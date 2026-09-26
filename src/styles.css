@@ -168,7 +168,8 @@ button, input, select { font: inherit; }
 
 .main-nav a {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
   transition: color .2s ease;
 }
 .main-nav a:hover,
