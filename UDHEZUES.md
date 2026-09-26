@@ -71,24 +71,26 @@ Faqet **Impressum** dhe **Datenschutz** krijohen vetë dhe dalin në fund të fa
 Kur të hapësh llogarinë te shërbimi i newsletter-it, më dërgo adresën e formularit
 (action URL) dhe unë e lidh. Deri atëherë seksioni i newsletter-it mbetet i fshehur.
 
-## 7. Versioni gjermanisht
+## 7. Versionet gjermanisht dhe shqip
 
-Faqja ka dy gjuhë. Faqet gjermane janë nën `/de/` (p.sh. `/de/insights.html`),
-dhe butoni **DE / EN** lart djathtas kalon te e njëjta faqe në gjuhën tjetër.
+Faqja ka tri gjuhë. Faqet gjermane janë nën `/de/` (p.sh. `/de/insights.html`) dhe ato shqip nën `/sq/`
+(p.sh. `/sq/insights.html`). Butonat **EN · DE · SQ** lart djathtas të çojnë te e njëjta faqe në gjuhën tjetër.
+Në celular janë brenda menysë.
 
-Në panel çdo seksion ka edhe variantin **(Deutsch)**:
+Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 | Seksioni | Çfarë është |
 |---|---|
-| **Insights (Deutsch)** | Artikujt në gjermanisht |
-| **Field Notes (Deutsch)** | Shënimet në gjermanisht |
-| **Projects (Deutsch)** | Projektet në gjermanisht |
-| **Homepage highlights (Deutsch)** | Dy kartat e vogla në faqen kryesore gjermane |
+| **Insights (Deutsch / Shqip)** | Artikujt në gjermanisht / shqip |
+| **Field Notes (Deutsch / Shqip)** | Shënimet në gjermanisht / shqip |
+| **Projects (Deutsch / Shqip)** | Projektet në gjermanisht / shqip |
+| **Homepage highlights (Deutsch / Shqip)** | Dy kartat e vogla në faqen kryesore gjermane / shqip |
 
-- Një artikull i ri në anglisht **nuk** del vetë në gjermanisht: shtoje edhe te **Insights (Deutsch)**.
+- Një artikull i ri në anglisht **nuk** del vetë në gjuhët e tjera: shtoje edhe te **Insights (Deutsch)** dhe **Insights (Shqip)**.
 - Te **English version** shkruaj adresën e artikullit anglisht, p.sh. `kpi-is-not-the-problem`.
-  Kështu të dy faqet lidhen me butonin **DE / EN**. Nëse e lë bosh, artikulli del vetëm në gjermanisht.
+  Kështu faqet lidhen me butonat e gjuhës. Nëse e lë bosh, artikulli del vetëm në atë gjuhë.
 - Kategoritë në gjermanisht: Führung, Betrieb, Menschen, Systeme, Hotellerie, Logistik, Service, Wandel.
+- Kategoritë në shqip: Udhëheqje, Operacione, Njerëz, Sisteme, Mikpritje, Logjistikë, Shërbim, Ndryshim.
 
 ---
 

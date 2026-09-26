@@ -1,10 +1,23 @@
 // Helpers shared by the warehouse tools (defect-log.js, delay-analyzer.js).
 window.ToolKit = (() => {
-  // Language: German pages carry their translations in #ui-strings, keyed by
-  // the English text. tx("Copied") returns the German text there, or the
-  // English text itself; {name} placeholders are filled from vars.
-  const LANG = document.documentElement.lang === "de" ? "de" : "en";
-  const LOCALE = LANG === "de" ? "de-DE" : "en-GB";
+  // Language: German and Albanian pages carry their translations in #ui-strings,
+  // keyed by the English text. tx("Copied") returns the translated text there,
+  // or the English text itself; {name} placeholders are filled from vars.
+  // Chrome has no Albanian number or date data, so Albanian pages format numbers
+  // as German does (1.234,5) and spell dates with the names below.
+  const LOCALES = { en: "en-GB", de: "de-DE", sq: "de-DE" };
+  const LANG = document.documentElement.lang in LOCALES ? document.documentElement.lang : "en";
+  const LOCALE = LOCALES[LANG];
+  const SQ_MONTHS = ["jan", "shk", "mar", "pri", "maj", "qer", "korr", "gush", "sht", "tet", "nën", "dhj"];
+  const SQ_DAYS = ["Die", "Hën", "Mar", "Mër", "Enj", "Pre", "Sht"];
+  // dayMonth(true)(date) gives "Pre, 18 sht" / "Fri, 18 Sep"; build it once, call it often.
+  const dayMonth = (weekday) => {
+    if (LANG === "sq") return (date) => `${weekday ? `${SQ_DAYS[date.getUTCDay()]}, ` : ""}${date.getUTCDate()} ${SQ_MONTHS[date.getUTCMonth()]}`;
+    const format = new Intl.DateTimeFormat(LOCALE, { ...(weekday && { weekday: "short" }), day: "numeric", month: "short", timeZone: "UTC" });
+    return (date) => format.format(date);
+  };
+  // German and Albanian write 1.234,5 (or 1 234,5); English writes 1,234.5.
+  const DECIMAL_COMMA = LANG !== "en";
   const strings = (() => {
     try { return JSON.parse(document.getElementById("ui-strings")?.textContent || "{}"); } catch { return {}; }
   })();
@@ -71,12 +84,14 @@ window.ToolKit = (() => {
   const int = new Intl.NumberFormat(LOCALE);
   const euro = new Intl.NumberFormat(LOCALE, { style: "currency", currency: "EUR" });
   const num = (value, digits) => value.toLocaleString(LOCALE, { minimumFractionDigits: digits, maximumFractionDigits: digits });
-  const pct = (value, digits = 1) => value.toLocaleString(LOCALE, { style: "percent", minimumFractionDigits: digits, maximumFractionDigits: digits });
-  // Dates are stored as YYYY-MM-DD; German pages show them as DD.MM.YYYY.
-  const showDate = (iso) => (LANG === "de" && /^\d{4}-\d{2}-\d{2}$/.test(iso) ? `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}` : iso);
+  const pctFormat = (value, digits) => value.toLocaleString(LOCALE, { style: "percent", minimumFractionDigits: digits, maximumFractionDigits: digits });
+  // Albanian writes 12,5% without the German space.
+  const pct = (value, digits = 1) => (LANG === "sq" ? pctFormat(value, digits).replace(/\s%/, "%") : pctFormat(value, digits));
+  // Dates are stored as YYYY-MM-DD; German and Albanian pages show them as DD.MM.YYYY.
+  const showDate = (iso) => (DECIMAL_COMMA && /^\d{4}-\d{2}-\d{2}$/.test(iso) ? `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}` : iso);
   const plural = (count, word, many = `${word}s`) => `${int.format(count)} ${count === 1 ? word : many}`;
   const capital = (text) => text.charAt(0).toUpperCase() + text.slice(1);
-  // Mid-sentence lower case for English labels; German nouns keep their capital.
+  // Mid-sentence lower case, except in German, where nouns keep their capital.
   const lower = (text) => (LANG === "de" ? text : text.toLowerCase());
   const today = () => new Date().toISOString().slice(0, 10);
 
@@ -87,8 +102,8 @@ window.ToolKit = (() => {
     const comma = text.lastIndexOf(",");
     const dot = text.lastIndexOf(".");
     // With one separator, use the page's locale to distinguish 1,234 from 1,234 decimals.
-    if (comma >= 0 && dot < 0 && LANG === "en" && /^\d{1,3}(,\d{3})+$/.test(text) && !text.startsWith("0,")) text = text.replace(/,/g, "");
-    else if (dot >= 0 && comma < 0 && LANG === "de" && /^\d{1,3}(\.\d{3})+$/.test(text) && !text.startsWith("0.")) text = text.replace(/\./g, "");
+    if (comma >= 0 && dot < 0 && !DECIMAL_COMMA && /^\d{1,3}(,\d{3})+$/.test(text) && !text.startsWith("0,")) text = text.replace(/,/g, "");
+    else if (dot >= 0 && comma < 0 && DECIMAL_COMMA && /^\d{1,3}(\.\d{3})+$/.test(text) && !text.startsWith("0.")) text = text.replace(/\./g, "");
     // When both appear, the later separator is decimal: 1.234,50 and 1,234.50.
     else text = comma > dot ? text.replace(/\./g, "").replace(",", ".") : text.replace(/,/g, "");
     if (!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(text)) return NaN;
@@ -157,8 +172,10 @@ window.ToolKit = (() => {
     const text = String(value ?? "").trim();
     if (!text) return empty;
     const wanted = text.toLowerCase();
+    // Albanian names may start with an article ("I shtypur"): "shtyp" still matches.
+    const starts = (option) => option.toLowerCase().startsWith(wanted) || option.toLowerCase().replace(/^(?:i|e|të) /, "").startsWith(wanted);
     return options.find((option) => option.toLowerCase() === wanted)
-      || (wanted.length >= 3 && options.find((option) => option.toLowerCase().startsWith(wanted)))
+      || (wanted.length >= 3 && options.find(starts))
       || text;
   };
 
@@ -329,11 +346,11 @@ window.ToolKit = (() => {
     node.timer = setTimeout(() => { node.textContent = ""; }, 2600);
   };
 
-  // German Excel expects semicolons and a decimal comma.
+  // German and Albanian Excel expect semicolons and a decimal comma.
   const downloadCsv = (name, rows) => {
-    const separator = LANG === "de" ? ";" : ",";
+    const separator = DECIMAL_COMMA ? ";" : ",";
     const quote = (value) => {
-      const text = typeof value === "number" && LANG === "de" ? String(value).replace(".", ",") : String(value ?? "");
+      const text = typeof value === "number" && DECIMAL_COMMA ? String(value).replace(".", ",") : String(value ?? "");
       return text.includes(separator) || /["\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
     };
     const lines = rows.map((cells) => cells.map(quote).join(separator));
@@ -381,7 +398,7 @@ window.ToolKit = (() => {
   };
 
   return {
-    LANG, LOCALE, tx, num, showDate, lower,
+    LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,

@@ -21,9 +21,11 @@
   <meta name="theme-color" content="#070a0d">
 {%- if not noindex %}
   <link rel="canonical" href="{{ page.url | absoluteUrl }}">
-{%- if alt %}
-  <link rel="alternate" hreflang="{{ lang or 'en' }}" href="{{ page.url | absoluteUrl }}">
-  <link rel="alternate" hreflang="{{ 'en' if lang == 'de' else 'de' }}" href="{{ alt | absoluteUrl }}">
+{%- for code, href in alternates %}
+  <link rel="alternate" hreflang="{{ code }}" href="{{ href | absoluteUrl }}">
+{%- endfor %}
+{%- if alternates.en %}
+  <link rel="alternate" hreflang="x-default" href="{{ alternates.en | absoluteUrl }}">
 {%- endif %}
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="{{ site.title }}">
@@ -66,6 +68,7 @@
     {%- for item in nav %}
     <a{% if activeNav == item[0] %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}</a>
     {%- endfor %}
+    {%- include "partials/lang-switch.njk" %}
   </nav>
 </header>
 
@@ -90,9 +93,9 @@
     </nav>
   </div>
 </footer>
-{#- German tool pages carry their UI text for tool-kit.js. #}
-{%- if lang == "de" and page.url and "/de/tools/" in page.url %}
-<script type="application/json" id="ui-strings">{{ de.ui | dump | safe }}</script>
+{#- Translated tool pages carry their UI text for tool-kit.js. #}
+{%- if lang and lang != "en" and page.url and ("/" + lang + "/tools/") in page.url %}
+<script type="application/json" id="ui-strings">{{ lang | uiStrings | safe }}</script>
 {%- endif %}
 <script src="{{ '/script.js' | assetUrl }}"></script>
 </body>

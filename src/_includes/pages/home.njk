@@ -1,8 +1,8 @@
 {#- The homepage, shared by / and /de/. -#}
-{%- set essays = collections.insightsDe if lang == "de" else collections.insights -%}
-{%- set noteList = collections.notesDe if lang == "de" else collections.notes -%}
-{%- set highlights = de.home.highlights if lang == "de" else home.highlights -%}
-{%- set toolList = de.tools if lang == "de" else tools -%}
+{%- set essays = collections["insights" + (lang | langSuffix)] -%}
+{%- set noteList = collections["notes" + (lang | langSuffix)] -%}
+{%- set highlights = (de if lang == "de" else sq).home.highlights if lang == "de" or lang == "sq" else home.highlights -%}
+{%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
 {%- set featured = essays | featured -%}
 {%- set others = essays | except(featured) | last(3) -%}
   <section class="shell hero">

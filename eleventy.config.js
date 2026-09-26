@@ -1,12 +1,18 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
+import { clearCache, localUrl } from "./lib/translations.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
-// German interface texts, keyed by the English text (also used by the tools' scripts).
-// Read once per build; a rebuild in watch mode reads the file again.
-let german = null;
-const readGerman = () => (german ??= JSON.parse(fs.readFileSync("src/_data/de/ui.json", "utf8")));
+// Interface texts in German and Albanian, keyed by the English text (also used
+// by the tools' scripts). Read once per build; a rebuild in watch mode reads them again.
+const ui = new Map();
+const readUi = (lang) => {
+  if (!ui.has(lang)) ui.set(lang, JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, "utf8")));
+  return ui.get(lang);
+};
+const TRANSLATED = new Set(["de", "sq"]);
+const LOCALES = { en: "en-GB", de: "de-DE", sq: "sq-AL" };
 const assetVersions = new Map();
 
 const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug);
@@ -37,24 +43,30 @@ export default function (eleventyConfig) {
     api.getFilteredByGlob("src/content/projects/*.md").sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   );
 
-  // The same three collections in German (src/content/de/...).
-  eleventyConfig.addCollection("insightsDe", (api) =>
-    api.getFilteredByGlob("src/content/de/insights/*.md").sort(byDate).map((item, index) => {
-      item.data.number = String(index + 1).padStart(2, "0");
-      return item;
-    })
-  );
-  eleventyConfig.addCollection("notesDe", (api) =>
-    api.getFilteredByGlob("src/content/de/notes/*.md").sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
-  );
-  eleventyConfig.addCollection("projectsDe", (api) =>
-    api.getFilteredByGlob("src/content/de/projects/*.md").sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
-  );
+  // The same three collections in German and Albanian: insightsDe, notesSq, ...
+  for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {
+    eleventyConfig.addCollection(`insights${suffix}`, (api) =>
+      api.getFilteredByGlob(`src/content/${lang}/insights/*.md`).sort(byDate).map((item, index) => {
+        item.data.number = String(index + 1).padStart(2, "0");
+        return item;
+      })
+    );
+    eleventyConfig.addCollection(`notes${suffix}`, (api) =>
+      api.getFilteredByGlob(`src/content/${lang}/notes/*.md`).sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
+    );
+    eleventyConfig.addCollection(`projects${suffix}`, (api) =>
+      api.getFilteredByGlob(`src/content/${lang}/projects/*.md`).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+    );
+  }
 
   eleventyConfig.addGlobalData("year", new Date().getFullYear());
 
-  // {{ "Add to log" | t(lang) }}: the German text on German pages, else the English one.
-  eleventyConfig.addFilter("t", (text, lang) => (lang === "de" ? readGerman()[text] ?? text : text));
+  // {{ "Add to log" | t(lang) }}: the German or Albanian text on those pages, else the English one.
+  eleventyConfig.addFilter("t", (text, lang) => (TRANSLATED.has(lang) ? readUi(lang)[text] ?? text : text));
+  // The interface texts a tool page hands to tool-kit.js.
+  eleventyConfig.addFilter("uiStrings", (lang) => JSON.stringify(TRANSLATED.has(lang) ? readUi(lang) : {}));
+  // collections["notes" + (lang | langSuffix)]: notes, notesDe or notesSq.
+  eleventyConfig.addFilter("langSuffix", (lang) => (TRANSLATED.has(lang) ? lang[0].toUpperCase() + lang.slice(1) : ""));
   // A changed asset gets a new URL, so browsers do not keep an old script or stylesheet.
   eleventyConfig.addFilter("assetUrl", (path) => {
     const file = `src${path}`;
@@ -63,19 +75,16 @@ export default function (eleventyConfig) {
     }
     return `${path}?v=${assetVersions.get(file)}`;
   });
-  // Links between tools stay in the page's language: /tools/x/ becomes /de/tools/x/.
-  const GERMAN_PAGES = new Set(["/", "/insights.html", "/field-notes.html", "/projects.html", "/tools.html", "/about.html", "/contact.html"]);
-  eleventyConfig.addFilter("local", (url, lang) => {
-    if (lang !== "de" || !(GERMAN_PAGES.has(url) || url.startsWith("/tools/"))) return url;
-    return url === "/" ? "/de/" : `/de${url}`;
-  });
-  // Lower case mid-sentence in English only: German nouns keep their capital.
+  // Links stay in the page's language: /tools/x/ becomes /de/tools/x/ or /sq/tools/x/.
+  eleventyConfig.addFilter("local", localUrl);
+  // Lower case mid-sentence, except in German, where nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
-  eleventyConfig.on("eleventy.before", () => { german = null; assetVersions.clear(); });
+  eleventyConfig.addWatchTarget("src/_data/sq/");
+  eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); });
 
   eleventyConfig.addFilter("readableDate", (date, lang) =>
-    new Date(date).toLocaleDateString(lang === "de" ? "de-DE" : "en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
+    new Date(date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
   );
   eleventyConfig.addFilter("pad", (value) => String(value).padStart(2, "0"));
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));

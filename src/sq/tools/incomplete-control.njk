@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Kontrolli i plotësisë
+description: "Një regjistër privat për porositë e paplota: artikuj që mungojnë, sasi më të vogla, artikuj të gabuar dhe pako që mungojnë. Shkalla, porositë e plota, DPMO dhe niveli sigma, Pareto e shkaqeve dhe ku në proces shkojnë keq porositë."
+activeNav: /sq/tools.html
+permalink: /sq/tools/incomplete-control/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Magazinë</p>
+  <h1>Kontrolli i plotësisë</h1>
+  <p class="lede">Një porosi që del pa të gjithë artikujt ose pakot kushton një dorëzim të dytë dhe besimin e klientit. Regjistroni çdo gabim me vendin ku lindi dhe arsyen. Mjeti tregon shkallën, shkaqet e pakta pas shumicës së gabimeve dhe ku duhet të filloni.</p>
+</section>
+
+{% set cfg = sq.incompleteControl %}
+{% include "partials/defect-log.njk" %}

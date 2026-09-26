@@ -1,7 +1,7 @@
 {#- The Field Notes page, shared by both languages. -#}
 <section class="shell page-hero"><p class="eyebrow">{{ "Observed close to the work" | t(lang) }}</p><h1>{{ "Field Notes" | t(lang) }}</h1><p class="lede">{{ "Shorter ideas about management, service, standards and what becomes visible when you stay close to the operation." | t(lang) }}</p></section>
 <section class="shell section" data-filter-list>
-{%- set noteList = collections.notesDe if lang == "de" else collections.notes %}
+{%- set noteList = collections["notes" + (lang | langSuffix)] %}
 {%- set notesPage = "/field-notes.html" | local(lang) %}
 {%- set searchLabel = "Search notes" | t(lang) %}
 {%- set countLabel = "{a} of {b} notes" | t(lang) %}

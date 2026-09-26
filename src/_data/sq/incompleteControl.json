@@ -1,0 +1,180 @@
+{
+  "storageKey": "sc-incomplete-control-sq",
+  "unknownCause": "E panjohur",
+  "text": {
+    "tool": "Kontrolli i plotësisë",
+    "one": "porosi e paplotë",
+    "many": "porosi të paplota",
+    "allNoun": "porositë e paplota",
+    "volumeNoun": "porosi",
+    "volumeLabel": "Porosi të dërguara",
+    "volumePlaceholder": "p.sh. 6200",
+    "targetLabel": "Objektivi i porosive të paplota %",
+    "targetPlaceholder": "p.sh. 0,5",
+    "rateLabel": "Shkalla e porosive të paplota",
+    "complement": {
+      "label": "Porosi të plota",
+      "note": "dolën me çdo artikull dhe çdo pako"
+    },
+    "periodPlaceholder": "p.sh. Java 38, e-commerce",
+    "entryLegend": "Regjistro një porosi të paplotë",
+    "countLabel": "Porosi të prekura",
+    "countShort": "porosi",
+    "notePlaceholder": "p.sh. U mor masa M në vend të L, pozicioni B-14",
+    "pasteRow": "Një rresht për çdo gabim",
+    "pastePlaceholder": "14.09.2026\tMëngjes\tMbledhja\tArtikull i gabuar\tGabim mbledhjeje\t3\t27",
+    "empty": "Ende asnjë porosi e paplotë e regjistruar.",
+    "stageTitle": "Ku shkoi keq",
+    "stageNote": "Sipas radhës së procesit. Regjistroni ku u krijua gabimi, jo ku e vuri re klienti.",
+    "stagePhrase": "me origjinë në hapin",
+    "matrixTitle": "Hapi i procesit dhe lloji i gabimit",
+    "csv": "regjistri-i-porosive-te-paplota",
+    "tips": [
+      [
+        "Regjistroni ku shkoi keq.",
+        "Një artikull që mungon zakonisht zbulohet në paketim ose nga klienti, por krijohet më herët. Gjurmojeni pas para se ta regjistroni."
+      ],
+      [
+        "Numëroni porosi, jo artikuj.",
+        "Një porosi me tre artikuj që mungojnë është një porosi e paplotë; detajet vendosini te shënimi."
+      ],
+      [
+        "Shtoni volumin.",
+        "Me porositë e dërguara merrni shkallën e porosive të paplota, pjesën e porosive të plota, DPMO-në dhe nivelin sigma."
+      ]
+    ],
+    "checkTitle": "A del porosia e plotë?",
+    "checkIntro": "Ecni nga rafti i mbledhjes deri te mjeti dhe shënoni atë që shihni realisht sot. Çdo rresht i pashënuar është një vend ku mund të humbasë një artikull ose një pako."
+  },
+  "fields": [
+    {
+      "name": "shift",
+      "label": "Turni",
+      "options": ["Mëngjes", "Pasdite", "Natë"]
+    },
+    {
+      "name": "stage",
+      "label": "Hapi",
+      "options": ["Pranimi", "Rimbushja", "Mbledhja", "Paketimi", "Sortimi dhe ngarkimi", "Dorëzimi"]
+    },
+    {
+      "name": "type",
+      "label": "Lloji i gabimit",
+      "options": ["Artikull që mungon", "Sasi më e vogël", "Artikull i gabuar", "Pako që mungon", "Tjetër"]
+    },
+    {
+      "name": "cause",
+      "label": "Shkaku",
+      "options": ["Saktësia e stokut", "Gabim mbledhjeje", "Gabim paketimi", "Skanim i anashkaluar", "Gabim sortimi ose ngarkimi", "Sistemi ose të dhënat", "E panjohur"]
+    }
+  ],
+  "stages": {
+    "Pranimi": {
+      "meaning": "U regjistruan mallra që nuk mbërritën kurrë, ose mbërritën në sasi tjetër. Çdo marrje nga ai stok del më vonë e mangët.",
+      "moves": [
+        "Numëroni në pranim sipas dorëzimit, jo sipas porosisë së blerjes.",
+        "Përdorni numërim të verbër: pranuesi numëron së pari, pastaj sheh sasinë e pritur.",
+        "Regjistroni diferencat po atë ditë, që sistemi të mos premtojë kurrë stok që nuk ekziston."
+      ],
+      "question": "Kush i numëron mallrat, dhe a e di numrin e pritur para se të numërojë?"
+    },
+    "Rimbushja": {
+      "meaning": "Pozicioni i mbledhjes zbrazet ose merr artikullin e gabuar ndërsa sistemi ende tregon stok. Mbledhësit marrin më pak ose marrin artikullin fqinj.",
+      "moves": [
+        "Nisni rimbushjen para se pozicioni të zbrazet, jo pas.",
+        "Skanoni pozicionin dhe artikullin në çdo vendosje te pozicioni i mbledhjes.",
+        "Nisni çdo turn me pozicionet që patën mungesa të përsëritura një ditë më parë."
+      ],
+      "question": "Si e kupton mbledhësi që një pozicion është bosh, dhe çfarë bën atëherë?"
+    },
+    "Mbledhja": {
+      "meaning": "Artikulli i gabuar ose sasia e gabuar shkon në kosh. Artikujt që ngjajnë, rreshtat me shumë njësi dhe presioni i kohës shkaktojnë shumicën.",
+      "moves": [
+        "Skanoni çdo artikull dhe konfirmoni sasinë në rreshtat me shumë njësi.",
+        "Ndani artikujt që ngjajnë: masat, ngjyrat dhe variantet e një produkti kurrë krah njëri-tjetrit.",
+        "Bëjeni raportimin e një mungese më të shpejtë se anashkalimin e saj."
+      ],
+      "question": "Çfarë ndodh kur mbledhësi nuk e gjen sasinë e plotë?"
+    },
+    "Paketimi": {
+      "meaning": "Një artikull mbetet në tavolinë, rrëshqet te porosia tjetër ose futet në kutinë e gabuar.",
+      "moves": [
+        "Skanoni çdo artikull kundrejt porosisë para se të mbyllet kutia.",
+        "Një porosi në tavolinë në një kohë, dhe tavolinë e pastër para së ardhshmes.",
+        "Kontrolloni peshën te porositë ku pesha e pritur dihet."
+      ],
+      "question": "Si e di paketuesi që porosia është e plotë para se ta mbyllë kutinë?"
+    },
+    "Sortimi dhe ngarkimi": {
+      "meaning": "Pakot e një porosie ndahen: njëra shkon në mjet, tjetra mbetet pas ose shkon në linjën e gabuar.",
+      "moves": [
+        "Numëroni pakot për porosi në ngarkim: dy nga tre nuk quhet e ngarkuar.",
+        "Skanoni çdo pako në mjet dhe kontrolloni skanimin e daljes kundrejt linjës.",
+        "Kontrolloni zonën e sortimit në fund të çdo vale për pako të mbetura."
+      ],
+      "question": "Çfarë e pengon pakon e fundit të një porosie të mbetet në dysheme?"
+    },
+    "Dorëzimi": {
+      "meaning": "Pakot mbeten në mjet, shkojnë në adresë të gabuar, ose dorëzohet vetëm një pjesë e një porosie me disa pako.",
+      "moves": [
+        "Skanoni çdo pako në dorëzim dhe numëroni te dera porositë me disa pako.",
+        "Kontrolloni që mjeti të jetë bosh në fund të linjës.",
+        "Ndiqni çdo “nuk u mor” brenda një dite, sa shoferi ende e mban mend ndalesën."
+      ],
+      "question": "Si e di shoferi që çdo pako për këtë ndalesë është dorëzuar?"
+    }
+  },
+  "causes": {
+    "Saktësia e stokut": "Numëroni po atë ditë pozicionet pas gabimeve, dhe gjeni ku u prish regjistrimi i stokut, jo vetëm sa del numërimi tani.",
+    "Gabim mbledhjeje": "Shikoni marrjet te pozicioni me më shumë gabime. Shumica e gabimeve të mbledhjes krijohen nga planimetria, etiketat dhe artikujt që ngjajnë.",
+    "Gabim paketimi": "Bëjeni porosinë të dukshme në tavolinën e paketimit dhe skanoni kundrejt saj. Kujtesa nuk mban në orët e pikut.",
+    "Skanim i anashkaluar": "Pyesni pse u anashkalua skanimi. Një skaner i ngadaltë, një etiketë që mungon ose një objektiv që e ndëshkon kohën e skanimit janë më të shpeshta se pakujdesia.",
+    "Gabim sortimi ose ngarkimi": "Numëroni dhe skanoni te dera e mjetit. Porositë me më shumë se një pako kanë nevojë për kontrollin e tyre.",
+    "Sistemi ose të dhënat": "Kontrolloni të dhënat bazë: madhësitë e paketimit, njësitë matëse, paketat dhe kompletet shpesh premtojnë sasi që rafti nuk i ka.",
+    "E panjohur": "Një pjesë e madhe “E panjohur” do të thotë se regjistri nuk është ende mjaft i mirë. Regjistroni ku shkoi keq dhe pse, në momentin kur gjendet gabimi."
+  },
+  "checklist": [
+    "Çdo marrje skanohet: pozicioni dhe artikulli.",
+    "Sasitë në rreshtat me shumë njësi numërohen dhe konfirmohen, jo supozohen.",
+    "Artikujt që ngjajnë nuk ruhen pranë njëri-tjetrit.",
+    "Mungesat në mbledhje raportohen menjëherë, jo lihen që t’i gjejë paketimi.",
+    "Paketimi skanon çdo artikull kundrejt porosisë para se të mbyllet kutia.",
+    "Në tavolinën e paketimit ka vetëm një porosi në një kohë.",
+    "Porositë me disa pako numërohen dhe mbahen bashkë para ngarkimit.",
+    "Pozicionet me mungesa numërohen po atë ditë.",
+    "Çdo mjet kontrollohet që të jetë bosh në fund të linjës.",
+    "Çdo porosi e paplotë regjistrohet me vendin ku shkoi keq dhe arsyen."
+  ],
+  "example": {
+    "period": "Javë shembull",
+    "volume": 6200,
+    "target": 0.5,
+    "rows": [
+      "2026-09-14|Mëngjes|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|3|27",
+      "2026-09-14|Pasdite|Mbledhja|Sasi më e vogël|Saktësia e stokut|2|18",
+      "2026-09-14|Pasdite|Paketimi|Artikull që mungon|Gabim paketimi|1|9",
+      "2026-09-14|Natë|Mbledhja|Sasi më e vogël|Skanim i anashkaluar|2|18",
+      "2026-09-15|Mëngjes|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|4|36",
+      "2026-09-15|Pasdite|Rimbushja|Sasi më e vogël|Saktësia e stokut|3|27",
+      "2026-09-15|Pasdite|Sortimi dhe ngarkimi|Pako që mungon|Gabim sortimi ose ngarkimi|2|24",
+      "2026-09-16|Mëngjes|Mbledhja|Sasi më e vogël|Gabim mbledhjeje|3|27",
+      "2026-09-16|Pasdite|Mbledhja|Artikull që mungon|Skanim i anashkaluar|3|27",
+      "2026-09-16|Pasdite|Pranimi|Sasi më e vogël|Saktësia e stokut|2|18",
+      "2026-09-16|Natë|Paketimi|Artikull që mungon|Gabim paketimi|2|18",
+      "2026-09-17|Mëngjes|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|2|18",
+      "2026-09-17|Pasdite|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|4|36",
+      "2026-09-17|Pasdite|Mbledhja|Sasi më e vogël|Saktësia e stokut|3|27",
+      "2026-09-17|Natë|Dorëzimi|Pako që mungon|Gabim sortimi ose ngarkimi|1|12",
+      "2026-09-18|Mëngjes|Mbledhja|Sasi më e vogël|Skanim i anashkaluar|2|18",
+      "2026-09-18|Pasdite|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|3|27",
+      "2026-09-18|Pasdite|Mbledhja|Sasi më e vogël|Sistemi ose të dhënat|2|",
+      "2026-09-18|Pasdite|Paketimi|Artikull që mungon|Gabim paketimi|1|9",
+      "2026-09-19|Mëngjes|Mbledhja|Artikull që mungon|Gabim mbledhjeje|2|18",
+      "2026-09-19|Pasdite|Rimbushja|Sasi më e vogël|Saktësia e stokut|2|18",
+      "2026-09-19|Pasdite|Mbledhja|Artikull i gabuar|Skanim i anashkaluar|2|18",
+      "2026-09-19|Natë|Sortimi dhe ngarkimi|Pako që mungon|Gabim sortimi ose ngarkimi|1|12",
+      "2026-09-20|Mëngjes|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|3|27",
+      "2026-09-20|Mëngjes|Dorëzimi|Pako që mungon|E panjohur|1|"
+    ]
+  }
+}

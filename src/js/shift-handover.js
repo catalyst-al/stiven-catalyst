@@ -3,7 +3,7 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { LOCALE, tx, lower, read, write, isObject, str, el, today, parseDate, renderOnPause } = window.ToolKit;
+  const { LOCALE, tx, dayMonth, lower, read, write, isObject, str, el, today, parseDate, renderOnPause } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
@@ -85,11 +85,11 @@
   };
 
   // One formatter each: building them per call is slow with a long history.
-  const dateFormat = new Intl.DateTimeFormat(LOCALE, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
-  const timeFormat = new Intl.DateTimeFormat(LOCALE, { hour: "2-digit", minute: "2-digit" });
+  const dateFormat = dayMonth(true);
+  const timeFormat = new Intl.DateTimeFormat(LOCALE, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
   const longDate = (iso) => {
     const date = new Date(`${iso}T00:00:00Z`);
-    return iso && !Number.isNaN(date.getTime()) ? dateFormat.format(date) : tx("No date");
+    return iso && !Number.isNaN(date.getTime()) ? dateFormat(date) : tx("No date");
   };
   const clock = (iso) => {
     const date = new Date(iso);

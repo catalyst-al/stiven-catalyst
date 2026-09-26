@@ -1,6 +1,6 @@
 {#- The 5 Whys worksheet; five-whys.js does the rest. -#}
 <section class="shell tool-layout">
-  <form class="tool-panel worksheet" data-worksheet data-key="{{ 'sc-five-whys-de' if lang == 'de' else 'sc-five-whys' }}">
+  <form class="tool-panel worksheet" data-worksheet data-key="sc-five-whys{{ '-' + lang if lang and lang != 'en' }}">
     <div class="field">
       <label for="ws-problem">{{ "Problem" | t(lang) }}</label>
       <textarea id="ws-problem" name="problem" rows="3" placeholder="{{ 'What happened, where, when and how often? e.g. 14 late check-outs last week on the evening shift' | t(lang) }}" data-store></textarea>

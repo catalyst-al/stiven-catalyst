@@ -1,0 +1,240 @@
+{
+  "storageKey": "sc-delay-analyzer-sq",
+  "tool": "Analiza e vonesave",
+  "csv": "regjistri-i-vonesave",
+  "text": {
+    "pasteRow": "Një rresht për çdo linjë",
+    "pasteColumns": "data, turni, linja, nisja e planifikuar, nisja reale, mbërritja e planifikuar, mbërritja reale, arsyeja, shënimi",
+    "pasteHelp": "Orët si 07:45, 7.45 ose 0745 funksionojnë të gjitha; po ashtu tab-et, pikëpresjet ose presjet, dhe rreshti i titujve anashkalohet. Emrat tuaj për arsyet mbeten siç janë.",
+    "pastePlaceholder": "14.09.2026\tPasdite\tR12\t11:15\t11:50\t15:15\t15:55\tValë e vonë",
+    "empty": "Ende asnjë linjë e regjistruar.",
+    "tips": [
+      [
+        "Regjistroni çdo linjë.",
+        "Linjat në kohë janë baza: pa to nuk ka përqindje në kohë dhe as model sipas orës."
+      ],
+      [
+        "Përdorni orën e premtuar.",
+        "Mbërritja e planifikuar është ajo që u premtua: ndalesa e parë, një dritare dorëzimi ose fundi i linjës. Përdorni të njëjtën çdo ditë."
+      ],
+      [
+        "Rampa apo rruga.",
+        "Minutat me të cilat linja u nis me vonesë llogariten si vonesë e rampës; minutat që humbi pas nisjes llogariten si vonesë e rrugës."
+      ]
+    ],
+    "vitalFew": "Zakonisht dy ose tri arsye mbajnë shumicën e linjave me vonesë. Filloni aty, pastaj çojeni arsyen kryesore te",
+    "checkTitle": "A niset mjeti në kohë?",
+    "checkIntro": "Qëndroni te rampa gjatë një vale nisjesh dhe shënoni atë që shihni realisht sot. Çdo rresht i pashënuar është një vend ku krijohen minutat e para të vonesës."
+  },
+  "shifts": ["Mëngjes", "Pasdite", "Natë"],
+  "reasons": [
+    {
+      "name": "Ngarkim i vonë",
+      "side": "dock",
+      "meaning": "Mjeti ishte gati, ngarkesa jo. Ngarkimi nisi vonë, ecte ngadalë ose priti pako që mungonin.",
+      "moves": [
+        "Jepini çdo linje një orë fikse për nisjen e ngarkimit dhe një slot ngarkimi në një rampë të caktuar.",
+        "Përgatitni ngarkesën sipas linjës para se të mbërrijë mjeti, që ngarkimi të jetë mbartje, jo kërkim.",
+        "Matni kohën e ngarkimit për një javë: gjeni linjat që zgjasin gjithmonë më shumë dhe pse."
+      ],
+      "question": "Çfarë pret mjeti në pesëmbëdhjetë minutat e fundit para se të niset?"
+    },
+    {
+      "name": "Valë e vonë ose pik volumi",
+      "side": "dock",
+      "meaning": "Volumi mbërriti pas orës së mbylljes, ose një pik ra mbi të njëjtat orare nisjeje çdo ditë. Linjat presin pakot e fundit.",
+      "moves": [
+        "Bini dakord për një orë mbylljeje të prerë: pakot që e humbasin shkojnë me linjën e radhës, jo në një nisje të vonë.",
+        "Largoni linjat më të rënda nga vala e pikut aty ku dritaret e dorëzimit e lejojnë.",
+        "Ndani çdo ditë numrat e valëve të vona me qendrën ose sortuesin paraardhës, bashkë me nisjet që kushtuan."
+      ],
+      "question": "Kush vendos ta mbajë një linjë për volumin e vonë, dhe sa u kushton klientëve të parë?"
+    },
+    {
+      "name": "Mjeti jo gati",
+      "side": "dock",
+      "meaning": "Mjeti mbërriti vonë te rampa, nuk kaloi një kontroll ose nuk ishte furnizuar apo karikuar.",
+      "moves": [
+        "Kontrolloni, furnizoni ose karikoni mjetet në fund të turnit të mëparshëm, jo në nisje.",
+        "Mbani një mjet rezervë gati në pik, me çelësat dhe dokumentet.",
+        "Regjistroni problemet e mjeteve sipas targës: zakonisht pak mjete shkaktojnë shumicën."
+      ],
+      "question": "Kur e marrim vesh që një mjet nuk është gati, dhe a mund ta dinim një orë më herët?"
+    },
+    {
+      "name": "Shoferi jo gati",
+      "side": "dock",
+      "meaning": "Shoferi erdhi vonë, briefing-u zgjati ose linja u ricaktua në minutën e fundit.",
+      "moves": [
+        "Nisni briefing-un në kohë dhe mbajeni të shkurtër; shënimet e linjës jepini me shkrim.",
+        "Konfirmoni shoferët e linjave të hershme një mbrëmje më parë.",
+        "Ricaktimet bëjini para se të nisë ngarkimi, kurrë te mjeti."
+      ],
+      "question": "Sa minuta kalojnë nga mbërritja e shoferit deri te nisja e mjetit, dhe ku shkojnë?"
+    },
+    {
+      "name": "Mungojnë dokumentet ose skaneri",
+      "side": "dock",
+      "meaning": "Skanerët, çelësat, fletëdërgesat ose dokumentet doganore nuk ishin gati kur ishte gati mjeti.",
+      "moves": [
+        "Përgatitni skanerët, çelësat dhe dokumentet për çdo linjë në një vend para se të mbarojë ngarkimi.",
+        "Karikoni dhe testoni skanerët në fund të çdo turni.",
+        "Shtojini dokumentet dhe pajisjet te kontrolli i nisjes, jo te kujtesa e shoferit."
+      ],
+      "question": "Çfarë duhet të shkojë të gjejë një shofer para se të niset?"
+    },
+    {
+      "name": "Trafik ose punime në rrugë",
+      "side": "road",
+      "meaning": "Linja humbi kohë nga trafiku, bllokimet ose punimet. Një pjesë është jashtë kontrollit tuaj; modelet që përsëriten jo.",
+      "moves": [
+        "Kërkoni në regjistër të njëjtat rrugë dhe orë: trafiku që përsëritet i përket planit të linjës.",
+        "Zhvendosni nisjet ose radhën e ndalesave për të shmangur pikët e njohura.",
+        "Kontrolloni nëse koha e planifikuar përfshin kohë realiste udhëtimi për atë orë."
+      ],
+      "question": "A është ky trafik një surprizë, apo ndodh në këtë orë çdo javë?"
+    },
+    {
+      "name": "Adresa ose hyrja",
+      "side": "road",
+      "meaning": "Adresat e gabuara, portat e mbyllura, mungesa e parkimit ose pikat e paqarta të dorëzimit kushtojnë minuta në çdo ndalesë.",
+      "moves": [
+        "Mblidhni shënimet e hyrjes (porta, kode, zona shkarkimi) dhe vendosini në të dhënat e linjës.",
+        "Rregulloni adresat e gabuara te burimi, jo me kujtesën e një shoferi.",
+        "U jepni shoferëve të rinj shënimet për ndalesat e vështira para se të nisen."
+      ],
+      "question": "Cilat ndalesa kushtojnë më shumë se dhjetë minuta çdo herë, dhe a e di shoferi i radhës?"
+    },
+    {
+      "name": "Klienti nuk ishte aty",
+      "side": "road",
+      "meaning": "Klienti nuk ishte aty, ndaj shoferi priti, telefonoi ose u kthye përsëri.",
+      "moves": [
+        "I dërgoni klientit një dritare dorëzimi dhe konfirmojeni para se të niset linja.",
+        "Bini dakord për një kohë pritjeje fikse dhe një hap të qartë pasues për çdo lloj klienti.",
+        "Kërkoni klientët që përsëriten: një marrëveshje e përhershme dorëzimi kursen të njëjtat minuta çdo javë."
+      ],
+      "question": "Sa pret një shofer para se të vazhdojë, dhe kush e vendosi këtë?"
+    },
+    {
+      "name": "Shumë ndalesa",
+      "side": "road",
+      "meaning": "Linja u planifikua me më shumë ndalesa ose distancë se sa lejon koha. Shoferi nuk mund ta rikuperojë.",
+      "moves": [
+        "Krahasoni kohët e planifikuara dhe reale të ndalesave për çdo linjë: planifikoni me atë që ndodh realisht.",
+        "Kufizoni ndalesat për linjë sipas zonës dhe orës së ditës, jo sipas mesatares.",
+        "Zhvendosni ndalesa nga linjat më të gjata para se të ngarkohet mjeti."
+      ],
+      "question": "A do ta mbaronte shoferi ynë më i mirë këtë linjë në kohë në një ditë normale?"
+    },
+    {
+      "name": "Moti",
+      "side": "road",
+      "meaning": "Bora, stuhitë ose nxehtësia e ngadalësuan udhëtimin dhe ndalesat.",
+      "moves": [
+        "Planifikoni ditët me mot të keq: më pak ndalesa për linjë dhe nisje më të hershme kur ka paralajmërim.",
+        "Njoftojini klientët herët kur dritaret do të zhvendosen.",
+        "Mbajeni motin jashtë arsyeve të tjera, që modeli normal të mbetet i dukshëm."
+      ],
+      "question": "Çfarë ndryshojmë në plan një mbrëmje para motit të keq?"
+    }
+  ],
+  "sides": {
+    "dock": {
+      "name": "Rampa",
+      "lede": "nisën te rampa, para se mjeti të nisej",
+      "advice": "Rregulloni së pari nisjen. Një mjet që niset 30 minuta vonë nuk mund të jetë në kohë për ndalesat e para, çfarëdo që të bëjë shoferi në rrugë."
+    },
+    "road": {
+      "name": "Rruga",
+      "lede": "u krijuan në rrugë, pas një nisjeje në kohë",
+      "advice": "Rampa e dorëzon në kohë; vonesa rritet në rrugë. Shikoni dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikoni ngarjen."
+    }
+  },
+  "checklist": [
+    "Ngarkimi nis në një orë fikse për çdo linjë, jo kur mbërrin pakoja e fundit.",
+    "Ora e mbylljes respektohet: volumi i vonë shkon te linja e radhës, jo në një nisje të vonë.",
+    "Mjetet janë të kontrolluara, të furnizuara ose të karikuara dhe te rampa para se të nisë ngarkimi.",
+    "Shoferët janë informuar dhe janë gati para se të ngarkohet mjeti i tyre.",
+    "Linjat me dritaret më të hershme të dorëzimit ngarkohen dhe nisen të parat.",
+    "Skanerët, çelësat dhe dokumentet janë gati për çdo linjë para se të mbarojë ngarkimi.",
+    "Oraret e nisjes regjistrohen për çdo linjë, jo vetëm për ato me vonesë.",
+    "Linjat planifikohen me një numër realist ndalesash për kohën në dispozicion.",
+    "Problemet e njohura të hyrjes (porta, kode, zona shkarkimi) janë në shënimet e linjës.",
+    "Çdo linjë me vonesë ka arsyen e regjistruar po atë ditë."
+  ],
+  "example": {
+    "period": "Javë shembull",
+    "routes": "",
+    "departureGrace": "10",
+    "arrivalGrace": "15",
+    "target": "95",
+    "rows": [
+      "2026-09-14|Mëngjes|R01|06:30|06:30|10:30|10:20|",
+      "2026-09-14|Mëngjes|R02|06:45|06:47|11:00|11:07|",
+      "2026-09-14|Mëngjes|R03|07:00|06:57|10:45|10:37|",
+      "2026-09-14|Mëngjes|R04|07:15|07:20|11:45|11:50|",
+      "2026-09-14|Mëngjes|R05|07:30|07:30|11:30|11:30|",
+      "2026-09-14|Mëngjes|R06|07:45|07:40|12:00|11:50|",
+      "2026-09-14|Mëngjes|R07|08:00|08:03|12:00|12:03|",
+      "2026-09-14|Pasdite|R08|10:30|10:30|14:15|14:05|",
+      "2026-09-14|Pasdite|R09|10:45|10:49|14:45|14:54|",
+      "2026-09-14|Pasdite|R10|11:00|10:58|15:15|15:13|",
+      "2026-09-14|Pasdite|R11|11:15|11:15|15:15|15:00|",
+      "2026-09-14|Pasdite|R12|11:30|12:05|15:15|15:55|Valë e vonë ose pik volumi",
+      "2026-09-14|Pasdite|R13|11:45|12:30|15:45|16:40|Valë e vonë ose pik volumi",
+      "2026-09-15|Mëngjes|R01|06:30|06:32|10:30|10:32|",
+      "2026-09-15|Mëngjes|R02|06:45|06:42|11:00|10:42|",
+      "2026-09-15|Mëngjes|R03|07:00|07:00|10:45|11:25|Trafik ose punime në rrugë",
+      "2026-09-15|Mëngjes|R04|07:15|07:15|11:45|11:40|",
+      "2026-09-15|Mëngjes|R05|07:30|07:25|11:30|11:15|",
+      "2026-09-15|Mëngjes|R06|07:45|07:48|12:00|12:08|",
+      "2026-09-15|Mëngjes|R07|08:00|08:00|12:00|11:55|",
+      "2026-09-15|Pasdite|R08|10:30|10:34|14:15|14:19|",
+      "2026-09-15|Pasdite|R09|10:45|10:43|14:45|14:43|",
+      "2026-09-15|Pasdite|R10|11:00|11:00|15:15|15:10|",
+      "2026-09-15|Pasdite|R11|11:15|11:21|15:15|15:21|",
+      "2026-09-15|Pasdite|R12|11:30|12:00|15:15|15:45|Ngarkim i vonë",
+      "2026-09-15|Pasdite|R13|11:45|12:25|15:45|16:30|Ngarkim i vonë",
+      "2026-09-16|Mëngjes|R01|06:30|06:27|10:30|10:22|",
+      "2026-09-16|Mëngjes|R02|06:45|06:50|11:00|11:05|",
+      "2026-09-16|Mëngjes|R03|07:00|07:00|10:45|10:35|",
+      "2026-09-16|Mëngjes|R04|07:15|07:10|11:45|11:45|",
+      "2026-09-16|Mëngjes|R05|07:30|07:35|11:30|12:10|Shumë ndalesa",
+      "2026-09-16|Mëngjes|R06|07:45|08:10|12:00|12:30|Ngarkim i vonë",
+      "2026-09-16|Mëngjes|R07|08:00|08:04|12:00|12:14|",
+      "2026-09-16|Pasdite|R08|10:30|10:28|14:15|14:08|",
+      "2026-09-16|Pasdite|R09|10:45|10:45|14:45|14:35|",
+      "2026-09-16|Pasdite|R10|11:00|11:06|15:15|15:26|",
+      "2026-09-16|Pasdite|R11|11:15|11:16|15:15|15:11|",
+      "2026-09-16|Pasdite|R12|11:30|11:30|15:15|15:15|",
+      "2026-09-16|Pasdite|R13|11:45|11:47|15:45|15:47|",
+      "2026-09-17|Mëngjes|R01|06:30|06:35|10:30|10:40|",
+      "2026-09-17|Mëngjes|R02|06:45|06:45|11:00|10:55|",
+      "2026-09-17|Mëngjes|R03|07:00|06:55|10:45|10:40|",
+      "2026-09-17|Mëngjes|R04|07:15|07:18|11:45|11:48|",
+      "2026-09-17|Mëngjes|R05|07:30|07:30|11:30|11:25|",
+      "2026-09-17|Mëngjes|R06|07:45|07:49|12:00|12:04|",
+      "2026-09-17|Mëngjes|R07|08:00|07:58|12:00|11:48|",
+      "2026-09-17|Pasdite|R08|10:30|10:30|14:15|14:20|",
+      "2026-09-17|Pasdite|R09|10:45|10:51|14:45|14:51|",
+      "2026-09-17|Pasdite|R10|11:00|11:15|15:15|15:55|Valë e vonë ose pik volumi",
+      "2026-09-17|Pasdite|R11|11:15|11:15|15:15|15:25|",
+      "2026-09-17|Pasdite|R12|11:30|12:10|15:15|16:00|Valë e vonë ose pik volumi",
+      "2026-09-17|Pasdite|R13|11:45|12:35|15:45|16:35|Valë e vonë ose pik volumi",
+      "2026-09-18|Mëngjes|R01|06:30|06:30|10:30|10:15|",
+      "2026-09-18|Mëngjes|R02|06:45|06:40|11:00|11:05|",
+      "2026-09-18|Mëngjes|R03|07:00|07:03|10:45|10:43|",
+      "2026-09-18|Mëngjes|R04|07:15|07:15|11:45|11:35|",
+      "2026-09-18|Mëngjes|R05|07:30|07:34|11:30|11:39|",
+      "2026-09-18|Mëngjes|R06|07:45|07:43|12:00|11:53|",
+      "2026-09-18|Mëngjes|R07|08:00|08:00|12:00|12:30|Trafik ose punime në rrugë",
+      "2026-09-18|Pasdite|R08|10:30|10:36|14:15|14:21|",
+      "2026-09-18|Pasdite|R09|10:45|10:46|14:45|14:41|",
+      "2026-09-18|Pasdite|R10|11:00|11:00|15:15|15:15|",
+      "2026-09-18|Pasdite|R11|11:15|11:17|15:15|15:07|",
+      "2026-09-18|Pasdite|R12|11:30|12:00|15:15|15:55|Ngarkim i vonë",
+      "2026-09-18|Pasdite|R13|11:45|12:20|15:45|16:15|"
+    ]
+  }
+}

@@ -5,7 +5,7 @@
     <p class="lede">{{ "Longer thinking on leadership, operations, accountability, service and the systems that shape performance." | t(lang) }}</p>
   </section>
   <section class="shell listing" data-filter-list>
-    {%- set essays = collections.insightsDe if lang == "de" else collections.insights %}
+    {%- set essays = collections["insights" + (lang | langSuffix)] %}
     {%- set searchLabel = "Search essays" | t(lang) %}
     {%- set countLabel = "{a} of {b} essays" | t(lang) %}
     {%- set filterTopics = essays | topics("category") %}
