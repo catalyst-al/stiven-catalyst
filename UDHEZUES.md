@@ -71,6 +71,25 @@ Faqet **Impressum** dhe **Datenschutz** krijohen vetë dhe dalin në fund të fa
 Kur të hapësh llogarinë te shërbimi i newsletter-it, më dërgo adresën e formularit
 (action URL) dhe unë e lidh. Deri atëherë seksioni i newsletter-it mbetet i fshehur.
 
+## 7. Versioni gjermanisht
+
+Faqja ka dy gjuhë. Faqet gjermane janë nën `/de/` (p.sh. `/de/insights.html`),
+dhe butoni **DE / EN** lart djathtas kalon te e njëjta faqe në gjuhën tjetër.
+
+Në panel çdo seksion ka edhe variantin **(Deutsch)**:
+
+| Seksioni | Çfarë është |
+|---|---|
+| **Insights (Deutsch)** | Artikujt në gjermanisht |
+| **Field Notes (Deutsch)** | Shënimet në gjermanisht |
+| **Projects (Deutsch)** | Projektet në gjermanisht |
+| **Homepage highlights (Deutsch)** | Dy kartat e vogla në faqen kryesore gjermane |
+
+- Një artikull i ri në anglisht **nuk** del vetë në gjermanisht: shtoje edhe te **Insights (Deutsch)**.
+- Te **English version** shkruaj adresën e artikullit anglisht, p.sh. `kpi-is-not-the-problem`.
+  Kështu të dy faqet lidhen me butonin **DE / EN**. Nëse e lë bosh, artikulli del vetëm në gjermanisht.
+- Kategoritë në gjermanisht: Führung, Betrieb, Menschen, Systeme, Hotellerie, Logistik, Service, Wandel.
+
 ---
 
 ## Pyetje të shpejta

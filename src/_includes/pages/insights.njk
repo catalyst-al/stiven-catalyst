@@ -1,0 +1,32 @@
+{#- The Insights list, shared by both languages. -#}
+  <section class="shell page-hero">
+    <p class="eyebrow">{{ "Essays & analysis" | t(lang) }}</p>
+    <h1>{{ "Insights" | t(lang) }}</h1>
+    <p class="lede">{{ "Longer thinking on leadership, operations, accountability, service and the systems that shape performance." | t(lang) }}</p>
+  </section>
+  <section class="shell listing" data-filter-list>
+    {%- set essays = collections.insightsDe if lang == "de" else collections.insights %}
+    {%- set searchLabel = "Search essays" | t(lang) %}
+    {%- set countLabel = "{a} of {b} essays" | t(lang) %}
+    {%- set filterTopics = essays | topics("category") %}
+    {% include "partials/filter-bar.njk" %}
+    {%- for item in essays %}
+    {%- set search = [item.data.title, item.data.summary, item.data.teaser, item.data.category] | join(" ") | lower %}
+    {%- if item.data.status == "soon" %}
+    <div class="list-row" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}">
+      <span class="number">{{ item.data.number }}</span>
+      <div><h2>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
+      <span class="row-meta">{{ item.data.category }} · {{ "Soon" | t(lang) }}</span>
+    </div>
+    {%- else %}
+    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}">
+      <span class="number">{{ item.data.number }}</span>
+      <div><h2>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
+      <span class="row-meta">{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}</span>
+    </a>
+    {%- endif %}
+    {%- endfor %}
+    <p class="filter-empty" data-filter-empty hidden>{{ "No essays match that yet. Try another word or topic." | t(lang) }}</p>
+  </section>
+{% include "partials/newsletter.njk" %}
+<script src="/js/filter.js" defer></script>
