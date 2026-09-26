@@ -1,5 +1,15 @@
 // Helpers shared by the warehouse tools (defect-log.js, delay-analyzer.js).
 window.ToolKit = (() => {
+  // Language: German pages carry their translations in #ui-strings, keyed by
+  // the English text. tx("Copied") returns the German text there, or the
+  // English text itself; {name} placeholders are filled from vars.
+  const LANG = document.documentElement.lang === "de" ? "de" : "en";
+  const LOCALE = LANG === "de" ? "de-DE" : "en-GB";
+  const strings = (() => {
+    try { return JSON.parse(document.getElementById("ui-strings")?.textContent || "{}"); } catch { return {}; }
+  })();
+  const tx = (text, vars = {}) => (strings[text] ?? text).replace(/\{(\w+)\}/g, (match, name) => (name in vars ? vars[name] : match));
+
   // Storage (the tools work without it, for example in a private window).
   const read = (key, fallback) => {
     try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; }
@@ -14,7 +24,7 @@ window.ToolKit = (() => {
     box.className = "tk-save-warning";
     box.setAttribute("role", "alert");
     const text = document.createElement("p");
-    text.textContent = "This browser could not save your latest changes (storage is full, blocked or private). They stay on this page until you close it: download the CSV or copy the summary to keep them.";
+    text.textContent = tx("This browser could not save your latest changes (storage is full, blocked or private). They stay on this page until you close it: download the CSV or copy the summary to keep them.");
     const close = document.createElement("button");
     close.type = "button";
     close.textContent = "OK";
@@ -58,11 +68,16 @@ window.ToolKit = (() => {
     return node;
   };
 
-  const int = new Intl.NumberFormat("en-GB");
-  const euro = new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR" });
-  const pct = (value, digits = 1) => `${(value * 100).toFixed(digits)}%`;
+  const int = new Intl.NumberFormat(LOCALE);
+  const euro = new Intl.NumberFormat(LOCALE, { style: "currency", currency: "EUR" });
+  const num = (value, digits) => value.toLocaleString(LOCALE, { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  const pct = (value, digits = 1) => value.toLocaleString(LOCALE, { style: "percent", minimumFractionDigits: digits, maximumFractionDigits: digits });
+  // Dates are stored as YYYY-MM-DD; German pages show them as DD.MM.YYYY.
+  const showDate = (iso) => (LANG === "de" && /^\d{4}-\d{2}-\d{2}$/.test(iso) ? `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}` : iso);
   const plural = (count, word, many = `${word}s`) => `${int.format(count)} ${count === 1 ? word : many}`;
   const capital = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+  // Mid-sentence lower case for English labels; German nouns keep their capital.
+  const lower = (text) => (LANG === "de" ? text : text.toLowerCase());
   const today = () => new Date().toISOString().slice(0, 10);
 
   // Parsing, for forms and for rows pasted from a spreadsheet.
@@ -100,9 +115,9 @@ window.ToolKit = (() => {
   const canon = (options, value, empty) => {
     const text = String(value ?? "").trim();
     if (!text) return empty;
-    const lower = text.toLowerCase();
-    return options.find((option) => option.toLowerCase() === lower)
-      || (lower.length >= 3 && options.find((option) => option.toLowerCase().startsWith(lower)))
+    const wanted = text.toLowerCase();
+    return options.find((option) => option.toLowerCase() === wanted)
+      || (wanted.length >= 3 && options.find((option) => option.toLowerCase().startsWith(wanted)))
       || text;
   };
 
@@ -121,7 +136,7 @@ window.ToolKit = (() => {
   };
   // Short-term sigma level with the usual 1.5 shift; 6 when there are no defects.
   const sigma = (rate) => (rate === 0 ? 6 : normInv(1 - rate) + 1.5);
-  const sigmaText = (rate) => (rate === 0 ? "6+" : sigma(rate).toFixed(2));
+  const sigmaText = (rate) => (rate === 0 ? "6+" : num(sigma(rate), 2));
 
   // Result pieces.
   const panel = (title, note) => {
@@ -171,7 +186,7 @@ window.ToolKit = (() => {
   // "Start here" card: stage or reason advice from a tool's data file.
   const focusCard = ({ title, detail, lede, advice, extraLabel, extra, warning }) => {
     const focus = el("article", "result-card dl-focus");
-    focus.append(el("p", "result-label", "Start here"));
+    focus.append(el("p", "result-label", tx("Start here")));
     const heading = el("h3");
     heading.append(title);
     if (detail) heading.append(el("span", null, ` · ${detail}`));
@@ -179,7 +194,7 @@ window.ToolKit = (() => {
     focus.append(el("p", "dl-focus-lede", lede));
     if (advice) {
       focus.append(el("p", null, advice.meaning));
-      focus.append(el("p", "result-label", "First moves"));
+      focus.append(el("p", "result-label", tx("First moves")));
       const moves = el("ol", "moves");
       advice.moves.forEach((move) => moves.append(el("li", null, move)));
       focus.append(moves);
@@ -189,7 +204,7 @@ window.ToolKit = (() => {
       focus.append(el("p", null, extra));
     }
     if (advice) {
-      focus.append(el("p", "result-label", "Question for the floor"));
+      focus.append(el("p", "result-label", tx("Question for the floor")));
       focus.append(el("blockquote", null, advice.question));
     }
     if (warning) focus.append(el("p", "dl-warning", warning));
@@ -208,22 +223,23 @@ window.ToolKit = (() => {
       area.remove();
     }
     const label = button.textContent;
-    button.textContent = "Copied";
+    button.textContent = tx("Copied");
     setTimeout(() => { button.textContent = label; }, 1600);
   };
 
   // Copy, print and 5 Whys buttons under a result.
   const resultActions = (summary, problem) => {
     const actions = el("div", "tool-actions result-actions");
-    const copyButton = el("button", "button-primary", "Copy summary");
+    const copyButton = el("button", "button-primary", tx("Copy summary"));
     copyButton.type = "button";
     copyButton.addEventListener("click", () => copy(summary(), copyButton));
-    const printButton = el("button", "button-secondary", "Print or save as PDF");
+    const printButton = el("button", "button-secondary", tx("Print or save as PDF"));
     printButton.type = "button";
     printButton.addEventListener("click", () => window.print());
-    const whys = el("a", "button-secondary", "Take it to 5 Whys");
-    // Every tool lives next to 5 Whys under /tools/.
-    const url = new URL("../five-whys/", window.location.href);
+    const whys = el("a", "button-secondary", tx("Take it to 5 Whys"));
+    // The page's own 5 Whys link says which worksheet to open; otherwise it
+    // is the one next to this tool.
+    const url = new URL(document.querySelector("a[data-five-whys]")?.href || new URL("../five-whys/", window.location.href));
     url.searchParams.set("problem", problem);
     whys.href = url.href;
     actions.append(copyButton, printButton, whys);
@@ -243,7 +259,7 @@ window.ToolKit = (() => {
       else render();
     };
   };
-  const shownNote = (total) => (total > LOG_LIMIT ? ` · newest ${LOG_LIMIT} shown, CSV has all` : "");
+  const shownNote = (total) => (total > LOG_LIMIT ? tx(" · newest {n} shown, CSV has all", { n: LOG_LIMIT }) : "");
 
   const flash = (node, message) => {
     node.textContent = message;
@@ -251,12 +267,14 @@ window.ToolKit = (() => {
     node.timer = setTimeout(() => { node.textContent = ""; }, 2600);
   };
 
+  // German Excel expects semicolons and a decimal comma.
   const downloadCsv = (name, rows) => {
+    const separator = LANG === "de" ? ";" : ",";
     const quote = (value) => {
-      const text = String(value ?? "");
-      return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      const text = typeof value === "number" && LANG === "de" ? String(value).replace(".", ",") : String(value ?? "");
+      return text.includes(separator) || /["\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
     };
-    const lines = rows.map((cells) => cells.map(quote).join(","));
+    const lines = rows.map((cells) => cells.map(quote).join(separator));
     const blob = new Blob([`﻿${lines.join("\r\n")}\r\n`], { type: "text/csv;charset=utf-8" });
     const link = el("a");
     link.href = URL.createObjectURL(blob);
@@ -274,11 +292,11 @@ window.ToolKit = (() => {
     const render = () => {
       const ticked = boxes.filter((box) => box.checked).length;
       const total = boxes.length;
-      const verdict = ticked === total ? "The standard holds today."
-        : ticked >= total - 2 ? "Close. Fix the open lines this shift."
-        : ticked >= total / 2 ? "Gaps in the standard. Expect misses where lines are open."
-        : "Not yet a standard. Start with the first three lines.";
-      score.replaceChildren(el("strong", null, `${ticked} of ${total}`), ` in place. ${verdict}`);
+      const verdict = ticked === total ? tx("The standard holds today.")
+        : ticked >= total - 2 ? tx("Close. Fix the open lines this shift.")
+        : ticked >= total / 2 ? tx("Gaps in the standard. Expect misses where lines are open.")
+        : tx("Not yet a standard. Start with the first three lines.");
+      score.replaceChildren(el("strong", null, tx("{a} of {b}", { a: ticked, b: total })), ` ${tx("in place.")} ${verdict}`);
     };
     const saved = read(key, []);
     boxes.forEach((box, index) => {
@@ -296,11 +314,12 @@ window.ToolKit = (() => {
     render();
     return () => {
       const ticked = boxes.filter((box) => box.checked).length;
-      return ticked ? `Floor check: ${ticked} of ${boxes.length} standards in place` : "";
+      return ticked ? tx("Floor check: {a} of {b} standards in place", { a: ticked, b: boxes.length }) : "";
     };
   };
 
   return {
+    LANG, LOCALE, tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, splitLine, canon, sigma, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,

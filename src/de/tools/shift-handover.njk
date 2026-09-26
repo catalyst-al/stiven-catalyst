@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Schichtübergabe
+description: "Eine strukturierte Schichtübergabe: Zahlen, offene Punkte mit Verantwortlichen, Hinweise für die nächste Schicht, Sicherheit und Personal, und ein Übergabe-Check. Offene Punkte gehen in die nächste Schicht über. Kostenlos und privat."
+activeNav: /de/tools.html
+permalink: /de/tools/shift-handover/
+alt: /tools/shift-handover/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloses Tool · Übergabe</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1>Schicht&shy;übergabe</h1>
+  <p class="lede">Die meisten Probleme gehen nicht in der Schicht verloren, sondern zwischen den Schichten. Schreiben Sie die Übergabe in fünf Minuten, geben Sie jedem offenen Punkt einen Verantwortlichen, und lassen Sie die ungelösten von selbst in die nächste Schicht übergehen.</p>
+</section>
+
+{% set cfg = de.shiftHandover %}
+{% include "partials/shift-handover.njk" %}

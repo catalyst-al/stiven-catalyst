@@ -1,0 +1,171 @@
+{#- The Delay Analyzer. The page sets `cfg` to its data file; delay-analyzer.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout dl-setup">
+  <div class="tool-panel" data-delay-analyzer>
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Period" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="da-period">{{ "Period" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="da-period" name="period" placeholder="{{ 'e.g. Week 38, last mile' | t(lang) }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="da-dep-grace">{{ "Late departure after (min)" | t(lang) }}</label>
+          <input id="da-dep-grace" name="departureGrace" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 10' | t(lang) }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="da-arr-grace">{{ "Late arrival after (min)" | t(lang) }}</label>
+          <input id="da-arr-grace" name="arrivalGrace" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 15' | t(lang) }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="da-target">{{ "Target on-time %" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="da-target" name="target" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="{{ 'e.g. 95' | t(lang) }}" data-setting>
+        </div>
+        <div class="field dl-wide">
+          <label for="da-routes">{{ "Routes in the period" | t(lang) }} <span class="optional">{{ "only if you log late routes only" | t(lang) }}</span></label>
+          <input id="da-routes" name="routes" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'Empty if every route is logged' | t(lang) }}" data-setting>
+        </div>
+      </div>
+    </fieldset>
+
+    <form class="dl-box" data-entry>
+      <fieldset>
+        <legend class="kicker">2 · {{ "Log a route" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="da-date">{{ "Date" | t(lang) }}</label>
+            <input id="da-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="da-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="da-shift" name="shift">
+              {%- for shift in cfg.shifts %}
+              <option>{{ shift }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="da-route">{{ "Route" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="da-route" name="route" placeholder="{{ 'e.g. R07' | t(lang) }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="da-plan-dep">{{ "Planned departure" | t(lang) }}</label>
+            <input id="da-plan-dep" name="planDep" type="time" required>
+          </div>
+          <div class="field">
+            <label for="da-act-dep">{{ "Actual departure" | t(lang) }}</label>
+            <input id="da-act-dep" name="actDep" type="time" required>
+          </div>
+          <div class="field">
+            <label for="da-reason">{{ "Reason if late" | t(lang) }}</label>
+            <select id="da-reason" name="reason">
+              <option value="">{{ "On time / not known" | t(lang) }}</option>
+              <optgroup label="{{ 'At the dock' | t(lang) }}">
+                {%- for r in cfg.reasons %}{% if r.side == "dock" %}
+                <option>{{ r.name }}</option>
+                {%- endif %}{% endfor %}
+              </optgroup>
+              <optgroup label="{{ 'On the road' | t(lang) }}">
+                {%- for r in cfg.reasons %}{% if r.side == "road" %}
+                <option>{{ r.name }}</option>
+                {%- endif %}{% endfor %}
+              </optgroup>
+            </select>
+          </div>
+          <div class="field">
+            <label for="da-plan-arr">{{ "Planned arrival" | t(lang) }}</label>
+            <input id="da-plan-arr" name="planArr" type="time" required>
+          </div>
+          <div class="field">
+            <label for="da-act-arr">{{ "Actual arrival" | t(lang) }}</label>
+            <input id="da-act-arr" name="actArr" type="time" required>
+          </div>
+          <div class="field">
+            <label for="da-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="da-note" name="note" placeholder="{{ 'e.g. Waited for wave 3' | t(lang) }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Or paste from Excel" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ t.pasteColumns }}</strong>. {{ t.pasteHelp }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="da-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="da-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <div class="dl-table-wrap" data-log-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col">{{ "Route" | t(lang) }}</th><th scope="col">{{ "Dep. plan" | t(lang) }}</th><th scope="col">{{ "Dep." | t(lang) }}</th><th scope="col">{{ "Arr. plan" | t(lang) }}</th><th scope="col">{{ "Arr." | t(lang) }}</th><th scope="col" class="num">{{ "Dep. ±" | t(lang) }}</th><th scope="col" class="num">{{ "Arr. ±" | t(lang) }}</th><th scope="col">{{ "Reason" | t(lang) }}</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example week" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in t.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Fix the vital few." | t(lang) }}</strong> {{ t.vitalFew }} <a class="inline-link" href="{{ fiveWhysUrl or '/tools/five-whys/' }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your log stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results" data-results tabindex="-1" hidden></section>
+
+<section class="shell dl-check" data-floor-check>
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "Floor check" | t(lang) }}</p>
+      <h2>{{ t.checkTitle }}</h2>
+    </div>
+    <p>{{ t.checkIntro }}</p>
+  </div>
+  <ol class="dl-checklist">
+    {%- for item in cfg.checklist %}
+    <li>
+      <label class="dl-check-item">
+        <input type="checkbox" name="check{{ loop.index0 }}">
+        <span>{{ item }}</span>
+      </label>
+    </li>
+    {%- endfor %}
+  </ol>
+  <div class="dl-check-foot">
+    <p class="dl-score" data-check-score aria-live="polite"></p>
+    <div class="tool-actions">
+      <button class="button-secondary" type="button" data-check-reset>{{ "Reset the check" | t(lang) }}</button>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="delay-analyzer-data">{{ cfg | dump | safe }}</script>
+<script src="/js/tool-kit.js" defer></script>
+<script src="/js/delay-analyzer.js" defer></script>

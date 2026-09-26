@@ -2,6 +2,8 @@ import { HtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
+// German interface texts, keyed by the English text (also used by the tools' scripts).
+const readGerman = () => JSON.parse(fs.readFileSync("src/_data/de/ui.json", "utf8"));
 
 const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug);
 
@@ -32,6 +34,12 @@ export default function (eleventyConfig) {
   );
 
   eleventyConfig.addGlobalData("year", new Date().getFullYear());
+
+  // {{ "Add to log" | t(lang) }}: the German text on German pages, else the English one.
+  eleventyConfig.addFilter("t", (text, lang) => (lang === "de" ? readGerman()[text] ?? text : text));
+  // Lower case mid-sentence in English only: German nouns keep their capital.
+  eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
+  eleventyConfig.addWatchTarget("src/_data/de/");
 
   eleventyConfig.addFilter("readableDate", (date) =>
     new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })

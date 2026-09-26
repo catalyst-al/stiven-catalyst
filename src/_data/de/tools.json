@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Schadens­kontrolle",
+    "type": "Lager",
+    "time": "Laufend",
+    "summary": "Beschädigte Einheiten nach Prozessschritt und Ursache erfassen. Schadensquote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Schäden und wo Sie anfangen.",
+    "url": "/de/tools/damage-control/",
+    "cta": "Schadensprotokoll öffnen"
+  },
+  {
+    "name": "Vollständigkeits­kontrolle",
+    "type": "Lager",
+    "time": "Laufend",
+    "summary": "Aufträge erfassen, die ohne alle Artikel oder Pakete rausgingen. Quote, DPMO und Sigma-Niveau, die Ursachen hinter den meisten Fehlern und wo sie entstehen.",
+    "url": "/de/tools/incomplete-control/",
+    "cta": "Auftragsprotokoll öffnen"
+  },
+  {
+    "name": "Verspätungs­analyse",
+    "type": "Lager",
+    "time": "Laufend",
+    "summary": "Geplante und tatsächliche Tourzeiten erfassen. Pünktlichkeitsquote, wie viel Verspätung an der Rampe und wie viel auf der Straße beginnt, und die Gründe und Uhrzeiten dahinter.",
+    "url": "/de/tools/delay-analyzer/",
+    "cta": "Tourenprotokoll öffnen"
+  },
+  {
+    "name": "Schicht­übergabe",
+    "type": "Checkliste",
+    "time": "5 min",
+    "summary": "Zahlen, offene Punkte mit Verantwortlichem und Zeit, Hinweise und Sicherheit in einer Übergabe. Offene Punkte gehen von selbst in die nächste Schicht über.",
+    "url": "/de/tools/shift-handover/",
+    "cta": "Übergabe starten"
+  },
+  {
+    "name": "KPI Diagnostic",
+    "type": "Diagnose",
+    "time": "2 min · Englisch",
+    "summary": "Eine Kennzahl ist rot. Zehn Aussagen zeigen, ob die Ursache bei Klarheit, Können, Kapazität, Prozess oder Verantwortung liegt, mit ersten Schritten für jede.",
+    "url": "/tools/kpi-diagnostic/",
+    "hreflang": "en",
+    "cta": "Diagnose starten (Englisch)"
+  },
+  {
+    "name": "5 Whys",
+    "type": "Arbeitsblatt",
+    "time": "10 min · Englisch",
+    "summary": "Vom Symptom zu einer Ursache, die Sie ändern können, dann eine Maßnahme, ein Verantwortlicher und eine Kontrolle. Drucken oder als PDF speichern.",
+    "url": "/tools/five-whys/",
+    "hreflang": "en",
+    "cta": "Arbeitsblatt öffnen (Englisch)"
+  },
+  {
+    "name": "Sigma & Control Chart",
+    "type": "Six Sigma",
+    "time": "5 min · Englisch",
+    "summary": "Fehler in ein Sigma-Niveau umrechnen, pünktlich, unbeschädigt und vollständig zur perfekten Lieferung kombinieren, und sehen, ob ein schlechter Tag ein Signal ist oder Rauschen.",
+    "url": "/tools/sigma-control-chart/",
+    "hreflang": "en",
+    "cta": "Rechner öffnen (Englisch)"
+  },
+  {
+    "name": "Six Sigma im Lager",
+    "type": "Kurs",
+    "time": "45 min · Englisch",
+    "summary": "DMAIC in fünf Schritten an einem Lagerfall, mit dem passenden Tool für jeden Schritt, drei Fragen pro Schritt, den acht Verschwendungsarten und einem Projektauftrag.",
+    "url": "/tools/six-sigma-dmaic/",
+    "hreflang": "en",
+    "cta": "Kurs starten (Englisch)"
+  }
+]

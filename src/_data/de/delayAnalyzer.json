@@ -1,0 +1,244 @@
+{
+  "storageKey": "sc-delay-analyzer-de",
+  "tool": "Verspätungsanalyse",
+  "csv": "verspaetungsprotokoll",
+  "text": {
+    "pasteRow": "Eine Zeile pro Tour",
+    "pasteColumns": "Datum, Schicht, Tour, geplante Abfahrt, tatsächliche Abfahrt, geplante Ankunft, tatsächliche Ankunft, Grund, Notiz",
+    "pasteHelp": "Zeiten wie 07:45, 7.45 oder 0745 funktionieren; Tabs, Semikolons oder Kommas auch, und eine Kopfzeile wird übersprungen. Eigene Namen für Gründe bleiben erhalten.",
+    "pastePlaceholder": "14.09.2026\tSpät\tR12\t11:15\t11:50\t15:15\t15:55\tSpäte Welle",
+    "empty": "Noch keine Touren erfasst.",
+    "tips": [
+      [
+        "Erfassen Sie jede Tour.",
+        "Pünktliche Touren sind die Basis: Ohne sie gibt es keine Pünktlichkeitsquote und kein Muster nach Uhrzeit."
+      ],
+      [
+        "Nehmen Sie die zugesagte Zeit.",
+        "Die geplante Ankunft ist das, was zugesagt wurde: der erste Stopp, ein Zeitfenster oder das Tourende. Nehmen Sie jeden Tag dieselbe."
+      ],
+      [
+        "Rampe oder Straße.",
+        "Minuten, die eine Tour zu spät abfuhr, zählen als Verspätung an der Rampe; Minuten, die sie nach der Abfahrt verlor, als Verspätung auf der Straße."
+      ]
+    ],
+    "vitalFew": "Zwei oder drei Gründe tragen meist die meisten verspäteten Touren. Fangen Sie dort an und bringen Sie den wichtigsten danach in",
+    "checkTitle": "Fährt das Fahrzeug pünktlich ab?",
+    "checkIntro": "Stehen Sie eine Abfahrtswelle lang an der Rampe und haken Sie ab, was Sie heute wirklich sehen. Jede offene Zeile ist eine Stelle, an der die ersten Minuten Verspätung entstehen."
+  },
+  "shifts": [
+    "Früh",
+    "Spät",
+    "Nacht"
+  ],
+  "reasons": [
+    {
+      "name": "Verladung verspätet",
+      "side": "dock",
+      "meaning": "Das Fahrzeug war bereit, die Ladung nicht. Die Verladung begann spät, lief langsam oder wartete auf fehlende Pakete.",
+      "moves": [
+        "Jeder Tour eine feste Ladestartzeit und einen Ladeslot an einer benannten Rampe geben.",
+        "Die Ladung pro Tour bereitstellen, bevor das Fahrzeug kommt, damit Verladen Tragen ist und nicht Suchen.",
+        "Eine Woche lang die Ladezeit messen: die Touren finden, die immer länger dauern, und den Grund."
+      ],
+      "question": "Worauf wartet das Fahrzeug in den letzten fünfzehn Minuten vor der Abfahrt?"
+    },
+    {
+      "name": "Späte Welle oder Mengenspitze",
+      "side": "dock",
+      "meaning": "Die Menge kam nach dem Cut-off, oder eine Spitze fällt jeden Tag auf dieselben Abfahrtsslots. Die Touren warten auf die letzten Pakete.",
+      "moves": [
+        "Einen festen Cut-off vereinbaren: Pakete, die ihn verpassen, fahren mit der nächsten Tour, nicht mit einer verspäteten Abfahrt.",
+        "Die schwersten Touren von der Spitzenwelle weglegen, wo die Zeitfenster es erlauben.",
+        "Die Zahlen zu späten Wellen jeden Tag mit dem vorgelagerten Standort oder der Sortierung teilen, mit den Abfahrten, die sie gekostet haben."
+      ],
+      "question": "Wer entscheidet, eine Tour für späte Menge zurückzuhalten, und was kostet das die ersten Kunden?"
+    },
+    {
+      "name": "Fahrzeug nicht bereit",
+      "side": "dock",
+      "meaning": "Das Fahrzeug kam zu spät an die Rampe, fiel bei einer Prüfung durch oder war nicht getankt oder geladen.",
+      "moves": [
+        "Fahrzeuge am Ende der vorherigen Schicht prüfen, tanken oder laden, nicht erst bei der Abfahrt.",
+        "In der Spitze ein Ersatzfahrzeug mit Schlüssel und Papieren bereithalten.",
+        "Fahrzeugprobleme nach Kennzeichen erfassen: Meist verursachen wenige Fahrzeuge das meiste."
+      ],
+      "question": "Wann erfahren wir, dass ein Fahrzeug nicht bereit ist, und könnten wir es eine Stunde früher wissen?"
+    },
+    {
+      "name": "Fahrer nicht bereit",
+      "side": "dock",
+      "meaning": "Der Fahrer kam zu spät, die Einweisung dauerte zu lange oder die Tour wurde in letzter Minute neu vergeben.",
+      "moves": [
+        "Die Einweisung pünktlich beginnen und kurz halten; Tourhinweise schriftlich übergeben.",
+        "Fahrer für frühe Touren am Vorabend bestätigen.",
+        "Neuvergaben vor Ladebeginn machen, nie am Fahrzeug."
+      ],
+      "question": "Wie viele Minuten liegen zwischen Ankunft des Fahrers und Abfahrt des Fahrzeugs, und wo gehen sie hin?"
+    },
+    {
+      "name": "Papiere oder Scanner fehlen",
+      "side": "dock",
+      "meaning": "Scanner, Schlüssel, Lieferscheine oder Zollpapiere waren nicht bereit, als das Fahrzeug bereit war.",
+      "moves": [
+        "Scanner, Schlüssel und Papiere pro Tour an einem Ort vorbereiten, bevor die Verladung endet.",
+        "Scanner am Ende jeder Schicht laden und testen.",
+        "Papiere und Geräte in den Abfahrtscheck aufnehmen, nicht dem Gedächtnis des Fahrers überlassen."
+      ],
+      "question": "Was muss ein Fahrer vor der Abfahrt noch suchen gehen?"
+    },
+    {
+      "name": "Verkehr oder Baustelle",
+      "side": "road",
+      "meaning": "Die Tour verlor Zeit durch Verkehr, Sperrungen oder Baustellen. Manches davon liegt außerhalb Ihrer Kontrolle, wiederkehrende Muster nicht.",
+      "moves": [
+        "Im Protokoll nach denselben Straßen und Uhrzeiten suchen: Wiederkehrender Verkehr gehört in die Tourenplanung.",
+        "Abfahrten oder Stoppreihenfolge verschieben, um bekannte Spitzen zu meiden.",
+        "Prüfen, ob die geplante Zeit eine realistische Fahrzeit für diese Uhrzeit enthält."
+      ],
+      "question": "Ist dieser Verkehr eine Überraschung, oder kommt er jede Woche zu dieser Uhrzeit?"
+    },
+    {
+      "name": "Adresse oder Zufahrt",
+      "side": "road",
+      "meaning": "Falsche Adressen, geschlossene Tore, keine Parkmöglichkeit oder unklare Übergabestellen kosten an jedem Stopp Minuten.",
+      "moves": [
+        "Zufahrtshinweise (Tore, Codes, Ladezonen) sammeln und in die Tourdaten schreiben.",
+        "Falsche Adressen an der Quelle korrigieren, nicht im Gedächtnis eines Fahrers.",
+        "Neuen Fahrern die Hinweise für schwierige Stopps vor der Abfahrt geben."
+      ],
+      "question": "Welche Stopps kosten jedes Mal mehr als zehn Minuten, und weiß der nächste Fahrer das?"
+    },
+    {
+      "name": "Kunde nicht erreichbar",
+      "side": "road",
+      "meaning": "Der Kunde war nicht da, also hat der Fahrer gewartet, angerufen oder ist zurückgekommen.",
+      "moves": [
+        "Dem Kunden ein Zeitfenster schicken und es vor der Abfahrt bestätigen.",
+        "Eine feste Wartezeit und einen klaren nächsten Schritt für jede Kundenart vereinbaren.",
+        "Nach Stammkunden suchen: Eine feste Liefervereinbarung spart jede Woche dieselben Minuten."
+      ],
+      "question": "Wie lange wartet ein Fahrer, bevor er weiterfährt, und wer hat das entschieden?"
+    },
+    {
+      "name": "Zu viele Stopps",
+      "side": "road",
+      "meaning": "Die Tour wurde mit mehr Stopps oder Strecke geplant, als die Zeit erlaubt. Der Fahrer kann das nicht aufholen.",
+      "moves": [
+        "Geplante und tatsächliche Stoppzeiten pro Tour vergleichen: mit dem planen, was wirklich passiert.",
+        "Stopps pro Tour nach Gebiet und Tageszeit begrenzen, nicht nach Durchschnitt.",
+        "Stopps von den längsten Touren verschieben, bevor das Fahrzeug beladen wird."
+      ],
+      "question": "Könnte unser bester Fahrer diese Tour an einem normalen Tag pünktlich schaffen?"
+    },
+    {
+      "name": "Wetter",
+      "side": "road",
+      "meaning": "Schnee, Sturm oder Hitze haben Fahrt und Stopps verlangsamt.",
+      "moves": [
+        "Wettertage planen: weniger Stopps pro Tour und frühere Abfahrten, wenn eine Warnung vorliegt.",
+        "Kunden früh informieren, wenn sich Zeitfenster verschieben.",
+        "Wetter von den anderen Gründen getrennt halten, damit das normale Muster sichtbar bleibt."
+      ],
+      "question": "Was ändern wir am Vorabend von schlechtem Wetter an der Planung?"
+    }
+  ],
+  "sides": {
+    "dock": {
+      "name": "Rampe",
+      "lede": "begannen an der Rampe, vor der Abfahrt",
+      "advice": "Zuerst die Abfahrt in Ordnung bringen. Ein Fahrzeug, das 30 Minuten zu spät abfährt, kann bei den ersten Stopps nicht pünktlich sein, egal was der Fahrer auf der Straße macht."
+    },
+    "road": {
+      "name": "Straße",
+      "lede": "entstanden auf der Straße, nach pünktlicher Abfahrt",
+      "advice": "Die Rampe übergibt pünktlich; die Verspätung wächst auf der Straße. Schauen Sie auf Tourenplanung, Anzahl der Stopps und Zeitfenster, bevor Sie auf das Fahren schauen."
+    }
+  },
+  "checklist": [
+    "Die Verladung beginnt für jede Tour zu einer festen Zeit, nicht wenn das letzte Paket da ist.",
+    "Der Cut-off hält: Späte Menge fährt mit der nächsten Tour, nicht mit einer verspäteten Abfahrt.",
+    "Fahrzeuge sind geprüft, getankt oder geladen und an der Rampe, bevor die Verladung beginnt.",
+    "Fahrer sind eingewiesen und bereit, bevor ihr Fahrzeug beladen ist.",
+    "Touren mit den frühesten Zeitfenstern werden zuerst beladen und fahren zuerst ab.",
+    "Scanner, Schlüssel und Papiere sind pro Tour bereit, bevor die Verladung endet.",
+    "Abfahrtszeiten werden für jede Tour erfasst, nicht nur für die verspäteten.",
+    "Touren sind mit einer realistischen Anzahl Stopps für die verfügbare Zeit geplant.",
+    "Bekannte Zufahrtsprobleme (Tore, Codes, Ladezonen) stehen in den Tourhinweisen.",
+    "Jede verspätete Tour hat noch am selben Tag einen erfassten Grund."
+  ],
+  "example": {
+    "period": "Beispielwoche",
+    "routes": "",
+    "departureGrace": "10",
+    "arrivalGrace": "15",
+    "target": "95",
+    "rows": [
+      "2026-09-14|Früh|R01|06:30|06:30|10:30|10:20|",
+      "2026-09-14|Früh|R02|06:45|06:47|11:00|11:07|",
+      "2026-09-14|Früh|R03|07:00|06:57|10:45|10:37|",
+      "2026-09-14|Früh|R04|07:15|07:20|11:45|11:50|",
+      "2026-09-14|Früh|R05|07:30|07:30|11:30|11:30|",
+      "2026-09-14|Früh|R06|07:45|07:40|12:00|11:50|",
+      "2026-09-14|Früh|R07|08:00|08:03|12:00|12:03|",
+      "2026-09-14|Spät|R08|10:30|10:30|14:15|14:05|",
+      "2026-09-14|Spät|R09|10:45|10:49|14:45|14:54|",
+      "2026-09-14|Spät|R10|11:00|10:58|15:15|15:13|",
+      "2026-09-14|Spät|R11|11:15|11:15|15:15|15:00|",
+      "2026-09-14|Spät|R12|11:30|12:05|15:15|15:55|Späte Welle oder Mengenspitze",
+      "2026-09-14|Spät|R13|11:45|12:30|15:45|16:40|Späte Welle oder Mengenspitze",
+      "2026-09-15|Früh|R01|06:30|06:32|10:30|10:32|",
+      "2026-09-15|Früh|R02|06:45|06:42|11:00|10:42|",
+      "2026-09-15|Früh|R03|07:00|07:00|10:45|11:25|Verkehr oder Baustelle",
+      "2026-09-15|Früh|R04|07:15|07:15|11:45|11:40|",
+      "2026-09-15|Früh|R05|07:30|07:25|11:30|11:15|",
+      "2026-09-15|Früh|R06|07:45|07:48|12:00|12:08|",
+      "2026-09-15|Früh|R07|08:00|08:00|12:00|11:55|",
+      "2026-09-15|Spät|R08|10:30|10:34|14:15|14:19|",
+      "2026-09-15|Spät|R09|10:45|10:43|14:45|14:43|",
+      "2026-09-15|Spät|R10|11:00|11:00|15:15|15:10|",
+      "2026-09-15|Spät|R11|11:15|11:21|15:15|15:21|",
+      "2026-09-15|Spät|R12|11:30|12:00|15:15|15:45|Verladung verspätet",
+      "2026-09-15|Spät|R13|11:45|12:25|15:45|16:30|Verladung verspätet",
+      "2026-09-16|Früh|R01|06:30|06:27|10:30|10:22|",
+      "2026-09-16|Früh|R02|06:45|06:50|11:00|11:05|",
+      "2026-09-16|Früh|R03|07:00|07:00|10:45|10:35|",
+      "2026-09-16|Früh|R04|07:15|07:10|11:45|11:45|",
+      "2026-09-16|Früh|R05|07:30|07:35|11:30|12:10|Zu viele Stopps",
+      "2026-09-16|Früh|R06|07:45|08:10|12:00|12:30|Verladung verspätet",
+      "2026-09-16|Früh|R07|08:00|08:04|12:00|12:14|",
+      "2026-09-16|Spät|R08|10:30|10:28|14:15|14:08|",
+      "2026-09-16|Spät|R09|10:45|10:45|14:45|14:35|",
+      "2026-09-16|Spät|R10|11:00|11:06|15:15|15:26|",
+      "2026-09-16|Spät|R11|11:15|11:16|15:15|15:11|",
+      "2026-09-16|Spät|R12|11:30|11:30|15:15|15:15|",
+      "2026-09-16|Spät|R13|11:45|11:47|15:45|15:47|",
+      "2026-09-17|Früh|R01|06:30|06:35|10:30|10:40|",
+      "2026-09-17|Früh|R02|06:45|06:45|11:00|10:55|",
+      "2026-09-17|Früh|R03|07:00|06:55|10:45|10:40|",
+      "2026-09-17|Früh|R04|07:15|07:18|11:45|11:48|",
+      "2026-09-17|Früh|R05|07:30|07:30|11:30|11:25|",
+      "2026-09-17|Früh|R06|07:45|07:49|12:00|12:04|",
+      "2026-09-17|Früh|R07|08:00|07:58|12:00|11:48|",
+      "2026-09-17|Spät|R08|10:30|10:30|14:15|14:20|",
+      "2026-09-17|Spät|R09|10:45|10:51|14:45|14:51|",
+      "2026-09-17|Spät|R10|11:00|11:15|15:15|15:55|Späte Welle oder Mengenspitze",
+      "2026-09-17|Spät|R11|11:15|11:15|15:15|15:25|",
+      "2026-09-17|Spät|R12|11:30|12:10|15:15|16:00|Späte Welle oder Mengenspitze",
+      "2026-09-17|Spät|R13|11:45|12:35|15:45|16:35|Späte Welle oder Mengenspitze",
+      "2026-09-18|Früh|R01|06:30|06:30|10:30|10:15|",
+      "2026-09-18|Früh|R02|06:45|06:40|11:00|11:05|",
+      "2026-09-18|Früh|R03|07:00|07:03|10:45|10:43|",
+      "2026-09-18|Früh|R04|07:15|07:15|11:45|11:35|",
+      "2026-09-18|Früh|R05|07:30|07:34|11:30|11:39|",
+      "2026-09-18|Früh|R06|07:45|07:43|12:00|11:53|",
+      "2026-09-18|Früh|R07|08:00|08:00|12:00|12:30|Verkehr oder Baustelle",
+      "2026-09-18|Spät|R08|10:30|10:36|14:15|14:21|",
+      "2026-09-18|Spät|R09|10:45|10:46|14:45|14:41|",
+      "2026-09-18|Spät|R10|11:00|11:00|15:15|15:15|",
+      "2026-09-18|Spät|R11|11:15|11:17|15:15|15:07|",
+      "2026-09-18|Spät|R12|11:30|12:00|15:15|15:55|Verladung verspätet",
+      "2026-09-18|Spät|R13|11:45|12:20|15:45|16:15|"
+    ]
+  }
+}

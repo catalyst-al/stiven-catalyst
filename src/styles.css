@@ -922,6 +922,24 @@ button, input, select { font: inherit; }
 .tool-card p { margin: 0 0 24px; color: var(--muted); }
 
 .page-hero.tool-hero h1 { font-size: clamp(38px, 12.5cqi, 120px); }
+/* German compounds are long: titles break at a soft hyphen, the longest ones
+   are set smaller, and no title is ever wider than the screen. */
+.page-hero h1:lang(de), .tool-card h2:lang(de), .tool-card h3:lang(de) { overflow-wrap: break-word; hyphens: manual; }
+.page-hero.tool-hero h1.hero-long { font-size: clamp(28px, 8.4cqi, 88px); }
+/* Eyebrow and the Deutsch / English switch on one line. */
+.hero-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin: 0 0 18px; }
+.hero-top .eyebrow { margin: 0; }
+.lang-switch {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.lang-switch:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 
 .tool-layout {
   display: grid;
@@ -1777,7 +1795,7 @@ select.sh-in { cursor: pointer; }
   .has-result .tool-layout { display: none; }
   .statement, .result-card { break-inside: avoid; }
   .field input, .field textarea { border-color: #bbb; }
-  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .sh-side, .sh-history, .sh-output .section-heading p { display: none !important; }
+  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .sh-side, .sh-history, .sh-output .section-heading p, .lang-switch { display: none !important; }
   .sh-output { padding: 0; border: 0; }
   .sh-output-grid { display: block; }
   .print-charter main > :not(.dm-charter) { display: none !important; }

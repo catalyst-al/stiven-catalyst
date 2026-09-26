@@ -1,0 +1,135 @@
+{#- The Shift Handover. The page sets `cfg` to its data file; shift-handover.js does the rest. -#}
+<section class="shell tool-layout dl-setup sh-setup">
+  <form class="tool-panel" data-handover novalidate>
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Shift" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sh-template">{{ "Type of work" | t(lang) }}</label>
+          <select id="sh-template" name="template">
+            {%- for key, tpl in cfg.templates %}
+            <option value="{{ key }}">{{ tpl.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="sh-date">{{ "Date" | t(lang) }}</label>
+          <input id="sh-date" name="date" type="date">
+        </div>
+        <div class="field">
+          <label for="sh-shift">{{ "Shift" | t(lang) }}</label>
+          <select id="sh-shift" name="shift">
+            {%- for shift in cfg.shifts %}
+            <option>{{ shift }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="sh-area">{{ "Area or team" | t(lang) }}</label>
+          <input id="sh-area" name="area" placeholder="{{ 'e.g. Outbound, docks 1–6' | t(lang) }}" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="sh-from">{{ "Handed over by" | t(lang) }}</label>
+          <input id="sh-from" name="from" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="sh-to">{{ "Taken over by" | t(lang) }}</label>
+          <input id="sh-to" name="to" autocomplete="off">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Numbers at handover" | t(lang) }}</legend>
+      <div class="sh-rows" data-metrics></div>
+      <button class="button-ghost" type="button" data-add-metric>{{ "+ Add a number" | t(lang) }}</button>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">3 · {{ "Open issues" | t(lang) }}</legend>
+      <p class="form-note sh-help">{{ "One line per issue, with one owner on the next shift and a time. Tick it when it is solved; everything else carries over when you close the shift." | t(lang) }}</p>
+      <div class="sh-issues" data-issues></div>
+      <button class="button-ghost" type="button" data-add-issue>{{ "+ Add an issue" | t(lang) }}</button>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">4 · {{ "Heads-up and people" | t(lang) }}</legend>
+      <div class="dl-grid sh-grid-2">
+        <div class="field">
+          <label for="sh-heads">{{ "Heads-up for the next shift" | t(lang) }}</label>
+          <textarea id="sh-heads" name="headsUp" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <label for="sh-safety">{{ "Safety and people" | t(lang) }}</label>
+          <textarea id="sh-safety" name="safety" rows="4" placeholder="{{ 'Incidents, near misses, absences, new starters' | t(lang) }}"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">5 · {{ "Handover check" | t(lang) }}</legend>
+      <ul class="dm-checklist" data-checklist></ul>
+    </fieldset>
+
+    <p class="dl-empty sh-empty" data-empty>{{ "New here?" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "Load an example shift" | t(lang) }}</button> {{ "to see a full handover." | t(lang) }}</p>
+  </form>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "A good handover" | t(lang) }}</p>
+    <ul class="tips">
+      <li><strong>{{ "Face to face, with the sheet." | t(lang) }}</strong> {{ "The written handover is the agenda for a two-minute talk, not a replacement for it." | t(lang) }}</li>
+      <li><strong>{{ "One owner per issue." | t(lang) }}</strong> {{ '"The early shift" is not an owner. A name is.' | t(lang) }}</li>
+      <li><strong>{{ "Numbers, not feelings." | t(lang) }}</strong> {{ '"Backlog is fine" means nothing; "320 parcels, sorted" does.' | t(lang) }}</li>
+      <li><strong>{{ "Watch what carries over." | t(lang) }}</strong> {{ "An issue carried three times is not a shift problem any more. Take it through" | t(lang) }} <a class="inline-link" href="{{ fiveWhysUrl or '/tools/five-whys/' }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Handovers stay in this browser. Nothing is sent or uploaded. Copy the text to send it through your own channel." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell sh-output" data-output tabindex="-1">
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "The handover" | t(lang) }}</p>
+      <h2 data-output-title>{{ "Ready to hand over" | t(lang) }}</h2>
+    </div>
+    <p>{{ "This is what the next shift reads. It updates as you type." | t(lang) }}</p>
+  </div>
+  <div class="sh-output-grid">
+    <article class="result-card sh-sheet" data-sheet></article>
+    <div class="sh-side">
+      <div class="dl-box sh-quality" data-quality></div>
+      <div class="dl-box">
+        <p class="kicker">{{ "Take over" | t(lang) }}</p>
+        <p class="form-note sh-help" data-ack-text>{{ "The person taking over confirms they have read it and asked their questions." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-ack>{{ "Confirm takeover" | t(lang) }}</button>
+        </div>
+      </div>
+      <div class="tool-actions sh-actions">
+        <button class="button-primary" type="button" data-copy>{{ "Copy as text" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-print>{{ "Print or save as PDF" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-close>{{ "Close shift, start the next" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-status aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="shell sh-history" data-history-section hidden>
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "History" | t(lang) }}</p>
+      <h2>{{ "Earlier handovers" | t(lang) }}</h2>
+    </div>
+    <p>{{ "The last 30 closed shifts on this device. Open one to read or copy it." | t(lang) }}</p>
+  </div>
+  <div class="sh-history-list" data-history></div>
+  <div class="tool-actions">
+    <button class="button-secondary" type="button" data-clear-history>{{ "Delete history" | t(lang) }}</button>
+  </div>
+</section>
+
+<script type="application/json" id="shift-handover-data">{{ cfg | dump | safe }}</script>
+<script src="/js/tool-kit.js" defer></script>
+<script src="/js/shift-handover.js" defer></script>

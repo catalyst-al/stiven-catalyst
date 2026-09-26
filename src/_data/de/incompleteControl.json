@@ -1,0 +1,152 @@
+{
+  "storageKey": "sc-incomplete-control-de",
+  "unknownCause": "Unbekannt",
+  "text": {
+    "tool": "Vollständigkeitskontrolle",
+    "one": "unvollständiger Auftrag",
+    "many": "unvollständige Aufträge",
+    "allNoun": "unvollständigen Aufträge",
+    "volumeNoun": "Aufträge",
+    "volumeLabel": "Versendete Aufträge",
+    "volumePlaceholder": "z. B. 6200",
+    "targetLabel": "Ziel unvollständig %",
+    "targetPlaceholder": "z. B. 0,5",
+    "rateLabel": "Quote unvollständig",
+    "complement": { "label": "Vollständige Aufträge", "note": "mit allen Artikeln und Paketen raus" },
+    "periodPlaceholder": "z. B. KW 38, E-Commerce",
+    "entryLegend": "Unvollständigen Auftrag erfassen",
+    "countLabel": "Betroffene Aufträge",
+    "countShort": "Aufträge",
+    "notePlaceholder": "z. B. Größe M statt L gepickt, Platz B-14",
+    "pasteRow": "Eine Zeile pro Fehler",
+    "pastePlaceholder": "14.09.2026\tFrüh\tKommissionierung\tFalscher Artikel\tPickfehler\t3\t27",
+    "empty": "Noch keine unvollständigen Aufträge erfasst.",
+    "stageTitle": "Wo der Fehler entstand",
+    "stageNote": "In der Reihenfolge des Prozesses. Erfassen Sie, wo der Fehler entstanden ist, nicht wo der Kunde ihn bemerkt hat.",
+    "stagePhrase": "entstanden im Schritt",
+    "matrixTitle": "Prozessschritt und Fehlerart",
+    "csv": "vollstaendigkeitsprotokoll",
+    "tips": [
+      ["Erfassen Sie, wo der Fehler entstand.", "Ein fehlender Artikel wird meist beim Packen oder vom Kunden gefunden, aber früher verursacht. Verfolgen Sie ihn zurück, bevor Sie ihn erfassen."],
+      ["Zählen Sie Aufträge, nicht Artikel.", "Ein Auftrag mit drei fehlenden Artikeln ist ein unvollständiger Auftrag. Die Details kommen in die Notiz."],
+      ["Tragen Sie das Volumen ein.", "Mit den versendeten Aufträgen bekommen Sie die Quote, den Anteil vollständiger Aufträge, DPMO und Sigma-Niveau."]
+    ],
+    "checkTitle": "Verlässt der Auftrag das Lager vollständig?",
+    "checkIntro": "Gehen Sie vom Pickplatz bis zum Fahrzeug und haken Sie ab, was Sie heute wirklich sehen. Jede offene Zeile ist eine Stelle, an der ein Artikel oder ein Paket verloren gehen kann."
+  },
+  "fields": [
+    { "name": "shift", "label": "Schicht", "options": ["Früh", "Spät", "Nacht"] },
+    { "name": "stage", "label": "Prozessschritt", "options": ["Wareneingang", "Nachschub", "Kommissionierung", "Packen", "Sortierung und Verladung", "Zustellung"] },
+    { "name": "type", "label": "Fehlerart", "options": ["Fehlender Artikel", "Fehlmenge", "Falscher Artikel", "Fehlendes Paket", "Sonstiges"] },
+    { "name": "cause", "label": "Ursache", "options": ["Bestandsgenauigkeit", "Pickfehler", "Packfehler", "Scan ausgelassen", "Sortier- oder Ladefehler", "System oder Stammdaten", "Unbekannt"] }
+  ],
+  "stages": {
+    "Wareneingang": {
+      "meaning": "Es wurde Ware eingebucht, die nie ankam oder in anderer Menge ankam. Jeder spätere Pick aus diesem Bestand kommt zu kurz.",
+      "moves": [
+        "Im Wareneingang gegen die Lieferung zählen, nicht gegen die Bestellung.",
+        "Blind zählen: Zuerst zählt der Mitarbeiter, danach sieht er die erwartete Menge.",
+        "Differenzen am selben Tag buchen, damit das System nie Bestand verspricht, der nicht da ist."
+      ],
+      "question": "Wer zählt die Ware, und kennt er die erwartete Menge schon vor dem Zählen?"
+    },
+    "Nachschub": {
+      "meaning": "Der Pickplatz läuft leer oder bekommt den falschen Artikel, während das System noch Bestand zeigt. Kommissionierer picken zu wenig oder greifen zum Nachbarplatz.",
+      "moves": [
+        "Nachschub auslösen, bevor der Platz leer ist, nicht danach.",
+        "Bei jeder Einlagerung in den Pickplatz Platz und Artikel scannen.",
+        "Jede Schicht mit den Plätzen beginnen, die am Vortag wiederholt Fehlmengen hatten."
+      ],
+      "question": "Wie merkt ein Kommissionierer, dass ein Platz leer ist, und was macht er dann?"
+    },
+    "Kommissionierung": {
+      "meaning": "Der falsche Artikel oder die falsche Menge kommt in den Behälter. Ähnliche Artikel, Positionen mit mehreren Stück und Zeitdruck verursachen das meiste davon.",
+      "moves": [
+        "Jeden Artikel scannen und bei Positionen mit mehreren Stück die Menge bestätigen.",
+        "Ähnliche Artikel trennen: Größen, Farben und Varianten eines Produkts nie direkt nebeneinander.",
+        "Eine Fehlmenge zu melden muss schneller gehen, als sie zu umgehen."
+      ],
+      "question": "Was passiert, wenn der Kommissionierer nicht die volle Menge findet?"
+    },
+    "Packen": {
+      "meaning": "Ein Artikel bleibt auf dem Tisch liegen, rutscht in den nächsten Auftrag oder landet im falschen Karton.",
+      "moves": [
+        "Jeden Artikel gegen den Auftrag scannen, bevor der Karton geschlossen wird.",
+        "Immer nur ein Auftrag auf dem Tisch, und ein leerer Tisch vor dem nächsten.",
+        "Bei Aufträgen mit bekanntem Sollgewicht das Gewicht prüfen."
+      ],
+      "question": "Woran erkennt der Packer, dass der Auftrag vollständig ist, bevor er den Karton schließt?"
+    },
+    "Sortierung und Verladung": {
+      "meaning": "Die Pakete eines Auftrags werden getrennt: Eins kommt ins Fahrzeug, ein anderes bleibt stehen oder geht auf die falsche Tour.",
+      "moves": [
+        "Beim Verladen die Pakete pro Auftrag zählen: Zwei von drei ist nicht verladen.",
+        "Jedes Paket ins Fahrzeug scannen und den Ausgangsscan mit der Tour abgleichen.",
+        "Am Ende jeder Welle den Sortierbereich nach liegengebliebenen Paketen absuchen."
+      ],
+      "question": "Was verhindert, dass das letzte Paket eines Auftrags auf dem Boden bleibt?"
+    },
+    "Zustellung": {
+      "meaning": "Pakete bleiben im Fahrzeug, gehen an die falsche Adresse, oder von einem Auftrag mit mehreren Paketen wird nur ein Teil übergeben.",
+      "moves": [
+        "Jedes Paket bei der Übergabe scannen und Aufträge mit mehreren Paketen an der Tür zählen.",
+        "Am Ende der Tour prüfen, dass das Fahrzeug leer ist.",
+        "Jedem „nicht erhalten“ innerhalb eines Tages nachgehen, solange sich der Fahrer an den Stopp erinnert."
+      ],
+      "question": "Woran erkennt der Fahrer, dass jedes Paket für diesen Stopp übergeben wurde?"
+    }
+  },
+  "causes": {
+    "Bestandsgenauigkeit": "Zählen Sie die Plätze hinter den Fehlern noch am selben Tag nach, und finden Sie heraus, wo der Bestand falsch wurde, nicht nur, wie viel jetzt da ist.",
+    "Pickfehler": "Beobachten Sie Picks am Platz mit den meisten Fehlern. Die meisten Pickfehler entstehen durch Layout, Etiketten und ähnliche Artikel.",
+    "Packfehler": "Machen Sie den Auftrag am Packtisch sichtbar und scannen Sie dagegen. In der Spitzenzeit hält das Gedächtnis nicht.",
+    "Scan ausgelassen": "Fragen Sie, warum der Scan ausgelassen wurde. Ein langsamer Scanner, ein fehlendes Etikett oder ein Ziel, das Scanzeit bestraft, sind häufiger als Nachlässigkeit.",
+    "Sortier- oder Ladefehler": "Zählen und scannen Sie an der Fahrzeugtür. Aufträge mit mehr als einem Paket brauchen eine eigene Kontrolle.",
+    "System oder Stammdaten": "Prüfen Sie die Stammdaten: Packgrößen, Mengeneinheiten, Bündel und Sets versprechen oft Mengen, die das Regal nicht hat.",
+    "Unbekannt": "Ein hoher Anteil „Unbekannt“ heißt: Das Protokoll ist noch nicht gut genug. Erfassen Sie, wo und warum es schiefging, sobald ein Fehler gefunden wird."
+  },
+  "checklist": [
+    "Jeder Pick wird gescannt: Platz und Artikel.",
+    "Mengen bei Positionen mit mehreren Stück werden gezählt und bestätigt, nicht angenommen.",
+    "Ähnliche Artikel liegen nicht nebeneinander.",
+    "Fehlmengen werden sofort gemeldet und nicht dem Packen überlassen.",
+    "Beim Packen wird jeder Artikel gegen den Auftrag gescannt, bevor der Karton schließt.",
+    "Es liegt immer nur ein Auftrag auf dem Packtisch.",
+    "Aufträge mit mehreren Paketen werden vor dem Verladen gezählt und zusammengehalten.",
+    "Plätze mit Fehlmengen werden am selben Tag nachgezählt.",
+    "Jedes Fahrzeug wird am Ende der Tour auf Leere geprüft.",
+    "Jeder unvollständige Auftrag wird mit Ort und Ursache des Fehlers erfasst."
+  ],
+  "example": {
+    "period": "Beispielwoche",
+    "volume": 6200,
+    "target": 0.5,
+    "rows": [
+      "2026-09-14|Früh|Kommissionierung|Falscher Artikel|Pickfehler|3|27",
+      "2026-09-14|Spät|Kommissionierung|Fehlmenge|Bestandsgenauigkeit|2|18",
+      "2026-09-14|Spät|Packen|Fehlender Artikel|Packfehler|1|9",
+      "2026-09-14|Nacht|Kommissionierung|Fehlmenge|Scan ausgelassen|2|18",
+      "2026-09-15|Früh|Kommissionierung|Falscher Artikel|Pickfehler|4|36",
+      "2026-09-15|Spät|Nachschub|Fehlmenge|Bestandsgenauigkeit|3|27",
+      "2026-09-15|Spät|Sortierung und Verladung|Fehlendes Paket|Sortier- oder Ladefehler|2|24",
+      "2026-09-16|Früh|Kommissionierung|Fehlmenge|Pickfehler|3|27",
+      "2026-09-16|Spät|Kommissionierung|Fehlender Artikel|Scan ausgelassen|3|27",
+      "2026-09-16|Spät|Wareneingang|Fehlmenge|Bestandsgenauigkeit|2|18",
+      "2026-09-16|Nacht|Packen|Fehlender Artikel|Packfehler|2|18",
+      "2026-09-17|Früh|Kommissionierung|Falscher Artikel|Pickfehler|2|18",
+      "2026-09-17|Spät|Kommissionierung|Falscher Artikel|Pickfehler|4|36",
+      "2026-09-17|Spät|Kommissionierung|Fehlmenge|Bestandsgenauigkeit|3|27",
+      "2026-09-17|Nacht|Zustellung|Fehlendes Paket|Sortier- oder Ladefehler|1|12",
+      "2026-09-18|Früh|Kommissionierung|Fehlmenge|Scan ausgelassen|2|18",
+      "2026-09-18|Spät|Kommissionierung|Falscher Artikel|Pickfehler|3|27",
+      "2026-09-18|Spät|Kommissionierung|Fehlmenge|System oder Stammdaten|2|",
+      "2026-09-18|Spät|Packen|Fehlender Artikel|Packfehler|1|9",
+      "2026-09-19|Früh|Kommissionierung|Fehlender Artikel|Pickfehler|2|18",
+      "2026-09-19|Spät|Nachschub|Fehlmenge|Bestandsgenauigkeit|2|18",
+      "2026-09-19|Spät|Kommissionierung|Falscher Artikel|Scan ausgelassen|2|18",
+      "2026-09-19|Nacht|Sortierung und Verladung|Fehlendes Paket|Sortier- oder Ladefehler|1|12",
+      "2026-09-20|Früh|Kommissionierung|Falscher Artikel|Pickfehler|3|27",
+      "2026-09-20|Früh|Zustellung|Fehlendes Paket|Unbekannt|1|"
+    ]
+  }
+}

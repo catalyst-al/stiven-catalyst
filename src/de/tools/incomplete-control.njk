@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Vollständigkeitskontrolle
+description: "Ein privates Protokoll für unvollständige Aufträge: fehlende Artikel, Fehlmengen, falsche Artikel und fehlende Pakete. Quote, vollständige Aufträge, DPMO und Sigma-Niveau, ein Pareto der Ursachen und wo im Prozess Aufträge schiefgehen."
+activeNav: /de/tools.html
+permalink: /de/tools/incomplete-control/
+alt: /tools/incomplete-control/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloses Tool · Lager</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1 class="hero-long">Vollständigkeits&shy;kontrolle</h1>
+  <p class="lede">Ein Auftrag, der ohne alle Artikel oder Pakete rausgeht, kostet eine Nachlieferung und das Vertrauen des Kunden. Erfassen Sie jeden Fehler mit dem Ort, an dem er entstand, und dem Grund. Das Tool zeigt Ihre Quote, die wenigen Ursachen hinter den meisten Fehlern und wo Sie anfangen sollten.</p>
+</section>
+
+{% set cfg = de.incompleteControl %}
+{% include "partials/defect-log.njk" %}

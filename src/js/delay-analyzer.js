@@ -4,6 +4,7 @@
   if (!root || !dataEl || !window.ToolKit) return;
 
   const {
+    tx, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, splitLine, canon, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
@@ -11,7 +12,10 @@
 
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
-  const NOT_RECORDED = "Not recorded";
+  const NOT_RECORDED = tx("Not recorded");
+  const routes = (count) => plural(count, tx("route"), tx("routes"));
+  const lateRoutes = (count) => plural(count, tx("late route"), tx("late routes"));
+  const sideName = (side) => data.sides[side].name;
   const reasonNames = data.reasons.map((reason) => reason.name);
   const reasonInfo = Object.fromEntries(data.reasons.map((reason) => [reason.name, reason]));
 
@@ -62,6 +66,14 @@
   })).filter((row) => row.planArr && row.actArr);
   const signed = (value) => (value === null ? "" : value > 0 ? `+${value}` : value < 0 ? `−${-value}` : "0");
   const minutes = (value) => `${int.format(Math.round(value))} min`;
+  // Where a late route's delay began; the keys stay English, the names follow the page.
+  const SIDES = ["Dock", "Dock and road", "Road", "Not known"];
+  const SIDE_TITLES = {
+    "Dock": "Left late, and most of the delay was already there at departure.",
+    "Dock and road": "Left late, then lost even more time on the road.",
+    "Road": "Left on time and lost the time on the road.",
+    "Not known": "No departure times, so the delay cannot be split.",
+  };
 
   const importRows = (text) => {
     const added = [];
@@ -146,12 +158,12 @@
       item.cumulative = running;
     });
 
-    const sides = ["Dock", "Dock and road", "Road", "Not known"]
-      .map((key) => {
-        const items = late.filter((row) => row.side === key);
-        return { key, value: items.length, minutes: items.reduce((sum, row) => sum + row.arr, 0) };
+    const sides = SIDES
+      .map((id) => {
+        const items = late.filter((row) => row.side === id);
+        return { id, key: tx(id), value: items.length, minutes: items.reduce((sum, row) => sum + row.arr, 0) };
       })
-      .filter((item) => item.value || item.key !== "Not known");
+      .filter((item) => item.value || item.id !== "Not known");
 
     const withRate = (items) => items.map((item) => ({ ...item, value: item.late / item.routes }));
     const hours = withRate(group(rows.filter((row) => row.planDep), (row) => `${row.planDep.slice(0, 2)}:00`))
@@ -161,7 +173,7 @@
     const worstHour = hours.filter((item) => item.routes >= 3 && item.late).sort((a, b) => b.value - a.value)[0];
 
     const buckets = [[1, 15], [16, 30], [31, 60], [61, 120], [121, Infinity]].map(([low, high]) => ({
-      key: high === Infinity ? `Over ${low - 1} min` : `${low}–${high} min`,
+      key: high === Infinity ? tx("Over {n} min", { n: low - 1 }) : `${low}–${high} min`,
       value: late.filter((row) => row.arr >= low && row.arr <= high).length,
     }));
 
@@ -208,7 +220,7 @@
       const dep = diff(row.planDep, row.actDep);
       const arr = diff(row.planArr, row.actArr);
       const tr = el("tr");
-      tr.append(el("td", "nowrap", row.date || "-"));
+      tr.append(el("td", "nowrap", showDate(row.date) || "-"));
       [row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr].forEach((value) => tr.append(el("td", null, value || "")));
       const depCell = el("td", "num", signed(dep));
       if (dep > depGrace) depCell.classList.add("is-late");
@@ -221,7 +233,7 @@
       const remove = el("button", "dl-remove", "×");
       remove.type = "button";
       remove.dataset.remove = index;
-      remove.setAttribute("aria-label", `Remove route ${row.route || ""} planned ${row.planDep || row.planArr}${row.date ? ` on ${row.date}` : ""}`);
+      remove.setAttribute("aria-label", tx(row.date ? "Remove route {route} planned {time} on {date}" : "Remove route {route} planned {time}", { route: row.route || "", time: row.planDep || row.planArr, date: showDate(row.date) }));
       cell.append(remove);
       tr.append(cell);
       logBody.append(tr);
@@ -229,21 +241,21 @@
     logWrap.hidden = !rows.length;
     logEmpty.hidden = rows.length > 0;
     const late = rows.filter((row) => diff(row.planArr, row.actArr) > arrGrace).length;
-    logCount.textContent = rows.length ? `${plural(rows.length, "route")} · ${int.format(late)} late${shownNote(rows.length)}` : "";
+    logCount.textContent = rows.length ? `${routes(rows.length)} · ${tx("{n} late", { n: int.format(late) })}${shownNote(rows.length)}` : "";
   };
 
   // Results.
   const sideText = (result) => {
     const share = result.side === "dock" ? result.dockShare : result.dockShare === null ? null : 1 - result.dockShare;
     return share === null
-      ? `most late routes point to the ${result.side}`
-      : `${pct(share, 0)} of late minutes ${data.sides[result.side].lede}`;
+      ? tx("most late routes point to the {side}", { side: lower(sideName(result.side)) })
+      : tx("{pct} of late minutes {lede}", { pct: pct(share, 0), lede: data.sides[result.side].lede });
   };
 
   const problemText = (result) => {
     const when = state.period ? `${state.period}: ` : "";
-    const why = result.topReason ? `, mostly ${result.topReason.key.toLowerCase()}` : "";
-    return `${when}${int.format(result.late.length)} of ${plural(result.total, "route")} late (${pct(result.onTime, 1)} on time); ${sideText(result)}${why}.`;
+    const why = result.topReason ? tx(", mostly {cause}", { cause: lower(result.topReason.key) }) : "";
+    return `${when}${tx("{n} of {routes} late ({pct} on time)", { n: int.format(result.late.length), routes: routes(result.total), pct: pct(result.onTime, 1) })}; ${sideText(result)}${why}.`;
   };
 
   const targetText = (result) => {
@@ -251,44 +263,44 @@
     const needed = Math.ceil(result.target * result.total - 1e-9);
     const gap = needed - (result.total - result.late.length);
     return gap > 0
-      ? { value: `${int.format(gap)} short`, note: `${plural(gap, "more route")} on time reach ${pct(result.target, 1)}` }
-      : { value: "On target", note: `${plural(-gap, "route")} to spare at ${pct(result.target, 1)}` };
+      ? { value: tx("{n} short", { n: int.format(gap) }), note: tx("{routes} on time reach {pct}", { routes: plural(gap, tx("more route"), tx("more routes")), pct: pct(result.target, 1) }) }
+      : { value: tx("On target"), note: tx("{routes} to spare at {pct}", { routes: routes(-gap), pct: pct(result.target, 1) }) };
   };
 
   let checkSummary = () => "";
 
   const summaryText = (result) => {
-    const lines = ["Delay Analyzer | Stiven Catalyst"];
-    if (state.period) lines.push(`Period: ${state.period}`);
+    const lines = [`${data.tool} | Stiven Catalyst`];
+    if (state.period) lines.push(`${tx("Period")}: ${state.period}`);
     lines.push(
       "",
-      `Routes: ${int.format(result.total)} · late: ${int.format(result.late.length)} · on time: ${pct(result.onTime, 1)} · sigma level: ${sigmaText(result.rate)}`,
-      `Late means arrival more than ${state.arrivalGrace || 0} min after plan; late departure more than ${state.departureGrace || 0} min.`
+      tx("Routes: {total} · late: {late} · on time: {pct} · sigma level: {sigma}", { total: int.format(result.total), late: int.format(result.late.length), pct: pct(result.onTime, 1), sigma: sigmaText(result.rate) }),
+      tx("Late means arrival more than {arr} min after plan; late departure more than {dep} min.", { arr: state.arrivalGrace || 0, dep: state.departureGrace || 0 })
     );
     if (result.late.length) {
-      lines.push(`Average delay of late routes: ${minutes(result.lateMinutes / result.late.length)}`);
-      if (result.dockShare !== null) lines.push(`Late minutes that started at the dock: ${pct(result.dockShare, 0)}`);
+      lines.push(`${tx("Average delay of late routes")}: ${minutes(result.lateMinutes / result.late.length)}`);
+      if (result.dockShare !== null) lines.push(`${tx("Late minutes that started at the dock")}: ${pct(result.dockShare, 0)}`);
     }
-    if (result.depOnTime !== null) lines.push(`On-time departures: ${pct(result.depOnTime, 1)}`);
+    if (result.depOnTime !== null) lines.push(`${tx("On-time departures")}: ${pct(result.depOnTime, 1)}`);
     const target = targetText(result);
-    if (target) lines.push(`Target ${pct(result.target, 1)} on time: ${target.note}`);
+    if (target) lines.push(`${tx("Target {pct} on time", { pct: pct(result.target, 1) })}: ${target.note}`);
     if (result.late.length) {
-      lines.push("", "Dock or road (late routes):");
-      result.sides.forEach((item) => lines.push(`- ${item.key}: ${item.value} routes, ${minutes(item.minutes)}`));
-      lines.push("", "Pareto of reasons:");
-      result.reasons.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.share, 0)}, cum. ${pct(item.cumulative, 0)})${item.vital ? " [vital few]" : ""}`));
+      lines.push("", `${tx("Dock or road (late routes)")}:`);
+      result.sides.forEach((item) => lines.push(`- ${item.key}: ${routes(item.value)}, ${minutes(item.minutes)}`));
+      lines.push("", `${tx("Pareto of reasons")}:`);
+      result.reasons.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.share, 0)}, ${tx("cum.")} ${pct(item.cumulative, 0)})${item.vital ? ` [${tx("vital few")}]` : ""}`));
     }
-    lines.push("", "Late by planned departure hour:");
-    result.hours.forEach((item) => lines.push(`- ${item.key}: ${item.late} of ${item.routes} (${pct(item.value, 0)})`));
-    lines.push("", "Late by shift:");
-    result.shifts.forEach((item) => lines.push(`- ${item.key}: ${item.late} of ${item.routes} (${pct(item.value, 0)})`));
+    lines.push("", `${tx("Late by planned departure hour")}:`);
+    result.hours.forEach((item) => lines.push(`- ${item.key}: ${tx("{a} of {b}", { a: item.late, b: item.routes })} (${pct(item.value, 0)})`));
+    lines.push("", `${tx("Late by shift")}:`);
+    result.shifts.forEach((item) => lines.push(`- ${item.key}: ${tx("{a} of {b}", { a: item.late, b: item.routes })} (${pct(item.value, 0)})`));
     if (result.late.length) {
-      lines.push("", `Start here: ${problemText(result)}`);
+      lines.push("", `${tx("Start here")}: ${problemText(result)}`);
       const advice = reasonInfo[result.topReason?.key];
       if (advice) {
-        lines.push("First moves:");
+        lines.push(`${tx("First moves")}:`);
         advice.moves.forEach((move) => lines.push(`- ${move}`));
-        lines.push(`Question for the floor: ${advice.question}`);
+        lines.push(`${tx("Question for the floor")}: ${advice.question}`);
       }
     }
     const check = checkSummary();
@@ -298,8 +310,8 @@
 
   const rateBars = (items, options = {}) => barList(items, {
     ...options,
-    label: (item) => [`${item.late} of ${item.routes}`, ` late · ${pct(item.value, 0)}`],
-    title: (item) => `${item.key}: ${item.late} of ${plural(item.routes, "route")} late${item.late ? `, ${minutes(item.minutes)} late in total` : ""}`,
+    label: (item) => [tx("{a} of {b}", { a: item.late, b: item.routes }), ` ${tx("late")} · ${pct(item.value, 0)}`],
+    title: (item) => `${item.key}: ${tx("{n} of {routes} late", { n: item.late, routes: routes(item.routes) })}${item.late ? tx(", {min} late in total", { min: minutes(item.minutes) }) : ""}`,
   });
 
   const renderResults = () => {
@@ -309,72 +321,67 @@
     const result = analyse();
 
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", state.period ? `Result · ${state.period}` : "Result"));
+    head.append(el("p", "kicker", state.period ? `${tx("Result")} · ${state.period}` : tx("Result")));
     const title = el("h2");
-    title.append("On time ", el("span", null, pct(result.onTime, 1)));
+    title.append(`${tx("On time")} `, el("span", null, pct(result.onTime, 1)));
     head.append(title);
     results.append(head);
 
     const stats = el("div", "dl-stats");
-    stats.append(stat("Late routes", `${int.format(result.late.length)} of ${int.format(result.total)}`, `${plural(result.logged, "route")} logged${result.days ? ` over ${plural(result.days, "day")}` : ""}`));
+    stats.append(stat(tx("Late routes"), tx("{a} of {b}", { a: int.format(result.late.length), b: int.format(result.total) }), `${tx("{routes} logged", { routes: routes(result.logged) })}${result.days ? ` ${tx("over {days}", { days: plural(result.days, tx("day"), tx("days")) })}` : ""}`));
     if (result.late.length) {
-      stats.append(stat("Average delay", minutes(result.lateMinutes / result.late.length), "of the late routes"));
-      if (result.dockShare !== null) stats.append(stat("Started at the dock", pct(result.dockShare, 0), "of late minutes"));
+      stats.append(stat(tx("Average delay"), minutes(result.lateMinutes / result.late.length), tx("of the late routes")));
+      if (result.dockShare !== null) stats.append(stat(tx("Started at the dock"), pct(result.dockShare, 0), tx("of late minutes")));
     }
-    if (result.depOnTime !== null) stats.append(stat("On-time departures", pct(result.depOnTime, 1), `left within ${state.departureGrace || 0} min of plan`));
-    stats.append(stat("Sigma level", sigmaText(result.rate), "short term, with 1.5 shift"));
+    if (result.depOnTime !== null) stats.append(stat(tx("On-time departures"), pct(result.depOnTime, 1), tx("left within {n} min of plan", { n: state.departureGrace || 0 })));
+    stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
     const target = targetText(result);
-    if (target) stats.append(stat("Target", target.value, target.note));
+    if (target) stats.append(stat(tx("Target"), target.value, target.note));
     results.append(stats);
 
     if (result.setRoutesIgnored) {
-      results.append(el("p", "dl-warning", "Routes in the period is lower than the routes in the log, so the log count is used."));
+      results.append(el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used.")));
     }
 
     const grid = el("div", "dl-result-grid");
     if (result.late.length) {
-      const sides = panel("Dock or road", result.dockShare === null
-        ? "Add departure times to split late minutes between the dock and the road."
-        : `${pct(result.dockShare, 0)} of late minutes started at the dock, before the vehicle left.`);
+      const sides = panel(tx("Dock or road"), result.dockShare === null
+        ? tx("Add departure times to split late minutes between the dock and the road.")
+        : tx("{pct} of late minutes started at the dock, before the vehicle left.", { pct: pct(result.dockShare, 0) }));
       const biggest = Math.max(...result.sides.map((item) => item.value));
       sides.append(barList(result.sides, {
         highlight: (item) => item.value === biggest,
-        tag: "Most",
-        label: (item) => [int.format(item.value), ` ${item.value === 1 ? "route" : "routes"} · ${minutes(item.minutes)}`],
-        title: (item) => ({
-          "Dock": "Left late, and most of the delay was already there at departure.",
-          "Dock and road": "Left late, then lost even more time on the road.",
-          "Road": "Left on time and lost the time on the road.",
-          "Not known": "No departure times, so the delay cannot be split.",
-        })[item.key],
+        tag: tx("Most"),
+        label: (item) => [int.format(item.value), ` ${item.value === 1 ? tx("route") : tx("routes")} · ${minutes(item.minutes)}`],
+        title: (item) => tx(SIDE_TITLES[item.id]),
       }));
       grid.append(sides);
 
       const vital = result.reasons.filter((item) => item.vital);
-      const pareto = panel("Pareto of reasons", `${vital.length} of ${result.reasons.length} reasons carry ${pct(vital.at(-1).cumulative, 0)} of late routes. Fix these first.`);
+      const pareto = panel(tx("Pareto of reasons"), tx("{a} of {b} reasons carry {pct} of late routes. Fix these first.", { a: vital.length, b: result.reasons.length, pct: pct(vital.at(-1).cumulative, 0) }));
       pareto.append(barList(result.reasons, {
         ranked: true,
         highlight: (item) => item.vital,
-        tag: "Vital few",
-        label: (item) => [int.format(item.value), ` · ${pct(item.share, 0)} · ${pct(item.cumulative, 0)} cum.`],
-        title: (item) => `${item.key}${reasonInfo[item.key] ? ` (${reasonInfo[item.key].side})` : ""}: ${plural(item.value, "late route")}, ${minutes(item.minutes)} late in total`,
+        tag: tx("Vital few"),
+        label: (item) => [int.format(item.value), ` · ${pct(item.share, 0)} · ${pct(item.cumulative, 0)} ${tx("cum.")}`],
+        title: (item) => `${item.key}${reasonInfo[item.key] ? ` (${lower(sideName(reasonInfo[item.key].side))})` : ""}: ${lateRoutes(item.value)}${tx(", {min} late in total", { min: minutes(item.minutes) })}`,
       }));
       grid.append(pareto);
     }
 
-    const hours = panel("By planned departure hour", "Share of routes that arrived late, by the hour they were planned to leave.");
-    hours.append(rateBars(result.hours, { highlight: (item) => item === result.worstHour, tag: "Worst" }));
+    const hours = panel(tx("By planned departure hour"), tx("Share of routes that arrived late, by the hour they were planned to leave."));
+    hours.append(rateBars(result.hours, { highlight: (item) => item === result.worstHour, tag: tx("Worst") }));
     grid.append(hours);
 
-    const shifts = panel("By shift", "Share of each shift's routes that arrived late.");
+    const shifts = panel(tx("By shift"), tx("Share of each shift's routes that arrived late."));
     shifts.append(rateBars(result.shifts));
     grid.append(shifts);
 
     if (result.late.length) {
-      const spread = panel("How late", "Late routes by minutes after the planned arrival.");
+      const spread = panel(tx("How late"), tx("Late routes by minutes after the planned arrival."));
       spread.append(barList(result.buckets, {
-        label: (item) => [int.format(item.value), ` ${item.value === 1 ? "route" : "routes"}`],
-        title: (item) => `${item.key}: ${plural(item.value, "route")}`,
+        label: (item) => [int.format(item.value), ` ${item.value === 1 ? tx("route") : tx("routes")}`],
+        title: (item) => `${item.key}: ${routes(item.value)}`,
       }));
       grid.append(spread);
     }
@@ -382,23 +389,23 @@
 
     if (result.late.length) {
       const warnings = [];
-      if (result.noReason / result.late.length > 0.15) warnings.push(`${pct(result.noReason / result.late.length, 0)} of late routes have no reason. Record it the same day, while people still remember.`);
-      if (result.noDeparture) warnings.push(`${plural(result.noDeparture, "late route")} ${result.noDeparture === 1 ? "has" : "have"} no departure time, so ${result.noDeparture === 1 ? "its" : "their"} delay cannot be split between dock and road.`);
+      if (result.noReason / result.late.length > 0.15) warnings.push(tx("{pct} of late routes have no reason. Record it the same day, while people still remember.", { pct: pct(result.noReason / result.late.length, 0) }));
+      if (result.noDeparture) warnings.push(tx(result.noDeparture === 1 ? "{routes} has no departure time, so its delay cannot be split between dock and road." : "{routes} have no departure time, so their delay cannot be split between dock and road.", { routes: lateRoutes(result.noDeparture) }));
       const reason = result.topReason;
       results.append(focusCard({
-        title: data.sides[result.side].name,
+        title: sideName(result.side),
         detail: reason?.key,
         lede: problemText(result),
         advice: reasonInfo[reason?.key],
-        extraLabel: `Why the ${result.side} first`,
+        extraLabel: tx("Why the {side} first", { side: lower(sideName(result.side)) }),
         extra: data.sides[result.side].advice,
         warning: warnings.join(" "),
       }));
       results.append(resultActions(() => summaryText(result), problemText(result)));
     } else {
       const card = el("article", "result-card dl-focus");
-      card.append(el("p", "result-label", "No late routes"));
-      card.append(el("p", "dl-focus-lede", `Every logged route arrived within ${state.arrivalGrace || 0} minutes of plan.`));
+      card.append(el("p", "result-label", tx("No late routes")));
+      card.append(el("p", "dl-focus-lede", tx("Every logged route arrived within {n} minutes of plan.", { n: state.arrivalGrace || 0 })));
       results.append(card);
     }
   };
@@ -436,7 +443,7 @@
       note: form.note.value.trim(),
     };
     if (!row.planArr || !row.actArr) {
-      flash(entryStatus, "Enter the planned and actual arrival.");
+      flash(entryStatus, tx("Enter the planned and actual arrival."));
       return;
     }
     state.rows.push(row);
@@ -446,21 +453,21 @@
     ["route", "planDep", "actDep", "planArr", "actArr", "note"].forEach((name) => { form[name].value = ""; });
     form.reason.value = "";
     const arr = diff(row.planArr, row.actArr);
-    flash(entryStatus, `Added ${row.route || "route"}: ${signed(arr)} min at arrival.`);
+    flash(entryStatus, tx("Added {route}: {n} min at arrival.", { route: row.route || tx("route"), n: signed(arr) }));
     form.route.focus();
   });
 
   root.querySelector("[data-import]").addEventListener("click", () => {
     const { added, skipped } = importRows(pasteArea.value);
     if (!added.length) {
-      flash(importStatus, "No rows found. Check that the arrival times are in columns six and seven.");
+      flash(importStatus, tx("No rows found. Check that the arrival times are in columns six and seven."));
       return;
     }
     state.rows.push(...added);
     save();
     render();
     pasteArea.value = "";
-    flash(importStatus, `Imported ${plural(added.length, "route")}${skipped ? `, skipped ${skipped} without arrival times` : ""}.`);
+    flash(importStatus, `${tx("Imported {rows}", { rows: routes(added.length) })}${skipped ? tx(", skipped {n} without arrival times", { n: skipped }) : ""}.`);
   });
 
   logBody.addEventListener("click", (event) => {
@@ -484,7 +491,7 @@
   });
 
   root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!state.rows.length || !window.confirm("Clear the whole route log?")) return;
+    if (!state.rows.length || !window.confirm(tx("Clear the whole route log?"))) return;
     state.rows = [];
     save();
     render();
@@ -493,9 +500,9 @@
   root.querySelector("[data-csv]").addEventListener("click", () => {
     if (!state.rows.length) return;
     const { rows } = analyse();
-    downloadCsv("delay-log", [
-      ["Date", "Shift", "Route", "Planned departure", "Actual departure", "Planned arrival", "Actual arrival", "Departure delay (min)", "Arrival delay (min)", "Late", "Reason", "Note"],
-      ...rows.map((row) => [row.date, row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr, row.dep ?? "", row.arr ?? "", row.late ? "yes" : "no", row.reason, row.note]),
+    downloadCsv(data.csv, [
+      ["Date", "Shift", "Route", "Planned departure", "Actual departure", "Planned arrival", "Actual arrival", "Departure delay (min)", "Arrival delay (min)", "Late", "Reason", "Note"].map((name) => tx(name)),
+      ...rows.map((row) => [row.date, row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr, row.dep ?? "", row.arr ?? "", row.late ? tx("yes") : tx("no"), row.reason, row.note]),
     ]);
   });
 

@@ -1,0 +1,120 @@
+{
+  "storageKey": "sc-shift-handover-de",
+  "shifts": ["Früh", "Spät", "Nacht"],
+  "priorities": ["Hoch", "Mittel", "Niedrig"],
+  "templates": {
+    "warehouse": {
+      "name": "Lager",
+      "metrics": [
+        "Bearbeitete Einheiten",
+        "Rückstand bei Übergabe",
+        "Schäden %",
+        "Unvollständig %",
+        "Pünktliche Abfahrten %",
+        "Personal in der Schicht"
+      ],
+      "checklist": [
+        "Jeder offene Punkt hat einen Verantwortlichen in der nächsten Schicht.",
+        "Defekte Geräte sind gekennzeichnet und aufgelistet.",
+        "Der Rückstand ist gezählt, nicht geschätzt.",
+        "Unfälle und Beinahe-Unfälle sind aufgeschrieben.",
+        "Rampen, Gänge und Notausgänge sind frei.",
+        "Die nächste Schichtleitung hat diese Übergabe gelesen und Fragen gestellt."
+      ],
+      "headsUp": "z. B. Mengenspitze um 11:00 erwartet\nStapler 3 bis Donnerstag in Reparatur"
+    },
+    "hotel": {
+      "name": "Hotel-Rezeption",
+      "metrics": [
+        "Offene Anreisen",
+        "Offene Abreisen",
+        "Belegung %",
+        "Gesperrte Zimmer",
+        "No-Shows",
+        "Offene Gästebeschwerden"
+      ],
+      "checklist": [
+        "Jedes Gästeanliegen hat einen Verantwortlichen und eine zugesagte Zeit.",
+        "Kasse und Kartenterminals sind abgerechnet und gezählt.",
+        "Späte Anreisen und Sonderwünsche sind aufgelistet.",
+        "Gesperrte Zimmer sind an die Technik gemeldet.",
+        "Schlüssel, Safes und Generalschlüssel sind vollständig.",
+        "Die nächste Schicht hat diese Übergabe gelesen und Fragen gestellt."
+      ],
+      "headsUp": "z. B. VIP-Anreise 23:30, Zimmer 412\nFeueralarm-Test um 10:00"
+    },
+    "delivery": {
+      "name": "Zustellbasis",
+      "metrics": [
+        "Touren raus",
+        "Touren zurück",
+        "Nicht zugestellte Pakete",
+        "Pünktlich %",
+        "Fahrzeuge außer Betrieb",
+        "Fehlende Fahrer"
+      ],
+      "checklist": [
+        "Jedes zurückgekommene Paket ist gescannt und hat einen Grund.",
+        "Fahrzeugschäden und Mängel sind mit Fotos gemeldet.",
+        "Fehlende Fahrer und offene Touren sind der Disposition bekannt.",
+        "Schlüssel, Scanner und Tankkarten sind zurück und gezählt.",
+        "Kundenbeschwerden haben einen Verantwortlichen und eine Rückrufzeit.",
+        "Die nächste Schicht hat diese Übergabe gelesen und Fragen gestellt."
+      ],
+      "headsUp": "z. B. Sperrung der B43 ab 06:00\nZwei neue Fahrer starten auf Tour 14 und 15"
+    }
+  },
+  "example": {
+    "template": "warehouse",
+    "date": "2026-09-18",
+    "shift": "Spät",
+    "area": "Warenausgang, Rampen 1–6",
+    "from": "Arben",
+    "to": "Lena",
+    "metrics": [
+      ["Bearbeitete Einheiten", "18.400", "Ziel 18.000"],
+      ["Rückstand bei Übergabe", "320 Pakete", "Welle 4, sortiert"],
+      ["Schäden %", "0,42 %", "Ziel 0,30 %"],
+      ["Unvollständig %", "0,8 %", ""],
+      ["Pünktliche Abfahrten %", "86 %", "11:15 und 11:30 zu spät abgefahren"],
+      ["Personal in der Schicht", "14 von 16", "2 krank"]
+    ],
+    "issues": [
+      {
+        "text": "Stapler 3 verliert Hydrauliköl; an Rampe 4 gesperrt und gekennzeichnet",
+        "priority": "Hoch",
+        "owner": "Lena",
+        "due": "Vor 07:00",
+        "done": false,
+        "carried": 0
+      },
+      {
+        "text": "Wand in Gitterbox an Rampe 3 um 18:40 eingestürzt, 6 Pakete neu verpackt; Stapelbild fehlt an dieser Rampe",
+        "priority": "Mittel",
+        "owner": "Schichtleitung Früh",
+        "due": "Schichtbeginn",
+        "done": false,
+        "carried": 1
+      },
+      {
+        "text": "Tour R12: 2 Pakete fehlten, im Sortierbereich gefunden",
+        "priority": "Mittel",
+        "owner": "Disposition",
+        "due": "Vor der ersten Welle",
+        "done": false,
+        "carried": 0
+      },
+      {
+        "text": "Akku von Scanner 7 getauscht",
+        "priority": "Niedrig",
+        "owner": "Arben",
+        "due": "",
+        "done": true,
+        "carried": 0
+      }
+    ],
+    "headsUp": "Mengenspitze in der 11:00-Welle erwartet, etwa +15 %\nPilot für den neuen Stapelstandard startet an Rampe 3 und 4",
+    "safety": "Beinahe-Unfall an Rampe 2: Hubwagen und Fußgänger, niemand verletzt. Im Sicherheitsbuch gemeldet.\nZwei Verlader krank; ein Leih-Verlader für morgen ist bestätigt.",
+    "checks": [true, true, false, true, true, false]
+  }
+}
