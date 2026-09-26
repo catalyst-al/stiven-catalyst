@@ -2264,7 +2264,7 @@ html:not(.js) .filter-bar { display: none; }
   .mobile-panel[data-open="true"] { display: grid; gap: 16px; }
   .mobile-panel a {
     font-family: var(--display);
-    font-size: 28px;
+    font-size: 24px;
     letter-spacing: -.03em;
     text-transform: uppercase;
   }
