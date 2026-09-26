@@ -2109,6 +2109,23 @@ html:not(.js) .filter-bar { display: none; }
   line-height: 1.15;
 }
 
+.about-author {
+  margin: 54px 0 36px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+
+.about-author .kicker { font-size: 11px; }
+.about-author h3 {
+  margin: 12px 0 22px;
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.about-author p { font-size: 18px; }
+
 .pillars {
   display: grid;
   grid-template-columns: 1fr 1fr;

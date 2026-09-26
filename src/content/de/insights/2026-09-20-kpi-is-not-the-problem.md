@@ -4,7 +4,6 @@ date: 2026-09-20
 category: Betrieb
 status: published
 featured: true
-read_time: 7 min
 summary: Warum Druck auf eine Zahl schwächer ist, als das System zu verstehen, das sie erzeugt hat.
 teaser: Wenn sich eine Kennzahl in die falsche Richtung bewegt, ist Druck oft die schnellste Reaktion. Gute Führung beginnt mit der Frage, welches System diese Zahl erzeugt hat.
 deck: Eine schlechte Zahl erzeugt Dringlichkeit. Aber Dringlichkeit ohne Diagnose erzeugt oft Druck statt Verbesserung.

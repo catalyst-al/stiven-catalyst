@@ -9,7 +9,7 @@
     <h2>{{ project.data.title }}</h2>
     <p>{{ project.data.summary }}</p>
     {%- if project.data.link %}
-    <a class="text-link project-link" href="{{ project.data.link }}">{{ "View project" | t(lang) }} <span aria-hidden="true">→</span></a>
+    <a class="text-link project-link" href="{{ project.data.link }}">{{ project.data.link_label or ("View project" | t(lang)) }} <span aria-hidden="true">→</span></a>
     {%- endif %}
     {%- if project.data.file %}
     <a class="text-link project-link" href="{{ project.data.file }}" download>{{ "Download" | t(lang) }} <span aria-hidden="true">↓</span></a>

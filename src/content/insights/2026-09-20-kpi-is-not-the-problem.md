@@ -4,7 +4,6 @@ date: 2026-09-20
 category: Operations
 status: published
 featured: true
-read_time: 7 min
 summary: Why pressure on a number is weaker than understanding the system that created it.
 teaser: When a metric moves in the wrong direction, the fastest reaction is often pressure. Better management starts by asking what system produced the number.
 deck: A bad number creates urgency. But urgency without diagnosis often produces pressure instead of improvement.

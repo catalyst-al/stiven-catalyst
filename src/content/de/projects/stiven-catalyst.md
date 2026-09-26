@@ -3,7 +3,8 @@ title: Stiven Catalyst
 tag: In Arbeit
 summary: Eine unabhängige Publikation und ein Archiv für Führungsdenken, Field Notes, Projekte und lange Essays.
 order: 4
-link: ""
+link: "/de/"
+link_label: "Publikation entdecken"
 image: ""
 file: ""
 ---
