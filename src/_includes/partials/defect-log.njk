@@ -59,7 +59,7 @@
     </form>
 
     <details class="dl-box dl-paste">
-      <summary class="kicker">{{ "Or paste from Excel" | t(lang) }}</summary>
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
       <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {% for f in cfg.fields %}{{ f.label | lc(lang) }}, {% endfor %}{{ t.countShort }}, {{ "cost" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "Your own {a} or {b} names are kept as they are." | t(lang) | replace("{a}", cfg.fields[1].label | lc(lang)) | replace("{b}", cfg.fields[3].label | lc(lang)) }}</p>
       <div class="field">
         <label class="visually-hidden" for="dl-paste">{{ "Rows to import" | t(lang) }}</label>

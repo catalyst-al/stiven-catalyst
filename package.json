@@ -4,6 +4,7 @@
   "description": "Stiven Catalyst: publication on leadership, operations, people and systems.",
   "scripts": {
     "build": "eleventy",
+    "test": "node --test tests/*.test.cjs",
     "start": "eleventy --serve"
   },
   "repository": {

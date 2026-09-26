@@ -86,18 +86,27 @@ window.ToolKit = (() => {
     if (!text) return NaN;
     const comma = text.lastIndexOf(",");
     const dot = text.lastIndexOf(".");
-    // The later separator is the decimal one: 1.234,50 and 1,234.50 both work.
-    text = comma > dot ? text.replace(/\./g, "").replace(",", ".") : text.replace(/,/g, "");
-    return Number(text);
+    // With one separator, use the page's locale to distinguish 1,234 from 1,234 decimals.
+    if (comma >= 0 && dot < 0 && LANG === "en" && /^\d{1,3}(,\d{3})+$/.test(text) && !text.startsWith("0,")) text = text.replace(/,/g, "");
+    else if (dot >= 0 && comma < 0 && LANG === "de" && /^\d{1,3}(\.\d{3})+$/.test(text) && !text.startsWith("0.")) text = text.replace(/\./g, "");
+    // When both appear, the later separator is decimal: 1.234,50 and 1,234.50.
+    else text = comma > dot ? text.replace(/\./g, "").replace(",", ".") : text.replace(/,/g, "");
+    if (!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(text)) return NaN;
+    const number = Number(text);
+    return Number.isFinite(number) ? number : NaN;
   };
 
   const iso = (year, month, day) => {
-    const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
-    return Number.isNaN(date.getTime()) || date.getUTCDate() !== Number(day) ? "" : date.toISOString().slice(0, 10);
+    const y = Number(year), m = Number(month), d = Number(day);
+    if (y < 1 || y > 9999 || m < 1 || m > 12 || d < 1 || d > 31) return "";
+    const date = new Date(0);
+    date.setUTCFullYear(y, m - 1, d);
+    return date.getUTCFullYear() === y && date.getUTCMonth() === m - 1 && date.getUTCDate() === d
+      ? date.toISOString().slice(0, 10) : "";
   };
   const parseDate = (value) => {
     const text = String(value ?? "").trim();
-    let match = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    let match = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:$|[T ])/);
     if (match) return iso(match[1], match[2], match[3]);
     match = text.match(/^(\d{1,2})[./](\d{1,2})[./](\d{2,4})$/);
     if (match) return iso(match[3].length === 2 ? `20${match[3]}` : match[3], match[2], match[1]);
@@ -106,9 +115,41 @@ window.ToolKit = (() => {
     return "";
   };
 
-  const splitLine = (line) => {
-    const separator = line.includes("\t") ? "\t" : line.includes(";") ? ";" : ",";
-    return line.split(separator).map((cell) => cell.trim().replace(/^"(.*)"$/, "$1"));
+  // Parse pasted TSV or CSV, including quoted separators, doubled quotes and line breaks.
+  const parseRows = (text) => {
+    const source = String(text ?? "").replace(/^\uFEFF/, "");
+    let first = "", quoted = false;
+    for (let i = 0; i < source.length; i++) {
+      const ch = source[i];
+      if (ch === '"') {
+        if (quoted && source[i + 1] === '"') { i++; continue; }
+        quoted = !quoted;
+      } else if (!quoted && (ch === "\n" || ch === "\r")) break;
+      else if (!quoted) first += ch;
+    }
+    const separator = first.includes("\t") ? "\t" : first.includes(";") ? ";" : ",";
+    const rows = [];
+    let row = [], field = "";
+    quoted = false;
+    const endField = () => { row.push(field.trim()); field = ""; };
+    const endRow = () => {
+      endField();
+      if (row.some((cell) => cell)) rows.push(row);
+      row = [];
+    };
+    for (let i = 0; i < source.length; i++) {
+      const ch = source[i];
+      if (ch === '"') {
+        if (quoted && source[i + 1] === '"') { field += '"'; i++; }
+        else quoted = !quoted;
+      } else if (!quoted && ch === separator) endField();
+      else if (!quoted && (ch === "\n" || ch === "\r")) {
+        endRow();
+        if (ch === "\r" && source[i + 1] === "\n") i++;
+      } else field += ch;
+    }
+    if (field || row.length) endRow();
+    return rows;
   };
 
   // Map a typed value onto a known option; unknown names are kept as they are.
@@ -321,7 +362,7 @@ window.ToolKit = (() => {
   return {
     LANG, LOCALE, tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
-    parseNumber, parseDate, splitLine, canon, sigma, sigmaText,
+    parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

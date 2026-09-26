@@ -6,7 +6,7 @@
   const {
     tx, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
-    parseNumber, parseDate, splitLine, canon, sigmaText,
+    parseNumber, parseDate, parseRows, canon, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   } = window.ToolKit;
 
@@ -78,8 +78,11 @@
   const importRows = (text) => {
     const added = [];
     let skipped = 0;
-    text.split(/\r?\n/).filter((line) => line.trim()).forEach((line, index) => {
-      const [date, shift, route, planDep, actDep, planArr, actArr, reason, ...note] = splitLine(line);
+    parseRows(text).forEach((cells, index) => {
+      const [date, shift, route, planDep, actDep, planArr, actArr] = cells;
+      // The downloaded report also includes delay and late-status columns.
+      const reason = cells.length >= 12 ? cells[10] : cells[7];
+      const note = cells.slice(cells.length >= 12 ? 11 : 8);
       const row = {
         date: parseDate(date),
         shift: canon(data.shifts, shift, NOT_RECORDED),

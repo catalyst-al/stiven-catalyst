@@ -9,7 +9,7 @@
   const {
     tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
-    parseNumber, parseDate, splitLine, canon, sigma, sigmaText,
+    parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   } = window.ToolKit;
 
@@ -50,10 +50,11 @@
   const importRows = (text) => {
     const added = [];
     let skipped = 0;
-    text.split(/\r?\n/).filter((line) => line.trim()).forEach((line, index) => {
-      const [date, shift, stage, type, cause, units, cost, ...note] = splitLine(line);
+    parseRows(text).forEach((cells, index) => {
+      const [date, shift, stage, type, cause, units, cost, ...note] = cells;
       const count = units ? parseNumber(units) : 1;
-      if (!(count > 0)) {
+      const wholeUnits = Math.round(count);
+      if (!(wholeUnits > 0 && Number.isSafeInteger(wholeUnits))) {
         // A first row with words where numbers belong is a header.
         if (index > 0) skipped++;
         return;
@@ -65,7 +66,7 @@
         stage: canon(field.stage.options, stage, NOT_RECORDED),
         type: canon(field.type.options, type, NOT_RECORDED),
         cause: canon(field.cause.options, cause, NOT_RECORDED),
-        units: Math.round(count),
+        units: wholeUnits,
         cost: value >= 0 ? value : null,
         note: note.join(", ").trim(),
       });

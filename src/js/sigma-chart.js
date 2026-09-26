@@ -5,7 +5,7 @@
   const {
     LANG, LOCALE, tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
-    parseNumber, parseDate, splitLine, sigma, sigmaText,
+    parseNumber, parseDate, parseRows, sigma, sigmaText,
     panel, stat, resultActions, flash, downloadCsv, LOG_LIMIT, shownNote, renderOnPause,
   } = window.ToolKit;
 
@@ -143,8 +143,9 @@
   const importRows = (text) => {
     const added = [];
     let skipped = 0;
-    text.split(/\r?\n/).filter((line) => line.trim()).forEach((line, index) => {
-      const [date, n, d, ...note] = splitLine(line);
+    parseRows(text).forEach((cells, index) => {
+      const [date, n, d] = cells;
+      const note = cells.slice(cells.length >= 9 ? 8 : 3);
       const row = { date: parseDate(date), n: Math.round(parseNumber(n)), d: Math.round(parseNumber(d)), note: note.join(", ").trim() };
       if (!row.date || !(row.n > 0) || !(row.d >= 0) || row.d > row.n) {
         if (index > 0) skipped++;
