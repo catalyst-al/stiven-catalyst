@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Schadenskontrolle
+description: "Ein privates Schadensprotokoll für Lager- und Zustellteams: Schadensquote, DPMO und Sigma-Niveau, ein Pareto der Ursachen, wo im Prozess Schäden entstehen, und ein Check für die Verladung."
+activeNav: /de/tools.html
+permalink: /de/tools/damage-control/
+alt: /tools/damage-control/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloses Tool · Lager</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1>Schadens&shy;kontrolle</h1>
+  <p class="lede">Erfassen Sie jede beschädigte Einheit mit dem Prozessschritt, in dem sie gefunden wurde, und der Ursache dahinter. Das Tool zeigt Ihre Schadensquote, die wenigen Ursachen hinter den meisten Schäden und wo Sie anfangen sollten.</p>
+</section>
+
+{% set cfg = de.damageControl %}
+{% include "partials/defect-log.njk" %}

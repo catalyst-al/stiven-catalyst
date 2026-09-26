@@ -7,6 +7,7 @@
   if (!root || !dataEl || !window.ToolKit) return;
 
   const {
+    tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, splitLine, canon, sigma, sigmaText,
     panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
@@ -15,7 +16,10 @@
   const data = JSON.parse(dataEl.textContent);
   const t = data.text;
   const KEY = data.storageKey;
-  const NOT_RECORDED = "Not recorded";
+  const NOT_RECORDED = tx("Not recorded");
+  // The cause that means "nobody knows"; German data names it in German.
+  const UNKNOWN = data.unknownCause || "Unknown";
+  const entries = (count) => plural(count, tx("entry"), tx("entries"));
   const fields = data.fields;
   const field = Object.fromEntries(fields.map((f) => [f.name, f]));
 
@@ -110,7 +114,7 @@
 
     const topStage = bySize(tally(rows, "stage"))[0];
     const topStageCause = bySize(tally(rows.filter((row) => row.stage === topStage.key), "cause"))[0];
-    const unknown = rows.filter((row) => row.cause === "Unknown" || row.cause === NOT_RECORDED).reduce((sum, row) => sum + row.units, 0);
+    const unknown = rows.filter((row) => row.cause === UNKNOWN || row.cause === NOT_RECORDED).reduce((sum, row) => sum + row.units, 0);
 
     return {
       rows,
@@ -138,16 +142,16 @@
     logBody.replaceChildren();
     rows.map((row, index) => [row, index]).reverse().slice(0, LOG_LIMIT).forEach(([row, index]) => {
       const tr = el("tr");
-      tr.append(el("td", "nowrap", row.date || "-"));
+      tr.append(el("td", "nowrap", showDate(row.date) || "-"));
       fields.forEach((f) => tr.append(el("td", null, row[f.name])));
       tr.append(el("td", "num", int.format(row.units)));
-      tr.append(el("td", "num", row.cost == null ? "" : row.cost.toFixed(2)));
+      tr.append(el("td", "num", row.cost == null ? "" : num(row.cost, 2)));
       tr.append(el("td", "dl-note", row.note || ""));
       const cell = el("td");
       const remove = el("button", "dl-remove", "×");
       remove.type = "button";
       remove.dataset.remove = index;
-      remove.setAttribute("aria-label", `Remove ${row.units} ${row.type} at ${row.stage}${row.date ? ` on ${row.date}` : ""}`);
+      remove.setAttribute("aria-label", tx(row.date ? "Remove {n} {type} at {stage} on {date}" : "Remove {n} {type} at {stage}", { n: row.units, type: row.type, stage: row.stage, date: showDate(row.date) }));
       cell.append(remove);
       tr.append(cell);
       logBody.append(tr);
@@ -155,21 +159,21 @@
     logWrap.hidden = !rows.length;
     logEmpty.hidden = rows.length > 0;
     const units = rows.reduce((sum, row) => sum + row.units, 0);
-    logCount.textContent = rows.length ? `${plural(rows.length, "entry", "entries")} · ${plural(units, t.one, t.many)}${shownNote(rows.length)}` : "";
+    logCount.textContent = rows.length ? `${entries(rows.length)} · ${plural(units, t.one, t.many)}${shownNote(rows.length)}` : "";
   };
 
   // Results.
   const bars = (items, total, options = {}) => barList(items, {
     ...options,
-    title: (item) => `${item.key}: ${plural(item.value, t.one, t.many)} in ${plural(item.entries, "entry", "entries")}, ${pct(item.value / total)} of all ${t.allNoun}`,
-    label: (item) => [int.format(item.value), ` · ${pct(item.value / total, 0)}${options.cumulative ? ` · ${pct(item.cumulative, 0)} cum.` : ""}`],
+    title: (item) => `${item.key}: ${tx("{count} in {entries}, {pct} of all {noun}", { count: plural(item.value, t.one, t.many), entries: entries(item.entries), pct: pct(item.value / total), noun: t.allNoun })}`,
+    label: (item) => [int.format(item.value), ` · ${pct(item.value / total, 0)}${options.cumulative ? ` · ${pct(item.cumulative, 0)} ${tx("cum.")}` : ""}`],
   });
 
   const matrix = (result) => {
     const wrap = el("div", "dl-table-wrap");
     const table = el("table", "dl-table dl-matrix");
     const head = el("tr");
-    head.append(el("th", null, `${fields[1].label} \\ ${fields[2].label.toLowerCase()}`));
+    head.append(el("th", null, `${fields[1].label} \\ ${lower(fields[2].label)}`));
     result.types.forEach((type) => {
       const th = el("th", "num", type.key);
       th.scope = "col";
@@ -213,43 +217,43 @@
     const allowed = Math.floor(result.target * result.volume);
     const gap = result.total - allowed;
     return gap > 0
-      ? { value: `${int.format(gap)} over`, note: `${int.format(gap)} fewer ${t.many} reach ${pct(result.target, 2)}` }
-      : { value: "On target", note: `${int.format(-gap)} ${t.volumeNoun} inside ${pct(result.target, 2)}` };
+      ? { value: tx("{n} over", { n: int.format(gap) }), note: tx("{n} fewer {many} reach {pct}", { n: int.format(gap), many: t.many, pct: pct(result.target, 2) }) }
+      : { value: tx("On target"), note: tx("{n} {noun} inside {pct}", { n: int.format(-gap), noun: t.volumeNoun, pct: pct(result.target, 2) }) };
   };
 
   const problemText = (result) => {
     const stage = result.topStage;
     const when = state.period ? `${state.period}: ` : "";
-    const why = result.topStageCause ? `, mostly ${result.topStageCause.key.toLowerCase()}` : "";
-    return `${when}${plural(stage.value, t.one, t.many)} ${t.stagePhrase} ${stage.key} (${pct(stage.value / result.total, 0)} of all ${t.allNoun})${why}.`;
+    const why = result.topStageCause ? tx(", mostly {cause}", { cause: lower(result.topStageCause.key) }) : "";
+    return `${when}${plural(stage.value, t.one, t.many)} ${t.stagePhrase} ${stage.key} (${tx("{pct} of all {noun}", { pct: pct(stage.value / result.total, 0), noun: t.allNoun })})${why}.`;
   };
 
   let checkSummary = () => "";
 
   const summaryText = (result) => {
     const lines = [`${t.tool} | Stiven Catalyst`];
-    if (state.period) lines.push(`Period: ${state.period}`);
-    lines.push("", `${capital(t.many)}: ${int.format(result.total)} in ${plural(result.rows.length, "entry", "entries")}`);
+    if (state.period) lines.push(`${tx("Period")}: ${state.period}`);
+    lines.push("", `${capital(t.many)}: ${tx("{n} in {entries}", { n: int.format(result.total), entries: entries(result.rows.length) })}`);
     if (result.volume) {
       lines.push(`${t.volumeLabel}: ${int.format(result.volume)}`);
-      lines.push(`${t.rateLabel}: ${pct(result.rate, 2)} · DPMO: ${int.format(Math.round(result.dpmo))} · Sigma level: ${sigma(result.rate).toFixed(2)}`);
+      lines.push(`${t.rateLabel}: ${pct(result.rate, 2)} · DPMO: ${int.format(Math.round(result.dpmo))} · ${tx("Sigma level")}: ${num(sigma(result.rate), 2)}`);
       if (t.complement) lines.push(`${t.complement.label}: ${pct(1 - result.rate, 2)}`);
     }
     const target = targetText(result);
-    if (target) lines.push(`Target ${pct(result.target, 2)}: ${target.note}`);
-    if (result.cost != null) lines.push(`Recorded cost: ${euro.format(result.cost)}`);
-    lines.push("", "Pareto of causes:");
-    result.causes.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.share, 0)}, cum. ${pct(item.cumulative, 0)})${item.vital ? " [vital few]" : ""}`));
+    if (target) lines.push(`${tx("Target")} ${pct(result.target, 2)}: ${target.note}`);
+    if (result.cost != null) lines.push(`${tx("Recorded cost")}: ${euro.format(result.cost)}`);
+    lines.push("", `${tx("Pareto of causes")}:`);
+    result.causes.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.share, 0)}, ${tx("cum.")} ${pct(item.cumulative, 0)})${item.vital ? ` [${tx("vital few")}]` : ""}`));
     lines.push("", `${t.stageTitle}:`);
     result.stages.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.value / result.total, 0)})`));
-    lines.push("", "By shift:");
+    lines.push("", `${tx("By shift")}:`);
     result.shifts.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.value / result.total, 0)})`));
-    lines.push("", `Start here: ${problemText(result)}`);
+    lines.push("", `${tx("Start here")}: ${problemText(result)}`);
     const advice = data.stages[result.topStage.key];
     if (advice) {
-      lines.push("First moves:");
+      lines.push(`${tx("First moves")}:`);
       advice.moves.forEach((move) => lines.push(`- ${move}`));
-      lines.push(`Question for the floor: ${advice.question}`);
+      lines.push(`${tx("Question for the floor")}: ${advice.question}`);
     }
     const check = checkSummary();
     if (check) lines.push("", check);
@@ -263,7 +267,7 @@
     const result = analyse();
 
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", state.period ? `Result · ${state.period}` : "Result"));
+    head.append(el("p", "kicker", state.period ? `${tx("Result")} · ${state.period}` : tx("Result")));
     const title = el("h2");
     if (result.rate !== null) {
       title.append(`${t.rateLabel} `, el("span", null, pct(result.rate, 2)));
@@ -274,39 +278,39 @@
     results.append(head);
 
     const stats = el("div", "dl-stats");
-    stats.append(stat(capital(t.many), int.format(result.total), `${plural(result.rows.length, "entry", "entries")}${result.days ? ` over ${plural(result.days, "day")}` : ""}`));
+    stats.append(stat(capital(t.many), int.format(result.total), `${entries(result.rows.length)}${result.days ? ` ${tx("over {days}", { days: plural(result.days, tx("day"), tx("days")) })}` : ""}`));
     if (result.volume) {
       if (t.complement) stats.append(stat(t.complement.label, pct(1 - result.rate, 2), t.complement.note));
-      stats.append(stat("DPMO", int.format(Math.round(result.dpmo)), `${t.many} per million ${t.volumeNoun}`));
-      stats.append(stat("Sigma level", sigmaText(result.rate), "short term, with 1.5 shift"));
+      stats.append(stat("DPMO", int.format(Math.round(result.dpmo)), tx("{many} per million {noun}", { many: t.many, noun: t.volumeNoun })));
+      stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
       const target = targetText(result);
-      if (target) stats.append(stat("Target", target.value, target.note));
+      if (target) stats.append(stat(tx("Target"), target.value, target.note));
     }
-    if (result.cost != null) stats.append(stat("Recorded cost", euro.format(result.cost), "only entries with a cost"));
+    if (result.cost != null) stats.append(stat(tx("Recorded cost"), euro.format(result.cost), tx("only entries with a cost")));
     results.append(stats);
 
     if (result.volumeTooLow) {
-      results.append(el("p", "dl-warning", `The log holds more ${t.many} than ${t.volumeLabel.toLowerCase()}. Check the volume to see the rate, DPMO and sigma level.`));
+      results.append(el("p", "dl-warning", tx("The log holds more {many} than {volume}. Check the volume to see the rate, DPMO and sigma level.", { many: t.many, volume: lower(t.volumeLabel) })));
     } else if (!result.volume) {
-      results.append(el("p", "dl-warning", `Add the ${t.volumeLabel.toLowerCase()} in this period to see the ${t.rateLabel.toLowerCase()}, DPMO and sigma level.`));
+      results.append(el("p", "dl-warning", tx("Add the {volume} in this period to see the {rate}, DPMO and sigma level.", { volume: lower(t.volumeLabel), rate: lower(t.rateLabel) })));
     }
 
     const grid = el("div", "dl-result-grid");
 
     const vital = result.causes.filter((item) => item.vital);
-    const pareto = panel("Pareto of causes", `${vital.length} of ${result.causes.length} causes carry ${pct(vital.at(-1).cumulative, 0)} of the ${t.allNoun}. Fix these first.`);
-    pareto.append(bars(result.causes, result.total, { ranked: true, cumulative: true, highlight: (item) => item.vital, tag: "Vital few" }));
+    const pareto = panel(tx("Pareto of causes"), tx("{a} of {b} causes carry {pct} of the {noun}. Fix these first.", { a: vital.length, b: result.causes.length, pct: pct(vital.at(-1).cumulative, 0), noun: t.allNoun }));
+    pareto.append(bars(result.causes, result.total, { ranked: true, cumulative: true, highlight: (item) => item.vital, tag: tx("Vital few") }));
     grid.append(pareto);
 
     const flow = panel(t.stageTitle, t.stageNote);
-    flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: "Most" }));
+    flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: tx("Most") }));
     grid.append(flow);
 
-    const types = panel(t.matrixTitle, `Each cell counts ${t.many}. The darkest cell is the most specific place to look.`);
+    const types = panel(t.matrixTitle, tx("Each cell counts {many}. The darkest cell is the most specific place to look.", { many: t.many }));
     types.append(matrix(result));
     grid.append(types);
 
-    const shifts = panel("By shift", `Counts only. A shift that handles more volume will log more ${t.allNoun}, so compare with its share of the work.`);
+    const shifts = panel(tx("By shift"), tx("Counts only. A shift that handles more volume will log more {noun}, so compare with its share of the work.", { noun: t.allNoun }));
     shifts.append(bars(result.shifts, result.total));
     grid.append(shifts);
 
@@ -319,9 +323,9 @@
       detail: cause?.key,
       lede: problemText(result),
       advice: data.stages[result.topStage.key],
-      extraLabel: cause ? `About ${cause.key.toLowerCase()}` : "",
-      extra: cause && cause.key !== "Unknown" ? data.causes[cause.key] : "",
-      warning: result.unknownShare > 0.15 ? `${pct(result.unknownShare, 0)} of ${t.many} have no known cause. ${data.causes.Unknown}` : "",
+      extraLabel: cause ? tx("About {cause}", { cause: lower(cause.key) }) : "",
+      extra: cause && cause.key !== UNKNOWN ? data.causes[cause.key] : "",
+      warning: result.unknownShare > 0.15 ? `${tx("{pct} of {many} have no known cause.", { pct: pct(result.unknownShare, 0), many: t.many })} ${data.causes[UNKNOWN]}` : "",
     }));
 
     results.append(resultActions(() => summaryText(result), problemText(result)));
@@ -351,7 +355,7 @@
     const units = Math.round(parseNumber(form.units.value));
     if (!(units > 0)) {
       form.units.focus();
-      flash(entryStatus, `Enter at least one ${t.one}.`);
+      flash(entryStatus, tx("Enter at least one {one}.", { one: t.one }));
       return;
     }
     const cost = parseNumber(form.cost.value);
@@ -368,21 +372,21 @@
     form.units.value = 1;
     form.cost.value = "";
     form.note.value = "";
-    flash(entryStatus, `Added ${plural(units, t.one, t.many)} at ${form.stage.value}.`);
+    flash(entryStatus, tx("Added {count} at {stage}.", { count: plural(units, t.one, t.many), stage: form.stage.value }));
     form.type.focus();
   });
 
   root.querySelector("[data-import]").addEventListener("click", () => {
     const { added, skipped } = importRows(pasteArea.value);
     if (!added.length) {
-      flash(importStatus, `No rows found. Check that ${t.countShort} are in the sixth column.`);
+      flash(importStatus, tx("No rows found. Check that {count} are in the sixth column.", { count: t.countShort }));
       return;
     }
     state.rows.push(...added);
     save();
     render();
     pasteArea.value = "";
-    flash(importStatus, `Imported ${plural(added.length, "row")}${skipped ? `, skipped ${skipped} without ${t.countShort}` : ""}.`);
+    flash(importStatus, `${tx("Imported {rows}", { rows: plural(added.length, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without {count}", { n: skipped, count: t.countShort }) : ""}.`);
   });
 
   logBody.addEventListener("click", (event) => {
@@ -408,7 +412,7 @@
   });
 
   root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!state.rows.length || !window.confirm(`Clear the whole ${t.tool} log?`)) return;
+    if (!state.rows.length || !window.confirm(tx("Clear the whole {tool} log?", { tool: t.tool }))) return;
     state.rows = [];
     save();
     render();
@@ -417,7 +421,7 @@
   root.querySelector("[data-csv]").addEventListener("click", () => {
     if (!state.rows.length) return;
     downloadCsv(t.csv, [
-      ["Date", ...fields.map((f) => f.label), capital(t.countShort), "Cost", "Note"],
+      [tx("Date"), ...fields.map((f) => f.label), capital(t.countShort), tx("Cost"), tx("Note")],
       ...state.rows.map((row) => [row.date, ...fields.map((f) => row[f.name]), row.units, row.cost ?? "", row.note]),
     ]);
   });

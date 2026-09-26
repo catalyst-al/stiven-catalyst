@@ -3,11 +3,14 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { read, write, isObject, str, el, today } = window.ToolKit;
+  const { LOCALE, tx, lower, read, write, isObject, str, el, today } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
   const PRIORITY_ORDER = Object.fromEntries(data.priorities.map((p, i) => [p, i]));
+  // Priorities are listed high to low; the colour follows the position, not the word.
+  const priorityClass = (p) => ["high", "medium", "low"][PRIORITY_ORDER[p]] || "medium";
+  const MEDIUM = data.priorities[1];
 
   const metricsBox = form.querySelector("[data-metrics]");
   const issuesBox = form.querySelector("[data-issues]");
@@ -46,7 +49,7 @@
     const metrics = Array.isArray(h.metrics) ? h.metrics.filter(Array.isArray).map((m) => [str(m[0]), str(m[1]), str(m[2])]) : base.metrics;
     const issues = Array.isArray(h.issues) ? h.issues.filter(isObject).map((issue) => ({
       text: str(issue.text),
-      priority: data.priorities.includes(issue.priority) ? issue.priority : "Medium",
+      priority: data.priorities.includes(issue.priority) ? issue.priority : MEDIUM,
       owner: str(issue.owner),
       due: str(issue.due),
       done: issue.done === true,
@@ -81,8 +84,10 @@
     return { shift, date };
   };
 
-  const longDate = (iso) => (iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" }) : "No date");
-  const clock = (iso) => new Date(iso).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  const longDate = (iso) => (iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" }) : tx("No date"));
+  const clock = (iso) => new Date(iso).toLocaleTimeString(LOCALE, { hour: "2-digit", minute: "2-digit" });
+  const shiftLine = (h) => `${longDate(h.date)} · ${tx("{shift} shift → {next}", { shift: h.shift, next: nextShift(h).shift })}`;
+  const people = (h) => tx("From {from} to {to}", { from: h.from || "?", to: h.to || "?" });
   const openIssues = (h) => h.issues.filter((issue) => !issue.done && issue.text.trim())
     .sort((a, b) => (PRIORITY_ORDER[a.priority] ?? 9) - (PRIORITY_ORDER[b.priority] ?? 9) || b.carried - a.carried);
   const solvedIssues = (h) => h.issues.filter((issue) => issue.done && issue.text.trim());
@@ -109,10 +114,10 @@
     cur().metrics.forEach(([label, value, note], i) => {
       const row = el("div", "sh-metric");
       row.append(
-        input({ value: label, placeholder: "Number", ariaLabel: `Name of number ${i + 1}`, className: "sh-in" }),
-        input({ value, placeholder: "Value", ariaLabel: `${label || "Number"}: value`, className: "sh-in" }),
-        input({ value: note, placeholder: "Note or target", ariaLabel: `${label || "Number"}: note`, className: "sh-in" }),
-        removeButton(`Remove ${label || "this number"}`, "metric", i),
+        input({ value: label, placeholder: tx("Number"), ariaLabel: tx("Name of number {n}", { n: i + 1 }), className: "sh-in" }),
+        input({ value, placeholder: tx("Value"), ariaLabel: `${label || tx("Number")}: ${tx("value")}`, className: "sh-in" }),
+        input({ value: note, placeholder: tx("Note or target"), ariaLabel: `${label || tx("Number")}: ${tx("note")}`, className: "sh-in" }),
+        removeButton(tx("Remove {name}", { name: label || tx("this number") }), "metric", i),
       );
       ["label", "value", "note"].forEach((field, j) => {
         row.children[j].dataset.metric = field;
@@ -124,31 +129,31 @@
 
   const renderIssues = () => {
     issuesBox.replaceChildren();
-    if (!cur().issues.length) issuesBox.append(el("p", "form-note sh-help", "No open issues yet."));
+    if (!cur().issues.length) issuesBox.append(el("p", "form-note sh-help", tx("No open issues yet.")));
     cur().issues.forEach((issue, i) => {
       const row = el("div", "sh-issue");
       if (issue.done) row.classList.add("is-done");
-      const done = input({ type: "checkbox", checked: issue.done, ariaLabel: `Solved: ${issue.text || `issue ${i + 1}`}` });
+      const done = input({ type: "checkbox", checked: issue.done, ariaLabel: `${tx("Solved")}: ${issue.text || tx("issue {n}", { n: i + 1 })}` });
       done.dataset.issue = "done";
-      const text = input({ value: issue.text, placeholder: "What is open, and what is the risk?", ariaLabel: `Issue ${i + 1}`, className: "sh-in sh-issue-text" });
+      const text = input({ value: issue.text, placeholder: tx("What is open, and what is the risk?"), ariaLabel: tx("Issue {n}", { n: i + 1 }), className: "sh-in sh-issue-text" });
       text.dataset.issue = "text";
       const priority = el("select", "sh-in");
-      priority.setAttribute("aria-label", `Issue ${i + 1}: priority`);
+      priority.setAttribute("aria-label", `${tx("Issue {n}", { n: i + 1 })}: ${tx("priority")}`);
       data.priorities.forEach((p) => {
         const option = el("option", null, p);
         option.selected = p === issue.priority;
         priority.append(option);
       });
       priority.dataset.issue = "priority";
-      const owner = input({ value: issue.owner, placeholder: "Owner", ariaLabel: `Issue ${i + 1}: owner`, className: "sh-in" });
+      const owner = input({ value: issue.owner, placeholder: tx("Owner"), ariaLabel: `${tx("Issue {n}", { n: i + 1 })}: ${tx("owner")}`, className: "sh-in" });
       owner.dataset.issue = "owner";
-      const due = input({ value: issue.due, placeholder: "By when", ariaLabel: `Issue ${i + 1}: by when`, className: "sh-in" });
+      const due = input({ value: issue.due, placeholder: tx("By when"), ariaLabel: `${tx("Issue {n}", { n: i + 1 })}: ${tx("by when")}`, className: "sh-in" });
       due.dataset.issue = "due";
       [done, text, priority, owner, due].forEach((node) => { node.dataset.index = i; });
       const meta = el("div", "sh-issue-meta");
       meta.append(priority, owner, due);
-      if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= 2 ? " is-warn" : ""}`, `Carried ${issue.carried}×`));
-      meta.append(removeButton(`Remove issue ${i + 1}`, "issue", i));
+      if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= 2 ? " is-warn" : ""}`, tx("Carried {n}×", { n: issue.carried })));
+      meta.append(removeButton(tx("Remove issue {n}", { n: i + 1 }), "issue", i));
       const main = el("div", "sh-issue-main");
       main.append(text, meta);
       row.append(done, main);
@@ -189,47 +194,46 @@
     const list = [];
     const noOwner = open.filter((issue) => !issue.owner.trim()).length;
     const noTime = open.filter((issue) => !issue.due.trim()).length;
-    if (noOwner) list.push(`${noOwner} open ${noOwner === 1 ? "issue has" : "issues have"} no owner.`);
-    if (noTime) list.push(`${noTime} open ${noTime === 1 ? "issue has" : "issues have"} no time.`);
-    open.filter((issue) => issue.carried >= 2).forEach((issue) => list.push(`"${issue.text}" has been carried ${issue.carried} times. It is not a shift problem any more: take it through 5 Whys.`));
-    if (!h.to.trim()) list.push("Nobody is named to take over.");
+    if (noOwner) list.push(tx(noOwner === 1 ? "{n} open issue has no owner." : "{n} open issues have no owner.", { n: noOwner }));
+    if (noTime) list.push(tx(noTime === 1 ? "{n} open issue has no time." : "{n} open issues have no time.", { n: noTime }));
+    open.filter((issue) => issue.carried >= 2).forEach((issue) => list.push(tx("\"{text}\" has been carried {n} times. It is not a shift problem any more: take it through 5 Whys.", { text: issue.text, n: issue.carried })));
+    if (!h.to.trim()) list.push(tx("Nobody is named to take over."));
     const unticked = h.checks.filter((c) => !c).length;
-    if (unticked === h.checks.length) list.push("No handover checks ticked yet.");
-    else if (unticked) list.push(`${unticked} of ${h.checks.length} handover checks are not ticked.`);
+    if (unticked === h.checks.length) list.push(tx("No handover checks ticked yet."));
+    else if (unticked) list.push(tx("{a} of {b} handover checks are not ticked.", { a: unticked, b: h.checks.length }));
     return list;
   };
 
   const asText = (h) => {
     const t = template(h.template);
-    const next = nextShift(h);
-    const lines = [`Shift handover${h.area ? ` | ${h.area}` : ""}`, `${longDate(h.date)} · ${h.shift} shift → ${next.shift}`];
-    if (h.from || h.to) lines.push(`From ${h.from || "?"} to ${h.to || "?"}`);
+    const lines = [`${tx("Shift handover")}${h.area ? ` | ${h.area}` : ""}`, shiftLine(h)];
+    if (h.from || h.to) lines.push(people(h));
     const numbers = h.metrics.filter(([label, value]) => label && value);
     if (numbers.length) {
-      lines.push("", "NUMBERS");
+      lines.push("", tx("NUMBERS"));
       numbers.forEach(([label, value, note]) => lines.push(`- ${label}: ${value}${note ? ` (${note})` : ""}`));
     }
     const open = openIssues(h);
-    lines.push("", `OPEN ISSUES (${open.length})`);
-    if (!open.length) lines.push("- None");
-    open.forEach((issue, i) => lines.push(`${i + 1}. [${issue.priority}] ${issue.text} · owner: ${issue.owner || "-"} · by: ${issue.due || "-"}${issue.carried ? ` · carried ${issue.carried}×` : ""}`));
+    lines.push("", `${tx("OPEN ISSUES")} (${open.length})`);
+    if (!open.length) lines.push(`- ${tx("None")}`);
+    open.forEach((issue, i) => lines.push(`${i + 1}. [${issue.priority}] ${issue.text} · ${tx("owner")}: ${issue.owner || "-"} · ${tx("by")}: ${issue.due || "-"}${issue.carried ? ` · ${tx("carried {n}×", { n: issue.carried })}` : ""}`));
     const solved = solvedIssues(h);
     if (solved.length) {
-      lines.push("", "SOLVED THIS SHIFT");
+      lines.push("", tx("SOLVED THIS SHIFT"));
       solved.forEach((issue) => lines.push(`- ${issue.text}`));
     }
     const heads = h.headsUp.split("\n").map((line) => line.trim()).filter(Boolean);
     if (heads.length) {
-      lines.push("", "HEADS-UP");
+      lines.push("", tx("HEADS-UP"));
       heads.forEach((line) => lines.push(`- ${line}`));
     }
     const safety = h.safety.split("\n").map((line) => line.trim()).filter(Boolean);
     if (safety.length) {
-      lines.push("", "SAFETY AND PEOPLE");
+      lines.push("", tx("SAFETY AND PEOPLE"));
       safety.forEach((line) => lines.push(`- ${line}`));
     }
-    lines.push("", `Handover check: ${h.checks.filter(Boolean).length} of ${t.checklist.length}`);
-    if (h.ackAt) lines.push(`Taken over by ${h.to} at ${clock(h.ackAt)}`);
+    lines.push("", `${tx("Handover check")}: ${tx("{a} of {b}", { a: h.checks.filter(Boolean).length, b: t.checklist.length })}`);
+    if (h.ackAt) lines.push(tx("Taken over by {name} at {time}", { name: h.to, time: clock(h.ackAt) }));
     return lines.join("\n");
   };
 
@@ -246,12 +250,11 @@
 
   const renderSheet = () => {
     const h = cur();
-    const next = nextShift(h);
     sheet.replaceChildren();
     const head = el("header", "sh-sheet-head");
-    head.append(el("p", "result-label", `${longDate(h.date)} · ${h.shift} shift → ${next.shift}`));
-    head.append(el("h3", null, h.area || "Shift handover"));
-    head.append(el("p", "sh-people", `From ${h.from || "?"} to ${h.to || "?"}`));
+    head.append(el("p", "result-label", shiftLine(h)));
+    head.append(el("h3", null, h.area || tx("Shift handover")));
+    head.append(el("p", "sh-people", people(h)));
     sheet.append(head);
 
     const numbers = h.metrics.filter(([label, value]) => label && value);
@@ -263,43 +266,43 @@
         if (note) item.append(el("dd", "sh-note", note));
         grid.append(item);
       });
-      sheet.append(block("Numbers", [grid]));
+      sheet.append(block(tx("Numbers"), [grid]));
     }
 
     const open = openIssues(h);
     const list = el("ol", "sh-open");
-    if (!open.length) list.append(el("li", "sh-none", "No open issues."));
+    if (!open.length) list.append(el("li", "sh-none", tx("No open issues.")));
     open.forEach((issue) => {
       const li = el("li");
-      li.append(el("span", `sh-priority is-${issue.priority.toLowerCase()}`, issue.priority));
+      li.append(el("span", `sh-priority is-${priorityClass(issue.priority)}`, issue.priority));
       const body = el("div");
       body.append(el("strong", null, issue.text));
-      const meta = [`Owner: ${issue.owner || "none"}`, `By: ${issue.due || "no time"}`];
-      if (issue.carried) meta.push(`Carried ${issue.carried}×`);
+      const meta = [`${tx("Owner")}: ${issue.owner || tx("none")}`, `${tx("By")}: ${issue.due || tx("no time")}`];
+      if (issue.carried) meta.push(tx("Carried {n}×", { n: issue.carried }));
       body.append(el("span", "sh-issue-info", meta.join(" · ")));
       li.append(body);
       list.append(li);
     });
-    sheet.append(block(`Open issues (${open.length})`, [list]));
+    sheet.append(block(`${tx("Open issues")} (${open.length})`, [list]));
 
     const solved = solvedIssues(h);
-    if (solved.length) sheet.append(block("Solved this shift", [lines(solved.map((issue) => issue.text).join("\n"))]));
-    if (h.headsUp.trim()) sheet.append(block("Heads-up", [lines(h.headsUp)]));
-    if (h.safety.trim()) sheet.append(block("Safety and people", [lines(h.safety)]));
+    if (solved.length) sheet.append(block(tx("Solved this shift"), [lines(solved.map((issue) => issue.text).join("\n"))]));
+    if (h.headsUp.trim()) sheet.append(block(tx("Heads-up"), [lines(h.headsUp)]));
+    if (h.safety.trim()) sheet.append(block(tx("Safety and people"), [lines(h.safety)]));
 
-    const foot = el("p", "sh-foot", `Handover check: ${h.checks.filter(Boolean).length} of ${h.checks.length}${h.ackAt ? ` · Taken over by ${h.to} at ${clock(h.ackAt)}` : " · Not yet confirmed"}`);
+    const foot = el("p", "sh-foot", `${tx("Handover check")}: ${tx("{a} of {b}", { a: h.checks.filter(Boolean).length, b: h.checks.length })} · ${h.ackAt ? tx("Taken over by {name} at {time}", { name: h.to, time: clock(h.ackAt) }) : tx("Not yet confirmed")}`);
     sheet.append(foot);
   };
 
   const renderQuality = () => {
     const list = problems(cur());
-    quality.replaceChildren(el("p", "kicker", "Before you hand over"));
+    quality.replaceChildren(el("p", "kicker", tx("Before you hand over")));
     if (!hasContent(cur())) {
-      quality.append(el("p", "sh-ok", "Fill in the shift, the numbers and the open issues. This panel then shows what is still missing."));
+      quality.append(el("p", "sh-ok", tx("Fill in the shift, the numbers and the open issues. This panel then shows what is still missing.")));
       return;
     }
     if (!list.length) {
-      quality.append(el("p", "sh-ok", "Complete: every open issue has an owner and a time, and the checks are done."));
+      quality.append(el("p", "sh-ok", tx("Complete: every open issue has an owner and a time, and the checks are done.")));
       return;
     }
     const ul = el("ul", "sh-problems");
@@ -309,10 +312,10 @@
 
   const renderOutput = () => {
     const h = cur();
-    outputTitle.textContent = !hasContent(h) ? "Start with the numbers" : h.ackAt ? `Taken over by ${h.to}` : problems(h).length ? "Almost ready" : "Ready to hand over";
+    outputTitle.textContent = !hasContent(h) ? tx("Start with the numbers") : h.ackAt ? tx("Taken over by {name}", { name: h.to }) : problems(h).length ? tx("Almost ready") : tx("Ready to hand over");
     ackText.textContent = h.ackAt
-      ? `Confirmed by ${h.to} at ${clock(h.ackAt)}. Close the shift to start the next handover with the open issues carried over.`
-      : "The person taking over confirms they have read it and asked their questions.";
+      ? tx("Confirmed by {name} at {time}. Close the shift to start the next handover with the open issues carried over.", { name: h.to, time: clock(h.ackAt) })
+      : tx("The person taking over confirms they have read it and asked their questions.");
     emptyNote.hidden = hasContent(h);
     renderSheet();
     renderQuality();
@@ -325,10 +328,10 @@
       const h = entry.handover;
       const details = el("details", "dl-box sh-past");
       const summary = el("summary");
-      summary.append(el("strong", null, `${longDate(h.date)} · ${h.shift}`), ` ${h.area ? `· ${h.area} ` : ""}· ${h.from || "?"} → ${h.to || "?"} · ${openIssues(h).length} open`);
+      summary.append(el("strong", null, `${longDate(h.date)} · ${h.shift}`), ` ${h.area ? `· ${h.area} ` : ""}· ${h.from || "?"} → ${h.to || "?"} · ${tx("{n} open", { n: openIssues(h).length })}`);
       details.append(summary);
       details.append(el("pre", "sh-pre", entry.text));
-      const copyButton = el("button", "button-secondary", "Copy as text");
+      const copyButton = el("button", "button-secondary", tx("Copy as text"));
       copyButton.type = "button";
       copyButton.dataset.copyHistory = index;
       const actions = el("div", "tool-actions");
@@ -401,7 +404,7 @@
     } else if (target.name === "template") {
       const next = template(target.value);
       const filled = h.metrics.some(([, value]) => value);
-      if (filled && !window.confirm(`Switch the numbers and checks to ${next.name}? Values you typed in the numbers are cleared.`)) {
+      if (filled && !window.confirm(tx("Switch the numbers and checks to {name}? Values you typed in the numbers are cleared.", { name: next.name }))) {
         target.value = h.template;
         return;
       }
@@ -431,7 +434,7 @@
   });
 
   form.querySelector("[data-add-issue]").addEventListener("click", () => {
-    cur().issues.push({ text: "", priority: "Medium", owner: "", due: "", done: false, carried: 0 });
+    cur().issues.push({ text: "", priority: MEDIUM, owner: "", due: "", done: false, carried: 0 });
     save();
     renderIssues();
     renderOutput();
@@ -460,18 +463,18 @@
   output.querySelector("[data-ack]").addEventListener("click", () => {
     const h = cur();
     if (!h.to.trim()) {
-      note("Name who takes over first.");
+      note(tx("Name who takes over first."));
       form.elements.to.focus();
       return;
     }
     h.ackAt = new Date().toISOString();
     commit();
-    note(`Confirmed by ${h.to}.`);
+    note(tx("Confirmed by {name}.", { name: h.to }));
   });
 
   output.querySelector("[data-copy]").addEventListener("click", async () => {
     await copyText(asText(cur()));
-    note("Copied. Paste it into your team chat or email.");
+    note(tx("Copied. Paste it into your team chat or email."));
   });
 
   output.querySelector("[data-print]").addEventListener("click", () => window.print());
@@ -479,11 +482,11 @@
   output.querySelector("[data-close]").addEventListener("click", () => {
     const h = cur();
     if (!hasContent(h)) {
-      note("There is nothing to close yet.");
+      note(tx("There is nothing to close yet."));
       return;
     }
     const open = openIssues(h);
-    if (!window.confirm(`Close the ${h.shift.toLowerCase()} shift? It moves to the history, and ${open.length} open ${open.length === 1 ? "issue carries" : "issues carry"} over to the next handover.`)) return;
+    if (!window.confirm(tx(open.length === 1 ? "Close the {shift} shift? It moves to the history, and {n} open issue carries over to the next handover." : "Close the {shift} shift? It moves to the history, and {n} open issues carry over to the next handover.", { shift: lower(h.shift), n: open.length }))) return;
     state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(h)), text: asText(h) });
     state.history = state.history.slice(0, HISTORY_MAX);
     const next = nextShift(h);
@@ -496,12 +499,12 @@
     };
     save();
     renderAll();
-    note(`Started the ${next.shift.toLowerCase()} shift handover with ${open.length} carried ${open.length === 1 ? "issue" : "issues"}.`);
+    note(tx(open.length === 1 ? "Started the {shift} shift handover with {n} carried issue." : "Started the {shift} shift handover with {n} carried issues.", { shift: lower(next.shift), n: open.length }));
     form.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   output.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!window.confirm("Clear this handover? The history stays.")) return;
+    if (!window.confirm(tx("Clear this handover? The history stays."))) return;
     state.current = blank(cur().template, cur().date, cur().shift);
     save();
     renderAll();
@@ -511,12 +514,12 @@
     const button = event.target.closest("[data-copy-history]");
     if (!button) return;
     await copyText(state.history[Number(button.dataset.copyHistory)].text);
-    button.textContent = "Copied";
-    setTimeout(() => { button.textContent = "Copy as text"; }, 1600);
+    button.textContent = tx("Copied");
+    setTimeout(() => { button.textContent = tx("Copy as text"); }, 1600);
   });
 
   document.querySelector("[data-clear-history]").addEventListener("click", () => {
-    if (!window.confirm("Delete all earlier handovers on this device?")) return;
+    if (!window.confirm(tx("Delete all earlier handovers on this device?"))) return;
     state.history = [];
     save();
     renderHistory();

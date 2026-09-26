@@ -1,0 +1,190 @@
+{
+  "storageKey": "sc-damage-control-de",
+  "unknownCause": "Unbekannt",
+  "text": {
+    "tool": "Schadenskontrolle",
+    "one": "beschädigte Einheit",
+    "many": "beschädigte Einheiten",
+    "allNoun": "Schäden",
+    "volumeNoun": "Einheiten",
+    "volumeLabel": "Bearbeitete Einheiten",
+    "volumePlaceholder": "z. B. 18400",
+    "targetLabel": "Ziel Schäden %",
+    "targetPlaceholder": "z. B. 0,3",
+    "rateLabel": "Schadensquote",
+    "periodPlaceholder": "z. B. KW 38, Warenausgang",
+    "entryLegend": "Schaden erfassen",
+    "countLabel": "Beschädigte Einheiten",
+    "countShort": "Einheiten",
+    "notePlaceholder": "z. B. Gitterbox 4, obere Lage eingedrückt",
+    "pasteRow": "Eine Zeile pro Schaden",
+    "pastePlaceholder": "14.09.2026\tSpät\tVerladung\tGequetscht\tStapeln\t6\t55",
+    "empty": "Noch keine Schäden erfasst.",
+    "stageTitle": "Wo der Schaden gefunden wird",
+    "stageNote": "In der Reihenfolge des Prozesses, vom Tor bis zum Kunden.",
+    "stagePhrase": "im Prozessschritt",
+    "matrixTitle": "Prozessschritt und Schadensart",
+    "csv": "schadensprotokoll",
+    "tips": [
+      [
+        "Erfassen Sie, wo der Schaden gefunden wurde.",
+        "Der Prozessschritt zeigt, wo man den Schaden gesehen hat. Die Ursache zeigt, warum er passiert ist. Beides ist wichtig."
+      ],
+      [
+        "Zählen Sie Einheiten, nicht Vorfälle.",
+        "Sechs gequetschte Pakete aus einer eingestürzten Wand sind sechs Einheiten."
+      ],
+      [
+        "Tragen Sie das Volumen ein.",
+        "Ohne bearbeitete Einheiten sehen Sie nur Anzahlen. Mit dem Volumen bekommen Sie Quote, DPMO und Sigma-Niveau."
+      ]
+    ],
+    "checkTitle": "Hält der Standard?",
+    "checkIntro": "Gehen Sie durch die Verladezone und haken Sie ab, was Sie heute wirklich sehen, nicht was in der Arbeitsanweisung steht. Jede offene Zeile ist eine Stelle, an der Schäden beginnen können."
+  },
+  "fields": [
+    {
+      "name": "shift",
+      "label": "Schicht",
+      "options": ["Früh", "Spät", "Nacht"]
+    },
+    {
+      "name": "stage",
+      "label": "Prozessschritt",
+      "options": ["Wareneingang", "Lagerung", "Kommissionierung", "Packen", "Verladung", "Transport", "Zustellung"]
+    },
+    {
+      "name": "type",
+      "label": "Schadensart",
+      "options": ["Gequetscht", "Gerissen oder durchstochen", "Nass", "Gebrochen", "Ausgelaufen", "Sonstiges"]
+    },
+    {
+      "name": "cause",
+      "label": "Ursache",
+      "options": ["Stapeln", "Handhabung", "Verpackung", "Arbeitsmittel", "Ladungssicherung", "Umgebung", "Unbekannt"]
+    }
+  ],
+  "stages": {
+    "Wareneingang": {
+      "meaning": "Vieles, was im Wareneingang gefunden wird, kam schon beschädigt an. Wenn es am Tor nicht notiert wird, zahlt Ihr Standort für den Schaden von anderen.",
+      "moves": [
+        "Beschädigte Paletten vor der Unterschrift prüfen, fotografieren und auf dem Lieferschein vermerken.",
+        "Im Protokoll „beschädigt angekommen“ und „hier beschädigt“ getrennt halten.",
+        "Die Zahlen jede Woche mit Fotos an Lieferant oder Spediteur schicken."
+      ],
+      "question": "Wer prüft die Ware, bevor der Lieferschein unterschrieben wird?"
+    },
+    "Lagerung": {
+      "meaning": "Schäden an Ware, die nur steht, zeigen auf Regale, Höhe, Wasser oder Verkehr rund um den Lagerplatz.",
+      "moves": [
+        "Schwere Artikel unten lagern und prüfen, dass nichts über Traverse oder Fachboden hinausragt.",
+        "Schauen, wo sich Schäden häufen: Gangenden, Ecken und Staplerkurven brauchen meist einen Anfahrschutz.",
+        "Das Gebäude auf Wasser prüfen: undichtes Dach, Kondenswasser, offene Tore bei Regen."
+      ],
+      "question": "Welche Lagerplätze haben immer wieder Schäden, und was fährt dort vorbei?"
+    },
+    "Kommissionierung": {
+      "meaning": "Artikel fallen herunter, werden unter anderen Artikeln herausgezogen oder in Behälter geworfen, wenn es eilt oder der Platz ungünstig ist.",
+      "moves": [
+        "Am schlimmsten Lagerplatz zehn Picks beobachten und notieren, wie der Artikel entnommen wird.",
+        "Schwere und zerbrechliche Schnelldreher auf Hüfthöhe legen.",
+        "Schwer zuerst, zerbrechlich zuletzt: die Pick-Reihenfolge so einstellen, dass nichts Schweres oben landet."
+      ],
+      "question": "Was muss ein Kommissionierer tun, um diesen Artikel sicher zu entnehmen?"
+    },
+    "Packen": {
+      "meaning": "Falsche Kartongröße, zu wenig Füllmaterial oder schwaches Klebeband. Das Paket sieht beim Versand gut aus und geht unterwegs kaputt.",
+      "moves": [
+        "Pro Artikelgruppe eine Kartongröße festlegen und diese Kartons am Packplatz bereithalten.",
+        "Schütteltest: Wenn sich der Artikel im Karton bewegt, vor dem Schließen Füllmaterial dazugeben.",
+        "Zerbrechliche Artikel im System markieren, damit der Packer es vor dem Packen sieht."
+      ],
+      "question": "Was macht der Packer, wenn der richtige Karton nicht am Platz ist?"
+    },
+    "Verladung": {
+      "meaning": "Die meisten Transportschäden entstehen beim Beladen: Stapelreihenfolge, Lücken, Tempo in der Spitzenzeit.",
+      "moves": [
+        "Schwer unten, leicht oben, zerbrechlich nie unter etwas anderem.",
+        "Stabile Wände ohne Lücken und Überstand bauen und die letzte Wand sichern, bevor die Türen schließen.",
+        "Die Verladeslots in der Spitzenzeit prüfen: Wenn das Zeitziel wichtiger ist als der Stapelstandard, folgen Schäden."
+      ],
+      "question": "Wie sieht die Ladung in den letzten zehn Minuten vor der Abfahrt aus?"
+    },
+    "Transport": {
+      "meaning": "Die Ladung bewegt sich im Fahrzeug: Bremsen, Kurven, fehlende Ladungssicherung, Regale, die nicht halten.",
+      "moves": [
+        "Die Ladungssicherung vor der Abfahrt prüfen und ein Foto der geschlossenen Ladung machen.",
+        "Schäden nach Tour, Fahrzeug und Fahrer vergleichen, bevor man der Straße die Schuld gibt.",
+        "Regale, Gurte und Zurrpunkte in den Fahrzeugen reparieren, die am häufigsten auftauchen."
+      ],
+      "question": "Sieht die Ladung beim ersten Stopp noch so aus wie bei der Abfahrt?"
+    },
+    "Zustellung": {
+      "meaning": "Schäden auf den letzten Metern: Pakete werden geworfen, im Regen gelassen oder an unsicheren Stellen abgestellt.",
+      "moves": [
+        "Tragen, nie werfen: zwei Hände auf den letzten Metern.",
+        "Pakete an der Tür mit Tüte oder Abdeckung vor Regen schützen.",
+        "Bei der Übergabe ein Foto machen, damit Schadensmeldungen fair geprüft werden können."
+      ],
+      "question": "Was passiert mit einem Paket zwischen Fahrzeugtür und Kunde?"
+    }
+  },
+  "causes": {
+    "Stapeln": "Schreiben Sie die Stapelregel als ein Bild an die Rampe: schwer unten, zerbrechlich oben, keine Lücken.",
+    "Handhabung": "Beobachten Sie die Arbeit in der stärksten Stunde. Schäden durch Handhabung wachsen, wenn Menschen gehetzt sind, nicht wenn sie nachlässig sind.",
+    "Verpackung": "Testen Sie die Verpackung, nicht die Menschen: Lassen Sie von jeder Paketart, die hier auftaucht, eines fallen und schütteln Sie es.",
+    "Arbeitsmittel": "Prüfen Sie Gabeln, Hubwagen, Gitterboxen und Rollbehälter. Defekte Arbeitsmittel noch am selben Tag aus dem Verkehr ziehen.",
+    "Ladungssicherung": "Machen Sie die Sicherung zum letzten Schritt der Verladung, mit Foto, und nicht zu etwas, woran der Fahrer denken muss.",
+    "Umgebung": "Wasser, Hitze und Kälte beschädigen Ware unbemerkt. Schließen Sie die Lücken: Tore, Dächer, Abdeckungen, Wartezonen.",
+    "Unbekannt": "Ein hoher Anteil „Unbekannt“ heißt: Das Protokoll ist noch nicht gut genug. Erfassen Sie Prozessschritt und Ursache in dem Moment, in dem der Schaden gefunden wird."
+  },
+  "checklist": [
+    "Schwere Artikel liegen unten, leichte und zerbrechliche oben.",
+    "Nichts ragt über den Rand von Palette, Fachboden oder Gitterbox hinaus.",
+    "Die Wände sind stabil, ohne Lücken, in die ein Paket fallen kann.",
+    "Die Ladung ist mit Gurten, Sperrstangen oder Netzen gesichert, bevor die Türen schließen.",
+    "Zerbrechliche Artikel und Flüssigkeiten sind markiert und reisen aufrecht.",
+    "Beschädigte Kartons werden aussortiert und neu verpackt, nie so verladen.",
+    "Gabeln, Hubwagen und Gitterboxen werden vor der Nutzung geprüft.",
+    "Undichte Stellen, nasse Böden und offene Tore nahe der Ware werden in derselben Schicht gemeldet.",
+    "Jeder Schaden wird mit Prozessschritt und Ursache erfasst, sobald er gefunden wird.",
+    "Beschädigt angelieferte Ware wird vor der Unterschrift fotografiert und vermerkt."
+  ],
+  "example": {
+    "period": "Beispielwoche",
+    "volume": 18400,
+    "target": 0.3,
+    "rows": [
+      "2026-09-14|Früh|Verladung|Gequetscht|Stapeln|7|61",
+      "2026-09-14|Früh|Wareneingang|Gequetscht|Verpackung|2|",
+      "2026-09-14|Spät|Verladung|Gequetscht|Stapeln|6|55",
+      "2026-09-14|Spät|Transport|Gebrochen|Ladungssicherung|3|72",
+      "2026-09-14|Nacht|Kommissionierung|Gerissen oder durchstochen|Handhabung|2|18",
+      "2026-09-15|Früh|Verladung|Gerissen oder durchstochen|Handhabung|3|24",
+      "2026-09-15|Spät|Verladung|Gequetscht|Stapeln|7|61",
+      "2026-09-15|Spät|Packen|Gebrochen|Verpackung|2|40",
+      "2026-09-15|Spät|Zustellung|Nass|Umgebung|3|30",
+      "2026-09-15|Nacht|Lagerung|Gequetscht|Arbeitsmittel|1|12",
+      "2026-09-16|Früh|Transport|Gebrochen|Ladungssicherung|4|95",
+      "2026-09-16|Früh|Verladung|Gequetscht|Stapeln|5|44",
+      "2026-09-16|Spät|Kommissionierung|Gebrochen|Handhabung|2|26",
+      "2026-09-16|Spät|Verladung|Gequetscht|Stapeln|8|70",
+      "2026-09-16|Nacht|Wareneingang|Nass|Umgebung|1|",
+      "2026-09-17|Früh|Verladung|Gequetscht|Stapeln|3|27",
+      "2026-09-17|Spät|Transport|Ausgelaufen|Ladungssicherung|4|58",
+      "2026-09-17|Spät|Verladung|Gerissen oder durchstochen|Arbeitsmittel|2|16",
+      "2026-09-17|Spät|Packen|Gequetscht|Verpackung|3|29",
+      "2026-09-17|Nacht|Lagerung|Nass|Umgebung|2|22",
+      "2026-09-18|Früh|Zustellung|Gerissen oder durchstochen|Handhabung|2|15",
+      "2026-09-18|Spät|Verladung|Gequetscht|Stapeln|13|118",
+      "2026-09-18|Spät|Transport|Gebrochen|Ladungssicherung|4|81",
+      "2026-09-18|Spät|Verladung|Gequetscht|Unbekannt|2|19",
+      "2026-09-18|Nacht|Kommissionierung|Gequetscht|Arbeitsmittel|1|9",
+      "2026-09-19|Früh|Verladung|Gequetscht|Stapeln|4|35",
+      "2026-09-19|Früh|Transport|Gequetscht|Stapeln|2|24",
+      "2026-09-19|Spät|Zustellung|Nass|Umgebung|1|12",
+      "2026-09-19|Spät|Verladung|Gebrochen|Handhabung|2|48",
+      "2026-09-20|Früh|Verladung|Gequetscht|Stapeln|3|26"
+    ]
+  }
+}

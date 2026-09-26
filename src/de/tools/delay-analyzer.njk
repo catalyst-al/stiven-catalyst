@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Verspätungsanalyse
+description: "Ein privates Tourenprotokoll für Zustell- und Disposteams: Pünktlichkeitsquote, wo Verspätung beginnt (an der Rampe oder auf der Straße), Gründe, Abfahrtsstunden und Schichten."
+activeNav: /de/tools.html
+permalink: /de/tools/delay-analyzer/
+alt: /tools/delay-analyzer/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloses Tool · Lager</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1>Verspätungs&shy;analyse</h1>
+  <p class="lede">Ob eine Zustellung zu spät kommt, entscheidet sich oft schon vor der Abfahrt. Erfassen Sie für jede Tour die geplanten und tatsächlichen Zeiten. Das Tool teilt jede Minute Verspätung in Rampe und Straße auf, damit das richtige Team die Lösung übernimmt.</p>
+</section>
+
+{% set cfg = de.delayAnalyzer %}
+{% include "partials/delay-analyzer.njk" %}

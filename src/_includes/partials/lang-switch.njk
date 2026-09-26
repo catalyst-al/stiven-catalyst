@@ -1,0 +1,4 @@
+{#- Link to the same page in the other language; pages set `alt` in their front matter. -#}
+{%- if alt %}
+<a class="lang-switch" href="{{ alt }}" hreflang="{{ 'en' if lang == 'de' else 'de' }}" lang="{{ 'en' if lang == 'de' else 'de' }}">{{ "English" if lang == "de" else "Deutsch" }}</a>
+{%- endif %}

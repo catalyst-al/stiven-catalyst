@@ -1,5 +1,31 @@
 {
   "storageKey": "sc-delay-analyzer",
+  "tool": "Delay Analyzer",
+  "csv": "delay-log",
+  "text": {
+    "pasteRow": "One row per route",
+    "pasteColumns": "date, shift, route, planned departure, actual departure, planned arrival, actual arrival, reason, note",
+    "pasteHelp": "Times like 07:45, 7.45 or 0745 all work; tabs, semicolons or commas too, and a header row is skipped. Your own reason names are kept as they are.",
+    "pastePlaceholder": "2026-09-14\tLate\tR12\t11:15\t11:50\t15:15\t15:55\tLate wave",
+    "empty": "No routes logged yet.",
+    "tips": [
+      [
+        "Log every route.",
+        "On-time routes are the baseline: without them there is no on-time rate and no pattern by hour."
+      ],
+      [
+        "Use the promised time.",
+        "Planned arrival is what was promised: the first stop, a delivery window or the route end. Use the same one every day."
+      ],
+      [
+        "Dock or road.",
+        "Minutes a route left late count as dock delay; minutes it lost after leaving count as road delay."
+      ]
+    ],
+    "vitalFew": "Two or three reasons usually carry most late routes. Start there, then take the top one through",
+    "checkTitle": "Does the vehicle leave on time?",
+    "checkIntro": "Stand at the dock for one departure wave and tick what you actually see today. Every unticked line is a place where the first minutes of delay are made."
+  },
   "shifts": [
     "Early",
     "Late",
