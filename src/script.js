@@ -15,7 +15,7 @@
   const setThemeLabel = () => {
     if (!themeButton) return;
     const isDark = root.dataset.theme === "dark";
-    themeButton.setAttribute("aria-label", isDark ? "Use light theme" : "Use dark theme");
+    themeButton.setAttribute("aria-label", isDark ? themeButton.dataset.lightLabel : themeButton.dataset.darkLabel);
   };
   setThemeLabel();
 
@@ -31,7 +31,7 @@
   const setMenu = (open) => {
     if (panel) panel.dataset.open = String(open);
     menuButton?.setAttribute("aria-expanded", String(open));
-    menuButton?.setAttribute("aria-label", open ? "Close menu" : "Menu");
+    menuButton?.setAttribute("aria-label", open ? menuButton.dataset.closeLabel : menuButton.getAttribute("data-menu-label"));
   };
 
   menuButton?.addEventListener("click", () => {

@@ -1,6 +1,6 @@
 {
   "highlights": [
-    { "label": "Führung", "type": "Field Note", "title": "Gute Führungskräfte bleiben nah genug, um die Arbeit zu sehen.", "link": "" },
-    { "label": "Hotellerie", "type": "Perspektive", "title": "Was die Nachtschicht über Verantwortung lehrt.", "link": "" }
+    { "label": "Führung", "type": "Essay", "title": "Warum gute Führungskräfte Zeit in der Halle verbringen.", "link": "/de/insights/good-managers-on-the-floor/" },
+    { "label": "Hotellerie", "type": "Field Note", "title": "Die Nachtschicht zeigt schwache Prozesse.", "link": "/de/field-notes.html#note-04-night-shift" }
   ]
 }
