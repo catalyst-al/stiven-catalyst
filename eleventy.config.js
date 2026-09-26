@@ -19,7 +19,7 @@ const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug)
 
 export default function (eleventyConfig) {
   // Pages are written with root-relative links ("/styles.css"); this plugin
-  // prefixes them with the folder the site lives in (e.g. /stiven-catalyst/).
+  // prefixes them with the folder the site lives in (for example /stiven-catalyst/ on a GitHub Pages project address).
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
   for (const path of ["styles.css", "script.js", "favicon.svg", "social.png", "fonts", "media", "js"]) {
