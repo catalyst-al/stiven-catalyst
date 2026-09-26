@@ -290,14 +290,28 @@ window.ToolKit = (() => {
   // Log tables show the newest rows only: a table of thousands of rows makes
   // every keystroke slow. Results and CSV always use every row.
   const LOG_LIMIT = 100;
-  // With a large log, typing in a setting waits for a short pause before the
-  // results are rebuilt, so every keystroke stays instant.
-  const renderOnPause = (render, rowCount) => {
+  // With a large log, typing waits for a short pause before saving and
+  // rebuilding the results, so every keystroke stays instant on slow phones.
+  // Anything still waiting runs at once when the page is hidden or closed.
+  const pending = new Set();
+  const flushPending = () => pending.forEach((run) => run());
+  window.addEventListener("pagehide", flushPending);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushPending(); });
+  const renderOnPause = (render, rowCount, limit = 300) => {
     let timer;
+    const run = () => {
+      clearTimeout(timer);
+      pending.delete(run);
+      render();
+    };
     return () => {
       clearTimeout(timer);
-      if (rowCount() > 300) timer = setTimeout(render, 150);
-      else render();
+      if (rowCount() > limit) {
+        pending.add(run);
+        timer = setTimeout(run, 150);
+      } else {
+        run();
+      }
     };
   };
   const shownNote = (total) => (total > LOG_LIMIT ? tx(" · newest {n} shown, CSV has all", { n: LOG_LIMIT }) : "");

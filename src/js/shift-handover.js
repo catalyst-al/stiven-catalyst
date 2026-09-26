@@ -3,7 +3,7 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { LOCALE, tx, lower, read, write, isObject, str, el, today } = window.ToolKit;
+  const { LOCALE, tx, lower, read, write, isObject, str, el, today, parseDate, renderOnPause } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
@@ -45,7 +45,7 @@
   // Rebuild a saved handover field by field, so damaged data cannot break the page.
   const clean = (h) => {
     const key = data.templates[h.template] ? h.template : Object.keys(data.templates)[0];
-    const base = blank(key, str(h.date) || today(), data.shifts.includes(h.shift) ? h.shift : data.shifts[0]);
+    const base = blank(key, parseDate(str(h.date)) || today(), data.shifts.includes(h.shift) ? h.shift : data.shifts[0]);
     const metrics = Array.isArray(h.metrics) ? h.metrics.filter(Array.isArray).map((m) => [str(m[0]), str(m[1]), str(m[2])]) : base.metrics;
     const issues = Array.isArray(h.issues) ? h.issues.filter(isObject).map((issue) => ({
       text: str(issue.text),
@@ -76,16 +76,25 @@
     const index = data.shifts.indexOf(h.shift);
     const shift = data.shifts[(index + 1) % data.shifts.length];
     let date = h.date;
-    if (index === data.shifts.length - 1 && date) {
-      const next = new Date(`${date}T00:00:00Z`);
+    const next = new Date(`${date}T00:00:00Z`);
+    if (index === data.shifts.length - 1 && date && !Number.isNaN(next.getTime())) {
       next.setUTCDate(next.getUTCDate() + 1);
       date = next.toISOString().slice(0, 10);
     }
     return { shift, date };
   };
 
-  const longDate = (iso) => (iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" }) : tx("No date"));
-  const clock = (iso) => new Date(iso).toLocaleTimeString(LOCALE, { hour: "2-digit", minute: "2-digit" });
+  // One formatter each: building them per call is slow with a long history.
+  const dateFormat = new Intl.DateTimeFormat(LOCALE, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  const timeFormat = new Intl.DateTimeFormat(LOCALE, { hour: "2-digit", minute: "2-digit" });
+  const longDate = (iso) => {
+    const date = new Date(`${iso}T00:00:00Z`);
+    return iso && !Number.isNaN(date.getTime()) ? dateFormat.format(date) : tx("No date");
+  };
+  const clock = (iso) => {
+    const date = new Date(iso);
+    return Number.isNaN(date.getTime()) ? "?" : timeFormat.format(date);
+  };
   const shiftLine = (h) => `${longDate(h.date)} · ${tx("{shift} shift → {next}", { shift: h.shift, next: nextShift(h).shift })}`;
   const people = (h) => tx("From {from} to {to}", { from: h.from || "?", to: h.to || "?" });
   const openIssues = (h) => h.issues.filter((issue) => !issue.done && issue.text.trim())
@@ -127,38 +136,54 @@
     });
   };
 
-  const renderIssues = () => {
-    issuesBox.replaceChildren();
-    if (!cur().issues.length) issuesBox.append(el("p", "form-note sh-help", tx("No open issues yet.")));
-    cur().issues.forEach((issue, i) => {
-      const row = el("div", "sh-issue");
-      if (issue.done) row.classList.add("is-done");
-      const done = input({ type: "checkbox", checked: issue.done, ariaLabel: `${tx("Solved")}: ${issue.text || tx("issue {n}", { n: i + 1 })}` });
-      done.dataset.issue = "done";
-      const text = input({ value: issue.text, placeholder: tx("What is open, and what is the risk?"), ariaLabel: tx("Issue {n}", { n: i + 1 }), className: "sh-in sh-issue-text" });
-      text.dataset.issue = "text";
-      const priority = el("select", "sh-in");
-      priority.setAttribute("aria-label", `${tx("Issue {n}", { n: i + 1 })}: ${tx("priority")}`);
-      data.priorities.forEach((p) => {
-        const option = el("option", null, p);
-        option.selected = p === issue.priority;
-        priority.append(option);
-      });
-      priority.dataset.issue = "priority";
-      const owner = input({ value: issue.owner, placeholder: tx("Owner"), ariaLabel: `${tx("Issue {n}", { n: i + 1 })}: ${tx("owner")}`, className: "sh-in" });
-      owner.dataset.issue = "owner";
-      const due = input({ value: issue.due, placeholder: tx("By when"), ariaLabel: `${tx("Issue {n}", { n: i + 1 })}: ${tx("by when")}`, className: "sh-in" });
-      due.dataset.issue = "due";
-      [done, text, priority, owner, due].forEach((node) => { node.dataset.index = i; });
-      const meta = el("div", "sh-issue-meta");
-      meta.append(priority, owner, due);
-      if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= 2 ? " is-warn" : ""}`, tx("Carried {n}×", { n: issue.carried })));
-      meta.append(removeButton(tx("Remove issue {n}", { n: i + 1 }), "issue", i));
-      const main = el("div", "sh-issue-main");
-      main.append(text, meta);
-      row.append(done, main);
-      issuesBox.append(row);
+  // One issue row. Its number lives in data-index and the labels, so rows can
+  // be renumbered in place when one above them is removed.
+  const numberIssue = (row, i) => {
+    const issue = cur().issues[i];
+    const name = tx("Issue {n}", { n: i + 1 });
+    row.querySelectorAll("[data-index]").forEach((node) => { node.dataset.index = i; });
+    row.querySelector('[data-issue="done"]').setAttribute("aria-label", `${tx("Solved")}: ${issue.text || tx("issue {n}", { n: i + 1 })}`);
+    row.querySelector('[data-issue="text"]').setAttribute("aria-label", name);
+    row.querySelector('[data-issue="priority"]').setAttribute("aria-label", `${name}: ${tx("priority")}`);
+    row.querySelector('[data-issue="owner"]').setAttribute("aria-label", `${name}: ${tx("owner")}`);
+    row.querySelector('[data-issue="due"]').setAttribute("aria-label", `${name}: ${tx("by when")}`);
+    row.querySelector("[data-remove]").setAttribute("aria-label", tx("Remove issue {n}", { n: i + 1 }));
+  };
+
+  const issueRow = (issue, i) => {
+    const row = el("div", "sh-issue");
+    if (issue.done) row.classList.add("is-done");
+    const done = input({ type: "checkbox", checked: issue.done });
+    done.dataset.issue = "done";
+    const text = input({ value: issue.text, placeholder: tx("What is open, and what is the risk?"), className: "sh-in sh-issue-text" });
+    text.dataset.issue = "text";
+    const priority = el("select", "sh-in");
+    data.priorities.forEach((p) => {
+      const option = el("option", null, p);
+      option.selected = p === issue.priority;
+      priority.append(option);
     });
+    priority.dataset.issue = "priority";
+    const owner = input({ value: issue.owner, placeholder: tx("Owner"), className: "sh-in" });
+    owner.dataset.issue = "owner";
+    const due = input({ value: issue.due, placeholder: tx("By when"), className: "sh-in" });
+    due.dataset.issue = "due";
+    [done, text, priority, owner, due].forEach((node) => { node.dataset.index = i; });
+    const meta = el("div", "sh-issue-meta");
+    meta.append(priority, owner, due);
+    if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= 2 ? " is-warn" : ""}`, tx("Carried {n}×", { n: issue.carried })));
+    meta.append(removeButton("", "issue", i));
+    const main = el("div", "sh-issue-main");
+    main.append(text, meta);
+    row.append(done, main);
+    numberIssue(row, i);
+    return row;
+  };
+
+  const noIssues = () => el("p", "form-note sh-help", tx("No open issues yet."));
+
+  const renderIssues = () => {
+    issuesBox.replaceChildren(...(cur().issues.length ? cur().issues.map(issueRow) : [noIssues()]));
   };
 
   const renderChecklist = () => {
@@ -371,6 +396,8 @@
     save();
     renderOutput();
   };
+  // Typing waits for a pause when the handover is long (many issues or a full history).
+  const commitSoon = renderOnPause(commit, () => cur().issues.length + state.history.length, 40);
 
   form.addEventListener("input", (event) => {
     const target = event.target;
@@ -385,7 +412,7 @@
     } else {
       return;
     }
-    commit();
+    commitSoon();
   });
 
   form.addEventListener("change", (event) => {
@@ -419,10 +446,21 @@
   form.addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove]");
     if (!button) return;
-    const list = button.dataset.remove === "metric" ? cur().metrics : cur().issues;
-    list.splice(Number(button.dataset.index), 1);
+    const index = Number(button.dataset.index);
+    if (button.dataset.remove === "metric") {
+      cur().metrics.splice(index, 1);
+      renderMetrics();
+    } else {
+      // Remove the one row and renumber the rows below it; rebuilding a long
+      // list on every click is slow on phones.
+      cur().issues.splice(index, 1);
+      const rows = [...issuesBox.querySelectorAll(".sh-issue")];
+      rows[index].remove();
+      rows.slice(index + 1).forEach((row, k) => numberIssue(row, index + k));
+      if (!cur().issues.length) issuesBox.append(noIssues());
+      (issuesBox.querySelectorAll("[data-remove]")[Math.min(index, cur().issues.length - 1)] || form.querySelector("[data-add-issue]")).focus();
+    }
     save();
-    renderEditor();
     renderOutput();
   });
 
@@ -434,11 +472,15 @@
   });
 
   form.querySelector("[data-add-issue]").addEventListener("click", () => {
-    cur().issues.push({ text: "", priority: MEDIUM, owner: "", due: "", done: false, carried: 0 });
+    const issues = cur().issues;
+    issues.push({ text: "", priority: MEDIUM, owner: "", due: "", done: false, carried: 0 });
     save();
-    renderIssues();
+    // Add just the new row; the ones above it stay as they are.
+    if (issues.length === 1) issuesBox.replaceChildren();
+    const row = issueRow(issues.at(-1), issues.length - 1);
+    issuesBox.append(row);
     renderOutput();
-    issuesBox.lastElementChild.querySelector(".sh-issue-text").focus();
+    row.querySelector(".sh-issue-text").focus();
   });
 
   form.querySelector("[data-example]").addEventListener("click", () => {
