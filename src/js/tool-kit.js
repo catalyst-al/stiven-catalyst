@@ -295,8 +295,14 @@ window.ToolKit = (() => {
   // Anything still waiting runs at once when the page is hidden or closed.
   const pending = new Set();
   const flushPending = () => pending.forEach((run) => run());
-  window.addEventListener("pagehide", flushPending);
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushPending(); });
+  // Listen only once something waits, so loading the kit touches no page events.
+  let listening = false;
+  const listen = () => {
+    if (listening) return;
+    listening = true;
+    window.addEventListener("pagehide", flushPending);
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushPending(); });
+  };
   const renderOnPause = (render, rowCount, limit = 300) => {
     let timer;
     const run = () => {
@@ -307,6 +313,7 @@ window.ToolKit = (() => {
     return () => {
       clearTimeout(timer);
       if (rowCount() > limit) {
+        listen();
         pending.add(run);
         timer = setTimeout(run, 150);
       } else {
