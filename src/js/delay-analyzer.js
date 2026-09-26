@@ -416,12 +416,14 @@
   };
 
   // Period settings.
-  const renderSetting = renderOnPause(render, () => state.rows.length);
+  const renderSetting = renderOnPause(() => {
+    save();
+    render();
+  }, () => state.rows.length);
   root.querySelectorAll("[data-setting]").forEach((input) => {
     input.value = state[input.name] ?? "";
     input.addEventListener("input", () => {
       state[input.name] = input.value;
-      save();
       renderSetting();
     });
   });

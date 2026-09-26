@@ -494,12 +494,14 @@
     renderResults();
   };
 
-  const renderSetting = renderOnPause(renderResults, () => state.rows.length);
+  const renderSetting = renderOnPause(() => {
+    save();
+    renderResults();
+  }, () => state.rows.length);
   root.querySelectorAll("[data-setting]").forEach((input) => {
     input.value = state[input.name] ?? "";
     input.addEventListener("input", () => {
       state[input.name] = input.value;
-      save();
       renderSetting();
     });
   });
