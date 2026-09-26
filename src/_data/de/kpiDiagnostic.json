@@ -1,0 +1,67 @@
+{
+  "scale": ["Stimmt nicht", "Teilweise", "Größtenteils", "Stimmt voll"],
+  "causes": {
+    "clarity": {
+      "name": "Klarheit",
+      "meaning": "Die Leute arbeiten nicht mit demselben Bild von „gut“. Der Standard, das Ziel oder der Grund dafür ist nicht geteilt.",
+      "moves": [
+        "Den Standard in einem Satz aufschreiben, den alle wiederholen können.",
+        "Mit einem echten Beispiel zeigen, wie gut aussieht, nicht mit einer Folie.",
+        "Erklären, warum die Zahl für die nächste Person im Prozess wichtig ist."
+      ],
+      "question": "Fragen Sie drei Leute: Wie sieht „richtig gemacht“ hier aus?"
+    },
+    "skill": {
+      "name": "Können",
+      "meaning": "Der Prozess kann funktionieren, aber noch nicht alle können ihn zuverlässig ausführen. Erfahrung trägt das Ergebnis.",
+      "moves": [
+        "Neuere Mitarbeiter ein paar Schichten lang mit einer starken Kollegin oder einem starken Kollegen zusammen arbeiten lassen.",
+        "Die kritischen Schritte in eine einseitige Checkliste übertragen.",
+        "Verständnis prüfen, indem man die Arbeit beobachtet, nicht indem man fragt „Ist das klar?“"
+      ],
+      "question": "Wo genau geht es schief, wenn jemand das zum ersten Mal allein macht?"
+    },
+    "capacity": {
+      "name": "Kapazität",
+      "meaning": "Die Arbeit passt nicht in die verfügbare Zeit oder zu den verfügbaren Leuten. Unter Druck fallen Schritte weg.",
+      "moves": [
+        "Die Kennzahl neben Menge und Personal pro Stunde oder pro Tag legen.",
+        "In der Spitzenzeit die kritischen Schritte schützen und zuerst das Unwichtige weglassen.",
+        "Arbeit aus der Spitze verschieben, wo immer es geht."
+      ],
+      "question": "Was lassen die Leute weg, wenn es voll wird?"
+    },
+    "design": {
+      "name": "Prozessdesign",
+      "meaning": "Der Prozess selbst erzeugt den Fehler. Verschiedene Leute kommen zum selben Ergebnis, weil das System sie dorthin führt.",
+      "moves": [
+        "Den Prozess von Anfang bis Ende ablaufen und jeden Schritt messen.",
+        "Den richtigen Weg zum einfachen Weg machen: Layout, Werkzeuge, Voreinstellungen.",
+        "Schritte streichen, die es nur wegen alter Probleme gibt."
+      ],
+      "question": "Was macht den falschen Weg schneller als den richtigen?"
+    },
+    "ownership": {
+      "name": "Verantwortung",
+      "meaning": "Die Arbeit fällt zwischen Menschen, Schichten oder Teams. Jeder macht seinen Teil, und die Lücke gehört niemandem.",
+      "moves": [
+        "Für jede Übergabe einen Verantwortlichen benennen.",
+        "Vereinbaren, was „übergeben“ heißt: was, in welchem Zustand, bis wann.",
+        "Fehler an der Übergabe besprechen, nicht nur am Ende der Kette."
+      ],
+      "question": "In welchem Moment wird das zur Aufgabe von niemandem?"
+    }
+  },
+  "statements": [
+    { "cause": "clarity", "text": "Wenn man verschiedene Leute nach dem Standard fragt, bekommt man verschiedene Antworten." },
+    { "cause": "capacity", "text": "Die Zahl wird in Spitzenzeiten, an vollen Tagen oder mit weniger Personal schlechter." },
+    { "cause": "design", "text": "Derselbe Fehler kommt immer wieder, auch wenn verschiedene Leute die Arbeit machen." },
+    { "cause": "skill", "text": "Das Problem tritt vor allem bei neueren oder weniger erfahrenen Leuten auf." },
+    { "cause": "ownership", "text": "Probleme entstehen an Übergaben zwischen Schichten, Teams oder Systemen." },
+    { "cause": "clarity", "text": "Das Ziel hat sich vor Kurzem geändert, oder der Grund dafür wurde nie erklärt." },
+    { "cause": "design", "text": "Werkzeuge, Layout oder Systeme machen den richtigen Weg langsamer als den falschen." },
+    { "cause": "capacity", "text": "Die Leute lassen Schritte aus, weil nicht genug Zeit für alle da ist." },
+    { "cause": "ownership", "text": "Wenn etwas schiefgeht, ist unklar, wer es hätte auffangen sollen." },
+    { "cause": "skill", "text": "Die Ergebnisse werden deutlich besser, wenn eine erfahrene Person in derselben Schicht ist." }
+  ]
+}

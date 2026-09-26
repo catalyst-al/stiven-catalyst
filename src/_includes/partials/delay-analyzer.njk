@@ -132,7 +132,7 @@
       {%- for tip in t.tips %}
       <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
       {%- endfor %}
-      <li><strong>{{ "Fix the vital few." | t(lang) }}</strong> {{ t.vitalFew }} <a class="inline-link" href="{{ fiveWhysUrl or '/tools/five-whys/' }}" data-five-whys>5 Whys</a>.</li>
+      <li><strong>{{ "Fix the vital few." | t(lang) }}</strong> {{ t.vitalFew }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
     </ul>
     <p class="privacy-note">{{ "Your log stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
   </aside>

@@ -3,6 +3,7 @@
   if (!dataEl || !window.ToolKit) return;
 
   const {
+    LANG, LOCALE, tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, splitLine, sigma, sigmaText,
     panel, stat, resultActions, flash, downloadCsv, LOG_LIMIT, shownNote, renderOnPause,
@@ -15,8 +16,10 @@
     Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
     return node;
   };
-  const shortDate = (iso) => (iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : "-");
-  const rate = (value, digits = 2) => `${(value * 100).toFixed(digits)}%`;
+  const shortDate = (iso) => (iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { day: "numeric", month: "short", timeZone: "UTC" }) : "-");
+  const rate = (value, digits = 2) => pct(value, digits);
+  const days = (count) => plural(count, tx("day"), tx("days"));
+  const direction = (worse) => (worse ? tx("worse") : tx("better"));
 
   // 1 · Calculator ----------------------------------------------------------
   const calcSigma = document.querySelector("[data-calc-sigma]");
@@ -37,13 +40,13 @@
     data.sigmaTable.forEach((row) => {
       const tr = el("tr");
       if (row === reached) tr.classList.add("is-current");
-      const level = el("th", null, row.sigma.toFixed(1));
+      const level = el("th", null, num(row.sigma, 1));
       level.scope = "row";
-      if (row === reached) level.append(el("span", "dl-tag", "You"));
+      if (row === reached) level.append(el("span", "dl-tag", tx("You")));
       tr.append(level);
-      tr.append(el("td", "num", row.dpmo < 10 ? String(row.dpmo) : int.format(row.dpmo)));
-      tr.append(el("td", "num", `${(100 - row.dpmo / 1e4).toFixed(row.dpmo < 100 ? 4 : 2)}%`));
-      tr.append(el("td", "num", (row.dpmo / 1000).toFixed(row.dpmo < 1000 ? 3 : 1)));
+      tr.append(el("td", "num", row.dpmo < 10 ? num(row.dpmo, 1) : int.format(row.dpmo)));
+      tr.append(el("td", "num", pct(1 - row.dpmo / 1e6, row.dpmo < 100 ? 4 : 2)));
+      tr.append(el("td", "num", num(row.dpmo / 1000, row.dpmo < 1000 ? 3 : 1)));
       sigmaTable.append(tr);
     });
   };
@@ -54,22 +57,22 @@
     const opportunities = Math.max(1, Math.round(parseNumber(calcSigma.elements.opportunities.value)) || 1);
     sigmaOut.replaceChildren();
     if (!(units > 0) || !(defects >= 0)) {
-      sigmaOut.append(hint("Enter units and defects to see the sigma level."));
+      sigmaOut.append(hint(tx("Enter units and defects to see the sigma level.")));
       renderTable(null);
       return null;
     }
     const chances = units * opportunities;
     if (defects > chances) {
-      sigmaOut.append(hint("There are more defects than chances. Check the numbers or the chances per unit."));
+      sigmaOut.append(hint(tx("There are more defects than chances. Check the numbers or the chances per unit.")));
       renderTable(null);
       return null;
     }
     const value = defects / chances;
     sigmaOut.append(
-      stat("Defect rate", rate(value), `${int.format(defects)} of ${int.format(chances)}`),
-      stat("DPMO", int.format(Math.round(value * 1e6)), "defects per million chances"),
-      stat("Yield", rate(1 - value), "right first time"),
-      stat("Sigma level", sigmaText(value), "short term, with 1.5 shift"),
+      stat(tx("Defect rate"), rate(value), tx("{a} of {b}", { a: int.format(defects), b: int.format(chances) })),
+      stat("DPMO", int.format(Math.round(value * 1e6)), tx("defects per million chances")),
+      stat(tx("Yield"), rate(1 - value), tx("right first time")),
+      stat(tx("Sigma level"), sigmaText(value), tx("short term, with 1.5 shift")),
     );
     renderTable(sigma(value));
     return value;
@@ -77,20 +80,20 @@
 
   const renderPerfect = () => {
     const parts = [["On time", "onTime"], ["Undamaged", "undamaged"], ["Complete", "complete"]]
-      .map(([label, name]) => ({ label, value: parseNumber(calcPerfect.elements[name].value) / 100 }))
+      .map(([label, name]) => ({ label: tx(label), value: parseNumber(calcPerfect.elements[name].value) / 100 }))
       .filter((part) => part.value >= 0 && part.value <= 1);
     perfectOut.replaceChildren();
     if (!parts.length) {
-      perfectOut.append(hint("Enter at least two of the three percentages."));
+      perfectOut.append(hint(tx("Enter at least two of the three percentages.")));
       return;
     }
     const perfect = parts.reduce((product, part) => product * part.value, 1);
     const weakest = [...parts].sort((a, b) => a.value - b.value)[0];
     perfectOut.append(
-      stat("Perfect delivery", rate(perfect), parts.length < 3 ? `from ${parts.length} of 3 measures` : "on time, undamaged and complete"),
-      stat("Fail at least once", `${(1000 * (1 - perfect)).toFixed(1)}`, "per 1,000 deliveries"),
-      stat("Sigma level", sigmaText(1 - perfect), "of the whole delivery"),
-      stat("Weakest link", weakest.label, `${rate(1 - weakest.value)} fail here`),
+      stat(tx("Perfect delivery"), rate(perfect), parts.length < 3 ? tx("from {n} of 3 measures", { n: parts.length }) : tx("on time, undamaged and complete")),
+      stat(tx("Fail at least once"), num(1000 * (1 - perfect), 1), tx("per 1,000 deliveries")),
+      stat(tx("Sigma level"), sigmaText(1 - perfect), tx("of the whole delivery")),
+      stat(tx("Weakest link"), weakest.label, tx("{pct} fail here", { pct: rate(1 - weakest.value) })),
     );
   };
 
@@ -127,8 +130,8 @@
     .map((row) => ({ date: parseDate(row.date), n: Math.round(Number(row.n)), d: Math.round(Number(row.d)), note: str(row.note) }))
     .filter((row) => row.date && row.n > 0 && row.d >= 0 && row.d <= row.n);
   const save = () => write(KEY, state);
-  const metric = () => state.metric.trim() || "Defects";
-  const unit = () => state.unit.trim() || "Handled";
+  const metric = () => state.metric.trim() || tx("Defects");
+  const unit = () => state.unit.trim() || tx("Handled");
 
   // One row per date: a new value for a date replaces the old one.
   const upsert = (rows) => {
@@ -170,10 +173,10 @@
     points.forEach((point) => {
       if (point.p > point.ucl) {
         point.signals.push({ rule: "beyond", worse: true });
-        events.push({ rule: "beyond", worse: true, from: point, to: point, text: `${rate(point.p)} is above the upper limit of ${rate(point.ucl)}.` });
+        events.push({ rule: "beyond", worse: true, from: point, to: point, text: tx("{rate} is above the upper limit of {limit}.", { rate: rate(point.p), limit: rate(point.ucl) }) });
       } else if (point.lcl > 0 && point.p < point.lcl) {
         point.signals.push({ rule: "beyond", worse: false });
-        events.push({ rule: "beyond", worse: false, from: point, to: point, text: `${rate(point.p)} is below the lower limit of ${rate(point.lcl)}.` });
+        events.push({ rule: "beyond", worse: false, from: point, to: point, text: tx("{rate} is below the lower limit of {limit}.", { rate: rate(point.p), limit: rate(point.lcl) }) });
       }
     });
 
@@ -189,7 +192,7 @@
     shifts.forEach((run) => {
       const worse = side(run[0]) > 0;
       run.forEach((point) => point.signals.push({ rule: "run", worse }));
-      events.push({ rule: "run", worse, from: run[0], to: run.at(-1), text: `${run.length} days in a row ${worse ? "above" : "below"} the centre line.` });
+      events.push({ rule: "run", worse, from: run[0], to: run.at(-1), text: tx(worse ? "{n} days in a row above the centre line." : "{n} days in a row below the centre line.", { n: run.length }) });
     });
     // Six points each higher (or lower) than the one before. The turning
     // point of one trend is the first point of the next.
@@ -206,7 +209,7 @@
     trends.forEach((run) => {
       const worse = step(run[0], run[1]) > 0;
       run.forEach((point) => point.signals.push({ rule: "trend", worse }));
-      events.push({ rule: "trend", worse, from: run[0], to: run.at(-1), text: `${run.length} days in a row each ${worse ? "higher" : "lower"} than the one before.` });
+      events.push({ rule: "trend", worse, from: run[0], to: run.at(-1), text: tx(worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: run.length }) });
     });
     events.sort((a, b) => a.from.index - b.from.index);
 
@@ -217,7 +220,7 @@
   };
 
   const ruleName = (rule) => data.rules.find((item) => item.id === rule).name;
-  const signalText = (point) => point.signals.map((s) => `${ruleName(s.rule)} (${s.worse ? "worse" : "better"})`).join(", ");
+  const signalText = (point) => point.signals.map((s) => `${ruleName(s.rule)} (${direction(s.worse)})`).join(", ");
   const span = (event) => (event.from === event.to ? shortDate(event.from.date) : `${shortDate(event.from.date)} – ${shortDate(event.to.date)}`);
 
   // Round the axis to clean steps.
@@ -240,12 +243,12 @@
     const x = (i) => m.left + band * (i + 0.5);
     const y = (v) => m.top + h - (v / yMax) * h;
 
-    const root = svg("svg", { viewBox: `0 0 ${width} ${height}`, width, height, class: "sc-chart", role: "img", "aria-label": `Control chart of ${metric().toLowerCase()} rate by day. The table below lists every value.` });
+    const root = svg("svg", { viewBox: `0 0 ${width} ${height}`, width, height, class: "sc-chart", role: "img", "aria-label": tx("Control chart of {metric} rate by day. The table below lists every value.", { metric: lower(metric()) }) });
 
     for (let v = 0; v <= yMax + 1e-12; v += yStep) {
       root.append(svg("line", { x1: m.left, x2: m.left + w, y1: y(v), y2: y(v), class: "sc-grid" }));
       const label = svg("text", { x: m.left - 8, y: y(v) + 4, class: "sc-axis", "text-anchor": "end" });
-      label.textContent = `${(v * 100).toFixed(yStep * 100 < 0.1 ? 2 : yStep * 100 < 1 ? 1 : 0)}%`;
+      label.textContent = pct(v, yStep * 100 < 0.1 ? 2 : yStep * 100 < 1 ? 1 : 0);
       root.append(label);
     }
     const every = Math.max(1, Math.ceil(points.length / Math.floor(w / 64)));
@@ -261,7 +264,7 @@
       root.append(svg("line", { x1: at, x2: at, y1: m.top, y2: m.top + h, class: "sc-divider" }));
       if (width >= 480) {
         const label = svg("text", { x: at - 6, y: m.top + 12, class: "sc-axis", "text-anchor": "end" });
-        label.textContent = "Limits from here ←";
+        label.textContent = tx("Limits from here ←");
         root.append(label);
       }
     }
@@ -276,8 +279,8 @@
       label.textContent = text;
       root.append(label);
     };
-    endLabel("UCL", points.at(-1).ucl);
-    endLabel("Avg", pBar);
+    endLabel(tx("UCL"), points.at(-1).ucl);
+    endLabel(tx("Avg"), pBar);
 
     root.append(svg("path", { d: points.map((p, i) => `${i ? "L" : "M"}${x(i)},${y(p.p)}`).join(""), class: "sc-line" }));
     points.forEach((point, i) => {
@@ -318,8 +321,8 @@
       tooltip.replaceChildren(
         el("strong", "sc-tip-value", rate(point.p)),
         el("span", "sc-tip-date", shortDate(point.date)),
-        el("span", null, `${int.format(point.d)} of ${int.format(point.n)}`),
-        el("span", null, `Limits ${rate(point.lcl)} – ${rate(point.ucl)}`),
+        el("span", null, tx("{a} of {b}", { a: int.format(point.d), b: int.format(point.n) })),
+        el("span", null, tx("Limits {low} – {high}", { low: rate(point.lcl), high: rate(point.ucl) })),
       );
       if (point.signals.length) tooltip.append(el("span", "sc-tip-signal", signalText(point)));
       if (point.note) tooltip.append(el("span", "sc-tip-note", point.note));
@@ -341,7 +344,7 @@
 
   const legend = () => {
     const box = el("div", "sc-legend");
-    [["sc-key-line", `${metric()} rate`], ["sc-key-center", "Average"], ["sc-key-limit", "Control limits"], ["sc-key-worse", "Signal, worse"], ["sc-key-better", "Signal, better"]]
+    [["sc-key-line", tx("{metric} rate", { metric: metric() })], ["sc-key-center", tx("Average")], ["sc-key-limit", tx("Control limits")], ["sc-key-worse", tx("Signal, worse")], ["sc-key-better", tx("Signal, better")]]
       .forEach(([cls, text]) => {
         const item = el("span", "sc-legend-item");
         item.append(el("span", `sc-key ${cls}`), text);
@@ -358,24 +361,24 @@
     if (worse) parts.push(data.verdicts.badSpecial);
     if (better) parts.push(data.verdicts.goodSpecial);
     if (result.points.length < 12) parts.push(data.verdicts.short);
-    return { title: worse ? "Signals to investigate" : better ? "A real improvement" : "Stable: this is noise", text: parts.join(" ") };
+    return { title: worse ? tx("Signals to investigate") : better ? tx("A real improvement") : tx("Stable: this is noise"), text: parts.join(" ") };
   };
 
   const problemText = (result) => {
     const bad = result.events.find((e) => e.worse && e.rule === "beyond") || result.events.find((e) => e.worse);
     if (bad) return `${metric()}, ${span(bad)}: ${bad.text}`;
-    return `${metric()} run at ${rate(result.pBar)} on average and the process is stable: the level itself comes from the way the work is done.`;
+    return tx("{metric} run at {rate} on average and the process is stable: the level itself comes from the way the work is done.", { metric: metric(), rate: rate(result.pBar) });
   };
 
   const summaryText = (result) => {
     const v = verdict(result);
-    const lines = ["Control chart | Stiven Catalyst", "", `${metric()} out of ${unit().toLowerCase()}, ${plural(result.points.length, "day")} (${shortDate(result.points[0].date)} – ${shortDate(result.points.at(-1).date)})`];
-    lines.push(`Average ${rate(result.pBar)}${result.useBase ? ` over the first ${result.baseCount} days` : ""} · sigma level ${sigmaText(result.pBar)}`);
-    if (result.afterRate !== null) lines.push(`Since then: ${rate(result.afterRate)}`);
+    const lines = [`${tx("Control chart")} | Stiven Catalyst`, "", `${tx("{metric} out of {unit}", { metric: metric(), unit: lower(unit()) })}, ${days(result.points.length)} (${shortDate(result.points[0].date)} – ${shortDate(result.points.at(-1).date)})`];
+    lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${sigmaText(result.pBar)}`);
+    if (result.afterRate !== null) lines.push(`${tx("Since then")}: ${rate(result.afterRate)}`);
     lines.push("", `${v.title}. ${v.text}`);
     if (result.events.length) {
-      lines.push("", "Signals:");
-      result.events.forEach((e) => lines.push(`- ${span(e)}: ${ruleName(e.rule)}, ${e.worse ? "worse" : "better"}. ${e.text}`));
+      lines.push("", `${tx("Signals")}:`);
+      result.events.forEach((e) => lines.push(`- ${span(e)}: ${ruleName(e.rule)}, ${direction(e.worse)}. ${e.text}`));
     }
     return lines.join("\n");
   };
@@ -389,7 +392,7 @@
     const result = analyse();
 
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", `Control chart · ${metric()}`));
+    head.append(el("p", "kicker", `${tx("Control chart")} · ${metric()}`));
     const v = verdict(result);
     const title = el("h2");
     const [first, ...rest] = v.title.split(": ");
@@ -399,18 +402,18 @@
     results.append(head);
 
     const stats = el("div", "dl-stats");
-    stats.append(stat("Average rate", rate(result.pBar), result.useBase ? `first ${result.baseCount} days` : `${plural(result.points.length, "day")}`));
+    stats.append(stat(tx("Average rate"), rate(result.pBar), result.useBase ? tx("first {n} days", { n: result.baseCount }) : days(result.points.length)));
     if (result.afterRate !== null) {
       const change = (result.afterRate - result.pBar) / result.pBar;
-      stats.append(stat("Since then", rate(result.afterRate), `${change > 0 ? "+" : ""}${(change * 100).toFixed(0)}% against the first ${result.baseCount} days`));
+      stats.append(stat(tx("Since then"), rate(result.afterRate), tx("{change} against the first {n} days", { change: `${change > 0 ? "+" : ""}${pct(change, 0)}`, n: result.baseCount })));
     }
     const last = result.points.at(-1);
-    stats.append(stat("Latest day", rate(last.p), last.signals.length ? signalText(last) : "inside the limits, noise"));
-    stats.append(stat("Signals", String(result.events.length), result.events.length ? `${result.events.filter((e) => e.worse).length} worse, ${result.events.filter((e) => !e.worse).length} better` : "nothing to chase"));
-    stats.append(stat("Sigma level", sigmaText(result.pBar), "at the average rate"));
+    stats.append(stat(tx("Latest day"), rate(last.p), last.signals.length ? signalText(last) : tx("inside the limits, noise")));
+    stats.append(stat(tx("Signals"), String(result.events.length), result.events.length ? tx("{a} worse, {b} better", { a: result.events.filter((e) => e.worse).length, b: result.events.filter((e) => !e.worse).length }) : tx("nothing to chase")));
+    stats.append(stat(tx("Sigma level"), sigmaText(result.pBar), tx("at the average rate")));
     results.append(stats);
 
-    const chartPanel = panel(`${metric()} rate by day`, `Out of ${unit().toLowerCase()}. Hover a day for its numbers.`);
+    const chartPanel = panel(tx("{metric} rate by day", { metric: metric() }), tx("Out of {unit}. Hover a day for its numbers.", { unit: lower(unit()) }));
     chartPanel.classList.add("sc-chart-panel");
     chartPanel.append(legend());
     const wrap = el("div", "sc-chart-wrap");
@@ -422,16 +425,16 @@
     attachHover(wrap, drawn, result.points);
 
     const card = el("article", "result-card dl-focus");
-    card.append(el("p", "result-label", "What it says"));
+    card.append(el("p", "result-label", tx("What it says")));
     card.append(el("p", "sc-verdict", v.text));
     if (result.events.length) {
-      card.append(el("p", "result-label", "Signals"));
+      card.append(el("p", "result-label", tx("Signals")));
       const list = el("ul", "sc-signals");
       result.events.forEach((e) => {
         const item = el("li");
-        item.append(el("strong", null, `${span(e)} · ${ruleName(e.rule)}, ${e.worse ? "worse" : "better"}. `), e.text);
+        item.append(el("strong", null, `${span(e)} · ${ruleName(e.rule)}, ${direction(e.worse)}. `), e.text);
         const note = [...new Set(result.points.slice(e.from.index, e.to.index + 1).map((p) => p.note).filter(Boolean))].join("; ");
-        if (note) item.append(el("span", "sc-signal-note", ` Note: ${note}`));
+        if (note) item.append(el("span", "sc-signal-note", ` ${tx("Note")}: ${note}`));
         list.append(item);
       });
       card.append(list);
@@ -439,12 +442,12 @@
     results.append(card);
 
     const many = result.points.length > LOG_LIMIT;
-    const tablePanel = panel(many ? `The latest ${LOG_LIMIT} days` : "Every day", many ? "The same numbers as the chart. Download the CSV for every day." : "The same numbers as the chart.");
+    const tablePanel = panel(many ? tx("The latest {n} days", { n: LOG_LIMIT }) : tx("Every day"), many ? tx("The same numbers as the chart. Download the CSV for every day.") : tx("The same numbers as the chart."));
     const tableWrap = el("div", "dl-table-wrap");
     const table = el("table", "dl-table");
     const thead = el("thead");
     const headRow = el("tr");
-    ["Date", unit(), metric(), "Rate", "Lower", "Upper", "Signal", "Note"].forEach((text, i) => {
+    [tx("Date"), unit(), metric(), tx("Rate"), tx("Lower"), tx("Upper"), tx("Signal"), tx("Note")].forEach((text, i) => {
       const th = el("th", i && i < 6 ? "num" : null, text);
       th.scope = "col";
       headRow.append(th);
@@ -471,19 +474,19 @@
     logBody.replaceChildren();
     [...state.rows].reverse().slice(0, LOG_LIMIT).forEach((row) => {
       const tr = el("tr");
-      tr.append(el("td", "nowrap", row.date), el("td", "num", int.format(row.n)), el("td", "num", int.format(row.d)), el("td", "num", rate(row.d / row.n)), el("td", "dl-note", row.note || ""));
+      tr.append(el("td", "nowrap", showDate(row.date)), el("td", "num", int.format(row.n)), el("td", "num", int.format(row.d)), el("td", "num", rate(row.d / row.n)), el("td", "dl-note", row.note || ""));
       const cell = el("td");
       const remove = el("button", "dl-remove", "×");
       remove.type = "button";
       remove.dataset.remove = row.date;
-      remove.setAttribute("aria-label", `Remove ${row.date}`);
+      remove.setAttribute("aria-label", tx("Remove {name}", { name: showDate(row.date) }));
       cell.append(remove);
       tr.append(cell);
       logBody.append(tr);
     });
     logWrap.hidden = !state.rows.length;
     logEmpty.hidden = state.rows.length > 0;
-    logCount.textContent = state.rows.length ? `${plural(state.rows.length, "day")}${shownNote(state.rows.length)}` : "";
+    logCount.textContent = state.rows.length ? `${days(state.rows.length)}${shownNote(state.rows.length)}` : "";
   };
 
   const render = () => {
@@ -507,7 +510,7 @@
     const form = entry.elements;
     const row = { date: form.date.value, n: Math.round(parseNumber(form.n.value)), d: Math.round(parseNumber(form.d.value)), note: form.note.value.trim() };
     if (!row.date || !(row.n > 0) || !(row.d >= 0) || row.d > row.n) {
-      flash(entryStatus, "Check the numbers: defects cannot be more than handled.");
+      flash(entryStatus, tx("Check the numbers: defects cannot be more than handled."));
       return;
     }
     const replaced = state.rows.some((item) => item.date === row.date);
@@ -521,21 +524,21 @@
     form.n.value = "";
     form.d.value = "";
     form.note.value = "";
-    flash(entryStatus, `${replaced ? "Replaced" : "Added"} ${row.date}: ${rate(row.d / row.n)}.`);
+    flash(entryStatus, tx(replaced ? "Replaced {date}: {rate}." : "Added {date}: {rate}.", { date: showDate(row.date), rate: rate(row.d / row.n) }));
     form.n.focus();
   });
 
   root.querySelector("[data-import]").addEventListener("click", () => {
     const { added, skipped } = importRows(pasteArea.value);
     if (!added.length) {
-      flash(importStatus, "No rows found. Check the order: date, handled, defects.");
+      flash(importStatus, tx("No rows found. Check the order: date, handled, defects."));
       return;
     }
     upsert(added);
     save();
     render();
     pasteArea.value = "";
-    flash(importStatus, `Imported ${plural(added.length, "day")}${skipped ? `, skipped ${skipped} that did not add up` : ""}.`);
+    flash(importStatus, `${tx("Imported {rows}", { rows: days(added.length) })}${skipped ? tx(", skipped {n} that did not add up", { n: skipped }) : ""}.`);
   });
 
   logBody.addEventListener("click", (event) => {
@@ -560,7 +563,7 @@
   });
 
   root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!state.rows.length || !window.confirm("Clear all days from the chart?")) return;
+    if (!state.rows.length || !window.confirm(tx("Clear all days from the chart?"))) return;
     state.rows = [];
     save();
     render();
@@ -569,11 +572,11 @@
   root.querySelector("[data-csv]").addEventListener("click", () => {
     if (!state.rows.length) return;
     const result = state.rows.length > 1 ? analyse() : null;
-    downloadCsv("control-chart", [
-      ["Date", unit(), metric(), "Rate %", "Average %", "Lower limit %", "Upper limit %", "Signal", "Note"],
+    downloadCsv(data.csv || "control-chart", [
+      [tx("Date"), unit(), metric(), tx("Rate %"), tx("Average %"), tx("Lower limit %"), tx("Upper limit %"), tx("Signal"), tx("Note")],
       ...state.rows.map((row, i) => {
         const point = result?.points[i];
-        const fixed = (value) => (value == null ? "" : (value * 100).toFixed(3));
+        const fixed = (value) => (value == null ? "" : (value * 100).toFixed(3).replace(".", LANG === "de" ? "," : "."));
         return [row.date, row.n, row.d, fixed(row.d / row.n), fixed(result?.pBar), fixed(point?.lcl), fixed(point?.ucl), point ? signalText(point) : "", row.note];
       }),
     ]);

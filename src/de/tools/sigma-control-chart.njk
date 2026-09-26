@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Sigma & Regelkarte
+description: "Ein Sigma-Rechner, ein Rechner für perfekte Lieferung und eine p-Karte, die zeigt, ob die Zahl von heute ein echtes Signal oder normales Rauschen ist. Kostenlos, privat, im Browser."
+activeNav: /de/tools.html
+permalink: /de/tools/sigma-control-chart/
+alt: /tools/sigma-control-chart/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloses Tool · Six Sigma</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1>Sigma &amp; Regel&shy;karte</h1>
+  <p class="lede">Rechnen Sie Fehler in ein Sigma-Niveau um, kombinieren Sie pünktlich, unbeschädigt und vollständig zu einer Zahl für die perfekte Lieferung, und sehen Sie auf einer Regelkarte, ob ein schlechter Tag ein Signal ist oder nur Rauschen.</p>
+</section>
+
+{% set cfg = de.sigmaChart %}
+{% include "partials/sigma-chart.njk" %}

@@ -2,7 +2,7 @@
   const dataEl = document.getElementById("dmaic-data");
   if (!dataEl || !window.ToolKit) return;
 
-  const { write, loadState } = window.ToolKit;
+  const { tx, write, loadState } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const state = loadState(KEY, { answers: {}, checks: {}, charter: {} });
@@ -26,7 +26,7 @@
     }
     feedback.hidden = false;
     feedback.className = `dm-feedback ${isRight(module, index) ? "is-right" : "is-wrong"}`;
-    feedback.textContent = isRight(module, index) ? `Right. ${module.quiz[index].why}` : "Not quite. Read the step again and try another answer.";
+    feedback.textContent = isRight(module, index) ? `${tx("Right.")} ${module.quiz[index].why}` : tx("Not quite. Read the step again and try another answer.");
   };
 
   const renderProgress = () => {
@@ -40,12 +40,12 @@
       document.querySelector(`[data-step="${module.id}"]`)?.classList.toggle("is-done", complete);
       const score = document.querySelector(`[data-quiz="${module.id}"] [data-score]`);
       const answered = module.quiz.filter((_, i) => state.answers[`${module.id}-${i}`] !== undefined).length;
-      score.textContent = answered ? `${moduleRight} of ${module.quiz.length} right${complete ? ": step complete." : "."}` : "";
+      score.textContent = answered ? tx(complete ? "{a} of {b} right: step complete." : "{a} of {b} right.", { a: moduleRight, b: module.quiz.length }) : "";
     });
     document.querySelector("[data-progress-bar]").style.width = `${(right / total) * 100}%`;
     document.querySelector("[data-progress-text]").textContent = right
-      ? `${right} of ${total} questions right · ${done} of ${data.modules.length} steps complete${done === data.modules.length ? ". Well done: now start your own project below." : ""}`
-      : "Answer the questions to track your progress.";
+      ? `${tx("{a} of {b} questions right · {c} of {d} steps complete", { a: right, b: total, c: done, d: data.modules.length })}${done === data.modules.length ? tx(". Well done: now start your own project below.") : ""}`
+      : tx("Answer the questions to track your progress.");
   };
 
   data.modules.forEach((module) => {
@@ -104,7 +104,7 @@
   const note = (message) => {
     status.textContent = message;
     clearTimeout(note.timer);
-    note.timer = setTimeout(() => { status.textContent = "Your charter is kept only in this browser."; }, 2200);
+    note.timer = setTimeout(() => { status.textContent = tx("Your charter is kept only in this browser."); }, 2200);
   };
 
   charter.querySelector("[data-charter-print]").addEventListener("click", () => {
@@ -114,7 +114,7 @@
   window.addEventListener("afterprint", () => document.body.classList.remove("print-charter"));
 
   charter.querySelector("[data-charter-copy]").addEventListener("click", async () => {
-    const text = ["DMAIC project charter | Stiven Catalyst", "", ...fields.map((f) => `${f.label}: ${f.input.value.trim() || "-"}`)].join("\n");
+    const text = [`${tx("DMAIC project charter")} | Stiven Catalyst`, "", ...fields.map((f) => `${f.label}: ${f.input.value.trim() || "-"}`)].join("\n");
     try {
       await navigator.clipboard.writeText(text);
     } catch {
@@ -125,21 +125,21 @@
       document.execCommand("copy");
       area.remove();
     }
-    note("Copied to the clipboard.");
+    note(tx("Copied to the clipboard."));
   });
 
   charter.querySelector("[data-charter-example]").addEventListener("click", () => {
-    if (fields.some((f) => f.input.value.trim()) && !window.confirm("Replace your charter with the course case?")) return;
+    if (fields.some((f) => f.input.value.trim()) && !window.confirm(tx("Replace your charter with the course case?"))) return;
     fields.forEach((f) => { f.input.value = data.charterExample[f.name] || ""; });
     saveCharter();
-    note("Filled with the course case.");
+    note(tx("Filled with the course case."));
   });
 
   charter.querySelector("[data-charter-clear]").addEventListener("click", () => {
-    if (!window.confirm("Clear the whole charter?")) return;
+    if (!window.confirm(tx("Clear the whole charter?"))) return;
     fields.forEach((f) => { f.input.value = ""; });
     saveCharter();
-    note("Charter cleared.");
+    note(tx("Charter cleared."));
     fields[0].input.focus();
   });
 

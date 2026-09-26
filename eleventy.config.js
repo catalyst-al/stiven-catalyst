@@ -3,7 +3,9 @@ import fs from "node:fs";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // German interface texts, keyed by the English text (also used by the tools' scripts).
-const readGerman = () => JSON.parse(fs.readFileSync("src/_data/de/ui.json", "utf8"));
+// Read once per build; a rebuild in watch mode reads the file again.
+let german = null;
+const readGerman = () => (german ??= JSON.parse(fs.readFileSync("src/_data/de/ui.json", "utf8")));
 
 const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug);
 
@@ -37,9 +39,12 @@ export default function (eleventyConfig) {
 
   // {{ "Add to log" | t(lang) }}: the German text on German pages, else the English one.
   eleventyConfig.addFilter("t", (text, lang) => (lang === "de" ? readGerman()[text] ?? text : text));
+  // Links between tools stay in the page's language: /tools/x/ becomes /de/tools/x/.
+  eleventyConfig.addFilter("local", (url, lang) => (lang === "de" && /^\/tools(\/|\.html)/.test(url) ? `/de${url}` : url));
   // Lower case mid-sentence in English only: German nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
+  eleventyConfig.on("eleventy.before", () => { german = null; });
 
   eleventyConfig.addFilter("readableDate", (date) =>
     new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
