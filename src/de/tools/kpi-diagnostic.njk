@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: KPI-Diagnose
+description: "Eine Zwei-Minuten-Diagnose für eine Kennzahl, die rot geworden ist: Liegt die Ursache bei Klarheit, Können, Kapazität, Prozessdesign oder Verantwortung?"
+activeNav: /de/tools.html
+permalink: /de/tools/kpi-diagnostic/
+alt: /tools/kpi-diagnostic/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloses Tool · 2 Minuten</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1>KPI-Diagnose</h1>
+  <p class="lede">Eine Zahl ist rot geworden. Bevor Sie stärker darauf drücken, finden Sie heraus, wo der Prozess zuerst instabil wurde. Bewerten Sie zehn Aussagen über die Arbeit hinter der Zahl.</p>
+</section>
+
+{% set cfg = de.kpiDiagnostic %}
+{% include "partials/kpi-diagnostic.njk" %}

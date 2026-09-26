@@ -2,7 +2,8 @@
   const form = document.querySelector("[data-worksheet]");
   if (!form) return;
 
-  const KEY = "sc-five-whys";
+  const tx = window.ToolKit?.tx || ((text) => text);
+  const KEY = form.dataset.key || "sc-five-whys";
   const MAX_WHYS = 9;
   const list = form.querySelector("[data-whys]");
   const addButton = form.querySelector("[data-add-why]");
@@ -28,7 +29,7 @@
     item.className = "field why";
     const label = document.createElement("label");
     label.htmlFor = `ws-why-${number}`;
-    label.textContent = `Why ${number}?`;
+    label.textContent = tx("Why {n}?", { n: number });
     const input = document.createElement("input");
     input.id = `ws-why-${number}`;
     input.name = `why${number}`;
@@ -43,7 +44,7 @@
   // Suggest the deepest answer so far as the root cause.
   const suggestCause = () => {
     const last = whyInputs().map((input) => input.value.trim()).filter(Boolean).pop();
-    causeField.placeholder = last ? `Suggested: ${last}` : "The last answer that you can act on";
+    causeField.placeholder = last ? tx("Suggested: {text}", { text: last }) : tx("The last answer that you can act on");
   };
 
   const save = () => {
@@ -69,17 +70,18 @@
 
   const asText = () => {
     const value = (name) => form.elements[name]?.value.trim() || "-";
-    const lines = ["5 Whys | Stiven Catalyst", "", `Problem: ${value("problem")}`, ""];
+    const due = window.ToolKit ? window.ToolKit.showDate(value("due")) : value("due");
+    const lines = ["5 Whys | Stiven Catalyst", "", `${tx("Problem")}: ${value("problem")}`, ""];
     whyInputs().forEach((input, index) => {
-      if (input.value.trim()) lines.push(`Why ${index + 1}: ${input.value.trim()}`);
+      if (input.value.trim()) lines.push(`${tx("Why {n}", { n: index + 1 })}: ${input.value.trim()}`);
     });
     lines.push(
       "",
-      `Root cause: ${value("cause")}`,
-      `Countermeasure: ${value("action")}`,
-      `Owner: ${value("owner")}`,
-      `Due: ${value("due")}`,
-      `Check: ${value("check")}`
+      `${tx("Root cause")}: ${value("cause")}`,
+      `${tx("Countermeasure")}: ${value("action")}`,
+      `${tx("Owner")}: ${value("owner")}`,
+      `${tx("Due")}: ${due}`,
+      `${tx("Check")}: ${value("check")}`
     );
     return lines.join("\n");
   };
@@ -87,7 +89,7 @@
   const flash = (message) => {
     status.textContent = message;
     clearTimeout(flash.timer);
-    flash.timer = setTimeout(() => { status.textContent = "Your draft is kept only in this browser."; }, 2200);
+    flash.timer = setTimeout(() => { status.textContent = tx("Your draft is kept only in this browser."); }, 2200);
   };
 
   form.addEventListener("input", save);
@@ -112,17 +114,17 @@
       document.execCommand("copy");
       area.remove();
     }
-    flash("Copied to the clipboard.");
+    flash(tx("Copied to the clipboard."));
   });
 
   form.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!window.confirm("Clear the whole worksheet?")) return;
+    if (!window.confirm(tx("Clear the whole worksheet?"))) return;
     form.reset();
     whyInputs().slice(5).forEach((input) => input.closest("li").remove());
     addButton.hidden = false;
     forget();
     suggestCause();
-    flash("Worksheet cleared.");
+    flash(tx("Worksheet cleared."));
     form.elements.problem.focus();
   });
 
@@ -132,7 +134,7 @@
   const incoming = new URLSearchParams(location.search).get("problem")?.trim();
   if (incoming) {
     const current = form.elements.problem.value.trim();
-    if (current !== incoming && (!current || window.confirm(`Start a new worksheet with this problem?\n\n${incoming}`))) {
+    if (current !== incoming && (!current || window.confirm(`${tx("Start a new worksheet with this problem?")}\n\n${incoming}`))) {
       form.reset();
       whyInputs().slice(5).forEach((input) => input.closest("li").remove());
       addButton.hidden = false;

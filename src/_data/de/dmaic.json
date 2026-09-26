@@ -1,0 +1,709 @@
+{
+  "storageKey": "sc-dmaic-de",
+  "case": {
+    "title": "Der Fall: Schäden im Warenausgang eines Paketzentrums",
+    "text": "Ein Paketzentrum versendet etwa 18.400 Einheiten pro Woche. Kunden beschweren sich über gequetschte Pakete, und die Schadensquote ist fast doppelt so hoch wie zugesagt. Begleiten Sie ein Verbesserungsprojekt durch alle fünf Schritte, mit denselben Zahlen, die Sie in den Tools als Beispiel laden können."
+  },
+  "modules": [
+    {
+      "id": "define",
+      "letter": "D",
+      "name": "Define (Definieren)",
+      "goal": "Einigen Sie sich, welches Problem Sie lösen, für wen, wie Sie es messen und was nicht dazugehört.",
+      "output": "Ein Projektauftrag",
+      "ideas": [
+        [
+          "Stimme des Kunden → CTQ",
+          "Beginnen Sie mit dem, was der Kunde bemerkt, und machen Sie daraus etwas Messbares: die qualitätskritische Anforderung (Critical to Quality)."
+        ],
+        [
+          "SIPOC",
+          "Eine Reihe von Kästchen: Lieferanten (Suppliers), Eingaben (Inputs), Prozess (fünf bis sieben Schritte), Ergebnisse (Outputs), Kunden (Customers). Sie legt die Grenzen des Projekts fest, bevor jemand über Details streitet."
+        ],
+        [
+          "Problembeschreibung",
+          "Was, wo, seit wann, wie viel, und die Lücke zum Ziel. Noch keine Ursache und keine Lösung: Die kommen später, aus den Daten."
+        ]
+      ],
+      "case": [
+        [
+          "Problem",
+          "In den Wochen 36 bis 38 verließen 0,57 % der Einheiten im Warenausgang das Zentrum beschädigt (104 von 18.400 in Woche 38), zugesagt waren dem Kunden 0,30 %. Gutschriften kosten etwa 1.150 € pro Woche."
+        ],
+        [
+          "CTQ",
+          "Das Paket kommt unbeschädigt an: kein gequetschter, gerissener oder nasser Außenkarton."
+        ],
+        [
+          "Umfang",
+          "Dazu gehört: vom Pickplatz bis zur Übergabe an den Fahrer. Nicht dazu gehört: Hauptlauf und Verpackung des Lieferanten."
+        ],
+        [
+          "Ziel",
+          "0,30 % oder weniger bis Woche 46, ohne längere Ladezeiten."
+        ]
+      ],
+      "mistakes": [
+        "Die Lösung in das Problem schreiben: „Wir brauchen mehr Schulung.“",
+        "Ein so großer Umfang, dass das Projekt nie endet.",
+        "Ein Problem ohne Zahl, sodass niemand sagen kann, wann es gelöst ist."
+      ],
+      "tools": [
+        [
+          "KPI-Diagnose",
+          "/tools/kpi-diagnostic/",
+          "um zu prüfen, ob die Zahl für alle klar ist"
+        ],
+        [
+          "Projektauftrag",
+          "#dm-charter",
+          "unten auf dieser Seite"
+        ]
+      ],
+      "checklist": [
+        "Das Problem hat eine Zahl, einen Zeitraum und eine Lücke zum Ziel.",
+        "Das CTQ ist aus Sicht des Kunden geschrieben.",
+        "Was dazugehört und was nicht, ist vereinbart.",
+        "Ein Sponsor hat den Projektauftrag unterschrieben."
+      ],
+      "quiz": [
+        {
+          "q": "Welche Problembeschreibung ist am besten?",
+          "options": [
+            "Die Verlader sind nachlässig und brauchen mehr Schulung.",
+            "Im Warenausgang gibt es zu viele Schäden.",
+            "In den Wochen 36–38 waren 0,57 % der Einheiten im Warenausgang beschädigt, bei einem Ziel von 0,30 %; das kostet etwa 1.150 € pro Woche.",
+            "Wir brauchen einen neuen Stapelstandard."
+          ],
+          "answer": 2,
+          "why": "Sie sagt was, wann, wie viel und wie groß die Lücke ist, und sie rät weder die Ursache noch die Lösung."
+        },
+        {
+          "q": "Wofür steht CTQ?",
+          "options": [
+            "Cost to Quality",
+            "Critical to Quality",
+            "Control the Queue",
+            "Check the Quantity"
+          ],
+          "answer": 1,
+          "why": "Ein CTQ macht aus dem, was dem Kunden wichtig ist, eine Anforderung, die man messen kann."
+        },
+        {
+          "q": "Wofür ist ein SIPOC da?",
+          "options": [
+            "Um den Prozess grob darzustellen, mit seinen Lieferanten und Kunden",
+            "Um das Sigma-Niveau zu berechnen",
+            "Um die Grundursache zu finden",
+            "Um Eingriffsgrenzen festzulegen"
+          ],
+          "answer": 0,
+          "why": "Ein SIPOC legt die Grenzen des Prozesses fest, bevor das Projekt mit dem Messen beginnt."
+        }
+      ],
+      "nav": "Define"
+    },
+    {
+      "id": "measure",
+      "letter": "M",
+      "name": "Measure (Messen)",
+      "goal": "Finden Sie heraus, wie der Prozess heute läuft, mit Daten, denen Sie trauen können, bevor Sie etwas ändern.",
+      "output": "Eine Ausgangsbasis",
+      "ideas": [
+        [
+          "Operationale Definition",
+          "Schreiben Sie genau auf, was zählt, mit Fotos. „Beschädigt“ bedeutet für verschiedene Leute Verschiedenes, bis es aufgeschrieben ist."
+        ],
+        [
+          "Datenerhebungsplan",
+          "Was wird erfasst, wo, von wem, wie oft und in welchem Format. Erfassen Sie Prozessschritt und Ursache in dem Moment, in dem ein Problem gefunden wird."
+        ],
+        [
+          "Die Messung prüfen",
+          "Lassen Sie zwei Personen dieselben zwanzig Fälle beurteilen. Wenn sie sich nicht einig sind, verbessern Sie die Definition, bevor Sie den Daten trauen."
+        ],
+        [
+          "Ausgangsbasis",
+          "Das aktuelle Niveau als Quote, DPMO und Sigma-Niveau, über zwei bis vier Wochen."
+        ]
+      ],
+      "case": [
+        [
+          "Definition",
+          "Eine Einheit ist beschädigt, wenn der Außenkarton so gequetscht, gerissen oder nass ist, dass der Kunde es bemerkt, gefunden irgendwo zwischen Pickplatz und Übergabe an den Fahrer."
+        ],
+        [
+          "Prüfung",
+          "Zwei Schichtleiter beurteilten dieselben 20 Kartons und waren sich bei 17 einig. Drei waren „leicht eingedrückt“: Die Definition bekam ein Foto von dem, was zählt und was nicht."
+        ],
+        [
+          "Ausgangsbasis",
+          "104 beschädigte von 18.400 Einheiten: 0,57 %, DPMO 5.652, Sigma-Niveau 4,03."
+        ]
+      ],
+      "mistakes": [
+        "Den Prozess ändern, während man ihn noch misst.",
+        "Einer Zahl trauen, die zwei Leute unterschiedlich zählen würden.",
+        "Nur am Ende der Kette messen, sodass man nie sieht, wo es beginnt."
+      ],
+      "tools": [
+        [
+          "Schadenskontrolle",
+          "/tools/damage-control/",
+          "um nach Prozessschritt und Ursache zu erfassen"
+        ],
+        [
+          "Sigma-Rechner",
+          "/tools/sigma-control-chart/",
+          "für DPMO und Sigma-Niveau"
+        ]
+      ],
+      "checklist": [
+        "Die Definition ist aufgeschrieben, mit Fotos von dem, was zählt.",
+        "Alle erfassen gleich, mit Prozessschritt und Ursache.",
+        "Es gibt Daten aus mindestens zwei Wochen.",
+        "Die Ausgangsbasis ist als Quote, DPMO und Sigma-Niveau aufgeschrieben."
+      ],
+      "quiz": [
+        {
+          "q": "Warum schreibt man eine operationale Definition?",
+          "options": [
+            "Damit verschiedene Leute dasselbe auf dieselbe Weise zählen",
+            "Weil der Auditor danach fragt",
+            "Damit die Zahl besser aussieht",
+            "Um das Projekt zu verkürzen"
+          ],
+          "answer": 0,
+          "why": "Ohne sie kann eine Änderung der Zahl einfach bedeuten, dass jemand anderes zählt."
+        },
+        {
+          "q": "104 beschädigte Einheiten von 18.400, eine Fehlermöglichkeit pro Einheit. Wie hoch ist der DPMO?",
+          "options": [
+            "104",
+            "0,57",
+            "5.652",
+            "56.522"
+          ],
+          "answer": 2,
+          "why": "104 ÷ 18.400 × 1.000.000 = 5.652 Fehler pro Million."
+        },
+        {
+          "q": "Zwei Schichtleiter beurteilen dieselben 20 Kartons und sind sich bei fünf nicht einig. Was kommt zuerst?",
+          "options": [
+            "Trotzdem mit dem Verbessern beginnen",
+            "Den Durchschnitt ihrer Antworten nehmen",
+            "Definition und Messung verbessern, bevor man den Daten traut",
+            "Die Antworten des strengeren Schichtleiters nehmen"
+          ],
+          "answer": 2,
+          "why": "Eine Messung, die man nicht wiederholen kann, versteckt später Verbesserungen oder erfindet welche."
+        }
+      ],
+      "nav": "Measure"
+    },
+    {
+      "id": "analyze",
+      "letter": "A",
+      "name": "Analyze (Analysieren)",
+      "goal": "Finden Sie die wenigen Grundursachen hinter dem größten Teil des Problems, und beweisen Sie sie mit Daten statt mit Meinungen.",
+      "output": "Bestätigte Grundursachen",
+      "ideas": [
+        [
+          "Pareto",
+          "Sortieren Sie die Ursachen nach Größe. Meist tragen zwei oder drei etwa 80 % des Problems: die wenigen Wesentlichen."
+        ],
+        [
+          "Aufteilen",
+          "Teilen Sie die Daten nach Prozessschritt, Schicht, Uhrzeit, Produkt oder Tour auf. Probleme verstecken sich in Durchschnitten."
+        ],
+        [
+          "Hingehen und schauen",
+          "Beobachten Sie die Arbeit dort, wo die Zahl entsteht, zu der Zeit, in der es schiefgeht."
+        ],
+        [
+          "5 Whys und das Fischgrät-Diagramm",
+          "Fragen Sie „Warum?“, bis Sie bei etwas im Prozess ankommen, das Sie ändern können. Das Fischgrät-Diagramm prüft Mensch, Methode, Maschine, Material, Messung und Umfeld."
+        ],
+        [
+          "Allgemeine oder besondere Ursache",
+          "Eine Regelkarte zeigt Ihnen, ob Sie auf das normale Niveau des Prozesses schauen oder auf ein paar ungewöhnliche Tage."
+        ]
+      ],
+      "case": [
+        [
+          "Pareto",
+          "Stapeln 56 %, Ladungssicherung 14 %, Handhabung 11 %: Drei Ursachen tragen 81 % der Schäden."
+        ],
+        [
+          "Wo und wann",
+          "63 % werden bei der Verladung gefunden, 60 % in der Spätschicht, das meiste in der Abfahrtswelle um 11:00."
+        ],
+        [
+          "Vor Ort",
+          "In der späten Welle bauen die Verlader die Wände schnell und legen schwere Pakete oben drauf, um Lücken zu füllen. An der Rampe gibt es keine Stapelregel."
+        ],
+        [
+          "Beweis",
+          "Die Schäden pro 1.000 Einheiten sind in den Spitzen-Ladeslots 2,4-mal höher als in den anderen. Die Regelkarte zeigt keine besonderen Tage: Das Niveau kommt von der Methode."
+        ]
+      ],
+      "mistakes": [
+        "Bei einer Person stehen bleiben: „Der Verlader war nachlässig.“",
+        "Die lauteste Beschwerde beheben statt des größten Balkens.",
+        "Eine Meinung als Grundursache behandeln, ohne sie in den Daten zu prüfen."
+      ],
+      "tools": [
+        [
+          "Schadenskontrolle",
+          "/tools/damage-control/",
+          "für das Pareto und die Matrix aus Prozessschritt und Schadensart"
+        ],
+        [
+          "5 Whys",
+          "/tools/five-whys/",
+          "um zu einer Ursache zu kommen, die Sie ändern können"
+        ],
+        [
+          "Regelkarte",
+          "/tools/sigma-control-chart/",
+          "um allgemeine von besonderen Ursachen zu unterscheiden"
+        ]
+      ],
+      "checklist": [
+        "Das Pareto zeigt die wenigen Wesentlichen.",
+        "Die wichtigste Ursache wurde vor Ort gesehen, zu der Zeit, in der sie auftritt.",
+        "Die Grundursache liegt im Prozess, nicht in einer Person.",
+        "Die Daten bestätigen es: Ursache und Problem bewegen sich gemeinsam."
+      ],
+      "quiz": [
+        {
+          "q": "Das Pareto zeigt Stapeln 56 %, Ladungssicherung 14 %, Handhabung 11 % und vier andere Ursachen 19 %. Wo beginnen Sie?",
+          "options": [
+            "Mit allen sieben gleichzeitig",
+            "Mit Stapeln, dann Ladungssicherung: zusammen 70 %",
+            "Mit der kleinsten, weil es am schnellsten geht",
+            "Mit Handhabung, weil es um Menschen geht"
+          ],
+          "answer": 1,
+          "why": "Die wenigen Wesentlichen tragen den größten Teil des Problems. Sieben kleine Projekte gleichzeitig werden selten fertig."
+        },
+        {
+          "q": "Ist „Der Verlader war nachlässig“ eine Grundursache?",
+          "options": [
+            "Ja, es nennt, wer es war",
+            "Ja, wenn es zweimal passiert ist",
+            "Noch nicht: Fragen Sie, warum der Prozess es möglich gemacht hat",
+            "Nein, weil Verlader nie die Ursache sind"
+          ],
+          "answer": 2,
+          "why": "Menschen arbeiten in einem Prozess. Fragen Sie, was den falschen Weg schneller oder einfacher gemacht hat als den richtigen."
+        },
+        {
+          "q": "Die Regelkarte zeigt keine Signale, aber das Niveau ist zu hoch. Was bedeutet das?",
+          "options": [
+            "Die Daten sind falsch",
+            "Es muss sich nichts ändern",
+            "Den einen schlechten Tag finden und beheben",
+            "Das Niveau kommt vom Prozess selbst: Ändern Sie die Methode, jagen Sie nicht einzelnen Tagen hinterher"
+          ],
+          "answer": 3,
+          "why": "Das ist Streuung aus allgemeinen Ursachen. Nur eine Änderung an der Art, wie gearbeitet wird, bewegt das Niveau."
+        }
+      ],
+      "nav": "Analyze"
+    },
+    {
+      "id": "improve",
+      "letter": "I",
+      "name": "Improve (Verbessern)",
+      "goal": "Entwickeln, testen und beweisen Sie eine Maßnahme, die die Grundursache beseitigt.",
+      "output": "Eine bewiesene Maßnahme",
+      "ideas": [
+        [
+          "Erst Optionen, dann Auswahl",
+          "Sammeln Sie mehrere Maßnahmen und wählen Sie nach Wirkung und Aufwand. Die erste Idee ist selten die beste."
+        ],
+        [
+          "Poka-Yoke",
+          "Machen Sie den Fehler schwer: Layout, Markierungen, Vorrichtungen und Voreinstellungen statt Erinnerungen."
+        ],
+        [
+          "Standardarbeit",
+          "Schreiben Sie den neuen Weg als kurzen, bildhaften Standard auf, dem eine neue Person am ersten Tag folgen kann."
+        ],
+        [
+          "Pilot",
+          "Testen Sie klein, an einer Rampe oder in einer Schicht, lange genug, um die Wirkung zu sehen. Planen, tun, prüfen, handeln (PDCA)."
+        ]
+      ],
+      "case": [
+        [
+          "Maßnahmen",
+          "Ein Stapelbild an jeder Rampe (schwer unten, zerbrechlich oben, keine Lücken), Bodenzonen im Fahrzeug für schwere Pakete, Sperrstangen nach der letzten Wand mit Foto, und zehn Minuten mehr für die Spitzen-Ladeslots."
+        ],
+        [
+          "Pilot",
+          "Rampen 3 und 4, zwei Wochen, dieselbe Definition und dasselbe Protokoll."
+        ],
+        [
+          "Ergebnis",
+          "Die Schäden sanken von 0,57 % auf 0,31 %. Die Regelkarte zeigt zehn Tage hintereinander unter der alten Mittellinie. Die Ladezeit stieg um zwei Minuten pro Tour: vom Sponsor akzeptiert."
+        ]
+      ],
+      "mistakes": [
+        "Eine Erinnerung in der Einweisung statt einer Änderung an der Arbeit.",
+        "Überall einführen, bevor der Pilot etwas bewiesen hat.",
+        "Nebenwirkungen auf andere Zahlen ignorieren, etwa auf die Ladezeit."
+      ],
+      "tools": [
+        [
+          "Checks vor Ort",
+          "/tools/damage-control/",
+          "in der Schadenskontrolle, um zu sehen, ob der Standard hält"
+        ],
+        [
+          "Regelkarte",
+          "/tools/sigma-control-chart/",
+          "mit Grenzen aus der Zeit vor der Änderung"
+        ]
+      ],
+      "checklist": [
+        "Die Maßnahme greift die bestätigte Grundursache an.",
+        "Sie wurde klein getestet, bevor sie eingeführt wurde.",
+        "Vorher und nachher werden mit derselben Definition verglichen.",
+        "Nebenwirkungen auf andere Zahlen wurden geprüft."
+      ],
+      "quiz": [
+        {
+          "q": "Welche Maßnahme verhindert am besten, dass schwere Pakete oben landen?",
+          "options": [
+            "Die Verlader in jeder Einweisung daran erinnern",
+            "Ein Stapelbild und Bodenzonen, damit Schweres von vornherein unten liegt",
+            "Nach jedem Schaden ein Abmahnungsschreiben",
+            "Eine zusätzliche Kontrolle vor der Abfahrt"
+          ],
+          "answer": 1,
+          "why": "Erinnerungen verblassen, und Kontrollen finden den Schaden erst, wenn er passiert ist. Bauen Sie den richtigen Weg in die Arbeit ein."
+        },
+        {
+          "q": "Warum testet man mit einem Pilot, bevor man einführt?",
+          "options": [
+            "Um günstig zu lernen und die Wirkung zu beweisen, bevor man alles ändert",
+            "Weil der Sponsor danach gefragt hat",
+            "Um die Entscheidung hinauszuzögern",
+            "Es ist nicht nötig, wenn die Idee gut ist"
+          ],
+          "answer": 0,
+          "why": "Ein Pilot zeigt mit wenig Aufwand, ob die Änderung wirkt und was sie sonst noch ändert."
+        },
+        {
+          "q": "Nach dem Pilot sanken die Schäden, aber die Ladezeit stieg um sechs Minuten pro Tour. Was jetzt?",
+          "options": [
+            "Ignorieren: Die Schäden waren das Ziel",
+            "Das Projekt stoppen",
+            "Die Nebenwirkung anschauen und anpassen, bevor man einführt",
+            "Einführen und hoffen, dass es sich einpendelt"
+          ],
+          "answer": 2,
+          "why": "Eine Lösung, die eine andere Zahl kaputt macht, wird nicht überleben. Passen Sie an und entscheiden Sie dann mit dem Sponsor."
+        }
+      ],
+      "nav": "Improve"
+    },
+    {
+      "id": "control",
+      "letter": "C",
+      "name": "Control (Steuern)",
+      "goal": "Halten Sie den Gewinn: Machen Sie den neuen Weg zum Standard, beobachten Sie ihn und übergeben Sie ihn an den Prozessverantwortlichen.",
+      "output": "Ein Kontrollplan und eine Übergabe",
+      "ideas": [
+        [
+          "Standard und Schulung",
+          "Nehmen Sie den neuen Weg in die Arbeitsanweisung und in die Einarbeitung auf, damit er nicht vom Projektteam abhängt."
+        ],
+        [
+          "Kontrollplan",
+          "Was wird gemessen, wie oft, von wem, und was ist zu tun, wenn ein Signal erscheint: der Reaktionsplan."
+        ],
+        [
+          "Regelkarte",
+          "Berechnen Sie die Grenzen vom neuen stabilen Niveau aus neu und achten Sie auf Signale, nicht auf einzelne schlechte Tage."
+        ],
+        [
+          "Das Projekt abschließen",
+          "Übergeben Sie an den Prozessverantwortlichen, halten Sie Einsparungen und Erkenntnisse fest, und feiern Sie das Team."
+        ]
+      ],
+      "case": [
+        [
+          "Standard",
+          "Der Stapelstandard steht in der Arbeitsanweisung und in der Einarbeitung, mit den Bildern von der Rampe."
+        ],
+        [
+          "Kontrollplan",
+          "Tägliche Schäden auf einer p-Karte mit Grenzen aus den Pilotwochen. Ein Tag über der oberen Grenze: Der Schichtleiter prüft dieselbe Schicht und macht innerhalb von 24 Stunden 5 Whys. Jede Woche ein Check vor Ort an der Rampe."
+        ],
+        [
+          "Ergebnis",
+          "0,31 % bei 18.400 Einheiten pro Woche: etwa 47 beschädigte Einheiten und 500 € Gutschriften weniger pro Woche. Ab Woche 47 verantwortet der Leiter Warenausgang das Ergebnis."
+        ]
+      ],
+      "mistakes": [
+        "Den Sieg verkünden, wenn der Pilot endet.",
+        "Die alten Grenzen auf der Karte lassen, sodass nie ein Signal erscheint.",
+        "Kein Verantwortlicher, nachdem das Projektteam gegangen ist."
+      ],
+      "tools": [
+        [
+          "Regelkarte",
+          "/tools/sigma-control-chart/",
+          "mit den neuen Grenzen"
+        ],
+        [
+          "Schadenskontrolle",
+          "/tools/damage-control/",
+          "Check vor Ort, wöchentlich"
+        ]
+      ],
+      "checklist": [
+        "Der Standard ist aufgeschrieben und geschult.",
+        "Die Regelkarte läuft mit Grenzen vom neuen Niveau.",
+        "Der Reaktionsplan nennt einen Verantwortlichen.",
+        "Das Projekt ist übergeben, mit festgehaltenen Einsparungen und Erkenntnissen."
+      ],
+      "quiz": [
+        {
+          "q": "Was muss ein Kontrollplan enthalten?",
+          "options": [
+            "Nur das Ziel",
+            "Was gemessen wird, wie oft, von wem, und was zu tun ist, wenn ein Signal erscheint",
+            "Die Namen des Projektteams",
+            "Die ursprüngliche Problembeschreibung"
+          ],
+          "answer": 1,
+          "why": "Ohne Reaktionsplan ist ein Signal auf der Karte nur ein roter Punkt, auf den niemand reagiert."
+        },
+        {
+          "q": "Was passiert nach der Verbesserung mit den Eingriffsgrenzen?",
+          "options": [
+            "Sie bleiben, wie sie waren",
+            "Sie werden auf das Ziel gesetzt",
+            "Sie werden aus der neuen stabilen Phase neu berechnet",
+            "Sie werden entfernt"
+          ],
+          "answer": 2,
+          "why": "Die alten Grenzen sind für den neuen Prozess zu weit: Ein Rückfall bliebe innerhalb und unbemerkt."
+        },
+        {
+          "q": "Heute ist der Wert höher als gestern, aber innerhalb der Grenzen. Was sagt der Reaktionsplan?",
+          "options": [
+            "Nichts Besonderes: Das ist Rauschen, weiter beobachten",
+            "Eine Besprechung einberufen",
+            "5 Whys zu diesem Tag machen",
+            "Den Standard ändern"
+          ],
+          "answer": 0,
+          "why": "Auf Rauschen zu reagieren verschwendet Zeit und kann den Prozess verschlechtern. Reagieren Sie auf Signale."
+        }
+      ],
+      "nav": "Control"
+    }
+  ],
+  "glossary": [
+    [
+      "CTQ",
+      "Critical to Quality: ein Kundenbedürfnis, geschrieben als etwas, das man messen kann."
+    ],
+    [
+      "DMAIC",
+      "Define, Measure, Analyze, Improve, Control: die fünf Schritte eines Six-Sigma-Verbesserungsprojekts."
+    ],
+    [
+      "DPMO",
+      "Fehler pro Million Möglichkeiten (Defects per Million Opportunities): Fehler ÷ (Einheiten × Fehlermöglichkeiten pro Einheit) × 1.000.000."
+    ],
+    [
+      "Sigma-Niveau",
+      "Eine Art auszudrücken, wie oft ein Prozess Fehler macht. Vier Sigma sind etwa 6.200 Fehler pro Million, sechs Sigma sind 3,4."
+    ],
+    [
+      "Ausbeute",
+      "Der Anteil der Einheiten, die beim ersten Mal richtig gemacht werden."
+    ],
+    [
+      "SIPOC",
+      "Suppliers, Inputs, Process, Outputs, Customers: eine einzeilige Landkarte eines Prozesses."
+    ],
+    [
+      "Operationale Definition",
+      "Eine genaue, gemeinsame Beschreibung dessen, was zählt, damit alle gleich messen."
+    ],
+    [
+      "Ausgangsbasis",
+      "Wie der Prozess läuft, bevor Sie ihn ändern."
+    ],
+    [
+      "Pareto",
+      "Ursachen nach Größe sortiert; die wenigen größten tragen meist den größten Teil des Problems."
+    ],
+    [
+      "Grundursache",
+      "Die Ursache im Prozess, deren Beseitigung verhindert, dass das Problem zurückkommt."
+    ],
+    [
+      "Allgemeine Ursache",
+      "Die normale Streuung, die in einem Prozess steckt. Nur eine Änderung des Prozesses ändert sie."
+    ],
+    [
+      "Besondere Ursache",
+      "Etwas Ungewöhnliches an einem bestimmten Tag oder bei einer bestimmten Charge. Finden und beseitigen."
+    ],
+    [
+      "Regelkarte",
+      "Ein Diagramm einer Messgröße über die Zeit, mit Grenzen, die normales Rauschen von echten Signalen trennen."
+    ],
+    [
+      "Poka-Yoke",
+      "Fehlervermeidung: eine Gestaltung, die den Fehler schwer oder unmöglich macht."
+    ],
+    [
+      "Standardarbeit",
+      "Der aktuell beste Weg, eine Arbeit zu machen, kurz und bildhaft aufgeschrieben."
+    ],
+    [
+      "Gemba",
+      "Der Ort, an dem die Arbeit gemacht wird. „Geh zum Gemba“: hingehen und schauen."
+    ],
+    [
+      "Kaizen",
+      "Kleine, ständige Verbesserungen durch die Menschen, die die Arbeit machen."
+    ],
+    [
+      "Kontrollplan",
+      "Was nach dem Projekt gemessen wird, von wem, wie oft, und wie auf Signale reagiert wird."
+    ]
+  ],
+  "wastes": [
+    [
+      "D",
+      "Fehler (Defects)",
+      "Beschädigte, unvollständige oder falsche Aufträge; neu verpacken und neu zustellen."
+    ],
+    [
+      "O",
+      "Überproduktion (Overproduction)",
+      "Kommissionieren oder Packen, bevor der Auftrag oder das Fahrzeug bereit ist."
+    ],
+    [
+      "W",
+      "Warten (Waiting)",
+      "Verlader warten auf die Welle, Fahrer auf die Ladung, Lkw auf eine Rampe."
+    ],
+    [
+      "N",
+      "Ungenutztes Talent (Non-used talent)",
+      "Verlader, die wissen, warum Schäden entstehen, aber nie gefragt werden."
+    ],
+    [
+      "T",
+      "Transport",
+      "Paletten zweimal bewegen, weil die Bereitstellfläche am falschen Ort ist."
+    ],
+    [
+      "I",
+      "Bestände (Inventory)",
+      "Pakete, die über Nacht auf dem Boden bleiben; Bestand, der Zählfehler versteckt."
+    ],
+    [
+      "M",
+      "Bewegung (Motion)",
+      "Laufen, um Scanner, Klebeband oder Etiketten zu holen; Bücken nach schweren Artikeln, die unten liegen."
+    ],
+    [
+      "E",
+      "Zusätzliche Bearbeitung (Extra processing)",
+      "Dasselbe Paket dreimal scannen, oder doppelte Kontrollen, die niemand liest."
+    ]
+  ],
+  "charter": [
+    [
+      "name",
+      "Projektname",
+      "z. B. Schäden im Warenausgang unter 0,30 %",
+      false
+    ],
+    [
+      "problem",
+      "Problembeschreibung",
+      "Was, wo, seit wann, wie viel, und die Lücke zum Ziel",
+      true
+    ],
+    [
+      "ctq",
+      "CTQ und Messgröße",
+      "z. B. Paket kommt unbeschädigt an; beschädigte Einheiten ÷ versendete Einheiten",
+      true
+    ],
+    [
+      "baseline",
+      "Ausgangsbasis",
+      "z. B. 0,57 %, DPMO 5.652, Sigma 4,03 (Woche 38)",
+      false
+    ],
+    [
+      "target",
+      "Ziel",
+      "z. B. 0,30 % bis Woche 46",
+      false
+    ],
+    [
+      "scopeIn",
+      "Dazu gehört",
+      "z. B. Pickplatz bis Übergabe an den Fahrer",
+      false
+    ],
+    [
+      "scopeOut",
+      "Nicht dazu gehört",
+      "z. B. Hauptlauf, Verpackung des Lieferanten",
+      false
+    ],
+    [
+      "sponsor",
+      "Sponsor",
+      "Wer das Ergebnis verantwortet",
+      false
+    ],
+    [
+      "team",
+      "Team",
+      "Namen und Rollen",
+      false
+    ],
+    [
+      "benefit",
+      "Erwarteter Nutzen",
+      "z. B. etwa 500 € Gutschriften pro Woche",
+      false
+    ],
+    [
+      "dates",
+      "Meilensteine",
+      "z. B. D KW 39 · M KW 41 · A KW 42 · I KW 45 · C KW 47",
+      true
+    ]
+  ],
+  "charterExample": {
+    "name": "Schäden im Warenausgang unter 0,30 %",
+    "problem": "In den Wochen 36 bis 38 verließen 0,57 % der Einheiten im Warenausgang das Zentrum beschädigt (104 von 18.400 in Woche 38), zugesagt waren dem Kunden 0,30 %. Gutschriften kosten etwa 1.150 € pro Woche.",
+    "ctq": "Das Paket kommt unbeschädigt an. Messgröße: beschädigte Einheiten ÷ versendete Einheiten, erfasst nach Prozessschritt und Ursache.",
+    "baseline": "0,57 %, DPMO 5.652, Sigma-Niveau 4,03 (Woche 38)",
+    "target": "0,30 % oder weniger bis Woche 46, ohne längere Ladezeiten",
+    "scopeIn": "Vom Pickplatz bis zur Übergabe an den Fahrer",
+    "scopeOut": "Hauptlauf, Verpackung des Lieferanten",
+    "sponsor": "Leiter Warenausgang",
+    "team": "Schichtleiter Früh und Spät, zwei Verlader, ein Fahrer, Qualitätskoordinator",
+    "benefit": "Etwa 500 € Gutschriften pro Woche, weniger Kundenbeschwerden",
+    "dates": "Define KW 39 · Measure KW 41 · Analyze KW 42 · Improve KW 45 · Control KW 47"
+  }
+}

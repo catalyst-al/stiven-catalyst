@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Six Sigma im Lager
+description: "Ein kostenloser, kurzer DMAIC-Kurs an einem Lagerfall: Schäden im Warenausgang definieren, messen, analysieren, verbessern und steuern, mit einem Quiz pro Schritt, den acht Verschwendungsarten, einem Glossar und einem Projektauftrag."
+activeNav: /de/tools.html
+permalink: /de/tools/six-sigma-dmaic/
+alt: /tools/six-sigma-dmaic/
+---
+<section class="shell page-hero tool-hero">
+  <div class="hero-top">
+    <p class="eyebrow">Kostenloser Kurs · Six Sigma</p>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+  <h1>Six Sigma im Lager</h1>
+  <p class="lede">DMAIC in fünf Schritten und an einem echten Fall. Jeder Schritt sagt, was zu tun ist, zeigt es in der Halle, verlinkt das passende Tool und endet mit drei Fragen. Beginnen Sie Ihr eigenes Projekt mit dem Projektauftrag unten.</p>
+</section>
+
+{% set cfg = de.dmaic %}
+{% include "partials/dmaic.njk" %}

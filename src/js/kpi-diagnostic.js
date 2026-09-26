@@ -5,6 +5,7 @@
   const data = JSON.parse(document.getElementById("kpi-diagnostic-data").textContent);
   if (!form || !resultBox) return;
 
+  const tx = window.ToolKit?.tx || ((text, vars = {}) => text.replace(/\{(\w+)\}/g, (m, name) => (name in vars ? vars[name] : m)));
   const total = data.statements.length;
   const maxPerCause = (data.scale.length - 1) * 2;
 
@@ -18,7 +19,7 @@
   const answered = () => form.querySelectorAll("input[type=radio]:checked");
 
   const updateProgress = () => {
-    progress.textContent = `${answered().length} of ${total} answered`;
+    progress.textContent = tx("{a} of {b} answered", { a: answered().length, b: total });
   };
   form.addEventListener("change", updateProgress);
 
@@ -31,21 +32,21 @@
   };
 
   const summaryText = (kpi, ranked, top) => {
-    const lines = ["KPI Diagnostic | Stiven Catalyst"];
+    const lines = [`${tx("KPI Diagnostic")} | Stiven Catalyst`];
     if (kpi) lines.push(`KPI: ${kpi}`);
     lines.push("");
     if (top.length) {
-      lines.push(`Most likely cause: ${top.map((key) => data.causes[key].name).join(" + ")}`);
+      lines.push(`${tx("Most likely cause")}: ${top.map((key) => data.causes[key].name).join(" + ")}`);
       top.forEach((key) => {
         const cause = data.causes[key];
-        lines.push("", `${cause.name}: ${cause.meaning}`, "First moves:");
+        lines.push("", `${cause.name}: ${cause.meaning}`, `${tx("First moves")}:`);
         cause.moves.forEach((move) => lines.push(`- ${move}`));
-        lines.push(`Question for the floor: ${cause.question}`);
+        lines.push(`${tx("Question for the floor")}: ${cause.question}`);
       });
     } else {
-      lines.push("No clear pattern. Go and watch the work where the number is produced.");
+      lines.push(tx("No clear pattern. Go and watch the work where the number is produced."));
     }
-    lines.push("", "Scores:");
+    lines.push("", `${tx("Scores")}:`);
     ranked.forEach(([key, score]) => lines.push(`- ${data.causes[key].name}: ${score}/${maxPerCause}`));
     return lines.join("\n");
   };
@@ -62,7 +63,7 @@
       area.remove();
     }
     const label = button.textContent;
-    button.textContent = "Copied";
+    button.textContent = tx("Copied");
     setTimeout(() => { button.textContent = label; }, 1600);
   };
 
@@ -75,14 +76,14 @@
 
     resultBox.replaceChildren();
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", kpi ? `Result · ${kpi}` : "Result"));
+    head.append(el("p", "kicker", kpi ? `${tx("Result")} · ${kpi}` : tx("Result")));
     const title = el("h2");
     if (top.length) {
-      title.append("Most likely: ");
+      title.append(`${tx("Most likely")}: `);
       title.append(el("span", null, top.map((key) => data.causes[key].name).join(" + ")));
     } else {
-      title.append("No single cause ");
-      title.append(el("span", null, "stands out."));
+      title.append(`${tx("No single cause")} `);
+      title.append(el("span", null, tx("stands out.")));
     }
     head.append(title);
     resultBox.append(head);
@@ -95,24 +96,24 @@
         const card = el("article", "result-card");
         card.append(el("h3", null, cause.name));
         card.append(el("p", null, cause.meaning));
-        card.append(el("p", "result-label", "First moves"));
+        card.append(el("p", "result-label", tx("First moves")));
         const list = el("ol", "moves");
         cause.moves.forEach((move) => list.append(el("li", null, move)));
         card.append(list);
-        card.append(el("p", "result-label", "Question for the floor"));
+        card.append(el("p", "result-label", tx("Question for the floor")));
         card.append(el("blockquote", null, cause.question));
         detail.append(card);
       });
     } else {
       const card = el("article", "result-card");
-      card.append(el("h3", null, "Go and see the work"));
-      card.append(el("p", null, "Your answers do not point strongly to one cause. That usually means the problem is not visible from where the number is reported. Spend one shift where the result is produced, follow one case from start to finish and note where it first deviates."));
+      card.append(el("h3", null, tx("Go and see the work")));
+      card.append(el("p", null, tx("Your answers do not point strongly to one cause. That usually means the problem is not visible from where the number is reported. Spend one shift where the result is produced, follow one case from start to finish and note where it first deviates.")));
       detail.append(card);
     }
     grid.append(detail);
 
     const bars = el("div", "result-bars");
-    bars.append(el("p", "result-label", "All five causes"));
+    bars.append(el("p", "result-label", tx("All five causes")));
     ranked.forEach(([key, score]) => {
       const row = el("div", "bar-row");
       if (top.includes(key)) row.classList.add("is-top");
@@ -125,7 +126,7 @@
       row.append(label, track);
       bars.append(row);
     });
-    const essay = el("a", "text-link", "Read the essay behind this tool ");
+    const essay = el("a", "text-link", `${tx("Read the essay behind this tool")} `);
     essay.href = document.querySelector(".tool-aside .inline-link").href;
     const arrow = el("span", null, "→");
     arrow.setAttribute("aria-hidden", "true");
@@ -135,13 +136,13 @@
     resultBox.append(grid);
 
     const actions = el("div", "tool-actions result-actions");
-    const copyButton = el("button", "button-primary", "Copy summary");
+    const copyButton = el("button", "button-primary", tx("Copy summary"));
     copyButton.type = "button";
     copyButton.addEventListener("click", () => copy(summaryText(kpi, ranked, top), copyButton));
-    const printButton = el("button", "button-secondary", "Print or save as PDF");
+    const printButton = el("button", "button-secondary", tx("Print or save as PDF"));
     printButton.type = "button";
     printButton.addEventListener("click", () => window.print());
-    const resetButton = el("button", "button-secondary", "Start again");
+    const resetButton = el("button", "button-secondary", tx("Start again"));
     resetButton.type = "button";
     resetButton.addEventListener("click", () => {
       form.reset();
@@ -167,7 +168,7 @@
     form.querySelectorAll(".statement.is-missing").forEach((set) => set.classList.remove("is-missing"));
     if (missing.length) {
       missing.forEach((set) => set.classList.add("is-missing"));
-      progress.textContent = `${missing.length} ${missing.length === 1 ? "statement" : "statements"} left to answer`;
+      progress.textContent = tx(missing.length === 1 ? "{n} statement left to answer" : "{n} statements left to answer", { n: missing.length });
       missing[0].scrollIntoView({ behavior: "smooth", block: "center" });
       missing[0].querySelector("input").focus({ preventScroll: true });
       return;
