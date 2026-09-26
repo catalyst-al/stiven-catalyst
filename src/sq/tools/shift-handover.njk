@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Dorëzimi i turnit
+description: "Një dorëzim turni i strukturuar: numrat, çështjet e hapura me përgjegjës, paralajmërimet për turnin e ardhshëm, siguria dhe personeli, dhe një kontroll dorëzimi. Çështjet e hapura kalojnë te turni i ardhshëm. Falas dhe privat."
+activeNav: /sq/tools.html
+permalink: /sq/tools/shift-handover/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Dorëzimi</p>
+  <h1>Dorëzimi i turnit</h1>
+  <p class="lede">Shumica e problemeve nuk humbasin gjatë turnit, por mes turneve. Shkruajeni dorëzimin në pesë minuta, jepini çdo çështjeje të hapur një përgjegjës, dhe lërini të pazgjidhurat të kalojnë vetë te turni i ardhshëm.</p>
+</section>
+
+{% set cfg = sq.shiftHandover %}
+{% include "partials/shift-handover.njk" %}

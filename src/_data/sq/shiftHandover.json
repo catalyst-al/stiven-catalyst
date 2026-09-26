@@ -1,0 +1,120 @@
+{
+  "storageKey": "sc-shift-handover-sq",
+  "shifts": ["Mëngjes", "Pasdite", "Natë"],
+  "priorities": ["E lartë", "Mesatare", "E ulët"],
+  "templates": {
+    "warehouse": {
+      "name": "Magazinë",
+      "metrics": [
+        "Njësi të trajtuara",
+        "Mbetje në dorëzim",
+        "Dëme %",
+        "Porosi të paplota %",
+        "Nisje në kohë %",
+        "Personel në turn"
+      ],
+      "checklist": [
+        "Çdo çështje e hapur ka një përgjegjës në turnin e ardhshëm.",
+        "Pajisjet jashtë funksionit janë të etiketuara dhe të listuara.",
+        "Mbetjet janë numëruar, jo vlerësuar me sy.",
+        "Incidentet e sigurisë dhe gati-aksidentet janë shkruar.",
+        "Rampat, korridoret dhe daljet e emergjencës janë të lira.",
+        "Përgjegjësi i turnit të ardhshëm e ka lexuar këtë dorëzim dhe ka bërë pyetje."
+      ],
+      "headsUp": "p.sh. Pritet pik volumi në 11:00\nPiruni 3 në riparim deri të enjten"
+    },
+    "hotel": {
+      "name": "Recepsioni i hotelit",
+      "metrics": [
+        "Mbërritje të mbetura",
+        "Largime të mbetura",
+        "Zënia %",
+        "Dhoma jashtë funksionit",
+        "No-show",
+        "Ankesa të hapura të mysafirëve"
+      ],
+      "checklist": [
+        "Çdo çështje e mysafirëve ka një përgjegjës dhe një orë të premtuar.",
+        "Arka dhe terminalet e kartave janë barazuar dhe numëruar.",
+        "Mbërritjet e vona dhe kërkesat e veçanta janë të listuara.",
+        "Dhomat jashtë funksionit janë raportuar te mirëmbajtja.",
+        "Çelësat, kasafortat dhe çelësat master janë kontrolluar.",
+        "Turni i ardhshëm e ka lexuar këtë dorëzim dhe ka bërë pyetje."
+      ],
+      "headsUp": "p.sh. VIP mbërrin në 23:30, dhoma 412\nProvë e alarmit të zjarrit në 10:00"
+    },
+    "delivery": {
+      "name": "Stacion shpërndarjeje",
+      "metrics": [
+        "Linja të nisura",
+        "Linja të kthyera",
+        "Pako të padorëzuara",
+        "Në kohë %",
+        "Mjete jashtë funksionit",
+        "Shoferë që mungojnë"
+      ],
+      "checklist": [
+        "Çdo pako e kthyer është skanuar dhe ka një arsye.",
+        "Dëmet dhe defektet e mjeteve janë raportuar me foto.",
+        "Shoferët që mungojnë dhe linjat e hapura i di dispeçeria.",
+        "Çelësat, skanerët dhe kartat e karburantit janë kthyer dhe numëruar.",
+        "Ankesat e përshkallëzuara të klientëve kanë përgjegjës dhe orë për t’i telefonuar.",
+        "Turni i ardhshëm e ka lexuar këtë dorëzim dhe ka bërë pyetje."
+      ],
+      "headsUp": "p.sh. Rruga e mbyllur në B43 nga ora 06:00\nDy shoferë të rinj nisin në linjat 14 dhe 15"
+    }
+  },
+  "example": {
+    "template": "warehouse",
+    "date": "2026-09-18",
+    "shift": "Pasdite",
+    "area": "Dalja e mallit, rampat 1–6",
+    "from": "Arben",
+    "to": "Lena",
+    "metrics": [
+      ["Njësi të trajtuara", "18.400", "objektivi 18.000"],
+      ["Mbetje në dorëzim", "320 pako", "vala 4, të sortuara"],
+      ["Dëme %", "0,42%", "objektivi 0,30%"],
+      ["Porosi të paplota %", "0,8%", ""],
+      ["Nisje në kohë %", "86%", "11:15 dhe 11:30 u nisën me vonesë"],
+      ["Personel në turn", "14 nga 16", "2 të sëmurë"]
+    ],
+    "issues": [
+      {
+        "text": "Piruni 3 rrjedh vaj hidraulik; i etiketuar jashtë funksionit te rampa 4",
+        "priority": "E lartë",
+        "owner": "Lena",
+        "due": "Para 07:00",
+        "done": false,
+        "carried": 0
+      },
+      {
+        "text": "Muri i kafazit te rampa 3 u shemb në 18:40, 6 pako u ripaketuan; te ajo rampë mungon figura e stivimit",
+        "priority": "Mesatare",
+        "owner": "Përgjegjësi i turnit të mëngjesit",
+        "due": "Në fillim të turnit",
+        "done": false,
+        "carried": 1
+      },
+      {
+        "text": "Linjës R12 i mungojnë 2 pako, u gjetën në zonën e sortimit",
+        "priority": "Mesatare",
+        "owner": "Dispeçeria",
+        "due": "Para valës së parë",
+        "done": false,
+        "carried": 0
+      },
+      {
+        "text": "U ndërrua bateria e skanerit 7",
+        "priority": "E ulët",
+        "owner": "Arben",
+        "due": "",
+        "done": true,
+        "carried": 0
+      }
+    ],
+    "headsUp": "Pritet pik volumi në valën e 11:00, rreth +15%\nPiloti i standardit të ri të stivimit nis te rampat 3 dhe 4",
+    "safety": "Gati-aksident te rampa 2: transpaletë dhe këmbësor, pa lëndime. Raportuar në regjistrin e sigurisë.\nDy ngarkues të sëmurë; u konfirmua një ngarkues nga agjencia për nesër.",
+    "checks": [true, true, false, true, true, false]
+  }
+}

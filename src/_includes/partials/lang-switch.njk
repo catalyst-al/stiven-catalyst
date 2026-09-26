@@ -1,5 +1,13 @@
-{#- Link to the same page in the other language; pages set `alt` in their front matter. -#}
-{%- if alt %}
-{%- set other = "en" if lang == "de" else "de" %}
-<a class="lang-switch" href="{{ alt }}" hreflang="{{ other }}" lang="{{ other }}" aria-label="{{ 'English' if other == 'en' else 'Deutsch' }}">{{ other | upper }}</a>
+{#- The same page in each language; `alternates` is worked out in lib/translations.js. -#}
+{%- if alternates %}
+{%- set current = lang or "en" %}
+<nav class="lang-switch" aria-label="{{ 'Language' | t(lang) }}">
+  {%- for code, name in [["en", "English"], ["de", "Deutsch"], ["sq", "Shqip"]] %}
+  {%- if code == current %}
+  <span aria-current="true" title="{{ name }}">{{ code | upper }}</span>
+  {%- elif alternates[code] %}
+  <a href="{{ alternates[code] }}" hreflang="{{ code }}" lang="{{ code }}" title="{{ name }}" aria-label="{{ name }}">{{ code | upper }}</a>
+  {%- endif %}
+  {%- endfor %}
+</nav>
 {%- endif %}

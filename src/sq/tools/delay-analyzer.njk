@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Analiza e vonesave
+description: "Një regjistër privat linjash për ekipet e shpërndarjes dhe dispeçerisë: përqindja në kohë, ku nis vonesa (te rampa apo në rrugë), arsyet, oraret e nisjes dhe turnet."
+activeNav: /sq/tools.html
+permalink: /sq/tools/delay-analyzer/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Magazinë</p>
+  <h1>Analiza e vonesave</h1>
+  <p class="lede">Nëse një dorëzim do të vonohet shpesh vendoset para nisjes. Regjistroni për çdo linjë orët e planifikuara dhe reale. Mjeti e ndan çdo minutë vonese mes rampës dhe rrugës, që zgjidhjen ta marrë ekipi i duhur.</p>
+</section>
+
+{% set cfg = sq.delayAnalyzer %}
+{% include "partials/delay-analyzer.njk" %}

@@ -1,0 +1,101 @@
+{
+  "storageKey": "sc-sigma-chart-sq",
+  "sigmaTable": [
+    {
+      "sigma": 2,
+      "dpmo": 308538
+    },
+    {
+      "sigma": 2.5,
+      "dpmo": 158655
+    },
+    {
+      "sigma": 3,
+      "dpmo": 66807
+    },
+    {
+      "sigma": 3.5,
+      "dpmo": 22750
+    },
+    {
+      "sigma": 4,
+      "dpmo": 6210
+    },
+    {
+      "sigma": 4.5,
+      "dpmo": 1350
+    },
+    {
+      "sigma": 5,
+      "dpmo": 233
+    },
+    {
+      "sigma": 5.5,
+      "dpmo": 32
+    },
+    {
+      "sigma": 6,
+      "dpmo": 3.4
+    }
+  ],
+  "example": {
+    "metric": "Njësi të dëmtuara",
+    "unit": "Njësi të trajtuara",
+    "baseline": "20",
+    "rows": [
+      "2026-08-24|2900|20|",
+      "2026-08-25|2600|13|",
+      "2026-08-26|2600|15|",
+      "2026-08-27|3200|16|",
+      "2026-08-28|2600|17|",
+      "2026-08-29|2600|13|",
+      "2026-08-30|3050|14|",
+      "2026-08-31|3200|19|",
+      "2026-09-01|3050|22|",
+      "2026-09-02|2750|17|",
+      "2026-09-03|2800|9|",
+      "2026-09-04|3200|40|Muri i kafazit u shemb te rampa 3",
+      "2026-09-05|3200|8|",
+      "2026-09-06|2600|21|",
+      "2026-09-07|3200|20|",
+      "2026-09-08|2750|13|",
+      "2026-09-09|3200|20|",
+      "2026-09-10|2950|19|",
+      "2026-09-11|2800|18|",
+      "2026-09-12|2800|20|",
+      "2026-09-13|2750|6|Nis standardi i ri i stivimit",
+      "2026-09-14|2600|11|",
+      "2026-09-15|3200|12|",
+      "2026-09-16|2800|9|",
+      "2026-09-17|3200|7|",
+      "2026-09-18|3200|11|",
+      "2026-09-19|3050|8|",
+      "2026-09-20|2750|10|",
+      "2026-09-21|2800|9|",
+      "2026-09-22|2900|8|"
+    ]
+  },
+  "rules": [
+    {
+      "id": "beyond",
+      "name": "Jashtë kufijve",
+      "text": "Një ditë mbi kufirin e sipërm (ose nën të poshtmin). Diçka ishte ndryshe atë ditë: gjejeni sa njerëzit ende e mbajnë mend."
+    },
+    {
+      "id": "run",
+      "name": "Zhvendosje",
+      "text": "Tetë ditë ose më shumë radhazi në të njëjtën anë të vijës qendrore. Procesi ka lëvizur: pas një ndryshimi që bëtë, kjo është prova që funksionoi; pa ndryshim, gjeni çfarë ndryshoi."
+    },
+    {
+      "id": "trend",
+      "name": "Trend",
+      "text": "Gjashtë ditë ose më shumë radhazi, secila më e lartë (ose secila më e ulët) se e mëparshmja. Diçka po rrëshqet: konsumimi, mbetjet, personeli ose një ndryshim i ngadaltë i volumit."
+    }
+  ],
+  "verdicts": {
+    "stable": "Asnjë sinjal. Ngritjet dhe uljet janë zhurma normale e këtij procesi. Reagimi ndaj ditëve të veçanta nuk ndihmon dhe mund ta përkeqësojë: për një numër më të mirë, ndryshoni vetë procesin.",
+    "badSpecial": "Karta tregon ditë që nuk janë zhurmë normale. Hetoni së pari ato ditë: çfarë ishte ndryshe në volum, njerëz, pajisje ose metodë?",
+    "goodSpecial": "Karta tregon një përmirësim të qëndrueshëm. Gjeni çfarë bëri diferencën dhe bëjeni standard, pastaj rillogaritni kufijtë nga niveli i ri.",
+    "short": "Më pak se 12 ditë në kartë. Kufijtë janë të përafërt; vazhdoni të shtoni ditë para se t’i besoni një sinjali."
+  }
+}

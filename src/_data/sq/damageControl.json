@@ -1,0 +1,190 @@
+{
+  "storageKey": "sc-damage-control-sq",
+  "unknownCause": "E panjohur",
+  "text": {
+    "tool": "Kontrolli i dëmeve",
+    "one": "njësi e dëmtuar",
+    "many": "njësi të dëmtuara",
+    "allNoun": "dëmet",
+    "volumeNoun": "njësi",
+    "volumeLabel": "Njësi të trajtuara",
+    "volumePlaceholder": "p.sh. 18400",
+    "targetLabel": "Objektivi i dëmeve %",
+    "targetPlaceholder": "p.sh. 0,3",
+    "rateLabel": "Shkalla e dëmeve",
+    "periodPlaceholder": "p.sh. Java 38, dalja e mallit",
+    "entryLegend": "Regjistro një dëm",
+    "countLabel": "Njësi të dëmtuara",
+    "countShort": "njësi",
+    "notePlaceholder": "p.sh. Kafazi 4, shtresa e sipërme u shemb",
+    "pasteRow": "Një rresht për çdo dëm",
+    "pastePlaceholder": "14.09.2026\tPasdite\tNgarkimi\tI shtypur\tStivimi\t6\t55",
+    "empty": "Ende asnjë dëm i regjistruar.",
+    "stageTitle": "Ku gjendet dëmi",
+    "stageNote": "Sipas radhës së procesit, nga porta e rampës te klienti.",
+    "stagePhrase": "në hapin",
+    "matrixTitle": "Hapi i procesit dhe lloji i dëmit",
+    "csv": "regjistri-i-demeve",
+    "tips": [
+      [
+        "Regjistroni ku u gjet.",
+        "Hapi është vendi ku u pa dëmi, shkaku është pse ndodhi. Kanë rëndësi të dyja."
+      ],
+      [
+        "Numëroni njësi, jo incidente.",
+        "Gjashtë pako të shtypura nga një mur i shembur janë gjashtë njësi."
+      ],
+      [
+        "Shtoni volumin.",
+        "Pa njësitë e trajtuara shihni vetëm numra; me to merrni shkallën, DPMO-në dhe nivelin sigma."
+      ]
+    ],
+    "checkTitle": "A qëndron standardi?",
+    "checkIntro": "Ecni përgjatë rampës dhe shënoni atë që shihni realisht sot, jo atë që thotë SOP-ja. Çdo rresht i pashënuar është një vend ku mund të nisë dëmi."
+  },
+  "fields": [
+    {
+      "name": "shift",
+      "label": "Turni",
+      "options": ["Mëngjes", "Pasdite", "Natë"]
+    },
+    {
+      "name": "stage",
+      "label": "Hapi",
+      "options": ["Pranimi", "Magazinimi", "Mbledhja", "Paketimi", "Ngarkimi", "Transporti", "Dorëzimi"]
+    },
+    {
+      "name": "type",
+      "label": "Lloji i dëmit",
+      "options": ["I shtypur", "I grisur ose i shpuar", "I lagur", "I thyer", "Rrjedh", "Tjetër"]
+    },
+    {
+      "name": "cause",
+      "label": "Shkaku",
+      "options": ["Stivimi", "Manipulimi", "Ambalazhi", "Pajisjet", "Sigurimi i ngarkesës", "Mjedisi", "E panjohur"]
+    }
+  ],
+  "stages": {
+    "Pranimi": {
+      "meaning": "Shumë nga ajo që gjendet në pranim ka mbërritur e dëmtuar. Nëse nuk regjistrohet te porta, magazina juaj paguan dëmin e dikujt tjetër.",
+      "moves": [
+        "Kontrolloni dhe fotografoni paletat e dëmtuara para se të firmosni, dhe shënojeni në fletëdërgesë.",
+        "Mbajeni “mbërriti e dëmtuar” veçmas nga “u dëmtua këtu” në regjistër.",
+        "Ndajini numrat me furnitorin ose transportuesin çdo javë, me foto."
+      ],
+      "question": "Kush i kontrollon mallrat para se të firmoset fletëdërgesa?"
+    },
+    "Magazinimi": {
+      "meaning": "Dëmi ndërsa malli qëndron në vend tregon raftet, lartësinë, ujin ose trafikun rreth pozicionit.",
+      "moves": [
+        "Vendosni artikujt e rëndë poshtë dhe kontrolloni që asgjë të mos dalë jashtë traversës ose buzës së raftit.",
+        "Shikoni ku grumbullohet dëmi: fundet e korridoreve, qoshet dhe kthesat e pirunëve zakonisht kanë nevojë për mbrojtje.",
+        "Kontrolloni ndërtesën për ujë: pikime nga çatia, kondensim, dyer të lëna hapur në shi."
+      ],
+      "question": "Cilat pozicione vazhdojnë të prodhojnë dëme, dhe çfarë kalon pranë tyre?"
+    },
+    "Mbledhja": {
+      "meaning": "Artikujt bien, tërhiqen nga poshtë artikujve të tjerë ose hidhen në kosha kur mbledhja bëhet me nxitim ose pozicioni është i papërshtatshëm.",
+      "moves": [
+        "Shikoni dhjetë marrje në pozicionin më të keq dhe shënoni si nxirret artikulli.",
+        "Çojini artikujt e rëndë dhe të brishtë në lartësinë e belit aty ku merren shpesh.",
+        "Të rëndët së pari, të brishtët në fund: vendosni radhën e mbledhjes që asgjë e rëndë të mos bjerë sipër."
+      ],
+      "question": "Çfarë duhet të bëjë mbledhësi për ta nxjerrë këtë artikull në mënyrë të sigurt?"
+    },
+    "Paketimi": {
+      "meaning": "Kuti e gabuar, pak material mbushës ose shirit i dobët. Pakoja del në dukje në rregull dhe dështon gjatë rrugës.",
+      "moves": [
+        "Bini dakord për një madhësi kutie për çdo grup artikujsh dhe mbajini ato kuti te stacioni.",
+        "Prova e tundjes: nëse artikulli lëviz brenda kutisë, shtoni mbushës para se ta mbyllni.",
+        "Shënoni artikujt e brishtë në sistem që paketuesi ta shohë para paketimit."
+      ],
+      "question": "Çfarë bën paketuesi kur kutia e duhur nuk është te stacioni?"
+    },
+    "Ngarkimi": {
+      "meaning": "Shumica e dëmeve të transportit krijohen në momentin kur ngarkohet mjeti: radha e stivimit, boshllëqet, shpejtësia në orët e pikut.",
+      "moves": [
+        "Të rëndat poshtë, të lehtat sipër, të brishtat kurrë poshtë diçkaje.",
+        "Ndërtoni mure të qëndrueshme pa boshllëqe dhe pa dalje, dhe siguroni murin e fundit para se të mbyllen dyert.",
+        "Kontrolloni oraret e pikut: kur objektivi i kohës së ngarkimit fiton mbi standardin e stivimit, vijnë dëmet."
+      ],
+      "question": "Si duket ngarkesa në dhjetë minutat e fundit para nisjes?"
+    },
+    "Transporti": {
+      "meaning": "Ngarkesa lëviz në mjet: frenime, kthesa, mungesë sigurimi të ngarkesës, rafte që nuk mbajnë.",
+      "moves": [
+        "Kontrolloni sigurimin e ngarkesës para nisjes dhe bëni një foto të ngarkesës së mbyllur.",
+        "Krahasoni dëmet sipas linjës, mjetit dhe shoferit para se të fajësoni rrugën.",
+        "Riparoni raftet, rripat dhe pikat e fiksimit në mjetet që dalin më shpesh."
+      ],
+      "question": "A duket ngarkesa njësoj në ndalesën e parë si në nisje?"
+    },
+    "Dorëzimi": {
+      "meaning": "Dëmi në metrat e fundit: pako të hedhura, të lëna në shi ose të vendosura në vende të pasigurta.",
+      "moves": [
+        "Mbaje, mos e hidh: dy duar për metrat e fundit.",
+        "Mbroni pakot nga shiu te dera me një qese ose mbulesë.",
+        "Bëni një foto në dorëzim që ankesat për dëme të kontrollohen drejt."
+      ],
+      "question": "Çfarë i ndodh një pakoje mes derës së mjetit dhe klientit?"
+    }
+  },
+  "causes": {
+    "Stivimi": "Shkruajeni rregullin e stivimit si një figurë te rampa: të rëndat poshtë, të brishtat lart, pa boshllëqe.",
+    "Manipulimi": "Shikoni punën në orën më të ngarkuar. Dëmet nga manipulimi rriten kur njerëzit nxitohen, jo kur janë të pakujdesshëm.",
+    "Ambalazhi": "Testoni ambalazhin, jo njerëzit: rrëzoni dhe tundni një pako nga çdo lloj që del këtu.",
+    "Pajisjet": "Kontrolloni pirunët, transpaletat, kafazet dhe karrocat. Hiqini nga përdorimi pajisjet e prishura po atë ditë.",
+    "Sigurimi i ngarkesës": "Bëjeni sigurimin hapin e fundit të ngarkimit, me foto, jo diçka që shoferi duhet ta mbajë mend.",
+    "Mjedisi": "Uji, nxehtësia dhe i ftohti i dëmtojnë mallrat në heshtje. Mbyllni boshllëqet: dyer, çati, mbulesa, zona pritjeje.",
+    "E panjohur": "Një pjesë e madhe “E panjohur” do të thotë se regjistri nuk është ende mjaft i mirë. Regjistroni hapin dhe shkakun në momentin kur gjendet dëmi."
+  },
+  "checklist": [
+    "Artikujt e rëndë vendosen poshtë, të lehtët dhe të brishtët sipër.",
+    "Asgjë nuk del jashtë buzës së paletës, raftit ose kafazit.",
+    "Muret janë të qëndrueshme, pa boshllëqe ku mund të bjerë një pako.",
+    "Ngarkesa sigurohet me rripa, shufra ose rrjeta para se të mbyllen dyert.",
+    "Artikujt e brishtë dhe lëngjet janë të shënuara dhe udhëtojnë drejt.",
+    "Kutitë e dëmtuara hiqen dhe ripaketohen, kurrë nuk ngarkohen siç janë.",
+    "Pirunët, transpaletat dhe kafazet kontrollohen para përdorimit.",
+    "Pikimet, dyshemetë e lagura dhe dyert e hapura pranë mallit raportohen në të njëjtin turn.",
+    "Çdo dëm regjistrohet me hapin dhe shkakun në momentin kur gjendet.",
+    "Mallrat që mbërrijnë të dëmtuara fotografohen dhe shënohen para firmosjes."
+  ],
+  "example": {
+    "period": "Javë shembull",
+    "volume": 18400,
+    "target": 0.3,
+    "rows": [
+      "2026-09-14|Mëngjes|Ngarkimi|I shtypur|Stivimi|7|61",
+      "2026-09-14|Mëngjes|Pranimi|I shtypur|Ambalazhi|2|",
+      "2026-09-14|Pasdite|Ngarkimi|I shtypur|Stivimi|6|55",
+      "2026-09-14|Pasdite|Transporti|I thyer|Sigurimi i ngarkesës|3|72",
+      "2026-09-14|Natë|Mbledhja|I grisur ose i shpuar|Manipulimi|2|18",
+      "2026-09-15|Mëngjes|Ngarkimi|I grisur ose i shpuar|Manipulimi|3|24",
+      "2026-09-15|Pasdite|Ngarkimi|I shtypur|Stivimi|7|61",
+      "2026-09-15|Pasdite|Paketimi|I thyer|Ambalazhi|2|40",
+      "2026-09-15|Pasdite|Dorëzimi|I lagur|Mjedisi|3|30",
+      "2026-09-15|Natë|Magazinimi|I shtypur|Pajisjet|1|12",
+      "2026-09-16|Mëngjes|Transporti|I thyer|Sigurimi i ngarkesës|4|95",
+      "2026-09-16|Mëngjes|Ngarkimi|I shtypur|Stivimi|5|44",
+      "2026-09-16|Pasdite|Mbledhja|I thyer|Manipulimi|2|26",
+      "2026-09-16|Pasdite|Ngarkimi|I shtypur|Stivimi|8|70",
+      "2026-09-16|Natë|Pranimi|I lagur|Mjedisi|1|",
+      "2026-09-17|Mëngjes|Ngarkimi|I shtypur|Stivimi|3|27",
+      "2026-09-17|Pasdite|Transporti|Rrjedh|Sigurimi i ngarkesës|4|58",
+      "2026-09-17|Pasdite|Ngarkimi|I grisur ose i shpuar|Pajisjet|2|16",
+      "2026-09-17|Pasdite|Paketimi|I shtypur|Ambalazhi|3|29",
+      "2026-09-17|Natë|Magazinimi|I lagur|Mjedisi|2|22",
+      "2026-09-18|Mëngjes|Dorëzimi|I grisur ose i shpuar|Manipulimi|2|15",
+      "2026-09-18|Pasdite|Ngarkimi|I shtypur|Stivimi|13|118",
+      "2026-09-18|Pasdite|Transporti|I thyer|Sigurimi i ngarkesës|4|81",
+      "2026-09-18|Pasdite|Ngarkimi|I shtypur|E panjohur|2|19",
+      "2026-09-18|Natë|Mbledhja|I shtypur|Pajisjet|1|9",
+      "2026-09-19|Mëngjes|Ngarkimi|I shtypur|Stivimi|4|35",
+      "2026-09-19|Mëngjes|Transporti|I shtypur|Stivimi|2|24",
+      "2026-09-19|Pasdite|Dorëzimi|I lagur|Mjedisi|1|12",
+      "2026-09-19|Pasdite|Ngarkimi|I thyer|Manipulimi|2|48",
+      "2026-09-20|Mëngjes|Ngarkimi|I shtypur|Stivimi|3|26"
+    ]
+  }
+}

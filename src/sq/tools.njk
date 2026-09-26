@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Mjete
+description: "Mjete falas dhe private për menaxherët dhe ekipet e magazinës: dëmet, plotësia, vonesat dhe dorëzimi i turnit. Gjithçka punon në browser."
+activeNav: /sq/tools.html
+permalink: /sq/tools.html
+---
+<section class="shell page-hero">
+  <p class="eyebrow">Falas · Privat · Pa regjistrim</p>
+  <h1>Mjete</h1>
+  <p class="lede">Mjete të vogla dhe praktike të lindura nga puna në magazinë. Punojnë në browser-in tuaj, dhe asgjë që shkruani nuk del nga pajisja juaj.</p>
+</section>
+<section class="shell tool-grid">
+  {%- for tool in sq.tools %}
+  {% include "partials/tool-card.njk" %}
+  {%- endfor %}
+</section>

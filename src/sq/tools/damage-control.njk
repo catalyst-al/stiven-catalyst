@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Kontrolli i dëmeve
+description: "Një regjistër privat dëmesh për ekipet e magazinës dhe shpërndarjes: shkalla e dëmeve, DPMO dhe niveli sigma, Pareto e shkaqeve, ku në proces lindin dëmet, dhe një kontroll për ngarkimin."
+activeNav: /sq/tools.html
+permalink: /sq/tools/damage-control/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Magazinë</p>
+  <h1>Kontrolli i dëmeve</h1>
+  <p class="lede">Regjistroni çdo njësi të dëmtuar me hapin e procesit ku u gjet dhe shkakun pas saj. Mjeti tregon shkallën e dëmeve, shkaqet e pakta pas shumicës së dëmeve dhe ku duhet të filloni.</p>
+</section>
+
+{% set cfg = sq.damageControl %}
+{% include "partials/defect-log.njk" %}

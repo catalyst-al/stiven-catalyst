@@ -170,6 +170,7 @@ button, input, select { font: inherit; }
   color: var(--muted);
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
   transition: color .2s ease;
 }
 .main-nav a:hover,
@@ -945,21 +946,30 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
   h2:lang(de), h3:lang(de) { hyphens: auto; }
 }
 .page-hero.tool-hero h1.hero-long { font-size: clamp(28px, 8.4cqi, 88px); }
-/* Link to the page in the other language, next to the theme button. */
+/* The same page in each language, next to the theme button. */
 .lang-switch {
-  display: inline-grid;
-  place-items: center;
-  min-width: 40px;
+  display: inline-flex;
+  align-items: center;
   height: 40px;
-  padding: 0 10px;
+  padding: 0 4px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--ink);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: .08em;
 }
-.lang-switch:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.lang-switch > * {
+  display: inline-grid;
+  place-items: center;
+  min-width: 32px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 999px;
+  color: var(--muted);
+}
+.lang-switch a:hover { color: var(--ink); }
+.lang-switch [aria-current] { background: color-mix(in srgb, var(--blue) 18%, transparent); color: var(--ink); }
+.mobile-panel .lang-switch { display: none; }
 
 .tool-layout {
   display: grid;
@@ -2244,6 +2254,12 @@ html:not(.js) .filter-bar { display: none; }
 
 .mobile-panel { display: none; }
 
+/* Narrow desktops: the longer Albanian and German labels still fit on one line. */
+@media (max-width: 1100px) {
+  .header-inner { gap: 18px; }
+  .main-nav { gap: 14px; }
+}
+
 @media (max-width: 900px) {
   .main-nav { display: none; }
   .header-actions { margin-left: auto; }
@@ -2302,7 +2318,14 @@ html:not(.js) .filter-bar { display: none; }
   }
 }
 
-/* The smallest phones: brand, language, theme and menu still fit on one line. */
+/* Phones: the language switch moves from the header into the menu. */
+@media (max-width: 620px) {
+  .header-actions > .lang-switch { display: none; }
+  .mobile-panel .lang-switch { display: inline-flex; justify-self: start; margin-top: 8px; }
+  .mobile-panel .lang-switch > * { font-family: inherit; font-size: 13px; letter-spacing: .08em; min-width: 44px; height: 32px; }
+}
+
+/* The smallest phones: brand, theme and menu still fit on one line. */
 @media (max-width: 380px) {
   .header-inner { gap: 10px; }
   .brand { gap: 8px; letter-spacing: .1em; }

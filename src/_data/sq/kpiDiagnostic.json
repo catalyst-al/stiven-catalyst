@@ -1,0 +1,67 @@
+{
+  "scale": ["Nuk është e vërtetë", "Pjesërisht", "Kryesisht", "Plotësisht e vërtetë"],
+  "causes": {
+    "clarity": {
+      "name": "Qartësia",
+      "meaning": "Njerëzit nuk punojnë me të njëjtën pamje për “mirë”. Standardi, objektivi ose arsyeja pas tij nuk janë të përbashkëta.",
+      "moves": [
+        "Shkruajeni standardin në një fjali që njerëzit mund ta përsërisin.",
+        "Tregoni si duket “mirë” me një shembull real, jo me një slide.",
+        "Shpjegoni pse numri ka rëndësi për personin e radhës në proces."
+      ],
+      "question": "Pyetni tre njerëz: si duket këtu “e bërë siç duhet”?"
+    },
+    "skill": {
+      "name": "Aftësia",
+      "meaning": "Procesi mund të funksionojë, por jo të gjithë mund ta drejtojnë ende në mënyrë të qëndrueshme. Rezultatin po e mban përvoja.",
+      "moves": [
+        "Vendosni njerëzit më të rinj në çift me një punonjës të fortë për disa turne.",
+        "Ktheni hapat kritikë në një listë kontrolli me një faqe.",
+        "Kontrolloni të kuptuarit duke parë punën, jo duke pyetur “a është e qartë?”"
+      ],
+      "question": "Ku saktësisht shkon keq herën e parë që dikush e bën këtë vetëm?"
+    },
+    "capacity": {
+      "name": "Kapaciteti",
+      "meaning": "Puna nuk hyn në kohën ose te njerëzit në dispozicion. Nën presion hapat braktisen.",
+      "moves": [
+        "Vendoseni KPI-në pranë volumit dhe personelit sipas orës ose ditës.",
+        "Mbroni hapat kritikë në orët e pikut dhe hiqni së pari ato jo thelbësore.",
+        "Largoni punë nga piku kudo që mundeni."
+      ],
+      "question": "Çfarë anashkalojnë njerëzit kur ka ngarkesë?"
+    },
+    "design": {
+      "name": "Dizajni i procesit",
+      "meaning": "Vetë procesi e prodhon gabimin. Njerëz të ndryshëm marrin të njëjtin rezultat, sepse sistemi i çon atje.",
+      "moves": [
+        "Ecni procesin nga fillimi në fund dhe matni kohën e çdo hapi.",
+        "Bëjeni mënyrën e duhur mënyrën e lehtë: planimetria, mjetet, cilësimet e paracaktuara.",
+        "Hiqni hapat që ekzistojnë vetëm për shkak të problemeve të vjetra."
+      ],
+      "question": "Çfarë e bën mënyrën e gabuar më të shpejtë se mënyrën e duhur?"
+    },
+    "ownership": {
+      "name": "Përgjegjësia",
+      "meaning": "Puna bie mes njerëzve, turneve ose ekipeve. Secili bën pjesën e vet, dhe boshllëku nuk i përket askujt.",
+      "moves": [
+        "Caktoni një përgjegjës për çdo dorëzim pune.",
+        "Bini dakord çfarë do të thotë “u dorëzua”: çfarë, në çfarë gjendjeje, deri kur.",
+        "Shqyrtoni gabimet te dorëzimi, jo vetëm në fund të linjës."
+      ],
+      "question": "Në cilin moment kjo bëhet punë e askujt?"
+    }
+  },
+  "statements": [
+    { "cause": "clarity", "text": "Nëse pyet njerëz të ndryshëm cili është standardi, merr përgjigje të ndryshme." },
+    { "cause": "capacity", "text": "Numri përkeqësohet në orët e pikut, në ditët e ngarkuara ose kur ka më pak njerëz në turn." },
+    { "cause": "design", "text": "I njëjti gabim vazhdon të kthehet, edhe kur punën e bëjnë njerëz të ndryshëm." },
+    { "cause": "skill", "text": "Problemi përqendrohet te njerëzit më të rinj ose me më pak përvojë." },
+    { "cause": "ownership", "text": "Problemet shfaqen te dorëzimet mes turneve, ekipeve ose sistemeve." },
+    { "cause": "clarity", "text": "Objektivi ndryshoi së fundmi, ose arsyeja pas tij nuk u shpjegua kurrë." },
+    { "cause": "design", "text": "Mjetet, planimetria ose sistemet e bëjnë mënyrën e duhur më të ngadaltë se mënyrën e gabuar." },
+    { "cause": "capacity", "text": "Njerëzit anashkalojnë hapa sepse nuk ka kohë të mjaftueshme për t’i bërë të gjithë." },
+    { "cause": "ownership", "text": "Kur diçka shkon keq, nuk është e qartë kush duhej ta kishte kapur." },
+    { "cause": "skill", "text": "Rezultatet përmirësohen qartë kur në të njëjtin turn është një person me përvojë." }
+  ]
+}

@@ -3,7 +3,7 @@
   if (!dataEl || !window.ToolKit) return;
 
   const {
-    LANG, LOCALE, tx, num, showDate, lower,
+    DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
     panel, stat, resultActions, flash, downloadCsv, LOG_LIMIT, shownNote, renderOnPause,
@@ -16,7 +16,8 @@
     Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
     return node;
   };
-  const shortDate = (iso) => (iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { day: "numeric", month: "short", timeZone: "UTC" }) : "-");
+  const dayLabel = dayMonth(false);
+  const shortDate = (iso) => (iso ? dayLabel(new Date(`${iso}T00:00:00Z`)) : "-");
   const rate = (value, digits = 2) => pct(value, digits);
   const days = (count) => plural(count, tx("day"), tx("days"));
   const direction = (worse) => (worse ? tx("worse") : tx("better"));
@@ -579,7 +580,7 @@
       [tx("Date"), unit(), metric(), tx("Rate %"), tx("Average %"), tx("Lower limit %"), tx("Upper limit %"), tx("Signal"), tx("Note")],
       ...state.rows.map((row, i) => {
         const point = result?.points[i];
-        const fixed = (value) => (value == null ? "" : (value * 100).toFixed(3).replace(".", LANG === "de" ? "," : "."));
+        const fixed = (value) => (value == null ? "" : (value * 100).toFixed(3).replace(".", DECIMAL_COMMA ? "," : "."));
         return [row.date, row.n, row.d, fixed(row.d / row.n), fixed(result?.pBar), fixed(point?.lcl), fixed(point?.ucl), point ? signalText(point) : "", row.note];
       }),
     ]);

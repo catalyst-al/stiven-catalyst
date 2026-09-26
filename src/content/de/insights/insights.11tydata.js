@@ -1,5 +1,3 @@
-import { englishUrl } from "../../../../lib/translations.js";
-
 const WORDS_PER_MINUTE = 200;
 
 export default {
@@ -14,6 +12,5 @@ export default {
       const words = text.split(/\s+/).filter(Boolean).length;
       return words ? `${Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))} min` : "";
     },
-    alt: (data) => (data.status === "soon" ? undefined : englishUrl(data.page.fileSlug, data.original)),
   },
 };

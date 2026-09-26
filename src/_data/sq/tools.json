@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Diagnostikimi i KPI-së",
+    "type": "Diagnostikim",
+    "time": "2 min",
+    "summary": "Një numër është bërë i kuq. Dhjetë pohime tregojnë nëse shkaku është te qartësia, aftësia, kapaciteti, procesi apo përgjegjësia, me hapat e parë për secilin.",
+    "url": "/sq/tools/kpi-diagnostic/",
+    "cta": "Nis diagnostikimin"
+  },
+  {
+    "name": "5 Whys",
+    "type": "Fletë pune",
+    "time": "10 min",
+    "summary": "Nga simptoma te një shkak që mund ta ndryshoni, pastaj një kundërmasë, një përgjegjës dhe një kontroll. Printojeni ose ruajeni si PDF.",
+    "url": "/sq/tools/five-whys/",
+    "cta": "Hap fletën e punës"
+  },
+  {
+    "name": "Kontrolli i dëmeve",
+    "type": "Magazinë",
+    "time": "Vazhdimisht",
+    "summary": "Regjistroni njësitë e dëmtuara sipas hapit të procesit dhe shkakut. Shkalla e dëmeve, DPMO dhe niveli sigma, shkaqet e pakta pas shumicës së dëmeve dhe ku të filloni.",
+    "url": "/sq/tools/damage-control/",
+    "cta": "Hap regjistrin e dëmeve"
+  },
+  {
+    "name": "Kontrolli i plotësisë",
+    "type": "Magazinë",
+    "time": "Vazhdimisht",
+    "summary": "Regjistroni porositë që dolën pa të gjithë artikujt ose pakot. Shkalla, DPMO dhe niveli sigma, shkaqet pas shumicës së gabimeve dhe ku lindin.",
+    "url": "/sq/tools/incomplete-control/",
+    "cta": "Hap regjistrin e porosive"
+  },
+  {
+    "name": "Analiza e vonesave",
+    "type": "Magazinë",
+    "time": "Vazhdimisht",
+    "summary": "Regjistroni orët e planifikuara dhe reale të linjave. Përqindja në kohë, sa vonesë nis te rampa dhe sa në rrugë, dhe arsyet e orët pas saj.",
+    "url": "/sq/tools/delay-analyzer/",
+    "cta": "Hap regjistrin e linjave"
+  },
+  {
+    "name": "Sigma dhe karta e kontrollit",
+    "type": "Six Sigma",
+    "time": "5 min",
+    "summary": "Ktheni defektet në nivel sigma, bashkoni në kohë, pa dëme dhe të plota në dorëzimin e përsosur, dhe shihni nëse një ditë e keqe është sinjal apo zhurmë.",
+    "url": "/sq/tools/sigma-control-chart/",
+    "cta": "Hap llogaritësin"
+  },
+  {
+    "name": "Six Sigma në magazinë",
+    "type": "Kurs",
+    "time": "45 min",
+    "summary": "DMAIC në pesë hapa mbi një rast magazine, me mjetin e duhur për çdo hap, tri pyetje për hap, tetë humbjet dhe një kartë projekti.",
+    "url": "/sq/tools/six-sigma-dmaic/",
+    "cta": "Nis kursin"
+  },
+  {
+    "name": "Dorëzimi i turnit",
+    "type": "Listë kontrolli",
+    "time": "5 min",
+    "summary": "Numrat, çështjet e hapura me përgjegjës dhe orë, paralajmërimet dhe siguria në një dorëzim. Çështjet e hapura kalojnë vetë te turni i ardhshëm.",
+    "url": "/sq/tools/shift-handover/",
+    "cta": "Nis dorëzimin"
+  }
+]
