@@ -42,5 +42,5 @@
 <section class="shell tool-result" data-result hidden tabindex="-1" aria-live="polite"></section>
 
 <script type="application/json" id="kpi-diagnostic-data">{{ cfg | dump | safe }}</script>
-<script src="/js/tool-kit.js" defer></script>
-<script src="/js/kpi-diagnostic.js" defer></script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/kpi-diagnostic.js' | assetUrl }}" defer></script>

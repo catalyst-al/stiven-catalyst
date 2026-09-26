@@ -29,4 +29,4 @@
     <p class="filter-empty" data-filter-empty hidden>{{ "No essays match that yet. Try another word or topic." | t(lang) }}</p>
   </section>
 {% include "partials/newsletter.njk" %}
-<script src="/js/filter.js" defer></script>
+<script src="{{ '/js/filter.js' | assetUrl }}" defer></script>

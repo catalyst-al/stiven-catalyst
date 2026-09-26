@@ -40,7 +40,7 @@
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
 </head>
 <body>
 <a class="skip-link" href="#main">{{ "Skip to content" | t(lang) }}</a>
@@ -94,6 +94,6 @@
 {%- if lang == "de" and page.url and "/de/tools/" in page.url %}
 <script type="application/json" id="ui-strings">{{ de.ui | dump | safe }}</script>
 {%- endif %}
-<script src="/script.js"></script>
+<script src="{{ '/script.js' | assetUrl }}"></script>
 </body>
 </html>

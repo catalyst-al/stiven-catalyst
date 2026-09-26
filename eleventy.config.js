@@ -1,11 +1,13 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // German interface texts, keyed by the English text (also used by the tools' scripts).
 // Read once per build; a rebuild in watch mode reads the file again.
 let german = null;
 const readGerman = () => (german ??= JSON.parse(fs.readFileSync("src/_data/de/ui.json", "utf8")));
+const assetVersions = new Map();
 
 const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug);
 
@@ -53,6 +55,14 @@ export default function (eleventyConfig) {
 
   // {{ "Add to log" | t(lang) }}: the German text on German pages, else the English one.
   eleventyConfig.addFilter("t", (text, lang) => (lang === "de" ? readGerman()[text] ?? text : text));
+  // A changed asset gets a new URL, so browsers do not keep an old script or stylesheet.
+  eleventyConfig.addFilter("assetUrl", (path) => {
+    const file = `src${path}`;
+    if (!assetVersions.has(file)) {
+      assetVersions.set(file, createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10));
+    }
+    return `${path}?v=${assetVersions.get(file)}`;
+  });
   // Links between tools stay in the page's language: /tools/x/ becomes /de/tools/x/.
   const GERMAN_PAGES = new Set(["/", "/insights.html", "/field-notes.html", "/projects.html", "/tools.html", "/about.html", "/contact.html"]);
   eleventyConfig.addFilter("local", (url, lang) => {
@@ -62,7 +72,7 @@ export default function (eleventyConfig) {
   // Lower case mid-sentence in English only: German nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
-  eleventyConfig.on("eleventy.before", () => { german = null; });
+  eleventyConfig.on("eleventy.before", () => { german = null; assetVersions.clear(); });
 
   eleventyConfig.addFilter("readableDate", (date, lang) =>
     new Date(date).toLocaleDateString(lang === "de" ? "de-DE" : "en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
