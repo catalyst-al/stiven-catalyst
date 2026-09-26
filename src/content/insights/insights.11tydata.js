@@ -1,7 +1,10 @@
+import { germanUrl } from "../../../lib/translations.js";
+
 const WORDS_PER_MINUTE = 220;
 
 export default {
   layout: "layouts/article.njk",
+  activeNav: "/insights.html",
   // Essays marked "soon" are listed but get no page of their own yet.
   // "address" lets older essays keep their original URL (e.g. /article-kpi.html).
   permalink: (data) => {
@@ -16,5 +19,6 @@ export default {
       const words = text.split(/\s+/).filter(Boolean).length;
       return words ? `${Math.max(1, Math.round(words / WORDS_PER_MINUTE))} min` : "";
     },
+    alt: (data) => (data.status === "soon" ? undefined : germanUrl(data.page.fileSlug)),
   },
 };

@@ -8,7 +8,8 @@
   const chips = [...controls.querySelectorAll("[data-topic]")];
   const count = controls.querySelector("[data-filter-count]");
   const empty = list.querySelector("[data-filter-empty]");
-  const noun = list.querySelector(".notes-grid") ? "notes" : "essays";
+  // "{a} of {b} essays", in the page's language.
+  const countLabel = controls.dataset.countLabel || "{a} of {b}";
 
   const params = new URLSearchParams(location.search);
   let topic = chips.some((chip) => chip.dataset.topic === params.get("topic")) ? params.get("topic") : "";
@@ -25,7 +26,7 @@
     chips.forEach((chip) => chip.setAttribute("aria-pressed", String(chip.dataset.topic === topic)));
     empty.hidden = shown > 0;
     const filtered = topic || words.length;
-    count.textContent = filtered ? `${shown} of ${items.length} ${noun}` : "";
+    count.textContent = filtered ? countLabel.replace("{a}", shown).replace("{b}", items.length) : "";
 
     // Keep the current filter in the address so it can be shared.
     const next = new URLSearchParams();

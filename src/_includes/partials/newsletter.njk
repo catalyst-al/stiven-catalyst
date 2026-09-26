@@ -1,20 +1,20 @@
 {%- if site.newsletter.action %}
 <section class="shell newsletter" aria-labelledby="newsletter-title">
   <div>
-    <p class="kicker">Newsletter</p>
-    <h2 id="newsletter-title">New thinking, <span>when it is ready.</span></h2>
-    <p>New essays and field notes by email. No schedule pressure, no noise. Unsubscribe at any time.</p>
+    <p class="kicker">{{ "Newsletter" | t(lang) }}</p>
+    <h2 id="newsletter-title">{{ "New thinking," | t(lang) }} <span>{{ "when it is ready." | t(lang) }}</span></h2>
+    <p>{{ "New essays and field notes by email. No schedule pressure, no noise. Unsubscribe at any time." | t(lang) }}</p>
   </div>
   <form class="newsletter-form" action="{{ site.newsletter.action }}" method="post" target="_blank">
-    <label class="visually-hidden" for="newsletter-email">Email address</label>
+    <label class="visually-hidden" for="newsletter-email">{{ "Email address" | t(lang) }}</label>
     <div class="newsletter-row">
-      <input id="newsletter-email" type="email" name="{{ site.newsletter.emailField }}" placeholder="you@example.com" autocomplete="email" required>
-      <button type="submit">Subscribe</button>
+      <input id="newsletter-email" type="email" name="{{ site.newsletter.emailField }}" placeholder="{{ 'you@example.com' | t(lang) }}" autocomplete="email" required>
+      <button type="submit">{{ "Subscribe" | t(lang) }}</button>
     </div>
     {%- for name, value in site.newsletter.hiddenFields %}
     <input type="hidden" name="{{ name }}" value="{{ value }}">
     {%- endfor %}
-    <p class="form-note">You will get an email to confirm your subscription.{% if legal.name and legal.city %} Details in the <a href="/datenschutz.html">privacy policy</a>.{% endif %}</p>
+    <p class="form-note">{{ "You will get an email to confirm your subscription." | t(lang) }}{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="/datenschutz.html">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
   </form>
 </section>
 {%- endif %}

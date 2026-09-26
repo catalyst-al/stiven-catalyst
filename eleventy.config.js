@@ -35,19 +35,37 @@ export default function (eleventyConfig) {
     api.getFilteredByGlob("src/content/projects/*.md").sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   );
 
+  // The same three collections in German (src/content/de/...).
+  eleventyConfig.addCollection("insightsDe", (api) =>
+    api.getFilteredByGlob("src/content/de/insights/*.md").sort(byDate).map((item, index) => {
+      item.data.number = String(index + 1).padStart(2, "0");
+      return item;
+    })
+  );
+  eleventyConfig.addCollection("notesDe", (api) =>
+    api.getFilteredByGlob("src/content/de/notes/*.md").sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
+  );
+  eleventyConfig.addCollection("projectsDe", (api) =>
+    api.getFilteredByGlob("src/content/de/projects/*.md").sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  );
+
   eleventyConfig.addGlobalData("year", new Date().getFullYear());
 
   // {{ "Add to log" | t(lang) }}: the German text on German pages, else the English one.
   eleventyConfig.addFilter("t", (text, lang) => (lang === "de" ? readGerman()[text] ?? text : text));
   // Links between tools stay in the page's language: /tools/x/ becomes /de/tools/x/.
-  eleventyConfig.addFilter("local", (url, lang) => (lang === "de" && /^\/tools(\/|\.html)/.test(url) ? `/de${url}` : url));
+  const GERMAN_PAGES = new Set(["/", "/insights.html", "/field-notes.html", "/projects.html", "/tools.html", "/about.html", "/contact.html"]);
+  eleventyConfig.addFilter("local", (url, lang) => {
+    if (lang !== "de" || !(GERMAN_PAGES.has(url) || url.startsWith("/tools/"))) return url;
+    return url === "/" ? "/de/" : `/de${url}`;
+  });
   // Lower case mid-sentence in English only: German nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
   eleventyConfig.on("eleventy.before", () => { german = null; });
 
-  eleventyConfig.addFilter("readableDate", (date) =>
-    new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
+  eleventyConfig.addFilter("readableDate", (date, lang) =>
+    new Date(date).toLocaleDateString(lang === "de" ? "de-DE" : "en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
   );
   eleventyConfig.addFilter("pad", (value) => String(value).padStart(2, "0"));
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
