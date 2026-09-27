@@ -14,12 +14,12 @@ The site is built with [Eleventy](https://www.11ty.dev/) from the `src/` folder 
 ## Run locally
 ```
 npm install
-npm start      # http://localhost:8080/stiven-catalyst/
+npm start      # http://localhost:8080/
 npm run build  # writes the site to _site/
 ```
 
 ## Notes
-- Links in templates are written from the site root (`/styles.css`); Eleventy adds the `/stiven-catalyst/` prefix, which comes from `url` in `src/_data/site.json`. For a custom domain, change `url` there and everything follows (links, social previews, sitemap, feed).
+- Links in templates are written from the site root (`/styles.css`); The site lives at https://stivencatalyst.com/ (`url` in `src/_data/site.json`); Eleventy prefixes links with the path in that address, so moving the site means changing `url` there and everything follows (links, social previews, sitemap, feed).
 - Insights and Field Notes have client-side search and topic filters (`src/js/filter.js`); the filter is kept in the URL (`?topic=Operations&q=handoff`) so it can be shared. Essays show a reading time that is counted from the text unless one is typed in.
 - The newsletter section stays hidden until `newsletter.action` is set in `src/_data/site.json`.
 - The Impressum and Datenschutz pages are only generated once the name and city in `src/_data/legal.json` are filled in.
