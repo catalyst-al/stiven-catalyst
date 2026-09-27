@@ -290,7 +290,6 @@ button, input, select { font: inherit; }
   position: relative;
   min-height: 520px;
   overflow: hidden;
-  border: 1px solid var(--line);
   border-radius: 30px;
   background:
     linear-gradient(90deg,
@@ -315,7 +314,7 @@ button, input, select { font: inherit; }
   position: absolute;
   z-index: 2;
   top: 0;
-  left: 58%;
+  left: 50%;
   width: 5px;
   height: 145px;
   background: #030506;
@@ -325,7 +324,7 @@ button, input, select { font: inherit; }
 .brand-bulb {
   position: absolute;
   z-index: 3;
-  left: 58%;
+  left: 50%;
   top: 136px;
   width: 62px;
   height: 78px;
