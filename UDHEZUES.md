@@ -112,6 +112,7 @@ pip install pymupdf pillow
 python3 scripts/book-pages.py rruga/per/te/libri.pdf
 ```
 
+Kopjo edhe PDF-në e re te `src/media/books/mall-per-durresin/mall-per-durresin.pdf` (për shkarkim).
 Skripti rishkruan faqet te `src/media/books/mall-per-durresin/` dhe tekstin te `src/_data/book.json`.
 
 ---
