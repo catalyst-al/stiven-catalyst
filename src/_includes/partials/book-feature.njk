@@ -1,0 +1,15 @@
+{#- The book, shown on the homepage and the Reflections page. -#}
+{%- set bookUrl = "/books/mall-per-durresin.html" | local(lang) -%}
+{%- set cover = book.pages[0] -%}
+  <section class="shell book-feature">
+    <a class="book-object" href="{{ bookUrl }}" tabindex="-1" aria-hidden="true">
+      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="lazy"></span>
+    </a>
+    <div class="book-feature-copy">
+      <p class="kicker">{{ "The book · in Albanian" | t(lang) }}</p>
+      <h2 lang="sq"><a href="{{ bookUrl }}">{{ book.title }}</a></h2>
+      <p class="book-subtitle" lang="sq">{{ book.subtitle }}</p>
+      <p>{{ "Seven chapters about growing up in Durrës: friends, the leaving and the coming back. Leaf through it page by page, like a real book." | t(lang) }}</p>
+      <a class="button-primary" href="{{ bookUrl }}">{{ "Open the book" | t(lang) }}</a>
+    </div>
+  </section>
