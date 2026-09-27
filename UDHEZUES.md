@@ -100,6 +100,23 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ---
 
+## Libri “Mall për Durrësin”
+
+Libri shfletohet në `/sq/books/mall-per-durresin.html` (edhe në anglisht dhe gjermanisht, me tekstin e librit në shqip).
+Faqet janë imazhe të nxjerra nga PDF-ja, plus teksti i plotë për kërkim dhe lexues ekrani.
+
+Kur ke një version të ri të PDF-së, kjo bëhet në kompjuter (jo nga paneli):
+
+```
+pip install pymupdf pillow
+python3 scripts/book-pages.py rruga/per/te/libri.pdf
+```
+
+Kopjo edhe PDF-në e re te `src/media/books/mall-per-durresin/mall-per-durresin.pdf` (për shkarkim).
+Skripti rishkruan faqet te `src/media/books/mall-per-durresin/` dhe tekstin te `src/_data/book.json`.
+
+---
+
 ## Pyetje të shpejta
 
 **Sa shpejt del ndryshimi?** Rreth 1–2 minuta pas Save.

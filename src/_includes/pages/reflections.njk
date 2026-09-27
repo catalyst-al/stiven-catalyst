@@ -4,6 +4,7 @@
     <h1>{{ "Reflections" | t(lang) }}</h1>
     <p class="lede">{{ "Slower, more personal pieces on attention, people and the quiet side of leadership." | t(lang) }}</p>
   </section>
+{% include "partials/book-feature.njk" %}
   <section class="shell listing reflection-list">
     {%- for item in collections["reflections" + (lang | langSuffix)] %}
     <a class="list-row" href="{{ item.url }}">
