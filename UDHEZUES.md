@@ -43,6 +43,12 @@ Në të majtë do shohësh:
 
 Shtyp **Save**. Kaq.
 
+**Foto në krye (opsionale)**: te **Photo at the top** ngarko një foto, dhe te **Photo description** shkruaj me pak fjalë çfarë shihet (për lexuesit që nuk e shohin foton). Foto horizontale ose katrore del më mirë; faqja e zbut vetë skajet.
+
+### Reflektime (shkrimet personale)
+
+**Reflections → Add an entry** (gjermanisht: **Reflections (Deutsch)**, shqip: **Reflections (Shqip)**). Fushat janë si te artikulli, pa kategori. Këtu shkojnë shkrimet me zërin tënd personal; Insights mbeten për analizat e punës.
+
 ## 3. Field Note e re
 
 **Field Notes → Add an entry**: shkruaj shënimin (pa thonjëza, shtohen vetë) dhe datën. Faqja kryesore tregon 2 më të rejat.

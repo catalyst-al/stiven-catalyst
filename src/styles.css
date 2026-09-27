@@ -2004,6 +2004,8 @@ html:not(.js) .filter-bar { display: none; }
 }
 
 .listing { padding: 30px 0 100px; }
+/* "Reflections" is wider than the other one-word titles. */
+.reflection-hero h1 { font-size: clamp(34px, 13cqi, 120px); }
 
 .list-row {
   display: grid;
@@ -2040,6 +2042,14 @@ html:not(.js) .filter-bar { display: none; }
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: .09em;
+}
+/* Reflections carry a date instead of a number. */
+.reflection-list .number {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
 }
 
 .project-grid {
@@ -2202,6 +2212,69 @@ html:not(.js) .filter-bar { display: none; }
   font-size: 20px;
 }
 
+/* An essay with a photo: the picture sits to the right and fades into the page,
+   tinted with the brand's red and blue; the title runs over its faded edge. */
+.article-hero.has-image {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  align-items: end;
+  padding-top: 56px;
+}
+.article-hero-media {
+  position: relative;
+  grid-area: 1 / 2;
+  margin: 0;
+  aspect-ratio: 720 / 612;
+  border-radius: 28px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%), linear-gradient(0deg, transparent, #000 26%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 38%), linear-gradient(0deg, transparent, #000 26%, #000 86%, transparent);
+  mask-composite: intersect;
+}
+.article-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.72) contrast(1.06) brightness(.86);
+}
+.article-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--red) 26%, transparent), transparent 46%, color-mix(in srgb, var(--blue) 24%, transparent));
+  mix-blend-mode: soft-light;
+}
+.has-image .article-hero-text {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  margin-right: -22%;
+  padding-bottom: 12px;
+}
+.has-image .article-hero-text h1 { font-size: clamp(46px, 6.4vw, 92px); }
+.has-image .article-deck { margin-left: 0; max-width: 560px; }
+
+.author-photo {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 16px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about-portrait {
+  max-width: 340px;
+  margin: 0 0 28px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.about-portrait img { display: block; width: 100%; height: auto; }
+
 .article-body {
   display: grid;
   grid-template-columns: 220px minmax(0, 720px);
@@ -2258,6 +2331,10 @@ html:not(.js) .filter-bar { display: none; }
   .header-inner { gap: 18px; }
   .main-nav { gap: 14px; }
 }
+@media (max-width: 1000px) {
+  .main-nav { gap: 11px; }
+  .main-nav a { font-size: 13px; }
+}
 
 @media (max-width: 900px) {
   .main-nav { display: none; }
@@ -2295,9 +2372,17 @@ html:not(.js) .filter-bar { display: none; }
   .home-tools > :last-child:nth-child(odd) { grid-column: 1 / -1; min-height: 0; }
   .about-brand-poster { max-width: 560px; min-height: 560px; }
   .article-body { gap: 28px; }
+  .article-hero.has-image { grid-template-columns: minmax(0, 1fr); padding-top: 28px; }
+  .article-hero-media {
+    grid-area: 1 / 1;
+    -webkit-mask-image: linear-gradient(0deg, transparent, #000 45%);
+    mask-image: linear-gradient(0deg, transparent, #000 45%);
+  }
+  .has-image .article-hero-text { grid-area: 2 / 1; margin: -96px 0 0; }
   .article-aside { border-bottom: 1px solid var(--line); padding-bottom: 20px; }
   .list-row { grid-template-columns: 70px 1fr; }
   .list-row .row-meta { display: none; }
+  .reflection-list .list-row { grid-template-columns: 1fr; gap: 12px; }
 
   .mobile-panel {
     position: fixed;
@@ -2367,6 +2452,8 @@ html:not(.js) .filter-bar { display: none; }
   .footer-grid { grid-template-columns: 1fr; }
   .list-row { grid-template-columns: 46px 1fr; gap: 14px; }
   .list-row .number { font-size: 24px; }
+  .reflection-list .list-row { grid-template-columns: 1fr; }
+  .reflection-list .number { font-size: 12px; }
   .project-grid { padding-top: 40px; }
   .project-card { min-height: 340px; }
   .page-hero { padding-top: 70px; }
