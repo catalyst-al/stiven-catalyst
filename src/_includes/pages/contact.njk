@@ -27,9 +27,5 @@
   <aside class="contact-aside">
     <p class="kicker">{{ "Email" | t(lang) }}</p>
     <a class="text-link" href="mailto:{{ site.email }}">{{ site.email }} <span aria-hidden="true">→</span></a>
-    {%- if site.billingEmail %}
-    <p class="kicker">{{ "Invoices & billing" | t(lang) }}</p>
-    <a class="text-link" href="mailto:{{ site.billingEmail }}">{{ site.billingEmail }} <span aria-hidden="true">→</span></a>
-    {%- endif %}
   </aside>
 </section>
