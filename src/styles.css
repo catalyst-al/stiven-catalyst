@@ -2258,10 +2258,10 @@ html:not(.js) .filter-bar { display: none; }
 
 .author-photo {
   display: block;
-  width: 56px;
-  height: 56px;
-  margin-bottom: 12px;
-  border: 1px solid var(--line);
+  width: 96px;
+  height: 96px;
+  margin-bottom: 16px;
+  border: 2px solid var(--line);
   border-radius: 50%;
   object-fit: cover;
 }

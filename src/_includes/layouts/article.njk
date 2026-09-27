@@ -18,7 +18,7 @@ ogType: article
 </section>
 <section class="shell article-body">
   <aside class="article-aside">
-    {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="56" height="56">{% endif -%}
+    {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="96" height="96">{% endif -%}
     {{ author or site.author }}<br><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %}<br>{{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</aside>
   <article class="article-content" data-article>
 {{ content | safe }}
