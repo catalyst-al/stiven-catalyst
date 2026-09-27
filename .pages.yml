@@ -68,6 +68,14 @@ content:
         label: Custom address (advanced, leave empty)
         description: "Only for older essays that must keep their address, e.g. /article-kpi.html"
         type: string
+      - name: image
+        label: Photo at the top (optional)
+        description: Shown next to the title, softly faded into the page.
+        type: image
+      - name: image_alt
+        label: Photo description (optional)
+        description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
+        type: string
       - name: body
         label: Essay
         type: rich-text
@@ -132,6 +140,14 @@ content:
         type: text
       - name: seo_title
         label: Short title for the browser tab (optional)
+        type: string
+      - name: image
+        label: Photo at the top (optional)
+        description: Shown next to the title, softly faded into the page.
+        type: image
+      - name: image_alt
+        label: Photo description (optional)
+        description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
       - name: body
         label: Essay
@@ -198,8 +214,183 @@ content:
       - name: seo_title
         label: Short title for the browser tab (optional)
         type: string
+      - name: image
+        label: Photo at the top (optional)
+        description: Shown next to the title, softly faded into the page.
+        type: image
+      - name: image_alt
+        label: Photo description (optional)
+        description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
+        type: string
       - name: body
         label: Essay
+        type: rich-text
+  - name: reflections
+    label: Reflections
+    type: collection
+    path: src/content/reflections
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, status, date]
+      primary: title
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: status
+        label: Status
+        description: "Published = has its own page. Soon = not shown yet."
+        type: select
+        default: published
+        options:
+          values: [published, soon]
+      - name: read_time
+        label: Reading time (optional)
+        description: "For example: 3 min. Leave empty to count it from the text."
+        type: string
+      - name: summary
+        label: Summary (Reflections list)
+        type: text
+        required: true
+      - name: deck
+        label: Intro under the title (optional)
+        type: text
+      - name: description
+        label: Search description (optional)
+        description: What Google and LinkedIn show. Leave empty to use the summary.
+        type: text
+      - name: image
+        label: Photo at the top (optional)
+        description: Shown next to the title, softly faded into the page.
+        type: image
+      - name: image_alt
+        label: Photo description (optional)
+        description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
+        type: string
+      - name: body
+        label: Text
+        type: rich-text
+  - name: reflectionsDe
+    label: Reflections (Deutsch)
+    type: collection
+    path: src/content/de/reflections
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, status, date]
+      primary: title
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: original
+        label: English version (optional)
+        description: "The English reflection this translates, as in its address, e.g. ghost-in-a-room-of-mirrors. Adds the language switch to all versions."
+        type: string
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: status
+        label: Status
+        description: "Published = has its own page. Soon = not shown yet."
+        type: select
+        default: published
+        options:
+          values: [published, soon]
+      - name: read_time
+        label: Reading time (optional)
+        description: "For example: 3 min. Leave empty to count it from the text."
+        type: string
+      - name: summary
+        label: Summary (Reflections list)
+        type: text
+        required: true
+      - name: deck
+        label: Intro under the title (optional)
+        type: text
+      - name: description
+        label: Search description (optional)
+        description: What Google and LinkedIn show. Leave empty to use the summary.
+        type: text
+      - name: image
+        label: Photo at the top (optional)
+        description: Shown next to the title, softly faded into the page.
+        type: image
+      - name: image_alt
+        label: Photo description (optional)
+        description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
+        type: string
+      - name: body
+        label: Text
+        type: rich-text
+  - name: reflectionsSq
+    label: Reflections (Shqip)
+    type: collection
+    path: src/content/sq/reflections
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, status, date]
+      primary: title
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: original
+        label: English version (optional)
+        description: "The English reflection this translates, as in its address, e.g. ghost-in-a-room-of-mirrors. Adds the language switch to all versions."
+        type: string
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: status
+        label: Status
+        description: "Published = has its own page. Soon = not shown yet."
+        type: select
+        default: published
+        options:
+          values: [published, soon]
+      - name: read_time
+        label: Reading time (optional)
+        description: "For example: 3 min. Leave empty to count it from the text."
+        type: string
+      - name: summary
+        label: Summary (Reflections list)
+        type: text
+        required: true
+      - name: deck
+        label: Intro under the title (optional)
+        type: text
+      - name: description
+        label: Search description (optional)
+        description: What Google and LinkedIn show. Leave empty to use the summary.
+        type: text
+      - name: image
+        label: Photo at the top (optional)
+        description: Shown next to the title, softly faded into the page.
+        type: image
+      - name: image_alt
+        label: Photo description (optional)
+        description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
+        type: string
+      - name: body
+        label: Text
         type: rich-text
   - name: notes
     label: Field Notes

@@ -4,15 +4,22 @@ ogType: article
 ---
 {%- set pageUrl = page.url | absoluteUrl %}
 <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
-<section class="shell article-hero">
-  <p class="eyebrow">{{ category }} · {{ "Essay" | t(lang) }}</p>
-  <h1>{{ title }}</h1>
-  {%- if deck %}
-  <p class="article-deck">{{ deck }}</p>
+<section class="shell article-hero{% if image %} has-image{% endif %}">
+  {%- if image %}
+  <figure class="article-hero-media"><img src="{{ image }}" alt="{{ image_alt }}" fetchpriority="high"></figure>
   {%- endif %}
+  <div class="article-hero-text">
+    <p class="eyebrow">{% if category %}{{ category }} · {% endif %}{{ (kind or "Essay") | t(lang) }}</p>
+    <h1>{{ title }}</h1>
+    {%- if deck %}
+    <p class="article-deck">{{ deck }}</p>
+    {%- endif %}
+  </div>
 </section>
 <section class="shell article-body">
-  <aside class="article-aside">{{ author or site.author }}<br><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %}<br>{{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</aside>
+  <aside class="article-aside">
+    {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="56" height="56">{% endif -%}
+    {{ author or site.author }}<br><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %}<br>{{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</aside>
   <article class="article-content" data-article>
 {{ content | safe }}
     <div class="share-row">

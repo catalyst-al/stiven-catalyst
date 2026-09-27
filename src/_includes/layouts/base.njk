@@ -5,6 +5,7 @@
 {%- set nav = [
   [homeUrl, "Home" | t(lang)],
   ["/insights.html" | local(lang), "Insights" | t(lang)],
+  ["/reflections.html" | local(lang), "Reflections" | t(lang)],
   ["/field-notes.html" | local(lang), "Field Notes" | t(lang)],
   ["/projects.html" | local(lang), "Projects" | t(lang)],
   ["/tools.html" | local(lang), "Tools" | t(lang)],
@@ -87,7 +88,7 @@
       </p>
     </div>
     <nav class="footer-links" aria-label="{{ 'Footer' | t(lang) }}">
-      {%- for path, label in [["/insights.html", "Insights"], ["/field-notes.html", "Field Notes"], ["/projects.html", "Projects"], ["/tools.html", "Tools"], ["/about.html", "About"], ["/contact.html", "Contact"]] %}
+      {%- for path, label in [["/insights.html", "Insights"], ["/reflections.html", "Reflections"], ["/field-notes.html", "Field Notes"], ["/projects.html", "Projects"], ["/tools.html", "Tools"], ["/about.html", "About"], ["/contact.html", "Contact"]] %}
       <a href="{{ path | local(lang) }}">{{ label | t(lang) }}</a>
       {%- endfor %}
     </nav>

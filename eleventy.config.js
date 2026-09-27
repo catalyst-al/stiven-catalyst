@@ -33,17 +33,22 @@ export default function (eleventyConfig) {
       return item;
     })
   );
-  eleventyConfig.addCollection("published", (api) =>
-    api.getFilteredByGlob("src/content/insights/*.md").filter((item) => item.data.status !== "soon").sort(byDate)
-  );
   eleventyConfig.addCollection("notes", (api) =>
     api.getFilteredByGlob("src/content/notes/*.md").sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
+  );
+  // Reflections: personal essays, newest first.
+  eleventyConfig.addCollection("reflections", (api) =>
+    api.getFilteredByGlob("src/content/reflections/*.md").filter((item) => item.data.status !== "soon").sort((a, b) => b.date - a.date)
+  );
+  // The feed carries the English essays and reflections together.
+  eleventyConfig.addCollection("feed", (api) =>
+    api.getFilteredByGlob(["src/content/insights/*.md", "src/content/reflections/*.md"]).filter((item) => item.data.status !== "soon").sort(byDate)
   );
   eleventyConfig.addCollection("projects", (api) =>
     api.getFilteredByGlob("src/content/projects/*.md").sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   );
 
-  // The same three collections in German and Albanian: insightsDe, notesSq, ...
+  // The same collections in German and Albanian: insightsDe, notesSq, ...
   for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {
     eleventyConfig.addCollection(`insights${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/insights/*.md`).sort(byDate).map((item, index) => {
@@ -53,6 +58,9 @@ export default function (eleventyConfig) {
     );
     eleventyConfig.addCollection(`notes${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/notes/*.md`).sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
+    );
+    eleventyConfig.addCollection(`reflections${suffix}`, (api) =>
+      api.getFilteredByGlob(`src/content/${lang}/reflections/*.md`).filter((item) => item.data.status !== "soon").sort((a, b) => b.date - a.date)
     );
     eleventyConfig.addCollection(`projects${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/projects/*.md`).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))

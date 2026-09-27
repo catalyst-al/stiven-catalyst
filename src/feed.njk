@@ -10,7 +10,7 @@ eleventyExcludeFromCollections: true
   <link href="{{ '/' | absoluteUrl }}"/>
   <id>{{ '/' | absoluteUrl }}</id>
   <author><name>{{ site.author }}</name></author>
-  {%- set posts = collections.published | reverse %}
+  {%- set posts = collections.feed | reverse %}
   <updated>{{ (posts[0].date if posts.length else "2026-01-01") | isoDate }}T00:00:00Z</updated>
   {%- for post in posts | first(20) %}
   <entry>
