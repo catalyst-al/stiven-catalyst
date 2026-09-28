@@ -308,7 +308,7 @@ window.CvImport = (() => {
   const textLines = (text) => {
     let leafStart = true;
     const out = [];
-    String(text ?? "").replace(/\r/g, "").split("\n").forEach((raw) => {
+    String(text ?? "").slice(0, 300000).replace(/\r/g, "").split("\n").forEach((raw) => {
       if (!raw.trim()) { leafStart = true; return; }
       out.push({ text: raw.trim(), leafStart });
       leafStart = false;
@@ -526,8 +526,11 @@ window.CvImport = (() => {
     });
 
 
+  // A CV has a few hundred lines; anything far beyond that is not a CV and is cut,
+  // so a huge file cannot freeze the page.
+  const MAX_LINES = 3000;
   const parse = (input) => {
-    const lines = input.map((line) => ({ ...line, text: line.text.replace(/ /g, " ").replace(/[​﻿]/g, "").trim() })).filter((line) => line.text);
+    const lines = input.slice(0, MAX_LINES).map((line) => ({ ...line, text: line.text.replace(/ /g, " ").replace(/[​﻿]/g, "").trim() })).filter((line) => line.text);
     const body = median(lines.map((line) => line.size || 0));
     const cv = {
       person: { name: "", headline: "", location: "", phone: "", email: "", website: "", extra: "" },

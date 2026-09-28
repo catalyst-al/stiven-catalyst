@@ -172,6 +172,7 @@
 
   const matrix = (result) => {
     const wrap = el("div", "dl-table-wrap");
+    wrap.tabIndex = 0;
     const table = el("table", "dl-table dl-matrix");
     const head = el("tr");
     head.append(el("th", null, `${fields[1].label} \\ ${lower(fields[2].label)}`));

@@ -446,6 +446,7 @@
     const many = result.points.length > LOG_LIMIT;
     const tablePanel = panel(many ? tx("The latest {n} days", { n: LOG_LIMIT }) : tx("Every day"), many ? tx("The same numbers as the chart. Download the CSV for every day.") : tx("The same numbers as the chart."));
     const tableWrap = el("div", "dl-table-wrap");
+    tableWrap.tabIndex = 0;
     const table = el("table", "dl-table");
     const thead = el("thead");
     const headRow = el("tr");

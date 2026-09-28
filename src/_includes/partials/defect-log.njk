@@ -76,7 +76,7 @@
         <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
         <p class="form-note" data-log-count></p>
       </div>
-      <div class="dl-table-wrap" data-log-wrap hidden>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
         <table class="dl-table">
           <thead>
             <tr><th scope="col">{{ "Date" | t(lang) }}</th>{% for f in cfg.fields %}<th scope="col">{{ f.label }}</th>{% endfor %}<th scope="col" class="num">{{ t.countShort | capitalize }}</th><th scope="col" class="num">€</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>

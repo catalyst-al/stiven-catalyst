@@ -3119,10 +3119,12 @@ html:not(.js) .filter-bar { display: none; }
 .cv-more-menu {
   position: absolute;
   top: calc(100% + 6px);
-  left: 0;
+  right: 0;
   z-index: 5;
   display: grid;
-  min-width: 250px;
+  width: max-content;
+  min-width: 220px;
+  max-width: min(300px, calc(100vw - 32px));
   padding: 6px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -3152,6 +3154,13 @@ html:not(.js) .filter-bar { display: none; }
   font-weight: 800;
 }
 .cv-badge.is-done { color: #2fb36d; }
+/* The gold and green of the checks are too light on the light theme's paper. */
+[data-theme="light"] .cv-badge,
+[data-theme="light"] .is-open .cv-check-mark,
+[data-theme="light"] .ats-chip.is-missing { color: #7a5a1c; }
+[data-theme="light"] .cv-badge.is-done,
+[data-theme="light"] .is-ok .cv-check-mark,
+[data-theme="light"] .ats-chip.is-found { color: #1d7a45; }
 .cv-status { min-height: 0; margin: 0; }
 .cv-status:empty { display: none; }
 .cv-stage { position: relative; overflow: hidden; }
@@ -3203,7 +3212,8 @@ html:not(.js) .filter-bar { display: none; }
 .cv-page.is-over { box-shadow: 0 0 0 3px #e11d48, 0 18px 50px rgba(0, 0, 0, .28); }
 .cv-page > * { margin: 0; }
 .cv-measure { position: absolute; top: 0; left: 0; height: auto; visibility: hidden; box-shadow: none; pointer-events: none; }
-.cv-doc .is-placeholder { opacity: .45; }
+.cv-doc .is-placeholder { opacity: .65; }
+.cv-doc .cv-headline.is-placeholder { opacity: .85; }
 
 .cv-doc .cv-head {
   display: flex;
@@ -3269,7 +3279,7 @@ html:not(.js) .filter-bar { display: none; }
 .cv-doc .cv-bullets + .cv-role-row { margin-top: 8px; }
 .cv-doc .cv-role { color: var(--cv-ink); font-size: 13.5px; font-weight: 800; }
 .cv-doc .cv-role .cv-muted { font-weight: 600; }
-.cv-doc .cv-dates { flex: none; color: #4b5563; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.cv-doc .cv-dates { flex: 0 1 auto; max-width: 42%; color: #4b5563; font-size: 12px; font-weight: 800; text-align: right; }
 .cv-doc .cv-company { font-size: 12px; }
 .cv-doc .cv-accent { color: var(--cv-accent); font-weight: 800; }
 .cv-doc .cv-muted { color: var(--cv-muted); }
@@ -3331,6 +3341,9 @@ html:not(.js) .filter-bar { display: none; }
   .cv-toolbar .button-primary,
   .cv-toolbar .button-secondary { padding: 9px 15px; font-size: 14px; }
   .cv-badge { padding: 6px 10px; font-size: 12px; }
+  /* The menu opens from the toolbar's left edge, so it always fits the screen. */
+  .cv-more { position: static; }
+  .cv-more-menu { right: auto; left: 0; }
 }
 
 @media print {
@@ -3418,7 +3431,7 @@ html:not(.js) .filter-bar { display: none; }
 .ats-measure { position: absolute; top: 0; left: 0; height: auto; visibility: hidden; box-shadow: none; pointer-events: none; }
 .ats-doc .ats-head { display: grid; gap: 4px; padding-bottom: 4px; }
 .ats-doc .ats-name { color: var(--ats-accent); font-size: 27px; font-weight: 700; line-height: 1.15; }
-.ats-doc .ats-name.is-placeholder { opacity: .4; }
+.ats-doc .ats-name.is-placeholder { opacity: .65; }
 .ats-doc .ats-headline { font-size: 14.5px; font-weight: 600; }
 .ats-doc .ats-contact { color: var(--ats-muted); font-size: 12.5px; white-space: pre-wrap; }
 .ats-doc .ats-h2 {
@@ -3433,7 +3446,7 @@ html:not(.js) .filter-bar { display: none; }
 .ats-doc .ats-text { display: grid; gap: 4px; }
 .ats-doc .ats-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .ats-doc .ats-title { font-size: 13.5px; font-weight: 700; }
-.ats-doc .ats-when { flex: none; color: var(--ats-muted); font-weight: 700; white-space: nowrap; }
+.ats-doc .ats-when { flex: 0 1 auto; max-width: 42%; color: var(--ats-muted); font-weight: 700; text-align: right; }
 .ats-doc .ats-sub { color: var(--ats-muted); }
 .ats-doc .ats-bullets { display: grid; gap: 2px; margin-top: 3px; }
 .ats-doc .ats-bullet { display: grid; grid-template-columns: 14px minmax(0, 1fr); }
@@ -3446,7 +3459,7 @@ html:not(.js) .filter-bar { display: none; }
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  color: #777;
+  color: #666;
   font-size: 10.5px;
 }
 @media print {
@@ -3464,12 +3477,12 @@ html:not(.js) .filter-bar { display: none; }
 .cl-doc .cl-name { color: var(--cl-accent); font-size: 27px; font-weight: 700; line-height: 1.15; }
 .cl-doc .cl-headline { font-size: 14px; font-weight: 600; }
 .cl-doc .cl-contact { color: #4a4a4a; font-size: 12px; white-space: pre-wrap; }
-.cl-doc .is-placeholder { opacity: .45; }
+.cl-doc .is-placeholder { opacity: .65; }
 .cl-doc .cl-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
 .cl-doc .cl-address { display: grid; gap: 1px; }
 .cl-doc .cl-company { font-weight: 800; }
 .cl-doc.is-classic .cl-company { font-weight: 700; }
-.cl-doc .cl-date { flex: none; color: #374151; white-space: nowrap; }
+.cl-doc .cl-date { flex: 0 1 auto; max-width: 45%; color: #374151; text-align: right; }
 .cl-doc .cl-subject { color: var(--cl-accent); font-size: 14.5px; font-weight: 800; line-height: 1.35; }
 .cl-doc.is-classic .cl-subject { font-weight: 700; }
 .cl-doc .cl-para { text-align: justify; hyphens: auto; }
@@ -3595,3 +3608,10 @@ html:not(.js) .filter-bar { display: none; }
 .pg-check { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; color: var(--muted); font-size: 14px; cursor: pointer; }
 .pg-check input { width: 18px; height: 18px; accent-color: var(--blue); }
 @media print { .pg-dialog { display: none !important; } }
+
+/* Long words and pasted links break at the edge of their box instead of
+   pushing the page (or a CV page) wider than the screen. */
+main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label, legend, summary, strong, em, span, a, button, td, th) { overflow-wrap: anywhere; }
+:where(.tool-panel, .tool-aside, .cv-editor, .cv-sec, .cv-item, .dl-box, .result-card, .field, .dl-panel, .sh-side, .sh-sheet) { min-width: 0; }
+.cv-doc, .ats-doc { overflow-wrap: anywhere; }
+.cv-doc .cv-role, .ats-doc .ats-title, .cl-doc .cl-address { min-width: 0; }

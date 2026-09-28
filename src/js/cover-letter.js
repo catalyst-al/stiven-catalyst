@@ -207,6 +207,7 @@
   const save = () => {
     try {
       localStorage.setItem(KEY, JSON.stringify(letter));
+      dirty = false;
     } catch {
       say(tx("This browser could not save your letter (storage is full, blocked or private). Download it as a Word file to keep it."));
     }
@@ -364,12 +365,30 @@
     frame = requestAnimationFrame(renderLetter);
   };
   let saveTimer;
+  // Only unsaved changes are written when the page closes, so a reload never
+  // overwrites what another tab saved; that tab's changes show up here too.
+  let dirty = false;
   const changed = () => {
+    dirty = true;
     schedule();
     clearTimeout(saveTimer);
     saveTimer = setTimeout(save, 300);
   };
-  window.addEventListener("pagehide", () => { clearTimeout(saveTimer); save(); });
+  window.addEventListener("pagehide", () => {
+    if (!dirty) return;
+    clearTimeout(saveTimer);
+    save();
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== KEY || !event.newValue || dirty) return;
+    try {
+      letter = clean(JSON.parse(event.newValue), data, LANG);
+    } catch {
+      return;
+    }
+    syncForm();
+    schedule();
+  });
 
   const renderChecks = () => {
     const bodyWords = words(letter.body);
