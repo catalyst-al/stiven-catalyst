@@ -181,6 +181,7 @@
   const save = () => {
     try {
       localStorage.setItem(KEY, JSON.stringify(cv));
+      dirty = false;
       if (saveFailed) { saveFailed = false; say(tx("Saved in this browser.")); }
     } catch {
       saveFailed = true;
@@ -548,12 +549,31 @@
     frame = requestAnimationFrame(renderCv);
   };
   let saveTimer;
+  // Only unsaved changes are written when the page closes, so a reload never
+  // overwrites what another tab saved; that tab's changes show up here too.
+  let dirty = false;
   const changed = () => {
+    dirty = true;
     schedule();
     clearTimeout(saveTimer);
     saveTimer = setTimeout(save, 300);
   };
-  window.addEventListener("pagehide", () => { clearTimeout(saveTimer); save(); });
+  window.addEventListener("pagehide", () => {
+    if (!dirty) return;
+    clearTimeout(saveTimer);
+    save();
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== KEY || !event.newValue || dirty) return;
+    try {
+      cv = clean(JSON.parse(event.newValue), data, LANG);
+    } catch {
+      return;
+    }
+    syncStatic();
+      buildEditor();
+    schedule();
+  });
 
   // ---------- CV check ----------
   const renderChecks = () => {
@@ -710,9 +730,11 @@
     schedule();
   }
 
+  // At the limit the button goes away instead of doing nothing.
   const addButton = (text, path, disabled) => {
     const node = button(text, "add", path);
-    if (disabled) node.hidden = true;
+    const list = getPath(path);
+    if (disabled || (Array.isArray(list) && list.length >= (LIMITS[kindOf(path)] || MAX_ITEMS))) node.hidden = true;
     return node;
   };
 

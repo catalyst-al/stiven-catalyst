@@ -288,6 +288,7 @@
   const save = () => {
     try {
       localStorage.setItem(KEY, JSON.stringify(cv));
+      dirty = false;
       if (saveFailed) { saveFailed = false; say(tx("Saved in this browser.")); }
     } catch {
       saveFailed = true;
@@ -445,12 +446,31 @@
     frame = requestAnimationFrame(renderCv);
   };
   let saveTimer;
+  // Only unsaved changes are written when the page closes, so a reload never
+  // overwrites what another tab saved; that tab's changes show up here too.
+  let dirty = false;
   const changed = () => {
+    dirty = true;
     schedule();
     clearTimeout(saveTimer);
     saveTimer = setTimeout(save, 300);
   };
-  window.addEventListener("pagehide", () => { clearTimeout(saveTimer); save(); });
+  window.addEventListener("pagehide", () => {
+    if (!dirty) return;
+    clearTimeout(saveTimer);
+    save();
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== KEY || !event.newValue || dirty) return;
+    try {
+      cv = clean(JSON.parse(event.newValue), data, LANG);
+    } catch {
+      return;
+    }
+    syncStatic();
+      buildEditor();
+    schedule();
+  });
 
   // ---------- Job ad and checks ----------
   const cvText = () => plainText(cv, doc()).toLowerCase();
@@ -577,7 +597,9 @@
   const listEditor = (name, make, addLabel) => {
     const box = el("div", "cv-items");
     cv[name].forEach((item, i) => box.append(card(`${name}.${i}`, i, cv[name].length, make(`${name}.${i}`))));
-    box.append(button(addLabel, "add", name));
+    const add = button(addLabel, "add", name);
+    add.hidden = cv[name].length >= MAX_ITEMS;
+    box.append(add);
     return box;
   };
   const editors = {

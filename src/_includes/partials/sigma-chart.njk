@@ -52,7 +52,7 @@
 
   <div class="dl-box sc-reference">
     <p class="kicker">{{ "What a sigma level means" | t(lang) }}</p>
-    <div class="dl-table-wrap">
+    <div class="dl-table-wrap" tabindex="0">
       <table class="dl-table">
         <thead><tr><th scope="col">{{ "Sigma level" | t(lang) }}</th><th scope="col" class="num">{{ "Defects per million" | t(lang) }}</th><th scope="col" class="num">{{ "Yield" | t(lang) }}</th><th scope="col" class="num">{{ "Failures per 1,000" | t(lang) }}</th></tr></thead>
         <tbody data-sigma-table></tbody>
@@ -129,7 +129,7 @@
         <p class="kicker">{{ "Days" | t(lang) }}</p>
         <p class="form-note" data-log-count></p>
       </div>
-      <div class="dl-table-wrap" data-log-wrap hidden>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
         <table class="dl-table">
           <thead><tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col" class="num">{{ "Handled" | t(lang) }}</th><th scope="col" class="num">{{ "Defects" | t(lang) }}</th><th scope="col" class="num">{{ "Rate" | t(lang) }}</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr></thead>
           <tbody data-log></tbody>
