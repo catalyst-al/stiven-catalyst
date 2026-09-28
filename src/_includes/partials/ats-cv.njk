@@ -1,0 +1,226 @@
+{#- The ATS CV. The page sets `cfg` to atsCv; ats-cv.js builds the lists and the pages, cv-import.js reads old CVs. -#}
+<style>@page { size: A4; margin: 0; }</style>
+<section class="shell cv-app ats-app" data-ats>
+  <form class="cv-editor" data-cv-form novalidate autocomplete="off">
+    <a class="cv-jump" href="#cv-preview">{{ "See the preview" | t(lang) }} <span aria-hidden="true">↓</span></a>
+
+    <section class="ats-import" data-drop aria-labelledby="ats-import-title">
+      <p class="kicker" id="ats-import-title">{{ "Start from your current CV" | t(lang) }}</p>
+      <p class="ats-import-lede">{{ "Drop a PDF or Word file here. It is read in this browser and sorted into the fields below; you only fix the details." | t(lang) }}</p>
+      <div class="tool-actions">
+        <label class="cv-file button-primary">{{ "Choose a PDF or Word file" | t(lang) }}<input type="file" accept=".pdf,.docx,.doc,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" data-import-file></label>
+        <button class="button-secondary" type="button" data-act="from-builder" hidden>{{ "Use my CV from the CV Builder" | t(lang) }}</button>
+      </div>
+      <details class="ats-paste">
+        <summary>{{ "Or paste the text of your CV" | t(lang) }}</summary>
+        <div class="field">
+          <label for="ats-paste">{{ "Text of your CV" | t(lang) }}</label>
+          <textarea id="ats-paste" rows="8" data-paste></textarea>
+        </div>
+        <button class="button-secondary" type="button" data-act="paste-import">{{ "Sort it into the fields" | t(lang) }}</button>
+      </details>
+      <p class="ats-import-note" data-import-note aria-live="polite"></p>
+      <p class="cv-hint">{{ "No CV yet?" | t(lang) }} <button class="button-ghost ats-inline" type="button" data-act="example">{{ "Load an example CV" | t(lang) }}</button></p>
+    </section>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">1 · {{ "Design" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-grid">
+          <div class="field">
+            <label for="ats-docLang">{{ "Language of the CV" | t(lang) }}</label>
+            <select id="ats-docLang" data-path="docLang">
+              {%- for code, docLang in cfg.docLangs %}
+              <option value="{{ code }}">{{ docLang.label }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="ats-font">{{ "Font" | t(lang) }}</label>
+            <select id="ats-font" data-path="font">
+              {%- for font in cfg.fonts %}
+              <option value="{{ font.id }}">{{ font.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+        <fieldset class="cv-themes ats-accents">
+          <legend>{{ "Colour of the headings" | t(lang) }}</legend>
+          {%- for accent in cfg.accents %}
+          <label class="cv-theme">
+            <input type="radio" name="accent" value="{{ accent.id }}" data-path="accent">
+            <span class="ats-swatch" style="background: {{ accent.color }};" aria-hidden="true"></span>
+            <span>{{ accent.name | t(lang) }}</span>
+          </label>
+          {%- endfor %}
+        </fieldset>
+        <p class="cv-hint">{{ "One column, no photo, no graphics, standard headings: application software reads every word in the right order." | t(lang) }}</p>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">2 · {{ "Contact" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-grid">
+          <div class="field cv-wide">
+            <label for="ats-person-name">{{ "Full name" | t(lang) }}</label>
+            <input id="ats-person-name" data-path="person.name" autocomplete="name">
+          </div>
+          <div class="field cv-wide">
+            <label for="ats-person-headline">{{ "Job title you are applying for" | t(lang) }}</label>
+            <input id="ats-person-headline" data-path="person.headline" placeholder="{{ 'e.g. Night Manager | Front Office' | t(lang) }}">
+            <p class="cv-hint">{{ "Use the same words as the job ad." | t(lang) }}</p>
+          </div>
+          <div class="field">
+            <label for="ats-person-location">{{ "City" | t(lang) }}</label>
+            <input id="ats-person-location" data-path="person.location">
+          </div>
+          <div class="field">
+            <label for="ats-person-phone">{{ "Phone" | t(lang) }}</label>
+            <input id="ats-person-phone" type="tel" data-path="person.phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="ats-person-email">{{ "Email" | t(lang) }}</label>
+            <input id="ats-person-email" type="email" data-path="person.email" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="ats-person-website">{{ "LinkedIn or website" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ats-person-website" data-path="person.website" placeholder="linkedin.com/in/…">
+          </div>
+          <div class="field cv-wide">
+            <label for="ats-person-extra">{{ "Anything else on the contact line" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ats-person-extra" data-path="person.extra" placeholder="{{ 'e.g. Driving licence B' | t(lang) }}">
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">3 · {{ "Summary" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="field">
+          <label for="ats-summary">{{ "Summary" | t(lang) }}</label>
+          <textarea id="ats-summary" data-path="summary" rows="6"></textarea>
+          <p class="cv-hint">{{ "3–5 sentences: who you are, where you work best, your strongest results, your languages." | t(lang) }}</p>
+        </div>
+        <div class="field">
+          <label for="ats-highlights">{{ "Key achievements" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <textarea id="ats-highlights" data-path="highlights" rows="4"></textarea>
+          <p class="cv-hint">{{ "One per line." | t(lang) }}</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">4 · {{ "Work experience" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <p class="cv-hint">{{ "Newest first, one entry per role." | t(lang) }}</p>
+        <div data-list="experience"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">5 · {{ "Education and certificates" | t(lang) }}</span></summary>
+      <div class="cv-sec-body"><div data-list="education"></div></div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">6 · {{ "Skills" | t(lang) }}</span></summary>
+      <div class="cv-sec-body"><div data-list="skills"></div></div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">7 · {{ "Languages" | t(lang) }}</span></summary>
+      <div class="cv-sec-body"><div data-list="languages"></div></div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">8 · {{ "More sections" | t(lang) }}</span> <span class="optional">{{ "optional" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <p class="cv-hint">{{ "Volunteering, projects, side activities. Keep the titles plain." | t(lang) }}</p>
+        <div data-list="extras"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">9 · {{ "Section titles" | t(lang) }}</span> <span class="optional">{{ "optional" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <p class="cv-hint">{{ "Leave them empty to use the standard titles, which application software knows best." | t(lang) }}</p>
+        <div class="cv-grid">
+          {%- for key, label in [["summary", "Summary"], ["highlights", "Key achievements"], ["experience", "Work experience"], ["education", "Education and certificates"], ["skills", "Skills"], ["languages", "Languages"]] %}
+          <div class="field">
+            <label for="ats-headings-{{ key }}">{{ label | t(lang) }}</label>
+            <input id="ats-headings-{{ key }}" data-path="headings.{{ key }}" data-heading="{{ key }}">
+          </div>
+          {%- endfor %}
+        </div>
+      </div>
+    </details>
+
+    <section class="cv-sec cv-check-box ats-match-box" aria-labelledby="ats-match-title">
+      <p class="kicker" id="ats-match-title">{{ "Match a job ad" | t(lang) }}</p>
+      <div class="field">
+        <label for="ats-jobAd">{{ "Paste the job ad" | t(lang) }}</label>
+        <textarea id="ats-jobAd" data-path="jobAd" rows="6"></textarea>
+      </div>
+      <div class="ats-match" data-match></div>
+    </section>
+
+    <section class="cv-sec cv-check-box" aria-labelledby="cv-check-title">
+      <p class="kicker" id="cv-check-title">{{ "ATS check" | t(lang) }}</p>
+      <div data-check></div>
+    </section>
+  </form>
+
+  <div class="cv-preview" id="cv-preview" tabindex="-1">
+    <div class="cv-toolbar">
+      <button class="button-primary" type="button" data-act="print">{{ "Download PDF" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-act="word">{{ "Word (.docx)" | t(lang) }}</button>
+      <details class="cv-more">
+        <summary class="button-secondary">{{ "More" | t(lang) }}</summary>
+        <div class="cv-more-menu">
+          <button type="button" data-act="copy">{{ "Copy as plain text" | t(lang) }}</button>
+          <button type="button" data-act="text">{{ "Download as text (.txt)" | t(lang) }}</button>
+          <button type="button" data-act="example">{{ "Load an example CV" | t(lang) }}</button>
+          <button type="button" data-act="reset">{{ "Start a new CV" | t(lang) }}</button>
+        </div>
+      </details>
+      <a class="cv-badge" href="#cv-check-title" data-check-badge></a>
+    </div>
+    <p class="form-note cv-status" data-status aria-live="polite"></p>
+    <div class="cv-stage" data-stage>
+      <div class="ats-doc" data-scale></div>
+    </div>
+    <p class="cv-hint cv-print-hint">{{ "In the print window choose “Save as PDF”, paper A4 and margins “None” or “Default”." | t(lang) }}</p>
+  </div>
+</section>
+
+<section class="shell cv-tips">
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "Written for software, read by people" | t(lang) }}</p>
+      <h2>{{ "How ATS software reads a CV" | t(lang) }}</h2>
+    </div>
+    <p>{{ "Most large employers first let software sort the applications. It looks for plain text, standard headings and the words of the job ad." | t(lang) }}</p>
+  </div>
+  <div class="cv-tips-grid">
+    <ul class="tips">
+      <li><strong>{{ "One column." | t(lang) }}</strong> {{ "Columns, tables and text boxes can be read in the wrong order. Here everything runs top to bottom." | t(lang) }}</li>
+      <li><strong>{{ "Standard headings." | t(lang) }}</strong> {{ "“Work experience” is found; “My journey” may not be." | t(lang) }}</li>
+      <li><strong>{{ "The ad's own words." | t(lang) }}</strong> {{ "If the ad says “Opera PMS”, write “Opera PMS”, not only “hotel software”." | t(lang) }}</li>
+    </ul>
+    <ul class="tips">
+      <li><strong>{{ "PDF or Word?" | t(lang) }}</strong> {{ "Send what the portal asks for. When in doubt, Word is the safest for software; PDF keeps the layout for people." | t(lang) }}</li>
+      <li><strong>{{ "Two versions." | t(lang) }}</strong> {{ "Use this CV for portals and the designed one from the CV Builder when you send it to a person." | t(lang) }}</li>
+      <li><strong>{{ "Check the import." | t(lang) }}</strong> {{ "Reading an old file is a head start, not the end: read every field once." | t(lang) }} <a class="inline-link" href="{{ '/tools/cv-builder/' | local(lang) }}">{{ "CV Builder" | t(lang) }}</a> · <a class="inline-link" href="{{ '/tools/cover-letter/' | local(lang) }}">{{ "Cover letter" | t(lang) }}</a></li>
+    </ul>
+  </div>
+  <p class="privacy-note">{{ "Your CV and the files you open stay in this browser; nothing is uploaded. The PDF reader (pdf.js) is loaded from this website only when you open a PDF." | t(lang) }}</p>
+</section>
+
+<script type="application/json" id="ats-cv-data">{{ cfg | dump | safe }}</script>
+<script type="application/json" id="ats-builder-data">{{ {"examples": cvBuilder.examples, "docLangs": cvBuilder.docLangs} | dump | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/ats-cv.js' | assetUrl }}" defer></script>

@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: ATS CV
+description: "Turn your current CV (PDF or Word) into a clean, one-column CV that application software reads without mistakes. Match it to a job ad and save it as PDF, Word or text. Free and private."
+activeNav: /tools.html
+permalink: /tools/ats-cv/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Career</p>
+  <h1>ATS CV</h1>
+  <p class="lede">Most large employers let software read your CV before a person does. Drop in the CV you already have, as PDF or Word, and get a clean version that software reads correctly, checked against the job ad, ready as PDF or Word.</p>
+</section>
+
+{% set cfg = atsCv %}
+{% include "partials/ats-cv.njk" %}
