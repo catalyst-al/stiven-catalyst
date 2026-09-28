@@ -70,5 +70,21 @@
     "summary": "A designer-quality CV on live A4 pages: photo, key figures, and company logos found from a website. In English, German or Albanian, saved as PDF.",
     "url": "/tools/cv-builder/",
     "cta": "Build your CV"
+  },
+  {
+    "name": "ATS CV",
+    "type": "Career",
+    "time": "10 min",
+    "summary": "Drop in the CV you have, as PDF or Word. Get a clean one-column version that application software reads, matched to the job ad, as PDF, Word or text.",
+    "url": "/tools/ats-cv/",
+    "cta": "Convert your CV"
+  },
+  {
+    "name": "Cover Letter",
+    "type": "Career",
+    "time": "15 min",
+    "summary": "The letter in the same design as your CV, with your details taken from it and a first draft from a few answers. PDF or Word.",
+    "url": "/tools/cover-letter/",
+    "cta": "Write your letter"
   }
 ]

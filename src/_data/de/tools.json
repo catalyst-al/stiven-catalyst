@@ -70,5 +70,21 @@
     "summary": "Ein Lebenslauf in Designer-Qualität auf echten A4-Seiten: Foto, Kennzahlen und Firmenlogos, die über die Website gefunden werden. Auf Deutsch, Englisch oder Albanisch, als PDF.",
     "url": "/de/tools/cv-builder/",
     "cta": "Lebenslauf erstellen"
+  },
+  {
+    "name": "ATS-Lebenslauf",
+    "type": "Karriere",
+    "time": "10 min",
+    "summary": "Laden Sie Ihren Lebenslauf als PDF oder Word hinein. Sie erhalten eine klare, einspaltige Fassung, die Bewerbungssoftware liest, abgeglichen mit der Stellenanzeige, als PDF, Word oder Text.",
+    "url": "/de/tools/ats-cv/",
+    "cta": "Lebenslauf umwandeln"
+  },
+  {
+    "name": "Anschreiben",
+    "type": "Karriere",
+    "time": "15 min",
+    "summary": "Das Anschreiben im Design Ihres Lebenslaufs, mit Ihren Angaben daraus und einem ersten Entwurf aus wenigen Antworten. PDF oder Word.",
+    "url": "/de/tools/cover-letter/",
+    "cta": "Anschreiben schreiben"
   }
 ]

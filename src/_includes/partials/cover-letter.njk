@@ -1,0 +1,301 @@
+{#- The cover letter. The page sets `cfg` to coverLetter; cover-letter.js does the rest. -#}
+<style>@page { size: A4; margin: 0; }</style>
+<section class="shell cv-app cl-app" data-letter>
+  <form class="cv-editor" data-cv-form novalidate autocomplete="off">
+    <a class="cv-jump" href="#cv-preview">{{ "See the preview" | t(lang) }} <span aria-hidden="true">↓</span></a>
+
+    <section class="ats-import cl-source" aria-labelledby="cl-source-title">
+      <p class="kicker" id="cl-source-title">{{ "One application, one look" | t(lang) }}</p>
+      <p class="ats-import-lede">{{ "Take your name, contact details, photo and colours from the CV you made here, so letter and CV match." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-act="from-builder">{{ "From the CV Builder" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-act="from-ats">{{ "From the ATS CV" | t(lang) }}</button>
+      </div>
+      <p class="ats-import-note" data-source-note aria-live="polite"></p>
+      <p class="cv-hint">{{ "No CV yet?" | t(lang) }} <button class="button-ghost ats-inline" type="button" data-act="example">{{ "Load an example letter" | t(lang) }}</button></p>
+    </section>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">1 · {{ "Design" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-grid">
+          <div class="field">
+            <label for="cl-docLang">{{ "Language of the letter" | t(lang) }}</label>
+            <select id="cl-docLang" data-path="docLang">
+              {%- for code, docLang in cfg.docLangs %}
+              <option value="{{ code }}">{{ docLang.label }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="cl-design">{{ "Design" | t(lang) }}</label>
+            <select id="cl-design" data-path="design">
+              <option value="modern">{{ "Modern, like the CV Builder" | t(lang) }}</option>
+              <option value="classic">{{ "Classic, like the ATS CV" | t(lang) }}</option>
+            </select>
+          </div>
+        </div>
+        <fieldset class="cv-themes" data-design-only="modern">
+          <legend>{{ "Colours" | t(lang) }}</legend>
+          {%- for theme in cvBuilder.themes %}
+          <label class="cv-theme" style="--sw-dark: {{ theme.dark }}; --sw-accent: {{ theme.accent }}; --sw-gold: {{ theme.gold }};">
+            <input type="radio" name="theme" value="{{ theme.id }}" data-path="theme">
+            <span class="cv-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>{{ theme.name | t(lang) }}</span>
+          </label>
+          {%- endfor %}
+        </fieldset>
+        <div class="cv-grid" data-design-only="classic" hidden>
+          <div class="field">
+            <label for="cl-font">{{ "Font" | t(lang) }}</label>
+            <select id="cl-font" data-path="font">
+              {%- for font in atsCv.fonts %}
+              <option value="{{ font.id }}">{{ font.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="cl-accent">{{ "Colour of the name" | t(lang) }}</label>
+            <select id="cl-accent" data-path="accent">
+              {%- for accent in atsCv.accents %}
+              <option value="{{ accent.id }}">{{ accent.name | t(lang) }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">2 · {{ "You" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-photo-edit" data-design-only="modern">
+          <div class="cv-photo-thumb" data-photo-thumb aria-hidden="true"></div>
+          <div class="cv-photo-controls">
+            <div class="cv-logo-actions">
+              <label class="cv-file button-secondary">{{ "Upload a photo" | t(lang) }}<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="photo"></label>
+              <button class="button-ghost" type="button" data-act="clear" data-path="photo" hidden>{{ "Remove the photo" | t(lang) }}</button>
+            </div>
+            <div class="field">
+              <label for="cl-photoShape">{{ "Photo shape" | t(lang) }}</label>
+              <select id="cl-photoShape" data-path="photoShape">
+                <option value="circle">{{ "Circle" | t(lang) }}</option>
+                <option value="rounded">{{ "Rounded square" | t(lang) }}</option>
+                <option value="none">{{ "No photo" | t(lang) }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="cv-grid">
+          <div class="field cv-wide">
+            <label for="cl-person-name">{{ "Full name" | t(lang) }}</label>
+            <input id="cl-person-name" data-path="person.name" autocomplete="name">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-person-headline">{{ "Role and fields" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cl-person-headline" data-path="person.headline">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-person-address">{{ "Your address" | t(lang) }}</label>
+            <input id="cl-person-address" data-path="person.address" placeholder="{{ 'e.g. Main Street 12, 60311 Frankfurt' | t(lang) }}" autocomplete="street-address">
+          </div>
+          <div class="field">
+            <label for="cl-person-phone">{{ "Phone" | t(lang) }}</label>
+            <input id="cl-person-phone" type="tel" data-path="person.phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="cl-person-email">{{ "Email" | t(lang) }}</label>
+            <input id="cl-person-email" type="email" data-path="person.email" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="cl-person-location">{{ "City" | t(lang) }}</label>
+            <input id="cl-person-location" data-path="person.location">
+          </div>
+          <div class="field">
+            <label for="cl-person-website">{{ "LinkedIn or website" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cl-person-website" data-path="person.website">
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">3 · {{ "The company" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-grid">
+          <div class="field cv-wide">
+            <label for="cl-recipient-company">{{ "Company" | t(lang) }}</label>
+            <input id="cl-recipient-company" data-path="recipient.company">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-recipient-department">{{ "Department" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cl-recipient-department" data-path="recipient.department" placeholder="{{ 'e.g. Human Resources' | t(lang) }}">
+          </div>
+          <div class="field">
+            <label for="cl-recipient-contact">{{ "Contact person" | t(lang) }}</label>
+            <input id="cl-recipient-contact" data-path="recipient.contact" placeholder="{{ 'e.g. Anna Weber' | t(lang) }}">
+          </div>
+          <div class="field">
+            <label for="cl-recipient-gender">{{ "Address them as" | t(lang) }}</label>
+            <select id="cl-recipient-gender" data-path="recipient.gender">
+              <option value="">{{ "Not known" | t(lang) }}</option>
+              <option value="f">{{ "Ms" | t(lang) }}</option>
+              <option value="m">{{ "Mr" | t(lang) }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cl-recipient-street">{{ "Street and number" | t(lang) }}</label>
+            <input id="cl-recipient-street" data-path="recipient.street">
+          </div>
+          <div class="field">
+            <label for="cl-recipient-city">{{ "Postcode and city" | t(lang) }}</label>
+            <input id="cl-recipient-city" data-path="recipient.city">
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">4 · {{ "First draft" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <p class="cv-hint">{{ "Answer in a few words; the page turns them into a letter you then make your own." | t(lang) }}</p>
+        <div class="cv-grid">
+          <div class="field">
+            <label for="cl-draft-role">{{ "Position" | t(lang) }}</label>
+            <input id="cl-draft-role" data-path="draft.role" placeholder="{{ 'e.g. Night Manager' | t(lang) }}">
+          </div>
+          <div class="field">
+            <label for="cl-draft-source">{{ "Where you found the ad" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cl-draft-source" data-path="draft.source" placeholder="{{ 'e.g. LinkedIn' | t(lang) }}">
+          </div>
+          <div class="field">
+            <label for="cl-draft-current">{{ "What you do now" | t(lang) }}</label>
+            <input id="cl-draft-current" data-path="draft.current" placeholder="{{ 'e.g. Night Auditor at a 300-room hotel' | t(lang) }}">
+          </div>
+          <div class="field">
+            <label for="cl-draft-years">{{ "How long" | t(lang) }}</label>
+            <input id="cl-draft-years" data-path="draft.years" placeholder="{{ 'e.g. five years' | t(lang) }}">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-draft-strength">{{ "Your two or three strongest points" | t(lang) }}</label>
+            <input id="cl-draft-strength" data-path="draft.strength" placeholder="{{ 'e.g. calm under pressure, clean night audits and strong German' | t(lang) }}">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-draft-achievement">{{ "One result you are proud of, with a number" | t(lang) }}</label>
+            <textarea id="cl-draft-achievement" data-path="draft.achievement" rows="2"></textarea>
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-draft-why">{{ "Why this company" | t(lang) }}</label>
+            <textarea id="cl-draft-why" data-path="draft.why" rows="2"></textarea>
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-draft-start">{{ "When you can start" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cl-draft-start" data-path="draft.start" placeholder="{{ 'e.g. on 1 March' | t(lang) }}">
+          </div>
+        </div>
+        <button class="button-primary" type="button" data-act="draft">{{ "Write the first draft" | t(lang) }}</button>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">5 · {{ "The letter" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-grid">
+          <div class="field">
+            <label for="cl-place">{{ "Place" | t(lang) }}</label>
+            <input id="cl-place" data-path="place">
+          </div>
+          <div class="field">
+            <label for="cl-date">{{ "Date" | t(lang) }}</label>
+            <input id="cl-date" data-path="date">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-subject">{{ "Subject" | t(lang) }}</label>
+            <input id="cl-subject" data-path="subject">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-salutation">{{ "Greeting" | t(lang) }}</label>
+            <input id="cl-salutation" data-path="salutation">
+          </div>
+          <div class="field cv-wide">
+            <label for="cl-body">{{ "Text" | t(lang) }}</label>
+            <textarea id="cl-body" data-path="body" rows="14"></textarea>
+            <p class="cv-hint">{{ "An empty line starts a new paragraph. Empty fields use the suggestion shown in grey." | t(lang) }}</p>
+          </div>
+          <div class="field">
+            <label for="cl-closing">{{ "Closing" | t(lang) }}</label>
+            <input id="cl-closing" data-path="closing">
+          </div>
+          <div class="field">
+            <label for="cl-enclosures">{{ "Enclosures" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cl-enclosures" data-path="enclosures">
+          </div>
+        </div>
+        <div class="cv-photo-edit cl-signature-edit">
+          <div class="cv-photo-thumb cl-signature-thumb" data-signature-thumb aria-hidden="true"></div>
+          <div class="cv-photo-controls">
+            <div class="cv-logo-actions">
+              <label class="cv-file button-secondary">{{ "Upload your signature" | t(lang) }}<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="signature"></label>
+              <button class="button-ghost" type="button" data-act="clear" data-path="signature" hidden>{{ "Remove the signature" | t(lang) }}</button>
+            </div>
+            <p class="cv-hint">{{ "Sign on white paper, take a photo, crop it close. Optional; without it there is space to sign by hand." | t(lang) }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <section class="cv-sec cv-check-box" aria-labelledby="cv-check-title">
+      <p class="kicker" id="cv-check-title">{{ "Letter check" | t(lang) }}</p>
+      <div data-check></div>
+    </section>
+  </form>
+
+  <div class="cv-preview" id="cv-preview" tabindex="-1">
+    <div class="cv-toolbar">
+      <button class="button-primary" type="button" data-act="print">{{ "Download PDF" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-act="word">{{ "Word (.docx)" | t(lang) }}</button>
+      <details class="cv-more">
+        <summary class="button-secondary">{{ "More" | t(lang) }}</summary>
+        <div class="cv-more-menu">
+          <button type="button" data-act="copy">{{ "Copy as plain text" | t(lang) }}</button>
+          <button type="button" data-act="example">{{ "Load an example letter" | t(lang) }}</button>
+          <button type="button" data-act="reset">{{ "Start a new letter" | t(lang) }}</button>
+        </div>
+      </details>
+      <a class="cv-badge" href="#cv-check-title" data-check-badge></a>
+    </div>
+    <p class="form-note cv-status" data-status aria-live="polite"></p>
+    <div class="cv-stage" data-stage>
+      <div class="cv-doc cl-doc" data-scale></div>
+    </div>
+    <p class="cv-hint cv-print-hint">{{ "In the print window choose “Save as PDF”, paper A4, margins “None” or “Default”, and switch on “Background graphics”." | t(lang) }}</p>
+  </div>
+</section>
+
+<section class="shell cv-tips">
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "A letter that gets read" | t(lang) }}</p>
+      <h2>{{ "One page, one reason" | t(lang) }}</h2>
+    </div>
+    <p>{{ "The CV says what you did. The letter says why it matters for this job." | t(lang) }}</p>
+  </div>
+  <div class="cv-tips-grid">
+    <ul class="tips">
+      <li><strong>{{ "Start with the job, not with yourself." | t(lang) }}</strong> {{ "The first sentence names the position and why you write." | t(lang) }}</li>
+      <li><strong>{{ "One proof beats five adjectives." | t(lang) }}</strong> {{ "“Reliable and motivated” is what everyone writes. A number is what they remember." | t(lang) }}</li>
+      <li><strong>{{ "Write to a person." | t(lang) }}</strong> {{ "Find the name in the ad, on LinkedIn or with one phone call." | t(lang) }}</li>
+    </ul>
+    <ul class="tips">
+      <li><strong>{{ "Same design as the CV." | t(lang) }}</strong> {{ "Take your details from the" | t(lang) }} <a class="inline-link" href="{{ '/tools/cv-builder/' | local(lang) }}">{{ "CV Builder" | t(lang) }}</a> {{ "or the" | t(lang) }} <a class="inline-link" href="{{ '/tools/ats-cv/' | local(lang) }}">{{ "ATS CV" | t(lang) }}</a>{{ "; name, colours and photo match." | t(lang) }}</li>
+      <li><strong>{{ "One letter per company." | t(lang) }}</strong> {{ "Change at least the company, the “why” and the proof for each application." | t(lang) }}</li>
+      <li><strong>{{ "Read it aloud once." | t(lang) }}</strong> {{ "Where you stumble, the reader will too." | t(lang) }}</li>
+    </ul>
+  </div>
+  <p class="privacy-note">{{ "Your letter, photo and signature stay in this browser; nothing is uploaded." | t(lang) }}</p>
+</section>
+
+<script type="application/json" id="cover-letter-data">{{ {"letter": cfg, "themes": cvBuilder.themes, "fonts": atsCv.fonts, "accents": atsCv.accents} | dump | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cover-letter.js' | assetUrl }}" defer></script>

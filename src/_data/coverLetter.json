@@ -1,0 +1,229 @@
+{
+  "storageKey": "sc-cover-letter",
+  "cvBuilderKey": "sc-cv-builder",
+  "atsKey": "sc-ats-cv",
+  "docLangs": {
+    "en": {
+      "label": "English",
+      "doc": "Cover letter",
+      "locale": "en-GB",
+      "subject": "Application for the position of {role}",
+      "subjectPlain": "Application",
+      "dear": {
+        "f": "Dear Ms {name},",
+        "m": "Dear Mr {name},",
+        "": "Dear Hiring Team,"
+      },
+      "closing": "Kind regards",
+      "enclosures": "Enclosures",
+      "enclosuresDefault": "CV, references",
+      "draft": [
+        [
+          "I am applying for the position of {role} at {company}{source}.",
+          "I currently work as {current} and bring {years} of experience."
+        ],
+        [
+          "What I bring: {strength}.",
+          "{achievement} This is the kind of result I want to deliver for {company}."
+        ],
+        [
+          "{why}"
+        ],
+        [
+          "I can start {start}.",
+          "I would be glad to show you in a personal conversation how I can support your team."
+        ]
+      ],
+      "source": ", which I found on {source}",
+      "noCompany": "your company",
+      "courtesy": {
+        "f": "Ms",
+        "m": "Mr",
+        "": ""
+      }
+    },
+    "de": {
+      "label": "Deutsch",
+      "doc": "Anschreiben",
+      "locale": "de-DE",
+      "subject": "Bewerbung als {role}",
+      "subjectPlain": "Bewerbung",
+      "dear": {
+        "f": "Sehr geehrte Frau {name},",
+        "m": "Sehr geehrter Herr {name},",
+        "": "Sehr geehrte Damen und Herren,"
+      },
+      "closing": "Mit freundlichen Grüßen",
+      "enclosures": "Anlagen",
+      "enclosuresDefault": "Lebenslauf, Zeugnisse",
+      "draft": [
+        [
+          "mit großem Interesse habe ich Ihre Stellenanzeige für die Position als {role}{source} gelesen.",
+          "Zurzeit arbeite ich als {current} und bringe {years} Erfahrung mit."
+        ],
+        [
+          "Was ich mitbringe: {strength}.",
+          "{achievement} Solche Ergebnisse möchte ich auch bei {company} erreichen."
+        ],
+        [
+          "{why}"
+        ],
+        [
+          "Ich kann {start} beginnen.",
+          "Über die Einladung zu einem persönlichen Gespräch freue ich mich sehr."
+        ]
+      ],
+      "source": " auf {source}",
+      "noCompany": "Ihrem Unternehmen",
+      "courtesy": {
+        "f": "Frau",
+        "m": "Herr",
+        "": ""
+      }
+    },
+    "sq": {
+      "label": "Shqip",
+      "doc": "Letër motivimi",
+      "locale": "sq-AL",
+      "subject": "Aplikim për pozicionin {role}",
+      "subjectPlain": "Aplikim",
+      "dear": {
+        "f": "E nderuar zonja {name},",
+        "m": "I nderuar zoti {name},",
+        "": "Të nderuar,"
+      },
+      "closing": "Me respekt",
+      "enclosures": "Bashkëlidhur",
+      "enclosuresDefault": "CV, referencat",
+      "draft": [
+        [
+          "Me shumë interes lexova njoftimin tuaj për pozicionin {role}{source}.",
+          "Aktualisht punoj si {current} dhe kam {years} përvojë."
+        ],
+        [
+          "Çfarë sjell: {strength}.",
+          "{achievement} Rezultate të tilla dua t’i arrij edhe te {company}."
+        ],
+        [
+          "{why}"
+        ],
+        [
+          "Mund të filloj {start}.",
+          "Do të më gëzonte t’ju tregoj në një bisedë personale si mund ta mbështes ekipin tuaj."
+        ]
+      ],
+      "source": " në {source}",
+      "noCompany": "kompania juaj",
+      "courtesy": {
+        "f": "Znj.",
+        "m": "Z.",
+        "": ""
+      }
+    }
+  },
+  "months": {
+    "sq": [
+      "janar",
+      "shkurt",
+      "mars",
+      "prill",
+      "maj",
+      "qershor",
+      "korrik",
+      "gusht",
+      "shtator",
+      "tetor",
+      "nëntor",
+      "dhjetor"
+    ]
+  },
+  "example": {
+    "en": {
+      "person": {
+        "name": "Elena Marku",
+        "headline": "Front Office Manager | Guest Experience | Hotel Operations",
+        "location": "Munich",
+        "phone": "+49 170 1234567",
+        "email": "elena.marku@example.com",
+        "website": "",
+        "address": "Lindwurmstraße 12, 80337 Munich"
+      },
+      "recipient": {
+        "company": "Seaview Grand Hotel",
+        "contact": "Anna Weber",
+        "gender": "f",
+        "department": "Human Resources",
+        "street": "Hafenstraße 5",
+        "city": "20459 Hamburg"
+      },
+      "draft": {
+        "role": "Hotel Manager",
+        "source": "LinkedIn",
+        "current": "Front Office Manager at a 320-room hotel",
+        "years": "eight years",
+        "strength": "a calm hand in busy shifts, clean handovers and a team that stays",
+        "achievement": "In my current role I raised our guest rating from 4.3 to 4.7 in 18 months and cut check-in waiting times at peak hours from 12 to 5 minutes.",
+        "why": "Seaview Grand stands for personal service at a large scale, which is exactly how I like to lead: close to guests and close to the team.",
+        "start": "on 1 January"
+      }
+    },
+    "de": {
+      "person": {
+        "name": "Elena Marku",
+        "headline": "Front Office Managerin | Gästeerlebnis | Hotel Operations",
+        "location": "München",
+        "phone": "+49 170 1234567",
+        "email": "elena.marku@example.com",
+        "website": "",
+        "address": "Lindwurmstraße 12, 80337 München"
+      },
+      "recipient": {
+        "company": "Seaview Grand Hotel",
+        "contact": "Anna Weber",
+        "gender": "f",
+        "department": "Personalabteilung",
+        "street": "Hafenstraße 5",
+        "city": "20459 Hamburg"
+      },
+      "draft": {
+        "role": "Hotel Managerin",
+        "source": "LinkedIn",
+        "current": "Front Office Managerin in einem Hotel mit 320 Zimmern",
+        "years": "acht Jahre",
+        "strength": "Ruhe in vollen Schichten, saubere Übergaben und ein Team, das bleibt",
+        "achievement": "In meiner aktuellen Position habe ich unsere Gästebewertung in 18 Monaten von 4,3 auf 4,7 gesteigert und die Wartezeit beim Check-in zu Spitzenzeiten von 12 auf 5 Minuten gesenkt.",
+        "why": "Das Seaview Grand steht für persönlichen Service in großem Rahmen, und genau so führe ich gern: nah am Gast und nah am Team.",
+        "start": "zum 1. Januar"
+      }
+    },
+    "sq": {
+      "person": {
+        "name": "Elena Marku",
+        "headline": "Front Office Manager | Përvoja e mysafirit | Operacione hoteli",
+        "location": "Mynih",
+        "phone": "+49 170 1234567",
+        "email": "elena.marku@example.com",
+        "website": "",
+        "address": "Lindwurmstraße 12, 80337 Mynih"
+      },
+      "recipient": {
+        "company": "Seaview Grand Hotel",
+        "contact": "Anna Weber",
+        "gender": "f",
+        "department": "Burimet njerëzore",
+        "street": "Hafenstraße 5",
+        "city": "20459 Hamburg"
+      },
+      "draft": {
+        "role": "Hotel Manager",
+        "source": "LinkedIn",
+        "current": "Front Office Manager në një hotel me 320 dhoma",
+        "years": "tetë vite",
+        "strength": "qetësi në turnet e ngarkuara, dorëzime të qarta dhe një ekip që qëndron",
+        "achievement": "Në pozicionin aktual e rrita vlerësimin e mysafirëve nga 4,3 në 4,7 brenda 18 muajve dhe e ula kohën e pritjes në check-in nga 12 në 5 minuta.",
+        "why": "Seaview Grand përfaqëson shërbim personal në shkallë të madhe, dhe pikërisht kështu më pëlqen të drejtoj: pranë mysafirëve dhe pranë ekipit.",
+        "start": "më 1 janar"
+      }
+    }
+  }
+}

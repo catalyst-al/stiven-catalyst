@@ -1,0 +1,62 @@
+{
+  "storageKey": "sc-ats-cv",
+  "cvBuilderKey": "sc-cv-builder",
+  "fonts": [
+    { "id": "arial", "name": "Arial", "css": "Arial, Helvetica, \"Liberation Sans\", sans-serif", "word": "Arial" },
+    { "id": "calibri", "name": "Calibri", "css": "Calibri, Carlito, \"Segoe UI\", Arial, sans-serif", "word": "Calibri" },
+    { "id": "georgia", "name": "Georgia", "css": "Georgia, \"Times New Roman\", serif", "word": "Georgia" }
+  ],
+  "accents": [
+    { "id": "black", "name": "Black", "color": "#111111" },
+    { "id": "navy", "name": "Navy", "color": "#1f3a5f" },
+    { "id": "burgundy", "name": "Burgundy", "color": "#7a1f2b" }
+  ],
+  "docLangs": {
+    "en": {
+      "label": "English",
+      "doc": "CV",
+      "present": "present",
+      "page": "Page {n} of {total}",
+      "yourName": "Your Name",
+      "headings": {
+        "summary": "Summary",
+        "highlights": "Key achievements",
+        "experience": "Work experience",
+        "education": "Education and certificates",
+        "skills": "Skills",
+        "languages": "Languages"
+      }
+    },
+    "de": {
+      "label": "Deutsch",
+      "doc": "Lebenslauf",
+      "present": "heute",
+      "page": "Seite {n} von {total}",
+      "yourName": "Ihr Name",
+      "headings": {
+        "summary": "Profil",
+        "highlights": "Ausgewählte Erfolge",
+        "experience": "Berufserfahrung",
+        "education": "Ausbildung und Zertifikate",
+        "skills": "Kenntnisse",
+        "languages": "Sprachen"
+      }
+    },
+    "sq": {
+      "label": "Shqip",
+      "doc": "CV",
+      "present": "sot",
+      "page": "Faqja {n} nga {total}",
+      "yourName": "Emri juaj",
+      "headings": {
+        "summary": "Profili",
+        "highlights": "Arritjet kryesore",
+        "experience": "Përvoja e punës",
+        "education": "Arsimi dhe certifikatat",
+        "skills": "Aftësitë",
+        "languages": "Gjuhët"
+      }
+    }
+  },
+  "stopwords": "a about above after again all also am an and any are as at be because been before being below between both but by can could did do does doing down during each few for from further had has have having he her here hers him his how i if in into is it its just me more most my no nor not now of off on once only or other our out over own same she should so some such than that the their them then there these they this those through to too under until up very was we were what when where which while who whom why will with would you your yours job role work working team teams candidate candidates position apply application company experience years year strong ability skills skill required requirements responsibilities responsible preferred plus including within across well new good great offer offers benefits looking join ideal must etc per e.g you'll we're our us der die das und oder aber auch als am an auf aus bei bin bis bist da dann dass dein deine dem den des dich dir du durch ein eine einem einen einer eines er es für hat haben hast hatte ich ihr ihre im in ist ja jede jeder kann kein keine mit mich mir nach nicht noch nur ob oder ohne sehr sein sich sie sind so über um uns unser unsere unter vom von vor war was weil wenn wer wie wir wird wo zu zum zur sowie bzw ggf gerne suchen bieten dich dein deine ihre ihren ihnen stelle stellen aufgaben profil erfahrung erfahrungen kenntnisse vollzeit teilzeit bewerbung bewerben unternehmen team mitarbeitende mitarbeiter wir bieten einen eines jahre jahren idealerweise m/w/d mwd w/m/d dhe në për të me nga një është janë si që ka kanë do por ose edhe nuk më ju juaj tuaj ne ata ato kjo ky këtë këto tij saj i e u së te tek pas para mbi nën deri kur ku cili cila çdo punë vend pozicion kërkojmë ofrojmë aplikoni aplikim përvojë vite vjet njohuri aftësi kompania ekip pflicht wünschenswert vorteil idealerweise mindestens sowie gute sehr gutes gute bereitschaft freuen required nice have plus"
+}

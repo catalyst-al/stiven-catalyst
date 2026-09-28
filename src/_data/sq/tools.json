@@ -70,5 +70,21 @@
     "summary": "Një CV me cilësi dizajneri në faqe të vërteta A4: foto, shifrat kryesore dhe logot e kompanive të gjetura nga faqja e internetit. Në shqip, gjermanisht ose anglisht, si PDF.",
     "url": "/sq/tools/cv-builder/",
     "cta": "Krijoni CV-në tuaj"
+  },
+  {
+    "name": "CV për ATS",
+    "type": "Karriera",
+    "time": "10 min",
+    "summary": "Ngarkoni CV-në që keni, si PDF ose Word. Merrni një version të pastër me një kolonë që programet e rekrutimit e lexojnë, të krahasuar me njoftimin e punës, si PDF, Word ose tekst.",
+    "url": "/sq/tools/ats-cv/",
+    "cta": "Kthejeni CV-në"
+  },
+  {
+    "name": "Letër motivimi",
+    "type": "Karriera",
+    "time": "15 min",
+    "summary": "Letra me të njëjtin dizajn si CV-ja juaj, me të dhënat e marra prej saj dhe një draft të parë nga disa përgjigje. PDF ose Word.",
+    "url": "/sq/tools/cover-letter/",
+    "cta": "Shkruani letrën"
   }
 ]

@@ -1,0 +1,31 @@
+{#- The career tools on the homepage: CV Builder, ATS CV and cover letter. -#}
+<section class="shell career-feature" aria-labelledby="career-title">
+  <div class="career-copy">
+    <p class="kicker">{{ "New · Career tools" | t(lang) }}</p>
+    <h2 id="career-title">{{ "Your next job starts with one page." | t(lang) }}</h2>
+    <p>{{ "Build a CV that looks designed, turn it into a version application software reads, and write the letter that goes with it. Free, private, in English, German and Albanian." | t(lang) }}</p>
+    <a class="button-primary" href="{{ '/tools/cv-builder/' | local(lang) }}">{{ "Build your CV" | t(lang) }}</a>
+  </div>
+  <div class="career-visual" aria-hidden="true">
+    <span class="career-sheet is-letter"><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="career-sheet is-ats"><b></b><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="career-sheet is-cv"><em></em><u><s></s><s></s><s></s><s></s></u><i></i><i></i><i></i><i></i></span>
+  </div>
+  <div class="career-cards">
+    <a class="career-card" href="{{ '/tools/cv-builder/' | local(lang) }}">
+      <span class="career-step">01</span>
+      <strong>{{ "CV Builder" | t(lang) }}</strong>
+      <span>{{ "Photo, key figures and company logos on live A4 pages." | t(lang) }}</span>
+    </a>
+    <a class="career-card" href="{{ '/tools/ats-cv/' | local(lang) }}">
+      <span class="career-step">02</span>
+      <strong>{{ "ATS CV" | t(lang) }}</strong>
+      <span>{{ "Drop in your old PDF or Word CV; get a version software reads, matched to the job ad." | t(lang) }}</span>
+    </a>
+    <a class="career-card" href="{{ '/tools/cover-letter/' | local(lang) }}">
+      <span class="career-step">03</span>
+      <strong>{{ "Cover letter" | t(lang) }}</strong>
+      <span>{{ "The letter in the same design, with a first draft from a few answers." | t(lang) }}</span>
+    </a>
+  </div>
+</section>
