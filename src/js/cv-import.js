@@ -16,7 +16,7 @@ window.CvImport = (() => {
     education: ["education", "ausbildung", "bildung", "bildungsweg", "schulbildung", "studium", "arsimi", "arsim", "edukimi", "certificates", "certifications", "zertifikate", "certifikatat", "certifikata", "weiterbildung", "fortbildung", "qualifications", "qualifikationen", "trainings", "kurse", "trajnime", "kualifikime"],
     skills: ["skills", "kenntnisse", "fahigkeiten", "kompetenzen", "kernkompetenzen", "aftesite", "aftesi", "it skills", "edv kenntnisse", "technical skills", "core skills", "key skills", "competencies", "competences", "fachkenntnisse", "kompetencat"],
     languages: ["languages", "sprachen", "sprachkenntnisse", "gjuhet", "gjuhe", "gjuhet e huaja", "language skills"],
-    extra: ["side activities", "nebenberufliche", "nebentatigkeit", "ehrenamt", "volunteer", "volunteering", "projects", "projekte", "projektet", "interests", "hobbys", "hobbies", "interessen", "interesa", "aktivitete", "activities", "references", "referenzen", "referenca", "awards", "auszeichnungen", "cmime", "publications", "publikationen", "memberships", "mitgliedschaften", "sonstiges", "other", "te tjera"],
+    extra: ["karriereprofil", "karriereweg", "laufbahn", "career path", "rruga profesionale", "side activities", "nebenberufliche", "nebentatigkeit", "ehrenamt", "volunteer", "volunteering", "projects", "projekte", "projektet", "interests", "hobbys", "hobbies", "interessen", "interesa", "aktivitete", "activities", "references", "referenzen", "referenca", "awards", "auszeichnungen", "cmime", "publications", "publikationen", "memberships", "mitgliedschaften", "sonstiges", "other", "te tjera"],
   };
   const sectionOf = (text) => {
     const folded = fold(text);
@@ -44,6 +44,22 @@ window.CvImport = (() => {
     if (match) return { from: match[1], to: "", index: match.index, length: match[0].length };
     return null;
   };
+  // A date that marks an entry stands at the start or the end of its line
+  // ("Night Manager  07/2023 – 09/2026"), not inside a sentence ("… seit 2012, mit …").
+  const entryDates = (text) => {
+    const dates = findDates(text);
+    if (!dates) return null;
+    const before = text.slice(0, dates.index);
+    const after = text.slice(dates.index + dates.length);
+    return /^[\s.,;:)|–-]*$/.test(after) || /^[\s(|•–-]*$/.test(before) || /[|]\s*$|\s{2,}$/.test(before) ? dates : null;
+  };
+  const entryYear = (text) => {
+    const match = text.match(YEAR);
+    if (!match) return false;
+    const before = text.slice(0, match.index);
+    const after = text.slice(match.index + match[0].length);
+    return /^[\s.,;:)|–-]*$/.test(after) || /^[\s(|•–-]*$/.test(before) || /[|,]\s*$|\s{2,}$/.test(before);
+  };
   const withoutDates = (text, dates) => (text.slice(0, dates.index) + " " + text.slice(dates.index + dates.length)).replace(/\s*[|•·,–-]\s*$/, "").replace(/^\s*[|•·,–-]\s*/, "").replace(/\s{2,}/g, " ").replace(/\s*\|\s*\|\s*/g, " | ").trim();
 
   // ---------- Contact details ----------
@@ -56,6 +72,8 @@ window.CvImport = (() => {
   const BULLET = /^\s*(?:[•●▪■◦○‣∙·*►➢➤✓✔-]|–(?=\s)|•|[])\s*/u;
   const stripBullet = (text) => text.replace(BULLET, "").trim();
   const ENDS_SENTENCE = /[.!?…]["”)]?$/;
+  const ARROW = /[→➔➜⇒»]/;
+  const ARROW_END = /[→➔➜⇒»]\s*$/;
   // Join a wrapped line to the one before it: "Fehler zu" + "reduzieren." A word
   // broken at a hyphen keeps it ("No-" + "Show" gives "No-Show"); a soft hyphen goes.
   const join = (a, b) => (/\u00ad$/.test(a) ? a.slice(0, -1) + b : /-$/.test(a) ? a + b : `${a} ${b}`);
@@ -183,6 +201,13 @@ window.CvImport = (() => {
       if (line.top < 70 || line.top > height - 70) seen.set(key(line.text), (seen.get(key(line.text)) || 0) + 1);
     }));
     const repeated = (line, height) => (line.top < 70 || line.top > height - 70) && perPage.length > 1 && seen.get(key(line.text)) >= perPage.length;
+    // A sentence that runs on in the same column, close below, stays one paragraph
+    // even when the cut put its lines in separate pieces.
+    perPage.forEach(({ lines }) => lines.forEach((line, i) => {
+      const prev = lines[i - 1];
+      if (line.leafStart && prev && Math.abs(line.x - prev.x) < 2 && Math.abs(line.size - prev.size) < 0.3
+        && line.top > prev.top && line.top - prev.top < prev.size * 1.9 && !ENDS_SENTENCE.test(prev.text)) line.leafStart = false;
+    }));
     return perPage.flatMap(({ lines, height }) => lines
       .map((line) => ({ ...line, text: line.text.replace(/\s*(?:seite|page|faqja)\s+\d+\s*(?:von|of|nga)\s*\d+\s*$/i, "").trim() }))
       .filter((line) => line.text && !pageNumber.test(line.text) && !repeated(line, height)));
@@ -345,9 +370,11 @@ window.CvImport = (() => {
       const prev = lines[index - 1];
       const explicit = line.bullet || BULLET.test(line.text);
       const prevFull = prev && prev.right && width ? (prev.right - prev.x) > width * 0.7 : !prev?.bullet;
-      const continues = out.length && prev && !explicit && !line.leafStart
-        && !ENDS_SENTENCE.test(out[out.length - 1])
-        && (/^[\p{Ll}(0-9%]/u.test(text) || prevFull);
+      // "Guest Service → Night Audit →" + "Senior Night Audit" is one career path.
+      const last = out[out.length - 1] || "";
+      const chain = ARROW.test(last) && (ARROW.test(text) || ARROW_END.test(last));
+      const continues = out.length && prev && !explicit && !ENDS_SENTENCE.test(last)
+        && (chain || (!line.leafStart && !ARROW.test(last) && (/^[\p{Ll}(0-9%]/u.test(text) || prevFull)));
       if (continues) out[out.length - 1] = join(out[out.length - 1], text);
       else out.push(text);
     });
@@ -358,7 +385,9 @@ window.CvImport = (() => {
     const out = [];
     lines.forEach((line, index) => {
       const text = stripBullet(line.text);
-      if (out.length && !line.leafStart && !(line.bullet && index)) out[out.length - 1] = join(out[out.length - 1], text);
+      const last = out[out.length - 1] || "";
+      const chain = ARROW.test(last) && (ARROW.test(text) || ARROW_END.test(last));
+      if (out.length && (chain || (!line.leafStart && !ARROW.test(last))) && !(line.bullet && index)) out[out.length - 1] = join(out[out.length - 1], text);
       else out.push(text);
     });
     return out;
@@ -366,14 +395,14 @@ window.CvImport = (() => {
 
   const experienceFrom = (lines) => {
     const entries = [];
-    const anchors = lines.map((line, i) => (findDates(line.text) ? i : -1)).filter((i) => i >= 0);
+    const anchors = lines.map((line, i) => (entryDates(line.text) ? i : -1)).filter((i) => i >= 0);
     const indented = (line, ref) => line.bullet || BULLET.test(line.text) || (line.x !== undefined && ref.x !== undefined && line.x > ref.x + 3);
-    const titleLike = (line, ref) => line && !indented(line, ref) && !findDates(line.text) && line.text.length <= 100 && !ENDS_SENTENCE.test(line.text);
+    const titleLike = (line, ref) => line && !indented(line, ref) && !entryDates(line.text) && line.text.length <= 100 && !ENDS_SENTENCE.test(line.text);
     const starts = [];
     anchors.forEach((a, k) => {
       const floor = k ? anchors[k - 1] + 1 : 0;
       const before = lines[a - 1];
-      const rest = withoutDates(lines[a].text, findDates(lines[a].text));
+      const rest = withoutDates(lines[a].text, entryDates(lines[a].text));
       // The title stands on the line above when the date line reads like "Company | 2019 – 2020".
       const titleAbove = a - 1 >= floor && titleLike(before, lines[a]) && (!rest || (before.size || 0) >= (lines[a].size || 0)) && !(k && starts[k - 1].companyAt === a - 1);
       const start = { anchor: a, begin: titleAbove ? a - 1 : a, companyAt: -1 };
@@ -385,7 +414,7 @@ window.CvImport = (() => {
     });
     starts.forEach((start, k) => {
       const line = lines[start.anchor];
-      const dates = findDates(line.text);
+      const dates = entryDates(line.text);
       const rest = withoutDates(line.text, dates);
       const entry = { title: "", company: "", location: "", from: dates.from, to: dates.to, bullets: "" };
       if (start.begin < start.anchor) {
@@ -414,7 +443,7 @@ window.CvImport = (() => {
   };
 
   const educationFrom = (lines) => {
-    const anchors = lines.map((line, i) => (findDates(line.text) || YEAR.test(line.text) ? i : -1)).filter((i) => i >= 0);
+    const anchors = lines.map((line, i) => (entryDates(line.text) || entryYear(line.text) ? i : -1)).filter((i) => i >= 0);
     if (!anchors.length) {
       return paragraphs(lines).map((text) => ({ title: text, school: "", date: "", detail: "" }));
     }
@@ -573,7 +602,7 @@ window.CvImport = (() => {
     // Sections.
     sections.forEach((section) => {
       const title = tidyTitle(section.title.replace(/[:：]\s*$/, ""));
-      const kind = section.kind === "other" && section.lines.some((line) => findDates(line.text)) ? "experience" : section.kind;
+      const kind = section.kind === "other" && section.lines.some((line) => entryDates(line.text)) ? "experience" : section.kind;
       const content = section.lines;
       if (!content.length) return;
       if (kind === "profile") cv.summary = [cv.summary, ...paragraphs(content)].filter(Boolean).join("\n\n");
@@ -585,7 +614,7 @@ window.CvImport = (() => {
       } else if (kind === "education") cv.education.push(...educationFrom(content));
       else if (kind === "skills") cv.skills.push(...skillsFrom(content));
       else if (kind === "languages") cv.languages.push(...languagesFrom(content));
-      else if (content.some((line) => findDates(line.text))) {
+      else if (content.some((line) => entryDates(line.text))) {
         // Dated items (projects, volunteering): one line with title, place and dates, then the text.
         const text = educationFrom(content).map((item) => [[item.title, item.school, item.date].filter(Boolean).join(" | "), item.detail].filter(Boolean).join("\n")).join("\n");
         cv.extras.push({ title, text });
