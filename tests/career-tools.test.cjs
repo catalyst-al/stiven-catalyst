@@ -128,3 +128,37 @@ test('the cover letter greets by name and writes a draft from the answers given'
   assert.equal(CoverLetter.salutationOf(letter, doc), 'Sehr geehrte Damen und Herren,');
   assert.match(CoverLetter.plainText(letter, data, new Date(2026, 8, 28)), /28\. September 2026/);
 });
+
+test('a career path with arrows stays one section, and a year inside a sentence is not a job', () => {
+  const text = `Max Beispiel
+Night Manager
+max@example.com | 0170 1234567
+
+PROFIL
+Erfahrener Night Manager mit 14 Jahren in der Hotellerie.
+
+KARRIEREPROFIL
+Guest Service → Night Audit →
+
+Senior Night Audit → Shift
+
+Leader → Night Manager
+Kontinuierliche Laufbahn im Frankfurter Hotelmarkt seit 2012, mit wachsender
+Verantwortung im Nachtbetrieb.
+
+BERUFSERFAHRUNG
+Night Manager        07/2023 – 09/2026
+Beispiel Hotel | Frankfurt
+- Leitung des Nachtbetriebs seit 2024 mit zwei Kollegen.
+`;
+  const cv = plain(CvImport.parse(CvImport.textLines(text)));
+  assert.equal(cv.summary, 'Erfahrener Night Manager mit 14 Jahren in der Hotellerie.');
+  assert.deepEqual(cv.extras, [{
+    title: 'Karriereprofil',
+    text: 'Guest Service → Night Audit → Senior Night Audit → Shift Leader → Night Manager\n'
+      + 'Kontinuierliche Laufbahn im Frankfurter Hotelmarkt seit 2012, mit wachsender Verantwortung im Nachtbetrieb.',
+  }]);
+  assert.equal(cv.experience.length, 1);
+  assert.deepEqual([cv.experience[0].title, cv.experience[0].company, cv.experience[0].from, cv.experience[0].to], ['Night Manager', 'Beispiel Hotel', '07/2023', '09/2026']);
+  assert.equal(cv.experience[0].bullets, 'Leitung des Nachtbetriebs seit 2024 mit zwei Kollegen.');
+});
