@@ -62,5 +62,13 @@
     "summary": "Numrat, çështjet e hapura me përgjegjës dhe orë, paralajmërimet dhe siguria në një dorëzim. Çështjet e hapura kalojnë vetë te turni i ardhshëm.",
     "url": "/sq/tools/shift-handover/",
     "cta": "Nis dorëzimin"
+  },
+  {
+    "name": "Krijuesi i CV-së",
+    "type": "Karriera",
+    "time": "20 min",
+    "summary": "Një CV me cilësi dizajneri në faqe të vërteta A4: foto, shifrat kryesore dhe logot e kompanive të gjetura nga faqja e internetit. Në shqip, gjermanisht ose anglisht, si PDF.",
+    "url": "/sq/tools/cv-builder/",
+    "cta": "Krijoni CV-në tuaj"
   }
 ]

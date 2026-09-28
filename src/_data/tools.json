@@ -62,5 +62,13 @@
     "summary": "Numbers, open issues with an owner and a time, heads-up and safety in one handover. Open issues carry over to the next shift by themselves.",
     "url": "/tools/shift-handover/",
     "cta": "Start a handover"
+  },
+  {
+    "name": "CV Builder",
+    "type": "Career",
+    "time": "20 min",
+    "summary": "A designer-quality CV on live A4 pages: photo, key figures, and company logos found from a website. In English, German or Albanian, saved as PDF.",
+    "url": "/tools/cv-builder/",
+    "cta": "Build your CV"
   }
 ]

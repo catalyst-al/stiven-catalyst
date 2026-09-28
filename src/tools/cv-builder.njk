@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: CV Builder
+description: "Build a professional CV in minutes: photo, key figures, company logos found automatically, a live A4 preview and a clean PDF. In English, German or Albanian. Free and private."
+activeNav: /tools.html
+permalink: /tools/cv-builder/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Career</p>
+  <h1>CV Builder</h1>
+  <p class="lede">A CV that looks like it was made by a designer, in the time it takes to type it. Add your photo, type a company's website and its logo appears, and watch every change on real A4 pages before you save the PDF.</p>
+</section>
+
+{% set cfg = cvBuilder %}
+{% include "partials/cv-builder.njk" %}

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Lebenslauf-Generator
+description: "Ein professioneller Lebenslauf in wenigen Minuten: Foto, Kennzahlen, automatisch gefundene Firmenlogos, eine Live-Vorschau in A4 und ein sauberes PDF. Auf Deutsch, Englisch oder Albanisch. Kostenlos und privat."
+activeNav: /de/tools.html
+permalink: /de/tools/cv-builder/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Karriere</p>
+  <h1 class="hero-long">Lebenslauf-Generator</h1>
+  <p class="lede">Ein Lebenslauf, der aussieht wie vom Designer, in der Zeit, die das Tippen dauert. Fügen Sie Ihr Foto hinzu, geben Sie die Website einer Firma ein und ihr Logo erscheint, und sehen Sie jede Änderung auf echten A4-Seiten, bevor Sie das PDF speichern.</p>
+</section>
+
+{% set cfg = cvBuilder %}
+{% include "partials/cv-builder.njk" %}

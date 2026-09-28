@@ -1,0 +1,277 @@
+{
+  "storageKey": "sc-cv-builder",
+  "logoService": "https://www.google.com/s2/favicons?sz=128&domain=",
+  "themes": [
+    { "id": "navy", "name": "Navy & red", "dark": "#15233d", "accent": "#c8102e", "gold": "#f3b23a", "soft": "#fdf0f1" },
+    { "id": "graphite", "name": "Graphite & blue", "dark": "#1f2328", "accent": "#1f6feb", "gold": "#f2c14e", "soft": "#edf4ff" },
+    { "id": "forest", "name": "Forest & gold", "dark": "#163a2f", "accent": "#1f7a55", "gold": "#e3b448", "soft": "#ebf6f0" },
+    { "id": "burgundy", "name": "Burgundy", "dark": "#3a1020", "accent": "#a3203f", "gold": "#e7b35a", "soft": "#fbeff2" },
+    { "id": "teal", "name": "Slate & teal", "dark": "#1d2939", "accent": "#0e8a8c", "gold": "#f5b83d", "soft": "#e7f5f5" },
+    { "id": "mono", "name": "Black & white", "dark": "#111111", "accent": "#333333", "gold": "#d9d9d9", "soft": "#f2f2f2" }
+  ],
+  "docLangs": {
+    "en": {
+      "label": "English",
+      "doc": "CV",
+      "present": "present",
+      "page": "Page {n} of {total}",
+      "yourName": "Your Name",
+      "yourHeadline": "Your role | Your field",
+      "headings": {
+        "profile": "Profile",
+        "highlights": "Key achievements",
+        "experience": "Professional experience",
+        "side": "Side activities",
+        "education": "Education & certificates",
+        "skills": "Core skills",
+        "languages": "Languages"
+      }
+    },
+    "de": {
+      "label": "Deutsch",
+      "doc": "Lebenslauf",
+      "present": "heute",
+      "page": "Seite {n} von {total}",
+      "yourName": "Ihr Name",
+      "yourHeadline": "Ihre Rolle | Ihr Fachgebiet",
+      "headings": {
+        "profile": "Kurzprofil",
+        "highlights": "Ausgewählte Erfolge",
+        "experience": "Berufserfahrung",
+        "side": "Nebenberufliche Tätigkeiten",
+        "education": "Ausbildung & Zertifikate",
+        "skills": "Kernkompetenzen",
+        "languages": "Sprachen"
+      }
+    },
+    "sq": {
+      "label": "Shqip",
+      "doc": "CV",
+      "present": "sot",
+      "page": "Faqja {n} nga {total}",
+      "yourName": "Emri juaj",
+      "yourHeadline": "Roli juaj | Fusha juaj",
+      "headings": {
+        "profile": "Profili",
+        "highlights": "Arritjet kryesore",
+        "experience": "Përvoja profesionale",
+        "side": "Aktivitete paralele",
+        "education": "Arsimi & certifikatat",
+        "skills": "Aftësitë kryesore",
+        "languages": "Gjuhët"
+      }
+    }
+  },
+  "examples": {
+    "en": {
+      "person": {
+        "name": "Elena Marku",
+        "headline": "Front Office Manager | Guest Experience | Hotel Operations",
+        "location": "Munich",
+        "phone": "+49 170 1234567",
+        "email": "elena.marku@example.com",
+        "extra": "Driving licence B"
+      },
+      "stats": [
+        { "value": "8+", "label": "Years in hotels" },
+        { "value": "14", "label": "People led" },
+        { "value": "4.7 / 5", "label": "Guest rating" },
+        { "value": "4", "label": "Languages" }
+      ],
+      "profile": "Front Office Manager with eight years in city and resort hotels in Germany and Albania. Leads reception, night audit and guest relations for a 320-room hotel, with a steady focus on clean handovers, accurate billing and calm complaint handling. Known for training new staff quickly and turning guest feedback into small, lasting fixes. Works in Albanian, German, English and Italian.",
+      "highlights": "Raised the hotel's guest rating from 4.3 to 4.7 in 18 months.\nCut check-in waiting time at peak hours from 12 to 5 minutes.\nPromoted from receptionist to Front Office Manager in six years.\nTrained 20+ new front office staff with a two-week onboarding plan.",
+      "groups": [
+        {
+          "title": "",
+          "entries": [
+            {
+              "company": "Lakeside Grand Hotel",
+              "note": "320 rooms, 4 stars",
+              "location": "Munich",
+              "roles": [
+                { "title": "Front Office Manager", "from": "03.2022", "to": "", "bullets": "Lead a team of 14 across reception, concierge and night audit; build the weekly rota.\n**Guest rating:** from 4.3 to 4.7 in 18 months through a daily review of every comment below 4.\nIntroduced a pre-arrival check that cut room-assignment errors by 60 %.\nOwn the daily close, payment controls and no-show billing with the finance team." }
+              ]
+            },
+            {
+              "company": "Riverside City Hotel",
+              "note": "210 rooms",
+              "location": "Frankfurt am Main",
+              "roles": [
+                { "title": "Night Manager", "from": "01.2020", "to": "02.2022", "bullets": "Ran the night operation with two colleagues; first contact for guests, team and security.\nNight audit, daily close and a structured handover to the morning team." },
+                { "title": "Receptionist", "from": "05.2018", "to": "12.2019", "bullets": "Check-in and check-out, reservations and guest requests; promoted after 20 months." }
+              ]
+            },
+            {
+              "company": "Adriatic Bay Resort",
+              "note": "Seasonal resort",
+              "location": "Durrës",
+              "roles": [
+                { "title": "Guest Relations Agent (summer seasons)", "from": "2016", "to": "2018", "bullets": "Welcomed up to 400 guests a day in four languages; handled complaints on the spot." }
+              ]
+            }
+          ]
+        }
+      ],
+      "side": [
+        { "title": "Trainer – Hospitality Academy", "meta": "Munich | part-time | since 2023", "text": "Evening courses on front office basics and complaint handling." },
+        { "title": "Volunteer – Tourism Festival Durrës", "meta": "Albania | 2015 – 2017", "text": "Visitor information and coordination of 30 volunteers." }
+      ],
+      "education": [
+        { "title": "Bachelor in Tourism Management", "school": "University of Tirana, Albania", "date": "2012 – 2016", "detail": "Final grade 9.1 / 10" },
+        { "title": "Opera PMS – Advanced User", "school": "Hospitality Academy, Munich", "date": "2021", "detail": "Reservations, billing and night audit" }
+      ],
+      "skills": [
+        { "title": "Front office", "text": "Check-in/check-out, night audit, daily close, no-show control, payment checks" },
+        { "title": "Guests & service", "text": "Guest relations, complaint handling, de-escalation, loyalty programmes" },
+        { "title": "Leadership", "text": "Rotas, onboarding, coaching, KPI reviews, process improvement" },
+        { "title": "Systems & tools", "text": "Opera PMS, Protel, Excel, Microsoft 365" }
+      ],
+      "languages": [
+        { "name": "Albanian", "level": "Native" },
+        { "name": "German", "level": "C1" },
+        { "name": "English", "level": "C1" },
+        { "name": "Italian", "level": "B2" }
+      ]
+    },
+    "de": {
+      "person": {
+        "name": "Elena Marku",
+        "headline": "Front Office Managerin | Gästeerlebnis | Hotel Operations",
+        "location": "München",
+        "phone": "+49 170 1234567",
+        "email": "elena.marku@example.com",
+        "extra": "Führerschein Klasse B"
+      },
+      "stats": [
+        { "value": "8+", "label": "Jahre in Hotels" },
+        { "value": "14", "label": "Mitarbeitende geführt" },
+        { "value": "4,7 / 5", "label": "Gästebewertung" },
+        { "value": "4", "label": "Sprachen" }
+      ],
+      "profile": "Front Office Managerin mit acht Jahren Erfahrung in Stadt- und Resorthotels in Deutschland und Albanien. Leitet Rezeption, Night Audit und Gästebetreuung eines Hotels mit 320 Zimmern, mit klarem Fokus auf saubere Übergaben, korrekte Abrechnung und ruhigen Umgang mit Beschwerden. Arbeitet neue Kolleginnen und Kollegen schnell ein und macht aus Gästefeedback kleine, dauerhafte Verbesserungen. Kommuniziert auf Albanisch, Deutsch, Englisch und Italienisch.",
+      "highlights": "Gästebewertung des Hotels in 18 Monaten von 4,3 auf 4,7 gesteigert.\nWartezeit beim Check-in zu Spitzenzeiten von 12 auf 5 Minuten gesenkt.\nIn sechs Jahren von der Rezeptionistin zur Front Office Managerin aufgestiegen.\nÜber 20 neue Mitarbeitende mit einem zweiwöchigen Einarbeitungsplan geschult.",
+      "groups": [
+        {
+          "title": "",
+          "entries": [
+            {
+              "company": "Lakeside Grand Hotel",
+              "note": "320 Zimmer, 4 Sterne",
+              "location": "München",
+              "roles": [
+                { "title": "Front Office Managerin", "from": "03.2022", "to": "", "bullets": "Führung von 14 Mitarbeitenden in Rezeption, Concierge und Night Audit; Erstellung des Wochendienstplans.\n**Gästebewertung:** in 18 Monaten von 4,3 auf 4,7 durch tägliche Auswertung jedes Kommentars unter 4.\nPre-Arrival-Check eingeführt; Fehler bei der Zimmerzuteilung um 60 % gesenkt.\nVerantwortlich für Tagesabschluss, Zahlungskontrollen und No-Show-Abrechnung mit der Buchhaltung." }
+              ]
+            },
+            {
+              "company": "Riverside City Hotel",
+              "note": "210 Zimmer",
+              "location": "Frankfurt am Main",
+              "roles": [
+                { "title": "Night Manager", "from": "01.2020", "to": "02.2022", "bullets": "Leitung des Nachtbetriebs mit zwei Kollegen; Ansprechpartnerin für Gäste, Team und Sicherheit.\nNight Audit, Tagesabschluss und strukturierte Übergabe an das Frühteam." },
+                { "title": "Rezeptionistin", "from": "05.2018", "to": "12.2019", "bullets": "Check-in und Check-out, Reservierungen und Gästeanliegen; nach 20 Monaten befördert." }
+              ]
+            },
+            {
+              "company": "Adriatic Bay Resort",
+              "note": "Saisonresort",
+              "location": "Durrës",
+              "roles": [
+                { "title": "Guest Relations Agent (Sommersaisons)", "from": "2016", "to": "2018", "bullets": "Bis zu 400 Gäste täglich in vier Sprachen empfangen; Beschwerden direkt gelöst." }
+              ]
+            }
+          ]
+        }
+      ],
+      "side": [
+        { "title": "Trainerin – Hospitality Academy", "meta": "München | nebenberuflich | seit 2023", "text": "Abendkurse zu Front-Office-Grundlagen und Beschwerdemanagement." },
+        { "title": "Ehrenamt – Tourismusfestival Durrës", "meta": "Albanien | 2015 – 2017", "text": "Besucherinformation und Koordination von 30 Freiwilligen." }
+      ],
+      "education": [
+        { "title": "Bachelor Tourismusmanagement", "school": "Universität Tirana, Albanien", "date": "2012 – 2016", "detail": "Abschlussnote 9,1 / 10" },
+        { "title": "Opera PMS – Advanced User", "school": "Hospitality Academy, München", "date": "2021", "detail": "Reservierung, Abrechnung und Night Audit" }
+      ],
+      "skills": [
+        { "title": "Front Office", "text": "Check-in/Check-out, Night Audit, Tagesabschluss, No-Show-Kontrolle, Zahlungskontrollen" },
+        { "title": "Gäste & Service", "text": "Gästebetreuung, Beschwerdemanagement, Deeskalation, Treueprogramme" },
+        { "title": "Führung", "text": "Dienstpläne, Einarbeitung, Coaching, KPI-Besprechungen, Prozessverbesserung" },
+        { "title": "Systeme & Tools", "text": "Opera PMS, Protel, Excel, Microsoft 365" }
+      ],
+      "languages": [
+        { "name": "Albanisch", "level": "Muttersprache" },
+        { "name": "Deutsch", "level": "C1" },
+        { "name": "Englisch", "level": "C1" },
+        { "name": "Italienisch", "level": "B2" }
+      ]
+    },
+    "sq": {
+      "person": {
+        "name": "Elena Marku",
+        "headline": "Front Office Manager | Përvoja e mysafirit | Operacione hoteli",
+        "location": "Mynih",
+        "phone": "+49 170 1234567",
+        "email": "elena.marku@example.com",
+        "extra": "Patentë kategoria B"
+      },
+      "stats": [
+        { "value": "8+", "label": "Vite në hotele" },
+        { "value": "14", "label": "Punonjës të drejtuar" },
+        { "value": "4,7 / 5", "label": "Vlerësimi i mysafirëve" },
+        { "value": "4", "label": "Gjuhë" }
+      ],
+      "profile": "Front Office Manager me tetë vite përvojë në hotele qyteti dhe resorte në Gjermani dhe Shqipëri. Drejton recepsionin, night audit-in dhe marrëdhëniet me mysafirët në një hotel me 320 dhoma, me fokus te dorëzimet e qarta, faturimi i saktë dhe trajtimi i qetë i ankesave. Trajnon shpejt stafin e ri dhe e kthen reagimin e mysafirëve në përmirësime të vogla e të qëndrueshme. Punon në shqip, gjermanisht, anglisht dhe italisht.",
+      "highlights": "Vlerësimi i hotelit u rrit nga 4,3 në 4,7 brenda 18 muajve.\nKoha e pritjes në check-in në orët e pikut u ul nga 12 në 5 minuta.\nNga recepsioniste në Front Office Manager brenda gjashtë vitesh.\nMbi 20 punonjës të rinj të trajnuar me një plan dyjavor.",
+      "groups": [
+        {
+          "title": "",
+          "entries": [
+            {
+              "company": "Lakeside Grand Hotel",
+              "note": "320 dhoma, 4 yje",
+              "location": "Mynih",
+              "roles": [
+                { "title": "Front Office Manager", "from": "03.2022", "to": "", "bullets": "Drejton 14 punonjës në recepsion, concierge dhe night audit; harton orarin javor.\n**Vlerësimi i mysafirëve:** nga 4,3 në 4,7 brenda 18 muajve, me shqyrtim ditor të çdo komenti nën 4.\nFutja e një kontrolli para mbërritjes uli gabimet në caktimin e dhomave me 60 %.\nPërgjegjëse për mbylljen ditore, kontrollin e pagesave dhe faturimin e no-show me financën." }
+              ]
+            },
+            {
+              "company": "Riverside City Hotel",
+              "note": "210 dhoma",
+              "location": "Frankfurt am Main",
+              "roles": [
+                { "title": "Night Manager", "from": "01.2020", "to": "02.2022", "bullets": "Drejtoi turnin e natës me dy kolegë; pika e parë e kontaktit për mysafirët, ekipin dhe sigurinë.\nNight audit, mbyllja ditore dhe dorëzim i strukturuar për turnin e mëngjesit." },
+                { "title": "Recepsioniste", "from": "05.2018", "to": "12.2019", "bullets": "Check-in dhe check-out, rezervime dhe kërkesa të mysafirëve; u promovua pas 20 muajsh." }
+              ]
+            },
+            {
+              "company": "Adriatic Bay Resort",
+              "note": "Resort sezonal",
+              "location": "Durrës",
+              "roles": [
+                { "title": "Guest Relations Agent (sezonet verore)", "from": "2016", "to": "2018", "bullets": "Priste deri në 400 mysafirë në ditë në katër gjuhë; zgjidhte ankesat në vend." }
+              ]
+            }
+          ]
+        }
+      ],
+      "side": [
+        { "title": "Trajnere – Hospitality Academy", "meta": "Mynih | me kohë të pjesshme | që nga 2023", "text": "Kurse mbrëmjeje për bazat e recepsionit dhe trajtimin e ankesave." },
+        { "title": "Vullnetare – Festivali i Turizmit Durrës", "meta": "Shqipëri | 2015 – 2017", "text": "Informacion për vizitorët dhe koordinim i 30 vullnetarëve." }
+      ],
+      "education": [
+        { "title": "Bachelor në Menaxhim Turizmi", "school": "Universiteti i Tiranës", "date": "2012 – 2016", "detail": "Nota përfundimtare 9,1 / 10" },
+        { "title": "Opera PMS – Advanced User", "school": "Hospitality Academy, Mynih", "date": "2021", "detail": "Rezervime, faturim dhe night audit" }
+      ],
+      "skills": [
+        { "title": "Recepsioni", "text": "Check-in/check-out, night audit, mbyllja ditore, kontrolli i no-show, kontrolli i pagesave" },
+        { "title": "Mysafirët & shërbimi", "text": "Marrëdhënie me mysafirët, trajtimi i ankesave, qetësimi i situatave, programe besnikërie" },
+        { "title": "Drejtimi", "text": "Oraret, integrimi i stafit të ri, coaching, analiza e KPI-ve, përmirësimi i proceseve" },
+        { "title": "Sisteme & mjete", "text": "Opera PMS, Protel, Excel, Microsoft 365" }
+      ],
+      "languages": [
+        { "name": "Shqip", "level": "Gjuha amtare" },
+        { "name": "Gjermanisht", "level": "C1" },
+        { "name": "Anglisht", "level": "C1" },
+        { "name": "Italisht", "level": "B2" }
+      ]
+    }
+  }
+}
