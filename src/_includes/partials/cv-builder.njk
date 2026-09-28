@@ -1,0 +1,242 @@
+{#- The CV Builder. The page sets `cfg` to cvBuilder; cv-builder.js builds the lists and the pages. -#}
+<style>@page { size: A4; margin: 0; }</style>
+<section class="shell cv-app" data-cv>
+  <form class="cv-editor" data-cv-form novalidate autocomplete="off">
+    <a class="cv-jump" href="#cv-preview">{{ "See the preview" | t(lang) }} <span aria-hidden="true">↓</span></a>
+    <p class="dl-empty cv-empty" data-empty>{{ "New here?" | t(lang) }} <button class="button-ghost" type="button" data-act="example">{{ "Load an example CV" | t(lang) }}</button> {{ "to see every section filled in." | t(lang) }}</p>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">1 · {{ "Design" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-grid">
+          <div class="field">
+            <label for="cv-docLang">{{ "Language of the CV" | t(lang) }}</label>
+            <select id="cv-docLang" data-path="docLang">
+              {%- for code, docLang in cfg.docLangs %}
+              <option value="{{ code }}">{{ docLang.label }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="cv-density">{{ "Spacing" | t(lang) }}</label>
+            <select id="cv-density" data-path="density">
+              <option value="normal">{{ "Comfortable" | t(lang) }}</option>
+              <option value="compact">{{ "Compact (more on a page)" | t(lang) }}</option>
+            </select>
+          </div>
+        </div>
+        <fieldset class="cv-themes">
+          <legend>{{ "Colours" | t(lang) }}</legend>
+          {%- for theme in cfg.themes %}
+          <label class="cv-theme" style="--sw-dark: {{ theme.dark }}; --sw-accent: {{ theme.accent }}; --sw-gold: {{ theme.gold }};">
+            <input type="radio" name="theme" value="{{ theme.id }}" data-path="theme">
+            <span class="cv-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>{{ theme.name | t(lang) }}</span>
+          </label>
+          {%- endfor %}
+        </fieldset>
+        <p class="cv-hint">{{ "The headings follow the language of the CV, not of this page, so you can write a German CV from the Albanian page." | t(lang) }}</p>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">2 · {{ "Photo and contact" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="cv-photo-edit">
+          <div class="cv-photo-thumb" data-photo-thumb aria-hidden="true"></div>
+          <div class="cv-photo-controls">
+            <div class="cv-logo-actions">
+              <label class="cv-file button-secondary">{{ "Upload a photo" | t(lang) }}<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="photo"></label>
+              <button class="button-ghost" type="button" data-act="clear" data-path="photo" data-photo-remove hidden>{{ "Remove the photo" | t(lang) }}</button>
+            </div>
+            <div class="cv-grid">
+              <div class="field">
+                <label for="cv-photoShape">{{ "Photo shape" | t(lang) }}</label>
+                <select id="cv-photoShape" data-path="photoShape">
+                  <option value="circle">{{ "Circle" | t(lang) }}</option>
+                  <option value="rounded">{{ "Rounded square" | t(lang) }}</option>
+                  <option value="none">{{ "No photo on the CV" | t(lang) }}</option>
+                </select>
+              </div>
+              <div class="field" data-photo-position hidden>
+                <label for="cv-photoY">{{ "Photo position" | t(lang) }}</label>
+                <input id="cv-photoY" type="range" min="0" max="100" step="1" data-path="photoY">
+              </div>
+            </div>
+            <p class="cv-hint">{{ "A friendly, professional portrait, head and shoulders, on a calm background. In Germany a photo is common; in the UK and the US leave it out." | t(lang) }}</p>
+          </div>
+        </div>
+        <div class="cv-grid">
+          <div class="field cv-wide">
+            <label for="cv-person-name">{{ "Full name" | t(lang) }}</label>
+            <input id="cv-person-name" data-path="person.name" autocomplete="name">
+          </div>
+          <div class="field cv-wide">
+            <label for="cv-person-headline">{{ "Role and fields" | t(lang) }}</label>
+            <input id="cv-person-headline" data-path="person.headline" placeholder="{{ 'e.g. Night Manager | Front Office | Hotel Operations' | t(lang) }}">
+            <p class="cv-hint">{{ "Separate the parts with |." | t(lang) }}</p>
+          </div>
+          <div class="field">
+            <label for="cv-person-location">{{ "City" | t(lang) }}</label>
+            <input id="cv-person-location" data-path="person.location">
+          </div>
+          <div class="field">
+            <label for="cv-person-phone">{{ "Phone" | t(lang) }}</label>
+            <input id="cv-person-phone" type="tel" data-path="person.phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="cv-person-email">{{ "Email" | t(lang) }}</label>
+            <input id="cv-person-email" type="email" data-path="person.email" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="cv-person-website">{{ "LinkedIn or website" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cv-person-website" data-path="person.website" placeholder="linkedin.com/in/…">
+          </div>
+          <div class="field cv-wide">
+            <label for="cv-person-extra">{{ "Anything else on the contact line" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="cv-person-extra" data-path="person.extra" placeholder="{{ 'e.g. Driving licence B' | t(lang) }}">
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">3 · {{ "Key figures" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <p class="cv-hint">{{ "Up to four numbers a recruiter sees first: years, people led, results, languages." | t(lang) }}</p>
+        <div data-list="stats"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">4 · {{ "Profile" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="field">
+          <label for="cv-profile">{{ "Short profile" | t(lang) }}</label>
+          <textarea id="cv-profile" data-path="profile" rows="6"></textarea>
+          <p class="cv-hint">{{ "3–5 sentences: who you are, where you work best, your strongest results, your languages." | t(lang) }}</p>
+        </div>
+        <div class="field">
+          <label for="cv-highlights">{{ "Key achievements" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <textarea id="cv-highlights" data-path="highlights" rows="4"></textarea>
+          <p class="cv-hint">{{ "One per line. Shown in a box next to the profile." | t(lang) }}</p>
+        </div>
+        <div class="cv-grid">
+          <div class="field">
+            <label for="cv-headings-profile">{{ "Title of this section" | t(lang) }}</label>
+            <input id="cv-headings-profile" data-path="headings.profile" data-heading="profile">
+          </div>
+          <div class="field">
+            <label for="cv-headings-highlights">{{ "Title of the box" | t(lang) }}</label>
+            <input id="cv-headings-highlights" data-path="headings.highlights" data-heading="highlights">
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cv-sec" open>
+      <summary><span class="kicker">5 · {{ "Experience" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <p class="cv-hint">{{ "Newest first. Split it into sections if you like, for example by country. Several roles at one company sit under one logo." | t(lang) }}</p>
+        <div data-list="groups"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">6 · {{ "Side activities" | t(lang) }}</span> <span class="optional">{{ "optional" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="field">
+          <label for="cv-headings-side">{{ "Title of this section" | t(lang) }}</label>
+          <input id="cv-headings-side" data-path="headings.side" data-heading="side">
+        </div>
+        <div data-list="side"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">7 · {{ "Education and certificates" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="field">
+          <label for="cv-headings-education">{{ "Title of this section" | t(lang) }}</label>
+          <input id="cv-headings-education" data-path="headings.education" data-heading="education">
+        </div>
+        <div data-list="education"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">8 · {{ "Skills" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="field">
+          <label for="cv-headings-skills">{{ "Title of this section" | t(lang) }}</label>
+          <input id="cv-headings-skills" data-path="headings.skills" data-heading="skills">
+        </div>
+        <div data-list="skills"></div>
+      </div>
+    </details>
+
+    <details class="cv-sec">
+      <summary><span class="kicker">9 · {{ "Languages" | t(lang) }}</span></summary>
+      <div class="cv-sec-body">
+        <div class="field">
+          <label for="cv-headings-languages">{{ "Title of this section" | t(lang) }}</label>
+          <input id="cv-headings-languages" data-path="headings.languages" data-heading="languages">
+        </div>
+        <div data-list="languages"></div>
+      </div>
+    </details>
+
+    <section class="cv-sec cv-check-box" aria-labelledby="cv-check-title">
+      <p class="kicker" id="cv-check-title">{{ "CV check" | t(lang) }}</p>
+      <div data-check></div>
+    </section>
+  </form>
+
+  <div class="cv-preview" id="cv-preview" tabindex="-1">
+    <div class="cv-toolbar">
+      <button class="button-primary" type="button" data-act="print">{{ "Download PDF" | t(lang) }}</button>
+      <details class="cv-more">
+        <summary class="button-secondary">{{ "More" | t(lang) }}</summary>
+        <div class="cv-more-menu">
+          <button type="button" data-act="example">{{ "Load an example CV" | t(lang) }}</button>
+          <button type="button" data-act="export">{{ "Save a backup file" | t(lang) }}</button>
+          <label class="cv-file">{{ "Open a backup file" | t(lang) }}<input type="file" accept="application/json,.json" data-import></label>
+          <button type="button" data-act="reset">{{ "Start a new CV" | t(lang) }}</button>
+        </div>
+      </details>
+      <a class="cv-badge" href="#cv-check-title" data-check-badge></a>
+    </div>
+    <p class="form-note cv-status" data-status aria-live="polite"></p>
+    <div class="cv-stage" data-stage>
+      <div class="cv-doc" data-scale></div>
+    </div>
+    <p class="cv-hint cv-print-hint">{{ "In the print window choose “Save as PDF”, paper A4, margins “None” or “Default”, and switch on “Background graphics”." | t(lang) }}</p>
+  </div>
+</section>
+
+<section class="shell cv-tips">
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "A strong CV" | t(lang) }}</p>
+      <h2>{{ "Six seconds decide" | t(lang) }}</h2>
+    </div>
+    <p>{{ "Recruiters scan before they read. Make the first look count." | t(lang) }}</p>
+  </div>
+  <div class="cv-tips-grid">
+    <ul class="tips">
+      <li><strong>{{ "Results, not duties." | t(lang) }}</strong> {{ "“Responsible for the team” says little. “Led 12 people; complaints down by a third” says a lot." | t(lang) }}</li>
+      <li><strong>{{ "One page per ten years." | t(lang) }}</strong> {{ "Recent roles get detail; older ones get a line or two." | t(lang) }}</li>
+      <li><strong>{{ "Match the job ad." | t(lang) }}</strong> {{ "Use the same words for the skills the ad asks for, so screening software finds them." | t(lang) }}</li>
+    </ul>
+    <ul class="tips">
+      <li><strong>{{ "Same format everywhere." | t(lang) }}</strong> {{ "Dates as MM.YYYY, cities after companies, one style for every bullet point." | t(lang) }}</li>
+      <li><strong>{{ "Logos help the eye." | t(lang) }}</strong> {{ "A known company logo is recognised faster than its name. Type the website and it is added." | t(lang) }}</li>
+      <li><strong>{{ "Keep a backup." | t(lang) }}</strong> {{ "Save the backup file after big changes; open it on any device to keep working." | t(lang) }}</li>
+    </ul>
+  </div>
+  <p class="privacy-note">{{ "Your CV stays in this browser; nothing is uploaded, and photos and logos you add are kept only on this device. Only when you type a company website, that address is sent to Google's icon service to fetch the logo." | t(lang) }}</p>
+</section>
+
+<script type="application/json" id="cv-builder-data">{{ cfg | dump | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cv-builder.js' | assetUrl }}" defer></script>

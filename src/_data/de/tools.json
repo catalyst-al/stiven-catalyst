@@ -62,5 +62,13 @@
     "summary": "Zahlen, offene Punkte mit Verantwortlichem und Zeit, Hinweise und Sicherheit in einer Übergabe. Offene Punkte gehen von selbst in die nächste Schicht über.",
     "url": "/de/tools/shift-handover/",
     "cta": "Übergabe starten"
+  },
+  {
+    "name": "Lebenslauf-Generator",
+    "type": "Karriere",
+    "time": "20 min",
+    "summary": "Ein Lebenslauf in Designer-Qualität auf echten A4-Seiten: Foto, Kennzahlen und Firmenlogos, die über die Website gefunden werden. Auf Deutsch, Englisch oder Albanisch, als PDF.",
+    "url": "/de/tools/cv-builder/",
+    "cta": "Lebenslauf erstellen"
   }
 ]
