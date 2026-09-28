@@ -1010,12 +1010,17 @@
       say(tx("Backup saved. Open it here later, on any device, to keep working."));
     },
     print: () => {
-      cancelAnimationFrame(frame);
-      renderCv();
-      const title = document.title;
-      document.title = [cv.person.name.trim(), doc().doc].filter(Boolean).join(" – ") || title;
-      window.addEventListener("afterprint", () => { document.title = title; }, { once: true });
-      window.print();
+      const print = () => {
+        cancelAnimationFrame(frame);
+        renderCv();
+        const title = document.title;
+        document.title = [cv.person.name.trim(), doc().doc].filter(Boolean).join(" – ") || title;
+        window.addEventListener("afterprint", () => { document.title = title; }, { once: true });
+        window.print();
+      };
+      // First a short guide to saving the PDF (print-guide.js).
+      if (window.PrintGuide) window.PrintGuide.open(print, { colours: true });
+      else print();
     },
   };
 

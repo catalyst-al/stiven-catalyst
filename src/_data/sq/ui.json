@@ -1031,5 +1031,16 @@
   "Cleared. Your own details are kept.": "U pastrua. Të dhënat tuaja mbeten.",
   "Copied as plain text, ready for an email or a portal.": "U kopjua si tekst i thjeshtë, gati për email ose portal.",
   "Black": "E zezë",
-  "Navy": "Blu e errët"
+  "Navy": "Blu e errët",
+  "Printer:": "Printeri:",
+  "choose “Save as PDF” (“Als PDF speichern”), not “Microsoft Print to PDF”.": "zgjidhni “Save as PDF” (“Ruaj si PDF”), jo “Microsoft Print to PDF”.",
+  "More settings:": "Më shumë cilësime (More settings):",
+  "switch on “Background graphics”, so the colours are kept.": "aktivizoni “Background graphics”, që të ruhen ngjyrat.",
+  "Save:": "Ruaj:",
+  "click Save and choose a folder, for example Downloads.": "shtypni Save dhe zgjidhni një dosje, për shembull Downloads.",
+  "Using “Microsoft Print to PDF” anyway? Its save window often opens behind the browser: press Alt+Tab to find it.": "E përdorni gjithsesi “Microsoft Print to PDF”? Dritarja e ruajtjes shpesh hapet pas shfletuesit: shtypni Alt+Tab për ta gjetur.",
+  "Don't show this again": "Mos e shfaq më",
+  "Open the print window": "Hap dritaren e printimit",
+  "Cancel": "Anulo",
+  "How to save your PDF": "Si ta ruani PDF-në"
 }
