@@ -3576,3 +3576,22 @@ html:not(.js) .filter-bar { display: none; }
   .career-sheet { width: 150px; height: 212px; }
   .career-visual { height: 250px; }
 }
+
+/* The guide before the print window (print-guide.js). */
+.pg-dialog {
+  width: min(calc(100% - 32px), 520px);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.pg-dialog::backdrop { background: rgba(0, 0, 0, .55); }
+.pg-dialog h2 { margin: 0 0 16px; font-size: 22px; line-height: 1.25; }
+.pg-steps { display: grid; gap: 10px; margin: 0 0 16px; padding-left: 22px; line-height: 1.5; }
+.pg-steps strong { color: var(--ink); }
+.pg-tip { margin: 0 0 16px; padding: 12px 14px; border-radius: 12px; background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--ink); font-size: 14px; }
+.pg-check { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; color: var(--muted); font-size: 14px; cursor: pointer; }
+.pg-check input { width: 18px; height: 18px; accent-color: var(--blue); }
+@media print { .pg-dialog { display: none !important; } }

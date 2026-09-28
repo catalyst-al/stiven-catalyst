@@ -1031,5 +1031,16 @@
   "Cleared. Your own details are kept.": "Geleert. Ihre eigenen Angaben bleiben erhalten.",
   "Copied as plain text, ready for an email or a portal.": "Als reiner Text kopiert, bereit für eine E-Mail oder ein Portal.",
   "Black": "Schwarz",
-  "Navy": "Marineblau"
+  "Navy": "Marineblau",
+  "Printer:": "Drucker:",
+  "choose “Save as PDF” (“Als PDF speichern”), not “Microsoft Print to PDF”.": "wählen Sie „Als PDF speichern“ („Save as PDF“), nicht „Microsoft Print to PDF“.",
+  "More settings:": "Weitere Einstellungen:",
+  "switch on “Background graphics”, so the colours are kept.": "schalten Sie „Hintergrundgrafiken“ ein, damit die Farben erhalten bleiben.",
+  "Save:": "Speichern:",
+  "click Save and choose a folder, for example Downloads.": "klicken Sie auf Speichern und wählen Sie einen Ordner, zum Beispiel Downloads.",
+  "Using “Microsoft Print to PDF” anyway? Its save window often opens behind the browser: press Alt+Tab to find it.": "Sie nutzen trotzdem „Microsoft Print to PDF“? Das Speicherfenster öffnet sich oft hinter dem Browser: Mit Alt+Tab finden Sie es.",
+  "Don't show this again": "Nicht mehr anzeigen",
+  "Open the print window": "Druckfenster öffnen",
+  "Cancel": "Abbrechen",
+  "How to save your PDF": "So speichern Sie Ihr PDF"
 }
