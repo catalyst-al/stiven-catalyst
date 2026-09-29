@@ -404,7 +404,15 @@
         extra: data.sides[result.side].advice,
         warning: warnings.join(" "),
       }));
-      results.append(resultActions(() => summaryText(result), problemText(result)));
+      results.append(resultActions(() => summaryText(result), problemText(result), () => ({
+        source: document.title.split("|")[0].trim(),
+        template: "route-delays",
+        headers: [tx("Date"), tx("Shift"), tx("Route"), tx("Reason"), tx("Delay minutes")],
+        rows: result.late.map((row) => [row.date, row.shift, row.route, row.reason, String(row.arr)]),
+        map: { category: 3, count: -1, value: 4, date: 0, filter: 1 },
+        measure: "value",
+        valueLabel: tx("minutes"),
+      })));
     } else {
       const card = el("article", "result-card dl-focus");
       card.append(el("p", "result-label", tx("No late routes")));

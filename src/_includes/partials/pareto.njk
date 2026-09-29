@@ -1,0 +1,153 @@
+{#- Pareto 80/20. The page sets `cfg` to the pareto data; pareto.js does the rest. -#}
+<div data-pareto>
+<section class="shell tool-layout pa-setup">
+  <div class="tool-panel">
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "What do you want to analyse?" | t(lang) }}</legend>
+      <div class="field">
+        <label for="pa-template">{{ "Template" | t(lang) }}</label>
+        <select id="pa-template" data-template>
+          {%- for groupId, group in cfg.groups %}
+          <optgroup label="{{ group[lang] or group.en }}">
+            {%- for tpl in cfg.templates %}{% if tpl.group == groupId %}
+            <option value="{{ tpl.id }}">{{ tpl.name[lang] or tpl.name.en }}</option>
+            {%- endif %}{% endfor %}
+          </optgroup>
+          {%- endfor %}
+        </select>
+        <p class="pa-what" data-template-what></p>
+      </div>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-act="example">{{ "Load the example" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-act="csv">{{ "Download the CSV template" | t(lang) }}</button>
+      </div>
+      <details class="pa-causes">
+        <summary>{{ "Columns and cause list of this template" | t(lang) }}</summary>
+        <p class="cv-hint"><strong>{{ "Columns" | t(lang) }}:</strong> <span data-template-columns></span></p>
+        <ol class="pa-cause-list" data-cause-list></ol>
+        <button class="button-ghost" type="button" data-act="copy-causes">{{ "Copy the cause list for Excel" | t(lang) }}</button>
+      </details>
+    </fieldset>
+
+    <fieldset class="dl-box pa-drop" data-drop>
+      <legend class="kicker">2 · {{ "Your data" | t(lang) }}</legend>
+      <p class="pa-drop-lede">{{ "Drop a CSV or Excel file here, or paste cells from Excel. One row per event, or one row per cause with its count." | t(lang) }}</p>
+      <div class="tool-actions">
+        <label class="cv-file button-primary">{{ "Choose a CSV or Excel file" | t(lang) }}<input type="file" accept=".csv,.txt,.tsv,.xlsx,.xls,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" data-file></label>
+        <button class="button-ghost" type="button" data-act="reset">{{ "Start again" | t(lang) }}</button>
+      </div>
+      <details class="ats-paste">
+        <summary>{{ "Or paste cells from Excel" | t(lang) }}</summary>
+        <div class="field">
+          <label for="pa-paste">{{ "Cells, with or without the header row" | t(lang) }}</label>
+          <textarea id="pa-paste" rows="7" data-paste></textarea>
+        </div>
+        <button class="button-secondary" type="button" data-act="paste">{{ "Use these cells" | t(lang) }}</button>
+      </details>
+      <p class="ats-import-note" data-source-note aria-live="polite"></p>
+    </fieldset>
+
+    <fieldset class="dl-box" data-mapping hidden>
+      <legend class="kicker">3 · {{ "Check the columns" | t(lang) }}</legend>
+      <p class="cv-hint">{{ "The page guessed which column is which. Check it once; the coloured columns in the preview are the ones used." | t(lang) }}</p>
+      <label class="pa-check"><input type="checkbox" data-has-header> {{ "The first row holds the column names" | t(lang) }}</label>
+      <div class="dl-grid pa-grid">
+        <div class="field">
+          <label for="pa-map-category">{{ "Cause" | t(lang) }}</label>
+          <select id="pa-map-category" data-map="category"></select>
+        </div>
+        <div class="field">
+          <label for="pa-map-count">{{ "Count" | t(lang) }}</label>
+          <select id="pa-map-count" data-map="count"></select>
+        </div>
+        <div class="field">
+          <label for="pa-map-value">{{ "Value (minutes, €, hours…)" | t(lang) }}</label>
+          <select id="pa-map-value" data-map="value"></select>
+        </div>
+        <div class="field">
+          <label for="pa-map-date">{{ "Date" | t(lang) }}</label>
+          <select id="pa-map-date" data-map="date"></select>
+        </div>
+        <div class="field">
+          <label for="pa-map-filter">{{ "Filter by (station, zone, department…)" | t(lang) }}</label>
+          <select id="pa-map-filter" data-map="filter"></select>
+        </div>
+        <div class="field" data-filter-row hidden>
+          <label for="pa-filter-value">{{ "Show only" | t(lang) }}</label>
+          <select id="pa-filter-value" data-filter-value></select>
+        </div>
+      </div>
+      <fieldset class="pa-measure">
+        <legend>{{ "Rank the causes by" | t(lang) }}</legend>
+        <label><input type="radio" name="pa-measure" value="count" data-measure> {{ "How often they happen" | t(lang) }}</label>
+        <label><input type="radio" name="pa-measure" value="value" data-measure> {{ "What they cost:" | t(lang) }} <span data-measure-value-label></span></label>
+      </fieldset>
+      <div class="dl-grid pa-grid">
+        <div class="field" data-value-row hidden>
+          <label for="pa-value-label">{{ "Name of the value" | t(lang) }}</label>
+          <input id="pa-value-label" data-value-label autocomplete="off">
+        </div>
+        <div class="field" data-date-row hidden>
+          <label for="pa-from">{{ "From" | t(lang) }}</label>
+          <input id="pa-from" type="date" data-from>
+        </div>
+        <div class="field" data-date-row hidden>
+          <label for="pa-to">{{ "To" | t(lang) }}</label>
+          <input id="pa-to" type="date" data-to>
+        </div>
+        <div class="field">
+          <label for="pa-group">{{ "Small causes in the chart" | t(lang) }}</label>
+          <select id="pa-group" data-group>
+            <option value="0">{{ "Show every cause" | t(lang) }}</option>
+            <option value="1">{{ "Group causes under 1% as “Other”" | t(lang) }}</option>
+            <option value="2">{{ "Group causes under 2% as “Other”" | t(lang) }}</option>
+            <option value="5">{{ "Group causes under 5% as “Other”" | t(lang) }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="dl-table-wrap pa-preview-wrap" tabindex="0">
+        <table class="dl-table pa-preview" data-preview></table>
+      </div>
+      <div class="pa-checks" data-checks aria-live="polite"></div>
+    </fieldset>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "Data you can trust" | t(lang) }}</p>
+    <ul class="tips">
+      <li><strong>{{ "A fixed cause list." | t(lang) }}</strong> {{ "Everyone picks from the same names, ideally a drop-down in Excel. Free text makes ten causes out of one." | t(lang) }}</li>
+      <li><strong>{{ "The cause, not the symptom." | t(lang) }}</strong> {{ "“Delay” is a symptom; “late loading” is a cause." | t(lang) }}</li>
+      <li><strong>{{ "Numbers, not words." | t(lang) }}</strong> {{ "Write 25, not “long”." | t(lang) }}</li>
+      <li><strong>{{ "“Other” under 10%." | t(lang) }}</strong> {{ "If it grows, the cause list is missing a name." | t(lang) }}</li>
+      <li><strong>{{ "Enough data." | t(lang) }}</strong> {{ "From about 50 events or 2–4 weeks the picture holds." | t(lang) }}</li>
+      <li><strong>{{ "Causes, not culprits." | t(lang) }}</strong> {{ "Use IDs instead of names for drivers or pickers. In Germany, measuring individual performance usually involves the works council and data protection." | t(lang) }}</li>
+    </ul>
+    <p class="privacy-note">{{ "Your data stays in this browser; nothing is uploaded." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell pa-results" data-pareto-results hidden tabindex="-1">
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "Result" | t(lang) }}</p>
+      <h2>{{ "Where to start" | t(lang) }}</h2>
+    </div>
+    <p>{{ "Bars show each cause's share of the total, the line adds them up. The highlighted causes bring the total to 80%." | t(lang) }}</p>
+  </div>
+  <div data-result-body></div>
+
+  <section class="dl-box pa-compare" data-compare hidden>
+    <p class="kicker">{{ "Before and after" | t(lang) }}</p>
+    <div class="field">
+      <label for="pa-split">{{ "Split the data on this date" | t(lang) }}</label>
+      <input id="pa-split" type="date" data-split>
+    </div>
+    <div data-compare-body></div>
+  </section>
+</section>
+</div>
+
+<script type="application/json" id="pareto-data">{{ cfg | dump | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pareto.js' | assetUrl }}" defer></script>

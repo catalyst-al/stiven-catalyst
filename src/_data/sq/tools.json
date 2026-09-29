@@ -48,6 +48,14 @@
     "cta": "Hap llogaritësin"
   },
   {
+    "name": "Pareto 80/20",
+    "type": "Shkaqet",
+    "time": "5 min",
+    "summary": "Cilat shkaqe të pakta sjellin shumicën e vonesave, gabimeve, kohës boshe ose ankesave? Modele për shpërndarje, magazinë dhe hotel, import nga CSV dhe Excel, grafik i kontrolluar.",
+    "url": "/sq/tools/pareto/",
+    "cta": "Gjeni shkaqet kryesore"
+  },
+  {
     "name": "Six Sigma në magazinë",
     "type": "Kurs",
     "time": "45 min",
