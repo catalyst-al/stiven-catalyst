@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: Last-Mile CX Control Tower
+description: "A control tower for delivery stations: Perfect Delivery per order, on time, incomplete, damage, cold chain, loading and departures, partner and driver scorecards, route risk, root-cause Pareto, corrective actions and a weekly quality review. Reads your Excel or CSV files; free and private."
+activeNav: /tools.html
+permalink: /tools/cx-control-tower/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Last mile</p>
+  <h1>Last-Mile CX Control Tower</h1>
+  <p class="lede">From the customer outcome to the operational driver, the root cause and an action that is verified. Load your delivery, route, incident and action data from Excel or CSV, or start with the example station.</p>
+</section>
+
+{% set cfg = cxTower %}
+{% include "partials/cx-tower.njk" %}

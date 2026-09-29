@@ -56,6 +56,14 @@
     "cta": "Die wichtigsten Ursachen finden"
   },
   {
+    "name": "Last-Mile CX Control Tower",
+    "type": "Letzte Meile",
+    "time": "Wöchentlich",
+    "summary": "Perfect Delivery pro Auftrag, Pünktlichkeit, unvollständig, Schaden, Kühlkette, Beladung und Abfahrten, Scorecards für Partner und Fahrer, Routenrisiko, Pareto der Ursachen, Maßnahmen und Wochenreview. Liest Ihre Excel-Arbeitsmappe.",
+    "url": "/de/tools/cx-control-tower/",
+    "cta": "Control Tower öffnen"
+  },
+  {
     "name": "Six Sigma im Lager",
     "type": "Kurs",
     "time": "45 min",

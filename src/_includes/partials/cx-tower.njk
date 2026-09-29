@@ -1,0 +1,68 @@
+{#- Last-Mile CX Control Tower. The page sets `cfg` to the cxTower data; cx-tower.js does the rest. -#}
+<div data-cx class="cx">
+<section class="shell cx-shell" aria-labelledby="cx-title">
+  <h2 class="visually-hidden" id="cx-title">{{ "Control tower" | t(lang) }}</h2>
+  <p class="cx-example-flag" data-cx-example-flag hidden>{{ "Example data: the numbers of an invented station, for trying the tool. Your own files replace them." | t(lang) }}</p>
+  <p class="ats-import-note cx-note" data-cx-note aria-live="polite"></p>
+  <div class="cx-filters" data-cx-filters hidden>
+    <div class="field">
+      <label for="cx-from">{{ "From" | t(lang) }}</label>
+      <input id="cx-from" type="date" data-cx-filter="from">
+    </div>
+    <div class="field">
+      <label for="cx-to">{{ "To" | t(lang) }}</label>
+      <input id="cx-to" type="date" data-cx-filter="to">
+    </div>
+    <div class="field">
+      <label for="cx-dsp">{{ "Partner" | t(lang) }}</label>
+      <select id="cx-dsp" data-cx-filter="DSP"></select>
+    </div>
+    <div class="field">
+      <label for="cx-shift">{{ "Shift" | t(lang) }}</label>
+      <select id="cx-shift" data-cx-filter="Shift"></select>
+    </div>
+    <div class="field">
+      <label for="cx-zone">{{ "Zone" | t(lang) }}</label>
+      <select id="cx-zone" data-cx-filter="Zone"></select>
+    </div>
+    <button class="button-ghost" type="button" data-cx-reset-filters>{{ "Clear filters" | t(lang) }}</button>
+  </div>
+  <div class="cx-tabs" role="tablist" aria-label="{{ 'Control tower views' | t(lang) }}" data-cx-tabs></div>
+  <div class="cx-body" id="cx-panel" role="tabpanel" tabindex="-1" data-cx-body></div>
+</section>
+
+<section class="shell cx-about">
+  <details class="cx-blueprint">
+    <summary>{{ "Customer journey: which control protects which moment" | t(lang) }}</summary>
+    <div class="dl-table-wrap" tabindex="0">
+      <table class="dl-table cx-table">
+        <thead>
+          <tr><th></th>{% for stage in cfg.stages[lang] or cfg.stages.en %}<th>{{ stage }}</th>{% endfor %}</tr>
+        </thead>
+        <tbody>
+          {%- for row in cfg.blueprint %}
+          <tr><th>{{ row[lang] or row.en }}</th>{% for text in row.cells[lang] or row.cells.en %}<td>{{ text }}</td>{% endfor %}</tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </details>
+  <details class="cx-blueprint">
+    <summary>{{ "How the numbers are made" | t(lang) }}</summary>
+    <ul class="tips">
+      <li><strong>{{ "Perfect Delivery per delivery." | t(lang) }}</strong> {{ "A delivery counts as perfect only when it was on time, complete, undamaged, temperature-compliant and delivered at the first attempt, all at once. Multiplying separate rates gives a different, wrong number." | t(lang) }}</li>
+      <li><strong>{{ "The right denominator." | t(lang) }}</strong> {{ "Rates are per delivered order; cold chain only counts chilled or frozen deliveries, notification only late or at-risk ones; route KPIs count routes." | t(lang) }}</li>
+      <li><strong>{{ "Targets you approved." | t(lang) }}</strong> {{ "A KPI without a target is shown but not scored. The page never invents a threshold." | t(lang) }}</li>
+      <li><strong>{{ "Enough data to compare." | t(lang) }}</strong> {{ "Partners and drivers with few deliveries are marked and not ranked: one bad day would look like a trend." | t(lang) }}</li>
+      <li><strong>{{ "Causes, not culprits." | t(lang) }}</strong> {{ "Stop at a process step you can change, not at “driver mistake”, and verify that the action worked." | t(lang) }}</li>
+    </ul>
+  </details>
+  <p class="privacy-note">{{ "Your data stays in this browser; files are read here and nothing is uploaded." | t(lang) }}</p>
+</section>
+</div>
+
+<script type="application/json" id="cx-data">{{ cfg | dump | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pareto.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cx-tower.js' | assetUrl }}" defer></script>

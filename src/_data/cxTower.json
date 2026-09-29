@@ -1,0 +1,274 @@
+{
+ "storageKey": "sc-cx-tower",
+ "handoffKey": "sc-pareto-handoff",
+ "exampleEnd": "2026-09-27",
+ "stages": {
+  "en": [
+   "Order confirmed",
+   "Pick & pack",
+   "Handover to last mile",
+   "Loading",
+   "En route",
+   "Doorstep",
+   "Recovery & loyalty"
+  ],
+  "de": [
+   "Bestellung bestätigt",
+   "Kommissionieren & Packen",
+   "Übergabe an die letzte Meile",
+   "Beladung",
+   "Unterwegs",
+   "An der Haustür",
+   "Wiedergutmachung & Treue"
+  ],
+  "sq": [
+   "Porosia e konfirmuar",
+   "Mbledhja & paketimi",
+   "Dorëzimi te milja e fundit",
+   "Ngarkimi",
+   "Në rrugë",
+   "Te dera",
+   "Rikuperimi & besnikëria"
+  ]
+ },
+ "blueprint": [
+  {
+   "en": "Customer expectation",
+   "de": "Erwartung der Kundschaft",
+   "sq": "Pritja e klientit",
+   "cells": {
+    "en": [
+     "Order arrives as promised",
+     "Correct products prepared",
+     "Order is complete and ready",
+     "Loaded safely and quickly",
+     "Reliable ETA, no surprises",
+     "Correct, fresh, respectful handover",
+     "Fast, fair resolution if something fails"
+    ],
+    "de": [
+     "Die Bestellung kommt wie versprochen",
+     "Die richtigen Artikel sind vorbereitet",
+     "Die Bestellung ist vollständig und bereit",
+     "Sicher und zügig verladen",
+     "Verlässliche Ankunftszeit, keine Überraschungen",
+     "Richtige, frische, respektvolle Übergabe",
+     "Schnelle, faire Lösung, wenn etwas schiefgeht"
+    ],
+    "sq": [
+     "Porosia vjen siç u premtua",
+     "Produktet e duhura të përgatitura",
+     "Porosia është e plotë dhe gati",
+     "Ngarkuar sigurt dhe shpejt",
+     "Orar mbërritjeje i besueshëm, pa surpriza",
+     "Dorëzim i saktë, i freskët, me respekt",
+     "Zgjidhje e shpejtë dhe e drejtë nëse diçka dështon"
+    ]
+   }
+  },
+  {
+   "en": "Touchpoint",
+   "de": "Kontaktpunkt",
+   "sq": "Pika e kontaktit",
+   "cells": {
+    "en": [
+     "App, confirmation",
+     "Picking, substitution messages",
+     "Warehouse to last mile",
+     "Ramp, vehicle",
+     "Tracking, notification",
+     "Driver, customer",
+     "Customer care, refund, feedback"
+    ],
+    "de": [
+     "App, Bestätigung",
+     "Kommissionierung, Ersatzartikel-Nachricht",
+     "Lager an letzte Meile",
+     "Rampe, Fahrzeug",
+     "Sendungsverfolgung, Benachrichtigung",
+     "Fahrer, Kundschaft",
+     "Kundenservice, Erstattung, Feedback"
+    ],
+    "sq": [
+     "Aplikacioni, konfirmimi",
+     "Mbledhja, mesazhet për zëvendësime",
+     "Magazina te milja e fundit",
+     "Rampa, automjeti",
+     "Gjurmimi, njoftimi",
+     "Shoferi, klienti",
+     "Kujdesi për klientin, rimbursimi, komentet"
+    ]
+   }
+  },
+  {
+   "en": "Main CX risk",
+   "de": "Größtes CX-Risiko",
+   "sq": "Rreziku kryesor për klientin",
+   "cells": {
+    "en": [
+     "Promise mismatch",
+     "Missing or wrong item",
+     "Missing bag, wrong trolley",
+     "Damage, temperature, late departure",
+     "Delay without a message",
+     "Failed attempt, poor behaviour",
+     "Slow or unclear recovery"
+    ],
+    "de": [
+     "Versprechen passt nicht",
+     "Fehlender oder falscher Artikel",
+     "Fehlende Tasche, falscher Rollwagen",
+     "Schaden, Temperatur, späte Abfahrt",
+     "Verspätung ohne Nachricht",
+     "Fehlversuch, unpassendes Verhalten",
+     "Langsame oder unklare Lösung"
+    ],
+    "sq": [
+     "Premtimi nuk përputhet",
+     "Artikull që mungon ose i gabuar",
+     "Çantë që mungon, karrocë e gabuar",
+     "Dëm, temperaturë, nisje me vonesë",
+     "Vonesë pa njoftim",
+     "Tentativë e dështuar, sjellje e dobët",
+     "Zgjidhje e ngadaltë ose e paqartë"
+    ]
+   }
+  },
+  {
+   "en": "Lead KPI",
+   "de": "Führende Kennzahl",
+   "sq": "Treguesi kryesor",
+   "cells": {
+    "en": [
+     "Promise accuracy",
+     "Pick and pack accuracy",
+     "Completeness at release",
+     "Loading time and scan compliance",
+     "On-time and notification rate",
+     "Perfect Delivery and first attempt",
+     "Complaints and repeat failures"
+    ],
+    "de": [
+     "Treffgenauigkeit des Versprechens",
+     "Genauigkeit beim Kommissionieren",
+     "Vollständigkeit bei Freigabe",
+     "Ladezeit und Scanquote",
+     "Pünktlichkeit und Benachrichtigungsquote",
+     "Perfect Delivery und Erstzustellung",
+     "Beschwerden und wiederholte Fehler"
+    ],
+    "sq": [
+     "Saktësia e premtimit",
+     "Saktësia e mbledhjes dhe paketimit",
+     "Plotësia në dalje",
+     "Koha e ngarkimit dhe skanimi",
+     "Në kohë dhe norma e njoftimit",
+     "Perfect Delivery dhe tentativa e parë",
+     "Ankesat dhe gabimet e përsëritura"
+    ]
+   }
+  },
+  {
+   "en": "Operational control",
+   "de": "Steuerung im Betrieb",
+   "sq": "Kontrolli operacional",
+   "cells": {
+    "en": [
+     "Capacity and slot planning",
+     "Standard work and quality check",
+     "Pre-scan and bag resolution",
+     "Loading target with quality; cold scan; gate closed",
+     "Live exception monitoring",
+     "Proof and handover standard",
+     "Incident list, root cause, corrective action"
+    ],
+    "de": [
+     "Kapazitäts- und Zeitfensterplanung",
+     "Standardarbeit und Qualitätsprüfung",
+     "Vorab-Scan und Klärung fehlender Taschen",
+     "Ladeziel mit Qualität; Kühlscan; Tor geschlossen",
+     "Ausnahmen live verfolgen",
+     "Nachweis- und Übergabestandard",
+     "Vorfallliste, Grundursache, Korrekturmaßnahme"
+    ],
+    "sq": [
+     "Planifikimi i kapacitetit dhe orareve",
+     "Puna standarde dhe kontrolli i cilësisë",
+     "Skanimi paraprak dhe zgjidhja e çantave",
+     "Objektivi i ngarkimit me cilësi; skanimi i ftohtë; porta e mbyllur",
+     "Ndjekja e përjashtimeve në kohë reale",
+     "Standardi i provës dhe i dorëzimit",
+     "Lista e incidenteve, shkaku rrënjësor, veprimi korrigjues"
+    ]
+   }
+  },
+  {
+   "en": "Owner",
+   "de": "Verantwortlich",
+   "sq": "Përgjegjësi",
+   "cells": {
+    "en": [
+     "Planning",
+     "Warehouse, outbound",
+     "Warehouse and last mile",
+     "Driver, partner, last mile",
+     "Last mile, partner, customer care",
+     "Driver, partner",
+     "Customer care, operations, quality"
+    ],
+    "de": [
+     "Planung",
+     "Lager, Warenausgang",
+     "Lager und letzte Meile",
+     "Fahrer, Partner, letzte Meile",
+     "Letzte Meile, Partner, Kundenservice",
+     "Fahrer, Partner",
+     "Kundenservice, Betrieb, Qualität"
+    ],
+    "sq": [
+     "Planifikimi",
+     "Magazina, dalja",
+     "Magazina dhe milja e fundit",
+     "Shoferi, partneri, milja e fundit",
+     "Milja e fundit, partneri, kujdesi për klientin",
+     "Shoferi, partneri",
+     "Kujdesi për klientin, operacionet, cilësia"
+    ]
+   }
+  },
+  {
+   "en": "Escalate when",
+   "de": "Eskalieren, wenn",
+   "sq": "Përshkallëzo kur",
+   "cells": {
+    "en": [
+     "Capacity at risk",
+     "Preparation defect",
+     "Bag unresolved before release",
+     "Quality or safety deviation",
+     "Window will be missed",
+     "Failed delivery or complaint",
+     "Repeat issue or high severity"
+    ],
+    "de": [
+     "Kapazität gefährdet",
+     "Fehler in der Vorbereitung",
+     "Tasche vor Freigabe ungeklärt",
+     "Abweichung bei Qualität oder Sicherheit",
+     "Zeitfenster wird verpasst",
+     "Fehlzustellung oder Beschwerde",
+     "Wiederholung oder hohe Schwere"
+    ],
+    "sq": [
+     "Kapaciteti në rrezik",
+     "Defekt në përgatitje",
+     "Çantë e pazgjidhur para daljes",
+     "Shmangie në cilësi ose siguri",
+     "Orari do të humbasë",
+     "Dorëzim i dështuar ose ankesë",
+     "Problem i përsëritur ose i rëndë"
+    ]
+   }
+  }
+ ]
+}

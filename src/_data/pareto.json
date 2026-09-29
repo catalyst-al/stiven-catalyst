@@ -357,6 +357,192 @@
    ]
   },
   {
+   "id": "cx-incidents",
+   "group": "logistics",
+   "name": {
+    "en": "Last-mile incidents (root cause)",
+    "de": "Vorfälle letzte Meile (Grundursache)",
+    "sq": "Incidentet e miljes së fundit (shkaku rrënjësor)"
+   },
+   "what": {
+    "en": "Which root causes are behind delays, failed deliveries, incomplete orders and damage? Same categories as the CX Control Tower.",
+    "de": "Welche Grundursachen stecken hinter Verspätungen, Fehlzustellungen, unvollständigen Aufträgen und Schäden? Dieselben Kategorien wie im CX Control Tower.",
+    "sq": "Cilat shkaqe rrënjësore qëndrojnë pas vonesave, dorëzimeve të dështuara, porosive të paplota dhe dëmeve? Të njëjtat kategori si te CX Control Tower."
+   },
+   "measure": "count",
+   "unit": {
+    "en": "Incidents",
+    "de": "Vorfälle",
+    "sq": "Incidente"
+   },
+   "columns": {
+    "en": [
+     "Date",
+     "DSP",
+     "Route",
+     "Root cause",
+     "Count",
+     "Minutes lost",
+     "Note"
+    ],
+    "de": [
+     "Datum",
+     "DSP",
+     "Tour",
+     "Grundursache",
+     "Anzahl",
+     "Verlorene Minuten",
+     "Notiz"
+    ],
+    "sq": [
+     "Data",
+     "DSP",
+     "Rruga",
+     "Shkaku rrënjësor",
+     "Sasia",
+     "Minuta të humbura",
+     "Shënim"
+    ]
+   },
+   "areas": {
+    "en": [
+     "DSP A",
+     "DSP B",
+     "DSP C",
+     "DSP D"
+    ],
+    "de": [
+     "DSP A",
+     "DSP B",
+     "DSP C",
+     "DSP D"
+    ],
+    "sq": [
+     "DSP A",
+     "DSP B",
+     "DSP C",
+     "DSP D"
+    ]
+   },
+   "idFormat": "R{n}",
+   "count": [
+    1,
+    1
+   ],
+   "causes": [
+    {
+     "en": "Customer unavailable / access",
+     "de": "Kunde nicht erreichbar / kein Zugang",
+     "sq": "Klienti mungon / pa akses",
+     "w": 22,
+     "v": [
+      5,
+      15
+     ]
+    },
+    {
+     "en": "Route planning / capacity",
+     "de": "Tourenplanung / Kapazität",
+     "sq": "Planifikimi i rrugës / kapaciteti",
+     "w": 17,
+     "v": [
+      10,
+      30
+     ]
+    },
+    {
+     "en": "Late departure / loading",
+     "de": "Späte Abfahrt / Beladung",
+     "sq": "Nisje e vonë / ngarkimi",
+     "w": 13,
+     "v": [
+      8,
+      25
+     ]
+    },
+    {
+     "en": "Communication failure",
+     "de": "Kommunikationsfehler",
+     "sq": "Mungesë komunikimi",
+     "w": 10,
+     "v": [
+      3,
+      10
+     ]
+    },
+    {
+     "en": "Warehouse preparation",
+     "de": "Vorbereitung im Lager",
+     "sq": "Përgatitja në magazinë",
+     "w": 9,
+     "v": [
+      5,
+      20
+     ]
+    },
+    {
+     "en": "Missing bag / scan gap",
+     "de": "Fehlende Tasche / Scanlücke",
+     "sq": "Çantë që mungon / skanim i humbur",
+     "w": 8,
+     "v": [
+      10,
+      25
+     ]
+    },
+    {
+     "en": "Loading sequence / stacking",
+     "de": "Ladereihenfolge / Stapeln",
+     "sq": "Radha e ngarkimit / stivimi",
+     "w": 7,
+     "v": [
+      5,
+      15
+     ]
+    },
+    {
+     "en": "Traffic / external",
+     "de": "Verkehr / extern",
+     "sq": "Trafiku / faktorë të jashtëm",
+     "w": 6,
+     "v": [
+      10,
+      30
+     ]
+    },
+    {
+     "en": "Packaging failure",
+     "de": "Verpackungsfehler",
+     "sq": "Paketim i dobët",
+     "w": 4,
+     "v": [
+      3,
+      10
+     ]
+    },
+    {
+     "en": "Driver process non-compliance",
+     "de": "Fahrer hält Prozess nicht ein",
+     "sq": "Shoferi nuk ndjek procesin",
+     "w": 3,
+     "v": [
+      5,
+      15
+     ]
+    },
+    {
+     "en": "Cold-chain process",
+     "de": "Kühlkettenprozess",
+     "sq": "Procesi i zinxhirit të ftohtë",
+     "w": 1,
+     "v": [
+      10,
+      20
+     ]
+    }
+   ]
+  },
+  {
    "id": "stop-idle",
    "group": "logistics",
    "name": {
