@@ -3615,3 +3615,117 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 :where(.tool-panel, .tool-aside, .cv-editor, .cv-sec, .cv-item, .dl-box, .result-card, .field, .dl-panel, .sh-side, .sh-sheet) { min-width: 0; }
 .cv-doc, .ats-doc { overflow-wrap: anywhere; }
 .cv-doc .cv-role, .ats-doc .ats-title, .cl-doc .cl-address { min-width: 0; }
+
+/* Pareto 80/20. The chart takes its colours from these tokens. */
+.pa-results {
+  --pa-vital: #4ab5f7;
+  --pa-rest: #6b7682;
+  --pa-line: #f6f7f4;
+  --pa-grid: rgba(255, 255, 255, .12);
+  --pa-text: #f6f7f4;
+  --pa-muted: #a5b0b8;
+  --pa-surface: #070a0d;
+  padding: 60px 0 90px;
+  border-top: 1px solid var(--line);
+  outline: none;
+}
+[data-theme="light"] .pa-results {
+  --pa-vital: #1c7cc2;
+  --pa-rest: #7c8691;
+  --pa-line: #1b2330;
+  --pa-grid: #dfe3e8;
+  --pa-text: #1b2330;
+  --pa-muted: #5f6870;
+  --pa-surface: #f6f7f5;
+}
+.pa-what { margin: 6px 0 0; color: var(--ink); font-size: 15px; }
+.pa-causes > summary { color: var(--blue); font-weight: 800; cursor: pointer; }
+.pa-causes[open] { display: grid; gap: 10px; }
+.pa-cause-list { display: grid; gap: 4px; margin: 0; padding-left: 22px; color: var(--muted); font-size: 14px; columns: 2; }
+.pa-drop.is-over { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, var(--card)); }
+.pa-drop-lede { margin: 0; color: var(--ink); }
+.pa-check { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 15px; cursor: pointer; }
+.pa-check input { width: 18px; height: 18px; accent-color: var(--blue); }
+.pa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pa-measure { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.pa-measure legend { margin-bottom: 8px; padding: 0; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.pa-measure label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--ink); cursor: pointer; }
+.pa-measure input { accent-color: var(--blue); }
+.pa-measure input:disabled + * { opacity: .5; }
+.pa-preview-wrap { max-height: 260px; }
+.pa-preview th small { display: block; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.pa-preview .is-mapped { background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.pa-checks { display: grid; gap: 12px; }
+.pa-skipped summary { color: var(--blue); font-weight: 700; cursor: pointer; }
+.pa-skipped ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; }
+.pa-suggestions { display: grid; gap: 8px; padding: 14px; border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line)); border-radius: 14px; }
+.pa-suggestions .kicker { margin: 0; }
+.pa-suggestion { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; color: var(--ink); }
+.pa-suggestion .button-secondary { padding: 8px 14px; }
+.pa-headline h3 { margin: 6px 0 10px; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; }
+.pa-headline > p:not(.result-label) { max-width: 820px; color: var(--muted); }
+.pa-stats { margin-top: 18px; }
+.pa-figure { position: relative; margin: 26px 0 10px; padding: 18px 12px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.pa-chart { display: block; width: 100%; height: auto; }
+.pa-bar-group { cursor: default; outline: none; }
+.pa-bar-group:focus-visible .pa-hit,
+.pa-bar-group.is-active .pa-hit { fill: color-mix(in srgb, var(--pa-text) 7%, transparent); }
+.pa-bar-group.is-active .pa-bar { filter: brightness(1.12); }
+.pa-tooltip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  min-width: 160px;
+  max-width: 260px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  color: var(--muted);
+  font-size: 13px;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+.pa-tooltip strong { color: var(--ink); font-size: 16px; }
+.pa-tooltip span:nth-child(2) { color: var(--ink); font-weight: 700; }
+.pa-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 10px; color: var(--muted); font-size: 13px; }
+.pa-legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.pa-legend-item i { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
+.pa-key-vital { background: var(--pa-vital); }
+.pa-key-rest { background: var(--pa-rest); }
+.pa-key-line { height: 2px !important; width: 18px !important; border-radius: 0 !important; background: var(--pa-line); }
+.pa-key-80 { height: 1px !important; width: 18px !important; border-radius: 0 !important; background: var(--pa-text); opacity: .55; }
+.pa-warnings { display: grid; gap: 6px; margin: 16px 0; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--ink); }
+.pa-warnings p { margin: 0; }
+.pa-table { width: 100%; }
+.pa-table td.num, .pa-table th:nth-child(n+3) { text-align: right; font-variant-numeric: tabular-nums; }
+.pa-table tr.is-vital td { font-weight: 700; }
+.pa-table .pa-spellings { color: var(--muted); font-weight: 400; }
+.pa-class { text-align: center !important; font-weight: 800; }
+.pa-class.is-a { color: var(--pa-vital); }
+.pa-table-wrap { max-height: 520px; margin-top: 18px; }
+.pa-table .is-better { color: #2fb36d; }
+.pa-table .is-worse { color: var(--red); }
+[data-theme="light"] .pa-table .is-better { color: #1d7a45; }
+.pa-compare { margin-top: 30px; grid-template-columns: minmax(0, 1fr); }
+.pa-compare .kicker { margin: 0; }
+@media (max-width: 620px) {
+  .pa-grid { grid-template-columns: minmax(0, 1fr); }
+  .pa-cause-list { columns: 1; }
+  .pa-figure { padding: 10px 4px 8px; }
+}
+@media print {
+  .pa-setup, .pa-compare .field { display: none !important; }
+  .pa-results { --pa-vital: #1c7cc2; --pa-rest: #8e98a3; --pa-line: #1b2330; --pa-grid: #e3e6ea; --pa-text: #1b2330; --pa-muted: #5f6870; --pa-surface: #fff; padding: 0; border: 0; }
+  .pa-figure { break-inside: avoid; }
+}
+.pa-chart-scroll { overflow-x: auto; border-radius: 10px; }
+@media (max-width: 620px) {
+  .pa-chart-scroll .pa-chart { width: 620px; max-width: none; }
+}
+@media print {
+  .pa-chart-scroll { overflow: visible; }
+  .pa-chart-scroll .pa-chart { width: 100%; }
+}

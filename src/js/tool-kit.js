@@ -126,7 +126,7 @@ window.ToolKit = (() => {
     match = text.match(/^(\d{1,2})[./](\d{1,2})[./](\d{2,4})$/);
     if (match) return iso(match[3].length === 2 ? `20${match[3]}` : match[3], match[2], match[1]);
     // Excel sometimes pastes dates as serial numbers.
-    if (/^\d{5}$/.test(text)) return new Date(Date.UTC(1899, 11, 30) + Number(text) * 864e5).toISOString().slice(0, 10);
+    if (/^\d{5}(?:[.,]\d+)?$/.test(text)) return new Date(Date.UTC(1899, 11, 30) + Math.floor(Number(text.replace(",", "."))) * 864e5).toISOString().slice(0, 10);
     return "";
   };
 
@@ -286,7 +286,9 @@ window.ToolKit = (() => {
   };
 
   // Copy, print and 5 Whys buttons under a result.
-  const resultActions = (summary, problem) => {
+  // pareto, when given, returns a table ({ source, template, headers, rows, map, measure })
+  // that the Pareto tool opens; it travels in sessionStorage, so it stays in this tab.
+  const resultActions = (summary, problem, pareto) => {
     const actions = el("div", "tool-actions result-actions");
     const copyButton = el("button", "button-primary", tx("Copy summary"));
     copyButton.type = "button";
@@ -301,6 +303,14 @@ window.ToolKit = (() => {
     url.searchParams.set("problem", problem);
     whys.href = url.href;
     actions.append(copyButton, printButton, whys);
+    if (pareto) {
+      const link = el("a", "button-secondary", tx("Open in Pareto 80/20"));
+      link.href = new URL("../pareto/", window.location.href).href;
+      link.addEventListener("click", () => {
+        try { sessionStorage.setItem("sc-pareto-handoff", JSON.stringify(pareto())); } catch { /* the page opens empty */ }
+      });
+      actions.append(link);
+    }
     return actions;
   };
 

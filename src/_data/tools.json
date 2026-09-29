@@ -48,6 +48,14 @@
     "cta": "Open the calculator"
   },
   {
+    "name": "Pareto 80/20",
+    "type": "Root causes",
+    "time": "5 min",
+    "summary": "Which few causes make most of your delays, errors, idle time or complaints? Templates for delivery, warehouse and hotel, CSV and Excel import, a checked chart.",
+    "url": "/tools/pareto/",
+    "cta": "Find the vital few"
+  },
+  {
     "name": "Six Sigma in the Warehouse",
     "type": "Course",
     "time": "45 min",

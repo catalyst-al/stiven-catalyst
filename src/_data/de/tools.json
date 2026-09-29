@@ -48,6 +48,14 @@
     "cta": "Rechner öffnen"
   },
   {
+    "name": "Pareto 80/20",
+    "type": "Ursachen",
+    "time": "5 min",
+    "summary": "Welche wenigen Ursachen machen den Großteil Ihrer Verspätungen, Fehler, Stillstände oder Beschwerden aus? Vorlagen für Zustellung, Lager und Hotel, CSV- und Excel-Import, ein geprüftes Diagramm.",
+    "url": "/de/tools/pareto/",
+    "cta": "Die wichtigsten Ursachen finden"
+  },
+  {
     "name": "Six Sigma im Lager",
     "type": "Kurs",
     "time": "45 min",

@@ -330,8 +330,20 @@
       warning: result.unknownShare > 0.15 ? `${tx("{pct} of {many} have no known cause.", { pct: pct(result.unknownShare, 0), many: t.many })} ${data.causes[UNKNOWN]}` : "",
     }));
 
-    results.append(resultActions(() => summaryText(result), problemText(result)));
+    results.append(resultActions(() => summaryText(result), problemText(result), paretoTable));
   };
+
+  // The log for the Pareto tool: causes counted in units, valued in euros where known.
+  const paretoTable = () => ({
+    source: data.text?.title || document.title.split("|")[0].trim(),
+    template: KEY.includes("damage") ? "damage" : "picking-errors",
+    headers: [tx("Date"), fields.find((f) => f.name === "shift")?.label || "Shift", fields.find((f) => f.name === "stage")?.label || "Stage",
+      fields.find((f) => f.name === "type")?.label || "Type", fields.find((f) => f.name === "cause")?.label || "Cause", tx("Units"), tx("Cost (€)")],
+    rows: state.rows.map((row) => [row.date, row.shift, row.stage, row.type, row.cause, String(row.units), row.cost == null ? "" : String(row.cost)]),
+    map: { category: 4, count: 5, value: 6, date: 0, filter: 2 },
+    measure: "count",
+    valueLabel: "€",
+  });
 
   const render = () => {
     renderLog();
