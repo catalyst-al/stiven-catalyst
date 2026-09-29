@@ -411,6 +411,6 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, focusCard, resultActions, copy, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

@@ -44,6 +44,10 @@
         </div>
         <button class="button-secondary" type="button" data-act="paste">{{ "Use these cells" | t(lang) }}</button>
       </details>
+      <div class="field" data-sheet-row hidden>
+        <label for="pa-sheet">{{ "Sheet" | t(lang) }}</label>
+        <select id="pa-sheet" data-sheet></select>
+      </div>
       <p class="ats-import-note" data-source-note aria-live="polite"></p>
     </fieldset>
 

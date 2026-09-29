@@ -165,7 +165,7 @@ test('an .xlsx file is read from its first sheet, with shared and inline strings
 });
 
 test('every template has three languages, seven columns and an example that is the same each time', () => {
-  assert.equal(data.templates.length, 11);
+  assert.equal(data.templates.length, 12);
   for (const template of data.templates) {
     for (const lang of ['en', 'de', 'sq']) {
       assert.ok(template.name[lang] && template.what[lang] && template.unit[lang], `${template.id} ${lang}`);

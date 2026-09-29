@@ -56,6 +56,14 @@
     "cta": "Find the vital few"
   },
   {
+    "name": "Last-Mile CX Control Tower",
+    "type": "Last mile",
+    "time": "Weekly",
+    "summary": "Perfect Delivery per order, on time, incomplete, damage, cold chain, loading and departures, partner and driver scorecards, route risk, root-cause Pareto, actions and a weekly review. Reads your Excel workbook.",
+    "url": "/tools/cx-control-tower/",
+    "cta": "Open the control tower"
+  },
+  {
     "name": "Six Sigma in the Warehouse",
     "type": "Course",
     "time": "45 min",

@@ -17,14 +17,14 @@
     }
   };
 
-  // The first sheet of an .xlsx file as rows of cells.
+  // Reading .xlsx files: cells as text, numbers written the way the page reads them.
   const xmlText = (text) => text.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'")
     .replace(/&#x([0-9a-f]+);/gi, (m, hex) => String.fromCodePoint(parseInt(hex, 16)))
     .replace(/&#(\d+);/g, (m, dec) => String.fromCodePoint(Number(dec))).replace(/&amp;/g, "&");
   const columnIndex = (ref) => [...ref.replace(/\d+/g, "")].reduce((n, ch) => n * 26 + ch.charCodeAt(0) - 64, 0) - 1;
-  // Numbers are written the way the page reads them: Excel stores 3.125, which a
-  // German page would otherwise read as 3125.
-  const readXlsx = async (buffer, unzip, decimalComma = false) => {
+  // Every sheet of an .xlsx file, in workbook order: [{ name, hidden, rows }].
+  const readWorkbook = async (buffer, unzip, decimalComma = false) => {
+    // Excel stores 3.125, which a German page would otherwise read as 3125.
     const numberCell = (raw) => {
       const n = Number(raw);
       if (!/^[+-]?[\d.]+(e[+-]?\d+)?$/i.test(raw) || !Number.isFinite(n)) return raw;
@@ -32,42 +32,55 @@
       return decimalComma ? text.replace(".", ",") : text;
     };
     const get = (name) => unzip(buffer, name).catch(() => "");
-    let sheet = "xl/worksheets/sheet1.xml";
     const workbook = await get("xl/workbook.xml");
     const rels = await get("xl/_rels/workbook.xml.rels");
-    const firstId = (workbook.match(/<sheet\b[^>]*r:id="([^"]+)"/) || [])[1];
-    const target = firstId && (rels.match(new RegExp(`<Relationship\\b[^>]*Id="${firstId}"[^>]*Target="([^"]+)"`)) || rels.match(new RegExp(`<Relationship\\b[^>]*Target="([^"]+)"[^>]*Id="${firstId}"`)) || [])[1];
-    if (target) sheet = target.startsWith("/") ? target.slice(1) : `xl/${target.replace(/^\.\//, "")}`;
+    const targetOf = (id) => (rels.match(new RegExp(`<Relationship\\b[^>]*Id="${id}"[^>]*Target="([^"]+)"`)) || rels.match(new RegExp(`<Relationship\\b[^>]*Target="([^"]+)"[^>]*Id="${id}"`)) || [])[1];
+    const sheets = [...workbook.matchAll(/<sheet\b([^>]*)\/?>/g)].map((m, i) => {
+      const attrs = m[1];
+      const target = targetOf((attrs.match(/\br:id="([^"]+)"/) || [])[1]);
+      return {
+        name: xmlText((attrs.match(/\bname="([^"]*)"/) || [])[1] || `Sheet ${i + 1}`),
+        hidden: /\bstate="(?:hidden|veryHidden)"/.test(attrs),
+        path: target ? (target.startsWith("/") ? target.slice(1) : `xl/${target.replace(/^\.\//, "")}`) : `xl/worksheets/sheet${i + 1}.xml`,
+      };
+    });
+    if (!sheets.length) sheets.push({ name: "Sheet 1", hidden: false, path: "xl/worksheets/sheet1.xml" });
     const shared = (await get("xl/sharedStrings.xml")).split(/<si\b[^>]*>/).slice(1)
       .map((si) => xmlText([...si.split("</si>")[0].matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]).join("")));
-    const xml = await unzip(buffer, sheet);
-    const rows = [];
-    for (const rowMatch of xml.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)) {
-      const row = [];
-      for (const cell of rowMatch[1].matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
-        const attrs = cell[1];
-        const inner = cell[2] || "";
-        const ref = (attrs.match(/\br="([A-Z]+)\d+"/) || [])[1];
-        const type = (attrs.match(/\bt="(\w+)"/) || [])[1];
-        const raw = (inner.match(/<v>([\s\S]*?)<\/v>/) || [])[1];
-        let value = "";
-        if (type === "s") value = shared[Number(raw)] ?? "";
-        else if (type === "inlineStr") value = xmlText([...inner.matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]).join(""));
-        else if (raw !== undefined) value = type === "str" || type === "e" || type === "b" ? xmlText(raw) : numberCell(xmlText(raw));
-        row[ref ? columnIndex(ref) : row.length] = value;
+    const out = [];
+    for (const sheet of sheets) {
+      const xml = await get(sheet.path);
+      const rows = [];
+      for (const rowMatch of xml.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)) {
+        const row = [];
+        for (const cell of rowMatch[1].matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
+          const attrs = cell[1];
+          const inner = cell[2] || "";
+          const ref = (attrs.match(/\br="([A-Z]+)\d+"/) || [])[1];
+          const type = (attrs.match(/\bt="(\w+)"/) || [])[1];
+          const raw = (inner.match(/<v>([\s\S]*?)<\/v>/) || [])[1];
+          let value = "";
+          if (type === "s") value = shared[Number(raw)] ?? "";
+          else if (type === "inlineStr") value = xmlText([...inner.matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]).join(""));
+          else if (raw !== undefined) value = type === "str" || type === "e" || type === "b" ? xmlText(raw) : numberCell(xmlText(raw));
+          row[ref ? columnIndex(ref) : row.length] = value;
+        }
+        rows.push(Array.from(row, (cell) => (cell ?? "").trim()));
       }
-      rows.push(Array.from(row, (cell) => (cell ?? "").trim()));
+      out.push({ name: sheet.name, hidden: sheet.hidden, rows });
     }
-    return rows;
+    return out;
   };
+  // The first sheet only.
+  const readXlsx = async (buffer, unzip, decimalComma = false) => (await readWorkbook(buffer, unzip, decimalComma))[0].rows;
 
   // ---------- Recognising the columns ----------
   const WORDS = {
-    category: ["cause", "causes", "reason", "root cause", "category", "kategorie", "kategori", "kategoria", "grund", "ursache", "fehler", "fehlerart", "defect", "issue", "problem", "type", "typ", "art", "shkak", "shkaku", "arsye", "arsyeja", "lloji", "gabimi", "reason code", "rts reason", "beschwerde", "complaint", "ankesa"],
+    category: ["cause", "causes", "reason", "root cause", "category", "kategorie", "kategori", "kategoria", "grund", "ursache", "grundursache", "fehlerursache", "fehler", "fehlerart", "defect", "issue", "problem", "type", "typ", "art", "shkak", "shkaku", "arsye", "arsyeja", "lloji", "gabimi", "reason code", "rts reason", "beschwerde", "complaint", "ankesa"],
     count: ["count", "qty", "quantity", "anzahl", "menge", "stuck", "stueck", "units", "pcs", "cases", "falle", "faelle", "sasia", "numri", "cope", "parcels", "pakete", "pako", "complaints", "beschwerden", "ankesa", "findings", "befunde", "gjetje", "frequency", "haufigkeit"],
     value: ["minutes", "min", "minuten", "minuta", "cost", "costs", "kosten", "kosto", "eur", "euro", "€", "value", "wert", "vlera", "amount", "betrag", "shuma", "hours", "stunden", "ore", "time", "zeit", "koha", "delay", "verspatung", "vonese", "duration", "dauer", "idle", "dwell", "compensation", "entschadigung", "kompensim", "loss", "verlust", "hours out of order", "delay minutes", "verspatung minuten", "minuta vonese", "cost €", "kosten €", "kosto €", "amount €", "betrag €", "shuma €"],
     date: ["date", "datum", "data", "day", "tag", "dita"],
-    filter: ["station", "zone", "zona", "area", "bereich", "department", "abteilung", "departamenti", "shift", "schicht", "turni", "floor", "etage", "kati", "driver", "fahrer", "shofer", "route", "tour", "rruga", "site", "standort", "stacioni", "supplier", "lieferant", "furnitori", "stage", "phase", "faza"],
+    filter: ["dsp", "station", "zone", "zona", "area", "bereich", "department", "abteilung", "departamenti", "shift", "schicht", "turni", "floor", "etage", "kati", "driver", "fahrer", "shofer", "route", "tour", "rruga", "site", "standort", "stacioni", "supplier", "lieferant", "furnitori", "stage", "phase", "faza"],
   };
   const matches = (header, kind) => {
     const h = fold(header);
@@ -116,7 +129,9 @@
     const isDate = (type) => type.filled && type.dates >= 0.8;
     const map = { category: -1, count: -1, value: -1, date: -1, filter: -1 };
     map.date = pick("date", isDate);
-    map.category = pick("category", isText);
+    // A cause column beats a type column ("Root_Cause_Category" before "Incident_Type").
+    const causeFirst = headers.findIndex((header, col) => /\b(root cause|cause|causes|reason|ursache|grundursache|fehlerursache|grund|shkak|shkaku|arsye|arsyeja)\b/.test(fold(header)) && isText(types[col]));
+    if (causeFirst >= 0) { map.category = causeFirst; used.add(causeFirst); } else map.category = pick("category", isText);
     if (map.category < 0) {
       // The text column whose values repeat most, with words of a sensible length.
       const candidates = types.filter((type) => !used.has(type.col) && isText(type) && type.avgLength >= 2 && type.avgLength <= 80)
@@ -129,7 +144,7 @@
     const categoryType = types[map.category];
     const aggregated = categoryType && categoryType.distinct === categoryType.filled && rows.length > 1;
     if (aggregated && map.count < 0 && map.value < 0) {
-      const number = types.find((type) => !used.has(type.col) && isNumber(type));
+      const number = types.find((type) => !used.has(type.col) && isNumber(type) && type.dates < 0.5);
       if (number) { map.count = number.col; used.add(number.col); }
     }
     if (map.date < 0) {
@@ -330,7 +345,8 @@
     const rotate = n > 7;
     const bottom = rotate ? 130 : 64;
     const H = 380 + bottom;
-    const left = 52;
+    // Slanted labels reach left of the first bar, so the plot starts further in.
+    const left = rotate ? 104 : 52;
     const right = 24;
     const top = 26;
     const plotH = H - top - bottom;
@@ -390,7 +406,7 @@
     return svg;
   };
 
-  window.Pareto = { fold, decode, readXlsx, detectHeader, suggestColumns, analyse, compare, example, similarPairs, isOther, chart };
+  window.Pareto = { fold, decode, readXlsx, readWorkbook, detectHeader, suggestColumns, analyse, compare, example, similarPairs, isOther, chart };
 
   // ======================================================================
   const app = document.querySelector("[data-pareto]");
@@ -449,6 +465,11 @@
   const useTable = (name, rows, options = {}) => {
     const clean = rows.map((row) => row.map((cell) => String(cell ?? "").trim())).filter((row) => row.some(Boolean));
     if (!clean.length) { say(tx("No rows were found in this data.")); return false; }
+    // Title lines above the table ("Incident log", a blank, a note) are skipped.
+    const filled = clean.slice(0, 30).map((row) => row.filter(Boolean).length);
+    const widest = Math.max(...filled);
+    const start = widest >= 3 ? filled.findIndex((n) => n >= Math.max(2, widest * 0.6)) : 0;
+    if (start > 0) clean.splice(0, start);
     const width = Math.max(...clean.map((row) => row.length));
     const padded = clean.slice(0, MAX_ROWS + 1).map((row) => Array.from({ length: width }, (_, i) => row[i] ?? ""));
     const hasHeader = options.hasHeader ?? detectHeader(padded, parseNumber, parseDate);
@@ -472,14 +493,54 @@
     return true;
   };
 
+  // Workbooks with several sheets: the page opens the sheet that looks most like a
+  // cause log (a cause column, then the most rows); the others can be picked.
+  let workbook = [];
+  const sheetRow = $("[data-sheet-row]");
+  const sheetSelect = $("[data-sheet]");
+  const bestSheet = (sheets) => {
+    const score = (sheet) => {
+      const top = sheet.rows.slice(0, 12).flat().map(fold);
+      const cause = top.some((cell) => /\b(root cause|cause|reason|ursache|grund|shkak|shkaku|arsye|arsyeja|category|kategorie)\b/.test(cell));
+      return (sheet.hidden ? -1e6 : 0) + (cause ? 1e5 : 0) + Math.min(sheet.rows.length, 99999);
+    };
+    return sheets.reduce((best, sheet, i) => (score(sheet) > score(sheets[best]) ? i : best), 0);
+  };
+  const renderSheets = (fileName, selected) => {
+    sheetRow.hidden = workbook.length < 2;
+    sheetSelect.replaceChildren(...workbook.map((sheet, i) => {
+      const option = el("option", null, `${sheet.name} (${int.format(Math.max(0, sheet.rows.length - 1))})`);
+      option.value = String(i);
+      return option;
+    }));
+    sheetSelect.value = String(selected);
+    sheetSelect.dataset.file = fileName;
+  };
+  sheetSelect.addEventListener("change", () => {
+    const sheet = workbook[Number(sheetSelect.value)];
+    if (sheet) useTable(`${sheetSelect.dataset.file} · ${sheet.name}`, sheet.rows);
+  });
+
   const importFile = async (file) => {
     if (!file) return;
+    workbook = [];
+    sheetRow.hidden = true;
     const name = file.name;
     say(tx("Reading {name}…", { name }));
     try {
       if (file.size > 30e6) throw new Error("size");
       let rows;
-      if (/\.xlsx$/i.test(name)) rows = await readXlsx(await file.arrayBuffer(), window.CvImport.unzip, LANG !== "en");
+      if (/\.xlsx$/i.test(name)) {
+        workbook = (await readWorkbook(await file.arrayBuffer(), window.CvImport.unzip, LANG !== "en")).filter((sheet) => sheet.rows.filter((row) => row.some(Boolean)).length >= 2);
+        if (!workbook.length) throw new Error("empty");
+        const best = bestSheet(workbook);
+        renderSheets(name, best);
+        rows = workbook[best].rows;
+        if (workbook.length > 1) {
+          useTable(`${name} · ${workbook[best].name}`, rows);
+          return;
+        }
+      }
       else if (/\.xls$/i.test(name)) throw new Error("xls");
       else if (/\.(csv|txt|tsv)$/i.test(name) || /^text\//.test(file.type) || !file.type) rows = parseRows(decode(await file.arrayBuffer()));
       else throw new Error("type");
