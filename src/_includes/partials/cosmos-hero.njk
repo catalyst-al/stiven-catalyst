@@ -1,0 +1,45 @@
+{#- The homepage hero: the Catalyst light in the centre, the tool families on its orbits (js/cosmos.js). -#}
+<section class="cosmos" data-cosmos>
+  <canvas class="cosmos-canvas" aria-hidden="true"></canvas>
+  <div class="shell cosmos-inner">
+    <div class="cosmos-copy">
+      <p class="eyebrow">{{ "Stiven Catalyst · Leadership · Operations · People" | t(lang) }}</p>
+      <h1>
+        <span class="line">{{ "See clearly." | t(lang) }}</span>
+        <span class="line">{{ "Think differently." | t(lang) }}</span>
+        <span class="line act">{{ "Act deliberately." | t(lang) }}</span>
+      </h1>
+      <p class="hero-copy"><strong>{{ "Ideas that move work forward." | t(lang) }}</strong> {{ "A modern publication about the people, systems and decisions behind better performance, written close to the work, not from a distance." | t(lang) }}</p>
+      <div class="hero-actions">
+        <a class="button-primary" href="{{ '/insights.html' | local(lang) }}">{{ "Read the essays" | t(lang) }}</a>
+        <a class="button-secondary" href="{{ '/tools.html' | local(lang) }}">{{ "Try the tools" | t(lang) }}</a>
+      </div>
+      <a class="hero-cv-link" href="{{ '/tools/cv-builder/' | local(lang) }}"><span>{{ "New" | t(lang) }}</span> {{ "Build a professional CV, free" | t(lang) }} <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="cosmos-system">
+      <div class="cosmos-anchor" data-cosmos-anchor></div>
+      <p class="cosmos-hint" data-cosmos-hint>{{ "Drag to turn the system. Tap a planet to open its tools." | t(lang) }}</p>
+      <div class="cosmos-families" role="group" aria-label="{{ 'Tool families' | t(lang) }}">
+        {%- for family in families %}
+        <button class="cosmos-chip" type="button" data-family="{{ family.id }}" aria-expanded="false" aria-controls="family-{{ family.id }}" style="--family: {{ family.color }}"><span aria-hidden="true"></span>{{ family.name }}</button>
+        {%- endfor %}
+      </div>
+      {%- for family in families %}
+      <div class="cosmos-family" id="family-{{ family.id }}" data-family-panel="{{ family.id }}" data-name="{{ family.name }}" data-color="{{ family.color }}" data-orbit="{{ family.orbit }}" style="--family: {{ family.color }}">
+        <p class="cosmos-family-head"><strong>{{ family.name }}</strong><span>{{ family.role | t(lang) }}</span></p>
+        <p class="cosmos-family-line">{{ family.line | t(lang) }}</p>
+        <ul>
+          {%- for url in family.tools %}
+          {%- set href = url | local(lang) %}
+          {%- for tool in toolList %}{% if tool.url == href %}
+          <li><a href="{{ href }}"><span>{{ tool.name }}</span><small>{{ tool.type }}</small><span aria-hidden="true">→</span></a></li>
+          {%- endif %}{% endfor %}
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+<script src="{{ '/js/cosmos.js' | assetUrl }}" defer></script>

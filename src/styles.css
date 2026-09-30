@@ -211,17 +211,194 @@ button, input, select { font: inherit; }
 
 .menu-button { display: none; }
 
-.hero {
-  min-height: 78vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .72fr);
-  gap: clamp(42px, 7vw, 96px);
-  align-items: center;
-  padding: 84px 0 70px;
+/* Homepage hero: the Catalyst light and the tool families on its orbits (js/cosmos.js).
+   It stays a dark stage in both themes. */
+.cosmos {
+  --ink: #f6f7f4;
+  --muted: #a5b0b8;
+  --line: rgba(255,255,255,.13);
+  --red: #df1119;
+  --blue: #4ab5f7;
+  --blue-soft: #79c9f7;
+  --gold: #d1a553;
+  --card: rgba(255,255,255,.045);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 60% 70% at 72% 48%, rgba(20,40,58,.85), transparent 70%),
+    radial-gradient(circle at 4% 96%, rgba(223,17,25,.16), transparent 38%),
+    radial-gradient(circle at 96% 4%, rgba(74,181,247,.13), transparent 42%),
+    #05080b;
   border-bottom: 1px solid var(--line);
+  touch-action: pan-y pinch-zoom;
+}
+.cosmos.is-pointing { cursor: pointer; }
+.cosmos.is-dragging { cursor: grabbing; user-select: none; }
+
+.cosmos-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.hero > :first-child { container-type: inline-size; }
+.cosmos-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  min-height: min(88vh, 900px);
+  padding: 64px 0 52px;
+}
+
+.cosmos-copy { container-type: inline-size; }
+
+.cosmos-system {
+  align-self: start;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.cosmos-anchor {
+  width: 100%;
+  aspect-ratio: 1 / .8;
+  max-height: 60vh;
+  cursor: grab;
+}
+.cosmos.is-pointing .cosmos-anchor { cursor: pointer; }
+
+.cosmos-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-align: center;
+  transition: opacity .6s ease;
+}
+.cosmos-hint.is-done { opacity: .45; }
+
+.cosmos-families {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.cosmos-hint,
+.cosmos-families { display: none; }
+.cosmos.is-live .cosmos-families { display: flex; }
+.cosmos.is-live .cosmos-hint { display: block; }
+
+.cosmos-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.cosmos-chip > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--family);
+  box-shadow: 0 0 10px var(--family);
+}
+.cosmos-chip:hover { border-color: color-mix(in srgb, var(--family) 55%, transparent); }
+.cosmos-chip[aria-expanded="true"] {
+  border-color: var(--family);
+  background: color-mix(in srgb, var(--family) 16%, transparent);
+}
+
+.cosmos-family {
+  width: 100%;
+  max-width: 540px;
+  padding: 18px 20px 12px;
+  border: 1px solid color-mix(in srgb, var(--family) 38%, var(--line));
+  border-radius: 20px;
+  background: rgba(8,13,18,.74);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.cosmos.is-live .cosmos-family:not(.is-open) { display: none; }
+.cosmos.is-live .cosmos-family.is-open { animation: cosmos-rise .35s ease both; }
+@keyframes cosmos-rise {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+.cosmos-family-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+}
+.cosmos-family-head strong {
+  font-family: var(--display);
+  font-size: 24px;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  color: var(--family);
+}
+.cosmos-family-head span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.cosmos-family-line {
+  margin: 6px 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.cosmos-family ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cosmos-family li + li { border-top: 1px solid var(--line); }
+.cosmos-family a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 2px;
+  font-weight: 750;
+}
+.cosmos-family a small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.cosmos-family a:hover { color: var(--family); }
+.cosmos-family a:hover > span:last-child { transform: translateX(3px); }
+.cosmos-family a > span:last-child { transition: transform .2s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmos.is-live .cosmos-family.is-open { animation: none; }
+}
 
 .eyebrow,
 .kicker {
@@ -233,7 +410,7 @@ button, input, select { font: inherit; }
   text-transform: uppercase;
 }
 
-.hero h1 {
+.cosmos h1 {
   max-width: 900px;
   margin: 0;
   font-family: var(--display);
@@ -245,12 +422,12 @@ button, input, select { font: inherit; }
   text-transform: uppercase;
 }
 
-.hero h1 .line { display: block; }
-.hero h1 .line:nth-child(2) {
+.cosmos h1 .line { display: block; }
+.cosmos h1 .line:nth-child(2) {
   color: transparent;
   -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 82%, transparent);
 }
-.hero h1 .act {
+.cosmos h1 .act {
   background: linear-gradient(90deg, var(--red), var(--blue-soft));
   -webkit-background-clip: text;
   background-clip: text;
@@ -2340,12 +2517,14 @@ html:not(.js) .filter-bar { display: none; }
   .main-nav { display: none; }
   .header-actions { margin-left: auto; }
   .menu-button { display: inline-grid; }
-  .hero {
+  .cosmos-inner {
     min-height: auto;
     grid-template-columns: minmax(0, 1fr);
-    gap: 52px;
-    padding-top: 72px;
+    gap: 36px;
+    padding: 20px 0 56px;
   }
+  .cosmos-system { order: -1; }
+  .cosmos-anchor { aspect-ratio: 1 / .86; max-height: none; }
   .hero-side { max-width: 650px; }
   .brand-poster { min-height: 500px; }
   .meta-strip { grid-template-columns: 1fr 1fr; }
@@ -2420,7 +2599,9 @@ html:not(.js) .filter-bar { display: none; }
   .shell { width: min(calc(100% - 28px), var(--max)); }
   .header-inner { min-height: 66px; }
   .mobile-panel { inset: 66px 0 auto 0; }
-  .hero { padding: 56px 0 44px; }
+  .cosmos-inner { padding: 8px 0 44px; }
+  .cosmos-anchor { aspect-ratio: 1 / .8; }
+  .cosmos-chip { min-height: 36px; padding: 7px 12px; font-size: 11px; }
   .brand-poster { min-height: 430px; border-radius: 22px; }
   .meta-strip { grid-template-columns: 1fr; }
   .meta-strip > div,

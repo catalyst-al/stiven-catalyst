@@ -5,35 +5,7 @@
 {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
 {%- set featured = essays | featured -%}
 {%- set others = essays | except(featured) | last(3) -%}
-  <section class="shell hero">
-    <div>
-      <p class="eyebrow">{{ "Stiven Catalyst · Leadership · Operations · People" | t(lang) }}</p>
-      <h1>
-        <span class="line">{{ "See clearly." | t(lang) }}</span>
-        <span class="line">{{ "Think differently." | t(lang) }}</span>
-        <span class="line act">{{ "Act deliberately." | t(lang) }}</span>
-      </h1>
-      <p class="hero-copy"><strong>{{ "Ideas that move work forward." | t(lang) }}</strong> {{ "A modern publication about the people, systems and decisions behind better performance, written close to the work, not from a distance." | t(lang) }}</p>
-      <div class="hero-actions">
-        <a class="button-primary" href="{{ '/insights.html' | local(lang) }}">{{ "Read the essays" | t(lang) }}</a>
-        <a class="button-secondary" href="{{ '/tools.html' | local(lang) }}">{{ "Try the tools" | t(lang) }}</a>
-      </div>
-      <a class="hero-cv-link" href="{{ '/tools/cv-builder/' | local(lang) }}"><span>{{ "New" | t(lang) }}</span> {{ "Build a professional CV, free" | t(lang) }} <span aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="hero-side">
-      <div class="brand-poster" role="img" aria-label="{{ 'Stiven Catalyst visual identity inspired by the original Catalyst Coaching logo' | t(lang) }}">
-        <span class="brand-cable"></span>
-        <span class="brand-bulb"></span>
-        <div class="brand-wordmark">
-          <small>STIVEN</small>
-          <strong>CATALYST</strong>
-          <em>{{ "Clarity · Insight · Action · Change" | t(lang) }}</em>
-        </div>
-      </div>
-      <p>{{ "The light is the moment of clarity. The catalyst is what happens next." | t(lang) }}</p>
-    </div>
-  </section>
+{% include "partials/cosmos-hero.njk" %}
 
   <div class="shell meta-strip" aria-label="{{ 'Stiven Catalyst philosophy' | t(lang) }}">
     <div><strong>{{ "Clarity" | t(lang) }}</strong><span>{{ "Understand before reacting." | t(lang) }}</span></div>

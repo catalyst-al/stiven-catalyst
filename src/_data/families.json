@@ -1,0 +1,47 @@
+[
+  {
+    "id": "lumen",
+    "name": "Lumen",
+    "role": "Diagnose",
+    "line": "Closest to the light. Find where the problem really sits before you act on it.",
+    "color": "#f5c86a",
+    "orbit": 0.42,
+    "tools": ["/tools/kpi-diagnostic/", "/tools/five-whys/"]
+  },
+  {
+    "id": "pulse",
+    "name": "Pulse",
+    "role": "Control",
+    "line": "The daily heartbeat of the floor: damage, incomplete orders, delays and the shift handover.",
+    "color": "#ff4d55",
+    "orbit": 0.62,
+    "tools": ["/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"]
+  },
+  {
+    "id": "zenith",
+    "name": "Zenith",
+    "role": "Analyse",
+    "line": "The highest view: sigma levels, the vital few causes and a full control tower for the last mile.",
+    "color": "#4ab5f7",
+    "orbit": 0.82,
+    "tools": ["/tools/sigma-control-chart/", "/tools/pareto/", "/tools/cx-control-tower/"]
+  },
+  {
+    "id": "atlas",
+    "name": "Atlas",
+    "role": "Career",
+    "line": "Carry your experience into the next role: a designed CV, an ATS CV and a matching cover letter.",
+    "color": "#e9eef3",
+    "orbit": 1.02,
+    "tools": ["/tools/cv-builder/", "/tools/ats-cv/", "/tools/cover-letter/"]
+  },
+  {
+    "id": "academy",
+    "name": "Academy",
+    "role": "Learn",
+    "line": "Six Sigma in the warehouse, step by step on one real case.",
+    "color": "#f2884b",
+    "orbit": 1.2,
+    "tools": ["/tools/six-sigma-dmaic/"]
+  }
+]

@@ -1438,5 +1438,17 @@
   "Average minutes to load a route. Scanning and loading quality come before speed.": "Durchschnittliche Minuten, um eine Tour zu beladen. Scan- und Ladequalität gehen vor Tempo.",
   "Routes that left later than the late limit set below.": "Touren, die später als die unten eingestellte Grenze abfuhren.",
   "Routes where the gate was closed after loading.": "Touren, bei denen das Tor nach der Beladung geschlossen wurde.",
-  "Routes where chilled and frozen bags were scanned inside the cooling area.": "Touren, bei denen gekühlte und tiefgekühlte Taschen im Kühlbereich gescannt wurden."
+  "Routes where chilled and frozen bags were scanned inside the cooling area.": "Touren, bei denen gekühlte und tiefgekühlte Taschen im Kühlbereich gescannt wurden.",
+  "Drag to turn the system. Tap a planet to open its tools.": "Ziehen, um das System zu drehen. Einen Planeten antippen, um seine Tools zu öffnen.",
+  "Tool families": "Tool-Familien",
+  "Diagnose": "Diagnose",
+  "Control": "Kontrolle",
+  "Analyse": "Analyse",
+  "Career": "Karriere",
+  "Learn": "Lernen",
+  "Closest to the light. Find where the problem really sits before you act on it.": "Am nächsten am Licht. Finden, wo das Problem wirklich sitzt, bevor Sie handeln.",
+  "The daily heartbeat of the floor: damage, incomplete orders, delays and the shift handover.": "Der tägliche Puls der Halle: Schäden, unvollständige Aufträge, Verspätungen und die Schichtübergabe.",
+  "The highest view: sigma levels, the vital few causes and a full control tower for the last mile.": "Der höchste Blick: Sigma-Niveau, die wenigen entscheidenden Ursachen und ein ganzer Control Tower für die letzte Meile.",
+  "Carry your experience into the next role: a designed CV, an ATS CV and a matching cover letter.": "Ihre Erfahrung in die nächste Rolle tragen: ein gestalteter Lebenslauf, ein ATS-Lebenslauf und das passende Anschreiben.",
+  "Six Sigma in the warehouse, step by step on one real case.": "Six Sigma im Lager, Schritt für Schritt an einem echten Fall."
 }
