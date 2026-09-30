@@ -1,5 +1,6 @@
 /* Scoped additions only. The existing homepage, planets and tool layouts stay intact. */
 .coaching[hidden] { display: none; }
+.coaching [hidden] { display: none !important; }
 .coaching { --coaching-accent: var(--family, var(--blue)); }
 .coaching-nav, .coaching-modules, .coaching-tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
 .coaching-nav .button-secondary, .coaching-modules .button-secondary { padding: 10px 16px; font-size: .85rem; font-weight: 650; }
@@ -20,6 +21,8 @@
 .coaching legend { font-weight: 700; }
 .coaching-choice { display: flex; gap: 12px; align-items: start; padding: 12px; border: 1px solid var(--line); border-radius: 10px; margin: 10px 0; cursor: pointer; }
 .coaching-choice input { margin-top: 5px; accent-color: var(--coaching-accent); }
+.coaching button.coaching-choice { width: 100%; background: var(--card); color: var(--ink); text-align: start; font: inherit; }
+.coaching-feedback { border-inline-start: 3px solid var(--coaching-accent); padding-inline-start: 16px; }
 .coaching input:disabled, .coaching textarea:disabled, .coaching button:disabled { opacity: .55; cursor: not-allowed; }
 .coaching-review { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 28px; }
 .coaching-list { padding: 0; margin: 18px 0; list-style: none; }

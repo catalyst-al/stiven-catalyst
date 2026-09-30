@@ -84,7 +84,7 @@ test('backup import makes independent copies and preserves current context, acti
 test('invalid backups reject atomically: versions, shape, dates, measurement bounds, IDs and size', () => {
   const s = stateWithProject(), original = JSON.stringify(s);
   for (const mutate of [
-    b => b.version = 2,
+    b => b.version = 999,
     b => b.state.projects[0].role = 'unknown',
     b => b.state.projects[0].deadline = '2026-02-30',
     b => b.state.projects.push(clone(b.state.projects[0])),
@@ -134,13 +134,14 @@ async function workspace(lang = 'en', saved = null, role = 'lumen') {
   dom.window.document.getElementById('coaching-data').textContent = JSON.stringify(data);
   if (saved) dom.window.localStorage.setItem(C.KEY, JSON.stringify(saved));
   dom.window.confirm = () => true;
-  dom.window.eval(coreSource); dom.window.eval(uiSource);
+  dom.window.eval(coreSource); dom.window.eval(fs.readFileSync('src/js/coaching-results.js', 'utf8')); dom.window.eval(uiSource);
   return dom;
 }
 const formValues = (w, name, values) => {
   const form = w.document.querySelector(`[data-form="${name}"]`);
   assert.ok(form, `form ${name}`);
   for (const [key, value] of Object.entries(values)) { const el = form.elements.namedItem(key); assert.ok(el, key); el.value = value; }
+  if ('mode' in values) form.elements.mode.dispatchEvent(new w.Event('change', { bubbles: true }));
   form.dispatchEvent(new w.Event('submit', { bubbles: true, cancelable: true }));
 };
 const click = (w, selector) => { const el = w.document.querySelector(selector); assert.ok(el, selector); el.click(); };
@@ -169,6 +170,117 @@ test('workspace journey: context → project → practice → workplace review �
   const ids = [...w.document.querySelectorAll('[id]')].map(el => el.id);
   assert.equal(new Set(ids).size, ids.length, 'form labels have unique IDs');
   assert.ok(C.validState(saved(w)));
+  dom.window.close();
+});
+
+const paretoSnapshot = () => ({ version: 1, tool: 'pareto', captured: '2026-09-30T10:00:00.000Z', payload: { measure: 'count', unit: 'cases', source: 'Observation log', filter: '', from: '2026-09-20', to: '2026-09-29', total: 10, used: 10, skipped: 1, items: [{ name: 'Handoff', amount: 8, share: .8, cumulative: .8, cls: 'A' }, { name: 'Other', amount: 2, share: .2, cumulative: 1, cls: 'B' }] } });
+
+test('v1 work and backups migrate without a read-time write or changing historical records', () => {
+  const legacy = stateWithProject(); legacy.version = 1; legacy.profile.sector = 'hospitality';
+  const p = legacy.projects[0];
+  for (const key of ['context', 'workflow', 'delegations', 'simulations']) delete p[key];
+  p.measurements.push({ id: C.id(), date: '2026-09-25', phase: 'before', units: 120, failed: 12 });
+  p.evidence.push({ id: C.id(), date: '2026-09-25', summary: 'Observed', source: 'Shift log', tool: 'five-whys' });
+  const raw = JSON.stringify(legacy), store = memory(); store.setItem(C.KEY, raw);
+  const loaded = C.load(store); assert.equal(loaded.error, null); assert.equal(loaded.state.version, 2);
+  assert.equal(store.getItem(C.KEY), raw); assert.equal(loaded.state.projects[0].id, p.id);
+  assert.deepEqual(clone(loaded.state.projects[0].measurements), clone(p.measurements));
+  assert.equal(loaded.state.projects[0].context.sector, 'hospitality');
+  const copy = C.importBackup(C.empty(), JSON.stringify({ format: 'stiven-catalyst-coaching', version: 1, state: legacy }));
+  assert.equal(copy.version, 2); assert.equal(copy.projects[0].measurements[0].units, 120);
+  assert.equal(C.save(store, loaded.state), null); assert.equal(JSON.parse(store.getItem(C.KEY)).version, 2);
+  const invalid = clone(legacy); invalid.projects[0].deadline = '2026-02-31'; store.setItem(C.KEY, JSON.stringify(invalid));
+  assert.equal(C.load(store).error, 'corrupt'); assert.equal(C.save(store, loaded.state), 'corrupt');
+});
+
+test('typed results preserve exact totals, require a reviewed conclusion and add actions atomically', () => {
+  const s = stateWithProject(), p = s.projects[0], result = paretoSnapshot();
+  assert.ok(C.validSnapshot(result));
+  C.addResult(p, result, { summary: 'Investigate handoff first', source: 'Weekly log', action: 'Observe two handoffs', owner: 'Lead', due: '2026-10-02' });
+  assert.equal(p.evidence[0].snapshot.payload.items[0].share, .8); assert.equal(p.actions.length, 1);
+  result.payload.items[0].name = 'Changed elsewhere'; assert.equal(p.evidence[0].snapshot.payload.items[0].name, 'Handoff');
+  const original = JSON.stringify(p);
+  assert.throws(() => C.addResult(p, paretoSnapshot(), { summary: 'Review', source: '', action: 'Check', owner: '', due: '2026-10-01' }), /invalidResult/);
+  assert.equal(JSON.stringify(p), original);
+  const invalid = paretoSnapshot(); invalid.payload.total = 11; assert.equal(C.validSnapshot(invalid), false);
+  invalid.payload.total = 10; invalid.payload.items[0].share = .7; assert.equal(C.validSnapshot(invalid), false);
+  const whys = { version: 1, tool: 'five-whys', captured: result.captured, payload: { problem: 'Lost requests', whys: ['No acceptance'], hypothesis: 'No receiving owner', action: '', owner: '', due: '', check: '' } };
+  C.addResult(p, whys, { summary: 'Still a hypothesis', source: 'One observed case', useHypothesis: true });
+  assert.equal(p.brief.hypothesis, 'No receiving owner'); assert.ok(C.validState(s));
+});
+
+test('LUMEN next step is based on records, distinguishes evidence from a hypothesis and handles comparability', () => {
+  const p = stateWithProject().projects[0], day = '2026-09-30';
+  const next = () => C.nextStep(p, day).key;
+  assert.equal(next(), 'stepDefine'); p.brief.scope = 'One handoff'; p.brief.target = 'Reduce miss rate';
+  assert.equal(next(), 'stepBaseline'); C.addMeasurement(p, { date: day, phase: 'before', units: 100, failed: 10, definition: 'Missed / all' });
+  assert.equal(next(), 'stepInvestigate'); C.addResult(p, paretoSnapshot(), { summary: 'Priority', source: '' });
+  assert.equal(next(), 'stepHypothesis'); p.brief.hypothesis = 'Ownership unclear'; p.workflow.supportingEvidence = 'Two observed handoffs; other cases untested'; p.workflow.test = 'Check whether accepted requests are still missed';
+  assert.equal(next(), 'stepPilot'); p.brief.pilot = 'Explicit acceptance in one shift'; Object.assign(p.workflow, { pilotOwner: 'Lead', reviewDate: '2026-10-02', criterion: 'Fewer misses in five shifts', guardrail: 'No longer response time' });
+  assert.equal(next(), 'stepAfter'); C.addMeasurement(p, { date: '2026-10-02', phase: 'after', units: 100, failed: 5, definition: 'Different definition' });
+  assert.equal(next(), 'stepComparable'); p.measurements[1].definition = 'Missed / all'; assert.equal(next(), 'stepReview');
+  p.workflow.verdict = 'adapt'; p.workflow.reviewResult = 'Response time worsened'; assert.equal(next(), 'stepReplan');
+  p.workflow.verdict = 'adopt'; assert.equal(next(), 'stepControl'); p.brief.control = 'Accepted requests log'; Object.assign(p.workflow, { controlOwner: 'Lead', cadence: 'Weekly', reaction: 'Observe drift and investigate' });
+  assert.equal(next(), 'stepComplete'); p.actions.push({ id: C.id(), text: 'Review', owner: 'Lead', due: day, done: false }); assert.equal(next(), 'stepAction');
+});
+
+test('all simulation branches are translated, valid, distinct and terminate after three decisions', async () => {
+  const data = await content;
+  for (const [role, scenario] of Object.entries(data.simulations)) {
+    for (const lang of ['en', 'de', 'sq']) {
+      assert.ok(scenario.title[lang]); for (const c of Object.values(scenario.cases)) assert.ok(c[lang]);
+      for (const node of Object.values(scenario.nodes)) { assert.ok(node.prompt[lang]); for (const c of node.choices) assert.ok(c.label[lang] && c.feedback[lang]); }
+    }
+    const visit = path => {
+      const id = C.simulationNode(scenario, path), node = scenario.nodes[id];
+      if (!node.choices.length) { assert.equal(path.length, 3, role); return; }
+      node.choices.forEach((c, choice) => visit([...path, { node: id, choice }]));
+    }; visit([]);
+    assert.notEqual(C.simulationNode(scenario, [{ node: 'start', choice: 0 }]), C.simulationNode(scenario, [{ node: 'start', choice: 1 }]));
+    assert.throws(() => C.simulationNode(scenario, [{ node: 'rush', choice: 0 }]), /invalidSimulation/);
+  }
+});
+
+test('1:1 follows a previous commitment and backup remaps the complete chain and delegation action', async () => {
+  const s = stateWithProject('zenith'); s.profile.ready = true;
+  const dom = await workspace('sq', s, 'zenith'), w = dom.window; click(w, '[data-view="sessions"]');
+  const values = { mode: 'one-to-one', participant: 'Lead A', goal: 'Better handoffs', reality: 'No owner', options: 'Log or call', way: 'Pilot log', support: 'Provide overlap time', action: 'Test one shift', owner: 'Lead A', due: '2026-10-02', nextReview: '2026-10-05' };
+  formValues(w, 'session', values);
+  let p = saved(w).projects[0]; assert.equal(p.sessions.length, 1); const first = p.sessions[0].id;
+  const previous = w.document.querySelector('[name="previousSession"]'); previous.value = first; previous.dispatchEvent(new w.Event('change', { bubbles: true }));
+  assert.match(w.document.querySelector('[data-previous-commitment]').textContent, /Provide overlap time/);
+  formValues(w, 'session', { ...values, previousSession: first, previousReview: 'Pilot complete; overlap helped', nextReview: '2026-10-12' });
+  p = saved(w).projects[0]; assert.equal(p.sessions.length, 2); assert.equal(p.sessions[1].previousId, first);
+  click(w, '[data-view="project"]');
+  const delegation = { outcome: 'Accepted handoff log', owner: 'Lead A', checkpoint: '2026-10-02', due: '2026-10-04', resources: '15 minutes overlap', authority: 'Choose channel', boundary: 'Escalate system changes', success: 'All items acknowledged', acceptance: 'Lead A repeated scope and agreed review' };
+  formValues(w, 'delegation', { ...delegation, checkpoint: '2026-10-05' }); assert.equal(saved(w).projects[0].delegations.length, 0);
+  formValues(w, 'delegation', delegation); assert.equal(saved(w).projects[0].delegations.length, 1);
+  formValues(w, 'delegation-review', { result: 'Owner chose the channel; overlap time provided' });
+  assert.match(saved(w).projects[0].delegations[0].review.result, /overlap time/);
+  formValues(w, 'action-review', { result: 'One shift tested; all requests acknowledged' });
+  assert.equal(saved(w).projects[0].actions[0].done, true);
+  assert.match(saved(w).projects[0].actions[0].review.result, /acknowledged/);
+  const imported = C.importBackup(C.empty(), C.exportBackup(saved(w))), cp = imported.projects[0];
+  assert.equal(cp.sessions[1].previousId, cp.sessions[0].id); assert.notEqual(cp.sessions[0].id, first);
+  assert.ok(cp.actions.some(a => a.id === cp.delegations[0].actionId)); assert.equal(cp.delegations[0].authority, 'Choose channel');
+  assert.equal(C.nextStep(cp, '2026-10-06').key, 'stepAction'); cp.actions.forEach(a => a.done = true);
+  assert.notEqual(C.nextStep(cp, '2026-10-06').key, 'stepSession', 'a later 1:1 supersedes the older review date');
+  w.print = () => {}; click(w, '[data-action="print"]'); assert.match(w.document.querySelector('.coaching-print').textContent, /Choose channel/);
+  dom.window.close();
+});
+
+test('simulations resume across languages, preserve project context and never count as workplace practice', async () => {
+  const s = stateWithProject(); s.profile.ready = true; s.projects[0].context.sector = 'hospitality'; s.profile.sector = 'logistics';
+  let dom = await workspace('en', s), w = dom.window; click(w, '[data-view="pathway"]');
+  assert.match(w.document.body.textContent, /guest requests went unconfirmed/);
+  click(w, '[data-action="simulation"][data-choice="1"]');
+  const intermediate = saved(w); assert.equal(intermediate.projects[0].simulations.lumen.path.length, 1); assert.equal(C.progress(intermediate.projects[0]).practised, 0);
+  dom.window.close(); dom = await workspace('de', intermediate); w = dom.window; click(w, '[data-view="pathway"]');
+  assert.ok(w.document.querySelector('[data-node="rush"]'));
+  click(w, '[data-action="simulation"][data-choice="0"]'); click(w, '[data-action="simulation"][data-choice="0"]');
+  formValues(w, 'simulation-reflection', { reflection: 'Test ownership and response time' }); assert.ok(C.validState(saved(w)));
+  const projectId = saved(w).projects[0].id; click(w, '[data-action="restart-simulation"]');
+  assert.equal(saved(w).projects[0].id, projectId); assert.equal(saved(w).projects[0].simulations.lumen, undefined);
   dom.window.close();
 });
 

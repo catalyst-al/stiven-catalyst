@@ -1,4 +1,4 @@
-# Coaching platform, first release
+# Coaching platform
 
 ## What changed for a visitor
 
@@ -34,11 +34,12 @@ The current site is a static application. It has no server, account system, shar
 
 ## Implementation
 
-- `src/_data/coaching.js`: 13 original modules, case choices, specific assignments, role configuration and three-language text.
+- `src/_data/coaching.js`: 13 original modules, case choices, specific assignments and role configuration; `coaching-workflows.js`: sector project templates, branching scenarios and three-language workflow text.
 - `partials/coaching-workspace.njk`: role workspace shell and safely embedded JSON.
 - `js/coaching-core.js`: schema validation, shared state, storage revision checks, backup import/export, weighted measurements and progress.
 - `js/coaching-workspace.js`: context, next step, training, project, self-coaching, reporting and saved-work views.
-- `partials/coaching-bridge.njk` / `js/coaching-bridge.js`: optional project panel on an existing tool page. Opening a tool from a project carries only a random project ID. The visitor manually attaches a summary and source; tool inputs and logs are not scraped or overwritten. Submitting the summary reloads the latest project state first.
+- `partials/coaching-bridge.njk` / `js/coaching-bridge.js`: optional project panel on an existing tool page. Opening a tool from a project carries only a random project ID. Pareto, 5 Whys and KPI Diagnostic expose explicit read-only result providers. The visitor reviews the current result, writes a conclusion and optionally adds an accountable action. Submission reloads the latest project state first. Other tools retain manual summary/source capture. Tool inputs and logs are not overwritten.
+- `js/coaching-results.js`: safe display of validated, dated result snapshots in the tool panel, project journal and printable report. Pareto keeps the complete category distribution, totals, filter, period and skipped-row count; 5 Whys keeps the reasoning chain as a hypothesis; KPI Diagnostic keeps the ten ratings and their consistent cause scores. Raw imported Pareto rows are not copied into coaching backups.
 - `src/coaching.css`: scoped additions using existing colors, buttons, form controls and typography; supports the existing dark/light themes, narrow screens and a dedicated printable report.
 - `tests/coaching.test.cjs`: state, backup, weighted rate, curriculum and DOM workflow tests.
 - `scripts/check-coaching-build.mjs`: generated-page integration checks across all 12 role pages and 39 tool pages.
@@ -48,6 +49,7 @@ No homepage or planet asset was edited. The English, German and Albanian built h
 ## Persistence and data rules
 
 - Browser storage key: `sc-coaching-v1`. It is shared across the site's languages, isolated from existing tool keys.
+- State and backup schema are now version 2. Valid version 1 records migrate in memory on load; storage is written only on the next explicit save. Old backups are accepted and copied. Invalid legacy records remain untouched. Each project retains the sector/experience context present at creation or migration.
 - A storage error keeps new work in page memory and offers backup export. Closing the page can lose that unsaved work.
 - Unreadable stored data is never silently overwritten. Explicit recovery requires a valid backup and confirmation; the unreadable original is downloaded first.
 - Revision checks prevent common stale-tab overwrites. These are not a distributed or transactional database; use one editing tab for a project.
@@ -55,6 +57,7 @@ No homepage or planet asset was edited. The English, German and Albanian built h
 - User text is escaped when displayed. Embedded configuration escapes HTML script terminators.
 - Failed-unit observations require valid dates, whole nonnegative counts, a positive denominator and failed units no greater than total. Duplicate date/period entries are rejected. Rates use summed failed units divided by summed units, not an average of daily percentages.
 - Before/after changes are descriptive, in percentage points. They are not presented as proof of causation or significance. The visitor must keep definitions and conditions comparable and check a guardrail.
+- New measurements retain their metric definition and source. Missing historical definitions or changed definitions suppress percentage comparisons and request a source review; the original counts remain visible and unchanged.
 - Module progress distinguishes saved practice from self-reported workplace review. Neither is a professional certification.
 - Coaching backups contain coaching work only. Existing tool logs still require their own exports.
 
@@ -70,6 +73,16 @@ node scripts/check-coaching-build.mjs
 ```
 
 The new DOM tests exercise context → project → case feedback → practical exercise → workplace review → GROW action → measurement, and the tool-to-project evidence connection. They also check all role/language combinations and safe rendering of imported text.
+
+## Connected managerial workflows
+
+LUMEN starts with a hotel handoff or warehouse incomplete-order brief without fabricated baseline data. Next-step guidance checks scope and target → before observations → reviewed tool snapshot → working hypothesis, supporting facts and falsification test → bounded pilot with owner/date/criterion/guardrail → comparable after observations → adopt/adapt/stop decision with reason → standard owner/cadence/drift response. Due actions and 1:1 reviews take priority. Documentation is self-reported, not independent validation. Adapt/stop keeps a replan prompt instead of declaring success.
+
+Recurring 1:1 sessions use a colleague alias, reference the previous session and show the previous action and manager support. The new record requires review of that commitment, GROW reasoning, renewed support, a linked action and next review date. Only the latest session for an alias drives reminders. Backups remap the full session chain and linked action IDs.
+
+PULSE and ZENITH include delegation agreements: expected outcome, owner, resources, decision authority, escalation boundaries, checkpoint, due date, acceptance criteria and the recorded agreement. Saving creates a linked action. A dated checkpoint observation clears its reminder; completing an action requires an observed outcome. Print includes the agreement and reviews. There are no invitations, notifications or automatic proof of acceptance.
+
+Each planet has an original fictional simulation with three successive decisions. The first decision branches to a different situation; every choice records its consequence. Attempts resume across languages, can be restarted and end with a workplace-transfer reflection. Simulations never increment practical-assignment or workplace-review progress.
 
 ## Next architectural boundary
 

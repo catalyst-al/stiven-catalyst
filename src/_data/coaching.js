@@ -1,3 +1,4 @@
+import { workflowLabels, projectTemplates, simulations } from './coaching-workflows.js';
 // Original, practical coaching content. Stable IDs keep work across languages.
 const T = (en, de, sq) => ({ en, de, sq });
 const labels = {
@@ -278,4 +279,4 @@ const assignments = {
 };
 modules.forEach(m => { m.assignment = assignments[m.id]; });
 const toolNames = { 'kpi-diagnostic': 'KPI Diagnostic', 'five-whys': '5 Whys', 'damage-control': 'Damage Control', 'incomplete-control': 'Incomplete Control', 'delay-analyzer': 'Delay Analyzer', 'sigma-control-chart': 'Sigma & Control Chart', 'pareto': 'Pareto 80/20', 'cx-control-tower': 'Last-Mile CX Control Tower', 'six-sigma-dmaic': 'Six Sigma in the Warehouse', 'shift-handover': 'Shift Handover', 'cv-builder': 'CV Builder', 'ats-cv': 'ATS CV', 'cover-letter': 'Cover Letter' };
-export default { version: 1, labels, roles, modules, toolNames };
+export default { version: 2, labels: { ...labels, ...workflowLabels }, roles, modules, toolNames, projectTemplates, simulations };

@@ -709,6 +709,8 @@
   };
 
   let lastResult = null;
+  let coachingResult = null;
+  window.CoachingToolResult = { tool: 'pareto', get: () => coachingResult };
   let lastBars = [];
   const tooltip = el("div", "pa-tooltip");
   tooltip.hidden = true;
@@ -726,6 +728,8 @@
   };
 
   const renderResults = () => {
+    coachingResult = null;
+    window.dispatchEvent(new CustomEvent('coaching:result'));
     results.hidden = !state.source;
     if (!state.source) return;
     const result = analyse(state.source, {
@@ -740,6 +744,8 @@
       renderChecks(result);
       return;
     }
+    coachingResult = { version: 1, tool: 'pareto', captured: new Date().toISOString(), payload: { measure: state.measure, unit: state.measure === 'value' ? valueName() : tx('cases'), source: state.source.name, filter: state.filterValue || '', from: state.from || '', to: state.to || '', total: result.total, used: result.used, skipped: result.skipped.length, items: result.items.map(r => ({ name: r.key, amount: r.amount, share: r.share, cumulative: r.cumulative, cls: r.cls })) } };
+    window.dispatchEvent(new CustomEvent('coaching:result'));
     const unit = state.measure === "value" ? lower(valueName()) : tx("cases");
     // Headline
     const head = el("article", "result-card pa-headline");
