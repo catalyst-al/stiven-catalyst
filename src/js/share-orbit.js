@@ -56,6 +56,22 @@
     }, 1800);
   });
 
+  // On Android a web link cannot choose between WhatsApp and WhatsApp Business; the phone opens its default.
+  // There each planet names its app, and the Business planet appears next to the ordinary one.
+  if (/Android/i.test(navigator.userAgent)) {
+    const text = `${title} ${url}`;
+    root.querySelectorAll("[data-whatsapp]").forEach((link) => {
+      const fallback = encodeURIComponent(link.href);
+      link.href = `intent://send?text=${encodeURIComponent(text)}#Intent;scheme=whatsapp;package=${link.dataset.whatsapp};S.browser_fallback_url=${fallback};end`;
+      link.removeAttribute("target");
+    });
+    const business = root.querySelector("[data-whatsapp-business]");
+    if (business) {
+      business.hidden = false;
+      root.querySelector(".share-orbit-planets").classList.add("has-business");
+    }
+  }
+
   if (nativeButton && navigator.share) {
     nativeButton.hidden = false;
     nativeButton.addEventListener("click", async () => {
