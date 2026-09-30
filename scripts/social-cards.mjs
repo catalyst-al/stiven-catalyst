@@ -1,5 +1,5 @@
-// Makes the social preview images (1200 × 630) of every tool page and of the Tools page,
-// in English, German and Albanian: src/media/social/<lang>/<tool>.jpg and tools.jpg.
+// Makes the social preview images (1200 × 630) of every tool page, the Tools page and the homepage,
+// in English, German and Albanian: src/media/social/<lang>/<tool>.jpg, tools.jpg and home.jpg.
 // Each card carries the tool's name, its family and the family's drawing (the same shapes
 // as the background on the tool page, from src/_data/familySky.js).
 //
@@ -257,5 +257,37 @@ for (const [lang, { tools }] of Object.entries(LANGS)) {
   }), path.join(dir, "tools.jpg"));
   made += 1;
 }
+// The homepage (and every page without its own image): the real hero, the Catalyst light with the
+// families on their orbits, photographed from the built site at 1200 × 630 without the header and buttons.
+execSync("npx @11ty/eleventy --quiet", { cwd: ROOT, stdio: "inherit" });
+const SITE = path.join(ROOT, "_site");
+const TYPES = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".png": "image/png", ".jpg": "image/jpeg" };
+const http = await import("node:http");
+const server = http.createServer((req, res) => {
+  let file = path.join(SITE, decodeURIComponent(req.url.split("?")[0]));
+  if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
+  if (!file.startsWith(SITE) || !fs.existsSync(file)) { res.writeHead(404); res.end(); return; }
+  res.writeHead(200, { "content-type": TYPES[path.extname(file)] || "application/octet-stream" });
+  fs.createReadStream(file).pipe(res);
+});
+await new Promise((resolve) => server.listen(0, resolve));
+const hero = await browser.newPage({ viewport: { width: 1200, height: 630 } });
+await hero.addInitScript(() => { try { localStorage.setItem("sc-theme", "dark"); } catch { /* private mode */ } });
+for (const lang of Object.keys(LANGS)) {
+  await hero.goto(`http://localhost:${server.address().port}${lang === "en" ? "/" : `/${lang}/`}`, { waitUntil: "networkidle" });
+  await hero.addStyleTag({ content: `
+    .site-header, .skip-link, .hero-actions, .hero-cv-link, .cosmos-hint, .cosmos-families { display: none !important; }
+    .cosmos { height: 630px; }
+    .cosmos-inner { width: 1090px; min-height: 630px; padding: 56px 0 44px; align-items: center; }
+    .cosmos-system { align-self: center; }
+    .cosmos-anchor { max-height: 540px; }
+    .cosmos .hero-copy { font-size: 19px; }
+    .cosmos .hero-copy::after { content: "stivencatalyst.com"; display: block; margin-top: 26px; color: #4ab5f7; font-size: 14px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }` });
+  await hero.evaluate(() => window.dispatchEvent(new Event("resize")));
+  await hero.waitForTimeout(2600);
+  await hero.screenshot({ path: path.join(ROOT, "src/media/social", lang, "home.jpg"), type: "jpeg", quality: 88 });
+  made += 1;
+}
+server.close();
 await browser.close();
 console.log(`${made} cards written to src/media/social/`);
