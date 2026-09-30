@@ -1,0 +1,32 @@
+{#- "All your work in one file" (js/work-backup.js): on the Tools page and under every tool. -#}
+{%- set wbTools = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+{%- set wbText = {
+  coaching: "Coaching workspace" | t(lang),
+  blocked: "This browser does not allow saving (a private window or blocked storage), so there is no work here to save." | t(lang),
+  inBrowser: "Saved in this browser: {tools}." | t(lang),
+  nothing: "No saved work in this browser yet." | t(lang),
+  saved: "Saved as {file}. Keep it, or open it on another device with Open a saved file." | t(lang),
+  invalid: "This is not a Stiven Catalyst work file, or it is damaged. Nothing was changed." | t(lang),
+  confirm: "Open the work saved on {date}? For these tools the work in this browser is replaced: {tools}. Other tools stay as they are." | t(lang),
+  full: "This browser ran out of space, so not every tool was opened. Free some space and open the file again." | t(lang),
+  opened: "Opened. The page reloads to show your work." | t(lang)
+} %}
+<section class="shell work-backup" data-work-backup data-text="{{ wbText | dump }}" aria-labelledby="work-backup-title">
+  <div class="work-backup-card">
+    <div class="work-backup-copy">
+      <p class="kicker">{{ "Your work" | t(lang) }}</p>
+      <h2 id="work-backup-title">{{ "All your work in one file" | t(lang) }}</h2>
+      <p>{{ "Every tool keeps your work only in this browser. Save it as one file to keep a copy, to carry on from another phone or computer, or to hand it to a colleague. Nothing is uploaded." | t(lang) }}</p>
+      <p class="form-note" data-work-summary></p>
+    </div>
+    <div class="tool-actions work-backup-actions">
+      <button class="button-primary" type="button" data-work-save>{{ "Save all my work" | t(lang) }}</button>
+      <label class="button-secondary work-backup-open">{{ "Open a saved file" | t(lang) }}<input type="file" accept="application/json,.json" data-work-open></label>
+    </div>
+    <p class="form-note work-backup-status" data-work-status role="status" aria-live="polite"></p>
+  </div>
+</section>
+<script type="application/json" id="work-backup-names">{
+{%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | dump | safe }}: {{ tool.name | dump | safe }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor -%}
+}</script>
+<script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>

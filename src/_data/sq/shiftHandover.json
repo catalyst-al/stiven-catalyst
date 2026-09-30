@@ -5,6 +5,7 @@
   "templates": {
     "warehouse": {
       "name": "Magazinë",
+      "sources": [null, null, "damage", "incomplete", "departures", null],
       "metrics": [
         "Njësi të trajtuara",
         "Mbetje në dorëzim",
@@ -45,6 +46,7 @@
     },
     "delivery": {
       "name": "Stacion shpërndarjeje",
+      "sources": [null, null, null, "arrivals", null, null],
       "metrics": [
         "Linja të nisura",
         "Linja të kthyera",
