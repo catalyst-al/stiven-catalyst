@@ -4809,3 +4809,197 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   .family-more { display: none !important; }
   body.in-family { --blue: #0b5f9e; --blue-soft: #0b5f9e; --signal: #0b5f9e; --sky-ink: #0b5f9e; }
 }
+
+/* ---------------------------------------------------------------------------
+   Share, on every page: a small planet at the bottom right (partials/share-orbit.njk,
+   js/share-orbit.js). Tapping it sends out the ways to share on a small piece of
+   night sky, dark in both themes. */
+.share-orbit {
+  --share-glow: var(--family, #4ab5f7);
+  position: fixed;
+  z-index: 55;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  color: #f6f7f4;
+}
+.share-orbit-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--share-glow) 55%, rgba(255, 255, 255, .18));
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #1d2833, #070a0d 70%);
+  color: #f6f7f4;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45), 0 0 22px -6px var(--share-glow);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+.share-orbit-button:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(0, 0, 0, .5), 0 0 30px -2px var(--share-glow); }
+.share-orbit-button:active { transform: scale(.95); }
+.share-orbit-button svg {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.share-orbit-button svg circle { fill: currentColor; stroke: none; }
+.share-orbit-ring {
+  position: absolute;
+  inset: -7px;
+  border: 1px dashed color-mix(in srgb, var(--share-glow) 45%, transparent);
+  border-radius: 50%;
+  animation: share-turn 12s linear infinite;
+  pointer-events: none;
+}
+.share-orbit-ring i {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--share-glow);
+  box-shadow: 0 0 8px var(--share-glow);
+}
+.share-orbit.is-open .share-orbit-ring { animation-duration: 3s; }
+@keyframes share-turn { to { transform: rotate(360deg); } }
+
+.share-orbit-panel {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  width: min(318px, calc(100vw - 36px));
+  padding: 18px 16px 14px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 22px;
+  background:
+    radial-gradient(1px 1px at 14% 20%, rgba(255, 255, 255, .7), transparent),
+    radial-gradient(1px 1px at 76% 12%, rgba(255, 255, 255, .5), transparent),
+    radial-gradient(1px 1px at 88% 70%, rgba(255, 255, 255, .45), transparent),
+    radial-gradient(1px 1px at 30% 86%, rgba(255, 255, 255, .4), transparent),
+    radial-gradient(260px 180px at 100% 100%, color-mix(in srgb, var(--share-glow) 22%, transparent), transparent 70%),
+    rgba(7, 10, 13, .92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+  transform-origin: 100% 100%;
+  opacity: 0;
+  transform: translateY(10px) scale(.94);
+  transition: opacity .22s ease, transform .26s cubic-bezier(.2, .8, .2, 1);
+}
+.share-orbit-panel.is-shown { opacity: 1; transform: none; }
+.share-orbit-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.share-orbit-mini {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1px solid color-mix(in srgb, var(--share-glow) 60%, transparent);
+  border-radius: 50%;
+  animation: share-turn 4s linear infinite;
+}
+.share-orbit-mini::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #fff6df;
+  box-shadow: 0 0 8px #fff3d0;
+}
+.share-orbit-mini i {
+  position: absolute;
+  top: -3px;
+  left: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--share-glow);
+}
+.share-orbit-planets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.share-orbit-planets a,
+.share-orbit-planets button {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 8px 2px 6px;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  color: #dfe6ec;
+  font: inherit;
+  cursor: pointer;
+}
+.share-orbit-planets small { font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+.share-planet {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--c) 45%, #fff) 0, var(--c) 42%, color-mix(in srgb, var(--c) 30%, #000) 100%);
+  box-shadow: 0 0 18px -4px var(--c);
+  color: #0b1015;
+  transition: transform .2s ease, box-shadow .25s ease;
+}
+.share-planet svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.share-planet .fill { fill: currentColor; stroke: none; }
+.share-orbit-planets a:hover .share-planet,
+.share-orbit-planets button:hover .share-planet,
+.share-orbit-planets :focus-visible .share-planet { transform: translateY(-3px) scale(1.06); box-shadow: 0 0 26px 0 var(--c); }
+.share-orbit-planets .is-done .share-planet { box-shadow: 0 0 30px 4px var(--c); }
+/* The planets fly out from the button, one after another. */
+.share-orbit-panel li { opacity: 0; transform: translate(40px, 60px) scale(.3); }
+.share-orbit-panel.is-shown li { animation: share-launch .5s cubic-bezier(.2, .9, .25, 1.15) calc(var(--i) * 45ms + 40ms) forwards; }
+@keyframes share-launch { to { opacity: 1; transform: none; } }
+.share-orbit-native {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  color: #f6f7f4;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.share-orbit-native:hover { border-color: var(--share-glow); }
+
+@media (max-width: 620px) {
+  .share-orbit-button { width: 50px; height: 50px; }
+  .share-orbit-panel { bottom: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .share-orbit-ring,
+  .share-orbit-mini { animation: none; }
+  .share-orbit-panel { transition: none; }
+  .share-orbit-panel li,
+  .share-orbit-panel.is-shown li { animation: none; opacity: 1; transform: none; }
+}
+@media print {
+  .share-orbit { display: none !important; }
+}
