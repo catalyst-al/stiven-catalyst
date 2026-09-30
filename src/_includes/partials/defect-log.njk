@@ -2,27 +2,10 @@
 {%- set t = cfg.text -%}
 <section class="shell tool-layout dl-setup">
   <div class="tool-panel" data-defect-log>
-    <fieldset class="dl-box">
-      <legend class="kicker">1 · {{ "Period" | t(lang) }}</legend>
-      <div class="dl-grid">
-        <div class="field dl-wide">
-          <label for="dl-period">{{ "Period" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
-          <input id="dl-period" name="period" placeholder="{{ t.periodPlaceholder }}" autocomplete="off" data-setting>
-        </div>
-        <div class="field">
-          <label for="dl-volume">{{ t.volumeLabel }}</label>
-          <input id="dl-volume" name="volume" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.volumePlaceholder }}" data-setting>
-        </div>
-        <div class="field">
-          <label for="dl-target">{{ t.targetLabel }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
-          <input id="dl-target" name="target" type="number" min="0" step="0.01" inputmode="decimal" placeholder="{{ t.targetPlaceholder }}" data-setting>
-        </div>
-      </div>
-    </fieldset>
 
     <form class="dl-box" data-entry>
       <fieldset>
-        <legend class="kicker">2 · {{ t.entryLegend }}</legend>
+        <legend class="kicker">1 · {{ t.entryLegend }}</legend>
         <div class="dl-grid">
           <div class="field">
             <label for="dl-date">{{ "Date" | t(lang) }}</label>
@@ -71,11 +54,32 @@
       </div>
     </details>
 
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Period" | t(lang) }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "dl" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field dl-wide">
+          <label for="dl-period">{{ "Period" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="dl-period" name="period" placeholder="{{ t.periodPlaceholder }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="dl-volume">{{ t.volumeLabel }}</label>
+          <input id="dl-volume" name="volume" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.volumePlaceholder }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="dl-target">{{ t.targetLabel }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="dl-target" name="target" type="number" min="0" step="0.01" inputmode="decimal" placeholder="{{ t.targetPlaceholder }}" data-setting>
+        </div>
+      </div>
+    </fieldset>
+
     <div class="dl-box">
       <div class="dl-log-head">
         <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
         <p class="form-note" data-log-count></p>
       </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
       <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
         <table class="dl-table">
           <thead>

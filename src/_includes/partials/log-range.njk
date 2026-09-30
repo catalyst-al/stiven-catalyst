@@ -1,0 +1,21 @@
+{#- Which days of a log the results cover (ToolKit.rangeControl). Needs `prefix` for the input ids. -#}
+<div class="field dl-wide dl-range" data-range>
+  <span class="dl-range-label" id="{{ prefix }}-range-label">{{ "Show results for" | t(lang) }}</span>
+  <div class="dl-range-presets" role="group" aria-labelledby="{{ prefix }}-range-label">
+    <button type="button" data-preset="today" aria-pressed="false">{{ "Today" | t(lang) }}</button>
+    <button type="button" data-preset="week" aria-pressed="false">{{ "Last 7 days" | t(lang) }}</button>
+    <button type="button" data-preset="month" aria-pressed="false">{{ "Last 30 days" | t(lang) }}</button>
+    <button type="button" data-preset="all" aria-pressed="false">{{ "All" | t(lang) }}</button>
+  </div>
+  <div class="dl-range-dates">
+    <div class="field">
+      <label for="{{ prefix }}-from">{{ "From" | t(lang) }}</label>
+      <input id="{{ prefix }}-from" name="from" type="date">
+    </div>
+    <div class="field">
+      <label for="{{ prefix }}-to">{{ "To" | t(lang) }}</label>
+      <input id="{{ prefix }}-to" name="to" type="date">
+    </div>
+  </div>
+  <p class="form-note dl-span" data-span aria-live="polite"></p>
+</div>

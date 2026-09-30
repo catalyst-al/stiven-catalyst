@@ -2,35 +2,10 @@
 {%- set t = cfg.text -%}
 <section class="shell tool-layout dl-setup">
   <div class="tool-panel" data-delay-analyzer>
-    <fieldset class="dl-box">
-      <legend class="kicker">1 · {{ "Period" | t(lang) }}</legend>
-      <div class="dl-grid">
-        <div class="field dl-wide">
-          <label for="da-period">{{ "Period" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
-          <input id="da-period" name="period" placeholder="{{ 'e.g. Week 38, last mile' | t(lang) }}" autocomplete="off" data-setting>
-        </div>
-        <div class="field">
-          <label for="da-dep-grace">{{ "Late departure after (min)" | t(lang) }}</label>
-          <input id="da-dep-grace" name="departureGrace" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 10' | t(lang) }}" data-setting>
-        </div>
-        <div class="field">
-          <label for="da-arr-grace">{{ "Late arrival after (min)" | t(lang) }}</label>
-          <input id="da-arr-grace" name="arrivalGrace" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 15' | t(lang) }}" data-setting>
-        </div>
-        <div class="field">
-          <label for="da-target">{{ "Target on-time %" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
-          <input id="da-target" name="target" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="{{ 'e.g. 95' | t(lang) }}" data-setting>
-        </div>
-        <div class="field dl-wide">
-          <label for="da-routes">{{ "Routes in the period" | t(lang) }} <span class="optional">{{ "only if you log late routes only" | t(lang) }}</span></label>
-          <input id="da-routes" name="routes" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'Empty if every route is logged' | t(lang) }}" data-setting>
-        </div>
-      </div>
-    </fieldset>
 
     <form class="dl-box" data-entry>
       <fieldset>
-        <legend class="kicker">2 · {{ "Log a route" | t(lang) }}</legend>
+        <legend class="kicker">1 · {{ "Log a route" | t(lang) }}</legend>
         <div class="dl-grid">
           <div class="field">
             <label for="da-date">{{ "Date" | t(lang) }}</label>
@@ -57,6 +32,14 @@
             <input id="da-act-dep" name="actDep" type="time" required>
           </div>
           <div class="field">
+            <label for="da-plan-arr">{{ "Planned arrival" | t(lang) }}</label>
+            <input id="da-plan-arr" name="planArr" type="time" required>
+          </div>
+          <div class="field">
+            <label for="da-act-arr">{{ "Actual arrival" | t(lang) }}</label>
+            <input id="da-act-arr" name="actArr" type="time" required>
+          </div>
+          <div class="field">
             <label for="da-reason">{{ "Reason if late" | t(lang) }}</label>
             <select id="da-reason" name="reason">
               <option value="">{{ "On time / not known" | t(lang) }}</option>
@@ -73,18 +56,11 @@
             </select>
           </div>
           <div class="field">
-            <label for="da-plan-arr">{{ "Planned arrival" | t(lang) }}</label>
-            <input id="da-plan-arr" name="planArr" type="time" required>
-          </div>
-          <div class="field">
-            <label for="da-act-arr">{{ "Actual arrival" | t(lang) }}</label>
-            <input id="da-act-arr" name="actArr" type="time" required>
-          </div>
-          <div class="field">
             <label for="da-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
             <input id="da-note" name="note" placeholder="{{ 'e.g. Waited for wave 3' | t(lang) }}" autocomplete="off">
           </div>
         </div>
+        <p class="form-note da-preview" data-preview aria-live="polite"></p>
         <div class="tool-actions">
           <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
           <p class="form-note" data-entry-status aria-live="polite"></p>
@@ -105,11 +81,40 @@
       </div>
     </details>
 
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Period" | t(lang) }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "da" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field dl-wide">
+          <label for="da-period">{{ "Period" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="da-period" name="period" placeholder="{{ 'e.g. Week 38, last mile' | t(lang) }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="da-dep-grace">{{ "Late departure after (min)" | t(lang) }}</label>
+          <input id="da-dep-grace" name="departureGrace" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 10' | t(lang) }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="da-arr-grace">{{ "Late arrival after (min)" | t(lang) }}</label>
+          <input id="da-arr-grace" name="arrivalGrace" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 15' | t(lang) }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="da-target">{{ "Target on-time %" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="da-target" name="target" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="{{ 'e.g. 95' | t(lang) }}" data-setting>
+        </div>
+        <div class="field dl-wide">
+          <label for="da-routes">{{ "Routes in the period" | t(lang) }} <span class="optional">{{ "only if you log late routes only" | t(lang) }}</span></label>
+          <input id="da-routes" name="routes" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'Empty if every route is logged' | t(lang) }}" data-setting>
+        </div>
+      </div>
+    </fieldset>
+
     <div class="dl-box">
       <div class="dl-log-head">
         <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
         <p class="form-note" data-log-count></p>
       </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
       <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
         <table class="dl-table">
           <thead>

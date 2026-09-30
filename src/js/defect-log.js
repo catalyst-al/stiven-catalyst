@@ -10,7 +10,8 @@
     tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    inRange, dateSpan, spanText, rangeControl,
+    panel, stat, barList, focusCard, resultActions, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -29,11 +30,14 @@
   const logEmpty = root.querySelector("[data-log-empty]");
   const logCount = root.querySelector("[data-log-count]");
   const entryStatus = root.querySelector("[data-entry-status]");
+  const logStatus = root.querySelector("[data-log-status]");
   const importStatus = root.querySelector("[data-import-status]");
   const pasteArea = root.querySelector("#dl-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", volume: "", target: "", rows: [] });
+  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", rows: [] });
+  state.from = parseDate(state.from);
+  state.to = parseDate(state.to);
   state.rows = state.rows.filter(isObject).map((row) => {
     const units = Math.round(Number(row.units));
     const cost = Number(row.cost);
@@ -94,8 +98,17 @@
   };
   const bySize = (map) => [...map.values()].sort((a, b) => b.value - a.value || a.key.localeCompare(b.key));
 
+  // The rows of the chosen period; the volume and target belong to the same days.
+  const periodRows = () => inRange(state.rows, state.from, state.to);
+  // "Week 38" when the period has a name, else the days the rows cover.
+  const periodName = (rows) => {
+    if (state.period) return state.period;
+    const span = dateSpan(rows);
+    return span ? spanText(span) : "";
+  };
+
   const analyse = () => {
-    const rows = state.rows;
+    const rows = periodRows();
     const total = rows.reduce((sum, row) => sum + row.units, 0);
     const costed = rows.filter((row) => row.cost != null);
     const cost = costed.reduce((sum, row) => sum + row.cost, 0);
@@ -225,7 +238,8 @@
 
   const problemText = (result) => {
     const stage = result.topStage;
-    const when = state.period ? `${state.period}: ` : "";
+    const name = periodName(result.rows);
+    const when = name ? `${name}: ` : "";
     const why = result.topStageCause ? tx(", mostly {cause}", { cause: lower(result.topStageCause.key) }) : "";
     return `${when}${plural(stage.value, t.one, t.many)} ${t.stagePhrase} ${stage.key} (${tx("{pct} of all {noun}", { pct: pct(stage.value / result.total, 0), noun: t.allNoun })})${why}.`;
   };
@@ -234,7 +248,8 @@
 
   const summaryText = (result) => {
     const lines = [`${t.tool} | Stiven Catalyst`];
-    if (state.period) lines.push(`${tx("Period")}: ${state.period}`);
+    const span = dateSpan(result.rows);
+    if (state.period || span) lines.push(`${tx("Period")}: ${[state.period, span && spanText(span)].filter(Boolean).join(" · ")}`);
     lines.push("", `${capital(t.many)}: ${tx("{n} in {entries}", { n: int.format(result.total), entries: entries(result.rows.length) })}`);
     if (result.volume) {
       lines.push(`${t.volumeLabel}: ${int.format(result.volume)}`);
@@ -266,10 +281,17 @@
     results.replaceChildren();
     results.hidden = !state.rows.length;
     if (!state.rows.length) return;
+    if (!periodRows().length) {
+      const card = el("article", "result-card dl-focus");
+      card.append(el("p", "result-label", tx("Result")), el("p", "dl-focus-lede", tx("No entries in this period. Choose another period or All.")));
+      results.append(card);
+      return;
+    }
     const result = analyse();
 
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", state.period ? `${tx("Result")} · ${state.period}` : tx("Result")));
+    const name = periodName(result.rows);
+    head.append(el("p", "kicker", name ? `${tx("Result")} · ${name}` : tx("Result")));
     const title = el("h2");
     if (result.rate !== null) {
       title.append(`${t.rateLabel} `, el("span", null, pct(result.rate, 2)));
@@ -339,14 +361,16 @@
     template: KEY.includes("damage") ? "damage" : "picking-errors",
     headers: [tx("Date"), fields.find((f) => f.name === "shift")?.label || "Shift", fields.find((f) => f.name === "stage")?.label || "Stage",
       fields.find((f) => f.name === "type")?.label || "Type", fields.find((f) => f.name === "cause")?.label || "Cause", tx("Units"), tx("Cost (€)")],
-    rows: state.rows.map((row) => [row.date, row.shift, row.stage, row.type, row.cause, String(row.units), row.cost == null ? "" : String(row.cost)]),
+    rows: periodRows().map((row) => [row.date, row.shift, row.stage, row.type, row.cause, String(row.units), row.cost == null ? "" : String(row.cost)]),
     map: { category: 4, count: 5, value: 6, date: 0, filter: 2 },
     measure: "count",
     valueLabel: "€",
   });
 
+  let syncRange = () => {};
   const render = () => {
     renderLog();
+    syncRange();
     renderResults();
   };
 
@@ -408,10 +432,16 @@
   logBody.addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove]");
     if (!button) return;
-    state.rows.splice(Number(button.dataset.remove), 1);
+    const index = Number(button.dataset.remove);
+    const [removed] = state.rows.splice(index, 1);
     save();
     render();
     (logBody.querySelector("[data-remove]") || entry.elements.date).focus();
+    undoNote(logStatus, tx("Removed {count} at {stage}.", { count: plural(removed.units, t.one, t.many), stage: removed.stage }), () => {
+      state.rows.splice(Math.min(index, state.rows.length), 0, removed);
+      save();
+      render();
+    });
   });
 
   root.querySelector("[data-example]").addEventListener("click", () => {
@@ -419,6 +449,8 @@
     state.period = example.period;
     state.volume = String(example.volume);
     state.target = String(example.target);
+    state.from = "";
+    state.to = "";
     state.rows = importRows(example.rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
     root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
     save();
@@ -442,6 +474,10 @@
     ]);
   });
 
+  syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, () => {
+    save();
+    render();
+  });
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
   render();
 })();

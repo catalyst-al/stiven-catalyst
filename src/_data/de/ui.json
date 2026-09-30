@@ -1508,5 +1508,22 @@
   "Roles": "Rollen",
   "Open the planet: routine, learning, next orbit": "Planet öffnen: Routine, Lernen, nächste Umlaufbahn",
   "Open the planet": "Planet öffnen",
-  "{n} free tools, one planet per role": "{n} kostenlose Tools, ein Planet pro Rolle"
+  "{n} free tools, one planet per role": "{n} kostenlose Tools, ein Planet pro Rolle",
+  "No entries in this period. Choose another period or All.": "Keine Einträge in diesem Zeitraum. Wählen Sie einen anderen Zeitraum oder Alle.",
+  "All {n} entries": "Alle {n} Einträge",
+  "{n} of {total} entries": "{n} von {total} Einträgen",
+  "Any volume you enter must cover the same days.": "Eingegebene Mengen müssen dieselben Tage abdecken.",
+  "Undo": "Rückgängig",
+  "Today": "Heute",
+  "Last 7 days": "Letzte 7 Tage",
+  "Last 30 days": "Letzte 30 Tage",
+  "Removed {count} at {stage}.": "{count} bei {stage} entfernt.",
+  "Only some routes of the period are in the log, so hours and shifts show counts, not shares.": "Nur ein Teil der Touren des Zeitraums ist erfasst, daher zeigen Stunden und Schichten Anzahlen, keine Anteile.",
+  "Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.": "Nur ein Teil der Touren des Zeitraums ist erfasst, daher werden verspätete Touren gezählt. Erfassen Sie alle Touren, um den Anteil der Verspätungen zu sehen.",
+  "{min} late in total": "{min} Verspätung insgesamt",
+  "Departure {n} min.": "Abfahrt {n} Min.",
+  "Arrival {n} min: late ({side}). Choose the reason.": "Ankunft {n} Min.: verspätet ({side}). Wählen Sie den Grund.",
+  "Arrival {n} min: on time.": "Ankunft {n} Min.: pünktlich.",
+  "Removed route {route}.": "Tour {route} entfernt.",
+  "Show results for": "Auswerten für"
 }

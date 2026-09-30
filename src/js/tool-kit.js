@@ -93,7 +93,14 @@ window.ToolKit = (() => {
   const capital = (text) => text.charAt(0).toUpperCase() + text.slice(1);
   // Mid-sentence lower case, except in German, where nouns keep their capital.
   const lower = (text) => (LANG === "de" ? text : text.toLowerCase());
-  const today = () => new Date().toISOString().slice(0, 10);
+  // Dates on this device's clock: a night shift logging after midnight gets today's date, not yesterday's (UTC).
+  const localIso = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  const today = () => localIso(new Date());
+  const addDays = (iso, days) => {
+    const date = new Date(`${iso}T00:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + days);
+    return date.toISOString().slice(0, 10);
+  };
 
   // Parsing, for forms and for rows pasted from a spreadsheet.
   const parseNumber = (value) => {
@@ -192,9 +199,49 @@ window.ToolKit = (() => {
     const r = q * q;
     return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
   };
-  // Short-term sigma level with the usual 1.5 shift; 6 when there are no defects.
-  const sigma = (rate) => (rate === 0 ? 6 : normInv(1 - rate) + 1.5);
-  const sigmaText = (rate) => (rate === 0 ? "6+" : num(sigma(rate), 2));
+  // Short-term sigma level with the usual 1.5 shift; 6 when there are no defects, and never below 0.
+  const sigma = (rate) => (rate <= 0 ? 6 : rate >= 1 ? 0 : Math.max(0, normInv(1 - rate) + 1.5));
+  const sigmaText = (rate) => (rate <= 0 ? "6+" : num(sigma(rate), 2));
+
+  // The period a log is analysed over. An empty end is open; with no range every row counts,
+  // with a range only rows dated inside it. A rate needs its volume for the same days.
+  const inRange = (rows, from, to) => (!from && !to ? rows : rows.filter((row) => row.date && (!from || row.date >= from) && (!to || row.date <= to)));
+  const dateSpan = (rows) => {
+    const dates = rows.map((row) => row.date).filter(Boolean).sort();
+    return dates.length ? { from: dates[0], to: dates.at(-1), days: new Set(dates).size } : null;
+  };
+  const RANGE_PRESETS = { today: 0, week: 6, month: 29 };
+  const rangePreset = (name) => (name in RANGE_PRESETS ? { from: addDays(today(), -RANGE_PRESETS[name]), to: today() } : { from: "", to: "" });
+  const spanText = (span) => (span.from === span.to ? showDate(span.from) : `${showDate(span.from)} – ${showDate(span.to)}`);
+  // The range buttons and dates above a log (partials/log-range.njk). onChange runs after state.from/to change.
+  const rangeControl = (box, state, rows, onChange) => {
+    if (!box) return () => {};
+    const inputs = [...box.querySelectorAll("input[type=date]")];
+    const buttons = [...box.querySelectorAll("[data-preset]")];
+    const note = box.querySelector("[data-span]");
+    const sync = () => {
+      inputs.forEach((input) => { input.value = state[input.name] || ""; });
+      buttons.forEach((button) => {
+        const preset = rangePreset(button.dataset.preset);
+        button.setAttribute("aria-pressed", String(preset.from === (state.from || "") && preset.to === (state.to || "")));
+      });
+      const all = rows();
+      const used = inRange(all, state.from, state.to);
+      const span = dateSpan(used);
+      note.textContent = !all.length ? ""
+        : !used.length ? tx("No entries in this period. Choose another period or All.")
+        : `${tx(used.length === all.length ? "All {n} entries" : "{n} of {total} entries", { n: int.format(used.length), total: int.format(all.length) })}${span ? `, ${spanText(span)} (${plural(span.days, tx("day"), tx("days"))})` : ""}. ${tx("Any volume you enter must cover the same days.")}`;
+    };
+    buttons.forEach((button) => button.addEventListener("click", () => {
+      Object.assign(state, rangePreset(button.dataset.preset));
+      onChange();
+    }));
+    inputs.forEach((input) => input.addEventListener("change", () => {
+      state[input.name] = parseDate(input.value);
+      onChange();
+    }));
+    return sync;
+  };
 
   // Result pieces.
   const panel = (title, note) => {
@@ -355,6 +402,19 @@ window.ToolKit = (() => {
     clearTimeout(node.timer);
     node.timer = setTimeout(() => { node.textContent = ""; }, 2600);
   };
+  // A removed row can be put back for a few seconds: one tap on a phone is easy to miss.
+  const undoNote = (node, message, undo) => {
+    const button = el("button", "dl-undo", tx("Undo"));
+    button.type = "button";
+    button.addEventListener("click", () => {
+      clearTimeout(node.timer);
+      node.textContent = "";
+      undo();
+    });
+    node.replaceChildren(`${message} `, button);
+    clearTimeout(node.timer);
+    node.timer = setTimeout(() => { node.textContent = ""; }, 8000);
+  };
 
   // German and Albanian Excel expect semicolons and a decimal comma.
   const downloadCsv = (name, rows) => {
@@ -409,8 +469,9 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
+    read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    panel, stat, barList, focusCard, resultActions, copy, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    inRange, dateSpan, rangePreset, spanText, rangeControl,
+    panel, stat, barList, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

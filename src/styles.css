@@ -1674,6 +1674,50 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
   align-items: end;
 }
 .dl-grid .dl-wide { grid-column: 1 / -1; }
+/* Which days the results cover: quick buttons, or two dates. */
+.dl-range { display: grid; gap: 10px; }
+.dl-range-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.dl-range-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.dl-range-presets button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.dl-range-presets button:hover { border-color: var(--accent-fill, var(--blue)); }
+.dl-range-presets button[aria-pressed="true"] {
+  border-color: var(--accent-fill, var(--blue));
+  background: color-mix(in srgb, var(--accent-fill, var(--blue)) 18%, transparent);
+}
+.dl-range-dates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.dl-span:empty, .dl-log-status:empty, .da-preview:empty { display: none; }
+.dl-span, .da-preview { margin: 0; }
+.da-preview { margin-top: 14px; font-weight: 700; }
+.dl-log-status { margin: 0 0 12px; }
+.dl-undo {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
 .field select {
   appearance: none;
   padding-right: 40px;
