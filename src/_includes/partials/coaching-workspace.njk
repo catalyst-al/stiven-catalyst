@@ -1,0 +1,14 @@
+{# Coaching uses the role's existing visual language. Its state is shared across languages. #}
+<section class="shell role-ring coaching" id="coaching" data-coaching data-role="{{ family.id }}" aria-labelledby="coaching-title">
+  <header class="role-ring-head">
+    <p class="kicker">{{ coaching.labels.coaching[lang or 'en'] }}</p>
+    <h2 id="coaching-title">{{ coaching.roles[family.id].aim[lang or 'en'] }}</h2>
+    <p class="form-note">{{ coaching.labels.privacy[lang or 'en'] }}</p>
+  </header>
+  <div data-coaching-app></div>
+  <noscript><p>{{ coaching.labels.nojs[lang or 'en'] }}</p></noscript>
+  <p class="form-note" data-coaching-status role="status" aria-live="polite"></p>
+</section>
+<script type="application/json" id="coaching-data">{{ coaching | scriptJson | safe }}</script>
+<script src="{{ '/js/coaching-core.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/coaching-workspace.js' | assetUrl }}" defer></script>

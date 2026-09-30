@@ -50,6 +50,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
   <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
+{%- if toolFamily %}
+  <link rel="stylesheet" href="{{ '/coaching.css' | assetUrl }}">
+{%- endif %}
 </head>
 <body{% if toolFamily %} class="in-family" data-family="{{ toolFamily.id }}" style="--family: {{ toolFamily.color }}"{% endif %}>
 <a class="skip-link" href="#main">{{ "Skip to content" | t(lang) }}</a>
@@ -85,6 +88,7 @@
 {%- endif %}
 {{ content | safe }}
 {%- if toolFamily and not rolePage %}
+{% include "partials/coaching-bridge.njk" %}
 {% include "partials/family-more.njk" %}
 {%- endif %}
 </main>

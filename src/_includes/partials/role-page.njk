@@ -11,6 +11,7 @@
   <h1>{{ family.role | t(lang) }}</h1>
   <p class="lede">{{ family.line | t(lang) }}</p>
   <nav class="role-rings" aria-label="{{ 'On this planet' | t(lang) }}">
+    <a href="#coaching"><b>00</b>{{ coaching.labels.coaching[lang or 'en'] }}</a>
     <a href="#use"><b>01</b>{{ "Use" | t(lang) }}</a>
     <a href="#routine"><b>02</b>{{ "Routine" | t(lang) }}</a>
     {%- if modules.length or essays.length %}
@@ -19,6 +20,8 @@
     <a href="#grow"><b>{{ "04" if modules.length or essays.length else "03" }}</b>{{ "Grow" | t(lang) }}</a>
   </nav>
 </section>
+
+{% include "partials/coaching-workspace.njk" %}
 
 <section class="shell role-ring" id="use" aria-labelledby="use-title">
   <header class="role-ring-head">
