@@ -1454,5 +1454,7 @@
   "{n} tools": "{n} Tools",
   "1 tool": "1 Tool",
   "More tools": "Weitere Tools",
-  "See all tools": "Alle Tools ansehen"
+  "See all tools": "Alle Tools ansehen",
+  "More from {name}": "Mehr aus {name}",
+  "All tool families": "Alle Tool-Familien"
 }

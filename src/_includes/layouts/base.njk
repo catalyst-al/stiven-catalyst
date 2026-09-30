@@ -12,6 +12,7 @@
   ["/about.html" | local(lang), "About" | t(lang)]
 ] -%}
 {%- set hasLegal = legal.name and legal.city -%}
+{%- set toolFamily = page.url | familyOf(families) -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">
 <head>
@@ -45,7 +46,7 @@
   <script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
   <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
 </head>
-<body>
+<body{% if toolFamily %} class="in-family" data-family="{{ toolFamily.id }}" style="--family: {{ toolFamily.color }}"{% endif %}>
 <a class="skip-link" href="#main">{{ "Skip to content" | t(lang) }}</a>
 
 <header class="site-header">
@@ -74,7 +75,13 @@
 </header>
 
 <main id="main">
+{%- if toolFamily %}
+{% include "partials/family-stage.njk" %}
+{%- endif %}
 {{ content | safe }}
+{%- if toolFamily %}
+{% include "partials/family-more.njk" %}
+{%- endif %}
 </main>
 
 <footer class="site-footer">
@@ -99,5 +106,8 @@
 <script type="application/json" id="ui-strings">{{ lang | uiStrings | safe }}</script>
 {%- endif %}
 <script src="{{ '/script.js' | assetUrl }}"></script>
+{%- if toolFamily %}
+<script src="{{ '/js/family-sky.js' | assetUrl }}" defer></script>
+{%- endif %}
 </body>
 </html>

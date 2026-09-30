@@ -1,0 +1,61 @@
+{#- On a tool page: the drawn background of the tool's family (familySky.js) and the family badge above the title. Needs toolFamily. -#}
+{%- set sky = familySky %}
+<div class="family-sky sky-{{ toolFamily.id }}" data-family-sky aria-hidden="true">
+{%- if toolFamily.id == "lumen" %}
+  <span class="lumen-cable"></span>
+  <span class="lumen-halo"></span>
+  <span class="lumen-bulb"></span>
+  <span class="lumen-beam"><span class="lumen-cone"></span><span class="lumen-core"></span></span>
+  <span class="lumen-pool"></span>
+  <span class="lumen-dust">
+    {%- for p in sky.dust %}<i style="left: {{ p.x }}%; top: {{ p.y }}%; --s: {{ p.size }}px; --dx: {{ p.drift }}px; --t: {{ p.time }}s; --d: {{ p.delay }}s"></i>{% endfor -%}
+  </span>
+{%- elif toolFamily.id == "pulse" %}
+  <span class="pulse-grid"></span>
+  <svg class="pulse-ecg" viewBox="0 0 1600 180" preserveAspectRatio="xMidYMid slice">
+    <path class="pulse-base" d="{{ sky.ecg }}"/>
+    <path class="pulse-trace" d="{{ sky.ecg }}" pathLength="1000"/>
+  </svg>
+{%- elif toolFamily.id == "zenith" %}
+  <svg class="zenith-map" viewBox="0 0 900 900">
+    {%- for c in sky.contours %}<path d="{{ c.d }}"{% if c.major %} class="is-major"{% endif %}/>{% endfor -%}
+  </svg>
+  <span class="zenith-radar" style="--sweep: {{ sky.sweep }}s">
+    <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="33"/><circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="99"/><path d="M100 0V200M0 100H200"/></svg>
+    <span class="zenith-sweep"></span>
+    {%- for b in sky.blips %}<i style="left: {{ b.x }}%; top: {{ b.y }}%; animation-delay: {{ b.delay }}s"></i>{% endfor -%}
+  </span>
+{%- elif toolFamily.id == "atlas" %}
+  <span class="atlas-stars">
+    {%- for s in sky.stars %}<i style="left: {{ s.x }}%; top: {{ s.y }}%; --s: {{ s.size }}px; --t: {{ s.time }}s; --d: {{ s.delay }}s"></i>{% endfor -%}
+  </span>
+  <svg class="atlas-map" viewBox="0 0 1000 600" preserveAspectRatio="xMaxYMid meet">
+    <g class="atlas-compass">
+      <circle cx="912" cy="330" r="74"/><circle cx="912" cy="330" r="56" class="is-dashed"/>
+      <path d="M912 260 L921 321 L982 330 L921 339 L912 400 L903 339 L842 330 L903 321 Z"/>
+      <path d="M912 286 L917 325 L956 330 L917 335 L912 374 L907 335 L868 330 L907 325 Z" class="is-inner"/>
+      <text x="912" y="248" text-anchor="middle">N</text>
+      <path class="atlas-needle" d="M912 330 L952 290 L916 334 Z"/>
+    </g>
+    <polyline class="atlas-line" points="{{ sky.line }}" pathLength="1"/>
+    {%- for p in sky.path %}
+    <g class="atlas-star{% if loop.last %} is-goal{% endif %}" style="animation-delay: {{ 0.4 + loop.index0 * 0.32 }}s">
+      <circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ 14 if loop.last else 9 }}" class="halo"/>
+      <circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ 4.5 if loop.last else 3.2 }}"/>
+      {%- if loop.last %}<path d="M{{ p.x }} {{ p.y - 26 }} L{{ p.x + 3 }} {{ p.y - 3 }} L{{ p.x + 26 }} {{ p.y }} L{{ p.x + 3 }} {{ p.y + 3 }} L{{ p.x }} {{ p.y + 26 }} L{{ p.x - 3 }} {{ p.y + 3 }} L{{ p.x - 26 }} {{ p.y }} L{{ p.x - 3 }} {{ p.y - 3 }} Z"/>{% endif %}
+    </g>
+    {%- endfor %}
+  </svg>
+{%- elif toolFamily.id == "academy" %}
+  <span class="atlas-stars academy-stars">
+    {%- for s in sky.stars %}{% if loop.index0 % 2 == 0 %}<i style="left: {{ s.x }}%; top: {{ s.y }}%; --s: {{ s.size }}px; --t: {{ s.time }}s; --d: {{ s.delay }}s"></i>{% endif %}{% endfor -%}
+  </span>
+  <span class="academy-arc"></span>
+  {%- for m in dmaic.modules %}{% set moon = sky.moons[loop.index0] %}{% if moon %}
+  <span class="academy-moon{% if loop.first %} is-current{% endif %}" data-moon="{{ m.id }}" style="--i: {{ loop.index0 }}; left: {{ moon.x }}%; --drop: {{ moon.drop }}px; --shade: {{ moon.shade }}px"><b>{{ m.letter }}</b></span>
+  {%- endif %}{% endfor %}
+{%- endif %}
+</div>
+<div class="shell family-badge-row">
+  <a class="family-badge" href="{{ '/tools.html' | local(lang) }}#{{ toolFamily.id }}"><span aria-hidden="true"></span>{{ toolFamily.name }}<small>{{ toolFamily.role | t(lang) }}</small></a>
+</div>
