@@ -1508,5 +1508,22 @@
   "Roles": "Rolet",
   "Open the planet: routine, learning, next orbit": "Hapni planetin: rutina, mësimi, orbita e radhës",
   "Open the planet": "Hapni planetin",
-  "{n} free tools, one planet per role": "{n} mjete falas, një planet për çdo rol"
+  "{n} free tools, one planet per role": "{n} mjete falas, një planet për çdo rol",
+  "No entries in this period. Choose another period or All.": "Asnjë regjistrim në këtë periudhë. Zgjidhni një periudhë tjetër ose Të gjitha.",
+  "All {n} entries": "Të gjitha {n} regjistrimet",
+  "{n} of {total} entries": "{n} nga {total} regjistrime",
+  "Any volume you enter must cover the same days.": "Çdo vëllim që shkruani duhet të jetë për po këto ditë.",
+  "Undo": "Kthe mbrapsht",
+  "Today": "Sot",
+  "Last 7 days": "7 ditët e fundit",
+  "Last 30 days": "30 ditët e fundit",
+  "Removed {count} at {stage}.": "U hoqën {count} te {stage}.",
+  "Only some routes of the period are in the log, so hours and shifts show counts, not shares.": "Në regjistër janë vetëm disa linja të periudhës, prandaj orët dhe turnet tregojnë numra, jo përqindje.",
+  "Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.": "Në regjistër janë vetëm disa linja të periudhës, prandaj këtu numërohen linjat me vonesë. Regjistroni çdo linjë për të parë përqindjen me vonesë.",
+  "{min} late in total": "{min} vonesë gjithsej",
+  "Departure {n} min.": "Nisja {n} min.",
+  "Arrival {n} min: late ({side}). Choose the reason.": "Mbërritja {n} min: me vonesë ({side}). Zgjidhni arsyen.",
+  "Arrival {n} min: on time.": "Mbërritja {n} min: në kohë.",
+  "Removed route {route}.": "U hoq linja {route}.",
+  "Show results for": "Shfaq rezultatet për"
 }

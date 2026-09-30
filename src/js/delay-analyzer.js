@@ -1,4 +1,30 @@
 (() => {
+  // The arithmetic of a late route, without the page (tests/pulse-tools.test.cjs uses it too).
+  // dep and arr are minutes after plan (null when a time is missing). A route is late when it
+  // arrives more than arrGrace minutes after plan. It "left on time" within depGrace, and then all
+  // of its delay grew on the road; otherwise the minutes it left late (up to its arrival delay)
+  // began at the dock.
+  const classify = (dep, arr, depGrace, arrGrace) => {
+    if (!(arr > arrGrace)) return { late: false, dock: null, side: null };
+    if (dep === null) return { late: true, dock: null, side: "Not known" };
+    if (dep <= depGrace) return { late: true, dock: 0, side: "Road" };
+    const dock = Math.min(dep, arr);
+    return { late: true, dock, side: dock >= arr - dock ? "Dock" : "Dock and road" };
+  };
+  // "How late" bands start just past the arrival grace, so no band can only ever be empty.
+  const delayBands = (arrGrace) => {
+    const edges = [15, 30, 60, 120].filter((edge) => edge > arrGrace);
+    const bands = [];
+    let low = Math.floor(arrGrace) + 1;
+    edges.forEach((edge) => {
+      bands.push([low, edge]);
+      low = edge + 1;
+    });
+    bands.push([low, Infinity]);
+    return bands;
+  };
+  window.DelayMath = { classify, delayBands };
+
   const root = document.querySelector("[data-delay-analyzer]");
   const dataEl = document.getElementById("delay-analyzer-data");
   if (!root || !dataEl || !window.ToolKit) return;
@@ -7,7 +33,8 @@
     tx, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
-    panel, stat, barList, focusCard, resultActions, flash, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    inRange, dateSpan, spanText, rangeControl,
+    panel, stat, barList, focusCard, resultActions, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -25,11 +52,15 @@
   const logEmpty = root.querySelector("[data-log-empty]");
   const logCount = root.querySelector("[data-log-count]");
   const entryStatus = root.querySelector("[data-entry-status]");
+  const logStatus = root.querySelector("[data-log-status]");
+  const preview = root.querySelector("[data-preview]");
   const importStatus = root.querySelector("[data-import-status]");
   const pasteArea = root.querySelector("#da-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", rows: [] });
+  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [] });
+  state.from = parseDate(state.from);
+  state.to = parseDate(state.to);
   const save = () => write(KEY, state);
 
   // Times: 07:45, 7.45, 0745, 07:45:00, or an Excel day fraction (0.3229).
@@ -104,28 +135,29 @@
     return { added, skipped };
   };
 
+  // The routes of the chosen period; "routes in the period" belongs to the same days.
+  const periodRows = () => inRange(state.rows, state.from, state.to);
+  const periodName = (rows) => {
+    if (state.period) return state.period;
+    const span = dateSpan(rows);
+    return span ? spanText(span) : "";
+  };
+  const graces = () => [Math.max(0, parseNumber(state.departureGrace) || 0), Math.max(0, parseNumber(state.arrivalGrace) || 0)];
+
   const analyse = () => {
-    const depGrace = Math.max(0, parseNumber(state.departureGrace) || 0);
-    const arrGrace = Math.max(0, parseNumber(state.arrivalGrace) || 0);
-    const rows = state.rows.map((row) => {
+    const [depGrace, arrGrace] = graces();
+    const rows = periodRows().map((row) => {
       const dep = diff(row.planDep, row.actDep);
       const arr = diff(row.planArr, row.actArr);
-      const late = arr > arrGrace;
-      let dock = null;
-      let side = null;
-      if (late) {
-        dock = dep === null ? null : Math.min(Math.max(dep, 0), arr);
-        side = dep === null ? "Not known"
-          : dep <= depGrace ? "Road"
-          : dock >= arr - dock ? "Dock"
-          : "Dock and road";
-      }
-      return { ...row, dep, arr, late, lateDep: dep !== null && dep > depGrace, dock, side };
+      return { ...row, dep, arr, lateDep: dep !== null && dep > depGrace, ...classify(dep, arr, depGrace, arrGrace) };
     });
 
     const logged = rows.length;
     const setRoutes = Math.round(parseNumber(state.routes));
-    const total = setRoutes > logged ? setRoutes : logged;
+    // With more routes in the period than in the log, the log holds only some of them
+    // (often only the late ones): shares by hour, shift and departure would be too high.
+    const partial = setRoutes > logged;
+    const total = partial ? setRoutes : logged;
     const late = rows.filter((row) => row.late);
     const lateMinutes = late.reduce((sum, row) => sum + row.arr, 0);
     const split = late.filter((row) => row.dock !== null);
@@ -175,7 +207,7 @@
       .sort((a, b) => (data.shifts.indexOf(a.key) + 1 || 99) - (data.shifts.indexOf(b.key) + 1 || 99));
     const worstHour = hours.filter((item) => item.routes >= 3 && item.late).sort((a, b) => b.value - a.value)[0];
 
-    const buckets = [[1, 15], [16, 30], [31, 60], [61, 120], [121, Infinity]].map(([low, high]) => ({
+    const buckets = delayBands(arrGrace).map(([low, high]) => ({
       key: high === Infinity ? tx("Over {n} min", { n: low - 1 }) : `${low}–${high} min`,
       value: late.filter((row) => row.arr >= low && row.arr <= high).length,
     }));
@@ -191,13 +223,14 @@
       rows,
       logged,
       total,
+      partial,
       setRoutesIgnored: setRoutes > 0 && setRoutes < logged,
       late,
       lateMinutes,
       dockShare,
       rate,
       onTime: 1 - rate,
-      depOnTime: withDep.length ? withDep.filter((row) => !row.lateDep).length / withDep.length : null,
+      depOnTime: withDep.length && !partial ? withDep.filter((row) => !row.lateDep).length / withDep.length : null,
       target: target > 0 && target <= 1 ? target : null,
       reasons,
       sides,
@@ -215,8 +248,7 @@
 
   // The log table.
   const renderLog = () => {
-    const depGrace = Math.max(0, parseNumber(state.departureGrace) || 0);
-    const arrGrace = Math.max(0, parseNumber(state.arrivalGrace) || 0);
+    const [depGrace, arrGrace] = graces();
     const rows = state.rows;
     logBody.replaceChildren();
     rows.map((row, index) => [row, index]).reverse().slice(0, LOG_LIMIT).forEach(([row, index]) => {
@@ -256,7 +288,8 @@
   };
 
   const problemText = (result) => {
-    const when = state.period ? `${state.period}: ` : "";
+    const name = periodName(result.rows);
+    const when = name ? `${name}: ` : "";
     const why = result.topReason ? tx(", mostly {cause}", { cause: lower(result.topReason.key) }) : "";
     return `${when}${tx("{n} of {routes} late ({pct} on time)", { n: int.format(result.late.length), routes: routes(result.total), pct: pct(result.onTime, 1) })}; ${sideText(result)}${why}.`;
   };
@@ -274,7 +307,8 @@
 
   const summaryText = (result) => {
     const lines = [`${data.tool} | Stiven Catalyst`];
-    if (state.period) lines.push(`${tx("Period")}: ${state.period}`);
+    const span = dateSpan(result.rows);
+    if (state.period || span) lines.push(`${tx("Period")}: ${[state.period, span && spanText(span)].filter(Boolean).join(" · ")}`);
     lines.push(
       "",
       tx("Routes: {total} · late: {late} · on time: {pct} · sigma level: {sigma}", { total: int.format(result.total), late: int.format(result.late.length), pct: pct(result.onTime, 1), sigma: sigmaText(result.rate) }),
@@ -293,10 +327,12 @@
       lines.push("", `${tx("Pareto of reasons")}:`);
       result.reasons.forEach((item) => lines.push(`- ${item.key}: ${item.value} (${pct(item.share, 0)}, ${tx("cum.")} ${pct(item.cumulative, 0)})${item.vital ? ` [${tx("vital few")}]` : ""}`));
     }
+    const share = (item) => (result.partial ? tx("{n} late", { n: item.late }) : `${tx("{a} of {b}", { a: item.late, b: item.routes })} (${pct(item.value, 0)})`);
     lines.push("", `${tx("Late by planned departure hour")}:`);
-    result.hours.forEach((item) => lines.push(`- ${item.key}: ${tx("{a} of {b}", { a: item.late, b: item.routes })} (${pct(item.value, 0)})`));
+    result.hours.forEach((item) => lines.push(`- ${item.key}: ${share(item)}`));
     lines.push("", `${tx("Late by shift")}:`);
-    result.shifts.forEach((item) => lines.push(`- ${item.key}: ${tx("{a} of {b}", { a: item.late, b: item.routes })} (${pct(item.value, 0)})`));
+    result.shifts.forEach((item) => lines.push(`- ${item.key}: ${share(item)}`));
+    if (result.partial) lines.push(tx("Only some routes of the period are in the log, so hours and shifts show counts, not shares."));
     if (result.late.length) {
       lines.push("", `${tx("Start here")}: ${problemText(result)}`);
       const advice = reasonInfo[result.topReason?.key];
@@ -311,6 +347,12 @@
     return lines.join("\n");
   };
 
+  // With a partial log the bars count late routes; a share of only the logged routes would mislead.
+  const countBars = (items, options = {}) => barList(items.map((item) => ({ ...item, value: item.late })), {
+    ...options,
+    label: (item) => [int.format(item.late), ` ${tx("late")}`],
+    title: (item) => `${item.key}: ${lateRoutes(item.late)}${item.late ? tx(", {min} late in total", { min: minutes(item.minutes) }) : ""}`,
+  });
   const rateBars = (items, options = {}) => barList(items, {
     ...options,
     label: (item) => [tx("{a} of {b}", { a: item.late, b: item.routes }), ` ${tx("late")} · ${pct(item.value, 0)}`],
@@ -321,10 +363,17 @@
     results.replaceChildren();
     results.hidden = !state.rows.length;
     if (!state.rows.length) return;
+    if (!periodRows().length) {
+      const card = el("article", "result-card dl-focus");
+      card.append(el("p", "result-label", tx("Result")), el("p", "dl-focus-lede", tx("No entries in this period. Choose another period or All.")));
+      results.append(card);
+      return;
+    }
     const result = analyse();
 
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", state.period ? `${tx("Result")} · ${state.period}` : tx("Result")));
+    const name = periodName(result.rows);
+    head.append(el("p", "kicker", name ? `${tx("Result")} · ${name}` : tx("Result")));
     const title = el("h2");
     title.append(`${tx("On time")} `, el("span", null, pct(result.onTime, 1)));
     head.append(title);
@@ -355,7 +404,7 @@
       sides.append(barList(result.sides, {
         highlight: (item) => item.value === biggest,
         tag: tx("Most"),
-        label: (item) => [int.format(item.value), ` ${item.value === 1 ? tx("route") : tx("routes")} · ${minutes(item.minutes)}`],
+        label: (item) => [int.format(item.value), ` ${item.value === 1 ? tx("route") : tx("routes")} · ${tx("{min} late in total", { min: minutes(item.minutes) })}`],
         title: (item) => tx(SIDE_TITLES[item.id]),
       }));
       grid.append(sides);
@@ -372,13 +421,22 @@
       grid.append(pareto);
     }
 
-    const hours = panel(tx("By planned departure hour"), tx("Share of routes that arrived late, by the hour they were planned to leave."));
-    hours.append(rateBars(result.hours, { highlight: (item) => item === result.worstHour, tag: tx("Worst") }));
-    grid.append(hours);
-
-    const shifts = panel(tx("By shift"), tx("Share of each shift's routes that arrived late."));
-    shifts.append(rateBars(result.shifts));
-    grid.append(shifts);
+    if (result.partial) {
+      const onlySome = tx("Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.");
+      const hours = panel(tx("By planned departure hour"), onlySome);
+      hours.append(countBars(result.hours));
+      grid.append(hours);
+      const shifts = panel(tx("By shift"), onlySome);
+      shifts.append(countBars(result.shifts));
+      grid.append(shifts);
+    } else {
+      const hours = panel(tx("By planned departure hour"), tx("Share of routes that arrived late, by the hour they were planned to leave."));
+      hours.append(rateBars(result.hours, { highlight: (item) => item === result.worstHour, tag: tx("Worst") }));
+      grid.append(hours);
+      const shifts = panel(tx("By shift"), tx("Share of each shift's routes that arrived late."));
+      shifts.append(rateBars(result.shifts));
+      grid.append(shifts);
+    }
 
     if (result.late.length) {
       const spread = panel(tx("How late"), tx("Late routes by minutes after the planned arrival."));
@@ -421,10 +479,29 @@
     }
   };
 
+  let syncRange = () => {};
   const render = () => {
     renderLog();
+    syncRange();
     renderResults();
   };
+
+  // While a route is typed in: its delay and whether it counts as late, before it is added.
+  const showPreview = () => {
+    const form = entry.elements;
+    const [depGrace, arrGrace] = graces();
+    const dep = diff(parseTime(form.planDep.value), parseTime(form.actDep.value));
+    const arr = diff(parseTime(form.planArr.value), parseTime(form.actArr.value));
+    if (arr === null) {
+      preview.textContent = dep === null ? "" : tx("Departure {n} min.", { n: signed(dep) });
+      return;
+    }
+    const route = classify(dep, arr, depGrace, arrGrace);
+    preview.textContent = route.late
+      ? tx("Arrival {n} min: late ({side}). Choose the reason.", { n: signed(arr), side: lower(tx(route.side)) })
+      : tx("Arrival {n} min: on time.", { n: signed(arr) });
+  };
+  ["planDep", "actDep", "planArr", "actArr"].forEach((name) => entry.elements[name].addEventListener("input", showPreview));
 
   // Period settings.
   const renderSetting = renderOnPause(() => {
@@ -465,6 +542,7 @@
     // Keep date and shift: the next route is usually from the same wave.
     ["route", "planDep", "actDep", "planArr", "actArr", "note"].forEach((name) => { form[name].value = ""; });
     form.reason.value = "";
+    preview.textContent = "";
     const arr = diff(row.planArr, row.actArr);
     flash(entryStatus, tx("Added {route}: {n} min at arrival.", { route: row.route || tx("route"), n: signed(arr) }));
     form.route.focus();
@@ -486,15 +564,21 @@
   logBody.addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove]");
     if (!button) return;
-    state.rows.splice(Number(button.dataset.remove), 1);
+    const index = Number(button.dataset.remove);
+    const [removed] = state.rows.splice(index, 1);
     save();
     render();
     (logBody.querySelector("[data-remove]") || entry.elements.date).focus();
+    undoNote(logStatus, tx("Removed route {route}.", { route: removed.route || removed.planDep || removed.planArr }), () => {
+      state.rows.splice(Math.min(index, state.rows.length), 0, removed);
+      save();
+      render();
+    });
   });
 
   root.querySelector("[data-example]").addEventListener("click", () => {
     const { rows, ...settings } = data.example;
-    Object.assign(state, settings);
+    Object.assign(state, settings, { from: "", to: "" });
     state.rows = importRows(rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
     root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
     save();
@@ -519,6 +603,10 @@
     ]);
   });
 
+  syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, () => {
+    save();
+    render();
+  });
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
   render();
 })();
