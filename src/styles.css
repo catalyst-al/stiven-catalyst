@@ -4584,6 +4584,45 @@ body.in-family {
   letter-spacing: .2em;
 }
 
+/* Inside the tool, the family colour becomes the accent: labels, links, focus,
+   selected states, progress and the main buttons. Colours that carry meaning
+   (right and wrong, better and worse, priority, warnings) keep their own, and
+   the CV documents keep their themes. */
+body.in-family {
+  --signal: #4ab5f7;
+  --blue: var(--sky-ink);
+  --blue-soft: color-mix(in srgb, var(--sky-ink) 72%, #fff);
+  --accent-fill: var(--family);
+  --accent-on: #0b1015;
+}
+[data-theme="light"] body.in-family { --signal: #239ee9; }
+[data-theme="light"] body.in-family[data-family="atlas"] { --accent-fill: #56606b; --accent-on: #fff; }
+[data-theme="light"] .in-family ::selection { color: #fff; }
+
+.in-family .button-primary,
+.in-family .scale-option input:checked + span,
+.in-family .chip[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--accent-fill), color-mix(in srgb, var(--accent-fill) 72%, #fff));
+  color: var(--accent-on);
+}
+.in-family .bar-row.is-top .bar-fill,
+.in-family .dm-progress .bar-fill { background: linear-gradient(90deg, var(--accent-fill), var(--blue-soft)); }
+.in-family .dm-letter { background-image: linear-gradient(135deg, var(--sky-ink), color-mix(in srgb, var(--sky-ink) 50%, #fff)); }
+.in-family .dm-steps a.is-done .dm-step-letter { color: var(--accent-on); background: var(--accent-fill); }
+
+.in-family .dm-option.is-right { border-color: var(--signal); background: color-mix(in srgb, var(--signal) 10%, transparent); }
+.in-family .dm-feedback.is-right { border-left-color: var(--signal); }
+.in-family .sh-priority.is-medium { border-color: color-mix(in srgb, var(--signal) 60%, var(--line)); }
+.in-family .dl-tag:not(.is-warn) { border-color: color-mix(in srgb, var(--signal) 55%, var(--line)); color: var(--signal); }
+.in-family .sc-key-better { border-color: var(--signal); }
+.in-family .sc-dot.is-better { stroke: var(--signal); }
+/* Pulse is red, so a ticked item there keeps the calm signal colour instead of looking like an error. */
+[data-family="pulse"] .sh-issue > input[type="checkbox"],
+[data-family="pulse"] .dl-check-item input { accent-color: var(--signal); }
+[data-family="pulse"] .dl-check-item:has(input:checked) { border-color: color-mix(in srgb, var(--signal) 45%, var(--line)); }
+/* Atlas is silver, close to the text colour, so its text buttons are underlined. */
+[data-family="atlas"] :is(.button-ghost, .cv-jump, .ats-paste > summary) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
 /* More from the same family, at the end of a tool page. */
 .family-more { padding: 72px 0 110px; border-top: 1px solid var(--line); }
 .family-more-head {
@@ -4674,4 +4713,5 @@ body.in-family {
   .family-sky,
   .family-badge-row,
   .family-more { display: none !important; }
+  body.in-family { --blue: #0b5f9e; --blue-soft: #0b5f9e; --signal: #0b5f9e; --sky-ink: #0b5f9e; }
 }
