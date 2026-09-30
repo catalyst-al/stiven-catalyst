@@ -21,6 +21,11 @@ npm start      # http://localhost:8080/
 npm run build  # writes the site to _site/
 ```
 
+## Coaching workspace
+The four role pages now include a working coaching workspace: 13 original modules, contextual cases, workplace assignments, saved projects, action plans, evidence, before/after measurements, GROW reflections and printable project reports. The original tools can attach a visitor-written summary to the active project. Work stays in the visitor's browser, with validated backup import/export; there are no accounts or team sync. See [docs/COACHING_PLATFORM.md](docs/COACHING_PLATFORM.md) for the visitor journey, architecture, data rules and validation.
+
+Run `npm test`, `npm run build` and `node scripts/check-coaching-build.mjs` to check the coaching workflows and the generated role/tool pages in all three languages.
+
 ## Notes
 - Links in templates are written from the site root (`/styles.css`); The site lives at https://stivencatalyst.com/ (`url` in `src/_data/site.json`); Eleventy prefixes links with the path in that address, so moving the site means changing `url` there and everything follows (links, social previews, sitemap, feed).
 - Insights and Field Notes have client-side search and topic filters (`src/js/filter.js`); the filter is kept in the URL (`?topic=Operations&q=handoff`) so it can be shared. Essays show a reading time that is counted from the text unless one is typed in.

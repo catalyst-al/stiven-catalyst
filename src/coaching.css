@@ -1,0 +1,57 @@
+/* Scoped additions only. The existing homepage, planets and tool layouts stay intact. */
+.coaching[hidden] { display: none; }
+.coaching { --coaching-accent: var(--family, var(--blue)); }
+.coaching-nav, .coaching-modules, .coaching-tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
+.coaching-nav .button-secondary, .coaching-modules .button-secondary { padding: 10px 16px; font-size: .85rem; font-weight: 650; }
+.coaching [aria-current] { border-color: var(--coaching-accent); background: color-mix(in srgb, var(--coaching-accent) 12%, var(--paper)); }
+.coaching-project-picker { display: flex; align-items: end; gap: 16px; margin: 24px 0; }
+.coaching-project-picker .field { flex: 1; max-width: 560px; }
+.coaching-box { padding: 26px; margin: 18px 0; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.coaching-box h3 { font-size: clamp(1.2rem, 2.5vw, 1.7rem); margin: 0 0 16px; }
+.coaching-box h4 { margin: 26px 0 10px; font-size: 1rem; }
+.coaching-box p { max-width: 78ch; white-space: pre-line; overflow-wrap: anywhere; }
+.coaching-form { display: grid; gap: 18px; max-width: 850px; margin: 20px 0; }
+.coaching-form button[type="submit"] { justify-self: start; }
+.coaching-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.coaching summary { cursor: pointer; font-weight: 700; padding: 8px 0; }
+.coaching details > summary { color: var(--ink); }
+.coaching details[open] > summary { margin-bottom: 14px; }
+.coaching fieldset { min-width: 0; border: 0; padding: 0; margin: 20px 0; }
+.coaching legend { font-weight: 700; }
+.coaching-choice { display: flex; gap: 12px; align-items: start; padding: 12px; border: 1px solid var(--line); border-radius: 10px; margin: 10px 0; cursor: pointer; }
+.coaching-choice input { margin-top: 5px; accent-color: var(--coaching-accent); }
+.coaching input:disabled, .coaching textarea:disabled, .coaching button:disabled { opacity: .55; cursor: not-allowed; }
+.coaching-review { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 28px; }
+.coaching-list { padding: 0; margin: 18px 0; list-style: none; }
+.coaching-list li { display: flex; align-items: start; flex-wrap: wrap; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.coaching-list li > div { flex: 1; min-width: 180px; }
+.coaching-list strong { white-space: pre-line; overflow-wrap: anywhere; }
+.coaching-list p { font-size: .85rem; color: var(--muted); margin: 8px 0 0; }
+.coaching progress { width: min(100%, 420px); height: 8px; accent-color: var(--coaching-accent); }
+.coaching-tools { gap: 14px 24px; }
+.coaching-table { overflow-x: auto; }
+.coaching table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.coaching th, .coaching td { padding: 12px; text-align: start; border-bottom: 1px solid var(--line); }
+.coaching-entry { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.coaching [data-error="true"] { color: var(--red); padding: 16px; border: 1px solid var(--red); border-radius: 10px; }
+.coaching-content:focus { outline: none; }
+.coaching :focus-visible { outline: 2px solid var(--coaching-accent); outline-offset: 4px; }
+.coaching-print { display: none; }
+@media (max-width: 650px) {
+  .coaching-box { padding: 18px; }
+  .coaching-row { grid-template-columns: 1fr; }
+  .coaching-project-picker { align-items: stretch; flex-direction: column; }
+  .coaching-nav { gap: 8px; }
+  .coaching-nav .button-secondary { padding: 9px 12px; }
+}
+@media print {
+  body.coaching-printing { background: #fff; color: #111; }
+  body.coaching-printing > :not(.coaching-print) { display: none !important; }
+  body.coaching-printing .coaching-print { display: block; font: 11pt/1.5 system-ui, sans-serif; padding: 8mm; }
+  .coaching-print h1 { font-size: 22pt; }
+  .coaching-print h2 { font-size: 16pt; margin-top: 20pt; }
+  .coaching-print h3 { font-size: 12pt; }
+  .coaching-print p { white-space: pre-line; overflow-wrap: anywhere; }
+  .coaching-print section { border-top: 1px solid #ccc; }
+  .coaching-print h1, .coaching-print h2, .coaching-print h3 { break-after: avoid; }
+}

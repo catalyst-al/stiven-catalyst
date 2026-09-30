@@ -22,7 +22,7 @@ export default function (eleventyConfig) {
   // prefixes them with the folder the site lives in (for example /stiven-catalyst/ on a GitHub Pages project address).
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
-  for (const path of ["styles.css", "script.js", "favicon.svg", "social.png", "fonts", "media", "js"]) {
+  for (const path of ["styles.css", "coaching.css", "script.js", "favicon.svg", "social.png", "fonts", "media", "js"]) {
     eleventyConfig.addPassthroughCopy(`src/${path}`);
   }
 
@@ -73,6 +73,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("t", (text, lang) => (TRANSLATED.has(lang) ? readUi(lang)[text] ?? text : text));
   // The interface texts a tool page hands to tool-kit.js.
   eleventyConfig.addFilter("uiStrings", (lang) => JSON.stringify(TRANSLATED.has(lang) ? readUi(lang) : {}));
+  // JSON embedded in HTML must not be able to close its script element.
+  eleventyConfig.addFilter("scriptJson", (value) => JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`));
   // collections["notes" + (lang | langSuffix)]: notes, notesDe or notesSq.
   eleventyConfig.addFilter("langSuffix", (lang) => (TRANSLATED.has(lang) ? lang[0].toUpperCase() + lang.slice(1) : ""));
   // A changed asset gets a new URL, so browsers do not keep an old script or stylesheet.
