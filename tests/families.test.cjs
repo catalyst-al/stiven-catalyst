@@ -37,3 +37,11 @@ test('families have an id, a colour and an orbit', () => {
     assert.ok(family.orbit > 0);
   }
 });
+
+test('every tool page and the Tools page have a social preview in each language', () => {
+  for (const lang of ['en', 'de', 'sq']) {
+    for (const slug of [...listed.map((url) => url.split('/').filter(Boolean).pop()), 'tools']) {
+      assert.ok(fs.existsSync(`src/media/social/${lang}/${slug}.jpg`), `${lang}/${slug}.jpg: run node scripts/social-cards.mjs`);
+    }
+  }
+});

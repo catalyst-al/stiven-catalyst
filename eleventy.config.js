@@ -94,6 +94,13 @@ export default function (eleventyConfig) {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
     return families.find((family) => family.tools.includes(path)) || null;
   });
+  // The social preview of a tool page or the Tools page (made by scripts/social-cards.mjs), if there is one.
+  eleventyConfig.addFilter("socialCard", (url, lang) => {
+    const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
+    const slug = path === "/tools.html" ? "tools" : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
+    const file = slug && `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
+    return file && fs.existsSync(`src${file}`) ? file : null;
+  });
   // Tools that no family lists yet, so a new tool is never left off the page.
   eleventyConfig.addFilter("unassigned", (tools, families, lang) =>
     tools.filter((tool) => !families.some((family) => family.tools.some((url) => localUrl(url, lang) === tool.url)))
