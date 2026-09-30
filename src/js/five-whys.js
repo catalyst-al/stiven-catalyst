@@ -9,6 +9,13 @@
   const addButton = form.querySelector("[data-add-why]");
   const status = form.querySelector("[data-status]");
   const causeField = form.elements.cause;
+  // An explicit, read-only result provider. The coaching bridge never changes the worksheet.
+  window.CoachingToolResult = { tool: 'five-whys', get: () => {
+    const value = name => form.elements[name]?.value.trim() || '';
+    const payload = { problem: value('problem'), whys: whyInputs().map(i => i.value.trim()).filter(Boolean), hypothesis: value('cause'), action: value('action'), owner: value('owner'), due: value('due'), check: value('check') };
+    return payload.problem && payload.hypothesis && payload.whys.length ? { version: 1, tool: 'five-whys', captured: new Date().toISOString(), payload } : null;
+  } };
+  const changed = () => window.dispatchEvent(new CustomEvent('coaching:result'));
 
   const read = () => {
     try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
@@ -52,6 +59,7 @@
     form.querySelectorAll("[data-store]").forEach((field) => { values[field.name] = field.value; });
     write(values);
     suggestCause();
+    changed();
   };
 
   const restore = () => {
@@ -124,6 +132,7 @@
     addButton.hidden = false;
     forget();
     suggestCause();
+    changed();
     flash(tx("Worksheet cleared."));
     form.elements.problem.focus();
   });
@@ -142,6 +151,7 @@
       save();
       form.elements.why1.focus();
     }
-    history.replaceState(null, "", location.pathname + location.hash);
+    const query = new URLSearchParams(location.search); query.delete('problem');
+    history.replaceState(null, "", location.pathname + (query.size ? `?${query}` : '') + location.hash);
   }
 })();

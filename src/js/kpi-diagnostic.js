@@ -8,6 +8,11 @@
   const tx = window.ToolKit?.tx || ((text, vars = {}) => text.replace(/\{(\w+)\}/g, (m, name) => (name in vars ? vars[name] : m)));
   const total = data.statements.length;
   const maxPerCause = (data.scale.length - 1) * 2;
+  let coachingResult = null;
+  window.CoachingToolResult = { tool: 'kpi-diagnostic', get: () => coachingResult };
+  const invalidate = () => { coachingResult = null; window.dispatchEvent(new CustomEvent('coaching:result')); };
+  form.addEventListener('input', invalidate);
+  form.addEventListener('change', invalidate);
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -73,6 +78,8 @@
     const best = ranked[0][1];
     // Below a third of the maximum there is no pattern worth naming.
     const top = best > maxPerCause / 3 ? ranked.filter(([, score]) => score === best).map(([key]) => key) : [];
+    coachingResult = { version: 1, tool: 'kpi-diagnostic', captured: new Date().toISOString(), payload: { kpi, answers: [...answered()].map(i => ({ key: i.dataset.cause, score: Number(i.value) })), scores: ranked.map(([key, score]) => ({ key, label: data.causes[key].name, score })) } };
+    window.dispatchEvent(new CustomEvent('coaching:result'));
 
     resultBox.replaceChildren();
     const head = el("div", "result-head");
@@ -146,6 +153,7 @@
     resetButton.type = "button";
     resetButton.addEventListener("click", () => {
       form.reset();
+      invalidate();
       updateProgress();
       resultBox.hidden = true;
       document.body.classList.remove("has-result");
