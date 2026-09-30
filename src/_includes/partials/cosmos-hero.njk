@@ -1,4 +1,4 @@
-{#- The homepage hero: the Catalyst light in the centre, the tool families on its orbits (js/cosmos.js). -#}
+{#- The homepage hero: the Catalyst light in the centre, the roles on its orbits (js/cosmos.js). -#}
 <section class="cosmos" data-cosmos>
   <canvas class="cosmos-canvas" aria-hidden="true"></canvas>
   <div class="shell cosmos-inner">
@@ -20,7 +20,7 @@
     <div class="cosmos-system">
       <div class="cosmos-anchor" data-cosmos-anchor></div>
       <p class="cosmos-hint" data-cosmos-hint>{{ "Drag to turn the system. Tap a planet to open its tools." | t(lang) }}</p>
-      <div class="cosmos-families" role="group" aria-label="{{ 'Tool families' | t(lang) }}">
+      <div class="cosmos-families" role="group" aria-label="{{ 'Roles' | t(lang) }}">
         {%- for family in families %}
         <button class="cosmos-chip" type="button" data-family="{{ family.id }}" aria-expanded="false" aria-controls="family-{{ family.id }}" style="--family: {{ family.color }}"><span aria-hidden="true"></span>{{ family.name }}</button>
         {%- endfor %}
@@ -30,10 +30,11 @@
         <p class="cosmos-family-head"><strong>{{ family.name }}</strong><span>{{ family.role | t(lang) }}</span></p>
         <p class="cosmos-family-line">{{ family.line | t(lang) }}</p>
         <ul>
-          {%- for tool in family | familyTools(toolList, lang) %}
+          {%- for tool in (family | familyTools(toolList, lang)).concat(family | familyTools(toolList, lang, "learn")) %}
           <li><a href="{{ tool.url }}"><span>{{ tool.name }}</span><small>{{ tool.type }}</small><span aria-hidden="true">→</span></a></li>
           {%- endfor %}
         </ul>
+        <a class="cosmos-family-role" href="{{ family | roleUrl(lang) }}">{{ "Open the planet" | t(lang) }} <span aria-hidden="true">→</span></a>
       </div>
       {%- endfor %}
     </div>

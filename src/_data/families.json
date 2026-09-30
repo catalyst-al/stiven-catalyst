@@ -1,47 +1,88 @@
 [
   {
-    "id": "lumen",
-    "name": "Lumen",
-    "role": "Diagnose",
-    "line": "Closest to the light. Find where the problem really sits before you act on it.",
-    "color": "#f5c86a",
-    "orbit": 0.42,
-    "tools": ["/tools/kpi-diagnostic/", "/tools/five-whys/"]
-  },
-  {
     "id": "pulse",
     "name": "Pulse",
-    "role": "Control",
-    "line": "The daily heartbeat of the floor: damage, incomplete orders, delays and the shift handover.",
+    "role": "Shift Lead",
+    "slug": "shift-lead",
+    "scope": "One shift",
+    "line": "You run the floor for one shift: people, damage, incomplete orders, delays, and a clean handover at the end.",
     "color": "#ff4d55",
-    "orbit": 0.62,
-    "tools": ["/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"]
+    "orbit": 0.46,
+    "tools": ["/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"],
+    "learn": [],
+    "also": ["/tools/five-whys/"],
+    "read": ["fix-the-handoff", "good-managers-on-the-floor"],
+    "routine": [
+      { "when": "Start of shift", "do": "Read the last handover before the briefing, not after the first problem.", "tool": "/tools/shift-handover/" },
+      { "when": "During the shift", "do": "Log each damaged unit where it happens, with its stage and cause.", "tool": "/tools/damage-control/" },
+      { "when": "During the shift", "do": "Log every order that leaves without all its items or parcels.", "tool": "/tools/incomplete-control/" },
+      { "when": "End of shift", "do": "Hand over open issues with an owner and a time, not a story.", "tool": "/tools/shift-handover/" },
+      { "when": "Every week", "do": "See whether late routes started at the dock or on the road.", "tool": "/tools/delay-analyzer/" },
+      { "when": "When a problem returns", "do": "Ask why until you reach something you can change.", "tool": "/tools/five-whys/" }
+    ],
+    "next": "zenith"
   },
   {
     "id": "zenith",
     "name": "Zenith",
-    "role": "Analyse",
-    "line": "The highest view: sigma levels, the vital few causes and a full control tower for the last mile.",
+    "role": "Area Manager",
+    "slug": "area-manager",
+    "scope": "One area, week by week",
+    "line": "You lead the shift leads. You read an area's numbers week by week and decide where the next hour of attention goes.",
     "color": "#4ab5f7",
-    "orbit": 0.82,
-    "tools": ["/tools/sigma-control-chart/", "/tools/pareto/", "/tools/cx-control-tower/"]
+    "orbit": 0.7,
+    "tools": ["/tools/cx-control-tower/", "/tools/kpi-diagnostic/", "/tools/pareto/"],
+    "learn": [],
+    "also": ["/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
+    "read": ["kpi-is-not-the-problem", "good-managers-on-the-floor"],
+    "routine": [
+      { "when": "Every morning", "do": "Read yesterday in one view: on time, undamaged, complete and complaints.", "tool": "/tools/cx-control-tower/" },
+      { "when": "When a KPI turns red", "do": "Find out whether it is clarity, skill, capacity, process or ownership before you push.", "tool": "/tools/kpi-diagnostic/" },
+      { "when": "Every week", "do": "Sort the week's losses and start with the few causes behind most of them.", "tool": "/tools/pareto/" },
+      { "when": "Every week", "do": "Check with your shift leads where route delays begin.", "tool": "/tools/delay-analyzer/" },
+      { "when": "Every month", "do": "Tell a real change from a normal bad day before you react.", "tool": "/tools/sigma-control-chart/" }
+    ],
+    "next": "lumen"
+  },
+  {
+    "id": "lumen",
+    "name": "Lumen",
+    "role": "Process Manager",
+    "slug": "process-manager",
+    "scope": "The whole system",
+    "line": "You look at the whole system: find where a problem really sits, prove it with data, and change the process so it stays fixed.",
+    "color": "#f5c86a",
+    "orbit": 0.94,
+    "tools": ["/tools/sigma-control-chart/", "/tools/five-whys/"],
+    "learn": ["/tools/six-sigma-dmaic/"],
+    "also": ["/tools/pareto/", "/tools/kpi-diagnostic/"],
+    "read": ["standards-follow-through", "kpi-is-not-the-problem", "fix-the-handoff"],
+    "routine": [
+      { "when": "Every problem", "do": "Reach a root cause you can change before anyone proposes a fix.", "tool": "/tools/five-whys/" },
+      { "when": "Every week", "do": "Put the process on a control chart and react only to real signals.", "tool": "/tools/sigma-control-chart/" },
+      { "when": "Every quarter", "do": "Rank the losses and choose the next improvement project.", "tool": "/tools/pareto/" },
+      { "when": "Every project", "do": "Run it through Define, Measure, Analyse, Improve and Control.", "tool": "/tools/six-sigma-dmaic/" }
+    ],
+    "next": "atlas"
   },
   {
     "id": "atlas",
     "name": "Atlas",
     "role": "Career",
+    "slug": "career",
+    "scope": "Every orbit",
     "line": "Carry your experience into the next role: a designed CV, an ATS CV and a matching cover letter.",
     "color": "#e9eef3",
-    "orbit": 1.02,
-    "tools": ["/tools/cv-builder/", "/tools/ats-cv/", "/tools/cover-letter/"]
-  },
-  {
-    "id": "academy",
-    "name": "Academy",
-    "role": "Learn",
-    "line": "Six Sigma in the warehouse, step by step on one real case.",
-    "color": "#f2884b",
-    "orbit": 1.2,
-    "tools": ["/tools/six-sigma-dmaic/"]
+    "orbit": 1.18,
+    "tools": ["/tools/cv-builder/", "/tools/ats-cv/", "/tools/cover-letter/"],
+    "learn": [],
+    "also": [],
+    "read": [],
+    "routine": [
+      { "when": "Every quarter", "do": "Add one result with a number to your CV while you still remember it.", "tool": "/tools/cv-builder/" },
+      { "when": "Before you apply", "do": "Check your CV against the job ad, the way screening software reads it.", "tool": "/tools/ats-cv/" },
+      { "when": "Every application", "do": "Write the letter for this company, not for any company.", "tool": "/tools/cover-letter/" }
+    ],
+    "next": null
   }
 ]

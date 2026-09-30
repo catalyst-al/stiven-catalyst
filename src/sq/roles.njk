@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+lang: sq
+pagination:
+  data: families
+  size: 1
+  alias: family
+  addAllPagesToCollections: true
+activeNav: /sq/tools.html
+permalink: "/sq/roles/{{ family.slug }}/"
+eleventyComputed:
+  title: "{{ family.role | t('sq') }}"
+  description: "{{ family.line | t('sq') }}"
+---
+{% include "partials/role-page.njk" %}

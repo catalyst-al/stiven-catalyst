@@ -1,9 +1,9 @@
-// Makes the social preview images (1200 × 630) of every tool page, the Tools page and the homepage,
-// in English, German and Albanian: src/media/social/<lang>/<tool>.jpg, tools.jpg and home.jpg.
-// Each card carries the tool's name, its family and the family's drawing (the same shapes
-// as the background on the tool page, from src/_data/familySky.js).
+// Makes the social preview images (1200 × 630) of every tool page, every role page, the Tools page and
+// the homepage, in English, German and Albanian: src/media/social/<lang>/<tool>.jpg, role-<slug>.jpg,
+// tools.jpg and home.jpg. Each card carries the name, its family (role) and the family's drawing (the
+// same shapes as the background on the page, from src/_data/familySky.js); a training module has moons.
 //
-// Run it after changing a tool's name, summary or family:  node scripts/social-cards.mjs
+// Run it after changing a tool's name, summary or family, or a role:  node scripts/social-cards.mjs
 // It needs Playwright with Chromium (npm i -g playwright, or a local copy).
 import fs from "node:fs";
 import path from "node:path";
@@ -98,7 +98,7 @@ const art = {
       ${points.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i === points.length - 1 ? 13 : 9}" fill="var(--family)" fill-opacity=".18"/><circle cx="${x}" cy="${y}" r="${i === points.length - 1 ? 5 : 3.6}" fill="#f4f7fb"/>`).join("")}
       <path d="M${gx} ${gy - 30} L${gx + 4} ${gy - 4} L${gx + 30} ${gy} L${gx + 4} ${gy + 4} L${gx} ${gy + 30} L${gx - 4} ${gy + 4} L${gx - 30} ${gy} L${gx - 4} ${gy - 4} Z" fill="#f4f7fb" filter="url(#glow)"/>`;
   },
-  academy: () => {
+  learn: () => {
     const letters = ["D", "M", "A", "I", "C"];
     const moons = sky.moons.map((m, i) => {
       const x = 700 + i * 106;
@@ -116,11 +116,11 @@ const art = {
   },
 };
 
-// The Tools page: the Catalyst light with the five families on their orbits.
+// The Tools page: the Catalyst light with the families on their orbits.
 const system = () => {
   const cx = 910;
   const cy = 318;
-  const angles = [200, 320, 30, 140, 250];
+  const angles = [200, 320, 40, 145, 250];
   return `
     ${families.map((f) => `<ellipse cx="${cx}" cy="${cy}" rx="${f.orbit * 230}" ry="${f.orbit * 230 * 0.42}" fill="none" stroke="${f.color}" stroke-opacity=".32"/>`).join("")}
     ${bulb(cx, cy, 1.15)}
@@ -232,12 +232,12 @@ let made = 0;
 for (const [lang, { tools }] of Object.entries(LANGS)) {
   const dir = path.join(ROOT, "src/media/social", lang);
   for (const family of families) {
-    for (const url of family.tools) {
+    for (const url of [...family.tools, ...family.learn]) {
       const tool = tools.find((item) => item.url === local(url, lang));
       if (!tool) continue;
       await save(page({
         color: family.color,
-        drawing: art[family.id](),
+        drawing: art[family.learn.includes(url) ? "learn" : family.id](),
         badge: { name: family.name, role: t(lang, family.role) },
         title: esc(tool.name).replace(/­/g, "&shy;"),
         line: tool.summary,
@@ -245,6 +245,15 @@ for (const [lang, { tools }] of Object.entries(LANGS)) {
       }), path.join(dir, `${slugOf(url)}.jpg`));
       made += 1;
     }
+    await save(page({
+      color: family.color,
+      drawing: art[family.id](),
+      badge: { name: family.name, role: t(lang, family.scope) },
+      title: esc(t(lang, family.role)),
+      line: t(lang, family.line),
+      footer: t(lang, "Free · Private · No sign-up"),
+    }), path.join(dir, `role-${family.slug}.jpg`));
+    made += 1;
   }
   const count = tools.filter((tool) => tool.url).length;
   await save(page({
@@ -252,7 +261,7 @@ for (const [lang, { tools }] of Object.entries(LANGS)) {
     drawing: system(),
     badge: { name: "Catalyst", role: families.map((f) => f.name).join(" · ") },
     title: esc(t(lang, "Tools")),
-    line: t(lang, "{n} free tools in five families").replace("{n}", count),
+    line: t(lang, "{n} free tools, one planet per role").replace("{n}", count),
     footer: t(lang, "Free · Private · No sign-up"),
   }), path.join(dir, "tools.jpg"));
   made += 1;

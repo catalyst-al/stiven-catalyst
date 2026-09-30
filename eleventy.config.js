@@ -85,25 +85,37 @@ export default function (eleventyConfig) {
   });
   // Links stay in the page's language: /tools/x/ becomes /de/tools/x/ or /sq/tools/x/.
   eleventyConfig.addFilter("local", localUrl);
-  // The tools of one family (families.json), in the page's language and in the family's order.
-  eleventyConfig.addFilter("familyTools", (family, tools, lang) =>
-    family.tools.map((url) => tools.find((tool) => tool.url === localUrl(url, lang))).filter(Boolean)
+  // The tools of one family (families.json), in the page's language and in the family's order:
+  // its own tools, or with key "learn" its training modules, or with "also" the tools it borrows from other families.
+  eleventyConfig.addFilter("familyTools", (family, tools, lang, key = "tools") =>
+    (family?.[key] || []).map((url) => tools.find((tool) => tool.url === localUrl(url, lang))).filter(Boolean)
   );
-  // The family a tool page belongs to (/tools/x/, /de/tools/x/ or /sq/tools/x/), else null.
+  // The family of a tool page, a training module or a role page (/tools/x/, /roles/x/, in any language), else null.
   eleventyConfig.addFilter("familyOf", (url, families) => {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
-    return families.find((family) => family.tools.includes(path)) || null;
+    return families.find((family) => family.tools.includes(path) || family.learn.includes(path) || path === `/roles/${family.slug}/`) || null;
   });
-  // The social preview of the homepage, the Tools page or a tool page (made by scripts/social-cards.mjs), if there is one.
+  // The page of a family's role: /roles/shift-lead/, /de/roles/shift-lead/ ...
+  eleventyConfig.addFilter("roleUrl", (family, lang) => localUrl(`/roles/${family.slug}/`, lang));
+  // One tool by its English address, in the page's language.
+  eleventyConfig.addFilter("toolAt", (tools, url, lang) => tools.find((tool) => tool.url === localUrl(url, lang)) || null);
+  // A family by its id (the "next" orbit of a role).
+  eleventyConfig.addFilter("familyById", (families, id) => families.find((family) => family.id === id) || null);
+  // Essays by file slug, in the order given.
+  eleventyConfig.addFilter("bySlugs", (items, slugs) =>
+    (slugs || []).map((slug) => (items || []).find((item) => item.fileSlug === slug)).filter(Boolean)
+  );
+  // The social preview of the homepage, the Tools page, a tool page or a role page (made by scripts/social-cards.mjs), if there is one.
   eleventyConfig.addFilter("socialCard", (url, lang) => {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
-    const slug = path === "/" ? "home" : path === "/tools.html" ? "tools" : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
+    const role = path.match(/^\/roles\/([^/]+)\/$/)?.[1];
+    const slug = path === "/" ? "home" : path === "/tools.html" ? "tools" : role ? `role-${role}` : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
     const file = slug && `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
   // Tools that no family lists yet, so a new tool is never left off the page.
   eleventyConfig.addFilter("unassigned", (tools, families, lang) =>
-    tools.filter((tool) => !families.some((family) => family.tools.some((url) => localUrl(url, lang) === tool.url)))
+    tools.filter((tool) => !families.some((family) => [...family.tools, ...family.learn].some((url) => localUrl(url, lang) === tool.url)))
   );
   // Lower case mid-sentence, except in German, where nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));

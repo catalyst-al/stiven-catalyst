@@ -13,6 +13,7 @@
 ] -%}
 {%- set hasLegal = legal.name and legal.city -%}
 {%- set toolFamily = page.url | familyOf(families) -%}
+{%- set rolePage = toolFamily and "/roles/" in page.url -%}
 {#- A page's own image, else its card, else the homepage card in its language (the hero with the families). -#}
 {%- set card = (page.url | socialCard(lang)) or (homeUrl | socialCard(lang)) -%}
 {%- set socialImage = ogImage or ((card | assetUrl) if card else "/social.png") -%}
@@ -83,7 +84,7 @@
 {% include "partials/family-stage.njk" %}
 {%- endif %}
 {{ content | safe }}
-{%- if toolFamily %}
+{%- if toolFamily and not rolePage %}
 {% include "partials/family-more.njk" %}
 {%- endif %}
 </main>

@@ -61,7 +61,7 @@ const stars = Array.from({ length: 70 }, () => ({
   delay: -between(0, 7),
 }));
 
-// Academy: where the five moons sit on their arc (drop below its top), from crescent to full.
+// Training modules: where the five moons sit on their arc (drop below its top), from crescent to full.
 const moons = [[58, 44, -32], [67, 9, -24], [76, 0, -15], [85, 9, -7], [94, 44, 0]].map(([x, drop, shade]) => ({ x, drop, shade }));
 
 export default {

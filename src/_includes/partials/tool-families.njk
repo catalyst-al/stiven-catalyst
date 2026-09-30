@@ -1,5 +1,5 @@
-{#- The Tools page: the five families (families.json) as cards, then each family with its tools. Needs toolList. -#}
-<nav class="shell family-index" aria-label="{{ 'Tool families' | t(lang) }}">
+{#- The Tools page: the roles (families.json) as cards, then each role with its tools and training modules. Needs toolList. -#}
+<nav class="shell family-index" aria-label="{{ 'Roles' | t(lang) }}">
   {%- set familyLink = "" %}
   {%- include "partials/family-cards.njk" %}
 </nav>
@@ -9,15 +9,16 @@
   <header class="family-head">
     <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
     <div>
-      <p class="kicker">{{ family.role | t(lang) }}</p>
-      <h2 id="{{ family.id }}-title">{{ family.name }}</h2>
+      <p class="kicker">{{ family.name }} · {{ family.scope | t(lang) }}</p>
+      <h2 id="{{ family.id }}-title">{{ family.role | t(lang) }}</h2>
       <p>{{ family.line | t(lang) }}</p>
+      <a class="text-link" href="{{ family | roleUrl(lang) }}">{{ "Open the planet: routine, learning, next orbit" | t(lang) }} <span aria-hidden="true">→</span></a>
     </div>
   </header>
   <div class="tool-grid family-tools">
     {%- set accent = family.color %}
     {%- set level = 3 %}
-    {%- for tool in family | familyTools(toolList, lang) %}
+    {%- for tool in (family | familyTools(toolList, lang)).concat(family | familyTools(toolList, lang, "learn")) %}
     {% include "partials/tool-card.njk" %}
     {%- endfor %}
   </div>
