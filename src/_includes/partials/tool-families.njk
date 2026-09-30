@@ -1,17 +1,7 @@
 {#- The Tools page: the five families (families.json) as cards, then each family with its tools. Needs toolList. -#}
 <nav class="shell family-index" aria-label="{{ 'Tool families' | t(lang) }}">
-  {%- for family in families %}
-  {%- set count = (family | familyTools(toolList, lang)).length %}
-  <a class="family-card family-{{ family.id }}" href="#{{ family.id }}" style="--family: {{ family.color }}">
-    <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
-    <span class="family-card-text">
-      <span class="family-role">{{ family.role | t(lang) }}</span>
-      <strong>{{ family.name }}</strong>
-      <span class="family-line">{{ family.line | t(lang) }}</span>
-      <span class="family-count">{{ ("1 tool" if count == 1 else "{n} tools") | t(lang) | replace("{n}", count) }} <span aria-hidden="true">↓</span></span>
-    </span>
-  </a>
-  {%- endfor %}
+  {%- set familyLink = "" %}
+  {%- include "partials/family-cards.njk" %}
 </nav>
 
 {%- for family in families %}

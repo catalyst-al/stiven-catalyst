@@ -121,12 +121,11 @@
       <p>{{ "Small tools built from the essays. They run in your browser, and nothing you type leaves your device." | t(lang) }}</p>
     </div>
 
-    <div class="tool-grid home-tools">
-      {%- set level = 3 %}
-      {%- for tool in toolList %}{% if tool.url %}
-      {% include "partials/tool-card.njk" %}
-      {%- endif %}{% endfor %}
+    <div class="family-index home-families">
+      {%- set familyLink = "/tools.html" | local(lang) %}
+      {%- include "partials/family-cards.njk" %}
     </div>
+    <a class="text-link home-families-link" href="{{ '/tools.html' | local(lang) }}">{{ "See all tools" | t(lang) }} <span aria-hidden="true">→</span></a>
   </section>
 
 {% include "partials/newsletter.njk" %}
