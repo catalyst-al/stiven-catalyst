@@ -1,5 +1,7 @@
 {#- On every page: a small planet at the bottom right; tapping it sends out the ways to share this page (js/share-orbit.js). No third-party scripts: plain links. -#}
-{%- set shareLink = page.url | absoluteUrl %}
+{#- The shared address carries the version of the page's preview image, so WhatsApp and others fetch the new preview instead of a remembered old one. -#}
+{%- set previewVersion = (socialImage.split("?v=")[1] if "?v=" in socialImage else "") %}
+{%- set shareLink = (page.url | absoluteUrl) + ("?s=" + previewVersion if previewVersion else "") %}
 {%- set shareTitle = shortTitle or site.title %}
 <div class="share-orbit" data-share-orbit data-url="{{ shareLink }}" data-title="{{ shareTitle }}">
   <div class="share-orbit-panel" id="share-orbit-panel" role="dialog" aria-label="{{ 'Share this page' | t(lang) }}" hidden>
