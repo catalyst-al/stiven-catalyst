@@ -30,11 +30,8 @@
         <p class="cosmos-family-head"><strong>{{ family.name }}</strong><span>{{ family.role | t(lang) }}</span></p>
         <p class="cosmos-family-line">{{ family.line | t(lang) }}</p>
         <ul>
-          {%- for url in family.tools %}
-          {%- set href = url | local(lang) %}
-          {%- for tool in toolList %}{% if tool.url == href %}
-          <li><a href="{{ href }}"><span>{{ tool.name }}</span><small>{{ tool.type }}</small><span aria-hidden="true">→</span></a></li>
-          {%- endif %}{% endfor %}
+          {%- for tool in family | familyTools(toolList, lang) %}
+          <li><a href="{{ tool.url }}"><span>{{ tool.name }}</span><small>{{ tool.type }}</small><span aria-hidden="true">→</span></a></li>
           {%- endfor %}
         </ul>
       </div>

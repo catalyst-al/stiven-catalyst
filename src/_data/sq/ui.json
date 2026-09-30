@@ -1450,5 +1450,8 @@
   "The daily heartbeat of the floor: damage, incomplete orders, delays and the shift handover.": "Pulsi i përditshëm i punës: dëmet, porositë e paplota, vonesat dhe dorëzimi i turnit.",
   "The highest view: sigma levels, the vital few causes and a full control tower for the last mile.": "Pamja nga lart: niveli sigma, shkaqet kryesore dhe një control tower i plotë për last mile.",
   "Carry your experience into the next role: a designed CV, an ATS CV and a matching cover letter.": "Çoje përvojën tënde te roli i ardhshëm: një CV e dizajnuar, një CV për ATS dhe letra e motivimit që i përshtatet.",
-  "Six Sigma in the warehouse, step by step on one real case.": "Six Sigma në magazinë, hap pas hapi mbi një rast real."
+  "Six Sigma in the warehouse, step by step on one real case.": "Six Sigma në magazinë, hap pas hapi mbi një rast real.",
+  "{n} tools": "{n} mjete",
+  "1 tool": "1 mjet",
+  "More tools": "Mjete të tjera"
 }

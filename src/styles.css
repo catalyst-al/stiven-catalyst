@@ -1114,6 +1114,231 @@ button, input, select { font: inherit; }
 }
 .tool-card p { margin: 0 0 24px; color: var(--muted); }
 
+/* Tools page: the five families (families.json), each with its own planet. */
+.tool-card.has-family {
+  background:
+    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--family) 16%, transparent), transparent 42%),
+    var(--card);
+}
+.tool-card.has-family:has(a):hover { border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.tool-card.has-family .text-link:hover { color: var(--family); }
+
+.family-index {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  padding: 44px 0 20px;
+}
+.family-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.family-card:hover,
+.family-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--family) 60%, var(--line));
+}
+.family-card-text {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  align-content: start;
+  padding: 16px 18px 18px;
+}
+.family-role {
+  color: var(--family);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+[data-theme="light"] .family-role { color: color-mix(in srgb, var(--family) 70%, #000); }
+.family-card strong {
+  font-family: var(--display);
+  font-size: 24px;
+  letter-spacing: -.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.family-line {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.family-count {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* The planet on a small piece of night sky; stays dark in both themes. */
+.family-visual {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background:
+    radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.8), transparent),
+    radial-gradient(1px 1px at 32% 78%, rgba(255,255,255,.55), transparent),
+    radial-gradient(1.5px 1.5px at 72% 16%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 88% 64%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 56% 90%, rgba(255,255,255,.45), transparent),
+    radial-gradient(1px 1px at 22% 52%, rgba(255,255,255,.35), transparent),
+    radial-gradient(1px 1px at 92% 30%, rgba(255,255,255,.4), transparent),
+    radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--family) 24%, transparent), transparent 62%),
+    #05080b;
+}
+.family-planet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--family) 28%, #fff) 0, var(--family) 40%, color-mix(in srgb, var(--family) 22%, #000) 100%);
+  box-shadow: 0 0 34px color-mix(in srgb, var(--family) 55%, transparent);
+  transition: transform .35s ease;
+}
+.family-card:hover .family-planet { transform: translate(-50%, -50%) scale(1.08); }
+.family-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 78%;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--family) 45%, transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg) scaleY(.3);
+}
+.family-orbit i {
+  position: absolute;
+  inset: 0;
+  animation: family-turn 9s linear infinite;
+}
+.family-orbit i::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  width: 6px;
+  height: 20px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px var(--family);
+}
+@keyframes family-turn { to { transform: rotate(360deg); } }
+
+/* Lumen: closest to the light, it shines. */
+.family-lumen .family-planet {
+  background: radial-gradient(circle at 42% 38%, #fff 0, #fff4d6 30%, var(--family) 70%, color-mix(in srgb, var(--family) 60%, #000) 100%);
+  box-shadow: 0 0 22px #fff3d0, 0 0 60px color-mix(in srgb, var(--family) 80%, transparent), 0 0 120px color-mix(in srgb, var(--family) 35%, transparent);
+}
+/* Pulse: a heartbeat. */
+.family-pulse .family-planet::before,
+.family-pulse .family-planet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--family);
+  border-radius: 50%;
+  animation: family-beat 2.6s ease-out infinite;
+}
+.family-pulse .family-planet::after { animation-delay: 1.3s; }
+@keyframes family-beat {
+  from { transform: scale(1); opacity: .8; }
+  to { transform: scale(2.8); opacity: 0; }
+}
+/* Zenith: seen from above, on a steeper orbit. */
+.family-zenith .family-orbit { transform: translate(-50%, -50%) rotate(18deg) scaleY(.55); width: 70%; }
+.family-zenith .family-planet { width: 22%; }
+/* Atlas: carries a ring. */
+.family-atlas .family-planet::before {
+  content: "";
+  position: absolute;
+  left: -48%;
+  top: 50%;
+  width: 196%;
+  aspect-ratio: 1;
+  border: 2px solid color-mix(in srgb, var(--family) 70%, transparent);
+  border-radius: 50%;
+  transform: translateY(-50%) rotate(-20deg) scaleY(.28);
+}
+/* Academy: a crescent, still learning. */
+.family-academy .family-planet {
+  box-shadow: inset -9px 3px 0 0 rgba(4,6,9,.82), 0 0 30px color-mix(in srgb, var(--family) 50%, transparent);
+}
+
+.family-section {
+  padding: 64px 0 20px;
+  scroll-margin-top: 84px;
+}
+.family-section + .family-section { border-top: 1px solid var(--line); }
+.family-section:last-child { padding-bottom: 110px; }
+.family-head {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+.family-head.is-plain { grid-template-columns: minmax(0, 1fr); }
+.family-head .family-visual { border-radius: 18px; }
+.family-head .kicker { color: var(--family); margin-bottom: 10px; }
+[data-theme="light"] .family-head .kicker { color: color-mix(in srgb, var(--family) 70%, #000); }
+.family-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 76px);
+  letter-spacing: -.05em;
+  line-height: .9;
+  text-transform: uppercase;
+}
+.family-head p:not(.kicker) {
+  max-width: 640px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+.family-tools {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  padding: 30px 0 0;
+}
+.family-tools .tool-card { min-height: 300px; }
+
+@media (max-width: 1100px) {
+  .family-index { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .family-index {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: min(74%, 280px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+  }
+  .family-card { scroll-snap-align: start; }
+  .family-head { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .family-head .family-visual { max-width: 320px; aspect-ratio: 16 / 9; }
+  .family-tools { grid-template-columns: minmax(0, 1fr); }
+  .family-tools .tool-card { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .family-orbit i,
+  .family-pulse .family-planet::before,
+  .family-pulse .family-planet::after { animation: none; }
+  .family-card,
+  .family-planet { transition: none; }
+}
+
 .page-hero.tool-hero h1 { font-size: clamp(38px, 12.5cqi, 120px); }
 /* German compounds are long: titles break at a soft hyphen, the longest ones
    are set smaller, and no title is ever wider than the screen. */

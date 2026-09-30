@@ -6,13 +6,10 @@ description: "Kostenlose, private Tools für Führungskräfte und Teams im Lager
 activeNav: /de/tools.html
 permalink: /de/tools.html
 ---
-<section class="shell page-hero">
+<section class="shell page-hero tools-hero">
   <p class="eyebrow">Kostenlos · Privat · Ohne Anmeldung</p>
   <h1>Tools</h1>
   <p class="lede">Kleine, praktische Tools aus der Arbeit im Lager. Sie laufen in Ihrem Browser, und nichts, was Sie eingeben, verlässt Ihr Gerät, außer einer Firmen-Website, die Sie dem Lebenslauf-Generator für das Logo geben.</p>
 </section>
-<section class="shell tool-grid">
-  {%- for tool in de.tools %}
-  {% include "partials/tool-card.njk" %}
-  {%- endfor %}
-</section>
+{%- set toolList = de.tools %}
+{% include "partials/tool-families.njk" %}

@@ -1,4 +1,4 @@
-<article class="tool-card{% if not tool.url %} is-soon{% endif %}">
+<article class="tool-card{% if not tool.url %} is-soon{% endif %}{% if accent %} has-family" style="--family: {{ accent }}{% endif %}">
   <div class="card-meta"><span>{{ tool.type }}</span><span>{{ tool.time }}</span></div>
   <div>
     <h{{ level or 2 }}>{{ tool.name }}</h{{ level or 2 }}>
