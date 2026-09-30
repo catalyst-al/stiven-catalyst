@@ -1,0 +1,109 @@
+{#- The page of one role (a family in families.json): its tools, a routine that says when each one is used,
+    what to learn, and the next orbit. Needs family. -#}
+{%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+{%- set essays = collections["insights" + (lang | langSuffix)] | bySlugs(family.read) %}
+{%- set modules = family | familyTools(toolList, lang, "learn") %}
+{%- set borrowed = family | familyTools(toolList, lang, "also") %}
+{%- set nextFamily = families | familyById(family.next) %}
+{%- set atlas = families | familyById("atlas") %}
+<section class="shell page-hero tool-hero role-hero">
+  <p class="eyebrow">{{ "Planet" | t(lang) }} {{ family.name }} · {{ family.scope | t(lang) }}</p>
+  <h1>{{ family.role | t(lang) }}</h1>
+  <p class="lede">{{ family.line | t(lang) }}</p>
+  <nav class="role-rings" aria-label="{{ 'On this planet' | t(lang) }}">
+    <a href="#use"><b>01</b>{{ "Use" | t(lang) }}</a>
+    <a href="#routine"><b>02</b>{{ "Routine" | t(lang) }}</a>
+    {%- if modules.length or essays.length %}
+    <a href="#learn"><b>03</b>{{ "Learn" | t(lang) }}</a>
+    {%- endif %}
+    <a href="#grow"><b>{{ "04" if modules.length or essays.length else "03" }}</b>{{ "Grow" | t(lang) }}</a>
+  </nav>
+</section>
+
+<section class="shell role-ring" id="use" aria-labelledby="use-title">
+  <header class="role-ring-head">
+    <p class="kicker">{{ "Use" | t(lang) }}</p>
+    <h2 id="use-title">{{ "The tools of this orbit" | t(lang) }}</h2>
+  </header>
+  <div class="tool-grid family-tools">
+    {%- set accent = family.color %}
+    {%- set level = 3 %}
+    {%- for tool in family | familyTools(toolList, lang) %}
+    {% include "partials/tool-card.njk" %}
+    {%- endfor %}
+  </div>
+  {%- if borrowed.length %}
+  <h3 class="role-subhead">{{ "Borrowed from other orbits" | t(lang) }}</h3>
+  <ul class="role-borrowed">
+    {%- for tool in borrowed %}
+    {%- set home = tool.url | familyOf(families) %}
+    <li><a href="{{ tool.url }}" style="--family: {{ home.color }}"><span class="role-dot" aria-hidden="true"></span><strong>{{ tool.name }}</strong><small>{{ home.name }} · {{ home.role | t(lang) }}</small><em aria-hidden="true">→</em></a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>
+
+<section class="shell role-ring" id="routine" aria-labelledby="routine-title">
+  <header class="role-ring-head">
+    <p class="kicker">{{ "Routine" | t(lang) }}</p>
+    <h2 id="routine-title">{{ "When each tool earns its place" | t(lang) }}</h2>
+  </header>
+  <ol class="role-routine">
+    {%- for step in family.routine %}
+    {%- set tool = toolList | toolAt(step.tool, lang) %}
+    <li>
+      <span class="role-when">{{ step.when | t(lang) }}</span>
+      <p>{{ step.do | t(lang) }}</p>
+      {%- if tool %}<a class="text-link" href="{{ tool.url }}">{{ tool.name }} <span aria-hidden="true">→</span></a>{% endif %}
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+
+{%- if modules.length or essays.length %}
+<section class="shell role-ring" id="learn" aria-labelledby="learn-title">
+  <header class="role-ring-head">
+    <p class="kicker">{{ "Learn" | t(lang) }}</p>
+    <h2 id="learn-title">{{ "Understand it before you use it" | t(lang) }}</h2>
+  </header>
+  {%- if modules.length %}
+  <div class="tool-grid family-tools">
+    {%- set accent = family.color %}
+    {%- set level = 3 %}
+    {%- for tool in modules %}
+    {% include "partials/tool-card.njk" %}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+  {%- if essays.length %}
+  <ul class="role-reading">
+    {%- for essay in essays %}
+    <li><a href="{{ essay.url }}"><small>{{ "Essay" | t(lang) }}{% if essay.data.readingTime %} · {{ essay.data.readingTime }}{% endif %}</small><strong>{{ essay.data.title }}</strong><span>{{ essay.data.summary }}</span></a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{%- endif %}
+
+<section class="shell role-ring role-grow" id="grow" aria-labelledby="grow-title">
+  <header class="role-ring-head">
+    <p class="kicker">{{ "Grow" | t(lang) }}</p>
+    <h2 id="grow-title">{{ ("The next orbit" if nextFamily else "Choose your orbit") | t(lang) }}</h2>
+  </header>
+  <div class="role-next">
+    {#- The next role and, beside it, Atlas to carry the results into a CV; from Atlas, every role. -#}
+    {%- if not nextFamily %}{% set targets = families | rejectattr("id", "equalto", family.id) %}
+    {%- elif nextFamily.id == "atlas" or not atlas %}{% set targets = [nextFamily] %}
+    {%- else %}{% set targets = [nextFamily, atlas] %}{% endif %}
+    {%- for target in targets %}
+    <a class="role-next-card family-{{ target.id }}" href="{{ target | roleUrl(lang) }}" style="--family: {{ target.color }}">
+      <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
+      <span class="role-next-text">
+        <small>{{ target.name }} · {{ target.scope | t(lang) }}</small>
+        <strong>{{ target.role | t(lang) }}</strong>
+        <span>{{ target.line | t(lang) }}</span>
+      </span>
+    </a>
+    {%- endfor %}
+  </div>
+</section>

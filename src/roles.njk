@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: families
+  size: 1
+  alias: family
+  addAllPagesToCollections: true
+activeNav: /tools.html
+permalink: "/roles/{{ family.slug }}/"
+eleventyComputed:
+  title: "{{ family.role }}"
+  description: "{{ family.line }}"
+---
+{% include "partials/role-page.njk" %}

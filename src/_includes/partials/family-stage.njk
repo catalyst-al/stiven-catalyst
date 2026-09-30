@@ -1,7 +1,17 @@
-{#- On a tool page: the drawn background of the tool's family (familySky.js) and the family badge above the title. Needs toolFamily. -#}
+{#- On a tool page or a role page: the drawn background of the family (familySky.js), and on a tool page the
+    family badge above the title. A training module ("learn" in families.json) has the moons of a course instead. Needs toolFamily. -#}
 {%- set sky = familySky %}
-<div class="family-sky sky-{{ toolFamily.id }}" data-family-sky aria-hidden="true">
-{%- if toolFamily.id == "lumen" %}
+{%- set learning = (page.url | replace("/" + lang + "/", "/")) in toolFamily.learn if lang and lang != "en" else page.url in toolFamily.learn %}
+<div class="family-sky sky-{{ 'learn' if learning else toolFamily.id }}" data-family-sky aria-hidden="true">
+{%- if learning %}
+  <span class="atlas-stars learn-stars">
+    {%- for s in sky.stars %}{% if loop.index0 % 2 == 0 %}<i style="left: {{ s.x }}%; top: {{ s.y }}%; --s: {{ s.size }}px; --t: {{ s.time }}s; --d: {{ s.delay }}s"></i>{% endif %}{% endfor -%}
+  </span>
+  <span class="learn-arc"></span>
+  {%- for m in dmaic.modules %}{% set moon = sky.moons[loop.index0] %}{% if moon %}
+  <span class="learn-moon{% if loop.first %} is-current{% endif %}" data-moon="{{ m.id }}" style="--i: {{ loop.index0 }}; left: {{ moon.x }}%; --drop: {{ moon.drop }}px; --shade: {{ moon.shade }}px"><b>{{ m.letter }}</b></span>
+  {%- endif %}{% endfor %}
+{%- elif toolFamily.id == "lumen" %}
   <span class="lumen-cable"></span>
   <span class="lumen-halo"></span>
   <span class="lumen-bulb"></span>
@@ -46,16 +56,10 @@
     </g>
     {%- endfor %}
   </svg>
-{%- elif toolFamily.id == "academy" %}
-  <span class="atlas-stars academy-stars">
-    {%- for s in sky.stars %}{% if loop.index0 % 2 == 0 %}<i style="left: {{ s.x }}%; top: {{ s.y }}%; --s: {{ s.size }}px; --t: {{ s.time }}s; --d: {{ s.delay }}s"></i>{% endif %}{% endfor -%}
-  </span>
-  <span class="academy-arc"></span>
-  {%- for m in dmaic.modules %}{% set moon = sky.moons[loop.index0] %}{% if moon %}
-  <span class="academy-moon{% if loop.first %} is-current{% endif %}" data-moon="{{ m.id }}" style="--i: {{ loop.index0 }}; left: {{ moon.x }}%; --drop: {{ moon.drop }}px; --shade: {{ moon.shade }}px"><b>{{ m.letter }}</b></span>
-  {%- endif %}{% endfor %}
 {%- endif %}
 </div>
+{%- if not rolePage %}
 <div class="shell family-badge-row">
-  <a class="family-badge" href="{{ '/tools.html' | local(lang) }}#{{ toolFamily.id }}"><span aria-hidden="true"></span>{{ toolFamily.name }}<small>{{ toolFamily.role | t(lang) }}</small></a>
+  <a class="family-badge" href="{{ toolFamily | roleUrl(lang) }}"><span aria-hidden="true"></span>{{ toolFamily.name }}<small>{{ toolFamily.role | t(lang) }}</small></a>
 </div>
+{%- endif %}

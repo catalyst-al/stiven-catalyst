@@ -395,6 +395,19 @@ button, input, select { font: inherit; }
 .cosmos-family a:hover { color: var(--family); }
 .cosmos-family a:hover > span:last-child { transform: translateX(3px); }
 .cosmos-family a > span:last-child { transition: transform .2s ease; }
+.cosmos-family a.cosmos-family-role {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 2px;
+  padding: 12px 2px 8px;
+  border-top: 1px solid color-mix(in srgb, var(--family) 30%, var(--line));
+  color: var(--family);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .cosmos.is-live .cosmos-family.is-open { animation: none; }
@@ -1120,7 +1133,7 @@ button, input, select { font: inherit; }
 
 .family-index {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   padding: 44px 0 20px;
 }
@@ -1233,7 +1246,7 @@ button, input, select { font: inherit; }
 }
 @keyframes family-turn { to { transform: rotate(360deg); } }
 
-/* Lumen: closest to the light, it shines. */
+/* Lumen: sees the whole system, it shines. */
 .family-lumen .family-planet {
   background: radial-gradient(circle at 42% 38%, #fff 0, #fff4d6 30%, var(--family) 70%, color-mix(in srgb, var(--family) 60%, #000) 100%);
   box-shadow: 0 0 22px #fff3d0, 0 0 60px color-mix(in srgb, var(--family) 80%, transparent), 0 0 120px color-mix(in srgb, var(--family) 35%, transparent);
@@ -1267,10 +1280,6 @@ button, input, select { font: inherit; }
   border: 2px solid color-mix(in srgb, var(--family) 70%, transparent);
   border-radius: 50%;
   transform: translateY(-50%) rotate(-20deg) scaleY(.28);
-}
-/* Academy: a crescent, still learning. */
-.family-academy .family-planet {
-  box-shadow: inset -9px 3px 0 0 rgba(4,6,9,.82), 0 0 30px color-mix(in srgb, var(--family) 50%, transparent);
 }
 
 .family-section {
@@ -1310,7 +1319,7 @@ button, input, select { font: inherit; }
 .family-tools .tool-card { min-height: 300px; }
 
 @media (max-width: 1100px) {
-  .family-index { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .family-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
   .family-index {
@@ -4538,8 +4547,8 @@ body.in-family {
 @keyframes atlas-appear { to { opacity: 1; } }
 @keyframes atlas-glow { 50% { opacity: .55; } }
 
-/* Academy: five moons from crescent to full, one per DMAIC step; a completed step lights its moon. */
-.sky-academy .academy-arc {
+/* A training module (a "learn" page): five moons from crescent to full, one per DMAIC step; a completed step lights its moon. */
+.sky-learn .learn-arc {
   left: 55%;
   top: 40px;
   width: 42%;
@@ -4547,7 +4556,7 @@ body.in-family {
   border-top: 1px dashed color-mix(in srgb, var(--sky-ink) 40%, transparent);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
-.sky-academy .academy-moon {
+.sky-learn .learn-moon {
   top: calc(40px + var(--drop));
   width: 46px;
   aspect-ratio: 1;
@@ -4559,21 +4568,21 @@ body.in-family {
   filter: grayscale(.7);
   transition: opacity .6s ease, filter .6s ease;
 }
-.sky-academy .academy-moon.is-lit { opacity: 1; filter: grayscale(0) drop-shadow(0 0 16px color-mix(in srgb, var(--family) 75%, transparent)); }
-.sky-academy .academy-moon.is-current { opacity: .75; filter: grayscale(0); }
-.sky-academy .academy-moon.is-current::after {
+.sky-learn .learn-moon.is-lit { opacity: 1; filter: grayscale(0) drop-shadow(0 0 16px color-mix(in srgb, var(--family) 75%, transparent)); }
+.sky-learn .learn-moon.is-current { opacity: .75; filter: grayscale(0); }
+.sky-learn .learn-moon.is-current::after {
   content: "";
   position: absolute;
   inset: -9px;
   border: 1px solid var(--sky-ink);
   border-radius: 50%;
-  animation: academy-ring 2.8s ease-out infinite;
+  animation: learn-ring 2.8s ease-out infinite;
 }
-@keyframes academy-ring {
+@keyframes learn-ring {
   from { transform: scale(.9); opacity: 1; }
   to { transform: scale(1.35); opacity: 0; }
 }
-.sky-academy .academy-moon b {
+.sky-learn .learn-moon b {
   position: absolute;
   top: calc(100% + 12px);
   left: 50%;
@@ -4763,6 +4772,205 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .family-more-list span { color: var(--muted); font-size: 14px; }
 .family-more-list em { position: absolute; right: 20px; top: 20px; font-style: normal; font-weight: 800; }
 
+/* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
+.role-hero .eyebrow { color: var(--sky-ink); }
+.role-rings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+.role-rings a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--family) 40%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: border-color .2s ease, background .2s ease;
+}
+.role-rings a:hover { border-color: var(--family); background: color-mix(in srgb, var(--family) 14%, transparent); }
+.role-rings b {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid color-mix(in srgb, var(--family) 60%, transparent);
+  border-radius: 50%;
+  color: var(--sky-ink);
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.role-ring {
+  padding: 64px 0 20px;
+  scroll-margin-top: 84px;
+}
+.role-ring + .role-ring { border-top: 1px solid var(--line); }
+.role-grow { padding-bottom: 110px; }
+.role-ring-head .kicker { margin: 0 0 10px; color: var(--sky-ink); }
+.role-ring-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(30px, 4.6vw, 54px);
+  letter-spacing: -.045em;
+  line-height: .95;
+  text-transform: uppercase;
+}
+.role-subhead {
+  margin: 44px 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.role-borrowed {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.role-borrowed a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "dot name arrow" "dot home arrow";
+  align-items: center;
+  gap: 2px 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.role-borrowed a:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.role-dot {
+  grid-area: dot;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--family);
+  box-shadow: 0 0 12px var(--family);
+}
+.role-borrowed strong { grid-area: name; font-weight: 800; }
+.role-borrowed small { grid-area: home; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.role-borrowed em { grid-area: arrow; font-style: normal; font-weight: 800; }
+
+/* The routine: a line of moments, each with the tool it calls for. */
+.role-routine {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.role-routine::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: linear-gradient(var(--family), color-mix(in srgb, var(--family) 10%, transparent));
+}
+.role-routine li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px 28px;
+  padding: 18px 0 18px 38px;
+}
+.role-routine li + li { border-top: 1px solid var(--line); }
+.role-routine li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 24px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--family);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--family) 60%, transparent);
+}
+.role-when { color: var(--sky-ink); font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.role-routine p { margin: 0; font-size: 17px; }
+.role-routine .text-link { white-space: nowrap; }
+
+.role-reading {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.role-reading a {
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.role-reading a:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.role-reading small { color: var(--sky-ink); font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.role-reading strong { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -.03em; line-height: 1.1; }
+.role-reading span { color: var(--muted); font-size: 14px; }
+
+.role-next {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+}
+.role-next-card {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.role-next-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--family) 60%, var(--line)); }
+.role-next-card .family-visual { aspect-ratio: auto; height: 100%; min-height: 150px; }
+.role-next-card:hover .family-planet { transform: translate(-50%, -50%) scale(1.08); }
+.role-next-text { display: grid; align-content: center; gap: 6px; padding: 20px 22px; }
+.role-next-text small { color: var(--family); font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
+[data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 70%, #000); }
+.role-next-text strong { font-family: var(--display); font-size: 26px; letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
+.role-next-text span { color: var(--muted); font-size: 14px; }
+
+@media (max-width: 760px) {
+  .role-ring { padding-top: 48px; }
+  .role-routine li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .role-routine .text-link { white-space: normal; }
+  .role-next-card { grid-template-columns: 110px minmax(0, 1fr); }
+  .role-next-card .family-visual { min-height: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .role-borrowed a,
+  .role-reading a,
+  .role-next-card { transition: none; }
+}
+@media print {
+  .role-rings,
+  .role-grow { display: none !important; }
+}
+
 @media (max-width: 900px) {
   .sky-lumen .lumen-cable,
   .sky-lumen .lumen-bulb,
@@ -4778,16 +4986,16 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   .sky-zenith .zenith-radar { left: 86%; top: calc(var(--hero-bottom) * .3); }
   .sky-zenith .zenith-radar { width: 340px; }
   /* Phones: the moons line up at the right of the badge. */
-  .sky-academy .academy-arc,
-  .sky-academy .academy-moon b { display: none; }
-  .sky-academy .academy-moon {
+  .sky-learn .learn-arc,
+  .sky-learn .learn-moon b { display: none; }
+  .sky-learn .learn-moon {
     top: 42px;
     left: calc(100% - 26px - (4 - var(--i)) * 30px) !important;
     width: 22px;
     margin: -11px 0 0 -11px;
     box-shadow: inset calc(var(--shade) * .48) 0 0 0 color-mix(in srgb, var(--paper) 92%, transparent);
   }
-  .sky-academy .academy-moon.is-current::after { inset: -5px; }
+  .sky-learn .learn-moon.is-current::after { inset: -5px; }
   .family-more-head .text-link { margin-left: 0; }
 }
 @media (max-width: 620px) {

@@ -1,4 +1,4 @@
-// Tool pages: fits the family background to the title block, and lets Academy's moons follow the course.
+// Tool pages: fits the family background to the title block, and lets the moons of a training module follow the course.
 (() => {
   const sky = document.querySelector("[data-family-sky]");
   const main = document.getElementById("main");
