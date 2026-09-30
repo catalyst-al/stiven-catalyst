@@ -1,0 +1,41 @@
+{#- The Tools page: the five families (families.json) as cards, then each family with its tools. Needs toolList. -#}
+<nav class="shell family-index" aria-label="{{ 'Tool families' | t(lang) }}">
+  {%- set familyLink = "" %}
+  {%- include "partials/family-cards.njk" %}
+</nav>
+
+{%- for family in families %}
+<section class="shell family-section family-{{ family.id }}" id="{{ family.id }}" style="--family: {{ family.color }}" aria-labelledby="{{ family.id }}-title">
+  <header class="family-head">
+    <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
+    <div>
+      <p class="kicker">{{ family.role | t(lang) }}</p>
+      <h2 id="{{ family.id }}-title">{{ family.name }}</h2>
+      <p>{{ family.line | t(lang) }}</p>
+    </div>
+  </header>
+  <div class="tool-grid family-tools">
+    {%- set accent = family.color %}
+    {%- set level = 3 %}
+    {%- for tool in family | familyTools(toolList, lang) %}
+    {% include "partials/tool-card.njk" %}
+    {%- endfor %}
+  </div>
+</section>
+{%- endfor %}
+
+{%- set rest = toolList | unassigned(families, lang) %}
+{%- if rest.length %}
+<section class="shell family-section" aria-labelledby="more-tools-title">
+  <header class="family-head is-plain">
+    <div><h2 id="more-tools-title">{{ "More tools" | t(lang) }}</h2></div>
+  </header>
+  <div class="tool-grid family-tools">
+    {%- set accent = false %}
+    {%- set level = 3 %}
+    {%- for tool in rest %}
+    {% include "partials/tool-card.njk" %}
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}

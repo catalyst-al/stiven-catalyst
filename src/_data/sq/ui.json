@@ -1438,5 +1438,21 @@
   "Average minutes to load a route. Scanning and loading quality come before speed.": "Minutat mesatare për të ngarkuar një rrugë. Skanimi dhe cilësia e ngarkimit vijnë para shpejtësisë.",
   "Routes that left later than the late limit set below.": "Rrugë që u nisën më vonë se kufiri i vendosur më poshtë.",
   "Routes where the gate was closed after loading.": "Rrugë ku porta u mbyll pas ngarkimit.",
-  "Routes where chilled and frozen bags were scanned inside the cooling area.": "Rrugë ku çantat e ftohura dhe të ngrira u skanuan brenda zonës së ftohtë."
+  "Routes where chilled and frozen bags were scanned inside the cooling area.": "Rrugë ku çantat e ftohura dhe të ngrira u skanuan brenda zonës së ftohtë.",
+  "Drag to turn the system. Tap a planet to open its tools.": "Tërhiqe për ta rrotulluar sistemin. Prek një planet për të hapur mjetet e tij.",
+  "Tool families": "Familjet e mjeteve",
+  "Diagnose": "Diagnozë",
+  "Control": "Kontroll",
+  "Analyse": "Analizë",
+  "Career": "Karrierë",
+  "Learn": "Mëso",
+  "Closest to the light. Find where the problem really sits before you act on it.": "Më afër dritës. Gjej ku qëndron vërtet problemi para se të veprosh.",
+  "The daily heartbeat of the floor: damage, incomplete orders, delays and the shift handover.": "Pulsi i përditshëm i punës: dëmet, porositë e paplota, vonesat dhe dorëzimi i turnit.",
+  "The highest view: sigma levels, the vital few causes and a full control tower for the last mile.": "Pamja nga lart: niveli sigma, shkaqet kryesore dhe një control tower i plotë për last mile.",
+  "Carry your experience into the next role: a designed CV, an ATS CV and a matching cover letter.": "Çoje përvojën tënde te roli i ardhshëm: një CV e dizajnuar, një CV për ATS dhe letra e motivimit që i përshtatet.",
+  "Six Sigma in the warehouse, step by step on one real case.": "Six Sigma në magazinë, hap pas hapi mbi një rast real.",
+  "{n} tools": "{n} mjete",
+  "1 tool": "1 mjet",
+  "More tools": "Mjete të tjera",
+  "See all tools": "Shiko të gjitha mjetet"
 }

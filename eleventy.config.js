@@ -85,6 +85,14 @@ export default function (eleventyConfig) {
   });
   // Links stay in the page's language: /tools/x/ becomes /de/tools/x/ or /sq/tools/x/.
   eleventyConfig.addFilter("local", localUrl);
+  // The tools of one family (families.json), in the page's language and in the family's order.
+  eleventyConfig.addFilter("familyTools", (family, tools, lang) =>
+    family.tools.map((url) => tools.find((tool) => tool.url === localUrl(url, lang))).filter(Boolean)
+  );
+  // Tools that no family lists yet, so a new tool is never left off the page.
+  eleventyConfig.addFilter("unassigned", (tools, families, lang) =>
+    tools.filter((tool) => !families.some((family) => family.tools.some((url) => localUrl(url, lang) === tool.url)))
+  );
   // Lower case mid-sentence, except in German, where nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
