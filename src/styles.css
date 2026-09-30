@@ -4953,6 +4953,25 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   cursor: pointer;
 }
 .share-orbit-planets small { font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+.share-orbit-planets.has-business { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.share-orbit-planets.has-business small { font-size: 10.5px; }
+.share-orbit-planets.has-business .share-planet { width: 42px; height: 42px; }
+.share-planet { position: relative; }
+.share-planet b {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 2px solid #070a0d;
+  border-radius: 50%;
+  background: #f6f7f4;
+  color: #0b1015;
+  font-size: 9px;
+  font-weight: 900;
+}
 .share-planet {
   display: grid;
   place-items: center;
