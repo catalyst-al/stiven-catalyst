@@ -442,7 +442,20 @@ window.ToolKit = (() => {
   // The log behind Damage Control, Incomplete Control and Delay Analyzer: its settings and period,
   // the table of the newest rows, removing a row (with undo), pasting from Excel, the example week,
   // clearing and the CSV. The tool gives its columns, its texts and its results.
-  const logBook = ({ root, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearText, csv, renderResults, results }) => {
+  // Each language keeps its own log (the names in it are that language's words). When this
+  // language's log is empty, the logs of the other languages are pointed to instead of looking lost.
+  const LANG_NAMES = { en: "English", de: "Deutsch", sq: "Shqip" };
+  const otherLogs = (key) => {
+    const base = key.replace(/-(de|sq)$/, "");
+    const path = window.location.pathname.replace(/^\/(de|sq)(?=\/)/, "");
+    return Object.keys(LANG_NAMES).filter((code) => code !== LANG).map((code) => {
+      const saved = read(code === "en" ? base : `${base}-${code}`, null);
+      const count = isObject(saved) && Array.isArray(saved.rows) ? saved.rows.length : 0;
+      return { code, count, name: LANG_NAMES[code], url: code === "en" ? path : `/${code}${path}` };
+    }).filter((item) => item.count > 0);
+  };
+
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearText, csv, renderResults, results }) => {
     const logBody = root.querySelector("[data-log]");
     const logWrap = root.querySelector("[data-log-wrap]");
     const logEmpty = root.querySelector("[data-log-empty]");
@@ -450,6 +463,9 @@ window.ToolKit = (() => {
     const logStatus = root.querySelector("[data-log-status]");
     const importStatus = root.querySelector("[data-import-status]");
     const settings = [...root.querySelectorAll("[data-setting]")];
+    const elsewhere = el("p", "form-note dl-elsewhere");
+    elsewhere.hidden = true;
+    logEmpty.after(elsewhere);
     let syncRange = () => {};
 
     const renderLog = () => {
@@ -470,6 +486,15 @@ window.ToolKit = (() => {
       logWrap.hidden = !rows.length;
       logEmpty.hidden = rows.length > 0;
       logCount.textContent = rows.length ? `${countText(rows)}${shownNote(rows.length)}` : "";
+      const others = rows.length || !key ? [] : otherLogs(key);
+      elsewhere.hidden = !others.length;
+      elsewhere.replaceChildren();
+      others.forEach((item, index) => {
+        const link = el("a", "inline-link", tx("Open it"));
+        link.href = item.url;
+        link.hreflang = item.code;
+        elsewhere.append(`${index ? " " : ""}${tx("Your log in {language} has {n} entries.", { language: item.name, n: int.format(item.count) })} `, link);
+      });
     };
     const render = () => {
       renderLog();
@@ -603,7 +628,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout,
+    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs,
     panel, stat, barList, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

@@ -335,6 +335,7 @@
 
   const book = logBook({
     root,
+    key: KEY,
     state,
     save,
     results,

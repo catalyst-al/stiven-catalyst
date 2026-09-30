@@ -1552,5 +1552,7 @@
   "{n} already typed stayed as they were.": "{n} të shkruar më parë mbetën siç ishin.",
   "damaged units": "njësi të dëmtuara",
   "incomplete orders": "porosi të paplota",
-  "These numbers are already filled in. What you typed stays as it is.": "Këta numra janë plotësuar tashmë. Ajo që keni shkruar mbetet siç është."
+  "These numbers are already filled in. What you typed stays as it is.": "Këta numra janë plotësuar tashmë. Ajo që keni shkruar mbetet siç është.",
+  "Your log in {language} has {n} entries.": "Regjistri juaj në {language} ka {n} regjistrime.",
+  "Open it": "Hapeni"
 }

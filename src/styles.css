@@ -5346,3 +5346,4 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .sh-metric-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
 .sh-fill-status { margin: 12px 0 0; }
 .sh-fill-status:empty { display: none; }
+.dl-elsewhere { margin: 10px 0 0; }

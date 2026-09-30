@@ -79,7 +79,7 @@ test('the new Pulse texts are translated', () => {
     'No entries in this period. Choose another period or All.', 'All {n} entries', '{n} of {total} entries',
     'Any volume you enter must cover the same days.', 'Undo', 'Show results for', 'Today', 'Last 7 days', 'Last 30 days', 'All', 'From', 'To',
     'Removed {count} at {stage}.', 'Removed route {route}.', '{min} late in total', 'Departure {n} min.',
-    'Arrival {n} min: late ({side}). Choose the reason.', 'Arrival {n} min: on time.', 'All details',
+    'Arrival {n} min: late ({side}). Choose the reason.', 'Arrival {n} min: on time.', 'All details', 'Your log in {language} has {n} entries.', 'Open it',
     'Only some routes of the period are in the log, so hours and shifts show counts, not shares.',
     'Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.',
   ];
@@ -87,4 +87,14 @@ test('the new Pulse texts are translated', () => {
     const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
     for (const key of keys) assert.ok(ui[key], `${lang}: ${key}`);
   }
+});
+
+test('an empty log points to the same log kept in another language', () => {
+  const dom = new JSDOM('<html lang="de"><body></body></html>', { url: 'https://example.test/de/tools/damage-control/', runScripts: 'outside-only' });
+  dom.window.localStorage.setItem('sc-damage-control-sq', JSON.stringify({ rows: [{}, {}, {}] }));
+  dom.window.localStorage.setItem('sc-damage-control', JSON.stringify({ rows: [] }));
+  dom.window.localStorage.setItem('sc-damage-control-de', JSON.stringify({ rows: [{}] }));
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  // From the German page: the Albanian log has three entries, the English one none; German is this page.
+  assert.deepEqual(plain(dom.window.ToolKit.otherLogs('sc-damage-control-de')), [{ code: 'sq', count: 3, name: 'Shqip', url: '/sq/tools/damage-control/' }]);
 });
