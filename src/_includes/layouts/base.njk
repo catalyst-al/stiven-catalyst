@@ -109,7 +109,9 @@
 {%- if lang and lang != "en" and page.url and ("/" + lang + "/tools/") in page.url %}
 <script type="application/json" id="ui-strings">{{ lang | uiStrings | safe }}</script>
 {%- endif %}
+{%- include "partials/share-orbit.njk" %}
 <script src="{{ '/script.js' | assetUrl }}"></script>
+<script src="{{ '/js/share-orbit.js' | assetUrl }}" defer></script>
 {%- if toolFamily %}
 <script src="{{ '/js/family-sky.js' | assetUrl }}" defer></script>
 {%- endif %}
