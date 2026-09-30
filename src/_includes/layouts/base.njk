@@ -13,7 +13,8 @@
 ] -%}
 {%- set hasLegal = legal.name and legal.city -%}
 {%- set toolFamily = page.url | familyOf(families) -%}
-{%- set card = page.url | socialCard(lang) -%}
+{#- A page's own image, else its card, else the homepage card in its language (the hero with the families). -#}
+{%- set card = (page.url | socialCard(lang)) or (homeUrl | socialCard(lang)) -%}
 {%- set socialImage = ogImage or ((card | assetUrl) if card else "/social.png") -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">

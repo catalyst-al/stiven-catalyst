@@ -94,10 +94,10 @@ export default function (eleventyConfig) {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
     return families.find((family) => family.tools.includes(path)) || null;
   });
-  // The social preview of a tool page or the Tools page (made by scripts/social-cards.mjs), if there is one.
+  // The social preview of the homepage, the Tools page or a tool page (made by scripts/social-cards.mjs), if there is one.
   eleventyConfig.addFilter("socialCard", (url, lang) => {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
-    const slug = path === "/tools.html" ? "tools" : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
+    const slug = path === "/" ? "home" : path === "/tools.html" ? "tools" : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
     const file = slug && `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
