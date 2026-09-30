@@ -79,7 +79,7 @@ test('the new Pulse texts are translated', () => {
     'No entries in this period. Choose another period or All.', 'All {n} entries', '{n} of {total} entries',
     'Any volume you enter must cover the same days.', 'Undo', 'Show results for', 'Today', 'Last 7 days', 'Last 30 days', 'All', 'From', 'To',
     'Removed {count} at {stage}.', 'Removed route {route}.', '{min} late in total', 'Departure {n} min.',
-    'Arrival {n} min: late ({side}). Choose the reason.', 'Arrival {n} min: on time.',
+    'Arrival {n} min: late ({side}). Choose the reason.', 'Arrival {n} min: on time.', 'All details',
     'Only some routes of the period are in the log, so hours and shifts show counts, not shares.',
     'Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.',
   ];

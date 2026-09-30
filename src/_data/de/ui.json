@@ -1525,5 +1525,6 @@
   "Arrival {n} min: late ({side}). Choose the reason.": "Ankunft {n} Min.: verspätet ({side}). Wählen Sie den Grund.",
   "Arrival {n} min: on time.": "Ankunft {n} Min.: pünktlich.",
   "Removed route {route}.": "Tour {route} entfernt.",
-  "Show results for": "Auswerten für"
+  "Show results for": "Auswerten für",
+  "All details": "Alle Details"
 }

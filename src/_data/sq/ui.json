@@ -1525,5 +1525,6 @@
   "Arrival {n} min: late ({side}). Choose the reason.": "Mbërritja {n} min: me vonesë ({side}). Zgjidhni arsyen.",
   "Arrival {n} min: on time.": "Mbërritja {n} min: në kohë.",
   "Removed route {route}.": "U hoq linja {route}.",
-  "Show results for": "Shfaq rezultatet për"
+  "Show results for": "Shfaq rezultatet për",
+  "All details": "Të gjitha detajet"
 }
