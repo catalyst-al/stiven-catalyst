@@ -1,0 +1,17 @@
+{#- At the end of a tool page: the other tools of its family. Needs toolFamily. -#}
+{%- set familyList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
+{%- set siblings = toolFamily | familyTools(familyList, lang) -%}
+{%- if siblings.length > 1 %}
+<section class="shell family-more" aria-labelledby="family-more-title">
+  <div class="family-more-head">
+    <p class="kicker">{{ toolFamily.role | t(lang) }}</p>
+    <h2 id="family-more-title">{{ "More from {name}" | t(lang) | replace("{name}", toolFamily.name) }}</h2>
+    <a class="text-link" href="{{ '/tools.html' | local(lang) }}#{{ toolFamily.id }}">{{ "All tool families" | t(lang) }} <span aria-hidden="true">→</span></a>
+  </div>
+  <ul class="family-more-list">
+    {%- for tool in siblings %}{% if tool.url != page.url %}
+    <li><a href="{{ tool.url }}"><small>{{ tool.type }} · {{ tool.time }}</small><strong>{{ tool.name }}</strong><span>{{ tool.summary }}</span><em aria-hidden="true">→</em></a></li>
+    {%- endif %}{% endfor %}
+  </ul>
+</section>
+{%- endif %}

@@ -89,6 +89,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("familyTools", (family, tools, lang) =>
     family.tools.map((url) => tools.find((tool) => tool.url === localUrl(url, lang))).filter(Boolean)
   );
+  // The family a tool page belongs to (/tools/x/, /de/tools/x/ or /sq/tools/x/), else null.
+  eleventyConfig.addFilter("familyOf", (url, families) => {
+    const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
+    return families.find((family) => family.tools.includes(path)) || null;
+  });
   // Tools that no family lists yet, so a new tool is never left off the page.
   eleventyConfig.addFilter("unassigned", (tools, families, lang) =>
     tools.filter((tool) => !families.some((family) => family.tools.some((url) => localUrl(url, lang) === tool.url)))

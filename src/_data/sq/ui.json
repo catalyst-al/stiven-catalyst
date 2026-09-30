@@ -1454,5 +1454,7 @@
   "{n} tools": "{n} mjete",
   "1 tool": "1 mjet",
   "More tools": "Mjete të tjera",
-  "See all tools": "Shiko të gjitha mjetet"
+  "See all tools": "Shiko të gjitha mjetet",
+  "More from {name}": "Më shumë nga {name}",
+  "All tool families": "Të gjitha familjet e mjeteve"
 }

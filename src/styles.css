@@ -4259,3 +4259,419 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
   .cx-action { break-inside: avoid; }
   .cx-action:not([open]) .cx-action-form { display: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   Tool pages: each family has its own drawn background above the title
+   (partials/family-stage.njk, js/family-sky.js). It lives only around the
+   title and fades out before the work area; print leaves it out. */
+body.in-family {
+  --sky-ink: var(--family);
+  --sky-star: #f4f7fb;
+  --sky-glow: 1;
+  background:
+    radial-gradient(1100px 640px at 72% -14%, color-mix(in srgb, var(--family) 18%, transparent), transparent 62%),
+    radial-gradient(900px 560px at 6% -12%, color-mix(in srgb, var(--family) 8%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--paper), var(--paper));
+}
+[data-theme="light"] body.in-family {
+  --sky-ink: color-mix(in srgb, var(--family) 62%, #0b1015);
+  --sky-star: color-mix(in srgb, var(--family) 55%, #1b2330);
+  --sky-glow: .55;
+}
+[data-theme="light"] body.in-family[data-family="atlas"] { --sky-ink: #56606b; --sky-star: #56606b; }
+.in-family main { position: relative; }
+
+.family-sky {
+  --hero-bottom: 560px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: calc(var(--hero-bottom) + 220px);
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 300px), transparent);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 300px), transparent);
+}
+.family-sky > * { position: absolute; }
+
+.family-badge-row { padding-top: 40px; }
+.family-badge-row + .tool-hero { padding-top: 26px; }
+.family-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--family) 45%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--family) 10%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.family-badge > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sky-ink);
+  box-shadow: 0 0 10px var(--family);
+}
+.family-badge small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.family-badge:hover { border-color: var(--family); }
+.in-family .tool-hero .eyebrow { color: var(--sky-ink); }
+.in-family .tool-hero .lede { text-shadow: 0 0 18px var(--paper), 0 0 4px var(--paper); }
+
+/* Lumen: a beam of light from the bulb, dust drifting in it. */
+.sky-lumen .lumen-cable {
+  left: 84%;
+  top: 0;
+  width: 1.5px;
+  height: 36px;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--sky-star) 55%, transparent));
+}
+.sky-lumen .lumen-bulb {
+  left: 84%;
+  top: 46px;
+  width: 26px;
+  height: 32px;
+  margin-left: -12px;
+  border-radius: 48% 48% 52% 52%;
+  background: radial-gradient(circle at 45% 55%, #fff, #fff6df 60%, #ffe2a8);
+  box-shadow: 0 0 12px #fff, 0 0 40px rgba(255, 236, 190, .9);
+}
+.sky-lumen .lumen-halo {
+  left: 84%;
+  top: 62px;
+  width: 420px;
+  height: 420px;
+  margin: -210px 0 0 -210px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 236, 190, calc(.42 * var(--sky-glow))), rgba(245, 200, 106, calc(.14 * var(--sky-glow))) 45%, transparent);
+  animation: lumen-breathe 5s ease-in-out infinite;
+}
+.sky-lumen .lumen-bulb::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: -11px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(#050607, #1b1e20);
+  border-bottom: 2px solid #d1a553;
+}
+@keyframes lumen-breathe {
+  50% { opacity: .7; transform: scale(.92); }
+}
+.sky-lumen .lumen-beam { inset: 0; filter: blur(16px); }
+.sky-lumen .lumen-cone,
+.sky-lumen .lumen-core,
+.sky-lumen .lumen-dust { position: absolute; inset: 0; }
+.sky-lumen .lumen-cone,
+.sky-lumen .lumen-dust { clip-path: polygon(calc(84% - 14px) 70px, calc(84% + 16px) 70px, 104% 100%, 34% 100%); }
+.sky-lumen .lumen-cone { background: linear-gradient(180deg, rgba(255, 240, 205, .30), rgba(255, 226, 170, .12) 58%, rgba(255, 226, 170, 0)); }
+.sky-lumen .lumen-core {
+  clip-path: polygon(calc(84% - 6px) 70px, calc(84% + 8px) 70px, 90% 100%, 64% 100%);
+  background: linear-gradient(180deg, rgba(255, 250, 235, .30), rgba(255, 236, 190, 0) 80%);
+}
+[data-theme="light"] .sky-lumen .lumen-cone { background: linear-gradient(180deg, rgba(209, 165, 83, .30), rgba(209, 165, 83, .10) 58%, rgba(209, 165, 83, 0)); }
+[data-theme="light"] .sky-lumen .lumen-core { background: linear-gradient(180deg, rgba(209, 165, 83, .22), rgba(209, 165, 83, 0) 80%); }
+.sky-lumen .lumen-pool {
+  left: 64%;
+  top: var(--hero-bottom);
+  width: 1000px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(255, 226, 170, calc(.16 * var(--sky-glow))), transparent);
+}
+.sky-lumen .lumen-dust i {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #fff4dc;
+  box-shadow: 0 0 6px rgba(255, 226, 170, .9);
+  opacity: 0;
+  animation: lumen-dust var(--t) linear var(--d) infinite;
+}
+[data-theme="light"] .sky-lumen .lumen-dust i { background: #b88a3b; box-shadow: none; }
+@keyframes lumen-dust {
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  18% { opacity: .9; }
+  80% { opacity: .6; }
+  100% { opacity: 0; transform: translate3d(var(--dx), -80px, 0); }
+}
+
+/* Pulse: a monitor grid and a heartbeat running along the foot of the title. */
+.sky-pulse .pulse-grid {
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--sky-ink) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--sky-ink) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--sky-ink) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--sky-ink) 5%, transparent) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 80% at 72% 45%, #000, transparent 78%);
+  mask-image: radial-gradient(ellipse 60% 80% at 72% 45%, #000, transparent 78%);
+}
+.sky-pulse .pulse-ecg {
+  left: 0;
+  top: calc(var(--hero-bottom) - 90px);
+  width: 100%;
+  height: 180px;
+  overflow: visible;
+}
+.sky-pulse path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.sky-pulse .pulse-base { stroke: color-mix(in srgb, var(--sky-ink) 42%, transparent); stroke-width: 1.4; }
+.sky-pulse .pulse-trace {
+  stroke: var(--sky-ink);
+  stroke-width: 2.6;
+  stroke-dasharray: 80 1000;
+  stroke-dashoffset: 1080;
+  filter: drop-shadow(0 0 6px var(--family));
+  animation: pulse-run 3.4s linear infinite;
+}
+@keyframes pulse-run { to { stroke-dashoffset: 0; } }
+
+/* Zenith: the landscape from above and a radar turning over it. */
+.sky-zenith .zenith-map,
+.sky-zenith .zenith-radar {
+  left: 82%;
+  top: calc(var(--hero-bottom) * .34);
+  transform: translate(-50%, -50%);
+}
+.sky-zenith .zenith-map { width: 980px; height: 980px; }
+.sky-zenith .zenith-map path { fill: none; stroke: color-mix(in srgb, var(--sky-ink) 16%, transparent); stroke-width: 1; }
+.sky-zenith .zenith-map path.is-major { stroke: color-mix(in srgb, var(--sky-ink) 36%, transparent); stroke-dasharray: 2 5; }
+.sky-zenith .zenith-radar {
+  width: 460px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.sky-zenith .zenith-radar svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sky-zenith .zenith-radar circle,
+.sky-zenith .zenith-radar path { fill: none; stroke: color-mix(in srgb, var(--sky-ink) 30%, transparent); stroke-width: .5; }
+.sky-zenith .zenith-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 285deg, color-mix(in srgb, var(--family) calc(22% * var(--sky-glow) + 8%), transparent) 360deg);
+  animation: zenith-turn var(--sweep) linear infinite;
+}
+.sky-zenith .zenith-sweep::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1.5px;
+  height: 50%;
+  margin-left: -.75px;
+  background: linear-gradient(color-mix(in srgb, var(--family) 90%, #fff), transparent);
+}
+@keyframes zenith-turn { to { transform: rotate(360deg); } }
+.sky-zenith .zenith-radar i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sky-ink);
+  box-shadow: 0 0 12px var(--family);
+  opacity: .14;
+  transform: translate(-50%, -50%);
+  animation: zenith-blip var(--sweep) linear infinite;
+}
+@keyframes zenith-blip {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1.7); }
+  30% { opacity: .3; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: .14; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Atlas: a career drawn as a constellation, rising to its brightest star, and a compass. */
+.atlas-stars { inset: 0; }
+.atlas-stars i {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--sky-star);
+  animation: atlas-twinkle var(--t) ease-in-out var(--d) infinite;
+}
+@keyframes atlas-twinkle { 50% { opacity: .2; } }
+.sky-atlas .atlas-map { top: 0; right: 0; width: 100%; height: var(--hero-bottom); overflow: visible; }
+.sky-atlas .atlas-compass circle,
+.sky-atlas .atlas-compass path { fill: none; stroke: color-mix(in srgb, var(--sky-ink) 26%, transparent); stroke-width: 1; }
+.sky-atlas .atlas-compass .is-dashed { stroke-dasharray: 2 6; }
+.sky-atlas .atlas-compass .is-inner { fill: color-mix(in srgb, var(--sky-ink) 6%, transparent); }
+.sky-atlas .atlas-compass text { fill: color-mix(in srgb, var(--sky-ink) 45%, transparent); font: 800 14px var(--sans); letter-spacing: .2em; }
+.sky-atlas .atlas-compass .atlas-needle {
+  fill: color-mix(in srgb, var(--sky-ink) 30%, transparent);
+  stroke: none;
+  transform-box: view-box;
+  transform-origin: 912px 330px;
+  animation: atlas-needle 9s ease-in-out infinite;
+}
+@keyframes atlas-needle { 50% { transform: rotate(-10deg); } }
+.sky-atlas .atlas-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--sky-star) 50%, transparent);
+  stroke-width: 1.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: atlas-draw 3.4s cubic-bezier(.4, 0, .2, 1) .3s forwards;
+}
+@keyframes atlas-draw { to { stroke-dashoffset: 0; } }
+.sky-atlas .atlas-star { opacity: 0; animation: atlas-appear .8s ease-out forwards; }
+.sky-atlas .atlas-star circle { fill: var(--sky-star); }
+.sky-atlas .atlas-star .halo { fill: color-mix(in srgb, var(--sky-ink) 20%, transparent); }
+.sky-atlas .atlas-star path { fill: var(--sky-star); filter: drop-shadow(0 0 6px var(--family)); }
+.sky-atlas .atlas-star.is-goal { animation: atlas-appear .8s ease-out forwards, atlas-glow 4s ease-in-out 4s infinite; }
+@keyframes atlas-appear { to { opacity: 1; } }
+@keyframes atlas-glow { 50% { opacity: .55; } }
+
+/* Academy: five moons from crescent to full, one per DMAIC step; a completed step lights its moon. */
+.sky-academy .academy-arc {
+  left: 55%;
+  top: 40px;
+  width: 42%;
+  height: 90px;
+  border-top: 1px dashed color-mix(in srgb, var(--sky-ink) 40%, transparent);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.sky-academy .academy-moon {
+  top: calc(40px + var(--drop));
+  width: 46px;
+  aspect-ratio: 1;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #fffaf2, #ffe1c8 45%, color-mix(in srgb, var(--family) 55%, #fff) 100%);
+  box-shadow: inset var(--shade) 0 0 0 color-mix(in srgb, var(--paper) 92%, transparent);
+  opacity: .3;
+  filter: grayscale(.7);
+  transition: opacity .6s ease, filter .6s ease;
+}
+.sky-academy .academy-moon.is-lit { opacity: 1; filter: grayscale(0) drop-shadow(0 0 16px color-mix(in srgb, var(--family) 75%, transparent)); }
+.sky-academy .academy-moon.is-current { opacity: .75; filter: grayscale(0); }
+.sky-academy .academy-moon.is-current::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 1px solid var(--sky-ink);
+  border-radius: 50%;
+  animation: academy-ring 2.8s ease-out infinite;
+}
+@keyframes academy-ring {
+  from { transform: scale(.9); opacity: 1; }
+  to { transform: scale(1.35); opacity: 0; }
+}
+.sky-academy .academy-moon b {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--sky-ink);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .2em;
+}
+
+/* More from the same family, at the end of a tool page. */
+.family-more { padding: 72px 0 110px; border-top: 1px solid var(--line); }
+.family-more-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin-bottom: 26px;
+}
+.family-more-head .kicker { flex-basis: 100%; margin: 0; color: var(--sky-ink); }
+.family-more-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.family-more-head .text-link { margin-left: auto; }
+.family-more-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.family-more-list a {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  padding: 22px 48px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--family) 14%, transparent), transparent 50%),
+    var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.family-more-list a:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.family-more-list small { color: var(--sky-ink); font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.family-more-list strong { font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: -.03em; line-height: 1.05; }
+.family-more-list span { color: var(--muted); font-size: 14px; }
+.family-more-list em { position: absolute; right: 20px; top: 20px; font-style: normal; font-weight: 800; }
+
+@media (max-width: 900px) {
+  .sky-lumen .lumen-cable,
+  .sky-lumen .lumen-bulb,
+  .sky-lumen .lumen-halo { left: 88%; }
+  .sky-lumen .lumen-halo { top: 56px; width: 260px; height: 260px; margin: -130px 0 0 -130px; }
+  .sky-lumen .lumen-cable { height: 30px; }
+  .sky-lumen .lumen-bulb { top: 40px; transform: scale(.8); }
+  .sky-lumen .lumen-cone,
+  .sky-lumen .lumen-dust { clip-path: polygon(calc(88% - 12px) 64px, calc(88% + 14px) 64px, 100% 100%, 18% 100%); }
+  .sky-lumen .lumen-core { clip-path: polygon(calc(88% - 5px) 64px, calc(88% + 7px) 64px, 96% 100%, 56% 100%); }
+  .sky-zenith .zenith-map { width: 720px; height: 720px; }
+  .sky-zenith .zenith-map,
+  .sky-zenith .zenith-radar { left: 86%; top: calc(var(--hero-bottom) * .3); }
+  .sky-zenith .zenith-radar { width: 340px; }
+  /* Phones: the moons line up at the right of the badge. */
+  .sky-academy .academy-arc,
+  .sky-academy .academy-moon b { display: none; }
+  .sky-academy .academy-moon {
+    top: 42px;
+    left: calc(100% - 26px - (4 - var(--i)) * 30px) !important;
+    width: 22px;
+    margin: -11px 0 0 -11px;
+    box-shadow: inset calc(var(--shade) * .48) 0 0 0 color-mix(in srgb, var(--paper) 92%, transparent);
+  }
+  .sky-academy .academy-moon.is-current::after { inset: -5px; }
+  .family-more-head .text-link { margin-left: 0; }
+}
+@media (max-width: 620px) {
+  .family-badge-row { padding-top: 26px; }
+  .family-badge-row + .tool-hero { padding-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .family-sky *,
+  .family-sky *::before,
+  .family-sky *::after { animation: none !important; transition: none !important; }
+  .sky-lumen .lumen-dust i { opacity: .6; }
+  .sky-atlas .atlas-line { stroke-dashoffset: 0; }
+  .sky-atlas .atlas-star { opacity: 1; }
+  .sky-pulse .pulse-trace { stroke-dashoffset: 700; }
+}
+@media print {
+  .family-sky,
+  .family-badge-row,
+  .family-more { display: none !important; }
+}
