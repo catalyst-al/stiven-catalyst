@@ -1,0 +1,67 @@
+{#- Structured data (JSON-LD) for search engines, in the head of every page (layouts/base.njk):
+    the author as a Person everywhere, the site as a WebSite on the homepage, a ProfilePage on the About
+    page, and an Article for every essay and reflection (layouts/article.njk, ogType "article").
+    Everything comes from site.json, the page's front matter and the social preview already chosen
+    for the page; profile links go in "profiles" in site.json. -#}
+{%- set siteUrl = "/" | absoluteUrl %}
+{%- set person = {
+  "@type": "Person",
+  "@id": siteUrl + "#author",
+  "name": site.author,
+  "url": ("/about.html" | local(lang)) | absoluteUrl,
+  "image": ("/media/stiven-portrait.jpg" | absoluteUrl),
+  "email": site.email,
+  "sameAs": site.profiles or []
+} %}
+{%- set publisher = {
+  "@type": "Organization",
+  "@id": siteUrl + "#publisher",
+  "name": site.title,
+  "url": siteUrl,
+  "logo": { "@type": "ImageObject", "url": ("/social.png" | absoluteUrl) },
+  "founder": { "@id": siteUrl + "#author" }
+} %}
+{%- set graph = [person, publisher] %}
+{%- if ogType == "article" %}
+  {%- set minutes = (readingTime or "") | replace(" min", "") | trim %}
+  {%- set article = {
+    "@type": "Article",
+    "@id": (page.url | absoluteUrl) + "#article",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": (page.url | absoluteUrl) },
+    "headline": title,
+    "description": pageDescription,
+    "image": [socialImage | absoluteUrl],
+    "datePublished": page.date | isoDate,
+    "dateModified": page.date | isoDate,
+    "inLanguage": lang or "en",
+    "author": { "@id": siteUrl + "#author" },
+    "publisher": { "@id": siteUrl + "#publisher" },
+    "isAccessibleForFree": true
+  } %}
+  {%- if category %}{% set article = article | merge({ "articleSection": category }) %}{% endif %}
+  {%- if kind == "Reflection" %}{% set article = article | merge({ "genre": "Reflection" }) %}{% endif %}
+  {%- if minutes and (minutes | int) > 0 %}{% set article = article | merge({ "timeRequired": "PT" + (minutes | int) + "M" }) %}{% endif %}
+  {%- if image %}{% set article = article | merge({ "image": [image | absoluteUrl, socialImage | absoluteUrl] }) %}{% endif %}
+  {%- set graph = graph.concat([article]) %}
+{%- elif page.url == homeUrl %}
+  {%- set graph = graph.concat([{
+    "@type": "WebSite",
+    "@id": siteUrl + "#website",
+    "name": site.title,
+    "url": siteUrl,
+    "description": site.description,
+    "inLanguage": ["en", "de", "sq"],
+    "publisher": { "@id": siteUrl + "#publisher" },
+    "author": { "@id": siteUrl + "#author" }
+  }]) %}
+{%- elif activeNav == ("/about.html" | local(lang)) %}
+  {%- set graph = graph.concat([{
+    "@type": "ProfilePage",
+    "@id": (page.url | absoluteUrl) + "#profile",
+    "url": (page.url | absoluteUrl),
+    "name": title,
+    "inLanguage": lang or "en",
+    "mainEntity": { "@id": siteUrl + "#author" }
+  }]) %}
+{%- endif %}
+  <script type="application/ld+json">{{ { "@context": "https://schema.org", "@graph": graph } | dump | replace("</", "<\\/") | safe }}</script>

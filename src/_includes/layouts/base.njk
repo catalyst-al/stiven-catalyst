@@ -47,6 +47,9 @@
   <meta name="robots" content="noindex">
 {%- endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
+{%- if not noindex %}
+{% include "partials/structured-data.njk" %}
+{%- endif %}
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
   <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
