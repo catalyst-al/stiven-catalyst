@@ -5,10 +5,15 @@
 
 The visual identity is rooted in the original Catalyst Coaching mark: a hanging light bulb, strong white typography, a red-to-blue-to-dark gradient, and a restrained gold accent.
 
+## Headline
+**Management without theatre.**
+
+Supporting line: **Ideas that move work forward.** The homepage opens with both: the headline says what the publication is about and how it speaks, the line under it says for whom.
+
 ## Brand line
 **See clearly. Think differently. Act deliberately.**
 
-Supporting line: **Ideas that move work forward.**
+The philosophy behind the work, on the About page.
 
 ## Meaning of the symbol
 - **The light** represents clarity: the moment a complex problem becomes understandable.
