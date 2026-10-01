@@ -2,6 +2,7 @@ import { HtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { clearCache, localUrl } from "./lib/translations.js";
+import { splitStylesheet } from "./lib/css-split.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -133,6 +134,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/_data/de/");
   eleventyConfig.addWatchTarget("src/_data/sq/");
   eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); });
+  // A minified stylesheet, and a lighter one for the pages that are not tools (lib/css-split.js).
+  eleventyConfig.on("eleventy.after", ({ dir }) => splitStylesheet(dir?.output || "_site"));
 
   eleventyConfig.addFilter("readableDate", (date, lang) =>
     new Date(date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })

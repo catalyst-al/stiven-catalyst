@@ -8,12 +8,19 @@
     .replace(/ß/g, "ss").replace(/[^a-z0-9%€]+/g, " ").trim();
 
   // Excel on German Windows still saves CSV as Windows-1252; UTF-8 is tried first.
+  // Windows-1252 is Latin-1 except for 0x80-0x9F (€, curly quotes, dashes...). Those are
+  // mapped here, because a TextDecoder built without full ICU reads them as Latin-1 and drops the €.
+  const CP1252 = "€\u0081‚ƒ„…†‡ˆ‰Š‹Œ\u008DŽ\u008F\u0090‘’“”•–—˜™š›œ\u009DžŸ";
   const decode = (bytes) => {
     const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
     try {
       return new TextDecoder("utf-8", { fatal: true }).decode(data).replace(/^﻿/, "");
     } catch {
-      return new TextDecoder("windows-1252").decode(data);
+      let text = "";
+      for (let i = 0; i < data.length; i += 8192) {
+        text += String.fromCharCode(...data.subarray(i, i + 8192)).replace(/[\x80-\x9f]/g, (ch) => CP1252[ch.charCodeAt(0) - 0x80]);
+      }
+      return text;
     }
   };
 
