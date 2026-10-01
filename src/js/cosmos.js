@@ -666,19 +666,20 @@
   };
 
   // ---- The reader: a small figure under the light ----
-  // A pictogram, no face, sitting on the inner orbit in the pool of light, reading. Now and then it
-  // looks up, stretches or walks a few steps; left alone for a minute it lies down and sleeps, and the
-  // light dims a little. When a planet is opened it runs there along the beam and stands on it; when
+  // A pictogram, no face, sitting on two books on the inner orbit in the pool of light, reading. Now and
+  // then it looks up, stretches or walks a few steps; left alone for a minute it dozes off over its book,
+  // and the light dims a little. When a planet is opened it runs there along the beam and stands on it; when
   // a moon is tapped it jumps to the moon as the tool opens; when the planet is closed it comes back
   // and sits down to read. With reduced motion it only sits, or stands on the open planet.
   const reader = {
     state: "read", t: 0, next: 4 + Math.random() * 6, idle: 0,
-    x: 0, y: 0, s: 1, face: 1, from: { x: 0, y: 0 }, target: null, walkDir: 1, walkOff: 0,
+    x: 0, y: 0, s: 1, face: 1, from: { x: 0, y: 0 }, target: null, walkDir: 1, walkOff: 0, bx: 0, by: 0, bs: 1,
   };
   let dim = 1;
   const inner = planets.reduce((a, p) => (p.r < a.r ? p : a), planets[0] || { r: 0.46, incl: 0 });
   // The seat: the front of the inner orbit, a little to the left of the bulb, whatever the turn of the system.
-  const seatPoint = () => orbitPoint(inner.r, inner.incl, Math.PI / 2 - (view.yaw + view.hoverX * 0.22) + 0.45 + reader.walkOff);
+  const seatPoint = (off = reader.walkOff) => orbitPoint(inner.r, inner.incl, Math.PI / 2 - (view.yaw + view.hoverX * 0.22) + 0.45 + off);
+  const readerScale = (k) => Math.max((15 * dpr) / 34, (0.1 * S * Math.min(1.2, k)) / 34);
   const toRead = () => { reader.state = "read"; reader.t = 0; reader.next = 6 + Math.random() * 8; reader.walkOff = 0; };
   const startRun = (planet) => { reader.from = { x: reader.x, y: reader.y }; reader.target = planet; reader.state = "run"; reader.t = 0; };
   const startBack = () => { reader.from = { x: reader.x, y: reader.y }; reader.target = null; reader.state = "back"; reader.t = 0; };
@@ -740,106 +741,161 @@
       x = reader.target.sx;
       y = reader.target.sy - reader.target.sr;
       k = reader.target.sr / (inner.size * S) || k;
-    } else if (reader.state === "walk" && Math.abs(x - reader.x) > 0.2) {
-      reader.face = Math.sign(x - reader.x);
+    } else if (reader.state === "walk") {
+      if (Math.abs(x - reader.x) > 0.2) reader.face = Math.sign(x - reader.x);
+    } else {
+      // Seated, it faces the light it reads by.
+      reader.face = 1;
     }
     reader.x = x;
     reader.y = y;
-    reader.s = Math.max((15 * dpr) / 34, (0.1 * S * Math.min(1.2, k)) / 34);
+    reader.s = readerScale(k);
+    const home = seatPoint(0);
+    reader.bx = home.x;
+    reader.by = home.y;
+    reader.bs = readerScale(home.k);
+  };
+
+  // The reader is a pictogram in the bulb's light: one warm colour, thick rounded limbs and a head
+  // apart from the body, sitting on two books with an open book in its hands. The books stay at the
+  // seat while it runs to a planet.
+  const FIGURE = "rgb(255,243,224)";
+  const FAR = "rgba(255,232,200,0.62)";
+  const drawBooks = () => {
+    const { bx, by, bs } = reader;
+    ctx.save();
+    ctx.translate(bx, by);
+    ctx.scale(bs, bs);
+    ctx.fillStyle = "rgba(0,0,0,0.28)";
+    ctx.beginPath();
+    ctx.ellipse(-3.5, 0.6, 9, 1.6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    const book = (x0, y0, w, cover) => {
+      ctx.fillStyle = cover;
+      ctx.beginPath();
+      ctx.roundRect(x0, y0, w, 4, 1);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255,246,230,0.85)";
+      ctx.fillRect(x0 + 1.6, y0 + 1.55, w - 2.4, 0.9);
+    };
+    book(-10, -4, 13, "rgb(196,128,72)");
+    book(-9, -8, 11, "rgb(226,176,110)");
+    ctx.restore();
   };
 
   const drawReader = () => {
     const { x, y, s, face, state, t } = reader;
-    const onSeat = !(state === "run" || state === "jump" || state === "back" || state === "stand");
-    if (onSeat) {
-      ctx.fillStyle = "rgba(0,0,0,0.35)";
-      ctx.beginPath();
-      ctx.ellipse(x, y + 1 * s, 14 * s, 3 * s, 0, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    drawBooks();
     // A soft light around the figure instead of a shadow blur, which is costly every frame.
     ctx.globalCompositeOperation = "lighter";
     const aura = ctx.createRadialGradient(x, y - 16 * s, 0, x, y - 16 * s, 30 * s);
-    aura.addColorStop(0, "rgba(255,236,200,0.3)");
+    aura.addColorStop(0, "rgba(255,236,200,0.26)");
     aura.addColorStop(1, "rgba(255,236,200,0)");
     ctx.fillStyle = aura;
     ctx.beginPath();
     ctx.arc(x, y - 16 * s, 30 * s, 0, Math.PI * 2);
     ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(s * face, s);
-    ctx.strokeStyle = "rgba(255,246,225,0.85)";
-    ctx.fillStyle = "rgba(255,246,225,0.85)";
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 2.4;
-    const head = (hx, hy) => { ctx.beginPath(); ctx.arc(hx, hy, 3.4, 0, Math.PI * 2); ctx.fill(); };
-    const seg = (...pts) => { ctx.beginPath(); ctx.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]); ctx.stroke(); };
+    const head = (hx, hy) => { ctx.fillStyle = FIGURE; ctx.beginPath(); ctx.arc(hx, hy, 3.7, 0, Math.PI * 2); ctx.fill(); };
+    const limb = (w, colour, ...pts) => {
+      ctx.lineWidth = w;
+      ctx.strokeStyle = colour;
+      ctx.beginPath();
+      ctx.moveTo(pts[0], pts[1]);
+      for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]);
+      ctx.stroke();
+    };
+    const body = (...pts) => limb(6.2, FIGURE, ...pts);
+    const leg = (...pts) => limb(4.4, FIGURE, ...pts);
+    const arm = (...pts) => limb(3.4, FIGURE, ...pts);
+    // An open book: two pages from the spine; while a page turns it sweeps from right to left.
+    const openBook = (bx, by, turn) => {
+      limb(2.8, "rgb(214,150,84)", bx - 3.8, by - 4.8, bx, by, bx + 4, by - 4.4);
+      limb(1.2, "rgb(255,250,240)", bx - 3.2, by - 4.6, bx, by - 0.6, bx + 3.4, by - 4.3);
+      if (turn > 0 && turn < 1) {
+        const a = -0.86 + (-2.21 + 0.86) * smooth(turn);
+        limb(1.2, "rgb(255,250,240)", bx, by - 0.6, bx + Math.cos(a) * 5.4, by - 0.6 + Math.sin(a) * 5.4);
+      }
+    };
+    const closedBook = (bx, by) => limb(2.4, "rgb(226,176,110)", bx - 2.6, by, bx + 2.6, by);
     const bob = Math.sin(time * 2) * 0.4;
+    // Sitting: hip on the books, knee forward, foot on the ground.
+    const sit = (tap = 0) => {
+      leg(-3, -10.4, 6, -11.6, 7, -1.2 + tap, 9.4, -1 + tap);
+    };
     if (state === "read" || state === "lookup" || state === "wake") {
       const up = state === "lookup" ? Math.min(1, t / 0.4) * (t > 1.4 ? Math.max(0, 1 - (t - 1.4) / 0.4) : 1) : 0;
-      const eyes = Math.sin(time * 1.1) * 0.7;
+      const eyes = Math.sin(time * 1.1) * 0.4;
       const page = (time % 3.4) / 3.4;
-      const turn = page < 0.22 ? Math.sin((page / 0.22) * Math.PI) : 0;
-      const tap = -1.6 * Math.max(0, Math.sin(time * 2.6));
-      head(1 + up * 2 + eyes, -29 - up + bob * 0.5);
-      seg(1, -24, -1, -11);
-      seg(-1, -11, -9, -8, -8, 0);
-      seg(-1, -11, 7, -9, 9, tap);
-      if (state === "wake") { seg(0, -20, -7, -10); seg(0, -20, 6, -10); }
-      else {
-        seg(0, -20, 7 - turn * 8, -16 + up * 2 - turn * 3);
-        seg(0, -20, -6, -15 + up * 2);
-        ctx.lineWidth = 1.8;
-        ctx.strokeRect(-1, -19 + up * 3, 10, 7);
+      const tap = -1.2 * Math.max(0, Math.sin(time * 2.6));
+      sit(tap);
+      body(-0.6, -21.6 + up * 0.4, -3, -10.4);
+      head(2 + eyes - up * 1.6, -29 - up * 1.2 + bob * 0.3);
+      if (state === "wake") {
+        arm(-0.6, -20, -3, -26, -4, -32);
+        arm(-0.6, -20, 2.5, -26, 3.5, -32);
+      } else {
+        const yb = -16.4 + up * 2.6;
+        arm(-0.6, -20, 3.4, -14.6, 8, yb);
+        openBook(8.4, yb, page / 0.22);
       }
-    } else if (state === "stretch") {
-      const a = Math.sin(Math.min(1, t / 0.6) * Math.PI / 2) * (t > 1.4 ? Math.max(0, 1 - (t - 1.4) / 0.6) : 1);
-      head(0, -33 - a);
-      seg(0, -28 - a, 0, -12);
-      seg(0, -12, -4, 0);
-      seg(0, -12, 4, 0);
-      seg(0, -23, -7, -23 - 14 * a);
-      seg(0, -23, 7, -23 - 14 * a);
-    } else if (state === "stand") {
-      head(0, -33 + bob);
-      seg(0, -28 + bob, 0, -12);
-      seg(0, -12, -4, 0);
-      seg(0, -12, 5, 0);
-      seg(0, -23 + bob, -6, -13);
-      seg(0, -23 + bob, 6, -13);
-    } else if (state === "run" || state === "back" || state === "walk") {
-      const fast = state !== "walk";
-      const k = Math.sin(time * (fast ? 16 : 9)) * (fast ? 1 : 0.6);
-      const lean = fast ? 4 : 1;
-      head(lean + 1, -33);
-      seg(lean, -28, 0, -12);
-      seg(0, -12, -7 + k * 4, -5, -4 + k * 6, 0);
-      seg(0, -12, 7 - k * 4, -6, 11 - k * 4, -2 * (1 + k) * (fast ? 1 : 0.4));
-      seg(lean - 1, -23, lean + 8 + k * 3, -19);
-      seg(lean - 1, -23, lean - 8 - k * 3, -20);
-    } else if (state === "jump") {
-      head(0, -30);
-      seg(0, -25, 0, -12);
-      seg(0, -12, -5, -6, -2, -2);
-      seg(0, -12, 5, -6, 8, -3);
-      seg(0, -21, -7, -29);
-      seg(0, -21, 7, -29);
     } else if (state === "sleep") {
-      const breath = Math.sin(time * 1.4) * 0.6;
-      head(-16, -3);
-      seg(-11, -3, 4, -4 - breath, 14, -3, 23, -3);
-      seg(2, -3, 6, -7);
+      // Dozed off over the book: head on the chest, the book closed on the lap.
+      const breath = Math.sin(time * 1.4);
+      sit();
+      body(0.2, -20.6 + breath * 0.4, -3, -10.4);
+      head(5, -25.8 + breath * 0.5);
+      arm(0.2, -19, 3, -13, 7.4, -12.6);
+      closedBook(6.4, -13.2);
       const z = (time % 2.4) / 2.4;
+      ctx.fillStyle = FIGURE;
       ctx.globalAlpha = 1 - z;
       ctx.font = "800 7px Inter, ui-sans-serif, sans-serif";
-      ctx.fillText("z", -14 + z * 4, -12 - z * 10);
+      ctx.fillText("z", 6 + z * 4, -30 - z * 10);
       ctx.font = "800 5px Inter, ui-sans-serif, sans-serif";
-      ctx.fillText("z", -8 + z * 5, -18 - z * 8);
+      ctx.fillText("z", 11 + z * 5, -36 - z * 8);
+      ctx.globalAlpha = 1;
+    } else if (state === "stretch") {
+      // Still sitting, the book on the lap, both arms up.
+      const a = Math.sin(Math.min(1, t / 0.6) * Math.PI / 2) * (t > 1.4 ? Math.max(0, 1 - (t - 1.4) / 0.6) : 1);
+      sit();
+      body(-1, -21.8 - a, -3, -10.4);
+      head(-0.4, -29.2 - a * 1.6);
+      closedBook(4, -12.6);
+      arm(-1, -20.4 - a, -4.5 - a * 0.5, -24 - a * 4, -5.5, -24 - a * 10);
+      arm(-1, -20.4 - a, 2.5 + a * 0.5, -24 - a * 4, 3.5, -24 - a * 10);
+    } else if (state === "stand") {
+      limb(4.4, FAR, 1.4, -15, 2.4, -7.5, 3, 0);
+      limb(3.4, FAR, 0, -26 + bob, 4, -20.5, 5, -15);
+      body(0, -27 + bob, 0, -15);
+      leg(-1.4, -15, -2.4, -7.5, -3, 0);
+      arm(0, -26 + bob, -4, -20.5, -5, -15);
+      head(0, -34 + bob);
+    } else if (state === "run" || state === "back" || state === "walk") {
+      const fast = state !== "walk";
+      const k = Math.sin(time * (fast ? 16 : 9)) * (fast ? 1 : 0.55);
+      const lean = fast ? 3 : 1;
+      const lift = (v) => Math.max(0, v) * (fast ? 3 : 1.4);
+      limb(4.4, FAR, 0, -15, 3.5 - 3 * k, -8.5, 0.5 - 6 * k, -1 - lift(k));
+      limb(3.4, FAR, lean - 0.5, -25.5, lean - 0.5 + 4 * k, -20.5, lean + 2 + 4 * k, -17.5);
+      body(lean, -27, 0, -15);
+      leg(0, -15, 3.5 + 3 * k, -8.5, 0.5 + 6 * k, -1 - lift(-k));
+      arm(lean - 0.5, -25.5, lean - 0.5 - 4 * k, -20.5, lean + 2 - 4 * k, -17.5);
+      head(lean + 2.2, -33.6);
+    } else if (state === "jump") {
+      limb(4.4, FAR, 0, -15, -2, -10.5, -4.5, -7);
+      limb(3.4, FAR, 0, -25, 5, -31);
+      body(0, -26, 0, -15);
+      leg(0, -15, 4, -11, 1.5, -6.5);
+      arm(0, -25, -5, -30.5);
+      head(0.4, -32.8);
     }
     ctx.restore();
-    ctx.globalCompositeOperation = "source-over";
   };
 
   const draw = () => {
