@@ -1554,5 +1554,6 @@
   "incomplete orders": "unvollständige Aufträge",
   "These numbers are already filled in. What you typed stays as it is.": "Diese Zahlen sind schon eingetragen. Was Sie eingegeben haben, bleibt unverändert.",
   "Your log in {language} has {n} entries.": "Ihr Protokoll auf {language} hat {n} Einträge.",
-  "Open it": "Öffnen"
+  "Open it": "Öffnen",
+  "Show {n} more": "{n} weitere anzeigen"
 }

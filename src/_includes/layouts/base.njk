@@ -111,9 +111,9 @@
     </nav>
   </div>
 </footer>
-{#- Translated tool pages carry their UI text for tool-kit.js. #}
+{#- Translated tool pages load their UI text for tool-kit.js from one file the browser keeps (before the deferred tool scripts run). #}
 {%- if lang and lang != "en" and page.url and ("/" + lang + "/tools/") in page.url %}
-<script type="application/json" id="ui-strings">{{ lang | uiStrings | safe }}</script>
+<script src="{{ lang | uiStringsUrl }}"></script>
 {%- endif %}
 {%- include "partials/share-orbit.njk" %}
 <script src="{{ '/script.js' | assetUrl }}"></script>

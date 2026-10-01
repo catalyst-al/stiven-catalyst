@@ -1,6 +1,6 @@
 // Helpers shared by the warehouse tools (defect-log.js, delay-analyzer.js).
 window.ToolKit = (() => {
-  // Language: German and Albanian pages carry their translations in #ui-strings,
+  // Language: German and Albanian pages load their translations as window.UiStrings (js/ui-de.js, js/ui-sq.js),
   // keyed by the English text. tx("Copied") returns the translated text there,
   // or the English text itself; {name} placeholders are filled from vars.
   // Chrome has no Albanian number or date data, so Albanian pages format numbers
@@ -18,7 +18,7 @@ window.ToolKit = (() => {
   };
   // German and Albanian write 1.234,5 (or 1 234,5); English writes 1,234.5.
   const DECIMAL_COMMA = LANG !== "en";
-  const strings = (() => {
+  const strings = window.UiStrings || (() => {
     try { return JSON.parse(document.getElementById("ui-strings")?.textContent || "{}"); } catch { return {}; }
   })();
   const tx = (text, vars = {}) => (strings[text] ?? text).replace(/\{(\w+)\}/g, (match, name) => (name in vars ? vars[name] : match));
@@ -206,9 +206,19 @@ window.ToolKit = (() => {
   // The period a log is analysed over. An empty end is open; with no range every row counts,
   // with a range only rows dated inside it. A rate needs its volume for the same days.
   const inRange = (rows, from, to) => (!from && !to ? rows : rows.filter((row) => row.date && (!from || row.date >= from) && (!to || row.date <= to)));
+  // One pass, no sort: logs can hold thousands of rows and this runs on every change.
   const dateSpan = (rows) => {
-    const dates = rows.map((row) => row.date).filter(Boolean).sort();
-    return dates.length ? { from: dates[0], to: dates.at(-1), days: new Set(dates).size } : null;
+    const days = new Set();
+    let from = "";
+    let to = "";
+    for (const row of rows) {
+      const date = row.date;
+      if (!date) continue;
+      days.add(date);
+      if (!from || date < from) from = date;
+      if (!to || date > to) to = date;
+    }
+    return days.size ? { from, to, days: days.size } : null;
   };
   const RANGE_PRESETS = { today: 0, week: 6, month: 29 };
   const rangePreset = (name) => (name in RANGE_PRESETS ? { from: addDays(today(), -RANGE_PRESETS[name]), to: today() } : { from: "", to: "" });
@@ -466,12 +476,26 @@ window.ToolKit = (() => {
     const elsewhere = el("p", "form-note dl-elsewhere");
     elsewhere.hidden = true;
     logEmpty.after(elsewhere);
+    // The table shows the newest rows; more on request. Fewer rows keep every entry quick on a
+    // phone with a long log, and the CSV always has all of them.
+    const FIRST_ROWS = 25;
+    let shown = FIRST_ROWS;
+    const more = el("button", "button-ghost dl-more");
+    more.type = "button";
+    more.hidden = true;
+    logWrap.after(more);
+    more.addEventListener("click", () => {
+      shown = Math.min(shown + LOG_LIMIT, state.rows.length);
+      renderLog();
+    });
     let syncRange = () => {};
 
     const renderLog = () => {
       const rows = state.rows;
       logBody.replaceChildren();
-      rows.map((row, index) => [row, index]).reverse().slice(0, LOG_LIMIT).forEach(([row, index]) => {
+      const newest = [];
+      for (let index = rows.length - 1; index >= 0 && newest.length < shown; index--) newest.push([rows[index], index]);
+      newest.forEach(([row, index]) => {
         const tr = el("tr");
         tr.append(...cells(row));
         const cell = el("td");
@@ -485,7 +509,10 @@ window.ToolKit = (() => {
       });
       logWrap.hidden = !rows.length;
       logEmpty.hidden = rows.length > 0;
-      logCount.textContent = rows.length ? `${countText(rows)}${shownNote(rows.length)}` : "";
+      const hiddenRows = rows.length - newest.length;
+      logCount.textContent = rows.length ? `${countText(rows)}${hiddenRows ? tx(" · newest {n} shown, CSV has all", { n: int.format(newest.length) }) : ""}` : "";
+      more.hidden = !hiddenRows;
+      more.textContent = tx("Show {n} more", { n: int.format(Math.min(LOG_LIMIT, hiddenRows)) });
       const others = rows.length || !key ? [] : otherLogs(key);
       elsewhere.hidden = !others.length;
       elsewhere.replaceChildren();
@@ -501,8 +528,23 @@ window.ToolKit = (() => {
       syncRange();
       renderResults();
     };
+    // The screen updates first; the log is written right after it is drawn (with a long log the
+    // write takes a moment), and at once if the page is hidden or closed before that.
+    let saving = null;
+    const saveSoon = () => {
+      if (saving) return;
+      saving = () => {
+        pending.delete(saving);
+        saving = null;
+        save();
+      };
+      const run = saving;
+      listen();
+      pending.add(run);
+      requestAnimationFrame(() => setTimeout(() => { if (saving === run) run(); }, 0));
+    };
     const changed = () => {
-      save();
+      saveSoon();
       render();
     };
 

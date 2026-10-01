@@ -1,0 +1,11 @@
+---
+pagination:
+  data: uiLangs
+  size: 1
+  alias: uiLang
+uiLangs: ["de", "sq"]
+permalink: "/js/ui-{{ uiLang }}.js"
+eleventyExcludeFromCollections: true
+---
+// The interface texts of the tools in one language, keyed by the English text (src/_data/{{ uiLang }}/ui.json).
+window.UiStrings = {{ uiLang | uiStrings | safe }};

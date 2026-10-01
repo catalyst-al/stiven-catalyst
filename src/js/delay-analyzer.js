@@ -530,11 +530,12 @@
       flash(entryStatus, tx("Enter the planned and actual arrival."));
       return;
     }
-    book.add(row);
-    // Keep date and shift: the next route is usually from the same wave.
+    // Keep date and shift: the next route is usually from the same wave. The form is cleared
+    // before the results change, so the page is laid out once.
     ["route", "planDep", "actDep", "planArr", "actArr", "note"].forEach((name) => { form[name].value = ""; });
     form.reason.value = "";
     preview.textContent = "";
+    book.add(row);
     const arr = diff(row.planArr, row.actArr);
     flash(entryStatus, tx("Added {route}: {n} min at arrival.", { route: row.route || tx("route"), n: signed(arr) }));
     form.route.focus();

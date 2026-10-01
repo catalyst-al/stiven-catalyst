@@ -5347,3 +5347,22 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .sh-fill-status { margin: 12px 0 0; }
 .sh-fill-status:empty { display: none; }
 .dl-elsewhere { margin: 10px 0 0; }
+
+/* Speed: parts of a tool page that are off screen are not laid out until they come near it
+   (a long log or a big result would otherwise be laid out again on every entry). */
+.dl-results,
+.dl-check,
+.family-more,
+.work-backup,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+@media print {
+  .dl-results,
+  .dl-check,
+  .family-more,
+  .work-backup,
+  .site-footer { content-visibility: visible; }
+}
+.dl-more { margin-top: 12px; }

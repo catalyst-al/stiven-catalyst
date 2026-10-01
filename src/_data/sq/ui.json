@@ -1554,5 +1554,6 @@
   "incomplete orders": "porosi të paplota",
   "These numbers are already filled in. What you typed stays as it is.": "Këta numra janë plotësuar tashmë. Ajo që keni shkruar mbetet siç është.",
   "Your log in {language} has {n} entries.": "Regjistri juaj në {language} ka {n} regjistrime.",
-  "Open it": "Hapeni"
+  "Open it": "Hapeni",
+  "Show {n} more": "Shfaq {n} të tjera"
 }

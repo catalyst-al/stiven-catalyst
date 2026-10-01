@@ -73,6 +73,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("t", (text, lang) => (TRANSLATED.has(lang) ? readUi(lang)[text] ?? text : text));
   // The interface texts a tool page hands to tool-kit.js.
   eleventyConfig.addFilter("uiStrings", (lang) => JSON.stringify(TRANSLATED.has(lang) ? readUi(lang) : {}));
+  // The address of that text as one file (src/ui-strings.njk), which the browser keeps between
+  // tool pages; it changes when the translations do.
+  eleventyConfig.addFilter("uiStringsUrl", (lang) =>
+    `/js/ui-${lang}.js?v=${createHash("sha256").update(JSON.stringify(readUi(lang))).digest("hex").slice(0, 10)}`
+  );
   // JSON embedded in HTML must not be able to close its script element.
   eleventyConfig.addFilter("scriptJson", (value) => JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`));
   // collections["notes" + (lang | langSuffix)]: notes, notesDe or notesSq.
