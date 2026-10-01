@@ -8,6 +8,8 @@ const core = fs.readFileSync('src/js/coaching-core.js', 'utf8');
 const ui = fs.readFileSync('src/js/coaching-workspace.js', 'utf8');
 const bridge = fs.readFileSync('src/js/coaching-bridge.js', 'utf8');
 const resultUI = fs.readFileSync('src/js/coaching-results.js', 'utf8');
+// The curriculum is served as one cached file (src/coaching-data.njk) instead of inside every page.
+const dataFile = fs.readFileSync('_site/js/coaching-data.js', 'utf8');
 let checked = 0;
 for (const lang of ['en', 'de', 'sq']) {
   const prefix = lang === 'en' ? '' : `${lang}/`;
@@ -15,7 +17,7 @@ for (const lang of ['en', 'de', 'sq']) {
     const path = `${prefix}roles/${role.slug}/`;
     const html = fs.readFileSync(`_site/${path}index.html`, 'utf8');
     const dom = new JSDOM(html, { url: `https://stivencatalyst.com/${path}`, runScripts: 'outside-only' });
-    dom.window.eval(core); dom.window.eval(resultUI); dom.window.eval(ui);
+    dom.window.eval(dataFile); dom.window.eval(core); dom.window.eval(resultUI); dom.window.eval(ui);
     const document = dom.window.document;
     assert.equal(document.querySelector('[data-coaching]').dataset.role, id);
     assert.equal(document.querySelectorAll('.coaching-nav button').length, 5);
@@ -31,7 +33,8 @@ for (const lang of ['en', 'de', 'sq']) {
   for (const slug of Object.keys(coaching.toolNames)) {
     const path = `${prefix}tools/${slug}/`;
     const dom = new JSDOM(fs.readFileSync(`_site/${path}index.html`, 'utf8'), { url: `https://stivencatalyst.com/${path}`, runScripts: 'outside-only' });
-    dom.window.eval(core); dom.window.eval(resultUI); dom.window.eval(bridge);
+    assert.ok(!dom.window.document.getElementById('coaching-data'), `no curriculum inside ${path}`);
+    dom.window.eval(dataFile); dom.window.eval(core); dom.window.eval(resultUI); dom.window.eval(bridge);
     assert.equal(dom.window.document.querySelector('[data-coaching-bridge]').hidden, true, `ordinary tool page ${path}`);
     dom.window.close(); checked++;
   }
@@ -47,7 +50,7 @@ for (const lang of ['en', 'de', 'sq']) for (const slug of ['pareto', 'five-whys'
   p.id = 'test-project'; state.projects.push(p); state.active.lumen = p.id; w.localStorage.setItem(C.KEY, JSON.stringify(state));
   w.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
   if (slug === 'pareto') w.eval(fs.readFileSync('src/js/cv-import.js', 'utf8'));
-  w.eval(fs.readFileSync(`src/js/${slug}.js`, 'utf8')); w.eval(resultUI); w.eval(bridge);
+  w.eval(fs.readFileSync(`src/js/${slug}.js`, 'utf8')); w.eval(dataFile); w.eval(resultUI); w.eval(bridge);
   const bridgeForm = w.document.querySelector('[data-coaching-bridge] form');
   assert.ok(bridgeForm); assert.ok(bridgeForm.querySelector('button').disabled);
   const input = (form, key, value) => { form.elements[key].value = value; form.elements[key].dispatchEvent(new w.Event('input', { bubbles: true })); };

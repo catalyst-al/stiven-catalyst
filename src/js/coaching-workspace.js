@@ -3,7 +3,7 @@
   const root = document.querySelector('[data-coaching]');
   if (!root || !window.CoachingCore) return;
   const C = window.CoachingCore;
-  const data = JSON.parse(document.getElementById('coaching-data').textContent);
+  const data = window.CoachingData || JSON.parse(document.getElementById('coaching-data').textContent);
   const lang = ['en', 'de', 'sq'].includes(document.documentElement.lang) ? document.documentElement.lang : 'en';
   const tr = v => v?.[lang] || v?.en || '';
   const tx = key => tr(data.labels[key]);
