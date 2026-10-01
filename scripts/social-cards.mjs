@@ -285,7 +285,7 @@ await hero.addInitScript(() => { try { localStorage.setItem("sc-theme", "dark");
 for (const lang of Object.keys(LANGS)) {
   await hero.goto(`http://localhost:${server.address().port}${lang === "en" ? "/" : `/${lang}/`}`, { waitUntil: "networkidle" });
   await hero.addStyleTag({ content: `
-    .site-header, .skip-link, .hero-actions, .hero-cv-link, .cosmos-hint, .cosmos-families { display: none !important; }
+    .site-header, .skip-link, .hero-actions, .cosmos-hint, .cosmos-families { display: none !important; }
     .cosmos { height: 630px; }
     .cosmos-inner { width: 1090px; min-height: 630px; padding: 56px 0 44px; align-items: center; }
     .cosmos-system { align-self: center; }
