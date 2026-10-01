@@ -77,8 +77,8 @@
     }
   };
 
-  // Initials for a company without a logo: "Radisson Hotel Group" gives "RH",
-  // "Arteg Sh.p.k" gives "A". Legal forms and small words are skipped.
+  // Initials for a company without a logo: "Northgate Hotel Group" gives "NH",
+  // "Drita Sh.p.k" gives "D". Legal forms and small words are skipped.
   const SKIP = /^(?:gmbh|mbh|ug|ag|kg|co|ohg|ev|e\.v|ltd|llc|inc|plc|corp|shpk|sh\.p\.k|sha|sh\.a|srl|s\.r\.l|spa|s\.p\.a|bv|nv|sa|sas|und|and|the|der|die|das|of|i|e|&)\.?$/i;
   const initials = (name) => String(name ?? "")
     .split(/[\s/,|()–-]+/)
@@ -765,7 +765,7 @@
             grid(
               field(tx("Company or organisation"), `${ePath}.company`),
               field(tx("Location"), `${ePath}.location`, { placeholder: tx("e.g. Frankfurt am Main") }),
-              field(tx("Detail next to the company"), `${ePath}.note`, { wide: true, placeholder: tx("e.g. Deployed at Park Inn Frankfurt Airport") }),
+              field(tx("Detail next to the company"), `${ePath}.note`, { wide: true, placeholder: tx("e.g. Deployed at an airport hotel") }),
             ),
             logoEditor(ePath, "company"),
           );
