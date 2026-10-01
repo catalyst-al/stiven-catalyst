@@ -4,53 +4,77 @@ date: 2026-10-01
 category: Njerëz
 status: published
 featured: false
-summary: Në shumë kompani shqiptare ka një zyrë me emrin Burime Njerëzore. Ka kontrata, lista page dhe vula. Burime njerëzore nuk ka.
-teaser: Një burim është diçka në të cilën investon që të rritet. Ne i mbajmë njerëzit si kosto dhe çuditemi që ikin.
-deck: Zyra që merret me letrat e punonjësve nuk është zyrë burimesh njerëzore. Është arkivë. Dhe njerëzit nuk largohen nga arkivat, largohen nga vendet ku askush nuk i sheh.
-description: Një ese për mungesën e burimeve njerëzore të vërteta në Shqipëri, për punonjësin si kosto dhe për gjërat e vogla që e kthejnë njeriun në burim.
+summary: Kur thua "nuk ka njerëz", ke të drejtë vetëm për gjysmën. Njerëz ka. Nuk ka një vend ku ata të duan të qëndrojnë.
+teaser: Punonjësi yt më i mirë po bën një vlerësim performance pikërisht tani. Për ty. Dhe nuk të ka ftuar.
+deck: Një test i së hënës, një llogari që asnjë kontabilist nuk ta bën dhe gjashtë standarde minimale për shefin që duhet ta pranojë se, në një kompani të vogël, departamenti i burimeve njerëzore është ai vetë.
+description: Një ese menaxheriale për mungesën e burimeve njerëzore në Shqipëri, me një test vetëdiagnostikimi, koston e vërtetë të largimeve dhe gjashtë standarde minimale nga punësimi te biseda e largimit.
 ---
 
-Në shumë kompani të këtij vendi ka një derë me një tabelë të vogël: Burime Njerëzore. Pas derës ka një tavolinë, një printer që punon kur ka qejf dhe një dollap me dosje. Në dosje janë kontratat, kopjet e letërnjoftimeve, raportet mjekësore, listëpagesat për tatimet.
+E hënë, ora 08:15. Mesazhi vjen në WhatsApp, dhe ti e lexon në ekran para se ta hapësh:
 
-Është një zyrë shumë e rregullt. E di gjithçka për ty, përveç një gjëje: kush je.
+"Faleminderit për gjithçka. Nga sot nuk vij më."
 
-## Arkiva me emër të bukur
+Është ai që i dinte të gjitha. Ku rri çelësi rezervë. Cili klient paguan me vonesë. Pse kamioni i dytë nuk ndizet kur bie shi.
 
-Le t'i quajmë gjërat me emrin e tyre. Ajo që shumica e kompanive e quajnë burime njerëzore është administrim personeli. Hyrje, dalje, leje, pagesa. Puna është e nevojshme, e nderuar dhe e lodhshme. Por nuk ka asnjë lidhje me fjalën "burim".
+E lexon dy herë. Pastaj thua fjalinë që e ka thënë çdo shef në këtë vend, të paktën një herë këtë vit:
 
-Një burim është diçka që e kujdes që të japë më shumë. Toka është burim nëse e punon. Uji është burim nëse nuk e ndot. Njeriu është burim nëse investon tek ai. Përndryshe është vetëm një rresht në listëpagesë, i cili, si çdo rresht tjetër në atë faqe, mezi pret të shkurtohet.
+"Nuk ka njerëz."
 
-## Punonjësi si kosto
+Më lejo të të them diçka tjetër. Me respekt, por pa e zbutur. Njerëz ka. Ai që sapo iku ishte një prej tyre. Ajo që nuk ka është një vend ku ata duan të qëndrojnë. Dhe ai vend nuk ndërtohet nga tregu, nga qeveria apo nga brezi i ri. Ndërtohet nga ti.
 
-Shikoni si punësojmë. Shpesh me telefon: "A ke ndonjë njeri të besuar?" Pastaj njeriu i besuar vjen të hënën dhe askush nuk e di ku do të ulet. Nuk ka përshkrim pune, sepse "do ta shohim". Nuk ka plan për javën e parë, sepse "do mësojë duke punuar". Dhe mëson, me të vërtetë. Mëson se këtu pyetjet e bezdisin shefin, se gabimi kushton më shumë se heshtja dhe se mënyra më e sigurt për të mbijetuar është të bësh vetëm atë që të thonë.
+## Testi i së hënës
 
-Kemi një dashuri të çuditshme për trajnimin e punonjësve të të tjerëve. Kur një kompani e huaj e trajnon dikë, themi se është kompani serioze. Kur na kërkohet ne të trajnojmë tonët, pyesim: po sikur të ikin pasi t'i kemi trajnuar? Pyetja e saktë është tjetër: po sikur të mos i trajnojmë dhe të qëndrojnë?
+Merr një laps. Përgjigju sinqerisht. Askush nuk po të vlerëson. Përveç atyre që po e bëjnë tashmë.
 
-## Vlerësimi më i sinqertë i performancës
+- Punësimin e fundit e bëre me telefon: "A ke ndonjë njeri të besuar?"
+- I riu erdhi ditën e parë dhe askush nuk e dinte ku do të ulej.
+- Nuk ka përshkrim pune të shkruar, sepse "e di ai çfarë ka për të bërë".
+- Bisedën e fundit vetëm ju të dy, pa detyra në mes, nuk e mban mend.
+- Rritjen e fundit të pagës e dhe kur dikush tha se po ikën, jo kur e meritoi.
+- Kur dikush largohet, nuk e pyet pse. Ose e pyet, por me një ton që nuk pret përgjigje.
+- Zyra jote e "burimeve njerëzore" e di numrin e letërnjoftimit të çdo punonjësi, por jo çfarë do të bëjë ai pas dy vjetësh.
 
-Në shumë kompani tona nuk ka vlerësim performance. Ose ka një formular një herë në vit, që plotësohet në dhjetë minuta dhe harrohet në dhjetë sekonda.
+Nëse njohe veten në tri prej tyre, kompania jote nuk ka burime njerëzore. Ka një arkivë. Dhe arkiva nuk mban njeri.
 
-Por mos u gaboni. Vlerësimi ekziston, dhe është shumë i saktë. Vetëm se nuk e bën kompania për punonjësin. E bën punonjësi për kompaninë. Ai nuk përdor formular. Përdor një biletë avioni, një kontratë në Itali ose në Gjermani, një mesazh të shkurtër në WhatsApp: "Faleminderit për gjithçka, nga e hëna nuk vij më."
+## Llogaria që kontabilisti nuk ta bën
 
-Dhe askush nuk e pyet pse. Nuk ka bisedë largimi. Nuk ka asnjë shënim. Kompania humb njeriun dhe, më keq, humb arsyen. Kështu që gabimi përsëritet me njeriun e radhës, me të njëjtin besim të patundur se problemi është te brezi i ri.
+Në bilanc, punonjësi shfaqet vetëm në një vend: te shpenzimet. Paga, sigurimet, tatimi. Prandaj shumë shefa e shohin njeriun ashtu siç e tregon letra: si një kosto që duhet mbajtur poshtë.
 
-## Si duket një burim njerëzor i vërtetë
+Por letra nuk e tregon koston e largimit. Llogarite vetë, me numrat e tu, jo me të mitë:
 
-Nuk ke nevojë për një departament me pesë veta. Ke nevojë për disa zakone që nuk kushtojnë pothuajse asgjë, përveç vëmendjes:
+- Sa javë kërkove derisa gjete zëvendësuesin? Gjatë atyre javëve, kush e bëri punën e tij, dhe çfarë la pa bërë ndërkohë?
+- Sa muaj iu deshën të riut për të punuar me shpejtësinë e të vjetrit? Për gjithë atë kohë ke paguar pagë të plotë për gjysmë rezultati.
+- Sa gabime bëri në fillim? Sa kushtoi secili: një porosi e gabuar, një klient i zemëruar, një dëm në magazinë?
+- Çfarë dinte ai që iku, që nuk ishte shkruar askund?
+- Dhe kush e pa që iku, dhe po pyet veten tani nëse duhet të ikë edhe ai?
 
-- **Përshkrimi i punës shkruhet para punësimit**, jo pas grindjes së parë. Çfarë rezultati pret, si do ta masësh, kujt i raporton.
-- **Java e parë ka një plan.** Kush e pret, çfarë mëson ditën e parë, me kë punon, kur bëni bisedën e parë.
-- **Një bisedë në muaj, vetëm ju të dy.** Jo për detyrat. Për atë që i pengon, atë që po mëson dhe atë që i duhet nga ti. Te [planeti i Area Manager-it](/sq/roles/area-manager/) ke një strukturë 1:1 të gatshme që e mban mend bisedën e kaluar.
-- **Një buxhet trajnimi, edhe i vogël.** Një libër, një kurs, një ditë me kolegun më të mirë. Mesazhi ka më shumë vlerë se shuma.
-- **Paga ka logjikë.** Njerëzit mund ta pranojnë një pagë të ulët. Nuk e pranojnë dot një pagë të pashpjegueshme.
-- **Kur dikush largohet, e pyet pse**, me qetësi, pa u mbrojtur. Përgjigjja e tij është konsulenca më e lirë që do të marrësh ndonjëherë.
+Mblidhi. Nëse e bën me ndershmëri, ka shumë mundësi që shifra të kalojë disa paga mujore të atij që iku. Dhe kjo shifër nuk shfaqet askund si humbje. Shfaqet si "vit i vështirë".
 
-## Fjala e fundit
+Tani krahasoje me koston e asaj që do ta kishte mbajtur: një bisedë në muaj, një kurs, një rritje e shpjeguar në kohë. Ti nuk po kursen duke mos investuar te njerëzit. Po paguan dyfish. Vetëm se fatura vjen pa emër.
 
-Shpesh dëgjoj se në Shqipëri nuk ka më njerëz. Se kanë ikur të gjithë, se ata që kanë mbetur nuk duan të punojnë.
+## Shefi është departamenti
 
-Unë them diçka tjetër, dhe e them me shumë respekt për ata që mbajnë kompani në kushte të vështira. Njerëzit nuk ikin vetëm për paga. Ikin edhe nga vendet ku askush nuk i ka parë ndonjëherë si diçka që mund të rritet. Ikin nga zyrat ku janë një dosje.
+Një kompani me pesëmbëdhjetë veta nuk do të ketë kurrë një drejtor burimesh njerëzore. Dhe nuk ka nevojë. Sepse çdo gjë që bën një departament i mirë, punësimi, mirëpritja, zhvillimi, vlerësimi, paga, largimi, ndodh tashmë. Çdo ditë. Vetëm se e bën ti, pa e ditur, pa e shkruar dhe shpesh pa e menduar.
 
-Burimet njerëzore nuk fillojnë me një departament. Fillojnë ditën kur dikush në kompani ulet përballë një punonjësi dhe e pyet, duke pritur vërtet përgjigjen: "Çfarë të duhet që të bëhesh më i mirë këtu?"
+Kur nuk i flet njeriut për një muaj, ke marrë një vendim për burimet njerëzore. Kur e qorton para të tjerëve, ke marrë një tjetër. Kur ia rrit pagën atij që ankohet më me zë, ke shkruar politikën e pagave të kompanisë. Të gjithë e kanë lexuar. Përveç teje.
 
-Deri atë ditë, tabela mbi derë është thjesht një tabelë.
+Pyetja nuk është nëse kompania jote ka burime njerëzore. Pyetja është nëse ato ndodhin me qëllim apo rastësisht.
+
+## Standardi minimal
+
+Nuk të duhet softuer. Nuk të duhet konsulent. Të duhen gjashtë zakone, secili me një provë që ta tregon menjëherë nëse e ke apo jo:
+
+1. **Punësimi.** Përshkrimi i punës shkruhet para se të kërkosh "njeri të besuar". Një faqe: çfarë rezultati pret, si do ta masësh, kujt i raporton. *Prova: a mund ta lexojë kandidati para intervistës?*
+2. **Nëntëdhjetë ditët e para.** Dita e parë ka një tavolinë, një njeri që e pret dhe një plan të shkruar për javën. Në fund të muajit të parë, të dytë dhe të tretë, një bisedë: si po shkon, çfarë të mungon. *Prova: a e di i riu, ditën e parë, kë të pyesë kur ngec?*
+3. **Biseda e muajit.** Tridhjetë minuta, vetëm ju të dy, një herë në muaj. Jo për detyrat. Për atë që e pengon, atë që po mëson dhe atë që i duhet nga ti. Te [planeti i Area Manager-it](/sq/roles/area-manager/) ka një strukturë 1:1 që e mban mend bisedën e kaluar, që herën tjetër të nisësh aty ku mbetët. *Prova: a e di çfarë do të bëjë ai pas dy vjetësh?*
+4. **Zhvillimi.** Një buxhet i vogël, por i thënë me zë. Një libër, një kurs, një ditë pranë kolegut më të mirë. *Prova: kur mësoi dikush këtu, për herë të fundit, diçka të re me qëllim?*
+5. **Paga.** Njerëzit e pranojnë një pagë të ulët për një kohë. Nuk e pranojnë dot një pagë të pashpjegueshme. Shkruaj në një fjali çfarë e rrit pagën këtu dhe zbatoje njësoj për të gjithë. *Prova: a mund t'ia thuash me zë çdo punonjësi, pa u skuqur?*
+6. **Largimi.** Kur dikush ikën, ulu me të. Pa u mbrojtur, pa u ofenduar, pa u përpjekur ta mbash. Pyete vetëm: "Çfarë duhet të kishim bërë ndryshe?" Dhe shkruaje. *Prova: a mund të thuash pse ikën tre njerëzit e fundit, me fjalët e tyre, jo me tuat?*
+
+## Pasqyra
+
+Njerëzit nuk ikin vetëm për paga. Paga është arsyeja që thuhet, sepse është e vetmja që nuk fyen askënd. Arsyet e tjera mbeten pa u thënë: shefi që nuk dëgjon, puna që nuk të çon askund, ndjenja se je një dosje në një dollap.
+
+Ndaj herën tjetër që të vjen mesazhi i së hënës, para se të thuash "nuk ka njerëz", bëj diçka më të vështirë. Mos shiko telefonin. Shiko kalendarin. Kërko bisedën e fundit që bëre me atë njeri, vetëm ju të dy.
+
+Nëse nuk e gjen, e ke gjetur arsyen.

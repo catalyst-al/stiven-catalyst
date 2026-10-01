@@ -4,59 +4,81 @@ date: 2026-10-01
 category: Udhëheqje
 status: published
 featured: false
-summary: Një kompani që punon vetëm kur shefi është aty nuk ka menaxhim. Ka një njeri, një telefon dhe shumë njerëz që presin.
-teaser: Brishtësia nuk duket në ditët e mira. Duket ditën kur shefi nuk e hap telefonin.
-deck: Në ditë të zakonshme, kompania e brishtë duket e shëndetshme. Brishtësia del në pah vetëm kur njeriu i vetëm që mban gjithçka mungon për një pasdite.
-description: Një ese për menaxhimin e brishtë në Shqipëri, kontrollin si zakon dhe atë që duhet ndërtuar që një kompani të qëndrojë në këmbë pa pronarin.
+summary: Nëse kompania jote punon vetëm kur je aty, nuk ke ndërtuar një kompani. Ke ndërtuar një radhë pritjeje me emrin tënd në krye.
+teaser: Telefoni yt bie çdo katër minuta. Ti e quan përkushtim. Unë e quaj ngushtim i prodhimit.
+deck: Një test pasditeje, një matematikë e thjeshtë e pritjes dhe një plan tridhjetëditor për t'u bërë i zëvendësueshëm. Sepse shefi që nuk mund të mungojë nuk po drejton. Po mban peng.
+description: Një ese menaxheriale për menaxhimin e brishtë në Shqipëri, me një test vetëdiagnostikimi, nivelet e delegimit dhe një plan tridhjetëditor që kompania të punojë edhe pa pronarin.
 ---
 
-Ka një burrë në çdo qytet të këtij vendi që nuk ka bërë pushime prej njëmbëdhjetë vjetësh. E thotë me krenari, siç tregon dikush një plagë lufte. Kafeja i ftohet mbi tavolinë, telefoni i bie çdo katër minuta, dhe sa herë bie, diçka në kompaninë e tij pret lejen e tij për të ekzistuar.
+Është ora 07:42. Ende nuk ke arritur në zyrë dhe telefoni ka rënë tri herë.
 
-Ai e quan përkushtim. Unë e quaj arkitekturë. Dhe arkitektura e tij ka vetëm një shtyllë.
+Herën e parë, magazina pyet nëse mund ta nisë porosinë e madhe. Herën e dytë, kontabiliteti pyet nëse ta paguajë furnitorin. Herën e tretë, dikush thjesht do të dijë nëse je rrugës.
 
-## Brishtësia nuk duket në ditët e mira
+Ti përgjigjesh në të tria. Shpejt, me siguri, pa e humbur durimin. Dhe diku thellë brenda teje ndihesh mirë, sepse pa ty nuk lëviz asgjë.
 
-Në një ditë të zakonshme, kompania e brishtë duket shumë e shëndetshme. Klientët vijnë. Faturat paguhen. Punonjësit drejtohen në karrige kur hyn shefi. Brishtësia nuk duket në diell. Duket ditën kur shefi sëmuret, kur udhëton, kur thjesht vendos të mos e hapë telefonin për një pasdite.
+Më lejo të të them diçka që nuk do ta dëgjosh në asnjë dasmë, në asnjë kafe me miqtë, në asnjë takim me bankën. Ajo ndjenja nuk është sukses. Është simptomë.
 
-Atëherë zbulon diçka të pakëndshme. Askush nuk e di çmimin e saktë. Askush nuk e ka fjalëkalimin. Askush nuk guxon t'i thotë "po" një klienti pa pyetur. Jo sepse njerëzit janë të paaftë. Por sepse i kanë mësuar, me durim dhe me disiplinë të admirueshme, të mos jenë të aftë.
+## Testi i pasdites
 
-Kjo është e veçanta e menaxhimit të brishtë. Nuk lind nga mungesa e kontrollit. Lind nga teprica e tij.
+Merr një laps. Mos u gënje. Askush tjetër nuk po e lexon këtë.
 
-## Kontrolli si zakon, jo si sistem
+- Kur mungon gjysmë dite, ka vendime që presin derisa të kthehesh.
+- Je i vetmi që i di çmimet e vërteta, ose i vetmi që mund t'i ndryshojë.
+- Fjalëkalimet e rëndësishme janë vetëm në kokën tënde ose në telefonin tënd.
+- Punonjësit të telefonojnë për gjëra që i dinë vetë, sepse herën e fundit që vendosën vetë, i qortove.
+- Pushimet e tua janë pushime me telefon.
+- Kur dikush largohet, merr me vete një pjesë të kompanisë që askush nuk e kishte shkruar.
+- Ke thënë të paktën një herë këtë vit: "Më shpejt e bëj vetë."
 
-Kemi një marrëdhënie të vjetër dhe të ndërlikuar me besimin. E kemi mësuar në familje, në lagje, në institucione që ndërroheshin më shpejt se stinët: beso vetëm atë që e sheh me sytë e tu. Është një instinkt i arsyeshëm mbijetese. Por një instinkt mbijetese nuk është strategji biznesi.
+Nëse njohe veten në tri prej tyre, kompania jote ka një ngushtim. Dhe ai ngushtim ka emrin tënd.
 
-Pronari i brishtë nuk delegon. Ai lë porosi. Dallimi duket i vogël në letër dhe është i madh në jetë. Delegimi i jep dikujt një rezultat, kufijtë dhe autoritetin për ta arritur. Porosia i jep dikujt një detyrë dhe e lë të presë telefonatën e radhës. Në rastin e parë rritet një njeri. Në të dytin rritet një varësi.
+## Matematika e pritjes
 
-Dhe varësia, duhet ta pranojmë, është e rehatshme për të dyja palët. Punonjësi nuk mban përgjegjësi. Shefi mban gjithçka dhe ndihet i domosdoshëm. Të dy flenë të qetë, deri natën kur nuk flenë.
+Në çdo magazinë që kam njohur, gjëja më e shtrenjtë nuk është malli që lëviz. Është malli që pret.
 
-## Kostoja që nuk del në bilanc
+Vendimet sillen njësoj. Çdo pyetje që pret përgjigjen tënde është gjendje e ngrirë. Kamioni pret. Klienti pret. Punonjësi pret, dhe ndërsa pret, mëson diçka shumë më të rrezikshme se çdo procedurë: mëson se mendimi i tij nuk vlen.
 
-Menaxhimi i brishtë ka një kosto që asnjë kontabilist nuk e shënon. Është koha që humbet duke pritur. Janë vendimet e vogla që shtyhen deri nesër, pastaj deri të hënën. Është klienti që shkon te konkurrenti, jo sepse çmimi ishte i lartë, por sepse askush nuk mund t'i jepte një përgjigje sot.
+Bëj një llogari të thjeshtë. Sa vendime të vogla të kalojnë në një ditë? Thuaj tridhjetë. Sa minuta pret secili, mesatarisht, derisa ta kapësh telefonin? Thuaj njëzet. Kjo bën dhjetë orë pritje në ditë, të shpërndara në gjithë kompaninë, që askush nuk i sheh në bilanc. Dhjetë orë. Çdo ditë. Me rrogë të paguar.
 
-Por kostoja më e shtrenjtë është tjetër. Janë njerëzit e mirë që largohen. Një njeri i aftë mund ta durojë një pagë të ulët për një kohë, nëse po mëson diçka. Nuk e duron gjatë një vend ku nuk i lejohet të mendojë. Ikën, shpesh jashtë shtetit, dhe pronari thotë se në këtë vend nuk ka njerëz të mirë.
+Dhe ky është vetëm kostoja e kohës. Kostoja e njerëzve është më e madhe. Një njeri i aftë e duron një pagë të ulët për një kohë, nëse po mëson. Nuk e duron gjatë një vend ku nuk i lejohet të mendojë. Ikën, dhe ti thua se në këtë vend nuk ka njerëz të mirë.
 
-Ka. Thjesht nuk qëndrojnë aty ku nuk u besohet asgjë.
+Ka. Vetëm se nuk qëndrojnë aty ku duhet të kërkojnë leje për të marrë frymë.
 
-## Si duket e kundërta
+## Delegim nuk do të thotë "bëje ti"
 
-E kundërta e menaxhimit të brishtë nuk është kaosi. Është një kompani që mund të punojë një javë pa ty dhe, kur kthehesh, të tregon çfarë ndodhi, çfarë vendosi dhe pse.
+Në Shqipëri kemi dy mënyra delegimi. E para: "Merre ti, unë nuk merrem." E dyta: "Bëje ti, por më telefono për çdo gjë." E para është braktisje. E dyta është kontroll i veshur si besim. Asnjëra nuk është delegim.
 
-Kjo nuk ndërtohet me një seminar në një hotel me pishinë. Ndërtohet me gjëra të vogla, të mërzitshme dhe të përditshme:
+Delegimi i vërtetë ka nivele. Ja pesë, nga më i ulëti te më i larti:
 
-- **Çdo proces që ka rëndësi shkruhet një herë**, shkurt, në gjuhën e atij që e bën, jo në gjuhën e konsulentit.
-- **Çdo vendim ka një pronar dhe një kufi.** "Deri në 200 euro vendos ti. Mbi 200 më njofton." Kaq. Kjo fjali e vetme çliron më shumë kohë se çdo program i ri kompjuterik.
-- **Gabimi i parë paguhet me durim.** Njeriu që vendos për herë të parë do të gabojë. Nëse e ndëshkon gabimin e parë, nuk do ta shohësh kurrë vendimin e dytë.
-- **Shefi e mat veten me atë që ndodh kur mungon**, jo me sa telefonata merr në ditë.
+1. **Më thuaj çfarë ke parë.** Unë vendos.
+2. **Më sill një propozim.** Unë vendos.
+3. **Vendos ti, por më pyet para se ta zbatosh.**
+4. **Vendos ti dhe zbatoje. Më njofto pas.**
+5. **Vendos ti. Nuk ke nevojë të më njoftosh.**
 
-Nëse do të fillosh diku, fillo me një marrëveshje delegimi të shkruar: çfarë rezultati pret, çfarë mund të vendosë personi vetë, kur të thërret dhe kur e kontrolloni bashkë. Te [planeti i Area Manager-it](/sq/roles/area-manager/) e gjen këtë si ushtrim të gatshëm.
+Gabimi më i madh i menaxherit të brishtë nuk është se i mban të gjitha vendimet në nivelin 1. Gabimi është se nuk e thotë kurrë me zë se në cilin nivel është secili vendim. Kështu njerëzit e marrin me mend. Dhe kush e merr me mend, gabon. Dhe kush gabon, ndëshkohet. Dhe kush ndëshkohet, ndalon së vendosuri. Pastaj ti ankohesh se nuk ka iniciativë.
 
-## Pyetja e pakëndshme
+Iniciativa nuk mungon. E vrave ti, ngadalë, me një mijë telefonata.
 
-Pra, ja ku jemi. Ti, i ulur aty, me telefonin që dridhet mbi tavolinë. Do të të bëj vetëm një pyetje, dhe nuk ke nevojë të ma thuash përgjigjen mua.
+## Plani i tridhjetë ditëve
 
-Nëse nesër në mëngjes do të nisje një muaj pushime, pa telefon, çfarë do t'i ndodhte kompanisë tënde?
+Nuk të duhet konsulent. Nuk të duhet softuer i ri. Të duhet guxim për të qenë më pak i nevojshëm. Ja si:
 
-Nëse përgjigjja të tremb, ke ndërtuar një punë, jo një kompani. Dallimi mes tyre nuk matet me fitimin e këtij viti. Matet me atë që mbetet në këmbë kur ti del nga dhoma.
+- **Java 1. Numëro.** Për pesë ditë, shkruaj çdo pyetje që të bëjnë. Kush pyeti, për çfarë, sa priti. Mos ndrysho asgjë. Vetëm shiko. Do të çuditesh sa të njëjta janë.
+- **Java 2. Jepi çdo vendimi një pronar dhe një kufi.** Merr dhjetë pyetjet që përsëriten më shpesh. Për secilën, shkruaj kush vendos dhe deri ku. "Zbritje deri në 5 % vendos përgjegjësi i shitjeve. Mbi 5 %, më pyet." Një fjali. Një letër në mur.
+- **Java 3. Mungo.** Një pasdite e plotë, pa telefon, e paralajmëruar. Shko diku. Mos kontrollo. Kur kthehesh, mos pyet "a ka ndonjë problem?". Pyet "çfarë vendosët?".
+- **Java 4. Shqyrto, mos ndëshko.** Shiko vendimet që u morën pa ty. Ato që ishin të mira, thuaji me zë. Ato që ishin të gabuara, rregulloji rregullat, jo njerëzit. Pastaj ngrije një kufi të vetëm një nivel më lart.
 
-Menaxhimi i mirë nuk të bën të domosdoshëm. Të bën të zëvendësueshëm. Dhe kjo, paradoksalisht, është gjëja më e çmuar që mund t'i lësh një vendi ku gjithçka ka varur gjithmonë nga një njeri.
+Nëse do një model të gatshëm, te [planeti i Area Manager-it](/sq/roles/area-manager/) ka një marrëveshje delegimi me rezultatin, autoritetin, kufijtë e eskalimit dhe datën e kontrollit. Plotësoje me njeriun përballë, jo për të.
+
+## Pyetja
+
+Dhe tani, një pyetje e vetme. Nuk ke nevojë të ma thuash përgjigjen mua. Thuaje vetëm me vete, me zë të ulët, siç thuhen gjërat e vërteta.
+
+Nëse nesër në mëngjes do të nisje një muaj pushime, pa telefon, çfarë do të mbetej në këmbë?
+
+Nëse përgjigjja të tremb, nuk ke ndërtuar një kompani. Ke ndërtuar një punë me shumë punonjës. Dhe dallimi mes tyre nuk matet me fitimin e këtij viti. Matet me atë që ndodh ditën kur ti del nga dhoma.
+
+Shefat e brishtë mendojnë se vlera e tyre është sa shumë kanë nevojë të tjerët për ta. Shefat e mirë e dinë që vlera e tyre është sa pak kanë nevojë.
+
+Mendo pak se në cilin grup je. Dhe pastaj, të lutem, fike telefonin për një pasdite.
