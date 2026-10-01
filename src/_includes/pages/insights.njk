@@ -10,7 +10,8 @@
     {%- set countLabel = "{a} of {b} essays" | t(lang) %}
     {%- set filterTopics = essays | topics("category") %}
     {% include "partials/filter-bar.njk" %}
-    {%- for item in essays %}
+    {#- Newest first; an essay is marked new for seven days after its date (the script below). -#}
+    {%- for item in essays | reverse %}
     {%- set search = [item.data.title, item.data.summary, item.data.teaser, item.data.category] | join(" ") | lower %}
     {%- if item.data.status == "soon" %}
     <div class="list-row" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}">
@@ -21,7 +22,7 @@
     {%- else %}
     <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}">
       <span class="number">{{ item.data.number }}</span>
-      <div><h2>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
+      <div><h2><span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
       <span class="row-meta">{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}</span>
     </a>
     {%- endif %}
@@ -30,3 +31,10 @@
   </section>
 {% include "partials/newsletter.njk" %}
 <script src="{{ '/js/filter.js' | assetUrl }}" defer></script>
+<script>
+  // "New" on essays from the last seven days, by the reader's own date.
+  document.querySelectorAll("[data-new-since]").forEach((badge) => {
+    const days = (Date.now() - new Date(`${badge.dataset.newSince}T00:00:00`).getTime()) / 864e5;
+    badge.hidden = !(days >= -1 && days < 7);
+  });
+</script>

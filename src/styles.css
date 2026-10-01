@@ -5366,3 +5366,19 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   .site-footer { content-visibility: visible; }
 }
 .dl-more { margin-top: 12px; }
+
+/* "New" beside a recent essay in the Insights list. */
+.new-badge {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--red, #df1119);
+  color: #fff;
+  font-family: var(--sans, inherit);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
