@@ -1204,83 +1204,36 @@ button, input, select { font: inherit; }
     radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--family) 24%, transparent), transparent 62%),
     #05080b;
 }
+/* The planet itself is an SVG (partials/family-planet.njk): Pulse beats inside its heartbeat ring,
+   Zenith's radar sweeps its contour map, Lumen's ring of dust turns, Atlas keeps its constellation still. */
 .family-planet {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 26%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--family) 28%, #fff) 0, var(--family) 40%, color-mix(in srgb, var(--family) 22%, #000) 100%);
-  box-shadow: 0 0 34px color-mix(in srgb, var(--family) 55%, transparent);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   transition: transform .35s ease;
 }
-.family-card:hover .family-planet { transform: translate(-50%, -50%) scale(1.08); }
-.family-orbit {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 78%;
-  aspect-ratio: 1;
-  border: 1px solid color-mix(in srgb, var(--family) 45%, transparent);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) rotate(-12deg) scaleY(.3);
-}
-.family-orbit i {
-  position: absolute;
-  inset: 0;
-  animation: family-turn 9s linear infinite;
-}
-.family-orbit i::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -3px;
-  width: 6px;
-  height: 20px;
-  margin-left: -3px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 10px var(--family);
-}
-@keyframes family-turn { to { transform: rotate(360deg); } }
-
-/* Lumen: sees the whole system, it shines. */
-.family-lumen .family-planet {
-  background: radial-gradient(circle at 42% 38%, #fff 0, #fff4d6 30%, var(--family) 70%, color-mix(in srgb, var(--family) 60%, #000) 100%);
-  box-shadow: 0 0 22px #fff3d0, 0 0 60px color-mix(in srgb, var(--family) 80%, transparent), 0 0 120px color-mix(in srgb, var(--family) 35%, transparent);
-}
-/* Pulse: a heartbeat. */
-.family-pulse .family-planet::before,
-.family-pulse .family-planet::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--family);
-  border-radius: 50%;
-  animation: family-beat 2.6s ease-out infinite;
-}
-.family-pulse .family-planet::after { animation-delay: 1.3s; }
+.family-card:hover .family-planet,
+.role-next-card:hover .family-planet { transform: scale(1.06); }
+.planet-moon { fill: color-mix(in srgb, var(--family) 45%, #fff); }
+.planet-atlas .planet-moon { fill: #fff; }
+.pulse-cracks { animation: family-beat 1.15s ease-in-out infinite; }
 @keyframes family-beat {
-  from { transform: scale(1); opacity: .8; }
-  to { transform: scale(2.8); opacity: 0; }
+  0%, 100% { opacity: .3; }
+  12% { opacity: 1; }
+  26% { opacity: .45; }
+  36% { opacity: .85; }
+  52% { opacity: .3; }
 }
-/* Zenith: seen from above, on a steeper orbit. */
-.family-zenith .family-orbit { transform: translate(-50%, -50%) rotate(18deg) scaleY(.55); width: 70%; }
-.family-zenith .family-planet { width: 22%; }
-/* Atlas: carries a ring. */
-.family-atlas .family-planet::before {
-  content: "";
-  position: absolute;
-  left: -48%;
-  top: 50%;
-  width: 196%;
-  aspect-ratio: 1;
-  border: 2px solid color-mix(in srgb, var(--family) 70%, transparent);
-  border-radius: 50%;
-  transform: translateY(-50%) rotate(-20deg) scaleY(.28);
+.pulse-ring { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--family) 80%, transparent)); }
+.zenith-radar {
+  transform-box: view-box;
+  transform-origin: 200px 150px;
+  animation: family-sweep 6s linear infinite;
 }
+@keyframes family-sweep { to { transform: rotate(360deg); } }
+.lumen-ring ellipse { animation: family-ring 70s linear infinite; }
+@keyframes family-ring { to { stroke-dashoffset: -100; } }
 
 .family-section {
   padding: 64px 0 20px;
@@ -1338,9 +1291,9 @@ button, input, select { font: inherit; }
   .family-tools .tool-card { min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .family-orbit i,
-  .family-pulse .family-planet::before,
-  .family-pulse .family-planet::after { animation: none; }
+  .pulse-cracks,
+  .zenith-radar,
+  .lumen-ring ellipse { animation: none; }
   .family-card,
   .family-planet { transition: none; }
 }
@@ -5024,7 +4977,6 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 }
 .role-next-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--family) 60%, var(--line)); }
 .role-next-card .family-visual { aspect-ratio: auto; height: 100%; min-height: 150px; }
-.role-next-card:hover .family-planet { transform: translate(-50%, -50%) scale(1.08); }
 .role-next-text { display: grid; align-content: center; gap: 6px; padding: 20px 22px; }
 .role-next-text small { color: var(--family); font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
 [data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 70%, #000); }

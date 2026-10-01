@@ -26,7 +26,8 @@
         {%- endfor %}
       </div>
       {%- for family in families %}
-      <div class="cosmos-family" id="family-{{ family.id }}" data-family-panel="{{ family.id }}" data-name="{{ family.name }}" data-color="{{ family.color }}" data-orbit="{{ family.orbit }}" style="--family: {{ family.color }}">
+      {%- set moons = (family | familyTools(toolList, lang)).length + (family | familyTools(toolList, lang, "learn")).length %}
+      <div class="cosmos-family" id="family-{{ family.id }}" data-family-panel="{{ family.id }}" data-name="{{ family.name }}" data-color="{{ family.color }}" data-orbit="{{ family.orbit }}" data-moons="{{ moons }}" style="--family: {{ family.color }}">
         <p class="cosmos-family-head"><strong>{{ family.name }}</strong><span>{{ family.role | t(lang) }}</span></p>
         <p class="cosmos-family-line">{{ family.line | t(lang) }}</p>
         <ul>

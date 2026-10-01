@@ -100,7 +100,7 @@
     {%- else %}{% set targets = [nextFamily, atlas] %}{% endif %}
     {%- for target in targets %}
     <a class="role-next-card family-{{ target.id }}" href="{{ target | roleUrl(lang) }}" style="--family: {{ target.color }}">
-      <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
+      {% set planet = target %}{% set planetKey = "next-" + target.id %}{% include "partials/family-planet.njk" %}
       <span class="role-next-text">
         <small>{{ target.name }} · {{ target.scope | t(lang) }}</small>
         <strong>{{ target.role | t(lang) }}</strong>

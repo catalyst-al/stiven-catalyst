@@ -3,7 +3,7 @@
   {%- for family in families %}
   {%- set count = (family | familyTools(toolList, lang)).length + (family | familyTools(toolList, lang, "learn")).length %}
   <a class="family-card family-{{ family.id }}" href="{{ (family | roleUrl(lang)) if familyLink else '#' + family.id }}" style="--family: {{ family.color }}">
-    <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
+    {% set planet = family %}{% set planetKey = "card-" + family.id %}{% include "partials/family-planet.njk" %}
     <span class="family-card-text">
       <span class="family-role">{{ family.name }} · {{ family.scope | t(lang) }}</span>
       <strong>{{ family.role | t(lang) }}</strong>
