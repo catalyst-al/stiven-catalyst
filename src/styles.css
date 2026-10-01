@@ -2631,22 +2631,77 @@ html:not(.js) .filter-bar { display: none; }
   line-height: 1.15;
 }
 
-.about-author {
-  margin: 54px 0 36px;
-  padding-top: 36px;
-  border-top: 1px solid var(--line);
+/* About: who writes this comes first, then the philosophy. */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 32px 64px;
+  align-items: start;
+  padding: 72px 0 84px;
+  border-bottom: 1px solid var(--line);
 }
-
-.about-author .kicker { font-size: 11px; }
-.about-author h3 {
-  margin: 12px 0 22px;
+.about-intro .kicker { font-size: 11px; }
+.about-intro h2 {
+  margin: 10px 0 8px;
   font-family: var(--serif);
-  font-size: clamp(32px, 3.5vw, 48px);
+  font-size: clamp(40px, 5vw, 64px);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1;
+  letter-spacing: -.03em;
 }
-
-.about-author p { font-size: 18px; }
+.about-role {
+  margin: 0 0 26px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.about-intro-copy > p:not(.kicker, .about-role, .about-links) {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 19px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 760px;
+  margin: 30px 0;
+}
+.about-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 16px 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+.about-stats dd {
+  margin: 0;
+  background: linear-gradient(90deg, var(--red), color-mix(in srgb, var(--red) 40%, var(--blue)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--display);
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+}
+.about-stats dt {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 0;
+}
 
 .pillars {
   display: grid;
@@ -2755,13 +2810,69 @@ html:not(.js) .filter-bar { display: none; }
 }
 
 .about-portrait {
-  max-width: 340px;
-  margin: 0 0 28px;
-  border-radius: 24px;
+  max-width: 300px;
+  margin: 0;
+  border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--line);
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--blue) 10%, transparent), 0 24px 60px rgba(0,0,0,.35);
 }
 .about-portrait img { display: block; width: 100%; height: auto; }
+
+/* About: the path so far, newest first. */
+.about-path { border-bottom: 1px solid var(--line); }
+.about-timeline {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.about-timeline li {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 8px 40px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.about-when {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  padding-top: 4px;
+}
+.about-timeline h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+.about-timeline p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+.about-more {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 28px 0 0;
+}
+.about-more > div {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+.about-more dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.about-more dd { margin: 8px 0 0; color: var(--ink); font-size: 15px; font-weight: 600; }
 
 .article-body {
   display: grid;
@@ -2851,6 +2962,7 @@ html:not(.js) .filter-bar { display: none; }
   .manifesto,
   .cta,
   .about-grid,
+  .about-intro,
   .article-body { grid-template-columns: minmax(0, 1fr); }
   .section-heading p { justify-self: start; }
   .feature-card { min-height: 470px; }
@@ -2913,6 +3025,11 @@ html:not(.js) .filter-bar { display: none; }
   .cosmos-anchor { aspect-ratio: 1 / .8; }
   .cosmos-chip { min-height: 40px; padding: 6px 14px 6px 12px; }
   .cosmos-chip-text small { font-size: 12px; }
+  .about-intro { padding: 44px 0 56px; }
+  .about-portrait { max-width: 200px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .about-timeline li { grid-template-columns: minmax(0, 1fr); }
+  .about-more { grid-template-columns: minmax(0, 1fr); }
   .brand-poster { min-height: 430px; border-radius: 22px; }
   .meta-strip { grid-template-columns: 1fr; }
   .meta-strip > div,
