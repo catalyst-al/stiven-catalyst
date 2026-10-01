@@ -1,6 +1,16 @@
 {
   "highlights": [
-    { "label": "Leadership", "type": "Essay", "title": "Why good managers spend time on the floor.", "link": "/insights/good-managers-on-the-floor/" },
-    { "label": "Hospitality", "type": "Field note", "title": "The night shift exposes weak processes.", "link": "/field-notes.html#note-04-night-shift" }
+    {
+      "label": "People",
+      "type": "Field note",
+      "title": "Ownership begins where the sentence ‘someone should’ ends.",
+      "link": "/field-notes.html#note-03-ownership"
+    },
+    {
+      "label": "Hospitality",
+      "type": "Field note",
+      "title": "The night shift exposes weak processes.",
+      "link": "/field-notes.html#note-04-night-shift"
+    }
   ]
 }

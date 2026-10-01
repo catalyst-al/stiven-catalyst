@@ -11,7 +11,7 @@
     "tools": ["/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"],
     "learn": [],
     "also": ["/tools/five-whys/"],
-    "read": ["fix-the-handoff", "good-managers-on-the-floor"],
+    "read": [],
     "routine": [
       { "when": "Start of shift", "do": "Read the last handover before the briefing, not after the first problem.", "tool": "/tools/shift-handover/" },
       { "when": "During the shift", "do": "Log each damaged unit where it happens, with its stage and cause.", "tool": "/tools/damage-control/" },
@@ -34,7 +34,7 @@
     "tools": ["/tools/cx-control-tower/", "/tools/kpi-diagnostic/", "/tools/pareto/"],
     "learn": [],
     "also": ["/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
-    "read": ["kpi-is-not-the-problem", "good-managers-on-the-floor"],
+    "read": [],
     "routine": [
       { "when": "Every morning", "do": "Read yesterday in one view: on time, undamaged, complete and complaints.", "tool": "/tools/cx-control-tower/" },
       { "when": "When a KPI turns red", "do": "Find out whether it is clarity, skill, capacity, process or ownership before you push.", "tool": "/tools/kpi-diagnostic/" },
@@ -56,7 +56,7 @@
     "tools": ["/tools/sigma-control-chart/", "/tools/five-whys/"],
     "learn": ["/tools/six-sigma-dmaic/"],
     "also": ["/tools/pareto/", "/tools/kpi-diagnostic/"],
-    "read": ["standards-follow-through", "kpi-is-not-the-problem", "fix-the-handoff"],
+    "read": [],
     "routine": [
       { "when": "Every problem", "do": "Reach a root cause you can change before anyone proposes a fix.", "tool": "/tools/five-whys/" },
       { "when": "Every week", "do": "Put the process on a control chart and react only to real signals.", "tool": "/tools/sigma-control-chart/" },

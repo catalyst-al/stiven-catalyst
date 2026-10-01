@@ -1,6 +1,16 @@
 {
   "highlights": [
-    { "label": "Führung", "type": "Essay", "title": "Warum gute Führungskräfte Zeit in der Halle verbringen.", "link": "/de/insights/good-managers-on-the-floor/" },
-    { "label": "Hotellerie", "type": "Field Note", "title": "Die Nachtschicht zeigt schwache Prozesse.", "link": "/de/field-notes.html#note-04-night-shift" }
+    {
+      "label": "Menschen",
+      "type": "Field Note",
+      "title": "Verantwortung beginnt dort, wo der Satz ‚Jemand sollte …‘ aufhört.",
+      "link": "/de/field-notes.html#note-03-ownership"
+    },
+    {
+      "label": "Hotellerie",
+      "type": "Field Note",
+      "title": "Die Nachtschicht zeigt schwache Prozesse.",
+      "link": "/de/field-notes.html#note-04-night-shift"
+    }
   ]
 }

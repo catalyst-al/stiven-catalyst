@@ -133,12 +133,6 @@
       row.append(label, track);
       bars.append(row);
     });
-    const essay = el("a", "text-link", `${tx("Read the essay behind this tool")} `);
-    essay.href = document.querySelector(".tool-aside .inline-link").href;
-    const arrow = el("span", null, "→");
-    arrow.setAttribute("aria-hidden", "true");
-    essay.append(arrow);
-    bars.append(essay);
     grid.append(bars);
     resultBox.append(grid);
 

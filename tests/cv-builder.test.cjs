@@ -13,10 +13,10 @@ const plain = (value) => JSON.parse(JSON.stringify(value));
 
 test('company websites become the bare domain, anything else is ignored', () => {
   const { domainOf } = cvb;
-  assert.equal(domainOf('radissonhotels.com'), 'radissonhotels.com');
-  assert.equal(domainOf('https://www.Knuspr.de/de/jobs?x=1'), 'knuspr.de');
-  assert.equal(domainOf(' www.one.al '), 'one.al');
-  assert.equal(domainOf('Radisson Blu Hotel'), '');
+  assert.equal(domainOf('northgatehotels.com'), 'northgatehotels.com');
+  assert.equal(domainOf('https://www.Parcelway.de/de/jobs?x=1'), 'parcelway.de');
+  assert.equal(domainOf(' www.drita.al '), 'drita.al');
+  assert.equal(domainOf('Northgate Grand Hotel'), '');
   assert.equal(domainOf('localhost'), '');
   assert.equal(domainOf('javascript:alert(1)'), '');
   assert.equal(domainOf('ftp://files.example.com'), '');
@@ -24,9 +24,9 @@ test('company websites become the bare domain, anything else is ignored', () => 
 
 test('initials skip legal forms and small words', () => {
   const { initials } = cvb;
-  assert.equal(initials('Radisson Hotel Group'), 'RH');
-  assert.equal(initials('Arteg Sh.p.k'), 'A');
-  assert.equal(initials('Großer Kern GmbH / knuspr.de'), 'GK');
+  assert.equal(initials('Northgate Hotel Group'), 'NH');
+  assert.equal(initials('Drita Sh.p.k'), 'D');
+  assert.equal(initials('Grüner Hafen GmbH / parcelway.de'), 'GH');
   assert.equal(initials('The Lakeside Grand Hotel'), 'LG');
   assert.equal(initials(''), '');
 });
@@ -55,7 +55,7 @@ test('saved data is rebuilt to the expected shape', () => {
     photo: 'https://tracker.example/pixel.png',
     photoY: 500,
     person: { name: 42, headline: 'Night Manager' },
-    groups: [{ title: 'Germany', entries: [{ company: 'Noctua', logo: 'javascript:1', roles: [] }, 'junk'] }],
+    groups: [{ title: 'Germany', entries: [{ company: 'Northgate', logo: 'javascript:1', roles: [] }, 'junk'] }],
     languages: 'German',
   }, data, 'de');
   assert.equal(cv.docLang, 'de');
