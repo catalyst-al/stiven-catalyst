@@ -300,8 +300,8 @@ button, input, select { font: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 40px;
-  padding: 9px 17px 9px 14px;
+  min-height: 44px;
+  padding: 7px 18px 7px 14px;
   border: 1px solid color-mix(in srgb, var(--family) 42%, var(--line));
   border-radius: 999px;
   background:
@@ -311,16 +311,14 @@ button, input, select { font: inherit; }
   backdrop-filter: blur(10px);
   color: var(--ink);
   font: inherit;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  text-align: left;
   cursor: pointer;
   animation: chip-ring 3.2s ease-out infinite;
   transition: border-color .2s ease, background .2s ease, transform .2s ease;
 }
 /* Each chip's dot is a small planet that beats, one after the other around the row. */
-.cosmos-chip > span {
+.cosmos-chip-dot {
+  flex: none;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -329,11 +327,30 @@ button, input, select { font: inherit; }
   animation: chip-beat 1.6s ease-in-out infinite;
 }
 .cosmos-chip:nth-child(2),
-.cosmos-chip:nth-child(2) > span { animation-delay: .4s; }
+.cosmos-chip:nth-child(2) .cosmos-chip-dot { animation-delay: .4s; }
 .cosmos-chip:nth-child(3),
-.cosmos-chip:nth-child(3) > span { animation-delay: .8s; }
+.cosmos-chip:nth-child(3) .cosmos-chip-dot { animation-delay: .8s; }
 .cosmos-chip:nth-child(4),
-.cosmos-chip:nth-child(4) > span { animation-delay: 1.2s; }
+.cosmos-chip:nth-child(4) .cosmos-chip-dot { animation-delay: 1.2s; }
+/* The planet's name, and under it the role it stands for. */
+.cosmos-chip-text {
+  display: grid;
+  gap: 1px;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.cosmos-chip-text b {
+  color: color-mix(in srgb, var(--family) 55%, #fff);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.cosmos-chip-text small {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
 .cosmos-chip:hover {
   border-color: var(--family);
   background:
@@ -358,7 +375,7 @@ button, input, select { font: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cosmos-chip,
-  .cosmos-chip > span { animation: none; }
+  .cosmos-chip-dot { animation: none; }
   .cosmos-chip:hover { transform: none; }
 }
 
@@ -2894,7 +2911,8 @@ html:not(.js) .filter-bar { display: none; }
   .mobile-panel { inset: 66px 0 auto 0; }
   .cosmos-inner { padding: 8px 0 44px; }
   .cosmos-anchor { aspect-ratio: 1 / .8; }
-  .cosmos-chip { min-height: 36px; padding: 7px 12px; font-size: 11px; }
+  .cosmos-chip { min-height: 40px; padding: 6px 14px 6px 12px; }
+  .cosmos-chip-text small { font-size: 12px; }
   .brand-poster { min-height: 430px; border-radius: 22px; }
   .meta-strip { grid-template-columns: 1fr; }
   .meta-strip > div,

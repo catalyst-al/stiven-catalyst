@@ -20,7 +20,7 @@
       <p class="cosmos-hint" data-cosmos-hint>{{ "Drag to turn the system. Tap a planet to open its tools, a moon to open one of them." | t(lang) }}</p>
       <div class="cosmos-families" role="group" aria-label="{{ 'Roles' | t(lang) }}">
         {%- for family in families %}
-        <button class="cosmos-chip" type="button" data-family="{{ family.id }}" aria-expanded="false" aria-controls="family-{{ family.id }}" style="--family: {{ family.color }}"><span aria-hidden="true"></span>{{ family.name }}</button>
+        <button class="cosmos-chip" type="button" data-family="{{ family.id }}" aria-expanded="false" aria-controls="family-{{ family.id }}" style="--family: {{ family.color }}"><span class="cosmos-chip-dot" aria-hidden="true"></span><span class="cosmos-chip-text"><b>{{ family.name }}</b> <small>{{ family.role | t(lang) }}</small></span></button>
         {%- endfor %}
       </div>
       {%- for family in families %}
