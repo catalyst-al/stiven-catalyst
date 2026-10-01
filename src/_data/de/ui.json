@@ -1440,6 +1440,7 @@
   "Routes where the gate was closed after loading.": "Touren, bei denen das Tor nach der Beladung geschlossen wurde.",
   "Routes where chilled and frozen bags were scanned inside the cooling area.": "Touren, bei denen gekühlte und tiefgekühlte Taschen im Kühlbereich gescannt wurden.",
   "Drag to turn the system. Tap a planet to open its tools.": "Ziehen, um das System zu drehen. Einen Planeten antippen, um seine Tools zu öffnen.",
+  "Drag to turn the system. Tap a planet to open its tools, a moon to open one of them.": "Ziehen, um das System zu drehen. Einen Planeten antippen, um seine Tools zu öffnen, einen Mond, um eines davon zu öffnen.",
   "Diagnose": "Diagnose",
   "Control": "Kontrolle",
   "Analyse": "Analyse",

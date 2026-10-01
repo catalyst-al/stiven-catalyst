@@ -19,15 +19,14 @@
 
     <div class="cosmos-system">
       <div class="cosmos-anchor" data-cosmos-anchor></div>
-      <p class="cosmos-hint" data-cosmos-hint>{{ "Drag to turn the system. Tap a planet to open its tools." | t(lang) }}</p>
+      <p class="cosmos-hint" data-cosmos-hint>{{ "Drag to turn the system. Tap a planet to open its tools, a moon to open one of them." | t(lang) }}</p>
       <div class="cosmos-families" role="group" aria-label="{{ 'Roles' | t(lang) }}">
         {%- for family in families %}
         <button class="cosmos-chip" type="button" data-family="{{ family.id }}" aria-expanded="false" aria-controls="family-{{ family.id }}" style="--family: {{ family.color }}"><span aria-hidden="true"></span>{{ family.name }}</button>
         {%- endfor %}
       </div>
       {%- for family in families %}
-      {%- set moons = (family | familyTools(toolList, lang)).length + (family | familyTools(toolList, lang, "learn")).length %}
-      <div class="cosmos-family" id="family-{{ family.id }}" data-family-panel="{{ family.id }}" data-name="{{ family.name }}" data-color="{{ family.color }}" data-orbit="{{ family.orbit }}" data-moons="{{ moons }}" style="--family: {{ family.color }}">
+      <div class="cosmos-family" id="family-{{ family.id }}" data-family-panel="{{ family.id }}" data-name="{{ family.name }}" data-color="{{ family.color }}" data-orbit="{{ family.orbit }}" style="--family: {{ family.color }}">
         <p class="cosmos-family-head"><strong>{{ family.name }}</strong><span>{{ family.role | t(lang) }}</span></p>
         <p class="cosmos-family-line">{{ family.line | t(lang) }}</p>
         <ul>

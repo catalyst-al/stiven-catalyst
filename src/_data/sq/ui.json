@@ -1440,6 +1440,7 @@
   "Routes where the gate was closed after loading.": "Rrugë ku porta u mbyll pas ngarkimit.",
   "Routes where chilled and frozen bags were scanned inside the cooling area.": "Rrugë ku çantat e ftohura dhe të ngrira u skanuan brenda zonës së ftohtë.",
   "Drag to turn the system. Tap a planet to open its tools.": "Tërhiqe për ta rrotulluar sistemin. Prek një planet për të hapur mjetet e tij.",
+  "Drag to turn the system. Tap a planet to open its tools, a moon to open one of them.": "Tërhiqe për ta rrotulluar sistemin. Prek një planet për të hapur mjetet e tij, një hënë për të hapur njërin prej tyre.",
   "Diagnose": "Diagnozë",
   "Control": "Kontroll",
   "Analyse": "Analizë",
