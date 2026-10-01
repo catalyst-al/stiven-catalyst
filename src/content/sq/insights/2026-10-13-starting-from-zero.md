@@ -42,28 +42,3 @@ Nëse dikush që ka qenë shef më pyet si të nisë nga e para, nuk do t'i thos
 Por ka një kusht. Mos hyr në punën e re duke kërkuar që të tjerët të respektojnë atë që ke qenë. Fillo të tregosh çfarë di të bësh aty ku je. Unë kalova nga drejtimi i njerëzve dhe i bizneseve në Shqipëri te shpërndarja e pakove dhe puna si steward në Gjermani, pastaj te night audit-i, te Team Leader dhe te Area Manager. Po të kisha menduar se disa punë ishin poshtë meje, ndoshta nuk do ta kisha mësuar kurrë atë që më duhej për t'u ngritur përsëri.
 
 Mos u kap pas karriges që kishe. Mbaj me vete atë që ke mësuar duke qenë ulur në të.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| Roli i fundit në Shqipëri: Cluster Manager, flagship store në Tiranë, koordinim i rrjetit | Përgjigja 1 (2020–2021) |
-| Ndërtimi nga zero deri në hapje: arkitektë, marangozë, bojaxhinj, ekipet e zbatimit | Përgjigja 1 |
-| Ekipi: 8 shitës, 4 arkëtare, 1 asistente | Përgjigja 1 |
-| Faqja e parë e shitjeve online dhe ekipi i parë i e-commerce | Përgjigja 1 |
-| Dy dyqane të dobëta u mbyllën, aktiviteti te flagship-i | Përgjigja 1 |
-| General Sales Manager, distributor pajisjesh shtëpiake, 61 rishitës aktivë, magazina/B2B/kontabiliteti/teknika/shërbimi ndaj klientit | Përgjigja 1 |
-| 11.2021–06.2022: nisi si shpërndarës pakosh, pastaj dispeçim | Përgjigja 2 dhe konfirmimi i Stivenit (të dyja) |
-| Steward në hotel 07.2022–04.2023 | Përgjigja 2 |
-| Night auditor në Frankfurt nga 05.2023 | Përgjigja 2 |
-| Pako 12.2023–10.2024 krahas night audit-it; Pflegehelfer 10.2024–01.2025 | Përgjigja 2 dhe konfirmimi i Stivenit (paralelisht) |
-| Team Leader On Road 01.2025; Area Manager 06.2025 | Përgjigja 2 |
-| Furgoni, rruga, koha, procesi; askush s'kishte detyrim ta njihte të kaluarën | Përgjigja 3 |
-| Çfarë ndihmoi menjëherë dhe çfarë duhej lënë pas | Përgjigja 4 |
-| Gjermanishtja u ndërtua duke punuar; DTZ B1 2025: 45/45, 15/20, 97/100 | Përgjigja 5 |
-| Çfarë pa si shpërndarës, steward, night auditor | Përgjigja 6 |
-| Këshilla dhe mbyllja me karrigen | Përgjigja 7 |
-
-Asnjë emër kompanie, as këtu as në ese (vendim i Stivenit). Nuk ka asnjë skenë apo dialog të shpikur. Momenti i një dite specifike mungon me qëllim: Stiveni do ta shtojë vetë nëse e do.
--->
