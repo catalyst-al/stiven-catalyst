@@ -3,8 +3,9 @@
 // are its tools (the same drawings as the role cards, partials/family-planet.njk): Pulse cracks and
 // beats inside a heartbeat ring, Zenith is a contour map under a radar, Lumen shines inside a ring
 // of dust in five parts, Atlas is a globe with a constellation on its lit side. Dragging turns and
-// tilts the system, a tap on a planet (or on its button) opens that role's tools, a tap on a moon opens
-// that tool, a tap on the light flares it.
+// tilts the system and sets the bulb swinging on its cable (it throws a pool of light on the plane of the
+// orbits), a tap on a planet (or on its button) opens that role's tools, a tap on a moon opens that tool,
+// a tap on the light makes its filament, a sound wave, speak up.
 (() => {
   const root = document.querySelector("[data-cosmos]");
   const canvas = root?.querySelector("canvas");
@@ -126,6 +127,11 @@
   const view = { yaw: 0.5, yawVel: DRIFT, pitch: REST_PITCH, hoverX: 0, hoverY: 0, aimX: 0, aimY: 0 };
   let time = 0;
   let flare = 0;
+  // The bulb hangs from the top of the hero and swings like a pendant lamp: a drag pushes it,
+  // gravity brings it back. bx, by is where it hangs this frame.
+  const swing = { a: 0, v: 0 };
+  let bx = 0;
+  let by = 0;
   let selected = null;
   let hovered = null;
   let hoveredMoon = null;
@@ -244,18 +250,40 @@
     ctx.fillStyle = g;
     ctx.fillRect(cx - S * 1.4 * breathe, cy - S * 1.4 * breathe, S * 2.8 * breathe, S * 2.8 * breathe);
     const b = S * BULB;
-    g = ctx.createRadialGradient(cx, cy, 0, cx, cy, b * 3 * breathe);
+    g = ctx.createRadialGradient(bx, by, 0, bx, by, b * 3 * breathe);
     g.addColorStop(0, "rgba(255,251,238,0.95)");
     g.addColorStop(0.32, "rgba(255,226,170,0.38)");
     g.addColorStop(1, "rgba(255,200,120,0)");
     ctx.fillStyle = g;
-    ctx.fillRect(cx - b * 3.2 * breathe, cy - b * 3.2 * breathe, b * 6.4 * breathe, b * 6.4 * breathe);
+    ctx.fillRect(bx - b * 3.2 * breathe, by - b * 3.2 * breathe, b * 6.4 * breathe, b * 6.4 * breathe);
     ctx.globalCompositeOperation = "source-over";
   };
 
-  // The Catalyst bulb, hanging from its cable at the top of the hero.
+  // The pool of light the bulb throws on the plane of the orbits; it moves as the bulb swings.
+  const drawPool = () => {
+    const p = project((bx - cx) / S, 0, 0);
+    const rx = S * 0.55 * (1 + flare * 0.3);
+    const ry = Math.max(rx * 0.12, rx * Math.abs(sinP));
+    ctx.globalCompositeOperation = "lighter";
+    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rx);
+    g.addColorStop(0, `rgba(255,236,200,${0.16 + flare * 0.12})`);
+    g.addColorStop(0.5, "rgba(255,226,170,0.05)");
+    g.addColorStop(1, "rgba(255,226,170,0)");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
+  };
+
+  // The Catalyst bulb, hanging from its cable at the top of the hero and swinging around that point.
+  // Its filament is a sound wave, the voice of the brand: it pulses as it glows and speaks up when the bulb is tapped.
   const drawBulb = () => {
     const b = S * BULB;
+    ctx.save();
+    ctx.translate(cx, 0);
+    ctx.rotate(swing.a + view.hoverX * 0.04);
+    ctx.translate(-cx, 0);
     const neck = cy - 0.52 * b;
     const capTop = neck - 0.46 * b;
 
@@ -287,14 +315,30 @@
     ctx.fill();
     ctx.restore();
 
-    ctx.strokeStyle = `rgba(255,160,60,${0.5 + 0.2 * Math.sin(time * 5)})`;
+    // The two leads, then the wave between them.
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "rgba(255,150,50,0.85)";
     ctx.lineWidth = Math.max(1, 0.035 * b);
     ctx.beginPath();
-    ctx.moveTo(cx - 0.12 * b, neck + 0.05 * b);
-    ctx.lineTo(cx - 0.12 * b, cy + 0.12 * b);
-    for (let i = 0; i <= 6; i += 1) ctx.lineTo(cx - 0.12 * b + (i * 0.24 * b) / 6, cy + (i % 2 ? 0.2 : 0.12) * b);
-    ctx.lineTo(cx + 0.12 * b, neck + 0.05 * b);
+    ctx.moveTo(cx - 0.1 * b, neck + 0.05 * b);
+    ctx.lineTo(cx - 0.1 * b, cy - 0.02 * b);
+    ctx.moveTo(cx + 0.1 * b, neck + 0.05 * b);
+    ctx.lineTo(cx + 0.1 * b, cy - 0.02 * b);
     ctx.stroke();
+    const bars = 11;
+    const loud = 1 + flare * 0.9;
+    ctx.lineWidth = Math.max(1.2, 0.05 * b);
+    for (let i = 0; i < bars; i += 1) {
+      const px = cx - 0.3 * b + (i * 0.6 * b) / (bars - 1);
+      const env = Math.sin((i / (bars - 1)) * Math.PI);
+      const h = (0.04 + 0.22 * env * (0.6 + 0.4 * Math.sin(time * 3 + i * 1.3))) * b * loud;
+      ctx.strokeStyle = `rgba(255,${Math.round(150 + 40 * env)},60,${0.55 + 0.45 * env})`;
+      ctx.beginPath();
+      ctx.moveTo(px, cy + 0.22 * b - h);
+      ctx.lineTo(px, cy + 0.22 * b + h);
+      ctx.stroke();
+    }
+    ctx.lineCap = "butt";
 
     const cap = ctx.createLinearGradient(cx - 0.25 * b, 0, cx + 0.25 * b, 0);
     cap.addColorStop(0, "#050607");
@@ -310,6 +354,13 @@
     ctx.fillRect(cx - 0.25 * b, capTop + 0.26 * b, 0.5 * b, Math.max(1, 0.025 * b));
     ctx.fillStyle = "#d1a553";
     ctx.fillRect(cx - 0.25 * b, neck - 0.04 * b, 0.5 * b, Math.max(1.5, 0.06 * b));
+    ctx.restore();
+  };
+
+  const placeBulb = () => {
+    const a = swing.a + view.hoverX * 0.04;
+    bx = cx + Math.sin(a) * cy;
+    by = Math.cos(a) * cy;
   };
 
   const placePlanets = () => {
@@ -571,7 +622,7 @@
     const lit = hovered === planet || isOn;
 
     if (isOn) {
-      const beam = ctx.createLinearGradient(cx, cy, x, y);
+      const beam = ctx.createLinearGradient(bx, by, x, y);
       beam.addColorStop(0, "rgba(255,240,210,0.5)");
       beam.addColorStop(1, rgba(rgb, 0.7));
       ctx.strokeStyle = beam;
@@ -579,7 +630,7 @@
       ctx.setLineDash([3 * dpr, 5 * dpr]);
       ctx.lineDashOffset = -time * 30 * dpr;
       ctx.beginPath();
-      ctx.moveTo(cx, cy);
+      ctx.moveTo(bx, by);
       ctx.lineTo(x, y);
       ctx.stroke();
       ctx.setLineDash([]);
@@ -587,8 +638,8 @@
     if (lit) halo(x, y, r, rgb, 4.2, 0.4);
 
     // Lit from the bulb's side.
-    const dx = cx - x;
-    const dy = cy - y;
+    const dx = bx - x;
+    const dy = by - y;
     const len = Math.hypot(dx, dy) || 1;
     (DRAWERS[planet.id] || ((p, ux, uy) => { halo(x, y, r, rgb, 3.2, 0.32); sphere(x, y, r, rgb, ux, uy); }))(planet, dx / len, dy / len);
 
@@ -614,8 +665,10 @@
     if (!disc) return;
     ctx.clearRect(0, 0, width, height);
     setAngles();
+    placeBulb();
     placePlanets();
     drawSky();
+    drawPool();
     for (const planet of planets) drawOrbit(planet, false);
     for (const planet of planets) if (planet.sz < 0) drawPlanet(planet);
     ctx.globalCompositeOperation = "lighter";
@@ -643,6 +696,8 @@
       view.pitch += (REST_PITCH - view.pitch) * ease(1.8, dt);
     }
     view.yaw += view.yawVel * dt;
+    swing.v += (-9.9 * Math.sin(swing.a) - 0.9 * swing.v) * dt;
+    swing.a = Math.max(-0.22, Math.min(0.22, swing.a + swing.v * dt));
     view.hoverX += (view.aimX - view.hoverX) * ease(3, dt);
     view.hoverY += (view.aimY - view.hoverY) * ease(3, dt);
     flare *= Math.exp(-dt * 2.4);
@@ -711,7 +766,7 @@
     }
     return best;
   };
-  const onBulb = ({ x, y }) => Math.hypot(x - cx, y - cy) < S * BULB * 1.1;
+  const onBulb = ({ x, y }) => Math.hypot(x - bx, y - by) < S * BULB * 1.1;
   const interactive = (target) => target.closest("a, button, input, .cosmos-copy, .cosmos-family");
 
   root.addEventListener("pointerdown", (event) => {
@@ -743,6 +798,7 @@
     }
     if (!dragging.moved) return;
     view.yaw += dx * 0.006;
+    swing.v = Math.max(-1.6, Math.min(1.6, swing.v + dx * 0.008));
     view.pitch = Math.min(1.25, Math.max(0.08, view.pitch + dy * 0.004));
     view.yawVel = (dx * 0.006) / Math.max(0.008, (now - dragging.t) / 1000);
     view.yawVel = Math.max(-3, Math.min(3, view.yawVel));
