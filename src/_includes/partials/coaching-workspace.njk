@@ -9,7 +9,7 @@
   <noscript><p>{{ coaching.labels.nojs[lang or 'en'] }}</p></noscript>
   <p class="form-note" data-coaching-status role="status" aria-live="polite"></p>
 </section>
-<script type="application/json" id="coaching-data">{{ coaching | scriptJson | safe }}</script>
+<script src="{{ coaching | coachingDataUrl }}" defer></script>
 <script src="{{ '/js/coaching-core.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/coaching-results.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/coaching-workspace.js' | assetUrl }}" defer></script>

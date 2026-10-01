@@ -80,6 +80,10 @@ export default function (eleventyConfig) {
   );
   // JSON embedded in HTML must not be able to close its script element.
   eleventyConfig.addFilter("scriptJson", (value) => JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`));
+  // The coaching curriculum as one file (src/coaching-data.njk) the browser keeps; its address changes with the content.
+  eleventyConfig.addFilter("coachingDataUrl", (coaching) =>
+    `/js/coaching-data.js?v=${createHash("sha256").update(JSON.stringify(coaching)).digest("hex").slice(0, 10)}`
+  );
   // collections["notes" + (lang | langSuffix)]: notes, notesDe or notesSq.
   eleventyConfig.addFilter("langSuffix", (lang) => (TRANSLATED.has(lang) ? lang[0].toUpperCase() + lang.slice(1) : ""));
   // A changed asset gets a new URL, so browsers do not keep an old script or stylesheet.
