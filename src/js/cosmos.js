@@ -3,7 +3,8 @@
 // are its tools (the same drawings as the role cards, partials/family-planet.njk): Pulse cracks and
 // beats inside a heartbeat ring, Zenith is a contour map under a radar, Lumen shines inside a ring
 // of dust in five parts, Atlas is a globe with a constellation on its lit side. Dragging turns and
-// tilts the system, a tap on a planet (or on its button) opens that role's tools, a tap on the light flares it.
+// tilts the system, a tap on a planet (or on its button) opens that role's tools, a tap on a moon opens
+// that tool, a tap on the light flares it.
 (() => {
   const root = document.querySelector("[data-cosmos]");
   const canvas = root?.querySelector("canvas");
@@ -40,7 +41,8 @@
       incl: (i % 2 ? -1 : 1) * 0.035 * (i + 1),
       speed: 0.1 / Math.pow(r, 1.5),
       size: SIZES[i % SIZES.length],
-      moons: Number(panel.dataset.moons) || 0,
+      // The moons are the role's tools, from the panel's list: tapping one opens that tool.
+      moons: [...panel.querySelectorAll("ul a")].map((a) => ({ name: a.querySelector("span")?.textContent || "", url: a.href, x: 0, y: 0, front: false, size: 0 })),
       reach: REACH[panel.dataset.familyPanel] || 1.8,
       sx: 0, sy: 0, sz: 0, sr: 0,
     };
@@ -126,6 +128,7 @@
   let flare = 0;
   let selected = null;
   let hovered = null;
+  let hoveredMoon = null;
   let dpr = 1;
   let width = 0;
   let height = 0;
@@ -351,18 +354,47 @@
     ctx.fill();
     ctx.globalCompositeOperation = "source-over";
   };
-  // The moons go round on an ellipse; the half with sin(a) < 0 passes behind the planet.
+  // The moons go round on an ellipse; the half with sin(a) < 0 passes behind the planet. They grow
+  // while their planet is open, and the one under the mouse shows the name of its tool.
   const drawMoons = (planet, front) => {
     const { sx: x, sy: y, sr: r, rgb, moons, reach } = planet;
     const rx = r * reach;
     const ry = rx * 0.3;
-    const size = Math.max(1.4 * dpr, r * 0.12);
-    ctx.fillStyle = rgba(mix(rgb, WHITE, 0.6), front ? 1 : 0.6);
-    for (let i = 0; i < moons; i += 1) {
-      const a = time * 0.4 + (i / moons) * Math.PI * 2 + 0.6;
-      if ((Math.sin(a) > 0) !== front) continue;
-      circle(x + Math.cos(a) * rx, y + Math.sin(a) * ry, size);
+    const open = selected === planet || hovered === planet;
+    const size = Math.max(1.6 * dpr, r * (open ? 0.16 : 0.12));
+    for (let i = 0; i < moons.length; i += 1) {
+      const moon = moons[i];
+      const a = time * 0.4 + (i / moons.length) * Math.PI * 2 + 0.6;
+      moon.front = Math.sin(a) > 0;
+      moon.x = x + Math.cos(a) * rx;
+      moon.y = y + Math.sin(a) * ry;
+      moon.size = size;
+      if (moon.front !== front) continue;
+      const lit = moon === hoveredMoon;
+      if (lit) {
+        ctx.globalCompositeOperation = "lighter";
+        const glow = ctx.createRadialGradient(moon.x, moon.y, 0, moon.x, moon.y, size * 4);
+        glow.addColorStop(0, rgba(rgb, 0.6));
+        glow.addColorStop(1, rgba(rgb, 0));
+        ctx.fillStyle = glow;
+        circle(moon.x, moon.y, size * 4);
+        ctx.fill();
+        ctx.globalCompositeOperation = "source-over";
+      }
+      ctx.fillStyle = lit ? "#fff" : rgba(mix(rgb, WHITE, 0.6), front ? 1 : 0.6);
+      circle(moon.x, moon.y, lit ? size * 1.5 : size);
       ctx.fill();
+      if (lit) {
+        const fontSize = (width / dpr < 560 ? 9.5 : 10.5) * dpr;
+        ctx.font = `800 ${fontSize}px Inter, ui-sans-serif, -apple-system, "Segoe UI", sans-serif`;
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.fillStyle = "rgba(4,6,9,.75)";
+        ctx.fillRect(moon.x - ctx.measureText(moon.name).width / 2 - 5 * dpr, moon.y - size * 2 - fontSize * 1.25, ctx.measureText(moon.name).width + 10 * dpr, fontSize * 1.5);
+        ctx.fillStyle = "#fff";
+        ctx.fillText(moon.name, moon.x, moon.y - size * 2 - fontSize * 0.5);
+        ctx.textAlign = "start";
+      }
     }
   };
 
@@ -664,6 +696,21 @@
     }
     return best;
   };
+  // The moon under a point, if any; a moon in front wins over one behind its planet.
+  const moonAt = ({ x, y }) => {
+    let best = null;
+    let bestD = Infinity;
+    for (const planet of planets) {
+      for (const moon of planet.moons) {
+        const d = Math.hypot(moon.x - x, moon.y - y);
+        if (d < Math.max(moon.size * 3, 12 * dpr) && d - (moon.front ? 6 * dpr : 0) < bestD) {
+          best = moon;
+          bestD = d - (moon.front ? 6 * dpr : 0);
+        }
+      }
+    }
+    return best;
+  };
   const onBulb = ({ x, y }) => Math.hypot(x - cx, y - cy) < S * BULB * 1.1;
   const interactive = (target) => target.closest("a, button, input, .cosmos-copy, .cosmos-family");
 
@@ -677,9 +724,11 @@
       const box = root.getBoundingClientRect();
       view.aimX = ((event.clientX - box.left) / box.width - 0.5) * 2;
       view.aimY = ((event.clientY - box.top) / box.height - 0.5) * 2;
-      const over = interactive(event.target) ? null : planetAt(local(event));
-      const wantPointer = Boolean(over) || onBulb(local(event));
-      if (over !== hovered) { hovered = over; refresh(); }
+      const at = local(event);
+      const overMoon = interactive(event.target) ? null : moonAt(at);
+      const over = interactive(event.target) ? null : planetAt(at);
+      const wantPointer = Boolean(over || overMoon) || onBulb(at);
+      if (over !== hovered || overMoon !== hoveredMoon) { hovered = over; hoveredMoon = overMoon; refresh(); }
       root.classList.toggle("is-pointing", wantPointer);
     }
     if (!dragging || event.pointerId !== dragging.id) return;
@@ -710,8 +759,10 @@
     root.classList.remove("is-dragging");
     if (!wasTap || event.type === "pointercancel") return;
     const at = local(event);
+    const moon = moonAt(at);
     const planet = planetAt(at);
-    if (planet) select(planet.id);
+    if (moon) window.location.href = moon.url;
+    else if (planet) select(planet.id);
     else if (onBulb(at) && !still) flare = 1;
   };
   root.addEventListener("pointerup", release);
@@ -720,7 +771,7 @@
     if (event.pointerType !== "mouse") return;
     view.aimX = 0;
     view.aimY = 0;
-    if (hovered) { hovered = null; refresh(); }
+    if (hovered || hoveredMoon) { hovered = null; hoveredMoon = null; refresh(); }
   });
 
   // ---- Life cycle ----
