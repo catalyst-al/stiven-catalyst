@@ -460,7 +460,7 @@ button, input, select { font: inherit; }
   max-width: 900px;
   margin: 0;
   font-family: var(--display);
-  /* ~8em is the width of "DELIBERATELY." in Arial Black */
+  /* the longest word, "MANAGEMENT", is ~7.5em wide in Arial Black */
   font-size: clamp(34px, 12cqi, 108px);
   font-weight: 900;
   line-height: .88;
@@ -469,11 +469,11 @@ button, input, select { font: inherit; }
 }
 
 .cosmos h1 .line { display: block; }
-.cosmos h1 .line:nth-child(2) {
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 82%, transparent);
-}
 .cosmos h1 .act {
+  /* The gradient is painted inside the box, and with line-height .88 the box stops below the
+     dots of Ë and the top of Ä/Ö/Ü: room above, taken back by the margin. */
+  margin-top: -.2em;
+  padding-top: .2em;
   background: linear-gradient(90deg, var(--red), var(--blue-soft));
   -webkit-background-clip: text;
   background-clip: text;
