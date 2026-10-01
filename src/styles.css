@@ -4369,6 +4369,22 @@ body.in-family {
 .in-family .tool-hero .eyebrow { color: var(--sky-ink); }
 .in-family .tool-hero .lede { text-shadow: 0 0 18px var(--paper), 0 0 4px var(--paper); }
 
+/* The role's planet over its drawing, in the open space beside the title; it keeps the
+   physics and the moons of the role cards (partials/family-planet.njk). */
+.family-sky .sky-planet {
+  width: 440px;
+  aspect-ratio: 4 / 3;
+  transform: translate(-50%, -50%);
+}
+.sky-pulse .sky-planet { left: 78%; top: calc(var(--hero-bottom) * .4); }
+.sky-zenith .sky-planet { left: 60%; top: calc(var(--hero-bottom) * .18); width: 340px; }
+.sky-lumen .sky-planet { left: 74%; top: calc(var(--hero-bottom) * .5); }
+.sky-atlas .sky-planet { left: 66%; top: calc(var(--hero-bottom) * .3); width: 380px; }
+.sky-learn .sky-planet { left: 48%; top: 90px; width: 300px; }
+@media (max-width: 900px) {
+  .family-sky .sky-planet { left: auto; right: -90px; top: 30px; width: 260px; transform: none; }
+}
+
 /* Lumen: a beam of light from the bulb, dust drifting in it. */
 .sky-lumen .lumen-cable {
   left: 84%;

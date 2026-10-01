@@ -2,10 +2,11 @@
     and the role pages. Each planet has its own physics and its moons are its tools: Pulse cracks and beats
     inside a heartbeat ring, Zenith is a contour map under a radar, Lumen shines inside a ring of dust in
     five parts, Atlas is a globe with a constellation on its lit side. The light comes from the top left,
-    where the Catalyst bulb is on the homepage. Needs planet (the family) and planetKey (unique on the page). -#}
+    where the Catalyst bulb is on the homepage. Needs planet (the family) and planetKey (unique on the page);
+    with planetBare only the SVG is written, without its piece of night sky (the tool-page background). -#}
 {%- set shapes = familySky.planets %}
 {%- set k = planetKey %}
-<span class="family-visual" aria-hidden="true">
+{% if not planetBare %}<span class="family-visual" aria-hidden="true">{% endif %}
   <svg class="family-planet planet-{{ planet.id }}" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" focusable="false">
     <defs>
       <radialGradient id="halo-{{ k }}" cx="50%" cy="50%" r="50%">
@@ -112,4 +113,4 @@
     {%- for m in shapes.moons.atlas %}{% if m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
     {%- endif %}
   </svg>
-</span>
+{% if not planetBare %}</span>{% endif %}
