@@ -385,17 +385,19 @@
       return;
     }
     const cost = parseNumber(form.cost.value);
-    book.add({
+    const row = {
       date: form.date.value,
       ...Object.fromEntries(fields.map((f) => [f.name, form[f.name].value])),
       units,
       cost: cost >= 0 ? cost : null,
       note: form.note.value.trim(),
-    });
-    // Keep date, shift and stage: the next entry is usually from the same place.
+    };
+    // Keep date, shift and stage: the next entry is usually from the same place. The form is
+    // cleared before the results change, so the page is laid out once.
     form.units.value = 1;
     form.cost.value = "";
     form.note.value = "";
+    book.add(row);
     flash(entryStatus, tx("Added {count} at {stage}.", { count: plural(units, t.one, t.many), stage: form.stage.value }));
     form.type.focus();
   });
