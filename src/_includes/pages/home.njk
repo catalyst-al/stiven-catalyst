@@ -4,7 +4,8 @@
 {%- set highlights = (de if lang == "de" else sq).home.highlights if lang == "de" or lang == "sq" else home.highlights -%}
 {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
 {%- set featured = essays | featured -%}
-{%- set others = essays | except(featured) | last(3) -%}
+{#- The three newest essays besides the featured one, newest first. -#}
+{%- set others = essays | except(featured) | last(3) | reverse -%}
 {% include "partials/cosmos-hero.njk" %}
 
   <div class="shell meta-strip" aria-label="{{ 'Stiven Catalyst philosophy' | t(lang) }}">
