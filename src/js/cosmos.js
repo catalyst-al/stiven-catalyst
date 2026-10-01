@@ -5,7 +5,9 @@
 // of dust in five parts, Atlas is a globe with a constellation on its lit side. Dragging turns and
 // tilts the system and sets the bulb swinging on its cable (it throws a pool of light on the plane of the
 // orbits), a tap on a planet (or on its button) opens that role's tools, a tap on a moon opens that tool,
-// a tap on the light makes its filament, a sound wave, speak up.
+// a tap on the light makes its filament, a sound wave, speak up. A small reader sits under the light
+// on the inner orbit; it runs to the planet that is opened, jumps to a moon that is tapped, and
+// sleeps when left alone.
 (() => {
   const root = document.querySelector("[data-cosmos]");
   const canvas = root?.querySelector("canvas");
@@ -250,12 +252,14 @@
     ctx.fillStyle = g;
     ctx.fillRect(cx - S * 1.4 * breathe, cy - S * 1.4 * breathe, S * 2.8 * breathe, S * 2.8 * breathe);
     const b = S * BULB;
+    ctx.globalAlpha = dim;
     g = ctx.createRadialGradient(bx, by, 0, bx, by, b * 3 * breathe);
     g.addColorStop(0, "rgba(255,251,238,0.95)");
     g.addColorStop(0.32, "rgba(255,226,170,0.38)");
     g.addColorStop(1, "rgba(255,200,120,0)");
     ctx.fillStyle = g;
     ctx.fillRect(bx - b * 3.2 * breathe, by - b * 3.2 * breathe, b * 6.4 * breathe, b * 6.4 * breathe);
+    ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = "source-over";
   };
 
@@ -310,7 +314,7 @@
     glass.addColorStop(0.55, "#fffaf0");
     glass.addColorStop(1, "#ffe6bb");
     ctx.shadowColor = "rgba(255,238,205,0.95)";
-    ctx.shadowBlur = (26 + flare * 30) * dpr;
+    ctx.shadowBlur = (26 + flare * 30) * dpr * dim;
     ctx.fillStyle = glass;
     ctx.fill();
     ctx.restore();
@@ -326,7 +330,7 @@
     ctx.lineTo(cx + 0.1 * b, cy - 0.02 * b);
     ctx.stroke();
     const bars = 11;
-    const loud = 1 + flare * 0.9;
+    const loud = (1 + flare * 0.9) * (0.5 + 0.5 * dim);
     ctx.lineWidth = Math.max(1.2, 0.05 * b);
     for (let i = 0; i < bars; i += 1) {
       const px = cx - 0.3 * b + (i * 0.6 * b) / (bars - 1);
@@ -661,12 +665,185 @@
     if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
   };
 
+  // ---- The reader: a small figure under the light ----
+  // A pictogram, no face, sitting on the inner orbit in the pool of light, reading. Now and then it
+  // looks up, stretches or walks a few steps; left alone for a minute it lies down and sleeps, and the
+  // light dims a little. When a planet is opened it runs there along the beam and stands on it; when
+  // a moon is tapped it jumps to the moon as the tool opens; when the planet is closed it comes back
+  // and sits down to read. With reduced motion it only sits, or stands on the open planet.
+  const reader = {
+    state: "read", t: 0, next: 20 + Math.random() * 20, idle: 0,
+    x: 0, y: 0, s: 1, face: 1, from: { x: 0, y: 0 }, target: null, walkDir: 1, walkOff: 0,
+  };
+  let dim = 1;
+  const inner = planets.reduce((a, p) => (p.r < a.r ? p : a), planets[0] || { r: 0.46, incl: 0 });
+  // The seat: the front of the inner orbit, a little to the left of the bulb, whatever the turn of the system.
+  const seatPoint = () => orbitPoint(inner.r, inner.incl, Math.PI / 2 - (view.yaw + view.hoverX * 0.22) + 0.45 + reader.walkOff);
+  const toRead = () => { reader.state = "read"; reader.t = 0; reader.next = 20 + Math.random() * 20; reader.walkOff = 0; };
+  const startRun = (planet) => { reader.from = { x: reader.x, y: reader.y }; reader.target = planet; reader.state = "run"; reader.t = 0; };
+  const startBack = () => { reader.from = { x: reader.x, y: reader.y }; reader.target = null; reader.state = "back"; reader.t = 0; };
+  const jumpTo = (moon) => { reader.from = { x: reader.x, y: reader.y }; reader.target = { sx: moon.x, sy: moon.y, sr: moon.size }; reader.state = "jump"; reader.t = 0; };
+
+  const updateReader = (dt) => {
+    reader.t += dt;
+    reader.idle += dt;
+    const open = selected;
+    switch (reader.state) {
+      case "read":
+        if (open) startRun(open);
+        else if (reader.idle > 60) { reader.state = "sleep"; reader.t = 0; }
+        else if (reader.t > reader.next) {
+          const act = Math.random();
+          reader.state = act < 0.4 ? "lookup" : act < 0.7 ? "stretch" : "walk";
+          reader.walkDir = Math.random() < 0.5 ? -1 : 1;
+          reader.t = 0;
+        }
+        break;
+      case "lookup": if (open) startRun(open); else if (reader.t > 1.8) toRead(); break;
+      case "stretch": if (open) startRun(open); else if (reader.t > 2) toRead(); break;
+      case "walk":
+        if (open) { startRun(open); break; }
+        reader.walkOff += reader.walkDir * 0.22 * dt * (reader.t < 1.6 ? 1 : -1);
+        if (reader.t > 3.2) toRead();
+        break;
+      case "sleep": if (reader.idle < 1 || open) { reader.state = "wake"; reader.t = 0; } break;
+      case "wake": if (reader.t > 0.7) { if (open) startRun(open); else toRead(); } break;
+      case "run":
+        if (!open) startBack();
+        else if (open !== reader.target) startRun(open);
+        else if (reader.t > 0.7) { reader.state = "stand"; reader.t = 0; }
+        break;
+      case "stand": if (!open) startBack(); else if (open !== reader.target) startRun(open); break;
+      case "back": if (open) startRun(open); else if (reader.t > 0.7) toRead(); break;
+      default: break;
+    }
+    dim += ((reader.state === "sleep" ? 0.7 : 1) - dim) * ease(2, dt);
+  };
+
+  const smooth = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+  const placeReader = () => {
+    if (still) { reader.state = selected ? "stand" : "read"; reader.target = selected; }
+    const seat = seatPoint();
+    let x = seat.x;
+    let y = seat.y;
+    let k = seat.k;
+    const moving = reader.state === "run" || reader.state === "jump" || reader.state === "back";
+    if (moving) {
+      const dur = reader.state === "jump" ? 0.26 : 0.7;
+      const u = smooth(Math.min(1, reader.t / dur));
+      const tx = reader.state === "back" ? seat.x : reader.target.sx;
+      const ty = reader.state === "back" ? seat.y : reader.target.sy - reader.target.sr;
+      x = reader.from.x + (tx - reader.from.x) * u;
+      y = reader.from.y + (ty - reader.from.y) * u - Math.sin(u * Math.PI) * (reader.state === "jump" ? 10 : 6) * dpr;
+      if (Math.abs(tx - reader.from.x) > 1) reader.face = Math.sign(tx - reader.from.x);
+    } else if (reader.state === "stand" && reader.target) {
+      x = reader.target.sx;
+      y = reader.target.sy - reader.target.sr;
+      k = reader.target.sr / (inner.size * S) || k;
+    } else if (reader.state === "walk" && Math.abs(x - reader.x) > 0.2) {
+      reader.face = Math.sign(x - reader.x);
+    }
+    reader.x = x;
+    reader.y = y;
+    reader.s = Math.max((15 * dpr) / 34, (0.1 * S * Math.min(1.2, k)) / 34);
+  };
+
+  const drawReader = () => {
+    const { x, y, s, face, state, t } = reader;
+    const onSeat = !(state === "run" || state === "jump" || state === "back" || state === "stand");
+    if (onSeat) {
+      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.beginPath();
+      ctx.ellipse(x, y + 1 * s, 14 * s, 3 * s, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // A soft light around the figure instead of a shadow blur, which is costly every frame.
+    ctx.globalCompositeOperation = "lighter";
+    const aura = ctx.createRadialGradient(x, y - 16 * s, 0, x, y - 16 * s, 26 * s);
+    aura.addColorStop(0, "rgba(255,236,200,0.22)");
+    aura.addColorStop(1, "rgba(255,236,200,0)");
+    ctx.fillStyle = aura;
+    ctx.beginPath();
+    ctx.arc(x, y - 16 * s, 26 * s, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(s * face, s);
+    ctx.strokeStyle = "#f4f7fb";
+    ctx.fillStyle = "#f4f7fb";
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.lineWidth = 3.2;
+    const head = (hx, hy) => { ctx.beginPath(); ctx.arc(hx, hy, 3.4, 0, Math.PI * 2); ctx.fill(); };
+    const seg = (...pts) => { ctx.beginPath(); ctx.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]); ctx.stroke(); };
+    const bob = Math.sin(time * 2) * 0.4;
+    if (state === "read" || state === "lookup" || state === "wake") {
+      const up = state === "lookup" ? Math.min(1, t / 0.4) * (t > 1.4 ? Math.max(0, 1 - (t - 1.4) / 0.4) : 1) : 0;
+      head(1 + up * 2, -29 - up + bob * 0.5);
+      seg(1, -24, -1, -11);
+      seg(-1, -11, -9, -8, -8, 0);
+      seg(-1, -11, 7, -9, 9, 0);
+      if (state === "wake") { seg(0, -20, -7, -10); seg(0, -20, 6, -10); }
+      else {
+        seg(0, -20, 7, -16 + up * 2);
+        seg(0, -20, -6, -15 + up * 2);
+        ctx.lineWidth = 2;
+        ctx.strokeRect(-1, -19 + up * 3, 10, 7);
+      }
+    } else if (state === "stretch") {
+      const a = Math.sin(Math.min(1, t / 0.6) * Math.PI / 2) * (t > 1.4 ? Math.max(0, 1 - (t - 1.4) / 0.6) : 1);
+      head(0, -33 - a);
+      seg(0, -28 - a, 0, -12);
+      seg(0, -12, -4, 0);
+      seg(0, -12, 4, 0);
+      seg(0, -23, -7, -23 - 14 * a);
+      seg(0, -23, 7, -23 - 14 * a);
+    } else if (state === "stand") {
+      head(0, -33 + bob);
+      seg(0, -28 + bob, 0, -12);
+      seg(0, -12, -4, 0);
+      seg(0, -12, 5, 0);
+      seg(0, -23 + bob, -6, -13);
+      seg(0, -23 + bob, 6, -13);
+    } else if (state === "run" || state === "back" || state === "walk") {
+      const fast = state !== "walk";
+      const k = Math.sin(time * (fast ? 16 : 9)) * (fast ? 1 : 0.6);
+      const lean = fast ? 4 : 1;
+      head(lean + 1, -33);
+      seg(lean, -28, 0, -12);
+      seg(0, -12, -7 + k * 4, -5, -4 + k * 6, 0);
+      seg(0, -12, 7 - k * 4, -6, 11 - k * 4, -2 * (1 + k) * (fast ? 1 : 0.4));
+      seg(lean - 1, -23, lean + 8 + k * 3, -19);
+      seg(lean - 1, -23, lean - 8 - k * 3, -20);
+    } else if (state === "jump") {
+      head(0, -30);
+      seg(0, -25, 0, -12);
+      seg(0, -12, -5, -6, -2, -2);
+      seg(0, -12, 5, -6, 8, -3);
+      seg(0, -21, -7, -29);
+      seg(0, -21, 7, -29);
+    } else if (state === "sleep") {
+      head(-16, -3);
+      seg(-11, -3, 4, -4, 14, -3, 23, -3);
+      seg(2, -3, 6, -7);
+      const z = (time % 2.4) / 2.4;
+      ctx.globalAlpha = 1 - z;
+      ctx.font = "800 7px Inter, ui-sans-serif, sans-serif";
+      ctx.fillText("z", -14 + z * 4, -12 - z * 10);
+      ctx.font = "800 5px Inter, ui-sans-serif, sans-serif";
+      ctx.fillText("z", -8 + z * 5, -18 - z * 8);
+    }
+    ctx.restore();
+  };
+
   const draw = () => {
     if (!disc) return;
     ctx.clearRect(0, 0, width, height);
     setAngles();
     placeBulb();
     placePlanets();
+    placeReader();
     drawSky();
     drawPool();
     for (const planet of planets) drawOrbit(planet, false);
@@ -678,6 +855,7 @@
     drawBulb();
     for (const planet of planets) drawOrbit(planet, true);
     planets.filter((planet) => planet.sz >= 0).sort((a, b) => a.sz - b.sz).forEach(drawPlanet);
+    drawReader();
   };
 
   // ---- Motion ----
@@ -702,6 +880,7 @@
     view.hoverY += (view.aimY - view.hoverY) * ease(3, dt);
     flare *= Math.exp(-dt * 2.4);
     time += dt * (selected ? 0.4 : 1) * (1 + flare * 3);
+    updateReader(dt);
     draw();
     frameId = requestAnimationFrame(step);
   };
@@ -770,11 +949,13 @@
   const interactive = (target) => target.closest("a, button, input, .cosmos-copy, .cosmos-family");
 
   root.addEventListener("pointerdown", (event) => {
+    reader.idle = 0;
     if (event.button !== 0 || interactive(event.target)) return;
     dragging = { id: event.pointerId, x: event.clientX, y: event.clientY, x0: event.clientX, y0: event.clientY, t0: performance.now(), t: performance.now(), moved: false };
     view.yawVel = 0;
   });
   root.addEventListener("pointermove", (event) => {
+    reader.idle = 0;
     if (event.pointerType === "mouse" && !dragging) {
       const box = root.getBoundingClientRect();
       view.aimX = ((event.clientX - box.left) / box.width - 0.5) * 2;
@@ -817,7 +998,11 @@
     const at = local(event);
     const moon = moonAt(at);
     const planet = planetAt(at);
-    if (moon) window.location.href = moon.url;
+    if (moon) {
+      jumpTo(moon);
+      refresh();
+      setTimeout(() => { window.location.href = moon.url; }, still ? 0 : 260);
+    }
     else if (planet) select(planet.id);
     else if (onBulb(at) && !still) flare = 1;
   };
