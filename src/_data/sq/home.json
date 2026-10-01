@@ -1,6 +1,16 @@
 {
   "highlights": [
-    { "label": "Udhëheqje", "type": "Ese", "title": "Pse menaxherët e mirë kalojnë kohë në terren.", "link": "/sq/insights/good-managers-on-the-floor/" },
-    { "label": "Mikpritje", "type": "Shënim nga terreni", "title": "Turni i natës i nxjerr në pah proceset e dobëta.", "link": "/sq/field-notes.html#note-04-night-shift" }
+    {
+      "label": "Njerëz",
+      "type": "Shënim nga terreni",
+      "title": "Përgjegjësia fillon aty ku mbaron fjalia ‘dikush duhet’.",
+      "link": "/sq/field-notes.html#note-03-ownership"
+    },
+    {
+      "label": "Mikpritje",
+      "type": "Shënim nga terreni",
+      "title": "Turni i natës i nxjerr në pah proceset e dobëta.",
+      "link": "/sq/field-notes.html#note-04-night-shift"
+    }
   ]
 }

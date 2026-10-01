@@ -1,9 +1,9 @@
 ---
 title: Të fillosh nga zero, pasi ke drejtuar njerëz dhe biznes
-date: 2026-10-13
+date: 2026-10-01
 category: Udhëheqje
 status: published
-featured: false
+featured: true
 summary: Titulli mund të humbasë brenda një dite. Ajo që ke mësuar nuk humbet, por në vendin e ri duhet ta provosh përsëri.
 teaser: Në Shqipëri drejtoja njerëz, dyqane dhe procese. Në Gjermani, puna ime e parë ishte të shpërndaja pako.
 deck: 'Eseja e parë e serisë "Dhjetë vite pranë punës": çfarë mbetet nga një menaxher kur titulli nuk e kalon kufirin bashkë me të.'

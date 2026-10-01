@@ -93,7 +93,7 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 | **Homepage highlights (Deutsch / Shqip)** | Dy kartat e vogla në faqen kryesore gjermane / shqip |
 
 - Një artikull i ri në anglisht **nuk** del vetë në gjuhët e tjera: shtoje edhe te **Insights (Deutsch)** dhe **Insights (Shqip)**.
-- Te **English version** shkruaj adresën e artikullit anglisht, p.sh. `kpi-is-not-the-problem`.
+- Te **English version** shkruaj adresën e artikullit anglisht, p.sh. `starting-from-zero`.
   Kështu faqet lidhen me butonat e gjuhës. Nëse e lë bosh, artikulli del vetëm në atë gjuhë.
 - Kategoritë në gjermanisht: Führung, Betrieb, Menschen, Systeme, Hotellerie, Logistik, Service, Wandel.
 - Kategoritë në shqip: Udhëheqje, Operacione, Njerëz, Sisteme, Mikpritje, Logjistikë, Shërbim, Ndryshim.

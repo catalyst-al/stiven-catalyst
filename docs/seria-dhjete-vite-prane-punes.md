@@ -14,9 +14,9 @@ Seria e ndjek rrugën profesionale me radhë. Nis nga menaxhimi dhe sipërmarrja
 
 Emri i serisë merr titullin e seksionit të karrierës te faqja About: "Dhjetë vite pranë punës" (EN *Ten years close to the work*, DE *Zehn Jahre nah an der Arbeit*).
 
-### Si ndryshon nga esetë që janë sot në faqe
+### Vetëm seria
 
-Dhjetë esetë e publikuara deri më 5 tetor janë këshilla të përgjithshme, pa vetën e parë. Seria është në vetën e parë dhe çdo ese nis nga një rast i vërtetë. Ajo tregon se si punoi Stiveni, jo vetëm çfarë duhet bërë. Kur një temë është prekur tashmë, eseja e re lidhet me të vjetrën dhe nuk e përsërit.
+Më 1 tetor 2026 Stiveni vendosi t'i heqë nga faqja dhjetë esetë e mëparshme, që ishin këshilla të përgjithshme pa vetën e parë. Tani faqja ka vetëm esetë e kësaj serie: në vetën e parë, secila nga një rast i vërtetë, duke treguar si punoi Stiveni, jo vetëm çfarë duhet bërë. Esetë e vjetra mbeten në historinë e git-it nëse ndonjë ide prej tyre duhet rimarrë.
 
 ## Rregullat e së vërtetës
 
@@ -52,13 +52,13 @@ Me dëshirë: nga çdo ese del edhe një **Field Note**, një fjali e Stivenit n
 - **Çfarë ndryshoi dhe çfarë jo.**
 - **Çfarë do t'i thoja një menaxheri tjetër:** 3–5 pika praktike dhe lidhja me mjetin përkatës në faqe.
 
-Gjatësia: 900–1 300 fjalë. Esetë e sotme kanë 500–700 fjalë, por këtu historia ka nevojë për më shumë hapësirë.
+Gjatësia: 900–1 300 fjalë. Esetë e mëparshme kishin 500–700 fjalë, por këtu historia ka nevojë për më shumë hapësirë.
 
 ## Harku i serisë
 
 | Java | Data | Pjesa | Eseja |
 |---|---|---|---|
-| 1 | 13.10.2026 | I. Rifillimi | Të fillosh nga zero, pasi ke drejtuar njerëz dhe biznes |
+| 1 | 01.10.2026 (u publikua) | I. Rifillimi | Të fillosh nga zero, pasi ke drejtuar njerëz dhe biznes |
 | 2 | 20.10.2026 | II. Milja e fundit | Çfarë më mësoi last mile-i për menaxhimin real të operacioneve |
 | 3 | 27.10.2026 | II. Milja e fundit | KPI-të nuk përmirësohen nga Excel-i |
 | 4 | 03.11.2026 | II. Milja e fundit | Pareto dhe 5 Why në praktikë, jo në PowerPoint |
@@ -116,15 +116,13 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 
 **Kujdes:** asnjë shifër e klientit përtej atyre që janë te About. Klienti dhe kompania përshkruhen, nuk emërtohen.
 
-**Lidhje:** Damage Control, Incomplete Control, Delay Analyzer; esetë "Kap gabimin aty ku ndodh, jo te klienti" dhe "Planifiko pikun para se të vijë, jo kur je brenda tij".
+**Lidhje:** Damage Control, Incomplete Control, Delay Analyzer.
 
 **Lexuesi merr:** cikli ditor KPI → veprim: çfarë shikon para, gjatë dhe pas turnit.
 
 ## 3. KPI-të nuk përmirësohen nga Excel-i
 
 **Teza.** Numri të thotë ku të shikosh, jo çfarë të bësh. Shkon në gemba, flet me njerëzit dhe e kupton shkakun, para se të kërkosh rezultatin.
-
-**Ndryshe nga esetë ekzistuese.** "Problemi nuk është KPI-ja. Është procesi pas saj." dhe "Pse menaxherët e mirë kalojnë kohë në terren" e thonë parimin. Kjo ese tregon si e zbatoi Stiveni, me një rast të vërtetë. Lidhet me të dyja.
 
 **Pyetjet:**
 1. Një rast kur raporti thoshte një gjë dhe në terren ishte tjetër.
@@ -134,7 +132,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 5. Si i shënoje vëzhgimet: shënime, foto, listë kontrolli?
 6. Çfarë nuk funksionoi herët e para që shkove në terren?
 
-**Lidhje:** KPI Diagnostic; esetë e dy përmendura më lart; Field Note "Një dashboard duhet të të ndihmojë ta shohësh operacionin. Nuk duhet të bëhet kurrë zëvendësues i të parit të operacionit."
+**Lidhje:** KPI Diagnostic; Field Note "Një dashboard duhet të të ndihmojë ta shohësh operacionin. Nuk duhet të bëhet kurrë zëvendësues i të parit të operacionit."
 
 **Lexuesi merr:** një gemba walk prej 20 minutash me 5 pyetje.
 
@@ -170,7 +168,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 
 **Kujdes:** asnjë person i identifikueshëm; detajet ndryshohen aq sa të mos njihet kush ishte.
 
-**Lidhje:** esetë "Standardet dështojnë kur askush nuk mban përgjegjësi për zbatimin" dhe "Thuaji njeriut si po shkon puna ndërsa puna është ende e freskët"; Field Note "Përgjegjësia fillon aty ku mbaron fjalia ‘dikush duhet’."
+**Lidhje:** Field Note "Përgjegjësia fillon aty ku mbaron fjalia ‘dikush duhet’."
 
 **Lexuesi merr:** një strukturë bisede në katër hapa: fakti, standardi, shkaku, hapi i radhës.
 
@@ -187,7 +185,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 
 **Tashmë publike:** menaxher dyqani, shef departamenti, menaxher shitjesh, cluster manager; ekipe deri në 16 veta; 61 rishitës dhe +30–40% xhiro.
 
-**Lidhje:** eseja "Menaxhimi është i brishtë kur çdo vendim pret shefin"; faqja Mjete me katër rolet.
+**Lidhje:** eseja 1 e serisë; faqja Mjete me katër rolet.
 
 **Lexuesi merr:** një tabelë me 5 konstante × 3 industri.
 
@@ -205,7 +203,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 
 **Kujdes:** rregulli 6, siguria. Pagesat dhe kontrollet përshkruhen në parim, jo hap pas hapi. Asnjë e dhënë mysafiri.
 
-**Lidhje:** Field Note "Turni i natës i nxjerr në pah proceset e dobëta, sepse ka më pak njerëz që t’i fshehin."; projekti Front Desk Control; eseja "Rregullo dorëzimin para se të fajësosh personin".
+**Lidhje:** Field Note "Turni i natës i nxjerr në pah proceset e dobëta, sepse ka më pak njerëz që t’i fshehin."; projekti Front Desk Control.
 
 **Lexuesi merr:** pesë gjëra që menaxheri i ditës duhet t'i shohë në raportin e natës.
 
@@ -220,15 +218,13 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 4. Si e mban të gjallë: kush e përditëson dhe kur?
 5. Cili është dallimi mes SOP-së që lexohet dhe asaj që përdoret?
 
-**Lidhje:** projektet Manuale operative dhe Front Desk Control; esetë "Standardet dështojnë kur askush nuk mban përgjegjësi për zbatimin" dhe "Punonjësi i ri mëson procesin që ke, jo atë që e ke shkruar"; Field Note "Nëse një problem ka nevojë për të njëjtën kujtesë çdo ditë, kujtesa nuk është sistemi."
+**Lidhje:** projektet Manuale operative dhe Front Desk Control; Field Note "Nëse një problem ka nevojë për të njëjtën kujtesë çdo ditë, kujtesa nuk është sistemi."
 
 **Lexuesi merr:** testi i një SOP-je: a mund ta zbatojë saktë një person i ri, natën e parë, vetëm?
 
 ## 9. Pse handover-i është një nga proceset më të nënvlerësuara
 
 **Teza.** Një turn mund të bëjë punë perfekte, dhe organizata prapë dështon nëse informacioni nuk kalon te tjetri.
-
-**Ndryshe nga eseja ekzistuese.** "Rregullo dorëzimin para se të fajësosh personin" jep kornizën: pesë pyetjet e një dorëzimi të plotë. Kjo ese tregon raste të vërteta nga dispatch-i dhe nata në hotel, dhe pse Stiveni ndërtoi mjetin Shift Handover. Kornizën e lidh, nuk e përsërit.
 
 **Pyetjet:**
 1. Një rast kur një handover i dobët shkaktoi problem, në last mile ose në hotel.
@@ -237,7 +233,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 4. Pse e ndërtove mjetin Shift Handover, dhe çfarë problemi zgjidh?
 5. Si bën që personi tjetër ta lexojë realisht, jo vetëm ta marrë?
 
-**Lidhje:** Shift Handover; eseja "Rregullo dorëzimin para se të fajësosh personin".
+**Lidhje:** Shift Handover; eseja 7 e serisë.
 
 **Lexuesi merr:** rutina e Stivenit për handover-in, 10 minuta para dhe pas turnit.
 
@@ -254,7 +250,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 
 **Kujdes:** pa hidhërim ndaj punëdhënësve dhe pa nënkuptuar vendime pa autorizim.
 
-**Lidhje:** Field Note "Përgjegjësia fillon aty ku mbaron fjalia ‘dikush duhet’."; eseja "Menaxhimi është i brishtë kur çdo vendim pret shefin".
+**Lidhje:** Field Note "Përgjegjësia fillon aty ku mbaron fjalia ‘dikush duhet’."; eseja 1 e serisë.
 
 **Lexuesi merr:** tri pyetje para se të marrësh një përgjegjësi që nuk është e jotja.
 
@@ -269,7 +265,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 4. Çfarë ruajte nga Shqipëria që në Gjermani e gjen më rrallë?
 5. Një vendim që sot do ta merrje ndryshe nga ç'e more në 2019.
 
-**Lidhje:** reflektimi "Paradoksi i madh shqiptar"; esetë "Menaxhimi është i brishtë kur çdo vendim pret shefin" dhe "Burimet njerëzore nuk janë një zyrë me dosje".
+**Lidhje:** reflektimi "Paradoksi i madh shqiptar"; eseja 1 e serisë.
 
 **Lexuesi merr:** çfarë mund të mësojë secila kulturë pune nga tjetra, dhe sinteza e Stivenit.
 

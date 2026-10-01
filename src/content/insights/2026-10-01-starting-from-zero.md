@@ -1,9 +1,9 @@
 ---
 title: Starting from zero after you have led people and a business
-date: 2026-10-13
+date: 2026-10-01
 category: Leadership
 status: published
-featured: false
+featured: true
 summary: A title can disappear in a day. What you have learned does not, but in a new place you have to prove it again.
 teaser: In Albania I led people, stores and processes. In Germany, my first job was delivering parcels.
 deck: 'The first essay in the series "Ten years close to the work": what is left of a manager when the title does not cross the border with him.'

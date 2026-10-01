@@ -1,9 +1,9 @@
 ---
 title: Bei null anfangen, nachdem man Menschen und ein Geschäft geführt hat
-date: 2026-10-13
+date: 2026-10-01
 category: Führung
 status: published
-featured: false
+featured: true
 summary: Ein Titel kann an einem einzigen Tag verschwinden. Was man gelernt hat, nicht. Aber am neuen Ort muss man es noch einmal beweisen.
 teaser: In Albanien habe ich Menschen, Filialen und Prozesse geführt. In Deutschland war mein erster Job, Pakete auszuliefern.
 deck: 'Der erste Essay der Reihe „Zehn Jahre nah an der Arbeit“: was von einer Führungskraft bleibt, wenn der Titel nicht mit über die Grenze kommt.'
