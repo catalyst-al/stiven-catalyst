@@ -139,6 +139,8 @@ export default function (eleventyConfig) {
   );
   eleventyConfig.addFilter("pad", (value) => String(value).padStart(2, "0"));
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
+  // One object over another, for the structured data (partials/structured-data.njk).
+  eleventyConfig.addFilter("merge", (base, extra) => ({ ...base, ...extra }));
   eleventyConfig.addFilter("absoluteUrl", (path) => new URL(String(path).replace(/^\//, ""), site.url).href);
   // The newest published essay marked "featured", for the homepage.
   eleventyConfig.addFilter("featured", (items) =>
