@@ -5,6 +5,28 @@
   <p class="lede">{{ "Stiven Catalyst is built around one idea: better results begin with clearer thinking, and clearer thinking matters only when it changes what happens next." | t(lang) }}</p>
 </section>
 
+<section class="shell about-intro" aria-labelledby="about-author-heading">
+  <figure class="about-portrait"><img src="/media/stiven-portrait.jpg" alt="{{ 'Stiven Janaqi, listening at a microphone' | t(lang) }}" width="480" height="592"></figure>
+  <div class="about-intro-copy">
+    <p class="kicker">{{ "Behind the work" | t(lang) }}</p>
+    <h2 id="about-author-heading">Stiven Janaqi</h2>
+    <p class="about-role">{{ "Operations · Last-mile logistics · Hotel front office" | t(lang) }}</p>
+    <p>{{ "Stiven works in operations in Germany, with hands-on experience in last-mile coordination and hotel front-office and night-audit work. He has seen how a missed handoff, an unclear standard or a rushed shift can change the result that appears on a dashboard." | t(lang) }}</p>
+    <p>{{ "He writes from that practical perspective and builds small tools that help people see the work, ask better questions and make the next shift easier to run." | t(lang) }}</p>
+    <dl class="about-facts">
+      <div><dt>{{ "Based in" | t(lang) }}</dt><dd>{{ "Germany" | t(lang) }}</dd></div>
+      <div><dt>{{ "Logistics" | t(lang) }}</dt><dd>{{ "Last-mile coordination" | t(lang) }}</dd></div>
+      <div><dt>{{ "Hospitality" | t(lang) }}</dt><dd>{{ "Front office and night audit" | t(lang) }}</dd></div>
+    </dl>
+    <p class="about-links">
+      {%- for profile in site.profiles %}
+      <a class="text-link" href="{{ profile }}" rel="me noopener" target="_blank">{{ "LinkedIn" if "linkedin.com" in profile else profile }} <span aria-hidden="true">→</span></a>
+      {%- endfor %}
+      <a class="text-link" href="mailto:{{ site.email }}">{{ site.email }} <span aria-hidden="true">→</span></a>
+    </p>
+  </div>
+</section>
+
 <section class="shell about-grid">
   <aside class="about-aside">
     <div class="brand-poster about-brand-poster" role="img" aria-label="{{ 'Stiven Catalyst visual identity' | t(lang) }}">
@@ -33,14 +55,6 @@
 
     <p class="large-copy">{{ "See clearly. Think differently. Act deliberately." | t(lang) }}</p>
     <p>{{ "The publication explores leadership, operations, hospitality, logistics, service, accountability, process design and the everyday realities of managing people. It is also an archive of tools and systems built to make work clearer and more reliable." | t(lang) }}</p>
-    <section class="about-author" aria-labelledby="about-author-heading">
-      <figure class="about-portrait"><img src="/media/stiven-portrait.jpg" alt="{{ 'Stiven Janaqi, listening at a microphone' | t(lang) }}" width="480" height="592" loading="lazy"></figure>
-      <p class="kicker">{{ "Behind the work" | t(lang) }}</p>
-      <h3 id="about-author-heading">Stiven Janaqi</h3>
-      <p>{{ "Stiven works in operations in Germany, with hands-on experience in last-mile coordination and hotel front-office and night-audit work. He has seen how a missed handoff, an unclear standard or a rushed shift can change the result that appears on a dashboard." | t(lang) }}</p>
-      <p>{{ "He writes from that practical perspective and builds small tools that help people see the work, ask better questions and make the next shift easier to run." | t(lang) }}</p>
-    </section>
-    <p><a class="text-link" href="mailto:{{ site.email }}">{{ site.email }} <span>→</span></a></p>
   </div>
 </section>
 
