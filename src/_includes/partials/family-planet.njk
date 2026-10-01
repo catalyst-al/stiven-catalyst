@@ -1,0 +1,115 @@
+{#- The planet of a role on its piece of night sky (familySky.js, planets): on the role cards, the Tools page
+    and the role pages. Each planet has its own physics and its moons are its tools: Pulse cracks and beats
+    inside a heartbeat ring, Zenith is a contour map under a radar, Lumen shines inside a ring of dust in
+    five parts, Atlas is a globe with a constellation on its lit side. The light comes from the top left,
+    where the Catalyst bulb is on the homepage. Needs planet (the family) and planetKey (unique on the page). -#}
+{%- set shapes = familySky.planets %}
+{%- set k = planetKey %}
+<span class="family-visual" aria-hidden="true">
+  <svg class="family-planet planet-{{ planet.id }}" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" focusable="false">
+    <defs>
+      <radialGradient id="halo-{{ k }}" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="var(--family)" stop-opacity="{{ '.5' if planet.id == 'lumen' else '.32' }}"/>
+        <stop offset="1" stop-color="var(--family)" stop-opacity="0"/>
+      </radialGradient>
+      {%- if planet.id == "lumen" %}
+      <radialGradient id="body-{{ k }}" cx="40%" cy="36%" r="68%">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset=".35" stop-color="#fff4d6"/>
+        <stop offset=".8" stop-color="var(--family)"/>
+        <stop offset="1" stop-color="color-mix(in srgb, var(--family) 70%, #000)"/>
+      </radialGradient>
+      {%- elif planet.id == "atlas" %}
+      <radialGradient id="body-{{ k }}" cx="34%" cy="30%" r="70%">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset=".45" stop-color="#c8d0d8"/>
+        <stop offset="1" stop-color="#3a434c"/>
+      </radialGradient>
+      <linearGradient id="night-{{ k }}" x1="20%" y1="15%" x2="85%" y2="90%">
+        <stop offset=".45" stop-color="#05080b" stop-opacity="0"/>
+        <stop offset=".68" stop-color="#05080b" stop-opacity=".82"/>
+        <stop offset="1" stop-color="#05080b" stop-opacity=".95"/>
+      </linearGradient>
+      {%- else %}
+      <radialGradient id="body-{{ k }}" cx="34%" cy="30%" r="70%">
+        <stop offset="0" stop-color="color-mix(in srgb, var(--family) {{ '25%' if planet.id == 'zenith' else '32%' }}, #fff)"/>
+        <stop offset=".42" stop-color="var(--family)"/>
+        <stop offset="1" stop-color="color-mix(in srgb, var(--family) 32%, #000)"/>
+      </radialGradient>
+      {%- endif %}
+      <radialGradient id="shade-{{ k }}" cx="36%" cy="32%" r="78%">
+        <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+        <stop offset=".8" stop-color="#000" stop-opacity=".4"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".7"/>
+      </radialGradient>
+      {%- if planet.id == "zenith" %}
+      <radialGradient id="cap-{{ k }}" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#fff" stop-opacity=".75"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      {%- endif %}
+      <clipPath id="clip-{{ k }}"><circle cx="200" cy="150" r="50"/></clipPath>
+      {%- if planet.id == "lumen" %}
+      <clipPath id="front-{{ k }}"><rect x="0" y="150" width="400" height="150"/></clipPath>
+      {%- endif %}
+    </defs>
+    <circle class="planet-halo" cx="200" cy="150" r="{{ 170 if planet.id == 'lumen' else 130 }}" fill="url(#halo-{{ k }})"/>
+
+    {%- if planet.id == "pulse" %}
+    <path class="pulse-ring" d="{{ shapes.pulseRing.back }}" fill="none" stroke="var(--family)" stroke-width="1.5" opacity=".45"/>
+    {%- for m in shapes.moons.pulse %}{% if not m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+    <circle cx="200" cy="150" r="50" fill="url(#body-{{ k }})"/>
+    <g class="pulse-cracks" clip-path="url(#clip-{{ k }})" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      {%- for d in shapes.cracks %}<polyline points="{{ d }}"/>{% endfor %}
+    </g>
+    <circle cx="200" cy="150" r="50" fill="url(#shade-{{ k }})"/>
+    <path class="pulse-ring" d="{{ shapes.pulseRing.front }}" fill="none" stroke="color-mix(in srgb, var(--family) 70%, #fff)" stroke-width="2.2" stroke-linejoin="round"/>
+    {%- for m in shapes.moons.pulse %}{% if m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+
+    {%- elif planet.id == "zenith" %}
+    {%- for m in shapes.moons.zenith %}{% if not m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+    <circle cx="200" cy="150" r="50" fill="url(#body-{{ k }})"/>
+    <g clip-path="url(#clip-{{ k }})">
+      <g fill="none" stroke="#fff">
+        {%- for c in shapes.contourLines %}<path d="M{{ 200 - c.rx }} {{ c.cy }} A{{ c.rx }} {{ c.ry }} 0 0 0 {{ 200 + c.rx }} {{ c.cy }}" stroke-width="{{ '1.2' if c.major else '.7' }}" opacity="{{ '.8' if c.major else '.42' }}"/>{% endfor %}
+      </g>
+      <circle cx="200" cy="104" r="26" fill="url(#cap-{{ k }})"/>
+      <g class="zenith-radar">
+        <path d="M200 150 L250 150 A50 50 0 0 0 238.3 117.9 Z" fill="#fff" opacity=".22"/>
+        <path d="M200 150 L250 150" stroke="#fff" stroke-width="1.2" opacity=".9"/>
+      </g>
+    </g>
+    <circle cx="200" cy="150" r="50" fill="url(#shade-{{ k }})" opacity=".8"/>
+    {%- for m in shapes.moons.zenith %}{% if m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+
+    {%- elif planet.id == "lumen" %}
+    <g class="lumen-ring" fill="none" stroke="var(--family)">
+      <ellipse cx="200" cy="150" rx="118" ry="34" pathLength="100" stroke-width="7" stroke-dasharray="18.6 1.4" opacity=".42"/>
+      <ellipse cx="200" cy="150" rx="128" ry="39" pathLength="100" stroke-width="3" stroke-dasharray=".3 1.4" stroke-linecap="round" opacity=".7"/>
+      <ellipse cx="200" cy="150" rx="108" ry="30" pathLength="100" stroke-width="2" stroke-dasharray=".2 .9" stroke-linecap="round" stroke="#fff" opacity=".5"/>
+    </g>
+    {%- for m in shapes.moons.lumen %}{% if not m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+    <circle cx="200" cy="150" r="50" fill="url(#body-{{ k }})"/>
+    <g class="lumen-ring" clip-path="url(#front-{{ k }})" fill="none" stroke="var(--family)">
+      <ellipse cx="200" cy="150" rx="118" ry="34" pathLength="100" stroke-width="7" stroke-dasharray="18.6 1.4" opacity=".55"/>
+      <ellipse cx="200" cy="150" rx="128" ry="39" pathLength="100" stroke-width="3" stroke-dasharray=".3 1.4" stroke-linecap="round" opacity=".85"/>
+      <ellipse cx="200" cy="150" rx="108" ry="30" pathLength="100" stroke-width="2" stroke-dasharray=".2 .9" stroke-linecap="round" stroke="#fff" opacity=".6"/>
+    </g>
+    {%- for m in shapes.moons.lumen %}{% if m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+
+    {%- else %}
+    {%- for m in shapes.moons.atlas %}{% if not m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+    <circle cx="200" cy="150" r="50" fill="url(#body-{{ k }})"/>
+    <g clip-path="url(#clip-{{ k }})">
+      <g fill="none" stroke="#fff" stroke-width=".7" opacity=".4">
+        {%- for rx in shapes.meridians %}<ellipse cx="200" cy="150" rx="{{ rx }}" ry="50"/>{% endfor %}
+        {%- for p in shapes.parallels %}<ellipse cx="200" cy="{{ p.cy }}" rx="{{ p.rx }}" ry="{{ p.ry }}"/>{% endfor %}
+      </g>
+      <polyline class="atlas-path" points="{% for p in shapes.constellation %}{{ p.x }},{{ p.y }} {% endfor %}" fill="none" stroke="#fff" stroke-width="1.3" opacity=".8"/>
+      {%- for p in shapes.constellation %}<circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ 3.2 if loop.last else 1.6 }}" fill="#fff"/>{% endfor %}
+    </g>
+    <circle cx="200" cy="150" r="50" fill="url(#night-{{ k }})"/>
+    {%- for m in shapes.moons.atlas %}{% if m.front %}<circle class="planet-moon" cx="{{ m.x }}" cy="{{ m.y }}" r="4"/>{% endif %}{% endfor %}
+    {%- endif %}
+  </svg>
+</span>

@@ -7,7 +7,7 @@
 {%- for family in families %}
 <section class="shell family-section family-{{ family.id }}" id="{{ family.id }}" style="--family: {{ family.color }}" aria-labelledby="{{ family.id }}-title">
   <header class="family-head">
-    <span class="family-visual" aria-hidden="true"><span class="family-orbit"><i></i></span><span class="family-planet"></span></span>
+    {% set planet = family %}{% set planetKey = "head-" + family.id %}{% include "partials/family-planet.njk" %}
     <div>
       <p class="kicker">{{ family.name }} · {{ family.scope | t(lang) }}</p>
       <h2 id="{{ family.id }}-title">{{ family.role | t(lang) }}</h2>
