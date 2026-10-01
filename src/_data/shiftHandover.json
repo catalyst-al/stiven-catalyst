@@ -13,6 +13,7 @@
   "templates": {
     "warehouse": {
       "name": "Warehouse",
+      "sources": [null, null, "damage", "incomplete", "departures", null],
       "metrics": [
         "Units handled",
         "Backlog at handover",
@@ -53,6 +54,7 @@
     },
     "delivery": {
       "name": "Delivery station",
+      "sources": [null, null, null, "arrivals", null, null],
       "metrics": [
         "Routes out",
         "Routes back",

@@ -606,7 +606,7 @@
       d: state.deliveries.filter(keep), r: state.routes.filter(keep), i: state.incidents.filter(keep),
       first: dates[0] || "", last: dates[dates.length - 1] || "",
     };
-    cache.asOf = cache.last || new Date().toISOString().slice(0, 10);
+    cache.asOf = cache.last || window.ToolKit.today();
     return cache;
   };
   const settingsFor = () => ({ ...state.settings, loadingTarget: state.targets.loading });

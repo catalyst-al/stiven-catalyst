@@ -33,8 +33,8 @@
     tx, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
-    inRange, dateSpan, spanText, rangeControl,
-    panel, stat, barList, focusCard, resultActions, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    inRange, dateSpan, spanText, logBook, resultLayout,
+    panel, stat, barList, focusCard, resultActions, flash, floorCheck,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -47,14 +47,8 @@
   const reasonInfo = Object.fromEntries(data.reasons.map((reason) => [reason.name, reason]));
 
   const entry = root.querySelector("[data-entry]");
-  const logBody = root.querySelector("[data-log]");
-  const logWrap = root.querySelector("[data-log-wrap]");
-  const logEmpty = root.querySelector("[data-log-empty]");
-  const logCount = root.querySelector("[data-log-count]");
   const entryStatus = root.querySelector("[data-entry-status]");
-  const logStatus = root.querySelector("[data-log-status]");
   const preview = root.querySelector("[data-preview]");
-  const importStatus = root.querySelector("[data-import-status]");
   const pasteArea = root.querySelector("#da-paste");
   const results = document.querySelector("[data-results]");
 
@@ -246,39 +240,6 @@
     };
   };
 
-  // The log table.
-  const renderLog = () => {
-    const [depGrace, arrGrace] = graces();
-    const rows = state.rows;
-    logBody.replaceChildren();
-    rows.map((row, index) => [row, index]).reverse().slice(0, LOG_LIMIT).forEach(([row, index]) => {
-      const dep = diff(row.planDep, row.actDep);
-      const arr = diff(row.planArr, row.actArr);
-      const tr = el("tr");
-      tr.append(el("td", "nowrap", showDate(row.date) || "-"));
-      [row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr].forEach((value) => tr.append(el("td", null, value || "")));
-      const depCell = el("td", "num", signed(dep));
-      if (dep > depGrace) depCell.classList.add("is-late");
-      const arrCell = el("td", "num", signed(arr));
-      if (arr > arrGrace) arrCell.classList.add("is-late");
-      tr.append(depCell, arrCell);
-      tr.append(el("td", null, row.reason || ""));
-      tr.append(el("td", "dl-note", row.note || ""));
-      const cell = el("td");
-      const remove = el("button", "dl-remove", "×");
-      remove.type = "button";
-      remove.dataset.remove = index;
-      remove.setAttribute("aria-label", tx(row.date ? "Remove route {route} planned {time} on {date}" : "Remove route {route} planned {time}", { route: row.route || "", time: row.planDep || row.planArr, date: showDate(row.date) }));
-      cell.append(remove);
-      tr.append(cell);
-      logBody.append(tr);
-    });
-    logWrap.hidden = !rows.length;
-    logEmpty.hidden = rows.length > 0;
-    const late = rows.filter((row) => diff(row.planArr, row.actArr) > arrGrace).length;
-    logCount.textContent = rows.length ? `${routes(rows.length)} · ${tx("{n} late", { n: int.format(late) })}${shownNote(rows.length)}` : "";
-  };
-
   // Results.
   const sideText = (result) => {
     const share = result.side === "dock" ? result.dockShare : result.dockShare === null ? null : 1 - result.dockShare;
@@ -377,7 +338,6 @@
     const title = el("h2");
     title.append(`${tx("On time")} `, el("span", null, pct(result.onTime, 1)));
     head.append(title);
-    results.append(head);
 
     const stats = el("div", "dl-stats");
     stats.append(stat(tx("Late routes"), tx("{a} of {b}", { a: int.format(result.late.length), b: int.format(result.total) }), `${tx("{routes} logged", { routes: routes(result.logged) })}${result.days ? ` ${tx("over {days}", { days: plural(result.days, tx("day"), tx("days")) })}` : ""}`));
@@ -389,13 +349,9 @@
     stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
     const target = targetText(result);
     if (target) stats.append(stat(tx("Target"), target.value, target.note));
-    results.append(stats);
 
-    if (result.setRoutesIgnored) {
-      results.append(el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used.")));
-    }
-
-    const grid = el("div", "dl-result-grid");
+    const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used."))] : [];
+    const grid = [];
     if (result.late.length) {
       const sides = panel(tx("Dock or road"), result.dockShare === null
         ? tx("Add departure times to split late minutes between the dock and the road.")
@@ -407,7 +363,7 @@
         label: (item) => [int.format(item.value), ` ${item.value === 1 ? tx("route") : tx("routes")} · ${tx("{min} late in total", { min: minutes(item.minutes) })}`],
         title: (item) => tx(SIDE_TITLES[item.id]),
       }));
-      grid.append(sides);
+      grid.push(sides);
 
       const vital = result.reasons.filter((item) => item.vital);
       const pareto = panel(tx("Pareto of reasons"), tx("{a} of {b} reasons carry {pct} of late routes. Fix these first.", { a: vital.length, b: result.reasons.length, pct: pct(vital.at(-1).cumulative, 0) }));
@@ -418,24 +374,24 @@
         label: (item) => [int.format(item.value), ` · ${pct(item.share, 0)} · ${pct(item.cumulative, 0)} ${tx("cum.")}`],
         title: (item) => `${item.key}${reasonInfo[item.key] ? ` (${lower(sideName(reasonInfo[item.key].side))})` : ""}: ${lateRoutes(item.value)}${tx(", {min} late in total", { min: minutes(item.minutes) })}`,
       }));
-      grid.append(pareto);
+      grid.push(pareto);
     }
 
     if (result.partial) {
       const onlySome = tx("Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.");
       const hours = panel(tx("By planned departure hour"), onlySome);
       hours.append(countBars(result.hours));
-      grid.append(hours);
+      grid.push(hours);
       const shifts = panel(tx("By shift"), onlySome);
       shifts.append(countBars(result.shifts));
-      grid.append(shifts);
+      grid.push(shifts);
     } else {
       const hours = panel(tx("By planned departure hour"), tx("Share of routes that arrived late, by the hour they were planned to leave."));
       hours.append(rateBars(result.hours, { highlight: (item) => item === result.worstHour, tag: tx("Worst") }));
-      grid.append(hours);
+      grid.push(hours);
       const shifts = panel(tx("By shift"), tx("Share of each shift's routes that arrived late."));
       shifts.append(rateBars(result.shifts));
-      grid.append(shifts);
+      grid.push(shifts);
     }
 
     if (result.late.length) {
@@ -444,16 +400,15 @@
         label: (item) => [int.format(item.value), ` ${item.value === 1 ? tx("route") : tx("routes")}`],
         title: (item) => `${item.key}: ${routes(item.value)}`,
       }));
-      grid.append(spread);
+      grid.push(spread);
     }
-    results.append(grid);
 
     if (result.late.length) {
       const warnings = [];
       if (result.noReason / result.late.length > 0.15) warnings.push(tx("{pct} of late routes have no reason. Record it the same day, while people still remember.", { pct: pct(result.noReason / result.late.length, 0) }));
       if (result.noDeparture) warnings.push(tx(result.noDeparture === 1 ? "{routes} has no departure time, so its delay cannot be split between dock and road." : "{routes} have no departure time, so their delay cannot be split between dock and road.", { routes: lateRoutes(result.noDeparture) }));
       const reason = result.topReason;
-      results.append(focusCard({
+      const focus = focusCard({
         title: sideName(result.side),
         detail: reason?.key,
         lede: problemText(result),
@@ -461,8 +416,8 @@
         extraLabel: tx("Why the {side} first", { side: lower(sideName(result.side)) }),
         extra: data.sides[result.side].advice,
         warning: warnings.join(" "),
-      }));
-      results.append(resultActions(() => summaryText(result), problemText(result), () => ({
+      });
+      const actions = resultActions(() => summaryText(result), problemText(result), () => ({
         source: document.title.split("|")[0].trim(),
         template: "route-delays",
         headers: [tx("Date"), tx("Shift"), tx("Route"), tx("Reason"), tx("Delay minutes")],
@@ -470,21 +425,73 @@
         map: { category: 3, count: -1, value: 4, date: 0, filter: 1 },
         measure: "value",
         valueLabel: tx("minutes"),
-      })));
+      }));
+      resultLayout(results, { head, stats, notes, focus, actions, panels: grid });
     } else {
       const card = el("article", "result-card dl-focus");
       card.append(el("p", "result-label", tx("No late routes")));
       card.append(el("p", "dl-focus-lede", tx("Every logged route arrived within {n} minutes of plan.", { n: state.arrivalGrace || 0 })));
-      results.append(card);
+      resultLayout(results, { head, stats, notes, focus: card, panels: grid });
     }
   };
 
-  let syncRange = () => {};
-  const render = () => {
-    renderLog();
-    syncRange();
-    renderResults();
-  };
+  const book = logBook({
+    root,
+    key: KEY,
+    state,
+    save,
+    results,
+    paste: pasteArea,
+    cells: (row) => {
+      const [depGrace, arrGrace] = graces();
+      const dep = diff(row.planDep, row.actDep);
+      const arr = diff(row.planArr, row.actArr);
+      const depCell = el("td", "num", signed(dep));
+      if (dep > depGrace) depCell.classList.add("is-late");
+      const arrCell = el("td", "num", signed(arr));
+      if (arr > arrGrace) arrCell.classList.add("is-late");
+      return [
+        el("td", "nowrap", showDate(row.date) || "-"),
+        ...[row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr].map((value) => el("td", null, value || "")),
+        depCell,
+        arrCell,
+        el("td", null, row.reason || ""),
+        el("td", "dl-note", row.note || ""),
+      ];
+    },
+    removeLabel: (row) => tx(row.date ? "Remove route {route} planned {time} on {date}" : "Remove route {route} planned {time}", { route: row.route || "", time: row.planDep || row.planArr, date: showDate(row.date) }),
+    removedText: (row) => tx("Removed route {route}.", { route: row.route || row.planDep || row.planArr }),
+    countText: (rows) => {
+      const arrGrace = graces()[1];
+      return `${routes(rows.length)} · ${tx("{n} late", { n: int.format(rows.filter((row) => diff(row.planArr, row.actArr) > arrGrace).length) })}`;
+    },
+    importRows,
+    importText: {
+      none: tx("No rows found. Check that the arrival times are in columns six and seven."),
+      done: (added, skipped) => `${tx("Imported {rows}", { rows: routes(added) })}${skipped ? tx(", skipped {n} without arrival times", { n: skipped }) : ""}.`,
+    },
+    loadExample: () => {
+      const { rows, ...settings } = data.example;
+      Object.assign(state, settings);
+      state.rows = importRows(rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+    },
+    clearText: tx("Clear the whole route log?"),
+    csv: () => {
+      const [depGrace, arrGrace] = graces();
+      return {
+        name: data.csv,
+        rows: [
+          ["Date", "Shift", "Route", "Planned departure", "Actual departure", "Planned arrival", "Actual arrival", "Departure delay (min)", "Arrival delay (min)", "Late", "Reason", "Note"].map((name) => tx(name)),
+          ...state.rows.map((row) => {
+            const dep = diff(row.planDep, row.actDep);
+            const arr = diff(row.planArr, row.actArr);
+            return [row.date, row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr, dep ?? "", arr ?? "", classify(dep, arr, depGrace, arrGrace).late ? tx("yes") : tx("no"), row.reason, row.note];
+          }),
+        ],
+      };
+    },
+    renderResults,
+  });
 
   // While a route is typed in: its delay and whether it counts as late, before it is added.
   const showPreview = () => {
@@ -502,19 +509,6 @@
       : tx("Arrival {n} min: on time.", { n: signed(arr) });
   };
   ["planDep", "actDep", "planArr", "actArr"].forEach((name) => entry.elements[name].addEventListener("input", showPreview));
-
-  // Period settings.
-  const renderSetting = renderOnPause(() => {
-    save();
-    render();
-  }, () => state.rows.length);
-  root.querySelectorAll("[data-setting]").forEach((input) => {
-    input.value = state[input.name] ?? "";
-    input.addEventListener("input", () => {
-      state[input.name] = input.value;
-      renderSetting();
-    });
-  });
 
   // Log a route.
   entry.elements.date.value = today();
@@ -536,9 +530,7 @@
       flash(entryStatus, tx("Enter the planned and actual arrival."));
       return;
     }
-    state.rows.push(row);
-    save();
-    render();
+    book.add(row);
     // Keep date and shift: the next route is usually from the same wave.
     ["route", "planDep", "actDep", "planArr", "actArr", "note"].forEach((name) => { form[name].value = ""; });
     form.reason.value = "";
@@ -548,65 +540,6 @@
     form.route.focus();
   });
 
-  root.querySelector("[data-import]").addEventListener("click", () => {
-    const { added, skipped } = importRows(pasteArea.value);
-    if (!added.length) {
-      flash(importStatus, tx("No rows found. Check that the arrival times are in columns six and seven."));
-      return;
-    }
-    state.rows.push(...added);
-    save();
-    render();
-    pasteArea.value = "";
-    flash(importStatus, `${tx("Imported {rows}", { rows: routes(added.length) })}${skipped ? tx(", skipped {n} without arrival times", { n: skipped }) : ""}.`);
-  });
-
-  logBody.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-remove]");
-    if (!button) return;
-    const index = Number(button.dataset.remove);
-    const [removed] = state.rows.splice(index, 1);
-    save();
-    render();
-    (logBody.querySelector("[data-remove]") || entry.elements.date).focus();
-    undoNote(logStatus, tx("Removed route {route}.", { route: removed.route || removed.planDep || removed.planArr }), () => {
-      state.rows.splice(Math.min(index, state.rows.length), 0, removed);
-      save();
-      render();
-    });
-  });
-
-  root.querySelector("[data-example]").addEventListener("click", () => {
-    const { rows, ...settings } = data.example;
-    Object.assign(state, settings, { from: "", to: "" });
-    state.rows = importRows(rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
-    root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
-    save();
-    render();
-    results.scrollIntoView({ behavior: "smooth", block: "start" });
-    results.focus({ preventScroll: true });
-  });
-
-  root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!state.rows.length || !window.confirm(tx("Clear the whole route log?"))) return;
-    state.rows = [];
-    save();
-    render();
-  });
-
-  root.querySelector("[data-csv]").addEventListener("click", () => {
-    if (!state.rows.length) return;
-    const { rows } = analyse();
-    downloadCsv(data.csv, [
-      ["Date", "Shift", "Route", "Planned departure", "Actual departure", "Planned arrival", "Actual arrival", "Departure delay (min)", "Arrival delay (min)", "Late", "Reason", "Note"].map((name) => tx(name)),
-      ...rows.map((row) => [row.date, row.shift, row.route, row.planDep, row.actDep, row.planArr, row.actArr, row.dep ?? "", row.arr ?? "", row.late ? tx("yes") : tx("no"), row.reason, row.note]),
-    ]);
-  });
-
-  syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, () => {
-    save();
-    render();
-  });
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
-  render();
+  book.render();
 })();

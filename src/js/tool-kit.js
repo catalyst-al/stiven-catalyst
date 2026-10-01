@@ -416,6 +416,163 @@ window.ToolKit = (() => {
     node.timer = setTimeout(() => { node.textContent = ""; }, 8000);
   };
 
+  // Results in the order a phone needs them: the answer first (headline, key numbers, where to
+  // start, the actions), then the evidence behind it, which starts closed on a narrow screen.
+  // A reader who opens or closes the evidence keeps that choice while the results update.
+  let detailsOpen = null;
+  const resultLayout = (results, { head, stats, notes = [], focus, actions, panels = [] }) => {
+    results.append(...[head, stats, ...notes, focus, actions].filter(Boolean));
+    if (!panels.length) return;
+    if (detailsOpen === null) {
+      detailsOpen = window.matchMedia ? window.matchMedia("(min-width: 761px)").matches : true;
+      // Printed results show the evidence too.
+      window.addEventListener("beforeprint", () => document.querySelectorAll(".dl-details").forEach((details) => { details.open = true; }));
+    }
+    const details = el("details", "dl-details");
+    details.open = detailsOpen;
+    details.addEventListener("toggle", () => { detailsOpen = details.open; });
+    const titles = panels.map((box) => box.querySelector(".result-label")?.textContent).filter(Boolean);
+    const summary = el("summary", "dl-details-summary");
+    summary.append(el("strong", null, tx("All details")), el("span", null, titles.join(" · ")));
+    const grid = el("div", "dl-result-grid");
+    grid.append(...panels);
+    details.append(summary, grid);
+    results.append(details);
+  };
+  // The log behind Damage Control, Incomplete Control and Delay Analyzer: its settings and period,
+  // the table of the newest rows, removing a row (with undo), pasting from Excel, the example week,
+  // clearing and the CSV. The tool gives its columns, its texts and its results.
+  // Each language keeps its own log (the names in it are that language's words). When this
+  // language's log is empty, the logs of the other languages are pointed to instead of looking lost.
+  const LANG_NAMES = { en: "English", de: "Deutsch", sq: "Shqip" };
+  const otherLogs = (key) => {
+    const base = key.replace(/-(de|sq)$/, "");
+    const path = window.location.pathname.replace(/^\/(de|sq)(?=\/)/, "");
+    return Object.keys(LANG_NAMES).filter((code) => code !== LANG).map((code) => {
+      const saved = read(code === "en" ? base : `${base}-${code}`, null);
+      const count = isObject(saved) && Array.isArray(saved.rows) ? saved.rows.length : 0;
+      return { code, count, name: LANG_NAMES[code], url: code === "en" ? path : `/${code}${path}` };
+    }).filter((item) => item.count > 0);
+  };
+
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearText, csv, renderResults, results }) => {
+    const logBody = root.querySelector("[data-log]");
+    const logWrap = root.querySelector("[data-log-wrap]");
+    const logEmpty = root.querySelector("[data-log-empty]");
+    const logCount = root.querySelector("[data-log-count]");
+    const logStatus = root.querySelector("[data-log-status]");
+    const importStatus = root.querySelector("[data-import-status]");
+    const settings = [...root.querySelectorAll("[data-setting]")];
+    const elsewhere = el("p", "form-note dl-elsewhere");
+    elsewhere.hidden = true;
+    logEmpty.after(elsewhere);
+    let syncRange = () => {};
+
+    const renderLog = () => {
+      const rows = state.rows;
+      logBody.replaceChildren();
+      rows.map((row, index) => [row, index]).reverse().slice(0, LOG_LIMIT).forEach(([row, index]) => {
+        const tr = el("tr");
+        tr.append(...cells(row));
+        const cell = el("td");
+        const remove = el("button", "dl-remove", "×");
+        remove.type = "button";
+        remove.dataset.remove = index;
+        remove.setAttribute("aria-label", removeLabel(row));
+        cell.append(remove);
+        tr.append(cell);
+        logBody.append(tr);
+      });
+      logWrap.hidden = !rows.length;
+      logEmpty.hidden = rows.length > 0;
+      logCount.textContent = rows.length ? `${countText(rows)}${shownNote(rows.length)}` : "";
+      const others = rows.length || !key ? [] : otherLogs(key);
+      elsewhere.hidden = !others.length;
+      elsewhere.replaceChildren();
+      others.forEach((item, index) => {
+        const link = el("a", "inline-link", tx("Open it"));
+        link.href = item.url;
+        link.hreflang = item.code;
+        elsewhere.append(`${index ? " " : ""}${tx("Your log in {language} has {n} entries.", { language: item.name, n: int.format(item.count) })} `, link);
+      });
+    };
+    const render = () => {
+      renderLog();
+      syncRange();
+      renderResults();
+    };
+    const changed = () => {
+      save();
+      render();
+    };
+
+    // Period settings; typing waits for a pause when the log is long.
+    const renderSetting = renderOnPause(changed, () => state.rows.length);
+    const showSettings = () => settings.forEach((input) => { input.value = state[input.name] ?? ""; });
+    settings.forEach((input) => input.addEventListener("input", () => {
+      state[input.name] = input.value;
+      renderSetting();
+    }));
+
+    root.querySelector("[data-import]").addEventListener("click", () => {
+      const { added, skipped } = importRows(paste.value);
+      if (!added.length) {
+        flash(importStatus, importText.none);
+        return;
+      }
+      state.rows.push(...added);
+      changed();
+      paste.value = "";
+      flash(importStatus, importText.done(added.length, skipped));
+    });
+
+    logBody.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-remove]");
+      if (!button) return;
+      const index = Number(button.dataset.remove);
+      const [removed] = state.rows.splice(index, 1);
+      changed();
+      (logBody.querySelector("[data-remove]") || root.querySelector("[data-entry] input, [data-entry] select")).focus();
+      undoNote(logStatus, removedText(removed), () => {
+        state.rows.splice(Math.min(index, state.rows.length), 0, removed);
+        changed();
+      });
+    });
+
+    root.querySelector("[data-example]").addEventListener("click", () => {
+      loadExample();
+      state.from = "";
+      state.to = "";
+      showSettings();
+      changed();
+      results.scrollIntoView({ behavior: "smooth", block: "start" });
+      results.focus({ preventScroll: true });
+    });
+
+    root.querySelector("[data-clear]").addEventListener("click", () => {
+      if (!state.rows.length || !window.confirm(clearText)) return;
+      state.rows = [];
+      changed();
+    });
+
+    root.querySelector("[data-csv]").addEventListener("click", () => {
+      if (!state.rows.length) return;
+      const { name, rows } = csv();
+      downloadCsv(name, rows);
+    });
+
+    showSettings();
+    syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, changed);
+    return {
+      render,
+      // A new row from the entry form.
+      add: (row) => {
+        state.rows.push(row);
+        changed();
+      },
+    };
+  };
+
   // German and Albanian Excel expect semicolons and a decimal comma.
   const downloadCsv = (name, rows) => {
     const separator = DECIMAL_COMMA ? ";" : ",";
@@ -471,7 +628,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl,
+    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs,
     panel, stat, barList, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

@@ -3,7 +3,7 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { LOCALE, tx, dayMonth, lower, read, write, isObject, str, el, today, parseDate, renderOnPause } = window.ToolKit;
+  const { LOCALE, tx, dayMonth, lower, pct, read, write, isObject, str, el, today, parseDate, renderOnPause } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
@@ -211,6 +211,67 @@
     renderMetrics();
     renderIssues();
     renderChecklist();
+  };
+
+  // Numbers from the logs ------------------------------------------------------
+  // Damage Control, Incomplete Control and Delay Analyzer keep their logs in this browser, one per
+  // language, with the same shift names as this page. Their numbers for this handover's date and
+  // shift fill the matching empty numbers of the template; anything typed stays as it is.
+  const logRows = (tool) => {
+    const saved = read(KEY.replace("shift-handover", tool), {});
+    return isObject(saved) && Array.isArray(saved.rows) ? { settings: saved, rows: saved.rows.filter(isObject) } : { settings: {}, rows: [] };
+  };
+  const clockMinutes = (time) => (/^\d{2}:\d{2}$/.test(str(time)) ? Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5)) : null);
+  const late = (planned, actual) => {
+    const a = clockMinutes(planned);
+    const b = clockMinutes(actual);
+    if (a === null || b === null) return null;
+    let value = b - a;
+    if (value < -720) value += 1440;
+    if (value > 720) value -= 1440;
+    return value;
+  };
+  const gracePart = (value, fallback) => {
+    const number = Number(String(value ?? "").replace(",", "."));
+    return Number.isFinite(number) && number >= 0 ? number : fallback;
+  };
+  const shiftTotals = (h) => {
+    const mine = (row) => row.date === h.date && row.shift === h.shift;
+    const units = (rows) => rows.reduce((sum, row) => sum + (Number(row.units) > 0 ? Math.round(Number(row.units)) : 1), 0);
+    const damage = logRows("damage-control").rows.filter(mine);
+    const incomplete = logRows("incomplete-control").rows.filter(mine);
+    const delay = logRows("delay-analyzer");
+    const depGrace = gracePart(delay.settings.departureGrace, 10);
+    const arrGrace = gracePart(delay.settings.arrivalGrace, 15);
+    const routes = delay.rows.filter(mine).map((row) => ({ dep: late(row.planDep, row.actDep), arr: late(row.planArr, row.actArr) })).filter((row) => row.arr !== null);
+    const departed = routes.filter((row) => row.dep !== null);
+    return {
+      damage: damage.length ? units(damage) : null,
+      incomplete: incomplete.length ? units(incomplete) : null,
+      departures: departed.length ? { onTime: departed.filter((row) => row.dep <= depGrace).length, total: departed.length } : null,
+      arrivals: routes.length ? { onTime: routes.filter((row) => row.arr <= arrGrace).length, total: routes.length } : null,
+    };
+  };
+  const handledNumber = (h) => {
+    const label = template(h.template).metrics[0];
+    const value = Number(String(h.metrics.find(([name]) => name === label)?.[1] ?? "").replace(/[.\s](?=\d{3}\b)/g, "").replace(",", "."));
+    return value > 0 ? value : null;
+  };
+  // What each source writes, for the metric it belongs to.
+  const fillValue = (source, totals, h) => {
+    const fromLog = tx("from the log");
+    if (source === "damage" || source === "incomplete") {
+      const count = totals[source];
+      if (count === null) return null;
+      const noun = source === "damage" ? tx("damaged units") : tx("incomplete orders");
+      const handled = source === "damage" ? handledNumber(h) : null;
+      return handled
+        ? [pct(count / handled, 2), `${tx("{a} of {b}", { a: count, b: handled })} · ${fromLog}`]
+        : [String(count), [noun, fromLog, source === "damage" ? tx("add the units handled for the rate") : ""].filter(Boolean).join(" · ")];
+    }
+    const part = totals[source];
+    if (!part) return null;
+    return [pct(part.onTime / part.total, 1), `${tx("{a} of {b} routes", { a: part.onTime, b: part.total })} · ${fromLog}`];
   };
 
   // Output --------------------------------------------------------------------
@@ -470,6 +531,54 @@
     renderMetrics();
     metricsBox.lastElementChild.querySelector("input").focus();
   });
+
+  const fillStatus = form.querySelector("[data-fill-status]");
+  form.querySelector("[data-fill-logs]").addEventListener("click", () => {
+    const h = cur();
+    const sources = template(h.template).sources || [];
+    const totals = shiftTotals(h);
+    let filled = 0;
+    let kept = 0;
+    let found = 0;
+    template(h.template).metrics.forEach((label, i) => {
+      const source = sources[i];
+      if (!source) return;
+      const value = fillValue(source, totals, h);
+      if (!value) return;
+      found++;
+      let row = h.metrics.find(([name]) => name === label);
+      if (!row) {
+        row = [label, "", ""];
+        h.metrics.push(row);
+      }
+      if (row[1].trim()) {
+        kept++;
+        return;
+      }
+      row[1] = value[0];
+      row[2] = value[1];
+      filled++;
+    });
+    if (!sources.some(Boolean)) {
+      flashFill(tx("This template has no numbers that the logs can fill."));
+      return;
+    }
+    if (!found) {
+      flashFill(tx("No entries in the logs for {date}, {shift} shift. Damage Control, Incomplete Control and Delay Analyzer fill these numbers when they log this shift.", { date: longDate(h.date), shift: lower(h.shift) }));
+      return;
+    }
+    save();
+    renderMetrics();
+    renderOutput();
+    flashFill(filled
+      ? `${tx(filled === 1 ? "Filled {n} number from the logs." : "Filled {n} numbers from the logs.", { n: filled })}${kept ? ` ${tx("{n} already typed stayed as they were.", { n: kept })}` : ""}`
+      : tx("These numbers are already filled in. What you typed stays as it is."));
+  });
+  const flashFill = (message) => {
+    fillStatus.textContent = message;
+    clearTimeout(flashFill.timer);
+    flashFill.timer = setTimeout(() => { fillStatus.textContent = ""; }, 6000);
+  };
 
   form.querySelector("[data-add-issue]").addEventListener("click", () => {
     const issues = cur().issues;

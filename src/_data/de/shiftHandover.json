@@ -5,6 +5,7 @@
   "templates": {
     "warehouse": {
       "name": "Lager",
+      "sources": [null, null, "damage", "incomplete", "departures", null],
       "metrics": [
         "Bearbeitete Einheiten",
         "Rückstand bei Übergabe",
@@ -45,6 +46,7 @@
     },
     "delivery": {
       "name": "Zustellbasis",
+      "sources": [null, null, null, "arrivals", null, null],
       "metrics": [
         "Touren raus",
         "Touren zurück",

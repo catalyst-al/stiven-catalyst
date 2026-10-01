@@ -42,7 +42,11 @@
     <fieldset class="dl-box">
       <legend class="kicker">2 · {{ "Numbers at handover" | t(lang) }}</legend>
       <div class="sh-rows" data-metrics></div>
-      <button class="button-ghost" type="button" data-add-metric>{{ "+ Add a number" | t(lang) }}</button>
+      <div class="sh-metric-actions">
+        <button class="button-ghost" type="button" data-add-metric>{{ "+ Add a number" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-fill-logs>{{ "Fill in from the logs" | t(lang) }}</button>
+      </div>
+      <p class="form-note sh-fill-status" data-fill-status aria-live="polite"></p>
     </fieldset>
 
     <fieldset class="dl-box">

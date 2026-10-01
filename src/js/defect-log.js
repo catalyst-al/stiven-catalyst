@@ -10,8 +10,8 @@
     tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, spanText, rangeControl,
-    panel, stat, barList, focusCard, resultActions, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    inRange, dateSpan, spanText, logBook, resultLayout,
+    panel, stat, barList, focusCard, resultActions, flash, floorCheck,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -25,13 +25,7 @@
   const field = Object.fromEntries(fields.map((f) => [f.name, f]));
 
   const entry = root.querySelector("[data-entry]");
-  const logBody = root.querySelector("[data-log]");
-  const logWrap = root.querySelector("[data-log-wrap]");
-  const logEmpty = root.querySelector("[data-log-empty]");
-  const logCount = root.querySelector("[data-log-count]");
   const entryStatus = root.querySelector("[data-entry-status]");
-  const logStatus = root.querySelector("[data-log-status]");
-  const importStatus = root.querySelector("[data-import-status]");
   const pasteArea = root.querySelector("#dl-paste");
   const results = document.querySelector("[data-results]");
 
@@ -148,32 +142,6 @@
       unknownShare: unknown / total,
       days: new Set(rows.map((row) => row.date).filter(Boolean)).size,
     };
-  };
-
-  // The log table.
-  const renderLog = () => {
-    const rows = state.rows;
-    logBody.replaceChildren();
-    rows.map((row, index) => [row, index]).reverse().slice(0, LOG_LIMIT).forEach(([row, index]) => {
-      const tr = el("tr");
-      tr.append(el("td", "nowrap", showDate(row.date) || "-"));
-      fields.forEach((f) => tr.append(el("td", null, row[f.name])));
-      tr.append(el("td", "num", int.format(row.units)));
-      tr.append(el("td", "num", row.cost == null ? "" : num(row.cost, 2)));
-      tr.append(el("td", "dl-note", row.note || ""));
-      const cell = el("td");
-      const remove = el("button", "dl-remove", "×");
-      remove.type = "button";
-      remove.dataset.remove = index;
-      remove.setAttribute("aria-label", tx(row.date ? "Remove {n} {type} at {stage} on {date}" : "Remove {n} {type} at {stage}", { n: row.units, type: row.type, stage: row.stage, date: showDate(row.date) }));
-      cell.append(remove);
-      tr.append(cell);
-      logBody.append(tr);
-    });
-    logWrap.hidden = !rows.length;
-    logEmpty.hidden = rows.length > 0;
-    const units = rows.reduce((sum, row) => sum + row.units, 0);
-    logCount.textContent = rows.length ? `${entries(rows.length)} · ${plural(units, t.one, t.many)}${shownNote(rows.length)}` : "";
   };
 
   // Results.
@@ -299,7 +267,6 @@
       title.append(el("span", null, int.format(result.total)), ` ${result.total === 1 ? t.one : t.many}`);
     }
     head.append(title);
-    results.append(head);
 
     const stats = el("div", "dl-stats");
     stats.append(stat(capital(t.many), int.format(result.total), `${entries(result.rows.length)}${result.days ? ` ${tx("over {days}", { days: plural(result.days, tx("day"), tx("days")) })}` : ""}`));
@@ -311,38 +278,30 @@
       if (target) stats.append(stat(tx("Target"), target.value, target.note));
     }
     if (result.cost != null) stats.append(stat(tx("Recorded cost"), euro.format(result.cost), tx("only entries with a cost")));
-    results.append(stats);
 
+    const notes = [];
     if (result.volumeTooLow) {
-      results.append(el("p", "dl-warning", tx("The log holds more {many} than {volume}. Check the volume to see the rate, DPMO and sigma level.", { many: t.many, volume: lower(t.volumeLabel) })));
+      notes.push(el("p", "dl-warning", tx("The log holds more {many} than {volume}. Check the volume to see the rate, DPMO and sigma level.", { many: t.many, volume: lower(t.volumeLabel) })));
     } else if (!result.volume) {
-      results.append(el("p", "dl-warning", tx("Add the {volume} in this period to see the {rate}, DPMO and sigma level.", { volume: lower(t.volumeLabel), rate: lower(t.rateLabel) })));
+      notes.push(el("p", "dl-warning", tx("Add the {volume} in this period to see the {rate}, DPMO and sigma level.", { volume: lower(t.volumeLabel), rate: lower(t.rateLabel) })));
     }
-
-    const grid = el("div", "dl-result-grid");
 
     const vital = result.causes.filter((item) => item.vital);
     const pareto = panel(tx("Pareto of causes"), tx("{a} of {b} causes carry {pct} of the {noun}. Fix these first.", { a: vital.length, b: result.causes.length, pct: pct(vital.at(-1).cumulative, 0), noun: t.allNoun }));
     pareto.append(bars(result.causes, result.total, { ranked: true, cumulative: true, highlight: (item) => item.vital, tag: tx("Vital few") }));
-    grid.append(pareto);
 
     const flow = panel(t.stageTitle, t.stageNote);
     flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: tx("Most") }));
-    grid.append(flow);
 
     const types = panel(t.matrixTitle, tx("Each cell counts {many}. The darkest cell is the most specific place to look.", { many: t.many }));
     types.append(matrix(result));
-    grid.append(types);
 
     const shifts = panel(tx("By shift"), tx("Counts only. A shift that handles more volume will log more {noun}, so compare with its share of the work.", { noun: t.allNoun }));
     shifts.append(bars(result.shifts, result.total));
-    grid.append(shifts);
-
-    results.append(grid);
 
     // Where to start: the stage with the highest count, and its main cause.
     const cause = result.topStageCause;
-    results.append(focusCard({
+    const focus = focusCard({
       title: result.topStage.key,
       detail: cause?.key,
       lede: problemText(result),
@@ -350,9 +309,16 @@
       extraLabel: cause ? tx("About {cause}", { cause: lower(cause.key) }) : "",
       extra: cause && cause.key !== UNKNOWN ? data.causes[cause.key] : "",
       warning: result.unknownShare > 0.15 ? `${tx("{pct} of {many} have no known cause.", { pct: pct(result.unknownShare, 0), many: t.many })} ${data.causes[UNKNOWN]}` : "",
-    }));
+    });
 
-    results.append(resultActions(() => summaryText(result), problemText(result), paretoTable));
+    resultLayout(results, {
+      head,
+      stats,
+      notes,
+      focus,
+      actions: resultActions(() => summaryText(result), problemText(result), paretoTable),
+      panels: [pareto, flow, types, shifts],
+    });
   };
 
   // The log for the Pareto tool: causes counted in units, valued in euros where known.
@@ -367,24 +333,44 @@
     valueLabel: "€",
   });
 
-  let syncRange = () => {};
-  const render = () => {
-    renderLog();
-    syncRange();
-    renderResults();
-  };
-
-  // Period settings.
-  const renderSetting = renderOnPause(() => {
-    save();
-    renderResults();
-  }, () => state.rows.length);
-  root.querySelectorAll("[data-setting]").forEach((input) => {
-    input.value = state[input.name] ?? "";
-    input.addEventListener("input", () => {
-      state[input.name] = input.value;
-      renderSetting();
-    });
+  const book = logBook({
+    root,
+    key: KEY,
+    state,
+    save,
+    results,
+    paste: pasteArea,
+    cells: (row) => [
+      el("td", "nowrap", showDate(row.date) || "-"),
+      ...fields.map((f) => el("td", null, row[f.name])),
+      el("td", "num", int.format(row.units)),
+      el("td", "num", row.cost == null ? "" : num(row.cost, 2)),
+      el("td", "dl-note", row.note || ""),
+    ],
+    removeLabel: (row) => tx(row.date ? "Remove {n} {type} at {stage} on {date}" : "Remove {n} {type} at {stage}", { n: row.units, type: row.type, stage: row.stage, date: showDate(row.date) }),
+    removedText: (row) => tx("Removed {count} at {stage}.", { count: plural(row.units, t.one, t.many), stage: row.stage }),
+    countText: (rows) => `${entries(rows.length)} · ${plural(rows.reduce((sum, row) => sum + row.units, 0), t.one, t.many)}`,
+    importRows,
+    importText: {
+      none: tx("No rows found. Check that {count} are in the sixth column.", { count: t.countShort }),
+      done: (added, skipped) => `${tx("Imported {rows}", { rows: plural(added, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without {count}", { n: skipped, count: t.countShort }) : ""}.`,
+    },
+    loadExample: () => {
+      const example = data.example;
+      state.period = example.period;
+      state.volume = String(example.volume);
+      state.target = String(example.target);
+      state.rows = importRows(example.rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+    },
+    clearText: tx("Clear the whole {tool} log?", { tool: t.tool }),
+    csv: () => ({
+      name: t.csv,
+      rows: [
+        [tx("Date"), ...fields.map((f) => f.label), capital(t.countShort), tx("Cost"), tx("Note")],
+        ...state.rows.map((row) => [row.date, ...fields.map((f) => row[f.name]), row.units, row.cost ?? "", row.note]),
+      ],
+    }),
+    renderResults,
   });
 
   // Log an entry.
@@ -399,15 +385,13 @@
       return;
     }
     const cost = parseNumber(form.cost.value);
-    state.rows.push({
+    book.add({
       date: form.date.value,
       ...Object.fromEntries(fields.map((f) => [f.name, form[f.name].value])),
       units,
       cost: cost >= 0 ? cost : null,
       note: form.note.value.trim(),
     });
-    save();
-    render();
     // Keep date, shift and stage: the next entry is usually from the same place.
     form.units.value = 1;
     form.cost.value = "";
@@ -416,68 +400,6 @@
     form.type.focus();
   });
 
-  root.querySelector("[data-import]").addEventListener("click", () => {
-    const { added, skipped } = importRows(pasteArea.value);
-    if (!added.length) {
-      flash(importStatus, tx("No rows found. Check that {count} are in the sixth column.", { count: t.countShort }));
-      return;
-    }
-    state.rows.push(...added);
-    save();
-    render();
-    pasteArea.value = "";
-    flash(importStatus, `${tx("Imported {rows}", { rows: plural(added.length, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without {count}", { n: skipped, count: t.countShort }) : ""}.`);
-  });
-
-  logBody.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-remove]");
-    if (!button) return;
-    const index = Number(button.dataset.remove);
-    const [removed] = state.rows.splice(index, 1);
-    save();
-    render();
-    (logBody.querySelector("[data-remove]") || entry.elements.date).focus();
-    undoNote(logStatus, tx("Removed {count} at {stage}.", { count: plural(removed.units, t.one, t.many), stage: removed.stage }), () => {
-      state.rows.splice(Math.min(index, state.rows.length), 0, removed);
-      save();
-      render();
-    });
-  });
-
-  root.querySelector("[data-example]").addEventListener("click", () => {
-    const example = data.example;
-    state.period = example.period;
-    state.volume = String(example.volume);
-    state.target = String(example.target);
-    state.from = "";
-    state.to = "";
-    state.rows = importRows(example.rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
-    root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
-    save();
-    render();
-    results.scrollIntoView({ behavior: "smooth", block: "start" });
-    results.focus({ preventScroll: true });
-  });
-
-  root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!state.rows.length || !window.confirm(tx("Clear the whole {tool} log?", { tool: t.tool }))) return;
-    state.rows = [];
-    save();
-    render();
-  });
-
-  root.querySelector("[data-csv]").addEventListener("click", () => {
-    if (!state.rows.length) return;
-    downloadCsv(t.csv, [
-      [tx("Date"), ...fields.map((f) => f.label), capital(t.countShort), tx("Cost"), tx("Note")],
-      ...state.rows.map((row) => [row.date, ...fields.map((f) => row[f.name]), row.units, row.cost ?? "", row.note]),
-    ]);
-  });
-
-  syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, () => {
-    save();
-    render();
-  });
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
-  render();
+  book.render();
 })();

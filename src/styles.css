@@ -1825,6 +1825,39 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
   border-radius: 0 12px 12px 0;
   font-size: 14px;
 }
+/* The evidence behind a result: open on a wide screen, closed on a phone until asked for. */
+.dl-details { margin-top: 28px; }
+.dl-details-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  cursor: pointer;
+  list-style: none;
+}
+.dl-details-summary::-webkit-details-marker { display: none; }
+.dl-details-summary::after {
+  content: "+";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 700;
+}
+.dl-details[open] > .dl-details-summary::after { content: "−"; }
+.dl-details-summary strong { font-size: 16px; }
+.dl-details-summary span { color: var(--muted); font-size: 13px; }
+.dl-details-summary:hover { border-color: color-mix(in srgb, var(--accent-fill, var(--blue)) 55%, var(--line)); }
+.dl-details > .dl-result-grid { margin-top: 18px; }
 .dl-result-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -5274,3 +5307,43 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 @media print {
   .share-orbit { display: none !important; }
 }
+
+/* All your work in one file (partials/work-backup.njk). */
+.work-backup { padding: 20px 0 60px; }
+.work-backup-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px 32px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--card);
+}
+.work-backup-copy h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.work-backup-copy p:not(.kicker):not(.form-note) { max-width: 640px; margin: 12px 0 0; color: var(--muted); }
+.work-backup-copy .form-note { margin: 12px 0 0; }
+.work-backup-actions { margin: 0; justify-content: flex-end; }
+.work-backup-open { position: relative; cursor: pointer; }
+.work-backup-open input { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+.work-backup-open:focus-within { outline: 2px solid var(--accent-fill, var(--blue)); outline-offset: 3px; }
+.work-backup-status { grid-column: 1 / -1; margin: 0; }
+.work-backup-status:empty { display: none; }
+@media (max-width: 760px) {
+  .work-backup-card { grid-template-columns: minmax(0, 1fr); padding: 22px 20px; }
+  .work-backup-actions { justify-content: flex-start; }
+}
+@media print { .work-backup { display: none !important; } }
+
+/* Shift Handover: numbers can come from the logs of the same shift. */
+.sh-metric-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.sh-fill-status { margin: 12px 0 0; }
+.sh-fill-status:empty { display: none; }
+.dl-elsewhere { margin: 10px 0 0; }
