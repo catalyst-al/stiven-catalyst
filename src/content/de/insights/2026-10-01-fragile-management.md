@@ -1,5 +1,5 @@
 ---
-title: Führung ist zerbrechlich, wenn jede Entscheidung auf die Chefin oder den Chef wartet
+title: Führung ist zerbrechlich, wenn jede Entscheidung auf den Chef wartet
 date: 2026-10-01
 category: Führung
 status: published
