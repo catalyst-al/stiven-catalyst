@@ -1,8 +1,9 @@
 {#- Structured data (JSON-LD) for search engines, in the head of every page (layouts/base.njk):
     the author as a Person everywhere, the site as a WebSite on the homepage, a ProfilePage on the About
-    page, and an Article for every essay and reflection (layouts/article.njk, ogType "article").
-    Everything comes from site.json, the page's front matter and the social preview already chosen
-    for the page; profile links go in "profiles" in site.json. -#}
+    page, an Article for every essay and reflection (layouts/article.njk, ogType "article"), a
+    SoftwareApplication for every tool page (a Course for a training module) and an ItemList of the
+    tools on the Tools page. Everything comes from site.json, tools.json, the page's front matter and
+    the social preview already chosen for the page; profile links go in "profiles" in site.json. -#}
 {%- set siteUrl = "/" | absoluteUrl %}
 {%- set person = {
   "@type": "Person",
@@ -53,6 +54,57 @@
     "inLanguage": ["en", "de", "sq"],
     "publisher": { "@id": siteUrl + "#publisher" },
     "author": { "@id": siteUrl + "#author" }
+  }]) %}
+{%- elif toolFamily and not rolePage %}
+  {#- A tool page: its entry in tools.json (in the page's language) gives the kind and the time it takes. -#}
+  {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+  {%- set canonical = (page.url | replace("/" + lang + "/", "/")) if lang and lang != "en" else page.url %}
+  {%- set tool = toolList | where("url", page.url) %}
+  {%- set learning = canonical in toolFamily.learn %}
+  {%- set minutes = "" %}
+  {%- if tool and tool.time %}{% set minutes = tool.time | replace(" min", "") | trim %}{% endif %}
+  {%- set app = {
+    "@type": "Course" if learning else ["SoftwareApplication", "WebApplication"],
+    "@id": (page.url | absoluteUrl) + ("#course" if learning else "#app"),
+    "name": title,
+    "description": pageDescription,
+    "url": (page.url | absoluteUrl),
+    "image": socialImage | absoluteUrl,
+    "inLanguage": lang or "en",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "author": { "@id": siteUrl + "#author" }
+  } %}
+  {%- if learning %}
+    {%- set app = app | merge({
+      "provider": { "@id": siteUrl + "#publisher" },
+      "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online" }
+    }) %}
+    {%- if minutes and (minutes | int) > 0 %}{% set app = app | merge({ "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online", "courseWorkload": "PT" + (minutes | int) + "M" } }) %}{% endif %}
+  {%- else %}
+    {%- set app = app | merge({
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript",
+      "publisher": { "@id": siteUrl + "#publisher" }
+    }) %}
+    {%- if tool and tool.type %}{% set app = app | merge({ "applicationSubCategory": tool.type }) %}{% endif %}
+    {%- if minutes and (minutes | int) > 0 %}{% set app = app | merge({ "timeRequired": "PT" + (minutes | int) + "M" }) %}{% endif %}
+  {%- endif %}
+  {%- set graph = graph.concat([app]) %}
+{%- elif activeNav == ("/tools.html" | local(lang)) and not toolFamily %}
+  {#- The Tools page: the list of every tool, in the order of tools.json. -#}
+  {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+  {%- set items = [] %}
+  {%- for tool in toolList %}
+    {%- set items = (items.push({ "@type": "ListItem", "position": loop.index, "name": tool.name, "url": (tool.url | local(lang)) | absoluteUrl }), items) %}
+  {%- endfor %}
+  {%- set graph = graph.concat([{
+    "@type": "ItemList",
+    "@id": (page.url | absoluteUrl) + "#tools",
+    "name": title,
+    "numberOfItems": items.length,
+    "itemListElement": items
   }]) %}
 {%- elif activeNav == ("/about.html" | local(lang)) %}
   {%- set graph = graph.concat([{

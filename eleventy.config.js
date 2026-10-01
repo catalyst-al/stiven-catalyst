@@ -141,6 +141,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
   // One object over another, for the structured data (partials/structured-data.njk).
   eleventyConfig.addFilter("merge", (base, extra) => ({ ...base, ...extra }));
+  // The first item of a list whose key has this value (a tool by its url).
+  eleventyConfig.addFilter("where", (list, key, value) => (list || []).find((item) => item[key] === value));
   eleventyConfig.addFilter("absoluteUrl", (path) => new URL(String(path).replace(/^\//, ""), site.url).href);
   // The newest published essay marked "featured", for the homepage.
   eleventyConfig.addFilter("featured", (items) =>
