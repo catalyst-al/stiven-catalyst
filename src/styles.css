@@ -469,6 +469,48 @@ button, input, select { font: inherit; }
   min-height: 48px;
   text-align: center;
 }
+/* Reflections, drawn as the Pulse planet's chip: a red dot that beats. */
+.hero-actions .hero-pulse {
+  --family: #ff4d55;
+  gap: 10px;
+  padding: 13px 22px;
+  border: 1px solid color-mix(in srgb, var(--family) 45%, var(--line));
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  animation: hero-pulse-ring 2.4s ease-out infinite;
+  transition: border-color .2s ease, background .2s ease;
+}
+.hero-pulse > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--family);
+  box-shadow: 0 0 10px var(--family);
+  animation: hero-pulse-dot 1.2s ease-in-out infinite;
+}
+.hero-actions .hero-pulse:hover {
+  border-color: var(--family);
+  background: color-mix(in srgb, var(--family) 16%, transparent);
+}
+@keyframes hero-pulse-dot {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 8px var(--family); }
+  50% { transform: scale(1.45); box-shadow: 0 0 18px var(--family); }
+}
+@keyframes hero-pulse-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--family) 45%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--family) 0%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-actions .hero-pulse,
+  .hero-pulse > span { animation: none; }
+}
 
 .hero-side {
   align-self: center;
