@@ -1,5 +1,6 @@
-{#- On a tool page or a role page: the drawn background of the family (familySky.js), and on a tool page the
-    family badge above the title. A training module ("learn" in families.json) has the moons of a course instead. Needs toolFamily. -#}
+{#- On a tool page or a role page: the drawn background of the family (familySky.js) with the role's planet over it
+    (partials/family-planet.njk), and on a tool page the family badge above the title. A training module ("learn" in
+    families.json) has the moons of a course instead. Needs toolFamily. -#}
 {%- set sky = familySky %}
 {%- set learning = (page.url | replace("/" + lang + "/", "/")) in toolFamily.learn if lang and lang != "en" else page.url in toolFamily.learn %}
 <div class="family-sky sky-{{ 'learn' if learning else toolFamily.id }}" data-family-sky aria-hidden="true">
@@ -57,6 +58,11 @@
     {%- endfor %}
   </svg>
 {%- endif %}
+  <span class="sky-planet">
+    {%- set planet = toolFamily %}{% set planetKey = "sky-" + toolFamily.id %}{% set planetBare = true %}
+    {%- include "partials/family-planet.njk" %}
+    {%- set planetBare = false %}
+  </span>
 </div>
 {%- if not rolePage %}
 <div class="shell family-badge-row">
