@@ -15,25 +15,6 @@
     <div><strong>{{ "Change" | t(lang) }}</strong><span>{{ "Turn insight into movement." | t(lang) }}</span></div>
   </div>
 
-{% include "partials/career-feature.njk" %}
-
-  <section class="shell section philosophy">
-    <div class="manifesto">
-      <div class="manifesto-line">
-        <span>{{ "Observation" | t(lang) }}</span>
-        <span class="blue">{{ "into insight." | t(lang) }}</span>
-        <span>{{ "Insight" | t(lang) }}</span>
-        <span class="red">{{ "into action." | t(lang) }}</span>
-      </div>
-      <div class="manifesto-copy">
-        <p>{{ "Stiven Catalyst exists to turn clearer thinking into better action." | t(lang) }}</p>
-        <p>{{ "Leadership is not distance from the work. Management is not control. A KPI is not the operation. And an idea is not change until something moves." | t(lang) }}</p>
-        <p>{{ "This is a place for practical thinking on leadership, operations, people and systems, grounded in real work and built to be useful." | t(lang) }}</p>
-        <a class="text-link" href="{{ '/about.html' | local(lang) }}">{{ "Read the philosophy" | t(lang) }} <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
   <section class="shell section">
     <div class="section-heading">
       <div>
@@ -111,8 +92,7 @@
     </div>
   </section>
 
-{% include "partials/book-feature.njk" %}
-
+{#- After the writing: the tools, then who writes this and the book. #}
   <section class="shell section">
     <div class="section-heading">
       <div>
@@ -128,6 +108,27 @@
     </div>
     <a class="text-link home-families-link" href="{{ '/tools.html' | local(lang) }}">{{ "See all tools" | t(lang) }} <span aria-hidden="true">→</span></a>
   </section>
+
+{% include "partials/career-feature.njk" %}
+
+  <section class="shell section philosophy">
+    <div class="manifesto">
+      <div class="manifesto-line">
+        <span>{{ "Observation" | t(lang) }}</span>
+        <span class="blue">{{ "into insight." | t(lang) }}</span>
+        <span>{{ "Insight" | t(lang) }}</span>
+        <span class="red">{{ "into action." | t(lang) }}</span>
+      </div>
+      <div class="manifesto-copy">
+        <p>{{ "Stiven Catalyst exists to turn clearer thinking into better action." | t(lang) }}</p>
+        <p>{{ "Leadership is not distance from the work. Management is not control. A KPI is not the operation. And an idea is not change until something moves." | t(lang) }}</p>
+        <p>{{ "This is a place for practical thinking on leadership, operations, people and systems, grounded in real work and built to be useful." | t(lang) }}</p>
+        <a class="text-link" href="{{ '/about.html' | local(lang) }}">{{ "Read the philosophy" | t(lang) }} <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+{% include "partials/book-feature.njk" %}
 
 {% include "partials/newsletter.njk" %}
 
