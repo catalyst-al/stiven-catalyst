@@ -661,6 +661,8 @@
   };
 
   const onMapChange = () => {
+    // The mapping is hidden until a table is read; nothing to map before that.
+    if (!state.source) return;
     Object.entries(selects).forEach(([key, select]) => { state.map[key] = Number(select.value); });
     if (state.map.value < 0) state.measure = "count";
     state.filterValue = "";
@@ -671,6 +673,7 @@
   };
   Object.values(selects).forEach((select) => select.addEventListener("change", onMapChange));
   $("[data-has-header]").addEventListener("change", (event) => {
+    if (!state.source) return;
     const { name } = state.source;
     const rows = state.source.hasHeader ? [state.source.headers, ...state.source.rows] : state.source.rows;
     useTable(name, rows, { hasHeader: event.target.checked });
