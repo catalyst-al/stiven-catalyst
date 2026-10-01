@@ -6,17 +6,19 @@
 </section>
 
 <section class="shell about-intro" aria-labelledby="about-author-heading">
-  <figure class="about-portrait"><img src="/media/stiven-portrait.jpg" alt="{{ 'Stiven Janaqi, listening at a microphone' | t(lang) }}" width="480" height="592"></figure>
+  <figure class="about-portrait"><img src="/media/stiven-headshot.jpg" alt="Stiven Janaqi" width="360" height="360"></figure>
   <div class="about-intro-copy">
     <p class="kicker">{{ "Behind the work" | t(lang) }}</p>
     <h2 id="about-author-heading">Stiven Janaqi</h2>
-    <p class="about-role">{{ "Operations · Last-mile logistics · Hotel front office" | t(lang) }}</p>
-    <p>{{ "Stiven works in operations in Germany, with hands-on experience in last-mile coordination and hotel front-office and night-audit work. He has seen how a missed handoff, an unclear standard or a rushed shift can change the result that appears on a dashboard." | t(lang) }}</p>
-    <p>{{ "He writes from that practical perspective and builds small tools that help people see the work, ask better questions and make the next shift easier to run." | t(lang) }}</p>
-    <dl class="about-facts">
-      <div><dt>{{ "Based in" | t(lang) }}</dt><dd>{{ "Germany" | t(lang) }}</dd></div>
-      <div><dt>{{ "Logistics" | t(lang) }}</dt><dd>{{ "Last-mile coordination" | t(lang) }}</dd></div>
-      <div><dt>{{ "Hospitality" | t(lang) }}</dt><dd>{{ "Front office and night audit" | t(lang) }}</dd></div>
+    <p class="about-role">{{ "Operations & leadership · Last mile · Hotels" | t(lang) }}</p>
+    <p>{{ "Stiven has led operations and teams for more than ten years: in retail and wholesale in Albania, then in last-mile logistics and hotels in Germany. As Area Manager for last-mile operations he led four shift leads and eight dispatchers, with about 250 drivers on the road. Today he coordinates last-mile operations and runs the night shift at an airport hotel in Frankfurt." | t(lang) }}</p>
+    <p>{{ "He has seen how a missed handoff, an unclear standard or a rushed shift changes the number on a dashboard. He writes from that practical perspective and builds small tools that help people see the work, ask better questions and make the next shift easier to run." | t(lang) }}</p>
+    {#- Each figure under its label; the figure is shown first. #}
+    <dl class="about-stats">
+      <div><dt>{{ "years in operations and leadership" | t(lang) }}</dt><dd>10+</dd></div>
+      <div><dt>{{ "shift leads and dispatchers led" | t(lang) }}</dt><dd>12</dd></div>
+      <div><dt>{{ "drivers on the road, led indirectly" | t(lang) }}</dt><dd>~250</dd></div>
+      <div><dt>{{ "damage rate as Area Manager" | t(lang) }}</dt><dd>{{ "3% → 1%" | t(lang) }}</dd></div>
     </dl>
     <p class="about-links">
       {%- for profile in site.profiles %}
@@ -25,6 +27,42 @@
       <a class="text-link" href="mailto:{{ site.email }}">{{ site.email }} <span aria-hidden="true">→</span></a>
     </p>
   </div>
+</section>
+
+<section class="shell section about-path" aria-labelledby="about-path-heading">
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "Experience" | t(lang) }}</p>
+      <h2 id="about-path-heading">{{ "Ten years close to the work." | t(lang) }}</h2>
+    </div>
+    <p>{{ "Retail and wholesale in Albania, then last-mile logistics and hotels in Germany: the places the essays and tools come from." | t(lang) }}</p>
+  </div>
+  <ol class="about-timeline">
+    <li>
+      <span class="about-when">{{ "2025 – today" | t(lang) }}</span>
+      <div><h3>{{ "Last-mile coordination and hotel night management" | t(lang) }}</h3><p>{{ "Remote coordination of 80+ vehicles and 100+ drivers; night manager and front office at an airport hotel in Frankfurt." | t(lang) }}</p></div>
+    </li>
+    <li>
+      <span class="about-when">2025</span>
+      <div><h3>{{ "Team Leader, then Area Manager, last-mile operations" | t(lang) }}</h3><p>{{ "Promoted after five months. Damage rate from 3% to 1%, incomplete deliveries from 0.8% to 0.1%, delays at 2.5% against a 5% target." | t(lang) }}</p></div>
+    </li>
+    <li>
+      <span class="about-when">2021 – 2024</span>
+      <div><h3>{{ "Last-mile dispatch and hotel night audit" | t(lang) }}</h3><p>{{ "Dispatch for 70+ drivers a shift at a delivery station, then night audit and front office at hotels in Frankfurt." | t(lang) }}</p></div>
+    </li>
+    <li>
+      <span class="about-when">2015 – 2021</span>
+      <div><h3>{{ "Retail and wholesale management in Albania" | t(lang) }}</h3><p>{{ "Store manager, department head, general sales manager and cluster manager. Teams of up to 16 people; a network of 61 resellers that grew revenue by 30–40%." | t(lang) }}</p></div>
+    </li>
+    <li>
+      <span class="about-when">2012 – 2015</span>
+      <div><h3>{{ "Bachelor of Business Administration" | t(lang) }}</h3><p>{{ "University of Durrës, final grade 9.38 / 10, with a scholarship, alongside work in a telecom company's shops." | t(lang) }}</p></div>
+    </li>
+  </ol>
+  <dl class="about-more">
+    <div><dt>{{ "Languages" | t(lang) }}</dt><dd>{{ "Albanian (native) · English C1 · Italian C1 · German B1" | t(lang) }}</dd></div>
+    <div><dt>{{ "Methods and systems" | t(lang) }}</dt><dd>{{ "Lean · 6S · Gemba walks · Pareto · 5 Whys · SAP · OPERA PMS · Power BI" | t(lang) }}</dd></div>
+  </dl>
 </section>
 
 <section class="shell about-grid">
