@@ -8,7 +8,7 @@
     "line": "You run the floor for one shift: people, damage, incomplete orders, delays, and a clean handover at the end.",
     "color": "#ff4d55",
     "orbit": 0.46,
-    "tools": ["/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"],
+    "tools": ["/tools/shift-pulse/", "/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"],
     "learn": [],
     "also": ["/tools/five-whys/"],
     "read": [],
@@ -16,6 +16,7 @@
       { "when": "Start of shift", "do": "Read the last handover before the briefing, not after the first problem.", "tool": "/tools/shift-handover/" },
       { "when": "During the shift", "do": "Log each damaged unit where it happens, with its stage and cause.", "tool": "/tools/damage-control/" },
       { "when": "During the shift", "do": "Log every order that leaves without all its items or parcels.", "tool": "/tools/incomplete-control/" },
+      { "when": "End of shift", "do": "Before you write the handover, look at the whole shift in one picture.", "tool": "/tools/shift-pulse/" },
       { "when": "End of shift", "do": "Hand over open issues with an owner and a time, not a story.", "tool": "/tools/shift-handover/" },
       { "when": "Every week", "do": "See whether late routes started at the dock or on the road.", "tool": "/tools/delay-analyzer/" },
       { "when": "When a problem returns", "do": "Ask why until you reach something you can change.", "tool": "/tools/five-whys/" }
@@ -33,12 +34,13 @@
     "orbit": 0.7,
     "tools": ["/tools/cx-control-tower/", "/tools/kpi-diagnostic/", "/tools/pareto/"],
     "learn": [],
-    "also": ["/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
+    "also": ["/tools/shift-pulse/", "/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
     "read": [],
     "routine": [
       { "when": "Every morning", "do": "Read yesterday in one view: on time, undamaged, complete and complaints.", "tool": "/tools/cx-control-tower/" },
       { "when": "When a KPI turns red", "do": "Find out whether it is clarity, skill, capacity, process or ownership before you push.", "tool": "/tools/kpi-diagnostic/" },
       { "when": "Every week", "do": "Sort the week's losses and start with the few causes behind most of them.", "tool": "/tools/pareto/" },
+      { "when": "Every week", "do": "Read the logs of your shifts week by week: rates, the trend and what is still open.", "tool": "/tools/shift-pulse/" },
       { "when": "Every week", "do": "Check with your shift leads where route delays begin.", "tool": "/tools/delay-analyzer/" },
       { "when": "Every month", "do": "Tell a real change from a normal bad day before you react.", "tool": "/tools/sigma-control-chart/" }
     ],

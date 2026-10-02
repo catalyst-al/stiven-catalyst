@@ -48,6 +48,18 @@ test('coaching curriculum covers current roles, languages and existing tools', a
   }
 });
 
+test('every tool a role or module links to has a name, and Shift Pulse is on the Pulse and Zenith paths', async () => {
+  const data = await content;
+  const linked = new Set([...Object.values(data.roles).flatMap(role => role.tools), ...data.modules.flatMap(m => m.tools)]);
+  for (const slug of linked) assert.ok(data.toolNames[slug], `no display name for ${slug}`);
+  for (const role of ['pulse', 'zenith']) assert.ok(data.roles[role].tools.includes('shift-pulse'), role);
+  assert.deepEqual(data.modules.filter(m => m.tools.includes('shift-pulse')).map(m => m.id), ['pulse-brief', 'pulse-handover', 'zenith-review']);
+  // The assignments that send the lead to Shift Pulse say so in every language.
+  for (const id of ['pulse-brief', 'pulse-handover']) {
+    for (const lang of ['en', 'de', 'sq']) assert.match(data.modules.find(m => m.id === id).assignment[lang], /Shift Pulse/, `${id} ${lang}`);
+  }
+});
+
 test('state persists with revision checking and blocks stale tab writes', () => {
   const store = memory(), s = stateWithProject();
   assert.ok(C.validState(s)); assert.equal(C.save(store, s), null);

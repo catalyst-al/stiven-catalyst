@@ -80,6 +80,14 @@
     "cta": "Nis dorëzimin"
   },
   {
+    "name": "Shift Pulse",
+    "type": "Pasqyrë",
+    "time": "1 min",
+    "summary": "Dëmtimet, porositë e paplota, linjat me vonesë dhe çështjet e hapura të dorëzimit në një pamje, sipas ditës ose javës. Grafikë trendi dhe përqindje, sinjalizime për ato mbi normalen dhe një përmbledhje për ta kopjuar ose printuar.",
+    "url": "/sq/tools/shift-pulse/",
+    "cta": "Hap Shift Pulse"
+  },
+  {
     "name": "Krijuesi i CV-së",
     "type": "Karriera",
     "time": "20 min",

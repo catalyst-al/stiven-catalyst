@@ -7,11 +7,11 @@
   if (!root || !dataEl || !window.ToolKit) return;
 
   const {
-    tx, num, showDate, lower,
+    tx, num, showDate, lower, addDays, cleanVolumes, importVolumes, dayVolumes, shareText,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
-    panel, stat, barList, focusCard, resultActions, flash, floorCheck,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, flash, floorCheck,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -24,14 +24,17 @@
   const fields = data.fields;
   const field = Object.fromEntries(fields.map((f) => [f.name, f]));
 
+  const periodVolumeInput = root.querySelector('[name="volume"]');
+  const periodVolumePlaceholder = periodVolumeInput.placeholder;
   const entry = root.querySelector("[data-entry]");
   const entryStatus = root.querySelector("[data-entry-status]");
   const pasteArea = root.querySelector("#dl-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", rows: [] });
+  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [] });
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
+  state.volumes = cleanVolumes(state.volumes);
   state.rows = state.rows.filter(isObject).map((row) => {
     const units = Math.round(Number(row.units));
     const cost = Number(row.cost);
@@ -92,6 +95,11 @@
   };
   const bySize = (map) => [...map.values()].sort((a, b) => b.value - a.value || a.key.localeCompare(b.key));
 
+  const dayVolumesOf = (rows) => dayVolumes(state.volumes, rows, state.from, state.to);
+  // Set by the page code below: the list of daily volumes, and whether the box opens (after loading the example).
+  let renderVolumes = () => {};
+  let openVolumes = false;
+
   // The rows of the chosen period; the volume and target belong to the same days.
   const periodRows = () => inRange(state.rows, state.from, state.to);
   // "Week 38" when the period has a name, else the days the rows cover.
@@ -106,7 +114,11 @@
     const total = rows.reduce((sum, row) => sum + row.units, 0);
     const costed = rows.filter((row) => row.cost != null);
     const cost = costed.reduce((sum, row) => sum + row.cost, 0);
-    const volume = parseNumber(state.volume);
+    // The volume typed for the period wins; without one, the daily volumes stand in for it when every day with entries has one.
+    const days = dayVolumesOf(rows);
+    const typed = parseNumber(state.volume);
+    const fromDays = !(typed > 0) && days.items.length > 0 && !days.missing.length && !days.undated;
+    const volume = fromDays ? days.total : typed;
     const target = parseNumber(state.target) / 100;
     const hasVolume = volume > 0 && total <= volume;
     const rate = hasVolume ? total / volume : null;
@@ -129,6 +141,8 @@
       total,
       cost: costed.length ? cost : null,
       volume: hasVolume ? volume : null,
+      volumeFromDays: fromDays ? days.items.length : 0,
+      dayVolumes: days,
       volumeTooLow: volume > 0 && total > volume,
       rate,
       dpmo: rate === null ? null : rate * 1e6,
@@ -245,7 +259,16 @@
     return lines.join("\n");
   };
 
+  // With the volume of every day in, the volume of the period fills itself; the empty field says so.
+  const syncPeriodVolume = () => {
+    const days = dayVolumesOf(periodRows());
+    const covers = days.items.length > 0 && !days.missing.length && !days.undated;
+    periodVolumeInput.placeholder = covers ? tx("from the daily volumes: {n}", { n: int.format(days.total) }) : periodVolumePlaceholder;
+  };
+
   const renderResults = () => {
+    syncPeriodVolume();
+    renderVolumes();
     results.replaceChildren();
     results.hidden = !state.rows.length;
     if (!state.rows.length) return;
@@ -284,6 +307,15 @@
       notes.push(el("p", "dl-warning", tx("The log holds more {many} than {volume}. Check the volume to see the rate, DPMO and sigma level.", { many: t.many, volume: lower(t.volumeLabel) })));
     } else if (!result.volume) {
       notes.push(el("p", "dl-warning", tx("Add the {volume} in this period to see the {rate}, DPMO and sigma level.", { volume: lower(t.volumeLabel), rate: lower(t.rateLabel) })));
+      const days = result.dayVolumes;
+      if (days.items.length && (days.missing.length || days.undated)) {
+        const list = days.missing.slice(0, 5).map(showDate).join(", ");
+        notes.push(el("p", "dl-warning", days.missing.length
+          ? tx("The daily volumes do not cover every day with entries yet: {days} missing. Add them, or type the volume of the period.", { days: `${list}${days.missing.length > 5 ? "…" : ""}` })
+          : tx("Entries without a date cannot use the daily volumes. Type the volume of the period.")));
+      }
+    } else if (result.volumeFromDays) {
+      notes.push(el("p", "dl-panel-note", tx("The volume is the sum of the daily volumes of {days}.", { days: plural(result.volumeFromDays, tx("day"), tx("days")) })));
     }
 
     const vital = result.causes.filter((item) => item.vital);
@@ -292,6 +324,29 @@
 
     const flow = panel(t.stageTitle, t.stageNote);
     flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: tx("Most") }));
+
+    // Trend over time, so a bad day or a worsening week shows before the totals do. With the volume of each day it is a
+    // rate (and the target, when there is one, is drawn); without it, the units per day or week.
+    const shares = result.dayVolumes.items.length ? trendShares(result.rows, (row) => row.units, result.dayVolumes.items) : null;
+    const useShares = Boolean(shares) && shares.buckets.filter((bucket) => bucket.total > 0).length > 1;
+    const trend = useShares ? shares : trendBuckets(result.rows, (row) => row.units);
+    const goal = parseNumber(state.target) / 100;
+    const trendUnit = trend.unit === "week" ? tx("week") : tx("day");
+    let trendPanel = null;
+    if (trend.buckets.length > 1) {
+      const by = trend.unit === "week" ? tx("week by week") : tx("day by day");
+      const note = !useShares ? tx("{many} per {unit}. The dashed line is the average; the highest {unit} is red.", { many: t.many, unit: trendUnit })
+        : goal > 0 ? tx("{rate} ({many} / {volume}), {by}. The dashed line is the average, the solid line the target; columns above it are red.", { rate: t.rateLabel, many: t.many, volume: t.volumeLabel, by })
+        : tx("{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.", { rate: t.rateLabel, many: t.many, volume: t.volumeLabel, by });
+      trendPanel = panel(tx("Trend over time"), note);
+      trendPanel.append(trendFigure(trend, useShares
+        ? { title: `${t.tool}: ${t.rateLabel}`, unit: t.rateLabel, average: tx("Average"), format: shareText, target: goal > 0 ? goal : null, targetLabel: tx("Target") }
+        : { title: `${t.tool}: ${tx("Trend over time")}`, unit: capital(t.many), average: tx("Average") }, KEY.replace(/^sc-/, "")));
+      if (useShares && shares.skipped.length) {
+        const list = shares.skipped.slice(0, 5).map(showDate).join(", ");
+        trendPanel.append(el("p", "dl-panel-note", tx(shares.skipped.length === 1 ? "{n} day with entries has no volume and is not in this chart: {days}." : "{n} days with entries have no volume and are not in this chart: {days}.", { n: shares.skipped.length, days: shares.skipped.length > 5 ? `${list}…` : list })));
+      }
+    }
 
     const types = panel(t.matrixTitle, tx("Each cell counts {many}. The darkest cell is the most specific place to look.", { many: t.many }));
     types.append(matrix(result));
@@ -316,9 +371,18 @@
       stats,
       notes,
       focus,
-      actions: resultActions(() => summaryText(result), problemText(result), paretoTable),
-      panels: [pareto, flow, types, shifts],
+      actions: resultActions(() => summaryText(result), problemText(result), paretoTable, controlChart(result)),
+      panels: [trendPanel, pareto, flow, types, shifts].filter(Boolean),
     });
+  };
+
+  // The days with a volume as a p-chart for the Sigma & Control Chart: units out of the volume of each day.
+  // A day with entries and no volume cannot be a point, so it is counted in "skipped"; the chart needs two days.
+  const controlChart = (result) => {
+    const perDay = new Map();
+    result.rows.forEach((row) => row.date && perDay.set(row.date, (perDay.get(row.date) || 0) + row.units));
+    const rows = result.dayVolumes.items.map((item) => ({ date: item.date, n: item.volume, d: perDay.get(item.date) || 0 })).filter((row) => row.d <= row.n);
+    return rows.length < 2 ? null : { source: t.tool, metric: capital(t.many), unit: t.volumeLabel, rows, skipped: result.dayVolumes.missing.length };
   };
 
   // The log for the Pareto tool: causes counted in units, valued in euros where known.
@@ -361,6 +425,9 @@
       state.volume = String(example.volume);
       state.target = String(example.target);
       state.rows = importRows(example.rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+      state.volumes = importVolumes((example.volumes || []).map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+      state.volumes = cleanVolumes(state.volumes);
+      openVolumes = true;
     },
     clearText: tx("Clear the whole {tool} log?", { tool: t.tool }),
     csv: () => ({
@@ -371,6 +438,90 @@
       ],
     }),
     renderResults,
+  });
+
+  // The volume of each day (optional): it makes the trend a rate and can stand in for the volume of the period.
+  const volumesBox = root.querySelector("[data-volumes]");
+  const volumeForm = volumesBox.querySelector("[data-volume-form]");
+  const volumeList = volumesBox.querySelector("[data-volume-list]");
+  const volumeWrap = volumesBox.querySelector("[data-volume-wrap]");
+  const volumeCount = volumesBox.querySelector("[data-volume-count]");
+  const volumeStatus = volumesBox.querySelector("[data-volume-status]");
+  const volumePaste = volumesBox.querySelector("[data-volume-paste]");
+  const volumeImportStatus = volumesBox.querySelector("[data-volume-import-status]");
+  const VOLUME_ROWS = 14;
+  renderVolumes = () => {
+    if (openVolumes) {
+      volumesBox.open = true;
+      openVolumes = false;
+    }
+    volumeList.replaceChildren();
+    [...state.volumes].reverse().slice(0, VOLUME_ROWS).forEach((item) => {
+      const tr = el("tr");
+      tr.append(el("td", "nowrap", showDate(item.date)), el("td", "num", int.format(item.volume)));
+      const cell = el("td");
+      const remove = el("button", "dl-remove", "×");
+      remove.type = "button";
+      remove.dataset.removeVolume = item.date;
+      remove.setAttribute("aria-label", tx("Remove {name}", { name: showDate(item.date) }));
+      cell.append(remove);
+      tr.append(cell);
+      volumeList.append(tr);
+    });
+    volumeWrap.hidden = !state.volumes.length;
+    const hidden = state.volumes.length - VOLUME_ROWS;
+    volumeCount.textContent = state.volumes.length
+      ? `${plural(state.volumes.length, tx("day"), tx("days"))} · ${int.format(state.volumes.reduce((sum, item) => sum + item.volume, 0))} ${lower(t.volumeNoun)}${hidden > 0 ? tx(" · newest {n} shown", { n: VOLUME_ROWS }) : ""}`
+      : "";
+  };
+  const volumesChanged = () => {
+    save();
+    book.render();
+    renderVolumes();
+  };
+  openVolumes = state.volumes.length > 0;
+  volumeForm.elements.vdate.value = today();
+  volumeForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = volumeForm.elements;
+    const volume = Math.round(parseNumber(form.vvolume.value));
+    const date = parseDate(form.vdate.value);
+    if (!date || !(volume > 0)) {
+      flash(volumeStatus, tx("Enter a date and a volume above zero."));
+      (date ? form.vvolume : form.vdate).focus();
+      return;
+    }
+    const replaced = state.volumes.some((item) => item.date === date);
+    state.volumes = cleanVolumes([...state.volumes, { date, volume }]);
+    volumesChanged();
+    // The next entry is usually the next day.
+    form.vdate.value = addDays(date, 1);
+    form.vvolume.value = "";
+    flash(volumeStatus, tx(replaced ? "Replaced {date}: {n}." : "Added {date}: {n}.", { date: showDate(date), n: int.format(volume) }));
+    form.vvolume.focus();
+  });
+  volumesBox.querySelector("[data-volume-import]").addEventListener("click", () => {
+    const { added, skipped } = importVolumes(volumePaste.value);
+    if (!added.length) {
+      flash(volumeImportStatus, tx("No rows found. Check the order: date, volume."));
+      return;
+    }
+    state.volumes = cleanVolumes([...state.volumes, ...added]);
+    volumesChanged();
+    volumePaste.value = "";
+    flash(volumeImportStatus, `${tx("Imported {rows}", { rows: plural(added.length, tx("day"), tx("days")) })}${skipped ? tx(", skipped {n} without a date or volume", { n: skipped }) : ""}.`);
+  });
+  volumeList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-remove-volume]");
+    if (!button) return;
+    state.volumes = state.volumes.filter((item) => item.date !== button.dataset.removeVolume);
+    volumesChanged();
+    (volumeList.querySelector("[data-remove-volume]") || volumeForm.elements.vvolume).focus();
+  });
+  volumesBox.querySelector("[data-volume-clear]").addEventListener("click", () => {
+    if (!state.volumes.length || !window.confirm(tx("Clear all daily volumes?"))) return;
+    state.volumes = [];
+    volumesChanged();
   });
 
   // Log an entry.

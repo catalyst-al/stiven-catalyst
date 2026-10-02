@@ -1880,6 +1880,32 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
 }
 .dl-panel .result-label { margin: 0; }
 .dl-panel-note { margin: 0; color: var(--muted); font-size: 14px; }
+/* Trend chart: columns per day or week; the colours follow the theme. */
+.dl-panel {
+  --tr-bar: #4ab5f7; --tr-top: #ff4d55; --tr-line: #f6f7f4; --tr-target: #d1a553;
+  --tr-grid: rgba(255, 255, 255, .12); --tr-text: #f6f7f4; --tr-muted: #a5b0b8;
+}
+[data-theme="light"] .dl-panel {
+  --tr-bar: #1c7cc2; --tr-top: #c90912; --tr-line: #1b2330; --tr-target: #b88a3b;
+  --tr-grid: #dfe3e8; --tr-text: #1b2330; --tr-muted: #5f6870;
+}
+/* Shift Pulse: three number cards, a short list of what needs attention, and the open issues. */
+.sp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.sp-card { display: grid; align-content: start; gap: 8px; min-width: 0; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.sp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sp-card-head .result-label { margin: 0; }
+.sp-card-value { font-size: clamp(30px, 4vw, 40px); line-height: 1; font-variant-numeric: tabular-nums; }
+.sp-card .dl-panel-note { margin: 0; }
+.sp-spark { display: block; width: 100%; max-width: 160px; height: 36px; fill: var(--blue); opacity: .85; }
+.sp-spark .is-latest { fill: var(--red); }
+.sp-flag { background: var(--red); color: #fff; }
+.sp-attention, .sp-issues { display: grid; gap: 8px; margin: 0; padding-left: 20px; }
+.sp-issues { list-style: none; padding-left: 0; }
+.sp-issues small { display: block; margin-top: 2px; color: var(--muted); }
+@media print { .sp-spark { opacity: 1; } }
+.tr-figure { display: grid; gap: 12px; margin: 0; min-width: 0; }
+.tr-scroll { overflow-x: auto; }
+.tr-chart { display: block; width: 100%; min-width: 420px; height: auto; }
 .dl-bars { display: grid; gap: 12px; }
 .dl-bar .bar-label { gap: 12px; margin-bottom: 6px; }
 .dl-bar-name { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; min-width: 0; }

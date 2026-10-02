@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Shift Pulse
+description: "Dëmtimet, porositë jo të plota, linjat e vonuara dhe çështjet e hapura të dorëzimit të turnit tuaj në një pamje, me grafikë trendi sipas ditës ose javës që mund t'i ruani. Falas dhe privat."
+activeNav: /sq/tools.html
+permalink: /sq/tools/shift-pulse/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Pasqyrë</p>
+  <h1>Shift Pulse</h1>
+  <p class="lede">Katër regjistra, një shikim. Shihni ku po shmanget turni, me një grafik për çdo numër, dhe çfarë mbetet e hapur para se të shkruani dorëzimin.</p>
+</section>
+
+{% set cfg = sq.shiftHandover %}
+{% set damage = sq.damageControl %}
+{% set incomplete = sq.incompleteControl %}
+{% include "partials/shift-pulse.njk" %}

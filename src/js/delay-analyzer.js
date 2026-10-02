@@ -31,10 +31,10 @@
 
   const {
     tx, showDate, lower,
-    read, write, isObject, str, loadState, el, int, pct, plural, today,
+    read, write, isObject, str, loadState, el, int, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
-    panel, stat, barList, focusCard, resultActions, flash, floorCheck,
+    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -320,6 +320,22 @@
     title: (item) => `${item.key}: ${tx("{n} of {routes} late", { n: item.late, routes: routes(item.routes) })}${item.late ? tx(", {min} late in total", { min: minutes(item.minutes) }) : ""}`,
   });
 
+  // The days as a p-chart for the Sigma & Control Chart: late routes out of the routes of each day. With only some
+  // routes of the period logged there is no honest count of routes per day, so there is no chart.
+  const controlChart = (result) => {
+    if (result.partial) return null;
+    const perDay = new Map();
+    result.rows.forEach((row) => {
+      if (!row.date) return;
+      const day = perDay.get(row.date) || { date: row.date, n: 0, d: 0 };
+      day.n += 1;
+      if (row.late) day.d += 1;
+      perDay.set(row.date, day);
+    });
+    const rows = [...perDay.values()].sort((a, b) => a.date.localeCompare(b.date));
+    return rows.length < 2 ? null : { source: data.tool, metric: tx("Late routes"), unit: capital(tx("routes")), rows, skipped: result.rows.filter((row) => !row.date).length };
+  };
+
   const renderResults = () => {
     results.replaceChildren();
     results.hidden = !state.rows.length;
@@ -352,6 +368,26 @@
 
     const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used."))] : [];
     const grid = [];
+    // Trend: the share of routes that were late each day (week), or the count of late routes when only some routes are logged.
+    // The on-time target, when there is one, becomes a ceiling for the late share.
+    const trend = result.partial ? trendBuckets(result.rows, (row) => (row.late ? 1 : 0)) : trendBuckets(result.rows, (row) => (row.late ? 1 : 0), 60, () => 1);
+    if (trend.buckets.length > 1) {
+      const unit = trend.unit === "week" ? tx("week") : tx("day");
+      const lateTarget = !result.partial && result.target && result.target < 1 ? 1 - result.target : null;
+      const trendPanel = panel(tx("Trend over time"), result.partial
+        ? tx("Late routes per {unit}. The dashed line is the average; the highest {unit} is red.", { unit })
+        : lateTarget ? tx("Share of routes that were late per {unit}. The dashed line is the average, the solid line the target; columns above it are red.", { unit })
+        : tx("Share of routes that were late per {unit}. The dashed line is the average; the highest {unit} is red.", { unit }));
+      trendPanel.append(trendFigure(trend, {
+        title: `${data.tool}: ${tx("Trend over time")}`,
+        unit: result.partial ? tx("Late routes") : tx("Late routes (%)"),
+        average: tx("Average"),
+        format: result.partial ? undefined : (value) => pct(value, 0),
+        target: lateTarget,
+        targetLabel: tx("Target"),
+      }, KEY.replace(/^sc-/, "")));
+      grid.push(trendPanel);
+    }
     if (result.late.length) {
       const sides = panel(tx("Dock or road"), result.dockShare === null
         ? tx("Add departure times to split late minutes between the dock and the road.")
@@ -425,7 +461,7 @@
         map: { category: 3, count: -1, value: 4, date: 0, filter: 1 },
         measure: "value",
         valueLabel: tx("minutes"),
-      }));
+      }), controlChart(result));
       resultLayout(results, { head, stats, notes, focus, actions, panels: grid });
     } else {
       const card = el("article", "result-card dl-focus");

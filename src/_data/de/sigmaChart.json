@@ -97,6 +97,7 @@
     "stable": "Keine Signale. Das Auf und Ab ist das normale Rauschen dieses Prozesses. Auf einzelne Tage zu reagieren hilft nicht und kann es schlimmer machen: Für eine bessere Zahl müssen Sie den Prozess selbst ändern.",
     "badSpecial": "Die Karte zeigt Tage, die kein normales Rauschen sind. Untersuchen Sie diese Tage zuerst: Was war anders bei Menge, Personal, Geräten oder Methode?",
     "goodSpecial": "Die Karte zeigt eine dauerhafte Verbesserung. Finden Sie heraus, was den Unterschied gemacht hat, machen Sie es zum Standard und berechnen Sie die Grenzen vom neuen Niveau aus neu.",
-    "short": "Weniger als 12 Tage in der Karte. Die Grenzen sind grob; tragen Sie weitere Tage ein, bevor Sie einem Signal trauen."
+    "short": "Weniger als 12 Tage in der Karte. Die Grenzen sind grob; tragen Sie weitere Tage ein, bevor Sie einem Signal trauen.",
+    "shortWeek": "Weniger als 12 Wochen in der Karte. Die Grenzen sind grob; tragen Sie weitere Wochen ein, bevor Sie einem Signal trauen."
   }
 }

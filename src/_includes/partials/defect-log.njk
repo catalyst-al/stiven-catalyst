@@ -74,6 +74,41 @@
       </div>
     </fieldset>
 
+    <details class="dl-box dl-volumes" data-volumes>
+      <summary class="kicker">{{ t.volumeLabel }} {{ "per day" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></summary>
+      <p class="form-note">{{ "Enter the volume of each day to see the rate per day in the trend chart. When every day with entries has a volume, the volume of the period fills itself." | t(lang) }}</p>
+      <form class="dl-grid" data-volume-form novalidate>
+        <div class="field">
+          <label for="dl-vdate">{{ "Date" | t(lang) }}</label>
+          <input id="dl-vdate" name="vdate" type="date">
+        </div>
+        <div class="field">
+          <label for="dl-vvolume">{{ t.volumeLabel }}</label>
+          <input id="dl-vvolume" name="vvolume" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ t.volumePlaceholder }}">
+        </div>
+        <div class="tool-actions dl-wide">
+          <button class="button-secondary" type="submit">{{ "Add day" | t(lang) }}</button>
+          <p class="form-note" data-volume-status aria-live="polite"></p>
+        </div>
+      </form>
+      <div class="field">
+        <label for="dl-vpaste">{{ "Or paste from Excel: one row per day, date then volume" | t(lang) }}</label>
+        <textarea id="dl-vpaste" rows="3" data-volume-paste placeholder="2026-09-14	2900"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-volume-import>{{ "Import rows" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-volume-clear>{{ "Clear volumes" | t(lang) }}</button>
+        <p class="form-note" data-volume-import-status aria-live="polite"></p>
+      </div>
+      <p class="form-note" data-volume-count></p>
+      <div class="dl-table-wrap" tabindex="0" data-volume-wrap hidden>
+        <table class="dl-table">
+          <thead><tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col" class="num">{{ t.volumeLabel }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr></thead>
+          <tbody data-volume-list></tbody>
+        </table>
+      </div>
+    </details>
+
     <div class="dl-box">
       <div class="dl-log-head">
         <p class="kicker">3 · {{ "Log" | t(lang) }}</p>

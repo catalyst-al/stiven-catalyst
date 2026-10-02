@@ -96,6 +96,7 @@
     "stable": "Asnjë sinjal. Ngritjet dhe uljet janë zhurma normale e këtij procesi. Reagimi ndaj ditëve të veçanta nuk ndihmon dhe mund ta përkeqësojë: për një numër më të mirë, ndryshoni vetë procesin.",
     "badSpecial": "Karta tregon ditë që nuk janë zhurmë normale. Hetoni së pari ato ditë: çfarë ishte ndryshe në volum, njerëz, pajisje ose metodë?",
     "goodSpecial": "Karta tregon një përmirësim të qëndrueshëm. Gjeni çfarë bëri diferencën dhe bëjeni standard, pastaj rillogaritni kufijtë nga niveli i ri.",
-    "short": "Më pak se 12 ditë në kartë. Kufijtë janë të përafërt; vazhdoni të shtoni ditë para se t’i besoni një sinjali."
+    "short": "Më pak se 12 ditë në kartë. Kufijtë janë të përafërt; vazhdoni të shtoni ditë para se t’i besoni një sinjali.",
+    "shortWeek": "Më pak se 12 javë në kartë. Kufijtë janë të përafërt; vazhdoni të shtoni javë para se t’i besoni një sinjali."
   }
 }

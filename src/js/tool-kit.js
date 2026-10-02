@@ -298,6 +298,213 @@ window.ToolKit = (() => {
     return list;
   };
 
+  // Shares of a volume are small (0.45% of the units is a bad day), so the digits follow the size: 12%, 0.45%.
+  const shareText = (value) => pct(value, value === 0 || value >= 0.1 ? 0 : 2);
+  // The volume of single days (units handled, orders shipped), kept by the defect logs and read by Shift Pulse. One
+  // volume per date (a new value for a date replaces the old one), oldest first.
+  const cleanVolumes = (list) => {
+    const byDate = new Map();
+    list.filter(isObject).forEach((item) => {
+      const date = parseDate(item.date);
+      const volume = Math.round(Number(item.volume));
+      if (date && volume > 0 && Number.isSafeInteger(volume)) byDate.set(date, volume);
+    });
+    return [...byDate].sort(([a], [b]) => a.localeCompare(b)).map(([date, volume]) => ({ date, volume }));
+  };
+  // Rows pasted from a spreadsheet: date, then the volume of that day.
+  const importVolumes = (text) => {
+    const added = [];
+    let skipped = 0;
+    parseRows(text).forEach((cells, index) => {
+      const [date, volume] = cells;
+      const day = parseDate(date);
+      const value = Math.round(parseNumber(volume));
+      if (!day || !(value > 0) || !Number.isSafeInteger(value)) {
+        // A first row with words where the date and the number belong is a header.
+        if (index > 0) skipped++;
+        return;
+      }
+      added.push({ date: day, volume: value });
+    });
+    return { added, skipped };
+  };
+  // The days of a period that have a volume of their own. rows are the rows of the period and from/to its own
+  // limits ("" when open): an open side runs to the first or last day with entries, so volumes entered for other
+  // months do not dilute the rate, while a limit that is given counts its quiet days too. "missing" lists the days
+  // with entries that have no volume.
+  const dayVolumes = (volumes, rows, from, to) => {
+    const span = dateSpan(rows);
+    const low = from || span?.from;
+    const high = to || span?.to;
+    if (!low || !high) return { items: [], missing: [], undated: false, total: 0 };
+    const items = volumes.filter((item) => item.date >= low && item.date <= high);
+    const have = new Set(items.map((item) => item.date));
+    return {
+      items,
+      missing: [...new Set(rows.filter((row) => row.date).map((row) => row.date))].filter((date) => !have.has(date)).sort(),
+      undated: rows.some((row) => !row.date),
+      total: items.reduce((sum, item) => sum + item.volume, 0),
+    };
+  };
+
+  // Trend over time. trendBuckets groups dated rows by day (a period of up to 31 days) or by week
+  // (Monday to Sunday), fills quiet days with 0 and sums valueOf(row). It is plain arithmetic, so a test can call it.
+  const mondayOf = (isoDate) => {
+    const date = new Date(`${isoDate}T00:00:00Z`);
+    return addDays(isoDate, -((date.getUTCDay() + 6) % 7));
+  };
+  // With totalOf, each bucket holds a share (sum of valueOf over sum of totalOf, 0 to 1) and its count and total;
+  // a day with no total has no share and draws no column. options: { unit: "day" or "week" instead of by the length of
+  // the span, from and to: dates the buckets must cover even where there are no rows }.
+  const trendBuckets = (rows, valueOf, maxBuckets = 60, totalOf = null, options = {}) => {
+    const dated = rows.filter((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.date));
+    const undated = rows.length - dated.length;
+    const reach = [options.from, options.to].filter(Boolean);
+    if (!dated.length && !reach.length) return { unit: options.unit || "day", buckets: [], undated };
+    const dates = [...dated.map((row) => row.date), ...reach].sort();
+    const days = Math.round((new Date(`${dates.at(-1)}T00:00:00Z`) - new Date(`${dates[0]}T00:00:00Z`)) / 864e5) + 1;
+    const unit = options.unit || (days <= 31 ? "day" : "week");
+    const keyOf = unit === "day" ? (d) => d : mondayOf;
+    const sums = new Map();
+    const totals = new Map();
+    dated.forEach((row) => {
+      sums.set(keyOf(row.date), (sums.get(keyOf(row.date)) || 0) + valueOf(row));
+      if (totalOf) totals.set(keyOf(row.date), (totals.get(keyOf(row.date)) || 0) + totalOf(row));
+    });
+    const step = unit === "day" ? 1 : 7;
+    const buckets = [];
+    for (let key = keyOf(dates[0]); key <= keyOf(dates.at(-1)); key = addDays(key, step)) {
+      const count = sums.get(key) || 0;
+      const total = totals.get(key) || 0;
+      buckets.push(totalOf ? { key, to: addDays(key, step - 1), count, total, value: total ? count / total : 0 } : { key, to: addDays(key, step - 1), value: count });
+    }
+    return { unit, buckets: buckets.slice(-maxBuckets), undated };
+  };
+  // Shares over a volume of each day: countOf(row) over volumes[{ date, volume }], per day or per week. A day with
+  // entries but no volume cannot have a share, so it is left out and listed in `skipped`; a day with a volume and no
+  // entries counts as 0. Pass only the volumes of the days that belong to the period.
+  const trendShares = (rows, countOf, volumes, maxBuckets = 60, options = {}) => {
+    const volumeOf = new Map(volumes.map((item) => [item.date, item.volume]));
+    const parts = [
+      ...rows.filter((row) => volumeOf.has(row.date)).map((row) => ({ date: row.date, count: countOf(row), total: 0 })),
+      ...volumes.map((item) => ({ date: item.date, count: 0, total: item.volume })),
+    ];
+    const trend = trendBuckets(parts, (part) => part.count, maxBuckets, (part) => part.total, options);
+    return { ...trend, undated: rows.filter((row) => !row.date).length, skipped: [...new Set(rows.filter((row) => row.date && !volumeOf.has(row.date)).map((row) => row.date))].sort() };
+  };
+
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const svgEl = (tag, attrs = {}, text) => {
+    const node = document.createElementNS(SVG_NS, tag);
+    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+  const TREND_COLORS = { bar: "var(--tr-bar)", top: "var(--tr-top)", line: "var(--tr-line)", grid: "var(--tr-grid)", text: "var(--tr-text)", muted: "var(--tr-muted)", target: "var(--tr-target)" };
+  const TREND_EXPORT = { bar: "#1c7cc2", top: "#c90912", line: "#1b2330", grid: "#e3e6ea", text: "#1b2330", muted: "#5f6870", target: "#b88a3b" };
+  // The next 1, 2, 5 or 10 times a power of ten above the value (0.12 gives 0.2, 7 gives 10).
+  const niceMax = (value) => {
+    if (!(value > 0)) return 1;
+    const magnitude = 10 ** Math.floor(Math.log10(value));
+    return [1, 2, 5, 10].map((m) => m * magnitude).find((m) => m >= value - 1e-12) || value;
+  };
+  // Columns per bucket, a dashed average line and the highest bucket in the alert colour. With labels.target (a share,
+  // for buckets that hold shares) a solid target line is drawn and every column above it is in the alert colour instead.
+  // labels: { title, unit (what the columns count), average, format (optional), target, targetLabel }. Returns an <svg>.
+  const trendChart = (trend, colors, labels) => {
+    const { buckets, unit } = trend;
+    const W = 640, H = 280, left = 44, right = 14, top = 28, bottom = 44;
+    const plotW = W - left - right, plotH = H - top - bottom;
+    const shares = buckets.some((b) => "total" in b);
+    const format = labels.format || ((value) => int.format(Math.round(value * 10) / 10));
+    const max = Math.max(...buckets.map((b) => b.value), 0);
+    const target = shares && Number.isFinite(labels.target) && labels.target > 0 ? labels.target : null;
+    const peak = Math.max(max, target ?? 0);
+    const ceiling = shares ? Math.min(1, niceMax(peak * 100) / 100) : niceMax(peak);
+    const y = (value) => top + plotH - (Math.min(value, ceiling) / ceiling) * plotH;
+    const band = plotW / buckets.length;
+    const barW = Math.max(2, Math.min(40, band * 0.7));
+    const dayName = dayMonth(false);
+    const nameOf = (b) => dayName(new Date(`${b.key}T00:00:00Z`));
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": labels.title, class: "tr-chart", "font-family": "Inter, Segoe UI, Roboto, Arial, sans-serif" });
+    svg.append(svgEl("title", {}, labels.title));
+    [0, 0.5, 1].forEach((f) => {
+      const value = ceiling * f;
+      svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(value), y2: y(value), style: `stroke:${colors.grid}`, "stroke-width": 1 }));
+      svg.append(svgEl("text", { x: left - 8, y: y(value) + 4, "text-anchor": "end", "font-size": 12, style: `fill:${colors.muted}` }, format(value)));
+    });
+    const top1 = buckets.findIndex((b) => b.value === max);
+    buckets.forEach((b, i) => {
+      const cx = left + band * (i + 0.5);
+      const hot = target ? b.total > 0 && b.value > target : max > 0 && i === top1;
+      const g = svgEl("g", { tabindex: 0, role: "img", "aria-label": `${nameOf(b)}${unit === "week" ? " –" : ""}: ${format(b.value)}` });
+      g.append(svgEl("title", {}, `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`));
+      g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
+      if (b.value > 0) g.append(svgEl("rect", { x: cx - barW / 2, y: y(b.value), width: barW, height: Math.max(1, y(0) - y(b.value)), rx: 2, style: `fill:${hot ? colors.top : colors.bar}` }));
+      if (buckets.length <= 16 && b.value > 0) g.append(svgEl("text", { x: cx, y: y(b.value) - 5, "text-anchor": "middle", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, format(b.value)));
+      svg.append(g);
+      if (i % Math.ceil(buckets.length / 10) === 0) svg.append(svgEl("text", { x: cx, y: top + plotH + 18, "text-anchor": "middle", "font-size": 12, style: `fill:${colors.text}` }, nameOf(b)));
+    });
+    const average = shares
+      ? buckets.reduce((sum, b) => sum + b.count, 0) / (buckets.reduce((sum, b) => sum + b.total, 0) || 1)
+      : buckets.reduce((sum, b) => sum + b.value, 0) / buckets.length;
+    svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(average), y2: y(average), style: `stroke:${colors.line}`, "stroke-width": 1.5, "stroke-dasharray": "6 4", "pointer-events": "none" }));
+    const averageText = `${labels.average} ${shares ? format(average) : num(average, 1)}`;
+    svg.append(svgEl("text", { x: W - right, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, averageText));
+    if (target) {
+      svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(target), y2: y(target), style: `stroke:${colors.target}`, "stroke-width": 2, "pointer-events": "none" }));
+      svg.append(svgEl("text", { x: W - right - averageText.length * 7 - 18, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.target}` }, `${labels.targetLabel} ${format(target)}`));
+    }
+    svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, style: `fill:${colors.muted}` }, labels.unit));
+    return svg;
+  };
+  const exportTrendSvg = (trend, labels) => {
+    const svg = trendChart(trend, TREND_EXPORT, labels);
+    svg.setAttribute("xmlns", SVG_NS);
+    const [, , w, h] = svg.getAttribute("viewBox").split(" ").map(Number);
+    svg.setAttribute("width", w);
+    svg.setAttribute("height", h);
+    svg.insertBefore(svgEl("rect", { x: 0, y: 0, width: w, height: h, fill: "#ffffff" }), svg.firstChild.nextSibling);
+    return new XMLSerializer().serializeToString(svg);
+  };
+  const saveBlob = (name, blob) => {
+    const link = el("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = name;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  };
+  // A figure with the chart and its "Chart as SVG / PNG" buttons.
+  const trendFigure = (trend, labels, fileName) => {
+    const figure = el("figure", "tr-figure");
+    const scroller = el("div", "tr-scroll");
+    scroller.append(trendChart(trend, TREND_COLORS, labels));
+    const actions = el("div", "tool-actions");
+    const svgButton = el("button", "button-secondary", tx("Chart as SVG"));
+    svgButton.type = "button";
+    svgButton.addEventListener("click", () => saveBlob(`${fileName}-${today()}.svg`, new Blob([exportTrendSvg(trend, labels)], { type: "image/svg+xml" })));
+    const pngButton = el("button", "button-secondary", tx("Chart as PNG"));
+    pngButton.type = "button";
+    pngButton.addEventListener("click", () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width * 2;
+        canvas.height = img.height * 2;
+        const ctx = canvas.getContext("2d");
+        ctx.scale(2, 2);
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => blob && saveBlob(`${fileName}-${today()}.png`, blob));
+      };
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(exportTrendSvg(trend, labels))}`;
+    });
+    actions.append(svgButton, pngButton);
+    figure.append(scroller, actions);
+    return figure;
+  };
+
   // "Start here" card: stage or reason advice from a tool's data file.
   const focusCard = ({ title, detail, lede, advice, extraLabel, extra, warning }) => {
     const focus = el("article", "result-card dl-focus");
@@ -345,7 +552,9 @@ window.ToolKit = (() => {
   // Copy, print and 5 Whys buttons under a result.
   // pareto, when given, returns a table ({ source, template, headers, rows, map, measure })
   // that the Pareto tool opens; it travels in sessionStorage, so it stays in this tab.
-  const resultActions = (summary, problem, pareto) => {
+  // chart, when given, is a day-by-day series ({ source, metric, unit, rows: [{ date, n, d }], skipped }) that
+  // the Sigma & Control Chart opens as a p-chart: d defects out of n handled on each date.
+  const resultActions = (summary, problem, pareto, chart = null) => {
     const actions = el("div", "tool-actions result-actions");
     const copyButton = el("button", "button-primary", tx("Copy summary"));
     copyButton.type = "button";
@@ -365,6 +574,14 @@ window.ToolKit = (() => {
       link.href = new URL("../pareto/", window.location.href).href;
       link.addEventListener("click", () => {
         try { sessionStorage.setItem("sc-pareto-handoff", JSON.stringify(pareto())); } catch { /* the page opens empty */ }
+      });
+      actions.append(link);
+    }
+    if (chart) {
+      const link = el("a", "button-secondary", tx("Open as control chart"));
+      link.href = new URL("../sigma-control-chart/", window.location.href).href;
+      link.addEventListener("click", () => {
+        try { sessionStorage.setItem("sc-sigma-handoff", JSON.stringify(chart)); } catch { /* the chart opens as it was */ }
       });
       actions.append(link);
     }
@@ -670,7 +887,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs,
-    panel, stat, barList, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();
