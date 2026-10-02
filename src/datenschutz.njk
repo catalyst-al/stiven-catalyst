@@ -1,20 +1,27 @@
 ---js
 {
   layout: "layouts/base.njk",
-  title: "Datenschutzerklärung",
-  lang: "de",
   noindex: true,
   eleventyExcludeFromCollections: true,
-  permalink: (data) => (data.legal.name && data.legal.city ? "/datenschutz.html" : false),
+  // One page per language: /datenschutz.html (English), /de/datenschutz.html, /sq/datenschutz.html.
+  pagination: { data: "legalLangs", size: 1, alias: "lang" },
+  legalLangs: ["en", "de", "sq"],
+  eleventyComputed: {
+    title: (data) => ({ en: "Privacy policy", de: "Datenschutzerklärung", sq: "Politika e privatësisë" })[data.lang],
+  },
+  permalink: (data) => (data.legal.name && data.legal.city ? (data.lang === "en" ? "/datenschutz.html" : `/${data.lang}/datenschutz.html`) : false),
 }
 ---
+{%- set email = legal.email or site.email -%}
+{%- set rightsNumber = "6" if site.newsletter.action else "5" -%}
+{%- if lang == "de" %}
 <section class="shell page-hero legal-hero">
   <p class="eyebrow">Rechtliches</p>
   <h1>Datenschutz</h1>
 </section>
 <section class="shell legal">
   <h2>1. Verantwortlicher</h2>
-  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country }}<br>E-Mail: <a href="mailto:{{ legal.email or site.email }}">{{ legal.email or site.email }}</a></p>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country }}<br>E-Mail: <a href="mailto:{{ email }}">{{ email }}</a></p>
 
   <h2>2. Hosting</h2>
   <p>Diese Website wird über GitHub Pages bereitgestellt (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Beim Aufruf der Seiten verarbeitet GitHub technisch notwendige Daten, insbesondere die IP-Adresse, Datum und Uhrzeit des Zugriffs sowie Angaben zu Browser und Betriebssystem, um die Website auszuliefern und ihre Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt in einer sicheren und stabilen Bereitstellung der Website. Eine Übermittlung in die USA erfolgt auf Grundlage des EU-US Data Privacy Framework, dem GitHub angeschlossen ist. Weitere Informationen: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement">GitHub-Datenschutzerklärung</a>.</p>
@@ -38,6 +45,75 @@
   <p>Für den Versand nutze ich {{ legal.newsletterProvider or "einen externen Newsletter-Dienst" }}. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.</p>
 {%- endif %}
 
-  <h2>{{ "6" if site.newsletter.action else "5" }}. Ihre Rechte</h2>
+  <h2>{{ rightsNumber }}. Ihre Rechte</h2>
   <p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, insbesondere in dem Mitgliedstaat Ihres gewöhnlichen Aufenthalts oder Arbeitsplatzes (Art. 77 DSGVO).</p>
 </section>
+{%- elif lang == "sq" %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">Ligjore</p>
+  <h1>Privatësia</h1>
+</section>
+<section class="shell legal">
+  <h2>1. Përgjegjësi për të dhënat</h2>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country | replace("Albanien", "Shqipëri") }}<br>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
+
+  <h2>2. Hostimi</h2>
+  <p>Kjo faqe ofrohet përmes GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, SHBA). Kur hapni faqet, GitHub përpunon të dhëna teknikisht të nevojshme, sidomos adresën IP, datën dhe orën e hyrjes dhe të dhëna për shfletuesin dhe sistemin operativ, për ta shpërndarë faqen dhe për të siguruar sigurinë e saj. Baza ligjore është neni 6(1)(f) i GDPR-së; interesi legjitim është ofrimi i sigurt dhe i qëndrueshëm i faqes. Transferimi në SHBA bëhet mbi bazën e EU-US Data Privacy Framework, ku GitHub bën pjesë. Më shumë informacion: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Deklarata e privatësisë e GitHub</a>.</p>
+
+  <h2>3. Pa cookies, pa gjurmim</h2>
+  <p>Kjo faqe nuk vendos cookies dhe nuk përdor shërbime analize apo gjurmimi. Fontet ngarkohen nga ky server; nuk krijohet asnjë lidhje me Google Fonts ose ofrues të tjerë të palëve të treta. I vetmi përjashtim është CV Builder, kur aty shkruani faqen e internetit të një kompanie (shih më poshtë).</p>
+  <p>Disa funksione i ruajnë të dhënat që shkruani vetëm në shfletuesin tuaj (Local Storage), që të mbeten pas rifreskimit të faqes: zgjedhja mes temës së çelur dhe të errët, fleta e punës 5 Whys, logjet në Damage Control, Incomplete Control dhe Delay Analyzer, dorëzimi i turnit me historikun e tij, ditët e grafikut të kontrollit, përgjigjet, listat e kontrollit dhe karta e projektit në kursin "Six Sigma në magazinë", të dhënat në veglën Pareto (80/20), tabelat, objektivat dhe veprimet në Last-Mile CX Control Tower, CV-ja në CV Builder bashkë me fotot dhe logot që ngarkoni aty, ATS CV-ja dhe letra e motivimit bashkë me foton dhe nënshkrimin. Edhe hapësira e punës së coaching-ut i ruan kontekstin e zgjedhur të punës, projektet, ushtrimet, reflektimet, veprimet dhe provat vetëm në shfletuesin tuaj. Kopjet rezervë të coaching-ut i eksportoni vetë; nuk ka sinkronizim automatik me llogari ose ekip. Me "Ruaj gjithë punën time" i ruani vetë të dhënat e të gjitha veglave si skedar në pajisjen tuaj; kur hapni një skedar të tillë, ai lexohet vetëm në shfletuesin tuaj dhe nuk ngarkohet askund. Këto të dhëna nuk më dërgohen mua as palëve të treta dhe e lënë pajisjen tuaj vetëm kur i eksportoni, kopjoni ose printoni vetë. Ruajtja është e domosdoshme për funksionin që kërkoni ju (§ 25(2) nr. 2 TDDDG, ligji gjerman për mbrojtjen e të dhënave në shërbimet digjitale). Të dhënat që shkruani në KPI Diagnostic nuk ruhen. Të dhënat e ruajtura mund t'i fshini në çdo kohë me butonin e fshirjes në veglën përkatëse ose nga cilësimet e shfletuesit tuaj.</p>
+  <p>Importi i CV-së në ATS CV: kur hapni aty një skedar PDF ose Word, ai lexohet vetëm në shfletuesin tuaj dhe nuk ngarkohet askund. Programi i nevojshëm për leximin e PDF-ve (pdf.js) ngarkohet nga ky server, jo nga palë të treta.</p>
+  <p>Pareto 80/20 dhe Last-Mile CX Control Tower: skedarët CSV dhe Excel që hapni aty lexohen gjithashtu vetëm në shfletuesin tuaj dhe nuk ngarkohen. Kur i kaloni të dhëna nga Damage Control, Incomplete Control, Delay Analyzer ose Control Tower te vegla Pareto, kjo bëhet përmes kujtesës së sesionit (Session Storage) të shfletuesit tuaj, që fshihet kur mbyllni skedën.</p>
+  <p>Logot e kompanive në CV Builder: kur shkruani aty faqen e internetit të një kompanie, shfletuesi juaj e ngarkon logon e saj përmes shërbimit të ikonave të Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandë). Google merr adresën e shkruar dhe të dhëna teknikisht të nevojshme, si adresa juaj IP dhe të dhënat e shfletuesit. Emri juaj dhe përmbajtja tjetër e CV-së nuk dërgohen. Kërkesa bëhet vetëm kur shkruani vetë një faqe interneti; pa të, ose me një logo të ngarkuar nga ju, nuk krijohet asnjë lidhje. Baza ligjore është neni 6(1)(f) i GDPR-së; interesi legjitim është ofrimi i kërkimit të logos që kërkoni ju. Transferimi në SHBA bëhet mbi bazën e EU-US Data Privacy Framework, ku Google bën pjesë. Më shumë informacion: <a href="https://policies.google.com/privacy?hl=en">Politika e privatësisë e Google</a>.</p>
+
+  <h2>4. Kontakti me email{% if site.contact.action %} dhe me formën e kontaktit{% endif %}</h2>
+  <p>Kur më shkruani një email{% if site.contact.action %} ose përdorni formën e kontaktit{% endif %}, i përpunoj të dhënat tuaja (emri, adresa e emailit, mesazhi) vetëm për t'iu përgjigjur kërkesës suaj. Baza ligjore është neni 6(1)(b) ose (f) i GDPR-së. Të dhënat fshihen sapo nuk nevojiten më për këtë qëllim dhe nuk ka detyrime ligjore ruajtjeje.</p>
+{%- if site.contact.action %}
+  <p>Forma e kontaktit më përcillet përmes {{ site.contact.provider or "një shërbimi të jashtëm formash" }}. Me ofruesin ekziston një kontratë përpunimi sipas nenit 28 të GDPR-së.</p>
+{%- endif %}
+{%- if site.newsletter.action %}
+
+  <h2>5. Newsletter</h2>
+  <p>Kur abonoheni në newsletter, e përpunoj adresën tuaj të emailit për t'ju dërguar shkrimet e reja. Regjistrimi bëhet me konfirmim të dyfishtë (double opt-in): së pari merrni një email ku e konfirmoni regjistrimin. Baza ligjore është pëlqimi juaj (neni 6(1)(a) i GDPR-së), që mund ta tërhiqni në çdo kohë me lidhjen e çregjistrimit në çdo email.</p>
+  <p>Për dërgimin përdor {{ legal.newsletterProvider or "një shërbim të jashtëm newsletter-i" }}. Me ofruesin ekziston një kontratë përpunimi sipas nenit 28 të GDPR-së.</p>
+{%- endif %}
+
+  <h2>{{ rightsNumber }}. Të drejtat tuaja</h2>
+  <p>Keni të drejtën e informimit (neni 15 i GDPR-së), korrigjimit (neni 16), fshirjes (neni 17), kufizimit të përpunimit (neni 18), bartshmërisë së të dhënave (neni 20) dhe kundërshtimit (neni 21). Një pëlqim të dhënë mund ta tërhiqni në çdo kohë me efekt për të ardhmen. Gjithashtu mund të ankoheni pranë një autoriteti mbikëqyrës për mbrojtjen e të dhënave, sidomos në shtetin anëtar ku banoni ose punoni zakonisht (neni 77 i GDPR-së).</p>
+</section>
+{%- else %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">Legal</p>
+  <h1>Privacy</h1>
+</section>
+<section class="shell legal">
+  <h2>1. Controller</h2>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country | replace("Albanien", "Albania") }}<br>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
+
+  <h2>2. Hosting</h2>
+  <p>This website is served through GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). When you open its pages, GitHub processes technically necessary data, in particular the IP address, the date and time of access and details of the browser and operating system, in order to deliver the website and keep it secure. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest is the secure and stable provision of the website. Transfers to the USA rest on the EU-US Data Privacy Framework, of which GitHub is a member. More information: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>.</p>
+
+  <h2>3. No cookies, no tracking</h2>
+  <p>This website sets no cookies and uses no analytics or tracking services. Fonts are loaded from this server; no connection is made to Google Fonts or other third parties. The one exception is the CV Builder, when you type a company's website there (see below).</p>
+  <p>Some features keep what you type only in your own browser (local storage), so that it is still there after the page is reloaded: the choice between the light and the dark theme, the 5 Whys worksheet, the logs in Damage Control, Incomplete Control and Delay Analyzer, the shift handover with its history, the days of the control chart, the answers, checklists and project charter in the course "Six Sigma in the Warehouse", the data in the Pareto tool (80/20), the tables, targets and actions in the Last-Mile CX Control Tower, the CV in the CV Builder including the photos and logos you upload there, the ATS CV, and the cover letter including photo and signature. The coaching workspace, too, keeps the chosen work context, projects, exercises, reflections, actions and evidence only in your browser. You export coaching backups yourself; there is no automatic account or team synchronisation. With "Save all my work" you save the data of every tool yourself as a file on your device; when you open such a file, it is read only in your browser and not uploaded. None of this data is sent to me or to third parties, and it leaves your device only when you export, copy or print it yourself. The storage is strictly necessary for the feature you asked for (Section 25(2) no. 2 TDDDG, the German data protection act for digital services). What you type in the KPI Diagnostic is not stored. You can remove stored data at any time with the delete button in the tool concerned or in your browser's settings.</p>
+  <p>CV import in the ATS CV: when you open a PDF or Word file there, it is read only in your browser and not uploaded. The reader needed for PDF files (pdf.js) is loaded from this server, not from third parties.</p>
+  <p>Pareto 80/20 and Last-Mile CX Control Tower: CSV and Excel files you open there are likewise read only in your browser and not uploaded. When you hand data from Damage Control, Incomplete Control, Delay Analyzer or the Control Tower to the Pareto tool, this happens through your browser's session storage, which is cleared when the tab is closed.</p>
+  <p>Company logos in the CV Builder: when you type a company's website there, your browser loads that company's logo through Google's icon service (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland). Google receives the web address you typed and technically necessary data such as your IP address and browser details. Your name and the rest of your CV are not sent. The request happens only when you type a website yourself; without one, or with a logo you uploaded, no connection is made. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest is providing the logo lookup you asked for. Transfers to the USA rest on the EU-US Data Privacy Framework, of which Google is a member. More information: <a href="https://policies.google.com/privacy?hl=en">Google privacy policy</a>.</p>
+
+  <h2>4. Contact by email{% if site.contact.action %} and contact form{% endif %}</h2>
+  <p>When you write me an email{% if site.contact.action %} or use the contact form{% endif %}, I process your details (name, email address, message) only to handle your request. The legal basis is Art. 6(1)(b) or (f) GDPR. The data is deleted as soon as it is no longer needed for that purpose and no statutory retention duties apply.</p>
+{%- if site.contact.action %}
+  <p>The contact form is forwarded to me through {{ site.contact.provider or "an external form service" }}. A data processing agreement under Art. 28 GDPR is in place with the provider.</p>
+{%- endif %}
+{%- if site.newsletter.action %}
+
+  <h2>5. Newsletter</h2>
+  <p>When you subscribe to the newsletter, I process your email address to send you new posts. Subscription uses double opt-in: you first receive an email in which you confirm the subscription. The legal basis is your consent (Art. 6(1)(a) GDPR), which you can withdraw at any time through the unsubscribe link in every email.</p>
+  <p>For sending I use {{ legal.newsletterProvider or "an external newsletter service" }}. A data processing agreement under Art. 28 GDPR is in place with the provider.</p>
+{%- endif %}
+
+  <h2>{{ rightsNumber }}. Your rights</h2>
+  <p>You have the right of access (Art. 15 GDPR), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20) and objection (Art. 21). You can withdraw a consent you have given at any time with effect for the future. You can also lodge a complaint with a data protection supervisory authority, in particular in the member state of your habitual residence or place of work (Art. 77 GDPR).</p>
+</section>
+{%- endif %}

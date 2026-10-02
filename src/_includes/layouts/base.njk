@@ -117,7 +117,7 @@
       <a class="brand" href="{{ homeUrl }}" aria-label="{{ 'Stiven Catalyst home' | t(lang) }}"><span class="brand-mark" aria-hidden="true"></span><span>Stiven Catalyst</span></a>
       <p class="footer-small">© <span data-year>{{ year }}</span> Stiven Catalyst. {{ "Clarity into action." | t(lang) }}</p>
       <p class="footer-legal">
-        {%- if hasLegal %}<a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a>{% endif -%}
+        {%- if hasLegal %}<a href="{{ '/impressum.html' | local(lang) }}">{{ "Legal notice" | t(lang) }}</a><a href="{{ '/datenschutz.html' | local(lang) }}">{{ "Privacy" | t(lang) }}</a>{% endif -%}
         <a href="/feed.xml">RSS</a>
       </p>
     </div>
