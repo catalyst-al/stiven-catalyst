@@ -241,12 +241,31 @@ const textsOf = (file) => {
   return [...found].map((text) => text.replace(/\\"/g, '"'));
 };
 test('the texts of the Pulse tools and their pages are translated', () => {
-  const files = ['src/js/tool-kit.js', 'src/js/defect-log.js', 'src/js/delay-analyzer.js', 'src/js/shift-pulse.js',
-    'src/_includes/partials/defect-log.njk', 'src/_includes/partials/shift-pulse.njk'];
+  const files = ['src/js/tool-kit.js', 'src/js/defect-log.js', 'src/js/delay-analyzer.js', 'src/js/shift-pulse.js', 'src/js/sigma-chart.js',
+    'src/_includes/partials/defect-log.njk', 'src/_includes/partials/shift-pulse.njk', 'src/_includes/partials/sigma-chart.njk'];
   for (const lang of ['de', 'sq']) {
     const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
     for (const file of files) {
       for (const text of textsOf(file)) assert.ok(ui[text], `${lang}: ${file}: ${text}`);
     }
   }
+});
+
+test('days handed to the control chart become points, and the same metric adds to the chart instead of replacing it', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/sigma-control-chart/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/sigma-chart.js', 'utf8'));
+  const { SigmaMath } = dom.window;
+  const given = { source: 'Damage Control', metric: 'Damaged units', unit: 'Units handled', rows: [
+    { date: '2026-09-14', n: 3000, d: 20 }, { date: '14.09.2026', n: 100, d: 1 }, { date: '2026-09-15', n: 100, d: 101 },
+    { date: '2026-09-16', n: 0, d: 0 }, { date: '2026-09-17', n: 100, d: 0 }, { date: 'soon', n: 100, d: 1 }, null,
+  ] };
+  const empty = { metric: '', unit: '', rows: [] };
+  const first = plain(SigmaMath.takeOver(given, empty));
+  assert.deepEqual(first.rows.map((row) => [row.date, row.n, row.d]), [['2026-09-14', 3000, 20], ['2026-09-14', 100, 1], ['2026-09-17', 100, 0]], 'more defects than handled, no volume and no date are not points');
+  assert.equal(first.merge, false, 'an empty chart is filled, not merged');
+  const chart = { metric: ' damaged UNITS ', unit: 'units handled', rows: [{ date: '2026-09-01', n: 10, d: 1 }] };
+  assert.equal(SigmaMath.takeOver(given, chart).merge, true, 'the same metric and unit, whatever the case');
+  assert.equal(SigmaMath.takeOver(given, { ...chart, metric: 'Incomplete orders' }).merge, false);
+  assert.equal(SigmaMath.takeOver(given, { ...chart, unit: 'Orders shipped' }).merge, false);
 });

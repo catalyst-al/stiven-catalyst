@@ -1,4 +1,18 @@
 (() => {
+  // Days handed over by Damage Control, Incomplete Control or Delay Analyzer ("Open as control chart"), without the
+  // page (tests/pulse-tools.test.cjs uses it too). given: { metric, unit, rows: [{ date, n, d }] }; current: the chart as
+  // it is. Gives the rows that can be points (d defects out of n handled, on a date) and whether they are added to the
+  // chart (the same metric and unit, and a chart that has days) or replace it.
+  const takeOver = (given, current) => {
+    const kit = window.ToolKit;
+    const rows = given.rows.filter(kit.isObject)
+      .map((row) => ({ date: kit.parseDate(row.date), n: Math.round(Number(row.n)), d: Math.round(Number(row.d)), note: "" }))
+      .filter((row) => row.date && row.n > 0 && row.d >= 0 && row.d <= row.n);
+    const same = (a, b) => kit.str(a).trim().toLowerCase() === kit.str(b).trim().toLowerCase();
+    return { rows, merge: current.rows.length > 0 && same(current.metric, given.metric) && same(current.unit, given.unit) };
+  };
+  window.SigmaMath = { takeOver };
+
   const dataEl = document.getElementById("sigma-chart-data");
   if (!dataEl || !window.ToolKit) return;
 
@@ -6,7 +20,7 @@
     DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
-    panel, stat, resultActions, flash, downloadCsv, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -587,6 +601,54 @@
     ]);
   });
 
+  // Days handed over by Damage Control, Incomplete Control or Delay Analyzer ("Open as control chart"): defects out of
+  // the volume of each day. The same metric and unit are added to the chart (a day already in it is replaced);
+  // anything else replaces the chart, and Undo puts the old days back for a few seconds.
+  const handoff = (() => {
+    try {
+      const raw = sessionStorage.getItem("sc-sigma-handoff");
+      sessionStorage.removeItem("sc-sigma-handoff");
+      const value = raw && JSON.parse(raw);
+      return isObject(value) && Array.isArray(value.rows) ? value : null;
+    } catch {
+      return null;
+    }
+  })();
+  const handoffStatus = root.querySelector("[data-handoff-status]");
+  const applyHandoff = (given) => {
+    const { rows, merge } = takeOver(given, state);
+    if (!rows.length) return;
+    const before = { metric: state.metric, unit: state.unit, baseline: state.baseline, rows: state.rows.map((row) => ({ ...row })) };
+    if (!merge) {
+      state.metric = str(given.metric);
+      state.unit = str(given.unit);
+      state.baseline = "";
+      state.rows = [];
+    }
+    upsert(rows);
+    const showSettings = () => root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name] ?? ""; });
+    showSettings();
+    save();
+    render();
+    const skipped = Math.round(Number(given.skipped)) || 0;
+    const message = [
+      tx(merge ? "{source}: {days} taken over and added to the chart. A day that was already in it was replaced." : "{source}: {days} taken over. They replace what was in the chart.", { source: str(given.source), days: days(rows.length) }),
+      skipped ? tx(skipped === 1 ? "{n} day without a volume was left out." : "{n} days without a volume were left out.", { n: skipped }) : "",
+    ].filter(Boolean).join(" ");
+    if (before.rows.length) {
+      undoNote(handoffStatus, message, () => {
+        Object.assign(state, before);
+        showSettings();
+        save();
+        render();
+      });
+    } else {
+      handoffStatus.textContent = message;
+    }
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+    results.focus({ preventScroll: true });
+  };
+
   // Redraw the chart when its width changes.
   let resizeTimer;
   window.addEventListener("resize", () => {
@@ -598,4 +660,5 @@
   });
 
   render();
+  if (handoff) applyHandoff(handoff);
 })();

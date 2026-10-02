@@ -420,9 +420,18 @@
       stats,
       notes,
       focus,
-      actions: resultActions(() => summaryText(result), problemText(result), paretoTable),
+      actions: resultActions(() => summaryText(result), problemText(result), paretoTable, controlChart(result)),
       panels: [trendPanel, pareto, flow, types, shifts].filter(Boolean),
     });
+  };
+
+  // The days with a volume as a p-chart for the Sigma & Control Chart: units out of the volume of each day.
+  // A day with entries and no volume cannot be a point, so it is counted in "skipped"; the chart needs two days.
+  const controlChart = (result) => {
+    const perDay = new Map();
+    result.rows.forEach((row) => row.date && perDay.set(row.date, (perDay.get(row.date) || 0) + row.units));
+    const rows = result.dayVolumes.items.map((item) => ({ date: item.date, n: item.volume, d: perDay.get(item.date) || 0 })).filter((row) => row.d <= row.n);
+    return rows.length < 2 ? null : { source: t.tool, metric: capital(t.many), unit: t.volumeLabel, rows, skipped: result.dayVolumes.missing.length };
   };
 
   // The log for the Pareto tool: causes counted in units, valued in euros where known.

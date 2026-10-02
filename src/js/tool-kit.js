@@ -501,7 +501,9 @@ window.ToolKit = (() => {
   // Copy, print and 5 Whys buttons under a result.
   // pareto, when given, returns a table ({ source, template, headers, rows, map, measure })
   // that the Pareto tool opens; it travels in sessionStorage, so it stays in this tab.
-  const resultActions = (summary, problem, pareto) => {
+  // chart, when given, is a day-by-day series ({ source, metric, unit, rows: [{ date, n, d }], skipped }) that
+  // the Sigma & Control Chart opens as a p-chart: d defects out of n handled on each date.
+  const resultActions = (summary, problem, pareto, chart = null) => {
     const actions = el("div", "tool-actions result-actions");
     const copyButton = el("button", "button-primary", tx("Copy summary"));
     copyButton.type = "button";
@@ -521,6 +523,14 @@ window.ToolKit = (() => {
       link.href = new URL("../pareto/", window.location.href).href;
       link.addEventListener("click", () => {
         try { sessionStorage.setItem("sc-pareto-handoff", JSON.stringify(pareto())); } catch { /* the page opens empty */ }
+      });
+      actions.append(link);
+    }
+    if (chart) {
+      const link = el("a", "button-secondary", tx("Open as control chart"));
+      link.href = new URL("../sigma-control-chart/", window.location.href).href;
+      link.addEventListener("click", () => {
+        try { sessionStorage.setItem("sc-sigma-handoff", JSON.stringify(chart)); } catch { /* the chart opens as it was */ }
       });
       actions.append(link);
     }

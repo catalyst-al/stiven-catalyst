@@ -31,7 +31,7 @@
 
   const {
     tx, showDate, lower,
-    read, write, isObject, str, loadState, el, int, pct, plural, today,
+    read, write, isObject, str, loadState, el, int, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
     panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck,
@@ -320,6 +320,22 @@
     title: (item) => `${item.key}: ${tx("{n} of {routes} late", { n: item.late, routes: routes(item.routes) })}${item.late ? tx(", {min} late in total", { min: minutes(item.minutes) }) : ""}`,
   });
 
+  // The days as a p-chart for the Sigma & Control Chart: late routes out of the routes of each day. With only some
+  // routes of the period logged there is no honest count of routes per day, so there is no chart.
+  const controlChart = (result) => {
+    if (result.partial) return null;
+    const perDay = new Map();
+    result.rows.forEach((row) => {
+      if (!row.date) return;
+      const day = perDay.get(row.date) || { date: row.date, n: 0, d: 0 };
+      day.n += 1;
+      if (row.late) day.d += 1;
+      perDay.set(row.date, day);
+    });
+    const rows = [...perDay.values()].sort((a, b) => a.date.localeCompare(b.date));
+    return rows.length < 2 ? null : { source: data.tool, metric: tx("Late routes"), unit: capital(tx("routes")), rows, skipped: result.rows.filter((row) => !row.date).length };
+  };
+
   const renderResults = () => {
     results.replaceChildren();
     results.hidden = !state.rows.length;
@@ -445,7 +461,7 @@
         map: { category: 3, count: -1, value: 4, date: 0, filter: 1 },
         measure: "value",
         valueLabel: tx("minutes"),
-      }));
+      }), controlChart(result));
       resultLayout(results, { head, stats, notes, focus, actions, panels: grid });
     } else {
       const card = el("article", "result-card dl-focus");

@@ -1642,5 +1642,11 @@
   "{rate}: {many} as a share of {volume}, {by}. The dashed line is the average, the solid line the target; columns above it are red.": "{rate}: {many} në raport me {volume}, {by}. Vija me pika është mesatarja, vija e plotë synimi; kolonat mbi të janë të kuqe.",
   "{rate}: {many} as a share of {volume}, {by}. The dashed line is the average; the highest column is red.": "{rate}: {many} në raport me {volume}, {by}. Vija me pika është mesatarja; kolona më e lartë është e kuqe.",
   "{n} day with entries has no volume and is not in this chart: {days}.": "{n} ditë me hyrje nuk ka volum dhe nuk është në këtë grafik: {days}.",
-  "{n} days with entries have no volume and are not in this chart: {days}.": "{n} ditë me hyrje nuk kanë volum dhe nuk janë në këtë grafik: {days}."
+  "{n} days with entries have no volume and are not in this chart: {days}.": "{n} ditë me hyrje nuk kanë volum dhe nuk janë në këtë grafik: {days}.",
+  "Open as control chart": "Hape si kartë kontrolli",
+  "{source}: {days} taken over and added to the chart. A day that was already in it was replaced.": "{source}: {days} u morën dhe u shtuan në grafik. Një ditë që ishte tashmë aty u zëvendësua.",
+  "{source}: {days} taken over. They replace what was in the chart.": "{source}: {days} u morën. Ato zëvendësojnë atë që ishte në grafik.",
+  "{n} day without a volume was left out.": "{n} ditë pa volum u la jashtë.",
+  "{n} days without a volume were left out.": "{n} ditë pa volum u lanë jashtë.",
+  "Damage Control, Incomplete Control and Delay Analyzer open their days here with \"Open as control chart\".": "Damage Control, Incomplete Control dhe Analiza e vonesave i hapin ditët e tyre këtu me „Hape si kartë kontrolli“."
 }

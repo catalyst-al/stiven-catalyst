@@ -1642,5 +1642,11 @@
   "{rate}: {many} as a share of {volume}, {by}. The dashed line is the average, the solid line the target; columns above it are red.": "{rate}: {many} im Verhältnis zu {volume}, {by}. Die gestrichelte Linie ist der Durchschnitt, die durchgezogene das Ziel; Säulen darüber sind rot.",
   "{rate}: {many} as a share of {volume}, {by}. The dashed line is the average; the highest column is red.": "{rate}: {many} im Verhältnis zu {volume}, {by}. Die gestrichelte Linie ist der Durchschnitt; die höchste Säule ist rot.",
   "{n} day with entries has no volume and is not in this chart: {days}.": "{n} Tag mit Einträgen hat keine Menge und fehlt in diesem Diagramm: {days}.",
-  "{n} days with entries have no volume and are not in this chart: {days}.": "{n} Tage mit Einträgen haben keine Menge und fehlen in diesem Diagramm: {days}."
+  "{n} days with entries have no volume and are not in this chart: {days}.": "{n} Tage mit Einträgen haben keine Menge und fehlen in diesem Diagramm: {days}.",
+  "Open as control chart": "Als Regelkarte öffnen",
+  "{source}: {days} taken over and added to the chart. A day that was already in it was replaced.": "{source}: {days} übernommen und zur Karte hinzugefügt. Ein Tag, der schon darin war, wurde ersetzt.",
+  "{source}: {days} taken over. They replace what was in the chart.": "{source}: {days} übernommen. Sie ersetzen, was in der Karte war.",
+  "{n} day without a volume was left out.": "{n} Tag ohne Menge wurde weggelassen.",
+  "{n} days without a volume were left out.": "{n} Tage ohne Menge wurden weggelassen.",
+  "Damage Control, Incomplete Control and Delay Analyzer open their days here with \"Open as control chart\".": "Damage Control, Incomplete Control und die Verspätungsanalyse öffnen ihre Tage hier mit „Als Regelkarte öffnen“."
 }
