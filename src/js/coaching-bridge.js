@@ -8,7 +8,9 @@
   const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
   const loaded = C.load(storage);
   const p = loaded.state.projects.find(p => p.id === projectId);
-  const data = window.CoachingData || JSON.parse(document.getElementById('coaching-data').textContent);
+  const dataEl = document.getElementById('coaching-data');
+  const data = window.CoachingData || (dataEl ? JSON.parse(dataEl.textContent) : null);
+  if (!data) return;
   const lang = ['en', 'de', 'sq'].includes(document.documentElement.lang) ? document.documentElement.lang : 'en';
   const tx = key => data.labels[key][lang];
   const E = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);

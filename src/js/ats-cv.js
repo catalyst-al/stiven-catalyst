@@ -343,7 +343,7 @@
     const p = cv.person;
 
     const head = el("header", "ats-head");
-    const name = el("h1", "ats-name", p.name.trim() || doc().yourName);
+    const name = el("h2", "ats-name", p.name.trim() || doc().yourName);
     name.classList.toggle("is-placeholder", !p.name.trim());
     head.append(name);
     if (p.headline.trim()) head.append(el("p", "ats-headline", p.headline.trim()));

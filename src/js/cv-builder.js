@@ -202,6 +202,9 @@
   // Looked-up logos: domain -> "ok" or "none". Google answers an unknown
   // domain with a 16-pixel globe, which counts as no logo.
   const logoState = new Map();
+  // While the website is being typed, no logo is fetched for the half-typed hosts (northgatehotels.co ...).
+  let websiteTyping = false;
+  let websiteTimer;
   const logoUrl = (domain) => data.logoService + encodeURIComponent(domain);
 
   const monogram = (name) => {
@@ -229,7 +232,7 @@
       return box;
     }
     const domain = domainOf(website);
-    if (!domain || logoState.get(domain) === "none") {
+    if (!domain || logoState.get(domain) === "none" || (websiteTyping && !logoState.has(domain))) {
       const mono = fallbackNode();
       if (mono) box.append(mono);
       else box.classList.add("is-empty");
@@ -314,7 +317,7 @@
       band.append(frame);
     }
     const text = el("div", "cv-head-text");
-    const name = el("h1", "cv-name", person.name.trim() || doc().yourName);
+    const name = el("h2", "cv-name", person.name.trim() || doc().yourName);
     name.classList.toggle("is-placeholder", !person.name.trim());
     const headlineText = person.headline.trim() || doc().yourHeadline;
     const headline = el("p", "cv-headline");
@@ -898,6 +901,11 @@
       buildList("groups");
     }
     if (path === "photoY") renderPhoto();
+    if (path.endsWith(".website")) {
+      websiteTyping = true;
+      clearTimeout(websiteTimer);
+      websiteTimer = setTimeout(() => { websiteTyping = false; changed(); }, 600);
+    }
     if (path.endsWith(".website") || path.endsWith(".company") || path.endsWith(".title")) {
       const box = target.closest("[data-item]")?.querySelector(":scope > .cv-item-body > .cv-logo-edit");
       clearTimeout(logoTimer);

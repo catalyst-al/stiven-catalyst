@@ -64,6 +64,26 @@ window.CoachingCore = (() => {
     && list(s.projects, p => validProject(p, s.version), 100) && uniqueIds(s.projects)
     && object(s.active) && Object.entries(s.active).every(([role, value]) => ROLES.includes(role) && (value === '' || s.projects.some(p => p.id === value && p.role === role)));
   const clone = v => JSON.parse(JSON.stringify(v));
+  // Only the fields the workspace knows survive an import; anything else a file carries is dropped,
+  // so a backup cannot fill the browser's storage with data no screen shows.
+  const pick = (v, keys) => (object(v) ? Object.fromEntries(keys.filter(k => v[k] !== undefined).map(k => [k, v[k]])) : v);
+  const pickAll = (rows, keys) => (Array.isArray(rows) ? rows.map(r => pick(r, keys)) : rows);
+  const REVIEW_KEYS = ['date', 'result', 'reviewer'];
+  const withReview = (v, keys) => { const out = pick(v, keys); if (object(out.review)) out.review = pick(out.review, REVIEW_KEYS); return out; };
+  const known = p => {
+    const out = pick(p, ['id', 'role', 'title', 'created', 'updated', 'deadline', 'archived', 'brief', 'practice', 'actions', 'evidence', 'measurements', 'sessions', 'context', 'workflow', 'delegations', 'simulations']);
+    out.brief = pick(out.brief, FIELDS);
+    if (object(out.practice)) out.practice = Object.fromEntries(Object.entries(out.practice).map(([k, v]) => [k, withReview(v, ['situation', 'facts', 'decision', 'verify', 'date', 'review'])]));
+    if (Array.isArray(out.actions)) out.actions = out.actions.map(a => withReview(a, ['id', 'text', 'owner', 'due', 'done', 'review']));
+    out.evidence = pickAll(out.evidence, ['id', 'summary', 'source', 'date', 'tool', 'snapshot']);
+    out.measurements = pickAll(out.measurements, ['id', 'date', 'phase', 'units', 'failed', 'definition', 'source']);
+    out.sessions = pickAll(out.sessions, ['id', 'date', 'goal', 'reality', 'options', 'way', 'actionId', 'mode', 'participant', 'previousReview', 'support', 'nextReview', 'previousId']);
+    if (out.context !== undefined) out.context = pick(out.context, ['sector', 'experience']);
+    if (out.workflow !== undefined) out.workflow = pick(out.workflow, [...WORKFLOW, 'reviewDate', 'verdict']);
+    if (Array.isArray(out.delegations)) out.delegations = out.delegations.map(d => withReview(d, ['id', 'actionId', 'date', 'due', 'checkpoint', 'outcome', 'owner', 'resources', 'authority', 'boundary', 'success', 'acceptance', 'review']));
+    if (object(out.simulations)) out.simulations = Object.fromEntries(Object.entries(out.simulations).map(([k, v]) => [k, pick(v, ['date', 'reflection', 'path'])]));
+    return out;
+  };
   const migrate = s => {
     if (!validState(s)) throw new Error('invalidBackup');
     const next = clone(s);
@@ -111,7 +131,7 @@ window.CoachingCore = (() => {
     const next = migrate(state);
     // Always copy: a backup may be older than current work. Do not overwrite it.
     for (const original of migrate(backup.state).projects) {
-      const p = clone(original);
+      const p = known(clone(original));
       p.id = id();
       const actionIds = new Map();
       for (const a of p.actions) { const old = a.id; a.id = id(); actionIds.set(old, a.id); }
