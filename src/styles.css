@@ -1880,6 +1880,18 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
 }
 .dl-panel .result-label { margin: 0; }
 .dl-panel-note { margin: 0; color: var(--muted); font-size: 14px; }
+/* Trend chart: columns per day or week; the colours follow the theme. */
+.dl-panel {
+  --tr-bar: #4ab5f7; --tr-top: #ff4d55; --tr-line: #f6f7f4;
+  --tr-grid: rgba(255, 255, 255, .12); --tr-text: #f6f7f4; --tr-muted: #a5b0b8;
+}
+[data-theme="light"] .dl-panel {
+  --tr-bar: #1c7cc2; --tr-top: #c90912; --tr-line: #1b2330;
+  --tr-grid: #dfe3e8; --tr-text: #1b2330; --tr-muted: #5f6870;
+}
+.tr-figure { display: grid; gap: 12px; margin: 0; min-width: 0; }
+.tr-scroll { overflow-x: auto; }
+.tr-chart { display: block; width: 100%; min-width: 420px; height: auto; }
 .dl-bars { display: grid; gap: 12px; }
 .dl-bar .bar-label { gap: 12px; margin-bottom: 6px; }
 .dl-bar-name { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; min-width: 0; }

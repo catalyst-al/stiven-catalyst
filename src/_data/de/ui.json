@@ -1572,5 +1572,9 @@
   "These numbers are already filled in. What you typed stays as it is.": "Diese Zahlen sind schon eingetragen. Was Sie eingegeben haben, bleibt unverändert.",
   "Your log in {language} has {n} entries.": "Ihr Protokoll auf {language} hat {n} Einträge.",
   "Open it": "Öffnen",
-  "Show {n} more": "{n} weitere anzeigen"
+  "Show {n} more": "{n} weitere anzeigen",
+  "Trend over time": "Verlauf",
+  "{many} per {unit}. The dashed line is the average; the highest {unit} is red.": "{many} pro {unit}. Die gestrichelte Linie ist der Durchschnitt; der höchste Wert ist rot.",
+  "week": "Woche",
+  "Chart as PNG": "Diagramm als PNG"
 }

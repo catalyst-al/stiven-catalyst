@@ -98,3 +98,28 @@ test('an empty log points to the same log kept in another language', () => {
   // From the German page: the Albanian log has three entries, the English one none; German is this page.
   assert.deepEqual(plain(dom.window.ToolKit.otherLogs('sc-damage-control-de')), [{ code: 'sq', count: 3, name: 'Shqip', url: '/sq/tools/damage-control/' }]);
 });
+
+test('trend buckets group a log by day or by week and fill the quiet days', () => {
+  const { ToolKit } = load();
+  const rows = (dates) => dates.map((date) => ({ date, units: 2 }));
+  const daily = ToolKit.trendBuckets(rows(['2026-09-01', '2026-09-01', '2026-09-04', '']), (row) => row.units);
+  assert.equal(daily.unit, 'day');
+  assert.equal(daily.undated, 1);
+  assert.deepEqual(plain(daily.buckets.map((b) => [b.key, b.value])), [['2026-09-01', 4], ['2026-09-02', 0], ['2026-09-03', 0], ['2026-09-04', 2]]);
+  // More than 31 days: weeks starting on Monday (2026-09-07 is a Monday).
+  const weekly = ToolKit.trendBuckets(rows(['2026-09-09', '2026-09-13', '2026-10-20']), (row) => row.units);
+  assert.equal(weekly.unit, 'week');
+  assert.deepEqual(plain(weekly.buckets.slice(0, 2).map((b) => [b.key, b.to, b.value])), [['2026-09-07', '2026-09-13', 4], ['2026-09-14', '2026-09-20', 0]]);
+  assert.equal(weekly.buckets.at(-1).key, '2026-10-19');
+  assert.equal(ToolKit.trendBuckets([{ date: '' }], () => 1).buckets.length, 0);
+});
+
+test('the trend chart draws one column per day, marks the highest and exports a white SVG', () => {
+  const { ToolKit, document } = load();
+  const trend = ToolKit.trendBuckets([{ date: '2026-09-01', u: 1 }, { date: '2026-09-02', u: 5 }, { date: '2026-09-03', u: 2 }], (row) => row.u);
+  const figure = ToolKit.trendFigure(trend, { title: 'Damage: trend', unit: 'Damages', average: 'Average' }, 'damage-control');
+  document.body.append(figure);
+  assert.equal(figure.querySelectorAll('svg g[role=img]').length, 3);
+  assert.equal(figure.querySelectorAll('button').length, 2);
+  assert.match(figure.querySelector('svg').textContent, /Average/);
+});

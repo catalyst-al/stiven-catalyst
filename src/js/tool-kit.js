@@ -298,6 +298,126 @@ window.ToolKit = (() => {
     return list;
   };
 
+  // Trend over time. trendBuckets groups dated rows by day (a period of up to 31 days) or by week
+  // (Monday to Sunday), fills quiet days with 0 and sums valueOf(row). It is plain arithmetic, so a test can call it.
+  const mondayOf = (isoDate) => {
+    const date = new Date(`${isoDate}T00:00:00Z`);
+    return addDays(isoDate, -((date.getUTCDay() + 6) % 7));
+  };
+  const trendBuckets = (rows, valueOf, maxBuckets = 60) => {
+    const dated = rows.filter((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.date));
+    const undated = rows.length - dated.length;
+    if (!dated.length) return { unit: "day", buckets: [], undated };
+    const dates = dated.map((row) => row.date).sort();
+    const days = Math.round((new Date(`${dates.at(-1)}T00:00:00Z`) - new Date(`${dates[0]}T00:00:00Z`)) / 864e5) + 1;
+    const unit = days <= 31 ? "day" : "week";
+    const keyOf = unit === "day" ? (d) => d : mondayOf;
+    const sums = new Map();
+    dated.forEach((row) => sums.set(keyOf(row.date), (sums.get(keyOf(row.date)) || 0) + valueOf(row)));
+    const step = unit === "day" ? 1 : 7;
+    const buckets = [];
+    for (let key = keyOf(dates[0]); key <= keyOf(dates.at(-1)); key = addDays(key, step)) buckets.push({ key, to: addDays(key, step - 1), value: sums.get(key) || 0 });
+    return { unit, buckets: buckets.slice(-maxBuckets), undated };
+  };
+
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const svgEl = (tag, attrs = {}, text) => {
+    const node = document.createElementNS(SVG_NS, tag);
+    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+  const TREND_COLORS = { bar: "var(--tr-bar)", top: "var(--tr-top)", line: "var(--tr-line)", grid: "var(--tr-grid)", text: "var(--tr-text)", muted: "var(--tr-muted)" };
+  const TREND_EXPORT = { bar: "#1c7cc2", top: "#c90912", line: "#1b2330", grid: "#e3e6ea", text: "#1b2330", muted: "#5f6870" };
+  const niceMax = (value) => {
+    const magnitude = 10 ** Math.floor(Math.log10(Math.max(value, 1)));
+    return [1, 2, 5, 10].map((m) => m * magnitude).find((m) => m >= value) || value;
+  };
+  // Columns per bucket, a dashed average line and the highest bucket in the alert colour.
+  // labels: { title, unit (what the columns count), average }. Returns an <svg>.
+  const trendChart = (trend, colors, labels) => {
+    const { buckets, unit } = trend;
+    const W = 640, H = 280, left = 44, right = 14, top = 28, bottom = 44;
+    const plotW = W - left - right, plotH = H - top - bottom;
+    const max = Math.max(...buckets.map((b) => b.value), 0);
+    const ceiling = niceMax(max);
+    const y = (value) => top + plotH - (value / ceiling) * plotH;
+    const band = plotW / buckets.length;
+    const barW = Math.max(2, Math.min(40, band * 0.7));
+    const format = dayMonth(false);
+    const nameOf = (b) => format(new Date(`${b.key}T00:00:00Z`));
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": labels.title, class: "tr-chart", "font-family": "Inter, Segoe UI, Roboto, Arial, sans-serif" });
+    svg.append(svgEl("title", {}, labels.title));
+    [0, 0.5, 1].forEach((f) => {
+      const value = ceiling * f;
+      svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(value), y2: y(value), style: `stroke:${colors.grid}`, "stroke-width": 1 }));
+      svg.append(svgEl("text", { x: left - 8, y: y(value) + 4, "text-anchor": "end", "font-size": 12, style: `fill:${colors.muted}` }, int.format(Math.round(value * 10) / 10)));
+    });
+    const top1 = buckets.findIndex((b) => b.value === max);
+    buckets.forEach((b, i) => {
+      const cx = left + band * (i + 0.5);
+      const hot = max > 0 && i === top1;
+      const g = svgEl("g", { tabindex: 0, role: "img", "aria-label": `${nameOf(b)}${unit === "week" ? " –" : ""}: ${int.format(b.value)}` });
+      g.append(svgEl("title", {}, `${nameOf(b)}: ${int.format(b.value)} ${labels.unit}`));
+      g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
+      if (b.value > 0) g.append(svgEl("rect", { x: cx - barW / 2, y: y(b.value), width: barW, height: Math.max(1, y(0) - y(b.value)), rx: 2, style: `fill:${hot ? colors.top : colors.bar}` }));
+      if (buckets.length <= 16 && b.value > 0) g.append(svgEl("text", { x: cx, y: y(b.value) - 5, "text-anchor": "middle", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, int.format(b.value)));
+      svg.append(g);
+      if (i % Math.ceil(buckets.length / 10) === 0) svg.append(svgEl("text", { x: cx, y: top + plotH + 18, "text-anchor": "middle", "font-size": 12, style: `fill:${colors.text}` }, nameOf(b)));
+    });
+    const average = buckets.reduce((sum, b) => sum + b.value, 0) / buckets.length;
+    svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(average), y2: y(average), style: `stroke:${colors.line}`, "stroke-width": 1.5, "stroke-dasharray": "6 4", "pointer-events": "none" }));
+    svg.append(svgEl("text", { x: W - right, y: y(average) - 6, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, `${labels.average} ${num(average, 1)}`));
+    svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, style: `fill:${colors.muted}` }, labels.unit));
+    return svg;
+  };
+  const exportTrendSvg = (trend, labels) => {
+    const svg = trendChart(trend, TREND_EXPORT, labels);
+    svg.setAttribute("xmlns", SVG_NS);
+    const [, , w, h] = svg.getAttribute("viewBox").split(" ").map(Number);
+    svg.setAttribute("width", w);
+    svg.setAttribute("height", h);
+    svg.insertBefore(svgEl("rect", { x: 0, y: 0, width: w, height: h, fill: "#ffffff" }), svg.firstChild.nextSibling);
+    return new XMLSerializer().serializeToString(svg);
+  };
+  const saveBlob = (name, blob) => {
+    const link = el("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = name;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  };
+  // A figure with the chart and its "Chart as SVG / PNG" buttons.
+  const trendFigure = (trend, labels, fileName) => {
+    const figure = el("figure", "tr-figure");
+    const scroller = el("div", "tr-scroll");
+    scroller.append(trendChart(trend, TREND_COLORS, labels));
+    const actions = el("div", "tool-actions");
+    const svgButton = el("button", "button-secondary", tx("Chart as SVG"));
+    svgButton.type = "button";
+    svgButton.addEventListener("click", () => saveBlob(`${fileName}-${today()}.svg`, new Blob([exportTrendSvg(trend, labels)], { type: "image/svg+xml" })));
+    const pngButton = el("button", "button-secondary", tx("Chart as PNG"));
+    pngButton.type = "button";
+    pngButton.addEventListener("click", () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width * 2;
+        canvas.height = img.height * 2;
+        const ctx = canvas.getContext("2d");
+        ctx.scale(2, 2);
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => blob && saveBlob(`${fileName}-${today()}.png`, blob));
+      };
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(exportTrendSvg(trend, labels))}`;
+    });
+    actions.append(svgButton, pngButton);
+    figure.append(scroller, actions);
+    return figure;
+  };
+
   // "Start here" card: stage or reason advice from a tool's data file.
   const focusCard = ({ title, detail, lede, advice, extraLabel, extra, warning }) => {
     const focus = el("article", "result-card dl-focus");
@@ -671,6 +791,6 @@ window.ToolKit = (() => {
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs,
-    panel, stat, barList, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

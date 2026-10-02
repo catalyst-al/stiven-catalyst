@@ -11,7 +11,7 @@
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
-    panel, stat, barList, focusCard, resultActions, flash, floorCheck,
+    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -293,6 +293,11 @@
     const flow = panel(t.stageTitle, t.stageNote);
     flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: tx("Most") }));
 
+    // Trend: units per day (or week), so a bad day or a worsening week shows before the totals do.
+    const trend = trendBuckets(result.rows, (row) => row.units);
+    const trendPanel = trend.buckets.length > 1 ? panel(tx("Trend over time"), tx("{many} per {unit}. The dashed line is the average; the highest {unit} is red.", { many: t.many, unit: trend.unit === "week" ? tx("week") : tx("day") })) : null;
+    if (trendPanel) trendPanel.append(trendFigure(trend, { title: `${t.tool}: ${tx("Trend over time")}`, unit: capital(t.many), average: tx("Average") }, KEY.replace(/^sc-/, "")));
+
     const types = panel(t.matrixTitle, tx("Each cell counts {many}. The darkest cell is the most specific place to look.", { many: t.many }));
     types.append(matrix(result));
 
@@ -317,7 +322,7 @@
       notes,
       focus,
       actions: resultActions(() => summaryText(result), problemText(result), paretoTable),
-      panels: [pareto, flow, types, shifts],
+      panels: [trendPanel, pareto, flow, types, shifts].filter(Boolean),
     });
   };
 

@@ -1572,5 +1572,9 @@
   "These numbers are already filled in. What you typed stays as it is.": "Këta numra janë plotësuar tashmë. Ajo që keni shkruar mbetet siç është.",
   "Your log in {language} has {n} entries.": "Regjistri juaj në {language} ka {n} regjistrime.",
   "Open it": "Hapeni",
-  "Show {n} more": "Shfaq {n} të tjera"
+  "Show {n} more": "Shfaq {n} të tjera",
+  "Trend over time": "Trendi në kohë",
+  "{many} per {unit}. The dashed line is the average; the highest {unit} is red.": "{many} për {unit}. Vija me pika është mesatarja; vlera më e lartë është e kuqe.",
+  "week": "javë",
+  "Chart as PNG": "Grafiku si PNG"
 }
