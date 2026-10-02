@@ -42,7 +42,7 @@
 .coaching table { width: 100%; border-collapse: collapse; font-size: .9rem; }
 .coaching th, .coaching td { padding: 12px; text-align: start; border-bottom: 1px solid var(--line); }
 .coaching-entry { border-bottom: 1px solid var(--line); padding: 12px 0; }
-.coaching [data-error="true"] { color: var(--red); padding: 16px; border: 1px solid var(--red); border-radius: 10px; }
+.coaching [data-error="true"] { color: var(--danger); padding: 16px; border: 1px solid var(--danger); border-radius: 10px; }
 .coaching-content:focus { outline: none; }
 .coaching :focus-visible { outline: 2px solid var(--coaching-accent); outline-offset: 4px; }
 .coaching-print { display: none; }
