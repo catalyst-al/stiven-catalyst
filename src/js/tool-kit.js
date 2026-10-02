@@ -329,6 +329,18 @@ window.ToolKit = (() => {
     }
     return { unit, buckets: buckets.slice(-maxBuckets), undated };
   };
+  // Shares over a volume of each day: countOf(row) over volumes[{ date, volume }], per day or per week. A day with
+  // entries but no volume cannot have a share, so it is left out and listed in `skipped`; a day with a volume and no
+  // entries counts as 0. Pass only the volumes of the days that belong to the period.
+  const trendShares = (rows, countOf, volumes, maxBuckets = 60) => {
+    const volumeOf = new Map(volumes.map((item) => [item.date, item.volume]));
+    const parts = [
+      ...rows.filter((row) => volumeOf.has(row.date)).map((row) => ({ date: row.date, count: countOf(row), total: 0 })),
+      ...volumes.map((item) => ({ date: item.date, count: 0, total: item.volume })),
+    ];
+    const trend = trendBuckets(parts, (part) => part.count, maxBuckets, (part) => part.total);
+    return { ...trend, undated: rows.filter((row) => !row.date).length, skipped: [...new Set(rows.filter((row) => row.date && !volumeOf.has(row.date)).map((row) => row.date))].sort() };
+  };
 
   const SVG_NS = "http://www.w3.org/2000/svg";
   const svgEl = (tag, attrs = {}, text) => {
@@ -337,14 +349,17 @@ window.ToolKit = (() => {
     if (text !== undefined) node.textContent = text;
     return node;
   };
-  const TREND_COLORS = { bar: "var(--tr-bar)", top: "var(--tr-top)", line: "var(--tr-line)", grid: "var(--tr-grid)", text: "var(--tr-text)", muted: "var(--tr-muted)" };
-  const TREND_EXPORT = { bar: "#1c7cc2", top: "#c90912", line: "#1b2330", grid: "#e3e6ea", text: "#1b2330", muted: "#5f6870" };
+  const TREND_COLORS = { bar: "var(--tr-bar)", top: "var(--tr-top)", line: "var(--tr-line)", grid: "var(--tr-grid)", text: "var(--tr-text)", muted: "var(--tr-muted)", target: "var(--tr-target)" };
+  const TREND_EXPORT = { bar: "#1c7cc2", top: "#c90912", line: "#1b2330", grid: "#e3e6ea", text: "#1b2330", muted: "#5f6870", target: "#b88a3b" };
+  // The next 1, 2, 5 or 10 times a power of ten above the value (0.12 gives 0.2, 7 gives 10).
   const niceMax = (value) => {
-    const magnitude = 10 ** Math.floor(Math.log10(Math.max(value, 1)));
-    return [1, 2, 5, 10].map((m) => m * magnitude).find((m) => m >= value) || value;
+    if (!(value > 0)) return 1;
+    const magnitude = 10 ** Math.floor(Math.log10(value));
+    return [1, 2, 5, 10].map((m) => m * magnitude).find((m) => m >= value - 1e-12) || value;
   };
-  // Columns per bucket, a dashed average line and the highest bucket in the alert colour.
-  // labels: { title, unit (what the columns count), average }. Returns an <svg>.
+  // Columns per bucket, a dashed average line and the highest bucket in the alert colour. With labels.target (a share,
+  // for buckets that hold shares) a solid target line is drawn and every column above it is in the alert colour instead.
+  // labels: { title, unit (what the columns count), average, format (optional), target, targetLabel }. Returns an <svg>.
   const trendChart = (trend, colors, labels) => {
     const { buckets, unit } = trend;
     const W = 640, H = 280, left = 44, right = 14, top = 28, bottom = 44;
@@ -352,8 +367,10 @@ window.ToolKit = (() => {
     const shares = buckets.some((b) => "total" in b);
     const format = labels.format || ((value) => int.format(Math.round(value * 10) / 10));
     const max = Math.max(...buckets.map((b) => b.value), 0);
-    const ceiling = shares ? Math.min(1, niceMax(max * 100) / 100) : niceMax(max);
-    const y = (value) => top + plotH - (value / ceiling) * plotH;
+    const target = shares && Number.isFinite(labels.target) && labels.target > 0 ? labels.target : null;
+    const peak = Math.max(max, target ?? 0);
+    const ceiling = shares ? Math.min(1, niceMax(peak * 100) / 100) : niceMax(peak);
+    const y = (value) => top + plotH - (Math.min(value, ceiling) / ceiling) * plotH;
     const band = plotW / buckets.length;
     const barW = Math.max(2, Math.min(40, band * 0.7));
     const dayName = dayMonth(false);
@@ -368,7 +385,7 @@ window.ToolKit = (() => {
     const top1 = buckets.findIndex((b) => b.value === max);
     buckets.forEach((b, i) => {
       const cx = left + band * (i + 0.5);
-      const hot = max > 0 && i === top1;
+      const hot = target ? b.total > 0 && b.value > target : max > 0 && i === top1;
       const g = svgEl("g", { tabindex: 0, role: "img", "aria-label": `${nameOf(b)}${unit === "week" ? " –" : ""}: ${format(b.value)}` });
       g.append(svgEl("title", {}, `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`));
       g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
@@ -381,7 +398,12 @@ window.ToolKit = (() => {
       ? buckets.reduce((sum, b) => sum + b.count, 0) / (buckets.reduce((sum, b) => sum + b.total, 0) || 1)
       : buckets.reduce((sum, b) => sum + b.value, 0) / buckets.length;
     svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(average), y2: y(average), style: `stroke:${colors.line}`, "stroke-width": 1.5, "stroke-dasharray": "6 4", "pointer-events": "none" }));
-    svg.append(svgEl("text", { x: W - right, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, `${labels.average} ${shares ? format(average) : num(average, 1)}`));
+    const averageText = `${labels.average} ${shares ? format(average) : num(average, 1)}`;
+    svg.append(svgEl("text", { x: W - right, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, averageText));
+    if (target) {
+      svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(target), y2: y(target), style: `stroke:${colors.target}`, "stroke-width": 2, "pointer-events": "none" }));
+      svg.append(svgEl("text", { x: W - right - averageText.length * 7 - 18, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.target}` }, `${labels.targetLabel} ${format(target)}`));
+    }
     svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, style: `fill:${colors.muted}` }, labels.unit));
     return svg;
   };
@@ -805,6 +827,6 @@ window.ToolKit = (() => {
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs,
-    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

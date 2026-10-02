@@ -146,6 +146,15 @@
       "2026-09-19|Night|Sorting and loading|Missing parcel|Sort or load error|1|12",
       "2026-09-20|Early|Picking|Wrong item|Pick error|3|27",
       "2026-09-20|Early|Delivery|Missing parcel|Unknown|1|"
+    ],
+    "volumes": [
+      "2026-09-14|1000",
+      "2026-09-15|1050",
+      "2026-09-16|1000",
+      "2026-09-17|1100",
+      "2026-09-18|1050",
+      "2026-09-19|600",
+      "2026-09-20|400"
     ]
   }
 }

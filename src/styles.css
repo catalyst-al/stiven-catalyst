@@ -1882,11 +1882,11 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
 .dl-panel-note { margin: 0; color: var(--muted); font-size: 14px; }
 /* Trend chart: columns per day or week; the colours follow the theme. */
 .dl-panel {
-  --tr-bar: #4ab5f7; --tr-top: #ff4d55; --tr-line: #f6f7f4;
+  --tr-bar: #4ab5f7; --tr-top: #ff4d55; --tr-line: #f6f7f4; --tr-target: #d1a553;
   --tr-grid: rgba(255, 255, 255, .12); --tr-text: #f6f7f4; --tr-muted: #a5b0b8;
 }
 [data-theme="light"] .dl-panel {
-  --tr-bar: #1c7cc2; --tr-top: #c90912; --tr-line: #1b2330;
+  --tr-bar: #1c7cc2; --tr-top: #c90912; --tr-line: #1b2330; --tr-target: #b88a3b;
   --tr-grid: #dfe3e8; --tr-text: #1b2330; --tr-muted: #5f6870;
 }
 /* Shift Pulse: three number cards, a short list of what needs attention, and the open issues. */

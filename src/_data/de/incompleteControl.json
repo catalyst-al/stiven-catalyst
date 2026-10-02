@@ -147,6 +147,15 @@
       "2026-09-19|Nacht|Sortierung und Verladung|Fehlendes Paket|Sortier- oder Ladefehler|1|12",
       "2026-09-20|Früh|Kommissionierung|Falscher Artikel|Pickfehler|3|27",
       "2026-09-20|Früh|Zustellung|Fehlendes Paket|Unbekannt|1|"
+    ],
+    "volumes": [
+      "2026-09-14|1000",
+      "2026-09-15|1050",
+      "2026-09-16|1000",
+      "2026-09-17|1100",
+      "2026-09-18|1050",
+      "2026-09-19|600",
+      "2026-09-20|400"
     ]
   }
 }

@@ -175,6 +175,15 @@
       "2026-09-19|Natë|Sortimi dhe ngarkimi|Pako që mungon|Gabim sortimi ose ngarkimi|1|12",
       "2026-09-20|Mëngjes|Mbledhja|Artikull i gabuar|Gabim mbledhjeje|3|27",
       "2026-09-20|Mëngjes|Dorëzimi|Pako që mungon|E panjohur|1|"
+    ],
+    "volumes": [
+      "2026-09-14|1000",
+      "2026-09-15|1050",
+      "2026-09-16|1000",
+      "2026-09-17|1100",
+      "2026-09-18|1050",
+      "2026-09-19|600",
+      "2026-09-20|400"
     ]
   }
 }

@@ -167,3 +167,86 @@ test('Shift Pulse counts each log per day and flags a latest day that is clearly
   const quiet = plain(PulseMath.compute({ damage: { rows: [{ date: '2026-09-03', shift: 'Early', units: 3 }] } }, { from: '2026-09-01', to: '2026-09-03' }));
   assert.equal(quiet.damage.above, false, 'no earlier day to compare with is not a flag');
 });
+
+const loadDefectLog = () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/damage-control/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/defect-log.js', 'utf8'));
+  return dom.window;
+};
+
+test('daily volumes keep one value per day, read pasted rows and say which days of a period they cover', () => {
+  const { DefectMath } = loadDefectLog();
+  assert.deepEqual(plain(DefectMath.cleanVolumes([
+    { date: '2026-09-02', volume: 200 }, { date: '2026-09-01', volume: '100' }, { date: '2026-09-02', volume: 250 },
+    { date: 'bad', volume: 5 }, { date: '2026-09-03', volume: 0 }, null, { date: '2026-09-04', volume: 12.4 },
+  ])), [{ date: '2026-09-01', volume: 100 }, { date: '2026-09-02', volume: 250 }, { date: '2026-09-04', volume: 12 }]);
+
+  const pasted = DefectMath.importVolumes('Date\tVolume\n2026-09-14\t2900\n15.09.2026\t3100\nnonsense\n2026-09-16\t0');
+  assert.deepEqual(plain(pasted), { added: [{ date: '2026-09-14', volume: 2900 }, { date: '2026-09-15', volume: 3100 }], skipped: 2 });
+
+  const rows = [{ date: '2026-09-14' }, { date: '2026-09-14' }, { date: '2026-09-16' }];
+  const volumes = [13, 14, 15, 16, 17, 20].map((day) => ({ date: `2026-09-${day}`, volume: 100 }));
+  const open = DefectMath.dayVolumes(volumes, rows, '', '');
+  assert.deepEqual(open.items.map((item) => item.date), ['2026-09-14', '2026-09-15', '2026-09-16'], 'an open period runs from the first to the last day with entries');
+  assert.deepEqual([open.missing.length, open.total, open.undated], [0, 300, false]);
+  assert.deepEqual(DefectMath.dayVolumes(volumes, rows, '', '2026-09-17').items.map((item) => item.date), ['2026-09-14', '2026-09-15', '2026-09-16', '2026-09-17'], 'a period with its own end counts its quiet days');
+  const gap = DefectMath.dayVolumes(volumes.filter((item) => item.date !== '2026-09-16'), rows, '', '');
+  assert.deepEqual(plain(gap.missing), ['2026-09-16']);
+  assert.equal(DefectMath.dayVolumes(volumes, [...rows, { date: '' }], '', '').undated, true);
+  assert.deepEqual(plain(DefectMath.dayVolumes(volumes, [], '', '')), { items: [], missing: [], undated: false, total: 0 });
+});
+
+test('trend shares divide each day by its own volume and leave out days without one', () => {
+  const { ToolKit } = load();
+  const rows = [{ date: '2026-09-01', units: 2 }, { date: '2026-09-01', units: 1 }, { date: '2026-09-03', units: 4 }, { date: '2026-09-05', units: 9 }, { date: '', units: 1 }];
+  const volumes = [['2026-09-01', 100], ['2026-09-02', 100], ['2026-09-03', 200], ['2026-09-04', 50]].map(([date, volume]) => ({ date, volume }));
+  const trend = ToolKit.trendShares(rows, (row) => row.units, volumes);
+  assert.deepEqual(plain(trend.buckets.map((b) => [b.key, b.count, b.total, b.value])), [['2026-09-01', 3, 100, 0.03], ['2026-09-02', 0, 100, 0], ['2026-09-03', 4, 200, 0.02], ['2026-09-04', 0, 50, 0]]);
+  assert.deepEqual(plain(trend.skipped), ['2026-09-05'], 'a day with entries and no volume has no share');
+  assert.equal(trend.undated, 1);
+  // Over 31 days the shares are per week: the counts and the volumes of the week add up first.
+  const long = ToolKit.trendShares([{ date: '2026-09-07', units: 1 }, { date: '2026-09-08', units: 3 }], (row) => row.units, [{ date: '2026-09-07', volume: 100 }, { date: '2026-09-08', volume: 100 }, { date: '2026-10-20', volume: 50 }]);
+  assert.equal(long.unit, 'week');
+  assert.deepEqual(plain(long.buckets[0]), { key: '2026-09-07', to: '2026-09-13', count: 4, total: 200, value: 0.02 });
+});
+
+test('the trend chart draws a target line and turns the columns above it red', () => {
+  const { ToolKit, document } = load();
+  const trend = ToolKit.trendShares([{ date: '2026-09-01', units: 3 }, { date: '2026-09-02', units: 1 }, { date: '2026-09-03', units: 2 }], (row) => row.units,
+    [{ date: '2026-09-01', volume: 1000 }, { date: '2026-09-02', volume: 1000 }, { date: '2026-09-03', volume: 1000 }]);
+  const labels = { title: 'Damage rate', unit: 'Damage rate', average: 'Average', format: (v) => `${(v * 100).toFixed(2)}%`, target: 0.0025, targetLabel: 'Target' };
+  const figure = ToolKit.trendFigure(trend, labels, 'damage-control');
+  document.body.append(figure);
+  const text = figure.querySelector('svg').textContent;
+  assert.match(text, /Target 0\.25%/);
+  assert.match(text, /Average 0\.20%/);
+  assert.equal(figure.querySelectorAll('rect[style*="--tr-top"]').length, 1, 'only 0.30% is above the 0.25% target');
+  // Small shares get a small axis: the highest column is 0.30%, so the axis ends at 0.5% rather than 1%.
+  assert.match(text, /0\.50%/);
+  assert.doesNotMatch(text, /1\.00%/);
+  // Without a target, the highest column is the red one.
+  const plainFigure = ToolKit.trendFigure(trend, { ...labels, target: null }, 'damage-control');
+  document.body.append(plainFigure);
+  assert.equal(plainFigure.querySelectorAll('rect[style*="--tr-top"]').length, 1);
+});
+
+// Every text a tool shows through tx("…") in a script, or "…" | t(lang) in a page, must have a German and an Albanian text.
+const textsOf = (file) => {
+  const source = fs.readFileSync(file, 'utf8');
+  const found = new Set();
+  for (const match of source.matchAll(/\btx\("((?:[^"\\]|\\.)*)"/g)) found.add(match[1]);
+  for (const match of source.matchAll(/\btx\(\s*[\w.]+(?: === \d)? \? "((?:[^"\\]|\\.)*)" : "((?:[^"\\]|\\.)*)"/g)) { found.add(match[1]); found.add(match[2]); }
+  for (const match of source.matchAll(/"((?:[^"\\]|\\.)*)" \| t\(lang\)/g)) found.add(match[1]);
+  return [...found].map((text) => text.replace(/\\"/g, '"'));
+};
+test('the texts of the Pulse tools and their pages are translated', () => {
+  const files = ['src/js/tool-kit.js', 'src/js/defect-log.js', 'src/js/delay-analyzer.js', 'src/js/shift-pulse.js',
+    'src/_includes/partials/defect-log.njk', 'src/_includes/partials/shift-pulse.njk'];
+  for (const lang of ['de', 'sq']) {
+    const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
+    for (const file of files) {
+      for (const text of textsOf(file)) assert.ok(ui[text], `${lang}: ${file}: ${text}`);
+    }
+  }
+});

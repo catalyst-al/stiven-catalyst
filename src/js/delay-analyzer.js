@@ -353,13 +353,23 @@
     const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used."))] : [];
     const grid = [];
     // Trend: the share of routes that were late each day (week), or the count of late routes when only some routes are logged.
+    // The on-time target, when there is one, becomes a ceiling for the late share.
     const trend = result.partial ? trendBuckets(result.rows, (row) => (row.late ? 1 : 0)) : trendBuckets(result.rows, (row) => (row.late ? 1 : 0), 60, () => 1);
     if (trend.buckets.length > 1) {
       const unit = trend.unit === "week" ? tx("week") : tx("day");
+      const lateTarget = !result.partial && result.target && result.target < 1 ? 1 - result.target : null;
       const trendPanel = panel(tx("Trend over time"), result.partial
         ? tx("Late routes per {unit}. The dashed line is the average; the highest {unit} is red.", { unit })
+        : lateTarget ? tx("Share of routes that were late per {unit}. The dashed line is the average, the solid line the target; columns above it are red.", { unit })
         : tx("Share of routes that were late per {unit}. The dashed line is the average; the highest {unit} is red.", { unit }));
-      trendPanel.append(trendFigure(trend, { title: `${data.tool}: ${tx("Trend over time")}`, unit: result.partial ? tx("Late routes") : tx("Late routes (%)"), average: tx("Average"), format: result.partial ? undefined : (value) => pct(value, 0) }, KEY.replace(/^sc-/, "")));
+      trendPanel.append(trendFigure(trend, {
+        title: `${data.tool}: ${tx("Trend over time")}`,
+        unit: result.partial ? tx("Late routes") : tx("Late routes (%)"),
+        average: tx("Average"),
+        format: result.partial ? undefined : (value) => pct(value, 0),
+        target: lateTarget,
+        targetLabel: tx("Target"),
+      }, KEY.replace(/^sc-/, "")));
       grid.push(trendPanel);
     }
     if (result.late.length) {
