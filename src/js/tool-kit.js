@@ -413,7 +413,7 @@ window.ToolKit = (() => {
     return node;
   };
   const TREND_COLORS = { bar: "var(--tr-bar)", top: "var(--tr-top)", line: "var(--tr-line)", grid: "var(--tr-grid)", text: "var(--tr-text)", muted: "var(--tr-muted)", target: "var(--tr-target)" };
-  const TREND_EXPORT = { bar: "#1c7cc2", top: "#c90912", line: "#1b2330", grid: "#e3e6ea", text: "#1b2330", muted: "#5f6870", target: "#b88a3b" };
+  const TREND_EXPORT = { bar: "#0a6ab0", top: "#c2141b", line: "#1b2330", grid: "#e3e6ea", text: "#1b2330", muted: "#5f6870", target: "#7f5c1f" };
   // The next 1, 2, 5 or 10 times a power of ten above the value (0.12 gives 0.2, 7 gives 10).
   const niceMax = (value) => {
     if (!(value > 0)) return 1;
