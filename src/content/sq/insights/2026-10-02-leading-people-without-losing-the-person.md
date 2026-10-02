@@ -42,28 +42,3 @@ Ky është një ndryshim i vërtetë në leadership, sidomos kur ngrihesh nga br
 Kur ngrihesh në detyrë, nuk duhet të bëhesh papritur një person tjetër vetëm për të provuar që tani je shefi. Por as nuk mund të vazhdosh të sillesh sikur asgjë nuk ka ndryshuar. Duhet ta ruash marrëdhënien me njerëzit, dhe njëkohësisht të kërkosh prej tyre gjëra që dje nuk kishe përgjegjësinë t'ua kërkoje.
 
 Këtu, për mua, është edhe përkufizimi i respektit në punë. Respekti nuk është të mos i kërkosh llogari njeriut. Respekti është t'ia bësh të qartë standardin, ta dëgjosh para se ta gjykosh, dhe kur përgjegjësia është e tij, të mos ia fshehësh.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| "Punoni më mirë" nuk mjafton | Përgjigja 2 |
-| Lista e standardeve konkrete (loading, zona e shoferëve, gate, chilled/frozen, bag që mungon, safety/pastërti, KPI ditore) | Përgjigja 2 |
-| Sistem pasojash për shkelje të përsëritura; standardi jo poster | Përgjigja 2 |
-| Standardi duhet ditur para gjykimit | Përgjigja 2 |
-| Incomplete: pyetjet për procesin; jo automatikisht shoferi | Përgjigja 4 |
-| Përgjegjësia individuale kur procesi funksionon | Përgjigja 4 |
-| Pyetja proces apo person; dy rrugët; ndonjëherë të dyja | Përgjigja 4 |
-| Presioni për KPI si problem operacional; pyetjet | Përgjigja 5 |
-| Pa histori heroike; presioni i drejtë, poshtërimi jo | Përgjigja 5 |
-| Team Leader në Area Manager pas ~5 muajsh; 4 Shift Leaders, 8 dispecerë, ~250 shoferë | Përgjigja 6 |
-| Nuk zgjidhte më gjithçka vetë; kërkonte përgjegjësi nga Shift Leaders dhe dispecerët | Përgjigja 6 |
-| "Ky është tashmë problemi yt..." si parim ("me fjalë ose me mënyrën si punon"), jo si citat i dokumentuar | Përgjigja 6 |
-| Pa reagime të ish-kolegëve (nuk janë të dokumentuara) | Përgjigja 6 |
-| Mos u bëj person tjetër; mos u sill sikur asgjë s'ka ndryshuar; respekti | Përgjigja 6 |
-| Lënë jashtë: biseda e vështirë (1), "shumë i butë / shumë i ashpër" (3), skena e presionit nga lart (5) | Përgjigjet 1, 3, 5 |
-| "Pyetja që ndoshta përcakton më shumë..." dhe "Pjesa më e vështirë... erdhi kur ndryshoi pozicioni": lidhje mes pjesëve | Sintezë |
-
-Asnjë emër kompanie, asnjë skenë, dialog apo rezultat i shpikur.
--->
