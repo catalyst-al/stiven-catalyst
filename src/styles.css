@@ -6,6 +6,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  /* While Archivo Black downloads, the headings are drawn with the device's bold sans (Arial, Liberation,
+     Arimo, Roboto) widened to its measure: Archivo Black is about 13% wider than Arial Bold, with an ascent
+     of 88% and a descent of 21% of the font size. So the text keeps its width and line height when the
+     real font arrives, and nothing on the page moves (layout shift). */
+  font-family: "Archivo Black Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"), local("Arimo Bold"), local("Arimo-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Helvetica Bold"), local("Helvetica-Bold");
+  font-weight: 400 900;
+  font-style: normal;
+  size-adjust: 113%;
+  ascent-override: 88%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+}
 
 :root {
   color-scheme: dark;
@@ -24,7 +38,7 @@
   --max: 1240px;
   --serif: Georgia, "Times New Roman", serif;
   --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --display: "Arial Black", "Archivo Black", "Archivo Black Fallback", "Helvetica Neue", Arial, sans-serif;
 }
 
 :root[data-theme="light"] {
@@ -292,10 +306,14 @@ button, input, select { font: inherit; }
   justify-content: center;
   gap: 8px;
 }
+/* Without JavaScript the four role panels are simply listed; with it they fold into chips and the
+   drawn system. The html element gets the "js" class from the inline script in the head, before the
+   first paint, so the page is laid out in its final shape at once: if the panels were hidden only when
+   cosmos.js runs (after the first paint), everything below the hero would jump up (layout shift). */
 .cosmos-hint,
 .cosmos-families { display: none; }
-.cosmos.is-live .cosmos-families { display: flex; }
-.cosmos.is-live .cosmos-hint { display: block; }
+.js .cosmos-families { display: flex; }
+.js .cosmos-hint { display: block; }
 
 .cosmos-chip {
   display: inline-flex;
@@ -391,7 +409,7 @@ button, input, select { font: inherit; }
   backdrop-filter: blur(14px);
   box-shadow: 0 24px 70px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.05);
 }
-.cosmos.is-live .cosmos-family:not(.is-open) { display: none; }
+.js .cosmos-family:not(.is-open) { display: none; }
 .cosmos.is-live .cosmos-family.is-open { animation: cosmos-rise .35s ease both; }
 @keyframes cosmos-rise {
   from { opacity: 0; transform: translateY(8px); }
