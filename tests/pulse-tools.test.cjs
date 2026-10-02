@@ -123,3 +123,15 @@ test('the trend chart draws one column per day, marks the highest and exports a 
   assert.equal(figure.querySelectorAll('button').length, 2);
   assert.match(figure.querySelector('svg').textContent, /Average/);
 });
+
+test('trend buckets can hold a share: late routes over all routes of each day', () => {
+  const { ToolKit } = load();
+  const rows = [
+    { date: '2026-09-01', late: true }, { date: '2026-09-01', late: false }, { date: '2026-09-01', late: false }, { date: '2026-09-01', late: false },
+    { date: '2026-09-03', late: true },
+  ];
+  const trend = ToolKit.trendBuckets(rows, (row) => (row.late ? 1 : 0), 60, () => 1);
+  assert.deepEqual(plain(trend.buckets.map((b) => [b.key, b.count, b.total, b.value])), [['2026-09-01', 1, 4, 0.25], ['2026-09-02', 0, 0, 0], ['2026-09-03', 1, 1, 1]]);
+  const figure = ToolKit.trendFigure(trend, { title: 'Late', unit: 'Late (%)', average: 'Average', format: (v) => `${Math.round(v * 100)}%` }, 'delay-analyzer');
+  assert.match(figure.querySelector('svg').textContent, /Average 40%/, 'the average counts routes, not days');
+});

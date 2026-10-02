@@ -34,7 +34,7 @@
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
-    panel, stat, barList, focusCard, resultActions, flash, floorCheck,
+    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck,
   } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -352,6 +352,16 @@
 
     const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used."))] : [];
     const grid = [];
+    // Trend: the share of routes that were late each day (week), or the count of late routes when only some routes are logged.
+    const trend = result.partial ? trendBuckets(result.rows, (row) => (row.late ? 1 : 0)) : trendBuckets(result.rows, (row) => (row.late ? 1 : 0), 60, () => 1);
+    if (trend.buckets.length > 1) {
+      const unit = trend.unit === "week" ? tx("week") : tx("day");
+      const trendPanel = panel(tx("Trend over time"), result.partial
+        ? tx("Late routes per {unit}. The dashed line is the average; the highest {unit} is red.", { unit })
+        : tx("Share of routes that were late per {unit}. The dashed line is the average; the highest {unit} is red.", { unit }));
+      trendPanel.append(trendFigure(trend, { title: `${data.tool}: ${tx("Trend over time")}`, unit: result.partial ? tx("Late routes") : tx("Late routes (%)"), average: tx("Average"), format: result.partial ? undefined : (value) => pct(value, 0) }, KEY.replace(/^sc-/, "")));
+      grid.push(trendPanel);
+    }
     if (result.late.length) {
       const sides = panel(tx("Dock or road"), result.dockShare === null
         ? tx("Add departure times to split late minutes between the dock and the road.")

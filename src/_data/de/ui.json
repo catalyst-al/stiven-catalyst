@@ -1576,5 +1576,8 @@
   "Trend over time": "Verlauf",
   "{many} per {unit}. The dashed line is the average; the highest {unit} is red.": "{many} pro {unit}. Die gestrichelte Linie ist der Durchschnitt; der höchste Wert ist rot.",
   "week": "Woche",
-  "Chart as PNG": "Diagramm als PNG"
+  "Chart as PNG": "Diagramm als PNG",
+  "Late routes per {unit}. The dashed line is the average; the highest {unit} is red.": "Verspätete Touren pro {unit}. Die gestrichelte Linie ist der Durchschnitt; der höchste Wert ist rot.",
+  "Share of routes that were late per {unit}. The dashed line is the average; the highest {unit} is red.": "Anteil verspäteter Touren pro {unit}. Die gestrichelte Linie ist der Durchschnitt; der höchste Wert ist rot.",
+  "Late routes (%)": "Verspätete Touren (%)"
 }

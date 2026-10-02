@@ -304,7 +304,9 @@ window.ToolKit = (() => {
     const date = new Date(`${isoDate}T00:00:00Z`);
     return addDays(isoDate, -((date.getUTCDay() + 6) % 7));
   };
-  const trendBuckets = (rows, valueOf, maxBuckets = 60) => {
+  // With totalOf, each bucket holds a share (sum of valueOf over sum of totalOf, 0 to 1) and its count and total;
+  // a day with no total has no share and draws no column.
+  const trendBuckets = (rows, valueOf, maxBuckets = 60, totalOf = null) => {
     const dated = rows.filter((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.date));
     const undated = rows.length - dated.length;
     if (!dated.length) return { unit: "day", buckets: [], undated };
@@ -313,10 +315,18 @@ window.ToolKit = (() => {
     const unit = days <= 31 ? "day" : "week";
     const keyOf = unit === "day" ? (d) => d : mondayOf;
     const sums = new Map();
-    dated.forEach((row) => sums.set(keyOf(row.date), (sums.get(keyOf(row.date)) || 0) + valueOf(row)));
+    const totals = new Map();
+    dated.forEach((row) => {
+      sums.set(keyOf(row.date), (sums.get(keyOf(row.date)) || 0) + valueOf(row));
+      if (totalOf) totals.set(keyOf(row.date), (totals.get(keyOf(row.date)) || 0) + totalOf(row));
+    });
     const step = unit === "day" ? 1 : 7;
     const buckets = [];
-    for (let key = keyOf(dates[0]); key <= keyOf(dates.at(-1)); key = addDays(key, step)) buckets.push({ key, to: addDays(key, step - 1), value: sums.get(key) || 0 });
+    for (let key = keyOf(dates[0]); key <= keyOf(dates.at(-1)); key = addDays(key, step)) {
+      const count = sums.get(key) || 0;
+      const total = totals.get(key) || 0;
+      buckets.push(totalOf ? { key, to: addDays(key, step - 1), count, total, value: total ? count / total : 0 } : { key, to: addDays(key, step - 1), value: count });
+    }
     return { unit, buckets: buckets.slice(-maxBuckets), undated };
   };
 
@@ -339,35 +349,39 @@ window.ToolKit = (() => {
     const { buckets, unit } = trend;
     const W = 640, H = 280, left = 44, right = 14, top = 28, bottom = 44;
     const plotW = W - left - right, plotH = H - top - bottom;
+    const shares = buckets.some((b) => "total" in b);
+    const format = labels.format || ((value) => int.format(Math.round(value * 10) / 10));
     const max = Math.max(...buckets.map((b) => b.value), 0);
-    const ceiling = niceMax(max);
+    const ceiling = shares ? Math.min(1, niceMax(max * 100) / 100) : niceMax(max);
     const y = (value) => top + plotH - (value / ceiling) * plotH;
     const band = plotW / buckets.length;
     const barW = Math.max(2, Math.min(40, band * 0.7));
-    const format = dayMonth(false);
-    const nameOf = (b) => format(new Date(`${b.key}T00:00:00Z`));
+    const dayName = dayMonth(false);
+    const nameOf = (b) => dayName(new Date(`${b.key}T00:00:00Z`));
     const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": labels.title, class: "tr-chart", "font-family": "Inter, Segoe UI, Roboto, Arial, sans-serif" });
     svg.append(svgEl("title", {}, labels.title));
     [0, 0.5, 1].forEach((f) => {
       const value = ceiling * f;
       svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(value), y2: y(value), style: `stroke:${colors.grid}`, "stroke-width": 1 }));
-      svg.append(svgEl("text", { x: left - 8, y: y(value) + 4, "text-anchor": "end", "font-size": 12, style: `fill:${colors.muted}` }, int.format(Math.round(value * 10) / 10)));
+      svg.append(svgEl("text", { x: left - 8, y: y(value) + 4, "text-anchor": "end", "font-size": 12, style: `fill:${colors.muted}` }, format(value)));
     });
     const top1 = buckets.findIndex((b) => b.value === max);
     buckets.forEach((b, i) => {
       const cx = left + band * (i + 0.5);
       const hot = max > 0 && i === top1;
-      const g = svgEl("g", { tabindex: 0, role: "img", "aria-label": `${nameOf(b)}${unit === "week" ? " –" : ""}: ${int.format(b.value)}` });
-      g.append(svgEl("title", {}, `${nameOf(b)}: ${int.format(b.value)} ${labels.unit}`));
+      const g = svgEl("g", { tabindex: 0, role: "img", "aria-label": `${nameOf(b)}${unit === "week" ? " –" : ""}: ${format(b.value)}` });
+      g.append(svgEl("title", {}, `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`));
       g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
       if (b.value > 0) g.append(svgEl("rect", { x: cx - barW / 2, y: y(b.value), width: barW, height: Math.max(1, y(0) - y(b.value)), rx: 2, style: `fill:${hot ? colors.top : colors.bar}` }));
-      if (buckets.length <= 16 && b.value > 0) g.append(svgEl("text", { x: cx, y: y(b.value) - 5, "text-anchor": "middle", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, int.format(b.value)));
+      if (buckets.length <= 16 && b.value > 0) g.append(svgEl("text", { x: cx, y: y(b.value) - 5, "text-anchor": "middle", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, format(b.value)));
       svg.append(g);
       if (i % Math.ceil(buckets.length / 10) === 0) svg.append(svgEl("text", { x: cx, y: top + plotH + 18, "text-anchor": "middle", "font-size": 12, style: `fill:${colors.text}` }, nameOf(b)));
     });
-    const average = buckets.reduce((sum, b) => sum + b.value, 0) / buckets.length;
+    const average = shares
+      ? buckets.reduce((sum, b) => sum + b.count, 0) / (buckets.reduce((sum, b) => sum + b.total, 0) || 1)
+      : buckets.reduce((sum, b) => sum + b.value, 0) / buckets.length;
     svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(average), y2: y(average), style: `stroke:${colors.line}`, "stroke-width": 1.5, "stroke-dasharray": "6 4", "pointer-events": "none" }));
-    svg.append(svgEl("text", { x: W - right, y: y(average) - 6, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, `${labels.average} ${num(average, 1)}`));
+    svg.append(svgEl("text", { x: W - right, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, `${labels.average} ${shares ? format(average) : num(average, 1)}`));
     svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, style: `fill:${colors.muted}` }, labels.unit));
     return svg;
   };

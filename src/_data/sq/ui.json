@@ -1576,5 +1576,8 @@
   "Trend over time": "Trendi në kohë",
   "{many} per {unit}. The dashed line is the average; the highest {unit} is red.": "{many} për {unit}. Vija me pika është mesatarja; vlera më e lartë është e kuqe.",
   "week": "javë",
-  "Chart as PNG": "Grafiku si PNG"
+  "Chart as PNG": "Grafiku si PNG",
+  "Late routes per {unit}. The dashed line is the average; the highest {unit} is red.": "Itinerare të vonuara për {unit}. Vija me pika është mesatarja; vlera më e lartë është e kuqe.",
+  "Share of routes that were late per {unit}. The dashed line is the average; the highest {unit} is red.": "Pjesa e itinerareve të vonuara për {unit}. Vija me pika është mesatarja; vlera më e lartë është e kuqe.",
+  "Late routes (%)": "Itinerare të vonuara (%)"
 }
