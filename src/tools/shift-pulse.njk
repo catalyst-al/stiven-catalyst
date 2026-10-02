@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: Shift Pulse
+description: "Damage, incomplete orders, late routes and open handover issues of your shift in one picture, with trend charts you can save. Free and private."
+activeNav: /tools.html
+permalink: /tools/shift-pulse/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Dashboard</p>
+  <h1>Shift Pulse</h1>
+  <p class="lede">Four logs, one look. See where the shift is drifting, with a chart per number, and what is still open before you write the handover.</p>
+</section>
+
+{% set cfg = shiftHandover %}
+{% include "partials/shift-pulse.njk" %}

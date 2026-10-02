@@ -1,0 +1,42 @@
+{#- Shift Pulse: the three logs and the open handover in one picture. The page sets `cfg` to the Shift Handover data (shift and priority names); shift-pulse.js does the rest. -#}
+<section class="shell tool-layout dl-setup sp-setup">
+  <form class="tool-panel" data-shift-pulse novalidate>
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Show" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sp-days">{{ "Period" | t(lang) }}</label>
+          <select id="sp-days" name="days">
+            <option value="7">{{ "Last 7 days" | t(lang) }}</option>
+            <option value="14">{{ "Last 14 days" | t(lang) }}</option>
+            <option value="30">{{ "Last 30 days" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sp-shift">{{ "Shift" | t(lang) }}</label>
+          <select id="sp-shift" name="shift">
+            <option value="">{{ "All shifts" | t(lang) }}</option>
+            {%- for shift in cfg.shifts %}
+            <option>{{ shift }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      <li><strong>{{ "Log where it happens." | t(lang) }}</strong> {{ "Shift Pulse draws only what Damage Control, Incomplete Control, Delay Analyzer and Shift Handover hold in this browser." | t(lang) }}</li>
+      <li><strong>{{ "Read it before the handover." | t(lang) }}</strong> {{ "Look at the flags, then write the handover with an owner and a time for each open issue." | t(lang) }}</li>
+      <li><strong>{{ "Save the pictures." | t(lang) }}</strong> {{ "Each chart can be saved as PNG or SVG for a report or a message to your manager." | t(lang) }}</li>
+    </ul>
+    <p class="privacy-note">{{ "Your log stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results" data-pulse-results tabindex="-1" aria-live="polite"></section>
+
+<script type="application/json" id="shift-pulse-data">{{ { shifts: cfg.shifts, priorities: cfg.priorities } | dump | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/shift-pulse.js' | assetUrl }}" defer></script>

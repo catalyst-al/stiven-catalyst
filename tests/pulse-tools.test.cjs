@@ -135,3 +135,35 @@ test('trend buckets can hold a share: late routes over all routes of each day', 
   const figure = ToolKit.trendFigure(trend, { title: 'Late', unit: 'Late (%)', average: 'Average', format: (v) => `${Math.round(v * 100)}%` }, 'delay-analyzer');
   assert.match(figure.querySelector('svg').textContent, /Average 40%/, 'the average counts routes, not days');
 });
+
+test('Shift Pulse counts each log per day and flags a latest day that is clearly above the usual', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath } = dom.window;
+  assert.equal(PulseMath.minutesLate('23:50', '00:20'), 30, 'a route that arrives after midnight');
+  assert.equal(PulseMath.minutesLate('10:00', ''), null);
+  const logs = {
+    damage: { rows: [
+      { date: '2026-09-01', shift: 'Early', units: 1 }, { date: '2026-09-02', shift: 'Early', units: 2 }, { date: '2026-09-03', shift: 'Early', units: 6 },
+      { date: '2026-09-03', shift: 'Late', units: 2 }, { date: '2026-08-01', shift: 'Early', units: 9 }, { date: '2026-09-03', shift: 'Early' },
+    ] },
+    incomplete: { rows: [] },
+    delay: { arrivalGrace: '15', rows: [
+      { date: '2026-09-02', shift: 'Early', planArr: '10:00', actArr: '10:05' }, { date: '2026-09-02', shift: 'Early', planArr: '11:00', actArr: '11:40' },
+      { date: '2026-09-03', shift: 'Early', planArr: '10:00', actArr: '10:30' }, { date: '2026-09-03', shift: 'Early', planArr: '11:00', actArr: '11:50' }, { date: '2026-09-03', shift: 'Early', planArr: '12:00', actArr: '' },
+    ] },
+  };
+  const all = plain(PulseMath.compute(logs, { from: '2026-09-01', to: '2026-09-03', shift: '' }));
+  assert.deepEqual(all.days, ['2026-09-01', '2026-09-02', '2026-09-03']);
+  assert.deepEqual(all.damage.byDay, [1, 2, 9], 'a row without units counts one; rows outside the period do not count');
+  assert.equal(all.damage.total, 12);
+  assert.equal(all.damage.above, true, '9 on the latest day against a usual 1.5');
+  assert.equal(all.incomplete.latest, null);
+  assert.deepEqual([all.delay.routes, all.delay.late, all.delay.onTime], [4, 3, 0.25], 'the route without an arrival time is left out');
+  assert.equal(all.delay.above, true);
+  const early = plain(PulseMath.compute(logs, { from: '2026-09-01', to: '2026-09-03', shift: 'Early' }));
+  assert.deepEqual(early.damage.byDay, [1, 2, 7]);
+  const quiet = plain(PulseMath.compute({ damage: { rows: [{ date: '2026-09-03', shift: 'Early', units: 3 }] } }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.equal(quiet.damage.above, false, 'no earlier day to compare with is not a flag');
+});

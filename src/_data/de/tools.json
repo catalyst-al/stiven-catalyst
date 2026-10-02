@@ -80,6 +80,14 @@
     "cta": "Übergabe starten"
   },
   {
+    "name": "Shift Pulse",
+    "type": "Übersicht",
+    "time": "1 Min.",
+    "summary": "Schäden, unvollständige Aufträge, verspätete Touren und offene Übergabepunkte in einem Bild. Verlaufsdiagramme pro Zahl, Hinweise bei Auffälligem und eine Zusammenfassung zum Kopieren oder Drucken.",
+    "url": "/de/tools/shift-pulse/",
+    "cta": "Shift Pulse öffnen"
+  },
+  {
     "name": "Lebenslauf-Generator",
     "type": "Karriere",
     "time": "20 min",
