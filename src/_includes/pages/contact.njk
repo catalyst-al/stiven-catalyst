@@ -21,7 +21,7 @@
     </div>
     <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button type="submit">{{ "Send message" | t(lang) }}</button>
-    <p class="form-note">Your details are only used to reply to you.{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="/datenschutz.html">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
+    <p class="form-note">{{ "Your details are only used to reply to you." | t(lang) }}{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
   </form>
   {%- endif %}
   <aside class="contact-aside">

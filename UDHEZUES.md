@@ -67,7 +67,7 @@ Skedarët e ngarkuar ruhen te **Media** dhe mund të përdoren kudo.
 ## 5. Impressum dhe Datenschutz
 
 Të dhënat janë te **Impressum details** (emri, qyteti, email; rruga është opsionale).
-Faqet **Impressum** dhe **Datenschutz** krijohen vetë dhe dalin në fund të faqes.
+Faqet **Impressum** dhe **Datenschutz** krijohen vetë në tri gjuhë (anglisht, gjermanisht, shqip) dhe dalin në fund të çdo faqeje, në gjuhën e saj.
 
 > Teksti i Datenschutz është draft i mirë, por **nuk është këshillë ligjore**.
 > Kontrolloje një herë me një gjenerator (p.sh. e-recht24.de) ose me një jurist.

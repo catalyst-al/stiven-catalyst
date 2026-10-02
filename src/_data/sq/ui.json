@@ -552,7 +552,7 @@
   "Copy": "Kopjo",
   "Copy link": "Kopjo lidhjen",
   "Details in the": "Detajet te",
-  "privacy policy": "politika e privatësisë",
+  "privacy policy": "politikën e privatësisë",
   "Download": "Shkarko",
   "Email": "Email",
   "Email address": "Adresa e email-it",
@@ -1686,5 +1686,8 @@
   "This browser ran out of space, so nothing was changed. Free some space and open the file again.": "Shfletuesit i mbaroi hapësira, prandaj nuk u ndryshua asgjë. Lironi pak hapësirë dhe hapeni skedarin përsëri.",
   "Start again and clear my details": "Fillo nga e para dhe fshi të dhënat e mia",
   "Delete this letter and your own details (name, address, photo, signature) from this browser?": "Të fshihet kjo letër dhe të dhënat tuaja (emri, adresa, fotoja, nënshkrimi) nga ky shfletues?",
-  "Cleared, including your own details.": "U fshi, bashkë me të dhënat tuaja."
+  "Cleared, including your own details.": "U fshi, bashkë me të dhënat tuaja.",
+  "Legal notice": "Shënim ligjor",
+  "Privacy": "Privatësia",
+  "Your details are only used to reply to you.": "Të dhënat tuaja përdoren vetëm për t'ju kthyer përgjigje."
 }

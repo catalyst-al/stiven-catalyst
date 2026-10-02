@@ -1,14 +1,21 @@
 ---js
 {
   layout: "layouts/base.njk",
-  title: "Impressum",
-  lang: "de",
   noindex: true,
   eleventyExcludeFromCollections: true,
+  // One page per language: /impressum.html (English), /de/impressum.html, /sq/impressum.html.
+  pagination: { data: "legalLangs", size: 1, alias: "lang" },
+  legalLangs: ["en", "de", "sq"],
+  eleventyComputed: {
+    title: (data) => ({ en: "Legal notice", de: "Impressum", sq: "Shënim ligjor" })[data.lang],
+  },
   // Only published once the name and city in src/_data/legal.json are filled in.
-  permalink: (data) => (data.legal.name && data.legal.city ? "/impressum.html" : false),
+  permalink: (data) => (data.legal.name && data.legal.city ? (data.lang === "en" ? "/impressum.html" : `/${data.lang}/impressum.html`) : false),
 }
 ---
+{%- set email = legal.email or site.email -%}
+{%- set contactUrl = "/contact.html" | local(lang) -%}
+{%- if lang == "de" %}
 <section class="shell page-hero legal-hero">
   <p class="eyebrow">Rechtliches</p>
   <h1>Impressum</h1>
@@ -18,7 +25,7 @@
   <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}<br>{{ legal.country }}</p>
 
   <h2>Kontakt</h2>
-  <p>E-Mail: <a href="mailto:{{ legal.email or site.email }}">{{ legal.email or site.email }}</a>{% if legal.phone %}<br>Telefon: {{ legal.phone }}{% endif %}{% if site.contact.action %}<br>Kontaktformular: <a href="/contact.html">Zum Kontaktformular</a>{% endif %}</p>
+  <p>E-Mail: <a href="mailto:{{ email }}">{{ email }}</a>{% if legal.phone %}<br>Telefon: {{ legal.phone }}{% endif %}{% if site.contact.action %}<br>Kontaktformular: <a href="{{ contactUrl }}">Zum Kontaktformular</a>{% endif %}</p>
 
   <h2>Verantwortlich für den Inhalt</h2>
   <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country }}</p>
@@ -29,3 +36,46 @@
   <h2>Urheberrecht</h2>
   <p>Die Texte, Grafiken und das Logo auf dieser Website sind urheberrechtlich geschützt. Vervielfältigung oder Verwendung außerhalb der Grenzen des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung.</p>
 </section>
+{%- elif lang == "sq" %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">Ligjore</p>
+  <h1>Shënim ligjor</h1>
+</section>
+<section class="shell legal">
+  <h2>Ofruesi</h2>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}<br>{{ legal.country | replace("Albanien", "Shqipëri") }}</p>
+
+  <h2>Kontakti</h2>
+  <p>Email: <a href="mailto:{{ email }}">{{ email }}</a>{% if legal.phone %}<br>Telefon: {{ legal.phone }}{% endif %}{% if site.contact.action %}<br>Forma e kontaktit: <a href="{{ contactUrl }}">Te forma e kontaktit</a>{% endif %}</p>
+
+  <h2>Përgjegjës për përmbajtjen</h2>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country | replace("Albanien", "Shqipëri") }}</p>
+
+  <h2>Përgjegjësia për lidhjet</h2>
+  <p>Kjo faqe përmban lidhje drejt faqeve të jashtme të palëve të treta. Mbi përmbajtjen e tyre nuk kam asnjë ndikim; për të përgjigjet gjithmonë ofruesi përkatës. Nëse marr dijeni për shkelje ligjore, lidhjet përkatëse hiqen menjëherë.</p>
+
+  <h2>E drejta e autorit</h2>
+  <p>Tekstet, grafikat dhe logoja në këtë faqe mbrohen nga e drejta e autorit. Riprodhimi ose përdorimi i tyre jashtë kufijve të së drejtës së autorit kërkon pëlqimin paraprak me shkrim.</p>
+</section>
+{%- else %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">Legal</p>
+  <h1>Legal notice</h1>
+</section>
+<section class="shell legal">
+  <h2>Provider</h2>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}<br>{{ legal.country | replace("Albanien", "Albania") }}</p>
+
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:{{ email }}">{{ email }}</a>{% if legal.phone %}<br>Phone: {{ legal.phone }}{% endif %}{% if site.contact.action %}<br>Contact form: <a href="{{ contactUrl }}">Open the contact form</a>{% endif %}</p>
+
+  <h2>Responsible for the content</h2>
+  <p>{{ legal.name }}<br>{% if legal.street %}{{ legal.street }}<br>{% endif %}{{ legal.postcode }} {{ legal.city }}, {{ legal.country | replace("Albanien", "Albania") }}</p>
+
+  <h2>Liability for links</h2>
+  <p>This website contains links to external websites of third parties. I have no influence over their content; the respective provider is always responsible for it. Should I become aware of any infringement, the links concerned will be removed at once.</p>
+
+  <h2>Copyright</h2>
+  <p>The texts, graphics and logo on this website are protected by copyright. Reproduction or use beyond the limits of copyright law requires prior written consent.</p>
+</section>
+{%- endif %}

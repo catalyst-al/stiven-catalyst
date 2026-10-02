@@ -14,7 +14,7 @@
     {%- for name, value in site.newsletter.hiddenFields %}
     <input type="hidden" name="{{ name }}" value="{{ value }}">
     {%- endfor %}
-    <p class="form-note">{{ "You will get an email to confirm your subscription." | t(lang) }}{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="/datenschutz.html">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
+    <p class="form-note">{{ "You will get an email to confirm your subscription." | t(lang) }}{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
   </form>
 </section>
 {%- endif %}
