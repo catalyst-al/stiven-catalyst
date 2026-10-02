@@ -60,7 +60,7 @@ Gjatësia: 900–1 300 fjalë. Esetë e mëparshme kishin 500–700 fjalë, por 
 |---|---|---|---|
 | 1 | 01.10.2026 (u publikua) | I. Rifillimi | Të fillosh nga zero, pasi ke drejtuar njerëz dhe biznes |
 | 2 | 02.10.2026 (u publikua) | II. Milja e fundit | Çfarë më mësoi last mile-i për menaxhimin real të operacioneve |
-| 3 | 27.10.2026 | II. Milja e fundit | KPI-të nuk përmirësohen nga Excel-i |
+| 3 | 02.10.2026 (u publikua) | II. Milja e fundit | KPI-të nuk përmirësohen nga Excel-i |
 | 4 | 03.11.2026 | II. Milja e fundit | Pareto dhe 5 Why në praktikë, jo në PowerPoint |
 | 5 | 10.11.2026 | II. Milja e fundit | Të drejtosh njerëzit pa humbur njeriun |
 | 6 | 17.11.2026 | III. Ura | Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
