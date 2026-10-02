@@ -6,7 +6,8 @@ ogType: article
 <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
 <section class="shell article-hero{% if image %} has-image{% endif %}">
   {%- if image %}
-  <figure class="article-hero-media"><img src="{{ image }}" alt="{{ image_alt }}" fetchpriority="high"></figure>
+  {%- set heroSize = image | imageSize %}
+  <figure class="article-hero-media"><img src="{{ image }}" alt="{{ image_alt }}"{% if heroSize %} width="{{ heroSize.width }}" height="{{ heroSize.height }}"{% endif %} fetchpriority="high"></figure>
   {%- endif %}
   <div class="article-hero-text">
     <p class="eyebrow">{% if category %}{{ category }} · {% endif %}{{ (kind or "Essay") | t(lang) }}</p>
@@ -18,7 +19,7 @@ ogType: article
 </section>
 <section class="shell article-body">
   <aside class="article-aside">
-    {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="96" height="96">{% endif -%}
+    {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="96" height="96" loading="lazy" decoding="async">{% endif -%}
     {{ author or site.author }}<br><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %}<br>{{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</aside>
   <article class="article-content" data-article>
 {{ content | safe }}

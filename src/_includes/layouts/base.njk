@@ -17,10 +17,19 @@
 {#- A page's own image, else its card, else the homepage card in its language (the hero with the families). -#}
 {%- set card = (page.url | socialCard(lang)) or (homeUrl | socialCard(lang)) -%}
 {%- set socialImage = ogImage or ((card | assetUrl) if card else "/social.png") -%}
+{#- The two inline scripts, kept in variables so the Content Security Policy can name their hashes. -#}
+{%- set themeScript -%}document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}{%- endset -%}
+{%- set coachingLoader -%}{% include "partials/coaching-loader.njk" %}{%- endset -%}
+{#- Everything comes from this site; the one exception is a company logo from Google's icon service in the
+    CV tools (img-src). Styles allow inline attributes (the role colour, SVG charts), fonts and images may be
+    data: or blob: (exports, uploaded photos), pdf.js runs its worker from here, forms may post to the
+    newsletter provider (form-action https:). -#}
+{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="{{ csp | safe }}">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ pageTitle }}</title>
   <meta name="description" content="{{ pageDescription }}">
@@ -51,7 +60,7 @@
 {% include "partials/structured-data.njk" %}
 {%- endif %}
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <script>{{ themeScript | safe }}</script>
   <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
 {%- if toolFamily %}
   <link rel="stylesheet" href="{{ '/coaching.css' | assetUrl }}">

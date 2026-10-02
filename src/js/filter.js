@@ -1,3 +1,9 @@
+// "New" on essays from the last seven days, by the reader's own date.
+document.querySelectorAll("[data-new-since]").forEach((badge) => {
+  const days = (Date.now() - new Date(`${badge.dataset.newSince}T00:00:00`).getTime()) / 864e5;
+  badge.hidden = !(days >= -1 && days < 7);
+});
+
 (() => {
   const list = document.querySelector("[data-filter-list]");
   const controls = list?.querySelector("[data-filter-controls]");
