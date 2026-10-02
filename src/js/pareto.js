@@ -10,9 +10,26 @@
   // Excel on German Windows still saves CSV as Windows-1252; UTF-8 is tried first.
   // Windows-1252 is Latin-1 except for 0x80-0x9F (€, curly quotes, dashes...). Those are
   // mapped here, because a TextDecoder built without full ICU reads them as Latin-1 and drops the €.
+  // Excel's "Unicode Text" is UTF-16 with a byte order mark; its NUL bytes are valid UTF-8,
+  // so it is recognised first, by the mark or by the NUL in every other byte of plain text.
   const CP1252 = "€\u0081‚ƒ„…†‡ˆ‰Š‹Œ\u008DŽ\u008F\u0090‘’“”•–—˜™š›œ\u009DžŸ";
+  const utf16 = (data) => {
+    if (data.length < 2) return null;
+    if (data[0] === 0xff && data[1] === 0xfe) return "utf-16le";
+    if (data[0] === 0xfe && data[1] === 0xff) return "utf-16be";
+    const head = data.subarray(0, Math.min(data.length, 512));
+    let even = 0, odd = 0;
+    for (let i = 0; i < head.length; i += 1) if (head[i] === 0) { if (i % 2) odd += 1; else even += 1; }
+    if (odd > head.length / 4 && even === 0) return "utf-16le";
+    if (even > head.length / 4 && odd === 0) return "utf-16be";
+    return null;
+  };
   const decode = (bytes) => {
     const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const wide = utf16(data);
+    if (wide) {
+      try { return new TextDecoder(wide).decode(data).replace(/^\ufeff/, ""); } catch { /* no UTF-16 decoder: read as bytes below */ }
+    }
     try {
       return new TextDecoder("utf-8", { fatal: true }).decode(data).replace(/^﻿/, "");
     } catch {

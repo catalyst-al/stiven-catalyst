@@ -135,6 +135,12 @@ test('German Excel CSV: Windows-1252, semicolons and decimal commas', () => {
   const decoded = Pareto.decode(bytes);
   assert.equal(decoded, text);
   assert.equal(Pareto.decode(new TextEncoder().encode(`﻿${text}`)), text);
+  // Excel's "Unicode Text" is UTF-16 with a byte order mark, little or big endian, or without one.
+  const wide = (le, bom) => { const codes = [...(bom ? '﻿' : '') + text].map((ch) => ch.charCodeAt(0)); const out = new Uint8Array(codes.length * 2); codes.forEach((code, i) => { out[i * 2] = le ? code & 0xff : code >> 8; out[i * 2 + 1] = le ? code >> 8 : code & 0xff; }); return out; };
+  assert.equal(Pareto.decode(wide(true, true)), text);
+  assert.equal(Pareto.decode(wide(false, true)), text);
+  assert.equal(Pareto.decode(wide(true, false)), text);
+  assert.equal(Pareto.decode(wide(false, false)), text);
   const rows = parseRows(decoded);
   const table = { hasHeader: true, headers: rows[0], rows: rows.slice(1) };
   const map = Pareto.suggestColumns(table, de.ToolKit.parseNumber, de.ToolKit.parseDate);

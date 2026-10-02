@@ -131,7 +131,8 @@
     return n === 1 || n === 0 ? n : NaN;
   };
   // Minutes since 1970 from "2026-08-31T07:57", "31.08.2026 07:57", an Excel
-  // serial with a time fraction, or a bare "07:57" on the row's date.
+  // serial with a time fraction, a bare "07:57" on the row's date, or an Excel time
+  // cell on its own (a fraction of a day, 0.33125 for 07:57; German pages read 0,33125).
   const minutes = (value, dayIso) => {
     const text = String(value ?? "").trim();
     if (!text) return null;
@@ -143,6 +144,7 @@
     m = text.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
     if (m) return dayIso ? Date.parse(`${dayIso}T00:00:00Z`) / 6e4 + Number(m[1]) * 60 + Number(m[2]) : NaN;
     if (/^\d{5}(?:[.,]\d+)?$/.test(text)) return Math.round((Number(text.replace(",", ".")) - 25569) * 1440);
+    if (/^(?:0|0?[.,]\d+)$/.test(text)) return dayIso ? Date.parse(`${dayIso}T00:00:00Z`) / 6e4 + Math.round(Number(text.replace(",", ".")) * 1440) : NaN;
     return NaN;
   };
 
@@ -204,8 +206,12 @@
       });
       if (name === "routes") {
         // A delay written in the file wins; otherwise it comes from the two departure times.
+        // Bare times sit on the row's date, so a route planned at 23:50 that left at 00:10 is
+        // twenty minutes late, not a day early.
         if (record.Departure_Delay_Min == null && record.Planned_Departure != null && record.Actual_Departure != null) {
-          record.Departure_Delay_Min = Math.max(0, record.Actual_Departure - record.Planned_Departure);
+          let delay = record.Actual_Departure - record.Planned_Departure;
+          if (delay < -720) delay += 1440;
+          record.Departure_Delay_Min = Math.max(0, delay);
         }
       }
       if (name !== "actions" && !record.Date) note("Date", line, "");
