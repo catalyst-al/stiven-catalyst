@@ -38,28 +38,3 @@ Në atë periudhë, dëmet ranë afërsisht nga 3% në 1%. Por këtë e shoh si 
 Nëse do të më duhej ta përmblidhja gjithë këtë në diçka që një menaxher mund ta përdorë nesër, do të ishin tri gjëra. Kontrollo kategoritë para se të besosh grafikun. Mos e ndal analizën te emri i personit. Dhe shkruaj vetëm aq "pse" sa ke bërë vërtet, pastaj vazhdo të pyesësh në terren, jo në formular.
 
 Një analizë e plotësuar për bukuri është më e rrezikshme se një analizë e paplotë që e pranon kufirin e vet.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| Pareto dhe 5 Why në analizën e përditshme të KPI-ve (delay, damage, incomplete, loading) | Përgjigja 1 |
-| Raport vonesash i një dite në gusht 2025 (21.08.2025), me 19 raste; lista e shkaqeve | Përgjigja 1 (data e plotë e lënë jashtë) |
-| Të dhënat nga rastet operative, jo survey | Përgjigja 1 |
-| Pa tabelën origjinale; pa përqindje si "42%" | Përgjigjet 1 dhe 2 |
-| Modelet; missing bags dhe trolley/loading të përsëritura; "driver delay" që fillon para rampës | Përgjigja 2 |
-| Pareto mbi kategori të gabuara; grafik i saktë, përfundim i gabuar | Përgjigja 6 |
-| 5 Why: bag i gabuar, dy "pse" të dokumentuara, "Beladung doppelt prüfen", klasifikuar si warehouse/loading | Përgjigja 3 |
-| Pa Why 3–5, me qëllim | Përgjigja 3 |
-| "Kush e bëri" te "çfarë në proces e lejoi" | Përgjigja 6 |
-| Ku ndalen njerëzit; pyetjet pas "shoferi mori bag-un e gabuar" | Përgjigja 4 |
-| "Punonjësi ishte i pakujdesshëm"; punonjës tjetër, i njëjti gabim | Përgjigja 4 |
-| Masat e periudhës; ndarja e përgjegjësisë; ndjekja me Shift Leaders dhe dispecerë | Përgjigja 5 |
-| Pa person të caktuar dhe pa matje specifike për rastin | Përgjigja 5 |
-| Dëmet ~3% në ~1% si rezultat ekipi, jo i një 5 Why | Përgjigja 5 |
-| Pa analizë të dokumentuar që doli e gabuar; kufiri i kategorive | Përgjigja 6 |
-| "Ke ndërruar vetëm emrin në raport", tri gjërat për nesër dhe mbyllja: përfundime nga përgjigjet 4 dhe 6 | Sintezë |
-
-Asnjë emër kompanie, asnjë numër, skenë apo dialog i shpikur.
--->
