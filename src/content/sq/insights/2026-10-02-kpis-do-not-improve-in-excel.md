@@ -42,29 +42,3 @@ Me kalimin e kohës, kontrollet u bënë shumë më të strukturuara: pre-scan, 
 Kjo nuk do të thotë që tabela nuk vlen. Pa të nuk do ta dije as që duhet të shkosh në rampë. Por tabela është pika e nisjes, jo përgjigjja. Kur e trajton numrin si përgjigje, ndëshkon shoferin për një bag që nuk ka qenë kurrë në trolley-n e tij.
 
 Në Excel, gabimi është një numër. Në rampë, ka një adresë.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| Incomplete në raport; mendimi i parë për shoferin | Përgjigja 1 |
-| Rasti i dokumentuar: bag që mungonte nga një sektor (në përgjigje: Sector 11; në ese pa numër) | Përgjigja 1 |
-| Bag të skanuara por bag i gabuar; bag pa label, me dy emra, trolley të përzier, trolley i plotë që mungonte | Përgjigjet 1 dhe 4 |
-| Pyetja: gabim te dera apo që nga magazina | Përgjigja 1 |
-| Incomplete = 1 dhe objekti fizik në vend të gabuar | Përgjigja 4 |
-| Rampa dhe zona e ngarkimit; lista e gjërave që shiheshin | Përgjigja 2 |
-| Rregullat për chilled/frozen dhe bag-un që mungon | Përgjigja 2 |
-| Ramp audits dhe kontrolle direkte | Përgjigja 2 |
-| Pa numër se sa shpesh (nuk është i dokumentuar) | Përgjigja 2 |
-| Pyetjet për rindërtimin e rastit (si pyetje, jo si dialog) | Përgjigja 3 |
-| Arsyet e shoferëve për vonesat; foto/screenshots | Përgjigja 3 |
-| Një version i vetëm nuk mjafton | Përgjigja 3 |
-| Pa metodë për "si të mos duket hetim" (nuk është e dokumentuar) | Përgjigja 3 |
-| Raporte ditore, komunikim i shkruar, foto në rrugë dhe në rampë | Përgjigja 5 |
-| Kontrollet që u bënë më të strukturuara; incident/veprim/shkak/KPI | Përgjigjet 5 dhe 6 |
-| Pa gabim të fillimit (nuk ka episod të dokumentuar) | Përgjigja 6 |
-| "Kjo nuk do të thotë që tabela nuk vlen..." dhe mbyllja: përfundim nga përgjigjet 1 dhe 4, jo fakt i ri | Sintezë |
-
-Asnjë emër kompanie, asnjë skenë, dialog apo rezultat i shpikur.
--->
