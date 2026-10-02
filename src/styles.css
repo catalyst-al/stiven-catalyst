@@ -4861,10 +4861,6 @@ body.in-family {
 .in-family .dl-tag:not(.is-warn) { border-color: color-mix(in srgb, var(--signal) 55%, var(--line)); color: var(--signal); }
 .in-family .sc-key-better { border-color: var(--signal); }
 .in-family .sc-dot.is-better { stroke: var(--signal); }
-/* Pulse is red, so a ticked item there keeps the calm signal colour instead of looking like an error. */
-[data-family="pulse"] .sh-issue > input[type="checkbox"],
-[data-family="pulse"] .dl-check-item input { accent-color: var(--signal); }
-[data-family="pulse"] .dl-check-item:has(input:checked) { border-color: color-mix(in srgb, var(--signal) 45%, var(--line)); }
 /* Atlas is silver, close to the text colour, so its text buttons are underlined. */
 [data-family="atlas"] :is(.button-ghost, .cv-jump, .ats-paste > summary) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 
@@ -4915,8 +4911,6 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .in-family .cx-tab[aria-selected="true"] { box-shadow: 0 10px 18px -12px var(--glow); }
 /* A field being typed in and a chosen course answer take a steady light too. */
 .in-family :is(.field input, .field textarea, .field select, .sh-in):focus { box-shadow: 0 0 0 1px var(--glow), 0 0 24px -6px var(--glow); transition: box-shadow .25s ease; }
-/* Pulse is red, which on a field reads as an error: its fields get a softer, warmer light and no hard red ring. */
-[data-family="pulse"] :is(.field input, .field textarea, .field select, .sh-in):is(:focus, :focus-visible) { border-color: color-mix(in srgb, var(--family) 45%, var(--line)); box-shadow: 0 0 26px -8px var(--glow); }
 .in-family .dm-option { position: relative; isolation: isolate; }
 .in-family .dm-option:has(input:checked)::before {
   content: "";

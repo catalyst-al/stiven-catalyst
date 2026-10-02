@@ -43,7 +43,7 @@ Rules:
 - **No coloured background glows** except a soft blue light at the top of a page.
 - **A state colour means the same thing everywhere.** Red-for-error is `--danger`, not the brand red, so the brand never reads as a mistake.
 - **New colours are not added in components.** A tool uses the tokens above; if it needs a new role, the role is added here first.
-- **Tool families** (Pulse, Zenith, Lumen, Atlas) keep their own colour for wayfinding. Inside a family the family colour takes the place of blue, so a page still has a single accent.
+- **Tool families** keep their own colour for wayfinding: Pulse violet, Zenith blue, Lumen gold, Atlas silver. None of them is red or green, so a family never reads as an error or a success. Inside a family the family colour takes the place of blue, so a page still has a single accent.
 
 ## Editorial scope
 Stiven Catalyst is broader than a coaching site. It is a modern publication and professional archive covering leadership, management, operations, hospitality, logistics, service, people, systems, field notes and projects.
