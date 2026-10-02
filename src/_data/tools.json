@@ -83,7 +83,7 @@
     "name": "Shift Pulse",
     "type": "Dashboard",
     "time": "1 min",
-    "summary": "Damage, incomplete orders, late routes and open handover issues in one picture. Trend charts per number, flags for what is above usual, and a summary to copy or print.",
+    "summary": "Damage, incomplete orders, late routes and open handover issues in one picture, by day or week. Trend charts and rates, flags for what is above usual, and a summary to copy or print.",
     "url": "/tools/shift-pulse/",
     "cta": "Open Shift Pulse"
   },

@@ -38,11 +38,11 @@ The current site is a static application. It has no server, account system, shar
 - `partials/coaching-workspace.njk`: role workspace shell and safely embedded JSON.
 - `js/coaching-core.js`: schema validation, shared state, storage revision checks, backup import/export, weighted measurements and progress.
 - `js/coaching-workspace.js`: context, next step, training, project, self-coaching, reporting and saved-work views.
-- `partials/coaching-bridge.njk` / `js/coaching-bridge.js`: optional project panel on an existing tool page. Opening a tool from a project carries only a random project ID. Pareto, 5 Whys and KPI Diagnostic expose explicit read-only result providers. The visitor reviews the current result, writes a conclusion and optionally adds an accountable action. Submission reloads the latest project state first. Other tools retain manual summary/source capture. Tool inputs and logs are not overwritten.
+- `partials/coaching-bridge.njk` / `js/coaching-bridge.js`: optional project panel on an existing tool page. Opening a tool from a project carries only a random project ID. Pareto, 5 Whys and KPI Diagnostic expose explicit read-only result providers. The visitor reviews the current result, writes a conclusion and optionally adds an accountable action. Submission reloads the latest project state first. Other tools retain manual summary/source capture (for Shift Pulse that is its “Copy summary” text: the period, the three numbers, what needs attention and the open issues). Tool inputs and logs are not overwritten.
 - `js/coaching-results.js`: safe display of validated, dated result snapshots in the tool panel, project journal and printable report. Pareto keeps the complete category distribution, totals, filter, period and skipped-row count; 5 Whys keeps the reasoning chain as a hypothesis; KPI Diagnostic keeps the ten ratings and their consistent cause scores. Raw imported Pareto rows are not copied into coaching backups.
 - `src/coaching.css`: scoped additions using existing colors, buttons, form controls and typography; supports the existing dark/light themes, narrow screens and a dedicated printable report.
 - `tests/coaching.test.cjs`: state, backup, weighted rate, curriculum and DOM workflow tests.
-- `scripts/check-coaching-build.mjs`: generated-page integration checks across all 12 role pages and 39 tool pages.
+- `scripts/check-coaching-build.mjs`: generated-page integration checks across all 12 role pages and 42 tool pages.
 
 No homepage or planet asset was edited. The English, German and Albanian built homepages and `src/styles.css` were compared with the baseline and remained byte-for-byte identical.
 
