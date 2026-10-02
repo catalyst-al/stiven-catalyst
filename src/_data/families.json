@@ -6,7 +6,7 @@
     "slug": "shift-lead",
     "scope": "One shift",
     "line": "You run the floor for one shift: people, damage, incomplete orders, delays, and a clean handover at the end.",
-    "color": "#ff4d55",
+    "color": "#a78bfa",
     "orbit": 0.46,
     "tools": ["/tools/shift-pulse/", "/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/shift-handover/"],
     "learn": [],
