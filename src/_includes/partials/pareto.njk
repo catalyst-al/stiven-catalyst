@@ -151,7 +151,7 @@
 </section>
 </div>
 
-<script type="application/json" id="pareto-data">{{ cfg | dump | safe }}</script>
+<script type="application/json" id="pareto-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/pareto.js' | assetUrl }}" defer></script>

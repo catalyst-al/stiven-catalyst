@@ -295,7 +295,7 @@
   <p class="privacy-note">{{ "Your letter, photo and signature stay in this browser; nothing is uploaded." | t(lang) }}</p>
 </section>
 
-<script type="application/json" id="cover-letter-data">{{ {"letter": cfg, "themes": cvBuilder.themes, "fonts": atsCv.fonts, "accents": atsCv.accents} | dump | safe }}</script>
+<script type="application/json" id="cover-letter-data">{{ {"letter": cfg, "themes": cvBuilder.themes, "fonts": atsCv.fonts, "accents": atsCv.accents} | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/print-guide.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>

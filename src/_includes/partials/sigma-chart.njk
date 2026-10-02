@@ -168,6 +168,6 @@
 
 <section class="shell dl-results sc-results" data-results tabindex="-1" hidden></section>
 
-<script type="application/json" id="sigma-chart-data">{{ cfg | dump | safe }}</script>
+<script type="application/json" id="sigma-chart-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/sigma-chart.js' | assetUrl }}" defer></script>

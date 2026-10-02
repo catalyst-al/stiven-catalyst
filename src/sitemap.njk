@@ -6,7 +6,9 @@ eleventyExcludeFromCollections: true
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for item in collections.all %}
 {%- if item.url and item.url.endsWith(".html") or item.url and item.url.endsWith("/") %}
-  <url><loc>{{ item.url | absoluteUrl }}</loc><lastmod>{{ item.date | isoDate }}</lastmod></url>
+{#- A page without a date of its own would carry the time of the checkout that built it, which changes
+    on every deploy; only content with a real date (essays, notes, projects, reflections) says when it changed. -#}
+  <url><loc>{{ item.url | absoluteUrl }}</loc>{% if item.data.date or "/content/" in item.inputPath %}<lastmod>{{ item.date | isoDate }}</lastmod>{% endif %}</url>
 {%- endif %}
 {%- endfor %}
 </urlset>

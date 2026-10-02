@@ -134,6 +134,6 @@
   </div>
 </section>
 
-<script type="application/json" id="shift-handover-data">{{ cfg | dump | safe }}</script>
+<script type="application/json" id="shift-handover-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-handover.js' | assetUrl }}" defer></script>

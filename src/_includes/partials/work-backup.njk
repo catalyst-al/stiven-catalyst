@@ -27,6 +27,6 @@
   </div>
 </section>
 <script type="application/json" id="work-backup-names">{
-{%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | dump | safe }}: {{ tool.name | dump | safe }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor -%}
+{%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | scriptJson | safe }}: {{ tool.name | scriptJson | safe }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor -%}
 }</script>
 <script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>

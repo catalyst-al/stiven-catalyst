@@ -35,9 +35,10 @@
   --muted: #5f6870;
   --line: rgba(11, 16, 21, 0.14);
   --red: #c90912;
-  --blue: #239ee9;
+  /* Dark enough to read as text on the light paper (4.5:1 and more): blue 5.3:1, gold 5.7:1. */
+  --blue: #0a6ab0;
   --blue-soft: #63bdf3;
-  --gold: #b88a3b;
+  --gold: #7f5c1f;
   --card: rgba(255,255,255,.74);
   --shadow: 0 28px 80px rgba(15, 28, 40, .12);
 }
@@ -4826,7 +4827,7 @@ body.in-family {
   --accent-fill: var(--family);
   --accent-on: #0b1015;
 }
-[data-theme="light"] body.in-family { --signal: #239ee9; }
+[data-theme="light"] body.in-family { --signal: #0a6ab0; }
 [data-theme="light"] body.in-family[data-family="atlas"] { --accent-fill: #56606b; --accent-on: #fff; }
 [data-theme="light"] .in-family ::selection { color: #fff; }
 
