@@ -1,4 +1,4 @@
-{#- Shift Pulse: the three logs and the open handover in one picture. The page sets `cfg` to the Shift Handover data (shift and priority names); shift-pulse.js does the rest. -#}
+{#- Shift Pulse: the three logs and the open handover in one picture. The page sets `cfg` to the Shift Handover data (shift and priority names) and `damage` and `incomplete` to the data of the two defect logs (their wording); shift-pulse.js does the rest. -#}
 <section class="shell tool-layout dl-setup sp-setup">
   <form class="tool-panel" data-shift-pulse novalidate>
     <fieldset class="dl-box">
@@ -10,6 +10,8 @@
             <option value="7">{{ "Last 7 days" | t(lang) }}</option>
             <option value="14">{{ "Last 14 days" | t(lang) }}</option>
             <option value="30">{{ "Last 30 days" | t(lang) }}</option>
+            <option value="w8">{{ "Last 8 weeks" | t(lang) }}</option>
+            <option value="w12">{{ "Last 12 weeks" | t(lang) }}</option>
           </select>
         </div>
         <div class="field">
@@ -29,6 +31,8 @@
     <ul class="tips">
       <li><strong>{{ "Log where it happens." | t(lang) }}</strong> {{ "Shift Pulse draws only what Damage Control, Incomplete Control, Delay Analyzer and Shift Handover hold in this browser." | t(lang) }}</li>
       <li><strong>{{ "Read it before the handover." | t(lang) }}</strong> {{ "Look at the flags, then write the handover with an owner and a time for each open issue." | t(lang) }}</li>
+      <li><strong>{{ "Add the volume." | t(lang) }}</strong> {{ "With the volume of each day in Damage Control and Incomplete Control, the cards and charts show rates, not only counts." | t(lang) }}</li>
+      <li><strong>{{ "Read the weeks." | t(lang) }}</strong> {{ "Choose the last 8 or 12 weeks to read the logs of your shifts week by week." | t(lang) }}</li>
       <li><strong>{{ "Save the pictures." | t(lang) }}</strong> {{ "Each chart can be saved as PNG or SVG for a report or a message to your manager." | t(lang) }}</li>
     </ul>
     <p class="privacy-note">{{ "Your log stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
@@ -37,6 +41,11 @@
 
 <section class="shell dl-results" data-pulse-results tabindex="-1" aria-live="polite"></section>
 
-<script type="application/json" id="shift-pulse-data">{{ { shifts: cfg.shifts, priorities: cfg.priorities } | dump | safe }}</script>
+<script type="application/json" id="shift-pulse-data">{{ {
+  shifts: cfg.shifts,
+  priorities: cfg.priorities,
+  damage: { many: damage.text.many, volumeLabel: damage.text.volumeLabel, rateLabel: damage.text.rateLabel },
+  incomplete: { many: incomplete.text.many, volumeLabel: incomplete.text.volumeLabel, rateLabel: incomplete.text.rateLabel }
+} | dump | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-pulse.js' | assetUrl }}" defer></script>

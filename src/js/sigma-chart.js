@@ -11,7 +11,21 @@
     const same = (a, b) => kit.str(a).trim().toLowerCase() === kit.str(b).trim().toLowerCase();
     return { rows, merge: current.rows.length > 0 && same(current.metric, given.metric) && same(current.unit, given.unit) };
   };
-  window.SigmaMath = { takeOver };
+  // The days of the log as weeks, each from its Monday: handled and defects add up and the notes are joined, so the
+  // weekly chart is a p-chart of the week (a week with more handled gets narrower limits).
+  const byWeek = (rows) => {
+    const weeks = new Map();
+    rows.forEach((row) => {
+      const key = window.ToolKit.mondayOf(row.date);
+      const week = weeks.get(key) || { date: key, n: 0, d: 0, notes: [] };
+      week.n += row.n;
+      week.d += row.d;
+      if (row.note && !week.notes.includes(row.note)) week.notes.push(row.note);
+      weeks.set(key, week);
+    });
+    return [...weeks.values()].sort((a, b) => a.date.localeCompare(b.date)).map(({ notes, ...week }) => ({ ...week, note: notes.join("; ") }));
+  };
+  window.SigmaMath = { takeOver, byWeek };
 
   const dataEl = document.getElementById("sigma-chart-data");
   if (!dataEl || !window.ToolKit) return;
@@ -140,11 +154,16 @@
   const results = document.querySelector("[data-results]");
   const KEY = data.storageKey;
 
-  const state = loadState(KEY, { metric: "", unit: "", baseline: "", rows: [] });
+  const state = loadState(KEY, { metric: "", unit: "", baseline: "", grain: "day", rows: [] });
+  if (state.grain !== "week") state.grain = "day";
   state.rows = state.rows.filter(isObject)
     .map((row) => ({ date: parseDate(row.date), n: Math.round(Number(row.n)), d: Math.round(Number(row.d)), note: str(row.note) }))
     .filter((row) => row.date && row.n > 0 && row.d >= 0 && row.d <= row.n);
   const save = () => write(KEY, state);
+  // The chart is by day, or by week (the days added up from each Monday). The log below it is always by day.
+  const weekly = () => state.grain === "week";
+  const chartRows = () => (weekly() ? byWeek(state.rows) : state.rows);
+  const periods = (count) => (weekly() ? plural(count, tx("week"), tx("weeks")) : days(count));
   const metric = () => state.metric.trim() || tx("Defects");
   const unit = () => state.unit.trim() || tx("Handled");
 
@@ -173,7 +192,7 @@
 
   // Limits, and the three signal rules.
   const analyse = () => {
-    const rows = state.rows;
+    const rows = chartRows();
     const baseCount = Math.round(parseNumber(state.baseline));
     const useBase = baseCount >= 2 && baseCount < rows.length;
     const base = useBase ? rows.slice(0, baseCount) : rows;
@@ -208,7 +227,9 @@
     shifts.forEach((run) => {
       const worse = side(run[0]) > 0;
       run.forEach((point) => point.signals.push({ rule: "run", worse }));
-      events.push({ rule: "run", worse, from: run[0], to: run.at(-1), text: tx(worse ? "{n} days in a row above the centre line." : "{n} days in a row below the centre line.", { n: run.length }) });
+      events.push({ rule: "run", worse, from: run[0], to: run.at(-1), text: weekly()
+        ? tx(worse ? "{n} weeks in a row above the centre line." : "{n} weeks in a row below the centre line.", { n: run.length })
+        : tx(worse ? "{n} days in a row above the centre line." : "{n} days in a row below the centre line.", { n: run.length }) });
     });
     // Six points each higher (or lower) than the one before. The turning
     // point of one trend is the first point of the next.
@@ -225,7 +246,9 @@
     trends.forEach((run) => {
       const worse = step(run[0], run[1]) > 0;
       run.forEach((point) => point.signals.push({ rule: "trend", worse }));
-      events.push({ rule: "trend", worse, from: run[0], to: run.at(-1), text: tx(worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: run.length }) });
+      events.push({ rule: "trend", worse, from: run[0], to: run.at(-1), text: weekly()
+        ? tx(worse ? "{n} weeks in a row each higher than the one before." : "{n} weeks in a row each lower than the one before.", { n: run.length })
+        : tx(worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: run.length }) });
     });
     events.sort((a, b) => a.from.index - b.from.index);
 
@@ -259,7 +282,7 @@
     const x = (i) => m.left + band * (i + 0.5);
     const y = (v) => m.top + h - (v / yMax) * h;
 
-    const root = svg("svg", { viewBox: `0 0 ${width} ${height}`, width, height, class: "sc-chart", role: "img", "aria-label": tx("Control chart of {metric} rate by day. The table below lists every value.", { metric: lower(metric()) }) });
+    const root = svg("svg", { viewBox: `0 0 ${width} ${height}`, width, height, class: "sc-chart", role: "img", "aria-label": weekly() ? tx("Control chart of {metric} rate by week. The table below lists every value.", { metric: lower(metric()) }) : tx("Control chart of {metric} rate by day. The table below lists every value.", { metric: lower(metric()) }) });
 
     for (let v = 0; v <= yMax + 1e-12; v += yStep) {
       root.append(svg("line", { x1: m.left, x2: m.left + w, y1: y(v), y2: y(v), class: "sc-grid" }));
@@ -336,7 +359,7 @@
       drawn.cross.setAttribute("visibility", "visible");
       tooltip.replaceChildren(
         el("strong", "sc-tip-value", rate(point.p)),
-        el("span", "sc-tip-date", shortDate(point.date)),
+        el("span", "sc-tip-date", weekly() ? tx("Week of {date}", { date: shortDate(point.date) }) : shortDate(point.date)),
         el("span", null, tx("{a} of {b}", { a: int.format(point.d), b: int.format(point.n) })),
         el("span", null, tx("Limits {low} – {high}", { low: rate(point.lcl), high: rate(point.ucl) })),
       );
@@ -376,7 +399,7 @@
     if (!worse && !better) parts.push(data.verdicts.stable);
     if (worse) parts.push(data.verdicts.badSpecial);
     if (better) parts.push(data.verdicts.goodSpecial);
-    if (result.points.length < 12) parts.push(data.verdicts.short);
+    if (result.points.length < 12) parts.push(weekly() && data.verdicts.shortWeek ? data.verdicts.shortWeek : data.verdicts.short);
     return { title: worse ? tx("Signals to investigate") : better ? tx("A real improvement") : tx("Stable: this is noise"), text: parts.join(" ") };
   };
 
@@ -388,8 +411,8 @@
 
   const summaryText = (result) => {
     const v = verdict(result);
-    const lines = [`${tx("Control chart")} | Stiven Catalyst`, "", `${tx("{metric} out of {unit}", { metric: metric(), unit: lower(unit()) })}, ${days(result.points.length)} (${shortDate(result.points[0].date)} – ${shortDate(result.points.at(-1).date)})`];
-    lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${sigmaText(result.pBar)}`);
+    const lines = [`${tx("Control chart")} | Stiven Catalyst`, "", `${tx("{metric} out of {unit}", { metric: metric(), unit: lower(unit()) })}, ${periods(result.points.length)} (${shortDate(result.points[0].date)} – ${shortDate(result.points.at(-1).date)})`];
+    lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${weekly() ? tx("over the first {n} weeks", { n: result.baseCount }) : tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${sigmaText(result.pBar)}`);
     if (result.afterRate !== null) lines.push(`${tx("Since then")}: ${rate(result.afterRate)}`);
     lines.push("", `${v.title}. ${v.text}`);
     if (result.events.length) {
@@ -403,8 +426,15 @@
 
   const renderResults = () => {
     results.replaceChildren();
-    results.hidden = state.rows.length < 2;
+    const shown = chartRows();
+    results.hidden = shown.length < 2 && !(weekly() && state.rows.length >= 2);
     if (results.hidden) return;
+    if (shown.length < 2) {
+      const note = el("article", "result-card dl-focus");
+      note.append(el("p", "result-label", tx("Control chart")), el("p", "dl-focus-lede", tx("Add days from at least two different weeks to see the chart by week.")));
+      results.append(note);
+      return;
+    }
     const result = analyse();
 
     const head = el("div", "result-head");
@@ -418,18 +448,21 @@
     results.append(head);
 
     const stats = el("div", "dl-stats");
-    stats.append(stat(tx("Average rate"), rate(result.pBar), result.useBase ? tx("first {n} days", { n: result.baseCount }) : days(result.points.length)));
+    stats.append(stat(tx("Average rate"), rate(result.pBar), result.useBase ? (weekly() ? tx("first {n} weeks", { n: result.baseCount }) : tx("first {n} days", { n: result.baseCount })) : periods(result.points.length)));
     if (result.afterRate !== null) {
       const change = (result.afterRate - result.pBar) / result.pBar;
-      stats.append(stat(tx("Since then"), rate(result.afterRate), tx("{change} against the first {n} days", { change: `${change > 0 ? "+" : ""}${pct(change, 0)}`, n: result.baseCount })));
+      const against = { change: `${change > 0 ? "+" : ""}${pct(change, 0)}`, n: result.baseCount };
+      stats.append(stat(tx("Since then"), rate(result.afterRate), weekly() ? tx("{change} against the first {n} weeks", against) : tx("{change} against the first {n} days", against)));
     }
     const last = result.points.at(-1);
-    stats.append(stat(tx("Latest day"), rate(last.p), last.signals.length ? signalText(last) : tx("inside the limits, noise")));
+    stats.append(stat(weekly() ? tx("Latest week") : tx("Latest day"), rate(last.p), last.signals.length ? signalText(last) : tx("inside the limits, noise")));
     stats.append(stat(tx("Signals"), String(result.events.length), result.events.length ? tx("{a} worse, {b} better", { a: result.events.filter((e) => e.worse).length, b: result.events.filter((e) => !e.worse).length }) : tx("nothing to chase")));
     stats.append(stat(tx("Sigma level"), sigmaText(result.pBar), tx("at the average rate")));
     results.append(stats);
 
-    const chartPanel = panel(tx("{metric} rate by day", { metric: metric() }), tx("Out of {unit}. Hover a day for its numbers.", { unit: lower(unit()) }));
+    const chartPanel = weekly()
+      ? panel(tx("{metric} rate by week", { metric: metric() }), tx("Out of {unit}. Hover a week for its numbers.", { unit: lower(unit()) }))
+      : panel(tx("{metric} rate by day", { metric: metric() }), tx("Out of {unit}. Hover a day for its numbers.", { unit: lower(unit()) }));
     chartPanel.classList.add("sc-chart-panel");
     chartPanel.append(legend());
     const wrap = el("div", "sc-chart-wrap");
@@ -458,13 +491,15 @@
     results.append(card);
 
     const many = result.points.length > LOG_LIMIT;
-    const tablePanel = panel(many ? tx("The latest {n} days", { n: LOG_LIMIT }) : tx("Every day"), many ? tx("The same numbers as the chart. Download the CSV for every day.") : tx("The same numbers as the chart."));
+    const tablePanel = weekly()
+      ? panel(many ? tx("The latest {n} weeks", { n: LOG_LIMIT }) : tx("Every week"), many ? tx("The same numbers as the chart. Download the CSV for every week.") : tx("The same numbers as the chart."))
+      : panel(many ? tx("The latest {n} days", { n: LOG_LIMIT }) : tx("Every day"), many ? tx("The same numbers as the chart. Download the CSV for every day.") : tx("The same numbers as the chart."));
     const tableWrap = el("div", "dl-table-wrap");
     tableWrap.tabIndex = 0;
     const table = el("table", "dl-table");
     const thead = el("thead");
     const headRow = el("tr");
-    [tx("Date"), unit(), metric(), tx("Rate"), tx("Lower"), tx("Upper"), tx("Signal"), tx("Note")].forEach((text, i) => {
+    [weekly() ? tx("Week from") : tx("Date"), unit(), metric(), tx("Rate"), tx("Lower"), tx("Upper"), tx("Signal"), tx("Note")].forEach((text, i) => {
       const th = el("th", i && i < 6 ? "num" : null, text);
       th.scope = "col";
       headRow.append(th);
@@ -515,13 +550,25 @@
     save();
     renderResults();
   }, () => state.rows.length);
+  // "Limits from the first [ ] days" counts weeks when the chart is by week.
+  const baselineUnit = root.querySelector("[data-grain-unit]");
+  const syncGrain = () => { if (baselineUnit) baselineUnit.textContent = weekly() ? tx("weeks, optional") : tx("days, optional"); };
   root.querySelectorAll("[data-setting]").forEach((input) => {
     input.value = state[input.name] ?? "";
     input.addEventListener("input", () => {
+      const was = state.grain;
       state[input.name] = input.value;
+      // The first days (or weeks) that set the limits keep their length in time when the chart changes its grain.
+      if (input.name === "grain" && was !== state.grain) {
+        const count = Math.round(parseNumber(state.baseline));
+        if (count >= 2) state.baseline = weekly() ? (Math.round(count / 7) >= 2 ? String(Math.round(count / 7)) : "") : String(count * 7);
+        root.querySelector('[name="baseline"]').value = state.baseline;
+      }
+      syncGrain();
       renderSetting();
     });
   });
+  syncGrain();
 
   entry.elements.date.value = today();
   entry.addEventListener("submit", (event) => {
@@ -590,10 +637,12 @@
 
   root.querySelector("[data-csv]").addEventListener("click", () => {
     if (!state.rows.length) return;
-    const result = state.rows.length > 1 ? analyse() : null;
+    // By week, the file holds the weeks of the chart, from their Mondays.
+    const exported = chartRows();
+    const result = exported.length > 1 ? analyse() : null;
     downloadCsv(data.csv || "control-chart", [
-      [tx("Date"), unit(), metric(), tx("Rate %"), tx("Average %"), tx("Lower limit %"), tx("Upper limit %"), tx("Signal"), tx("Note")],
-      ...state.rows.map((row, i) => {
+      [weekly() ? tx("Week from") : tx("Date"), unit(), metric(), tx("Rate %"), tx("Average %"), tx("Lower limit %"), tx("Upper limit %"), tx("Signal"), tx("Note")],
+      ...exported.map((row, i) => {
         const point = result?.points[i];
         const fixed = (value) => (value == null ? "" : (value * 100).toFixed(3).replace(".", DECIMAL_COMMA ? "," : "."));
         return [row.date, row.n, row.d, fixed(row.d / row.n), fixed(result?.pBar), fixed(point?.lcl), fixed(point?.ucl), point ? signalText(point) : "", row.note];

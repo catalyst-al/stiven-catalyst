@@ -156,27 +156,75 @@ test('Shift Pulse counts each log per day and flags a latest day that is clearly
   };
   const all = plain(PulseMath.compute(logs, { from: '2026-09-01', to: '2026-09-03', shift: '' }));
   assert.deepEqual(all.days, ['2026-09-01', '2026-09-02', '2026-09-03']);
-  assert.deepEqual(all.damage.byDay, [1, 2, 9], 'a row without units counts one; rows outside the period do not count');
+  assert.deepEqual(all.damage.values, [1, 2, 9], 'a row without units counts one; rows outside the period do not count');
   assert.equal(all.damage.total, 12);
   assert.equal(all.damage.above, true, '9 on the latest day against a usual 1.5');
   assert.equal(all.incomplete.latest, null);
   assert.deepEqual([all.delay.routes, all.delay.late, all.delay.onTime], [4, 3, 0.25], 'the route without an arrival time is left out');
   assert.equal(all.delay.above, true);
   const early = plain(PulseMath.compute(logs, { from: '2026-09-01', to: '2026-09-03', shift: 'Early' }));
-  assert.deepEqual(early.damage.byDay, [1, 2, 7]);
+  assert.deepEqual(early.damage.values, [1, 2, 7]);
   const quiet = plain(PulseMath.compute({ damage: { rows: [{ date: '2026-09-03', shift: 'Early', units: 3 }] } }, { from: '2026-09-01', to: '2026-09-03' }));
   assert.equal(quiet.damage.above, false, 'no earlier day to compare with is not a flag');
 });
 
-const loadDefectLog = () => {
-  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/damage-control/', runScripts: 'outside-only' });
+test('Shift Pulse reads a period by the week, from each Monday, and compares the latest week with the ones before', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
   dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
-  dom.window.eval(fs.readFileSync('src/js/defect-log.js', 'utf8'));
-  return dom.window;
-};
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath } = dom.window;
+  const day = (date, units) => ({ date, shift: 'Early', units });
+  const logs = {
+    damage: { rows: [day('2026-09-08', 4), day('2026-09-10', 3), day('2026-09-14', 5), day('2026-09-21', 12), day('2026-09-23', 2)] },
+    incomplete: { rows: [] },
+    delay: { arrivalGrace: '15', rows: [
+      { date: '2026-09-09', shift: 'Early', planArr: '10:00', actArr: '10:05' }, { date: '2026-09-09', shift: 'Early', planArr: '11:00', actArr: '11:05' },
+      { date: '2026-09-22', shift: 'Early', planArr: '10:00', actArr: '10:45' }, { date: '2026-09-22', shift: 'Early', planArr: '11:00', actArr: '11:40' }, { date: '2026-09-23', shift: 'Early', planArr: '11:00', actArr: '11:05' },
+    ] },
+  };
+  const weeks = plain(PulseMath.compute(logs, { from: '2026-09-07', to: '2026-09-23', unit: 'week' }));
+  assert.deepEqual(weeks.slots, ['2026-09-07', '2026-09-14', '2026-09-21']);
+  assert.equal(weeks.days.length, 17);
+  assert.deepEqual(weeks.damage.values, [7, 5, 14]);
+  assert.deepEqual([weeks.damage.latest.key, weeks.damage.latest.count, weeks.damage.usual], ['2026-09-21', 14, 6], 'the usual is the mean of the weeks before');
+  assert.equal(weeks.damage.above, true, '14 against a usual 6');
+  assert.deepEqual(weeks.delay.values, [0, 0, 2]);
+  assert.deepEqual(weeks.delay.routesBySlot, [2, 0, 3]);
+  assert.equal(weeks.delay.latest.share, 2 / 3);
+  assert.equal(weeks.delay.usualShare, 0, 'the weeks before had routes and none was late');
+  assert.equal(weeks.delay.above, true);
+  const byDay = plain(PulseMath.compute(logs, { from: '2026-09-07', to: '2026-09-23' }));
+  assert.equal(byDay.slots.length, 17, 'the same period by day has a slot per day');
+  assert.equal(byDay.damage.total, weeks.damage.total);
+});
+
+test('Shift Pulse shows a rate only when every day with entries has a volume, and not for one shift', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath } = dom.window;
+  const rows = [{ date: '2026-09-01', shift: 'Early', units: 3 }, { date: '2026-09-02', shift: 'Late', units: 3 }, { date: '2026-09-03', shift: 'Early', units: 6 }];
+  const volumes = ['2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04'].map((date) => ({ date, volume: 1000 }));
+  const options = { from: '2026-09-01', to: '2026-09-04' };
+  const full = plain(PulseMath.compute({ damage: { rows, volumes, target: '0.2' } }, options)).damage;
+  assert.deepEqual([full.volume, full.rate, full.target], [4000, 12 / 4000, 0.002], 'a quiet day with a volume is in the volume');
+  assert.equal(full.above, true, '6 of 1000 on the latest day, against 6 of 2000 before it');
+  assert.equal(full.volumes.length, 4);
+  const gap = plain(PulseMath.compute({ damage: { rows, volumes: volumes.filter((item) => item.date !== '2026-09-02') } }, options)).damage;
+  assert.equal(gap.rate, null, 'a day with entries and no volume: no rate');
+  assert.equal(gap.volumes.length, 3, 'but the chart can still use the days that have one');
+  assert.equal(plain(PulseMath.compute({ damage: { rows, volumes } }, { ...options, shift: 'Early' })).damage.rate, null, 'a volume is for the whole day, so no rate for one shift');
+  assert.equal(plain(PulseMath.compute({ damage: { rows } }, options)).damage.rate, null);
+  assert.equal(plain(PulseMath.compute({ damage: { rows, volumes: [{ date: '2026-09-01', volume: 2 }, ...volumes.slice(1)] } }, options)).damage.rate, 12 / 3002, 'the sum counts what was entered');
+  // Entries above the volume cannot be a rate.
+  assert.equal(plain(PulseMath.compute({ damage: { rows, volumes: volumes.map((item) => ({ ...item, volume: 2 })) } }, options)).damage.rate, null);
+  // The Delay Analyzer's on-time target becomes a ceiling for the late share.
+  assert.equal(plain(PulseMath.compute({ delay: { rows: [], target: '95' } }, options)).delay.lateTarget, 1 - 0.95);
+  assert.equal(plain(PulseMath.compute({ delay: { rows: [], target: '' } }, options)).delay.lateTarget, null);
+});
 
 test('daily volumes keep one value per day, read pasted rows and say which days of a period they cover', () => {
-  const { DefectMath } = loadDefectLog();
+  const { ToolKit: DefectMath } = load();
   assert.deepEqual(plain(DefectMath.cleanVolumes([
     { date: '2026-09-02', volume: 200 }, { date: '2026-09-01', volume: '100' }, { date: '2026-09-02', volume: 250 },
     { date: 'bad', volume: 5 }, { date: '2026-09-03', volume: 0 }, null, { date: '2026-09-04', volume: 12.4 },
@@ -195,6 +243,8 @@ test('daily volumes keep one value per day, read pasted rows and say which days 
   assert.deepEqual(plain(gap.missing), ['2026-09-16']);
   assert.equal(DefectMath.dayVolumes(volumes, [...rows, { date: '' }], '', '').undated, true);
   assert.deepEqual(plain(DefectMath.dayVolumes(volumes, [], '', '')), { items: [], missing: [], undated: false, total: 0 });
+  // A period that is given counts its days even when nothing was logged in them: zero damage on a day with a volume.
+  assert.deepEqual(plain(DefectMath.dayVolumes(volumes, [], '2026-09-14', '2026-09-16')).total, 300);
 });
 
 test('trend shares divide each day by its own volume and leave out days without one', () => {
@@ -268,4 +318,34 @@ test('days handed to the control chart become points, and the same metric adds t
   assert.equal(SigmaMath.takeOver(given, chart).merge, true, 'the same metric and unit, whatever the case');
   assert.equal(SigmaMath.takeOver(given, { ...chart, metric: 'Incomplete orders' }).merge, false);
   assert.equal(SigmaMath.takeOver(given, { ...chart, unit: 'Orders shipped' }).merge, false);
+});
+
+test('trend buckets can be forced to weeks and made to cover a whole period', () => {
+  const { ToolKit } = load();
+  const rows = [{ date: '2026-09-09', n: 1 }, { date: '2026-09-10', n: 2 }];
+  const weeks = ToolKit.trendBuckets(rows, (row) => row.n, 60, null, { unit: 'week', from: '2026-08-17', to: '2026-09-20' });
+  assert.equal(weeks.unit, 'week');
+  assert.deepEqual(plain(weeks.buckets.map((b) => [b.key, b.value])), [['2026-08-17', 0], ['2026-08-24', 0], ['2026-08-31', 0], ['2026-09-07', 3], ['2026-09-14', 0]], 'quiet weeks are 0 and the period decides the first and last week');
+  const days = ToolKit.trendBuckets([], (row) => row.n, 60, null, { from: '2026-09-01', to: '2026-09-03' });
+  assert.deepEqual(plain(days.buckets.map((b) => b.key)), ['2026-09-01', '2026-09-02', '2026-09-03']);
+  assert.equal(ToolKit.trendBuckets([], () => 0).buckets.length, 0);
+  const shares = ToolKit.trendShares([], () => 0, [{ date: '2026-09-07', volume: 100 }, { date: '2026-09-21', volume: 100 }], 60, { unit: 'week', from: '2026-09-07', to: '2026-09-27' });
+  assert.deepEqual(plain(shares.buckets.map((b) => [b.key, b.total, b.value])), [['2026-09-07', 100, 0], ['2026-09-14', 0, 0], ['2026-09-21', 100, 0]]);
+});
+
+test('the control chart by week adds the days up from each Monday and joins their notes', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/sigma-control-chart/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/sigma-chart.js', 'utf8'));
+  const { SigmaMath } = dom.window;
+  const days = [
+    { date: '2026-09-06', n: 100, d: 1, note: 'Sunday before' }, { date: '2026-09-07', n: 1000, d: 10, note: '' }, { date: '2026-09-09', n: 1000, d: 5, note: 'New standard' },
+    { date: '2026-09-13', n: 500, d: 5, note: 'New standard' }, { date: '2026-09-14', n: 1000, d: 20, note: '' },
+  ];
+  assert.deepEqual(plain(SigmaMath.byWeek(days)), [
+    { date: '2026-08-31', n: 100, d: 1, note: 'Sunday before' },
+    { date: '2026-09-07', n: 2500, d: 20, note: 'New standard' },
+    { date: '2026-09-14', n: 1000, d: 20, note: '' },
+  ], 'Sunday belongs to the week that began the Monday before; the same note is not repeated');
+  assert.deepEqual(plain(SigmaMath.byWeek([])), []);
 });

@@ -298,6 +298,55 @@ window.ToolKit = (() => {
     return list;
   };
 
+  // Shares of a volume are small (0.45% of the units is a bad day), so the digits follow the size: 12%, 0.45%.
+  const shareText = (value) => pct(value, value === 0 || value >= 0.1 ? 0 : 2);
+  // The volume of single days (units handled, orders shipped), kept by the defect logs and read by Shift Pulse. One
+  // volume per date (a new value for a date replaces the old one), oldest first.
+  const cleanVolumes = (list) => {
+    const byDate = new Map();
+    list.filter(isObject).forEach((item) => {
+      const date = parseDate(item.date);
+      const volume = Math.round(Number(item.volume));
+      if (date && volume > 0 && Number.isSafeInteger(volume)) byDate.set(date, volume);
+    });
+    return [...byDate].sort(([a], [b]) => a.localeCompare(b)).map(([date, volume]) => ({ date, volume }));
+  };
+  // Rows pasted from a spreadsheet: date, then the volume of that day.
+  const importVolumes = (text) => {
+    const added = [];
+    let skipped = 0;
+    parseRows(text).forEach((cells, index) => {
+      const [date, volume] = cells;
+      const day = parseDate(date);
+      const value = Math.round(parseNumber(volume));
+      if (!day || !(value > 0) || !Number.isSafeInteger(value)) {
+        // A first row with words where the date and the number belong is a header.
+        if (index > 0) skipped++;
+        return;
+      }
+      added.push({ date: day, volume: value });
+    });
+    return { added, skipped };
+  };
+  // The days of a period that have a volume of their own. rows are the rows of the period and from/to its own
+  // limits ("" when open): an open side runs to the first or last day with entries, so volumes entered for other
+  // months do not dilute the rate, while a limit that is given counts its quiet days too. "missing" lists the days
+  // with entries that have no volume.
+  const dayVolumes = (volumes, rows, from, to) => {
+    const span = dateSpan(rows);
+    const low = from || span?.from;
+    const high = to || span?.to;
+    if (!low || !high) return { items: [], missing: [], undated: false, total: 0 };
+    const items = volumes.filter((item) => item.date >= low && item.date <= high);
+    const have = new Set(items.map((item) => item.date));
+    return {
+      items,
+      missing: [...new Set(rows.filter((row) => row.date).map((row) => row.date))].filter((date) => !have.has(date)).sort(),
+      undated: rows.some((row) => !row.date),
+      total: items.reduce((sum, item) => sum + item.volume, 0),
+    };
+  };
+
   // Trend over time. trendBuckets groups dated rows by day (a period of up to 31 days) or by week
   // (Monday to Sunday), fills quiet days with 0 and sums valueOf(row). It is plain arithmetic, so a test can call it.
   const mondayOf = (isoDate) => {
@@ -305,14 +354,16 @@ window.ToolKit = (() => {
     return addDays(isoDate, -((date.getUTCDay() + 6) % 7));
   };
   // With totalOf, each bucket holds a share (sum of valueOf over sum of totalOf, 0 to 1) and its count and total;
-  // a day with no total has no share and draws no column.
-  const trendBuckets = (rows, valueOf, maxBuckets = 60, totalOf = null) => {
+  // a day with no total has no share and draws no column. options: { unit: "day" or "week" instead of by the length of
+  // the span, from and to: dates the buckets must cover even where there are no rows }.
+  const trendBuckets = (rows, valueOf, maxBuckets = 60, totalOf = null, options = {}) => {
     const dated = rows.filter((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.date));
     const undated = rows.length - dated.length;
-    if (!dated.length) return { unit: "day", buckets: [], undated };
-    const dates = dated.map((row) => row.date).sort();
+    const reach = [options.from, options.to].filter(Boolean);
+    if (!dated.length && !reach.length) return { unit: options.unit || "day", buckets: [], undated };
+    const dates = [...dated.map((row) => row.date), ...reach].sort();
     const days = Math.round((new Date(`${dates.at(-1)}T00:00:00Z`) - new Date(`${dates[0]}T00:00:00Z`)) / 864e5) + 1;
-    const unit = days <= 31 ? "day" : "week";
+    const unit = options.unit || (days <= 31 ? "day" : "week");
     const keyOf = unit === "day" ? (d) => d : mondayOf;
     const sums = new Map();
     const totals = new Map();
@@ -332,13 +383,13 @@ window.ToolKit = (() => {
   // Shares over a volume of each day: countOf(row) over volumes[{ date, volume }], per day or per week. A day with
   // entries but no volume cannot have a share, so it is left out and listed in `skipped`; a day with a volume and no
   // entries counts as 0. Pass only the volumes of the days that belong to the period.
-  const trendShares = (rows, countOf, volumes, maxBuckets = 60) => {
+  const trendShares = (rows, countOf, volumes, maxBuckets = 60, options = {}) => {
     const volumeOf = new Map(volumes.map((item) => [item.date, item.volume]));
     const parts = [
       ...rows.filter((row) => volumeOf.has(row.date)).map((row) => ({ date: row.date, count: countOf(row), total: 0 })),
       ...volumes.map((item) => ({ date: item.date, count: 0, total: item.volume })),
     ];
-    const trend = trendBuckets(parts, (part) => part.count, maxBuckets, (part) => part.total);
+    const trend = trendBuckets(parts, (part) => part.count, maxBuckets, (part) => part.total, options);
     return { ...trend, undated: rows.filter((row) => !row.date).length, skipped: [...new Set(rows.filter((row) => row.date && !volumeOf.has(row.date)).map((row) => row.date))].sort() };
   };
 
@@ -836,7 +887,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs,
+    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

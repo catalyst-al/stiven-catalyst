@@ -1,50 +1,4 @@
 (() => {
-  // The arithmetic of daily volumes, without the page (tests/pulse-tools.test.cjs uses it too).
-  const kit = window.ToolKit || {};
-  // One volume per date (a new value for a date replaces the old one), oldest first.
-  const cleanVolumes = (list) => {
-    const byDate = new Map();
-    list.filter(kit.isObject).forEach((item) => {
-      const date = kit.parseDate(item.date);
-      const volume = Math.round(Number(item.volume));
-      if (date && volume > 0 && Number.isSafeInteger(volume)) byDate.set(date, volume);
-    });
-    return [...byDate].sort(([a], [b]) => a.localeCompare(b)).map(([date, volume]) => ({ date, volume }));
-  };
-  // Rows pasted from a spreadsheet: date, then the volume of that day.
-  const importVolumes = (text) => {
-    const added = [];
-    let skipped = 0;
-    kit.parseRows(text).forEach((cells, index) => {
-      const [date, volume] = cells;
-      const day = kit.parseDate(date);
-      const value = Math.round(kit.parseNumber(volume));
-      if (!day || !(value > 0) || !Number.isSafeInteger(value)) {
-        // A first row with words where the date and the number belong is a header.
-        if (index > 0) skipped++;
-        return;
-      }
-      added.push({ date: day, volume: value });
-    });
-    return { added, skipped };
-  };
-  // The days of a period that have a volume of their own. rows are the rows of the period and from/to its own
-  // limits ("" when open): an open period runs from the first to the last day with entries, so volumes entered for
-  // other months do not dilute the rate. "missing" lists the days with entries that have no volume.
-  const dayVolumes = (volumes, rows, from, to) => {
-    const span = kit.dateSpan(rows);
-    if (!span) return { items: [], missing: [], undated: false, total: 0 };
-    const items = volumes.filter((item) => item.date >= (from || span.from) && item.date <= (to || span.to));
-    const have = new Set(items.map((item) => item.date));
-    return {
-      items,
-      missing: [...new Set(rows.filter((row) => row.date).map((row) => row.date))].filter((date) => !have.has(date)).sort(),
-      undated: rows.some((row) => !row.date),
-      total: items.reduce((sum, item) => sum + item.volume, 0),
-    };
-  };
-  window.DefectMath = { cleanVolumes, importVolumes, dayVolumes };
-
   // Shared by Damage Control and Incomplete Control. Each page supplies its
   // fields, wording, advice and example in #defect-log-data. The fields are
   // always shift, stage, type and cause, in that order.
@@ -53,7 +7,7 @@
   if (!root || !dataEl || !window.ToolKit) return;
 
   const {
-    tx, num, showDate, lower, addDays,
+    tx, num, showDate, lower, addDays, cleanVolumes, importVolumes, dayVolumes, shareText,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
@@ -203,9 +157,6 @@
       days: new Set(rows.map((row) => row.date).filter(Boolean)).size,
     };
   };
-
-  // Shares are small here: 0.45% of units is a bad day, so the digits follow the size.
-  const shareText = (value) => pct(value, value === 0 || value >= 0.1 ? 0 : 2);
 
   // Results.
   const bars = (items, total, options = {}) => barList(items, {
@@ -385,8 +336,8 @@
     if (trend.buckets.length > 1) {
       const by = trend.unit === "week" ? tx("week by week") : tx("day by day");
       const note = !useShares ? tx("{many} per {unit}. The dashed line is the average; the highest {unit} is red.", { many: t.many, unit: trendUnit })
-        : goal > 0 ? tx("{rate}: {many} as a share of {volume}, {by}. The dashed line is the average, the solid line the target; columns above it are red.", { rate: t.rateLabel, many: t.many, volume: lower(t.volumeLabel), by })
-        : tx("{rate}: {many} as a share of {volume}, {by}. The dashed line is the average; the highest column is red.", { rate: t.rateLabel, many: t.many, volume: lower(t.volumeLabel), by });
+        : goal > 0 ? tx("{rate} ({many} / {volume}), {by}. The dashed line is the average, the solid line the target; columns above it are red.", { rate: t.rateLabel, many: t.many, volume: t.volumeLabel, by })
+        : tx("{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.", { rate: t.rateLabel, many: t.many, volume: t.volumeLabel, by });
       trendPanel = panel(tx("Trend over time"), note);
       trendPanel.append(trendFigure(trend, useShares
         ? { title: `${t.tool}: ${t.rateLabel}`, unit: t.rateLabel, average: tx("Average"), format: shareText, target: goal > 0 ? goal : null, targetLabel: tx("Target") }

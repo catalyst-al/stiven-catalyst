@@ -34,12 +34,13 @@
     "orbit": 0.7,
     "tools": ["/tools/cx-control-tower/", "/tools/kpi-diagnostic/", "/tools/pareto/"],
     "learn": [],
-    "also": ["/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
+    "also": ["/tools/shift-pulse/", "/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
     "read": [],
     "routine": [
       { "when": "Every morning", "do": "Read yesterday in one view: on time, undamaged, complete and complaints.", "tool": "/tools/cx-control-tower/" },
       { "when": "When a KPI turns red", "do": "Find out whether it is clarity, skill, capacity, process or ownership before you push.", "tool": "/tools/kpi-diagnostic/" },
       { "when": "Every week", "do": "Sort the week's losses and start with the few causes behind most of them.", "tool": "/tools/pareto/" },
+      { "when": "Every week", "do": "Read the logs of your shifts week by week: rates, the trend and what is still open.", "tool": "/tools/shift-pulse/" },
       { "when": "Every week", "do": "Check with your shift leads where route delays begin.", "tool": "/tools/delay-analyzer/" },
       { "when": "Every month", "do": "Tell a real change from a normal bad day before you react.", "tool": "/tools/sigma-control-chart/" }
     ],
