@@ -419,7 +419,7 @@
   const app = document.querySelector("[data-pareto]");
   const dataEl = document.getElementById("pareto-data");
   if (!app || !dataEl || !window.ToolKit) return;
-  const { LANG, tx, el, num, pct, int, lower, parseNumber, parseDate, parseRows, showDate, read, write, isObject, str, stat, resultActions } = window.ToolKit;
+  const { LANG, tx, el, num, pct, int, lower, parseNumber, parseDate, parseRows, showDate, read, write, isObject, str, stat, resultActions, csvSafe } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const lang = ["de", "sq"].includes(LANG) ? LANG : "en";
   const templates = Object.fromEntries(data.templates.map((template) => [template.id, template]));
@@ -589,7 +589,10 @@
     save();
   });
 
-  const csvCell = (text, sep) => (/[";\n,\t]/.test(text) || text.includes(sep) ? `"${text.replace(/"/g, '""')}"` : text);
+  const csvCell = (raw, sep) => {
+    const text = csvSafe(String(raw ?? ""));
+    return /[";\n,\t]/.test(text) || text.includes(sep) ? `"${text.replace(/"/g, '""')}"` : text;
+  };
   const download = (name, content, type) => {
     const url = URL.createObjectURL(content instanceof Blob ? content : new Blob([content], { type }));
     const link = el("a");

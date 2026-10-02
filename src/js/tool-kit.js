@@ -832,11 +832,14 @@ window.ToolKit = (() => {
     };
   };
 
+  // A typed text that a spreadsheet would run as a formula (=HYPERLINK(...), +cmd, @A1,
+  // or a leading tab) is kept as text with a leading apostrophe; a plain number stays a number.
+  const csvSafe = (text) => (/^[=+\-@\t\r]/.test(text) && !/^[+-]?\d+(?:[.,]\d+)?%?$/.test(text) ? `'${text}` : text);
   // German and Albanian Excel expect semicolons and a decimal comma.
   const downloadCsv = (name, rows) => {
     const separator = DECIMAL_COMMA ? ";" : ",";
     const quote = (value) => {
-      const text = typeof value === "number" && DECIMAL_COMMA ? String(value).replace(".", ",") : String(value ?? "");
+      const text = csvSafe(typeof value === "number" && DECIMAL_COMMA ? String(value).replace(".", ",") : String(value ?? ""));
       return text.includes(separator) || /["\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
     };
     const lines = rows.map((cells) => cells.map(quote).join(separator));
@@ -888,6 +891,6 @@ window.ToolKit = (() => {
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
-    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

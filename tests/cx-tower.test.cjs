@@ -155,6 +155,25 @@ test('a whole workbook: four tables, the target sheet wins over a KPI dictionary
   assert.deepEqual(plain(targets), { onTime: 0.98, lateRoute: null, loading: 20 });
 });
 
+test('an action tracker with Metric and Target columns is read as actions, not as targets', () => {
+  const rows = [
+    ['Action_ID', 'Problem', 'Action', 'Owner', 'Deadline', 'Metric', 'Baseline', 'Target', 'Verification_Status'],
+    ['A1', 'Late PM wave', 'Move the cut-off', 'SM', '2026-10-01', 'Damage Rate', '1.1%', '<=0.8%', 'Pending'],
+    ['A2', 'Loading', 'Dock plan', 'OM', '2026-10-05', 'Late Route Rate', '7%', '<=5%', 'Pending'],
+  ];
+  const { found, targets, targetSheet } = C.readSheets([{ name: 'actions.csv', rows, hidden: false }]);
+  assert.deepEqual(plain(found.map((f) => `${f.name}:${f.records.length}`)), ['actions:2']);
+  assert.equal(targets, null);
+  assert.equal(targetSheet, '');
+  // The German tracker, the same way.
+  const de = rows.map((row, i) => (i ? row : ['Massnahme ID', 'Problem', 'Massnahme', 'Verantwortlich', 'Frist', 'Kennzahl', 'Ausgangswert', 'Ziel', 'Wirksamkeit']));
+  assert.deepEqual(plain(C.readSheets([{ name: 'Massnahmen', rows: de, hidden: false }]).found.map((f) => f.name)), ['actions']);
+  // A plain "Metric | Target" sheet still holds targets.
+  const t = C.readSheets([{ name: 'TARGETS', rows: [['Metric', 'Target'], ['Damage Rate', '0.8%']], hidden: false }]);
+  assert.deepEqual(plain(t.found), []);
+  assert.deepEqual(plain(t.targets), { damage: 0.008 });
+});
+
 test('the example is the same every time and tells its story', () => {
   const a = C.example('2026-09-27');
   assert.deepEqual(plain(a), plain(C.example('2026-09-27')));

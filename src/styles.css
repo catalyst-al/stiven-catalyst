@@ -4062,6 +4062,7 @@ html:not(.js) .filter-bar { display: none; }
   box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
 }
 .ats-page > * { margin: 0; }
+.ats-page.is-over { box-shadow: 0 0 0 3px #e11d48, 0 18px 50px rgba(0, 0, 0, .28); }
 .ats-measure { position: absolute; top: 0; left: 0; height: auto; visibility: hidden; box-shadow: none; pointer-events: none; }
 .ats-doc .ats-head { display: grid; gap: 4px; padding-bottom: 4px; }
 .ats-doc .ats-name { color: var(--ats-accent); font-size: 27px; font-weight: 700; line-height: 1.15; }

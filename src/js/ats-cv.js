@@ -398,6 +398,8 @@
   const measure = el("div", "ats-page ats-measure");
   measure.setAttribute("aria-hidden", "true");
   let pageCount = 0;
+  // A block taller than a page is cut off by the page; the page is marked and the checks say so.
+  let overflow = false;
 
   const renderCv = () => {
     const font = data.fonts.find((item) => item.id === cv.font) || data.fonts[0];
@@ -412,13 +414,20 @@
     const pages = paginate(list, PAGE_H - TOP - BOTTOM);
     measure.remove();
     pageCount = pages.length;
+    overflow = false;
     const footerName = [cv.person.name.trim(), doc().doc].filter(Boolean).join(" · ");
     scaler.replaceChildren(...pages.map((indices, n) => {
       const page = el("div", "ats-page");
+      let used = 0;
       indices.forEach((index, i) => {
         list[index].node.style.marginTop = i ? `${list[index].space}px` : "";
+        used += (i ? list[index].space : 0) + list[index].height;
         page.append(list[index].node);
       });
+      if (used > PAGE_H - TOP - BOTTOM) {
+        overflow = true;
+        page.classList.add("is-over");
+      }
       const foot = el("footer", "ats-foot");
       foot.append(el("span", null, footerName), el("span", null, doc().page.replace("{n}", n + 1).replace("{total}", pages.length)));
       page.append(foot);
@@ -522,7 +531,9 @@
       [dateKinds.size <= 1 || (dateKinds.size === 2 && !dateKinds.has("other")), tx("Dates use one format, for example 03.2022.")],
       [bullets.length > 0 && withNumber * 2 >= bullets.length, tx("At least half of the bullet points show a number or result ({a} of {b}).", { a: withNumber, b: bullets.length })],
       [cv.skills.some((item) => item.text.trim()), tx("Skills are listed as words the software can find.")],
-      [pageCount <= 2, tx("{n} pages. One or two pages read best.", { n: pageCount })],
+      [pageCount <= 2 && !overflow, overflow
+        ? tx("One block is longer than a page. Shorten it so nothing is cut off.")
+        : tx("{n} pages. One or two pages read best.", { n: pageCount })],
     ];
     if (matchScore !== null) checks.push([matchScore >= 0.6, tx("At least 60% of the job ad's key words are in the CV.")]);
     const passed = checks.filter(([ok]) => ok).length;

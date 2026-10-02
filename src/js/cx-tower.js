@@ -221,11 +221,15 @@
     sheets.forEach((sheet) => {
       if (sheet.hidden) return;
       const rows = sheet.rows.map((row) => row.map((cell) => String(cell ?? "")));
-      // A "Metric | Target" table holds targets, even when it also has an Owner column.
-      const t = readTargets(rows);
-      if (t) { targetTables.push({ sheet: sheet.name, t }); return; }
+      // One of the four tables is read as that table, even when it has Metric and Target
+      // columns (the action tracker has both). Any other "Metric | Target" table holds
+      // targets, even when it also has an Owner column.
       const hit = recognise(rows);
-      if (!hit) return;
+      if (!hit) {
+        const t = readTargets(rows);
+        if (t) targetTables.push({ sheet: sheet.name, t });
+        return;
+      }
       const { records, issues } = toRecords(hit.name, rows, hit.map, hit.headerRow);
       found.push({ name: hit.name, sheet: sheet.name, map: hit.map, records, issues });
     });
