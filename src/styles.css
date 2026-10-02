@@ -244,6 +244,7 @@ button, input, select { font: inherit; }
   --red: #df1119;
   --blue: #4ab5f7;
   --blue-soft: #79c9f7;
+  --on-blue: #001018;
   --gold: #d1a553;
   --card: rgba(255,255,255,.045);
   position: relative;
@@ -3228,6 +3229,8 @@ html:not(.js) .filter-bar { display: none; }
   --muted: #a5b0b8;
   --line: rgba(255, 255, 255, .13);
   --blue: #4ab5f7;
+  --blue-soft: #79c9f7;
+  --on-blue: #001018;
   --gold: #d1a553;
   color-scheme: dark;
   position: relative;
