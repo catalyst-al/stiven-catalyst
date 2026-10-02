@@ -115,16 +115,27 @@
       ? (document.documentElement.lang === "en" ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`)
       : "?";
     if (!window.confirm(fill(text.confirm, { date: when, tools: toolNames(keys).join(", ") }))) return;
-    let written = 0;
+    // All or nothing: when the browser runs out of space halfway, the tools already written get
+    // their old data back, so the device never holds half of one file and half of the other.
+    const before = new Map(keys.map((key) => [key, storage.getItem(key)]));
+    const written = [];
+    let full = false;
     for (const key of keys) {
       try {
         storage.setItem(key, backup.items[key]);
-        written++;
+        written.push(key);
       } catch {
+        full = true;
         break;
       }
     }
-    if (written < keys.length) {
+    if (full) {
+      written.forEach((key) => {
+        try {
+          if (before.get(key) === null) storage.removeItem(key);
+          else storage.setItem(key, before.get(key));
+        } catch { /* the old value was there before, so it fits again */ }
+      });
       say(text.full);
       return;
     }

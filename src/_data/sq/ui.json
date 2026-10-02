@@ -1681,5 +1681,7 @@
   "Chart by": "Karta sipas",
   "Day": "Dita",
   "{rate} ({many} / {volume}), {by}. The dashed line is the average, the solid line the target; columns above it are red.": "{rate} ({many} / {volume}), {by}. Vija me pika është mesatarja, vija e plotë synimi; kolonat mbi të janë të kuqe.",
-  "{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.": "{rate} ({many} / {volume}), {by}. Vija me pika është mesatarja; kolona më e lartë është e kuqe."
+  "{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.": "{rate} ({many} / {volume}), {by}. Vija me pika është mesatarja; kolona më e lartë është e kuqe.",
+  "Only the first {n} rows of {name} were kept between visits. Open the file again for the full totals.": "Mes vizitave u ruajtën vetëm {n} rreshtat e parë të {name}. Hapeni skedarin përsëri për totalet e plota.",
+  "This browser ran out of space, so nothing was changed. Free some space and open the file again.": "Shfletuesit i mbaroi hapësira, prandaj nuk u ndryshua asgjë. Lironi pak hapësirë dhe hapeni skedarin përsëri."
 }

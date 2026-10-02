@@ -690,7 +690,7 @@
         let sheets;
         if (/\.xlsx$/i.test(file.name)) sheets = await P.readWorkbook(await file.arrayBuffer(), window.CvImport.unzip, LANG !== "en");
         else if (/\.xls$/i.test(file.name)) { report.push(tx("{name}: old Excel files (.xls) cannot be read. Save as .xlsx or CSV.", { name: file.name })); continue; }
-        else sheets = [{ name: file.name, hidden: false, rows: parseRows(P.decode(await file.arrayBuffer())) }];
+        else sheets = [{ name: file.name, hidden: false, rows: parseRows(P.decode(await file.arrayBuffer()), { keepBlank: true }) }];
         const { found, targets, targetSheet } = C.readSheets(sheets);
         if (!found.length && !targets) { report.push(tx("{name}: no known table found. Check the column names against the templates.", { name: file.name })); continue; }
         found.forEach((part) => {
@@ -901,6 +901,9 @@
     }));
     const svg = P.chart(bars, paretoColors(), { title: tx("Pareto chart: share of each cause and cumulative share"), line80: "80%", cumulative: tx("cumulative") });
     const scroller = el("div", "pa-chart-scroll");
+    scroller.tabIndex = 0;
+    scroller.setAttribute("role", "group");
+    scroller.setAttribute("aria-label", tx("Pareto chart: share of each cause and cumulative share"));
     scroller.append(svg);
     const tip = el("div", "pa-tooltip");
     tip.hidden = true;

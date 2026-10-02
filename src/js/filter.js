@@ -29,7 +29,10 @@
     count.textContent = filtered ? countLabel.replace("{a}", shown).replace("{b}", items.length) : "";
 
     // Keep the current filter in the address so it can be shared.
-    const next = new URLSearchParams();
+    // Other parameters in the address (a campaign tag, for example) are left as they are.
+    const next = new URLSearchParams(location.search);
+    next.delete("topic");
+    next.delete("q");
     if (topic) next.set("topic", topic);
     if (search.value.trim()) next.set("q", search.value.trim());
     const query = next.toString();

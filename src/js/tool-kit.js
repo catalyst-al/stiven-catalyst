@@ -96,6 +96,16 @@ window.ToolKit = (() => {
   // Dates on this device's clock: a night shift logging after midnight gets today's date, not yesterday's (UTC).
   const localIso = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
   const today = () => localIso(new Date());
+  // The example week of a tool, moved forward by whole weeks so that its last day is not in the
+  // future and not weeks ago: the weekdays stay the same, and the other tools (Shift Pulse, the
+  // handover) see it in their recent days. Rows are "YYYY-MM-DD|..." strings.
+  const recentExample = (rows) => {
+    const dates = rows.map((row) => String(row).slice(0, 10)).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort();
+    if (!dates.length) return rows;
+    const weeks = Math.floor((Date.parse(`${today()}T00:00:00Z`) - Date.parse(`${dates.at(-1)}T00:00:00Z`)) / (7 * 864e5));
+    if (!(weeks > 0)) return rows;
+    return rows.map((row) => (/^\d{4}-\d{2}-\d{2}/.test(row) ? addDays(String(row).slice(0, 10), weeks * 7) + String(row).slice(10) : row));
+  };
   const addDays = (iso, days) => {
     const date = new Date(`${iso}T00:00:00Z`);
     date.setUTCDate(date.getUTCDate() + days);
@@ -138,7 +148,8 @@ window.ToolKit = (() => {
   };
 
   // Parse pasted TSV or CSV, including quoted separators, doubled quotes and line breaks.
-  const parseRows = (text) => {
+  // With keepBlank, an empty line stays as an empty row, so that the rows keep the line numbers of the file.
+  const parseRows = (text, { keepBlank = false } = {}) => {
     const source = String(text ?? "").replace(/^\uFEFF/, "");
     let first = "", quoted = false;
     for (let i = 0; i < source.length; i++) {
@@ -157,6 +168,7 @@ window.ToolKit = (() => {
     const endRow = () => {
       endField();
       if (row.some((cell) => cell)) rows.push(row);
+      else if (keepBlank) rows.push([]);
       row = [];
     };
     for (let i = 0; i < source.length; i++) {
@@ -437,7 +449,8 @@ window.ToolKit = (() => {
     buckets.forEach((b, i) => {
       const cx = left + band * (i + 0.5);
       const hot = target ? b.total > 0 && b.value > target : max > 0 && i === top1;
-      const g = svgEl("g", { tabindex: 0, role: "img", "aria-label": `${nameOf(b)}${unit === "week" ? " –" : ""}: ${format(b.value)}` });
+      // The chart is one image with one name; a column is a tooltip (its title), not a tab stop of its own.
+      const g = svgEl("g", { class: "tr-col" });
       g.append(svgEl("title", {}, `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`));
       g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
       if (b.value > 0) g.append(svgEl("rect", { x: cx - barW / 2, y: y(b.value), width: barW, height: Math.max(1, y(0) - y(b.value)), rx: 2, style: `fill:${hot ? colors.top : colors.bar}` }));
@@ -798,7 +811,10 @@ window.ToolKit = (() => {
       });
     });
 
+    // A pending undo belongs to the log that was there; the example or an empty log must not get its row back.
+    const dropUndo = () => { clearTimeout(logStatus.timer); logStatus.textContent = ""; };
     root.querySelector("[data-example]").addEventListener("click", () => {
+      dropUndo();
       loadExample();
       state.from = "";
       state.to = "";
@@ -810,6 +826,7 @@ window.ToolKit = (() => {
 
     root.querySelector("[data-clear]").addEventListener("click", () => {
       if (!state.rows.length || !window.confirm(clearText)) return;
+      dropUndo();
       state.rows = [];
       changed();
     });
@@ -888,7 +905,7 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays,
+    read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
