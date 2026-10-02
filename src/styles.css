@@ -35,9 +35,10 @@
   --muted: #5f6870;
   --line: rgba(11, 16, 21, 0.14);
   --red: #c90912;
-  --blue: #239ee9;
+  /* Dark enough to read as text on the light paper (4.5:1 and more): blue 5.3:1, gold 5.7:1. */
+  --blue: #0a6ab0;
   --blue-soft: #63bdf3;
-  --gold: #b88a3b;
+  --gold: #7f5c1f;
   --card: rgba(255,255,255,.74);
   --shadow: 0 28px 80px rgba(15, 28, 40, .12);
 }
@@ -3862,6 +3863,8 @@ html:not(.js) .filter-bar { display: none; }
 .cv-doc .cv-photo.is-rounded { border-radius: 18px; }
 .cv-doc .cv-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .cv-doc .cv-head-text { display: grid; gap: 8px; min-width: 0; }
+/* The name is the document's heading (an h2: the page's one h1 is the tool's title) with the margins the h1 had. */
+.cv-doc .cv-name, .ats-doc .ats-name, .cl-doc .cl-name, .cl-doc .cv-name { margin: .67em 0; }
 .cv-doc .cv-name { color: #fff; font-size: 38px; font-weight: 800; letter-spacing: .01em; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
 .cv-doc .cv-headline { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; color: var(--cv-gold); font-size: 15px; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
 .cv-doc .cv-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin-top: 4px; color: rgba(255, 255, 255, .86); font-size: 12.5px; }
@@ -4062,6 +4065,7 @@ html:not(.js) .filter-bar { display: none; }
   box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
 }
 .ats-page > * { margin: 0; }
+.ats-page.is-over { box-shadow: 0 0 0 3px #e11d48, 0 18px 50px rgba(0, 0, 0, .28); }
 .ats-measure { position: absolute; top: 0; left: 0; height: auto; visibility: hidden; box-shadow: none; pointer-events: none; }
 .ats-doc .ats-head { display: grid; gap: 4px; padding-bottom: 4px; }
 .ats-doc .ats-name { color: var(--ats-accent); font-size: 27px; font-weight: 700; line-height: 1.15; }
@@ -4825,7 +4829,7 @@ body.in-family {
   --accent-fill: var(--family);
   --accent-on: #0b1015;
 }
-[data-theme="light"] body.in-family { --signal: #239ee9; }
+[data-theme="light"] body.in-family { --signal: #0a6ab0; }
 [data-theme="light"] body.in-family[data-family="atlas"] { --accent-fill: #56606b; --accent-on: #fff; }
 [data-theme="light"] .in-family ::selection { color: #fff; }
 

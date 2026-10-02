@@ -82,12 +82,44 @@ export default function (eleventyConfig) {
   // JSON embedded in HTML must not be able to close its script element.
   eleventyConfig.addFilter("scriptJson", (value) => JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`));
   // The coaching curriculum as one file (src/coaching-data.njk) the browser keeps; its address changes with the content.
-  eleventyConfig.addFilter("coachingDataUrl", (coaching) =>
-    `/js/coaching-data.js?v=${createHash("sha256").update(JSON.stringify(coaching)).digest("hex").slice(0, 10)}`
-  );
+  const coachingUrls = new WeakMap();
+  eleventyConfig.addFilter("coachingDataUrl", (coaching) => {
+    if (!coachingUrls.has(coaching)) coachingUrls.set(coaching, `/js/coaching-data.js?v=${createHash("sha256").update(JSON.stringify(coaching)).digest("hex").slice(0, 10)}`);
+    return coachingUrls.get(coaching);
+  });
   // collections["notes" + (lang | langSuffix)]: notes, notesDe or notesSq.
   eleventyConfig.addFilter("langSuffix", (lang) => (TRANSLATED.has(lang) ? lang[0].toUpperCase() + lang.slice(1) : ""));
   // A changed asset gets a new URL, so browsers do not keep an old script or stylesheet.
+  // The pixel size of an image in src/ (JPEG, PNG or WebP), so an <img> can carry width and height
+  // and the page does not move when the picture arrives; null when it cannot be read.
+  const imageSizes = new Map();
+  eleventyConfig.addFilter("imageSize", (path) => {
+    const file = `src${String(path || "").split("?")[0]}`;
+    if (!imageSizes.has(file)) {
+      let size = null;
+      try {
+        const b = fs.readFileSync(file);
+        if (b[0] === 0x89 && b.toString("ascii", 1, 4) === "PNG") size = { width: b.readUInt32BE(16), height: b.readUInt32BE(20) };
+        else if (b.toString("ascii", 0, 4) === "RIFF" && b.toString("ascii", 8, 12) === "WEBP") {
+          const kind = b.toString("ascii", 12, 16);
+          if (kind === "VP8X") size = { width: 1 + b.readUIntLE(24, 3), height: 1 + b.readUIntLE(27, 3) };
+          else if (kind === "VP8L") { const bits = b.readUInt32LE(21); size = { width: 1 + (bits & 0x3fff), height: 1 + ((bits >> 14) & 0x3fff) }; }
+          else if (kind === "VP8 ") size = { width: b.readUInt16LE(26) & 0x3fff, height: b.readUInt16LE(28) & 0x3fff };
+        } else if (b[0] === 0xff && b[1] === 0xd8) {
+          for (let i = 2; i + 9 < b.length && !size;) {
+            if (b[i] !== 0xff) { i += 1; continue; }
+            const marker = b[i + 1];
+            if ([0xc0, 0xc1, 0xc2].includes(marker)) size = { height: b.readUInt16BE(i + 5), width: b.readUInt16BE(i + 7) };
+            else i += 2 + b.readUInt16BE(i + 2);
+          }
+        }
+      } catch { size = null; }
+      imageSizes.set(file, size);
+    }
+    return imageSizes.get(file);
+  });
+  // The hash of an inline script, for the Content Security Policy in layouts/base.njk.
+  eleventyConfig.addFilter("cspHash", (code) => `'sha256-${createHash("sha256").update(String(code)).digest("base64")}'`);
   eleventyConfig.addFilter("assetUrl", (path) => {
     const file = `src${path}`;
     if (!assetVersions.has(file)) {
@@ -133,7 +165,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
   eleventyConfig.addWatchTarget("src/_data/sq/");
-  eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); });
+  eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); imageSizes.clear(); });
   // A minified stylesheet, and a lighter one for the pages that are not tools (lib/css-split.js).
   eleventyConfig.on("eleventy.after", ({ dir }) => splitStylesheet(dir?.output || "_site"));
 

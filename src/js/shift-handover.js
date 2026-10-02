@@ -3,7 +3,7 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { LOCALE, tx, dayMonth, lower, pct, read, write, isObject, str, el, today, parseDate, renderOnPause } = window.ToolKit;
+  const { LOCALE, tx, dayMonth, lower, pct, read, write, isObject, str, el, today, parseDate, parseNumber, renderOnPause } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
@@ -254,7 +254,8 @@
   };
   const handledNumber = (h) => {
     const label = template(h.template).metrics[0];
-    const value = Number(String(h.metrics.find(([name]) => name === label)?.[1] ?? "").replace(/[.\s](?=\d{3}\b)/g, "").replace(",", "."));
+    // "3,000" on the English page and "3.000" on the German one are both three thousand.
+    const value = parseNumber(h.metrics.find(([name]) => name === label)?.[1] ?? "");
     return value > 0 ? value : null;
   };
   // What each source writes, for the metric it belongs to.

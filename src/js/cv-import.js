@@ -632,6 +632,7 @@ window.CvImport = (() => {
     pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
     const doc = await pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise;
     const pages = [];
+    try {
     for (let n = 1; n <= Math.min(doc.numPages, 10); n++) {
       const page = await doc.getPage(n);
       const { height } = page.getViewport({ scale: 1 });
@@ -646,6 +647,10 @@ window.CvImport = (() => {
           h: item.height || Math.hypot(item.transform[2], item.transform[3]),
         })),
       });
+    }
+    } finally {
+      // The parsed document is released; otherwise every import keeps one alive in the worker.
+      await doc.destroy().catch(() => {});
     }
     return pdfLines(pages);
   };

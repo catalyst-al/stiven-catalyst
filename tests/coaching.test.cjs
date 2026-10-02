@@ -84,6 +84,15 @@ test('backup import makes independent copies and preserves current context, acti
   const p = s.projects[0], actionId = C.id();
   p.actions.push({ id: actionId, text: 'Review', owner: 'Lead', due: '2026-10-10', done: false });
   p.sessions.push({ id: C.id(), date: '2026-09-30', goal: 'Improve', reality: 'Gap', options: 'A or B', way: 'Test A', actionId });
+  const padded = JSON.parse(C.exportBackup(s));
+  padded.state.projects[0].extra = 'x'.repeat(1000);
+  padded.state.projects[0].brief.junk = 'y';
+  padded.state.projects[0].actions.push({ id: 'a1b2c3d4-0000-4000-8000-000000000001', text: 'Check', owner: 'SM', due: '2026-10-10', done: false, note: 'unknown' });
+  const stripped = C.importBackup(s, JSON.stringify(padded)).projects.at(-1);
+  assert.equal(stripped.extra, undefined);
+  assert.equal(stripped.brief.junk, undefined);
+  assert.equal(stripped.actions.at(-1).note, undefined);
+  assert.equal(stripped.actions.at(-1).text, 'Check');
   const imported = C.importBackup(s, C.exportBackup(s));
   assert.equal(imported.projects.length, 2); assert.equal(imported.profile.name, s.profile.name);
   assert.equal(imported.active.lumen, p.id); assert.notEqual(imported.projects[1].id, p.id);

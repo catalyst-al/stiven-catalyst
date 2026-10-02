@@ -10,9 +10,26 @@
   // Excel on German Windows still saves CSV as Windows-1252; UTF-8 is tried first.
   // Windows-1252 is Latin-1 except for 0x80-0x9F (€, curly quotes, dashes...). Those are
   // mapped here, because a TextDecoder built without full ICU reads them as Latin-1 and drops the €.
+  // Excel's "Unicode Text" is UTF-16 with a byte order mark; its NUL bytes are valid UTF-8,
+  // so it is recognised first, by the mark or by the NUL in every other byte of plain text.
   const CP1252 = "€\u0081‚ƒ„…†‡ˆ‰Š‹Œ\u008DŽ\u008F\u0090‘’“”•–—˜™š›œ\u009DžŸ";
+  const utf16 = (data) => {
+    if (data.length < 2) return null;
+    if (data[0] === 0xff && data[1] === 0xfe) return "utf-16le";
+    if (data[0] === 0xfe && data[1] === 0xff) return "utf-16be";
+    const head = data.subarray(0, Math.min(data.length, 512));
+    let even = 0, odd = 0;
+    for (let i = 0; i < head.length; i += 1) if (head[i] === 0) { if (i % 2) odd += 1; else even += 1; }
+    if (odd > head.length / 4 && even === 0) return "utf-16le";
+    if (even > head.length / 4 && odd === 0) return "utf-16be";
+    return null;
+  };
   const decode = (bytes) => {
     const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const wide = utf16(data);
+    if (wide) {
+      try { return new TextDecoder(wide).decode(data).replace(/^\ufeff/, ""); } catch { /* no UTF-16 decoder: read as bytes below */ }
+    }
     try {
       return new TextDecoder("utf-8", { fatal: true }).decode(data).replace(/^﻿/, "");
     } catch {
@@ -58,9 +75,12 @@
     for (const sheet of sheets) {
       const xml = await get(sheet.path);
       const rows = [];
-      for (const rowMatch of xml.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)) {
+      // Rows sit at their Excel row number (an empty row, written as <row .../>, stays empty), so that
+      // "Row 5" in a note is row 5 of the sheet.
+      for (const rowMatch of xml.matchAll(/<row\b([^>]*?)(?:\/>|>([\s\S]*?)<\/row>)/g)) {
+        const number = Number((rowMatch[1].match(/\br="(\d+)"/) || [])[1]);
         const row = [];
-        for (const cell of rowMatch[1].matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
+        for (const cell of (rowMatch[2] || "").matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
           const attrs = cell[1];
           const inner = cell[2] || "";
           const ref = (attrs.match(/\br="([A-Z]+)\d+"/) || [])[1];
@@ -72,7 +92,8 @@
           else if (raw !== undefined) value = type === "str" || type === "e" || type === "b" ? xmlText(raw) : numberCell(xmlText(raw));
           row[ref ? columnIndex(ref) : row.length] = value;
         }
-        rows.push(Array.from(row, (cell) => (cell ?? "").trim()));
+        const cells = Array.from(row, (cell) => (cell ?? "").trim());
+        if (number >= 1) { while (rows.length < number - 1) rows.push([]); rows[number - 1] = cells; } else rows.push(cells);
       }
       out.push({ name: sheet.name, hidden: sheet.hidden, rows });
     }
@@ -207,7 +228,7 @@
     let used = 0;
     let totalCount = 0;
     let totalValue = 0;
-    const firstRow = table.hasHeader ? 2 : 1;
+    const firstRow = (table.firstLine || 1) + (table.hasHeader ? 1 : 0);
     table.rows.forEach((row, index) => {
       const line = index + firstRow;
       if (!row.some((cell) => String(cell ?? "").trim())) return;
@@ -419,7 +440,7 @@
   const app = document.querySelector("[data-pareto]");
   const dataEl = document.getElementById("pareto-data");
   if (!app || !dataEl || !window.ToolKit) return;
-  const { LANG, tx, el, num, pct, int, lower, parseNumber, parseDate, parseRows, showDate, read, write, isObject, str, stat, resultActions } = window.ToolKit;
+  const { LANG, tx, el, num, pct, int, lower, parseNumber, parseDate, parseRows, showDate, read, write, isObject, str, stat, resultActions, csvSafe } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const lang = ["de", "sq"].includes(LANG) ? LANG : "en";
   const templates = Object.fromEntries(data.templates.map((template) => [template.id, template]));
@@ -437,7 +458,7 @@
     const base = blankState();
     if (!isObject(saved)) return base;
     const source = isObject(saved.source) && Array.isArray(saved.source.headers) && Array.isArray(saved.source.rows)
-      ? { name: str(saved.source.name), headers: saved.source.headers.map(String), rows: saved.source.rows.filter(Array.isArray).map((row) => row.map((cell) => String(cell ?? ""))), hasHeader: Boolean(saved.source.hasHeader) }
+      ? { name: str(saved.source.name), headers: saved.source.headers.map(String), rows: saved.source.rows.filter(Array.isArray).map((row) => row.map((cell) => String(cell ?? ""))), hasHeader: Boolean(saved.source.hasHeader), firstLine: Number.isInteger(saved.source.firstLine) && saved.source.firstLine > 0 ? saved.source.firstLine : 1, truncated: Boolean(saved.source.truncated) }
       : null;
     const map = isObject(saved.map) ? Object.fromEntries(["category", "count", "value", "date", "filter"].map((key) => [key, Number.isInteger(saved.map[key]) ? saved.map[key] : -1])) : null;
     return {
@@ -459,29 +480,36 @@
   const save = () => {
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => {
-      const copy = { ...state, source: state.source ? { ...state.source, rows: state.source.rows.slice(0, SAVE_ROWS) } : null };
+      // Only the first rows are kept between visits; the page says so when it opens with such a copy.
+      const copy = { ...state, source: state.source ? { ...state.source, rows: state.source.rows.slice(0, SAVE_ROWS), truncated: state.source.rows.length > SAVE_ROWS } : null };
       if (!write(data.storageKey, copy)) status.textContent = tx("This browser could not save the data (storage is full, blocked or private). It stays on this page until you close it.");
     }, 300);
   };
   const say = (text) => { status.textContent = text; };
+  if (state.source?.truncated) say(tx("Only the first {n} rows of {name} were kept between visits. Open the file again for the full totals.", { n: int.format(SAVE_ROWS), name: state.source.name }));
 
   const template = () => templates[state.template];
   const valueName = () => state.valueLabel.trim() || (state.source && state.map?.value >= 0 ? state.source.headers[state.map.value] : "") || tx("Value");
 
   // ---------- Loading data ----------
   const useTable = (name, rows, options = {}) => {
-    const clean = rows.map((row) => row.map((cell) => String(cell ?? "").trim())).filter((row) => row.some(Boolean));
-    if (!clean.length) { say(tx("No rows were found in this data.")); return false; }
-    // Title lines above the table ("Incident log", a blank, a note) are skipped.
-    const filled = clean.slice(0, 30).map((row) => row.filter(Boolean).length);
+    const trimmed = rows.map((row) => row.map((cell) => String(cell ?? "").trim()));
+    const hasText = (row) => row.some(Boolean);
+    if (!trimmed.some(hasText)) { say(tx("No rows were found in this data.")); return false; }
+    // Title lines above the table ("Incident log", a blank, a note) are skipped: the table starts at the
+    // first row about as wide as the widest of the first thirty. Empty rows inside the table stay, so
+    // that every row keeps the line number it has in the file (firstLine is the line of the first kept row).
+    let start = trimmed.findIndex(hasText);
+    const filled = trimmed.slice(start).filter(hasText).slice(0, 30).map((row) => row.filter(Boolean).length);
     const widest = Math.max(...filled);
-    const start = widest >= 3 ? filled.findIndex((n) => n >= Math.max(2, widest * 0.6)) : 0;
-    if (start > 0) clean.splice(0, start);
+    if (widest >= 3) while (!hasText(trimmed[start]) || trimmed[start].filter(Boolean).length < Math.max(2, widest * 0.6)) start++;
+    const clean = trimmed.slice(start);
+    while (clean.length && !hasText(clean.at(-1))) clean.pop();
     const width = Math.max(...clean.map((row) => row.length));
     const padded = clean.slice(0, MAX_ROWS + 1).map((row) => Array.from({ length: width }, (_, i) => row[i] ?? ""));
     const hasHeader = options.hasHeader ?? detectHeader(padded, parseNumber, parseDate);
     const headers = hasHeader ? padded[0].map((cell, i) => cell || tx("Column {n}", { n: i + 1 })) : padded[0].map((_, i) => tx("Column {n}", { n: i + 1 }));
-    state.source = { name, headers, rows: hasHeader ? padded.slice(1) : padded, hasHeader };
+    state.source = { name, headers, rows: hasHeader ? padded.slice(1) : padded, hasHeader, firstLine: start + 1 };
     state.map = options.map || suggestColumns(state.source, parseNumber, parseDate);
     if (state.map.category < 0) state.map.category = 0;
     const tpl = template();
@@ -549,7 +577,7 @@
         }
       }
       else if (/\.xls$/i.test(name)) throw new Error("xls");
-      else if (/\.(csv|txt|tsv)$/i.test(name) || /^text\//.test(file.type) || !file.type) rows = parseRows(decode(await file.arrayBuffer()));
+      else if (/\.(csv|txt|tsv)$/i.test(name) || /^text\//.test(file.type) || !file.type) rows = parseRows(decode(await file.arrayBuffer()), { keepBlank: true });
       else throw new Error("type");
       if (!rows.length) throw new Error("empty");
       useTable(name, rows);
@@ -589,7 +617,10 @@
     save();
   });
 
-  const csvCell = (text, sep) => (/[";\n,\t]/.test(text) || text.includes(sep) ? `"${text.replace(/"/g, '""')}"` : text);
+  const csvCell = (raw, sep) => {
+    const text = csvSafe(String(raw ?? ""));
+    return /[";\n,\t]/.test(text) || text.includes(sep) ? `"${text.replace(/"/g, '""')}"` : text;
+  };
   const download = (name, content, type) => {
     const url = URL.createObjectURL(content instanceof Blob ? content : new Blob([content], { type }));
     const link = el("a");
@@ -1044,7 +1075,7 @@
     paste: () => {
       const text = $("[data-paste]").value;
       if (!text.trim()) { say(tx("Paste the cells first.")); return; }
-      useTable(tx("Pasted data"), parseRows(text));
+      useTable(tx("Pasted data"), parseRows(text, { keepBlank: true }));
     },
     reset: () => {
       if (!window.confirm(tx("Remove the data from this page and start again?"))) return;

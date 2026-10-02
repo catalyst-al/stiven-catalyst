@@ -1,5 +1,5 @@
 {# Coaching uses the role's existing visual language. Its state is shared across languages. #}
-<section class="shell role-ring coaching" id="coaching" data-coaching data-role="{{ family.id }}" aria-labelledby="coaching-title">
+<section class="shell role-ring coaching" id="coaching" data-coaching data-role="{{ family.id }}" data-nojs="{{ coaching.labels.nojs[lang or 'en'] }}" aria-labelledby="coaching-title">
   <header class="role-ring-head">
     <p class="kicker">{{ coaching.labels.coaching[lang or 'en'] }}</p>
     <h2 id="coaching-title">{{ coaching.roles[family.id].aim[lang or 'en'] }}</h2>

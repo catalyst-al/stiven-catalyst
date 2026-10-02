@@ -2,6 +2,12 @@
 .coaching[hidden] { display: none; }
 .coaching [hidden] { display: none !important; }
 .coaching { --coaching-accent: var(--family, var(--blue)); }
+/* The workspace is drawn by its script after the page shows. Its empty state is about this tall,
+   so the space is kept from the start and the rings below it do not jump down (layout shift). */
+[data-coaching-app] { min-height: 585px; }
+@media (max-width: 900px) { [data-coaching-app] { min-height: 610px; } }
+@media (max-width: 600px) { [data-coaching-app] { min-height: 665px; } }
+@media print { [data-coaching-app] { min-height: 0; } }
 .coaching-nav, .coaching-modules, .coaching-tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
 .coaching-nav .button-secondary, .coaching-modules .button-secondary { padding: 10px 16px; font-size: .85rem; font-weight: 650; }
 .coaching [aria-current] { border-color: var(--coaching-accent); background: color-mix(in srgb, var(--coaching-accent) 12%, var(--paper)); }

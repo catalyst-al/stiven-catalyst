@@ -46,6 +46,6 @@
   priorities: cfg.priorities,
   damage: { many: damage.text.many, volumeLabel: damage.text.volumeLabel, rateLabel: damage.text.rateLabel },
   incomplete: { many: incomplete.text.many, volumeLabel: incomplete.text.volumeLabel, rateLabel: incomplete.text.rateLabel }
-} | dump | safe }}</script>
+} | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-pulse.js' | assetUrl }}" defer></script>

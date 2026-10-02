@@ -238,7 +238,7 @@
         band.append(frame);
       }
       const text = el("div", "cv-head-text");
-      const title = el("h1", "cv-name", name);
+      const title = el("h2", "cv-name", name);
       title.classList.toggle("is-placeholder", !p.name.trim());
       text.append(title);
       if (p.headline.trim()) {
@@ -255,7 +255,7 @@
       return band;
     }
     const head = el("header", "cl-head");
-    const title = el("h1", "cl-name", name);
+    const title = el("h2", "cl-name", name);
     title.classList.toggle("is-placeholder", !p.name.trim());
     head.append(title);
     if (p.headline.trim()) head.append(el("p", "cl-headline", p.headline.trim()));
@@ -552,6 +552,13 @@
       syncForm();
       changed();
       say(tx("Cleared. Your own details are kept."));
+    },
+    resetAll: () => {
+      if (!window.confirm(tx("Delete this letter and your own details (name, address, photo, signature) from this browser?"))) return;
+      letter = clean({ docLang: letter.docLang, design: letter.design, theme: letter.theme, font: letter.font, accent: letter.accent }, data, LANG);
+      syncForm();
+      changed();
+      say(tx("Cleared, including your own details."));
     },
     word: () => {
       download(`${fileName()}.docx`, docx(letter, data), "application/vnd.openxmlformats-officedocument.wordprocessingml.document");

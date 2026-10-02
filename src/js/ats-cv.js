@@ -83,7 +83,9 @@
   const keywords = (ad, stopwords, limit = 24) => {
     const stop = new Set(stopwords);
     const seq = tokens(ad);
-    const useful = (word) => word.length >= 3 && !stop.has(word) && !/^\d+$/.test(word) && !/^\d/.test(word);
+    // Addresses (www.hotel.de, jobs@hotel.de), domains and abbreviations such as z.B. or e.g. are not key words.
+    const address = (word) => /@/.test(word) || /^(?:www\.|https?[:/])/.test(word) || /\.(?:de|at|ch|com|net|org|eu|al|it|fr|uk|io|info|biz|co)(?:\/|$)/.test(word) || /^\p{L}\.\p{L}\.?$/u.test(word);
+    const useful = (word) => word.length >= 3 && !stop.has(word) && !/^\d+$/.test(word) && !/^\d/.test(word) && !address(word);
     const uni = new Map();
     const bi = new Map();
     seq.forEach((word, i) => {
@@ -97,8 +99,17 @@
     const singles = [...uni].filter(([word]) => !inPair.has(word)).sort((a, b) => b[1] - a[1] || b[0].length - a[0].length).map(([word]) => word);
     return [...pairs, ...singles].slice(0, limit);
   };
+  // Hyphens and slashes count as spaces, so "Front-Office" in the ad is found in a CV that writes
+  // "Front Office" (and the other way round), and "Check-in" in "Checkin".
+  const simple = (text) => String(text).toLowerCase().replace(/[-‐‑–/]+/g, " ").replace(/\s+/g, " ");
   // "kommunikation" also counts when the CV says "kommunikativ".
-  const hasTerm = (text, term) => text.includes(term) || (term.length >= 8 && !term.includes(" ") && text.includes(term.slice(0, -3)));
+  const hasTerm = (text, term) => {
+    const t = simple(text);
+    const k = simple(term).trim();
+    if (!k) return false;
+    if (t.includes(k) || (k.includes(" ") && t.replace(/ /g, "").includes(k.replace(/ /g, "")))) return true;
+    return k.length >= 8 && /^\p{L}+$/u.test(k) && t.includes(k.slice(0, -3));
+  };
 
   // ---------- Plain text ----------
   const period = (from, to, present) => {
@@ -108,10 +119,12 @@
     return start ? `${start} – ${present}` : end;
   };
   const headingOf = (cv, doc, key) => cv.headings[key]?.trim() || doc.headings[key];
-  const plainText = (cv, doc) => {
+  // The CV as plain text; without headings for the job ad match, so that "Ausbildung" in the
+  // ad is not found in the heading "Ausbildung" of a CV that has no education entry.
+  const plainText = (cv, doc, { headings = true } = {}) => {
     const out = [];
     const p = cv.person;
-    const section = (title, body) => { if (body.length) out.push("", title.toUpperCase(), ...body); };
+    const section = (title, body) => { if (body.length) out.push("", ...(headings ? [title.toUpperCase()] : []), ...body); };
     if (p.name.trim()) out.push(p.name.trim());
     if (p.headline.trim()) out.push(p.headline.trim());
     const contact = [p.location, p.phone, p.email, p.website, p.extra].map((part) => part.trim()).filter(Boolean);
@@ -208,7 +221,10 @@
       const gap = page.length ? block.space : 0;
       const next = blocks[index + 1];
       const need = gap + block.height + (block.keep && next ? next.space + next.height : 0);
-      if (page.length && used + need > limit) {
+      // The block under a heading that opened this page stays with it, even when it is taller
+      // than the page (the page is then marked), so no page ever holds a heading alone.
+      const underHeading = page.length === 1 && blocks[page[0]].keep;
+      if (page.length && !underHeading && used + need > limit) {
         pages.push([index]);
         used = block.height;
       } else {
@@ -327,7 +343,7 @@
     const p = cv.person;
 
     const head = el("header", "ats-head");
-    const name = el("h1", "ats-name", p.name.trim() || doc().yourName);
+    const name = el("h2", "ats-name", p.name.trim() || doc().yourName);
     name.classList.toggle("is-placeholder", !p.name.trim());
     head.append(name);
     if (p.headline.trim()) head.append(el("p", "ats-headline", p.headline.trim()));
@@ -398,6 +414,8 @@
   const measure = el("div", "ats-page ats-measure");
   measure.setAttribute("aria-hidden", "true");
   let pageCount = 0;
+  // A block taller than a page is cut off by the page; the page is marked and the checks say so.
+  let overflow = false;
 
   const renderCv = () => {
     const font = data.fonts.find((item) => item.id === cv.font) || data.fonts[0];
@@ -412,13 +430,20 @@
     const pages = paginate(list, PAGE_H - TOP - BOTTOM);
     measure.remove();
     pageCount = pages.length;
+    overflow = false;
     const footerName = [cv.person.name.trim(), doc().doc].filter(Boolean).join(" · ");
     scaler.replaceChildren(...pages.map((indices, n) => {
       const page = el("div", "ats-page");
+      let used = 0;
       indices.forEach((index, i) => {
         list[index].node.style.marginTop = i ? `${list[index].space}px` : "";
+        used += (i ? list[index].space : 0) + list[index].height;
         page.append(list[index].node);
       });
+      if (used > PAGE_H - TOP - BOTTOM) {
+        overflow = true;
+        page.classList.add("is-over");
+      }
       const foot = el("footer", "ats-foot");
       foot.append(el("span", null, footerName), el("span", null, doc().page.replace("{n}", n + 1).replace("{total}", pages.length)));
       page.append(foot);
@@ -473,7 +498,7 @@
   });
 
   // ---------- Job ad and checks ----------
-  const cvText = () => plainText(cv, doc()).toLowerCase();
+  const cvText = () => plainText(cv, doc(), { headings: false }).toLowerCase();
   let matchScore = null;
   const renderMatch = () => {
     const terms = keywords(cv.jobAd, STOP);
@@ -522,7 +547,9 @@
       [dateKinds.size <= 1 || (dateKinds.size === 2 && !dateKinds.has("other")), tx("Dates use one format, for example 03.2022.")],
       [bullets.length > 0 && withNumber * 2 >= bullets.length, tx("At least half of the bullet points show a number or result ({a} of {b}).", { a: withNumber, b: bullets.length })],
       [cv.skills.some((item) => item.text.trim()), tx("Skills are listed as words the software can find.")],
-      [pageCount <= 2, tx("{n} pages. One or two pages read best.", { n: pageCount })],
+      [pageCount <= 2 && !overflow, overflow
+        ? tx("One block is longer than a page. Shorten it so nothing is cut off.")
+        : tx("{n} pages. One or two pages read best.", { n: pageCount })],
     ];
     if (matchScore !== null) checks.push([matchScore >= 0.6, tx("At least 60% of the job ad's key words are in the CV.")]);
     const passed = checks.filter(([ok]) => ok).length;

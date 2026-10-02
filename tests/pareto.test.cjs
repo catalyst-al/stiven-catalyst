@@ -94,6 +94,9 @@ test('rows that cannot be counted are listed with their line and reason, never l
   assert.equal(byCount.used, 3);
   assert.deepEqual(plain(byCount.skipped).map((s) => [s.line, s.reason]), [[3, 'count'], [7, 'count']]);
   assert.equal(byCount.total, 4);
+  // With a title and a blank line above the header (header on file line 3), the notes name the file's lines.
+  const shifted = run({ ...table, firstLine: 3 }, { map });
+  assert.deepEqual(plain(shifted.skipped).map((s) => [s.line, s.reason]), [[5, 'count'], [9, 'count']]);
   const byValue = run(table, { map, measure: 'value' });
   assert.deepEqual(plain(byValue.skipped).map((s) => [s.line, s.reason]), [[3, 'count'], [6, 'value'], [7, 'count']]);
   const ranged = run(table, { map, from: '2026-09-02', to: '2026-09-30' });
@@ -135,12 +138,29 @@ test('German Excel CSV: Windows-1252, semicolons and decimal commas', () => {
   const decoded = Pareto.decode(bytes);
   assert.equal(decoded, text);
   assert.equal(Pareto.decode(new TextEncoder().encode(`﻿${text}`)), text);
+  // Excel's "Unicode Text" is UTF-16 with a byte order mark, little or big endian, or without one.
+  const wide = (le, bom) => { const codes = [...(bom ? '﻿' : '') + text].map((ch) => ch.charCodeAt(0)); const out = new Uint8Array(codes.length * 2); codes.forEach((code, i) => { out[i * 2] = le ? code & 0xff : code >> 8; out[i * 2 + 1] = le ? code >> 8 : code & 0xff; }); return out; };
+  assert.equal(Pareto.decode(wide(true, true)), text);
+  assert.equal(Pareto.decode(wide(false, true)), text);
+  assert.equal(Pareto.decode(wide(true, false)), text);
+  assert.equal(Pareto.decode(wide(false, false)), text);
   const rows = parseRows(decoded);
   const table = { hasHeader: true, headers: rows[0], rows: rows.slice(1) };
   const map = Pareto.suggestColumns(table, de.ToolKit.parseNumber, de.ToolKit.parseDate);
   const result = de.Pareto.analyse(table, { map, measure: 'value', notStated: '-', parseNumber: de.ToolKit.parseNumber, parseDate: de.ToolKit.parseDate });
   assert.equal(result.total, 1246.5);
   assert.equal(result.items[0].key, 'Stapler');
+});
+
+test('an empty Excel row written as <row/> keeps its place, so the next rows keep their numbers', async () => {
+  const xml = '<worksheet><sheetData>'
+    + '<row r="1"><c r="A1" t="inlineStr"><is><t>Cause</t></is></c><c r="B1" t="inlineStr"><is><t>Count</t></is></c></row>'
+    + '<row r="2" ht="30" customHeight="1"/>'
+    + '<row r="3"><c r="A3" t="inlineStr"><is><t>Late</t></is></c><c r="B3"><v>4</v></c></row>'
+    + '<row r="5"><c r="A5" t="inlineStr"><is><t>Lost</t></is></c><c r="B5"><v>2</v></c></row>'
+    + '</sheetData></worksheet>';
+  const rows = await Pareto.readXlsx(new Uint8Array(0).buffer, async () => xml);
+  assert.deepEqual(plain(rows), [['Cause', 'Count'], [], ['Late', '4'], [], ['Lost', '2']]);
 });
 
 test('an .xlsx file is read from its first sheet, with shared and inline strings and serial dates', async () => {

@@ -34,8 +34,7 @@
     DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
-    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause,
-  } = window.ToolKit;
+    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const SVG = "http://www.w3.org/2000/svg";
@@ -620,7 +619,7 @@
     const { rows, ...settings } = data.example;
     Object.assign(state, settings);
     state.rows = [];
-    upsert(importRows(rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added);
+    upsert(importRows(recentExample(rows).map((row) => row.replace(/\|/g, "\t")).join("\n")).added);
     root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
     save();
     render();

@@ -3,17 +3,5 @@
   <div data-coaching-bridge-app></div>
   <p data-coaching-bridge-status class="form-note" role="status" aria-live="polite"></p>
 </section>
-{#- The panel, its scripts and the curriculum load only when the tool was opened from a coaching
-    project (?coaching=...), after the tool's own script has run. Other visits load none of it. -#}
-<script>
-  if (new URLSearchParams(location.search).has("coaching")) {
-    document.addEventListener("DOMContentLoaded", () => {
-      ["{{ coaching | coachingDataUrl }}", "{{ '/js/coaching-core.js' | assetUrl }}", "{{ '/js/coaching-results.js' | assetUrl }}", "{{ '/js/coaching-bridge.js' | assetUrl }}"].forEach((src) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = false;
-        document.body.append(script);
-      });
-    });
-  }
-</script>
+{#- Its loader (partials/coaching-loader.njk) is written by layouts/base.njk, which also names its hash in the Content Security Policy. -#}
+<script>{{ coachingLoader | safe }}</script>

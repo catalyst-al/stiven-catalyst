@@ -116,4 +116,4 @@
     "mainEntity": { "@id": siteUrl + "#author" }
   }]) %}
 {%- endif %}
-  <script type="application/ld+json">{{ { "@context": "https://schema.org", "@graph": graph } | dump | replace("</", "<\\/") | safe }}</script>
+  <script type="application/ld+json">{{ { "@context": "https://schema.org", "@graph": graph } | scriptJson | safe }}</script>

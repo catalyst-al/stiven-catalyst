@@ -1,0 +1,13 @@
+{#- The coaching panel, its scripts and the curriculum load only when the tool was opened from a coaching
+    project (?coaching=...), after the tool's own script has run. Other visits load none of it.
+    Plain script text: layouts/base.njk writes it into a script element and hashes it for the Content Security Policy. -#}
+if (new URLSearchParams(location.search).has("coaching")) {
+  document.addEventListener("DOMContentLoaded", () => {
+    ["{{ coaching | coachingDataUrl }}", "{{ '/js/coaching-core.js' | assetUrl }}", "{{ '/js/coaching-results.js' | assetUrl }}", "{{ '/js/coaching-bridge.js' | assetUrl }}"].forEach((src) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = false;
+      document.body.append(script);
+    });
+  });
+}

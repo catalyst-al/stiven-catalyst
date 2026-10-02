@@ -34,8 +34,7 @@
     read, write, isObject, str, loadState, el, int, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
-    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck,
-  } = window.ToolKit;
+    panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
@@ -61,10 +60,11 @@
   const parseTime = (value) => {
     const text = String(value ?? "").trim();
     let minutes = NaN;
-    let match = text.match(/^(\d{1,2})[:.](\d{2})(?::\d{2})?$/);
-    if (match) minutes = Number(match[1]) * 60 + Number(match[2]);
+    // A day fraction first: 0.32 is 07:41, not 00:32.
+    let match = null;
+    if (/^0?[.,]\d+$/.test(text)) minutes = Math.round(parseNumber(text) * 1440);
+    else if ((match = text.match(/^(\d{1,2})[:.](\d{2})(?::\d{2})?$/))) minutes = Number(match[1]) * 60 + Number(match[2]);
     else if ((match = text.match(/^(\d{1,2})(\d{2})$/))) minutes = Number(match[1]) * 60 + Number(match[2]);
-    else if (/^0?[.,]\d+$/.test(text)) minutes = Math.round(parseNumber(text) * 1440);
     if (!(minutes >= 0 && minutes < 1440) || (match && Number(match[2]) > 59)) return "";
     return `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;
   };
@@ -509,7 +509,7 @@
     loadExample: () => {
       const { rows, ...settings } = data.example;
       Object.assign(state, settings);
-      state.rows = importRows(rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+      state.rows = importRows(recentExample(rows).map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
     },
     clearText: tx("Clear the whole route log?"),
     csv: () => {

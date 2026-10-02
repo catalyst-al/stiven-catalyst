@@ -237,7 +237,7 @@
   <p class="privacy-note">{{ "Your CV stays in this browser; nothing is uploaded, and photos and logos you add are kept only on this device. Only when you type a company website, that address is sent to Google's icon service to fetch the logo." | t(lang) }}</p>
 </section>
 
-<script type="application/json" id="cv-builder-data">{{ cfg | dump | safe }}</script>
+<script type="application/json" id="cv-builder-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/print-guide.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/cv-builder.js' | assetUrl }}" defer></script>

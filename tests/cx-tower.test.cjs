@@ -29,6 +29,12 @@ test('departure times from ISO text, German dates, Excel serials and bare times'
   assert.equal(C.minutes('31.08.2026 07:57', ''), base + 7 * 60 + 57);
   assert.equal(C.minutes('46265.33125', ''), base + 7 * 60 + 57);
   assert.equal(C.minutes('07:57', '2026-08-31'), base + 7 * 60 + 57);
+  // An Excel cell typed as a time only is a fraction of the row's day; German pages read it with a comma.
+  assert.equal(C.minutes('0.33125', '2026-08-31'), base + 7 * 60 + 57);
+  assert.equal(C.minutes('0,33125', '2026-08-31'), base + 7 * 60 + 57);
+  assert.equal(C.minutes('.5', '2026-08-31'), base + 12 * 60);
+  assert.equal(C.minutes('0', '2026-08-31'), base);
+  assert.ok(Number.isNaN(C.minutes('0.33125', '')), 'a time alone needs the date of its row');
   assert.equal(C.minutes('', ''), null);
   assert.ok(Number.isNaN(C.minutes('soon', '')));
 });
@@ -123,6 +129,13 @@ test('tables are recognised by their headers, also in German and below a title',
   assert.equal(parsed.records[0].Departure_Delay_Min, 14);
   assert.equal(parsed.records[0].Scan_Compliance_Pct, 0.975);
   assert.equal(parsed.records[1].Scan_Compliance_Pct, 0.99);
+  // Excel time cells, a PM wave that leaves after midnight, and an early departure.
+  const night = [['Date', 'Route_ID', 'Loading_Time_Min', 'Planned_Departure', 'Actual_Departure'],
+    ['2026-09-21', 'R3', '20', '0.33125', '0.345833'], ['2026-09-21', 'R4', '20', '23:50', '00:10'], ['2026-09-21', 'R5', '20', '07:45', '07:30']];
+  const n = C.recognise(night);
+  const late = C.toRecords('routes', night, n.map, n.headerRow);
+  assert.deepEqual(plain(late.records.map((row) => row.Departure_Delay_Min)), [21, 20, 0]);
+  assert.equal(late.issues.length, 0);
   assert.deepEqual(plain(parsed.issues).map((i) => [i.field, i.lines]), [['Loading_Time_Min', [3]]]);
   // A sheet with only a few matching words is not a table.
   assert.equal(C.recognise([['Date', 'Note'], ['2026-09-21', 'x']]), null);
@@ -153,6 +166,25 @@ test('a whole workbook: four tables, the target sheet wins over a KPI dictionary
   assert.deepEqual(plain(found.map((f) => `${f.name}:${f.sheet}:${f.records.length}`)), ['deliveries:DELIVERY_DATA:2', 'routes:ROUTE_DATA:1', 'incidents:INCIDENT_LOG:1', 'actions:ACTION_TRACKER:1']);
   assert.equal(targetSheet, 'TARGETS');
   assert.deepEqual(plain(targets), { onTime: 0.98, lateRoute: null, loading: 20 });
+});
+
+test('an action tracker with Metric and Target columns is read as actions, not as targets', () => {
+  const rows = [
+    ['Action_ID', 'Problem', 'Action', 'Owner', 'Deadline', 'Metric', 'Baseline', 'Target', 'Verification_Status'],
+    ['A1', 'Late PM wave', 'Move the cut-off', 'SM', '2026-10-01', 'Damage Rate', '1.1%', '<=0.8%', 'Pending'],
+    ['A2', 'Loading', 'Dock plan', 'OM', '2026-10-05', 'Late Route Rate', '7%', '<=5%', 'Pending'],
+  ];
+  const { found, targets, targetSheet } = C.readSheets([{ name: 'actions.csv', rows, hidden: false }]);
+  assert.deepEqual(plain(found.map((f) => `${f.name}:${f.records.length}`)), ['actions:2']);
+  assert.equal(targets, null);
+  assert.equal(targetSheet, '');
+  // The German tracker, the same way.
+  const de = rows.map((row, i) => (i ? row : ['Massnahme ID', 'Problem', 'Massnahme', 'Verantwortlich', 'Frist', 'Kennzahl', 'Ausgangswert', 'Ziel', 'Wirksamkeit']));
+  assert.deepEqual(plain(C.readSheets([{ name: 'Massnahmen', rows: de, hidden: false }]).found.map((f) => f.name)), ['actions']);
+  // A plain "Metric | Target" sheet still holds targets.
+  const t = C.readSheets([{ name: 'TARGETS', rows: [['Metric', 'Target'], ['Damage Rate', '0.8%']], hidden: false }]);
+  assert.deepEqual(plain(t.found), []);
+  assert.deepEqual(plain(t.targets), { damage: 0.008 });
 });
 
 test('the example is the same every time and tells its story', () => {

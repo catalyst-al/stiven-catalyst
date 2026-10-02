@@ -11,8 +11,7 @@
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout,
-    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, flash, floorCheck,
-  } = window.ToolKit;
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const t = data.text;
@@ -424,8 +423,8 @@
       state.period = example.period;
       state.volume = String(example.volume);
       state.target = String(example.target);
-      state.rows = importRows(example.rows.map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
-      state.volumes = importVolumes((example.volumes || []).map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+      state.rows = importRows(recentExample(example.rows).map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
+      state.volumes = importVolumes(recentExample(example.volumes || []).map((row) => row.replace(/\|/g, "\t")).join("\n")).added;
       state.volumes = cleanVolumes(state.volumes);
       openVolumes = true;
     },
