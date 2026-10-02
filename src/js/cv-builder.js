@@ -109,7 +109,10 @@
       const gap = page.length ? block.space : 0;
       const next = blocks[index + 1];
       const need = gap + block.height + (block.keep && next ? next.space + next.height : 0);
-      if (page.length && used + need > (pages.length === 1 ? firstLimit : limit)) {
+      // The block under a heading that opened this page stays with it, even when it is taller
+      // than the page (the page is then marked red), so no page ever holds a heading alone.
+      const underHeading = page.length === 1 && blocks[page[0]].keep;
+      if (page.length && !underHeading && used + need > (pages.length === 1 ? firstLimit : limit)) {
         pages.push([index]);
         used = block.height;
       } else {

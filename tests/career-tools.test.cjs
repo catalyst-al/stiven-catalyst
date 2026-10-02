@@ -104,6 +104,24 @@ test('job ad keywords skip filler words and match word forms', () => {
   assert.ok(terms.includes('opera pms'));
   assert.ok(!terms.includes('wir') && !terms.includes('pflicht'));
   assert.ok(AtsCv.hasTerm('kommunikationsstark und kommunikativ', 'kommunikation'));
+  // Addresses and abbreviations are not key words.
+  const ad = 'Front-Office Agent für unser Hotel, z.B. Night-Audit und Check-in. Bewerbung an jobs@hotel.de oder www.hotel.de, siehe hotel.de/jobs.';
+  const found = AtsCv.keywords(ad, stop);
+  assert.ok(found.includes('front-office') && found.includes('night-audit') && found.includes('check-in'));
+  assert.ok(!found.some((term) => /hotel\.de|jobs@|www\.|^z\.b/.test(term)), `no addresses in ${found}`);
+  // A hyphen in the ad or in the CV makes no difference.
+  const text = 'Front Office Agent. Night Audit, Checkin und Check-out.';
+  assert.ok(AtsCv.hasTerm(text, 'front-office') && AtsCv.hasTerm(text, 'night-audit') && AtsCv.hasTerm(text, 'check-in') && AtsCv.hasTerm(text, 'check out'));
+  assert.ok(AtsCv.hasTerm('Front-Office Agent', 'front office'));
+  assert.ok(!AtsCv.hasTerm('Front Office Agent', 'back-office'));
+  // The stem rule applies to words only, not to addresses.
+  assert.ok(!AtsCv.hasTerm('im hotel gearbeitet', 'hotel.de'));
+  // Headings are not part of the matched text: an empty education section does not "have" Ausbildung.
+  const cv = AtsCv.clean(AtsCv.fromBuilder(builderData.examples.en), atsData, 'de');
+  cv.education = [];
+  const matched = AtsCv.plainText(cv, atsData.docLangs.de, { headings: false }).toLowerCase();
+  assert.ok(!matched.includes(atsData.docLangs.de.headings.education.toLowerCase()));
+  assert.ok(AtsCv.plainText(cv, atsData.docLangs.de).includes(atsData.docLangs.de.headings.experience.toUpperCase()));
 });
 
 test('the plain text keeps an empty line between jobs', () => {

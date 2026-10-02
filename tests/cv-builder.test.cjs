@@ -45,6 +45,9 @@ test('pages break between blocks and headings move with the next block', () => {
   assert.deepEqual(plain(paginate([block(800), block(40, 20, true), block(300, 10)], 1000, 1000)), [[0], [1, 2]]);
   // A block taller than a page still gets a page of its own.
   assert.deepEqual(plain(paginate([block(100), block(1500)], 1000, 1000)), [[0], [1]]);
+  // A heading never stands alone on a page: the entry under it comes along even when it is too tall.
+  assert.deepEqual(plain(paginate([block(500), block(40, 20, true), block(980, 10)], 1000, 1000)), [[0], [1, 2]]);
+  assert.deepEqual(plain(paginate([block(40, 0, true), block(1200, 10), block(100, 10)], 1000, 1000)), [[0, 1], [2]]);
 });
 
 test('saved data is rebuilt to the expected shape', () => {
