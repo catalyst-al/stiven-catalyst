@@ -71,16 +71,24 @@
     // of it shows on each side (the rest may hang over the right or left edge or above the top). Full size
     // first, then smaller.
     const fits = (x, y, r) => !hits(x, y, r, rects) && x <= vw - r * 0.34 && x >= r * 0.34 && y >= r * 0.34;
-    const spots = [
-      // 1. its own place
-      ["home", (r, w) => [home.x + offX * w, home.y + offY * w]],
-      // 2. beside the title, past the longest line it would touch
-      ["beside", (r, w) => { const y = home.y + offY * w; const lines = rects.filter((b) => b.bottom > y - r && b.top < y + r); return lines.length ? [Math.max(...lines.map((b) => b.right)) + r + PAD + 6, y] : null; }],
-      // 3. above the title, towards the right
-      ["above", (r, w) => [Math.min(home.x + offX * w, vw - r * 0.8), titleTop - r - PAD - 2]],
-    ];
-    const narrow = vw < 900;
-    const order = narrow ? [spots[0], spots[2], spots[1]] : spots;
+    const beside = (r, w, farthest) => {
+      const y = home.y + offY * w;
+      const lines = rects.filter((b) => b.bottom > y - r && b.top < y + r);
+      if (!lines.length) return null;
+      const x = Math.max(...lines.map((b) => b.right)) + r + PAD + 6;
+      return Math.abs(x - home.x) <= farthest ? [x, y] : null;
+    };
+    const spots = {
+      // its own place
+      home: (r, w) => [home.x + offX * w, home.y + offY * w],
+      // beside the title, past the longest line it would touch, when that is not too far from its own place
+      near: (r, w) => beside(r, w, vw * 0.4),
+      // above the title, towards the right
+      above: (r, w) => [Math.min(home.x + offX * w, vw - r * 0.8), titleTop - r - PAD - 2],
+      // beside the title, however far
+      beside: (r, w) => beside(r, w, Infinity),
+    };
+    const order = (vw < 900 ? ["home", "above", "beside"] : ["home", "near", "above", "beside"]).map((name) => [name, spots[name]]);
     const trace = location.hash === "#sky-debug" ? [] : null;
     for (const scale of [1, 0.85, 0.7, 0.55]) {
       const w = width * scale, r = w * bodyRatio;
