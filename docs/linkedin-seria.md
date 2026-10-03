@@ -225,8 +225,32 @@ Vegla: https://stivencatalyst.com/de/tools/shift-handover/
 >
 > #Hotellerie #NightAudit #Schichtleitung #Operations
 
+## Eseja 10: Leadership pa titull
+
+Lidhja: https://stivencatalyst.com/de/insights/leadership-without-a-title/
+Eseja 1: https://stivencatalyst.com/de/insights/starting-from-zero/
+
+> Führung ohne Titel heißt nicht, die Arbeit des Chefs zu machen, ohne Chef zu sein. Es heißt, sich nicht hinter der Stellenbeschreibung zu verstecken, wenn eine Situation Verantwortung braucht. Und zu wissen, wann man aufhören muss.
+>
+> Initiative sagt: „Ich ignoriere das Problem nicht.“ Autorität sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Man kann viel vom Ersten haben, ohne das Zweite zu beanspruchen.
+>
+> Autorität ohne Position gewinnt man, indem man nützlich ist: klar bleiben, keine Panik verbreiten, ein Problem nicht weiterschieben, nur damit es nicht mehr auf dem eigenen Tisch liegt.
+>
+> Der Preis ist leiser, als man denkt. Wer ständig die Lücken eines Systems füllt, erweckt den Eindruck, dass das System funktioniert. Weil es immer jemand rettet.
+>
+> Drei Fragen, bevor man etwas übernimmt, das nicht das Eigene ist:
+> 1. Braucht die Situation Handlung, oder treffe ich eine Entscheidung, die jemand anderes treffen müsste?
+> 2. Habe ich die Informationen und die Kompetenz dafür?
+> 3. Bei wem bleibt danach die Verantwortung?
+>
+> Der Essay: https://stivencatalyst.com/de/insights/leadership-without-a-title/
+>
+> Wo ziehen Sie die Grenze zwischen Initiative und Befugnis?
+>
+> #Führung #Leadership #Operations #Verantwortung
+
 ---
 
-## Për esetë 10–12
+## Për esetë 11–12
 
 Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").

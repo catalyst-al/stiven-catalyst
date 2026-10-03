@@ -78,23 +78,3 @@ Sot do t'i bëja vetes tri pyetje:
 3. **Pas kësaj, kujt i mbetet përgjegjësia?** Problemi më i madh nuk është gjithmonë të bësh diçka jashtë rolit për një moment. Problemi fillon kur një përjashtim bëhet normalitet dhe askush nuk e di më kush zotëron çfarë.
 
 Pjekuria profesionale nuk matet vetëm nga sa përgjegjësi je gati të marrësh. Matet edhe nga fakti nëse e di se cilat përgjegjësi nuk janë të tuat për t'i marrë.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| Përkufizimi i leadership pa titull (hapja) | Përgjigja 6 (zhvendosur në hapje) |
-| Përgjegjësitë përtej rolit në last mile; nga "kush gaboi?" te procesi | Përgjigja 1 |
-| Hoteli: checklist, SOP, materiale trajnimi, sistem digjital; jo autoritet menaxhmenti | Përgjigja 1 |
-| Autoriteti nga dobia; qartësia; pa panik; procesi para kërkesës; fakti jo personi | Përgjigja 2 |
-| Mandati; lista e asaj që mund të bëjë; kur eskalon | Përgjigja 3 |
-| Iniciativa dhe autoriteti | Përgjigja 3 |
-| Reagimet: vetëm që kontributi është përdorur; pa lavdërime apo premtime | Përgjigja 4 |
-| Lodhja; mbulimi i boshllëqeve; çfarë do të bënte ndryshe; "personi pa të cilin asgjë nuk funksionon" | Përgjigja 5 |
-| Tri pyetjet | Përgjigja 6 |
-| Pjekuria profesionale (mbyllja) | Përgjigja 6 |
-| Titujt e pjesëve; "Më shumë se kaq nuk e shkruaj" | Sintezë |
-
-Asnjë emër kompanie apo hoteli, asnjë hidhërim ndaj punëdhënësve, asnjë vendim pa autorizim, asnjë skenë apo rezultat i shpikur.
--->
