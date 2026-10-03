@@ -1697,5 +1697,10 @@
   "From the essays": "Nga esetë",
   "Read the story behind this tool": "Lexo historinë pas kësaj vegle",
   "Clear the example": "Fshi shembullin",
-  "This is an example, so you can see what the tool shows. Add your own entries and it leaves, or clear it now.": "Ky është një shembull, që të shihni çfarë tregon vegla. Shtoni të dhënat tuaja dhe ai largohet, ose fshijeni tani."
+  "This is an example, so you can see what the tool shows. Add your own entries and it leaves, or clear it now.": "Ky është një shembull, që të shihni çfarë tregon vegla. Shtoni të dhënat tuaja dhe ai largohet, ose fshijeni tani.",
+  "Ten years close to the work": "Dhjetë vite pranë punës",
+  "Essay {n} of {total}": "Eseja {n} nga {total}",
+  "Previous essay": "Eseja e mëparshme",
+  "Next essay": "Eseja e radhës",
+  "All essays": "Të gjitha esetë"
 }

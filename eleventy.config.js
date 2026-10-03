@@ -142,6 +142,13 @@ export default function (eleventyConfig) {
   // The page of a family's role: /roles/shift-lead/, /de/roles/shift-lead/ ...
   eleventyConfig.addFilter("roleUrl", (family, lang) => localUrl(`/roles/${family.slug}/`, lang));
   // One tool by its English address, in the page's language.
+  // The essays before and after this one in its language's list (published only), for the series navigation at the end of an essay.
+  eleventyConfig.addFilter("seriesNeighbours", (items, url) => {
+    const published = (items || []).filter((item) => item.data.status !== "soon");
+    const index = published.findIndex((item) => item.url === url);
+    if (index < 0) return null;
+    return { prev: published[index - 1] || null, next: published[index + 1] || null, number: index + 1, total: published.length };
+  });
   eleventyConfig.addFilter("toolAt", (tools, url, lang) => tools.find((tool) => tool.url === localUrl(url, lang)) || null);
   // A family by its id (the "next" orbit of a role).
   eleventyConfig.addFilter("familyById", (families, id) => families.find((family) => family.id === id) || null);

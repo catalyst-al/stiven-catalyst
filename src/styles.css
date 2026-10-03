@@ -1220,7 +1220,16 @@ button, input, select { font: inherit; }
 .tool-essays { padding-top: 28px; padding-bottom: 8px; }
 .tool-essays .kicker { margin: 0 0 6px; }
 .tool-essays h2 { margin: 0 0 18px; font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(26px, 3vw, 36px); }
-@media print { .essay-tools, .tool-essays { display: none; } }
+.essay-series { margin: 28px 0 8px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.essay-series .kicker { margin: 0 0 14px; }
+.essay-series ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.essay-series li a { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+.essay-series li.is-next a { text-align: right; }
+.essay-series li a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+.essay-series li a small { color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.essay-series li a strong { font-size: 1.02rem; line-height: 1.35; }
+.essay-series-all { margin: 14px 0 0; font-size: .92rem; }
+@media print { .essay-tools, .tool-essays, .essay-series { display: none; } }
 
 /* Tools page: the five families (families.json), each with its own planet. */
 .tool-card.has-family {
