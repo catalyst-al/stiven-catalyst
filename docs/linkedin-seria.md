@@ -249,8 +249,32 @@ Eseja 1: https://stivencatalyst.com/de/insights/starting-from-zero/
 >
 > #Führung #Leadership #Operations #Verantwortung
 
+## Eseja 11: Nga Shqipëria në Gjermani
+
+Lidhja: https://stivencatalyst.com/de/insights/from-albania-to-germany/
+Eseja 1: https://stivencatalyst.com/de/insights/starting-from-zero/
+
+> Früher habe ich gefragt: „Wie lösen wir das?“
+> Heute frage ich: „Wie lösen wir das, wem gehört es danach, und was ändern wir, damit es nicht wiederkommt?“
+>
+> In Albanien habe ich mit breiter Verantwortung geführt: Verkauf, Bestand, Lager, Kosten, Cashflow, ein Netz mit 61 Wiederverkäufern. Mein Stil war direkt und lösungsorientiert.
+>
+> In Deutschland ist für mich das Gewicht des Prozesses sichtbar geworden. Es reicht nicht, dass die Arbeit erledigt ist. Sie muss nach dem Prozess erledigt, dokumentiert und nachweisbar kontrolliert sein. Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat, hat man noch keinen guten Prozess.
+>
+> Aus Albanien habe ich die Nähe zum Betrieb bewahrt, die Flexibilität und die menschliche Beziehung zum Team. Menschen sind keine Prozesse.
+>
+> Keine Kultur sollte die andere kopieren. Aber Prozessdisziplin und schnelle Reaktion ergänzen sich sehr gut.
+>
+> Ich bin nicht weniger flexibel geworden. Ich bin weniger bereit, Flexibilität an die Stelle des Systems treten zu lassen.
+>
+> Der Essay: https://stivencatalyst.com/de/insights/from-albania-to-germany/
+>
+> Was haben Sie aus einer anderen Arbeitskultur mitgenommen, und was haben Sie bewusst behalten?
+>
+> #Führung #Operations #Arbeitskultur #Leadership
+
 ---
 
-## Për esetë 11–12
+## Për esenë 12
 
 Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").
