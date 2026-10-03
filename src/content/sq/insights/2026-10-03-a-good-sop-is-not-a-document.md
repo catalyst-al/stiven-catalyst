@@ -76,23 +76,3 @@ Front Desk Control, për mua, nuk është interesante vetëm si faqe interneti. 
 Dhe pikërisht këtu ndryshon kuptimi i një SOP-je. Një dokument të tregon si duhet bërë puna. Një SOP e mirë të ndihmon ta bësh punën saktë pikërisht kur ke nevojë për të.
 
 Testi më i mirë për një SOP, sipas meje, nuk është nëse autori e kupton. Autori gjithmonë e kupton, sepse e ka shkruar vetë. Testi është nëse një person tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| SOP që lexohet vs presioni i turnit (zhvendosur në hapje) | Përgjigja 5 |
-| Proceset e standardizuara në logjistikë; "e di si bëhet" | Përgjigja 1 |
-| Checklist dhe SOP në hotel për Front Office dhe Night Audit | Përgjigja 1 (pa emër hoteli, pa procedura hap pas hapi) |
-| Si shkruhet një SOP: rezultati, puna reale, rendi, krahasimi me realitetin | Përgjigja 2 |
-| Pa test formal me grup njerëzish | Përgjigja 2 (e thënë hapur, siç e kërkoi autori) |
-| Pa rast SOP-je që dështoi; dokumente të gjata e të shpërndara | Përgjigja 3 (rasti lihet jashtë; vetëm vëzhgimi i përgjithshëm) |
-| Përditësimi; versioni "zyrtar" vs mënyra në turn | Përgjigja 4 |
-| Tri pyetjet; checklist-at; informacioni aty ku pritet | Përgjigja 5 |
-| Front Desk Control: si lindi, struktura, rishikimi i screenshot-eve | Përgjigjet 1 dhe 6 |
-| Testi i SOP-së (zhvendosur në mbyllje) | Përgjigja 5 |
-| "Këtë e kam parë si në logjistikë, ashtu edhe në hotel." dhe titujt e pjesëve | Sintezë |
-
-Asnjë emër kompanie apo hoteli, asnjë procedurë sigurie apo pagese, asnjë skenë apo rezultat i shpikur.
--->

@@ -176,8 +176,33 @@ Vegla: https://stivencatalyst.com/de/tools/shift-handover/
 >
 > #Hotellerie #NightAudit #FrontOffice #Operations
 
+## Eseja 8: Një SOP e mirë nuk është dokument
+
+Lidhja: https://stivencatalyst.com/de/insights/a-good-sop-is-not-a-document/
+Faqja: https://stivencatalyst.com/de/projects.html
+
+> Eine SOP kann sehr professionell aussehen: schöne Seiten, viel Text, jedes Detail. Aber wenn der Druck der Schicht beginnt, hat niemand Zeit, ein Handbuch zu lesen.
+>
+> Eine SOP beginnt deshalb nicht in Word, sondern bei der echten Arbeit: Welches Ergebnis muss am Ende stehen? Wo entstehen die Fehler? Was wird am häufigsten vergessen? Welche Schritte hängen voneinander ab?
+>
+> Eine SOP, die wirklich genutzt wird, beantwortet drei Fragen schnell:
+> Wo bin ich im Prozess?
+> Was muss ich jetzt prüfen?
+> Woran erkenne ich, dass ich weitermachen kann?
+>
+> Und sie bleibt nur Standard, solange sie aktuell ist. Wenn die „offizielle“ Version das eine sagt und die Schicht einen anderen Weg gelernt hat, ist sie kein Standard mehr.
+>
+> Der beste Test: nicht, ob der Autor sie versteht. Der Autor versteht sie immer. Sondern ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht.
+>
+> Der Essay: https://stivencatalyst.com/de/insights/a-good-sop-is-not-a-document/
+> Front Desk Control, meine SOPs für Front Office und Night Audit als Arbeitswerkzeug statt als Ordner: https://stivencatalyst.com/de/projects.html
+>
+> Wann haben Sie zuletzt eine SOP geändert, weil die Arbeit sich geändert hatte?
+>
+> #Operations #SOP #Hotellerie #Logistik
+
 ---
 
-## Për esetë 8–12
+## Për esetë 9–12
 
 Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").
