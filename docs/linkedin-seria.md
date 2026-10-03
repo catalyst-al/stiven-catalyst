@@ -129,8 +129,30 @@ Vegla: https://stivencatalyst.com/de/tools/shift-handover/
 >
 > #Logistik #LastMile #Schichtleitung #Operations
 
+## Eseja 6: Nga retail-i te logjistika dhe hoteleria
+
+Lidhja: https://stivencatalyst.com/de/insights/the-industry-changes-management-problems-do-not/
+Faqja: https://stivencatalyst.com/de/tools.html
+
+> Einzelhandel in Albanien, Last-Mile-Logistik, heute Hotellerie in Deutschland. Von außen drei Welten. Von innen dasselbe Problem: der Unterschied zwischen dem, was laut Prozess passieren soll, und dem, was vor Ort wirklich passiert.
+>
+> Im Laden war der Bestand ein Karton im Lager. In der Logistik ein Auftrag in Bewegung. Im Hotel ist es oft eine Transaktion, die nur im System existiert. Das Prinzip bleibt: Was das System sagt, dass man hat, und was wirklich existiert, muss dasselbe sein.
+>
+> Auch der Kunde ändert sich, die Erwartung nicht. Im Laden ist man selbst das Unternehmen. An der Tür ist es der Fahrer. Nachts an der Rezeption ist es der Rezeptionist.
+>
+> Mit 61 Wiederverkäufern habe ich gelernt, dass man einen Partner nicht wie einen Mitarbeiter führt. Oft heißt Führung, Menschen, über die man keine Autorität hat, in dieselbe Richtung zu bringen.
+>
+> Die Branche kann man lernen. Schwieriger ist es zu sehen, wann ein Prozess nicht funktioniert, nicht daran vorbeizugehen und das Problem bis zum Ende zu übernehmen.
+>
+> Der Essay: https://stivencatalyst.com/de/insights/the-industry-changes-management-problems-do-not/
+> Kostenlose Werkzeuge für Schicht, Team und Betrieb, nach Rolle sortiert: https://stivencatalyst.com/de/tools.html
+>
+> Was haben Sie aus Ihrer vorherigen Branche mitgenommen, das Ihnen heute am meisten nützt?
+>
+> #Operations #Logistik #Hotellerie #Führung
+
 ---
 
-## Për esetë 6–12
+## Për esetë 7–12
 
 Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").
