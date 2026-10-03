@@ -695,7 +695,25 @@ window.ToolKit = (() => {
     }).filter((item) => item.count > 0);
   };
 
-  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearText, csv, renderResults, results }) => {
+  // An example in a log is remembered by its shape (how many rows, first and last date). The moment the
+  // log differs from that shape, the visitor has started their own work and the example note goes.
+  const exampleStamp = (rows) => ({ n: rows.length, first: rows[0]?.date ?? "", last: rows.at(-1)?.date ?? "" });
+  const exampleMatches = (state) => isObject(state.example) && Number.isInteger(state.example.n) && state.rows.length === state.example.n
+    && (state.rows[0]?.date ?? "") === state.example.first && (state.rows.at(-1)?.date ?? "") === state.example.last;
+  // The note above the result while an example is loaded: what it is, and one tap to clear it.
+  const exampleNote = (anchor, onClear) => {
+    const note = el("div", "dl-example-note");
+    note.setAttribute("role", "status");
+    const button = el("button", "button-ghost", tx("Clear the example"));
+    button.type = "button";
+    button.addEventListener("click", onClear);
+    note.append(el("strong", null, tx("Example")), " ", el("span", null, tx("This is an example, so you can see what the tool shows. Add your own entries and it leaves, or clear it now.")), " ", button);
+    note.hidden = true;
+    anchor.before(note);
+    return { sync: (state) => { if (state.example && !exampleMatches(state)) state.example = {}; note.hidden = !exampleMatches(state); } };
+  };
+
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results }) => {
     const logBody = root.querySelector("[data-log]");
     const logWrap = root.querySelector("[data-log-wrap]");
     const logEmpty = root.querySelector("[data-log-empty]");
@@ -753,7 +771,15 @@ window.ToolKit = (() => {
         elsewhere.append(`${index ? " " : ""}${tx("Your log in {language} has {n} entries.", { language: item.name, n: int.format(item.count) })} `, link);
       });
     };
+    const note = exampleNote(results, () => {
+      state.rows = [];
+      state.example = {};
+      clearExample?.();
+      showSettings();
+      changed();
+    });
     const render = () => {
+      note.sync(state);
       renderLog();
       syncRange();
       renderResults();
@@ -816,6 +842,7 @@ window.ToolKit = (() => {
     root.querySelector("[data-example]").addEventListener("click", () => {
       dropUndo();
       loadExample();
+      state.example = exampleStamp(state.rows);
       state.from = "";
       state.to = "";
       showSettings();
@@ -837,6 +864,13 @@ window.ToolKit = (() => {
       downloadCsv(name, rows);
     });
 
+    // A first visit opens on the example, so the result is visible at once; the note says so.
+    if (key && !state.rows.length && read(key, null) === null) {
+      loadExample();
+      state.example = exampleStamp(state.rows);
+      state.from = "";
+      state.to = "";
+    }
     showSettings();
     syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, changed);
     return {
@@ -907,7 +941,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

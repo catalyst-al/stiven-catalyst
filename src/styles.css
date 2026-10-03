@@ -5544,6 +5544,11 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   .site-footer { content-visibility: visible; }
 }
 .dl-more { margin-top: 12px; }
+/* The note above a result while the example is loaded (tool-kit.js: exampleNote). */
+.dl-example-note { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 18px; padding: 10px 14px; border-left: 2px solid var(--warn, var(--gold)); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--warn, var(--gold)) 10%, transparent); font-size: 14px; }
+.dl-example-note strong { letter-spacing: .06em; text-transform: uppercase; font-size: 12px; color: var(--warn, var(--gold)); }
+.dl-example-note .button-ghost { padding: 6px 12px; font-size: 13px; }
+@media print { .dl-example-note { display: none; } }
 
 /* "New" beside a recent essay in the Insights list. */
 .new-badge {

@@ -1110,6 +1110,8 @@
     });
     say(tx("{name}: {n} rows taken over. Check the columns below.", { name: str(handoff.source), n: int.format(handoff.rows.length) }));
   } else {
-    renderAll();
+    // A first visit opens on the example of the chosen template, so the chart is visible at once (its name says "Example").
+  if (!state.source && read(data.storageKey, null) === null) actions.example();
+  renderAll();
   }
 })();

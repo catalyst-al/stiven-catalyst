@@ -51,7 +51,7 @@
   const pasteArea = root.querySelector("#da-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [] });
+  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [], example: {} });
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   const save = () => write(KEY, state);
@@ -474,6 +474,7 @@
   const book = logBook({
     root,
     key: KEY,
+    clearExample: () => { state.period = ""; state.routes = ""; state.departureGrace = "10"; state.arrivalGrace = "15"; state.target = ""; },
     state,
     save,
     results,

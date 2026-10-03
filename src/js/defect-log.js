@@ -30,7 +30,7 @@
   const pasteArea = root.querySelector("#dl-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [] });
+  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [], example: {} });
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   state.volumes = cleanVolumes(state.volumes);
@@ -399,6 +399,7 @@
   const book = logBook({
     root,
     key: KEY,
+    clearExample: () => { state.period = ""; state.volume = ""; state.target = ""; state.volumes = []; openVolumes = false; },
     state,
     save,
     results,

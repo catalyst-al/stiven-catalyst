@@ -1730,5 +1730,7 @@
     renderTabs();
     renderPanel();
   };
+  // A first visit opens on the example station, so the control tower is visible at once (the flag says so).
+  if (!hasData() && read(cfg.storageKey, null) === null) loadExample();
   render();
 })();
