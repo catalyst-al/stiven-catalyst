@@ -151,8 +151,33 @@ Faqja: https://stivencatalyst.com/de/tools.html
 >
 > #Operations #Logistik #Hotellerie #Führung
 
+## Eseja 7: Çfarë mëson një Night Auditor
+
+Lidhja: https://stivencatalyst.com/de/insights/what-a-night-auditor-learns/
+Vegla: https://stivencatalyst.com/de/tools/shift-handover/
+
+> Tagsüber sieht das Management die Aktivität. Nachts sieht man die Spuren, die die Aktivität hinterlassen hat.
+>
+> Als Night Auditor finde ich selten spektakuläre Fehler. Es sind kleine Dinge: eine Reservierung, die nicht ganz zur Realität passt, ein Status, der geprüft werden muss, eine Information, die nicht von einer Schicht zur nächsten kam. Sie entstehen selten aus fehlendem Können. Sie entstehen aus dem Satz „Machen wir später.“ Oft ist „später“ die Nachtschicht.
+>
+> In den ersten Wochen habe ich gefragt: „Habe ich diesen Schritt gemacht?“ Heute frage ich: „Ist das, was dieser Schritt prüfen soll, wirklich in Ordnung?“ Eine Checkliste kann man mechanisch abarbeiten. Einen Tagesabschluss nicht.
+>
+> Fünf Dinge, die ein Tagesmanager jeden Morgen im Nachtbericht sehen sollte:
+> 1. Was ungelöst geblieben ist.
+> 2. Wo System und Realität nicht übereinstimmten.
+> 3. Welche Probleme sich wiederholen.
+> 4. Was den Gast oder den Betrieb betroffen hat.
+> 5. Was die nächste Schicht wissen muss, bevor die Arbeit beginnt.
+>
+> Der Essay: https://stivencatalyst.com/de/insights/what-a-night-auditor-learns/
+> Eine Übergabe, die die nächste Schicht wirklich versteht: Zahlen, offene Punkte mit Verantwortlichem, Hinweise. Eine Vorlage, kostenlos: https://stivencatalyst.com/de/tools/shift-handover/
+>
+> Was lesen Sie im Nachtbericht zuerst?
+>
+> #Hotellerie #NightAudit #FrontOffice #Operations
+
 ---
 
-## Për esetë 7–12
+## Për esetë 8–12
 
 Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").
