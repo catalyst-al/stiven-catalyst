@@ -7,6 +7,10 @@ featured: true
 summary: The driver sees the problem, the dispatcher sees its effect on the shift, the manager has to understand why it exists.
 teaser: Loading time was 24 minutes against a 20-minute target. It would have been easy to say the drivers were loading slowly.
 deck: 'The second essay in the series "Ten years close to the work": loading time, delays, incompletes, damage, and why a KPI does not tell you by itself what happened.'
+# The tools this essay is about (English addresses; the German and Albanian pages follow this list).
+relatedTools:
+  - /tools/delay-analyzer/
+  - /tools/cx-control-tower/
 ---
 
 I have seen last mile from three places. As a parcel courier, as a dispatcher with more than 70 drivers on a shift, and then as Team Leader and Area Manager, with four Shift Leaders, eight dispatchers and around 250 drivers under my responsibility indirectly. The same operation looks completely different from each of them.

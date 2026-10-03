@@ -66,6 +66,16 @@ test('families have an id, a slug, a colour and an orbit, widening outwards', ()
   });
 });
 
+test('every tool has a picture of its result for its card, in each language', () => {
+  for (const lang of ['en', 'de', 'sq']) {
+    const list = JSON.parse(fs.readFileSync(lang === 'en' ? 'src/_data/tools.json' : `src/_data/${lang}/tools.json`, 'utf8'));
+    for (const tool of list.filter((t) => t.url)) {
+      const slug = tool.url.split('/').filter(Boolean).pop();
+      assert.ok(fs.existsSync(`src/media/tools/${lang}/${slug}.jpg`), `${lang}/${slug}.jpg: run node scripts/tool-previews.mjs`);
+    }
+  }
+});
+
 test('the homepage, the Tools page, every tool page and every role page have a social preview in each language', () => {
   const slugs = [...listed.map(slugOf), ...families.map((family) => `role-${family.slug}`), 'tools', 'home'];
   for (const lang of ['en', 'de', 'sq']) {

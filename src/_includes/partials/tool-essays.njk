@@ -1,0 +1,19 @@
+{#- At the end of a tool page: the essays that are about this tool ("relatedTools" in the English essay's front matter), in the page's language. -#}
+{%- set enUrl = page.url | enPath %}
+{%- set essayList = collections["insights" + (lang | langSuffix)] %}
+{%- set found = [] %}
+{%- for essay in collections.insights %}{% if essay.data.relatedTools and enUrl in essay.data.relatedTools %}
+  {%- set localEssay = essay if (lang or "en") == "en" else (essayList | byOriginal(essay.fileSlug)) %}
+  {%- if localEssay %}{% set found = (found.push(localEssay), found) %}{% endif %}
+{%- endif %}{% endfor %}
+{%- if found.length %}
+<section class="shell tool-essays" aria-labelledby="tool-essays-title">
+  <p class="kicker">{{ "From the essays" | t(lang) }}</p>
+  <h2 id="tool-essays-title">{{ "Read the story behind this tool" | t(lang) }}</h2>
+  <ul class="tool-essays-list">
+    {%- for essay in found %}
+    <li><a href="{{ essay.url }}"><small>{{ essay.data.category }} · {{ essay.data.readingTime }}</small><strong>{{ essay.data.title }}</strong><span>{{ essay.data.summary }}</span><em aria-hidden="true">→</em></a></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}

@@ -1,4 +1,9 @@
-<article class="tool-card{% if not tool.url %} is-soon{% endif %}{% if accent %} has-family" style="--family: {{ accent }}{% endif %}">
+{#- A tool's card: what it is, what it shows (a picture of its result, when scripts/tool-previews.mjs has made one), and the way in. -#}
+{%- set preview = tool.url | toolPreview(lang) %}
+<article class="tool-card{% if not tool.url %} is-soon{% endif %}{% if preview %} has-preview{% endif %}{% if accent %} has-family" style="--family: {{ accent }}{% endif %}">
+  {%- if preview %}{% set previewSize = preview | imageSize %}
+  <a class="tool-card-preview" href="{{ tool.url }}" tabindex="-1" aria-hidden="true"><img src="{{ preview | assetUrl }}" alt=""{% if previewSize %} width="{{ previewSize.width }}" height="{{ previewSize.height }}"{% endif %} loading="lazy" decoding="async"></a>
+  {%- endif %}
   <div class="card-meta"><span>{{ tool.type }}</span><span>{{ tool.time }}</span></div>
   <div>
     <h{{ level or 2 }}>{{ tool.name }}</h{{ level or 2 }}>

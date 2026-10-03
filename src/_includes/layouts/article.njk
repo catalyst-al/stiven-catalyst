@@ -23,6 +23,22 @@ ogType: article
     {{ author or site.author }}<br><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %}<br>{{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</aside>
   <article class="article-content" data-article>
 {{ content | safe }}
+    {#- The tools an essay is about ("relatedTools" on the English essay; translations follow it). -#}
+    {%- if "/insights/" in page.inputPath %}
+    {%- set sourceEssay = collections.insights | byOriginal(original or page.fileSlug) %}
+    {%- set essayTools = sourceEssay.data.relatedTools if sourceEssay and sourceEssay.data.relatedTools else [] %}
+    {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+    {%- if essayTools.length %}
+    <aside class="essay-tools" aria-labelledby="essay-tools-title">
+      <p class="kicker" id="essay-tools-title">{{ "Tools for this essay" | t(lang) }}</p>
+      <ul>
+        {%- for url in essayTools %}{% set tool = toolList | toolAt(url, lang) %}{% if tool %}
+        <li><a href="{{ tool.url }}"><small>{{ tool.type }} · {{ tool.time }}</small><strong>{{ tool.name }}</strong><span>{{ tool.summary }}</span><em aria-hidden="true">→</em></a></li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </aside>
+    {%- endif %}
+    {%- endif %}
     <div class="share-row">
       <p class="kicker">{{ "Share this essay" | t(lang) }}</p>
       <div class="share-links">

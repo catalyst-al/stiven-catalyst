@@ -1188,6 +1188,10 @@ button, input, select { font: inherit; }
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
 }
+/* The picture of the tool's result at the top of its card. */
+.tool-card.has-preview { gap: 22px; }
+.tool-card-preview { display: block; margin: -12px -12px 0; border-radius: calc(var(--radius) - 10px); overflow: hidden; border: 1px solid var(--line); background: #0b1117; }
+.tool-card-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
 .tool-card.is-soon { background: var(--card); }
 .tool-card :is(h2, h3) {
   margin: 0 0 14px;
@@ -1198,6 +1202,25 @@ button, input, select { font: inherit; }
   line-height: 1;
 }
 .tool-card p { margin: 0 0 24px; color: var(--muted); }
+
+/* Essays and tools point at each other: "Tools for this essay" under an essay, "Read the story behind this tool" on a tool page. */
+.essay-tools { margin: 44px 0 8px; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.essay-tools .kicker { margin: 0 0 14px; }
+.essay-tools ul, .tool-essays-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.essay-tools li a, .tool-essays-list li a {
+  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "small arrow" "strong arrow" "span arrow"; align-items: center; column-gap: 16px;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; background: color-mix(in srgb, var(--card) 60%, transparent);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.essay-tools li a:hover, .tool-essays-list li a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+.essay-tools li a small, .tool-essays-list li a small { grid-area: small; color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.essay-tools li a strong, .tool-essays-list li a strong { grid-area: strong; font-size: 1.05rem; }
+.essay-tools li a span, .tool-essays-list li a span { grid-area: span; color: var(--muted); font-size: .92rem; }
+.essay-tools li a em, .tool-essays-list li a em { grid-area: arrow; font-style: normal; color: var(--blue); }
+.tool-essays { padding-top: 28px; padding-bottom: 8px; }
+.tool-essays .kicker { margin: 0 0 6px; }
+.tool-essays h2 { margin: 0 0 18px; font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(26px, 3vw, 36px); }
+@media print { .essay-tools, .tool-essays { display: none; } }
 
 /* Tools page: the five families (families.json), each with its own planet. */
 .tool-card.has-family {
