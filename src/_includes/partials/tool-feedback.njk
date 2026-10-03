@@ -1,0 +1,32 @@
+{#- At the end of a tool page: one question, "did this help?", with room for what is missing.
+    With site.contact.action set, the answer is posted there (fetch, JSON reply); without it, the answer
+    goes by email through the visitor's own mail program (mailto:). Nothing is sent until "Send" is pressed. -#}
+{%- set feedbackTool = page.url | enPath %}
+<section class="shell tool-feedback" aria-labelledby="tool-feedback-title">
+  <p class="kicker">{{ "Feedback" | t(lang) }}</p>
+  <h2 id="tool-feedback-title">{{ "Did this tool help you?" | t(lang) }}</h2>
+  <form class="tool-feedback-form" data-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
+        data-sent="{{ 'Thank you. This goes straight to me and shapes what gets built next.' | t(lang) }}"
+        data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
+        data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
+        data-subject="{{ 'Feedback' | t(lang) }}: {{ title }}">
+    <input type="hidden" name="subject" value="{{ 'Feedback' | t(lang) }}: {{ title }}">
+    <input type="hidden" name="tool" value="{{ feedbackTool }}">
+    <input type="hidden" name="lang" value="{{ lang or 'en' }}">
+    <input type="hidden" name="page" value="{{ page.url | absoluteUrl }}">
+    <fieldset class="tf-choices">
+      <legend class="visually-hidden">{{ "Did this tool help you?" | t(lang) }}</legend>
+      <label class="tf-choice"><input type="radio" name="helped" value="yes" required><span>{{ "Yes" | t(lang) }}</span></label>
+      <label class="tf-choice"><input type="radio" name="helped" value="no"><span>{{ "No" | t(lang) }}</span></label>
+    </fieldset>
+    <label class="tf-field"><span>{{ "What is missing, or what would you change? (optional)" | t(lang) }}</span><textarea name="message" rows="3" maxlength="2000"></textarea></label>
+    <label class="tf-field"><span>{{ "Your email, if you would like an answer (optional)" | t(lang) }}</span><input type="email" name="email" autocomplete="email"></label>
+    <div class="tf-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="tf-actions">
+      <button type="submit" class="button-primary">{{ "Send" | t(lang) }}</button>
+      <p class="form-note">{{ "Nothing is sent until you press Send. The page itself keeps no analytics." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
+    </div>
+    <p class="form-note tf-status" data-feedback-status role="status" aria-live="polite" hidden></p>
+  </form>
+</section>
+<script src="{{ '/js/feedback.js' | assetUrl }}" defer></script>

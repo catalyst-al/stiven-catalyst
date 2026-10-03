@@ -1702,5 +1702,16 @@
   "Essay {n} of {total}": "Essay {n} von {total}",
   "Previous essay": "Vorheriger Essay",
   "Next essay": "Nächster Essay",
-  "All essays": "Alle Essays"
+  "All essays": "Alle Essays",
+  "Feedback": "Feedback",
+  "Did this tool help you?": "Hat Ihnen dieses Tool geholfen?",
+  "Yes": "Ja",
+  "No": "Nein",
+  "Send": "Senden",
+  "What is missing, or what would you change? (optional)": "Was fehlt, oder was würden Sie ändern? (optional)",
+  "Your email, if you would like an answer (optional)": "Ihre E-Mail, wenn Sie eine Antwort möchten (optional)",
+  "Thank you. This goes straight to me and shapes what gets built next.": "Danke. Das geht direkt an mich und entscheidet mit, was als Nächstes gebaut wird.",
+  "Your email program opens with the message. If it does not, write to": "Ihr E-Mail-Programm öffnet sich mit der Nachricht. Falls nicht, schreiben Sie an",
+  "The message could not be sent. Please write to": "Die Nachricht konnte nicht gesendet werden. Bitte schreiben Sie an",
+  "Nothing is sent until you press Send. The page itself keeps no analytics.": "Nichts wird gesendet, bevor Sie auf Senden drücken. Die Seite selbst führt keine Analytics."
 }

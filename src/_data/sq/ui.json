@@ -1702,5 +1702,16 @@
   "Essay {n} of {total}": "Eseja {n} nga {total}",
   "Previous essay": "Eseja e mëparshme",
   "Next essay": "Eseja e radhës",
-  "All essays": "Të gjitha esetë"
+  "All essays": "Të gjitha esetë",
+  "Feedback": "Mendimi juaj",
+  "Did this tool help you?": "A ju ndihmoi kjo vegël?",
+  "Yes": "Po",
+  "No": "Jo",
+  "Send": "Dërgo",
+  "What is missing, or what would you change? (optional)": "Çfarë mungon, ose çfarë do të ndryshonit? (opsionale)",
+  "Your email, if you would like an answer (optional)": "Emaili juaj, nëse doni një përgjigje (opsionale)",
+  "Thank you. This goes straight to me and shapes what gets built next.": "Faleminderit. Kjo vjen drejt e tek unë dhe ndikon se çfarë ndërtohet më pas.",
+  "Your email program opens with the message. If it does not, write to": "Programi juaj i emailit hapet me mesazhin. Nëse jo, shkruani te",
+  "The message could not be sent. Please write to": "Mesazhi nuk u dërgua dot. Ju lutem shkruani te",
+  "Nothing is sent until you press Send. The page itself keeps no analytics.": "Asgjë nuk dërgohet para se të shtypni Dërgo. Vetë faqja nuk mban analytics."
 }
