@@ -67,7 +67,7 @@ Gjatësia: 900–1 300 fjalë. Esetë e mëparshme kishin 500–700 fjalë, por 
 | 7 | 03.10.2026 (u publikua) | IV. Nata | Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin |
 | 8 | 03.10.2026 (u publikua) | IV. Nata | Një SOP e mirë nuk është dokument |
 | 9 | 03.10.2026 (u publikua) | IV. Nata | Pse handover-i është një nga proceset më të nënvlerësuara |
-| 10 | 10.11.2026 | V. Kush jam si menaxher | Leadership pa titull |
+| 10 | 03.10.2026 (u publikua) | V. Kush jam si menaxher | Leadership pa titull |
 | 11 | 17.11.2026 | V. Kush jam si menaxher | Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj |
 | 12 | 24.11.2026 | V. Kush jam si menaxher | Operations Manager-i që dua të jem |
 
