@@ -82,22 +82,3 @@ Pesë gjërat që do të shihja çdo mëngjes:
 5. **Çfarë duhet të dijë turni i ardhshëm para se të fillojë puna.** Një raport i mirë nuk duhet vetëm të tregojë të kaluarën. Duhet ta bëjë më të sigurt ditën që po fillon.
 
 Kjo vlen për çdo biznes, jo vetëm për hotelin. Dhe ndonjëherë, ajo që një biznes fsheh nga vetja gjatë ditës, del shumë qartë natën.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| "Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët..." (zhvendosur në hapje) | Përgjigja 6 |
-| Night Auditor në një hotel në Gjermani (pa emër hoteli) | Plani i serisë; eseja 6 |
-| Katër fazat e natës: dorëzimi, kontrolli, mbyllja, dorëzimi | Përgjigja 1 (pa orare) |
-| Gabimet tipike; "Do ta bëjmë më vonë"; "më vonë" është turni i natës | Përgjigja 2 (pa emra, pa shuma) |
-| No-show-t dhe pagesat: parimi dhe pasoja | Përgjigja 3 (asnjë hap pas hapi) |
-| Mbyllja e ditës; javët e para; checklist mekanik; varësia mes proceseve | Përgjigja 4 |
-| Kufiri i autoritetit; kur eskalon | Përgjigja 5 |
-| Pesë gjërat në raportin e natës | Përgjigja 6 |
-| "Kjo vlen për çdo biznes, jo vetëm për hotelin." | Sintezë (nga "për çdo biznes" te përgjigja 6) |
-| Titujt e pjesëve, p.sh. "Mbyllja e ditës nuk është listë" | Sintezë |
-
-Asnjë emër kompanie apo hoteli, asnjë të dhënë mysafiri, asnjë orar, asnjë procedurë pagese hap pas hapi, asnjë skenë apo rezultat i shpikur.
--->
