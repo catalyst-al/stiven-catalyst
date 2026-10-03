@@ -68,7 +68,7 @@ Gjatësia: 900–1 300 fjalë. Esetë e mëparshme kishin 500–700 fjalë, por 
 | 8 | 03.10.2026 (u publikua) | IV. Nata | Një SOP e mirë nuk është dokument |
 | 9 | 03.10.2026 (u publikua) | IV. Nata | Pse handover-i është një nga proceset më të nënvlerësuara |
 | 10 | 03.10.2026 (u publikua) | V. Kush jam si menaxher | Leadership pa titull |
-| 11 | 17.11.2026 | V. Kush jam si menaxher | Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj |
+| 11 | 03.10.2026 (u publikua) | V. Kush jam si menaxher | Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj |
 | 12 | 24.11.2026 | V. Kush jam si menaxher | Operations Manager-i që dua të jem |
 
 Datat e eseve 6–12 u rivendosën më 3 tetor 2026, që seria të vazhdojë pa ndërprerje pas pesë eseve të para: cikli i parë nis me pyetjet e esesë 6 të shtunën, 3 tetor, dhe publikimi bie të martën, 13 tetor. Nëse një javë nuk del, gjithçka zhvendoset me një javë; nuk publikohet asgjë e papërfunduar vetëm për të mbajtur datën.

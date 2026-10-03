@@ -80,23 +80,3 @@ Sot mënyrën time të drejtimit e shoh pikërisht mes këtyre dy botëve. Nga n
 Nuk jam bërë më pak fleksibël.
 
 Jam bërë më pak i gatshëm që fleksibiliteti të zëvendësojë sistemin.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| Pyetja e dikurshme dhe e sotme (hapja); "ndryshimi më i madh" | Përgjigja 6 (zhvendosur në hapje) |
-| Përgjegjësitë në Shqipëri; 61 rishitës aktivë; lidhjet shitje–stok–klient–të ardhura | Përgjigja 1 |
-| Stili i drejtpërdrejtë; afërsia me operacionin | Përgjigja 1 |
-| Marrëdhënia me pronarët: lënë jashtë | Përgjigja 1 (autori: pa material të dokumentuar) |
-| Pesha e procesit; logjistika dhe hoteleria; dokumentimi | Përgjigja 2 |
-| Disiplina e procesit; iniciativa dhe autoriteti; "person i mirë e mban mend" | Përgjigja 3 |
-| "Ownership" i shkruar si "pronësia e një detyre" | Përgjigja 3 |
-| Afërsia, fleksibiliteti, marrëdhënia njerëzore; jo "mungojnë" në Gjermani | Përgjigja 4 |
-| Pa vendim të dokumentuar; dokumentim më shumë; përgjegjësia personale dhe organizative | Përgjigja 5 |
-| Dy forcat; mes dy botëve; mbyllja | Përgjigja 6 |
-| Titujt e pjesëve | Sintezë |
-
-Asnjë emër kompanie, asnjë krahasim fyes mes vendeve, asnjë histori emigrimi, asnjë skenë apo rezultat i shpikur.
--->
