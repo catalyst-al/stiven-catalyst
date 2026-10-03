@@ -7,6 +7,10 @@ featured: true
 summary: Pressure can be fair. Humiliating people is not a management method. A standard can be very strong without treating a person as a number.
 teaser: You cannot hold people accountable for a rule nobody ever made clear.
 deck: 'The fifth essay in the series "Ten years close to the work": standards, process errors and personal errors, and what changes when you are promoted among the people you worked beside yesterday.'
+# The tools this essay is about (English addresses; the German and Albanian pages follow this list).
+relatedTools:
+  - /tools/shift-handover/
+  - /tools/kpi-diagnostic/
 ---
 
 In last mile it is not enough to tell someone "work better". They have to understand what "better" means.

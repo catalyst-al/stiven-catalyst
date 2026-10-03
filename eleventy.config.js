@@ -157,6 +157,16 @@ export default function (eleventyConfig) {
     const file = slug && `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
+  // The picture of a tool's result on its card (made by scripts/tool-previews.mjs), if there is one.
+  eleventyConfig.addFilter("toolPreview", (url, lang) => {
+    const slug = String(url || "").replace(/^\/(de|sq)(?=\/)/, "").match(/^\/tools\/([^/]+)\/$/)?.[1];
+    const file = slug && `/media/tools/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
+    return file && fs.existsSync(`src${file}`) ? file : null;
+  });
+  // The English address of a page in any language: /de/tools/x/ becomes /tools/x/.
+  eleventyConfig.addFilter("enPath", (url) => String(url || "").replace(/^\/(de|sq)(?=\/)/, ""));
+  // The essay of a language that translates the English essay with this file slug (its "original"), or the English one itself.
+  eleventyConfig.addFilter("byOriginal", (items, slug) => (items || []).find((item) => item.data.original === slug || item.fileSlug === slug) || null);
   // Tools that no family lists yet, so a new tool is never left off the page.
   eleventyConfig.addFilter("unassigned", (tools, families, lang) =>
     tools.filter((tool) => !families.some((family) => [...family.tools, ...family.learn].some((url) => localUrl(url, lang) === tool.url)))

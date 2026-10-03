@@ -7,6 +7,10 @@ featured: true
 summary: Pareto does not give you the truth if the data does not describe the truth. And 5 Why is not asking "why" five times to fill in a form.
 teaser: A delay report with 19 cases. No pretty chart, but many causes that had started before the driver left the ramp.
 deck: 'The fourth essay in the series "Ten years close to the work": how I used Pareto and 5 Why in last mile, and why I do not pad an analysis just so it looks complete.'
+# The tools this essay is about (English addresses; the German and Albanian pages follow this list).
+relatedTools:
+  - /tools/pareto/
+  - /tools/five-whys/
 ---
 
 In last mile, Pareto and 5 Why were not presentations. They were part of the daily analysis of the KPIs, especially for delays, damage, incomplete orders and loading time. But precisely for that reason I want to describe them the way I used them, not the way they look on a slide.

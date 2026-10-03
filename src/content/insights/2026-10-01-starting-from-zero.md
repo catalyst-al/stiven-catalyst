@@ -7,6 +7,10 @@ featured: true
 summary: A title can disappear in a day. What you have learned does not, but in a new place you have to prove it again.
 teaser: In Albania I led people, stores and processes. In Germany, my first job was delivering parcels.
 deck: 'The first essay in the series "Ten years close to the work": what is left of a manager when the title does not cross the border with him.'
+# The tools this essay is about (English addresses; the German and Albanian pages follow this list).
+relatedTools:
+  - /tools/cv-builder/
+  - /tools/ats-cv/
 ---
 
 In Albania, my last role was Cluster Manager. I ran the operations of a flagship store in Tirana and coordinated part of the store network. In Germany, my first job was delivering parcels.
