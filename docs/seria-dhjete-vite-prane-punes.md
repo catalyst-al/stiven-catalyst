@@ -1,6 +1,6 @@
 # Seria: Dhjetë vite pranë punës
 
-Plani editorial për 12 javë, tetor–dhjetor 2026. Një ese në javë, çdo të martë, në shqip, anglisht dhe gjermanisht.
+Plani editorial për 12 ese, tetor–nëntor 2026. Një ese në javë, çdo të martë, në shqip, anglisht dhe gjermanisht. Versionet e shkurtra për LinkedIn janë te `linkedin-seria.md`.
 
 ## Qëllimi
 
@@ -63,13 +63,15 @@ Gjatësia: 900–1 300 fjalë. Esetë e mëparshme kishin 500–700 fjalë, por 
 | 3 | 02.10.2026 (u publikua) | II. Milja e fundit | KPI-të nuk përmirësohen nga Excel-i |
 | 4 | 02.10.2026 (u publikua) | II. Milja e fundit | Pareto dhe 5 Why në praktikë, jo në PowerPoint |
 | 5 | 02.10.2026 (u publikua) | II. Milja e fundit | Të drejtosh njerëzit pa humbur njeriun |
-| 6 | 17.11.2026 | III. Ura | Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
-| 7 | 24.11.2026 | IV. Nata | Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin |
-| 8 | 01.12.2026 | IV. Nata | Një SOP e mirë nuk është dokument |
-| 9 | 08.12.2026 | IV. Nata | Pse handover-i është një nga proceset më të nënvlerësuara |
-| 10 | 15.12.2026 | V. Kush jam si menaxher | Leadership pa titull |
-| 11 | 22.12.2026 | V. Kush jam si menaxher | Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj |
-| 12 | 29.12.2026 | V. Kush jam si menaxher | Operations Manager-i që dua të jem |
+| 6 | 13.10.2026 | III. Ura | Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
+| 7 | 20.10.2026 | IV. Nata | Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin |
+| 8 | 27.10.2026 | IV. Nata | Një SOP e mirë nuk është dokument |
+| 9 | 03.11.2026 | IV. Nata | Pse handover-i është një nga proceset më të nënvlerësuara |
+| 10 | 10.11.2026 | V. Kush jam si menaxher | Leadership pa titull |
+| 11 | 17.11.2026 | V. Kush jam si menaxher | Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj |
+| 12 | 24.11.2026 | V. Kush jam si menaxher | Operations Manager-i që dua të jem |
+
+Datat e eseve 6–12 u rivendosën më 3 tetor 2026, që seria të vazhdojë pa ndërprerje pas pesë eseve të para: cikli i parë nis me pyetjet e esesë 6 të shtunën, 3 tetor, dhe publikimi bie të martën, 13 tetor. Nëse një javë nuk del, gjithçka zhvendoset me një javë; nuk publikohet asgjë e papërfunduar vetëm për të mbajtur datën.
 
 Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fundit (2–5) me natën në hotel (7–9). Eseja 11 i kthehet temës së esesë 1, por tani si reflektim profesional, jo si histori fillimi.
 
@@ -289,9 +291,9 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 ## Çfarë mund të shtojmë në faqe (sipas vendimit të Stivenit)
 
 - **Etiketa e serisë dhe faqja e serisë:** një faqe "Dhjetë vite pranë punës" me 12 esetë me radhë. Esetë që nuk kanë dalë ende mund të shfaqen si "së shpejti" (faqja e mbështet tashmë statusin `soon`). Kjo e bën premtimin publik, ndaj vendoset vetëm nëse Stiveni e do.
-- **Navigimi brenda serisë:** "Eseja e mëparshme / e radhës" në fund të çdo eseje të serisë.
-- **Version i shkurtër për LinkedIn:** 150–250 fjalë për çdo ese, me lidhje te faqja.
+- **Navigimi brenda serisë** (u bë më 3 tetor 2026): në fund të çdo eseje qëndron "Dhjetë vite pranë punës · Eseja 4 nga 5", me esenë e mëparshme dhe atë të radhës dhe lidhjen te të gjitha esetë, në tri gjuhët (`seriesNeighbours` në `eleventy.config.js`, blloku `.essay-series` në `layouts/article.njk`). Numërimi merr vetëm esetë e botuara, kështu nuk premton publikisht 12.
+- **Version i shkurtër për LinkedIn** (u bë për esetë 1–5): 150–250 fjalë në gjermanisht për çdo ese, me një vegël dhe një shifër nga eseja, te `linkedin-seria.md`. Për esetë 6–12 shkruhet të hënën bashkë me përkthimet.
 
 ## Hapi i radhës
 
-Stiveni u përgjigjet 7 pyetjeve të esesë 1. Nuk duhet tekst i bukur: mjafton e vërteta, me shembuj konkretë, edhe me shkrim të shpejtë ose me mesazh zanor të transkriptuar.
+Esetë 1–5 janë botuar. Stiveni u përgjigjet 5 pyetjeve të esesë 6 (deri të martën, 6 tetor); drafti në shqip vjen të mërkurën, përkthimet dhe postimi për LinkedIn të hënën, publikimi të martën, 13 tetor. Nuk duhet tekst i bukur: mjafton e vërteta, me shembuj konkretë, edhe me shkrim të shpejtë ose me mesazh zanor të transkriptuar.
