@@ -149,6 +149,8 @@ export default function (eleventyConfig) {
     if (index < 0) return null;
     return { prev: published[index - 1] || null, next: published[index + 1] || null, number: index + 1, total: published.length };
   });
+  // The origin of an address (https://host), for naming a form provider in the Content Security Policy.
+  eleventyConfig.addFilter("originOf", (url) => { try { return new URL(url).origin; } catch { return ""; } });
   eleventyConfig.addFilter("toolAt", (tools, url, lang) => tools.find((tool) => tool.url === localUrl(url, lang)) || null);
   // A family by its id (the "next" orbit of a role).
   eleventyConfig.addFilter("familyById", (families, id) => families.find((family) => family.id === id) || null);

@@ -1218,6 +1218,24 @@ button, input, select { font: inherit; }
 .essay-tools li a span, .tool-essays-list li a span { grid-area: span; color: var(--muted); font-size: .92rem; }
 .essay-tools li a em, .tool-essays-list li a em { grid-area: arrow; font-style: normal; color: var(--blue); }
 .tool-essays { padding-top: 28px; padding-bottom: 8px; }
+.tool-feedback { padding-top: 28px; padding-bottom: 8px; }
+.tool-feedback h2 { margin: 0 0 16px; }
+.tool-feedback-form { display: grid; gap: 14px; max-width: 640px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.tf-choices { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; border: 0; }
+.tf-choice { position: relative; }
+.tf-choice input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.tf-choice span { display: inline-block; padding: 10px 22px; border: 1px solid var(--line); border-radius: 999px; font-weight: 800; transition: border-color .2s, background .2s, color .2s; }
+.tf-choice input:checked + span { border-color: var(--blue); background: var(--blue); color: var(--on-blue); }
+.tf-choice input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; }
+.tf-field { display: grid; gap: 6px; }
+.tf-field span { color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.tf-field textarea, .tf-field input { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; }
+.tf-field textarea { resize: vertical; min-height: 72px; }
+.tf-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.tf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.tf-actions .form-note { margin: 0; }
+.tf-status { margin: 0; font-size: .95rem; color: var(--ink); }
+@media print { .tool-feedback { display: none; } }
 .tool-essays .kicker { margin: 0 0 6px; }
 .tool-essays h2 { margin: 0 0 18px; font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(26px, 3vw, 36px); }
 .essay-series { margin: 28px 0 8px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
