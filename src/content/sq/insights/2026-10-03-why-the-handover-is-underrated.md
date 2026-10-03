@@ -84,24 +84,3 @@ Një gjë që asnjë vegël nuk e zëvendëson plotësisht është konteksti nje
 Kjo është arsyeja pse për mua handover-i nuk është thjesht transferim informacioni. Është transferim përgjegjësie. Dhe pikërisht këtu shumë organizata gabojnë.
 
 Nëse informacioni nuk e kalon kufirin mes dy turneve, puna e mirë e turnit të parë nuk i përket më organizatës. Mbetet vetëm në kokën e personit që sapo iku në shtëpi.
-
-<!--
-KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
-
-| Pohimi në ese | Burimi |
-|---|---|
-| "Një problem që nuk kalon në handover nuk pushon së ekzistuari..." (hapja) | Përgjigja 1 |
-| Pa rast të dokumentuar; llojet e çështjeve të parë në hotel | Përgjigja 1 (asnjë histori e ndërtuar) |
-| Dy turne të mirë; "organizata mund të humbasë kujtesën"; "Ajo pikë quhet handover" | Përgjigja 6 (zhvendosur në hapje) |
-| Kalimi drejt dorëzimit të strukturuar; pesë pyetjet; SOP-të; "gjendjen aktuale" | Përgjigja 2 |
-| Kategoritë e handover-it të natës | Përgjigja 3 (pa përmbajtje; "pa hyrë në procedurën e tyre" u hoq nga lista, parimi mbetet te hyrja) |
-| "E raportuar" dhe "e zgjidhur" | Përgjigja 3 |
-| "Problem me dhomën"; pa rregull absolut verbal; dokumenti si mjet, jo provë | Përgjigja 4 |
-| Fundi dhe fillimi i turnit; pasqyra; paqartësia | Përgjigja 5 |
-| Logjika e veglës: shifrat, pikat e hapura, përgjegjësi, afati, shënimet, siguria si kategori | Përgjigja 6 |
-| "Vegla e handover-it që kam ndërtuar" (pa përcaktuar ku ndodhet) | Përgjigja 6 (autori e quajti "Shift Handover në Front Desk Control") |
-| Konteksti njerëzor; transferim përgjegjësie; mbyllja | Përgjigja 6 |
-| Titujt e pjesëve; "Parimi më mjafton." | Sintezë |
-
-Asnjë emër kompanie apo hoteli, asnjë të dhënë mysafiri, asnjë detaj sigurie, asnjë skenë apo rezultat i shpikur.
--->

@@ -201,8 +201,32 @@ Faqja: https://stivencatalyst.com/de/projects.html
 >
 > #Operations #SOP #Hotellerie #Logistik
 
+## Eseja 9: Pse handover-i është një nga proceset më të nënvlerësuara
+
+Lidhja: https://stivencatalyst.com/de/insights/why-the-handover-is-underrated/
+Vegla: https://stivencatalyst.com/de/tools/shift-handover/
+
+> Ein Problem, das nicht in die Übergabe kommt, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
+>
+> Man kann zwei sehr gute Schichten haben. Aber zwischen ihnen gibt es einen Punkt, an dem die Organisation ihr Gedächtnis verlieren kann. Dieser Punkt heißt Übergabe.
+>
+> Meine Übergabe beantwortet fünf Fragen: Wie ist der Zustand? Was ist passiert? Was wurde gelöst? Was ist noch offen? Wer verfolgt es weiter?
+>
+> „Problem mit dem Zimmer“ ist keine Übergabe. Und „gemeldet“ ist nicht „gelöst“. Ein offener Punkt muss als offen erkennbar sein, mit einem Verantwortlichen, denn eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt.
+>
+> Wenn ich übergebe, verringere ich die Unklarheit für den anderen. Wenn ich übernehme, decke ich die Unklarheit auf, die übrig geblieben ist.
+>
+> Eine Übergabe ist keine Weitergabe von Information. Sie ist eine Weitergabe von Verantwortung.
+>
+> Der Essay: https://stivencatalyst.com/de/insights/why-the-handover-is-underrated/
+> Eine Übergabe mit Zahlen, offenen Punkten mit Verantwortlichem und Uhrzeit, Hinweisen und Sicherheit. Eine Vorlage, kostenlos: https://stivencatalyst.com/de/tools/shift-handover/
+>
+> Woran erkennen Sie in einer Übergabe, dass etwas noch offen ist?
+>
+> #Hotellerie #NightAudit #Schichtleitung #Operations
+
 ---
 
-## Për esetë 9–12
+## Për esetë 10–12
 
 Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").
