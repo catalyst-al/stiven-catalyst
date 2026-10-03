@@ -63,7 +63,7 @@ Gjatësia: 900–1 300 fjalë. Esetë e mëparshme kishin 500–700 fjalë, por 
 | 3 | 02.10.2026 (u publikua) | II. Milja e fundit | KPI-të nuk përmirësohen nga Excel-i |
 | 4 | 02.10.2026 (u publikua) | II. Milja e fundit | Pareto dhe 5 Why në praktikë, jo në PowerPoint |
 | 5 | 02.10.2026 (u publikua) | II. Milja e fundit | Të drejtosh njerëzit pa humbur njeriun |
-| 6 | 13.10.2026 | III. Ura | Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
+| 6 | 03.10.2026 (u publikua) | III. Ura | Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
 | 7 | 20.10.2026 | IV. Nata | Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin |
 | 8 | 27.10.2026 | IV. Nata | Një SOP e mirë nuk është dokument |
 | 9 | 03.11.2026 | IV. Nata | Pse handover-i është një nga proceset më të nënvlerësuara |
