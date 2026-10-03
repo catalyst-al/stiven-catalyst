@@ -4627,6 +4627,9 @@ body.in-family {
 @media (max-width: 900px) {
   .family-sky .sky-planet { left: auto; right: -90px; top: 30px; width: 260px; transform: none; }
 }
+/* js/family-sky.js moves the planet where it touches no words (the title, the badge, the moons): beside the
+   title, above it, or smaller; the rules above are its home and the fallback without scripts. */
+.family-sky .sky-planet.is-placed { left: var(--planet-x); top: var(--planet-y); right: auto; width: var(--planet-w); transform: translate(-50%, -50%); }
 
 /* Lumen: a beam of light from the bulb, dust drifting in it. */
 .sky-lumen .lumen-cable {
