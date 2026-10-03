@@ -34,7 +34,7 @@
     DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
-    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample } = window.ToolKit;
+    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample, firstVisit, exampleStamp, exampleNote } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const SVG = "http://www.w3.org/2000/svg";
@@ -153,7 +153,7 @@
   const results = document.querySelector("[data-results]");
   const KEY = data.storageKey;
 
-  const state = loadState(KEY, { metric: "", unit: "", baseline: "", grain: "day", rows: [] });
+  const state = loadState(KEY, { metric: "", unit: "", baseline: "", grain: "day", rows: [], example: {} });
   if (state.grain !== "week") state.grain = "day";
   state.rows = state.rows.filter(isObject)
     .map((row) => ({ date: parseDate(row.date), n: Math.round(Number(row.n)), d: Math.round(Number(row.d)), note: str(row.note) }))
@@ -541,6 +541,7 @@
   };
 
   const render = () => {
+    note.sync(state);
     renderLog();
     renderResults();
   };
@@ -615,12 +616,24 @@
     (logBody.querySelector("[data-remove]") || entry.elements.date).focus();
   });
 
-  root.querySelector("[data-example]").addEventListener("click", () => {
+  const loadExample = () => {
     const { rows, ...settings } = data.example;
     Object.assign(state, settings);
     state.rows = [];
     upsert(importRows(recentExample(rows).map((row) => row.replace(/\|/g, "\t")).join("\n")).added);
+    state.example = exampleStamp(state.rows);
     root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
+  };
+  const note = exampleNote(results, () => {
+    state.rows = [];
+    state.example = {};
+    state.metric = ""; state.unit = ""; state.baseline = "";
+    root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
+    save();
+    render();
+  });
+  root.querySelector("[data-example]").addEventListener("click", () => {
+    loadExample();
     save();
     render();
     results.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -707,6 +720,11 @@
     }, 150);
   });
 
+  // A first visit opens on the example month, so the chart is visible at once; the note says so.
+  if (!state.rows.length && !handoff && firstVisit(KEY)) {
+    loadExample();
+    save();
+  }
   render();
   if (handoff) applyHandoff(handoff);
 })();

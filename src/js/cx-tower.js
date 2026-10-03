@@ -526,7 +526,7 @@
   if (!app || !dataEl || !window.ToolKit || !window.CxTower || !window.Pareto) return;
   const C = window.CxTower;
   const P = window.Pareto;
-  const { LANG, tx, el, num, pct, int, lower, parseDate, parseRows, showDate, read, write, isObject, stat, panel, barList, copy, flash, downloadCsv } = window.ToolKit;
+  const { LANG, tx, el, num, pct, int, lower, parseDate, parseRows, showDate, read, write, isObject, stat, panel, barList, copy, flash, downloadCsv, firstVisit } = window.ToolKit;
   const cfg = JSON.parse(dataEl.textContent);
   const NAMES = ["deliveries", "routes", "incidents", "actions"];
   const TABLE_LABEL = { deliveries: tx("Deliveries"), routes: tx("Routes"), incidents: tx("Incidents"), actions: tx("Actions") };
@@ -1730,5 +1730,7 @@
     renderTabs();
     renderPanel();
   };
+  // A first visit opens on the example station, so the control tower is visible at once (the flag says so).
+  if (!hasData() && firstVisit(cfg.storageKey)) loadExample();
   render();
 })();

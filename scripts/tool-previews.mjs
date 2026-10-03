@@ -43,19 +43,22 @@ const WHYS = {
 const RECIPES = {
   "kpi-diagnostic": { act: (page) => page.evaluate(() => { const names = [...new Set([...document.querySelectorAll("input[type=radio]")].map((x) => x.name))]; const pick = [3, 1, 2, 0, 2, 3, 1, 2, 0, 1]; names.forEach((n, i) => { const inputs = [...document.querySelectorAll(`input[name="${n}"]`)]; inputs[Math.min(inputs.length - 1, pick[i % pick.length])].click(); }); }), target: "[data-result]" },
   "five-whys": { act: async (page, lang) => { const ids = ["ws-problem", "ws-why-1", "ws-why-2", "ws-why-3", "ws-why-4", "ws-cause", "ws-owner", "ws-check"]; for (const [i, id] of ids.entries()) { const el = await page.$(`#${id}`); if (el) await el.fill(WHYS[lang][i]); else { const alt = (await page.$$("textarea, input[type=text]"))[i]; if (alt) await alt.fill(WHYS[lang][i]); } } }, target: "main form, main .ws-sheet" },
-  "damage-control": { act: (page) => page.click("[data-example]"), target: "[data-results]" },
-  "incomplete-control": { act: (page) => page.click("[data-example]"), target: "[data-results]" },
-  "delay-analyzer": { act: (page) => page.click("[data-example]"), target: "[data-results]" },
-  "sigma-control-chart": { act: (page) => page.click("[data-example]"), target: "[data-results]" },
+  "damage-control": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "incomplete-control": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "delay-analyzer": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "sigma-control-chart": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "shift-pulse": { before: ["damage-control", "incomplete-control", "delay-analyzer"], act: async () => {}, target: "[data-pulse-results]" },
-  "shift-handover": { act: (page) => page.click("[data-example]"), target: "[data-output]" },
+  "shift-handover": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-output]" },
   "six-sigma-dmaic": { act: async () => {}, target: ".dm-module" },
-  "pareto": { act: (page) => page.click('[data-act="example"]'), target: "[data-result-body], .pa-results" },
-  "cx-control-tower": { act: (page, lang) => page.click(`button:has-text("${t(lang, "Load the example")}")`), target: "main section:has(.cx-tabs), main .cx" },
-  "cv-builder": { act: (page) => page.click('[data-act="example"]'), target: "[data-stage] > :first-child" },
-  "ats-cv": { act: (page) => page.click('[data-act="example"]'), target: "[data-stage] > :first-child" },
-  "cover-letter": { act: (page) => page.click('[data-act="example"]'), target: "[data-stage] > :first-child" },
+  "pareto": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-result-body], .pa-results" },
+  "cx-control-tower": { act: (page, lang) => clickIfVisible(page, `button:has-text("${t(lang, "Load the example")}")`), target: "main section:has(.cx-tabs), main .cx" },
+  "cv-builder": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-stage] > :first-child" },
+  "ats-cv": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-stage] > :first-child" },
+  "cover-letter": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-stage] > :first-child" },
 };
+
+// A click only when the button is there and visible (a first visit already shows the example).
+const clickIfVisible = async (page, selector) => { const button = await page.$(selector); if (button && await button.isVisible()) await button.click(); };
 
 const chromium = await loadChromium();
 const browser = await chromium.launch();
