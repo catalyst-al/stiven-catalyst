@@ -34,7 +34,7 @@
     DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
-    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample, exampleStamp, exampleNote } = window.ToolKit;
+    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample, firstVisit, exampleStamp, exampleNote } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const SVG = "http://www.w3.org/2000/svg";
@@ -721,7 +721,7 @@
   });
 
   // A first visit opens on the example month, so the chart is visible at once; the note says so.
-  if (!state.rows.length && !handoff && read(KEY, null) === null) {
+  if (!state.rows.length && !handoff && firstVisit(KEY)) {
     loadExample();
     save();
   }

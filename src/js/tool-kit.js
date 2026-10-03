@@ -697,6 +697,9 @@ window.ToolKit = (() => {
 
   // An example in a log is remembered by its shape (how many rows, first and last date). The moment the
   // log differs from that shape, the visitor has started their own work and the example note goes.
+  // A tool opens on its example only when nothing is stored yet and no coaching project sent the visitor here:
+  // someone arriving with ?coaching= works on their own case, and the example must not become its evidence.
+  const firstVisit = (key) => read(key, null) === null && !new URLSearchParams(location.search).has("coaching");
   const exampleStamp = (rows) => ({ n: rows.length, first: rows[0]?.date ?? "", last: rows.at(-1)?.date ?? "" });
   const exampleMatches = (state) => isObject(state.example) && Number.isInteger(state.example.n) && state.rows.length === state.example.n
     && (state.rows[0]?.date ?? "") === state.example.first && (state.rows.at(-1)?.date ?? "") === state.example.last;
@@ -865,7 +868,7 @@ window.ToolKit = (() => {
     });
 
     // A first visit opens on the example, so the result is visible at once; the note says so.
-    if (key && !state.rows.length && read(key, null) === null) {
+    if (key && !state.rows.length && firstVisit(key)) {
       loadExample();
       state.example = exampleStamp(state.rows);
       state.from = "";
@@ -941,7 +944,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();
