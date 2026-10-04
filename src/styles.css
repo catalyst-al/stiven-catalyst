@@ -5912,3 +5912,46 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
   .essay-series-next { padding: 24px 22px; }
   .essay-series-next em { top: 20px; right: 20px; }
 }
+
+/* The field note of the day, just below the hero on the home page. */
+.note-of-day {
+  position: relative;
+  margin-top: 28px;
+  margin-bottom: 56px;
+  padding: 44px 48px 36px;
+  border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line));
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 50%),
+    var(--card);
+  overflow: hidden;
+}
+.note-of-day::before {
+  content: "“";
+  position: absolute;
+  top: -30px;
+  right: 28px;
+  color: color-mix(in srgb, var(--blue) 16%, transparent);
+  font-family: var(--serif);
+  font-size: 260px;
+  line-height: 1;
+  pointer-events: none;
+}
+.note-of-day .kicker { margin: 0 0 18px; }
+.note-of-day-quote { position: relative; max-width: 980px; margin: 0 0 30px; }
+.note-of-day-quote p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -.03em;
+}
+.note-of-day-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.note-of-day-by { margin: 0; color: var(--muted); font-size: 14px; }
+.note-of-day-by span { color: var(--ink); font-weight: 700; }
+.note-of-day-by a { color: var(--blue); text-decoration: none; border-bottom: 1px solid currentColor; }
+@media (max-width: 600px) {
+  .note-of-day { margin-top: 20px; margin-bottom: 36px; padding: 30px 24px 26px; border-radius: 22px; }
+  .note-of-day::before { font-size: 180px; top: -22px; right: 14px; }
+  .note-of-day-quote p { font-size: 29px; }
+}
