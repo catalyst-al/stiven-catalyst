@@ -8,11 +8,14 @@ Nëntori hap sezonin e pikut në logjistikë (Black Friday, Krishtlindjet) dhe n
 
 | Shifra | Çfarë thotë | Burimi |
 |---|---|---|
-| 4,37 miliardë | Dërgesa KEP në Gjermani në 2025, +1,8% (80 milionë më shumë); rritja u ngadalësua nga parashikimi 2,5–3,5% | BIEK, KEP-Studie 2026 (cituar te firmenauto.de, paketda.de, onlinemarktplatz.de) |
-| ~735 milionë | Dërgesa të pritura në nëntor dhe dhjetor 2025 (sezoni i Krishtlindjeve), rritje 1–3% | BIEK (cituar te hamburg-logistik.net) |
-| 3,1% në vit | Rritja e pritur deri në 2030, deri në 5,08 miliardë dërgesa | BIEK, KEP-Studie 2026 |
-| 157 | Profesione me mungesë fuqie punëtore në Gjermani; shoferët e kamionëve janë ndër dhjetë më të mangëtit | Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025 |
-| 12% | Punonjës që pajtohen fort se organizata e tyre e bën mirë integrimin e të rinjve | Gallup, "Why the Onboarding Experience Is Key for Retention" (studim më i vjetër; shënohet si i tillë) |
+| 4,37 miliardë | Dërgesa KEP në Gjermani në 2025, rreth +2% (KEP-Studie 2026: +1,8%) | BPEX (ish-BIEK), KEP-Studie 2026; firmenauto.de, paketda.de |
+| ~750 milionë | Dërgesa të pritura në nëntor dhe dhjetor 2025, +1–2% | BPEX, "Ausblick Weihnachtsgeschäft 2025" (nëntor 2025); haendlerbund.de, technologiebox.de |
+| ~15 milionë / deri 21 milionë | Dërgesa në ditë në pikun e Krishtlindjeve: mesatarisht / në ditët më të ngarkuara | BPEX, po aty |
+| deri 20.000 / 17.000 | Punonjës shtesë / automjete shtesë për sezonin | BPEX, po aty |
+| 157 | Profesione me mungesë fuqie punëtore në Gjermani; shoferët e kamionëve ndër dhjetë më të mangëtit | Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025 |
+| 12% | Punonjës që pajtohen fort se organizata e tyre e bën shumë mirë integrimin e të rinjve | Gallup, "Why the Onboarding Experience Is Key for Retention", 16 maj 2018 |
+
+Korrigjim: shifra 735 milionë që u përmend në fillim ishte parashikimi për Krishtlindjet 2024, jo 2025.
 
 Shënim: burimet primare (biek.de / bpex-ev.de, statistik.arbeitsagentur.de, gallup.com) nuk u hapën dot nga ambienti i punës; shifrat u kontrolluan te përmbledhje të pavarura dhe kontrollohen sërish para publikimit.
 
