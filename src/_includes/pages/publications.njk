@@ -1,7 +1,9 @@
 {#- Publications: the book, the Tools Guide and the monthly magazine, in the three languages. -#}
   <section class="shell page-hero publications-hero">
     <p class="eyebrow">{{ "Books, guides and a monthly magazine" | t(lang) }}</p>
-    <h1>{{ "Publications" | t(lang) }}</h1>
+    {%- set pubTitle = "Publications" | t(lang) %}
+    {#- "Publications" and "Publikationen" are wider than a phone at the full hero size. #}
+    <h1{% if pubTitle | length > 10 %} class="hero-long"{% endif %}>{{ pubTitle }}</h1>
     <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, and every month a magazine on management, from the floor." | t(lang) }}</p>
   </section>
 {#- The magazine: every issue the same way as the other publications, cover and text, the newest first. -#}
@@ -9,7 +11,7 @@
 {%- for issue in magazine.issues | reverse %}
 {%- set issueUrl = ("/magazine/" + issue.slug + ".html") | local(lang) %}
 {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
-  <section class="shell book-feature magazine-feature">
+  <section class="shell book-feature magazine-feature"{% if loop.first %} id="magazine"{% endif %}>
     <a class="book-object" href="{{ issueUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ issueCover.image }}" srcset="{{ issueCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy"></span>
     </a>

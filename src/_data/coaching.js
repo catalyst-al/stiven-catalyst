@@ -135,7 +135,7 @@ const roles = {
   },
   zenith: {
     slug: 'area-manager', name: T('ZENITH · Area Manager', 'ZENITH · Bereichsleitung', 'ZENITH · Area Manager'),
-    aim: T('Turn an area review into follow-through.', 'Aus der Bereichsbesprechung Umsetzung machen.', 'Ktheje kontrollin e zonës në veprim.'),
+    aim: T('Turn an area review into follow-through.', 'Aus der Bereichs\u00ADbesprechung Umsetzung machen.', 'Ktheje kontrollin e zonës në veprim.'),
     suggested: T('One area, one improvement priority', 'Ein Bereich, eine Verbesserungspriorität', 'Një zonë, një prioritet përmirësimi'),
     prompt: T('Pick one weekly area problem. Compare evidence, coach the shift leads and review one bounded improvement.', 'Wählen Sie ein wöchentliches Bereichsproblem. Vergleichen Sie Belege, coachen Sie die Schichtleitungen und prüfen Sie eine begrenzte Verbesserung.', 'Zgjidh një problem javor të zonës. Krahaso provat, puno me drejtuesit e turneve dhe kontrollo një përmirësim të kufizuar.'),
     tools: ['cx-control-tower', 'kpi-diagnostic', 'pareto', 'shift-pulse'], modules: ['zenith-review', 'zenith-gemba', 'zenith-pdca']

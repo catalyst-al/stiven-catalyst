@@ -129,6 +129,9 @@
     });
     $("[data-book-prev]").disabled = turned === 0;
     $("[data-book-next]").disabled = turned >= sheets.length - (spread ? 0 : 1);
+    // On the back cover, the way on to another issue (the magazine).
+    const end = $("[data-book-end]");
+    if (end) end.hidden = last !== total;
   };
 
   const remember = () => {
