@@ -36,6 +36,23 @@
       </div>
       {%- endfor %}
     </div>
+
+    {#- Two small books under the hero, as on Publications: the book and the newest issue of the magazine. -#}
+    {%- set ml = lang or "en" %}
+    {%- set issue = magazine.latest %}
+    {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
+    {%- set bookCover = book.pages[0] %}
+    <div class="hero-shelf">
+      <a class="hero-shelf-label" href="{{ '/publications.html' | local(lang) }}">{{ "Publications" | t(lang) }} <span aria-hidden="true">→</span></a>
+      <a class="hero-shelf-item" href="{{ '/books/mall-per-durresin.html' | local(lang) }}">
+        <span class="book-object" aria-hidden="true"><span class="book-object-cover"><img src="{{ bookCover.image }}" width="{{ bookCover.width }}" height="{{ bookCover.height }}" alt="" loading="lazy"></span></span>
+        <span class="hero-shelf-text"><small>{{ "The book · in Albanian" | t(lang) }}</small><strong lang="sq">{{ book.title }}</strong><span>{{ "Open the book" | t(lang) }} →</span></span>
+      </a>
+      <a class="hero-shelf-item" href="{{ ('/magazine/' + issue.slug + '.html') | local(lang) }}">
+        <span class="book-object" aria-hidden="true"><span class="book-object-cover"><img src="{{ issueCover.image }}" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy"></span></span>
+        <span class="hero-shelf-text"><small>{{ magazine.names[ml].name }} · {{ magazine.labels[ml].issue }} {{ issue.number }}</small><strong>{{ issue[ml].theme }}</strong><span>{{ "Open the issue" | t(lang) }} →</span></span>
+      </a>
+    </div>
   </div>
 </section>
 <script src="{{ '/js/cosmos.js' | assetUrl }}" defer></script>
