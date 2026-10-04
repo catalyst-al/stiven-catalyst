@@ -1,0 +1,8 @@
+{#- On the three writing pages (Insights, Reflections, Field Notes): one "Writing" item in the menu, these tabs
+    to move between them. -#}
+<nav class="shell writing-tabs" aria-label="{{ 'Writing' | t(lang) }}">
+  {%- for path, label in [["/insights.html", "Insights"], ["/reflections.html", "Reflections"], ["/field-notes.html", "Field Notes"]] %}
+  {%- set url = path | local(lang) %}
+  <a href="{{ url }}"{% if activeNav == url %} aria-current="page"{% endif %}>{{ label | t(lang) }}</a>
+  {%- endfor %}
+</nav>

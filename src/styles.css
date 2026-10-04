@@ -2632,6 +2632,20 @@ html:not(.js) .filter-bar { display: none; }
 .legal a { color: var(--ink); border-bottom: 1px solid currentColor; }
 
 /* Internal pages */
+.writing-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 34px; }
+.writing-tabs a {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s ease, border-color .2s ease;
+}
+.writing-tabs a:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.writing-tabs a[aria-current="page"] { color: var(--ink); border-color: var(--blue); background: color-mix(in srgb, var(--blue) 14%, transparent); }
+.writing-tabs + .page-hero { padding-top: 56px; }
 .page-hero {
   container-type: inline-size;
   padding: 100px 0 68px;
