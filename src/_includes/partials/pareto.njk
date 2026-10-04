@@ -1,4 +1,5 @@
-{#- Pareto 80/20. The page sets `cfg` to the pareto data; pareto.js does the rest. -#}
+{#- Pareto 80/20. The page sets `cfg` to the pareto data; pareto.js does the rest. The first template's description
+    is written here already, so the page does not jump when the script fills it in. -#}
 <div data-pareto>
 <section class="shell tool-layout pa-setup">
   <div class="tool-panel">
@@ -15,7 +16,7 @@
           </optgroup>
           {%- endfor %}
         </select>
-        <p class="pa-what" data-template-what></p>
+        <p class="pa-what" data-template-what>{{ cfg.templates[0].what[lang] or cfg.templates[0].what.en }}</p>
       </div>
       <div class="tool-actions">
         <button class="button-primary" type="button" data-act="example">{{ "Load the example" | t(lang) }}</button>
