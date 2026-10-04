@@ -3623,8 +3623,6 @@ html:not(.js) .filter-bar { display: none; }
 .book-feature-copy > p:not(.kicker, .book-subtitle) { max-width: 560px; margin: 22px 0 30px; color: var(--muted); font-size: 18px; }
 .book-feature .button-primary { display: inline-block; }
 /* Publications: the list of the magazine's issues, under the newest one. */
-.magazine-list { padding-top: 60px; }
-.magazine-list > .kicker { margin-bottom: 18px; }
 
 @media (max-width: 900px) {
   .book-hero { grid-template-columns: 1fr; gap: 50px; padding: 64px 0 60px; }
