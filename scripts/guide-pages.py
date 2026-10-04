@@ -1,4 +1,5 @@
-"""Turn the PDFs of the Tools Guide into the pages of the online reader (run by scripts/tools-guide.mjs).
+"""Turn the PDFs of a publication into the pages of the online reader (run by scripts/tools-guide.mjs and
+scripts/magazine.mjs).
 
     pip install pymupdf pillow
     python3 scripts/guide-pages.py tools-guide en sq de
@@ -7,8 +8,12 @@ Writes, for each language:
   src/media/guides/tools-guide/<lang>/page-01.webp ...  one image per page
   src/media/guides/tools-guide/<lang>/social.jpg        the preview for social media
 and src/_data/toolsGuidePages.json with the page list of every language.
+
+For the magazine, MEDIA_ROOT (default "guides") and DATA_FILE (default toolsGuidePages.json) say where the
+issue lives; DATA_FILE then holds one entry per issue, under its slug.
 """
 import json
+import os
 import sys
 from io import BytesIO
 from pathlib import Path
@@ -19,8 +24,9 @@ from PIL import Image
 PAGE_WIDTH = 1000  # pixels; sharp on a two-page spread on a retina screen, as the book
 ROOT = Path(__file__).resolve().parent.parent
 SLUG, *LANGS = sys.argv[1:] or ["tools-guide", "en", "sq", "de"]
-MEDIA = ROOT / "src" / "media" / "guides" / SLUG
-DATA = ROOT / "src" / "_data" / "toolsGuidePages.json"
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "guides")
+MEDIA = ROOT / "src" / "media" / MEDIA_ROOT / SLUG
+DATA = ROOT / "src" / "_data" / os.environ.get("DATA_FILE", "toolsGuidePages.json")
 
 
 def render(page, width):
@@ -53,7 +59,7 @@ def main():
             image.save(folder / name, "WEBP", quality=82, method=6)
             pages.append({
                 "number": number,
-                "image": f"/media/guides/{SLUG}/{lang}/{name}",
+                "image": f"/media/{MEDIA_ROOT}/{SLUG}/{lang}/{name}",
                 "width": image.width,
                 "height": image.height,
             })
@@ -61,6 +67,10 @@ def main():
                 social(image).save(folder / "social.jpg", "JPEG", quality=86, optimize=True, progressive=True)
         out[lang] = {"pageCount": len(pages), "pages": pages}
         print(f"{lang}: {len(pages)} pages")
+    if "DATA_FILE" in os.environ:
+        everything = json.loads(DATA.read_text(encoding="utf-8")) if DATA.exists() else {}
+        everything[SLUG] = out
+        out = everything
     DATA.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 

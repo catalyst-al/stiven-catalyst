@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+pagination:
+  data: magazine.issues
+  size: 1
+  alias: issue
+permalink: "/de/magazine/{{ issue.slug }}.html"
+activeNav: /de/publications.html
+ogType: article
+eleventyComputed:
+  title: "{{ issue.de.theme }}"
+  seo_title: "Aus der Praxis, Ausgabe {{ issue.number }}: {{ issue.de.theme }}"
+  description: "{{ issue.de.themeSub }}. {{ issue.de.trend.lead }}"
+  ogImage: "/media/magazine/{{ issue.slug }}/de/social.jpg"
+---
+{% include "pages/magazine-issue.njk" %}

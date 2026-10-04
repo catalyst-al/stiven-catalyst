@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: magazine.issues
+  size: 1
+  alias: issue
+permalink: "/magazine/{{ issue.slug }}.html"
+activeNav: /publications.html
+ogType: article
+eleventyComputed:
+  title: "{{ issue.en.theme }}"
+  seo_title: "From the Floor, issue {{ issue.number }}: {{ issue.en.theme }}"
+  description: "{{ issue.en.themeSub }}. {{ issue.en.trend.lead }}"
+  ogImage: "/media/magazine/{{ issue.slug }}/en/social.jpg"
+---
+{% include "pages/magazine-issue.njk" %}
