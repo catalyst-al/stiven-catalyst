@@ -1,19 +1,20 @@
 {#- The Reflections list, shared by the three languages. -#}
 {% include "partials/writing-tabs.njk" %}
-  <section class="shell page-hero reflection-hero">
+  <section class="shell page-hero writing-hero reflection-hero">
     <p class="eyebrow">{{ "Personal essays" | t(lang) }}</p>
     <h1>{{ "Reflections" | t(lang) }}</h1>
     <p class="lede">{{ "Slower, more personal pieces on attention, people and the quiet side of leadership." | t(lang) }}</p>
   </section>
   <section class="shell listing reflection-list">
     {%- for item in collections["reflections" + (lang | langSuffix)] %}
-    <a class="list-row" href="{{ item.url }}">
+    <a class="list-row" href="{{ item.url }}" data-read-row="{{ item.fileSlug }}">
       <span class="number"><time datetime="{{ item.date | isoDate }}">{{ item.date | readableDate(lang) }}</time></span>
       <div><h2>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
-      <span class="row-meta">{{ "Reflection" | t(lang) }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}</span>
+      <span class="row-meta">{{ "Reflection" | t(lang) }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}<span class="read-mark" data-read-mark hidden>{{ "Read" | t(lang) }}</span></span>
     </a>
     {%- else %}
     <p class="filter-empty">{{ "The first reflection is on its way." | t(lang) }}</p>
     {%- endfor %}
   </section>
 {% include "partials/newsletter.njk" %}
+<script src="{{ '/js/writing.js' | assetUrl }}" defer></script>
