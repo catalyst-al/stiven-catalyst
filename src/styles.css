@@ -5955,3 +5955,8 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
   .note-of-day::before { font-size: 180px; top: -22px; right: 14px; }
   .note-of-day-quote p { font-size: 29px; }
 }
+
+/* "Betriebshandbücher" fits a 360 px phone without breaking inside the word. */
+@media (max-width: 400px) {
+  .project-card h2 { font-size: 34px; }
+}
