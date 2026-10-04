@@ -1725,5 +1725,9 @@
   "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, and every month a magazine on management, from the floor.": "Pjesë më të gjata, për t'u shfletuar: një libër për vendin ku nisi gjithçka, një udhëzues për mjetet dhe çdo muaj një revistë për menaxhimin, parë nga terreni.",
   "Open the issue": "Hape numrin",
   "The issue, page by page": "Numri, faqe pas faqeje",
-  "Read the issue as text": "Lexoje numrin si tekst"
+  "Read the issue as text": "Lexoje numrin si tekst",
+  "How to use this tool, in the guide": "Si përdoret ky mjet, te udhëzuesi",
+  "Why each tool exists, which family it belongs to and how to use it step by step, in one book you can leaf through.": "Pse ekziston çdo mjet, në cilën familje bën pjesë dhe si përdoret hap pas hapi, në një libër që shfletohet.",
+  "Open it on page {n}": "Hape te faqja {n}",
+  "The whole guide": "I gjithë udhëzuesi"
 }
