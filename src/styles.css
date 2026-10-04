@@ -3278,6 +3278,9 @@ html:not(.js) .filter-bar { display: none; }
   font-size: clamp(19px, 2vw, 24px);
   font-style: italic;
 }
+/* On the light paper the soft blue is too faint for text; the darker blue reads at 5:1. */
+[data-theme="light"] .book-subtitle,
+[data-theme="light"] .book-text-body .book-text-quote { color: var(--blue); }
 .book-hero .lede {
   max-width: 600px;
   margin: 30px 0 0;
