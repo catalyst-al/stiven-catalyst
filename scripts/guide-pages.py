@@ -1,14 +1,15 @@
 """Turn the PDFs of the Tools Guide into the pages of the online reader (run by scripts/tools-guide.mjs).
 
     pip install pymupdf pillow
-    python3 scripts/guide-pages.py
+    python3 scripts/guide-pages.py tools-guide en sq de
 
-Writes, for each language in src/_data/toolsGuide.json:
+Writes, for each language:
   src/media/guides/tools-guide/<lang>/page-01.webp ...  one image per page
   src/media/guides/tools-guide/<lang>/social.jpg        the preview for social media
 and src/_data/toolsGuidePages.json with the page list of every language.
 """
 import json
+import sys
 from io import BytesIO
 from pathlib import Path
 
@@ -17,8 +18,8 @@ from PIL import Image
 
 PAGE_WIDTH = 1000  # pixels; sharp on a two-page spread on a retina screen, as the book
 ROOT = Path(__file__).resolve().parent.parent
-GUIDE = json.loads((ROOT / "src" / "_data" / "toolsGuide.json").read_text(encoding="utf-8"))
-MEDIA = ROOT / "src" / "media" / "guides" / GUIDE["slug"]
+SLUG, *LANGS = sys.argv[1:] or ["tools-guide", "en", "sq", "de"]
+MEDIA = ROOT / "src" / "media" / "guides" / SLUG
 DATA = ROOT / "src" / "_data" / "toolsGuidePages.json"
 
 
@@ -39,8 +40,8 @@ def social(cover):
 
 def main():
     out = {}
-    for lang in GUIDE["langs"]:
-        pdf = pymupdf.open(MEDIA / f"{GUIDE['slug']}-{lang}.pdf")
+    for lang in LANGS:
+        pdf = pymupdf.open(MEDIA / f"{SLUG}-{lang}.pdf")
         folder = MEDIA / lang
         folder.mkdir(parents=True, exist_ok=True)
         for old in folder.glob("page-*.webp"):
@@ -52,7 +53,7 @@ def main():
             image.save(folder / name, "WEBP", quality=82, method=6)
             pages.append({
                 "number": number,
-                "image": f"/media/guides/{GUIDE['slug']}/{lang}/{name}",
+                "image": f"/media/guides/{SLUG}/{lang}/{name}",
                 "width": image.width,
                 "height": image.height,
             })

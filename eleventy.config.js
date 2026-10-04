@@ -139,6 +139,12 @@ export default function (eleventyConfig) {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
     return families.find((family) => family.tools.includes(path) || family.learn.includes(path) || path === `/roles/${family.slug}/`) || null;
   });
+  // The text of a guide (toolsGuide.js): [[Label]] is a button or field of a tool, written in quotes in the guide's language.
+  const GUIDE_QUOTES = { en: ["“", "”"], sq: ["“", "”"], de: ["„", "“"] };
+  eleventyConfig.addFilter("guideText", (text, lang) => {
+    const [open, close] = GUIDE_QUOTES[lang] || GUIDE_QUOTES.en;
+    return String(text || "").replace(/\[\[(.+?)\]\]/g, (_, label) => `${open}${TRANSLATED.has(lang) ? readUi(lang)[label] ?? label : label}${close}`);
+  });
   // The page of a family's role: /roles/shift-lead/, /de/roles/shift-lead/ ...
   eleventyConfig.addFilter("roleUrl", (family, lang) => localUrl(`/roles/${family.slug}/`, lang));
   // One tool by its English address, in the page's language.

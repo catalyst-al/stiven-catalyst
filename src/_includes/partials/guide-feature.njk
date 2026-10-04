@@ -1,0 +1,14 @@
+{#- The Tools Guide, shown on the Tools page: its cover in the page's language and the way to the reader. -#}
+{%- set guideUrl = "/guides/tools-guide.html" | local(lang) -%}
+{%- set guideCover = toolsGuidePages[lang or "en"].pages[0] -%}
+  <section class="shell book-feature guide-feature">
+    <a class="book-object" href="{{ guideUrl }}" tabindex="-1" aria-hidden="true">
+      <span class="book-object-cover"><img src="{{ guideCover.image }}" width="{{ guideCover.width }}" height="{{ guideCover.height }}" alt="" loading="lazy"></span>
+    </a>
+    <div class="book-feature-copy">
+      <p class="kicker">{{ "The guide · Edition 1" | t(lang) }}</p>
+      <h2><a href="{{ guideUrl }}">{{ toolsGuide[lang or "en"].title }}</a></h2>
+      <p>{{ "Why the tools are a solar system, what each family is for, and how to use every tool, step by step. Leaf through it page by page, or download the PDF." | t(lang) }}</p>
+      <a class="button-primary" href="{{ guideUrl }}">{{ "Open the guide" | t(lang) }}</a>
+    </div>
+  </section>

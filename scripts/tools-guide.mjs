@@ -3,12 +3,12 @@
 //   pip install pymupdf pillow
 //   node scripts/tools-guide.mjs
 //
-// 1. Eleventy renders the print pages (src/guides/print.njk) into a temporary folder, only when GUIDE_PRINT is set,
+// 1. Eleventy renders the print pages (src/guide-print/print.njk) into a temporary folder, only when GUIDE_PRINT is set,
 //    so they never reach the published site.
 // 2. Chromium (Playwright) prints each language to src/media/guides/tools-guide/tools-guide-<lang>.pdf.
 // 3. scripts/guide-pages.py turns every PDF into page images and writes src/_data/toolsGuidePages.json.
 //
-// Run it again whenever the text in src/_data/toolsGuide.json or a tool changes.
+// Run it again whenever the text in src/_data/toolsGuide.js or a tool changes.
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import http from "node:http";
@@ -18,7 +18,7 @@ import { createRequire } from "node:module";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(ROOT, "src", "media", "guides", "tools-guide");
-const guide = JSON.parse(fs.readFileSync(path.join(ROOT, "src", "_data", "toolsGuide.json"), "utf8"));
+const { default: guide } = await import(path.join(ROOT, "src", "_data", "toolsGuide.js"));
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tools-guide-"));
 
 execFileSync("npx", ["@11ty/eleventy", `--output=${tmp}`, "--quiet"], {
@@ -62,4 +62,4 @@ await browser.close();
 server.close();
 fs.rmSync(tmp, { recursive: true, force: true });
 
-execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py")], { cwd: ROOT, stdio: "inherit" });
+execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py"), guide.slug, ...guide.langs], { cwd: ROOT, stdio: "inherit" });

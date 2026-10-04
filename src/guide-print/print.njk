@@ -1,0 +1,305 @@
+---
+pagination:
+  data: toolsGuide.langs
+  size: 1
+  alias: glang
+---
+{#- The printed Tools Guide, one A5 page per section, in one language. scripts/tools-guide.mjs prints it to PDF;
+    the published site never carries this page (guides.11tydata.js). The text is in toolsGuide.js. -#}
+{%- set lang = glang -%}
+{%- set g = toolsGuide[glang] -%}
+{%- set T = toolsGuide.tool[lang] -%}
+{%- set F = toolsGuide.family -%}
+{%- set P = toolsGuide.pageOf -%}
+
+{%- macro pageTitle(id) -%}
+{%- if id.startsWith("family:") -%}{% set f = F[id.slice(7)] %}{{ f.name }} · {{ f.role | t(lang) }}
+{%- elif id.startsWith("tool:") -%}{{ T[id.slice(5)].name }}
+{%- elif id == "contents" -%}{{ g.labels.contents }}
+{%- elif g.sections[id] and g.sections[id].title -%}{{ g.sections[id].title }}
+{%- endif -%}
+{%- endmacro -%}
+
+{#- The solar system of the homepage, drawn flat (toolsGuide.system): the light in the middle, the roles on their orbits, a moon for every tool. -#}
+{%- macro system(key, labels = true, roles = false) -%}
+<svg class="system" viewBox="0 45 400 205" aria-hidden="true">
+  <defs>
+    <radialGradient id="light-{{ key }}" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff8e6" stop-opacity=".95"/>
+      <stop offset=".18" stop-color="#f5c86a" stop-opacity=".75"/>
+      <stop offset=".55" stop-color="#d1a553" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#d1a553" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  {%- for p in toolsGuide.system %}
+  <ellipse cx="200" cy="150" rx="{{ p.rx }}" ry="{{ p.ry }}" fill="none" stroke="{{ p.color }}" stroke-opacity=".3" stroke-width=".8"/>
+  {%- endfor %}
+  <circle cx="200" cy="150" r="58" fill="url(#light-{{ key }})"/>
+  <circle cx="200" cy="150" r="6.5" fill="#fffaf0"/>
+  {%- for p in toolsGuide.system %}
+  <circle cx="{{ p.x }}" cy="{{ p.y }}" r="16" fill="{{ p.color }}" fill-opacity=".14"/>
+  <circle cx="{{ p.x }}" cy="{{ p.y }}" r="7.5" fill="{{ p.color }}"/>
+  {%- for m in p.moons %}<circle cx="{{ m.x }}" cy="{{ m.y }}" r="1.6" fill="#fff" fill-opacity=".85"/>{% endfor %}
+  {%- if labels %}
+  <text x="{{ p.x }}" y="{{ p.y + (27 if p.below else -21) }}" text-anchor="middle" class="sys-name" fill="{{ p.color }}">{{ p.name }}</text>
+  {%- if roles %}<text x="{{ p.x }}" y="{{ p.y + (38 if p.below else -32) }}" text-anchor="middle" class="sys-role">{{ p.role | t(lang) }}</text>{% endif %}
+  {%- endif %}
+  {%- endfor %}
+</svg>
+{%- endmacro -%}
+
+{%- macro blocks(body, accent) -%}
+{%- for block in body %}
+{%- if block is string %}<p>{{ block | guideText(lang) }}</p>
+{%- elif block.note %}<p class="note">{{ block.note | guideText(lang) }}</p>
+{%- elif block.list %}<ul class="list">{% for item in block.list %}<li>{{ item | guideText(lang) }}</li>{% endfor %}</ul>
+{%- elif block.steps %}<ol class="steps">{% for item in block.steps %}<li>{{ item | guideText(lang) }}</li>{% endfor %}</ol>
+{%- elif block.cards %}<div class="cards">{% for card in block.cards %}<div class="card"><strong>{{ card.title }}</strong><span>{{ card.text }}</span></div>{% endfor %}</div>
+{%- elif block.diagram %}<div class="diagram">{{ system("diagram", true, true) }}</div>
+{%- elif block.routes %}
+<div class="routes">
+  {%- for route in block.routes %}{% set f = F[route.family] %}{% set at = P["family:" + route.family] %}
+  <div class="route" style="--family: {{ f.color }}"><span class="dot"></span><span class="route-text">{{ route.text }}</span><span class="route-to"><b>{{ f.name }}</b> · {{ f.role | t(lang) }} <em>{{ g.labels.page }} {{ at }}</em></span></div>
+  {%- endfor %}
+</div>
+{%- elif block.planets %}
+<div class="planets">
+  {%- for item in block.planets %}{% set planet = F[item.family] %}
+  <div class="planet-row" style="--family: {{ planet.color }}">
+    <span class="planet-art">{% set planetKey = "fam-" + planet.id + "-" + lang %}{% set planetBare = true %}{% include "partials/family-planet.njk" %}</span>
+    <span><b>{{ planet.name }}</b> {{ item.text }}</span>
+  </div>
+  {%- endfor %}
+</div>
+{%- endif %}
+{%- endfor %}
+{%- endmacro -%}
+
+{%- macro chrome(number, section, color) -%}
+<header class="run"><span>{{ g.title }}</span>{% if section %}<span class="run-section" style="--family: {{ color }}"><i></i>{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ g.title }}</title>
+<style>
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Archivo Black"; src: url("/fonts/archivo-black-latin-400-normal.woff2") format("woff2"); }
+@page { size: 148mm 210mm; margin: 0; }
+:root {
+  --paper: #060a10; --paper-2: #0c131c; --ink: #f6f7f4; --body: #d5dbe0; --muted: #a5b0b8; --line: rgba(255,255,255,.12);
+  --blue: #4ab5f7; --gold: #d1a553; --family: var(--blue);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); }
+body { font-family: "Inter", sans-serif; color: var(--body); font-size: 9.6pt; line-height: 1.52; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.pg {
+  width: 148mm; height: 210mm; position: relative; overflow: hidden; page-break-after: always; break-after: page;
+  padding: 19mm 13mm 17mm;
+  background: radial-gradient(120mm 70mm at 50% -18mm, rgba(74,181,247,.13), transparent 70%), var(--paper);
+}
+.pg.fam { background: radial-gradient(120mm 90mm at 50% -10mm, color-mix(in srgb, var(--family) 15%, transparent), transparent 70%), var(--paper); }
+.run { position: absolute; top: 8.5mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; align-items: center; font-size: 6.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.run-section { display: inline-flex; align-items: center; gap: 1.6mm; color: var(--family); }
+.run-section i { width: 1.8mm; height: 1.8mm; border-radius: 50%; background: var(--family); }
+.foot { position: absolute; bottom: 8mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--muted); border-top: .25mm solid var(--line); padding-top: 2.2mm; }
+.foot .num { color: var(--ink); font-weight: 600; }
+.kicker { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--family); margin-bottom: 2.6mm; }
+h1, h2 { font-family: "Archivo Black", sans-serif; font-weight: 400; color: var(--ink); line-height: 1.08; letter-spacing: -.01em; }
+h2 { font-size: 19pt; margin-bottom: 5mm; }
+p { margin-bottom: 2.8mm; }
+p.note { font-size: 7.6pt; color: var(--muted); border-left: .6mm solid var(--line); padding-left: 3mm; }
+.list, .steps { margin: 0 0 3mm; list-style: none; }
+.list li, .steps li { position: relative; padding-left: 6mm; margin-bottom: 2mm; }
+.list li::before { content: ""; position: absolute; left: 1mm; top: 1.7mm; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--family); }
+.steps { counter-reset: s; }
+.steps li { counter-increment: s; margin-bottom: 2.4mm; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: .1mm; width: 4.2mm; height: 4.2mm; border-radius: 50%; border: .25mm solid var(--family); color: var(--family); font-size: 6.4pt; font-weight: 700; display: grid; place-items: center; line-height: 1; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; margin: 4mm 0 5mm; }
+.card { background: rgba(255,255,255,.045); border: .25mm solid var(--line); border-radius: 3mm; padding: 3.2mm; }
+.card strong { display: block; color: var(--ink); font-size: 9pt; margin-bottom: 1.2mm; }
+.card span { font-size: 7.5pt; line-height: 1.42; display: block; }
+.diagram { margin: -2mm -4mm 3mm; }
+.system { width: 100%; height: auto; display: block; }
+.sys-name { font-family: "Inter"; font-weight: 700; font-size: 10px; letter-spacing: .04em; }
+.sys-role { font-family: "Inter"; font-size: 7.5px; fill: #a5b0b8; }
+.routes { display: grid; gap: 2.6mm; margin: 4mm 0 5mm; }
+.route { display: grid; grid-template-columns: 4mm 1fr; column-gap: 2.5mm; row-gap: .8mm; border: .25mm solid var(--line); border-left: .9mm solid var(--family); border-radius: 2.5mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.035); }
+.route .dot { grid-row: span 2; width: 3mm; height: 3mm; border-radius: 50%; background: var(--family); margin-top: .9mm; box-shadow: 0 0 3mm var(--family); }
+.route-text { color: var(--ink); font-size: 9.4pt; font-weight: 500; }
+.route-to { font-size: 7.4pt; color: var(--muted); }
+.route-to b { color: var(--family); }
+.route-to em { font-style: normal; float: right; color: var(--ink); }
+.planets { display: grid; gap: 1.8mm; margin-top: 3mm; }
+.planet-row { display: grid; grid-template-columns: 26mm 1fr; gap: 3mm; align-items: center; font-size: 8.2pt; }
+.planet-row b { color: var(--family); display: block; font-size: 9pt; }
+.planet-art svg { width: 26mm; height: auto; display: block; }
+.planet-moon { fill: color-mix(in srgb, var(--family) 45%, #fff); }
+.planet-atlas .planet-moon { fill: #fff; }
+
+/* Cover and back */
+.cover { padding: 15mm 13mm 14mm; display: flex; flex-direction: column; background: radial-gradient(140mm 90mm at 50% 32%, rgba(209,165,83,.10), transparent 70%), radial-gradient(120mm 70mm at 50% -18mm, rgba(74,181,247,.16), transparent 70%), var(--paper); }
+.brand { font-size: 7pt; letter-spacing: .3em; text-transform: uppercase; color: var(--ink); font-weight: 700; display: flex; justify-content: space-between; }
+.brand span:last-child { color: var(--muted); letter-spacing: .14em; }
+.cover .system { margin: 6mm -10mm 0; width: calc(100% + 20mm); }
+.cover h1 { font-size: 30pt; margin-top: auto; }
+.cover .sub { font-size: 10pt; line-height: 1.45; color: var(--body); margin-top: 4mm; max-width: 112mm; }
+.cover .meta { margin-top: 7mm; padding-top: 3mm; border-top: .25mm solid var(--line); display: flex; justify-content: space-between; font-size: 7.2pt; color: var(--muted); }
+.cover .meta b { color: var(--ink); font-weight: 600; }
+.back { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.back .system { width: 100mm; margin: 0 auto 8mm; }
+.back .motto { font-family: "Archivo Black"; font-size: 15pt; color: var(--ink); line-height: 1.2; margin-bottom: 7mm; }
+.back .motto span { display: block; }
+.back .url { margin-top: 2mm; color: var(--blue); font-weight: 600; font-size: 10pt; }
+.back .edition { position: absolute; left: 0; right: 0; bottom: 12mm; font-size: 7pt; color: var(--muted); }
+
+/* Contents */
+.toc { list-style: none; margin-top: 2mm; }
+.toc li { display: flex; align-items: baseline; gap: 2mm; padding: .75mm 0; border-bottom: .2mm solid rgba(255,255,255,.07); font-size: 8pt; line-height: 1.35; }
+.toc li .t { flex: 1; color: var(--ink); }
+.toc li .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.toc li.fam { margin-top: 1.8mm; border-bottom-color: var(--line); }
+.toc li.fam .t { font-weight: 700; color: var(--family); }
+.toc li.tool .t { padding-left: 4.5mm; color: var(--body); }
+.toc li .dot { width: 2mm; height: 2mm; border-radius: 50%; background: var(--family); flex: none; transform: translateY(-.2mm); }
+
+/* Family opener */
+.fam-hero { display: grid; grid-template-columns: 1fr 50mm; align-items: center; gap: 2mm; margin: -2mm 0 2mm; }
+.fam-hero .planet-art svg { width: 62mm; margin: -6mm -10mm -6mm -2mm; }
+.fam-name { font-family: "Archivo Black"; font-size: 30pt; color: var(--family); line-height: 1; }
+.fam-role { color: var(--ink); font-size: 12pt; font-weight: 600; margin-top: 2mm; }
+.fam-scope { color: var(--muted); font-size: 7.6pt; letter-spacing: .12em; text-transform: uppercase; margin-top: 1.2mm; }
+.fam-line { font-size: 10pt; color: var(--ink); line-height: 1.45; margin: 2mm 0 2.4mm; }
+.opener { font-size: 8.6pt; }
+.fam-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8mm; margin-bottom: 4mm; }
+.fam-tools div { border: .25mm solid var(--line); border-radius: 2mm; padding: 1.4mm 2.4mm; font-size: 7.8pt; color: var(--ink); display: flex; justify-content: space-between; gap: 2mm; }
+.fam-tools div em { font-style: normal; color: var(--muted); }
+.subhead { font-size: 6.6pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 1mm 0 2mm; }
+.routine { width: 100%; border-collapse: collapse; font-size: 7.3pt; }
+.routine td { padding: 1.05mm 0; line-height: 1.38; border-top: .2mm solid var(--line); vertical-align: top; }
+.routine-tool { color: var(--muted); }
+.routine td:first-child { width: 27mm; color: var(--family); font-weight: 600; padding-right: 3mm; }
+
+/* Tool page */
+.tool-head { margin-bottom: 4mm; }
+.tool-meta { display: flex; gap: 2mm; flex-wrap: wrap; margin-bottom: 2.5mm; }
+.chip { font-size: 6.6pt; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border: .25mm solid var(--line); border-radius: 10mm; padding: .7mm 2.4mm; color: var(--muted); }
+.chip.f { color: var(--family); border-color: color-mix(in srgb, var(--family) 45%, transparent); }
+.tool-head h2 { margin-bottom: 2.2mm; font-size: 20pt; }
+.tool-summary { font-size: 8.6pt; color: var(--muted); }
+.when { font-family: Georgia, serif; font-style: italic; font-size: 11.5pt; line-height: 1.42; color: var(--ink); border-left: .9mm solid var(--family); padding: .5mm 0 .5mm 3.5mm; margin-bottom: 4.5mm; }
+.block { margin-bottom: 4.6mm; }
+.block p { margin-bottom: 0; }
+.open { position: absolute; left: 13mm; right: 13mm; bottom: 19mm; display: flex; justify-content: space-between; align-items: center; background: color-mix(in srgb, var(--family) 10%, transparent); border: .25mm solid color-mix(in srgb, var(--family) 40%, transparent); border-radius: 2.5mm; padding: 2.4mm 3.4mm; font-size: 7.8pt; }
+.open b { color: var(--family); font-weight: 600; }
+.open span { color: var(--ink); }
+</style>
+</head>
+<body>
+{%- for id in toolsGuide.pages %}
+{%- set number = loop.index %}
+
+{%- if id == "cover" %}
+<section class="pg cover">
+  <div class="brand"><span>Stiven Catalyst</span><span>{{ g.edition }}</span></div>
+  {{ system("cover", true, false) }}
+  <h1>{{ g.title }}</h1>
+  <p class="sub">{{ g.subtitle }}</p>
+  <div class="meta"><span><b>{{ g.author }}</b></span><span>stivencatalyst.com</span></div>
+</section>
+
+{%- elif id == "back" %}
+{%- set s = g.sections.back %}
+<section class="pg back">
+  {{ system("back", false, false) }}
+  <p class="motto">{% for part in s.motto.split(". ") %}<span>{{ part }}{{ "." if not loop.last }}</span>{% endfor %}</p>
+  <p>{{ s.text }}</p>
+  <p class="url">{{ ("stivencatalyst.com" + ("/tools.html" | local(lang))) }}</p>
+  <p class="edition">{{ g.title }} · {{ g.edition }} · {{ g.author }}</p>
+</section>
+
+{%- elif id == "contents" %}
+<section class="pg">
+  {{ chrome(number) }}
+  <p class="kicker">{{ g.edition }}</p>
+  <h2>{{ g.labels.contents }}</h2>
+  <ol class="toc">
+    {%- for other in toolsGuide.pages %}
+    {%- if other not in ["cover", "contents", "back"] %}
+    {%- if other.startsWith("family:") %}{% set f = F[other.slice(7)] %}
+    <li class="fam" style="--family: {{ f.color }}"><span class="dot"></span><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
+    {%- elif other.startsWith("tool:") %}
+    <li class="tool"><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
+    {%- else %}
+    <li><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
+    {%- endif %}
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+</section>
+
+{%- elif id.startsWith("family:") %}
+{%- set f = F[id.slice(7)] %}
+<section class="pg fam opener" style="--family: {{ f.color }}">
+  {{ chrome(number, f.name, f.color) }}
+  <div class="fam-hero">
+    <div>
+      <p class="kicker">{{ g.labels.family }}</p>
+      <div class="fam-name">{{ f.name }}</div>
+      <div class="fam-role">{{ f.role | t(lang) }}</div>
+      <div class="fam-scope">{{ f.scope | t(lang) }}</div>
+    </div>
+    <span class="planet-art">{% set planet = f %}{% set planetKey = "open-" + f.id + "-" + lang %}{% set planetBare = true %}{% include "partials/family-planet.njk" %}</span>
+  </div>
+  <p class="fam-line">{{ f.line | t(lang) }}</p>
+  <p>{{ g.families[f.id] }}</p>
+  <p class="subhead">{{ g.labels.tools }}</p>
+  <div class="fam-tools">
+    {%- for url in f.tools.concat(f.learn) %}
+    <div><span>{{ T[url].name }}</span><em>{{ P["tool:" + url] }}</em></div>
+    {%- endfor %}
+  </div>
+  <p class="subhead">{{ g.labels.routine }}</p>
+  <table class="routine">
+    {%- for step in f.routine %}
+    <tr><td>{{ step.when | t(lang) }}</td><td>{{ step.do | t(lang) }} <span class="routine-tool">· {{ T[step.tool].name }}</span></td></tr>
+    {%- endfor %}
+  </table>
+</section>
+
+{%- elif id.startsWith("tool:") %}
+{%- set url = id.slice(5) %}
+{%- set tool = T[url] %}
+{%- set text = g.tools[url] %}
+{%- set f = F[toolsGuide.familyOfTool[url]] %}
+<section class="pg fam" style="--family: {{ f.color }}">
+  {{ chrome(number, f.name + " · " + (f.role | t(lang)), f.color) }}
+  <div class="tool-head">
+    <div class="tool-meta"><span class="chip f">{{ f.name }}</span><span class="chip">{{ tool.type }}</span><span class="chip">{{ tool.time }}</span></div>
+    <h2>{{ tool.name }}</h2>
+    <p class="tool-summary">{{ tool.summary }}</p>
+  </div>
+  <p class="when">{{ text.when | guideText(lang) }}</p>
+  <div class="block"><p class="kicker">{{ g.labels.how }}</p><ol class="steps">{% for step in text.how %}<li>{{ step | guideText(lang) }}</li>{% endfor %}</ol></div>
+  <div class="block"><p class="kicker">{{ g.labels.get }}</p><p>{{ text.get | guideText(lang) }}</p></div>
+  <div class="block"><p class="kicker">{{ g.labels.data }}</p><p>{{ text.data | guideText(lang) }}</p></div>
+  <div class="open"><b>{{ g.labels.open }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>
+</section>
+
+{%- else %}
+{%- set s = g.sections[id] %}
+<section class="pg">
+  {{ chrome(number, s.kicker) }}
+  <p class="kicker">{{ s.kicker }}</p>
+  <h2>{{ s.title }}</h2>
+  {{ blocks(s.body) }}
+</section>
+{%- endif %}
+{%- endfor %}
+</body>
+</html>
