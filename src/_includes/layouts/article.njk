@@ -15,16 +15,66 @@ ogType: article
     {%- if deck %}
     <p class="article-deck">{{ deck }}</p>
     {%- endif %}
+    {#- Who wrote it, when, and how long it takes: one line, so the text starts on the first screen. -#}
+    <p class="article-byline">
+      {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="44" height="44" decoding="async">{% endif -%}
+      <span><strong>{{ author or site.author }}</strong><span><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %} · {{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</span></span>
+    </p>
   </div>
 </section>
-<section class="shell article-body">
+{#- The text with ids on its section titles; with three sections or more, a list of them beside the text
+    (on a phone, folded above it). -#}
+{%- set body = content | essayBody %}
+{%- set sections = content | essayContents %}
+{%- set hasContents = sections.length >= 3 %}
+{%- set isEssay = "/insights/" in page.inputPath %}
+{%- set seriesItems = collections["insights" + (lang | langSuffix)] | published if isEssay else [] %}
+{%- set series = seriesItems | seriesNeighbours(page.url) if isEssay else null %}
+{%- set contentsTitle = "In this essay" | t(lang) %}
+<section class="shell article-body{% if not (series or hasContents) %} no-aside{% endif %}">
+  {%- if series or hasContents %}
   <aside class="article-aside">
-    {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="96" height="96" loading="lazy" decoding="async">{% endif -%}
-    {{ author or site.author }}<br><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %}<br>{{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</aside>
-  <article class="article-content" data-article>
-{{ content | safe }}
+    <div class="article-aside-inner">
+      {%- if series %}
+      {#- Where this essay stands in the series: one dot per essay, this one marked, those already read filled in
+          (js/article.js, from this browser only). -#}
+      <div class="series-track">
+        <p class="kicker">{{ "Ten years close to the work" | t(lang) }}</p>
+        <p class="series-track-count">{{ "Essay {n} of {total}" | t(lang) | replace("{n}", series.number | string) | replace("{total}", series.total | string) }}</p>
+        <ol class="series-dots">
+          {%- for item in seriesItems %}
+          <li><a href="{{ item.url }}" data-essay-dot="{{ item.fileSlug }}" title="{{ loop.index | pad }} · {{ item.data.title }}"{% if item.url == page.url %} aria-current="page"{% endif %}><span class="visually-hidden">{{ loop.index | pad }} · {{ item.data.title }}</span></a></li>
+          {%- endfor %}
+        </ol>
+      </div>
+      {%- endif %}
+      {%- if hasContents %}
+      <nav class="article-toc" aria-label="{{ contentsTitle }}">
+        <p class="kicker">{{ contentsTitle }}</p>
+        <ol>
+          {%- for section in sections %}
+          <li><a href="#{{ section.id }}" data-toc-link>{{ section.html | safe }}</a></li>
+          {%- endfor %}
+        </ol>
+      </nav>
+      {%- endif %}
+    </div>
+  </aside>
+  {%- endif %}
+  <article class="article-content" data-article data-essay-id="{{ page.fileSlug }}" data-essay-title="{{ title }}">
+    {%- if hasContents %}
+    <details class="article-toc-fold">
+      <summary>{{ contentsTitle }}</summary>
+      <ol>
+        {%- for section in sections %}
+        <li><a href="#{{ section.id }}">{{ section.html | safe }}</a></li>
+        {%- endfor %}
+      </ol>
+    </details>
+    {%- endif %}
+{{ body | safe }}
     {#- The tools an essay is about ("relatedTools" on the English essay; translations follow it). -#}
-    {%- if "/insights/" in page.inputPath %}
+    {%- if isEssay %}
     {%- set sourceEssay = collections.insights | byOriginal(original or page.fileSlug) %}
     {%- set essayTools = sourceEssay.data.relatedTools if sourceEssay and sourceEssay.data.relatedTools else [] %}
     {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
@@ -38,20 +88,33 @@ ogType: article
       </ul>
     </aside>
     {%- endif %}
-    {#- Where this essay stands in the series, with the one before and the one after. -#}
-    {%- set series = collections["insights" + (lang | langSuffix)] | seriesNeighbours(page.url) %}
-    {%- if series and (series.prev or series.next) %}
+    {#- After the essay: the next one, large, with its opening line; the one before; all essays. After the last
+        essay, the end of the series and where to go from there. -#}
+    {%- if series %}
+    {%- set insightsUrl = '/insights.html' | local(lang) %}
     <nav class="essay-series" aria-labelledby="essay-series-title">
       <p class="kicker" id="essay-series-title">{{ "Ten years close to the work" | t(lang) }} · {{ "Essay {n} of {total}" | t(lang) | replace("{n}", series.number | string) | replace("{total}", series.total | string) }}</p>
-      <ul>
-        {%- if series.prev %}
-        <li><a href="{{ series.prev.url }}" rel="prev"><small>{{ "Previous essay" | t(lang) }}</small><strong>{{ series.prev.data.title }}</strong></a></li>
-        {%- endif %}
-        {%- if series.next %}
-        <li class="is-next"><a href="{{ series.next.url }}" rel="next"><small>{{ "Next essay" | t(lang) }}</small><strong>{{ series.next.data.title }}</strong></a></li>
-        {%- endif %}
-      </ul>
-      <p class="essay-series-all"><a href="{{ '/insights.html' | local(lang) }}">{{ "All essays" | t(lang) }}</a></p>
+      {%- if series.next %}
+      <a class="essay-series-next" href="{{ series.next.url }}" rel="next">
+        <small>{{ "Next essay" | t(lang) }} · {{ (series.number + 1) | pad }}</small>
+        <strong>{{ series.next.data.title }}</strong>
+        {%- if series.next.data.teaser or series.next.data.summary %}<span>{{ series.next.data.teaser or series.next.data.summary }}</span>{% endif %}
+        <em aria-hidden="true">→</em>
+      </a>
+      {%- else %}
+      <div class="essay-series-next is-end">
+        <strong>{{ "The last essay of the series." | t(lang) }}</strong>
+        <span class="essay-series-end-links">
+          <a href="{{ seriesItems[0].url }}">{{ "Start again with essay 1" | t(lang) }}</a>
+          <a href="{{ '/publications.html' | local(lang) }}#magazine">{{ magazine.names[lang or 'en'].name }}</a>
+          <a href="{{ '/tools.html' | local(lang) }}">{{ "Tools" | t(lang) }}</a>
+        </span>
+      </div>
+      {%- endif %}
+      <p class="essay-series-more">
+        {%- if series.prev %}<a href="{{ series.prev.url }}" rel="prev"><small>← {{ "Previous essay" | t(lang) }}</small> {{ series.prev.data.title }}</a>{% endif %}
+        <a class="essay-series-all" href="{{ insightsUrl }}">{{ "All essays" | t(lang) }}</a>
+      </p>
     </nav>
     {%- endif %}
     {%- endif %}

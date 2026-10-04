@@ -5,6 +5,7 @@ import { clearCache, localUrl } from "./lib/translations.js";
 import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
+import { essayBody, essayContents } from "./lib/essay-body.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -168,6 +169,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("roleUrl", (family, lang) => localUrl(`/roles/${family.slug}/`, lang));
   // One tool by its English address, in the page's language.
   // The essays before and after this one in its language's list (published only), for the series navigation at the end of an essay.
+  // The body of an essay with ids on its section titles, and the list of those sections (lib/essay-body.js).
+  eleventyConfig.addFilter("essayBody", essayBody);
+  eleventyConfig.addFilter("essayContents", essayContents);
+  // The essays that have a page, without those marked "soon".
+  eleventyConfig.addFilter("published", (items) => (items || []).filter((item) => item.data.status !== "soon"));
   eleventyConfig.addFilter("seriesNeighbours", (items, url) => {
     const published = (items || []).filter((item) => item.data.status !== "soon");
     const index = published.findIndex((item) => item.url === url);

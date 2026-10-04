@@ -1,17 +1,37 @@
 {#- The Insights list, shared by both languages. -#}
 {% include "partials/writing-tabs.njk" %}
-  <section class="shell page-hero">
+  <section class="shell page-hero writing-hero">
     <p class="eyebrow">{{ "Essays & analysis" | t(lang) }}</p>
     <h1>{{ "Insights" | t(lang) }}</h1>
     <p class="lede">{{ "Longer thinking on leadership, operations, accountability, service and the systems that shape performance." | t(lang) }}</p>
   </section>
+  {%- set essays = collections["insights" + (lang | langSuffix)] %}
+  {%- set seriesItems = essays | published %}
+  {#- The series as a path: one dot per essay, those read in this browser filled in, and a button to start or
+      to continue where the reader stopped (js/writing.js; without it, the button starts with essay 1). -#}
+  {%- if seriesItems.length > 1 %}
+  <section class="shell series-panel" aria-labelledby="series-panel-title" data-series-panel
+           data-read-label="{{ '{a} of {b} read' | t(lang) }}"
+           data-continue-label="{{ 'Continue with essay {n}' | t(lang) }}"
+           data-resume-label="{{ 'Continue reading essay {n}' | t(lang) }}">
+    <div class="series-panel-copy">
+      <p class="kicker" id="series-panel-title">{{ "Ten years close to the work" | t(lang) }}</p>
+      <p class="series-panel-count" data-series-count>{{ "{n} essays" | t(lang) | replace("{n}", seriesItems.length) }}</p>
+    </div>
+    <ol class="series-dots is-large">
+      {%- for item in seriesItems %}
+      <li><a href="{{ item.url }}" data-essay-dot="{{ item.fileSlug }}" data-essay-number="{{ loop.index }}" title="{{ loop.index | pad }} · {{ item.data.title }}"><span class="visually-hidden">{{ loop.index | pad }} · {{ item.data.title }}</span></a></li>
+      {%- endfor %}
+    </ol>
+    <a class="button-primary" href="{{ seriesItems[0].url }}" data-series-next>{{ "Start with essay 1" | t(lang) }}</a>
+  </section>
+  {%- endif %}
   <section class="shell listing" data-filter-list>
-    {%- set essays = collections["insights" + (lang | langSuffix)] %}
     {%- set searchLabel = "Search essays" | t(lang) %}
     {%- set countLabel = "{a} of {b} essays" | t(lang) %}
     {%- set filterTopics = essays | topics("category") %}
     {% include "partials/filter-bar.njk" %}
-    {#- Newest first; an essay is marked new for seven days after its date (the script below). -#}
+    {#- Newest first; only the newest essay can be marked new, for seven days after its date (the script below). -#}
     {%- for item in essays | reverse %}
     {%- set search = [item.data.title, item.data.summary, item.data.teaser, item.data.category] | join(" ") | lower %}
     {%- if item.data.status == "soon" %}
@@ -21,10 +41,10 @@
       <span class="row-meta">{{ item.data.category }} · {{ "Soon" | t(lang) }}</span>
     </div>
     {%- else %}
-    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}">
+    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}" data-read-row="{{ item.fileSlug }}">
       <span class="number">{{ item.data.number }}</span>
-      <div><h2><span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
-      <span class="row-meta">{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}</span>
+      <div><h2>{% if loop.first %}<span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{% endif %}{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
+      <span class="row-meta">{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}<span class="read-mark" data-read-mark hidden>{{ "Read" | t(lang) }}</span></span>
     </a>
     {%- endif %}
     {%- endfor %}
@@ -32,3 +52,4 @@
   </section>
 {% include "partials/newsletter.njk" %}
 <script src="{{ '/js/filter.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/writing.js' | assetUrl }}" defer></script>
