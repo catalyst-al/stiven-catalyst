@@ -5,8 +5,8 @@ category: Operations
 status: published
 featured: true
 summary: During the day, management sees the activity. At night, you see the traces the activity has left behind.
-teaser: Many mistakes are not born from a lack of skill. They are born from the sentence "We'll do it later". Often, "later" is the night shift.
-deck: 'The seventh essay in the series "Ten years close to the work": what comes to light when the hotel sleeps, why closing the day is process discipline, and five things a day manager should look for in the night report.'
+teaser: Many mistakes are not born from a lack of skill. They are born from the sentence “We'll do it later”. Often, “later” is the night shift.
+deck: 'The seventh essay in the series “Ten years close to the work”: what comes to light when the hotel sleeps, why closing the day is process discipline, and five things a day manager should look for in the night report.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -34,9 +34,9 @@ I have come across reservations that do not fully match what really happened, ro
 
 The night brings these things to light because the rhythm changes. You no longer have the same flow of people in front of the reception desk, and you have the chance to see more clearly behind the process.
 
-This work has taught me that many mistakes are not born from a lack of skill. They are born from interruptions, incomplete communication and the sentence: "We'll do it later."
+This work has taught me that many mistakes are not born from a lack of skill. They are born from interruptions, incomplete communication and the sentence: “We'll do it later.”
 
-Often, "later" is the night shift.
+Often, “later” is the night shift.
 
 ## No-shows and payments
 
@@ -44,17 +44,17 @@ A reservation that exists in the system does not automatically mean that everyth
 
 No-shows matter because they affect how the hotel closes the day and recognises what really happened. If they are not checked, reservations can be left with the wrong status, differences can appear in the reporting, or problems can surface only later.
 
-The same goes for payments. The check is not only to see whether "there is money". It is to see whether what has been recorded matches what should have been recorded.
+The same goes for payments. The check is not only to see whether “there is money”. It is to see whether what has been recorded matches what should have been recorded.
 
 If nobody does this check, the mistakes do not disappear. They just move from one day to the next. And the longer they move, the harder it becomes to understand where they started.
 
 ## Closing the day is not a list
 
-Closing the day has taught me that a process should not be closed just because "it is time to close it". It should be closed when the things that depend on it are really ready.
+Closing the day has taught me that a process should not be closed just because “it is time to close it”. It should be closed when the things that depend on it are really ready.
 
 In the first weeks, naturally, my attention was very much on the list: which step comes after which, what has to be opened, what has to be checked and in what order I have to go.
 
-Today I see it differently. I do not only think: "Did I do this step?" I think: "Is what this step is meant to check really in order?"
+Today I see it differently. I do not only think: “Did I do this step?” I think: “Is what this step is meant to check really in order?”
 
 That is a big change. A checklist can be completed mechanically. But a good Night Audit requires you to understand how the processes depend on each other. If something earlier has not been closed properly, there is no point in rushing the process just so the list looks finished.
 
@@ -70,7 +70,7 @@ For me the line is fairly clear. If it is an operational problem that falls with
 
 I have learned that responsibility is not making every decision. Responsibility is knowing which decision you can make yourself and which one you should not make.
 
-This matters especially at night, because the temptation to say "I'm alone, I have to solve it myself" is strong. Not always. Sometimes the most professional decision is precisely not to cross the limit of your authority.
+This matters especially at night, because the temptation to say “I'm alone, I have to solve it myself” is strong. Not always. Sometimes the most professional decision is precisely not to cross the limit of your authority.
 
 ## Five minutes with the day managers
 

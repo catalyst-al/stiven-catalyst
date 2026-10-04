@@ -74,3 +74,6 @@ for (const issue of issues) {
     stdio: "inherit",
   });
 }
+
+// The pages were replaced: make the small copies of the cover again (scripts/thumbnails.mjs).
+execFileSync("node", [path.join(ROOT, "scripts", "thumbnails.mjs")], { cwd: ROOT, stdio: "inherit" });

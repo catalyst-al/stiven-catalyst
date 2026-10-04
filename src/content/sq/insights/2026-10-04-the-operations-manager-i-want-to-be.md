@@ -7,7 +7,7 @@ featured: true
 summary: Pesë parime, një javë pune dhe 90 ditët e para. Jo menaxheri që duket më i rëndësishëm kur operacioni ka probleme, por ai që ndërton një operacion që ka gjithnjë e më pak nevojë të shpëtohet.
 description: "Pesë parime, një javë pune dhe 90 ditët e para: të ndërtosh një operacion që ka gjithnjë e më pak nevojë të shpëtohet."
 teaser: Nëse një ekip funksionon vetëm kur menaxheri është në dhomë, ai menaxher nuk ka ndërtuar ende një sistem.
-deck: 'Eseja e dymbëdhjetë dhe e fundit e serisë "Dhjetë vite pranë punës": njerëzit, standardet, të dhënat, ownership dhe përmirësimi i vazhdueshëm, plus një plan për 90 ditët e para në një rol të ri.'
+deck: 'Eseja e dymbëdhjetë dhe e fundit e serisë “Dhjetë vite pranë punës”: njerëzit, standardet, të dhënat, ownership dhe përmirësimi i vazhdueshëm, plus një plan për 90 ditët e para në një rol të ri.'
 ---
 
 Pas viteve në retail, shitje, logjistikë dhe hoteleri, kam kuptuar se industria ndryshon shumë më shpejt se parimet e menaxhimit.
@@ -46,7 +46,7 @@ Ka vetëm më pak gabime të dukshme.
 
 ## 2. Standardet
 
-Kam mësuar të mos kem shumë besim te proceset që funksionojnë vetëm sepse një person me eksperiencë "e di si bëhet".
+Kam mësuar të mos kem shumë besim te proceset që funksionojnë vetëm sepse një person me eksperiencë “e di si bëhet”.
 
 Nëse rezultati varet nga fakti që personi i duhur është në turn, atëherë organizata ka njohuri, por nuk ka ende standard.
 
@@ -82,7 +82,7 @@ E njëjta gjë vlen edhe për leadership-in pa titull. Mund të marrësh iniciat
 
 Ownership për mua është:
 
-**Nuk do ta injoroj sepse "nuk është e imja".**
+**Nuk do ta injoroj sepse “nuk është e imja”.**
 
 Por gjithashtu:
 
@@ -140,7 +140,7 @@ Kush i zotëron?
 
 Dhe cilat probleme nuk janë më incidente, por modele?
 
-Do të doja gjithashtu kohë të dedikuar për njerëzit: feedback, coaching dhe biseda ku problemi nuk është vetëm "çfarë nuk shkoi", por edhe "çfarë po të pengon ta bësh mirë punën?".
+Do të doja gjithashtu kohë të dedikuar për njerëzit: feedback, coaching dhe biseda ku problemi nuk është vetëm “çfarë nuk shkoi”, por edhe “çfarë po të pengon ta bësh mirë punën?”.
 
 Raportet më tregojnë ku të shikoj. Terreni më tregon çfarë po ndodh. Menaxheri duhet t'i bëjë të dyja.
 
@@ -148,7 +148,7 @@ Raportet më tregojnë ku të shikoj. Terreni më tregon çfarë po ndodh. Menax
 
 ### Ditët 1–30: Kupto para se të ndryshosh
 
-Në muajin e parë nuk do të hyja me idenë se kam ardhur për të "rregulluar" organizatën. Do të mësoja.
+Në muajin e parë nuk do të hyja me idenë se kam ardhur për të “rregulluar” organizatën. Do të mësoja.
 
 Do të kuptoja ekipin, proceset, KPI-të, klientin, varësitë mes departamenteve dhe mënyrën si merret një vendim. Do të kaloja shumë kohë në terren. Do të flisja me njerëzit që e bëjnë punën çdo ditë. Do të shihja SOP-të dhe do t'i krahasoja me realitetin.
 
@@ -156,7 +156,7 @@ Do të kërkoja të kuptoja edhe atë që nuk del menjëherë në dashboard:
 
 Ku harxhohet kohë?
 
-Cilat probleme konsiderohen tashmë "normale"?
+Cilat probleme konsiderohen tashmë “normale”?
 
 Çfarë duhet bërë manualisht sepse procesi nuk funksionon mirë?
 
@@ -200,7 +200,7 @@ Ka shumë gjëra që dua t'i zhvilloj më tej.
 
 Dua të thelloj edhe më shumë njohuritë në analizën e të dhënave dhe në mënyrën si operacionet lidhen me P&L-në, forecasting-un dhe vendimet financiare në një nivel më të gjerë.
 
-Dua të fitoj më shumë eksperiencë në drejtimin e operacioneve me një scope më të madh organizativ, ku vendimet kalojnë përtej një turni ose një funksioni dhe ndikojnë disa ekipe njëkohësisht.
+Dua të fitoj më shumë eksperiencë në drejtimin e operacioneve me një scope më të madh organizativ, ku vendimet kalojnë përtej një turni ose një funksioni dhe ndikojnë në disa ekipe njëkohësisht.
 
 Dua gjithashtu të vazhdoj të përmirësohem në një gjë që nuk mendoj se përfundon ndonjëherë: të dish kur duhet të ndërhysh dhe kur duhet t'i lësh njerëzit të zgjidhin vetë.
 
@@ -212,7 +212,7 @@ Nëse një ditë do t'i pyesja njerëzit që kanë punuar me mua si do të donin
 
 Do të më mjaftonte kjo:
 
-**"Kërkonte shumë nga ne, por ishte aty me ne, na dëgjonte dhe përpiqej ta linte procesin më të mirë sesa e gjeti."**
+**“Kërkonte shumë nga ne, por ishte aty me ne, na dëgjonte dhe përpiqej ta linte procesin më të mirë sesa e gjeti.”**
 
 Ky është Operations Manager-i që dua të jem.
 

@@ -49,7 +49,7 @@
       <a class="hero-shelf-label" href="{{ '/publications.html' | local(lang) }}">{{ "Publications" | t(lang) }} <span aria-hidden="true">→</span></a>
       {%- for item in shelf %}
       <a class="book-shelf-item" href="{{ item.url }}">
-        <span class="book-object" aria-hidden="true"><span class="book-object-cover"><img src="{{ item.cover.image }}" width="{{ item.cover.width }}" height="{{ item.cover.height }}" alt="" loading="lazy"></span></span>
+        <span class="book-object" aria-hidden="true"><span class="book-object-cover"><img src="{{ item.cover.image }}" srcset="{{ item.cover.image | srcsetFor }}" sizes="78px" width="{{ item.cover.width }}" height="{{ item.cover.height }}" alt="" loading="lazy"></span></span>
         <span class="book-shelf-text"><small>{{ item.kicker }}</small><strong{% if item.titleLang %} lang="{{ item.titleLang }}"{% endif %}>{{ item.title }}</strong><span>{{ item.open }} →</span></span>
       </a>
       {%- endfor %}

@@ -41,7 +41,7 @@ Eine Reservierung, die im System existiert, bedeutet nicht automatisch, dass all
 
 No-Shows sind wichtig, weil sie beeinflussen, wie das Hotel den Tag abschließt und erfasst, was wirklich passiert ist. Wenn sie nicht geprüft werden, können Reservierungen mit falschem Status bleiben, Unterschiede im Reporting entstehen oder Probleme erst später auftauchen.
 
-Dasselbe gilt für Zahlungen. Die Kontrolle dient nicht nur dazu zu sehen, ob „Geld da ist“. Sie dient dazu zu sehen, ob das, was erfasst wurde, mit dem übereinstimmt, was hätte erfasst werden müssen.
+Dasselbe gilt für Zahlungen. Die Kontrolle dient nicht nur dazu, zu sehen, ob „Geld da ist“. Sie dient dazu, zu sehen, ob das, was erfasst wurde, mit dem übereinstimmt, was hätte erfasst werden müssen.
 
 Wenn niemand diese Kontrolle macht, verschwinden die Fehler nicht. Sie wandern nur von einem Tag in den nächsten. Und je länger sie wandern, desto schwieriger wird es zu verstehen, wo sie entstanden sind.
 
@@ -67,7 +67,7 @@ Für mich ist die Grenze ziemlich klar. Wenn es ein operatives Problem ist, das 
 
 Ich habe gelernt, dass Verantwortung nicht heißt, jede Entscheidung zu treffen. Verantwortung heißt zu wissen, welche Entscheidung man selbst treffen kann und welche man nicht treffen sollte.
 
-Das ist nachts besonders wichtig, weil die Versuchung groß ist zu sagen: „Ich bin allein, ich muss es selbst lösen.“ Nicht immer. Manchmal ist die professionellste Entscheidung genau die, die Grenze der eigenen Befugnis nicht zu überschreiten.
+Das ist nachts besonders wichtig, weil die Versuchung groß ist, zu sagen: „Ich bin allein, ich muss es selbst lösen.“ Nicht immer. Manchmal ist die professionellste Entscheidung genau die, die Grenze der eigenen Befugnis nicht zu überschreiten.
 
 ## Fünf Minuten mit den Tagesmanagern
 

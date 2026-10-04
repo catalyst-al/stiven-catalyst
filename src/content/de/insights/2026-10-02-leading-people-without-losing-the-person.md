@@ -5,7 +5,7 @@ category: Menschen
 status: published
 featured: true
 summary: Druck kann berechtigt sein. Menschen zu demütigen ist keine Führungsmethode. Ein Standard kann sehr streng sein, ohne den Menschen wie eine Zahl zu behandeln.
-teaser: Man kann niemanden für eine Regel zur Verantwortung ziehen, die nie jemand klar gemacht hat.
+teaser: Man kann niemanden für eine Regel zur Verantwortung ziehen, die nie jemand klargemacht hat.
 deck: 'Der fünfte Essay der Reihe „Zehn Jahre nah an der Arbeit“: Standards, Prozessfehler und persönliche Fehler, und was sich ändert, wenn man unter den Menschen befördert wird, mit denen man gestern noch zusammengearbeitet hat.'
 ---
 
@@ -15,13 +15,13 @@ Deshalb mussten die Standards sehr konkret sein. Das Laden musste im Ziel bleibe
 
 Wir hatten auch ein System von Konsequenzen, wenn Regeln wiederholt gebrochen wurden. Der Standard war kein Poster an der Wand. Zu ihm gehörten Erwartungen, Kontrolle und Verantwortung.
 
-Aber für mich war noch etwas anderes wichtig, das oft vergessen wird. Ein Mensch muss den Standard kennen, bevor man ihn dafür beurteilt, dass er ihn nicht einhält. Man kann niemanden für eine Regel zur Verantwortung ziehen, die nie jemand klar gemacht hat.
+Aber für mich war noch etwas anderes wichtig, das oft vergessen wird. Ein Mensch muss den Standard kennen, bevor man ihn dafür beurteilt, dass er ihn nicht einhält. Man kann niemanden für eine Regel zur Verantwortung ziehen, die nie jemand klargemacht hat.
 
 Das führt mich zu der Frage, die vielleicht mehr als alles andere bestimmt, wie man Menschen führt: Wenn etwas schiefgeht, ist es ein Fehler des Prozesses oder der Person?
 
 Wenn eine Zustellung unvollständig war, habe ich nicht automatisch bei „Der Fahrer hat einen Fehler gemacht“ angefangen. Wir haben uns den Prozess angesehen. Fehlte die Tasche schon im Lager? War sie im falschen Trolley gelandet? Hatte sie ein falsches Etikett? Waren Taschen vermischt? Wurde richtig gescannt? Hatte die vollständige Tour den Ladebereich verlassen? Wenn das Problem früher im Prozess entstanden war, war es nicht fair, es automatisch zu einem Leistungsproblem des Fahrers zu machen.
 
-Andererseits: Wenn der Prozess in Ordnung war, der Standard klar, die Mittel vorhanden, und die Person das Verfahren trotzdem nicht befolgte, dann begann die individuelle Verantwortung.
+Andererseits: Wenn der Prozess in Ordnung war, der Standard klar, die Mittel vorhanden und die Person das Verfahren trotzdem nicht befolgte, dann begann die individuelle Verantwortung.
 
 Die Frage war: Hat das System die Möglichkeit des Fehlers geschaffen, oder hat die Person einen Prozess nicht befolgt, der funktionierte und den sie kannte?
 
@@ -41,4 +41,4 @@ Das ist eine echte Veränderung in der Führung, besonders wenn man von innen be
 
 Wenn man befördert wird, sollte man nicht plötzlich ein anderer Mensch werden, nur um zu beweisen, dass man jetzt der Chef ist. Aber man kann auch nicht so weitermachen, als hätte sich nichts geändert. Man muss die Beziehung zu den Menschen bewahren und gleichzeitig Dinge von ihnen verlangen, die man gestern nicht verlangen musste.
 
-Für mich ist das auch die Definition von Respekt bei der Arbeit. Respekt heißt nicht, niemanden zur Verantwortung zu ziehen. Respekt heißt, ihm den Standard klar zu machen, ihm zuzuhören, bevor man urteilt, und, wenn die Verantwortung bei ihm liegt, ihm das nicht zu verschweigen.
+Für mich ist das auch die Definition von Respekt bei der Arbeit. Respekt heißt nicht, niemanden zur Verantwortung zu ziehen. Respekt heißt, ihm den Standard klarzumachen, ihm zuzuhören, bevor man urteilt, und, wenn die Verantwortung bei ihm liegt, ihm das nicht zu verschweigen.

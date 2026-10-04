@@ -7,7 +7,7 @@ featured: true
 summary: The test of an SOP is not whether the author understands it. The author always does, because they wrote it. The test is whether someone else can use it under pressure and get the same result.
 description: "The test of an SOP is not whether its author understands it. It is whether someone else can use it under pressure and get the same result."
 teaser: The person doing the work should not have to search for the information. The information should be where they expect it.
-deck: 'The eighth essay in the series "Ten years close to the work": how to write a procedure for the moment it is used, not for the folder, and how to keep it alive when the process changes.'
+deck: 'The eighth essay in the series “Ten years close to the work”: how to write a procedure for the moment it is used, not for the folder, and how to keep it alive when the process changes.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -17,7 +17,7 @@ An SOP that is only read can look very professional. It can have nice pages, a l
 
 I have seen this in logistics and in the hotel alike.
 
-In logistics I worked on standardising the processes tied to the flow of the shift: loading, discipline on the ramp, handling problem orders, checking damage and incomplete orders, following the temperature processes, and how problems are escalated during the operation. The idea was always the same: when you have many people, many orders and time pressure, you cannot rely only on memory, or on the fact that an experienced employee "knows how it's done".
+In logistics I worked on standardising the processes tied to the flow of the shift: loading, discipline on the ramp, handling problem orders, checking damage and incomplete orders, following the temperature processes, and how problems are escalated during the operation. The idea was always the same: when you have many people, many orders and time pressure, you cannot rely only on memory, or on the fact that an experienced employee “knows how it's done”.
 
 In the hotel I have worked much more directly with checklists and SOPs for Front Office and Night Audit processes: checking reservations and statuses, closing the day, the reports, the shift handover, and the processes that have to be verified before the work counts as finished.
 
@@ -49,7 +49,7 @@ The process changes. Systems change. The team changes. A screen in the software 
 
 That is why, for me, an SOP has to be updated every time the reality it describes changes. The person who knows the process has to flag the change, and the version the team uses has to be corrected, so that two different ways of working do not keep circulating.
 
-One of the biggest problems I have seen with operational documentation is when the "official" version says one thing while the people on shift have learned another way. At that moment the SOP has stopped being a standard.
+One of the biggest problems I have seen with operational documentation is when the “official” version says one thing while the people on shift have learned another way. At that moment the SOP has stopped being a standard.
 
 ## The SOP that is read and the SOP that is used
 

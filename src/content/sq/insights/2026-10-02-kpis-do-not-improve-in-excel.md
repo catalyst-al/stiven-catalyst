@@ -5,8 +5,8 @@ category: Operacione
 status: published
 featured: true
 summary: Në Excel, një porosi e paplotë është një numër. Në rampë është një objekt fizik që është në vendin e gabuar.
-teaser: Dashboard-i thoshte "incomplete delivery". Terreni të detyronte të pyesje nëse gabimi ishte në derën e klientit apo që në magazinë.
-deck: 'Eseja e tretë e serisë "Dhjetë vite pranë punës": pse duhet të shkosh aty ku ndodh procesi, para se të kërkosh rezultat nga një tabelë.'
+teaser: Dashboard-i thoshte “incomplete delivery”. Terreni të detyronte të pyesje nëse gabimi ishte në derën e klientit apo që në magazinë.
+deck: 'Eseja e tretë e serisë “Dhjetë vite pranë punës”: pse duhet të shkosh aty ku ndodh procesi, para se të kërkosh rezultat nga një tabelë.'
 ---
 
 Në raport shfaqej diçka shumë e thjeshtë: klienti nuk kishte marrë porosinë e plotë. Incomplete. Nëse e shikon vetëm nga KPI-ja, mendimi i parë vjen vetë: shoferi ka harruar një bag gjatë dorëzimit.

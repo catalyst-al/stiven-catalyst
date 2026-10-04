@@ -12,11 +12,11 @@
     "targetPlaceholder": "e.g. 0.3",
     "rateLabel": "Damage rate",
     "periodPlaceholder": "e.g. Week 38, outbound",
-    "entryLegend": "Log a damage",
+    "entryLegend": "Log damage",
     "countLabel": "Units damaged",
     "countShort": "units",
     "notePlaceholder": "e.g. Cage 4, top layer collapsed",
-    "pasteRow": "One row per damage",
+    "pasteRow": "One row per damage entry",
     "pastePlaceholder": "2026-09-14\tLate\tLoading\tCrushed\tStacking\t6\t55",
     "empty": "No damage logged yet.",
     "stageTitle": "Where it is found",
@@ -95,7 +95,7 @@
       "meaning": "Much of what is found at receiving arrived damaged. If it is not recorded at the door, your site pays for someone else's damage.",
       "moves": [
         "Inspect and photograph damaged pallets before signing, and note it on the delivery note.",
-        "Keep \"arrived damaged\" separate from \"damaged here\" in the log.",
+        "Keep “arrived damaged” separate from “damaged here” in the log.",
         "Share the numbers with the supplier or carrier every week, with photos."
       ],
       "question": "Who checks the goods before the delivery note is signed?"
@@ -173,7 +173,7 @@
     "Damaged boxes are taken out and repacked, never loaded as they are.",
     "Forks, pallet trucks and cages are checked before use.",
     "Leaks, wet floors and open doors near goods are reported the same shift.",
-    "Every damage is logged with stage and cause at the moment it is found.",
+    "All damage is logged with stage and cause at the moment it is found.",
     "Goods that arrive damaged are photographed and noted before signing."
   ],
   "example": {

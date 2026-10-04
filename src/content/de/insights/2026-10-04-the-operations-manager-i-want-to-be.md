@@ -58,7 +58,7 @@ Standardisierung soll für mich den Menschen nicht das Denken abnehmen. Sie soll
 
 ## 3. Daten
 
-Eine KPI ist ein Signal, keine Schlussfolgerung.
+Ein KPI ist ein Signal, keine Schlussfolgerung.
 
 Ich habe gelernt, mich nicht damit zufriedenzugeben, dass ein Prozentwert rot oder grün ist.
 
@@ -68,7 +68,7 @@ Wenn wir Schäden, Fehler, Ladezeiten außerhalb des Standards oder ein anderes 
 
 Hier helfen mir Denkweisen wie Pareto und 5 Why. Nicht weil jedes Problem eine große Methodik braucht, sondern weil es sehr leicht ist, das Symptom zu bekämpfen und es Verbesserung zu nennen.
 
-Die Daten müssen mich vor Ort führen. Und der Ort muss mir helfen, die Daten zu verstehen.
+Die Daten müssen mich an den Ort des Geschehens führen. Und dieser Ort muss mir helfen, die Daten zu verstehen.
 
 Wenn sich diese beiden Welten nicht treffen, kann der Bericht schön aussehen und der Betrieb trotzdem dasselbe Problem behalten.
 
@@ -110,7 +110,7 @@ Ich will Angst nicht als Führungsinstrument einsetzen.
 
 Ich will von Menschen keinen Standard verlangen, den ich selbst nicht bereit bin zu verstehen oder einzuhalten.
 
-Ich will kein Problem verstecken, nur weil die KPI ohne es besser aussieht.
+Ich will kein Problem verstecken, nur weil der KPI ohne es besser aussieht.
 
 Ich will nicht der Manager werden, der alles weiß, weil niemand sonst eingearbeitet wurde.
 
@@ -202,7 +202,7 @@ Ich will mein Wissen in der Datenanalyse vertiefen und darin, wie der Betrieb mi
 
 Ich will mehr Erfahrung darin sammeln, Betriebe mit einem größeren organisatorischen Umfang zu führen, in dem Entscheidungen über eine Schicht oder eine Funktion hinausgehen und mehrere Teams gleichzeitig betreffen.
 
-Und ich will mich in einer Sache weiter verbessern, die meiner Meinung nach nie abgeschlossen ist: zu wissen, wann man eingreifen muss und wann man die Menschen selbst lösen lassen sollte.
+Und ich will mich in einer Sache weiter verbessern, die meiner Meinung nach nie abgeschlossen ist: zu wissen, wann man eingreifen muss und wann man die Menschen die Dinge selbst lösen lassen sollte.
 
 Denn mein Ziel ist nicht, der Mensch zu werden, der auf alles eine Antwort hat. Ich will der Manager werden, der ein Team aufbaut, in dem die Antworten nicht immer von ihm kommen müssen.
 

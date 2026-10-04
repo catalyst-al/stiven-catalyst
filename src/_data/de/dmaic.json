@@ -22,7 +22,7 @@
         ],
         [
           "Problembeschreibung",
-          "Was, wo, seit wann, wie viel, und die Lücke zum Ziel. Noch keine Ursache und keine Lösung: Die kommen später, aus den Daten."
+          "Was, wo, seit wann, wie viel und die Lücke zum Ziel. Noch keine Ursache und keine Lösung: Die kommen später, aus den Daten."
         ]
       ],
       "case": [
@@ -76,7 +76,7 @@
             "Wir brauchen einen neuen Stapelstandard."
           ],
           "answer": 2,
-          "why": "Sie sagt was, wann, wie viel und wie groß die Lücke ist, und sie rät weder die Ursache noch die Lösung."
+          "why": "Sie sagt, was, wann, wie viel und wie groß die Lücke ist, und sie rät weder die Ursache noch die Lösung."
         },
         {
           "q": "Wofür steht CTQ?",
@@ -325,7 +325,7 @@
         ],
         [
           "Poka-Yoke",
-          "Machen Sie den Fehler schwer: Layout, Markierungen, Vorrichtungen und Voreinstellungen statt Erinnerungen."
+          "Machen Sie es schwer, den Fehler zu machen: Layout, Markierungen, Vorrichtungen und Voreinstellungen statt Erinnerungen."
         ],
         [
           "Standardarbeit",
@@ -339,7 +339,7 @@
       "case": [
         [
           "Maßnahmen",
-          "Ein Stapelbild an jeder Rampe (schwer unten, zerbrechlich oben, keine Lücken), Bodenzonen im Fahrzeug für schwere Pakete, Sperrstangen nach der letzten Wand mit Foto, und zehn Minuten mehr für die Spitzen-Ladeslots."
+          "Ein Stapelbild an jeder Rampe (schwer unten, zerbrechlich oben, keine Lücken), Bodenzonen im Fahrzeug für schwere Pakete, Sperrstangen nach der letzten Wand mit Foto und zehn Minuten mehr für die Spitzen-Ladeslots."
         ],
         [
           "Pilot",
@@ -423,7 +423,7 @@
         ],
         [
           "Kontrollplan",
-          "Was wird gemessen, wie oft, von wem, und was ist zu tun, wenn ein Signal erscheint: der Reaktionsplan."
+          "Was wird gemessen, wie oft, von wem und was ist zu tun, wenn ein Signal erscheint: der Reaktionsplan."
         ],
         [
           "Regelkarte",
@@ -476,7 +476,7 @@
           "q": "Was muss ein Kontrollplan enthalten?",
           "options": [
             "Nur das Ziel",
-            "Was gemessen wird, wie oft, von wem, und was zu tun ist, wenn ein Signal erscheint",
+            "Was gemessen wird, wie oft, von wem und was zu tun ist, wenn ein Signal erscheint",
             "Die Namen des Projektteams",
             "Die ursprüngliche Problembeschreibung"
           ],
@@ -580,7 +580,7 @@
     ],
     [
       "Kontrollplan",
-      "Was nach dem Projekt gemessen wird, von wem, wie oft, und wie auf Signale reagiert wird."
+      "Was nach dem Projekt gemessen wird, von wem, wie oft und wie auf Signale reagiert wird."
     ]
   ],
   "wastes": [
@@ -622,7 +622,7 @@
     [
       "E",
       "Zusätzliche Bearbeitung (Extra processing)",
-      "Dasselbe Paket dreimal scannen, oder doppelte Kontrollen, die niemand liest."
+      "Dasselbe Paket dreimal scannen oder doppelte Kontrollen, die niemand liest."
     ]
   ],
   "charter": [
@@ -635,7 +635,7 @@
     [
       "problem",
       "Problembeschreibung",
-      "Was, wo, seit wann, wie viel, und die Lücke zum Ziel",
+      "Was, wo, seit wann, wie viel und die Lücke zum Ziel",
       true
     ],
     [

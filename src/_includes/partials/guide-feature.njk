@@ -3,7 +3,7 @@
 {%- set guideCover = toolsGuidePages[lang or "en"].pages[0] -%}
   <section class="shell book-feature guide-feature">
     <a class="book-object" href="{{ guideUrl }}" tabindex="-1" aria-hidden="true">
-      <span class="book-object-cover"><img src="{{ guideCover.image }}" width="{{ guideCover.width }}" height="{{ guideCover.height }}" alt="" loading="lazy"></span>
+      <span class="book-object-cover"><img src="{{ guideCover.image }}" srcset="{{ guideCover.image | srcsetFor }}" sizes="(max-width: 900px) 240px, 300px" width="{{ guideCover.width }}" height="{{ guideCover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
       <p class="kicker">{{ "The guide · Edition 1" | t(lang) }}</p>

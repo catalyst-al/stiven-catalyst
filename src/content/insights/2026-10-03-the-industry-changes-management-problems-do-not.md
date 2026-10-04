@@ -7,7 +7,7 @@ featured: true
 summary: I went from checking a box in a warehouse, to checking an order on the move, to checking a transaction that exists only in a system. The principle stayed the same.
 description: "From checking a box in a warehouse, to an order on the move, to a transaction that exists only in a system. The principle stayed the same."
 teaser: The customer does not care which department made the mistake. In that moment, the person in front of them is the whole company.
-deck: 'The sixth essay in the series "Ten years close to the work": what stays the same when you move from the shop floor to the loading ramp and the night reception desk, and what you have to learn from scratch.'
+deck: 'The sixth essay in the series “Ten years close to the work”: what stays the same when you move from the shop floor to the loading ramp and the night reception desk, and what you have to learn from scratch.'
 ---
 
 I have worked in retail and wholesale in Albania, then in last-mile logistics, and today in hospitality in Germany. From the outside they look like three different worlds. From the inside, the problem I have seen almost everywhere is the same one: the gap between what should happen according to the process and what actually happens on the ground.
@@ -20,7 +20,7 @@ In a hotel, the problem changes its look again. It can be a reservation, a payme
 
 The industry changes. The thing you control changes. But the management problem stays the same: if information, responsibility and execution do not meet at the same point, a mistake will show up somewhere.
 
-I see this most clearly when I think about what "inventory" was in each industry.
+I see this most clearly when I think about what “inventory” was in each industry.
 
 In retail, inventory was inventory in the classic sense: the product, the warehouse, and what you really had available to sell. In Albania I was responsible for inventory, the warehouse, sales, costs and cash flow, and at one of the companies one of my tasks was to improve inventory management. Inventory was not just a count of products. It was the company's capital, and it had to match sales and real demand.
 

@@ -6,8 +6,8 @@ status: published
 featured: true
 summary: Leadership without a title is not doing the boss's job without being the boss. It is not hiding behind your job description when a situation needs responsibility, and knowing when to stop.
 description: "Leadership without a title is not doing the boss's job. It is not hiding behind your job description when a situation needs responsibility."
-teaser: Initiative says "I will not ignore the problem". Authority says "I have the right to make this decision". You can have a lot of the first without claiming the second.
-deck: 'The tenth essay in the series "Ten years close to the work": what you do when your responsibility is bigger than your position, how authority is earned without one, and three questions before you take on something that is not yours.'
+teaser: Initiative says “I will not ignore the problem”. Authority says “I have the right to make this decision”. You can have a lot of the first without claiming the second.
+deck: 'The tenth essay in the series “Ten years close to the work”: what you do when your responsibility is bigger than your position, how authority is earned without one, and three questions before you take on something that is not yours.'
 ---
 
 For me, leadership without a title is not doing the boss's job without being the boss.
@@ -16,7 +16,7 @@ It is not hiding behind your job description when a situation needs responsibili
 
 ## Beyond the role, not beyond the mandate
 
-In last mile I had an operational role, but in practice there were moments when the work asked for more than just doing my own task. I took responsibility for coordinating problems during the shift, following the KPIs, process discipline on the ramp, communication with the drivers, and raising the problems that kept repeating. When I saw that a problem was not just an incident but was turning into a pattern, I tried to move the discussion from "who made the mistake?" to "what needs to change in the process?".
+In last mile I had an operational role, but in practice there were moments when the work asked for more than just doing my own task. I took responsibility for coordinating problems during the shift, following the KPIs, process discipline on the ramp, communication with the drivers, and raising the problems that kept repeating. When I saw that a problem was not just an incident but was turning into a pattern, I tried to move the discussion from “who made the mistake?” to “what needs to change in the process?”.
 
 In the hotel it has happened in a different way. My role is operational, but I have gone beyond running the shift by structuring checklists, SOPs, training materials and, later, a digital system for Front Office and Night Audit.
 
@@ -36,7 +36,7 @@ Another part was understanding the process before asking anything of people. It 
 
 Authority that comes only from a position works for as long as people have to listen to you. Authority that comes from credibility works even when they are not obliged to.
 
-## "This is not mine to decide"
+## “This is not mine to decide”
 
 I draw the line at the mandate.
 
@@ -46,9 +46,9 @@ But if the decision touches company policy, significant costs, personnel matters
 
 I have learned that initiative and authority are two different things.
 
-Initiative says: "I will not ignore the problem."
+Initiative says: “I will not ignore the problem.”
 
-Authority says: "I have the right to make this decision."
+Authority says: “I have the right to make this decision.”
 
 You can have a lot of the first without claiming the second.
 
@@ -66,7 +66,7 @@ The most visible price is tiredness. When you start to see everything as a probl
 
 The other risk is less visible: if you keep covering the gaps in a system, you can create the impression that the system works. Because someone is always rescuing it.
 
-Today I would do one thing more clearly: I would separate "I am solving this now so the operation can continue" from "this problem needs a structural solution from the person who has the authority for it". I would document more. I would make the ownership of a problem clearer. And I would not confuse being willing to help with being obliged to carry every problem of the organisation.
+Today I would do one thing more clearly: I would separate “I am solving this now so the operation can continue” from “this problem needs a structural solution from the person who has the authority for it”. I would document more. I would make the ownership of a problem clearer. And I would not confuse being willing to help with being obliged to carry every problem of the organisation.
 
 Leadership is not becoming the person without whom nothing works. Leadership is helping things work even when you are not there.
 

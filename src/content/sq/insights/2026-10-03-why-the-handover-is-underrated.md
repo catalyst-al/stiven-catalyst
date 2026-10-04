@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: Handover-i nuk është thjesht transferim informacioni. Është transferim përgjegjësie. Dhe pikërisht këtu shumë organizata gabojnë.
 teaser: Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.
-deck: 'Eseja e nëntë e serisë "Dhjetë vite pranë punës": pse "e raportuar" dhe "e zgjidhur" nuk janë e njëjta gjë, çfarë duhet të përmbajë një dorëzim turni, dhe dy momentet që janë pasqyrë e njëri-tjetrit.'
+deck: 'Eseja e nëntë e serisë “Dhjetë vite pranë punës”: pse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë, çfarë duhet të përmbajë një dorëzim turni, dhe dy momentet që janë pasqyrë e njëri-tjetrit.'
 ---
 
 Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.
@@ -42,7 +42,7 @@ Për mua përmirësimi kryesor është pikërisht ky: të mos ia lësh turnit tj
 Pa hyrë në përmbajtje konkrete, handover-i që përdor ose kam strukturuar rreth punës së natës përfshin kategori si:
 
 - gjendja e përgjithshme operative e hotelit;
-- lëvizjet kryesore të ditës dhe ato që ndikojnë turnin pasardhës;
+- lëvizjet kryesore të ditës dhe ato që ndikojnë në turnin pasardhës;
 - rezervime ose statuse që kërkojnë vëmendje;
 - çështje të pambyllura administrative ose financiare;
 - probleme ose kërkesa të mysafirëve që kërkojnë vazhdim;
@@ -53,19 +53,19 @@ Pa hyrë në përmbajtje konkrete, handover-i që përdor ose kam strukturuar rr
 
 Në raportet e mia, problemet që kërkojnë vazhdim nuk dua të shfaqen thjesht si histori e asaj që ndodhi. Duhet të jetë e dallueshme që diçka është ende e hapur.
 
-Sepse "e raportuar" dhe "e zgjidhur" nuk janë e njëjta gjë.
+Sepse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë.
 
 ## Një dokument që përdoret, jo vetëm provë
 
 Informacioni duhet të jetë aq i qartë sa personi tjetër të mos ketë nevojë të interpretojë çfarë kam dashur të them.
 
-Një shënim si "problem me dhomën" nuk është handover i mirë. Duhet të kuptohet natyra e problemit, gjendja e tij dhe nëse ka ende diçka që duhet ndjekur, pa futur informacion të panevojshëm.
+Një shënim si “problem me dhomën” nuk është handover i mirë. Duhet të kuptohet natyra e problemit, gjendja e tij dhe nëse ka ende diçka që duhet ndjekur, pa futur informacion të panevojshëm.
 
 Nuk kam një rregull personal absolut që çdo handover ta bëj gjithmonë edhe me gojë, ndaj nuk do ta paraqes si fakt. Por një gjë është e qartë nga mënyra si e kam ndërtuar raportimin: dokumenti nuk duhet të jetë thjesht provë që dorëzimi u bë. Duhet të jetë i përdorshëm nga personi që e merr.
 
 ## Dy momente që janë pasqyrë e njëri-tjetrit
 
-Në fund të turnit fokusi im kalon nga "çfarë duhet të bëj unë?" te "çfarë duhet të dijë personi pas meje?"
+Në fund të turnit fokusi im kalon nga “çfarë duhet të bëj unë?” te “çfarë duhet të dijë personi pas meje?”
 
 Kontrolloj çfarë ka mbetur e hapur, çfarë është zgjidhur gjatë natës dhe cilat çështje nuk duhet të humbasin kur ndryshon turni. Më intereson veçanërisht që një problem i pambyllur të mos duket si problem i përfunduar vetëm sepse turni im po mbaron.
 

@@ -359,6 +359,15 @@ window.CvImport = (() => {
     return { company: text.trim(), location: "" };
   };
 
+  // "Shift Lead, DHL, Frankfurt", "Shift Lead | DHL | Frankfurt", "Shift Lead – DHL – Frankfurt" or
+  // "Shift Lead at DHL, Frankfurt": title, company and place; null when the line has only a title.
+  const headingParts = (text) => {
+    const parts = text.split(/\s*\|\s*|\s+[–—]\s+/).map((part) => part.trim()).filter(Boolean);
+    if (parts.length >= 2) return { title: parts[0], company: parts[1], location: parts.slice(2).join(" | ") };
+    const inline = text.match(/^(.+?)(?:,\s+|\s+(?:at|@|bei|tek|pranë)\s+)(.+)$/iu);
+    return inline ? { title: inline[1].trim(), ...companyParts(inline[2]) } : null;
+  };
+
   // Bullet points from wrapped lines: a line continues the one before unless
   // it starts with a bullet, the one before ended a sentence, or was short.
   const bulletsFrom = (lines) => {
@@ -420,6 +429,8 @@ window.CvImport = (() => {
       if (start.begin < start.anchor) {
         entry.title = clean(lines[start.begin].text);
         Object.assign(entry, companyParts(rest));
+        // The dates stand alone and the line above holds it all: "Shift Lead, DHL, Frankfurt".
+        if (!rest) Object.assign(entry, headingParts(entry.title) || {});
       } else {
         entry.title = rest.replace(/\s{2,}.*$/, "").trim() || rest;
         // "Team Leader, Zalando – Milan" or "Team Leader at Zalando" on one line.
@@ -522,6 +533,9 @@ window.CvImport = (() => {
       if (split.length > 1) return { name: split[0].trim(), level: split.slice(1).join(" – ").trim() };
       const paren = part.match(/^(.+?)\s*\((.+)\)$/);
       if (paren) return { name: paren[1].trim(), level: paren[2].trim() };
+      // "German B2" or "Englisch C1 (fließend)": a CEFR level after the name.
+      const cefr = part.match(/^(.+?)\s+([ABC][12](?:\s*\(.+\))?|[ABC][12]\+?)$/u);
+      if (cefr) return { name: cefr[1].trim(), level: cefr[2].trim() };
       return { name: part, level: "" };
     });
 

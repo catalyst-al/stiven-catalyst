@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: Shoferi sheh problemin, dispatcher-i sheh efektin e tij mbi turnin, menaxheri duhet të kuptojë pse ekziston.
 teaser: Loading time ishte 24 minuta kundrejt një target-i prej 20. Do të ishte e lehtë të thoshe që shoferët ngarkojnë ngadalë.
-deck: 'Eseja e dytë e serisë "Dhjetë vite pranë punës": loading time, delays, incomplete, damage, dhe pse një KPI nuk të tregon vetë çfarë ka ndodhur.'
+deck: 'Eseja e dytë e serisë “Dhjetë vite pranë punës”: loading time, delays, incomplete, damage, dhe pse një KPI nuk të tregon vetë çfarë ka ndodhur.'
 ---
 
 Last mile-in e kam parë nga tri vende. Si shpërndarës pakosh, si dispatcher me mbi 70 shoferë në një turn, dhe pastaj si Team Leader dhe Area Manager, me katër Shift Leaders, tetë dispecerë dhe rreth 250 shoferë nën përgjegjësinë time në mënyrë indirekte. I njëjti operacion duket krejt ndryshe nga secili vend.
@@ -27,7 +27,7 @@ Do të ishte shumë e lehtë të thoshe: shoferët po ngarkojnë ngadalë. Por 2
 
 Puna ishte të shkoje te procesi, jo të fajësoje menjëherë shoferin. Punuam me gjëra shumë konkrete: kontroll më të mirë të trolley-ve dhe të routes, scanner-at më afër rampave, pre-scan, kontrolle finale për kompletësinë, organizim më të qartë të dry, chilled dhe frozen, dhe auditim të rampës. Në periudha të tjera loading-u zbriti në zonën 16 deri në 19 minuta.
 
-Mësimi për mua nuk ishte "ulëm një KPI". Mësimi ishte se një KPI përmirësohet kur ndryshon procesin që e prodhon atë.
+Mësimi për mua nuk ishte “ulëm një KPI”. Mësimi ishte se një KPI përmirësohet kur ndryshon procesin që e prodhon atë.
 
 E njëjta gjë vlen për porositë e paplota. Incomplete për mua nuk ishte thjesht një përqindje. Do të thoshte që një klient nuk kishte marrë porosinë e plotë. Duhej të kuptoje nëse produkti kishte munguar që në magazinë, ishte vendosur në trolley-n e gabuar, kishte mbetur në rampë apo kishte ndodhur diçka gjatë dorëzimit. Edhe me dëmet: numri të tregon sa raste ke. Nuk të tregon automatikisht pse i ke.
 
@@ -41,7 +41,7 @@ Mësimi im ishte se presioni nuk duhet kaluar poshtë si panik. Nëse menaxheri 
 
 Accountability për mua nuk do të thotë të kërkosh një fajtor sa herë që një numër bëhet i kuq. Do të thotë të gjesh kush e zotëron problemin dhe ta ndjekësh derisa të mbyllet.
 
-Nëse më pyet cili KPI të mashtron më shumë kur e sheh vetëm si numër, do të thosha Delays. Numri të jep përshtypjen se po mat vetëm vonesën e shoferit. Por vonesa mund të ketë filluar shumë më herët. Te ngarkimi. Te një missing bag. Te një trolley e përzier. Te renditja e route-it. Te një problem operacional para se shoferi të ketë dalë fare nga rampa. Pastaj në dashboard sheh vetëm një shofer "late".
+Nëse më pyet cili KPI të mashtron më shumë kur e sheh vetëm si numër, do të thosha Delays. Numri të jep përshtypjen se po mat vetëm vonesën e shoferit. Por vonesa mund të ketë filluar shumë më herët. Te ngarkimi. Te një missing bag. Te një trolley i përzier. Te renditja e route-it. Te një problem operacional para se shoferi të ketë dalë fare nga rampa. Pastaj në dashboard sheh vetëm një shofer “late”.
 
 Nëse menaxhon vetëm numrin, mund të ndëshkosh personin e gabuar. Nëse menaxhon procesin, fillon të kuptosh ku është krijuar realisht vonesa.
 

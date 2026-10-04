@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-sigma-chart-sq",
+  "csv": "karta-e-kontrollit",
   "sigmaTable": [
     {
       "sigma": 2,

@@ -6,10 +6,10 @@ status: published
 featured: true
 summary: Presioni mund të jetë i drejtë. Poshtërimi i njerëzve nuk është metodë menaxhimi. Standardi mund të jetë shumë i fortë pa e trajtuar njeriun si numër.
 teaser: Nuk mund të kërkosh llogari për një rregull që askush nuk e ka bërë të qartë.
-deck: 'Eseja e pestë e serisë "Dhjetë vite pranë punës": standardet, gabimi i procesit dhe gabimi i personit, dhe çfarë ndryshon kur ngrihesh në detyrë mes njerëzve me të cilët punoje dje.'
+deck: 'Eseja e pestë e serisë “Dhjetë vite pranë punës”: standardet, gabimi i procesit dhe gabimi i personit, dhe çfarë ndryshon kur ngrihesh në detyrë mes njerëzve me të cilët punoje dje.'
 ---
 
-Në last mile nuk mjafton t'i thuash dikujt "punoni më mirë". Duhet të kuptojë çfarë do të thotë "mirë".
+Në last mile nuk mjafton t'i thuash dikujt “punoni më mirë”. Duhet të kuptojë çfarë do të thotë “mirë”.
 
 Prandaj standardet duhej të ishin shumë konkrete. Ngarkimi duhej të qëndronte brenda target-it. Shoferët duhej të qëndronin në zonën e tyre, jo të grumbulloheshin te tavolina e Shift Leader-it. Pas ngarkimit, gate-i mbyllej. Chilled dhe frozen skanoheshin në zonat përkatëse. Kur mungonte një bag, nuk vazhdohej sikur gjithçka ishte normale: problemi raportohej. Siguria, pastërtia dhe rregulli në rampë ishin pjesë e standardit. Dëmet, porositë e paplota, vonesat dhe koha e ngarkimit mateshin çdo ditë.
 
@@ -19,7 +19,7 @@ Por për mua kishte rëndësi edhe një gjë tjetër, që shpesh harrohet. Njeri
 
 Kjo më çon te pyetja që ndoshta përcakton më shumë se çdo gjë tjetër si drejton njerëzit: kur diçka shkon keq, gabimi është i procesit apo i personit?
 
-Nëse një dorëzim dilte i paplotë, nuk filloja automatikisht nga "shoferi bëri gabim". Shikohej procesi. A mungonte bag-u që në magazinë? Ishte futur në trolley të gabuar? Kishte label të gabuar? Ishin përzier bag-et? Ishte bërë skanimi siç duhej? Kishte dalë route-i i plotë nga zona e ngarkimit? Nëse problemi kishte lindur më herët në proces, nuk ishte e drejtë ta ktheje automatikisht në problem performance të shoferit.
+Nëse një dorëzim dilte i paplotë, nuk filloja automatikisht nga “shoferi bëri gabim”. Shikohej procesi. A mungonte bag-u që në magazinë? Ishte futur në trolley të gabuar? Kishte label të gabuar? Ishin përzier bag-et? Ishte bërë skanimi siç duhej? Kishte dalë route-i i plotë nga zona e ngarkimit? Nëse problemi kishte lindur më herët në proces, nuk ishte e drejtë ta ktheje automatikisht në problem të performancës së shoferit.
 
 Nga ana tjetër, nëse procesi ishte në rregull, standardi ishte i qartë, mjetet ishin aty dhe personi përsëri nuk e ndiqte procedurën, atëherë fillonte përgjegjësia individuale.
 

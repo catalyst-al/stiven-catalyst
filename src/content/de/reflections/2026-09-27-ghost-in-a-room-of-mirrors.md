@@ -11,7 +11,7 @@ image_alt: Stiven Janaqi mit Kopfhörern hört an einem Mikrofon zu
 
 Wir leben in einer faszinierenden und zutiefst verwirrten Zeit, in der Menschen lieber auf dem Marktplatz verbrannt würden, als einen einzigen Nachmittag unbemerkt zu verbringen.
 
-Heute unsichtbar zu sein? Ah... das ist kein bescheidener Rückzug mehr. Es ist ein Akt der Rebellion. Leise, unverschämt, beinahe aristokratisch.
+Heute unsichtbar zu sein? Ah … das ist kein bescheidener Rückzug mehr. Es ist ein Akt der Rebellion. Leise, unverschämt, beinahe aristokratisch.
 
 Diese Gesellschaft hat sich unsterblich in die glatte Oberfläche von Glas verliebt. Alles muss gerahmt, gefiltert, von diesem kalten LED-Licht beleuchtet und ausgestellt werden wie Fleisch, das auf einem Straßenmarkt in Marrakesch hängt. Menschen opfern Geheimnis, Intimität und ein Stück ihrer Würde, damit eine Menge Fremder bestätigt, dass sie atmen. Ohne ein Bild, ohne einen Beweis auf wenigen Quadratzentimetern fühlen sie sich, als gäbe es sie nicht.
 

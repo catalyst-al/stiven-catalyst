@@ -6,8 +6,8 @@ status: published
 featured: true
 summary: Leadership pa titull nuk është të bësh punën e shefit pa qenë shef. Është të mos fshihesh pas përshkrimit të vendit të punës kur situata ka nevojë për përgjegjësi, dhe të dish kur duhet të ndalosh.
 description: "Leadership pa titull nuk është të bësh punën e shefit. Është të mos fshihesh pas përshkrimit të punës kur situata kërkon përgjegjësi."
-teaser: Iniciativa thotë "Nuk do ta injoroj problemin". Autoriteti thotë "Kam të drejtën ta marr këtë vendim". Mund të kesh shumë nga e para pa pretenduar të dytën.
-deck: 'Eseja e dhjetë e serisë "Dhjetë vite pranë punës": çfarë bën kur përgjegjësia jote është më e madhe se pozicioni, si fitohet autoriteti pa pozitë, dhe tri pyetje para se të marrësh përsipër diçka që nuk është e jotja.'
+teaser: Iniciativa thotë “Nuk do ta injoroj problemin”. Autoriteti thotë “Kam të drejtën ta marr këtë vendim”. Mund të kesh shumë nga e para pa pretenduar të dytën.
+deck: 'Eseja e dhjetë e serisë “Dhjetë vite pranë punës”: çfarë bën kur përgjegjësia jote është më e madhe se pozicioni, si fitohet autoriteti pa pozitë, dhe tri pyetje para se të marrësh përsipër diçka që nuk është e jotja.'
 ---
 
 Për mua, leadership pa titull nuk është të bësh punën e shefit pa qenë shef.
@@ -16,7 +16,7 @@ Për mua, leadership pa titull nuk është të bësh punën e shefit pa qenë sh
 
 ## Përtej rolit, jo përtej mandatit
 
-Në last mile kam pasur një rol operacional, por në praktikë kishte momente kur puna kërkonte më shumë sesa thjesht të kryeja detyrën time. Kam marrë përgjegjësi për koordinimin e problemeve gjatë turnit, ndjekjen e KPI-ve, disiplinën e proceseve në rampë, komunikimin me shoferët dhe ngritjen e problemeve që po përsëriteshin. Kur shihja se një problem nuk ishte thjesht një incident, por po kthehej në model, përpiqesha ta çoja diskutimin nga "kush gaboi?" te "çfarë duhet ndryshuar në proces?".
+Në last mile kam pasur një rol operacional, por në praktikë kishte momente kur puna kërkonte më shumë sesa thjesht të kryeja detyrën time. Kam marrë përgjegjësi për koordinimin e problemeve gjatë turnit, ndjekjen e KPI-ve, disiplinën e proceseve në rampë, komunikimin me shoferët dhe ngritjen e problemeve që po përsëriteshin. Kur shihja se një problem nuk ishte thjesht një incident, por po kthehej në model, përpiqesha ta çoja diskutimin nga “kush gaboi?” te “çfarë duhet ndryshuar në proces?”.
 
 Në hotel më ka ndodhur në një mënyrë tjetër. Roli im është operacional, por kam shkuar përtej ekzekutimit të turnit duke strukturuar checklist-a, SOP, materiale trajnimi dhe më vonë një sistem digjital për Front Office dhe Night Audit.
 
@@ -36,7 +36,7 @@ Një pjesë tjetër ishte të kuptoja procesin para se të kërkoja diçka nga n
 
 Autoriteti që vjen vetëm nga pozicioni funksionon për aq kohë sa njerëzit duhet të të dëgjojnë. Autoriteti që vjen nga besueshmëria funksionon edhe kur nuk janë të detyruar.
 
-## "Kjo nuk është e imja ta vendos"
+## “Kjo nuk është e imja ta vendos”
 
 Kufirin e vendos te mandati.
 
@@ -46,9 +46,9 @@ Por nëse vendimi prek politika të kompanisë, kosto të rëndësishme, çësht
 
 Kam mësuar se iniciativa dhe autoriteti janë dy gjëra të ndryshme.
 
-Iniciativa thotë: "Nuk do ta injoroj problemin."
+Iniciativa thotë: “Nuk do ta injoroj problemin.”
 
-Autoriteti thotë: "Kam të drejtën ta marr këtë vendim."
+Autoriteti thotë: “Kam të drejtën ta marr këtë vendim.”
 
 Mund të kesh shumë nga e para pa pretenduar të dytën.
 
@@ -66,7 +66,7 @@ Më shumë se kaq nuk e shkruaj, sepse nuk dua të pretendoj reagime, lavdërime
 
 Rreziku tjetër është më i padukshëm: nëse vazhdimisht mbulon boshllëqet e një sistemi, mund të krijosh përshtypjen se sistemi funksionon. Sepse dikush gjithmonë po e shpëton.
 
-Sot do të bëja një gjë më qartë: do të ndaja "po e zgjidh këtë tani që operacioni të vazhdojë" nga "ky problem ka nevojë për një zgjidhje strukturore nga personi që ka autoritetin për të". Do të dokumentoja më shumë. Do ta bëja më të qartë pronësinë e një problemi. Dhe nuk do ta ngatërroja gatishmërinë për të ndihmuar me detyrimin për të mbajtur mbi vete çdo problem të organizatës.
+Sot do të bëja një gjë më qartë: do të ndaja “po e zgjidh këtë tani që operacioni të vazhdojë” nga “ky problem ka nevojë për një zgjidhje strukturore nga personi që ka autoritetin për të”. Do të dokumentoja më shumë. Do ta bëja më të qartë pronësinë e një problemi. Dhe nuk do ta ngatërroja gatishmërinë për të ndihmuar me detyrimin për të mbajtur mbi vete çdo problem të organizatës.
 
 Leadership nuk është të bëhesh personi pa të cilin asgjë nuk funksionon. Leadership është të ndihmosh që gjërat të funksionojnë edhe kur ti nuk je aty.
 

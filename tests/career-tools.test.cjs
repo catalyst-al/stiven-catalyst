@@ -180,3 +180,18 @@ Beispiel Hotel | Frankfurt
   assert.deepEqual([cv.experience[0].title, cv.experience[0].company, cv.experience[0].from, cv.experience[0].to], ['Night Manager', 'Beispiel Hotel', '07/2023', '09/2026']);
   assert.equal(cv.experience[0].bullets, 'Leitung des Nachtbetriebs seit 2024 mit zwei Kollegen.');
 });
+
+test('a job line above its own dates is split into title, company and place, and CEFR levels are read', () => {
+  const cv = plain(CvImport.parse(CvImport.textLines([
+    'Jane Doe', 'Shift Lead', 'jane@example.com | +49 170 1234567 | Frankfurt',
+    'EXPERIENCE',
+    'Shift Lead, DHL, Frankfurt', '01.2020 – today', '- Led 25 people',
+    'Team Leader | Zalando | Berlin', '03.2017 – 12.2019', '- Ran the night shift',
+    'Dispatcher at Hermes, Hamburg', '2015 – 2017',
+    'LANGUAGES', 'German B2, English C1, Albanian (native)',
+  ].join('\n'))));
+  assert.deepEqual(cv.experience.map((e) => [e.title, e.company, e.location]), [
+    ['Shift Lead', 'DHL', 'Frankfurt'], ['Team Leader', 'Zalando', 'Berlin'], ['Dispatcher', 'Hermes', 'Hamburg'],
+  ]);
+  assert.deepEqual(cv.languages, [{ name: 'German', level: 'B2' }, { name: 'English', level: 'C1' }, { name: 'Albanian', level: 'native' }]);
+});

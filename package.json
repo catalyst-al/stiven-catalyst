@@ -17,7 +17,8 @@
   "homepage": "https://github.com/catalyst-al/stiven-catalyst#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
-    "jsdom": "^26.1.0"
+    "jsdom": "^26.1.0",
+    "terser": "^5.51.2"
   },
   "private": true,
   "type": "module",

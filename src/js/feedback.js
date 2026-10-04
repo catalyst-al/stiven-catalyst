@@ -2,9 +2,9 @@
 // With an action the form posts there and stays on the page; without one it opens the visitor's
 // mail program with the answer. Nothing leaves the browser until "Send" is pressed.
 (() => {
-  const form = document.querySelector("[data-feedback]");
+  const form = document.querySelector("[data-tool-feedback]");
   if (!form) return;
-  const status = form.querySelector("[data-feedback-status]");
+  const status = form.querySelector("[data-tool-feedback-status]");
   const mail = form.dataset.mail || "";
   const action = form.getAttribute("action") || "";
 

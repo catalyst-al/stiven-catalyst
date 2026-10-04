@@ -5,8 +5,8 @@ category: Operacione
 status: published
 featured: true
 summary: Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët që aktiviteti ka lënë pas.
-teaser: Shumë gabime nuk lindin nga mungesa e aftësisë. Lindin nga fjalia "Do ta bëjmë më vonë". Shpesh, "më vonë" është turni i natës.
-deck: 'Eseja e shtatë e serisë "Dhjetë vite pranë punës": çfarë del në pah kur hoteli fle, pse mbyllja e ditës është disiplinë procesi, dhe pesë gjëra që menaxheri i ditës duhet t''i shohë në raportin e natës.'
+teaser: Shumë gabime nuk lindin nga mungesa e aftësisë. Lindin nga fjalia “Do ta bëjmë më vonë”. Shpesh, “më vonë” është turni i natës.
+deck: 'Eseja e shtatë e serisë “Dhjetë vite pranë punës”: çfarë del në pah kur hoteli fle, pse mbyllja e ditës është disiplinë procesi, dhe pesë gjëra që menaxheri i ditës duhet t''i shohë në raportin e natës.'
 ---
 
 Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët që aktiviteti ka lënë pas.
@@ -31,9 +31,9 @@ Kam hasur rezervime që nuk përputhen plotësisht me atë që ka ndodhur realis
 
 Nata i nxjerr në pah këto gjëra sepse ritmi ndryshon. Nuk ke më të njëjtin fluks njerëzish përpara recepsionit dhe ke mundësinë të shohësh më qartë pas procesit.
 
-Kjo punë më ka mësuar se shumë gabime nuk lindin nga mungesa e aftësisë. Lindin nga ndërprerjet, komunikimi i paplotë dhe fjalia: "Do ta bëjmë më vonë."
+Kjo punë më ka mësuar se shumë gabime nuk lindin nga mungesa e aftësisë. Lindin nga ndërprerjet, komunikimi i paplotë dhe fjalia: “Do ta bëjmë më vonë.”
 
-Shpesh, "më vonë" është turni i natës.
+Shpesh, “më vonë” është turni i natës.
 
 ## No-show-t dhe pagesat
 
@@ -41,17 +41,17 @@ Një rezervim që ekziston në sistem nuk do të thotë automatikisht se gjithç
 
 No-show-t kanë rëndësi sepse ndikojnë në mënyrën si hoteli e mbyll ditën dhe e njeh atë që ka ndodhur realisht. Nëse nuk kontrollohen, mund të mbeten rezervime me status të gabuar, të krijohen diferenca në raportim ose probleme që shfaqen vetëm më vonë.
 
-E njëjta gjë vlen për pagesat. Kontrolli nuk bëhet vetëm për të parë nëse "ka para". Bëhet për të parë nëse ajo që është regjistruar përputhet me atë që duhet të jetë regjistruar.
+E njëjta gjë vlen për pagesat. Kontrolli nuk bëhet vetëm për të parë nëse “ka para”. Bëhet për të parë nëse ajo që është regjistruar përputhet me atë që duhet të jetë regjistruar.
 
 Nëse askush nuk e bën këtë kontroll, gabimet nuk zhduken. Vetëm kalojnë nga një ditë në tjetrën. Dhe sa më gjatë të kalojnë, aq më e vështirë bëhet të kuptosh ku kanë lindur.
 
 ## Mbyllja e ditës nuk është listë
 
-Mbyllja e ditës më ka mësuar se një proces nuk duhet mbyllur vetëm sepse "erdhi momenti për ta mbyllur". Duhet mbyllur kur gjërat që varen prej tij janë vërtet gati.
+Mbyllja e ditës më ka mësuar se një proces nuk duhet mbyllur vetëm sepse “erdhi momenti për ta mbyllur”. Duhet mbyllur kur gjërat që varen prej tij janë vërtet gati.
 
 Në javët e para, natyrshëm, vëmendjen e kisha shumë te lista: cili hap vjen pas cilit, çfarë duhet hapur, çfarë duhet kontrolluar dhe në çfarë radhe duhet të eci.
 
-Sot e shoh ndryshe. Nuk mendoj vetëm: "A e bëra këtë hap?" Mendoj: "A është realisht në rregull ajo që ky hap duhet të kontrollojë?"
+Sot e shoh ndryshe. Nuk mendoj vetëm: “A e bëra këtë hap?” Mendoj: “A është realisht në rregull ajo që ky hap duhet të kontrollojë?”
 
 Ky është një ndryshim i madh. Një checklist mund të plotësohet mekanikisht. Por një Night Audit i mirë kërkon të kuptosh varësinë midis proceseve. Nëse një gjë më herët nuk është mbyllur siç duhet, nuk ka kuptim të nxitosh procesin vetëm që lista të duket e përfunduar.
 
@@ -67,7 +67,7 @@ Për mua kufiri është relativisht i qartë. Nëse është një problem operaci
 
 Kam mësuar se përgjegjësia nuk është të marrësh çdo vendim. Përgjegjësia është të dish cilin vendim mund ta marrësh vetë dhe cilin nuk duhet ta marrësh.
 
-Kjo është veçanërisht e rëndësishme natën, sepse tundimi është i madh të thuash: "Jam vetëm, duhet ta zgjidh vetë." Jo gjithmonë. Ndonjëherë vendimi më profesional është pikërisht të mos kalosh kufirin e autoritetit tënd.
+Kjo është veçanërisht e rëndësishme natën, sepse tundimi është i madh të thuash: “Jam vetëm, duhet ta zgjidh vetë.” Jo gjithmonë. Ndonjëherë vendimi më profesional është pikërisht të mos kalosh kufirin e autoritetit tënd.
 
 ## Pesë minuta me menaxherët e ditës
 

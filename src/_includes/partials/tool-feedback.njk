@@ -5,7 +5,7 @@
 <section class="shell tool-feedback" aria-labelledby="tool-feedback-title">
   <p class="kicker">{{ "Feedback" | t(lang) }}</p>
   <h2 id="tool-feedback-title">{{ "Did this tool help you?" | t(lang) }}</h2>
-  <form class="tool-feedback-form" data-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
+  <form class="tool-feedback-form" data-tool-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
         data-sent="{{ 'Thank you. This goes straight to me and shapes what gets built next.' | t(lang) }}"
         data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
         data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
@@ -26,7 +26,7 @@
       <button type="submit" class="button-primary">{{ "Send" | t(lang) }}</button>
       <p class="form-note">{{ "Nothing is sent until you press Send. The page itself keeps no analytics." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
     </div>
-    <p class="form-note tf-status" data-feedback-status role="status" aria-live="polite" hidden></p>
+    <p class="form-note tf-status" data-tool-feedback-status role="status" aria-live="polite" hidden></p>
   </form>
 </section>
 <script src="{{ '/js/feedback.js' | assetUrl }}" defer></script>

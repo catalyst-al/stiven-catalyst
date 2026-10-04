@@ -283,7 +283,7 @@
     const noTime = open.filter((issue) => !issue.due.trim()).length;
     if (noOwner) list.push(tx(noOwner === 1 ? "{n} open issue has no owner." : "{n} open issues have no owner.", { n: noOwner }));
     if (noTime) list.push(tx(noTime === 1 ? "{n} open issue has no time." : "{n} open issues have no time.", { n: noTime }));
-    open.filter((issue) => issue.carried >= 2).forEach((issue) => list.push(tx("\"{text}\" has been carried {n} times. It is not a shift problem any more: take it through 5 Whys.", { text: issue.text, n: issue.carried })));
+    open.filter((issue) => issue.carried >= 2).forEach((issue) => list.push(tx("“{text}” has been carried {n} times. It is not a shift problem any more: take it through 5 Whys.", { text: issue.text, n: issue.carried })));
     if (!h.to.trim()) list.push(tx("Nobody is named to take over."));
     const unticked = h.checks.filter((c) => !c).length;
     if (unticked === h.checks.length) list.push(tx("No handover checks ticked yet."));
