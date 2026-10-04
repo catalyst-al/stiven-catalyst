@@ -273,8 +273,27 @@ Eseja 1: https://stivencatalyst.com/de/insights/starting-from-zero/
 >
 > #Führung #Operations #Arbeitskultur #Leadership
 
----
+## Eseja 12: Operations Manager-i që dua të jem
 
-## Për esenë 12
+Lidhja: https://stivencatalyst.com/de/insights/the-operations-manager-i-want-to-be/
+Faqja: https://stivencatalyst.com/de/about.html
 
-Postimi shkruhet të hënën, bashkë me përkthimet, nga drafti i miratuar. Skema është e njëjta: shifra ose kontrasti në rreshtin e parë, tre deri pesë paragrafë të shkurtër, një vegël ose një faqe e sitit, një pyetje në fund. Veglat që i takojnë çdo eseje janë te plani i serisë ("Lidhje").
+> Branchen ändern sich viel schneller als die Prinzipien des Managements. Ob Ware im Lager, ein Auftrag, der pünktlich raus muss, oder ein Hotelzimmer: Ein Operations Manager steht fast immer vor denselben Fragen.
+>
+> Nach zwölf Essays fasse ich meine Arbeitsphilosophie in fünf Prinzipien zusammen:
+> 1. Menschen: Druck kann berechtigt sein. Demütigung nicht. Ein Team, das Angst hat, Fehler zu zeigen, hat nicht weniger Fehler, nur weniger sichtbare.
+> 2. Standards: Wenn das Ergebnis davon abhängt, dass die richtige Person in der Schicht ist, hat die Organisation Wissen, aber noch keinen Standard.
+> 3. Daten: Eine KPI ist ein Signal, keine Schlussfolgerung.
+> 4. Ownership: Kein Problem bleibt ohne Verantwortlichen. Und keine Entscheidung, die mir nicht zusteht, nur weil ich das Problem gesehen habe.
+> 5. Kontinuierliche Verbesserung: Wie lösen wir es, warum ist es passiert, und was ändern wir, damit es nicht wiederkommt?
+>
+> Die ersten 90 Tage in einer neuen Rolle: verstehen, bevor man verändert. Wenige Prioritäten statt zwanzig Projekte. Verbesserungen zur Arbeitsweise machen.
+>
+> Nicht der Manager, der am wichtigsten wirkt, wenn der Betrieb Probleme hat. Sondern der, der einen Betrieb aufbaut, der immer seltener gerettet werden muss.
+>
+> Der Essay, mit dem die Reihe „Zehn Jahre nah an der Arbeit“ endet: https://stivencatalyst.com/de/insights/the-operations-manager-i-want-to-be/
+> Über mich: https://stivencatalyst.com/de/about.html
+>
+> Welches dieser fünf Prinzipien ist in Ihrem Betrieb am schwersten durchzuhalten?
+>
+> #Operations #Führung #OperationsManagement #Leadership
