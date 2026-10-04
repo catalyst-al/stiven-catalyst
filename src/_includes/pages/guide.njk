@@ -1,0 +1,131 @@
+{#- The Tools Guide in its reader, shared by the three languages: the same page-turning reader as the book
+    (js/book.js), the pages of this language's PDF (toolsGuidePages.json, made by scripts/tools-guide.mjs)
+    and the whole text below, from the same source as the print (toolsGuide.js). -#}
+{%- set g = toolsGuide[lang or "en"] -%}
+{%- set guide = toolsGuidePages[lang or "en"] -%}
+{%- set T = toolsGuide.tool[lang or "en"] -%}
+{%- set F = toolsGuide.family -%}
+{%- set cover = guide.pages[0] -%}
+{%- set pdf = "/media/guides/" + toolsGuide.slug + "/" + toolsGuide.slug + "-" + (lang or "en") + ".pdf" -%}
+{%- set labels = {
+  cover: "Cover" | t(lang),
+  back: "Back cover" | t(lang),
+  page: "Page {n}" | t(lang),
+  pages: "Pages {a}–{b}" | t(lang),
+  of: "of {total}" | t(lang),
+  resume: "Continue from page {n}" | t(lang)
+} -%}
+  <section class="shell book-hero">
+    <div class="book-hero-copy">
+      <p class="eyebrow">Stiven Catalyst · {{ g.edition }}</p>
+      <h1>{{ g.title }}</h1>
+      <p class="lede">{{ g.subtitle }}</p>
+      <dl class="book-facts">
+        <div><dt>{{ "Tools" | t(lang) }}</dt><dd>{{ toolsGuide.toolCount }}</dd></div>
+        <div><dt>{{ "Families" | t(lang) }}</dt><dd>{{ toolsGuide.system | length }}</dd></div>
+        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ guide.pageCount }}</dd></div>
+        <div><dt>{{ "Languages" | t(lang) }}</dt><dd>{{ toolsGuide.langs | length }}</dd></div>
+      </dl>
+      <div class="hero-actions">
+        <a class="button-primary" href="#reader" data-book-open>{{ "Open the guide" | t(lang) }}</a>
+        <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
+        <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+      </div>
+    </div>
+    <a class="book-object" href="#reader" data-book-open aria-label="{{ 'Open the guide' | t(lang) }}">
+      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
+    </a>
+  </section>
+
+  <section class="book-stage" id="reader" aria-label="{{ 'The guide, page by page' | t(lang) }}">
+    <div class="book-reader" data-book data-slug="{{ toolsGuide.slug }}-{{ lang or 'en' }}" data-labels="{{ labels | dump }}">
+      <div class="book-viewport">
+        <div class="book" data-book-pages>
+          {%- for page in guide.pages %}
+          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}" width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+          {%- endfor %}
+        </div>
+      </div>
+
+      <div class="book-controls" data-book-controls hidden>
+        <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="book-status">
+          <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
+          <p class="book-chapter" data-book-chapter></p>
+          <input class="book-scrub" type="range" min="1" max="{{ guide.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
+        </div>
+        <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="book-tools">
+          <button class="book-chip" type="button" data-book-toc aria-expanded="false" aria-controls="book-contents">{{ "Contents" | t(lang) }}</button>
+          <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
+          <a class="book-chip" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+          <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
+        </div>
+      </div>
+
+      <nav class="book-contents" id="book-contents" data-book-contents aria-label="{{ 'Contents' | t(lang) }}" hidden>
+        <ol>
+          {%- for id in toolsGuide.pages %}
+          {%- if id not in ["cover", "contents", "back"] %}
+          {%- if id.startsWith("family:") %}{% set f = F[id.slice(7)] %}{% set label = g.labels.family %}{% set title = f.name + " · " + (f.role | t(lang)) %}
+          {%- elif id.startsWith("tool:") %}{% set label = F[toolsGuide.familyOfTool[id.slice(5)]].name %}{% set title = T[id.slice(5)].name %}
+          {%- else %}{% set label = g.sections[id].kicker %}{% set title = g.sections[id].title %}{% endif %}
+          <li><button type="button" data-book-goto="{{ toolsGuide.pageOf[id] }}"><span class="book-contents-label">{{ label }}</span><span class="book-contents-title">{{ title }}</span><span class="book-contents-page">{{ toolsGuide.pageOf[id] | pad }}</span></button></li>
+          {%- endif %}
+          {%- endfor %}
+        </ol>
+      </nav>
+
+      <p class="book-hint" data-book-hint hidden>{{ "Click or swipe a page to turn it. The arrow keys work too." | t(lang) }}</p>
+    </div>
+  </section>
+
+  <section class="shell book-text" id="text">
+    <details data-book-details>
+      <summary>
+        <span class="kicker">{{ "The whole text" | t(lang) }}</span>
+        <span class="book-text-title">{{ "Read the guide as text" | t(lang) }}</span>
+        <span class="book-text-note">{{ "For reading on a small screen, searching or a screen reader. The same words, without the page design." | t(lang) }}</span>
+      </summary>
+      <div class="article-content book-text-body">
+        {%- for id in toolsGuide.pages %}
+        {%- if id.startsWith("family:") %}
+        {%- set f = F[id.slice(7)] %}
+        <p class="book-text-kicker">{{ g.labels.family }}</p>
+        <h2>{{ f.name }} · {{ f.role | t(lang) }}</h2>
+        <p><strong>{{ f.scope | t(lang) }}.</strong> {{ f.line | t(lang) }}</p>
+        <p>{{ g.families[f.id] }}</p>
+        <h3>{{ g.labels.routine }}</h3>
+        <ul>
+          {%- for step in f.routine %}<li><strong>{{ step.when | t(lang) }}:</strong> {{ step.do | t(lang) }} ({{ T[step.tool].name }})</li>{% endfor %}
+        </ul>
+        {%- elif id.startsWith("tool:") %}
+        {%- set url = id.slice(5) %}{% set tool = T[url] %}{% set text = g.tools[url] %}
+        <h3><a href="{{ tool.url }}">{{ tool.name }}</a></h3>
+        <p class="book-text-note">{{ tool.type }} · {{ tool.time }}. {{ tool.summary }}</p>
+        <p><em>{{ text.when | guideText(lang) }}</em></p>
+        <p><strong>{{ g.labels.how }}</strong></p>
+        <ol>{% for step in text.how %}<li>{{ step | guideText(lang) }}</li>{% endfor %}</ol>
+        <p><strong>{{ g.labels.get }}:</strong> {{ text.get | guideText(lang) }}</p>
+        <p><strong>{{ g.labels.data }}:</strong> {{ text.data | guideText(lang) }}</p>
+        {%- elif g.sections[id] and g.sections[id].body %}
+        {%- set s = g.sections[id] %}
+        <p class="book-text-kicker">{{ s.kicker }}</p>
+        <h2>{{ s.title }}</h2>
+        {%- for block in s.body %}
+        {%- if block is string %}<p>{{ block | guideText(lang) }}</p>
+        {%- elif block.note %}<p class="book-text-note">{{ block.note | guideText(lang) }}</p>
+        {%- elif block.list %}<ul>{% for item in block.list %}<li>{{ item | guideText(lang) }}</li>{% endfor %}</ul>
+        {%- elif block.steps %}<ol>{% for item in block.steps %}<li>{{ item | guideText(lang) }}</li>{% endfor %}</ol>
+        {%- elif block.cards %}<ul>{% for card in block.cards %}<li><strong>{{ card.title }}.</strong> {{ card.text }}</li>{% endfor %}</ul>
+        {%- elif block.routes %}<ul>{% for route in block.routes %}{% set f = F[route.family] %}<li>{{ route.text }} <strong>{{ f.name }}</strong>, {{ f.role | t(lang) }}.</li>{% endfor %}</ul>
+        {%- elif block.planets %}<ul>{% for item in block.planets %}<li><strong>{{ F[item.family].name }}:</strong> {{ item.text }}</li>{% endfor %}</ul>
+        {%- endif %}
+        {%- endfor %}
+        {%- endif %}
+        {%- endfor %}
+        <p class="book-text-quote">{{ g.sections.back.motto }}</p>
+      </div>
+    </details>
+  </section>
+<script src="{{ '/js/book.js' | assetUrl }}" defer></script>
