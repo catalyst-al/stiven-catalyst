@@ -13,9 +13,9 @@ const names = {
 };
 
 const labels = {
-  en: { issue: "Issue", contents: "In this issue", trend: "Trend of the month", floor: "From the floor", tool: "Tool of the month", essays: "Essays of the month", question: "A question for you", sources: "Sources", open: "Open it", formula: "The formula", page: "Page", read: "Read" },
-  sq: { issue: "Numri", contents: "Në këtë numër", trend: "Trendi i muajit", floor: "Si e shoh nga terreni", tool: "Mjeti i muajit", essays: "Esetë e muajit", question: "Pyetja për ju", sources: "Burimet", open: "Hapeni", formula: "Formula", page: "Faqe", read: "Lexojeni" },
-  de: { issue: "Ausgabe", contents: "In dieser Ausgabe", trend: "Trend des Monats", floor: "Aus der Praxis", tool: "Tool des Monats", essays: "Essays des Monats", question: "Eine Frage an Sie", sources: "Quellen", open: "Öffnen", formula: "Die Formel", page: "Seite", read: "Lesen" },
+  en: { issue: "Issue", contents: "In this issue", trend: "Trend of the month", floor: "From the floor", tool: "Tool of the month", essays: "Essays of the month", question: "A question for you", sources: "Sources", open: "Open it", formula: "The formula", page: "Page", read: "Further reading" },
+  sq: { issue: "Numri", contents: "Në këtë numër", trend: "Trendi i muajit", floor: "Si e shoh nga terreni", tool: "Mjeti i muajit", essays: "Esetë e muajit", question: "Pyetja për ju", sources: "Burimet", open: "Hapeni", formula: "Formula", page: "Faqe", read: "Për të lexuar" },
+  de: { issue: "Ausgabe", contents: "In dieser Ausgabe", trend: "Trend des Monats", floor: "Aus der Praxis", tool: "Tool des Monats", essays: "Essays des Monats", question: "Eine Frage an Sie", sources: "Quellen", open: "Öffnen", formula: "Die Formel", page: "Seite", read: "Zum Weiterlesen" },
 };
 
 const sources = [
@@ -32,6 +32,7 @@ const issue1 = {
   month: "2026-10",
   essays: { from: "2026-10-01", to: "2026-10-31" },
   tool: "/tools/kpi-diagnostic/",
+  alertFirst: true,
   sources,
   en: {
     date: "October 2026",
@@ -239,7 +240,216 @@ const issue1 = {
   },
 };
 
-const issues = [issue1];
+
+const sources2 = [
+  { url: "https://bpex-ev.de/kep-branche/zahlen-und-fakten.html", en: "BPEX (the German parcel and express association, formerly BIEK), facts and figures: shipments in Germany in 2025.", sq: "BPEX (shoqata gjermane e pakove dhe ekspresit, ish-BIEK), fakte dhe shifra: dërgesat në Gjermani në 2025.", de: "BPEX (Bundesverband Paket und Expresslogistik, ehemals BIEK), Zahlen und Fakten: Sendungen in Deutschland 2025." },
+  { url: "https://www.bpex-ev.de/presse/meldung/ausblick-weihnachtsgeschaeft-2025.html", en: "BPEX, “Ausblick Weihnachtsgeschäft 2025”, November 2025: shipments in November and December, peak days, extra staff and vehicles.", sq: "BPEX, “Ausblick Weihnachtsgeschäft 2025”, nëntor 2025: dërgesat e nëntorit dhe dhjetorit, ditët e pikut, punonjësit dhe automjetet shtesë.", de: "BPEX, „Ausblick Weihnachtsgeschäft 2025“, November 2025: Sendungen im November und Dezember, Spitzentage, zusätzliche Beschäftigte und Fahrzeuge." },
+  { url: "https://statistik.arbeitsagentur.de/DE/Statischer-Content/Statistiken/Themen-im-Fokus/Fachkraeftebedarf/Fachkraefteengpassanalyse/Fachkraefteengpassanalyse.html", en: "Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025: occupations with a shortage of skilled workers.", sq: "Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025: profesionet me mungesë fuqie punëtore të kualifikuar.", de: "Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025: Berufe mit Fachkräfteengpass." },
+  { url: "https://www.gallup.com/workplace/235121/why-onboarding-experience-key-retention.aspx", en: "Gallup, “Why the Onboarding Experience Is Key for Retention”, 2018, research first reported in State of the American Workplace (2017).", sq: "Gallup, “Why the Onboarding Experience Is Key for Retention”, 2018; kërkim i raportuar fillimisht te State of the American Workplace (2017).", de: "Gallup, „Why the Onboarding Experience Is Key for Retention“, 2018; Forschung, zuerst veröffentlicht in State of the American Workplace (2017)." },
+];
+
+const issue2 = {
+  number: 2,
+  slug: "nga-terreni-02",
+  month: "2026-11",
+  tool: "/tools/shift-handover/",
+  // Three essays from the series instead of the month's essays: no new essay was published in November.
+  reading: ["why-the-handover-is-underrated", "a-good-sop-is-not-a-document", "what-last-mile-taught-me"],
+  floorSplit: [[0, 2], [2, 3]],
+  sources: sources2,
+  en: {
+    date: "November 2026",
+    theme: "When the load rises",
+    themeSub: "Pressure does not always create the problems. It makes them visible",
+    coverStat: { n: "750 m", text: "parcel and express shipments were expected in Germany in November and December 2025 alone." },
+    contents: [
+      ["trend", "Peak season"],
+      ["floor", "Stiven Janaqi on days when demand runs above forecast"],
+      ["tool", "The Shift Handover"],
+      ["read", "Three essays from the series “Ten years close to the work”"],
+      ["question", "Which standard breaks first?"],
+    ],
+    trend: {
+      title: "Peak season",
+      lead: "November opens the busiest season in logistics. For many teams it means more volume, less time and more new people, all at once.",
+      stats: [
+        { n: "4.37 bn", t: "parcel and express shipments in Germany in 2025" },
+        { n: "~750 m", t: "expected in November and December 2025" },
+        { n: "21 m", t: "shipments on the busiest days" },
+        { n: "20,000", t: "extra workers for the season" },
+      ],
+      parts: [
+        { h: "Volume keeps growing, but more slowly.", p: "In 2025 about 4.37 billion courier, express and parcel shipments were moved in Germany, about 2% more than a year earlier. Growth continues, but more slowly than expected." },
+        { h: "The last two months of the year are a world of their own.", p: "For November and December 2025, the industry association BPEX expected about 750 million shipments, 1 to 2% more than a year earlier. At the height of the season the networks move on average about 15 million shipments a day, and up to 21 million on the busiest days." },
+        { h: "Extra capacity is mostly new people.", p: "To handle the season, companies in the industry were adding up to 20,000 workers and 17,000 vehicles." },
+        { h: "And people are hard to find.", p: "According to the Federal Employment Agency's analysis for 2025, Germany had a shortage of skilled workers in 157 occupations, and professional drivers are among the occupations where demand remains high." },
+        { h: "Onboarding is the weak point.", p: "In Gallup research first reported in 2017 and 2018, only 12% of employees strongly agreed that their organisation does a great job of onboarding new employees. It is not a measurement from this year, but the question returns every time a team grows with new people under pressure." },
+      ],
+      meaning: { h: "What it means", p: "At the peak, an operation has no time to learn. What is not clear before the volume rises shows up during it: as a mistake, as a delay, or as a problem for the next shift." },
+    },
+    floor: {
+      intro: "Stiven Janaqi has been a Team Leader and an Area Manager in last-mile logistics and works today as a Night Auditor in hospitality.",
+      qa: [
+        { q: "What happens to an operation when the load rises?", a: [
+          "The peak does not always create the problems. Often it only makes them visible.",
+          "When volume rises, an unclear SOP becomes a mistake. Incomplete training becomes a delay or a quality problem. Weak communication becomes the next shift's problem. Capacity that looked enough on a normal day starts to show its limits.",
+        ] },
+        { q: "What have you seen on days when demand ran above forecast?", a: [
+          "I have had days when demand ran above forecast. Drivers had to be brought in at short notice, and there were drivers in ramp-up who were not yet fully aligned with the SOPs.",
+          "On such a day the damage rate went above target, with several concrete cases of damage during the operation. For me that is the clearest proof that operational pressure shows up directly in quality. New people under pressure expose the weakness of the standard straight away.",
+        ] },
+        { q: "What would you do differently today?", a: [
+          "Today I would invest more before the load than during it. Once the pressure has started, the time to learn the process becomes much more expensive.",
+          "Capacity is not only a number of people. It is the number of people who can carry out the process to standard.",
+        ] },
+      ],
+      closing: "The peak does not always create the problems. Often it only makes them visible.",
+    },
+    tool: {
+      text: "When volume rises, personal memory becomes less reliable. The handover becomes the memory of the operation. The Shift Handover on Stiven Catalyst builds one in a few minutes: the numbers, open issues with an owner and a time, heads-ups and safety. “Fill in from the logs” takes the numbers from the damage, incomplete and delay logs, and everything stays in your browser.",
+      formulaTitle: "Five fields under pressure",
+      formula: ["What changed", "What remains open", "Who owns it", "By when", "What the next shift must know"],
+      quote: "When volume rises, personal memory becomes less reliable. The handover becomes the memory of the operation.",
+    },
+    reading: {
+      intro: "From the series “Ten years close to the work”:",
+      notes: ["The handover as a transfer of responsibility.", "The standard that holds under pressure.", "The live operation and its indicators."],
+    },
+    question: "If your volume rose by a third tomorrow, which standard would break first?",
+  },
+  sq: {
+    date: "Nëntor 2026",
+    theme: "Kur ngarkesa rritet",
+    themeSub: "Presioni nuk i krijon gjithmonë problemet. I bën të dukshme",
+    coverStat: { n: "750 mln", text: "dërgesa korrier dhe pako priteshin në Gjermani vetëm në nëntor dhe dhjetor 2025." },
+    contents: [
+      ["trend", "Sezoni i pikut"],
+      ["floor", "Stiven Janaqi për ditët me kërkesë mbi parashikim"],
+      ["tool", "Dorëzimi i turnit"],
+      ["read", "Tri ese nga seria “Dhjetë vite pranë punës”"],
+      ["question", "Cili standard prishet i pari?"],
+    ],
+    trend: {
+      title: "Sezoni i pikut",
+      lead: "Nëntori hap sezonin më të ngarkuar në logjistikë. Për shumë ekipe, kjo do të thotë më shumë vëllim, më pak kohë dhe më shumë njerëz të rinj në të njëjtën kohë.",
+      stats: [
+        { n: "4,37 mld", t: "dërgesa korrier dhe pako në Gjermani në 2025" },
+        { n: "~750 mln", t: "të pritura në nëntor dhe dhjetor 2025" },
+        { n: "21 mln", t: "dërgesa në ditët më të ngarkuara" },
+        { n: "20.000", t: "punonjës shtesë për sezonin" },
+      ],
+      parts: [
+        { h: "Vëllimi rritet, por më ngadalë.", p: "Në vitin 2025, në Gjermani u transportuan rreth 4,37 miliardë dërgesa korrier, ekspres dhe pako, rreth 2% më shumë se një vit më parë. Rritja vazhdon, por është më e ngadaltë nga sa pritej." },
+        { h: "Dy muajt e fundit të vitit janë një botë më vete.", p: "Për nëntorin dhe dhjetorin e 2025, shoqata e branshit BPEX priste rreth 750 milionë dërgesa, 1 deri në 2% më shumë se një vit më parë. Në pikun e sezonit, rrjetet lëvizin mesatarisht rreth 15 milionë dërgesa në ditë, dhe deri në 21 milionë në ditët më të ngarkuara." },
+        { h: "Kapaciteti shtesë është kryesisht njerëz të rinj.", p: "Për të përballuar sezonin, kompanitë e branshit shtonin deri në 20.000 punonjës dhe 17.000 automjete shtesë." },
+        { h: "Dhe njerëzit nuk gjenden lehtë.", p: "Sipas analizës së Agjencisë Federale të Punës për 2025, Gjermania kishte mungesë fuqie punëtore të kualifikuar në 157 profesione, dhe shoferët profesionistë janë ndër profesionet ku kërkesa mbetet e lartë." },
+        { h: "Integrimi i të rinjve është pika e dobët.", p: "Në kërkimin e Gallup të raportuar fillimisht në 2017 dhe 2018, vetëm 12% e punonjësve pajtoheshin fort se organizata e tyre e bën shumë mirë integrimin e të rinjve. Nuk është matje e këtij viti, por pyetja kthehet sa herë që një ekip shtohet me njerëz të rinj nën presion." },
+      ],
+      meaning: { h: "Çfarë do të thotë kjo", p: "Në pik, një operacion nuk ka kohë të mësojë. Ajo që nuk është e qartë para se të rritet vëllimi, shfaqet gjatë tij: si gabim, si vonesë ose si problem për turnin tjetër." },
+    },
+    floor: {
+      intro: "Stiven Janaqi ka qenë Team Leader dhe Area Manager në logjistikën e miljes së fundit, dhe sot punon si Night Auditor në hoteleri.",
+      qa: [
+        { q: "Çfarë ndodh me një operacion kur ngarkesa rritet?", a: [
+          "Piku nuk krijon gjithmonë problemet. Shpesh vetëm i bën të dukshme.",
+          "Kur volumi rritet, SOP-ja e paqartë bëhet gabim. Trajnimi i paplotë bëhet vonesë ose problem cilësie. Komunikimi i dobët bëhet problem i turnit tjetër. Kapaciteti që dukej i mjaftueshëm në një ditë normale fillon të tregojë kufijtë e tij.",
+        ] },
+        { q: "Çfarë ke parë në ditët kur kërkesa doli mbi parashikim?", a: [
+          "Kam pasur ditë kur kërkesa doli mbi forecast. U deshën shoferë me njoftim të shkurtër, dhe kishte shoferë në fazën e ramp-up që nuk ishin ende plotësisht të përafruar me SOP-të.",
+          "Në një ditë të tillë, damage rate doli mbi target, me disa raste konkrete dëmtimesh gjatë operacionit. Për mua kjo është prova më e qartë se presioni operacional shfaqet direkt te cilësia. Njerëzit e rinj nën presion e ekspozojnë menjëherë dobësinë e standardizimit.",
+        ] },
+        { q: "Çfarë do të bëje ndryshe sot?", a: [
+          "Sot do të investoja më shumë përpara ngarkesës sesa gjatë saj. Kur presioni ka filluar, koha për të mësuar procesin bëhet shumë më e shtrenjtë.",
+          "Kapaciteti nuk është vetëm numër njerëzish. Është numër njerëzish që mund ta ekzekutojnë procesin në standard.",
+        ] },
+      ],
+      closing: "Piku nuk krijon gjithmonë problemet. Shpesh vetëm i bën të dukshme.",
+    },
+    tool: {
+      text: "Kur volumi rritet, kujtesa personale bëhet më pak e besueshme. Handover-i bëhet memoria e operacionit. Dorëzimi i turnit në Stiven Catalyst e ndërton këtë në pak minuta: shifrat, çështjet e hapura me përgjegjës dhe orë, paralajmërimet dhe sigurinë. “Plotëso nga regjistrat” i merr shifrat nga regjistrat e dëmeve, të plotësisë dhe të vonesave, dhe gjithçka mbetet në shfletuesin tuaj.",
+      formulaTitle: "Pesë fusha nën presion",
+      formula: ["Çfarë ndryshoi", "Çfarë mbetet e hapur", "Kush e mban", "Deri kur", "Çfarë duhet të dijë turni tjetër"],
+      quote: "Kur volumi rritet, kujtesa personale bëhet më pak e besueshme. Handover-i bëhet memoria e operacionit.",
+    },
+    reading: {
+      intro: "Nga seria “Dhjetë vite pranë punës”:",
+      notes: ["Dorëzimi si transferim përgjegjësie.", "Standardi që funksionon nën presion.", "Operacioni live dhe treguesit e tij."],
+    },
+    question: "Nëse nesër vëllimi juaj do të rritej me një të tretën, cili standard do të prishej i pari?",
+  },
+  de: {
+    date: "November 2026",
+    theme: "Wenn die Last steigt",
+    themeSub: "Druck schafft die Probleme nicht immer. Er macht sie sichtbar",
+    coverStat: { n: "750 Mio.", text: "KEP-Sendungen wurden allein im November und Dezember 2025 in Deutschland erwartet." },
+    contents: [
+      ["trend", "Die Hochsaison"],
+      ["floor", "Stiven Janaqi über Tage mit Nachfrage über Prognose"],
+      ["tool", "Die Schichtübergabe"],
+      ["read", "Drei Essays aus der Reihe „Zehn Jahre nah an der Arbeit“"],
+      ["question", "Welcher Standard bricht zuerst?"],
+    ],
+    trend: {
+      title: "Die Hochsaison",
+      lead: "Der November eröffnet die arbeitsreichste Zeit in der Logistik. Für viele Teams heißt das: mehr Menge, weniger Zeit und mehr neue Leute, alles gleichzeitig.",
+      stats: [
+        { n: "4,37 Mrd.", t: "KEP-Sendungen in Deutschland 2025" },
+        { n: "~750 Mio.", t: "erwartet im November und Dezember 2025" },
+        { n: "21 Mio.", t: "Sendungen an Spitzentagen" },
+        { n: "20.000", t: "zusätzliche Beschäftigte für die Saison" },
+      ],
+      parts: [
+        { h: "Die Menge wächst, aber langsamer.", p: "2025 wurden in Deutschland rund 4,37 Milliarden Kurier-, Express- und Paketsendungen befördert, etwa 2 % mehr als im Vorjahr. Das Wachstum geht weiter, aber langsamer als erwartet." },
+        { h: "Die letzten zwei Monate des Jahres sind eine eigene Welt.", p: "Für November und Dezember 2025 erwartete der Branchenverband BPEX rund 750 Millionen Sendungen, 1 bis 2 % mehr als im Vorjahr. In der Hochphase bewegen die Netze im Schnitt rund 15 Millionen Sendungen pro Tag, an Spitzentagen bis zu 21 Millionen." },
+        { h: "Zusätzliche Kapazität sind vor allem neue Menschen.", p: "Für die Saison setzten die Unternehmen der Branche bis zu 20.000 zusätzliche Beschäftigte und 17.000 zusätzliche Fahrzeuge ein." },
+        { h: "Und Menschen sind schwer zu finden.", p: "Laut der Fachkräfteengpassanalyse 2025 der Bundesagentur für Arbeit gab es in Deutschland in 157 Berufen einen Fachkräfteengpass, und Berufskraftfahrer gehören zu den Berufen, in denen die Nachfrage hoch bleibt." },
+        { h: "Die Einarbeitung ist die Schwachstelle.", p: "In Gallup-Forschung, die zuerst 2017 und 2018 veröffentlicht wurde, stimmten nur 12 % der Beschäftigten voll zu, dass ihre Organisation neue Mitarbeitende sehr gut einarbeitet. Das ist keine Messung aus diesem Jahr, aber die Frage kehrt jedes Mal zurück, wenn ein Team unter Druck mit neuen Leuten wächst." },
+      ],
+      meaning: { h: "Was das bedeutet", p: "In der Spitze hat ein Betrieb keine Zeit zu lernen. Was vor dem Anstieg der Menge nicht klar ist, zeigt sich währenddessen: als Fehler, als Verspätung oder als Problem für die nächste Schicht." },
+    },
+    floor: {
+      intro: "Stiven Janaqi war Team Leader und Area Manager in der Last-Mile-Logistik und arbeitet heute als Night Auditor in der Hotellerie.",
+      qa: [
+        { q: "Was passiert mit einem Betrieb, wenn die Last steigt?", a: [
+          "Die Spitze schafft die Probleme nicht immer. Oft macht sie sie nur sichtbar.",
+          "Wenn die Menge steigt, wird eine unklare SOP zum Fehler. Unvollständiges Training wird zur Verspätung oder zum Qualitätsproblem. Schwache Kommunikation wird zum Problem der nächsten Schicht. Kapazität, die an einem normalen Tag ausreichend aussah, zeigt ihre Grenzen.",
+        ] },
+        { q: "Was haben Sie an Tagen gesehen, an denen die Nachfrage über der Prognose lag?", a: [
+          "Ich hatte Tage, an denen die Nachfrage über dem Forecast lag. Fahrer mussten kurzfristig geholt werden, und es gab Fahrer in der Ramp-up-Phase, die noch nicht vollständig mit den SOPs vertraut waren.",
+          "An einem solchen Tag lag die Schadensquote über dem Ziel, mit mehreren konkreten Schadensfällen während des Betriebs. Für mich ist das der klarste Beweis, dass sich operativer Druck direkt in der Qualität zeigt. Neue Leute unter Druck legen die Schwäche der Standardisierung sofort offen.",
+        ] },
+        { q: "Was würden Sie heute anders machen?", a: [
+          "Heute würde ich mehr vor der Last investieren als während der Last. Wenn der Druck einmal begonnen hat, wird die Zeit, den Prozess zu lernen, viel teurer.",
+          "Kapazität ist nicht nur eine Zahl von Menschen. Es ist die Zahl der Menschen, die den Prozess im Standard ausführen können.",
+        ] },
+      ],
+      closing: "Die Spitze schafft die Probleme nicht immer. Oft macht sie sie nur sichtbar.",
+    },
+    tool: {
+      text: "Wenn die Menge steigt, wird das persönliche Gedächtnis weniger verlässlich. Die Übergabe wird zum Gedächtnis des Betriebs. Die Schichtübergabe von Stiven Catalyst baut sie in wenigen Minuten: die Zahlen, offene Punkte mit Verantwortlichem und Uhrzeit, Hinweise und Sicherheit. „Aus den Protokollen übernehmen“ holt die Zahlen aus den Protokollen für Schäden, Vollständigkeit und Verspätungen, und alles bleibt in Ihrem Browser.",
+      formulaTitle: "Fünf Felder unter Druck",
+      formula: ["Was hat sich geändert", "Was ist noch offen", "Wem gehört es", "Bis wann", "Was die nächste Schicht wissen muss"],
+      quote: "Wenn die Menge steigt, wird das persönliche Gedächtnis weniger verlässlich. Die Übergabe wird zum Gedächtnis des Betriebs.",
+    },
+    reading: {
+      intro: "Aus der Reihe „Zehn Jahre nah an der Arbeit“:",
+      notes: ["Die Übergabe als Weitergabe von Verantwortung.", "Der Standard, der unter Druck hält.", "Der Live-Betrieb und seine Kennzahlen."],
+    },
+    question: "Wenn Ihre Menge morgen um ein Drittel stiege, welcher Standard würde zuerst brechen?",
+  },
+};
+
+// The page layout of an issue: cover, contents, two pages of trend, the pages of "From the floor" (floorSplit,
+// the questions on each page; the closing words go on the last), the tool, the essays, the question, the back.
+const withLayout = (issue) => {
+  const floorSplit = issue.floorSplit || [[0, 2], [2, 4], [4, 99]];
+  const floor = 5;
+  const tool = floor + floorSplit.length;
+  const pageOf = { trend: 3, floor, tool, essays: tool + 1, read: tool + 1, question: tool + 2, back: tool + 3 };
+  return { ...issue, floorSplit, pageOf };
+};
+
+const issues = [issue1, issue2].map(withLayout);
 const langs = ["en", "sq", "de"];
 
 export default {

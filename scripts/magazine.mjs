@@ -21,6 +21,15 @@ const only = process.argv[2] ? Number(process.argv[2]) : null;
 const issues = magazine.issues.filter((issue) => !only || issue.number === only);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "magazine-"));
 
+// A new issue has no page images yet, but its reader page is part of the same Eleventy run: give it an empty entry,
+// which step 3 replaces.
+const pagesFile = path.join(ROOT, "src", "_data", "magazinePages.json");
+const known = fs.existsSync(pagesFile) ? JSON.parse(fs.readFileSync(pagesFile, "utf8")) : {};
+for (const issue of issues) {
+  known[issue.slug] ??= Object.fromEntries(magazine.langs.map((lang) => [lang, { pageCount: 0, pages: [{ number: 1, image: "", width: 0, height: 0 }] }]));
+}
+fs.writeFileSync(pagesFile, JSON.stringify(known, null, 1) + "\n");
+
 execFileSync("npx", ["@11ty/eleventy", `--output=${tmp}`, "--quiet"], { cwd: ROOT, env: { ...process.env, GUIDE_PRINT: "1" }, stdio: "inherit" });
 
 const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".woff2": "font/woff2" };

@@ -9,7 +9,7 @@
 {%- set reader = magazinePages[issue.slug][lang] -%}
 {%- set cover = reader.pages[0] -%}
 {%- set pdf = "/media/magazine/" + issue.slug + "/" + issue.slug + "-" + lang + ".pdf" -%}
-{%- set pageOf = { trend: 3, floor: 5, tool: 8, essays: 9, question: 10 } -%}
+{%- set pageOf = issue.pageOf -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
   back: "Back cover" | t(lang),
@@ -108,9 +108,19 @@
         <p class="book-text-kicker">{{ L.tool }}</p>
         <h2><a href="{{ tool.url }}">{{ tool.name }}</a></h2>
         <p>{{ m.tool.text }}</p>
-        <p><strong>{{ L.formula }}:</strong> {{ m.tool.formula | join(" → ") }}</p>
+        <p><strong>{{ m.tool.formulaTitle or L.formula }}:</strong> {{ m.tool.formula | join(" → ") }}</p>
         <p class="book-text-quote">{{ m.tool.quote }}</p>
 
+        {%- if issue.reading %}
+        <p class="book-text-kicker">{{ L.read }}</p>
+        <h2>{{ m.contents[3][1] }}</h2>
+        <p>{{ m.reading.intro }}</p>
+        <ol>
+          {%- for slug in issue.reading %}{% set note = m.reading.notes[loop.index0] %}{% for essay in collections["insights" + (lang | langSuffix)] %}{% if essay.fileSlug.endsWith(slug) %}
+          <li><a href="{{ essay.url }}">{{ essay.data.title }}</a><br>{{ note }}</li>
+          {%- endif %}{% endfor %}{% endfor %}
+        </ol>
+        {%- else %}
         <p class="book-text-kicker">{{ L.essays }}</p>
         <h2>{{ m.contents[3][1] }}</h2>
         <p>{{ m.essays.intro }}</p>
@@ -120,6 +130,7 @@
           {%- endif %}{% endfor %}
         </ol>
         <p>{{ m.essays.pick }}</p>
+        {%- endif %}
 
         <p class="book-text-kicker">{{ L.question }}</p>
         <p class="book-text-quote">{{ m.question }}</p>
