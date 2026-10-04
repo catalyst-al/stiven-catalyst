@@ -9,7 +9,7 @@ image: /media/stiven-microphone.jpg
 image_alt: Stiven Janaqi wearing headphones, speaking into a microphone in a podcast studio
 ---
 
-In San Francisco, in those glass towers with filtered air where thirty-year-olds in plain cotton T-shirts play with language models of billions of parameters, an existential panic reigns that is almost religious. They fear a cold, perfect and merciless intelligence that is coming to wipe human reason off the face of the earth. They shed tears for the end of order and predictability.
+In San Francisco, in those glass towers with filtered air where thirty-year-olds in plain cotton T-shirts play with language models with billions of parameters, an existential panic reigns that is almost religious. They fear a cold, perfect and merciless intelligence that is coming to wipe human reason off the face of the earth. They shed tears for the end of order and predictability.
 
 Late one evening, in a dimly lit café somewhere on the outskirts of Durrës, one of those places where cigarette smoke mixes with the damp smell of the sea and the noise of an old engine, I saw a young man with a scratched laptop nursing the same cold espresso for hours. He was not using artificial intelligence to discover new molecules or to write philosophical treatises. No, my friend. He was training that colossal neural network with the patience of a master watchmaker for a far more earthly purpose: how to game the algorithms of a foreign corporation to secure a few hundred euros by the end of the week.
 

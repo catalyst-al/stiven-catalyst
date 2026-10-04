@@ -5,8 +5,8 @@ category: Operations
 status: published
 featured: true
 summary: In Excel, an incomplete order is a number. On the ramp it is a physical object in the wrong place.
-teaser: The dashboard said "incomplete delivery". The floor made you ask whether the mistake happened at the customer's door or already in the warehouse.
-deck: 'The third essay in the series "Ten years close to the work": why you have to go where the process happens before you demand a result from a table.'
+teaser: The dashboard said “incomplete delivery”. The floor made you ask whether the mistake happened at the customer's door or already in the warehouse.
+deck: 'The third essay in the series “Ten years close to the work”: why you have to go where the process happens before you demand a result from a table.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/damage-control/

@@ -43,7 +43,7 @@
     "name": "Sigma & Regel­karte",
     "type": "Six Sigma",
     "time": "5 min",
-    "summary": "Fehler in ein Sigma-Niveau umrechnen, pünktlich, unbeschädigt und vollständig zur perfekten Lieferung kombinieren, und sehen, ob ein schlechter Tag ein Signal ist oder Rauschen.",
+    "summary": "Fehler in ein Sigma-Niveau umrechnen, pünktlich, unbeschädigt und vollständig zur perfekten Lieferung kombinieren und sehen, ob ein schlechter Tag ein Signal ist oder Rauschen.",
     "url": "/de/tools/sigma-control-chart/",
     "cta": "Rechner öffnen"
   },
@@ -59,7 +59,7 @@
     "name": "Last-Mile CX Control Tower",
     "type": "Letzte Meile",
     "time": "Wöchentlich",
-    "summary": "Perfect Delivery pro Auftrag, Pünktlichkeit, unvollständig, Schaden, Kühlkette, Beladung und Abfahrten, Scorecards für Partner und Fahrer, Routenrisiko, Pareto der Ursachen, Maßnahmen und Wochenreview. Liest Ihre Excel-Arbeitsmappe.",
+    "summary": "Perfect Delivery pro Auftrag, Pünktlichkeit, unvollständig, Schaden, Kühlkette, Beladung und Abfahrten, Scorecards für Partner und Fahrer, Tourenrisiko, Pareto der Ursachen, Maßnahmen und Wochenreview. Liest Ihre Excel-Arbeitsmappe.",
     "url": "/de/tools/cx-control-tower/",
     "cta": "Control Tower öffnen"
   },
@@ -82,7 +82,7 @@
   {
     "name": "Shift Pulse",
     "type": "Übersicht",
-    "time": "1 Min.",
+    "time": "1 min",
     "summary": "Schäden, unvollständige Aufträge, verspätete Touren und offene Übergabepunkte in einem Bild, nach Tag oder Woche. Verlaufsdiagramme und Quoten, Hinweise bei Auffälligem und eine Zusammenfassung zum Kopieren oder Drucken.",
     "url": "/de/tools/shift-pulse/",
     "cta": "Shift Pulse öffnen"

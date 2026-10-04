@@ -366,7 +366,7 @@
     const target = targetText(result);
     if (target) stats.append(stat(tx("Target"), target.value, target.note));
 
-    const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("Routes in the period is lower than the routes in the log, so the log count is used."))] : [];
+    const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("“Routes in the period” is lower than the number of routes in the log, so the log count is used."))] : [];
     const grid = [];
     // Trend: the share of routes that were late each day (week), or the count of late routes when only some routes are logged.
     // The on-time target, when there is one, becomes a ceiling for the late share.

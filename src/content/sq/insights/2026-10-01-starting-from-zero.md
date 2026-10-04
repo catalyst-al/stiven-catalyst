@@ -6,12 +6,12 @@ status: published
 featured: true
 summary: Titulli mund të humbasë brenda një dite. Ajo që ke mësuar nuk humbet, por në vendin e ri duhet ta provosh përsëri.
 teaser: Në Shqipëri drejtoja njerëz, dyqane dhe procese. Në Gjermani, puna ime e parë ishte të shpërndaja pako.
-deck: 'Eseja e parë e serisë "Dhjetë vite pranë punës": çfarë mbetet nga një menaxher kur titulli nuk e kalon kufirin bashkë me të.'
+deck: 'Eseja e parë e serisë “Dhjetë vite pranë punës”: çfarë mbetet nga një menaxher kur titulli nuk e kalon kufirin bashkë me të.'
 ---
 
 Në Shqipëri, roli im i fundit ishte Cluster Manager. Drejtoja operativisht një flagship store në Tiranë dhe koordinoja pjesë të rrjetit të dyqaneve. Në Gjermani, puna ime e parë ishte të shpërndaja pako.
 
-Me këtë kontrast nis seria "Dhjetë vite pranë punës". Nuk e nis për ta bërë dramë, as për të treguar një histori emigrimi. E nis sepse pa të nuk kuptohet asgjë nga ç'do të shkruaj më pas: si mendoj kur kam një problem operacional përpara, si drejtoj njerëzit dhe pse i shoh proceset nga të dyja anët.
+Me këtë kontrast nis seria “Dhjetë vite pranë punës”. Nuk e nis për ta bërë dramë, as për të treguar një histori emigrimi. E nis sepse pa të nuk kuptohet asgjë nga ç'do të shkruaj më pas: si mendoj kur kam një problem operacional përpara, si drejtoj njerëzit dhe pse i shoh proceset nga të dyja anët.
 
 Flagship store-in nuk e mora gati. Mora pjesë në ndërtimin e tij nga zero deri në hapje, duke koordinuar arkitektë, marangozë, bojaxhinj dhe ekipet e zbatimit. Pastaj erdhën shitjet, standardi i shërbimit, eksperienca e klientit, organizimi operacional dhe ekipi: tetë shitës, katër arkëtare dhe një asistente. Ndërtuam faqen e parë të shitjeve online të kompanisë dhe ekipin e saj të parë të e-commerce. Në të njëjtën periudhë rrjeti u ristrukturua. Dy dyqane me performancë të dobët u mbyllën dhe aktiviteti u përqendrua më shumë te flagship-i.
 
@@ -27,7 +27,7 @@ Në Shqipëri drejtoja njerëz, dyqane dhe procese. Në Gjermani duhej të merrj
 
 Disa gjëra më ndihmuan menjëherë, sepse nuk varen nga titulli: disiplina operative, marrëdhënia me klientin, aftësia për ta kuptuar një proces dhe për të parë ku ka waste, puna nën presion dhe gatishmëria për të marrë përgjegjësi. Kisha kaluar nga retail-i te shitja me shumicë, nga drejtimi i dyqanit te magazina, te shitjet B2B, te e-commerce dhe te drejtimi i ekipeve. Kjo më ndihmoi t'i kuptoja shpejt edhe industritë e reja.
 
-Një gjë duhej ta lija pas: idenë se eksperienca e mëparshme të garanton automatikisht të njëjtin pozicion në një vend të ri. Nuk mund të thosha "kam qenë manager, prandaj duhet të jem manager". Sistemin duhej ta mësoja nga brenda, nga niveli operacional. Duhej ta provoja përsëri.
+Një gjë duhej ta lija pas: idenë se eksperienca e mëparshme të garanton automatikisht të njëjtin pozicion në një vend të ri. Nuk mund të thosha “kam qenë manager, prandaj duhet të jem manager”. Sistemin duhej ta mësoja nga brenda, nga niveli operacional. Duhej ta provoja përsëri.
 
 Me gjuhën ndodhi e njëjta gjë. Kur erdha, gjermanishtja nuk ishte gjuha ime e punës, dhe më është dashur ta ndërtoj ndërkohë që punoja. Në vitin 2025 dhashë provimin Deutsch-Test für Zuwanderer, niveli B1: 45 nga 45 në dëgjim dhe lexim, 15 nga 20 në shkrim, 97 nga 100 në të folur. Gjuhën nuk e prita të bëhej perfekte që të filloja të ecja profesionalisht. Punoja, komunikoja dhe mësoja njëkohësisht.
 

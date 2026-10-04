@@ -7,7 +7,7 @@ featured: true
 summary: Five principles, a working week and the first 90 days. Not the manager who looks most important when the operation is in trouble, but the one who builds an operation that needs rescuing less and less.
 description: "Five principles, a working week and the first 90 days: building an operation that needs rescuing less and less."
 teaser: If a team only works when the manager is in the room, that manager has not yet built a system.
-deck: 'The twelfth and final essay in the series "Ten years close to the work": people, standards, data, ownership and continuous improvement, plus a plan for the first 90 days in a new role.'
+deck: 'The twelfth and final essay in the series “Ten years close to the work”: people, standards, data, ownership and continuous improvement, plus a plan for the first 90 days in a new role.'
 ---
 
 After years in retail, sales, logistics and hospitality, I have understood that industries change much faster than the principles of management.
@@ -46,7 +46,7 @@ It only has fewer visible mistakes.
 
 ## 2. Standards
 
-I have learned not to put much trust in processes that only work because an experienced person "knows how it's done".
+I have learned not to put much trust in processes that only work because an experienced person “knows how it's done”.
 
 If the result depends on the right person being on shift, then the organisation has knowledge, but it does not yet have a standard.
 
@@ -82,7 +82,7 @@ The same goes for leadership without a title. You can take initiative. You can i
 
 For me, ownership is:
 
-**I will not ignore it because "it's not mine".**
+**I will not ignore it because “it's not mine”.**
 
 But also:
 
@@ -140,7 +140,7 @@ Who owns them?
 
 And which problems are no longer incidents, but patterns?
 
-I would also want dedicated time for people: feedback, coaching, and conversations where the question is not only "what went wrong", but also "what is stopping you from doing the job well?".
+I would also want dedicated time for people: feedback, coaching, and conversations where the question is not only “what went wrong”, but also “what is stopping you from doing the job well?”.
 
 Reports tell me where to look. The floor tells me what is happening. A manager has to do both.
 
@@ -148,7 +148,7 @@ Reports tell me where to look. The floor tells me what is happening. A manager h
 
 ### Days 1–30: Understand before you change
 
-In the first month I would not come in with the idea that I am there to "fix" the organisation. I would learn.
+In the first month I would not come in with the idea that I am there to “fix” the organisation. I would learn.
 
 I would get to know the team, the processes, the KPIs, the customer, the dependencies between departments and the way decisions are made. I would spend a lot of time on the floor. I would talk to the people who do the work every day. I would look at the SOPs and compare them with reality.
 
@@ -156,7 +156,7 @@ I would also try to understand what does not show up straight away on the dashbo
 
 Where is time being lost?
 
-Which problems are already considered "normal"?
+Which problems are already considered “normal”?
 
 What has to be done by hand because the process does not work well?
 
@@ -212,7 +212,7 @@ If one day I asked the people who have worked with me how they would describe me
 
 This would be enough for me:
 
-**"He asked a lot of us, but he was there with us, he listened to us, and he tried to leave the process better than he found it."**
+**“He asked a lot of us, but he was there with us, he listened to us, and he tried to leave the process better than he found it.”**
 
 That is the Operations Manager I want to be.
 

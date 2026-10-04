@@ -6,14 +6,14 @@ status: published
 featured: true
 summary: Pressure can be fair. Humiliating people is not a management method. A standard can be very strong without treating a person as a number.
 teaser: You cannot hold people accountable for a rule nobody ever made clear.
-deck: 'The fifth essay in the series "Ten years close to the work": standards, process errors and personal errors, and what changes when you are promoted among the people you worked beside yesterday.'
+deck: 'The fifth essay in the series “Ten years close to the work”: standards, process errors and personal errors, and what changes when you are promoted among the people you worked beside yesterday.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
   - /tools/kpi-diagnostic/
 ---
 
-In last mile it is not enough to tell someone "work better". They have to understand what "better" means.
+In last mile it is not enough to tell someone “work better”. They have to understand what “better” means.
 
 That is why the standards had to be very concrete. Loading had to stay within target. Drivers had to stay in their own area, not crowd around the Shift Leader's desk. After loading, the gate was closed. Chilled and frozen were scanned in their own areas. When a bag was missing, nobody carried on as if everything was normal: the problem was reported. Safety, cleanliness and order on the ramp were part of the standard. Damage, incomplete orders, delays and loading time were measured every day.
 
@@ -23,7 +23,7 @@ But for me something else mattered too, something that is often forgotten. A per
 
 That brings me to the question that perhaps shapes how you lead people more than anything else: when something goes wrong, is it the process's error or the person's?
 
-If a delivery came out incomplete, I did not automatically start from "the driver made a mistake". We looked at the process. Was the bag already missing in the warehouse? Had it been put in the wrong trolley? Did it have the wrong label? Were the bags mixed? Had the scanning been done properly? Had the complete route left the loading area? If the problem had started earlier in the process, it was not fair to turn it automatically into a performance problem of the driver.
+If a delivery came out incomplete, I did not automatically start from “the driver made a mistake”. We looked at the process. Was the bag already missing in the warehouse? Had it been put in the wrong trolley? Did it have the wrong label? Were the bags mixed? Had the scanning been done properly? Had the complete route left the loading area? If the problem had started earlier in the process, it was not fair to turn it automatically into a performance problem of the driver.
 
 On the other hand, if the process was in order, the standard was clear, the tools were there and the person still did not follow the procedure, then individual responsibility began.
 

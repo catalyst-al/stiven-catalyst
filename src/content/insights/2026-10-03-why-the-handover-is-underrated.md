@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: A handover is not just a transfer of information. It is a transfer of responsibility. And this is exactly where many organisations go wrong.
 teaser: A problem that does not make it into the handover does not stop existing. It just becomes the problem of someone who does not yet know it exists.
-deck: 'The ninth essay in the series "Ten years close to the work": why "reported" and "resolved" are not the same thing, what a shift handover should contain, and the two moments that mirror each other.'
+deck: 'The ninth essay in the series “Ten years close to the work”: why “reported” and “resolved” are not the same thing, what a shift handover should contain, and the two moments that mirror each other.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -56,19 +56,19 @@ Without going into concrete content, the handover I use or have structured aroun
 
 In my reports, I do not want problems that need follow-up to appear simply as a story of what happened. It has to be clear that something is still open.
 
-Because "reported" and "resolved" are not the same thing.
+Because “reported” and “resolved” are not the same thing.
 
 ## A document that is used, not just proof
 
 The information has to be clear enough that the other person does not need to interpret what I meant.
 
-A note like "problem with the room" is not a good handover. It has to be clear what kind of problem it is, what state it is in, and whether there is still something to follow up, without adding unnecessary information.
+A note like “problem with the room” is not a good handover. It has to be clear what kind of problem it is, what state it is in, and whether there is still something to follow up, without adding unnecessary information.
 
 I do not have an absolute personal rule that I always do every handover verbally as well, so I will not present that as a fact. But one thing is clear from the way I have built the reporting: the document should not just be proof that the handover happened. It has to be usable by the person who receives it.
 
 ## Two moments that mirror each other
 
-At the end of the shift my focus moves from "what do I need to do?" to "what does the person after me need to know?"
+At the end of the shift my focus moves from “what do I need to do?” to “what does the person after me need to know?”
 
 I check what has been left open, what was resolved during the night, and which issues must not get lost when the shift changes. I care especially that an unclosed problem does not look like a finished one just because my shift is ending.
 

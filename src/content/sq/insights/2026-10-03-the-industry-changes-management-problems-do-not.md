@@ -7,7 +7,7 @@ featured: true
 summary: Kam kaluar nga kontrolli i një kutie në magazinë, te kontrolli i një porosie që lëviz, te kontrolli i një transaksioni që ekziston vetëm në sistem. Parimi mbeti i njëjtë.
 description: "Nga kontrolli i një kutie në magazinë te një porosi që lëviz dhe një transaksion që ekziston vetëm në sistem. Parimi mbeti i njëjtë."
 teaser: Klientit nuk i intereson cili departament bëri gabimin. Në atë moment, personi përballë tij është e gjithë kompania.
-deck: 'Eseja e gjashtë e serisë "Dhjetë vite pranë punës": çfarë mbetet e njëjtë kur kalon nga dyqani te rampa dhe te recepsioni i natës, dhe çfarë duhet mësuar nga e para.'
+deck: 'Eseja e gjashtë e serisë “Dhjetë vite pranë punës”: çfarë mbetet e njëjtë kur kalon nga dyqani te rampa dhe te recepsioni i natës, dhe çfarë duhet mësuar nga e para.'
 ---
 
 Kam punuar në retail dhe në shitje me shumicë në Shqipëri, pastaj në logjistikën e miljes së fundit dhe sot në hoteleri në Gjermani. Nga jashtë duken tri botë të ndryshme. Nga brenda, problemi që kam parë pothuajse kudo është i njëjti: diferenca mes asaj që duhet të ndodhë sipas procesit dhe asaj që ndodh realisht në terren.
@@ -20,7 +20,7 @@ Në hotel, problemi ndryshon përsëri pamje. Mund të jetë një rezervim, një
 
 Industria ndryshon. Objekti që kontrollon ndryshon. Por problemi i menaxhimit mbetet i njëjtë: nëse informacioni, përgjegjësia dhe ekzekutimi nuk takohen në të njëjtën pikë, diku do të dalë një gabim.
 
-Këtë e shoh më qartë kur mendoj se çfarë ishte "inventari" në secilën industri.
+Këtë e shoh më qartë kur mendoj se çfarë ishte “inventari” në secilën industri.
 
 Në retail, inventari ishte inventar në kuptimin klasik: produkti, magazina dhe ajo që kishe realisht në dispozicion për të shitur. Në Shqipëri kam pasur përgjegjësi mbi inventarin, magazinën, shitjen, kostot dhe cash flow-n, dhe në një nga kompanitë një nga detyrat e mia ishte përmirësimi i menaxhimit të inventarit. Inventari nuk ishte thjesht numër produktesh. Ishte kapital i kompanisë, dhe duhej të përputhej me shitjen dhe me nevojën reale.
 
@@ -34,7 +34,7 @@ Edhe klienti ndryshon. Në dyqan është përballë teje. E sheh, e kupton reagi
 
 Ajo që nuk ndryshon është pritshmëria. Klientit nuk i intereson shumë cili departament bëri gabimin. Ai sheh vetëm kompaninë përballë tij. Në dyqan je ti. Te dera është shoferi. Në hotel është recepsionisti. Në atë moment, për klientin, ai person është e gjithë kompania.
 
-Një mësim tjetër e mora nga shitja me shumicë, dhe më ka shërbyer më shumë nga sa e prisja. Kam ndërtuar dhe menaxhuar një rrjet kombëtar me 61 rishitës aktivë, dhe ai kanal lidhej me një rritje të të ardhurave prej rreth 30 deri në 40 për qind. Ajo eksperiencë më mësoi se partneri nuk menaxhohet si punonjës. Një punonjësi mund t'i japësh një procedurë dhe një përgjegjësi direkte. Me një partner duhet të krijosh interes të përbashkët, komunikim dhe vazhdimësi, dhe marrëdhënia duhet të funksionojë ekonomikisht për të dyja palët. Kur ke 61 partnerë, nuk mund të mbështetesh vetëm te marrëdhënia personale me secilin. Duhet një mënyrë pune që përsëritet.
+Një mësim tjetër e mora nga shitja me shumicë, dhe më ka shërbyer më shumë nga sa e prisja. Kam ndërtuar dhe menaxhuar një rrjet kombëtar me 61 rishitës aktivë, dhe ai kanal lidhej me një rritje të të ardhurave prej rreth 30 deri në 40 përqind. Ajo eksperiencë më mësoi se partneri nuk menaxhohet si punonjës. Një punonjësi mund t'i japësh një procedurë dhe një përgjegjësi direkte. Me një partner duhet të krijosh interes të përbashkët, komunikim dhe vazhdimësi, dhe marrëdhënia duhet të funksionojë ekonomikisht për të dyja palët. Kur ke 61 partnerë, nuk mund të mbështetesh vetëm te marrëdhënia personale me secilin. Duhet një mënyrë pune që përsëritet.
 
 Kjo më ndihmoi më vonë, edhe kur njerëzit nuk quheshin më rishitës. Në logjistikë punon me shoferë, operatorë dhe kompani partnere. Në hotel punon me departamente të tjera, furnitorë dhe struktura që nuk i kontrollon drejtpërdrejt. Menaxhimi nuk është gjithmonë të kesh autoritet mbi dikë. Shpesh është të arrish që njerëz mbi të cilët nuk ke autoritet të punojnë në të njëjtin drejtim me ty.
 

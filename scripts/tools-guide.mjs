@@ -63,3 +63,6 @@ server.close();
 fs.rmSync(tmp, { recursive: true, force: true });
 
 execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py"), guide.slug, ...guide.langs], { cwd: ROOT, stdio: "inherit" });
+
+// The pages were replaced: make the small copies of the cover again (scripts/thumbnails.mjs).
+execFileSync("node", [path.join(ROOT, "scripts", "thumbnails.mjs")], { cwd: ROOT, stdio: "inherit" });

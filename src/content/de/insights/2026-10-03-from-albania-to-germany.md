@@ -13,7 +13,7 @@ Früher habe ich öfter gefragt: „Wie lösen wir das?“
 
 Heute lautet meine Frage: „Wie lösen wir das, wem gehört es danach, und was ändern wir, damit es nicht wiederkommt?“
 
-Vielleicht ist das die größte Veränderung, die ich als Führungskraft gemacht habe.
+Vielleicht ist das die größte Veränderung, die ich als Führungskraft vollzogen habe.
 
 ## Wie ich in Albanien geführt habe
 
@@ -63,7 +63,7 @@ Ich habe keine einzelne, klar dokumentierte Entscheidung aus Albanien, die ich s
 
 Aber eines würde ich heute generell anders machen: Ich würde mehr dokumentieren.
 
-Wenn ein Prozess funktionierte, weil ich ihn kannte, würde ich heute versuchen, dass das System ihn kennt. Wenn ein Problem gelöst war, würde ich mich nicht damit zufriedengeben, dass es weg ist. Ich würde verstehen wollen, warum es passiert ist und ob sich im Prozess etwas ändern muss.
+Wenn ein Prozess funktionierte, weil ich ihn kannte, würde ich heute versuchen, dafür zu sorgen, dass das System ihn kennt. Wenn ein Problem gelöst war, würde ich mich nicht damit zufriedengeben, dass es weg ist. Ich würde verstehen wollen, warum es passiert ist und ob sich im Prozess etwas ändern muss.
 
 Und ich würde persönliche Verantwortung früher von organisatorischer Verantwortung trennen. Es ist nicht immer gut, wenn eine Führungskraft zu der Person wird, die alles löst. Denn die Organisation kann anfangen, von ihr abhängig zu werden, statt ihre Arbeitsweise zu verbessern.
 

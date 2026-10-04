@@ -35,7 +35,7 @@
       "name": "Dizajni i procesit",
       "meaning": "Vetë procesi e prodhon gabimin. Njerëz të ndryshëm marrin të njëjtin rezultat, sepse sistemi i çon atje.",
       "moves": [
-        "Ecni procesin nga fillimi në fund dhe matni kohën e çdo hapi.",
+        "Ndiqni procesin nga fillimi në fund dhe matni kohën e çdo hapi.",
         "Bëjeni mënyrën e duhur mënyrën e lehtë: planimetria, mjetet, cilësimet e paracaktuara.",
         "Hiqni hapat që ekzistojnë vetëm për shkak të problemeve të vjetra."
       ],
@@ -53,7 +53,7 @@
     }
   },
   "statements": [
-    { "cause": "clarity", "text": "Nëse pyet njerëz të ndryshëm cili është standardi, merr përgjigje të ndryshme." },
+    { "cause": "clarity", "text": "Nëse pyetni njerëz të ndryshëm cili është standardi, merrni përgjigje të ndryshme." },
     { "cause": "capacity", "text": "Numri përkeqësohet në orët e pikut, në ditët e ngarkuara ose kur ka më pak njerëz në turn." },
     { "cause": "design", "text": "I njëjti gabim vazhdon të kthehet, edhe kur punën e bëjnë njerëz të ndryshëm." },
     { "cause": "skill", "text": "Problemi përqendrohet te njerëzit më të rinj ose me më pak përvojë." },

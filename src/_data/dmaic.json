@@ -44,7 +44,7 @@
         ]
       ],
       "mistakes": [
-        "Writing the solution into the problem: \"we need more training\".",
+        "Writing the solution into the problem: “we need more training”.",
         "A scope so wide that the project never ends.",
         "A problem without a number, so nobody can say when it is solved."
       ],
@@ -111,7 +111,7 @@
       "ideas": [
         [
           "Operational definition",
-          "Write exactly what counts, with photos. \"Damaged\" means different things to different people until it is written down."
+          "Write exactly what counts, with photos. “Damaged” means different things to different people until it is written down."
         ],
         [
           "Data collection plan",
@@ -133,7 +133,7 @@
         ],
         [
           "Check",
-          "Two shift leads judged the same 20 cartons and agreed on 17. Three were \"slightly dented\": the definition got a photo of what counts and what does not."
+          "Two shift leads judged the same 20 cartons and agreed on 17. Three were “slightly dented”: the definition got a photo of what counts and what does not."
         ],
         [
           "Baseline",
@@ -202,7 +202,7 @@
     {
       "id": "analyze",
       "letter": "A",
-      "name": "Analyze",
+      "name": "Analyse",
       "goal": "Find the few root causes behind most of the problem, and prove them with data rather than opinions.",
       "output": "Verified root causes",
       "ideas": [
@@ -246,7 +246,7 @@
         ]
       ],
       "mistakes": [
-        "Stopping at a person: \"the loader was careless\".",
+        "Stopping at a person: “the loader was careless”.",
         "Fixing the loudest complaint instead of the largest bar.",
         "Treating an opinion as a root cause without checking it in the data."
       ],
@@ -286,7 +286,7 @@
           "why": "The vital few carry most of the problem. Seven small projects at once rarely finish."
         },
         {
-          "q": "Is \"the loader was careless\" a root cause?",
+          "q": "Is “the loader was careless” a root cause?",
           "options": [
             "Yes, it names who did it",
             "Yes, if it happened twice",
@@ -376,7 +376,7 @@
           "options": [
             "Remind loaders at every briefing",
             "A stacking picture and floor zones, so heavy goes low by design",
-            "A warning letter after each damage",
+            "A warning letter after each damage case",
             "One more inspection before departure"
           ],
           "answer": 1,
@@ -511,7 +511,7 @@
     ],
     [
       "DMAIC",
-      "Define, Measure, Analyze, Improve, Control: the five steps of a Six Sigma improvement project."
+      "Define, Measure, Analyse, Improve, Control: the five steps of a Six Sigma improvement project."
     ],
     [
       "DPMO",
@@ -567,7 +567,7 @@
     ],
     [
       "Gemba",
-      "The place where the work is done. \"Go to the gemba\": go and see."
+      "The place where the work is done. “Go to the gemba”: go and see."
     ],
     [
       "Kaizen",
@@ -596,7 +596,7 @@
     ],
     [
       "N",
-      "Non-used talent",
+      "Non-utilised talent",
       "Loaders who know why damage happens but are never asked."
     ],
     [
@@ -699,6 +699,6 @@
     "sponsor": "Outbound manager",
     "team": "Shift leads early and late, two loaders, one driver, quality coordinator",
     "benefit": "About €500 a week in credits, fewer customer complaints",
-    "dates": "Define week 39 · Measure week 41 · Analyze week 42 · Improve week 45 · Control week 47"
+    "dates": "Define week 39 · Measure week 41 · Analyse week 42 · Improve week 45 · Control week 47"
   }
 }

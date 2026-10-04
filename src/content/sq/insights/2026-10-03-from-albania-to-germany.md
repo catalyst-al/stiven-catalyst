@@ -6,12 +6,12 @@ status: published
 featured: true
 summary: Nuk jam bërë më pak fleksibël. Jam bërë më pak i gatshëm që fleksibiliteti të zëvendësojë sistemin.
 teaser: Nëse një proces funksionon vetëm sepse një person i mirë e mban mend, atëherë nuk ke ende një proces të mirë.
-deck: 'Eseja e njëmbëdhjetë e serisë "Dhjetë vite pranë punës": çfarë mora nga mënyra e strukturuar e punës në Gjermani, çfarë ruajta nga Shqipëria, dhe pyetja që ka ndryshuar më shumë se gjithçka tjetër.'
+deck: 'Eseja e njëmbëdhjetë e serisë “Dhjetë vite pranë punës”: çfarë mora nga mënyra e strukturuar e punës në Gjermani, çfarë ruajta nga Shqipëria, dhe pyetja që ka ndryshuar më shumë se gjithçka tjetër.'
 ---
 
-Më parë pyesja më shpesh: "Si e zgjidhim këtë?"
+Më parë pyesja më shpesh: “Si e zgjidhim këtë?”
 
-Sot pyetja ime është bërë: "Si e zgjidhim këtë, kush e zotëron më pas dhe çfarë ndryshojmë që të mos na kthehet përsëri?"
+Sot pyetja ime është bërë: “Si e zgjidhim këtë, kush e zotëron më pas dhe çfarë ndryshojmë që të mos na kthehet përsëri?”
 
 Ndoshta ky është ndryshimi më i madh që kam bërë si drejtues.
 
@@ -51,15 +51,15 @@ Dhe kam mësuar diçka që në fillim mund të duket burokratike, por në operac
 
 Kam ruajtur afërsinë me operacionin. Ende nuk besoj se mund ta drejtosh mirë një proces vetëm nga raportet. Duhet të shohësh çfarë ndodh aty ku punohet. Në logjistikë kjo do të thotë të kuptosh çfarë ndodh realisht në rampë dhe me njerëzit gjatë turnit, jo vetëm të shohësh përqindjen në fund të ditës. Në hotel do të thotë të kuptosh çfarë ndodh realisht në recepsion gjatë një turni, jo vetëm të lexosh raportin në mëngjes.
 
-Kam ruajtur gjithashtu fleksibilitetin. Kur lind një problem, nuk më pëlqen të përgjigjem menjëherë me: "Nuk është puna ime." Përpiqem fillimisht të kuptoj nëse mund ta ndihmoj situatën pa kaluar kufijtë e rolit tim.
+Kam ruajtur gjithashtu fleksibilitetin. Kur lind një problem, nuk më pëlqen të përgjigjem menjëherë me: “Nuk është puna ime.” Përpiqem fillimisht të kuptoj nëse mund ta ndihmoj situatën pa kaluar kufijtë e rolit tim.
 
 Dhe kam ruajtur marrëdhënien njerëzore me ekipin. Procesi është i rëndësishëm, por njerëzit nuk janë procese. Një punonjës mund të ketë të njëjtën detyrë si dje dhe të vijë sot në punë në një gjendje krejt tjetër. Menaxhimi duhet ta shohë edhe këtë.
 
-Nuk do të thosha se këto gjëra "mungojnë" në Gjermani. Kjo do të ishte një përgjithësim që nuk mund ta mbështes nga përvoja ime. Mund të them vetëm se janë elemente të stilit tim që i kam sjellë me vete dhe që nuk kam dashur t'i humbas ndërsa jam përshtatur me një kulturë pune më të strukturuar.
+Nuk do të thosha se këto gjëra “mungojnë” në Gjermani. Kjo do të ishte një përgjithësim që nuk mund ta mbështes nga përvoja ime. Mund të them vetëm se janë elemente të stilit tim që i kam sjellë me vete dhe që nuk kam dashur t'i humbas ndërsa jam përshtatur me një kulturë pune më të strukturuar.
 
 ## Çfarë do të bëja ndryshe
 
-Nuk kam një vendim të vetëm, të dokumentuar qartë, nga Shqipëria që mund ta rindërtoj me siguri dhe të them: "Ky ishte gabimi dhe sot do ta bëja kështu." Dhe nuk do të krijoja një histori vetëm sepse eseja ka nevojë për një moment dramatik.
+Nuk kam një vendim të vetëm, të dokumentuar qartë, nga Shqipëria që mund ta rindërtoj me siguri dhe të them: “Ky ishte gabimi dhe sot do ta bëja kështu.” Dhe nuk do të krijoja një histori vetëm sepse eseja ka nevojë për një moment dramatik.
 
 Por ka një gjë që sot do ta bëja ndryshe në përgjithësi: do të dokumentoja më shumë.
 

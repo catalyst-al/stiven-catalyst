@@ -6,12 +6,12 @@ status: published
 featured: true
 summary: I have not become less flexible. I have become less willing to let flexibility replace the system.
 teaser: If a process only works because a good person remembers it, you do not yet have a good process.
-deck: 'The eleventh essay in the series "Ten years close to the work": what I took from the structured way of working in Germany, what I kept from Albania, and the question that has changed more than anything else.'
+deck: 'The eleventh essay in the series “Ten years close to the work”: what I took from the structured way of working in Germany, what I kept from Albania, and the question that has changed more than anything else.'
 ---
 
-I used to ask more often: "How do we solve this?"
+I used to ask more often: “How do we solve this?”
 
-Today my question has become: "How do we solve this, who owns it afterwards, and what do we change so it does not come back?"
+Today my question has become: “How do we solve this, who owns it afterwards, and what do we change so it does not come back?”
 
 That may be the biggest change I have made as a leader.
 
@@ -51,15 +51,15 @@ And I have learned something that can look bureaucratic at first, but has a lot 
 
 I have kept staying close to the operation. I still do not believe you can lead a process well from reports alone. You have to see what happens where the work is done. In logistics that means understanding what really happens on the ramp and with the people during the shift, not just looking at the percentage at the end of the day. In a hotel it means understanding what really happens at the reception desk during a shift, not just reading the report in the morning.
 
-I have also kept flexibility. When a problem comes up, I do not like to answer straight away with: "That's not my job." I first try to understand whether I can help the situation without crossing the limits of my role.
+I have also kept flexibility. When a problem comes up, I do not like to answer straight away with: “That's not my job.” I first try to understand whether I can help the situation without crossing the limits of my role.
 
 And I have kept the human relationship with the team. Process matters, but people are not processes. An employee can have the same task as yesterday and come to work today in a completely different state. Management has to see that too.
 
-I would not say these things are "missing" in Germany. That would be a generalisation I cannot back up from my own experience. I can only say they are parts of my style that I brought with me and did not want to lose while adapting to a more structured working culture.
+I would not say these things are “missing” in Germany. That would be a generalisation I cannot back up from my own experience. I can only say they are parts of my style that I brought with me and did not want to lose while adapting to a more structured working culture.
 
 ## What I would do differently
 
-I do not have a single, clearly documented decision from Albania that I can reconstruct with certainty and say: "That was the mistake, and today I would do it this way." And I would not invent a story just because the essay needs a dramatic moment.
+I do not have a single, clearly documented decision from Albania that I can reconstruct with certainty and say: “That was the mistake, and today I would do it this way.” And I would not invent a story just because the essay needs a dramatic moment.
 
 But there is one thing I would do differently today in general: I would document more.
 

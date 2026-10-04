@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: Führung ohne Titel heißt nicht, die Arbeit des Chefs zu machen, ohne Chef zu sein. Es heißt, sich nicht hinter der Stellenbeschreibung zu verstecken, wenn eine Situation Verantwortung braucht, und zu wissen, wann man aufhören muss.
 description: "Führung ohne Titel heißt, sich nicht hinter der Stellenbeschreibung zu verstecken, wenn eine Situation Verantwortung braucht."
-teaser: Initiative sagt „Ich ignoriere das Problem nicht“. Autorität sagt „Ich habe das Recht, diese Entscheidung zu treffen“. Man kann viel vom Ersten haben, ohne das Zweite zu beanspruchen.
+teaser: Initiative sagt: „Ich ignoriere das Problem nicht.“ Autorität sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Man kann viel vom Ersten haben, ohne das Zweite zu beanspruchen.
 deck: 'Der zehnte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was man tut, wenn die eigene Verantwortung größer ist als die Position, wie man Autorität ohne Position gewinnt, und drei Fragen, bevor man etwas übernimmt, das nicht das Eigene ist.'
 ---
 
@@ -62,7 +62,7 @@ Mehr schreibe ich nicht, weil ich keine Reaktionen, kein Lob und keine Versprech
 
 ## Der Preis
 
-Der sichtbarste Preis ist die Müdigkeit. Wenn man anfängt, alles als Problem zu sehen, das gelöst werden muss, nimmt man sehr leicht mehr Verantwortung mit, als einem zusteht.
+Der sichtbarste Preis ist die Müdigkeit. Wenn man anfängt, alles als Problem zu sehen, das gelöst werden muss, übernimmt man sehr leicht mehr Verantwortung, als einem zusteht.
 
 Das andere Risiko ist weniger sichtbar: Wenn man ständig die Lücken eines Systems füllt, kann man den Eindruck erwecken, dass das System funktioniert. Weil es immer jemand rettet.
 

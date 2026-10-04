@@ -119,7 +119,7 @@ const issue1 = {
       lead: "Të dhënat e fundit tregojnë diçka që shumë njerëz në operacione e ndiejnë prej kohësh: presioni mblidhet te menaxheri.",
       stats: [
         { n: "20%", t: "e punonjësve në botë të angazhuar në 2025" },
-        { n: "31% → 22%", t: "menaxherë të angazhuar, 2022 deri 2025" },
+        { n: "31% → 22%", t: "menaxherë të angazhuar, 2022 deri në 2025" },
         { n: "12%", t: "Evropa, rajoni më i ulët" },
         { n: "< 50%", t: "e menaxherëve kanë marrë ndonjë trajnim për menaxhim" },
       ],
@@ -129,7 +129,7 @@ const issue1 = {
         { h: "Menaxheri përcakton pjesën më të madhe të klimës së ekipit.", p: "Gallup vlerëson se rreth 70% e ndryshimit në angazhimin e një ekipi lidhet me menaxherin." },
         { h: "Ekipet po zmadhohen, por jo kudo njësoj.", p: "Në SHBA, numri mesatar i vartësve direkt për menaxher u rrit nga 8,2 në 2013 në 12,1 në 2025. Mediana mbetet rreth 6. Mesatarja rritet sepse disa ekipe janë bërë shumë të mëdha, jo sepse çdo menaxher ka më shumë njerëz." },
         { h: "Dhe tani vjen AI, përmes menaxherit.", p: "Në tremujorin e dytë të 2026, sipas Gallup, në SHBA 51% e drejtuesve të lartë përdorin AI disa herë në javë ose më shpesh, nga 17% në 2023. Te menaxherët shifra është 36%, nga 15%; te punonjësit pa rol menaxheri, 26%, nga 9%. Punonjësit, menaxheri i të cilëve e mbështet aktivisht përdorimin e AI-së, e përdorin atë 2,1 herë më shpesh, dhe angazhimi i tyre është 48%, kundrejt 30% te të tjerët. Kur ka përdorim të shpeshtë, një plan të qartë dhe mbështetje nga menaxheri, angazhimi arrin 53%." },
-        { h: "Një parashikim, jo një matje.", p: "Në tetor 2024, Gartner parashikoi se deri në 2026 një e pesta e organizatave do ta përdorin AI-n për të rrafshuar strukturën dhe do të heqin më shumë se gjysmën e pozicioneve aktuale të menaxhimit të mesëm." },
+        { h: "Një parashikim, jo një matje.", p: "Në tetor 2024, Gartner parashikoi se deri në 2026 një e pesta e organizatave do ta përdorin AI-në për të rrafshuar strukturën dhe do të heqin më shumë se gjysmën e pozicioneve aktuale të menaxhimit të mesëm." },
       ],
       meaning: { h: "Çfarë do të thotë kjo", p: "Të dhënat nuk thonë se menaxherët janë problemi. Thonë se menaxheri është pika ku takohen objektivat nga lart, problemet nga terreni, të dhënat dhe tani edhe AI. Një organizatë që pret më shumë nga ky person duhet t'i japë edhe më shumë: trajnim, prioritete të qarta dhe më pak zhurmë." },
     },

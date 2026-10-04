@@ -232,7 +232,7 @@ const en = {
       data: "The log stays in this browser. Nothing is sent or uploaded.",
     },
     "/tools/shift-handover/": {
-      when: "At the end of every shift. Most problems are not lost on the shift, they are lost between shifts.",
+      when: "At the end of every shift. Most problems are not lost on the shift; they are lost between shifts.",
       how: [
         "Choose a template: warehouse, hotel front office or delivery station. Fill in date, shift, area and both names.",
         "Add the numbers. [[Fill in from the logs]] takes them from Damage, Incomplete and Delay.",
@@ -260,7 +260,7 @@ const en = {
         "Rate ten statements.",
         "Press [[See the result]].",
       ],
-      get: "The cause that fits best, clarity, skill, capacity, process design or ownership, with a score for each, three first moves and a [[Question for the floor]].",
+      get: "The cause that fits best (clarity, skill, capacity, process design or ownership), with a score for each, three first moves and a [[Question for the floor]].",
       data: "Nothing you enter is stored or sent.",
     },
     "/tools/pareto/": {
@@ -709,7 +709,7 @@ const de = {
         { planets: [
           { family: "pulse", text: "Risse, die in einem Herzschlag-Ring pulsieren: der Puls einer Schicht." },
           { family: "zenith", text: "Eine Höhenlinienkarte unter einem Radar: ein Bereich von oben, Woche für Woche." },
-          { family: "lumen", text: "Leuchtet von selbst, in einem Staubring aus fünf Teilen: den fünf Schritten von DMAIC." },
+          { family: "lumen", text: "Er leuchtet von selbst, in einem Staubring aus fünf Teilen: den fünf Schritten von DMAIC." },
           { family: "atlas", text: "Ein Globus mit dem Weg einer Karriere als Sternbild." },
         ] },
       ],
@@ -884,7 +884,7 @@ const de = {
       data: "Alles bleibt in diesem Browser.",
     },
     "/tools/five-whys/": {
-      when: "Wenn ein Problem zurückkommt. Fangen Sie bei dem an, was passiert ist, nicht bei dem, wer es getan hat.",
+      when: "Wenn ein Problem zurückkommt. Fangen Sie bei dem an, was passiert ist, nicht bei der Frage, wer es getan hat.",
       how: [
         "Schreiben Sie das Problem auf.",
         "Fragen Sie warum, fünfmal oder so oft wie nötig.",

@@ -7,14 +7,14 @@ featured: true
 summary: Testi i një SOP-je nuk është nëse autori e kupton. Autori gjithmonë e kupton, sepse e ka shkruar vetë. Testi është nëse një person tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat.
 description: "Testi i një SOP-je nuk është nëse autori e kupton. Është nëse një person tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat."
 teaser: Njeriu që punon nuk duhet të kërkojë informacionin. Informacioni duhet të jetë aty ku ai e pret.
-deck: 'Eseja e tetë e serisë "Dhjetë vite pranë punës": si shkruhet një procedurë për momentin kur përdoret, jo për dosjen, dhe si mbahet e gjallë kur procesi ndryshon.'
+deck: 'Eseja e tetë e serisë “Dhjetë vite pranë punës”: si shkruhet një procedurë për momentin kur përdoret, jo për dosjen, dhe si mbahet e gjallë kur procesi ndryshon.'
 ---
 
 Një SOP që vetëm lexohet mund të jetë shumë profesionale në pamje. Mund të ketë faqe të bukura, shumë tekst dhe çdo detaj të mundshëm. Por kur fillon presioni i turnit, askush nuk ka kohë të lexojë një manual.
 
 Këtë e kam parë si në logjistikë, ashtu edhe në hotel.
 
-Në logjistikë kam punuar me standardizimin e proceseve që lidhen me rrjedhën e turnit: ngarkimin, disiplinën në rampë, trajtimin e porosive problematike, kontrollin e dëmtimeve dhe të porosive të paplota, respektimin e proceseve të temperaturës dhe mënyrën si eskalohen problemet gjatë operacionit. Ideja ishte gjithmonë e njëjtë: kur ke shumë njerëz, shumë porosi dhe presion kohe, nuk mund të mbështetesh vetëm te kujtesa ose te fakti që një punonjës me eksperiencë "e di si bëhet".
+Në logjistikë kam punuar me standardizimin e proceseve që lidhen me rrjedhën e turnit: ngarkimin, disiplinën në rampë, trajtimin e porosive problematike, kontrollin e dëmtimeve dhe të porosive të paplota, respektimin e proceseve të temperaturës dhe mënyrën si eskalohen problemet gjatë operacionit. Ideja ishte gjithmonë e njëjtë: kur ke shumë njerëz, shumë porosi dhe presion kohe, nuk mund të mbështetesh vetëm te kujtesa ose te fakti që një punonjës me eksperiencë “e di si bëhet”.
 
 Në hotel kam punuar shumë më drejtpërdrejt me checklist dhe SOP për proceset e Front Office dhe Night Audit-it: kontrollin e rezervimeve dhe statuseve, mbylljen e ditës, raportet, dorëzimin e turnit dhe proceset që duhen verifikuar para se puna të konsiderohet e përfunduar.
 
@@ -46,7 +46,7 @@ Procesi ndryshon. Sistemet ndryshojnë. Ekipi ndryshon. Një ekran në software 
 
 Prandaj, për mua, SOP-ja duhet të përditësohet sa herë që ndryshon realiteti që ajo përshkruan. Personi që e njeh procesin duhet të sinjalizojë ndryshimin, dhe versioni që përdor ekipi duhet të korrigjohet, që të mos vazhdojnë të qarkullojnë dy mënyra të ndryshme pune.
 
-Një nga problemet më të mëdha që kam parë me dokumentacionin operacional është kur versioni "zyrtar" thotë një gjë, ndërsa njerëzit në turn kanë mësuar një mënyrë tjetër. Në atë moment SOP-ja ka pushuar së qeni standard.
+Një nga problemet më të mëdha që kam parë me dokumentacionin operacional është kur versioni “zyrtar” thotë një gjë, ndërsa njerëzit në turn kanë mësuar një mënyrë tjetër. Në atë moment SOP-ja ka pushuar së qeni standard.
 
 ## SOP-ja që lexohet dhe SOP-ja që përdoret
 
@@ -68,7 +68,7 @@ Nga ky problem lindi Front Desk Control.
 
 Në punën e Front Office dhe Night Audit-it informacioni mund të jetë i shpërndarë në shumë vende: checklist-a, dokumente të veçanta, udhëzime, screenshot-e dhe shënime që janë krijuar në momente të ndryshme. Kur je duke mësuar një hotel ose një sistem të ri, problemi nuk është gjithmonë mungesa e informacionit. Ndonjëherë problemi është se ke shumë informacion dhe nuk e gjen dot atë që të duhet në momentin e duhur.
 
-Prandaj i mblodha këto procese në një strukturë të vetme digjitale, një faqe e vetme. Jo si manual për ta lexuar nga fillimi në fund, por si mjet pune. Proceset ndahen sipas funksionit. Mund të gjesh SOP-në që të duhet, të shohësh udhëzimin përkatës dhe të përdorësh referencat vizuale pa kërkuar në shumë dokumente të ndryshme.
+Prandaj i mblodha këto procese në një strukturë të vetme digjitale, një faqe të vetme. Jo si manual për ta lexuar nga fillimi në fund, por si mjet pune. Proceset ndahen sipas funksionit. Mund të gjesh SOP-në që të duhet, të shohësh udhëzimin përkatës dhe të përdorësh referencat vizuale pa kërkuar në shumë dokumente të ndryshme.
 
 Një pjesë e rëndësishme për mua ka qenë edhe cilësia e këtyre materialeve. Kam rishikuar pamjet dhe screenshot-et që përdoren në udhëzime, dhe kam mbajtur vetëm ato që tregojnë qartë të njëjtin hap të procesit dhe janë realisht të lexueshme.
 

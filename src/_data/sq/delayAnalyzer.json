@@ -119,7 +119,7 @@
     {
       "name": "Shumë ndalesa",
       "side": "road",
-      "meaning": "Linja u planifikua me më shumë ndalesa ose distancë se sa lejon koha. Shoferi nuk mund ta rikuperojë.",
+      "meaning": "Linja u planifikua me më shumë ndalesa ose distancë sesa lejon koha. Shoferi nuk mund ta rikuperojë.",
       "moves": [
         "Krahasoni kohët e planifikuara dhe reale të ndalesave për çdo linjë: planifikoni me atë që ndodh realisht.",
         "Kufizoni ndalesat për linjë sipas zonës dhe orës së ditës, jo sipas mesatares.",
@@ -148,7 +148,7 @@
     "road": {
       "name": "Rruga",
       "lede": "u krijuan në rrugë, pas një nisjeje në kohë",
-      "advice": "Rampa e dorëzon në kohë; vonesa rritet në rrugë. Shikoni dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikoni ngarjen."
+      "advice": "Rampa e dorëzon në kohë; vonesa rritet në rrugë. Shikoni dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikoni ngasjen."
     }
   },
   "checklist": [

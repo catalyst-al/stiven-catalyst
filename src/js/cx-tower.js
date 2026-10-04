@@ -1024,7 +1024,7 @@
       const meta = el("span", "cx-kpi-meta");
       meta.append(badge(ok));
       if (state.targets[kpi.id] != null) meta.append(el("span", null, targetText(kpi)));
-      tile.append(meta, el("span", "dl-stat-note", grainWord(kpi, v.n) + (v.n < 30 ? ` · ${tx("few data")}` : "")));
+      tile.append(meta, el("span", "dl-stat-note", grainWord(kpi, v.n) + (v.n < 30 ? ` · ${tx("little data")}` : "")));
       tile.title = tx(kpi.def);
       tiles.append(tile);
     });
@@ -1059,7 +1059,7 @@
         return { key, value: v.value ?? 0, n: v.n };
       }).sort((a, b) => b.value - a.value);
       box.append(barList(items, {
-        label: (item) => [pct(item.value, 1), ` · ${tx("{n} deliveries", { n: int.format(item.n) })}${item.n < state.settings.minSample ? ` · ${tx("few data")}` : ""}`],
+        label: (item) => [pct(item.value, 1), ` · ${tx("{n} deliveries", { n: int.format(item.n) })}${item.n < state.settings.minSample ? ` · ${tx("little data")}` : ""}`],
         highlight: (item) => item === items[items.length - 1] && items.length > 1,
       }));
       pair.append(box);

@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: A title can disappear in a day. What you have learned does not, but in a new place you have to prove it again.
 teaser: In Albania I led people, stores and processes. In Germany, my first job was delivering parcels.
-deck: 'The first essay in the series "Ten years close to the work": what is left of a manager when the title does not cross the border with him.'
+deck: 'The first essay in the series “Ten years close to the work”: what is left of a manager when the title does not cross the border with him.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/cv-builder/
@@ -15,7 +15,7 @@ relatedTools:
 
 In Albania, my last role was Cluster Manager. I ran the operations of a flagship store in Tirana and coordinated part of the store network. In Germany, my first job was delivering parcels.
 
-The series "Ten years close to the work" starts with that contrast. Not to make it dramatic, and not to tell a migration story. It starts there because nothing I write afterwards makes sense without it: how I think when I have an operational problem in front of me, how I lead people, and why I see processes from both sides.
+The series “Ten years close to the work” starts with that contrast. Not to make it dramatic, and not to tell a migration story. It starts there because nothing I write afterwards makes sense without it: how I think when I have an operational problem in front of me, how I lead people, and why I see processes from both sides.
 
 I did not take over the flagship store ready-made. I was part of building it from zero to opening day, coordinating architects, carpenters, painters and the fit-out crews. Then came sales, the service standard, the customer experience, the operational organisation and the team: eight sales staff, four cashiers and one assistant. We built the company's first online sales website and its first e-commerce team. In the same period the network was restructured. Two underperforming stores were closed and the business was concentrated more on the flagship.
 
@@ -31,9 +31,9 @@ In Albania I led people, stores and processes. In Germany I had to take the van,
 
 Some things helped me straight away, because they do not depend on a title: operational discipline, the relationship with the customer, the ability to understand a process and see where the waste is, working under pressure and being ready to take responsibility. I had moved from retail to wholesale, from running a store to the warehouse, B2B sales, e-commerce and leading teams. That helped me understand new industries quickly.
 
-One thing I had to leave behind: the idea that previous experience automatically guarantees the same position in a new place. I could not say "I was a manager, so I should be a manager". I had to learn the system from the inside, from the operational level. I had to prove it again.
+One thing I had to leave behind: the idea that previous experience automatically guarantees the same position in a new place. I could not say “I was a manager, so I should be a manager”. I had to learn the system from the inside, from the operational level. I had to prove it again.
 
-The language was the same. When I arrived, German was not my working language, and I had to build it while I worked. In 2025 I took the Deutsch-Test für Zuwanderer at level B1: 45 out of 45 in listening and reading, 15 out of 20 in writing, 97 out of 100 in speaking. I did not wait for my German to be perfect before moving forward professionally. I worked, communicated and learned at the same time.
+It was the same with the language. When I arrived, German was not my working language, and I had to build it while I worked. In 2025 I took the Deutsch-Test für Zuwanderer at level B1: 45 out of 45 in listening and reading, 15 out of 20 in writing, 97 out of 100 in speaking. I did not wait for my German to be perfect before moving forward professionally. I worked, communicated and learned at the same time.
 
 What I gained in these years was not only the language. I saw the work from the side of the person who has to carry out the process.
 

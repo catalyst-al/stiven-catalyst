@@ -90,7 +90,7 @@
       "moves": [
         "Scan every parcel at handover and count multi-parcel orders at the door.",
         "Check that the vehicle is empty at the end of the route.",
-        "Follow up every \"not received\" within a day, while the driver still remembers the stop."
+        "Follow up every “not received” within a day, while the driver still remembers the stop."
       ],
       "question": "How does the driver know every parcel for this stop has been handed over?"
     }

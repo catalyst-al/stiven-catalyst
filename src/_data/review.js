@@ -104,7 +104,7 @@ const pages = [
           p: x("From scattered trials to processes that are measurable, repeatable and stable.", "Nga prova të shpërndara te procese të matshme, të përsëritshme dhe të qëndrueshme.", "Von verstreuten Versuchen zu messbaren, wiederholbaren und stabilen Prozessen.") },
       ] },
       { type: "callout", label: x("The key question", "Pyetja kyçe", "Die Schlüsselfrage"),
-        text: x("Not only what AI can do, but how does the way the team works change?", "Jo vetëm çfarë mund të bëjë AI, por si ndryshon mënyra si punon ekipi?", "Nicht nur, was KI kann, sondern: Wie verändert sich die Arbeitsweise des Teams?") },
+        text: x("Not only what can AI do, but how does the way the team works change?", "Jo vetëm çfarë mund të bëjë AI, por si ndryshon mënyra si punon ekipi?", "Nicht nur, was KI kann, sondern: Wie verändert sich die Arbeitsweise des Teams?") },
     ],
   },
   {
@@ -272,7 +272,7 @@ const pages = [
         ],
         note: x("“Own work”: the share of time the manager still spends on individual contributor work.", "“Punë vetjake”: pjesa e kohës që menaxheri ende harxhon për punë individuale, jo menaxhim.", "„Eigene Arbeit“: der Anteil der Zeit, den die Führungskraft noch mit eigener Facharbeit verbringt.") },
       { type: "callout", label: x("The player-coach problem", "Problemi i lojtarit-trajner", "Das Spielertrainer-Problem"),
-        text: x("97% of managers in Gallup's study also carry individual work, at a median of 40% of their time. When that load stays high and the team grows, management weakens.", "97% e menaxherëve në studimin e Gallup kanë edhe përgjegjësi individuale, me një mediane prej 40% të kohës. Kur ky ngarkim mbetet i lartë dhe ekipi rritet, menaxhimi dobësohet.", "97 % der Führungskräfte in Gallups Studie haben auch eigene Facharbeit, im Median 40 % ihrer Zeit. Bleibt diese Last hoch und wächst das Team, leidet die Führung.") },
+        text: x("97% of managers in Gallup's study also carry individual work, at a median of 40% of their time. When that load stays high and the team grows, management weakens.", "97% e menaxherëve në studimin e Gallup kanë edhe përgjegjësi individuale, me një medianë prej 40% të kohës. Kur ky ngarkim mbetet i lartë dhe ekipi rritet, menaxhimi dobësohet.", "97 % der Führungskräfte in Gallups Studie haben auch eigene Facharbeit, im Median 40 % ihrer Zeit. Bleibt diese Last hoch und wächst das Team, leidet die Führung.") },
     ],
     source: sourceLine("span"),
   },
@@ -307,7 +307,7 @@ const pages = [
         "Kur kalova nga Team Leader On Road në Area Manager pas rreth pesë muajsh, përgjegjësia u zgjerua shpejt. Në strukturën direkte kisha katër Shift Leaders dhe tetë dispecerë, ndërsa operacioni përfshinte rreth 250 shoferë në mënyrë indirekte.",
         "Als ich nach rund fünf Monaten vom Team Leader On Road zum Area Manager wechselte, wuchs die Verantwortung schnell. Direkt geführt habe ich vier Shift Leaders und acht Dispatcher, indirekt gehörten rund 250 Fahrer zum Betrieb.") },
       { type: "p", text: x(
-        "The energy did not go into one problem. It went into constantly switching between KPIs, delays, quality, damages, loading, safety and people who needed a decision or support.",
+        "The energy did not go into one problem. It went into constantly switching between KPIs, delays, quality, damage, loading, safety and people who needed a decision or support.",
         "Energjia nuk harxhohej te një problem i vetëm. Harxhohej te kalimi i vazhdueshëm mes KPI-ve, vonesave, cilësisë, dëmtimeve, ngarkimit, sigurisë dhe njerëzve që kishin nevojë për vendim ose mbështetje.",
         "Die Energie floss nicht in ein einzelnes Problem. Sie floss in den ständigen Wechsel zwischen KPIs, Verspätungen, Qualität, Schäden, Beladung, Sicherheit und Menschen, die eine Entscheidung oder Unterstützung brauchten.") },
       { type: "p", text: x(
@@ -411,9 +411,9 @@ const pages = [
     lead: x("Do not enter a new operation to show how fast you can change things. Enter it to understand what needs to change.", "Mos hyr në një operacion të ri për të treguar sa shpejt mund të ndryshosh gjërat. Hyr për të kuptuar çfarë duhet të ndryshojë.", "Nicht in einen neuen Betrieb kommen, um zu zeigen, wie schnell man Dinge ändern kann. Sondern um zu verstehen, was sich ändern muss."),
     blocks: [
       { type: "cards", cols: 1, items: [
-        { n: x("Days 0–30", "Ditët 0–30", "Tag 0–30"), h: x("Understand", "Kupto", "Verstehen"), p: x("The team, the process, the KPIs, the customer, the handover, the dependencies and the problems that have become “normal”.", "Ekipi, procesi, KPI-të, klienti, handover-i, varësitë dhe problemet që janë bërë “normale”.", "Das Team, der Prozess, die KPIs, der Kunde, die Übergabe, die Abhängigkeiten und die Probleme, die „normal“ geworden sind.") },
-        { n: x("Days 31–60", "Ditët 31–60", "Tag 31–60"), h: x("Prioritise", "Prioritizo", "Priorisieren"), p: x("Separate symptoms from real problems. Choose a few priorities and give each an owner.", "Ndaji simptomat nga problemet reale. Zgjidh pak prioritete dhe cakto një përgjegjës për secilin.", "Symptome von echten Problemen trennen. Wenige Prioritäten wählen und jeder eine verantwortliche Person geben.") },
-        { n: x("Days 61–90", "Ditët 61–90", "Tag 61–90"), h: x("Standardise", "Standardizo", "Standardisieren"), p: x("Turn improvements into a working rhythm: review, standard, measurement, feedback and follow-up.", "Ktheji përmirësimet në ritëm pune: rishikim, standard, matje, feedback dhe ndjekje.", "Verbesserungen in einen Arbeitsrhythmus bringen: Review, Standard, Messung, Feedback und Nachverfolgung.") },
+        { n: x("Days 0–30", "Ditët 0–30", "Tage 0–30"), h: x("Understand", "Kupto", "Verstehen"), p: x("The team, the process, the KPIs, the customer, the handover, the dependencies and the problems that have become “normal”.", "Ekipi, procesi, KPI-të, klienti, handover-i, varësitë dhe problemet që janë bërë “normale”.", "Das Team, der Prozess, die KPIs, der Kunde, die Übergabe, die Abhängigkeiten und die Probleme, die „normal“ geworden sind.") },
+        { n: x("Days 31–60", "Ditët 31–60", "Tage 31–60"), h: x("Prioritise", "Prioritizo", "Priorisieren"), p: x("Separate symptoms from real problems. Choose a few priorities and give each an owner.", "Ndaji simptomat nga problemet reale. Zgjidh pak prioritete dhe cakto një përgjegjës për secilin.", "Symptome von echten Problemen trennen. Wenige Prioritäten wählen und jeder eine verantwortliche Person geben.") },
+        { n: x("Days 61–90", "Ditët 61–90", "Tage 61–90"), h: x("Standardise", "Standardizo", "Standardisieren"), p: x("Turn improvements into a working rhythm: review, standard, measurement, feedback and follow-up.", "Ktheji përmirësimet në ritëm pune: rishikim, standard, matje, feedback dhe ndjekje.", "Verbesserungen in einen Arbeitsrhythmus bringen: Review, Standard, Messung, Feedback und Nachverfolgung.") },
       ] },
       { type: "callout", label: x("The goal", "Qëllimi", "Das Ziel"),
         text: x("Not to prove you are smart. To build an operation that understands itself better and learns faster.", "Jo të provosh që je i zgjuar. Të ndërtosh një operacion që e kupton më mirë veten dhe mëson më shpejt.", "Nicht beweisen, dass man klug ist. Einen Betrieb aufbauen, der sich besser versteht und schneller lernt.") },
@@ -423,7 +423,7 @@ const pages = [
     id: "challenge", part: 3,
     kicker: x("A 30-day challenge", "Sfida 30-ditore", "Eine 30-Tage-Aufgabe"),
     title: [x("One problem.", "Një problem.", "Ein Problem."), x("Four weeks.", "Katër javë.", "Vier Wochen.")],
-    lead: x("Pick a problem that keeps coming back. Not the biggest problem in theory, but one you see often, that costs time or energy and is worth understanding better. Treat it as an experiment, not a crisis.", "Gjej një problem që rikthehet. Jo problemin më të madh në teori, por një problem që e sheh shpesh, që të merr kohë ose energji dhe që ia vlen të kuptohet më mirë. Trajtoje si eksperiment, jo si krizë.", "Ein Problem wählen, das immer wiederkommt. Nicht das theoretisch größte, sondern eines, das man oft sieht, das Zeit oder Energie kostet und das sich lohnt, besser zu verstehen. Als Experiment behandeln, nicht als Krise."),
+    lead: x("Pick a problem that keeps coming back. Not the biggest problem in theory, but one you see often, that costs time or energy and is worth understanding better. Treat it as an experiment, not a crisis.", "Gjej një problem që rikthehet. Jo problemin më të madh në teori, por një problem që e sheh shpesh, që të merr kohë ose energji dhe që ia vlen të kuptohet më mirë. Trajtoje si eksperiment, jo si krizë.", "Ein Problem wählen, das immer wiederkommt. Nicht das theoretisch größte, sondern eines, das man oft sieht, das Zeit oder Energie kostet und das es wert ist, besser verstanden zu werden. Als Experiment behandeln, nicht als Krise."),
     blocks: [
       { type: "cards", cols: 2, items: [
         { n: x("Week 1", "Java 1", "Woche 1"), h: x("Observe and log", "Vëzhgo dhe regjistro", "Beobachten und erfassen"), p: x("Log every repeat by category, not by culprit. Do not propose solutions yet.", "Regjistro çdo përsëritje me kategori, jo me fajtor. Mos propozo zgjidhje ende.", "Jede Wiederholung nach Kategorie erfassen, nicht nach Schuldigen. Noch keine Lösungen vorschlagen.") },

@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: The driver sees the problem, the dispatcher sees its effect on the shift, the manager has to understand why it exists.
 teaser: Loading time was 24 minutes against a 20-minute target. It would have been easy to say the drivers were loading slowly.
-deck: 'The second essay in the series "Ten years close to the work": loading time, delays, incompletes, damage, and why a KPI does not tell you by itself what happened.'
+deck: 'The second essay in the series “Ten years close to the work”: loading time, delays, incompletes, damage, and why a KPI does not tell you by itself what happened.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/delay-analyzer/
@@ -31,7 +31,7 @@ It would have been very easy to say: the drivers are loading slowly. But 24 minu
 
 The work was to go to the process, not to blame the driver straight away. We worked on very concrete things: better checks of the trolleys and the routes, scanners closer to the ramps, pre-scanning, final checks for completeness, a clearer organisation of dry, chilled and frozen, and ramp audits. In other periods loading time came down to the range of 16 to 19 minutes.
 
-For me the lesson was not "we brought a KPI down". The lesson was that a KPI improves when you change the process that produces it.
+For me the lesson was not “we brought a KPI down”. The lesson was that a KPI improves when you change the process that produces it.
 
 The same goes for incomplete orders. For me, Incomplete was not just a percentage. It meant that a customer had not received their full order. You had to understand whether the product had been missing in the warehouse already, had been put in the wrong trolley, had been left on the ramp, or whether something had happened during delivery. With damage too: the number tells you how many cases you have. It does not automatically tell you why you have them.
 
@@ -45,7 +45,7 @@ My lesson was that pressure must not be passed down as panic. If a manager sees 
 
 For me, accountability does not mean looking for someone to blame every time a number turns red. It means finding who owns the problem and following it until it is closed.
 
-If you ask me which KPI misleads you most when you look at it only as a number, I would say Delays. The number gives you the impression that you are measuring only the driver's delay. But the delay may have started much earlier. At loading. With a missing bag. With a mixed-up trolley. With the order of the route. With an operational problem before the driver had even left the ramp. Then on the dashboard you see only one driver who is "late".
+If you ask me which KPI misleads you most when you look at it only as a number, I would say Delays. The number gives you the impression that you are measuring only the driver's delay. But the delay may have started much earlier. At loading. With a missing bag. With a mixed-up trolley. With the order of the route. With an operational problem before the driver had even left the ramp. Then on the dashboard you see only one driver who is “late”.
 
 If you manage only the number, you can punish the wrong person. If you manage the process, you start to understand where the delay was really created.
 
