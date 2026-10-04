@@ -1,0 +1,21 @@
+{#- One field note a day on the home page. The notes keep a fixed order (oldest first, so a new note joins at
+    the end); today's is chosen from the reader's own date by js/note-of-the-day.js, the same for every reader
+    that day. Before the script runs, the page shows the note of the day it was built. The two field note
+    cards further down show the two notes after it, so no note appears twice. -#}
+{#- Needs dayNotes and dayIndex (set by pages/home.njk). -#}
+{%- set notesPage = "/field-notes.html" | local(lang) %}
+{%- set todayNote = dayNotes[dayIndex] %}
+{%- set copiedLabel = "Copied" | t(lang) %}
+{%- if todayNote %}
+  <section class="shell note-of-day" aria-labelledby="note-of-day-title" data-note-of-day data-notes="{{ dayNotes | noteDayData(lang) | dump }}" data-page="{{ notesPage | absoluteUrl }}">
+    <p class="kicker" id="note-of-day-title">{{ "Field note of the day" | t(lang) }}</p>
+    <blockquote class="note-of-day-quote"><p data-note-quote>“{{ todayNote.data.quote }}”</p></blockquote>
+    <div class="note-of-day-foot">
+      <p class="note-of-day-by"><span>Stiven Janaqi</span> · <a href="{{ notesPage }}#note-{{ todayNote.fileSlug }}" data-note-link>{{ "All field notes" | t(lang) }}</a></p>
+      <div class="note-actions" data-note-actions hidden>
+        <button type="button" data-note-copy data-copied-label="{{ copiedLabel }}" data-copy-text="“{{ todayNote.data.quote }}” (Stiven Janaqi, Stiven Catalyst) {{ (notesPage + '#note-' + todayNote.fileSlug) | absoluteUrl }}">{{ "Copy" | t(lang) }}</button>
+        <button type="button" data-note-share data-share-url="{{ (notesPage + '#note-' + todayNote.fileSlug) | absoluteUrl }}" data-share-text="“{{ todayNote.data.quote }}”">{{ "Share" | t(lang) }}</button>
+      </div>
+    </div>
+  </section>
+{%- endif %}

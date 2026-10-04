@@ -172,6 +172,9 @@ export default function (eleventyConfig) {
   // The body of an essay with ids on its section titles, and the list of those sections (lib/essay-body.js).
   eleventyConfig.addFilter("essayBody", essayBody);
   eleventyConfig.addFilter("essayContents", essayContents);
+  // Today's place in a cycle of {count} items, counted in whole days since 1970 (UTC at build time; the
+  // browser counts by the reader's own date, js/note-of-the-day.js).
+  eleventyConfig.addFilter("dayOfCycle", (count) => (count ? Math.floor(Date.now() / 864e5) % count : 0));
   // The essays that have a page, without those marked "soon".
   eleventyConfig.addFilter("published", (items) => (items || []).filter((item) => item.data.status !== "soon"));
   eleventyConfig.addFilter("seriesNeighbours", (items, url) => {
@@ -238,6 +241,17 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("readableDate", (date, lang) =>
     new Date(date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
+  );
+  // Oldest first, and in file order within a day (the order the note of the day cycles through).
+  eleventyConfig.addFilter("chronological", (items) => [...(items || [])].sort((a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug)));
+  // The field notes as the home page's note of the day reads them (js/note-of-the-day.js).
+  eleventyConfig.addFilter("noteDayData", (notes, lang) =>
+    (notes || []).map((note) => ({
+      q: note.data.quote,
+      id: `note-${note.fileSlug}`,
+      d: new Date(note.date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }),
+      iso: new Date(note.date).toISOString().slice(0, 10),
+    }))
   );
   eleventyConfig.addFilter("pad", (value) => String(value).padStart(2, "0"));
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));

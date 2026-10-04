@@ -1,12 +1,16 @@
 {#- The homepage, shared by / and /de/. -#}
 {%- set essays = collections["insights" + (lang | langSuffix)] -%}
 {%- set noteList = collections["notes" + (lang | langSuffix)] -%}
+{#- The field notes in a fixed order (oldest first) and today's place in it (partials/note-of-the-day.njk). -#}
+{%- set dayNotes = noteList | chronological -%}
+{%- set dayIndex = dayNotes.length | dayOfCycle -%}
 {%- set highlights = (de if lang == "de" else sq).home.highlights if lang == "de" or lang == "sq" else home.highlights -%}
 {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
 {%- set featured = essays | featured -%}
 {#- The three newest essays besides the featured one, newest first. -#}
 {%- set others = essays | except(featured) | last(3) | reverse -%}
 {% include "partials/cosmos-hero.njk" %}
+{% include "partials/note-of-the-day.njk" %}
 
   <div class="shell meta-strip" aria-label="{{ 'Stiven Catalyst philosophy' | t(lang) }}">
     <div><strong>{{ "Clarity" | t(lang) }}</strong><span>{{ "Understand before reacting." | t(lang) }}</span></div>
@@ -85,12 +89,12 @@
     </div>
 
     <div class="notes-grid">
-      {%- for note in noteList | first(2) %}
-      <article class="note-card">
+      {%- for offset in [1, 2] %}{% set note = dayNotes[(dayIndex + offset) % dayNotes.length] %}{% if note and dayNotes.length > 2 %}
+      <article class="note-card" data-note-slot="{{ offset }}">
         <blockquote>“{{ note.data.quote }}”</blockquote>
         <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate(lang) }}</time>
       </article>
-      {%- endfor %}
+      {%- endif %}{% endfor %}
     </div>
   </section>
 
@@ -139,3 +143,5 @@
       <a class="text-link" href="{{ '/about.html' | local(lang) }}">{{ "About Stiven Catalyst" | t(lang) }} <span aria-hidden="true">→</span></a>
     </div>
   </section>
+<script src="{{ '/js/note-of-the-day.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/share.js' | assetUrl }}" defer></script>
