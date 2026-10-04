@@ -1,0 +1,18 @@
+{#- At the end of a tool page: where this tool is in the Tools Guide, with a link that opens the reader on its page
+    (js/book.js reads #faqe-N). -#}
+{%- set guidePage = toolsGuide.pageOf["tool:" + (page.url | enPath)] %}
+{%- if guidePage %}
+{%- set guideUrl = "/guides/tools-guide.html" | local(lang) %}
+{%- set guideCover = toolsGuidePages[lang or "en"].pages[0] %}
+<section class="shell tool-guide" aria-labelledby="tool-guide-title">
+  <div class="book-shelf-item">
+    <a class="book-object" href="{{ guideUrl }}#faqe-{{ guidePage }}" tabindex="-1" aria-hidden="true"><span class="book-object-cover"><img src="{{ guideCover.image }}" width="{{ guideCover.width }}" height="{{ guideCover.height }}" alt="" loading="lazy"></span></a>
+    <div class="tool-guide-copy">
+      <p class="kicker">{{ "The guide · Edition 1" | t(lang) }} · {{ "Page {n}" | t(lang) | replace("{n}", guidePage) }}</p>
+      <h2 id="tool-guide-title">{{ "How to use this tool, in the guide" | t(lang) }}</h2>
+      <p>{{ "Why each tool exists, which family it belongs to and how to use it step by step, in one book you can leaf through." | t(lang) }}</p>
+      <p class="tool-guide-links"><a class="button-primary" href="{{ guideUrl }}#faqe-{{ guidePage }}">{{ "Open it on page {n}" | t(lang) | replace("{n}", guidePage) }}</a> <a class="text-link" href="{{ guideUrl }}">{{ "The whole guide" | t(lang) }} <span aria-hidden="true">→</span></a></p>
+    </div>
+  </div>
+</section>
+{%- endif %}
