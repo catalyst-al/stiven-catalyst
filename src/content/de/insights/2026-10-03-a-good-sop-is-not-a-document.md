@@ -5,6 +5,7 @@ category: Betrieb
 status: published
 featured: true
 summary: Der Test einer SOP ist nicht, ob der Autor sie versteht. Der Autor versteht sie immer, weil er sie selbst geschrieben hat. Der Test ist, ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht.
+description: "Der Test einer SOP ist nicht, ob der Autor sie versteht, sondern ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht."
 teaser: Wer arbeitet, soll die Information nicht suchen müssen. Die Information soll dort sein, wo er sie erwartet.
 deck: 'Der achte Essay der Reihe „Zehn Jahre nah an der Arbeit“: wie man eine Prozedur für den Moment schreibt, in dem sie gebraucht wird, nicht für den Ordner, und wie sie lebendig bleibt, wenn sich der Prozess ändert.'
 ---

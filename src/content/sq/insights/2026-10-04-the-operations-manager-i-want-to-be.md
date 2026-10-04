@@ -5,6 +5,7 @@ category: Udhëheqje
 status: published
 featured: true
 summary: Pesë parime, një javë pune dhe 90 ditët e para. Jo menaxheri që duket më i rëndësishëm kur operacioni ka probleme, por ai që ndërton një operacion që ka gjithnjë e më pak nevojë të shpëtohet.
+description: "Pesë parime, një javë pune dhe 90 ditët e para: të ndërtosh një operacion që ka gjithnjë e më pak nevojë të shpëtohet."
 teaser: Nëse një ekip funksionon vetëm kur menaxheri është në dhomë, ai menaxher nuk ka ndërtuar ende një sistem.
 deck: 'Eseja e dymbëdhjetë dhe e fundit e serisë "Dhjetë vite pranë punës": njerëzit, standardet, të dhënat, ownership dhe përmirësimi i vazhdueshëm, plus një plan për 90 ditët e para në një rol të ri.'
 ---

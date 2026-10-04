@@ -5,6 +5,7 @@ category: Udhëheqje
 status: published
 featured: true
 summary: Leadership pa titull nuk është të bësh punën e shefit pa qenë shef. Është të mos fshihesh pas përshkrimit të vendit të punës kur situata ka nevojë për përgjegjësi, dhe të dish kur duhet të ndalosh.
+description: "Leadership pa titull nuk është të bësh punën e shefit. Është të mos fshihesh pas përshkrimit të punës kur situata kërkon përgjegjësi."
 teaser: Iniciativa thotë "Nuk do ta injoroj problemin". Autoriteti thotë "Kam të drejtën ta marr këtë vendim". Mund të kesh shumë nga e para pa pretenduar të dytën.
 deck: 'Eseja e dhjetë e serisë "Dhjetë vite pranë punës": çfarë bën kur përgjegjësia jote është më e madhe se pozicioni, si fitohet autoriteti pa pozitë, dhe tri pyetje para se të marrësh përsipër diçka që nuk është e jotja.'
 ---

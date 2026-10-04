@@ -5,6 +5,7 @@ category: Operacione
 status: published
 featured: true
 summary: Kam kaluar nga kontrolli i një kutie në magazinë, te kontrolli i një porosie që lëviz, te kontrolli i një transaksioni që ekziston vetëm në sistem. Parimi mbeti i njëjtë.
+description: "Nga kontrolli i një kutie në magazinë te një porosi që lëviz dhe një transaksion që ekziston vetëm në sistem. Parimi mbeti i njëjtë."
 teaser: Klientit nuk i intereson cili departament bëri gabimin. Në atë moment, personi përballë tij është e gjithë kompania.
 deck: 'Eseja e gjashtë e serisë "Dhjetë vite pranë punës": çfarë mbetet e njëjtë kur kalon nga dyqani te rampa dhe te recepsioni i natës, dhe çfarë duhet mësuar nga e para.'
 ---

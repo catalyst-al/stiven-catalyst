@@ -5,6 +5,7 @@ category: Operations
 status: published
 featured: true
 summary: The test of an SOP is not whether the author understands it. The author always does, because they wrote it. The test is whether someone else can use it under pressure and get the same result.
+description: "The test of an SOP is not whether its author understands it. It is whether someone else can use it under pressure and get the same result."
 teaser: The person doing the work should not have to search for the information. The information should be where they expect it.
 deck: 'The eighth essay in the series "Ten years close to the work": how to write a procedure for the moment it is used, not for the folder, and how to keep it alive when the process changes.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).

@@ -12,7 +12,7 @@ ogType: article
 eleventyComputed:
   title: "{{ issue.sq.theme }}"
   seo_title: "Nga terreni, numri {{ issue.number }}: {{ issue.sq.theme }}"
-  description: "{{ issue.sq.themeSub }}. {{ issue.sq.trend.lead }}"
+  description: "{{ issue.sq.trend.lead }}"
   ogImage: "/media/magazine/{{ issue.slug }}/sq/social.jpg"
 ---
 {% include "pages/magazine-issue.njk" %}

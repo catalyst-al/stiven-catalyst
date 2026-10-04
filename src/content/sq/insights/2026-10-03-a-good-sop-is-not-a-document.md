@@ -5,6 +5,7 @@ category: Operacione
 status: published
 featured: true
 summary: Testi i një SOP-je nuk është nëse autori e kupton. Autori gjithmonë e kupton, sepse e ka shkruar vetë. Testi është nëse një person tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat.
+description: "Testi i një SOP-je nuk është nëse autori e kupton. Është nëse një person tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat."
 teaser: Njeriu që punon nuk duhet të kërkojë informacionin. Informacioni duhet të jetë aty ku ai e pret.
 deck: 'Eseja e tetë e serisë "Dhjetë vite pranë punës": si shkruhet një procedurë për momentin kur përdoret, jo për dosjen, dhe si mbahet e gjallë kur procesi ndryshon.'
 ---

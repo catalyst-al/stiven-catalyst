@@ -11,7 +11,7 @@ ogType: article
 eleventyComputed:
   title: "{{ issue.en.theme }}"
   seo_title: "From the Floor, issue {{ issue.number }}: {{ issue.en.theme }}"
-  description: "{{ issue.en.themeSub }}. {{ issue.en.trend.lead }}"
+  description: "{{ issue.en.trend.lead }}"
   ogImage: "/media/magazine/{{ issue.slug }}/en/social.jpg"
 ---
 {% include "pages/magazine-issue.njk" %}

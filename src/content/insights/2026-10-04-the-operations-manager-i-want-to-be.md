@@ -5,6 +5,7 @@ category: Leadership
 status: published
 featured: true
 summary: Five principles, a working week and the first 90 days. Not the manager who looks most important when the operation is in trouble, but the one who builds an operation that needs rescuing less and less.
+description: "Five principles, a working week and the first 90 days: building an operation that needs rescuing less and less."
 teaser: If a team only works when the manager is in the room, that manager has not yet built a system.
 deck: 'The twelfth and final essay in the series "Ten years close to the work": people, standards, data, ownership and continuous improvement, plus a plan for the first 90 days in a new role.'
 ---
