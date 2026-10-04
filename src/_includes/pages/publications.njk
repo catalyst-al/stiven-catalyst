@@ -30,6 +30,22 @@
     </a>
     {%- endfor %}
   </section>
+{#- The Management Review: a one-off edition, beside the monthly magazine. -#}
+{%- set R = review[ml] %}
+{%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}
+{%- set reviewCover = magazinePages[review.slug][ml].pages[0] %}
+  <section class="shell book-feature magazine-feature">
+    <a class="book-object" href="{{ reviewUrl }}" tabindex="-1" aria-hidden="true">
+      <span class="book-object-cover"><img src="{{ reviewCover.image }}" width="{{ reviewCover.width }}" height="{{ reviewCover.height }}" alt="" loading="lazy"></span>
+    </a>
+    <div class="book-feature-copy">
+      <p class="kicker">{{ R.name }} · {{ R.date }}</p>
+      <h2><a href="{{ reviewUrl }}">{{ R.theme }}</a></h2>
+      <p class="book-subtitle">{{ R.tagline }}</p>
+      <p>{{ R.feature }}</p>
+      <a class="button-primary" href="{{ reviewUrl }}">{{ R.labels.open_edition }}</a>
+    </div>
+  </section>
 {% include "partials/guide-feature.njk" %}
 {% include "partials/book-feature.njk" %}
 {% include "partials/newsletter.njk" %}
