@@ -774,11 +774,16 @@ window.ToolKit = (() => {
         elsewhere.append(`${index ? " " : ""}${tx("Your log in {language} has {n} entries.", { language: item.name, n: int.format(item.count) })} `, link);
       });
     };
-    const note = exampleNote(results, () => {
+    // The example leaves as a whole: its rows and its settings (period, volume, target), so the
+    // visitor's own entries are never mixed into it or scored against its volume.
+    const dropExample = () => {
       state.rows = [];
       state.example = {};
       clearExample?.();
       showSettings();
+    };
+    const note = exampleNote(results, () => {
+      dropExample();
       changed();
     });
     const render = () => {
@@ -821,6 +826,7 @@ window.ToolKit = (() => {
         flash(importStatus, importText.none);
         return;
       }
+      if (exampleMatches(state)) dropExample();
       state.rows.push(...added);
       changed();
       paste.value = "";
@@ -857,6 +863,7 @@ window.ToolKit = (() => {
     root.querySelector("[data-clear]").addEventListener("click", () => {
       if (!state.rows.length || !window.confirm(clearText)) return;
       dropUndo();
+      if (exampleMatches(state)) dropExample();
       state.rows = [];
       changed();
     });
@@ -880,6 +887,7 @@ window.ToolKit = (() => {
       render,
       // A new row from the entry form.
       add: (row) => {
+        if (exampleMatches(state)) { dropUndo(); dropExample(); }
         state.rows.push(row);
         changed();
       },

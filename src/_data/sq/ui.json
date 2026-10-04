@@ -1731,5 +1731,6 @@
   "“Backlog is fine” means nothing; “320 parcels, sorted” does.": "“Mbetjet janë në rregull” nuk thotë asgjë; “320 pako, të sortuara” po.",
   "Cover Letter": "Letër motivimi",
   "“Routes in the period” is lower than the number of routes in the log, so the log count is used.": "“Linjat në periudhë” janë më pak se linjat në regjistër, ndaj përdoret numri i regjistrit.",
-  "little data": "pak të dhëna"
+  "little data": "pak të dhëna",
+  "{table}: {n} row from {source}.": "{table}: {n} rresht nga {source}."
 }

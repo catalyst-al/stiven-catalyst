@@ -707,7 +707,7 @@
           state.columns[part.name] = C.FIELDS[part.name].filter((field) => field in part.map);
           state.sources[part.name] = source;
           state.issues[part.name] = part.issues;
-          report.push(tx("{table}: {n} rows from {source}.", { table: TABLE_LABEL[part.name], n: int.format(records.length), source }));
+          report.push(tx(records.length === 1 ? "{table}: {n} row from {source}." : "{table}: {n} rows from {source}.", { table: TABLE_LABEL[part.name], n: int.format(records.length), source }));
           got += 1;
         });
         if (targets) {

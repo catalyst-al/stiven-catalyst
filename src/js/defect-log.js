@@ -386,7 +386,8 @@
 
   // The log for the Pareto tool: causes counted in units, valued in euros where known.
   const paretoTable = () => ({
-    source: data.text?.title || document.title.split("|")[0].trim(),
+    // The tool's name as the page shows it (the title in the browser tab is written for search engines).
+    source: data.text?.title || document.querySelector("h1")?.textContent.replace(/\u00ad/g, "").trim() || document.title.split("|")[0].trim(),
     template: KEY.includes("damage") ? "damage" : "picking-errors",
     headers: [tx("Date"), fields.find((f) => f.name === "shift")?.label || "Shift", fields.find((f) => f.name === "stage")?.label || "Stage",
       fields.find((f) => f.name === "type")?.label || "Type", fields.find((f) => f.name === "cause")?.label || "Cause", tx("Units"), tx("Cost (€)")],

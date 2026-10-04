@@ -34,7 +34,7 @@
     DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
-    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample, firstVisit, exampleStamp, exampleNote } = window.ToolKit;
+    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample, firstVisit, exampleStamp, exampleMatches, exampleNote } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const SVG = "http://www.w3.org/2000/svg";
@@ -579,6 +579,7 @@
       flash(entryStatus, tx("Check the numbers: defects cannot be more than handled."));
       return;
     }
+    leaveExample();
     const replaced = state.rows.some((item) => item.date === row.date);
     upsert([row]);
     save();
@@ -600,6 +601,7 @@
       flash(importStatus, tx("No rows found. Check the order: date, handled, defects."));
       return;
     }
+    leaveExample();
     upsert(added);
     save();
     render();
@@ -624,11 +626,16 @@
     state.example = exampleStamp(state.rows);
     root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
   };
-  const note = exampleNote(results, () => {
+  // The example leaves as a whole, its days and its settings, before the visitor's own days go in.
+  const dropExample = () => {
     state.rows = [];
     state.example = {};
     state.metric = ""; state.unit = ""; state.baseline = "";
     root.querySelectorAll("[data-setting]").forEach((input) => { input.value = state[input.name]; });
+  };
+  const leaveExample = () => { if (exampleMatches(state)) dropExample(); };
+  const note = exampleNote(results, () => {
+    dropExample();
     save();
     render();
   });
@@ -642,6 +649,7 @@
 
   root.querySelector("[data-clear]").addEventListener("click", () => {
     if (!state.rows.length || !window.confirm(tx("Clear all days from the chart?"))) return;
+    leaveExample();
     state.rows = [];
     save();
     render();

@@ -1731,5 +1731,6 @@
   "“Backlog is fine” means nothing; “320 parcels, sorted” does.": "„Rückstand passt“ sagt nichts; „320 Pakete, sortiert“ schon.",
   "Cover Letter": "Anschreiben",
   "“Routes in the period” is lower than the number of routes in the log, so the log count is used.": "„Touren im Zeitraum“ ist kleiner als die Touren im Protokoll, deshalb wird die Anzahl im Protokoll verwendet.",
-  "little data": "wenige Daten"
+  "little data": "wenige Daten",
+  "{table}: {n} row from {source}.": "{table}: {n} Zeile aus {source}."
 }

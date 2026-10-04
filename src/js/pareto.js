@@ -487,6 +487,8 @@
   };
   const say = (text) => { status.textContent = text; };
   if (state.source?.truncated) say(tx("Only the first {n} rows of {name} were kept between visits. Open the file again for the full totals.", { n: int.format(SAVE_ROWS), name: state.source.name }));
+  // The example keeps its label between visits, so it is never taken for the visitor's own data.
+  else if (state.source?.name.startsWith(`${tx("Example")}: `)) say(tx("{name}: {n} rows read.", { name: state.source.name, n: int.format(state.source.rows.length) }));
 
   const template = () => templates[state.template];
   const valueName = () => state.valueLabel.trim() || (state.source && state.map?.value >= 0 ? state.source.headers[state.map.value] : "") || tx("Value");

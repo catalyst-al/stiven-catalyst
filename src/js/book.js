@@ -20,8 +20,8 @@
   const fill = (text, values) => String(text || "").replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
   const numberOf = (page) => Number(page?.dataset.page) || 0;
 
-  // In the open book the back cover sits alone on the left, so an empty
-  // endpaper goes before it, as in a printed book.
+  // In the open book the back cover sits alone on the left. With an odd number of pages an empty
+  // endpaper goes before it, as in a printed book; with an even number it lands there by itself.
   const endpaper = document.createElement("div");
   endpaper.className = "book-page is-blank";
   endpaper.setAttribute("aria-hidden", "true");
@@ -30,7 +30,7 @@
   let turned = 0;  // sheets already turned to the left
   let spread = false;
 
-  const faceList = () => (spread ? [...pages.slice(0, -1), endpaper, pages[total - 1]] : pages);
+  const faceList = () => (spread && total % 2 === 1 ? [...pages.slice(0, -1), endpaper, pages[total - 1]] : pages);
 
   // The pages in view: [left, right] when open, [page] on a phone.
   const inView = () => {
