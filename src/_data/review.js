@@ -498,6 +498,11 @@ const common = {
     read_text: x("Read the edition as text", "Lexoje botimin si tekst", "Die Ausgabe als Text lesen"),
     page_by_page: x("The edition, page by page", "Botimi, faqe pas faqeje", "Die Ausgabe, Seite für Seite"),
   },
+  // The description for search results: short enough to be shown whole (about 155 characters).
+  seo: x(
+    "The manager in the age of AI: figures from Microsoft, Deloitte, PwC, Gallup and Owl Labs, checked one by one, and the practice behind them.",
+    "Menaxheri në epokën e AI-së: shifrat e Microsoft, Deloitte, PwC, Gallup dhe Owl Labs, të kontrolluara një nga një, dhe praktika pas tyre.",
+    "Die Führungskraft im KI-Zeitalter: Zahlen von Microsoft, Deloitte, PwC, Gallup und Owl Labs, einzeln geprüft, und die Praxis dahinter."),
   feature: x(
     "A one-off edition on the manager in the age of AI: the numbers from Microsoft, Deloitte, PwC, Gallup and Owl Labs, checked one by one, and the practice that turns them into work.",
     "Një botim më vete për menaxherin në epokën e AI-së: shifrat e Microsoft, Deloitte, PwC, Gallup dhe Owl Labs, të kontrolluara një nga një, dhe praktika që i kthen në punë.",

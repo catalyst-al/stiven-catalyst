@@ -5,6 +5,7 @@ category: Betrieb
 status: published
 featured: true
 summary: Ich bin von der Kontrolle eines Kartons im Lager zur Kontrolle eines Auftrags in Bewegung gekommen und dann zur Kontrolle einer Transaktion, die nur im System existiert. Das Prinzip blieb dasselbe.
+description: "Vom Karton im Lager über den Auftrag in Bewegung bis zur Transaktion, die nur im System existiert. Das Prinzip blieb dasselbe."
 teaser: Den Kunden interessiert nicht, welche Abteilung den Fehler gemacht hat. In diesem Moment ist die Person vor ihm das ganze Unternehmen.
 deck: 'Der sechste Essay der Reihe „Zehn Jahre nah an der Arbeit“: was gleich bleibt, wenn man vom Laden an die Rampe und an die Rezeption in der Nacht wechselt, und was man von Grund auf lernen muss.'
 ---

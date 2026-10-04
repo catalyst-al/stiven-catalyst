@@ -5,6 +5,7 @@ category: Führung
 status: published
 featured: true
 summary: Fünf Prinzipien, eine Arbeitswoche und die ersten 90 Tage. Nicht der Manager, der am wichtigsten wirkt, wenn der Betrieb Probleme hat, sondern der, der einen Betrieb aufbaut, der immer seltener gerettet werden muss.
+description: "Fünf Prinzipien, eine Arbeitswoche und die ersten 90 Tage: einen Betrieb aufbauen, der immer seltener gerettet werden muss."
 teaser: Wenn ein Team nur funktioniert, wenn der Manager im Raum ist, hat dieser Manager noch kein System aufgebaut.
 deck: 'Der zwölfte und letzte Essay der Reihe „Zehn Jahre nah an der Arbeit“: Menschen, Standards, Daten, Ownership und kontinuierliche Verbesserung, dazu ein Plan für die ersten 90 Tage in einer neuen Rolle.'
 ---
