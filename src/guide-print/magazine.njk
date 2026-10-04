@@ -12,7 +12,8 @@ pagination:
 {%- set L = magazine.labels[lang] -%}
 {%- set N = magazine.names[lang] -%}
 {%- set tool = toolsGuide.tool[lang][issue.tool] -%}
-{%- set pageOf = { trend: 3, floor: 5, tool: 8, essays: 9, question: 10 } -%}
+{%- set pageOf = issue.pageOf -%}
+{%- set fourth = "read" if issue.reading else "essays" -%}
 
 {%- macro chrome(number, section) -%}
 <header class="run"><span>{{ N.name }} · {{ L.issue }} {{ issue.number }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
@@ -96,8 +97,9 @@ p { margin-bottom: 2.4mm; }
 .formula { list-style: none; display: grid; gap: 1.6mm; margin: 2mm 0 5mm; }
 .formula li { display: flex; align-items: center; gap: 2.5mm; font-size: 9.4pt; color: var(--ink); }
 .formula li span { width: 5.4mm; height: 5.4mm; border-radius: 50%; border: .3mm solid var(--blue); color: var(--blue); display: grid; place-items: center; font-size: 6.6pt; font-weight: 700; flex: none; }
-.formula li:first-child { color: #ff8a8e; font-weight: 600; }
-.formula li:first-child span { border-color: #ff8a8e; color: #ff8a8e; }
+.formula.alert li:first-child { color: #ff8a8e; font-weight: 600; }
+.formula.alert li:first-child span { border-color: #ff8a8e; color: #ff8a8e; }
+.essays .why { display: block; color: var(--muted); font-size: 7.6pt; margin-top: .4mm; }
 .big-quote { font-family: Georgia, serif; font-size: 13pt; line-height: 1.4; color: var(--ink); border-left: .9mm solid var(--blue); padding-left: 4mm; margin-bottom: 5mm; }
 .open { position: absolute; left: 13mm; right: 13mm; bottom: 19mm; display: flex; justify-content: space-between; align-items: center; background: rgba(74,181,247,.1); border: .25mm solid rgba(74,181,247,.4); border-radius: 2.5mm; padding: 2.4mm 3.4mm; font-size: 7.8pt; }
 .open b { color: var(--blue); font-weight: 600; }
@@ -132,7 +134,7 @@ p { margin-bottom: 2.4mm; }
   <div class="tagline">{{ N.tagline }}</div>
   <div class="cover-stat"><div class="n">{{ m.coverStat.n }}</div><p class="t">{{ m.coverStat.text }}</p></div>
   <div class="cover-theme"><div class="k">{{ L.trend }}</div><div class="t">{{ m.theme }}</div><div class="s">{{ m.themeSub }}</div></div>
-  <div class="cover-foot"><span>stivencatalyst.com</span><span>{{ L.floor }} · {{ L.tool }} · {{ L.essays }}</span></div>
+  <div class="cover-foot"><span>stivencatalyst.com</span><span>{{ L.floor }} · {{ L.tool }} · {{ L[fourth] }}</span></div>
 </section>
 
 <section class="pg">
@@ -144,7 +146,7 @@ p { margin-bottom: 2.4mm; }
     <li><span class="n">{{ loop.index }}</span><span><span class="k">{{ L[row[0]] }}</span><span class="t">{{ row[1] }}</span></span><span class="p">{{ pageOf[row[0]] }}</span></li>
     {%- endfor %}
   </ol>
-  <p class="colophon">{{ N.tagline }}. {{ m.themeSub }}. {{ L.sources }}: {{ L.page }} 10.</p>
+  <p class="colophon">{{ N.tagline }}. {{ m.themeSub }}. {{ L.sources }}: {{ L.page }} {{ pageOf.question }}.</p>
 </section>
 
 <section class="pg">
@@ -162,49 +164,49 @@ p { margin-bottom: 2.4mm; }
   <div class="meaning"><h3>{{ m.trend.meaning.h }}</h3><p>{{ m.trend.meaning.p }}</p></div>
 </section>
 
+{%- for split in issue.floorSplit %}
 <section class="pg">
-  {{ chrome(5, L.floor) }}
+  {{ chrome(pageOf.floor + loop.index0, L.floor) }}
+  {%- if loop.first %}
   <p class="kicker">{{ L.floor }}</p>
   <h2>{{ m.contents[1][1] }}</h2>
   <p class="byline">{{ m.floor.intro }}</p>
-  <div class="qa">{% for row in m.floor.qa.slice(0, 2) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
-</section>
-
-<section class="pg">
-  {{ chrome(6, L.floor) }}
-  <div class="qa">{% for row in m.floor.qa.slice(2, 4) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
-</section>
-
-<section class="pg">
-  {{ chrome(7, L.floor) }}
-  <div class="qa">{% for row in m.floor.qa.slice(4) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
+  {%- endif %}
+  <div class="qa">{% for row in m.floor.qa.slice(split[0], split[1]) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
+  {%- if loop.last %}
   <p class="pull">{{ m.floor.closing }}</p>
   <p class="sign">Stiven Janaqi</p>
+  {%- endif %}
 </section>
-
+{% endfor %}
 <section class="pg">
-  {{ chrome(8, L.tool) }}
+  {{ chrome(pageOf.tool, L.tool) }}
   <p class="kicker">{{ L.tool }}</p>
   <div class="tool-name">{{ tool.name }}</div>
   <p class="tool-meta">{{ tool.type }} · {{ tool.time }}</p>
   <p>{{ m.tool.text }}</p>
-  <h3>{{ L.formula }}</h3>
-  <ol class="formula">{% for step in m.tool.formula %}<li><span>{{ loop.index }}</span>{{ step }}</li>{% endfor %}</ol>
+  <h3>{{ m.tool.formulaTitle or L.formula }}</h3>
+  <ol class="formula{{ ' alert' if issue.alertFirst }}">{% for step in m.tool.formula %}<li><span>{{ loop.index }}</span>{{ step }}</li>{% endfor %}</ol>
   <p class="big-quote">{{ m.tool.quote }}</p>
   <div class="open"><b>{{ L.open }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>
 </section>
 
 <section class="pg">
-  {{ chrome(9, L.essays) }}
-  <p class="kicker">{{ L.essays }}</p>
+  {{ chrome(pageOf[fourth], L[fourth]) }}
+  <p class="kicker">{{ L[fourth] }}</p>
   <h2>{{ m.contents[3][1] }}</h2>
+  {%- if issue.reading %}
+  <p>{{ m.reading.intro }}</p>
+  <ol class="essays">{% for slug in issue.reading %}{% set note = m.reading.notes[loop.index0] %}{% for essay in collections["insights" + (lang | langSuffix)] %}{% if essay.fileSlug.endsWith(slug) %}<li><span>{{ essay.data.title }}<span class="why">{{ note }}</span></span></li>{% endif %}{% endfor %}{% endfor %}</ol>
+  {%- else %}
   <p>{{ m.essays.intro }}</p>
   <ol class="essays">{% for essay in collections["insights" + (lang | langSuffix)] %}{% set day = essay.date | isoDate %}{% if day >= issue.essays.from and day <= issue.essays.to %}<li>{{ essay.data.title }}</li>{% endif %}{% endfor %}</ol>
   <p class="note">{{ m.essays.pick }}</p>
+  {%- endif %}
 </section>
 
 <section class="pg">
-  {{ chrome(10, L.question) }}
+  {{ chrome(pageOf.question, L.question) }}
   <p class="kicker">{{ L.question }}</p>
   <p class="question">{{ m.question }}</p>
   <p class="kicker">{{ L.sources }}</p>
