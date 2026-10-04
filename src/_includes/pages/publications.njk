@@ -1,0 +1,17 @@
+{#- Publications: the book, the Tools Guide and the monthly magazine, in the three languages. -#}
+  <section class="shell page-hero publications-hero">
+    <p class="eyebrow">{{ "Books, guides and a monthly magazine" | t(lang) }}</p>
+    <h1>{{ "Publications" | t(lang) }}</h1>
+    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, and every month a magazine on management, from the floor." | t(lang) }}</p>
+  </section>
+{% include "partials/guide-feature.njk" %}
+{% include "partials/book-feature.njk" %}
+  <section class="shell magazine-soon">
+    <div class="magazine-soon-copy">
+      <p class="kicker">{{ "Monthly magazine · in preparation" | t(lang) }}</p>
+      <h2>{{ "The monthly magazine" | t(lang) }}</h2>
+      <p>{{ "Every month, one management trend with its sources, a comment from the floor, the tool of the month and the month's essays. Short enough to read on a break." | t(lang) }}</p>
+      <p class="magazine-soon-note">{{ "The first issue is in preparation." | t(lang) }}</p>
+    </div>
+  </section>
+{% include "partials/newsletter.njk" %}
