@@ -2,14 +2,14 @@
 {%- set pageTitle = (shortTitle + " | " + site.title) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set homeUrl = "/" | local(lang) -%}
+{#- The menu: five places. "Writing" covers Insights, Reflections and Field Notes (the third item lists the pages
+    it is active on); the brand takes you home. -#}
+{%- set writingPages = ["/insights.html" | local(lang), "/reflections.html" | local(lang), "/field-notes.html" | local(lang)] -%}
 {%- set nav = [
-  [homeUrl, "Home" | t(lang)],
-  ["/insights.html" | local(lang), "Insights" | t(lang)],
-  ["/reflections.html" | local(lang), "Reflections" | t(lang)],
-  ["/publications.html" | local(lang), "Publications" | t(lang)],
-  ["/field-notes.html" | local(lang), "Field Notes" | t(lang)],
-  ["/projects.html" | local(lang), "Projects" | t(lang)],
+  ["/insights.html" | local(lang), "Writing" | t(lang), writingPages],
   ["/tools.html" | local(lang), "Tools" | t(lang)],
+  ["/publications.html" | local(lang), "Publications" | t(lang)],
+  ["/projects.html" | local(lang), "Projects" | t(lang)],
   ["/about.html" | local(lang), "About" | t(lang)]
 ] -%}
 {%- set hasLegal = legal.name and legal.city -%}
@@ -84,7 +84,7 @@
     </a>
     <nav class="main-nav" aria-label="{{ 'Primary' | t(lang) }}">
       {%- for item in nav %}
-      <a{% if activeNav == item[0] %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}</a>
+      <a{% if activeNav == item[0] or (item[2] and activeNav in item[2]) %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}</a>
       {%- endfor %}
     </nav>
     <div class="header-actions">
@@ -95,7 +95,7 @@
   </div>
   <nav id="mobile-menu" class="mobile-panel" data-mobile-panel data-open="false" aria-label="{{ 'Mobile' | t(lang) }}">
     {%- for item in nav %}
-    <a{% if activeNav == item[0] %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}</a>
+    <a{% if activeNav == item[0] or (item[2] and activeNav in item[2]) %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}</a>
     {%- endfor %}
     {%- include "partials/lang-switch.njk" %}
   </nav>
