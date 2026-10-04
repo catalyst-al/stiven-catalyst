@@ -407,6 +407,50 @@ button, input, select { font: inherit; }
   .cosmos-chip:hover { transform: none; }
 }
 
+/* Under the hero: the book and the newest issue of the magazine, small, as on Publications. */
+.hero-shelf {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px clamp(24px, 4vw, 48px);
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.hero-shelf-label {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.hero-shelf-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.hero-shelf .book-object { width: 78px; flex: none; animation: shelf-float 6s ease-in-out infinite; }
+.hero-shelf-item + .hero-shelf-item .book-object { animation-delay: -3s; }
+.hero-shelf .book-object::before { inset: 10% -30% 0; filter: blur(18px); }
+.hero-shelf .book-object-cover { box-shadow: 1px 1px 0 #f3efe6, 2px 2px 0 #d9d2c3, 3px 3px 0 #f3efe6, 4px 4px 0 #cbc3b2, 18px 22px 30px -8px rgba(0, 0, 0, .6); }
+.hero-shelf-item:hover .book-object-cover,
+.hero-shelf-item:focus-visible .book-object-cover { transform: rotateY(-9deg) rotateX(1deg); }
+.hero-shelf-text { display: grid; gap: 3px; max-width: 220px; }
+.hero-shelf-text small { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.hero-shelf-text strong { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.15; }
+.hero-shelf-text span { color: var(--blue); font-size: 13px; font-weight: 600; }
+.hero-shelf-item:hover .hero-shelf-text strong { color: var(--blue-soft); }
+@keyframes shelf-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-shelf .book-object { animation: none; }
+}
+
 .cosmos-family {
   width: 100%;
   max-width: 540px;
