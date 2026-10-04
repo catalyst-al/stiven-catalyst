@@ -29,7 +29,7 @@ Të dhënat e fundit tregojnë diçka që shumë njerëz në operacione e ndiejn
 
 **Menaxheri përcakton pjesën më të madhe të klimës së ekipit.** Gallup vlerëson se rreth 70% e ndryshimit në angazhimin e një ekipi lidhet me menaxherin.
 
-**Ekipet po zmadhohen, por jo kudo njësoj.** Në SHBA, numri mesatar i vartësve direkt për menaxher u rrit nga 8,2 në 2013 në 12,1 në 2025. Mediana mbetet rreth 6. Mesatarja rritet sepse disa ekipe janë bërë shumë të mëdha, jo sepse çdo menaxher ka më shumë njerëz.
+**Ekipet po zmadhohen, por jo kudo njësoj.** Në SHBA, numri mesatar i vartësve direkt për menaxher u rrit nga 8,2 në 2013 në 12,1 në 2025. Mediana mbetet rreth 5 deri në 6. Mesatarja rritet sepse disa ekipe janë bërë shumë të mëdha, jo sepse çdo menaxher ka më shumë njerëz.
 
 **Dhe tani vjen AI, përmes menaxherit.** Në tremujorin e dytë të 2026, sipas Gallup, në SHBA 51% e drejtuesve të lartë përdorin AI disa herë në javë ose më shpesh, nga 17% në 2023. Te menaxherët shifra është 36%, nga 15%. Te punonjësit pa rol menaxheri është 26%, nga 9%. Punonjësit, menaxheri i të cilëve e mbështet aktivisht përdorimin e AI-së, e përdorin atë 2,1 herë më shpesh. Angazhimi i tyre është 48%, kundrejt 30% te të tjerët. Kur ka përdorim të shpeshtë, një plan të qartë dhe mbështetje nga menaxheri, angazhimi arrin 53%.
 
@@ -51,7 +51,7 @@ Ajo që të lodh nuk është gjithmonë madhësia e një problemi. Është numri
 
 **A more trajnim për menaxhim?**
 
-Nuk kam informacion të sigurt që më lejon të them se kam marrë një program formal trajnimi menaxherial në atë moment, ndaj nuk do ta fus si fakt. Ajo që do të më kishte ndihmuar shumë do të ishte një onboarding specifik për kalimin nga operator në menaxher: si të prioritizosh, si të delegosh, si të japësh feedback, si të zhvillosh njerëzit dhe si të dallosh një problem që kërkon ndërhyrjen tënde nga një problem që ekipi duhet ta zgjidhë vetë.
+Ajo që do të më kishte ndihmuar shumë do të ishte një onboarding specifik për kalimin nga operator në menaxher: si të prioritizosh, si të delegosh, si të japësh feedback, si të zhvillosh njerëzit dhe si të dallosh një problem që kërkon ndërhyrjen tënde nga një problem që ekipi duhet ta zgjidhë vetë.
 
 Shumë njerëz promovohen sepse janë të mirë në punën operative. Por puna e menaxherit kërkon një grup tjetër aftësish.
 
@@ -135,7 +135,7 @@ KONTROLLI I FAKTEVE (nuk publikohet)
 |---|---|
 | Shifrat e Gallup 2026 (20%, 23%, 31/27/22%, 19%, 12%, <50% trajnim, 79%) | Gallup SOGW 2026; verifikuar te Unleash, Haiilo, Sociabble, Enterprise Engagement, People Results, HR Dive. Faqja gallup.com nuk u hap dot nga ambienti; kontrollohet edhe një herë para publikimit. |
 | 70% e ndryshimit në angazhim | Gjetje e përsëritur e Gallup; e cituar te Loeb Leadership dhe raporti 2025 |
-| 8,2 → 12,1; mediana ~6 | Gallup, Span of Control; e cituar te gothamCulture dhe allwork.space |
+| 8,2 → 12,1; mediana rreth 5–6 | Gallup, Span of Control; e cituar te gothamCulture dhe allwork.space |
 | AI: 51/17, 36/15, 26/9 (Q2 2026, SHBA) | Gallup; e cituar te Axios (13 prill 2026) dhe Political Wire |
 | 2,1 herë; 48% kundrejt 30%; 53% | Gallup, "Employee Engagement Remains Flat as AI Adoption Accelerates"; HR Dive |
 | Parashikimi i Gartner | Gartner, njoftim për shtyp, 22.10.2024; SHRM, Inc. |
