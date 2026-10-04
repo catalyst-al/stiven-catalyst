@@ -4,8 +4,9 @@
     <h1>{{ "Publications" | t(lang) }}</h1>
     <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, and every month a magazine on management, from the floor." | t(lang) }}</p>
   </section>
-{#- The magazine: the newest issue in front, every issue listed below it. -#}
-{%- set issue = magazine.latest %}{% set ml = lang or "en" %}
+{#- The magazine: every issue the same way as the other publications, cover and text, the newest first. -#}
+{%- set ml = lang or "en" %}
+{%- for issue in magazine.issues | reverse %}
 {%- set issueUrl = ("/magazine/" + issue.slug + ".html") | local(lang) %}
 {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
   <section class="shell book-feature magazine-feature">
@@ -16,20 +17,11 @@
       <p class="kicker">{{ magazine.names[ml].name }} · {{ magazine.labels[ml].issue }} {{ issue.number }} · {{ issue[ml].date }}</p>
       <h2><a href="{{ issueUrl }}">{{ issue[ml].theme }}</a></h2>
       <p class="book-subtitle">{{ issue[ml].themeSub }}</p>
-      <p>{{ "Every month, one management trend with its sources, a comment from the floor, the tool of the month and the month's essays. Short enough to read on a break." | t(lang) }}</p>
+      <p>{{ issue[ml].trend.lead }}</p>
       <a class="button-primary" href="{{ issueUrl }}">{{ "Open the issue" | t(lang) }}</a>
     </div>
   </section>
-  <section class="shell listing magazine-list">
-    <p class="kicker">{{ magazine.names[ml].name }} · {{ "All issues" | t(lang) }}</p>
-    {%- for item in magazine.issues | reverse %}
-    <a class="list-row" href="{{ ('/magazine/' + item.slug + '.html') | local(lang) }}">
-      <span class="number">{{ item.number | pad }}</span>
-      <div><h2>{{ item[ml].theme }}</h2><p>{{ item[ml].themeSub }}</p></div>
-      <span class="row-meta">{{ item[ml].date }}</span>
-    </a>
-    {%- endfor %}
-  </section>
+{%- endfor %}
 {#- The Management Review: a one-off edition, beside the monthly magazine. -#}
 {%- set R = review[ml] %}
 {%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}
