@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+pagination:
+  data: magazine.issues
+  size: 1
+  alias: issue
+permalink: "/sq/magazine/{{ issue.slug }}.html"
+activeNav: /sq/publications.html
+ogType: article
+eleventyComputed:
+  title: "{{ issue.sq.theme }}"
+  seo_title: "Nga terreni, numri {{ issue.number }}: {{ issue.sq.theme }}"
+  description: "{{ issue.sq.themeSub }}. {{ issue.sq.trend.lead }}"
+  ogImage: "/media/magazine/{{ issue.slug }}/sq/social.jpg"
+---
+{% include "pages/magazine-issue.njk" %}

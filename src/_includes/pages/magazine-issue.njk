@@ -1,0 +1,132 @@
+{#- One issue of the magazine in its reader, shared by the three languages: the same page-turning reader as the
+    book (js/book.js), the pages of this language's PDF (magazinePages.json, made by scripts/magazine.mjs) and the
+    whole text below, from the same source as the print (magazine.js). Needs issue. -#}
+{%- set lang = lang or "en" -%}
+{%- set m = issue[lang] -%}
+{%- set L = magazine.labels[lang] -%}
+{%- set N = magazine.names[lang] -%}
+{%- set tool = toolsGuide.tool[lang][issue.tool] -%}
+{%- set reader = magazinePages[issue.slug][lang] -%}
+{%- set cover = reader.pages[0] -%}
+{%- set pdf = "/media/magazine/" + issue.slug + "/" + issue.slug + "-" + lang + ".pdf" -%}
+{%- set pageOf = { trend: 3, floor: 5, tool: 8, essays: 9, question: 10 } -%}
+{%- set labels = {
+  cover: "Cover" | t(lang),
+  back: "Back cover" | t(lang),
+  page: "Page {n}" | t(lang),
+  pages: "Pages {a}–{b}" | t(lang),
+  of: "of {total}" | t(lang),
+  resume: "Continue from page {n}" | t(lang)
+} -%}
+  <section class="shell book-hero">
+    <div class="book-hero-copy">
+      <p class="eyebrow">{{ N.name }} · {{ L.issue }} {{ issue.number }} · {{ m.date }}</p>
+      <h1>{{ m.theme }}</h1>
+      <p class="lede">{{ m.themeSub }}. {{ m.trend.lead }}</p>
+      <dl class="book-facts">
+        <div><dt>{{ L.issue }}</dt><dd>{{ issue.number }}</dd></div>
+        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ reader.pageCount }}</dd></div>
+        <div><dt>{{ "Languages" | t(lang) }}</dt><dd>{{ magazine.langs | length }}</dd></div>
+      </dl>
+      <div class="hero-actions">
+        <a class="button-primary" href="#reader" data-book-open>{{ "Open the issue" | t(lang) }}</a>
+        <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
+        <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+      </div>
+    </div>
+    <a class="book-object" href="#reader" data-book-open aria-label="{{ 'Open the issue' | t(lang) }}">
+      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
+    </a>
+  </section>
+
+  <section class="book-stage" id="reader" aria-label="{{ 'The issue, page by page' | t(lang) }}">
+    <div class="book-reader" data-book data-slug="{{ issue.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
+      <div class="book-viewport">
+        <div class="book" data-book-pages>
+          {%- for page in reader.pages %}
+          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}" width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+          {%- endfor %}
+        </div>
+      </div>
+
+      <div class="book-controls" data-book-controls hidden>
+        <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="book-status">
+          <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
+          <p class="book-chapter" data-book-chapter></p>
+          <input class="book-scrub" type="range" min="1" max="{{ reader.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
+        </div>
+        <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="book-tools">
+          <button class="book-chip" type="button" data-book-toc aria-expanded="false" aria-controls="book-contents">{{ "Contents" | t(lang) }}</button>
+          <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
+          <a class="book-chip" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+          <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
+        </div>
+      </div>
+
+      <nav class="book-contents" id="book-contents" data-book-contents aria-label="{{ 'Contents' | t(lang) }}" hidden>
+        <ol>
+          {%- for row in m.contents %}
+          <li><button type="button" data-book-goto="{{ pageOf[row[0]] }}"><span class="book-contents-label">{{ L[row[0]] }}</span><span class="book-contents-title">{{ row[1] }}</span><span class="book-contents-page">{{ pageOf[row[0]] | pad }}</span></button></li>
+          {%- endfor %}
+        </ol>
+      </nav>
+
+      <p class="book-hint" data-book-hint hidden>{{ "Click or swipe a page to turn it. The arrow keys work too." | t(lang) }}</p>
+    </div>
+  </section>
+
+  <section class="shell book-text" id="text">
+    <details data-book-details>
+      <summary>
+        <span class="kicker">{{ "The whole text" | t(lang) }}</span>
+        <span class="book-text-title">{{ "Read the issue as text" | t(lang) }}</span>
+        <span class="book-text-note">{{ "For reading on a small screen, searching or a screen reader. The same words, without the page design." | t(lang) }}</span>
+      </summary>
+      <div class="article-content book-text-body">
+        <p class="book-text-kicker">{{ L.trend }}</p>
+        <h2>{{ m.trend.title }}</h2>
+        <p><em>{{ m.trend.lead }}</em></p>
+        <ul>{% for s in m.trend.stats %}<li><strong>{{ s.n }}</strong> {{ s.t }}</li>{% endfor %}</ul>
+        {%- for part in m.trend.parts %}
+        <h3>{{ part.h }}</h3>
+        <p>{{ part.p }}</p>
+        {%- endfor %}
+        <h3>{{ m.trend.meaning.h }}</h3>
+        <p>{{ m.trend.meaning.p }}</p>
+
+        <p class="book-text-kicker">{{ L.floor }}</p>
+        <h2>{{ m.contents[1][1] }}</h2>
+        <p class="book-text-note">{{ m.floor.intro }}</p>
+        {%- for row in m.floor.qa %}
+        <h3>{{ row.q }}</h3>
+        {%- for a in row.a %}<p>{{ a }}</p>{% endfor %}
+        {%- endfor %}
+        <p class="book-text-quote">{{ m.floor.closing }}</p>
+
+        <p class="book-text-kicker">{{ L.tool }}</p>
+        <h2><a href="{{ tool.url }}">{{ tool.name }}</a></h2>
+        <p>{{ m.tool.text }}</p>
+        <p><strong>{{ L.formula }}:</strong> {{ m.tool.formula | join(" → ") }}</p>
+        <p class="book-text-quote">{{ m.tool.quote }}</p>
+
+        <p class="book-text-kicker">{{ L.essays }}</p>
+        <h2>{{ m.contents[3][1] }}</h2>
+        <p>{{ m.essays.intro }}</p>
+        <ol>
+          {%- for essay in collections["insights" + (lang | langSuffix)] %}{% set day = essay.date | isoDate %}{% if day >= issue.essays.from and day <= issue.essays.to %}
+          <li><a href="{{ essay.url }}">{{ essay.data.title }}</a></li>
+          {%- endif %}{% endfor %}
+        </ol>
+        <p>{{ m.essays.pick }}</p>
+
+        <p class="book-text-kicker">{{ L.question }}</p>
+        <p class="book-text-quote">{{ m.question }}</p>
+
+        <h3>{{ L.sources }}</h3>
+        <ul>{% for s in issue.sources %}<li>{{ s[lang] }} <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a></li>{% endfor %}</ul>
+      </div>
+    </details>
+  </section>
+<script src="{{ '/js/book.js' | assetUrl }}" defer></script>

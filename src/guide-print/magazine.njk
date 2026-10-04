@@ -1,0 +1,222 @@
+---
+pagination:
+  data: magazine.prints
+  size: 1
+  alias: item
+---
+{#- One issue of the magazine in one language, as A5 pages. scripts/magazine.mjs prints it to PDF; the published
+    site never carries this page (guide-print.11tydata.js). The text is in magazine.js. -#}
+{%- set lang = item.lang -%}
+{%- set issue = item.issue -%}
+{%- set m = issue[lang] -%}
+{%- set L = magazine.labels[lang] -%}
+{%- set N = magazine.names[lang] -%}
+{%- set tool = toolsGuide.tool[lang][issue.tool] -%}
+{%- set pageOf = { trend: 3, floor: 5, tool: 8, essays: 9, question: 10 } -%}
+
+{%- macro chrome(number, section) -%}
+<header class="run"><span>{{ N.name }} · {{ L.issue }} {{ issue.number }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span>{{ m.date }}</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ N.name }} · {{ L.issue }} {{ issue.number }}</title>
+<style>
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Archivo Black"; src: url("/fonts/archivo-black-latin-400-normal.woff2") format("woff2"); }
+@page { size: 148mm 210mm; margin: 0; }
+:root { --paper: #060a10; --ink: #f6f7f4; --body: #d5dbe0; --muted: #a5b0b8; --line: rgba(255,255,255,.12); --blue: #4ab5f7; --gold: #d1a553; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); }
+body { font-family: "Inter", sans-serif; color: var(--body); font-size: 9pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.pg { width: 148mm; height: 210mm; position: relative; overflow: hidden; break-after: page; padding: 18mm 13mm 17mm; background: radial-gradient(120mm 70mm at 50% -18mm, rgba(74,181,247,.12), transparent 70%), var(--paper); }
+.run { position: absolute; top: 8.5mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.run-section { color: var(--blue); }
+.foot { position: absolute; bottom: 8mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--muted); border-top: .25mm solid var(--line); padding-top: 2.2mm; }
+.foot .num { color: var(--ink); font-weight: 600; }
+.kicker { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--blue); margin-bottom: 2.4mm; }
+h1, h2, h3 { color: var(--ink); font-weight: 400; }
+h2 { font-family: "Archivo Black", sans-serif; font-size: 20pt; line-height: 1.06; margin-bottom: 3.5mm; letter-spacing: -.01em; }
+h3 { font-weight: 700; font-size: 9.4pt; margin: 3.2mm 0 1.2mm; }
+p { margin-bottom: 2.4mm; }
+.lead { font-family: Georgia, serif; font-style: italic; font-size: 11pt; line-height: 1.45; color: var(--ink); margin-bottom: 4mm; }
+.serif { font-family: Georgia, serif; }
+
+/* Cover */
+.cover { padding: 14mm 13mm 13mm; display: flex; flex-direction: column; background: radial-gradient(130mm 90mm at 85% 62%, rgba(74,181,247,.16), transparent 70%), radial-gradient(120mm 70mm at 50% -18mm, rgba(74,181,247,.12), transparent 70%), var(--paper); }
+.mast { display: flex; justify-content: space-between; align-items: baseline; border-bottom: .3mm solid var(--line); padding-bottom: 2.6mm; font-size: 6.8pt; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mast b { color: var(--ink); }
+.masthead { font-family: "Archivo Black"; font-size: 41pt; line-height: .95; color: var(--ink); letter-spacing: -.02em; margin-top: 5mm; text-transform: uppercase; }
+.tagline { margin-top: 2.4mm; font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+.cover-stat { margin-top: auto; }
+.cover-stat .n { font-family: "Archivo Black"; font-size: 84pt; line-height: .9; color: var(--blue); letter-spacing: -.03em; }
+.cover-stat .t { font-size: 9pt; color: var(--body); max-width: 92mm; margin-top: 3mm; }
+.cover-theme { margin-top: 9mm; border-top: .3mm solid var(--line); padding-top: 4mm; }
+.cover-theme .k { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.cover-theme .t { font-family: Georgia, serif; font-size: 22pt; line-height: 1.1; color: var(--ink); margin-top: 1.5mm; }
+.cover-theme .s { font-family: Georgia, serif; font-style: italic; font-size: 12pt; color: var(--body); margin-top: 1mm; }
+.cover-foot { margin-top: 6mm; display: flex; justify-content: space-between; font-size: 7pt; color: var(--muted); }
+
+/* Contents */
+.toc { list-style: none; margin-top: 4mm; counter-reset: c; }
+.toc li { display: grid; grid-template-columns: 9mm 1fr 8mm; gap: 2mm; padding: 3.2mm 0; border-bottom: .25mm solid var(--line); align-items: baseline; }
+.toc .n { font-family: "Archivo Black"; color: var(--blue); font-size: 12pt; }
+.toc .k { display: block; font-size: 6.4pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: .8mm; }
+.toc .t { color: var(--ink); font-size: 10pt; font-weight: 500; }
+.toc .p { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.colophon { position: absolute; left: 13mm; right: 13mm; bottom: 20mm; font-size: 7pt; color: var(--muted); border-left: .6mm solid var(--line); padding-left: 3mm; }
+
+/* Trend */
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm; margin: 1mm 0 4mm; }
+.stat { border: .25mm solid var(--line); border-radius: 2.5mm; padding: 2.6mm 3mm; background: rgba(255,255,255,.035); }
+.stat b { display: block; font-family: "Archivo Black"; font-weight: 400; font-size: 15pt; color: var(--blue); line-height: 1.05; }
+.stat span { display: block; font-size: 7.2pt; color: var(--body); margin-top: 1mm; line-height: 1.35; }
+.part h3 { color: var(--ink); }
+.meaning { margin-top: 4mm; border-left: .9mm solid var(--blue); padding: 1mm 0 1mm 3.5mm; }
+.meaning h3 { margin-top: 0; color: var(--blue); }
+.meaning p { color: var(--ink); margin: 0; }
+
+/* From the floor */
+.byline { font-size: 7.8pt; color: var(--muted); margin-bottom: 3.5mm; }
+.qa .q { font-weight: 700; color: var(--blue); font-size: 8.8pt; margin: 3mm 0 1.2mm; }
+.qa .q:first-child { margin-top: 0; }
+.qa p { font-size: 8.8pt; }
+.pull { margin-top: 5mm; font-family: Georgia, serif; font-size: 11.8pt; line-height: 1.45; color: var(--ink); border-top: .3mm solid var(--line); padding-top: 4mm; }
+.pull::before { content: "“"; display: block; font-family: "Archivo Black"; color: var(--blue); font-size: 30pt; line-height: .6; margin-bottom: 1mm; }
+.sign { margin-top: 2.5mm; font-size: 7.6pt; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+/* Tool */
+.tool-name { font-family: "Archivo Black"; font-size: 22pt; color: var(--ink); line-height: 1.05; margin-bottom: 1.5mm; }
+.tool-meta { font-size: 7pt; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4mm; }
+.formula { list-style: none; display: grid; gap: 1.6mm; margin: 2mm 0 5mm; }
+.formula li { display: flex; align-items: center; gap: 2.5mm; font-size: 9.4pt; color: var(--ink); }
+.formula li span { width: 5.4mm; height: 5.4mm; border-radius: 50%; border: .3mm solid var(--blue); color: var(--blue); display: grid; place-items: center; font-size: 6.6pt; font-weight: 700; flex: none; }
+.formula li:first-child { color: #ff8a8e; font-weight: 600; }
+.formula li:first-child span { border-color: #ff8a8e; color: #ff8a8e; }
+.big-quote { font-family: Georgia, serif; font-size: 13pt; line-height: 1.4; color: var(--ink); border-left: .9mm solid var(--blue); padding-left: 4mm; margin-bottom: 5mm; }
+.open { position: absolute; left: 13mm; right: 13mm; bottom: 19mm; display: flex; justify-content: space-between; align-items: center; background: rgba(74,181,247,.1); border: .25mm solid rgba(74,181,247,.4); border-radius: 2.5mm; padding: 2.4mm 3.4mm; font-size: 7.8pt; }
+.open b { color: var(--blue); font-weight: 600; }
+.open span { color: var(--ink); }
+
+/* Essays */
+.essays { list-style: none; counter-reset: e; margin: 2mm 0 4mm; }
+.essays li { counter-increment: e; display: grid; grid-template-columns: 7mm 1fr; gap: 1.5mm; padding: 1.35mm 0; border-bottom: .2mm solid rgba(255,255,255,.08); font-size: 8.3pt; color: var(--ink); line-height: 1.35; }
+.essays li::before { content: counter(e, decimal-leading-zero); color: var(--blue); font-weight: 700; font-size: 7.4pt; padding-top: .3mm; }
+.note { font-size: 8pt; color: var(--muted); }
+
+/* Question and sources */
+.question { font-family: Georgia, serif; font-size: 15pt; line-height: 1.35; color: var(--ink); margin: 2mm 0 7mm; }
+.sources { list-style: none; border-top: .25mm solid var(--line); padding-top: 3mm; }
+.sources li { font-size: 7pt; line-height: 1.4; margin-bottom: 2.2mm; color: var(--body); }
+.sources li i { font-style: normal; color: var(--muted); word-break: break-all; display: block; font-size: 6.2pt; }
+
+/* Back */
+.back { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.back .masthead { font-size: 30pt; margin: 0; }
+.back .tagline { margin-bottom: 9mm; }
+.back p { color: var(--body); }
+.back .url { color: var(--blue); font-weight: 600; font-size: 10pt; }
+.back .edition { position: absolute; left: 0; right: 0; bottom: 12mm; font-size: 7pt; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<section class="pg cover">
+  <div class="mast"><span><b>{{ L.issue }} {{ issue.number }}</b> · {{ m.date }}</span><span>Stiven Catalyst</span></div>
+  <div class="masthead">{{ N.name }}</div>
+  <div class="tagline">{{ N.tagline }}</div>
+  <div class="cover-stat"><div class="n">{{ m.coverStat.n }}</div><p class="t">{{ m.coverStat.text }}</p></div>
+  <div class="cover-theme"><div class="k">{{ L.trend }}</div><div class="t">{{ m.theme }}</div><div class="s">{{ m.themeSub }}</div></div>
+  <div class="cover-foot"><span>stivencatalyst.com</span><span>{{ L.floor }} · {{ L.tool }} · {{ L.essays }}</span></div>
+</section>
+
+<section class="pg">
+  {{ chrome(2) }}
+  <p class="kicker">{{ L.issue }} {{ issue.number }} · {{ m.date }}</p>
+  <h2>{{ L.contents }}</h2>
+  <ol class="toc">
+    {%- for row in m.contents %}
+    <li><span class="n">{{ loop.index }}</span><span><span class="k">{{ L[row[0]] }}</span><span class="t">{{ row[1] }}</span></span><span class="p">{{ pageOf[row[0]] }}</span></li>
+    {%- endfor %}
+  </ol>
+  <p class="colophon">{{ N.tagline }}. {{ m.themeSub }}. {{ L.sources }}: {{ L.page }} 10.</p>
+</section>
+
+<section class="pg">
+  {{ chrome(3, L.trend) }}
+  <p class="kicker">{{ L.trend }}</p>
+  <h2>{{ m.trend.title }}</h2>
+  <p class="lead">{{ m.trend.lead }}</p>
+  <div class="stats">{% for s in m.trend.stats %}<div class="stat"><b>{{ s.n }}</b><span>{{ s.t }}</span></div>{% endfor %}</div>
+  {%- for part in m.trend.parts.slice(0, 2) %}<div class="part"><h3>{{ part.h }}</h3><p>{{ part.p }}</p></div>{% endfor %}
+</section>
+
+<section class="pg">
+  {{ chrome(4, L.trend) }}
+  {%- for part in m.trend.parts.slice(2) %}<div class="part"><h3>{{ part.h }}</h3><p>{{ part.p }}</p></div>{% endfor %}
+  <div class="meaning"><h3>{{ m.trend.meaning.h }}</h3><p>{{ m.trend.meaning.p }}</p></div>
+</section>
+
+<section class="pg">
+  {{ chrome(5, L.floor) }}
+  <p class="kicker">{{ L.floor }}</p>
+  <h2>{{ m.contents[1][1] }}</h2>
+  <p class="byline">{{ m.floor.intro }}</p>
+  <div class="qa">{% for row in m.floor.qa.slice(0, 2) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
+</section>
+
+<section class="pg">
+  {{ chrome(6, L.floor) }}
+  <div class="qa">{% for row in m.floor.qa.slice(2, 4) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
+</section>
+
+<section class="pg">
+  {{ chrome(7, L.floor) }}
+  <div class="qa">{% for row in m.floor.qa.slice(4) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
+  <p class="pull">{{ m.floor.closing }}</p>
+  <p class="sign">Stiven Janaqi</p>
+</section>
+
+<section class="pg">
+  {{ chrome(8, L.tool) }}
+  <p class="kicker">{{ L.tool }}</p>
+  <div class="tool-name">{{ tool.name }}</div>
+  <p class="tool-meta">{{ tool.type }} · {{ tool.time }}</p>
+  <p>{{ m.tool.text }}</p>
+  <h3>{{ L.formula }}</h3>
+  <ol class="formula">{% for step in m.tool.formula %}<li><span>{{ loop.index }}</span>{{ step }}</li>{% endfor %}</ol>
+  <p class="big-quote">{{ m.tool.quote }}</p>
+  <div class="open"><b>{{ L.open }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>
+</section>
+
+<section class="pg">
+  {{ chrome(9, L.essays) }}
+  <p class="kicker">{{ L.essays }}</p>
+  <h2>{{ m.contents[3][1] }}</h2>
+  <p>{{ m.essays.intro }}</p>
+  <ol class="essays">{% for essay in collections["insights" + (lang | langSuffix)] %}{% set day = essay.date | isoDate %}{% if day >= issue.essays.from and day <= issue.essays.to %}<li>{{ essay.data.title }}</li>{% endif %}{% endfor %}</ol>
+  <p class="note">{{ m.essays.pick }}</p>
+</section>
+
+<section class="pg">
+  {{ chrome(10, L.question) }}
+  <p class="kicker">{{ L.question }}</p>
+  <p class="question">{{ m.question }}</p>
+  <p class="kicker">{{ L.sources }}</p>
+  <ol class="sources">{% for s in issue.sources %}<li>{{ s[lang] }}<i>{{ s.url }}</i></li>{% endfor %}</ol>
+</section>
+
+<section class="pg back">
+  <div class="masthead">{{ N.name }}</div>
+  <div class="tagline">{{ N.tagline }}</div>
+  <p>{{ L.issue }} {{ issue.number }} · {{ m.date }}</p>
+  <p class="url">stivencatalyst.com{{ "/publications.html" | local(lang) }}</p>
+  <p class="edition">{{ N.name }} · {{ L.issue }} {{ issue.number }} · {{ m.date }} · Stiven Catalyst</p>
+</section>
+</body>
+</html>

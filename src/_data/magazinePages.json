@@ -1,0 +1,217 @@
+{
+ "nga-terreni-01": {
+  "en": {
+   "pageCount": 11,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/nga-terreni-01/en/page-01.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 2,
+     "image": "/media/magazine/nga-terreni-01/en/page-02.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 3,
+     "image": "/media/magazine/nga-terreni-01/en/page-03.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 4,
+     "image": "/media/magazine/nga-terreni-01/en/page-04.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 5,
+     "image": "/media/magazine/nga-terreni-01/en/page-05.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 6,
+     "image": "/media/magazine/nga-terreni-01/en/page-06.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 7,
+     "image": "/media/magazine/nga-terreni-01/en/page-07.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 8,
+     "image": "/media/magazine/nga-terreni-01/en/page-08.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 9,
+     "image": "/media/magazine/nga-terreni-01/en/page-09.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 10,
+     "image": "/media/magazine/nga-terreni-01/en/page-10.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 11,
+     "image": "/media/magazine/nga-terreni-01/en/page-11.webp",
+     "width": 1000,
+     "height": 1417
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 11,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/nga-terreni-01/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 2,
+     "image": "/media/magazine/nga-terreni-01/sq/page-02.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 3,
+     "image": "/media/magazine/nga-terreni-01/sq/page-03.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 4,
+     "image": "/media/magazine/nga-terreni-01/sq/page-04.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 5,
+     "image": "/media/magazine/nga-terreni-01/sq/page-05.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 6,
+     "image": "/media/magazine/nga-terreni-01/sq/page-06.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 7,
+     "image": "/media/magazine/nga-terreni-01/sq/page-07.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 8,
+     "image": "/media/magazine/nga-terreni-01/sq/page-08.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 9,
+     "image": "/media/magazine/nga-terreni-01/sq/page-09.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 10,
+     "image": "/media/magazine/nga-terreni-01/sq/page-10.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 11,
+     "image": "/media/magazine/nga-terreni-01/sq/page-11.webp",
+     "width": 1000,
+     "height": 1417
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 11,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/nga-terreni-01/de/page-01.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 2,
+     "image": "/media/magazine/nga-terreni-01/de/page-02.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 3,
+     "image": "/media/magazine/nga-terreni-01/de/page-03.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 4,
+     "image": "/media/magazine/nga-terreni-01/de/page-04.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 5,
+     "image": "/media/magazine/nga-terreni-01/de/page-05.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 6,
+     "image": "/media/magazine/nga-terreni-01/de/page-06.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 7,
+     "image": "/media/magazine/nga-terreni-01/de/page-07.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 8,
+     "image": "/media/magazine/nga-terreni-01/de/page-08.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 9,
+     "image": "/media/magazine/nga-terreni-01/de/page-09.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 10,
+     "image": "/media/magazine/nga-terreni-01/de/page-10.webp",
+     "width": 1000,
+     "height": 1417
+    },
+    {
+     "number": 11,
+     "image": "/media/magazine/nga-terreni-01/de/page-11.webp",
+     "width": 1000,
+     "height": 1417
+    }
+   ]
+  }
+ }
+}

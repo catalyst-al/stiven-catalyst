@@ -1,8 +1,13 @@
-// The print pages of the guides are written only when scripts/tools-guide.mjs asks for them (GUIDE_PRINT),
-// into a temporary folder; the published site carries the PDFs and the reader, not these pages.
+// The print pages of the publications are written only when a build script asks for them (GUIDE_PRINT):
+// scripts/tools-guide.mjs for the Tools Guide, scripts/magazine.mjs for the magazine. They go into a temporary
+// folder; the published site carries the PDFs and the readers, not these pages.
 export default {
   eleventyExcludeFromCollections: true,
   eleventyComputed: {
-    permalink: (data) => (process.env.GUIDE_PRINT ? `/guide-print/${data.glang}/` : false),
+    permalink: (data) => {
+      if (!process.env.GUIDE_PRINT) return false;
+      if (data.item) return `/guide-print/magazine/${data.item.issue.slug}/${data.item.lang}/`;
+      return `/guide-print/${data.glang}/`;
+    },
   },
 };

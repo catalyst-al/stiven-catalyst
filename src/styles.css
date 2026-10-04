@@ -3187,8 +3187,7 @@ html:not(.js) .filter-bar { display: none; }
   padding: 90px 0 84px;
 }
 .book-hero h1,
-.book-feature h2,
-.magazine-soon h2 {
+.book-feature h2 {
   margin: 0;
   font-family: var(--serif);
   font-size: clamp(52px, 7.2vw, 108px);
@@ -3623,11 +3622,9 @@ html:not(.js) .filter-bar { display: none; }
 .book-feature h2 { font-size: clamp(46px, 6vw, 88px); }
 .book-feature-copy > p:not(.kicker, .book-subtitle) { max-width: 560px; margin: 22px 0 30px; color: var(--muted); font-size: 18px; }
 .book-feature .button-primary { display: inline-block; }
-/* Publications: the magazine, before its first issue. */
-.magazine-soon { padding: 90px 0; border-bottom: 1px solid var(--line); }
-.magazine-soon-copy { max-width: 760px; }
-.magazine-soon-copy > p:not(.kicker) { max-width: 600px; margin: 22px 0 0; color: var(--muted); font-size: 18px; }
-.magazine-soon .magazine-soon-note { margin-top: 14px; color: var(--ink); font-size: 16px; }
+/* Publications: the list of the magazine's issues, under the newest one. */
+.magazine-list { padding-top: 60px; }
+.magazine-list > .kicker { margin-bottom: 18px; }
 
 @media (max-width: 900px) {
   .book-hero { grid-template-columns: 1fr; gap: 50px; padding: 64px 0 60px; }
@@ -3635,7 +3632,6 @@ html:not(.js) .filter-bar { display: none; }
   .book-facts { grid-template-columns: repeat(2, auto); }
   .book-feature { grid-template-columns: 1fr; gap: 44px; padding: 70px 0; }
   .book-feature .book-object { justify-self: start; width: min(56%, 230px); }
-  .magazine-soon { padding: 70px 0; }
   .book-controls { grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; }
   .book-stage { padding: 40px 0 44px; }
 }
