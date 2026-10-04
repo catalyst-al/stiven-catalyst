@@ -542,7 +542,7 @@ const sq = {
       data: "Dorëzimi mbetet në këtë shfletues. Asgjë nuk dërgohet.",
     },
     "/tools/cx-control-tower/": {
-      when: "Çdo javë, për të shkuar nga rezultati te klienti te shkaktari operacional, te shkaku rrënjësor dhe te një veprim i verifikuar.",
+      when: "Çdo javë, për të shkuar nga rezultati që merr klienti te shkaktari operacional, te shkaku rrënjësor dhe te një veprim i verifikuar.",
       how: [
         "Ngarkoni skedarët: dorëzimet, itineraret, incidentet dhe veprimet, si CSV ose Excel, ose një libër pune të vetëm. Ose [[Load the example]].",
         "Vendosni vetëm objektivat që keni miratuar.",
