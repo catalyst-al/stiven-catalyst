@@ -11,7 +11,7 @@
 {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
   <section class="shell book-feature magazine-feature">
     <a class="book-object" href="{{ issueUrl }}" tabindex="-1" aria-hidden="true">
-      <span class="book-object-cover"><img src="{{ issueCover.image }}" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy"></span>
+      <span class="book-object-cover"><img src="{{ issueCover.image }}" srcset="{{ issueCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
       <p class="kicker">{{ magazine.names[ml].name }} · {{ magazine.labels[ml].issue }} {{ issue.number }} · {{ issue[ml].date }}</p>
@@ -28,7 +28,7 @@
 {%- set reviewCover = magazinePages[review.slug][ml].pages[0] %}
   <section class="shell book-feature magazine-feature">
     <a class="book-object" href="{{ reviewUrl }}" tabindex="-1" aria-hidden="true">
-      <span class="book-object-cover"><img src="{{ reviewCover.image }}" width="{{ reviewCover.width }}" height="{{ reviewCover.height }}" alt="" loading="lazy"></span>
+      <span class="book-object-cover"><img src="{{ reviewCover.image }}" srcset="{{ reviewCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ reviewCover.width }}" height="{{ reviewCover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
       <p class="kicker">{{ R.name }} · {{ R.date }}</p>

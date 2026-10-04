@@ -8,4 +8,5 @@ permalink: "/js/ui-{{ uiLang }}.js"
 eleventyExcludeFromCollections: true
 ---
 // The interface texts of the tools in one language, keyed by the English text (src/_data/{{ uiLang }}/ui.json).
-window.UiStrings = {{ uiLang | uiStrings | safe }};
+// JSON.parse is read faster than an object literal of this size.
+window.UiStrings = JSON.parse({{ uiLang | uiStrings | dump | safe }});

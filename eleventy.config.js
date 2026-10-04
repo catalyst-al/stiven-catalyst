@@ -3,6 +3,7 @@ import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { clearCache, localUrl } from "./lib/translations.js";
 import { splitStylesheet } from "./lib/css-split.js";
+import { minifyScripts } from "./lib/js-minify.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -72,12 +73,29 @@ export default function (eleventyConfig) {
 
   // {{ "Add to log" | t(lang) }}: the German or Albanian text on those pages, else the English one.
   eleventyConfig.addFilter("t", (text, lang) => (TRANSLATED.has(lang) ? readUi(lang)[text] ?? text : text));
-  // The interface texts a tool page hands to tool-kit.js.
-  eleventyConfig.addFilter("uiStrings", (lang) => JSON.stringify(TRANSLATED.has(lang) ? readUi(lang) : {}));
+  // The interface texts a tool page hands to tool-kit.js: only those the scripts can ask for, that is every
+  // text that appears as a string in src/js (literal tx("…") calls and the labels the tools keep in their own
+  // tables, such as the KPI names of the CX Control Tower). Texts used only in templates are already in the HTML.
+  const scriptSource = () => fs.readdirSync("src/js").filter((file) => file.endsWith(".js"))
+    .map((file) => fs.readFileSync(`src/js/${file}`, "utf8")).join("\n");
+  const inScripts = (source, text) => source.includes(JSON.stringify(text))
+    || source.includes(`'${text.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'`)
+    || source.includes(`\`${text}\``);
+  const scriptStringsCache = new Map();
+  eleventyConfig.on("eleventy.before", () => scriptStringsCache.clear());
+  const scriptStrings = (lang) => {
+    if (!TRANSLATED.has(lang)) return {};
+    if (!scriptStringsCache.has(lang)) {
+      const source = scriptSource();
+      scriptStringsCache.set(lang, Object.fromEntries(Object.entries(readUi(lang)).filter(([text]) => inScripts(source, text))));
+    }
+    return scriptStringsCache.get(lang);
+  };
+  eleventyConfig.addFilter("uiStrings", (lang) => JSON.stringify(scriptStrings(lang)));
   // The address of that text as one file (src/ui-strings.njk), which the browser keeps between
   // tool pages; it changes when the translations do.
   eleventyConfig.addFilter("uiStringsUrl", (lang) =>
-    `/js/ui-${lang}.js?v=${createHash("sha256").update(JSON.stringify(readUi(lang))).digest("hex").slice(0, 10)}`
+    `/js/ui-${lang}.js?v=${createHash("sha256").update(JSON.stringify(scriptStrings(lang))).digest("hex").slice(0, 10)}`
   );
   // JSON embedded in HTML must not be able to close its script element.
   eleventyConfig.addFilter("scriptJson", (value) => JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`));
@@ -173,6 +191,17 @@ export default function (eleventyConfig) {
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
   // The picture of a tool's result on its card (made by scripts/tool-previews.mjs), if there is one.
+  // The smaller WebP copies of an image (scripts/thumbnails.mjs: name-240.webp, name-480.webp, name-720.webp)
+  // and the image itself, as a srcset; only copies that exist are offered, so a missing one costs nothing.
+  eleventyConfig.addFilter("srcsetFor", (src) => {
+    const clean = String(src || "").split("?")[0];
+    const base = clean.replace(/\.(webp|jpg|png)$/, "");
+    if (!clean || base === clean) return "";
+    const copies = [240, 480, 720].filter((width) => fs.existsSync(`src${base}-${width}.webp`)).map((width) => `${base}-${width}.webp ${width}w`);
+    if (!copies.length) return "";
+    const size = eleventyConfig.getFilter("imageSize")(clean);
+    return size ? [...copies, `${src} ${size.width}w`].join(", ") : copies.join(", ");
+  });
   eleventyConfig.addFilter("toolPreview", (url, lang) => {
     const slug = String(url || "").replace(/^\/(de|sq)(?=\/)/, "").match(/^\/tools\/([^/]+)\/$/)?.[1];
     const file = slug && `/media/tools/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
@@ -193,6 +222,8 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); imageSizes.clear(); });
   // A minified stylesheet, and a lighter one for the pages that are not tools (lib/css-split.js).
   eleventyConfig.on("eleventy.after", ({ dir }) => splitStylesheet(dir?.output || "_site"));
+  // Minified scripts in the output; the sources stay readable (lib/js-minify.js).
+  eleventyConfig.on("eleventy.after", async ({ dir }) => { await minifyScripts(dir?.output || "_site"); });
 
   eleventyConfig.addFilter("readableDate", (date, lang) =>
     new Date(date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })

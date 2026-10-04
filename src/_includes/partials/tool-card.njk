@@ -2,7 +2,7 @@
 {%- set preview = tool.url | toolPreview(lang) %}
 <article class="tool-card{% if not tool.url %} is-soon{% endif %}{% if preview %} has-preview{% endif %}{% if accent %} has-family" style="--family: {{ accent }}{% endif %}">
   {%- if preview %}{% set previewSize = preview | imageSize %}
-  <a class="tool-card-preview" href="{{ tool.url }}" tabindex="-1" aria-hidden="true"><img src="{{ preview | assetUrl }}" alt=""{% if previewSize %} width="{{ previewSize.width }}" height="{{ previewSize.height }}"{% endif %} loading="lazy" decoding="async"></a>
+  <a class="tool-card-preview" href="{{ tool.url }}" tabindex="-1" aria-hidden="true"><img src="{{ preview | assetUrl }}" srcset="{{ preview | assetUrl | srcsetFor }}" sizes="(max-width: 700px) calc(100vw - 64px), 360px" alt=""{% if previewSize %} width="{{ previewSize.width }}" height="{{ previewSize.height }}"{% endif %} loading="lazy" decoding="async"></a>
   {%- endif %}
   <div class="card-meta"><span>{{ tool.type }}</span><span>{{ tool.time }}</span></div>
   <div>

@@ -6,7 +6,7 @@
 {%- set guideCover = toolsGuidePages[lang or "en"].pages[0] %}
 <section class="shell tool-guide" aria-labelledby="tool-guide-title">
   <div class="book-shelf-item">
-    <a class="book-object" href="{{ guideUrl }}#faqe-{{ guidePage }}" tabindex="-1" aria-hidden="true"><span class="book-object-cover"><img src="{{ guideCover.image }}" width="{{ guideCover.width }}" height="{{ guideCover.height }}" alt="" loading="lazy"></span></a>
+    <a class="book-object" href="{{ guideUrl }}#faqe-{{ guidePage }}" tabindex="-1" aria-hidden="true"><span class="book-object-cover"><img src="{{ guideCover.image }}" srcset="{{ guideCover.image | srcsetFor }}" sizes="96px" width="{{ guideCover.width }}" height="{{ guideCover.height }}" alt="" loading="lazy"></span></a>
     <div class="tool-guide-copy">
       <p class="kicker">{{ "The guide · Edition 1" | t(lang) }} · {{ "Page {n}" | t(lang) | replace("{n}", guidePage) }}</p>
       <h2 id="tool-guide-title">{{ "How to use this tool, in the guide" | t(lang) }}</h2>
