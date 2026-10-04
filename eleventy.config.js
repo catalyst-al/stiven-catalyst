@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { clearCache, localUrl } from "./lib/translations.js";
 import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
+import { markPairs } from "./lib/display-pairs.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -222,6 +223,10 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); imageSizes.clear(); });
   // A minified stylesheet, and a lighter one for the pages that are not tools (lib/css-split.js).
   eleventyConfig.on("eleventy.after", ({ dir }) => splitStylesheet(dir?.output || "_site"));
+  // Letter pairs that would touch in the tight display titles get their space (lib/display-pairs.js).
+  eleventyConfig.addTransform("display-pairs", function (content) {
+    return (this.page.outputPath || "").endsWith(".html") ? markPairs(content) : content;
+  });
   // Minified scripts in the output; the sources stay readable (lib/js-minify.js).
   eleventyConfig.on("eleventy.after", async ({ dir }) => { await minifyScripts(dir?.output || "_site"); });
 

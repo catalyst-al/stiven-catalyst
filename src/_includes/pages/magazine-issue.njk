@@ -62,6 +62,7 @@
           <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
           <a class="book-chip" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
           <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
+          <a class="book-chip is-accent" href="#more-issues" data-book-end hidden>{{ "Read another issue" | t(lang) }}</a>
         </div>
       </div>
 
@@ -139,5 +140,29 @@
         <ul>{% for s in issue.sources %}<li>{{ s[lang] }} <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a></li>{% endfor %}</ul>
       </div>
     </details>
+  </section>
+
+{#- After the issue: the one before and the one after it, and a link to all issues on the publications page.
+    Only the neighbours, so the page stays this issue's page as the archive grows. The issues are numbered
+    1, 2, 3… in the order of magazine.issues. -#}
+{%- set older = magazine.issues[issue.number - 2] if issue.number > 1 else false %}
+{%- set newer = magazine.issues[issue.number] %}
+  <section class="shell issue-more" id="more-issues" aria-labelledby="more-issues-title">
+    <p class="kicker">{{ N.name }}</p>
+    <h2 id="more-issues-title">{{ "Read another issue" | t(lang) }}</h2>
+    <div class="issue-more-list">
+      {%- for other in [older, newer] %}{% if other %}
+      {%- set otherCover = magazinePages[other.slug][lang].pages[0] %}
+      <a class="issue-more-card" href="{{ ('/magazine/' + other.slug + '.html') | local(lang) }}">
+        <img src="{{ otherCover.image }}" srcset="{{ otherCover.image | srcsetFor }}" sizes="96px" width="{{ otherCover.width }}" height="{{ otherCover.height }}" alt="" loading="lazy" decoding="async">
+        <span class="issue-more-copy">
+          <span class="issue-more-label">{{ ("Previous issue" if other.number < issue.number else "Next issue") | t(lang) }}</span>
+          <span class="issue-more-title">{{ other[lang].theme }}</span>
+          <span class="issue-more-meta">{{ L.issue }} {{ other.number }} · {{ other[lang].date }}</span>
+        </span>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+    <a class="text-link" href="{{ '/publications.html' | local(lang) }}#magazine">{{ "All issues" | t(lang) }}</a>
   </section>
 <script src="{{ '/js/book.js' | assetUrl }}" defer></script>
