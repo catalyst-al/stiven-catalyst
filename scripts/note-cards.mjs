@@ -17,7 +17,8 @@ const esc = (text) => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").
 
 const SERIF = base64("scripts/note-card-fonts/gelasio-latin-400-normal.woff2");
 const SANS = base64("scripts/guide-fonts/inter-latin-600-normal.woff2");
-const PHOTO = base64("src/media/stiven-headshot.jpg");
+// The portrait for the cards: the head centred in the circle, with room above the hair.
+const PHOTO = base64("scripts/note-card-photo.jpg");
 const LOGO = base64("src/favicon.svg");
 
 const LANGS = {
@@ -56,7 +57,7 @@ const card = (quote, label) => `<!doctype html><html><head><meta charset="utf-8"
   .quote { flex: 1; display: flex; align-items: center; min-height: 0; padding-bottom: 32px; }
   blockquote { margin: 0; font-family: Gelasio, serif; font-size: 112px; line-height: 1.1; letter-spacing: -.025em; overflow-wrap: break-word; }
   footer { display: flex; align-items: center; gap: 26px; padding-top: 44px; border-top: 2px solid rgba(255,255,255,.12); }
-  footer img.photo { width: 104px; height: 104px; border-radius: 50%; }
+  footer img.photo { width: 120px; height: 120px; border-radius: 50%; }
   footer div { flex: 1; }
   footer strong { display: block; font-size: 34px; font-weight: 600; letter-spacing: -.01em; }
   footer span { display: block; margin-top: 6px; font-size: 26px; color: #a5b0b8; }
