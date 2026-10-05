@@ -15,6 +15,9 @@
 {%- set hasLegal = legal.name and legal.city -%}
 {%- set toolFamily = page.url | familyOf(families) -%}
 {%- set rolePage = toolFamily and "/roles/" in page.url -%}
+{#- Anonymous visit counts (Cloudflare Web Analytics: no cookies, nothing stored in the browser) on the writing
+    pages only; the tools and the role pages, where people type their own work, load nothing from outside. -#}
+{%- set analyticsToken = site.analytics.cloudflareToken if not toolFamily else "" -%}
 {#- A page's own image, else its card (a tool, a role, an essay, a reflection, a writing page), else the homepage
     card in its language (the hero with the families). -#}
 {%- set card = (page.url | socialCard(lang)) or (page | pieceCard(lang)) or (homeUrl | socialCard(lang)) -%}
@@ -27,7 +30,7 @@
     data: or blob: (exports, uploaded photos), pdf.js runs its worker from here, forms may post to the
     newsletter provider (form-action https:, and connect-src for the form that stays on the page), and the
     feedback form at the end of a tool may post to the form provider in site.contact.action (connect-src). -#}
-{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
+{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + (" https://static.cloudflareinsights.com" if analyticsToken else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + (" https://cloudflareinsights.com" if analyticsToken else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">
 <head>
@@ -139,6 +142,9 @@
 {%- include "partials/share-orbit.njk" %}
 <script src="{{ '/script.js' | assetUrl }}"></script>
 <script src="{{ '/js/share-orbit.js' | assetUrl }}" defer></script>
+{%- if analyticsToken %}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ analyticsToken }}"}'></script>
+{%- endif %}
 {%- if toolFamily %}
 <script src="{{ '/js/family-sky.js' | assetUrl }}" defer></script>
 {%- endif %}
