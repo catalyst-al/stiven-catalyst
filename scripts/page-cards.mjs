@@ -1,7 +1,7 @@
 // Makes the link previews (1200 × 630, the size LinkedIn, WhatsApp and mail programs show) of every essay, every
 // reflection and the writing pages, in English, German and Albanian, so a shared link shows what it leads to
 // instead of the homepage card:
-//   src/media/social/<lang>/insight-<slug>.jpg     the essay's number, category, title and the series
+//   src/media/social/<lang>/insight-<slug>.jpg     the essay's number in its series, category, title and the series
 //   src/media/social/<lang>/reflection-<slug>.jpg  the reflection's title
 //   src/media/social/<lang>/page-<name>.jpg        Start here, Insights, Reflections, Field Notes, About
 // The layout picks them up through the socialCard and essayCard filters (eleventy.config.js). The face and the
@@ -28,6 +28,7 @@ const DISPLAY = base64("src/fonts/archivo-black-latin-400-normal.woff2");
 const PHOTO = base64("scripts/note-card-photo.jpg");
 const LOGO = base64("src/favicon.svg");
 
+const SERIES = json("src/_data/essaySeries.json");
 const UI = { en: {}, de: json("src/_data/de/ui.json"), sq: json("src/_data/sq/ui.json") };
 const t = (lang, text) => UI[lang][text] ?? text;
 const content = (lang, section) => (lang === "en" ? `src/content/${section}` : `src/content/${lang}/${section}`);
@@ -104,13 +105,18 @@ export const cards = () => {
   for (const lang of ["en", "de", "sq"]) {
     const dir = `src/media/social/${lang}`;
     const essays = piecesOf(lang, "insights");
-    essays.forEach(({ slug, data }, index) => list.push({
-      file: `${dir}/insight-${slug}.jpg`,
-      kicker: `${t(lang, "Essay")} · ${data.category || ""}`.replace(/ · $/, ""),
-      number: String(index + 1).padStart(2, "0"),
-      title: data.title,
-      sub: `${t(lang, "Ten years close to the work")} · ${t(lang, "Essay {n} of {total}").replace("{n}", index + 1).replace("{total}", essays.length)}`,
-    }));
+    // Each essay is numbered within its series (essaySeries.json), against the essays the series plans.
+    for (const info of SERIES) {
+      const inSeries = essays.filter(({ data }) => (data.series || SERIES[0].id) === info.id);
+      const total = Math.max(inSeries.length, info.planned || 0);
+      inSeries.forEach(({ slug, data }, index) => list.push({
+        file: `${dir}/insight-${slug}.jpg`,
+        kicker: `${t(lang, "Essay")} · ${data.category || ""}`.replace(/ · $/, ""),
+        number: String(index + 1).padStart(2, "0"),
+        title: data.title,
+        sub: `${info.name[lang]} · ${t(lang, "Essay {n} of {total}").replace("{n}", index + 1).replace("{total}", total)}`,
+      }));
+    }
     for (const { slug, data } of piecesOf(lang, "reflections")) {
       list.push({ file: `${dir}/reflection-${slug}.jpg`, kicker: t(lang, "Reflection"), title: data.title, sub: data.summary });
     }

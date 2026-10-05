@@ -1779,5 +1779,9 @@
   "1 result": "1 Ergebnis",
   "Nothing found for that yet. Try another word, or browse the essays.": "Dazu gibt es noch nichts. Versuchen Sie ein anderes Wort oder stöbern Sie in den Essays.",
   "For example: handover, KPI, standard": "Zum Beispiel: Übergabe, KPI, Standard",
-  "Or browse:": "Oder stöbern:"
+  "Or browse:": "Oder stöbern:",
+  "Get it by email": "Per E-Mail erhalten",
+  "The next essay of the series is on its way.": "Der nächste Essay der Reihe ist unterwegs.",
+  "The next series": "Die nächste Reihe",
+  "{n} of {total} essays": "{n} von {total} Essays"
 }

@@ -13,22 +13,23 @@
     if (mark) mark.hidden = !done;
   });
 
-  const panel = document.querySelector("[data-series-panel]");
-  if (!panel) return;
-  const dots = [...panel.querySelectorAll("[data-essay-dot]")];
-  const state = dots.map((dot) => ({ dot, entry: reading[dot.dataset.essayDot] || null, number: Number(dot.dataset.essayNumber) }));
-  state.forEach(({ dot, entry }) => dot.classList.toggle("is-read", Boolean(entry?.done)));
+  // Each series on the page has its own panel; the reading state is the same for all of them.
+  document.querySelectorAll("[data-series-panel]").forEach((panel) => {
+    const dots = [...panel.querySelectorAll("[data-essay-dot]")];
+    const state = dots.map((dot) => ({ dot, entry: reading[dot.dataset.essayDot] || null, number: Number(dot.dataset.essayNumber) }));
+    state.forEach(({ dot, entry }) => dot.classList.toggle("is-read", Boolean(entry?.done)));
 
-  const read = state.filter(({ entry }) => entry?.done).length;
-  if (!read && !state.some(({ entry }) => entry)) return;
-  if (read) panel.querySelector("[data-series-count]").textContent = fill(panel.dataset.readLabel, { a: read, b: state.length });
+    const read = state.filter(({ entry }) => entry?.done).length;
+    if (!read && !state.some(({ entry }) => entry)) return;
+    if (read) panel.querySelector("[data-series-count]").textContent = fill(panel.dataset.readLabel, { a: read, b: state.length });
 
-  // An essay begun and not finished, the latest first; else the first essay not yet read.
-  const begun = state.filter(({ entry }) => entry && !entry.done && entry.p >= 0.05).sort((a, b) => (b.entry.t || 0) - (a.entry.t || 0))[0];
-  const next = begun || state.find(({ entry }) => !entry?.done);
-  if (!next) return;
-  const button = panel.querySelector("[data-series-next]");
-  button.setAttribute("href", next.dot.getAttribute("href"));
-  button.textContent = fill(begun ? panel.dataset.resumeLabel : panel.dataset.continueLabel, { n: next.number });
-  next.dot.classList.add("is-next");
+    // An essay begun and not finished, the latest first; else the first essay not yet read.
+    const begun = state.filter(({ entry }) => entry && !entry.done && entry.p >= 0.05).sort((a, b) => (b.entry.t || 0) - (a.entry.t || 0))[0];
+    const next = begun || state.find(({ entry }) => !entry?.done);
+    if (!next) return;
+    const button = panel.querySelector("[data-series-next]");
+    button.setAttribute("href", next.dot.getAttribute("href"));
+    button.textContent = fill(begun ? panel.dataset.resumeLabel : panel.dataset.continueLabel, { n: next.number });
+    next.dot.classList.add("is-next");
+  });
 })();

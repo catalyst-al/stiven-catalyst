@@ -1779,5 +1779,9 @@
   "1 result": "1 rezultat",
   "Nothing found for that yet. Try another word, or browse the essays.": "Ende nuk ka gjë për këtë. Provoni një fjalë tjetër, ose shfletoni esetë.",
   "For example: handover, KPI, standard": "Për shembull: dorëzim, KPI, standard",
-  "Or browse:": "Ose shfletoni:"
+  "Or browse:": "Ose shfletoni:",
+  "Get it by email": "Merreni me email",
+  "The next essay of the series is on its way.": "Eseja tjetër e serisë është në rrugë.",
+  "The next series": "Seria tjetër",
+  "{n} of {total} essays": "{n} nga {total} ese"
 }

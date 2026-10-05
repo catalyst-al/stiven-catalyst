@@ -28,8 +28,12 @@ ogType: article
 {%- set sections = content | essayContents %}
 {%- set hasContents = sections.length >= 3 %}
 {%- set isEssay = "/insights/" in page.inputPath %}
-{%- set seriesItems = collections["insights" + (lang | langSuffix)] | published if isEssay else [] %}
-{%- set series = seriesItems | seriesNeighbours(page.url) if isEssay else null %}
+{#- The essay's series (src/_data/essaySeries.json): its name, its essays and this one's place among them. -#}
+{%- set seriesInfo = essaySeries | seriesById(series) if isEssay else null %}
+{%- set seriesName = seriesInfo.name[lang or "en"] if seriesInfo else "" %}
+{%- set allEssays = collections["insights" + (lang | langSuffix)] | published if isEssay else [] %}
+{%- set seriesItems = allEssays | inSeries(seriesInfo.id) if seriesInfo else [] %}
+{%- set series = seriesItems | seriesNeighbours(page.url, seriesInfo.planned) if seriesInfo else null %}
 {%- set contentsTitle = "In this essay" | t(lang) %}
 <section class="shell article-body{% if not (series or hasContents) %} no-aside{% endif %}">
   {%- if series or hasContents %}
@@ -39,7 +43,7 @@ ogType: article
       {#- Where this essay stands in the series: one dot per essay, this one marked, those already read filled in
           (js/article.js, from this browser only). -#}
       <div class="series-track">
-        <p class="kicker">{{ "Ten years close to the work" | t(lang) }}</p>
+        <p class="kicker">{{ seriesName }}</p>
         <p class="series-track-count">{{ "Essay {n} of {total}" | t(lang) | replace("{n}", series.number | string) | replace("{total}", series.total | string) }}</p>
         <ol class="series-dots">
           {%- for item in seriesItems %}
@@ -92,13 +96,35 @@ ogType: article
         essay, the end of the series and where to go from there. -#}
     {%- if series %}
     {%- set insightsUrl = '/insights.html' | local(lang) %}
+    {%- set laterSeries = essaySeries | seriesAfter(seriesInfo.id) %}
+    {%- set laterFirst = (allEssays | inSeries(laterSeries.id))[0] if laterSeries else null %}
     <nav class="essay-series" aria-labelledby="essay-series-title">
-      <p class="kicker" id="essay-series-title">{{ "Ten years close to the work" | t(lang) }} · {{ "Essay {n} of {total}" | t(lang) | replace("{n}", series.number | string) | replace("{total}", series.total | string) }}</p>
+      <p class="kicker" id="essay-series-title">{{ seriesName }} · {{ "Essay {n} of {total}" | t(lang) | replace("{n}", series.number | string) | replace("{total}", series.total | string) }}</p>
       {%- if series.next %}
       <a class="essay-series-next" href="{{ series.next.url }}" rel="next">
         <small>{{ "Next essay" | t(lang) }} · {{ (series.number + 1) | pad }}</small>
         <strong>{{ series.next.data.title }}</strong>
         {%- if series.next.data.teaser or series.next.data.summary %}<span>{{ series.next.data.teaser or series.next.data.summary }}</span>{% endif %}
+        <em aria-hidden="true">→</em>
+      </a>
+      {%- elif seriesItems.length < seriesInfo.planned %}
+      {#- The newest essay of a series still being written: the next one is on its way. #}
+      <div class="essay-series-next is-end">
+        <strong>{{ "The next essay of the series is on its way." | t(lang) }}</strong>
+        <span class="essay-series-end-links">
+          <a href="#newsletter-title">{{ "Get it by email" | t(lang) }}</a>
+          {%- if series.number > 1 %}
+          <a href="{{ seriesItems[0].url }}">{{ "Start again with essay 1" | t(lang) }}</a>
+          {%- endif %}
+          <a href="{{ '/tools.html' | local(lang) }}">{{ "Tools" | t(lang) }}</a>
+        </span>
+      </div>
+      {%- elif laterFirst %}
+      {#- The last essay of a finished series leads into the next series. #}
+      <a class="essay-series-next" href="{{ laterFirst.url }}">
+        <small>{{ "The next series" | t(lang) }} · {{ laterSeries.name[lang or "en"] }}</small>
+        <strong>{{ laterFirst.data.title }}</strong>
+        {%- if laterFirst.data.teaser or laterFirst.data.summary %}<span>{{ laterFirst.data.teaser or laterFirst.data.summary }}</span>{% endif %}
         <em aria-hidden="true">→</em>
       </a>
       {%- else %}

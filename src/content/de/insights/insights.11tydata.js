@@ -2,6 +2,8 @@ const WORDS_PER_MINUTE = 200;
 
 export default {
   layout: "layouts/article.njk",
+  // The series an essay belongs to (src/_data/essaySeries.json); an essay names another with "series:".
+  series: "ten-years",
   lang: "de",
   activeNav: "/de/insights.html",
   permalink: (data) => (data.status === "soon" ? false : `/de/insights/${data.page.fileSlug}/`),
