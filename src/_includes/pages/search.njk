@@ -1,0 +1,27 @@
+{#- Search, shared by the three languages: one field over the essays, reflections, field notes, tools and main pages of
+    this language. js/search.js reads the index (/search-index.json, /de/…, /sq/…) once and searches in the browser;
+    nothing is sent anywhere. Without JavaScript the form still shows what was asked and points to the lists. -#}
+{%- set indexUrl = "/search-index.json" if not lang or lang == "en" else "/" + lang + "/search-index.json" -%}
+<section class="shell page-hero search-hero">
+  <p class="eyebrow">{{ "Essays, field notes, tools" | t(lang) }}</p>
+  <h1>{{ "Search" | t(lang) }}</h1>
+</section>
+
+<section class="shell section search-page" data-search data-index="{{ indexUrl }}"
+  data-kinds='{{ { essay: "Essay" | t(lang), reflection: "Reflection" | t(lang), note: "Field note" | t(lang), tool: "Tool" | t(lang), page: "Page" | t(lang) } | dump }}'
+  data-count-label="{{ '{n} results' | t(lang) }}" data-one-label="{{ '1 result' | t(lang) }}" data-none-label="{{ 'Nothing found for that yet. Try another word, or browse the essays.' | t(lang) }}">
+  <form class="search-form" action="" method="get" role="search">
+    <label class="visually-hidden" for="search-input">{{ "Search" | t(lang) }}</label>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <input id="search-input" type="search" name="q" placeholder="{{ 'For example: handover, KPI, standard' | t(lang) }}" autocomplete="off" data-search-input>
+  </form>
+  <p class="search-count" data-search-count aria-live="polite"></p>
+  <ol class="search-results" data-search-results></ol>
+  <p class="search-browse">{{ "Or browse:" | t(lang) }}
+    <a href="{{ '/insights.html' | local(lang) }}">{{ "Insights" | t(lang) }}</a> ·
+    <a href="{{ '/reflections.html' | local(lang) }}">{{ "Reflections" | t(lang) }}</a> ·
+    <a href="{{ '/field-notes.html' | local(lang) }}">{{ "Field Notes" | t(lang) }}</a> ·
+    <a href="{{ '/tools.html' | local(lang) }}">{{ "Tools" | t(lang) }}</a>
+  </p>
+</section>
+<script src="{{ '/js/search.js' | assetUrl }}" defer></script>

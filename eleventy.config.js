@@ -6,6 +6,7 @@ import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
+import { searchIndex } from "./lib/search-index.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -65,6 +66,10 @@ export default function (eleventyConfig) {
     );
     eleventyConfig.addCollection(`reflections${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/reflections/*.md`).filter((item) => item.data.status !== "soon").sort((a, b) => b.date - a.date)
+    );
+    // The feed in this language: its essays and reflections together.
+    eleventyConfig.addCollection(`feed${suffix}`, (api) =>
+      api.getFilteredByGlob([`src/content/${lang}/insights/*.md`, `src/content/${lang}/reflections/*.md`]).filter((item) => item.data.status !== "soon").sort(byDate)
     );
     eleventyConfig.addCollection(`projects${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/projects/*.md`).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
@@ -208,6 +213,18 @@ export default function (eleventyConfig) {
     const slug = path === "/" ? "home" : path === "/tools.html" ? "tools" : page ? `page-${page}` : role ? `role-${role}` : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
     const file = slug && `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
     return file && fs.existsSync(`src${file}`) ? file : null;
+  });
+  // The search index of a language, as JSON (lib/search-index.js, read by js/search.js).
+  eleventyConfig.addFilter("searchIndex", (lang, collections, tools, pages) => {
+    const suffix = TRANSLATED.has(lang) ? lang[0].toUpperCase() + lang.slice(1) : "";
+    return JSON.stringify(searchIndex({
+      essays: collections[`insights${suffix}`],
+      reflections: collections[`reflections${suffix}`],
+      notes: collections[`notes${suffix}`],
+      tools,
+      pages,
+      local: (url) => localUrl(url, lang),
+    }));
   });
   // The link preview of an essay or a reflection (made by scripts/page-cards.mjs), if there is one; it follows
   // the file, so an essay that keeps an older address still finds it.

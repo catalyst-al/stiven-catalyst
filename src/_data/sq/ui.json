@@ -1769,5 +1769,15 @@
   "A new field note on the home page every day. New essays and field notes by email, when they are ready.": "Çdo ditë një shënim i ri në faqen kryesore. Ese dhe shënime të reja me email, kur të jenë gati.",
   "Also here:": "Gjithashtu këtu:",
   "the magazine, the book and the guides": "revista, libri dhe udhëzuesit",
-  "Read first": "Lexo fillimisht"
+  "Read first": "Lexo fillimisht",
+  "Search": "Kërko",
+  "Essays, field notes, tools": "Ese, shënime nga terreni, mjete",
+  "Field note": "Shënim nga terreni",
+  "Tool": "Mjet",
+  "Page": "Faqe",
+  "{n} results": "{n} rezultate",
+  "1 result": "1 rezultat",
+  "Nothing found for that yet. Try another word, or browse the essays.": "Ende nuk ka gjë për këtë. Provoni një fjalë tjetër, ose shfletoni esetë.",
+  "For example: handover, KPI, standard": "Për shembull: dorëzim, KPI, standard",
+  "Or browse:": "Ose shfletoni:"
 }
