@@ -6,17 +6,22 @@
     <p class="lede">{{ "Longer thinking on leadership, operations, accountability, service and the systems that shape performance." | t(lang) }}</p>
   </section>
   {%- set essays = collections["insights" + (lang | langSuffix)] %}
-  {%- set seriesItems = essays | published %}
-  {#- The series as a path: one dot per essay, those read in this browser filled in, and a button to start or
-      to continue where the reader stopped (js/writing.js; without it, the button starts with essay 1). -#}
-  {%- if seriesItems.length > 1 %}
-  <section class="shell series-panel" aria-labelledby="series-panel-title" data-series-panel
+  {#- Each series as a path, the newest first: one dot per essay, those read in this browser filled in, and a
+      button to start or to continue where the reader stopped (js/writing.js; without it, the button starts with
+      essay 1). A series still being written says how many of its essays are out. -#}
+  {%- for info in essaySeries | reverse %}
+  {%- set seriesItems = essays | published | inSeries(info.id) %}
+  {%- if seriesItems.length %}
+  <section class="shell series-panel" aria-labelledby="series-panel-{{ info.id }}" data-series-panel
            data-read-label="{{ '{a} of {b} read' | t(lang) }}"
            data-continue-label="{{ 'Continue with essay {n}' | t(lang) }}"
            data-resume-label="{{ 'Continue reading essay {n}' | t(lang) }}">
     <div class="series-panel-copy">
-      <p class="kicker" id="series-panel-title">{{ "Ten years close to the work" | t(lang) }}</p>
-      <p class="series-panel-count" data-series-count>{{ "{n} essays" | t(lang) | replace("{n}", seriesItems.length) }}</p>
+      <p class="kicker" id="series-panel-{{ info.id }}">{{ info.name[lang or "en"] }}</p>
+      <p class="series-panel-count" data-series-count>
+        {%- if seriesItems.length < info.planned %}{{ "{n} of {total} essays" | t(lang) | replace("{n}", seriesItems.length) | replace("{total}", info.planned) }}
+        {%- else %}{{ "{n} essays" | t(lang) | replace("{n}", seriesItems.length) }}{% endif -%}
+      </p>
     </div>
     <ol class="series-dots is-large">
       {%- for item in seriesItems %}
@@ -26,6 +31,7 @@
     <a class="button-primary" href="{{ seriesItems[0].url }}" data-series-next>{{ "Start with essay 1" | t(lang) }}</a>
   </section>
   {%- endif %}
+  {%- endfor %}
   <section class="shell listing" data-filter-list>
     {%- set searchLabel = "Search essays" | t(lang) %}
     {%- set countLabel = "{a} of {b} essays" | t(lang) %}
@@ -44,7 +50,7 @@
     <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}" data-read-row="{{ item.fileSlug }}">
       <span class="number">{{ item.data.number }}</span>
       <div><h2>{% if loop.first %}<span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{% endif %}{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
-      <span class="row-meta">{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}<span class="read-mark" data-read-mark hidden>{{ "Read" | t(lang) }}</span></span>
+      <span class="row-meta">{% if item.data.series != essaySeries[0].id %}{{ (essaySeries | seriesById(item.data.series)).name[lang or "en"] }} · {% endif %}{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}<span class="read-mark" data-read-mark hidden>{{ "Read" | t(lang) }}</span></span>
     </a>
     {%- endif %}
     {%- endfor %}

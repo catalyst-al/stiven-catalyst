@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ten-years",
+    "name": { "en": "Ten years close to the work", "de": "Zehn Jahre nah an der Arbeit", "sq": "Dhjetë vite pranë punës" },
+    "planned": 12
+  },
+  {
+    "id": "without-you",
+    "name": { "en": "The operation that runs without you", "de": "Ein Betrieb, der auch ohne Sie läuft", "sq": "Operacioni që punon pa ty" },
+    "planned": 10
+  }
+]

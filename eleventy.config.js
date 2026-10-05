@@ -31,13 +31,17 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy(`src/${path}`);
   }
 
-  // Insights, numbered oldest first (01, 02, ...), as on the Insights page.
-  eleventyConfig.addCollection("insights", (api) =>
-    api.getFilteredByGlob("src/content/insights/*.md").sort(byDate).map((item, index) => {
-      item.data.number = String(index + 1).padStart(2, "0");
+  // Insights, oldest first, each numbered within its series (01, 02, ...), as on the Insights page.
+  const numberInSeries = (items) => {
+    const counts = {};
+    return items.map((item) => {
+      const id = item.data.series || "ten-years";
+      counts[id] = (counts[id] || 0) + 1;
+      item.data.number = String(counts[id]).padStart(2, "0");
       return item;
-    })
-  );
+    });
+  };
+  eleventyConfig.addCollection("insights", (api) => numberInSeries(api.getFilteredByGlob("src/content/insights/*.md").sort(byDate)));
   eleventyConfig.addCollection("notes", (api) =>
     api.getFilteredByGlob("src/content/notes/*.md").sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
   );
@@ -55,12 +59,7 @@ export default function (eleventyConfig) {
 
   // The same collections in German and Albanian: insightsDe, notesSq, ...
   for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {
-    eleventyConfig.addCollection(`insights${suffix}`, (api) =>
-      api.getFilteredByGlob(`src/content/${lang}/insights/*.md`).sort(byDate).map((item, index) => {
-        item.data.number = String(index + 1).padStart(2, "0");
-        return item;
-      })
-    );
+    eleventyConfig.addCollection(`insights${suffix}`, (api) => numberInSeries(api.getFilteredByGlob(`src/content/${lang}/insights/*.md`).sort(byDate)));
     eleventyConfig.addCollection(`notes${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/notes/*.md`).sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
     );
@@ -189,11 +188,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("dayOfCycle", (count) => (count ? Math.floor(Date.now() / 864e5) % count : 0));
   // The essays that have a page, without those marked "soon".
   eleventyConfig.addFilter("published", (items) => (items || []).filter((item) => item.data.status !== "soon"));
-  eleventyConfig.addFilter("seriesNeighbours", (items, url) => {
+  // An essay's place in its series: the essays before and after it, its number, and how many the series has
+  // (the planned number while it is still being written).
+  eleventyConfig.addFilter("seriesNeighbours", (items, url, planned = 0) => {
     const published = (items || []).filter((item) => item.data.status !== "soon");
     const index = published.findIndex((item) => item.url === url);
     if (index < 0) return null;
-    return { prev: published[index - 1] || null, next: published[index + 1] || null, number: index + 1, total: published.length };
+    return { prev: published[index - 1] || null, next: published[index + 1] || null, number: index + 1, total: Math.max(published.length, planned) };
+  });
+  // The essays of one series (src/_data/essaySeries.json), and a series by its id or the one after it.
+  eleventyConfig.addFilter("inSeries", (items, id) => (items || []).filter((item) => (item.data.series || "ten-years") === id));
+  eleventyConfig.addFilter("seriesById", (all, id) => (all || []).find((entry) => entry.id === (id || "ten-years")) || null);
+  eleventyConfig.addFilter("seriesAfter", (all, id) => {
+    const index = (all || []).findIndex((entry) => entry.id === (id || "ten-years"));
+    return index >= 0 ? all[index + 1] || null : null;
   });
   // The origin of an address (https://host), for naming a form provider in the Content Security Policy.
   eleventyConfig.addFilter("originOf", (url) => { try { return new URL(url).origin; } catch { return ""; } });

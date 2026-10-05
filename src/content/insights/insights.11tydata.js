@@ -2,6 +2,8 @@ const WORDS_PER_MINUTE = 200;
 
 export default {
   layout: "layouts/article.njk",
+  // The series an essay belongs to (src/_data/essaySeries.json); an essay names another with "series:".
+  series: "ten-years",
   activeNav: "/insights.html",
   // Essays marked "soon" are listed but get no page of their own yet.
   // "address" lets older essays keep their original URL (e.g. /article-kpi.html).
