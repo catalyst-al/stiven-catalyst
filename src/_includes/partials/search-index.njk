@@ -1,0 +1,10 @@
+{#- The search index of a language (lib/search-index.js), written by search-index.njk in each language. -#}
+{%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
+{%- set pages = [
+  { title: "Start here" | t(lang), summary: "Essays, field notes and small tools about leading people and running operations, written from ten years close to the work. If you have ten minutes, begin with these." | t(lang), url: "/start.html" },
+  { title: "About" | t(lang), summary: "Stiven Catalyst is built around one idea: better results begin with clearer thinking, and clearer thinking matters only when it changes what happens next." | t(lang), url: "/about.html" },
+  { title: "Publications" | t(lang), summary: "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, and every month a magazine on management, from the floor." | t(lang), url: "/publications.html" },
+  { title: "Tools" | t(lang), summary: "Small tools built from the essays. They run in your browser, and nothing you type leaves your device." | t(lang), url: "/tools.html" },
+  { title: "Contact" | t(lang), summary: "Questions, ideas or a conversation about leadership, operations and systems. Messages are read personally." | t(lang), url: "/contact.html" }
+] -%}
+{{ lang | searchIndex(collections, toolList, pages) | safe }}
