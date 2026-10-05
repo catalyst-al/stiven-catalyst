@@ -203,9 +203,19 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("socialCard", (url, lang) => {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
     const role = path.match(/^\/roles\/([^/]+)\/$/)?.[1];
-    const slug = path === "/" ? "home" : path === "/tools.html" ? "tools" : role ? `role-${role}` : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
+    // The writing pages and Start here have cards of their own (made by scripts/page-cards.mjs).
+    const page = path.match(/^\/(start|insights|reflections|field-notes|about)\.html$/)?.[1];
+    const slug = path === "/" ? "home" : path === "/tools.html" ? "tools" : page ? `page-${page}` : role ? `role-${role}` : path.match(/^\/tools\/([^/]+)\/$/)?.[1];
     const file = slug && `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
     return file && fs.existsSync(`src${file}`) ? file : null;
+  });
+  // The link preview of an essay or a reflection (made by scripts/page-cards.mjs), if there is one; it follows
+  // the file, so an essay that keeps an older address still finds it.
+  eleventyConfig.addFilter("pieceCard", (page, lang) => {
+    const section = String(page?.inputPath || "").match(/\/(insights|reflections)\/[^/]+\.md$/)?.[1];
+    if (!section) return null;
+    const file = `/media/social/${TRANSLATED.has(lang) ? lang : "en"}/${section === "insights" ? "insight" : "reflection"}-${page.fileSlug}.jpg`;
+    return fs.existsSync(`src${file}`) ? file : null;
   });
   // The picture of a tool's result on its card (made by scripts/tool-previews.mjs), if there is one.
   // The smaller WebP copies of an image (scripts/thumbnails.mjs: name-240.webp, name-480.webp, name-720.webp)

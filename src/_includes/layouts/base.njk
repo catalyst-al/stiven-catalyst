@@ -15,8 +15,9 @@
 {%- set hasLegal = legal.name and legal.city -%}
 {%- set toolFamily = page.url | familyOf(families) -%}
 {%- set rolePage = toolFamily and "/roles/" in page.url -%}
-{#- A page's own image, else its card, else the homepage card in its language (the hero with the families). -#}
-{%- set card = (page.url | socialCard(lang)) or (homeUrl | socialCard(lang)) -%}
+{#- A page's own image, else its card (a tool, a role, an essay, a reflection, a writing page), else the homepage
+    card in its language (the hero with the families). -#}
+{%- set card = (page.url | socialCard(lang)) or (page | pieceCard(lang)) or (homeUrl | socialCard(lang)) -%}
 {%- set socialImage = ogImage or ((card | assetUrl) if card else "/social.png") -%}
 {#- The two inline scripts, kept in variables so the Content Security Policy can name their hashes. -#}
 {%- set themeScript -%}document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}{%- endset -%}
