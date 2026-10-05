@@ -1748,5 +1748,7 @@
   "Cover Letter": "Anschreiben",
   "“Routes in the period” is lower than the number of routes in the log, so the log count is used.": "„Touren im Zeitraum“ ist kleiner als die Touren im Protokoll, deshalb wird die Anzahl im Protokoll verwendet.",
   "little data": "wenige Daten",
-  "{table}: {n} row from {source}.": "{table}: {n} Zeile aus {source}."
+  "{table}: {n} row from {source}.": "{table}: {n} Zeile aus {source}.",
+  "Almost there: open the email that just arrived and confirm with the link in it. If nothing comes, look in spam.": "Fast geschafft: Öffnen Sie die E-Mail, die gerade angekommen ist, und bestätigen Sie mit dem Link darin. Wenn nichts kommt, schauen Sie im Spam-Ordner nach.",
+  "That did not go through. Please try again in a moment, or write to": "Das hat nicht geklappt. Bitte versuchen Sie es gleich noch einmal oder schreiben Sie an"
 }

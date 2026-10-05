@@ -5,16 +5,22 @@
     <h2 id="newsletter-title">{{ "New thinking," | t(lang) }} <span>{{ "when it is ready." | t(lang) }}</span></h2>
     <p>{{ "New essays and field notes by email. No schedule pressure, no noise. Unsubscribe at any time." | t(lang) }}</p>
   </div>
-  <form class="newsletter-form" action="{{ site.newsletter.action }}" method="post" target="_blank">
+  <form class="newsletter-form" action="{{ site.newsletter.action }}" method="post" target="_blank" data-newsletter data-sent="{{ 'Almost there: open the email that just arrived and confirm with the link in it. If nothing comes, look in spam.' | t(lang) }}" data-failed="{{ 'That did not go through. Please try again in a moment, or write to' | t(lang) }}" data-mail="{{ site.email }}">
     <label class="visually-hidden" for="newsletter-email">{{ "Email address" | t(lang) }}</label>
     <div class="newsletter-row">
       <input id="newsletter-email" type="email" name="{{ site.newsletter.emailField }}" placeholder="{{ 'you@example.com' | t(lang) }}" autocomplete="email" required>
       <button type="submit">{{ "Subscribe" | t(lang) }}</button>
     </div>
+    {%- if site.newsletter.languageField %}
+    <input type="hidden" name="{{ site.newsletter.languageField }}" value="{{ lang or 'en' }}">
+    {%- endif %}
     {%- for name, value in site.newsletter.hiddenFields %}
     <input type="hidden" name="{{ name }}" value="{{ value }}">
     {%- endfor %}
+    <div class="newsletter-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
     <p class="form-note">{{ "You will get an email to confirm your subscription." | t(lang) }}{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
+    <p class="newsletter-status" data-newsletter-status role="status" hidden></p>
   </form>
 </section>
+<script src="{{ '/js/newsletter.js' | assetUrl }}" defer></script>
 {%- endif %}

@@ -1155,6 +1155,18 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 .newsletter-row button:hover { filter: brightness(1.08); }
 
+.newsletter-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.newsletter-status {
+  margin: 0;
+  padding: 18px 22px;
+  border: 1px solid color-mix(in srgb, var(--blue) 45%, var(--line));
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--ink);
+}
+.newsletter-row:not([hidden]) ~ .newsletter-status { margin-top: 14px; }
+.newsletter-status a { border-bottom: 1px solid currentColor; }
+
 .form-note {
   margin: 14px 0 0 18px;
   color: var(--muted);

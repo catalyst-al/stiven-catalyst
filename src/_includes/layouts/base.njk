@@ -24,9 +24,9 @@
 {#- Everything comes from this site; the one exception is a company logo from Google's icon service in the
     CV tools (img-src). Styles allow inline attributes (the role colour, SVG charts), fonts and images may be
     data: or blob: (exports, uploaded photos), pdf.js runs its worker from here, forms may post to the
-    newsletter provider (form-action https:), and the feedback form at the end of a tool may post to
-    the form provider in site.contact.action (connect-src). -#}
-{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
+    newsletter provider (form-action https:, and connect-src for the form that stays on the page), and the
+    feedback form at the end of a tool may post to the form provider in site.contact.action (connect-src). -#}
+{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">
 <head>
