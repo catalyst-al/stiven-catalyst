@@ -40,10 +40,16 @@ test('the preview cards number an essay within its series', async () => {
 const built = (file) => fs.readFileSync(path.join('_site', file), 'utf8');
 
 test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/insights/the-first-30-days/index.html') }, () => {
-  const essay = built('sq/insights/the-first-30-days/index.html');
-  assert.match(essay, /Operacioni që punon pa ty · Eseja 1 nga 10/);
-  assert.match(essay, /href="#newsletter-title">Merreni me email</);
-  assert.doesNotMatch(essay, /Filloni sërish me esenë 1/, 'no link back to itself');
+  // The first essay of the new series leads to the second.
+  const first = built('sq/insights/the-first-30-days/index.html');
+  assert.match(first, /Operacioni që punon pa ty · Eseja 1 nga 10/);
+  assert.match(first, /href="\/sq\/insights\/ten-minutes-before-the-shift\/" rel="next"/);
+
+  // The newest essay of the unfinished series says the next one is on its way.
+  const newest = built('sq/insights/ten-minutes-before-the-shift/index.html');
+  assert.match(newest, /Operacioni që punon pa ty · Eseja 2 nga 10/);
+  assert.match(newest, /href="#newsletter-title">Merreni me email</);
+  assert.match(newest, /Filloni sërish me esenë 1/);
 
   // The last essay of the finished first series leads into the second.
   const last = built('insights/the-operations-manager-i-want-to-be/index.html');
@@ -53,7 +59,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const page = built('sq/insights.html');
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
-  assert.match(page, /1 nga 10 ese/);
+  assert.match(page, /2 nga 10 ese/);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
   assert.match(row, /<span class="number">01<\/span>/);
