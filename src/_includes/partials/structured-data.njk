@@ -11,7 +11,7 @@
   "name": site.author,
   "url": ("/about.html" | local(lang)) | absoluteUrl,
   "image": ("/media/stiven-headshot.jpg" | absoluteUrl),
-  "email": site.email,
+  "email": site.personalEmail or site.email,
   "sameAs": site.profiles or []
 } %}
 {%- set publisher = {
