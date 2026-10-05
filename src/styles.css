@@ -588,6 +588,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 /* "PA TEATËR.": the dots of Ë reach up to the line above at .88; in Albanian the second line sits a little lower. */
 .cosmos h1:lang(sq) .act { margin-top: -.08em; }
+/* The same for the other uppercase titles that wrap in Albanian ("NDËRTO SISTEME MË TË MIRA.", the tool names). */
+.cta h2:lang(sq) { line-height: 1.02; }
+.page-hero h1:lang(sq) { line-height: .98; }
 
 .hero-copy {
   max-width: 700px;
