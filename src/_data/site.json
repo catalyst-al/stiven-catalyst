@@ -10,9 +10,10 @@
   ],
   "description": "Stiven Catalyst is an independent publication about leadership, operations, people, systems and practical change.",
   "newsletter": {
-    "action": "",
-    "emailField": "email",
-    "hiddenFields": {}
+    "action": "https://assets.mailerlite.com/jsonp/2685428/forms/200474251346576487/subscribe",
+    "emailField": "fields[email]",
+    "languageField": "fields[language]",
+    "hiddenFields": { "ml-submit": "1", "anticsrf": "true" }
   },
   "contact": {
     "action": "",
