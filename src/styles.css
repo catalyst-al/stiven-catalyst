@@ -586,6 +586,8 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   background-clip: text;
   color: transparent;
 }
+/* "PA TEATËR.": the dots of Ë reach up to the line above at .88; in Albanian the second line sits a little lower. */
+.cosmos h1:lang(sq) .act { margin-top: -.08em; }
 
 .hero-copy {
   max-width: 700px;
