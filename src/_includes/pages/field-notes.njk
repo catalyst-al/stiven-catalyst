@@ -17,6 +17,8 @@
     <div class="note-actions" data-note-actions hidden>
       <button type="button" data-copied-label="{{ 'Copied' | t(lang) }}" data-copy-text="“{{ note.data.quote }}” (Stiven Janaqi, Stiven Catalyst) {{ (notesPage + '#note-' + note.fileSlug) | absoluteUrl }}">{{ "Copy" | t(lang) }}</button>
       <button type="button" data-share-url="{{ (notesPage + '#note-' + note.fileSlug) | absoluteUrl }}" data-share-text="“{{ note.data.quote }}”">{{ "Share" | t(lang) }}</button>
+      {%- set image = note.fileSlug | noteImage(lang) %}{% if image %}
+      <a href="{{ image }}" download="stiven-catalyst-{{ note.fileSlug }}-{{ lang or 'en' }}.jpg" title="{{ 'Download as an image to post' | t(lang) }}">{{ "Image" | t(lang) }}</a>{% endif %}
     </div>
   </div>
 </article>

@@ -1023,6 +1023,41 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   text-transform: uppercase;
 }
 
+/* Start here */
+.start-intro {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+  max-width: 900px;
+  padding-bottom: 20px;
+}
+.start-intro img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
+.start-intro .kicker { margin: 0 0 10px; }
+.start-intro p:not(.kicker) { margin: 0 0 14px; color: var(--muted); font-size: clamp(16px, 1.6vw, 19px); }
+.start-number {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-right: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.start-tool { max-width: 760px; min-height: 0; }
+.start-tool h3 { margin-top: 0; }
+.start-links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+.start-step .note-card { max-width: 900px; }
+.start-more { margin: 34px 0 0; color: var(--muted); }
+.start-more a { color: var(--ink); border-bottom: 1px solid var(--line); }
+.start-more a:hover { border-color: currentColor; }
+@media (max-width: 560px) {
+  .start-intro { grid-template-columns: 1fr; gap: 20px; }
+  .start-intro img { width: 96px; height: 96px; }
+}
+
 .cta {
   display: grid;
   grid-template-columns: 1.4fr .6fr;
@@ -2594,6 +2629,7 @@ html:not(.js) .filter-bar { display: none; }
 }
 .note-actions { display: flex; gap: 6px; }
 .note-actions button,
+.note-actions a,
 .share-links button,
 .share-links a {
   padding: 7px 13px;
@@ -2607,6 +2643,7 @@ html:not(.js) .filter-bar { display: none; }
   cursor: pointer;
 }
 .note-actions button:hover,
+.note-actions a:hover,
 .share-links button:hover,
 .share-links a:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 
