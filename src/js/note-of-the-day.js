@@ -21,6 +21,11 @@
   const share = box.querySelector("[data-note-share]");
   share.dataset.shareUrl = url;
   share.dataset.shareText = `“${today.q}”`;
+  const image = box.querySelector("[data-note-image]");
+  if (image && today.img) {
+    image.setAttribute("href", today.img);
+    image.setAttribute("download", `stiven-catalyst-${today.id.replace(/^note-/, "")}-${document.documentElement.lang || "en"}.jpg`);
+  } else if (image) image.hidden = true;
 
   document.querySelectorAll("[data-note-slot]").forEach((card) => {
     const note = at(Number(card.dataset.noteSlot));

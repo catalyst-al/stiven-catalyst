@@ -140,13 +140,20 @@ export default function (eleventyConfig) {
   });
   // The hash of an inline script, for the Content Security Policy in layouts/base.njk.
   eleventyConfig.addFilter("cspHash", (code) => `'sha256-${createHash("sha256").update(String(code)).digest("base64")}'`);
-  eleventyConfig.addFilter("assetUrl", (path) => {
+  const assetUrl = (path) => {
     const file = `src${path}`;
     if (!assetVersions.has(file)) {
       assetVersions.set(file, createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10));
     }
     return `${path}?v=${assetVersions.get(file)}`;
-  });
+  };
+  eleventyConfig.addFilter("assetUrl", assetUrl);
+  // A field note as an image to post (made by scripts/note-cards.mjs), or "" while it has none.
+  const noteImage = (slug, lang) => {
+    const path = `/media/notes/${lang || "en"}/${slug}.jpg`;
+    return fs.existsSync(`src${path}`) ? assetUrl(path) : "";
+  };
+  eleventyConfig.addFilter("noteImage", noteImage);
   // Links stay in the page's language: /tools/x/ becomes /de/tools/x/ or /sq/tools/x/.
   eleventyConfig.addFilter("local", localUrl);
   // The tools of one family (families.json), in the page's language and in the family's order:
@@ -251,6 +258,8 @@ export default function (eleventyConfig) {
       id: `note-${note.fileSlug}`,
       d: new Date(note.date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }),
       iso: new Date(note.date).toISOString().slice(0, 10),
+      // The note as an image to post (scripts/note-cards.mjs), when there is one.
+      img: noteImage(note.fileSlug, lang),
     }))
   );
   eleventyConfig.addFilter("pad", (value) => String(value).padStart(2, "0"));
