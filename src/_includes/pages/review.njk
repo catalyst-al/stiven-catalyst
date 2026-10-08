@@ -38,7 +38,7 @@
   </section>
 
   <section class="book-stage" id="reader" aria-label="{{ L.page_by_page }}">
-    <div class="book-reader" data-book data-slug="{{ review.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
+    <div class="book-reader is-dark" data-book data-slug="{{ review.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
       <div class="book-viewport">
         <div class="book" data-book-pages>
           {%- for page in reader.pages %}

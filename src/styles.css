@@ -3594,6 +3594,13 @@ html:not(.js) .filter-bar { display: none; }
 }
 .book-edge.is-left { right: 100%; --n: var(--left-stack); }
 .book-edge.is-right { left: 100%; --n: var(--right-stack); }
+/* The magazines, the Management Review and the Tools Guide are printed on dark paper: their page edges, and the
+   pages while they load, are dark too. */
+.book-reader.is-dark .book-edge { background: repeating-linear-gradient(90deg, #27313b 0 1px, #0b1117 1px 2px); }
+.book-reader.is-dark .book-face,
+.book-reader.is-dark .book-page,
+.book-reader.is-dark .book-zoom-pages img { background: #060a10; }
+.book-reader.is-dark .book-page.is-blank { background: #0b1117; }
 
 @media (hover: hover) and (pointer: fine) {
   .is-spread .book-sheet.is-right:not(.is-turned):hover { transform: rotateY(-6deg); }
