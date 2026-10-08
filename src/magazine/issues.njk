@@ -9,9 +9,9 @@ permalink: "/magazine/{{ issue.slug }}.html"
 activeNav: /publications.html
 ogType: article
 eleventyComputed:
-  title: "{{ issue.en.theme }}"
-  seo_title: "From the Floor, issue {{ issue.number }}: {{ issue.en.theme }}"
-  description: "{{ issue.en.trend.lead }}"
-  ogImage: "/media/magazine/{{ issue.slug }}/en/social.jpg"
+  title: "{{ issue.en.theme | safe }}"
+  seo_title: "From the Floor, issue {{ issue.number | safe }}: {{ issue.en.theme | safe }}"
+  description: "{{ issue.en.trend.lead | safe }}"
+  ogImage: "/media/magazine/{{ issue.slug | safe }}/en/social.jpg"
 ---
 {% include "pages/magazine-issue.njk" %}

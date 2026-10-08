@@ -8,7 +8,7 @@ pagination:
 activeNav: /tools.html
 permalink: "/roles/{{ family.slug }}/"
 eleventyComputed:
-  title: "{{ family.role }}"
-  description: "{{ family.line }}"
+  title: "{{ family.role | safe }}"
+  description: "{{ family.line | safe }}"
 ---
 {% include "partials/role-page.njk" %}

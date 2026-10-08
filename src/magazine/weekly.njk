@@ -4,8 +4,8 @@ permalink: "/magazine/management-review.html"
 activeNav: /publications.html
 eleventyComputed:
   title: "Management Review"
-  seo_title: "Management Review · {{ weekly.en.archive.eyebrow }}"
-  description: "{{ weekly.en.archive.seo }}"
-  ogImage: "/media/magazine/{{ weekly.latest.slug }}/en/social.jpg"
+  seo_title: "Management Review · {{ weekly.en.archive.eyebrow | safe }}"
+  description: "{{ weekly.en.archive.seo | safe }}"
+  ogImage: "/media/magazine/{{ weekly.latest.slug | safe }}/en/social.jpg"
 ---
 {% include "pages/weekly-archive.njk" %}

@@ -10,9 +10,9 @@ permalink: "/sq/magazine/{{ issue.slug }}.html"
 activeNav: /sq/publications.html
 ogType: article
 eleventyComputed:
-  title: "{{ issue.sq.heading }}"
-  seo_title: "Management Review Nr. {{ issue.no }}: {{ issue.sq.heading }}"
-  description: "{{ issue.sq.seo }}"
-  ogImage: "/media/magazine/{{ issue.slug }}/sq/social.jpg"
+  title: "{{ issue.sq.heading | safe }}"
+  seo_title: "Management Review Nr. {{ issue.no | safe }}: {{ issue.sq.heading | safe }}"
+  description: "{{ issue.sq.seo | safe }}"
+  ogImage: "/media/magazine/{{ issue.slug | safe }}/sq/social.jpg"
 ---
 {% include "pages/weekly-issue.njk" %}

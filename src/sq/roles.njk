@@ -9,7 +9,7 @@ pagination:
 activeNav: /sq/tools.html
 permalink: "/sq/roles/{{ family.slug }}/"
 eleventyComputed:
-  title: "{{ family.role | t('sq') }}"
-  description: "{{ family.line | t('sq') }}"
+  title: "{{ family.role | t('sq') | safe }}"
+  description: "{{ family.line | t('sq') | safe }}"
 ---
 {% include "partials/role-page.njk" %}

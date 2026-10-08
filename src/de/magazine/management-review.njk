@@ -5,9 +5,9 @@ permalink: "/de/magazine/management-review-2026-09.html"
 activeNav: /de/publications.html
 ogType: article
 eleventyComputed:
-  title: "{{ review.de.theme }}"
-  seo_title: "Management Review, {{ review.de.date }}: {{ review.de.theme }}"
-  description: "{{ review.de.seo }}"
+  title: "{{ review.de.theme | safe }}"
+  seo_title: "Management Review, {{ review.de.date | safe }}: {{ review.de.theme | safe }}"
+  description: "{{ review.de.seo | safe }}"
   ogImage: "/media/magazine/management-review-2026-09/de/social.jpg"
 ---
 {% include "pages/review.njk" %}

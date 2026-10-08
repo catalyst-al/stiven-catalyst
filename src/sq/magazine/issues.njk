@@ -10,9 +10,9 @@ permalink: "/sq/magazine/{{ issue.slug }}.html"
 activeNav: /sq/publications.html
 ogType: article
 eleventyComputed:
-  title: "{{ issue.sq.theme }}"
-  seo_title: "Nga terreni, numri {{ issue.number }}: {{ issue.sq.theme }}"
-  description: "{{ issue.sq.trend.lead }}"
-  ogImage: "/media/magazine/{{ issue.slug }}/sq/social.jpg"
+  title: "{{ issue.sq.theme | safe }}"
+  seo_title: "Nga terreni, numri {{ issue.number | safe }}: {{ issue.sq.theme | safe }}"
+  description: "{{ issue.sq.trend.lead | safe }}"
+  ogImage: "/media/magazine/{{ issue.slug | safe }}/sq/social.jpg"
 ---
 {% include "pages/magazine-issue.njk" %}

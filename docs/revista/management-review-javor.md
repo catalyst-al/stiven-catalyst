@@ -108,8 +108,8 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 |---|---|---|
 | Modeli | 1 | U botua |
 | 1 | 2–5 | U botua |
-| 2 | 6–9 | Në shqyrtim |
-| 3 | 10–13 | |
+| 2 | 6–9 | U botua |
+| 3 | 10–13 | Në shqyrtim |
 | 4 | 14–17 | |
 | 5 | 18–21 | |
 | 6 | 22–25 | |
