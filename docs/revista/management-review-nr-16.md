@@ -15,9 +15,9 @@ së botuesit që kthejnë kërkimet, te abstraktet dhe te burime të pavarura; k
 | Gallup studioi në 2014 profilin e talentit të 143 CEO-ve të listës Inc. 500 | Sangeeta Bharadwaj Badal & Bryant Ott, "Delegating: A Huge Management Challenge for Entrepreneurs", Gallup Business Journal, 2015 | U konfirmua te teksti i Gallup. Viti i botimit sipas burimeve dytësore (CFO South Africa) |
 | Kompanitë e CEO-ve me talent të lartë për delegim patën 33% më shumë të ardhura në 2013 (8 kundrejt 6 milionë dollarëve) | Po aty | U konfirmua te teksti i Gallup, te Korea Business Review dhe te Forbes Argentina. Është lidhje, jo provë shkaku |
 | Vetëm një në katër sipërmarrës me punonjës ka talent të lartë për delegim | Po aty | U konfirmua te teksti i Gallup. Vlen për mostrën e gjerë të sipërmarrësve, jo për 143 CEO-të |
-| Talenti i delegimit është një nga dhjetë talentet e vlerësimit Builder Profile 10, që Gallup e shet | Gallup, "Builder Profile 10" | U konfirmua te faqja e Gallup |
+| Profilet e talentit janë të Gallup; talenti i delegimit është një nga dhjetë talentet e vlerësimit që Gallup e shet (Builder Profile 10, më parë Entrepreneurial Profile 10) | Gallup, "Builder Profile 10"; raporti EP10 | U konfirmua te faqja e Gallup. Që studimi i 2014 përdori pikërisht këtë vlerësim është përfundim, jo fakt i shkruar |
 | Rritja trevjeçare 1.751%, 112 pikë përqindjeje më e lartë | Po aty | Vetëm te Korea Business Review dhe në një ekstrakt kërkimi; nuk hyn në numër |
-| "Management Time: Who's Got the Monkey?" u botua në HBR në nëntor–dhjetor 1974 dhe u ribotua në 1999 me një koment të Stephen R. Covey; HBR e quajti atëherë një nga dy ribotimet më të shitura të saj | William Oncken Jr. & Donald L. Wass, HBR, 1974; ribotimi 1999 | Datat u konfirmuan te faqja e HBR; "një nga dy ribotimet më të shitura" te shënimi i redaksisë së HBR në tekstin e ribotimit (kopje e mbajtur nga një palë e tretë) |
+| "Management Time: Who's Got the Monkey?" u botua në HBR në nëntor–dhjetor 1974 dhe u ribotua në 1999 si klasik, me një koment të Stephen R. Covey | William Oncken Jr. & Donald L. Wass, HBR, 1974; ribotimi 1999 | U konfirmua te faqja e HBR (1999/11, ribotimi 99609) dhe te përmbledhja e HBR Guides me komentin e Covey |
 | "Majmuni" është hapi i radhës në një problem; kur menaxheri thotë "më lër ta mendoj", majmuni kalon nga shpina e punonjësit te menaxheri | Po aty | U konfirmua te faqja e HBR dhe te përmbledhja e ribotimit |
 | Pesë shkallët e iniciativës, nga më e ulëta te më e larta: pret derisa t'i thuhet; pyet çfarë të bëjë; propozon, pastaj vepron sipas vendimit; vepron dhe njofton menjëherë; vepron vetë dhe raporton rregullisht. Përmbledhja e ribotimit: shkallët 1 dhe 2 ndalohen, menaxheri cakton 3, 4 ose 5 | Po aty | Rendi dhe përmbajtja u konfirmuan te përmbledhja e ribotimit dhe te një ribotim i pjesës. Fjalët i shkruajmë me tonat |
 | 44 mbikëqyrës dhe 198 vlerësues dëmesh në 19 zyra të një kompanie sigurimesh; delegimi u mat me kufirin në dollarë që vlerësuesit përdornin për të mbyllur dëmet. E parashikuan si e shihte mbikëqyrësi punonjësin, ngarkesa e mbikëqyrësit dhe rëndësia e vendimit, jo personaliteti i mbikëqyrësit | Carrie R. Leana, "Predictors and Consequences of Delegation", Academy of Management Journal 29(4), 1986 | U konfirmua te abstrakti i AOM. Një kompani, një industri |
@@ -28,7 +28,8 @@ së botuesit që kthejnë kërkimet, te abstraktet dhe te burime të pavarura; k
 
 ## Çfarë nuk hyri
 
-- 1.751% dhe 112 pikë përqindjeje (Gallup): vetëm një burim dytësor; dhe një mesatare kaq e madhe në firma që rriten shumë shpejt lexohet keq.
+- 1.751% dhe 112 pikë përqindjeje, 21 kundrejt 17 vendeve të punës (Gallup): u konfirmuan te Gallup dhe Korea Business Review, por mesatare kaq të mëdha në firma që rriten shumë shpejt lexohen keq; përdorim të ardhurat.
+- "Një nga dy ribotimet më të shitura" të HBR: vetëm te shënimi në një kopje të ribotimit; një burim tjetër flet për "ribotimin e dytë më të kërkuar" pa burim.
 - Pjesa e 143 CEO-ve me talent të lartë për delegim: nuk u gjet.
 - Mostra e Birkinshaw & Cohen (45 punonjës në 39 kompani): HBR IdeaCast i jep anasjelltas; nuk e shkruajmë.
 - Ndarja 6 orë punë në tavolinë dhe 2 orë takime: vetëm një burim; shkruajmë "rreth një e pesta".
