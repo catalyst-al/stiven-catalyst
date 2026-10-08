@@ -263,18 +263,20 @@ test('all simulation branches are translated, valid, distinct and terminate afte
 });
 
 test('1:1 follows a previous commitment and backup remaps the complete chain and delegation action', async () => {
+  // Dates relative to today: a 1:1 review date must not lie in the past.
+  const day = n => { const d = new Date(); d.setDate(d.getDate() + n); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
   const s = stateWithProject('zenith'); s.profile.ready = true;
   const dom = await workspace('sq', s, 'zenith'), w = dom.window; click(w, '[data-view="sessions"]');
-  const values = { mode: 'one-to-one', participant: 'Lead A', goal: 'Better handoffs', reality: 'No owner', options: 'Log or call', way: 'Pilot log', support: 'Provide overlap time', action: 'Test one shift', owner: 'Lead A', due: '2026-10-02', nextReview: '2026-10-05' };
+  const values = { mode: 'one-to-one', participant: 'Lead A', goal: 'Better handoffs', reality: 'No owner', options: 'Log or call', way: 'Pilot log', support: 'Provide overlap time', action: 'Test one shift', owner: 'Lead A', due: day(1), nextReview: day(4) };
   formValues(w, 'session', values);
   let p = saved(w).projects[0]; assert.equal(p.sessions.length, 1); const first = p.sessions[0].id;
   const previous = w.document.querySelector('[name="previousSession"]'); previous.value = first; previous.dispatchEvent(new w.Event('change', { bubbles: true }));
   assert.match(w.document.querySelector('[data-previous-commitment]').textContent, /Provide overlap time/);
-  formValues(w, 'session', { ...values, previousSession: first, previousReview: 'Pilot complete; overlap helped', nextReview: '2026-10-12' });
+  formValues(w, 'session', { ...values, previousSession: first, previousReview: 'Pilot complete; overlap helped', nextReview: day(11) });
   p = saved(w).projects[0]; assert.equal(p.sessions.length, 2); assert.equal(p.sessions[1].previousId, first);
   click(w, '[data-view="project"]');
-  const delegation = { outcome: 'Accepted handoff log', owner: 'Lead A', checkpoint: '2026-10-02', due: '2026-10-04', resources: '15 minutes overlap', authority: 'Choose channel', boundary: 'Escalate system changes', success: 'All items acknowledged', acceptance: 'Lead A repeated scope and agreed review' };
-  formValues(w, 'delegation', { ...delegation, checkpoint: '2026-10-05' }); assert.equal(saved(w).projects[0].delegations.length, 0);
+  const delegation = { outcome: 'Accepted handoff log', owner: 'Lead A', checkpoint: day(1), due: day(3), resources: '15 minutes overlap', authority: 'Choose channel', boundary: 'Escalate system changes', success: 'All items acknowledged', acceptance: 'Lead A repeated scope and agreed review' };
+  formValues(w, 'delegation', { ...delegation, checkpoint: day(4) }); assert.equal(saved(w).projects[0].delegations.length, 0);
   formValues(w, 'delegation', delegation); assert.equal(saved(w).projects[0].delegations.length, 1);
   formValues(w, 'delegation-review', { result: 'Owner chose the channel; overlap time provided' });
   assert.match(saved(w).projects[0].delegations[0].review.result, /overlap time/);
@@ -284,8 +286,8 @@ test('1:1 follows a previous commitment and backup remaps the complete chain and
   const imported = C.importBackup(C.empty(), C.exportBackup(saved(w))), cp = imported.projects[0];
   assert.equal(cp.sessions[1].previousId, cp.sessions[0].id); assert.notEqual(cp.sessions[0].id, first);
   assert.ok(cp.actions.some(a => a.id === cp.delegations[0].actionId)); assert.equal(cp.delegations[0].authority, 'Choose channel');
-  assert.equal(C.nextStep(cp, '2026-10-06').key, 'stepAction'); cp.actions.forEach(a => a.done = true);
-  assert.notEqual(C.nextStep(cp, '2026-10-06').key, 'stepSession', 'a later 1:1 supersedes the older review date');
+  assert.equal(C.nextStep(cp, day(5)).key, 'stepAction'); cp.actions.forEach(a => a.done = true);
+  assert.notEqual(C.nextStep(cp, day(5)).key, 'stepSession', 'a later 1:1 supersedes the older review date');
   w.print = () => {}; click(w, '[data-action="print"]'); assert.match(w.document.querySelector('.coaching-print').textContent, /Choose channel/);
   dom.window.close();
 });
