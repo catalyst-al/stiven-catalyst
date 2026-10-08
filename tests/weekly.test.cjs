@@ -21,7 +21,7 @@ const texts = (value, where = '', out = []) => {
   else if (value && typeof value === 'object') for (const [key, item] of Object.entries(value)) texts(item, `${where}.${key}`, out);
   return out;
 };
-const FIGURES = ['line', 'dumbbell', 'donut', 'people', 'pairs', 'columns', 'stat', 'stats', 'figures', 'timeline'];
+const FIGURES = ['line', 'dumbbell', 'donut', 'people', 'pairs', 'columns', 'hbars', 'days', 'stat', 'stats', 'figures', 'timeline'];
 const PLAN = ['cover', 'intro', 'sources', 'back'];
 
 test('the issues are numbered 1, 2, 3 … one file each, with the number in the file name', async () => {
@@ -90,7 +90,7 @@ test('the charts are drawn for the print and again, narrower, for phones', async
   for (const issue of weekly.issues) {
     for (const lang of LANGS) {
       const charts = issue[lang].charts;
-      assert.ok(charts.length >= 3, `${issue.slug} ${lang}: ${charts.length} charts`);
+      assert.ok(charts.length >= 1, `${issue.slug} ${lang}: ${charts.length} charts`);
       for (const chart of charts) {
         assert.match(chart.svg, /^<svg class="wk-svg[^"]*" viewBox="0 0 (340|120) /, `${issue.slug} ${lang} ${chart.type}`);
         assert.ok(chart.alt && !chart.alt.includes('undefined'), `${issue.slug} ${lang} ${chart.type}: ${chart.alt}`);

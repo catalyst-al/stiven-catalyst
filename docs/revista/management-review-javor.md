@@ -41,7 +41,7 @@ burimet dhe kopertina e pasme të jenë në vendin e tyre, dhe që çdo faqe me 
 
 - Teksti i çdo numri: `lib/weekly/issues/XX.js`, çdo tekst në tri gjuhët, `x(en, sq, de)`
 - Burimet: `lib/weekly/sources.js`; etiketat e përbashkëta dhe blloqet: `lib/weekly/common.js`
-- Grafikët (vija, dy pika, unaza, njerëz nga 10, para dhe pas, kolona): `lib/weekly/charts.js`
+- Grafikët (vija, dy pika, unaza, njerëz nga 10, para dhe pas, kolona, shirita, një katror për çdo ditë): `lib/weekly/charts.js`
 - Faqet e printimit: `src/guide-print/weekly.njk`; faqja e lexuesit: `src/_includes/pages/weekly-issue.njk`;
   lista e numrave: `src/_includes/pages/weekly-archive.njk` (`/magazine/management-review.html`)
 
@@ -104,16 +104,16 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 
 ## Grupet
 
-| PR | Numrat |
-|---|---|
-| Modeli | 1 |
-| 1 | 2–5 |
-| 2 | 6–9 |
-| 3 | 10–13 |
-| 4 | 14–17 |
-| 5 | 18–21 |
-| 6 | 22–25 |
-| 7 | 26–29 |
-| 8 | 30–33 |
-| 9 | 34–37 |
-| 10 | 38–41 |
+| PR | Numrat | Statusi |
+|---|---|---|
+| Modeli | 1 | U botua |
+| 1 | 2–5 | Në shqyrtim |
+| 2 | 6–9 | |
+| 3 | 10–13 | |
+| 4 | 14–17 | |
+| 5 | 18–21 | |
+| 6 | 22–25 | |
+| 7 | 26–29 | |
+| 8 | 30–33 | |
+| 9 | 34–37 | |
+| 10 | 38–41 | |

@@ -3516,7 +3516,7 @@ html:not(.js) .filter-bar { display: none; }
   width: min(100%, max(280px, (100svh - 330px) * .705));
   aspect-ratio: 1000 / 1419;
   perspective: 2600px;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   user-select: none;
   -webkit-user-select: none;
   cursor: pointer;
@@ -3731,6 +3731,57 @@ html:not(.js) .filter-bar { display: none; }
   overflow: auto;
 }
 .book-reader.is-fullscreen .book-hint { display: none; }
+/* In full screen only the controls stay around the book, so the pages take the rest of the height. */
+.js .book-reader.is-fullscreen .book { width: min(100%, max(280px, (100svh - 230px) * .705)); }
+.js .book-reader.is-fullscreen.is-spread .book { width: min(100%, max(640px, (100svh - 200px) * 1.41)); }
+
+/* Zoom: the pages in view at the width of the screen, one under the other (src/js/book.js). */
+.book-zoom {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.book-zoom::backdrop { background: rgba(6, 10, 16, .97); }
+html:has(.book-zoom[open]) { overflow: hidden; }
+.book-zoom-pages {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  min-height: 100%;
+  padding: 68px 16px 32px;
+}
+.book-zoom-pages img {
+  display: block;
+  width: min(100%, 1100px);
+  height: auto;
+  background: #fbfaf6;
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .7);
+}
+.book-zoom-close {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 50%;
+  background: rgba(6, 10, 16, .82);
+  color: #fff;
+  cursor: pointer;
+}
+.book-zoom-close:hover { border-color: #fff; }
+.book-zoom-close:focus-visible { outline: 2px solid var(--blue, #4ab5f7); outline-offset: 3px; }
+.book-zoom-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
 
 /* The closing lines and the plain text. */
 .book-closing { padding: 96px 0 40px; }
@@ -3830,7 +3881,7 @@ html:not(.js) .filter-bar { display: none; }
 .weekly-glance { padding: 84px 0 34px; scroll-margin-top: 80px; }
 .weekly-glance h2 { margin: 0 0 12px; font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.05; }
 .weekly-glance-note { max-width: 640px; margin: 0 0 34px; color: var(--muted); font-size: 17px; }
-.weekly-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 470px), 1fr)); gap: 22px; }
+.weekly-charts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 470px), 1fr)); gap: 22px; }
 .weekly-chart {
   display: flex;
   flex-direction: column;
@@ -3882,6 +3933,9 @@ html:not(.js) .filter-bar { display: none; }
 .wk-bar-a { fill: color-mix(in srgb, var(--ink) 26%, transparent); }
 .wk-col { fill: var(--blue); }
 .wk-col.is-alert { fill: var(--red); }
+.wk-day { fill: color-mix(in srgb, var(--ink) 16%, transparent); }
+.wk-day.is-key { fill: none; stroke: var(--red); stroke-width: .8; }
+.wk-day-part { fill: var(--red); }
 .wk-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 4px 0 0; padding: 0; list-style: none; }
 .wk-legend li { padding-top: 8px; border-top: 2px solid var(--line); }
 .wk-legend li.tone-red { border-color: var(--red); }

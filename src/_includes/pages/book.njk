@@ -37,7 +37,7 @@
       <div class="book-viewport">
         <div class="book" data-book-pages>
           {%- for page in book.pages %}
-          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}" width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}"{{ page | pageSrcset | safe }} width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
           {%- endfor %}
         </div>
       </div>
@@ -53,6 +53,7 @@
         <div class="book-tools">
           <button class="book-chip" type="button" data-book-toc aria-expanded="false" aria-controls="book-contents">{{ "Contents" | t(lang) }}</button>
           <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
+          <button class="book-chip" type="button" data-book-zoom data-label="{{ 'The pages, enlarged' | t(lang) }}" data-close="{{ 'Close the enlarged pages' | t(lang) }}" hidden>{{ "Zoom in" | t(lang) }}</button>
           <a class="book-chip" href="/media/books/{{ book.slug }}/{{ book.slug }}.pdf" download>{{ "Download PDF" | t(lang) }}</a>
           <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
         </div>

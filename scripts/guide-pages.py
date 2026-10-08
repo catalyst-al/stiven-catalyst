@@ -5,7 +5,8 @@ scripts/magazine.mjs).
     python3 scripts/guide-pages.py tools-guide en sq de
 
 Writes, for each language:
-  src/media/guides/tools-guide/<lang>/page-01.webp ...  one image per page
+  src/media/guides/tools-guide/<lang>/page-01.webp ...  one image per page, and page-01-2000.webp ... for
+                                                        sharp screens (scripts/page_images.py)
   src/media/guides/tools-guide/<lang>/social.jpg        the preview for social media
 and src/_data/toolsGuidePages.json with the page list of every language.
 
@@ -15,24 +16,18 @@ issue lives; DATA_FILE then holds one entry per issue, under its slug.
 import json
 import os
 import sys
-from io import BytesIO
 from pathlib import Path
 
 import pymupdf
 from PIL import Image
 
-PAGE_WIDTH = 1000  # pixels; sharp on a two-page spread on a retina screen, as the book
+from page_images import save_page
+
 ROOT = Path(__file__).resolve().parent.parent
 SLUG, *LANGS = sys.argv[1:] or ["tools-guide", "en", "sq", "de"]
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "guides")
 MEDIA = ROOT / "src" / "media" / MEDIA_ROOT / SLUG
 DATA = ROOT / "src" / "_data" / os.environ.get("DATA_FILE", "toolsGuidePages.json")
-
-
-def render(page, width):
-    zoom = width / page.rect.width
-    pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False)
-    return Image.open(BytesIO(pix.tobytes("png"))).convert("RGB")
 
 
 def social(cover):
@@ -54,15 +49,8 @@ def main():
             old.unlink()
         pages = []
         for number, page in enumerate(pdf, start=1):
-            image = render(page, PAGE_WIDTH)
-            name = f"page-{number:02d}.webp"
-            image.save(folder / name, "WEBP", quality=82, method=6)
-            pages.append({
-                "number": number,
-                "image": f"/media/{MEDIA_ROOT}/{SLUG}/{lang}/{name}",
-                "width": image.width,
-                "height": image.height,
-            })
+            image, entry = save_page(page, folder, f"page-{number:02d}", f"/media/{MEDIA_ROOT}/{SLUG}/{lang}")
+            pages.append({"number": number, **entry})
             if number == 1:
                 social(image).save(folder / "social.jpg", "JPEG", quality=86, optimize=True, progressive=True)
         out[lang] = {"pageCount": len(pages), "pages": pages}
