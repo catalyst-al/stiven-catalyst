@@ -1,0 +1,80 @@
+// Builds the weekly Management Review: one designed PDF per issue and language, and the page images of the online
+// reader. The same steps as scripts/review.mjs:
+//
+//   pip install pymupdf pillow
+//   node scripts/weekly.mjs          every issue
+//   node scripts/weekly.mjs 1 2      only these issues
+//
+// 1. Eleventy renders the print pages (src/guide-print/weekly.njk) into a temporary folder (GUIDE_PRINT).
+// 2. Chromium (Playwright) prints each one to src/media/magazine/<slug>/<slug>-<lang>.pdf.
+// 3. scripts/guide-pages.py turns the PDFs into page images and adds the issue to src/_data/magazinePages.json.
+import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import http from "node:http";
+import os from "node:os";
+import path from "node:path";
+import { createRequire } from "node:module";
+
+const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const { default: weekly } = await import(path.join(ROOT, "src", "_data", "weekly.js"));
+const wanted = process.argv.slice(2).map(Number);
+const issues = weekly.issues.filter((issue) => !wanted.length || wanted.includes(issue.number));
+if (!issues.length) throw new Error(`No issue numbered ${wanted.join(", ")} in lib/weekly/issues`);
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "weekly-"));
+
+// The reader pages are part of the same Eleventy run and need an entry before the page images exist; step 3
+// replaces it.
+const pagesFile = path.join(ROOT, "src", "_data", "magazinePages.json");
+const known = fs.existsSync(pagesFile) ? JSON.parse(fs.readFileSync(pagesFile, "utf8")) : {};
+for (const issue of weekly.issues) {
+  known[issue.slug] ??= Object.fromEntries(weekly.langs.map((lang) => [lang, { pageCount: 0, pages: [{ number: 1, image: "", width: 0, height: 0 }] }]));
+}
+fs.writeFileSync(pagesFile, JSON.stringify(known, null, 1) + "\n");
+
+execFileSync("npx", ["@11ty/eleventy", `--output=${tmp}`, "--quiet"], { cwd: ROOT, env: { ...process.env, GUIDE_PRINT: "1" }, stdio: "inherit" });
+
+const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".woff2": "font/woff2", ".jpg": "image/jpeg" };
+const server = http.createServer((req, res) => {
+  const url = decodeURIComponent(new URL(req.url, "http://x").pathname);
+  const file = url.startsWith("/guide-fonts/") ? path.join(ROOT, "scripts", url.slice(1)) : path.join(tmp, url.endsWith("/") ? `${url}index.html` : url);
+  fs.readFile(file, (error, body) => {
+    if (error) { res.writeHead(404); res.end(); return; }
+    res.writeHead(200, { "content-type": TYPES[path.extname(file)] || "application/octet-stream" });
+    res.end(body);
+  });
+});
+await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+const base = `http://127.0.0.1:${server.address().port}`;
+
+const require = createRequire(import.meta.url);
+let playwright;
+try { playwright = require("playwright"); } catch { playwright = require(path.join(execFileSync("npm", ["root", "-g"]).toString().trim(), "playwright")); }
+const browser = await playwright.chromium.launch(fs.existsSync("/opt/pw-browsers/chromium") ? { executablePath: "/opt/pw-browsers/chromium" } : {});
+
+for (const issue of issues) {
+  const out = path.join(ROOT, "src", "media", "magazine", issue.slug);
+  fs.mkdirSync(out, { recursive: true });
+  for (const lang of weekly.langs) {
+    const page = await browser.newPage();
+    await page.goto(`${base}/guide-print/weekly/${issue.slug}/${lang}/`, { waitUntil: "networkidle" });
+    await page.evaluate(() => document.fonts.ready);
+    const target = path.join(out, `${issue.slug}-${lang}.pdf`);
+    await page.pdf({ path: target, preferCSSPageSize: true, printBackground: true });
+    console.log(`Printed ${path.relative(ROOT, target)}`);
+    await page.close();
+  }
+}
+await browser.close();
+server.close();
+fs.rmSync(tmp, { recursive: true, force: true });
+
+for (const issue of issues) {
+  execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py"), issue.slug, ...weekly.langs], {
+    cwd: ROOT,
+    env: { ...process.env, MEDIA_ROOT: "magazine", DATA_FILE: "magazinePages.json" },
+    stdio: "inherit",
+  });
+}
+
+// The pages were replaced: make the small copies of the covers again (scripts/thumbnails.mjs).
+execFileSync("node", [path.join(ROOT, "scripts", "thumbnails.mjs")], { cwd: ROOT, stdio: "inherit" });

@@ -1,13 +1,34 @@
-{#- Publications: the book, the Tools Guide and the monthly magazine, in the three languages. -#}
+{#- Publications: the weekly Management Review, the monthly magazine, the book and the Tools Guide, in the three
+    languages. -#}
   <section class="shell page-hero publications-hero">
-    <p class="eyebrow">{{ "Books, guides and a monthly magazine" | t(lang) }}</p>
+    <p class="eyebrow">{{ "Books, guides, a weekly review and a monthly magazine" | t(lang) }}</p>
     {%- set pubTitle = "Publications" | t(lang) %}
     {#- "Publications" and "Publikationen" are wider than a phone at the full hero size. #}
     <h1{% if pubTitle | length > 10 %} class="hero-long"{% endif %}>{{ pubTitle }}</h1>
-    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, and every month a magazine on management, from the floor." | t(lang) }}</p>
+    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every week a review of the best management research, and every month a magazine from the floor." | t(lang) }}</p>
+  </section>
+{%- set ml = lang or "en" %}
+{#- The weekly Management Review: its newest issue, and the way to all of them. -#}
+{%- set WK = weekly[ml] %}
+{%- set wk = weekly.latest %}
+{%- set wkUrl = ("/magazine/" + wk.slug + ".html") | local(lang) %}
+{%- set wkCover = magazinePages[wk.slug][ml].pages[0] %}
+  <section class="shell book-feature magazine-feature" id="weekly">
+    <a class="book-object" href="{{ wkUrl }}" tabindex="-1" aria-hidden="true">
+      <span class="book-object-cover"><img src="{{ wkCover.image }}" srcset="{{ wkCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ wkCover.width }}" height="{{ wkCover.height }}" alt="" loading="lazy"></span>
+    </a>
+    <div class="book-feature-copy">
+      <p class="kicker">{{ weekly.name }} · {{ WK.labels.weekly }} · {{ WK.labels.no }} {{ wk.no }} · {{ wk[ml].date }}</p>
+      <h2><a href="{{ wkUrl }}">{{ wk[ml].heading }}</a></h2>
+      <p class="book-subtitle">{{ WK.tagline }}</p>
+      <p>{{ wk[ml].feature }}</p>
+      <div class="book-feature-actions">
+        <a class="button-primary" href="{{ wkUrl }}">{{ WK.labels.open_issue }}</a>
+        <a class="text-link" href="{{ '/magazine/management-review.html' | local(lang) }}">{{ WK.labels.all }} ({{ weekly.issues | length }})</a>
+      </div>
+    </div>
   </section>
 {#- The magazine: every issue the same way as the other publications, cover and text, the newest first. -#}
-{%- set ml = lang or "en" %}
 {%- for issue in magazine.issues | reverse %}
 {%- set issueUrl = ("/magazine/" + issue.slug + ".html") | local(lang) %}
 {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
@@ -24,7 +45,7 @@
     </div>
   </section>
 {%- endfor %}
-{#- The Management Review: a one-off edition, beside the monthly magazine. -#}
+{#- The Management Review of September 2026: the special edition before the weekly one. -#}
 {%- set R = review[ml] %}
 {%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}
 {%- set reviewCover = magazinePages[review.slug][ml].pages[0] %}
@@ -33,7 +54,7 @@
       <span class="book-object-cover"><img src="{{ reviewCover.image }}" srcset="{{ reviewCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ reviewCover.width }}" height="{{ reviewCover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
-      <p class="kicker">{{ R.name }} · {{ R.date }}</p>
+      <p class="kicker">{{ R.name }} · {{ WK.labels.special }} · {{ R.date }}</p>
       <h2><a href="{{ reviewUrl }}">{{ R.theme }}</a></h2>
       <p class="book-subtitle">{{ R.tagline }}</p>
       <p>{{ R.feature }}</p>

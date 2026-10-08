@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+lang: de
+pagination:
+  data: weekly.issues
+  size: 1
+  alias: issue
+  addAllPagesToCollections: true
+permalink: "/de/magazine/{{ issue.slug }}.html"
+activeNav: /de/publications.html
+ogType: article
+eleventyComputed:
+  title: "{{ issue.de.heading }}"
+  seo_title: "Management Review Nr. {{ issue.no }}: {{ issue.de.heading }}"
+  description: "{{ issue.de.seo }}"
+  ogImage: "/media/magazine/{{ issue.slug }}/de/social.jpg"
+---
+{% include "pages/weekly-issue.njk" %}

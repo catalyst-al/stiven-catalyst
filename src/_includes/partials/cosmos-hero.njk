@@ -37,11 +37,14 @@
       {%- endfor %}
     </div>
 
-    {#- Under the hero, small, as on Publications: the book, the newest issue of the magazine and the Tools Guide. -#}
+    {#- Under the hero, small, as on Publications: the book, the newest weekly Management Review, the newest issue of
+        the magazine and the Tools Guide. -#}
     {%- set ml = lang or "en" %}
     {%- set issue = magazine.latest %}
+    {%- set wk = weekly.latest %}
     {%- set shelf = [
       { url: "/books/mall-per-durresin.html" | local(lang), cover: book.pages[0], kicker: "The book · in Albanian" | t(lang), title: book.title, titleLang: "sq", open: "Open the book" | t(lang) },
+      { url: ("/magazine/" + wk.slug + ".html") | local(lang), cover: magazinePages[wk.slug][ml].pages[0], kicker: weekly.name + " · " + weekly[ml].labels.no + " " + wk.no, title: wk[ml].heading, open: weekly[ml].labels.open_issue },
       { url: ("/magazine/" + issue.slug + ".html") | local(lang), cover: magazinePages[issue.slug][ml].pages[0], kicker: magazine.names[ml].name + " · " + issue[ml].date, title: issue[ml].theme, open: "Open the issue" | t(lang) },
       { url: "/guides/tools-guide.html" | local(lang), cover: toolsGuidePages[ml].pages[0], kicker: "The guide · Edition 1" | t(lang), title: toolsGuide[ml].title, open: "Open the guide" | t(lang) }
     ] %}
