@@ -4,7 +4,8 @@
     python3 scripts/book-pages.py path/to/book.pdf
 
 Writes, for "Mall për Durrësin":
-  src/media/books/mall-per-durresin/page-01.webp ...  one image per page
+  src/media/books/mall-per-durresin/page-01.webp ...  one image per page, and page-01-2000.webp ... for sharp
+                                                      screens (scripts/page_images.py)
   src/media/books/mall-per-durresin/social.jpg        the preview for social media
   src/_data/book.json                                 page list, chapters and the text
 
@@ -13,14 +14,14 @@ Run it again whenever a new version of the PDF is ready.
 import json
 import re
 import sys
-from io import BytesIO
 from pathlib import Path
 
 import pymupdf
 from PIL import Image, ImageEnhance, ImageFilter
 
+from page_images import save_page
+
 SLUG = "mall-per-durresin"
-PAGE_WIDTH = 1000  # pixels; sharp on a two-page spread on a retina screen
 ROOT = Path(__file__).resolve().parent.parent
 MEDIA = ROOT / "src" / "media" / "books" / SLUG
 DATA = ROOT / "src" / "_data" / "book.json"
@@ -29,12 +30,6 @@ RUNNING_HEAD = 7.0  # the small "MALL PËR DURRËSIN" at the top of each page
 KICKER = 8.0        # "KAPITULLI I", "PROLOG"
 CHAPTER = 21.0      # chapter titles
 SECTION = 15.0      # section titles inside a chapter
-
-
-def render(page, width):
-    zoom = width / page.rect.width
-    pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False)
-    return Image.open(BytesIO(pix.tobytes("png"))).convert("RGB")
 
 
 def clean(text):
@@ -154,10 +149,8 @@ def main(pdf_path):
     chapters, back, subtitle = [], [], ""
     for index, page in enumerate(doc):
         number = index + 1
-        image = render(page, PAGE_WIDTH)
-        name = f"page-{number:02d}.webp"
-        image.save(MEDIA / name, "WEBP", quality=80, method=6)
-        pages.append({"number": number, "image": f"/media/books/{SLUG}/{name}", "width": image.width, "height": image.height})
+        image, entry = save_page(page, MEDIA, f"page-{number:02d}", f"/media/books/{SLUG}")
+        pages.append({"number": number, **entry})
         if index == 0:
             social(image).save(MEDIA / "social.jpg", "JPEG", quality=84, optimize=True, progressive=True)
         found = contents(page)

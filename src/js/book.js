@@ -173,7 +173,7 @@
   // Clicks and swipes on the pages.
   let pointer = null;
   book.addEventListener("pointerdown", (event) => {
-    pointer = { x: event.clientX, y: event.clientY };
+    pointer = event.isPrimary ? { x: event.clientX, y: event.clientY } : null;
   });
   book.addEventListener("pointerup", (event) => {
     if (!pointer) return;
@@ -234,11 +234,50 @@
     });
   }
 
+  // Zoom: the pages in view, as wide as the screen allows, for the small print. The large page
+  // images (srcset) keep the letters sharp at this size.
+  const zoomButton = $("[data-book-zoom]");
+  let zoom = null;
+  if (zoomButton && typeof HTMLDialogElement === "function") {
+    zoom = document.createElement("dialog");
+    zoom.className = "book-zoom";
+    zoom.setAttribute("aria-label", zoomButton.dataset.label || zoomButton.textContent.trim());
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "book-zoom-close";
+    close.setAttribute("aria-label", zoomButton.dataset.close || "Close");
+    close.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    const list = document.createElement("div");
+    list.className = "book-zoom-pages";
+    zoom.append(close, list);
+    reader.append(zoom);
+    close.addEventListener("click", () => zoom.close());
+    // A click beside the pages closes the view as well.
+    zoom.addEventListener("click", (event) => {
+      if (event.target === zoom || event.target === list) zoom.close();
+    });
+    zoom.addEventListener("close", () => {
+      list.replaceChildren();
+      zoomButton.focus();
+    });
+    zoomButton.hidden = false;
+    zoomButton.addEventListener("click", () => {
+      list.replaceChildren(...inView().map((page) => page.querySelector("img")).filter(Boolean).map((image) => {
+        const copy = image.cloneNode();
+        copy.sizes = "min(calc(100vw - 32px), 1100px)";
+        copy.loading = "eager";
+        return copy;
+      }));
+      zoom.showModal();
+      zoom.scrollTop = 0;
+    });
+  }
+
   // The arrow keys turn pages while the book is on screen.
   let onScreen = false;
   new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; }, { threshold: 0.35 }).observe(book);
   document.addEventListener("keydown", (event) => {
-    if (!onScreen || event.altKey || event.ctrlKey || event.metaKey) return;
+    if (!onScreen || zoom?.open || event.altKey || event.ctrlKey || event.metaKey) return;
     if (event.target.closest("input, textarea, select, [contenteditable]")) return;
     const keys = { ArrowRight: next, PageDown: next, ArrowLeft: prev, PageUp: prev, Home: () => turnTo(0), End: () => turnTo(sheets.length) };
     if (event.key === "Escape" && !contents.hidden) { setContents(false); tocButton.focus(); return; }

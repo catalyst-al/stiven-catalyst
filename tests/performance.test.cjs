@@ -29,6 +29,33 @@ test('every cover has its small copies, and every tool preview its 720 px copy',
   }
 });
 
+// The online readers (the book, the Tools Guide, the magazines, the Management Review) offer every page at 1000 and
+// at 2000 px (scripts/page_images.py), so a sharp screen or a page opened large never enlarges a small picture.
+test('every page of the online readers has a sharp copy twice as wide', () => {
+  const read = (name) => JSON.parse(fs.readFileSync(`src/_data/${name}`, 'utf8'));
+  const lists = [
+    ['book', read('book.json').pages],
+    ...Object.entries(read('toolsGuidePages.json')).map(([lang, entry]) => [`tools-guide ${lang}`, entry.pages]),
+    ...Object.entries(read('magazinePages.json')).flatMap(([slug, langs]) => Object.entries(langs).map(([lang, entry]) => [`${slug} ${lang}`, entry.pages])),
+  ];
+  assert.ok(lists.length >= 20, `found ${lists.length} readers`);
+  for (const [name, pages] of lists) {
+    assert.ok(pages.length > 1, name);
+    for (const page of pages) {
+      const hint = `${name}, page ${page.number}: run scripts/guide-pages.py or scripts/book-pages.py`;
+      assert.equal(page.width, 1000, hint);
+      assert.equal(page.largeWidth, 2000, hint);
+      assert.ok(page.large && fs.existsSync(path.join('src', page.large)), `${hint} (${page.large})`);
+      assert.ok(fs.existsSync(path.join('src', page.image)), `${hint} (${page.image})`);
+    }
+  }
+  for (const reader of ['book', 'guide', 'magazine-issue', 'review', 'weekly-issue']) {
+    const template = fs.readFileSync(`src/_includes/pages/${reader}.njk`, 'utf8');
+    assert.match(template, /\| pageSrcset \| safe/, `${reader}.njk: the page images need their srcset`);
+    assert.match(template, /data-book-zoom/, `${reader}.njk: the zoom button`);
+  }
+});
+
 test('the minifier shortens local names but keeps the shared top-level ones', async () => {
   const { minify } = await import('terser');
   const source = 'const ToolKit = (() => { const longLocalName = 41; return { answer: () => longLocalName + 1 }; })();\nfunction shared(value) { return value * 2; }\nwindow.Answer = ToolKit.answer();';

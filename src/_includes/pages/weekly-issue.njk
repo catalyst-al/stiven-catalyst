@@ -42,11 +42,11 @@
   </section>
 
   <section class="book-stage" id="reader" aria-label="{{ L.page_by_page }}">
-    <div class="book-reader" data-book data-slug="{{ issue.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
+    <div class="book-reader is-dark" data-book data-slug="{{ issue.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
       <div class="book-viewport">
         <div class="book" data-book-pages>
           {%- for page in reader.pages %}
-          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}" width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}"{{ page | pageSrcset | safe }} width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
           {%- endfor %}
         </div>
       </div>
@@ -62,6 +62,7 @@
         <div class="book-tools">
           <button class="book-chip" type="button" data-book-toc aria-expanded="false" aria-controls="book-contents">{{ "Contents" | t(lang) }}</button>
           <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
+          <button class="book-chip" type="button" data-book-zoom data-label="{{ 'The pages, enlarged' | t(lang) }}" data-close="{{ 'Close the enlarged pages' | t(lang) }}" hidden>{{ "Zoom in" | t(lang) }}</button>
           <a class="book-chip" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
           <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
           <a class="book-chip is-accent" href="#more-issues" data-book-end hidden>{{ "Read another issue" | t(lang) }}</a>
@@ -129,6 +130,11 @@
         {%- elif b.chart %}<p>{% if b.label %}{{ b.label }}: {% endif %}{{ b.alt }}.</p>{% if b.note %}<p><em>{{ b.note }}</em></p>{% endif %}
         {%- elif b.type == "timeline" %}<ul>{% for item in b.items %}<li><strong>{{ item.k }}</strong> {{ item.t }}</li>{% endfor %}</ul>
         {%- elif b.type == "tiles" %}{% for g in b.groups %}<h3>{{ g.h }}</h3><ul>{% for item in g.items %}<li>{{ item.n }}. {{ item.t }}{% if item.isNew %} ({{ b.badge }}){% endif %}</li>{% endfor %}</ul>{% endfor %}
+        {%- elif b.type == "chain" %}{% if b.label %}<h3>{{ b.label }}</h3>{% endif %}<ol>{% for item in b.items %}<li><strong>{{ item.h }}.</strong> {{ item.p }}</li>{% endfor %}</ol>
+        {%- elif b.type == "example" and b.rows %}<h3>{{ b.label }}</h3><ul>{% for r in b.rows %}<li><strong>{{ r.k }}:</strong> {{ r.v }}</li>{% endfor %}</ul><p><em>{{ b.text }}</em></p>
+        {%- elif b.type == "example" %}<p><strong>{{ b.label }}:</strong> {{ b.text }}</p>
+        {%- elif b.type == "matrix" %}<p>{{ b.y }} × {{ b.x }}:</p><ul>{% for c in b.cells %}<li><strong>{{ c.h }}</strong> ({{ c.where }}). {{ c.p }}</li>{% endfor %}</ul>
+        {%- elif b.type == "form" %}<ol>{% for item in b.items %}<li><strong>{{ item.h }}</strong>{% if item.hint %} {{ item.hint }}{% endif %}</li>{% endfor %}</ol>
         {%- elif b.type == "rating" %}<p>{{ b.key }}</p><ol>{% for item in b.items %}<li>{{ item }}</li>{% endfor %}</ol>
         {%- elif b.type == "cards" or b.type == "rows" or b.type == "steps" %}{% if b.label %}<h3>{{ b.label }}</h3>{% endif %}<ul>{% for c in b.items %}<li><strong>{% if c.n %}{{ c.n }}: {% endif %}{{ c.h }}.</strong> {{ c.p }}</li>{% endfor %}</ul>
         {%- elif b.type == "box" %}<h3>{{ b.title }}</h3><ol>{% for i in b.items %}<li>{{ i }}</li>{% endfor %}</ol>
