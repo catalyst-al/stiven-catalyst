@@ -145,6 +145,8 @@ test('every issue is printed: its PDF, its ten page images and its preview in ev
 
 const hasSite = fs.existsSync('_site/magazine/management-review.html');
 const built = (file) => fs.readFileSync(path.join('_site', file), 'utf8');
+// A text as Nunjucks writes it into the page, with its apostrophes, quotes and ampersands escaped once.
+const escaped = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
 test('each issue has its page in each language, with the reader, the charts and the text', { skip: !hasSite }, async () => {
   const weekly = await load();
@@ -153,7 +155,7 @@ test('each issue has its page in each language, with the reader, the charts and 
       const html = built(`${lang === 'en' ? '' : `${lang}/`}magazine/${issue.slug}.html`);
       assert.match(html, /data-book-pages/, `${issue.slug} ${lang}: reader`);
       assert.equal((html.match(/data-weekly-chart/g) || []).length, issue[lang].charts.length, `${issue.slug} ${lang}: charts`);
-      assert.ok(html.includes(issue[lang].heading), `${issue.slug} ${lang}: title`);
+      assert.ok(html.includes(escaped(issue[lang].heading)), `${issue.slug} ${lang}: title`);
       assert.ok(html.includes(`/media/magazine/${issue.slug}/${issue.slug}-${lang}.pdf`), `${issue.slug} ${lang}: PDF`);
     }
   }
@@ -170,4 +172,20 @@ test('the list of all issues and Publications show the weekly in every language'
     assert.ok(publications.includes(`/${prefix}magazine/${weekly.latest.slug}.html`), `${lang}: newest issue`);
     assert.ok(publications.includes(`/${prefix}magazine/management-review.html`), `${lang}: all issues`);
   }
+});
+
+test('no page writes its title or description escaped twice', { skip: !hasSite }, () => {
+  // eleventyComputed values are rendered by Nunjucks before the layout escapes them again; "Google's" must reach the
+  // page as "Google&#39;s", never "Google&amp;#39;s".
+  const pages = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) return entry.name === 'media' ? [] : pages(file);
+    return entry.name.endsWith('.html') ? [file] : [];
+  });
+  const twice = [];
+  for (const file of pages('_site')) {
+    const head = fs.readFileSync(file, 'utf8').split('</head>')[0];
+    if (/&amp;(#39|#x27|amp|quot|lt|gt);/.test(head)) twice.push(path.relative('_site', file));
+  }
+  assert.deepEqual(twice, []);
 });
