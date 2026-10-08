@@ -92,6 +92,10 @@ document.querySelectorAll("[data-essay-checklist]").forEach((box) => {
   const update = () => { count.textContent = `${items.filter(done).length}/${items.length}`; };
   items.forEach((item) => item.addEventListener(item.type === "checkbox" ? "change" : "input", update));
   update();
+  box.querySelector("[data-checklist-clear]")?.addEventListener("click", () => {
+    items.forEach((item) => { if (item.type === "checkbox") item.checked = false; else item.value = ""; });
+    update();
+  });
   const button = box.querySelector("[data-checklist-copy]");
   const label = button?.textContent;
   button?.addEventListener("click", async () => {

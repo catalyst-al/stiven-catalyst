@@ -77,7 +77,7 @@ ogType: article
     </details>
     {%- endif %}
 {{ body | safe }}
-    {#- A checklist the essay ends with ("checklist" in its front matter: title, items, and "fill" for a card of answers): the reader ticks the
+    {#- A checklist the essay ends with ("checklist" in its front matter: title, items as text or { label, hint }, "fill" for a card of answers, and an optional note): the reader ticks the
         questions off and can copy them. Nothing is kept or sent (js/article.js). -#}
     {%- if checklist and checklist.items %}
     <section class="essay-checklist" data-essay-checklist aria-labelledby="essay-checklist-title">
@@ -88,13 +88,22 @@ ogType: article
       <ol>
         {%- for item in checklist.items %}
         {%- if checklist.fill %}
-        <li class="is-field"><label><span><b>{{ loop.index | pad }}</b> {{ item }}</span><textarea rows="2" data-checklist-item placeholder="{{ 'Your answer' | t(lang) }}"></textarea></label></li>
+        {%- set label = item.label if item.label else item %}
+        <li class="is-field"><label><span><b>{{ loop.index | pad }}</b> {{ label }}</span>{% if item.hint %}<small>{{ item.hint }}</small>{% endif %}<textarea rows="2" data-checklist-item placeholder="{{ 'Your answer' | t(lang) }}"></textarea></label></li>
         {%- else %}
         <li><label><input type="checkbox" data-checklist-item><span>{{ item }}</span></label></li>
         {%- endif %}
         {%- endfor %}
       </ol>
+      <div class="essay-checklist-actions">
+      {%- if checklist.fill %}
+      <button type="button" class="button-secondary" data-checklist-clear>{{ "Clear" | t(lang) }}</button>
+      {%- endif %}
       <button type="button" class="button-secondary" data-checklist-copy data-copied-label="{{ 'Copied' | t(lang) }}">{{ ("Copy the card" | t(lang)) if checklist.fill else ("Copy the {n} questions" | t(lang) | replace("{n}", checklist.items.length | string)) }}</button>
+      </div>
+      {%- if checklist.note %}
+      <p class="essay-checklist-note">{{ checklist.note }}</p>
+      {%- endif %}
     </section>
     {%- endif %}
     {#- The tools an essay is about ("relatedTools" on the English essay; translations follow it). -#}
