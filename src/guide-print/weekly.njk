@@ -1,0 +1,259 @@
+---
+pagination:
+  data: weekly.prints
+  size: 1
+  alias: weeklyPrint
+---
+{#- One issue of the weekly Management Review in one language, as A5 pages. scripts/weekly.mjs prints it to PDF;
+    the published site never carries this page (guide-print.11tydata.js). The text is in lib/weekly/issues, the
+    charts come ready from weekly.js (b.svg). -#}
+{%- set lang = weeklyPrint.lang -%}
+{%- set issue = weekly.issues | where("slug", weeklyPrint.slug) -%}
+{%- set I = issue[lang] -%}
+{%- set W = weekly[lang] -%}
+{%- set L = W.labels -%}
+{%- set essays = collections["insights" + (lang | langSuffix)] -%}
+
+{%- macro chrome(number, section) -%}
+<header class="run"><span>{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.heading }}</title>
+<style>
+{% include "print/review-base.css" %}
+/* The weekly issues: the cover with the number, the contents, the charts, the tiles and the card. */
+/* The glow of each page and the callouts in solid colours: a gradient that fades to transparent becomes a soft mask
+   in the PDF, about 15 KB each, and the weekly prints ten pages every week. */
+.pg { background: var(--paper); isolation: isolate; }
+.pg::before, .pg::after { content: ""; position: absolute; top: 0; z-index: -1; pointer-events: none; }
+.pg::before { left: 0; width: 84mm; height: 31mm; background: radial-gradient(84mm 49mm at 0 -18mm, #0e1f2c, #060a10); }
+.pg::after { right: 0; width: 77mm; height: 39mm; background: radial-gradient(77mm 49mm at 100% -10mm, #1f1118, #060a10); }
+.callout { background: linear-gradient(100deg, #0b1823, #241219); }
+.callout.is-reading { background: linear-gradient(100deg, #1f1118, #0a141e); }
+.wk-chip { display: inline-block; font-size: 6.2pt; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--blue); border: .25mm solid rgba(74,181,247,.55); border-radius: 1.2mm; padding: .9mm 2.2mm .8mm; margin-bottom: 2.8mm; }
+.wk-cover .cover-main { grid-template-columns: minmax(0, 1fr) 41mm; }
+.wk-art { position: relative; width: 41mm; height: 92mm; }
+.wk-art img { width: 41mm; height: 92mm; object-fit: cover; display: block; }
+.wk-no { position: absolute; left: 0; right: 0; bottom: 0; padding: 12mm 3.2mm 3mm; background: linear-gradient(180deg, rgba(6,10,16,0), rgba(6,10,16,.94) 62%); font-family: "Archivo Black"; color: var(--ink); font-size: 36pt; line-height: .86; letter-spacing: -.02em; margin: 0; }
+.wk-no small { display: block; font-family: "Inter"; font-weight: 700; font-size: 6.4pt; letter-spacing: .22em; color: var(--red); margin-bottom: 1.6mm; }
+.wk-cover .cover-main { margin-top: 11mm; }
+.wk-cover .cover-theme { font-size: 14pt; }
+.wk-figure-cover { display: grid; grid-template-columns: auto 1fr; gap: 5mm; align-items: center; margin-top: 6mm; padding-top: 3.6mm; border-top: .25mm solid var(--line); }
+.wk-figure-cover b { font-family: "Archivo Black"; font-weight: 400; font-size: 27pt; line-height: 1; color: var(--blue); }
+.wk-figure-cover p { margin: 0; font-family: Georgia, serif; font-size: 9.6pt; line-height: 1.4; color: var(--ink); }
+.wk-figure-cover i { display: block; font-family: "Inter"; font-style: normal; font-size: 6.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: 1.2mm; }
+.wk-teasers { margin-top: auto; padding-top: 4mm; }
+.wk-teasers .k { font-size: 6.4pt; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); padding-bottom: 1.8mm; border-bottom: .25mm solid var(--line); }
+.wk-teasers ol { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4.2mm; padding-top: 3.2mm; }
+.wk-teasers li { display: flex; flex-direction: column; gap: 1.2mm; }
+.wk-teasers li::before { content: ""; display: block; width: 8mm; height: .9mm; background: var(--red); margin-bottom: 1.2mm; }
+.wk-t-kick { font-size: 6pt; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+.wk-teasers b { font-size: 8.4pt; line-height: 1.3; color: var(--ink); font-weight: 700; }
+.wk-t-page { font-size: 6.2pt; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+.wk-byline { font-family: Georgia, serif; font-style: italic; font-size: 11pt; color: var(--ink); margin: 1.4mm 0 4.4mm; }
+.wk-byline span { font-family: "Inter"; font-style: normal; font-size: 6.2pt; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-left: 2.4mm; }
+.wk-toc { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 5mm; margin: 0 0 4.6mm; border-top: .25mm solid var(--line); }
+.wk-toc li { display: grid; grid-template-columns: 8mm 1fr; gap: 1.6mm; align-items: baseline; padding: 1.7mm 0; border-bottom: .25mm solid var(--line); }
+.wk-toc b { font-family: "Archivo Black"; font-weight: 400; font-size: 10pt; color: var(--blue); }
+.wk-toc li:nth-child(4n+1) b, .wk-toc li:nth-child(4n+4) b { color: var(--red); }
+.wk-toc span { color: var(--ink); font-size: 8.4pt; font-weight: 600; line-height: 1.3; }
+.wk-toc i { display: block; font-style: normal; font-size: 5.8pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: .3mm; }
+.wk-legend-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; }
+.wk-legend-box div { border: .25mm solid var(--line); border-radius: 2.2mm; padding: 2.6mm; background: var(--card); }
+.wk-legend-box div:nth-child(1) { border-color: rgba(74,181,247,.45); }
+.wk-legend-box div:nth-child(2) { border-color: rgba(255,75,92,.42); }
+.wk-legend-box h4 { font-size: 7.6pt; margin-bottom: .8mm; }
+.wk-legend-box p { font-size: 7pt; margin: 0; line-height: 1.38; }
+
+.wk-figure { margin: 0 0 3.8mm; }
+.wk-fig-note { font-size: 6.6pt; color: var(--muted); font-style: italic; margin: 1.6mm 0 0; line-height: 1.4; }
+.wk-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.wk-grid { stroke: rgba(255,255,255,.1); stroke-width: .6; }
+.wk-axis { fill: var(--muted); font-size: 7.2px; font-weight: 500; }
+.wk-label { fill: var(--ink); font-size: 8px; font-weight: 600; }
+.wk-value { fill: var(--ink); font-size: 8.4px; font-weight: 700; }
+.wk-value.is-key { font-size: 10.6px; }
+.wk-value.is-key.is-alert { fill: var(--red); }
+.wk-value.is-a { fill: var(--muted); font-weight: 600; }
+.wk-path { fill: none; stroke: var(--blue); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.wk-path.is-alert { stroke: var(--red); }
+.wk-path.is-dim { stroke: var(--muted); stroke-dasharray: 3 3; }
+.wk-area { fill: var(--blue); opacity: .14; }
+.wk-area.is-alert { fill: var(--red); }
+.wk-dot { fill: var(--blue); stroke: var(--paper); stroke-width: 1.5; }
+.wk-dot.is-alert { fill: var(--red); }
+.wk-dot-a { fill: var(--paper); stroke: var(--muted); stroke-width: 1.4; }
+.wk-dot-key { fill: var(--ink); }
+.wk-track { stroke: rgba(255,255,255,.1); stroke-width: 1; }
+.wk-seg { stroke: var(--blue); stroke-width: 3.2; stroke-linecap: round; opacity: .6; }
+.wk-seg.is-alert { stroke: var(--red); }
+.wk-ring { fill: none; stroke: rgba(255,255,255,.08); stroke-width: 13; }
+.wk-arc { fill: none; stroke: var(--blue); stroke-width: 13; }
+.wk-arc.is-alert { stroke: var(--red); }
+.wk-donut-n { fill: var(--ink); font-family: "Archivo Black"; font-size: 23px; }
+.wk-person.tone-red { fill: var(--red); }
+.wk-person.tone-blue { fill: var(--blue); }
+.wk-person.tone-dim { fill: rgba(255,255,255,.17); }
+.wk-bar { fill: var(--blue); }
+.wk-bar.is-alert { fill: var(--red); }
+.wk-bar-a { fill: rgba(255,255,255,.24); }
+.wk-col { fill: var(--blue); }
+.wk-col.is-alert { fill: var(--red); }
+.wk-legend { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; margin-top: 2.6mm; }
+.wk-legend li { border-top: .5mm solid rgba(255,255,255,.18); padding-top: 1.4mm; }
+.wk-legend li.tone-red { border-color: var(--red); }
+.wk-legend li.tone-blue { border-color: var(--blue); }
+.wk-legend b { display: block; font-family: "Archivo Black"; font-weight: 400; font-size: 12pt; color: var(--ink); line-height: 1.1; }
+.wk-legend .tone-red b { color: var(--red); }
+.wk-legend .tone-blue b { color: var(--blue); }
+.wk-legend span { display: block; font-size: 7.2pt; line-height: 1.32; margin-top: .6mm; }
+.wk-donut-row { display: grid; grid-template-columns: 30mm 1fr; gap: 5mm; align-items: center; margin: .6mm 0 3.8mm; }
+.wk-donut-row p { margin: 0; font-family: Georgia, serif; font-size: 10.4pt; line-height: 1.42; color: var(--ink); }
+.callout.is-reading { border-color: rgba(255,75,92,.42); }
+.callout.is-reading .label { color: var(--red); }
+
+.rows.compact li { grid-template-columns: 8mm 38mm 1fr; padding: 1.45mm 0; align-items: baseline; }
+.rows.compact li::before { font-size: 10pt; }
+.rows.compact li > div { display: contents; }
+.rows.compact h4 { margin: 0; font-size: 8.2pt; }
+.rows.compact p { font-size: 7.5pt; line-height: 1.36; }
+.wide-stat { padding: 2.4mm 0; margin-bottom: 3.2mm; }
+.wide-stat b { font-size: 19pt; }
+.figures.compact { gap: 2mm; margin-bottom: 3.4mm; }
+.figures.compact div { padding: 2.2mm 2.6mm; }
+.figures.compact b { font-size: 14pt; }
+.figures.compact span { font-size: 6.9pt; line-height: 1.36; }
+.wk-timeline { list-style: none; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 4mm; position: relative; margin: 0 0 4.4mm; }
+.wk-timeline::before { content: ""; position: absolute; top: 1.7mm; left: 0; right: 0; height: .3mm; background: rgba(255,255,255,.16); }
+.wk-timeline li { position: relative; padding-top: 5.6mm; }
+.wk-timeline li::before { content: ""; position: absolute; top: 0; left: 0; width: 3.4mm; height: 3.4mm; border-radius: 50%; background: var(--paper); border: .55mm solid var(--blue); box-sizing: border-box; }
+.wk-timeline li:first-child::before { border-color: var(--red); }
+.wk-timeline b { display: block; font-family: "Archivo Black"; font-weight: 400; font-size: 13pt; color: var(--ink); line-height: 1; margin-bottom: 1.2mm; }
+.wk-timeline span { display: block; font-size: 7.4pt; line-height: 1.38; }
+.wk-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; margin: 0 0 3.4mm; }
+.wk-tile-group { border: .25mm solid var(--line); border-radius: 2.4mm; padding: 2.8mm 2.6mm 1.4mm; background: var(--card); }
+.wk-tile-group h4 { font-family: "Archivo Black"; font-weight: 400; font-size: 9.6pt; margin-bottom: 1.4mm; padding-bottom: 1.6mm; border-bottom: .6mm solid var(--ink); }
+.wk-tile-group.tone-red h4 { border-color: var(--red); }
+.wk-tile-group.tone-blue h4 { border-color: var(--blue); }
+.wk-tile-group ol { list-style: none; }
+.wk-tile-group li { display: grid; grid-template-columns: 5.6mm 1fr; gap: 1.2mm; padding: 1.5mm 0; border-bottom: .25mm solid var(--line); font-size: 7.3pt; line-height: 1.32; color: var(--ink); }
+.wk-tile-group li:last-child { border-bottom: 0; }
+.wk-tile-group li b { font-family: "Archivo Black"; font-weight: 400; font-size: 8pt; color: var(--muted); }
+.wk-tile-group.tone-red li b { color: var(--red); }
+.wk-tile-group.tone-blue li b { color: var(--blue); }
+.wk-tile-group em { display: inline-block; font-style: normal; font-size: 5.4pt; letter-spacing: .08em; text-transform: uppercase; color: var(--paper); background: var(--blue); border-radius: .8mm; padding: .3mm 1mm .2mm; margin-top: .8mm; font-weight: 700; }
+
+.wk-rating { border: .3mm solid rgba(74,181,247,.45); border-radius: 2.6mm; padding: 2.4mm 3mm 1mm; margin: 0 0 3.4mm; background: var(--card); }
+.wk-rating-head { display: grid; grid-template-columns: 1fr repeat(5, 5mm); gap: 1.2mm; align-items: center; padding-bottom: 1.4mm; border-bottom: .25mm solid var(--line); font-size: 6.2pt; color: var(--muted); letter-spacing: .06em; }
+.wk-rating-head i { font-style: normal; text-align: center; font-weight: 700; color: var(--ink); }
+.wk-rating ol { list-style: none; }
+.wk-rating li { display: grid; grid-template-columns: 5.4mm 1fr repeat(5, 5mm); gap: 1.2mm; align-items: center; padding: 1.05mm 0; border-bottom: .25mm solid var(--line); font-size: 7.5pt; color: var(--ink); line-height: 1.3; }
+.wk-rating li:last-child { border-bottom: 0; }
+.wk-rating li b { font-family: "Archivo Black"; font-weight: 400; font-size: 7.6pt; color: var(--blue); }
+.wk-rating li i { width: 4.2mm; height: 4.2mm; border: .3mm solid rgba(255,255,255,.38); border-radius: 1mm; justify-self: center; }
+</style>
+</head>
+<body>
+{%- for page in I.pages %}
+{%- set n = loop.index %}
+{%- if page.type == "cover" %}
+<section class="pg cover wk-cover">
+  <div class="mast"><span>Stiven Catalyst</span><span>{{ L.weekly }} · {{ I.date }}</span></div>
+  <div class="mast-rule"></div>
+  <div class="cover-main">
+    <div>
+      <div class="masthead">Management<span class="accent">Review</span></div>
+      <p class="cover-tag">{{ W.tagline }}</p>
+      <div class="cover-rule"></div>
+      <p class="wk-chip">{{ I.blockName }}</p>
+      <div class="cover-theme">{{ I.theme[0] }}<span class="accent">{{ I.theme[1] }}</span></div>
+      <p class="cover-sub">{{ I.sub }}</p>
+    </div>
+    <div class="wk-art"><img src="{{ weekly.cover.src }}" alt=""><p class="wk-no"><small>{{ L.no }}</small>{{ issue.no }}</p></div>
+  </div>
+  {%- if I.figure %}
+  <div class="wk-figure-cover"><b>{{ I.figure.n }}</b><p>{{ I.figure.t }}<i>{{ I.figure.by }}</i></p></div>
+  {%- endif %}
+  <div class="wk-teasers">
+    <p class="k">{{ L.inside }}</p>
+    <ol>{% for t in I.teasers %}<li><span class="wk-t-kick">{{ t.kicker }}</span><b>{{ t.title }}</b><span class="wk-t-page">{{ L.page }} {{ t.number | pad }}</span></li>{% endfor %}</ol>
+  </div>
+  <p class="cover-foot">stivencatalyst.com</p>
+</section>
+{%- elif page.type == "intro" %}
+<section class="pg">
+  {{ chrome(n, I.blockName) }}
+  <p class="kicker">{{ L.no }} {{ issue.no }} · {{ I.blockName }}</p>
+  <h2>{{ W.intro.title }}</h2>
+  <p class="lead">{{ page.why }}</p>
+  <div class="body-text"><p>{{ page.body }}</p></div>
+  <p class="wk-byline">Stiven Janaqi<span>{{ L.editor }} · Stiven Catalyst</span></p>
+  <ol class="wk-toc">
+    {%- for item in I.pages %}{% if item.heading %}<li><b>{{ loop.index | pad }}</b><span><i>{{ item.kicker }}</i>{{ item.heading }}</span></li>{% endif %}{% endfor %}
+    <li><b>{{ issue.pageOf.sources | pad }}</b><span><i>{{ L.sources }}</i>{{ W.sourcesPage.kicker }}</span></li>
+  </ol>
+  <p class="block-label">{{ W.intro.how }}</p>
+  <div class="wk-legend-box">{% for item in W.legend %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
+</section>
+{%- elif page.type == "sources" %}
+<section class="pg">
+  {{ chrome(n, L.sources) }}
+  <p class="kicker">{{ W.sourcesPage.kicker }}</p>
+  <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
+  <p class="lead">{{ W.sourcesPage.lead }}</p>
+  <ol class="src">{% for s in issue.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
+  <div class="callout"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div>
+</section>
+{%- elif page.type == "back" %}
+<section class="pg back">
+  <img src="{{ weekly.cover.src }}" alt="">
+  <div class="masthead">Management<span class="accent">Review</span></div>
+  <p class="cover-tag">{{ W.tagline }}</p>
+  <p>{{ W.back.line }}</p>
+  <p class="monthly">{{ W.back.all }}</p>
+  <p class="url">stivencatalyst.com{{ "/magazine/management-review.html" | local(lang) }}</p>
+  <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst</p>
+</section>
+{%- else %}
+<section class="pg">
+  {{ chrome(n, I.blockName) }}
+  <p class="kicker">{{ page.kicker }}</p>
+  <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
+  {%- if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+  {%- for b in page.blocks %}
+  {%- if b.type == "p" %}<div class="body-text"><p>{{ b.text }}</p></div>
+  {%- elif b.type == "donut" %}<div class="wk-donut-row">{{ b.svg | safe }}<p>{{ b.t }}</p></div>
+  {%- elif b.chart %}<div class="wk-figure">{% if b.label %}<p class="block-label">{{ b.label }}</p>{% endif %}{{ b.svg | safe }}{% if b.note %}<p class="wk-fig-note">{{ b.note }}</p>{% endif %}</div>
+  {%- elif b.type == "timeline" %}<ol class="wk-timeline" style="--n:{{ b.items | length }}">{% for item in b.items %}<li><b>{{ item.k }}</b><span>{{ item.t }}</span></li>{% endfor %}</ol>
+  {%- elif b.type == "tiles" %}<div class="wk-tiles">{% for g in b.groups %}<div class="wk-tile-group tone-{{ g.tone }}"><h4>{{ g.h }}</h4><ol>{% for item in g.items %}<li><b>{{ item.n }}</b><span>{{ item.t }}{% if item.isNew %}<br><em>{{ b.badge }}</em>{% endif %}</span></li>{% endfor %}</ol></div>{% endfor %}</div>
+  {%- elif b.type == "rating" %}<div class="wk-rating"><div class="wk-rating-head"><span>{{ b.key }}</span>{% for s in b.scale %}<i>{{ s }}</i>{% endfor %}</div><ol>{% for item in b.items %}<li><b>{{ loop.index | pad }}</b><span>{{ item }}</span>{% for s in b.scale %}<i></i>{% endfor %}</li>{% endfor %}</ol></div>
+  {%- elif b.type == "cards" %}<div class="cards c{{ b.cols }}{{ ' plain' if b.plain }}">{% for c in b.items %}<div class="card">{% if not b.plain %}<span class="cn">{{ c.n or (loop.index | pad) }}</span>{% endif %}<h4>{{ c.h }}</h4><p>{{ c.p }}</p></div>{% endfor %}</div>
+  {%- elif b.type == "rows" %}{% if b.label %}<p class="block-label">{{ b.label }}</p>{% endif %}<ol class="rows{{ ' compact' if b.compact }}">{% for r in b.items %}<li><div><h4>{{ r.h }}</h4><p>{{ r.p }}</p></div></li>{% endfor %}</ol>
+  {%- elif b.type == "box" %}<div class="box"><h4>{{ b.title }}</h4><ol>{% for i in b.items %}<li>{{ i }}</li>{% endfor %}</ol></div>
+  {%- elif b.type == "stats" %}{% if b.label %}<p class="stats-label">{{ b.label }}</p>{% endif %}<div class="stats c{{ b.cols }}">{% for s in b.items %}<div class="stat"><b>{{ s.n }}</b><span>{{ s.t }}</span>{% if s.by %}<i>{{ s.by }}</i>{% endif %}</div>{% endfor %}</div>
+  {%- elif b.type == "stat" %}<div class="wide-stat"><b>{{ b.n }}</b><span>{{ b.t }}</span></div>
+  {%- elif b.type == "figures" %}<div class="figures{{ ' compact' if b.compact }}">{% for f in b.items %}<div><b>{{ f.n }}</b><span>{{ f.t }}</span></div>{% endfor %}</div>
+  {%- elif b.type == "callout" %}<div class="callout{{ ' is-reading' if b.reading }}"><span class="label">{{ L.reading if b.reading else b.label }}</span><p>{{ b.text }}</p></div>
+  {%- elif b.type == "quote" %}<p class="quote">“{{ b.text }}”</p>
+  {%- elif b.type == "steps" %}<ol class="steps">{% for s in b.items %}<li><div><h4>{{ s.h }}</h4><p>{{ s.p }}</p></div></li>{% endfor %}</ol>
+  {%- elif b.type == "lists" %}<div class="lists">{% for col in b.cols %}<div class="{{ 'accent' if col.accent }}"><h4><span class="hl">{{ col.h }}</span></h4><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul></div>{% endfor %}</div>
+  {%- endif %}
+  {%- endfor %}
+  {%- if page.sourceLine or page.note or page.more or page.tool %}
+  <div class="bottom">
+    {%- if page.sourceLine %}<p class="source">{{ L.sources if page.source.length > 1 else L.source }}: {{ page.sourceLine }}</p>{% endif %}
+    {%- if page.note %}<p class="source">{{ page.note }}</p>{% endif %}
+    {%- if page.more %}{% for essay in essays %}{% if essay.fileSlug.endsWith(page.more) %}<div class="link"><b>{{ L.more }}</b><span>{{ essay.data.title }}</span></div>{% endif %}{% endfor %}{% endif %}
+    {%- if page.tool %}{% set tool = toolsGuide.tool[lang][page.tool] %}<div class="link"><b>{{ L.open }}: {{ tool.name }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>{% endif %}
+  </div>
+  {%- endif %}
+</section>
+{%- endif %}
+{%- endfor %}
+</body>
+</html>

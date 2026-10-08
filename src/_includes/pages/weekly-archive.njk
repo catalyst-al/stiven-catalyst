@@ -1,0 +1,52 @@
+{#- All issues of the weekly Management Review, the newest first, each as its cover; the topics narrow the list
+    (js/weekly.js). Below them, the special edition of September 2026. Shared by the three languages. -#}
+{%- set lang = lang or "en" -%}
+{%- set W = weekly[lang] -%}
+{%- set L = W.labels -%}
+{%- set A = W.archive -%}
+  <section class="shell page-hero weekly-hero">
+    <p class="eyebrow">{{ A.eyebrow }}</p>
+    <h1>Management <span class="weekly-mark">Review</span></h1>
+    <p class="lede">{{ A.lede }}</p>
+  </section>
+
+  <section class="shell weekly-archive" aria-label="{{ L.issues }}">
+    {%- if weekly.blocks | length > 1 %}
+    <div class="weekly-filter" role="group" aria-label="{{ L.blocks }}" data-weekly-filter hidden>
+      <button type="button" aria-pressed="true" data-block="">{{ A.all }}</button>
+      {%- for b in weekly.blocks %}<button type="button" aria-pressed="false" data-block="{{ b.id }}">{{ b[lang] }}</button>{% endfor %}
+    </div>
+    {%- endif %}
+    <ol class="weekly-grid" reversed>
+      {%- for issue in weekly.issues | reverse %}
+      {%- set I = issue[lang] %}
+      {%- set cover = magazinePages[issue.slug][lang].pages[0] %}
+      <li data-block="{{ issue.block }}">
+        <a class="weekly-card" href="{{ ('/magazine/' + issue.slug + '.html') | local(lang) }}">
+          <span class="weekly-card-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 620px) 45vw, 220px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}" decoding="async"></span>
+          <span class="weekly-card-meta">{{ L.no }} {{ issue.no }} · {{ I.blockName }}</span>
+          <strong>{{ I.heading }}</strong>
+          <span class="weekly-card-date">{{ I.date }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ol>
+  </section>
+
+{#- The September edition: one of a kind, before the weekly began. -#}
+{%- set R = review[lang] %}
+{%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}
+{%- set reviewCover = magazinePages[review.slug][lang].pages[0] %}
+  <section class="shell book-feature magazine-feature weekly-special">
+    <a class="book-object" href="{{ reviewUrl }}" tabindex="-1" aria-hidden="true">
+      <span class="book-object-cover"><img src="{{ reviewCover.image }}" srcset="{{ reviewCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ reviewCover.width }}" height="{{ reviewCover.height }}" alt="" loading="lazy"></span>
+    </a>
+    <div class="book-feature-copy">
+      <p class="kicker">{{ R.name }} · {{ L.special }} · {{ R.date }}</p>
+      <h2><a href="{{ reviewUrl }}">{{ R.theme }}</a></h2>
+      <p class="book-subtitle">{{ A.special }}</p>
+      <p>{{ R.feature }}</p>
+      <a class="button-primary" href="{{ reviewUrl }}">{{ R.labels.open_edition }}</a>
+    </div>
+  </section>
+<script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>

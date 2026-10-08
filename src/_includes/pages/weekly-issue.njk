@@ -1,0 +1,184 @@
+{#- One issue of the weekly Management Review in its reader, shared by the three languages: the page-turning
+    reader of the book (js/book.js) with the pages of this language's PDF (magazinePages.json, made by
+    scripts/weekly.mjs), the charts of the issue drawn again and moving in (js/weekly.js), and the whole text,
+    from the same source as the print (weekly.js). Needs issue. -#}
+{%- set lang = lang or "en" -%}
+{%- set I = issue[lang] -%}
+{%- set W = weekly[lang] -%}
+{%- set L = W.labels -%}
+{%- set reader = magazinePages[issue.slug][lang] -%}
+{%- set cover = reader.pages[0] -%}
+{%- set pdf = "/media/magazine/" + issue.slug + "/" + issue.slug + "-" + lang + ".pdf" -%}
+{%- set archive = "/magazine/management-review.html" | local(lang) -%}
+{%- set essays = collections["insights" + (lang | langSuffix)] -%}
+{%- set labels = {
+  cover: "Cover" | t(lang),
+  back: "Back cover" | t(lang),
+  page: "Page {n}" | t(lang),
+  pages: "Pages {a}–{b}" | t(lang),
+  of: "of {total}" | t(lang),
+  resume: "Continue from page {n}" | t(lang)
+} -%}
+  <section class="shell book-hero">
+    <div class="book-hero-copy">
+      <p class="eyebrow">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }}</p>
+      <h1>{{ I.heading }}</h1>
+      <p class="lede">{{ I.sub }}</p>
+      <dl class="book-facts">
+        <div><dt>{{ L.no }}</dt><dd>{{ issue.no }}</dd></div>
+        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ reader.pageCount }}</dd></div>
+        <div><dt>{{ L.sources }}</dt><dd>{{ issue.sources | length }}</dd></div>
+        <div><dt>{{ L.blocks }}</dt><dd>{{ I.blockName }}</dd></div>
+      </dl>
+      <div class="hero-actions">
+        <a class="button-primary" href="#reader" data-book-open>{{ L.open_issue }}</a>
+        <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
+        <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+      </div>
+    </div>
+    <a class="book-object" href="#reader" data-book-open aria-label="{{ L.open_issue }}">
+      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
+    </a>
+  </section>
+
+  <section class="book-stage" id="reader" aria-label="{{ L.page_by_page }}">
+    <div class="book-reader" data-book data-slug="{{ issue.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
+      <div class="book-viewport">
+        <div class="book" data-book-pages>
+          {%- for page in reader.pages %}
+          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}" width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+          {%- endfor %}
+        </div>
+      </div>
+
+      <div class="book-controls" data-book-controls hidden>
+        <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="book-status">
+          <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
+          <p class="book-chapter" data-book-chapter></p>
+          <input class="book-scrub" type="range" min="1" max="{{ reader.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
+        </div>
+        <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="book-tools">
+          <button class="book-chip" type="button" data-book-toc aria-expanded="false" aria-controls="book-contents">{{ "Contents" | t(lang) }}</button>
+          <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
+          <a class="book-chip" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+          <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
+          <a class="book-chip is-accent" href="#more-issues" data-book-end hidden>{{ "Read another issue" | t(lang) }}</a>
+        </div>
+      </div>
+
+      <nav class="book-contents" id="book-contents" data-book-contents aria-label="{{ 'Contents' | t(lang) }}" hidden>
+        <ol>
+          <li><button type="button" data-book-goto="{{ issue.pageOf.intro }}"><span class="book-contents-label">{{ L.no }} {{ issue.no }}</span><span class="book-contents-title">{{ W.intro.title }}</span><span class="book-contents-page">{{ issue.pageOf.intro | pad }}</span></button></li>
+          {%- for page in I.pages %}{% if page.heading %}
+          <li><button type="button" data-book-goto="{{ loop.index }}"><span class="book-contents-label">{{ page.kicker }}</span><span class="book-contents-title">{{ page.heading }}</span><span class="book-contents-page">{{ loop.index | pad }}</span></button></li>
+          {%- endif %}{% endfor %}
+          <li><button type="button" data-book-goto="{{ issue.pageOf.sources }}"><span class="book-contents-label">{{ L.sources }}</span><span class="book-contents-title">{{ W.sourcesPage.kicker }}</span><span class="book-contents-page">{{ issue.pageOf.sources | pad }}</span></button></li>
+        </ol>
+      </nav>
+
+      <p class="book-hint" data-book-hint hidden>{{ "Click or swipe a page to turn it. The arrow keys work too." | t(lang) }}</p>
+    </div>
+  </section>
+
+  {#- The charts of the issue, drawn again for the screen: they move in once when they come into view. -#}
+  <section class="shell weekly-glance" aria-labelledby="weekly-glance-title">
+    <p class="kicker">{{ W.name }} · {{ L.no }} {{ issue.no }}</p>
+    <h2 id="weekly-glance-title">{{ L.glance }}</h2>
+    <p class="weekly-glance-note">{{ L.glance_note }}</p>
+    <div class="weekly-charts">
+      {%- for c in I.charts %}
+      <figure class="weekly-chart wk-chart wk-{{ c.type }}" data-weekly-chart>
+        <figcaption><span>{{ c.kicker }}</span>{% if c.label %}<strong>{{ c.label }}</strong>{% endif %}</figcaption>
+        {%- if c.type == "donut" %}
+        <div class="weekly-donut">{{ c.svg | safe }}<p><strong>{{ c.n }}</strong> {{ c.t }}</p></div>
+        {%- else %}
+        <div class="wk-wide">{{ c.svg | safe }}</div>
+        <div class="wk-narrow">{{ c.svgNarrow | safe }}</div>
+        {%- endif %}
+        {%- if c.note %}<p class="weekly-chart-note">{{ c.note }}</p>{% endif %}
+        <p class="weekly-chart-source">{{ L.sources if c.sources > 1 else L.source }}: {{ c.sourceLine }}</p>
+      </figure>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <section class="shell book-text" id="text">
+    <details data-book-details>
+      <summary>
+        <span class="kicker">{{ "The whole text" | t(lang) }}</span>
+        <span class="book-text-title">{{ L.read_text }}</span>
+        <span class="book-text-note">{{ "For reading on a small screen, searching or a screen reader. The same words, without the page design." | t(lang) }}</span>
+      </summary>
+      <div class="article-content book-text-body">
+        {%- for page in I.pages %}
+        {%- if page.type == "intro" %}
+        <p class="book-text-kicker">{{ W.intro.title }}</p>
+        <p>{{ page.why }}</p>
+        <p>{{ page.body }}</p>
+        <p><em>Stiven Janaqi, {{ L.editor }}</em></p>
+        {%- elif page.heading %}
+
+        <p class="book-text-kicker">{{ page.kicker }}</p>
+        <h2>{{ page.heading }}</h2>
+        {%- if page.lead %}<p><em>{{ page.lead }}</em></p>{% endif %}
+        {%- for b in page.blocks %}
+        {%- if b.type == "p" %}<p>{{ b.text }}</p>
+        {%- elif b.type == "donut" %}<p><strong>{{ b.n }}</strong> {{ b.t }}</p>
+        {%- elif b.chart %}<p>{% if b.label %}{{ b.label }}: {% endif %}{{ b.alt }}.</p>{% if b.note %}<p><em>{{ b.note }}</em></p>{% endif %}
+        {%- elif b.type == "timeline" %}<ul>{% for item in b.items %}<li><strong>{{ item.k }}</strong> {{ item.t }}</li>{% endfor %}</ul>
+        {%- elif b.type == "tiles" %}{% for g in b.groups %}<h3>{{ g.h }}</h3><ul>{% for item in g.items %}<li>{{ item.n }}. {{ item.t }}{% if item.isNew %} ({{ b.badge }}){% endif %}</li>{% endfor %}</ul>{% endfor %}
+        {%- elif b.type == "rating" %}<p>{{ b.key }}</p><ol>{% for item in b.items %}<li>{{ item }}</li>{% endfor %}</ol>
+        {%- elif b.type == "cards" or b.type == "rows" or b.type == "steps" %}{% if b.label %}<h3>{{ b.label }}</h3>{% endif %}<ul>{% for c in b.items %}<li><strong>{% if c.n %}{{ c.n }}: {% endif %}{{ c.h }}.</strong> {{ c.p }}</li>{% endfor %}</ul>
+        {%- elif b.type == "box" %}<h3>{{ b.title }}</h3><ol>{% for i in b.items %}<li>{{ i }}</li>{% endfor %}</ol>
+        {%- elif b.type == "stats" or b.type == "figures" %}<ul>{% for s in b.items %}<li><strong>{{ s.n }}</strong> {{ s.t }}</li>{% endfor %}</ul>
+        {%- elif b.type == "stat" %}<p><strong>{{ b.n }}</strong> {{ b.t }}</p>
+        {%- elif b.type == "callout" %}<h3>{{ L.reading if b.reading else b.label }}</h3><p>{{ b.text }}</p>
+        {%- elif b.type == "quote" %}<p class="book-text-quote">{{ b.text }}</p>
+        {%- elif b.type == "lists" %}{% for col in b.cols %}<h3>{{ col.h }}</h3><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul>{% endfor %}
+        {%- endif %}
+        {%- endfor %}
+        {%- if page.note %}<p><em>{{ page.note }}</em></p>{% endif %}
+        {%- if page.sourceLine %}<p><small>{{ L.sources if page.source.length > 1 else L.source }}: {{ page.sourceLine }}</small></p>{% endif %}
+        {%- if page.more %}{% for essay in essays %}{% if essay.fileSlug.endsWith(page.more) %}<p>{{ L.more }}: <a href="{{ essay.url }}">{{ essay.data.title }}</a></p>{% endif %}{% endfor %}{% endif %}
+        {%- if page.tool %}{% set tool = toolsGuide.tool[lang][page.tool] %}<p>{{ L.open }}: <a href="{{ tool.url }}">{{ tool.name }}</a></p>{% endif %}
+        {%- endif %}
+        {%- endfor %}
+
+        <p class="book-text-kicker">{{ W.sourcesPage.kicker }}</p>
+        <h2>{{ W.sourcesPage.title | join(" ") }}</h2>
+        <p>{{ W.sourcesPage.lead }}</p>
+        <ul>{% for s in issue.sources %}<li>{{ s.by }}, “{{ s.title }}”, {{ s.year }}{% if s.via %} ({{ L.via }} {{ s.via }}){% endif %}.{% if s.url %} <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a>{% endif %}</li>{% endfor %}</ul>
+        <h3>{{ W.sourcesPage.method }}</h3>
+        <p>{{ W.sourcesPage.methodText }}</p>
+      </div>
+    </details>
+  </section>
+
+{#- After the issue: the one before and the one after it, and the list of all issues. Only the neighbours, so the
+    page stays this issue's page as the archive grows. -#}
+{%- set older = weekly.issues | where("number", issue.number - 1) %}
+{%- set newer = weekly.issues | where("number", issue.number + 1) %}
+  <section class="shell issue-more" id="more-issues" aria-labelledby="more-issues-title">
+    <p class="kicker">{{ W.name }} · {{ L.weekly }}</p>
+    <h2 id="more-issues-title">{{ "Read another issue" | t(lang) }}</h2>
+    {%- if older or newer %}
+    <div class="issue-more-list">
+      {%- for other in [older, newer] %}{% if other %}
+      {%- set otherCover = magazinePages[other.slug][lang].pages[0] %}
+      <a class="issue-more-card" href="{{ ('/magazine/' + other.slug + '.html') | local(lang) }}">
+        <img src="{{ otherCover.image }}" srcset="{{ otherCover.image | srcsetFor }}" sizes="96px" width="{{ otherCover.width }}" height="{{ otherCover.height }}" alt="" loading="lazy" decoding="async">
+        <span class="issue-more-copy">
+          <span class="issue-more-label">{{ ("Previous issue" if other.number < issue.number else "Next issue") | t(lang) }}</span>
+          <span class="issue-more-title">{{ other[lang].heading }}</span>
+          <span class="issue-more-meta">{{ L.no }} {{ other.no }} · {{ other[lang].date }}</span>
+        </span>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+    {%- endif %}
+    <a class="text-link" href="{{ archive }}">{{ L.all }}</a>
+  </section>
+<script src="{{ '/js/book.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>
