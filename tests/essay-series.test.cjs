@@ -46,8 +46,8 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(first, /href="\/sq\/insights\/ten-minutes-before-the-shift\/" rel="next"/);
 
   // The newest essay of the unfinished series says the next one is on its way.
-  const newest = built('sq/insights/talking-to-someone-who-made-a-mistake/index.html');
-  assert.match(newest, /Operacioni që punon pa ty · Eseja 7 nga 10/);
+  const newest = built('sq/insights/teams-with-many-languages/index.html');
+  assert.match(newest, /Operacioni që punon pa ty · Eseja 8 nga 10/);
   assert.match(newest, /href="#newsletter-title">Merreni me email</);
   assert.match(newest, /Filloni sërish me esenë 1/);
 
@@ -59,7 +59,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const page = built('sq/insights.html');
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
-  assert.match(page, /7 nga 10 ese/);
+  assert.match(page, /8 nga 10 ese/);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
   assert.match(row, /<span class="number">01<\/span>/);
@@ -90,4 +90,9 @@ test('a fill-in card can carry a hint per line, a clear button and a note', { sk
   assert.match(html, /data-checklist-clear>Pastro</);
   assert.match(html, /class="essay-checklist-note">Shabllon orientues/);
   assert.doesNotMatch(built('sq/insights/mistakes-get-lost-between-departments/index.html'), /data-checklist-clear/);
+});
+
+test('a card can name its own copy button', { skip: !fs.existsSync('_site/sq/insights/teams-with-many-languages/index.html') }, () => {
+  assert.match(built('sq/insights/teams-with-many-languages/index.html'), /data-checklist-copy[^>]*>Kopjo udhëzimin</);
+  assert.match(built('sq/insights/kpis-the-team-trusts/index.html'), /data-checklist-copy[^>]*>Kopjo kartën</);
 });
