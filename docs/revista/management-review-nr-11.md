@@ -34,4 +34,6 @@ përmbledhjet e faqes së botuesit dhe te burime të pavarura, dhe kjo shënohet
 ## Çfarë është editoriale
 
 - Leximi se për menaxherin si coach provat janë kryesisht lidhje, jo eksperimente.
-- Ritmi i javës, shembulli hipotetik me numra të shpikur, karta GROW dhe kutitë "Leximi ynë".
+- Krahasimi "shefi dhe coach-i" te faqja 3, përmbledhja jonë e udhëzimeve të Google dhe të Gallup.
+- Shembulli hipotetik i një bisede GROW te faqja 5 dhe ekipi me tetë veta te faqja 7, me numra të shpikur.
+- Përshkrimet e pesë bisedave të Gallup (emrat janë të Gallup), karta GROW dhe kutitë "Leximi ynë".

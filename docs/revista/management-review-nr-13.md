@@ -31,5 +31,6 @@ fundit.
 
 ## Çfarë është editoriale
 
-- Llogaria hipotetike e orëve të një takimi javor, hapat dhe karta e takimit të vendimit.
+- Llogaria hipotetike e orëve të një takimi javor, kalendari hipotetik i ekipit te faqja 5, hapat dhe karta e takimit të vendimit.
+- Grafiku "në këmbë 100, ulur 134" është paraqitja jonë e "34% më gjatë".
 - Leximi se një takim vendimi ka nevojë për një pyetje, një vendimmarrës dhe një shënim të shkruar; kutitë "Leximi ynë".
