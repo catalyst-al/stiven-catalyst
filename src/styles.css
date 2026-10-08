@@ -6079,3 +6079,8 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 .essay-checklist li.is-field b { color: var(--blue); font-variant-numeric: tabular-nums; margin-right: 6px; }
 .essay-checklist textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; font-size: .95rem; resize: vertical; }
 .essay-checklist textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.essay-checklist li.is-field small { color: var(--muted); font-size: .9rem; line-height: 1.4; margin-top: -4px; }
+.essay-checklist-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.essay-checklist-note { margin: 14px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.45; }
+.article-content .essay-checklist-note { margin: 14px 0 0; }
+@media print { .essay-checklist-actions { display: none; } }
