@@ -46,8 +46,8 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(first, /href="\/sq\/insights\/ten-minutes-before-the-shift\/" rel="next"/);
 
   // The newest essay of the unfinished series says the next one is on its way.
-  const newest = built('sq/insights/ten-minutes-before-the-shift/index.html');
-  assert.match(newest, /Operacioni që punon pa ty · Eseja 2 nga 10/);
+  const newest = built('sq/insights/watch-how-i-do-it-is-not-training/index.html');
+  assert.match(newest, /Operacioni që punon pa ty · Eseja 3 nga 10/);
   assert.match(newest, /href="#newsletter-title">Merreni me email</);
   assert.match(newest, /Filloni sërish me esenë 1/);
 
@@ -59,7 +59,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const page = built('sq/insights.html');
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
-  assert.match(page, /2 nga 10 ese/);
+  assert.match(page, /3 nga 10 ese/);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
   assert.match(row, /<span class="number">01<\/span>/);
