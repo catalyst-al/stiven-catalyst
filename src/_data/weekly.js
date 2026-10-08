@@ -16,12 +16,21 @@ const raw = await Promise.all(files.map((name) => import(new URL(name, folder)).
 
 const pad = (n) => String(n).padStart(2, "0");
 const sourceById = Object.fromEntries(sources.map((source) => [source.id, source]));
-// "Gallup, 2015" or "Laszlo Bock, 2015, via World Economic Forum, 2015", for the foot of a page.
-const sourceLine = (ids, lang) => ids.map((id) => {
-  const s = sourceById[id];
-  if (!s) throw new Error(`Management Review: unknown source "${id}"`);
-  return `${s.by}, ${s.year}${s.via ? ` (${common.labels.via[lang]} ${s.via})` : ""}`;
-}).join("; ");
+// "Gallup, 2015" or "Laszlo Bock, 2015, via World Economic Forum, 2015", for the foot of a page. Two sources by the
+// same author in the same year are told apart by their titles: "Gallup, Indicator: Employee Engagement, 2026".
+const sourceLine = (ids, lang) => {
+  const list = ids.map((id) => {
+    const s = sourceById[id];
+    if (!s) throw new Error(`Management Review: unknown source "${id}"`);
+    return s;
+  });
+  const short = (s) => `${s.by}, ${s.year}`;
+  return list.map((s) => {
+    const twin = list.filter((other) => short(other) === short(s)).length > 1;
+    const named = s.title.includes(String(s.year)) ? `${s.by}, ${s.title}` : `${s.by}, ${s.title}, ${s.year}`;
+    return `${twin ? named : short(s)}${s.via ? ` (${common.labels.via[lang]} ${s.via})` : ""}`;
+  }).join("; ");
+};
 
 const withChart = (block) => {
   const svg = chartMarkup(block);
