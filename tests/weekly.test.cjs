@@ -85,6 +85,19 @@ test('every page with a figure names its source, and every source is in the list
   }
 });
 
+test('a source line never names the same thing twice: two sources by one author in one year carry their titles', async () => {
+  const weekly = await load();
+  for (const issue of weekly.issues) {
+    for (const lang of LANGS) {
+      const lines = [...issue[lang].pages.map((page) => page.sourceLine), ...issue[lang].charts.map((chart) => chart.sourceLine)];
+      for (const line of lines.filter(Boolean)) {
+        const parts = line.split('; ');
+        assert.equal(new Set(parts).size, parts.length, `${issue.slug} ${lang}: ${line}`);
+      }
+    }
+  }
+});
+
 test('the charts are drawn for the print and again, narrower, for phones', async () => {
   const weekly = await load();
   for (const issue of weekly.issues) {
