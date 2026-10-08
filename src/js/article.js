@@ -83,20 +83,25 @@
   update();
 })();
 
-// The checklist at the end of an essay: the count of ticked questions, and a copy of them as text.
+// The checklist at the end of an essay: the count of questions ticked off (or answered, on a card to fill in),
+// and a copy of them as text. Nothing is kept or sent.
 document.querySelectorAll("[data-essay-checklist]").forEach((box) => {
   const items = [...box.querySelectorAll("[data-checklist-item]")];
   const count = box.querySelector("[data-checklist-count]");
-  const update = () => { count.textContent = `${items.filter((item) => item.checked).length}/${items.length}`; };
-  items.forEach((item) => item.addEventListener("change", update));
+  const done = (item) => (item.type === "checkbox" ? item.checked : item.value.trim() !== "");
+  const update = () => { count.textContent = `${items.filter(done).length}/${items.length}`; };
+  items.forEach((item) => item.addEventListener(item.type === "checkbox" ? "change" : "input", update));
   update();
   const button = box.querySelector("[data-checklist-copy]");
   const label = button?.textContent;
   button?.addEventListener("click", async () => {
     const title = box.querySelector(".kicker")?.textContent.trim() || "";
-    const lines = items.map((item, i) => `${i + 1}. ${item.closest("label").textContent.trim()}`);
+    const lines = items.map((item, i) => {
+      const question = item.closest("label").querySelector("span").textContent.trim();
+      return item.type === "checkbox" ? `${i + 1}. ${question}` : `${question}\n${item.value.trim() || "—"}\n`;
+    });
     try {
-      await navigator.clipboard.writeText([title, "", ...lines].join("\n"));
+      await navigator.clipboard.writeText([title, "", ...lines].join("\n").trim());
       button.textContent = button.dataset.copiedLabel || label;
       setTimeout(() => { button.textContent = label; }, 2000);
     } catch { /* clipboard unavailable */ }
