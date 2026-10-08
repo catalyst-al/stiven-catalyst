@@ -1,6 +1,7 @@
 // An essay or reflection while it is read (layouts/article.njk):
 // - the thin bar at the top shows how far the reader is;
 // - the contents beside the text mark the section on screen;
+// - a checklist at the end of an essay counts the questions ticked off and copies them as plain text;
 // - how far each essay was read is kept in this browser only (localStorage "sc-reading"), so the series
 //   dots and the list of essays can show what is already read and where to continue. Nothing is sent.
 (() => {
@@ -81,3 +82,23 @@
   window.addEventListener("resize", request);
   update();
 })();
+
+// The checklist at the end of an essay: the count of ticked questions, and a copy of them as text.
+document.querySelectorAll("[data-essay-checklist]").forEach((box) => {
+  const items = [...box.querySelectorAll("[data-checklist-item]")];
+  const count = box.querySelector("[data-checklist-count]");
+  const update = () => { count.textContent = `${items.filter((item) => item.checked).length}/${items.length}`; };
+  items.forEach((item) => item.addEventListener("change", update));
+  update();
+  const button = box.querySelector("[data-checklist-copy]");
+  const label = button?.textContent;
+  button?.addEventListener("click", async () => {
+    const title = box.querySelector(".kicker")?.textContent.trim() || "";
+    const lines = items.map((item, i) => `${i + 1}. ${item.closest("label").textContent.trim()}`);
+    try {
+      await navigator.clipboard.writeText([title, "", ...lines].join("\n"));
+      button.textContent = button.dataset.copiedLabel || label;
+      setTimeout(() => { button.textContent = label; }, 2000);
+    } catch { /* clipboard unavailable */ }
+  });
+});

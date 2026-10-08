@@ -46,8 +46,8 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(first, /href="\/sq\/insights\/ten-minutes-before-the-shift\/" rel="next"/);
 
   // The newest essay of the unfinished series says the next one is on its way.
-  const newest = built('sq/insights/solve-it-or-escalate-it/index.html');
-  assert.match(newest, /Operacioni që punon pa ty · Eseja 4 nga 10/);
+  const newest = built('sq/insights/mistakes-get-lost-between-departments/index.html');
+  assert.match(newest, /Operacioni që punon pa ty · Eseja 5 nga 10/);
   assert.match(newest, /href="#newsletter-title">Merreni me email</);
   assert.match(newest, /Filloni sërish me esenë 1/);
 
@@ -59,9 +59,18 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const page = built('sq/insights.html');
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
-  assert.match(page, /4 nga 10 ese/);
+  assert.match(page, /5 nga 10 ese/);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
   assert.match(row, /<span class="number">01<\/span>/);
   assert.match(row.slice(0, row.indexOf('</a>')), /Operacioni që punon pa ty · Operacione/);
+});
+
+test('an essay can end with a checklist the reader ticks off and copies', { skip: !fs.existsSync('_site/sq/insights/mistakes-get-lost-between-departments/index.html') }, () => {
+  const html = built('sq/insights/mistakes-get-lost-between-departments/index.html');
+  assert.match(html, /data-essay-checklist/);
+  assert.equal((html.match(/data-checklist-item/g) || []).length, 5);
+  assert.match(html, /data-checklist-count[^>]*>0\/5</);
+  assert.match(html, />Kopjo 5 pyetjet</);
+  assert.doesNotMatch(built('sq/insights/the-first-30-days/index.html'), /data-essay-checklist/);
 });

@@ -6062,3 +6062,16 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 @media (max-width: 400px) {
   .project-card h2 { font-size: 34px; }
 }
+
+/* The checklist an essay can end with (layouts/article.njk, "checklist" in the front matter). */
+.essay-checklist { margin: 40px 0 8px; padding: 24px 26px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-checklist-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 14px; }
+.essay-checklist-head .kicker { margin: 0; }
+.essay-checklist-count { color: var(--blue); font-weight: 800; font-variant-numeric: tabular-nums; }
+.article-content .essay-checklist ol { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.article-content .essay-checklist li { margin: 0; padding: 0; }
+.essay-checklist label { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; font-size: 1rem; line-height: 1.45; transition: border-color .2s ease; }
+.essay-checklist label:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.essay-checklist input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); }
+.essay-checklist input:checked + span { color: var(--muted); }
+@media print { .essay-checklist button { display: none; } .essay-checklist { border-color: var(--line); } }

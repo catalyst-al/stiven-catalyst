@@ -77,6 +77,22 @@ ogType: article
     </details>
     {%- endif %}
 {{ body | safe }}
+    {#- A checklist the essay ends with ("checklist" in its front matter: title and items): the reader ticks the
+        questions off and can copy them. Nothing is kept or sent (js/article.js). -#}
+    {%- if checklist and checklist.items %}
+    <section class="essay-checklist" data-essay-checklist aria-labelledby="essay-checklist-title">
+      <div class="essay-checklist-head">
+        <p class="kicker" id="essay-checklist-title">{{ checklist.title }}</p>
+        <span class="essay-checklist-count" data-checklist-count aria-live="polite">0/{{ checklist.items.length }}</span>
+      </div>
+      <ol>
+        {%- for item in checklist.items %}
+        <li><label><input type="checkbox" data-checklist-item><span>{{ item }}</span></label></li>
+        {%- endfor %}
+      </ol>
+      <button type="button" class="button-secondary" data-checklist-copy data-copied-label="{{ 'Copied' | t(lang) }}">{{ "Copy the {n} questions" | t(lang) | replace("{n}", checklist.items.length | string) }}</button>
+    </section>
+    {%- endif %}
     {#- The tools an essay is about ("relatedTools" on the English essay; translations follow it). -#}
     {%- if isEssay %}
     {%- set sourceEssay = collections.insights | byOriginal(original or page.fileSlug) %}
