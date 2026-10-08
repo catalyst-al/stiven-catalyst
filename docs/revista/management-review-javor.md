@@ -66,9 +66,9 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 4 | Njerëzit | Siguria psikologjike | Google re:Work, Project Aristotle; Edmondson (1999) |
 | 5 | Operacioni | Tetë humbjet e Lean-it | Ohno, Toyota Production System (1988); Lean Enterprise Institute; Womack & Jones (1996) |
 | 6 | Roli | Nga më i miri në ekip te menaxheri | Gallup (2026), "When Good Frontline Workers Make Bad Supervisors"; Charan, Drotter & Noel, The Leadership Pipeline |
-| 7 | KPI | Pak objektiva, të qarta: qëllimet që punojnë | Locke & Latham (2002), American Psychologist; McChesney, Covey & Huling, The 4 Disciplines of Execution (2012) |
+| 7 | KPI | Pak qëllime, të qarta | Locke & Latham (2002), American Psychologist; McChesney, Covey & Huling, The 4 Disciplines of Execution (2012) |
 | 8 | Strategjia | Kush vendos çfarë | McKinsey, Decision making in the age of urgency (2019); Rogers & Blenko, "Who Has the D?", HBR (2006) |
-| 9 | Njerëzit | Angazhimi: çfarë thonë të dhënat e 2026-s | Gallup, State of the Global Workplace 2026; Gallup, Q12 Meta-Analysis |
+| 9 | Njerëzit | Angazhimi: të dhënat e 2026-s | Gallup, State of the Global Workplace 2026; Gallup, Q12 Meta-Analysis |
 | 10 | AI | AI në punën e menaxherit, pa iluzione | MIT NANDA, The GenAI Divide (2025); Microsoft, Work Trend Index 2026; Gallup (2026) |
 | 11 | Roli | Menaxheri si coach | Google re:Work; Gallup, punimet për coaching-un e menaxherëve |
 | 12 | KPI | OKR dhe KPI: kur përdoret secili | Doerr, Measure What Matters (2018); Google re:Work, OKR; Grove, High Output Management (1983) |
@@ -107,8 +107,8 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | PR | Numrat | Statusi |
 |---|---|---|
 | Modeli | 1 | U botua |
-| 1 | 2–5 | Në shqyrtim |
-| 2 | 6–9 | |
+| 1 | 2–5 | U botua |
+| 2 | 6–9 | Në shqyrtim |
 | 3 | 10–13 | |
 | 4 | 14–17 | |
 | 5 | 18–21 | |
