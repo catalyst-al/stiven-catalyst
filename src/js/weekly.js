@@ -1,4 +1,4 @@
-// The weekly Management Review on the site. On the page of an issue, its charts (lib/weekly/charts.js) move in
+// The monthly Management Review on the site. On the page of an issue, its charts (lib/weekly/charts.js) move in
 // once when they come into view: lines draw, bars grow, people and figures appear one by one, the big figures
 // count up. On the list of all issues, the topics narrow the list. Without this script, or with reduced motion,
 // everything is simply shown as it is.

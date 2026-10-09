@@ -1,0 +1,104 @@
+{#- One page of a monthly issue of the Management Review, as the print (src/guide-print/weekly.njk) and the reader
+    (src/_includes/pages/weekly-issue.njk) both show it. Needs page (the page), n (its number), issue, I (the issue in
+    this language), W (weekly[lang]), L (its labels), lang and essays. The charts come ready from weekly.js (b.svg). -#}
+{%- macro chrome(number, section) -%}
+<header class="run"><span>{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+{%- if page.type == "cover" %}
+<section class="pg cover wk-cover">
+  <div class="mast"><span>Stiven Catalyst</span><span>{{ L.edition }} · {{ I.date }}</span></div>
+  <div class="mast-rule"></div>
+  <div class="cover-main">
+    <div>
+      <div class="masthead">Management<span class="accent">Review</span></div>
+      <p class="cover-tag">{{ W.tagline }}</p>
+      <div class="cover-rule"></div>
+      <p class="wk-chip">{{ I.blockName }}</p>
+      <div class="cover-theme">{{ I.theme[0] }}<span class="accent">{{ I.theme[1] }}</span></div>
+      <p class="cover-sub">{{ I.sub }}</p>
+    </div>
+    <div class="wk-art"><img src="{{ weekly.cover.src }}" alt=""><p class="wk-no"><small>{{ L.no }}</small>{{ issue.no }}</p></div>
+  </div>
+  {%- if I.figure %}
+  <div class="wk-figure-cover"><b>{{ I.figure.n }}</b><p>{{ I.figure.t }}<i>{{ I.figure.by }}</i></p></div>
+  {%- endif %}
+  <div class="wk-teasers">
+    <p class="k">{{ L.inside }}</p>
+    <ol>{% for t in I.teasers %}<li><span class="wk-t-kick">{{ t.kicker }}</span><b>{{ t.title }}</b><span class="wk-t-page">{{ L.page }} {{ t.number | pad }}</span></li>{% endfor %}</ol>
+  </div>
+  <p class="cover-foot">stivencatalyst.com</p>
+</section>
+{%- elif page.type == "intro" %}
+<section class="pg">
+  {{ chrome(n, I.blockName) }}
+  <p class="kicker">{{ L.no }} {{ issue.no }} · {{ I.blockName }}</p>
+  <h2>{{ W.intro.title }}</h2>
+  <p class="lead">{{ page.why }}</p>
+  <div class="body-text"><p>{{ page.body }}</p></div>
+  <p class="wk-byline">Stiven Janaqi<span>{{ L.editor }} · Stiven Catalyst</span></p>
+  <ol class="wk-toc">
+    {%- for item in I.pages %}{% if item.heading %}<li><b>{{ loop.index | pad }}</b><span><i>{{ item.kicker }}</i>{{ item.heading }}</span></li>{% endif %}{% endfor %}
+    <li><b>{{ issue.pageOf.sources | pad }}</b><span><i>{{ L.sources }}</i>{{ W.sourcesPage.kicker }}</span></li>
+  </ol>
+  <p class="block-label">{{ W.intro.how }}</p>
+  <div class="wk-legend-box">{% for item in W.legend %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
+</section>
+{%- elif page.type == "sources" %}
+<section class="pg">
+  {{ chrome(n, L.sources) }}
+  <p class="kicker">{{ W.sourcesPage.kicker }}</p>
+  <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
+  <p class="lead">{{ W.sourcesPage.lead }}</p>
+  <ol class="src">{% for s in issue.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
+  <div class="bottom"><div class="callout wk-method"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div></div>
+</section>
+{%- elif page.type == "back" %}
+<section class="pg back">
+  <img src="{{ weekly.cover.src }}" alt="">
+  <div class="masthead">Management<span class="accent">Review</span></div>
+  <p class="cover-tag">{{ W.tagline }}</p>
+  <p>{{ W.back.line }}</p>
+  <p class="monthly">{{ W.back.all }}</p>
+  <p class="url">stivencatalyst.com{{ "/magazine/management-review.html" | local(lang) }}</p>
+  <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst</p>
+</section>
+{%- else %}
+<section class="pg">
+  {{ chrome(n, I.blockName) }}
+  <p class="kicker">{{ page.kicker }}</p>
+  <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
+  {%- if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+  {%- for b in page.blocks %}
+  {%- if b.type == "p" %}<div class="body-text"><p>{{ b.text }}</p></div>
+  {%- elif b.type == "donut" %}<div class="wk-donut-row">{{ b.svg | safe }}<p>{{ b.t }}</p></div>
+  {%- elif b.chart %}<div class="wk-figure">{% if b.label %}<p class="block-label">{{ b.label }}</p>{% endif %}{{ b.svg | safe }}{% if b.note %}<p class="wk-fig-note">{{ b.note }}</p>{% endif %}</div>
+  {%- elif b.type == "timeline" %}<ol class="wk-timeline" style="--n:{{ b.items | length }}">{% for item in b.items %}<li><b>{{ item.k }}</b><span>{{ item.t }}</span></li>{% endfor %}</ol>
+  {%- elif b.type == "tiles" %}<div class="wk-tiles">{% for g in b.groups %}<div class="wk-tile-group tone-{{ g.tone }}"><h4>{{ g.h }}</h4><ol>{% for item in g.items %}<li><b>{{ item.n }}</b><span>{{ item.t }}{% if item.isNew %}<br><em>{{ b.badge }}</em>{% endif %}</span></li>{% endfor %}</ol></div>{% endfor %}</div>
+  {%- elif b.type == "chain" %}{% if b.label %}<p class="block-label">{{ b.label }}</p>{% endif %}<ol class="wk-chain" style="--n:{{ b.items | length }}">{% for item in b.items %}<li><b>{{ loop.index | pad }}</b><h4>{{ item.h }}</h4><p>{{ item.p }}</p></li>{% endfor %}</ol>
+  {%- elif b.type == "example" %}<div class="wk-example"><span class="label">{{ b.label }}</span>{% if b.rows %}<dl>{% for r in b.rows %}<div><dt>{{ r.k }}</dt><dd>{{ r.v }}</dd></div>{% endfor %}</dl>{% endif %}<p{% if b.rows %} class="wk-ex-note"{% endif %}>{{ b.text }}</p></div>
+  {%- elif b.type == "matrix" %}<div class="wk-matrix"><span class="ax-y">{{ b.y }}</span>{% for c in b.cells %}<div class="wk-cell tone-{{ c.tone or 'dim' }}"><h4>{{ c.h }}</h4><p>{{ c.p }}</p><i>{{ c.where }}</i></div>{% endfor %}<span></span><span class="ax-x">{{ b.x }}</span></div>
+  {%- elif b.type == "form" %}<ol class="wk-form">{% for item in b.items %}<li><h4><b>{{ loop.index | pad }}</b>{{ item.h }}{% if item.hint %}<span>{{ item.hint }}</span>{% endif %}</h4><span class="wk-lines{{ ' two' if item.lines == 2 }}{{ ' three' if item.lines == 3 }}"></span></li>{% endfor %}</ol>
+  {%- elif b.type == "rating" %}<div class="wk-rating{{ ' roomy' if b.roomy }}"><div class="wk-rating-head"><span>{{ b.key }}</span>{% for s in b.scale %}<i>{{ s }}</i>{% endfor %}</div><ol>{% for item in b.items %}<li><b>{{ loop.index | pad }}</b><span>{{ item }}</span>{% for s in b.scale %}<i></i>{% endfor %}</li>{% endfor %}</ol></div>
+  {%- elif b.type == "cards" %}<div class="cards c{{ b.cols }}{{ ' plain' if b.plain }}">{% for c in b.items %}<div class="card">{% if not b.plain %}<span class="cn">{{ c.n or (loop.index | pad) }}</span>{% endif %}<h4>{{ c.h }}</h4><p>{{ c.p }}</p></div>{% endfor %}</div>
+  {%- elif b.type == "rows" %}{% if b.label %}<p class="block-label">{{ b.label }}</p>{% endif %}<ol class="rows{{ ' compact' if b.compact }}">{% for r in b.items %}<li><div><h4>{{ r.h }}</h4><p>{{ r.p }}</p></div></li>{% endfor %}</ol>
+  {%- elif b.type == "box" %}<div class="box"><h4>{{ b.title }}</h4><ol>{% for i in b.items %}<li>{{ i }}</li>{% endfor %}</ol></div>
+  {%- elif b.type == "stats" %}{% if b.label %}<p class="stats-label">{{ b.label }}</p>{% endif %}<div class="stats c{{ b.cols }}">{% for s in b.items %}<div class="stat"><b>{{ s.n }}</b><span>{{ s.t }}</span>{% if s.by %}<i>{{ s.by }}</i>{% endif %}</div>{% endfor %}</div>
+  {%- elif b.type == "stat" %}<div class="wide-stat"><b>{{ b.n }}</b><span>{{ b.t }}</span></div>
+  {%- elif b.type == "figures" %}<div class="figures{{ ' compact' if b.compact }}">{% for f in b.items %}<div><b>{{ f.n }}</b><span>{{ f.t }}</span></div>{% endfor %}</div>
+  {%- elif b.type == "callout" %}<div class="callout{{ ' is-reading' if b.reading }}"><span class="label">{{ L.reading if b.reading else b.label }}</span><p>{{ b.text }}</p></div>
+  {%- elif b.type == "quote" %}<p class="quote">“{{ b.text }}”</p>
+  {%- elif b.type == "steps" %}<ol class="steps">{% for s in b.items %}<li><div><h4>{{ s.h }}</h4><p>{{ s.p }}</p></div></li>{% endfor %}</ol>
+  {%- elif b.type == "lists" %}<div class="lists">{% for col in b.cols %}<div class="{{ 'accent' if col.accent }}"><h4><span class="hl">{{ col.h }}</span></h4><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul></div>{% endfor %}</div>
+  {%- endif %}
+  {%- endfor %}
+  {%- if page.sourceLine or page.note or page.more or page.tool %}
+  <div class="bottom">
+    {%- if page.sourceLine %}<p class="source">{{ L.sources if page.source.length > 1 else L.source }}: {{ page.sourceLine }}</p>{% endif %}
+    {%- if page.note %}<p class="source">{{ page.note }}</p>{% endif %}
+    {%- if page.more %}{% for essay in essays %}{% if essay.fileSlug.endsWith(page.more) %}<div class="link"><b>{{ L.more }}</b><span>{{ essay.data.title }}</span></div>{% endif %}{% endfor %}{% endif %}
+    {%- if page.tool %}{% set tool = toolsGuide.tool[lang][page.tool] %}<div class="link"><b>{{ L.open }}: {{ tool.name }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>{% endif %}
+  </div>
+  {%- endif %}
+</section>
+{%- endif %}

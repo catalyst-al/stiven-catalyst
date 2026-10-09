@@ -30,7 +30,9 @@ const issue1 = {
   number: 1,
   slug: "nga-terreni-01",
   month: "2026-10",
-  essays: { from: "2026-10-01", to: "2026-10-31" },
+  // The essays page lists the series "Ten years close to the work", complete in October: only that series, so the
+  // page stays the printed page as other essays of the month are published.
+  essays: { from: "2026-10-01", to: "2026-10-31", series: "ten-years" },
   tool: "/tools/kpi-diagnostic/",
   alertFirst: true,
   sources,
@@ -446,7 +448,7 @@ const withLayout = (issue) => {
   const floor = 5;
   const tool = floor + floorSplit.length;
   const pageOf = { trend: 3, floor, tool, essays: tool + 1, read: tool + 1, question: tool + 2, back: tool + 3 };
-  return { ...issue, floorSplit, pageOf };
+  return { ...issue, floorSplit, pageOf, pageCount: pageOf.back };
 };
 
 const issues = [issue1, issue2].map(withLayout);

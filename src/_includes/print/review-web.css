@@ -1,0 +1,8 @@
+/* The Management Review's own additions for the site (after print/review-base.css and print/weekly.css, before
+   print/live-pages.css): the charts of a page keep the print's own type and colours where the site's chart styles
+   (styles.css, .wk-…) would otherwise reach in. */
+.mr .pg .wk-svg { font-family: inherit; }
+.mr .pg .wk-donut-n { font-weight: 400; letter-spacing: 0; }
+.mr .pg .wk-legend { margin: 2.6mm 0 0; padding: 0; }
+.mr .pg .wk-legend b { letter-spacing: 0; }
+.mr .pg .wk-legend span { color: inherit; }

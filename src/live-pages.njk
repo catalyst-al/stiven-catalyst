@@ -1,0 +1,9 @@
+---
+pagination:
+  data: livePageSheets
+  size: 1
+  alias: sheet
+permalink: "{{ sheet.path }}"
+eleventyExcludeFromCollections: true
+---
+{{ sheet.name | livePagesCss | safe }}

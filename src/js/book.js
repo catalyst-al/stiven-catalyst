@@ -2,7 +2,10 @@
 // large page at a time, at a size the small print can be read at, and the
 // reader can lay the book open on two pages instead; on a phone it shows one
 // page at a time. Without this script the pages simply follow each other down
-// the page.
+// the page. A page is a picture (the book, the magazine, the Tools Guide) or,
+// in the Management Review, the page itself as HTML (.book-page.is-live): laid
+// out at its printed size and scaled to its place in the book, so its text
+// stays sharp at any size. The scale, --pg-scale, follows the width of a page.
 (() => {
   const reader = document.querySelector("[data-book]");
   const book = reader?.querySelector("[data-book-pages]");
@@ -22,6 +25,10 @@
 
   const fill = (text, values) => String(text || "").replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
   const numberOf = (page) => Number(page?.dataset.page) || 0;
+  // Live pages: the printed width of a page (148 mm) as the browser lays it out, for the scale.
+  const live = pages[0]?.classList.contains("is-live") || false;
+  const pageWidth = () => pages[0]?.querySelector(".pg")?.offsetWidth || 559.37;
+  const fit = (el, width) => { if (live) el.style.setProperty("--pg-scale", String(width / pageWidth())); };
 
   // In the open book the back cover sits alone on the left. With an odd number of pages an empty
   // endpaper goes before it, as in a printed book; with an even number it lands there by itself.
@@ -91,8 +98,13 @@
     }
     turned = turnsFor(keep);
     sheets.forEach((sheet) => { sheet.turned = sheet.shown = sheet.index < turned; });
+    scale();
     render();
   };
+
+  // A live page is as wide as its face: the whole book on a phone or as one large page, half of it when open.
+  const scale = () => fit(book, book.clientWidth / (spread ? 2 : 1));
+  if (live && "ResizeObserver" in window) new ResizeObserver(scale).observe(book);
 
   function edge(side) {
     const el = document.createElement("div");
@@ -265,7 +277,7 @@
   }
 
   // Zoom: the pages in view, as wide as the screen allows, for the small print. The large page
-  // images (srcset) keep the letters sharp at this size.
+  // images (srcset) keep the letters sharp at this size; a live page is scaled up, and its text can be selected.
   const zoomButton = $("[data-book-zoom]");
   let zoom = null;
   if (zoomButton && typeof HTMLDialogElement === "function") {
@@ -278,8 +290,9 @@
     close.setAttribute("aria-label", zoomButton.dataset.close || "Close");
     close.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
     const list = document.createElement("div");
-    list.className = "book-zoom-pages";
+    list.className = live ? "book-zoom-pages mr" : "book-zoom-pages";
     zoom.append(close, list);
+    if (live && "ResizeObserver" in window) new ResizeObserver(() => { const first = list.firstElementChild; if (first) fit(list, first.clientWidth); }).observe(list);
     reader.append(zoom);
     close.addEventListener("click", () => zoom.close());
     // A click beside the pages closes the view as well.
@@ -292,13 +305,22 @@
     });
     zoomButton.hidden = false;
     zoomButton.addEventListener("click", () => {
-      list.replaceChildren(...inView().map((page) => page.querySelector("img")).filter(Boolean).map((image) => {
+      list.replaceChildren(...inView().map((page) => {
+        if (live) {
+          const copy = document.createElement("div");
+          copy.className = "book-zoom-page";
+          copy.append(page.querySelector(".pg").cloneNode(true));
+          return copy;
+        }
+        const image = page.querySelector("img");
+        if (!image) return null;
         const copy = image.cloneNode();
         copy.sizes = "min(calc(100vw - 32px), 1100px)";
         copy.loading = "eager";
         return copy;
-      }));
+      }).filter(Boolean));
       zoom.showModal();
+      if (live && list.firstElementChild) fit(list, list.firstElementChild.clientWidth);
       zoom.scrollTop = 0;
     });
   }

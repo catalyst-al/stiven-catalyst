@@ -1,4 +1,4 @@
-// The weekly Management Review: one issue a week, 10 pages each, in English, Albanian and German. The issues
+// The monthly Management Review: a monthly edition in numbered issues, 10 pages each, in English, Albanian and German. The issues
 // are in lib/weekly/issues (01.js, 02.js …), the sources and shared labels in lib/weekly. This file puts them
 // together for the print (src/guide-print/weekly.njk, printed by scripts/weekly.mjs), the reader of each issue
 // (src/_includes/pages/weekly-issue.njk) and the list of all issues (src/_includes/pages/weekly-archive.njk).
