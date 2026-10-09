@@ -1,6 +1,7 @@
 {#- One issue of the magazine in its reader, shared by the three languages: the same page-turning reader as the
-    book (js/book.js), the pages of this language's PDF (magazinePages.json, made by scripts/magazine.mjs) and the
-    whole text below, from the same source as the print (magazine.js). Needs issue. -#}
+    book (js/book.js), with the pages alive, the same markup as the print (print/magazine-pages.njk, styled by
+    /magazine-pages.css), the cover as a picture in the hero (magazinePages.json, made by scripts/magazine.mjs) and
+    the whole text below, from the same source as the print (magazine.js). Needs issue. -#}
 {%- set lang = lang or "en" -%}
 {%- set m = issue[lang] -%}
 {%- set L = magazine.labels[lang] -%}
@@ -25,7 +26,7 @@
       <p class="lede">{{ m.themeSub }}. {{ m.trend.lead }}</p>
       <dl class="book-facts">
         <div><dt>{{ L.issue }}</dt><dd>{{ issue.number }}</dd></div>
-        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ reader.pageCount }}</dd></div>
+        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ issue.pageCount }}</dd></div>
         <div><dt>{{ "Languages" | t(lang) }}</dt><dd>{{ magazine.langs | length }}</dd></div>
       </dl>
       <div class="hero-actions">
@@ -42,10 +43,8 @@
   <section class="book-stage" id="reader" aria-label="{{ 'The issue, page by page' | t(lang) }}">
     <div class="book-reader is-dark" data-book data-slug="{{ issue.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
       <div class="book-viewport">
-        <div class="book" data-book-pages>
-          {%- for page in reader.pages %}
-          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}"{{ page | pageSrcset | safe }} width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
-          {%- endfor %}
+        <div class="book mz" data-book-pages>
+          {%- include "print/magazine-pages.njk" %}
         </div>
       </div>
 
@@ -54,7 +53,7 @@
         <div class="book-status">
           <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
           <p class="book-chapter" data-book-chapter></p>
-          <input class="book-scrub" type="range" min="1" max="{{ reader.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
+          <input class="book-scrub" type="range" min="1" max="{{ issue.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
         </div>
         <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         <div class="book-tools">
@@ -128,7 +127,7 @@
         <h2>{{ m.contents[3][1] }}</h2>
         <p>{{ m.essays.intro }}</p>
         <ol>
-          {%- for essay in collections["insights" + (lang | langSuffix)] %}{% set day = essay.date | isoDate %}{% if day >= issue.essays.from and day <= issue.essays.to %}
+          {%- for essay in collections["insights" + (lang | langSuffix)] %}{% set day = essay.date | isoDate %}{% if day >= issue.essays.from and day <= issue.essays.to and (not issue.essays.series or (essay.data.series or "ten-years") == issue.essays.series) %}
           <li><a href="{{ essay.url }}">{{ essay.data.title }}</a></li>
           {%- endif %}{% endfor %}
         </ol>

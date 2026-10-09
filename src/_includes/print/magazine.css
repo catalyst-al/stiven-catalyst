@@ -1,0 +1,96 @@
+/* The page design of the magazine "Nga terreni" (src/guide-print/magazine.njk prints it, pages/magazine-issue.njk
+   shows the same pages alive). Every rule is scoped to .mz .pg, after a reset that keeps the site's styles out of a
+   page, as print/review-base.css does for the Management Review; the fonts come from variables (print/print-head.css
+   for the PDF, print/live-pages.css for the site). */
+.mz { --paper: #060a10; --ink: #f6f7f4; --body: #d5dbe0; --muted: #a5b0b8; --line: rgba(255,255,255,.12); --blue: #4ab5f7; --gold: #d1a553; }
+.mz .pg, .mz .pg *:not(svg *) { all: revert; box-sizing: border-box; margin: 0; padding: 0; }
+.mz { font-family: var(--mr-sans); color: var(--body); font-size: 9pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.mz .pg { width: 148mm; height: 210mm; position: relative; overflow: hidden; break-after: page; padding: 18mm 13mm 17mm; background: radial-gradient(120mm 70mm at 50% -18mm, rgba(74,181,247,.12), transparent 70%), var(--paper); }
+.mz .pg .run { position: absolute; top: 8.5mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mz .pg .run-section { color: var(--blue); }
+.mz .pg .foot { position: absolute; bottom: 8mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--muted); border-top: .25mm solid var(--line); padding-top: 2.2mm; }
+.mz .pg .foot .num { color: var(--ink); font-weight: 600; }
+.mz .pg .kicker { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--blue); margin-bottom: 2.4mm; }
+.mz .pg h1, .mz .pg h2, .mz .pg h3 { color: var(--ink); font-weight: 400; }
+.mz .pg h2 { font-family: var(--mr-display); font-size: 20pt; line-height: 1.06; margin-bottom: 3.5mm; letter-spacing: -.01em; }
+.mz .pg h3 { font-weight: 700; font-size: 9.4pt; margin: 3.2mm 0 1.2mm; }
+.mz .pg p { margin-bottom: 2.4mm; }
+.mz .pg .lead { font-family: var(--mr-serif); font-style: italic; font-size: 11pt; line-height: 1.45; color: var(--ink); margin-bottom: 4mm; }
+.mz .pg .serif { font-family: var(--mr-serif); }
+
+/* Cover */
+.mz .pg.cover { padding: 14mm 13mm 13mm; display: flex; flex-direction: column; background: radial-gradient(130mm 90mm at 85% 62%, rgba(74,181,247,.16), transparent 70%), radial-gradient(120mm 70mm at 50% -18mm, rgba(74,181,247,.12), transparent 70%), var(--paper); }
+.mz .pg .mast { display: flex; justify-content: space-between; align-items: baseline; border-bottom: .3mm solid var(--line); padding-bottom: 2.6mm; font-size: 6.8pt; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mz .pg .mast b { color: var(--ink); }
+.mz .pg .masthead { font-family: var(--mr-display); font-size: 41pt; line-height: .95; color: var(--ink); letter-spacing: -.02em; margin-top: 5mm; text-transform: uppercase; }
+.mz .pg .tagline { margin-top: 2.4mm; font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+.mz .pg .cover-stat { margin-top: auto; }
+.mz .pg .cover-stat .n { font-family: var(--mr-display); font-size: 84pt; line-height: .9; color: var(--blue); letter-spacing: -.03em; }
+.mz .pg .cover-stat .t { font-size: 9pt; color: var(--body); max-width: 92mm; margin-top: 3mm; }
+.mz .pg .cover-theme { margin-top: 9mm; border-top: .3mm solid var(--line); padding-top: 4mm; }
+.mz .pg .cover-theme .k { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.mz .pg .cover-theme .t { font-family: var(--mr-serif); font-size: 22pt; line-height: 1.1; color: var(--ink); margin-top: 1.5mm; }
+.mz .pg .cover-theme .s { font-family: var(--mr-serif); font-style: italic; font-size: 12pt; color: var(--body); margin-top: 1mm; }
+.mz .pg .cover-foot { margin-top: 6mm; display: flex; justify-content: space-between; font-size: 7pt; color: var(--muted); }
+
+/* Contents */
+.mz .pg .toc { list-style: none; margin-top: 4mm; counter-reset: c; }
+.mz .pg .toc li { display: grid; grid-template-columns: 9mm 1fr 8mm; gap: 2mm; padding: 3.2mm 0; border-bottom: .25mm solid var(--line); align-items: baseline; }
+.mz .pg .toc .n { font-family: var(--mr-display); color: var(--blue); font-size: 12pt; }
+.mz .pg .toc .k { display: block; font-size: 6.4pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: .8mm; }
+.mz .pg .toc .t { color: var(--ink); font-size: 10pt; font-weight: 500; }
+.mz .pg .toc .p { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.mz .pg .colophon { position: absolute; left: 13mm; right: 13mm; bottom: 20mm; font-size: 7pt; color: var(--muted); border-left: .6mm solid var(--line); padding-left: 3mm; }
+
+/* Trend */
+.mz .pg .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm; margin: 1mm 0 4mm; }
+.mz .pg .stat { border: .25mm solid var(--line); border-radius: 2.5mm; padding: 2.6mm 3mm; background: rgba(255,255,255,.035); }
+.mz .pg .stat b { display: block; font-family: var(--mr-display); font-weight: 400; font-size: 15pt; color: var(--blue); line-height: 1.05; }
+.mz .pg .stat span { display: block; font-size: 7.2pt; color: var(--body); margin-top: 1mm; line-height: 1.35; }
+.mz .pg .part h3 { color: var(--ink); }
+.mz .pg .meaning { margin-top: 4mm; border-left: .9mm solid var(--blue); padding: 1mm 0 1mm 3.5mm; }
+.mz .pg .meaning h3 { margin-top: 0; color: var(--blue); }
+.mz .pg .meaning p { color: var(--ink); margin: 0; }
+
+/* From the floor */
+.mz .pg .byline { font-size: 7.8pt; color: var(--muted); margin-bottom: 3.5mm; }
+.mz .pg .qa .q { font-weight: 700; color: var(--blue); font-size: 8.8pt; margin: 3mm 0 1.2mm; }
+.mz .pg .qa .q:first-child { margin-top: 0; }
+.mz .pg .qa p { font-size: 8.8pt; }
+.mz .pg .pull { margin-top: 5mm; font-family: var(--mr-serif); font-size: 11.8pt; line-height: 1.45; color: var(--ink); border-top: .3mm solid var(--line); padding-top: 4mm; }
+.mz .pg .pull::before { content: "“"; display: block; font-family: var(--mr-display); color: var(--blue); font-size: 30pt; line-height: .6; margin-bottom: 1mm; }
+.mz .pg .sign { margin-top: 2.5mm; font-size: 7.6pt; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+/* Tool */
+.mz .pg .tool-name { font-family: var(--mr-display); font-size: 22pt; color: var(--ink); line-height: 1.05; margin-bottom: 1.5mm; }
+.mz .pg .tool-meta { font-size: 7pt; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4mm; }
+.mz .pg .formula { list-style: none; display: grid; gap: 1.6mm; margin: 2mm 0 5mm; }
+.mz .pg .formula li { display: flex; align-items: center; gap: 2.5mm; font-size: 9.4pt; color: var(--ink); }
+.mz .pg .formula li span { width: 5.4mm; height: 5.4mm; border-radius: 50%; border: .3mm solid var(--blue); color: var(--blue); display: grid; place-items: center; font-size: 6.6pt; font-weight: 700; flex: none; }
+.mz .pg .formula.alert li:first-child { color: #ff8a8e; font-weight: 600; }
+.mz .pg .formula.alert li:first-child span { border-color: #ff8a8e; color: #ff8a8e; }
+.mz .pg .essays .why { display: block; color: var(--muted); font-size: 7.6pt; margin-top: .4mm; }
+.mz .pg .big-quote { font-family: var(--mr-serif); font-size: 13pt; line-height: 1.4; color: var(--ink); border-left: .9mm solid var(--blue); padding-left: 4mm; margin-bottom: 5mm; }
+.mz .pg .open { position: absolute; left: 13mm; right: 13mm; bottom: 19mm; display: flex; justify-content: space-between; align-items: center; background: rgba(74,181,247,.1); border: .25mm solid rgba(74,181,247,.4); border-radius: 2.5mm; padding: 2.4mm 3.4mm; font-size: 7.8pt; }
+.mz .pg .open b { color: var(--blue); font-weight: 600; }
+.mz .pg .open span { color: var(--ink); }
+
+/* Essays */
+.mz .pg .essays { list-style: none; counter-reset: e; margin: 2mm 0 4mm; }
+.mz .pg .essays li { counter-increment: e; display: grid; grid-template-columns: 7mm 1fr; gap: 1.5mm; padding: 1.35mm 0; border-bottom: .2mm solid rgba(255,255,255,.08); font-size: 8.3pt; color: var(--ink); line-height: 1.35; }
+.mz .pg .essays li::before { content: counter(e, decimal-leading-zero); color: var(--blue); font-weight: 700; font-size: 7.4pt; padding-top: .3mm; }
+.mz .pg .note { font-size: 8pt; color: var(--muted); }
+
+/* Question and sources */
+.mz .pg .question { font-family: var(--mr-serif); font-size: 15pt; line-height: 1.35; color: var(--ink); margin: 2mm 0 7mm; }
+.mz .pg .sources { list-style: none; border-top: .25mm solid var(--line); padding-top: 3mm; }
+.mz .pg .sources li { font-size: 7pt; line-height: 1.4; margin-bottom: 2.2mm; color: var(--body); }
+.mz .pg .sources li i { font-style: normal; color: var(--muted); word-break: break-all; display: block; font-size: 6.2pt; }
+
+/* Back */
+.mz .pg.back { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.mz .pg.back .masthead { font-size: 30pt; margin: 0; }
+.mz .pg.back .tagline { margin-bottom: 9mm; }
+.mz .pg.back p { color: var(--body); }
+.mz .pg.back .url { color: var(--blue); font-weight: 600; font-size: 10pt; }
+.mz .pg.back .edition { position: absolute; left: 0; right: 0; bottom: 12mm; font-size: 7pt; color: var(--muted); }

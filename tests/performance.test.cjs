@@ -40,7 +40,7 @@ test('every page of the online readers has a sharp copy twice as wide', () => {
   ];
   assert.ok(lists.length >= 20, `found ${lists.length} readers`);
   for (const [name, pages] of lists) {
-    // The Management Review (the issues and the special edition) keeps only its cover as a picture: its pages are alive.
+    // The Management Review, the magazine and the Tools Guide keep only their covers as pictures: their pages are alive.
     assert.ok(pages.length >= 1, name);
     for (const page of pages) {
       const hint = `${name}, page ${page.number}: run scripts/guide-pages.py or scripts/book-pages.py`;
@@ -50,17 +50,20 @@ test('every page of the online readers has a sharp copy twice as wide', () => {
       assert.ok(fs.existsSync(path.join('src', page.image)), `${hint} (${page.image})`);
     }
   }
-  for (const reader of ['book', 'guide', 'magazine-issue']) {
+  for (const reader of ['book']) {
     const template = fs.readFileSync(`src/_includes/pages/${reader}.njk`, 'utf8');
     assert.match(template, /\| pageSrcset \| safe/, `${reader}.njk: the page images need their srcset`);
     assert.match(template, /data-book-zoom/, `${reader}.njk: the zoom button`);
     assert.match(template, /data-book-view data-one="[^"]+" data-two="[^"]+"/, `${reader}.njk: the button for one large page or two pages`);
   }
-  // The Management Review shows its pages alive, the same markup as the print (tests/review-pages.test.cjs), with the
-  // same controls.
-  for (const reader of ['review', 'weekly-issue']) {
+  // The Management Review, the magazine and the Tools Guide show their pages alive, the same markup as the print
+  // (tests/live-pages.test.cjs), with the same controls.
+  for (const reader of ['review', 'weekly-issue', 'magazine-issue', 'guide']) {
     const template = fs.readFileSync(`src/_includes/pages/${reader}.njk`, 'utf8');
-    assert.match(template, /class="book-page is-live"/, `${reader}.njk: live pages`);
+    // The wrapper of a page is in the reader (the Management Review) or in the partial it includes (the magazine, the guide).
+    const partial = template.match(/\{%-? include "print\/([a-z-]+)\.njk" %\}/)?.[1];
+    const markup = template + (partial ? fs.readFileSync(`src/_includes/print/${partial}.njk`, 'utf8') : '');
+    assert.match(markup, /class="book-page is-live"/, `${reader}.njk: live pages`);
     assert.doesNotMatch(template, /pageSrcset/, `${reader}.njk: no page pictures`);
     assert.match(template, /data-book-zoom/, `${reader}.njk: the zoom button`);
     assert.match(template, /data-book-view data-one="[^"]+" data-two="[^"]+"/, `${reader}.njk: the button for one large page or two pages`);

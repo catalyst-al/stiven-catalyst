@@ -7,7 +7,7 @@ import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
 import { searchIndex } from "./lib/search-index.js";
-import { reviewPagesCss, clearReviewCss } from "./lib/review-css.js";
+import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -261,10 +261,11 @@ export default function (eleventyConfig) {
   const READER_SIZES = "(min-width: 900px) min(calc(100vw - 32px), 1000px), min(calc(100vw - 32px), max(280px, calc((100vh - 230px) * .705)))";
   eleventyConfig.addFilter("pageSrcset", (page) =>
     page && page.large ? ` srcset="${page.image} ${page.width}w, ${page.large} ${page.largeWidth}w" sizes="${READER_SIZES}"` : "");
-  // The stylesheet of the Management Review's live pages (lib/review-css.js): its text, for src/review-pages.njk,
-  // and its address with a version, for the pages that load it.
-  eleventyConfig.addFilter("reviewCss", () => reviewPagesCss().css);
-  eleventyConfig.addFilter("reviewCssUrl", () => reviewPagesCss().url);
+  // The stylesheets of the live pages (lib/live-pages.js): the text of each, for src/live-pages.njk, and the
+  // address with a version, for the reader pages that load it (livePages in their front matter).
+  eleventyConfig.addGlobalData("livePageSheets", Object.entries(LIVE_PAGES).map(([name, sheet]) => ({ name, path: sheet.path })));
+  eleventyConfig.addFilter("livePagesCss", (name) => livePagesCss(name).css);
+  eleventyConfig.addFilter("livePagesUrl", (name) => livePagesCss(name).url);
   eleventyConfig.addFilter("toolPreview", (url, lang) => {
     const slug = String(url || "").replace(/^\/(de|sq)(?=\/)/, "").match(/^\/tools\/([^/]+)\/$/)?.[1];
     const file = slug && `/media/tools/${TRANSLATED.has(lang) ? lang : "en"}/${slug}.jpg`;
@@ -282,7 +283,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
   eleventyConfig.addWatchTarget("src/_data/sq/");
-  eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); imageSizes.clear(); clearReviewCss(); });
+  eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); imageSizes.clear(); clearLivePages(); });
   // A minified stylesheet, and a lighter one for the pages that are not tools (lib/css-split.js).
   eleventyConfig.on("eleventy.after", ({ dir }) => splitStylesheet(dir?.output || "_site"));
   // Letter pairs that would touch in the tight display titles get their space (lib/display-pairs.js).
