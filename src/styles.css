@@ -3502,7 +3502,7 @@ html:not(.js) .filter-bar { display: none; }
   width: min(100%, 560px);
 }
 .book-page { margin: 0; }
-.book-page img {
+.book-page > img {
   width: 100%;
   height: auto;
   background: #fbfaf6;
@@ -3563,8 +3563,8 @@ html:not(.js) .filter-bar { display: none; }
 .book-face:empty { display: none; }
 .book-face.is-back { transform: rotateY(180deg); }
 .book-face .book-page,
-.book-face .book-page img { width: 100%; height: 100%; box-shadow: none; }
-.book-face .book-page img { object-fit: cover; pointer-events: none; }
+.book-face .book-page > img { width: 100%; height: 100%; box-shadow: none; }
+.book-face .book-page > img { object-fit: cover; pointer-events: none; }
 /* The fold: pages darken towards the spine. */
 .book-face::after {
   content: "";
@@ -3603,7 +3603,8 @@ html:not(.js) .filter-bar { display: none; }
 .book-edge.is-left { right: 100%; --n: var(--left-stack); }
 .book-edge.is-right { left: 100%; --n: var(--right-stack); }
 /* The magazines, the Management Review and the Tools Guide are printed on dark paper: their page edges, and the
-   pages while they load, are dark too. */
+   pages while they load, are dark too. (The pages of the Management Review are alive, not pictures: their own
+   stylesheet, /review-pages.css, scales them to the book; see src/_includes/print/review-web.css.) */
 .book-reader.is-dark .book-edge { background: repeating-linear-gradient(90deg, #27313b 0 1px, #0b1117 1px 2px); }
 .book-reader.is-dark .book-face,
 .book-reader.is-dark .book-page,

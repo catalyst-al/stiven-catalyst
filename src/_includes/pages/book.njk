@@ -28,7 +28,7 @@
       </div>
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ 'Open the book' | t(lang) }}">
-      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
+      <span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 900px) min(calc(100vw - 32px), 360px), 360px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
     </a>
   </section>
 

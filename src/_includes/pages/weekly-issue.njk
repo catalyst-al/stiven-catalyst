@@ -1,7 +1,8 @@
-{#- One issue of the weekly Management Review in its reader, shared by the three languages: the page-turning
-    reader of the book (js/book.js) with the pages of this language's PDF (magazinePages.json, made by
-    scripts/weekly.mjs), the charts of the issue drawn again and moving in (js/weekly.js), and the whole text,
-    from the same source as the print (weekly.js). Needs issue. -#}
+{#- One issue of the monthly Management Review in its reader, shared by the three languages: the page-turning
+    reader of the book (js/book.js) with the pages of the issue alive, the same markup as the print
+    (print/weekly-page.njk, styled by /review-pages.css), so their text is drawn sharp at any size; the cover as a
+    picture in the hero (magazinePages.json, made by scripts/weekly.mjs); the charts of the issue drawn again and
+    moving in (js/weekly.js); and the whole text, from the same source as the print (weekly.js). Needs issue. -#}
 {%- set lang = lang or "en" -%}
 {%- set I = issue[lang] -%}
 {%- set W = weekly[lang] -%}
@@ -21,12 +22,12 @@
 } -%}
   <section class="shell book-hero">
     <div class="book-hero-copy">
-      <p class="eyebrow">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }}</p>
+      <p class="eyebrow">{{ W.name }} · {{ L.edition }} · {{ I.date }} · {{ L.no }} {{ issue.no }}</p>
       <h1>{{ I.heading }}</h1>
       <p class="lede">{{ I.sub }}</p>
       <dl class="book-facts">
         <div><dt>{{ L.no }}</dt><dd>{{ issue.no }}</dd></div>
-        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ reader.pageCount }}</dd></div>
+        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ issue.pageCount }}</dd></div>
         <div><dt>{{ L.sources }}</dt><dd>{{ issue.sources | length }}</dd></div>
         <div><dt>{{ L.blocks }}</dt><dd>{{ I.blockName }}</dd></div>
       </dl>
@@ -37,16 +38,19 @@
       </div>
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ L.open_issue }}">
-      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
+      <span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 900px) min(calc(100vw - 32px), 360px), 360px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
     </a>
   </section>
 
   <section class="book-stage" id="reader" aria-label="{{ L.page_by_page }}">
     <div class="book-reader is-dark" data-book data-slug="{{ issue.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
       <div class="book-viewport">
-        <div class="book" data-book-pages>
-          {%- for page in reader.pages %}
-          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}"{{ page | pageSrcset | safe }} width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+        <div class="book mr" data-book-pages>
+          {%- for page in I.pages %}
+          {%- set n = loop.index %}
+          <div class="book-page is-live" data-page="{{ n }}">
+            {%- include "print/weekly-page.njk" %}
+          </div>
           {%- endfor %}
         </div>
       </div>
@@ -56,7 +60,7 @@
         <div class="book-status">
           <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
           <p class="book-chapter" data-book-chapter></p>
-          <input class="book-scrub" type="range" min="1" max="{{ reader.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
+          <input class="book-scrub" type="range" min="1" max="{{ issue.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
         </div>
         <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         <div class="book-tools">
@@ -168,7 +172,7 @@
 {%- set older = weekly.issues | where("number", issue.number - 1) %}
 {%- set newer = weekly.issues | where("number", issue.number + 1) %}
   <section class="shell issue-more" id="more-issues" aria-labelledby="more-issues-title">
-    <p class="kicker">{{ W.name }} · {{ L.weekly }}</p>
+    <p class="kicker">{{ W.name }} · {{ L.edition }}</p>
     <h2 id="more-issues-title">{{ "Read another issue" | t(lang) }}</h2>
     {%- if older or newer %}
     <div class="issue-more-list">

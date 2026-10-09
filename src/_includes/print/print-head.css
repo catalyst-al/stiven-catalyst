@@ -1,0 +1,12 @@
+/* What only the printed Management Review needs (src/guide-print/review.njk, src/guide-print/weekly.njk): the fonts by
+   their files, the paper size, the dark page behind the pages, and the three font families the scoped stylesheets
+   (print/review-base.css, print/weekly.css) take from variables. The site sets the same variables in
+   print/review-web.css, with the fonts it serves itself. */
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Inter"; src: url("/guide-fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Archivo Black"; src: url("/fonts/archivo-black-latin-400-normal.woff2") format("woff2"); }
+@page { size: 148mm 210mm; margin: 0; }
+html, body { margin: 0; padding: 0; background: #060a10; }
+.mr { --mr-sans: "Inter", sans-serif; --mr-display: "Archivo Black", sans-serif; --mr-serif: Georgia, serif; }

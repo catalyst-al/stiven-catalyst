@@ -1,14 +1,14 @@
-{#- Publications: the weekly Management Review, the monthly magazine, the book and the Tools Guide, in the three
+{#- Publications: the monthly Management Review, the magazine, the book and the Tools Guide, in the three
     languages. -#}
   <section class="shell page-hero publications-hero">
-    <p class="eyebrow">{{ "Books, guides, a weekly review and a monthly magazine" | t(lang) }}</p>
+    <p class="eyebrow">{{ "Books, guides, a monthly review and a magazine from the floor" | t(lang) }}</p>
     {%- set pubTitle = "Publications" | t(lang) %}
     {#- "Publications" and "Publikationen" are wider than a phone at the full hero size. #}
     <h1{% if pubTitle | length > 10 %} class="hero-long"{% endif %}>{{ pubTitle }}</h1>
-    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every week a review of the best management research, and every month a magazine from the floor." | t(lang) }}</p>
+    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every month a review of the best management research in several issues, and a magazine from the floor." | t(lang) }}</p>
   </section>
 {%- set ml = lang or "en" %}
-{#- The weekly Management Review: its newest issue, and the way to all of them. -#}
+{#- The monthly Management Review: its newest issue, and the way to all of them. -#}
 {%- set WK = weekly[ml] %}
 {%- set wk = weekly.latest %}
 {%- set wkUrl = ("/magazine/" + wk.slug + ".html") | local(lang) %}
@@ -18,7 +18,7 @@
       <span class="book-object-cover"><img src="{{ wkCover.image }}" srcset="{{ wkCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ wkCover.width }}" height="{{ wkCover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
-      <p class="kicker">{{ weekly.name }} · {{ WK.labels.weekly }} · {{ WK.labels.no }} {{ wk.no }} · {{ wk[ml].date }}</p>
+      <p class="kicker">{{ weekly.name }} · {{ WK.labels.edition }} · {{ wk[ml].date }} · {{ WK.labels.no }} {{ wk.no }}</p>
       <h2><a href="{{ wkUrl }}">{{ wk[ml].heading }}</a></h2>
       <p class="book-subtitle">{{ WK.tagline }}</p>
       <p>{{ wk[ml].feature }}</p>
@@ -45,7 +45,7 @@
     </div>
   </section>
 {%- endfor %}
-{#- The Management Review of September 2026: the special edition before the weekly one. -#}
+{#- The Management Review of September 2026: the special edition before the monthly one. -#}
 {%- set R = review[ml] %}
 {%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}
 {%- set reviewCover = magazinePages[review.slug][ml].pages[0] %}

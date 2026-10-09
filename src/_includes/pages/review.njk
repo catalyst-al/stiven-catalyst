@@ -1,6 +1,7 @@
-{#- The Management Review in its reader, shared by the three languages: the same page-turning reader as the book
-    (js/book.js), the pages of this language's PDF (magazinePages.json, made by scripts/review.mjs) and the whole
-    text below, from the same source as the print (review.js). -#}
+{#- The Management Review of September 2026 in its reader, shared by the three languages: the same page-turning
+    reader as the book (js/book.js), with the pages alive, the same markup as the print (print/review-page.njk, styled
+    by /review-pages.css), the cover as a picture in the hero (magazinePages.json, made by scripts/review.mjs) and the
+    whole text below, from the same source as the print (review.js). -#}
 {%- set lang = lang or "en" -%}
 {%- set R = review[lang] -%}
 {%- set L = R.labels -%}
@@ -22,7 +23,7 @@
       <h1>{{ R.theme }}</h1>
       <p class="lede">{{ R.sub }} {{ R.tagline }}</p>
       <dl class="book-facts">
-        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ reader.pageCount }}</dd></div>
+        <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ review.pageCount }}</dd></div>
         <div><dt>{{ L.sources }}</dt><dd>{{ review.sources | length }}</dd></div>
         <div><dt>{{ "Languages" | t(lang) }}</dt><dd>{{ review.langs | length }}</dd></div>
       </dl>
@@ -33,16 +34,19 @@
       </div>
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ L.open_edition }}">
-      <span class="book-object-cover"><img src="{{ cover.image }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
+      <span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 900px) min(calc(100vw - 32px), 360px), 360px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
     </a>
   </section>
 
   <section class="book-stage" id="reader" aria-label="{{ L.page_by_page }}">
     <div class="book-reader is-dark" data-book data-slug="{{ review.slug }}-{{ lang }}" data-labels="{{ labels | dump }}">
       <div class="book-viewport">
-        <div class="book" data-book-pages>
-          {%- for page in reader.pages %}
-          <figure class="book-page" data-page="{{ page.number }}"><img src="{{ page.image }}"{{ page | pageSrcset | safe }} width="{{ page.width }}" height="{{ page.height }}" alt="{{ 'Page {n}' | t(lang) | replace('{n}', page.number) }}" loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async" draggable="false"></figure>
+        <div class="book mr" data-book-pages>
+          {%- for page in R.pages %}
+          {%- set n = loop.index %}
+          <div class="book-page is-live" data-page="{{ n }}">
+            {%- include "print/review-page.njk" %}
+          </div>
           {%- endfor %}
         </div>
       </div>
@@ -52,7 +56,7 @@
         <div class="book-status">
           <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
           <p class="book-chapter" data-book-chapter></p>
-          <input class="book-scrub" type="range" min="1" max="{{ reader.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
+          <input class="book-scrub" type="range" min="1" max="{{ review.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
         </div>
         <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         <div class="book-tools">

@@ -1,4 +1,4 @@
-// The weekly Management Review (lib/weekly, src/_data/weekly.js): every issue has its ten pages in the three
+// The monthly Management Review (lib/weekly, src/_data/weekly.js): every issue has its ten pages in the three
 // languages, every figure names a source that exists, the charts are drawn for print and for phones, and the
 // printed issue (scripts/weekly.mjs) is there for the reader.
 const test = require('node:test');
@@ -128,7 +128,7 @@ test('the teasers of the cover point at pages of the issue, and the essays it li
   }
 });
 
-test('every issue is printed: its PDF, its ten page images and its preview in every language', async () => {
+test('every issue is printed: its PDF, its cover and its preview in every language', async () => {
   const weekly = await load();
   const pages = JSON.parse(fs.readFileSync('src/_data/magazinePages.json', 'utf8'));
   for (const issue of weekly.issues) {
@@ -136,7 +136,9 @@ test('every issue is printed: its PDF, its ten page images and its preview in ev
       const hint = `${issue.slug} ${lang}: run node scripts/weekly.mjs ${issue.number}`;
       const entry = pages[issue.slug] && pages[issue.slug][lang];
       assert.ok(entry && entry.pageCount === 10, hint);
-      for (const page of entry.pages) assert.ok(fs.existsSync(path.join('src', page.image)), `${hint} (${page.image})`);
+      // The reader shows the pages alive; only the cover is kept as a picture, for the hero, the lists and the preview.
+      assert.equal(entry.pages.length, 1, hint);
+      assert.ok(fs.existsSync(path.join('src', entry.pages[0].image)), `${hint} (${entry.pages[0].image})`);
       assert.ok(fs.existsSync(`src/media/magazine/${issue.slug}/${issue.slug}-${lang}.pdf`), hint);
       assert.ok(fs.existsSync(`src/media/magazine/${issue.slug}/${lang}/social.jpg`), hint);
     }
@@ -154,6 +156,9 @@ test('each issue has its page in each language, with the reader, the charts and 
     for (const lang of LANGS) {
       const html = built(`${lang === 'en' ? '' : `${lang}/`}magazine/${issue.slug}.html`);
       assert.match(html, /data-book-pages/, `${issue.slug} ${lang}: reader`);
+      assert.equal((html.match(/class="book-page is-live"/g) || []).length, 10, `${issue.slug} ${lang}: ten live pages`);
+      assert.equal((html.match(/<section class="pg/g) || []).length, 10, `${issue.slug} ${lang}: ten printed pages`);
+      assert.match(html, /<link rel="stylesheet" href="\/review-pages\.css\?v=[0-9a-f]{10}">/, `${issue.slug} ${lang}: the stylesheet of the pages`);
       assert.equal((html.match(/data-weekly-chart/g) || []).length, issue[lang].charts.length, `${issue.slug} ${lang}: charts`);
       assert.ok(html.includes(escaped(issue[lang].heading)), `${issue.slug} ${lang}: title`);
       assert.ok(html.includes(`/media/magazine/${issue.slug}/${issue.slug}-${lang}.pdf`), `${issue.slug} ${lang}: PDF`);
