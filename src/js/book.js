@@ -1,6 +1,8 @@
-// The book reader: pages that turn like paper. On a wide screen the book lies
-// open on two pages; on a phone it shows one page at a time. Without this
-// script the pages simply follow each other down the page.
+// The book reader: pages that turn like paper. On a wide screen it shows one
+// large page at a time, at a size the small print can be read at, and the
+// reader can lay the book open on two pages instead; on a phone it shows one
+// page at a time. Without this script the pages simply follow each other down
+// the page.
 (() => {
   const reader = document.querySelector("[data-book]");
   const book = reader?.querySelector("[data-book-pages]");
@@ -12,6 +14,7 @@
   const total = pages.length;
   const storageKey = `sc-book-${reader.dataset.slug}`;
   const wide = window.matchMedia("(min-width: 900px)");
+  const viewKey = "sc-book-view";
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
   const TURN = 900; // ms for one page
   const FAST = 520; // ms for each page when leafing through many
@@ -29,6 +32,10 @@
   let sheets = []; // { el, index, turned, shown, busy }
   let turned = 0;  // sheets already turned to the left
   let spread = false;
+  let large = false; // one large page on a wide screen
+  // On a wide screen the reader chooses: one large page (the default) or two pages side by side.
+  let two = false;
+  try { two = localStorage.getItem(viewKey) === "two"; } catch { /* storage unavailable */ }
 
   const faceList = () => (spread && total % 2 === 1 ? [...pages.slice(0, -1), endpaper, pages[total - 1]] : pages);
 
@@ -52,7 +59,8 @@
 
   const build = () => {
     const keep = sheets.length ? currentPage() : 1;
-    spread = wide.matches;
+    spread = wide.matches && two;
+    large = wide.matches && !two;
     book.replaceChildren();
     const list = faceList();
     const perSheet = spread ? 2 : 1;
@@ -75,6 +83,12 @@
     }
     reader.classList.toggle("is-spread", spread);
     reader.classList.toggle("is-single", !spread);
+    reader.classList.toggle("is-large", large);
+    const viewButton = $("[data-book-view]");
+    if (viewButton) {
+      viewButton.hidden = !wide.matches;
+      viewButton.textContent = two ? viewButton.dataset.one : viewButton.dataset.two;
+    }
     turned = turnsFor(keep);
     sheets.forEach((sheet) => { sheet.turned = sheet.shown = sheet.index < turned; });
     render();
@@ -164,6 +178,12 @@
       else setTimeout(start, step * STAGGER);
     });
     remember();
+    toTop();
+  };
+
+  // A large page is taller than the window: after a turn the new page starts at its top.
+  const toTop = () => {
+    if (large && book.getBoundingClientRect().top < 0) book.scrollIntoView({ behavior: calm.matches ? "auto" : "smooth", block: "start" });
   };
 
   const goToPage = (number) => turnTo(turnsFor(number));
@@ -221,6 +241,16 @@
     });
   });
 
+  // One large page or two pages side by side, on a wide screen.
+  $("[data-book-view]")?.addEventListener("click", () => {
+    two = !two;
+    try { localStorage.setItem(viewKey, two ? "two" : "one"); } catch { /* storage unavailable */ }
+    build();
+    // The book changes size: bring it back into view, the large page from its top.
+    const box = book.getBoundingClientRect();
+    if (box.top < 0 || box.bottom > innerHeight) book.scrollIntoView({ behavior: calm.matches ? "auto" : "smooth", block: large ? "start" : "center" });
+  });
+
   // Full screen, where the browser allows it.
   const fullButton = $("[data-book-fullscreen]");
   if (document.fullscreenEnabled && reader.requestFullscreen) {
@@ -275,11 +305,14 @@
 
   // The arrow keys turn pages while the book is on screen.
   let onScreen = false;
-  new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; }, { threshold: 0.35 }).observe(book);
+  new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; }, { threshold: 0.15 }).observe(book);
   document.addEventListener("keydown", (event) => {
     if (!onScreen || zoom?.open || event.altKey || event.ctrlKey || event.metaKey) return;
     if (event.target.closest("input, textarea, select, [contenteditable]")) return;
-    const keys = { ArrowRight: next, PageDown: next, ArrowLeft: prev, PageUp: prev, Home: () => turnTo(0), End: () => turnTo(sheets.length) };
+    // A large page is read by scrolling, so there Page Up, Page Down, Home and End keep scrolling.
+    const keys = large
+      ? { ArrowRight: next, ArrowLeft: prev }
+      : { ArrowRight: next, PageDown: next, ArrowLeft: prev, PageUp: prev, Home: () => turnTo(0), End: () => turnTo(sheets.length) };
     if (event.key === "Escape" && !contents.hidden) { setContents(false); tocButton.focus(); return; }
     if (!keys[event.key]) return;
     event.preventDefault();

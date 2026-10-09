@@ -256,8 +256,8 @@ export default function (eleventyConfig) {
   });
   // The two sizes of a reader page (scripts/page_images.py): on a high-density or a large screen the browser takes
   // the 2000 px picture, so the text is never enlarged from a smaller one. The sizes follow the reader (js/book.js,
-  // styles.css): two pages side by side from 900 px, each as wide as the height of the window allows.
-  const READER_SIZES = "(min-width: 900px) min(calc(50vw - 16px), max(320px, calc((100vh - 200px) * .705))), min(calc(100vw - 32px), max(280px, calc((100vh - 230px) * .705)))";
+  // styles.css): from 900 px one large page up to 1000 px wide, below that one page as wide as the window allows.
+  const READER_SIZES = "(min-width: 900px) min(calc(100vw - 32px), 1000px), min(calc(100vw - 32px), max(280px, calc((100vh - 230px) * .705)))";
   eleventyConfig.addFilter("pageSrcset", (page) =>
     page && page.large ? ` srcset="${page.image} ${page.width}w, ${page.large} ${page.largeWidth}w" sizes="${READER_SIZES}"` : "");
   eleventyConfig.addFilter("toolPreview", (url, lang) => {

@@ -53,7 +53,12 @@ test('every page of the online readers has a sharp copy twice as wide', () => {
     const template = fs.readFileSync(`src/_includes/pages/${reader}.njk`, 'utf8');
     assert.match(template, /\| pageSrcset \| safe/, `${reader}.njk: the page images need their srcset`);
     assert.match(template, /data-book-zoom/, `${reader}.njk: the zoom button`);
+    assert.match(template, /data-book-view data-one="[^"]+" data-two="[^"]+"/, `${reader}.njk: the button for one large page or two pages`);
   }
+  // On a wide screen the reader opens one page 1000 px wide (js/book.js, styles.css), so the small print is read at
+  // its own size; the sizes the browser picks the picture by say the same, so above 1x it takes the 2000 px copy.
+  assert.match(fs.readFileSync('src/styles.css', 'utf8'), /\.js \.book-reader\.is-large \.book \{\s*width: min\(100%, 1000px\);/);
+  assert.match(fs.readFileSync('eleventy.config.js', 'utf8'), /\(min-width: 900px\) min\(calc\(100vw - 32px\), 1000px\)/);
 });
 
 test('the minifier shortens local names but keeps the shared top-level ones', async () => {
