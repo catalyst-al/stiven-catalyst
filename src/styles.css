@@ -3476,6 +3476,7 @@ html:not(.js) .filter-bar { display: none; }
   color-scheme: dark;
   position: relative;
   overflow: hidden;
+  overflow: clip;
   padding: 40px 0 48px;
   background:
     radial-gradient(900px 480px at 50% -5%, rgba(74, 181, 247, .16), transparent 70%),
@@ -3525,6 +3526,13 @@ html:not(.js) .filter-bar { display: none; }
 .js .book-reader.is-spread .book {
   width: min(100%, max(640px, (100svh - 300px) * 1.41));
   aspect-ratio: 2000 / 1419;
+}
+/* On a wide screen: one page at a time, 1000 px wide, so the small print is read at its own size and
+   the 1000 px picture is shown pixel for pixel. The page is taller than the window and is read by
+   scrolling; the controls wait under it, where the reading ends (js/book.js). */
+.js .book-reader.is-large .book {
+  width: min(100%, 1000px);
+  scroll-margin-top: 84px;
 }
 .book.is-closed-front { transform: translateX(-25%); }
 .book.is-closed-back { transform: translateX(25%); }
@@ -3741,6 +3749,7 @@ html:not(.js) .filter-bar { display: none; }
 /* In full screen only the controls stay around the book, so the pages take the rest of the height. */
 .js .book-reader.is-fullscreen .book { width: min(100%, max(280px, (100svh - 230px) * .705)); }
 .js .book-reader.is-fullscreen.is-spread .book { width: min(100%, max(640px, (100svh - 200px) * 1.41)); }
+.js .book-reader.is-fullscreen.is-large .book { width: min(100%, 1000px); scroll-margin-top: 20px; }
 
 /* Zoom: the pages in view at the width of the screen, one under the other (src/js/book.js). */
 .book-zoom {
