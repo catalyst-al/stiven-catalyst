@@ -58,6 +58,16 @@ test('the page stylesheets name their fonts through variables the print and the 
     assert.ok(fs.existsSync(`src/${file}`), `src/${file}`);
   }
   assert.ok(fs.existsSync('src/fonts/Inter-OFL.txt'), 'the licence of Inter');
+  // The serif of the print, Liberation Serif (the measures of Times New Roman), so the lines break as on paper; a
+  // device with Times uses its own copy.
+  for (const face of ['regular', 'italic', 'bold']) {
+    const file = `fonts/liberation-serif-latin-${face}.woff2`;
+    assert.match(web, new RegExp(`/${file}`), `review-web.css: ${file}`);
+    assert.ok(fs.existsSync(`src/${file}`), `src/${file}`);
+  }
+  assert.match(web, /local\("Times New Roman"\)/);
+  assert.ok(fs.existsSync('src/fonts/LiberationSerif-OFL.txt'), 'the licence of Liberation Serif');
+  assert.match(read(path.join(PRINT, 'print-head.css')), /--mr-serif: "Liberation Serif"/);
   assert.match(web, /font-family: "Inter MR"/, 'the web font keeps its own name, so the rest of the site keeps its own sans');
   assert.match(web, /\.book-page\.is-live > \.pg \{[^}]*transform: scale\(var\(--pg-scale/);
 });

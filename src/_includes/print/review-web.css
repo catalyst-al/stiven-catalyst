@@ -6,7 +6,13 @@
 @font-face { font-family: "Inter MR"; src: url("/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "Inter MR"; src: url("/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 @font-face { font-family: "Inter MR"; src: url("/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-.mr { --mr-sans: "Inter MR", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --mr-display: "Archivo Black", "Archivo Black Fallback", sans-serif; --mr-serif: Georgia, "Times New Roman", serif; }
+/* The serif of the pages is the one the PDF is printed with, Liberation Serif, which has the measures of Times New
+   Roman: a device that has Times uses it without a download (local), any other takes the file, so every page breaks
+   its lines exactly as the print does and nothing runs into the block at the foot of a page. */
+@font-face { font-family: "Serif MR"; src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif"), local("LiberationSerif-Regular"), url("/fonts/liberation-serif-latin-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Serif MR"; src: local("Times New Roman Italic"), local("TimesNewRomanPS-ItalicMT"), local("Liberation Serif Italic"), local("LiberationSerif-Italic"), url("/fonts/liberation-serif-latin-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Serif MR"; src: local("Times New Roman Bold"), local("TimesNewRomanPS-BoldMT"), local("Liberation Serif Bold"), local("LiberationSerif-Bold"), url("/fonts/liberation-serif-latin-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+.mr { --mr-sans: "Inter MR", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --mr-display: "Archivo Black", "Archivo Black Fallback", sans-serif; --mr-serif: "Serif MR", "Times New Roman", "Liberation Serif", Tinos, Georgia, serif; }
 
 /* A live page: the A5 page laid out at its own size (148 × 210 mm) and scaled to the width of its place in the book,
    so the text is drawn by the browser at whatever size it is shown, never enlarged from a picture. The page itself
