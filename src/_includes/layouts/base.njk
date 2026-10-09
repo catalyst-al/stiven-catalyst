@@ -72,6 +72,10 @@
 {%- if toolFamily %}
   <link rel="stylesheet" href="{{ '/coaching.css' | assetUrl }}">
 {%- endif %}
+{#- The pages of the Management Review, alive in the reader (reviewPages in the page's front matter). #}
+{%- if reviewPages %}
+  <link rel="stylesheet" href="{{ '' | reviewCssUrl }}">
+{%- endif %}
 {#- Translated tool pages load their UI text for tool-kit.js from one file the browser keeps. Deferred scripts run
     in document order, so this one, first in the document, runs before the deferred tool scripts that read it. #}
 {%- if lang and lang != "en" and page.url and ("/" + lang + "/tools/") in page.url %}

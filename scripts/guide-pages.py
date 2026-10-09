@@ -11,7 +11,9 @@ Writes, for each language:
 and src/_data/toolsGuidePages.json with the page list of every language.
 
 For the magazine, MEDIA_ROOT (default "guides") and DATA_FILE (default toolsGuidePages.json) say where the
-issue lives; DATA_FILE then holds one entry per issue, under its slug.
+issue lives; DATA_FILE then holds one entry per issue, under its slug. With COVER_ONLY=1 (the Management Review,
+whose reader shows the pages themselves as HTML) only the cover is drawn: page-01.webp, its sharp copy and the
+social preview; the entry keeps the page count of the PDF and lists that one page.
 """
 import json
 import os
@@ -26,6 +28,7 @@ from page_images import save_page
 ROOT = Path(__file__).resolve().parent.parent
 SLUG, *LANGS = sys.argv[1:] or ["tools-guide", "en", "sq", "de"]
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "guides")
+COVER_ONLY = os.environ.get("COVER_ONLY") == "1"
 MEDIA = ROOT / "src" / "media" / MEDIA_ROOT / SLUG
 DATA = ROOT / "src" / "_data" / os.environ.get("DATA_FILE", "toolsGuidePages.json")
 
@@ -49,12 +52,14 @@ def main():
             old.unlink()
         pages = []
         for number, page in enumerate(pdf, start=1):
+            if COVER_ONLY and number > 1:
+                break
             image, entry = save_page(page, folder, f"page-{number:02d}", f"/media/{MEDIA_ROOT}/{SLUG}/{lang}")
             pages.append({"number": number, **entry})
             if number == 1:
                 social(image).save(folder / "social.jpg", "JPEG", quality=86, optimize=True, progressive=True)
-        out[lang] = {"pageCount": len(pages), "pages": pages}
-        print(f"{lang}: {len(pages)} pages")
+        out[lang] = {"pageCount": pdf.page_count, "pages": pages}
+        print(f"{lang}: {len(pages)} of {pdf.page_count} pages drawn")
     if "DATA_FILE" in os.environ:
         everything = json.loads(DATA.read_text(encoding="utf-8")) if DATA.exists() else {}
         everything[SLUG] = out

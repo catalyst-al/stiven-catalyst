@@ -1,11 +1,21 @@
-# Management Review · botimi javor
+# Management Review · botimi mujor
 
-Vendosur nga autori më 8 tetor 2026.
+Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shih "Përditësimi" më poshtë).
+
+## Përditësimi i 9 tetorit 2026
+
+- **Botimi mujor.** Numrat dalin si botim mujor: në kopertinë, në ballinë dhe te Botimet shkruhet "Botimi mujor · Tetor 2026"
+  (etiketa `edition` te `lib/weekly/common.js`, data e numrit te `date` e çdo numri). "Mjeti i javës" u bë "Mjeti i numrit".
+- **Faqet e gjalla.** Lexuesi i faqes nuk tregon më fotografi të faqeve: çdo faqe është e njëjta HTML si printimi
+  (`src/_includes/print/weekly-page.njk`, stili `src/_includes/print/review-base.css` dhe `weekly.css`, të dyja të kufizuara
+  nën `.mr .pg`), e shkallëzuar sipas vendit të saj në libër (`js/book.js`, `--pg-scale`). Teksti del i mprehtë në çdo
+  madhësi, zgjidhet dhe gjendet me kërkim. PDF-ja mbetet për shkarkim; nga PDF-ja nxirret vetëm kopertina
+  (`page-01.webp`, për ballinën, listat dhe parapamjen sociale), jo faqet e tjera.
 
 ## Vendimet
 
 - **Emri:** Management Review, me kopertinën e botimit të shtatorit (STIVEN CATALYST, MANAGEMENT REVIEW, llamba). Botimi i shtatorit mbetet "botim special".
-- **Numërimi:** Nr. 1–41 dalin si arkivë e botuar tani, pa data të kaluara. Në kopertinë shkruhet numri dhe muaji i botimit. Pasi mbyllet arkiva, del një numër i ri çdo javë me datën e vet të vërtetë.
+- **Numërimi:** Nr. 1–41 dalin si arkivë e botuar tani, pa data të kaluara. Në kopertinë shkruhet numri dhe muaji i botimit. Pasi mbyllet arkiva, del një numër i ri çdo javë me datën e vet të vërtetë. (9 tetor: botimi quhet mujor; shih më poshtë.)
 - **Gjuhët:** shqip, anglisht, gjermanisht, si gjithë faqja.
 - **Ritmi:** Nr. 1 del si model. Pas miratimit vazhdojmë me 4 numra për PR.
 
@@ -23,14 +33,14 @@ Të njëjtat si te "Nga terreni", plus disa rregulla që vijnë nga tema:
 
 ## Faqet e një numri (10)
 
-1. Kopertina: tema e javës, shifra e javës dhe tri pika brenda
+1. Kopertina: tema e numrit, shifra e numrit dhe tri pika brenda
 2. Në këtë numër: pse kjo temë, përmbajtja dhe si lexohet numri
 3. Tema kryesore: çfarë thonë të dhënat
 4. Shifrat: 2–3 grafikë
 5. Modeli ose korniza, me diagram
 6. Zhvillimi i rolit, ose si zbatohet
 7. Si matet
-8. Mjeti i javës: kartë që printohet dhe plotësohet, me lidhje te një ese ose një mjet i faqes
+8. Mjeti i numrit: kartë që printohet dhe plotësohet, me lidhje te një ese ose një mjet i faqes
 9. Burimet dhe metoda
 10. Kopertina e pasme
 

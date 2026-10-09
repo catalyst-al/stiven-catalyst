@@ -1,0 +1,109 @@
+{#- One page of the Management Review of September 2026, as the print (src/guide-print/review.njk) and the reader
+    (src/_includes/pages/review.njk) both show it. Needs page, n (its number), review, R (the edition in this
+    language), L (its labels), lang, essays and magazine. -#}
+{%- set roman = ["", "I", "II", "III"] -%}
+{%- macro chrome(number, section) -%}
+<header class="run"><span>{{ R.name }} · {{ R.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+{%- if page.type == "cover" %}
+<section class="pg cover">
+  <div class="mast"><span>Stiven Catalyst</span><span>{{ R.date }}</span></div>
+  <div class="mast-rule"></div>
+  <div class="cover-main">
+    <div>
+      <div class="masthead">Management<span class="accent">Review</span></div>
+      <p class="cover-tag">{{ R.tagline }}</p>
+      <div class="cover-rule"></div>
+      <div class="cover-theme">{{ R.theme }}</div>
+      <p class="cover-sub">{{ R.sub }}</p>
+    </div>
+    <img src="{{ R.cover.src }}" alt="">
+  </div>
+  <div class="inside">
+    <p class="k">{{ L.inside }}</p>
+    <ol>{% for id in R.inside %}{% set target = R.pages[review.pageOf[id] - 1] %}<li><b>{{ review.pageOf[id] | pad }}</b>{{ target.heading }}</li>{% endfor %}</ol>
+  </div>
+  <p class="cover-foot">stivencatalyst.com</p>
+</section>
+{%- elif page.type == "editor" %}
+<section class="pg">
+  {{ chrome(n) }}
+  <p class="kicker">{{ R.editor.kicker }}</p>
+  <h2>{{ R.editor.title }}</h2>
+  <div class="letter">{% for para in R.editor.body %}<p>{{ para }}</p>{% endfor %}</div>
+  <p class="signature">Stiven Janaqi</p>
+  <p class="signature-role">{{ R.editor.role }} · Stiven Catalyst</p>
+  <div class="motto"><i></i><p>{{ R.tagline }}</p></div>
+</section>
+{%- elif page.type == "contents" %}
+<section class="pg">
+  {{ chrome(n) }}
+  <p class="kicker">{{ R.date }}</p>
+  <h2>{{ L.contents }}</h2>
+  {%- for part in R.parts %}{% if part %}
+  {%- set partIndex = loop.index0 %}
+  <p class="toc-part">{{ roman[partIndex] }} · {{ part }}</p>
+  <ol class="toc">{% for item in R.pages %}{% if item.part == partIndex %}<li><b>{{ loop.index | pad }}</b>{{ item.heading }}</li>{% endif %}{% endfor %}</ol>
+  {%- endif %}{% endfor %}
+  <p class="toc-part">{{ L.sources }}</p>
+  <ol class="toc"><li><b>{{ review.pageOf.sources | pad }}</b>{{ R.sourcesPage.kicker }}</li></ol>
+</section>
+{%- elif page.type == "sources" %}
+<section class="pg">
+  {{ chrome(n, L.sources) }}
+  <p class="kicker">{{ R.sourcesPage.kicker }}</p>
+  <h2>{{ R.sourcesPage.title[0] }}<span class="accent">{{ R.sourcesPage.title[1] }}</span></h2>
+  <p class="lead">{{ R.sourcesPage.lead }}</p>
+  <ol class="src">{% for s in review.sources %}<li>{{ s.title }}<em>{{ s.by }}</em><i>{{ s.url }}</i></li>{% endfor %}</ol>
+  <div class="callout"><span class="label">{{ R.sourcesPage.method }}</span><p>{{ R.sourcesPage.methodText }}</p></div>
+</section>
+{%- elif page.type == "back" %}
+<section class="pg back">
+  <img src="{{ R.cover.src }}" alt="">
+  <div class="masthead">Management<span class="accent">Review</span></div>
+  <p class="cover-tag">{{ R.tagline }}</p>
+  <p>{{ R.back.line }}</p>
+  <p class="monthly">{{ magazine.names[lang].name }}</p>
+  <p>{{ R.back.more }}</p>
+  <p class="url">stivencatalyst.com{{ "/publications.html" | local(lang) }}</p>
+  <p class="edition">{{ R.name }} · {{ R.date }} · Stiven Catalyst</p>
+</section>
+{%- else %}
+<section class="pg">
+  {{ chrome(n, R.parts[page.part]) }}
+  {%- if page.image %}<div class="head-split"><div>{% endif %}
+  <p class="kicker">{{ page.kicker }}</p>
+  <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
+  {%- if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+  {%- if page.image %}</div><img src="{{ page.image.src }}" alt=""></div>{% endif %}
+  {%- for b in page.blocks %}
+  {%- if b.type == "p" %}<div class="body-text"><p>{{ b.text }}</p></div>
+  {%- elif b.type == "cards" %}<div class="cards c{{ b.cols }}{{ ' plain' if b.plain }}">{% for c in b.items %}<div class="card">{% if not b.plain %}<span class="cn">{{ c.n or (loop.index | pad) }}</span>{% endif %}<h4>{{ c.h }}</h4><p>{{ c.p }}</p></div>{% endfor %}</div>
+  {%- elif b.type == "rows" %}<ol class="rows">{% for r in b.items %}<li><div><h4>{{ r.h }}</h4><p>{{ r.p }}</p></div></li>{% endfor %}</ol>
+  {%- elif b.type == "box" %}<div class="box"><h4>{{ b.title }}</h4><ol>{% for i in b.items %}<li>{{ i }}</li>{% endfor %}</ol></div>
+  {%- elif b.type == "stats" %}{% if b.label %}<p class="stats-label">{{ b.label }}</p>{% endif %}<div class="stats c{{ b.cols }}">{% for s in b.items %}<div class="stat"><b>{{ s.n }}</b><span>{{ s.t }}</span>{% if s.by %}<i>{{ s.by }}</i>{% endif %}</div>{% endfor %}</div>
+  {%- elif b.type == "stat" %}<div class="wide-stat"><b>{{ b.n }}</b><span>{{ b.t }}</span></div>
+  {%- elif b.type == "callout" %}<div class="callout"><span class="label">{{ b.label }}</span><p>{{ b.text }}</p></div>
+  {%- elif b.type == "quote" %}<p class="quote">“{{ b.text }}”</p>
+  {%- elif b.type == "pull" %}<p class="pull">{{ b.text }}</p>
+  {%- elif b.type == "lists" %}<div class="lists">{% for col in b.cols %}<div class="{{ 'accent' if col.accent }}"><h4><span class="hl">{{ col.h }}</span></h4><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul></div>{% endfor %}</div>
+  {%- elif b.type == "steps" %}<ol class="steps">{% for s in b.items %}<li><div><h4>{{ s.h }}</h4><p>{{ s.p }}</p></div></li>{% endfor %}</ol>
+  {%- elif b.type == "bars" %}<p class="block-label">{{ b.label }}</p><div class="bars">{% for r in b.items %}<div class="bar{{ ' alert' if r.alert }}"><span>{{ r.k }}</span><span class="track"><span class="fill" style="display:block;width:{{ (r.v / b.max * 100) | round(1) }}%"></span></span><b>{{ r.n }}</b></div>{% endfor %}</div>
+  {%- elif b.type == "split" %}<p class="block-label">{{ b.label }}</p><div class="split"><div class="split-bar">{% for s in b.items %}<span class="{{ 'alert' if s.alert }}" style="width:{{ s.v }}%"></span>{% endfor %}</div><div class="split-legend">{% for s in b.items %}<div class="{{ 'alert' if s.alert }}"><b>{{ s.n }}</b><span>{{ s.t }}</span></div>{% endfor %}</div></div>
+  {%- elif b.type == "table" %}<p class="block-label">{{ b.label }}</p><div class="table"><div class="big"><b>{{ b.big.n }}</b><span>{{ b.big.t }}</span></div><div><table><thead><tr>{% for h in b.head %}<th>{{ h }}</th>{% endfor %}</tr></thead><tbody>{% for row in b.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table><p class="note">{{ b.note }}</p></div></div>
+  {%- elif b.type == "figures" %}<div class="figures">{% for f in b.items %}<div><b>{{ f.n }}</b><span>{{ f.t }}</span></div>{% endfor %}</div>
+  {%- elif b.type == "pareto" %}<div class="pareto">{% for h in [100, 64, 30, 18, 10] %}<span class="{{ 'top' if loop.index <= 2 }}" style="height:{{ h }}%"></span>{% endfor %}</div><div class="pareto-keys">{% for k in ["A", "B", "C", "D", "E"] %}<span>{{ k }}</span>{% endfor %}</div><p class="pareto-label">{{ b.label }}</p>
+  {%- elif b.type == "sign" %}<p class="sign">Stiven Janaqi</p>
+  {%- endif %}
+  {%- endfor %}
+  {%- if page.source or page.note or page.more or page.tool %}
+  <div class="bottom">
+    {%- if page.source %}<p class="source">{{ L.source }}: {{ page.source }}</p>{% endif %}
+    {%- if page.note %}<p class="source">{{ page.note }}</p>{% endif %}
+    {%- if page.more %}{% for essay in essays %}{% if essay.fileSlug.endsWith(page.more) %}<div class="link"><b>{{ L.more }}</b><span>{{ essay.data.title }}</span></div>{% endif %}{% endfor %}{% endif %}
+    {%- if page.tool %}{% set tool = toolsGuide.tool[lang][page.tool] %}<div class="link"><b>{{ L.open }}: {{ tool.name }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>{% endif %}
+  </div>
+  {%- endif %}
+</section>
+{%- endif %}
