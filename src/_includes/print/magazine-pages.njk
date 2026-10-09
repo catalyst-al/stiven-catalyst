@@ -1,0 +1,125 @@
+{#- The pages of one issue of the magazine "Nga terreni", in one language, as the print (src/guide-print/magazine.njk)
+    and the reader (pages/magazine-issue.njk) both show them: cover, contents, two pages of the trend, the pages of
+    "From the floor", the tool, the essays or the reading, the question with the sources, the back. Each page sits in a
+    .book-page wrapper that the reader scales (js/book.js) and the print simply ignores. Needs issue and lang. -#}
+{%- set lang = lang or "en" -%}
+{%- set m = issue[lang] -%}
+{%- set L = magazine.labels[lang] -%}
+{%- set N = magazine.names[lang] -%}
+{%- set tool = toolsGuide.tool[lang][issue.tool] -%}
+{%- set pageOf = issue.pageOf -%}
+{%- set fourth = "read" if issue.reading else "essays" -%}
+{%- macro chrome(number, section) -%}
+<header class="run"><span>{{ N.name }} · {{ L.issue }} {{ issue.number }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span>{{ m.date }}</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+<div class="book-page is-live" data-page="{{ 1 }}">
+<section class="pg cover">
+  <div class="mast"><span><b>{{ L.issue }} {{ issue.number }}</b> · {{ m.date }}</span><span>Stiven Catalyst</span></div>
+  <div class="masthead">{{ N.name }}</div>
+  <div class="tagline">{{ N.tagline }}</div>
+  <div class="cover-stat"><div class="n">{{ m.coverStat.n }}</div><p class="t">{{ m.coverStat.text }}</p></div>
+  <div class="cover-theme"><div class="k">{{ L.trend }}</div><div class="t">{{ m.theme }}</div><div class="s">{{ m.themeSub }}</div></div>
+  <div class="cover-foot"><span>stivencatalyst.com</span><span>{{ L.floor }} · {{ L.tool }} · {{ L[fourth] }}</span></div>
+</section>
+</div>
+
+<div class="book-page is-live" data-page="{{ 2 }}">
+<section class="pg">
+  {{ chrome(2) }}
+  <p class="kicker">{{ L.issue }} {{ issue.number }} · {{ m.date }}</p>
+  <h2>{{ L.contents }}</h2>
+  <ol class="toc">
+    {%- for row in m.contents %}
+    <li><span class="n">{{ loop.index }}</span><span><span class="k">{{ L[row[0]] }}</span><span class="t">{{ row[1] }}</span></span><span class="p">{{ pageOf[row[0]] }}</span></li>
+    {%- endfor %}
+  </ol>
+  <p class="colophon">{{ N.tagline }}. {{ m.themeSub }}. {{ L.sources }}: {{ L.page }} {{ pageOf.question }}.</p>
+</section>
+</div>
+
+<div class="book-page is-live" data-page="{{ 3 }}">
+<section class="pg">
+  {{ chrome(3, L.trend) }}
+  <p class="kicker">{{ L.trend }}</p>
+  <h2>{{ m.trend.title }}</h2>
+  <p class="lead">{{ m.trend.lead }}</p>
+  <div class="stats">{% for s in m.trend.stats %}<div class="stat"><b>{{ s.n }}</b><span>{{ s.t }}</span></div>{% endfor %}</div>
+  {%- for part in m.trend.parts.slice(0, 2) %}<div class="part"><h3>{{ part.h }}</h3><p>{{ part.p }}</p></div>{% endfor %}
+</section>
+</div>
+
+<div class="book-page is-live" data-page="{{ 4 }}">
+<section class="pg">
+  {{ chrome(4, L.trend) }}
+  {%- for part in m.trend.parts.slice(2) %}<div class="part"><h3>{{ part.h }}</h3><p>{{ part.p }}</p></div>{% endfor %}
+  <div class="meaning"><h3>{{ m.trend.meaning.h }}</h3><p>{{ m.trend.meaning.p }}</p></div>
+</section>
+</div>
+
+{%- for split in issue.floorSplit %}
+<div class="book-page is-live" data-page="{{ pageOf.floor + loop.index0 }}">
+<section class="pg">
+  {{ chrome(pageOf.floor + loop.index0, L.floor) }}
+  {%- if loop.first %}
+  <p class="kicker">{{ L.floor }}</p>
+  <h2>{{ m.contents[1][1] }}</h2>
+  <p class="byline">{{ m.floor.intro }}</p>
+  {%- endif %}
+  <div class="qa">{% for row in m.floor.qa.slice(split[0], split[1]) %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}</div>
+  {%- if loop.last %}
+  <p class="pull">{{ m.floor.closing }}</p>
+  <p class="sign">Stiven Janaqi</p>
+  {%- endif %}
+</section>
+</div>
+{% endfor %}
+<div class="book-page is-live" data-page="{{ pageOf.tool }}">
+<section class="pg">
+  {{ chrome(pageOf.tool, L.tool) }}
+  <p class="kicker">{{ L.tool }}</p>
+  <div class="tool-name">{{ tool.name }}</div>
+  <p class="tool-meta">{{ tool.type }} · {{ tool.time }}</p>
+  <p>{{ m.tool.text }}</p>
+  <h3>{{ m.tool.formulaTitle or L.formula }}</h3>
+  <ol class="formula{{ ' alert' if issue.alertFirst }}">{% for step in m.tool.formula %}<li><span>{{ loop.index }}</span>{{ step }}</li>{% endfor %}</ol>
+  <p class="big-quote">{{ m.tool.quote }}</p>
+  <div class="open"><b>{{ L.open }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>
+</section>
+</div>
+
+<div class="book-page is-live" data-page="{{ pageOf[fourth] }}">
+<section class="pg">
+  {{ chrome(pageOf[fourth], L[fourth]) }}
+  <p class="kicker">{{ L[fourth] }}</p>
+  <h2>{{ m.contents[3][1] }}</h2>
+  {%- if issue.reading %}
+  <p>{{ m.reading.intro }}</p>
+  <ol class="essays">{% for slug in issue.reading %}{% set note = m.reading.notes[loop.index0] %}{% for essay in collections["insights" + (lang | langSuffix)] %}{% if essay.fileSlug.endsWith(slug) %}<li><span>{{ essay.data.title }}<span class="why">{{ note }}</span></span></li>{% endif %}{% endfor %}{% endfor %}</ol>
+  {%- else %}
+  <p>{{ m.essays.intro }}</p>
+  <ol class="essays">{% for essay in collections["insights" + (lang | langSuffix)] %}{% set day = essay.date | isoDate %}{% if day >= issue.essays.from and day <= issue.essays.to and (not issue.essays.series or (essay.data.series or "ten-years") == issue.essays.series) %}<li>{{ essay.data.title }}</li>{% endif %}{% endfor %}</ol>
+  <p class="note">{{ m.essays.pick }}</p>
+  {%- endif %}
+</section>
+</div>
+
+<div class="book-page is-live" data-page="{{ pageOf.question }}">
+<section class="pg">
+  {{ chrome(pageOf.question, L.question) }}
+  <p class="kicker">{{ L.question }}</p>
+  <p class="question">{{ m.question }}</p>
+  <p class="kicker">{{ L.sources }}</p>
+  <ol class="sources">{% for s in issue.sources %}<li>{{ s[lang] }}<i>{{ s.url }}</i></li>{% endfor %}</ol>
+</section>
+</div>
+
+<div class="book-page is-live" data-page="{{ pageOf.back }}">
+<section class="pg back">
+  <div class="masthead">{{ N.name }}</div>
+  <div class="tagline">{{ N.tagline }}</div>
+  <p>{{ L.issue }} {{ issue.number }} · {{ m.date }}</p>
+  <p class="url">stivencatalyst.com{{ "/publications.html" | local(lang) }}</p>
+  <p class="edition">{{ N.name }} · {{ L.issue }} {{ issue.number }} · {{ m.date }} · Stiven Catalyst</p>
+</section>
+</div>

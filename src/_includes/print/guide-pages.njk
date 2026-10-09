@@ -1,0 +1,187 @@
+{#- The pages of the Tools Guide in one language, as the print (src/guide-print/print.njk) and the reader
+    (pages/guide.njk) both show them: one A5 page per section, the roles with their planets, one page per tool. Each
+    page sits in a .book-page wrapper that the reader scales (js/book.js) and the print simply ignores. Needs lang. -#}
+{%- set lang = lang or "en" -%}
+{%- set g = toolsGuide[lang] -%}
+{%- set T = toolsGuide.tool[lang] -%}
+{%- set F = toolsGuide.family -%}
+{%- set P = toolsGuide.pageOf -%}
+{%- macro pageTitle(id) -%}
+{%- if id.startsWith("family:") -%}{% set f = F[id.slice(7)] %}{{ f.name }} · {{ f.role | t(lang) }}
+{%- elif id.startsWith("tool:") -%}{{ T[id.slice(5)].name }}
+{%- elif id == "contents" -%}{{ g.labels.contents }}
+{%- elif g.sections[id] and g.sections[id].title -%}{{ g.sections[id].title }}
+{%- endif -%}
+{%- endmacro -%}
+
+{#- The solar system of the homepage, drawn flat (toolsGuide.system): the light in the middle, the roles on their orbits, a moon for every tool. -#}
+{%- macro system(key, labels = true, roles = false) -%}
+<svg class="system" viewBox="0 45 400 205" aria-hidden="true">
+  <defs>
+    <radialGradient id="light-{{ key }}" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff8e6" stop-opacity=".95"/>
+      <stop offset=".18" stop-color="#f5c86a" stop-opacity=".75"/>
+      <stop offset=".55" stop-color="#d1a553" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#d1a553" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  {%- for p in toolsGuide.system %}
+  <ellipse cx="200" cy="150" rx="{{ p.rx }}" ry="{{ p.ry }}" fill="none" stroke="{{ p.color }}" stroke-opacity=".3" stroke-width=".8"/>
+  {%- endfor %}
+  <circle cx="200" cy="150" r="58" fill="url(#light-{{ key }})"/>
+  <circle cx="200" cy="150" r="6.5" fill="#fffaf0"/>
+  {%- for p in toolsGuide.system %}
+  <circle cx="{{ p.x }}" cy="{{ p.y }}" r="16" fill="{{ p.color }}" fill-opacity=".14"/>
+  <circle cx="{{ p.x }}" cy="{{ p.y }}" r="7.5" fill="{{ p.color }}"/>
+  {%- for m in p.moons %}<circle cx="{{ m.x }}" cy="{{ m.y }}" r="1.6" fill="#fff" fill-opacity=".85"/>{% endfor %}
+  {%- if labels %}
+  <text x="{{ p.x }}" y="{{ p.y + (27 if p.below else -21) }}" text-anchor="middle" class="sys-name" fill="{{ p.color }}">{{ p.name }}</text>
+  {%- if roles %}<text x="{{ p.x }}" y="{{ p.y + (38 if p.below else -32) }}" text-anchor="middle" class="sys-role">{{ p.role | t(lang) }}</text>{% endif %}
+  {%- endif %}
+  {%- endfor %}
+</svg>
+{%- endmacro -%}
+
+{%- macro blocks(body, accent) -%}
+{%- for block in body %}
+{%- if block is string %}<p>{{ block | guideText(lang) }}</p>
+{%- elif block.note %}<p class="note">{{ block.note | guideText(lang) }}</p>
+{%- elif block.list %}<ul class="list">{% for item in block.list %}<li>{{ item | guideText(lang) }}</li>{% endfor %}</ul>
+{%- elif block.steps %}<ol class="steps">{% for item in block.steps %}<li>{{ item | guideText(lang) }}</li>{% endfor %}</ol>
+{%- elif block.cards %}<div class="cards">{% for card in block.cards %}<div class="card"><strong>{{ card.title }}</strong><span>{{ card.text }}</span></div>{% endfor %}</div>
+{%- elif block.diagram %}<div class="diagram">{{ system("diagram", true, true) }}</div>
+{%- elif block.routes %}
+<div class="routes">
+  {%- for route in block.routes %}{% set f = F[route.family] %}{% set at = P["family:" + route.family] %}
+  <div class="route" style="--family: {{ f.color }}"><span class="dot"></span><span class="route-text">{{ route.text }}</span><span class="route-to"><b>{{ f.name }}</b> · {{ f.role | t(lang) }} <em>{{ g.labels.page }} {{ at }}</em></span></div>
+  {%- endfor %}
+</div>
+{%- elif block.planets %}
+<div class="planets">
+  {%- for item in block.planets %}{% set planet = F[item.family] %}
+  <div class="planet-row" style="--family: {{ planet.color }}">
+    <span class="planet-art">{% set planetKey = "fam-" + planet.id + "-" + lang %}{% set planetBare = true %}{% include "partials/family-planet.njk" %}</span>
+    <span><b>{{ planet.name }}</b> {{ item.text }}</span>
+  </div>
+  {%- endfor %}
+</div>
+{%- endif %}
+{%- endfor %}
+{%- endmacro -%}
+
+{%- macro chrome(number, section, color) -%}
+<header class="run"><span>{{ g.title }}</span>{% if section %}<span class="run-section" style="--family: {{ color }}"><i></i>{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+{%- for id in toolsGuide.pages %}
+{%- set number = loop.index %}
+
+{%- if id == "cover" %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg cover">
+  <div class="brand"><span>Stiven Catalyst</span><span>{{ g.edition }}</span></div>
+  {{ system("cover", true, false) }}
+  <h1>{{ g.title }}</h1>
+  <p class="sub">{{ g.subtitle }}</p>
+  <div class="meta"><span><b>{{ g.author }}</b></span><span>stivencatalyst.com</span></div>
+</section>
+</div>
+
+{%- elif id == "back" %}
+{%- set s = g.sections.back %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg back">
+  {{ system("back", false, false) }}
+  <p class="motto">{% for part in s.motto.split(". ") %}<span>{{ part }}{{ "." if not loop.last }}</span>{% endfor %}</p>
+  <p>{{ s.text }}</p>
+  <p class="url">{{ ("stivencatalyst.com" + ("/tools.html" | local(lang))) }}</p>
+  <p class="edition">{{ g.title }} · {{ g.edition }} · {{ g.author }}</p>
+</section>
+</div>
+
+{%- elif id == "contents" %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg">
+  {{ chrome(number) }}
+  <p class="kicker">{{ g.edition }}</p>
+  <h2>{{ g.labels.contents }}</h2>
+  <ol class="toc">
+    {%- for other in toolsGuide.pages %}
+    {%- if other not in ["cover", "contents", "back"] %}
+    {%- if other.startsWith("family:") %}{% set f = F[other.slice(7)] %}
+    <li class="fam" style="--family: {{ f.color }}"><span class="dot"></span><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
+    {%- elif other.startsWith("tool:") %}
+    <li class="tool"><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
+    {%- else %}
+    <li><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
+    {%- endif %}
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+</section>
+</div>
+
+{%- elif id.startsWith("family:") %}
+{%- set f = F[id.slice(7)] %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg fam opener" style="--family: {{ f.color }}">
+  {{ chrome(number, f.name, f.color) }}
+  <div class="fam-hero">
+    <div>
+      <p class="kicker">{{ g.labels.family }}</p>
+      <div class="fam-name">{{ f.name }}</div>
+      <div class="fam-role">{{ f.role | t(lang) }}</div>
+      <div class="fam-scope">{{ f.scope | t(lang) }}</div>
+    </div>
+    <span class="planet-art">{% set planet = f %}{% set planetKey = "open-" + f.id + "-" + lang %}{% set planetBare = true %}{% include "partials/family-planet.njk" %}</span>
+  </div>
+  <p class="fam-line">{{ f.line | t(lang) }}</p>
+  <p>{{ g.families[f.id] }}</p>
+  <p class="subhead">{{ g.labels.tools }}</p>
+  <div class="fam-tools">
+    {%- for url in f.tools.concat(f.learn) %}
+    <div><span>{{ T[url].name }}</span><em>{{ P["tool:" + url] }}</em></div>
+    {%- endfor %}
+  </div>
+  <p class="subhead">{{ g.labels.routine }}</p>
+  <table class="routine">
+    {%- for step in f.routine %}
+    <tr><td>{{ step.when | t(lang) }}</td><td>{{ step.do | t(lang) }} <span class="routine-tool">· {{ T[step.tool].name }}</span></td></tr>
+    {%- endfor %}
+  </table>
+</section>
+</div>
+
+{%- elif id.startsWith("tool:") %}
+{%- set url = id.slice(5) %}
+{%- set tool = T[url] %}
+{%- set text = g.tools[url] %}
+{%- set f = F[toolsGuide.familyOfTool[url]] %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg fam" style="--family: {{ f.color }}">
+  {{ chrome(number, f.name + " · " + (f.role | t(lang)), f.color) }}
+  <div class="tool-head">
+    <div class="tool-meta"><span class="chip f">{{ f.name }}</span><span class="chip">{{ tool.type }}</span><span class="chip">{{ tool.time }}</span></div>
+    <h2>{{ tool.name }}</h2>
+    <p class="tool-summary">{{ tool.summary }}</p>
+  </div>
+  <p class="when">{{ text.when | guideText(lang) }}</p>
+  <div class="block"><p class="kicker">{{ g.labels.how }}</p><ol class="steps">{% for step in text.how %}<li>{{ step | guideText(lang) }}</li>{% endfor %}</ol></div>
+  <div class="block"><p class="kicker">{{ g.labels.get }}</p><p>{{ text.get | guideText(lang) }}</p></div>
+  <div class="block"><p class="kicker">{{ g.labels.data }}</p><p>{{ text.data | guideText(lang) }}</p></div>
+  <div class="open"><b>{{ g.labels.open }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>
+</section>
+</div>
+
+{%- else %}
+{%- set s = g.sections[id] %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg">
+  {{ chrome(number, s.kicker) }}
+  <p class="kicker">{{ s.kicker }}</p>
+  <h2>{{ s.title }}</h2>
+  {{ blocks(s.body) }}
+</section>
+</div>
+{%- endif %}
+{%- endfor %}

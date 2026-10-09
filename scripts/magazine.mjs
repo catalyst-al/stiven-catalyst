@@ -1,5 +1,6 @@
-// Builds the issues of the magazine "Nga terreni": one designed PDF per issue and language, and the page images of
-// the online reader. The same steps as scripts/tools-guide.mjs:
+// Builds the issues of the magazine "Nga terreni": one designed PDF per issue and language, and the cover of each
+// as a picture (the reader shows the pages themselves, as HTML; the cover is for the hero, the lists and the social
+// preview). The same steps as scripts/tools-guide.mjs:
 //
 //   pip install pymupdf pillow
 //   node scripts/magazine.mjs            every issue
@@ -7,7 +8,7 @@
 //
 // 1. Eleventy renders the print pages (src/guide-print/magazine.njk) into a temporary folder (GUIDE_PRINT).
 // 2. Chromium (Playwright) prints each one to src/media/magazine/<slug>/<slug>-<lang>.pdf.
-// 3. scripts/guide-pages.py turns the PDFs into page images and adds the issue to src/_data/magazinePages.json.
+// 3. scripts/guide-pages.py draws the cover of each PDF (COVER_ONLY) and adds the issue to src/_data/magazinePages.json.
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import http from "node:http";
@@ -70,7 +71,7 @@ fs.rmSync(tmp, { recursive: true, force: true });
 for (const issue of issues) {
   execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py"), issue.slug, ...magazine.langs], {
     cwd: ROOT,
-    env: { ...process.env, MEDIA_ROOT: "magazine", DATA_FILE: "magazinePages.json" },
+    env: { ...process.env, MEDIA_ROOT: "magazine", DATA_FILE: "magazinePages.json", COVER_ONLY: "1" },
     stdio: "inherit",
   });
 }

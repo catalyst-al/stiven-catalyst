@@ -1,4 +1,5 @@
-// Builds the Tools Guide: one designed PDF per language and the page images of the online reader.
+// Builds the Tools Guide: one designed PDF per language and its cover as a picture (the reader shows the pages
+// themselves, as HTML; the cover is for the hero, the lists and the social preview).
 //
 //   pip install pymupdf pillow
 //   node scripts/tools-guide.mjs
@@ -6,7 +7,7 @@
 // 1. Eleventy renders the print pages (src/guide-print/print.njk) into a temporary folder, only when GUIDE_PRINT is set,
 //    so they never reach the published site.
 // 2. Chromium (Playwright) prints each language to src/media/guides/tools-guide/tools-guide-<lang>.pdf.
-// 3. scripts/guide-pages.py turns every PDF into page images and writes src/_data/toolsGuidePages.json.
+// 3. scripts/guide-pages.py draws the cover of every PDF (COVER_ONLY) and writes src/_data/toolsGuidePages.json.
 //
 // Run it again whenever the text in src/_data/toolsGuide.js or a tool changes.
 import { execFileSync } from "node:child_process";
@@ -62,7 +63,7 @@ await browser.close();
 server.close();
 fs.rmSync(tmp, { recursive: true, force: true });
 
-execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py"), guide.slug, ...guide.langs], { cwd: ROOT, stdio: "inherit" });
+execFileSync("python3", [path.join(ROOT, "scripts", "guide-pages.py"), guide.slug, ...guide.langs], { cwd: ROOT, env: { ...process.env, COVER_ONLY: "1" }, stdio: "inherit" });
 
 // The pages were replaced: make the small copies of the cover again (scripts/thumbnails.mjs).
 execFileSync("node", [path.join(ROOT, "scripts", "thumbnails.mjs")], { cwd: ROOT, stdio: "inherit" });

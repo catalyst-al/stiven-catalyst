@@ -3,10 +3,11 @@
    (src/review-pages.njk, lib/review-css.js). Every rule is scoped to .mr .pg: the body of the printed document or the
    book of the reader, then the page. The first rule puts every element of a page back to the browser's defaults, so
    nothing of the site's own stylesheet reaches into a page, and every rule after it names the page too, so it wins
-   over that reset; the fonts come as variables, set by the print (print/print-head.css) and by the
-   site (print/review-web.css) each in its own way. Sizes are in mm and pt, the page is 148 × 210 mm (A5). */
+   over that reset; the inside of an SVG is left out of it, because in SVG the geometry (x, y, width, cx, r, d) and the
+   paint (fill, stroke) are attributes that the reset would wipe, and the charts and planets are drawn with them; the fonts come as variables, set by the print (print/print-head.css) and by the
+   site (print/live-pages.css) each in its own way. Sizes are in mm and pt, the page is 148 × 210 mm (A5). */
 .mr { --paper: #060a10; --ink: #f6f7f4; --body: #d5dbe0; --muted: #a5b0b8; --line: rgba(255,255,255,.12); --blue: #4ab5f7; --red: #ff4b5c; --card: rgba(255,255,255,.035); }
-.mr .pg, .mr .pg * { all: revert; box-sizing: border-box; margin: 0; padding: 0; }
+.mr .pg, .mr .pg *:not(svg *) { all: revert; box-sizing: border-box; margin: 0; padding: 0; }
 .mr { font-family: var(--mr-sans); color: var(--body); font-size: 8.6pt; line-height: 1.48; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .mr .pg { width: 148mm; height: 210mm; position: relative; overflow: hidden; break-after: page; padding: 17mm 13mm 17mm; background: radial-gradient(110mm 70mm at 100% -10mm, rgba(255,75,92,.10), transparent 70%), radial-gradient(120mm 70mm at 0% -18mm, rgba(74,181,247,.12), transparent 70%), var(--paper); }
 .mr .pg .run { position: absolute; top: 8.5mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
