@@ -113,7 +113,7 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 4 | 14–17 | U botua |
 | 5 | 18–21 | U botua |
 | 6 | 22–25 | U botua |
-| 7 | 26–29 | Në shqyrtim |
-| 8 | 30–33 | |
+| 7 | 26–29 | U botua |
+| 8 | 30–33 | Në shqyrtim |
 | 9 | 34–37 | |
 | 10 | 38–41 | |
