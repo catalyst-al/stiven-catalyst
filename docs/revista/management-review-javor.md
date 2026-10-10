@@ -18,7 +18,9 @@ Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shi
   turne dhe natën, 46 Poka-yoke, 47 Ku shkon java e menaxherit, 48 OEE. Nr. 49–56 po atë ditë: 49 After Action Review, 50 Kultura e drejtë,
   51 AI gjenerative në punë, 52 Të menaxhosh lart, 53 Takt time, 54 Teoria e kufizimeve, 55 Ekipet me shumë kultura,
   56 VSM. Nr. 57–64 po atë ditë: 57 Sa njerëz drejton një menaxher, 58 Ligji i Little-it, 59 S&OP, 60 Motivimi,
-  61 Menaxhimi algoritmik, 62 Vendimet nën presion, 63 Near miss, 64 Skenarët. Tabelat e fakteve: `nr-41.md` … `nr-64.md`.
+  61 Menaxhimi algoritmik, 62 Vendimet nën presion, 63 Near miss, 64 Skenarët. Nr. 65–72: 65 Intervista e strukturuar, 66 Kanban, 67 Të drejtosh në distancë,
+  68 Saktësia e stokut, 69 Pilotet, 70 Drejtësia në organizatë, 71 Monitorimi i punonjësve, 72 Mentori dhe sponsori.
+  Tabelat e fakteve: `nr-41.md` … `nr-72.md`.
 
 Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të serisë së vet, pastaj `node scripts/weekly.mjs NN` dhe
 `node scripts/thumbnails.mjs`.
@@ -149,4 +151,5 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 9 | 34–40 | U botua (seria e parë, tetor 2026) |
 | 10 | 41–48 | U botua (seria e dytë, nëntor 2026) |
 | 11 | 49–56 | U botua (seria e dytë, nëntor 2026) |
-| 12 | 57–64 | Në PR (seria e dytë, nëntor 2026) |
+| 12 | 57–64 | U botua (seria e dytë, nëntor 2026) |
+| 13 | 65–72 | Në PR (seria e dytë, nëntor 2026) |
