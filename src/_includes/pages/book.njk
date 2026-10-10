@@ -12,7 +12,7 @@
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ "A book by Stiven Janaqi · in Albanian" | t(lang) }}</p>
-      <h1 lang="sq">{{ book.title }}</h1>
+      <h1 lang="sq"{{ book.title | longTitle | safe }}>{{ book.title }}</h1>
       <p class="book-subtitle" lang="sq">{{ book.subtitle }}</p>
       <p class="lede">{{ "A short book about growing up in Durrës: the streets before we had watches, the friends, the leaving and the coming back. Not to find the city untouched, but to see what of it is still there." | t(lang) }}</p>
       <dl class="book-facts">

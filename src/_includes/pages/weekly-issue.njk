@@ -23,7 +23,7 @@
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ W.name }} · {{ L.edition }} · {{ I.date }} · {{ L.no }} {{ issue.no }}</p>
-      <h1>{{ I.heading }}</h1>
+      <h1{{ I.heading | longTitle | safe }}>{{ I.heading }}</h1>
       <p class="lede">{{ I.sub }}</p>
       <dl class="book-facts">
         <div><dt>{{ L.no }}</dt><dd>{{ issue.no }}</dd></div>

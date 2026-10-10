@@ -20,7 +20,7 @@
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ R.name }} · {{ R.date }}</p>
-      <h1>{{ R.theme }}</h1>
+      <h1{{ R.theme | longTitle | safe }}>{{ R.theme }}</h1>
       <p class="lede">{{ R.sub }} {{ R.tagline }}</p>
       <dl class="book-facts">
         <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ review.pageCount }}</dd></div>

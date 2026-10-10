@@ -145,3 +145,9 @@ test('at rest the pages being read lie flat, outside any 3D scene, so their text
   assert.match(css, /\.is-single \.book\.is-still \{ perspective: none; \}/);
   assert.match(css, /\.is-single \.book\.is-still \.book-sheet\.is-turned \{ visibility: hidden; \}/);
 });
+
+test('a publication title with a word too long for a phone is set smaller there', { skip: !fs.existsSync('_site/de/magazine/management-review-nr-31.html') }, () => {
+  assert.match(read('src/styles.css'), /\.book-hero h1\.hero-long \{ font-size: clamp\(36px, 10\.5vw, 52px\); \}/);
+  assert.match(read('_site/de/magazine/management-review-nr-31.html'), /<h1 class="hero-long">Selbstwahrnehmung und emotionale Intelligenz<\/h1>/);
+  assert.match(read('_site/sq/magazine/management-review-nr-31.html'), /<h1>V/, 'a title with short words keeps its size');
+});

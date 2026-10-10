@@ -288,6 +288,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("unassigned", (tools, families, lang) =>
     tools.filter((tool) => !families.some((family) => [...family.tools, ...family.learn].some((url) => localUrl(url, lang) === tool.url)))
   );
+  // A large title with a word too long for a phone at full size ("Selbstwahrnehmung") gets the class hero-long:
+  // <h1{{ title | longTitle | safe }}>.
+  eleventyConfig.addFilter("longTitle", (text, limit = 14) =>
+    Math.max(0, ...String(text || "").replace(/<[^>]+>/g, "").split(/[\s\u2013\u2014/-]+/).map((word) => word.length)) > limit ? ' class="hero-long"' : "");
   // Lower case mid-sentence, except in German, where nouns keep their capital.
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");

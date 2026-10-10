@@ -1604,6 +1604,8 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
 @media (max-width: 480px) {
   h2:lang(de), h3:lang(de) { hyphens: auto; }
+  /* The large serif title of a publication with a word too long for a phone ("Selbstwahrnehmung"): smaller. */
+  .book-hero h1.hero-long { font-size: clamp(36px, 10.5vw, 52px); }
 }
 .page-hero.tool-hero h1.hero-long { font-size: clamp(28px, 8.4cqi, 88px); }
 .page-hero h1.hero-long { font-size: clamp(30px, 11cqi, 120px); }
@@ -4085,7 +4087,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 /* Publications: the list of the magazine's issues, under the newest one. */
 
 @media (max-width: 900px) {
-  .book-hero { grid-template-columns: 1fr; gap: 50px; padding: 64px 0 60px; }
+  .book-hero { grid-template-columns: minmax(0, 1fr); gap: 50px; padding: 64px 0 60px; }
   .book-hero .book-object { order: -1; justify-self: start; width: min(44%, 190px); }
   .book-facts { grid-template-columns: repeat(2, auto); }
   .book-feature { grid-template-columns: 1fr; gap: 44px; padding: 70px 0; }

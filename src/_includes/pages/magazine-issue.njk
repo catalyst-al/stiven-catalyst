@@ -22,7 +22,7 @@
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ N.name }} · {{ L.issue }} {{ issue.number }} · {{ m.date }}</p>
-      <h1>{{ m.theme }}</h1>
+      <h1{{ m.theme | longTitle | safe }}>{{ m.theme }}</h1>
       <p class="lede">{{ m.themeSub }}. {{ m.trend.lead }}</p>
       <dl class="book-facts">
         <div><dt>{{ L.issue }}</dt><dd>{{ issue.number }}</dd></div>

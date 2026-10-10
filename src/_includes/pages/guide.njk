@@ -19,7 +19,7 @@
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">Stiven Catalyst · {{ g.edition }}</p>
-      <h1>{{ g.title }}</h1>
+      <h1{{ g.title | longTitle | safe }}>{{ g.title }}</h1>
       <p class="lede">{{ g.subtitle }}</p>
       <dl class="book-facts">
         <div><dt>{{ "Tools" | t(lang) }}</dt><dd>{{ toolsGuide.toolCount }}</dd></div>
