@@ -21,7 +21,7 @@ Rregullat e së vërtetës janë ato te `seria-dhjete-vite-prane-punes.md` dhe k
 | 2 | Ku humbet një pjesë e porosisë | Incomplete Control | Publikuar 10 tetor 2026 (`where-part-of-the-order-goes-missing`; drafti te `seria-permiresimi/02-…`); shënimet 94–96 |
 | 3 | Gemba: çfarë sheh në terren që raporti nuk e tregon | KPI Diagnostic | Publikuar 10 tetor 2026 (`gemba`; drafti te `seria-permiresimi/03-gemba.md`); shënimet 97–98 |
 | 4 | 6S pa poster: rregulli që shihet | Shift Handover, Shift Pulse | Publikuar 10 tetor 2026 (`6s-without-a-poster`; drafti te `seria-permiresimi/04-6s-pa-poster.md`); shënimet 99–101 |
-| 5 | Një ditë e keqe apo një problem? | Sigma & Control Chart | |
+| 5 | Një ditë e keqe apo një problem? | Sigma & Control Chart | Publikuar 10 tetor 2026 (`a-bad-day-or-a-problem`; drafti te `seria-permiresimi/05-nje-dite-e-keqe.md`); shënimet 102–105 |
 | 6 | DMAIC pa "black belt" | Six Sigma DMAIC | |
 | 7 | Të drejtosh 80+ automjete që nuk i sheh | CX Control Tower | |
 | 8 | Ditët me shumë volum: standardi nën presion | Delay Analyzer | |
