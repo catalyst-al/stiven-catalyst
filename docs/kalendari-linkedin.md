@@ -770,7 +770,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/incomplete-control.jpg` · `
 
 > Unvollständige Lieferungen: Das Ziel haben wir in einzelnen Monaten erreicht, nicht in jedem. Wieder: die Arbeit des Teams, nicht eine Maßnahme.
 >
-> Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, Taschen ohne Etikett, Taschen mit zwei Namen, vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
+> Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, und vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
 >
 > Jeder unvollständige Auftrag kostet eine Nachlieferung und das Vertrauen des Kunden. Die Vollständigkeitskontrolle erfasst jeden Fall mit dem Prozessschritt, an dem er entstand, und dem Grund: Bestandsgenauigkeit, Pickfehler, Packfehler, ausgelassener Scan, Sortier- oder Ladefehler. Sie zeigt die Quote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Fehlern und wo sie entstehen.
 >
@@ -786,7 +786,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/incomplete-control.jpg` · `
 
 > Dorëzimet jo të plota: objektivin e arritëm në disa muaj, jo në çdo muaj. Përsëri: puna e ekipit, jo një masë e vetme.
 >
-> Por një gjë duhej të ndodhte e para. Duhej të ndalonim së lexuari “incomplete” si gabim të shoferit. Në magazinë gjetëm bag-e që mungonin në një zonë, bag-e pa etiketë, bag-e me dy emra, trolley të përziera. Porosia e kishte lënë magazinën jo të plotë, shumë kohë para se shoferi të ishte te dera.
+> Por një gjë duhej të ndodhte e para. Duhej të ndalonim së lexuari “incomplete” si gabim të shoferit. Në magazinë gjetëm bag-e që mungonin në një zonë dhe trolley të përziera. Porosia e kishte lënë magazinën jo të plotë, shumë kohë para se shoferi të ishte te dera.
 >
 > Çdo porosi jo e plotë kushton një dërgesë shtesë dhe besimin e klientit. Kontrolli i plotësisë regjistron çdo rast me hapin e procesit ku lindi dhe arsyen: saktësia e stokut, gabim në picking, gabim në paketim, skanim i anashkaluar, gabim në renditje ose ngarkim. Tregon normën, DPMO-në dhe nivelin sigma, shkaqet e pakta pas shumicës së gabimeve dhe ku lindin.
 >

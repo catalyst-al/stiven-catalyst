@@ -13,7 +13,7 @@ Im Bericht stand etwas sehr Einfaches: Der Kunde hatte seine Bestellung nicht vo
 
 Aber wenn man den physischen Prozess prüft, ändert sich das Bild.
 
-In einem der Fälle, die wir dokumentiert haben, fehlte eine Tasche aus einem Bereich des Lagers. Wir hatten auch Fälle, in denen die Taschen als gescannt angezeigt wurden, aber die falsche Tasche abgeholt oder zugestellt worden war. In anderen Fällen fanden sich im Lager Taschen ohne Etikett, Taschen mit zwei Namen, vermischte Trolleys und sogar ein ganzer Trolley, der im normalen Ladeablauf fehlte.
+In einem der Fälle, die wir dokumentiert haben, fehlte eine Tasche aus einem Bereich des Lagers. Wir hatten auch Fälle, in denen die Taschen als gescannt angezeigt wurden, aber die falsche Tasche abgeholt oder zugestellt worden war. In anderen Fällen fanden sich im Lager vermischte Trolleys und sogar ein ganzer Trolley, der im normalen Ladeablauf fehlte.
 
 Das Dashboard sagte: incomplete delivery. Vor Ort musste man etwas anderes fragen. War es wirklich ein Fehler des Fahrers an der Tür des Kunden, oder hatte die Bestellung das Lager schon unvollständig verlassen?
 
