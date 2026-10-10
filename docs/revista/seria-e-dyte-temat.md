@@ -59,7 +59,7 @@ vendosen kur shkruhet numri, vetëm aty ku eseja e mbështet.
 
 ## Ritmi i propozuar
 
-**Statusi:** 41–56 të shkruar, të printuar dhe të kontrolluar (10 tetor); 57–80 presin.
+**Statusi:** 41–64 të shkruar, të printuar dhe të kontrolluar (10 tetor); 65–80 presin.
 
 Pesë grupe me nga tetë numra (41–48, 49–56, 57–64, 65–72, 73–80), një PR për grup, secili me tabelën e fakteve te
 `docs/revista/management-review-nr-XX.md`, PDF-të dhe kopertinat, dhe kontrollin që çdo faqe A5 të mbajë.
