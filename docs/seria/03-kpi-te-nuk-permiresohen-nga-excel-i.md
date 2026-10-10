@@ -13,7 +13,7 @@ Në raport shfaqej diçka shumë e thjeshtë: klienti nuk kishte marrë porosin�
 
 Por kur kontrollon procesin fizik, tabloja ndryshon.
 
-Në një nga rastet që kemi dokumentuar, mungonte një bag nga një sektor i magazinës. Kishim edhe raste ku bag-et rezultonin të skanuara, por ishte marrë ose dorëzuar bag-u i gabuar. Në raste të tjera, në magazinë u gjetën bag pa label, bag me dy emra, trolley të përzier, madje edhe një trolley i plotë që mungonte nga rrjedha normale e ngarkimit.
+Në një nga rastet që kemi dokumentuar, mungonte një bag nga një sektor i magazinës. Kishim edhe raste ku bag-et rezultonin të skanuara, por ishte marrë ose dorëzuar bag-u i gabuar. Në raste të tjera, në magazinë u gjetën trolley të përzier, madje edhe një trolley i plotë që mungonte nga rrjedha normale e ngarkimit.
 
 Dashboard-i thoshte: incomplete delivery. Terreni të detyronte të pyesje diçka tjetër. A ishte vërtet gabim i shoferit në derën e klientit, apo porosia kishte dalë e paplotë që nga magazina?
 
@@ -50,7 +50,7 @@ KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
 |---|---|
 | Incomplete në raport; mendimi i parë për shoferin | Përgjigja 1 |
 | Rasti i dokumentuar: bag që mungonte nga një sektor (në përgjigje: Sector 11; në ese pa numër) | Përgjigja 1 |
-| Bag të skanuara por bag i gabuar; bag pa label, me dy emra, trolley të përzier, trolley i plotë që mungonte | Përgjigjet 1 dhe 4 |
+| Bag të skanuara por bag i gabuar; trolley të përzier, trolley i plotë që mungonte | Përgjigjet 1 dhe 4. "Bag pa label" dhe "bag me dy emra" u hoqën më 10 tetor 2026: Stiveni nuk i ka të konfirmuara |
 | Pyetja: gabim te dera apo që nga magazina | Përgjigja 1 |
 | Incomplete = 1 dhe objekti fizik në vend të gabuar | Përgjigja 4 |
 | Rampa dhe zona e ngarkimit; lista e gjërave që shiheshin | Përgjigja 2 |

@@ -18,7 +18,7 @@ The report showed something very simple: the customer had not received their ful
 
 But when you check the physical process, the picture changes.
 
-In one of the cases we documented, a bag from one section of the warehouse was missing. We also had cases where the bags showed as scanned, but the wrong bag had been picked up or delivered. In other cases, the warehouse turned up bags without a label, bags with two names, mixed trolleys, and even a full trolley missing from the normal loading flow.
+In one of the cases we documented, a bag from one section of the warehouse was missing. We also had cases where the bags showed as scanned, but the wrong bag had been picked up or delivered. In other cases, the warehouse turned up mixed trolleys, and even a full trolley missing from the normal loading flow.
 
 The dashboard said: incomplete delivery. The floor made you ask something else. Was it really the driver's mistake at the customer's door, or had the order left the warehouse incomplete?
 

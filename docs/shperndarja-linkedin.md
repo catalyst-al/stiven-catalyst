@@ -140,7 +140,7 @@ Lidhja: https://stivencatalyst.com/de/tools/incomplete-control/
 
 > Unvollständige Lieferungen: Das Ziel haben wir in einzelnen Monaten erreicht, nicht in jedem. Wieder: die Arbeit des Teams, nicht eine Maßnahme.
 >
-> Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, Taschen ohne Etikett, Taschen mit zwei Namen, vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
+> Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, und vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
 >
 > Jeder unvollständige Auftrag kostet eine Nachlieferung und das Vertrauen des Kunden. Die Vollständigkeitskontrolle erfasst jeden Fall mit dem Prozessschritt, an dem er entstand, und dem Grund: Bestandsgenauigkeit, Pickfehler, Packfehler, ausgelassener Scan, Sortier- oder Ladefehler. Sie zeigt die Quote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Fehlern und wo sie entstehen.
 >

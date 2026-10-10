@@ -13,7 +13,7 @@ Në raport shfaqej diçka shumë e thjeshtë: klienti nuk kishte marrë porosin�
 
 Por kur kontrollon procesin fizik, tabloja ndryshon.
 
-Në një nga rastet që kemi dokumentuar, mungonte një bag nga një sektor i magazinës. Kishim edhe raste ku bag-et rezultonin të skanuara, por ishte marrë ose dorëzuar bag-u i gabuar. Në raste të tjera, në magazinë u gjetën bag pa label, bag me dy emra, trolley të përzier, madje edhe një trolley i plotë që mungonte nga rrjedha normale e ngarkimit.
+Në një nga rastet që kemi dokumentuar, mungonte një bag nga një sektor i magazinës. Kishim edhe raste ku bag-et rezultonin të skanuara, por ishte marrë ose dorëzuar bag-u i gabuar. Në raste të tjera, në magazinë u gjetën trolley të përzier, madje edhe një trolley i plotë që mungonte nga rrjedha normale e ngarkimit.
 
 Dashboard-i thoshte: incomplete delivery. Terreni të detyronte të pyesje diçka tjetër. A ishte vërtet gabim i shoferit në derën e klientit, apo porosia kishte dalë e paplotë që nga magazina?
 

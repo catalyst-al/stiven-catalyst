@@ -66,7 +66,7 @@ Vegla: https://stivencatalyst.com/de/tools/kpi-diagnostic/
 
 > Im Dashboard stand: incomplete delivery. Erster Gedanke: Der Fahrer hat eine Tasche vergessen.
 >
-> Im Lager fanden wir: eine Tasche, die in einem Bereich fehlte. Taschen, die als gescannt galten, aber falsch abgeholt worden waren. Taschen ohne Etikett. Taschen mit zwei Namen. Vermischte Trolleys. Einmal ein ganzer Trolley, der im Ladeablauf fehlte.
+> Im Lager fanden wir: eine Tasche, die in einem Bereich fehlte. Taschen, die als gescannt galten, aber falsch abgeholt worden waren. Vermischte Trolleys. Einmal ein ganzer Trolley, der im Ladeablauf fehlte.
 >
 > In Excel ist das eine 1 in der Spalte „incomplete“. An der Rampe ist es ein Gegenstand am falschen Ort.
 >
