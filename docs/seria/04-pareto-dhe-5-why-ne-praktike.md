@@ -33,7 +33,7 @@ Kur përgjigjja e analizës është vetëm "punonjësi ishte i pakujdesshëm", s
 
 Nga ai rast dhe nga raste të tjera të së njëjtës periudhë dolën masa konkrete. Kontrolli i dyfishtë i ngarkimit. Bag-et të mos përziheshin në të njëjtin trolley ose kuti. Trolley-t të organizoheshin sipas route-it. Kontroll më i qartë i ngarkimit. Respektim i procesit të skanimit. Kontrolle finale për kompletësinë. Ramp audits. Standarde më të qarta për shoferët dhe për dispatch-in. Përgjegjësia operative ndahej mes strukturës së turnit, dispatch-it dhe njerëzve përgjegjës për procesin përkatës, dhe si menaxher unë i ndiqja KPI-të dhe problemet me Shift Leaders dhe dispecerët.
 
-Në atë periudhë, dëmet ranë afërsisht nga 3% në 1%. Por këtë e shoh si rezultat të punës së ekipit dhe të një sistemi më të gjerë kontrolli, jo si rezultat të një 5 Why të vetëm. Nuk kam provë që ky rast konkret e shkaktoi atë rënie, dhe nuk dua ta paraqes sikur e kam.
+Në disa muaj të asaj periudhe, ekipi e arriti objektivin e dëmeve. Jo në çdo muaj, dhe nuk kam matjet që do të tregonin një rënie të qëndrueshme. Aty ku u arrit, e shoh si rezultat të punës së ekipit dhe të një sistemi më të gjerë kontrolli, jo të një 5 Why të vetëm. Nuk kam provë që ky rast konkret ndikoi në të, dhe nuk dua ta paraqes sikur e kam.
 
 Nëse do të më duhej ta përmblidhja gjithë këtë në diçka që një menaxher mund ta përdorë nesër, do të ishin tri gjëra. Kontrollo kategoritë para se të besosh grafikun. Mos e ndal analizën te emri i personit. Dhe shkruaj vetëm aq "pse" sa ke bërë vërtet, pastaj vazhdo të pyesësh në terren, jo në formular.
 
@@ -57,7 +57,7 @@ KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
 | "Punonjësi ishte i pakujdesshëm"; punonjës tjetër, i njëjti gabim | Përgjigja 4 |
 | Masat e periudhës; ndarja e përgjegjësisë; ndjekja me Shift Leaders dhe dispecerë | Përgjigja 5 |
 | Pa person të caktuar dhe pa matje specifike për rastin | Përgjigja 5 |
-| Dëmet ~3% në ~1% si rezultat ekipi, jo i një 5 Why | Përgjigja 5 |
+| Objektivi i dëmeve i arritur në disa muaj, si rezultat ekipi, jo i një 5 Why | Përgjigja 5; ndrequr më 10 tetor 2026: "3% → 1%" nuk është e konfirmuar, objektivat u arritën në muaj të caktuar |
 | Pa analizë të dokumentuar që doli e gabuar; kufiri i kategorive | Përgjigja 6 |
 | "Ke ndërruar vetëm emrin në raport", tri gjërat për nesër dhe mbyllja: përfundime nga përgjigjet 4 dhe 6 | Sintezë |
 

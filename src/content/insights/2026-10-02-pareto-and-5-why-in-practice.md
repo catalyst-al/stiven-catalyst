@@ -37,7 +37,7 @@ When the answer of an analysis is only “the employee was careless”, very oft
 
 From that case and from other cases in the same period came concrete measures. Double-checking the loading. Bags not mixed in the same trolley or box. Trolleys organised by route. Clearer control of loading. Following the scanning process. Final completeness checks. Ramp audits. Clearer standards for the drivers and for dispatch. Operational responsibility was shared between the shift structure, dispatch and the people responsible for each process, and as a manager I followed the KPIs and the problems with the Shift Leaders and the dispatchers.
 
-In that period, damage came down from roughly 3% to 1%. But I see that as the result of the team's work and of a wider system of controls, not as the result of a single 5 Why. I have no proof that this particular case caused that drop, and I do not want to present it as if I had.
+In some months of that period, the team met the damage target. Not in every month, and I do not have the measurements that would show a steady fall. Where it was met, I see it as the result of the team's work and of a wider system of controls, not of a single 5 Why. I have no proof that this particular case contributed to it, and I do not want to present it as if I had.
 
 If I had to sum all this up into something a manager can use tomorrow, it would be three things. Check the categories before you trust the chart. Do not stop the analysis at a person's name. And write down only as many “whys” as you have really asked, then keep asking on the floor, not on the form.
 

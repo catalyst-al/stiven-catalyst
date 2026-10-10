@@ -33,6 +33,13 @@ Rezerva: rekrutimi në dyqan; raporti që lexohet (Power BI, SAP); të nisësh s
 ## Shifrat
 
 Përgjigjet për esenë 1 (10 tetor 2026): Damage 1,06% në prill 2025 (objektivi 0,8%) dhe 0,97% në një raport të
-qershorit 2025 janë të dokumentuara. Rënia "nga 3% në 1%" nuk është e konfirmuar as për periudhën, as për matjet, dhe
-nuk përdoret në këtë seri derisa të konfirmohet. Ajo shifër del ende te faqja About, te eseja për Pareto dhe te
-kalendari i LinkedIn-it: vendimi i autorit pritet.
+qershorit 2025 janë të dokumentuara. "Dëmet nga 3% në 1%" dhe "incomplete nga 0,8% në 0,1%" nuk janë rënie të
+konfirmuara: sipas Stivenit janë objektiva të arritur në muaj të caktuar, jo standard. U ndreqën po atë ditë:
+
+- **About**: shifra kryesore "3% → 1%" u zëvendësua me "80+ automjete të koordinuara në distancë" (e cila del tashmë te
+  përvoja); te përvoja e 2025, në vend të shifrave "nga–në": KPI-të e ndjekura çdo ditë, objektivat të arritur në disa
+  muaj, jo në çdo muaj. U hoq edhe "vonesat 2,5% kundrejt 5%", që është e të njëjtit lloj.
+- **Eseja "Pareto dhe 5 Why"** (tri gjuhët dhe `seria/04-…`): objektivi i dëmeve i arritur në disa muaj, pa rënien.
+- **LinkedIn** (22 tetor dhe 12 nëntor, DE dhe SQ): pa "nga–në"; postimi i dëmeve nis nga 1,06% e prillit 2025.
+
+Në këtë seri përdoren vetëm shifrat e dokumentuara, me muajin e tyre.
