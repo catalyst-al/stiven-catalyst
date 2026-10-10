@@ -194,3 +194,19 @@ test('no page writes its title or description escaped twice', { skip: !hasSite }
   }
   assert.deepEqual(twice, []);
 });
+
+test('issues 1 to 33 are the first series of October 2026; later issues are the monthly edition', async () => {
+  const { common, FIRST_SERIES } = await import('../lib/weekly/common.js');
+  const { default: weekly } = await import('../src/_data/weekly.js');
+  assert.equal(FIRST_SERIES, 33);
+  for (const issue of weekly.issues) {
+    for (const lang of ['en', 'sq', 'de']) {
+      const label = issue.number <= FIRST_SERIES ? common.labels.first_series[lang] : common.labels.edition[lang];
+      assert.equal(issue[lang].edition, label, `${issue.no} ${lang}`);
+    }
+  }
+  assert.equal(weekly.issues[0].sq.edition, 'Seria e parë');
+  for (const file of ['src/_includes/print/weekly-page.njk', 'src/_includes/pages/weekly-issue.njk']) {
+    assert.match(fs.readFileSync(file, 'utf8'), /I\.edition \}\} · \{\{ I\.date/, file);
+  }
+});

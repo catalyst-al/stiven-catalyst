@@ -117,3 +117,10 @@ test('the feedback form has an attribute no other part of a page uses', () => {
   assert.deepEqual(users, ['src/_includes/partials/tool-feedback.njk']);
   assert.match(script, /querySelector\("\[data-tool-feedback\]"\)/);
 });
+
+test('a provider that asks for an access key (Web3Forms) gets it with the feedback and the contact form', () => {
+  const partial = fs.readFileSync('src/_includes/partials/tool-feedback.njk', 'utf8');
+  const contact = fs.readFileSync('src/_includes/pages/contact.njk', 'utf8');
+  for (const source of [partial, contact]) assert.match(source, /<input type="hidden" name="access_key" value="\{\{ site\.contact\.key \}\}">/);
+  assert.ok('key' in JSON.parse(fs.readFileSync('src/_data/site.json', 'utf8')).contact, 'site.json names the key');
+});

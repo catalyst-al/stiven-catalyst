@@ -1,6 +1,7 @@
 {#- At the end of a tool page: one question, "did this help?", with room for what is missing.
     With site.contact.action set, the answer is posted there (fetch, JSON reply); without it, the answer
-    goes by email through the visitor's own mail program (mailto:). Nothing is sent until "Send" is pressed. -#}
+    goes by email through the visitor's own mail program (mailto:). Nothing is sent until "Send" is pressed.
+    site.contact.key is the public access key a provider such as Web3Forms asks for with every form. -#}
 {%- set feedbackTool = page.url | enPath %}
 <section class="shell tool-feedback" aria-labelledby="tool-feedback-title">
   <p class="kicker">{{ "Feedback" | t(lang) }}</p>
@@ -10,6 +11,10 @@
         data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
         data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
         data-subject="{{ 'Feedback' | t(lang) }}: {{ title }}">
+    {%- if site.contact.action and site.contact.key %}
+    <input type="hidden" name="access_key" value="{{ site.contact.key }}">
+    <input type="hidden" name="from_name" value="Stiven Catalyst">
+    {%- endif %}
     <input type="hidden" name="subject" value="{{ 'Feedback' | t(lang) }}: {{ title }}">
     <input type="hidden" name="tool" value="{{ feedbackTool }}">
     <input type="hidden" name="lang" value="{{ lang or 'en' }}">
