@@ -49,7 +49,7 @@ export const piecesOf = (lang, section) => {
     .filter((file) => file.endsWith(".md"))
     .map((file) => ({ file, slug: file.replace(/\.md$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, ""), data: matter.read(path.join(dir, file)).data }))
     .filter((item) => item.data.status !== "soon")
-    .sort((a, b) => new Date(a.data.date) - new Date(b.data.date) || a.slug.localeCompare(b.slug));
+    .sort((a, b) => new Date(a.data.date) - new Date(b.data.date) || a.slug.localeCompare(b.slug, "en", { numeric: true }));
 };
 
 const card = ({ kicker, number, title, sub }) => `<!doctype html><html><head><meta charset="utf-8"><style>
