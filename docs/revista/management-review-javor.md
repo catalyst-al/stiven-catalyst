@@ -17,7 +17,8 @@ Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shi
   tetor: 41 EU AI Act, 42 Menaxheri si trajner (Job Instruction), 43 Ligji i Goodhart-it, 44 Pre-mortem, 45 Puna me
   turne dhe natën, 46 Poka-yoke, 47 Ku shkon java e menaxherit, 48 OEE. Nr. 49–56 po atë ditë: 49 After Action Review, 50 Kultura e drejtë,
   51 AI gjenerative në punë, 52 Të menaxhosh lart, 53 Takt time, 54 Teoria e kufizimeve, 55 Ekipet me shumë kultura,
-  56 VSM. Tabelat e fakteve: `nr-41.md` … `nr-56.md`.
+  56 VSM. Nr. 57–64 po atë ditë: 57 Sa njerëz drejton një menaxher, 58 Ligji i Little-it, 59 S&OP, 60 Motivimi,
+  61 Menaxhimi algoritmik, 62 Vendimet nën presion, 63 Near miss, 64 Skenarët. Tabelat e fakteve: `nr-41.md` … `nr-64.md`.
 
 Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të serisë së vet, pastaj `node scripts/weekly.mjs NN` dhe
 `node scripts/thumbnails.mjs`.
@@ -147,4 +148,5 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 8 | 30–33 | U botua |
 | 9 | 34–40 | U botua (seria e parë, tetor 2026) |
 | 10 | 41–48 | U botua (seria e dytë, nëntor 2026) |
-| 11 | 49–56 | Në PR (seria e dytë, nëntor 2026) |
+| 11 | 49–56 | U botua (seria e dytë, nëntor 2026) |
+| 12 | 57–64 | Në PR (seria e dytë, nëntor 2026) |
