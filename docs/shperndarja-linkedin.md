@@ -17,6 +17,8 @@ Rregullat e së vërtetës nga `seria-dhjete-vite-prane-punes.md` vlejnë edhe k
 
 ## 2. Kalendari: 6 tetor – 26 nëntor 2026
 
+> Nga 12 tetori e vazhdon `kalendari-linkedin.md`: i njëjti ritëm me shënimet nga terreni të hënën, seria e dytë e eseve në dhjetor, Seria e parë e Management Review, dhe çdo postim në gjermanisht e shqip, deri më 1 janar 2027.
+
 | Java | E martë (ese) | E enjte (vegël) |
 |---|---|---|
 | 6.10 | Eseja 1: Të fillosh nga zero | Verspätungsanalyse |
