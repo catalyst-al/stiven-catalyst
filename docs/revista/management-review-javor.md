@@ -15,7 +15,9 @@ Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shi
   Tabela e fakteve e secilit: `docs/revista/management-review-nr-34.md` … `nr-40.md`.
 - **Seria e dytë (41–80, nëntor):** temat janë te `docs/revista/seria-e-dyte-temat.md`. Nr. 41–48 u shkruan më 10
   tetor: 41 EU AI Act, 42 Menaxheri si trajner (Job Instruction), 43 Ligji i Goodhart-it, 44 Pre-mortem, 45 Puna me
-  turne dhe natën, 46 Poka-yoke, 47 Ku shkon java e menaxherit, 48 OEE. Tabelat e fakteve: `nr-41.md` … `nr-48.md`.
+  turne dhe natën, 46 Poka-yoke, 47 Ku shkon java e menaxherit, 48 OEE. Nr. 49–56 po atë ditë: 49 After Action Review, 50 Kultura e drejtë,
+  51 AI gjenerative në punë, 52 Të menaxhosh lart, 53 Takt time, 54 Teoria e kufizimeve, 55 Ekipet me shumë kultura,
+  56 VSM. Tabelat e fakteve: `nr-41.md` … `nr-56.md`.
 
 Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të serisë së vet, pastaj `node scripts/weekly.mjs NN` dhe
 `node scripts/thumbnails.mjs`.
@@ -144,4 +146,5 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 7 | 26–29 | U botua |
 | 8 | 30–33 | U botua |
 | 9 | 34–40 | U botua (seria e parë, tetor 2026) |
-| 10 | 41–48 | Në PR (seria e dytë, nëntor 2026) |
+| 10 | 41–48 | U botua (seria e dytë, nëntor 2026) |
+| 11 | 49–56 | Në PR (seria e dytë, nëntor 2026) |
