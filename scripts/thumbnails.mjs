@@ -1,7 +1,8 @@
 // Smaller copies of the images that pages show small: the covers of the book, the magazine issues, the
-// Management Review and the Tools Guide (page-01.webp, shown at 74–300 px) and the tool previews
+// Management Review and the Tools Guide (page-01.webp, shown at 74–360 px: 720 px for the cover at the head of its
+// own page on a phone, which would otherwise take the 1000 px picture) and the tool previews
 // (media/tools/<lang>/<tool>.jpg, shown at 255–360 px, so 720 px for a phone screen). Each gets WebP copies next to it, named
-// page-01-240.webp, page-01-480.webp and <tool>-720.webp; the srcsetFor filter (eleventy.config.js) offers
+// page-01-240.webp, page-01-480.webp, page-01-720.webp and <tool>-720.webp; the srcsetFor filter (eleventy.config.js) offers
 // them to the browser when they exist. Needs ImageMagick (convert). Run it again after the covers or the
 // previews change: node scripts/thumbnails.mjs
 import fs from "node:fs";
@@ -14,7 +15,7 @@ const walk = (folder) => {
   for (const entry of fs.readdirSync(folder, { withFileTypes: true })) {
     const file = path.join(folder, entry.name);
     if (entry.isDirectory()) walk(file);
-    else if (entry.name === "page-01.webp" && !/[/\\]art[/\\]/.test(file)) jobs.push([file, [240, 480]]);
+    else if (entry.name === "page-01.webp" && !/[/\\]art[/\\]/.test(file)) jobs.push([file, [240, 480, 720]]);
   }
 };
 for (const kind of ["books", "magazine", "guides"]) walk(path.join(media, kind));

@@ -53,6 +53,21 @@ Shtyp **Save**. Kaq.
 
 **Field Notes → Add an entry**: shkruaj shënimin (pa thonjëza, shtohen vetë) dhe datën. Faqja kryesore tregon 2 më të rejat.
 
+**Lidhjet bëhen vetë.** Çdo shënim lidhet me esenë nga vjen (kur fjalët e tij janë në një ese) dhe me mjetin që përmend
+(dorëzimi i turnit, KPI, vonesat…), ose me mjetin e parë të esesë së tij. Te shënimi dalin "Nga eseja" dhe "Provoje në
+punë"; te eseja "Shënime nga terreni nga kjo ese"; te mjeti "Nga shënimet e terrenit". Mjetet e një eseje i zgjedh fusha
+**relatedTools** e esesë angleze; pa të, faqja i gjen vetë nga teksti.
+
+**Shënime të reja nga esetë.** Fjalitë me bold më vete në ese (parimet) mund të bëhen shënime, në tri gjuhët njëherësh:
+
+```
+node scripts/field-notes.mjs              # propozimet, me numër; nuk shkruan asgjë
+node scripts/field-notes.mjs --write 1,3  # shkruan propozimet 1 dhe 3 (ose --write all)
+node scripts/note-cards.mjs               # pastaj: imazhet e shënimeve për LinkedIn/Instagram
+```
+
+Skripti lë jashtë parimet që janë tashmë shënim dhe hapat e listave ("Dita 1: …", "2. …").
+
 ## 4. Projekt, foto ose material për shkarkim
 
 **Projects → Add an entry**

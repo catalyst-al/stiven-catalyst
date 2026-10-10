@@ -8,6 +8,9 @@ summary: I went from checking a box in a warehouse, to checking an order on the 
 description: "From checking a box in a warehouse, to an order on the move, to a transaction that exists only in a system. The principle stayed the same."
 teaser: The customer does not care which department made the mistake. In that moment, the person in front of them is the whole company.
 deck: 'The sixth essay in the series “Ten years close to the work”: what stays the same when you move from the shop floor to the loading ramp and the night reception desk, and what you have to learn from scratch.'
+relatedTools:
+  - /tools/cx-control-tower/
+  - /tools/sigma-control-chart/
 ---
 
 I have worked in retail and wholesale in Albania, then in last-mile logistics, and today in hospitality in Germany. From the outside they look like three different worlds. From the inside, the problem I have seen almost everywhere is the same one: the gap between what should happen according to the process and what actually happens on the ground.

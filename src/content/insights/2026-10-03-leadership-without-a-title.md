@@ -8,6 +8,9 @@ summary: Leadership without a title is not doing the boss's job without being th
 description: "Leadership without a title is not doing the boss's job. It is not hiding behind your job description when a situation needs responsibility."
 teaser: Initiative says “I will not ignore the problem”. Authority says “I have the right to make this decision”. You can have a lot of the first without claiming the second.
 deck: 'The tenth essay in the series “Ten years close to the work”: what you do when your responsibility is bigger than your position, how authority is earned without one, and three questions before you take on something that is not yours.'
+relatedTools:
+  - /tools/kpi-diagnostic/
+  - /tools/shift-handover/
 ---
 
 For me, leadership without a title is not doing the boss's job without being the boss.

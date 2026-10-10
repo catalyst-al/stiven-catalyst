@@ -126,6 +126,8 @@
       sheet.el.classList.toggle("is-left", spread && sheet.index === turned - 1);
       sheet.el.classList.toggle("is-right", sheet.index === turned);
     }
+    // At rest the book is flat (styles.css): no page sits in a 3D scene while it is read.
+    book.classList.toggle("is-still", !sheets.some((sheet) => sheet.busy > 0));
     book.classList.toggle("is-closed-front", spread && turned === 0);
     book.classList.toggle("is-closed-back", spread && turned === count);
     book.style.setProperty("--left-stack", Math.min(turned, 12));

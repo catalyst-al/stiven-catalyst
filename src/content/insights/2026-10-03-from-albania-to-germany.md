@@ -7,6 +7,9 @@ featured: true
 summary: I have not become less flexible. I have become less willing to let flexibility replace the system.
 teaser: If a process only works because a good person remembers it, you do not yet have a good process.
 deck: 'The eleventh essay in the series “Ten years close to the work”: what I took from the structured way of working in Germany, what I kept from Albania, and the question that has changed more than anything else.'
+relatedTools:
+  - /tools/cv-builder/
+  - /tools/cover-letter/
 ---
 
 I used to ask more often: “How do we solve this?”

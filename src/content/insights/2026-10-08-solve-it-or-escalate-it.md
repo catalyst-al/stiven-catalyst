@@ -9,6 +9,9 @@ summary: A good escalation system does not teach people to ask permission for ev
 description: "Escalation as a system, not a temperament: how I separated at night in the hotel what was within my role, why ambiguity is a system problem, the five things a good escalation contains, and the escalation matrix for the shift."
 teaser: Ownership does not mean “I always solve it myself”. It means taking the problem to the place where the right decision can be made, with the right information.
 deck: 'The fourth essay in the series “The operation that runs without you”: the line between initiative and authority as a clear rule, the three escalation mistakes, what a good escalation contains, and the escalation matrix for the shift.'
+relatedTools:
+  - /tools/shift-handover/
+  - /tools/five-whys/
 ---
 
 “There's a problem. What should I do?”

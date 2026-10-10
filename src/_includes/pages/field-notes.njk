@@ -7,11 +7,24 @@
 {%- set searchLabel = "Search notes" | t(lang) %}
 {%- set countLabel = "{a} of {b} notes" | t(lang) %}
 {%- set filterTopics = noteList | topics("topic") %}
+{#- Each note's essay and tool (lib/writing-links.js), in the page's language. -#}
+{%- set noteLinks = collections.writingLinks.noteLinks %}
+{%- set essayList = collections["insights" + (lang | langSuffix)] %}
+{%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
 {% include "partials/filter-bar.njk" %}
 <div class="notes-grid">
 {%- for note in noteList %}
 <article class="note-card" id="note-{{ note.fileSlug }}" data-filter-item data-topic="{{ note.data.topic }}" data-search="{{ [note.data.quote, note.data.topic] | join(' ') | lower }}">
   <blockquote>“{{ note.data.quote }}”</blockquote>
+  {%- set link = noteLinks[note.fileSlug] %}
+  {%- set noteEssay = (essayList | byOriginal(link.essay)) if link and link.essay else null %}
+  {%- set noteTool = (toolList | toolAt(link.tool, lang)) if link and link.tool else null %}
+  {%- if (noteEssay and noteEssay.url) or noteTool %}
+  <p class="note-links">
+    {%- if noteEssay and noteEssay.url %}<a href="{{ noteEssay.url }}"><small>{{ "From the essay" | t(lang) }}</small><span>{{ noteEssay.data.title }}</span></a>{% endif %}
+    {%- if noteTool %}<a class="is-tool" href="{{ noteTool.url }}"><small>{{ "Put it to work" | t(lang) }}</small><span>{{ noteTool.name }} →</span></a>{% endif %}
+  </p>
+  {%- endif %}
   <div class="note-foot">
     <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate(lang) }}{% if note.data.topic %} · {{ note.data.topic }}{% endif %}</time>
     <div class="note-actions" data-note-actions hidden>

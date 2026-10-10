@@ -8,6 +8,9 @@ summary: Five principles, a working week and the first 90 days. Not the manager 
 description: "Five principles, a working week and the first 90 days: building an operation that needs rescuing less and less."
 teaser: If a team only works when the manager is in the room, that manager has not yet built a system.
 deck: 'The twelfth and final essay in the series “Ten years close to the work”: people, standards, data, ownership and continuous improvement, plus a plan for the first 90 days in a new role.'
+relatedTools:
+  - /tools/kpi-diagnostic/
+  - /tools/six-sigma-dmaic/
 ---
 
 After years in retail, sales, logistics and hospitality, I have understood that industries change much faster than the principles of management.

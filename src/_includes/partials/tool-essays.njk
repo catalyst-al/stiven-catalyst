@@ -1,19 +1,35 @@
-{#- At the end of a tool page: the essays that are about this tool ("relatedTools" in the English essay's front matter), in the page's language. -#}
+{#- At the end of a tool page: the essays that are about this tool and the field notes that point to it
+    (lib/writing-links.js: "relatedTools" in the English essay, or what its text and the note's words name), in the page's language. -#}
 {%- set enUrl = page.url | enPath %}
+{%- set links = collections.writingLinks %}
 {%- set essayList = collections["insights" + (lang | langSuffix)] %}
 {%- set found = [] %}
-{%- for essay in collections.insights %}{% if essay.data.relatedTools and enUrl in essay.data.relatedTools %}
-  {%- set localEssay = essay if (lang or "en") == "en" else (essayList | byOriginal(essay.fileSlug)) %}
-  {%- if localEssay %}{% set found = (found.push(localEssay), found) %}{% endif %}
-{%- endif %}{% endfor %}
-{%- if found.length %}
+{%- for slug in links.toolEssays[enUrl] or [] %}
+  {%- set localEssay = essayList | byOriginal(slug) %}
+  {%- if localEssay and localEssay.url %}{% set found = (found.push(localEssay), found) %}{% endif %}
+{%- endfor %}
+{%- set toolNotes = collections["notes" + (lang | langSuffix)] | bySlugs(links.toolNotes[enUrl] or []) %}
+{%- if found.length or toolNotes.length %}
 <section class="shell tool-essays" aria-labelledby="tool-essays-title">
   <p class="kicker">{{ "From the essays" | t(lang) }}</p>
   <h2 id="tool-essays-title">{{ "Read the story behind this tool" | t(lang) }}</h2>
+  {%- if found.length %}
   <ul class="tool-essays-list">
-    {%- for essay in found %}
+    {%- for essay in found %}{% if loop.index <= 4 %}
     <li><a href="{{ essay.url }}"><small>{{ essay.data.category }} · {{ essay.data.readingTime }}</small><strong>{{ essay.data.title }}</strong><span>{{ essay.data.summary }}</span><em aria-hidden="true">→</em></a></li>
-    {%- endfor %}
+    {%- endif %}{% endfor %}
   </ul>
+  {%- endif %}
+  {%- if toolNotes.length %}
+  {%- set notesPage = "/field-notes.html" | local(lang) %}
+  <div class="essay-notes is-tool">
+    <p class="kicker">{{ "From the field notes" | t(lang) }}</p>
+    <ul>
+      {%- for note in toolNotes %}{% if loop.index <= 3 %}
+      <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">“{{ note.data.quote }}”</a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+  </div>
+  {%- endif %}
 </section>
 {%- endif %}

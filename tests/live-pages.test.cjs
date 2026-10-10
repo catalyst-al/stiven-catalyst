@@ -136,3 +136,12 @@ test('the built site serves each stylesheet to its reader pages and to no other 
     assert.doesNotMatch(read(path.join('_site', file)), /-pages\.css/, `${file} does not need it`);
   }
 });
+
+test('at rest the pages being read lie flat, outside any 3D scene, so their text is drawn sharp', () => {
+  const css = read('src/styles.css');
+  assert.match(read('src/js/book.js'), /classList\.toggle\("is-still", !sheets\.some\(\(sheet\) => sheet\.busy > 0\)\)/);
+  assert.match(css, /\.book\.is-still \.book-sheet:not\(\.is-turned\) \{ transform-style: flat; \}/);
+  assert.match(css, /\.book\.is-still \.book-sheet:not\(\.is-turned\) \.book-face\.is-back \{ visibility: hidden; \}/);
+  assert.match(css, /\.is-single \.book\.is-still \{ perspective: none; \}/);
+  assert.match(css, /\.is-single \.book\.is-still \.book-sheet\.is-turned \{ visibility: hidden; \}/);
+});

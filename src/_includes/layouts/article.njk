@@ -106,10 +106,11 @@ ogType: article
       {%- endif %}
     </section>
     {%- endif %}
-    {#- The tools an essay is about ("relatedTools" on the English essay; translations follow it). -#}
+    {#- The tools an essay is about ("relatedTools" on the English essay, or read from its text; translations follow
+        it), and the field notes drawn from it (lib/writing-links.js). -#}
     {%- if isEssay %}
-    {%- set sourceEssay = collections.insights | byOriginal(original or page.fileSlug) %}
-    {%- set essayTools = sourceEssay.data.relatedTools if sourceEssay and sourceEssay.data.relatedTools else [] %}
+    {%- set essayKey = original or page.fileSlug %}
+    {%- set essayTools = collections.writingLinks.essayTools[essayKey] or [] %}
     {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
     {%- if essayTools.length %}
     <aside class="essay-tools" aria-labelledby="essay-tools-title">
@@ -119,6 +120,19 @@ ogType: article
         <li><a href="{{ tool.url }}"><small>{{ tool.type }} · {{ tool.time }}</small><strong>{{ tool.name }}</strong><span>{{ tool.summary }}</span><em aria-hidden="true">→</em></a></li>
         {%- endif %}{% endfor %}
       </ul>
+    </aside>
+    {%- endif %}
+    {%- set essayNotes = collections["notes" + (lang | langSuffix)] | bySlugs(collections.writingLinks.essayNotes[essayKey] or []) %}
+    {%- if essayNotes.length %}
+    {%- set notesPage = "/field-notes.html" | local(lang) %}
+    <aside class="essay-notes" aria-labelledby="essay-notes-title">
+      <p class="kicker" id="essay-notes-title">{{ "Field notes from this essay" | t(lang) }}</p>
+      <ul>
+        {%- for note in essayNotes %}{% if loop.index <= 4 %}
+        <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">“{{ note.data.quote }}”</a></li>
+        {%- endif %}{% endfor %}
+      </ul>
+      {%- if essayNotes.length > 4 %}<a class="text-link" href="{{ notesPage }}">{{ "All field notes" | t(lang) }} →</a>{% endif %}
     </aside>
     {%- endif %}
     {#- After the essay: the next one, large, with its opening line; the one before; all essays. After the last

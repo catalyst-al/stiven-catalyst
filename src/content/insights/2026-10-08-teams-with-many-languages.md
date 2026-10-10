@@ -9,6 +9,8 @@ summary: A good standard is not measured by how well it is written. It is measur
 description: "How to make a standard clear to a team that speaks many languages: language and ability as two different problems, short and visual instructions, “show me how you would do it” instead of “did you understand?”, and the clear-instruction card."
 teaser: Not yet speaking a language well does not mean you are not good at your job.
 deck: 'The eighth essay in the series “The operation that runs without you”: what working in Germany taught me, why translation is not enough, the five things of a good instruction, and the card for turning an unclear instruction into a standard you can check.'
+relatedTools:
+  - /tools/shift-handover/
 checklist:
   title: The clear-instruction card
   fill: true
