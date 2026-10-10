@@ -446,9 +446,9 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/pareto.jpg` · `src/media/to
 
 **Gjermanisht**
 
-> 58 Verspätungen an einem Tag. 2,8 %. Was macht man mit dieser Zahl?
+> Delay 2,8 % in einem Bericht vom Juni 2025. Was macht man mit dieser Zahl?
 >
-> Die falsche Antwort: alle 58 Fälle einzeln besprechen. Die zweite falsche Antwort: die Fahrer ermahnen. Die Antwort, die funktioniert hat: die Fälle nach Ursache sortieren und sehen, welche drei oder vier Gründe den größten Teil ausmachen.
+> Die falsche Antwort: alle Fälle einzeln besprechen. Die zweite falsche Antwort: die Fahrer ermahnen. Die Antwort, die weiterhilft: die Fälle nach Ursache sortieren und sehen, welche drei oder vier Gründe den größten Teil ausmachen.
 >
 > Das ist Pareto. Keine Präsentationsfolie, sondern eine Sortierung. Sie sagt, wo man anfängt. Mit einer Warnung: Wenn die Kategorien falsch sind, wenn „driver delay“ im Dashboard steht, aber die Verspätung im Lager begann, ist das Diagramm mathematisch richtig und die Schlussfolgerung falsch.
 >
@@ -464,9 +464,9 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/pareto.jpg` · `src/media/to
 
 **Shqip**
 
-> 58 vonesa në një ditë. 2,8%. Çfarë bën me këtë shifër?
+> Delay 2,8% në një raport të qershorit 2025. Çfarë bën me këtë shifër?
 >
-> Përgjigjja e gabuar: diskuton të 58 rastet një nga një. Përgjigjja e dytë e gabuar: qorton shoferët. Përgjigjja që funksionoi: i rendit rastet sipas shkakut dhe sheh cilat tri ose katër arsye përbëjnë pjesën më të madhe.
+> Përgjigjja e gabuar: diskuton rastet një nga një. Përgjigjja e dytë e gabuar: qorton shoferët. Përgjigjja që ndihmon: i rendit rastet sipas shkakut dhe sheh cilat tri ose katër arsye përbëjnë pjesën më të madhe.
 >
 > Kjo është Pareto. Jo një slide prezantimi, por një renditje. Të thotë ku të fillosh. Me një paralajmërim: nëse kategoritë janë të gabuara, nëse në dashboard shkruan “driver delay”, por vonesa nisi në magazinë, grafiku është matematikisht i saktë dhe përfundimi i gabuar.
 >
@@ -990,7 +990,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/sigma-control-chart.jpg` · 
 
 **Gjermanisht**
 
-> Ein Tag mit 2,8 % Verspätungen, bei einem Durchschnitt von 2,5 %. Signal oder Rauschen?
+> Angenommen, ein Tag hat 2,8 % Verspätungen und der Durchschnitt liegt bei 2,5 %. Signal oder Rauschen?
 >
 > Die meisten Betriebe reagieren auf jeden schlechten Tag, als wäre er ein Trend. Dann wird am Dienstag eine Maßnahme beschlossen, die am Mittwoch niemand mehr braucht, weil der Mittwoch von selbst normal war. Eine Regelkarte beantwortet die Frage, bevor man reagiert: Liegt der Tag innerhalb der normalen Schwankung des Prozesses, oder ist etwas passiert?
 >
@@ -1006,7 +1006,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/sigma-control-chart.jpg` · 
 
 **Shqip**
 
-> Një ditë me 2,8% vonesa, kur mesatarja është 2,5%. Sinjal apo zhurmë?
+> Le të themi që një ditë ka 2,8% vonesa dhe mesatarja është 2,5%. Sinjal apo zhurmë?
 >
 > Shumica e operacioneve reagojnë ndaj çdo dite të keqe sikur të ishte trend. Pastaj të martën vendoset një masë që të mërkurën nuk i duhet askujt, sepse e mërkura u normalizua vetë. Një kartë kontrolli i përgjigjet pyetjes para se të reagosh: a është dita brenda luhatjes normale të procesit, apo ndodhi diçka?
 >

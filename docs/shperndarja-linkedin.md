@@ -98,9 +98,9 @@ Lidhja: https://stivencatalyst.com/de/tools/damage-control/
 
 Lidhja: https://stivencatalyst.com/de/tools/pareto/
 
-> 58 Verspätungen an einem Tag. 2,8 %. Was macht man mit dieser Zahl?
+> Delay 2,8 % in einem Bericht vom Juni 2025. Was macht man mit dieser Zahl?
 >
-> Die falsche Antwort: alle 58 Fälle einzeln besprechen. Die zweite falsche Antwort: die Fahrer ermahnen. Die Antwort, die funktioniert hat: die Fälle nach Ursache sortieren und sehen, welche drei oder vier Gründe den größten Teil ausmachen.
+> Die falsche Antwort: alle Fälle einzeln besprechen. Die zweite falsche Antwort: die Fahrer ermahnen. Die Antwort, die weiterhilft: die Fälle nach Ursache sortieren und sehen, welche drei oder vier Gründe den größten Teil ausmachen.
 >
 > Das ist Pareto. Keine Präsentationsfolie, sondern eine Sortierung. Sie sagt, wo man anfängt. Mit einer Warnung: Wenn die Kategorien falsch sind, wenn „driver delay“ im Dashboard steht, aber die Verspätung im Lager begann, ist das Diagramm mathematisch richtig und die Schlussfolgerung falsch.
 >
@@ -174,7 +174,7 @@ Lidhja: https://stivencatalyst.com/de/tools/shift-pulse/
 
 Lidhja: https://stivencatalyst.com/de/tools/sigma-control-chart/
 
-> Ein Tag mit 2,8 % Verspätungen, bei einem Durchschnitt von 2,5 %. Signal oder Rauschen?
+> Angenommen, ein Tag hat 2,8 % Verspätungen und der Durchschnitt liegt bei 2,5 %. Signal oder Rauschen?
 >
 > Die meisten Betriebe reagieren auf jeden schlechten Tag, als wäre er ein Trend. Dann wird am Dienstag eine Maßnahme beschlossen, die am Mittwoch niemand mehr braucht, weil der Mittwoch von selbst normal war. Eine Regelkarte beantwortet die Frage, bevor man reagiert: Liegt der Tag innerhalb der normalen Schwankung des Prozesses, oder ist etwas passiert?
 >
