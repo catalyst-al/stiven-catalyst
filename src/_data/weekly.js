@@ -6,7 +6,7 @@
 // Each issue is resolved per language, and its charts are drawn here once (lib/weekly/charts.js), so the print
 // and the web page show the same SVG.
 import fs from "node:fs";
-import { langs, resolve, blocks, common, FIRST_SERIES } from "../../lib/weekly/common.js";
+import { langs, resolve, blocks, common, seriesOf } from "../../lib/weekly/common.js";
 import { sources } from "../../lib/weekly/sources.js";
 import { chartMarkup, chartText, NARROW } from "../../lib/weekly/charts.js";
 
@@ -50,8 +50,8 @@ const issues = raw.map((issue) => {
     }));
     return [lang, {
       date: text.date,
-      // "First series" for the issues that came out together in October 2026, "Monthly edition" after them.
-      edition: common.labels[issue.number <= FIRST_SERIES ? "first_series" : "edition"][lang],
+      // The series the issue belongs to: "First series" for 1–40 (October 2026), "Second series" for 41–80 …
+      edition: common.labels.series[seriesOf(issue.number) - 1][lang],
       theme: text.theme,
       heading: text.theme.join(" "),
       sub: text.sub,
