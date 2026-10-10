@@ -486,9 +486,9 @@ Lidhja: https://stivencatalyst.com/de/magazine/management-review.html · https:/
 
 **Gjermanisht**
 
-> 33 Ausgaben, 330 Seiten, 235 Quellen.
+> 40 Ausgaben, 400 Seiten, 285 Quellen.
 >
-> Das ist die erste Serie der Management Review, gesammelt erschienen im Oktober 2026: Jede Ausgabe eine Führungsfrage, geprüft an der besten Forschung, in zehn Seiten. Zu Rolle, Kennzahlen, Strategie, Menschen, Betrieb und KI.
+> Das ist die erste Serie der Management Review, erschienen im Oktober 2026: Jede Ausgabe eine Führungsfrage, geprüft an der besten Forschung, in zehn Seiten. Zu Rolle, Kennzahlen, Strategie, Menschen, Betrieb und KI.
 >
 > Ein paar Themen:
 > → Kennzahlen, die rechtzeitig warnen
@@ -499,9 +499,9 @@ Lidhja: https://stivencatalyst.com/de/magazine/management-review.html · https:/
 >
 > Jede Zahl hat Quelle und Jahr unten auf ihrer Seite. Wo die Redaktion deutet und nicht die Forschung, steht es dabei. Und jede Ausgabe endet mit einem Werkzeug für den Montag.
 >
-> Ab November erscheint jeden Monat eine neue Ausgabe.
+> Jeden Monat erscheint eine neue Serie mit 40 Ausgaben. Die nächste im November.
 >
-> Alle 33 Ausgaben, zum Blättern oder als PDF:
+> Alle 40 Ausgaben, zum Blättern oder als PDF:
 > https://stivencatalyst.com/de/magazine/management-review.html
 >
 > Welche Führungsfrage sollte eine der nächsten Ausgaben beantworten?
@@ -510,9 +510,9 @@ Lidhja: https://stivencatalyst.com/de/magazine/management-review.html · https:/
 
 **Shqip**
 
-> 33 numra, 330 faqe, 235 burime.
+> 40 numra, 400 faqe, 285 burime.
 >
-> Kjo është seria e parë e Management Review, e botuar e plotë në tetor 2026: çdo numër një pyetje e menaxhimit, e kontrolluar me kërkimet më të mira, në dhjetë faqe. Për rolin, KPI-të, strategjinë, njerëzit, operacionin dhe AI-në.
+> Kjo është seria e parë e Management Review, e botuar në tetor 2026: çdo numër një pyetje e menaxhimit, e kontrolluar me kërkimet më të mira, në dhjetë faqe. Për rolin, KPI-të, strategjinë, njerëzit, operacionin dhe AI-në.
 >
 > Disa tema:
 > → KPI që paralajmërojnë në kohë
@@ -523,9 +523,9 @@ Lidhja: https://stivencatalyst.com/de/magazine/management-review.html · https:/
 >
 > Çdo shifër ka burimin dhe vitin poshtë faqes së vet. Ku flet redaksia dhe jo kërkimi, shkruhet qartë. Dhe çdo numër mbyllet me një mjet për ta përdorur të hënën.
 >
-> Nga nëntori del një numër i ri çdo muaj.
+> Çdo muaj del një seri e re me 40 numra. E radhës në nëntor.
 >
-> Të 33 numrat, për t'i shfletuar ose si PDF:
+> Të 40 numrat, për t'i shfletuar ose si PDF:
 > https://stivencatalyst.com/sq/magazine/management-review.html
 >
 > Cilës pyetje të menaxhimit duhet t'i përgjigjet një nga numrat e ardhshëm?
