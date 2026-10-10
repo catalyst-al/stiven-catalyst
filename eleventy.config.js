@@ -22,7 +22,7 @@ const TRANSLATED = new Set(["de", "sq"]);
 const LOCALES = { en: "en-GB", de: "de-DE", sq: "sq-AL" };
 const assetVersions = new Map();
 
-const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug);
+const byDate = (a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug, "en", { numeric: true });
 
 export default function (eleventyConfig) {
   // Pages are written with root-relative links ("/styles.css"); this plugin
@@ -45,7 +45,7 @@ export default function (eleventyConfig) {
   };
   eleventyConfig.addCollection("insights", (api) => numberInSeries(api.getFilteredByGlob("src/content/insights/*.md").sort(byDate)));
   eleventyConfig.addCollection("notes", (api) =>
-    api.getFilteredByGlob("src/content/notes/*.md").sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
+    api.getFilteredByGlob("src/content/notes/*.md").sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug, "en", { numeric: true }))
   );
   // Reflections: personal essays, newest first.
   eleventyConfig.addCollection("reflections", (api) =>
@@ -71,7 +71,7 @@ export default function (eleventyConfig) {
   for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {
     eleventyConfig.addCollection(`insights${suffix}`, (api) => numberInSeries(api.getFilteredByGlob(`src/content/${lang}/insights/*.md`).sort(byDate)));
     eleventyConfig.addCollection(`notes${suffix}`, (api) =>
-      api.getFilteredByGlob(`src/content/${lang}/notes/*.md`).sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug))
+      api.getFilteredByGlob(`src/content/${lang}/notes/*.md`).sort((a, b) => b.date - a.date || a.fileSlug.localeCompare(b.fileSlug, "en", { numeric: true }))
     );
     eleventyConfig.addCollection(`reflections${suffix}`, (api) =>
       api.getFilteredByGlob(`src/content/${lang}/reflections/*.md`).filter((item) => item.data.status !== "soon").sort((a, b) => b.date - a.date)
@@ -310,7 +310,7 @@ export default function (eleventyConfig) {
     new Date(date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
   );
   // Oldest first, and in file order within a day (the order the note of the day cycles through).
-  eleventyConfig.addFilter("chronological", (items) => [...(items || [])].sort((a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug)));
+  eleventyConfig.addFilter("chronological", (items) => [...(items || [])].sort((a, b) => a.date - b.date || a.fileSlug.localeCompare(b.fileSlug, "en", { numeric: true })));
   // The field notes as the home page's note of the day reads them (js/note-of-the-day.js).
   eleventyConfig.addFilter("noteDayData", (notes, lang) =>
     (notes || []).map((note) => ({

@@ -61,10 +61,13 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(second, /Përmirësimi që mbahet · Eseja 2 nga 10/);
   assert.match(second, /href="\/sq\/insights\/gemba\/" rel="next"/);
   assert.match(second, /data-checklist-copy[^>]*>Kopjo listën</);
-  const newest = built('sq/insights/gemba/index.html');
-  assert.match(newest, /Përmirësimi që mbahet · Eseja 3 nga 10/);
+  const gemba = built('sq/insights/gemba/index.html');
+  assert.match(gemba, /Përmirësimi që mbahet · Eseja 3 nga 10/);
+  assert.match(gemba, /href="\/sq\/insights\/6s-without-a-poster\/" rel="next"/);
+  assert.equal((gemba.match(/<textarea[^>]*data-checklist-item/g) || []).length, 5);
+  const newest = built('sq/insights/6s-without-a-poster/index.html');
+  assert.match(newest, /Përmirësimi që mbahet · Eseja 4 nga 10/);
   assert.match(newest, /serisë është në rrugë\.<\/strong>/);
-  assert.equal((newest.match(/<textarea[^>]*data-checklist-item/g) || []).length, 5);
 
   // The last essay of the finished first series leads into the second.
   const last = built('insights/the-operations-manager-i-want-to-be/index.html');
@@ -75,7 +78,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
   assert.match(page, /aria-labelledby="series-panel-improvement"/);
-  assert.match(page, /3 nga 10 ese</);
+  assert.match(page, /4 nga 10 ese</);
   assert.match(page, /10 ese</);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));

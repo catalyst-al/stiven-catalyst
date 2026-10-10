@@ -42,6 +42,14 @@ test('the Field Notes page and the note of the day offer each note as an image',
   }
 });
 
+test('notes of the same day keep their numeric order past 99', { skip: !hasSite }, () => {
+  // "100-…" sorts before "99-…" as text; the page compares the numbers.
+  const ids = [...built('field-notes.html').matchAll(/id="note-(\d+)-/g)].map((match) => Number(match[1]));
+  const at = (n) => ids.indexOf(n);
+  assert.ok(at(99) >= 0 && at(100) >= 0, 'notes 99 and 100 are on the page');
+  assert.ok(at(99) < at(100) && at(91) < at(99), 'notes 91, 99 and 100 in order');
+});
+
 test('"Start here" has its three steps and the newsletter in every language, and the footer links to it', { skip: !hasSite }, () => {
   for (const [file, home] of [['start.html', 'index.html'], ['de/start.html', 'de/index.html'], ['sq/start.html', 'sq/index.html']]) {
     const page = built(file);
