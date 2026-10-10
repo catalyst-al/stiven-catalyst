@@ -58,9 +58,9 @@ export const proposals = (notes = existingNotes()) => {
 };
 
 // A file name for a note: its date, number and the first words that say something.
-const SMALL = new Set(["a", "an", "the", "is", "are", "it", "to", "of", "did", "which", "me", "my", "while", "can", "and", "or", "not", "do", "does", "i", "we", "you", "that", "this", "in", "on", "be", "will", "have", "has", "what", "how", "so", "for", "with", "at", "just", "because"]);
+const SMALL = new Set(["a", "an", "the", "is", "are", "it", "to", "of", "did", "which", "me", "my", "while", "can", "its", "and", "or", "not", "do", "does", "i", "we", "you", "that", "this", "in", "on", "be", "will", "have", "has", "what", "how", "so", "for", "with", "at", "just", "because"]);
 export const fileName = (date, number, quote) => {
-  const words = quote.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((word) => word && !SMALL.has(word));
+  const words = quote.toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((word) => word && !SMALL.has(word));
   return `${date}-${String(number).padStart(2, "0")}-${words.slice(0, 3).join("-") || "note"}.md`;
 };
 
