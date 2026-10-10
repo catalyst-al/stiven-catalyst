@@ -17,7 +17,7 @@ Rregullat e së vërtetës janë ato te `seria-dhjete-vite-prane-punes.md` dhe k
 
 | Nr. | Tema | Mjeti | Gjendja |
 |---|---|---|---|
-| 1 | Si punonim me dëmet | Damage Control | Draft (`seria-permiresimi/01-si-punonim-me-demet.md`) |
+| 1 | Si punonim me dëmet | Damage Control | Publikuar 10 tetor 2026 (`how-we-worked-with-damage`; drafti me kontrollin e fakteve te `seria-permiresimi/01-si-punonim-me-demet.md`); shënimet 91–93 |
 | 2 | Ku humbet një pjesë e porosisë | Incomplete Control | |
 | 3 | Gemba: çfarë sheh në terren që raporti nuk e tregon | KPI Diagnostic | |
 | 4 | 6S pa poster: rregulli që shihet | Shift Pulse | |
