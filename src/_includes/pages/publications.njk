@@ -18,7 +18,7 @@
       <span class="book-object-cover"><img src="{{ wkCover.image }}" srcset="{{ wkCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ wkCover.width }}" height="{{ wkCover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
-      <p class="kicker">{{ weekly.name }} · {{ WK.labels.edition }} · {{ wk[ml].date }} · {{ WK.labels.no }} {{ wk.no }}</p>
+      <p class="kicker">{{ weekly.name }} · {{ wk[ml].edition }} · {{ wk[ml].date }} · {{ WK.labels.no }} {{ wk.no }}</p>
       <h2><a href="{{ wkUrl }}">{{ wk[ml].heading }}</a></h2>
       <p class="book-subtitle">{{ WK.tagline }}</p>
       <p>{{ wk[ml].feature }}</p>

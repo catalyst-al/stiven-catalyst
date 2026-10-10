@@ -2,6 +2,29 @@
 
 Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shih "Përditësimi" më poshtë).
 
+## Përditësimi i 10 tetorit 2026
+
+- **Seria e parë.** Numrat 1–33 u shkruan dhe dolën të gjithë në tetor 2026. Që "botimi mujor" të jetë i vërtetë, ata
+  quhen tani **"Seria e parë · Tetor 2026"** (në kopertinë, në kokën e faqes, në ballinë dhe te Botimet; `FIRST_SERIES` dhe
+  etiketa `first_series` te `lib/weekly/common.js`). Nuk u dhanë data të kaluara (janar–shtator): numrat citojnë burime
+  të vitit 2026 që dolën më vonë, dhe esetë ku çojnë janë të tetorit; një datë e hershme do të binte ndesh me to.
+- **Nga Nr. 34, një numër në muaj**, në ditën e parë të muajit, me datën e vet; etiketa e tij është "Botimi mujor". Hyrja e
+  listës së numrave e thotë: seria e parë doli e plotë në tetor 2026, nga nëntori një numër i ri çdo muaj.
+
+| Nr. | Tema | Publikimi |
+|---|---|---|
+| 34 | Mirënjohja që funksionon | 1 nëntor 2026 |
+| 35 | Puna standarde dhe Kaizen | 1 dhjetor 2026 |
+| 36 | 70-20-10: si zhvillohen drejtuesit | 1 janar 2027 |
+| 37 | Dashboard-et që përdoren | 1 shkurt 2027 |
+| 38 | Konflikti në ekip | 1 mars 2027 |
+| 39 | Automatizimi dhe e ardhmja e roleve | 1 prill 2027 |
+| 40 | Gemba: menaxhimi aty ku ndodh puna | 1 maj 2027 |
+| 41 | AI dhe rregullat në punë: EU AI Act | 1 qershor 2027 |
+
+Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të vet, pastaj `node scripts/weekly.mjs NN` dhe
+`node scripts/thumbnails.mjs`.
+
 ## Përditësimi i 9 tetorit 2026
 
 - **Botimi mujor.** Numrat dalin si botim mujor: në kopertinë, në ballinë dhe te Botimet shkruhet "Botimi mujor · Tetor 2026"
@@ -124,6 +147,6 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 5 | 18–21 | U botua |
 | 6 | 22–25 | U botua |
 | 7 | 26–29 | U botua |
-| 8 | 30–33 | Në shqyrtim |
-| 9 | 34–37 | |
-| 10 | 38–41 | |
+| 8 | 30–33 | U botua |
+| 9 | 34–37 | Një në muaj, nëntor 2026 – shkurt 2027 |
+| 10 | 38–41 | Një në muaj, mars – qershor 2027 |

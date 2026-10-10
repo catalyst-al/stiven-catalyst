@@ -7,6 +7,11 @@
 <section class="shell contact">
   {%- if site.contact.action %}
   <form class="contact-form" action="{{ site.contact.action }}" method="post">
+    {%- if site.contact.key %}
+    <input type="hidden" name="access_key" value="{{ site.contact.key }}">
+    <input type="hidden" name="subject" value="Stiven Catalyst: {{ 'Contact' | t(lang) }}">
+    <input type="hidden" name="from_name" value="Stiven Catalyst">
+    {%- endif %}
     <div class="field">
       <label for="contact-name">{{ "Name" | t(lang) }}</label>
       <input id="contact-name" name="name" autocomplete="name" required>
