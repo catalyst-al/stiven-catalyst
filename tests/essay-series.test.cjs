@@ -80,9 +80,16 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const volume = built('sq/insights/high-volume-days/index.html');
   assert.match(volume, /Përmirësimi që mbahet · Eseja 8 nga 10/);
   assert.match(volume, /href="\/sq\/insights\/the-angry-guest-at-2am\/" rel="next"/);
-  const newest = built('sq/insights/the-angry-guest-at-2am/index.html');
-  assert.match(newest, /Përmirësimi që mbahet · Eseja 9 nga 10/);
-  assert.match(newest, /serisë është në rrugë\.<\/strong>/);
+  const guest = built('sq/insights/the-angry-guest-at-2am/index.html');
+  assert.match(guest, /Përmirësimi që mbahet · Eseja 9 nga 10/);
+  assert.match(guest, /href="\/sq\/insights\/when-improvement-fades\/" rel="next"/);
+
+  // The third series is complete: its last essay closes it, and offers to start again.
+  const thirdClosing = built('sq/insights/when-improvement-fades/index.html');
+  assert.match(thirdClosing, /Përmirësimi që mbahet · Eseja 10 nga 10/);
+  assert.doesNotMatch(thirdClosing, /serisë është në rrugë/);
+  assert.match(thirdClosing, /Filloni sërish me esenë 1/);
+  assert.equal((thirdClosing.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
 
   // The last essay of the finished first series leads into the second.
   const last = built('insights/the-operations-manager-i-want-to-be/index.html');
@@ -93,7 +100,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
   assert.match(page, /aria-labelledby="series-panel-improvement"/);
-  assert.match(page, /9 nga 10 ese</);
+  assert.doesNotMatch(page, /nga 10 ese</);
   assert.match(page, /10 ese</);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
