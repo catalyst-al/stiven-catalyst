@@ -8,5 +8,10 @@
     "id": "without-you",
     "name": { "en": "The operation that runs without you", "de": "Ein Betrieb, der auch ohne Sie läuft", "sq": "Operacioni që punon pa ty" },
     "planned": 10
+  },
+  {
+    "id": "improvement",
+    "name": { "en": "Improvement that holds", "de": "Verbesserung, die hält", "sq": "Përmirësimi që mbahet" },
+    "planned": 10
   }
 ]
