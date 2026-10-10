@@ -13,8 +13,9 @@ Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shi
 - **Nr. 34–40** u shkruan më 10 tetor dhe e mbyllin serinë e parë: 34 Mirënjohja që funksionon, 35 Puna standarde dhe
   kaizen, 36 70-20-10, 37 Dashboard-et që përdoren, 38 Konflikti në ekip, 39 Automatizimi dhe e ardhmja e roleve, 40 Gemba.
   Tabela e fakteve e secilit: `docs/revista/management-review-nr-34.md` … `nr-40.md`.
-- **Seria e dytë (41–80, nëntor):** nis me Nr. 41 "AI dhe rregullat në punë: EU AI Act" nga lista më poshtë; 39 temat e
-  tjera zgjidhen para se të nisë puna, me të njëjtat rregulla dhe të njëjtët gjashtë blloqe.
+- **Seria e dytë (41–80, nëntor):** temat janë te `docs/revista/seria-e-dyte-temat.md`. Nr. 41–48 u shkruan më 10
+  tetor: 41 EU AI Act, 42 Menaxheri si trajner (Job Instruction), 43 Ligji i Goodhart-it, 44 Pre-mortem, 45 Puna me
+  turne dhe natën, 46 Poka-yoke, 47 Ku shkon java e menaxherit, 48 OEE. Tabelat e fakteve: `nr-41.md` … `nr-48.md`.
 
 Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të serisë së vet, pastaj `node scripts/weekly.mjs NN` dhe
 `node scripts/thumbnails.mjs`.
@@ -143,3 +144,4 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 7 | 26–29 | U botua |
 | 8 | 30–33 | U botua |
 | 9 | 34–40 | U botua (seria e parë, tetor 2026) |
+| 10 | 41–48 | Në PR (seria e dytë, nëntor 2026) |
