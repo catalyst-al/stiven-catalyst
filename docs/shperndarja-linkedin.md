@@ -80,9 +80,9 @@ Lidhja: https://stivencatalyst.com/de/tools/shift-handover/
 
 Lidhja: https://stivencatalyst.com/de/tools/damage-control/
 
-> Schadensquote von rund 3 % auf 1 %. Das war nicht meine Zahl. Das war die Arbeit eines Teams mit vielen Maßnahmen gleichzeitig: doppelte Kontrolle der Beladung, keine vermischten Taschen, Trolleys nach Tour, Rampen-Audits.
+> Schadensquote im April 2025: 1,06 %, bei einem Ziel von 0,8 %. In einzelnen Monaten haben wir das Ziel erreicht, nicht in jedem. Und wenn, dann nie durch eine einzige Maßnahme, sondern durch die Arbeit eines Teams mit vielen Maßnahmen gleichzeitig: doppelte Kontrolle der Beladung, keine vermischten Taschen, Trolleys nach Tour, Rampen-Audits.
 >
-> Was ich dabei gelernt habe: Die Quote allein hilft nicht. „3 %“ sagt nicht, ob die Schäden beim Stapeln, beim Verladen oder auf der Straße entstehen, und ob die Ursache Verpackung, Handhabung oder Ladungssicherung ist. Ohne diese zwei Fragen, wo und warum, arbeitet man an allem gleichzeitig und an nichts richtig.
+> Was ich dabei gelernt habe: Die Quote allein hilft nicht. „1,06 %“ sagt nicht, ob die Schäden beim Stapeln, beim Verladen oder auf der Straße entstehen, und ob die Ursache Verpackung, Handhabung oder Ladungssicherung ist. Ohne diese zwei Fragen, wo und warum, arbeitet man an allem gleichzeitig und an nichts richtig.
 >
 > Das Tool Schadenskontrolle erfasst jede beschädigte Einheit mit Prozessschritt und Ursache. Es zeigt die Quote, DPMO und das Sigma-Niveau, die wenigen Ursachen hinter den meisten Schäden und den Schritt, an dem man anfangen sollte. Excel- und CSV-Import, Verlauf nach Woche, Export.
 >
@@ -138,7 +138,7 @@ Lidhja: https://stivencatalyst.com/de/tools/kpi-diagnostic/
 
 Lidhja: https://stivencatalyst.com/de/tools/incomplete-control/
 
-> Unvollständige Lieferungen von 0,8 % auf 0,1 %. Wieder: die Arbeit des Teams, nicht eine Maßnahme.
+> Unvollständige Lieferungen: Das Ziel haben wir in einzelnen Monaten erreicht, nicht in jedem. Wieder: die Arbeit des Teams, nicht eine Maßnahme.
 >
 > Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, Taschen ohne Etikett, Taschen mit zwei Namen, vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
 >

@@ -150,7 +150,7 @@ Rendi është ai që propozoi Stiveni. Eseja 6 shërben si urë: lidh milen e fu
 5. Cili veprim doli nga analiza, kush e mori përsipër dhe si e mate nëse funksionoi?
 6. Një analizë që të çoi në përfundim të gabuar. Çfarë mësove?
 
-**Për shifrat:** rënia e dëmeve nga 3% në 1% (dhe e paplotave nga 0,8% në 0,1%) mund të përmendet vetëm si sfond, si rezultat i ekipit me shumë veprime njëkohësisht. Lidhja mes një analize konkrete dhe këtij rezultati shkruhet vetëm aq sa e konfirmon Stiveni.
+**Për shifrat:** rënia e dëmeve nga 3% në 1% (dhe e paplotave nga 0,8% në 0,1%) nuk është e konfirmuar si rënie e qëndrueshme: më 10 tetor 2026 Stiveni sqaroi se janë objektiva të arritur në muaj të caktuar. Mund të përmendet vetëm kështu, pa shifrat "nga–në", si sfond, si rezultat i ekipit me shumë veprime njëkohësisht. Lidhja mes një analize konkrete dhe këtij rezultati shkruhet vetëm aq sa e konfirmon Stiveni.
 
 **Lidhje:** Pareto 80/20, 5 Whys, Damage Control; kursi Six Sigma DMAIC.
 
