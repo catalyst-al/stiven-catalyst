@@ -68,8 +68,11 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const sixS = built('sq/insights/6s-without-a-poster/index.html');
   assert.match(sixS, /Përmirësimi që mbahet · Eseja 4 nga 10/);
   assert.match(sixS, /href="\/sq\/insights\/a-bad-day-or-a-problem\/" rel="next"/);
-  const newest = built('sq/insights/a-bad-day-or-a-problem/index.html');
-  assert.match(newest, /Përmirësimi që mbahet · Eseja 5 nga 10/);
+  const badDay = built('sq/insights/a-bad-day-or-a-problem/index.html');
+  assert.match(badDay, /Përmirësimi që mbahet · Eseja 5 nga 10/);
+  assert.match(badDay, /href="\/sq\/insights\/dmaic-without-a-black-belt\/" rel="next"/);
+  const newest = built('sq/insights/dmaic-without-a-black-belt/index.html');
+  assert.match(newest, /Përmirësimi që mbahet · Eseja 6 nga 10/);
   assert.match(newest, /serisë është në rrugë\.<\/strong>/);
 
   // The last essay of the finished first series leads into the second.
@@ -81,7 +84,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(page, /aria-labelledby="series-panel-without-you"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
   assert.match(page, /aria-labelledby="series-panel-improvement"/);
-  assert.match(page, /5 nga 10 ese</);
+  assert.match(page, /6 nga 10 ese</);
   assert.match(page, /10 ese</);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
