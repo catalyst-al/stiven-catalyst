@@ -1411,7 +1411,16 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 @media print { .tool-feedback { display: none; } }
 .tool-essays .kicker { margin: 0 0 6px; }
 .tool-essays h2 { margin: 0 0 18px; font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(26px, 3vw, 36px); }
-@media print { .essay-tools, .tool-essays, .essay-series { display: none; } }
+/* The field notes drawn from an essay, or pointing to a tool: their words, each a link to the note. */
+.essay-notes { margin: 20px 0 8px; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.essay-notes.is-tool { margin-top: 18px; }
+.essay-notes .kicker { margin: 0 0 12px; }
+.essay-notes ul { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 4px; }
+.essay-notes li a { display: block; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-family: var(--serif); font-size: 1.2rem; line-height: 1.3; text-decoration: none; }
+.essay-notes li:last-child a { border-bottom: 0; }
+.essay-notes li a:hover { color: var(--blue); }
+.essay-notes .text-link { display: inline-block; margin-top: 8px; }
+@media print { .essay-tools, .tool-essays, .essay-series, .essay-notes { display: none; } }
 
 /* Tools page: the five families (families.json), each with its own planet. */
 .tool-card.has-family {
@@ -2687,6 +2696,25 @@ html:not(.js) .filter-bar { display: none; }
   gap: 12px;
 }
 .note-actions { display: flex; gap: 6px; }
+/* Where a note comes from and the tool it points to (lib/writing-links.js). */
+.note-links { display: flex; flex-wrap: wrap; gap: 8px; margin: -18px 0 22px; }
+.note-links a {
+  display: grid;
+  gap: 2px;
+  max-width: 100%;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: border-color .2s ease;
+}
+.note-links a small { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.note-links a.is-tool span { color: var(--blue); }
+.note-links a:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .note-actions button,
 .note-actions a,
 .share-links button,
@@ -3610,6 +3638,18 @@ html:not(.js) .filter-bar { display: none; }
 .book-reader.is-dark .book-page,
 .book-reader.is-dark .book-zoom-pages img { background: #060a10; }
 .book-reader.is-dark .book-page.is-blank { background: #0b1117; }
+
+/* At rest the pages being read are flat. A page in a 3D scene is drawn as a picture and then placed, which leaves
+   small print soft (and on iPhones after a pinch); flat, the browser draws the text straight onto the screen, as
+   sharp as the rest of the site. The scene comes back for the turn itself (js/book.js takes "is-still" away while a
+   sheet moves). A sheet not yet turned lies flat with its back hidden; on a phone or one large page the turned
+   sheets, unseen, are hidden too and the book needs no depth at all. Open on two pages, the left page stays the
+   back of a turned sheet. */
+.book.is-still .book-sheet:not(.is-turned) { transform-style: flat; }
+.book.is-still .book-sheet:not(.is-turned) .book-face { -webkit-backface-visibility: visible; backface-visibility: visible; }
+.book.is-still .book-sheet:not(.is-turned) .book-face.is-back { visibility: hidden; }
+.is-single .book.is-still { perspective: none; }
+.is-single .book.is-still .book-sheet.is-turned { visibility: hidden; }
 
 @media (hover: hover) and (pointer: fine) {
   .is-spread .book-sheet.is-right:not(.is-turned):hover { transform: rotateY(-6deg); }

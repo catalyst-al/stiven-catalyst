@@ -8,6 +8,7 @@ import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
 import { searchIndex } from "./lib/search-index.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
+import { writingLinks } from "./lib/writing-links.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -57,6 +58,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("projects", (api) =>
     api.getFilteredByGlob("src/content/projects/*.md").sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   );
+
+  // The writing and the tools, linked (lib/writing-links.js), read from the English essays and notes: each essay's
+  // tools, each note's essay and tool, and the other way round, the essays and notes of each tool.
+  eleventyConfig.addCollection("writingLinks", (api) => writingLinks({
+    essays: api.getFilteredByGlob("src/content/insights/*.md").filter((item) => item.data.status !== "soon")
+      .map((item) => ({ slug: item.fileSlug, date: item.date, text: item.rawInput, data: item.data })),
+    notes: api.getFilteredByGlob("src/content/notes/*.md").map((item) => ({ slug: item.fileSlug, date: item.date, quote: item.data.quote })),
+  }));
 
   // The same collections in German and Albanian: insightsDe, notesSq, ...
   for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {

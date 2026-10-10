@@ -9,6 +9,8 @@ summary: An SOP becomes truly useful when the person who needs it can find it, u
 description: "The series' concrete case: how I turned scattered checklists, documents, screenshots and notes into a browser work page for Front Office and Night Audit, what I left out, what I cannot claim, and what I would do differently today."
 teaser: I did not build it because documents were missing. I started it because the documents existed, but the information I needed during work was scattered.
 deck: 'The ninth essay in the series “The operation that runs without you”: a real project, developed step by step, presented as work in progress rather than a measured success, with the card for turning a folder of SOPs into a working tool.'
+relatedTools:
+  - /tools/shift-handover/
 checklist:
   title: The SOP organisation card
   fill: true

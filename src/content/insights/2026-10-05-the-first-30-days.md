@@ -9,6 +9,9 @@ summary: In the first 30 days, a new manager does not need 30 solutions. They ne
 description: "How I read an operation I do not know: my first nights as a Night Auditor in a new hotel, why I waited on purpose, and 30 questions for the first 30 days."
 teaser: The problem was not a lack of information. The problem was that the information did not quickly tell you where you were, what to check now and what came next.
 deck: 'The first essay in the series “The operation that runs without you”: the first nights in a new hotel, what I saw, why I changed nothing straight away, and a list of questions for anyone starting somewhere new.'
+relatedTools:
+  - /tools/six-sigma-dmaic/
+  - /tools/kpi-diagnostic/
 ---
 
 On my first night at the new hotel, I could not work as a Night Auditor.
