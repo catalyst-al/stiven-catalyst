@@ -25,7 +25,7 @@ Rregullat e së vërtetës janë ato te `seria-dhjete-vite-prane-punes.md` dhe k
 | 6 | DMAIC pa black belt | Six Sigma DMAIC, 5 Whys | Publikuar 10 tetor 2026 (`dmaic-without-a-black-belt`; drafti te `seria-permiresimi/06-dmaic-pa-black-belt.md`); shënimet 106–107 |
 | 7 | Të drejtosh 80+ automjete që nuk i sheh | CX Control Tower | Publikuar 10 tetor 2026 (`80-vehicles-you-cannot-see`; drafti te `seria-permiresimi/07-80-automjete.md`); shënimet 108–109 |
 | 8 | Ditët me shumë volum: standardi nën presion | Delay Analyzer | Publikuar 10 tetor 2026 (`high-volume-days`; drafti te `seria-permiresimi/08-ditet-me-shume-volum.md`); shënimet 110–112 |
-| 9 | Mysafiri i zemëruar në orën 2 të natës | Shift Handover | |
+| 9 | Mysafiri i zemëruar në orën 2 të natës | Shift Handover | Publikuar 10 tetor 2026 (`the-angry-guest-at-2am`; drafti te `seria-permiresimi/09-mysafiri-ne-oren-2.md`); shënimet 113–116 |
 | 10 | Kur përmirësimi shuhet | KPI Diagnostic | |
 
 Rezerva: rekrutimi në dyqan; raporti që lexohet (Power BI, SAP); të nisësh si kurier.
