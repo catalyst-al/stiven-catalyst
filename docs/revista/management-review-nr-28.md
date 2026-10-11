@@ -2,13 +2,25 @@
 
 Blloku: Strategjia. Të dhënat janë te `lib/weekly/issues/28.js`.
 
-Faqet e AIAG, VDA QMC, ISO, Wiley (Risk Analysis), SPE/OnePetro, IEEE dhe të revistave shkencore (Journal of Patient
-Safety) nuk hapen nga ambienti i punës. Çdo fakt u kontrollua te teksti i faqes së botuesit që kthejnë kërkimet, te
-abstraktet dhe te burime të pavarura; kjo shënohet në kolonën e fundit. Manuali AIAG & VDA (2019), standardi
+Në punën e parë faqet e AIAG, VDA QMC, ISO, Wiley (Risk Analysis), SPE/OnePetro, IEEE dhe të revistave shkencore
+(Journal of Patient Safety) nuk u hapën nga ambienti i punës; çdo fakt u kontrollua te teksti i faqes së botuesit që
+kthenin kërkimet, te abstraktet dhe te burime të pavarura. Manuali AIAG & VDA (2019), standardi
 ISO 31000:2018 dhe procedura MIL-P-1629 (1949) nuk u panë; tabela e Prioritetit të Veprimit (AP) është me pagesë dhe
 nuk u pa. Numri i vlerave të RPN-së është matematikë: e kontrolluam vetë mbi të 1.000 kombinimet. Rezultatet e Cox-it
 janë vërtetime matematikore, jo matje nga organizatat. Studimet empirike janë të vogla (dy ekipe në një Trust të
 shëndetësisë britanike; rreziqe të kohës së lirë) dhe matin përputhjen mes vlerësuesve, jo nëse metoda parandalon dëmin.
+
+Kontrolli i dytë, te tekstet e plota (12 tetor 2026). Asnjë nga tetë burimet nuk u lexua i plotë. Manuali AIAG & VDA
+dhe ISO 31000 janë me pagesë; faqja e VDA QMC u hap (botimi i qershorit 2019, SAE J1739), po ashtu fleta e korrigjimeve e
+AIAG (PDF te JSA) dhe udhëzuesi i Relyence për AP; iso.org kthen 403. MIL-P-1629 nuk gjendet; data dhe titulli u
+konfirmuan te PDF-ja ASEMS e Ministrisë britanike të Mbrojtjes. Bowles (IEEE) nuk u hap; te teksti i plotë i Produção
+(2013) i atribuohet vetëm 120. Cox, Ball & Watt (Wiley 403) dhe Shebl et al. (kopja e Hertfordshire vetëm për stafin):
+u lexuan abstraktet e plota (Crossref, PubMed), që i mbështetin të gjitha formulimet e shtypura. Thomas, Bratvold &
+Bickel (OnePetro 403): u lexuan të plota përmbledhja e JPT (2014) dhe raporti i Oil IT Journal (2013). U ndreqën, në të
+tri gjuhët: (1) faqja 3: Bowles-it i atribuohet vetëm fakti se RPN-ja merr 120 vlera; boshllëku 901–999 dhe 24 mënyrat
+për 120 jepen më vete, dhe shënimi thotë se janë llogari e redaksisë (i kontrolluam mbi të 1.000 kombinimet); (2) faqja 6:
+përmbysja e shkallës së pikëzimit "was enough to change the risk priority order", pra e ndryshoi rendin, jo e përmbysi.
+Asnjë shifër e shtypur nuk doli ndryshe. Të tetë burimet marrin ose mbajnë `via`.
 
 ## Tabela e fakteve
 
