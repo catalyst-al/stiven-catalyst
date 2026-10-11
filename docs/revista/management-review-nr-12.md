@@ -12,8 +12,8 @@ Silva & Santos (2024), PDF i revistës iSys; Butler, Zimmermann & Bird, por vet�
 (libër; te Internet Archive vetëm me huazim), libri i Doerr-it, dhe postimi i Rick Klau (library.gv.com nuk arrihet nga
 ambienti i punës). Asnjë shifër e shtypur nuk doli ndryshe. U ndreqën dy formulime, në të tri gjuhët: (1) Silva & Santos
 nuk thonë se shumica e 47 studimeve janë "në softuer dhe IT": ata gjejnë "eighteen studies related to software development
-and agile software development" dhe studime nga fusha të ndryshme; faqja e shifrave thotë tani "18 prej tyre për
-zhvillimin e softuerit"; (2) "tre deri në pesë objektiva" nuk është vetëm te libri i Doerr-it, që nuk u lexua: guida e
+and agile software development" dhe studime nga fusha të ndryshme; faqja e shifrave thotë tani "18 për zhvillim
+softueri"; (2) "tre deri në pesë objektiva" nuk është vetëm te libri i Doerr-it, që nuk u lexua: guida e
 Google thotë "Pick just three to five objectives" dhe "around three key results per objective", prandaj faqja e rrezikut ia
 atribuon tani guidës, dhe libri i Doerr-it hiqet nga burimet e asaj faqeje. Guida e Google shkruan se Doerr ua solli
 OKR-të drejtuesve të Google "in early 2000"; Doerr vetë, te TED dhe te faqja e botuesit, thotë 1999 (takimi i vjeshtës
