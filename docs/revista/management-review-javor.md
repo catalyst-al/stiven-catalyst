@@ -20,7 +20,16 @@ Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shi
   56 VSM. Nr. 57–64 po atë ditë: 57 Sa njerëz drejton një menaxher, 58 Ligji i Little-it, 59 S&OP, 60 Motivimi,
   61 Menaxhimi algoritmik, 62 Vendimet nën presion, 63 Near miss, 64 Skenarët. Nr. 65–72: 65 Intervista e strukturuar, 66 Kanban, 67 Të drejtosh në distancë,
   68 Saktësia e stokut, 69 Pilotet, 70 Drejtësia në organizatë, 71 Monitorimi i punonjësve, 72 Mentori dhe sponsori.
-  Tabelat e fakteve: `nr-41.md` … `nr-72.md`.
+  Nr. 73–80 e mbyllin serinë e dytë: 73 Time-Driven ABC, 74 Pse projektet vonohen, 75 Shëndeti mendor në punë,
+  76 Diagrama Ishikawa, 77 Parashikimi i kërkesës, 78 Drejtuesi etik, 79 Çmimi i mosrespektit, 80 PDCA.
+  Tabelat e fakteve: `nr-41.md` … `nr-80.md`.
+- **Nr. 73–80 dhe burimet.** Kur u shkruan, ambienti i punës nuk hapte asnjë faqe (WebFetch dhe curl u bllokuan nga
+  rrjeti); çdo shifër u kontrollua vetëm te pjesët e abstrakteve, përmbledhjeve dhe faqeve që kthente kërkimi. Prandaj
+  çdo burim i këtyre numrave mban "përmes" (`via`), dhe tabela e fakteve e thotë në krye. Rreshtat e shënuar "vetëm
+  abstrakti" ose "vetëm përmbledhje" duhen parë te teksti i plotë kur të jetë e mundur.
+- **Faqja e burimeve mban gjashtë karta.** Me shtatë ose tetë, kartat e fundit fshihen pas kutisë "Metoda editoriale"
+  (`.bottom` është e pozicionuar absolutisht dhe `.pg` ka `overflow: hidden`). Nr. 73–80 kanë nga gjashtë burime dhe
+  u kontrolluan në tri gjuhët që asnjë faqe të mos kalojë kutinë e poshtme.
 
 Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të serisë së vet, pastaj `node scripts/weekly.mjs NN` dhe
 `node scripts/thumbnails.mjs`.
@@ -152,4 +161,5 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 10 | 41–48 | U botua (seria e dytë, nëntor 2026) |
 | 11 | 49–56 | U botua (seria e dytë, nëntor 2026) |
 | 12 | 57–64 | U botua (seria e dytë, nëntor 2026) |
-| 13 | 65–72 | Në PR (seria e dytë, nëntor 2026) |
+| 13 | 65–72 | U botua (seria e dytë, nëntor 2026) |
+| 14 | 73–80 | Në PR (seria e dytë, nëntor 2026; e mbyll serinë) |
