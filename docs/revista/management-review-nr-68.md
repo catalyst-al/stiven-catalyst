@@ -17,7 +17,7 @@ Gjermaninë nuk u gjet asnjë shifër për saktësinë e stokut.
 Kontrolli i dytë, te tekstet e plota (12 tetor 2026). U lexuan të plota: udhëzuesi i GAO (GAO-02-447G), versioni HTML te
 govinfo.gov (gao.gov kthen 403); teza e doktoratës së Yun Kang-ut (MIT, shkurt 2004, 129 faqe), PDF te DSpace@MIT, mbi
 të cilën bazohet artikulli i 2005; dhe teksti i Chuang & Oliva në formën e dorëshkrimit të autorëve, brenda raportit
-përfundimtar të një projekti të Këshillit Kombëtar të Shkencës së Tajvanit (repozitori i National Chengchi University,
+përfundimtar të një projekti të Ministrisë së Shkencës dhe Teknologjisë së Tajvanit (repozitori i National Chengchi University,
 ah.lib.nccu.edu.tw). Abstrakti i Raman et al. (2001) u rilexua te faqja e CMR dhe ai i Rinehart-it (1960) te OpenAlex.
 Nuk u hapën: DeHoratius & Raman (2008) dhe Rinehart (1960) (INFORMS pas pagese, asnjë kopje e hapur te Unpaywall,
 OpenAlex ose CiteSeerX), Raman et al. (2001) (CMR, vetëm abstrakti; një kopje te Scribd nuk u përdor), Hardgrave et
