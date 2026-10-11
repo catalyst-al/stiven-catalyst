@@ -63,7 +63,8 @@ Asnjë shifër e shtypur nuk doli ndryshe. Të tetë burimet marrin ose mbajnë 
 ## Çfarë është editoriale
 
 - Grafiku i faqes 3 është llogari e redaksisë mbi të 1.000 kombinimet e tri pikëve (710, 188, 70, 25 dhe 7 në breza
-  200-she); 120 vlerat e ndryshme dhe 24 kombinimet që japin 120 ndjekin Bowles dhe i kontrolluam me llogari.
+  200-she), bashkë me 24 kombinimet që japin 120 dhe boshllëkun 901–999; vetëm 120 vlerat e ndryshme ndjekin Bowles,
+  dhe i kontrolluam edhe ato me llogari.
 - Shembujt 10 × 1 × 1 = 10 dhe 4 × 4 × 4 = 64 te faqja 3, dhe 17 / 50 = 34% te faqja 4, janë llogaritë tona.
 - Ndarja e shtatë hapave të AIAG & VDA në dy kolona ("Analiza", "Rreziku dhe veprimi") te faqja 5 është e redaksisë.
 - Leximet te kutitë "Leximi ynë".
