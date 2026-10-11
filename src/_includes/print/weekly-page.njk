@@ -45,7 +45,7 @@
   <div class="wk-legend-box">{% for item in W.legend %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
 </section>
 {%- elif page.type == "sources" %}
-<section class="pg">
+<section class="pg{{ ' is-dense' if issue.sources.length > 6 }}">
   {{ chrome(n, L.sources) }}
   <p class="kicker">{{ W.sourcesPage.kicker }}</p>
   <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
