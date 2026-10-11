@@ -18,7 +18,8 @@ govinfo.gov), Sentinel Event Alert 50 (PDF i Joint Commission te digitalassets.j
 (faqja e ECRI, botuar 15 janar 2026) dhe hyrja e fjalorit të LEI; faqja e Routledge u rihap. Libri i Shingo-s nuk u
 rihap: e vetmja kopje e plotë në internet është një skanim i ngarkuar nga një përdorues në Internet Archive (nëntor
 2025), jo një botim i ligjshëm, ndaj rrëfimet dhe shifrat e Shingo-s mbeten siç i konfirmoi kontrolli i parë; tri
-metodat e kapjes së gabimit, 112 shembujt dhe kostot e tyre u rikonfirmuan te Grout. Nuk u hap teksti i plotë i
+metodat e kapjes së gabimit, 112 shembujt dhe kostot e tyre u rikonfirmuan te Grout. Libri merr `via` "Grout, 2007, and a scan of the book", që
+faqja e burimeve të thotë ku u kontrollua. Nuk u hap teksti i plotë i
 Sendelbach & Funk (i mbyllur; LWW 403): vetëm abstrakti te Europe PMC, dhe burimi mban `via`. Asnjë shifër e shtypur nuk
 doli ndryshe dhe asgjë nuk u ndreq në numër.
 
