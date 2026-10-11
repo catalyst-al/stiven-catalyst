@@ -4,7 +4,10 @@ Blloku: Operacioni. Të dhënat janë te `lib/weekly/issues/25.js`.
 
 Në punën e parë faqet e ASQ, Motorola Solutions, NIST, iSixSigma, The W. Edwards Deming Institute dhe të revistave
 shkencore (Journal of Operations Management) nuk u hapën nga ambienti i punës; çdo fakt u kontrollua te teksti i faqes së
-botuesit që kthenin kërkimet, te abstraktet dhe te burime të pavarura. Për kontrollin e dytë shih paragrafin më poshtë.
+botuesit që kthenin kërkimet, te abstraktet dhe te burime të pavarura. Librat e Shewhart (1931), Deming (1986) dhe
+Montgomery nuk u panë. Shifrat e niveleve sigma janë llogari mbi një konventë (zhvendosja 1,5σ), jo matje nga fabrikat;
+i kontrolluam edhe vetë me shpërndarjen normale. Shifra 94% e Deming-ut është vlerësim nga përvoja, jo e dhënë.
+Kursimet e Motorola-s dhe të GE-së janë deklarata të kompanive dhe nuk hyjnë.
 
 Kontrolli i dytë, te tekstet e plota (12 tetor 2026). U lexuan të plota: kronologjia e Motorola Solutions (faqja e
 kompanisë); artikulli i iSixSigma "Sigma Performance Levels" (Kirsten Terry, 25 shtator 2024, faqja e botuesit); seksionet
@@ -17,10 +20,8 @@ shtypur nuk doli ndryshe dhe teksti i numrit nuk ndryshoi. Dy shënime: artikull
 (66.807 / 6.210 / 233 / 3,4; rendimenti 93,319% dhe 99,9997%) pa përmendur zhvendosjen 1,5 sigma, ndaj konventa dhe
 kritika ndaj saj mbështeten te burimet e tjera të punës së parë, jo te burimet e faqes; po ashtu Bill Smith, Bob Galvin dhe
 nisja në 1987 nuk janë te kronologjia e Motorola-s, që thotë vetëm "Motorola invented the Six Sigma quality improvement
-process in 1986". 99,99966% është llogari (1 − 3,4/1.000.000). Librat e Shewhart (1931), Deming
-(1986) dhe Montgomery nuk u panë. Shifrat e niveleve sigma janë llogari mbi një konventë (zhvendosja 1,5σ), jo matje
-nga fabrikat; i kontrolluam edhe vetë me shpërndarjen normale. Shifra 94% e Deming-ut është vlerësim nga përvoja, jo e
-dhënë. Kursimet e Motorola-s dhe të GE-së janë deklarata të kompanive dhe nuk hyjnë.
+process in 1986". 99,99966% është llogari (1 − 3,4/1.000.000). Burimet që nuk u hapën marrin `via`: dy faqet e ASQ
+(copat e kërkimit), dy artikujt e JOM (abstrakti) dhe libri i Deming-ut (The W. Edwards Deming Institute).
 
 ## Tabela e fakteve
 
