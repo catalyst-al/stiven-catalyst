@@ -22,6 +22,17 @@ vetëm përmes abstrakteve. Shifrat e shembullit u konfirmuan të gjitha te teks
 ilustrim i autorëve, jo një kompani e matur; kjo thuhet në faqe. Për Shqipërinë dhe Gjermaninë nuk u kërkua dhe nuk hyn
 asnjë shifër.
 
+Kontrolli i dytë, te tekstet e plota (12 tetor 2026), për dy burimet që mbanin `via`. Asnjëri nuk u hap: Ittner et al.
+(2002) nuk ka kopje të hapur (Unpaywall, OpenAlex, Semantic Scholar: "closed"; Wiley 403); Keel et al. (2017) është me
+qasje të hapur te ScienceDirect, por ScienceDirect, ScienceOpen dhe arkivi i Karolinska kthyen 403 ose faqe sfide, dhe
+Europe PMC nuk e ka tekstin. U lexua e plotë teza e doktoraturës e autorit të parë (George Keel, "Counting what counts",
+Karolinska Institutet 2020, PDF te openarchive.ki.se), ku studimi I është ky rishikim, i përmbledhur (f. 29–31), por pa
+artikullin e ribotuar. Teza konfirmon: 25 artikuj në analizë (nga 780 regjistrime); "none of the 25 applications reported
+a tight adherence to the seven-step … approach to TDABC. However, all applications reflected the seven-step approach in
+some way"; "no article reported cases where TDABC influenced reimbursement schemes". Kjo e mbështet fjalinë e faqes 6.
+`via` e Keel-it bëhet "Abstract and the first author's thesis (2020)"; Ittner mban të vetën. Shënimi i faqes 6 thotë tani
+"nuk u lexuan të plotë" në vend të "vetëm te abstraktet". Asnjë shifër e shtypur nuk doli ndryshe.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |
@@ -44,7 +55,7 @@ asnjë shifër.
 | Shtatë hapat: hapi 1 zgjedhja e gjendjes mjekësore (me komplikimet dhe sëmundjet shoqëruese), hapi 2 zinxhiri i vlerës së kujdesit; më tej hartat e procesit, vlerësimet e kohës dhe tarifa e kapacitetit për çdo burim (kostoja / kapaciteti praktik) | Kaplan & Porter (2011) | U konfirmua te teksti i plotë, seksioni "The Cost Measurement Process": 1 "Select the medical condition"; 2 "Define the care delivery value chain"; 3 "Develop process maps"; 4 "Obtain time estimates for each process"; 5 "Estimate the cost of supplying patient care resources"; 6 "Estimate the capacity of each resource, and calculate the capacity cost rate"; 7 "Calculate the total cost of patient care". **U plotësua** hyrja e faqes 6: "nga zgjedhja e gjendjes, përmes vlerësimeve të kohës dhe tarifës për çdo burim, te kostoja e plotë e kujdesit" |
 | Përdorimi i gjerë i ABC-së lidhet me nivele më të larta cilësie dhe përmirësime më të mëdha të kohës së ciklit dhe cilësisë; kosto më të ulëta prodhimi në mënyrë indirekte, përmes këtyre; mesatarisht pa lidhje domethënëse me kthimin nga aktivet (ROA); prova të dobëta se lidhja me fitimin varet nga karakteristikat operacionale të fabrikës | Christopher D. Ittner, William N. Lanen & David F. Larcker, Journal of Accounting Research 40(3), 2002, f. 711–726 | Artikulli nuk u hap (Wiley 403); abstrakti u lexua drejtpërdrejt te IDEAS/RePEc ("higher quality levels and greater improvements in cycle time and quality… no significant association with return on assets… weak evidence… contingent on the plant's operational characteristics"). Crossref: 40(3), 711–726, qershor 2002. Mostër prerjeje tërthore: lidhje, jo shkak. Madhësia e mostrës nuk u pa. Faqja 6 |
 | Dy anketa britanike (1994, 1999) te kompanitë më të mëdha: norma e adoptimit të ABC-së ra pak, dhe u rrit në mënyrë domethënëse pjesa e atyre që nuk po e shqyrtonin ABC-në | John Innes, Falconer Mitchell & Donald Sinclair, Management Accounting Research 11(3), 2000, f. 349–362 | U konfirmua vetëm si përmbledhje në rishikime të mëvonshme, përmes kërkimit; abstrakti origjinal nuk u pa. U hoq nga faqja 6 që burimet të mos kalojnë gjashtë (faqja e burimeve mban gjashtë karta); shih "Çfarë nuk hyri" |
-| Keel, Savage, Rafiq & Mazzocato, Health Policy 121(7), korrik 2017, f. 755–763: rishikim sistematik sipas PRISMA; TDABC mund të ndihmojë të kostohen proceset me efikasitet; roli te pagesat e paketuara (bundled payments) dhe koordinimi i kujdesit ende nuk është treguar; zbatimet ndryshonin, por përgjithësisht ndiqnin modelin me shtatë hapa, me shumë devijime që mund ta dëmtojnë saktësinë | Abstrakti dhe "highlights" (ScienceDirect, IDEAS); rishikime të mëvonshme për devijimet | Artikulli nuk u hap (ScienceDirect 403); abstrakti dhe "highlights" u lexuan te PubMed (28535996) dhe te kopja e ScienceDirect në Wayback ("can help to efficiently cost processes"; "ability to inform bundled payment reimbursement systems… remains to be demonstrated"; "applications varied but generally reflected the seven-step model"). Crossref: 121(7), 755–763. "Shumë studime u larguan nga shtatë hapat" mbështetet ende vetëm te përmbledhjet e mëvonshme ("many deviations"); `via` e thotë |
+| Keel, Savage, Rafiq & Mazzocato, Health Policy 121(7), korrik 2017, f. 755–763: rishikim sistematik sipas PRISMA; TDABC mund të ndihmojë të kostohen proceset me efikasitet; roli te pagesat e paketuara (bundled payments) dhe koordinimi i kujdesit ende nuk është treguar; zbatimet ndryshonin, por përgjithësisht ndiqnin modelin me shtatë hapa, me shumë devijime që mund ta dëmtojnë saktësinë | Abstrakti dhe "highlights" (ScienceDirect, IDEAS); rishikime të mëvonshme për devijimet | Artikulli nuk u hap (ScienceDirect 403); abstrakti dhe "highlights" u lexuan te PubMed (28535996) dhe te kopja e ScienceDirect në Wayback ("can help to efficiently cost processes"; "ability to inform bundled payment reimbursement systems… remains to be demonstrated"; "applications varied but generally reflected the seven-step model"). Crossref: 121(7), 755–763. "Shumë studime u larguan nga shtatë hapat" mbështetet te përmbledhjet e mëvonshme ("many deviations") dhe, në kontrollin e dytë, te teza e autorit të parë (Keel 2020, f. 30): "none of the 25 applications reported a tight adherence to the seven-step health-care-specific approach to TDABC. However, all applications reflected the seven-step approach in some way"; edhe "no article reported cases where TDABC influenced reimbursement schemes" (f. 30). Artikulli vetë nuk u hap; `via` e thotë |
 
 ## Çfarë nuk hyri
 
@@ -58,7 +69,8 @@ asnjë shifër.
   jashtë që faqja 6 të mos japë një shkak që studimi nuk e provon.
 - Innes, Mitchell & Sinclair (2000): rreshti për anketat britanike (adoptimi ra pak, më shumë firma nuk e shqyrtonin) u hoq nga faqja 6, sepse u pa vetëm te rishikime të mëvonshme dhe sepse faqja e burimeve mban gjashtë karta. Edhe "17,5% e 177 firmave përdornin ABC në 1999" dhe "36 firma prodhuese në 1994, vetëm 12 në 1999":
   vetëm te punime që e citojnë; nuk hynë.
-- Keel et al. (2017): numri i studimeve të rishikuara nuk u gjet. Rishikimi i 2025 te Applied Health Economics and Health
+- Keel et al. (2017): numri i studimeve të rishikuara (25, nga 780 regjistrime) u gjet në kontrollin e dytë vetëm te teza
+  e autorit të parë (2020, f. 29), jo te artikulli; nuk hyn. Rishikimi i 2025 te Applied Health Economics and Health
   Policy (32 studime) është punim tjetër; nuk hyn.
 - Kaplan & Porter (2011): rezultatet e pilotëve tani u panë te teksti (MD Anderson: "16% (11-minute) reduction in process
   time, a 12% decrease in costs for technical staff, and a 67% reduction in costs for professional staff"); nuk hynë për
