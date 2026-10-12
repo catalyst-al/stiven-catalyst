@@ -1815,5 +1815,14 @@
   "Search the essays, notes and tools": "Kërko në ese, shënime dhe mjete",
   "All tools": "Të gjitha mjetet",
   "Write to me": "Më shkruaj",
-  "the essays by challenge": "esetë sipas sfidës"
+  "the essays by challenge": "esetë sipas sfidës",
+  "Listen": "Dëgjo",
+  "Pause": "Pauzë",
+  "Resume": "Vazhdo",
+  "Speed": "Shpejtësia",
+  "Paragraph {a} of {b}": "Paragrafi {a} nga {b}",
+  "Read to the end": "U lexua deri në fund",
+  "The voice stopped. Press to continue.": "Zëri u ndal. Shtyp për të vazhduar.",
+  "Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.": "Shfletuesi juaj nuk ka zë për këtë gjuhë, prandaj nuk e lexon dot këtë tekst me zë. Një shfletues tjetër, si Microsoft Edge, mund ta ketë.",
+  "Read aloud by a voice of your own browser. This site records and sends nothing.": "Lexohet nga një zë i shfletuesit tuaj. Kjo faqe nuk regjistron dhe nuk dërgon asgjë."
 }

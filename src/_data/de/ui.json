@@ -1815,5 +1815,14 @@
   "Search the essays, notes and tools": "Essays, Notizen und Tools durchsuchen",
   "All tools": "Alle Tools",
   "Write to me": "Schreiben Sie mir",
-  "the essays by challenge": "die Essays nach Herausforderung"
+  "the essays by challenge": "die Essays nach Herausforderung",
+  "Listen": "Vorlesen",
+  "Pause": "Pause",
+  "Resume": "Weiter",
+  "Speed": "Tempo",
+  "Paragraph {a} of {b}": "Absatz {a} von {b}",
+  "Read to the end": "Bis zum Ende vorgelesen",
+  "The voice stopped. Press to continue.": "Die Stimme ist abgebrochen. Zum Fortsetzen drücken.",
+  "Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.": "Ihr Browser hat keine Stimme für diese Sprache und kann diesen Text hier nicht vorlesen. Ein anderer Browser, etwa Microsoft Edge, hat vielleicht eine.",
+  "Read aloud by a voice of your own browser. This site records and sends nothing.": "Vorgelesen von einer Stimme Ihres eigenen Browsers. Diese Seite zeichnet nichts auf und sendet nichts."
 }

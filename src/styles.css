@@ -1422,6 +1422,29 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .essay-notes .text-link { display: inline-block; margin-top: 8px; }
 @media print { .essay-tools, .tool-essays, .essay-series, .essay-notes { display: none; } }
 
+/* The Listen bar at the top of an essay (js/listen.js): play or pause, start again, the speed, the paragraph being
+   read, and a note on where the voice comes from. The block being read is marked in the text. */
+.essay-listen { margin: 0 0 20px; padding: 12px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-family: var(--sans); }
+.essay-listen[hidden] { display: none; }
+.essay-listen-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.essay-listen-play { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease; }
+.essay-listen-play:hover { filter: brightness(1.08); }
+.essay-listen-play svg { width: 13px; height: 13px; fill: currentColor; }
+.essay-listen-play[aria-pressed="true"] svg path { d: path("M6 4h4v16H6zM14 4h4v16h-4z"); }
+.essay-listen-play small { font-size: .8rem; font-weight: 600; opacity: .8; }
+.essay-listen-play[disabled] { opacity: .45; cursor: default; filter: none; }
+.essay-listen-stop { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .85rem; line-height: 1; cursor: pointer; }
+.essay-listen-stop:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.essay-listen-rate select { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font: inherit; font-size: .85rem; line-height: 1; }
+.essay-listen-rate select[disabled] { opacity: .45; }
+.essay-listen-status { color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.essay-listen-status:empty { display: none; }
+.essay-listen-bar { height: 3px; margin: 10px 0 8px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.essay-listen-bar span { display: block; height: 100%; width: 0; background: var(--blue); transition: width .3s ease; }
+.article-content .essay-listen-note { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+.article-content .is-speaking { background: color-mix(in srgb, var(--blue) 12%, transparent); box-shadow: 0 0 0 7px color-mix(in srgb, var(--blue) 12%, transparent); border-radius: 4px; transition: background .3s ease, box-shadow .3s ease; }
+@media print { .essay-listen { display: none; } }
+
 /* Before the text of an essay: the three moves for tomorrow's shift ("firstMove"), the way to the checklist, the
    first tool and the challenges the essay answers. Printed with the essay, without its links. */
 .essay-moves { margin: 0 0 36px; padding: 22px 26px 20px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); border-left: 4px solid var(--blue); border-radius: 18px; background: var(--card); font-family: var(--sans); }
