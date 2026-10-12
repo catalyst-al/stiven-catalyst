@@ -26,6 +26,11 @@ checklist:
       hint: Hapur, me emër. Jo “do të shihet”.
     - label: Kush e ndjek, dhe çfarë i thuhet mysafirit?
       hint: Që mysafiri të mos e tregojë historinë nga e para.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Dëgjo pa ndërprerë, pastaj thuaj qartë çfarë mund të bësh në këtë orë.
+  - Shkruaje ankesën me fjalët e mysafirit, me atë që verifikove dhe atë që është ende e hapur.
+  - Dorëzoje me një emër, që mysafiri të mos e tregojë historinë përsëri në mëngjes.
 ---
 
 Ora 2 e natës në titull nuk është ora e një incidenti që mund ta vërtetoj.

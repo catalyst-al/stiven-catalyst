@@ -25,7 +25,8 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
     const words = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
     let shown = 0;
     items.forEach((item) => {
-      const match = (!topic || item.dataset.topic === topic) && words.every((word) => item.dataset.search.includes(word));
+      // An item can belong to several topics, written "a|b" (the essays and their challenges); the notes have one.
+      const match = (!topic || item.dataset.topic.split("|").includes(topic)) && words.every((word) => item.dataset.search.includes(word));
       item.hidden = !match;
       if (match) shown++;
     });

@@ -6,6 +6,7 @@ import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
+import { withDiagram } from "./lib/diagrams.js";
 import { searchIndex } from "./lib/search-index.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
@@ -66,6 +67,21 @@ export default function (eleventyConfig) {
       .map((item) => ({ slug: item.fileSlug, date: item.date, text: item.rawInput, data: item.data })),
     notes: api.getFilteredByGlob("src/content/notes/*.md").map((item) => ({ slug: item.fileSlug, date: item.date, quote: item.data.quote })),
   }));
+
+  // The challenges each essay answers ("problems" on the English essay, ids from src/_data/challenges.json), by
+  // the essay's slug; the German and Albanian essays follow their English original (challengesOf, below).
+  eleventyConfig.addCollection("challengeMap", (api) => Object.fromEntries(
+    api.getFilteredByGlob("src/content/insights/*.md").map((item) => [item.fileSlug, Array.isArray(item.data.problems) ? item.data.problems : []])
+  ));
+  // The LinkedIn post of an essay ("linkedin" on the English essay), by slug, so "Discuss this essay on LinkedIn"
+  // under the German and Albanian essays leads to the same post unless their own front matter names another.
+  eleventyConfig.addCollection("linkedinMap", (api) => Object.fromEntries(
+    api.getFilteredByGlob("src/content/insights/*.md").filter((item) => item.data.linkedin).map((item) => [item.fileSlug, item.data.linkedin])
+  ));
+  // The challenge ids of an essay in any language, and the challenge entries for a list of ids, in their order.
+  eleventyConfig.addFilter("challengesOf", (item, map) => (map || {})[item.data.original || item.fileSlug] || []);
+  eleventyConfig.addFilter("challengeList", (ids, challenges) => (ids || []).map((id) => (challenges || []).find((c) => c.id === id)).filter(Boolean));
+  eleventyConfig.addFilter("withChallenge", (items, id, map) => (items || []).filter((item) => ((map || {})[item.data.original || item.fileSlug] || []).includes(id)));
 
   // The same collections in German and Albanian: insightsDe, notesSq, ...
   for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {
@@ -193,6 +209,8 @@ export default function (eleventyConfig) {
   // The body of an essay with ids on its section titles, and the list of those sections (lib/essay-body.js).
   eleventyConfig.addFilter("essayBody", essayBody);
   eleventyConfig.addFilter("essayContents", essayContents);
+  // The diagram of an essay ("diagram" in its front matter, lib/diagrams.js) in place of its "{diagram}" paragraph.
+  eleventyConfig.addFilter("withDiagram", withDiagram);
   // Today's place in a cycle of {count} items, counted in whole days since 1970 (UTC at build time; the
   // browser counts by the reader's own date, js/note-of-the-day.js).
   eleventyConfig.addFilter("dayOfCycle", (count) => (count ? Math.floor(Date.now() / 864e5) % count : 0));

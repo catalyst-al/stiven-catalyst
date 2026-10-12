@@ -22,6 +22,11 @@ checklist:
     - Die Ladungen sind sortiert, ohne vermischte Bestellungen.
     - Die Ladetore sind geschlossen.
     - Offene Probleme sind an die nächste Schicht übergeben.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Gehen Sie am Ende der Schicht einen Bereich ab: Ausrüstung am Platz, Ladungen sortiert, Tore geschlossen."
+  - Benennen Sie, wer diesen Bereich prüft, und machen Sie den Standard dort sichtbar, nicht auf einem Poster anderswo.
+  - Übergeben Sie die offenen Probleme dieses Bereichs an die nächste Schicht, mit Namen.
 ---
 
 Ein Plakat mit sechs Prinzipien kann an jeder Wand hängen. Aber die Rampe liest das Plakat nicht.

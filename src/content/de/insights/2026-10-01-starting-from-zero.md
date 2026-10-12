@@ -7,6 +7,25 @@ featured: true
 summary: Ein Titel kann an einem einzigen Tag verschwinden. Was man gelernt hat, nicht. Aber am neuen Ort muss man es noch einmal beweisen.
 teaser: In Albanien habe ich Menschen, Filialen und Prozesse geführt. In Deutschland war mein erster Job, Pakete auszuliefern.
 deck: 'Der erste Essay der Reihe „Zehn Jahre nah an der Arbeit“: was von einer Führungskraft bleibt, wenn der Titel nicht mit über die Grenze kommt.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Schreiben Sie drei Dinge auf, die Sie heute können und die von keinem Titel abhängen.
+  - Fragen Sie eine Person, die die Arbeit macht, wie der Prozess wirklich läuft, und hören Sie zu, bevor Sie vergleichen.
+  - Erwähnen Sie, was Sie früher waren, nur dann, wenn es der Aufgabe vor Ihnen hilft.
+checklist:
+  title: Was mit Ihnen geht
+  fill: true
+  items:
+    - label: Was ich kann, ohne Titel
+      hint: Disziplin, der Kunde, einen Prozess lesen, unter Druck arbeiten, Verantwortung übernehmen.
+    - label: Was ich hier von innen lernen muss
+      hint: Das System, die Sprache, die Regeln dieses Ortes.
+    - label: Die Erwartung, die ich an der Tür lasse
+      hint: „Ich war Manager, also sollte ich Manager sein.“
+    - label: Wo ich es zuerst zeige
+      hint: Eine Aufgabe, eine Schicht, ein Problem, das niemand übernommen hat.
+    - label: Die Arbeit, die ich nicht unter meiner Würde nenne
+      hint: Die, die mir den Prozess von der anderen Seite beibringt.
 ---
 
 In Albanien war meine letzte Rolle Cluster Manager. Ich habe den Betrieb eines Flagship-Stores in Tirana geleitet und Teile des Filialnetzes koordiniert. In Deutschland war mein erster Job, Pakete auszuliefern.

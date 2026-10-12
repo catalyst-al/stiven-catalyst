@@ -29,6 +29,13 @@ checklist:
       hint: Kush e ndryshon udhëzimin kur ndryshon procesi?
     - label: Pa ty
       hint: A do të funksiononte nesër, nëse ti nuk do të ishe aty?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një përmirësim që bëre këtë vit dhe pyet nëse do të ecte javën tjetër pa ty.
+  - Emëro, me emër, kush kontrollon që standardi zbatohet ende, dhe sa shpesh.
+  - Gjej një udhëzim që nuk përputhet më me procesin, dhe përditësoje sot.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: improvement-paths
 ---
 
 Mos u mjafto me faktin që sot e zgjidhe problemin.
@@ -62,6 +69,8 @@ Si mendim, jo si rast i provuar: besoj se një përmirësim rrezikon të humbas�
 Ndërrimi i njerëzve e bën këtë më të dukshme. Në last mile kemi pasur shoferë të thirrur me njoftim të shkurtër, dhe shoferë në ramp-up që nuk ishin ende të përshtatur me SOP-të. Kjo e bënte të vështirë ruajtjen e të njëjtit nivel zbatimi.
 
 Një standard nuk duhet të funksionojë vetëm me njerëzit që e njohin prej vitesh. Nëse çdo punonjës i ri duhet ta mësojë procesin vetëm duke parë një koleg, rezultati varet nga kush e trajnon. E shkrova këtë te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/). Këtu shihet çmimi i saj: një standard që kalon vetëm nga njeriu te njeriu humbet pak nga pak me çdo ndërrim.
+
+{diagram}
 
 ## Çfarë e mban gjallë një standard
 

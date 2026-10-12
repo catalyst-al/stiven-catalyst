@@ -24,6 +24,11 @@ checklist:
       hint: In der Schicht, mit der Menge, der Zeit und den Menschen dieses Tages.
     - label: Was muss sich ändern, damit der Schaden nicht wieder passiert?
       hint: Eine Änderung im Prozess, wer sie übernimmt und wann sie geprüft wird.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie einen Schadensfall und fragen Sie, wo er passiert ist, nicht wer es war.
+  - Prüfen Sie, ob es für diese Stufe einen Standard gab, und ob er an diesem Tag umsetzbar war.
+  - Erfassen Sie den Fall nach Stufe und Ursache, damit das Pareto nächste Woche eine Adresse hat.
 ---
 
 1,06 %. Das Ziel lag bei 0,8 %.

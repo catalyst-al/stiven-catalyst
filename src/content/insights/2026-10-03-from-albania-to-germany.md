@@ -10,6 +10,28 @@ deck: 'The eleventh essay in the series “Ten years close to the work”: what 
 relatedTools:
   - /tools/cv-builder/
   - /tools/cover-letter/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - new-role
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - For the next problem you solve, write down who owns it afterwards and what changes so it does not return.
+  - Document one process that works today only because you remember it.
+  - Take one decision this week and mark where your initiative ends and someone else's authority begins.
+checklist:
+  title: Solved. And then?
+  fill: true
+  items:
+    - label: What did we solve?
+      hint: The problem as it showed up, in one line.
+    - label: Why did it happen?
+      hint: The cause in the process, not the name of the person.
+    - label: Who owns it from tomorrow?
+      hint: A name, not a department.
+    - label: What changes so it does not come back?
+      hint: A step, a check, a rule, a tool.
+    - label: Where is it written down?
+      hint: So that the system knows it, not only I.
 ---
 
 I used to ask more often: “How do we solve this?”

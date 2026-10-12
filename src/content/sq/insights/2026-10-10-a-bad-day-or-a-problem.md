@@ -25,6 +25,13 @@ checklist:
       hint: Një ditë jashtë zakonit, apo disa ditë me radhë në të njëjtin drejtim?
     - label: A kemi gjetur një shkak konkret?
       hint: Para se të ndryshojmë procesin, jo pas.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Para se të ndryshosh një rregull, vendose numrin e sotëm pranë dhjetë ditëve të fundit.
+  - Kontrollo së pari nëse ka një problem të menjëhershëm sigurie ose shërbimi. Nëse po, vepro tani.
+  - Emëro një shkak konkret para se ta prekësh procesin.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: three-layers
 ---
 
 2,8%.
@@ -86,6 +93,8 @@ E treta: a kemi identifikuar një shkak konkret përpara se të ndryshojmë proc
 Në last mile ndiqnim shkaqe operative: bag-e që mungonin, trolley të përziera, vonesa në përgatitje, probleme gjatë ngarkimit. Për një metodë të dokumentuar që ndante ndikimin e motit dhe të volumit nga problemi i procesit, nuk e di.
 
 Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e punës, me kushtet e ditës dhe me të dhënat e ditëve të mëparshme. 2,8% vonesa në një ditë me volum të jashtëzakonshëm nuk thotë të njëjtën gjë si 2,8% në një ditë të zakonshme.
+
+{diagram}
 
 ## Tri shtresa
 

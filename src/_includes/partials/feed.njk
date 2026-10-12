@@ -19,7 +19,7 @@
     <id>{{ post.url | absoluteUrl }}</id>
     <updated>{{ post.date | isoDate }}T00:00:00Z</updated>
     <summary>{{ post.data.deck or post.data.summary }}</summary>
-    <content type="html">{{ post.content | transformWithHtmlBase(site.url, post.url) }}</content>
+    <content type="html">{{ post.content | withDiagram(post.data.diagram, post.data.lang or "en") | transformWithHtmlBase(site.url, post.url) }}</content>
   </entry>
   {%- endfor %}
 </feed>

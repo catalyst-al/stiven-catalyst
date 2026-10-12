@@ -25,6 +25,13 @@ checklist:
       hint: Ein ungewöhnlicher Tag, oder mehrere Tage hintereinander in dieselbe Richtung?
     - label: Haben wir eine konkrete Ursache gefunden?
       hint: Bevor wir den Prozess ändern, nicht danach.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Bevor Sie eine Regel ändern, legen Sie die heutige Zahl neben die letzten zehn Tage.
+  - Prüfen Sie zuerst, ob ein akutes Sicherheits- oder Serviceproblem besteht. Wenn ja, handeln Sie jetzt.
+  - Benennen Sie eine konkrete Ursache, bevor Sie den Prozess anfassen.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: three-layers
 ---
 
 2,8 %.
@@ -86,6 +93,8 @@ Drittens: Haben wir eine konkrete Ursache gefunden, bevor wir den Prozess änder
 Auf der letzten Meile verfolgten wir operative Ursachen: fehlende Taschen, vermischte Trolleys, Verzögerungen bei der Vorbereitung, Probleme beim Verladen. Eine dokumentierte Methode, mit der wir den Einfluss von Wetter und Menge von einem Prozessproblem getrennt hätten, kenne ich nicht.
 
 Heute würde ich das Ergebnis, bevor ich eine Ursache festlege, mit der Arbeitsmenge, den Bedingungen des Tages und den Daten der Tage davor vergleichen. 2,8 % Verspätungen an einem Tag mit außergewöhnlicher Menge bedeuten nicht dasselbe wie 2,8 % an einem gewöhnlichen Tag.
+
+{diagram}
 
 ## Drei Ebenen
 

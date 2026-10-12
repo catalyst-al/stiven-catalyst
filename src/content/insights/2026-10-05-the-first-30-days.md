@@ -12,6 +12,32 @@ deck: 'The first essay in the series “The operation that runs without you”: 
 relatedTools:
   - /tools/six-sigma-dmaic/
   - /tools/kpi-diagnostic/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - new-role
+  - red-number
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Follow the process exactly as it is defined for one more shift, and note where you were tempted to change it.
+  - Ask the person who does the work every day what wears them out most.
+  - Write down one thing that only the experienced people know by heart.
+checklist:
+  title: The map after 30 days
+  fill: true
+  note: What I would want to have written down by day 30. Not a list of changes.
+  items:
+    - label: The main processes
+      hint: And the result each one has to deliver.
+    - label: The key people
+      hint: Who does the work, and who the others ask when they do not know.
+    - label: The numbers
+      hint: Which KPIs are followed, who reads them, and what they do not show.
+    - label: Standard and reality
+      hint: Where the SOP and the real work differ, and why.
+    - label: The problems that keep coming back
+      hint: Already considered “normal” by the team.
+    - label: The limits
+      hint: What I can decide myself, and what has to be escalated, to whom.
 ---
 
 On my first night at the new hotel, I could not work as a Night Auditor.

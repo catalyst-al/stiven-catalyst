@@ -7,6 +7,25 @@ featured: true
 summary: Nuk jam bërë më pak fleksibël. Jam bërë më pak i gatshëm që fleksibiliteti të zëvendësojë sistemin.
 teaser: Nëse një proces funksionon vetëm sepse një person i mirë e mban mend, atëherë nuk ke ende një proces të mirë.
 deck: 'Eseja e njëmbëdhjetë e serisë “Dhjetë vite pranë punës”: çfarë mora nga mënyra e strukturuar e punës në Gjermani, çfarë ruajta nga Shqipëria, dhe pyetja që ka ndryshuar më shumë se gjithçka tjetër.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Për problemin tjetër që zgjidh, shkruaj kush e ka në pronësi pas kësaj dhe çfarë ndryshon që të mos kthehet.
+  - Dokumento një proces që sot funksionon vetëm sepse ti e mban mend.
+  - Merr një vendim të kësaj jave dhe shëno ku mbaron nisma jote dhe ku fillon autoriteti i dikujt tjetër.
+checklist:
+  title: U zgjidh. Dhe pastaj?
+  fill: true
+  items:
+    - label: Çfarë zgjidhëm?
+      hint: Problemi siç u shfaq, në një rresht.
+    - label: Pse ndodhi?
+      hint: Shkaku në proces, jo emri i personit.
+    - label: Kush e ka në pronësi nga nesër?
+      hint: Një emër, jo një departament.
+    - label: Çfarë ndryshon që të mos kthehet?
+      hint: Një hap, një kontroll, një rregull, një mjet.
+    - label: Ku është shkruar?
+      hint: Që ta dijë sistemi, jo vetëm unë.
 ---
 
 Më parë pyesja më shpesh: “Si e zgjidhim këtë?”

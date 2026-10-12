@@ -9,6 +9,28 @@ summary: Një sistem i mirë eskalimi nuk i mëson njerëzit të kërkojnë leje
 description: "Eskalimi si sistem, jo si temperament: si e ndaja natën në hotel atë që ishte brenda rolit tim, pse paqartësia është problem sistemi, pesë gjërat e një eskalimi të mirë dhe matrica e eskalimit për turnin."
 teaser: Ownership nuk do të thotë “e zgjidh gjithmonë vetë”. Do të thotë ta çosh problemin deri në vendin ku mund të merret vendimi i duhur, me informacionin e duhur.
 deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes iniciativës dhe autoritetit si rregull i qartë, tri gabimet e eskalimit, çfarë duhet të ketë një eskalim i mirë, dhe matrica e eskalimit për turnin.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Për problemin tjetër, përgjigju pesë pyetjeve para se të veprosh: autoriteti im, siguria, e kthyeshme, jashtë turnit tim, çfarë ndodh nëse pres."
+  - "Kur eskalon, sill pesë gjëra: çfarë ndodhi, ndikimi tani, çfarë është bërë, cili vendim duhet, sa urgjente është."
+  - Gjej një situatë ku dy kolegë do të vendosnin ndryshe, dhe kërko që vija të tërhiqet.
+checklist:
+  title: Matrica e eskalimit për turnin
+  fill: true
+  note: "Nëse 1 është “jo” ose 2 është “po”: mos e prek, eskaloje. Nëse nuk kthehet dot ose prek dikë jashtë turnit tënd: zgjidhe dhe informo. Nëse të gjitha përgjigjet janë të qeta: zgjidhe vetë. Pyetja e pestë cakton shpejtësinë."
+  items:
+    - label: A është brenda autoritetit tim?
+      hint: Roli, standardi, miratimet që më takojnë.
+    - label: A ka rrezik sigurie ose pajtueshmërie?
+      hint: Siguria në punë, security, të dhëna të ndjeshme, pagesa përtej autoritetit tim.
+    - label: A mund të kthehet vendimi?
+      hint: Nesër, nga unë ose nga dikush tjetër, pa dëm.
+    - label: A prek dikë jashtë turnit tim?
+      hint: Turnin tjetër, një KPI, klientin, një departament tjetër.
+    - label: Çfarë ndodh nëse pres?
+      hint: Nëse pritja e rrit rrezikun, eskaloje tani me atë që di.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: escalation-matrix
 ---
 
 “Ka problem. Çfarë të bëj?”
@@ -93,6 +115,8 @@ Kur mund ta zgjidhësh brenda autoritetit, por situata ka rëndësi për turnin 
 Kur prek sigurinë, security-n, compliance-in, të dhëna sensitive, pagesa jashtë autoritetit tënd, vendime disiplinore serioze, një risk të madh financiar, ose çdo situatë ku vendimi tejkalon qartë përgjegjësinë e rolit.
 
 Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë problemin operacional brenda standardit. Në momentin që problemi prek sigurinë, compliance-in, klientin në mënyrë serioze, ose kërkon një vendim jashtë autoritetit të tij, aty nuk është më çështje iniciative. Është eskalim.
+
+{diagram}
 
 ## Matrica e eskalimit për turnin
 

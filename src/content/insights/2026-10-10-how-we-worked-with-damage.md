@@ -25,6 +25,15 @@ checklist:
       hint: On the shift, with that day's volume, time and people.
     - label: What has to change so the damage does not happen again?
       hint: A change in the process, who takes it on and when it is checked.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - defects
+  - root-cause
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Take one damage case and ask where it happened, not who did it.
+  - Check whether a standard existed for that stage, and whether it was workable that day.
+  - Record the case by stage and cause, so that next week's Pareto has an address.
 ---
 
 1.06%. The target was 0.8%.

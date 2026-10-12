@@ -23,6 +23,14 @@ checklist:
     - Everyone knows which standards must not be broken, above all safety and the critical checks.
     - There is a plan for absences, delays and problems with vehicles.
     - It is clear before the shift who decides and who is told when the situation changes.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - peak
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Count the people who can do the work to the standard, not the people on the plan.
+  - Say before the shift which standards will not be broken, whatever the volume.
+  - Make clear who decides, and who is told, when the plan is not enough.
 ---
 
 We had days when demand was higher than the forecast.

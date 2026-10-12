@@ -29,6 +29,13 @@ checklist:
       hint: Wer ändert die Anweisung, wenn sich der Prozess ändert?
     - label: Ohne Sie
       hint: Würde es morgen funktionieren, wenn Sie nicht da wären?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie eine Verbesserung aus diesem Jahr und fragen Sie, ob sie nächste Woche ohne Sie laufen würde.
+  - Benennen Sie namentlich, wer prüft, ob der Standard noch angewendet wird, und wie oft.
+  - Finden Sie eine Anweisung, die nicht mehr zum Prozess passt, und aktualisieren Sie sie heute.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: improvement-paths
 ---
 
 Geben Sie sich nicht damit zufrieden, das Problem heute gelöst zu haben.
@@ -62,6 +69,8 @@ Als Meinung, nicht als belegter Fall: Ich glaube, eine Verbesserung ist gefährd
 Wechsel bei den Menschen machen das sichtbarer. Auf der letzten Meile hatten wir kurzfristig geholte Fahrer und Fahrer in der Ramp-up-Phase, die mit den SOPs noch nicht vertraut waren. Das machte es schwer, dasselbe Niveau der Umsetzung zu halten.
 
 Ein Standard darf nicht nur mit den Menschen funktionieren, die ihn seit Jahren kennen. Wenn jede neue Mitarbeiterin und jeder neue Mitarbeiter den Prozess nur durch Zuschauen bei Kollegen lernt, hängt das Ergebnis davon ab, wer einarbeitet. Darüber habe ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben. Hier sieht man den Preis: Ein Standard, der nur von Mensch zu Mensch weitergegeben wird, verliert mit jedem Wechsel ein wenig.
+
+{diagram}
 
 ## Was einen Standard am Leben hält
 

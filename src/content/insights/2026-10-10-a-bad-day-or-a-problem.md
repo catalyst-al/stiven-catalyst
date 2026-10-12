@@ -26,6 +26,16 @@ checklist:
       hint: One unusual day, or several days in a row going the same way?
     - label: Have we found a concrete cause?
       hint: Before we change the process, not after.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - red-number
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Before you change a rule, put today's number next to the last ten days.
+  - Check first whether there is an immediate safety or service problem. If there is, act now.
+  - Name a concrete cause before you touch the process.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: three-layers
 ---
 
 2.8%.
@@ -87,6 +97,8 @@ Third: have we found a concrete cause before we change the process?
 In last mile we followed operational causes: missing bags, mixed trolleys, delays in preparation, problems during loading. I do not know of a documented method we used to separate the effect of the weather and the volume from a problem in the process.
 
 Today, before deciding on a cause, I would compare the result with the volume of work, the conditions of the day and the data from the days before. 2.8% delays on a day with exceptional volume does not mean the same thing as 2.8% on an ordinary day.
+
+{diagram}
 
 ## Three layers
 

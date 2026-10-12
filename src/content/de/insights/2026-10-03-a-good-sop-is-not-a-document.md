@@ -8,6 +8,21 @@ summary: Der Test einer SOP ist nicht, ob der Autor sie versteht. Der Autor vers
 description: "Der Test einer SOP ist nicht, ob der Autor sie versteht, sondern ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht."
 teaser: Wer arbeitet, soll die Information nicht suchen müssen. Die Information soll dort sein, wo er sie erwartet.
 deck: 'Der achte Essay der Reihe „Zehn Jahre nah an der Arbeit“: wie man eine Prozedur für den Moment schreibt, in dem sie gebraucht wird, nicht für den Ordner, und wie sie lebendig bleibt, wenn sich der Prozess ändert.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie eine SOP und bitten Sie einen Kollegen, sie in der Schicht zu benutzen, ohne dass Sie etwas erklären.
+  - Beobachten Sie, wo er nach Information sucht, und legen Sie sie dorthin, wo er sie erwartet hat.
+  - Finden Sie einen Schritt, den die Realität verändert hat, und korrigieren Sie die Version, die das Team benutzt.
+checklist:
+  title: Gelesen oder benutzt?
+  copy: Liste kopieren
+  items:
+    - Sie beginnt beim Ergebnis, das der Prozess liefern muss, nicht bei der Struktur der Abteilung.
+    - "Sie beantwortet schnell: Wo bin ich, was prüfe ich jetzt, woher weiß ich, dass ich weitermachen kann."
+    - Alles, was die Person in diesem Moment nicht braucht, wurde entfernt.
+    - Die Reihenfolge sagt, was vor dem nächsten Schritt geprüft sein muss.
+    - Jemand anderes als der Autor hat unter Druck dasselbe Ergebnis erreicht.
+    - Eine namentlich benannte Person aktualisiert sie, wenn sich der Prozess ändert.
 ---
 
 Eine SOP, die nur gelesen wird, kann sehr professionell aussehen. Sie kann schöne Seiten haben, viel Text und jedes mögliche Detail. Aber wenn der Druck der Schicht beginnt, hat niemand Zeit, ein Handbuch zu lesen.

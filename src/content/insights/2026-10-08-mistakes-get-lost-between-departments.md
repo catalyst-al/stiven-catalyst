@@ -19,6 +19,18 @@ checklist:
     - What information has to travel with it?
     - How is it confirmed that the handover was done correctly?
     - Who takes responsibility if a problem is found?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - handover
+  - partners
+  - mistake
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - For one mistake this week, find the point where the work changed hands.
+  - Replace “I informed them” with a status, a name and a confirmation.
+  - Agree with the next department what has to be finished before a handover counts as done.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: between-departments
 ---
 
 A department can do its own work very well, and the operation can still fail.
@@ -62,6 +74,8 @@ If the driver is ready but the order is not complete, the delay shows up at depa
 **The place where a mistake is measured is not necessarily the place where it was born.**
 
 So when I see a negative KPI, I would not start by looking for someone to blame. I would first try to understand at which point in the process the deviation began. It is the same logic as in [Pareto and 5 Why](/insights/pareto-and-5-why-in-practice/): the number tells you where to look for the problem, not who caused it.
+
+{diagram}
 
 ## What I will not claim
 

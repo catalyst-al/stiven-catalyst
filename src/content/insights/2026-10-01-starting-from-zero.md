@@ -11,6 +11,28 @@ deck: 'The first essay in the series “Ten years close to the work”: what is 
 relatedTools:
   - /tools/cv-builder/
   - /tools/ats-cv/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - new-role
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Write down three things you can do today that do not depend on a title.
+  - Ask one person who does the work how the process really runs, and listen before you compare it with what you knew.
+  - Mention what you used to be only when it helps the job in front of you.
+checklist:
+  title: What travels with you
+  fill: true
+  items:
+    - label: What I can do that needs no title
+      hint: Discipline, the customer, reading a process, working under pressure, taking responsibility.
+    - label: What I have to learn from the inside here
+      hint: The system, the language, the rules of this place.
+    - label: The expectation I leave at the door
+      hint: “I was a manager, so I should be a manager.”
+    - label: Where I show it first
+      hint: One task, one shift, one problem nobody has taken on.
+    - label: The job I will not call beneath me
+      hint: The one that teaches me the process from the other side.
 ---
 
 In Albania, my last role was Cluster Manager. I ran the operations of a flagship store in Tirana and coordinated part of the store network. In Germany, my first job was delivering parcels.

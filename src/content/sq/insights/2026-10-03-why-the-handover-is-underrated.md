@@ -7,6 +7,22 @@ featured: true
 summary: Handover-i nuk është thjesht transferim informacioni. Është transferim përgjegjësie. Dhe pikërisht këtu shumë organizata gabojnë.
 teaser: Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.
 deck: 'Eseja e nëntë e serisë “Dhjetë vite pranë punës”: pse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë, çfarë duhet të përmbajë një dorëzim turni, dhe dy momentet që janë pasqyrë e njëri-tjetrit.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Në fund të turnit të sotëm, shkruaje dorëzimin sipas kategorive: gjendja, çfarë ndodhi, e zgjidhur, e hapur, kush e ndjek."
+  - "Zëvendëso çdo “problem me dhomën” me: çfarë lloj problemi, në çfarë gjendjeje, çfarë mbetet për t'u bërë."
+  - Kur e merr turnin, lexo së pari pikat e hapura dhe pyet për atë pa përgjegjës.
+checklist:
+  title: Para se ta dorëzosh turnin
+  copy: Kopjo listën
+  items:
+    - Është shkruar gjendja aktuale, jo historia e turnit.
+    - Çdo pikë e hapur është shënuar si e hapur, me gjendjen ku ndodhet.
+    - Çdo pikë e hapur ka një emër dhe një orë ose afat.
+    - “E raportuar” dhe “e zgjidhur” nuk janë ngatërruar.
+    - Personi pas meje mund të veprojë pa më marrë në telefon.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-gap
 ---
 
 Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.
@@ -36,6 +52,8 @@ Kush duhet ta ndjekë më tej?
 Kjo mënyrë pune është reflektuar edhe në SOP-të dhe në strukturat që kam ndërtuar më vonë për handover-in.
 
 Për mua përmirësimi kryesor është pikërisht ky: të mos ia lësh turnit tjetër barrën që të rindërtojë vetë historinë. Ai duhet të marrë gjendjen aktuale.
+
+{diagram}
 
 ## Çfarë përmban një handover nate
 

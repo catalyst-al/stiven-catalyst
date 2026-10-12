@@ -11,6 +11,25 @@ teaser: Training is not measured by how well the trainer explained. It is measur
 deck: 'The third essay in the series “The operation that runs without you”: three nights of training in a new hotel, why “yes, I got it” is not proof, what a new person needs to know in the first hour, and the plan for the first week.'
 relatedTools:
   - /tools/six-sigma-dmaic/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - training
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "In a new colleague's first hour, tell them five things: the role, the result expected, the rules not up for discussion, who to ask, what not to decide alone."
+  - "Replace “watch how I do it” with: watch, do it with me, you do it while I watch, do it alone, explain it to me."
+  - "Test one colleague who said “got it”: do it yourself, tell me why, show me what you do with an exception."
+checklist:
+  title: The first week of a new employee
+  copy: Copy the checklist
+  note: Days can be shifts, and the pace slower for more complex work. The order is what matters.
+  items:
+    - "Day 1: they can say in their own words what is expected of them and what they must not decide alone."
+    - "Day 2: they can write down the order of the steps without help."
+    - "Day 3: they carried out the process under supervision, and both of us noted where there was uncertainty."
+    - "Day 4: they handled an exception and know when they would have had to take it higher."
+    - "Day 5: they worked alone and explained the process backwards, from the result to the first step."
+    - "The test: do it yourself, tell me why, show me what you do when an exception comes up."
 ---
 
 “Stay with them today and watch how they do it.”

@@ -11,6 +11,27 @@ deck: 'The tenth essay in the series “Ten years close to the work”: what you
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-handover/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - new-role
+  - escalation
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Before you take on something outside your role today, ask whether it needs action or a decision that is someone else's.
+  - Solve the live problem, then write down who should own its structural fix.
+  - Name one gap you keep covering, and tell the person with the authority to close it.
+checklist:
+  title: Before you take on something that is not yours
+  fill: true
+  items:
+    - label: Does this situation need action, or a decision someone else should make?
+      hint: Initiative, or overstepping the mandate.
+    - label: Do I have the information and the competence to take this on?
+      hint: Nobody else acting does not make me the right person to decide.
+    - label: Afterwards, who does the responsibility stay with?
+      hint: The problem starts when an exception becomes normal and nobody knows who owns what.
+    - label: What do I escalate, and to whom?
+      hint: Policy, significant costs, personnel, security, exceptions to a procedure.
 ---
 
 For me, leadership without a title is not doing the boss's job without being the boss.

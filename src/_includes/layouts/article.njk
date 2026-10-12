@@ -24,7 +24,7 @@ ogType: article
 </section>
 {#- The text with ids on its section titles; with three sections or more, a list of them beside the text
     (on a phone, folded above it). -#}
-{%- set body = content | essayBody %}
+{%- set body = content | withDiagram(diagram, lang or "en") | essayBody %}
 {%- set sections = content | essayContents %}
 {%- set hasContents = sections.length >= 3 %}
 {%- set isEssay = "/insights/" in page.inputPath %}
@@ -66,6 +66,54 @@ ogType: article
   </aside>
   {%- endif %}
   <article class="article-content" data-article data-essay-id="{{ page.fileSlug }}" data-essay-title="{{ title }}">
+    {#- Listen: the text read aloud by a voice of the reader's own browser (js/listen.js). Hidden until the script
+        finds a voice for the page's language; without one, the bar says so. -#}
+    <div class="essay-listen" data-listen data-lang="{{ lang or 'en' }}" hidden
+         data-play-label="{{ 'Listen' | t(lang) }}" data-pause-label="{{ 'Pause' | t(lang) }}" data-resume-label="{{ 'Resume' | t(lang) }}"
+         data-progress-label="{{ 'Paragraph {a} of {b}' | t(lang) }}" data-done-label="{{ 'Read to the end' | t(lang) }}"
+         data-failed-label="{{ 'The voice stopped. Press to continue.' | t(lang) }}"
+         data-no-voice="{{ 'Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.' | t(lang) }}">
+      <div class="essay-listen-row">
+        <button type="button" class="essay-listen-play" data-listen-toggle aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5v15a1 1 0 0 0 1.5.86l13-7.5a1 1 0 0 0 0-1.72l-13-7.5A1 1 0 0 0 4 4.5z"/></svg>
+          <span data-listen-label>{{ "Listen" | t(lang) }}</span>{% if readingTime %}<small>{{ readingTime }}</small>{% endif %}
+        </button>
+        <button type="button" class="essay-listen-stop" data-listen-stop hidden>{{ "Start again" | t(lang) }}</button>
+        <label class="essay-listen-rate"><span class="visually-hidden">{{ "Speed" | t(lang) }}</span>
+          <select data-listen-rate><option value="0.9">0.9×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option><option value="1.4">1.4×</option></select>
+        </label>
+        <span class="essay-listen-status" data-listen-status aria-live="polite"></span>
+      </div>
+      <div class="essay-listen-bar" aria-hidden="true"><span data-listen-bar></span></div>
+      <p class="essay-listen-note" data-listen-note>{{ "Read aloud by a voice of your own browser. This site records and sends nothing." | t(lang) }}</p>
+    </div>
+    {#- Before the text: the three moves for tomorrow's shift ("firstMove" in the front matter), with the way to the
+        checklist at the end, the first tool of the essay and the challenges it answers (src/_data/challenges.json). -#}
+    {%- if firstMove and firstMove.length %}
+    {%- set moveKey = original or page.fileSlug %}
+    {%- set moveTools = collections.writingLinks.essayTools[moveKey] or [] %}
+    {%- set moveToolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+    {%- set moveTool = (moveToolList | toolAt(moveTools[0], lang)) if moveTools.length else null %}
+    {%- set moveChallenges = (collections.challengeMap[moveKey] or []) | challengeList(challenges) %}
+    <aside class="essay-moves" aria-labelledby="essay-moves-title">
+      <div class="essay-moves-head">
+        <p class="kicker" id="essay-moves-title">{{ "Tomorrow on shift" | t(lang) }}</p>
+        <p>{{ "Three moves from this essay, before you read it." | t(lang) }}</p>
+      </div>
+      <ol>
+        {%- for move in firstMove %}
+        <li><b>{{ loop.index | pad }}</b><span>{{ move }}</span></li>
+        {%- endfor %}
+      </ol>
+      {%- if checklist and checklist.items or moveTool or moveChallenges.length %}
+      <p class="essay-moves-links">
+        {%- if checklist and checklist.items %}<a href="#essay-checklist-title">{{ "The checklist at the end" | t(lang) }} ↓</a>{% endif %}
+        {%- if moveTool %}<a href="{{ moveTool.url }}">{{ "Tool" | t(lang) }}: {{ moveTool.name }} →</a>{% endif %}
+        {%- for item in moveChallenges %}<a class="essay-moves-challenge" href="{{ '/challenges.html' | local(lang) }}#{{ item.id }}">{{ item.name[lang or "en"] }}</a>{% endfor %}
+      </p>
+      {%- endif %}
+    </aside>
+    {%- endif %}
     {%- if hasContents %}
     <details class="article-toc-fold">
       <summary>{{ contentsTitle }}</summary>
@@ -187,6 +235,20 @@ ogType: article
     </nav>
     {%- endif %}
     {%- endif %}
+    {#- Join in: the essay's LinkedIn post ("linkedin" in the front matter, or the English essay's), else the author's
+        profile, and the form for a situation of the reader's own (pages/your-challenge.njk). -#}
+    {%- set postUrl = linkedin or collections.linkedinMap[original or page.fileSlug] %}
+    <aside class="essay-join" aria-labelledby="essay-join-title">
+      <p class="kicker" id="essay-join-title">{{ "Join in" | t(lang) }}</p>
+      <div class="essay-join-links">
+        {%- if postUrl %}
+        <a href="{{ postUrl }}" target="_blank" rel="noopener" data-join-linkedin="post"><strong>{{ "Discuss this essay on LinkedIn" | t(lang) }}</strong><span>{{ "Comments and questions go under the post, where the readers of this site already are." | t(lang) }}</span><em aria-hidden="true">→</em></a>
+        {%- elif site.profiles[0] %}
+        <a href="{{ site.profiles[0] }}" target="_blank" rel="noopener" data-join-linkedin="profile"><strong>{{ "Discuss it with me on LinkedIn" | t(lang) }}</strong><span>{{ "Write under one of my posts or send a message. Most readers of this site are there." | t(lang) }}</span><em aria-hidden="true">→</em></a>
+        {%- endif %}
+        <a href="{{ '/your-challenge.html' | local(lang) }}" data-join-challenge><strong>{{ "Send me your situation" | t(lang) }}</strong><span>{{ "A problem like this one on your shift? Describe it. I answer the ones I can in public, anonymised." | t(lang) }}</span><em aria-hidden="true">→</em></a>
+      </div>
+    </aside>
     <div class="share-row">
       <p class="kicker">{{ "Share this essay" | t(lang) }}</p>
       <div class="share-links">
@@ -201,3 +263,4 @@ ogType: article
 {% include "partials/newsletter.njk" %}
 <script src="{{ '/js/share.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/article.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/listen.js' | assetUrl }}" defer></script>

@@ -26,6 +26,11 @@ checklist:
       hint: Offen, mit Namen. Nicht „wird angeschaut“.
     - label: Wer verfolgt es weiter, und was wird dem Gast gesagt?
       hint: Damit der Gast die Geschichte nicht von vorn erzählen muss.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Hören Sie zu, ohne zu unterbrechen, und sagen Sie dann klar, was Sie um diese Uhrzeit tun können.
+  - Schreiben Sie die Beschwerde in den Worten des Gastes auf, mit dem, was Sie geprüft haben und was noch offen ist.
+  - Übergeben Sie sie mit einem Namen, damit der Gast die Geschichte beim Frühstück nicht noch einmal erzählt.
 ---
 
 Die 2 Uhr nachts im Titel sind nicht die Uhrzeit eines Vorfalls, den ich belegen kann.

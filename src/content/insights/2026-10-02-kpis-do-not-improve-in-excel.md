@@ -12,6 +12,33 @@ relatedTools:
   - /tools/damage-control/
   - /tools/incomplete-control/
   - /tools/shift-pulse/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - red-number
+  - defects
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Take one red number from today's report and go to the place where it is made.
+  - For one case, find the last point where the bag, the trolley or the time was still right.
+  - "Write the case down in the same structure as the last one: incident, cause, action, follow-up."
+checklist:
+  title: One case, from the table to the ramp
+  fill: true
+  items:
+    - label: Which number brought me here?
+      hint: The KPI and its value, from today's report.
+    - label: Where was everything last in order?
+      hint: "The bag, the trolley, the route, the scan: the last point that was right."
+    - label: Who noticed the problem, and when?
+      hint: The driver, the dispatcher, the customer, the audit.
+    - label: What did the floor show that the table did not?
+      hint: A mixed trolley, a wrong label, a wait at loading, an open gate.
+    - label: Where in the process did it start?
+      hint: Warehouse, loading, departure, road, door.
+    - label: What do we check tomorrow?
+      hint: One check, one owner, one time.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: table-to-ramp
 ---
 
 The report showed something very simple: the customer had not received their full order. Incomplete. If you look at it only through the KPI, the first thought comes by itself: the driver forgot a bag during delivery.
@@ -23,6 +50,8 @@ In one of the cases we documented, a bag from one section of the warehouse was m
 The dashboard said: incomplete delivery. The floor made you ask something else. Was it really the driver's mistake at the customer's door, or had the order left the warehouse incomplete?
 
 That is the whole difference between a table and an operation.
+
+{diagram}
 
 The table can tell you: incomplete = 1. It does not tell you that physically this may have happened: the bag was prepared, it entered the process, maybe it was even scanned, but it was put in the wrong trolley or loaded onto the wrong route. In Excel this ends up as a number. On the ramp it is a physical object in the wrong place. That is why the real cause is not always found on the dashboard.
 

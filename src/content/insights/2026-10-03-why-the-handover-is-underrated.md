@@ -10,6 +10,25 @@ deck: 'The ninth essay in the series “Ten years close to the work”: why “r
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - handover
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "At the end of today's shift, write the handover by category: state, what happened, resolved, open, who follows up."
+  - Replace every “problem with the room” with what kind of problem, what state it is in, and what is left to do.
+  - When you take over, read the open points first and ask about the one without an owner.
+checklist:
+  title: Before you hand over
+  copy: Copy the checklist
+  items:
+    - The current state is written down, not the story of the shift.
+    - Every open point is marked as open, with the state it is in.
+    - Every open point has a name and a time or deadline.
+    - “Reported” and “resolved” are not mixed up.
+    - The person after me can act on it without calling me.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-gap
 ---
 
 A problem that does not make it into the handover does not stop existing. It just becomes the problem of someone who does not yet know it exists.
@@ -39,6 +58,8 @@ Who has to follow it up?
 This way of working has also found its way into the SOPs and the structures I later built for the handover.
 
 For me the main improvement is exactly this: not leaving the next shift with the burden of rebuilding the story on its own. It should receive the current state.
+
+{diagram}
 
 ## What a night handover contains
 

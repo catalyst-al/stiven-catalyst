@@ -21,6 +21,11 @@ checklist:
     - Cili është standardi?
     - Çfarë konteksti duhet kontrolluar?
     - Çfarë bëjmë kur devijon?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një KPI dhe shkruaje përkufizimin e saj me fjalë që do t'i përdorte i gjithë ekipi.
+  - Për një rezultat të kuq, ndaj atë që kontrollonte personi nga ajo që ishte në proces.
+  - Lexoje pranë treguesit fqinj para se të reagosh ndaj saj.
 ---
 
 Një KPI mund të jetë matematikisht i saktë dhe interpretimi i tij të jetë i padrejtë.

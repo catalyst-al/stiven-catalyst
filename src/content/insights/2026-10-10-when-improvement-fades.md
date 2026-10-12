@@ -30,6 +30,16 @@ checklist:
       hint: Who changes the instruction when the process changes?
     - label: Without you
       hint: Would it work tomorrow if you were not there?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Pick one improvement you made this year and ask whether it would run next week without you.
+  - Name, by name, who checks that the standard is still applied, and how often.
+  - Find one instruction that no longer matches the process, and update it today.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: improvement-paths
 ---
 
 Do not settle for having solved the problem today.
@@ -63,6 +73,8 @@ As an opinion, not a proven case: I believe an improvement is at risk when it de
 Turnover makes this more visible. In last mile we had drivers called in at short notice, and drivers in ramp-up who were not yet used to the SOPs. That made it hard to keep the same level of compliance.
 
 A standard should not only work with the people who have known it for years. If every new employee has to learn the process just by watching a colleague, the result depends on who trains them. I wrote about this in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/). Here you see its price: a standard that only passes from person to person loses a little with every change.
+
+{diagram}
 
 ## What keeps a standard alive
 

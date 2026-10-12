@@ -28,6 +28,17 @@ checklist:
       hint: A change we can try, not a new procedure for everything.
     - label: How will we check that the improvement lasts?
       hint: Who follows it, how often, and what we do if the problem comes back.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - root-cause
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Write today's problem as one problem, one place, one period.
+  - Decide how you will measure it, and what it was before you started.
+  - Plan now who checks next month whether it held, not after the problem seems gone.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: dmaic-loop
 ---
 
 You do not need a Black Belt certificate to ask good questions.
@@ -63,6 +74,8 @@ If I set that experience against DMAIC, without dressing it up, it looks like th
 **Control.** For a documented system of control after improvements, I do not know.
 
 This list tells me something. The first three phases are the ones an operation almost does by itself, because the report demands them every day: there is a problem, there is a number, there is a question “why”. The last two phases are the ones that need someone to hold them. And they are exactly the ones I have the least proof for.
+
+{diagram}
 
 ## The discipline not to jump
 

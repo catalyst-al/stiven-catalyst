@@ -7,6 +7,25 @@ featured: true
 summary: Presioni mund të jetë i drejtë. Poshtërimi i njerëzve nuk është metodë menaxhimi. Standardi mund të jetë shumë i fortë pa e trajtuar njeriun si numër.
 teaser: Nuk mund të kërkosh llogari për një rregull që askush nuk e ka bërë të qartë.
 deck: 'Eseja e pestë e serisë “Dhjetë vite pranë punës”: standardet, gabimi i procesit dhe gabimi i personit, dhe çfarë ndryshon kur ngrihesh në detyrë mes njerëzve me të cilët punoje dje.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Para se t'i flasësh dikujt për një gabim, kontrollo nëse standardi i është bërë ndonjëherë i qartë.
+  - "Pyet së pari procesin: ku shkoi keq çanta, porosia ose koha para se të arrinte te personi?"
+  - Ktheja sot një problem personit që e ka për detyrë, dhe qëndro i gatshëm.
+checklist:
+  title: Procesi apo personi?
+  fill: true
+  items:
+    - label: A e dinte personi standardin?
+      hint: I thënë, i treguar, i shkruar, apo vetëm i supozuar.
+    - label: A e krijoi procesi mundësinë e gabimit?
+      hint: Një çantë që mungonte, një karrocë e gabuar, një etiketë, një kontroll që nuk ekzistonte.
+    - label: A ishin aty mjetet dhe koha?
+      hint: Skaneri, karroca, hapësira në rampë, minutat para nisjes.
+    - label: Çfarë ishte në dorën e personit?
+      hint: Pjesa që mund ta bënte ndryshe, me atë që dinte.
+    - label: Çfarë them, dhe çfarë rregulloj?
+      hint: Sjelljen dhe përgjegjësinë në njërin rast, procesin në tjetrin, ndonjëherë të dyja.
 ---
 
 Në last mile nuk mjafton t'i thuash dikujt “punoni më mirë”. Duhet të kuptojë çfarë do të thotë “mirë”.

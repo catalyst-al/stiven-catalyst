@@ -9,6 +9,28 @@ summary: Ein gutes Eskalationssystem bringt Menschen nicht bei, für alles um Er
 description: "Eskalation als System, nicht als Temperament: wie ich nachts im Hotel getrennt habe, was in meiner Rolle lag, warum Unklarheit ein Systemproblem ist, die fünf Dinge einer guten Eskalation und die Eskalationsmatrix für die Schicht."
 teaser: Ownership heißt nicht „Ich löse es immer selbst“. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.
 deck: 'Der vierte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Grenze zwischen Initiative und Befugnis als klare Regel, die drei Eskalationsfehler, was eine gute Eskalation enthält, und die Eskalationsmatrix für die Schicht.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Beantworten Sie beim nächsten Problem fünf Fragen, bevor Sie handeln: meine Befugnis, Sicherheit, umkehrbar, außerhalb meiner Schicht, was passiert beim Warten."
+  - "Bringen Sie beim Eskalieren fünf Dinge mit: was passiert ist, die Auswirkung jetzt, was getan wurde, welche Entscheidung nötig ist, wie dringend."
+  - Finden Sie eine Situation, in der zwei Kollegen unterschiedlich entscheiden würden, und bitten Sie darum, die Linie zu ziehen.
+checklist:
+  title: Die Eskalationsmatrix für die Schicht
+  fill: true
+  note: "Wenn 1 „nein“ oder 2 „ja“ ist: nicht anfassen, eskalieren. Wenn es nicht umkehrbar ist oder jemanden außerhalb Ihrer Schicht betrifft: lösen und informieren. Wenn alle Antworten ruhig sind: selbst lösen. Die fünfte Frage bestimmt das Tempo."
+  items:
+    - label: Liegt es in meiner Befugnis?
+      hint: Die Rolle, der Standard, die Freigaben, die mir zustehen.
+    - label: Gibt es ein Sicherheits- oder Compliance-Risiko?
+      hint: Arbeitssicherheit, Security, sensible Daten, Zahlungen über meiner Befugnis.
+    - label: Lässt sich die Entscheidung rückgängig machen?
+      hint: Morgen, durch mich oder jemand anderen, ohne Schaden.
+    - label: Betrifft es jemanden außerhalb meiner Schicht?
+      hint: Die nächste Schicht, eine Kennzahl, den Kunden, eine andere Abteilung.
+    - label: Was passiert, wenn ich warte?
+      hint: Wenn Warten das Risiko erhöht, jetzt eskalieren, mit dem, was Sie wissen.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: escalation-matrix
 ---
 
 „Es gibt ein Problem. Was soll ich tun?“
@@ -93,6 +115,8 @@ Wenn Sie es innerhalb Ihrer Befugnis lösen können, die Situation aber für die
 Wenn es um Sicherheit, Security, Compliance, sensible Daten, Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen, ein großes finanzielles Risiko geht oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
 
 Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit, die Compliance oder den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis braucht, ist es keine Frage der Initiative mehr. Es ist Eskalation.
+
+{diagram}
 
 ## Die Eskalationsmatrix für die Schicht
 

@@ -11,6 +11,29 @@ deck: 'The sixth essay in the series “Ten years close to the work”: what sta
 relatedTools:
   - /tools/cx-control-tower/
   - /tools/sigma-control-chart/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - red-number
+  - partners
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Pick one thing the system says you have and check whether it exists: a parcel, a room status, a payment."
+  - Find the point in today's work where information, responsibility and execution did not meet.
+  - For one partner or department you do not control, write down the shared interest that keeps them working with you.
+checklist:
+  title: System and reality
+  fill: true
+  items:
+    - label: What does the system say we have?
+      hint: The count, the status, the amount, as the screen shows it.
+    - label: What really exists?
+      hint: Counted, seen or confirmed, not reported.
+    - label: Where is the gap, and since when?
+      hint: One shift, one day, one week.
+    - label: Who needs to act?
+      hint: A name, in the department where the gap was born.
+    - label: What does the customer see of it?
+      hint: At the door, at the desk, on the invoice.
 ---
 
 I have worked in retail and wholesale in Albania, then in last-mile logistics, and today in hospitality in Germany. From the outside they look like three different worlds. From the inside, the problem I have seen almost everywhere is the same one: the gap between what should happen according to the process and what actually happens on the ground.

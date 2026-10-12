@@ -11,6 +11,30 @@ deck: 'The twelfth and final essay in the series â€œTen years close to the workâ
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/six-sigma-dmaic/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - new-role
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Start tomorrow with four questions: what deviated, what is still open, where is the risk, where am I needed."
+  - Spend thirty minutes on the floor and bring back one problem the report does not show.
+  - Give one problem an owner today that until now had none.
+checklist:
+  title: The weekly review
+  fill: true
+  note: The questions of my ideal week. Not a meeting I have minutes of.
+  items:
+    - label: What is improving?
+      hint: And do we know why.
+    - label: What is getting worse?
+      hint: Since when, and where.
+    - label: Which problems keep repeating?
+      hint: Incidents that have become a pattern.
+    - label: Which actions are still open, and who owns them?
+      hint: A name per action.
+    - label: Where did I ask for a standard I am not willing to keep myself?
+      hint: The one the team notices first.
 ---
 
 After years in retail, sales, logistics and hospitality, I have understood that industries change much faster than the principles of management.

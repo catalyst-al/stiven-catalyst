@@ -6,10 +6,11 @@
     <input id="filter-search" type="search" placeholder="{{ searchLabel }}" autocomplete="off" data-filter-search>
   </div>
   {%- if filterTopics and filterTopics.length > 1 %}
-  <div class="filter-chips" role="group" aria-label="{{ 'Filter by topic' | t(lang) }}">
+  {#- A topic is a text, or { id, label } when the value in the address should not change with the language. -#}
+  <div class="filter-chips" role="group" aria-label="{{ filterLabel or ('Filter by topic' | t(lang)) }}">
     <button type="button" class="chip" aria-pressed="true" data-topic="">{{ "All" | t(lang) }}</button>
     {%- for topic in filterTopics %}
-    <button type="button" class="chip" aria-pressed="false" data-topic="{{ topic }}">{{ topic }}</button>
+    <button type="button" class="chip" aria-pressed="false" data-topic="{{ topic.id if topic.id else topic }}">{{ topic.label if topic.label else topic }}</button>
     {%- endfor %}
   </div>
   {%- endif %}

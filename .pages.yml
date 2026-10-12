@@ -76,6 +76,28 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: problems
+        label: Challenges (English essay only)
+        description: "The situations this essay answers, as listed on the Challenges page. The German and Albanian pages follow the English essay."
+        type: select
+        list: true
+        options:
+          values: [red-number, handover, defects, root-cause, mistake, escalation, training, standards, peak, partners, new-role]
+      - name: diagram
+        label: Diagram (optional)
+        description: "A picture of the system the essay describes (lib/diagrams.js). Mark its place in the text with a paragraph that is only {diagram}; without the marker it comes after the text."
+        type: select
+        options:
+          values: [handover-gap, between-departments, table-to-ramp, check-before-departure, escalation-matrix, handover-to-briefing, improvement-paths, dmaic-loop, gemba-loop, three-layers]
+      - name: linkedin
+        label: LinkedIn post (optional)
+        description: "The address of this essay's post on LinkedIn. “Discuss this essay on LinkedIn” under the essay leads there; the German and Albanian essays use the English essay's post unless they name their own."
+        type: string
+      - name: firstMove
+        label: Tomorrow on shift (three moves)
+        description: "Three concrete moves for the next shift, shown in a box before the text. One line each."
+        type: string
+        list: true
       - name: body
         label: Essay
         type: rich-text
@@ -149,6 +171,21 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: diagram
+        label: Diagram (optional)
+        description: "A picture of the system the essay describes (lib/diagrams.js). Mark its place in the text with a paragraph that is only {diagram}; without the marker it comes after the text."
+        type: select
+        options:
+          values: [handover-gap, between-departments, table-to-ramp, check-before-departure, escalation-matrix, handover-to-briefing, improvement-paths, dmaic-loop, gemba-loop, three-layers]
+      - name: linkedin
+        label: LinkedIn post (optional)
+        description: "The address of this essay's post on LinkedIn. “Discuss this essay on LinkedIn” under the essay leads there; the German and Albanian essays use the English essay's post unless they name their own."
+        type: string
+      - name: firstMove
+        label: Tomorrow on shift (three moves)
+        description: "Three concrete moves for the next shift, shown in a box before the text. One line each."
+        type: string
+        list: true
       - name: body
         label: Essay
         type: rich-text
@@ -222,6 +259,21 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: diagram
+        label: Diagram (optional)
+        description: "A picture of the system the essay describes (lib/diagrams.js). Mark its place in the text with a paragraph that is only {diagram}; without the marker it comes after the text."
+        type: select
+        options:
+          values: [handover-gap, between-departments, table-to-ramp, check-before-departure, escalation-matrix, handover-to-briefing, improvement-paths, dmaic-loop, gemba-loop, three-layers]
+      - name: linkedin
+        label: LinkedIn post (optional)
+        description: "The address of this essay's post on LinkedIn. “Discuss this essay on LinkedIn” under the essay leads there; the German and Albanian essays use the English essay's post unless they name their own."
+        type: string
+      - name: firstMove
+        label: Tomorrow on shift (three moves)
+        description: "Three concrete moves for the next shift, shown in a box before the text. One line each."
+        type: string
+        list: true
       - name: body
         label: Essay
         type: rich-text

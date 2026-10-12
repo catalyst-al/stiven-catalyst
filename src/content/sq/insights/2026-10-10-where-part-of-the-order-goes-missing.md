@@ -22,6 +22,13 @@ checklist:
     - Trolley është kontrolluar që të mos ketë ngarkesa të përziera.
     - Nëse mungon një bag, procesi ndalet për atë problem dhe njoftohet Team Leader-i.
     - Çdo mungesë e zbuluar para nisjes regjistrohet me shkakun, kur dihet.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Para nisjes, kontrollo që numri i çantave përputhet dhe që asnjë karrocë nuk është e përzier.
+  - Kur mungon një çantë, ndale atë karrocë dhe njofto Team Leader-in. Mos e lër të niset sikur gjithçka të ishte në rregull.
+  - Regjistro çdo mungesë të gjetur në rampë me shkakun e saj. Aty fillon Incomplete.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: check-before-departure
 ---
 
 Kur mungonte një bag, rregulli ishte i qartë.
@@ -59,6 +66,8 @@ Njoftimi i Team Leader-it e kthen mungesën në problem të operacionit, jo në 
 Trolley që nuk lëviz nga zona e vet ruan gjurmën. Nëse trolley-i fillon të lëvizë ndërkohë që kërkohet bag-u, mund të ngatërrohet më shumë se ç'ishte, dhe pyetja “ku humbi?” bëhet më e vështirë.
 
 Dhe rregulli për chilled dhe frozen tregon që standardi nuk thotë vetëm çfarë bëhet. Thotë edhe ku bëhet. Kur një problem zgjidhet me nxitim, vendi është gjëja e parë që harrohet.
+
+{diagram}
 
 ## Jo vetëm numër, jo vetëm shofer
 

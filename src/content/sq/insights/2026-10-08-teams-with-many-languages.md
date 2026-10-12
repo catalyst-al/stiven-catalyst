@@ -24,6 +24,11 @@ checklist:
       hint: Si e kupton punonjësi se e kreu saktë?
     - label: Përjashtimi
       hint: Çfarë duhet bërë kur diçka nuk funksionon?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një udhëzim që keqkuptohet vazhdimisht dhe rishkruaje si veprim, vend dhe moment, kontroll, përjashtim.
+  - Shto një foto ose një screenshot të hapit të bërë siç duhet.
+  - Në vend që të pyesësh “e kuptove?”, thuaj “më trego si do ta bëje”.
 ---
 
 Një ekip mund të ketë njerëz që flasin gjuhë të ndryshme. Por standardi i punës duhet të ketë të njëjtin kuptim për të gjithë.

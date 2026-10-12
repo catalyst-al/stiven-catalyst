@@ -13,6 +13,28 @@ deck: 'Der zweite Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: d
 relatedTools:
   - /tools/shift-handover/
   - /tools/delay-analyzer/
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Wählen Sie vor dem Briefing zwei oder drei Prioritäten und sagen Sie jede so, dass das Team sie während der Arbeit sehen kann.
+  - Geben Sie jedem offenen Punkt und jeder Priorität einen Namen, bevor die Schicht beginnt.
+  - "Fragen Sie nach dem Briefing eine Person: Was sind heute die zwei Prioritäten?"
+checklist:
+  title: Das Zehn-Minuten-Briefing
+  fill: true
+  note: Fünf Fragen, je etwa zwei Minuten. Die Reihenfolge des Gesprächs, kein Formular.
+  items:
+    - label: Was übernehmen wir?
+      hint: "Aus der Übergabe, nicht aus dem Gedächtnis: offene Punkte, Fälle, die Nachverfolgung brauchen."
+    - label: Was hat sich geändert?
+      hint: "Nur, was diese Schicht betrifft: Volumen, ein Prozess, ein System, das Team."
+    - label: Wo liegt heute das Risiko?
+      hint: Eine Kennzahl, die abrutscht, und ihr Grund, ein offener Punkt mit Frist, ein technisches Problem.
+    - label: Was sind die zwei oder drei Prioritäten?
+      hint: Jede als Handlung, die das Team sehen kann, nicht als Zahl.
+    - label: Wer hält was?
+      hint: Jede Priorität und jeder offene Punkt mit einem Namen.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-to-briefing
 ---
 
 „Delay liegt bei 2,8 %.“
@@ -93,6 +115,8 @@ Deshalb sollte ein gutes Briefing vor der Schicht genau dort beginnen, wo die Ü
 - Was darf während der Schicht nicht verloren gehen?
 
 **Die zehn Minuten vor der Schicht sind nicht dafür da, alles zu erzählen, was wir wissen. Sie sind dafür da, zu entscheiden, was das Team wissen muss, bevor die Arbeit beginnt.**
+
+{diagram}
 
 ## Die Vorlage für das Zehn-Minuten-Briefing
 

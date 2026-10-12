@@ -26,6 +26,16 @@ checklist:
       hint: What is confirmed, and what has to be anonymised?
     - label: Test it in practice
       hint: Does someone else understand it without your explanation?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - standards
+  - handover
+  - training
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Choose one procedure and count how many places someone has to open to carry it out.
+  - Put that procedure where it can be found by what it does, not by the name of the document.
+  - Ask a colleague to follow it without your explanation, and note where they stopped.
 ---
 
 I did not build Front Desk Control because documents were missing.

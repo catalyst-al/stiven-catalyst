@@ -13,6 +13,28 @@ deck: 'Eseja e dytë e serisë “Operacioni që punon pa ty”: stand-up-et e m
 relatedTools:
   - /tools/shift-handover/
   - /tools/delay-analyzer/
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Para briefing-ut, zgjidh dy ose tri prioritete dhe thuaje secilin si diçka që ekipi mund ta shohë gjatë punës.
+  - Jepi çdo pike të hapur dhe çdo prioriteti një emër para se të fillojë turni.
+  - "Pas briefing-ut, pyet një person: cilat janë dy prioritetet e sotme?"
+checklist:
+  title: Briefing-u dhjetëminutësh
+  fill: true
+  note: Pesë pyetje, rreth dy minuta secila. Radha e bisedës, jo një formular.
+  items:
+    - label: Çfarë trashëgojmë?
+      hint: "Nga dorëzimi, jo nga kujtesa: pikat e hapura, rastet që presin ndjekje."
+    - label: Çfarë ka ndryshuar?
+      hint: "Vetëm ajo që prek këtë turn: volumi, një proces, një sistem, ekipi."
+    - label: Ku është rreziku sot?
+      hint: Një KPI që po bie dhe shkaku i saj, një pikë e hapur me afat, një problem teknik.
+    - label: Cilat janë dy ose tri prioritetet?
+      hint: Secili si veprim që ekipi mund ta shohë, jo si numër.
+    - label: Kush mban çfarë?
+      hint: Çdo prioritet dhe çdo pikë e hapur me një emër.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-to-briefing
 ---
 
 “Delay është 2.8%.”
@@ -93,6 +115,8 @@ Prandaj një briefing i mirë para turnit duhet të fillojë pikërisht aty ku m
 - Çfarë nuk duhet të humbasë gjatë turnit?
 
 **10 minuta para turnit nuk janë për të treguar gjithçka që dimë. Janë për të vendosur çfarë duhet të dijë ekipi para se puna të fillojë.**
+
+{diagram}
 
 ## Shablloni i briefing-ut 10-minutësh
 

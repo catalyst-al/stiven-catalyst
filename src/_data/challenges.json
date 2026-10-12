@@ -1,0 +1,112 @@
+[
+  {
+    "id": "red-number",
+    "name": { "en": "A number turned red", "de": "Eine Zahl ist rot", "sq": "Një numër u bë i kuq" },
+    "line": {
+      "en": "The report shows a KPI off target, and nobody can yet say why.",
+      "de": "Der Bericht zeigt eine Kennzahl außerhalb des Ziels, und noch kann niemand sagen, warum.",
+      "sq": "Raporti tregon një KPI jashtë objektivit, dhe ende askush nuk e thotë dot pse."
+    },
+    "tools": ["/tools/kpi-diagnostic/", "/tools/sigma-control-chart/", "/tools/shift-pulse/"]
+  },
+  {
+    "id": "handover",
+    "name": { "en": "The handover", "de": "Die Übergabe", "sq": "Dorëzimi i turnit" },
+    "line": {
+      "en": "Information gets lost between two shifts or two departments, and the next one pays for it.",
+      "de": "Zwischen zwei Schichten oder zwei Abteilungen geht Information verloren, und die nächste zahlt dafür.",
+      "sq": "Informacioni humbet mes dy turneve ose dy departamenteve, dhe tjetri e paguan."
+    },
+    "tools": ["/tools/shift-handover/"]
+  },
+  {
+    "id": "defects",
+    "name": { "en": "Damage, incomplete orders, delays", "de": "Schäden, unvollständige Aufträge, Verspätungen", "sq": "Dëmtime, porosi të paplota, vonesa" },
+    "line": {
+      "en": "The same defects keep coming back, and the dashboard only counts them.",
+      "de": "Dieselben Fehler kommen immer wieder, und das Dashboard zählt sie nur.",
+      "sq": "Të njëjtat defekte kthehen vazhdimisht, dhe dashboard-i vetëm i numëron."
+    },
+    "tools": ["/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/"]
+  },
+  {
+    "id": "root-cause",
+    "name": { "en": "Finding the real cause", "de": "Die wirkliche Ursache finden", "sq": "Gjetja e shkakut të vërtetë" },
+    "line": {
+      "en": "The analysis stops at a name instead of at the process.",
+      "de": "Die Analyse endet bei einem Namen statt beim Prozess.",
+      "sq": "Analiza ndalon te një emër, jo te procesi."
+    },
+    "tools": ["/tools/five-whys/", "/tools/pareto/", "/tools/six-sigma-dmaic/"]
+  },
+  {
+    "id": "mistake",
+    "name": { "en": "Someone made a mistake", "de": "Jemand hat einen Fehler gemacht", "sq": "Dikush bëri një gabim" },
+    "line": {
+      "en": "How to talk to the person, and how to tell a process error from a personal one.",
+      "de": "Wie man mit der Person spricht, und wie man einen Prozessfehler von einem persönlichen unterscheidet.",
+      "sq": "Si t'i flasësh personit, dhe si ta dallosh gabimin e procesit nga ai personal."
+    },
+    "tools": ["/tools/five-whys/"]
+  },
+  {
+    "id": "escalation",
+    "name": { "en": "Solve it or escalate it", "de": "Selbst lösen oder eskalieren", "sq": "Zgjidhe vetë apo eskaloje" },
+    "line": {
+      "en": "A problem in the middle of the shift, or at 2 a.m., and the question of whose decision it is.",
+      "de": "Ein Problem mitten in der Schicht oder um 2 Uhr nachts, und die Frage, wessen Entscheidung es ist.",
+      "sq": "Një problem në mes të turnit, ose në orën 2 të natës, dhe pyetja: e kujt është vendimi."
+    },
+    "tools": ["/tools/shift-handover/"]
+  },
+  {
+    "id": "training",
+    "name": { "en": "Training and onboarding", "de": "Einarbeitung und Training", "sq": "Trajnimi dhe fillimi i të rinjve" },
+    "line": {
+      "en": "A new colleague, a procedure that lives in one person's head, a team with many languages.",
+      "de": "Ein neuer Kollege, ein Ablauf, der nur im Kopf einer Person lebt, ein Team mit vielen Sprachen.",
+      "sq": "Një koleg i ri, një procedurë që jeton vetëm në kokën e një personi, një ekip me shumë gjuhë."
+    },
+    "tools": []
+  },
+  {
+    "id": "standards",
+    "name": { "en": "Making improvement stick", "de": "Verbesserung, die bleibt", "sq": "Që përmirësimi të mbahet" },
+    "line": {
+      "en": "A standard that works for a month and fades, an SOP nobody opens.",
+      "de": "Ein Standard, der einen Monat hält und dann verblasst, eine SOP, die niemand öffnet.",
+      "sq": "Një standard që punon një muaj dhe shuhet, një SOP që askush nuk e hap."
+    },
+    "tools": ["/tools/shift-handover/", "/tools/shift-pulse/"]
+  },
+  {
+    "id": "peak",
+    "name": { "en": "High-volume days and pressure", "de": "Spitzentage und Druck", "sq": "Ditët me volum të lartë dhe presioni" },
+    "line": {
+      "en": "The day with more volume than the plan, and the pressure that comes with it.",
+      "de": "Der Tag mit mehr Volumen als geplant, und der Druck, der mit ihm kommt.",
+      "sq": "Dita me më shumë volum se plani, dhe presioni që vjen bashkë me të."
+    },
+    "tools": ["/tools/delay-analyzer/", "/tools/shift-handover/"]
+  },
+  {
+    "id": "partners",
+    "name": { "en": "People you do not control", "de": "Menschen, die Sie nicht führen", "sq": "Njerëz që nuk i komandon ti" },
+    "line": {
+      "en": "Resellers, delivery partners, other departments: the result depends on people outside your team.",
+      "de": "Händler, Lieferpartner, andere Abteilungen: das Ergebnis hängt von Menschen außerhalb Ihres Teams ab.",
+      "sq": "Rishitës, partnerë shpërndarjeje, departamente të tjera: rezultati varet nga njerëz jashtë ekipit tënd."
+    },
+    "tools": ["/tools/cx-control-tower/"]
+  },
+  {
+    "id": "new-role",
+    "name": { "en": "A new role or a new operation", "de": "Eine neue Rolle oder ein neuer Betrieb", "sq": "Një rol i ri ose një operacion i ri" },
+    "line": {
+      "en": "The first 30 days, a promotion from within, starting again in a new country.",
+      "de": "Die ersten 30 Tage, eine Beförderung aus dem Team heraus, ein Neuanfang in einem neuen Land.",
+      "sq": "30 ditët e para, një ngritje nga brenda ekipit, fillimi nga zero në një vend të ri."
+    },
+    "tools": ["/tools/kpi-diagnostic/", "/tools/cv-builder/", "/tools/ats-cv/"]
+  }
+]

@@ -12,6 +12,31 @@ deck: 'The fourth essay in the series “The operation that runs without you”:
 relatedTools:
   - /tools/shift-handover/
   - /tools/five-whys/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - escalation
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "For the next problem, answer five questions before you act: my authority, safety, reversible, outside my shift, what if I wait."
+  - "When you escalate, bring five things: what happened, the impact now, what has been done, the decision needed, how urgent."
+  - Find one situation where two colleagues would decide differently, and ask for the line to be drawn.
+checklist:
+  title: The escalation matrix for the shift
+  fill: true
+  note: "If 1 is “no” or 2 is “yes”: do not touch it, escalate it. If it cannot be reversed or affects someone outside your shift: solve it and inform. If all the answers are calm: solve it yourself. The fifth question sets the speed."
+  items:
+    - label: Is it within my authority?
+      hint: The role, the standard, the approvals that are mine.
+    - label: Is there a safety or compliance risk?
+      hint: Safety, security, sensitive data, payments beyond my authority.
+    - label: Can the decision be reversed?
+      hint: Tomorrow, by me or by someone else, without damage.
+    - label: Does it affect someone outside my shift?
+      hint: The next shift, a KPI, the customer, another department.
+    - label: What happens if I wait?
+      hint: If waiting increases the risk, escalate now with what you know.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: escalation-matrix
 ---
 
 “There's a problem. What should I do?”
@@ -96,6 +121,8 @@ When you can solve it within your authority, but the situation matters for the n
 When it involves safety, security, compliance, sensitive data, payments beyond your authority, serious disciplinary decisions, a large financial risk, or any situation where the decision clearly goes beyond the responsibility of the role.
 
 In last mile, as I see it today, the Team Leader should have room to solve an operational problem within the standard. The moment the problem affects safety, compliance, the customer in a serious way, or needs a decision beyond their authority, it is no longer a question of initiative. It is escalation.
+
+{diagram}
 
 ## The escalation matrix for the shift
 

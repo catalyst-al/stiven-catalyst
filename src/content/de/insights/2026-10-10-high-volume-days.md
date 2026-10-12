@@ -22,6 +22,11 @@ checklist:
     - Alle wissen, welche Standards nicht gebrochen werden dürfen, vor allem Sicherheit und kritische Kontrollen.
     - Es gibt einen Plan für Ausfälle, Verspätungen und Probleme mit Fahrzeugen.
     - Vor der Schicht ist klar, wer entscheidet und wer informiert wird, wenn sich die Lage ändert.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Zählen Sie die Menschen, die die Arbeit nach Standard können, nicht die Menschen im Plan.
+  - Sagen Sie vor der Schicht, welche Standards nicht gebrochen werden, egal bei welchem Volumen.
+  - Machen Sie klar, wer entscheidet und wer informiert wird, wenn der Plan nicht reicht.
 ---
 
 Wir hatten Tage, an denen die Nachfrage über dem Forecast lag.

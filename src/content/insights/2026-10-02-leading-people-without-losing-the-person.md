@@ -11,6 +11,29 @@ deck: 'The fifth essay in the series “Ten years close to the work”: standard
 relatedTools:
   - /tools/shift-handover/
   - /tools/kpi-diagnostic/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - mistake
+  - new-role
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Before you speak to anyone about a mistake, check whether the standard was ever made clear to them.
+  - "Ask the process first: where did the bag, the order or the time go wrong before it reached the person?"
+  - Hand one problem back today to the person whose job it is, and stay available.
+checklist:
+  title: Process or person?
+  fill: true
+  items:
+    - label: Did the person know the standard?
+      hint: Told, shown, written down, or only assumed.
+    - label: Did the process create the possibility of the error?
+      hint: A missing bag, a wrong trolley, a label, a check that did not exist.
+    - label: Were the tools and the time there?
+      hint: Scanner, trolley, space on the ramp, minutes before departure.
+    - label: What was within the person's control?
+      hint: The part they could have done differently, knowing what they knew.
+    - label: What do I say, and what do I fix?
+      hint: Behaviour and accountability in one case, the process in the other, sometimes both.
 ---
 
 In last mile it is not enough to tell someone “work better”. They have to understand what “better” means.

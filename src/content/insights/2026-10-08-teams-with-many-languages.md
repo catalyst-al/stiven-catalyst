@@ -26,6 +26,15 @@ checklist:
       hint: How does the employee know they did it correctly?
     - label: The exception
       hint: What has to be done when something does not work?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - training
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Pick one instruction that keeps being misunderstood and rewrite it as action, place and moment, check, exception.
+  - Add a photo or a screenshot of the step done right.
+  - Instead of asking “did you understand?”, say “show me how you would do it”.
 ---
 
 A team can have people who speak different languages. But the work standard has to mean the same thing to all of them.

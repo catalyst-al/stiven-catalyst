@@ -19,6 +19,13 @@ checklist:
     - Çfarë informacioni duhet të kalojë bashkë me të?
     - Si konfirmohet që kalimi është kryer saktë?
     - Kush e merr përgjegjësinë nëse zbulohet një problem?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Për një gabim të kësaj jave, gjej pikën ku puna ndërroi duar.
+  - Zëvendëso “i informova” me një status, një emër dhe një konfirmim.
+  - Bini dakord me departamentin tjetër çfarë duhet të jetë e përfunduar që një dorëzim të quhet i bërë.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: between-departments
 ---
 
 Një departament mund ta bëjë punën e vet shumë mirë, dhe operacioni përsëri të dështojë.
@@ -62,6 +69,8 @@ Nëse shoferi është gati, por porosia nuk është e plotë, vonesa shfaqet te 
 **Vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ai ka lindur.**
 
 Prandaj, kur shoh një KPI negativ, nuk do të filloja duke kërkuar menjëherë fajtorin. Do të përpiqesha fillimisht të kuptoja në cilën pikë të procesit filloi devijimi. Kjo është e njëjta logjikë si te [Pareto dhe 5 Why](/sq/insights/pareto-and-5-why-in-practice/): numri të tregon ku ta kërkosh problemin, jo kush e shkaktoi.
+
+{diagram}
 
 ## Çfarë nuk do të them
 
