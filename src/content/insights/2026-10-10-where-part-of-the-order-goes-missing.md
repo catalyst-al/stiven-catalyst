@@ -27,6 +27,7 @@ checklist:
 problems:
   - defects
   - root-cause
+  - the-system-says
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Before departure, check that the number of bags matches and that no trolley is mixed.

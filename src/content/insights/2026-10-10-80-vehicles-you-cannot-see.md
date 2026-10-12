@@ -32,6 +32,7 @@ checklist:
 problems:
   - partners
   - defects
+  - the-system-says
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - For the next reported problem, separate what you know for sure from what you were told.
