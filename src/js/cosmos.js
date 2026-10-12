@@ -149,6 +149,10 @@
   let hovered = null;
   let hoveredMoon = null;
   let dpr = 1;
+  // Quality: a device that cannot hold the frame rate gets the canvas at a lower density and with
+  // fewer particles, a step at a time (1, then 0.75, then 0.5); a device that keeps up never changes.
+  let quality = 1;
+  const pace = { n: 0, slow: 0 };
   let width = 0;
   let height = 0;
   let cx = 0;
@@ -186,7 +190,7 @@
   };
 
   const resize = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2) * quality);
     const box = root.getBoundingClientRect();
     const spot = anchor.getBoundingClientRect();
     width = Math.max(1, Math.round(box.width * dpr));
@@ -197,7 +201,7 @@
     cy = (spot.top - box.top + spot.height / 2) * dpr;
     S0 = Math.min(spot.width / 2 / (spot.width < 560 ? 1.24 : 1.32), spot.height / 2 / 0.66) * dpr;
     S = S0 * (1 + ZOOM * zoom);
-    const count = Math.round(Math.min(2600, Math.max(900, (spot.width * spot.height) / 120)));
+    const count = Math.round(Math.min(2600, Math.max(900, (spot.width * spot.height) / 120)) * quality);
     if (!disc || Math.abs(disc.n - count) > 250) buildParticles(count);
     draw();
   };
@@ -950,8 +954,19 @@
 
   const ease = (rate, dt) => 1 - Math.exp(-rate * dt);
   const step = (now) => {
-    const dt = Math.min(0.05, (now - last) / 1000 || 0);
+    const raw = now - last;
+    const dt = Math.min(0.05, raw / 1000 || 0);
     last = now;
+    // Under 30 frames a second for most of a second, once the page has settled: a step down in quality.
+    if (quality > 0.5 && time > 2) {
+      pace.n += 1;
+      if (raw > 34) pace.slow += 1;
+      if (pace.n >= 60) {
+        if (pace.slow >= 40) { quality -= 0.25; resize(); }
+        pace.n = 0;
+        pace.slow = 0;
+      }
+    }
     if (warm < 1) {
       warmT += dt;
       const u = Math.min(1, warmT / 1.3);
