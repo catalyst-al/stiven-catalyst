@@ -1,0 +1,47 @@
+{#- Under an essay: "Did you try it?" The reader who took something from the essay into the shift says what
+    happened; the answers that help others are published under the essay, anonymised and with the reader's yes
+    ("readers" in the front matter, shown above this form). The form posts like the feedback form of a tool
+    (js/feedback.js): to site.contact.action when it is set, else through the reader's own mail program. -#}
+<section class="essay-feedback" aria-labelledby="essay-feedback-title">
+  <p class="kicker" id="essay-feedback-title">{{ "Did you try it?" | t(lang) }}</p>
+  <p class="essay-feedback-lede">{{ "If you took something from this essay into your shift, tell me what happened. The answers that help others are published under the essay, anonymised." | t(lang) }}</p>
+  <form class="tool-feedback-form essay-feedback-form" data-tool-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
+        data-sent="{{ 'Thank you. What helps others appears under the essay, anonymised; if you left an email, you get an answer.' | t(lang) }}"
+        data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
+        data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
+        data-subject="{{ 'Tried' | t(lang) }}: {{ title }}">
+    {%- if site.contact.action and site.contact.key %}
+    <input type="hidden" name="access_key" value="{{ site.contact.key }}">
+    <input type="hidden" name="from_name" value="Stiven Catalyst">
+    {%- endif %}
+    <input type="hidden" name="subject" value="{{ 'Tried' | t(lang) }}: {{ title }}">
+    <input type="hidden" name="essay" value="{{ original or page.fileSlug }}">
+    <input type="hidden" name="lang" value="{{ lang or 'en' }}">
+    <input type="hidden" name="page" value="{{ page.url | absoluteUrl }}">
+    <fieldset class="tf-choices">
+      <legend class="visually-hidden">{{ "Did you try it?" | t(lang) }}</legend>
+      {%- for choice in ["It worked", "It did not work", "Not yet"] %}
+      <label class="tf-choice"><input type="radio" name="tried" value="{{ choice | t(lang) }}" required data-line="{{ 'Tried' | t(lang) }}"><span>{{ choice | t(lang) }}</span></label>
+      {%- endfor %}
+    </fieldset>
+    <label class="tf-field"><span>{{ "What happened, where, in which industry? (optional)" | t(lang) }}</span><textarea name="message" rows="3" maxlength="2000" data-line="{{ 'What happened' | t(lang) }}"></textarea></label>
+    <div class="tf-row">
+      <label class="tf-field"><span>{{ "Industry" | t(lang) }}</span>
+        <select name="industry" data-line="{{ 'Industry' | t(lang) }}">
+          <option value="">{{ "Choose, if you like" | t(lang) }}</option>
+          {%- for industry in ["Last mile", "Warehouse", "Hotel", "Retail", "Other"] %}
+          <option value="{{ industry | t(lang) }}">{{ industry | t(lang) }}</option>
+          {%- endfor %}
+        </select>
+      </label>
+      <label class="tf-field"><span>{{ "Your email, if you would like an answer (optional)" | t(lang) }}</span><input type="email" name="email" autocomplete="email" data-line="{{ 'Reply to' | t(lang) }}"></label>
+    </div>
+    <label class="tf-field tf-check"><input type="checkbox" name="publish" value="{{ 'Yes' | t(lang) }}" data-line="{{ 'May be quoted' | t(lang) }}"><span>{{ "You may quote this under the essay, anonymised" | t(lang) }}</span></label>
+    <div class="tf-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="tf-actions">
+      <button type="submit" class="button-primary">{{ "Send" | t(lang) }}</button>
+      <p class="form-note">{{ "Nothing is sent until you press Send." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
+    </div>
+    <p class="form-note tf-status" data-tool-feedback-status role="status" aria-live="polite" hidden></p>
+  </form>
+</section>

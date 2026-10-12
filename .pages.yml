@@ -83,6 +83,19 @@ content:
         list: true
         options:
           values: [red-number, handover, defects, root-cause, mistake, escalation, training, standards, peak, partners, new-role]
+      - name: readers
+        label: From the readers (optional)
+        description: "What readers who tried it wrote, anonymised and with their yes. Shown under the essay above “Did you try it?”."
+        type: object
+        list: true
+        fields:
+          - name: text
+            label: What they wrote
+            type: text
+          - name: who
+            label: Who (role, industry)
+            description: "For example: Shift lead, last mile"
+            type: string
       - name: diagram
         label: Diagram (optional)
         description: "A picture of the system the essay describes (lib/diagrams.js). Mark its place in the text with a paragraph that is only {diagram}; without the marker it comes after the text."
@@ -171,6 +184,19 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: readers
+        label: From the readers (optional)
+        description: "What readers who tried it wrote, anonymised and with their yes. Shown under the essay above “Did you try it?”."
+        type: object
+        list: true
+        fields:
+          - name: text
+            label: What they wrote
+            type: text
+          - name: who
+            label: Who (role, industry)
+            description: "For example: Shift lead, last mile"
+            type: string
       - name: diagram
         label: Diagram (optional)
         description: "A picture of the system the essay describes (lib/diagrams.js). Mark its place in the text with a paragraph that is only {diagram}; without the marker it comes after the text."
@@ -259,6 +285,19 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: readers
+        label: From the readers (optional)
+        description: "What readers who tried it wrote, anonymised and with their yes. Shown under the essay above “Did you try it?”."
+        type: object
+        list: true
+        fields:
+          - name: text
+            label: What they wrote
+            type: text
+          - name: who
+            label: Who (role, industry)
+            description: "For example: Shift lead, last mile"
+            type: string
       - name: diagram
         label: Diagram (optional)
         description: "A picture of the system the essay describes (lib/diagrams.js). Mark its place in the text with a paragraph that is only {diagram}; without the marker it comes after the text."
