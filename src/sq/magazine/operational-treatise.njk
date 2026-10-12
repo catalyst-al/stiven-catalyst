@@ -1,0 +1,12 @@
+---
+layout: layouts/base.njk
+lang: sq
+permalink: "/sq/magazine/operational-treatise.html"
+activeNav: /sq/publications.html
+eleventyComputed:
+  title: "{{ treatise.sq.name | safe }}"
+  seo_title: "{{ treatise.sq.name | safe }} · Management Review"
+  description: "{{ treatise.sq.archive.seo | safe }}"
+  ogImage: "/media/magazine/{{ treatise.latest.slug | safe }}/sq/social.jpg"
+---
+{% include "pages/treatise-archive.njk" %}

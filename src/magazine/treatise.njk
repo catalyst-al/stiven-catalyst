@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: treatise.volumes
+  size: 1
+  alias: volume
+  addAllPagesToCollections: true
+permalink: "/magazine/{{ volume.slug }}.html"
+livePages: treatise
+activeNav: /publications.html
+ogType: article
+eleventyComputed:
+  title: "{{ volume.en.heading | safe }}"
+  seo_title: "{{ treatise.en.short | safe }}, {{ treatise.en.labels.volume | safe }} {{ volume.number }}: {{ volume.en.heading | safe }}"
+  description: "{{ volume.en.seo | safe }}"
+  ogImage: "/media/magazine/{{ volume.slug | safe }}/en/social.jpg"
+---
+{% include "pages/treatise-volume.njk" %}

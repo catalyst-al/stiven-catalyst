@@ -1,0 +1,25 @@
+{#- The blocks of one page as plain text, for the whole-text version of an issue of the Management Review
+    (pages/weekly-issue.njk) or a volume of the operational treatise (pages/treatise-volume.njk). Needs page and L. -#}
+        {%- for b in page.blocks %}
+        {%- if b.type == "p" %}<p>{{ b.text }}</p>
+        {%- elif b.type == "donut" %}<p><strong>{{ b.n }}</strong> {{ b.t }}</p>
+        {%- elif b.chart %}<p>{% if b.label %}{{ b.label }}: {% endif %}{{ b.alt }}.</p>{% if b.note %}<p><em>{{ b.note }}</em></p>{% endif %}
+        {%- elif b.type == "timeline" %}<ul>{% for item in b.items %}<li><strong>{{ item.k }}</strong> {{ item.t }}</li>{% endfor %}</ul>
+        {%- elif b.type == "tiles" %}{% for g in b.groups %}<h3>{{ g.h }}</h3><ul>{% for item in g.items %}<li>{{ item.n }}. {{ item.t }}{% if item.isNew %} ({{ b.badge }}){% endif %}</li>{% endfor %}</ul>{% endfor %}
+        {%- elif b.type == "chain" %}{% if b.label %}<h3>{{ b.label }}</h3>{% endif %}<ol>{% for item in b.items %}<li><strong>{{ item.h }}.</strong> {{ item.p }}</li>{% endfor %}</ol>
+        {%- elif b.type == "example" and b.rows %}<h3>{{ b.label }}</h3><ul>{% for r in b.rows %}<li><strong>{{ r.k }}:</strong> {{ r.v }}</li>{% endfor %}</ul><p><em>{{ b.text }}</em></p>
+        {%- elif b.type == "example" %}<p><strong>{{ b.label }}:</strong> {{ b.text }}</p>
+        {%- elif b.type == "matrix" %}<p>{{ b.y }} × {{ b.x }}:</p><ul>{% for c in b.cells %}<li><strong>{{ c.h }}</strong> ({{ c.where }}). {{ c.p }}</li>{% endfor %}</ul>
+        {%- elif b.type == "form" %}<ol>{% for item in b.items %}<li><strong>{{ item.h }}</strong>{% if item.hint %} {{ item.hint }}{% endif %}</li>{% endfor %}</ol>
+        {%- elif b.type == "rating" %}<p>{{ b.key }}</p><ol>{% for item in b.items %}<li>{{ item }}</li>{% endfor %}</ol>
+        {%- elif b.type == "cards" or b.type == "rows" or b.type == "steps" %}{% if b.label %}<h3>{{ b.label }}</h3>{% endif %}<ul>{% for c in b.items %}<li><strong>{% if c.n %}{{ c.n }}: {% endif %}{{ c.h }}.</strong> {{ c.p }}</li>{% endfor %}</ul>
+        {%- elif b.type == "box" %}<h3>{{ b.title }}</h3><ol>{% for i in b.items %}<li>{{ i }}</li>{% endfor %}</ol>
+        {%- elif b.type == "stats" or b.type == "figures" %}<ul>{% for s in b.items %}<li><strong>{{ s.n }}</strong> {{ s.t }}</li>{% endfor %}</ul>
+        {%- elif b.type == "stat" %}<p><strong>{{ b.n }}</strong> {{ b.t }}</p>
+        {%- elif b.type == "callout" %}<h3>{{ L.reading if b.reading else b.label }}</h3><p>{{ b.text }}</p>
+        {%- elif b.type == "flag" %}<p><em>{{ b.text }}</em></p>
+        {%- elif b.type == "quote" %}<p class="book-text-quote">{{ b.text }}</p>
+        {%- elif b.type == "qa" %}{% for row in b.items %}<h3>{{ row.q }}</h3>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}{% if b.closing %}<p class="book-text-quote">{{ b.closing }}</p>{% endif %}{% if b.sign %}<p><em>{{ b.sign }}</em></p>{% endif %}
+        {%- elif b.type == "lists" %}{% for col in b.cols %}<h3>{{ col.h }}</h3><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul>{% endfor %}
+        {%- endif %}
+        {%- endfor %}

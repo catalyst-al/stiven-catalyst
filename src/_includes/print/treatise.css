@@ -1,0 +1,53 @@
+/* The volumes of the operational treatise (src/guide-print/treatise.njk and the reader, src/_includes/pages/treatise-volume.njk),
+   on top of print/review-base.css and print/weekly.css: the cover with the volume, the strip of the three layers at the
+   head of every chapter page, the flag above a constructed scene, the box of the layers on the editorial and the
+   contents of the chapters. Scoped to .mr like the base. */
+.mr .pg .tr-mast-note { text-align: right; line-height: 1.55; font-size: 5.4pt; letter-spacing: .16em; }
+.mr .pg .wk-no.tr-no { font-size: 34pt; }
+.mr .pg .wk-no.tr-no small { display: block; font-family: var(--mr-sans); font-size: 5.8pt; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin-bottom: 1.2mm; }
+
+/* The three layers at the head of a chapter page: the page's own layer is lit, in the colour of its layer. */
+.mr .pg .tr-layers { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8mm; margin: -3mm 0 2.9mm; }
+.mr .pg .tr-layers li { display: flex; gap: 1.6mm; align-items: baseline; padding: 1.5mm 0 0; border-top: .55mm solid rgba(255,255,255,.14); font-size: 5.7pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--muted); line-height: 1.2; }
+.mr .pg .tr-layers li b { font-family: var(--mr-display); font-weight: 400; font-size: 7.6pt; letter-spacing: 0; line-height: 1; }
+.mr .pg .tr-layers li.is-on { color: var(--blue); border-color: var(--blue); }
+.mr .pg.tr-scene .tr-layers li.is-on { color: var(--red); border-color: var(--red); }
+.mr .pg.tr-protocol .tr-layers li.is-on { color: var(--ink); border-color: var(--ink); }
+
+/* A flag above a scene or an example: what it is, in one line. */
+.mr .pg .tr-flag { font-size: 6.2pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--red); margin: -1.6mm 0 2.8mm; padding-bottom: 1.6mm; border-bottom: .25mm solid rgba(255,75,92,.4); line-height: 1.4; }
+
+/* The editorial: the three layers, one row each. */
+.mr .pg .tr-layers-box { list-style: none; margin: 0 0 3.4mm; border-bottom: .25mm solid var(--line); }
+.mr .pg .tr-layers-box li { display: grid; grid-template-columns: 8mm 1fr; column-gap: 2mm; padding: 1.7mm 0 1.6mm; border-top: .25mm solid var(--line); }
+.mr .pg .tr-layers-box li b { grid-row: span 2; font-family: var(--mr-display); font-weight: 400; font-size: 12pt; color: var(--red); line-height: 1; }
+.mr .pg .tr-layers-box li:nth-child(2) b { color: var(--blue); }
+.mr .pg .tr-layers-box li:nth-child(3) b { color: var(--ink); }
+.mr .pg .tr-layers-box h4 { font-size: 7.9pt; margin-bottom: .5mm; }
+.mr .pg .tr-layers-box p { margin: 0; font-size: 6.9pt; line-height: 1.38; color: var(--body); }
+.mr .pg.tr-intro .lead { font-size: 10pt; margin-bottom: 3mm; }
+.mr .pg.tr-intro .body-text p { font-size: 8.8pt; line-height: 1.46; }
+.mr .pg.tr-intro .wk-byline { margin: .6mm 0 3.2mm; font-size: 10pt; }
+.mr .pg.tr-intro .wk-legend-box div { padding: 2.2mm 2.4mm; }
+.mr .pg.tr-intro .wk-legend-box p { font-size: 6.8pt; }
+
+/* The contents: each chapter with its pages side by side in the three layers, and the pages outside the chapters below. */
+.mr .pg .tr-contents { list-style: none; margin: 0 0 3mm; border-bottom: .25mm solid var(--line); }
+.mr .pg .tr-contents > li { padding: 1.3mm 0 1.2mm; border-top: .25mm solid var(--line); }
+.mr .pg .tr-contents h4 { display: grid; grid-template-columns: auto 1fr auto; gap: 2.2mm; align-items: baseline; font-size: 7.8pt; margin-bottom: .9mm; }
+.mr .pg .tr-contents h4 b { font-family: var(--mr-display); font-weight: 400; font-size: 7pt; color: var(--red); text-transform: uppercase; letter-spacing: .04em; }
+.mr .pg .tr-contents > li:nth-child(even) h4 b { color: var(--blue); }
+.mr .pg .tr-contents h4 em { font-style: normal; font-weight: 600; color: var(--muted); font-size: 7pt; }
+.mr .pg .tr-ch-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; }
+.mr .pg .tr-ch-layers i { display: block; font-style: normal; font-size: 5.2pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin-bottom: .3mm; }
+.mr .pg .tr-ch-layers span { display: grid; grid-template-columns: 1fr auto; gap: 1.4mm; align-items: baseline; font-size: 6.5pt; line-height: 1.24; color: var(--ink); padding: .2mm 0; }
+.mr .pg .tr-ch-layers span em { font-style: normal; color: var(--muted); font-weight: 600; font-size: 6.3pt; }
+.mr .pg.tr-toc .wk-toc { margin-bottom: 0; }
+.mr .pg.tr-toc .wk-toc li { padding: 1mm 0; }
+.mr .pg.tr-toc h2 { margin-bottom: 3.4mm; }
+.mr .pg.tr-toc .block-label { margin-top: 3mm; }
+
+/* Many sources (ten or more): the addresses stay in the text version, so the cards fit one page. */
+.mr .pg.tr-sources .src.many { gap: 1.3mm; }
+.mr .pg.tr-sources .src.many li { font-size: 6.1pt; padding: 1.4mm 2mm; line-height: 1.26; }
+.mr .pg.tr-sources .src.many li i { display: none; }

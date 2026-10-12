@@ -1,0 +1,35 @@
+---
+pagination:
+  data: treatise.prints
+  size: 1
+  alias: treatisePrint
+---
+{#- One volume of the operational treatise in one language, as A5 pages. scripts/treatise.mjs prints it to PDF;
+    the published site never carries this page (guide-print.11tydata.js). The text is in lib/treatise/volumes, the
+    charts come ready from treatise.js (b.svg), and each page is drawn by print/treatise-page.njk, which the reader
+    of the volume (pages/treatise-volume.njk) shares. -#}
+{%- set lang = treatisePrint.lang -%}
+{%- set volume = treatise.volumes | where("slug", treatisePrint.slug) -%}
+{%- set V = volume[lang] -%}
+{%- set W = treatise[lang] -%}
+{%- set L = W.labels -%}
+{%- set essays = collections["insights" + (lang | langSuffix)] -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ W.short }} · {{ L.volume }} {{ volume.number }} · {{ V.heading }}</title>
+<style>
+{% include "print/print-head.css" %}
+{% include "print/review-base.css" %}
+{% include "print/weekly.css" %}
+{% include "print/treatise.css" %}
+</style>
+</head>
+<body class="mr">
+{%- for page in V.pages %}
+{%- set n = loop.index %}
+{% include "print/treatise-page.njk" %}
+{%- endfor %}
+</body>
+</html>

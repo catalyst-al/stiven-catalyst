@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+lang: sq
+pagination:
+  data: treatise.volumes
+  size: 1
+  alias: volume
+  addAllPagesToCollections: true
+permalink: "/sq/magazine/{{ volume.slug }}.html"
+livePages: treatise
+activeNav: /sq/publications.html
+ogType: article
+eleventyComputed:
+  title: "{{ volume.sq.heading | safe }}"
+  seo_title: "{{ treatise.sq.short | safe }}, {{ treatise.sq.labels.volume | safe }} {{ volume.number }}: {{ volume.sq.heading | safe }}"
+  description: "{{ volume.sq.seo | safe }}"
+  ogImage: "/media/magazine/{{ volume.slug | safe }}/sq/social.jpg"
+---
+{% include "pages/treatise-volume.njk" %}

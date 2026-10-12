@@ -58,7 +58,7 @@ test('every page of the online readers has a sharp copy twice as wide', () => {
   }
   // The Management Review, the magazine and the Tools Guide show their pages alive, the same markup as the print
   // (tests/live-pages.test.cjs), with the same controls.
-  for (const reader of ['review', 'weekly-issue', 'magazine-issue', 'guide']) {
+  for (const reader of ['review', 'weekly-issue', 'guide']) {
     const template = fs.readFileSync(`src/_includes/pages/${reader}.njk`, 'utf8');
     // The wrapper of a page is in the reader (the Management Review) or in the partial it includes (the magazine, the guide).
     const partial = template.match(/\{%-? include "print\/([a-z-]+)\.njk" %\}/)?.[1];
@@ -68,6 +68,8 @@ test('every page of the online readers has a sharp copy twice as wide', () => {
     assert.match(template, /data-book-zoom/, `${reader}.njk: the zoom button`);
     assert.match(template, /data-book-view data-one="[^"]+" data-two="[^"]+"/, `${reader}.njk: the button for one large page or two pages`);
   }
+  // The magazine is written like the Management Review and opens in its reader.
+  assert.match(fs.readFileSync('src/_includes/pages/magazine-issue.njk', 'utf8'), /\{%- include "pages\/weekly-issue\.njk" %\}/);
   // On a wide screen the reader opens one page 1000 px wide (js/book.js, styles.css), so the small print is read at
   // its own size; the sizes the browser picks the picture by say the same, so above 1x it takes the 2000 px copy.
   assert.match(fs.readFileSync('src/styles.css', 'utf8'), /\.js \.book-reader\.is-large \.book \{\s*width: min\(100%, 1000px\);/);
