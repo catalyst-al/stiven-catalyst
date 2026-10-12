@@ -1,0 +1,11 @@
+---
+layout: layouts/base.njk
+permalink: "/magazine/from-the-floor.html"
+activeNav: /publications.html
+eleventyComputed:
+  title: "{{ magazine.names.en.name | safe }}"
+  seo_title: "{{ magazine.names.en.name | safe }} · {{ magazine.archive.en.eyebrow | safe }}"
+  description: "{{ magazine.archive.en.seo | safe }}"
+  ogImage: "/media/magazine/{{ magazine.latest.slug | safe }}/en/social.jpg"
+---
+{% include "pages/magazine-archive.njk" %}

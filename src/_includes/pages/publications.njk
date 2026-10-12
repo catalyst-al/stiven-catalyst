@@ -28,11 +28,11 @@
       </div>
     </div>
   </section>
-{#- The magazine: every issue the same way as the other publications, cover and text, the newest first. -#}
-{%- for issue in magazine.issues | reverse %}
+{#- The magazine: its newest issue, and the way to all of them, the same way as the Management Review. -#}
+{%- set issue = magazine.latest %}
 {%- set issueUrl = ("/magazine/" + issue.slug + ".html") | local(lang) %}
 {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
-  <section class="shell book-feature magazine-feature"{% if loop.first %} id="magazine"{% endif %}>
+  <section class="shell book-feature magazine-feature" id="magazine">
     <a class="book-object" href="{{ issueUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ issueCover.image }}" srcset="{{ issueCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy"></span>
     </a>
@@ -41,10 +41,12 @@
       <h2><a href="{{ issueUrl }}">{{ issue[ml].theme }}</a></h2>
       <p class="book-subtitle">{{ issue[ml].themeSub }}</p>
       <p>{{ issue[ml].trend.lead }}</p>
-      <a class="button-primary" href="{{ issueUrl }}">{{ "Open the issue" | t(lang) }}</a>
+      <div class="book-feature-actions">
+        <a class="button-primary" href="{{ issueUrl }}">{{ "Open the issue" | t(lang) }}</a>
+        <a class="text-link" href="{{ '/magazine/from-the-floor.html' | local(lang) }}">{{ magazine.archive[ml].all }} ({{ magazine.issues | length }})</a>
+      </div>
     </div>
   </section>
-{%- endfor %}
 {#- The Management Review of September 2026: the special edition before the monthly one. -#}
 {%- set R = review[ml] %}
 {%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}

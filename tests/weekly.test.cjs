@@ -179,6 +179,19 @@ test('the list of all issues and Publications show the weekly in every language'
   }
 });
 
+test('the monthly magazine is gathered the same way: its newest issue on Publications, all of them on their list', { skip: !hasSite }, async () => {
+  const { default: magazine } = await import('../src/_data/magazine.js');
+  for (const lang of LANGS) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    const archive = built(`${prefix}magazine/from-the-floor.html`);
+    for (const issue of magazine.issues) assert.ok(archive.includes(`/${prefix}magazine/${issue.slug}.html`), `${lang}: ${issue.slug}`);
+    const publications = built(`${prefix}publications.html`);
+    assert.ok(publications.includes(`/${prefix}magazine/${magazine.latest.slug}.html`), `${lang}: newest issue`);
+    assert.ok(publications.includes(`/${prefix}magazine/from-the-floor.html`), `${lang}: all issues`);
+    for (const issue of magazine.issues.slice(0, -1)) assert.ok(!publications.includes(`/${prefix}magazine/${issue.slug}.html`), `${lang}: ${issue.slug} only on the list`);
+  }
+});
+
 test('no page writes its title or description escaped twice', { skip: !hasSite }, () => {
   // eleventyComputed values are rendered by Nunjucks before the layout escapes them again; "Google's" must reach the
   // page as "Google&#39;s", never "Google&amp;#39;s".

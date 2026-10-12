@@ -1,0 +1,27 @@
+{#- All issues of the monthly magazine From the Floor, the newest first, each as its cover, the way the list of
+    the Management Review shows its issues. Shared by the three languages. -#}
+{%- set lang = lang or "en" -%}
+{%- set N = magazine.names[lang] -%}
+{%- set L = magazine.labels[lang] -%}
+{%- set A = magazine.archive[lang] -%}
+  <section class="shell page-hero weekly-hero">
+    <p class="eyebrow">{{ A.eyebrow }}</p>
+    <h1{% if N.name | length > 10 %} class="hero-long"{% endif %}>{{ N.name }}</h1>
+    <p class="lede">{{ A.lede }}</p>
+  </section>
+
+  <section class="shell weekly-archive" aria-label="{{ A.all }}">
+    <ol class="weekly-grid" reversed>
+      {%- for issue in magazine.issues | reverse %}
+      {%- set cover = magazinePages[issue.slug][lang].pages[0] %}
+      <li>
+        <a class="weekly-card" href="{{ ('/magazine/' + issue.slug + '.html') | local(lang) }}">
+          <span class="weekly-card-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 620px) 45vw, 220px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}" decoding="async"></span>
+          <span class="weekly-card-meta">{{ L.issue }} {{ issue.number }}</span>
+          <strong>{{ issue[lang].theme }}</strong>
+          <span class="weekly-card-date">{{ issue[lang].date }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ol>
+  </section>
