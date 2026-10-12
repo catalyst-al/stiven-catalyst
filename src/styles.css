@@ -5243,6 +5243,30 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 .cx-blueprint > summary { color: var(--blue); font-weight: 800; cursor: pointer; }
 .cx-blueprint[open] > summary { margin-bottom: 12px; }
 .cx-blueprint .cx-table td { min-width: 150px; white-space: normal; color: var(--muted); font-size: 14px; }
+/* Deep dive: one failure, where it concentrates, the evidence rows and the investigation that becomes an action. */
+.cx-deep-controls { align-items: end; }
+.cx-check-label { display: flex; align-items: center; gap: 10px; min-height: 48px; color: var(--ink); font-size: 15px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+.cx-check-label input { width: 20px; height: 20px; margin: 0; accent-color: var(--blue); }
+.dl-stat.is-bad { border-color: color-mix(in srgb, var(--cx-bad) 55%, var(--line)); }
+.dl-stat.is-bad .dl-stat-value { color: var(--cx-bad); }
+.cx-kpi-dive { padding: 2px 0; font-size: 13px; }
+.cx-deep-trend figcaption { color: var(--muted); font-size: 13px; }
+.cx-mini-chart rect:focus { outline: none; opacity: 1; stroke: var(--cx-text); stroke-width: 2; }
+.cx-seg { padding: 0; border: 0; background: none; color: var(--blue); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.cx-seg:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cx-seg[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.cx-seg-table tr.is-selected > * { background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.cx-seg-table .cx-seg-bar { min-width: 120px; }
+.cx-seg-table .bar-track { width: 110px; margin: 0; }
+.cx-deep-observed { margin: 0; padding: 12px 16px; border-left: 2px solid var(--blue); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--blue) 8%, transparent); font-size: 14px; }
+.cx-case-head { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.cx-case-form { align-items: start; }
+.cx-case-note { min-height: 1.4em; }
+.cx-case-note:empty { display: none; }
+.cx-case-note.is-bad { color: var(--cx-bad); }
+.cx-case-manage { white-space: nowrap; }
+.cx-case-manage .button-ghost { padding: 2px 0; }
+.cx-table tr.is-selected > * { background: color-mix(in srgb, var(--blue) 10%, transparent); }
 @media (max-width: 900px) {
   .cx-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cx-filters > .button-ghost { grid-column: 1 / -1; justify-self: start; }
@@ -5251,7 +5275,8 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
   .cx-filters { grid-template-columns: minmax(0, 1fr); }
 }
 @media print {
-  .cx-filters, .cx-tabs, .cx-about, .cx-note, .cx .tool-actions, .cx-drop, .cx .button-ghost, .cx-controls { display: none !important; }
+  .cx-filters, .cx-tabs, .cx-about, .cx-note, .cx .tool-actions, .cx-drop, .cx .button-ghost, .cx-controls, .cx-case-manage { display: none !important; }
+  .cx-seg { color: #1b2330; }
   .cx { --cx-line: #1c7cc2; --cx-target: #9a6d1f; --cx-grid: #e3e6ea; --cx-text: #1b2330; --cx-muted: #5f6870; --cx-surface: #fff; --cx-good: #1d7a45; --cx-bad: #c2141b; --pa-vital: #1c7cc2; --pa-rest: #8e98a3; --pa-line: #1b2330; --pa-grid: #e3e6ea; --pa-text: #1b2330; --pa-muted: #5f6870; --pa-surface: #fff; }
   .cx-table-wrap { max-height: none; overflow: visible; }
   .cx-kpi, .cx-mini, .dl-panel { break-inside: avoid; }

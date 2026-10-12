@@ -515,7 +515,139 @@
     return { deliveries, routes, incidents, actions };
   };
 
-  window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example };
+  // ---------- Deep dive ----------
+  // One failure to investigate at a time. Each metric names the rows it can judge (its grain and the
+  // column that must hold a valid outcome), what counts as a failure, which incident types record the
+  // same kind of failure (matched on the folded type, without accents, in English, German or Albanian), and the KPI
+  // whose approved target bounds its failure rate ("inverse": the KPI is a success rate, so the failure
+  // maximum is one minus the target). A row without a valid outcome is left out, never counted as a
+  // success or a failure.
+  const DEEP = [
+    { id: "late", label: "Late deliveries", grain: "deliveries", field: "On_Time", fail: 0, kpi: "onTime", inverse: true, incident: /delay|\blate\b|verspat|vones/ },
+    { id: "incomplete", label: "Incomplete deliveries", grain: "deliveries", field: "Complete", fail: 0, kpi: "incomplete", incident: /incomplete|unvollst|fehlend|paplot|mungon/ },
+    { id: "damage", label: "Damaged deliveries", grain: "deliveries", field: "Damage_Free", fail: 0, kpi: "damage", incident: /damage|schaden|beschad|\bdem/ },
+    { id: "temperature", label: "Temperature failures", grain: "deliveries", field: "Temp_Compliant", fail: 0, kpi: "cold", inverse: true, incident: /temperat|cold chain|kuhl|ftoht/ },
+    { id: "firstAttempt", label: "Failed first attempts", grain: "deliveries", field: "First_Attempt", fail: 0, kpi: "first", inverse: true, incident: /failed deliver|first attempt|not delivered|fehlversuch|nicht zugestellt|erstzustell|deshtuar|tentativ/ },
+    { id: "notification", label: "Late deliveries without a message", grain: "deliveries", kpi: "notification", inverse: true, incident: /communicat|notif|benachricht|kommunikat|njoftim|komunikim/ },
+    { id: "complaint", label: "Customer complaints", grain: "deliveries", field: "Complaint", fail: 1, kpi: null, incident: null },
+    { id: "imperfect", label: "Deliveries that were not perfect", grain: "deliveries", kpi: "perfect", inverse: true, incident: null },
+    { id: "loading", label: "Routes loading over target", grain: "routes", field: "Loading_Time_Min", over: (settings) => (settings.loadingTarget == null ? 20 : settings.loadingTarget), kpi: null, incident: /loading|ladung|belad|ngarkim/ },
+    { id: "departure", label: "Routes leaving late", grain: "routes", field: "Departure_Delay_Min", over: (settings) => settings.lateMinutes, kpi: "lateRoute", incident: /delay|\blate\b|departure|abfahrt|verspat|nisj|vones/ },
+    { id: "missingBags", label: "Routes with missing bags", grain: "routes", field: "Missing_Bag_Events", over: () => 0, kpi: null, incident: /incomplete|missing bag|\bbag|tasche|\bcant|paplot|mungon/ },
+    { id: "gate", label: "Gate left open", grain: "routes", field: "Gate_Closed_Compliant", fail: 0, kpi: "gateClose", inverse: true, incident: /\bgate|\btor\b|\bport/ },
+    { id: "coldScan", label: "Cold scan missed", grain: "routes", field: "Cold_Scan_Compliant", fail: 0, kpi: "coldScan", inverse: true, incident: /cold scan|kuhlscan|temperat|skanim/ },
+    { id: "safety", label: "Routes with a safety deviation", grain: "routes", fields: ["Yard_Speed_Breach", "Safety_Vest_Compliant", "Traffic_Direction_Compliant"], kpi: null, incident: /safety|sicherheit|siguri/ },
+  ];
+  const DEEP_DIMS = { deliveries: ["DSP", "Shift", "Zone", "Week", "Driver_ID", "Route_ID"], routes: ["DSP", "Shift", "Zone", "Week", "Driver_ID", "Route_ID", "Ramp_Gate", "Vehicle_ID"] };
+  // 1 failed, 0 passed, null when the row has no valid outcome for this metric.
+  const deepOutcome = (metric, row, settings, present) => {
+    if (metric.grain === "deliveries" && !isDelivered(row)) return null;
+    if (metric.id === "imperfect") {
+      const p = perfectOf(row, present);
+      return p == null ? null : p === 1 ? 0 : 1;
+    }
+    if (metric.id === "notification") {
+      if (row.Notification_Eligible !== 1 || row.Customer_Notified == null) return null;
+      return row.Customer_Notified === 1 ? 0 : 1;
+    }
+    if (metric.id === "safety") {
+      if (metric.fields.every((field) => row[field] == null)) return null;
+      return row.Yard_Speed_Breach > 0 || row.Safety_Vest_Compliant === 0 || row.Traffic_Direction_Compliant === 0 ? 1 : 0;
+    }
+    const value = row[metric.field];
+    if (value == null) return null;
+    if (metric.over) return value > metric.over(settings) ? 1 : 0;
+    return value === metric.fail ? 1 : 0;
+  };
+  // The eligible rows, the affected ones among them, and the rate: numerator over its own denominator.
+  const deepAggregate = (rows, metric, settings, present) => {
+    const eligible = [];
+    const affected = [];
+    rows.forEach((row) => {
+      const outcome = deepOutcome(metric, row, settings, present);
+      if (outcome == null) return;
+      eligible.push(row);
+      if (outcome === 1) affected.push(row);
+    });
+    const hit = new Set(affected);
+    return { eligible, affected, hit, excluded: rows.length - eligible.length, n: eligible.length, k: affected.length, rate: eligible.length ? affected.length / eligible.length : null };
+  };
+  const segmentOf = (row, dim) => (dim === "Week" ? (row.Date ? isoWeek(row.Date) : "") : String(row[dim] ?? ""));
+  // Where the failures sit: per value of a dimension, its cases, eligible rows, rate and share of all
+  // cases. The difference against the rest is only given when both sides reach the sample floor.
+  const deepSegments = (agg, dim, minN) => {
+    const map = new Map();
+    agg.eligible.forEach((row) => {
+      const key = segmentOf(row, dim);
+      const seg = map.get(key) || { key, n: 0, k: 0 };
+      seg.n += 1;
+      if (agg.hit.has(row)) seg.k += 1;
+      map.set(key, seg);
+    });
+    return [...map.values()].map((seg) => {
+      const restN = agg.n - seg.n;
+      const restK = agg.k - seg.k;
+      const comparable = seg.n >= minN && restN >= minN;
+      return { ...seg, rate: seg.n ? seg.k / seg.n : null, share: agg.k ? seg.k / agg.k : 0, low: seg.n < minN, vsRest: comparable ? seg.k / seg.n - restK / restN : null };
+    }).sort((a, b) => b.k - a.k || b.n - a.n || a.key.localeCompare(b.key, undefined, { numeric: true }));
+  };
+  // The rate per ISO week: each week's cases over that week's eligible rows, never an average of days.
+  const deepWeekly = (agg) => {
+    const map = new Map();
+    agg.eligible.forEach((row) => {
+      if (!row.Date) return;
+      const week = isoWeek(row.Date);
+      const point = map.get(week) || { week, n: 0, k: 0 };
+      point.n += 1;
+      if (agg.hit.has(row)) point.k += 1;
+      map.set(week, point);
+    });
+    return [...map.values()].sort((a, b) => a.week.localeCompare(b.week)).map((point) => ({ ...point, rate: point.k / point.n }));
+  };
+  // The window of equal length just before the period, for a like-for-like comparison.
+  const priorWindow = (from, to) => {
+    if (!from || !to || to < from) return null;
+    const days = Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5) + 1;
+    if (!(days > 0) || days > 3660) return null;
+    return { from: addDays(from, -days), to: addDays(from, -1), days };
+  };
+  // The incidents that record this kind of failure, and how many of them name one of the affected rows.
+  const deepKey = (metric, row) => (metric.grain === "routes" ? (row.Route_ID ? `${row.Date}|${row.Route_ID}` : "") : String(row.Delivery_ID || ""));
+  const deepIncidents = (incidents, metric, affected) => {
+    const records = metric.incident ? incidents.filter((row) => metric.incident.test(fold(row.Incident_Type))) : incidents;
+    const keys = new Set(affected.map((row) => deepKey(metric, row)).filter(Boolean));
+    const linked = records.filter((row) => keys.has(deepKey(metric, row))).length;
+    return { records, linked, typed: Boolean(metric.incident) };
+  };
+  // The investigation case: evidence first, a cause that stays a hypothesis until verified, then the
+  // actions, an owner, a deadline and the check that it worked.
+  const CASE_FIELDS = ["title", "status", "problem", "evidence", "where", "rootStatus", "why1", "why2", "why3", "why4", "why5", "root", "containment", "corrective", "preventive", "owner", "deadline", "verifyMetric", "verifyResult"];
+  const CASE_STATUS = ["Open", "Investigating", "Verification pending", "Verified effective", "Reopened"];
+  const ROOT_STATUS = ["Hypothesis", "Verified"];
+  const text = (value) => String(value ?? "").trim();
+  // What stops a case from being saved: "title" when it has none, "verified" when it is marked
+  // verified effective without a verified root cause, written evidence, a cause and a verification result.
+  const caseCheck = (draft) => {
+    const errors = [];
+    if (!text(draft.title)) errors.push("title");
+    if (draft.status === "Verified effective" && (draft.rootStatus !== "Verified" || !text(draft.evidence) || !text(draft.root) || !text(draft.verifyResult))) errors.push("verified");
+    return errors;
+  };
+  // An action can be created from a case once it names an action, an owner and a deadline.
+  const caseAction = (draft) => text(draft.corrective) || text(draft.containment) || text(draft.preventive);
+  const capaReady = (draft) => Boolean(caseAction(draft) && text(draft.owner) && text(draft.deadline));
+  // The action a case becomes, as a row of the action tracker.
+  // words: the page's texts for "working hypothesis" and "investigation", in its language.
+  const caseToAction = (draft, id, start, caseId, words = {}) => ({
+    Action_ID: id, Linked_Incident: "", Problem: text(draft.problem) || text(draft.title), Evidence: text(draft.evidence),
+    Root_Cause: draft.rootStatus === "Verified" ? text(draft.root) : `${words.hypothesis || "Working hypothesis, not verified"}: ${text(draft.root) || "–"}`,
+    Action_Type: text(draft.corrective) ? "Corrective" : text(draft.containment) ? "Containment" : "Preventive", Action: caseAction(draft),
+    Owner: text(draft.owner), Start_Date: start, Deadline: text(draft.deadline), Status: "Open", Verification_Metric: text(draft.verifyMetric), Baseline: "", Target: "", Result: "", Verification_Status: "Pending",
+    Notes: `${words.investigation || "Investigation"} ${caseId}`,
+  });
+
+  window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
+    DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction };
 })();
 
 // ======================================================================
@@ -531,7 +663,7 @@
   const NAMES = ["deliveries", "routes", "incidents", "actions"];
   const TABLE_LABEL = { deliveries: tx("Deliveries"), routes: tx("Routes"), incidents: tx("Incidents"), actions: tx("Actions") };
   const TABS = [
-    ["overview", tx("Overview")], ["operations", tx("Operations")], ["scorecards", tx("Scorecards")], ["causes", tx("Root causes")],
+    ["overview", tx("Overview")], ["operations", tx("Operations")], ["deep", tx("Deep dive")], ["scorecards", tx("Scorecards")], ["causes", tx("Root causes")],
     ["actions", tx("Actions")], ["review", tx("Weekly review")], ["data", tx("Data & targets")],
   ];
   const $ = (selector) => app.querySelector(selector);
@@ -546,6 +678,10 @@
     settings: { lateMinutes: 5, minSample: 50 },
     filters: { from: "", to: "", DSP: "", Shift: "", Zone: "" },
     tab: "overview", week: "", groupBy: "Root_Cause_Category", typeFilter: "", example: false,
+    // The deep dive: which failure, broken down by what, the sample floor, the comparison and the
+    // clicked segment; the saved investigations, the one open in the form and the form's draft.
+    deep: { metric: "incomplete", dim: "DSP", minN: 50, compare: true, segment: "" },
+    cases: [], caseId: "", draft: {},
   });
   // Saved and loaded values keep the kinds of their columns, so damaged storage never breaks the page.
   const cleanValue = (name, field, value) => {
@@ -582,6 +718,23 @@
     ["week", "groupBy", "typeFilter"].forEach((key) => { if (typeof saved[key] === "string") base[key] = saved[key]; });
     if (!["Root_Cause_Category", "Incident_Type", "Department_Owner", "DSP", "Zone", "Shift"].includes(base.groupBy)) base.groupBy = "Root_Cause_Category";
     base.example = saved.example === true;
+    if (isObject(saved.deep)) {
+      const d = saved.deep;
+      if (C.DEEP.some((m) => m.id === d.metric)) base.deep.metric = d.metric;
+      if (typeof d.dim === "string") base.deep.dim = d.dim;
+      if (Number.isInteger(d.minN) && d.minN >= 1) base.deep.minN = d.minN;
+      if (typeof d.compare === "boolean") base.deep.compare = d.compare;
+      if (typeof d.segment === "string") base.deep.segment = d.segment;
+    }
+    const textOf = (value) => (typeof value === "string" ? value : "");
+    if (Array.isArray(saved.cases)) {
+      base.cases = saved.cases.filter((item) => isObject(item) && typeof item.id === "string" && item.id).map((item) => ({
+        id: item.id, updated: textOf(item.updated), ...Object.fromEntries(C.CASE_FIELDS.map((field) => [field, textOf(item[field])])), actionId: textOf(item.actionId),
+        snapshot: isObject(item.snapshot) ? Object.fromEntries(Object.entries(item.snapshot).filter(([, v]) => typeof v === "string" || typeof v === "number")) : {},
+      }));
+    }
+    if (typeof saved.caseId === "string" && base.cases.some((item) => item.id === saved.caseId)) base.caseId = saved.caseId;
+    if (isObject(saved.draft)) base.draft = Object.fromEntries(C.CASE_FIELDS.filter((field) => typeof saved.draft[field] === "string").map((field) => [field, saved.draft[field]]));
     return base;
   })();
 
@@ -590,7 +743,7 @@
       const fields = C.FIELDS[name];
       return [name, { fields, rows: state[name].map((row) => fields.map((field) => row[field])) }];
     }));
-    write(cfg.storageKey, { v: 1, tables, sources: state.sources, targets: state.targets, settings: state.settings, filters: state.filters, tab: state.tab, week: state.week, groupBy: state.groupBy, typeFilter: state.typeFilter, example: state.example });
+    write(cfg.storageKey, { v: 1, tables, sources: state.sources, targets: state.targets, settings: state.settings, filters: state.filters, tab: state.tab, week: state.week, groupBy: state.groupBy, typeFilter: state.typeFilter, example: state.example, deep: state.deep, cases: state.cases, caseId: state.caseId, draft: state.draft });
   };
   let saveTimer = null;
   const save = () => {
@@ -823,12 +976,18 @@
     renderPanel();
     tabList.querySelector(`[data-tab="${next}"]`).focus();
   });
+  // The deep dive on one failure, from a KPI tile or the root causes.
+  const openDeep = (metricId) => {
+    state.deep.metric = metricId;
+    state.deep.segment = "";
+    goTo("deep");
+  };
   const goTo = (id) => {
     state.tab = id;
     save();
     renderTabs();
     renderPanel();
-    body.scrollIntoView({ behavior: "smooth", block: "start" });
+    body.scrollIntoView?.({ behavior: "smooth", block: "start" });
   };
 
   // ---------- Charts ----------
@@ -1026,6 +1185,13 @@
       if (state.targets[kpi.id] != null) meta.append(el("span", null, targetText(kpi)));
       tile.append(meta, el("span", "dl-stat-note", grainWord(kpi, v.n) + (v.n < 30 ? ` · ${tx("little data")}` : "")));
       tile.title = tx(kpi.def);
+      if (KPI_TO_DEEP[kpi.id]) {
+        const dive = el("button", "button-ghost cx-kpi-dive", tx("Investigate"));
+        dive.type = "button";
+        dive.setAttribute("aria-label", `${tx("Investigate")}: ${label(kpi)}`);
+        dive.addEventListener("click", () => openDeep(KPI_TO_DEEP[kpi.id]));
+        tile.append(dive);
+      }
       tiles.append(tile);
     });
     const score = C.cxScore(d);
@@ -1295,6 +1461,10 @@
       } catch { /* the Pareto page opens empty */ }
     });
     actions.append(pareto);
+    const dive = el("button", "button-secondary", tx("Open the deep dive"));
+    dive.type = "button";
+    dive.addEventListener("click", () => openDeep(state.typeFilter ? (C.DEEP.find((m) => m.incident && m.incident.test(P.fold(state.typeFilter)))?.id || state.deep.metric) : state.deep.metric));
+    actions.append(dive);
     if (top) {
       const whys = el("a", "button-secondary", tx("Take “{cause}” to 5 Whys", { cause: top.key }));
       const url = new URL("../five-whys/", window.location.href);
@@ -1350,6 +1520,8 @@
     const status = el("span", `cx-chip is-${action.Status === "Completed" ? "done" : overdue(action, asOf) ? "late" : "open"}`, overdue(action, asOf) ? `${optionText(action.Status)} · ${tx("overdue")}` : optionText(action.Status));
     const verified = el("span", `cx-chip is-${action.Verification_Status === "Effective" ? "done" : action.Verification_Status === "Not effective" ? "late" : "wait"}`, optionText(action.Verification_Status));
     meta.append(status, verified);
+    const fromCase = state.cases.find((item) => item.actionId && item.actionId === action.Action_ID);
+    if (fromCase) meta.append(el("span", "cx-chip is-open", `${tx("Investigation")} ${fromCase.id}`));
     summary.append(title, meta);
     return summary;
   };
@@ -1505,6 +1677,17 @@
       verify.forEach((a) => ul.append(el("li", null, `${a.Action_ID} · ${a.Action || a.Problem} · ${tx("verify with {metric}", { metric: a.Verification_Metric || tx("a metric") })}`)));
       actBox.append(ul);
     }
+    const openCases = state.cases.filter((item) => item.status !== "Verified effective");
+    if (openCases.length) {
+      actBox.append(el("p", "result-label", tx("Investigations in progress")));
+      const ul = el("ul", "cx-review-actions");
+      openCases.slice(0, 6).forEach((item) => ul.append(el("li", null, `${item.id} · ${item.title} · ${item.owner || tx("no owner")} · ${CASE_TEXT[item.status] || item.status}${item.actionId ? ` · ${item.actionId}` : ""}`)));
+      actBox.append(ul);
+      const more = el("button", "button-ghost", tx("Open the deep dive"));
+      more.type = "button";
+      more.addEventListener("click", () => goTo("deep"));
+      actBox.append(more);
+    }
     grid.append(actBox);
     out.push(grid);
     const agenda = section(tx("Agenda, 30 minutes"));
@@ -1523,6 +1706,7 @@
       });
       if (top3.length) lines.push("", `${tx("Top 3 root causes")}:`, ...top3.map((item, n) => `${n + 1}. ${item.key}: ${item.amount}`));
       if (due.length || verify.length) lines.push("", `${tx("Actions to discuss")}:`, ...due.map((a) => `- ${a.Action_ID} ${a.Action || a.Problem} (${a.Owner || "–"}, ${showDate(a.Deadline)})`), ...verify.map((a) => `- ${a.Action_ID} ${a.Action || a.Problem}: ${tx("verify")}`));
+      if (openCases.length) lines.push("", `${tx("Investigations in progress")}:`, ...openCases.map((item) => `- ${item.id} ${item.title} (${item.owner || "–"}, ${CASE_TEXT[item.status] || item.status})`));
       copy(lines.join("\n"), copyButton);
     });
     const printButton = el("button", "button-secondary", tx("Print or save as PDF"));
@@ -1573,7 +1757,7 @@
     const clear = el("button", "button-ghost", tx("Remove all data"));
     clear.type = "button";
     clear.addEventListener("click", () => {
-      if (!window.confirm(tx("Remove all tables, actions and targets from this browser?"))) return;
+      if (!window.confirm(tx("Remove all tables, actions, investigations and targets from this browser?"))) return;
       const fresh = blank();
       Object.keys(fresh).forEach((key) => { state[key] = fresh[key]; });
       state.tab = "data";
@@ -1591,7 +1775,12 @@
       const tr = el("tr");
       tr.append(el("th", null, TABLE_LABEL[name]), el("td", "num", int.format(rows.length)), el("td", null, dates.length ? `${showDate(dates[0])} – ${showDate(dates[dates.length - 1])}` : "–"), el("td", null, state.sources[name] || "–"));
       return tr;
-    })));
+    }).concat((() => {
+      const tr = el("tr");
+      const dates = state.cases.map((item) => item.updated).filter(Boolean).sort();
+      tr.append(el("th", null, tx("Investigations")), el("td", "num", int.format(state.cases.length)), el("td", null, dates.length ? `${showDate(dates[0])} – ${showDate(dates[dates.length - 1])}` : "–"), el("td", null, state.cases.length ? tx("Deep dive, this browser") : "–"));
+      return [tr];
+    })())));
     out.push(imp);
     // Templates and export
     const files = section(tx("Templates and export"), tx("Keep the column names; the order does not matter. 1 = yes, 0 = no. An empty temperature cell means nothing chilled on that delivery."));
@@ -1717,8 +1906,520 @@
     return value;
   };
 
+  // ---------- Deep dive ----------
+  // One failure, its eligible rows, where it concentrates, the incidents that record it, and an
+  // investigation that becomes an action in the tracker. A clicked segment narrows the evidence only.
+  const DEEP_BY = Object.fromEntries(C.DEEP.map((m) => [m.id, m]));
+  const KPI_TO_DEEP = { perfect: "imperfect", onTime: "late", incomplete: "incomplete", damage: "damage", cold: "temperature", first: "firstAttempt", notification: "notification", complaints: "complaint", loading: "loading", lateRoute: "departure", gateClose: "gate", coldScan: "coldScan" };
+  const DEEP_PROMPTS = {
+    late: ["Compare planned and actual departure, then separate a late departure from delay on the road.", "Check route density, capacity planning, traffic evidence and when the customer was told."],
+    incomplete: ["Review bag build, trolley assignment, scan exceptions and the completeness check at route release.", "Check the warehouse-to-ramp handover and repeated bag or route mismatches before assigning an owner."],
+    damage: ["Check packing, heavy items on top, loading sequence and the condition at the door.", "Look for clusters by product, vehicle, route and handling stage before naming a driver cause."],
+    temperature: ["Check cold-room scan times, insulated boxes, the vehicle's cooling and exposure at the door.", "Contain the food safety risk first and confirm the actual readings before declaring compliance."],
+    firstAttempt: ["Review access problems, driver attempts, route instructions, time windows and the support history.", "Separate what the driver can control from an unavailable customer or restricted access."],
+    notification: ["Check when the ETA moved past the window and whether a message went out before it.", "Compare the notification rate by partner and shift; a manual step depends on who remembers it."],
+    complaint: ["Check the complaint categories, remove duplicate case IDs and compare the reported incidents with the outcomes.", "Find the repeats and close the service-recovery loop with customer care."],
+    imperfect: ["Break down which conditions failed on the same deliveries; never add the shares of separate categories.", "Find the overlapping failures and put customer harm before the raw count."],
+    loading: ["Check trolley readiness, scanner distance, bag availability, ramp capacity and staffing per wave.", "Verify an action against the loading times after it, without giving up scan quality."],
+    departure: ["Separate delay made before or at loading from dispatch approval and vehicle problems.", "Compare departure delays with customer lateness on the linked deliveries before claiming an impact."],
+    missingBags: ["Check bag traceability, scan exceptions, the cold-room handover and the final vehicle check.", "Check whether the missing-bag flags match incomplete deliveries at the customer."],
+    gate: ["Walk gates 1 to 13 after loading and check who owns closing them in the release routine.", "Treat an open gate as a safety matter and escalate unsafe events."],
+    coldScan: ["Check that chilled and frozen bags are scanned inside the cooling area and stay under control.", "Review scanner availability, missing-bag escalation and trolley movement in the cold room."],
+    safety: ["Review the 10 km/h yard limit, one-way traffic, safety vests and the recorded vehicle movements.", "Escalate unsafe conditions at once, then verify training and safe behaviour in the next shifts."],
+  };
+  const DIM_LABEL = { DSP: tx("Partner"), Shift: tx("Shift"), Zone: tx("Zone"), Week: tx("Week"), Driver_ID: tx("Driver"), Route_ID: tx("Route"), Ramp_Gate: tx("Ramp gate"), Vehicle_ID: tx("Vehicle") };
+  const CASE_TEXT = { Open: tx("Open"), Investigating: tx("Investigating"), "Verification pending": tx("Verification pending"), "Verified effective": tx("Verified effective"), Reopened: tx("Reopened"), Hypothesis: tx("Hypothesis, not yet verified"), Verified: tx("Verified on the floor or in the records") };
+  const CASE_FORM = [
+    ["title", tx("Investigation title"), "text"], ["status", tx("Stage"), C.CASE_STATUS],
+    ["problem", tx("Problem"), "textarea"], ["evidence", tx("Verified evidence and its source"), "textarea"],
+    ["where", tx("Where in the process"), "text"], ["rootStatus", tx("Root cause"), C.ROOT_STATUS],
+    ["why1", tx("Why 1"), "text"], ["why2", tx("Why 2"), "text"], ["why3", tx("Why 3"), "text"], ["why4", tx("Why 4"), "text"], ["why5", tx("Why 5"), "text"],
+    ["root", tx("Process failure behind it (hypothesis until verified)"), "textarea"], ["containment", tx("Containment, now"), "textarea"],
+    ["corrective", tx("Corrective action"), "textarea"], ["preventive", tx("Preventive action"), "textarea"],
+    ["owner", tx("Owner"), "text"], ["deadline", tx("Deadline"), "date"],
+    ["verifyMetric", tx("Verification metric or method"), "text"], ["verifyResult", tx("Verification result and evidence"), "textarea"],
+  ];
+  const deepMetric = () => DEEP_BY[state.deep.metric] || DEEP_BY.incomplete;
+  const deepTable = (metric) => (metric.grain === "routes" ? state.routes : state.deliveries);
+  const deepTarget = (metric) => {
+    if (!metric.kpi) return null;
+    const t = state.targets[metric.kpi];
+    return t == null ? null : metric.inverse ? 1 - t : t;
+  };
+  const deepDims = (metric) => C.DEEP_DIMS[metric.grain];
+  const deepRange = () => ({ from: state.filters.from || view().first, to: state.filters.to || view().last });
+  const deepRate = (v) => (v == null ? "–" : pct(v, 2));
+  const deepPoints = (v) => (v == null ? "–" : `${v > 0 ? "+" : v < 0 ? "−" : "±"}${num(Math.abs(v) * 100, 2)} ${tx("pts")}`);
+  const grainWords = (metric, n) => (metric.grain === "routes" ? tx("{n} routes", { n: int.format(n) }) : tx("{n} deliveries", { n: int.format(n) }));
+  const deepLabel = (metric) => {
+    if (metric.id === "loading") return tx("Routes loading over {m} min", { m: num(metric.over(settingsFor()), settingsFor().loadingTarget % 1 ? 1 : 0) });
+    if (metric.id === "departure") return tx("Routes leaving over {m} min late", { m: state.settings.lateMinutes });
+    return tx(metric.label);
+  };
+  const segmentText = (dim, segment) => `${DIM_LABEL[dim]} = ${segment || tx("Not stated")}`;
+  // The current numbers: this period, the equal window before it, the segments and the incidents.
+  const deepNumbers = () => {
+    const metric = deepMetric();
+    const dims = deepDims(metric);
+    if (!dims.includes(state.deep.dim)) state.deep.dim = "DSP";
+    const settings = settingsFor();
+    const cols = present();
+    const rows = view()[metric.grain === "routes" ? "r" : "d"];
+    const agg = C.deepAggregate(rows, metric, settings, cols);
+    const range = deepRange();
+    const prior = C.priorWindow(range.from, range.to);
+    const before = state.deep.compare && prior ? C.deepAggregate(deepTable(metric).filter(inDims).filter((row) => row.Date && row.Date >= prior.from && row.Date <= prior.to), metric, settings, cols) : null;
+    const segments = C.deepSegments(agg, state.deep.dim, state.deep.minN);
+    if (state.deep.segment && !segments.some((seg) => seg.key === state.deep.segment)) state.deep.segment = "";
+    const focused = state.deep.segment !== "";
+    const focus = focused ? agg.affected.filter((row) => segmentOfRow(row, state.deep.dim) === state.deep.segment) : agg.affected;
+    // Incidents in the period; a focused segment keeps those of the segment (by the same column, by
+    // week, or by the routes of the segment when incidents do not carry the column).
+    let incidents = view().i;
+    if (focused) {
+      const dim = state.deep.dim;
+      if (dim === "Week") incidents = incidents.filter((row) => row.Date && C.isoWeek(row.Date) === state.deep.segment);
+      else if (C.FIELDS.incidents.includes(dim)) incidents = incidents.filter((row) => String(row[dim] ?? "") === state.deep.segment);
+      else {
+        const routes = new Set(agg.eligible.filter((row) => segmentOfRow(row, dim) === state.deep.segment).map((row) => `${row.Date}|${row.Route_ID}`));
+        incidents = incidents.filter((row) => routes.has(`${row.Date}|${row.Route_ID}`));
+      }
+    }
+    const signals = C.deepIncidents(incidents, metric, focus);
+    const segmentN = focused ? (segments.find((seg) => seg.key === state.deep.segment) || { n: 0 }).n : null;
+    return { metric, dims, agg, range, prior, before, segments, focus, focused, signals, segmentN, target: deepTarget(metric) };
+  };
+  const segmentOfRow = (row, dim) => (dim === "Week" ? (row.Date ? C.isoWeek(row.Date) : "") : String(row[dim] ?? ""));
+  // Weekly failure rate as columns, with the approved maximum as a dashed line.
+  const deepTrend = (points, target, metric) => {
+    const W = 680;
+    const H = 220;
+    const left = 50;
+    const right = 14;
+    const top = 18;
+    const bottom = 34;
+    const figure = el("figure", "cx-mini cx-deep-trend");
+    if (!points.length) { figure.append(el("p", "dl-panel-note", tx("No eligible rows in this period."))); return figure; }
+    const maxRate = Math.max(0.01, ...points.map((p) => p.rate), target ?? 0) * 1.15;
+    const areaW = W - left - right;
+    const areaH = H - top - bottom;
+    const x = (i) => left + ((i + 0.5) * areaW) / points.length;
+    const y = (v) => H - bottom - (v / maxRate) * areaH;
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, class: "cx-mini-chart", role: "img", "aria-label": `${deepLabel(metric)}: ${points.map((p) => `${p.week} ${deepRate(p.rate)}`).join(", ")}` });
+    [0, 0.25, 0.5, 0.75, 1].forEach((f) => {
+      const v = maxRate * f;
+      svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(v), y2: y(v), style: "stroke: var(--cx-grid)", "stroke-width": 1 }));
+      svg.append(svgEl("text", { x: left - 6, y: y(v) + 4, "text-anchor": "end", "font-size": 11, style: "fill: var(--cx-muted)" }, pct(v, v < 0.1 ? 1 : 0)));
+    });
+    if (target != null) svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(target), y2: y(target), style: "stroke: var(--cx-target)", "stroke-width": 1.5, "stroke-dasharray": "5 4" }));
+    const barW = Math.min(64, areaW / (points.length * 1.7));
+    const step = points.length > 10 ? Math.ceil(points.length / 8) : 1;
+    points.forEach((p, i) => {
+      const over = target != null && p.rate > target + 1e-9;
+      const bar = svgEl("rect", { x: x(i) - barW / 2, y: y(p.rate), width: barW, height: Math.max(0, y(0) - y(p.rate)), rx: 3, style: `fill: ${over ? "var(--cx-bad)" : "var(--cx-line)"}; opacity: .85`, tabindex: 0 });
+      bar.append(svgEl("title", {}, `${p.week}: ${int.format(p.k)} / ${int.format(p.n)} (${deepRate(p.rate)})${over ? ` · ${tx("off target")}` : ""}`));
+      svg.append(bar);
+      if (i % step === 0 || i === points.length - 1) svg.append(svgEl("text", { x: x(i), y: H - 12, "text-anchor": "middle", "font-size": 11, style: "fill: var(--cx-muted)" }, p.week.slice(5)));
+      if (points.length <= 12) svg.append(svgEl("text", { x: x(i), y: y(p.rate) - 6, "text-anchor": "middle", "font-size": 11, "font-weight": 700, style: "fill: var(--cx-text)" }, deepRate(p.rate)));
+    });
+    figure.append(svg);
+    figure.append(el("figcaption", null, tx("{n} weeks. Each column is that week's cases divided by its eligible rows, not an average of daily rates.", { n: int.format(points.length) }) + (target != null ? ` ${tx("Dashed line: the approved maximum.")}` : "")));
+    return figure;
+  };
+  const setDeep = (patch) => {
+    Object.assign(state.deep, patch);
+    save();
+    renderPanel();
+  };
+  const caseNote = () => $("[data-cx-case-note]");
+  const sayCase = (message, bad) => {
+    const node = caseNote();
+    if (!node) return;
+    node.textContent = message;
+    node.classList.toggle("is-bad", Boolean(bad));
+  };
+  const caseById = (id) => state.cases.find((item) => item.id === id);
+  const newCaseId = () => {
+    const stamp = window.ToolKit.today().replace(/-/g, "");
+    let n = state.cases.length + 1;
+    while (state.cases.some((item) => item.id === `INV-${stamp}-${String(n).padStart(3, "0")}`)) n += 1;
+    return `INV-${stamp}-${String(n).padStart(3, "0")}`;
+  };
+  const snapshotOf = (numbers) => ({
+    metric: numbers.metric.id, label: deepLabel(numbers.metric), from: numbers.range.from, to: numbers.range.to,
+    DSP: state.filters.DSP, Shift: state.filters.Shift, Zone: state.filters.Zone, dim: state.deep.dim, segment: state.deep.segment,
+    k: numbers.agg.k, n: numbers.agg.n, focus: numbers.focus.length, source: state.example ? tx("Example") : [...new Set(Object.values(state.sources))].join(", "),
+  });
+  // Save the draft as a case; silent: no message when nothing is wrong.
+  const saveCase = (numbers, silent) => {
+    const errors = C.caseCheck(state.draft);
+    if (errors.includes("title")) { sayCase(tx("Give the investigation a title first."), true); return null; }
+    if (errors.includes("verified")) { sayCase(tx("“Verified effective” needs a root cause verified on the floor or in the records, written evidence, the process failure and a verification result."), true); return null; }
+    const id = state.caseId || newCaseId();
+    const old = caseById(id);
+    const row = { ...(old || {}), id, updated: window.ToolKit.today(), ...Object.fromEntries(C.CASE_FIELDS.map((field) => [field, String(state.draft[field] ?? "")])), snapshot: old?.snapshot || snapshotOf(numbers) };
+    if (old) state.cases[state.cases.indexOf(old)] = row;
+    else state.cases.push(row);
+    state.caseId = id;
+    save();
+    if (!silent) sayCase(tx("{id} saved in this browser. Export the register before you change device.", { id }));
+    return row;
+  };
+  const startCase = (metric) => {
+    state.caseId = "";
+    state.draft = { title: tx("{metric}: investigation", { metric: deepLabel(metric) }), status: "Open", rootStatus: "Hypothesis" };
+    save();
+  };
+  const caseRegisterRows = () => {
+    const head = ["Case_ID", "Last_Updated", ...C.CASE_FIELDS, "Action_ID", "Metric", "Period_Start", "Period_End", "Partner", "Shift", "Zone", "Dimension", "Segment", "Affected", "Eligible", "Source"];
+    return [head, ...state.cases.map((item) => [item.id, item.updated, ...C.CASE_FIELDS.map((field) => item[field] ?? ""), item.actionId || "", item.snapshot?.label || "", item.snapshot?.from || "", item.snapshot?.to || "", item.snapshot?.DSP || "", item.snapshot?.Shift || "", item.snapshot?.Zone || "", item.snapshot?.dim || "", item.snapshot?.segment || "", item.snapshot?.k ?? "", item.snapshot?.n ?? "", item.snapshot?.source || ""])];
+  };
+  const downloadText = (name, body, type) => {
+    const link = el("a");
+    link.href = URL.createObjectURL(new Blob([body], { type }));
+    link.download = name;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  };
+  // The register of cases from a CSV this page exported (or the same columns typed elsewhere).
+  const importCases = async (file) => {
+    try {
+      const rows = parseRows(P.decode(await file.arrayBuffer()));
+      const header = rows[0] || [];
+      const col = (name) => header.findIndex((cell) => P.fold(cell) === P.fold(name));
+      if (col("Case_ID") < 0 || col("title") < 0) { sayCase(tx("Not a case register: it needs the columns Case_ID and title."), true); return; }
+      let count = 0;
+      rows.slice(1).forEach((cells) => {
+        const get = (name) => (col(name) >= 0 ? String(cells[col(name)] ?? "") : "");
+        const id = get("Case_ID").trim();
+        if (!id || !get("title").trim()) return;
+        const row = { id, updated: parseDate(get("Last_Updated")) || window.ToolKit.today(), ...Object.fromEntries(C.CASE_FIELDS.map((field) => [field, get(field)])), actionId: get("Action_ID"),
+          snapshot: { metric: "", label: get("Metric"), from: parseDate(get("Period_Start")), to: parseDate(get("Period_End")), DSP: get("Partner"), Shift: get("Shift"), Zone: get("Zone"), dim: get("Dimension"), segment: get("Segment"), k: Number(get("Affected")) || 0, n: Number(get("Eligible")) || 0, source: get("Source") || tx("Imported register") } };
+        if (!C.CASE_STATUS.includes(row.status)) row.status = "Open";
+        if (!C.ROOT_STATUS.includes(row.rootStatus)) row.rootStatus = "Hypothesis";
+        row.deadline = parseDate(row.deadline);
+        const old = caseById(id);
+        if (old) state.cases[state.cases.indexOf(old)] = { ...old, ...row };
+        else state.cases.push(row);
+        count += 1;
+      });
+      save();
+      renderPanel();
+      sayCase(tx("{n} investigations imported or updated.", { n: int.format(count) }));
+    } catch {
+      sayCase(tx("{name} could not be read. Save it as CSV and try again.", { name: file.name }), true);
+    }
+  };
+  const briefText = (numbers) => {
+    const { metric, agg, range, before, prior, segments, focus, signals, target } = numbers;
+    const lines = [`# ${tx("Deep dive")}: ${deepLabel(metric)}`, "", `${tx("Period")}: ${showDate(range.from)} – ${showDate(range.to)}`,
+      `${tx("Filters")}: ${tx("Partner")} ${state.filters.DSP || tx("All")}, ${tx("Shift")} ${state.filters.Shift || tx("All")}, ${tx("Zone")} ${state.filters.Zone || tx("All")}`,
+      `${tx("Focus")}: ${numbers.focused ? segmentText(state.deep.dim, state.deep.segment) : tx("All segments")}`, `${tx("Source")}: ${snapshotOf(numbers).source || "–"}`, "",
+      `## ${tx("Counts")}`, `- ${tx("Eligible")}: ${int.format(agg.n)}`, `- ${tx("Affected")}: ${int.format(agg.k)}`, `- ${tx("Failure rate")}: ${deepRate(agg.rate)}`, `- ${tx("Left out, no valid outcome")}: ${int.format(agg.excluded)}`,
+      `- ${tx("Approved maximum")}: ${target == null ? tx("none") : deepRate(target)}`];
+    if (before) lines.push(`- ${tx("Previous equal window")} (${showDate(prior.from)} – ${showDate(prior.to)}): ${before.n ? `${deepRate(before.rate)}, ${int.format(before.k)} / ${int.format(before.n)}` : tx("no eligible rows")}`);
+    lines.push(`- ${tx("Affected rows in focus")}: ${int.format(focus.length)}`, `- ${tx("Incidents of this kind")}: ${int.format(signals.records.length)}; ${tx("with an exact link to an affected row")}: ${int.format(signals.linked)}`, "", `## ${tx("Largest contributors by cases")} (${DIM_LABEL[state.deep.dim]})`);
+    segments.slice(0, 10).forEach((seg) => lines.push(`- ${seg.key || tx("Not stated")}: ${int.format(seg.k)} / ${int.format(seg.n)}, ${deepRate(seg.rate)}, ${pct(seg.share, 0)} ${tx("of all cases")}${seg.low ? ` (${tx("little data")})` : ""}`));
+    const causes = signals.records.length ? causeAnalysis(signals.records, "Root_Cause_Category").items.slice(0, 8) : [];
+    if (causes.length) { lines.push("", `## ${tx("Recorded root causes (a classification, not proof)")}`); causes.forEach((item) => lines.push(`- ${item.key}: ${int.format(item.amount)}`)); }
+    lines.push("", `## ${tx("Investigation")}${state.caseId ? ` ${state.caseId}` : ""}`);
+    CASE_FORM.forEach(([field, label]) => lines.push(`- ${label}: ${String(state.draft[field] || "").trim() || tx("not entered")}`));
+    lines.push("", `## ${tx("Rules")}`, `- ${tx("A cause stays a hypothesis until the process and the records confirm it.")}`, `- ${tx("Incident counts and failure counts have different denominators.")}`, `- ${tx("A small sample is not evidence for escalation.")}`, "", `${tx("Generated")}: ${showDate(window.ToolKit.today())}`);
+    return lines.join("\n");
+  };
+  const renderDeep = () => {
+    const out = [];
+    const hasRows = state.deliveries.length || state.routes.length;
+    if (!hasRows) return [emptyPanel(hasData() ? tx("The deep dive needs the delivery or the route table.") : tx("No data yet. Load the example to see the control tower at work, or import your own files."))];
+    const numbers = deepNumbers();
+    const { metric, dims, agg, range, prior, before, segments, focus, focused, signals, segmentN, target } = numbers;
+    const metricGrain = (m) => (m.grain === "routes" ? state.routes.length : state.deliveries.length);
+    // Controls
+    const controls = el("div", "dl-grid cx-controls cx-deep-controls");
+    const pick = (id, labelText, options, value, onChange) => {
+      const field = el("div", "field");
+      const lab = el("label", null, labelText);
+      lab.htmlFor = id;
+      const select = el("select");
+      select.id = id;
+      options.forEach(([v, text]) => { const o = el("option", null, text); o.value = v; select.append(o); });
+      select.value = value;
+      select.addEventListener("change", () => onChange(select.value));
+      field.append(lab, select);
+      return field;
+    };
+    controls.append(pick("cx-deep-metric", tx("Failure to investigate"), C.DEEP.filter(metricGrain).map((m) => [m.id, deepLabel(m)]), metric.id, (value) => {
+      const next = DEEP_BY[value];
+      setDeep({ metric: value, segment: "", dim: deepDims(next).includes(state.deep.dim) ? state.deep.dim : "DSP", minN: next.grain === "routes" ? 15 : 50 });
+    }));
+    controls.append(pick("cx-deep-dim", tx("Break down by"), dims.map((dim) => [dim, DIM_LABEL[dim]]), state.deep.dim, (value) => setDeep({ dim: value, segment: "" })));
+    const minField = el("div", "field");
+    const minLab = el("label", null, tx("Sample floor (eligible rows)"));
+    minLab.htmlFor = "cx-deep-min";
+    const minInput = el("input");
+    minInput.id = "cx-deep-min";
+    minInput.type = "number";
+    minInput.min = "1";
+    minInput.max = "100000";
+    minInput.value = String(state.deep.minN);
+    minInput.addEventListener("change", () => {
+      const n = Math.round(Number(minInput.value));
+      if (Number.isFinite(n) && n >= 1) setDeep({ minN: n });
+      else minInput.value = String(state.deep.minN);
+    });
+    minField.append(minLab, minInput);
+    controls.append(minField);
+    const cmpField = el("div", "field cx-deep-check");
+    const cmpLabel = el("label", "cx-check-label");
+    const cmp = el("input");
+    cmp.type = "checkbox";
+    cmp.checked = state.deep.compare;
+    cmp.addEventListener("change", () => setDeep({ compare: cmp.checked }));
+    cmpLabel.append(cmp, el("span", null, tx("Compare with the equal window before")));
+    cmpField.append(cmpLabel);
+    controls.append(cmpField);
+    out.push(controls);
+    out.push(el("p", "dl-panel-note", tx("Uses the date, partner, shift and zone filters above. A clicked segment narrows the evidence, not the overall numbers. Segment rates use their own eligible rows; incident counts are a separate record.")));
+    if (!agg.n) { out.push(emptyPanel(tx("No eligible rows for this failure in this selection."))); return out; }
+    // Cards
+    const change = before && before.n && agg.n ? agg.rate - before.rate : null;
+    const stats = el("div", "dl-stats");
+    const rateStat = stat(tx("Failure rate"), deepRate(agg.rate), target == null ? tx("No approved maximum") : `${tx("Approved maximum")} ≤ ${deepRate(target)}`);
+    rateStat.classList.toggle("is-bad", target != null && agg.rate > target + 1e-9);
+    stats.append(
+      stat(tx("Affected"), int.format(agg.k), `${grainWords(metric, agg.n)} ${tx("eligible")}${agg.excluded ? ` · ${tx("{n} left out, no valid outcome", { n: int.format(agg.excluded) })}` : ""}`),
+      rateStat,
+      stat(tx("Previous equal window"), before && before.n ? deepRate(before.rate) : "–", prior ? `${showDate(prior.from)} – ${showDate(prior.to)} · ${before ? grainWords(metric, before.n) : tx("not compared")}` : tx("Needs a start and an end date.")),
+      stat(tx("Change"), deepPoints(change), change == null ? tx("No rows in the window before.") : change < 0 ? tx("Fewer failures than before.") : change > 0 ? tx("More failures than before: look at what changed.") : tx("Unchanged.")),
+    );
+    out.push(stats);
+    // Readout
+    const head = el("article", "result-card cx-readout");
+    head.append(el("p", "result-label", tx("Readout")));
+    const top = segments.find((seg) => seg.k > 0 && !seg.low);
+    head.append(el("h3", null, tx("{metric}: {k} of {n} eligible {grain} ({rate}), {from} to {to}.", { metric: deepLabel(metric), k: int.format(agg.k), n: int.format(agg.n), grain: metric.grain === "routes" ? tx("routes") : tx("deliveries"), rate: deepRate(agg.rate), from: showDate(range.from), to: showDate(range.to) })));
+    const list = el("ul", "cx-readout-list");
+    list.append(el("li", null, top
+      ? tx("Largest contributor with enough data: {name} with {k} cases, {rate} of its {n} eligible rows and {share} of all cases.", { name: top.key || tx("Not stated"), k: int.format(top.k), rate: deepRate(top.rate), n: int.format(top.n), share: pct(top.share, 0) })
+      : tx("No segment reaches the sample floor with at least one case.")));
+    if (top && top.vsRest != null) list.append(el("li", null, top.vsRest > 0 ? tx("{name} fails {pts} more often than the rest of the period.", { name: top.key, pts: deepPoints(top.vsRest).replace("+", "") }) : tx("{name} does not fail more often than the rest: the count follows its volume.", { name: top.key })));
+    if (target != null) list.append(el("li", null, agg.rate > target + 1e-9 ? tx("Above the approved maximum of {t}.", { t: deepRate(target) }) : tx("Within the approved maximum of {t}.", { t: deepRate(target) })));
+    list.append(el("li", null, `${tx("This is descriptive evidence, not proof of why the failures happened.")} ${tx("Focus")}: ${focused ? segmentText(state.deep.dim, state.deep.segment) : tx("All segments")}.`));
+    head.append(list);
+    out.push(head);
+    // Trend and segments
+    const grid = el("div", "dl-result-grid");
+    const trendBox = section(tx("Weekly failure rate"), tx("Numerator over its eligible denominator, week by week."));
+    trendBox.append(deepTrend(C.deepWeekly(agg), target, metric));
+    grid.append(trendBox);
+    const segBox = section(tx("Where it concentrates"), tx("Ranked by cases. The rate is each segment's own; the share is of all cases. “Vs rest” compares the segment with the rest of the period only when both reach the sample floor."));
+    const segRows = segments.slice(0, 35).map((seg) => {
+      const tr = el("tr", seg.key === state.deep.segment && focused ? "is-selected" : "");
+      const th = el("th");
+      const button = el("button", "cx-seg", seg.key || tx("Not stated"));
+      button.type = "button";
+      button.setAttribute("aria-pressed", String(focused && seg.key === state.deep.segment));
+      button.title = tx("Show the rows of this segment");
+      button.addEventListener("click", () => setDeep({ segment: focused && seg.key === state.deep.segment ? "" : seg.key }));
+      th.append(button);
+      if (seg.low) th.append(" ", el("span", "dl-tag is-warn", tx("little data")));
+      const bar = el("td", "cx-seg-bar");
+      const track = el("div", "bar-track");
+      const fill = el("div", "bar-fill");
+      fill.style.width = `${(seg.k / Math.max(1, segments[0].k)) * 100}%`;
+      track.append(fill);
+      bar.append(track);
+      tr.append(th, el("td", "num", int.format(seg.k)), el("td", "num", int.format(seg.n)), el("td", "num", deepRate(seg.rate)), el("td", "num", pct(seg.share, 0)), el("td", `num${seg.vsRest > 0 ? " is-off" : seg.vsRest != null && seg.vsRest < 0 ? " is-better" : ""}`, deepPoints(seg.vsRest)), bar);
+      return tr;
+    });
+    segBox.append(table([DIM_LABEL[state.deep.dim], { text: tx("Cases"), className: "num" }, { text: tx("Eligible"), className: "num" }, { text: tx("Rate"), className: "num" }, { text: tx("Share of cases"), className: "num" }, { text: tx("Vs rest"), className: "num" }, ""], segRows, "cx-seg-table"));
+    const segNote = [tx("Sample floor: {n} eligible rows.", { n: int.format(state.deep.minN) })];
+    if (segments.length > 35) segNote.push(tx("Top 35 of {n} shown.", { n: int.format(segments.length) }));
+    if (focused) {
+      const clear = el("button", "button-ghost", tx("Clear the segment"));
+      clear.type = "button";
+      clear.addEventListener("click", () => setDeep({ segment: "" }));
+      const p = el("p", "dl-panel-note");
+      p.append(`${segNote.join(" ")} `, clear);
+      segBox.append(p);
+    } else segBox.append(el("p", "dl-panel-note", segNote.join(" ")));
+    grid.append(segBox);
+    out.push(grid);
+    // Cause signals and next checks
+    const pair = el("div", "dl-result-grid");
+    const causeBox = section(tx("Recorded cause signals"), signals.typed ? tx("Incidents whose type records this failure, grouped by their root cause.") : tx("All incidents in scope, grouped by their root cause."));
+    if (!state.incidents.length) causeBox.append(el("p", "dl-panel-note", tx("No incident log yet. One row per incident with its type, root cause, owner, severity and status.")));
+    else if (!signals.records.length) causeBox.append(el("p", "dl-panel-note", tx("No incident of this kind in the scope. That does not mean no failure happened.")));
+    else {
+      causeBox.append(el("p", "dl-panel-note", tx("{n} incidents of this kind; {linked} name one of the {k} affected rows exactly. Incident counts can differ from failure counts.", { n: int.format(signals.records.length), linked: int.format(signals.linked), k: int.format(focus.length) })));
+      const result = causeAnalysis(signals.records, "Root_Cause_Category");
+      causeBox.append(barList(result.items.slice(0, 8).map((item) => ({ key: item.key, value: item.amount, share: item.share, cls: item.cls })), {
+        label: (item) => [int.format(item.value), ` · ${pct(item.share, 0)}`],
+        highlight: (item) => item.cls === "A" && !P.isOther(item.key),
+      }));
+    }
+    causeBox.append(el("p", "dl-warning", tx("Evidence rule: a recorded category says where to look, not what the cause is. Verify with scans, Gemba, temperature records, handover and repeat checks.")));
+    pair.append(causeBox);
+    const logicBox = section(tx("Investigation logic and next checks"));
+    logicBox.append(el("p", "cx-deep-observed", tx("Observed: {k} affected rows in the focus, {n} incidents of this kind to review.", { k: int.format(focus.length), n: int.format(signals.records.length) })));
+    if (focused && segmentN < state.deep.minN) logicBox.append(el("p", "dl-warning", tx("This segment is under the sample floor of {n}. Do not rank or escalate on its rate alone.", { n: int.format(state.deep.minN) })));
+    const ol = el("ol", "cx-agenda");
+    (DEEP_PROMPTS[metric.id] || []).forEach((prompt) => ol.append(el("li", null, tx(prompt))));
+    ol.append(el("li", null, tx("Walk the control chain before naming an owner: warehouse, outbound, last mile, partner, driver, customer care.")));
+    if (["temperature", "coldScan", "safety", "gate"].includes(metric.id)) ol.append(el("li", null, tx("Safety and cold chain: contain and escalate now, investigate after.")));
+    logicBox.append(el("p", "result-label", tx("Gemba and evidence checks")), ol);
+    logicBox.append(el("p", "dl-panel-note", tx("Hypothesis → check the records or the floor → process cause → containment → corrective action → prevention → owner → deadline → control after the action.")));
+    pair.append(logicBox);
+    out.push(pair);
+    // Evidence rows
+    const evBox = section(tx("Traceable rows"), `${focused ? segmentText(state.deep.dim, state.deep.segment) : tx("All segments")} · ${tx("{n} affected rows; the first 60 are shown, the CSV has all.", { n: int.format(focus.length) })}`);
+    const mark = (v) => (v == null ? "–" : v === 1 ? "✓" : "✗");
+    const columns = metric.grain === "routes"
+      ? [[tx("Date"), (r) => showDate(r.Date)], [tx("Route"), (r) => r.Route_ID], [tx("Driver"), (r) => r.Driver_ID], [tx("Partner"), (r) => r.DSP], [tx("Shift"), (r) => r.Shift], [tx("Zone"), (r) => r.Zone], [tx("Loading (min)"), (r) => (r.Loading_Time_Min == null ? "–" : num(r.Loading_Time_Min, 1))], [tx("Delay (min)"), (r) => (r.Departure_Delay_Min == null ? "–" : int.format(Math.round(r.Departure_Delay_Min)))], [tx("Missing bags"), (r) => (r.Missing_Bag_Events == null ? "–" : int.format(r.Missing_Bag_Events))], [tx("Gate closed"), (r) => mark(r.Gate_Closed_Compliant)], [tx("Cold scan"), (r) => mark(r.Cold_Scan_Compliant)], [tx("Yard speed"), (r) => (r.Yard_Speed_Breach == null ? "–" : r.Yard_Speed_Breach > 0 ? "✗" : "✓")]]
+      : [[tx("Date"), (r) => showDate(r.Date)], [tx("Delivery"), (r) => r.Delivery_ID], [tx("Route"), (r) => r.Route_ID], [tx("Driver"), (r) => r.Driver_ID], [tx("Partner"), (r) => r.DSP], [tx("Shift"), (r) => r.Shift], [tx("Zone"), (r) => r.Zone], [tx("On time"), (r) => mark(r.On_Time)], [tx("Complete"), (r) => mark(r.Complete)], [tx("Undamaged"), (r) => mark(r.Damage_Free)], [tx("Temperature"), (r) => mark(r.Temp_Compliant)], [tx("First attempt"), (r) => mark(r.First_Attempt)], [tx("Told"), (r) => (r.Notification_Eligible === 1 ? mark(r.Customer_Notified) : "–")], [tx("Complaint"), (r) => (r.Complaint === 1 ? "✗" : r.Complaint === 0 ? "" : "–")]];
+    if (!focus.length) evBox.append(el("p", "dl-panel-note", tx("No affected rows in this focus.")));
+    else evBox.append(table(columns.map(([text]) => text), focus.slice(0, 60).map((row) => {
+      const tr = el("tr");
+      columns.forEach(([, get], i) => tr.append(el(i === 1 ? "th" : "td", null, String(get(row) ?? "") || "–")));
+      return tr;
+    })));
+    const evButtons = el("div", "tool-actions");
+    const csv = el("button", "button-secondary", tx("Affected rows as CSV"));
+    csv.type = "button";
+    csv.disabled = !focus.length;
+    csv.addEventListener("click", () => downloadCsv(`cx-deep-${metric.id}`, [C.FIELDS[metric.grain], ...focus.map((row) => C.FIELDS[metric.grain].map((field) => exportValue(metric.grain, field, row[field])))]));
+    const copyBrief = el("button", "button-primary", tx("Copy the brief"));
+    copyBrief.type = "button";
+    copyBrief.addEventListener("click", () => copy(briefText(deepNumbers()), copyBrief));
+    const mdBrief = el("button", "button-secondary", tx("Brief as Markdown"));
+    mdBrief.type = "button";
+    mdBrief.addEventListener("click", () => downloadText(`cx-deep-${metric.id}-${window.ToolKit.today()}.md`, briefText(deepNumbers()), "text/markdown;charset=utf-8"));
+    evButtons.append(copyBrief, mdBrief, csv);
+    evBox.append(evButtons);
+    out.push(evBox);
+    // Investigation workspace
+    const work = section(tx("Investigation and CAPA workspace"), tx("Evidence and hypotheses stay apart. A Pareto never confirms a root cause on its own."));
+    const chip = el("p", "cx-case-head");
+    chip.append(el("span", `cx-chip ${state.caseId ? "is-open" : "is-wait"}`, state.caseId || tx("New investigation")));
+    if (state.caseId && caseById(state.caseId)?.actionId) chip.append(" ", el("span", "cx-chip is-done", `${tx("Action")} ${caseById(state.caseId).actionId}`));
+    work.append(chip);
+    if (!Object.keys(state.draft).length) startCase(metric);
+    const form = el("div", "dl-grid cx-case-form");
+    CASE_FORM.forEach(([field, labelText, kind]) => {
+      const wrap = el("div", `field${kind === "textarea" || field === "title" ? " dl-wide" : ""}`);
+      const id = `cx-case-${field}`;
+      const lab = el("label", null, labelText);
+      lab.htmlFor = id;
+      let input;
+      if (Array.isArray(kind)) {
+        input = el("select");
+        kind.forEach((value) => { const o = el("option", null, CASE_TEXT[value] || value); o.value = value; input.append(o); });
+        input.value = kind.includes(state.draft[field]) ? state.draft[field] : kind[0];
+      } else if (kind === "textarea") {
+        input = el("textarea");
+        input.rows = 2;
+        input.value = state.draft[field] ?? "";
+      } else {
+        input = el("input");
+        input.type = kind;
+        input.autocomplete = "off";
+        input.value = state.draft[field] ?? "";
+      }
+      input.id = id;
+      input.addEventListener(Array.isArray(kind) || kind === "date" ? "change" : "input", () => {
+        state.draft[field] = kind === "date" ? parseDate(input.value) : input.value;
+        save();
+      });
+      wrap.append(lab, input);
+      form.append(wrap);
+    });
+    work.append(form);
+    const note = el("p", "dl-panel-note cx-case-note");
+    note.dataset.cxCaseNote = "";
+    note.setAttribute("role", "status");
+    work.append(note);
+    const caseButtons = el("div", "tool-actions");
+    const saveButton = el("button", "button-primary", tx("Save the investigation"));
+    saveButton.type = "button";
+    saveButton.addEventListener("click", () => {
+      const row = saveCase(deepNumbers(), true);
+      if (!row) return;
+      renderPanel();
+      sayCase(tx("{id} saved in this browser. Export the register before you change device.", { id: row.id }));
+    });
+    const capa = el("button", "button-secondary", tx("Create the linked action"));
+    capa.type = "button";
+    capa.addEventListener("click", () => {
+      if (!C.capaReady(state.draft)) { sayCase(tx("The action needs a containment, corrective or preventive action, an owner and a deadline."), true); return; }
+      const row = saveCase(deepNumbers(), true);
+      if (!row) return;
+      if (row.actionId && state.actions.some((a) => a.Action_ID === row.actionId)) { sayCase(tx("{id} is already linked to action {action}. Update it under Actions instead of adding another.", { id: row.id, action: row.actionId }), true); return; }
+      const id = nextActionId();
+      state.actions.push(C.caseToAction(state.draft, id, view().asOf, row.id, { hypothesis: tx("Working hypothesis, not verified"), investigation: tx("Investigation") }));
+      state.columns.actions = [...C.FIELDS.actions];
+      row.actionId = id;
+      openAction = state.actions.length - 1;
+      save();
+      renderPanel();
+      sayCase(tx("Action {action} created and linked to {id}. Close it only after the result shows it worked.", { action: id, id: row.id }));
+    });
+    const fresh = el("button", "button-ghost", tx("New investigation"));
+    fresh.type = "button";
+    fresh.addEventListener("click", () => { startCase(metric); renderPanel(); sayCase(tx("New draft. Record the evidence before naming a cause.")); });
+    const register = el("button", "button-secondary", tx("Case register as CSV"));
+    register.type = "button";
+    register.disabled = !state.cases.length;
+    register.addEventListener("click", () => downloadCsv("cx-investigations", caseRegisterRows()));
+    const importLabel = el("label", "cv-file button-secondary", tx("Import a case register"));
+    const importInput = el("input");
+    importInput.type = "file";
+    importInput.accept = ".csv,.txt,text/csv";
+    importInput.addEventListener("change", () => { if (importInput.files[0]) importCases(importInput.files[0]); importInput.value = ""; });
+    importLabel.append(importInput);
+    caseButtons.append(saveButton, capa, fresh, register, importLabel);
+    work.append(caseButtons);
+    out.push(work);
+    // Saved cases
+    const saved = section(tx("Saved investigations"), tx("Kept in this browser. Export the register as a backup before you change browser or device."));
+    if (!state.cases.length) saved.append(el("p", "dl-panel-note", tx("No investigation saved yet.")));
+    else {
+      saved.append(table([tx("ID"), tx("Investigation"), tx("Failure and period"), tx("Owner"), tx("Stage"), tx("Deadline"), tx("Action"), ""], [...state.cases].reverse().map((item) => {
+        const tr = el("tr", item.id === state.caseId ? "is-selected" : "");
+        const manage = el("td", "cx-case-manage");
+        const open = el("button", "button-ghost", tx("Open"));
+        open.type = "button";
+        open.addEventListener("click", () => {
+          state.caseId = item.id;
+          state.draft = Object.fromEntries(C.CASE_FIELDS.map((field) => [field, item[field] ?? ""]));
+          save();
+          renderPanel();
+          sayCase(tx("{id} opened. Its numbers are those of the filters when it was first saved.", { id: item.id }));
+          $(".cx-case-form")?.scrollIntoView?.({ behavior: "smooth", block: "start" });
+        });
+        const remove = el("button", "button-ghost", tx("Delete"));
+        remove.type = "button";
+        remove.addEventListener("click", () => {
+          if (!window.confirm(tx("Delete investigation {id}? A linked action stays in the tracker.", { id: item.id }))) return;
+          state.cases.splice(state.cases.indexOf(item), 1);
+          if (state.caseId === item.id) startCase(metric);
+          save();
+          renderPanel();
+        });
+        manage.append(open, " ", remove);
+        const period = el("td");
+        period.append(item.snapshot?.label || "–", el("span", "dl-stat-note", ` ${showDate(item.snapshot?.from || "")} – ${showDate(item.snapshot?.to || "")}${item.snapshot?.segment ? ` · ${item.snapshot.segment}` : ""}`));
+        tr.append(el("th", null, item.id), el("td", null, item.title), period, el("td", null, item.owner || tx("no owner")), el("td", null, CASE_TEXT[item.status] || item.status), el("td", null, item.deadline ? showDate(item.deadline) : "–"), el("td", null, item.actionId || "–"), manage);
+        return tr;
+      })));
+    }
+    out.push(saved);
+    return out;
+  };
+
   // ---------- Render ----------
-  const RENDER = { overview: renderOverview, operations: renderOperations, scorecards: renderScorecards, causes: renderCauses, actions: renderActions, review: renderReview, data: renderData };
+  const RENDER = { overview: renderOverview, operations: renderOperations, deep: renderDeep, scorecards: renderScorecards, causes: renderCauses, actions: renderActions, review: renderReview, data: renderData };
   const renderPanel = () => {
     body.setAttribute("aria-labelledby", `cx-tab-${state.tab}`);
     body.replaceChildren(...RENDER[state.tab]());
