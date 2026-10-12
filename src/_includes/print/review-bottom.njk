@@ -1,0 +1,10 @@
+{#- The foot of a page of the Management Review or the operational treatise: its sources, its note, the essay it
+    points to and the tool it opens. Needs page, L, lang, essays and toolsGuide. -#}
+  {%- if page.sourceLine or page.note or page.more or page.tool %}
+  <div class="bottom">
+    {%- if page.sourceLine %}<p class="source">{{ L.sources if page.source.length > 1 else L.source }}: {{ page.sourceLine }}</p>{% endif %}
+    {%- if page.note %}<p class="source">{{ page.note }}</p>{% endif %}
+    {%- if page.more %}{% for essay in essays %}{% if essay.fileSlug.endsWith(page.more) %}<div class="link"><b>{{ L.more }}</b><span>{{ essay.data.title }}</span></div>{% endif %}{% endfor %}{% endif %}
+    {%- if page.tool %}{% set tool = toolsGuide.tool[lang][page.tool] %}<div class="link"><b>{{ L.open }}: {{ tool.name }}</b><span>stivencatalyst.com{{ tool.url }}</span></div>{% endif %}
+  </div>
+  {%- endif %}

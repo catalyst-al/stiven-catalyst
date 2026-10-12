@@ -1,0 +1,11 @@
+---
+layout: layouts/base.njk
+permalink: "/magazine/operational-treatise.html"
+activeNav: /publications.html
+eleventyComputed:
+  title: "{{ treatise.en.name | safe }}"
+  seo_title: "{{ treatise.en.name | safe }} · Management Review"
+  description: "{{ treatise.en.archive.seo | safe }}"
+  ogImage: "/media/magazine/{{ treatise.latest.slug | safe }}/en/social.jpg"
+---
+{% include "pages/treatise-archive.njk" %}
