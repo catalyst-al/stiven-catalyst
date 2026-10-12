@@ -249,8 +249,9 @@ const en = {
         "Enter only the targets you have approved.",
         "Filter by dates, partner, shift and zone.",
         "Read the tabs, from the overview to the [[Weekly review]].",
+        "In the [[Deep dive]], pick one failure, see where it concentrates and which incidents record it, write the investigation and [[Create the linked action]].",
       ],
-      get: "Perfect Delivery for every order, scorecards, route risk, a Pareto of root causes and an action tracker. Copy the review, print it, or export tables as CSV.",
+      get: "Perfect Delivery for every order, scorecards, route risk, a Pareto of root causes, a deep dive per failure with its case register, and an action tracker. Copy the review, print it, or export tables as CSV.",
       data: "Your files are read in the browser. Nothing is uploaded.",
     },
     "/tools/kpi-diagnostic/": {
@@ -548,8 +549,9 @@ const sq = {
         "Vendosni vetëm objektivat që keni miratuar.",
         "Filtroni sipas datave, partnerit, turnit dhe zonës.",
         "Lexoni skedat, nga pamja e përgjithshme deri te [[Weekly review]].",
+        "Te [[Deep dive]], zgjidhni një dështim, shihni ku përqendrohet dhe cilat incidente e regjistrojnë, shkruani hetimin dhe [[Create the linked action]].",
       ],
-      get: "Perfect Delivery për çdo porosi, karta rezultatesh, rreziku i itinerareve, një Pareto e shkaqeve rrënjësore dhe një ndjekës veprimesh. Kopjoni rishikimin, printojeni ose eksportoni tabelat si CSV.",
+      get: "Perfect Delivery për çdo porosi, karta rezultatesh, rreziku i itinerareve, një Pareto e shkaqeve rrënjësore, një analizë e thelluar për çdo dështim me regjistrin e rasteve, dhe një ndjekës veprimesh. Kopjoni rishikimin, printojeni ose eksportoni tabelat si CSV.",
       data: "Skedarët lexohen në shfletues. Asgjë nuk ngarkohet.",
     },
     "/tools/kpi-diagnostic/": {
@@ -847,8 +849,9 @@ const de = {
         "Tragen Sie nur Ziele ein, die Sie freigegeben haben.",
         "Filtern Sie nach Datum, Partner, Schicht und Zone.",
         "Lesen Sie die Reiter, von der Übersicht bis zum [[Weekly review]].",
+        "Im [[Deep dive]] wählen Sie einen Fehler, sehen, wo er sich häuft und welche Vorfälle ihn erfassen, schreiben die Untersuchung und [[Create the linked action]].",
       ],
-      get: "Perfect Delivery für jeden Auftrag, Scorecards, Tourrisiko, ein Pareto der Grundursachen und ein Maßnahmen-Tracker. Review kopieren, drucken oder Tabellen als CSV exportieren.",
+      get: "Perfect Delivery für jeden Auftrag, Scorecards, Tourrisiko, ein Pareto der Grundursachen, ein Deep Dive pro Fehler mit seinem Fallregister und ein Maßnahmen-Tracker. Review kopieren, drucken oder Tabellen als CSV exportieren.",
       data: "Ihre Dateien werden im Browser gelesen. Nichts wird hochgeladen.",
     },
     "/tools/kpi-diagnostic/": {
