@@ -28,6 +28,8 @@ checklist:
       hint: Magazina, ngarkimi, nisja, rruga, dera.
     - label: Çfarë kontrollojmë nesër?
       hint: Një kontroll, një përgjegjës, një orë.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: table-to-ramp
 ---
 
 Në raport shfaqej diçka shumë e thjeshtë: klienti nuk kishte marrë porosinë e plotë. Incomplete. Nëse e shikon vetëm nga KPI-ja, mendimi i parë vjen vetë: shoferi ka harruar një bag gjatë dorëzimit.
@@ -39,6 +41,8 @@ Në një nga rastet që kemi dokumentuar, mungonte një bag nga një sektor i ma
 Dashboard-i thoshte: incomplete delivery. Terreni të detyronte të pyesje diçka tjetër. A ishte vërtet gabim i shoferit në derën e klientit, apo porosia kishte dalë e paplotë që nga magazina?
 
 Ky është i gjithë ndryshimi mes një tabele dhe një operacioni.
+
+{diagram}
 
 Tabela mund të të tregojë: incomplete = 1. Nuk të tregon që fizikisht mund të ketë ndodhur kjo: bag-u është përgatitur, është futur në proces, ndoshta është edhe skanuar, por është vendosur në trolley të gabuar ose është ngarkuar në route të gabuar. Në Excel kjo përfundon si një numër. Në rampë është një objekt fizik që është në vendin e gabuar. Prandaj shkaku i vërtetë nuk gjendet gjithmonë në dashboard.
 

@@ -32,6 +32,8 @@ firstMove:
   - Shkruaje problemin e sotëm si një problem, një vend, një periudhë.
   - Vendos si do ta matësh, dhe sa ishte para se të filloje.
   - Planifiko tani kush kontrollon muajin tjetër nëse u mbajt, jo pasi problemi të duket i ikur.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: dmaic-loop
 ---
 
 Nuk ke nevojë për një certifikatë Black Belt për të bërë pyetje të mira.
@@ -67,6 +69,8 @@ Nëse e vendos atë përvojë përballë DMAIC, pa e zbukuruar, del kështu:
 **Control.** Për një sistem të dokumentuar kontrolli pas përmirësimeve, nuk e di.
 
 Kjo listë më thotë diçka. Tri fazat e para janë ato që një operacion i bën pothuajse vetë, sepse raporti i kërkon çdo ditë: ka një problem, ka një numër, ka një pyetje “pse”. Dy fazat e fundit janë ato që kërkojnë dikë që i mban. Dhe janë pikërisht ato për të cilat kam më pak prova.
+
+{diagram}
 
 ## Disiplina për të mos kërcyer
 

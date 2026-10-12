@@ -28,6 +28,8 @@ checklist:
       hint: Lager, Beladung, Abfahrt, Straße, Haustür.
     - label: Was prüfen wir morgen?
       hint: Eine Prüfung, ein Verantwortlicher, eine Uhrzeit.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: table-to-ramp
 ---
 
 Im Bericht stand etwas sehr Einfaches: Der Kunde hatte seine Bestellung nicht vollständig erhalten. Incomplete. Wenn man es nur über die Kennzahl betrachtet, kommt der erste Gedanke von selbst: Der Fahrer hat bei der Zustellung eine Tasche vergessen.
@@ -39,6 +41,8 @@ In einem der Fälle, die wir dokumentiert haben, fehlte eine Tasche aus einem Be
 Das Dashboard sagte: incomplete delivery. Vor Ort musste man etwas anderes fragen. War es wirklich ein Fehler des Fahrers an der Tür des Kunden, oder hatte die Bestellung das Lager schon unvollständig verlassen?
 
 Das ist der ganze Unterschied zwischen einer Tabelle und einem Betrieb.
+
+{diagram}
 
 Die Tabelle kann Ihnen sagen: incomplete = 1. Sie sagt nicht, dass physisch Folgendes passiert sein kann: Die Tasche wurde vorbereitet, sie ist in den Prozess gegangen, vielleicht wurde sie sogar gescannt, aber sie landete im falschen Trolley oder wurde auf die falsche Tour geladen. In Excel endet das als Zahl. An der Rampe ist es ein Gegenstand am falschen Ort. Deshalb findet man die wirkliche Ursache nicht immer im Dashboard.
 

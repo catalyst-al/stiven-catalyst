@@ -24,7 +24,7 @@ ogType: article
 </section>
 {#- The text with ids on its section titles; with three sections or more, a list of them beside the text
     (on a phone, folded above it). -#}
-{%- set body = content | essayBody %}
+{%- set body = content | withDiagram(diagram, lang or "en") | essayBody %}
 {%- set sections = content | essayContents %}
 {%- set hasContents = sections.length >= 3 %}
 {%- set isEssay = "/insights/" in page.inputPath %}

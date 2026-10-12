@@ -32,6 +32,8 @@ firstMove:
   - Schreiben Sie das heutige Problem als ein Problem, ein Ort, ein Zeitraum.
   - Legen Sie fest, wie Sie es messen, und was es war, bevor Sie begonnen haben.
   - Planen Sie jetzt, wer nächsten Monat prüft, ob es gehalten hat, nicht erst, wenn das Problem verschwunden scheint.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: dmaic-loop
 ---
 
 Man braucht kein Black-Belt-Zertifikat, um gute Fragen zu stellen.
@@ -67,6 +69,8 @@ Wenn ich diese Erfahrung neben DMAIC lege, ohne sie zu beschönigen, sieht es so
 **Control.** Ein dokumentiertes Kontrollsystem nach Verbesserungen kann ich nicht belegen.
 
 Diese Liste sagt mir etwas. Die ersten drei Phasen sind die, die ein Betrieb fast von selbst macht, weil der Bericht sie jeden Tag verlangt: Es gibt ein Problem, es gibt eine Zahl, es gibt die Frage „warum“. Die letzten beiden Phasen sind die, die jemanden brauchen, der sie hält. Und genau für sie habe ich die wenigsten Belege.
+
+{diagram}
 
 ## Die Disziplin, nicht zu springen
 

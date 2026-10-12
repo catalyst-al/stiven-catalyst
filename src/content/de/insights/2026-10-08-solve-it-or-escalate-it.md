@@ -29,6 +29,8 @@ checklist:
       hint: Die nächste Schicht, eine Kennzahl, den Kunden, eine andere Abteilung.
     - label: Was passiert, wenn ich warte?
       hint: Wenn Warten das Risiko erhöht, jetzt eskalieren, mit dem, was Sie wissen.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: escalation-matrix
 ---
 
 „Es gibt ein Problem. Was soll ich tun?“
@@ -113,6 +115,8 @@ Wenn Sie es innerhalb Ihrer Befugnis lösen können, die Situation aber für die
 Wenn es um Sicherheit, Security, Compliance, sensible Daten, Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen, ein großes finanzielles Risiko geht oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
 
 Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit, die Compliance oder den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis braucht, ist es keine Frage der Initiative mehr. Es ist Eskalation.
+
+{diagram}
 
 ## Die Eskalationsmatrix für die Schicht
 

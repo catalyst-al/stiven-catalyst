@@ -21,6 +21,8 @@ checklist:
     - Jeder offene Punkt hat einen Namen und eine Uhrzeit oder Frist.
     - „Gemeldet“ und „erledigt“ sind nicht verwechselt.
     - Die Person nach mir kann danach handeln, ohne mich anzurufen.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-gap
 ---
 
 Ein Problem, das nicht in die Übergabe kommt, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
@@ -50,6 +52,8 @@ Wer muss es weiterverfolgen?
 Diese Arbeitsweise ist auch in die SOPs und die Strukturen eingeflossen, die ich später für die Übergabe aufgebaut habe.
 
 Für mich ist die wichtigste Verbesserung genau diese: der nächsten Schicht nicht die Last zu überlassen, die Geschichte selbst zu rekonstruieren. Sie soll den aktuellen Stand bekommen.
+
+{diagram}
 
 ## Was eine Nachtübergabe enthält
 

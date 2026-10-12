@@ -27,6 +27,8 @@ checklist:
     - Every open point has a name and a time or deadline.
     - “Reported” and “resolved” are not mixed up.
     - The person after me can act on it without calling me.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-gap
 ---
 
 A problem that does not make it into the handover does not stop existing. It just becomes the problem of someone who does not yet know it exists.
@@ -56,6 +58,8 @@ Who has to follow it up?
 This way of working has also found its way into the SOPs and the structures I later built for the handover.
 
 For me the main improvement is exactly this: not leaving the next shift with the burden of rebuilding the story on its own. It should receive the current state.
+
+{diagram}
 
 ## What a night handover contains
 

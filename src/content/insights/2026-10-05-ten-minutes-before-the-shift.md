@@ -37,6 +37,8 @@ checklist:
       hint: Each one as an action the team can see, not as a number.
     - label: Who holds what?
       hint: Every priority and every open item with a name.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-to-briefing
 ---
 
 “Delay is at 2.8%.”
@@ -117,6 +119,8 @@ That is why a good pre-shift briefing should start exactly where the handover en
 - What must not get lost during the shift?
 
 **The ten minutes before a shift are not for telling everything we know. They are for deciding what the team needs to know before the work starts.**
+
+{diagram}
 
 ## The ten-minute briefing template
 

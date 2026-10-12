@@ -32,6 +32,8 @@ firstMove:
   - Before departure, check that the number of bags matches and that no trolley is mixed.
   - When a bag is missing, stop that trolley and tell the Team Leader. Do not let it leave as if everything were fine.
   - Record every shortage found at the ramp with its cause. That is where Incomplete starts.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: check-before-departure
 ---
 
 When a bag was missing, the rule was clear.
@@ -69,6 +71,8 @@ Telling the Team Leader turns the shortage into a problem of the operation, not 
 A trolley that stays in its zone keeps the trace. If the trolley starts moving while the bag is being looked for, things can get more mixed up than they were, and the question “where did it go missing?” gets harder.
 
 And the rule for chilled and frozen shows that a standard does not only say what is done. It also says where. When a problem is solved in a hurry, the place is the first thing people forget.
+
+{diagram}
 
 ## Not just a number, not just the driver
 

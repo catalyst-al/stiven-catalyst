@@ -24,6 +24,8 @@ firstMove:
   - Suchen Sie bei einem Fehler dieser Woche den Punkt, an dem die Arbeit den Besitzer gewechselt hat.
   - Ersetzen Sie „ich habe sie informiert“ durch einen Status, einen Namen und eine Bestätigung.
   - Vereinbaren Sie mit der nächsten Abteilung, was fertig sein muss, bevor eine Übergabe als erledigt gilt.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: between-departments
 ---
 
 Eine Abteilung kann ihre eigene Arbeit sehr gut machen, und der Betrieb kann trotzdem scheitern.
@@ -67,6 +69,8 @@ Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die 
 **Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.**
 
 Wenn ich eine negative KPI sehe, würde ich deshalb nicht sofort nach einem Schuldigen suchen. Ich würde zuerst verstehen wollen, an welchem Punkt im Prozess die Abweichung begonnen hat. Es ist dieselbe Logik wie bei [Pareto und 5 Why](/de/insights/pareto-and-5-why-in-practice/): Die Zahl zeigt, wo man das Problem suchen muss, nicht, wer es verursacht hat.
+
+{diagram}
 
 ## Was ich nicht behaupten werde
 

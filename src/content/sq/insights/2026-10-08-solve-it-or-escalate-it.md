@@ -29,6 +29,8 @@ checklist:
       hint: Turnin tjetër, një KPI, klientin, një departament tjetër.
     - label: Çfarë ndodh nëse pres?
       hint: Nëse pritja e rrit rrezikun, eskaloje tani me atë që di.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: escalation-matrix
 ---
 
 “Ka problem. Çfarë të bëj?”
@@ -113,6 +115,8 @@ Kur mund ta zgjidhësh brenda autoritetit, por situata ka rëndësi për turnin 
 Kur prek sigurinë, security-n, compliance-in, të dhëna sensitive, pagesa jashtë autoritetit tënd, vendime disiplinore serioze, një risk të madh financiar, ose çdo situatë ku vendimi tejkalon qartë përgjegjësinë e rolit.
 
 Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë problemin operacional brenda standardit. Në momentin që problemi prek sigurinë, compliance-in, klientin në mënyrë serioze, ose kërkon një vendim jashtë autoritetit të tij, aty nuk është më çështje iniciative. Është eskalim.
+
+{diagram}
 
 ## Matrica e eskalimit për turnin
 

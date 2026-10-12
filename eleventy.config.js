@@ -6,6 +6,7 @@ import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
+import { withDiagram } from "./lib/diagrams.js";
 import { searchIndex } from "./lib/search-index.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
@@ -208,6 +209,8 @@ export default function (eleventyConfig) {
   // The body of an essay with ids on its section titles, and the list of those sections (lib/essay-body.js).
   eleventyConfig.addFilter("essayBody", essayBody);
   eleventyConfig.addFilter("essayContents", essayContents);
+  // The diagram of an essay ("diagram" in its front matter, lib/diagrams.js) in place of its "{diagram}" paragraph.
+  eleventyConfig.addFilter("withDiagram", withDiagram);
   // Today's place in a cycle of {count} items, counted in whole days since 1970 (UTC at build time; the
   // browser counts by the reader's own date, js/note-of-the-day.js).
   eleventyConfig.addFilter("dayOfCycle", (count) => (count ? Math.floor(Date.now() / 864e5) % count : 0));

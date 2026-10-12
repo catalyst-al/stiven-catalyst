@@ -33,6 +33,8 @@ checklist:
       hint: Secili si veprim që ekipi mund ta shohë, jo si numër.
     - label: Kush mban çfarë?
       hint: Çdo prioritet dhe çdo pikë e hapur me një emër.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-to-briefing
 ---
 
 “Delay është 2.8%.”
@@ -113,6 +115,8 @@ Prandaj një briefing i mirë para turnit duhet të fillojë pikërisht aty ku m
 - Çfarë nuk duhet të humbasë gjatë turnit?
 
 **10 minuta para turnit nuk janë për të treguar gjithçka që dimë. Janë për të vendosur çfarë duhet të dijë ekipi para se puna të fillojë.**
+
+{diagram}
 
 ## Shablloni i briefing-ut 10-minutësh
 

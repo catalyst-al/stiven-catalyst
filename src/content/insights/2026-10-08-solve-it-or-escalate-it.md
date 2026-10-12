@@ -35,6 +35,8 @@ checklist:
       hint: The next shift, a KPI, the customer, another department.
     - label: What happens if I wait?
       hint: If waiting increases the risk, escalate now with what you know.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: escalation-matrix
 ---
 
 “There's a problem. What should I do?”
@@ -119,6 +121,8 @@ When you can solve it within your authority, but the situation matters for the n
 When it involves safety, security, compliance, sensitive data, payments beyond your authority, serious disciplinary decisions, a large financial risk, or any situation where the decision clearly goes beyond the responsibility of the role.
 
 In last mile, as I see it today, the Team Leader should have room to solve an operational problem within the standard. The moment the problem affects safety, compliance, the customer in a serious way, or needs a decision beyond their authority, it is no longer a question of initiative. It is escalation.
+
+{diagram}
 
 ## The escalation matrix for the shift
 

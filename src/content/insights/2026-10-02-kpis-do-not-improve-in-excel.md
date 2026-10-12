@@ -37,6 +37,8 @@ checklist:
       hint: Warehouse, loading, departure, road, door.
     - label: What do we check tomorrow?
       hint: One check, one owner, one time.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: table-to-ramp
 ---
 
 The report showed something very simple: the customer had not received their full order. Incomplete. If you look at it only through the KPI, the first thought comes by itself: the driver forgot a bag during delivery.
@@ -48,6 +50,8 @@ In one of the cases we documented, a bag from one section of the warehouse was m
 The dashboard said: incomplete delivery. The floor made you ask something else. Was it really the driver's mistake at the customer's door, or had the order left the warehouse incomplete?
 
 That is the whole difference between a table and an operation.
+
+{diagram}
 
 The table can tell you: incomplete = 1. It does not tell you that physically this may have happened: the bag was prepared, it entered the process, maybe it was even scanned, but it was put in the wrong trolley or loaded onto the wrong route. In Excel this ends up as a number. On the ramp it is a physical object in the wrong place. That is why the real cause is not always found on the dashboard.
 

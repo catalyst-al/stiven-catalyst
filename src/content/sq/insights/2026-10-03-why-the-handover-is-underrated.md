@@ -21,6 +21,8 @@ checklist:
     - Çdo pikë e hapur ka një emër dhe një orë ose afat.
     - “E raportuar” dhe “e zgjidhur” nuk janë ngatërruar.
     - Personi pas meje mund të veprojë pa më marrë në telefon.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: handover-gap
 ---
 
 Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.
@@ -50,6 +52,8 @@ Kush duhet ta ndjekë më tej?
 Kjo mënyrë pune është reflektuar edhe në SOP-të dhe në strukturat që kam ndërtuar më vonë për handover-in.
 
 Për mua përmirësimi kryesor është pikërisht ky: të mos ia lësh turnit tjetër barrën që të rindërtojë vetë historinë. Ai duhet të marrë gjendjen aktuale.
+
+{diagram}
 
 ## Çfarë përmban një handover nate
 

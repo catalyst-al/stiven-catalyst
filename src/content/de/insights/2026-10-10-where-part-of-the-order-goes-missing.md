@@ -27,6 +27,8 @@ firstMove:
   - Prüfen Sie vor der Abfahrt, dass die Zahl der Taschen stimmt und kein Wagen gemischt ist.
   - Wenn eine Tasche fehlt, halten Sie diesen Wagen an und informieren Sie den Team Leader. Lassen Sie ihn nicht losfahren, als wäre alles in Ordnung.
   - Erfassen Sie jeden Fehlbestand, der an der Rampe gefunden wird, mit seiner Ursache. Dort beginnt Incomplete.
+# The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
+diagram: check-before-departure
 ---
 
 Wenn eine Tasche fehlte, war die Regel klar.
@@ -64,6 +66,8 @@ Die Meldung an den Team Leader macht aus dem Fehlbestand ein Problem des Betrieb
 Ein Trolley, der in seiner Zone bleibt, bewahrt die Spur. Wenn der Trolley bewegt wird, während die Tasche gesucht wird, kann mehr durcheinandergeraten, als es war, und die Frage „wo ist sie verloren gegangen?“ wird schwerer.
 
 Und die Regel für gekühlte und tiefgekühlte Ware zeigt, dass ein Standard nicht nur sagt, was gemacht wird. Er sagt auch, wo. Wenn ein Problem in Eile gelöst wird, ist der Ort das Erste, was vergessen wird.
+
+{diagram}
 
 ## Nicht nur eine Zahl, nicht nur der Fahrer
 
