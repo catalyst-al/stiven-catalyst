@@ -8,8 +8,7 @@
 // a tap on the light makes its filament, a sound wave, speak up. A small reader sits under the light
 // on the inner orbit; it runs to the planet that is opened, jumps to a moon that is tapped, and
 // sleeps when left alone. The filament warms up when the hero first runs (dark glass, a red glow,
-// then white light), every planet casts a shadow away from the light across the plane and through
-// the dust, and the system turns to show the planet that is opened and comes a little closer to it.
+// then white light), and the system turns to show the planet that is opened and comes a little closer to it.
 (() => {
   const root = document.querySelector("[data-cosmos]");
   const canvas = root?.querySelector("canvas");
@@ -235,25 +234,6 @@
     ctx.stroke();
   };
 
-  // How much of the light reaches a point of the plane at (radius, angle): 1 in the open, less in the
-  // shadow a planet casts away from the bulb. The bulb is wider than a planet, so the shadow narrows
-  // and ends about a planet-orbit's length out; its edge is soft.
-  const lightAt = (radius, angle) => {
-    let light = 1;
-    for (const planet of planets) {
-      const along = radius - planet.r;
-      if (along < 0 || along > planet.shadowL) continue;
-      const u = along / planet.shadowL;
-      let dd = angle - planet.ang;
-      dd -= Math.round(dd / (Math.PI * 2)) * Math.PI * 2;
-      const across = Math.abs(dd) * radius;
-      const half = planet.size * (1.15 - 0.85 * u);
-      const edge = Math.min(1, Math.max(0, (half + 0.4 * planet.size - across) / (0.6 * planet.size)));
-      light *= 1 - 0.92 * warm * (1 - u) * edge;
-    }
-    return light;
-  };
-
   const drawDisc = () => {
     const { n, colour, r, a, y, speed, size, tw } = disc;
     let current = -1;
@@ -267,7 +247,7 @@
       if (p.x < -4 || p.y < -4 || p.x > width + 4 || p.y > height + 4) continue;
       const near = r[i] < 0.6 ? 1.35 : 1;
       const depth = 0.5 + 0.5 * Math.min(1, Math.max(0, (p.z + 1.4) / 2.8));
-      ctx.globalAlpha = Math.min(1, depth * near * (0.55 + 0.45 * Math.sin(time * 2.2 + tw[i]))) * lightAt(r[i], angle);
+      ctx.globalAlpha = Math.min(1, depth * near * (0.55 + 0.45 * Math.sin(time * 2.2 + tw[i])));
       const s = size[i] * p.k * dpr;
       ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
     }
@@ -312,44 +292,6 @@
     ctx.ellipse(p.x, p.y, rx, ry, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.globalCompositeOperation = "source-over";
-  };
-
-  // The shadow each planet casts on the plane of the orbits: a soft wedge away from the bulb, darkest
-  // where it touches the planet, narrowing as the wide bulb lights around the planet further out.
-  const drawShadows = () => {
-    if (warm <= 0) return;
-    for (const planet of planets) {
-      const s = planet.size;
-      const dx = Math.cos(planet.ang);
-      const dz = Math.sin(planet.ang);
-      const px = planet.r * dx;
-      const pz = planet.r * dz;
-      const steps = 6;
-      const edge = (u, side) => {
-        const along = -0.35 * s + (planet.groundL + 0.35 * s) * u;
-        const half = side * s * (u < 0.12 ? 0.75 + (1.15 - 0.75) * (u / 0.12) : 1.15 - 0.85 * ((u - 0.12) / 0.88));
-        const p = project(px + dx * along - dz * half, 0, pz + dz * along + dx * half);
-        return [p.x, p.y];
-      };
-      ctx.beginPath();
-      for (let i = 0; i <= steps; i += 1) {
-        const [x, y] = edge(i / steps, 1);
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      for (let i = steps; i >= 0; i -= 1) ctx.lineTo(...edge(i / steps, -1));
-      ctx.closePath();
-      const from = project(px, 0, pz);
-      const fx = from.x;
-      const fy = from.y;
-      const to = project(px + dx * planet.groundL, 0, pz + dz * planet.groundL);
-      const g = ctx.createLinearGradient(fx, fy, to.x, to.y);
-      const dark = warm * planet.groundLit;
-      g.addColorStop(0, rgba(BLACK, 0.5 * dark));
-      g.addColorStop(0.3, rgba(BLACK, 0.2 * dark));
-      g.addColorStop(1, rgba(BLACK, 0));
-      ctx.fillStyle = g;
-      ctx.fill();
-    }
   };
 
   // The Catalyst bulb, hanging from its cable at the top of the hero and swinging around that point.
@@ -443,13 +385,7 @@
 
   const placePlanets = () => {
     for (const planet of planets) {
-      planet.ang = planet.phase + planet.speed * time;
-      planet.shadowL = planet.r * 0.8;
-      // On the plane itself only the near part shows: a contact shadow, so it never streaks over the stars.
-      planet.groundL = Math.min(0.22, planet.r * 0.4);
-      // A shadow shows where the floor is lit: full inside the pool of light, faint out at the far orbits.
-      planet.groundLit = Math.max(0.3, Math.min(1, 1 - (planet.r - 0.4) / 0.6));
-      const p = orbitPoint(planet.r, planet.incl, planet.ang);
+      const p = orbitPoint(planet.r, planet.incl, planet.phase + planet.speed * time);
       planet.sx = p.x;
       planet.sy = p.y;
       planet.sz = p.z;
@@ -987,7 +923,6 @@
     placeReader();
     drawSky();
     drawPool();
-    drawShadows();
     for (const planet of planets) drawOrbit(planet, false);
     for (const planet of planets) if (planet.sz < 0) drawPlanet(planet);
     ctx.globalCompositeOperation = "lighter";
