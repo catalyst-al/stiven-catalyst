@@ -167,6 +167,14 @@
 .mr .pg .wk-form .wk-lines.three { height: 20.4mm; }
 /* The note on method sits at the foot of the sources page, however many sources there are. */
 .mr .pg .bottom .wk-method { margin: 0; }
+/* Seven or eight sources: smaller cards and a smaller note, so the last cards clear the note. */
+.mr .pg.is-dense .lead { font-size: 9.4pt; margin-bottom: 3mm; }
+.mr .pg.is-dense .src { gap: 1.4mm; }
+.mr .pg.is-dense .src li { font-size: 6.3pt; padding: 1.5mm 2.2mm; line-height: 1.28; }
+.mr .pg.is-dense .src li em { margin-top: .4mm; }
+.mr .pg.is-dense .src li i { font-size: 5.1pt; margin-top: .5mm; }
+.mr .pg.is-dense .wk-method { padding: 2.4mm 3.4mm; }
+.mr .pg.is-dense .wk-method p { font-family: var(--mr-sans); font-size: 7.2pt; line-height: 1.4; }
 .mr .pg .box { margin-bottom: 3.4mm; }
 
 .mr .pg .wk-rating { border: .3mm solid rgba(74,181,247,.45); border-radius: 2.6mm; padding: 2.4mm 3mm 1mm; margin: 0 0 3.4mm; background: var(--card); }
