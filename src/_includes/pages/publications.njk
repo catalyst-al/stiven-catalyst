@@ -1,11 +1,11 @@
-{#- Publications: the monthly Management Review, the magazine, the book and the Tools Guide, in the three
-    languages. -#}
+{#- Publications: the monthly Management Review, its operational treatise, the magazine, the book and the Tools
+    Guide, in the three languages. -#}
   <section class="shell page-hero publications-hero">
-    <p class="eyebrow">{{ "Books, guides, a monthly review and a magazine from the floor" | t(lang) }}</p>
+    <p class="eyebrow">{{ "Books, guides, a monthly review, an operational treatise and a magazine from the floor" | t(lang) }}</p>
     {%- set pubTitle = "Publications" | t(lang) %}
     {#- "Publications" and "Publikationen" are wider than a phone at the full hero size. #}
     <h1{% if pubTitle | length > 10 %} class="hero-long"{% endif %}>{{ pubTitle }}</h1>
-    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every month a review of the best management research in several issues, and a magazine from the floor." | t(lang) }}</p>
+    <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every month a review of the best management research in several issues, an operational treatise in volumes that follow one question from the floor to the protocol, and a magazine from the floor." | t(lang) }}</p>
   </section>
 {%- set ml = lang or "en" %}
 {#- The monthly Management Review: its newest issue, and the way to all of them. -#}
@@ -25,6 +25,26 @@
       <div class="book-feature-actions">
         <a class="button-primary" href="{{ wkUrl }}">{{ WK.labels.open_issue }}</a>
         <a class="text-link" href="{{ '/magazine/management-review.html' | local(lang) }}">{{ WK.labels.all }} ({{ weekly.issues | length }})</a>
+      </div>
+    </div>
+  </section>
+{#- The operational treatise: its newest volume, and the way to all of them. -#}
+{%- set TR = treatise[ml] %}
+{%- set tv = treatise.latest %}
+{%- set tvUrl = ("/magazine/" + tv.slug + ".html") | local(lang) %}
+{%- set tvCover = magazinePages[tv.slug][ml].pages[0] %}
+  <section class="shell book-feature magazine-feature" id="treatise">
+    <a class="book-object" href="{{ tvUrl }}" tabindex="-1" aria-hidden="true">
+      <span class="book-object-cover"><img src="{{ tvCover.image }}" srcset="{{ tvCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ tvCover.width }}" height="{{ tvCover.height }}" alt="" loading="lazy"></span>
+    </a>
+    <div class="book-feature-copy">
+      <p class="kicker">{{ TR.short }} · {{ TR.labels.volume }} {{ tv.number }} · {{ tv[ml].date }}</p>
+      <h2><a href="{{ tvUrl }}">{{ tv[ml].heading }}</a></h2>
+      <p class="book-subtitle">{{ TR.name }}</p>
+      <p>{{ tv[ml].feature }}</p>
+      <div class="book-feature-actions">
+        <a class="button-primary" href="{{ tvUrl }}">{{ TR.labels.open_volume }}</a>
+        <a class="text-link" href="{{ '/magazine/operational-treatise.html' | local(lang) }}">{{ TR.labels.all }} ({{ treatise.volumes | length }})</a>
       </div>
     </div>
   </section>

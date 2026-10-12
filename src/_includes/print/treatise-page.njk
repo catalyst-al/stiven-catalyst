@@ -1,0 +1,97 @@
+{#- One page of a volume of the operational treatise, as the print (src/guide-print/treatise.njk) and the reader
+    (src/_includes/pages/treatise-volume.njk) both show it. Needs page (the page), n (its number), volume, V (the
+    volume in this language), W (treatise[lang]), L (its labels), lang and essays. The charts come ready from
+    treatise.js (b.svg); the blocks and the foot of a page are the Management Review's (print/review-blocks.njk,
+    print/review-bottom.njk). A page of a chapter carries its layer: the strip above the kicker shows the three
+    layers with the page's own lit. -#}
+{%- macro chrome(number, section) -%}
+<header class="run"><span>{{ W.short }} · {{ L.vol }} {{ volume.number }} · {{ V.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
+<footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
+{%- endmacro -%}
+{%- if page.type == "cover" %}
+<section class="pg cover wk-cover tr-cover">
+  <div class="mast"><span>Stiven Catalyst</span><span class="tr-mast-note">{{ W.mastNote[0] }}<br>{{ W.mastNote[1] }}</span></div>
+  <div class="mast-rule"></div>
+  <div class="cover-main">
+    <div>
+      <div class="masthead">Management<span class="accent">Review</span></div>
+      <p class="cover-tag">{{ W.tagline }}</p>
+      <div class="cover-rule"></div>
+      <p class="wk-chip">{{ V.blockName }}</p>
+      <div class="cover-theme">{{ V.theme[0] }}<span class="accent">{{ V.theme[1] }}</span></div>
+      <p class="cover-sub">{{ V.sub }}</p>
+    </div>
+    <div class="wk-art"><img src="{{ treatise.cover.src }}" alt=""><p class="wk-no tr-no"><small>{{ L.volume }}</small>{{ volume.number }}</p></div>
+  </div>
+  {%- if V.figure %}
+  <div class="wk-figure-cover"><b>{{ V.figure.n }}</b><p>{{ V.figure.t }}<i>{{ V.figure.by }}</i></p></div>
+  {%- endif %}
+  <div class="wk-teasers">
+    <p class="k">{{ L.inside }}</p>
+    <ol>{% for t in V.teasers %}<li><span class="wk-t-kick">{{ t.kicker }}</span><b>{{ t.title }}</b><span class="wk-t-page">{{ L.page }} {{ t.number | pad }}</span></li>{% endfor %}</ol>
+  </div>
+  <p class="cover-foot">stivencatalyst.com</p>
+</section>
+{%- elif page.type == "intro" %}
+<section class="pg tr-intro">
+  {{ chrome(n, page.run) }}
+  <p class="kicker">{{ W.intro.title }} · {{ L.volume }} {{ volume.number }}</p>
+  <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
+  <p class="lead">{{ page.why }}</p>
+  <div class="body-text"><p>{{ page.body }}</p></div>
+  <p class="wk-byline">Stiven Janaqi<span>{{ L.editor }} · Stiven Catalyst</span></p>
+  <p class="block-label">{{ W.intro.how }}</p>
+  <ol class="tr-layers-box">{% for layer in W.layers %}<li><b>{{ loop.index }}</b><h4>{{ layer.h }}</h4><p>{{ layer.p }}</p></li>{% endfor %}</ol>
+  <p class="block-label">{{ W.intro.contract }}</p>
+  <div class="wk-legend-box">{% for item in V.contract %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
+</section>
+{%- elif page.type == "contents" %}
+<section class="pg tr-toc">
+  {{ chrome(n, page.run) }}
+  <p class="kicker">{{ W.contentsPage.kicker }}</p>
+  <h2>{{ W.contentsPage.title[0] }}<span class="accent">{{ W.contentsPage.title[1] }}</span></h2>
+  <ol class="tr-contents">
+    {%- for ch in V.chapters %}
+    <li><h4><b>{{ L.chapter }} {{ ch.numeral }}</b><span>{{ ch.title }}</span><em>{{ ch.number | pad }}</em></h4><div class="tr-ch-layers">{% for layer in W.layers %}<div><i>{{ loop.index }} {{ layer.short }}</i>{% for p in ch.pages %}{% if p.layer == layer.id %}<span>{{ p.heading }}<em>{{ p.number | pad }}</em></span>{% endif %}{% endfor %}</div>{% endfor %}</div></li>
+    {%- endfor %}
+  </ol>
+  <p class="block-label">{{ W.contentsPage.also }}</p>
+  <ol class="wk-toc">
+    {%- for p in V.also %}<li><b>{{ p.number | pad }}</b><span><i>{{ p.kicker }}</i>{{ p.heading }}</span></li>{% endfor %}
+    <li><b>{{ volume.pageOf.sources | pad }}</b><span><i>{{ L.sources }}</i>{{ W.sourcesPage.kicker }}</span></li>
+  </ol>
+</section>
+{%- elif page.type == "sources" %}
+<section class="pg is-dense tr-sources">
+  {{ chrome(n, L.sources) }}
+  <p class="kicker">{{ W.sourcesPage.kicker }}</p>
+  <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
+  <p class="lead">{{ W.sourcesPage.lead }}</p>
+  <ol class="src{{ ' many' if volume.sources.length > 9 }}">{% for s in volume.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
+  {%- if volume.sources.length <= 9 %}
+  <div class="bottom"><div class="callout wk-method"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div></div>
+  {%- endif %}
+</section>
+{%- elif page.type == "back" %}
+<section class="pg back">
+  <img src="{{ treatise.cover.src }}" alt="">
+  <div class="masthead">Management<span class="accent">Review</span></div>
+  <p class="cover-tag">{{ W.tagline }}</p>
+  <p>{{ W.back.line }}</p>
+  <p class="monthly">{{ W.back.all }}</p>
+  <p class="url">stivencatalyst.com{{ "/magazine/operational-treatise.html" | local(lang) }}</p>
+  <p class="edition">{{ W.short }} · {{ L.volume }} {{ volume.number }} · {{ V.date }} · Stiven Catalyst</p>
+</section>
+{%- else %}
+<section class="pg{{ ' tr-' + page.layer if page.layer }}">
+  {{ chrome(n, page.run) }}
+  {%- if page.layer %}
+  <ol class="tr-layers" aria-label="{{ L.layers }}">{% for layer in W.layers %}<li{% if layer.id == page.layer %} class="is-on"{% endif %}><b>{{ loop.index }}</b><span>{{ layer.short }}</span></li>{% endfor %}</ol>
+  {%- endif %}
+  <p class="kicker">{{ page.kicker }}</p>
+  <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
+  {%- if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+  {%- include "print/review-blocks.njk" %}
+  {%- include "print/review-bottom.njk" %}
+</section>
+{%- endif %}
