@@ -19,6 +19,11 @@ checklist:
     - Çfarë informacioni duhet të kalojë bashkë me të?
     - Si konfirmohet që kalimi është kryer saktë?
     - Kush e merr përgjegjësinë nëse zbulohet një problem?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Për një gabim të kësaj jave, gjej pikën ku puna ndërroi duar.
+  - Zëvendëso “i informova” me një status, një emër dhe një konfirmim.
+  - Bini dakord me departamentin tjetër çfarë duhet të jetë e përfunduar që një dorëzim të quhet i bërë.
 ---
 
 Një departament mund ta bëjë punën e vet shumë mirë, dhe operacioni përsëri të dështojë.

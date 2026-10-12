@@ -24,6 +24,11 @@ checklist:
       hint: Në turn, me volumin, kohën dhe njerëzit e asaj dite.
     - label: Çfarë duhet ndryshuar që dëmi të mos përsëritet?
       hint: Një ndryshim në proces, kush e merr përsipër dhe kur kontrollohet.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një rast dëmtimi dhe pyet ku ndodhi, jo kush e bëri.
+  - Kontrollo nëse ekzistonte një standard për atë fazë, dhe nëse ishte i zbatueshëm atë ditë.
+  - Regjistroje rastin sipas fazës dhe shkakut, që Pareto-ja e javës tjetër të ketë një adresë.
 ---
 
 1,06%. Objektivi ishte 0,8%.

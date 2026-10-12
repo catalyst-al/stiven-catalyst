@@ -22,6 +22,11 @@ checklist:
     - Ngarkesat janë sistemuar, pa porosi të përziera.
     - Portat e ngarkimit janë mbyllur.
     - Problemet e hapura i janë kaluar turnit pasardhës.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Kalo një zonë në fund të turnit: pajisjet në vend, ngarkesat të ndara, portat të mbyllura."
+  - Emëro kush e kontrollon atë zonë, dhe bëje standardin të dukshëm aty, jo në një poster diku tjetër.
+  - Dorëzoji problemet e hapura të asaj zone turnit tjetër, me emër.
 ---
 
 Një poster me gjashtë parime mund të varet në çdo mur. Por rampa nuk e lexon posterin.

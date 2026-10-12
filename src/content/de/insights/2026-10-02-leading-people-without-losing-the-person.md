@@ -7,6 +7,25 @@ featured: true
 summary: Druck kann berechtigt sein. Menschen zu demütigen ist keine Führungsmethode. Ein Standard kann sehr streng sein, ohne den Menschen wie eine Zahl zu behandeln.
 teaser: Man kann niemanden für eine Regel zur Verantwortung ziehen, die nie jemand klargemacht hat.
 deck: 'Der fünfte Essay der Reihe „Zehn Jahre nah an der Arbeit“: Standards, Prozessfehler und persönliche Fehler, und was sich ändert, wenn man unter den Menschen befördert wird, mit denen man gestern noch zusammengearbeitet hat.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Bevor Sie mit jemandem über einen Fehler sprechen, prüfen Sie, ob der Standard ihm je klar gemacht wurde.
+  - "Fragen Sie zuerst den Prozess: Wo ging Tasche, Auftrag oder Zeit schief, bevor es die Person erreichte?"
+  - Geben Sie heute ein Problem an die Person zurück, deren Aufgabe es ist, und bleiben Sie erreichbar.
+checklist:
+  title: Prozess oder Person?
+  fill: true
+  items:
+    - label: Kannte die Person den Standard?
+      hint: Gesagt, gezeigt, aufgeschrieben, oder nur angenommen.
+    - label: Hat der Prozess den Fehler möglich gemacht?
+      hint: Eine fehlende Tasche, ein falscher Wagen, ein Etikett, eine Prüfung, die es nicht gab.
+    - label: Waren Werkzeuge und Zeit da?
+      hint: Scanner, Wagen, Platz an der Rampe, Minuten vor der Abfahrt.
+    - label: Was lag in der Hand der Person?
+      hint: Der Teil, den sie mit ihrem Wissen anders hätte machen können.
+    - label: Was sage ich, und was korrigiere ich?
+      hint: Verhalten und Verantwortung im einen Fall, den Prozess im anderen, manchmal beides.
 ---
 
 In der Last Mile reicht es nicht, jemandem zu sagen: „Arbeitet besser.“ Er muss verstehen, was „besser“ bedeutet.

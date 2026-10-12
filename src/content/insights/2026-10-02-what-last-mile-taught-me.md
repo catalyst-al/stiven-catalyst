@@ -11,6 +11,25 @@ deck: 'The second essay in the series “Ten years close to the work”: loading
 relatedTools:
   - /tools/delay-analyzer/
   - /tools/cx-control-tower/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - defects
+  - red-number
+  - peak
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Read today's loading time, delays, incomplete and damage together, not one after the other.
+  - Pick the number that misleads you most and trace one of its cases back to before departure.
+  - "Turn the pressure into five questions for the team: where, how many, which reason, what now, what tomorrow."
+checklist:
+  title: The KPI review that is not just reporting
+  copy: Copy the checklist
+  items:
+    - "The four numbers were read together: loading time, delays, incomplete, damage."
+    - For every red number we know which routes or stages it came from.
+    - The reason that repeats has been named, not only counted.
+    - It is clear which part of the problem is in our hands.
+    - One action came out of it, with an owner and a check tomorrow.
 ---
 
 I have seen last mile from three places. As a parcel courier, as a dispatcher with more than 70 drivers on a shift, and then as Team Leader and Area Manager, with four Shift Leaders, eight dispatchers and around 250 drivers under my responsibility indirectly. The same operation looks completely different from each of them.

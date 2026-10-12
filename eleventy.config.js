@@ -67,6 +67,16 @@ export default function (eleventyConfig) {
     notes: api.getFilteredByGlob("src/content/notes/*.md").map((item) => ({ slug: item.fileSlug, date: item.date, quote: item.data.quote })),
   }));
 
+  // The challenges each essay answers ("problems" on the English essay, ids from src/_data/challenges.json), by
+  // the essay's slug; the German and Albanian essays follow their English original (challengesOf, below).
+  eleventyConfig.addCollection("challengeMap", (api) => Object.fromEntries(
+    api.getFilteredByGlob("src/content/insights/*.md").map((item) => [item.fileSlug, Array.isArray(item.data.problems) ? item.data.problems : []])
+  ));
+  // The challenge ids of an essay in any language, and the challenge entries for a list of ids, in their order.
+  eleventyConfig.addFilter("challengesOf", (item, map) => (map || {})[item.data.original || item.fileSlug] || []);
+  eleventyConfig.addFilter("challengeList", (ids, challenges) => (ids || []).map((id) => (challenges || []).find((c) => c.id === id)).filter(Boolean));
+  eleventyConfig.addFilter("withChallenge", (items, id, map) => (items || []).filter((item) => ((map || {})[item.data.original || item.fileSlug] || []).includes(id)));
+
   // The same collections in German and Albanian: insightsDe, notesSq, ...
   for (const [lang, suffix] of [["de", "De"], ["sq", "Sq"]]) {
     eleventyConfig.addCollection(`insights${suffix}`, (api) => numberInSeries(api.getFilteredByGlob(`src/content/${lang}/insights/*.md`).sort(byDate)));

@@ -29,6 +29,11 @@ checklist:
       hint: Kush e ndryshon udhëzimin kur ndryshon procesi?
     - label: Pa ty
       hint: A do të funksiononte nesër, nëse ti nuk do të ishe aty?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një përmirësim që bëre këtë vit dhe pyet nëse do të ecte javën tjetër pa ty.
+  - Emëro, me emër, kush kontrollon që standardi zbatohet ende, dhe sa shpesh.
+  - Gjej një udhëzim që nuk përputhet më me procesin, dhe përditësoje sot.
 ---
 
 Mos u mjafto me faktin që sot e zgjidhe problemin.

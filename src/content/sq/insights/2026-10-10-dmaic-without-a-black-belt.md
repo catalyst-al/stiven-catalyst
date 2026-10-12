@@ -27,6 +27,11 @@ checklist:
       hint: Një ndryshim që mund ta provojmë, jo një procedurë e re për çdo gjë.
     - label: Si do ta kontrollojmë që përmirësimi të zgjasë?
       hint: Kush e ndjek, sa shpesh, dhe çfarë bëjmë nëse problemi kthehet.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Shkruaje problemin e sotëm si një problem, një vend, një periudhë.
+  - Vendos si do ta matësh, dhe sa ishte para se të filloje.
+  - Planifiko tani kush kontrollon muajin tjetër nëse u mbajt, jo pasi problemi të duket i ikur.
 ---
 
 Nuk ke nevojë për një certifikatë Black Belt për të bërë pyetje të mira.

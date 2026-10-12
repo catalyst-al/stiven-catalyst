@@ -12,6 +12,31 @@ relatedTools:
   - /tools/damage-control/
   - /tools/incomplete-control/
   - /tools/shift-pulse/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - red-number
+  - defects
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Take one red number from today's report and go to the place where it is made.
+  - For one case, find the last point where the bag, the trolley or the time was still right.
+  - "Write the case down in the same structure as the last one: incident, cause, action, follow-up."
+checklist:
+  title: One case, from the table to the ramp
+  fill: true
+  items:
+    - label: Which number brought me here?
+      hint: The KPI and its value, from today's report.
+    - label: Where was everything last in order?
+      hint: "The bag, the trolley, the route, the scan: the last point that was right."
+    - label: Who noticed the problem, and when?
+      hint: The driver, the dispatcher, the customer, the audit.
+    - label: What did the floor show that the table did not?
+      hint: A mixed trolley, a wrong label, a wait at loading, an open gate.
+    - label: Where in the process did it start?
+      hint: Warehouse, loading, departure, road, door.
+    - label: What do we check tomorrow?
+      hint: One check, one owner, one time.
 ---
 
 The report showed something very simple: the customer had not received their full order. Incomplete. If you look at it only through the KPI, the first thought comes by itself: the driver forgot a bag during delivery.

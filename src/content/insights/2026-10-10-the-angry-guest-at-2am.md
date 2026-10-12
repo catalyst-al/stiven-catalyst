@@ -27,6 +27,15 @@ checklist:
       hint: Open, with a name. Not “will be looked at”.
     - label: Who follows it up, and what is the guest told?
       hint: So the guest does not have to tell the story from the start.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - escalation
+  - handover
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Listen without interrupting, then say clearly what you can do at this hour.
+  - Write the complaint down in the guest's words, with what you verified and what is still open.
+  - Hand it over with a name, so the guest does not tell the story again at breakfast.
 ---
 
 The 2 a.m. in the title is not the time of an incident I can prove.

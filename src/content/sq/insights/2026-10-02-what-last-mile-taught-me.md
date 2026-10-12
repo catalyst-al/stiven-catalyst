@@ -7,6 +7,20 @@ featured: true
 summary: Shoferi sheh problemin, dispatcher-i sheh efektin e tij mbi turnin, menaxheri duhet të kuptojë pse ekziston.
 teaser: Loading time ishte 24 minuta kundrejt një target-i prej 20. Do të ishte e lehtë të thoshe që shoferët ngarkojnë ngadalë.
 deck: 'Eseja e dytë e serisë “Dhjetë vite pranë punës”: loading time, delays, incomplete, damage, dhe pse një KPI nuk të tregon vetë çfarë ka ndodhur.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Lexoji së bashku kohën e ngarkimit, vonesat, porositë e paplota dhe dëmtimet e sotme, jo një nga një.
+  - Merr numrin që të mashtron më shumë dhe ndiqe një rast të tij deri para nisjes.
+  - "Ktheje presionin në pesë pyetje për ekipin: ku, sa, cili shkak, çfarë tani, çfarë nesër."
+checklist:
+  title: Rishikimi i KPI-ve që nuk është vetëm raportim
+  copy: Kopjo listën
+  items:
+    - "Të katër numrat u lexuan së bashku: koha e ngarkimit, vonesat, të paplotat, dëmtimet."
+    - Për çdo numër të kuq dimë nga cilat rrugë ose faza erdhi.
+    - Shkaku që përsëritet është emëruar, jo vetëm numëruar.
+    - Është e qartë cila pjesë e problemit është në duart tona.
+    - Doli një veprim, me një përgjegjës dhe një kontroll nesër.
 ---
 
 Last mile-in e kam parë nga tri vende. Si shpërndarës pakosh, si dispatcher me mbi 70 shoferë në një turn, dhe pastaj si Team Leader dhe Area Manager, me katër Shift Leaders, tetë dispecerë dhe rreth 250 shoferë nën përgjegjësinë time në mënyrë indirekte. I njëjti operacion duket krejt ndryshe nga secili vend.

@@ -7,6 +7,25 @@ featured: true
 summary: Tagsüber sieht das Management die Aktivität. Nachts sieht man die Spuren, die die Aktivität hinterlassen hat.
 teaser: Viele Fehler entstehen nicht aus fehlendem Können. Sie entstehen aus dem Satz „Machen wir später“. Oft ist „später“ die Nachtschicht.
 deck: 'Der siebte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was sichtbar wird, wenn das Hotel schläft, warum der Tagesabschluss Prozessdisziplin ist, und fünf Dinge, auf die ein Tagesmanager im Nachtbericht achten sollte.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Lesen Sie den Nachtbericht danach, was noch offen ist, nicht als Beleg, dass die Nacht vorbei ist.
+  - Nehmen Sie eine Abweichung zwischen System und Wirklichkeit und fragen Sie, an welchem Punkt des Tages sie begann.
+  - Markieren Sie die Probleme, die diese Woche mehr als einmal aufgetaucht sind. Das ist ein Prozess, kein Zufall.
+checklist:
+  title: Der Nachtbericht in fünf Zeilen
+  fill: true
+  items:
+    - label: Was blieb ungelöst?
+      hint: Nicht, was passiert ist, sondern was noch Handeln braucht, mit einem Namen.
+    - label: Wo wichen System und Wirklichkeit voneinander ab?
+      hint: Reservierungen, Status, Dokumentation, Geld.
+    - label: Welches Problem wiederholt sich?
+      hint: Einmal ist Zufall. Mehrmals ist ein Prozess.
+    - label: Was hat den Gast oder den Betrieb betroffen?
+      hint: Wo ein internes Problem begann, ein Kundenproblem zu werden.
+    - label: Was muss die nächste Schicht wissen, bevor die Arbeit beginnt?
+      hint: Die Zeile, die den beginnenden Tag sicherer macht.
 ---
 
 Tagsüber sieht das Management die Aktivität. Nachts sieht man die Spuren, die die Aktivität hinterlassen hat.

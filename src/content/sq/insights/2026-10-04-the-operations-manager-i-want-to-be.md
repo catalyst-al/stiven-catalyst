@@ -8,6 +8,26 @@ summary: Pesë parime, një javë pune dhe 90 ditët e para. Jo menaxheri që du
 description: "Pesë parime, një javë pune dhe 90 ditët e para: të ndërtosh një operacion që ka gjithnjë e më pak nevojë të shpëtohet."
 teaser: Nëse një ekip funksionon vetëm kur menaxheri është në dhomë, ai menaxher nuk ka ndërtuar ende një sistem.
 deck: 'Eseja e dymbëdhjetë dhe e fundit e serisë “Dhjetë vite pranë punës”: njerëzit, standardet, të dhënat, ownership dhe përmirësimi i vazhdueshëm, plus një plan për 90 ditët e para në një rol të ri.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Fillo nesër me katër pyetje: çfarë devijoi, çfarë është ende e hapur, ku është rreziku, ku më duhet prania."
+  - Kalo tridhjetë minuta në terren dhe sill një problem që raporti nuk e tregon.
+  - Jepi sot një përgjegjës një problemi që deri tani nuk kishte.
+checklist:
+  title: Rishikimi javor
+  fill: true
+  note: Pyetjet e javës sime ideale. Jo një mbledhje për të cilën kam procesverbal.
+  items:
+    - label: Çfarë po përmirësohet?
+      hint: Dhe a e dimë pse.
+    - label: Çfarë po përkeqësohet?
+      hint: Që kur, dhe ku.
+    - label: Cilat probleme përsëriten?
+      hint: Incidente që janë bërë model.
+    - label: Cilat veprime janë ende të hapura, dhe kush i ka?
+      hint: Një emër për çdo veprim.
+    - label: Ku kërkova një standard që vetë nuk do ta mbaja?
+      hint: Atë e vë re ekipi i pari.
 ---
 
 Pas viteve në retail, shitje, logjistikë dhe hoteleri, kam kuptuar se industria ndryshon shumë më shpejt se parimet e menaxhimit.

@@ -8,6 +8,23 @@ summary: Leadership pa titull nuk është të bësh punën e shefit pa qenë she
 description: "Leadership pa titull nuk është të bësh punën e shefit. Është të mos fshihesh pas përshkrimit të punës kur situata kërkon përgjegjësi."
 teaser: Iniciativa thotë “Nuk do ta injoroj problemin”. Autoriteti thotë “Kam të drejtën ta marr këtë vendim”. Mund të kesh shumë nga e para pa pretenduar të dytën.
 deck: 'Eseja e dhjetë e serisë “Dhjetë vite pranë punës”: çfarë bën kur përgjegjësia jote është më e madhe se pozicioni, si fitohet autoriteti pa pozitë, dhe tri pyetje para se të marrësh përsipër diçka që nuk është e jotja.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Para se të marrësh sot diçka jashtë rolit tënd, pyet nëse i duhet veprim apo një vendim që i takon dikujt tjetër.
+  - Zgjidhe problemin e çastit, pastaj shkruaj kush duhet ta ketë në pronësi zgjidhjen strukturore.
+  - Emëro një boshllëk që e mbulon vazhdimisht, dhe thuaja personit që ka autoritetin ta mbyllë.
+checklist:
+  title: Para se të marrësh përsipër diçka që nuk është e jotja
+  fill: true
+  items:
+    - label: A i duhet kësaj situate veprim, apo një vendim që duhet ta marrë dikush tjetër?
+      hint: Nismë, apo tejkalim i mandatit.
+    - label: A kam informacionin dhe kompetencën për ta marrë përsipër?
+      hint: Fakti që askush tjetër nuk vepron nuk më bën mua personin e duhur për të vendosur.
+    - label: Pas kësaj, te kush mbetet përgjegjësia?
+      hint: Problemi fillon kur përjashtimi bëhet normal dhe askush nuk e di më kush ka çfarë.
+    - label: Çfarë eskaloj, dhe te kush?
+      hint: Politikat, kostot e mëdha, personeli, siguria, përjashtimet nga një procedurë.
 ---
 
 Për mua, leadership pa titull nuk është të bësh punën e shefit pa qenë shef.

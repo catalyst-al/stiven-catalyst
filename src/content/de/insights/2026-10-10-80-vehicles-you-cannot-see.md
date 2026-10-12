@@ -27,6 +27,11 @@ checklist:
       hint: Ein Problem ohne Verantwortlichen ist nicht offen. Es ist vergessen.
     - label: Welche Maßnahme ist jetzt nötig, und wer bestätigt sie?
       hint: Kurz, klar, mit der Maßnahme, die nötig ist.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Trennen Sie beim nächsten gemeldeten Problem, was Sie sicher wissen, von dem, was Ihnen gesagt wurde.
+  - Prüfen Sie, wie alt die Information ist, bevor Sie danach handeln.
+  - Geben Sie jedem offenen Fall einen Namen und eine Bestätigung, nicht nur eine Anweisung.
 ---
 
 An der Rampe sieht man ein Problem mit eigenen Augen.

@@ -8,6 +8,23 @@ summary: Führung ohne Titel heißt nicht, die Arbeit des Chefs zu machen, ohne 
 description: "Führung ohne Titel heißt, sich nicht hinter der Stellenbeschreibung zu verstecken, wenn eine Situation Verantwortung braucht."
 teaser: 'Initiative sagt: „Ich ignoriere das Problem nicht.“ Autorität sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Man kann viel vom Ersten haben, ohne das Zweite zu beanspruchen.'
 deck: 'Der zehnte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was man tut, wenn die eigene Verantwortung größer ist als die Position, wie man Autorität ohne Position gewinnt, und drei Fragen, bevor man etwas übernimmt, das nicht das Eigene ist.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Bevor Sie heute etwas außerhalb Ihrer Rolle übernehmen, fragen Sie, ob es Handeln braucht oder eine Entscheidung, die jemand anderem zusteht.
+  - Lösen Sie das akute Problem, und schreiben Sie dann auf, wem die strukturelle Lösung gehören sollte.
+  - Benennen Sie eine Lücke, die Sie ständig abdecken, und sagen Sie es der Person, die die Befugnis hat, sie zu schließen.
+checklist:
+  title: Bevor Sie etwas übernehmen, das nicht Ihres ist
+  fill: true
+  items:
+    - label: Braucht diese Situation Handeln, oder eine Entscheidung, die jemand anderes treffen sollte?
+      hint: Initiative, oder Überschreiten des Mandats.
+    - label: Habe ich die Information und die Kompetenz, das zu übernehmen?
+      hint: Dass sonst niemand handelt, macht mich nicht zur richtigen Person für die Entscheidung.
+    - label: Bei wem bleibt danach die Verantwortung?
+      hint: Das Problem beginnt, wenn die Ausnahme normal wird und niemand mehr weiß, wem was gehört.
+    - label: Was eskaliere ich, und an wen?
+      hint: Richtlinien, erhebliche Kosten, Personal, Sicherheit, Ausnahmen von einem Verfahren.
 ---
 
 Für mich heißt Führung ohne Titel nicht, die Arbeit des Chefs zu machen, ohne Chef zu sein.

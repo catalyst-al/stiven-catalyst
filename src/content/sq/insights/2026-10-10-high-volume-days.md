@@ -22,6 +22,11 @@ checklist:
     - Dihet cilat standarde nuk lejohen të shkelen, sidomos siguria dhe kontrollet kritike.
     - Ka një plan për mungesat, vonesat dhe problemet me automjetet.
     - Para turnit është sqaruar kush vendos dhe kush njoftohet kur situata ndryshon.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Numëro njerëzit që e bëjnë dot punën sipas standardit, jo njerëzit në plan.
+  - Thuaj para turnit cilat standarde nuk do të thyhen, pavarësisht volumit.
+  - Bëje të qartë kush vendos, dhe kush njoftohet, kur plani nuk mjafton.
 ---
 
 Kishim ditë kur kërkesa ishte më e lartë se parashikimi.

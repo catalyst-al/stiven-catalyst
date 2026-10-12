@@ -8,6 +8,25 @@ summary: Kam kaluar nga kontrolli i një kutie në magazinë, te kontrolli i nj�
 description: "Nga kontrolli i një kutie në magazinë te një porosi që lëviz dhe një transaksion që ekziston vetëm në sistem. Parimi mbeti i njëjtë."
 teaser: Klientit nuk i intereson cili departament bëri gabimin. Në atë moment, personi përballë tij është e gjithë kompania.
 deck: 'Eseja e gjashtë e serisë “Dhjetë vite pranë punës”: çfarë mbetet e njëjtë kur kalon nga dyqani te rampa dhe te recepsioni i natës, dhe çfarë duhet mësuar nga e para.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Merr një gjë që sistemi thotë se e ke dhe kontrollo nëse ekziston: një pako, një status dhome, një pagesë."
+  - Gjej pikën në punën e sotme ku informacioni, përgjegjësia dhe ekzekutimi nuk u takuan.
+  - Për një partner ose departament që nuk e komandon, shkruaj interesin e përbashkët që e mban të punojë me ty.
+checklist:
+  title: Sistemi dhe realiteti
+  fill: true
+  items:
+    - label: Çfarë thotë sistemi se kemi?
+      hint: Numri, statusi, shuma, siç e tregon ekrani.
+    - label: Çfarë ekziston vërtet?
+      hint: E numëruar, e parë ose e konfirmuar, jo e raportuar.
+    - label: Ku është hendeku, dhe që kur?
+      hint: Një turn, një ditë, një javë.
+    - label: Kush duhet të veprojë?
+      hint: Një emër, në departamentin ku lindi hendeku.
+    - label: Çfarë sheh klienti prej tij?
+      hint: Te dera, te recepsioni, në faturë.
 ---
 
 Kam punuar në retail dhe në shitje me shumicë në Shqipëri, pastaj në logjistikën e miljes së fundit dhe sot në hoteleri në Gjermani. Nga jashtë duken tri botë të ndryshme. Nga brenda, problemi që kam parë pothuajse kudo është i njëjti: diferenca mes asaj që duhet të ndodhë sipas procesit dhe asaj që ndodh realisht në terren.

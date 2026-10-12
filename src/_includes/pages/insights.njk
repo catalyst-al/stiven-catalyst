@@ -35,21 +35,41 @@
   <section class="shell listing" data-filter-list>
     {%- set searchLabel = "Search essays" | t(lang) %}
     {%- set countLabel = "{a} of {b} essays" | t(lang) %}
-    {%- set filterTopics = essays | topics("category") %}
+    {#- The chips are the challenges (src/_data/challenges.json), by id, so a shared address works in every language;
+        an essay can answer several, and its row carries all of them. -#}
+    {%- set filterTopics = [] %}
+    {%- for item in challenges %}{% set filterTopics = (filterTopics.push({ id: item.id, label: item.name[lang or "en"] }), filterTopics) %}{% endfor %}
+    {%- set filterLabel = "Filter by challenge" | t(lang) %}
     {% include "partials/filter-bar.njk" %}
+    <p class="filter-more"><a href="{{ '/challenges.html' | local(lang) }}">{{ "All challenges, with their essays, checklists and tools" | t(lang) }} →</a></p>
     {#- Newest first; only the newest essay can be marked new, for seven days after its date (the script below). -#}
     {%- for item in essays | reverse %}
-    {%- set search = [item.data.title, item.data.summary, item.data.teaser, item.data.category] | join(" ") | lower %}
+    {%- set itemChallenges = item | challengesOf(collections.challengeMap) | challengeList(challenges) %}
+    {%- set challengeNames = [] %}
+    {%- for c in itemChallenges %}{% set challengeNames = (challengeNames.push(c.name[lang or "en"]), challengeNames) %}{% endfor %}
+    {%- set search = [item.data.title, item.data.summary, item.data.teaser, item.data.category, challengeNames | join(" ")] | join(" ") | lower %}
+    {%- set topicIds = [] %}
+    {%- for c in itemChallenges %}{% set topicIds = (topicIds.push(c.id), topicIds) %}{% endfor %}
     {%- if item.data.status == "soon" %}
-    <div class="list-row" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}">
+    <div class="list-row" data-filter-item data-topic="{{ topicIds | join('|') }}" data-search="{{ search }}">
       <span class="number">{{ item.data.number }}</span>
       <div><h2>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
       <span class="row-meta">{{ item.data.category }} · {{ "Soon" | t(lang) }}</span>
     </div>
     {%- else %}
-    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ item.data.category }}" data-search="{{ search }}" data-read-row="{{ item.fileSlug }}">
+    {%- set itemTools = collections.writingLinks.essayTools[item.data.original or item.fileSlug] or [] %}
+    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ topicIds | join('|') }}" data-search="{{ search }}" data-read-row="{{ item.fileSlug }}">
       <span class="number">{{ item.data.number }}</span>
-      <div><h2>{% if loop.first %}<span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{% endif %}{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
+      <div>
+        <h2>{% if loop.first %}<span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{% endif %}{{ item.data.title }}</h2>
+        <p>{{ item.data.summary }}</p>
+        {#- What the reader takes away besides the text: the three moves, a checklist, the tools. -#}
+        <span class="row-badges" aria-label="{{ 'In this essay' | t(lang) }}">
+          <span class="row-badge">{{ "3 moves" | t(lang) }}</span>
+          {%- if item.data.checklist and item.data.checklist.items %}<span class="row-badge">{{ "Checklist" | t(lang) }}</span>{% endif %}
+          {%- if itemTools.length %}<span class="row-badge">{{ ("{n} tools" if itemTools.length > 1 else "1 tool") | t(lang) | replace("{n}", itemTools.length) }}</span>{% endif %}
+        </span>
+      </div>
       <span class="row-meta">{% if item.data.series != essaySeries[0].id %}{{ (essaySeries | seriesById(item.data.series)).name[lang or "en"] }} · {% endif %}{{ item.data.category }}{% if item.data.readingTime %} · {{ item.data.readingTime }}{% endif %}<span class="read-mark" data-read-mark hidden>{{ "Read" | t(lang) }}</span></span>
     </a>
     {%- endif %}

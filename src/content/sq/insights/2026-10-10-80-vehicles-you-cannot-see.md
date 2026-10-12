@@ -27,6 +27,11 @@ checklist:
       hint: Një problem pa pronar nuk është i hapur. Është i harruar.
     - label: Çfarë veprimi duhet tani, dhe kush e konfirmon?
       hint: I shkurtër, i qartë, me veprimin që nevojitet.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Për problemin tjetër të raportuar, ndaj atë që e di me siguri nga ajo që të thanë.
+  - Kontrollo sa i vjetër është informacioni para se të veprosh mbi të.
+  - Jepi çdo rasti të hapur një emër dhe një konfirmim, jo vetëm një udhëzim.
 ---
 
 Në rampë mund ta shohësh një problem me sytë e tu.

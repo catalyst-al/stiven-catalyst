@@ -25,6 +25,11 @@ checklist:
       hint: Ein ungewöhnlicher Tag, oder mehrere Tage hintereinander in dieselbe Richtung?
     - label: Haben wir eine konkrete Ursache gefunden?
       hint: Bevor wir den Prozess ändern, nicht danach.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Bevor Sie eine Regel ändern, legen Sie die heutige Zahl neben die letzten zehn Tage.
+  - Prüfen Sie zuerst, ob ein akutes Sicherheits- oder Serviceproblem besteht. Wenn ja, handeln Sie jetzt.
+  - Benennen Sie eine konkrete Ursache, bevor Sie den Prozess anfassen.
 ---
 
 2,8 %.

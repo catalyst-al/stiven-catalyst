@@ -24,6 +24,11 @@ checklist:
       hint: Çfarë është konfirmuar, dhe çfarë duhet anonimizuar?
     - label: Testoje në praktikë
       hint: A e kupton dikush tjetër pa shpjegimin tënd?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Zgjidh një procedurë dhe numëro sa vende duhet të hapë dikush për ta kryer.
+  - Vendose atë procedurë aty ku gjendet sipas asaj që bën, jo sipas emrit të dokumentit.
+  - Kërkoji një kolegu ta ndjekë pa shpjegimin tënd, dhe shëno ku u ndal.
 ---
 
 Nuk e ndërtova Front Desk Control sepse mungonin dokumentet.

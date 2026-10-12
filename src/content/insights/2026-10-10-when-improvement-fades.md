@@ -30,6 +30,14 @@ checklist:
       hint: Who changes the instruction when the process changes?
     - label: Without you
       hint: Would it work tomorrow if you were not there?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Pick one improvement you made this year and ask whether it would run next week without you.
+  - Name, by name, who checks that the standard is still applied, and how often.
+  - Find one instruction that no longer matches the process, and update it today.
 ---
 
 Do not settle for having solved the problem today.

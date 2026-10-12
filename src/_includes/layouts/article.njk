@@ -66,6 +66,33 @@ ogType: article
   </aside>
   {%- endif %}
   <article class="article-content" data-article data-essay-id="{{ page.fileSlug }}" data-essay-title="{{ title }}">
+    {#- Before the text: the three moves for tomorrow's shift ("firstMove" in the front matter), with the way to the
+        checklist at the end, the first tool of the essay and the challenges it answers (src/_data/challenges.json). -#}
+    {%- if firstMove and firstMove.length %}
+    {%- set moveKey = original or page.fileSlug %}
+    {%- set moveTools = collections.writingLinks.essayTools[moveKey] or [] %}
+    {%- set moveToolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+    {%- set moveTool = (moveToolList | toolAt(moveTools[0], lang)) if moveTools.length else null %}
+    {%- set moveChallenges = (collections.challengeMap[moveKey] or []) | challengeList(challenges) %}
+    <aside class="essay-moves" aria-labelledby="essay-moves-title">
+      <div class="essay-moves-head">
+        <p class="kicker" id="essay-moves-title">{{ "Tomorrow on shift" | t(lang) }}</p>
+        <p>{{ "Three moves from this essay, before you read it." | t(lang) }}</p>
+      </div>
+      <ol>
+        {%- for move in firstMove %}
+        <li><b>{{ loop.index | pad }}</b><span>{{ move }}</span></li>
+        {%- endfor %}
+      </ol>
+      {%- if checklist and checklist.items or moveTool or moveChallenges.length %}
+      <p class="essay-moves-links">
+        {%- if checklist and checklist.items %}<a href="#essay-checklist-title">{{ "The checklist at the end" | t(lang) }} ↓</a>{% endif %}
+        {%- if moveTool %}<a href="{{ moveTool.url }}">{{ "Tool" | t(lang) }}: {{ moveTool.name }} →</a>{% endif %}
+        {%- for item in moveChallenges %}<a class="essay-moves-challenge" href="{{ '/challenges.html' | local(lang) }}#{{ item.id }}">{{ item.name[lang or "en"] }}</a>{% endfor %}
+      </p>
+      {%- endif %}
+    </aside>
+    {%- endif %}
     {%- if hasContents %}
     <details class="article-toc-fold">
       <summary>{{ contentsTitle }}</summary>

@@ -8,6 +8,25 @@ summary: Ich bin von der Kontrolle eines Kartons im Lager zur Kontrolle eines Au
 description: "Vom Karton im Lager über den Auftrag in Bewegung bis zur Transaktion, die nur im System existiert. Das Prinzip blieb dasselbe."
 teaser: Den Kunden interessiert nicht, welche Abteilung den Fehler gemacht hat. In diesem Moment ist die Person vor ihm das ganze Unternehmen.
 deck: 'Der sechste Essay der Reihe „Zehn Jahre nah an der Arbeit“: was gleich bleibt, wenn man vom Laden an die Rampe und an die Rezeption in der Nacht wechselt, und was man von Grund auf lernen muss.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Nehmen Sie eine Sache, die das System ausweist, und prüfen Sie, ob sie existiert: ein Paket, ein Zimmerstatus, eine Zahlung."
+  - Finden Sie den Punkt in der heutigen Arbeit, an dem Information, Verantwortung und Ausführung nicht zusammenkamen.
+  - Schreiben Sie für einen Partner oder eine Abteilung, die Sie nicht führen, das gemeinsame Interesse auf, das sie bei Ihnen hält.
+checklist:
+  title: System und Wirklichkeit
+  fill: true
+  items:
+    - label: Was sagt das System, dass wir haben?
+      hint: Anzahl, Status, Betrag, so wie der Bildschirm es zeigt.
+    - label: Was existiert wirklich?
+      hint: Gezählt, gesehen oder bestätigt, nicht gemeldet.
+    - label: Wo ist die Lücke, und seit wann?
+      hint: Eine Schicht, ein Tag, eine Woche.
+    - label: Wer muss handeln?
+      hint: Ein Name, in der Abteilung, in der die Lücke entstanden ist.
+    - label: Was sieht der Kunde davon?
+      hint: An der Haustür, an der Rezeption, auf der Rechnung.
 ---
 
 Ich habe in Albanien im Einzel- und Großhandel gearbeitet, danach in der Last-Mile-Logistik und heute in der Hotellerie in Deutschland. Von außen sehen sie aus wie drei verschiedene Welten. Von innen war das Problem, das ich fast überall gesehen habe, dasselbe: der Unterschied zwischen dem, was laut Prozess passieren soll, und dem, was vor Ort wirklich passiert.

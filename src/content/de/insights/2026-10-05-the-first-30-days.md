@@ -9,6 +9,28 @@ summary: In den ersten 30 Tagen braucht eine neue Führungskraft keine 30 Lösun
 description: "Wie ich einen Betrieb lese, den ich nicht kenne: meine ersten Nächte als Night Auditor in einem neuen Hotel, warum ich bewusst gewartet habe, und 30 Fragen für die ersten 30 Tage."
 teaser: Das Problem war nicht fehlende Information. Das Problem war, dass die Information nicht schnell zeigte, wo man steht, was jetzt zu prüfen ist und was als Nächstes kommt.
 deck: 'Der erste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die ersten Nächte in einem neuen Hotel, was ich gesehen habe, warum ich nichts sofort verändert habe, und eine Liste von Fragen für alle, die irgendwo neu anfangen.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Folgen Sie dem Prozess noch eine Schicht lang genau so, wie er definiert ist, und notieren Sie, wo Sie ihn ändern wollten.
+  - Fragen Sie die Person, die die Arbeit jeden Tag macht, was sie am meisten zermürbt.
+  - Schreiben Sie eine Sache auf, die nur die erfahrenen Leute auswendig wissen.
+checklist:
+  title: Die Karte nach 30 Tagen
+  fill: true
+  note: Was ich bis Tag 30 aufgeschrieben haben möchte. Keine Liste von Änderungen.
+  items:
+    - label: Die Hauptprozesse
+      hint: Und das Ergebnis, das jeder liefern muss.
+    - label: Die Schlüsselpersonen
+      hint: Wer die Arbeit macht, und wen die anderen fragen, wenn sie nicht weiterwissen.
+    - label: Die Zahlen
+      hint: Welche Kennzahlen verfolgt werden, wer sie liest, und was sie nicht zeigen.
+    - label: Standard und Wirklichkeit
+      hint: Wo SOP und tatsächliche Arbeit auseinandergehen, und warum.
+    - label: Die Probleme, die immer wiederkommen
+      hint: Vom Team schon als „normal“ betrachtet.
+    - label: Die Grenzen
+      hint: Was ich selbst entscheiden kann, und was eskaliert werden muss, an wen.
 ---
 
 In meiner ersten Nacht im neuen Hotel konnte ich nicht als Night Auditor arbeiten.

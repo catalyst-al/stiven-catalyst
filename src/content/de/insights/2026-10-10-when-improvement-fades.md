@@ -29,6 +29,11 @@ checklist:
       hint: Wer ändert die Anweisung, wenn sich der Prozess ändert?
     - label: Ohne Sie
       hint: Würde es morgen funktionieren, wenn Sie nicht da wären?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie eine Verbesserung aus diesem Jahr und fragen Sie, ob sie nächste Woche ohne Sie laufen würde.
+  - Benennen Sie namentlich, wer prüft, ob der Standard noch angewendet wird, und wie oft.
+  - Finden Sie eine Anweisung, die nicht mehr zum Prozess passt, und aktualisieren Sie sie heute.
 ---
 
 Geben Sie sich nicht damit zufrieden, das Problem heute gelöst zu haben.

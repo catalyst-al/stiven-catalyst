@@ -26,6 +26,11 @@ checklist:
       hint: Cila pjesë e gabimit ishte brenda kontrollit të personit?
     - label: Dakordëso veprimin
       hint: Çfarë ndryshon, kush e bën dhe kur kontrollohet rezultati?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Kuptoji faktet para bisedës, dhe bëje atë privatisht.
+  - Përshkruaj çfarë ndodhi, dëgjo, kontrollo procesin, dhe vetëm pastaj fol për përgjegjësinë.
+  - "Mbylle me një veprim të rënë dakord: çfarë ndryshon, kush e bën, kur kontrollohet."
 ---
 
 Një gabim duhet të na çojë te dy pyetje: çfarë nuk funksionoi në proces, dhe çfarë përgjegjësie kishte personi që e kreu punën?

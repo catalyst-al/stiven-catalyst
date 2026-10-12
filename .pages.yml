@@ -76,6 +76,18 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: problems
+        label: Challenges (English essay only)
+        description: "The situations this essay answers, as listed on the Challenges page. The German and Albanian pages follow the English essay."
+        type: select
+        list: true
+        options:
+          values: [red-number, handover, defects, root-cause, mistake, escalation, training, standards, peak, partners, new-role]
+      - name: firstMove
+        label: Tomorrow on shift (three moves)
+        description: "Three concrete moves for the next shift, shown in a box before the text. One line each."
+        type: string
+        list: true
       - name: body
         label: Essay
         type: rich-text
@@ -149,6 +161,11 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: firstMove
+        label: Tomorrow on shift (three moves)
+        description: "Three concrete moves for the next shift, shown in a box before the text. One line each."
+        type: string
+        list: true
       - name: body
         label: Essay
         type: rich-text
@@ -222,6 +239,11 @@ content:
         label: Photo description (optional)
         description: "What the photo shows, for screen readers, e.g. Stiven listening at a microphone"
         type: string
+      - name: firstMove
+        label: Tomorrow on shift (three moves)
+        description: "Three concrete moves for the next shift, shown in a box before the text. One line each."
+        type: string
+        list: true
       - name: body
         label: Essay
         type: rich-text

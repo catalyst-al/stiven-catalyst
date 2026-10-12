@@ -13,6 +13,30 @@ deck: 'The second essay in the series “The operation that runs without you”:
 relatedTools:
   - /tools/shift-handover/
   - /tools/delay-analyzer/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - handover
+  - peak
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Before the briefing, choose two or three priorities and say each one as something the team can see during the work.
+  - Give every open item and every priority a name before the shift starts.
+  - "After the briefing, ask one person: what are today's two priorities?"
+checklist:
+  title: The ten-minute briefing
+  fill: true
+  note: Five questions, about two minutes each. The order of the conversation, not a form.
+  items:
+    - label: What are we inheriting?
+      hint: "From the handover, not from memory: open items, cases waiting for follow-up."
+    - label: What has changed?
+      hint: "Only what touches this shift: volume, a process, a system, the team."
+    - label: Where is the risk today?
+      hint: A KPI that is slipping and its reason, an open item with a deadline, a technical problem.
+    - label: What are the two or three priorities?
+      hint: Each one as an action the team can see, not as a number.
+    - label: Who holds what?
+      hint: Every priority and every open item with a name.
 ---
 
 “Delay is at 2.8%.”

@@ -7,6 +7,20 @@ featured: true
 summary: Eine Übergabe ist nicht nur eine Weitergabe von Information. Sie ist eine Weitergabe von Verantwortung. Und genau hier machen viele Organisationen Fehler.
 teaser: Ein Problem, das nicht in die Übergabe kommt, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
 deck: 'Der neunte Essay der Reihe „Zehn Jahre nah an der Arbeit“: warum „gemeldet“ und „gelöst“ nicht dasselbe sind, was eine Schichtübergabe enthalten sollte, und die zwei Momente, die sich spiegeln.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Schreiben Sie am Ende der heutigen Schicht die Übergabe nach Kategorien: Zustand, was geschah, erledigt, offen, wer übernimmt."
+  - "Ersetzen Sie jedes „Problem mit dem Zimmer“ durch: welches Problem, in welchem Zustand, was noch zu tun ist."
+  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem ohne Verantwortlichen.
+checklist:
+  title: Bevor Sie übergeben
+  copy: Liste kopieren
+  items:
+    - Der aktuelle Zustand steht da, nicht die Geschichte der Schicht.
+    - Jeder offene Punkt ist als offen markiert, mit seinem Stand.
+    - Jeder offene Punkt hat einen Namen und eine Uhrzeit oder Frist.
+    - „Gemeldet“ und „erledigt“ sind nicht verwechselt.
+    - Die Person nach mir kann danach handeln, ohne mich anzurufen.
 ---
 
 Ein Problem, das nicht in die Übergabe kommt, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.

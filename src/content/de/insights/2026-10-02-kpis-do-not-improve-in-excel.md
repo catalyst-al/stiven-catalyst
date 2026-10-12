@@ -7,6 +7,27 @@ featured: true
 summary: In Excel ist eine unvollständige Bestellung eine Zahl. An der Rampe ist sie ein Gegenstand am falschen Ort.
 teaser: Das Dashboard sagte „incomplete delivery“. Vor Ort musste man fragen, ob der Fehler an der Tür des Kunden passiert war oder schon im Lager.
 deck: 'Der dritte Essay der Reihe „Zehn Jahre nah an der Arbeit“: warum man dorthin gehen muss, wo der Prozess stattfindet, bevor man von einer Tabelle ein Ergebnis verlangt.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie eine rote Zahl aus dem heutigen Bericht und gehen Sie dorthin, wo sie entsteht.
+  - Suchen Sie für einen Fall den letzten Punkt, an dem Tasche, Wagen oder Zeit noch in Ordnung waren.
+  - "Schreiben Sie den Fall in derselben Struktur auf wie den letzten: Vorfall, Ursache, Maßnahme, Nachverfolgung."
+checklist:
+  title: Ein Fall, von der Tabelle zur Rampe
+  fill: true
+  items:
+    - label: Welche Zahl hat mich hierher gebracht?
+      hint: Die Kennzahl und ihr Wert aus dem heutigen Bericht.
+    - label: Wo war zuletzt alles in Ordnung?
+      hint: "Tasche, Wagen, Tour, Scan: der letzte Punkt, der stimmte."
+    - label: Wer hat das Problem bemerkt, und wann?
+      hint: Der Fahrer, der Dispatcher, der Kunde, das Audit.
+    - label: Was hat die Rampe gezeigt, was die Tabelle nicht zeigte?
+      hint: Ein gemischter Wagen, ein falsches Etikett, Wartezeit beim Beladen, ein offenes Tor.
+    - label: Wo im Prozess hat es begonnen?
+      hint: Lager, Beladung, Abfahrt, Straße, Haustür.
+    - label: Was prüfen wir morgen?
+      hint: Eine Prüfung, ein Verantwortlicher, eine Uhrzeit.
 ---
 
 Im Bericht stand etwas sehr Einfaches: Der Kunde hatte seine Bestellung nicht vollständig erhalten. Incomplete. Wenn man es nur über die Kennzahl betrachtet, kommt der erste Gedanke von selbst: Der Fahrer hat bei der Zustellung eine Tasche vergessen.

@@ -26,6 +26,11 @@ checklist:
       hint: Welcher Teil des Fehlers lag in der Hand der Person?
     - label: Die Maßnahme vereinbaren
       hint: Was ändert sich, wer macht es, und wann wird das Ergebnis geprüft?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Klären Sie die Fakten vor dem Gespräch, und führen Sie es unter vier Augen.
+  - Beschreiben Sie, was passiert ist, hören Sie zu, prüfen Sie den Prozess, und sprechen Sie erst dann über Verantwortung.
+  - "Enden Sie mit einer vereinbarten Maßnahme: was sich ändert, wer es tut, wann es geprüft wird."
 ---
 
 Ein Fehler sollte uns zu zwei Fragen führen: Was hat im Prozess nicht funktioniert, und welche Verantwortung hatte die Person, die die Arbeit gemacht hat?

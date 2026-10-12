@@ -7,6 +7,20 @@ featured: true
 summary: Handover-i nuk është thjesht transferim informacioni. Është transferim përgjegjësie. Dhe pikërisht këtu shumë organizata gabojnë.
 teaser: Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.
 deck: 'Eseja e nëntë e serisë “Dhjetë vite pranë punës”: pse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë, çfarë duhet të përmbajë një dorëzim turni, dhe dy momentet që janë pasqyrë e njëri-tjetrit.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Në fund të turnit të sotëm, shkruaje dorëzimin sipas kategorive: gjendja, çfarë ndodhi, e zgjidhur, e hapur, kush e ndjek."
+  - "Zëvendëso çdo “problem me dhomën” me: çfarë lloj problemi, në çfarë gjendjeje, çfarë mbetet për t'u bërë."
+  - Kur e merr turnin, lexo së pari pikat e hapura dhe pyet për atë pa përgjegjës.
+checklist:
+  title: Para se ta dorëzosh turnin
+  copy: Kopjo listën
+  items:
+    - Është shkruar gjendja aktuale, jo historia e turnit.
+    - Çdo pikë e hapur është shënuar si e hapur, me gjendjen ku ndodhet.
+    - Çdo pikë e hapur ka një emër dhe një orë ose afat.
+    - “E raportuar” dhe “e zgjidhur” nuk janë ngatërruar.
+    - Personi pas meje mund të veprojë pa më marrë në telefon.
 ---
 
 Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.

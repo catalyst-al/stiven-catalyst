@@ -7,6 +7,25 @@ featured: true
 summary: Titulli mund të humbasë brenda një dite. Ajo që ke mësuar nuk humbet, por në vendin e ri duhet ta provosh përsëri.
 teaser: Në Shqipëri drejtoja njerëz, dyqane dhe procese. Në Gjermani, puna ime e parë ishte të shpërndaja pako.
 deck: 'Eseja e parë e serisë “Dhjetë vite pranë punës”: çfarë mbetet nga një menaxher kur titulli nuk e kalon kufirin bashkë me të.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Shkruaj tri gjëra që di t'i bësh sot dhe që nuk varen nga asnjë titull.
+  - Pyet një person që e bën punën si funksionon vërtet procesi, dhe dëgjo para se ta krahasosh me atë që dije.
+  - Përmende atë që ke qenë vetëm kur i ndihmon punës që ke përpara.
+checklist:
+  title: Çfarë merr me vete
+  fill: true
+  items:
+    - label: Çfarë di të bëj pa titull
+      hint: Disiplina, klienti, leximi i një procesi, puna nën presion, marrja e përgjegjësisë.
+    - label: Çfarë duhet të mësoj këtu nga brenda
+      hint: Sistemi, gjuha, rregullat e këtij vendi.
+    - label: Pritshmëria që e lë te dera
+      hint: “Kam qenë menaxher, pra duhet të jem menaxher.”
+    - label: Ku e tregoj së pari
+      hint: Një detyrë, një turn, një problem që askush nuk e ka marrë përsipër.
+    - label: Puna që nuk do ta quaj poshtë meje
+      hint: Ajo që ma mëson procesin nga ana tjetër.
 ---
 
 Në Shqipëri, roli im i fundit ishte Cluster Manager. Drejtoja operativisht një flagship store në Tiranë dhe koordinoja pjesë të rrjetit të dyqaneve. Në Gjermani, puna ime e parë ishte të shpërndaja pako.

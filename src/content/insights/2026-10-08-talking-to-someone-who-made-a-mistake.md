@@ -26,6 +26,14 @@ checklist:
       hint: Which part of the mistake was within the person's control?
     - label: Agree the action
       hint: What changes, who does it and when is the result checked?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - mistake
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Understand the facts before the conversation, and have it in private.
+  - Describe what happened, listen, check the process, and only then talk about responsibility.
+  - "End with one agreed action: what changes, who does it, when it is checked."
 ---
 
 A mistake should lead us to two questions: what did not work in the process, and what responsibility did the person who did the work have?

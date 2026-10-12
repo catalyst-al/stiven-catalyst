@@ -28,6 +28,15 @@ checklist:
       hint: A problem with no owner is not open. It is forgotten.
     - label: What action is needed now, and who confirms it?
       hint: Short, clear, with the action that is needed.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - partners
+  - defects
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - For the next reported problem, separate what you know for sure from what you were told.
+  - Check how old the information is before you act on it.
+  - Give every open case a name and a confirmation, not only an instruction.
 ---
 
 On the ramp you can see a problem with your own eyes.

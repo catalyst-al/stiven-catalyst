@@ -19,6 +19,11 @@ checklist:
     - Welche Information muss mitgehen?
     - Wie wird bestätigt, dass die Übergabe richtig erfolgt ist?
     - Wer übernimmt die Verantwortung, wenn ein Problem entdeckt wird?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Suchen Sie bei einem Fehler dieser Woche den Punkt, an dem die Arbeit den Besitzer gewechselt hat.
+  - Ersetzen Sie „ich habe sie informiert“ durch einen Status, einen Namen und eine Bestätigung.
+  - Vereinbaren Sie mit der nächsten Abteilung, was fertig sein muss, bevor eine Übergabe als erledigt gilt.
 ---
 
 Eine Abteilung kann ihre eigene Arbeit sehr gut machen, und der Betrieb kann trotzdem scheitern.

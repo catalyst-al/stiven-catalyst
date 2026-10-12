@@ -7,6 +7,20 @@ featured: true
 summary: Der Fahrer sieht das Problem, der Dispatcher sieht seine Wirkung auf die Schicht, die Führungskraft muss verstehen, warum es existiert.
 teaser: Die Ladezeit lag bei 24 Minuten, das Ziel bei 20. Es wäre leicht gewesen zu sagen, die Fahrer laden zu langsam.
 deck: 'Der zweite Essay der Reihe „Zehn Jahre nah an der Arbeit“: Ladezeit, Verspätungen, unvollständige Lieferungen, Schäden und warum eine Kennzahl allein nicht sagt, was passiert ist.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Lesen Sie Ladezeit, Verspätungen, Incomplete und Schäden von heute zusammen, nicht nacheinander.
+  - Nehmen Sie die Zahl, die am meisten täuscht, und verfolgen Sie einen ihrer Fälle bis vor die Abfahrt zurück.
+  - "Machen Sie aus dem Druck fünf Fragen an das Team: wo, wie viele, welcher Grund, was jetzt, was morgen."
+checklist:
+  title: Die KPI-Runde, die mehr ist als Berichten
+  copy: Liste kopieren
+  items:
+    - "Die vier Zahlen wurden zusammen gelesen: Ladezeit, Verspätungen, Incomplete, Schäden."
+    - Für jede rote Zahl wissen wir, aus welchen Touren oder Stufen sie kam.
+    - Der Grund, der sich wiederholt, wurde benannt, nicht nur gezählt.
+    - Es ist klar, welcher Teil des Problems in unserer Hand liegt.
+    - Eine Maßnahme ist herausgekommen, mit einem Verantwortlichen und einer Prüfung morgen.
 ---
 
 Ich habe die Last Mile von drei Stellen aus gesehen. Als Paketzusteller, als Dispatcher mit mehr als 70 Fahrern in einer Schicht und dann als Team Leader und Area Manager, mit vier Shift Leaders, acht Dispatchern und rund 250 Fahrern in meiner indirekten Verantwortung. Derselbe Betrieb sieht von jeder dieser Stellen völlig anders aus.

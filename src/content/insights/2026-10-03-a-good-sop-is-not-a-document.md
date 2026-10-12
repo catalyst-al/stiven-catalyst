@@ -11,6 +11,25 @@ deck: 'The eighth essay in the series “Ten years close to the work”: how to 
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - standards
+  - training
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Take one SOP and ask a colleague to use it during the shift, without you explaining anything.
+  - Watch where they search for information, and move it to where they expected it.
+  - Find one step that reality has changed, and correct the version the team uses.
+checklist:
+  title: Read, or used?
+  copy: Copy the checklist
+  items:
+    - It starts from the result the process has to deliver, not from the structure of the department.
+    - "It answers quickly: where am I, what do I check now, how do I know I can carry on."
+    - Everything the person does not need at that moment has been removed.
+    - The order says what must have been checked before the next step.
+    - Someone other than the author got the same result under pressure.
+    - A named person updates it when the process changes.
 ---
 
 An SOP that is only read can look very professional. It can have nice pages, a lot of text and every possible detail. But when the pressure of the shift begins, nobody has time to read a manual.

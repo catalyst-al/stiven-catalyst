@@ -23,6 +23,14 @@ checklist:
     - The loads are sorted, with no mixed orders.
     - The loading gates are closed.
     - Open problems have been handed over to the next shift.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Walk one area at the end of the shift: equipment in its place, loads sorted, gates closed."
+  - Name who checks that area, and make the standard visible there, not on a poster somewhere else.
+  - Hand over the open problems of that area to the next shift, by name.
 ---
 
 A poster with six principles can hang on any wall. But the ramp does not read the poster.

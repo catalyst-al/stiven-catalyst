@@ -1,0 +1,92 @@
+{#- The essays by challenge (src/_data/challenges.json), shared by the three languages: the situation a shift lead
+    or a manager walks in with, and under it the essays that answer it (each with three moves and a checklist),
+    the tools and the field notes drawn from those essays. An essay names its challenges in "problems" on the
+    English file; the other languages follow it (collections.challengeMap). -#}
+{% include "partials/writing-tabs.njk" %}
+{%- set essays = collections["insights" + (lang | langSuffix)] | published %}
+{%- set notes = collections["notes" + (lang | langSuffix)] %}
+{%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+{%- set notesPage = "/field-notes.html" | local(lang) %}
+{%- set code = lang or "en" %}
+<section class="shell page-hero writing-hero">
+  <p class="eyebrow">{{ "By the problem, not the title" | t(lang) }}</p>
+  <h1>{{ "What is on your plate today?" | t(lang) }}</h1>
+  <p class="lede">{{ "Eleven situations a shift lead or a manager walks in with. Under each one: the essays, their checklists, the tools and the field notes that go with it." | t(lang) }}</p>
+</section>
+
+<nav class="shell challenge-index" aria-label="{{ 'Challenges' | t(lang) }}">
+  {%- for item in challenges %}
+  {%- set count = (essays | withChallenge(item.id, collections.challengeMap)).length %}
+  {%- if count %}
+  <a href="#{{ item.id }}"><b>{{ loop.index | pad }}</b> {{ item.name[code] }} <small>{{ count }}</small></a>
+  {%- endif %}
+  {%- endfor %}
+</nav>
+
+{%- for item in challenges %}
+{%- set found = essays | withChallenge(item.id, collections.challengeMap) %}
+{%- if found.length %}
+<section class="shell challenge" id="{{ item.id }}" aria-labelledby="challenge-{{ item.id }}">
+  <header class="challenge-head">
+    <p class="kicker">{{ loop.index | pad }} · {{ "Challenge" | t(lang) }}</p>
+    <h2 id="challenge-{{ item.id }}">{{ item.name[code] }}</h2>
+    <p class="challenge-line">{{ item.line[code] }}</p>
+  </header>
+  <div class="challenge-body">
+    <div class="challenge-essays">
+      <p class="kicker">{{ "Essays" | t(lang) }}</p>
+      <ul>
+        {%- for essay in found %}
+        {%- set essayTools = collections.writingLinks.essayTools[essay.data.original or essay.fileSlug] or [] %}
+        <li>
+          <a href="{{ essay.url }}">
+            <small>{{ (essaySeries | seriesById(essay.data.series)).name[code] }} · {{ essay.data.number }}{% if essay.data.readingTime %} · {{ essay.data.readingTime }}{% endif %}</small>
+            <strong>{{ essay.data.title }}</strong>
+            <span>{{ essay.data.teaser or essay.data.summary }}</span>
+            <span class="row-badges">
+              <span class="row-badge">{{ "3 moves" | t(lang) }}</span>
+              {%- if essay.data.checklist and essay.data.checklist.items %}<span class="row-badge">{{ "Checklist" | t(lang) }}: {{ essay.data.checklist.title }}</span>{% endif %}
+            </span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+    <div class="challenge-side">
+      {%- set sideTools = [] %}
+      {%- for url in item.tools %}{% set tool = toolList | toolAt(url, lang) %}{% if tool %}{% set sideTools = (sideTools.push(tool), sideTools) %}{% endif %}{% endfor %}
+      {%- if sideTools.length %}
+      <div class="essay-tools is-challenge">
+        <p class="kicker">{{ "Put it to work" | t(lang) }}</p>
+        <ul>
+          {%- for tool in sideTools %}
+          <li><a href="{{ tool.url }}"><small>{{ tool.type }} · {{ tool.time }}</small><strong>{{ tool.name }}</strong><span>{{ tool.summary }}</span><em aria-hidden="true">→</em></a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+      {#- Two field notes from the essays of this challenge, the first of each essay in turn. -#}
+      {%- set noteSlugs = [] %}
+      {%- for essay in found %}{% set fromEssay = collections.writingLinks.essayNotes[essay.data.original or essay.fileSlug] or [] %}{% if fromEssay.length and noteSlugs.length < 3 %}{% set noteSlugs = (noteSlugs.push(fromEssay[0]), noteSlugs) %}{% endif %}{% endfor %}
+      {%- set sideNotes = notes | bySlugs(noteSlugs) %}
+      {%- if sideNotes.length %}
+      <div class="essay-notes is-challenge">
+        <p class="kicker">{{ "From the field notes" | t(lang) }}</p>
+        <ul>
+          {%- for note in sideNotes %}
+          <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">“{{ note.data.quote }}”</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+{%- endfor %}
+
+<section class="shell challenge-foot">
+  <p>{{ "Something else on your plate?" | t(lang) }} <a href="{{ '/search.html' | local(lang) }}">{{ "Search the essays, notes and tools" | t(lang) }}</a> · <a href="{{ '/tools.html' | local(lang) }}">{{ "All tools" | t(lang) }}</a> · <a href="{{ '/contact.html' | local(lang) }}">{{ "Write to me" | t(lang) }}</a></p>
+</section>
+
+{% include "partials/newsletter.njk" %}

@@ -8,6 +8,26 @@ summary: Fünf Prinzipien, eine Arbeitswoche und die ersten 90 Tage. Nicht der M
 description: "Fünf Prinzipien, eine Arbeitswoche und die ersten 90 Tage: einen Betrieb aufbauen, der immer seltener gerettet werden muss."
 teaser: Wenn ein Team nur funktioniert, wenn der Manager im Raum ist, hat dieser Manager noch kein System aufgebaut.
 deck: 'Der zwölfte und letzte Essay der Reihe „Zehn Jahre nah an der Arbeit“: Menschen, Standards, Daten, Ownership und kontinuierliche Verbesserung, dazu ein Plan für die ersten 90 Tage in einer neuen Rolle.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Beginnen Sie morgen mit vier Fragen: Was ist abgewichen, was ist noch offen, wo liegt das Risiko, wo werde ich gebraucht."
+  - Verbringen Sie dreißig Minuten vor Ort und bringen Sie ein Problem mit, das der Bericht nicht zeigt.
+  - Geben Sie heute einem Problem einen Verantwortlichen, das bisher keinen hatte.
+checklist:
+  title: Die Wochenrunde
+  fill: true
+  note: Die Fragen meiner idealen Woche. Kein Meeting, von dem ich ein Protokoll habe.
+  items:
+    - label: Was wird besser?
+      hint: Und wissen wir, warum.
+    - label: Was wird schlechter?
+      hint: Seit wann, und wo.
+    - label: Welche Probleme wiederholen sich?
+      hint: Vorfälle, die zum Muster geworden sind.
+    - label: Welche Maßnahmen sind noch offen, und wem gehören sie?
+      hint: Ein Name pro Maßnahme.
+    - label: Wo habe ich einen Standard verlangt, den ich selbst nicht halten würde?
+      hint: Den merkt das Team als Erstes.
 ---
 
 Nach Jahren im Einzelhandel, im Verkauf, in der Logistik und in der Hotellerie habe ich verstanden, dass sich Branchen viel schneller ändern als die Prinzipien des Managements.

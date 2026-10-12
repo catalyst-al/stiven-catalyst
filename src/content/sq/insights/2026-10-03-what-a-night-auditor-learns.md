@@ -7,6 +7,25 @@ featured: true
 summary: Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët që aktiviteti ka lënë pas.
 teaser: Shumë gabime nuk lindin nga mungesa e aftësisë. Lindin nga fjalia “Do ta bëjmë më vonë”. Shpesh, “më vonë” është turni i natës.
 deck: 'Eseja e shtatë e serisë “Dhjetë vite pranë punës”: çfarë del në pah kur hoteli fle, pse mbyllja e ditës është disiplinë procesi, dhe pesë gjëra që menaxheri i ditës duhet t''i shohë në raportin e natës.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Lexoje raportin e natës për atë që është ende e hapur, jo si provë që nata kaloi.
+  - Merr një ndryshim mes sistemit dhe realitetit dhe pyet në cilën pikë të ditës filloi.
+  - Shëno problemet që janë shfaqur më shumë se një herë këtë javë. Ato janë proces, jo rastësi.
+checklist:
+  title: Raporti i natës në pesë rreshta
+  fill: true
+  items:
+    - label: Çfarë mbeti e pazgjidhur?
+      hint: Jo çfarë ndodhi, por çfarë kërkon ende veprim, me një emër.
+    - label: Ku ndryshuan sistemi dhe realiteti?
+      hint: Rezervimet, statuset, dokumentacioni, paratë.
+    - label: Cili problem përsëritet?
+      hint: Një herë është rastësi. Disa herë është proces.
+    - label: Çfarë preku mysafirin ose operacionin?
+      hint: Ku një problem i brendshëm filloi të bëhej problem i klientit.
+    - label: Çfarë duhet të dijë turni tjetër para se të fillojë puna?
+      hint: Rreshti që e bën më të sigurt ditën që po fillon.
 ---
 
 Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët që aktiviteti ka lënë pas.

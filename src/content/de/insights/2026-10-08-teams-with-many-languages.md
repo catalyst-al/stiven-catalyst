@@ -24,6 +24,11 @@ checklist:
       hint: Woran erkennt der Mitarbeiter, dass er es richtig gemacht hat?
     - label: Die Ausnahme
       hint: Was ist zu tun, wenn etwas nicht funktioniert?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie eine Anweisung, die immer wieder missverstanden wird, und schreiben Sie sie neu als Handlung, Ort und Zeitpunkt, Prüfung, Ausnahme.
+  - Fügen Sie ein Foto oder einen Screenshot des richtig ausgeführten Schritts hinzu.
+  - "Statt „haben Sie verstanden?“ sagen Sie: „Zeigen Sie mir, wie Sie es machen würden.“"
 ---
 
 Ein Team kann aus Menschen bestehen, die verschiedene Sprachen sprechen. Aber der Arbeitsstandard muss für alle dasselbe bedeuten.

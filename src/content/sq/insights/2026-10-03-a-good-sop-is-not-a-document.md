@@ -8,6 +8,21 @@ summary: Testi i një SOP-je nuk është nëse autori e kupton. Autori gjithmon�
 description: "Testi i një SOP-je nuk është nëse autori e kupton. Është nëse një person tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat."
 teaser: Njeriu që punon nuk duhet të kërkojë informacionin. Informacioni duhet të jetë aty ku ai e pret.
 deck: 'Eseja e tetë e serisë “Dhjetë vite pranë punës”: si shkruhet një procedurë për momentin kur përdoret, jo për dosjen, dhe si mbahet e gjallë kur procesi ndryshon.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një SOP dhe kërkoji një kolegu ta përdorë gjatë turnit, pa i shpjeguar asgjë.
+  - Shiko ku e kërkon informacionin, dhe vendose aty ku e priste.
+  - Gjej një hap që realiteti e ka ndryshuar, dhe korrigjo versionin që përdor ekipi.
+checklist:
+  title: E lexuar, apo e përdorur?
+  copy: Kopjo listën
+  items:
+    - Fillon nga rezultati që duhet të japë procesi, jo nga struktura e departamentit.
+    - "Përgjigjet shpejt: ku jam, çfarë kontrolloj tani, si e di që mund të vazhdoj."
+    - Gjithçka që personi nuk e ka të nevojshme në atë moment është hequr.
+    - Radha thotë çfarë duhet të jetë kontrolluar para hapit tjetër.
+    - Dikush tjetër përveç autorit mori të njëjtin rezultat nën presion.
+    - Një person me emër e përditëson kur ndryshon procesi.
 ---
 
 Një SOP që vetëm lexohet mund të jetë shumë profesionale në pamje. Mund të ketë faqe të bukura, shumë tekst dhe çdo detaj të mundshëm. Por kur fillon presioni i turnit, askush nuk ka kohë të lexojë një manual.

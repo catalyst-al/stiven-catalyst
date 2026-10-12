@@ -7,6 +7,27 @@ featured: true
 summary: Në Excel, një porosi e paplotë është një numër. Në rampë është një objekt fizik që është në vendin e gabuar.
 teaser: Dashboard-i thoshte “incomplete delivery”. Terreni të detyronte të pyesje nëse gabimi ishte në derën e klientit apo që në magazinë.
 deck: 'Eseja e tretë e serisë “Dhjetë vite pranë punës”: pse duhet të shkosh aty ku ndodh procesi, para se të kërkosh rezultat nga një tabelë.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Merr një numër të kuq nga raporti i sotëm dhe shko aty ku prodhohet.
+  - Për një rast, gjej pikën e fundit ku çanta, karroca ose koha ishin ende në rregull.
+  - "Shkruaje rastin në të njëjtën strukturë si të fundit: ngjarja, shkaku, veprimi, ndjekja."
+checklist:
+  title: Një rast, nga tabela te rampa
+  fill: true
+  items:
+    - label: Cili numër më solli këtu?
+      hint: KPI-ja dhe vlera e saj, nga raporti i sotëm.
+    - label: Ku ishte gjithçka në rregull për herë të fundit?
+      hint: "Çanta, karroca, rruga, skanimi: pika e fundit që ishte në rregull."
+    - label: Kush e vuri re problemin, dhe kur?
+      hint: Shoferi, dispeçeri, klienti, auditi.
+    - label: Çfarë tregoi rampa që tabela nuk e tregoi?
+      hint: Një karrocë e përzier, një etiketë e gabuar, pritje në ngarkim, një portë e hapur.
+    - label: Ku në proces filloi?
+      hint: Magazina, ngarkimi, nisja, rruga, dera.
+    - label: Çfarë kontrollojmë nesër?
+      hint: Një kontroll, një përgjegjës, një orë.
 ---
 
 Në raport shfaqej diçka shumë e thjeshtë: klienti nuk kishte marrë porosinë e plotë. Incomplete. Nëse e shikon vetëm nga KPI-ja, mendimi i parë vjen vetë: shoferi ka harruar një bag gjatë dorëzimit.

@@ -7,6 +7,20 @@ featured: true
 summary: Pareto nuk të jep të vërtetën nëse të dhënat nuk e përshkruajnë të vërtetën. Dhe 5 Why nuk është pesë herë “pse” për të plotësuar një formular.
 teaser: Një raport vonesash me 19 raste. Asnjë grafik i bukur, por shumë shkaqe që kishin filluar para se shoferi të largohej nga rampa.
 deck: 'Eseja e katërt e serisë “Dhjetë vite pranë punës”: si i përdorja Pareto-n dhe 5 Why në last mile, dhe pse nuk e mbush një analizë vetëm që të duket e plotë.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Hap rastet e djeshme të vonesave ose dëmtimeve dhe kontrollo kategorinë e secilit para se t'i numërosh.
+  - Merr një rast dhe pyet “pse” vetëm aq herë sa mund të përgjigjesh nga terreni.
+  - Shkruaje kundërmasën me një përgjegjës, dhe shëno ku ndaloi zinxhiri i pse-ve.
+checklist:
+  title: Para se t'i besosh grafikut
+  copy: Kopjo listën
+  items:
+    - Çdo rast është kategorizuar sipas vendit ku filloi, jo ku u mat.
+    - Çdo “vonesë e shoferit” është krahasuar me atë që ndodhi në rampë para nisjes.
+    - Zinxhiri i pse-ve ndalon te një proces, jo te një emër.
+    - Janë shkruar vetëm pse-të që u pyetën vërtet.
+    - Kundërmasa ka një përgjegjës dhe një datë kur kontrollohet.
 ---
 
 Në last mile, Pareto dhe 5 Why nuk ishin prezantime. Ishin pjesë e analizës së përditshme të KPI-ve, sidomos për vonesat, dëmet, porositë e paplota dhe kohën e ngarkimit. Por pikërisht për këtë arsye dua t'i përshkruaj ashtu siç i kam përdorur, jo ashtu siç duken në një slide.

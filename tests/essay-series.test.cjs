@@ -114,7 +114,8 @@ test('an essay can end with a checklist the reader ticks off and copies', { skip
   assert.equal((html.match(/data-checklist-item/g) || []).length, 5);
   assert.match(html, /data-checklist-count[^>]*>0\/5</);
   assert.match(html, />Kopjo 5 pyetjet</);
-  assert.doesNotMatch(built('sq/insights/the-first-30-days/index.html'), /data-essay-checklist/);
+  // Every essay ends with one now; this one got a card to fill in (tests/challenges.test.cjs checks them all).
+  assert.match(built('sq/insights/the-first-30-days/index.html'), /data-essay-checklist/);
 });
 
 test('a checklist can be a card to fill in', { skip: !fs.existsSync('_site/sq/insights/kpis-the-team-trusts/index.html') }, () => {

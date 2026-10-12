@@ -10,6 +10,29 @@ deck: 'The seventh essay in the series “Ten years close to the work”: what c
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - handover
+  - escalation
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Read tonight's night report for what is still open, not as proof that the night went by.
+  - Take one difference between the system and reality and ask at which point of the day it started.
+  - Mark the problems that have appeared more than once this week. Those are a process, not chance.
+checklist:
+  title: The night report in five lines
+  fill: true
+  items:
+    - label: What was left unresolved?
+      hint: Not what happened, but what still needs action, with a name.
+    - label: Where did the system and reality differ?
+      hint: Reservations, statuses, documentation, money.
+    - label: Which problem keeps repeating?
+      hint: Once is chance. Several times is a process.
+    - label: What affected the guest or the operation?
+      hint: Where an internal problem started to become a customer problem.
+    - label: What does the next shift need to know before the work starts?
+      hint: The line that makes the day that is starting safer.
 ---
 
 During the day, management sees the activity. At night, you see the traces the activity has left behind.

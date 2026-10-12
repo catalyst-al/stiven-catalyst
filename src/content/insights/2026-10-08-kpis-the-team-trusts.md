@@ -21,6 +21,14 @@ checklist:
     - What is the standard?
     - What context has to be checked?
     - What do we do when it deviates?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - red-number
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Take one KPI and write its definition in words the whole team would use.
+  - For one red result, separate what the person controlled from what sat in the process.
+  - Read it next to its neighbour indicator before you react to it.
 ---
 
 A KPI can be mathematically correct and its interpretation still be unfair.

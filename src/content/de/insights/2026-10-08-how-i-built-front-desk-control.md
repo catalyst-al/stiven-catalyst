@@ -24,6 +24,11 @@ checklist:
       hint: Was ist bestätigt, und was muss anonymisiert werden?
     - label: In der Praxis testen
       hint: Versteht es jemand anderes ohne Ihre Erklärung?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Wählen Sie einen Ablauf und zählen Sie, wie viele Stellen jemand öffnen muss, um ihn auszuführen.
+  - Legen Sie diesen Ablauf dorthin, wo man ihn nach dem findet, was er tut, nicht nach dem Namen des Dokuments.
+  - Bitten Sie einen Kollegen, ihm ohne Ihre Erklärung zu folgen, und notieren Sie, wo er stehen blieb.
 ---
 
 Ich habe Front Desk Control nicht gebaut, weil Dokumente fehlten.

@@ -7,6 +7,20 @@ featured: true
 summary: Pareto liefert nicht die Wahrheit, wenn die Daten die Wahrheit nicht beschreiben. Und 5 Why heißt nicht, fünfmal „warum“ zu fragen, um ein Formular auszufüllen.
 teaser: Ein Verspätungsbericht mit 19 Fällen. Kein schönes Diagramm, aber viele Ursachen, die begonnen hatten, bevor der Fahrer die Rampe verließ.
 deck: 'Der vierte Essay der Reihe „Zehn Jahre nah an der Arbeit“: wie ich Pareto und 5 Why in der Last Mile genutzt habe und warum ich eine Analyse nicht auffülle, nur damit sie vollständig aussieht.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Öffnen Sie die Verspätungs- oder Schadensfälle von gestern und prüfen Sie die Kategorie jedes Falls, bevor Sie zählen.
+  - Nehmen Sie einen Fall und fragen Sie nur so oft „warum“, wie Sie es von der Rampe aus beantworten können.
+  - Schreiben Sie die Gegenmaßnahme mit einem Verantwortlichen auf, und notieren Sie, wo die Kette der Warums endete.
+checklist:
+  title: Bevor Sie dem Diagramm trauen
+  copy: Liste kopieren
+  items:
+    - Jeder Fall ist danach eingeordnet, wo er begann, nicht danach, wo er gemessen wurde.
+    - Jede „Fahrerverspätung“ wurde mit dem verglichen, was vor der Abfahrt an der Rampe geschah.
+    - Die Kette der Warums endet bei einem Prozess, nicht bei einem Namen.
+    - Nur die Warums, die wirklich gefragt wurden, stehen auf dem Papier.
+    - Die Gegenmaßnahme hat einen Verantwortlichen und ein Datum, an dem sie geprüft wird.
 ---
 
 In der Last Mile waren Pareto und 5 Why keine Präsentationen. Sie waren Teil der täglichen Analyse der Kennzahlen, vor allem bei Verspätungen, Schäden, unvollständigen Bestellungen und Ladezeit. Aber gerade deshalb möchte ich sie so beschreiben, wie ich sie genutzt habe, nicht so, wie sie auf einer Folie aussehen.

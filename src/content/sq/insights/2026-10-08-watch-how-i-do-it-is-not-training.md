@@ -9,6 +9,22 @@ summary: Nëse standardi i trajnimit është “shiko si e bëj unë”, atëher
 description: "Si duket një trajnim që i jep të njëjtin rezultat çdokujt: tri netët e mia të trajnimit si Night Auditor, dallimi mes informacionit dhe sistemit të trajnimit, testi me tri pyetje dhe plani i javës së parë për një punonjës të ri."
 teaser: Trajnimi nuk matet nga sa mirë e shpjegoi trainer-i. Matet nga sa i njëjtë dhe i sigurt bëhet rezultati kur trainer-i largohet.
 deck: 'Eseja e tretë e serisë “Operacioni që punon pa ty”: tri net trajnimi në një hotel të ri, pse “po, e kuptova” nuk është provë, çfarë duhet të dijë një person i ri në orën e parë, dhe plani i javës së parë.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - "Në orën e parë të një kolegu të ri, thuaji pesë gjëra: roli, rezultati që pritet, rregullat që nuk diskutohen, kë të pyesë, çfarë të mos vendosë vetëm."
+  - "Zëvendëso “shiko si e bëj unë” me: shiko, bëje me mua, bëje ti ndërsa shikoj unë, bëje vetëm, ma shpjego."
+  - "Testo një koleg që tha “e kuptova”: bëje vetë, më thuaj pse, më trego çfarë bën kur del një përjashtim."
+checklist:
+  title: Java e parë e një punonjësi të ri
+  copy: Kopjo listën
+  note: Ditët mund të jenë turne, dhe ritmi më i ngadaltë për punë më komplekse. Radha është ajo që ka rëndësi.
+  items:
+    - "Dita 1: e thotë me fjalët e veta çfarë pritet prej tij dhe çfarë nuk duhet të vendosë vetëm."
+    - "Dita 2: e shkruan radhën e hapave pa ndihmë."
+    - "Dita 3: e kreu procesin nën mbikëqyrje, dhe të dy shënuam ku pati pasiguri."
+    - "Dita 4: trajtoi një përjashtim dhe e di kur do të duhej ta çonte më lart."
+    - "Dita 5: punoi vetëm dhe e shpjegoi procesin mbrapsht, nga rezultati te hapi i parë."
+    - "Testi: bëje vetë, më thuaj pse, më trego çfarë bën kur del një përjashtim."
 ---
 
 “Rri me të sot dhe shiko si e bën.”

@@ -19,6 +19,16 @@ checklist:
     - What information has to travel with it?
     - How is it confirmed that the handover was done correctly?
     - Who takes responsibility if a problem is found?
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - handover
+  - partners
+  - mistake
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - For one mistake this week, find the point where the work changed hands.
+  - Replace “I informed them” with a status, a name and a confirmation.
+  - Agree with the next department what has to be finished before a handover counts as done.
 ---
 
 A department can do its own work very well, and the operation can still fail.

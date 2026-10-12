@@ -22,6 +22,11 @@ checklist:
     - Trolley është kontrolluar që të mos ketë ngarkesa të përziera.
     - Nëse mungon një bag, procesi ndalet për atë problem dhe njoftohet Team Leader-i.
     - Çdo mungesë e zbuluar para nisjes regjistrohet me shkakun, kur dihet.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Para nisjes, kontrollo që numri i çantave përputhet dhe që asnjë karrocë nuk është e përzier.
+  - Kur mungon një çantë, ndale atë karrocë dhe njofto Team Leader-in. Mos e lër të niset sikur gjithçka të ishte në rregull.
+  - Regjistro çdo mungesë të gjetur në rampë me shkakun e saj. Aty fillon Incomplete.
 ---
 
 Kur mungonte një bag, rregulli ishte i qartë.

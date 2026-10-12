@@ -9,6 +9,28 @@ summary: Në 30 ditët e para, një menaxher i ri nuk ka nevojë për 30 zgjidhj
 description: "Si e lexoj një operacion që nuk e njoh: netët e para si Night Auditor në një hotel të ri, pse prita me qëllim dhe 30 pyetje për 30 ditët e para."
 teaser: Problemi nuk ishte mungesa e informacionit. Problemi ishte se informacioni nuk të tregonte shpejt ku je, çfarë duhet të kontrollosh tani dhe çfarë vjen më pas.
 deck: 'Eseja e parë e serisë “Operacioni që punon pa ty”: netët e para në një hotel të ri, çfarë pashë, pse nuk ndryshova asgjë menjëherë, dhe një listë pyetjesh për këdo që fillon në një vend të ri.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Ndiqe procesin edhe një turn pikërisht siç është përcaktuar, dhe shëno ku t'u desh ta ndryshoje.
+  - Pyet personin që e bën punën çdo ditë se çfarë e lodh më shumë.
+  - Shkruaj një gjë që vetëm njerëzit me përvojë e dinë përmendsh.
+checklist:
+  title: Harta pas 30 ditësh
+  fill: true
+  note: Çfarë do të doja të kisha të shkruar deri në ditën e 30-të. Jo një listë ndryshimesh.
+  items:
+    - label: Proceset kryesore
+      hint: Dhe rezultati që duhet të japë secili.
+    - label: Njerëzit kyç
+      hint: Kush e bën punën, dhe kë pyesin të tjerët kur nuk dinë.
+    - label: Numrat
+      hint: Cilat KPI ndiqen, kush i lexon, dhe çfarë nuk tregojnë.
+    - label: Standardi dhe realiteti
+      hint: Ku ndryshojnë SOP-ja dhe puna reale, dhe pse.
+    - label: Problemet që kthehen vazhdimisht
+      hint: Të konsideruara tashmë “normale” nga ekipi.
+    - label: Kufijtë
+      hint: Çfarë mund të vendos vetë, dhe çfarë duhet eskaluar, te kush.
 ---
 
 Natën e parë në hotelin e ri nuk punova dot si Night Auditor.

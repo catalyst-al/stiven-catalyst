@@ -46,7 +46,7 @@ test('each language has an index of its essays, reflections, notes, tools and pa
     assert.equal(kinds.essay, count(`${content}/insights`), `${lang}: essays`);
     assert.equal(kinds.reflection, count(`${content}/reflections`), `${lang}: reflections`);
     assert.equal(kinds.note, count(`${content}/notes`), `${lang}: notes`);
-    assert.ok(kinds.tool >= 10 && kinds.page === 5, `${lang}: tools and pages`);
+    assert.ok(kinds.tool >= 10 && kinds.page === 6, `${lang}: tools and pages`);
     assert.ok(index.filter((item) => item.k === 'essay').every((item) => item.b.length > 1500), `${lang}: essay text`);
   }
 });

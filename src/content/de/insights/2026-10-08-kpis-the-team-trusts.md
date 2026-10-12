@@ -21,6 +21,11 @@ checklist:
     - Was ist der Standard?
     - Welcher Kontext muss geprüft werden?
     - Was tun wir, wenn sie abweicht?
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Nehmen Sie eine Kennzahl und schreiben Sie ihre Definition in Worten, die das ganze Team benutzen würde.
+  - Trennen Sie bei einem roten Ergebnis, was die Person in der Hand hatte, von dem, was im Prozess lag.
+  - Lesen Sie sie neben ihrer Nachbarkennzahl, bevor Sie darauf reagieren.
 ---
 
 Eine Kennzahl kann mathematisch richtig sein und trotzdem unfair gelesen werden.

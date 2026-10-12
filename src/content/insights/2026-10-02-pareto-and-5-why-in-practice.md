@@ -11,6 +11,24 @@ deck: 'The fourth essay in the series “Ten years close to the work”: how I u
 relatedTools:
   - /tools/pareto/
   - /tools/five-whys/
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - root-cause
+  - red-number
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Open yesterday's delay or damage cases and check the category of each one before you count them.
+  - Take one case and ask “why” only as many times as you can answer from the floor.
+  - Write down the countermeasure with an owner, and note where the chain of whys stopped.
+checklist:
+  title: Before you trust the chart
+  copy: Copy the checklist
+  items:
+    - Every case is categorised by where it started, not by where it was measured.
+    - Every “driver delay” has been checked against what happened on the ramp before departure.
+    - The chain of whys stops at a process, not at a name.
+    - Only the whys that were really asked are written down.
+    - The countermeasure has an owner and a date on which it is checked.
 ---
 
 In last mile, Pareto and 5 Why were not presentations. They were part of the daily analysis of the KPIs, especially for delays, damage, incomplete orders and loading time. But precisely for that reason I want to describe them the way I used them, not the way they look on a slide.

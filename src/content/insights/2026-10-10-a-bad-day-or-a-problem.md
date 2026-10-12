@@ -26,6 +26,14 @@ checklist:
       hint: One unusual day, or several days in a row going the same way?
     - label: Have we found a concrete cause?
       hint: Before we change the process, not after.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - red-number
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Before you change a rule, put today's number next to the last ten days.
+  - Check first whether there is an immediate safety or service problem. If there is, act now.
+  - Name a concrete cause before you touch the process.
 ---
 
 2.8%.

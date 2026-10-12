@@ -23,6 +23,15 @@ checklist:
     - The trolley has been checked for mixed loads.
     - If a bag is missing, the process stops for that problem and the Team Leader is told.
     - Every shortage found before departure is recorded with its cause, when it is known.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - defects
+  - root-cause
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Before departure, check that the number of bags matches and that no trolley is mixed.
+  - When a bag is missing, stop that trolley and tell the Team Leader. Do not let it leave as if everything were fine.
+  - Record every shortage found at the ramp with its cause. That is where Incomplete starts.
 ---
 
 When a bag was missing, the rule was clear.

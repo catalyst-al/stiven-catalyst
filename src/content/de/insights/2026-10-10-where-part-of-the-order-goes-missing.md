@@ -22,6 +22,11 @@ checklist:
     - Der Trolley ist auf vermischte Ladungen geprüft.
     - Fehlt eine Tasche, stoppt der Prozess für dieses Problem, und der Team Leader wird informiert.
     - Jeder Fehlbestand, der vor der Abfahrt entdeckt wird, wird mit seiner Ursache erfasst, wenn sie bekannt ist.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Prüfen Sie vor der Abfahrt, dass die Zahl der Taschen stimmt und kein Wagen gemischt ist.
+  - Wenn eine Tasche fehlt, halten Sie diesen Wagen an und informieren Sie den Team Leader. Lassen Sie ihn nicht losfahren, als wäre alles in Ordnung.
+  - Erfassen Sie jeden Fehlbestand, der an der Rampe gefunden wird, mit seiner Ursache. Dort beginnt Incomplete.
 ---
 
 Wenn eine Tasche fehlte, war die Regel klar.

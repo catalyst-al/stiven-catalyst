@@ -28,6 +28,15 @@ checklist:
       hint: A change we can try, not a new procedure for everything.
     - label: How will we check that the improvement lasts?
       hint: Who follows it, how often, and what we do if the problem comes back.
+# The challenges this essay answers (src/_data/challenges.json); the German and Albanian pages follow this list.
+problems:
+  - root-cause
+  - standards
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Write today's problem as one problem, one place, one period.
+  - Decide how you will measure it, and what it was before you started.
+  - Plan now who checks next month whether it held, not after the problem seems gone.
 ---
 
 You do not need a Black Belt certificate to ask good questions.

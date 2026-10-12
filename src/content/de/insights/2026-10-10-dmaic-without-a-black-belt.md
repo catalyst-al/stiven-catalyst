@@ -27,6 +27,11 @@ checklist:
       hint: Eine Änderung, die wir ausprobieren können, kein neues Verfahren für alles.
     - label: Wie prüfen wir, dass die Verbesserung hält?
       hint: Wer sie verfolgt, wie oft, und was wir tun, wenn das Problem zurückkommt.
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Schreiben Sie das heutige Problem als ein Problem, ein Ort, ein Zeitraum.
+  - Legen Sie fest, wie Sie es messen, und was es war, bevor Sie begonnen haben.
+  - Planen Sie jetzt, wer nächsten Monat prüft, ob es gehalten hat, nicht erst, wenn das Problem verschwunden scheint.
 ---
 
 Man braucht kein Black-Belt-Zertifikat, um gute Fragen zu stellen.

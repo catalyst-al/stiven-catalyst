@@ -7,6 +7,25 @@ featured: true
 summary: Ich bin nicht weniger flexibel geworden. Ich bin weniger bereit, Flexibilität an die Stelle des Systems treten zu lassen.
 teaser: Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat, hat man noch keinen guten Prozess.
 deck: 'Der elfte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was ich aus der strukturierten Arbeitsweise in Deutschland mitgenommen habe, was ich aus Albanien bewahrt habe, und die Frage, die sich mehr verändert hat als alles andere.'
+# Three moves for tomorrow's shift, shown before the text.
+firstMove:
+  - Schreiben Sie beim nächsten Problem, das Sie lösen, auf, wer es danach besitzt und was sich ändert, damit es nicht zurückkommt.
+  - Dokumentieren Sie einen Prozess, der heute nur funktioniert, weil Sie sich an ihn erinnern.
+  - Nehmen Sie eine Entscheidung dieser Woche und markieren Sie, wo Ihre Initiative endet und die Befugnis eines anderen beginnt.
+checklist:
+  title: Gelöst. Und dann?
+  fill: true
+  items:
+    - label: Was haben wir gelöst?
+      hint: Das Problem, wie es aufgetreten ist, in einer Zeile.
+    - label: Warum ist es passiert?
+      hint: Die Ursache im Prozess, nicht der Name der Person.
+    - label: Wem gehört es ab morgen?
+      hint: Ein Name, keine Abteilung.
+    - label: Was ändert sich, damit es nicht zurückkommt?
+      hint: Ein Schritt, eine Prüfung, eine Regel, ein Werkzeug.
+    - label: Wo steht es geschrieben?
+      hint: Damit das System es weiß, nicht nur ich.
 ---
 
 Früher habe ich öfter gefragt: „Wie lösen wir das?“
