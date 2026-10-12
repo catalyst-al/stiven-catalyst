@@ -7,7 +7,8 @@
 // orbits), a tap on a planet (or on its button) opens that role's tools, a tap on a moon opens that tool,
 // a tap on the light makes its filament, a sound wave, speak up. A small reader sits under the light
 // on the inner orbit; it runs to the planet that is opened, jumps to a moon that is tapped, and
-// sleeps when left alone.
+// sleeps when left alone. The filament warms up when the hero first runs (dark glass, a red glow,
+// then white light), and the system turns to show the planet that is opened and comes a little closer to it.
 (() => {
   const root = document.querySelector("[data-cosmos]");
   const canvas = root?.querySelector("canvas");
@@ -78,6 +79,9 @@
   const PARALLELS = [-60, -30, 0, 30, 60].map((lat) => (lat * Math.PI) / 180);
   const CONSTELLATION = [[-0.55, 0.45], [-0.4, 0.2], [-0.22, 0.3], [-0.05, 0.02], [0.1, 0.1], [0.22, -0.2], [0.36, -0.12], [0.42, -0.42], [0.55, -0.62]];
   const GOLD_WHITE = [255, 243, 208];
+  // The filament and glass before the light is white: an ember, and dark glass.
+  const EMBER = [255, 110, 40];
+  const COLD_GLASS = [52, 57, 64];
   const SILVER = [200, 208, 216];
   const SILVER_HALO = [140, 170, 200];
   // The spikes of the heartbeat ring, three beats around it.
@@ -129,6 +133,13 @@
   const view = { yaw: 0.5, yawVel: DRIFT, pitch: REST_PITCH, hoverX: 0, hoverY: 0, aimX: 0, aimY: 0 };
   let time = 0;
   let flare = 0;
+  // The warm-up of the filament, 0 (off) to 1 (white); with reduced motion the light is simply on.
+  let warmT = 0;
+  let warm = still ? 1 : 0;
+  // The camera follows the opened planet until a drag takes over; zoom brings the system closer while open.
+  let follow = false;
+  let zoom = 0;
+  const ZOOM = 0.08;
   // The bulb hangs from the top of the hero and swings like a pendant lamp: a drag pushes it,
   // gravity brings it back. bx, by is where it hangs this frame.
   const swing = { a: 0, v: 0 };
@@ -143,6 +154,7 @@
   let cx = 0;
   let cy = 0;
   let S = 1;
+  let S0 = 1;
   const D = 4;
   const BULB = 0.16;
 
@@ -183,7 +195,8 @@
     canvas.height = height;
     cx = (spot.left - box.left + spot.width / 2) * dpr;
     cy = (spot.top - box.top + spot.height / 2) * dpr;
-    S = Math.min(spot.width / 2 / (spot.width < 560 ? 1.24 : 1.32), spot.height / 2 / 0.66) * dpr;
+    S0 = Math.min(spot.width / 2 / (spot.width < 560 ? 1.24 : 1.32), spot.height / 2 / 0.66) * dpr;
+    S = S0 * (1 + ZOOM * zoom);
     const count = Math.round(Math.min(2600, Math.max(900, (spot.width * spot.height) / 120)));
     if (!disc || Math.abs(disc.n - count) > 250) buildParticles(count);
     draw();
@@ -244,6 +257,7 @@
   const drawGlow = () => {
     const breathe = 1 + 0.05 * Math.sin(time * 1.3) + flare * 0.55;
     ctx.globalCompositeOperation = "lighter";
+    ctx.globalAlpha = warm;
     let g = ctx.createRadialGradient(cx, cy, 0, cx, cy, S * 1.25 * breathe);
     g.addColorStop(0, "rgba(255,236,200,0.30)");
     g.addColorStop(0.3, "rgba(74,181,247,0.10)");
@@ -252,10 +266,10 @@
     ctx.fillStyle = g;
     ctx.fillRect(cx - S * 1.4 * breathe, cy - S * 1.4 * breathe, S * 2.8 * breathe, S * 2.8 * breathe);
     const b = S * BULB;
-    ctx.globalAlpha = dim;
+    ctx.globalAlpha = dim * warm;
     g = ctx.createRadialGradient(bx, by, 0, bx, by, b * 3 * breathe);
-    g.addColorStop(0, "rgba(255,251,238,0.95)");
-    g.addColorStop(0.32, "rgba(255,226,170,0.38)");
+    g.addColorStop(0, rgba(mix(EMBER, [255, 251, 238], warm), 0.95));
+    g.addColorStop(0.32, rgba(mix(EMBER, [255, 226, 170], warm), 0.38));
     g.addColorStop(1, "rgba(255,200,120,0)");
     ctx.fillStyle = g;
     ctx.fillRect(bx - b * 3.2 * breathe, by - b * 3.2 * breathe, b * 6.4 * breathe, b * 6.4 * breathe);
@@ -270,8 +284,8 @@
     const ry = Math.max(rx * 0.12, rx * Math.abs(sinP));
     ctx.globalCompositeOperation = "lighter";
     const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rx);
-    g.addColorStop(0, `rgba(255,236,200,${0.16 + flare * 0.12})`);
-    g.addColorStop(0.5, "rgba(255,226,170,0.05)");
+    g.addColorStop(0, `rgba(255,236,200,${(0.16 + flare * 0.12) * warm})`);
+    g.addColorStop(0.5, `rgba(255,226,170,${0.05 * warm})`);
     g.addColorStop(1, "rgba(255,226,170,0)");
     ctx.fillStyle = g;
     ctx.beginPath();
@@ -310,18 +324,18 @@
     ctx.bezierCurveTo(cx + 0.64 * b, cy - 0.24 * b, cx + 0.24 * b, cy - 0.28 * b, cx + 0.22 * b, neck);
     ctx.closePath();
     const glass = ctx.createRadialGradient(cx - 0.14 * b, cy + 0.05 * b, 0, cx, cy + 0.1 * b, 0.95 * b);
-    glass.addColorStop(0, "#ffffff");
-    glass.addColorStop(0.55, "#fffaf0");
-    glass.addColorStop(1, "#ffe6bb");
+    glass.addColorStop(0, rgba(mix(COLD_GLASS, WHITE, warm), 1));
+    glass.addColorStop(0.55, rgba(mix(COLD_GLASS, [255, 250, 240], warm), 1));
+    glass.addColorStop(1, rgba(mix(mix(COLD_GLASS, BLACK, 0.3), [255, 230, 187], warm), 1));
     ctx.shadowColor = "rgba(255,238,205,0.95)";
-    ctx.shadowBlur = (26 + flare * 30) * dpr * dim;
+    ctx.shadowBlur = (26 + flare * 30) * dpr * dim * warm;
     ctx.fillStyle = glass;
     ctx.fill();
     ctx.restore();
 
     // The two leads, then the wave between them.
     ctx.lineCap = "round";
-    ctx.strokeStyle = "rgba(255,150,50,0.85)";
+    ctx.strokeStyle = `rgba(255,150,50,${0.25 + 0.6 * warm})`;
     ctx.lineWidth = Math.max(1, 0.035 * b);
     ctx.beginPath();
     ctx.moveTo(cx - 0.1 * b, neck + 0.05 * b);
@@ -336,7 +350,9 @@
       const px = cx - 0.3 * b + (i * 0.6 * b) / (bars - 1);
       const env = Math.sin((i / (bars - 1)) * Math.PI);
       const h = (0.04 + 0.22 * env * (0.6 + 0.4 * Math.sin(time * 3 + i * 1.3))) * b * loud;
-      ctx.strokeStyle = `rgba(255,${Math.round(150 + 40 * env)},60,${0.55 + 0.45 * env})`;
+      // A filament reddens before it whitens.
+      const red = Math.round(110 + 145 * Math.sqrt(warm));
+      ctx.strokeStyle = `rgba(${red},${Math.round((150 + 40 * env) * warm)},${Math.round(60 * warm)},${(0.55 + 0.45 * env) * (0.3 + 0.7 * warm)})`;
       ctx.beginPath();
       ctx.moveTo(px, cy + 0.22 * b - h);
       ctx.lineTo(px, cy + 0.22 * b + h);
@@ -917,6 +933,12 @@
     for (const planet of planets) drawOrbit(planet, true);
     planets.filter((planet) => planet.sz >= 0).sort((a, b) => a.sz - b.sz).forEach(drawPlanet);
     drawReader();
+    if (warm < 1) {
+      // The room is dark until the light is on; the bulb itself sits over the dark.
+      ctx.fillStyle = rgba(BLACK, 0.72 * (1 - warm));
+      ctx.fillRect(0, 0, width, height);
+      drawBulb();
+    }
   };
 
   // ---- Motion ----
@@ -930,8 +952,16 @@
   const step = (now) => {
     const dt = Math.min(0.05, (now - last) / 1000 || 0);
     last = now;
+    if (warm < 1) {
+      warmT += dt;
+      const u = Math.min(1, warmT / 1.3);
+      warm = u * u * (3 - 2 * u);
+      // It flutters as it catches.
+      if (warmT > 0.25 && warmT < 1) warm *= 1 - 0.1 * Math.max(0, Math.sin(warmT * 46));
+    }
+    const following = Boolean(selected && follow);
     if (!dragging) {
-      view.yawVel += (DRIFT - view.yawVel) * ease(1.4, dt);
+      view.yawVel += ((following ? 0 : DRIFT) - view.yawVel) * ease(1.4, dt);
       view.pitch += (REST_PITCH - view.pitch) * ease(1.8, dt);
     }
     view.yaw += view.yawVel * dt;
@@ -941,6 +971,13 @@
     view.hoverY += (view.aimY - view.hoverY) * ease(3, dt);
     flare *= Math.exp(-dt * 2.4);
     time += dt * (selected ? 0.4 : 1) * (1 + flare * 3);
+    if (following && !dragging) {
+      // Turn until the opened planet is at the front, and keep it there as it goes round.
+      const want = Math.PI / 2 - (selected.phase + selected.speed * time);
+      view.yaw += Math.atan2(Math.sin(want - view.yaw), Math.cos(want - view.yaw)) * ease(2.4, dt);
+    }
+    zoom += ((selected ? 1 : 0) - zoom) * ease(2.4, dt);
+    S = S0 * (1 + ZOOM * zoom);
     updateReader(dt);
     draw();
     frameId = requestAnimationFrame(step);
@@ -961,6 +998,12 @@
   // ---- Families ----
   const select = (id) => {
     selected = planets.find((planet) => planet.id === id && planet !== selected) || null;
+    follow = Boolean(selected);
+    if (still) {
+      if (selected) view.yaw = Math.PI / 2 - (selected.phase + selected.speed * time);
+      zoom = selected ? 1 : 0;
+      S = S0 * (1 + ZOOM * zoom);
+    }
     for (const chip of chips) chip.setAttribute("aria-expanded", String(chip.dataset.family === selected?.id));
     for (const panel of panels) panel.classList.toggle("is-open", panel.dataset.familyPanel === selected?.id);
     refresh();
@@ -1034,6 +1077,7 @@
     const now = performance.now();
     if (!dragging.moved && Math.hypot(event.clientX - dragging.x0, event.clientY - dragging.y0) > 6) {
       dragging.moved = true;
+      follow = false;
       root.classList.add("is-dragging");
       try { root.setPointerCapture(event.pointerId); } catch { /* already released */ }
       hint?.classList.add("is-done");
