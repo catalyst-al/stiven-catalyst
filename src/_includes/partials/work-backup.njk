@@ -27,6 +27,8 @@
   </div>
 </section>
 <script type="application/json" id="work-backup-names">{
-{%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | scriptJson | safe }}: {{ tool.name | scriptJson | safe }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor -%}
+{%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | scriptJson | safe }}: {{ tool.name | scriptJson | safe }}, {% endif %}{% endfor -%}
+{#- The reader's own keys (js/shelf.js, js/article.js) travel in the same file. -#}
+"shelf": {{ "My shelf" | t(lang) | scriptJson | safe }}, "checklists": {{ "Cards in progress" | t(lang) | scriptJson | safe }}, "reading": {{ "Reading progress" | t(lang) | scriptJson | safe }}
 }</script>
 <script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>
