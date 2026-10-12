@@ -7,10 +7,10 @@ pagination:
   alias: issue
   addAllPagesToCollections: true
 permalink: "/sq/magazine/{{ issue.slug }}.html"
-livePages: magazine
 activeNav: /sq/publications.html
 ogType: article
 eleventyComputed:
+  livePages: "{{ 'review' if issue.design == 'review' else 'magazine' }}"
   title: "{{ issue.sq.theme | safe }}"
   seo_title: "Nga terreni, numri {{ issue.number | safe }}: {{ issue.sq.theme | safe }}"
   description: "{{ issue.sq.trend.lead | safe }}"

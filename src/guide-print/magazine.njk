@@ -6,7 +6,8 @@ pagination:
 ---
 {#- One issue of the magazine in one language, as A5 pages. scripts/magazine.mjs prints it to PDF; the published
     site never carries this page (guide-print.11tydata.js). The text is in magazine.js; the pages are drawn by
-    print/magazine-pages.njk, which the reader of the issue (pages/magazine-issue.njk) shares. -#}
+    print/magazine-pages.njk, which the reader of the issue (pages/magazine-issue.njk) shares; an issue written in the
+    format of the Management Review by print/weekly-page.njk, with the stylesheets of the Management Review. -#}
 {%- set lang = item.lang -%}
 {%- set issue = item.issue -%}
 <!doctype html>
@@ -16,10 +17,29 @@ pagination:
 <title>{{ magazine.names[lang].name }} · {{ magazine.labels[lang].issue }} {{ issue.number }}</title>
 <style>
 {% include "print/print-head.css" %}
+{%- if issue.design == "review" %}
+{% include "print/review-base.css" %}
+{% include "print/weekly.css" %}
+{%- else %}
 {% include "print/magazine.css" %}
+{%- endif %}
 </style>
 </head>
+{%- if issue.design == "review" %}
+{#- An issue written in the format of the Management Review: its pages, under the name of the magazine. #}
+{%- set I = issue[lang] -%}
+{%- set W = magazine.review[lang] -%}
+{%- set L = W.labels -%}
+{%- set essays = collections["insights" + (lang | langSuffix)] -%}
+<body class="mr">
+{%- for page in I.pages %}
+{%- set n = loop.index %}
+{% include "print/weekly-page.njk" %}
+{%- endfor %}
+</body>
+{%- else %}
 <body class="mz">
 {% include "print/magazine-pages.njk" %}
 </body>
+{%- endif %}
 </html>

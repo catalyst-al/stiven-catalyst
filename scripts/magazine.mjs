@@ -33,7 +33,7 @@ fs.writeFileSync(pagesFile, JSON.stringify(known, null, 1) + "\n");
 
 execFileSync("npx", ["@11ty/eleventy", `--output=${tmp}`, "--quiet"], { cwd: ROOT, env: { ...process.env, GUIDE_PRINT: "1" }, stdio: "inherit" });
 
-const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".woff2": "font/woff2" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".woff2": "font/woff2", ".jpg": "image/jpeg" };
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(new URL(req.url, "http://x").pathname);
   const file = url.startsWith("/guide-fonts/") ? path.join(ROOT, "scripts", url.slice(1)) : path.join(tmp, url.endsWith("/") ? `${url}index.html` : url);
