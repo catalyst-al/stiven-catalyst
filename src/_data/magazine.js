@@ -18,6 +18,13 @@ const labels = {
   de: { issue: "Ausgabe", contents: "In dieser Ausgabe", trend: "Trend des Monats", floor: "Aus der Praxis", tool: "Tool des Monats", essays: "Essays des Monats", question: "Eine Frage an Sie", sources: "Quellen", open: "Öffnen", formula: "Die Formel", page: "Seite", read: "Zum Weiterlesen" },
 };
 
+// The list of all issues (/magazine/from-the-floor.html) and its link from Publications and from each issue.
+const archive = {
+  en: { eyebrow: "The monthly magazine", lede: "Every month one theme of the work on the floor: the trend of the month from cited sources, Stiven Janaqi's own answers from the floor, a tool, essays and a question for you. Every issue, the newest first.", seo: "From the Floor, the monthly magazine of Stiven Catalyst: every issue, the newest first, with the trend of the month, answers from the floor, a tool and essays.", all: "All issues" },
+  sq: { eyebrow: "Revista mujore", lede: "Çdo muaj një temë e punës në terren: trendi i muajit nga burime të cituara, përgjigjet e vetë Stiven Janaqit nga terreni, një mjet, ese dhe një pyetje për ju. Të gjithë numrat, më i riu i pari.", seo: "Nga terreni, revista mujore e Stiven Catalyst: të gjithë numrat, më i riu i pari, me trendin e muajit, përgjigjet nga terreni, një mjet dhe ese.", all: "Të gjithë numrat" },
+  de: { eyebrow: "Das Monatsmagazin", lede: "Jeden Monat ein Thema der Arbeit in der Praxis: der Trend des Monats aus zitierten Quellen, Stiven Janaqis eigene Antworten aus der Praxis, ein Tool, Essays und eine Frage an Sie. Alle Ausgaben, die neueste zuerst.", seo: "Aus der Praxis, das Monatsmagazin von Stiven Catalyst: alle Ausgaben, die neueste zuerst, mit dem Trend des Monats, Antworten aus der Praxis, einem Tool und Essays.", all: "Alle Ausgaben" },
+};
+
 const sources = [
   { url: "https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx", en: "Gallup, State of the Global Workplace 2026 (data for 2025): engagement worldwide, of managers and in Europe; training; best-practice organisations.", sq: "Gallup, State of the Global Workplace 2026 (të dhëna për 2025): angazhimi global, i menaxherëve dhe i Evropës; trajnimi; organizatat me praktikat më të mira.", de: "Gallup, State of the Global Workplace 2026 (Daten für 2025): Engagement weltweit, bei Führungskräften und in Europa; Training; Best-Practice-Organisationen." },
   { url: "https://www.gallup.com/workplace/700718/span-control-optimal-team-size-managers.aspx", en: "Gallup, “Span of Control: What's the Optimal Team Size for Managers?” (average and median direct reports in the US).", sq: "Gallup, “Span of Control: What's the Optimal Team Size for Managers?” (mesatarja dhe mediana e vartësve në SHBA).", de: "Gallup, „Span of Control: What's the Optimal Team Size for Managers?“ (Durchschnitt und Median der direkt Unterstellten in den USA)." },
@@ -458,6 +465,7 @@ export default {
   langs,
   names,
   labels,
+  archive,
   issues,
   latest: issues[issues.length - 1],
   // One print page per issue and language (src/guide-print/magazine.njk).
