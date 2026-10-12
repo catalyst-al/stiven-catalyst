@@ -19,6 +19,7 @@
         {%- elif b.type == "callout" %}<h3>{{ L.reading if b.reading else b.label }}</h3><p>{{ b.text }}</p>
         {%- elif b.type == "flag" %}<p><em>{{ b.text }}</em></p>
         {%- elif b.type == "quote" %}<p class="book-text-quote">{{ b.text }}</p>
+        {%- elif b.type == "qa" %}{% for row in b.items %}<h3>{{ row.q }}</h3>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}{% if b.closing %}<p class="book-text-quote">{{ b.closing }}</p>{% endif %}{% if b.sign %}<p><em>{{ b.sign }}</em></p>{% endif %}
         {%- elif b.type == "lists" %}{% for col in b.cols %}<h3>{{ col.h }}</h3><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul>{% endfor %}
         {%- endif %}
         {%- endfor %}

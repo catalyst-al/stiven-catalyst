@@ -186,3 +186,10 @@
 .mr .pg .wk-rating.roomy li { padding: 1.8mm 0; }
 .mr .pg .wk-rating li b { font-family: var(--mr-display); font-weight: 400; font-size: 7.6pt; color: var(--blue); }
 .mr .pg .wk-rating li i { width: 4.2mm; height: 4.2mm; border: .3mm solid rgba(255,255,255,.38); border-radius: 1mm; justify-self: center; }
+/* An interview (the pages of "Nga terreni"): the question in the sans of the labels, the answer in the serif of the
+   text, the name at the end. */
+.mr .pg .wk-qa .q { font-family: var(--mr-sans); font-weight: 700; font-size: 7.6pt; line-height: 1.35; color: var(--blue); margin: 3.2mm 0 1.2mm; }
+.mr .pg .wk-qa .q:first-child { margin-top: 0; }
+.mr .pg .wk-qa .pull { font-family: var(--mr-serif); font-style: italic; font-size: 10.4pt; line-height: 1.42; color: var(--ink); border-left: .7mm solid var(--red); padding-left: 3.2mm; margin: 3.4mm 0 0; }
+.mr .pg .wk-qa p:not(.q):not(.sign):not(.pull) { font-family: var(--mr-serif); font-size: 9.2pt; line-height: 1.46; color: var(--body); margin-bottom: 1.6mm; }
+.mr .pg .wk-qa .sign { font-family: var(--mr-serif); font-style: italic; font-size: 10pt; color: var(--ink); margin-top: 2.4mm; }
