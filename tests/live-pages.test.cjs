@@ -114,11 +114,12 @@ test('the stylesheet of each publication is one versioned file', async () => {
 
 const hasSite = fs.existsSync('_site/review-pages.css');
 test('the built site serves each stylesheet to its reader pages and to no other page', { skip: !hasSite }, () => {
-  // The special edition has 26 pages, an issue of the Management Review 10, an issue of the magazine 10 or 11 (the
-  // pages of "From the floor" vary), the guide 29: every printed page sits in its wrapper.
+  // The special edition has 26 pages, an issue of the Management Review 10, issue 1 of the magazine 10 (issue 2 on
+  // is written like the Management Review and takes its stylesheet), the guide 29: every printed page sits in its
+  // wrapper.
   const cases = [
-    ['review', ['magazine/management-review-nr-01.html', 'sq/magazine/management-review-nr-25.html', 'de/magazine/management-review-2026-09.html'], 10],
-    ['magazine', ['magazine/nga-terreni-01.html', 'sq/magazine/nga-terreni-02.html', 'de/magazine/nga-terreni-01.html'], 10],
+    ['review', ['magazine/management-review-nr-01.html', 'sq/magazine/management-review-nr-25.html', 'de/magazine/management-review-2026-09.html', 'sq/magazine/nga-terreni-02.html'], 10],
+    ['magazine', ['magazine/nga-terreni-01.html', 'sq/magazine/nga-terreni-01.html', 'de/magazine/nga-terreni-01.html'], 10],
     ['guide', ['guides/tools-guide.html', 'sq/guides/tools-guide.html', 'de/guides/tools-guide.html'], 29],
   ];
   for (const [name, files, least] of cases) {

@@ -6,10 +6,10 @@ pagination:
   alias: issue
   addAllPagesToCollections: true
 permalink: "/magazine/{{ issue.slug }}.html"
-livePages: magazine
 activeNav: /publications.html
 ogType: article
 eleventyComputed:
+  livePages: "{{ 'review' if issue.design == 'review' else 'magazine' }}"
   title: "{{ issue.en.theme | safe }}"
   seo_title: "From the Floor, issue {{ issue.number | safe }}: {{ issue.en.theme | safe }}"
   description: "{{ issue.en.trend.lead | safe }}"

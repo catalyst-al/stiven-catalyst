@@ -2,15 +2,17 @@
     reader of the book (js/book.js) with the pages of the issue alive, the same markup as the print
     (print/weekly-page.njk, styled by /review-pages.css), so their text is drawn sharp at any size; the cover as a
     picture in the hero (magazinePages.json, made by scripts/weekly.mjs); the charts of the issue drawn again and
-    moving in (js/weekly.js); and the whole text, from the same source as the print (weekly.js). Needs issue. -#}
+    moving in (js/weekly.js); and the whole text, from the same source as the print (weekly.js). Needs issue.
+    An issue of "Nga terreni" written the same way comes here too (pages/magazine-issue.njk), with its own W and the
+    issues of its magazine as family. -#}
 {%- set lang = lang or "en" -%}
 {%- set I = issue[lang] -%}
-{%- set W = weekly[lang] -%}
+{%- set W = W or weekly[lang] -%}
 {%- set L = W.labels -%}
 {%- set reader = magazinePages[issue.slug][lang] -%}
 {%- set cover = reader.pages[0] -%}
 {%- set pdf = "/media/magazine/" + issue.slug + "/" + issue.slug + "-" + lang + ".pdf" -%}
-{%- set archive = "/magazine/management-review.html" | local(lang) -%}
+{%- set archive = W.archiveUrl | local(lang) -%}
 {%- set essays = collections["insights" + (lang | langSuffix)] -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
@@ -147,6 +149,7 @@
         {%- elif b.type == "stat" %}<p><strong>{{ b.n }}</strong> {{ b.t }}</p>
         {%- elif b.type == "callout" %}<h3>{{ L.reading if b.reading else b.label }}</h3><p>{{ b.text }}</p>
         {%- elif b.type == "quote" %}<p class="book-text-quote">{{ b.text }}</p>
+        {%- elif b.type == "qa" %}{% for row in b.items %}<h3>{{ row.q }}</h3>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}{% if b.sign %}<p><em>{{ b.sign }}</em></p>{% endif %}
         {%- elif b.type == "lists" %}{% for col in b.cols %}<h3>{{ col.h }}</h3><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul>{% endfor %}
         {%- endif %}
         {%- endfor %}
@@ -169,8 +172,9 @@
 
 {#- After the issue: the one before and the one after it, and the list of all issues. Only the neighbours, so the
     page stays this issue's page as the archive grows. -#}
-{%- set older = weekly.issues | where("number", issue.number - 1) %}
-{%- set newer = weekly.issues | where("number", issue.number + 1) %}
+{%- set family = family or weekly.issues %}
+{%- set older = family | where("number", issue.number - 1) %}
+{%- set newer = family | where("number", issue.number + 1) %}
   <section class="shell issue-more" id="more-issues" aria-labelledby="more-issues-title">
     <p class="kicker">{{ W.name }} · {{ L.edition }}</p>
     <h2 id="more-issues-title">{{ "Read another issue" | t(lang) }}</h2>

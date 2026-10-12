@@ -1,6 +1,8 @@
 {#- One page of a monthly issue of the Management Review, as the print (src/guide-print/weekly.njk) and the reader
     (src/_includes/pages/weekly-issue.njk) both show it. Needs page (the page), n (its number), issue, I (the issue in
-    this language), W (weekly[lang]), L (its labels), lang and essays. The charts come ready from weekly.js (b.svg). -#}
+    this language), W (weekly[lang]), L (its labels), lang and essays. The charts come ready from weekly.js (b.svg).
+    "Nga terreni" draws its issues written the same way with these pages too: its W carries its own name, masthead,
+    picture and list of issues (magazine.js), and I.coverTheme the title of its cover. -#}
 {%- macro chrome(number, section) -%}
 <header class="run"><span>{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
 <footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
@@ -11,14 +13,14 @@
   <div class="mast-rule"></div>
   <div class="cover-main">
     <div>
-      <div class="masthead">Management<span class="accent">Review</span></div>
+      <div class="masthead">{{ W.mast[0] }}<span class="accent">{{ W.mast[1] }}</span></div>
       <p class="cover-tag">{{ W.tagline }}</p>
       <div class="cover-rule"></div>
       <p class="wk-chip">{{ I.blockName }}</p>
-      <div class="cover-theme">{{ I.theme[0] }}<span class="accent">{{ I.theme[1] }}</span></div>
+      <div class="cover-theme">{{ (I.coverTheme or I.theme)[0] }}<span class="accent">{{ (I.coverTheme or I.theme)[1] }}</span></div>
       <p class="cover-sub">{{ I.sub }}</p>
     </div>
-    <div class="wk-art"><img src="{{ weekly.cover.src }}" alt=""><p class="wk-no"><small>{{ L.no }}</small>{{ issue.no }}</p></div>
+    <div class="wk-art"><img src="{{ W.cover.src }}" alt=""><p class="wk-no"><small>{{ L.no }}</small>{{ issue.no }}</p></div>
   </div>
   {%- if I.figure %}
   <div class="wk-figure-cover"><b>{{ I.figure.n }}</b><p>{{ I.figure.t }}<i>{{ I.figure.by }}</i></p></div>
@@ -55,12 +57,12 @@
 </section>
 {%- elif page.type == "back" %}
 <section class="pg back">
-  <img src="{{ weekly.cover.src }}" alt="">
-  <div class="masthead">Management<span class="accent">Review</span></div>
+  <img src="{{ W.cover.src }}" alt="">
+  <div class="masthead">{{ W.mast[0] }}<span class="accent">{{ W.mast[1] }}</span></div>
   <p class="cover-tag">{{ W.tagline }}</p>
   <p>{{ W.back.line }}</p>
   <p class="monthly">{{ W.back.all }}</p>
-  <p class="url">stivencatalyst.com{{ "/magazine/management-review.html" | local(lang) }}</p>
+  <p class="url">stivencatalyst.com{{ W.archiveUrl | local(lang) }}</p>
   <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst</p>
 </section>
 {%- else %}
@@ -88,6 +90,7 @@
   {%- elif b.type == "figures" %}<div class="figures{{ ' compact' if b.compact }}">{% for f in b.items %}<div><b>{{ f.n }}</b><span>{{ f.t }}</span></div>{% endfor %}</div>
   {%- elif b.type == "callout" %}<div class="callout{{ ' is-reading' if b.reading }}"><span class="label">{{ L.reading if b.reading else b.label }}</span><p>{{ b.text }}</p></div>
   {%- elif b.type == "quote" %}<p class="quote">“{{ b.text }}”</p>
+  {%- elif b.type == "qa" %}<div class="wk-qa">{% for row in b.items %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}{% if b.sign %}<p class="sign">{{ b.sign }}</p>{% endif %}</div>
   {%- elif b.type == "steps" %}<ol class="steps">{% for s in b.items %}<li><div><h4>{{ s.h }}</h4><p>{{ s.p }}</p></div></li>{% endfor %}</ol>
   {%- elif b.type == "lists" %}<div class="lists">{% for col in b.cols %}<div class="{{ 'accent' if col.accent }}"><h4><span class="hl">{{ col.h }}</span></h4><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul></div>{% endfor %}</div>
   {%- endif %}

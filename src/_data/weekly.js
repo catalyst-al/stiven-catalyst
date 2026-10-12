@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import { langs, resolve, blocks, common, seriesOf } from "../../lib/weekly/common.js";
 import { sources } from "../../lib/weekly/sources.js";
-import { chartMarkup, chartText, NARROW } from "../../lib/weekly/charts.js";
+import { issueText, pageNumbers, sourceLineFor } from "../../lib/weekly/build.js";
 
 const folder = new URL("../../lib/weekly/issues/", import.meta.url);
 const files = fs.readdirSync(folder).filter((name) => /^\d{2}\.js$/.test(name)).sort();
@@ -16,59 +16,18 @@ const raw = await Promise.all(files.map((name) => import(new URL(name, folder)).
 
 const pad = (n) => String(n).padStart(2, "0");
 const sourceById = Object.fromEntries(sources.map((source) => [source.id, source]));
-// "Gallup, 2015" or "Laszlo Bock, 2015, via World Economic Forum, 2015", for the foot of a page. Two sources by the
-// same author in the same year are told apart by their titles: "Gallup, Indicator: Employee Engagement, 2026".
-const sourceLine = (ids, lang) => {
-  const list = ids.map((id) => {
-    const s = sourceById[id];
-    if (!s) throw new Error(`Management Review: unknown source "${id}"`);
-    return s;
-  });
-  const short = (s) => `${s.by}, ${s.year}`;
-  return list.map((s) => {
-    const twin = list.filter((other) => short(other) === short(s)).length > 1;
-    const named = s.title.includes(String(s.year)) ? `${s.by}, ${s.title}` : `${s.by}, ${s.title}, ${s.year}`;
-    return `${twin ? named : short(s)}${s.via ? ` (${common.labels.via[lang]} ${s.via})` : ""}`;
-  }).join("; ");
-};
-
-const withChart = (block) => {
-  const svg = chartMarkup(block);
-  return svg ? { ...block, chart: true, svg, alt: chartText(block) } : block;
-};
+const sourceLine = sourceLineFor(sourceById, "Management Review");
 
 const issues = raw.map((issue) => {
   const slug = `management-review-nr-${pad(issue.number)}`;
-  const pageOf = Object.fromEntries(issue.pages.map((page, index) => [page.id, index + 1]));
+  const pageOf = pageNumbers(issue);
   const perLang = Object.fromEntries(langs.map((lang) => {
-    const text = resolve(issue, lang);
-    const pages = text.pages.map((page) => ({
-      ...page,
-      heading: page.title ? page.title.join(" ") : undefined,
-      blocks: (page.blocks || []).map(withChart),
-      sourceLine: page.source ? sourceLine(page.source, lang) : "",
-    }));
+    const text = issueText(issue, lang, sourceLine);
     return [lang, {
-      date: text.date,
+      ...text,
       // The series the issue belongs to: "First series" for 1–40 (October 2026), "Second series" for 41–80 …
       edition: common.labels.series[seriesOf(issue.number) - 1][lang],
-      theme: text.theme,
-      heading: text.theme.join(" "),
-      sub: text.sub,
-      seo: text.seo,
-      feature: text.feature,
-      figure: text.figure,
       blockName: blocks[issue.block][lang],
-      teasers: text.teasers.map((teaser) => ({ ...teaser, number: pageOf[teaser.page] })),
-      pages,
-      // The charts again, for the web page: each with its own source when the page has several.
-      charts: pages.flatMap((page) => page.blocks.filter((block) => block.chart).map((block) => ({
-        ...block,
-        kicker: page.kicker,
-        sources: (block.source || page.source || []).length,
-        svgNarrow: block.type === "donut" ? "" : chartMarkup(block, NARROW),
-        sourceLine: block.source ? sourceLine(block.source, lang) : page.sourceLine,
-      }))),
     }];
   }));
   return {

@@ -2,6 +2,12 @@
     book (js/book.js), with the pages alive, the same markup as the print (print/magazine-pages.njk, styled by
     /magazine-pages.css), the cover as a picture in the hero (magazinePages.json, made by scripts/magazine.mjs) and
     the whole text below, from the same source as the print (magazine.js). Needs issue. -#}
+{%- if issue.design == "review" %}
+{#- An issue written in the format of the Management Review: its reader, under the name of the magazine. -#}
+{%- set W = magazine.review[lang or "en"] %}
+{%- set family = magazine.issues %}
+{%- include "pages/weekly-issue.njk" %}
+{%- else %}
 {%- set lang = lang or "en" -%}
 {%- set m = issue[lang] -%}
 {%- set L = magazine.labels[lang] -%}
@@ -167,3 +173,4 @@
     <a class="text-link" href="{{ '/magazine/from-the-floor.html' | local(lang) }}">{{ "All issues" | t(lang) }} ({{ magazine.issues | length }})</a>
   </section>
 <script src="{{ '/js/book.js' | assetUrl }}" defer></script>
+{%- endif %}
