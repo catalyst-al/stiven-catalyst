@@ -128,7 +128,7 @@ ogType: article
     {#- A checklist the essay ends with ("checklist" in its front matter: title, items as text or { label, hint }, "fill" for a card of answers, an optional note, and "copy" for the copy button's label): the reader ticks the
         questions off and can copy them. Nothing is kept or sent (js/article.js). -#}
     {%- if checklist and checklist.items %}
-    <section class="essay-checklist" data-essay-checklist aria-labelledby="essay-checklist-title">
+    <section class="essay-checklist" data-essay-checklist aria-labelledby="essay-checklist-title" data-essay-url="{{ pageUrl }}" data-lang="{{ lang or 'en' }}" data-site="{{ site.title }}" data-author="{{ site.author }}" data-word-from="{{ 'From the essay' | t(lang) }}" data-word-moves="{{ 'Tomorrow on shift' | t(lang) }}" data-word-answer="{{ 'Your answer' | t(lang) }}">
       <div class="essay-checklist-head">
         <p class="kicker" id="essay-checklist-title">{{ checklist.title }}</p>
         <span class="essay-checklist-count" data-checklist-count aria-live="polite">0/{{ checklist.items.length }}</span>
@@ -147,6 +147,8 @@ ogType: article
       {%- if checklist.fill %}
       <button type="button" class="button-secondary" data-checklist-clear>{{ "Clear" | t(lang) }}</button>
       {%- endif %}
+      {#- The checklist as a Word file for the shift folder or the next team meeting (js/checklist-word.js). -#}
+      <button type="button" class="button-secondary" data-checklist-word>{{ "Download as Word" | t(lang) }}</button>
       <button type="button" class="button-secondary" data-checklist-copy data-copied-label="{{ 'Copied' | t(lang) }}">{{ checklist.copy if checklist.copy else (("Copy the card" | t(lang)) if checklist.fill else ("Copy the {n} questions" | t(lang) | replace("{n}", checklist.items.length | string))) }}</button>
       </div>
       {%- if checklist.note %}
@@ -235,6 +237,20 @@ ogType: article
     </nav>
     {%- endif %}
     {%- endif %}
+    {#- From the readers: what readers who tried it wrote ("readers" in the front matter: text and who), then the
+        question "Did you try it?" (partials/essay-feedback.njk), so the essay learns from the shifts it reaches. -#}
+    {%- if readers and readers.length %}
+    <aside class="essay-readers" aria-labelledby="essay-readers-title">
+      <p class="kicker" id="essay-readers-title">{{ "From the readers" | t(lang) }}</p>
+      <p class="essay-readers-lede">{{ "What readers who tried it wrote. Anonymised, with their yes." | t(lang) }}</p>
+      <ul>
+        {%- for reader in readers %}
+        <li><blockquote>“{{ reader.text }}”</blockquote>{% if reader.who %}<cite>{{ reader.who }}</cite>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    </aside>
+    {%- endif %}
+    {% include "partials/essay-feedback.njk" %}
     {#- Join in: the essay's LinkedIn post ("linkedin" in the front matter, or the English essay's), else the author's
         profile, and the form for a situation of the reader's own (pages/your-challenge.njk). -#}
     {%- set postUrl = linkedin or collections.linkedinMap[original or page.fileSlug] %}
@@ -264,3 +280,8 @@ ogType: article
 <script src="{{ '/js/share.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/article.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/listen.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/feedback.js' | assetUrl }}" defer></script>
+{%- if checklist and checklist.items %}
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/checklist-word.js' | assetUrl }}" defer></script>
+{%- endif %}

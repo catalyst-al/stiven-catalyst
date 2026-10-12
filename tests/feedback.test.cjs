@@ -111,10 +111,10 @@ test('a filled honeypot sends nothing and still thanks', async () => {
   assert.equal(status.textContent, 'Thank you.');
 });
 
-test('the form attribute the script looks for is used only by the two forms it serves: the tool feedback and a reader\'s challenge', () => {
+test('the form attribute the script looks for is used only by the forms it serves: the tool feedback, a reader\'s challenge and the question under an essay', () => {
   const walk = (dir, out = []) => { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const f = `${dir}/${e.name}`; if (e.isDirectory()) walk(f, out); else if (f.endsWith('.njk')) out.push(f); } return out; };
   const users = walk('src').filter((file) => /data-tool-feedback(?!-status)/.test(fs.readFileSync(file, 'utf8')));
-  assert.deepEqual(users, ['src/_includes/pages/your-challenge.njk', 'src/_includes/partials/tool-feedback.njk']);
+  assert.deepEqual(users, ['src/_includes/pages/your-challenge.njk', 'src/_includes/partials/essay-feedback.njk', 'src/_includes/partials/tool-feedback.njk']);
   assert.match(script, /querySelector\("\[data-tool-feedback\]"\)/);
 });
 
