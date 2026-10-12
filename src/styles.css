@@ -1422,6 +1422,30 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .essay-notes .text-link { display: inline-block; margin-top: 8px; }
 @media print { .essay-tools, .tool-essays, .essay-series, .essay-notes { display: none; } }
 
+/* Under an essay: join in, on LinkedIn (the essay's post, or the author's profile) or with a situation of your own. */
+.essay-join { margin: 44px 0 0; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-join .kicker { margin: 0 0 14px; }
+.essay-join-links { display: grid; gap: 10px; }
+.article-content .essay-join-links a { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "strong arrow" "span arrow"; align-items: center; column-gap: 16px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; transition: border-color .2s ease, transform .2s ease; }
+.article-content .essay-join-links a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+.essay-join-links strong { grid-area: strong; font-size: 1.02rem; }
+.essay-join-links span { grid-area: span; color: var(--muted); font-size: .9rem; line-height: 1.4; }
+.essay-join-links em { grid-area: arrow; font-style: normal; color: var(--blue); }
+@media (min-width: 700px) { .essay-join-links { grid-template-columns: 1fr 1fr; } }
+@media print { .essay-join { display: none; } }
+
+/* "Send me your challenge": the contact layout, with the choices of the feedback form. */
+.challenge-form .field select { appearance: auto; }
+.challenge-publish { margin: 0; padding: 0; border: 0; }
+.challenge-publish legend { margin-bottom: 8px; color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.challenge-publish .tf-choice { display: inline-block; margin: 0 8px 8px 0; }
+.challenge-publish .tf-choice span { font-size: .92rem; font-weight: 600; }
+.challenge-aside .kicker { margin: 22px 0 8px; }
+.challenge-aside .kicker:first-child { margin-top: 0; }
+.challenge-aside p:not(.kicker) { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.5; }
+.challenge-steps { margin: 0; padding: 0 0 0 1.2em; color: var(--muted); font-size: .95rem; line-height: 1.5; display: grid; gap: 6px; }
+.challenge-steps li::marker { color: var(--blue); font-weight: 800; }
+
 /* The Listen bar at the top of an essay (js/listen.js): play or pause, start again, the speed, the paragraph being
    read, and a note on where the voice comes from. The block being read is marked in the text. */
 .essay-listen { margin: 0 0 20px; padding: 12px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-family: var(--sans); }

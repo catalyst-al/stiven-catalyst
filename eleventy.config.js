@@ -72,6 +72,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("challengeMap", (api) => Object.fromEntries(
     api.getFilteredByGlob("src/content/insights/*.md").map((item) => [item.fileSlug, Array.isArray(item.data.problems) ? item.data.problems : []])
   ));
+  // The LinkedIn post of an essay ("linkedin" on the English essay), by slug, so "Discuss this essay on LinkedIn"
+  // under the German and Albanian essays leads to the same post unless their own front matter names another.
+  eleventyConfig.addCollection("linkedinMap", (api) => Object.fromEntries(
+    api.getFilteredByGlob("src/content/insights/*.md").filter((item) => item.data.linkedin).map((item) => [item.fileSlug, item.data.linkedin])
+  ));
   // The challenge ids of an essay in any language, and the challenge entries for a list of ids, in their order.
   eleventyConfig.addFilter("challengesOf", (item, map) => (map || {})[item.data.original || item.fileSlug] || []);
   eleventyConfig.addFilter("challengeList", (ids, challenges) => (ids || []).map((id) => (challenges || []).find((c) => c.id === id)).filter(Boolean));

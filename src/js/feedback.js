@@ -1,4 +1,5 @@
-// The feedback question at the end of a tool page (partials/tool-feedback.njk).
+// The feedback question at the end of a tool page (partials/tool-feedback.njk) and the form for a reader's
+// challenge (pages/your-challenge.njk).
 // With an action the form posts there and stays on the page; without one it opens the visitor's
 // mail program with the answer. Nothing leaves the browser until "Send" is pressed.
 (() => {
@@ -24,11 +25,21 @@
     say(text);
   };
 
+  // The body of the mail: one line per filled field, labelled by its data-line (the feedback form's "helped" and
+  // "email" keep their labels without it), the message on its own, the page last.
+  const LABELS = { helped: "Helped", email: "Reply to" };
   const lines = (data) => {
-    const helped = data.get("helped") === "yes" ? "yes" : "no";
-    const message = String(data.get("message") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    return [`Helped: ${helped}`, message && `\n${message}`, email && `\nReply to: ${email}`, `\nPage: ${data.get("page")}`].filter(Boolean).join("\n");
+    const out = [];
+    for (const field of form.elements) {
+      if (!field.name || field.type === "hidden" || field.type === "submit" || field.name === "website") continue;
+      if ((field.type === "radio" || field.type === "checkbox") && !field.checked) continue;
+      const value = String(field.value || "").trim();
+      if (!value) continue;
+      const label = field.dataset.line || LABELS[field.name];
+      out.push(label ? `${label}: ${value}` : value);
+    }
+    out.push(`Page: ${data.get("page")}`);
+    return out.join("\n\n");
   };
 
   form.addEventListener("submit", async (event) => {

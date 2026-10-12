@@ -235,6 +235,20 @@ ogType: article
     </nav>
     {%- endif %}
     {%- endif %}
+    {#- Join in: the essay's LinkedIn post ("linkedin" in the front matter, or the English essay's), else the author's
+        profile, and the form for a situation of the reader's own (pages/your-challenge.njk). -#}
+    {%- set postUrl = linkedin or collections.linkedinMap[original or page.fileSlug] %}
+    <aside class="essay-join" aria-labelledby="essay-join-title">
+      <p class="kicker" id="essay-join-title">{{ "Join in" | t(lang) }}</p>
+      <div class="essay-join-links">
+        {%- if postUrl %}
+        <a href="{{ postUrl }}" target="_blank" rel="noopener" data-join-linkedin="post"><strong>{{ "Discuss this essay on LinkedIn" | t(lang) }}</strong><span>{{ "Comments and questions go under the post, where the readers of this site already are." | t(lang) }}</span><em aria-hidden="true">→</em></a>
+        {%- elif site.profiles[0] %}
+        <a href="{{ site.profiles[0] }}" target="_blank" rel="noopener" data-join-linkedin="profile"><strong>{{ "Discuss it with me on LinkedIn" | t(lang) }}</strong><span>{{ "Write under one of my posts or send a message. Most readers of this site are there." | t(lang) }}</span><em aria-hidden="true">→</em></a>
+        {%- endif %}
+        <a href="{{ '/your-challenge.html' | local(lang) }}" data-join-challenge><strong>{{ "Send me your situation" | t(lang) }}</strong><span>{{ "A problem like this one on your shift? Describe it. I answer the ones I can in public, anonymised." | t(lang) }}</span><em aria-hidden="true">→</em></a>
+      </div>
+    </aside>
     <div class="share-row">
       <p class="kicker">{{ "Share this essay" | t(lang) }}</p>
       <div class="share-links">

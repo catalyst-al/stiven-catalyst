@@ -23,7 +23,7 @@ test('the partial carries every name and attribute the script reads', () => {
   for (const name of ['data-tool-feedback', 'data-tool-feedback-status', 'data-sent', 'data-opened', 'data-failed', 'data-subject', 'name="helped"', 'name="message"', 'name="email"', 'name="website"', 'name="page"', 'name="tool"', 'name="lang"']) {
     assert.ok(partial.includes(name), name);
   }
-  for (const key of ['dataset.sent', 'dataset.opened', 'dataset.failed', 'dataset.subject', 'dataset.mail', '"helped"', '"message"', '"email"', '"website"', '"page"']) {
+  for (const key of ['dataset.sent', 'dataset.opened', 'dataset.failed', 'dataset.subject', 'dataset.mail', 'dataset.line', 'helped:', 'email:', '"website"', '"page"']) {
     assert.ok(script.includes(key), key);
   }
 });
@@ -111,10 +111,10 @@ test('a filled honeypot sends nothing and still thanks', async () => {
   assert.equal(status.textContent, 'Thank you.');
 });
 
-test('the feedback form has an attribute no other part of a page uses', () => {
+test('the form attribute the script looks for is used only by the two forms it serves: the tool feedback and a reader\'s challenge', () => {
   const walk = (dir, out = []) => { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const f = `${dir}/${e.name}`; if (e.isDirectory()) walk(f, out); else if (f.endsWith('.njk')) out.push(f); } return out; };
   const users = walk('src').filter((file) => /data-tool-feedback(?!-status)/.test(fs.readFileSync(file, 'utf8')));
-  assert.deepEqual(users, ['src/_includes/partials/tool-feedback.njk']);
+  assert.deepEqual(users, ['src/_includes/pages/your-challenge.njk', 'src/_includes/partials/tool-feedback.njk']);
   assert.match(script, /querySelector\("\[data-tool-feedback\]"\)/);
 });
 

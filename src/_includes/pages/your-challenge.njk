@@ -1,0 +1,71 @@
+{#- "Send me your challenge", shared by the three languages: a reader describes a situation from their work, the
+    author answers the ones he can in public, anonymised (a field note, a reader question in the Management Review),
+    the others by email. The form posts like the feedback form at the end of a tool (js/feedback.js): to
+    site.contact.action when it is set, else through the reader's own mail program. Nothing is sent until "Send". -#}
+<section class="shell page-hero">
+  <p class="eyebrow">{{ "Your challenge" | t(lang) }}</p>
+  <h1>{{ "Send me your challenge." | t(lang) }}</h1>
+  <p class="lede">{{ "A situation from your shift, your area or your front desk: a number you cannot explain, a handover that keeps failing, a conversation you are putting off. I read every one, and answer the ones I can in public, anonymised, so the next reader with the same problem finds it." | t(lang) }}</p>
+</section>
+<section class="shell contact your-challenge">
+  <form class="contact-form tool-feedback-form challenge-form" data-tool-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
+        data-sent="{{ 'Thank you. I read every one. What I can answer in public becomes a field note or a reader question, anonymised; the rest gets an answer by email, when you left one.' | t(lang) }}"
+        data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
+        data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
+        data-subject="{{ 'Your challenge' | t(lang) }}">
+    {%- if site.contact.action and site.contact.key %}
+    <input type="hidden" name="access_key" value="{{ site.contact.key }}">
+    <input type="hidden" name="from_name" value="Stiven Catalyst">
+    {%- endif %}
+    <input type="hidden" name="subject" value="Stiven Catalyst: {{ 'Your challenge' | t(lang) }}">
+    <input type="hidden" name="lang" value="{{ lang or 'en' }}">
+    <input type="hidden" name="page" value="{{ page.url | absoluteUrl }}">
+    <div class="field">
+      <label for="challenge-role">{{ "Your role" | t(lang) }}</label>
+      <select id="challenge-role" name="role" data-line="{{ 'Your role' | t(lang) }}">
+        <option value="">{{ "Choose, if you like" | t(lang) }}</option>
+        {%- for role in ["Shift lead or team leader", "Dispatcher or coordinator", "Area or department manager", "Process, quality or improvement", "Front office or night audit", "Other"] %}
+        <option value="{{ role | t(lang) }}">{{ role | t(lang) }}</option>
+        {%- endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="challenge-situation">{{ "The situation" | t(lang) }}</label>
+      <textarea id="challenge-situation" name="situation" rows="7" maxlength="3000" required data-line="{{ 'The situation' | t(lang) }}" placeholder="{{ 'What happens, where, how often. No names, no company.' | t(lang) }}"></textarea>
+    </div>
+    <div class="field">
+      <label for="challenge-tried">{{ "What has been tried (optional)" | t(lang) }}</label>
+      <textarea id="challenge-tried" name="tried" rows="3" maxlength="2000" data-line="{{ 'What has been tried (optional)' | t(lang) }}"></textarea>
+    </div>
+    <fieldset class="field challenge-publish">
+      <legend>{{ "May I publish it, anonymised?" | t(lang) }}</legend>
+      <label class="tf-choice"><input type="radio" name="publish" value="{{ 'Yes, as a field note or a reader question' | t(lang) }}" required data-line="{{ 'May I publish it, anonymised?' | t(lang) }}"><span>{{ "Yes, as a field note or a reader question" | t(lang) }}</span></label>
+      <label class="tf-choice"><input type="radio" name="publish" value="{{ 'No, only an answer to me' | t(lang) }}" data-line="{{ 'May I publish it, anonymised?' | t(lang) }}"><span>{{ "No, only an answer to me" | t(lang) }}</span></label>
+    </fieldset>
+    <div class="field">
+      <label for="challenge-email">{{ "Your email, if you would like an answer (optional)" | t(lang) }}</label>
+      <input id="challenge-email" type="email" name="email" autocomplete="email" data-line="{{ 'Reply to' | t(lang) }}">
+    </div>
+    <div class="tf-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="tf-actions">
+      <button type="submit" class="button-primary">{{ "Send the situation" | t(lang) }}</button>
+      <p class="form-note">{{ "Nothing is sent until you press Send." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
+    </div>
+    <p class="form-note tf-status" data-tool-feedback-status role="status" aria-live="polite" hidden></p>
+  </form>
+  <aside class="contact-aside challenge-aside">
+    <p class="kicker">{{ "How it works" | t(lang) }}</p>
+    <ol class="challenge-steps">
+      <li>{{ "You describe the situation. No names, no company, no customer data." | t(lang) }}</li>
+      <li>{{ "I answer: as a field note, as a reader question in the Management Review, or by email." | t(lang) }}</li>
+      <li>{{ "Nothing is published without the yes you give in the form." | t(lang) }}</li>
+    </ol>
+    <p class="kicker">{{ "One limit" | t(lang) }}</p>
+    <p>{{ "Safety, HR and legal matters belong with the people responsible for them where you work, not with a website. For those, this form is not the place." | t(lang) }}</p>
+    <p class="kicker">{{ "Email" | t(lang) }}</p>
+    <a class="text-link" href="mailto:{{ site.email }}">{{ site.email }} <span aria-hidden="true">→</span></a>
+    <p class="kicker">LinkedIn</p>
+    <a class="text-link" href="{{ site.profiles[0] }}" target="_blank" rel="noopener">{{ "Discuss it with me on LinkedIn" | t(lang) }} <span aria-hidden="true">→</span></a>
+  </aside>
+</section>
+<script src="{{ '/js/feedback.js' | assetUrl }}" defer></script>
