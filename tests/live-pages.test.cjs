@@ -1,5 +1,5 @@
 // The pages of the Management Review, the magazine "Nga terreni" and the Tools Guide alive on the site: each print's
-// stylesheet is scoped to its page (.mr .pg, .mz .pg, .tg .pg), so nothing of the site reaches into a page and nothing
+// stylesheet is scoped to its page (.mr .pg, .tg .pg), so nothing of the site reaches into a page and nothing
 // of the page reaches out; the print and the reader draw each page from one partial; the site serves the fonts the
 // print uses; and the stylesheet of each publication's pages is one versioned file that only its reader loads
 // (lib/live-pages.js, src/live-pages.njk).
@@ -24,7 +24,7 @@ const rules = (css) => {
 };
 const selectors = (prelude) => prelude.split(/,(?![^(]*\))/).map((s) => s.trim()).filter(Boolean);
 
-const SCOPED = [['review-base.css', 'mr'], ['weekly.css', 'mr'], ['magazine.css', 'mz'], ['guide.css', 'tg']];
+const SCOPED = [['review-base.css', 'mr'], ['weekly.css', 'mr'], ['guide.css', 'tg']];
 
 test('every rule of the page stylesheets is scoped to the page, after the reset that shuts the site out', () => {
   for (const [name, scope] of SCOPED) {
@@ -56,7 +56,7 @@ test('the page stylesheets name their fonts through variables the print and the 
   for (const name of ['print-head.css', 'live-pages.css']) {
     const css = read(path.join(PRINT, name));
     for (const variable of ['--mr-sans', '--mr-display', '--mr-serif']) assert.match(css, new RegExp(`${variable}:`), `${name}: ${variable}`);
-    assert.match(css, /\.mr, \.mz, \.tg \{/, `${name}: the variables for the three scopes`);
+    assert.match(css, /\.mr, \.tg \{/, `${name}: the variables for the two scopes`);
   }
   const web = read(path.join(PRINT, 'live-pages.css'));
   for (const weight of [400, 500, 600, 700]) {
@@ -81,7 +81,7 @@ test('the page stylesheets name their fonts through variables the print and the 
 });
 
 test('the print and the reader draw each page from the same partial', () => {
-  const pairs = [['weekly', 'weekly-issue', 'weekly-page', 'mr'], ['review', 'review', 'review-page', 'mr'], ['magazine', 'magazine-issue', 'magazine-pages', 'mz'], ['print', 'guide', 'guide-pages', 'tg']];
+  const pairs = [['weekly', 'weekly-issue', 'weekly-page', 'mr'], ['review', 'review', 'review-page', 'mr'], ['print', 'guide', 'guide-pages', 'tg']];
   for (const [print, reader, partial, scope] of pairs) {
     const printed = read(`src/guide-print/${print}.njk`);
     const shown = read(`src/_includes/pages/${reader}.njk`);
@@ -92,16 +92,16 @@ test('the print and the reader draw each page from the same partial', () => {
     assert.ok(fs.existsSync(`${PRINT}/${partial}.njk`));
     assert.ok(read(`${PRINT}/${partial}.njk`).includes('<section class="pg'), partial);
   }
-  // The magazine and the guide wrap their pages in the partial itself, so the print and the reader share them whole.
-  for (const partial of ['magazine-pages', 'guide-pages']) assert.match(read(`${PRINT}/${partial}.njk`), /class="book-page is-live" (id="[^"]+" )?data-page="\{\{ [^}]+ \}\}"/, partial);
+  // The guide wraps its pages in the partial itself, so the print and the reader share them whole.
+  for (const partial of ['guide-pages']) assert.match(read(`${PRINT}/${partial}.njk`), /class="book-page is-live" (id="[^"]+" )?data-page="\{\{ [^}]+ \}\}"/, partial);
   assert.match(read('src/js/book.js'), /is-live/);
   assert.match(read('src/js/book.js'), /--pg-scale/);
 });
 
 test('the stylesheet of each publication is one versioned file', async () => {
   const { livePagesCss, LIVE_PAGES } = await import('../lib/live-pages.js');
-  assert.deepEqual(Object.keys(LIVE_PAGES), ['review', 'magazine', 'guide']);
-  for (const [name, scope] of [['review', 'mr'], ['magazine', 'mz'], ['guide', 'tg']]) {
+  assert.deepEqual(Object.keys(LIVE_PAGES), ['review', 'guide']);
+  for (const [name, scope] of [['review', 'mr'], ['guide', 'tg']]) {
     const { css, url } = livePagesCss(name);
     assert.ok(LIVE_PAGES[name].files.at(-1) === 'live-pages.css', `${name}: the shared rules come last, so the scale of a page wins`);
     assert.match(url, new RegExp(`^/${name}-pages\\.css\\?v=[0-9a-f]{10}$`));
@@ -114,12 +114,11 @@ test('the stylesheet of each publication is one versioned file', async () => {
 
 const hasSite = fs.existsSync('_site/review-pages.css');
 test('the built site serves each stylesheet to its reader pages and to no other page', { skip: !hasSite }, () => {
-  // The special edition has 26 pages, an issue of the Management Review 10, issue 1 of the magazine 10 (issue 2 on
+  // The special edition has 26 pages, an issue of the Management Review 10, an issue of the magazine 10 or more (it
   // is written like the Management Review and takes its stylesheet), the guide 29: every printed page sits in its
   // wrapper.
   const cases = [
-    ['review', ['magazine/management-review-nr-01.html', 'sq/magazine/management-review-nr-25.html', 'de/magazine/management-review-2026-09.html', 'sq/magazine/nga-terreni-02.html'], 10],
-    ['magazine', ['magazine/nga-terreni-01.html', 'sq/magazine/nga-terreni-01.html', 'de/magazine/nga-terreni-01.html'], 10],
+    ['review', ['magazine/management-review-nr-01.html', 'sq/magazine/management-review-nr-25.html', 'de/magazine/management-review-2026-09.html', 'sq/magazine/nga-terreni-02.html', 'de/magazine/nga-terreni-01.html'], 10],
     ['guide', ['guides/tools-guide.html', 'sq/guides/tools-guide.html', 'de/guides/tools-guide.html'], 29],
   ];
   for (const [name, files, least] of cases) {
