@@ -1,0 +1,52 @@
+{#- "My shelf", shared by the three languages: what the reader keeps in this browser (js/shelf.js), with no account.
+    The page carries a catalogue of this language's essays, reflections and tools, so what the browser remembers by
+    slug or address can be shown with its title. -#}
+{%- set code = lang or "en" %}
+{%- set catalogue = [] %}
+{%- for item in collections["insights" + (lang | langSuffix)] | published %}{% set catalogue = (catalogue.push({ s: item.fileSlug, t: item.data.title, u: item.url, k: "essay" }), catalogue) %}{% endfor %}
+{%- for item in collections["reflections" + (lang | langSuffix)] %}{% set catalogue = (catalogue.push({ s: item.fileSlug, t: item.data.title, u: item.url, k: "reflection" }), catalogue) %}{% endfor %}
+{%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+{%- for tool in toolList %}{% set catalogue = (catalogue.push({ s: tool.url, t: tool.name, u: tool.url, k: "tool" }), catalogue) %}{% endfor %}
+{%- set labels = {
+  remove: "Remove" | t(lang),
+  noSaved: "Nothing saved yet. The bookmark on any essay or tool puts it here." | t(lang),
+  noCards: "No card started yet. Every essay ends with one." | t(lang),
+  noReading: "Nothing read yet." | t(lang),
+  done: "{a} of {b} done" | t(lang),
+  percent: "{p}% read" | t(lang),
+  confirmClear: "Clear the shelf? What you saved and the cards you started are removed from this browser." | t(lang),
+  kinds: { essay: "Essay" | t(lang), reflection: "Reflection" | t(lang), tool: "Tool" | t(lang), role: "Role" | t(lang), publication: "Publication" | t(lang), page: "Page" | t(lang) }
+} %}
+<section class="shell page-hero">
+  <p class="eyebrow">{{ "Yours, in this browser" | t(lang) }}</p>
+  <h1>{{ "My shelf" | t(lang) }}</h1>
+  <p class="lede">{{ "What you saved for later, the cards you started and the essays you read. Kept in this browser only, with no account; “Save all my work” takes it to another device." | t(lang) }}</p>
+</section>
+<section class="shell shelf" data-shelf-page data-lang="{{ code }}" data-labels="{{ labels | dump }}">
+  <script type="application/json" data-shelf-catalogue>{{ catalogue | dump | replace("<", "\\u003c") | safe }}</script>
+  <p class="shelf-blocked form-note" data-shelf-blocked hidden>{{ "This browser does not allow saving (a private window or blocked storage), so the shelf stays empty here." | t(lang) }}</p>
+  <div class="shelf-grid">
+    <div class="shelf-section" data-shelf-saved>
+      <h2>{{ "Saved for later" | t(lang) }}</h2>
+      <ul class="shelf-list"></ul>
+      <p class="shelf-empty">{{ "Nothing saved yet. The bookmark on any essay or tool puts it here." | t(lang) }}</p>
+    </div>
+    <div class="shelf-section" data-shelf-cards>
+      <h2>{{ "Cards in progress" | t(lang) }}</h2>
+      <ul class="shelf-list"></ul>
+      <p class="shelf-empty">{{ "No card started yet. Every essay ends with one." | t(lang) }}</p>
+    </div>
+    <div class="shelf-section" data-shelf-started>
+      <h2>{{ "Continue reading" | t(lang) }}</h2>
+      <ul class="shelf-list"></ul>
+      <p class="shelf-empty">{{ "Nothing read yet." | t(lang) }}</p>
+    </div>
+    <div class="shelf-section" data-shelf-finished>
+      <h2>{{ "Read to the end" | t(lang) }}</h2>
+      <ul class="shelf-list"></ul>
+      <p class="shelf-empty">{{ "Nothing read yet." | t(lang) }}</p>
+    </div>
+  </div>
+  <p class="shelf-note form-note">{{ "Kept in this browser only. Nothing is sent." | t(lang) }} <a href="{{ '/tools.html' | local(lang) }}#work-backup-title">{{ "Save all my work" | t(lang) }}</a> {{ "takes it to another device." | t(lang) }} <button type="button" class="shelf-clear" data-shelf-clear hidden>{{ "Clear the shelf" | t(lang) }}</button></p>
+</section>
+{% include "partials/newsletter.njk" %}

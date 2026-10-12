@@ -1545,6 +1545,39 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .essay-feedback .tf-check span { color: var(--ink); font-size: .95rem; letter-spacing: 0; text-transform: none; }
 @media print { .essay-feedback { display: none; } }
 
+/* My shelf (js/shelf.js): the bookmark in the header with its count, the bookmark on an essay, and the page. */
+.shelf-link { position: relative; }
+.shelf-link svg path { fill: none; }
+.shelf-link .shelf-count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--blue); color: var(--on-blue); font-family: var(--sans); font-size: 10px; font-weight: 800; line-height: 16px; text-align: center; }
+.shelf-link .shelf-count[hidden] { display: none; }
+.essay-save { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.essay-save svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.essay-save:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.essay-save.is-saved { color: var(--blue); border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.essay-save.is-saved svg { fill: currentColor; }
+.essay-save[disabled] { display: none; }
+.share-orbit-planets [data-shelf-save].is-saved .share-planet svg path { fill: currentColor; }
+@media print { .essay-save, .shelf-link { display: none; } }
+.shelf { padding-top: 10px; padding-bottom: 40px; }
+.shelf-grid { display: grid; gap: 18px; }
+@media (min-width: 820px) { .shelf-grid { grid-template-columns: 1fr 1fr; } }
+.shelf-section { padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.shelf-section h2 { margin: 0 0 14px; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+.shelf-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.shelf-list:empty { display: none; }
+.shelf-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+.shelf-row-link { display: grid; gap: 3px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; transition: border-color .2s ease; }
+.shelf-row-link:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.shelf-row-link strong { font-size: 1rem; line-height: 1.3; }
+.shelf-row-meta { color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.shelf-remove, .shelf-clear { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .82rem; cursor: pointer; }
+.shelf-remove:hover, .shelf-clear:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.shelf-empty { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.45; }
+.shelf-note { margin: 18px 0 0; }
+.shelf-note a { color: var(--ink); }
+.shelf-clear { margin-left: 10px; }
+.shelf-blocked { margin: 0 0 16px; }
+
 /* The Listen bar at the top of an essay (js/listen.js): play or pause, start again, the speed, the paragraph being
    read, and a note on where the voice comes from. The block being read is marked in the text. */
 .essay-listen { margin: 0 0 20px; padding: 12px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-family: var(--sans); }
