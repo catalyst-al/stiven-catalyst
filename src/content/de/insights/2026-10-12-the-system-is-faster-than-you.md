@@ -112,7 +112,7 @@ Das System mag falsch gelegen haben. Der Name in der Schicht ist Ihrer. Das ist 
 
 Das Ziel ist nicht, zwischen System und Erfahrung zu wählen. Das Ziel ist ein Prozess, in dem das System Ihnen hilft, schneller zu arbeiten, und Menschen einen Weg haben, zu erkennen, zu melden und zu korrigieren, was das System nicht versteht. Das System gibt Ihnen Geschwindigkeit, Gedächtnis und Zahlen, die Sie allein nie hätten. Im Gegenzug geben Sie ihm, was es nicht hat: Augen am Boden, eine Frage, wenn etwas keinen Sinn ergibt, und einen Namen, der verantwortet.
 
-Die Essays, die in dieser Reihe noch kommen, handeln von diesem Tausch: die Tour, die der Fahrer nicht versteht, der Scanner, der Zeuge ist und nicht Richter, das Dashboard, das vor Ihnen rot wird, der Bericht, den eine Maschine geschrieben hat, und die Nacht, in der das System ausfiel und wir sahen, was das Team wirklich wusste.
+Die Essays, die in dieser Reihe noch kommen, handeln von diesem Tausch: die Tour, die der Fahrer nicht versteht, der Scanner, der Zeuge ist und nicht Richter, das Dashboard, das vor Ihnen rot wird, der Bericht, den eine Maschine geschrieben hat, die Nacht, in der das System ausfiel und wir sahen, was das Team wirklich wusste, das neue System, das kommt, und die kleine Liste, die Sie selbst daneben bauen.
 
 ## Wer entscheidet was
 
