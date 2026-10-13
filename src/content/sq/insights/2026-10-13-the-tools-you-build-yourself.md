@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Kur një punonjës ndërton një mjet për ta bërë punën më të lehtë, tregon edhe një boshllëk në mënyrën si organizata e shpërndan informacionin. Por një mjet personal nuk bëhet pjesë e sistemit vetëm sepse është i dobishëm."
 teaser: Një mjet i vogël mund të zgjidhë një problem të madh. Që të bëhet pjesë e punës, duhet të jetë më shumë se projekti i personit që e ndërtoi.
-description: "Pse punonjësit ndërtojnë mjetet e tyre pranë sistemit zyrtar, çfarë tregon kjo për organizatën, dallimi mes një mjeti personal dhe një mjeti të autorizuar, të dhënat që nuk hyjnë në të, mjeti që varet nga një njeri, dhe pesë kushte para se ta ndash me ekipin."
+description: "Pse punonjësit ndërtojnë mjetet e tyre pranë sistemit, mjeti personal kundrejt atij të autorizuar, dhe pesë kushte para se ta ndash me ekipin."
 deck: "Eseja e tetë dhe e fundit e serisë “Sistemi është më i shpejtë se ti”: Front Desk Control dhe listat e vogla që lindin pranë sistemit zyrtar, çfarë tregojnë për boshllëqet e organizatës, pse një mjet i dobishëm nuk është vetvetiu një mjet i autorizuar, dhe pesë kushte para se të bëhet mjet i ekipit."
 relatedTools:
   - /tools/shift-handover/

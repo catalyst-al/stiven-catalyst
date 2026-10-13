@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "The system plans the tour with the data it has. The driver drives it with the conditions they have. The problem starts when the organisation does not learn from the person who drives it every day."
 teaser: An experienced driver should not be the permanent correction of a system that does not learn.
-description: "Why the system's tour and the driver's tour are not the same thing, why neither the driver nor the system is always right, four steps that turn knowledge of the area into improvement, and a card for a problem that repeats on a tour."
+description: "The system's tour and the driver's tour: why neither is always right, four steps that turn knowledge of the area into improvement, and a card."
 deck: "The third essay in the series “The system is faster than you”: the planned tour and the driven tour, the new driver and knowledge of the area, four steps that turn what the driver knows into an improvement to the plan, and a card for a problem that repeats."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

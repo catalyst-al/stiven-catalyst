@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "On the first night of my training at the hotel, the system was unavailable for hours. When the system stops, you realise how much of your work depends on it, and how well prepared you are to carry on."
 teaser: When the system stops, you realise how much of your work depends on it and how well prepared you are to carry on.
-description: "A training night without the system, what cannot be learned when the processes live on a screen, why the system coming back is not the end of the incident, five things to know before the shift, and a card for the night the system stops."
+description: "A training night without the system: what a screen cannot teach, why the incident does not end when it is back, and five things to know before the shift."
 deck: "The sixth essay in the series “The system is faster than you”: the first night of training at the hotel, when an update stopped the system for hours, what that night showed about work that depends on a screen, and five things to know before the system stops."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

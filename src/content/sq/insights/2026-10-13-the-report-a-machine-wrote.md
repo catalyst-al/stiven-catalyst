@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Një raport i gjeneruar shpejt dhe i shkruar bukur nuk është garanci që informacioni është i plotë. Makina mund ta shkruajë raportin. Përgjegjësinë për atë që thotë duhet ta mbajë njeriu."
 teaser: Makina mund ta shkruajë raportin. Përgjegjësinë për atë që thotë raporti duhet ta mbajë njeriu.
-description: "Raportet që prodhon sistemi dhe ato që shkruan AI, pse dy raporte të sakta mund të japin dy numra të ndryshëm, çfarë kontrollon para se t'i besosh një raporti, pesë rregulla për një tekst të shkruar me AI, dhe një raport në tri pjesë: faktet, interpretimi, veprimi."
+description: "Raportet e sistemit dhe ato të AI: pse dy raporte të sakta mund të mos përputhen, çfarë kontrollon para se t'i besosh, dhe një raport në tri pjesë."
 deck: "Eseja e pestë e serisë “Sistemi është më i shpejtë se ti”: raportet automatike të last mile dhe të Night Audit, AI që e shkruan tekstin më qartë, pse një raport i bukur nuk do të thotë që problemi është kuptuar, dhe një kartelë për një raport në tri pjesë."
 relatedTools:
   - /tools/shift-handover/

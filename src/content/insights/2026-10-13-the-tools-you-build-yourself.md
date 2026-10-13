@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "When an employee builds a tool to make the work easier, they also show a gap in the way the organisation distributes information. But a personal tool does not become part of the system just because it is useful."
 teaser: A small tool can solve a big problem. To become part of the work, it has to be more than the project of the person who built it.
-description: "Why employees build their own tools beside the official system, what that says about the organisation, the difference between a personal tool and an authorised one, the data that does not go into it, the tool that depends on one person, and five conditions before you share it with the team."
+description: "Why employees build their own tools beside the system, a personal tool versus an authorised one, and five conditions before you share it with the team."
 deck: "The eighth and last essay in the series “The system is faster than you”: Front Desk Control and the small lists that grow up beside the official system, what they show about the gaps in an organisation, why a useful tool is not by itself an authorised tool, and five conditions before it becomes a team tool."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

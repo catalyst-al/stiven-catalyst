@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "A scan shows that an action was recorded. It does not show the whole history of the product, and it does not show who is to blame."
 teaser: The system tells you what has been recorded. The manager has to understand what has happened.
-description: "What a scan proves and what it does not, the rule of the trolley that stays in its zone when a bag is missing, why a scan reconstructs and does not judge, five steps for a mismatch between the system and reality, and a card for it."
+description: "What a scan proves and what it does not, why it reconstructs and does not judge, five steps for a mismatch between system and reality, and a card."
 deck: "The fourth essay in the series “The system is faster than you”: what a scan proves, why an accurate record does not prove that the physical process ended correctly, five steps for a mismatch, and a card that separates a recording error from a loading error."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

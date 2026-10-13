@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "In der ersten Nacht meiner Einarbeitung im Hotel war das System stundenlang nicht verfügbar. Wenn das System stillsteht, merken Sie, wie viel Ihrer Arbeit davon abhängt, und wie gut Sie vorbereitet sind, weiterzumachen."
 teaser: Wenn das System stillsteht, merken Sie, wie viel Ihrer Arbeit davon abhängt und wie gut Sie vorbereitet sind, weiterzumachen.
-description: "Eine Einarbeitungsnacht ohne System, was sich nicht lernen lässt, wenn die Prozesse auf einem Bildschirm leben, warum die Rückkehr des Systems nicht das Ende des Vorfalls ist, fünf Dinge, die Sie vor der Schicht wissen sollten, und eine Karte für die Nacht, in der das System stillsteht."
+description: "Eine Einarbeitungsnacht ohne System: was ein Bildschirm nicht lehrt, warum der Vorfall mit seiner Rückkehr nicht endet, und fünf Dinge vor der Schicht."
 deck: "Der sechste Essay der Reihe „Das System ist schneller als Sie“: die erste Einarbeitungsnacht im Hotel, als ein Update das System stundenlang stilllegte, was diese Nacht über Arbeit gezeigt hat, die von einem Bildschirm abhängt, und fünf Dinge, die Sie wissen sollten, bevor das System stillsteht."
 relatedTools:
   - /tools/shift-handover/

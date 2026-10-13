@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Sistemi e planifikon rrugën me të dhënat që ka. Shoferi e përshkon me kushtet që ka. Problemi fillon kur organizata nuk mëson nga ai që e përshkon çdo ditë."
 teaser: Një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson.
-description: "Pse rruga e sistemit dhe rruga e shoferit nuk janë e njëjta gjë, pse as shoferi as sistemi nuk kanë gjithmonë të drejtë, katër hapa që e kthejnë njohjen e zonës në përmirësim, dhe një kartelë për një problem që përsëritet në rrugë."
+description: "Rruga e sistemit dhe rruga e shoferit: pse asnjëri s'ka gjithmonë të drejtë, katër hapa që e kthejnë njohjen e zonës në përmirësim, dhe një kartelë."
 deck: "Eseja e tretë e serisë “Sistemi është më i shpejtë se ti”: rruga e planifikuar dhe rruga e përshkuar, shoferi i ri dhe njohja e zonës, katër hapa që e kthejnë atë që di shoferi në përmirësim të planit, dhe një kartelë për një problem që përsëritet."
 relatedTools:
   - /tools/delay-analyzer/

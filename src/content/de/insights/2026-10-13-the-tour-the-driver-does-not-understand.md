@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Das System plant die Tour mit den Daten, die es hat. Der Fahrer fährt sie unter den Bedingungen, die er hat. Das Problem beginnt, wenn die Organisation nicht von dem lernt, der sie jeden Tag fährt."
 teaser: Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt.
-description: "Warum die Tour des Systems und die Tour des Fahrers nicht dasselbe sind, warum weder der Fahrer noch das System immer recht hat, vier Schritte, die Ortskenntnis in Verbesserung verwandeln, und eine Karte für ein Problem, das sich auf einer Tour wiederholt."
+description: "Die Tour des Systems und die des Fahrers: warum keiner immer recht hat, vier Schritte von der Ortskenntnis zur Verbesserung, und eine Karte."
 deck: "Der dritte Essay der Reihe „Das System ist schneller als Sie“: die geplante Tour und die gefahrene Tour, der neue Fahrer und die Ortskenntnis, vier Schritte, die das, was der Fahrer weiß, in eine Verbesserung des Plans verwandeln, und eine Karte für ein Problem, das sich wiederholt."
 relatedTools:
   - /tools/delay-analyzer/

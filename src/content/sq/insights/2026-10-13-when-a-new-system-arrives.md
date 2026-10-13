@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin, dhe dinë çfarë të bëjnë kur ai nuk i ndihmon."
 teaser: Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
-description: "Një ndryshim planifikimi në last mile dhe një trajnim hoteli parë nga ana e punonjësit, dallimi mes “si përdoret” dhe “pse ndryshon”, kur një dokument jashtë sistemit ndihmon dhe kur pengon, gjashtë gjëra para se të vijë sistemi i ri, dhe një kartelë për to."
+description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë, dhe një kartelë për to."
 deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në një hotel të ri në shtator 2026, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu, dhe gjashtë gjëra që duhen para se të vijë."
 relatedTools:
   - /tools/six-sigma-dmaic/

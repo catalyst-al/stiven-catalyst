@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "A new system does not become part of the work because it has been installed. It does when people understand it, know how to use it, and know what to do when it does not help them."
 teaser: Installation changes the system. Training, communication and daily experience change the way people work.
-description: "A planning change in last mile and a hotel training seen from the employee's side, the difference between “how it is used” and “why it is changing”, when a document outside the system helps and when it gets in the way, six things before the new system arrives, and a card for them."
+description: "A new system seen from the employee's side: “how it is used” versus “why it is changing”, six things before it arrives, and a card for them."
 deck: "The seventh essay in the series “The system is faster than you”: the move to a new planning system in August 2025 and the first weeks of training at a new hotel in September 2026, why a technically better system does not by itself make people ready, and six things that are needed before it arrives."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

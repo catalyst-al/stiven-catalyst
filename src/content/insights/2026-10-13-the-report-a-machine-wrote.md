@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "A report generated quickly and written well is no guarantee that the information is complete. The machine can write the report. The responsibility for what it says has to stay with a person."
 teaser: The machine can write the report. The responsibility for what the report says has to stay with a person.
-description: "The reports the system produces and the ones AI writes, why two correct reports can give two different numbers, what you check before you trust a report, five rules for a text written with AI, and a report in three parts: the facts, the interpretation, the action."
+description: "Reports from the system and from AI: why two correct reports can disagree, what to check before you trust one, and a report in three parts."
 deck: "The fifth essay in the series “The system is faster than you”: the automatic reports of last mile and of Night Audit, AI that writes the text more clearly, why a well-written report does not mean the problem has been understood, and a card for a report in three parts."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
