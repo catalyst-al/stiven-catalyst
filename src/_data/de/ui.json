@@ -2115,5 +2115,11 @@
   "Playback speed": "Wiedergabetempo",
   "A conversation about this issue, made with AI ({tool}) from its text. The figures and their sources are in the issue.": "Ein Gespräch über diese Ausgabe, mit KI ({tool}) aus ihrem Text erstellt. Die Zahlen und ihre Quellen stehen in der Ausgabe.",
   "Download MP3": "MP3 herunterladen",
-  "The audio could not be loaded. You can download it instead.": "Die Aufnahme konnte nicht geladen werden. Sie können sie stattdessen herunterladen."
+  "The audio could not be loaded. You can download it instead.": "Die Aufnahme konnte nicht geladen werden. Sie können sie stattdessen herunterladen.",
+  "Only some routes of the period are in the route log, so late routes are counted, not shown as a share.": "Im Touren-Protokoll steht nur ein Teil der Touren des Zeitraums, daher werden verspätete Touren gezählt und nicht als Anteil gezeigt.",
+  "Late routes are above the usual level on {day}: {n}.": "Die verspäteten Touren liegen am {day} über dem Üblichen: {n}.",
+  "Late routes are above the usual level in the week of {day}: {n}.": "Die verspäteten Touren liegen in der Woche ab {day} über dem Üblichen: {n}.",
+  "damaged unit": "beschädigte Einheit",
+  "incomplete order": "unvollständiger Auftrag",
+  "no order total, so this is a count": "keine Gesamtzahl der Aufträge, daher eine Anzahl"
 }

@@ -103,7 +103,12 @@
     });
     const lateSlots = perSlot(lateByDay);
     const routeSlots = perSlot(routesByDay);
-    const found = level(slots, lateSlots, routeSlots, (i) => routeSlots[i] > 0, (value, usual) => value > usual + 0.1);
+    // With only some routes logged (often the late ones), a share of the logged routes would read far worse than the
+    // day was: late routes are counted, as in the Delay Analyzer's hours and shifts.
+    const partial = Boolean(kit.partialRouteLog?.(delay));
+    const found = partial
+      ? level(slots, lateSlots, null, (i) => routeSlots[i] > 0, (value, usual) => value > usual * 1.25)
+      : level(slots, lateSlots, routeSlots, (i) => routeSlots[i] > 0, (value, usual) => value > usual + 0.1);
     const onTimeTarget = share(delay.target);
 
     return {
@@ -114,13 +119,14 @@
       incomplete: counted(logs.incomplete),
       delay: {
         routes: routes.length,
+        partial,
         late: sum(lateSlots),
-        onTime: routes.length ? 1 - sum(lateSlots) / routes.length : null,
+        onTime: routes.length && !partial ? 1 - sum(lateSlots) / routes.length : null,
         values: lateSlots,
         routesBySlot: routeSlots,
         ...found,
         // The on-time target is a ceiling for the late share.
-        lateTarget: onTimeTarget ? 1 - onTimeTarget : null,
+        lateTarget: onTimeTarget && !partial ? 1 - onTimeTarget : null,
       },
     };
   };
@@ -135,6 +141,7 @@
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;
   const PREFS = `sc-shift-pulse${SUFFIX}`;
   const PERIODS = ["7", "14", "30", "w8", "w12"];
+  const PARTIAL_NOTE = "Only some routes of the period are in the route log, so late routes are counted, not shown as a share.";
   const results = document.querySelector("[data-pulse-results]");
   const daysSelect = root.querySelector("[name=days]");
   const shiftSelect = root.querySelector("[name=shift]");
@@ -217,6 +224,7 @@
   };
   const delayNote = (model) => {
     const delay = model.delay;
+    if (delay.partial) return latestNote(model, delay, [tx("late route"), tx("late routes")]);
     if (!delay.latest) return tx("No entries in this period.");
     const vars = { day: dayLabel(delay.latest.key), pct: pct(delay.latest.share, 0), usual: delay.usualShare === null ? "–" : pct(delay.usualShare, 0) };
     return weekly(model) ? tx("Week of {day}: {pct} late · usual {usual}", vars) : tx("{day}: {pct} late · usual {usual}", vars);
@@ -227,7 +235,8 @@
     const w = weekly(model);
     if (model.damage.above) list.push(tx(w ? "Damage is above the usual level in the week of {day}: {n}." : "Damage is above the usual level on {day}: {n}.", { day: dayLabel(model.damage.latest.key), n: model.damage.latest.count }));
     if (model.incomplete.above) list.push(tx(w ? "Incomplete orders are above the usual level in the week of {day}: {n}." : "Incomplete orders are above the usual level on {day}: {n}.", { day: dayLabel(model.incomplete.latest.key), n: model.incomplete.latest.count }));
-    if (model.delay.above) list.push(tx(w ? "Late routes are above the usual level in the week of {day}: {pct} late." : "Late routes are above the usual level on {day}: {pct} late.", { day: dayLabel(model.delay.latest.key), pct: pct(model.delay.latest.share, 0) }));
+    if (model.delay.above && model.delay.partial) list.push(tx(w ? "Late routes are above the usual level in the week of {day}: {n}." : "Late routes are above the usual level on {day}: {n}.", { day: dayLabel(model.delay.latest.key), n: model.delay.latest.count }));
+    else if (model.delay.above) list.push(tx(w ? "Late routes are above the usual level in the week of {day}: {pct} late." : "Late routes are above the usual level on {day}: {pct} late.", { day: dayLabel(model.delay.latest.key), pct: pct(model.delay.latest.share, 0) }));
     const noOwner = issues.filter((issue) => !issue.owner).length;
     if (noOwner) list.push(tx(noOwner === 1 ? "{n} open issue has no owner." : "{n} open issues have no owner.", { n: noOwner }));
     const carried = issues.filter((issue) => issue.carried > 0).length;
@@ -241,7 +250,8 @@
       const series = model[key];
       lines.push(`${label}: ${int.format(series.total)}${series.rate !== null ? ` · ${data[key].rateLabel} ${shareText(series.rate)} (${int.format(series.total)}/${int.format(series.volume)})` : ""}`);
     });
-    lines.push(model.delay.routes
+    if (model.delay.partial) lines.push(`${tx("Late routes")}: ${int.format(model.delay.late)} (${tx(PARTIAL_NOTE)})`);
+    else lines.push(model.delay.routes
       ? `${tx("On-time routes")}: ${pct(model.delay.onTime, 1)} (${tx("{a} of {b} late", { a: model.delay.late, b: plural(model.delay.routes, tx("route"), tx("routes")) })})`
       : `${tx("On-time routes")}: –`);
     if (notes.length) lines.push("", `${tx("Needs attention")}:`, ...notes.map((note) => `- ${note}`));
@@ -283,6 +293,12 @@
     const delay = model.delay;
     if (!delay.routes) return null;
     const unitName = weekly(model) ? tx("week") : tx("day");
+    if (delay.partial) {
+      const counts = { unit: model.unit, buckets: model.slots.map((slot, i) => ({ key: slot, to: slot, value: delay.values[i] })) };
+      const box = panel(tx("Late routes"), `${tx(PARTIAL_NOTE)} ${tx("Per {unit} in this period. The dashed line is the average; the highest {unit} is red.", { unit: unitName })}`);
+      box.append(trendFigure(counts, { title: `${tx("Late routes")}: ${tx("Trend over time")}`, unit: `${tx("Late routes")} ${weekly(model) ? tx("per week") : tx("per day")}`, average: tx("Average") }, "shift-pulse-delay"));
+      return box;
+    }
     const trend = {
       unit: model.unit,
       buckets: model.slots.map((slot, i) => ({ key: slot, to: slot, count: delay.values[i], total: delay.routesBySlot[i], value: delay.routesBySlot[i] ? delay.values[i] / delay.routesBySlot[i] : 0 })),
@@ -321,9 +337,9 @@
       card({ label: tx("Damaged units"), value: int.format(model.damage.total), notes: [rateLine("damage"), latestNote(model, model.damage, [tx("unit"), tx("units")])], values: model.damage.values, highlight: slotIndex(model, model.damage.latest), above: model.damage.above, tool: "damage-control", linkText: tx("Open Damage Control") }),
       card({ label: tx("Incomplete orders"), value: int.format(model.incomplete.total), notes: [rateLine("incomplete"), latestNote(model, model.incomplete, [tx("order"), tx("orders")])], values: model.incomplete.values, highlight: slotIndex(model, model.incomplete.latest), above: model.incomplete.above, tool: "incomplete-control", linkText: tx("Open Incomplete Control") }),
       card({
-        label: tx("On-time routes"),
-        value: model.delay.routes ? pct(model.delay.onTime, 1) : "–",
-        notes: [delayNote(model)],
+        label: model.delay.partial ? tx("Late routes") : tx("On-time routes"),
+        value: model.delay.partial ? int.format(model.delay.late) : model.delay.routes ? pct(model.delay.onTime, 1) : "–",
+        notes: model.delay.partial ? [tx(PARTIAL_NOTE), delayNote(model)] : [delayNote(model)],
         values: model.delay.values,
         highlight: slotIndex(model, model.delay.latest),
         above: model.delay.above,

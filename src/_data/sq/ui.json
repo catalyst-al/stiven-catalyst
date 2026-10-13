@@ -2115,5 +2115,11 @@
   "Playback speed": "Shpejtësia e dëgjimit",
   "A conversation about this issue, made with AI ({tool}) from its text. The figures and their sources are in the issue.": "Një bisedë për këtë numër, e krijuar me inteligjencë artificiale ({tool}) nga teksti i tij. Shifrat dhe burimet e tyre janë te numri.",
   "Download MP3": "Shkarko MP3",
-  "The audio could not be loaded. You can download it instead.": "Audio nuk u ngarkua. Mund ta shkarkoni në vend të kësaj."
+  "The audio could not be loaded. You can download it instead.": "Audio nuk u ngarkua. Mund ta shkarkoni në vend të kësaj.",
+  "Only some routes of the period are in the route log, so late routes are counted, not shown as a share.": "Në regjistrin e linjave janë vetëm disa linja të periudhës, prandaj linjat me vonesë numërohen dhe nuk tregohen si përqindje.",
+  "Late routes are above the usual level on {day}: {n}.": "Linjat me vonesë janë mbi normalen më {day}: {n}.",
+  "Late routes are above the usual level in the week of {day}: {n}.": "Linjat me vonesë janë mbi normalen në javën e {day}: {n}.",
+  "damaged unit": "njësi e dëmtuar",
+  "incomplete order": "porosi e paplotë",
+  "no order total, so this is a count": "pa numrin total të porosive, prandaj ky është numër"
 }

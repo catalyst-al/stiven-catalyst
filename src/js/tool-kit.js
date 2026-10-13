@@ -218,6 +218,13 @@ window.ToolKit = (() => {
   // The period a log is analysed over. An empty end is open; with no range every row counts,
   // with a range only rows dated inside it. A rate needs its volume for the same days.
   const inRange = (rows, from, to) => (!from && !to ? rows : rows.filter((row) => row.date && (!from || row.date >= from) && (!to || row.date <= to)));
+  // A saved route log that holds only some routes of its period: the Delay Analyzer's "Routes in the period" is more
+  // than the routes logged in that period (often only the late ones are logged). Its routes are then no base for a share.
+  const partialRouteLog = (saved) => {
+    if (!isObject(saved) || !Array.isArray(saved.rows)) return false;
+    const set = Math.round(parseNumber(saved.routes));
+    return set > 0 && set > inRange(saved.rows.filter(isObject), str(saved.from), str(saved.to)).length;
+  };
   // One pass, no sort: logs can hold thousands of rows and this runs on every change.
   const dateSpan = (rows) => {
     const days = new Set();
@@ -952,7 +959,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    inRange, partialRouteLog, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

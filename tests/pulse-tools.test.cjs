@@ -120,6 +120,8 @@ test('the new Pulse texts are translated', () => {
     'Arrival {n} min: late ({side}). Choose the reason.', 'Arrival {n} min: on time.', 'All details', 'Show {n} more', 'Your log in {language} has {n} entries.', 'Open it',
     'Only some routes of the period are in the log, so hours and shifts show counts, not shares.',
     'Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.',
+    'Only some routes of the period are in the route log, so late routes are counted, not shown as a share.',
+    'Late routes are above the usual level on {day}: {n}.', 'Late routes are above the usual level in the week of {day}: {n}.',
   ];
   for (const lang of ['de', 'sq']) {
     const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
@@ -206,6 +208,28 @@ test('Shift Pulse counts each log per day and flags a latest day that is clearly
   assert.deepEqual(early.damage.values, [1, 2, 7]);
   const quiet = plain(PulseMath.compute({ damage: { rows: [{ date: '2026-09-03', shift: 'Early', units: 3 }] } }, { from: '2026-09-01', to: '2026-09-03' }));
   assert.equal(quiet.damage.above, false, 'no earlier day to compare with is not a flag');
+});
+
+test('Shift Pulse counts late routes, and gives no on-time share, when only some routes of the period are logged', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath, ToolKit } = dom.window;
+  // Five late routes logged on a day with 100 routes: the Delay Analyzer reads 95 % on time.
+  const late = [1, 2, 3, 4, 5].map((i) => ({ date: '2026-09-03', shift: 'Early', route: `R${i}`, planArr: '08:00', actArr: '08:45' }));
+  const partial = { arrivalGrace: '15', routes: '100', from: '', to: '', rows: late };
+  assert.equal(ToolKit.partialRouteLog(partial), true);
+  assert.equal(ToolKit.partialRouteLog({ ...partial, routes: '5' }), false, 'every route of the period is logged');
+  assert.equal(ToolKit.partialRouteLog({ ...partial, routes: '' }), false, 'no total typed');
+  assert.equal(ToolKit.partialRouteLog({ ...partial, from: '2026-09-04', to: '2026-09-05' }), true, 'none of the 100 routes of that period is logged');
+  const model = plain(PulseMath.compute({ delay: partial }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.equal(model.delay.partial, true);
+  assert.equal(model.delay.onTime, null, 'not 0 %: the logged routes are not all the routes');
+  assert.equal(model.delay.late, 5);
+  assert.equal(model.delay.latest.share, null);
+  assert.equal(model.delay.lateTarget, null);
+  const whole = plain(PulseMath.compute({ delay: { ...partial, routes: '' } }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.deepEqual([whole.delay.partial, whole.delay.onTime], [false, 0], 'a log of every route keeps its share');
 });
 
 test('Shift Pulse reads a period by the week, from each Monday, and compares the latest week with the ones before', () => {
