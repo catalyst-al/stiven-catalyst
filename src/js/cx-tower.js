@@ -906,11 +906,12 @@
     state.week = "";
     state.example = true;
     if (state.tab === "data") state.tab = "overview";
-    say(tx("Example loaded: four weeks of a delivery station with five partners. Replace it with your files in Data & targets."));
     invalidate();
   };
+  // On a first visit the example flag says it; asked for, the note says so too.
   const loadExample = () => {
     showExample();
+    say(tx("Example loaded: four weeks of a delivery station with five partners. Replace it with your files in Data & targets."));
     save();
     render();
   };
@@ -2451,4 +2452,5 @@
   // Nothing is written to the browser until the visitor acts.
   if (!hasData() && firstVisit(cfg.storageKey)) showExample();
   render();
+  app.classList.add("is-ready");
 })();

@@ -68,7 +68,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* The sticky header (74 px) must not cover what the keyboard or a link brings into view. */
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   margin: 0;
   min-height: 100vh;
@@ -308,6 +309,21 @@ button, input, select { font: inherit; }
   transition: opacity .6s ease;
 }
 .cosmos-hint.is-done { opacity: .45; }
+.cosmos-pause {
+  display: block;
+  margin: 8px auto 0;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.cosmos-pause:hover, .cosmos-pause:focus-visible { color: var(--ink); border-color: var(--muted); }
+.cosmos-pause[hidden] { display: none; }
 
 .cosmos-families {
   display: flex;
@@ -1722,7 +1738,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   letter-spacing: .2em;
   text-transform: uppercase;
 }
-[data-theme="light"] .family-role { color: color-mix(in srgb, var(--family) 70%, #000); }
+[data-theme="light"] .family-role { color: color-mix(in srgb, var(--family) 45%, #000); }
 .family-card strong {
   font-family: var(--display);
   font-size: 24px;
@@ -1805,7 +1821,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .family-head.is-plain { grid-template-columns: minmax(0, 1fr); }
 .family-head .family-visual { border-radius: 18px; }
 .family-head .kicker { color: var(--family); margin-bottom: 10px; }
-[data-theme="light"] .family-head .kicker { color: color-mix(in srgb, var(--family) 70%, #000); }
+[data-theme="light"] .family-head .kicker { color: color-mix(in srgb, var(--family) 45%, #000); }
 .family-head h2 {
   margin: 0;
   font-family: var(--display);
@@ -1929,7 +1945,7 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
 }
 .optional {
   margin-left: 6px;
-  color: color-mix(in srgb, var(--muted) 70%, transparent);
+  color: var(--muted);
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: none;
@@ -2180,6 +2196,8 @@ h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
 /* Defect logs (Damage Control, Incomplete Control) */
 .dl-box {
   display: grid;
+  /* One column that may not grow: a wide table in a <details> scrolls inside it instead of widening the page. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   min-width: 0;
   margin: 0;
@@ -2882,6 +2900,7 @@ select.sh-in { cursor: pointer; }
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   padding: 10px 0 26px;
   border-bottom: 1px solid var(--line);
@@ -2919,6 +2938,7 @@ html:not(.js) .filter-bar { display: none; }
 .filter-search input::placeholder { color: var(--muted); }
 .filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
+  max-width: 100%;
   padding: 8px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -3670,6 +3690,9 @@ html:not(.js) .filter-bar { display: none; }
 /* The book: "Mall për Durrësin" */
 .book-hero {
   display: grid;
+  /* The 3D cover's shadow may reach into the page margin, not past the screen (1024-1100 px scrolled sideways). */
+  overflow-x: clip;
+  overflow-clip-margin: 20px;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
   gap: 60px;
   align-items: center;
@@ -3760,6 +3783,12 @@ html:not(.js) .filter-bar { display: none; }
   .audio-player-rate { grid-area: rate; justify-self: end; }
   .audio-player-scrub { grid-area: scrub; margin: 0; }
   .audio-player-time { grid-area: time; }
+}
+/* The narrowest phones (320 px): the play button and the speed on one line, back, forward and the position under them,
+   the time last, so a longer label ("Abspielen") never pushes the row past the screen. */
+@media (max-width: 380px) {
+  .audio-player-row { grid-template-columns: auto auto minmax(0, 1fr) auto; grid-template-areas: "play play . rate" "back fwd scrub scrub" "time time time time"; }
+  .audio-player-time { justify-self: end; }
 }
 @media print { .audio-player { display: none; } }
 
@@ -5368,6 +5397,14 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 .cx-tab[aria-selected="true"] { border-bottom-color: var(--blue); color: var(--ink); }
 .cx-tab:hover { color: var(--ink); }
 .cx-body { display: grid; gap: 20px; min-width: 0; outline: none; }
+/* The tabs and the panel are drawn by js/cx-tower.js after the page: until then they keep their room (one row of tabs, a
+   screen of panel), so the text under them does not jump when they appear. */
+.js .cx-tabs:empty { min-height: 47px; }
+.js .cx-body:empty { min-height: 100vh; }
+/* The example flag and the filters show on a first visit (the example) and whenever there is data: until the script has
+   decided (.is-ready), their room is kept, unseen. */
+.js .cx:not(.is-ready) .cx-example-flag[hidden] { display: block !important; visibility: hidden; }
+.js .cx:not(.is-ready) .cx-filters[hidden] { display: grid !important; visibility: hidden; }
 .cx-body > * { min-width: 0; }
 .cx-body .dl-stats, .cx-body .dl-result-grid { margin: 0; }
 .cx-panel { gap: 14px; grid-template-columns: minmax(0, 1fr); }
@@ -6169,7 +6206,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .role-next-card .family-visual { aspect-ratio: auto; height: 100%; min-height: 150px; }
 .role-next-text { display: grid; align-content: center; gap: 6px; padding: 20px 22px; }
 .role-next-text small { color: var(--family); font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
-[data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 70%, #000); }
+[data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 45%, #000); }
 .role-next-text strong { font-family: var(--display); font-size: 26px; letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
 .role-next-text span { color: var(--muted); font-size: 14px; }
 
@@ -6537,8 +6574,10 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .writing-hero .lede { margin-top: 22px; }
 
 /* The series "Ten years close to the work" as a path: one dot per essay. */
-.series-dots { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.series-dots { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+/* A dot is small, its target is not: 24 px around each (::before), with gaps wide enough that no two targets overlap. */
 .series-dots a {
+  position: relative;
   display: block;
   width: 14px;
   height: 14px;
@@ -6546,14 +6585,17 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   border-radius: 50%;
   transition: transform .2s ease, background-color .2s ease;
 }
+.series-dots a::before { content: ""; position: absolute; inset: -6.5px; border-radius: 50%; }
 .series-dots a:hover, .series-dots a:focus-visible { transform: scale(1.25); }
 .series-dots a.is-read { background: color-mix(in srgb, var(--blue) 50%, transparent); }
 .series-dots a.is-next { border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 20%, transparent); }
 .series-dots a[aria-current="page"] { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 22%, transparent); }
-.series-track .series-dots { gap: 5px; }
+.series-track .series-dots { gap: 12px; }
 .series-track .series-dots a { width: 12px; height: 12px; }
+.series-track .series-dots a::before { inset: -7.5px; }
 .series-dots.is-large { gap: 10px; }
 .series-dots.is-large a { width: 18px; height: 18px; }
+.series-dots.is-large a::before { inset: -4.5px; }
 
 .series-panel {
   display: grid;
