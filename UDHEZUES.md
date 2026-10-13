@@ -158,7 +158,7 @@ node scripts/audio.mjs ~/Downloads/biseda.m4a management-review-nr-02 sq "Titull
 - **Faqja:** `stivencatalyst.com/podcast.html` (edhe `/de/` dhe `/sq/`). Aty lexuesi e ndjek me një prekje në
   Apple Podcasts, Overcast, Pocket Casts ose AntennaPod, ose kopjon adresën për çdo aplikacion tjetër. Lidhja
   "Podcast" është edhe në fund të çdo faqeje dhe poshtë luajtësit të çdo numri.
-- **Feed-i:** `stivencatalyst.com/podcast.xml` (një për çdo gjuhë që ka episode; tani vetëm anglisht).
+- **Feed-i:** një për çdo gjuhë: `stivencatalyst.com/podcast.xml` (anglisht), `/sq/podcast.xml` (shqip) dhe `/de/podcast.xml` (gjermanisht). Një gjuhë pa episode merr në faqe ato angleze.
 - **Pas çdo audioje të re:** pasi ke bërë `node scripts/audio.mjs …`, bëj edhe
   `node scripts/podcast-art.mjs`. Ai vizaton foton katrore të episodit (numri dhe titulli) te `src/media/podcast/`.
 
@@ -169,6 +169,7 @@ node scripts/audio.mjs ~/Downloads/biseda.m4a management-review-nr-02 sq "Titull
 2. **Spotify:** hyr te https://creators.spotify.com, **Add an existing show**, ngjit të njëjtën adresë. Spotify dërgon
    një kod te emaili i podcast-it (`contact@stivencatalyst.com`, nga `src/_data/site.json`): mbaje atë email aktiv.
 3. Episodet e reja dalin vetë në të dyja, pa bërë asgjë tjetër.
+4. Feed-i shqip (`https://stivencatalyst.com/sq/podcast.xml`) dhe ai gjermanisht (`/de/podcast.xml`) janë shfaqje më vete: shtoji në të njëjtën mënyrë, që secila gjuhë të ketë podcast-in e vet.
 
 
 ---

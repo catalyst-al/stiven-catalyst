@@ -7,6 +7,22 @@
       "bytes": 10069742,
       "ai": "NotebookLM",
       "published": "2026-10-13"
+    },
+    "sq": {
+      "src": "/media/audio/management-review-nr-01-sq.mp3",
+      "title": "Pse Google dështoi pa menaxherë",
+      "seconds": 1423,
+      "bytes": 11446718,
+      "published": "2026-10-13",
+      "ai": "NotebookLM"
+    },
+    "de": {
+      "src": "/media/audio/management-review-nr-01-de.mp3",
+      "title": "Warum Googles Experiment ohne Manager scheiterte",
+      "seconds": 1237,
+      "bytes": 9968204,
+      "published": "2026-10-13",
+      "ai": "NotebookLM"
     }
   }
 }
