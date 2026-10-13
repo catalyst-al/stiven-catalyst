@@ -28,24 +28,28 @@
 
   // One KPI over the slots of the period. counts are per slot; totals are per slot when the KPI is a share of something
   // (the volume, the routes) and null when it is a plain count. latest is the last slot where present(i) holds, usual
-  // what the slots before it ran at, and above says that the latest is clearly worse: worse(value, usual, before) with
-  // the share for shares and the count otherwise, and always at least two entries.
-  const level = (slots, counts, totals, present, worse) => {
+  // what the slots before it ran at, and above says that the latest is clearly worse, by the rule of the Sigma &
+  // Control Chart: beyond three sigma of the usual level (a c-chart for a count, a p-chart for a share, at the latest
+  // slot's own volume), and always at least two entries. A high day inside those limits is noise, not a signal.
+  const level = (slots, counts, totals, present) => {
     const index = counts.map((count, i) => i).filter(present).pop();
-    if (index === undefined) return { latest: null, usual: null, usualShare: null, above: false };
+    if (index === undefined) return { latest: null, usual: null, usualShare: null, limit: null, above: false };
     const before = counts.slice(0, index);
     const usual = before.some((count) => count > 0) ? sum(before) / before.length : null;
     if (!totals) {
-      return { latest: { key: slots[index], count: counts[index], share: null }, usual, usualShare: null, above: usual !== null && counts[index] >= 2 && worse(counts[index], usual, before) };
+      const limit = usual === null ? null : usual + 3 * Math.sqrt(usual);
+      return { latest: { key: slots[index], count: counts[index], share: null }, usual, usualShare: null, limit, above: limit !== null && counts[index] >= 2 && counts[index] > limit };
     }
     const base = sum(totals.slice(0, index));
     const usualShare = base > 0 ? sum(before) / base : null;
     const latestShare = totals[index] > 0 ? counts[index] / totals[index] : null;
+    const limit = usualShare === null || latestShare === null ? null : usualShare + 3 * Math.sqrt((usualShare * (1 - usualShare)) / totals[index]);
     return {
       latest: { key: slots[index], count: counts[index], share: latestShare },
       usual,
       usualShare,
-      above: latestShare !== null && usualShare !== null && counts[index] >= 2 && worse(latestShare, usualShare, before),
+      limit,
+      above: limit !== null && counts[index] >= 2 && latestShare > limit,
     };
   };
 
@@ -75,9 +79,9 @@
       const volumes = kit.dayVolumes(known, rows, from, to);
       const covered = volumes.items.length > 0 && !volumes.missing.length && !volumes.undated;
       const totals = covered ? perSlot(new Map(volumes.items.map((item) => [item.date, item.volume]))) : null;
-      const found = level(slots, counts, totals, (i) => counts[i] > 0, totals
-        ? (value, usual, before) => before.some((count) => count > 0) && value > usual * 1.25
-        : (value, usual) => value > usual * 1.25);
+      // With a volume, a damage-free run before the latest day is no base for a share: no flag then.
+      const found = level(slots, counts, totals, (i) => counts[i] > 0);
+      if (totals && !counts.slice(0, counts.findLastIndex((count) => count > 0)).some((count) => count > 0)) found.above = false;
       return {
         values: counts,
         total,
@@ -106,9 +110,7 @@
     // With only some routes logged (often the late ones), a share of the logged routes would read far worse than the
     // day was: late routes are counted, as in the Delay Analyzer's hours and shifts.
     const partial = Boolean(kit.partialRouteLog?.(delay));
-    const found = partial
-      ? level(slots, lateSlots, null, (i) => routeSlots[i] > 0, (value, usual) => value > usual * 1.25)
-      : level(slots, lateSlots, routeSlots, (i) => routeSlots[i] > 0, (value, usual) => value > usual + 0.1);
+    const found = level(slots, lateSlots, partial ? null : routeSlots, (i) => routeSlots[i] > 0);
     const onTimeTarget = share(delay.target);
 
     return {

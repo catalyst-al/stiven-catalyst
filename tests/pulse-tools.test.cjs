@@ -200,10 +200,15 @@ test('Shift Pulse counts each log per day and flags a latest day that is clearly
   assert.deepEqual(all.days, ['2026-09-01', '2026-09-02', '2026-09-03']);
   assert.deepEqual(all.damage.values, [1, 2, 9], 'a row without units counts one; rows outside the period do not count');
   assert.equal(all.damage.total, 12);
-  assert.equal(all.damage.above, true, '9 on the latest day against a usual 1.5');
+  assert.equal(all.damage.above, true, '9 on the latest day against a usual 1.5 (limit 1.5 + 3 x 1.22 = 5.2)');
   assert.equal(all.incomplete.latest, null);
   assert.deepEqual([all.delay.routes, all.delay.late, all.delay.onTime], [4, 3, 0.25], 'the route without an arrival time is left out');
-  assert.equal(all.delay.above, true);
+  assert.equal(all.delay.above, false, '2 of 2 late after 1 of 2: with two routes a day that is inside the limits, noise');
+  // A clear signal: 9 of 10 routes late on the latest day, after 1 of 20 on the two days before it.
+  const routesOf = (date, late, total) => Array.from({ length: total }, (_, i) => ({ date, shift: 'Early', planArr: '10:00', actArr: i < late ? '10:40' : '10:05' }));
+  const spike = plain(PulseMath.compute({ delay: { arrivalGrace: '15', rows: [...routesOf('2026-09-01', 1, 10), ...routesOf('2026-09-02', 0, 10), ...routesOf('2026-09-03', 9, 10)] } }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.equal(spike.delay.above, true);
+  assert.ok(spike.delay.limit > 0.05 && spike.delay.limit < 0.9, 'a p-chart limit at the latest day\'s own routes');
   const early = plain(PulseMath.compute(logs, { from: '2026-09-01', to: '2026-09-03', shift: 'Early' }));
   assert.deepEqual(early.damage.values, [1, 2, 7]);
   const quiet = plain(PulseMath.compute({ damage: { rows: [{ date: '2026-09-03', shift: 'Early', units: 3 }] } }, { from: '2026-09-01', to: '2026-09-03' }));
@@ -230,6 +235,20 @@ test('Shift Pulse counts late routes, and gives no on-time share, when only some
   assert.equal(model.delay.lateTarget, null);
   const whole = plain(PulseMath.compute({ delay: { ...partial, routes: '' } }, { from: '2026-09-01', to: '2026-09-03' }));
   assert.deepEqual([whole.delay.partial, whole.delay.onTime], [false, 0], 'a log of every route keeps its share');
+});
+
+test('Shift Pulse leaves a stable process unflagged: a usual day is not "above the usual"', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath } = dom.window;
+  const week = ['2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04', '2026-09-05', '2026-09-06', '2026-09-07'];
+  const options = { from: week[0], to: week[6] };
+  const log = (counts) => ({ rows: counts.flatMap((units, i) => (units ? [{ date: week[i], shift: 'Early', units }] : [])) });
+  // Two cases the old rule flagged: 3 every damaged day, and exactly 10 every day.
+  assert.equal(PulseMath.compute({ damage: log([0, 3, 0, 0, 3, 0, 3]) }, options).damage.above, false);
+  assert.equal(PulseMath.compute({ damage: log([10, 10, 10, 10, 10, 10, 10]) }, { from: '2026-08-25', to: week[6] }).damage.above, false);
+  assert.equal(PulseMath.compute({ damage: log([2, 1, 3, 2, 2, 1, 4]) }, options).damage.above, false, 'within c-chart limits');
 });
 
 test('Shift Pulse reads a period by the week, from each Monday, and compares the latest week with the ones before', () => {
@@ -272,7 +291,9 @@ test('Shift Pulse shows a rate only when every day with entries has a volume, an
   const options = { from: '2026-09-01', to: '2026-09-04' };
   const full = plain(PulseMath.compute({ damage: { rows, volumes, target: '0.2' } }, options)).damage;
   assert.deepEqual([full.volume, full.rate, full.target], [4000, 12 / 4000, 0.002], 'a quiet day with a volume is in the volume');
-  assert.equal(full.above, true, '6 of 1000 on the latest day, against 6 of 2000 before it');
+  assert.equal(full.above, false, '6 of 1000 against 6 of 2000 before it: about 3 were expected, and 6 is inside the limits');
+  const high = plain(PulseMath.compute({ damage: { rows: [...rows.slice(0, 2), { date: '2026-09-03', shift: 'Early', units: 15 }], volumes } }, options)).damage;
+  assert.equal(high.above, true, '15 of 1000 against 6 of 2000 is a signal');
   assert.equal(full.volumes.length, 4);
   const gap = plain(PulseMath.compute({ damage: { rows, volumes: volumes.filter((item) => item.date !== '2026-09-02') } }, options)).damage;
   assert.equal(gap.rate, null, 'a day with entries and no volume: no rate');
