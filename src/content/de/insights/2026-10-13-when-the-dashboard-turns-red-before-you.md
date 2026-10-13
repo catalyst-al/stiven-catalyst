@@ -5,10 +5,10 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "Eine rote Zahl auf dem Bildschirm ist nicht der Boden. Sie ist ein Bericht über den Boden, und der Bericht hat ein Alter. Zwischen dem Wagen an der Rampe und dem Rot auf Ihrem Dashboard liegen vier Schritte, und jeder braucht Zeit. Die Frage vor jeder Reaktion ist, wie alt das Rot ist."
+summary: "Eine rote Zahl auf dem Bildschirm ist ein Bericht über den Boden, und der Bericht hat ein Alter. Fragen Sie, wie alt er ist, bevor Sie danach handeln."
 teaser: Das Rot auf Ihrem Bildschirm ist der Boden, wie er war. Fragen Sie, wie alt es ist, bevor Sie handeln.
-description: "Warum eine rote Zahl auf einem Dashboard ein Alter hat, was zwischen dem Boden und dem Bildschirm passiert, die drei falschen Reaktionen auf ein Rot (sofort anrufen, ignorieren, weiterreichen), die ersten sechzig Sekunden nach einem Rot und wie man sie vor der Schicht festlegt, und eine Karte für Ihre eigene rote Zahl."
-deck: "Der zweite Essay der Reihe „Das System ist schneller als Sie“: warum eine rote Zahl ein Alter hat, was zwischen dem Boden und dem Bildschirm passiert, die drei falschen Reaktionen auf ein Rot, die ersten sechzig Sekunden danach, und eine Karte für Ihre eigene rote Zahl."
+description: "Warum eine rote Zahl auf einem Dashboard ein Alter hat, die vier Schritte zwischen Boden und Bildschirm, die drei falschen Reaktionen auf ein Rot, die ersten sechzig Sekunden, vor der Schicht festgelegt, und eine Karte für Ihre eigene rote Zahl."
+deck: "Der zweite Essay der Reihe „Das System ist schneller als Sie“: warum eine rote Zahl ein Alter hat, die drei falschen Reaktionen auf ein Rot, die ersten sechzig Sekunden danach, und eine Karte für Ihre eigene rote Zahl."
 relatedTools:
   - /tools/shift-pulse/
   - /tools/delay-analyzer/

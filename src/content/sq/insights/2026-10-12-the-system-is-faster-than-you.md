@@ -5,10 +5,10 @@ category: Operacione
 series: the-system
 status: published
 featured: true
-summary: "Sistemi vendos i pari. Skanimi e vërteton çantën, plani e cakton rrugën, tabela skuqet, të gjitha para se njeriu në turn të ketë parë ndonjë gjë. Ajo që i mbetet atij njeriu është pjesa që sistemit nuk i është thënë kurrë, dhe emri që përgjigjet për të."
+summary: "Sistemi vendos i pari. Ajo që i mbetet njeriut në turn është pjesa që sistemit nuk i është thënë kurrë, dhe emri që përgjigjet për të."
 teaser: Sistemi vendos i pari. Emri në turn është prapë i yti.
-description: "Pse sistemet e çdo turni, skaneri, planifikimi, PMS-i, tabela, janë më të shpejta se njerëzit pranë tyre dhe prapë kanë nevojë për ta: çfarë di sistemi dhe çfarë nuk i është thënë kurrë, tri mënyra si e gabon një shef turni, tri pyetje për çdo vendim që merr sistemi, dhe një kartelë për kush vendos çfarë."
-deck: "Eseja e parë e serisë “Sistemi është më i shpejtë se ti”: çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si e gabon një shef turni, tri pyetje për çdo vendim që merr sistemi, dhe një kartelë për kush vendos çfarë në turnin tënd."
+description: "Çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si e gabon një shef turni, tri pyetje për çdo vendim që merr sistemi, dhe një kartelë për kush vendos çfarë."
+deck: "Eseja e parë e serisë “Sistemi është më i shpejtë se ti”: çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si e gabon një shef turni, dhe një kartelë për kush vendos çfarë në turnin tënd."
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-pulse/
@@ -72,7 +72,7 @@ Pra puna nuk është të luftosh me sistemin. Puna është të dish cilat janë 
 
 Kam parë tri mënyra se si e trajtojnë këtë shefat e turnit, dhe i kam bërë të trija vetë.
 
-**Besimi i plotë.** Sistemi e tha, pra është kështu. Kur del keq, përgjigja është „sistemi e caktoi“. Është përgjigja më e rehatshme dhe më e rrezikshmja, sepse ia dorëzon përgjegjësinë diçkaje që nuk mund ta mbajë. Klienti para dyqanit të mbyllur nuk e pyet sistemin.
+**Besimi i plotë.** Sistemi e tha, pra është kështu. Kur del keq, përgjigja është “sistemi e caktoi”. Është përgjigja më e rehatshme dhe më e rrezikshmja, sepse ia dorëzon përgjegjësinë diçkaje që nuk mund ta mbajë. Klienti para dyqanit të mbyllur nuk e pyet sistemin.
 
 **Mosbesimi i plotë.** Shoferi me përvojë që e ndryshon rrugën çdo ditë pa thënë asnjë fjalë. Zakonisht ka të drejtë. Por dija e tij mbetet në kokën e tij: sistemi nuk mëson, shoferi i ri nuk mëson, dhe ditën që ai mungon, rruga kthehet te gabimi i parë.
 
