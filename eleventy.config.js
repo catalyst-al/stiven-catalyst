@@ -1,7 +1,7 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
-import { clearCache, localUrl, quoted, QUOTES } from "./lib/translations.js";
+import { clearCache, localUrl, quoted, QUOTES, keepUnits } from "./lib/translations.js";
 import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
@@ -324,6 +324,10 @@ export default function (eleventyConfig) {
   // Letter pairs that would touch in the tight display titles get their space (lib/display-pairs.js).
   eleventyConfig.addTransform("display-pairs", function (content) {
     return (this.page.outputPath || "").endsWith(".html") ? markPairs(content) : content;
+  });
+  // "5 %" stays on one line on the German pages (keepUnits in lib/translations.js).
+  eleventyConfig.addTransform("keep-units", function (content) {
+    return (this.page.outputPath || "").endsWith(".html") ? keepUnits(content) : content;
   });
   // Minified scripts in the output; the sources stay readable (lib/js-minify.js).
   eleventyConfig.on("eleventy.after", async ({ dir }) => { await minifyScripts(dir?.output || "_site"); });

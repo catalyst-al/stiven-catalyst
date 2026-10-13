@@ -37,6 +37,8 @@ const issues = raw.map((issue) => {
     block: issue.block,
     pageOf,
     pageCount: issue.pages.length,
+    // The languages in which page 2 leaves out the reading legend, for lack of room.
+    tight: issue.tight || [],
     sources: issue.sources.map((id) => sourceById[id]),
     ...perLang,
   };

@@ -23,7 +23,7 @@
         DSP: ["dsp", "delivery partner", "lieferpartner", "partner"],
         Shift: ["shift", "schicht", "turni", "wave", "welle"],
         Zone: ["zone", "zona", "area", "gebiet", "zustellgebiet"],
-        Route_ID: ["route id", "route", "tour", "tour id", "rruga"],
+        Route_ID: ["route id", "route", "tour", "tour id", "rruga", "linja"],
         Driver_ID: ["driver id", "driver", "fahrer", "fahrer id", "shofer", "shoferi"],
         Delivery_ID: ["delivery id", "order id", "order", "auftrag", "auftragsnummer", "sendung", "porosia"],
         Delivered: ["delivered", "zugestellt", "dorezuar", "e dorezuar"],
@@ -46,7 +46,7 @@
         DSP: ["dsp", "delivery partner", "lieferpartner", "partner"],
         Shift: ["shift", "schicht", "turni", "wave", "welle"],
         Zone: ["zone", "zona", "area", "gebiet"],
-        Route_ID: ["route id", "route", "tour", "tour id", "rruga"],
+        Route_ID: ["route id", "route", "tour", "tour id", "rruga", "linja"],
         Driver_ID: ["driver id", "driver", "fahrer", "fahrer id", "shofer"],
         Vehicle_ID: ["vehicle id", "vehicle", "fahrzeug", "automjeti"],
         Ramp_Gate: ["ramp gate", "gate", "rampe", "tor", "porta"],
@@ -76,7 +76,7 @@
         DSP: ["dsp", "delivery partner", "lieferpartner", "partner"],
         Shift: ["shift", "schicht", "turni"],
         Zone: ["zone", "zona", "area", "gebiet"],
-        Route_ID: ["route id", "route", "tour", "rruga"],
+        Route_ID: ["route id", "route", "tour", "rruga", "linja"],
         Driver_ID: ["driver id", "driver", "fahrer", "shofer"],
         Delivery_ID: ["delivery id", "order id", "auftrag", "porosia"],
         Incident_Type: ["incident type", "type", "vorfallart", "art", "lloji"],
@@ -2388,7 +2388,7 @@
       saved.append(table([tx("ID"), tx("Investigation"), tx("Failure and period"), tx("Owner"), tx("Stage"), tx("Deadline"), tx("Action"), ""], [...state.cases].reverse().map((item) => {
         const tr = el("tr", item.id === state.caseId ? "is-selected" : "");
         const manage = el("td", "cx-case-manage");
-        const open = el("button", "button-ghost", tx("Open"));
+        const open = el("button", "button-ghost", tx("Open it"));
         open.type = "button";
         open.addEventListener("click", () => {
           state.caseId = item.id;

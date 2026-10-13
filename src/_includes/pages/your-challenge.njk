@@ -9,7 +9,7 @@
 </section>
 <section class="shell contact your-challenge">
   <form class="contact-form tool-feedback-form challenge-form" data-tool-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
-        data-sent="{{ 'Thank you. I read every one. What I can answer in public becomes a field note or a reader question, anonymised; the rest gets an answer by email, when you left one.' | t(lang) }}"
+        data-sent="{{ 'Thank you. I read every one. What I can answer in public becomes a field note or a reader question, anonymised; the rest gets an answer by email, if you left one.' | t(lang) }}"
         data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
         data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
         data-subject="{{ 'Your challenge' | t(lang) }}">

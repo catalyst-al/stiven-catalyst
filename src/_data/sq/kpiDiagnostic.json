@@ -60,7 +60,7 @@
     { "cause": "ownership", "text": "Problemet shfaqen te dorëzimet mes turneve, ekipeve ose sistemeve." },
     { "cause": "clarity", "text": "Objektivi ndryshoi së fundmi, ose arsyeja pas tij nuk u shpjegua kurrë." },
     { "cause": "design", "text": "Mjetet, planimetria ose sistemet e bëjnë mënyrën e duhur më të ngadaltë se mënyrën e gabuar." },
-    { "cause": "capacity", "text": "Njerëzit anashkalojnë hapa sepse nuk ka kohë të mjaftueshme për t’i bërë të gjithë." },
+    { "cause": "capacity", "text": "Njerëzit anashkalojnë hapa sepse nuk ka kohë të mjaftueshme për t'i bërë të gjithë." },
     { "cause": "ownership", "text": "Kur diçka shkon keq, nuk është e qartë kush duhej ta kishte kapur." },
     { "cause": "skill", "text": "Rezultatet përmirësohen qartë kur në të njëjtin turn është një person me përvojë." }
   ]
