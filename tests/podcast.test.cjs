@@ -118,4 +118,7 @@ test('the built feed is well-formed RSS with the tags Apple Podcasts and Spotify
   assert.match(page, /<link rel="alternate" type="application\/rss\+xml"[^>]*href="\/podcast\.xml"/);
   assert.match(page, /data-podcast-copy/);
   assert.match(fs.readFileSync('_site/magazine/management-review-nr-01.html', 'utf8'), /href="\/podcast\.html">Follow the podcast/);
+  for (const lang of ['sq', 'de']) {
+    assert.match(fs.readFileSync(`_site/${lang}/index.html`, 'utf8'), new RegExp(`href="/${lang}/podcast\\.html">Podcast`), `${lang}: the footer opens the podcast page of the language`);
+  }
 });
