@@ -151,6 +151,26 @@ node scripts/audio.mjs ~/Downloads/biseda.m4a management-review-nr-02 sq "Titull
 - Shënimi poshtë luajtësit thotë që biseda është bërë me AI (NotebookLM). Nëse e ke incizuar me zërin tënd,
   shto `--own-voice` dhe shënimi nuk del.
 
+### Podcast-i
+
+Çdo audio e Management Review del vetë edhe si episod podcast-i:
+
+- **Faqja:** `stivencatalyst.com/podcast.html` (edhe `/de/` dhe `/sq/`). Aty lexuesi e ndjek me një prekje në
+  Apple Podcasts, Overcast, Pocket Casts ose AntennaPod, ose kopjon adresën për çdo aplikacion tjetër. Lidhja
+  "Podcast" është edhe në fund të çdo faqeje dhe poshtë luajtësit të çdo numri.
+- **Feed-i:** `stivencatalyst.com/podcast.xml` (një për çdo gjuhë që ka episode; tani vetëm anglisht).
+- **Pas çdo audioje të re:** pasi ke bërë `node scripts/audio.mjs …`, bëj edhe
+  `node scripts/podcast-art.mjs`. Ai vizaton foton katrore të episodit (numri dhe titulli) te `src/media/podcast/`.
+
+**Ta shfaqësh në Apple Podcasts dhe Spotify (një herë):**
+
+1. **Apple Podcasts:** hyr te https://podcastsconnect.apple.com me Apple ID-në, **+ → New Show → Add a show with an
+   RSS feed**, ngjit `https://stivencatalyst.com/podcast.xml`. Apple e kontrollon për disa ditë.
+2. **Spotify:** hyr te https://creators.spotify.com, **Add an existing show**, ngjit të njëjtën adresë. Spotify dërgon
+   një kod te emaili i podcast-it (`contact@stivencatalyst.com`, nga `src/_data/site.json`): mbaje atë email aktiv.
+3. Episodet e reja dalin vetë në të dyja, pa bërë asgjë tjetër.
+
+
 ---
 
 ## Pyetje të shpejta

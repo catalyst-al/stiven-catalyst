@@ -2,16 +2,20 @@
     the browser's own player as it comes, and a one-line bar over it once js/audio-player.js runs: play and pause,
     15 seconds back and forward, the position, the time and the speed (1×, 1.25×, 1.5×, 2×). The place reached and
     the speed are kept in the browser (sc-audio-<key>, sc-audio-rate). Nothing is loaded until play is pressed.
-    Needs track (an entry of audio.json), key, lang; artwork (a cover image) and album are optional. -#}
+    Needs track (an entry of audio.json), key, lang; artwork (a cover image) and album are optional. With compact
+    (the podcast page, where the episode carries its own title) the head is left out, and so is the link to the
+    podcast, which a player elsewhere offers. -#}
 {%- set clock = (track.seconds // 60) + ":" + (track.seconds % 60) | pad -%}
 <div class="audio-player" data-audio data-key="{{ key }}" data-seconds="{{ track.seconds }}"
      data-title="{{ track.title }}" data-album="{{ album }}"{% if artwork %} data-artwork="{{ artwork }}"{% endif %}
      data-play-label="{{ 'Play' | t(lang) }}" data-pause-label="{{ 'Pause' | t(lang) }}" data-resume-label="{{ 'Resume' | t(lang) }}"
      data-time-label="{{ '{a} of {b}' | t(lang) }}" data-error-label="{{ 'The audio could not be loaded. You can download it instead.' | t(lang) }}">
+  {%- if not compact %}
   <div class="audio-player-head">
     <p class="kicker">{{ "Audio overview" | t(lang) }} · {{ (track.seconds / 60) | round }} min</p>
     <p class="audio-player-title">{{ track.title }}</p>
   </div>
+  {%- endif %}
   <audio class="audio-player-native" controls preload="none" src="{{ track.src }}" data-audio-media></audio>
   <div class="audio-player-row" data-audio-controls hidden>
     <button type="button" class="audio-player-play" data-audio-toggle aria-pressed="false">
@@ -27,5 +31,6 @@
   <p class="audio-player-note" data-audio-note>
     {%- if track.ai %}{{ "A conversation about this issue, made with AI ({tool}) from its text. The figures and their sources are in the issue." | t(lang) | replace("{tool}", track.ai) }} {% endif -%}
     <a href="{{ track.src }}" download>{{ "Download MP3" | t(lang) }} · {{ (track.bytes / 1048576) | round }} MB</a>
+    {%- if not compact and podcast[lang].feed %} · <a href="{{ '/podcast.html' | local(lang) }}">{{ podcast[lang].follow }}</a>{% endif %}
   </p>
 </div>

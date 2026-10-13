@@ -1,0 +1,89 @@
+{#- The podcast of the Management Review (src/_data/podcast.js), shared by the three languages: the cover and what it
+    is, the apps that follow it in one tap and the three steps for any other, every episode with its player
+    (partials/audio-player.njk), and how the episodes are made. A language without episodes yet offers the English
+    ones and says so. -#}
+{%- set lang = lang or "en" -%}
+{%- set P = podcast[lang] -%}
+{%- set feed = P.feed -%}
+  <section class="shell book-hero podcast-hero">
+    <div class="book-hero-copy">
+      <p class="eyebrow">{{ P.eyebrow }}</p>
+      <h1>{{ P.heading }}</h1>
+      <p class="lede">{{ P.lede }}</p>
+      {%- if feed %}
+      <dl class="book-facts">
+        <div><dt>{{ P.episodes }}</dt><dd>{{ feed.episodes | length }}</dd></div>
+        <div><dt>{{ P.minutes }}</dt><dd>{{ P.totalMinutes }}</dd></div>
+        <div><dt>{{ P.language }}</dt><dd>{{ P.feedLanguage }}</dd></div>
+      </dl>
+      <div class="hero-actions">
+        <a class="button-primary" href="#follow">{{ P.follow }}</a>
+        <a class="button-secondary" href="#episode-{{ P.list[0].slug }}">{{ P.listen }}</a>
+      </div>
+      {%- if P.other %}<p class="podcast-other">{{ P.inEnglish }}</p>{% endif %}
+      {%- endif %}
+    </div>
+    <img class="podcast-cover" src="/media/podcast/cover-600.webp" width="600" height="600" alt="" fetchpriority="high">
+  </section>
+
+  {%- if feed %}
+  <section class="shell podcast-follow" id="follow" aria-labelledby="podcast-follow-title">
+    <p class="kicker">{{ P.followKicker }}</p>
+    <h2 id="podcast-follow-title">{{ P.followTitle }}</h2>
+    <p class="podcast-follow-text">{{ P.followText }}</p>
+    <ul class="podcast-apps">
+      {%- for app in P.subscribe %}
+      <li><a class="podcast-app" href="{{ app.href }}" rel="nofollow">{{ app.name }}<span aria-hidden="true">→</span></a></li>
+      {%- endfor %}
+    </ul>
+
+    <div class="podcast-steps">
+      <h3>{{ P.otherTitle }}</h3>
+      <ol>
+        {%- for step in P.steps %}
+        <li><b>{{ loop.index }}</b><span>{{ step }}</span></li>
+        {%- endfor %}
+      </ol>
+      <div class="podcast-address" data-podcast-copy data-copied="{{ P.copied }}">
+        <label for="podcast-url">{{ P.address }}</label>
+        <div class="podcast-address-row">
+          <input id="podcast-url" type="text" value="{{ feed.url }}" readonly spellcheck="false" data-podcast-url>
+          <button type="button" class="button-primary" data-podcast-copy-button>{{ P.copy }}</button>
+        </div>
+        <span class="podcast-copied" data-podcast-status aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell podcast-episodes" aria-labelledby="podcast-episodes-title">
+    <p class="kicker">{{ P.listKicker }}</p>
+    <h2 id="podcast-episodes-title">{{ P.listTitle }}</h2>
+    <ol class="podcast-list">
+      {%- for e in P.list %}
+      <li class="podcast-episode" id="episode-{{ e.slug }}">
+        <img src="{{ e.image | replace('.jpg', '-600.webp') }}" width="600" height="600" alt="" loading="lazy" decoding="async">
+        <div class="podcast-episode-copy">
+          <p class="podcast-episode-meta">{{ e.label }} · {{ e.issueDate }} · {{ e.minutes }} min</p>
+          <h3>{{ e.title }}</h3>
+          <p class="podcast-episode-issue">{{ P.fromIssue }}: <a href="{{ e.issueUrl }}">{{ e.issueHeading }}</a>. {{ e.issueSub }}</p>
+          {%- set track = e %}
+          {%- set key = e.slug + "-" + e.lang %}
+          {%- set album = "Management Review · " + e.label %}
+          {%- set artwork = e.image %}
+          {%- set compact = true %}
+          {%- include "partials/audio-player.njk" %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </section>
+
+  <section class="shell podcast-how" aria-labelledby="podcast-how-title">
+    <p class="kicker">{{ P.howKicker }}</p>
+    <h2 id="podcast-how-title">{{ P.howTitle }}</h2>
+    <p>{{ P.howText }}</p>
+    <p><a class="text-link" href="{{ feed.path }}">{{ P.rss }}</a></p>
+  </section>
+<script src="{{ '/js/audio-player.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/podcast.js' | assetUrl }}" defer></script>
+  {%- endif %}

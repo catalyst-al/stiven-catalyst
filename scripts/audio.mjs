@@ -69,7 +69,9 @@ const seconds = Math.round(Number(run("ffprobe", ["-v", "error", "-show_entries"
 const bytes = fs.statSync(out).size;
 const listFile = path.join(ROOT, "src", "_data", "audio.json");
 const list = fs.existsSync(listFile) ? JSON.parse(fs.readFileSync(listFile, "utf8")) : {};
-list[slug] = { ...list[slug], [lang]: { src: `/media/audio/${slug}-${lang}.mp3`, title, seconds, bytes, ...(ownVoice ? {} : { ai: "NotebookLM" }) } };
+// The day it was first published stays when a recording is encoded again; podcast apps order the episodes by it.
+const published = list[slug]?.[lang]?.published || new Date().toISOString().slice(0, 10);
+list[slug] = { ...list[slug], [lang]: { src: `/media/audio/${slug}-${lang}.mp3`, title, seconds, bytes, published, ...(ownVoice ? {} : { ai: "NotebookLM" }) } };
 const sorted = Object.fromEntries(Object.keys(list).sort().map((key) => [key, list[key]]));
 fs.writeFileSync(listFile, `${JSON.stringify(sorted, null, 2)}\n`);
 console.log(`${path.relative(ROOT, out)}: ${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}, ${(bytes / 1048576).toFixed(1)} MB, from ${m.input_i} to -16 LUFS`);
