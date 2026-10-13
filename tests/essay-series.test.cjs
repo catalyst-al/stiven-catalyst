@@ -96,7 +96,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const fourth = built('sq/insights/the-system-is-faster-than-you/index.html');
   assert.match(fourth, /Sistemi është më i shpejtë se ti · Eseja 1 nga 10/);
   assert.match(fourth, /href="\/sq\/insights\/when-the-dashboard-turns-red-before-you\/" rel="next"/);
-  assert.equal((fourth.match(/<textarea[^>]*data-checklist-item/g) || []).length, 5);
+  assert.equal((fourth.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
   assert.match(fourth, /data-diagram="decision-split"/);
   const dashboard = built('sq/insights/when-the-dashboard-turns-red-before-you/index.html');
   assert.match(dashboard, /Sistemi është më i shpejtë se ti · Eseja 2 nga 10/);

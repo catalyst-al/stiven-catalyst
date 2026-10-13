@@ -15,8 +15,8 @@ Esetë 1 dhe 2 u botuan më 12 dhe 13 tetor 2026 pa pyetjet. Më 13 tetor u rish
 
 | Nr. | Tema | Mjeti | Gjendja |
 |---|---|---|---|
-| 1 | Sistemi është më i shpejtë se ti | KPI Diagnostic, Shift Pulse | Botuar 12 tetor 2026; rishikimi me përgjigjet te `seria-sistemi/01-sistemi-me-i-shpejte.md`, në pritje të miratimit |
-| 2 | Kur tabela skuqet para teje | Shift Pulse, Delay Analyzer, CX Control Tower | Botuar 13 tetor 2026; rishikimi me përgjigjet te `seria-sistemi/02-kur-tabela-skuqet.md`, në pritje të miratimit |
+| 1 | Sistemi është më i shpejtë se ti | KPI Diagnostic, Shift Pulse | Botuar 12 tetor 2026; rishikuar me përgjigjet dhe ribotuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/01-sistemi-me-i-shpejte.md`); shënimet 161, 162, 188, 192 |
+| 2 | Kur tabela skuqet para teje | Shift Pulse, Delay Analyzer, CX Control Tower | Botuar 13 tetor 2026; rishikuar me përgjigjet dhe ribotuar 13 tetor 2026 (drafti te `seria-sistemi/02-kur-tabela-skuqet.md`); shënimet 189–191 |
 
 ## Shifrat
 
