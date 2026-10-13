@@ -17,10 +17,11 @@ Në të majtë do shohësh:
 | Seksioni | Çfarë është |
 |---|---|
 | **Insights (essays)** | Artikujt e gjatë |
+| **Reflections** | Shkrimet personale |
 | **Field Notes** | Shënimet e shkurtra (citatet) |
 | **Projects** | Projektet, me foto, link ose skedar për shkarkim |
 | **Homepage highlights** | Dy kartat e vogla në faqen kryesore |
-| **Impressum details** | Të dhënat ligjore (adresa etj.) |
+| **Impressum details** | Të dhënat ligjore (adresa etj.) dhe ofruesi i newsletter-it |
 | **Media** | Fotot, PDF-të dhe skedarët e ngarkuar |
 
 ---
@@ -89,8 +90,24 @@ Faqet **Impressum** dhe **Datenschutz** krijohen vetë në tri gjuhë (anglisht,
 
 ## 6. Newsletter
 
-Kur të hapësh llogarinë te shërbimi i newsletter-it, më dërgo adresën e formularit
-(action URL) dhe unë e lidh. Deri atëherë seksioni i newsletter-it mbetet i fshehur.
+Newsletter-i është **aktiv** dhe punon me **MailerLite** (https://dashboard.mailerlite.com).
+
+- **Ku del formulari:** në faqen kryesore, Start, Insights, në fund të çdo eseje, Reflections, Publications,
+  Challenges dhe Shelf, në tri gjuhët.
+- **Si regjistrohet lexuesi:** shkruan emailin dhe shtyp **Subscribe**. Faqja nuk largohet; i thotë të hapë emailin
+  dhe ta konfirmojë me linkun (double opt-in). Vetëm pas konfirmimit del te **Subscribers** në MailerLite.
+- **Gjuha:** çdo abonent vjen me fushën **language** (`en`, `de` ose `sq`), sipas faqes ku u regjistrua. Në
+  MailerLite bëj një **Segment** për çdo gjuhë (language = `sq` etj.) dhe dërgoja secilit në gjuhën e vet.
+  Fusha `language` duhet të ekzistojë te **Subscribers → Fields**; pa të, MailerLite e humb gjuhën.
+- **Dërgimi i një numri:** **Campaigns → Create campaign**, zgjidh segmentin e gjuhës, shkruaj ose ngjit tekstin
+  me linkun e esesë së re, dhe **Send** ose **Schedule**. Faqja nuk dërgon asgjë vetë.
+- **Feed-et e shkrimeve** (esetë dhe reflektimet e reja): `stivencatalyst.com/feed.xml` (anglisht), `/de/feed.xml`
+  dhe `/sq/feed.xml`. Nëse do që MailerLite ta nisë vetë emailin kur del një ese e re, provo një **RSS campaign**
+  me feed-in e gjuhës.
+- **Datenschutz:** seksioni i newsletter-it shtohet vetë në faqen Datenschutz. Emri i ofruesit merret nga
+  **Impressum details → Newsletter provider**.
+- **Ta ndryshosh ose ta fikësh:** adresa e formularit është te `src/_data/site.json` (`newsletter.action`). Nëse e
+  lë bosh, formulari zhduket nga të gjitha faqet. Për një formular të ri MailerLite, më dërgo adresën e tij.
 
 ## 7. Versionet gjermanisht dhe shqip
 
@@ -103,6 +120,7 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 | Seksioni | Çfarë është |
 |---|---|
 | **Insights (Deutsch / Shqip)** | Artikujt në gjermanisht / shqip |
+| **Reflections (Deutsch / Shqip)** | Shkrimet personale në gjermanisht / shqip |
 | **Field Notes (Deutsch / Shqip)** | Shënimet në gjermanisht / shqip |
 | **Projects (Deutsch / Shqip)** | Projektet në gjermanisht / shqip |
 | **Homepage highlights (Deutsch / Shqip)** | Dy kartat e vogla në faqen kryesore gjermane / shqip |
