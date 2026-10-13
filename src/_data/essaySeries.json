@@ -13,5 +13,10 @@
     "id": "improvement",
     "name": { "en": "Improvement that holds", "de": "Verbesserung, die hält", "sq": "Përmirësimi që mbahet" },
     "planned": 10
+  },
+  {
+    "id": "the-system",
+    "name": { "en": "The system is faster than you", "de": "Das System ist schneller als Sie", "sq": "Sistemi është më i shpejtë se ti" },
+    "planned": 10
   }
 ]

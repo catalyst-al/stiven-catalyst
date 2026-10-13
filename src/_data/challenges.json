@@ -108,5 +108,15 @@
       "sq": "30 ditët e para, një ngritje nga brenda ekipit, fillimi nga zero në një vend të ri."
     },
     "tools": ["/tools/kpi-diagnostic/", "/tools/cv-builder/", "/tools/ats-cv/"]
+  },
+  {
+    "id": "the-system-says",
+    "name": { "en": "The system says one thing, the floor another", "de": "Das System sagt das eine, der Boden das andere", "sq": "Sistemi thotë një gjë, salla tjetër" },
+    "line": {
+      "en": "The scan, the plan or the dashboard is sure, and what you see on shift does not match it. Whom do you believe, and who answers?",
+      "de": "Der Scan, der Plan oder das Dashboard ist sich sicher, und was Sie in der Schicht sehen, passt nicht dazu. Wem glauben Sie, und wer verantwortet es?",
+      "sq": "Skanimi, plani ose tabela është e sigurt, dhe ajo që sheh në turn nuk përputhet. Kujt i beson, dhe kush përgjigjet?"
+    },
+    "tools": ["/tools/kpi-diagnostic/", "/tools/shift-pulse/", "/tools/shift-handover/"]
   }
 ]
