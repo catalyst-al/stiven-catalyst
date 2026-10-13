@@ -95,8 +95,9 @@ const episodesOf = (lang) => weekly.issues
       minutes: Math.round(track.seconds / 60),
       clock: `${Math.floor(track.seconds / 60)}:${String(track.seconds % 60).padStart(2, "0")}`,
       published,
-      // RFC 2822, at six in the morning in Germany, the hour a new issue is meant to be found.
-      pubDate: new Date(`${published}T04:00:00Z`).toUTCString(),
+      // RFC 2822, at six in the morning in Germany, the hour a new issue is meant to be found, one minute later for
+      // each issue number: podcast apps order by this date, and issues published on the same day keep their order.
+      pubDate: new Date(Date.parse(`${published}T04:00:00Z`) + issue.number * 60000).toUTCString(),
       issueHeading: I.heading,
       issueSub: I.sub,
       issueDate: I.date,
