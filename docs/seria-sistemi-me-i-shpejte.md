@@ -19,6 +19,7 @@ Esetë 1 dhe 2 u botuan më 12 dhe 13 tetor 2026 pa pyetjet. Më 13 tetor u rish
 | 2 | Kur tabela skuqet para teje | Shift Pulse, Delay Analyzer, CX Control Tower | Botuar 13 tetor 2026; rishikuar me përgjigjet dhe ribotuar 13 tetor 2026 (drafti te `seria-sistemi/02-kur-tabela-skuqet.md`); shënimet 189–191 |
 | 3 | Rruga që shoferi nuk e kupton | Delay Analyzer, 5 Whys | Drafti me kontrollin e fakteve te `seria-sistemi/03-rruga-qe-shoferi-nuk-e-kupton.md`, në pritje të miratimit |
 | 4 | Skaneri është dëshmitar, jo gjykatës | Incomplete Control, 5 Whys | Drafti me kontrollin e fakteve te `seria-sistemi/04-skaneri-deshmitar.md`, në pritje të miratimit |
+| 5 | Raporti që e shkroi një makinë | Shift Handover, KPI Diagnostic | Drafti me kontrollin e fakteve te `seria-sistemi/05-raporti-qe-e-shkroi-nje-makine.md`, në pritje të miratimit |
 
 ## Shifrat
 
