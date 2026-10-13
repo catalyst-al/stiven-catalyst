@@ -2106,5 +2106,14 @@
   "A safety or temperature deviation is contained and escalated at once; the investigation follows.": "Eine Sicherheits- oder Temperaturabweichung wird sofort eingedämmt und eskaliert; die Untersuchung folgt.",
   "Close only after verification.": "Erst nach der Prüfung schließen.",
   "An action from an investigation starts open and pending; it is closed when the result shows it worked, and reopened when it did not.": "Eine Maßnahme aus einer Untersuchung beginnt offen und ungeprüft; sie wird geschlossen, wenn das Ergebnis zeigt, dass sie gewirkt hat, und wieder geöffnet, wenn nicht.",
-  "Your data stays in this browser; files are read here and nothing is uploaded. Investigations are kept the same way: export the case register to keep or share them.": "Ihre Daten bleiben in diesem Browser; Dateien werden hier gelesen und nichts wird hochgeladen. Untersuchungen werden genauso aufbewahrt: Exportieren Sie das Fallregister, um sie zu sichern oder zu teilen."
+  "Your data stays in this browser; files are read here and nothing is uploaded. Investigations are kept the same way: export the case register to keep or share them.": "Ihre Daten bleiben in diesem Browser; Dateien werden hier gelesen und nichts wird hochgeladen. Untersuchungen werden genauso aufbewahrt: Exportieren Sie das Fallregister, um sie zu sichern oder zu teilen.",
+  "Play": "Anhören",
+  "Audio overview": "Audio-Überblick",
+  "Back 15 seconds": "15 Sekunden zurück",
+  "Forward 15 seconds": "15 Sekunden vor",
+  "Position in the audio": "Stelle in der Aufnahme",
+  "Playback speed": "Wiedergabetempo",
+  "A conversation about this issue, made with AI ({tool}) from its text. The figures and their sources are in the issue.": "Ein Gespräch über diese Ausgabe, mit KI ({tool}) aus ihrem Text erstellt. Die Zahlen und ihre Quellen stehen in der Ausgabe.",
+  "Download MP3": "MP3 herunterladen",
+  "The audio could not be loaded. You can download it instead.": "Die Aufnahme konnte nicht geladen werden. Sie können sie stattdessen herunterladen."
 }

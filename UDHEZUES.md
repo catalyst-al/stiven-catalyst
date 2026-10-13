@@ -132,6 +132,27 @@ Skripti rishkruan faqet te `src/media/books/mall-per-durresin/` dhe tekstin te `
 
 ---
 
+## Audio e një numri të Management Review
+
+Te faqja e një numri, nën butonat **Open the issue**, **Read it as text** dhe **Download PDF**, del një luajtës i
+vogël kur numri ka audio në atë gjuhë: Play/Pause, 15 sekonda prapa e përpara, shiriti i kohës, `03:42 / 20:51` dhe
+shpejtësia (1×, 1.25×, 1.5×, 2×). Lexuesi e vazhdon aty ku e la herën e kaluar, dhe telefoni e kontrollon edhe nga
+ekrani i kyçur. Audio nuk shkarkohet derisa të shtypet Play.
+
+Për të shtuar audion e një numri (p.sh. nga NotebookLM, `.mp3`, `.m4a` ose `.wav`):
+
+```
+node scripts/audio.mjs ~/Downloads/biseda.m4a management-review-nr-02 sq "Titulli i bisedës"
+```
+
+- `management-review-nr-02` është numri, `sq` gjuha e audios (`en`, `sq` ose `de`).
+- Skripti (i duhet `ffmpeg`) e kthen në MP3 64 kbps mono me zë të njëtrajtshëm (rreth 10 MB për 20 minuta),
+  e ruan te `src/media/audio/` dhe e shton te `src/_data/audio.json`.
+- Shënimi poshtë luajtësit thotë që biseda është bërë me AI (NotebookLM). Nëse e ke incizuar me zërin tënd,
+  shto `--own-voice` dhe shënimi nuk del.
+
+---
+
 ## Pyetje të shpejta
 
 **Sa shpejt del ndryshimi?** Rreth 1–2 minuta pas Save.

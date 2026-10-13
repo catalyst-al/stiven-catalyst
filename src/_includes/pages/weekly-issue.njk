@@ -12,6 +12,8 @@
 {%- set reader = magazinePages[issue.slug][lang] -%}
 {%- set cover = reader.pages[0] -%}
 {%- set pdf = "/media/magazine/" + issue.slug + "/" + issue.slug + "-" + lang + ".pdf" -%}
+{#- The audio overview of the issue in this language, when there is one (src/_data/audio.json, scripts/audio.mjs). -#}
+{%- set track = audio[issue.slug][lang] if audio[issue.slug] else null -%}
 {%- set archive = W.archiveUrl | local(lang) -%}
 {%- set essays = collections["insights" + (lang | langSuffix)] -%}
 {%- set family = family or weekly.issues -%}
@@ -47,6 +49,12 @@
         <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
         <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
       </div>
+      {%- if track %}
+      {%- set key = issue.slug + "-" + lang %}
+      {%- set album = W.name + " · " + L.no + " " + issue.no %}
+      {%- set artwork = cover.image | replace(".webp", "-480.webp") %}
+      {%- include "partials/audio-player.njk" %}
+      {%- endif %}
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ L.open_issue }}">
       <span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 900px) min(calc(100vw - 32px), 360px), 360px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
@@ -183,3 +191,6 @@
   </section>
 <script src="{{ '/js/book.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>
+{%- if track %}
+<script src="{{ '/js/audio-player.js' | assetUrl }}" defer></script>
+{%- endif %}
