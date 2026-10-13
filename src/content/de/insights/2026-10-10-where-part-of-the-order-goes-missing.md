@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Eine Bestellung kann unvollständig beim Kunden ankommen, aber das Problem kann lange vor der Zustellung begonnen haben.
 teaser: Wenn eine Tasche fehlte, war die Regel klar. Der Fahrer informiert den Team Leader, und der Trolley verlässt seine Zone nicht, bis das Problem gelöst ist.
-description: "Incomplete als Kennzahl auf der letzten Meile: was ich belegen kann und was nicht, die Regel bei einer fehlenden Tasche, warum eine unvollständige Bestellung eine Geschichte vor der Tür des Kunden hat, und die Kontrolle vor der Abfahrt in fünf Punkten."
+description: "Incomplete auf der letzten Meile: die Regel bei fehlender Tasche, die Vorgeschichte einer unvollständigen Bestellung und die Kontrolle vor der Abfahrt."
 deck: 'Der zweite Essay der Reihe „Verbesserung, die hält“: Incomplete als Kennzahl auf der letzten Meile, die Regel bei einer fehlenden Tasche, warum eine unvollständige Bestellung eine Geschichte vor der Tür des Kunden hat, und die Kontrolle vor der Abfahrt in fünf Punkten.'
 relatedTools:
   - /tools/incomplete-control/

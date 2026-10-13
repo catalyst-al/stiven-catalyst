@@ -198,7 +198,7 @@
    "group": "logistics",
    "name": {
     "en": "Failed deliveries (RTS)",
-    "de": "Fehlzustellungen (RTS)",
+    "de": "Erfolglose Zustellungen (RTS)",
     "sq": "Dorëzime të dështuara (RTS)"
    },
    "what": {
@@ -366,7 +366,7 @@
    },
    "what": {
     "en": "Which root causes are behind delays, failed deliveries, incomplete orders and damage? Same categories as the CX Control Tower.",
-    "de": "Welche Grundursachen stecken hinter Verspätungen, Fehlzustellungen, unvollständigen Aufträgen und Schäden? Dieselben Kategorien wie im CX Control Tower.",
+    "de": "Welche Grundursachen stecken hinter Verspätungen, erfolglosen Zustellungen, unvollständigen Aufträgen und Schäden? Dieselben Kategorien wie im CX Control Tower.",
     "sq": "Cilat shkaqe rrënjësore qëndrojnë pas vonesave, dorëzimeve të dështuara, porosive të paplota dhe dëmeve? Të njëjtat kategori si te CX Control Tower."
    },
    "measure": "count",

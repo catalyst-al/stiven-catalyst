@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "A red number on the screen is a signal to check, not a diagnosis. Ask what it measures and how old it is before you act on it."
 teaser: The red on your screen is a signal, not a diagnosis. Ask what it measures and how old it is before you act.
-description: "Why a red number on a dashboard has an age, the four steps between the floor and the screen, the three wrong reactions to a red, four steps before any decision, and a card for your own red number."
+description: "Why a red number on a dashboard has an age, the steps between the floor and the screen, three wrong reactions, and a card for your own red number."
 deck: "The second essay in the series “The system is faster than you”: why a red number is a signal and not a diagnosis, the three wrong reactions to a red, four steps between the alarm and the decision, and a card for your own red number."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

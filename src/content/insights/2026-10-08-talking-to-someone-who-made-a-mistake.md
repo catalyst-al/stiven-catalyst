@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: The point of the conversation after a mistake is not that the employee leaves afraid of the next one. It is that they leave knowing what to do differently.
-description: "The conversation after a mistake: telling a person's mistake from a process mistake, why pressure can be fair but humiliation never is, talking to yesterday's colleagues after a promotion, and the five steps of the conversation."
+description: "The conversation after a mistake: a person's mistake or the process's, why pressure can be fair but humiliation never is, and the five steps of the talk."
 teaser: Pressure can be fair. Humiliation is not.
 deck: 'The seventh essay in the series “The operation that runs without you”: the two questions every mistake should raise, the line between demanding and humiliating, authority after a promotion, and the corrective conversation sheet in five steps.'
 relatedTools:

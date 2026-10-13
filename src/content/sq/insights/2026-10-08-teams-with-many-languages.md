@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një standard i mirë nuk matet nga sa bukur është shkruar. Matet nga sa saktë mund ta zbatojnë njerëz të ndryshëm, edhe kur nuk flasin të njëjtën gjuhë.
-description: "Si e bën një standard të kuptueshëm për një ekip që flet shumë gjuhë: gjuha dhe aftësia si dy probleme të ndryshme, udhëzime të shkurtra dhe vizuale, “më trego si do ta bëje” në vend të “e kuptove?”, dhe karta e udhëzimit të qartë."
+description: "Si e bën një standard të kuptueshëm për një ekip që flet shumë gjuhë: gjuha dhe aftësia si dy probleme të ndryshme, dhe karta e udhëzimit të qartë."
 teaser: Të mos e flasësh ende mirë një gjuhë nuk do të thotë të mos jesh i aftë në punën tënde.
 deck: 'Eseja e tetë e serisë “Operacioni që punon pa ty”: çfarë mësova duke punuar në Gjermani, pse përkthimi nuk mjafton, pesë gjërat e një udhëzimi të mirë, dhe karta për ta kthyer një udhëzim të paqartë në standard të kontrollueshëm.'
 checklist:

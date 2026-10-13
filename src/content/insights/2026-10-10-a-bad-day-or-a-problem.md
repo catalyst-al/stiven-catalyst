@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: A bad day is a signal to check. It is not automatically proof that the whole process has to change.
 teaser: 2.8%. That was Delay in a June 2025 report. Was it a bad day or a problem? From that number alone, I cannot say.
-description: "A day with bad KPIs: what I have on record and what I do not, why a single number does not show whether the process has changed, the idea behind a control chart, the two opposite mistakes, and four questions before you change the process."
+description: "A day with bad KPIs: why one number does not show whether the process has changed, the idea behind a control chart, and four questions before you act."
 deck: 'The fifth essay in the series “Improvement that holds”: how we followed the KPIs every day, why a single number does not show whether the process has changed, the two opposite mistakes, when to step in straight away, and four questions before you change the process.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

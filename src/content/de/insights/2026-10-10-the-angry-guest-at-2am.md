@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Eine Beschwerde ist nicht erledigt, nur weil der Gast die Rezeption verlässt.
 teaser: Nachts hat das Hotel weniger Menschen, weniger Abteilungen, die wach sind, und weniger Möglichkeiten. Der Gast hat dasselbe Problem wie am Mittag.
-description: "Beschwerden während des Night Audits: was ich belegen kann und was nicht, was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und die fünf Felder einer Beschwerde, die an die nächste Schicht geht."
+description: "Beschwerden im Night Audit: was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und die Übergabe an die nächste Schicht."
 deck: 'Der neunte Essay der Reihe „Verbesserung, die hält“: Beschwerden während des Night Audits, was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und eine Beschwerde, die bei der nächsten Schicht ankommt, ohne von vorn erzählt zu werden.'
 relatedTools:
   - /tools/shift-handover/

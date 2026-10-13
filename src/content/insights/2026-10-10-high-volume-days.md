@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Pressure does not always create the problems. Often it makes them more visible.
 teaser: We had days when demand was higher than the forecast. Drivers called in at short notice, some still in ramp-up. On those days you could see how well prepared the operation really was.
-description: "The days when demand outran the forecast in last mile: what I have on record and what I do not, where the pressure landed, why capacity is not just the number of people, and five checks before the big day."
+description: "The days demand outran the forecast in last mile: where the pressure landed, why capacity is more than headcount, and five checks before the big day."
 deck: 'The eighth essay in the series “Improvement that holds”: the days when demand outran the forecast, where the pressure landed, why capacity is not a headcount, and five checks before the big day.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

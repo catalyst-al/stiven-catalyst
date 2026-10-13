@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Die zehn Minuten vor der Schicht sind nicht dafür da, alles zu erzählen, was wir wissen. Sie sind dafür da, zu entscheiden, was das Team wissen muss, bevor die Arbeit beginnt.
-description: "Das Briefing vor der Schicht: worum es in den Morning Stand-ups auf der letzten Meile ging, wie die Nacht im Hotel begann, wo sich Briefing und Übergabe trennen, und eine Zehn-Minuten-Vorlage mit fünf Fragen."
+description: "Das Briefing vor der Schicht: Stand-ups auf der letzten Meile, der Beginn der Nacht im Hotel, wo sich Briefing und Übergabe trennen, und eine Vorlage."
 teaser: Die Übergabe zeigt, welchen Zustand Sie übernehmen. Das Briefing entscheidet, was jetzt zählt.
 deck: 'Der zweite Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Morning Stand-ups auf der letzten Meile, die Hotelnacht, die nie bei null beginnt, der Unterschied zwischen Übergabe und Briefing, und die Vorlage für das Zehn-Minuten-Briefing.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).

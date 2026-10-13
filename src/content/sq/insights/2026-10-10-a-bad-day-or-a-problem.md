@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Një ditë e keqe është sinjal për të kontrolluar. Nuk është automatikisht provë se i gjithë procesi duhet ndryshuar.
 teaser: 2,8%. Kaq ishte Delay në një raport të qershorit 2025. Ishte kjo një ditë e keqe apo një problem? Vetëm nga ky numër, nuk mund ta them.
-description: "Një ditë me KPI të këqija: çfarë kam të dokumentuar dhe çfarë jo, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, ideja e kartës së kontrollit, dy gabimet e kundërta, dhe katër pyetje para se të ndryshosh procesin."
+description: "Një ditë me KPI të këqija: pse një numër i vetëm nuk tregon nëse procesi ndryshoi, dy gabimet e kundërta, dhe katër pyetje para se të ndryshosh procesin."
 deck: 'Eseja e pestë e serisë “Përmirësimi që mbahet”: si ndiqnim KPI-të çdo ditë, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, dy gabimet e kundërta, kur ndërhyn menjëherë, dhe katër pyetje para se të ndryshosh procesin.'
 relatedTools:
   - /tools/sigma-control-chart/

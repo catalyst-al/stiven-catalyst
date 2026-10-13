@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein Prozess endet nicht, wenn ich die Arbeit übergebe. Er endet, wenn das nächste Team weitermachen kann, ohne Information, Verantwortung oder Zeit zu verlieren.
-description: "Warum so viele Fehler dort entstehen, wo Arbeit von einem Team zum anderen geht: Rezeption, Housekeeping und Haustechnik im Hotel, von Outbound bis zum Fahrer auf der letzten Meile, und fünf Fragen für jeden Punkt, an dem Arbeit die Hände wechselt."
+description: "Warum so viele Fehler dort entstehen, wo Arbeit von einem Team zum anderen geht, im Hotel und auf der letzten Meile, und fünf Fragen für jede Übergabe."
 teaser: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 deck: 'Der fünfte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: was zwischen zwei Abteilungen passiert, warum „Ich habe Bescheid gegeben“ nicht reicht, Status, Verantwortung und Bestätigung, und die Übergabekarte mit fünf Fragen.'
 relatedTools:
@@ -32,7 +32,7 @@ Eine Abteilung kann ihre eigene Arbeit sehr gut machen, und der Betrieb kann tro
 
 Das passiert, wenn niemand prüft, was zwischen zwei Abteilungen geschieht.
 
-Innerhalb eines Teams ist meist klar, wer was macht. Es gibt einen Verantwortlichen, einen Standard, einen Rhythmus. Aber Arbeit bleibt selten in einem einzigen Team. Sie geht von der Rezeption zur Haustechnik, von der Vorbereitung zur Rampe, von der Rampe zum Fahrer, von der Nachtschicht zur Frühschicht. Und genau an diesen Übergängen, dort, wo Arbeit die Hände wechselt, gehen viele Fehler verloren.
+Innerhalb eines Teams ist meist klar, wer was macht. Es gibt einen Verantwortlichen, einen Standard, einen Rhythmus. Aber Arbeit bleibt selten in einem einzigen Team. Sie geht von der Rezeption zur Haustechnik, von der Vorbereitung zur Rampe, von der Rampe zum Fahrer, von der Nachtschicht zur Frühschicht. Und genau an diesen Übergängen, dort, wo Arbeit in andere Hände übergeht, gehen viele Fehler verloren.
 
 ## Im Hotel: wer es aufnimmt, wer es löst, wer es abschließt
 
@@ -110,7 +110,7 @@ Wenn sich ein Fehler zwischen zwei Teams wiederholt, würde ich nicht mit der Fr
 
 Meine erste Frage wäre:
 
-**An welchem Punkt hat die Arbeit die Hände gewechselt, und welche Information ist bei diesem Übergang verloren gegangen?**
+**An welchem Punkt ist die Arbeit in andere Hände übergegangen, und welche Information ist bei diesem Übergang verloren gegangen?**
 
 Dann würde ich prüfen, ob beide Teams dasselbe Verständnis davon hatten, was übergeben werden musste. Gab es einen klaren Standard? War die Arbeit wirklich bereit für das nächste Team? Wurde der Empfang bestätigt? Gab es eine verantwortliche Person, falls ein Problem auftritt?
 
@@ -118,7 +118,7 @@ Wenn diese Fragen keine Antworten haben, dann haben wir einen Prozess, in dem si
 
 ## Die Übergabekarte
 
-Das Werkzeug dieses Essays ist einfach. Nehmen Sie jeden Punkt in Ihrem Betrieb, an dem Arbeit die Hände wechselt: von einer Abteilung zur anderen, von einer Schicht zur nächsten, von innen zu einem externen Partner. Stellen Sie für jeden dieselben fünf Fragen.
+Das Werkzeug dieses Essays ist einfach. Nehmen Sie jeden Punkt in Ihrem Betrieb, an dem Arbeit in andere Hände übergeht: von einer Abteilung zur anderen, von einer Schicht zur nächsten, von innen zu einem externen Partner. Stellen Sie für jeden dieselben fünf Fragen.
 
 Wenn Sie für einen Punkt nicht alle fünf beantworten können, haben Sie die Stelle gefunden, an der Fehler weiter verloren gehen werden.
 

@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Një KPI të tregon se ke një problem. Nuk të tregon automatikisht ku ka filluar dhe kush e ka shkaktuar.
-description: "Damage si KPI në last mile: çfarë kam të dokumentuar dhe çfarë jo, pse përqindja nuk tregon ku lind dëmi, dallimi mes uljes së një numri dhe parandalimit të dëmit, dhe kontrolli i një dëmi në katër pyetje."
+description: "Damage si KPI në last mile: pse përqindja nuk tregon ku lind dëmi, dallimi mes uljes së një numri dhe parandalimit të dëmit, dhe katër pyetje për një dëm."
 teaser: 1,06%, kundrejt objektivit 0,8%. Numri ishte i saktë. Por nuk thoshte nëse dëmi kishte lindur te karroca, gjatë ngarkimit, në makinë apo te dera e klientit.
 deck: 'Eseja e parë e serisë “Përmirësimi që mbahet”: Damage si KPI në last mile, çfarë kam të dokumentuar dhe çfarë jo, dallimi mes uljes së një përqindjeje dhe parandalimit të dëmit, dhe kontrolli i një dëmi në katër pyetje.'
 relatedTools:

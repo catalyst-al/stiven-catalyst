@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Eine rote Zahl auf dem Bildschirm ist ein Signal zum Prüfen, keine Diagnose. Fragen Sie, was sie misst und wie alt sie ist, bevor Sie danach handeln."
 teaser: Das Rot auf Ihrem Bildschirm ist ein Signal, keine Diagnose. Fragen Sie, was es misst und wie alt es ist, bevor Sie handeln.
-description: "Warum eine rote Zahl auf einem Dashboard ein Alter hat, die vier Schritte zwischen Boden und Bildschirm, die drei falschen Reaktionen auf ein Rot, vier Schritte vor jeder Entscheidung, und eine Karte für Ihre eigene rote Zahl."
+description: "Warum eine rote Zahl auf dem Dashboard ein Alter hat, der Weg vom Geschehen vor Ort zum Bildschirm, drei falsche Reaktionen und eine Karte für Ihre Zahl."
 deck: "Der zweite Essay der Reihe „Das System ist schneller als Sie“: warum eine rote Zahl ein Signal ist und keine Diagnose, die drei falschen Reaktionen auf ein Rot, vier Schritte zwischen Alarm und Entscheidung, und eine Karte für Ihre eigene rote Zahl."
 relatedTools:
   - /tools/shift-pulse/
@@ -21,7 +21,7 @@ checklist:
     - label: "Welche Zahl ist es, was misst sie genau, und was ist ihr Ziel?"
       hint: "Delay, Loading Time, Incomplete, Damage, offene Zimmer, Wartezeit. Eine pro Karte."
     - label: "Wie alt ist sie, wenn ich sie sehe?"
-      hint: "Die Zeit zwischen Boden und Bildschirm: Sekunden, Minuten, der nächste Morgen? Wenn Sie es nicht wissen, finden Sie es heute heraus."
+      hint: "Die Zeit zwischen dem Geschehen vor Ort und dem Bildschirm: Sekunden, Minuten, der nächste Morgen? Wenn Sie es nicht wissen, finden Sie es heute heraus."
     - label: "Was weiß ich sicher, und was wurde gemeldet?"
       hint: "Die Zahl ist ein Bericht. Was hat jemand mit eigenen Augen gesehen? Ist das Problem noch offen?"
     - label: "Wer hat die Information, die der Lage am nächsten ist?"
@@ -53,7 +53,7 @@ Was ich nicht habe: die genaue Liste der Kennzahlen, die im System meiner aktuel
 
 Dieser Essay ist also meine Analyse und wie ich es heute machen würde, kein Protokoll, dem ich gefolgt bin. Die Szene darin ist ein Bild, und ich kennzeichne sie als solches.
 
-## Vier Schritte zwischen dem Boden und dem Rot
+## Vier Schritte zwischen der Rampe und dem Rot
 
 Stellen Sie sich einen Transporter vor, der vor zehn Minuten von der Rampe hätte abfahren sollen. Auf dem Dashboard ist die Tour rot. Was musste passieren, damit sie rot ist?
 
@@ -61,13 +61,13 @@ Jemand musste sehen, dass der Transporter noch da steht, oder ein Scan musste bi
 
 {diagram}
 
-**Eine rote Zahl ist nicht der Boden. Sie ist ein Bericht über den Boden, und ein Bericht hat ein Alter.**
+**Eine rote Zahl ist nicht das, was vor Ort passiert. Sie ist ein Bericht darüber, und ein Bericht hat ein Alter.**
 
 Wenn Sie das Rot sehen, ist der Transporter vielleicht schon weg. Oder er steht noch da, und das Rot ist das erste Wahre, das Sie heute gehört haben. An der Farbe können Sie die beiden nicht unterscheiden. Sie können sie nur unterscheiden, wenn Sie wissen, was die Zahl misst und wie alt sie ist.
 
 ## Rot ist nicht immer ein Notfall. Und Grün ist nicht immer eine Garantie.
 
-Dieselbe Logik gilt in beide Richtungen. Ein Rot kann ein Problem beschreiben, das inzwischen gelöst ist. Ein Grün kann den Boden beschreiben, wie er war, bevor etwas schiefzulaufen begann, oder etwas anderes messen, als Sie denken.
+Dieselbe Logik gilt in beide Richtungen. Ein Rot kann ein Problem beschreiben, das inzwischen gelöst ist. Ein Grün kann die Lage vor Ort beschreiben, wie sie war, bevor etwas schiefzulaufen begann, oder etwas anderes messen, als Sie denken.
 
 Die Frage ist also nicht „welche Farbe hat es“. Die Frage ist „was misst diese Zahl, wann wurde sie aktualisiert, und was passiert jetzt wirklich“. Die Farbe sagt Ihnen, wohin Sie schauen sollen. Sie sagt Ihnen nicht, was Sie entscheiden sollen.
 
@@ -102,7 +102,7 @@ Wenn diese vier Schritte vor der Schicht feststehen, sind die ersten Minuten nac
 
 Noch etwas, eher für das Wochenende als für die Schicht. Schauen Sie sich die Rots an, die zu keiner Handlung geführt haben, weil sie, als Sie sie geprüft haben, schon gelöst oder keine Probleme waren. Sind sie die Mehrheit, trainiert der Alarm alle darauf, ihn zu ignorieren.
 
-Aber die Antwort ist nicht einfach, die Schwelle anzuheben, damit der Bildschirm besser aussieht. Eine Schwelle, die ohne Daten angehoben wird, versteckt die nutzlosen Rots zusammen mit denen, die wichtig waren. Der Alarm wird anhand der Daten überprüft: wie viele Rots, wie viele davon eine Handlung brauchten und was die, die eine brauchten, gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie zu denen bringen können, die den Alarm festlegen. Nicht „das Dashboard ist falsch“, sondern wie viele Rots es diese Woche gab und wie viele davon wirklich etwas verlangt haben.
+Aber die Antwort ist nicht einfach, die Schwelle anzuheben, damit der Bildschirm besser aussieht. Eine Schwelle, die ohne Daten angehoben wird, versteckt die nutzlosen Rots zusammen mit denen, die wichtig waren. Der Alarm wird anhand der Daten überprüft: wie viele Rots, bei wie vielen davon gehandelt werden musste und was diese gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie zu denen bringen können, die den Alarm festlegen. Nicht „das Dashboard ist falsch“, sondern wie viele Rots es diese Woche gab und wie viele davon wirklich etwas verlangt haben.
 
 ## Meine rote Zahl
 

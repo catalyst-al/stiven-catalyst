@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: An order can reach the customer incomplete, but the problem may have started long before the delivery.
 teaser: When a bag was missing, the rule was clear. The driver tells the Team Leader, and the trolley does not leave its zone until the problem is solved.
-description: "Incomplete as a last-mile KPI: what I have on record and what I do not, the rule when a bag was missing, why an incomplete order has a history before the customer's door, and a five-point check before departure."
+description: "Incomplete as a last-mile KPI: the rule when a bag was missing, why an incomplete order has a history before the door, and a check before departure."
 deck: 'The second essay in the series “Improvement that holds”: Incomplete as a last-mile KPI, the rule when a bag was missing, why an incomplete order has a history before the customer''s door, and a five-point check before departure.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

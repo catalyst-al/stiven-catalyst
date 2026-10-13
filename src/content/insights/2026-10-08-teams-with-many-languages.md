@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: A good standard is not measured by how well it is written. It is measured by how accurately different people can carry it out, even when they do not speak the same language.
-description: "How to make a standard clear to a team that speaks many languages: language and ability as two different problems, short and visual instructions, “show me how you would do it” instead of “did you understand?”, and the clear-instruction card."
+description: "A standard for a team of many languages: language and ability as two problems, short visual instructions, and “show me” instead of “did you understand?”"
 teaser: Not yet speaking a language well does not mean you are not good at your job.
 deck: 'The eighth essay in the series “The operation that runs without you”: what working in Germany taught me, why translation is not enough, the five things of a good instruction, and the card for turning an unclear instruction into a standard you can check.'
 relatedTools:

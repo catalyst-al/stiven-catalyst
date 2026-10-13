@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Përmirësimi i vërtetë nuk është ai që funksionon vetëm kur menaxheri është aty. Është ai që vazhdon të funksionojë edhe kur menaxheri largohet.
 teaser: Mos u mjafto me faktin që sot e zgjidhe problemin. Pyet veten nëse nesër ai problem mund të zgjidhet edhe pa praninë tënde.
-description: "Eseja përmbyllëse e serisë: pse një përmirësim shuhet, çfarë kam të dokumentuar dhe çfarë jo, çfarë e mban gjallë një standard, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë."
+description: "Eseja përmbyllëse e serisë: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë."
 deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që nuk di t''i përgjigjem për punën time, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë.'
 relatedTools:
   - /tools/kpi-diagnostic/
@@ -100,7 +100,7 @@ Për mua, ky është thelbi i gjithë serisë.
 
 ## Ditën e parë si Team Leader
 
-Nëse do të flisja me veten time në ditën e parë si Team Leader, do t'i thosha të mos përpiqej t'i zgjidhte vetë të gjitha problemet. Të ishte pranë operacionit, të dëgjonte njerëzit dhe të kuptonte procesin para se të ndryshonte rregullat. Të mos gjykonte një shofer vetëm nga një KPI negativ, dhe të mos e ngatërronte një ditë të keqe me një problem sistematik.
+Nëse do të flisja me veten time në ditën e parë si Team Leader, do t'i thosha të mos përpiqej t'i zgjidhte vetë të gjitha problemet. Të ishte pranë operacionit, të dëgjonte njerëzit dhe të kuptonte procesin para se të ndryshonte rregullat. Të mos gjykonte një shofer vetëm nga një KPI negative, dhe të mos e ngatërronte një ditë të keqe me një problem sistematik.
 
 Por mbi të gjitha, do t'i thosha fjalinë me të cilën nisa këtë ese.
 

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein guter Standard misst sich nicht daran, wie schön er geschrieben ist. Sondern daran, wie genau verschiedene Menschen ihn umsetzen können, auch wenn sie nicht dieselbe Sprache sprechen.
-description: "Wie man einen Standard für ein Team verständlich macht, das viele Sprachen spricht: Sprache und Können als zwei verschiedene Probleme, kurze und visuelle Anweisungen, „Zeig mir, wie du es machen würdest“ statt „Verstanden?“, und die Karte für eine klare Anweisung."
+description: "Standards für ein mehrsprachiges Team: Sprache und Können trennen, kurze, visuelle Anweisungen und „Zeig mir, wie du es machen würdest“ statt „Verstanden?“"
 teaser: Eine Sprache noch nicht gut zu sprechen heißt nicht, in seiner Arbeit nicht gut zu sein.
 deck: 'Der achte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: was mich die Arbeit in Deutschland gelehrt hat, warum Übersetzen nicht reicht, die fünf Dinge einer guten Anweisung, und die Karte, mit der aus einer unklaren Anweisung ein prüfbarer Standard wird.'
 checklist:

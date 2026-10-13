@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Nëse standardi i trajnimit është “shiko si e bëj unë”, atëherë çdo punonjës i ri merr një version tjetër të të njëjtës punë.
-description: "Si duket një trajnim që i jep të njëjtin rezultat çdokujt: tri netët e mia të trajnimit si Night Auditor, dallimi mes informacionit dhe sistemit të trajnimit, testi me tri pyetje dhe plani i javës së parë për një punonjës të ri."
+description: "Si duket një trajnim që i jep të njëjtin rezultat çdokujt: tri netët e mia të trajnimit si Night Auditor, testi me tri pyetje dhe plani i javës së parë."
 teaser: Trajnimi nuk matet nga sa mirë e shpjegoi trajneri. Matet nga sa i njëjtë dhe i sigurt bëhet rezultati kur trajneri largohet.
 deck: 'Eseja e tretë e serisë “Operacioni që punon pa ty”: tri net trajnimi në një hotel të ri, pse “po, e kuptova” nuk është provë, çfarë duhet të dijë një person i ri në orën e parë, dhe plani i javës së parë.'
 # Three moves for tomorrow's shift, shown before the text.

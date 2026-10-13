@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Man braucht kein Black-Belt-Zertifikat, um gute Fragen zu stellen. Aber es reicht auch nicht, den Namen einer Methode zu kennen, um zu behaupten, man habe sie angewendet.
 teaser: Der Wert von DMAIC liegt nicht im Zertifikat. Er liegt in der Disziplin, nicht sofort vom Problem zur Lösung zu springen.
-description: "DMAIC ohne Zertifikat: was ich belegen kann und was nicht, die fünf Phasen so, wie ich sie auf der letzten Meile tatsächlich hatte, warum Control die schwierigste Phase ist, und fünf Fragen für eine Schichtleitung."
+description: "DMAIC ohne Zertifikat: fünf Phasen, wie ich sie auf der letzten Meile erlebte, warum Control am schwersten ist, und fünf Fragen für die Schichtleitung."
 deck: 'Der sechste Essay der Reihe „Verbesserung, die hält“: was DMAIC ist, welche Phasen ich in meiner Arbeit hatte und welche nicht, warum Control die schwierigste Phase ist, und fünf Fragen für eine Schichtleitung, die kein Black Belt ist.'
 relatedTools:
   - /tools/six-sigma-dmaic/

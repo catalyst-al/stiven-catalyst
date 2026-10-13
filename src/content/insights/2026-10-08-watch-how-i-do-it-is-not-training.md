@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: If the training standard is “watch how I do it”, every new employee gets a different version of the same job.
-description: "What training looks like when it gives everyone the same result: my three nights of training as a Night Auditor, the difference between information and a training system, a three-part test and a first-week plan for a new employee."
+description: "Training that gives everyone the same result: my three nights as a new Night Auditor, information versus a training system, and a first-week plan."
 teaser: Training is not measured by how well the trainer explained. It is measured by how consistent and safe the result becomes once the trainer leaves.
 deck: 'The third essay in the series “The operation that runs without you”: three nights of training in a new hotel, why “yes, I got it” is not proof, what a new person needs to know in the first hour, and the plan for the first week.'
 relatedTools:

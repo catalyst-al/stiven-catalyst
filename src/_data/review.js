@@ -325,7 +325,7 @@ const pages = [
     id: "kpi", part: 3, tool: "/tools/kpi-diagnostic/",
     kicker: x("Tool of the month", "Mjeti i muajit", "Tool des Monats"),
     title: [x("A KPI is a signal,", "Një KPI është sinjal,", "Ein KPI ist ein Signal,"), x("not a conclusion.", "jo përfundim.", "kein Urteil.")],
-    lead: x("A red KPI is the start of an investigation, not an order to change the process.", "Një KPI i kuq është hyrje në hetim, jo urdhër për të ndryshuar procesin.", "Ein roter KPI ist der Beginn einer Untersuchung, kein Auftrag, den Prozess zu ändern."),
+    lead: x("A red KPI is the start of an investigation, not an order to change the process.", "Një KPI e kuqe është hyrje në hetim, jo urdhër për të ndryshuar procesin.", "Ein roter KPI ist der Beginn einer Untersuchung, kein Auftrag, den Prozess zu ändern."),
     blocks: [
       { type: "steps", items: [
         { h: x("Segment", "Segmento", "Segmentieren"), p: x("Split the problem by shift, zone, category, channel or team.", "Ndaje problemin sipas turnit, zonës, kategorisë, kanalit ose ekipit.", "Das Problem nach Schicht, Zone, Kategorie, Kanal oder Team aufteilen.") },

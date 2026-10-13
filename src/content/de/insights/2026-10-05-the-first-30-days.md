@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: In den ersten 30 Tagen braucht eine neue Führungskraft keine 30 Lösungen. Sie braucht 30 gute Fragen.
-description: "Wie ich einen Betrieb lese, den ich nicht kenne: meine ersten Nächte als Night Auditor in einem neuen Hotel, warum ich bewusst gewartet habe, und 30 Fragen für die ersten 30 Tage."
+description: "Wie ich einen fremden Betrieb lese: meine ersten Nächte als Night Auditor in einem neuen Hotel, warum ich bewusst wartete, und 30 Fragen für 30 Tage."
 teaser: Das Problem war nicht fehlende Information. Das Problem war, dass die Information nicht schnell zeigte, wo man steht, was jetzt zu prüfen ist und was als Nächstes kommt.
 deck: 'Der erste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die ersten Nächte in einem neuen Hotel, was ich gesehen habe, warum ich nichts sofort verändert habe, und eine Liste von Fragen für alle, die irgendwo neu anfangen.'
 # Three moves for tomorrow's shift, shown before the text.

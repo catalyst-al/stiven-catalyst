@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein gutes Eskalationssystem bringt Menschen nicht bei, für alles um Erlaubnis zu fragen. Es bringt ihnen bei, die Grenze ihrer eigenen Entscheidung zu verstehen.
-description: "Eskalation als System, nicht als Temperament: wie ich nachts im Hotel getrennt habe, was in meiner Rolle lag, warum Unklarheit ein Systemproblem ist, die fünf Dinge einer guten Eskalation und die Eskalationsmatrix für die Schicht."
+description: "Eskalation als System, nicht als Temperament: was nachts im Hotel in meiner Rolle lag, was eine gute Eskalation enthält, und eine Matrix für die Schicht."
 teaser: Ownership heißt nicht „Ich löse es immer selbst“. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.
 deck: 'Der vierte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Grenze zwischen Initiative und Befugnis als klare Regel, die drei Eskalationsfehler, was eine gute Eskalation enthält, und die Eskalationsmatrix für die Schicht.'
 # Three moves for tomorrow's shift, shown before the text.
@@ -17,7 +17,7 @@ firstMove:
 checklist:
   title: Die Eskalationsmatrix für die Schicht
   fill: true
-  note: "Wenn 1 „nein“ oder 2 „ja“ ist: nicht anfassen, eskalieren. Wenn es nicht umkehrbar ist oder jemanden außerhalb Ihrer Schicht betrifft: lösen und informieren. Wenn alle Antworten ruhig sind: selbst lösen. Die fünfte Frage bestimmt das Tempo."
+  note: "Wenn 1 „nein“ oder 2 „ja“ ist: nicht anfassen, eskalieren. Wenn es nicht umkehrbar ist oder jemanden außerhalb Ihrer Schicht betrifft: lösen und informieren. Wenn alle Antworten unbedenklich sind: selbst lösen. Die fünfte Frage bestimmt das Tempo."
   items:
     - label: Liegt es in meiner Befugnis?
       hint: Die Rolle, der Standard, die Freigaben, die mir zustehen.
@@ -133,7 +133,7 @@ So werden sie gelesen:
 - Wenn die Antwort auf Frage 1 „nein“ oder auf Frage 2 „ja“ ist: **nicht anfassen, eskalieren**.
 - Wenn sich die Entscheidung nicht rückgängig machen lässt, treffen Sie sie nicht allein: mindestens **lösen und informieren**, und bei Risiko eskalieren.
 - Wenn es jemanden außerhalb Ihrer Schicht betrifft, aber in Ihrer Befugnis liegt: **lösen und informieren**.
-- Wenn alle Antworten ruhig sind: **selbst lösen**.
+- Wenn alle Antworten unbedenklich sind: **selbst lösen**.
 - Die fünfte Frage bestimmt das Tempo: Wenn Warten das Risiko erhöht, eskalieren Sie sofort mit dem, was Sie wissen.
 
 Und wenn Sie eskalieren, die fünf Dinge einer guten Eskalation: was passiert ist, welche Auswirkung es hat, was getan wurde, welche Entscheidung gebraucht wird, wie dringend es ist.

@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Një ankesë nuk mbyllet vetëm sepse mysafiri largohet nga recepsioni.
 teaser: Natën, hoteli ka më pak njerëz, më pak departamente zgjuar dhe më pak mundësi. Mysafiri ka të njëjtin problem si në mesditë.
-description: "Ankesat gjatë Night Audit: çfarë kam të dokumentuar dhe çfarë jo, çfarë mund të zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit, dhe pesë fushat e një ankese që kalon te turni tjetër."
+description: "Ankesat në Night Audit: çfarë mund të zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit, dhe pesë fushat e një ankese që i kalon turnit tjetër."
 deck: 'Eseja e nëntë e serisë “Përmirësimi që mbahet”: ankesat gjatë Night Audit, çfarë mund të zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit, dhe ankesa që kalon te turni tjetër pa u treguar nga e para.'
 relatedTools:
   - /tools/shift-handover/

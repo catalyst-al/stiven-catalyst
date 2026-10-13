@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: A process does not end when I hand the work over. It ends when the next team can carry it on without losing the information, the responsibility or the time.
-description: "Why so many mistakes are born where work passes from one team to another: reception, Housekeeping and Maintenance in the hotel, from Outbound to the driver in last mile, and five questions for every point where work changes hands."
+description: "Why so many mistakes are born where work passes between teams, in the hotel and in last mile, and five questions for every point where work changes hands."
 teaser: The place where a mistake is measured is not necessarily the place where it was born.
 deck: 'The fifth essay in the series “The operation that runs without you”: what happens between two departments, why “I informed them” is not enough, status, responsibility and confirmation, and the handover map with five questions.'
 relatedTools:

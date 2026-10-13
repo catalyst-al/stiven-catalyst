@@ -87,7 +87,7 @@
       ],
       "case": [
         ["Përkufizimi", "Një njësi është e dëmtuar kur kutia e jashtme është e shtypur, e grisur ose e lagur aq sa ta vërejë klienti, e gjetur kudo nga rafti i mbledhjes deri te dorëzimi te shoferi."],
-        ["Kontrolli", "Dy drejtues turni gjykuan të njëjtat 20 kuti dhe u pajtuan për 17. Tri ishin “pak të shtypura”: përkufizimi mori një foto të asaj që numërohet dhe asaj që jo."],
+        ["Kontrolli", "Dy shefa turni gjykuan të njëjtat 20 kuti dhe u pajtuan për 17. Tri ishin “pak të shtypura”: përkufizimi mori një foto të asaj që numërohet dhe asaj që jo."],
         ["Pika e nisjes", "104 të dëmtuara nga 18.400 njësi: 0,57%, DPMO 5.652, niveli sigma 4,03."]
       ],
       "mistakes": [
@@ -124,12 +124,12 @@
           "why": "104 ÷ 18.400 × 1.000.000 = 5.652 defekte për milion."
         },
         {
-          "q": "Dy drejtues gjykojnë të njëjtat 20 kuti dhe nuk pajtohen për pesë. Çfarë vjen së pari?",
+          "q": "Dy shefa turni gjykojnë të njëjtat 20 kuti dhe nuk pajtohen për pesë. Çfarë vjen së pari?",
           "options": [
             "Nisni përmirësimin gjithsesi",
             "Merrni mesataren e përgjigjeve të tyre",
             "Rregulloni përkufizimin dhe matjen para se t'u besoni të dhënave",
-            "Përdorni përgjigjet e drejtuesit më të rreptë"
+            "Përdorni përgjigjet e shefit më të rreptë"
           ],
           "answer": 2,
           "why": "Një matje që nuk mund ta përsërisni do të fshehë ose do të shpikë përmirësime më vonë."
@@ -289,7 +289,7 @@
       ],
       "case": [
         ["Standardi", "Standardi i stivimit është në SOP dhe në trajnimin e të rinjve, me figurat e rampave."],
-        ["Plani i kontrollit", "Dëmet ditore në një kartë p me kufijtë nga javët e pilotit. Një ditë mbi kufirin e sipërm: drejtuesi i turnit kontrollon të njëjtin turn dhe bën 5 Whys brenda 24 orëve. Një kontroll javor në terren te rampa."],
+        ["Plani i kontrollit", "Dëmet ditore në një kartë p me kufijtë nga javët e pilotit. Një ditë mbi kufirin e sipërm: shefi i turnit kontrollon të njëjtin turn dhe bën 5 Whys brenda 24 orëve. Një kontroll javor në terren te rampa."],
         ["Rezultati", "0,31% me 18.400 njësi në javë: rreth 47 njësi të dëmtuara më pak dhe 500 € më pak kompensime në javë. Nga java 47 përgjegjësi është menaxheri i daljes së mallit."]
       ],
       "mistakes": [
@@ -396,7 +396,7 @@
     "scopeIn": "Nga rafti i mbledhjes deri te dorëzimi te shoferi",
     "scopeOut": "Transporti ndërqytetës, ambalazhi i furnitorit",
     "sponsor": "Menaxheri i daljes së mallit",
-    "team": "Drejtuesit e turnit të mëngjesit dhe të pasdites, dy ngarkues, një shofer, koordinatori i cilësisë",
+    "team": "Shefat e turnit të mëngjesit dhe të pasdites, dy ngarkues, një shofer, koordinatori i cilësisë",
     "benefit": "Rreth 500 € në javë kompensime, më pak ankesa nga klientët",
     "dates": "Përcakto java 39 · Mat java 41 · Analizo java 42 · Përmirëso java 45 · Kontrollo java 47"
   }

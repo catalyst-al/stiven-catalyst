@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Kur nuk e sheh automjetin, duhet të kesh një mënyrë të besueshme për të kuptuar çfarë po ndodh me të.
 teaser: Në rampë mund ta shohësh një problem me sytë e tu. Nga distanca, shpesh duhet ta kuptosh përmes informacionit që merr.
-description: "Koordinimi në distancë i 80+ automjeteve dhe 100+ shoferëve: çfarë kam të dokumentuar dhe çfarë jo, çfarë humbet dhe çfarë fiton kur nuk je në rampë, pse informacioni bëhet vetë puna, dhe pesë pyetje për një problem që nuk e sheh."
+description: "Koordinimi në distancë i 80+ automjeteve dhe 100+ shoferëve: çfarë humbet dhe çfarë fiton larg rampës, dhe pesë pyetje për një problem që nuk e sheh."
 deck: 'Eseja e shtatë e serisë “Përmirësimi që mbahet”: koordinimi në distancë i 80+ automjeteve, çfarë humbet dhe çfarë fiton kur nuk je në rampë, pse cilësia e informacionit bëhet vetë puna, dhe pesë pyetje për një problem që nuk e sheh.'
 relatedTools:
   - /tools/cx-control-tower/

@@ -111,7 +111,7 @@
   },
   {
     "id": "the-system-says",
-    "name": { "en": "The system says one thing, the floor another", "de": "Das System sagt das eine, der Boden das andere", "sq": "Sistemi thotë një gjë, salla tjetër" },
+    "name": { "en": "The system says one thing, the floor another", "de": "Das System sagt das eine, die Leute vor Ort das andere", "sq": "Sistemi thotë një gjë, terreni tjetër" },
     "line": {
       "en": "The scan, the plan or the dashboard is sure, and what you see on shift does not match it. Whom do you believe, and who answers for it?",
       "de": "Der Scan, der Plan oder das Dashboard ist sich sicher, und was Sie in der Schicht sehen, passt nicht dazu. Wem glauben Sie, und wer verantwortet es?",

@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Real improvement is not the kind that only works while the manager is there. It is the kind that keeps working when the manager leaves.
 teaser: Do not settle for having solved the problem today. Ask yourself whether tomorrow it can be solved without you there.
-description: "The closing essay of the series: why an improvement fades, what I have on record and what I do not, what keeps a standard alive, the question that links all ten essays, and a check of whether an improvement will last."
+description: "The closing essay of the series: why an improvement fades, what keeps a standard alive, the question behind all ten essays, and a check that it will last."
 deck: 'The tenth and final essay in the series “Improvement that holds”: why an improvement fades, what keeps a standard alive, the question I cannot answer about my own work, the question that links all ten essays, and a check of whether an improvement will last.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: The ten minutes before a shift are not for telling everything we know. They are for deciding what the team needs to know before the work starts.
-description: "The pre-shift briefing: what the morning stand-ups in last mile covered, how the night began in the hotel, where the briefing and the handover part ways, and a ten-minute template with five questions."
+description: "The pre-shift briefing: what the last-mile stand-ups covered, how the hotel night began, where briefing and handover part, and a ten-minute template."
 teaser: The handover tells you what state you are inheriting. The briefing decides what matters now.
 deck: 'The second essay in the series “The operation that runs without you”: the morning stand-ups in last mile, the hotel night that never starts from zero, the difference between a handover and a briefing, and the ten-minute briefing template.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).

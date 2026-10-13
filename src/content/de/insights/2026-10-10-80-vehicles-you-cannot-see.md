@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Wenn man das Fahrzeug nicht sieht, braucht man einen verlässlichen Weg zu verstehen, was mit ihm passiert.
 teaser: An der Rampe sieht man ein Problem mit eigenen Augen. Aus der Ferne muss man es oft über die Informationen verstehen, die man bekommt.
-description: "Remote-Koordination von 80+ Fahrzeugen und 100+ Fahrern: was ich belegen kann und was nicht, was man verliert und was man gewinnt, wenn man nicht an der Rampe ist, warum Information selbst zur Arbeit wird, und fünf Fragen für ein Problem, das man nicht sieht."
+description: "Remote-Koordination von 80+ Fahrzeugen und 100+ Fahrern: was man fern der Rampe verliert und gewinnt, warum Information zur Arbeit wird, und fünf Fragen."
 deck: 'Der siebte Essay der Reihe „Verbesserung, die hält“: Remote-Koordination von 80+ Fahrzeugen, was man verliert und was man gewinnt, wenn man nicht an der Rampe ist, warum die Qualität der Information selbst zur Arbeit wird, und fünf Fragen für ein Problem, das man nicht sieht.'
 relatedTools:
   - /tools/cx-control-tower/

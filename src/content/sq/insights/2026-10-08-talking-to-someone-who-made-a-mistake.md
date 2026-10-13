@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Qëllimi i bisedës pas gabimit nuk është që punonjësi të largohet me frikë nga gabimi i radhës. Është të largohet duke ditur çfarë duhet të bëjë ndryshe.
-description: "Biseda pas gabimit: si dallohet gabimi i personit nga gabimi i procesit, pse presioni mund të jetë i drejtë dhe poshtërimi jo, si të flasësh me kolegët e djeshëm pasi ngrihesh në detyrë, dhe pesë hapat e bisedës."
+description: "Biseda pas gabimit: si dallohet gabimi i personit nga gabimi i procesit, pse presioni mund të jetë i drejtë dhe poshtërimi jo, dhe pesë hapat e bisedës."
 teaser: Presioni mund të jetë i drejtë. Poshtërimi jo.
 deck: 'Eseja e shtatë e serisë “Operacioni që punon pa ty”: dy pyetjet që duhet të ngrejë çdo gabim, kufiri mes kërkesës dhe poshtërimit, autoriteti pas promovimit, dhe fleta e bisedës korrigjuese me pesë hapa.'
 relatedTools:

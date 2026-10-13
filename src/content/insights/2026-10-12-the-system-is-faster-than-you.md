@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "The system decides first. What is left for the person on shift is the part it was never told, and the name that answers for it."
 teaser: The system decides first. The name on the shift is still yours.
-description: "What the systems in every shift know and what they were never told, three ways a shift lead can get it wrong, three questions for every decision the system takes, and a card for who decides what."
+description: "What the systems in every shift know and what they were never told, three ways a shift lead can get it wrong, and a card for who decides what."
 deck: "The first essay in the series “The system is faster than you”: what the systems in every shift know and what they were never told, three ways a shift lead can get it wrong, and a card for who decides what in your shift."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

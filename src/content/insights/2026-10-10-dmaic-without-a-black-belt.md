@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: You do not need a Black Belt certificate to ask good questions. But knowing the name of a method is not enough to claim you have applied it.
 teaser: The value of DMAIC is not in the certificate. It is in the discipline not to jump straight from the problem to the solution.
-description: "DMAIC without a certificate: what I have on record and what I do not, the five phases as I actually had them in last mile, why Control is the hardest phase, and five questions for a shift manager."
+description: "DMAIC without a certificate: the five phases as I actually had them in last mile, why Control is the hardest, and five questions for a shift manager."
 deck: 'The sixth essay in the series “Improvement that holds”: what DMAIC is, which phases I had in my work and which I did not, why Control is the hardest phase, and five questions for a shift manager who is not a black belt.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

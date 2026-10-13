@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një sistem i mirë eskalimi nuk i mëson njerëzit të kërkojnë leje për çdo gjë. I mëson të kuptojnë kufirin e vendimit të tyre.
-description: "Eskalimi si sistem, jo si temperament: si e ndaja natën në hotel atë që ishte brenda rolit tim, pse paqartësia është problem sistemi, pesë gjërat e një eskalimi të mirë dhe matrica e eskalimit për turnin."
+description: "Eskalimi si sistem, jo si temperament: çfarë ishte brenda rolit tim natën në hotel, pesë gjërat e një eskalimi të mirë dhe matrica e eskalimit për turnin."
 teaser: Ownership nuk do të thotë “e zgjidh gjithmonë vetë”. Do të thotë ta çosh problemin deri në vendin ku mund të merret vendimi i duhur, me informacionin e duhur.
 deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes iniciativës dhe autoritetit si rregull i qartë, tri gabimet e eskalimit, çfarë duhet të ketë një eskalim i mirë, dhe matrica e eskalimit për turnin.'
 # Three moves for tomorrow's shift, shown before the text.

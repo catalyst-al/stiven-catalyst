@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: When you cannot see the vehicle, you need a reliable way to understand what is happening with it.
 teaser: On the ramp you can see a problem with your own eyes. From a distance, you often have to understand it through the information you receive.
-description: "Remote coordination of 80+ vehicles and 100+ drivers: what I have on record and what I do not, what you lose and what you gain when you are not on the ramp, why information becomes the work itself, and five questions for a problem you cannot see."
+description: "Coordinating 80+ vehicles and 100+ drivers remotely: what you lose and gain away from the ramp, why information becomes the work, and five questions."
 deck: 'The seventh essay in the series “Improvement that holds”: remote coordination of 80+ vehicles, what you lose and what you gain when you are not on the ramp, why the quality of information becomes the work itself, and five questions for a problem you cannot see.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

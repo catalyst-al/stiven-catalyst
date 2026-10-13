@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Ein schlechter Tag ist ein Signal zum Prüfen. Er ist nicht automatisch der Beweis, dass der ganze Prozess geändert werden muss.
 teaser: 2,8 %. So hoch war Delay in einem Bericht vom Juni 2025. War das ein schlechter Tag oder ein Problem? Aus dieser Zahl allein kann ich es nicht sagen.
-description: "Ein Tag mit schlechten Kennzahlen: was ich belegen kann und was nicht, warum eine einzelne Zahl nicht zeigt, ob sich der Prozess verändert hat, die Idee der Regelkarte, die zwei entgegengesetzten Fehler, und vier Fragen, bevor Sie den Prozess ändern."
+description: "Ein Tag mit schlechten Kennzahlen: warum eine Zahl allein nicht zeigt, ob sich der Prozess geändert hat, die Regelkarte und vier Fragen, bevor Sie handeln."
 deck: 'Der fünfte Essay der Reihe „Verbesserung, die hält“: wie wir die Kennzahlen täglich verfolgten, warum eine einzelne Zahl nicht zeigt, ob sich der Prozess verändert hat, die zwei entgegengesetzten Fehler, wann man sofort eingreift, und vier Fragen, bevor Sie den Prozess ändern.'
 relatedTools:
   - /tools/sigma-control-chart/

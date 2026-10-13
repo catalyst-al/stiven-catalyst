@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: A complaint is not closed just because the guest walks away from the front desk.
 teaser: At night the hotel has fewer people, fewer departments awake and fewer options. The guest has the same problem they would have at midday.
-description: "Complaints during the night audit: what I have on record and what I do not, what can be solved at night and what cannot, why listening comes before explaining, and the five fields of a complaint handed to the next shift."
+description: "Complaints during the night audit: what can be solved at night and what cannot, why listening comes before explaining, and a handover to the next shift."
 deck: 'The ninth essay in the series “Improvement that holds”: complaints during the night audit, what can be solved at night and what cannot, why listening comes before explaining, and a complaint that reaches the next shift without having to be told again from the start.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

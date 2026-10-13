@@ -20,7 +20,7 @@
         "Mbetjet janë numëruar, jo vlerësuar me sy.",
         "Incidentet e sigurisë dhe gati-aksidentet janë shkruar.",
         "Rampat, korridoret dhe daljet e emergjencës janë të lira.",
-        "Drejtuesi i turnit të ardhshëm e ka lexuar këtë dorëzim dhe ka bërë pyetje."
+        "Shefi i turnit të ardhshëm e ka lexuar këtë dorëzim dhe ka bërë pyetje."
       ],
       "headsUp": "p.sh. Pritet pik volumi në 11:00\nPiruni 3 në riparim deri të enjten"
     },
@@ -93,7 +93,7 @@
       {
         "text": "Muri i kafazit te rampa 3 u shemb në 18:40, 6 pako u ripaketuan; te ajo rampë mungon figura e stivimit",
         "priority": "Mesatare",
-        "owner": "Drejtuesi i turnit të mëngjesit",
+        "owner": "Shefi i turnit të mëngjesit",
         "due": "Në fillim të turnit",
         "done": false,
         "carried": 1

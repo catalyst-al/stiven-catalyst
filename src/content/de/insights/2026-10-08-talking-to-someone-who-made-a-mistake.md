@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Das Ziel des Gesprächs nach einem Fehler ist nicht, dass der Mitarbeiter mit Angst vor dem nächsten Fehler hinausgeht. Sondern dass er weiß, was er anders machen soll.
-description: "Das Gespräch nach einem Fehler: wie man den Fehler einer Person von einem Prozessfehler unterscheidet, warum Druck fair sein kann und Demütigung nie, wie man nach einer Beförderung mit den Kollegen von gestern spricht, und die fünf Schritte des Gesprächs."
+description: "Das Gespräch nach einem Fehler: Fehler einer Person oder des Prozesses, warum Druck fair sein kann und Demütigung nie, und die fünf Schritte des Gesprächs."
 teaser: Druck kann fair sein. Demütigung nicht.
 deck: 'Der siebte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die zwei Fragen, die jeder Fehler aufwerfen sollte, die Grenze zwischen Fordern und Demütigen, Autorität nach einer Beförderung, und der Gesprächsbogen in fünf Schritten.'
 relatedTools:

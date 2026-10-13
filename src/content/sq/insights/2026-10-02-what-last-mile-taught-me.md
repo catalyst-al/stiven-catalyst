@@ -51,11 +51,11 @@ Nëse kishe 58 vonesa, nuk mjaftonte të thoshe 2,8% delays. Duhej të kuptoje n
 
 Presioni në last mile vjen nga shumë drejtime njëkohësisht. Ke orarin e nisjes. Ke klientët që presin. Ke target-et. Ke shoferët. Ke magazinën. Ke missing bags. Ke një route që po vonohet, ndërkohë që një tjetër sapo ka krijuar problem. Dhe operacioni nuk ndalon që ti ta analizosh problemin qetësisht.
 
-Mësimi im ishte se presioni nuk duhet kaluar poshtë si panik. Nëse menaxheri sheh një KPI të kuq dhe reagimi i parë është të bërtasë, shumë shpejt ke 20 njerëz që përpiqen të duken të zënë, por askush nuk po zgjidh shkakun. Unë përpiqesha ta ktheja presionin në pyetje konkrete. Ku është problemi? Sa raste kemi? Cila është arsyeja që përsëritet? Çfarë mund të bëjmë tani? Çfarë duhet të ndryshojmë për nesër?
+Mësimi im ishte se presioni nuk duhet kaluar poshtë si panik. Nëse menaxheri sheh një KPI të kuqe dhe reagimi i parë është të bërtasë, shumë shpejt ke 20 njerëz që përpiqen të duken të zënë, por askush nuk po zgjidh shkakun. Unë përpiqesha ta ktheja presionin në pyetje konkrete. Ku është problemi? Sa raste kemi? Cila është arsyeja që përsëritet? Çfarë mund të bëjmë tani? Çfarë duhet të ndryshojmë për nesër?
 
 Accountability për mua nuk do të thotë të kërkosh një fajtor sa herë që një numër bëhet i kuq. Do të thotë të gjesh kush e zotëron problemin dhe ta ndjekësh derisa të mbyllet.
 
-Nëse më pyet cili KPI të mashtron më shumë kur e sheh vetëm si numër, do të thosha Delays. Numri të jep përshtypjen se po mat vetëm vonesën e shoferit. Por vonesa mund të ketë filluar shumë më herët. Te ngarkimi. Te një missing bag. Te një trolley i përzier. Te renditja e route-it. Te një problem operacional para se shoferi të ketë dalë fare nga rampa. Pastaj në dashboard sheh vetëm një shofer “late”.
+Nëse më pyet cila KPI të mashtron më shumë kur e sheh vetëm si numër, do të thosha Delays. Numri të jep përshtypjen se po mat vetëm vonesën e shoferit. Por vonesa mund të ketë filluar shumë më herët. Te ngarkimi. Te një missing bag. Te një trolley i përzier. Te renditja e route-it. Te një problem operacional para se shoferi të ketë dalë fare nga rampa. Pastaj në dashboard sheh vetëm një shofer “late”.
 
 Nëse menaxhon vetëm numrin, mund të ndëshkosh personin e gabuar. Nëse menaxhon procesin, fillon të kuptosh ku është krijuar realisht vonesa.
 

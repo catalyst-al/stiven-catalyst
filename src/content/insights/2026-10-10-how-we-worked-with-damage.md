@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: A KPI tells you that you have a problem. It does not automatically tell you where it started or who caused it.
-description: "Damage as a last-mile KPI: what I have on record and what I do not, why a percentage does not show where damage starts, lowering a number versus preventing damage, and a four-question check for a single damage case."
+description: "Damage as a last-mile KPI: why a percentage does not show where damage starts, lowering a number versus preventing damage, and a four-question check."
 teaser: 1.06% against a 0.8% target. The number was right. But it did not say whether the damage had started on the trolley, during loading, in the van or at the customer's door.
 deck: 'The first essay in the series “Improvement that holds”: Damage as a last-mile KPI, what I have on record and what I do not, the difference between lowering a percentage and preventing damage, and a four-question check for a single damage case.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist. Es ist die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
-description: "Wie man eine Kennzahl baut, der Menschen vertrauen: Damage, Incomplete, Delay und Loading Time auf der letzten Meile, Ergebnis und Grund, warum kein Wert allein gelesen wird, und die Kennzahlenkarte mit sechs Zeilen."
+description: "Eine Kennzahl, der Menschen vertrauen: Damage, Incomplete, Delay und Loading Time auf der letzten Meile, Ergebnis und Grund, und die Kennzahlenkarte."
 teaser: Eine Kennzahl kann mathematisch richtig sein und trotzdem unfair gelesen werden.
 deck: 'Der sechste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: eine klare Definition, faire Verantwortung und die Handlung nach dem Ergebnis, mit der Kennzahlenkarte, die man ausfüllt, bevor man zu messen beginnt.'
 relatedTools:
@@ -103,7 +103,7 @@ Im Hotel arbeitet man mit anderen betrieblichen Informationen. Im Night Audit ha
 
 Aber ich möchte unterscheiden. Das waren betriebliche Werte und Kontrollen, die ich in der Arbeit genutzt habe. Ich habe nicht dokumentiert, dass sie alle formale KPIs mit individuellen Zielen für den Night Auditor waren.
 
-Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze Lage zeigt. Man kann einen korrekten Bericht haben und ein offenes Problem, das noch Handlung braucht. Deshalb muss der Bericht mit dem tatsächlichen Status, mit der Verantwortung und mit der Übergabe an die nächste Schicht verbunden sein.
+Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze Lage zeigt. Man kann einen korrekten Bericht haben und ein offenes Problem, das noch gelöst werden muss. Deshalb muss der Bericht mit dem tatsächlichen Status, mit der Verantwortung und mit der Übergabe an die nächste Schicht verbunden sein.
 
 ## Die Kennzahlenkarte
 

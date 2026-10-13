@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Eine Kennzahl zeigt Ihnen, dass Sie ein Problem haben. Sie zeigt nicht automatisch, wo es angefangen hat und wer es verursacht hat.
-description: "Damage als Kennzahl auf der letzten Meile: was ich belegen kann und was nicht, warum eine Quote nicht zeigt, wo ein Schaden entsteht, eine Zahl senken oder Schäden verhindern, und die Prüfung eines Schadensfalls in vier Fragen."
+description: "Damage als Kennzahl der letzten Meile: warum eine Quote nicht zeigt, wo Schaden entsteht, eine Zahl senken oder Schaden verhindern, und vier Prüffragen."
 teaser: 1,06 % bei einem Ziel von 0,8 %. Die Zahl stimmte. Aber sie sagte nicht, ob der Schaden am Rollwagen, beim Verladen, im Fahrzeug oder an der Tür des Kunden entstanden war.
 deck: 'Der erste Essay der Reihe „Verbesserung, die hält“: Damage als Kennzahl auf der letzten Meile, was ich belegen kann und was nicht, der Unterschied zwischen dem Senken einer Quote und dem Verhindern von Schäden, und die Prüfung eines Schadensfalls in vier Fragen.'
 relatedTools:

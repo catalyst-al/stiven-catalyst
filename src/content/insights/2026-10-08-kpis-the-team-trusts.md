@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: A KPI the team trusts is not necessarily the one that always shows green. It is the one that measures clearly, is read fairly and helps people understand what they can do better.
-description: "How to build a KPI people trust: Damage, Incomplete, Delay and Loading Time in last mile, the result and the reason, why no indicator is read alone, and the six-line card for a KPI."
+description: "How to build a KPI people trust: Damage, Incomplete, Delay and Loading Time in last mile, the result and the reason, and a six-line card for a KPI."
 teaser: A KPI can be mathematically correct and its interpretation still be unfair.
 deck: 'The sixth essay in the series “The operation that runs without you”: a clear definition, fair responsibility and the action that follows the result, with the KPI card to fill in before you start measuring.'
 relatedTools:

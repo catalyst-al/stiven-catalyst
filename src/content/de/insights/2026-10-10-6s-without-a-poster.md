@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Ordnung beweist sich nicht durch ein Plakat an der Wand. Sie beweist sich daran, wie der Arbeitsplatz funktioniert, wenn der Tag schwer ist.
 teaser: Ein Plakat mit sechs Prinzipien kann an jeder Wand hängen. Aber die Rampe liest das Plakat nicht. Die Rampe zeigt, ob die Ordnung lebt.
-description: "5S und 6S auf der letzten Meile: was ich belegen kann und was nicht, die Standards an der Rampe, warum 6S kein Putzen ist, Sicherheit als sechstes S, und die Kontrolle eines Bereichs am Schichtende."
+description: "5S und 6S auf der letzten Meile: Standards an der Rampe, warum 6S kein Putzen ist, Sicherheit als sechstes S und eine Kontrolle am Schichtende."
 deck: 'Der vierte Essay der Reihe „Verbesserung, die hält“: 5S und 6S auf der letzten Meile, wie Ordnung an der Rampe aussah, warum es kein Putzen ist, Sicherheit als sechstes S, und die Kontrolle eines Bereichs am Schichtende.'
 relatedTools:
   - /tools/shift-handover/

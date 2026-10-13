@@ -368,7 +368,7 @@ const sq = {
       kicker: "Për këtë udhëzues",
       title: "Katërmbëdhjetë mjete, katër planete, një ide",
       body: [
-        "Stiven Catalyst ka katërmbëdhjetë mjete falas për ata që e drejtojnë punën: drejtuesit e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
+        "Stiven Catalyst ka katërmbëdhjetë mjete falas për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
         "Ky udhëzues shpjegon si janë organizuar mjetet, pse faqja duket ashtu siç duket dhe si përdoret çdo mjet, hap pas hapi. Nuk keni nevojë ta lexoni me radhë: gjeni planetin tuaj dhe nisni nga aty.",
         { cards: [
           { title: "Falas", text: "Çdo mjet përdoret falas." },
@@ -398,7 +398,7 @@ const sq = {
       body: [
         { diagram: "system" },
         "Në faqen kryesore mjetet janë një sistem i vogël diellor. Në qendër është drita, llamba e Catalyst. Në markë ajo do të thotë qartësi: momenti kur një problem i ndërlikuar bëhet i kuptueshëm.",
-        "Planetet janë role. Çdo orbitë zgjerohet ashtu si zgjerohet pamja e rolit: Pulse, drejtuesi i turnit, sheh një turn; Zenith, area manager-i, një zonë javë pas jave; Lumen, process manager-i, të gjithë sistemin; Atlas është karriera që e mbart çdo rol.",
+        "Planetet janë role. Çdo orbitë zgjerohet ashtu si zgjerohet pamja e rolit: Pulse, shefi i turnit, sheh një turn; Zenith, area manager-i, një zonë javë pas jave; Lumen, process manager-i, të gjithë sistemin; Atlas është karriera që e mbart çdo rol.",
         "Hënat janë mjetet, një për çdo mjet ose kurs. Prekni një planet dhe hapen mjetet e tij; prekni një hënë dhe jeni brenda mjetit. Si në një sistem diellor të vërtetë, planetet më afër dritës lëvizin më shpejt.",
       ],
     },
@@ -469,7 +469,7 @@ const sq = {
         "Ide në shqyrtim, jo premtime me data. Më tregoni cila do t'ju ndihmonte më shumë.",
         { list: [
           "Faqe mjetesh më të shpejta: skripte më të vogla, që mjetet të hapen më shpejt në telefon.",
-          "Analiza e vonesave për itinerare pa orë nisjeje të regjistruar.",
+          "Analiza e vonesave për linja pa orë nisjeje të regjistruar.",
           "Një hapësirë e përbashkët për një coach dhe një ekip, por vetëm me llogari të vërteta dhe kontroll aksesi, sepse premtimi i këtyre mjeteve është që të dhënat tuaja mbeten tuajat.",
         ] },
         "Kur ndryshon një mjet, ky udhëzues merr një botim të ri. Botimi më i fundit është gjithmonë në faqe.",
@@ -521,9 +521,9 @@ const sq = {
       data: "Regjistri mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
     },
     "/tools/delay-analyzer/": {
-      when: "Kur itineraret mbërrijnë me vonesë dhe duhet të dini nëse vonesa nisi në rampë apo në rrugë.",
+      when: "Kur linjat mbërrijnë me vonesë dhe duhet të dini nëse vonesa nisi në rampë apo në rrugë.",
       how: [
-        "Regjistroni një itinerar: datën, turnin, itinerarin, nisjen e planifikuar dhe reale, mbërritjen e planifikuar dhe reale, dhe arsyen nëse u vonua. Rreshtat mund të importohen.",
+        "Regjistroni një linjë: datën, turnin, linjën, nisjen e planifikuar dhe reale, mbërritjen e planifikuar dhe reale, dhe arsyen nëse u vonua. Rreshtat mund të importohen.",
         "Vendosni minutat e tolerancës për nisjen dhe mbërritjen, dhe objektivin e përpikërisë.",
         "Rishikoni regjistrin.",
         "Bëni [[Floor check]].",
@@ -545,13 +545,13 @@ const sq = {
     "/tools/cx-control-tower/": {
       when: "Çdo javë, për të shkuar nga rezultati që merr klienti te shkaktari operacional, te shkaku rrënjësor dhe te një veprim i verifikuar.",
       how: [
-        "Ngarkoni skedarët: dorëzimet, itineraret, incidentet dhe veprimet, si CSV ose Excel, ose një libër pune të vetëm. Ose [[Load the example]].",
+        "Ngarkoni skedarët: dorëzimet, linjat, incidentet dhe veprimet, si CSV ose Excel, ose një libër pune të vetëm. Ose [[Load the example]].",
         "Vendosni vetëm objektivat që keni miratuar.",
         "Filtroni sipas datave, partnerit, turnit dhe zonës.",
         "Lexoni skedat, nga pamja e përgjithshme deri te [[Weekly review]].",
         "Te [[Deep dive]], zgjidhni një dështim, shihni ku përqendrohet dhe cilat incidente e regjistrojnë, shkruani hetimin dhe [[Create the linked action]].",
       ],
-      get: "Perfect Delivery për çdo porosi, karta rezultatesh, rreziku i itinerareve, një Pareto e shkaqeve rrënjësore, një analizë e thelluar për çdo dështim me regjistrin e rasteve, dhe një ndjekës veprimesh. Kopjoni rishikimin, printojeni ose eksportoni tabelat si CSV.",
+      get: "Perfect Delivery për çdo porosi, karta rezultatesh, rreziku i linjave, një Pareto e shkaqeve rrënjësore, një analizë e thelluar për çdo dështim me regjistrin e rasteve, dhe një ndjekës veprimesh. Kopjoni rishikimin, printojeni ose eksportoni tabelat si CSV.",
       data: "Skedarët lexohen në shfletues. Asgjë nuk ngarkohet.",
     },
     "/tools/kpi-diagnostic/": {
@@ -579,11 +579,11 @@ const sq = {
       when: "Kur duhet të dini sa i mirë është një proces, dhe nëse një ditë e keqe është ndryshim i vërtetë apo zhurmë e zakonshme.",
       how: [
         "Për nivelin sigma: njësitë, defektet dhe mundësitë për njësi.",
-        "Për dorëzimin perfekt: në kohë, pa dëme dhe e plotë, në përqindje.",
+        "Për dorëzimin e përsosur: në kohë, pa dëme dhe i plotë, në përqindje.",
         "Për kartën e kontrollit: çfarë numëroni, sipas ditës ose javës, dhe një bazë krahasimi.",
         "Shtoni ditët një nga një me [[Add a day]], ose importoni rreshta.",
       ],
-      get: "Niveli sigma, dorëzimi perfekt dhe një kartë kontrolli që rendit [[Signals to investigate]]. Shkarkojeni si CSV, kopjojeni ose printojeni.",
+      get: "Niveli sigma, dorëzimi i përsosur dhe një kartë kontrolli që rendit [[Signals to investigate]]. Shkarkojeni si CSV, kopjojeni ose printojeni.",
       data: "Gjithçka mbetet në këtë shfletues.",
     },
     "/tools/five-whys/": {

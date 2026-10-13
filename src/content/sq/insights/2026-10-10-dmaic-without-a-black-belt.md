@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Nuk ke nevojë për një certifikatë Black Belt për të bërë pyetje të mira. Por nuk mjafton as ta njohësh emrin e metodës për të pretenduar se e ke zbatuar.
 teaser: Vlera e DMAIC nuk është te certifikata. Është te disiplina për të mos kaluar menjëherë nga problemi te zgjidhja.
-description: "DMAIC pa certifikatë: çfarë kam të dokumentuar dhe çfarë jo, pesë fazat ashtu siç i kam pasur në last mile, pse Control është faza më e vështirë, dhe pesë pyetje për një menaxher turni."
+description: "DMAIC pa certifikatë: pesë fazat ashtu siç i kam pasur në last mile, pse Control është faza më e vështirë, dhe pesë pyetje për një menaxher turni."
 deck: 'Eseja e gjashtë e serisë “Përmirësimi që mbahet”: çfarë është DMAIC, cilat faza i kam pasur në punë dhe cilat jo, pse Control është faza më e vështirë, dhe pesë pyetje për një menaxher turni që nuk është black belt.'
 relatedTools:
   - /tools/six-sigma-dmaic/
