@@ -525,7 +525,7 @@
     state.split = "";
     const cut = clean.length > MAX_ROWS + 1;
     say(tx("{name}: {n} rows read.", { name, n: int.format(state.source.rows.length) }) + (cut ? ` ${tx("Only the first {n} rows are used.", { n: int.format(MAX_ROWS) })}` : ""));
-    save();
+    if (options.keep !== false) save();
     renderAll();
     return true;
   };
@@ -1054,12 +1054,14 @@
   };
 
   // ---------- Actions ----------
+  // keep: false shows the example without writing it to the browser (a first visit).
+  const showExample = (keep) => {
+    const tpl = template();
+    const ex = example(tpl, lang, data.exampleEnd);
+    useTable(`${tx("Example")}: ${tpl.name[lang] || tpl.name.en}`, [ex.headers, ...ex.rows], { hasHeader: true, measure: tpl.measure === "value" ? "value" : "count", keep });
+  };
   const actions = {
-    example: () => {
-      const tpl = template();
-      const ex = example(tpl, lang, data.exampleEnd);
-      useTable(`${tx("Example")}: ${tpl.name[lang] || tpl.name.en}`, [ex.headers, ...ex.rows], { hasHeader: true, measure: tpl.measure === "value" ? "value" : "count" });
-    },
+    example: () => showExample(true),
     csv: () => {
       const tpl = template();
       const ex = example(tpl, lang, data.exampleEnd, 3);
@@ -1112,8 +1114,9 @@
     });
     say(tx("{name}: {n} rows taken over. Check the columns below.", { name: str(handoff.source), n: int.format(handoff.rows.length) }));
   } else {
-    // A first visit opens on the example of the chosen template, so the chart is visible at once (its name says "Example").
-  if (!state.source && firstVisit(data.storageKey)) actions.example();
-  renderAll();
+    // A first visit opens on the example of the chosen template, so the chart is visible at once (its name says
+    // "Example"). Nothing is written to the browser until the visitor acts.
+    if (!state.source && firstVisit(data.storageKey)) showExample(false);
+    renderAll();
   }
 })();

@@ -685,13 +685,17 @@
   })();
   const handoffStatus = root.querySelector("[data-handoff-status]");
   const applyHandoff = (given) => {
-    const { rows, merge } = takeOver(given, state);
+    // An example still on the chart is never mixed with real days: the handed-over days replace it, its
+    // settings (the baseline above all) included.
+    const onExample = exampleMatches(state);
+    const { rows, merge } = takeOver(given, onExample ? { ...state, rows: [] } : state);
     if (!rows.length) return;
-    const before = { metric: state.metric, unit: state.unit, baseline: state.baseline, rows: state.rows.map((row) => ({ ...row })) };
+    const before = { metric: state.metric, unit: state.unit, baseline: state.baseline, example: state.example, rows: state.rows.map((row) => ({ ...row })) };
     if (!merge) {
       state.metric = str(given.metric);
       state.unit = str(given.unit);
       state.baseline = "";
+      state.example = {};
       state.rows = [];
     }
     upsert(rows);
@@ -728,11 +732,9 @@
     }, 150);
   });
 
-  // A first visit opens on the example month, so the chart is visible at once; the note says so.
-  if (!state.rows.length && !handoff && firstVisit(KEY)) {
-    loadExample();
-    save();
-  }
+  // A first visit opens on the example month, so the chart is visible at once; the note says so. Nothing is written
+  // to the browser until the visitor acts, as in the log tools.
+  if (!state.rows.length && !handoff && firstVisit(KEY)) loadExample();
   render();
   if (handoff) applyHandoff(handoff);
 })();

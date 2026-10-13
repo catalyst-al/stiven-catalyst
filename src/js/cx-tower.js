@@ -885,7 +885,8 @@
   };
   const normaliseAction = (row) => ({ ...row, Status: C.actionStatus(row.Status), Verification_Status: C.verification(row.Verification_Status) });
 
-  const loadExample = () => {
+  // The example in memory only; loadExample also writes it, once the visitor asks for it.
+  const showExample = () => {
     const ex = C.example(cfg.exampleEnd);
     NAMES.forEach((name) => {
       state[name] = ex[name];
@@ -900,6 +901,9 @@
     if (state.tab === "data") state.tab = "overview";
     say(tx("Example loaded: four weeks of a delivery station with five partners. Replace it with your files in Data & targets."));
     invalidate();
+  };
+  const loadExample = () => {
+    showExample();
     save();
     render();
   };
@@ -2432,6 +2436,7 @@
     renderPanel();
   };
   // A first visit opens on the example station, so the control tower is visible at once (the flag says so).
-  if (!hasData() && firstVisit(cfg.storageKey)) loadExample();
+  // Nothing is written to the browser until the visitor acts.
+  if (!hasData() && firstVisit(cfg.storageKey)) showExample();
   render();
 })();
