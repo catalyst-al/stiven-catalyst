@@ -92,18 +92,22 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(thirdClosing, /class="essay-series-next" href="\/sq\/insights\/the-system-is-faster-than-you\/"/);
   assert.equal((thirdClosing.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
 
-  // The fourth series is being written: its first essay leads to the second, the newest, whose next one is on its way.
+  // The fourth series is complete in eight essays: the first leads to the second, the second to the third, and the eighth closes it.
   const fourth = built('sq/insights/the-system-is-faster-than-you/index.html');
-  assert.match(fourth, /Sistemi është më i shpejtë se ti · Eseja 1 nga 10/);
+  assert.match(fourth, /Sistemi është më i shpejtë se ti · Eseja 1 nga 8/);
   assert.match(fourth, /href="\/sq\/insights\/when-the-dashboard-turns-red-before-you\/" rel="next"/);
   assert.equal((fourth.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
   assert.match(fourth, /data-diagram="decision-split"/);
   const dashboard = built('sq/insights/when-the-dashboard-turns-red-before-you/index.html');
-  assert.match(dashboard, /Sistemi është më i shpejtë se ti · Eseja 2 nga 10/);
-  assert.match(dashboard, /serisë është në rrugë/);
-  assert.doesNotMatch(dashboard, /rel="next"/);
+  assert.match(dashboard, /Sistemi është më i shpejtë se ti · Eseja 2 nga 8/);
+  assert.match(dashboard, /href="\/sq\/insights\/the-tour-the-driver-does-not-understand\/" rel="next"/);
   assert.equal((dashboard.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
   assert.match(dashboard, /data-diagram="dashboard-lag"/);
+  const fourthClosing = built('sq/insights/the-tools-you-build-yourself/index.html');
+  assert.match(fourthClosing, /Sistemi është më i shpejtë se ti · Eseja 8 nga 8/);
+  assert.doesNotMatch(fourthClosing, /serisë është në rrugë/);
+  assert.doesNotMatch(fourthClosing, /rel="next"/);
+  assert.equal((fourthClosing.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
 
   // The last essay of the finished first series leads into the second.
   const last = built('insights/the-operations-manager-i-want-to-be/index.html');
@@ -115,10 +119,10 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(page, /aria-labelledby="series-panel-the-system"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
   assert.match(page, /aria-labelledby="series-panel-improvement"/);
-  // Three finished series and the fourth, just begun.
+  // Four finished series: twelve, ten, ten and eight essays.
   assert.equal((page.match(/>10 ese</g) || []).length, 2);
   assert.match(page, />12 ese</);
-  assert.match(page, /2 nga 10 ese</);
+  assert.match(page, />8 ese</);
   assert.match(page, /10 ese</);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));

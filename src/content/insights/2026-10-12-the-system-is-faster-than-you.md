@@ -117,7 +117,7 @@ The system may have been wrong. The name on the shift is yours. That is not unfa
 
 The aim is not to choose between the system and experience. The aim is a process in which the system helps you work faster, and people have a way to notice, report and correct what the system does not understand. The system gives you speed, memory and numbers you would never have on your own. In exchange you give it what it does not have: eyes on the floor, a question when something does not make sense, and a name that answers.
 
-The essays still to come in this series are about that exchange: the tour the driver does not understand, the scanner that is a witness and not a judge, the dashboard that turns red before you, the report a machine wrote, and the night the system went down and we saw what the team really knew.
+The essays still to come in this series are about that exchange: the tour the driver does not understand, the scanner that is a witness and not a judge, the dashboard that turns red before you, the report a machine wrote, the night the system went down and we saw what the team really knew, the new system that arrives, and the small list you build yourself beside it.
 
 ## Who decides what
 

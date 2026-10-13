@@ -112,7 +112,7 @@ Sistemi mund të ketë gabuar. Emri në turn është i yti. Kjo nuk është e pa
 
 Qëllimi nuk është të zgjedhësh mes sistemit dhe përvojës. Qëllimi është një proces ku sistemi të ndihmon të punosh më shpejt, dhe njerëzit kanë mënyrë të dallojnë, raportojnë dhe korrigjojnë atë që sistemi nuk e kupton. Sistemi të jep shpejtësi, kujtesë dhe numra që nuk do t'i kishe kurrë vetëm. Në këmbim ti i jep atë që ai nuk e ka: sy në terren, një pyetje kur diçka nuk ka kuptim, dhe një emër që përgjigjet.
 
-Esetë që vijnë në këtë seri janë për këtë këmbim: rruga që shoferi nuk e kupton, skaneri që është dëshmitar dhe jo gjykatës, tabela që skuqet para teje, raporti që e shkroi një makinë, dhe nata kur ra sistemi dhe pamë çfarë dinte ekipi vërtet.
+Esetë që vijnë në këtë seri janë për këtë këmbim: rruga që shoferi nuk e kupton, skaneri që është dëshmitar dhe jo gjykatës, tabela që skuqet para teje, raporti që e shkroi një makinë, nata kur ra sistemi dhe pamë çfarë dinte ekipi vërtet, sistemi i ri që vjen, dhe lista e vogël që e ndërton vetë pranë tij.
 
 ## Kush vendos çfarë
 

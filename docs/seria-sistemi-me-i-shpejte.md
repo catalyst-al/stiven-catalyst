@@ -1,7 +1,6 @@
 # Seria: Sistemi është më i shpejtë se ti
 
-EN *The system is faster than you* · DE *Das System ist schneller als Sie*. Seria e katërt e eseve, 10 ese, nga tetori
-2026. Për sistemet e çdo turni (skaneri, planifikimi, PMS-ja, tabela) dhe atë që i mbetet njeriut pranë tyre.
+EN *The system is faster than you* · DE *Das System ist schneller als Sie*. Seria e katërt e eseve, nga tetori 2026, e mbyllur me 8 ese (vendimi i Stivenit, 13 tetor 2026). Për sistemet e çdo turni (skaneri, planifikimi, PMS-ja, tabela) dhe atë që i mbetet njeriut pranë tyre.
 
 ## Si shkruhet një ese
 
@@ -17,8 +16,12 @@ Esetë 1 dhe 2 u botuan më 12 dhe 13 tetor 2026 pa pyetjet. Më 13 tetor u rish
 |---|---|---|---|
 | 1 | Sistemi është më i shpejtë se ti | KPI Diagnostic, Shift Pulse | Botuar 12 tetor 2026; rishikuar me përgjigjet dhe ribotuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/01-sistemi-me-i-shpejte.md`); shënimet 161, 162, 188, 192 |
 | 2 | Kur tabela skuqet para teje | Shift Pulse, Delay Analyzer, CX Control Tower | Botuar 13 tetor 2026; rishikuar me përgjigjet dhe ribotuar 13 tetor 2026 (drafti te `seria-sistemi/02-kur-tabela-skuqet.md`); shënimet 189–191 |
-| 3 | Rruga që shoferi nuk e kupton | Delay Analyzer, 5 Whys | Drafti me kontrollin e fakteve te `seria-sistemi/03-rruga-qe-shoferi-nuk-e-kupton.md`, në pritje të miratimit |
-| 4 | Skaneri është dëshmitar, jo gjykatës | Incomplete Control, 5 Whys | Drafti me kontrollin e fakteve te `seria-sistemi/04-skaneri-deshmitar.md`, në pritje të miratimit |
+| 3 | Rruga që shoferi nuk e kupton | Delay Analyzer, 5 Whys | Botuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/03-rruga-qe-shoferi-nuk-e-kupton.md`) |
+| 4 | Skaneri është dëshmitar, jo gjykatës | Incomplete Control, 5 Whys | Botuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/04-skaneri-deshmitar.md`) |
+| 5 | Raporti që e shkroi një makinë | Shift Handover, KPI Diagnostic | Botuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/05-raporti-qe-e-shkroi-nje-makine.md`) |
+| 6 | Nata kur ra sistemi | Shift Handover | Botuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/06-nata-kur-ra-sistemi.md`) |
+| 7 | Kur vjen një sistem i ri | Six Sigma DMAIC, Shift Handover | Botuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/07-kur-vjen-nje-sistem-i-ri.md`) |
+| 8 | Lista e vogël pranë sistemit: mjetet që i ndërton vetë | Shift Handover | Botuar 13 tetor 2026 (drafti me kontrollin e fakteve te `seria-sistemi/08-mjetet-qe-i-ndertoni-vete.md`) |
 
 ## Shifrat
 
