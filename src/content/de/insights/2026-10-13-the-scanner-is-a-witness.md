@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Ein Scan zeigt, dass eine Handlung erfasst wurde. Er zeigt nicht die ganze Geschichte des Produkts, und er zeigt nicht, wer schuld ist."
 teaser: Das System sagt Ihnen, was erfasst wurde. Die Führungskraft muss verstehen, was passiert ist.
-description: "Was ein Scan beweist und was nicht, die Regel des Trolleys, der in seiner Zone bleibt, wenn eine Tasche fehlt, warum ein Scan rekonstruiert und nicht urteilt, fünf Schritte für eine Abweichung zwischen System und Realität, und eine Karte dafür."
+description: "Was ein Scan beweist und was nicht, warum er rekonstruiert und nicht urteilt, fünf Schritte bei einer Abweichung von System und Realität, und eine Karte."
 deck: "Der vierte Essay der Reihe „Das System ist schneller als Sie“: was ein Scan beweist, warum eine korrekte Erfassung nicht beweist, dass der physische Prozess korrekt abgeschlossen wurde, fünf Schritte für eine Abweichung, und eine Karte, die den Erfassungsfehler vom Beladungsfehler trennt."
 relatedTools:
   - /tools/incomplete-control/

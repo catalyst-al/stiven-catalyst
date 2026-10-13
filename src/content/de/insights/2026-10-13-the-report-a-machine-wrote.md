@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Ein Bericht, der schnell erzeugt und gut geschrieben ist, ist keine Garantie dafür, dass die Information vollständig ist. Die Maschine kann den Bericht schreiben. Die Verantwortung für das, was er sagt, muss beim Menschen bleiben."
 teaser: Die Maschine kann den Bericht schreiben. Die Verantwortung für das, was der Bericht sagt, muss beim Menschen bleiben.
-description: "Die Berichte, die das System erzeugt, und die, die KI schreibt, warum zwei korrekte Berichte zwei verschiedene Zahlen liefern können, was Sie prüfen, bevor Sie einem Bericht vertrauen, fünf Regeln für einen mit KI geschriebenen Text, und ein Bericht in drei Teilen: die Fakten, die Interpretation, die Handlung."
+description: "Berichte vom System und von KI: warum zwei korrekte Berichte abweichen können, was Sie prüfen, bevor Sie einem vertrauen, und ein Bericht in drei Teilen."
 deck: "Der fünfte Essay der Reihe „Das System ist schneller als Sie“: die automatischen Berichte der letzten Meile und des Night Audit, KI, die den Text klarer schreibt, warum ein gut geschriebener Bericht nicht bedeutet, dass das Problem verstanden wurde, und eine Karte für einen Bericht in drei Teilen."
 relatedTools:
   - /tools/shift-handover/

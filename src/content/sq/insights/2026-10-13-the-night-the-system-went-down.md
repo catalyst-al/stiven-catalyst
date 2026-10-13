@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Natën e parë të trajnimit tim në hotel, sistemi ishte i padisponueshëm për orë të tëra. Kur sistemi ndalet, kupton sa shumë nga puna jote varet prej tij, dhe sa mirë je përgatitur për të vazhduar."
 teaser: Kur sistemi ndalet, kupton sa shumë nga puna jote varet prej tij dhe sa mirë je përgatitur për të vazhduar.
-description: "Një natë trajnimi pa sistem, çfarë nuk mund të mësohet kur proceset jetojnë në ekran, pse rikthimi i sistemit nuk është fundi i incidentit, pesë gjëra për t'i ditur para turnit, dhe një kartelë për natën kur ndalet sistemi."
+description: "Një natë trajnimi pa sistem: çfarë nuk mësohet dot nga ekrani, pse incidenti nuk mbaron kur sistemi rikthehet, dhe pesë gjëra për t'i ditur para turnit."
 deck: "Eseja e gjashtë e serisë “Sistemi është më i shpejtë se ti”: nata e parë e trajnimit në hotel, kur një përditësim e ndali sistemin për orë të tëra, çfarë tregoi ajo natë për punën që varet nga një ekran, dhe pesë gjëra për t'i ditur para se sistemi të ndalet."
 relatedTools:
   - /tools/shift-handover/

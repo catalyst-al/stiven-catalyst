@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Ein neues System wird nicht Teil der Arbeit, weil es installiert ist. Es wird es, wenn die Menschen es verstehen, wissen, wie man es benutzt, und wissen, was zu tun ist, wenn es ihnen nicht hilft."
 teaser: Die Installation verändert das System. Schulung, Kommunikation und die tägliche Erfahrung verändern die Art, wie Menschen arbeiten.
-description: "Eine Planungsänderung auf der letzten Meile und eine Einarbeitung im Hotel aus Sicht des Mitarbeiters, der Unterschied zwischen „wie man es benutzt“ und „warum es sich ändert“, wann ein Dokument außerhalb des Systems hilft und wann es stört, sechs Dinge, bevor das neue System kommt, und eine Karte dafür."
+description: "Ein neues System aus Sicht der Mitarbeiter: „wie man es benutzt“ und „warum es sich ändert“, sechs Dinge, bevor es kommt, und eine Karte dafür."
 deck: "Der siebte Essay der Reihe „Das System ist schneller als Sie“: der Wechsel zu einem neuen Planungssystem im August 2025 und die ersten Wochen der Einarbeitung in einem neuen Hotel im September 2026, warum ein technisch besseres System die Menschen nicht von selbst bereit macht, und sechs Dinge, die es braucht, bevor es kommt."
 relatedTools:
   - /tools/six-sigma-dmaic/

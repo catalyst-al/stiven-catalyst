@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Wenn ein Mitarbeiter ein Werkzeug baut, um die Arbeit leichter zu machen, zeigt er auch eine Lücke in der Art, wie die Organisation Information verteilt. Aber ein persönliches Werkzeug wird nicht Teil des Systems, nur weil es nützlich ist."
 teaser: Ein kleines Werkzeug kann ein großes Problem lösen. Um Teil der Arbeit zu werden, muss es mehr sein als das Projekt der Person, die es gebaut hat.
-description: "Warum Mitarbeiter neben dem offiziellen System eigene Werkzeuge bauen, was das über die Organisation sagt, der Unterschied zwischen einem persönlichen und einem freigegebenen Werkzeug, die Daten, die nicht hineingehören, das Werkzeug, das von einem Menschen abhängt, und fünf Bedingungen, bevor Sie es mit dem Team teilen."
+description: "Warum Mitarbeiter neben dem System eigene Werkzeuge bauen, persönlich oder freigegeben, und fünf Bedingungen, bevor Sie eines mit dem Team teilen."
 deck: "Der achte und letzte Essay der Reihe „Das System ist schneller als Sie“: Front Desk Control und die kleinen Listen, die neben dem offiziellen System entstehen, was sie über die Lücken einer Organisation zeigen, warum ein nützliches Werkzeug nicht von selbst ein freigegebenes Werkzeug ist, und fünf Bedingungen, bevor es ein Werkzeug des Teams wird."
 relatedTools:
   - /tools/shift-handover/

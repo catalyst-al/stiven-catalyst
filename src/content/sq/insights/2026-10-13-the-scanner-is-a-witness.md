@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Një skanim tregon që një veprim u regjistrua. Nuk tregon gjithë historinë e produktit, dhe nuk tregon kush e ka fajin."
 teaser: Sistemi të tregon çfarë është regjistruar. Menaxheri duhet të kuptojë çfarë ka ndodhur.
-description: "Çfarë dëshmon një skanim dhe çfarë jo, rregulli i karrocës që rri në zonë kur mungon një bag, pse skanimi rindërton dhe nuk gjykon, pesë hapa për një mospërputhje mes sistemit dhe realitetit, dhe një kartelë për të."
+description: "Çfarë dëshmon një skanim dhe çfarë jo, pse rindërton dhe nuk gjykon, pesë hapa për një mospërputhje mes sistemit dhe realitetit, dhe një kartelë."
 deck: "Eseja e katërt e serisë “Sistemi është më i shpejtë se ti”: çfarë dëshmon një skanim, pse një regjistrim i saktë nuk provon që procesi fizik mbaroi saktë, pesë hapa për një mospërputhje, dhe një kartelë që e ndan gabimin e regjistrimit nga gabimi i ngarkimit."
 relatedTools:
   - /tools/incomplete-control/
