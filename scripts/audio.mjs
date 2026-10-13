@@ -44,25 +44,37 @@ const LOUD = "loudnorm=I=-16:TP=-1.5:LRA=11";
 const report = run("ffmpeg", ["-nostats", "-i", input, "-af", `${LOUD}:print_format=json`, "-f", "null", "-"]).err;
 const m = JSON.parse(report.slice(report.lastIndexOf("{"), report.lastIndexOf("}") + 1));
 // loudnorm keeps the gain linear only when the peaks allow it; otherwise it compresses, and its output can still
-// overshoot once encoded. A limiter at -2 dBFS, at the final sample rate, keeps the MP3 from clipping.
-const filter = [
+// overshoot once encoded. A limiter at the final sample rate keeps the MP3 from clipping: it starts at -2 dBFS, and
+// when the decoded file still peaks above -0.3 dBFS (an MP3 can overshoot its source on a sharp consonant), the
+// recording is encoded again with the limiter 1.5 dB lower.
+const filter = (limitDb) => [
   `${LOUD}:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true`,
   "aresample=44100",
-  "alimiter=limit=0.794:attack=5:release=50:level=false",
+  `alimiter=limit=${(10 ** (limitDb / 20)).toFixed(3)}:attack=5:release=50:level=false`,
 ].join(",");
+const peakOf = (file) => Number(run("ffmpeg", ["-nostats", "-i", file, "-af", "astats=measure_overall=Peak_level:measure_perchannel=none", "-f", "null", "-"]).err.match(/Peak level dB:\s*(-?[\d.]+|-inf)/)?.[1]);
 
 // 2. Encode: mono, 64 kbps, 44.1 kHz, ID3v2.3 tags (read by phones and car radios), the cover as its picture.
 const withCover = fs.existsSync(cover);
-run("ffmpeg", [
+const encode = (limitDb) => run("ffmpeg", [
   "-y", "-nostats", "-i", input,
   ...(withCover ? ["-i", cover, "-map", "0:a", "-map", "1:v", "-c:v", "mjpeg", "-q:v", "4", "-disposition:v", "attached_pic"] : ["-map", "0:a"]),
-  "-af", filter, "-ac", "1", "-c:a", "libmp3lame", "-b:a", "64k",
+  "-af", filter(limitDb), "-ac", "1", "-c:a", "libmp3lame", "-b:a", "64k",
   "-map_metadata", "-1", "-id3v2_version", "3",
   "-metadata", `title=${title}`, "-metadata", "artist=Stiven Catalyst", "-metadata", `album=${album}`,
   "-metadata", `language=${ISO[lang]}`, "-metadata", `date=${new Date().getFullYear()}`,
   ...(number ? ["-metadata", `track=${Number(number)}`] : []),
   out,
 ]);
+let limit = -2;
+let peak;
+for (;;) {
+  encode(limit);
+  peak = peakOf(out);
+  if (!(peak > -0.3) || limit <= -6.5) break;
+  console.log(`peak ${peak} dBFS with the limiter at ${limit} dBFS: encoding again at ${limit - 1.5}`);
+  limit -= 1.5;
+}
 
 // 3. List it: the reader shows the length and size before anything is downloaded.
 const seconds = Math.round(Number(run("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", out]).out));
@@ -74,4 +86,4 @@ const published = list[slug]?.[lang]?.published || new Date().toISOString().slic
 list[slug] = { ...list[slug], [lang]: { src: `/media/audio/${slug}-${lang}.mp3`, title, seconds, bytes, published, ...(ownVoice ? {} : { ai: "NotebookLM" }) } };
 const sorted = Object.fromEntries(Object.keys(list).sort().map((key) => [key, list[key]]));
 fs.writeFileSync(listFile, `${JSON.stringify(sorted, null, 2)}\n`);
-console.log(`${path.relative(ROOT, out)}: ${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}, ${(bytes / 1048576).toFixed(1)} MB, from ${m.input_i} to -16 LUFS`);
+console.log(`${path.relative(ROOT, out)}: ${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}, ${(bytes / 1048576).toFixed(1)} MB, from ${m.input_i} to -16 LUFS, peak ${peak} dBFS`);
