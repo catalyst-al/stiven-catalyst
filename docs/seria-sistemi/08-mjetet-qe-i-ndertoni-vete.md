@@ -97,7 +97,7 @@ Dhe nuk do ta matja suksesin vetëm me faktin që mjeti funksionon teknikisht. D
 
 ## Para se ta ndash mjetin tënd
 
-Kartela më poshtë është për çdo mjet që e ke ndërtuar për veten dhe që mendon se mund t'u shërbejë edhe të tjerëve: qëllimi dhe kufijtë, verifikimi kundrejt SOP-ve, të dhënat që nuk hyjnë, miratimi, kush e përditëson kur mungon, dhe kush tjetër e ka provuar. Plotësoje para se ta japësh, jo pasi të jetë përhapur. [Shift Handover](/sq/tools/shift-handover/) është një shembull i një mjeti që mban metodën dhe jo të dhënat e askujt tjetër: punon në shfletuesin tënd, pa llogari.
+Kartela më poshtë është për çdo mjet që e ke ndërtuar për veten dhe që mendon se mund t'u shërbejë edhe të tjerëve: qëllimi dhe kufijtë, verifikimi kundrejt SOP-ve, të dhënat që nuk hyjnë, miratimi, kush e përditëson kur mungon, dhe kush tjetër e ka provuar. Plotësoje para se ta japësh, jo pasi të jetë përhapur. [Shift Handover](/sq/tools/shift-handover/) është një shembull i një mjeti që mban metodën dhe jo të dhënat e askujt tjetër: dorëzimet mbeten në shfletuesin tënd, dhe asgjë nuk dërgohet apo ngarkohet.
 
 **Një mjet i vogël mund të zgjidhë një problem të madh. Por që të bëhet pjesë e punës, duhet të jetë më shumë se projekti i personit që e ndërtoi.**
 
@@ -122,7 +122,7 @@ KONTROLLI I FAKTEVE (nuk publikohet; hiqet para publikimit)
 | Asnjë rast i procedurës së vjetëruar; asnjë përgjegjës tjetër; varësia nga një person | Përgjigja 5 |
 | "Udhëzimi i vjetëruar është më i rrezikshëm se ai që mungon": analizë | Përgjigja 5; analizë |
 | Pesë kushtet; suksesi jo vetëm teknik | Përgjigja 6 |
-| Shift Handover punon në shfletues pa llogari | Faqja e mjetit në sit (mjet i faqes, jo i punëdhënësit) |
+| Shift Handover: dorëzimet mbeten në shfletues, asgjë nuk dërgohet | Shënimi i privatësisë në faqen e mjetit ("Handovers stay in this browser. Nothing is sent or uploaded.") |
 | "Një mjet i vogël mund të zgjidhë..." | Fjalia që propozoi Stiveni |
 | Lidhjet te esetë 3 dhe 7 | Kërkojnë që ato të botohen para kësaj |
 
