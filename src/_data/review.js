@@ -188,7 +188,7 @@ const pages = [
       { type: "stats", cols: 2, items: [
         { n: pc(40), t: x("higher productivity growth in the companies most exposed to AI than in the least exposed.", "rritje më e lartë e produktivitetit te kompanitë më të ekspozuara ndaj AI-së, krahasuar me ato më pak të ekspozuara.", "höheres Produktivitätswachstum in den am stärksten KI-exponierten Unternehmen als in den am wenigsten exponierten.") },
         { n: x("2×", "2×", "2×"), t: x("Skills in the most AI-exposed jobs are changing more than twice as fast.", "Aftësitë te punët më të ekspozuara ndaj AI-së po ndryshojnë më shumë se dy herë më shpejt.", "Die Fähigkeiten in den am stärksten KI-exponierten Jobs ändern sich mehr als doppelt so schnell.") },
-        { n: x("7×", "7×", "7×"), t: x("AI-exposed junior roles are seven times more likely to ask for skills that used to be senior, such as leadership.", "Rolet fillestare të ekspozuara ndaj AI-së kanë shtatë herë më shumë gjasa të kërkojnë aftësi që dikur ishin për seniorët, si lidershipi.", "KI-exponierte Einstiegsrollen verlangen siebenmal häufiger Fähigkeiten, die früher Senior-Rollen vorbehalten waren, etwa Führung.") },
+        { n: x("7×", "7×", "7×"), t: x("In the US, AI-exposed junior roles are seven times more likely to ask for skills that used to be senior, such as leadership.", "Në SHBA, rolet fillestare të ekspozuara ndaj AI-së kanë shtatë herë më shumë gjasa të kërkojnë aftësi që dikur ishin për seniorët, si lidershipi.", "In den USA verlangen KI-exponierte Einstiegsrollen siebenmal häufiger Fähigkeiten, die früher Senior-Rollen vorbehalten waren, etwa Führung.") },
         { n: x("2.5×", "2,5×", "2,5×"), t: x("The most AI-exposed jobs are adding tasks that rely on empathy, judgment and creativity 2.5 times faster.", "Punët më të ekspozuara ndaj AI-së po shtojnë 2,5 herë më shpejt detyra që mbështeten te empatia, gjykimi dhe kreativiteti.", "In den am stärksten KI-exponierten Jobs kommen Aufgaben, die Empathie, Urteil und Kreativität brauchen, 2,5-mal schneller hinzu.") },
       ] },
       { type: "callout", label: x("What it means for managers", "Çfarë do të thotë për menaxherët", "Was das für Führungskräfte bedeutet"),
@@ -239,7 +239,7 @@ const pages = [
     title: [x("Promotion is not", "Promovimi nuk është", "Beförderung ist keine"), x("preparation.", "përgatitje.", "Vorbereitung.")],
     lead: x("Being good at operational work does not automatically prepare you to lead people.", "Të jesh i mirë në punën operative nuk të përgatit automatikisht për të drejtuar njerëz.", "Wer operativ gut ist, ist nicht automatisch darauf vorbereitet, Menschen zu führen."),
     blocks: [
-      { type: "split", label: x("Frontline supervisors and supervisor training", "Supervizorët e vijës së parë dhe trajnimi për rolin", "Frontline-Vorgesetzte und Führungstraining"), items: [
+      { type: "split", label: x("US frontline supervisors and supervisor training", "Supervizorët e vijës së parë në SHBA dhe trajnimi për rolin", "Frontline-Vorgesetzte in den USA und Führungstraining"), items: [
         { v: 45, n: pc(45), t: x("trained in the past year", "të trajnuar në vitin e fundit", "im letzten Jahr geschult") },
         { v: 32, n: pc(32), t: x("trained, but not in the past year", "të trajnuar, por jo në vitin e fundit", "geschult, aber nicht im letzten Jahr") },
         { v: 23, n: pc(23), t: x("never trained", "asnjëherë të trajnuar", "nie geschult"), alert: true },
@@ -272,7 +272,7 @@ const pages = [
         ],
         note: x("“Own work”: the share of time the manager still spends on individual contributor work.", "“Punë vetjake”: pjesa e kohës që menaxheri ende harxhon për punë individuale, jo menaxhim.", "„Eigene Arbeit“: der Anteil der Zeit, den die Führungskraft noch mit eigener Facharbeit verbringt.") },
       { type: "callout", label: x("The player-coach problem", "Problemi i lojtarit-trajner", "Das Spielertrainer-Problem"),
-        text: x("97% of managers in Gallup's study also carry individual work, at a median of 40% of their time. When that load stays high and the team grows, management weakens.", "97% e menaxherëve në studimin e Gallup kanë edhe përgjegjësi individuale, me një medianë prej 40% të kohës. Kur kjo ngarkesë mbetet e lartë dhe ekipi rritet, menaxhimi dobësohet.", "97 % der Führungskräfte in Gallups Studie haben auch eigene Facharbeit, im Median 40 % ihrer Zeit. Bleibt diese Last hoch und wächst das Team, leidet die Führung.") },
+        text: x("97% of US managers in Gallup's study also carry individual work, at a median of 40% of their time. When that load stays high and the team grows, management weakens.", "97% e menaxherëve në SHBA në studimin e Gallup kanë edhe përgjegjësi individuale, me një medianë prej 40% të kohës. Kur kjo ngarkesë mbetet e lartë dhe ekipi rritet, menaxhimi dobësohet.", "97 % der US-Führungskräfte in Gallups Studie haben auch eigene Facharbeit, im Median 40 % ihrer Zeit. Bleibt diese Last hoch und wächst das Team, leidet die Führung.") },
     ],
     source: sourceLine("span"),
   },
