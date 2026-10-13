@@ -24,8 +24,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
+      # The site is built first: many tests read the built pages, and without them they are skipped.
       - run: npm run build
+      - name: npm test (no test may be skipped)
+        run: |
+          npm test 2>&1 | tee test.log
+          grep -q '^# skipped 0$' test.log
       - run: node scripts/check-coaching-build.mjs
       - if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5

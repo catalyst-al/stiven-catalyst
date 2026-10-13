@@ -10,4 +10,4 @@
   { title: "My shelf" | t(lang), summary: "What you saved for later, the cards you started and the essays you read. Kept in this browser only, with no account; “Save all my work” takes it to another device." | t(lang), url: "/shelf.html" },
   { title: "Contact" | t(lang), summary: "Questions, ideas or a conversation about leadership, operations and systems. Messages are read personally." | t(lang), url: "/contact.html" }
 ] -%}
-{{ lang | searchIndex(collections, toolList, pages) | safe }}
+{{ lang | searchIndex(collections, toolList, pages, { weekly: weekly, treatise: treatise, magazine: magazine, review: review, toolsGuide: toolsGuide, podcast: podcast }) | safe }}
