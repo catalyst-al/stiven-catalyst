@@ -45,6 +45,8 @@ test('every Management Review recording is an episode of the feed of its languag
     assert.deepEqual(numbers, [...numbers].sort((a, b) => b - a), `${feed.lang}: the newest first`);
     assert.equal(new Set(feed.episodes.map((e) => e.guid)).size, feed.episodes.length, 'episode guids are unique');
     for (const e of feed.episodes) assert.ok(!Number.isNaN(Date.parse(e.pubDate)), `${e.slug}: pubDate`);
+    const times = feed.episodes.map((e) => Date.parse(e.pubDate));
+    times.slice(1).forEach((time, i) => assert.ok(time < times[i], `${feed.lang}: ${feed.episodes[i].slug} is published after the issue before it`));
   }
 });
 

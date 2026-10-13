@@ -24,5 +24,31 @@
       "published": "2026-10-13",
       "ai": "NotebookLM"
     }
+  },
+  "management-review-nr-02": {
+    "en": {
+      "src": "/media/audio/management-review-nr-02-en.mp3",
+      "title": "Replace lagging KPIs with leading indicators",
+      "seconds": 819,
+      "bytes": 6614422,
+      "published": "2026-10-13",
+      "ai": "NotebookLM"
+    },
+    "sq": {
+      "src": "/media/audio/management-review-nr-02-sq.mp3",
+      "title": "Pse KPI-të dështojnë të paralajmërojnë problemet",
+      "seconds": 1575,
+      "bytes": 12659806,
+      "published": "2026-10-13",
+      "ai": "NotebookLM"
+    },
+    "de": {
+      "src": "/media/audio/management-review-nr-02-de.mp3",
+      "title": "Frühindikatoren statt Blick in den Rückspiegel",
+      "seconds": 1070,
+      "bytes": 8629333,
+      "published": "2026-10-13",
+      "ai": "NotebookLM"
+    }
   }
 }
