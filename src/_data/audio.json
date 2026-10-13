@@ -15,6 +15,14 @@
       "bytes": 11446718,
       "published": "2026-10-13",
       "ai": "NotebookLM"
+    },
+    "de": {
+      "src": "/media/audio/management-review-nr-01-de.mp3",
+      "title": "Warum Googles Experiment ohne Manager scheiterte",
+      "seconds": 1237,
+      "bytes": 9968204,
+      "published": "2026-10-13",
+      "ai": "NotebookLM"
     }
   }
 }
