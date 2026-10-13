@@ -48,7 +48,7 @@ A concrete example. The target for loading time was around 20 minutes. For a per
 
 It would have been very easy to say: the drivers are loading slowly. But 24 minutes do not tell you by themselves why you have a problem. You have to go to the ramp and see what is physically happening. There you found missing bags, trolleys that did not match the route or the floor as they should, problems with the order of the stops, loads that took longer than normal, drivers waiting. You looked at the scanners, at how dry, chilled and frozen were organised, and at whether the driver was taking everything before leaving.
 
-The work was to go to the process, not to blame the driver straight away. We worked on very concrete things: better checks of the trolleys and the routes, scanners closer to the ramps, pre-scanning, final checks for completeness, a clearer organisation of dry, chilled and frozen, and ramp audits. In other periods loading time came down to the range of 16 to 19 minutes.
+The work was to go to the process, not to blame the driver straight away. We worked on very concrete things: better checks of the trolleys and the routes, a clearer organisation of dry, chilled and frozen, and ramp audits. Scanners closer to the ramps, pre-scanning and final checks for completeness were recommendations, not measures I can say were put in place. In other periods loading time came down to the range of 16 to 19 minutes.
 
 For me the lesson was not “we brought a KPI down”. The lesson was that a KPI improves when you change the process that produces it.
 

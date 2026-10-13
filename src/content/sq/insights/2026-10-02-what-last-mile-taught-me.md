@@ -39,7 +39,7 @@ Një shembull konkret. Target-i për loading time ishte rreth 20 minuta. Në nj�
 
 Do të ishte shumë e lehtë të thoshe: shoferët po ngarkojnë ngadalë. Por 24 minuta nuk të thonë vetë pse ke problem. Duhet të shkosh në rampë dhe të shohësh çfarë po ndodh fizikisht. Aty gjeje missing bags, trolley që nuk përputheshin siç duhej me route-in ose floor-in, probleme me renditjen e stop-eve, ngarkesa që kërkonin më shumë kohë se normalisht, shoferë që prisnin. Shikoje scanner-at, mënyrën si organizoheshin dry, chilled dhe frozen, dhe nëse shoferi po merrte çdo gjë para se të largohej.
 
-Puna ishte të shkoje te procesi, jo të fajësoje menjëherë shoferin. Punuam me gjëra shumë konkrete: kontroll më të mirë të trolley-ve dhe të routes, scanner-at më afër rampave, pre-scan, kontrolle finale për kompletësinë, organizim më të qartë të dry, chilled dhe frozen, dhe auditim të rampës. Në periudha të tjera loading-u zbriti në zonën 16 deri në 19 minuta.
+Puna ishte të shkoje te procesi, jo të fajësoje menjëherë shoferin. Punuam me gjëra shumë konkrete: kontroll më të mirë të trolley-ve dhe të routes, organizim më të qartë të dry, chilled dhe frozen, dhe auditim të rampës. Scanner-at më afër rampave, pre-scan dhe kontrolle finale për kompletësinë ishin rekomandime, jo masa që mund të them se u zbatuan. Në periudha të tjera loading-u zbriti në zonën 16 deri në 19 minuta.
 
 Mësimi për mua nuk ishte “ulëm një KPI”. Mësimi ishte se një KPI përmirësohet kur ndryshon procesin që e prodhon atë.
 

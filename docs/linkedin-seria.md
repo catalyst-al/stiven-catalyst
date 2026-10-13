@@ -46,7 +46,7 @@ Vegla: https://stivencatalyst.com/de/tools/delay-analyzer/
 >
 > An der Rampe sah es anders aus. Fehlende Taschen. Trolleys, die nicht zur Tour passten. Stopps in der falschen Reihenfolge. Fahrer, die warteten. Die vier Minuten entstanden nicht beim Fahrer, sondern vor ihm.
 >
-> Wir haben am Prozess gearbeitet, nicht an der Zahl: Trolleys und Touren besser kontrolliert, Scanner näher an die Rampen, Pre-Scan, Endkontrolle auf Vollständigkeit, Rampen-Audits. In anderen Zeiträumen lag die Ladezeit bei 16 bis 19 Minuten. Das war die Arbeit des Teams, nicht eines Managers.
+> Wir haben am Prozess gearbeitet, nicht an der Zahl: Trolleys und Touren besser kontrolliert, Trocken-, Kühl- und Tiefkühlware klarer organisiert, Rampen-Audits. In anderen Zeiträumen lag die Ladezeit bei 16 bis 19 Minuten. Das war die Arbeit des Teams, nicht eines Managers.
 >
 > Ich habe die Last Mile aus drei Positionen gesehen: als Zusteller, als Dispatcher mit über 70 Fahrern in einer Schicht, als Area Manager mit rund 250 Fahrern in indirekter Verantwortung. Der Fahrer sieht das Problem. Der Dispatcher sieht seine Wirkung auf die Schicht. Die Führungskraft muss verstehen, warum es das Problem gibt.
 >
@@ -72,7 +72,7 @@ Vegla: https://stivencatalyst.com/de/tools/kpi-diagnostic/
 >
 > Deshalb bin ich bei einem operativen Problem nicht bei der Tabelle geblieben. Ich bin dorthin gegangen, wo der Prozess stattfand: Rampe und Ladebereich. Mit einfachen Fragen. Wo wurde die Tasche zuletzt gesehen? War sie im Trolley? War sie gescannt? Stimmten Tour und Trolley?
 >
-> Und alles, was man sieht, wird festgehalten, sonst ist es morgen nur eine Erinnerung. Daraus wurden mit der Zeit Pre-Scan, Abgleich jedes Trolleys mit seiner Tour, Endkontrollen, Rampen-Audits.
+> Und alles, was man sieht, wird festgehalten, sonst ist es morgen nur eine Erinnerung. Daraus wurden mit der Zeit der Abgleich jedes Trolleys mit seiner Tour, Kontrollen von Trocken-, Kühl- und Tiefkühlware, Rampen-Audits.
 >
 > Die Tabelle ist nicht wertlos. Ohne sie wüsste man nicht, dass man an die Rampe gehen muss. Aber sie ist der Ausgangspunkt, nicht die Antwort. Wer die Zahl als Antwort behandelt, bestraft den Fahrer für eine Tasche, die nie in seinem Trolley war.
 >
