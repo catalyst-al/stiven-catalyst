@@ -12,6 +12,14 @@
       <div class="hero-actions">
         <a class="button-primary" href="{{ '/tools.html' | local(lang) }}">{{ "Try the tools" | t(lang) }}</a>
         <a class="button-secondary" href="{{ '/insights.html' | local(lang) }}">{{ "Read the essays" | t(lang) }}</a>
+        {#- The monthly Management Review, the site's own publication, on a row of its own: the masthead (its second word
+            in blue here, red is the brand mark's only) and how many issues it has. -#}
+        {%- set wl = weekly[lang or "en"] %}
+        <a class="hero-review" href="{{ wl.archiveUrl | local(lang) }}">
+          <span class="hero-review-mast">{{ wl.mast[0] }} <b>{{ wl.mast[1] }}</b></span>
+          <small>{{ wl.archive.eyebrow }} · {{ wl.labels.no }} 1–{{ weekly.latest.number }}</small>
+          <span class="hero-review-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
 
