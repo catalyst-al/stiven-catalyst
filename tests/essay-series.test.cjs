@@ -119,10 +119,10 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(page, /aria-labelledby="series-panel-the-system"/);
   assert.match(page, /aria-labelledby="series-panel-ten-years"/);
   assert.match(page, /aria-labelledby="series-panel-improvement"/);
-  // Three finished series and the fourth, just begun.
+  // Four finished series: twelve, ten, ten and eight essays.
   assert.equal((page.match(/>10 ese</g) || []).length, 2);
   assert.match(page, />12 ese</);
-  assert.match(page, /2 nga 10 ese</);
+  assert.match(page, />8 ese</);
   assert.match(page, /10 ese</);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
