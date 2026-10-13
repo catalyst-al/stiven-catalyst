@@ -39,7 +39,7 @@ Ein konkretes Beispiel. Das Ziel für die Ladezeit lag bei etwa 20 Minuten. Übe
 
 Es wäre sehr leicht gewesen zu sagen: Die Fahrer laden zu langsam. Aber 24 Minuten sagen allein nicht, warum es ein Problem gibt. Man muss an die Rampe gehen und sehen, was dort tatsächlich passiert. Dort fand man fehlende Taschen, Trolleys, die nicht so zur Tour oder zur Etage passten, wie sie sollten, Probleme mit der Reihenfolge der Stopps, Ladungen, die länger dauerten als normal, wartende Fahrer. Man schaute sich die Scanner an, wie Trocken-, Kühl- und Tiefkühlware organisiert war und ob der Fahrer vor der Abfahrt wirklich alles mitnahm.
 
-Die Arbeit bestand darin, zum Prozess zu gehen, statt sofort den Fahrer zu beschuldigen. Wir haben an sehr konkreten Dingen gearbeitet: bessere Kontrolle der Trolleys und Touren, Scanner näher an den Rampen, Pre-Scan, Endkontrollen auf Vollständigkeit, eine klarere Organisation von Trocken-, Kühl- und Tiefkühlware und Rampen-Audits. In anderen Zeiträumen sank die Ladezeit auf 16 bis 19 Minuten.
+Die Arbeit bestand darin, zum Prozess zu gehen, statt sofort den Fahrer zu beschuldigen. Wir haben an sehr konkreten Dingen gearbeitet: bessere Kontrolle der Trolleys und Touren, eine klarere Organisation von Trocken-, Kühl- und Tiefkühlware und Rampen-Audits. Scanner näher an den Rampen, Pre-Scan und Endkontrollen auf Vollständigkeit waren Empfehlungen, keine Maßnahmen, von denen ich sagen kann, dass sie umgesetzt wurden. In anderen Zeiträumen sank die Ladezeit auf 16 bis 19 Minuten.
 
 Die Lektion für mich war nicht: „Wir haben eine Kennzahl gesenkt.“ Die Lektion war, dass sich eine Kennzahl verbessert, wenn man den Prozess verändert, der sie erzeugt.
 
