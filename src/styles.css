@@ -2872,7 +2872,11 @@ select.sh-in { cursor: pointer; }
   .dl-panel, .dl-stat, .dl-focus, .dl-check-item { break-inside: avoid; }
   .dl-matrix td.is-heat { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .dl-check { padding: 20px 0 0; }
+  /* A box prints only what fits in it, and an empty one its grey example: on paper its whole text stands in for it. */
+  .has-print-text { display: none !important; }
+  .print-text { display: block; min-height: 1.5em; padding: 4px 0; border-bottom: 1px solid #bbb; white-space: pre-wrap; overflow-wrap: anywhere; }
 }
+@media screen { .print-text { display: none; } }
 
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }

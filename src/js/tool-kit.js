@@ -939,6 +939,21 @@ window.ToolKit = (() => {
     };
   };
 
+  // Printing a form: a one-line box prints only what fits in it, and an empty box prints its grey example. Inside a
+  // [data-print-fields] container each box gets its whole text as plain text for print (.print-text), and the box
+  // itself is left off the paper (.has-print-text in styles.css).
+  window.addEventListener?.("beforeprint", () => {
+    document.querySelectorAll("[data-print-fields]").forEach((box) => {
+      box.querySelectorAll("input:not([type]), input[type=text], input[type=date], input[type=number], textarea").forEach((field) => {
+        const next = field.nextElementSibling;
+        const text = next?.classList.contains("print-text") ? next : el("span", "print-text");
+        if (text !== next) field.after(text);
+        text.textContent = field.value;
+        field.classList.add("has-print-text");
+      });
+    });
+  });
+
   // A typed text that a spreadsheet would run as a formula (=HYPERLINK(...), +cmd, @A1,
   // or a leading tab) is kept as text with a leading apostrophe; a plain number stays a number.
   const csvSafe = (text) => (/^[=+\-@\t\r]/.test(text) && !/^[+-]?\d+(?:[.,]\d+)?%?$/.test(text) ? `'${text}` : text);
