@@ -3720,6 +3720,45 @@ html:not(.js) .filter-bar { display: none; }
 }
 .book-facts dd span { color: var(--muted); font-size: 14px; }
 
+/* The audio overview of an issue (partials/audio-player.njk, js/audio-player.js): under the buttons of the hero,
+   the browser's player until the script puts one line of controls in its place. */
+.audio-player { max-width: 560px; margin: 28px 0 0; padding: 16px 18px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.audio-player .kicker { margin: 0 0 6px; }
+.audio-player-title { margin: 0 0 14px; font-family: var(--serif); font-size: 21px; line-height: 1.2; }
+.audio-player-native { display: block; width: 100%; }
+.audio-player-native[hidden] { display: none; }
+.audio-player-row { display: flex; align-items: center; gap: 8px; }
+.audio-player-row[hidden] { display: none; }
+.audio-player-play { display: inline-flex; flex: none; align-items: center; gap: 8px; min-height: 40px; white-space: nowrap; padding: 8px 16px 8px 13px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease; }
+.audio-player-play:hover { filter: brightness(1.08); }
+.audio-player-play svg { width: 13px; height: 13px; flex: none; fill: currentColor; }
+.audio-player-play .audio-icon-pause,
+.audio-player-play[aria-pressed="true"] .audio-icon-play { display: none; }
+.audio-player-play[aria-pressed="true"] .audio-icon-pause { display: inline; }
+.audio-player-skip,
+.audio-player-rate { flex: none; min-width: 44px; min-height: 40px; padding: 0 10px; white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; cursor: pointer; }
+.audio-player-skip:hover,
+.audio-player-rate:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.audio-player-rate { min-width: 56px; }
+.audio-player-scrub { flex: 1 1 auto; min-width: 60px; margin: 0 4px; accent-color: var(--blue); cursor: pointer; }
+.audio-player-time { color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.audio-player-note { margin: 12px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.audio-player-note a { color: var(--ink); font-weight: 700; white-space: nowrap; }
+.audio-player-error { color: var(--ink); }
+/* On a phone: the buttons on one line, the position and the time under them. */
+@media (max-width: 560px) {
+  .audio-player { padding: 14px 14px 12px; }
+  .audio-player-row { display: grid; grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "play back fwd . rate" "scrub scrub scrub scrub time"; gap: 12px 8px; }
+  .audio-player-row[hidden] { display: none; }
+  .audio-player-play { grid-area: play; }
+  .audio-player-skip[data-audio-skip^="-"] { grid-area: back; }
+  .audio-player-skip:not([data-audio-skip^="-"]) { grid-area: fwd; }
+  .audio-player-rate { grid-area: rate; justify-self: end; }
+  .audio-player-scrub { grid-area: scrub; margin: 0; }
+  .audio-player-time { grid-area: time; }
+}
+@media print { .audio-player { display: none; } }
+
 /* A closed book standing at an angle: cover, spine shade and page edges. */
 .book-object {
   position: relative;

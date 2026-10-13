@@ -1,0 +1,31 @@
+{#- The audio overview of a publication: one recording from src/_data/audio.json (made by scripts/audio.mjs), with
+    the browser's own player as it comes, and a one-line bar over it once js/audio-player.js runs: play and pause,
+    15 seconds back and forward, the position, the time and the speed (1×, 1.25×, 1.5×, 2×). The place reached and
+    the speed are kept in the browser (sc-audio-<key>, sc-audio-rate). Nothing is loaded until play is pressed.
+    Needs track (an entry of audio.json), key, lang; artwork (a cover image) and album are optional. -#}
+{%- set clock = (track.seconds // 60) + ":" + (track.seconds % 60) | pad -%}
+<div class="audio-player" data-audio data-key="{{ key }}" data-seconds="{{ track.seconds }}"
+     data-title="{{ track.title }}" data-album="{{ album }}"{% if artwork %} data-artwork="{{ artwork }}"{% endif %}
+     data-play-label="{{ 'Play' | t(lang) }}" data-pause-label="{{ 'Pause' | t(lang) }}" data-resume-label="{{ 'Resume' | t(lang) }}"
+     data-time-label="{{ '{a} of {b}' | t(lang) }}" data-error-label="{{ 'The audio could not be loaded. You can download it instead.' | t(lang) }}">
+  <div class="audio-player-head">
+    <p class="kicker">{{ "Audio overview" | t(lang) }} · {{ (track.seconds / 60) | round }} min</p>
+    <p class="audio-player-title">{{ track.title }}</p>
+  </div>
+  <audio class="audio-player-native" controls preload="none" src="{{ track.src }}" data-audio-media></audio>
+  <div class="audio-player-row" data-audio-controls hidden>
+    <button type="button" class="audio-player-play" data-audio-toggle aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="audio-icon-play" d="M4 4.5v15a1 1 0 0 0 1.5.86l13-7.5a1 1 0 0 0 0-1.72l-13-7.5A1 1 0 0 0 4 4.5z"/><path class="audio-icon-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+      <span data-audio-label>{{ "Play" | t(lang) }}</span>
+    </button>
+    <button type="button" class="audio-player-skip" data-audio-skip="-15" aria-label="{{ 'Back 15 seconds' | t(lang) }}">−15</button>
+    <input type="range" class="audio-player-scrub" data-audio-scrub min="0" max="{{ track.seconds }}" step="1" value="0" aria-label="{{ 'Position in the audio' | t(lang) }}">
+    <span class="audio-player-time" data-audio-time><span data-audio-now>0:00</span> / {{ clock }}</span>
+    <button type="button" class="audio-player-skip" data-audio-skip="15" aria-label="{{ 'Forward 15 seconds' | t(lang) }}">+15</button>
+    <button type="button" class="audio-player-rate" data-audio-rate><span class="visually-hidden">{{ "Playback speed" | t(lang) }}: </span><span data-audio-rate-value>1×</span></button>
+  </div>
+  <p class="audio-player-note" data-audio-note>
+    {%- if track.ai %}{{ "A conversation about this issue, made with AI ({tool}) from its text. The figures and their sources are in the issue." | t(lang) | replace("{tool}", track.ai) }} {% endif -%}
+    <a href="{{ track.src }}" download>{{ "Download MP3" | t(lang) }} · {{ (track.bytes / 1048576) | round }} MB</a>
+  </p>
+</div>
