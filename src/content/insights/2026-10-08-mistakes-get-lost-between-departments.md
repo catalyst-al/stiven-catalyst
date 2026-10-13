@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: A process does not end when I hand the work over. It ends when the next team can carry it on without losing the information, the responsibility or the time.
-description: "Why so many mistakes are born where work passes from one team to another: reception, Housekeeping and Maintenance in the hotel, from Outbound to the driver in last mile, and five questions for every point where work changes hands."
+description: "Why so many mistakes are born where work passes between teams, in the hotel and in last mile, and five questions for every point where work changes hands."
 teaser: The place where a mistake is measured is not necessarily the place where it was born.
 deck: 'The fifth essay in the series “The operation that runs without you”: what happens between two departments, why “I informed them” is not enough, status, responsibility and confirmation, and the handover map with five questions.'
 relatedTools:
@@ -63,9 +63,9 @@ In last mile, the handover points were even more visible.
 
 Outbound prepared the orders. The warehouse and the dock had their part in the physical organisation. Last Mile coordinated the departure. The DSP drivers took responsibility for transport and delivery.
 
-I handled cases with bags that were missing or arrived late, carts that were badly organised, mixed loads and delays during loading.
+I handled cases with bags that were missing or arrived late, trolleys that were badly organised, mixed loads and delays during loading.
 
-One concrete example is a bag missing during loading. The rule was that the driver informed the Team Leader and waited according to the procedure, without moving the cart out of the designated area.
+One concrete example is a bag missing during loading. The rule was that the driver informed the Team Leader and waited according to the procedure, without moving the trolley out of the designated area.
 
 That rule handles the moment. But to me the problem has to be looked at earlier too.
 
@@ -111,7 +111,7 @@ A phone call can deal with the urgency. But when a matter needs follow-up, there
 
 ## The first question
 
-If a mistake keeps repeating between two teams, I would not start with the question “who got it wrong?”.
+If a mistake keeps repeating between two teams, I would not start with the question “who got it wrong?”
 
 My first question would be:
 

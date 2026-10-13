@@ -1484,7 +1484,7 @@ Lidhja: https://stivencatalyst.com/de/insights/mistakes-get-lost-between-departm
 >
 > „Ich habe Bescheid gegeben“ reicht nicht. Gesendete Information ist nicht immer empfangene Information.
 >
-> Meine erste Frage, wenn sich ein Fehler zwischen zwei Teams wiederholt: An welchem Punkt hat die Arbeit die Hände gewechselt, und welche Information ist dabei verloren gegangen?
+> Meine erste Frage, wenn sich ein Fehler zwischen zwei Teams wiederholt: An welchem Punkt ist die Arbeit in andere Hände übergegangen, und welche Information ist dabei verloren gegangen?
 >
 > Im Essay: die Übergabekarte mit fünf Fragen für jeden Übergang.
 > https://stivencatalyst.com/de/insights/mistakes-get-lost-between-departments/

@@ -17,14 +17,14 @@ checklist:
   fill: true
   items:
     - label: Was ich kann, ohne Titel
-      hint: Disziplin, der Kunde, einen Prozess lesen, unter Druck arbeiten, Verantwortung übernehmen.
+      hint: Disziplin, Umgang mit Kunden, einen Prozess lesen, unter Druck arbeiten, Verantwortung übernehmen.
     - label: Was ich hier von innen lernen muss
       hint: Das System, die Sprache, die Regeln dieses Ortes.
     - label: Die Erwartung, die ich an der Tür lasse
       hint: „Ich war Manager, also sollte ich Manager sein.“
     - label: Wo ich es zuerst zeige
       hint: Eine Aufgabe, eine Schicht, ein Problem, das niemand übernommen hat.
-    - label: Die Arbeit, die ich nicht unter meiner Würde nenne
+    - label: Die Arbeit, die ich nicht für unter meiner Würde halte
       hint: Die, die mir den Prozess von der anderen Seite beibringt.
 ---
 
@@ -52,7 +52,7 @@ Mit der Sprache war es genauso. Als ich ankam, war Deutsch nicht meine Arbeitssp
 
 Was ich in diesen Jahren gewonnen habe, war nicht nur die Sprache. Ich habe die Arbeit aus der Sicht der Person gesehen, die den Prozess umsetzen muss.
 
-Als Paketzusteller versteht man anders, was Zeit bedeutet, was eine Tour bedeutet, was Druck bedeutet, was ein Prozess bedeutet, der nicht funktioniert, oder eine Entscheidung, die jemand trifft, der nicht vor Ort ist. Als Steward sieht man das Hotel von einer ganz anderen Ebene: körperliche Arbeit, Rhythmus, Zusammenarbeit zwischen Abteilungen und wie sehr das Erlebnis des Gastes von Menschen abhängt, die er vielleicht nie sieht. Als Night Auditor habe ich eine andere Seite gesehen: was nach einem Arbeitstag übrig bleibt, wenn alle anderen gegangen sind. Die Fehler, die Zahlungen, die Berichte, die Beschwerden, die No-Shows, die Kontrollen und die Übergabe.
+Als Paketzusteller versteht man anders, was Zeit bedeutet, was eine Tour bedeutet, was Druck bedeutet, was ein Prozess bedeutet, der nicht funktioniert, oder eine Entscheidung, die jemand trifft, der nicht vor Ort ist. Als Steward sieht man das Hotel von einer ganz anderen Ebene aus: körperliche Arbeit, Rhythmus, Zusammenarbeit zwischen Abteilungen und wie sehr das Erlebnis des Gastes von Menschen abhängt, die er vielleicht nie sieht. Als Night Auditor habe ich eine andere Seite gesehen: was nach einem Arbeitstag übrig bleibt, wenn alle anderen gegangen sind. Die Fehler, die Zahlungen, die Berichte, die Beschwerden, die No-Shows, die Kontrollen und die Übergabe.
 
 Als ich in der Last Mile wieder in die Führung zurückkehrte, habe ich Menschen nicht nur aus der Theorie geführt. Ich war selbst auf der anderen Seite des Prozesses gewesen. Das steht hinter jedem Essay dieser Reihe.
 

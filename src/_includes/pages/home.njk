@@ -91,7 +91,7 @@
     <div class="notes-grid">
       {%- for offset in [1, 2] %}{% set note = dayNotes[(dayIndex + offset) % dayNotes.length] %}{% if note and dayNotes.length > 2 %}
       <article class="note-card" data-note-slot="{{ offset }}">
-        <blockquote>“{{ note.data.quote }}”</blockquote>
+        <blockquote>{{ note.data.quote | quoted(lang) }}</blockquote>
         <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate(lang) }}</time>
       </article>
       {%- endif %}{% endfor %}
@@ -105,7 +105,7 @@
         <p class="kicker">{{ "Free tools" | t(lang) }}</p>
         <h2>{{ "Thinking you can use." | t(lang) }}</h2>
       </div>
-      <p>{{ "Small tools built from the essays. They run in your browser, and nothing you type leaves your device." | t(lang) }}</p>
+      <p>{{ "Small tools built from the essays. They run in your browser, and your work stays on your device." | t(lang) }}</p>
     </div>
 
     <div class="family-index home-families">

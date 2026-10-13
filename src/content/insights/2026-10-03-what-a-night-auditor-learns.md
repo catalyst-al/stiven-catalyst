@@ -105,6 +105,6 @@ The five things I would look at every morning:
 2. **Where there were differences between the system and reality.** Reservations, statuses, documentation or financial matters that needed intervention.
 3. **Which problems keep repeating.** A mistake once can be chance. The same mistake several times is a process.
 4. **What affected the guest or the operation.** Because that is where you see whether an internal problem is starting to become a customer problem.
-5. **What the next shift needs to know before the work starts.** A good report should not only tell the past. It should make the day that is starting safer.
+5. **What the next shift needs to know before the work starts.** A good report should not only describe the past. It should make the day that is starting safer.
 
 This holds for every business, not only for a hotel. And sometimes, what a business hides from itself during the day shows up very clearly at night.

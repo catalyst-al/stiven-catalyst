@@ -40,7 +40,7 @@ It is not hiding behind your job description when a situation needs responsibili
 
 ## Beyond the role, not beyond the mandate
 
-In last mile I had an operational role, but in practice there were moments when the work asked for more than just doing my own task. I took responsibility for coordinating problems during the shift, following the KPIs, process discipline on the ramp, communication with the drivers, and raising the problems that kept repeating. When I saw that a problem was not just an incident but was turning into a pattern, I tried to move the discussion from “who made the mistake?” to “what needs to change in the process?”.
+In last mile I had an operational role, but in practice there were moments when the work asked for more than just doing my own task. I took responsibility for coordinating problems during the shift, following the KPIs, process discipline on the ramp, communication with the drivers, and raising the problems that kept repeating. When I saw that a problem was not just an incident but was turning into a pattern, I tried to move the discussion from “who made the mistake?” to “what needs to change in the process?”
 
 In the hotel it has happened in a different way. My role is operational, but I have gone beyond running the shift by structuring checklists, SOPs, training materials and, later, a digital system for Front Office and Night Audit.
 

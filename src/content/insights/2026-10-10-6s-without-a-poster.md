@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Order is not proved by a poster on the wall. It is proved by how the workplace runs when the day is hard.
 teaser: A poster with six principles can hang on any wall. But the ramp does not read the poster. The ramp shows whether the order is alive.
-description: "5S and 6S in last mile: what I have on record and what I do not, the standards on the ramp, why 6S is not cleaning, safety as the sixth S, and an end-of-shift check for one area."
+description: "5S and 6S in last mile: the standards on the ramp, why 6S is not cleaning, safety as the sixth S, and an end-of-shift check for one area."
 deck: 'The fourth essay in the series “Improvement that holds”: 5S and 6S in last mile, what order looked like on the ramp, why it is not cleaning, safety as the sixth S, and an end-of-shift check for one area.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:

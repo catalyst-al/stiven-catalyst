@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Një numër i kuq në ekran është një sinjal për të kontrolluar, jo një diagnozë. Pyet çfarë mat dhe sa i vjetër është para se të veprosh mbi të."
 teaser: E kuqja në ekranin tënd është sinjal, jo diagnozë. Pyet çfarë mat dhe sa e vjetër është para se të veprosh.
-description: "Pse një numër i kuq në tabelë ka një moshë, katër hapat mes sallës dhe ekranit, tri reagimet e gabuara ndaj një të kuqeje, katër hapa para çdo vendimi, dhe një kartelë për numrin tënd të kuq."
+description: "Pse një numër i kuq në tabelë ka një moshë, katër hapat mes terrenit dhe ekranit, tri reagimet e gabuara, dhe një kartelë për numrin tënd të kuq."
 deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq është sinjal dhe jo diagnozë, tri reagimet e gabuara ndaj një të kuqeje, katër hapa mes alarmit dhe vendimit, dhe një kartelë për numrin tënd të kuq."
 relatedTools:
   - /tools/shift-pulse/
@@ -21,7 +21,7 @@ checklist:
     - label: "Cili numër është, çfarë mat saktësisht, dhe cili është objektivi i tij?"
       hint: "Delay, Loading Time, Incomplete, Damage, dhoma të hapura, koha e pritjes. Një për kartelë."
     - label: "Sa i vjetër është kur e shoh?"
-      hint: "Koha mes sallës dhe ekranit: sekonda, minuta, mëngjesi tjetër? Nëse nuk e di, mësoje sot."
+      hint: "Koha mes terrenit dhe ekranit: sekonda, minuta, mëngjesi tjetër? Nëse nuk e di, mësoje sot."
     - label: "Çfarë di me siguri, dhe çfarë më është raportuar?"
       hint: "Numri është një raport. Çfarë ka parë dikush me sytë e vet? A është problemi ende i hapur?"
     - label: "Kush e ka informacionin më të afërt me situatën?"
@@ -53,7 +53,7 @@ Ajo që nuk kam: listën e saktë të treguesve që shfaqen në sistemin e punë
 
 Pra kjo ese është analiza ime dhe mënyra si do ta bëja sot, jo një protokoll që e kam ndjekur. Skena në të është një figurë, dhe e shënoj si të tillë.
 
-## Katër hapa mes sallës dhe të kuqes
+## Katër hapa mes terrenit dhe të kuqes
 
 Përfytyro një furgon që duhej të ishte nisur nga rampa dhjetë minuta më parë. Në tabelë rruga është e kuqe. Çfarë duhej të ndodhte që të ishte e kuqe?
 
@@ -61,13 +61,13 @@ Dikush duhej të shihte që furgoni është ende aty, ose një skanim duhej të 
 
 {diagram}
 
-**Një numër i kuq nuk është salla. Është një raport për sallën, dhe një raport ka një moshë.**
+**Një numër i kuq nuk është terreni. Është një raport për terrenin, dhe një raport ka një moshë.**
 
 Kur ti e sheh të kuqen, furgoni mund të jetë nisur. Ose mund të jetë ende aty, dhe e kuqja është gjëja e parë e vërtetë që ke dëgjuar sot. Nga ngjyra nuk i dallon dot të dyja. I dallon vetëm nëse di çfarë mat numri dhe sa i vjetër është.
 
 ## E kuqja nuk është gjithmonë urgjencë. Dhe e gjelbra nuk është gjithmonë garanci.
 
-E njëjta logjikë vlen në të dy drejtimet. Një e kuqe mund të përshkruajë një problem që është zgjidhur ndërkohë. Një e gjelbër mund të përshkruajë sallën siç ishte para se diçka të fillonte të shkonte keq, ose të masë diçka tjetër nga ajo që mendon ti.
+E njëjta logjikë vlen në të dy drejtimet. Një e kuqe mund të përshkruajë një problem që është zgjidhur ndërkohë. Një e gjelbër mund të përshkruajë terrenin siç ishte para se diçka të fillonte të shkonte keq, ose të masë diçka tjetër nga ajo që mendon ti.
 
 Prandaj pyetja nuk është “çfarë ngjyre ka”. Pyetja është “çfarë mat ky numër, kur u përditësua, dhe çfarë po ndodh realisht tani”. Ngjyra të thotë ku të shikosh. Nuk të thotë çfarë të vendosësh.
 

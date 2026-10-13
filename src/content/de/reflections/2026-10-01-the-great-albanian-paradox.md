@@ -4,7 +4,7 @@ date: 2026-10-01
 status: published
 summary: Die Welt fürchtet eine Intelligenz, die sie im Spiel der Regeln schlägt. Albaner haben nie dank Regeln überlebt.
 deck: Die Gefahr ist nicht, dass die Maschine dem Albaner den Verstand stiehlt, sondern dass er die Werkzeuge der Zukunft mit der Denkweise eines mittelalterlichen Gauners benutzt.
-description: Eine Reflexion über künstliche Intelligenz, albanisches Überleben und die Falle, die Werkzeuge der Zukunft für die Betrügereien der Vergangenheit zu nutzen.
+description: Eine Reflexion über künstliche Intelligenz, albanisches Überleben und die Falle, Werkzeuge der Zukunft für die Betrügereien der Vergangenheit zu nutzen.
 image: /media/stiven-microphone.jpg
 image_alt: Stiven Janaqi mit Kopfhörern spricht in einem Podcast-Studio in ein Mikrofon
 ---
@@ -21,4 +21,4 @@ Wie soll man einen Algorithmus aus Wahrscheinlichkeitsrechnungen einem Menschen 
 
 Doch dieser Kampf ist kein reiner Triumph; er birgt eine dunkle und tragische Falle. Die wahre Gefahr für ihn in diesem Zeitalter ist nicht, dass eine Maschine ihm den Verstand stiehlt, sondern dass er in seinem ältesten Laster gefangen bleibt: die Werkzeuge der Zukunft mit der Denkweise eines mittelalterlichen Gauners zu benutzen. Es ist ein tiefer seelischer Niedergang, die höchste Intelligenz, die die Menschheitsgeschichte je gesehen hat, zu einem bloßen Werkzeug zu machen, um den nächsten Schwindel zu verfeinern, statt endlich etwas zu bauen, das der Zeit standhält.
 
-Und doch: Sollte die Welt jemals einen völligen Zusammenbruch erleben, in dem die digitalen Systeme ausfallen und die Zivilisation verzweifelt nach einer Bedienungsanleitung sucht, weiß ich genau, wer am Ende noch stehen wird. Es wird nicht der Technokrat inmitten eingefrorener Server sein. Es wird jener Albaner sein, der ohne Strom und ohne Internet einen Weg findet, einen rostigen Generator mit Draht zusammenzuflicken, sich eine Zigarette anzündet und lächelnd sagt, es hätte auch schlimmer kommen können.
+Und doch: Sollte die Welt jemals einen völligen Zusammenbruch erleben, bei dem die digitalen Systeme ausfallen und die Zivilisation verzweifelt nach einer Bedienungsanleitung sucht, weiß ich genau, wer am Ende noch stehen wird. Es wird nicht der Technokrat inmitten eingefrorener Server sein. Es wird jener Albaner sein, der ohne Strom und ohne Internet einen Weg findet, einen rostigen Generator mit Draht zusammenzuflicken, sich eine Zigarette anzündet und lächelnd sagt, es hätte auch schlimmer kommen können.

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: In den ersten 30 Tagen braucht eine neue Führungskraft keine 30 Lösungen. Sie braucht 30 gute Fragen.
-description: "Wie ich einen Betrieb lese, den ich nicht kenne: meine ersten Nächte als Night Auditor in einem neuen Hotel, warum ich bewusst gewartet habe, und 30 Fragen für die ersten 30 Tage."
+description: "Wie ich einen fremden Betrieb lese: meine ersten Nächte als Night Auditor in einem neuen Hotel, warum ich bewusst wartete, und 30 Fragen für 30 Tage."
 teaser: Das Problem war nicht fehlende Information. Das Problem war, dass die Information nicht schnell zeigte, wo man steht, was jetzt zu prüfen ist und was als Nächstes kommt.
 deck: 'Der erste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die ersten Nächte in einem neuen Hotel, was ich gesehen habe, warum ich nichts sofort verändert habe, und eine Liste von Fragen für alle, die irgendwo neu anfangen.'
 # Three moves for tomorrow's shift, shown before the text.
@@ -22,24 +22,24 @@ checklist:
     - label: Die Hauptprozesse
       hint: Und das Ergebnis, das jeder liefern muss.
     - label: Die Schlüsselpersonen
-      hint: Wer die Arbeit macht, und wen die anderen fragen, wenn sie nicht weiterwissen.
+      hint: Wer die Arbeit macht und wen die anderen fragen, wenn sie nicht weiterwissen.
     - label: Die Zahlen
-      hint: Welche Kennzahlen verfolgt werden, wer sie liest, und was sie nicht zeigen.
+      hint: Welche Kennzahlen verfolgt werden, wer sie liest und was sie nicht zeigen.
     - label: Standard und Wirklichkeit
       hint: Wo SOP und tatsächliche Arbeit auseinandergehen, und warum.
     - label: Die Probleme, die immer wiederkommen
       hint: Vom Team schon als „normal“ betrachtet.
     - label: Die Grenzen
-      hint: Was ich selbst entscheiden kann, und was eskaliert werden muss, an wen.
+      hint: Was ich selbst entscheiden kann und was eskaliert werden muss, an wen.
 ---
 
 In meiner ersten Nacht im neuen Hotel konnte ich nicht als Night Auditor arbeiten.
 
-Das System lief ein Update, und mehrere Stunden lang war normales Arbeiten praktisch nicht möglich. Also verbrachte ich den größten Teil der Nacht im Backoffice. Ich nahm Informationen über das Hotel auf, über die grundlegenden Prozesse und darüber, wie die Arbeit organisiert war.
+Im System lief ein Update, und mehrere Stunden lang war normales Arbeiten praktisch nicht möglich. Also verbrachte ich den größten Teil der Nacht im Backoffice. Ich nahm Informationen über das Hotel auf, über die grundlegenden Prozesse und darüber, wie die Arbeit organisiert war.
 
 Auf den ersten Blick eine verlorene Nacht. In Wirklichkeit war es die Nacht, die mir die erste Lektion beibrachte: An einem neuen Ort muss man verstehen, wie die Arbeit funktioniert, bevor man sie macht.
 
-Mit diesem Essay beginnt eine neue Reihe. Die erste, *Zehn Jahre nah an der Arbeit*, handelte davon, was ich gelernt habe. Diese handelt davon, wie man einen Betrieb aufbaut, der auch dann funktioniert, wenn die Führungskraft nicht da ist. Und das beginnt lange bevor man etwas verändert: Es beginnt damit, wie man den Betrieb liest.
+Mit diesem Essay beginnt eine neue Reihe. Die erste, *Zehn Jahre nah an der Arbeit*, handelte davon, was ich gelernt habe. Diese handelt davon, wie man einen Betrieb aufbaut, der auch dann funktioniert, wenn die Führungskraft nicht da ist. Und das beginnt, lange bevor man etwas verändert: Es beginnt damit, wie man den Betrieb liest.
 
 ## Die ersten Nächte: nah an den Menschen, nicht an der Theorie
 
@@ -92,7 +92,7 @@ Eine solche Episode aus diesen Tagen habe ich nicht dokumentiert, und ich werde 
 
 Ich weiß, dass ich viel von den Kolleginnen und Kollegen gelernt habe, die die Schicht tatsächlich getragen haben. Ich weiß, dass im Night Audit der Bericht nur ein Teil der Wirklichkeit ist: Um den echten Stand zu verstehen, muss man auch die Status, die offenen Punkte, das, was die vorherige Schicht hinterlassen hat, und das, was an die nächste gehen muss, ansehen. Aber das habe ich mit der Zeit verstanden, nicht in der dritten Nacht entdeckt.
 
-Ich glaube, auch das gehört dazu, einen Betrieb zu lesen: zu unterscheiden, was man gesehen hat, und was man gern erzählen würde.
+Ich glaube, auch das gehört dazu, einen Betrieb zu lesen: zu unterscheiden, was man gesehen hat und was man gern erzählen würde.
 
 ## Drei Dinge für die ersten 30 Tage
 

@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Druck erzeugt nicht immer die Probleme. Oft macht er sie sichtbarer.
 teaser: Wir hatten Tage, an denen die Nachfrage über dem Forecast lag. Kurzfristig geholte Fahrer, manche noch in der Ramp-up-Phase. An diesen Tagen sah man, wie gut der Betrieb wirklich vorbereitet war.
-description: "Die Tage, an denen die Nachfrage auf der letzten Meile über dem Forecast lag: was ich belegen kann und was nicht, wo der Druck ankam, warum Kapazität nicht nur die Zahl der Menschen ist, und fünf Kontrollen vor dem großen Tag."
+description: "Tage mit Nachfrage über dem Forecast: wo der Druck auf der letzten Meile ankam, warum Kapazität mehr als Köpfe ist, und fünf Kontrollen vor dem großen Tag."
 deck: 'Der achte Essay der Reihe „Verbesserung, die hält“: die Tage, an denen die Nachfrage über dem Forecast lag, wo der Druck ankam, warum Kapazität keine Kopfzahl ist, und fünf Kontrollen vor dem großen Tag.'
 relatedTools:
   - /tools/delay-analyzer/
@@ -47,7 +47,7 @@ Und ich habe keine konkrete Entscheidung, bei der ich sicher erklären könnte, 
 
 ## Wo der Druck ankam
 
-Als Area Manager hatte ich vier Shift Leaders und acht Dispatcher. Im Daily Stand-up sprachen wir über die Ergebnisse der Kennzahlen, Probleme beim Verladen, Verspätungen, Sicherheit und operative Abstimmung.
+Als Area Manager hatte ich vier Shift Leader und acht Dispatcher. Im Daily Stand-up sprachen wir über die Ergebnisse der Kennzahlen, Probleme beim Verladen, Verspätungen, Sicherheit und operative Abstimmung.
 
 Aus den dokumentierten Problemen waren das die Punkte, die Aufmerksamkeit brauchten, wenn der Druck stieg:
 

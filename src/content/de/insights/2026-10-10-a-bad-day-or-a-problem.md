@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Ein schlechter Tag ist ein Signal zum Prüfen. Er ist nicht automatisch der Beweis, dass der ganze Prozess geändert werden muss.
 teaser: 2,8 %. So hoch war Delay in einem Bericht vom Juni 2025. War das ein schlechter Tag oder ein Problem? Aus dieser Zahl allein kann ich es nicht sagen.
-description: "Ein Tag mit schlechten Kennzahlen: was ich belegen kann und was nicht, warum eine einzelne Zahl nicht zeigt, ob sich der Prozess verändert hat, die Idee der Regelkarte, die zwei entgegengesetzten Fehler, und vier Fragen, bevor Sie den Prozess ändern."
+description: "Ein Tag mit schlechten Kennzahlen: warum eine Zahl allein nicht zeigt, ob sich der Prozess geändert hat, die Regelkarte und vier Fragen, bevor Sie handeln."
 deck: 'Der fünfte Essay der Reihe „Verbesserung, die hält“: wie wir die Kennzahlen täglich verfolgten, warum eine einzelne Zahl nicht zeigt, ob sich der Prozess verändert hat, die zwei entgegengesetzten Fehler, wann man sofort eingreift, und vier Fragen, bevor Sie den Prozess ändern.'
 relatedTools:
   - /tools/sigma-control-chart/
@@ -22,7 +22,7 @@ checklist:
     - label: Wie verhält sich der Tag zur Menge, zu den Bedingungen und zu den Tagen davor?
       hint: Wie viel Arbeit es gab, was an dem Tag passiert ist, wie die Tage davor aussahen.
     - label: Ist es eine Ausnahme oder Teil eines Trends?
-      hint: Ein ungewöhnlicher Tag, oder mehrere Tage hintereinander in dieselbe Richtung?
+      hint: Ein ungewöhnlicher Tag oder mehrere Tage hintereinander in dieselbe Richtung?
     - label: Haben wir eine konkrete Ursache gefunden?
       hint: Bevor wir den Prozess ändern, nicht danach.
 # Three moves for tomorrow's shift, shown before the text.
@@ -54,7 +54,7 @@ Deshalb ist dieser Essay keine Geschichte. Es ist eine Frage, die sich jeder Fü
 
 2,8 % allein sagt nicht viel. Verglichen womit?
 
-Nehmen wir ein erfundenes Beispiel, nur um den Gedanken klar zu machen. Angenommen, der Durchschnitt der letzten Wochen lag bei 2,5 %. Ist 2,8 % ein Signal?
+Nehmen wir ein erfundenes Beispiel, nur um den Gedanken klarzumachen. Angenommen, der Durchschnitt der letzten Wochen lag bei 2,5 %. Ist 2,8 % ein Signal?
 
 Es kommt darauf an. Jeder Prozess schwankt. Kein Tag fällt genauso aus wie der nächste, auch wenn niemand etwas verändert hat. Die Menge ändert sich, die Menschen ändern sich, die Touren ändern sich. Die Frage ist nicht, ob heute schlechter ist als der Durchschnitt. Das werden viele Tage sein. Die Frage ist, ob heute schlechter ist, als dieser Prozess normalerweise schwankt.
 

@@ -26,7 +26,7 @@
     <p class="kicker">{{ "From the field notes" | t(lang) }}</p>
     <ul>
       {%- for note in toolNotes %}{% if loop.index <= 3 %}
-      <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">“{{ note.data.quote }}”</a></li>
+      <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">{{ note.data.quote | quoted(lang) }}</a></li>
       {%- endif %}{% endfor %}
     </ul>
   </div>

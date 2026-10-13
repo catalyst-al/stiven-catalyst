@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Pressure does not always create the problems. Often it makes them more visible.
 teaser: We had days when demand was higher than the forecast. Drivers called in at short notice, some still in ramp-up. On those days you could see how well prepared the operation really was.
-description: "The days when demand outran the forecast in last mile: what I have on record and what I do not, where the pressure landed, why capacity is not just the number of people, and five checks before the big day."
+description: "The days demand outran the forecast in last mile: where the pressure landed, why capacity is more than headcount, and five checks before the big day."
 deck: 'The eighth essay in the series “Improvement that holds”: the days when demand outran the forecast, where the pressure landed, why capacity is not a headcount, and five checks before the big day.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
@@ -51,7 +51,7 @@ And I do not have a concrete decision where I can explain with certainty what I 
 
 ## Where the pressure landed
 
-As Area Manager I had four Shift Leaders and eight Dispatchers. In the daily stand-up we talked about the KPI results, loading problems, delays, safety and operational coordination.
+As Area Manager I had four Shift Leaders and eight dispatchers. In the daily stand-up we talked about the KPI results, loading problems, delays, safety and operational coordination.
 
 From the documented problems, these were the points that needed attention when the pressure rose:
 
@@ -59,7 +59,7 @@ From the documented problems, these were the points that needed attention when t
 - loading time and keeping to the departure schedule;
 - scanning products in their designated zones;
 - discipline and safety on the ramp;
-- communication between drivers, dispatchers and shift leads.
+- communication between drivers, dispatchers and Shift Leaders.
 
 These are not new problems. They are the same ones that show up on an ordinary day. On the hard day there is just no more time to hide them.
 

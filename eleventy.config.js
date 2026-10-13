@@ -1,7 +1,7 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
-import { clearCache, localUrl } from "./lib/translations.js";
+import { clearCache, localUrl, quoted, QUOTES, keepUnits } from "./lib/translations.js";
 import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
@@ -103,6 +103,11 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addGlobalData("year", new Date().getFullYear());
 
+  // {{ note.data.quote | quoted(lang) }}: a quotation in the quotes of its language, “…” in English and Albanian,
+  // „…“ in German; a quotation inside it takes the inner quotes, ‘…’ or ‚…‘.
+  eleventyConfig.addFilter("quoted", quoted);
+  // A value written once for every language ("PubMed") or in each of them ({ en, sq, de }), in one language.
+  eleventyConfig.addFilter("inLang", (value, lang) => (value && typeof value === "object" && !Array.isArray(value) ? value[lang] ?? value.en : value));
   // {{ "Add to log" | t(lang) }}: the German or Albanian text on those pages, else the English one.
   eleventyConfig.addFilter("t", (text, lang) => (TRANSLATED.has(lang) ? readUi(lang)[text] ?? text : text));
   // The interface texts a tool page hands to tool-kit.js: only those the scripts can ask for, that is every
@@ -197,9 +202,8 @@ export default function (eleventyConfig) {
     return families.find((family) => family.tools.includes(path) || family.learn.includes(path) || path === `/roles/${family.slug}/`) || null;
   });
   // The text of a guide (toolsGuide.js): [[Label]] is a button or field of a tool, written in quotes in the guide's language.
-  const GUIDE_QUOTES = { en: ["“", "”"], sq: ["“", "”"], de: ["„", "“"] };
   eleventyConfig.addFilter("guideText", (text, lang) => {
-    const [open, close] = GUIDE_QUOTES[lang] || GUIDE_QUOTES.en;
+    const [open, close] = QUOTES[lang] || QUOTES.en;
     return String(text || "").replace(/\[\[(.+?)\]\]/g, (_, label) => `${open}${TRANSLATED.has(lang) ? readUi(lang)[label] ?? label : label}${close}`);
   });
   // The page of a family's role: /roles/shift-lead/, /de/roles/shift-lead/ ...
@@ -321,6 +325,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform("display-pairs", function (content) {
     return (this.page.outputPath || "").endsWith(".html") ? markPairs(content) : content;
   });
+  // "5 %" stays on one line on the German pages (keepUnits in lib/translations.js).
+  eleventyConfig.addTransform("keep-units", function (content) {
+    return (this.page.outputPath || "").endsWith(".html") ? keepUnits(content) : content;
+  });
   // Minified scripts in the output; the sources stay readable (lib/js-minify.js).
   eleventyConfig.on("eleventy.after", async ({ dir }) => { await minifyScripts(dir?.output || "_site"); });
 
@@ -332,7 +340,7 @@ export default function (eleventyConfig) {
   // The field notes as the home page's note of the day reads them (js/note-of-the-day.js).
   eleventyConfig.addFilter("noteDayData", (notes, lang) =>
     (notes || []).map((note) => ({
-      q: note.data.quote,
+      q: quoted(note.data.quote, lang),
       id: `note-${note.fileSlug}`,
       d: new Date(note.date).toLocaleDateString(LOCALES[lang] || LOCALES.en, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }),
       iso: new Date(note.date).toISOString().slice(0, 10),

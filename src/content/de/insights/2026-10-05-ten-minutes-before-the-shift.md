@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Die zehn Minuten vor der Schicht sind nicht dafür da, alles zu erzählen, was wir wissen. Sie sind dafür da, zu entscheiden, was das Team wissen muss, bevor die Arbeit beginnt.
-description: "Das Briefing vor der Schicht: worum es in den Morning Stand-ups auf der letzten Meile ging, wie die Nacht im Hotel begann, wo sich Briefing und Übergabe trennen, und eine Zehn-Minuten-Vorlage mit fünf Fragen."
+description: "Das Briefing vor der Schicht: Stand-ups auf der letzten Meile, der Beginn der Nacht im Hotel, wo sich Briefing und Übergabe trennen, und eine Vorlage."
 teaser: Die Übergabe zeigt, welchen Zustand Sie übernehmen. Das Briefing entscheidet, was jetzt zählt.
 deck: 'Der zweite Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Morning Stand-ups auf der letzten Meile, die Hotelnacht, die nie bei null beginnt, der Unterschied zwischen Übergabe und Briefing, und die Vorlage für das Zehn-Minuten-Briefing.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
@@ -31,7 +31,7 @@ checklist:
       hint: Eine Kennzahl, die abrutscht, und ihr Grund, ein offener Punkt mit Frist, ein technisches Problem.
     - label: Was sind die zwei oder drei Prioritäten?
       hint: Jede als Handlung, die das Team sehen kann, nicht als Zahl.
-    - label: Wer hält was?
+    - label: Wer übernimmt was?
       hint: Jede Priorität und jeder offene Punkt mit einem Namen.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: handover-to-briefing
@@ -79,7 +79,7 @@ So wollte ich das Stand-up sehen: KPIs, 5 Why, Pareto, 5S und Sicherheit nicht a
 
 Ein Briefing verliert seinen Wert, wenn es bei den Zahlen stehen bleibt.
 
-Wenn Sie sagen „Delay liegt bei 2,8 %“ und dann beginnt die Schicht, aber niemand weiß, was er anders machen soll, ist die Zahl vom Bericht zum Team gewandert, ohne unterwegs etwas zu verändern.
+Wenn Sie sagen „Delay liegt bei 2,8 %“ und dann die Schicht beginnt, aber niemand weiß, was er anders machen soll, ist die Zahl vom Bericht zum Team gewandert, ohne unterwegs etwas zu verändern.
 
 Der Unterschied ist klein in Worten und groß in der Wirkung:
 
@@ -104,7 +104,7 @@ Für mich ist das der wichtigste Teil dieses Essays.
 
 **Die Übergabe zeigt, welchen Zustand Sie übernehmen. Das Briefing entscheidet, was jetzt zählt.**
 
-Die Übergabe muss vollständig sein. Das Briefing muss ausgewählt sein. Wenn das Briefing zum lauten Vorlesen der Übergabe wird, hört das Team alles und weiß nicht, was es behalten soll.
+Die Übergabe muss vollständig sein. Das Briefing muss auswählen. Wenn das Briefing zum lauten Vorlesen der Übergabe wird, hört das Team alles und weiß nicht, was es behalten soll.
 
 Deshalb sollte ein gutes Briefing vor der Schicht genau dort beginnen, wo die Übergabe endet:
 

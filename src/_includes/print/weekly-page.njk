@@ -43,8 +43,10 @@
     {%- for item in I.pages %}{% if item.heading %}<li><b>{{ loop.index | pad }}</b><span><i>{{ item.kicker }}</i>{{ item.heading }}</span></li>{% endif %}{% endfor %}
     <li><b>{{ issue.pageOf.sources | pad }}</b><span><i>{{ L.sources }}</i>{{ W.sourcesPage.kicker }}</span></li>
   </ol>
+  {%- if lang not in (issue.tight or []) %}
   <p class="block-label">{{ W.intro.how }}</p>
   <div class="wk-legend-box">{% for item in W.legend %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
+  {%- endif %}
 </section>
 {%- elif page.type == "sources" %}
 <section class="pg{{ ' is-dense' if issue.sources.length > 6 }}">
@@ -52,7 +54,7 @@
   <p class="kicker">{{ W.sourcesPage.kicker }}</p>
   <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
   <p class="lead">{{ W.sourcesPage.lead }}</p>
-  <ol class="src">{% for s in issue.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
+  <ol class="src">{% for s in issue.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via | inLang(lang) }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
   <div class="bottom"><div class="callout wk-method"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div></div>
 </section>
 {%- elif page.type == "back" %}

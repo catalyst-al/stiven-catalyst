@@ -77,7 +77,7 @@
     "Lagerung": {
       "meaning": "Schäden an Ware, die nur steht, zeigen auf Regale, Höhe, Wasser oder Verkehr rund um den Lagerplatz.",
       "moves": [
-        "Schwere Artikel unten lagern und prüfen, dass nichts über Traverse oder Fachboden hinausragt.",
+        "Schwere Artikel unten lagern und darauf achten, dass nichts über Traverse oder Fachboden hinausragt.",
         "Schauen, wo sich Schäden häufen: Gangenden, Ecken und Staplerkurven brauchen meist einen Anfahrschutz.",
         "Das Gebäude auf Wasser prüfen: undichtes Dach, Kondenswasser, offene Tore bei Regen."
       ],
@@ -130,10 +130,10 @@
     }
   },
   "causes": {
-    "Stapeln": "Schreiben Sie die Stapelregel als ein Bild an die Rampe: schwer unten, zerbrechlich oben, keine Lücken.",
+    "Stapeln": "Hängen Sie die Stapelregel als ein Bild an der Rampe aus: schwer unten, zerbrechlich oben, keine Lücken.",
     "Handhabung": "Beobachten Sie die Arbeit in der stärksten Stunde. Schäden durch Handhabung wachsen, wenn Menschen gehetzt sind, nicht wenn sie nachlässig sind.",
     "Verpackung": "Testen Sie die Verpackung, nicht die Menschen: Lassen Sie von jeder Paketart, die hier auftaucht, eines fallen und schütteln Sie es.",
-    "Arbeitsmittel": "Prüfen Sie Gabeln, Hubwagen, Gitterboxen und Rollbehälter. Defekte Arbeitsmittel noch am selben Tag aus dem Verkehr ziehen.",
+    "Arbeitsmittel": "Prüfen Sie Gabeln, Hubwagen, Gitterboxen und Rollbehälter. Ziehen Sie defekte Arbeitsmittel noch am selben Tag aus dem Verkehr.",
     "Ladungssicherung": "Machen Sie die Sicherung zum letzten Schritt der Verladung, mit Foto, und nicht zu etwas, woran der Fahrer denken muss.",
     "Umgebung": "Wasser, Hitze und Kälte beschädigen Ware unbemerkt. Schließen Sie die Lücken: Tore, Dächer, Abdeckungen, Wartezonen.",
     "Unbekannt": "Ein hoher Anteil „Unbekannt“ heißt: Das Protokoll ist noch nicht gut genug. Erfassen Sie Prozessschritt und Ursache in dem Moment, in dem der Schaden gefunden wird."

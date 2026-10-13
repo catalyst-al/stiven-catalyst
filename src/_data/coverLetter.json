@@ -31,10 +31,10 @@
         ],
         [
           "I can start {start}.",
-          "I would be glad to show you in a personal conversation how I can support your team."
+          "I would be glad to show you in an interview how I can support your team."
         ]
       ],
-      "source": ", which I found on {source}",
+      "source": ", advertised on {source}",
       "noCompany": "your company",
       "courtesy": {
         "f": "Ms",

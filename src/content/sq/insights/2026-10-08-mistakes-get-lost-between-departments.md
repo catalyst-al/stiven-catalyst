@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një proces nuk përfundon kur unë e dorëzoj punën. Përfundon kur ekipi tjetër mund ta vazhdojë pa humbur informacionin, përgjegjësinë ose kohën.
-description: "Pse shumë gabime lindin te kalimi i punës nga një ekip te tjetri: recepsioni, Housekeeping dhe Maintenance në hotel, nga Outbound te shoferi në last mile, dhe pesë pyetje për çdo pikë ku puna ndërron duar."
+description: "Pse shumë gabime lindin te kalimi i punës nga një ekip te tjetri: si ndodh në hotel dhe në last mile, dhe pesë pyetje për çdo pikë ku puna ndërron duar."
 teaser: Vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ai ka lindur.
 deck: 'Eseja e pestë e serisë “Operacioni që punon pa ty”: çfarë ndodh mes dy departamenteve, pse “e njoftova” nuk mjafton, statusi, përgjegjësia dhe konfirmimi, dhe harta e kalimeve me pesë pyetje.'
 relatedTools:
@@ -23,7 +23,7 @@ checklist:
 firstMove:
   - Për një gabim të kësaj jave, gjej pikën ku puna ndërroi duar.
   - Zëvendëso “i informova” me një status, një emër dhe një konfirmim.
-  - Bini dakord me departamentin tjetër çfarë duhet të jetë e përfunduar që një dorëzim të quhet i bërë.
+  - Bjer dakord me departamentin tjetër çfarë duhet të jetë e përfunduar që një dorëzim të quhet i bërë.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: between-departments
 ---
@@ -68,7 +68,7 @@ Nëse shoferi është gati, por porosia nuk është e plotë, vonesa shfaqet te 
 
 **Vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ai ka lindur.**
 
-Prandaj, kur shoh një KPI negativ, nuk do të filloja duke kërkuar menjëherë fajtorin. Do të përpiqesha fillimisht të kuptoja në cilën pikë të procesit filloi devijimi. Kjo është e njëjta logjikë si te [Pareto dhe 5 Why](/sq/insights/pareto-and-5-why-in-practice/): numri të tregon ku ta kërkosh problemin, jo kush e shkaktoi.
+Prandaj, kur shoh një KPI negative, nuk do të filloja duke kërkuar menjëherë fajtorin. Do të përpiqesha fillimisht të kuptoja në cilën pikë të procesit filloi devijimi. Kjo është e njëjta logjikë si te [Pareto dhe 5 Why](/sq/insights/pareto-and-5-why-in-practice/): numri të tregon ku ta kërkosh problemin, jo kush e shkaktoi.
 
 {diagram}
 
@@ -110,7 +110,7 @@ Nëse një gabim përsëritet mes dy ekipeve, nuk do ta nisja me pyetjen “kush
 
 Pyetja ime e parë do të ishte:
 
-**Në cilën pikë puna ndryshoi duar, dhe çfarë informacioni humbi gjatë atij kalimi?**
+**Në cilën pikë puna ndërroi duar, dhe çfarë informacioni humbi gjatë atij kalimi?**
 
 Pastaj do të shikoja nëse të dy ekipet kishin të njëjtin kuptim për atë që duhej dorëzuar. A kishte një standard të qartë? A ishte puna realisht gati për ekipin tjetër? A u konfirmua marrja? A kishte një person përgjegjës në rast problemi?
 

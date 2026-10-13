@@ -11,7 +11,7 @@ deck: 'Der neunte Essay der Reihe „Zehn Jahre nah an der Arbeit“: warum „g
 firstMove:
   - "Schreiben Sie am Ende der heutigen Schicht die Übergabe nach Kategorien: Zustand, was geschah, erledigt, offen, wer übernimmt."
   - "Ersetzen Sie jedes „Problem mit dem Zimmer“ durch: welches Problem, in welchem Zustand, was noch zu tun ist."
-  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem ohne Verantwortlichen.
+  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem Punkt ohne Verantwortlichen.
 checklist:
   title: Bevor Sie übergeben
   copy: Liste kopieren
@@ -95,7 +95,7 @@ Für mich spiegeln sich diese beiden Momente fast. Wenn ich die Schicht übergeb
 
 Das Übergabe-Werkzeug, das ich gebaut habe, folgt fast derselben Logik.
 
-Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte trennen das, was passiert ist, von dem, was noch Handlung braucht. Der Verantwortliche ist wichtig, denn eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt. Die Uhrzeit oder Frist unterscheidet eine Information, die man nur wissen muss, von etwas, bei dem man handeln muss. Die Hinweise bewahren den Kontext, der in keine Zahl und keinen Status passt. Auch Sicherheit gibt es als Kategorie, aber auf ihren Inhalt und ihre Abläufe gehe ich hier nicht ein.
+Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte trennen das, was passiert ist, von dem, was noch zu tun ist. Der Verantwortliche ist wichtig, denn eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt. Die Uhrzeit oder Frist unterscheidet eine Information, die man nur wissen muss, von etwas, bei dem man handeln muss. Die Hinweise bewahren den Kontext, der in keine Zahl und keinen Status passt. Auch Sicherheit gibt es als Kategorie, aber auf ihren Inhalt und ihre Abläufe gehe ich hier nicht ein.
 
 Eines ersetzt kein Werkzeug vollständig: den menschlichen Kontext. Ein System kann festhalten, dass ein Punkt offen ist, wer ihn weiterverfolgen muss und bis wann. Aber es kann nicht von sich aus garantieren, dass die Person, die die Schicht übernimmt, verstanden hat, wie wichtig er ist.
 

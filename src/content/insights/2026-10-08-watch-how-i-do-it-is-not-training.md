@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: If the training standard is “watch how I do it”, every new employee gets a different version of the same job.
-description: "What training looks like when it gives everyone the same result: my three nights of training as a Night Auditor, the difference between information and a training system, a three-part test and a first-week plan for a new employee."
+description: "Training that gives everyone the same result: my three nights as a new Night Auditor, information versus a training system, and a first-week plan."
 teaser: Training is not measured by how well the trainer explained. It is measured by how consistent and safe the result becomes once the trainer leaves.
 deck: 'The third essay in the series “The operation that runs without you”: three nights of training in a new hotel, why “yes, I got it” is not proof, what a new person needs to know in the first hour, and the plan for the first week.'
 relatedTools:
@@ -48,7 +48,7 @@ At the hotel where I started as a Night Auditor, I had three nights of training,
 
 The training was a combination of several things: the Night Audit checklist, separate documents for different processes, colleagues who showed me in practice what they did, videos and screenshots. I took notes.
 
-The first night also had an obstacle. The system was down for several hours, so that night we could not do a normal training of the whole process. It was more of an introduction to the work and the surroundings. I wrote about that night in [The first 30 days](/insights/the-first-30-days/).
+The first night also had an obstacle. The system was down for several hours, so that night we could not do normal training on the whole process. It was more of an introduction to the work and the surroundings. I wrote about that night in [The first 30 days](/insights/the-first-30-days/).
 
 I will not say that after the third night I immediately started working completely on my own. I am not certain of that, and I do not want to write it as fact.
 

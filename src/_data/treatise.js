@@ -10,10 +10,11 @@
 // laid flat, numbered, and resolved per language, and the charts are drawn once (lib/weekly/charts.js), so the
 // print and the web page show the same SVG.
 import fs from "node:fs";
-import { blocks } from "../../lib/weekly/common.js";
+import { blocks, joinTitle } from "../../lib/weekly/common.js";
 import { langs, resolve, common, layers, layerById } from "../../lib/treatise/common.js";
 import { sources } from "../../lib/weekly/sources.js";
 import { chartMarkup, chartText, NARROW } from "../../lib/weekly/charts.js";
+import { viaIn } from "../../lib/weekly/build.js";
 
 const folder = new URL("../../lib/treatise/volumes/", import.meta.url);
 const files = fs.readdirSync(folder).filter((name) => /^\d{2}\.js$/.test(name)).sort();
@@ -33,7 +34,7 @@ const sourceLine = (ids, lang) => {
   return list.map((s) => {
     const twin = list.filter((other) => short(other) === short(s)).length > 1;
     const named = s.title.includes(String(s.year)) ? `${s.by}, ${s.title}` : `${s.by}, ${s.title}, ${s.year}`;
-    return `${twin ? named : short(s)}${s.via ? ` (${common.labels.via[lang]} ${s.via})` : ""}`;
+    return `${twin ? named : short(s)}${s.via ? ` (${common.labels.via[lang]} ${viaIn(s, lang)})` : ""}`;
   }).join("; ");
 };
 
@@ -76,7 +77,7 @@ const volumes = raw.map((volume) => {
         kicker,
         run,
         layerInfo: layer,
-        heading: page.title && page.type !== "cover" ? page.title.join(" ") : undefined,
+        heading: page.title && page.type !== "cover" ? joinTitle(page.title, lang) : undefined,
         blocks: (page.blocks || []).map(withChart),
         sourceLine: page.source ? sourceLine(page.source, lang) : "",
       };
@@ -93,7 +94,7 @@ const volumes = raw.map((volume) => {
       date: text.date,
       edition: L.edition,
       theme: text.theme,
-      heading: text.theme.join(" "),
+      heading: joinTitle(text.theme, lang),
       sub: text.sub,
       seo: text.seo,
       feature: text.feature,

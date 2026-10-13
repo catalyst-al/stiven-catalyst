@@ -198,7 +198,7 @@
    "group": "logistics",
    "name": {
     "en": "Failed deliveries (RTS)",
-    "de": "Fehlzustellungen (RTS)",
+    "de": "Erfolglose Zustellungen (RTS)",
     "sq": "Dorëzime të dështuara (RTS)"
    },
    "what": {
@@ -361,12 +361,12 @@
    "group": "logistics",
    "name": {
     "en": "Last-mile incidents (root cause)",
-    "de": "Vorfälle letzte Meile (Grundursache)",
+    "de": "Vorfälle auf der letzten Meile (Grundursache)",
     "sq": "Incidentet e miljes së fundit (shkaku rrënjësor)"
    },
    "what": {
     "en": "Which root causes are behind delays, failed deliveries, incomplete orders and damage? Same categories as the CX Control Tower.",
-    "de": "Welche Grundursachen stecken hinter Verspätungen, Fehlzustellungen, unvollständigen Aufträgen und Schäden? Dieselben Kategorien wie im CX Control Tower.",
+    "de": "Welche Grundursachen stecken hinter Verspätungen, erfolglosen Zustellungen, unvollständigen Aufträgen und Schäden? Dieselben Kategorien wie im CX Control Tower.",
     "sq": "Cilat shkaqe rrënjësore qëndrojnë pas vonesave, dorëzimeve të dështuara, porosive të paplota dhe dëmeve? Të njëjtat kategori si te CX Control Tower."
    },
    "measure": "count",
@@ -1053,7 +1053,7 @@
    "causes": [
     {
      "en": "No work, waiting for orders",
-     "de": "Keine Arbeit, warten auf Aufträge",
+     "de": "Keine Arbeit, Warten auf Aufträge",
      "sq": "S'ka punë, pritje për porosi",
      "w": 28,
      "v": [
@@ -1747,7 +1747,7 @@
    },
    "what": {
     "en": "What fails most often in room inspections?",
-    "de": "Was fällt bei Zimmerkontrollen am häufigsten durch?",
+    "de": "Was wird bei Zimmerkontrollen am häufigsten beanstandet?",
     "sq": "Çfarë del më shpesh me mangësi në inspektimin e dhomave?"
    },
    "measure": "count",

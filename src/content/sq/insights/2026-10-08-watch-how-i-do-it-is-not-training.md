@@ -6,8 +6,8 @@ series: without-you
 status: published
 featured: true
 summary: Nëse standardi i trajnimit është “shiko si e bëj unë”, atëherë çdo punonjës i ri merr një version tjetër të të njëjtës punë.
-description: "Si duket një trajnim që i jep të njëjtin rezultat çdokujt: tri netët e mia të trajnimit si Night Auditor, dallimi mes informacionit dhe sistemit të trajnimit, testi me tri pyetje dhe plani i javës së parë për një punonjës të ri."
-teaser: Trajnimi nuk matet nga sa mirë e shpjegoi trainer-i. Matet nga sa i njëjtë dhe i sigurt bëhet rezultati kur trainer-i largohet.
+description: "Si duket një trajnim që i jep të njëjtin rezultat çdokujt: tri netët e mia të trajnimit si Night Auditor, testi me tri pyetje dhe plani i javës së parë."
+teaser: Trajnimi nuk matet nga sa mirë e shpjegoi trajneri. Matet nga sa i njëjtë dhe i sigurt bëhet rezultati kur trajneri largohet.
 deck: 'Eseja e tretë e serisë “Operacioni që punon pa ty”: tri net trajnimi në një hotel të ri, pse “po, e kuptova” nuk është provë, çfarë duhet të dijë një person i ri në orën e parë, dhe plani i javës së parë.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
@@ -95,7 +95,7 @@ Në orën e parë nuk do të përpiqesha t'i mësoja dikujt gjithçka. Do të do
 
 1. Çfarë roli ka.
 2. Çfarë rezultati pritet prej tij.
-3. Cilat janë rregullat që nuk diskutohen, sidomos siguria dhe compliance.
+3. Cilat janë rregullat që nuk diskutohen, sidomos siguria dhe pajtueshmëria.
 4. Kujt i drejtohet kur nuk di diçka.
 5. Çfarë nuk duhet të vendosë vetë pa autorizim.
 
@@ -116,13 +116,13 @@ Kjo për mua është shumë më e fortë se “rri me të sot dhe shiko si e bë
 Ky është plani që do të propozoja. Nuk është i lidhur me një vend pune të caktuar. Ditët mund të jenë turne, dhe ritmi mund të jetë më i ngadaltë për një punë më të ndërlikuar. Rendi është ajo që ka rëndësi.
 
 **Dita 1: kupto rolin dhe kufijtë.**
-Pesë gjërat e orës së parë. Ku gjendet informacioni. Kush është kush. Në fund të ditës, personi duhet të thotë me fjalët e veta çfarë pritet prej tij dhe çfarë nuk duhet ta vendosë vetë.
+Pesë gjërat e orës së parë. Ku gjendet informacioni. Kush është kush. Në fund të ditës, personi duhet të thotë me fjalët e veta çfarë pritet prej tij dhe çfarë nuk duhet të vendosë vetë.
 
 **Dita 2: shiko procesin e plotë.**
 Një herë nga fillimi në fund, me checklist-ën në dorë, me dikë që shpjegon jo vetëm çfarë bën, por edhe pse. Në fund të ditës, personi duhet të vizatojë ose të shkruajë rendin e hapave pa ndihmë.
 
 **Dita 3: bëje me mbikëqyrje.**
-Personi i ri e kryen procesin, trainer-i rri pranë dhe ndërhyn vetëm kur duhet. Në fund të ditës, të dy shënojnë ku ka pasur pasiguri.
+Personi i ri e kryen procesin, trajneri rri pranë dhe ndërhyn vetëm kur duhet. Në fund të ditës, të dy shënojnë ku ka pasur pasiguri.
 
 **Dita 4: trajto edhe një përjashtim.**
 Një rast që nuk shkon sipas skenarit normal: një status që nuk përputhet, një problem teknik, një kërkesë që duhet eskaluar. Në fund të ditës, personi duhet të dijë jo vetëm çfarë bëri, por kur do të duhej ta çonte lart.
@@ -132,6 +132,6 @@ Personi punon vetë. Në fund, e shpjegon procesin nga rezultati te hapi i parë
 
 Dhe pas ditës së pestë, testi me tri pyetje: bëje vetë, ma shpjego pse, më trego çfarë bën kur del një përjashtim.
 
-Trajnimi nuk matet nga sa mirë e shpjegoi trainer-i.
+Trajnimi nuk matet nga sa mirë e shpjegoi trajneri.
 
-Matet nga sa i njëjtë dhe i sigurt bëhet rezultati kur trainer-i largohet.
+Matet nga sa i njëjtë dhe i sigurt bëhet rezultati kur trajneri largohet.

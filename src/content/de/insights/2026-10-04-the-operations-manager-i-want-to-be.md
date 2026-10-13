@@ -130,7 +130,7 @@ Ich will Angst nicht als Führungsinstrument einsetzen.
 
 Ich will von Menschen keinen Standard verlangen, den ich selbst nicht bereit bin zu verstehen oder einzuhalten.
 
-Ich will kein Problem verstecken, nur weil der KPI ohne es besser aussieht.
+Ich will kein Problem verstecken, nur weil der KPI ohne das Problem besser aussieht.
 
 Ich will nicht der Manager werden, der alles weiß, weil niemand sonst eingearbeitet wurde.
 

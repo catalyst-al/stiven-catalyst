@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Echte Verbesserung ist nicht die, die nur funktioniert, solange die Führungskraft da ist. Es ist die, die weiter funktioniert, wenn die Führungskraft geht.
 teaser: Geben Sie sich nicht damit zufrieden, das Problem heute gelöst zu haben. Fragen Sie sich, ob es morgen auch ohne Sie gelöst werden kann.
-description: "Der abschließende Essay der Reihe: warum eine Verbesserung verblasst, was ich belegen kann und was nicht, was einen Standard am Leben hält, die Frage, die alle zehn Essays verbindet, und eine Prüfung, ob eine Verbesserung hält."
+description: "Der Schlussessay der Reihe: warum Verbesserungen verblassen, was Standards am Leben hält, die Frage hinter allen zehn Essays und ein Test, ob sie halten."
 deck: 'Der zehnte und letzte Essay der Reihe „Verbesserung, die hält“: warum eine Verbesserung verblasst, was einen Standard am Leben hält, die Frage, die ich für meine eigene Arbeit nicht beantworten kann, die Frage, die alle zehn Essays verbindet, und eine Prüfung, ob eine Verbesserung hält.'
 relatedTools:
   - /tools/kpi-diagnostic/

@@ -36,9 +36,11 @@ window.ChecklistWord = (() => {
     if (!kit) return null;
     const { run, para } = kit;
     const c = read(box);
+    // The essay's title in the quotes of its language: „…“ in German, “…” in English and Albanian.
+    const [open, close] = String(c.lang || "").startsWith("de") ? ["„", "“"] : ["“", "”"];
     const body = [];
     body.push(para(run(c.title), '<w:pStyle w:val="Title"/>'));
-    body.push(para(run(`${c.labels.from} “${c.essay}” · ${c.labels.site}`.trim(), GREY + SMALL), '<w:spacing w:after="240"/>'));
+    body.push(para(run(`${c.labels.from} ${open}${c.essay}${close} · ${c.labels.site}`.trim(), GREY + SMALL), '<w:spacing w:after="240"/>'));
     c.items.forEach((item, i) => {
       if (!item.fill) {
         body.push(para(run("☐  ", "") + run(item.text), '<w:spacing w:before="80" w:after="80"/><w:ind w:left="284" w:hanging="284"/>'));
@@ -59,7 +61,7 @@ window.ChecklistWord = (() => {
       body.push(para(run(c.labels.moves), '<w:pStyle w:val="Heading1"/>'));
       c.moves.forEach((move, i) => body.push(para(run(`${String(i + 1).padStart(2, "0")}  `, "<w:b/>") + run(move), '<w:spacing w:after="80"/><w:ind w:left="284" w:hanging="284"/>')));
     }
-    body.push(para(run(`${c.labels.from} “${c.essay}”: ${c.url}`, GREY + SMALL), '<w:spacing w:before="360"/>'));
+    body.push(para(run(`${c.labels.from} ${open}${c.essay}${close}: ${c.url}`, GREY + SMALL), '<w:spacing w:before="360"/>'));
     return kit.wordFile({ body, font: "Arial", accent: "1d4ed8", lang: c.lang, title: `${c.title} – ${c.essay}`, creator: c.labels.author });
   };
 

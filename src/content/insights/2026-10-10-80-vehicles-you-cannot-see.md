@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: When you cannot see the vehicle, you need a reliable way to understand what is happening with it.
 teaser: On the ramp you can see a problem with your own eyes. From a distance, you often have to understand it through the information you receive.
-description: "Remote coordination of 80+ vehicles and 100+ drivers: what I have on record and what I do not, what you lose and what you gain when you are not on the ramp, why information becomes the work itself, and five questions for a problem you cannot see."
+description: "Coordinating 80+ vehicles and 100+ drivers remotely: what you lose and gain away from the ramp, why information becomes the work, and five questions."
 deck: 'The seventh essay in the series “Improvement that holds”: remote coordination of 80+ vehicles, what you lose and what you gain when you are not on the ramp, why the quality of information becomes the work itself, and five questions for a problem you cannot see.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
@@ -50,7 +50,7 @@ The same problems. A completely different position in front of them.
 
 ## What I have and what I do not
 
-I will not write the names of applications or systems, the exact way we communicate, or the shift times. Some of these I do not know precisely, and I do not publish internal work details. Nor will I say exactly what the system shows, live location, stops or ETA, because I am not sure.
+I will not write the names of applications or systems, the exact way we communicate, or the shift times. Some of these I do not know precisely, and I do not publish internal work details. Nor will I say exactly what the system shows (live location, stops or ETA), because I am not sure.
 
 I do not have a documented incident from this role that I can describe with certainty from start to resolution. I have documented cases from my earlier work in last mile, with vehicles and with delays, but I will not present them as cases solved from a distance.
 
@@ -84,7 +84,7 @@ On communication, I have no documented rules that I set myself: when I call, whe
 
 ## What I would watch for
 
-I do not know of a documented personal method I use to spot problems before they happen. But today I would pay attention to three things.
+I do not have a documented personal method I use to spot problems before they happen. But today I would pay attention to three things.
 
 **Deviations that repeat.** One delay is an event. The same delay, in the same place, several days in a row, is a pattern.
 

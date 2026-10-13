@@ -710,7 +710,7 @@ window.ToolKit = (() => {
     const button = el("button", "button-ghost", tx("Clear the example"));
     button.type = "button";
     button.addEventListener("click", onClear);
-    note.append(el("strong", null, tx("Example")), " ", el("span", null, tx("This is an example, so you can see what the tool shows. Add your own entries and it leaves, or clear it now.")), " ", button);
+    note.append(el("strong", null, tx("Example")), " ", el("span", null, tx("This is an example, so you can see what the tool shows. Add your own entries and it disappears, or clear it now.")), " ", button);
     note.hidden = true;
     anchor.before(note);
     return { sync: (state) => { if (state.example && !exampleMatches(state)) state.example = {}; note.hidden = !exampleMatches(state); } };
@@ -923,7 +923,7 @@ window.ToolKit = (() => {
       const ticked = boxes.filter((box) => box.checked).length;
       const total = boxes.length;
       const verdict = ticked === total ? tx("The standard holds today.")
-        : ticked >= total - 2 ? tx("Close. Fix the open lines this shift.")
+        : ticked >= total - 2 ? tx("Almost. Fix the open lines this shift.")
         : ticked >= total / 2 ? tx("Gaps in the standard. Expect misses where lines are open.")
         : tx("Not yet a standard. Start with the first three lines.");
       score.replaceChildren(el("strong", null, tx("{a} of {b}", { a: ticked, b: total })), ` ${tx("in place.")} ${verdict}`);

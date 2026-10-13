@@ -152,7 +152,7 @@
         <p class="book-text-kicker">{{ W.sourcesPage.kicker }}</p>
         <h2>{{ W.sourcesPage.title | join(" ") }}</h2>
         <p>{{ W.sourcesPage.lead }}</p>
-        <ul>{% for s in issue.sources %}<li>{{ s.by }}, “{{ s.title }}”, {{ s.year }}{% if s.via %} ({{ L.via }} {{ s.via }}){% endif %}.{% if s.url %} <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a>{% endif %}</li>{% endfor %}</ul>
+        <ul>{% for s in issue.sources %}<li>{{ s.by }}, {{ s.title | quoted(lang) }}, {{ s.year }}{% if s.via %} ({{ L.via }} {{ s.via | inLang(lang) }}){% endif %}.{% if s.url %} <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a>{% endif %}</li>{% endfor %}</ul>
         <h3>{{ W.sourcesPage.method }}</h3>
         <p>{{ W.sourcesPage.methodText }}</p>
       </div>

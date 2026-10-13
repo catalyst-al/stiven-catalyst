@@ -104,7 +104,7 @@
       "meaning": "Wrong addresses, closed gates, no parking or unclear delivery points cost minutes at each stop.",
       "moves": [
         "Collect access notes (gates, codes, loading zones) and put them in the route data.",
-        "Fix wrong addresses at the source, not by memory of one driver.",
+        "Fix wrong addresses at the source, not in one driver's memory.",
         "Give new drivers the notes for difficult stops before they leave."
       ],
       "question": "Which stops cost more than ten minutes every time, and does the next driver know?"
@@ -151,7 +151,7 @@
     },
     "road": {
       "name": "Road",
-      "lede": "were built on the road, after an on-time departure",
+      "lede": "built up on the road, after an on-time departure",
       "advice": "The dock hands over on time; the delay grows on the road. Look at route design, stop count and delivery windows before you look at driving."
     }
   },

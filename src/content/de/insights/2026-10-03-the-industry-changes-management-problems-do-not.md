@@ -17,7 +17,7 @@ checklist:
   title: System und Wirklichkeit
   fill: true
   items:
-    - label: Was sagt das System, dass wir haben?
+    - label: Was haben wir laut System?
       hint: Anzahl, Status, Betrag, so wie der Bildschirm es zeigt.
     - label: Was existiert wirklich?
       hint: Gezählt, gesehen oder bestätigt, nicht gemeldet.
@@ -43,7 +43,7 @@ Am deutlichsten sehe ich das, wenn ich darüber nachdenke, was in jeder Branche 
 
 Im Einzelhandel war der Bestand ein Bestand im klassischen Sinn: das Produkt, das Lager und das, was man wirklich zum Verkaufen zur Verfügung hatte. In Albanien war ich verantwortlich für Bestand, Lager, Verkauf, Kosten und Cashflow, und in einem der Unternehmen gehörte die Verbesserung des Bestandsmanagements zu meinen Aufgaben. Bestand war nicht einfach eine Zahl von Produkten. Er war Kapital des Unternehmens und musste zum Verkauf und zum tatsächlichen Bedarf passen.
 
-In der Logistik wurde der Bestand zum physischen Fluss der Aufträge. Man musste prüfen, ob die Beladung pünktlich lief, ob Pakete fehlten, ob es unvollständige Aufträge oder Schäden gab und ob die Fahrer zur richtigen Zeit losfuhren. Ich arbeitete mit konkreten Kennzahlen: Ladezeit, Verspätungen, unvollständige Aufträge, Schäden. Als Dispatcher koordinierte ich in einer Schicht mehr als 70 Fahrer, mit der Aufteilung der Touren, der Kontrolle der Abfahrten und dem Lösen von Problemen live.
+In der Logistik wurde der Bestand zum physischen Fluss der Aufträge. Man musste prüfen, ob die Beladung pünktlich lief, ob Pakete fehlten, ob es unvollständige Aufträge oder Schäden gab und ob die Fahrer zur richtigen Zeit losfuhren. Ich arbeitete mit konkreten Kennzahlen: Ladezeit, Verspätungen, unvollständige Aufträge, Schäden. Als Dispatcher koordinierte ich in einer Schicht mehr als 70 Fahrer, mit der Aufteilung der Touren, der Kontrolle der Abfahrten und dem Lösen von Live-Problemen.
 
 Im Hotel wird der Bestand abstrakter. Es sind die Zimmer, die Reservierungen, ihr Status und das Geld, das daran hängt. In der Nacht prüfe ich Reservierungen, No-Shows, Zahlungen, Guthaben, Finanzbewegungen, die Zimmer, die ausgecheckt oder verlängert sein müssen, und am Ende, ob der Tag abgeschlossen werden kann, ohne Fehler für die nächste Schicht zu hinterlassen.
 

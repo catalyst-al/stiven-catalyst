@@ -18,7 +18,7 @@ checklist:
   items:
     - label: Çfarë mbeti e pazgjidhur?
       hint: Jo çfarë ndodhi, por çfarë kërkon ende veprim, me një emër.
-    - label: Ku ndryshuan sistemi dhe realiteti?
+    - label: Ku nuk përputheshin sistemi dhe realiteti?
       hint: Rezervimet, statuset, dokumentacioni, paratë.
     - label: Cili problem përsëritet?
       hint: Një herë është rastësi. Disa herë është proces.

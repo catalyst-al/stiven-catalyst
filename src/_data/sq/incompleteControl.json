@@ -32,7 +32,7 @@
     "tips": [
       [
         "Regjistroni ku shkoi keq.",
-        "Një artikull që mungon zakonisht zbulohet në paketim ose nga klienti, por krijohet më herët. Gjurmojeni pas para se ta regjistroni."
+        "Një artikull që mungon zakonisht zbulohet në paketim ose nga klienti, por krijohet më herët. Gjurmojeni deri te burimi para se ta regjistroni."
       ],
       [
         "Numëroni porosi, jo artikuj.",
@@ -100,7 +100,7 @@
       "meaning": "Një artikull mbetet në tavolinë, rrëshqet te porosia tjetër ose futet në kutinë e gabuar.",
       "moves": [
         "Skanoni çdo artikull kundrejt porosisë para se të mbyllet kutia.",
-        "Një porosi në tavolinë në një kohë, dhe tavolinë e pastër para së ardhshmes.",
+        "Një porosi në tavolinë në të njëjtën kohë, dhe tavolinë e pastër para së ardhshmes.",
         "Kontrolloni peshën te porositë ku pesha e pritur dihet."
       ],
       "question": "Si e di paketuesi që porosia është e plotë para se ta mbyllë kutinë?"
@@ -137,9 +137,9 @@
     "Çdo marrje skanohet: pozicioni dhe artikulli.",
     "Sasitë në rreshtat me shumë njësi numërohen dhe konfirmohen, jo supozohen.",
     "Artikujt që ngjajnë nuk ruhen pranë njëri-tjetrit.",
-    "Mungesat në mbledhje raportohen menjëherë, jo lihen që t’i gjejë paketimi.",
+    "Mungesat në mbledhje raportohen menjëherë, jo lihen që t'i gjejë paketimi.",
     "Paketimi skanon çdo artikull kundrejt porosisë para se të mbyllet kutia.",
-    "Në tavolinën e paketimit ka vetëm një porosi në një kohë.",
+    "Në tavolinën e paketimit ka vetëm një porosi në të njëjtën kohë.",
     "Porositë me disa pako numërohen dhe mbahen bashkë para ngarkimit.",
     "Pozicionet me mungesa numërohen po atë ditë.",
     "Çdo mjet kontrollohet që të jetë bosh në fund të linjës.",

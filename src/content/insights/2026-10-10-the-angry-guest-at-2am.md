@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: A complaint is not closed just because the guest walks away from the front desk.
 teaser: At night the hotel has fewer people, fewer departments awake and fewer options. The guest has the same problem they would have at midday.
-description: "Complaints during the night audit: what I have on record and what I do not, what can be solved at night and what cannot, why listening comes before explaining, and the five fields of a complaint handed to the next shift."
-deck: 'The ninth essay in the series “Improvement that holds”: complaints during the night audit, what can be solved at night and what cannot, why listening comes before explaining, and a complaint that reaches the next shift without being told from the start.'
+description: "Complaints during the night audit: what can be solved at night and what cannot, why listening comes before explaining, and a handover to the next shift."
+deck: 'The ninth essay in the series “Improvement that holds”: complaints during the night audit, what can be solved at night and what cannot, why listening comes before explaining, and a complaint that reaches the next shift without having to be told again from the start.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -64,7 +64,7 @@ And that is exactly what makes the temptation bigger. When someone is angry in f
 
 ## Listening before explaining
 
-For how I calmed a guest, I have no documented incident. But today I would stand behind this way of doing it:
+As for how I calmed a guest, I have no documented incident. But today I would stand behind this way of doing it:
 
 1. **Listen to the guest without interrupting.**
 2. **Understand what happened and what they are asking for.**

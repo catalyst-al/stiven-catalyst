@@ -20,7 +20,7 @@
 .tg .pg .foot { position: absolute; bottom: 8mm; left: 13mm; right: 13mm; display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--muted); border-top: .25mm solid var(--line); padding-top: 2.2mm; }
 .tg .pg .foot .num { color: var(--ink); font-weight: 600; }
 .tg .pg .kicker { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--family); margin-bottom: 2.6mm; }
-.tg .pg h1, .tg .pg h2 { font-family: var(--mr-display); font-weight: 400; color: var(--ink); line-height: 1.08; letter-spacing: -.01em; }
+.tg .pg .cover-title, .tg .pg h2 { font-family: var(--mr-display); font-weight: 400; color: var(--ink); line-height: 1.08; letter-spacing: -.01em; }
 .tg .pg h2 { font-size: 19pt; margin-bottom: 5mm; }
 .tg .pg p { margin-bottom: 2.8mm; }
 .tg .pg p.note { font-size: 7.6pt; color: var(--muted); border-left: .6mm solid var(--line); padding-left: 3mm; }
@@ -57,7 +57,7 @@
 .tg .pg .brand { font-size: 7pt; letter-spacing: .3em; text-transform: uppercase; color: var(--ink); font-weight: 700; display: flex; justify-content: space-between; }
 .tg .pg .brand span:last-child { color: var(--muted); letter-spacing: .14em; }
 .tg .pg.cover .system { margin: 6mm -10mm 0; width: calc(100% + 20mm); }
-.tg .pg.cover h1 { font-size: 30pt; margin-top: auto; }
+.tg .pg.cover .cover-title { font-size: 30pt; margin-top: auto; margin-bottom: .67em; }
 .tg .pg.cover .sub { font-size: 10pt; line-height: 1.45; color: var(--body); margin-top: 4mm; max-width: 112mm; }
 .tg .pg.cover .meta { margin-top: 7mm; padding-top: 3mm; border-top: .25mm solid var(--line); display: flex; justify-content: space-between; font-size: 7.2pt; color: var(--muted); }
 .tg .pg.cover .meta b { color: var(--ink); font-weight: 600; }

@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Rregulli nuk provohet nga një poster në mur. Provohet nga mënyra si funksionon vendi i punës kur dita është e vështirë.
 teaser: Një poster me gjashtë parime mund të varet në çdo mur. Por rampa nuk e lexon posterin. Rampa tregon nëse rregulli jeton.
-description: "5S dhe 6S në last mile: çfarë kam të dokumentuar dhe çfarë jo, standardet e rampës, pse 6S nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit."
+description: "5S dhe 6S në last mile: standardet e rampës, pse 6S nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit."
 deck: 'Eseja e katërt e serisë “Përmirësimi që mbahet”: 5S dhe 6S në last mile, si dukej rregulli në rampë, pse nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit.'
 relatedTools:
   - /tools/shift-handover/

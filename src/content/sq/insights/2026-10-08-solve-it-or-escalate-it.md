@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një sistem i mirë eskalimi nuk i mëson njerëzit të kërkojnë leje për çdo gjë. I mëson të kuptojnë kufirin e vendimit të tyre.
-description: "Eskalimi si sistem, jo si temperament: si e ndaja natën në hotel atë që ishte brenda rolit tim, pse paqartësia është problem sistemi, pesë gjërat e një eskalimi të mirë dhe matrica e eskalimit për turnin."
+description: "Eskalimi si sistem, jo si temperament: çfarë ishte brenda rolit tim natën në hotel, pesë gjërat e një eskalimi të mirë dhe matrica e eskalimit për turnin."
 teaser: Ownership nuk do të thotë “e zgjidh gjithmonë vetë”. Do të thotë ta çosh problemin deri në vendin ku mund të merret vendimi i duhur, me informacionin e duhur.
 deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes iniciativës dhe autoritetit si rregull i qartë, tri gabimet e eskalimit, çfarë duhet të ketë një eskalim i mirë, dhe matrica e eskalimit për turnin.'
 # Three moves for tomorrow's shift, shown before the text.
@@ -112,9 +112,9 @@ Kur është brenda rolit, standardi është i qartë, risku është i ulët dhe 
 Kur mund ta zgjidhësh brenda autoritetit, por situata ka rëndësi për turnin tjetër, për një KPI, për klientin, ose mund të përsëritet. Këtu handover-i është vendi natyral i njoftimit.
 
 **Mos e prek dhe eskaloje.**
-Kur prek sigurinë, security-n, compliance-in, të dhëna sensitive, pagesa jashtë autoritetit tënd, vendime disiplinore serioze, një risk të madh financiar, ose çdo situatë ku vendimi tejkalon qartë përgjegjësinë e rolit.
+Kur prek sigurinë, security-n, pajtueshmërinë, të dhëna të ndjeshme, pagesa jashtë autoritetit tënd, vendime disiplinore serioze, një risk të madh financiar, ose çdo situatë ku vendimi tejkalon qartë përgjegjësinë e rolit.
 
-Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë problemin operacional brenda standardit. Në momentin që problemi prek sigurinë, compliance-in, klientin në mënyrë serioze, ose kërkon një vendim jashtë autoritetit të tij, aty nuk është më çështje iniciative. Është eskalim.
+Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë problemin operacional brenda standardit. Në momentin që problemi prek sigurinë, pajtueshmërinë, klientin në mënyrë serioze, ose kërkon një vendim jashtë autoritetit të tij, aty nuk është më çështje iniciative. Është eskalim.
 
 {diagram}
 
@@ -123,7 +123,7 @@ Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësir
 Tri nivelet më sipër janë kolonat. Për të vendosur në cilën kolonë bie një situatë, pesë pyetje kontrolli:
 
 1. **A është brenda autoritetit tim?**
-2. **A ka risk sigurie ose compliance?**
+2. **A ka rrezik sigurie ose pajtueshmërie?**
 3. **A mund të kthehet vendimi mbrapsht?**
 4. **A prek dikë jashtë turnit tim?**
 5. **Çfarë ndodh nëse pres?**

@@ -17,13 +17,13 @@ checklist:
   copy: Liste kopieren
   items:
     - "Die vier Zahlen wurden zusammen gelesen: Ladezeit, Verspätungen, Incomplete, Schäden."
-    - Für jede rote Zahl wissen wir, aus welchen Touren oder Stufen sie kam.
+    - Für jede rote Zahl wissen wir, aus welchen Touren oder Prozessschritten sie kam.
     - Der Grund, der sich wiederholt, wurde benannt, nicht nur gezählt.
     - Es ist klar, welcher Teil des Problems in unserer Hand liegt.
     - Eine Maßnahme ist herausgekommen, mit einem Verantwortlichen und einer Prüfung morgen.
 ---
 
-Ich habe die Last Mile von drei Stellen aus gesehen. Als Paketzusteller, als Dispatcher mit mehr als 70 Fahrern in einer Schicht und dann als Team Leader und Area Manager, mit vier Shift Leaders, acht Dispatchern und rund 250 Fahrern in meiner indirekten Verantwortung. Derselbe Betrieb sieht von jeder dieser Stellen völlig anders aus.
+Ich habe die Last Mile von drei Stellen aus gesehen. Als Paketzusteller, als Dispatcher mit mehr als 70 Fahrern in einer Schicht und dann als Team Leader und Area Manager, mit vier Shift Leadern, acht Dispatchern und rund 250 Fahrern in meiner indirekten Verantwortung. Derselbe Betrieb sieht von jeder dieser Stellen völlig anders aus.
 
 Als Zusteller ist der Tag sehr konkret. Man nimmt die Tour, belädt den Wagen und fährt los. Dort interessiert einen nicht die Theorie des Prozesses. Es interessiert, ob die Pakete in der richtigen Reihenfolge sind, ob die Tour gut geplant ist, ob die Zeit reicht und was man tut, wenn Verkehr, eine Adresse, ein Kunde oder ein Problem mit der Ladung den Plan durcheinanderbringt. Von dort aus habe ich etwas verstanden, das man im Büro nicht immer sieht: Ein kleines Problem im Lager kann den Menschen auf der Straße viel Zeit kosten.
 

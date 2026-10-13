@@ -60,7 +60,7 @@ The customer changes too. In a shop they are in front of you. You see them, you 
 
 What does not change is the expectation. The customer does not much care which department made the mistake. They only see the company in front of them. In the shop it is you. At the door it is the driver. In the hotel it is the receptionist. In that moment, for the customer, that person is the whole company.
 
-Another lesson came from wholesale, and it has served me more than I expected. I built and managed a national network of 61 active resellers, and that channel was linked to revenue growth of around 30 to 40 percent. That experience taught me that a partner is not managed like an employee. You can give an employee a procedure and a direct responsibility. With a partner you have to create a shared interest, communication and continuity, and the relationship has to work economically for both sides. When you have 61 partners, you cannot rely only on your personal relationship with each one. You need a way of working that repeats.
+Another lesson came from wholesale, and it has served me more than I expected. I built and managed a national network of 61 active resellers, and that channel was linked to revenue growth of around 30 to 40 per cent. That experience taught me that a partner is not managed like an employee. You can give an employee a procedure and a direct responsibility. With a partner you have to create a shared interest, communication and continuity, and the relationship has to work economically for both sides. When you have 61 partners, you cannot rely only on your personal relationship with each one. You need a way of working that repeats.
 
 This helped me later, even when the people were no longer called resellers. In logistics you work with drivers, operators and partner companies. In a hotel you work with other departments, suppliers and structures you do not control directly. Management is not always having authority over someone. Often it is getting people you have no authority over to work in the same direction as you.
 
@@ -68,6 +68,6 @@ What transferred easily from one industry to the next? Operational control. Ever
 
 What did not transfer automatically was the technical knowledge of the industry. You cannot walk into logistics just because you know how to run a shop. You have to learn routing, dispatch, loading and how a live operation works. And even more so in hospitality: the property management system, reservations, credit, payments, no-shows, the night audit procedures and closing the day are a language of their own. I had to learn that language.
 
-That is why today I do not put much faith in the idea that a good manager has to know every detail of the industry from day one. You can learn the industry. What is harder to learn is to see when a process is not working, not to walk past the problem, and to take it on until the end.
+That is why today I do not put much faith in the idea that a good manager has to know every detail of the industry from day one. You can learn the industry. What is harder to learn is to see when a process is not working, not to walk past the problem, and to take it on and see it through.
 
 That part I have carried with me from one industry to the next.

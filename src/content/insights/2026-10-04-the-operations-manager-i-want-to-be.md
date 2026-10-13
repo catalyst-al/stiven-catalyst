@@ -59,7 +59,7 @@ Today I would sum up my working philosophy in five principles.
 
 Operations do not work without the people who keep them running every day.
 
-I have worked in environments with pressure, targets, delays, mistakes and moments when you had to react quickly. I have learned that a standard can be high and a demand can be firm without lowering the dignity of the person in front of you.
+I have worked in environments with pressure, targets, delays, mistakes and moments when you had to react quickly. I have learned that a standard can be high and a demand can be firm without diminishing the dignity of the person in front of you.
 
 Pressure can be fair.
 
@@ -119,7 +119,7 @@ That balance is one of the things I want to keep as a manager, always.
 
 ## 5. Continuous improvement
 
-My question used to be, often:
+My question often used to be:
 
 **How do we solve this problem?**
 
@@ -167,7 +167,7 @@ Who owns them?
 
 And which problems are no longer incidents, but patterns?
 
-I would also want dedicated time for people: feedback, coaching, and conversations where the question is not only “what went wrong”, but also “what is stopping you from doing the job well?”.
+I would also want dedicated time for people: feedback, coaching, and conversations where the question is not only “what went wrong”, but also “what is stopping you from doing the job well?”
 
 Reports tell me where to look. The floor tells me what is happening. A manager has to do both.
 
