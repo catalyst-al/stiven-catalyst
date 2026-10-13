@@ -14,6 +14,15 @@
 {%- set pdf = "/media/magazine/" + issue.slug + "/" + issue.slug + "-" + lang + ".pdf" -%}
 {%- set archive = W.archiveUrl | local(lang) -%}
 {%- set essays = collections["insights" + (lang | langSuffix)] -%}
+{%- set family = family or weekly.issues -%}
+{%- set older = family | where("number", issue.number - 1) -%}
+{%- set newer = family | where("number", issue.number + 1) -%}
+{#- At the end of the reader, the next issue; after the newest one, the list of all issues. -#}
+{%- if newer -%}
+{%- set onward = { url: ("/magazine/" + newer.slug + ".html") | local(lang), cover: magazinePages[newer.slug][lang].pages[0], label: "Next issue" | t(lang), title: newer[lang].heading, meta: L.no + " " + newer.no + " · " + newer[lang].date } -%}
+{%- else -%}
+{%- set onward = { url: archive, label: W.name, title: L.all, meta: L.no + " " + family[0].no + "–" + issue.no } -%}
+{%- endif -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
   back: "Back cover" | t(lang),
@@ -56,6 +65,7 @@
           {%- endfor %}
         </div>
       </div>
+      {%- include "partials/book-onward.njk" %}
 
       <div class="book-controls" data-book-controls hidden>
         <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -151,9 +161,6 @@
 
 {#- After the issue: the one before and the one after it, and the list of all issues. Only the neighbours, so the
     page stays this issue's page as the archive grows. -#}
-{%- set family = family or weekly.issues %}
-{%- set older = family | where("number", issue.number - 1) %}
-{%- set newer = family | where("number", issue.number + 1) %}
   <section class="shell issue-more" id="more-issues" aria-labelledby="more-issues-title">
     <p class="kicker">{{ W.name }} · {{ L.edition }}</p>
     <h2 id="more-issues-title">{{ "Read another issue" | t(lang) }}</h2>

@@ -12,6 +12,14 @@
 {%- set pdf = "/media/magazine/" + volume.slug + "/" + volume.slug + "-" + lang + ".pdf" -%}
 {%- set archive = "/magazine/operational-treatise.html" | local(lang) -%}
 {%- set essays = collections["insights" + (lang | langSuffix)] -%}
+{%- set older = treatise.volumes | where("number", volume.number - 1) -%}
+{%- set newer = treatise.volumes | where("number", volume.number + 1) -%}
+{#- At the end of the reader, the next volume; after the newest one, the list of all volumes. -#}
+{%- if newer -%}
+{%- set onward = { url: ("/magazine/" + newer.slug + ".html") | local(lang), cover: magazinePages[newer.slug][lang].pages[0], label: L.next, title: newer[lang].heading, meta: L.volume + " " + newer.number + " · " + newer[lang].date } -%}
+{%- else -%}
+{%- set onward = { url: archive, label: W.short, title: L.all } -%}
+{%- endif -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
   back: "Back cover" | t(lang),
@@ -64,6 +72,7 @@
           {%- endfor %}
         </div>
       </div>
+      {%- include "partials/book-onward.njk" %}
 
       <div class="book-controls" data-book-controls hidden>
         <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -167,8 +176,6 @@
   </section>
 
 {#- After the volume: the one before and the one after it, and the list of all volumes. -#}
-{%- set older = treatise.volumes | where("number", volume.number - 1) %}
-{%- set newer = treatise.volumes | where("number", volume.number + 1) %}
   <section class="shell issue-more" id="more-volumes" aria-labelledby="more-volumes-title">
     <p class="kicker">{{ W.short }} · {{ L.edition }}</p>
     <h2 id="more-volumes-title">{{ L.another }}</h2>
