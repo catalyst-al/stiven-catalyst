@@ -1199,7 +1199,6 @@
   "Perfect Delivery per delivery.": "Perfect Delivery pro Lieferung.",
   "A delivery counts as perfect only when it was on time, complete, undamaged, temperature-compliant and delivered at the first attempt, all at once. Multiplying separate rates gives a different, wrong number.": "Eine Lieferung zählt nur dann als perfekt, wenn sie pünktlich, vollständig, unbeschädigt, temperaturgerecht und beim ersten Versuch zugestellt war, alles zugleich. Einzelquoten zu multiplizieren ergibt eine andere, falsche Zahl.",
   "The right denominator.": "Die richtige Basis.",
-  "Rates are per delivered order; cold chain only counts chilled or frozen deliveries, notification only late or at-risk ones; route KPIs count routes.": "Quoten beziehen sich auf zugestellte Aufträge; die Kühlkette zählt nur gekühlte oder tiefgekühlte Lieferungen, die Benachrichtigung nur verspätete oder gefährdete; Tourenkennzahlen zählen Touren.",
   "Targets you approved.": "Ziele, die Sie freigegeben haben.",
   "A KPI without a target is shown but not scored. The page never invents a threshold.": "Eine Kennzahl ohne Ziel wird angezeigt, aber nicht bewertet. Die Seite erfindet nie einen Grenzwert.",
   "Enough data to compare.": "Genug Daten zum Vergleichen.",
@@ -2124,5 +2123,6 @@
   "no order total, so this is a count": "keine Gesamtzahl der Aufträge, daher eine Anzahl",
   "The number you typed for {volume} was for {days}, so it is not used for the days chosen now.": "Die Zahl, die Sie für {volume} eingetragen haben, galt für {days} und wird für die jetzt gewählten Tage nicht verwendet.",
   "The routes in the period you typed were for {days}. Type the routes of the days chosen now to see the share on time.": "Die eingetragenen Touren im Zeitraum galten für {days}. Tragen Sie die Touren der jetzt gewählten Tage ein, um den Anteil pünktlicher Touren zu sehen.",
-  "all days": "alle Tage"
+  "all days": "alle Tage",
+  "Rates are per delivered order, except first attempt and complaints, which count every order, delivered or not; cold chain only counts chilled or frozen deliveries, notification only late or at-risk ones; route KPIs count routes.": "Quoten beziehen sich auf zugestellte Aufträge, außer Erstzustellung und Beschwerden: Sie zählen jeden Auftrag, zugestellt oder nicht; die Kühlkette zählt nur gekühlte oder tiefgekühlte Lieferungen, die Benachrichtigung nur verspätete oder gefährdete; Tourenkennzahlen zählen Touren."
 }

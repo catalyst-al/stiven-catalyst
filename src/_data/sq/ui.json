@@ -1199,7 +1199,6 @@
   "Perfect Delivery per delivery.": "Perfect Delivery për çdo dorëzim.",
   "A delivery counts as perfect only when it was on time, complete, undamaged, temperature-compliant and delivered at the first attempt, all at once. Multiplying separate rates gives a different, wrong number.": "Një dorëzim quhet i përsosur vetëm kur ishte në kohë, i plotë, pa dëme, me temperaturë të rregullt dhe u dorëzua në tentativën e parë, të gjitha njëherësh. Shumëzimi i normave të veçanta jep një numër tjetër, të gabuar.",
   "The right denominator.": "Emëruesi i duhur.",
-  "Rates are per delivered order; cold chain only counts chilled or frozen deliveries, notification only late or at-risk ones; route KPIs count routes.": "Normat llogariten mbi porositë e dorëzuara; zinxhiri i ftohtë numëron vetëm dorëzimet e ftohura ose të ngrira, njoftimi vetëm ato me vonesë ose në rrezik; treguesit e linjave numërojnë linja.",
   "Targets you approved.": "Objektiva që i keni miratuar.",
   "A KPI without a target is shown but not scored. The page never invents a threshold.": "Një tregues pa objektiv shfaqet, por nuk vlerësohet. Faqja nuk shpik kurrë një kufi.",
   "Enough data to compare.": "Mjaft të dhëna për krahasim.",
@@ -2124,5 +2123,6 @@
   "no order total, so this is a count": "pa numrin total të porosive, prandaj ky është numër",
   "The number you typed for {volume} was for {days}, so it is not used for the days chosen now.": "Numri që shkruat për {volume} ishte për {days}, prandaj nuk përdoret për ditët e zgjedhura tani.",
   "The routes in the period you typed were for {days}. Type the routes of the days chosen now to see the share on time.": "Linjat në periudhë që shkruat ishin për {days}. Shkruani linjat e ditëve të zgjedhura tani për të parë përqindjen në kohë.",
-  "all days": "të gjitha ditët"
+  "all days": "të gjitha ditët",
+  "Rates are per delivered order, except first attempt and complaints, which count every order, delivered or not; cold chain only counts chilled or frozen deliveries, notification only late or at-risk ones; route KPIs count routes.": "Normat llogariten mbi porositë e dorëzuara, përveç dorëzimit në tentativën e parë dhe ankesave, që numërojnë çdo porosi, të dorëzuar ose jo; zinxhiri i ftohtë numëron vetëm dorëzimet e ftohura ose të ngrira, njoftimi vetëm ato me vonesë ose në rrezik; treguesit e linjave numërojnë linja."
 }
