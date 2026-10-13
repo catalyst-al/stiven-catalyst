@@ -211,9 +211,12 @@ window.ToolKit = (() => {
     const r = q * q;
     return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
   };
-  // Short-term sigma level with the usual 1.5 shift; 6 when there are no defects, and never below 0.
+  // Short-term sigma level with the 1.5 shift that sigma tables add by convention; 6 when there are no defects, and never
+  // below 0.
   const sigma = (rate) => (rate <= 0 ? 6 : rate >= 1 ? 0 : Math.max(0, normInv(1 - rate) + 1.5));
-  const sigmaText = (rate) => (rate <= 0 ? "6+" : num(sigma(rate), 2));
+  // With no defect at all, a sample of n says only that the rate is below about 3/n (the rule of three, 95 %
+  // confidence): "≥ 4.25" for none in 1,000, not "6+". Without n, "6+".
+  const sigmaText = (rate, n) => (rate <= 0 ? (n > 0 ? `≥ ${num(sigma(Math.min(1, 3 / n)), 2)}` : "6+") : num(sigma(rate), 2));
 
   // The period a log is analysed over. An empty end is open; with no range every row counts,
   // with a range only rows dated inside it. A rate needs its volume for the same days.

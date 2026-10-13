@@ -282,7 +282,7 @@
       "",
       result.onTime === null
         ? `${tx("Late routes")}: ${int.format(result.late.length)} (${staleText(result)})`
-        : tx("Routes: {total} · late: {late} · on time: {pct} · sigma level: {sigma}", { total: int.format(result.total), late: int.format(result.late.length), pct: pct(result.onTime, 1), sigma: sigmaText(result.rate) }),
+        : tx("Routes: {total} · late: {late} · on time: {pct} · sigma level: {sigma}", { total: int.format(result.total), late: int.format(result.late.length), pct: pct(result.onTime, 1), sigma: sigmaText(result.rate, result.total) }),
       tx("Late means arrival more than {arr} min after plan; late departure more than {dep} min.", { arr: state.arrivalGrace || 0, dep: state.departureGrace || 0 })
     );
     if (result.late.length) {
@@ -373,7 +373,7 @@
       if (result.dockShare !== null) stats.append(stat(tx("Started at the dock"), pct(result.dockShare, 0), tx("of late minutes")));
     }
     if (result.depOnTime !== null) stats.append(stat(tx("On-time departures"), pct(result.depOnTime, 1), tx("left within {n} min of plan", { n: state.departureGrace || 0 })));
-    if (result.rate !== null) stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
+    if (result.rate !== null) stats.append(stat(tx("Sigma level"), sigmaText(result.rate, result.total), tx("short term, with 1.5 shift")));
     const target = targetText(result);
     if (target) stats.append(stat(tx("Target"), target.value, target.note));
 

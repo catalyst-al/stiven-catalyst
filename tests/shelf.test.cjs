@@ -118,6 +118,20 @@ test('the Shelf page draws what the browser holds: saved pages (this language fi
   assert.deepEqual(titles('[data-shelf-started]'), ['Gemba (sq)'], 'the reading stays: it is not the shelf');
 });
 
+test('the shelf shows only pages of this site, whatever a backup file put in it', () => {
+  const storage = {
+    'sc-shelf': { v: 1, items: [
+      { u: 'javascript:alert(1)', t: 'Script', k: 'tool', l: 'sq', at: 4 }, { u: 'https://example.com/login', t: 'Elsewhere', k: 'tool', l: 'sq', at: 3 },
+      { u: '//example.com/', t: 'Also elsewhere', k: 'tool', l: 'sq', at: 2 }, { u: '/sq/insights/gemba/', t: 'Gemba (sq)', k: 'essay', l: 'sq', at: 1 },
+    ] },
+    'sc-checklists': { x: { u: 'javascript:alert(1)', t: 'X', c: 'Card', v: [], n: 1, d: 0, at: 1 } },
+  };
+  const { $$ } = open(shelfPage('sq'), 'https://stivencatalyst.com/sq/shelf.html', storage);
+  assert.deepEqual($$('[data-shelf-saved] .shelf-row strong').map((s) => s.textContent), ['Gemba (sq)']);
+  assert.deepEqual($$('[data-shelf-cards] .shelf-row'), []);
+  assert.ok($$('a').every((a) => !/^(javascript:|https?:|\/\/)/.test(a.getAttribute('href') || '')), 'no link leads off the site');
+});
+
 test('the templates carry the bookmark in the header, the byline and the share planet; the texts are translated; the backup names the keys', () => {
   const base = fs.readFileSync('src/_includes/layouts/base.njk', 'utf8');
   assert.match(base, /class="icon-button shelf-link" href="\{\{ '\/shelf\.html' \| local\(lang\) \}\}"/);

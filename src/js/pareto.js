@@ -4,8 +4,10 @@
 // with the reason it was left out, and the totals are shown next to the chart.
 (() => {
   // ---------- Reading tables ----------
+  // Spellings of one name fold together (case, accents, ß, punctuation); letters of every script stay, so causes
+  // written in Cyrillic or Greek are not merged into one.
   const fold = (text) => String(text ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
-    .replace(/ß/g, "ss").replace(/[^a-z0-9%€]+/g, " ").trim();
+    .replace(/ß/g, "ss").replace(/[^\p{L}\p{N}%€]+/gu, " ").trim();
 
   // Excel on German Windows still saves CSV as Windows-1252; UTF-8 is tried first.
   // Windows-1252 is Latin-1 except for 0x80-0x9F (€, curly quotes, dashes...). Those are

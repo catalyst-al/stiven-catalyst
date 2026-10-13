@@ -151,8 +151,8 @@
     },
     "road": {
       "name": "Straße",
-      "lede": "entstanden auf der Straße, nach pünktlicher Abfahrt",
-      "advice": "Die Rampe übergibt pünktlich; die Verspätung wächst auf der Straße. Schauen Sie auf Tourenplanung, Anzahl der Stopps und Zeitfenster, bevor Sie auf das Fahren schauen."
+      "lede": "entstanden auf der Straße, nach der Abfahrt",
+      "advice": "Der größte Teil der Verspätung wächst auf der Straße, nach der Abfahrt. Schauen Sie auf Tourenplanung, Anzahl der Stopps und Zeitfenster, bevor Sie auf das Fahren schauen."
     }
   },
   "checklist": [

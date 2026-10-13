@@ -215,3 +215,11 @@ test('before and after: shares per period, split on the given date', () => {
   assert.equal(Math.round(a.beforeShare * 100), 67);
   assert.equal(Math.round(a.afterShare * 100), 33);
 });
+
+test('spellings of one cause fold together, and causes in other scripts stay apart', () => {
+  assert.equal(Pareto.fold('Dëmtim në ngarkim'), Pareto.fold('demtim ne ngarkim'));
+  assert.equal(Pareto.fold('Straße gesperrt!'), Pareto.fold('strasse gesperrt'));
+  const names = ['Повреждение', 'Опоздание', 'Неполный заказ'];
+  assert.equal(new Set(names.map(Pareto.fold)).size, 3, 'three Cyrillic causes are three causes');
+  assert.notEqual(Pareto.fold('Καθυστέρηση'), '', 'Greek letters are kept');
+});

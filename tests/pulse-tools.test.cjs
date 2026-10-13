@@ -81,6 +81,9 @@ test('the sigma level stays between 0 and 6', () => {
   assert.equal(ToolKit.sigma(0), 6);
   assert.equal(ToolKit.sigma(1), 0);
   assert.equal(ToolKit.sigmaText(1), '0.00');
+  // No defect in a sample proves only a bound (rule of three): none in 1,000 is at least 4.25, not 6.
+  assert.equal(ToolKit.sigmaText(0, 1000), '≥ 4.25');
+  assert.equal(ToolKit.sigmaText(0), '6+', 'without the sample size');
   assert.ok(Math.abs(ToolKit.sigma(0.0668) - 3) < 0.01);
   assert.equal(ToolKit.sigma(0.99), 0);
 });

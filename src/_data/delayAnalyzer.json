@@ -151,8 +151,8 @@
     },
     "road": {
       "name": "Road",
-      "lede": "built up on the road, after an on-time departure",
-      "advice": "The dock hands over on time; the delay grows on the road. Look at route design, stop count and delivery windows before you look at driving."
+      "lede": "built up on the road, after the vehicle left",
+      "advice": "Most of the delay grows on the road, after the vehicle has left. Look at route design, stop count and delivery windows before you look at driving."
     }
   },
   "checklist": [

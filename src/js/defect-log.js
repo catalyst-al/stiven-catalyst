@@ -298,7 +298,7 @@
     if (result.volume) {
       if (t.complement) stats.append(stat(t.complement.label, pct(1 - result.rate, 2), t.complement.note));
       stats.append(stat("DPMO", int.format(Math.round(result.dpmo)), tx("{many} per million {noun}", { many: t.many, noun: t.volumeNoun })));
-      stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
+      stats.append(stat(tx("Sigma level"), sigmaText(result.rate, result.volume), tx("short term, with 1.5 shift")));
       const target = targetText(result);
       if (target) stats.append(stat(tx("Target"), target.value, target.note));
     }
