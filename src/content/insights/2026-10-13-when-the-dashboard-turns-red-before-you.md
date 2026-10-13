@@ -5,10 +5,10 @@ category: Operations
 series: the-system
 status: published
 featured: true
-summary: "A red number on the screen is not the floor. It is a report about the floor, and the report has an age. Between the van at the dock and the red on your dashboard lie four steps, and each one takes time. The question before any reaction is how old the red is."
+summary: "A red number on the screen is a report about the floor, and the report has an age. Ask how old it is before you act on it."
 teaser: The red on your screen is the floor as it was. Ask how old it is before you act.
-description: "Why a red number on a dashboard has an age, what happens between the floor and the screen, the three wrong reactions to a red (calling at once, ignoring it, passing it on), the first sixty seconds after a red and how to decide them before the shift, and a card for your own red number."
-deck: "The second essay in the series “The system is faster than you”: why a red number has an age, what happens between the floor and the screen, the three wrong reactions to a red, the first sixty seconds after it, and a card for your own red number."
+description: "Why a red number on a dashboard has an age, the four steps between the floor and the screen, the three wrong reactions to a red, the first sixty seconds decided before the shift, and a card for your own red number."
+deck: "The second essay in the series “The system is faster than you”: why a red number has an age, the three wrong reactions to a red, the first sixty seconds after it, and a card for your own red number."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-pulse/

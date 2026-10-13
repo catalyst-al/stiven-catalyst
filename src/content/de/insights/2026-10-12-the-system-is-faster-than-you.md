@@ -5,10 +5,10 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "Das System entscheidet zuerst. Der Scan bestätigt die Tasche, der Plan vergibt die Tour, das Dashboard wird rot, alles bevor die Person in der Schicht etwas gesehen hat. Was dieser Person bleibt, ist der Teil, den man dem System nie gesagt hat, und der Name, der dafür verantwortet."
+summary: "Das System entscheidet zuerst. Was der Person in der Schicht bleibt, ist der Teil, den man ihm nie gesagt hat, und der Name, der dafür verantwortet."
 teaser: Das System entscheidet zuerst. Der Name in der Schicht ist trotzdem Ihrer.
-description: "Warum die Systeme in jeder Schicht, der Scanner, die Planung, das PMS, das Dashboard, schneller sind als die Menschen neben ihnen und sie trotzdem brauchen: was das System weiß und was man ihm nie gesagt hat, drei Arten, wie eine Schichtleitung es falsch macht, drei Fragen zu jeder Entscheidung des Systems, und eine Karte dafür, wer was entscheidet."
-deck: "Der erste Essay der Reihe „Das System ist schneller als Sie“: was die Systeme in jeder Schicht wissen und was man ihnen nie gesagt hat, drei Arten, wie eine Schichtleitung es falsch macht, drei Fragen zu jeder Entscheidung des Systems, und eine Karte dafür, wer in Ihrer Schicht was entscheidet."
+description: "Was die Systeme in jeder Schicht wissen und was man ihnen nie gesagt hat, drei Arten, wie eine Schichtleitung es falsch macht, drei Fragen zu jeder Entscheidung des Systems, und eine Karte dafür, wer was entscheidet."
+deck: "Der erste Essay der Reihe „Das System ist schneller als Sie“: was die Systeme in jeder Schicht wissen und was man ihnen nie gesagt hat, drei Arten, wie eine Schichtleitung es falsch macht, und eine Karte dafür, wer in Ihrer Schicht was entscheidet."
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-pulse/

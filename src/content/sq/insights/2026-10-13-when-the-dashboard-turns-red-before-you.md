@@ -5,10 +5,10 @@ category: Operacione
 series: the-system
 status: published
 featured: true
-summary: "Një numër i kuq në ekran nuk është salla. Është një raport për sallën, dhe raporti ka një moshë. Mes furgonit në rampë dhe të kuqes në tabelën tënde ka katër hapa, dhe secili merr kohë. Pyetja para çdo reagimi është sa e vjetër është e kuqja."
+summary: "Një numër i kuq në ekran është një raport për sallën, dhe raporti ka një moshë. Pyet sa i vjetër është para se të veprosh mbi të."
 teaser: E kuqja në ekranin tënd është salla siç ishte. Pyet sa e vjetër është para se të veprosh.
-description: "Pse një numër i kuq në tabelë ka një moshë, çfarë ndodh mes sallës dhe ekranit, tri reagimet e gabuara ndaj një të kuqeje (të telefonosh menjëherë, ta injorosh, ta kalosh më tej), gjashtëdhjetë sekondat e para pas një të kuqeje dhe si vendosen para turnit, dhe një kartelë për numrin tënd të kuq."
-deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq ka një moshë, çfarë ndodh mes sallës dhe ekranit, tri reagimet e gabuara ndaj një të kuqeje, gjashtëdhjetë sekondat e para pas saj, dhe një kartelë për numrin tënd të kuq."
+description: "Pse një numër i kuq në tabelë ka një moshë, katër hapat mes sallës dhe ekranit, tri reagimet e gabuara ndaj një të kuqeje, gjashtëdhjetë sekondat e para të vendosura para turnit, dhe një kartelë për numrin tënd të kuq."
+deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq ka një moshë, tri reagimet e gabuara ndaj një të kuqeje, gjashtëdhjetë sekondat e para pas saj, dhe një kartelë për numrin tënd të kuq."
 relatedTools:
   - /tools/shift-pulse/
   - /tools/delay-analyzer/
@@ -70,7 +70,7 @@ Kam parë tri reagime ndaj një numri të kuq, dhe nga distanca më kanë tundua
 
 **Të telefonosh menjëherë.** Numri skuqet, telefoni është në dorën tënde para se të kesh menduar. Shpesh personi që telefonon është në mes të zgjidhjes së pikërisht asaj gjëje për të cilën po telefonon, dhe tani duhet të ndalet për të ta shpjeguar ty. Ke reaguar ndaj një situate që mund të mos ekzistojë më, dhe për këtë ke hequr një palë duar nga problemi. E kuqja ishte një raport; ti e trajtove si të tashme.
 
-**Ta injorosh.** „Në orën nëntë është gjithmonë e kuqe.“ Ndonjëherë e vërtetë. Por një prag që të gjithë kanë mësuar ta injorojnë nuk mbron asgjë, dhe ditën që e kuqja do të thotë diçka, askush nuk shikon. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për shtresën që shumica e operacioneve e kapërcejnë: atë që thotë nëse sot është ndryshe nga dhjetë ditët e fundit. Një e kuqe që e injoron nga zakoni është një e kuqe pa histori.
+**Ta injorosh.** “Në orën nëntë është gjithmonë e kuqe.” Ndonjëherë e vërtetë. Por një prag që të gjithë kanë mësuar ta injorojnë nuk mbron asgjë, dhe ditën që e kuqja do të thotë diçka, askush nuk shikon. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për shtresën që shumica e operacioneve e kapërcejnë: atë që thotë nëse sot është ndryshe nga dhjetë ditët e fundit. Një e kuqe që e injoron nga zakoni është një e kuqe pa histori.
 
 **Ta kalosh më tej të kuqe.** Numri dërgohet një nivel më lart, i kuq dhe i zhveshur, pa informacion. Ky është gabimi i tretë nga [Kur ta zgjidhësh vetë dhe kur ta çosh lart](/sq/insights/solve-it-or-escalate-it/): eskalimi pa informacion. Problemi nuk ka lëvizur drejt një zgjidhjeje. Ka lëvizur vetëm te dikush që tani duhet të bëjë dhjetë pyetje për të mësuar atë që ti mund ta kishe mësuar në gjashtëdhjetë sekonda.
 
@@ -88,7 +88,7 @@ Atëherë gjashtëdhjetë sekondat e para pas një të kuqeje nuk janë vendim. 
 
 Edhe diçka, më shumë për fundin e javës sesa për turnin. Numëro të kuqet që u zgjidhën vetë para se ti të bëje ndonjë gjë. Nëse janë shumica, pragu është vënë shumë ulët, dhe ekrani po i stërvit të gjithë ta injorojnë. Nëse janë të rralla, pragu është i saktë, dhe çdo e kuqe i meriton gjashtëdhjetë sekondat e veta.
 
-Ai numërim është edhe argumenti më i mirë që do të kesh ndonjëherë me njerëzit që e vendosin pragun. Jo „tabela është gabim“, por „nga dyzet të kuqe këtë javë, tridhjetë e një ishin zgjidhur vetë para se të mund të veproja“.
+Ai numërim është edhe argumenti më i mirë që do të kesh ndonjëherë me njerëzit që e vendosin pragun. Jo “tabela është gabim”, por “nga dyzet të kuqe këtë javë, tridhjetë e një ishin zgjidhur vetë para se të mund të veproja”.
 
 ## Numri im i kuq
 
