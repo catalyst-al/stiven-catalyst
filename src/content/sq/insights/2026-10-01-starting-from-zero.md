@@ -40,15 +40,15 @@ Pastaj erdhi Gjermania, dhe me të një listë punësh që nuk i fsheh.
 
 Nga nëntori 2021 deri në qershor 2022 punova për një kompani dorëzimesh në last mile: nisa si shpërndarës pakosh dhe më pas kalova në dispeçim. Nga korriku 2022 deri në prill 2023 punova si steward në një hotel. Në maj 2023 fillova si night auditor në një hotel në Frankfurt. Nga dhjetori 2023 deri në tetor 2024, krahas night audit-it, shpërndava përsëri pako, dhe nga tetori 2024 deri në janar 2025 punova si ndihmës në kujdes (Pflegehelfer). Në janar 2025 u ktheva në last mile, këtë herë si Team Leader On Road. Në qershor 2025 u bëra Area Manager.
 
-Nuk kam asnjë arsye t'i fsheh punët si shpërndarës pakosh, steward apo Pflegehelfer. Përkundrazi. Pa to, rruga e kthimit në management nuk kuptohet.
+Nuk kam asnjë arsye t'i fsheh punët si shpërndarës pakosh, steward apo Pflegehelfer. Përkundrazi. Pa to, rruga e kthimit në menaxhim nuk kuptohet.
 
 Në Shqipëri drejtoja njerëz, dyqane dhe procese. Në Gjermani duhej të merrja furgonin, të bëja rrugën, të respektoja kohën dhe procesin, dhe ta kryeja punën si çdo punonjës tjetër. Nuk kishte më rëndësi çfarë titulli kisha pasur. Aty ishte zeroja e vërtetë. Jo sepse eksperienca ime ishte zhdukur, por sepse askush nuk kishte detyrimin të ma njihte vetëm nga e kaluara ime.
 
-Disa gjëra më ndihmuan menjëherë, sepse nuk varen nga titulli: disiplina operative, marrëdhënia me klientin, aftësia për ta kuptuar një proces dhe për të parë ku ka waste, puna nën presion dhe gatishmëria për të marrë përgjegjësi. Kisha kaluar nga retail-i te shitja me shumicë, nga drejtimi i dyqanit te magazina, te shitjet B2B, te e-commerce dhe te drejtimi i ekipeve. Kjo më ndihmoi t'i kuptoja shpejt edhe industritë e reja.
+Disa gjëra më ndihmuan menjëherë, sepse nuk varen nga titulli: disiplina operative, marrëdhënia me klientin, aftësia për ta kuptuar një proces dhe për të parë ku ka humbje, puna nën presion dhe gatishmëria për të marrë përgjegjësi. Kisha kaluar nga retail-i te shitja me shumicë, nga drejtimi i dyqanit te magazina, te shitjet B2B, te e-commerce dhe te drejtimi i ekipeve. Kjo më ndihmoi t'i kuptoja shpejt edhe industritë e reja.
 
-Një gjë duhej ta lija pas: idenë se eksperienca e mëparshme të garanton automatikisht të njëjtin pozicion në një vend të ri. Nuk mund të thosha “kam qenë manager, prandaj duhet të jem manager”. Sistemin duhej ta mësoja nga brenda, nga niveli operacional. Duhej ta provoja përsëri.
+Një gjë duhej ta lija pas: idenë se eksperienca e mëparshme të garanton automatikisht të njëjtin pozicion në një vend të ri. Nuk mund të thosha “kam qenë menaxher, prandaj duhet të jem menaxher”. Sistemin duhej ta mësoja nga brenda, nga niveli operacional. Duhej ta provoja përsëri.
 
-Me gjuhën ndodhi e njëjta gjë. Kur erdha, gjermanishtja nuk ishte gjuha ime e punës, dhe më është dashur ta ndërtoj ndërkohë që punoja. Në vitin 2025 dhashë provimin Deutsch-Test für Zuwanderer, niveli B1: 45 nga 45 në dëgjim dhe lexim, 15 nga 20 në shkrim, 97 nga 100 në të folur. Gjuhën nuk e prita të bëhej perfekte që të filloja të ecja profesionalisht. Punoja, komunikoja dhe mësoja njëkohësisht.
+Me gjuhën ndodhi e njëjta gjë. Kur erdha, gjermanishtja nuk ishte gjuha ime e punës, dhe m'u desh ta ndërtoja ndërkohë që punoja. Në vitin 2025 dhashë provimin Deutsch-Test für Zuwanderer, niveli B1: 45 nga 45 në dëgjim dhe lexim, 15 nga 20 në shkrim, 97 nga 100 në të folur. Gjuhën nuk e prita të bëhej perfekte që të filloja të ecja profesionalisht. Punoja, komunikoja dhe mësoja njëkohësisht.
 
 Ajo që fitova në këto vite nuk ishte vetëm gjuha. Pashë punën nga ana e personit që duhet ta zbatojë procesin.
 

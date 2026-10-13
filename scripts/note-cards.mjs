@@ -4,6 +4,7 @@
 // measure, which the site uses for quotes); the label in Inter.
 //
 // Run it after adding or changing a note:  node scripts/note-cards.mjs
+// Only some notes, in every language:       node scripts/note-cards.mjs 29-twice 87-changed-hands
 // It needs Playwright with Chromium (npm i -g playwright, or a local copy).
 import fs from "node:fs";
 import path from "node:path";
@@ -94,11 +95,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const chromium = await loadChromium();
   const browser = await chromium.launch();
   const tab = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
+  const only = new Set(process.argv.slice(2));
   let made = 0;
   for (const [lang, { dir, label }] of Object.entries(LANGS)) {
     const out = path.join(ROOT, "src/media/notes", lang);
     fs.mkdirSync(out, { recursive: true });
     for (const { slug, quote } of notesOf(dir)) {
+      if (only.size && !only.has(slug)) continue;
       await tab.setContent(card(quote, label), { waitUntil: "load" });
       await tab.evaluate(async () => { await document.fonts.ready; window.fit(); });
       await tab.screenshot({ path: path.join(out, `${slug}.jpg`), type: "jpeg", quality: 86 });

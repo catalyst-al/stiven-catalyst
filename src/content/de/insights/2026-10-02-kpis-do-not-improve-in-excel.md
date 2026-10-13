@@ -16,7 +16,7 @@ checklist:
   title: Ein Fall, von der Tabelle zur Rampe
   fill: true
   items:
-    - label: Welche Zahl hat mich hierher gebracht?
+    - label: Welche Zahl hat mich hierhergebracht?
       hint: Die Kennzahl und ihr Wert aus dem heutigen Bericht.
     - label: Wo war zuletzt alles in Ordnung?
       hint: "Tasche, Wagen, Tour, Scan: der letzte Punkt, der stimmte."
@@ -56,9 +56,9 @@ Wir hatten auch Rampen-Audits und direkte Kontrollen des Prozesses. Aber vor Ort
 
 Wenn eine Tasche fehlte, waren die Fragen einfach. Wo wurde die Tasche zuletzt gesehen? War sie im Trolley? War sie gescannt? Fehlte vor der Abfahrt etwas? Wer hat das Problem bemerkt? Stimmten Tour und Trolley? Gab es Wartezeiten oder ein Problem beim Laden?
 
-Bei Verspätungen war es genauso. Wir prüften auch die Gründe, die die Fahrer angaben. Es gab Fälle, in denen ein Fahrer Verkehr, Parkplatz oder eine Ampel meldete, und man musste sehen, ob das mit der Wirklichkeit übereinstimmte. In manchen Fällen hatten wir Fotos oder Screenshots von der Situation auf der Straße.
+Bei Verspätungen war es genauso. Wir prüften auch die Gründe, die die Fahrer angaben. Es gab Fälle, in denen ein Fahrer Verkehr, Parkplatzprobleme oder eine Ampel meldete, und man musste sehen, ob das mit der Wirklichkeit übereinstimmte. In manchen Fällen hatten wir Fotos oder Screenshots von der Situation auf der Straße.
 
-Was ich gelernt habe: Eine einzige Version reicht nicht, weder die der Tabelle noch die einer einzelnen Person. Man muss verbinden, was der Fahrer oder der Dispatcher sagt, mit dem, was im Prozess tatsächlich passiert ist.
+Was ich gelernt habe: Eine einzige Version reicht nicht, weder die der Tabelle noch die einer einzelnen Person. Man muss das, was der Fahrer oder der Dispatcher sagt, mit dem verbinden, was im Prozess tatsächlich passiert ist.
 
 Und was man sieht, muss festgehalten werden, sonst ist es morgen nur eine Erinnerung. Für den Betrieb habe ich strukturierte Tagesberichte geschrieben, in denen die Fälle nacheinander in derselben Struktur ergänzt wurden. Für konkrete Fälle nutzten wir schriftliche operative Kommunikation, mit der Beschreibung des Vorfalls und seiner Ursache. Fotos und Screenshots nutzten wir, wenn sie nötig waren, um reale Situationen zu dokumentieren: Verkehr oder Parken auf der Straße, aber auch physische Probleme an der Rampe, etwa unordentliche Trolleys, Kisten oder Trolleys am falschen Ort, offene Tore oder einen schlecht organisierten Ladebereich.
 

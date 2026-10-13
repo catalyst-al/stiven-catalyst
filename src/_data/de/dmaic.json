@@ -76,7 +76,7 @@
             "Wir brauchen einen neuen Stapelstandard."
           ],
           "answer": 2,
-          "why": "Sie sagt, was, wann, wie viel und wie groß die Lücke ist, und sie rät weder die Ursache noch die Lösung."
+          "why": "Sie sagt, was, wann, wie viel und wie groß die Lücke ist, und sie nimmt weder die Ursache noch die Lösung vorweg."
         },
         {
           "q": "Wofür steht CTQ?",
@@ -221,8 +221,8 @@
           "Beobachten Sie die Arbeit dort, wo die Zahl entsteht, zu der Zeit, in der es schiefgeht."
         ],
         [
-          "5 Whys und das Fischgrät-Diagramm",
-          "Fragen Sie „Warum?“, bis Sie bei etwas im Prozess ankommen, das Sie ändern können. Das Fischgrät-Diagramm prüft Mensch, Methode, Maschine, Material, Messung und Umfeld."
+          "5 Whys und das Fischgrätendiagramm",
+          "Fragen Sie „Warum?“, bis Sie bei etwas im Prozess ankommen, das Sie ändern können. Das Fischgrätendiagramm prüft Mensch, Methode, Maschine, Material, Messung und Umfeld."
         ],
         [
           "Allgemeine oder besondere Ursache",
@@ -414,7 +414,7 @@
       "id": "control",
       "letter": "C",
       "name": "Control (Steuern)",
-      "goal": "Halten Sie den Gewinn: Machen Sie den neuen Weg zum Standard, beobachten Sie ihn und übergeben Sie ihn an den Prozessverantwortlichen.",
+      "goal": "Sichern Sie die Verbesserung: Machen Sie den neuen Weg zum Standard, beobachten Sie ihn und übergeben Sie ihn an den Prozessverantwortlichen.",
       "output": "Ein Kontrollplan und eine Übergabe",
       "ideas": [
         [

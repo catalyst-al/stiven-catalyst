@@ -55,7 +55,7 @@ Dieser Unterschied ist kein Detail. Wenn das Team eine Kennzahl auf die eine Wei
 
 Für einen konkreten Streit, in dem eine von Outbound verursachte Verspätung unfair einem Fahrer angerechnet wurde, habe ich keinen dokumentierten Fall, den ich als Tatsache darstellen kann.
 
-Aber ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Bags, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
+Aber ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Taschen, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
 
 Wenn ein Fahrer verspätet abfährt, weil der Auftrag nicht bereit war, zeigt sich das Problem bei der Abfahrt. Das heißt aber nicht automatisch, dass die Verantwortung allein beim Fahrer liegt. Das habe ich auch in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 
@@ -73,7 +73,7 @@ Mir war wichtig, zwei Arten von Information zu unterscheiden.
 
 Die eine zeigte **das Ergebnis**: wie viele Verspätungen, wie viele Schäden, wie viele unvollständige Aufträge.
 
-Die andere zeigte **den Grund**: was im Prozess passiert ist, das zu diesem Ergebnis geführt hat.
+Die andere zeigte **den Grund**: was im Prozess passiert ist und zu diesem Ergebnis geführt hat.
 
 Ohne den zweiten Teil können Zahlen zu Berichten ohne Lernen werden.
 
@@ -91,7 +91,7 @@ Ich glaube, Menschen haben mehr Grund, einer Kennzahl zu vertrauen, wenn sie gen
 
 Für eine konkrete Episode, in der eine Kennzahl zu falschem Verhalten geführt hat, habe ich keinen Fall, den ich selbst erlebt habe und sicher beschreiben kann. Aber ich sehe das Risiko klar.
 
-Wenn eine Organisation nur die Geschwindigkeit des Beladens misst, ohne sie mit Qualität und Sicherheit zu verbinden, kann sie einen Anreiz schaffen, dass Menschen hetzen. Das ist ein mögliches Beispiel, kein Vorfall, den ich als geschehen behaupte.
+Wenn eine Organisation nur die Geschwindigkeit des Beladens misst, ohne sie mit Qualität und Sicherheit zu verbinden, kann sie einen Anreiz schaffen, dass Menschen hetzen. Das ist ein mögliches Beispiel, kein Vorfall, den ich als Tatsache darstelle.
 
 Deshalb würde ich Loading Time nie getrennt von Damage, Incomplete und Sicherheit bewerten.
 
@@ -114,7 +114,7 @@ Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie
 3. **Wer kann das Ergebnis beeinflussen?** Welcher Teil in der Hand der Person liegt und welcher im Prozess, in einer anderen Stufe oder in einer anderen Abteilung.
 4. **Was ist der Standard?** Was als gutes Ergebnis gilt, und warum.
 5. **Welcher Kontext muss geprüft werden?** Welche anderen Werte mit ihr gelesen werden, damit die Verbesserung des einen nicht die Verschlechterung des anderen verdeckt.
-6. **Was tun wir, wenn sie abweicht?** Wer es sieht, wann, und was der erste Schritt ist.
+6. **Was tun wir, wenn sie abweicht?** Wer es sieht, wann und was der erste Schritt ist.
 
 Die Karte unten können Sie direkt hier ausfüllen und für Ihr Team kopieren.
 

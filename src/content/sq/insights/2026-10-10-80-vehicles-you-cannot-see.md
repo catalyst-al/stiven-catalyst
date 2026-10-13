@@ -22,7 +22,7 @@ checklist:
     - label: Sa i vjetër është ky informacion?
       hint: Informacioni që vjen me vonesë i ka dhënë problemit kohë të rritet.
     - label: Është rast i vetëm apo përsëritje?
-      hint: E njëjta tur, i njëjti vend, e njëjta orë?
+      hint: I njëjti tur, i njëjti vend, e njëjta orë?
     - label: Çfarë është ende e hapur, dhe kush e ka?
       hint: Një problem pa pronar nuk është i hapur. Është i harruar.
     - label: Çfarë veprimi duhet tani, dhe kush e konfirmon?
@@ -78,7 +78,7 @@ Për komunikimin, nuk kam rregulla të dokumentuara që kam vendosur vetë: kur 
 
 ## Çfarë do të shikoja
 
-Për një metodë personale të dokumentuar që e përdor për të parë problemet para se të ndodhin, nuk e di. Por sot do t'u kushtoja vëmendje tri gjërave.
+Për një metodë personale të dokumentuar që e përdor për të parë problemet para se të ndodhin, nuk kam. Por sot do t'u kushtoja vëmendje tri gjërave.
 
 **Devijimeve që përsëriten.** Një vonesë është rast. E njëjta vonesë, në të njëjtin vend, disa ditë me radhë, është model.
 

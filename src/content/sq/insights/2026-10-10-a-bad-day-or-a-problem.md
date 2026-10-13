@@ -15,10 +15,10 @@ relatedTools:
 checklist:
   title: Para se të ndryshosh procesin
   fill: true
-  note: Fletë orientuese, si do ta bëja sot. Nuk është një metodë që e kam përdorur të dokumentuar.
+  note: Fletë orientuese, si do ta bëja sot. Nuk është një metodë e dokumentuar që e kam përdorur.
   items:
     - label: A ka një problem të menjëhershëm sigurie ose shërbimi?
-      hint: Nëse po, ndërhyj tani. Analiza vjen pas.
+      hint: Nëse po, ndërhyn tani. Analiza vjen pas.
     - label: Si krahasohet dita me volumin, kushtet dhe ditët e mëparshme?
       hint: Sa punë ishte, çfarë ndodhi atë ditë, si dukeshin ditët para saj.
     - label: Është përjashtim apo pjesë e një tendence?
@@ -29,7 +29,7 @@ checklist:
 firstMove:
   - Para se të ndryshosh një rregull, vendose numrin e sotëm pranë dhjetë ditëve të fundit.
   - Kontrollo së pari nëse ka një problem të menjëhershëm sigurie ose shërbimi. Nëse po, vepro tani.
-  - Emëro një shkak konkret para se ta prekësh procesin.
+  - Emërto një shkak konkret para se ta prekësh procesin.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: three-layers
 ---
@@ -52,7 +52,7 @@ Prandaj kjo ese nuk është histori. Është një pyetje që çdo menaxher e has
 
 ## Një numër pa histori
 
-2,8% vetëm, nuk thotë shumë. Krahasuar me çfarë?
+2,8% më vete nuk thotë shumë. Krahasuar me çfarë?
 
 Le të marrim një shembull të shpikur, vetëm për të sqaruar mendimin. Supozojmë që mesatarja e javëve të fundit ishte 2,5%. A është 2,8% një sinjal?
 
@@ -90,7 +90,7 @@ E treta: a kemi identifikuar një shkak konkret përpara se të ndryshojmë proc
 
 ## Volumi, moti dhe procesi
 
-Në last mile ndiqnim shkaqe operative: bag-e që mungonin, trolley të përziera, vonesa në përgatitje, probleme gjatë ngarkimit. Për një metodë të dokumentuar që ndante ndikimin e motit dhe të volumit nga problemi i procesit, nuk e di.
+Në last mile ndiqnim shkaqe operative: bag-e që mungonin, trolley të përzier, vonesa në përgatitje, probleme gjatë ngarkimit. Për një metodë të dokumentuar që ndante ndikimin e motit dhe të volumit nga problemi i procesit, nuk e di.
 
 Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e punës, me kushtet e ditës dhe me të dhënat e ditëve të mëparshme. 2,8% vonesa në një ditë me volum të jashtëzakonshëm nuk thotë të njëjtën gjë si 2,8% në një ditë të zakonshme.
 

@@ -23,7 +23,7 @@ checklist:
 firstMove:
   - Për një gabim të kësaj jave, gjej pikën ku puna ndërroi duar.
   - Zëvendëso “i informova” me një status, një emër dhe një konfirmim.
-  - Bini dakord me departamentin tjetër çfarë duhet të jetë e përfunduar që një dorëzim të quhet i bërë.
+  - Bjer dakord me departamentin tjetër çfarë duhet të jetë e përfunduar që një dorëzim të quhet i bërë.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: between-departments
 ---
@@ -110,7 +110,7 @@ Nëse një gabim përsëritet mes dy ekipeve, nuk do ta nisja me pyetjen “kush
 
 Pyetja ime e parë do të ishte:
 
-**Në cilën pikë puna ndryshoi duar, dhe çfarë informacioni humbi gjatë atij kalimi?**
+**Në cilën pikë puna ndërroi duar, dhe çfarë informacioni humbi gjatë atij kalimi?**
 
 Pastaj do të shikoja nëse të dy ekipet kishin të njëjtin kuptim për atë që duhej dorëzuar. A kishte një standard të qartë? A ishte puna realisht gati për ekipin tjetër? A u konfirmua marrja? A kishte një person përgjegjës në rast problemi?
 

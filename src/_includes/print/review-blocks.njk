@@ -20,7 +20,7 @@
   {%- elif b.type == "figures" %}<div class="figures{{ ' compact' if b.compact }}">{% for f in b.items %}<div><b>{{ f.n }}</b><span>{{ f.t }}</span></div>{% endfor %}</div>
   {%- elif b.type == "callout" %}<div class="callout{{ ' is-reading' if b.reading }}"><span class="label">{{ L.reading if b.reading else b.label }}</span><p>{{ b.text }}</p></div>
   {%- elif b.type == "flag" %}<p class="tr-flag">{{ b.text }}</p>
-  {%- elif b.type == "quote" %}<p class="quote">“{{ b.text }}”</p>
+  {%- elif b.type == "quote" %}<p class="quote">{{ b.text | quoted(lang) }}</p>
   {%- elif b.type == "qa" %}<div class="wk-qa">{% for row in b.items %}<p class="q">{{ row.q }}</p>{% for a in row.a %}<p>{{ a }}</p>{% endfor %}{% endfor %}{% if b.closing %}<p class="pull">{{ b.closing }}</p>{% endif %}{% if b.sign %}<p class="sign">{{ b.sign }}</p>{% endif %}</div>
   {%- elif b.type == "steps" %}<ol class="steps">{% for s in b.items %}<li><div><h4>{{ s.h }}</h4><p>{{ s.p }}</p></div></li>{% endfor %}</ol>
   {%- elif b.type == "lists" %}<div class="lists">{% for col in b.cols %}<div class="{{ 'accent' if col.accent }}"><h4><span class="hl">{{ col.h }}</span></h4><ul>{% for i in col.items %}<li>{{ i }}</li>{% endfor %}</ul></div>{% endfor %}</div>

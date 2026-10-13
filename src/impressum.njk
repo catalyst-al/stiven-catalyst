@@ -8,6 +8,11 @@
   legalLangs: ["en", "de", "sq"],
   eleventyComputed: {
     title: (data) => ({ en: "Legal notice", de: "Impressum", sq: "Shënim ligjor" })[data.lang],
+    description: (data) => ({
+      en: "Legal notice of Stiven Catalyst: who is responsible for the site, and how to get in touch.",
+      de: "Impressum von Stiven Catalyst: wer für die Website verantwortlich ist und wie Sie Kontakt aufnehmen.",
+      sq: "Shënimi ligjor i Stiven Catalyst: kush është përgjegjës për faqen dhe si të vini në kontakt.",
+    })[data.lang],
   },
   // Only published once the name and city in src/_data/legal.json are filled in.
   permalink: (data) => (data.legal.name && data.legal.city ? (data.lang === "en" ? "/impressum.html" : `/${data.lang}/impressum.html`) : false),

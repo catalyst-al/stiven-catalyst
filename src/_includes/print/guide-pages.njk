@@ -81,7 +81,8 @@
 <section class="pg cover">
   <div class="brand"><span>Stiven Catalyst</span><span>{{ g.edition }}</span></div>
   {{ system("cover", true, false) }}
-  <h1>{{ g.title }}</h1>
+  {#- Not a heading: in the reader the page already has its title as h1, as on the covers of the Management Review. #}
+  <div class="cover-title">{{ g.title }}</div>
   <p class="sub">{{ g.subtitle }}</p>
   <div class="meta"><span><b>{{ g.author }}</b></span><span>stivencatalyst.com</span></div>
 </section>

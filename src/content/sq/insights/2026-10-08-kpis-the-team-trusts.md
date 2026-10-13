@@ -116,7 +116,7 @@ Para se të fillosh të matësh diçka, plotëso këto gjashtë rreshta. Nëse n
 5. **Çfarë konteksti duhet kontrolluar?** Cilët tregues të tjerë lexohen bashkë me të, që përmirësimi i njërit të mos fshehë përkeqësimin e tjetrit.
 6. **Çfarë bëjmë kur devijon?** Kush e sheh, kur, dhe cili është hapi i parë.
 
-Karta më poshtë mund ta plotësosh këtu dhe ta kopjosh për ekipin.
+Kartën më poshtë mund ta plotësosh këtu dhe ta kopjosh për ekipin.
 
 Një KPI që ekipi e beson nuk është domosdoshmërisht ai që del gjithmonë jeshil.
 

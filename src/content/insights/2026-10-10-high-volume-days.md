@@ -51,7 +51,7 @@ And I do not have a concrete decision where I can explain with certainty what I 
 
 ## Where the pressure landed
 
-As Area Manager I had four Shift Leaders and eight Dispatchers. In the daily stand-up we talked about the KPI results, loading problems, delays, safety and operational coordination.
+As Area Manager I had four Shift Leaders and eight dispatchers. In the daily stand-up we talked about the KPI results, loading problems, delays, safety and operational coordination.
 
 From the documented problems, these were the points that needed attention when the pressure rose:
 
@@ -59,7 +59,7 @@ From the documented problems, these were the points that needed attention when t
 - loading time and keeping to the departure schedule;
 - scanning products in their designated zones;
 - discipline and safety on the ramp;
-- communication between drivers, dispatchers and shift leads.
+- communication between drivers, dispatchers and Shift Leaders.
 
 These are not new problems. They are the same ones that show up on an ordinary day. On the hard day there is just no more time to hide them.
 

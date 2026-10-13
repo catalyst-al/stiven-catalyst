@@ -80,7 +80,7 @@ Për mua, vlera e DMAIC nuk është te emri dhe as te certifikata.
 
 Fillimisht kupto problemin. Pastaj mate, analizo shkaqet, provo përmirësimin dhe kontrollo nëse ai vazhdon të funksionojë.
 
-Në operacion, tundimi është gjithmonë kërcimi. KPI-ja del keq, dhe dikush ka menjëherë një zgjidhje. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për rrezikun e ndryshimit të rregullave pas çdo luhatjeje. DMAIC është mënyra e strukturuar për ta shmangur atë: midis problemit dhe zgjidhjes ka tri hapa, dhe asnjëri nuk anashkalohet.
+Në operacion, tundimi është gjithmonë kërcimi. KPI-ja del keq, dhe dikush ka menjëherë një zgjidhje. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për rrezikun e ndryshimit të rregullave pas çdo luhatjeje. DMAIC është mënyra e strukturuar për ta shmangur atë: midis problemit dhe zgjidhjes ka tre hapa, dhe asnjëri nuk anashkalohet.
 
 ## Control, faza më e vështirë
 

@@ -74,7 +74,7 @@
         <p class="kicker">{{ "From the field notes" | t(lang) }}</p>
         <ul>
           {%- for note in sideNotes %}
-          <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">“{{ note.data.quote }}”</a></li>
+          <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">{{ note.data.quote | quoted(lang) }}</a></li>
           {%- endfor %}
         </ul>
       </div>

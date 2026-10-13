@@ -69,9 +69,9 @@ If I set that experience against DMAIC, without dressing it up, it looks like th
 
 **Analyze.** We looked into the reasons for delays, missing bags and problems with how loads were organised.
 
-**Improve.** For concrete measures I put in place myself, and their results, I do not know precisely.
+**Improve.** Which concrete measures I put in place myself, and what their results were, I do not know precisely.
 
-**Control.** For a documented system of control after improvements, I do not know.
+**Control.** Whether there was a documented system of control after improvements, I do not know.
 
 This list tells me something. The first three phases are the ones an operation almost does by itself, because the report demands them every day: there is a problem, there is a number, there is a question “why”. The last two phases are the ones that need someone to hold them. And they are exactly the ones I have the least proof for.
 

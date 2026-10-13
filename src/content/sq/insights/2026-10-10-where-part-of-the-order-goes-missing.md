@@ -51,7 +51,7 @@ Nuk e di me saktësi si regjistrohej një porosi jo e plotë: nga ankesa e klien
 
 ## Çfarë gjenim në magazinë
 
-Dy probleme i kam të konfirmuara: bag-e që mungonin, dhe trolley të përziera ose të organizuara gabim.
+Dy probleme i kam të konfirmuara: bag-e që mungonin, dhe trolley të përzier ose të organizuar gabim.
 
 Asnjëri prej tyre nuk lind te dera e klientit. Bag-u që mungon ka munguar diku më herët: në përgatitje, në trolley ose në ngarkim. Trolley i përzier është organizuar keq para se të arrijë te shoferi. Por nëse askush nuk e ndal, të dyja përfundojnë në të njëjtin rresht të raportit: porosi jo e plotë te klienti.
 

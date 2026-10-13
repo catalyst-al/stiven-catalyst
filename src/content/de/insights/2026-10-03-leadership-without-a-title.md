@@ -17,8 +17,8 @@ checklist:
   title: Bevor Sie etwas übernehmen, das nicht Ihres ist
   fill: true
   items:
-    - label: Braucht diese Situation Handeln, oder eine Entscheidung, die jemand anderes treffen sollte?
-      hint: Initiative, oder Überschreiten des Mandats.
+    - label: Braucht diese Situation Handeln oder eine Entscheidung, die jemand anderes treffen sollte?
+      hint: Initiative oder Überschreiten des Mandats.
     - label: Habe ich die Information und die Kompetenz, das zu übernehmen?
       hint: Dass sonst niemand handelt, macht mich nicht zur richtigen Person für die Entscheidung.
     - label: Bei wem bleibt danach die Verantwortung?

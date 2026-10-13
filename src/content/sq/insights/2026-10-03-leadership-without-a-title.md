@@ -12,7 +12,7 @@ deck: 'Eseja e dhjetë e serisë “Dhjetë vite pranë punës”: çfarë bën 
 firstMove:
   - Para se të marrësh sot diçka jashtë rolit tënd, pyet nëse i duhet veprim apo një vendim që i takon dikujt tjetër.
   - Zgjidhe problemin e çastit, pastaj shkruaj kush duhet ta ketë në pronësi zgjidhjen strukturore.
-  - Emëro një boshllëk që e mbulon vazhdimisht, dhe thuaja personit që ka autoritetin ta mbyllë.
+  - Emërto një boshllëk që e mbulon vazhdimisht, dhe thuaja personit që ka autoritetin ta mbyllë.
 checklist:
   title: Para se të marrësh përsipër diçka që nuk është e jotja
   fill: true

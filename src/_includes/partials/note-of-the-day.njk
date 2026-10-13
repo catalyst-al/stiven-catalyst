@@ -9,12 +9,12 @@
 {%- if todayNote %}
   <section class="shell note-of-day" aria-labelledby="note-of-day-title" data-note-of-day data-notes="{{ dayNotes | noteDayData(lang) | dump }}" data-page="{{ notesPage | absoluteUrl }}">
     <p class="kicker" id="note-of-day-title">{{ "Field note of the day" | t(lang) }}</p>
-    <blockquote class="note-of-day-quote"><p data-note-quote>“{{ todayNote.data.quote }}”</p></blockquote>
+    <blockquote class="note-of-day-quote"><p data-note-quote>{{ todayNote.data.quote | quoted(lang) }}</p></blockquote>
     <div class="note-of-day-foot">
       <p class="note-of-day-by"><span>Stiven Janaqi</span> · <a href="{{ notesPage }}#note-{{ todayNote.fileSlug }}" data-note-link>{{ "All field notes" | t(lang) }}</a></p>
       <div class="note-actions" data-note-actions hidden>
-        <button type="button" data-note-copy data-copied-label="{{ copiedLabel }}" data-copy-text="“{{ todayNote.data.quote }}” (Stiven Janaqi, Stiven Catalyst) {{ (notesPage + '#note-' + todayNote.fileSlug) | absoluteUrl }}">{{ "Copy" | t(lang) }}</button>
-        <button type="button" data-note-share data-share-url="{{ (notesPage + '#note-' + todayNote.fileSlug) | absoluteUrl }}" data-share-text="“{{ todayNote.data.quote }}”">{{ "Share" | t(lang) }}</button>
+        <button type="button" data-note-copy data-copied-label="{{ copiedLabel }}" data-copy-text="{{ todayNote.data.quote | quoted(lang) }} (Stiven Janaqi, Stiven Catalyst) {{ (notesPage + '#note-' + todayNote.fileSlug) | absoluteUrl }}">{{ "Copy" | t(lang) }}</button>
+        <button type="button" data-note-share data-share-url="{{ (notesPage + '#note-' + todayNote.fileSlug) | absoluteUrl }}" data-share-text="{{ todayNote.data.quote | quoted(lang) }}">{{ "Share" | t(lang) }}</button>
         {%- set image = todayNote.fileSlug | noteImage(lang) %}{% if image %}
         <a href="{{ image }}" download="stiven-catalyst-{{ todayNote.fileSlug }}-{{ lang or 'en' }}.jpg" title="{{ 'Download as an image to post' | t(lang) }}" data-note-image>{{ "Image" | t(lang) }}</a>{% endif %}
       </div>

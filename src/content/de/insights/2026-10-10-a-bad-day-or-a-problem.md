@@ -22,7 +22,7 @@ checklist:
     - label: Wie verhält sich der Tag zur Menge, zu den Bedingungen und zu den Tagen davor?
       hint: Wie viel Arbeit es gab, was an dem Tag passiert ist, wie die Tage davor aussahen.
     - label: Ist es eine Ausnahme oder Teil eines Trends?
-      hint: Ein ungewöhnlicher Tag, oder mehrere Tage hintereinander in dieselbe Richtung?
+      hint: Ein ungewöhnlicher Tag oder mehrere Tage hintereinander in dieselbe Richtung?
     - label: Haben wir eine konkrete Ursache gefunden?
       hint: Bevor wir den Prozess ändern, nicht danach.
 # Three moves for tomorrow's shift, shown before the text.
@@ -54,7 +54,7 @@ Deshalb ist dieser Essay keine Geschichte. Es ist eine Frage, die sich jeder Fü
 
 2,8 % allein sagt nicht viel. Verglichen womit?
 
-Nehmen wir ein erfundenes Beispiel, nur um den Gedanken klar zu machen. Angenommen, der Durchschnitt der letzten Wochen lag bei 2,5 %. Ist 2,8 % ein Signal?
+Nehmen wir ein erfundenes Beispiel, nur um den Gedanken klarzumachen. Angenommen, der Durchschnitt der letzten Wochen lag bei 2,5 %. Ist 2,8 % ein Signal?
 
 Es kommt darauf an. Jeder Prozess schwankt. Kein Tag fällt genauso aus wie der nächste, auch wenn niemand etwas verändert hat. Die Menge ändert sich, die Menschen ändern sich, die Touren ändern sich. Die Frage ist nicht, ob heute schlechter ist als der Durchschnitt. Das werden viele Tage sein. Die Frage ist, ob heute schlechter ist, als dieser Prozess normalerweise schwankt.
 

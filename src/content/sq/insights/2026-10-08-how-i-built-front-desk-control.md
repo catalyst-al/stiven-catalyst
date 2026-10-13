@@ -5,7 +5,7 @@ category: Operacione
 series: without-you
 status: published
 featured: true
-summary: Një SOP bëhet vërtet i dobishëm kur personi që ka nevojë për të mund ta gjejë, ta kuptojë dhe ta zbatojë në momentin e duhur.
+summary: Një SOP bëhet vërtet e dobishme kur personi që ka nevojë për të mund ta gjejë, ta kuptojë dhe ta zbatojë në momentin e duhur.
 description: "Rasti konkret i serisë: si i ktheva checklist-at, dokumentet, screenshot-et dhe shënimet e shpërndara në një faqe pune në browser për Front Office dhe Night Audit, çfarë lashë jashtë, çfarë nuk mund të pretendoj, dhe çfarë do të bëja ndryshe sot."
 teaser: Nuk e ndërtova sepse mungonin dokumentet. E nisa sepse dokumentet ekzistonin, por informacioni që më duhej gjatë punës ishte i shpërndarë.
 deck: 'Eseja e nëntë e serisë “Operacioni që punon pa ty”: një projekt real, i zhvilluar hap pas hapi, i paraqitur si punë në zhvillim dhe jo si sukses i matur, me kartën për ta kthyer një dosje me SOP në një mjet pune.'
@@ -115,4 +115,4 @@ Nuk ke nevojë të ndërtosh patjetër një aplikacion. Metoda vlen edhe për nj
 
 Gjatë zhvillimit kuptova se sfida më e rëndësishme nuk ishte të krijoja një faqe të bukur. Ishte ta organizoja informacionin në mënyrë që të mund të përdorej, të kontrollohej dhe të përmirësohej.
 
-Një SOP bëhet vërtet i dobishëm kur personi që ka nevojë për të mund ta gjejë, ta kuptojë dhe ta zbatojë në momentin e duhur.
+Një SOP bëhet vërtet e dobishme kur personi që ka nevojë për të mund ta gjejë, ta kuptojë dhe ta zbatojë në momentin e duhur.

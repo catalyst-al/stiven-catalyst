@@ -37,7 +37,7 @@ checklist:
 diagram: handover-to-briefing
 ---
 
-“Delay është 2.8%.”
+“Delay është 2,8%.”
 
 Kjo është një fjali që mund ta dëgjosh në çdo briefing. Është e saktë. Mund të jetë edhe e rëndësishme. Por nëse pas saj turni fillon dhe askush nuk e di çfarë duhet bërë ndryshe, ke dhënë informacion, jo drejtim.
 
@@ -79,12 +79,12 @@ Kështu doja ta shihja stand-up-in: KPI-të, 5 Why, Pareto, 5S dhe siguria jo si
 
 Një briefing humbet vlerën kur mbetet vetëm te numrat.
 
-Nëse thua “Delay është 2.8%” dhe pastaj turni fillon, por askush nuk e di çfarë duhet bërë ndryshe, numri ka kaluar nga raporti te ekipi pa ndryshuar asgjë rrugës.
+Nëse thua “Delay është 2,8%” dhe pastaj turni fillon, por askush nuk e di çfarë duhet bërë ndryshe, numri ka kaluar nga raporti te ekipi pa ndryshuar asgjë rrugës.
 
 Dallimi është i vogël në fjalë dhe i madh në efekt:
 
-- **Informacion:** Delay është 2.8%.
-- **Drejtim:** Delay është 2.8%. Arsyeja kryesore që po shohim është [arsyeja]. Sot, gjatë punës, të gjithë shikojmë [një gjë konkrete].
+- **Informacion:** Delay është 2,8%.
+- **Drejtim:** Delay është 2,8%. Arsyeja kryesore që po shohim është [arsyeja]. Sot, gjatë punës, të gjithë shikojmë [një gjë konkrete].
 
 Fjalia e dytë zgjat dhjetë sekonda më shumë. Por është e vetmja që ekipi mund ta marrë me vete në turn.
 
@@ -128,8 +128,8 @@ Gjendja nga turni i mëparshëm ose nga dita e djeshme: pikat e hapura dhe raste
 **2. Çfarë ka ndryshuar?**
 Vetëm ndryshimet që e prekin këtë turn: volumi, një proces, një sistem, ekipi.
 
-**3. Ku është risku sot?**
-Ku ka më shumë gjasa që diçka të shkojë keq: një KPI që po rrëshqet dhe arsyeja e tij, një pikë e hapur me afat, një problem teknik.
+**3. Ku është rreziku sot?**
+Ku ka më shumë gjasa që diçka të shkojë keq: një KPI që po rrëshqet dhe arsyeja e saj, një pikë e hapur me afat, një problem teknik.
 
 **4. Cilat janë 2–3 prioritetet?**
 Jo dhjetë. Secili i thënë si veprim që ekipi e sheh gjatë punës, jo si numër.

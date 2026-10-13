@@ -33,7 +33,7 @@ diagram: handover-gap
 
 A problem that does not make it into the handover does not stop existing. It just becomes the problem of someone who does not yet know it exists.
 
-I say this as a principle, not as a story. In hotel work I have seen unclosed issues, technical problems, requests that needed follow-up, or operational differences that had to pass to the next shift. But I do not have a single case documented clearly enough to say: this piece of information was missing from the handover, and that is exactly what caused this consequence. And I do not want to stitch several cases together into a story I am not sure of.
+I say this as a principle, not as a story. In hotel work I have seen open issues, technical problems, requests that needed follow-up, or operational differences that had to pass to the next shift. But I do not have a single case documented clearly enough to say: this piece of information was missing from the handover, and that is exactly what caused this consequence. And I do not want to stitch several cases together into a story I am not sure of.
 
 The principle is enough for me. You can have two shifts that are very good on their own. The first shift may have done everything right. The second may have people who are just as capable. But between them there is a point where the organisation can lose its memory.
 
@@ -68,7 +68,7 @@ Without going into concrete content, the handover I use or have structured aroun
 - the overall operational state of the hotel;
 - the main movements of the day and those that affect the next shift;
 - reservations or statuses that need attention;
-- unclosed administrative or financial matters;
+- open administrative or financial matters;
 - guest problems or requests that need to be continued;
 - technical issues;
 - information for housekeeping when there is something relevant for the next shift;
@@ -91,7 +91,7 @@ I do not have an absolute personal rule that I always do every handover verbally
 
 At the end of the shift my focus moves from “what do I need to do?” to “what does the person after me need to know?”
 
-I check what has been left open, what was resolved during the night, and which issues must not get lost when the shift changes. I care especially that an unclosed problem does not look like a finished one just because my shift is ending.
+I check what has been left open, what was resolved during the night, and which issues must not get lost when the shift changes. I take particular care that an open problem does not look like a finished one just because my shift is ending.
 
 When I take over the shift from someone else, I do the opposite. I try to build, as quickly as possible, a picture of the current state: what I am inheriting, what is normal, what has deviated and which points need attention.
 

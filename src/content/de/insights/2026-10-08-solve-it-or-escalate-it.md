@@ -51,7 +51,7 @@ Ich hatte konkrete Fälle, in denen technische Probleme in Zimmern an die Hauste
 
 Ich werde nicht sagen, ob es eine feste Liste von Personen gab, die nachts anzurufen waren, einen festgelegten Duty Manager oder eine schriftliche Regel, was jemanden weckt und was bis zum Morgen warten kann. Da bin ich mir nicht sicher.
 
-Auch für die letzte Meile habe ich keine dokumentierte Matrix, wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren. Ich weiß, dass der Team Leader sehr nah am täglichen Betrieb war: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen und Probleme, die live passierten. Ich weiß, dass es Regeln gab, nach denen der Team Leader informiert werden musste, wenn ein betriebliches Problem auftrat, zum Beispiel wenn beim Beladen ein Bag fehlte. Ich weiß, dass es für Schäden und die Kühlkette klare Standards und Kontrollen gab. Aber ich werde nicht sagen „das ging immer an den Area Manager“, ohne es dokumentiert zu haben.
+Auch für die letzte Meile habe ich keine dokumentierte Matrix, wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren. Ich weiß, dass der Team Leader sehr nah am täglichen Betrieb war: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen und Probleme, die live passierten. Ich weiß, dass es Regeln gab, nach denen der Team Leader informiert werden musste, wenn ein betriebliches Problem auftrat, zum Beispiel wenn beim Beladen eine Tasche fehlte. Ich weiß, dass es für Schäden und die Kühlkette klare Standards und Kontrollen gab. Aber ich werde nicht sagen „das ging immer an den Area Manager“, ohne es dokumentiert zu haben.
 
 Und ich habe keinen dokumentierten Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand, „selbst lösen oder nach oben geben“. Ich werde keinen erfinden.
 
@@ -73,7 +73,7 @@ Und ein Betrieb, der davon abhängt, wer Schicht hatte, ist noch kein Betrieb, d
 
 ## Die drei Fehler
 
-Hier spreche ich als Meinung, nicht als Statistik aus meiner Erfahrung.
+Hier äußere ich eine Meinung, keine Statistik aus meiner Erfahrung.
 
 **Der erste: Alles wird eskaliert.** Der Mensch baut nie Ownership auf. Jede Abweichung wird zum Problem des Chefs, und der Chef wird zu dem Punkt, an dem der ganze Betrieb stockt.
 

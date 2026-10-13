@@ -30,7 +30,7 @@ checklist:
 firstMove:
   - Klären Sie die Fakten vor dem Gespräch, und führen Sie es unter vier Augen.
   - Beschreiben Sie, was passiert ist, hören Sie zu, prüfen Sie den Prozess, und sprechen Sie erst dann über Verantwortung.
-  - "Enden Sie mit einer vereinbarten Maßnahme: was sich ändert, wer es tut, wann es geprüft wird."
+  - "Schließen Sie mit einer vereinbarten Maßnahme: was sich ändert, wer es tut, wann es geprüft wird."
 ---
 
 Ein Fehler sollte uns zu zwei Fragen führen: Was hat im Prozess nicht funktioniert, und welche Verantwortung hatte die Person, die die Arbeit gemacht hat?
@@ -93,7 +93,7 @@ Eine Führungskraft kann fordernd, entschlossen und sehr klar sein, ohne die Wü
 
 ## Wenn man mit den Kollegen von gestern spricht
 
-Der berufliche Schritt selbst ist belegt. Im Januar 2025 habe ich als Team Leader On Road angefangen, und einige Monate später wurde ich Area Manager. In dieser Rolle hatte ich vier Shift Leader und acht Disponenten direkt unter mir, während der Betrieb indirekt rund 250 Fahrer umfasste. Über diesen Schritt habe ich ausführlicher in [Menschen führen, ohne den Menschen zu verlieren](/de/insights/leading-people-without-losing-the-person/) geschrieben.
+Der berufliche Schritt selbst ist belegt. Im Januar 2025 habe ich als Team Leader On Road angefangen, und einige Monate später wurde ich Area Manager. In dieser Rolle hatte ich vier Shift Leader und acht Dispatcher direkt unter mir, während der Betrieb indirekt rund 250 Fahrer umfasste. Über diesen Schritt habe ich ausführlicher in [Menschen führen, ohne den Menschen zu verlieren](/de/insights/leading-people-without-losing-the-person/) geschrieben.
 
 Wie Kollegen auf meine Beförderung reagiert haben oder ob sich unser Verhältnis verändert hat, dazu habe ich keine bestätigte persönliche Darstellung.
 

@@ -93,7 +93,7 @@ Një menaxher mund të jetë kërkues, i vendosur dhe shumë i qartë, pa e cenu
 
 ## Kur flet me kolegët e djeshëm
 
-Kalimin profesional e kam të konfirmuar. Në janar 2025 fillova si Team Leader On Road, dhe disa muaj më vonë u bëra Area Manager. Në atë rol kisha katër Shift Leaders dhe tetë dispecerë në strukturën time direkte, ndërsa operacioni përfshinte rreth 250 shoferë në mënyrë indirekte. Për këtë kalim kam shkruar më gjatë te [Të drejtosh njerëzit pa humbur njeriun](/sq/insights/leading-people-without-losing-the-person/).
+Kalimin profesional e kam të konfirmuar. Në janar 2025 fillova si Team Leader On Road, dhe disa muaj më vonë u bëra Area Manager. Në atë rol kisha katër Shift Leaders dhe tetë dispeçerë në strukturën time direkte, ndërsa operacioni përfshinte rreth 250 shoferë në mënyrë indirekte. Për këtë kalim kam shkruar më gjatë te [Të drejtosh njerëzit pa humbur njeriun](/sq/insights/leading-people-without-losing-the-person/).
 
 Për mënyrën si reaguan kolegët ndaj promovimit tim, ose nëse ndryshoi marrëdhënia jonë, nuk kam një përshkrim personal të konfirmuar.
 
@@ -109,7 +109,7 @@ Si parim, besoj se reagimi më i dobishëm pas një gabimi është ai që të nd
 
 Jo ai që të lë vetëm me ndjenjën e fajit. Dhe as ai që e kalon gabimin sikur nuk ka ndodhur.
 
-Një shembull hipotetik: një shofer niset pa e kontrolluar një hap të procedurës. Një bisedë që fillon me “gjithmonë e bën këtë” e mbyll bisedën para se të nisë. Një bisedë që fillon me “sot u nise pa këtë kontroll; më trego si shkoi” e hap atë. Në të dyja rastet, gabimi emërohet. Ndryshon vetëm nëse personi mund të mësojë diçka prej saj.
+Një shembull hipotetik: një shofer niset pa e kontrolluar një hap të procedurës. Një bisedë që fillon me “gjithmonë e bën këtë” e mbyll bisedën para se të nisë. Një bisedë që fillon me “sot u nise pa këtë kontroll; më trego si shkoi” e hap atë. Në të dyja rastet, gabimi emërtohet. Ndryshon vetëm nëse personi mund të mësojë diçka prej tij.
 
 ## Pesë hapat e bisedës pas gabimit
 

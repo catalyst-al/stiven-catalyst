@@ -11,7 +11,7 @@ deck: 'Der neunte Essay der Reihe „Zehn Jahre nah an der Arbeit“: warum „g
 firstMove:
   - "Schreiben Sie am Ende der heutigen Schicht die Übergabe nach Kategorien: Zustand, was geschah, erledigt, offen, wer übernimmt."
   - "Ersetzen Sie jedes „Problem mit dem Zimmer“ durch: welches Problem, in welchem Zustand, was noch zu tun ist."
-  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem ohne Verantwortlichen.
+  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem Punkt ohne Verantwortlichen.
 checklist:
   title: Bevor Sie übergeben
   copy: Liste kopieren

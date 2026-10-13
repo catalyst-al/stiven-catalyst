@@ -45,7 +45,7 @@ This essay is not about language. It is about the standard, and about how you ma
 
 ## What I have and what I do not
 
-In last mile I worked with several DSPs and with a structure that included many drivers, dispatchers and shift leads. In the hotels in Germany, communication involved colleagues from different departments and international guests.
+In last mile I worked with several DSPs and with a structure that included many drivers, dispatchers and Shift Leaders. In the hotels in Germany, communication involved colleagues from different departments and international guests.
 
 But for the exact, or even approximate, number of languages and nationalities in my teams, I have no data. I will not say “ten” or “twenty” without something to back it up.
 

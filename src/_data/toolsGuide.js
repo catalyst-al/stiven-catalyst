@@ -373,16 +373,16 @@ const sq = {
         { cards: [
           { title: "Falas", text: "Çdo mjet përdoret falas." },
           { title: "Pa llogari", text: "Hapni mjetin dhe nisni. Nuk ka asgjë për t'u regjistruar." },
-          { title: "Në pajisjen tuaj", text: "Puna juaj ruhet në shfletuesin tuaj, jo në një server. Pa cookies, pa analytics." },
+          { title: "Në pajisjen tuaj", text: "Puna juaj ruhet në shfletuesin tuaj, jo në një server. Pa cookies, pa analitikë." },
         ] },
         { note: "Një përjashtim, i thënë në vetë mjetin: kur shkruani faqen e internetit të një kompanie te Krijuesi i CV-së, ajo adresë shkon te shërbimi i ikonave i Google-it për të marrë logon." },
       ],
     },
     start: {
-      kicker: "Fillo këtu",
+      kicker: "Filloni këtu",
       title: "Cili është planeti juaj?",
       body: [
-        "Mjetet janë grupuar sipas punës që bëni, jo sipas metodës. Nisni me planetin që i përngjan ditës suaj.",
+        "Mjetet janë grupuar sipas punës që bëni, jo sipas metodës. Nisni me planetin që i përshtatet ditës suaj.",
         { routes: [
           { family: "pulse", text: "Drejtoni punën në terren për një turn." },
           { family: "zenith", text: "Drejtoni një zonë dhe lexoni shifrat e saj javë pas jave." },

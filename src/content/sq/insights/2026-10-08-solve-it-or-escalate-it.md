@@ -112,9 +112,9 @@ Kur është brenda rolit, standardi është i qartë, risku është i ulët dhe 
 Kur mund ta zgjidhësh brenda autoritetit, por situata ka rëndësi për turnin tjetër, për një KPI, për klientin, ose mund të përsëritet. Këtu handover-i është vendi natyral i njoftimit.
 
 **Mos e prek dhe eskaloje.**
-Kur prek sigurinë, security-n, compliance-in, të dhëna sensitive, pagesa jashtë autoritetit tënd, vendime disiplinore serioze, një risk të madh financiar, ose çdo situatë ku vendimi tejkalon qartë përgjegjësinë e rolit.
+Kur prek sigurinë, security-n, pajtueshmërinë, të dhëna të ndjeshme, pagesa jashtë autoritetit tënd, vendime disiplinore serioze, një risk të madh financiar, ose çdo situatë ku vendimi tejkalon qartë përgjegjësinë e rolit.
 
-Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë problemin operacional brenda standardit. Në momentin që problemi prek sigurinë, compliance-in, klientin në mënyrë serioze, ose kërkon një vendim jashtë autoritetit të tij, aty nuk është më çështje iniciative. Është eskalim.
+Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë problemin operacional brenda standardit. Në momentin që problemi prek sigurinë, pajtueshmërinë, klientin në mënyrë serioze, ose kërkon një vendim jashtë autoritetit të tij, aty nuk është më çështje iniciative. Është eskalim.
 
 {diagram}
 
@@ -123,7 +123,7 @@ Në last mile, nga mënyra si e shoh sot, Team Leader-i duhet të ketë hapësir
 Tri nivelet më sipër janë kolonat. Për të vendosur në cilën kolonë bie një situatë, pesë pyetje kontrolli:
 
 1. **A është brenda autoritetit tim?**
-2. **A ka risk sigurie ose compliance?**
+2. **A ka rrezik sigurie ose pajtueshmërie?**
 3. **A mund të kthehet vendimi mbrapsht?**
 4. **A prek dikë jashtë turnit tim?**
 5. **Çfarë ndodh nëse pres?**

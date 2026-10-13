@@ -47,7 +47,7 @@ Und ich habe keine konkrete Entscheidung, bei der ich sicher erklären könnte, 
 
 ## Wo der Druck ankam
 
-Als Area Manager hatte ich vier Shift Leaders und acht Dispatcher. Im Daily Stand-up sprachen wir über die Ergebnisse der Kennzahlen, Probleme beim Verladen, Verspätungen, Sicherheit und operative Abstimmung.
+Als Area Manager hatte ich vier Shift Leader und acht Dispatcher. Im Daily Stand-up sprachen wir über die Ergebnisse der Kennzahlen, Probleme beim Verladen, Verspätungen, Sicherheit und operative Abstimmung.
 
 Aus den dokumentierten Problemen waren das die Punkte, die Aufmerksamkeit brauchten, wenn der Druck stieg:
 

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: A good escalation system does not teach people to ask permission for everything. It teaches them to understand the limit of their own decision.
-description: "Escalation as a system, not a temperament: how I separated at night in the hotel what was within my role, why ambiguity is a system problem, the five things a good escalation contains, and the escalation matrix for the shift."
+description: "Escalation as a system, not a temperament: how, at night in the hotel, I separated what was within my role, why ambiguity is a system problem, the five things a good escalation contains, and the escalation matrix for the shift."
 teaser: Ownership does not mean “I always solve it myself”. It means taking the problem to the place where the right decision can be made, with the right information.
 deck: 'The fourth essay in the series “The operation that runs without you”: the line between initiative and authority as a clear rule, the three escalation mistakes, what a good escalation contains, and the escalation matrix for the shift.'
 relatedTools:
@@ -79,7 +79,7 @@ And an operation that depends on who was on shift is not yet an operation that r
 
 ## The three mistakes
 
-Here I am speaking as an opinion, not as a statistic from my experience.
+Here I am giving an opinion, not a statistic from my experience.
 
 **The first: everything gets escalated.** The person never builds ownership. Every deviation becomes the boss's problem, and the boss becomes the point where the whole operation stalls.
 

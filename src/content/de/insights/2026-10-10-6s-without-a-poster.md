@@ -83,7 +83,7 @@ Die meisten davon sind gleichzeitig Ordnung, Sicherheit und Qualität. Ein gesch
 
 **Ordnung beweist sich nicht durch ein Plakat an der Wand. Sie beweist sich daran, wie der Arbeitsplatz funktioniert, wenn der Tag schwer ist.**
 
-An einem ruhigen Tag sieht fast jede Rampe ordentlich aus. An einem Tag mit viel Menge, fehlenden Leuten und Verspätungen sieht man, ob der Standard Teil der Arbeit ist oder etwas, das man macht, wenn Zeit ist.
+An einem ruhigen Tag sieht fast jede Rampe ordentlich aus. An einem Tag mit hohem Volumen, fehlenden Leuten und Verspätungen sieht man, ob der Standard Teil der Arbeit ist oder etwas, das man macht, wenn Zeit ist.
 
 Für eine konkrete Routine, die ich selbst eingeführt habe, mit einer Kontrolle am Ende jeder Schicht, habe ich keine Belege. Aber heute würde ich empfehlen, dass jeder Arbeitsbereich einen sichtbaren Standard und eine verantwortliche Person für dessen Kontrolle hat. Und am Ende der Schicht würde ich prüfen, ob die Arbeitsmittel an ihrem Platz sind, ob die Ladungen sortiert sind und ob offene Probleme an die nächste Schicht übergeben wurden.
 

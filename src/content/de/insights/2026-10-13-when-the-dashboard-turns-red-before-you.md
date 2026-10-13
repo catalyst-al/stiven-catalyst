@@ -26,8 +26,8 @@ checklist:
       hint: "Die Zahl ist ein Bericht. Was hat jemand mit eigenen Augen gesehen? Ist das Problem noch offen?"
     - label: "Wer hat die Information, die der Lage am nächsten ist?"
       hint: "Ein Name oder eine Rolle für jede Zone. Jetzt aufgeschrieben, nicht gesucht, wenn der Bildschirm rot ist."
-    - label: "Innerhalb meiner Rolle, oder Eskalation? Und mit welcher Information?"
-      hint: "Die Grenze meiner Entscheidung, und die drei Fakten, die die nächste Ebene braucht."
+    - label: "Innerhalb meiner Rolle oder Eskalation? Und mit welcher Information?"
+      hint: "Die Grenze meiner Entscheidung und die drei Fakten, die die nächste Ebene braucht."
     - label: "Was wartet nicht auf die Prüfung?"
       hint: "Unmittelbare Sicherheitsrisiken: sofort melden, die Analyse kommt danach."
 # Three moves for tomorrow's shift, shown before the text.
@@ -43,7 +43,7 @@ Das Rot auf Ihrem Bildschirm ist ein Signal, keine Diagnose. Fragen Sie, was es 
 
 In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich geschrieben, dass das System zuerst entscheidet und der Name in der Schicht Ihrer bleibt. Dieser Essay handelt von dem Moment, der am häufigsten vorkommt: Noch ist nichts entschieden, aber eine Zahl auf dem Bildschirm ist rot geworden, und alle warten darauf, was Sie tun.
 
-Seit dem 1. Januar 2026 arbeite ich in Teilzeit als Last Mile Dispatcher, aus der Ferne, und koordiniere 80+ Fahrzeuge und 100+ Fahrer. Was das mit einer Führungskraft macht, habe ich in [80+ Fahrzeuge führen, die man nicht sieht](/de/insights/80-vehicles-you-cannot-see/) beschrieben. Aus der Ferne kann man nicht zur Rampe gehen, um zu sehen, was hinter einer Zahl steckt. Man verlässt sich auf die Information, die einen aus dem System und von den Menschen im Feld erreicht. Und beide kommen immer ein wenig nach dem, was gerade passiert.
+Seit dem 1. Januar 2026 arbeite ich in Teilzeit als Last-Mile-Dispatcher, aus der Ferne, und koordiniere 80+ Fahrzeuge und 100+ Fahrer. Was das mit einer Führungskraft macht, habe ich in [80+ Fahrzeuge führen, die man nicht sieht](/de/insights/80-vehicles-you-cannot-see/) beschrieben. Aus der Ferne kann man nicht zur Rampe gehen, um zu sehen, was hinter einer Zahl steckt. Man verlässt sich auf die Information, die einen aus dem System und von den Menschen im Feld erreicht. Und beide kommen immer ein wenig nach dem, was gerade passiert.
 
 ## Was ich habe und was nicht
 
@@ -57,7 +57,7 @@ Dieser Essay ist also meine Analyse und wie ich es heute machen würde, kein Pro
 
 Stellen Sie sich einen Transporter vor, der vor zehn Minuten von der Rampe hätte abfahren sollen. Auf dem Dashboard ist die Tour rot. Was musste passieren, damit sie rot ist?
 
-Jemand musste sehen, dass der Transporter noch da steht, oder ein Scan musste bis zu einer bestimmten Uhrzeit fehlen. Jemand oder etwas musste es melden. Das System musste es gegen das Ziel rechnen, in seinem eigenen Takt. Und dann musste Ihr Bildschirm es zeichnen. Vier Schritte, jeder mit seiner eigenen Verzögerung. Wie groß diese Verzögerung ist, unterscheidet sich von System zu System, und für meines weiß ich es nicht. Genau deshalb ist es die erste Frage.
+Jemand musste sehen, dass der Transporter noch da steht, oder ein Scan musste bis zu einer bestimmten Uhrzeit fehlen. Jemand oder etwas musste es melden. Das System musste es mit dem Ziel abgleichen, in seinem eigenen Takt. Und dann musste Ihr Bildschirm es zeichnen. Vier Schritte, jeder mit seiner eigenen Verzögerung. Wie groß diese Verzögerung ist, unterscheidet sich von System zu System, und für meines weiß ich es nicht. Genau deshalb ist es die erste Frage.
 
 {diagram}
 
@@ -77,7 +77,7 @@ Es gibt drei Reaktionen auf eine rote Zahl, die jeder kennt, der vor einem Dashb
 
 **Sofort anrufen.** Die Zahl wird rot, das Telefon ist in Ihrer Hand, bevor Sie gedacht haben. Die Person, die den Anruf annimmt, ist vielleicht gerade dabei, genau das zu lösen, und muss jetzt aufhören, um es Ihnen zu erklären. Sie haben auf eine Situation reagiert, die es vielleicht nicht mehr gibt, und dafür ein Paar Hände vom Problem abgezogen.
 
-**Ignorieren.** „Um diese Uhrzeit ist es immer rot.“ Ein Alarm, der sich ständig ohne nützliche Information wiederholt, läuft Gefahr, seine Bedeutung zu verlieren. Und an dem Tag, an dem das Rot etwas bedeutet, schaut niemand hin. In [Ein schlechter Tag oder ein Problem?](/de/insights/a-bad-day-or-a-problem/) habe ich über die Schicht geschrieben, die die meisten Betriebe überspringen: die, die sagt, ob heute anders ist als die letzten zehn Tage. Ein Rot, das Sie aus Gewohnheit ignorieren, ist ein Rot ohne Geschichte.
+**Ignorieren.** „Um diese Uhrzeit ist es immer rot.“ Ein Alarm, der sich ständig ohne nützliche Information wiederholt, läuft Gefahr, seine Bedeutung zu verlieren. Und an dem Tag, an dem das Rot etwas bedeutet, schaut niemand hin. In [Ein schlechter Tag oder ein Problem?](/de/insights/a-bad-day-or-a-problem/) habe ich über die Ebene geschrieben, die die meisten Betriebe überspringen: die, die sagt, ob heute anders ist als die letzten zehn Tage. Ein Rot, das Sie aus Gewohnheit ignorieren, ist ein Rot ohne Geschichte.
 
 **Rot weiterreichen.** Die Zahl wird eine Ebene nach oben geschickt, rot und nackt. Das ist der dritte Fehler aus [Wann Sie es selbst lösen und wann Sie es nach oben geben](/de/insights/solve-it-or-escalate-it/): Eskalation ohne Information. Das Problem hat sich nicht auf eine Lösung zubewegt. Es ist nur zu jemandem gewandert, der jetzt die Fragen stellen muss, die Sie selbst hätten stellen können.
 
@@ -102,10 +102,10 @@ Wenn diese vier Schritte vor der Schicht feststehen, sind die ersten Minuten nac
 
 Noch etwas, eher für das Wochenende als für die Schicht. Schauen Sie sich die Rots an, die zu keiner Handlung geführt haben, weil sie, als Sie sie geprüft haben, schon gelöst oder keine Probleme waren. Sind sie die Mehrheit, trainiert der Alarm alle darauf, ihn zu ignorieren.
 
-Aber die Antwort ist nicht einfach, die Schwelle anzuheben, damit der Bildschirm besser aussieht. Eine Schwelle, die ohne Daten angehoben wird, versteckt die nutzlosen Rots zusammen mit denen, die wichtig waren. Der Alarm wird anhand der Daten überprüft: wie viele Rots, wie viele davon eine Handlung brauchten, und was die, die eine brauchten, gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie zu denen bringen können, die den Alarm festlegen. Nicht „das Dashboard ist falsch“, sondern wie viele Rots es diese Woche gab und wie viele davon wirklich etwas verlangt haben.
+Aber die Antwort ist nicht einfach, die Schwelle anzuheben, damit der Bildschirm besser aussieht. Eine Schwelle, die ohne Daten angehoben wird, versteckt die nutzlosen Rots zusammen mit denen, die wichtig waren. Der Alarm wird anhand der Daten überprüft: wie viele Rots, wie viele davon eine Handlung brauchten und was die, die eine brauchten, gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie zu denen bringen können, die den Alarm festlegen. Nicht „das Dashboard ist falsch“, sondern wie viele Rots es diese Woche gab und wie viele davon wirklich etwas verlangt haben.
 
 ## Meine rote Zahl
 
-Die Karte unten hat eine Zeile für jede Zahl, die Sie auf einem Bildschirm verfolgen: was sie misst, wie alt sie ist, wenn Sie sie sehen, was Sie sicher wissen, wer die Information hat, die ihr am nächsten ist, wann sie nach oben geht, und was nicht auf die Prüfung wartet. Füllen Sie sie vor der Schicht aus. [Shift Pulse](/de/tools/shift-pulse/) zeigt die Zahlen der Woche nebeneinander, damit ein roter Tag seine zehn Tage Geschichte neben sich hat, bevor Sie entscheiden, was er bedeutet.
+Die Karte unten hat eine Zeile für jede Zahl, die Sie auf einem Bildschirm verfolgen: was sie misst, wie alt sie ist, wenn Sie sie sehen, was Sie sicher wissen, wer die Information hat, die ihr am nächsten ist, wann sie nach oben geht und was nicht auf die Prüfung wartet. Füllen Sie sie vor der Schicht aus. [Shift Pulse](/de/tools/shift-pulse/) zeigt die Zahlen der Woche nebeneinander, damit ein roter Tag seine zehn Tage Geschichte neben sich hat, bevor Sie entscheiden, was er bedeutet.
 
 **Eine rote Zahl sagt Ihnen, wohin Sie schauen müssen. Sie sagt Ihnen nicht, was jetzt dort ist. Der Abstand zwischen beidem ist das Alter der Zahl, und den zu kennen ist Ihre Aufgabe.**

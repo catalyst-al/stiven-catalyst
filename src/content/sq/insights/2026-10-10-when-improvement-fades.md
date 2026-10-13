@@ -8,7 +8,7 @@ featured: true
 summary: Përmirësimi i vërtetë nuk është ai që funksionon vetëm kur menaxheri është aty. Është ai që vazhdon të funksionojë edhe kur menaxheri largohet.
 teaser: Mos u mjafto me faktin që sot e zgjidhe problemin. Pyet veten nëse nesër ai problem mund të zgjidhet edhe pa praninë tënde.
 description: "Eseja përmbyllëse e serisë: pse një përmirësim shuhet, çfarë kam të dokumentuar dhe çfarë jo, çfarë e mban gjallë një standard, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë."
-deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që nuk di t''ia përgjigjem për punën time, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë.'
+deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që nuk di t''i përgjigjem për punën time, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë.'
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-handover/
@@ -52,7 +52,7 @@ Por nuk kam një rast të dokumentuar ku një përmirësim që e vendosa vetë f
 
 Për një ese që quhet “Kur përmirësimi shuhet”, kjo nuk është detaj. Është pikërisht tema.
 
-## Pyetja që nuk di t'ia përgjigjem
+## Pyetja që nuk di t'i përgjigjem
 
 Në vitin 2025 punova si Team Leader dhe pastaj si Area Manager në last mile. Më vonë kalova te koordinimi në distancë.
 

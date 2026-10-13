@@ -154,7 +154,7 @@ Një herë në javë do të doja një rishikim më të thellë të performancës
 
 Cilat probleme po përsëriten?
 
-Cilat aksione janë ende të hapura?
+Cilat veprime janë ende të hapura?
 
 Kush i zotëron?
 
@@ -208,7 +208,7 @@ Por do të doja që disa gjëra të ishin bërë më të qarta:
 - KPI-të kryesore dhe kuptimi i tyre.
 - Ownership-i i problemeve.
 - Mënyra e handover-it.
-- Procesi i ndjekjes së aksioneve.
+- Procesi i ndjekjes së veprimeve.
 - Standardet që realisht përdoren.
 - Një ritëm i rregullt ku ekipi kontrollon jo vetëm performancën, por edhe përmirësimin.
 
@@ -220,7 +220,7 @@ Ka shumë gjëra që dua t'i zhvilloj më tej.
 
 Dua të thelloj edhe më shumë njohuritë në analizën e të dhënave dhe në mënyrën si operacionet lidhen me P&L-në, forecasting-un dhe vendimet financiare në një nivel më të gjerë.
 
-Dua të fitoj më shumë eksperiencë në drejtimin e operacioneve me një scope më të madh organizativ, ku vendimet kalojnë përtej një turni ose një funksioni dhe ndikojnë në disa ekipe njëkohësisht.
+Dua të fitoj më shumë eksperiencë në drejtimin e operacioneve me një fushëveprim më të madh organizativ, ku vendimet kalojnë përtej një turni ose një funksioni dhe ndikojnë në disa ekipe njëkohësisht.
 
 Dua gjithashtu të vazhdoj të përmirësohem në një gjë që nuk mendoj se përfundon ndonjëherë: të dish kur duhet të ndërhysh dhe kur duhet t'i lësh njerëzit të zgjidhin vetë.
 

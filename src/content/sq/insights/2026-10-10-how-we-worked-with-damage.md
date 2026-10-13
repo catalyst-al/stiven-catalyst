@@ -103,7 +103,7 @@ Jo në letër, por në turn, me volumin, kohën dhe njerëzit e asaj dite. Një 
 **4. Çfarë duhet ndryshuar që dëmi të mos përsëritet?**
 Një ndryshim në proces, me një person që e merr përsipër dhe një datë kur kontrollohet nëse funksionoi. “T'i kujtojmë ekipit të jetë më i kujdesshëm” nuk është ndryshim.
 
-Kur këto katër përgjigje mblidhen për shumë dëme, fillon të duket diçka që përqindja nuk e tregon: fazat ku dëmi lind më shpesh. [Kontrolli i dëmeve](/sq/tools/damage-control/) bën pikërisht këtë. Regjistron çdo njësi të dëmtuar me fazën e procesit dhe shkakun, dhe tregon ku duhet nisur. Karta më poshtë mund ta plotësosh këtu për një dëm të vetëm dhe ta kopjosh për ekipin.
+Kur këto katër përgjigje mblidhen për shumë dëme, fillon të duket diçka që përqindja nuk e tregon: fazat ku dëmi lind më shpesh. [Kontrolli i dëmeve](/sq/tools/damage-control/) bën pikërisht këtë. Regjistron çdo njësi të dëmtuar me fazën e procesit dhe shkakun, dhe tregon ku duhet nisur. Kartën më poshtë mund ta plotësosh këtu për një dëm të vetëm dhe ta kopjosh për ekipin.
 
 Përqindja të thotë sa. Pyetjet të thonë ku. Dhe vetëm “ku”-ja mund të ndryshohet.
 

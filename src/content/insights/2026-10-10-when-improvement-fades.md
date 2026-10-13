@@ -36,7 +36,7 @@ problems:
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Pick one improvement you made this year and ask whether it would run next week without you.
-  - Name, by name, who checks that the standard is still applied, and how often.
+  - Say by name who checks that the standard is still applied, and how often.
   - Find one instruction that no longer matches the process, and update it today.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: improvement-paths

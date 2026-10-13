@@ -28,7 +28,7 @@ problems:
 firstMove:
   - Take one KPI and write its definition in words the whole team would use.
   - For one red result, separate what the person controlled from what sat in the process.
-  - Read it next to its neighbour indicator before you react to it.
+  - Read it next to its neighbouring indicator before you react to it.
 ---
 
 A KPI can be mathematically correct and its interpretation still be unfair.
@@ -58,7 +58,7 @@ That distinction is not a detail. If the team understands a KPI one way and the 
 
 For a concrete dispute where a delay caused by Outbound was unfairly charged to a driver, I do not have a documented case I can present as fact.
 
-But I have worked with problems that involved more than one stage of the process: missing bags, mixed carts, load organisation and delays at departure. Those situations made me see a KPI differently.
+But I have worked with problems that involved more than one stage of the process: missing bags, mixed trolleys, load organisation and delays at departure. Those situations made me see a KPI differently.
 
 If a driver leaves late because the order was not ready, the problem shows up at departure. But that does not automatically mean the responsibility is the driver's alone. I wrote this in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/) too: the place where a mistake is measured is not necessarily the place where it was born.
 
@@ -104,7 +104,7 @@ If one indicator improves but another gets worse because of the way the improvem
 
 A hotel works with a different set of operational information. During Night Audit I checked the daily reports, room status, arrivals, departures, no-shows, the forecast for the next day and the open matters that could affect the operation. An important part was checking that the information was accurate before closing the day.
 
-But I want to make a distinction. These were operational indicators and checks I used in the work. I do not have it documented that they were all formal KPIs with individual targets for the Night Auditor.
+But I want to make a distinction. These were operational indicators and checks I used in the work. I have no documentation showing that they were all formal KPIs with individual targets for the Night Auditor.
 
 In the hotel I understood even better that a number does not always show the whole situation. You can have an accurate report and an open problem that still needs action. That is why the report has to be linked to the real status, to responsibility and to passing the information on to the next shift.
 

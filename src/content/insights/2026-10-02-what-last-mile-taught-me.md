@@ -32,9 +32,9 @@ checklist:
     - One action came out of it, with an owner and a check tomorrow.
 ---
 
-I have seen last mile from three places. As a parcel courier, as a dispatcher with more than 70 drivers on a shift, and then as Team Leader and Area Manager, with four Shift Leaders, eight dispatchers and around 250 drivers under my responsibility indirectly. The same operation looks completely different from each of them.
+I have seen last mile from three places. As a parcel courier, as a dispatcher with more than 70 drivers on a shift, and then as Team Leader and Area Manager, with four Shift Leaders, eight dispatchers and around 250 drivers indirectly under my responsibility. The same operation looks completely different from each of them.
 
-As a courier, the day is very concrete. You take the route, load the van and go out on the road. There you do not care about the theory of the process. You care whether the parcels are in the right order, whether the route is well organised, whether you have enough time, and what you do when traffic, an address, a customer or a problem with the load breaks your plan. From that place I understood something that is not always visible from the office: a small problem in the warehouse can cost a lot of time to the person on the road.
+As a courier, the day is very concrete. You take the route, load the van and go out on the road. There you do not care about the theory of the process. You care whether the parcels are in the right order, whether the route is well organised, whether you have enough time, and what you do when traffic, an address, a customer or a problem with the load breaks your plan. From that place I understood something that is not always visible from the office: a small problem in the warehouse can cost the person on the road a lot of time.
 
 As a dispatcher I no longer looked only at my own route. I had to check how the routes were split, how the drivers set off, the delays, the live problems and the communication throughout the day. In that position you start to understand that an individual problem can in fact be a system problem.
 

@@ -26,7 +26,7 @@ checklist:
     - label: "Si e kuptoj kur ka gabuar?"
       hint: "Një telefonatë e shoferit, një numër që nuk përputhet, një sy te karroca. Nëse nuk ka përgjigje, nuk ka kontroll."
     - label: "Kush mund ta korrigjojë, kush e miraton, ku shkruhet?"
-      hint: "Tri emra ose role, dhe vendi ku mbetet gjurma e ndryshimit. Nëse nuk i di, mësoji para se të të duhen."
+      hint: "Tre emra ose role, dhe vendi ku mbetet gjurma e ndryshimit. Nëse nuk i di, mësoji para se të të duhen."
     - label: "Cilin korrigjim e bëj me dorë çdo ditë?"
       hint: "I njëjti ndryshim, në të njëjtin vend, prej javësh: një gabim i sistemit që askush nuk e ka raportuar ende."
 # Three moves for tomorrow's shift, shown before the text.
@@ -82,11 +82,11 @@ Puna nuk është të luftosh me sistemin. Një turn ku çdo vendim i sistemit ko
 
 Ka tri mënyra si mund ta gabojë një shef turni këtë. Nuk janë raste që i kam të dokumentuara. Janë modele që i njeh kushdo që ka punuar pranë një sistemi planifikimi.
 
-**Besimi i plotë.** Sistemi e tha, pra është kështu. Kur del keq, përgjigja është “sistemi e caktoi”. Është përgjigja më e rehatshme dhe më e rrezikshmja, sepse ia dorëzon përgjegjësinë diçkaje që nuk mund ta mbajë. Klienti para dyqanit të mbyllur nuk e pyet sistemin.
+**Besimi i plotë.** Sistemi e tha, pra është kështu. Kur del keq, përgjigja është “sistemi e caktoi”. Është përgjigja më e rehatshme dhe më e rrezikshme, sepse ia dorëzon përgjegjësinë diçkaje që nuk mund ta mbajë. Klienti para dyqanit të mbyllur nuk e pyet sistemin.
 
 **Mosbesimi i plotë.** Shoferi me përvojë që e ndryshon rrugën çdo ditë pa thënë asnjë fjalë. Ndoshta ka të drejtë. Por dija e tij mbetet në kokën e tij: sistemi nuk mëson, shoferi i ri nuk mëson, dhe ditën që ai mungon, rruga kthehet te gabimi i parë.
 
-**Korrigjimi në heshtje.** Shefi i turnit që e korrigjon sistemin me dorë çdo mëngjes, në të njëjtat vende, prej javësh. E ka zgjidhur problemin për vete dhe e ka lënë për të gjithë të tjerët. Pikërisht ky është informacioni nga terreni që një sistem si ai i gushtit 2025 kishte nevojë, dhe nuk i arrin kurrë. **Një korrigjim që përsëritet nuk është korrigjim. Është një gabim i sistemit që askush nuk e ka raportuar.**
+**Korrigjimi në heshtje.** Shefi i turnit që e korrigjon sistemin me dorë çdo mëngjes, në të njëjtat vende, prej javësh. E ka zgjidhur problemin për vete dhe e ka lënë për të gjithë të tjerët. Pikërisht ky është informacioni nga terreni që i duhej një sistemi si ai i gushtit 2025, dhe nuk i arrin kurrë. **Një korrigjim që përsëritet nuk është korrigjim. Është një gabim i sistemit që askush nuk e ka raportuar.**
 
 ## Në recepsion: statusi dhe historia
 
@@ -100,9 +100,9 @@ Nuk kam një rast ku sistemi tregonte një status të gabuar. Por mësimi që nx
 
 Për çdo vendim që merr sistemi në turnin tim, sot do të doja të dija tri gjëra. Çfarë di sistemi kur e merr. Çfarë nuk di. Dhe si e kuptoj unë, nga salla, kur ka gabuar.
 
-Dy pyetjet e para përgjigjen një herë dhe shkruhen. E treta është puna. Në last mile përgjigja mund të jetë një telefonatë e shoferit, një karrocë që nuk përputhet me rrugën e saj, një numër në stand-up që nuk përputhet me ditën. Nga distanca, siç shkrova te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/), përgjigja është më e hollë: problemi të arrin vetëm nëse dikush e sheh, e kupton dhe e raporton.
+Dy pyetjet e para marrin përgjigje një herë dhe shkruhen. E treta është puna. Në last mile përgjigja mund të jetë një telefonatë e shoferit, një karrocë që nuk përputhet me rrugën e saj, një numër në stand-up që nuk përputhet me ditën. Nga distanca, siç shkrova te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/), përgjigja është më e hollë: problemi të arrin vetëm nëse dikush e sheh, e kupton dhe e raporton.
 
-Nëse për një vendim nuk e përgjigj dot pyetjen e tretë, nuk jam duke e drejtuar atë pjesë të operacionit. Jam duke e ndjekur.
+Nëse për një vendim nuk i përgjigjem dot pyetjes së tretë, nuk jam duke e drejtuar atë pjesë të operacionit. Jam duke e ndjekur.
 
 Dhe pas pyetjeve vjen rregulli. Një vendim i sugjeruar nga sistemi nuk e heq përgjegjësinë njerëzore për ta kontrolluar, sidomos kur ka shenja se diçka nuk shkon. Por kjo vlen vetëm nëse është e qartë kush mund ta korrigjojë vendimin, kush e miraton ndryshimin, dhe si regjistrohet problemi. Pa këto tri, “kontrolloje” do të thotë “korrigjoje në heshtje”.
 
@@ -116,6 +116,6 @@ Esetë që vijnë në këtë seri janë për këtë këmbim: rruga që shoferi n
 
 ## Kush vendos çfarë
 
-Kartela më poshtë ka një rresht për çdo vendim që merr sistemi në turnin tënd. Për secilin: çfarë di sistemi, çfarë nuk di, si e kupton ti kur ka gabuar, dhe kush mund ta korrigjojë, kush e miraton, ku shkruhet. Rreshti i fundit është për korrigjimin që e bën me dorë çdo ditë, ai që duhej raportuar prej kohësh. [KPI Diagnostic](/sq/tools/kpi-diagnostic/) ndihmon me numrat që të tregon sistemi: çfarë të thotë një numër i kuq para se të veprosh mbi të.
+Kartela më poshtë ka një rresht për çdo vendim që merr sistemi në turnin tënd. Për secilin: çfarë di sistemi, çfarë nuk di, si e kupton ti kur ka gabuar, dhe kush mund ta korrigjojë, kush e miraton, ku shkruhet. Rreshti i fundit është për korrigjimin që e bën me dorë çdo ditë, ai që duhej raportuar prej kohësh. [Diagnostikimi i KPI-së](/sq/tools/kpi-diagnostic/) ndihmon me numrat që të tregon sistemi: çfarë të thotë një numër i kuq para se të veprosh mbi të.
 
 **Sistemi vendos i pari. Ajo që të mbetet ty është pjesa që atij nuk i është thënë kurrë, dhe emri që përgjigjet për të gjitha.**

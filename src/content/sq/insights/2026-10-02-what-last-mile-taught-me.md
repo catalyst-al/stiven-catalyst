@@ -10,7 +10,7 @@ deck: 'Eseja e dytë e serisë “Dhjetë vite pranë punës”: loading time, d
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Lexoji së bashku kohën e ngarkimit, vonesat, porositë e paplota dhe dëmtimet e sotme, jo një nga një.
-  - Merr numrin që të mashtron më shumë dhe ndiqe një rast të tij deri para nisjes.
+  - Merr numrin që të mashtron më shumë dhe ndiq një rast të tij deri para nisjes.
   - "Ktheje presionin në pesë pyetje për ekipin: ku, sa, cili shkak, çfarë tani, çfarë nesër."
 checklist:
   title: Rishikimi i KPI-ve që nuk është vetëm raportim
@@ -18,12 +18,12 @@ checklist:
   items:
     - "Të katër numrat u lexuan së bashku: koha e ngarkimit, vonesat, të paplotat, dëmtimet."
     - Për çdo numër të kuq dimë nga cilat rrugë ose faza erdhi.
-    - Shkaku që përsëritet është emëruar, jo vetëm numëruar.
+    - Shkaku që përsëritet është emërtuar, jo vetëm numëruar.
     - Është e qartë cila pjesë e problemit është në duart tona.
     - Doli një veprim, me një përgjegjës dhe një kontroll nesër.
 ---
 
-Last mile-in e kam parë nga tri vende. Si shpërndarës pakosh, si dispatcher me mbi 70 shoferë në një turn, dhe pastaj si Team Leader dhe Area Manager, me katër Shift Leaders, tetë dispecerë dhe rreth 250 shoferë nën përgjegjësinë time në mënyrë indirekte. I njëjti operacion duket krejt ndryshe nga secili vend.
+Last mile-in e kam parë nga tri vende. Si shpërndarës pakosh, si dispatcher me mbi 70 shoferë në një turn, dhe pastaj si Team Leader dhe Area Manager, me katër Shift Leaders, tetë dispeçerë dhe rreth 250 shoferë nën përgjegjësinë time në mënyrë indirekte. I njëjti operacion duket krejt ndryshe nga secili vend.
 
 Si shpërndarës, dita është shumë konkrete. Merr itinerarin, ngarkon makinën dhe del në rrugë. Aty nuk të intereson teoria e procesit. Të intereson nëse pakot janë në rendin e duhur, nëse rruga është organizuar mirë, nëse ke kohë të mjaftueshme dhe çfarë bën kur trafiku, një adresë, një klient ose një problem me ngarkesën ta prish planin. Nga ky vend kuptova diçka që nga zyra nuk duket gjithmonë: një problem i vogël në magazinë mund t'i kushtojë shumë kohë njeriut që është në rrugë.
 

@@ -48,7 +48,7 @@ Was it a bad day or a problem? From that number alone, I cannot say. And that is
 
 In last mile we followed Delay, Damage, Incomplete and Loading Time every day. The results were discussed in the daily stand-up, and explanations were asked for whenever something was off. We also analysed them by DSP and by operational problem.
 
-I do not know whether we waited to see if a result repeated before acting, or always stepped in straight away. I do not know whether I used a statistical control chart myself, with control limits. For daily or weekly trends in Excel or Power BI, I do not know for sure. And I do not want to present knowing the Six Sigma method as proof that I used it in that job.
+I do not know whether we waited to see if a result repeated before acting, or always stepped in straight away. I do not know whether I used a statistical control chart myself, with control limits. Whether we followed daily or weekly trends in Excel or Power BI, I do not know for sure. And I do not want to present knowing the Six Sigma method as proof that I used it in that job.
 
 I also do not have a documented case where a bad day was treated as a crisis and everything was back to normal the next day. Nor the opposite: a slow decline that was spotted late.
 

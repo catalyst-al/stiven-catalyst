@@ -79,7 +79,7 @@ Die zweite:
 
 **Incomplete darf nicht nur als negative Zahl oder als Fehler des Fahrers gesehen werden. Es soll uns helfen zu verstehen, wo das Produkt oder die Information verloren gegangen ist und wie wir verhindern, dass es wieder passiert.**
 
-Das ist der Unterschied zu Schäden. Ein Schaden ist, wenn er entdeckt wird, schon passiert. Eine fehlende Tasche ist, wenn sie an der Rampe entdeckt wird, noch nur ein Fehlbestand. Sie ist noch keine unvollständige Bestellung beim Kunden. Deshalb ist die wertvollste Kontrolle nicht die, die Fälle zählt, nachdem sie passiert sind. Es ist die, die den Fehlbestand vor der Abfahrt auffängt.
+Das ist der Unterschied zu Schäden. Ein Schaden ist, wenn er entdeckt wird, schon passiert. Eine fehlende Tasche ist, wenn sie an der Rampe entdeckt wird, erst ein Fehlbestand. Sie ist noch keine unvollständige Bestellung beim Kunden. Deshalb ist die wertvollste Kontrolle nicht die, die Fälle zählt, nachdem sie passiert sind. Es ist die, die den Fehlbestand vor der Abfahrt auffängt.
 
 ## Die Kontrolle vor der Abfahrt
 

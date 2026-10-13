@@ -37,7 +37,7 @@ Në hotel kam punuar shumë më drejtpërdrejt me checklist dhe SOP për procese
 
 Fillon te puna reale.
 
-Së pari dua të kuptoj çfarë rezultati duhet të dalë në fund të procesit. Pastaj shoh çfarë ndodh realisht në turn, ku ndodhin gabimet, çfarë harrohet më shpesh dhe cilat hapa varen nga njëri-tjetri. Vetëm pas kësaj e kthej procesin në një strukturë.
+Së pari dua të kuptoj çfarë rezultati duhet të dalë në fund të procesit. Pastaj shoh çfarë ndodh realisht në turn, ku ndodhin gabimet, çfarë harrohet më shpesh dhe cilët hapa varen nga njëri-tjetri. Vetëm pas kësaj e kthej procesin në një strukturë.
 
 Përpiqem të heq gjithçka që nuk i duhet personit në momentin kur po punon. Nëse një dokument ka shumë teori, por nuk të ndihmon kur ke disa gjëra njëkohësisht për të zgjidhur, për mua nuk është SOP e mirë.
 
@@ -57,7 +57,7 @@ Kjo është një nga arsyet pse më vonë fillova të mendoj më shumë për më
 
 Një SOP nuk mund të trajtohet si dokument që shkruhet një herë dhe pastaj harrohet.
 
-Procesi ndryshon. Sistemet ndryshojnë. Ekipi ndryshon. Një ekran në software mund të ndryshojë. Një përgjegjësi mund të kalojë te një departament tjetër. Dhe nganjëherë puna vetë të tregon se një hap që dukej logjik në dokument nuk është aq praktik në turn.
+Procesi ndryshon. Sistemet ndryshojnë. Ekipi ndryshon. Një ekran në softuer mund të ndryshojë. Një përgjegjësi mund të kalojë te një departament tjetër. Dhe nganjëherë puna vetë të tregon se një hap që dukej logjik në dokument nuk është aq praktik në turn.
 
 Prandaj, për mua, SOP-ja duhet të përditësohet sa herë që ndryshon realiteti që ajo përshkruan. Personi që e njeh procesin duhet të sinjalizojë ndryshimin, dhe versioni që përdor ekipi duhet të korrigjohet, që të mos vazhdojnë të qarkullojnë dy mënyra të ndryshme pune.
 

@@ -58,7 +58,7 @@ At first the need was personal. I was learning new processes and wanted to organ
 
 I developed the project during September 2026, in the period when I was working through training and Night Audit processes. I do not have the exact date of the first version.
 
-The problem was very concrete. The information I needed existed, but it was scattered across checklists, documents, screenshots, videos and notes. The checklist told me what had to be done, while another document or a colleague showed me how. To understand one procedure, I sometimes had to move from one material to the next.
+The problem was very concrete. The information I needed existed, but it was scattered across checklists, documents, screenshots, videos and notes. The checklist told me what had to be done, while another document or a colleague showed me how. To understand one procedure, I sometimes had to move from one source to the next.
 
 This follows directly from the first essay of the series, [The first 30 days](/insights/the-first-30-days/). At first I was trying to understand the operation. Then I began to build a way for the information not to stay scattered. In [A good SOP is not a document](/insights/a-good-sop-is-not-a-document/) I wrote about why. Here I want to show how.
 

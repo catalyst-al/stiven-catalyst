@@ -5,7 +5,7 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "Das System entscheidet zuerst. Was der Person in der Schicht bleibt, ist der Teil, den man ihm nie gesagt hat, und der Name, der dafür verantwortet."
+summary: "Das System entscheidet zuerst. Was der Person in der Schicht bleibt, ist der Teil, den man ihm nie gesagt hat, und der Name, der dafür einsteht."
 teaser: Das System entscheidet zuerst. Der Name in der Schicht ist trotzdem Ihrer.
 description: "Was die Systeme in jeder Schicht wissen und was man ihnen nie gesagt hat, drei Arten, wie eine Schichtleitung es falsch machen kann, drei Fragen zu jeder Entscheidung des Systems, und eine Karte dafür, wer was entscheidet."
 deck: "Der erste Essay der Reihe „Das System ist schneller als Sie“: was die Systeme in jeder Schicht wissen und was man ihnen nie gesagt hat, drei Arten, wie eine Schichtleitung es falsch machen kann, und eine Karte dafür, wer in Ihrer Schicht was entscheidet."
@@ -33,7 +33,7 @@ checklist:
 firstMove:
   - "Vor der Schicht ein Satz: welche Entscheidung heute das System trifft und welche Sie."
   - "In der ersten Stunde eine Entscheidung des Systems selbst ansehen. Nicht um sie zu ändern, um sie zu verstehen."
-  - "Am Ende der Schicht den einen Fall aufschreiben, in dem das System falsch lag, woran man es gemerkt hat, und wem Sie es gesagt haben."
+  - "Am Ende der Schicht den einen Fall aufschreiben, in dem das System falsch lag, woran man es gemerkt hat und wem Sie es gesagt haben."
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: decision-split
 ---
@@ -72,7 +72,7 @@ Stellen Sie sich eine Tour vor, die das System für einen neuen Fahrer geplant h
 
 Das System hat nicht versagt. Es hat getan, wofür es gebaut wurde: Strecken berechnet. Es wusste nicht, dass der Laden Öffnungszeiten hat, weil es ihm niemand gesagt hat. Ein Fahrer, der das Gebiet kennt, hätte es in einer Sekunde gesehen. Der neue Fahrer hat dem Bildschirm geglaubt, weil der Bildschirm schneller und sicherer war als das eigene Urteil.
 
-Die Arbeit ist nicht, gegen das System zu kämpfen. Eine Schicht, in der jede Entscheidung des Systems von Hand geprüft wird, ist nicht sicherer, nur langsamer. Die Arbeit ist, die Fälle zu erkennen, in denen das System falsch liegt, wenn sie kommen. Diese Fälle haben oft dieselbe Form: Das System wusste etwas nicht, was der Boden wusste. Die Öffnungszeiten. Dass das zweite Tor kaputt ist. Dass der Gast in diesem Zimmer derjenige ist, der sich gestern beschwert hat. Dass der Beutel mit diesem Code auf dem falschen Wagen war, obwohl der Scan ja gesagt hat.
+Die Arbeit ist nicht, gegen das System zu kämpfen. Eine Schicht, in der jede Entscheidung des Systems von Hand geprüft wird, ist nicht sicherer, nur langsamer. Die Arbeit ist, die Fälle zu erkennen, in denen das System falsch liegt, wenn sie kommen. Diese Fälle haben oft dieselbe Form: Das System wusste etwas nicht, was der Boden wusste. Die Öffnungszeiten. Dass das zweite Tor kaputt ist. Dass der Gast in diesem Zimmer derjenige ist, der sich gestern beschwert hat. Dass die Tasche mit diesem Code auf dem falschen Wagen war, obwohl der Scan ja gesagt hat.
 
 **Das System ist schneller als Sie in allem, was man ihm gesagt hat. Es weiß nichts von dem, was man ihm nicht gesagt hat. Und das meiste, was der Boden weiß, hat nie jemand irgendwem gesagt.**
 
@@ -110,12 +110,12 @@ Und nach den Fragen kommt die Regel. Eine Entscheidung, die das System vorschlä
 
 Das System mag falsch gelegen haben. Der Name in der Schicht ist Ihrer. Das ist nicht ungerecht. Es ist die Arbeit.
 
-Das Ziel ist nicht, zwischen System und Erfahrung zu wählen. Das Ziel ist ein Prozess, in dem das System Ihnen hilft, schneller zu arbeiten, und Menschen einen Weg haben, zu erkennen, zu melden und zu korrigieren, was das System nicht versteht. Das System gibt Ihnen Geschwindigkeit, Gedächtnis und Zahlen, die Sie allein nie hätten. Im Gegenzug geben Sie ihm, was es nicht hat: Augen am Boden, eine Frage, wenn etwas keinen Sinn ergibt, und einen Namen, der verantwortet.
+Das Ziel ist nicht, zwischen System und Erfahrung zu wählen. Das Ziel ist ein Prozess, in dem das System Ihnen hilft, schneller zu arbeiten, und Menschen einen Weg haben, zu erkennen, zu melden und zu korrigieren, was das System nicht versteht. Das System gibt Ihnen Geschwindigkeit, Gedächtnis und Zahlen, die Sie allein nie hätten. Im Gegenzug geben Sie ihm, was es nicht hat: Augen am Boden, eine Frage, wenn etwas keinen Sinn ergibt, und einen Namen, der dafür einsteht.
 
 Die Essays, die in dieser Reihe noch kommen, handeln von diesem Tausch: die Tour, die der Fahrer nicht versteht, der Scanner, der Zeuge ist und nicht Richter, das Dashboard, das vor Ihnen rot wird, der Bericht, den eine Maschine geschrieben hat, und die Nacht, in der das System ausfiel und wir sahen, was das Team wirklich wusste.
 
 ## Wer entscheidet was
 
-Die Karte unten hat eine Zeile für jede Entscheidung, die das System in Ihrer Schicht trifft. Für jede: was das System weiß, was es nicht weiß, woran Sie merken, dass es falsch liegt, und wer es korrigieren kann, wer es genehmigt, wo es festgehalten wird. Die letzte Zeile ist für die Korrektur, die Sie jeden Tag von Hand machen, die schon lange hätte gemeldet werden müssen. [KPI Diagnostic](/de/tools/kpi-diagnostic/) hilft bei den Zahlen, die das System Ihnen zeigt: was eine rote Zahl Ihnen sagt, bevor Sie danach handeln.
+Die Karte unten hat eine Zeile für jede Entscheidung, die das System in Ihrer Schicht trifft. Für jede: was das System weiß, was es nicht weiß, woran Sie merken, dass es falsch liegt, und wer es korrigieren kann, wer es genehmigt, wo es festgehalten wird. Die letzte Zeile ist für die Korrektur, die Sie jeden Tag von Hand machen, die schon lange hätte gemeldet werden müssen. [KPI-Diagnose](/de/tools/kpi-diagnostic/) hilft bei den Zahlen, die das System Ihnen zeigt: was eine rote Zahl Ihnen sagt, bevor Sie danach handeln.
 
-**Das System entscheidet zuerst. Was Ihnen bleibt, ist der Teil, den man ihm nie gesagt hat, und der Name, der für alles verantwortet.**
+**Das System entscheidet zuerst. Was Ihnen bleibt, ist der Teil, den man ihm nie gesagt hat, und der Name, der für alles einsteht.**

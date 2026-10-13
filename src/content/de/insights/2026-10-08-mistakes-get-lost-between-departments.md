@@ -58,13 +58,13 @@ Auf der letzten Meile waren die Übergabepunkte noch sichtbarer.
 
 Outbound bereitete die Aufträge vor. Lager und Rampe hatten ihren Teil an der physischen Organisation. Last Mile koordinierte die Abfahrt. Die DSP-Fahrer übernahmen die Verantwortung für Transport und Zustellung.
 
-Ich hatte mit Fällen zu tun, in denen Bags fehlten oder verspätet ankamen, Wagen schlecht organisiert waren, Ladungen vermischt waren und es beim Beladen Verzögerungen gab.
+Ich hatte mit Fällen zu tun, in denen Taschen fehlten oder verspätet ankamen, Wagen schlecht organisiert waren, Ladungen vermischt waren und es beim Beladen Verzögerungen gab.
 
-Ein konkretes Beispiel ist ein fehlender Bag beim Beladen. Die Regel war, dass der Fahrer den Team Leader informiert und nach Verfahren wartet, ohne den Wagen aus dem festgelegten Bereich zu bringen.
+Ein konkretes Beispiel ist eine fehlende Tasche beim Beladen. Die Regel war, dass der Fahrer den Team Leader informiert und nach Verfahren wartet, ohne den Wagen aus dem festgelegten Bereich zu bringen.
 
 Diese Regel regelt den Moment. Aber für mich muss das Problem auch früher betrachtet werden.
 
-Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die Verspätung bei der Abfahrt. Im Bericht kann sie wie eine Verspätung des Fahrers aussehen. Das heißt aber nicht automatisch, dass der Fahrer die Ursache ist. Eine Verspätung kann mehrere Ursachen haben: verspätete Vorbereitung, fehlende Bags, die Organisation der Rampe oder die Bereitschaft des Fahrers.
+Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die Verspätung bei der Abfahrt. Im Bericht kann sie wie eine Verspätung des Fahrers aussehen. Das heißt aber nicht automatisch, dass der Fahrer die Ursache ist. Eine Verspätung kann mehrere Ursachen haben: verspätete Vorbereitung, fehlende Taschen, die Organisation der Rampe oder die Bereitschaft des Fahrers.
 
 **Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.**
 
@@ -80,7 +80,7 @@ Ich habe auch keine bestätigte formale Matrix, die jeden Übergang zwischen Abt
 
 ## „Ich habe Bescheid gegeben“ reicht nicht
 
-Für mich muss eine gute Übergabe zwei Dinge klar machen: **wer dafür verantwortlich ist, die Arbeit zu übergeben**, und **wer dafür verantwortlich ist, sie anzunehmen**.
+Für mich muss eine gute Übergabe zwei Dinge klarmachen: **wer dafür verantwortlich ist, die Arbeit zu übergeben**, und **wer dafür verantwortlich ist, sie anzunehmen**.
 
 Es reicht nicht, dass die erste Abteilung sagt: „Ich habe Bescheid gegeben.“
 

@@ -45,7 +45,7 @@ The report showed something very simple: the customer had not received their ful
 
 But when you check the physical process, the picture changes.
 
-In one of the cases we documented, a bag from one section of the warehouse was missing. We also had cases where the bags showed as scanned, but the wrong bag had been picked up or delivered. In other cases, the warehouse turned up mixed trolleys, and even a full trolley missing from the normal loading flow.
+In one of the cases we documented, a bag from one section of the warehouse was missing. We also had cases where the bags showed as scanned, but the wrong bag had been picked up or delivered. In other cases, we found mixed trolleys in the warehouse, and even a full trolley missing from the normal loading flow.
 
 The dashboard said: incomplete delivery. The floor made you ask something else. Was it really the driver's mistake at the customer's door, or had the order left the warehouse incomplete?
 
@@ -63,7 +63,7 @@ For chilled and frozen there were also concrete rules. Chilled products had to b
 
 We also had ramp audits and direct checks of the process. But the floor is not only a place to look. It is a place to reconstruct what happened.
 
-When a bag was missing, the questions were simple. Where was the bag last seen? Was it in the trolley? Had it been scanned? Was something missing before departure? Who noticed the problem? Were the route and the trolley correct? Had there been waiting or a problem during loading?
+When a bag was missing, the questions were simple. Where was the bag last seen? Was it in the trolley? Had it been scanned? Was something missing before departure? Who noticed the problem? Were the route and the trolley correct? Had there been a wait or a problem during loading?
 
 With delays it was the same. We also checked the reasons the drivers gave. There were cases where a driver reported traffic, parking or a traffic light, and we had to see whether that matched reality. In some cases we had photos or screenshots of the situation on the road.
 

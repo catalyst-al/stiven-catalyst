@@ -49,7 +49,7 @@ Am Anfang war der Bedarf persönlich. Ich lernte neue Abläufe und wollte die In
 
 ## Warum ich angefangen habe
 
-Ich habe das Projekt im September 2026 entwickelt, in der Zeit, in der ich mich mit Einarbeitung und den Abläufen des Night Audit beschäftigt habe. Das genaue Datum der ersten Version habe ich nicht.
+Ich habe das Projekt im September 2026 entwickelt, in der Zeit, in der ich mich mit Einarbeitung und den Abläufen des Night Audits beschäftigt habe. Das genaue Datum der ersten Version habe ich nicht.
 
 Das Problem war sehr konkret. Die Information, die ich brauchte, war da, aber verteilt auf Checklisten, Dokumente, Screenshots, Videos und Notizen. Die Checkliste sagte mir, was zu tun war, während ein anderes Dokument oder ein Kollege mir zeigte, wie. Um ein Verfahren zu verstehen, musste ich manchmal von einem Material zum nächsten wechseln.
 

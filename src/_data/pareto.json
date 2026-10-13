@@ -361,7 +361,7 @@
    "group": "logistics",
    "name": {
     "en": "Last-mile incidents (root cause)",
-    "de": "Vorfälle letzte Meile (Grundursache)",
+    "de": "Vorfälle auf der letzten Meile (Grundursache)",
     "sq": "Incidentet e miljes së fundit (shkaku rrënjësor)"
    },
    "what": {
@@ -1053,7 +1053,7 @@
    "causes": [
     {
      "en": "No work, waiting for orders",
-     "de": "Keine Arbeit, warten auf Aufträge",
+     "de": "Keine Arbeit, Warten auf Aufträge",
      "sq": "S'ka punë, pritje për porosi",
      "w": 28,
      "v": [
@@ -1747,7 +1747,7 @@
    },
    "what": {
     "en": "What fails most often in room inspections?",
-    "de": "Was fällt bei Zimmerkontrollen am häufigsten durch?",
+    "de": "Was wird bei Zimmerkontrollen am häufigsten beanstandet?",
     "sq": "Çfarë del më shpesh me mangësi në inspektimin e dhomave?"
    },
    "measure": "count",
