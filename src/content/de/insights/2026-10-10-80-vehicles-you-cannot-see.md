@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Wenn man das Fahrzeug nicht sieht, braucht man einen verlässlichen Weg zu verstehen, was mit ihm passiert.
 teaser: An der Rampe sieht man ein Problem mit eigenen Augen. Aus der Ferne muss man es oft über die Informationen verstehen, die man bekommt.
-description: "Remote-Koordination von 80+ Fahrzeugen und 100+ Fahrern: was ich belegen kann und was nicht, was man verliert und was man gewinnt, wenn man nicht an der Rampe ist, warum Information selbst zur Arbeit wird, und fünf Fragen für ein Problem, das man nicht sieht."
+description: "Remote-Koordination von 80+ Fahrzeugen und 100+ Fahrern: was man fern der Rampe verliert und gewinnt, warum Information zur Arbeit wird, und fünf Fragen."
 deck: 'Der siebte Essay der Reihe „Verbesserung, die hält“: Remote-Koordination von 80+ Fahrzeugen, was man verliert und was man gewinnt, wenn man nicht an der Rampe ist, warum die Qualität der Information selbst zur Arbeit wird, und fünf Fragen für ein Problem, das man nicht sieht.'
 relatedTools:
   - /tools/cx-control-tower/
@@ -72,7 +72,7 @@ Aus der Ferne werden drei Dinge noch wichtiger als an der Rampe: die Qualität d
 
 **Wenn man das Fahrzeug nicht sieht, braucht man einen verlässlichen Weg zu verstehen, was mit ihm passiert.**
 
-An der Rampe kann man unklare Informationen ausgleichen, indem man hingeht und nachsieht. Aus der Ferne geht das nicht. Unklare Information bleibt unklar, und die Entscheidung, die man darauf trifft, bleibt genauso unsicher.
+An der Rampe kann man unklare Informationen ausgleichen, indem man hingeht und nachsieht. Aus der Ferne geht das nicht. Unklare Information bleibt unklar, und die Entscheidung, die man auf ihrer Grundlage trifft, bleibt genauso unsicher.
 
 Für die Kommunikation habe ich keine dokumentierten Regeln, die ich selbst aufgestellt habe: wann ich anrufe, wann ich schreibe, wann ich eskaliere. Aber als Grundsatz glaube ich, dass gute Kommunikation kurz und klar sein und sagen sollte, welche Maßnahme nötig ist. Eine Nachricht, die drei Rückfragen braucht, um verstanden zu werden, hat die Zeit verloren, die sie sparen sollte.
 
@@ -90,7 +90,7 @@ Eine dokumentierte persönliche Methode, mit der ich Probleme erkenne, bevor sie
 
 **Remote-Koordination heißt nicht einfach, den Fahrern Anweisungen zu geben. Es heißt, eine Art der Kommunikation aufzubauen, in der Probleme sichtbar werden, Verantwortung klar ist und Entscheidungen rechtzeitig getroffen werden.**
 
-Das verbindet sich mit dieser ganzen Reihe. Eine Verbesserung hält, wenn sie nicht davon abhängt, dass jemand da ist. In der Remote-Koordination gibt es dieses Dasein gar nicht. Es bleibt nur das System: wer das Problem sieht, wie er es sagt, wer es übernimmt, wann es abgeschlossen wird.
+Das verbindet sich mit dieser ganzen Reihe. Eine Verbesserung hält, wenn sie nicht davon abhängt, dass jemand da ist. In der Remote-Koordination gibt es diese Anwesenheit gar nicht. Es bleibt nur das System: wer das Problem sieht, wie er es sagt, wer es übernimmt, wann es abgeschlossen wird.
 
 Das Blatt unten können Sie für ein Problem ausfüllen, das Sie nicht sehen, und kopieren. Der [Last-Mile CX Control Tower](/de/tools/cx-control-tower/) sammelt die Fälle, Maßnahmen und Ursachen vieler Touren in einer Ansicht, damit der Betrieb als einer gesehen wird und nicht als hundert Telefonate.
 

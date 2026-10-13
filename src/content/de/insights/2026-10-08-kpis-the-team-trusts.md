@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist. Es ist die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
-description: "Wie man eine Kennzahl baut, der Menschen vertrauen: Damage, Incomplete, Delay und Loading Time auf der letzten Meile, Ergebnis und Grund, warum kein Wert allein gelesen wird, und die Kennzahlenkarte mit sechs Zeilen."
+description: "Eine Kennzahl, der Menschen vertrauen: Damage, Incomplete, Delay und Loading Time auf der letzten Meile, Ergebnis und Grund, und die Kennzahlenkarte."
 teaser: Eine Kennzahl kann mathematisch richtig sein und trotzdem unfair gelesen werden.
 deck: 'Der sechste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: eine klare Definition, faire Verantwortung und die Handlung nach dem Ergebnis, mit der Kennzahlenkarte, die man ausfüllt, bevor man zu messen beginnt.'
 relatedTools:
@@ -55,7 +55,7 @@ Dieser Unterschied ist kein Detail. Wenn das Team eine Kennzahl auf die eine Wei
 
 Für einen konkreten Streit, in dem eine von Outbound verursachte Verspätung unfair einem Fahrer angerechnet wurde, habe ich keinen dokumentierten Fall, den ich als Tatsache darstellen kann.
 
-Aber ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Bags, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
+Aber ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Taschen, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
 
 Wenn ein Fahrer verspätet abfährt, weil der Auftrag nicht bereit war, zeigt sich das Problem bei der Abfahrt. Das heißt aber nicht automatisch, dass die Verantwortung allein beim Fahrer liegt. Das habe ich auch in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 
@@ -73,7 +73,7 @@ Mir war wichtig, zwei Arten von Information zu unterscheiden.
 
 Die eine zeigte **das Ergebnis**: wie viele Verspätungen, wie viele Schäden, wie viele unvollständige Aufträge.
 
-Die andere zeigte **den Grund**: was im Prozess passiert ist, das zu diesem Ergebnis geführt hat.
+Die andere zeigte **den Grund**: was im Prozess passiert ist und zu diesem Ergebnis geführt hat.
 
 Ohne den zweiten Teil können Zahlen zu Berichten ohne Lernen werden.
 
@@ -91,7 +91,7 @@ Ich glaube, Menschen haben mehr Grund, einer Kennzahl zu vertrauen, wenn sie gen
 
 Für eine konkrete Episode, in der eine Kennzahl zu falschem Verhalten geführt hat, habe ich keinen Fall, den ich selbst erlebt habe und sicher beschreiben kann. Aber ich sehe das Risiko klar.
 
-Wenn eine Organisation nur die Geschwindigkeit des Beladens misst, ohne sie mit Qualität und Sicherheit zu verbinden, kann sie einen Anreiz schaffen, dass Menschen hetzen. Das ist ein mögliches Beispiel, kein Vorfall, den ich als geschehen behaupte.
+Wenn eine Organisation nur die Geschwindigkeit des Beladens misst, ohne sie mit Qualität und Sicherheit zu verbinden, kann sie einen Anreiz schaffen, dass Menschen hetzen. Das ist ein mögliches Beispiel, kein Vorfall, den ich als Tatsache darstelle.
 
 Deshalb würde ich Loading Time nie getrennt von Damage, Incomplete und Sicherheit bewerten.
 
@@ -103,7 +103,7 @@ Im Hotel arbeitet man mit anderen betrieblichen Informationen. Im Night Audit ha
 
 Aber ich möchte unterscheiden. Das waren betriebliche Werte und Kontrollen, die ich in der Arbeit genutzt habe. Ich habe nicht dokumentiert, dass sie alle formale KPIs mit individuellen Zielen für den Night Auditor waren.
 
-Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze Lage zeigt. Man kann einen korrekten Bericht haben und ein offenes Problem, das noch Handlung braucht. Deshalb muss der Bericht mit dem tatsächlichen Status, mit der Verantwortung und mit der Übergabe an die nächste Schicht verbunden sein.
+Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze Lage zeigt. Man kann einen korrekten Bericht haben und ein offenes Problem, das noch gelöst werden muss. Deshalb muss der Bericht mit dem tatsächlichen Status, mit der Verantwortung und mit der Übergabe an die nächste Schicht verbunden sein.
 
 ## Die Kennzahlenkarte
 
@@ -114,7 +114,7 @@ Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie
 3. **Wer kann das Ergebnis beeinflussen?** Welcher Teil in der Hand der Person liegt und welcher im Prozess, in einer anderen Stufe oder in einer anderen Abteilung.
 4. **Was ist der Standard?** Was als gutes Ergebnis gilt, und warum.
 5. **Welcher Kontext muss geprüft werden?** Welche anderen Werte mit ihr gelesen werden, damit die Verbesserung des einen nicht die Verschlechterung des anderen verdeckt.
-6. **Was tun wir, wenn sie abweicht?** Wer es sieht, wann, und was der erste Schritt ist.
+6. **Was tun wir, wenn sie abweicht?** Wer es sieht, wann und was der erste Schritt ist.
 
 Die Karte unten können Sie direkt hier ausfüllen und für Ihr Team kopieren.
 

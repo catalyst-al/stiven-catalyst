@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Një porosi mund të mbërrijë jo e plotë te klienti, por problemi mund të ketë filluar shumë përpara dorëzimit.
 teaser: Kur mungonte një bag, rregulli ishte i qartë. Shoferi njofton Team Leader-in, dhe trolley nuk lëviz nga zona e vet derisa problemi të zgjidhet.
-description: "Incomplete si KPI në last mile: çfarë kam të dokumentuar dhe çfarë jo, rregulli kur mungonte një bag, pse një porosi jo e plotë ka një histori para derës së klientit, dhe kontrolli para nisjes në pesë pika."
+description: "Incomplete si KPI në last mile: rregulli kur mungonte një bag, pse një porosi jo e plotë ka një histori para derës së klientit, dhe kontrolli para nisjes."
 deck: 'Eseja e dytë e serisë “Përmirësimi që mbahet”: Incomplete si KPI në last mile, rregulli kur mungonte një bag, pse një porosi jo e plotë ka një histori para derës së klientit, dhe kontrolli para nisjes në pesë pika.'
 relatedTools:
   - /tools/incomplete-control/
@@ -51,7 +51,7 @@ Nuk e di me saktësi si regjistrohej një porosi jo e plotë: nga ankesa e klien
 
 ## Çfarë gjenim në magazinë
 
-Dy probleme i kam të konfirmuara: bag-e që mungonin, dhe trolley të përziera ose të organizuara gabim.
+Dy probleme i kam të konfirmuara: bag-e që mungonin, dhe trolley të përzier ose të organizuar gabim.
 
 Asnjëri prej tyre nuk lind te dera e klientit. Bag-u që mungon ka munguar diku më herët: në përgatitje, në trolley ose në ngarkim. Trolley i përzier është organizuar keq para se të arrijë te shoferi. Por nëse askush nuk e ndal, të dyja përfundojnë në të njëjtin rresht të raportit: porosi jo e plotë te klienti.
 

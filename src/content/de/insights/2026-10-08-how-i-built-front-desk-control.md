@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Eine SOP wird erst dann wirklich nützlich, wenn der Mensch, der sie braucht, sie im richtigen Moment finden, verstehen und anwenden kann.
-description: "Der konkrete Fall der Reihe: wie ich verstreute Checklisten, Dokumente, Screenshots und Notizen in eine Arbeitsseite im Browser für Front Office und Night Audit verwandelt habe, was ich weggelassen habe, was ich nicht behaupten kann und was ich heute anders machen würde."
+description: "Der konkrete Fall: wie aus verstreuten Checklisten und Notizen eine Arbeitsseite für Front Office und Night Audit wurde und was ich heute ändern würde."
 teaser: Ich habe es nicht gebaut, weil Dokumente fehlten. Ich habe angefangen, weil die Dokumente da waren, die Information, die ich bei der Arbeit brauchte, aber verstreut war.
 deck: 'Der neunte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: ein echtes Projekt, Schritt für Schritt entwickelt, als Arbeit im Werden dargestellt und nicht als gemessener Erfolg, mit der Karte, um aus einem SOP-Ordner ein Arbeitswerkzeug zu machen.'
 checklist:
@@ -49,7 +49,7 @@ Am Anfang war der Bedarf persönlich. Ich lernte neue Abläufe und wollte die In
 
 ## Warum ich angefangen habe
 
-Ich habe das Projekt im September 2026 entwickelt, in der Zeit, in der ich mich mit Einarbeitung und den Abläufen des Night Audit beschäftigt habe. Das genaue Datum der ersten Version habe ich nicht.
+Ich habe das Projekt im September 2026 entwickelt, in der Zeit, in der ich mich mit Einarbeitung und den Abläufen des Night Audits beschäftigt habe. Das genaue Datum der ersten Version habe ich nicht.
 
 Das Problem war sehr konkret. Die Information, die ich brauchte, war da, aber verteilt auf Checklisten, Dokumente, Screenshots, Videos und Notizen. Die Checkliste sagte mir, was zu tun war, während ein anderes Dokument oder ein Kollege mir zeigte, wie. Um ein Verfahren zu verstehen, musste ich manchmal von einem Material zum nächsten wechseln.
 

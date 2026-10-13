@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Eine Kennzahl zeigt Ihnen, dass Sie ein Problem haben. Sie zeigt nicht automatisch, wo es angefangen hat und wer es verursacht hat.
-description: "Damage als Kennzahl auf der letzten Meile: was ich belegen kann und was nicht, warum eine Quote nicht zeigt, wo ein Schaden entsteht, eine Zahl senken oder Schäden verhindern, und die Prüfung eines Schadensfalls in vier Fragen."
+description: "Damage als Kennzahl der letzten Meile: warum eine Quote nicht zeigt, wo Schaden entsteht, eine Zahl senken oder Schaden verhindern, und vier Prüffragen."
 teaser: 1,06 % bei einem Ziel von 0,8 %. Die Zahl stimmte. Aber sie sagte nicht, ob der Schaden am Rollwagen, beim Verladen, im Fahrzeug oder an der Tür des Kunden entstanden war.
 deck: 'Der erste Essay der Reihe „Verbesserung, die hält“: Damage als Kennzahl auf der letzten Meile, was ich belegen kann und was nicht, der Unterschied zwischen dem Senken einer Quote und dem Verhindern von Schäden, und die Prüfung eines Schadensfalls in vier Fragen.'
 relatedTools:
@@ -27,8 +27,8 @@ checklist:
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Nehmen Sie einen Schadensfall und fragen Sie, wo er passiert ist, nicht wer es war.
-  - Prüfen Sie, ob es für diese Stufe einen Standard gab, und ob er an diesem Tag umsetzbar war.
-  - Erfassen Sie den Fall nach Stufe und Ursache, damit das Pareto nächste Woche eine Adresse hat.
+  - Prüfen Sie, ob es für diesen Schritt einen Standard gab und ob er an diesem Tag umsetzbar war.
+  - Erfassen Sie den Fall nach Prozessschritt und Ursache, damit das Pareto nächste Woche eine Adresse hat.
 ---
 
 1,06 %. Das Ziel lag bei 0,8 %.
@@ -53,7 +53,7 @@ Was ich weiß, ist, wie wir die Kennzahl verfolgt haben und welche Probleme wir 
 
 Damage verfolgten wir in den operativen Berichten und im Daily Stand-up. Wir sahen die Zahl nicht allein an. Wir analysierten sie zusammen mit den anderen Kennzahlen und den täglichen Problemen des Betriebs.
 
-Die Probleme, die wir sahen, waren operativ: wie die Ladung organisiert war, wie die Rollwagen genutzt wurden, wie die Produkte platziert wurden. Im Betrieb gab es Standards für die Sicherheit, für die Organisation der Rampe, für das Verladen und für den Umgang mit den Produkten. Die Shift Leaders und Dispatcher verfolgten die operativen Probleme, und die Abstimmung mit den DSPs gehörte zur täglichen Arbeit.
+Die Probleme, die wir sahen, waren operativ: wie die Ladung organisiert war, wie die Rollwagen genutzt wurden, wie die Produkte platziert wurden. Im Betrieb gab es Standards für die Sicherheit, für die Organisation der Rampe, für das Verladen und für den Umgang mit den Produkten. Die Shift Leader und Dispatcher verfolgten die operativen Probleme, und die Abstimmung mit den DSPs gehörte zur täglichen Arbeit.
 
 In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über die Maßnahmen geschrieben, die in diesem Zeitraum aus den Fällen beim Verladen entstanden. Welche konkreten Änderungen ich selbst eingeführt habe und wie sich das Verhalten jeder Gruppe verändert hat, kann ich aber nicht genau belegen. Deshalb schreibe ich sie hier nicht als Erfolgsgeschichte auf.
 
@@ -71,7 +71,7 @@ Wenn eine Führungskraft nicht sagen kann, in welchem Schritt ein Schaden entste
 
 ## Zwei Wege, eine Zahl zu senken
 
-Hier spreche ich als Meinung, nicht aus einem Fall meiner Erfahrung.
+Hier äußere ich eine Meinung, keinen Fall aus meiner Erfahrung.
 
 Eine Quote kann sich bewegen, ohne dass jemand den Prozess verstanden hat. Man kann Druck auf das Team machen, bei dem der Schaden gemeldet wird. Man kann ihn jeden Morgen zum Thema machen. Die Zahl sinkt vielleicht eine Zeit lang. Aber wenn der Rollwagen genauso beladen, die Ladung genauso organisiert wird und der Standard genauso unklar bleibt, kommt der Schaden zurück, sobald die Aufmerksamkeit woanders hingeht.
 

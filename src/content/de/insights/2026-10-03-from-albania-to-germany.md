@@ -9,7 +9,7 @@ teaser: Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat
 deck: 'Der elfte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was ich aus der strukturierten Arbeitsweise in Deutschland mitgenommen habe, was ich aus Albanien bewahrt habe, und die Frage, die sich mehr verändert hat als alles andere.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Schreiben Sie beim nächsten Problem, das Sie lösen, auf, wer es danach besitzt und was sich ändert, damit es nicht zurückkommt.
+  - Schreiben Sie beim nächsten Problem, das Sie lösen, auf, wem es danach gehört und was sich ändert, damit es nicht zurückkommt.
   - Dokumentieren Sie einen Prozess, der heute nur funktioniert, weil Sie sich an ihn erinnern.
   - Nehmen Sie eine Entscheidung dieser Woche und markieren Sie, wo Ihre Initiative endet und die Befugnis eines anderen beginnt.
 checklist:

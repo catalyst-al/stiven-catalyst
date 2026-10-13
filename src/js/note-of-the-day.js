@@ -4,6 +4,7 @@
 (() => {
   const box = document.querySelector("[data-note-of-day]");
   if (!box) return;
+  // Each note comes already in the quotes of the page's language ("quoted" in eleventy.config.js).
   let notes = [];
   try { notes = JSON.parse(box.dataset.notes || "[]"); } catch { return; }
   if (!notes.length) return;
@@ -15,12 +16,12 @@
   const today = at(0);
   const url = `${box.dataset.page}#${today.id}`;
 
-  box.querySelector("[data-note-quote]").textContent = `“${today.q}”`;
+  box.querySelector("[data-note-quote]").textContent = today.q;
   box.querySelector("[data-note-link]").setAttribute("href", `${new URL(box.dataset.page).pathname}#${today.id}`);
-  box.querySelector("[data-note-copy]").dataset.copyText = `“${today.q}” (Stiven Janaqi, Stiven Catalyst) ${url}`;
+  box.querySelector("[data-note-copy]").dataset.copyText = `${today.q} (Stiven Janaqi, Stiven Catalyst) ${url}`;
   const share = box.querySelector("[data-note-share]");
   share.dataset.shareUrl = url;
-  share.dataset.shareText = `“${today.q}”`;
+  share.dataset.shareText = today.q;
   const image = box.querySelector("[data-note-image]");
   if (image && today.img) {
     image.setAttribute("href", today.img);
@@ -30,7 +31,7 @@
   document.querySelectorAll("[data-note-slot]").forEach((card) => {
     const note = at(Number(card.dataset.noteSlot));
     if (notes.length < 3 || !note) return;
-    card.querySelector("blockquote").textContent = `“${note.q}”`;
+    card.querySelector("blockquote").textContent = note.q;
     const time = card.querySelector("time");
     time.textContent = note.d;
     time.setAttribute("datetime", note.iso);

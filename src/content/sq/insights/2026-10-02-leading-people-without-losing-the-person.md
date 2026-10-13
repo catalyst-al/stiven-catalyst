@@ -11,7 +11,7 @@ deck: 'Eseja e pestë e serisë “Dhjetë vite pranë punës”: standardet, ga
 firstMove:
   - Para se t'i flasësh dikujt për një gabim, kontrollo nëse standardi i është bërë ndonjëherë i qartë.
   - "Pyet së pari procesin: ku shkoi keq çanta, porosia ose koha para se të arrinte te personi?"
-  - Ktheja sot një problem personit që e ka për detyrë, dhe qëndro i gatshëm.
+  - Ktheji sot një problem personit që e ka për detyrë, dhe qëndro i gatshëm.
 checklist:
   title: Procesi apo personi?
   fill: true
@@ -52,7 +52,7 @@ Nuk dua ta kthej këtë në një histori heroike, sikur e kam mbrojtur gjithmon�
 
 Pjesa më e vështirë e kësaj filozofie erdhi kur ndryshoi pozicioni im.
 
-Pas rreth pesë muajsh, kalova nga Team Leader në Area Manager. Si Team Leader isha shumë afër ekzekutimit ditor: dispatch-i, shoferët, problemet live, performanca e turnit. Si Area Manager duhej të drejtoja edhe njerëzit që drejtonin operacionin: katër Shift Leaders dhe tetë dispecerë, me përgjegjësi indirekte për rreth 250 shoferë.
+Pas rreth pesë muajsh, kalova nga Team Leader në Area Manager. Si Team Leader isha shumë afër ekzekutimit ditor: dispatch-i, shoferët, problemet live, performanca e turnit. Si Area Manager duhej të drejtoja edhe njerëzit që drejtonin operacionin: katër Shift Leaders dhe tetë dispeçerë, me përgjegjësi indirekte për rreth 250 shoferë.
 
 Nuk mund të isha më personi që hynte dhe e zgjidhte çdo problem vetë. Duhej të kërkoja që Shift Leader-i të merrte përgjegjësi. Që dispatcher-i të merrte vendim. Që problemi të mos vinte gjithmonë deri te unë.
 

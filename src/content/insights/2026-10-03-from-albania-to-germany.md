@@ -74,7 +74,7 @@ And I have learned something that can look bureaucratic at first, but has a lot 
 
 ## What I kept from Albania
 
-I have kept staying close to the operation. I still do not believe you can lead a process well from reports alone. You have to see what happens where the work is done. In logistics that means understanding what really happens on the ramp and with the people during the shift, not just looking at the percentage at the end of the day. In a hotel it means understanding what really happens at the reception desk during a shift, not just reading the report in the morning.
+I have kept the habit of staying close to the operation. I still do not believe you can lead a process well from reports alone. You have to see what happens where the work is done. In logistics that means understanding what really happens on the ramp and with the people during the shift, not just looking at the percentage at the end of the day. In a hotel it means understanding what really happens at the reception desk during a shift, not just reading the report in the morning.
 
 I have also kept flexibility. When a problem comes up, I do not like to answer straight away with: “That's not my job.” I first try to understand whether I can help the situation without crossing the limits of my role.
 
@@ -92,9 +92,9 @@ If a process worked because I knew it, today I would try to make the system know
 
 And I would separate personal responsibility from organisational responsibility earlier. It is not always good for a leader to become the person who solves everything. Because the organisation can start to depend on that person instead of improving the way it works.
 
-## Two strengths that complete each other
+## Two strengths that complement each other
 
-I do not think one working culture should copy the other. But from what I have lived, I see two strengths that can complete each other very well.
+I do not think one working culture should copy the other. But from what I have lived, I see two strengths that can complement each other very well.
 
 From the structured way of working I have experienced in Germany, you can take more process discipline: clearer standards, documentation, defined roles, measurement and continuity. That makes an organisation less dependent on the individual.
 

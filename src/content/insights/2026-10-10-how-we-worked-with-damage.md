@@ -6,8 +6,8 @@ series: improvement
 status: published
 featured: true
 summary: A KPI tells you that you have a problem. It does not automatically tell you where it started or who caused it.
-description: "Damage as a last-mile KPI: what I have on record and what I do not, why a percentage does not show where damage starts, lowering a number versus preventing damage, and a four-question check for a single damage case."
-teaser: 1.06% against a 0.8% target. The number was right. But it did not say whether the damage had started on the cart, during loading, in the van or at the customer's door.
+description: "Damage as a last-mile KPI: why a percentage does not show where damage starts, lowering a number versus preventing damage, and a four-question check."
+teaser: 1.06% against a 0.8% target. The number was right. But it did not say whether the damage had started on the trolley, during loading, in the van or at the customer's door.
 deck: 'The first essay in the series “Improvement that holds”: Damage as a last-mile KPI, what I have on record and what I do not, the difference between lowering a percentage and preventing damage, and a four-question check for a single damage case.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
@@ -40,7 +40,7 @@ firstMove:
 
 That is how Damage looked in the April 2025 report. In last mile it was one of the main KPIs we followed every day, together with Incomplete, Delay and Loading Time.
 
-The number was right. But it did not say whether the damage had started on the cart, during loading, in the van or at the customer's door. It only said that we had a problem.
+The number was right. But it did not say whether the damage had started on the trolley, during loading, in the van or at the customer's door. It only said that we had a problem.
 
 This essay opens a new series, “Improvement that holds”. I want to open it honestly, because an improvement that holds starts from what you really know, not from what sounds good in a presentation.
 
@@ -58,7 +58,7 @@ What I do know is how we followed it and what problems we saw.
 
 We followed Damage in the operational reports and in the daily stand-up. We did not look at it on its own. We analysed it alongside the other indicators and the everyday problems of the operation.
 
-The problems we saw were operational: how the load was organised, how the carts were used, how the products were placed. The operation had standards for safety, for organising the ramp, for loading and for handling products. The Shift Leaders and Dispatchers followed the operational problems, and coordinating with the DSPs was part of the daily work.
+The problems we saw were operational: how the load was organised, how the trolleys were used, how the products were placed. The operation had standards for safety, for organising the ramp, for loading and for handling products. The Shift Leaders and dispatchers followed the operational problems, and coordinating with the DSPs was part of the daily work.
 
 In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about the measures that came out of the loading cases in that period. But I do not have an exact record of the concrete changes I put in place, or of how each group's behaviour changed. So I do not write them up here as a success story.
 
@@ -68,7 +68,7 @@ This is what has stayed with me most from working with damage.
 
 **A KPI tells you that you have a problem. It does not automatically tell you where it started or who caused it.**
 
-A damage rate gathers into one number things that started in different places. A product placed badly on a cart. A load organised in a hurry. A box that moves in the van. A difficult delivery at the customer's door. In the report they all become one line.
+A damage rate gathers into one number things that started in different places. A product placed badly on a trolley. A load organised in a hurry. A box that moves in the van. A difficult delivery at the customer's door. In the report they all become one line.
 
 And damage is usually reported where it is found, not where it starts. I wrote this in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/) too, about mistakes in general. With damage it is even easier to get it wrong, because when a damaged product is found, someone always has it in their hands. That person very easily becomes the answer.
 
@@ -78,7 +78,7 @@ If a manager cannot say at which stage damage starts, they are working on the pe
 
 Here I am giving an opinion, not a case from my own experience.
 
-A percentage can move without anyone understanding the process. You can put pressure on the team where the damage is reported. You can make it the topic every morning. The number may come down for a while. But if the cart is filled the same way, the load is organised the same way and the standard stays just as unclear, the damage will come back as soon as attention goes somewhere else.
+A percentage can move without anyone understanding the process. You can put pressure on the team where the damage is reported. You can make it the topic every morning. The number may come down for a while. But if the trolley is filled the same way, the load is organised the same way and the standard stays just as unclear, the damage will come back as soon as attention goes somewhere else.
 
 The other way is slower. You follow the damage back through the process to the stage where it started, and you change something there.
 
@@ -97,7 +97,7 @@ For every damage case, I would look for four answers.
 ## Checking one damage case in four questions
 
 **1. Where did the damage happen?**
-The stage of the process, not the person: preparation, the cart, loading, transport, delivery. If the answer is “we do not know”, that is a finding too. It means the process does not record where damage starts, and that is where the work begins.
+The stage of the process, not the person: preparation, the trolley, loading, transport, delivery. If the answer is “we do not know”, that is a finding too. It means the process does not record where damage starts, and that is where the work begins.
 
 **2. Which standard was not followed, if there was one?**
 If there was no standard for that stage, the problem is not the person. It is the system, which left that person to decide alone.

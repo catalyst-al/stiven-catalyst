@@ -10,7 +10,7 @@ deck: 'Eseja e dytë e serisë “Dhjetë vite pranë punës”: loading time, d
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Lexoji së bashku kohën e ngarkimit, vonesat, porositë e paplota dhe dëmtimet e sotme, jo një nga një.
-  - Merr numrin që të mashtron më shumë dhe ndiqe një rast të tij deri para nisjes.
+  - Merr numrin që të mashtron më shumë dhe ndiq një rast të tij deri para nisjes.
   - "Ktheje presionin në pesë pyetje për ekipin: ku, sa, cili shkak, çfarë tani, çfarë nesër."
 checklist:
   title: Rishikimi i KPI-ve që nuk është vetëm raportim
@@ -18,12 +18,12 @@ checklist:
   items:
     - "Të katër numrat u lexuan së bashku: koha e ngarkimit, vonesat, të paplotat, dëmtimet."
     - Për çdo numër të kuq dimë nga cilat rrugë ose faza erdhi.
-    - Shkaku që përsëritet është emëruar, jo vetëm numëruar.
+    - Shkaku që përsëritet është emërtuar, jo vetëm numëruar.
     - Është e qartë cila pjesë e problemit është në duart tona.
     - Doli një veprim, me një përgjegjës dhe një kontroll nesër.
 ---
 
-Last mile-in e kam parë nga tri vende. Si shpërndarës pakosh, si dispatcher me mbi 70 shoferë në një turn, dhe pastaj si Team Leader dhe Area Manager, me katër Shift Leaders, tetë dispecerë dhe rreth 250 shoferë nën përgjegjësinë time në mënyrë indirekte. I njëjti operacion duket krejt ndryshe nga secili vend.
+Last mile-in e kam parë nga tri vende. Si shpërndarës pakosh, si dispatcher me mbi 70 shoferë në një turn, dhe pastaj si Team Leader dhe Area Manager, me katër Shift Leaders, tetë dispeçerë dhe rreth 250 shoferë nën përgjegjësinë time në mënyrë indirekte. I njëjti operacion duket krejt ndryshe nga secili vend.
 
 Si shpërndarës, dita është shumë konkrete. Merr itinerarin, ngarkon makinën dhe del në rrugë. Aty nuk të intereson teoria e procesit. Të intereson nëse pakot janë në rendin e duhur, nëse rruga është organizuar mirë, nëse ke kohë të mjaftueshme dhe çfarë bën kur trafiku, një adresë, një klient ose një problem me ngarkesën ta prish planin. Nga ky vend kuptova diçka që nga zyra nuk duket gjithmonë: një problem i vogël në magazinë mund t'i kushtojë shumë kohë njeriut që është në rrugë.
 
@@ -51,11 +51,11 @@ Nëse kishe 58 vonesa, nuk mjaftonte të thoshe 2,8% delays. Duhej të kuptoje n
 
 Presioni në last mile vjen nga shumë drejtime njëkohësisht. Ke orarin e nisjes. Ke klientët që presin. Ke target-et. Ke shoferët. Ke magazinën. Ke missing bags. Ke një route që po vonohet, ndërkohë që një tjetër sapo ka krijuar problem. Dhe operacioni nuk ndalon që ti ta analizosh problemin qetësisht.
 
-Mësimi im ishte se presioni nuk duhet kaluar poshtë si panik. Nëse menaxheri sheh një KPI të kuq dhe reagimi i parë është të bërtasë, shumë shpejt ke 20 njerëz që përpiqen të duken të zënë, por askush nuk po zgjidh shkakun. Unë përpiqesha ta ktheja presionin në pyetje konkrete. Ku është problemi? Sa raste kemi? Cila është arsyeja që përsëritet? Çfarë mund të bëjmë tani? Çfarë duhet të ndryshojmë për nesër?
+Mësimi im ishte se presioni nuk duhet kaluar poshtë si panik. Nëse menaxheri sheh një KPI të kuqe dhe reagimi i parë është të bërtasë, shumë shpejt ke 20 njerëz që përpiqen të duken të zënë, por askush nuk po zgjidh shkakun. Unë përpiqesha ta ktheja presionin në pyetje konkrete. Ku është problemi? Sa raste kemi? Cila është arsyeja që përsëritet? Çfarë mund të bëjmë tani? Çfarë duhet të ndryshojmë për nesër?
 
 Accountability për mua nuk do të thotë të kërkosh një fajtor sa herë që një numër bëhet i kuq. Do të thotë të gjesh kush e zotëron problemin dhe ta ndjekësh derisa të mbyllet.
 
-Nëse më pyet cili KPI të mashtron më shumë kur e sheh vetëm si numër, do të thosha Delays. Numri të jep përshtypjen se po mat vetëm vonesën e shoferit. Por vonesa mund të ketë filluar shumë më herët. Te ngarkimi. Te një missing bag. Te një trolley i përzier. Te renditja e route-it. Te një problem operacional para se shoferi të ketë dalë fare nga rampa. Pastaj në dashboard sheh vetëm një shofer “late”.
+Nëse më pyet cila KPI të mashtron më shumë kur e sheh vetëm si numër, do të thosha Delays. Numri të jep përshtypjen se po mat vetëm vonesën e shoferit. Por vonesa mund të ketë filluar shumë më herët. Te ngarkimi. Te një missing bag. Te një trolley i përzier. Te renditja e route-it. Te një problem operacional para se shoferi të ketë dalë fare nga rampa. Pastaj në dashboard sheh vetëm një shofer “late”.
 
 Nëse menaxhon vetëm numrin, mund të ndëshkosh personin e gabuar. Nëse menaxhon procesin, fillon të kuptosh ku është krijuar realisht vonesa.
 

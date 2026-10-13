@@ -41,7 +41,7 @@ The series “Ten years close to the work” starts with that contrast. Not to m
 
 I did not take over the flagship store ready-made. I was part of building it from zero to opening day, coordinating architects, carpenters, painters and the fit-out crews. Then came sales, the service standard, the customer experience, the operational organisation and the team: eight sales staff, four cashiers and one assistant. We built the company's first online sales website and its first e-commerce team. In the same period the network was restructured. Two underperforming stores were closed and the business was concentrated more on the flagship.
 
-Before that, as General Sales Manager at a distributor of household appliances, I had led wholesale: a network of 61 active resellers and a structure that included the warehouse, B2B sales, accounting, the technical team and customer service. Before I left Albania, I was used to making decisions, leading people and being accountable for business results.
+Before that, as General Sales Manager at a distributor of household appliances, I had led the wholesale business: a network of 61 active resellers and a structure that included the warehouse, B2B sales, accounting, the technical team and customer service. Before I left Albania, I was used to making decisions, leading people and being accountable for business results.
 
 Then came Germany, and with it a list of jobs I do not hide.
 

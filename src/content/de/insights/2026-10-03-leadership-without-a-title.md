@@ -17,8 +17,8 @@ checklist:
   title: Bevor Sie etwas übernehmen, das nicht Ihres ist
   fill: true
   items:
-    - label: Braucht diese Situation Handeln, oder eine Entscheidung, die jemand anderes treffen sollte?
-      hint: Initiative, oder Überschreiten des Mandats.
+    - label: Braucht diese Situation Handeln oder eine Entscheidung, die jemand anderes treffen sollte?
+      hint: Initiative oder Überschreiten des Mandats.
     - label: Habe ich die Information und die Kompetenz, das zu übernehmen?
       hint: Dass sonst niemand handelt, macht mich nicht zur richtigen Person für die Entscheidung.
     - label: Bei wem bleibt danach die Verantwortung?
@@ -91,7 +91,7 @@ Führung heißt nicht, die Person zu werden, ohne die nichts funktioniert. Führ
 
 Heute würde ich mir drei Fragen stellen:
 
-1. **Helfe ich, weil diese Situation Handlung braucht, oder treffe ich eine Entscheidung, die jemand anderes treffen müsste?** Das hilft mir, Initiative von der Überschreitung des Mandats zu trennen.
+1. **Helfe ich, weil diese Situation ein Eingreifen verlangt, oder treffe ich eine Entscheidung, die jemand anderes treffen müsste?** Das hilft mir, Initiative von der Überschreitung des Mandats zu trennen.
 2. **Habe ich die Informationen und die Kompetenz, um das zu übernehmen?** Dass in diesem Moment niemand sonst handelt, heißt nicht automatisch, dass ich die richtige Person bin, um zu entscheiden.
 3. **Bei wem bleibt danach die Verantwortung?** Das größte Problem ist nicht immer, für einen Moment etwas außerhalb der eigenen Rolle zu tun. Das Problem beginnt, wenn eine Ausnahme zur Normalität wird und niemand mehr weiß, wem was gehört.
 

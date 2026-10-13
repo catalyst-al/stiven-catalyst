@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: Eine Beschwerde ist nicht erledigt, nur weil der Gast die Rezeption verlässt.
 teaser: Nachts hat das Hotel weniger Menschen, weniger Abteilungen, die wach sind, und weniger Möglichkeiten. Der Gast hat dasselbe Problem wie am Mittag.
-description: "Beschwerden während des Night Audit: was ich belegen kann und was nicht, was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und die fünf Felder einer Beschwerde, die an die nächste Schicht geht."
-deck: 'Der neunte Essay der Reihe „Verbesserung, die hält“: Beschwerden während des Night Audit, was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und eine Beschwerde, die bei der nächsten Schicht ankommt, ohne von vorn erzählt zu werden.'
+description: "Beschwerden im Night Audit: was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und die Übergabe an die nächste Schicht."
+deck: 'Der neunte Essay der Reihe „Verbesserung, die hält“: Beschwerden während des Night Audits, was sich nachts lösen lässt und was nicht, warum Zuhören vor dem Erklären kommt, und eine Beschwerde, die bei der nächsten Schicht ankommt, ohne von vorn erzählt zu werden.'
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -21,7 +21,7 @@ checklist:
     - label: Was wurde überprüft?
       hint: Was wir selbst gesehen oder geprüft haben, nicht nur, was uns gesagt wurde.
     - label: Was wurde bisher getan?
-      hint: Wer informiert wurde, und was dem Gast gesagt wurde.
+      hint: Wer informiert wurde und was dem Gast gesagt wurde.
     - label: Was ist noch ungelöst?
       hint: Offen, mit Namen. Nicht „wird angeschaut“.
     - label: Wer verfolgt es weiter, und was wird dem Gast gesagt?
@@ -33,7 +33,7 @@ firstMove:
   - Übergeben Sie sie mit einem Namen, damit der Gast die Geschichte beim Frühstück nicht noch einmal erzählt.
 ---
 
-Die 2 Uhr nachts im Titel sind nicht die Uhrzeit eines Vorfalls, den ich belegen kann.
+Das „2 Uhr nachts“ im Titel ist nicht die Uhrzeit eines Vorfalls, den ich belegen kann.
 
 Es ist die Zeit, in der das Hotel weniger Menschen, weniger wache Abteilungen und weniger Möglichkeiten hat. Während der Gast dasselbe Problem hat, das er am Mittag hätte.
 
@@ -85,7 +85,7 @@ Das ist die Struktur, die ich heute empfehle. Ich weiß nicht, ob jede Beschwerd
 
 Einer neuen Rezeptionskraft vor ihrer ersten Nachtschicht würde ich sagen: Denken Sie nicht, dass Sie jedes Problem, das in der Nacht auftaucht, selbst lösen müssen.
 
-Kennen Sie Ihre Verantwortung, bleiben Sie ruhig und kommunizieren Sie respektvoll. Wenn Sie das Problem lösen können, tun Sie es nach Standard. Wenn nicht, verstecken Sie es nicht und machen Sie keine Versprechen, die nicht von Ihnen abhängen. Und vor allem: Lassen Sie keinen offenen Punkt ohne Information für die Kollegin oder den Kollegen, die die nächste Schicht übernehmen.
+Kennen Sie Ihre Verantwortung, bleiben Sie ruhig und kommunizieren Sie respektvoll. Wenn Sie das Problem lösen können, tun Sie es nach Standard. Wenn nicht, verstecken Sie es nicht und machen Sie keine Versprechen, die nicht von Ihnen abhängen. Und vor allem: Lassen Sie keinen offenen Punkt ohne Information für die Kollegin oder den Kollegen der nächsten Schicht.
 
 **Professionalität heißt zuhören, prüfen, tun, was in der eigenen Zuständigkeit liegt, und dafür sorgen, dass die Arbeit weitergeht, wenn jemand anderes einbezogen werden muss.**
 

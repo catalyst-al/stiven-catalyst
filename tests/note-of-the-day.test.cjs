@@ -19,7 +19,7 @@ test('every field note exists in English, German and Albanian, each with a quote
 
 // The home page as the templates render it, on a given day.
 const home = (date) => {
-  const notes = ['A', 'B', 'C', 'D'].map((q, i) => ({ q: `Note ${q}`, id: `note-0${i + 1}-x`, d: `${i + 1} October 2026`, iso: `2026-10-0${i + 1}` }));
+  const notes = ['A', 'B', 'C', 'D'].map((q, i) => ({ q: `“Note ${q}”`, id: `note-0${i + 1}-x`, d: `${i + 1} October 2026`, iso: `2026-10-0${i + 1}` }));
   const dom = new JSDOM(`<body><section data-note-of-day data-notes='${JSON.stringify(notes)}' data-page="https://example.test/field-notes.html">
     <p data-note-quote>“Note A”</p><a data-note-link href="/field-notes.html#note-01-x">All</a>
     <button data-note-copy data-copy-text="x">Copy</button><button data-note-share data-share-url="x" data-share-text="x">Share</button></section>

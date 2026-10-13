@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Kur nuk e sheh automjetin, duhet të kesh një mënyrë të besueshme për të kuptuar çfarë po ndodh me të.
 teaser: Në rampë mund ta shohësh një problem me sytë e tu. Nga distanca, shpesh duhet ta kuptosh përmes informacionit që merr.
-description: "Koordinimi në distancë i 80+ automjeteve dhe 100+ shoferëve: çfarë kam të dokumentuar dhe çfarë jo, çfarë humbet dhe çfarë fiton kur nuk je në rampë, pse informacioni bëhet vetë puna, dhe pesë pyetje për një problem që nuk e sheh."
+description: "Koordinimi në distancë i 80+ automjeteve dhe 100+ shoferëve: çfarë humbet dhe çfarë fiton larg rampës, dhe pesë pyetje për një problem që nuk e sheh."
 deck: 'Eseja e shtatë e serisë “Përmirësimi që mbahet”: koordinimi në distancë i 80+ automjeteve, çfarë humbet dhe çfarë fiton kur nuk je në rampë, pse cilësia e informacionit bëhet vetë puna, dhe pesë pyetje për një problem që nuk e sheh.'
 relatedTools:
   - /tools/cx-control-tower/
@@ -22,7 +22,7 @@ checklist:
     - label: Sa i vjetër është ky informacion?
       hint: Informacioni që vjen me vonesë i ka dhënë problemit kohë të rritet.
     - label: Është rast i vetëm apo përsëritje?
-      hint: E njëjta tur, i njëjti vend, e njëjta orë?
+      hint: I njëjti tur, i njëjti vend, e njëjta orë?
     - label: Çfarë është ende e hapur, dhe kush e ka?
       hint: Një problem pa pronar nuk është i hapur. Është i harruar.
     - label: Çfarë veprimi duhet tani, dhe kush e konfirmon?
@@ -78,7 +78,7 @@ Për komunikimin, nuk kam rregulla të dokumentuara që kam vendosur vetë: kur 
 
 ## Çfarë do të shikoja
 
-Për një metodë personale të dokumentuar që e përdor për të parë problemet para se të ndodhin, nuk e di. Por sot do t'u kushtoja vëmendje tri gjërave.
+Për një metodë personale të dokumentuar që e përdor për të parë problemet para se të ndodhin, nuk kam. Por sot do t'u kushtoja vëmendje tri gjërave.
 
 **Devijimeve që përsëriten.** Një vonesë është rast. E njëjta vonesë, në të njëjtin vend, disa ditë me radhë, është model.
 

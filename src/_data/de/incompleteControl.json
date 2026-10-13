@@ -80,7 +80,7 @@
     "Sortierung und Verladung": {
       "meaning": "Die Pakete eines Auftrags werden getrennt: Eins kommt ins Fahrzeug, ein anderes bleibt stehen oder geht auf die falsche Tour.",
       "moves": [
-        "Beim Verladen die Pakete pro Auftrag zählen: Zwei von drei ist nicht verladen.",
+        "Beim Verladen die Pakete pro Auftrag zählen: Zwei von drei gilt als nicht verladen.",
         "Jedes Paket ins Fahrzeug scannen und den Ausgangsscan mit der Tour abgleichen.",
         "Am Ende jeder Welle den Sortierbereich nach liegengebliebenen Paketen absuchen."
       ],
@@ -90,7 +90,7 @@
       "meaning": "Pakete bleiben im Fahrzeug, gehen an die falsche Adresse, oder von einem Auftrag mit mehreren Paketen wird nur ein Teil übergeben.",
       "moves": [
         "Jedes Paket bei der Übergabe scannen und Aufträge mit mehreren Paketen an der Tür zählen.",
-        "Am Ende der Tour prüfen, dass das Fahrzeug leer ist.",
+        "Am Ende der Tour prüfen, ob das Fahrzeug leer ist.",
         "Jedem „nicht erhalten“ innerhalb eines Tages nachgehen, solange sich der Fahrer an den Stopp erinnert."
       ],
       "question": "Woran erkennt der Fahrer, dass jedes Paket für diesen Stopp übergeben wurde?"

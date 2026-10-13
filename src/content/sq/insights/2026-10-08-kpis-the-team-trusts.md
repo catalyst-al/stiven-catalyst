@@ -5,9 +5,9 @@ category: Operacione
 series: without-you
 status: published
 featured: true
-summary: Një KPI që ekipi e beson nuk është domosdoshmërisht ai që del gjithmonë jeshil. Është ai që mat qartë, interpretohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
-description: "Si ndërtohet një KPI që njerëzit e besojnë: Damage, Incomplete, Delay dhe Loading Time në last mile, rezultati dhe arsyeja, pse asnjë tregues nuk lexohet i vetëm, dhe karta e një KPI-je me gjashtë rreshta."
-teaser: Një KPI mund të jetë matematikisht i saktë dhe interpretimi i tij të jetë i padrejtë.
+summary: Një KPI që ekipi e beson nuk është domosdoshmërisht ajo që del gjithmonë jeshil. Është ajo që mat qartë, interpretohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
+description: "Si ndërtohet një KPI që njerëzit e besojnë: katër tregues në last mile, rezultati dhe arsyeja, pse asnjë tregues nuk lexohet i vetëm, dhe karta e KPI-së."
+teaser: Një KPI mund të jetë matematikisht e saktë dhe interpretimi i saj të jetë i padrejtë.
 deck: 'Eseja e gjashtë e serisë “Operacioni që punon pa ty”: përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi pas rezultatit, me kartën e një KPI-je që plotësohet para se të fillosh ta matësh.'
 relatedTools:
   - /tools/kpi-diagnostic/
@@ -28,7 +28,7 @@ firstMove:
   - Lexoje pranë treguesit fqinj para se të reagosh ndaj saj.
 ---
 
-Një KPI mund të jetë matematikisht i saktë dhe interpretimi i tij të jetë i padrejtë.
+Një KPI mund të jetë matematikisht e saktë dhe interpretimi i saj të jetë i padrejtë.
 
 Te [KPI-të nuk përmirësohen nga Excel-i](/sq/insights/kpis-do-not-improve-in-excel/) shkrova se numri vetë nuk e përmirëson punën. Kjo ese merret me pyetjen tjetër: si e ndërton një KPI që njerëzit e besojnë? Që e kuptojnë, që nuk i ndëshkon për atë që nuk e kontrollojnë, dhe që i çon te një veprim.
 
@@ -85,7 +85,7 @@ Për një reagim konkret të dokumentuar, ku ekipi i përjetonte KPI-të si ndë
 
 Por pozicioni im është i qartë. Një KPI që përdoret vetëm për t'i treguar dikujt se ka dalë poshtë objektivit nuk e ndihmon domosdoshmërisht të përmirësohet.
 
-Besoj se njerëzit kanë më shumë arsye t'i besojnë një KPI-je kur ai përdoret për të kuptuar dhe përmirësuar punën, jo vetëm për të krahasuar individët.
+Besoj se njerëzit kanë më shumë arsye t'i besojnë një KPI-je kur ajo përdoret për të kuptuar dhe përmirësuar punën, jo vetëm për të krahasuar individët.
 
 ## Asnjë tregues nuk lexohet i vetëm
 
@@ -101,7 +101,7 @@ Nëse një tregues përmirësohet, por një tjetër përkeqësohet për shkak t�
 
 Në hotel punohet me një grup tjetër informacioni operacional. Gjatë Night Audit kontrolloja raportet ditore, statusin e dhomave, arrivals, departures, no-shows, forecast-in për ditën tjetër dhe çështjet e hapura që mund të ndikonin në operacion. Një pjesë e rëndësishme ishte kontrolli i saktësisë së informacionit përpara mbylljes së ditës.
 
-Por dua të bëj një dallim. Këta ishin tregues dhe kontrolle operative që i përdorja gjatë punës. Nuk kam të dokumentuar që të gjithë ishin KPI formalë me objektiva individualë për Night Auditor-in.
+Por dua të bëj një dallim. Këta ishin tregues dhe kontrolle operative që i përdorja gjatë punës. Nuk kam të dokumentuar që të gjithë ishin KPI formale me objektiva individualë për Night Auditor-in.
 
 Në hotel e kuptova edhe më mirë se një numër nuk tregon gjithmonë të gjithë situatën. Mund të kesh një raport të saktë dhe një problem të hapur që ende kërkon veprim. Prandaj raporti duhet të lidhet me statusin real, me përgjegjësinë dhe me dorëzimin e informacionit te turni tjetër.
 
@@ -116,8 +116,8 @@ Para se të fillosh të matësh diçka, plotëso këto gjashtë rreshta. Nëse n
 5. **Çfarë konteksti duhet kontrolluar?** Cilët tregues të tjerë lexohen bashkë me të, që përmirësimi i njërit të mos fshehë përkeqësimin e tjetrit.
 6. **Çfarë bëjmë kur devijon?** Kush e sheh, kur, dhe cili është hapi i parë.
 
-Karta më poshtë mund ta plotësosh këtu dhe ta kopjosh për ekipin.
+Kartën më poshtë mund ta plotësosh këtu dhe ta kopjosh për ekipin.
 
-Një KPI që ekipi e beson nuk është domosdoshmërisht ai që del gjithmonë jeshil.
+Një KPI që ekipi e beson nuk është domosdoshmërisht ajo që del gjithmonë jeshil.
 
-Është ai që mat qartë, interpretohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
+Është ajo që mat qartë, interpretohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.

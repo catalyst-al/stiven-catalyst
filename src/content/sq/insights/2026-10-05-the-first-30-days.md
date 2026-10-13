@@ -13,7 +13,7 @@ deck: 'Eseja e parë e serisë “Operacioni që punon pa ty”: netët e para n
 firstMove:
   - Ndiqe procesin edhe një turn pikërisht siç është përcaktuar, dhe shëno ku t'u desh ta ndryshoje.
   - Pyet personin që e bën punën çdo ditë se çfarë e lodh më shumë.
-  - Shkruaj një gjë që vetëm njerëzit me përvojë e dinë përmendsh.
+  - Shkruaj një gjë që vetëm njerëzit me përvojë e dinë përmendësh.
 checklist:
   title: Harta pas 30 ditësh
   fill: true
@@ -35,7 +35,7 @@ checklist:
 
 Natën e parë në hotelin e ri nuk punova dot si Night Auditor.
 
-Sistemi kishte një update dhe për disa orë praktikisht nuk mund të punohej normalisht. Kështu që qëndrova më shumë në back office. Mora informacion për hotelin, për proceset bazë dhe për mënyrën si ishte organizuar puna.
+Sistemi kishte një përditësim dhe për disa orë praktikisht nuk mund të punohej normalisht. Kështu që qëndrova më shumë në back office. Mora informacion për hotelin, për proceset bazë dhe për mënyrën si ishte organizuar puna.
 
 Në pamje të parë, një natë e humbur. Në fakt ishte nata që më mësoi gjënë e parë: në një vend të ri, para se të bësh punën, duhet të kuptosh si funksionon.
 

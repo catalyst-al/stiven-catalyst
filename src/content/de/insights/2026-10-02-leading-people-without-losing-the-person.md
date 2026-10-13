@@ -9,8 +9,8 @@ teaser: Man kann niemanden für eine Regel zur Verantwortung ziehen, die nie jem
 deck: 'Der fünfte Essay der Reihe „Zehn Jahre nah an der Arbeit“: Standards, Prozessfehler und persönliche Fehler, und was sich ändert, wenn man unter den Menschen befördert wird, mit denen man gestern noch zusammengearbeitet hat.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Bevor Sie mit jemandem über einen Fehler sprechen, prüfen Sie, ob der Standard ihm je klar gemacht wurde.
-  - "Fragen Sie zuerst den Prozess: Wo ging Tasche, Auftrag oder Zeit schief, bevor es die Person erreichte?"
+  - Bevor Sie mit jemandem über einen Fehler sprechen, prüfen Sie, ob der Standard ihm je klargemacht wurde.
+  - "Fragen Sie zuerst den Prozess: Wo lief bei Tasche, Auftrag oder Zeit etwas schief, bevor es die Person erreichte?"
   - Geben Sie heute ein Problem an die Person zurück, deren Aufgabe es ist, und bleiben Sie erreichbar.
 checklist:
   title: Prozess oder Person?
@@ -52,7 +52,7 @@ Ich möchte daraus keine Heldengeschichte machen, als hätte ich das Team immer 
 
 Der schwierigste Teil dieser Haltung kam, als sich meine eigene Position änderte.
 
-Nach etwa fünf Monaten wurde ich vom Team Leader zum Area Manager. Als Team Leader war ich sehr nah an der täglichen Ausführung: Dispatch, Fahrer, Live-Probleme, die Leistung der Schicht. Als Area Manager musste ich auch die Menschen führen, die den Betrieb führten: vier Shift Leaders und acht Dispatcher, mit indirekter Verantwortung für rund 250 Fahrer.
+Nach etwa fünf Monaten wurde ich vom Team Leader zum Area Manager. Als Team Leader war ich sehr nah an der täglichen Ausführung: Dispatch, Fahrer, Live-Probleme, die Leistung der Schicht. Als Area Manager musste ich auch die Menschen führen, die den Betrieb führten: vier Shift Leader und acht Dispatcher, mit indirekter Verantwortung für rund 250 Fahrer.
 
 Ich konnte nicht mehr derjenige sein, der hereinkommt und jedes Problem selbst löst. Ich musste vom Shift Leader verlangen, Verantwortung zu übernehmen. Vom Dispatcher, eine Entscheidung zu treffen. Dass das Problem nicht immer bis zu mir kommt.
 

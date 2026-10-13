@@ -6,13 +6,13 @@ series: without-you
 status: published
 featured: true
 summary: Wenn der Standard der Einarbeitung „Schau, wie ich es mache“ lautet, bekommt jeder neue Mitarbeiter eine andere Version derselben Arbeit.
-description: "Wie eine Einarbeitung aussieht, die jedem dasselbe Ergebnis gibt: meine drei Nächte Einarbeitung als Night Auditor, der Unterschied zwischen Information und einem Einarbeitungssystem, ein Test in drei Teilen und ein Plan für die erste Woche."
+description: "Eine Einarbeitung, die jedem dasselbe Ergebnis gibt: meine drei Nächte als neuer Night Auditor, ein Test in drei Teilen und ein Plan für die erste Woche."
 teaser: Eine Einarbeitung misst sich nicht daran, wie gut der Trainer erklärt hat. Sie misst sich daran, wie einheitlich und sicher das Ergebnis wird, wenn der Trainer geht.
 deck: 'Der dritte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: drei Nächte Einarbeitung in einem neuen Hotel, warum „Ja, verstanden“ kein Beweis ist, was ein neuer Mensch in der ersten Stunde wissen muss, und der Plan für die erste Woche.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Sagen Sie einem neuen Kollegen in der ersten Stunde fünf Dinge: die Rolle, das erwartete Ergebnis, die Regeln, die nicht verhandelbar sind, wen er fragt, was er nicht allein entscheidet."
-  - "Ersetzen Sie „schau zu, wie ich es mache“ durch: zuschauen, mit mir machen, du machst es und ich schaue zu, allein machen, mir erklären."
+  - "Ersetzen Sie „Schau, wie ich es mache“ durch: zuschauen, mit mir machen, du machst es und ich schaue zu, allein machen, mir erklären."
   - "Prüfen Sie einen Kollegen, der „verstanden“ gesagt hat: mach es selbst, sag mir warum, zeig mir, was du bei einer Ausnahme tust."
 checklist:
   title: Die erste Woche eines neuen Mitarbeiters

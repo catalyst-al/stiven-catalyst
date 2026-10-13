@@ -44,7 +44,7 @@
     "name": { "en": "Someone made a mistake", "de": "Jemand hat einen Fehler gemacht", "sq": "Dikush bëri një gabim" },
     "line": {
       "en": "How to talk to the person, and how to tell a process error from a personal one.",
-      "de": "Wie man mit der Person spricht, und wie man einen Prozessfehler von einem persönlichen unterscheidet.",
+      "de": "Wie man mit der Person spricht und wie man einen Prozessfehler von einem persönlichen unterscheidet.",
       "sq": "Si t'i flasësh personit, dhe si ta dallosh gabimin e procesit nga ai personal."
     },
     "tools": ["/tools/five-whys/"]
@@ -54,7 +54,7 @@
     "name": { "en": "Solve it or escalate it", "de": "Selbst lösen oder eskalieren", "sq": "Zgjidhe vetë apo eskaloje" },
     "line": {
       "en": "A problem in the middle of the shift, or at 2 a.m., and the question of whose decision it is.",
-      "de": "Ein Problem mitten in der Schicht oder um 2 Uhr nachts, und die Frage, wessen Entscheidung es ist.",
+      "de": "Ein Problem mitten in der Schicht oder um 2 Uhr nachts und die Frage, wessen Entscheidung es ist.",
       "sq": "Një problem në mes të turnit, ose në orën 2 të natës, dhe pyetja: e kujt është vendimi."
     },
     "tools": ["/tools/shift-handover/"]
@@ -84,7 +84,7 @@
     "name": { "en": "High-volume days and pressure", "de": "Spitzentage und Druck", "sq": "Ditët me volum të lartë dhe presioni" },
     "line": {
       "en": "The day with more volume than the plan, and the pressure that comes with it.",
-      "de": "Der Tag mit mehr Volumen als geplant, und der Druck, der mit ihm kommt.",
+      "de": "Der Tag mit mehr Volumen als geplant und der Druck, der mit ihm kommt.",
       "sq": "Dita me më shumë volum se plani, dhe presioni që vjen bashkë me të."
     },
     "tools": ["/tools/delay-analyzer/", "/tools/shift-handover/"]
@@ -94,7 +94,7 @@
     "name": { "en": "People you do not control", "de": "Menschen, die Sie nicht führen", "sq": "Njerëz që nuk i komandon ti" },
     "line": {
       "en": "Resellers, delivery partners, other departments: the result depends on people outside your team.",
-      "de": "Händler, Lieferpartner, andere Abteilungen: das Ergebnis hängt von Menschen außerhalb Ihres Teams ab.",
+      "de": "Händler, Lieferpartner, andere Abteilungen: Das Ergebnis hängt von Menschen außerhalb Ihres Teams ab.",
       "sq": "Rishitës, partnerë shpërndarjeje, departamente të tjera: rezultati varet nga njerëz jashtë ekipit tënd."
     },
     "tools": ["/tools/cx-control-tower/"]
@@ -111,9 +111,9 @@
   },
   {
     "id": "the-system-says",
-    "name": { "en": "The system says one thing, the floor another", "de": "Das System sagt das eine, der Boden das andere", "sq": "Sistemi thotë një gjë, salla tjetër" },
+    "name": { "en": "The system says one thing, the floor another", "de": "Das System sagt das eine, die Leute vor Ort das andere", "sq": "Sistemi thotë një gjë, terreni tjetër" },
     "line": {
-      "en": "The scan, the plan or the dashboard is sure, and what you see on shift does not match it. Whom do you believe, and who answers?",
+      "en": "The scan, the plan or the dashboard is sure, and what you see on shift does not match it. Whom do you believe, and who answers for it?",
       "de": "Der Scan, der Plan oder das Dashboard ist sich sicher, und was Sie in der Schicht sehen, passt nicht dazu. Wem glauben Sie, und wer verantwortet es?",
       "sq": "Skanimi, plani ose tabela është e sigurt, dhe ajo që sheh në turn nuk përputhet. Kujt i beson, dhe kush përgjigjet?"
     },

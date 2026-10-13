@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: An SOP becomes truly useful when the person who needs it can find it, understand it and apply it at the right moment.
-description: "The series' concrete case: how I turned scattered checklists, documents, screenshots and notes into a browser work page for Front Office and Night Audit, what I left out, what I cannot claim, and what I would do differently today."
+description: "The series' concrete case: how scattered checklists and notes became one work page for Front Office and Night Audit, and what I would do differently."
 teaser: I did not build it because documents were missing. I started it because the documents existed, but the information I needed during work was scattered.
 deck: 'The ninth essay in the series “The operation that runs without you”: a real project, developed step by step, presented as work in progress rather than a measured success, with the card for turning a folder of SOPs into a working tool.'
 relatedTools:
@@ -58,7 +58,7 @@ At first the need was personal. I was learning new processes and wanted to organ
 
 I developed the project during September 2026, in the period when I was working through training and Night Audit processes. I do not have the exact date of the first version.
 
-The problem was very concrete. The information I needed existed, but it was scattered across checklists, documents, screenshots, videos and notes. The checklist told me what had to be done, while another document or a colleague showed me how. To understand one procedure, I sometimes had to move from one material to the next.
+The problem was very concrete. The information I needed existed, but it was scattered across checklists, documents, screenshots, videos and notes. The checklist told me what had to be done, while another document or a colleague showed me how. To understand one procedure, I sometimes had to move from one source to the next.
 
 This follows directly from the first essay of the series, [The first 30 days](/insights/the-first-30-days/). At first I was trying to understand the operation. Then I began to build a way for the information not to stay scattered. In [A good SOP is not a document](/insights/a-good-sop-is-not-a-document/) I wrote about why. Here I want to show how.
 

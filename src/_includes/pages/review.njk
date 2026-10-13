@@ -129,7 +129,7 @@
         <p class="book-text-kicker">{{ R.sourcesPage.kicker }}</p>
         <h2>{{ R.sourcesPage.title | join(" ") }}</h2>
         <p>{{ R.sourcesPage.lead }}</p>
-        <ul>{% for s in review.sources %}<li>{{ s.by }}, “{{ s.title }}”. <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a></li>{% endfor %}</ul>
+        <ul>{% for s in review.sources %}<li>{{ s.by }}, {{ s.title | quoted(lang) }}. <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a></li>{% endfor %}</ul>
         <h3>{{ R.sourcesPage.method }}</h3>
         <p>{{ R.sourcesPage.methodText }}</p>
       </div>

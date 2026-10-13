@@ -181,7 +181,7 @@ ogType: article
       <p class="kicker" id="essay-notes-title">{{ "Field notes from this essay" | t(lang) }}</p>
       <ul>
         {%- for note in essayNotes %}{% if loop.index <= 4 %}
-        <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">“{{ note.data.quote }}”</a></li>
+        <li><a href="{{ notesPage }}#note-{{ note.fileSlug }}">{{ note.data.quote | quoted(lang) }}</a></li>
         {%- endif %}{% endfor %}
       </ul>
       {%- if essayNotes.length > 4 %}<a class="text-link" href="{{ notesPage }}">{{ "All field notes" | t(lang) }} →</a>{% endif %}
@@ -247,7 +247,7 @@ ogType: article
       <p class="essay-readers-lede">{{ "What readers who tried it wrote. Anonymised, with their yes." | t(lang) }}</p>
       <ul>
         {%- for reader in readers %}
-        <li><blockquote>“{{ reader.text }}”</blockquote>{% if reader.who %}<cite>{{ reader.who }}</cite>{% endif %}</li>
+        <li><blockquote>{{ reader.text | quoted(lang) }}</blockquote>{% if reader.who %}<cite>{{ reader.who }}</cite>{% endif %}</li>
         {%- endfor %}
       </ul>
     </aside>

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: The point of the conversation after a mistake is not that the employee leaves afraid of the next one. It is that they leave knowing what to do differently.
-description: "The conversation after a mistake: telling a person's mistake from a process mistake, why pressure can be fair but humiliation never is, talking to yesterday's colleagues after a promotion, and the five steps of the conversation."
+description: "The conversation after a mistake: a person's mistake or the process's, why pressure can be fair but humiliation never is, and the five steps of the talk."
 teaser: Pressure can be fair. Humiliation is not.
 deck: 'The seventh essay in the series “The operation that runs without you”: the two questions every mistake should raise, the line between demanding and humiliating, authority after a promotion, and the corrective conversation sheet in five steps.'
 relatedTools:
@@ -86,7 +86,7 @@ There are things I would never do in a conversation like this.
 
 I would not use someone's mistake to humiliate them in front of the team. I would not shout at an employee to show authority. I would not call them incompetent just because they made a mistake. I would not take a disciplinary decision without hearing their explanation and checking the facts.
 
-But that does not mean making every mistake relative.
+But that does not mean explaining every mistake away.
 
 If someone knowingly broke a safety rule, acted beyond their authority, or keeps failing to respect a clear standard, the responsibility has to be dealt with seriously and according to the relevant procedures.
 
@@ -98,7 +98,7 @@ A manager can be demanding, decisive and very clear without violating the dignit
 
 The career step itself is confirmed. In January 2025 I started as a Team Leader On Road, and a few months later I became an Area Manager. In that role I had four Shift Leaders and eight dispatchers reporting directly to me, while the operation involved around 250 drivers indirectly. I wrote about that step at more length in [Leading people without losing the person](/insights/leading-people-without-losing-the-person/).
 
-For how colleagues reacted to my promotion, or whether our relationship changed, I do not have a confirmed personal account.
+As for how colleagues reacted to my promotion, or whether our relationship changed, I do not have a confirmed personal account.
 
 My view is that a promotion should not turn authority into a show of strength. When you become responsible for people you used to work alongside, you have to be clear about expectations, fair in your decisions, and not use the position to show who is in charge.
 

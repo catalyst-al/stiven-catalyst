@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein Prozess endet nicht, wenn ich die Arbeit übergebe. Er endet, wenn das nächste Team weitermachen kann, ohne Information, Verantwortung oder Zeit zu verlieren.
-description: "Warum so viele Fehler dort entstehen, wo Arbeit von einem Team zum anderen geht: Rezeption, Housekeeping und Haustechnik im Hotel, von Outbound bis zum Fahrer auf der letzten Meile, und fünf Fragen für jeden Punkt, an dem Arbeit die Hände wechselt."
+description: "Warum so viele Fehler dort entstehen, wo Arbeit von einem Team zum anderen geht, im Hotel und auf der letzten Meile, und fünf Fragen für jede Übergabe."
 teaser: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 deck: 'Der fünfte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: was zwischen zwei Abteilungen passiert, warum „Ich habe Bescheid gegeben“ nicht reicht, Status, Verantwortung und Bestätigung, und die Übergabekarte mit fünf Fragen.'
 relatedTools:
@@ -32,7 +32,7 @@ Eine Abteilung kann ihre eigene Arbeit sehr gut machen, und der Betrieb kann tro
 
 Das passiert, wenn niemand prüft, was zwischen zwei Abteilungen geschieht.
 
-Innerhalb eines Teams ist meist klar, wer was macht. Es gibt einen Verantwortlichen, einen Standard, einen Rhythmus. Aber Arbeit bleibt selten in einem einzigen Team. Sie geht von der Rezeption zur Haustechnik, von der Vorbereitung zur Rampe, von der Rampe zum Fahrer, von der Nachtschicht zur Frühschicht. Und genau an diesen Übergängen, dort, wo Arbeit die Hände wechselt, gehen viele Fehler verloren.
+Innerhalb eines Teams ist meist klar, wer was macht. Es gibt einen Verantwortlichen, einen Standard, einen Rhythmus. Aber Arbeit bleibt selten in einem einzigen Team. Sie geht von der Rezeption zur Haustechnik, von der Vorbereitung zur Rampe, von der Rampe zum Fahrer, von der Nachtschicht zur Frühschicht. Und genau an diesen Übergängen, dort, wo Arbeit in andere Hände übergeht, gehen viele Fehler verloren.
 
 ## Im Hotel: wer es aufnimmt, wer es löst, wer es abschließt
 
@@ -58,13 +58,13 @@ Auf der letzten Meile waren die Übergabepunkte noch sichtbarer.
 
 Outbound bereitete die Aufträge vor. Lager und Rampe hatten ihren Teil an der physischen Organisation. Last Mile koordinierte die Abfahrt. Die DSP-Fahrer übernahmen die Verantwortung für Transport und Zustellung.
 
-Ich hatte mit Fällen zu tun, in denen Bags fehlten oder verspätet ankamen, Wagen schlecht organisiert waren, Ladungen vermischt waren und es beim Beladen Verzögerungen gab.
+Ich hatte mit Fällen zu tun, in denen Taschen fehlten oder verspätet ankamen, Wagen schlecht organisiert waren, Ladungen vermischt waren und es beim Beladen Verzögerungen gab.
 
-Ein konkretes Beispiel ist ein fehlender Bag beim Beladen. Die Regel war, dass der Fahrer den Team Leader informiert und nach Verfahren wartet, ohne den Wagen aus dem festgelegten Bereich zu bringen.
+Ein konkretes Beispiel ist eine fehlende Tasche beim Beladen. Die Regel war, dass der Fahrer den Team Leader informiert und nach Verfahren wartet, ohne den Wagen aus dem festgelegten Bereich zu bringen.
 
 Diese Regel regelt den Moment. Aber für mich muss das Problem auch früher betrachtet werden.
 
-Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die Verspätung bei der Abfahrt. Im Bericht kann sie wie eine Verspätung des Fahrers aussehen. Das heißt aber nicht automatisch, dass der Fahrer die Ursache ist. Eine Verspätung kann mehrere Ursachen haben: verspätete Vorbereitung, fehlende Bags, die Organisation der Rampe oder die Bereitschaft des Fahrers.
+Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die Verspätung bei der Abfahrt. Im Bericht kann sie wie eine Verspätung des Fahrers aussehen. Das heißt aber nicht automatisch, dass der Fahrer die Ursache ist. Eine Verspätung kann mehrere Ursachen haben: verspätete Vorbereitung, fehlende Taschen, die Organisation der Rampe oder die Bereitschaft des Fahrers.
 
 **Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.**
 
@@ -80,7 +80,7 @@ Ich habe auch keine bestätigte formale Matrix, die jeden Übergang zwischen Abt
 
 ## „Ich habe Bescheid gegeben“ reicht nicht
 
-Für mich muss eine gute Übergabe zwei Dinge klar machen: **wer dafür verantwortlich ist, die Arbeit zu übergeben**, und **wer dafür verantwortlich ist, sie anzunehmen**.
+Für mich muss eine gute Übergabe zwei Dinge klarmachen: **wer dafür verantwortlich ist, die Arbeit zu übergeben**, und **wer dafür verantwortlich ist, sie anzunehmen**.
 
 Es reicht nicht, dass die erste Abteilung sagt: „Ich habe Bescheid gegeben.“
 
@@ -110,7 +110,7 @@ Wenn sich ein Fehler zwischen zwei Teams wiederholt, würde ich nicht mit der Fr
 
 Meine erste Frage wäre:
 
-**An welchem Punkt hat die Arbeit die Hände gewechselt, und welche Information ist bei diesem Übergang verloren gegangen?**
+**An welchem Punkt ist die Arbeit in andere Hände übergegangen, und welche Information ist bei diesem Übergang verloren gegangen?**
 
 Dann würde ich prüfen, ob beide Teams dasselbe Verständnis davon hatten, was übergeben werden musste. Gab es einen klaren Standard? War die Arbeit wirklich bereit für das nächste Team? Wurde der Empfang bestätigt? Gab es eine verantwortliche Person, falls ein Problem auftritt?
 
@@ -118,7 +118,7 @@ Wenn diese Fragen keine Antworten haben, dann haben wir einen Prozess, in dem si
 
 ## Die Übergabekarte
 
-Das Werkzeug dieses Essays ist einfach. Nehmen Sie jeden Punkt in Ihrem Betrieb, an dem Arbeit die Hände wechselt: von einer Abteilung zur anderen, von einer Schicht zur nächsten, von innen zu einem externen Partner. Stellen Sie für jeden dieselben fünf Fragen.
+Das Werkzeug dieses Essays ist einfach. Nehmen Sie jeden Punkt in Ihrem Betrieb, an dem Arbeit in andere Hände übergeht: von einer Abteilung zur anderen, von einer Schicht zur nächsten, von innen zu einem externen Partner. Stellen Sie für jeden dieselben fünf Fragen.
 
 Wenn Sie für einen Punkt nicht alle fünf beantworten können, haben Sie die Stelle gefunden, an der Fehler weiter verloren gehen werden.
 

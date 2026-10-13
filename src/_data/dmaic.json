@@ -18,7 +18,7 @@
         ],
         [
           "SIPOC",
-          "One line of boxes: Suppliers, Inputs, Process (five to seven steps), Outputs, Customers. It sets the borders of the project before anyone argues about details."
+          "One line of boxes: Suppliers, Inputs, Process (five to seven steps), Outputs, Customers. It sets the boundaries of the project before anyone argues about details."
         ],
         [
           "Problem statement",
@@ -98,7 +98,7 @@
             "Setting control limits"
           ],
           "answer": 0,
-          "why": "SIPOC sets the borders of the process before the project starts measuring."
+          "why": "SIPOC sets the boundaries of the process before the project starts measuring."
         }
       ]
     },
@@ -254,7 +254,7 @@
         [
           "Damage Control",
           "/tools/damage-control/",
-          "for the Pareto and the stage by type matrix"
+          "for the Pareto and the stage-by-type matrix"
         ],
         [
           "5 Whys",

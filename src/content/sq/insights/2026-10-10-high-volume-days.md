@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Presioni nuk i krijon gjithmonë problemet. Shpesh i bën më të dukshme.
 teaser: Kishim ditë kur kërkesa ishte më e lartë se parashikimi. Shoferë të thirrur me njoftim të shkurtër, disa ende në ramp-up. Atë ditë shihej sa ishte përgatitur vërtet operacioni.
-description: "Ditët kur kërkesa kalonte parashikimin në last mile: çfarë kam të dokumentuar dhe çfarë jo, ku binte presioni, pse kapaciteti nuk është vetëm numri i njerëzve, dhe pesë kontrolle para ditës së madhe."
+description: "Ditët kur kërkesa kalonte parashikimin në last mile: ku binte presioni, pse kapaciteti nuk matet vetëm me njerëz, dhe pesë kontrolle para ditës së madhe."
 deck: 'Eseja e tetë e serisë “Përmirësimi që mbahet”: ditët kur kërkesa kalonte parashikimin, ku binte presioni, pse kapaciteti nuk është numri i njerëzve, dhe pesë kontrolle para ditës së madhe.'
 relatedTools:
   - /tools/delay-analyzer/

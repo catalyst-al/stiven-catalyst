@@ -2,7 +2,7 @@
   "storageKey": "sc-dmaic-sq",
   "case": {
     "title": "Rasti: dëmet në daljen e mallit në një qendër pakosh",
-    "text": "Një qendër dërgon rreth 18.400 njësi në javë. Klientët ankohen për pako të shtypura, dhe shkalla e dëmeve është pothuajse dyfishi i asaj që u premtua. Ndiqni një projekt përmirësimi nëpër të pesë hapat, me të njëjtët numra që mund t’i ngarkoni si shembuj në mjete."
+    "text": "Një qendër dërgon rreth 18.400 njësi në javë. Klientët ankohen për pako të shtypura, dhe shkalla e dëmeve është pothuajse dyfishi i asaj që u premtua. Ndiqni një projekt përmirësimi nëpër të pesë hapat, me të njëjtët numra që mund t'i ngarkoni si shembuj në mjete."
   },
   "modules": [
     {
@@ -12,7 +12,7 @@
       "goal": "Bini dakord cilin problem po zgjidhni, për kë, si do ta matni dhe çfarë mbetet jashtë.",
       "output": "Një kartë projekti",
       "ideas": [
-        ["Zëri i klientit → CTQ", "Filloni nga ajo që vë re klienti, pastaj ktheheni në diçka që mund ta matni: kërkesa kritike për cilësinë (Critical to Quality)."],
+        ["Zëri i klientit → CTQ", "Filloni nga ajo që vë re klienti, pastaj kthejeni në diçka që mund ta matni: kërkesa kritike për cilësinë (Critical to Quality)."],
         ["SIPOC", "Një rresht kutish: Furnitorët, Hyrjet, Procesi (pesë deri në shtatë hapa), Daljet, Klientët. I cakton kufijtë e projektit para se dikush të debatojë për detajet."],
         ["Përshkrimi i problemit", "Çfarë, ku, që kur, sa, dhe diferenca nga objektivi. Ende pa shkak dhe pa zgjidhje: ato vijnë më vonë, nga të dhënat."]
       ],
@@ -77,22 +77,22 @@
       "id": "measure",
       "letter": "M",
       "name": "Mat",
-      "goal": "Zbuloni si performon procesi sot, me të dhëna që mund t’u besoni, para se të ndryshoni ndonjë gjë.",
+      "goal": "Zbuloni si performon procesi sot, me të dhëna që mund t'u besoni, para se të ndryshoni ndonjë gjë.",
       "output": "Një pikë nisjeje",
       "ideas": [
         ["Përkufizimi operacional", "Shkruani saktësisht çfarë numërohet, me foto. “I dëmtuar” do të thotë gjëra të ndryshme për njerëz të ndryshëm derisa të shkruhet."],
         ["Plani i mbledhjes së të dhënave", "Çfarë regjistrohet, ku, nga kush, sa shpesh dhe në çfarë formati. Regjistroni hapin dhe shkakun në momentin kur gjendet problemi."],
-        ["Kontrolloni matjen", "Lërini dy njerëz të gjykojnë të njëjtat njëzet raste. Nëse nuk pajtohen, rregulloni përkufizimin para se t’u besoni të dhënave."],
+        ["Kontrolloni matjen", "Lërini dy njerëz të gjykojnë të njëjtat njëzet raste. Nëse nuk pajtohen, rregulloni përkufizimin para se t'u besoni të dhënave."],
         ["Pika e nisjes", "Niveli aktual si shkallë, DPMO dhe nivel sigma, gjatë dy deri katër javëve."]
       ],
       "case": [
         ["Përkufizimi", "Një njësi është e dëmtuar kur kutia e jashtme është e shtypur, e grisur ose e lagur aq sa ta vërejë klienti, e gjetur kudo nga rafti i mbledhjes deri te dorëzimi te shoferi."],
-        ["Kontrolli", "Dy përgjegjës turni gjykuan të njëjtat 20 kuti dhe u pajtuan për 17. Tri ishin “pak të shtypura”: përkufizimi mori një foto të asaj që numërohet dhe asaj që jo."],
+        ["Kontrolli", "Dy shefa turni gjykuan të njëjtat 20 kuti dhe u pajtuan për 17. Tri ishin “pak të shtypura”: përkufizimi mori një foto të asaj që numërohet dhe asaj që jo."],
         ["Pika e nisjes", "104 të dëmtuara nga 18.400 njësi: 0,57%, DPMO 5.652, niveli sigma 4,03."]
       ],
       "mistakes": [
         "Të ndryshosh procesin ndërsa ende po e mat.",
-        "T’i besosh një numri që dy njerëz do ta numëronin ndryshe.",
+        "T'i besosh një numri që dy njerëz do ta numëronin ndryshe.",
         "Të matësh vetëm në fund të linjës, që të mos shohësh kurrë ku nis."
       ],
       "tools": [
@@ -124,12 +124,12 @@
           "why": "104 ÷ 18.400 × 1.000.000 = 5.652 defekte për milion."
         },
         {
-          "q": "Dy përgjegjës gjykojnë të njëjtat 20 kuti dhe nuk pajtohen për pesë. Çfarë vjen së pari?",
+          "q": "Dy shefa turni gjykojnë të njëjtat 20 kuti dhe nuk pajtohen për pesë. Çfarë vjen së pari?",
           "options": [
             "Nisni përmirësimin gjithsesi",
             "Merrni mesataren e përgjigjeve të tyre",
-            "Rregulloni përkufizimin dhe matjen para se t’u besoni të dhënave",
-            "Përdorni përgjigjet e përgjegjësit më të rreptë"
+            "Rregulloni përkufizimin dhe matjen para se t'u besoni të dhënave",
+            "Përdorni përgjigjet e shefit më të rreptë"
           ],
           "answer": 2,
           "why": "Një matje që nuk mund ta përsërisni do të fshehë ose do të shpikë përmirësime më vonë."
@@ -143,14 +143,14 @@
       "goal": "Gjeni shkaqet e pakta rrënjësore pas pjesës më të madhe të problemit, dhe provojini me të dhëna, jo me mendime.",
       "output": "Shkaqe rrënjësore të verifikuara",
       "ideas": [
-        ["Pareto", "Renditni shkaqet sipas madhësisë. Zakonisht dy ose tre mbajnë rreth 80% të problemit: të paktat thelbësore."],
+        ["Pareto", "Renditni shkaqet sipas madhësisë. Zakonisht dy ose tre përbëjnë rreth 80% të problemit: të paktat thelbësore."],
         ["Shtresëzoni", "Ndani të dhënat sipas hapit, turnit, orës, produktit ose linjës. Problemet fshihen te mesataret."],
         ["Shkoni e shikoni", "Shikoni punën aty ku prodhohet numri, në kohën kur shkon keq."],
         ["5 Whys dhe diagrami kurriz peshku", "Pyesni pse derisa të arrini te diçka në proces që mund ta ndryshoni. Diagrami kurriz peshku kontrollon njerëzit, metodën, makineritë, materialin, matjen dhe mjedisin."],
         ["Shkak i zakonshëm apo i veçantë", "Një kartë kontrolli ju tregon nëse po shihni nivelin normal të procesit apo disa ditë të pazakonta."]
       ],
       "case": [
-        ["Pareto", "Stivimi 56%, sigurimi i ngarkesës 14%, manipulimi 11%: tre shkaqe mbajnë 81% të dëmeve."],
+        ["Pareto", "Stivimi 56%, sigurimi i ngarkesës 14%, manipulimi 11%: tre shkaqe përbëjnë 81% të dëmeve."],
         ["Ku dhe kur", "63% gjendet në ngarkim, 60% në turnin e pasdites, shumica në valën e nisjeve të orës 11:00."],
         ["Në terren", "Në valën e vonë, ngarkuesit ndërtojnë mure shpejt dhe vendosin pako të rënda sipër për të mbushur boshllëqet. Te rampa nuk ka rregull stivimi."],
         ["Prova", "Dëmet për 1.000 njësi janë 2,4 herë më të larta në orët e pikut të ngarkimit se në të tjerat. Karta e kontrollit nuk tregon ditë të veçanta: niveli vjen nga metoda."]
@@ -175,13 +175,13 @@
         {
           "q": "Pareto tregon stivimin 56%, sigurimin e ngarkesës 14%, manipulimin 11% dhe katër shkaqe të tjera 19%. Ku filloni?",
           "options": [
-            "Me të shtatat njëherësh",
+            "Me të shtatë njëherësh",
             "Me stivimin, pastaj sigurimin e ngarkesës: bashkë 70%",
             "Me më të voglin, sepse është më i shpejti",
             "Me manipulimin, sepse ka të bëjë me njerëzit"
           ],
           "answer": 1,
-          "why": "Të paktat thelbësore mbajnë pjesën më të madhe të problemit. Shtatë projekte të vogla njëherësh rrallë mbarojnë."
+          "why": "Të paktat thelbësore përbëjnë pjesën më të madhe të problemit. Shtatë projekte të vogla njëherësh rrallë mbarojnë."
         },
         {
           "q": "A është “ngarkuesi ishte i pakujdesshëm” shkak rrënjësor?",
@@ -215,7 +215,7 @@
       "output": "Një kundërmasë e provuar",
       "ideas": [
         ["Mundësitë, pastaj zgjedhja", "Mblidhni disa kundërmasa dhe zgjidhni sipas ndikimit dhe mundimit. Ideja e parë rrallë është më e mira."],
-        ["Poka-yoke", "Bëjeni gabimin të vështirë për t’u bërë: planimetria, shenjat, fiksimet dhe cilësimet e paracaktuara në vend të kujtesave."],
+        ["Poka-yoke", "Bëjeni gabimin të vështirë për t'u bërë: planimetria, shenjat, fiksimet dhe cilësimet e paracaktuara në vend të kujtesave."],
         ["Puna standarde", "Shkruajeni mënyrën e re si një standard të shkurtër dhe vizual që një person i ri mund ta ndjekë që ditën e parë."],
         ["Piloti", "Testoni në shkallë të vogël, në një rampë ose një turn, aq gjatë sa të shihet efekti. Planifiko, bëj, kontrollo, vepro."]
       ],
@@ -243,7 +243,7 @@
         {
           "q": "Cila kundërmasë parandalon më mirë që pakot e rënda të përfundojnë sipër?",
           "options": [
-            "T’u kujtohet ngarkuesve në çdo briefing",
+            "T'u kujtohet ngarkuesve në çdo briefing",
             "Një figurë stivimi dhe zona në dysheme, që të rëndat të shkojnë poshtë nga vetë dizajni",
             "Një letër paralajmëruese pas çdo dëmi",
             "Edhe një inspektim para nisjes"
@@ -289,12 +289,12 @@
       ],
       "case": [
         ["Standardi", "Standardi i stivimit është në SOP dhe në trajnimin e të rinjve, me figurat e rampave."],
-        ["Plani i kontrollit", "Dëmet ditore në një kartë p me kufijtë nga javët e pilotit. Një ditë mbi kufirin e sipërm: përgjegjësi i turnit kontrollon të njëjtin turn dhe bën 5 Whys brenda 24 orëve. Një kontroll javor në terren te rampa."],
+        ["Plani i kontrollit", "Dëmet ditore në një kartë p me kufijtë nga javët e pilotit. Një ditë mbi kufirin e sipërm: shefi i turnit kontrollon të njëjtin turn dhe bën 5 Whys brenda 24 orëve. Një kontroll javor në terren te rampa."],
         ["Rezultati", "0,31% me 18.400 njësi në javë: rreth 47 njësi të dëmtuara më pak dhe 500 € më pak kompensime në javë. Nga java 47 përgjegjësi është menaxheri i daljes së mallit."]
       ],
       "mistakes": [
         "Të shpallësh fitoren kur mbaron piloti.",
-        "T’i mbash kufijtë e vjetër në kartë, që të mos shfaqet kurrë asnjë sinjal.",
+        "T'i mbash kufijtë e vjetër në kartë, që të mos shfaqet kurrë asnjë sinjal.",
         "Asnjë pronar pasi largohet ekipi i projektit."
       ],
       "tools": [
@@ -346,14 +346,14 @@
   ],
   "glossary": [
     ["CTQ", "Critical to Quality: një nevojë e klientit e shkruar si diçka që mund të matet."],
-    ["DMAIC", "Define, Measure, Analyze, Improve, Control (Përcakto, Mat, Analizo, Përmirëso, Kontrollo): pesë hapat e një projekti përmirësimi Six Sigma."],
+    ["DMAIC", "Define, Measure, Analyse, Improve, Control (Përcakto, Mat, Analizo, Përmirëso, Kontrollo): pesë hapat e një projekti përmirësimi Six Sigma."],
     ["DPMO", "Defekte për milion mundësi: defektet ÷ (njësi × mundësi për njësi) × 1.000.000."],
     ["Niveli sigma", "Një mënyrë për të shprehur sa shpesh dështon një proces. Katër sigma janë rreth 6.200 defekte për milion; gjashtë sigma janë 3,4."],
     ["Rendimenti", "Pjesa e njësive të bëra saktë herën e parë."],
     ["SIPOC", "Suppliers, Inputs, Process, Outputs, Customers: një hartë e procesit në një rresht."],
     ["Përkufizimi operacional", "Një përshkrim i saktë dhe i përbashkët i asaj që numërohet, që të gjithë të matin njësoj."],
     ["Pika e nisjes", "Si performon procesi para se ta ndryshoni."],
-    ["Pareto", "Shkaqet e renditura sipas madhësisë; zakonisht pak më të mëdhenjtë mbajnë pjesën më të madhe të problemit."],
+    ["Pareto", "Shkaqet e renditura sipas madhësisë; zakonisht pak shkaqe të mëdha përbëjnë pjesën më të madhe të problemit."],
     ["Shkaku rrënjësor", "Shkaku në proces që, po të hiqet, e ndalon problemin të kthehet."],
     ["Shkak i zakonshëm", "Variacioni normal i ndërtuar brenda një procesi. Vetëm ndryshimi i procesit e ndryshon."],
     ["Shkak i veçantë", "Diçka e pazakontë në një ditë ose një seri të caktuar. Gjejeni dhe hiqeni."],
@@ -396,7 +396,7 @@
     "scopeIn": "Nga rafti i mbledhjes deri te dorëzimi te shoferi",
     "scopeOut": "Transporti ndërqytetës, ambalazhi i furnitorit",
     "sponsor": "Menaxheri i daljes së mallit",
-    "team": "Përgjegjësit e turnit të mëngjesit dhe të pasdites, dy ngarkues, një shofer, koordinatori i cilësisë",
+    "team": "Shefat e turnit të mëngjesit dhe të pasdites, dy ngarkues, një shofer, koordinatori i cilësisë",
     "benefit": "Rreth 500 € në javë kompensime, më pak ankesa nga klientët",
     "dates": "Përcakto java 39 · Mat java 41 · Analizo java 42 · Përmirëso java 45 · Kontrollo java 47"
   }

@@ -67,7 +67,7 @@
   <p class="kicker">{{ W.sourcesPage.kicker }}</p>
   <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
   <p class="lead">{{ W.sourcesPage.lead }}</p>
-  <ol class="src{{ ' many' if volume.sources.length > 9 }}">{% for s in volume.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
+  <ol class="src{{ ' many' if volume.sources.length > 9 }}">{% for s in volume.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via | inLang(lang) }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
   {%- if volume.sources.length <= 9 %}
   <div class="bottom"><div class="callout wk-method"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div></div>
   {%- endif %}

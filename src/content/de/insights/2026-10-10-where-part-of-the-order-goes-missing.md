@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Eine Bestellung kann unvollständig beim Kunden ankommen, aber das Problem kann lange vor der Zustellung begonnen haben.
 teaser: Wenn eine Tasche fehlte, war die Regel klar. Der Fahrer informiert den Team Leader, und der Trolley verlässt seine Zone nicht, bis das Problem gelöst ist.
-description: "Incomplete als Kennzahl auf der letzten Meile: was ich belegen kann und was nicht, die Regel bei einer fehlenden Tasche, warum eine unvollständige Bestellung eine Geschichte vor der Tür des Kunden hat, und die Kontrolle vor der Abfahrt in fünf Punkten."
+description: "Incomplete auf der letzten Meile: die Regel bei fehlender Tasche, die Vorgeschichte einer unvollständigen Bestellung und die Kontrolle vor der Abfahrt."
 deck: 'Der zweite Essay der Reihe „Verbesserung, die hält“: Incomplete als Kennzahl auf der letzten Meile, die Regel bei einer fehlenden Tasche, warum eine unvollständige Bestellung eine Geschichte vor der Tür des Kunden hat, und die Kontrolle vor der Abfahrt in fünf Punkten.'
 relatedTools:
   - /tools/incomplete-control/
@@ -79,7 +79,7 @@ Die zweite:
 
 **Incomplete darf nicht nur als negative Zahl oder als Fehler des Fahrers gesehen werden. Es soll uns helfen zu verstehen, wo das Produkt oder die Information verloren gegangen ist und wie wir verhindern, dass es wieder passiert.**
 
-Das ist der Unterschied zu Schäden. Ein Schaden ist, wenn er entdeckt wird, schon passiert. Eine fehlende Tasche ist, wenn sie an der Rampe entdeckt wird, noch nur ein Fehlbestand. Sie ist noch keine unvollständige Bestellung beim Kunden. Deshalb ist die wertvollste Kontrolle nicht die, die Fälle zählt, nachdem sie passiert sind. Es ist die, die den Fehlbestand vor der Abfahrt auffängt.
+Das ist der Unterschied zu Schäden. Ein Schaden ist, wenn er entdeckt wird, schon passiert. Eine fehlende Tasche ist, wenn sie an der Rampe entdeckt wird, erst ein Fehlbestand. Sie ist noch keine unvollständige Bestellung beim Kunden. Deshalb ist die wertvollste Kontrolle nicht die, die Fälle zählt, nachdem sie passiert sind. Es ist die, die den Fehlbestand vor der Abfahrt auffängt.
 
 ## Die Kontrolle vor der Abfahrt
 

@@ -94,9 +94,9 @@ Wenn ich fünf Minuten mit den Tagesmanagern hätte, würde ich ihnen sagen, den
 
 Die fünf Dinge, die ich mir jeden Morgen ansehen würde:
 
-1. **Was ungelöst geblieben ist.** Nicht nur, was passiert ist, sondern was noch Handlung braucht.
+1. **Was ungelöst geblieben ist.** Nicht nur, was passiert ist, sondern was noch zu tun ist.
 2. **Wo es Unterschiede zwischen System und Realität gab.** Reservierungen, Status, Dokumentation oder finanzielle Themen, die ein Eingreifen brauchten.
-3. **Welche Probleme sich wiederholen.** Ein Fehler einmal kann Zufall sein. Derselbe Fehler mehrmals ist ein Prozess.
+3. **Welche Probleme sich wiederholen.** Einmal kann ein Fehler Zufall sein. Derselbe Fehler mehrmals ist ein Prozess.
 4. **Was den Gast oder den Betrieb betroffen hat.** Denn dort sieht man, ob ein internes Problem anfängt, zum Problem des Kunden zu werden.
 5. **Was die nächste Schicht wissen muss, bevor die Arbeit beginnt.** Ein guter Bericht soll nicht nur die Vergangenheit erzählen. Er soll den Tag, der beginnt, sicherer machen.
 

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein guter Standard misst sich nicht daran, wie schön er geschrieben ist. Sondern daran, wie genau verschiedene Menschen ihn umsetzen können, auch wenn sie nicht dieselbe Sprache sprechen.
-description: "Wie man einen Standard für ein Team verständlich macht, das viele Sprachen spricht: Sprache und Können als zwei verschiedene Probleme, kurze und visuelle Anweisungen, „Zeig mir, wie du es machen würdest“ statt „Verstanden?“, und die Karte für eine klare Anweisung."
+description: "Standards für ein mehrsprachiges Team: Sprache und Können trennen, kurze, visuelle Anweisungen und „Zeig mir, wie du es machen würdest“ statt „Verstanden?“"
 teaser: Eine Sprache noch nicht gut zu sprechen heißt nicht, in seiner Arbeit nicht gut zu sein.
 deck: 'Der achte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: was mich die Arbeit in Deutschland gelehrt hat, warum Übersetzen nicht reicht, die fünf Dinge einer guten Anweisung, und die Karte, mit der aus einer unklaren Anweisung ein prüfbarer Standard wird.'
 checklist:
@@ -28,14 +28,14 @@ checklist:
 firstMove:
   - Nehmen Sie eine Anweisung, die immer wieder missverstanden wird, und schreiben Sie sie neu als Handlung, Ort und Zeitpunkt, Prüfung, Ausnahme.
   - Fügen Sie ein Foto oder einen Screenshot des richtig ausgeführten Schritts hinzu.
-  - "Statt „haben Sie verstanden?“ sagen Sie: „Zeigen Sie mir, wie Sie es machen würden.“"
+  - "Statt „Verstanden?“ sagen Sie: „Zeig mir, wie du es machen würdest.“"
 ---
 
 Ein Team kann aus Menschen bestehen, die verschiedene Sprachen sprechen. Aber der Arbeitsstandard muss für alle dasselbe bedeuten.
 
 Für mich hat dieses Thema auch eine persönliche Seite. Ich bin im November 2021 nach Deutschland gekommen, aus einem Arbeitsumfeld in Albanien, und habe in Betrieben gearbeitet, in denen Deutsch Teil der beruflichen Kommunikation war. Ich musste nicht nur die Sprache lernen, sondern auch die Art, wie bei der Arbeit kommuniziert wird. Über diesen Schritt habe ich in [Von Albanien nach Deutschland](/de/insights/from-albania-to-germany/) geschrieben.
 
-Dieser Essay handelt nicht von Sprache. Er handelt vom Standard, und von der Frage, wie man einen Standard für Menschen verständlich macht, die nicht auf demselben Niveau dieselbe Sprache sprechen.
+Dieser Essay handelt nicht von Sprache. Er handelt vom Standard und von der Frage, wie man einen Standard für Menschen verständlich macht, die nicht auf demselben Niveau dieselbe Sprache sprechen.
 
 ## Was ich habe und was nicht
 
@@ -67,13 +67,13 @@ Diese Regeln waren kurz und an klare Handlungen gebunden: wo der Fahrer wartet, 
 
 Im Hotel habe ich mit Checklisten und SOPs auf Deutsch gearbeitet und mit englischen Materialien für die Kommunikation mit Gästen und für die Hotelservices. Ich habe Checklisten, Screenshots, Videos und Vorführungen von Kollegen genutzt.
 
-Als ich die Abläufe des Night Audit gelernt habe, hat es mir geholfen, einen konkreten Schritt auf dem Bildschirm zu sehen und mit der passenden Anweisung zu verbinden. Das hat auch beeinflusst, wie ich angefangen habe, die SOP-Materialien in eine besser durchsuchbare Struktur zu bringen, wie ich in [Eine gute SOP ist kein Dokument](/de/insights/a-good-sop-is-not-a-document/) geschrieben habe.
+Als ich die Abläufe des Night Audits gelernt habe, hat es mir geholfen, einen konkreten Schritt auf dem Bildschirm zu sehen und mit der passenden Anweisung zu verbinden. Das hat auch beeinflusst, wie ich angefangen habe, die SOP-Materialien in eine besser durchsuchbare Struktur zu bringen, wie ich in [Eine gute SOP ist kein Dokument](/de/insights/a-good-sop-is-not-a-document/) geschrieben habe.
 
 ## Übersetzen reicht nicht
 
 Es reicht nicht, ein Dokument zu übersetzen. Man muss sicherstellen, dass Bedeutung und Handlung gleich bleiben.
 
-Ein hypothetisches Beispiel: Eine Anweisung lautet nur „Ladung prüfen“. Zwei Menschen können sie unterschiedlich verstehen. Der eine prüft die Zahl der Bags. Der andere prüft die Ladereihenfolge.
+Ein hypothetisches Beispiel: Eine Anweisung lautet nur „Ladung prüfen“. Zwei Menschen können sie unterschiedlich verstehen. Der eine prüft die Zahl der Taschen. Der andere prüft die Ladereihenfolge.
 
 Das Problem in diesem Beispiel ist nicht unbedingt die Sprache. Es kann der Standard selbst sein, der unklar ist. Und ein unklarer Standard bleibt unklar, in welche Sprache man ihn auch übersetzt.
 
