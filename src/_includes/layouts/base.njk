@@ -63,6 +63,11 @@
 {%- endif %}
   {%- set feedUrl = "/feed.xml" if not lang or lang == "en" else "/" + lang + "/feed.xml" %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ feedUrl }}">
+  {#- The podcast of the Management Review, so that a podcast app given this site's address finds it. -#}
+  {%- set podcastFeed = podcast[lang or "en"].feed %}
+  {%- if podcastFeed %}
+  <link rel="alternate" type="application/rss+xml" title="{{ podcastFeed.title }}" href="{{ podcastFeed.path }}">
+  {%- endif %}
 {%- if not noindex %}
 {% include "partials/structured-data.njk" %}
 {%- endif %}
@@ -136,6 +141,7 @@
       <p class="footer-legal">
         {%- if hasLegal %}<a href="{{ '/impressum.html' | local(lang) }}">{{ "Legal notice" | t(lang) }}</a><a href="{{ '/datenschutz.html' | local(lang) }}">{{ "Privacy" | t(lang) }}</a>{% endif -%}
         <a href="{{ feedUrl }}">RSS</a>
+        {%- if podcastFeed %}<a href="{{ '/podcast.html' | local(lang) }}">Podcast</a>{% endif %}
       </p>
     </div>
     <nav class="footer-links" aria-label="{{ 'Footer' | t(lang) }}">

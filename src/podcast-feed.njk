@@ -1,0 +1,61 @@
+---
+pagination:
+  data: podcast.feeds
+  size: 1
+  alias: feed
+permalink: "{{ feed.path }}"
+eleventyExcludeFromCollections: true
+---
+{#- The podcast of one language (src/_data/podcast.js): RSS 2.0 with the tags of Apple Podcasts (itunes:) and of
+    Podcasting 2.0 (podcast:), which Spotify, Pocket Casts, Overcast and the rest read too. The text is escaped by
+    Nunjucks, which is valid XML. -#}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  <channel>
+    <title>{{ feed.title }}</title>
+    <link>{{ feed.pageUrl | absoluteUrl }}</link>
+    <atom:link href="{{ feed.url }}" rel="self" type="application/rss+xml"/>
+    <description>{{ feed.description }}</description>
+    <language>{{ feed.lang }}</language>
+    <copyright>© {{ feed.episodes[feed.episodes.length - 1].published.slice(0, 4) }} {{ podcast.author }}</copyright>
+    <pubDate>{{ feed.updated }}</pubDate>
+    <lastBuildDate>{{ feed.updated }}</lastBuildDate>
+    <image>
+      <url>{{ feed.image | absoluteUrl }}</url>
+      <title>{{ feed.title }}</title>
+      <link>{{ feed.pageUrl | absoluteUrl }}</link>
+    </image>
+    <itunes:image href="{{ feed.image | absoluteUrl }}"/>
+    <itunes:author>{{ podcast.author }}</itunes:author>
+    <itunes:owner>
+      <itunes:name>{{ podcast.author }}</itunes:name>
+      <itunes:email>{{ podcast.email }}</itunes:email>
+    </itunes:owner>
+    <itunes:category text="Business">
+      <itunes:category text="Management"/>
+    </itunes:category>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <podcast:guid>{{ feed.guid }}</podcast:guid>
+    <podcast:medium>podcast</podcast:medium>
+    {%- for e in feed.episodes %}
+    <item>
+      <title>{{ e.title }}</title>
+      <itunes:title>{{ e.title }}</itunes:title>
+      <link>{{ e.issueUrl | absoluteUrl }}</link>
+      <guid isPermaLink="false">{{ e.guid }}</guid>
+      <pubDate>{{ e.pubDate }}</pubDate>
+      {%- set note = "Management Review " + e.label + ": " + e.issueHeading + ". " + e.issueSub %}
+      {%- set made = podcast[feed.lang].howText if e.ai else "" %}
+      <description>{{ note }}{% if made %} {{ made }}{% endif %} {{ podcast[feed.lang].readIssue }}: {{ e.issueUrl | absoluteUrl }}</description>
+      <content:encoded>{{ "<p><strong>Management Review " + e.label + ": " + e.issueHeading + ".</strong> " + e.issueSub + "</p>" + ("<p>" + made + "</p>" if made else "") + "<p><a href=\"" + (e.issueUrl | absoluteUrl) + "\">" + podcast[feed.lang].readIssue + " →</a></p>" }}</content:encoded>
+      <enclosure url="{{ e.src | absoluteUrl }}" length="{{ e.bytes }}" type="audio/mpeg"/>
+      <itunes:duration>{{ e.seconds }}</itunes:duration>
+      <itunes:image href="{{ e.image | absoluteUrl }}"/>
+      <itunes:episode>{{ e.number }}</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>
