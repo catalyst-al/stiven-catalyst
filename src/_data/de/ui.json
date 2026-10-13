@@ -2121,5 +2121,8 @@
   "Late routes are above the usual level in the week of {day}: {n}.": "Die verspäteten Touren liegen in der Woche ab {day} über dem Üblichen: {n}.",
   "damaged unit": "beschädigte Einheit",
   "incomplete order": "unvollständiger Auftrag",
-  "no order total, so this is a count": "keine Gesamtzahl der Aufträge, daher eine Anzahl"
+  "no order total, so this is a count": "keine Gesamtzahl der Aufträge, daher eine Anzahl",
+  "The number you typed for {volume} was for {days}, so it is not used for the days chosen now.": "Die Zahl, die Sie für {volume} eingetragen haben, galt für {days} und wird für die jetzt gewählten Tage nicht verwendet.",
+  "The routes in the period you typed were for {days}. Type the routes of the days chosen now to see the share on time.": "Die eingetragenen Touren im Zeitraum galten für {days}. Tragen Sie die Touren der jetzt gewählten Tage ein, um den Anteil pünktlicher Touren zu sehen.",
+  "all days": "alle Tage"
 }

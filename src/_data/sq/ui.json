@@ -2121,5 +2121,8 @@
   "Late routes are above the usual level in the week of {day}: {n}.": "Linjat me vonesë janë mbi normalen në javën e {day}: {n}.",
   "damaged unit": "njësi e dëmtuar",
   "incomplete order": "porosi e paplotë",
-  "no order total, so this is a count": "pa numrin total të porosive, prandaj ky është numër"
+  "no order total, so this is a count": "pa numrin total të porosive, prandaj ky është numër",
+  "The number you typed for {volume} was for {days}, so it is not used for the days chosen now.": "Numri që shkruat për {volume} ishte për {days}, prandaj nuk përdoret për ditët e zgjedhura tani.",
+  "The routes in the period you typed were for {days}. Type the routes of the days chosen now to see the share on time.": "Linjat në periudhë që shkruat ishin për {days}. Shkruani linjat e ditëve të zgjedhura tani për të parë përqindjen në kohë.",
+  "all days": "të gjitha ditët"
 }
