@@ -92,13 +92,18 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   assert.match(thirdClosing, /class="essay-series-next" href="\/sq\/insights\/the-system-is-faster-than-you\/"/);
   assert.equal((thirdClosing.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
 
-  // The fourth series has begun: its first essay is the newest, and the next one is on its way.
+  // The fourth series is being written: its first essay leads to the second, the newest, whose next one is on its way.
   const fourth = built('sq/insights/the-system-is-faster-than-you/index.html');
   assert.match(fourth, /Sistemi është më i shpejtë se ti · Eseja 1 nga 10/);
-  assert.match(fourth, /serisë është në rrugë/);
-  assert.doesNotMatch(fourth, /rel="next"/);
+  assert.match(fourth, /href="\/sq\/insights\/when-the-dashboard-turns-red-before-you\/" rel="next"/);
   assert.equal((fourth.match(/<textarea[^>]*data-checklist-item/g) || []).length, 5);
   assert.match(fourth, /data-diagram="decision-split"/);
+  const dashboard = built('sq/insights/when-the-dashboard-turns-red-before-you/index.html');
+  assert.match(dashboard, /Sistemi është më i shpejtë se ti · Eseja 2 nga 10/);
+  assert.match(dashboard, /serisë është në rrugë/);
+  assert.doesNotMatch(dashboard, /rel="next"/);
+  assert.equal((dashboard.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
+  assert.match(dashboard, /data-diagram="dashboard-lag"/);
 
   // The last essay of the finished first series leads into the second.
   const last = built('insights/the-operations-manager-i-want-to-be/index.html');
@@ -113,7 +118,7 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   // Three finished series and the fourth, just begun.
   assert.equal((page.match(/>10 ese</g) || []).length, 2);
   assert.match(page, />12 ese</);
-  assert.match(page, /1 nga 10 ese</);
+  assert.match(page, /2 nga 10 ese</);
   assert.match(page, /10 ese</);
   assert.match(page, /12 ese</);
   const row = page.slice(page.indexOf('data-read-row="the-first-30-days"'));
