@@ -9,6 +9,10 @@
 {%- set cover = reader.pages[0] -%}
 {%- set pdf = "/media/magazine/" + review.slug + "/" + review.slug + "-" + lang + ".pdf" -%}
 {%- set essays = collections["insights" + (lang | langSuffix)] -%}
+{#- At the end of the reader: the special edition came before the monthly one, so on to its first issue. -#}
+{%- set first = weekly.issues[0] -%}
+{%- set WK = weekly[lang] -%}
+{%- set onward = { url: ("/magazine/" + first.slug + ".html") | local(lang), cover: magazinePages[first.slug][lang].pages[0], label: WK.name + " · " + WK.labels.edition, title: first[lang].heading, meta: WK.labels.no + " " + first.no + " · " + first[lang].date } -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
   back: "Back cover" | t(lang),
@@ -50,6 +54,7 @@
           {%- endfor %}
         </div>
       </div>
+      {%- include "partials/book-onward.njk" %}
 
       <div class="book-controls" data-book-controls hidden>
         <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>

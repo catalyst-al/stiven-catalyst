@@ -157,9 +157,15 @@
     });
     $("[data-book-prev]").disabled = turned === 0;
     $("[data-book-next]").disabled = turned >= sheets.length - (spread ? 0 : 1);
-    // On the back cover, the way on to another issue (the magazine).
+    // On the back cover, the way on to another issue (the magazine), and the next one right under the page.
     const end = $("[data-book-end]");
     if (end) end.hidden = last !== total;
+    const onward = $("[data-book-onward]");
+    if (onward) {
+      onward.hidden = false;
+      onward.classList.toggle("is-shown", last === total);
+      onward.inert = last !== total;
+    }
   };
 
   const remember = () => {

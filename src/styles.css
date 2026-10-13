@@ -3913,6 +3913,72 @@ html:not(.js) .filter-bar { display: none; }
   .is-spread .book-sheet.is-left.is-turned:hover { transform: rotateY(-174deg); }
 }
 
+/* On the back cover, the next issue or volume right under the page (partials/book-onward.njk): folded away while
+   the pages are read, it opens and moves in when the last page comes into view (js/book.js), its border lit by a
+   light that goes round and its arrow pointing on. Folded, it gives back the gap of the reader above it. */
+@property --onward-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.book-onward {
+  --onward-angle: 0deg;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(100%, 560px);
+  max-height: 0;
+  margin-bottom: -26px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background:
+    linear-gradient(color-mix(in srgb, var(--blue) 9%, #0b1117), color-mix(in srgb, var(--blue) 9%, #0b1117)) padding-box,
+    conic-gradient(from var(--onward-angle), var(--line) 0 62%, var(--blue) 80%, var(--blue-soft) 86%, var(--line) 96%) border-box;
+  color: var(--ink);
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(18px) scale(.97);
+  transition: max-height .5s cubic-bezier(.2, .8, .2, 1), margin .5s cubic-bezier(.2, .8, .2, 1), padding .5s cubic-bezier(.2, .8, .2, 1), opacity .4s ease, transform .6s cubic-bezier(.2, .9, .25, 1.2), box-shadow .2s;
+}
+.book-onward.is-shown {
+  max-height: 180px;
+  margin-bottom: 0;
+  padding: 14px 20px;
+  opacity: 1;
+  transform: none;
+  animation: onward-light 3.2s linear .4s infinite;
+}
+.book-onward:hover,
+.book-onward:focus-visible { box-shadow: 0 0 34px -6px color-mix(in srgb, var(--blue) 70%, transparent); }
+.book-onward img { flex: none; width: 64px; height: auto; border-radius: 4px; box-shadow: 0 10px 24px rgba(0, 0, 0, .45); }
+.book-onward-copy { display: grid; flex: 1; gap: 4px; min-width: 0; text-align: left; }
+.book-onward-label { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.book-onward-title { font-family: var(--serif); font-size: clamp(18px, 2.2vw, 22px); line-height: 1.2; }
+.book-onward-meta { color: var(--muted); font-size: 13px; }
+.book-onward-arrow {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--on-blue);
+}
+.book-onward-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.book-onward.is-shown .book-onward-arrow svg { animation: onward-nudge 1.6s ease-in-out .8s infinite; }
+@keyframes onward-light { to { --onward-angle: 360deg; } }
+@keyframes onward-nudge { 0%, 55%, 100% { transform: none; } 25% { transform: translateX(5px); } }
+@media (max-width: 520px) {
+  .book-onward { gap: 12px; }
+  .book-onward.is-shown { padding: 12px 14px; }
+  .book-onward img { width: 48px; }
+  .book-onward-arrow { width: 40px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-onward { transform: none; transition: opacity .2s; }
+  .book-onward.is-shown,
+  .book-onward.is-shown .book-onward-arrow svg { animation: none; }
+}
+
 /* Controls under the book. */
 .book-controls {
   display: grid;

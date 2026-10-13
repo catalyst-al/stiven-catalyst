@@ -1,0 +1,17 @@
+{#- At the end of a reader, right under the back cover: the way on to the next issue or volume, so the reader does not
+    have to go back up to find it. js/book.js shows it, moving in, once the last page is in view; without the script
+    it stays hidden and the list of issues under the page does the same work. Needs onward: { url, label, title,
+    meta, cover } (cover optional, an entry of magazinePages). -#}
+{%- if onward %}
+      <a class="book-onward" href="{{ onward.url }}" data-book-onward hidden>
+        {%- if onward.cover %}
+        <img src="{{ onward.cover.image }}" srcset="{{ onward.cover.image | srcsetFor }}" sizes="64px" width="{{ onward.cover.width }}" height="{{ onward.cover.height }}" alt="" loading="lazy" decoding="async">
+        {%- endif %}
+        <span class="book-onward-copy">
+          <span class="book-onward-label">{{ onward.label }}</span>
+          <span class="book-onward-title">{{ onward.title }}</span>
+          {%- if onward.meta %}<span class="book-onward-meta">{{ onward.meta }}</span>{% endif %}
+        </span>
+        <span class="book-onward-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+{%- endif %}
