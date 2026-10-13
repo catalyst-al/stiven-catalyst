@@ -21,6 +21,7 @@ Esetë 1 dhe 2 u botuan më 12 dhe 13 tetor 2026 pa pyetjet. Më 13 tetor u rish
 | 4 | Skaneri është dëshmitar, jo gjykatës | Incomplete Control, 5 Whys | Drafti me kontrollin e fakteve te `seria-sistemi/04-skaneri-deshmitar.md`, në pritje të miratimit |
 | 5 | Raporti që e shkroi një makinë | Shift Handover, KPI Diagnostic | Drafti me kontrollin e fakteve te `seria-sistemi/05-raporti-qe-e-shkroi-nje-makine.md`, në pritje të miratimit |
 | 6 | Nata kur ra sistemi | Shift Handover | Drafti me kontrollin e fakteve te `seria-sistemi/06-nata-kur-ra-sistemi.md`, në pritje të miratimit |
+| 7 | Kur vjen një sistem i ri | Six Sigma DMAIC, Shift Handover | Drafti me kontrollin e fakteve te `seria-sistemi/07-kur-vjen-nje-sistem-i-ri.md`, në pritje të miratimit |
 
 ## Shifrat
 
