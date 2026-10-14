@@ -9,6 +9,11 @@ const fs = require('node:fs');
 const hasSite = fs.existsSync('_site/magazine/management-review-nr-47.html');
 const note = (path) => fs.readFileSync(`_site/${path}`, 'utf8').match(/<div class="book-corrections">[\s\S]*?<\/div>/)?.[0] ?? '';
 const plain = (html) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+// One episode of a podcast page (its <li>), or the whole page when it lists no episodes (an issue's page).
+const episodeOf = (html, slug) => {
+  const at = html.indexOf(`id="episode-${slug}"`);
+  return at < 0 ? html : html.slice(at, html.indexOf('</li>', at));
+};
 
 test('Issue 47 says, in each language, that its cover now credits Guest via Mintzberg, and since when', { skip: !hasSite }, () => {
   for (const [lang, start] of [['', 'Correction, 14 October 2026. The cover now credits the 48-second figure to Guest (1956) via Mintzberg (1975).'],
@@ -69,7 +74,7 @@ test('Issues 6, 72 and 74 say what was corrected on 13 October, only in the lang
 
 test('Episode 1 says what was cut from it, under its player, on the podcast page and in the feed, in English and German', { skip: !hasSite }, () => {
   const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'))['management-review-nr-01'];
-  const under = (html) => plain(html.match(/<p class="audio-player-correction">[\s\S]*?<\/p>/)?.[0] ?? '');
+  const under = (html) => plain(episodeOf(html, 'management-review-nr-01').match(/<p class="audio-player-correction">[\s\S]*?<\/p>/)?.[0] ?? '');
   for (const [lang, prefix, start] of [['en', '', 'Correction, 14 October 2026. Four passages the issue does not support were cut from this recording, 24 seconds in all'],
     ['de', 'de/', 'Korrektur, 14. Oktober 2026. Drei Stellen, die der Ausgabe widersprechen, wurden aus dieser Aufnahme geschnitten, zusammen 24 Sekunden']]) {
     for (const page of [`${prefix}magazine/management-review-nr-01.html`, `${prefix}podcast.html`]) {
@@ -84,5 +89,19 @@ test('Episode 1 says what was cut from it, under its player, on the podcast page
   assert.equal(audio.sq.corrections, undefined);
   for (const page of ['sq/magazine/management-review-nr-01.html', 'sq/podcast.html', 'magazine/management-review-nr-02.html']) {
     assert.doesNotMatch(fs.readFileSync(`_site/${page}`, 'utf8'), /audio-player-correction/, page);
+  }
+});
+
+test('Episode 2 says, in German only, that one sentence was cut from it', { skip: !hasSite }, () => {
+  const start = 'Korrektur, 14. Oktober 2026. Ein Satz wurde aus dieser Aufnahme geschnitten, 6 Sekunden';
+  const note = (html) => plain(episodeOf(html, 'management-review-nr-02').match(/<p class="audio-player-correction">[\s\S]*?<\/p>/)?.[0] ?? '');
+  for (const page of ['de/magazine/management-review-nr-02.html', 'de/podcast.html']) {
+    assert.ok(note(fs.readFileSync(`_site/${page}`, 'utf8')).startsWith(start), page);
+  }
+  const item = fs.readFileSync('_site/de/podcast.xml', 'utf8').split('<item>').find((x) => x.includes('stivencatalyst-management-review-nr-02-de'));
+  assert.ok(item.match(/<description>([^<]*)<\/description>/)[1].includes(start), 'de/podcast.xml');
+  // The English recording says nothing the issue contradicts, and the Albanian one was not edited: no note.
+  for (const page of ['magazine/management-review-nr-02.html', 'podcast.html', 'sq/magazine/management-review-nr-02.html', 'sq/podcast.html']) {
+    assert.equal(note(fs.readFileSync(`_site/${page}`, 'utf8')), '', page);
   }
 });

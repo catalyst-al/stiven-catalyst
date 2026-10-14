@@ -113,6 +113,15 @@ const episodesOf = (lang) => weekly.issues
   })
   .sort((a, b) => b.number - a.number);
 
+// The episodes whose recording was cut after publication (corrections in audio.json), with the languages in which it
+// was, for "How this is made".
+const isCut = (slug, lang) => Boolean(audio[slug]?.[lang]?.corrections?.length);
+const corrected = weekly.issues
+  .filter((issue) => langs.some((lang) => isCut(issue.slug, lang)))
+  .map((issue) => ({ slug: issue.slug, number: issue.number, langs: ["en", "de", "sq"].filter((lang) => isCut(issue.slug, lang)) }));
+const and = x(" and ", " dhe ", " und ");
+const listOf = (items, lang) => (items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")}${and[lang]}${items.at(-1)}`);
+
 const feedPath = (lang) => local("/podcast.xml", lang);
 const feeds = langs.filter((lang) => episodesOf(lang).length).map((lang) => {
   const episodes = episodesOf(lang);
@@ -152,6 +161,14 @@ const pages = Object.fromEntries(langs.map((lang) => {
     other: Boolean(feed && feed.lang !== lang),
     subscribe,
     totalMinutes: feed ? Math.round(feed.episodes.reduce((sum, e) => sum + e.seconds, 0) / 60) : 0,
+    // The cut episodes as this page's language names them, each linked to the podcast page of this language when its
+    // recording here was cut, otherwise to that of the first language whose recording was, where the note is shown.
+    corrected: corrected.map((c) => ({
+      slug: c.slug,
+      label: `${no[lang]} ${c.number}`,
+      url: `${local("/podcast.html", c.langs.includes(lang) ? lang : c.langs[0])}#episode-${c.slug}`,
+      languages: listOf(c.langs.map((l) => (lang === "sq" ? langName[l][lang].toLowerCase() : langName[l][lang])), lang),
+    })),
     // The episodes as this page shows them: the recording as it is, the issue it comes from in the page's language.
     list: feed ? feed.episodes.map((e) => {
       const I = weekly.issues.find((issue) => issue.slug === e.slug)[lang];
