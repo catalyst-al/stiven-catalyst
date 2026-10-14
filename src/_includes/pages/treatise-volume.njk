@@ -38,6 +38,9 @@
         <div><dt>{{ L.chapters }}</dt><dd>{{ volume.chapterCount }}</dd></div>
         <div><dt>{{ L.pages }}</dt><dd>{{ volume.pageCount }}</dd></div>
         <div><dt>{{ L.sources }}</dt><dd>{{ volume.sources | length }}</dd></div>
+      {%- if online[volume.slug] %}
+        <div><dt>{{ "Online since" | t(lang) }}</dt><dd>{{ online[volume.slug].published | readableDate(lang) }}</dd></div>
+      {%- endif %}
       </dl>
       <div class="hero-actions">
         <a class="button-primary" href="#reader" data-book-open>{{ L.open_volume }}</a>

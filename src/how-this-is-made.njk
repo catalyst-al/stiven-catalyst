@@ -1,0 +1,117 @@
+---js
+{
+  layout: "layouts/base.njk",
+  // One page per language: /how-this-is-made.html (English), /de/how-this-is-made.html, /sq/how-this-is-made.html. What
+  // it says is what can be checked: the byline of the issues, the method on their sources pages, the podcast's own note,
+  // the corrections in the publications' data and the dates in online.json.
+  pagination: { data: "pageLangs", size: 1, alias: "lang" },
+  pageLangs: ["en", "de", "sq"],
+  eleventyComputed: {
+    title: (data) => ({ en: "How this is made", de: "Wie diese Seite entsteht", sq: "Si bëhet kjo faqe" })[data.lang],
+    description: (data) => ({
+      en: "How Stiven Catalyst is made: who answers for it, where the figures come from, where AI is used, what the dates mean and how corrections are shown.",
+      de: "Wie Stiven Catalyst entsteht: wer verantwortet, woher die Zahlen kommen, wo KI eingesetzt wird, was die Daten bedeuten und wie Korrekturen gezeigt werden.",
+      sq: "Si bëhet Stiven Catalyst: kush përgjigjet, nga vijnë shifrat, ku përdoret AI-ja, çfarë tregojnë datat dhe si shfaqen korrigjimet.",
+    })[data.lang],
+  },
+  permalink: (data) => (data.lang === "en" ? "/how-this-is-made.html" : `/${data.lang}/how-this-is-made.html`),
+}
+---
+{#- An essay keeps its address in every language, under the language's folder (local() covers pages, not essays). -#}
+{%- set essay = ("" if lang == "en" else "/" + lang) + "/insights/the-report-a-machine-wrote/" -%}
+{%- set issueBase = "/magazine/management-review-nr-" -%}
+{%- set corrected = [["06", "6"], ["47", "47"], ["72", "72"], ["74", "74"]] -%}
+{%- if lang == "de" %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">Über diese Seite</p>
+  <h1>Wie diese Seite entsteht</h1>
+</section>
+<section class="shell legal">
+  <p>Stiven Catalyst ist meine Arbeit, gemacht mit KI-Werkzeugen. Hier steht, welche Werkzeuge ich wofür nutze und was bei mir bleibt.</p>
+
+  <h2>Wer verantwortet</h2>
+  <p>Ich entscheide, was hier erscheint, und ich verantworte es. Ich bin der Herausgeber, der in jeder Ausgabe der Management Review genannt ist; wo eine Publikation von „der Redaktion“ spricht, bin das ich.</p>
+
+  <h2>Was aus meiner Arbeit kommt</h2>
+  <p>Die Essays, die Reflexionen und die Antworten in „Aus der Praxis“ sind in der ersten Person geschrieben, aus meiner eigenen Arbeit. Mehrere Essays sagen offen, was ich nicht getan habe oder nicht belegen kann („Was ich nicht habe“), statt eine Erfahrung zu erfinden.</p>
+
+  <h2>Was aus der Forschung kommt</h2>
+  <p>Jede Zahl in den Publikationen stammt aus einer Quelle, die auf der Quellenseite der Ausgabe mit ihrem Jahr steht. Jede Zahl wird auf Jahr, Herausgeber und genaue Bedeutung geprüft. Eine Zahl, die an einer Zusammenfassung statt am Original geprüft wurde, ist mit „über“ markiert; meine Deutung mit „Unsere Lesart“. Eine Zahl, die sich nicht bestätigen lässt, erscheint nicht.</p>
+
+  <h2>Wo KI eingesetzt wird</h2>
+  <p>Texte, Übersetzungen und Code entstehen in Arbeitssitzungen mit Claude, einem KI-Modell von Anthropic: Entwurf und Überarbeitung, die deutsche und die albanische Fassung, die Prüfung der Zahlen an ihren Quellen, das Layout der Publikationen, die Tools und die Website selbst.</p>
+  <p>Der Podcast entsteht mit NotebookLM aus dem Text einer Ausgabe: Die zwei Stimmen sind KI-Stimmen. Sie können vereinfachen und sich manchmal irren; maßgeblich ist die Ausgabe.</p>
+  <p>Was wahr ist, entscheidet hier nicht die KI. Es gilt der Satz, mit dem <a href="{{ essay }}">„Der Bericht, den eine Maschine geschrieben hat“</a> endet: „Die Maschine kann den Bericht schreiben. Die Verantwortung für das, was der Bericht sagt, muss beim Menschen bleiben.“</p>
+
+  <h2>Was die Daten bedeuten</h2>
+  <p>Eine Ausgabe der Management Review trägt den Monat ihrer Ausgabe, wie ein Magazintitel: Die Hefte 41 bis 80 sind die Novemberausgabe 2026 und seit Oktober online. Den Tag, an dem eine Publikation online ging, nennt ihre Seite unter „Online seit“.</p>
+
+  <h2>Korrekturen</h2>
+  <p>Wird ein veröffentlichter Text korrigiert, sagt die Seite es: mit einem datierten Hinweis unter der Zusammenfassung und demselben Hinweis auf der Quellenseite des PDFs. Bisher: Management Review {% for n, label in corrected %}<a href="{{ (issueBase + n + '.html') | local(lang) }}">Nr. {{ label }}</a>{{ ", " if not loop.last }}{% endfor %} und die <a href="{{ '/magazine/management-review-2026-09.html' | local(lang) }}">Sonderausgabe vom September 2026</a>. Wenn Sie einen Fehler finden, <a href="{{ '/contact.html' | local(lang) }}">schreiben Sie mir</a>.</p>
+
+  <h2>Ihre Daten</h2>
+  <p>Die Tools laufen in Ihrem Browser: Ihre Arbeit bleibt auf Ihrem Gerät.{% if legal.name and legal.city %} Was die Website sonst verarbeitet, steht in der <a href="{{ '/datenschutz.html' | local(lang) }}">Datenschutzerklärung</a>.{% endif %}</p>
+</section>
+{%- elif lang == "sq" %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">Për këtë faqe</p>
+  <h1>Si bëhet kjo faqe</h1>
+</section>
+<section class="shell legal">
+  <p>Stiven Catalyst është puna ime, e bërë me mjete të AI-së. Këtu shkruan cilat mjete përdor, për çfarë, dhe çfarë mbetet te unë.</p>
+
+  <h2>Kush përgjigjet</h2>
+  <p>Unë vendos çfarë botohet këtu dhe unë përgjigjem për të. Unë jam redaktori që përmendet në çdo numër të Management Review; kur një botim flet për “redaksinë”, ajo jam unë.</p>
+
+  <h2>Çfarë vjen nga puna ime</h2>
+  <p>Esetë, reflektimet dhe përgjigjet te “Nga terreni” janë shkruar në vetën e parë, nga puna ime. Disa ese thonë hapur çfarë nuk kam bërë ose nuk mund ta provoj (“Ajo që nuk kam”), në vend që të shpikin një përvojë.</p>
+
+  <h2>Çfarë vjen nga kërkimi</h2>
+  <p>Çdo shifër në botime vjen nga një burim që jepet me vitin e tij në faqen e burimeve të numrit. Çdo shifër kontrollohet për vitin, botuesin dhe çfarë mat saktësisht. Një shifër e kontrolluar te një përmbledhje dhe jo te origjinali shënohet me “përmes”; interpretimi im me “Leximi ynë”. Një shifër që nuk konfirmohet nuk botohet.</p>
+
+  <h2>Ku përdoret AI-ja</h2>
+  <p>Tekstet, përkthimet dhe kodi bëhen në seanca pune me Claude, një model AI i Anthropic: hartimi dhe redaktimi, versionet në gjermanisht dhe në shqip, kontrolli i shifrave te burimet e tyre, faqosja e botimeve, mjetet dhe vetë faqja.</p>
+  <p>Podcasti bëhet me NotebookLM nga teksti i një numri: dy zërat janë zëra AI. Mund të thjeshtojnë dhe ndonjëherë të gabojnë; referenca mbetet numri.</p>
+  <p>Çfarë është e vërtetë, këtu nuk e vendos AI-ja. Vlen fjalia me të cilën mbyllet <a href="{{ essay }}">“Raporti që e shkroi një makinë”</a>: “Makina mund ta shkruajë raportin. Përgjegjësinë për atë që thotë raporti duhet ta mbajë njeriu.”</p>
+
+  <h2>Çfarë tregojnë datat</h2>
+  <p>Një numër i Management Review mban muajin e botimit të vet, si kopertina e një reviste: numrat 41 deri në 80 janë botimi i nëntorit 2026 dhe janë online që nga tetori. Ditën kur një botim doli online e tregon faqja e tij, te “Online që më”.</p>
+
+  <h2>Korrigjimet</h2>
+  <p>Kur një tekst i botuar korrigjohet, faqja e thotë: me një shënim me datë nën përmbledhje, dhe me të njëjtin shënim në faqen e burimeve të PDF-së. Deri tani: Management Review {% for n, label in corrected %}<a href="{{ (issueBase + n + '.html') | local(lang) }}">Nr. {{ label }}</a>{{ ", " if not loop.last }}{% endfor %} dhe <a href="{{ '/magazine/management-review-2026-09.html' | local(lang) }}">botimi special i shtatorit 2026</a>. Nëse gjeni një gabim, <a href="{{ '/contact.html' | local(lang) }}">më shkruani</a>.</p>
+
+  <h2>Të dhënat tuaja</h2>
+  <p>Mjetet punojnë në shfletuesin tuaj: puna juaj mbetet në pajisjen tuaj.{% if legal.name and legal.city %} Çfarë tjetër përpunon faqja, e shkruan <a href="{{ '/datenschutz.html' | local(lang) }}">politika e privatësisë</a>.{% endif %}</p>
+</section>
+{%- else %}
+<section class="shell page-hero legal-hero">
+  <p class="eyebrow">About this site</p>
+  <h1>How this is made</h1>
+</section>
+<section class="shell legal">
+  <p>Stiven Catalyst is my work, made with AI tools. This page says which tools I use, for what, and what stays with me.</p>
+
+  <h2>Who answers for it</h2>
+  <p>I decide what is published here, and I answer for it. I am the editor named on every issue of the Management Review; where a publication speaks of “the editors”, that means me.</p>
+
+  <h2>What comes from my work</h2>
+  <p>The essays, the reflections and the answers in From the Floor are written in the first person, from my own work. Several essays say plainly what I have not done or cannot prove (“What I do not have”) instead of inventing an experience.</p>
+
+  <h2>What comes from research</h2>
+  <p>Every figure in the publications comes from a source listed, with its year, on the sources page of the issue. Each figure is checked for its year, its publisher and what exactly it measures. A figure checked through a summary rather than the original is marked “via”; my interpretation is marked “Our reading”. A figure that cannot be confirmed is not published.</p>
+
+  <h2>Where AI is used</h2>
+  <p>Texts, translations and code are made in working sessions with Claude, an AI model by Anthropic: drafting and editing, the German and Albanian versions, checking figures against their sources, the layout of the publications, the tools and the site itself.</p>
+  <p>The podcast is made with NotebookLM from the text of an issue: the two voices are AI voices. They can simplify, and now and then get something wrong; the issue is the reference.</p>
+  <p>AI does not decide here what is true. The rule is the sentence that closes <a href="{{ essay }}">“The report a machine wrote”</a>: “The machine can write the report. The responsibility for what the report says has to stay with a person.”</p>
+
+  <h2>What the dates mean</h2>
+  <p>An issue of the Management Review carries the month of its edition, as a magazine cover does: issues 41 to 80 are the November 2026 edition, online since October. The day a publication went online is on its page, under “Online since”.</p>
+
+  <h2>Corrections</h2>
+  <p>When a published text is corrected, the page says so: a dated note under its summary, and the same note on the sources page of its PDF. So far: Management Review {% for n, label in corrected %}<a href="{{ (issueBase + n + '.html') | local(lang) }}">No. {{ label }}</a>{{ ", " if not loop.last }}{% endfor %}, and the <a href="{{ '/magazine/management-review-2026-09.html' | local(lang) }}">special edition of September 2026</a>. If you find an error, <a href="{{ '/contact.html' | local(lang) }}">write to me</a>.</p>
+
+  <h2>Your data</h2>
+  <p>The tools run in your browser: your work stays on your device.{% if legal.name and legal.city %} What else the site processes is in the <a href="{{ '/datenschutz.html' | local(lang) }}">privacy policy</a>.{% endif %}</p>
+</section>
+{%- endif %}

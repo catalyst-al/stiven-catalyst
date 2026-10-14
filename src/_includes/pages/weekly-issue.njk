@@ -45,6 +45,9 @@
         <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ issue.pageCount }}</dd></div>
         <div><dt>{{ L.sources }}</dt><dd>{{ issue.sources | length }}</dd></div>
         <div><dt>{{ L.blocks }}</dt><dd>{{ I.blockName }}</dd></div>
+      {%- if online[issue.slug] %}
+        <div><dt>{{ "Online since" | t(lang) }}</dt><dd>{{ online[issue.slug].published | readableDate(lang) }}</dd></div>
+      {%- endif %}
       </dl>
       <div class="hero-actions">
         <a class="button-primary" href="#reader" data-book-open>{{ L.open_issue }}</a>

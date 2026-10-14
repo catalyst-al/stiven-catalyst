@@ -140,6 +140,7 @@
       <p class="footer-small">© <span data-year>{{ year }}</span> Stiven Catalyst. {{ "Clarity into action." | t(lang) }}</p>
       <p class="footer-legal">
         {%- if hasLegal %}<a href="{{ '/impressum.html' | local(lang) }}">{{ "Legal notice" | t(lang) }}</a><a href="{{ '/datenschutz.html' | local(lang) }}">{{ "Privacy" | t(lang) }}</a>{% endif -%}
+        <a href="{{ '/how-this-is-made.html' | local(lang) }}">{{ "How this is made" | t(lang) }}</a>
         <a href="{{ feedUrl }}">RSS</a>
         {%- if podcastFeed %}<a href="{{ '/podcast.html' | local(lang) }}">Podcast</a>{% endif %}
       </p>

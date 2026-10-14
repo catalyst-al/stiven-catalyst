@@ -23,6 +23,10 @@
   "founder": { "@id": siteUrl + "#author" }
 } %}
 {%- set graph = [person, publisher] %}
+{#- A publication (an issue, the special edition, a treatise volume) gives the day it went online and the day its text
+    last changed (online.json, from scripts/online-dates.mjs); other pages give their own date. -#}
+{%- set onlineKey = issue.slug if (issue and issue.slug) else (volume.slug if (volume and volume.slug) else (review.slug if (review and review.slug in page.url) else "")) %}
+{%- set onlineDates = online[onlineKey] if onlineKey else null %}
 {%- if ogType == "article" %}
   {%- set minutes = (readingTime or "") | replace(" min", "") | trim %}
   {%- set article = {
@@ -32,8 +36,8 @@
     "headline": title,
     "description": pageDescription,
     "image": [socialImage | absoluteUrl],
-    "datePublished": page.date | isoDate,
-    "dateModified": page.date | isoDate,
+    "datePublished": onlineDates.published if onlineDates else (page.date | isoDate),
+    "dateModified": onlineDates.modified if onlineDates else (page.date | isoDate),
     "inLanguage": lang or "en",
     "author": { "@id": siteUrl + "#author" },
     "publisher": { "@id": siteUrl + "#publisher" },
