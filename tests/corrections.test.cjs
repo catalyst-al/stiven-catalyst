@@ -45,3 +45,23 @@ test('the printed pages carry the correction too, on the sources page, in each l
   }
   assert.doesNotMatch(fs.readFileSync('_site/magazine/management-review-nr-46.html', 'utf8'), /is-correction/);
 });
+
+test('Issues 6, 72 and 74 say what was corrected on 13 October, only in the languages whose text changed', { skip: !hasSite }, () => {
+  const cases = [
+    ['magazine/management-review-nr-06.html', 'Correction, 13 October 2026. The study by three economists that tested the Peter Principle'],
+    ['de/magazine/management-review-nr-06.html', 'Korrektur, 13. Oktober 2026. Die Studie dreier Ökonomen'],
+    ['sq/magazine/management-review-nr-06.html', 'Korrigjim, 13 tetor 2026. Studimi i tre ekonomistëve'],
+    ['magazine/management-review-nr-72.html', 'Correction, 13 October 2026. Lillian Eby and colleagues (2008) pooled samples from youth, academic and workplace mentoring'],
+    ['sq/magazine/management-review-nr-72.html', 'Korrigjim, 13 tetor 2026. Lillian Eby dhe kolegët (2008)'],
+    ['magazine/management-review-nr-74.html', 'Correction, 13 October 2026. The summary of the issue now says “what it is measured against”'],
+  ];
+  for (const [path, start] of cases) {
+    assert.ok(plain(note(path)).startsWith(start), path);
+    assert.match(fs.readFileSync(`_site/${path}`, 'utf8'), /class="callout is-correction/, `${path}: on the printed sources page too`);
+  }
+  // The German of 72 already said "Hochschul-", and only the English summary of 74 changed.
+  for (const path of ['de/magazine/management-review-nr-72.html', 'de/magazine/management-review-nr-74.html', 'sq/magazine/management-review-nr-74.html']) {
+    assert.equal(note(path), '', path);
+    assert.doesNotMatch(fs.readFileSync(`_site/${path}`, 'utf8'), /is-correction/, path);
+  }
+});
