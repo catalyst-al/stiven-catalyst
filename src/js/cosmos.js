@@ -20,8 +20,6 @@
   const panels = [...root.querySelectorAll("[data-family-panel]")];
   const hint = root.querySelector("[data-cosmos-hint]");
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Stopped by the visitor ("Pause the motion"): then, as with reduced motion, the scene is drawn only when it changes.
-  let paused = false;
 
   const rgbOf = (hex) => {
     const n = parseInt(hex.replace("#", ""), 16);
@@ -1000,7 +998,7 @@
     frameId = requestAnimationFrame(step);
   };
   const start = () => {
-    if (running || still || paused || !visible || document.hidden) return;
+    if (running || still || !visible || document.hidden) return;
     running = true;
     last = performance.now();
     frameId = requestAnimationFrame(step);
@@ -1016,7 +1014,7 @@
   const select = (id) => {
     selected = planets.find((planet) => planet.id === id && planet !== selected) || null;
     follow = Boolean(selected);
-    if (still || paused) {
+    if (still) {
       if (selected) view.yaw = Math.PI / 2 - (selected.phase + selected.speed * time);
       zoom = selected ? 1 : 0;
       S = S0 * (1 + ZOOM * zoom);
@@ -1146,16 +1144,6 @@
     }).observe(root);
   }
   document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
-  const pause = root.querySelector("[data-cosmos-pause]");
-  if (pause && !still) {
-    const pauseLabel = pause.textContent;
-    pause.hidden = false;
-    pause.addEventListener("click", () => {
-      paused = !paused;
-      pause.textContent = paused ? pause.dataset.playLabel : pauseLabel;
-      if (paused) stop(); else start();
-    });
-  }
   root.classList.add("is-live");
   resize();
   start();

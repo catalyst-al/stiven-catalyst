@@ -2128,7 +2128,5 @@
   "About {n} {metric} expected per day: with so few, the limits are wide and one day says little on its own. Read the chart by week.": "Etwa {n} {metric} pro Tag erwartet: Bei so wenigen sind die Grenzen weit, und ein einzelner Tag sagt allein wenig. Lesen Sie die Regelkarte nach Wochen.",
   "About {n} {metric} expected per week: with so few, the limits are wide and one week says little on its own. Add more weeks before you judge.": "Etwa {n} {metric} pro Woche erwartet: Bei so wenigen sind die Grenzen weit, und eine einzelne Woche sagt allein wenig. Sammeln Sie mehr Wochen, bevor Sie urteilen.",
   "Short-term sigma, with the 1.5 shift that sigma tables add by convention (it assumes a process drifts over time; it is a convention, not a measurement). Most warehouse and delivery processes run between 3 and 4.5 sigma; every step up means roughly three to ten times fewer failures.": "Kurzfristiges Sigma, mit der Verschiebung von 1,5, die Sigma-Tabellen nach Konvention hinzurechnen (sie unterstellt, dass ein Prozess mit der Zeit driftet; sie ist eine Konvention, keine Messung). Die meisten Lager- und Zustellprozesse liegen zwischen 3 und 4,5 Sigma; jede Stufe höher bedeutet etwa drei- bis zehnmal weniger Fehler.",
-  "no defect in this sample: the least it can be, with 95% confidence (rule of three)": "kein Fehler in dieser Stichprobe: mindestens so viel, mit 95 % Sicherheit (Dreierregel)",
-  "Pause the motion": "Bewegung anhalten",
-  "Play the motion": "Bewegung fortsetzen"
+  "no defect in this sample: the least it can be, with 95% confidence (rule of three)": "kein Fehler in dieser Stichprobe: mindestens so viel, mit 95 % Sicherheit (Dreierregel)"
 }

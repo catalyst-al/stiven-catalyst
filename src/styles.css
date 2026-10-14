@@ -309,21 +309,6 @@ button, input, select { font: inherit; }
   transition: opacity .6s ease;
 }
 .cosmos-hint.is-done { opacity: .45; }
-.cosmos-pause {
-  display: block;
-  margin: 8px auto 0;
-  padding: 5px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--muted);
-  font: inherit;
-  font-size: 12px;
-  letter-spacing: .04em;
-  cursor: pointer;
-}
-.cosmos-pause:hover, .cosmos-pause:focus-visible { color: var(--ink); border-color: var(--muted); }
-.cosmos-pause[hidden] { display: none; }
 
 .cosmos-families {
   display: flex;
@@ -1738,7 +1723,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   letter-spacing: .2em;
   text-transform: uppercase;
 }
-[data-theme="light"] .family-role { color: color-mix(in srgb, var(--family) 45%, #000); }
+[data-theme="light"] .family-role { color: color-mix(in srgb, var(--family) 70%, #000); }
 .family-card strong {
   font-family: var(--display);
   font-size: 24px;
@@ -1821,7 +1806,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .family-head.is-plain { grid-template-columns: minmax(0, 1fr); }
 .family-head .family-visual { border-radius: 18px; }
 .family-head .kicker { color: var(--family); margin-bottom: 10px; }
-[data-theme="light"] .family-head .kicker { color: color-mix(in srgb, var(--family) 45%, #000); }
+[data-theme="light"] .family-head .kicker { color: color-mix(in srgb, var(--family) 70%, #000); }
 .family-head h2 {
   margin: 0;
   font-family: var(--display);
@@ -6206,7 +6191,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .role-next-card .family-visual { aspect-ratio: auto; height: 100%; min-height: 150px; }
 .role-next-text { display: grid; align-content: center; gap: 6px; padding: 20px 22px; }
 .role-next-text small { color: var(--family); font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
-[data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 45%, #000); }
+[data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 70%, #000); }
 .role-next-text strong { font-family: var(--display); font-size: 26px; letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
 .role-next-text span { color: var(--muted); font-size: 14px; }
 
