@@ -3,10 +3,16 @@
     "en": {
       "src": "/media/audio/management-review-nr-01-en.mp3",
       "title": "Why great employees make bad managers",
-      "seconds": 1251,
-      "bytes": 10069742,
+      "seconds": 1226,
+      "bytes": 9873301,
       "ai": "NotebookLM",
-      "published": "2026-10-13"
+      "published": "2026-10-13",
+      "corrections": [
+        {
+          "date": "14 October 2026",
+          "t": "Four passages the issue does not support were cut from this recording, 24 seconds in all: that the manager explains engagement “entirely”, and that “the environment, the pay, the perks” make up the other 30% (Gallup found that the manager explains at least 70% of the differences between business units, and says nothing about the rest); that technical skill is “only 10% of the recipe” and the rest 90% (one of Google’s ten behaviours is technical: a count, not a share); and that “9 out of 10 people are not built for this” (according to Gallup, 1 in 10 have high talent to manage, and 2 in 10 more have basic talent)."
+        }
+      ]
     },
     "sq": {
       "src": "/media/audio/management-review-nr-01-sq.mp3",
@@ -19,10 +25,16 @@
     "de": {
       "src": "/media/audio/management-review-nr-01-de.mp3",
       "title": "Warum Googles Experiment ohne Manager scheiterte",
-      "seconds": 1237,
-      "bytes": 9968204,
+      "seconds": 1213,
+      "bytes": 9776570,
       "published": "2026-10-13",
-      "ai": "NotebookLM"
+      "ai": "NotebookLM",
+      "corrections": [
+        {
+          "date": "14. Oktober 2026",
+          "t": "Drei Stellen, die der Ausgabe widersprechen, wurden aus dieser Aufnahme geschnitten, zusammen 24 Sekunden: dass Google 2002 alle Engineering-Manager „gefeuert“ habe (die Ausgabe sagt „abgeschafft“; von Entlassungen sprechen ihre Quellen nicht); dass die Auswertung von über 10.000 Datenpunkten das Scheitern von 2002 erkläre (sie kam Jahre später und fand, dass Teams mit besseren Führungskräften bessere Ergebnisse hatten, zufriedener waren und seltener kündigten); und dass das Engagement der Beschäftigten ohne Führungsrolle „von 19 auf 20 Prozent“ gefallen sei (es fiel von 20 auf 19 Prozent)."
+        }
+      ]
     }
   },
   "management-review-nr-02": {

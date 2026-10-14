@@ -4,7 +4,8 @@
     the speed are kept in the browser (sc-audio-<key>, sc-audio-rate). Nothing is loaded until play is pressed.
     Needs track (an entry of audio.json), key, lang; artwork (a cover image) and album are optional. With compact
     (the podcast page, where the episode carries its own title) the head is left out, and so is the link to the
-    podcast, which a player elsewhere offers. -#}
+    podcast, which a player elsewhere offers. A recording edited after publication says so under it, dated (the
+    corrections of its entry in audio.json). -#}
 {%- set clock = (track.seconds // 60) + ":" + (track.seconds % 60) | pad -%}
 <div class="audio-player" data-audio data-key="{{ key }}" data-seconds="{{ track.seconds }}"
      data-title="{{ track.title }}" data-album="{{ album }}"{% if artwork %} data-artwork="{{ artwork }}"{% endif %}
@@ -33,4 +34,7 @@
     <a href="{{ track.src }}" download>{{ "Download MP3" | t(lang) }} · {{ (track.bytes / 1048576) | round }} MB</a>
     {%- if not compact and podcast[lang].feed %} · <a href="{{ '/podcast.html' | local(lang) }}">{{ podcast[lang].follow }}</a>{% endif %}
   </p>
+  {%- for c in track.corrections %}
+  <p class="audio-player-correction"><strong>{{ "Correction" | t(lang) }}, {{ c.date }}.</strong> {{ c.t }}</p>
+  {%- endfor %}
 </div>

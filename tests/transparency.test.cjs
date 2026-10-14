@@ -36,6 +36,14 @@ test('its list of corrections is exactly the publications that carry a correctio
   const section = page.slice(page.indexOf('<h2>Corrections</h2>'), page.indexOf('<h2>Your data</h2>'));
   const listed = [...section.matchAll(/href="\/magazine\/([^"]+\.html)"/g)].map((m) => m[1]).sort();
   assert.deepEqual(listed, corrected);
+  // And the podcast episodes whose recording was cut (corrections in audio.json), on the podcast page.
+  const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'));
+  const cut = Object.keys(audio).filter((slug) => Object.values(audio[slug]).some((track) => track.corrections?.length)).sort();
+  assert.deepEqual([...section.matchAll(/href="\/podcast\.html#episode-([^"]+)"/g)].map((m) => m[1]).sort(), cut);
+  for (const [, prefix] of LANGS) {
+    const html = read(`${prefix}how-this-is-made.html`);
+    for (const slug of cut) assert.ok(html.includes(`podcast.html#episode-${slug}"`), `${prefix}: ${slug}`);
+  }
 });
 
 test('the publications say when they went online, and tell search engines the same', { skip: !hasSite }, () => {
