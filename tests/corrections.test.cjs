@@ -33,3 +33,15 @@ test('the note sits under the lede, and an issue without a correction has none',
     assert.equal(note(path), '', path);
   }
 });
+
+test('the printed pages carry the correction too, on the sources page, in each language', { skip: !hasSite }, () => {
+  // The issue's page shows its printed pages (print/weekly-page.njk, print/review-page.njk); the PDFs are made from them.
+  for (const [path, label, page] of [['magazine/management-review-nr-47.html', 'Correction · 14 October 2026', 9], ['de/magazine/management-review-nr-47.html', 'Korrektur · 14. Oktober 2026', 9],
+    ['sq/magazine/management-review-2026-09.html', 'Korrigjim · 14 tetor 2026', 25], ['magazine/management-review-2026-09.html', 'Correction · 14 October 2026', 25]]) {
+    const html = fs.readFileSync(`_site/${path}`, 'utf8');
+    const printed = html.slice(html.indexOf(`data-page="${page}"`), html.indexOf(`data-page="${page + 1}"`));
+    assert.match(printed, /class="callout is-correction/, path);
+    assert.ok(plain(printed).includes(label), `${path}: ${label}`);
+  }
+  assert.doesNotMatch(fs.readFileSync('_site/magazine/management-review-nr-46.html', 'utf8'), /is-correction/);
+});
