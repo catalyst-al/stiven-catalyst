@@ -32,6 +32,9 @@
         <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ review.pageCount }}</dd></div>
         <div><dt>{{ L.sources }}</dt><dd>{{ review.sources | length }}</dd></div>
         <div><dt>{{ "Languages" | t(lang) }}</dt><dd>{{ review.langs | length }}</dd></div>
+      {%- if online[review.slug] %}
+        <div><dt>{{ "Online since" | t(lang) }}</dt><dd>{{ online[review.slug].published | readableDate(lang) }}</dd></div>
+      {%- endif %}
       </dl>
       <div class="hero-actions">
         <a class="button-primary" href="#reader" data-book-open>{{ L.open_edition }}</a>

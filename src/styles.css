@@ -3761,6 +3761,8 @@ html:not(.js) .filter-bar { display: none; }
   line-height: 1.1;
 }
 .book-facts dd span { color: var(--muted); font-size: 14px; }
+/* Five facts (with "Online since"): one row on a wide screen, the gap a little narrower; a phone keeps two columns. */
+@media (min-width: 901px) { .book-facts:has(> :nth-child(5)) { grid-template-columns: repeat(5, auto); column-gap: 30px; } }
 
 /* The audio overview of an issue (partials/audio-player.njk, js/audio-player.js): under the buttons of the hero,
    the browser's player until the script puts one line of controls in its place. */

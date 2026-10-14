@@ -2131,5 +2131,7 @@
   "no defect in this sample: the least it can be, with 95% confidence (rule of three)": "kein Fehler in dieser Stichprobe: mindestens so viel, mit 95 % Sicherheit (Dreierregel)",
   "Pause the motion": "Bewegung anhalten",
   "Play the motion": "Bewegung fortsetzen",
-  "Correction": "Korrektur"
+  "Correction": "Korrektur",
+  "Online since": "Online seit",
+  "How this is made": "Wie diese Seite entsteht"
 }
