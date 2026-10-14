@@ -1732,7 +1732,7 @@
   "The guide, page by page": "Der Leitfaden, Seite für Seite",
   "Read the guide as text": "Den Leitfaden als Text lesen",
   "Families": "Familien",
-  "The guide · Edition 1": "Der Leitfaden · Ausgabe 1",
+  "The guide · Edition {n}": "Der Leitfaden · Ausgabe {n}",
   "Why the tools are a solar system, what each family is for, and how to use every tool, step by step. Leaf through it page by page, or download the PDF.": "Warum die Tools ein Sonnensystem sind, wofür jede Familie da ist und wie man jedes Tool Schritt für Schritt nutzt. Seite für Seite blättern oder als PDF herunterladen.",
   "Publications": "Publikationen",
   "Books, guides, a monthly review and a magazine from the floor": "Bücher, Leitfäden, eine Monatsausgabe und ein Magazin aus der Praxis",
@@ -2133,5 +2133,10 @@
   "Play the motion": "Bewegung fortsetzen",
   "Correction": "Korrektur",
   "Online since": "Online seit",
-  "How this is made": "Wie diese Seite entsteht"
+  "How this is made": "Wie diese Seite entsteht",
+  "Editions": "Ausgaben",
+  "What changed in Edition {n}": "Was sich in Ausgabe {n} geändert hat",
+  "The tools changed on {date}, and this edition with them.": "Am {date} haben sich die Tools geändert, und mit ihnen diese Ausgabe.",
+  "Earlier editions, as they were printed": "Frühere Ausgaben, wie sie gedruckt wurden",
+  "Edition {n}": "Ausgabe {n}"
 }

@@ -129,4 +129,23 @@
       </div>
     </details>
   </section>
+
+  {#- The editions (toolsGuide.editions): what changed in this one, and every earlier one as it was printed. #}
+  {%- set latest = toolsGuide.editions[0] %}
+  <section class="shell book-editions" id="editions" aria-labelledby="editions-title">
+    <p class="kicker">{{ "Editions" | t(lang) }}</p>
+    <h2 id="editions-title">{{ "What changed in Edition {n}" | t(lang) | replace("{n}", latest.number) }}</h2>
+    <p>{{ "The tools changed on {date}, and this edition with them." | t(lang) | replace("{date}", latest.date[lang or "en"]) }}</p>
+    <ul>
+      {%- for change in latest.changes[lang or "en"] %}
+      <li>{{ change }}</li>
+      {%- endfor %}
+    </ul>
+    <h3>{{ "Earlier editions, as they were printed" | t(lang) }}</h3>
+    <ul>
+      {%- for edition in toolsGuide.editions %}{% if edition.pdf %}
+      <li><a href="{{ edition.pdf[lang or 'en'] }}" download>{{ "Edition {n}" | t(lang) | replace("{n}", edition.number) }} · {{ edition.date[lang or "en"] }} (PDF)</a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+  </section>
 <script src="{{ '/js/book.js' | assetUrl }}" defer></script>

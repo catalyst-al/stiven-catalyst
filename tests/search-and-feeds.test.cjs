@@ -1,6 +1,7 @@
-// Search (pages/search.njk, js/search.js, lib/search-index.js) and the feeds in each language (partials/feed.njk):
-// the index holds every essay, reflection, note, tool and main page with addresses that exist, the search finds
-// words without case or accents and marks them, and each language has its own Atom feed, linked from its pages.
+// Search (pages/search.njk, js/search.js, lib/search-index.js) and the feeds in each language (partials/feed.njk,
+// lib/feed-entries.js): the index holds every essay, reflection, note, tool and main page with addresses that exist, the
+// search finds words without case or accents and marks them, and each language has its own Atom feed, linked from its
+// pages, with its essays and the publications, each on the day it went online.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -119,11 +120,14 @@ test('a search in the address is run when the page opens', async () => {
   assert.equal(results().length, 1);
 });
 
-test('each language has its own feed of its essays and reflections, linked from its pages', { skip: !hasSite }, () => {
-  for (const [feed, home, content, lang] of [['feed.xml', 'index.html', 'src/content', 'en'], ['de/feed.xml', 'de/index.html', 'src/content/de', 'de'], ['sq/feed.xml', 'sq/index.html', 'src/content/sq', 'sq']]) {
+const online = JSON.parse(fs.readFileSync('src/_data/online.json', 'utf8'));
+const FEEDS = [['feed.xml', 'index.html', 'src/content', 'en'], ['de/feed.xml', 'de/index.html', 'src/content/de', 'de'], ['sq/feed.xml', 'sq/index.html', 'src/content/sq', 'sq']];
+
+test('each language has its own feed of its essays, reflections and publications, linked from its pages', { skip: !hasSite }, () => {
+  for (const [feed, home, content, lang] of FEEDS) {
     const xml = built(feed);
     assert.match(xml, new RegExp(`xml:lang="${lang}"`), feed);
-    assert.equal((xml.match(/<entry>/g) || []).length, Math.min(20, count(`${content}/insights`) + count(`${content}/reflections`)), feed);
+    assert.equal((xml.match(/<entry>/g) || []).length, Math.min(30, count(`${content}/insights`) + count(`${content}/reflections`) + Object.keys(online).length + 1), feed);
     const prefix = lang === 'en' ? '' : `/${lang}`;
     for (const href of xml.matchAll(/<entry>[\s\S]*?<link href="https:\/\/stivencatalyst\.com([^"]+)"/g)) {
       assert.ok(href[1].startsWith(`${prefix}/`), `${feed}: ${href[1]}`);
@@ -133,4 +137,72 @@ test('each language has its own feed of its essays and reflections, linked from 
     assert.ok(html.includes(`type="application/atom+xml" title="Stiven Catalyst" href="/${feed}"`), `${home}: feed link`);
     assert.ok(html.includes(`<a href="/${feed}">RSS</a>`), `${home}: footer link`);
   }
+});
+
+test('the feeds give the publications the day they went online, newest first, and every edition of the Tools Guide', { skip: !hasSite }, async () => {
+  const guide = (await import('../src/_data/toolsGuide.js')).default;
+  for (const [feed, , , lang] of FEEDS) {
+    const doc = new JSDOM(built(feed), { contentType: 'text/xml' }).window.document;
+    assert.equal(doc.querySelector('parsererror'), null, `${feed} is not well-formed`);
+    const text = (el, name) => el.getElementsByTagName(name)[0]?.textContent ?? '';
+    const entries = [...doc.getElementsByTagName('entry')].map((el) => ({
+      title: text(el, 'title'), link: el.getElementsByTagName('link')[0].getAttribute('href'), id: text(el, 'id'),
+      published: text(el, 'published'), updated: text(el, 'updated'), content: el.getElementsByTagName('content').length > 0,
+    }));
+    const days = entries.map((entry) => entry.published);
+    assert.deepEqual(days, [...days].sort().reverse(), `${feed}: newest first`);
+    const feedUpdated = [...doc.documentElement.childNodes].find((node) => node.nodeName === 'updated').textContent;
+    assert.equal(feedUpdated, entries.map((entry) => entry.updated).sort().at(-1), `${feed}: updated with its newest entry`);
+    const prefix = lang === 'en' ? '' : `/${lang}`;
+    const magazine = entries.filter((entry) => /\/magazine\//.test(entry.link));
+    assert.ok(magazine.length >= 5, `${feed}: the publications are in it`);
+    for (const entry of magazine) {
+      const slug = entry.link.match(/\/magazine\/([^/]+)\.html$/)[1];
+      assert.equal(entry.link, `https://stivencatalyst.com${prefix}/magazine/${slug}.html`, entry.link);
+      assert.equal(entry.published, `${online[slug].published}T00:00:00Z`, `${feed}: ${slug} went online`);
+      assert.equal(entry.updated, `${online[slug].modified}T00:00:00Z`, `${feed}: ${slug} last changed`);
+      assert.match(entry.title, /^[^:]+ (No\.|Nr\.|Vol\.|Vëll\.|Bd\.|, [^:]+)[^:]*: ./, `${feed}: ${entry.title}`);
+      assert.equal(entry.content, false, `${feed}: ${slug} is read on its page`);
+    }
+    // An essay keeps the id it had, its address, and its whole text.
+    for (const entry of entries.filter((item) => /\/(insights|reflections)\//.test(item.link))) {
+      assert.equal(entry.id, entry.link, entry.link);
+      assert.ok(entry.content, `${entry.link}: whole text`);
+    }
+    // Each edition of the guide is an entry of its own, on the day it came out.
+    const edition = entries.find((entry) => entry.id.endsWith(`/guides/tools-guide.html#edition-${guide.edition}`));
+    assert.ok(edition, `${feed}: the guide's edition ${guide.edition}`);
+    assert.equal(edition.published, `${guide.editionDate}T00:00:00Z`);
+    assert.ok(edition.title.includes(guide[lang].edition), edition.title);
+  }
+});
+
+test('the Tools Guide shows one edition everywhere, says what changed in it, and keeps every earlier one as printed', { skip: !hasSite }, async () => {
+  const guide = (await import('../src/_data/toolsGuide.js')).default;
+  const [latest, ...earlier] = guide.editions;
+  assert.equal(latest.number, guide.edition);
+  assert.ok(earlier.length >= 1 && earlier.every((edition) => edition.pdf && edition.number < guide.edition));
+  for (const lang of ['en', 'sq', 'de']) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    assert.ok(guide[lang].edition.includes(String(guide.edition)), `${lang}: ${guide[lang].edition}`);
+    const page = built(`${prefix}guides/tools-guide.html`);
+    assert.ok(page.includes(guide[lang].edition), `${lang}: the reader names the edition`);
+    // The kicker of every tool page with a page of the guide, and of the home page's guide card, names the same one.
+    for (const file of [`${prefix}tools/shift-pulse/index.html`, `${prefix}tools/kpi-diagnostic/index.html`]) {
+      const kicker = built(file).match(/<p class="kicker">([^<]*· (?:Edition|Ausgabe|Botimi) (\d+))/);
+      assert.ok(kicker, `${file}: the guide's kicker`);
+      assert.equal(Number(kicker[2]), guide.edition, `${file}: ${kicker[1]}`);
+    }
+    // What changed, in this language, and every earlier edition as its PDF.
+    const section = page.slice(page.indexOf('id="editions"'), page.indexOf('</section>', page.indexOf('id="editions"')));
+    assert.equal((section.match(/<li>(?!<a)/g) || []).length, latest.changes[lang].length, `${lang}: what changed`);
+    for (const edition of earlier) {
+      assert.ok(section.includes(`href="${edition.pdf[lang]}"`), `${lang}: edition ${edition.number}`);
+      assert.ok(fs.existsSync(path.join('src', edition.pdf[lang])), edition.pdf[lang]);
+    }
+  }
+  // The guide says what the tools now do: a flag only beyond the usual level, no cause named on flat answers.
+  const text = JSON.stringify(guide.en.tools);
+  assert.match(text, /\[\[Above usual\]\] only beyond the control-chart limit/);
+  assert.match(text, /when no single cause stands out/);
 });
