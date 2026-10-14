@@ -55,6 +55,12 @@
 .mr .pg .callout { border: .25mm solid rgba(74,181,247,.4); border-radius: 2.6mm; padding: 3.2mm 4mm; margin: 0 0 3.6mm; background: linear-gradient(100deg, rgba(74,181,247,.08), rgba(255,75,92,.12)); }
 .mr .pg .callout .label { display: block; font-size: 6.4pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--blue); margin-bottom: 1.2mm; }
 .mr .pg .callout p { margin: 0; font-family: var(--mr-serif); font-size: 9.6pt; line-height: 1.42; color: var(--ink); }
+/* A correction made after publication, on the sources page: compact, as the note on method of a dense sources page. */
+.mr .pg .callout.is-correction { padding: 2.4mm 3.4mm; }
+.mr .pg .callout.is-correction p { font-family: var(--mr-sans); font-size: 7.2pt; line-height: 1.4; }
+/* With a correction on it, the sources page of the special edition sets its note on method compact too, so both clear the foot. */
+.mr .pg.has-correction .callout { padding: 2.4mm 3.4mm; }
+.mr .pg.has-correction .callout p { font-family: var(--mr-sans); font-size: 7.2pt; line-height: 1.4; }
 .mr .pg .quote { font-family: var(--mr-serif); font-size: 12pt; line-height: 1.38; color: var(--ink); border-top: .3mm solid var(--line); padding-top: 3.6mm; margin: 1mm 0 3mm; }
 .mr .pg .pull { font-family: var(--mr-serif); font-size: 14pt; line-height: 1.3; color: var(--blue); font-weight: 700; }
 .mr .pg .lists { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-bottom: 3.6mm; }

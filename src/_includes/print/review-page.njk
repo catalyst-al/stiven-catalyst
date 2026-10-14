@@ -50,13 +50,16 @@
   <ol class="toc"><li><b>{{ review.pageOf.sources | pad }}</b>{{ R.sourcesPage.kicker }}</li></ol>
 </section>
 {%- elif page.type == "sources" %}
-<section class="pg">
+<section class="pg{{ ' has-correction' if R.corrections and R.corrections.length }}">
   {{ chrome(n, L.sources) }}
   <p class="kicker">{{ R.sourcesPage.kicker }}</p>
   <h2>{{ R.sourcesPage.title[0] }}<span class="accent">{{ R.sourcesPage.title[1] }}</span></h2>
   <p class="lead">{{ R.sourcesPage.lead }}</p>
   <ol class="src">{% for s in review.sources %}<li>{{ s.title }}<em>{{ s.by }}</em><i>{{ s.url }}</i></li>{% endfor %}</ol>
   <div class="callout"><span class="label">{{ R.sourcesPage.method }}</span><p>{{ R.sourcesPage.methodText }}</p></div>
+  {%- for c in R.corrections %}
+  <div class="callout is-correction"><span class="label">{{ "Correction" | t(lang) }} · {{ c.date }}</span><p>{{ c.t }}</p></div>
+  {%- endfor %}
 </section>
 {%- elif page.type == "back" %}
 <section class="pg back">

@@ -167,6 +167,8 @@
 .mr .pg .wk-form .wk-lines.three { height: 20.4mm; }
 /* The note on method sits at the foot of the sources page, however many sources there are. */
 .mr .pg .bottom .wk-method { margin: 0; }
+/* A correction made after publication (corrections in the issue's data), above the note on method. */
+.mr .pg .bottom .wk-correction { margin: 0 0 2.4mm; }
 /* Seven or eight sources: smaller cards and a smaller note, so the last cards clear the note. */
 .mr .pg.is-dense .lead { font-size: 9.4pt; margin-bottom: 3mm; }
 .mr .pg.is-dense .src { gap: 1.4mm; }
