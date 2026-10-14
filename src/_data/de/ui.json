@@ -2130,5 +2130,6 @@
   "Short-term sigma, with the 1.5 shift that sigma tables add by convention (it assumes a process drifts over time; it is a convention, not a measurement). Most warehouse and delivery processes run between 3 and 4.5 sigma; every step up means roughly three to ten times fewer failures.": "Kurzfristiges Sigma, mit der Verschiebung von 1,5, die Sigma-Tabellen nach Konvention hinzurechnen (sie unterstellt, dass ein Prozess mit der Zeit driftet; sie ist eine Konvention, keine Messung). Die meisten Lager- und Zustellprozesse liegen zwischen 3 und 4,5 Sigma; jede Stufe höher bedeutet etwa drei- bis zehnmal weniger Fehler.",
   "no defect in this sample: the least it can be, with 95% confidence (rule of three)": "kein Fehler in dieser Stichprobe: mindestens so viel, mit 95 % Sicherheit (Dreierregel)",
   "Pause the motion": "Bewegung anhalten",
-  "Play the motion": "Bewegung fortsetzen"
+  "Play the motion": "Bewegung fortsetzen",
+  "Correction": "Korrektur"
 }

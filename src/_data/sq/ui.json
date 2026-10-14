@@ -2130,5 +2130,6 @@
   "Short-term sigma, with the 1.5 shift that sigma tables add by convention (it assumes a process drifts over time; it is a convention, not a measurement). Most warehouse and delivery processes run between 3 and 4.5 sigma; every step up means roughly three to ten times fewer failures.": "Sigma afatshkurtër, me zhvendosjen 1,5 që tabelat e sigmës e shtojnë me marrëveshje (supozon se një proces zhvendoset me kohën; është konvencion, jo matje). Shumica e proceseve të magazinës dhe shpërndarjes janë mes 3 dhe 4,5 sigma; çdo shkallë më lart do të thotë afërsisht tre deri në dhjetë herë më pak dështime.",
   "no defect in this sample: the least it can be, with 95% confidence (rule of three)": "asnjë defekt në këtë mostër: të paktën kaq, me besueshmëri 95% (rregulli i treshit)",
   "Pause the motion": "Ndalo lëvizjen",
-  "Play the motion": "Vazhdo lëvizjen"
+  "Play the motion": "Vazhdo lëvizjen",
+  "Correction": "Korrigjim"
 }

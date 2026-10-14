@@ -1,0 +1,9 @@
+{#- Corrections made after publication (corrections in the issue's or the edition's data), dated, in the page's
+    language, under the lede of its page. Nothing is drawn when there are none. -#}
+{%- if corrections and corrections.length %}
+      <div class="book-corrections">
+        {%- for c in corrections %}
+        <p><strong>{{ "Correction" | t(lang) }}, {{ c.date }}.</strong> {{ c.t }}</p>
+        {%- endfor %}
+      </div>
+{%- endif %}

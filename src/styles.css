@@ -3733,6 +3733,11 @@ html:not(.js) .filter-bar { display: none; }
   color: var(--muted);
   font-size: 19px;
 }
+/* A correction made after publication (partials/book-corrections.njk), under the lede: dated, and saying what changed. */
+.book-corrections { max-width: 600px; margin: 22px 0 0; padding: 12px 16px; border-left: 3px solid var(--blue); border-radius: 0 12px 12px 0; background: var(--card); color: var(--muted); font-size: 15px; line-height: 1.5; }
+.book-corrections p { margin: 0; }
+.book-corrections p + p { margin-top: 8px; }
+.book-corrections strong { color: var(--ink); }
 .book-facts {
   display: grid;
   grid-template-columns: repeat(4, auto);
