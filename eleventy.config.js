@@ -8,6 +8,7 @@ import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
 import { withDiagram } from "./lib/diagrams.js";
 import { searchIndex, publicationEntries } from "./lib/search-index.js";
+import { feedEntries } from "./lib/feed-entries.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
 
@@ -267,6 +268,8 @@ export default function (eleventyConfig) {
       local: (url) => localUrl(url, lang),
     }));
   });
+  // The entries of a language's feed, essays and publications together, newest first (lib/feed-entries.js).
+  eleventyConfig.addFilter("feedEntries", (posts, lang, data) => feedEntries(posts, lang, { ...data, local: (url) => localUrl(url, lang) }));
   // The link preview of an essay or a reflection (made by scripts/page-cards.mjs), if there is one; it follows
   // the file, so an essay that keeps an older address still finds it.
   eleventyConfig.addFilter("pieceCard", (page, lang) => {

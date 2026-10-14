@@ -4375,6 +4375,16 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .book-text-body { max-width: 680px; margin: 0 auto; padding: 10px 24px 60px; }
 /* Below an issue of the magazine: the issue before and after it, and the way to all issues. */
 .book-text:has(+ .issue-more) { padding-bottom: 24px; }
+/* The editions of the Tools Guide (pages/guide.njk), under its text: what changed, and the earlier ones in PDF. */
+.book-text:has(+ .book-editions) { padding-bottom: 24px; }
+.book-editions { max-width: 860px; padding-bottom: 110px; scroll-margin-top: 90px; }
+@media (min-width: 700px) { .book-editions { padding-inline: 35px; } }
+.book-editions h2 { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); font-weight: 400; line-height: 1.1; }
+.book-editions h3 { margin: 28px 0 8px; font-size: 1rem; }
+.book-editions p, .book-editions li { color: var(--muted); line-height: 1.55; }
+.book-editions ul { margin: 0; padding-left: 1.2em; }
+.book-editions li + li { margin-top: 6px; }
+.book-editions a { color: var(--ink); font-weight: 700; }
 .issue-more { padding: 24px 0 110px; scroll-margin-top: 90px; }
 .issue-more h2 { margin: 0 0 22px; font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); font-weight: 400; line-height: 1.1; }
 .issue-more-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 14px; margin-bottom: 22px; }

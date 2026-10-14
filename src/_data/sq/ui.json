@@ -1732,7 +1732,7 @@
   "The guide, page by page": "Udhëzuesi, faqe pas faqeje",
   "Read the guide as text": "Lexoje udhëzuesin si tekst",
   "Families": "Familje",
-  "The guide · Edition 1": "Udhëzuesi · Botimi 1",
+  "The guide · Edition {n}": "Udhëzuesi · Botimi {n}",
   "Why the tools are a solar system, what each family is for, and how to use every tool, step by step. Leaf through it page by page, or download the PDF.": "Pse mjetet janë një sistem diellor, për çfarë shërben çdo familje dhe si përdoret çdo mjet, hap pas hapi. Shfletojeni faqe pas faqeje, ose shkarkoni PDF-në.",
   "Publications": "Botime",
   "Books, guides, a monthly review and a magazine from the floor": "Libra, udhëzues, një botim mujor dhe një revistë nga terreni",
@@ -2133,5 +2133,10 @@
   "Play the motion": "Vazhdo lëvizjen",
   "Correction": "Korrigjim",
   "Online since": "Online që më",
-  "How this is made": "Si bëhet kjo faqe"
+  "How this is made": "Si bëhet kjo faqe",
+  "Editions": "Botimet",
+  "What changed in Edition {n}": "Çfarë ndryshoi në Botimin {n}",
+  "The tools changed on {date}, and this edition with them.": "Më {date} ndryshuan mjetet, dhe bashkë me to ky botim.",
+  "Earlier editions, as they were printed": "Botimet e mëparshme, siç u printuan",
+  "Edition {n}": "Botimi {n}"
 }

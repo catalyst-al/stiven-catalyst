@@ -8,6 +8,13 @@
 import fs from "node:fs";
 
 const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url), "utf8"));
+
+// The edition: a tool that changes gives the guide a new one (the page "What comes next" says so). Its number is shown
+// on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
+// the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
+// src/media/guides/tools-guide/editions/).
+const EDITION = 2;
+const EDITION_DATE = "2026-10-14";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
 
@@ -46,7 +53,7 @@ const pages = [
 const en = {
   title: "The Tools Guide",
   subtitle: "Fourteen free tools for the people who run the work: what they are for, how to use them, and why they look the way they do.",
-  edition: "Edition 1 · October 2026",
+  edition: `Edition ${EDITION} · October 2026`,
   author: "Stiven Janaqi",
   labels: {
     contents: "Contents",
@@ -172,7 +179,7 @@ const en = {
           "The Delay Analyzer for routes without a recorded departure time.",
           "A shared space for a coach and a team, but only with real accounts and access control, because the promise of these tools is that your data stays yours.",
         ] },
-        "When a tool changes, this guide gets a new edition. The newest one is always on the site.",
+        "When a tool changes, this guide gets a new edition. The newest one is always on the site, and the earlier ones stay there as they were printed.",
       ],
     },
     back: {
@@ -195,7 +202,7 @@ const en = {
         "Read the cards and the flags.",
         "Open the trend chart of any number.",
       ],
-      get: "One look at what the Damage, Incomplete, Delay and Handover logs in this browser hold: cards, flags and a trend for each number, to copy, print or save as PDF.",
+      get: "One look at what the Damage, Incomplete, Delay and Handover logs in this browser hold: cards and a trend for each number, flagged [[Above usual]] only beyond the control-chart limit of its usual level, to copy, print or save as PDF.",
       data: "It keeps only your settings. It reads the other logs and changes nothing in them.",
     },
     "/tools/damage-control/": {
@@ -261,7 +268,7 @@ const en = {
         "Rate ten statements.",
         "Press [[See the result]].",
       ],
-      get: "The cause that fits best (clarity, skill, capacity, process design or ownership), with a score for each, three first moves and a [[Question for the floor]].",
+      get: "The cause that fits best (clarity, skill, capacity, process design or ownership), with three first moves and a [[Question for the floor]]; when no single cause stands out, the advice to go and see the work. A score for each cause either way.",
       data: "Nothing you enter is stored or sent.",
     },
     "/tools/pareto/": {
@@ -346,7 +353,7 @@ const en = {
 const sq = {
   title: "Udhëzuesi i mjeteve",
   subtitle: "Katërmbëdhjetë mjete falas për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
-  edition: "Botimi 1 · Tetor 2026",
+  edition: `Botimi ${EDITION} · Tetor 2026`,
   author: "Stiven Janaqi",
   labels: {
     contents: "Përmbajtja",
@@ -472,7 +479,7 @@ const sq = {
           "Analiza e vonesave për linja pa orë nisjeje të regjistruar.",
           "Një hapësirë e përbashkët për një coach dhe një ekip, por vetëm me llogari të vërteta dhe kontroll aksesi, sepse premtimi i këtyre mjeteve është që të dhënat tuaja mbeten tuajat.",
         ] },
-        "Kur ndryshon një mjet, ky udhëzues merr një botim të ri. Botimi më i fundit është gjithmonë në faqe.",
+        "Kur ndryshon një mjet, ky udhëzues merr një botim të ri. Botimi më i fundit është gjithmonë në faqe, dhe të mëparshmit mbeten aty siç u printuan.",
       ],
     },
     back: {
@@ -495,7 +502,7 @@ const sq = {
         "Lexoni kartat dhe sinjalet.",
         "Hapni grafikun e trendit të çdo shifre.",
       ],
-      get: "Një pamje e asaj që mbajnë në këtë shfletues regjistrat e dëmeve, të plotësisë, të vonesave dhe të dorëzimit: karta, sinjale dhe një trend për çdo shifër, për ta kopjuar, printuar ose ruajtur si PDF.",
+      get: "Një pamje e asaj që mbajnë në këtë shfletues regjistrat e dëmeve, të plotësisë, të vonesave dhe të dorëzimit: karta dhe një trend për çdo shifër, me sinjalin [[Above usual]] vetëm përtej kufirit të kartës së kontrollit për nivelin e saj të zakonshëm, për ta kopjuar, printuar ose ruajtur si PDF.",
       data: "Ruan vetëm cilësimet tuaja. I lexon regjistrat e tjerë dhe nuk ndryshon asgjë në to.",
     },
     "/tools/damage-control/": {
@@ -561,7 +568,7 @@ const sq = {
         "Vlerësoni dhjetë pohime.",
         "Shtypni [[See the result]].",
       ],
-      get: "Shkaku që përputhet më mirë, qartësia, aftësia, kapaciteti, procesi apo përgjegjësia, me një pikë për secilin, tre hapa të parë dhe një [[Question for the floor]].",
+      get: "Shkaku që përputhet më mirë, qartësia, aftësia, kapaciteti, procesi apo përgjegjësia, me tre hapa të parë dhe një [[Question for the floor]]; kur asnjë shkak i vetëm nuk del në pah, këshilla për të shkuar e parë punën. Gjithsesi, një pikë për çdo shkak.",
       data: "Asgjë që shkruani nuk ruhet e nuk dërgohet.",
     },
     "/tools/pareto/": {
@@ -646,7 +653,7 @@ const sq = {
 const de = {
   title: "Der Werkzeug-Leitfaden",
   subtitle: "Vierzehn kostenlose Tools für die, die die Arbeit führen: wofür sie da sind, wie man sie nutzt und warum sie so aussehen, wie sie aussehen.",
-  edition: "Ausgabe 1 · Oktober 2026",
+  edition: `Ausgabe ${EDITION} · Oktober 2026`,
   author: "Stiven Janaqi",
   labels: {
     contents: "Inhalt",
@@ -772,7 +779,7 @@ const de = {
           "Die Verspätungsanalyse für Touren ohne erfasste Abfahrtszeit.",
           "Ein gemeinsamer Bereich für einen Coach und ein Team, aber nur mit echten Konten und Zugriffskontrolle, denn das Versprechen dieser Tools ist, dass Ihre Daten Ihre bleiben.",
         ] },
-        "Wenn sich ein Tool ändert, bekommt dieser Leitfaden eine neue Ausgabe. Die neueste ist immer auf der Website.",
+        "Wenn sich ein Tool ändert, bekommt dieser Leitfaden eine neue Ausgabe. Die neueste ist immer auf der Website, die früheren bleiben dort, wie sie gedruckt wurden.",
       ],
     },
     back: {
@@ -795,7 +802,7 @@ const de = {
         "Lesen Sie die Karten und die Hinweise.",
         "Öffnen Sie den Trend jeder Zahl.",
       ],
-      get: "Ein Blick auf das, was die Protokolle für Schäden, Vollständigkeit, Verspätungen und Übergaben in diesem Browser enthalten: Karten, Hinweise und ein Trend für jede Zahl, zum Kopieren, Drucken oder als PDF.",
+      get: "Ein Blick auf das, was die Protokolle für Schäden, Vollständigkeit, Verspätungen und Übergaben in diesem Browser enthalten: Karten und ein Trend für jede Zahl, mit dem Hinweis [[Above usual]] nur jenseits der Grenze der Regelkarte für ihr übliches Niveau, zum Kopieren, Drucken oder als PDF.",
       data: "Es speichert nur Ihre Einstellungen. Die anderen Protokolle liest es und ändert nichts daran.",
     },
     "/tools/damage-control/": {
@@ -861,7 +868,7 @@ const de = {
         "Bewerten Sie zehn Aussagen.",
         "Drücken Sie [[See the result]].",
       ],
-      get: "Die Ursache, die am besten passt, Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung, mit einem Wert für jede, drei ersten Schritten und einer [[Question for the floor]].",
+      get: "Die Ursache, die am besten passt, Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung, mit drei ersten Schritten und einer [[Question for the floor]]; wenn keine einzelne Ursache heraussticht, der Rat, sich die Arbeit vor Ort anzusehen. In jedem Fall ein Wert für jede Ursache.",
       data: "Nichts, was Sie eingeben, wird gespeichert oder gesendet.",
     },
     "/tools/pareto/": {
@@ -971,8 +978,49 @@ const system = families.map((item) => {
   return { id: item.id, name: item.name, role: item.role, color: item.color, rx: r1(rx), ry: r1(ry), x: r1(x), y: r1(y), below: y > 150, moons };
 });
 
+// What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
+const editions = [
+  {
+    number: 2,
+    date: { en: "14 October 2026", sq: "14 tetor 2026", de: "14. Oktober 2026" },
+    changes: {
+      en: [
+        "Sigma & Control Chart: an example is shown, never saved, and days sent from another tool replace an example still on the chart instead of joining it.",
+        "Shift Pulse and Shift Handover: a route log that holds only some routes of the period gives the count of late routes, not a share; Shift Pulse flags a number only beyond the control-chart limit of its usual level.",
+        "Damage Control and Incomplete Control: a typed total counts only for the period it was typed for, so another period is no longer divided by it.",
+        "CX Control Tower: no target is set until you enter it.",
+        "KPI Diagnostic: when the answers are too even, it names no cause and sends you to see the work.",
+        "ATS CV: a keyword counts only where its word starts, and a short one only where it ends too: “lean” is no longer found in “cleaning”, nor “Excel” in “excellent”. A long word may still run on, as German compounds do.",
+        "5 Whys and Six Sigma DMAIC: the print shows the whole text of every field.",
+      ],
+      sq: [
+        "Sigma & Control Chart: një shembull shfaqet, nuk ruhet kurrë, dhe ditët e dërguara nga një mjet tjetër zëvendësojnë shembullin që është ende në kartë, në vend që t'i bashkohen.",
+        "Shift Pulse dhe Shift Handover: një regjistër që mban vetëm disa rrugë të periudhës jep numrin e rrugëve me vonesë, jo një përqindje; Shift Pulse e shënon një shifër vetëm përtej kufirit të kartës së kontrollit për nivelin e saj të zakonshëm.",
+        "Damage Control dhe Incomplete Control: një total i shkruar vlen vetëm për periudhën për të cilën u shkrua, kështu që një periudhë tjetër nuk pjesëtohet më me të.",
+        "CX Control Tower: asnjë objektiv nuk vendoset derisa ta shkruani ju.",
+        "KPI Diagnostic: kur përgjigjet janë shumë të barabarta, nuk emërton asnjë shkak dhe ju dërgon të shihni punën.",
+        "ATS CV: një fjalë kyçe numërohet vetëm aty ku nis fjala e saj, dhe një e shkurtër vetëm aty ku edhe mbaron: “lean” nuk gjendet më te “cleaning”, as “Excel” te “excellent”. Një fjalë e gjatë mund të vazhdojë, si fjalët e përbëra gjermane.",
+        "5 Whys dhe Six Sigma DMAIC: printimi tregon tekstin e plotë të çdo fushe.",
+      ],
+      de: [
+        "Sigma & Control Chart: Ein Beispiel wird gezeigt, nie gespeichert, und Tage aus einem anderen Tool ersetzen ein Beispiel, das noch in der Karte steht, statt sich ihm anzuschließen.",
+        "Shift Pulse und Shift Handover: Ein Routenprotokoll mit nur einem Teil der Routen des Zeitraums ergibt die Zahl der verspäteten Routen, keinen Anteil; Shift Pulse markiert eine Zahl nur jenseits der Grenze der Regelkarte für ihr übliches Niveau.",
+        "Damage Control und Incomplete Control: Eine eingetragene Gesamtzahl gilt nur für den Zeitraum, für den sie eingetragen wurde; ein anderer Zeitraum wird nicht mehr durch sie geteilt.",
+        "CX Control Tower: Kein Ziel ist gesetzt, bis Sie es eintragen.",
+        "KPI Diagnostic: Sind die Antworten zu gleichmäßig, nennt es keine Ursache und schickt Sie dorthin, wo die Arbeit geschieht.",
+        "ATS CV: Ein Schlüsselwort zählt nur dort, wo sein Wort beginnt, ein kurzes nur, wo es auch endet: „lean“ steckt nicht mehr in „cleaning“, „Excel“ nicht in „excellent“. Ein langes Wort darf weiterlaufen, wie deutsche Komposita.",
+        "5 Whys und Six Sigma DMAIC: Der Druck zeigt den ganzen Text jedes Felds.",
+      ],
+    },
+  },
+  { number: 1, date: { en: "October 2026", sq: "tetor 2026", de: "Oktober 2026" }, pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-1-${lang}.pdf` },
+];
+
 export default {
   slug: "tools-guide",
+  edition: EDITION,
+  editionDate: EDITION_DATE,
+  editions: editions.map(({ pdf, ...edition }) => ({ ...edition, ...(pdf ? { pdf: Object.fromEntries(["en", "sq", "de"].map((lang) => [lang, pdf(lang)])) } : {}) })),
   langs: ["en", "sq", "de"],
   pages,
   family,
