@@ -36,13 +36,18 @@ test('its list of corrections is exactly the publications that carry a correctio
   const section = page.slice(page.indexOf('<h2>Corrections</h2>'), page.indexOf('<h2>Your data</h2>'));
   const listed = [...section.matchAll(/href="\/magazine\/([^"]+\.html)"/g)].map((m) => m[1]).sort();
   assert.deepEqual(listed, corrected);
-  // And the podcast episodes whose recording was cut (corrections in audio.json), on the podcast page.
+  // And the podcast episodes whose recording was cut (corrections in audio.json), each linked, in every language, to a
+  // podcast page where its note is shown.
   const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'));
   const cut = Object.keys(audio).filter((slug) => Object.values(audio[slug]).some((track) => track.corrections?.length)).sort();
-  assert.deepEqual([...section.matchAll(/href="\/podcast\.html#episode-([^"]+)"/g)].map((m) => m[1]).sort(), cut);
   for (const [, prefix] of LANGS) {
-    const html = read(`${prefix}how-this-is-made.html`);
-    for (const slug of cut) assert.ok(html.includes(`podcast.html#episode-${slug}"`), `${prefix}: ${slug}`);
+    const links = [...read(`${prefix}how-this-is-made.html`).matchAll(/href="\/((?:de\/|sq\/)?podcast\.html)#episode-([^"]+)"/g)];
+    assert.deepEqual(links.map((m) => m[2]).sort(), cut, prefix || 'en');
+    for (const [, page, slug] of links) {
+      const target = read(page);
+      const episode = target.slice(target.indexOf(`id="episode-${slug}"`), target.indexOf('</li>', target.indexOf(`id="episode-${slug}"`)));
+      assert.match(episode, /class="audio-player-correction"/, `${prefix || 'en'}: ${page}#episode-${slug} shows no note`);
+    }
   }
 });
 

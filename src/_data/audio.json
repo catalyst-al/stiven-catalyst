@@ -57,10 +57,16 @@
     "de": {
       "src": "/media/audio/management-review-nr-02-de.mp3",
       "title": "Frühindikatoren statt Blick in den Rückspiegel",
-      "seconds": 1070,
-      "bytes": 8629333,
+      "seconds": 1065,
+      "bytes": 8583567,
       "published": "2026-10-13",
-      "ai": "NotebookLM"
+      "ai": "NotebookLM",
+      "corrections": [
+        {
+          "date": "14. Oktober 2026",
+          "t": "Ein Satz wurde aus dieser Aufnahme geschnitten, 6 Sekunden: dass das Bild düsterer werde, „je weiter man in der Hierarchie nach oben schaut“. Die 60 % von 2024 und die 26 % von 2018 stammen aus zwei verschiedenen Umfragen mit verschiedenen Fragen; als Vergleich zwischen Hierarchieebenen lassen sie sich nicht lesen."
+        }
+      ]
     }
   }
 }
