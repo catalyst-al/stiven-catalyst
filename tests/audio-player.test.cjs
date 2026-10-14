@@ -10,6 +10,16 @@ const { JSDOM } = require('jsdom');
 
 const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'));
 
+// The length of an MP3 from the frame count LAME writes in its first frame (the Info header): frames × 1152 samples.
+const mp3Seconds = (file) => {
+  const b = fs.readFileSync(file);
+  let i = b.toString('latin1', 0, 3) === 'ID3' ? 10 + (((b[6] & 127) << 21) | ((b[7] & 127) << 14) | ((b[8] & 127) << 7) | (b[9] & 127)) : 0;
+  while (!(b[i] === 0xff && (b[i + 1] & 0xe0) === 0xe0)) i += 1;
+  const at = i + 4 + ((b[i + 3] >> 6) === 3 ? 17 : 32);
+  assert.match(b.toString('latin1', at, at + 4), /^(Info|Xing)$/, `${file}: no frame count`);
+  return (b.readUInt32BE(at + 8) * 1152) / 44100;
+};
+
 test('every recording in audio.json exists, belongs to an issue, and says how it was made', async () => {
   const weekly = (await import('../src/_data/weekly.js')).default;
   const magazine = (await import('../src/_data/magazine.js')).default;
@@ -27,6 +37,7 @@ test('every recording in audio.json exists, belongs to an issue, and says how it
       assert.ok(track.bytes / (track.seconds / 60) < 600 * 1024, `${file} is larger than 64 kbps`);
       assert.ok(track.title && track.title.trim(), `${slug} ${lang}: title`);
       assert.ok(Number.isInteger(track.seconds) && track.seconds > 0, `${slug} ${lang}: seconds`);
+      assert.ok(Math.abs(mp3Seconds(file) - track.seconds) < 1, `${file} lasts ${mp3Seconds(file).toFixed(1)} s, not ${track.seconds}`);
       assert.ok(!('ai' in track) || (typeof track.ai === 'string' && track.ai), `${slug} ${lang}: ai names the tool`);
     }
   }

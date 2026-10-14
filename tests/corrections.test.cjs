@@ -1,6 +1,7 @@
 // Corrections made after publication (corrections in an issue's or the special edition's data, drawn by
 // partials/book-corrections.njk): on the built page, under the lede, dated, in each language; pages without one stay as
-// they were.
+// they were. A recording edited after publication (corrections in src/_data/audio.json) says so under its player and in
+// the podcast feed.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -63,5 +64,25 @@ test('Issues 6, 72 and 74 say what was corrected on 13 October, only in the lang
   for (const path of ['de/magazine/management-review-nr-72.html', 'de/magazine/management-review-nr-74.html', 'sq/magazine/management-review-nr-74.html']) {
     assert.equal(note(path), '', path);
     assert.doesNotMatch(fs.readFileSync(`_site/${path}`, 'utf8'), /is-correction/, path);
+  }
+});
+
+test('Episode 1 says what was cut from it, under its player, on the podcast page and in the feed, in English and German', { skip: !hasSite }, () => {
+  const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'))['management-review-nr-01'];
+  const under = (html) => plain(html.match(/<p class="audio-player-correction">[\s\S]*?<\/p>/)?.[0] ?? '');
+  for (const [lang, prefix, start] of [['en', '', 'Correction, 14 October 2026. Four passages the issue does not support were cut from this recording, 24 seconds in all'],
+    ['de', 'de/', 'Korrektur, 14. Oktober 2026. Drei Stellen, die der Ausgabe widersprechen, wurden aus dieser Aufnahme geschnitten, zusammen 24 Sekunden']]) {
+    for (const page of [`${prefix}magazine/management-review-nr-01.html`, `${prefix}podcast.html`]) {
+      assert.ok(under(fs.readFileSync(`_site/${page}`, 'utf8')).startsWith(start), page);
+    }
+    const item = fs.readFileSync(`_site/${prefix}podcast.xml`, 'utf8').split('<item>').find((x) => x.includes('<guid isPermaLink="false">stivencatalyst-management-review-nr-01-'));
+    assert.ok(item.match(/<description>([^<]*)<\/description>/)[1].includes(start), `${prefix}podcast.xml: description`);
+    assert.ok(item.match(/<content:encoded>([^<]*)<\/content:encoded>/)[1].includes(`&lt;p&gt;${start}`), `${prefix}podcast.xml: content`);
+    assert.equal(audio[lang].corrections.length, 1);
+  }
+  // The Albanian recording was not edited, and the other episodes were not either.
+  assert.equal(audio.sq.corrections, undefined);
+  for (const page of ['sq/magazine/management-review-nr-01.html', 'sq/podcast.html', 'magazine/management-review-nr-02.html']) {
+    assert.doesNotMatch(fs.readFileSync(`_site/${page}`, 'utf8'), /audio-player-correction/, page);
   }
 });

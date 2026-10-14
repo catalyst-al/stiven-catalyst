@@ -47,8 +47,9 @@ eleventyExcludeFromCollections: true
       <pubDate>{{ e.pubDate }}</pubDate>
       {%- set note = "Management Review " + e.label + ": " + e.issueHeading + ". " + e.issueSub %}
       {%- set made = podcast[feed.lang].howText if e.ai else "" %}
-      <description>{{ note }}{% if made %} {{ made }}{% endif %} {{ podcast[feed.lang].readIssue }}: {{ e.issueUrl | absoluteUrl }}</description>
-      <content:encoded>{{ "<p><strong>Management Review " + e.label + ": " + e.issueHeading + ".</strong> " + e.issueSub + "</p>" + ("<p>" + made + "</p>" if made else "") + "<p><a href=\"" + (e.issueUrl | absoluteUrl) + "\">" + podcast[feed.lang].readIssue + " →</a></p>" }}</content:encoded>
+      {%- set fixed = e.correctionLines %}
+      <description>{{ note }}{% for line in fixed %} {{ line }}{% endfor %}{% if made %} {{ made }}{% endif %} {{ podcast[feed.lang].readIssue }}: {{ e.issueUrl | absoluteUrl }}</description>
+      <content:encoded>{{ "<p><strong>Management Review " + e.label + ": " + e.issueHeading + ".</strong> " + e.issueSub + "</p>" + ("<p>" + (fixed | join("</p><p>")) + "</p>" if fixed.length else "") + ("<p>" + made + "</p>" if made else "") + "<p><a href=\"" + (e.issueUrl | absoluteUrl) + "\">" + podcast[feed.lang].readIssue + " →</a></p>" }}</content:encoded>
       <enclosure url="{{ e.src | absoluteUrl }}" length="{{ e.bytes }}" type="audio/mpeg"/>
       <itunes:duration>{{ e.seconds }}</itunes:duration>
       <itunes:image href="{{ e.image | absoluteUrl }}"/>

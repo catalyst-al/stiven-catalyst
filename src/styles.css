@@ -3789,6 +3789,9 @@ html:not(.js) .filter-bar { display: none; }
 .audio-player-note { margin: 12px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
 .audio-player-note a { color: var(--ink); font-weight: 700; white-space: nowrap; }
 .audio-player-error { color: var(--ink); }
+/* A recording edited after publication, dated, under its player: the note of a corrected issue, smaller. */
+.audio-player-correction { margin: 10px 0 0; padding: 8px 12px; border-left: 3px solid var(--blue); border-radius: 0 10px 10px 0; background: var(--paper); color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.audio-player-correction strong { color: var(--ink); }
 /* On a phone: the buttons on one line, the position and the time under them. */
 @media (max-width: 560px) {
   .audio-player { padding: 14px 14px 12px; }

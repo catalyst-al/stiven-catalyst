@@ -70,6 +70,7 @@ const texts = {
     "Jede Folge wird mit KI (NotebookLM) aus dem Text einer Ausgabe erstellt: Zwei Stimmen sprechen die Ausgabe durch. Sie können vereinfachen und sich manchmal irren; maßgeblich ist die Ausgabe, mit jeder Zahl und ihrer Quelle.",
   ),
   rss: x("The feed itself (RSS)", "Vetë feed-i (RSS)", "Der Feed selbst (RSS)"),
+  correction: x("Correction", "Korrigjim", "Korrektur"),
 };
 const langName = { en: x("English", "Anglisht", "Englisch"), sq: x("Albanian", "Shqip", "Albanisch"), de: x("German", "Gjermanisht", "Deutsch") };
 const no = x("No.", "Nr.", "Nr.");
@@ -89,6 +90,10 @@ const episodesOf = (lang) => weekly.issues
       label: `${no[lang]} ${issue.no}`,
       title: track.title,
       ai: track.ai,
+      // A recording edited after publication (corrections in audio.json): under its player, and as lines of the feed,
+      // where apps show the text of an episode and not its page.
+      corrections: track.corrections || [],
+      correctionLines: (track.corrections || []).map((c) => `${texts.correction[lang]}, ${c.date}. ${c.t}`),
       src: track.src,
       bytes: track.bytes,
       seconds: track.seconds,
