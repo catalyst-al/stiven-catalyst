@@ -459,6 +459,16 @@ const common = {
   name: "Management Review",
   tagline: x("Management without theatre.", "Menaxhim pa teatër.", "Management ohne Theater."),
   date: x("September 2026", "Shtator 2026", "September 2026"),
+  // Corrections made after publication, shown on the edition's page (pages/review.njk), newest last.
+  corrections: [
+    {
+      date: x("14 October 2026", "14 tetor 2026", "14. Oktober 2026"),
+      t: x(
+        "Three figures now say they come from US samples: PwC's finding on AI-exposed junior roles, and Gallup's figures on frontline supervisors and on managers who also carry individual work. The edition first gave them without the country.",
+        "Tri shifra tani thonë se vijnë nga mostra në SHBA: gjetja e PwC-së për rolet fillestare të ekspozuara ndaj AI-së, dhe shifrat e Gallup-it për supervizorët e vijës së parë dhe për menaxherët që kanë edhe përgjegjësi individuale. Botimi fillimisht i jepte pa përmendur vendin.",
+        "Drei Zahlen nennen jetzt ihre US-Stichproben: der PwC-Befund zu KI-exponierten Einstiegsrollen sowie die Gallup-Zahlen zu Frontline-Vorgesetzten und zu Führungskräften, die auch eigene Facharbeit leisten. Die Ausgabe nannte das Land zuerst nicht."),
+    },
+  ],
   theme: x("The manager in the age of AI", "Menaxheri në epokën e AI-së", "Die Führungskraft im Zeitalter der KI"),
   sub: x("How work is being redesigned, and what leaders must keep human.", "Si po ridizajnohet puna dhe çfarë duhet të mbajnë njerëzore drejtuesit.", "Wie Arbeit neu gestaltet wird und was Führung menschlich halten muss."),
   cover: { src: `/media/magazine/${slug}/art/bulb.jpg`, width: 350, height: 700 },

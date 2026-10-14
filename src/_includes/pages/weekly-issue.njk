@@ -38,6 +38,8 @@
       <p class="eyebrow">{{ W.name }} · {{ I.edition }} · {{ I.date }} · {{ L.no }} {{ issue.no }}</p>
       <h1{{ I.heading | longTitle | safe }}>{{ I.heading }}</h1>
       <p class="lede">{{ I.sub }}</p>
+      {%- set corrections = I.corrections %}
+      {%- include "partials/book-corrections.njk" %}
       <dl class="book-facts">
         <div><dt>{{ L.no }}</dt><dd>{{ issue.no }}</dd></div>
         <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ issue.pageCount }}</dd></div>
