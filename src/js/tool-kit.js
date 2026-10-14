@@ -211,13 +211,43 @@ window.ToolKit = (() => {
     const r = q * q;
     return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
   };
-  // Short-term sigma level with the usual 1.5 shift; 6 when there are no defects, and never below 0.
+  // Short-term sigma level with the 1.5 shift that sigma tables add by convention; 6 when there are no defects, and never
+  // below 0.
   const sigma = (rate) => (rate <= 0 ? 6 : rate >= 1 ? 0 : Math.max(0, normInv(1 - rate) + 1.5));
-  const sigmaText = (rate) => (rate <= 0 ? "6+" : num(sigma(rate), 2));
+  // With no defect at all, a sample of n says only that the rate is below about 3/n (the rule of three, 95 %
+  // confidence): "≥ 4.25" for none in 1,000, not "6+". Without n, "6+".
+  const sigmaText = (rate, n) => (rate <= 0 ? (n > 0 ? `≥ ${num(sigma(Math.min(1, 3 / n)), 2)}` : "6+") : num(sigma(rate), 2));
 
   // The period a log is analysed over. An empty end is open; with no range every row counts,
   // with a range only rows dated inside it. A rate needs its volume for the same days.
   const inRange = (rows, from, to) => (!from && !to ? rows : rows.filter((row) => row.date && (!from || row.date >= from) && (!to || row.date <= to)));
+  // A total typed for a period (the units handled, the routes) belongs to the days chosen when it was typed; a log
+  // remembers them in totalsFor. With other days chosen it is not used: it would be compared with the rows of other days.
+  // Gives the typed text, or "" and the period it was typed for (stale).
+  const rangeKey = (range) => `${str(range.from)}|${str(range.to)}`;
+  const typedRange = (state, name) => {
+    const key = isObject(state.totalsFor) ? state.totalsFor[name] : undefined;
+    if (typeof key !== "string") return null;
+    const [from = "", to = ""] = key.split("|");
+    return { from, to };
+  };
+  const periodTotal = (state, name) => {
+    const value = str(state[name]).trim();
+    const range = typedRange(state, name);
+    if (!value || !range || rangeKey(range) === rangeKey(state)) return { value, stale: null };
+    return { value: "", stale: range };
+  };
+  // "1 Sept – 7 Sept", "From 1 Sept", "all days" for a chosen period.
+  const rangeText = (range) => (range.from && range.to ? spanText(range) : range.from ? `${tx("From")} ${showDate(range.from)}` : range.to ? `${tx("To")} ${showDate(range.to)}` : tx("all days"));
+  // A saved route log that holds only some routes of its period: the Delay Analyzer's "Routes in the period" is more
+  // than the routes logged in the days it was typed for (often only the late ones are logged). Its routes are then no
+  // base for a share.
+  const partialRouteLog = (saved) => {
+    if (!isObject(saved) || !Array.isArray(saved.rows)) return false;
+    const set = Math.round(parseNumber(saved.routes));
+    const range = typedRange(saved, "routes") || { from: str(saved.from), to: str(saved.to) };
+    return set > 0 && set > inRange(saved.rows.filter(isObject), range.from, range.to).length;
+  };
   // One pass, no sort: logs can hold thousands of rows and this runs on every change.
   const dateSpan = (rows) => {
     const days = new Set();
@@ -779,6 +809,7 @@ window.ToolKit = (() => {
     const dropExample = () => {
       state.rows = [];
       state.example = {};
+      state.totalsFor = {};
       clearExample?.();
       showSettings();
     };
@@ -814,9 +845,18 @@ window.ToolKit = (() => {
 
     // Period settings; typing waits for a pause when the log is long.
     const renderSetting = renderOnPause(changed, () => state.rows.length);
-    const showSettings = () => settings.forEach((input) => { input.value = state[input.name] ?? ""; });
+    // A total for the period (data-period-total) remembers the days it was typed for; with other days chosen its box is
+    // empty, and the result says for which days it was typed.
+    const isTotal = (input) => input.hasAttribute("data-period-total");
+    const stampTotals = () => {
+      const stamps = isObject(state.totalsFor) ? { ...state.totalsFor } : {};
+      settings.filter(isTotal).forEach((input) => { if (str(state[input.name]).trim() && typeof stamps[input.name] !== "string") stamps[input.name] = `${str(state.from)}|${str(state.to)}`; });
+      state.totalsFor = stamps;
+    };
+    const showSettings = () => settings.forEach((input) => { input.value = isTotal(input) ? periodTotal(state, input.name).value : state[input.name] ?? ""; });
     settings.forEach((input) => input.addEventListener("input", () => {
       state[input.name] = input.value;
+      if (isTotal(input)) state.totalsFor = { ...(isObject(state.totalsFor) ? state.totalsFor : {}), [input.name]: `${str(state.from)}|${str(state.to)}` };
       renderSetting();
     }));
 
@@ -854,6 +894,8 @@ window.ToolKit = (() => {
       state.example = exampleStamp(state.rows);
       state.from = "";
       state.to = "";
+      state.totalsFor = {};
+      stampTotals();
       showSettings();
       changed();
       results.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -880,9 +922,15 @@ window.ToolKit = (() => {
       state.example = exampleStamp(state.rows);
       state.from = "";
       state.to = "";
+      state.totalsFor = {};
     }
+    // A total saved before totalsFor existed belongs to the days chosen now.
+    stampTotals();
     showSettings();
-    syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, changed);
+    syncRange = rangeControl(root.querySelector("[data-range]"), state, () => state.rows, () => {
+      showSettings();
+      changed();
+    });
     return {
       render,
       // A new row from the entry form.
@@ -893,6 +941,21 @@ window.ToolKit = (() => {
       },
     };
   };
+
+  // Printing a form: a one-line box prints only what fits in it, and an empty box prints its grey example. Inside a
+  // [data-print-fields] container each box gets its whole text as plain text for print (.print-text), and the box
+  // itself is left off the paper (.has-print-text in styles.css).
+  window.addEventListener?.("beforeprint", () => {
+    document.querySelectorAll("[data-print-fields]").forEach((box) => {
+      box.querySelectorAll("input:not([type]), input[type=text], input[type=date], input[type=number], textarea").forEach((field) => {
+        const next = field.nextElementSibling;
+        const text = next?.classList.contains("print-text") ? next : el("span", "print-text");
+        if (text !== next) field.after(text);
+        text.textContent = field.value;
+        field.classList.add("has-print-text");
+      });
+    });
+  });
 
   // A typed text that a spreadsheet would run as a formula (=HYPERLINK(...), +cmd, @A1,
   // or a leading tab) is kept as text with a leading apostrophe; a plain number stays a number.
@@ -952,7 +1015,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

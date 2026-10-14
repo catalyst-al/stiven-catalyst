@@ -81,6 +81,9 @@ test('the sigma level stays between 0 and 6', () => {
   assert.equal(ToolKit.sigma(0), 6);
   assert.equal(ToolKit.sigma(1), 0);
   assert.equal(ToolKit.sigmaText(1), '0.00');
+  // No defect in a sample proves only a bound (rule of three): none in 1,000 is at least 4.25, not 6.
+  assert.equal(ToolKit.sigmaText(0, 1000), '≥ 4.25');
+  assert.equal(ToolKit.sigmaText(0), '6+', 'without the sample size');
   assert.ok(Math.abs(ToolKit.sigma(0.0668) - 3) < 0.01);
   assert.equal(ToolKit.sigma(0.99), 0);
 });
@@ -120,6 +123,8 @@ test('the new Pulse texts are translated', () => {
     'Arrival {n} min: late ({side}). Choose the reason.', 'Arrival {n} min: on time.', 'All details', 'Show {n} more', 'Your log in {language} has {n} entries.', 'Open it',
     'Only some routes of the period are in the log, so hours and shifts show counts, not shares.',
     'Only some routes of the period are in the log, so this counts late routes. Log every route to see the share that was late.',
+    'Only some routes of the period are in the route log, so late routes are counted, not shown as a share.',
+    'Late routes are above the usual level on {day}: {n}.', 'Late routes are above the usual level in the week of {day}: {n}.',
   ];
   for (const lang of ['de', 'sq']) {
     const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
@@ -198,14 +203,55 @@ test('Shift Pulse counts each log per day and flags a latest day that is clearly
   assert.deepEqual(all.days, ['2026-09-01', '2026-09-02', '2026-09-03']);
   assert.deepEqual(all.damage.values, [1, 2, 9], 'a row without units counts one; rows outside the period do not count');
   assert.equal(all.damage.total, 12);
-  assert.equal(all.damage.above, true, '9 on the latest day against a usual 1.5');
+  assert.equal(all.damage.above, true, '9 on the latest day against a usual 1.5 (limit 1.5 + 3 x 1.22 = 5.2)');
   assert.equal(all.incomplete.latest, null);
   assert.deepEqual([all.delay.routes, all.delay.late, all.delay.onTime], [4, 3, 0.25], 'the route without an arrival time is left out');
-  assert.equal(all.delay.above, true);
+  assert.equal(all.delay.above, false, '2 of 2 late after 1 of 2: with two routes a day that is inside the limits, noise');
+  // A clear signal: 9 of 10 routes late on the latest day, after 1 of 20 on the two days before it.
+  const routesOf = (date, late, total) => Array.from({ length: total }, (_, i) => ({ date, shift: 'Early', planArr: '10:00', actArr: i < late ? '10:40' : '10:05' }));
+  const spike = plain(PulseMath.compute({ delay: { arrivalGrace: '15', rows: [...routesOf('2026-09-01', 1, 10), ...routesOf('2026-09-02', 0, 10), ...routesOf('2026-09-03', 9, 10)] } }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.equal(spike.delay.above, true);
+  assert.ok(spike.delay.limit > 0.05 && spike.delay.limit < 0.9, 'a p-chart limit at the latest day\'s own routes');
   const early = plain(PulseMath.compute(logs, { from: '2026-09-01', to: '2026-09-03', shift: 'Early' }));
   assert.deepEqual(early.damage.values, [1, 2, 7]);
   const quiet = plain(PulseMath.compute({ damage: { rows: [{ date: '2026-09-03', shift: 'Early', units: 3 }] } }, { from: '2026-09-01', to: '2026-09-03' }));
   assert.equal(quiet.damage.above, false, 'no earlier day to compare with is not a flag');
+});
+
+test('Shift Pulse counts late routes, and gives no on-time share, when only some routes of the period are logged', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath, ToolKit } = dom.window;
+  // Five late routes logged on a day with 100 routes: the Delay Analyzer reads 95 % on time.
+  const late = [1, 2, 3, 4, 5].map((i) => ({ date: '2026-09-03', shift: 'Early', route: `R${i}`, planArr: '08:00', actArr: '08:45' }));
+  const partial = { arrivalGrace: '15', routes: '100', from: '', to: '', rows: late };
+  assert.equal(ToolKit.partialRouteLog(partial), true);
+  assert.equal(ToolKit.partialRouteLog({ ...partial, routes: '5' }), false, 'every route of the period is logged');
+  assert.equal(ToolKit.partialRouteLog({ ...partial, routes: '' }), false, 'no total typed');
+  assert.equal(ToolKit.partialRouteLog({ ...partial, from: '2026-09-04', to: '2026-09-05' }), true, 'none of the 100 routes of that period is logged');
+  const model = plain(PulseMath.compute({ delay: partial }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.equal(model.delay.partial, true);
+  assert.equal(model.delay.onTime, null, 'not 0 %: the logged routes are not all the routes');
+  assert.equal(model.delay.late, 5);
+  assert.equal(model.delay.latest.share, null);
+  assert.equal(model.delay.lateTarget, null);
+  const whole = plain(PulseMath.compute({ delay: { ...partial, routes: '' } }, { from: '2026-09-01', to: '2026-09-03' }));
+  assert.deepEqual([whole.delay.partial, whole.delay.onTime], [false, 0], 'a log of every route keeps its share');
+});
+
+test('Shift Pulse leaves a stable process unflagged: a usual day is not "above the usual"', () => {
+  const dom = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools/shift-pulse/', runScripts: 'outside-only' });
+  dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
+  dom.window.eval(fs.readFileSync('src/js/shift-pulse.js', 'utf8'));
+  const { PulseMath } = dom.window;
+  const week = ['2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04', '2026-09-05', '2026-09-06', '2026-09-07'];
+  const options = { from: week[0], to: week[6] };
+  const log = (counts) => ({ rows: counts.flatMap((units, i) => (units ? [{ date: week[i], shift: 'Early', units }] : [])) });
+  // Two cases the old rule flagged: 3 every damaged day, and exactly 10 every day.
+  assert.equal(PulseMath.compute({ damage: log([0, 3, 0, 0, 3, 0, 3]) }, options).damage.above, false);
+  assert.equal(PulseMath.compute({ damage: log([10, 10, 10, 10, 10, 10, 10]) }, { from: '2026-08-25', to: week[6] }).damage.above, false);
+  assert.equal(PulseMath.compute({ damage: log([2, 1, 3, 2, 2, 1, 4]) }, options).damage.above, false, 'within c-chart limits');
 });
 
 test('Shift Pulse reads a period by the week, from each Monday, and compares the latest week with the ones before', () => {
@@ -248,7 +294,9 @@ test('Shift Pulse shows a rate only when every day with entries has a volume, an
   const options = { from: '2026-09-01', to: '2026-09-04' };
   const full = plain(PulseMath.compute({ damage: { rows, volumes, target: '0.2' } }, options)).damage;
   assert.deepEqual([full.volume, full.rate, full.target], [4000, 12 / 4000, 0.002], 'a quiet day with a volume is in the volume');
-  assert.equal(full.above, true, '6 of 1000 on the latest day, against 6 of 2000 before it');
+  assert.equal(full.above, false, '6 of 1000 against 6 of 2000 before it: about 3 were expected, and 6 is inside the limits');
+  const high = plain(PulseMath.compute({ damage: { rows: [...rows.slice(0, 2), { date: '2026-09-03', shift: 'Early', units: 15 }], volumes } }, options)).damage;
+  assert.equal(high.above, true, '15 of 1000 against 6 of 2000 is a signal');
   assert.equal(full.volumes.length, 4);
   const gap = plain(PulseMath.compute({ damage: { rows, volumes: volumes.filter((item) => item.date !== '2026-09-02') } }, options)).damage;
   assert.equal(gap.rate, null, 'a day with entries and no volume: no rate');

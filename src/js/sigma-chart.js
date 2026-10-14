@@ -61,10 +61,12 @@
 
   const hint = (text) => el("p", "form-note sc-hint", text);
 
-  const renderTable = (current) => {
+  // dpmo: the process's defects per million chances, or null.
+  const renderTable = (dpmo) => {
     sigmaTable.replaceChildren();
-    // Mark the highest level the current process reaches.
-    const reached = current == null ? null : [...data.sigmaTable].reverse().find((row) => row.sigma <= current + 1e-9);
+    // Mark the highest level the current process reaches, read on the DPMO column the table shows: 233 DPMO is
+    // 5.0 sigma there, although the exact level of 233 is 4.9993 (5.0 sigma is 232.6 DPMO).
+    const reached = dpmo == null ? null : [...data.sigmaTable].reverse().find((row) => dpmo <= row.dpmo + 1e-9);
     data.sigmaTable.forEach((row) => {
       const tr = el("tr");
       if (row === reached) tr.classList.add("is-current");
@@ -100,18 +102,22 @@
       stat(tx("Defect rate"), rate(value), tx("{a} of {b}", { a: int.format(defects), b: int.format(chances) })),
       stat("DPMO", int.format(Math.round(value * 1e6)), tx("defects per million chances")),
       stat(tx("Yield"), rate(1 - value), tx("right first time")),
-      stat(tx("Sigma level"), sigmaText(value), tx("short term, with 1.5 shift")),
+      stat(tx("Sigma level"), sigmaText(value, chances), defects ? tx("short term, with 1.5 shift") : tx("no defect in this sample: the least it can be, with 95% confidence (rule of three)")),
     );
-    renderTable(sigma(value));
+    renderTable(value * 1e6);
     return value;
   };
 
   const renderPerfect = () => {
-    const parts = [["On time", "onTime"], ["Undamaged", "undamaged"], ["Complete", "complete"]]
-      .map(([label, name]) => ({ label: tx(label), value: parseNumber(calcPerfect.elements[name].value) / 100 }))
-      .filter((part) => part.value >= 0 && part.value <= 1);
+    const typed = [["On time", "onTime"], ["Undamaged", "undamaged"], ["Complete", "complete"]]
+      .map(([label, name]) => ({ label: tx(label), raw: calcPerfect.elements[name].value.trim(), value: parseNumber(calcPerfect.elements[name].value) / 100 }))
+      .filter((part) => part.raw);
+    // A box with 120 or -5 is named, not left out without a word; one measure alone is not a perfect delivery.
+    const parts = typed.filter((part) => part.value >= 0 && part.value <= 1);
+    const outside = typed.filter((part) => !parts.includes(part));
     perfectOut.replaceChildren();
-    if (!parts.length) {
+    if (outside.length) perfectOut.append(hint(tx("A percentage is between 0 and 100. Check: {fields}.", { fields: outside.map((part) => part.label).join(", ") })));
+    if (parts.length < 2) {
       perfectOut.append(hint(tx("Enter at least two of the three percentages.")));
       return;
     }
@@ -242,12 +248,13 @@
       if (i - start >= 6) trends.push(points.slice(start, i));
       start = s !== 0 ? i - 1 : i;
     }
+    // Six points make five rises: "5 days in a row each higher than the one before".
     trends.forEach((run) => {
       const worse = step(run[0], run[1]) > 0;
       run.forEach((point) => point.signals.push({ rule: "trend", worse }));
       events.push({ rule: "trend", worse, from: run[0], to: run.at(-1), text: weekly()
-        ? tx(worse ? "{n} weeks in a row each higher than the one before." : "{n} weeks in a row each lower than the one before.", { n: run.length })
-        : tx(worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: run.length }) });
+        ? tx(worse ? "{n} weeks in a row each higher than the one before." : "{n} weeks in a row each lower than the one before.", { n: run.length - 1 })
+        : tx(worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: run.length - 1 }) });
     });
     events.sort((a, b) => a.from.index - b.from.index);
 
@@ -475,6 +482,13 @@
     const card = el("article", "result-card dl-focus");
     card.append(el("p", "result-label", tx("What it says")));
     card.append(el("p", "sc-verdict", v.text));
+    // A p-chart needs enough per point: with fewer than about five expected per day (week) the limits are so wide
+    // that even a day where everything went wrong can sit inside them.
+    const sizes = result.points.map((point) => point.n).sort((a, b) => a - b);
+    const expected = sizes[Math.floor(sizes.length / 2)] * result.pBar;
+    if (expected < 5) card.append(el("p", "dl-warning", weekly()
+      ? tx("About {n} {metric} expected per week: with so few, the limits are wide and one week says little on its own. Add more weeks before you judge.", { n: num(expected, 1), metric: lower(metric()) })
+      : tx("About {n} {metric} expected per day: with so few, the limits are wide and one day says little on its own. Read the chart by week.", { n: num(expected, 1), metric: lower(metric()) })));
     if (result.events.length) {
       card.append(el("p", "result-label", tx("Signals")));
       const list = el("ul", "sc-signals");
@@ -685,13 +699,17 @@
   })();
   const handoffStatus = root.querySelector("[data-handoff-status]");
   const applyHandoff = (given) => {
-    const { rows, merge } = takeOver(given, state);
+    // An example still on the chart is never mixed with real days: the handed-over days replace it, its
+    // settings (the baseline above all) included.
+    const onExample = exampleMatches(state);
+    const { rows, merge } = takeOver(given, onExample ? { ...state, rows: [] } : state);
     if (!rows.length) return;
-    const before = { metric: state.metric, unit: state.unit, baseline: state.baseline, rows: state.rows.map((row) => ({ ...row })) };
+    const before = { metric: state.metric, unit: state.unit, baseline: state.baseline, example: state.example, rows: state.rows.map((row) => ({ ...row })) };
     if (!merge) {
       state.metric = str(given.metric);
       state.unit = str(given.unit);
       state.baseline = "";
+      state.example = {};
       state.rows = [];
     }
     upsert(rows);
@@ -728,11 +746,9 @@
     }, 150);
   });
 
-  // A first visit opens on the example month, so the chart is visible at once; the note says so.
-  if (!state.rows.length && !handoff && firstVisit(KEY)) {
-    loadExample();
-    save();
-  }
+  // A first visit opens on the example month, so the chart is visible at once; the note says so. Nothing is written
+  // to the browser until the visitor acts, as in the log tools.
+  if (!state.rows.length && !handoff && firstVisit(KEY)) loadExample();
   render();
   if (handoff) applyHandoff(handoff);
 })();

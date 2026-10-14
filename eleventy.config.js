@@ -7,7 +7,7 @@ import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
 import { withDiagram } from "./lib/diagrams.js";
-import { searchIndex } from "./lib/search-index.js";
+import { searchIndex, publicationEntries } from "./lib/search-index.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
 
@@ -255,7 +255,7 @@ export default function (eleventyConfig) {
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
   // The search index of a language, as JSON (lib/search-index.js, read by js/search.js).
-  eleventyConfig.addFilter("searchIndex", (lang, collections, tools, pages) => {
+  eleventyConfig.addFilter("searchIndex", (lang, collections, tools, pages, publications) => {
     const suffix = TRANSLATED.has(lang) ? lang[0].toUpperCase() + lang.slice(1) : "";
     return JSON.stringify(searchIndex({
       essays: collections[`insights${suffix}`],
@@ -263,6 +263,7 @@ export default function (eleventyConfig) {
       notes: collections[`notes${suffix}`],
       tools,
       pages,
+      publications: publicationEntries(publications, lang),
       local: (url) => localUrl(url, lang),
     }));
   });

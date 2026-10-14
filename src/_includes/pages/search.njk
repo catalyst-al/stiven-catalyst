@@ -1,5 +1,5 @@
-{#- Search, shared by the three languages: one field over the essays, reflections, field notes, tools and main pages of
-    this language. js/search.js reads the index (/search-index.json, /de/…, /sq/…) once and searches in the browser;
+{#- Search, shared by the three languages: one field over the essays, reflections, field notes, tools, main pages and
+    publications of this language. js/search.js reads the index (/search-index.json, /de/…, /sq/…) once and searches in the browser;
     nothing is sent anywhere. Without JavaScript the form still shows what was asked and points to the lists. -#}
 {%- set indexUrl = "/search-index.json" if not lang or lang == "en" else "/" + lang + "/search-index.json" -%}
 <section class="shell page-hero search-hero">
@@ -7,8 +7,15 @@
   <h1>{{ "Search" | t(lang) }}</h1>
 </section>
 
+{%- set ln = lang or "en" -%}
+{#- The publications are named as they name themselves in this language. -#}
+{%- set kinds = {
+  essay: "Essay" | t(lang), reflection: "Reflection" | t(lang), note: "Field note" | t(lang), tool: "Tool" | t(lang), page: "Page" | t(lang),
+  issue: (weekly[ln] or weekly.en).name, treatise: (treatise.volumes[0][ln] or treatise.volumes[0].en).edition,
+  floor: (magazine.names[ln] or magazine.names.en).name, guide: (toolsGuide[ln] or toolsGuide.en).title, podcast: "Podcast"
+} -%}
 <section class="shell section search-page" data-search data-index="{{ indexUrl }}"
-  data-kinds='{{ { essay: "Essay" | t(lang), reflection: "Reflection" | t(lang), note: "Field note" | t(lang), tool: "Tool" | t(lang), page: "Page" | t(lang) } | dump }}'
+  data-kinds='{{ kinds | dump }}'
   data-count-label="{{ '{n} results' | t(lang) }}" data-one-label="{{ '1 result' | t(lang) }}" data-none-label="{{ 'Nothing found for that yet. Try another word, or browse the essays.' | t(lang) }}">
   <form class="search-form" action="" method="get" role="search">
     <label class="visually-hidden" for="search-input">{{ "Search" | t(lang) }}</label>

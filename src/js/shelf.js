@@ -13,10 +13,12 @@ window.Shelf = (() => {
   const read = (key, fallback) => { try { return JSON.parse(storage?.getItem(key) || "null") ?? fallback; } catch { return fallback; } };
   const write = (key, value) => { try { storage?.setItem(key, JSON.stringify(value)); return true; } catch { return false; } };
 
-  // The saved items, newest first.
+  // The saved items, newest first. Only pages of this site: an address from a file opened in "All your work in one
+  // file" that leads elsewhere (another site, a script) is not shown.
+  const ownPage = (url) => /^\/(?!\/)/.test(url);
   const items = () => {
     const data = read(KEY, { v: 1, items: [] });
-    return Array.isArray(data.items) ? data.items.filter((i) => i && typeof i.u === "string") : [];
+    return Array.isArray(data.items) ? data.items.filter((i) => i && typeof i.u === "string" && ownPage(i.u)) : [];
   };
   const saveItems = (list) => write(KEY, { v: 1, items: list });
   const has = (url) => items().some((i) => i.u === url);
@@ -139,7 +141,7 @@ window.Shelf = (() => {
       });
       section("saved", saved, labels.noSaved);
       // Cards in progress.
-      const inProgress = Object.values(cards()).filter((c) => c && c.u).sort((a, b) => b.at - a.at).map((c) =>
+      const inProgress = Object.values(cards()).filter((c) => c && typeof c.u === "string" && ownPage(c.u)).sort((a, b) => b.at - a.at).map((c) =>
         row({ url: `${c.u}#essay-checklist-title`, title: c.c || c.t, meta: `${c.t} · ${fill(labels.done, { a: c.d, b: c.n })}` }));
       section("cards", inProgress, labels.noCards);
       // Reading: begun and not finished, with how far, then finished.

@@ -48,6 +48,13 @@ test('each language has an index of its essays, reflections, notes, tools and pa
     assert.equal(kinds.note, count(`${content}/notes`), `${lang}: notes`);
     assert.ok(kinds.tool >= 10 && kinds.page === 8, `${lang}: tools and pages`);
     assert.ok(index.filter((item) => item.k === 'essay').every((item) => item.b.length > 1500), `${lang}: essay text`);
+    // The publications are found too: every issue of the Management Review and its special edition, the treatise,
+    // the magazine from the floor, the Tools Guide and the podcast, in this language.
+    const issues = fs.readdirSync('lib/weekly/issues').filter((file) => /^\d+\.js$/.test(file)).length;
+    assert.equal(kinds.issue, issues + 1, `${lang}: issues and the special edition`);
+    assert.ok(kinds.treatise >= 1 && kinds.floor >= 1 && kinds.guide === 1 && kinds.podcast === 1, `${lang}: publications`);
+    const first = index.find((item) => item.u.endsWith('/magazine/management-review-nr-01.html'));
+    assert.match(first.b, /Gallup/, `${lang}: an issue is found by what it is about`);
   }
 });
 

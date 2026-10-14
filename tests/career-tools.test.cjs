@@ -116,6 +116,13 @@ test('job ad keywords skip filler words and match word forms', () => {
   assert.ok(!AtsCv.hasTerm('Front Office Agent', 'back-office'));
   // The stem rule applies to words only, not to addresses.
   assert.ok(!AtsCv.hasTerm('im hotel gearbeitet', 'hotel.de'));
+  // A word inside another word is not the word: the match must not tell a CV it has Excel or Lean when it does not.
+  const cvText = 'Excellent guest service. Cleaning schedules. Things disappear from the store. JavaScript basics.';
+  for (const term of ['excel', 'lean', 'sap', 'java']) assert.ok(!AtsCv.hasTerm(cvText, term), term);
+  assert.ok(AtsCv.hasTerm('Excel, Lean and SAP; Java', 'excel') && AtsCv.hasTerm('SAP-Kenntnisse', 'sap'), 'a whole word, also before a hyphen');
+  assert.ok(AtsCv.hasTerm('Night audits and leadership skills', 'night audit') && AtsCv.hasTerm('leadership skills', 'skill'), 'a plural ending may follow');
+  assert.ok(!AtsCv.hasTerm('Check inventory daily', 'check-in'), 'two words end with their word');
+  assert.ok(AtsCv.hasTerm('Kundenservice und Lagerlogistik', 'lagerlogistik') && AtsCv.hasTerm('Lagerlogistikerin', 'lagerlogistik'), 'a long word may run on');
   // Headings are not part of the matched text: an empty education section does not "have" Ausbildung.
   const cv = AtsCv.clean(AtsCv.fromBuilder(builderData.examples.en), atsData, 'de');
   cv.education = [];

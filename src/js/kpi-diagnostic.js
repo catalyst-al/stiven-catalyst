@@ -36,6 +36,17 @@
     return Object.entries(result).sort((a, b) => b[1] - a[1]);
   };
 
+  // The causes worth naming. Below a third of the maximum there is no pattern; when every cause scores within a point
+  // of the others (every statement answered alike) the answers do not separate the causes either. A cause one point
+  // behind the leader is named with it: one notch on one statement is not a difference.
+  const topCauses = (ranked) => {
+    const best = ranked[0][1];
+    const lowest = ranked.at(-1)[1];
+    if (best <= maxPerCause / 3 || best - lowest < 2) return [];
+    return ranked.filter(([, score]) => score >= best - 1).map(([key]) => key);
+  };
+  window.KpiDiagnostic = { topCauses };
+
   const summaryText = (kpi, ranked, top) => {
     const lines = [`${tx("KPI Diagnostic")} | Stiven Catalyst`];
     if (kpi) lines.push(`KPI: ${kpi}`);
@@ -75,9 +86,7 @@
   const render = () => {
     const kpi = form.elements.kpi.value.trim();
     const ranked = scores();
-    const best = ranked[0][1];
-    // Below a third of the maximum there is no pattern worth naming.
-    const top = best > maxPerCause / 3 ? ranked.filter(([, score]) => score === best).map(([key]) => key) : [];
+    const top = topCauses(ranked);
     coachingResult = { version: 1, tool: 'kpi-diagnostic', captured: new Date().toISOString(), payload: { kpi, answers: [...answered()].map(i => ({ key: i.dataset.cause, score: Number(i.value) })), scores: ranked.map(([key, score]) => ({ key, label: data.causes[key].name, score })) } };
     window.dispatchEvent(new CustomEvent('coaching:result'));
 

@@ -33,7 +33,7 @@
     tx, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
-    inRange, dateSpan, spanText, logBook, resultLayout,
+    inRange, dateSpan, spanText, logBook, resultLayout, periodTotal, rangeText,
     panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -51,7 +51,7 @@
   const pasteArea = root.querySelector("#da-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [], example: {} });
+  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [], example: {}, totalsFor: {} });
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   const save = () => write(KEY, state);
@@ -147,18 +147,22 @@
     });
 
     const logged = rows.length;
-    const setRoutes = Math.round(parseNumber(state.routes));
+    // "Routes in the period" typed for other days than the ones chosen now says nothing about these days: their
+    // routes are not known (routesStale), so late routes are counted and no share is given.
+    const typedRoutes = periodTotal(state, "routes");
+    const routesStale = typedRoutes.stale;
+    const setRoutes = Math.round(parseNumber(typedRoutes.value));
     // With more routes in the period than in the log, the log holds only some of them
     // (often only the late ones): shares by hour, shift and departure would be too high.
-    const partial = setRoutes > logged;
-    const total = partial ? setRoutes : logged;
+    const partial = Boolean(routesStale) || setRoutes > logged;
+    const total = routesStale ? null : partial ? setRoutes : logged;
     const late = rows.filter((row) => row.late);
     const lateMinutes = late.reduce((sum, row) => sum + row.arr, 0);
     const split = late.filter((row) => row.dock !== null);
     const splitMinutes = split.reduce((sum, row) => sum + row.arr, 0);
     const dockMinutes = split.reduce((sum, row) => sum + row.dock, 0);
     const withDep = rows.filter((row) => row.dep !== null);
-    const rate = late.length / total;
+    const rate = total ? late.length / total : null;
     const target = parseNumber(state.target) / 100;
 
     const group = (items, keyOf) => {
@@ -218,12 +222,13 @@
       logged,
       total,
       partial,
+      routesStale,
       setRoutesIgnored: setRoutes > 0 && setRoutes < logged,
       late,
       lateMinutes,
       dockShare,
       rate,
-      onTime: 1 - rate,
+      onTime: rate === null ? null : 1 - rate,
       depOnTime: withDep.length && !partial ? withDep.filter((row) => !row.lateDep).length / withDep.length : null,
       target: target > 0 && target <= 1 ? target : null,
       reasons,
@@ -252,11 +257,14 @@
     const name = periodName(result.rows);
     const when = name ? `${name}: ` : "";
     const why = result.topReason ? tx(", mostly {cause}", { cause: lower(result.topReason.key) }) : "";
-    return `${when}${tx("{n} of {routes} late ({pct} on time)", { n: int.format(result.late.length), routes: routes(result.total), pct: pct(result.onTime, 1) })}; ${sideText(result)}${why}.`;
+    const count = result.onTime === null ? lateRoutes(result.late.length) : tx("{n} of {routes} late ({pct} on time)", { n: int.format(result.late.length), routes: routes(result.total), pct: pct(result.onTime, 1) });
+    return `${when}${count}; ${sideText(result)}${why}.`;
   };
 
+  const staleText = (result) => tx("The routes in the period you typed were for {days}. Type the routes of the days chosen now to see the share on time.", { days: rangeText(result.routesStale) });
+
   const targetText = (result) => {
-    if (!result.target) return null;
+    if (!result.target || result.total === null) return null;
     const needed = Math.ceil(result.target * result.total - 1e-9);
     const gap = needed - (result.total - result.late.length);
     return gap > 0
@@ -272,7 +280,9 @@
     if (state.period || span) lines.push(`${tx("Period")}: ${[state.period, span && spanText(span)].filter(Boolean).join(" · ")}`);
     lines.push(
       "",
-      tx("Routes: {total} · late: {late} · on time: {pct} · sigma level: {sigma}", { total: int.format(result.total), late: int.format(result.late.length), pct: pct(result.onTime, 1), sigma: sigmaText(result.rate) }),
+      result.onTime === null
+        ? `${tx("Late routes")}: ${int.format(result.late.length)} (${staleText(result)})`
+        : tx("Routes: {total} · late: {late} · on time: {pct} · sigma level: {sigma}", { total: int.format(result.total), late: int.format(result.late.length), pct: pct(result.onTime, 1), sigma: sigmaText(result.rate, result.total) }),
       tx("Late means arrival more than {arr} min after plan; late departure more than {dep} min.", { arr: state.arrivalGrace || 0, dep: state.departureGrace || 0 })
     );
     if (result.late.length) {
@@ -352,21 +362,23 @@
     const name = periodName(result.rows);
     head.append(el("p", "kicker", name ? `${tx("Result")} · ${name}` : tx("Result")));
     const title = el("h2");
-    title.append(`${tx("On time")} `, el("span", null, pct(result.onTime, 1)));
+    if (result.onTime === null) title.append(`${tx("Late routes")} `, el("span", null, int.format(result.late.length)));
+    else title.append(`${tx("On time")} `, el("span", null, pct(result.onTime, 1)));
     head.append(title);
 
     const stats = el("div", "dl-stats");
-    stats.append(stat(tx("Late routes"), tx("{a} of {b}", { a: int.format(result.late.length), b: int.format(result.total) }), `${tx("{routes} logged", { routes: routes(result.logged) })}${result.days ? ` ${tx("over {days}", { days: plural(result.days, tx("day"), tx("days")) })}` : ""}`));
+    stats.append(stat(tx("Late routes"), result.total === null ? int.format(result.late.length) : tx("{a} of {b}", { a: int.format(result.late.length), b: int.format(result.total) }), `${tx("{routes} logged", { routes: routes(result.logged) })}${result.days ? ` ${tx("over {days}", { days: plural(result.days, tx("day"), tx("days")) })}` : ""}`));
     if (result.late.length) {
       stats.append(stat(tx("Average delay"), minutes(result.lateMinutes / result.late.length), tx("of the late routes")));
       if (result.dockShare !== null) stats.append(stat(tx("Started at the dock"), pct(result.dockShare, 0), tx("of late minutes")));
     }
     if (result.depOnTime !== null) stats.append(stat(tx("On-time departures"), pct(result.depOnTime, 1), tx("left within {n} min of plan", { n: state.departureGrace || 0 })));
-    stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
+    if (result.rate !== null) stats.append(stat(tx("Sigma level"), sigmaText(result.rate, result.total), tx("short term, with 1.5 shift")));
     const target = targetText(result);
     if (target) stats.append(stat(tx("Target"), target.value, target.note));
 
     const notes = result.setRoutesIgnored ? [el("p", "dl-warning", tx("“Routes in the period” is lower than the number of routes in the log, so the log count is used."))] : [];
+    if (result.routesStale) notes.push(el("p", "dl-warning", staleText(result)));
     const grid = [];
     // Trend: the share of routes that were late each day (week), or the count of late routes when only some routes are logged.
     // The on-time target, when there is one, becomes a ceiling for the late share.

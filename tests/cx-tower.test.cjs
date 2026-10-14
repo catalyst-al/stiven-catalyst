@@ -62,14 +62,17 @@ test('each KPI uses its own denominator', () => {
     delivery({ Notification_Eligible: 1, Customer_Notified: 1, On_Time: 0 }),
     delivery({ Notification_Eligible: 1, Customer_Notified: 0, On_Time: 0, Complaint: 1 }),
     delivery(), delivery(),
-    delivery({ Delivered: 0, On_Time: 0 }),
+    delivery({ Delivered: 0, On_Time: 0, First_Attempt: 0, Complaint: 1 }),
   ];
   const k = C.computeKpis(rows, [], settings, all('deliveries'));
-  assert.equal(k.onTime.n, 4);
+  assert.equal(k.onTime.n, 4, 'on time is per delivered order');
   assert.equal(k.onTime.value, 0.5);
   assert.equal(k.notification.n, 2);
   assert.equal(k.notification.value, 0.5);
-  assert.equal(k.complaints.value, 250);
+  // A failed first attempt and a complaint about an order that was never delivered still count.
+  assert.deepEqual([k.first.n, k.first.value], [5, 0.8]);
+  assert.equal(k.complaints.value, 400, '2 complaints over 5 orders');
+  assert.equal(k.perfect.n, 4, 'Perfect Delivery stays per delivered order');
   const routes = [{ Loading_Time_Min: 18, Departure_Delay_Min: 3, Gate_Closed_Compliant: 1, Cold_Scan_Compliant: null }, { Loading_Time_Min: 24, Departure_Delay_Min: 12, Gate_Closed_Compliant: 0, Cold_Scan_Compliant: 1 }, { Loading_Time_Min: null, Departure_Delay_Min: 5 }];
   const r = C.computeKpis([], routes, settings, all('deliveries'));
   assert.equal(r.loading.value, 21);
@@ -77,6 +80,13 @@ test('each KPI uses its own denominator', () => {
   assert.equal(r.lateRoute.value, 1 / 3);
   assert.equal(r.gateClose.value, 0.5);
   assert.equal(r.coldScan.n, 1);
+});
+
+test('no KPI has a target until the visitor sets one; the example comes with its own', () => {
+  assert.ok(Object.values(C.DEFAULT_TARGETS).every((value) => value === null), 'the page never invents a threshold');
+  assert.deepEqual(Object.entries(C.EXAMPLE_TARGETS).filter(([, value]) => value !== null).map(([id]) => id).sort(), ['coldScan', 'damage', 'gateClose', 'incomplete', 'loading', 'onTime']);
+  assert.equal(C.isDelivered({ Delivered: 0 }), false);
+  assert.equal(C.isDelivered({ Delivered: null }), true, 'a blank Delivered cell is not read as "not delivered"');
 });
 
 test('targets: up, down, exactly on target, and no target', () => {

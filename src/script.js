@@ -49,6 +49,13 @@
     }
   });
 
+  // Focus that leaves the open menu (Tab past its last link, Shift+Tab before the button) closes it, so nothing the
+  // keyboard reaches is hidden behind the panel.
+  document.addEventListener("focusin", (event) => {
+    if (panel?.dataset.open !== "true" || panel.contains(event.target) || menuButton?.contains(event.target)) return;
+    setMenu(false);
+  });
+
   document.querySelectorAll("[data-year]").forEach((node) => {
     node.textContent = new Date().getFullYear();
   });

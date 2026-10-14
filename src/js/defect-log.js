@@ -10,7 +10,7 @@
     tx, num, showDate, lower, addDays, cleanVolumes, importVolumes, dayVolumes, shareText,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
-    inRange, dateSpan, spanText, logBook, resultLayout,
+    inRange, dateSpan, spanText, logBook, resultLayout, periodTotal, rangeText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
@@ -30,7 +30,7 @@
   const pasteArea = root.querySelector("#dl-paste");
   const results = document.querySelector("[data-results]");
 
-  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [], example: {} });
+  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [], example: {}, totalsFor: {} });
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   state.volumes = cleanVolumes(state.volumes);
@@ -114,8 +114,10 @@
     const costed = rows.filter((row) => row.cost != null);
     const cost = costed.reduce((sum, row) => sum + row.cost, 0);
     // The volume typed for the period wins; without one, the daily volumes stand in for it when every day with entries has one.
+    // A volume typed for other days than the ones chosen now is not used (volumeStale names them).
     const days = dayVolumesOf(rows);
-    const typed = parseNumber(state.volume);
+    const typedVolume = periodTotal(state, "volume");
+    const typed = parseNumber(typedVolume.value);
     const fromDays = !(typed > 0) && days.items.length > 0 && !days.missing.length && !days.undated;
     const volume = fromDays ? days.total : typed;
     const target = parseNumber(state.target) / 100;
@@ -141,6 +143,7 @@
       cost: costed.length ? cost : null,
       volume: hasVolume ? volume : null,
       volumeFromDays: fromDays ? days.items.length : 0,
+      volumeStale: typedVolume.stale,
       dayVolumes: days,
       volumeTooLow: volume > 0 && total > volume,
       rate,
@@ -295,13 +298,14 @@
     if (result.volume) {
       if (t.complement) stats.append(stat(t.complement.label, pct(1 - result.rate, 2), t.complement.note));
       stats.append(stat("DPMO", int.format(Math.round(result.dpmo)), tx("{many} per million {noun}", { many: t.many, noun: t.volumeNoun })));
-      stats.append(stat(tx("Sigma level"), sigmaText(result.rate), tx("short term, with 1.5 shift")));
+      stats.append(stat(tx("Sigma level"), sigmaText(result.rate, result.volume), tx("short term, with 1.5 shift")));
       const target = targetText(result);
       if (target) stats.append(stat(tx("Target"), target.value, target.note));
     }
     if (result.cost != null) stats.append(stat(tx("Recorded cost"), euro.format(result.cost), tx("only entries with a cost")));
 
     const notes = [];
+    if (result.volumeStale) notes.push(el("p", "dl-warning", tx("The number you typed for {volume} was for {days}, so it is not used for the days chosen now.", { volume: lower(t.volumeLabel), days: rangeText(result.volumeStale) })));
     if (result.volumeTooLow) {
       notes.push(el("p", "dl-warning", tx("The log holds more {many} than {volume}. Check the volume to see the rate, DPMO and sigma level.", { many: t.many, volume: lower(t.volumeLabel) })));
     } else if (!result.volume) {

@@ -285,7 +285,10 @@
     { id: "coldScan", label: "Cold Scan Compliance", aliases: ["Cold scan"], unit: "pct", dir: "up", grain: "routes", def: "Routes where chilled and frozen bags were scanned inside the cooling area." },
   ];
   const KPI = Object.fromEntries(KPIS.map((kpi) => [kpi.id, kpi]));
-  const DEFAULT_TARGETS = { perfect: null, onTime: 0.98, incomplete: 0.008, damage: 0.008, cold: null, first: null, notification: null, complaints: null, loading: 20, lateRoute: null, gateClose: 1, coldScan: 1 };
+  // No KPI has a target until the visitor approves one: the page never invents a threshold. The example station
+  // comes with targets of its own, so it shows what a scored KPI looks like.
+  const DEFAULT_TARGETS = { perfect: null, onTime: null, incomplete: null, damage: null, cold: null, first: null, notification: null, complaints: null, loading: null, lateRoute: null, gateClose: null, coldScan: null };
+  const EXAMPLE_TARGETS = { ...DEFAULT_TARGETS, onTime: 0.98, incomplete: 0.008, damage: 0.008, loading: 20, gateClose: 1, coldScan: 1 };
 
   // A delivery is perfect when every recorded condition holds. A blank
   // temperature cell means the order had nothing chilled, so it passes.
@@ -324,9 +327,11 @@
     out.incomplete = share(d, (row) => row.Complete === 0, has("Complete"));
     out.damage = share(d, (row) => row.Damage_Free === 0, has("Damage_Free"));
     out.cold = share(d, (row) => row.Temp_Compliant === 1, has("Temp_Compliant"));
-    out.first = share(d, (row) => row.First_Attempt === 1, has("First_Attempt"));
+    // A first attempt that failed is often an order that was not delivered: first attempt and complaints count every
+    // order, delivered or not; the other delivery rates are per delivered order.
+    out.first = share(deliveries, (row) => row.First_Attempt === 1, has("First_Attempt"));
     out.notification = share(d, (row) => row.Customer_Notified === 1, (row) => row.Notification_Eligible === 1 && row.Customer_Notified != null);
-    const complaints = share(d, (row) => row.Complaint === 1, has("Complaint"));
+    const complaints = share(deliveries, (row) => row.Complaint === 1, has("Complaint"));
     out.complaints = { value: complaints.n ? complaints.hit / complaints.n * 1000 : null, n: complaints.n, hit: complaints.hit };
     const loads = routes.filter((row) => row.Loading_Time_Min != null);
     out.loading = { value: loads.length ? loads.reduce((sum, row) => sum + row.Loading_Time_Min, 0) / loads.length : null, n: loads.length };
@@ -539,9 +544,11 @@
     { id: "safety", label: "Routes with a safety deviation", grain: "routes", fields: ["Yard_Speed_Breach", "Safety_Vest_Compliant", "Traffic_Direction_Compliant"], kpi: null, incident: /safety|sicherheit|siguri/ },
   ];
   const DEEP_DIMS = { deliveries: ["DSP", "Shift", "Zone", "Week", "Driver_ID", "Route_ID"], routes: ["DSP", "Shift", "Zone", "Week", "Driver_ID", "Route_ID", "Ramp_Gate", "Vehicle_ID"] };
+  // The deep-dive failures that count every order, delivered or not (as their KPIs do).
+  const EVERY_ORDER = new Set(["firstAttempt", "complaint"]);
   // 1 failed, 0 passed, null when the row has no valid outcome for this metric.
   const deepOutcome = (metric, row, settings, present) => {
-    if (metric.grain === "deliveries" && !isDelivered(row)) return null;
+    if (metric.grain === "deliveries" && !isDelivered(row) && !EVERY_ORDER.has(metric.id)) return null;
     if (metric.id === "imperfect") {
       const p = perfectOf(row, present);
       return p == null ? null : p === 1 ? 0 : 1;
@@ -646,7 +653,7 @@
     Notes: `${words.investigation || "Investigation"} ${caseId}`,
   });
 
-  window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
+  window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, EXAMPLE_TARGETS, isDelivered, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
     DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction };
 })();
 
@@ -885,7 +892,8 @@
   };
   const normaliseAction = (row) => ({ ...row, Status: C.actionStatus(row.Status), Verification_Status: C.verification(row.Verification_Status) });
 
-  const loadExample = () => {
+  // The example in memory only; loadExample also writes it, once the visitor asks for it.
+  const showExample = () => {
     const ex = C.example(cfg.exampleEnd);
     NAMES.forEach((name) => {
       state[name] = ex[name];
@@ -893,13 +901,17 @@
       state.sources[name] = tx("Example");
       state.issues[name] = [];
     });
-    state.targets = { ...C.DEFAULT_TARGETS };
+    state.targets = { ...C.EXAMPLE_TARGETS };
     state.filters = { from: "", to: "", DSP: "", Shift: "", Zone: "" };
     state.week = "";
     state.example = true;
     if (state.tab === "data") state.tab = "overview";
-    say(tx("Example loaded: four weeks of a delivery station with five partners. Replace it with your files in Data & targets."));
     invalidate();
+  };
+  // On a first visit the example flag says it; asked for, the note says so too.
+  const loadExample = () => {
+    showExample();
+    say(tx("Example loaded: four weeks of a delivery station with five partners. Replace it with your files in Data & targets."));
     save();
     render();
   };
@@ -1164,7 +1176,7 @@
       const top = causeAnalysis(i, "Root_Cause_Category").items.find((item) => !P.isOther(item.key));
       if (top) list.append(el("li", null, tx("Largest root cause: {cause}, {p} of incidents.", { cause: top.key, p: pct(top.share, 0) })));
     }
-    const dsps = [...groupBy(d, "DSP")].filter(([, rows]) => rows.length >= state.settings.minSample)
+    const dsps = [...groupBy(d, "DSP")].filter(([, rows]) => rows.filter(C.isDelivered).length >= state.settings.minSample)
       .map(([name, rows]) => ({ name, v: kpisOf(rows, []).perfect.value })).filter((x) => x.v != null).sort((a, b) => a.v - b.v);
     if (dsps.length > 1 && k.perfect.value != null) list.append(el("li", null, tx("Lowest Perfect Delivery: {dsp} with {v} (all: {all}).", { dsp: dsps[0].name, v: pct(dsps[0].v, 1), all: pct(k.perfect.value, 1) })));
     const ac = actionCounts(asOf);
@@ -1336,7 +1348,7 @@
   const scoreRow = (name, d, r, i, extra = [], incidents = true) => {
     const k = kpisOf(d, r);
     const tr = el("tr");
-    tr.append(el("th", null, name), el("td", "num", int.format(k.perfect.n || d.length)));
+    tr.append(el("th", null, name), el("td", "num", int.format(d.filter(C.isDelivered).length)));
     ["perfect", "onTime", "incomplete", "damage", "first", "complaints"].forEach((id) => tr.append(numCell(fmt(KPI_BY[id], k[id].value), C.judge(KPI_BY[id], k[id].value, state.targets[id]) === false)));
     extra.forEach((node) => tr.append(node));
     if (incidents) tr.append(el("td", "num", int.format(i.length)), el("td", "num", int.format(i.filter(C.incidentOpen).length)));
@@ -1354,10 +1366,14 @@
       sortKeys(groupBy(d, "DSP").keys()).map((name) => {
         const rr = rByDsp.get(name) || [];
         const kr = kpisOf([], rr);
-        return scoreRow(name, groupBy(d, "DSP").get(name), rr, iByDsp.get(name) || [], [
+        const rows = groupBy(d, "DSP").get(name);
+        const { tr } = scoreRow(name, rows, rr, iByDsp.get(name) || [], [
           numCell(fmt(KPI_BY.loading, kr.loading.value), C.judge(KPI_BY.loading, kr.loading.value, state.targets.loading) === false),
           numCell(fmt(KPI_BY.lateRoute, kr.lateRoute.value), C.judge(KPI_BY.lateRoute, kr.lateRoute.value, state.targets.lateRoute) === false),
-        ]).tr;
+        ]);
+        // Under the comparison floor a partner is marked, as the page says.
+        if (rows.filter(C.isDelivered).length < state.settings.minSample) tr.firstChild.append(" ", el("span", "dl-tag is-warn", tx("little data")));
+        return tr;
       })));
     out.push(dspBox);
     // Drivers
@@ -1367,7 +1383,8 @@
     const ranked = [];
     const few = [];
     dByDriver.forEach((rows, name) => {
-      if (rows.length < min) { few.push([name, rows.length]); return; }
+      const delivered = rows.filter(C.isDelivered).length;
+      if (delivered < min) { few.push([name, delivered]); return; }
       const k = kpisOf(rows, []);
       const misses = C.KPIS.filter((kpi) => C.judge(kpi, k[kpi.id].value, state.targets[kpi.id]) === false).length;
       ranked.push({ name, rows, k, misses });
@@ -2432,6 +2449,8 @@
     renderPanel();
   };
   // A first visit opens on the example station, so the control tower is visible at once (the flag says so).
-  if (!hasData() && firstVisit(cfg.storageKey)) loadExample();
+  // Nothing is written to the browser until the visitor acts.
+  if (!hasData() && firstVisit(cfg.storageKey)) showExample();
   render();
+  app.classList.add("is-ready");
 })();

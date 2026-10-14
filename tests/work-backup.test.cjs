@@ -51,7 +51,13 @@ test('a damaged or foreign file replaces nothing', () => {
     JSON.stringify({ ...good, items: {} }), JSON.stringify({ ...good, items: [] }),
     JSON.stringify({ ...good, items: { 'sc-theme': 'dark' } }), JSON.stringify({ ...good, items: { 'evil-key': '1' } }),
     JSON.stringify({ ...good, items: { 'sc-pareto': 42 } }),
+    // Well-formed files whose tool entries would wipe a log: a word, a list, no rows, rows that are not a list.
+    JSON.stringify({ ...good, items: { 'sc-damage-control': 'garbage' } }), JSON.stringify({ ...good, items: { 'sc-damage-control': '"garbage"' } }),
+    JSON.stringify({ ...good, items: { 'sc-cx-tower': '[]' } }), JSON.stringify({ ...good, items: { 'sc-delay-analyzer-de': '{}' } }),
+    JSON.stringify({ ...good, items: { 'sc-sigma-chart': '{"rows":"x"}' } }),
   ]) assert.equal(WorkBackup.readBackup(bad), null, bad);
+  // Other keys keep what they hold (the book remembers "two" pages, a voice its speed).
+  assert.ok(WorkBackup.readBackup(JSON.stringify({ ...good, items: { 'sc-book-view': 'two', 'sc-damage-control-sq': '{"rows":[]}' } })));
 });
 
 test('the backup and handover texts are translated', () => {

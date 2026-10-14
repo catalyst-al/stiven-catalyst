@@ -147,8 +147,8 @@
     },
     "road": {
       "name": "Rruga",
-      "lede": "u krijuan në rrugë, pas një nisjeje në kohë",
-      "advice": "Rampa e dorëzon në kohë; vonesa rritet në rrugë. Shikoni dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikoni ngasjen."
+      "lede": "u krijuan në rrugë, pasi mjeti u nis",
+      "advice": "Pjesa më e madhe e vonesës rritet në rrugë, pasi mjeti është nisur. Shikoni dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikoni ngasjen."
     }
   },
   "checklist": [

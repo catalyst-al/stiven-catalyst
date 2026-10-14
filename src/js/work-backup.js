@@ -18,6 +18,17 @@
     return ALIAS[slug] || slug;
   };
 
+  // The work of these tools is an object, and of the logs among them a list of rows. An entry of any other shape was
+  // damaged or made by hand: opened, it would wipe the log it replaces, so the whole file is refused.
+  const OBJECT = /^sc-(damage-control|incomplete-control|delay-analyzer|sigma-chart|pareto|cx-tower|shift-handover|six-sigma|dmaic)(-(de|sq))?$/;
+  const LOG = /^sc-(damage-control|incomplete-control|delay-analyzer|sigma-chart)(-(de|sq))?$/;
+  const sound = ([key, value]) => {
+    if (!OBJECT.test(key)) return true;
+    let parsed;
+    try { parsed = JSON.parse(value); } catch { return false; }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return false;
+    return !LOG.test(key) || Array.isArray(parsed.rows);
+  };
   // A saved file, checked before anything in this browser is replaced.
   const readBackup = (text) => {
     let file;
@@ -26,7 +37,7 @@
     const items = file.items;
     if (!items || typeof items !== "object" || Array.isArray(items)) return null;
     const entries = Object.entries(items);
-    if (!entries.length || entries.some(([key, value]) => !isWork(key) || typeof value !== "string")) return null;
+    if (!entries.length || entries.some(([key, value]) => !isWork(key) || typeof value !== "string") || !entries.every(sound)) return null;
     return { exported: typeof file.exported === "string" ? file.exported : "", items: Object.fromEntries(entries) };
   };
   const makeBackup = (storage, now = new Date()) => {

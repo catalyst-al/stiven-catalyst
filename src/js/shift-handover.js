@@ -3,10 +3,12 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { LOCALE, tx, dayMonth, lower, pct, read, write, isObject, str, el, today, parseDate, parseNumber, renderOnPause } = window.ToolKit;
+  const { LOCALE, tx, dayMonth, lower, pct, plural, read, write, isObject, str, el, today, parseDate, parseNumber, renderOnPause, partialRouteLog } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
+  // The page says it: an issue carried three times is not a shift problem any more.
+  const CARRY_LIMIT = 3;
   const PRIORITY_ORDER = Object.fromEntries(data.priorities.map((p, i) => [p, i]));
   // Priorities are listed high to low; the colour follows the position, not the word.
   const priorityClass = (p) => ["high", "medium", "low"][PRIORITY_ORDER[p]] || "medium";
@@ -171,7 +173,7 @@
     [done, text, priority, owner, due].forEach((node) => { node.dataset.index = i; });
     const meta = el("div", "sh-issue-meta");
     meta.append(priority, owner, due);
-    if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= 2 ? " is-warn" : ""}`, tx("Carried {n}×", { n: issue.carried })));
+    if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= CARRY_LIMIT ? " is-warn" : ""}`, tx("Carried {n}×", { n: issue.carried })));
     meta.append(removeButton("", "issue", i));
     const main = el("div", "sh-issue-main");
     main.append(text, meta);
@@ -245,11 +247,13 @@
     const arrGrace = gracePart(delay.settings.arrivalGrace, 15);
     const routes = delay.rows.filter(mine).map((row) => ({ dep: late(row.planDep, row.actDep), arr: late(row.planArr, row.actArr) })).filter((row) => row.arr !== null);
     const departed = routes.filter((row) => row.dep !== null);
+    // A route log with only some routes of its period (often the late ones) gives counts, never a share.
+    const partial = partialRouteLog(delay.settings);
     return {
       damage: damage.length ? units(damage) : null,
       incomplete: incomplete.length ? units(incomplete) : null,
-      departures: departed.length ? { onTime: departed.filter((row) => row.dep <= depGrace).length, total: departed.length } : null,
-      arrivals: routes.length ? { onTime: routes.filter((row) => row.arr <= arrGrace).length, total: routes.length } : null,
+      departures: departed.length ? { onTime: departed.filter((row) => row.dep <= depGrace).length, total: departed.length, partial } : null,
+      arrivals: routes.length ? { onTime: routes.filter((row) => row.arr <= arrGrace).length, total: routes.length, partial } : null,
     };
   };
   const handledNumber = (h) => {
@@ -264,14 +268,16 @@
     if (source === "damage" || source === "incomplete") {
       const count = totals[source];
       if (count === null) return null;
-      const noun = source === "damage" ? tx("damaged units") : tx("incomplete orders");
+      const noun = source === "damage" ? plural(count, tx("damaged unit"), tx("damaged units")) : plural(count, tx("incomplete order"), tx("incomplete orders"));
       const handled = source === "damage" ? handledNumber(h) : null;
+      // Without the units handled there is no rate: the box says what it counts, so "3" is never read as 3 %.
       return handled
         ? [pct(count / handled, 2), `${tx("{a} of {b}", { a: count, b: handled })} · ${fromLog}`]
-        : [String(count), [noun, fromLog, source === "damage" ? tx("add the units handled for the rate") : ""].filter(Boolean).join(" · ")];
+        : [noun, [fromLog, source === "damage" ? tx("add the units handled for the rate") : tx("no order total, so this is a count")].join(" · ")];
     }
     const part = totals[source];
     if (!part) return null;
+    if (part.partial) return [tx("{n} late", { n: part.total - part.onTime }), `${tx("Only some routes of the period are in the route log, so late routes are counted, not shown as a share.")} · ${fromLog}`];
     return [pct(part.onTime / part.total, 1), `${tx("{a} of {b} routes", { a: part.onTime, b: part.total })} · ${fromLog}`];
   };
 
@@ -283,7 +289,7 @@
     const noTime = open.filter((issue) => !issue.due.trim()).length;
     if (noOwner) list.push(tx(noOwner === 1 ? "{n} open issue has no owner." : "{n} open issues have no owner.", { n: noOwner }));
     if (noTime) list.push(tx(noTime === 1 ? "{n} open issue has no time." : "{n} open issues have no time.", { n: noTime }));
-    open.filter((issue) => issue.carried >= 2).forEach((issue) => list.push(tx("“{text}” has been carried {n} times. It is not a shift problem any more: take it through 5 Whys.", { text: issue.text, n: issue.carried })));
+    open.filter((issue) => issue.carried >= CARRY_LIMIT).forEach((issue) => list.push(tx("“{text}” has been carried {n} times. It is not a shift problem any more: take it through 5 Whys.", { text: issue.text, n: issue.carried })));
     if (!h.to.trim()) list.push(tx("Nobody is named to take over."));
     const unticked = h.checks.filter((c) => !c).length;
     if (unticked === h.checks.length) list.push(tx("No handover checks ticked yet."));

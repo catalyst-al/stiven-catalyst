@@ -102,13 +102,19 @@
   // Hyphens and slashes count as spaces, so "Front-Office" in the ad is found in a CV that writes
   // "Front Office" (and the other way round), and "Check-in" in "Checkin".
   const simple = (text) => String(text).toLowerCase().replace(/[-‐‑–/]+/g, " ").replace(/\s+/g, " ");
-  // "kommunikation" also counts when the CV says "kommunikativ".
+  const escapeTerm = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // A term counts where a word starts: "lean" is not in "cleaning", "sap" not in "disappear". A short term, or one of
+  // several words, must also end with its word (a plural ending may follow): "excel" is not in "excellent", "java" not
+  // in "javascript". One long word may run on, as German compounds do, and "kommunikation" also counts when the CV
+  // says "kommunikativ". "front office" also matches "frontoffice".
   const hasTerm = (text, term) => {
     const t = simple(text);
     const k = simple(term).trim();
     if (!k) return false;
-    if (t.includes(k) || (k.includes(" ") && t.replace(/ /g, "").includes(k.replace(/ /g, "")))) return true;
-    return k.length >= 8 && /^\p{L}+$/u.test(k) && t.includes(k.slice(0, -3));
+    const found = (pattern, runOn) => new RegExp(`(?:^|[^\\p{L}\\p{N}])${pattern}${runOn ? "" : "(?:s|es|e|en|n)?(?![\\p{L}\\p{N}])"}`, "u").test(t);
+    const longWord = k.length >= 8 && !k.includes(" ");
+    if (found(k.split(" ").map(escapeTerm).join(" ?"), longWord)) return true;
+    return longWord && /^\p{L}+$/u.test(k) && found(escapeTerm(k.slice(0, -3)), true);
   };
 
   // ---------- Plain text ----------
