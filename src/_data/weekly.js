@@ -33,8 +33,17 @@ const issues = raw.map((issue) => {
   const pageOf = pageNumbers(issue);
   const perLang = Object.fromEntries(langs.map((lang) => {
     const text = issueText(issue, lang, sourceLine);
+    // The second check of 12 October: the issues it changed say so, with a link to what it changed (the archive).
+    const checked = common.checked.issues.includes(issue.number) ? [{
+      date: common.checked.date[lang],
+      t: common.checked.issue[lang],
+      link: `${lang === "en" ? "" : `/${lang}`}${common.archiveUrl}#checked`,
+      linkText: common.checked.link[lang],
+      series: true,
+    }] : [];
     return [lang, {
       ...text,
+      corrections: [...text.corrections, ...checked],
       // The series the issue belongs to: "First series" for 1–40 (October 2026), "Second series" for 41–80 …
       edition: common.labels.series[seriesOf(issue.number) - 1][lang],
       blockName: blocks[issue.block][lang],

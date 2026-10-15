@@ -7,7 +7,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 
 const hasSite = fs.existsSync('_site/magazine/management-review-nr-47.html');
-const note = (path) => fs.readFileSync(`_site/${path}`, 'utf8').match(/<div class="book-corrections">[\s\S]*?<\/div>/)?.[0] ?? '';
+// The corrections of one page, without the note on the second check of the whole Management Review (data-series).
+const note = (path) => (fs.readFileSync(`_site/${path}`, 'utf8').match(/<div class="book-corrections"[^>]*>[\s\S]*?<\/div>/)?.[0] ?? '').replace(/<p data-series>[\s\S]*?<\/p>/g, '').replace(/<div class="book-corrections"[^>]*>\s*<\/div>/, '');
 const plain = (html) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 // One episode of a podcast page (its <li>), or the whole page when it lists no episodes (an issue's page).
 const episodeOf = (html, slug) => {
@@ -35,7 +36,7 @@ test('the note sits under the lede, and an issue without a correction has none',
   const html = fs.readFileSync('_site/magazine/management-review-nr-47.html', 'utf8');
   assert.ok(html.indexOf('class="lede"') < html.indexOf('class="book-corrections"'));
   assert.ok(html.indexOf('class="book-corrections"') < html.indexOf('class="book-facts"'));
-  for (const path of ['magazine/management-review-nr-46.html', 'de/magazine/management-review-nr-01.html', 'sq/magazine/management-review-nr-80.html']) {
+  for (const path of ['magazine/management-review-nr-46.html', 'de/magazine/management-review-nr-04.html', 'sq/magazine/management-review-nr-79.html']) {
     assert.equal(note(path), '', path);
   }
 });
@@ -103,5 +104,29 @@ test('Episode 2 says, in German only, that one sentence was cut from it', { skip
   // The English recording says nothing the issue contradicts, and the Albanian one was not edited: no note.
   for (const page of ['magazine/management-review-nr-02.html', 'podcast.html', 'sq/magazine/management-review-nr-02.html', 'sq/podcast.html']) {
     assert.equal(note(fs.readFileSync(`_site/${page}`, 'utf8')), '', page);
+  }
+});
+
+test('the second check of 12 October: the archive tells what it changed, and each issue it changed says so, on the web', { skip: !hasSite }, async () => {
+  const { common } = await import('../lib/weekly/common.js');
+  const changed = new Set(common.checked.issues);
+  assert.equal(changed.size, 64);
+  for (const [prefix, lang, start] of [['', 'en', 'Correction, 12 October 2026. Within four days of going online, every figure in issues 1 to 80 was checked a second time'],
+    ['de/', 'de', 'Korrektur, 12. Oktober 2026. Innerhalb von vier Tagen nach dem Erscheinen wurde jede Zahl in den Heften 1 bis 80 ein zweites Mal geprüft'],
+    ['sq/', 'sq', 'Korrigjim, 12 tetor 2026. Brenda katër ditësh nga dalja online, çdo shifër në numrat 1 deri në 80 u kontrollua për herë të dytë']]) {
+    const archive = fs.readFileSync(`_site/${prefix}magazine/management-review.html`, 'utf8');
+    assert.ok(plain(archive.match(/<div class="book-corrections" id="checked">[\s\S]*?<\/div>/)?.[0] ?? '').startsWith(start), `${prefix || 'en'}: the archive`);
+    const link = `href="/${prefix}magazine/management-review.html#checked"`;
+    assert.ok(fs.readFileSync(`_site/${prefix}how-this-is-made.html`, 'utf8').includes(link), `${prefix || 'en'}: How this is made links to it`);
+    for (let n = 1; n <= 80; n += 1) {
+      const html = fs.readFileSync(`_site/${prefix}magazine/management-review-nr-${String(n).padStart(2, '0')}.html`, 'utf8');
+      const series = html.match(/<p data-series>[\s\S]*?<\/p>/g) || [];
+      assert.equal(series.length, changed.has(n) ? 1 : 0, `${prefix || 'en'} No. ${n}`);
+      if (changed.has(n)) {
+        assert.ok(series[0].includes(link), `${prefix || 'en'} No. ${n}: links to the archive`);
+        // Not on the printed pages: the PDF printed on 12 October is already the checked text.
+        assert.equal(html.split(common.checked.issue[lang].slice(0, 40)).length - 1, 1, `${prefix || 'en'} No. ${n}: once, on the web`);
+      }
+    }
   }
 });

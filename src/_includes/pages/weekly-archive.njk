@@ -8,6 +8,10 @@
     <p class="eyebrow">{{ A.eyebrow }}</p>
     <h1>Management <span class="weekly-mark">Review</span></h1>
     <p class="lede">{{ A.lede }}</p>
+    {#- The second check of 12 October, and what it changed (weekly.checked). -#}
+    {%- set corrections = [{ date: W.checked.date, t: W.checked.archive, series: true }] %}
+    {%- set correctionsId = "checked" %}
+    {%- include "partials/book-corrections.njk" %}
   </section>
 
   <section class="shell weekly-archive" aria-label="{{ L.issues }}">
