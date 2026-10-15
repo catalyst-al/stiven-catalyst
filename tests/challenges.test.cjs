@@ -145,6 +145,6 @@ test('the Challenges page lists every challenge with its essays, in the three la
       assert.ok(section[0].includes(`href="#${c.id}"`) || html.includes(`href="#${c.id}"`), `${file}: ${c.id} in the index`);
     }
     assert.match(html, /<nav class="lang-switch"/, `${file}: the language switch`);
-    assert.match(html, /class="shell writing-tabs"[\s\S]*?aria-current="page">[^<]+<\/a>/, `${file}: the tab is current`);
+    assert.match(html, /class="shell writing-tabs"[\s\S]*?aria-current="page">[^<]+<span class="tab-pill" aria-hidden="true"><\/span><\/a>/, `${file}: the tab is current`);
   }
 });

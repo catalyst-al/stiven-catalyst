@@ -1,8 +1,8 @@
 {#- On the writing pages (Insights, Challenges, Reflections, Field Notes): one "Writing" item in the menu, these tabs
-    to move between them. -#}
+    to move between them. The marked tab is a pill of its own (.tab-pill), so it can slide to the next tab. -#}
 <nav class="shell writing-tabs" aria-label="{{ 'Writing' | t(lang) }}">
   {%- for path, label in [["/insights.html", "Insights"], ["/challenges.html", "Challenges"], ["/reflections.html", "Reflections"], ["/field-notes.html", "Field Notes"]] %}
   {%- set url = path | local(lang) %}
-  <a href="{{ url }}"{% if activeNav == url %} aria-current="page"{% endif %}>{{ label | t(lang) }}</a>
+  <a href="{{ url }}"{% if activeNav == url %} aria-current="page"{% endif %}>{{ label | t(lang) }}{% if activeNav == url %}<span class="tab-pill" aria-hidden="true"></span>{% endif %}</a>
   {%- endfor %}
 </nav>

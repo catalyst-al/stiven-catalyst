@@ -25,12 +25,15 @@
 {#- The two inline scripts, kept in variables so the Content Security Policy can name their hashes. -#}
 {%- set themeScript -%}document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}{%- endset -%}
 {%- set coachingLoader -%}{% include "partials/coaching-loader.njk" %}{%- endset -%}
+{#- Links on this site are fetched while the pointer rests on them (or on touch), so the next page is usually there
+    by the time it is clicked; browsers without speculation rules ignore it. -#}
+{%- set speculationRules -%}{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[download],[target=_blank]"}}]},"eagerness":"moderate"}]}{%- endset -%}
 {#- Everything comes from this site; the one exception is a company logo from Google's icon service in the
     CV tools (img-src). Styles allow inline attributes (the role colour, SVG charts), fonts and images may be
     data: or blob: (exports, uploaded photos), pdf.js runs its worker from here, forms may post to the
     newsletter provider (form-action https:, and connect-src for the form that stays on the page), and the
     feedback form at the end of a tool may post to the form provider in site.contact.action (connect-src). -#}
-{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + (" https://static.cloudflareinsights.com" if analyticsToken else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + (" https://cloudflareinsights.com" if analyticsToken else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
+{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + " " + (speculationRules | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + (" https://static.cloudflareinsights.com" if analyticsToken else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + (" https://cloudflareinsights.com" if analyticsToken else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">
 <head>
@@ -73,6 +76,7 @@
 {%- endif %}
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>{{ themeScript | safe }}</script>
+  <script type="speculationrules">{{ speculationRules | safe }}</script>
   <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
 {%- if toolFamily %}
   <link rel="stylesheet" href="{{ '/coaching.css' | assetUrl }}">
@@ -99,7 +103,8 @@
     </a>
     <nav class="main-nav" aria-label="{{ 'Primary' | t(lang) }}">
       {%- for item in nav %}
-      <a{% if activeNav == item[0] or (item[2] and activeNav in item[2]) %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}</a>
+      {%- set current = activeNav == item[0] or (item[2] and activeNav in item[2]) %}
+      <a{% if current %} aria-current="page"{% endif %} href="{{ item[0] }}">{{ item[1] }}{% if current %}<span class="nav-pill" aria-hidden="true"></span>{% endif %}</a>
       {%- endfor %}
     </nav>
     <div class="header-actions">
