@@ -73,29 +73,45 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
     const query = next.toString();
     history.replaceState(null, "", query ? `?${query}${location.hash}` : location.pathname + location.hash);
   };
+  // After a click on a month or a topic (and on "show more"), the rows come in one after another (styles.css,
+  // .is-entering); typing in the search box changes the list without it.
+  const reveal = (from = 0) => {
+    const shown = items.filter((item) => !item.hidden).slice(from);
+    shown.forEach((item) => item.classList.remove("is-entering"));
+    void list.offsetWidth;
+    shown.forEach((item, i) => {
+      item.style.setProperty("--i", Math.min(i, 12));
+      item.classList.add("is-entering");
+    });
+  };
+  items.forEach((item) => item.addEventListener("animationend", (event) => {
+    if (event.target === item) item.classList.remove("is-entering");
+  }));
   // Every new choice starts again from the first page.
-  const choose = () => {
+  const choose = (animate) => {
     limit = page;
     apply();
+    if (animate) reveal();
   };
 
   months.forEach((button) => button.addEventListener("click", () => {
     month = button.dataset.filterMonth;
-    choose();
+    choose(true);
   }));
   more?.querySelector("button").addEventListener("click", () => {
     const before = items.filter((item) => !item.hidden).length;
     limit += page;
     apply();
+    reveal(before);
     // Keyboard and screen-reader users go on from the first row that just appeared.
     const first = items.filter((item) => !item.hidden)[before];
     (first?.matches("a") ? first : first?.querySelector("a"))?.focus();
   });
   chips.forEach((chip) => chip.addEventListener("click", () => {
     topic = chip.dataset.topic;
-    choose();
+    choose(true);
   }));
-  search.addEventListener("input", choose);
+  search.addEventListener("input", () => choose());
   search.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && search.value) {
       search.value = "";

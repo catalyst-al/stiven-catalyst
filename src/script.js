@@ -71,6 +71,28 @@
     setMenu(false);
   });
 
+  // The month buttons of the lists (Insights, Reflections, Field Notes, Publications, the magazines): the blue of the
+  // chosen month is one pill that slides to the month chosen next. filter.js and weekly.js only set aria-pressed.
+  document.querySelectorAll(".weekly-months").forEach((group) => {
+    const pill = document.createElement("span");
+    pill.className = "month-pill";
+    pill.setAttribute("aria-hidden", "true");
+    group.prepend(pill);
+    const place = () => {
+      const button = group.querySelector('button[aria-pressed="true"]');
+      pill.hidden = !button?.offsetWidth;
+      if (pill.hidden) return;
+      pill.style.width = `${button.offsetWidth}px`;
+      pill.style.height = `${button.offsetHeight}px`;
+      pill.style.transform = `translate(${button.offsetLeft}px, ${button.offsetTop}px)`;
+    };
+    place();
+    group.classList.add("has-pill");
+    requestAnimationFrame(() => group.classList.add("is-ready"));
+    new MutationObserver(place).observe(group, { subtree: true, attributeFilter: ["aria-pressed"] });
+    if ("ResizeObserver" in window) new ResizeObserver(place).observe(group);
+  });
+
   document.querySelectorAll("[data-year]").forEach((node) => {
     node.textContent = new Date().getFullYear();
   });

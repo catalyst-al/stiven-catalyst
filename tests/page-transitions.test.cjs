@@ -76,3 +76,47 @@ test('a tap on the dimmed page closes the menu and presses nothing underneath', 
   under.click();
   assert.equal(pressed, 1, 'with the menu closed, the page works as before');
 });
+
+test('the blue of the chosen month is one pill that follows the month chosen', async () => {
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM(`<html><body><div class="weekly-months"><button aria-pressed="true">Nov</button><button aria-pressed="false">Oct</button></div></body></html>`, { runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  // jsdom lays nothing out: each button is 100 × 40 px, the second one 110 px to the right.
+  for (const [name, value] of [['offsetWidth', () => 100], ['offsetHeight', () => 40], ['offsetTop', () => 5], ['offsetLeft', function () { return this.textContent === 'Oct' ? 115 : 5; }]]) {
+    Object.defineProperty(window.HTMLElement.prototype, name, { configurable: true, get: value });
+  }
+  window.eval(fs.readFileSync('src/script.js', 'utf8'));
+  const group = window.document.querySelector('.weekly-months');
+  const pill = group.querySelector('.month-pill');
+  assert.ok(pill && group.classList.contains('has-pill'));
+  assert.equal(pill.getAttribute('aria-hidden'), 'true');
+  assert.equal(pill.style.transform, 'translate(5px, 5px)');
+  assert.equal(pill.style.width, '100px');
+  const [nov, oct] = group.querySelectorAll('button');
+  nov.setAttribute('aria-pressed', 'false');
+  oct.setAttribute('aria-pressed', 'true');
+  await new Promise((resolve) => window.setTimeout(resolve, 0));
+  assert.equal(pill.style.transform, 'translate(115px, 5px)', 'the pill moved to October');
+});
+
+test('the rows come in one after another after a click on a topic, not while typing', () => {
+  const { JSDOM } = require('jsdom');
+  const rows = ['a', 'b', 'c'].map((id, i) => `<a class="list-row" data-filter-item data-topic="${i ? 'x' : 'y'}" data-search="${id}"></a>`).join('');
+  const dom = new JSDOM(`<body><section data-filter-list><div data-filter-controls><input type="search" data-filter-search>
+    <button class="chip" data-topic="">All</button><button class="chip" data-topic="x">x</button><p data-filter-count></p></div>${rows}<p data-filter-empty hidden></p></section></body>`,
+    { url: 'https://example.test/insights.html', runScripts: 'outside-only' });
+  const { window } = dom;
+  window.eval(fs.readFileSync('src/js/filter.js', 'utf8'));
+  const doc = window.document;
+  const entering = () => [...doc.querySelectorAll('.is-entering')].map((row) => row.dataset.search);
+  assert.deepEqual(entering(), [], 'nothing moves when the page opens');
+  doc.querySelector('[data-topic="x"]').click();
+  assert.deepEqual(entering(), ['b', 'c']);
+  assert.deepEqual([...doc.querySelectorAll('.is-entering')].map((row) => row.style.getPropertyValue('--i')), ['0', '1']);
+  doc.querySelectorAll('.is-entering').forEach((row) => row.dispatchEvent(new window.Event('animationend')));
+  assert.deepEqual(entering(), [], 'the class goes when the row has come in');
+  const search = doc.querySelector('[data-filter-search]');
+  search.value = 'c';
+  search.dispatchEvent(new window.Event('input'));
+  assert.deepEqual(entering(), []);
+});

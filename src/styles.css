@@ -3043,6 +3043,7 @@ html:not(.js) .filter-bar { display: none; }
   letter-spacing: .08em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: color .25s ease, background .25s ease, border-color .25s ease;
 }
 .chip[hidden] { display: none; }
 .chip:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
@@ -4660,10 +4661,31 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 }
 .weekly-months button:hover { color: var(--ink); }
 .weekly-months button[aria-pressed="true"] { background: var(--blue); color: var(--on-blue); }
+/* With script.js the blue is one pill under the buttons that slides to the month chosen; the text changes colour with it. */
+.weekly-months { position: relative; isolation: isolate; }
+.weekly-months button { transition: color .3s ease; }
+.weekly-months.has-pill button[aria-pressed="true"] { background: transparent; }
+.month-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 10px;
+  background: var(--blue);
+  box-shadow: 0 8px 22px -10px color-mix(in srgb, var(--blue) 85%, transparent);
+  pointer-events: none;
+}
+.month-pill[hidden] { display: none; }
+.weekly-months.is-ready .month-pill { transition: transform .45s cubic-bezier(.22, 1, .36, 1), width .45s cubic-bezier(.22, 1, .36, 1), height .45s cubic-bezier(.22, 1, .36, 1); }
+/* After a month, a topic or "show more" is chosen, the items of the list come in one after another (filter.js, weekly.js). */
+.is-entering { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 35ms); }
+@keyframes list-in { from { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) { .is-entering { animation: none; } }
 .weekly-n { margin-left: 8px; font-weight: 600; opacity: .7; font-variant-numeric: tabular-nums; }
 .weekly-n:empty { display: none; }
 .weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
 .weekly-filter button {
+  transition: color .25s ease, background .25s ease, border-color .25s ease;
   padding: 9px 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
