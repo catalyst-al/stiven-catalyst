@@ -1654,7 +1654,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .shelf-link svg path { fill: none; }
 .shelf-link .shelf-count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--blue); color: var(--on-blue); font-family: var(--sans); font-size: 10px; font-weight: 800; line-height: 16px; text-align: center; }
 .shelf-link .shelf-count[hidden] { display: none; }
-.essay-save { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.essay-save { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: color .2s, border-color .2s, background .2s, scale .25s cubic-bezier(.22, 1, .36, 1); }
 .essay-save svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
 .essay-save:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .essay-save.is-saved { color: var(--blue); border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
@@ -1687,7 +1687,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .essay-listen { margin: 0 0 20px; padding: 12px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-family: var(--sans); }
 .essay-listen[hidden] { display: none; }
 .essay-listen-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
-.essay-listen-play { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease; }
+.essay-listen-play { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
 .essay-listen-play:hover { filter: brightness(1.08); }
 .essay-listen-play svg { width: 13px; height: 13px; fill: currentColor; }
 .essay-listen-play[aria-pressed="true"] svg path { d: path("M6 4h4v16H6zM14 4h4v16h-4z"); }
@@ -1732,7 +1732,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 /* The Challenges page: a short index of the situations, then one section per challenge with its essays on the
    left and its tools and field notes on the right. */
 .challenge-index { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 0; padding-bottom: 30px; }
-.challenge-index a { display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-family: var(--sans); font-size: .92rem; font-weight: 600; text-decoration: none; transition: border-color .2s ease, color .2s ease; }
+.challenge-index a { display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-family: var(--sans); font-size: .92rem; font-weight: 600; text-decoration: none; transition: border-color .2s ease, color .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
 .challenge-index a:hover { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .challenge-index a b { color: var(--blue); font-size: .75rem; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 .challenge-index a small { color: var(--muted); font-size: .75rem; }
@@ -2126,13 +2126,13 @@ main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
   background: var(--blue);
   color: var(--on-blue);
 }
-.button-primary:hover { filter: brightness(1.08); }
+.button-primary:hover { filter: brightness(1.08); box-shadow: 0 10px 28px -12px color-mix(in srgb, var(--blue) 90%, transparent); }
 .button-secondary {
   border: 1px solid var(--line);
   background: var(--card);
   color: var(--ink);
 }
-.button-secondary:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.button-secondary:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); background: color-mix(in srgb, var(--blue) 8%, var(--card)); }
 .button-ghost {
   justify-self: start;
   padding: 8px 0;
@@ -2140,6 +2140,21 @@ main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
   background: none;
   color: var(--blue);
 }
+.button-ghost:hover { filter: brightness(1.2); }
+
+/* Every button, on every page: its colour, border, shadow and glow change smoothly, and a press gives a little under
+   the finger (scale, which leaves a button's own transform alone). The transition has no specificity (:where), so a
+   button with a transition of its own keeps it; those that are buttons add scale to theirs. */
+:where(button, .button-primary, .button-secondary, .button-ghost, .icon-button, .lang-switch a, input[type="submit"], input[type="button"], summary) {
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .25s ease, filter .2s ease, opacity .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+:is(button, .button-primary, .button-secondary, .icon-button, .chip, .writing-tabs a, .challenge-index a, .lang-switch a, input[type="submit"], input[type="button"]):active:where(:not(:disabled)) { scale: .96; }
+/* Buttons that already give under the finger (or carry a pill that must stay under them) keep their own way. */
+.weekly-months button:active,
+button.share-orbit-button:active,
+.in-family .button-primary:active { scale: none; }
+.icon-button:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); background: color-mix(in srgb, var(--blue) 10%, var(--card)); }
 
 /* Diagnostic result */
 .tool-result {
@@ -2322,7 +2337,7 @@ main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
   font-size: 14px;
   font-weight: 750;
   cursor: pointer;
-  transition: border-color .2s ease, background .2s ease;
+  transition: border-color .2s ease, background .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
 }
 .dl-range-presets button:hover { border-color: var(--accent-fill, var(--blue)); }
 .dl-range-presets button[aria-pressed="true"] {
@@ -3043,7 +3058,7 @@ html:not(.js) .filter-bar { display: none; }
   letter-spacing: .08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color .25s ease, background .25s ease, border-color .25s ease;
+  transition: color .25s ease, background .25s ease, border-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
 }
 .chip[hidden] { display: none; }
 .chip:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
@@ -3168,7 +3183,7 @@ html:not(.js) .filter-bar { display: none; }
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
-  transition: color .2s ease, border-color .2s ease;
+  transition: color .2s ease, border-color .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
 }
 .writing-tabs a:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
 .writing-tabs a[aria-current="page"] { color: var(--ink); border-color: transparent; }
@@ -3813,6 +3828,7 @@ html:not(.js) .filter-bar { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
+  :is(button, .button-primary, .button-secondary, .icon-button, .chip, .writing-tabs a, .challenge-index a, .lang-switch a, input[type="submit"], input[type="button"]):active:where(:not(:disabled)) { scale: none; }
 }
 
 /* The book: "Mall për Durrësin" */
@@ -3894,7 +3910,7 @@ html:not(.js) .filter-bar { display: none; }
 .audio-player-native[hidden] { display: none; }
 .audio-player-row { display: flex; align-items: center; gap: 8px; }
 .audio-player-row[hidden] { display: none; }
-.audio-player-play { display: inline-flex; flex: none; align-items: center; gap: 8px; min-height: 40px; white-space: nowrap; padding: 8px 16px 8px 13px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease; }
+.audio-player-play { display: inline-flex; flex: none; align-items: center; gap: 8px; min-height: 40px; white-space: nowrap; padding: 8px 16px 8px 13px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
 .audio-player-play:hover { filter: brightness(1.08); }
 .audio-player-play svg { width: 13px; height: 13px; flex: none; fill: currentColor; }
 .audio-player-play .audio-icon-pause,
@@ -4274,7 +4290,7 @@ html:not(.js) .filter-bar { display: none; }
   background: rgba(255, 255, 255, .05);
   color: var(--ink);
   cursor: pointer;
-  transition: border-color .2s, color .2s, background .2s;
+  transition: border-color .2s, color .2s, background .2s, scale .25s cubic-bezier(.22, 1, .36, 1);
 }
 .book-button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .book-button:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); background: rgba(74, 181, 247, .08); }
@@ -4663,7 +4679,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-months button[aria-pressed="true"] { background: var(--blue); color: var(--on-blue); }
 /* With script.js the blue is one pill under the buttons that slides to the month chosen; the text changes colour with it. */
 .weekly-months { position: relative; isolation: isolate; }
-.weekly-months button { transition: color .3s ease; }
+.weekly-months button { transition: color .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
 .weekly-months.has-pill button[aria-pressed="true"] { background: transparent; }
 .month-pill {
   position: absolute;
@@ -4685,7 +4701,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-n:empty { display: none; }
 .weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
 .weekly-filter button {
-  transition: color .25s ease, background .25s ease, border-color .25s ease;
+  transition: color .25s ease, background .25s ease, border-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
   padding: 9px 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
