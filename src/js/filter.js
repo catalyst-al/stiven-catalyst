@@ -26,6 +26,13 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
   let month = (months.find((button) => button.dataset.filterMonth === params.get("month")) || months[0])?.dataset.filterMonth || "";
   let limit = page;
   search.value = params.get("q") || "";
+  // A link to one item (field-notes.html#note-…) opens the month it is in and shows it, however far down the list.
+  let target = null;
+  try {
+    target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+  } catch {}
+  const linked = target && items.find((item) => item.contains(target));
+  if (linked?.dataset.month && !params.has("month")) month = linked.dataset.month;
 
   // An item can belong to several topics, written "a|b" (the essays and their challenges); the notes have one.
   const inTopic = (item, id) => item.dataset.topic.split("|").includes(id);
@@ -97,4 +104,11 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
   });
 
   apply();
+  if (linked) {
+    while (linked.hidden && limit < items.length) {
+      limit += page;
+      apply();
+    }
+    if (!linked.hidden) target.scrollIntoView();
+  }
 })();

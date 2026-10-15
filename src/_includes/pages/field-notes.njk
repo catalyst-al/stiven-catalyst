@@ -7,6 +7,11 @@
 {%- set searchLabel = "Search notes" | t(lang) %}
 {%- set countLabel = "{a} of {b} notes" | t(lang) %}
 {%- set filterTopics = noteList | topics("topic") %}
+{#- One month at a time, the newest first, twelve notes at a time with "show more", each topic with its count
+    (js/filter.js); a link to one note opens its month. #}
+{%- set filterMonths = noteList | monthsOf(lang) %}
+{%- set filterCounts = true %}
+{%- set filterPage = 12 %}
 {#- Each note's essay and tool (lib/writing-links.js), in the page's language. -#}
 {%- set noteLinks = collections.writingLinks.noteLinks %}
 {%- set essayList = collections["insights" + (lang | langSuffix)] %}
@@ -14,7 +19,7 @@
 {% include "partials/filter-bar.njk" %}
 <div class="notes-grid">
 {%- for note in noteList %}
-<article class="note-card" id="note-{{ note.fileSlug }}" data-filter-item data-topic="{{ note.data.topic }}" data-search="{{ [note.data.quote, note.data.topic] | join(' ') | lower }}">
+<article class="note-card" id="note-{{ note.fileSlug }}" data-filter-item data-topic="{{ note.data.topic }}" data-month="{{ note.date | monthId }}" data-search="{{ [note.data.quote, note.data.topic] | join(' ') | lower }}">
   <blockquote data-fit>{{ note.data.quote | quoted(lang) }}</blockquote>
   {%- set link = noteLinks[note.fileSlug] %}
   {%- set noteEssay = (essayList | byOriginal(link.essay)) if link and link.essay else null %}
@@ -38,6 +43,10 @@
 {%- endfor %}
 </div>
 <p class="filter-empty" data-filter-empty hidden>{{ "No notes match that yet. Try another word." | t(lang) }}</p>
+<div class="weekly-more" data-filter-more hidden>
+  <p class="weekly-shown" aria-live="polite"></p>
+  <button type="button" class="button-secondary">{{ "Show more notes" | t(lang) }}</button>
+</div>
 </section>
 <script src="{{ '/js/filter.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/share.js' | assetUrl }}" defer></script>
