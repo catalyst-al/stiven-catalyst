@@ -106,7 +106,8 @@
       // Keyboard and screen-reader users go on from the first cover that just appeared.
       items.filter((item) => !item.hidden)[before]?.querySelector("a")?.focus();
     });
-    filter.hidden = false;
+    // With one month and one topic there is nothing to choose, only the covers to show twelve at a time.
+    filter.hidden = !filter.querySelector("button");
     render();
   }
 })();
