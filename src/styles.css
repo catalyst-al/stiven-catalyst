@@ -3001,6 +3001,7 @@ html:not(.js) .filter-bar { display: none; }
   text-transform: uppercase;
   cursor: pointer;
 }
+.chip[hidden] { display: none; }
 .chip:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .chip[aria-pressed="true"] {
   border-color: var(--blue);

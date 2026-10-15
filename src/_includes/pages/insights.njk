@@ -40,6 +40,10 @@
     {%- set filterTopics = [] %}
     {%- for item in challenges %}{% set filterTopics = (filterTopics.push({ id: item.id, label: item.name[lang or "en"] }), filterTopics) %}{% endfor %}
     {%- set filterLabel = "Filter by challenge" | t(lang) %}
+    {#- One month at a time, the newest first, twelve essays at a time with "show more" (js/filter.js). #}
+    {%- set filterMonths = essays | monthsOf(lang) %}
+    {%- set filterCounts = true %}
+    {%- set filterPage = 12 %}
     {% include "partials/filter-bar.njk" %}
     <p class="filter-more"><a href="{{ '/challenges.html' | local(lang) }}">{{ "All challenges, with their essays, checklists and tools" | t(lang) }} →</a></p>
     {#- Newest first; only the newest essay can be marked new, for seven days after its date (the script below). -#}
@@ -51,14 +55,14 @@
     {%- set topicIds = [] %}
     {%- for c in itemChallenges %}{% set topicIds = (topicIds.push(c.id), topicIds) %}{% endfor %}
     {%- if item.data.status == "soon" %}
-    <div class="list-row" data-filter-item data-topic="{{ topicIds | join('|') }}" data-search="{{ search }}">
+    <div class="list-row" data-filter-item data-topic="{{ topicIds | join('|') }}" data-month="{{ item.date | monthId }}" data-search="{{ search }}">
       <span class="number">{{ item.data.number }}</span>
       <div><h2>{{ item.data.title }}</h2><p>{{ item.data.summary }}</p></div>
       <span class="row-meta">{{ item.data.category }} · {{ "Soon" | t(lang) }}</span>
     </div>
     {%- else %}
     {%- set itemTools = collections.writingLinks.essayTools[item.data.original or item.fileSlug] or [] %}
-    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ topicIds | join('|') }}" data-search="{{ search }}" data-read-row="{{ item.fileSlug }}">
+    <a class="list-row" href="{{ item.url }}" data-filter-item data-topic="{{ topicIds | join('|') }}" data-month="{{ item.date | monthId }}" data-search="{{ search }}" data-read-row="{{ item.fileSlug }}">
       <span class="number">{{ item.data.number }}</span>
       <div>
         <h2>{% if loop.first %}<span class="new-badge" data-new-since="{{ item.date | isoDate }}" hidden>{{ "New" | t(lang) }}</span>{% endif %}{{ item.data.title }}</h2>
@@ -75,6 +79,10 @@
     {%- endif %}
     {%- endfor %}
     <p class="filter-empty" data-filter-empty hidden>{{ "No essays match that yet. Try another word or topic." | t(lang) }}</p>
+    <div class="weekly-more" data-filter-more hidden>
+      <p class="weekly-shown" aria-live="polite"></p>
+      <button type="button" class="button-secondary">{{ "Show more essays" | t(lang) }}</button>
+    </div>
   </section>
 {% include "partials/newsletter.njk" %}
 <script src="{{ '/js/filter.js' | assetUrl }}" defer></script>
