@@ -362,6 +362,17 @@ export default function (eleventyConfig) {
   );
   eleventyConfig.addFilter("pad", (value) => String(value).padStart(2, "0"));
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
+  // The month of a date as "2026-10", and the months of a list of essays, the newest first, each with its name in the
+  // page's language ("Tetor 2026") and how many essays it has: the months above the list of Insights (filter.js).
+  const monthId = (date) => new Date(date).toISOString().slice(0, 7);
+  eleventyConfig.addFilter("monthId", monthId);
+  eleventyConfig.addFilter("monthsOf", (items, lang) => {
+    const ids = [...new Set((items || []).map((item) => monthId(item.date)))].sort().reverse();
+    return ids.map((id) => {
+      const name = new Date(`${id}-01T00:00:00Z`).toLocaleDateString(LOCALES[lang] || LOCALES.en, { month: "long", year: "numeric", timeZone: "UTC" });
+      return { id, label: name.charAt(0).toUpperCase() + name.slice(1), count: items.filter((item) => monthId(item.date) === id).length };
+    });
+  });
   // One object over another, for the structured data (partials/structured-data.njk).
   eleventyConfig.addFilter("merge", (base, extra) => ({ ...base, ...extra }));
   // The first item of a list whose key has this value (a tool by its url).

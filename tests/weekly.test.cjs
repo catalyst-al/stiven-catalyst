@@ -264,3 +264,17 @@ test('the issues come in monthly series of 40: the label names the series, the d
     assert.match(fs.readFileSync(file, 'utf8'), /I\.edition \}\} · \{\{ I\.date/, file);
   }
 });
+
+test('Insights shows its essays a month and twelve at a time, with "show more" and the count of each challenge', { skip: !hasSite }, () => {
+  for (const lang of LANGS) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    const page = built(`${prefix}insights.html`);
+    const rows = page.match(/data-filter-item [^>]*>/g) || [];
+    assert.ok(rows.length > 12, `${lang}: more essays than a page`);
+    for (const row of rows) assert.match(row, /data-month="\d{4}-\d{2}"/, `${lang}: every essay has its month`);
+    const months = new Set(rows.map((row) => row.match(/data-month="([^"]+)"/)[1]));
+    assert.equal((page.match(/data-filter-month="/g) || []).length, months.size > 1 ? months.size : 0, `${lang}: a button for each month, once there are two`);
+    assert.ok(page.includes('data-page="12"') && page.includes('data-filter-more'), `${lang}: twelve at a time, with show more`);
+    assert.ok(page.includes('data-chip-count'), `${lang}: the count of each challenge`);
+  }
+});
