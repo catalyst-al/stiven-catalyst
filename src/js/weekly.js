@@ -1,6 +1,6 @@
 // The monthly Management Review on the site. On the page of an issue, its charts (lib/weekly/charts.js) move in
 // once when they come into view: lines draw, bars grow, people and figures appear one by one, the big figures
-// count up. On the list of all issues, the topics narrow the list. Without this script, or with reduced motion,
+// count up. On the list of all issues, the month and the topics narrow the list. Without this script, or with reduced motion,
 // everything is simply shown as it is.
 (() => {
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -40,15 +40,66 @@
     }
   }
 
+  // The list of all issues: one month at a time (the newest first), narrowed by topic, twelve covers at a time with
+  // "show more". The choice stays in the address (?month=2026-10&topic=people), so the back button returns to it.
   const filter = document.querySelector("[data-weekly-filter]");
   if (filter) {
     const items = [...document.querySelectorAll(".weekly-grid > li")];
-    filter.hidden = false;
+    const monthButtons = [...filter.querySelectorAll("button[data-month]")];
+    const blockButtons = [...filter.querySelectorAll("button[data-block]")];
+    const more = document.querySelector("[data-weekly-more]");
+    const moreButton = more.querySelector("button");
+    const shown = more.querySelector(".weekly-shown");
+    const none = document.querySelector("[data-weekly-none]");
+    const page = Number(filter.dataset.page) || 12;
+    const params = new URLSearchParams(location.search);
+    const pick = (buttons, key, value) => buttons.find((button) => button.dataset[key] === value);
+    const state = {
+      month: (pick(monthButtons, "month", params.get("month")) || monthButtons[0])?.dataset.month || "",
+      block: pick(blockButtons, "block", params.get("topic") || "") ? params.get("topic") || "" : "",
+      limit: page,
+    };
+
+    const render = () => {
+      const inMonth = items.filter((item) => !state.month || item.dataset.month === state.month);
+      for (const button of monthButtons) button.setAttribute("aria-pressed", String(button.dataset.month === state.month));
+      for (const button of blockButtons) {
+        button.setAttribute("aria-pressed", String(button.dataset.block === state.block));
+        const count = button.querySelector(".weekly-n");
+        if (count) count.textContent = inMonth.filter((item) => item.dataset.block === button.dataset.block).length;
+      }
+      const matching = inMonth.filter((item) => !state.block || item.dataset.block === state.block);
+      const visible = new Set(matching.slice(0, state.limit));
+      for (const item of items) item.hidden = !visible.has(item);
+      none.hidden = matching.length > 0;
+      more.hidden = matching.length === 0;
+      moreButton.hidden = visible.size >= matching.length;
+      shown.textContent = filter.dataset.shown.replace("{shown}", visible.size).replace("{total}", matching.length);
+      const query = new URLSearchParams();
+      if (state.month && state.month !== monthButtons[0]?.dataset.month) query.set("month", state.month);
+      if (state.block) query.set("topic", state.block);
+      const search = query.toString();
+      try {
+        history.replaceState(history.state, "", `${location.pathname}${search ? `?${search}` : ""}${location.hash}`);
+      } catch {}
+    };
+
     filter.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-block]");
+      const button = event.target.closest("button[data-month], button[data-block]");
       if (!button) return;
-      for (const other of filter.querySelectorAll("button")) other.setAttribute("aria-pressed", String(other === button));
-      for (const item of items) item.hidden = Boolean(button.dataset.block) && item.dataset.block !== button.dataset.block;
+      if ("month" in button.dataset) state.month = button.dataset.month;
+      else state.block = button.dataset.block;
+      state.limit = page;
+      render();
     });
+    moreButton.addEventListener("click", () => {
+      const before = items.filter((item) => !item.hidden).length;
+      state.limit += page;
+      render();
+      // Keyboard and screen-reader users go on from the first cover that just appeared.
+      items.filter((item) => !item.hidden)[before]?.querySelector("a")?.focus();
+    });
+    filter.hidden = false;
+    render();
   }
 })();
