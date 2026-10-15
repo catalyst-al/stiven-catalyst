@@ -170,3 +170,34 @@ test('a returning reader sees the pulse where the stamp changed; opening the par
   assert.deepEqual(opened.news, [], 'on Writing itself nothing pulses');
   assert.equal(opened.seen.w, 'w2', 'and the new stamp is noted');
 });
+
+test('cards and rows light up under the pointer and rise into view without fighting the other animations', () => {
+  for (const card of ['.article-card', '.note-card', '.project-card', '.mini-card']) {
+    assert.match(css, new RegExp(`\\${card}::before[\\s\\S]*?radial-gradient\\(440px circle at var\\(--mx, 50%\\) var\\(--my, 0%\\)`), card);
+  }
+  assert.match(css, /a\.list-row::before \{[\s\S]*?var\(--mx, 30%\) var\(--my, 50%\)/);
+  assert.match(css, /@media \(max-width: 620px\) \{ a\.list-row::before \{ inset: 4px -10px; \} \}/, 'the band stays inside the phone margin');
+  // The rise on scroll has no specificity, so the rows that come in after a filter (.is-entering) keep theirs, and it
+  // moves `translate`, so the hover lift (transform) still works.
+  assert.match(css, /@supports \(animation-timeline: view\(\)\) \{\s*@media \(prefers-reduced-motion: no-preference\) \{\s*:where\(\.article-card,/);
+  assert.match(css, /@keyframes scroll-rise \{ from \{ opacity: 0; translate: 0 26px; \} \}/);
+});
+
+test('the light follows a mouse across a card, and touch leaves it alone', () => {
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM('<html><body><article class="article-card"><a href="#">Read</a></article><a class="list-row" href="#"><h2>Row</h2></a></body></html>', { runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  window.eval(fs.readFileSync('src/script.js', 'utf8'));
+  const card = window.document.querySelector('.article-card');
+  card.getBoundingClientRect = () => ({ left: 100, top: 50, width: 300, height: 200 });
+  const move = (target, pointerType) => {
+    const event = new window.MouseEvent('pointermove', { bubbles: true, clientX: 160, clientY: 90 });
+    Object.defineProperty(event, 'pointerType', { value: pointerType });
+    target.dispatchEvent(event);
+  };
+  move(card.querySelector('a'), 'touch');
+  assert.equal(card.style.getPropertyValue('--mx'), '');
+  move(card.querySelector('a'), 'mouse');
+  assert.equal(card.style.getPropertyValue('--mx'), '60px');
+  assert.equal(card.style.getPropertyValue('--my'), '40px');
+});

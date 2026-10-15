@@ -95,6 +95,16 @@
   });
   if (fresh.size) menuButton?.classList.add("has-news");
 
+  // The light on a card or a row follows the pointer (styles.css: --mx, --my).
+  document.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse") return;
+    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, a.list-row");
+    if (!card) return;
+    const box = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${Math.round(event.clientX - box.left)}px`);
+    card.style.setProperty("--my", `${Math.round(event.clientY - box.top)}px`);
+  }, { passive: true });
+
   // The month buttons of the lists (Insights, Reflections, Field Notes, Publications, the magazines): the blue of the
   // chosen month is one pill that slides to the month chosen next. filter.js and weekly.js only set aria-pressed.
   document.querySelectorAll(".weekly-months").forEach((group) => {
