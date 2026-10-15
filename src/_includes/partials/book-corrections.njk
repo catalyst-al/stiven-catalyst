@@ -1,9 +1,10 @@
 {#- Corrections made after publication (corrections in the issue's or the edition's data), dated, in the page's
-    language, under the lede of its page. Nothing is drawn when there are none. -#}
+    language, under the lede of its page. Nothing is drawn when there are none. A note about a check of the whole series
+    (series) is marked data-series and links to what that check changed; correctionsId gives the box an id. -#}
 {%- if corrections and corrections.length %}
-      <div class="book-corrections">
+      <div class="book-corrections"{% if correctionsId %} id="{{ correctionsId }}"{% endif %}>
         {%- for c in corrections %}
-        <p><strong>{{ "Correction" | t(lang) }}, {{ c.date }}.</strong> {{ c.t }}</p>
+        <p{% if c.series %} data-series{% endif %}><strong>{{ "Correction" | t(lang) }}, {{ c.date }}.</strong> {{ c.t }}{% if c.link %} <a href="{{ c.link }}">{{ c.linkText }} <span aria-hidden="true">→</span></a>{% endif %}</p>
         {%- endfor %}
       </div>
 {%- endif %}

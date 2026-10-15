@@ -31,7 +31,9 @@ test('its quote is the sentence that closes the essay it names, in each language
 });
 
 test('its list of corrections is exactly the publications that carry a correction note', { skip: !hasSite }, () => {
-  const corrected = fs.readdirSync('_site/magazine').filter((name) => name.endsWith('.html') && read(`magazine/${name}`).includes('class="book-corrections"')).sort();
+  // A publication corrected on its own: a correction other than the note on the second check of the whole series.
+  const ownCorrection = (html) => /<p>/.test((html.match(/<div class="book-corrections"[^>]*>[\s\S]*?<\/div>/)?.[0] ?? '').replace(/<p data-series>[\s\S]*?<\/p>/g, ''));
+  const corrected = fs.readdirSync('_site/magazine').filter((name) => name.endsWith('.html') && ownCorrection(read(`magazine/${name}`))).sort();
   const page = read('how-this-is-made.html');
   const section = page.slice(page.indexOf('<h2>Corrections</h2>'), page.indexOf('<h2>Your data</h2>'));
   const listed = [...section.matchAll(/href="\/magazine\/([^"]+\.html)"/g)].map((m) => m[1]).sort();

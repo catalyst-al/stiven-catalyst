@@ -55,7 +55,7 @@
   <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
   <p class="lead">{{ W.sourcesPage.lead }}</p>
   <ol class="src">{% for s in issue.sources %}<li>{{ s.title }}<em>{{ s.by }}, {{ s.year }}{% if s.via %} · {{ L.via }} {{ s.via | inLang(lang) }}{% endif %}</em>{% if s.url %}<i>{{ s.url }}</i>{% endif %}</li>{% endfor %}</ol>
-  <div class="bottom">{% for c in I.corrections %}<div class="callout is-correction wk-correction"><span class="label">{{ "Correction" | t(lang) }} · {{ c.date }}</span><p>{{ c.t }}</p></div>{% endfor %}<div class="callout wk-method"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div></div>
+  <div class="bottom">{% for c in I.corrections %}{% if not c.series %}<div class="callout is-correction wk-correction"><span class="label">{{ "Correction" | t(lang) }} · {{ c.date }}</span><p>{{ c.t }}</p></div>{% endif %}{% endfor %}<div class="callout wk-method"><span class="label">{{ W.sourcesPage.method }}</span><p>{{ W.sourcesPage.methodText }}</p></div></div>
 </section>
 {%- elif page.type == "back" %}
 <section class="pg back">
