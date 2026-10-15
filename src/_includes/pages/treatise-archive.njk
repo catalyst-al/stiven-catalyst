@@ -1,9 +1,10 @@
-{#- All volumes of the operational treatise, the newest first, each as its cover (the topics narrow the list once
-    there are several, js/weekly.js); above them the formula every chapter follows. Shared by the three languages. -#}
+{#- All volumes of the operational treatise, the newest first, each as its cover, narrowed by month and topic once
+    there are several, twelve at a time (partials/issue-filter.njk); above them the formula every chapter follows. Shared by the three languages. -#}
 {%- set lang = lang or "en" -%}
 {%- set W = treatise[lang] -%}
 {%- set L = W.labels -%}
 {%- set A = W.archive -%}
+{%- import "partials/issue-filter.njk" as filter -%}
   <section class="shell page-hero weekly-hero treatise-hero">
     <p class="eyebrow">{{ A.eyebrow }}</p>
     <h1 class="hero-long">{{ W.name }}</h1>
@@ -20,17 +21,12 @@
   </section>
 
   <section class="shell weekly-archive" aria-label="{{ L.volumes }}">
-    {%- if treatise.blocks | length > 1 %}
-    <div class="weekly-filter" role="group" aria-label="{{ L.blocks }}" data-weekly-filter hidden>
-      <button type="button" aria-pressed="true" data-block="">{{ A.all }}</button>
-      {%- for b in treatise.blocks %}<button type="button" aria-pressed="false" data-block="{{ b.id }}">{{ b[lang] }}</button>{% endfor %}
-    </div>
-    {%- endif %}
+    {{ filter.controls(treatise.months, treatise.blocks, lang, A, L.blocks) }}
     <ol class="weekly-grid" reversed>
       {%- for volume in treatise.volumes | reverse %}
       {%- set V = volume[lang] %}
       {%- set cover = magazinePages[volume.slug][lang].pages[0] %}
-      <li data-block="{{ volume.block }}">
+      <li data-block="{{ volume.block }}" data-month="{{ volume.month }}">
         <a class="weekly-card" href="{{ ('/magazine/' + volume.slug + '.html') | local(lang) }}">
           <span class="weekly-card-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 620px) 45vw, 220px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}" decoding="async"></span>
           <span class="weekly-card-meta">{{ L.volume }} {{ volume.number }} · {{ volume.chapterCount }} {{ L.chapters | lower }} · {{ V.blockName }}</span>
@@ -40,6 +36,7 @@
       </li>
       {%- endfor %}
     </ol>
+    {{ filter.more(A) }}
     <p class="treatise-monthly">{{ A.monthly }} <a class="text-link" href="{{ '/magazine/management-review.html' | local(lang) }}">{{ A.monthly_link }}</a></p>
   </section>
 <script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>

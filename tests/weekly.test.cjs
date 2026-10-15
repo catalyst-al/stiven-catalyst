@@ -182,7 +182,8 @@ test('the list of all issues and Publications show the weekly in every language'
 test('the lists of all issues can be narrowed to the month of an edition', { skip: !hasSite }, async () => {
   const weekly = await load();
   const magazine = (await import('../src/_data/magazine.js')).default;
-  for (const [data, page] of [[weekly, 'management-review'], [magazine, 'from-the-floor']]) {
+  const treatise = (await import('../src/_data/treatise.js')).default;
+  for (const [data, page] of [[weekly, 'management-review'], [magazine, 'from-the-floor'], [{ ...treatise, issues: treatise.volumes }, 'operational-treatise']]) {
     assert.deepEqual(data.months.map((month) => month.id), [...new Set(data.issues.map((issue) => issue.month))].sort().reverse(), `${page}: the newest month first`);
     assert.equal(data.months.reduce((sum, month) => sum + month.count, 0), data.issues.length, `${page}: every issue in one month`);
     for (const issue of data.issues) assert.match(issue.month, /^\d{4}-\d{2}$/, `${issue.slug}: month`);

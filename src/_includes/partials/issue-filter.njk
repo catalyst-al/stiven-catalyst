@@ -1,7 +1,7 @@
-{#- The controls above a list of issues (the Management Review, From the Floor): one month at a time, the newest
+{#- The controls above a list of issues (the Management Review, From the Floor, the volumes of the treatise): one month at a time, the newest
     first, then a topic, then twelve covers at a time with "show more" (js/weekly.js). Each cover of the list is an
     <li data-block data-month> of .weekly-grid. Without the script every issue is listed. F: the words of the
-    controls (weekly[lang].archive); topics: the name of the group of topics. -#}
+    controls (the archive labels of the list); topics: the name of the group of topics. -#}
 {%- macro controls(months, blocks, lang, F, topics) %}
     <div class="weekly-controls" data-weekly-filter data-page="12" data-shown="{{ F.shown }}" hidden>
       {%- if months | length > 1 %}

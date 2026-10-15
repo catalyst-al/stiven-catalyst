@@ -14,7 +14,7 @@ import { blocks, joinTitle } from "../../lib/weekly/common.js";
 import { langs, resolve, common, layers, layerById } from "../../lib/treatise/common.js";
 import { sources } from "../../lib/weekly/sources.js";
 import { chartMarkup, chartText, NARROW } from "../../lib/weekly/charts.js";
-import { viaIn } from "../../lib/weekly/build.js";
+import { viaIn, monthOf, monthsOf, blocksOf } from "../../lib/weekly/build.js";
 
 const folder = new URL("../../lib/treatise/volumes/", import.meta.url);
 const files = fs.readdirSync(folder).filter((name) => /^\d{2}\.js$/.test(name)).sort();
@@ -123,6 +123,7 @@ const volumes = raw.map((volume) => {
     numeral: volume.numeral,
     slug,
     block: volume.block,
+    month: monthOf(volume, "Operational treatise, volume"),
     pageOf,
     pageCount: flat.length,
     chapterCount: chapters.length,
@@ -137,7 +138,9 @@ export default {
   cover: common.cover,
   volumes,
   latest: volumes.at(-1),
-  blocks: Object.keys(blocks).filter((id) => volumes.some((volume) => volume.block === id)).map((id) => ({ id, ...blocks[id] })),
+  // The topics and the months that have at least one volume, for the list of volumes.
+  blocks: blocksOf(volumes),
+  months: monthsOf(volumes),
   prints: volumes.flatMap((volume) => langs.map((lang) => ({ slug: volume.slug, number: volume.number, lang }))),
   ...Object.fromEntries(langs.map((lang) => [lang, { ...resolve(common, lang), layers: resolve(layers, lang) }])),
 };
