@@ -120,3 +120,13 @@ test('the rows come in one after another after a click on a topic, not while typ
   search.dispatchEvent(new window.Event('input'));
   assert.deepEqual(entering(), []);
 });
+
+test('every button changes smoothly and gives under the finger, without touching its own transform', () => {
+  assert.match(css, /:where\(button, \.button-primary, \.button-secondary, \.button-ghost, \.icon-button, [^)]*\) \{\s*transition: [^;]*scale \.25s/);
+  assert.match(css, /:is\(button, [^)]*\):active:where\(:not\(:disabled\)\) \{ scale: \.96; \}/);
+  assert.doesNotMatch(css, /:active[^{]*\{[^}]*transform: scale\(\.96\)/, 'the press uses scale, not transform');
+  for (const rule of ['.chip {', '.weekly-filter button {', '.writing-tabs a {', '.book-button {']) {
+    const body = css.slice(css.indexOf(rule), css.indexOf('}', css.indexOf(rule)));
+    assert.match(body, /transition:[^;]*scale/, `${rule} lets the press move smoothly`);
+  }
+});
