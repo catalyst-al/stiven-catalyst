@@ -71,6 +71,30 @@
     setMenu(false);
   });
 
+  // Writing and Publications pulse in the menu when something came out there since the reader last opened them. Each
+  // menu item carries a stamp of what its part of the site holds (data-stamp, made when the site is built); the
+  // browser keeps the stamp it last saw (nothing leaves it). A first visit only notes the stamps; opening the part
+  // notes its new stamp, and the pulse stops.
+  const nav = document.querySelector(".main-nav");
+  const fresh = new Set();
+  nav?.querySelectorAll("[data-news]").forEach((link) => {
+    const key = `sc-seen-${link.dataset.news}`;
+    let seen = null;
+    try { seen = localStorage.getItem(key); } catch { return; }
+    if (seen === null || link.getAttribute("aria-current") === "page") {
+      try { localStorage.setItem(key, link.dataset.stamp); } catch { /* storage unavailable */ }
+    } else if (seen !== link.dataset.stamp) fresh.add(link.dataset.news);
+  });
+  document.querySelectorAll("a[data-news]").forEach((link) => {
+    if (!fresh.has(link.dataset.news)) return;
+    link.classList.add("has-news");
+    const note = document.createElement("span");
+    note.className = "visually-hidden";
+    note.textContent = ` (${nav.dataset.newLabel || "New"})`;
+    link.append(note);
+  });
+  if (fresh.size) menuButton?.classList.add("has-news");
+
   // The month buttons of the lists (Insights, Reflections, Field Notes, Publications, the magazines): the blue of the
   // chosen month is one pill that slides to the month chosen next. filter.js and weekly.js only set aria-pressed.
   document.querySelectorAll(".weekly-months").forEach((group) => {

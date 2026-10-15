@@ -188,30 +188,87 @@ button, input, select { font: inherit; }
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 23px;
+  gap: 4px;
 }
 
+/* Each menu item is a small pill with a planet in the site's blue, like the family chips on the homepage but quieter:
+   the planet is dim, lights up under the pointer and glows on the page you are on. */
 .main-nav a {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
   color: var(--muted);
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
-  transition: color .2s ease;
+  transition: color .2s ease, border-color .25s ease, background-color .25s ease;
 }
-.main-nav a:hover,
-.main-nav a[aria-current="page"] { color: var(--ink); }
-/* The line under the page you are on; it slides to the next item when you change page (see "Moving between pages"). */
-.main-nav a[aria-current="page"] { position: relative; }
+.main-nav a:hover { color: var(--ink); border-color: var(--line); background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.main-nav a[aria-current="page"] { color: var(--ink); border-color: transparent; background: none; }
+.nav-orb {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--blue) 48%, color-mix(in srgb, var(--blue) 50%, #000) 100%);
+  opacity: .35;
+  transition: opacity .25s ease, box-shadow .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
+}
+.main-nav a:hover .nav-orb { opacity: .85; }
+.main-nav a[aria-current="page"] .nav-orb { opacity: 1; box-shadow: 0 0 9px var(--blue); }
+/* The pill of the page you are on: it slides to the next item when you change page (see "Moving between pages"). */
 .nav-pill {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -9px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--blue);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--blue) 60%, transparent);
+  inset: -1px;
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--blue) 45%, var(--line));
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 14% 50%, color-mix(in srgb, var(--blue) 24%, transparent), transparent 64%),
+    color-mix(in srgb, var(--ink) 4%, transparent);
+  box-shadow: 0 0 20px -8px color-mix(in srgb, var(--blue) 70%, transparent);
   pointer-events: none;
+}
+/* Something new in Writing or Publications since the reader last opened it (script.js): the planet beats and a ring
+   of light leaves the pill, the way the family chips call. In the phone menu the planet follows the name, and the
+   menu button carries a dot. */
+.main-nav a.has-news .nav-orb { opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
+.main-nav a.has-news { animation: news-ring 2.6s ease-out infinite; }
+.mobile-panel .nav-orb { display: none; }
+.mobile-panel a.has-news .nav-orb { display: inline-block; width: 9px; height: 9px; margin-left: 12px; vertical-align: .3em; opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
+.menu-button { position: relative; }
+.menu-button.has-news::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 10px var(--blue);
+  animation: news-beat 1.8s ease-in-out infinite;
+}
+.menu-button.has-news[aria-expanded="true"]::after { opacity: 0; }
+@keyframes news-beat {
+  0%, 100% { scale: 1; box-shadow: 0 0 6px var(--blue); }
+  50% { scale: 1.4; box-shadow: 0 0 14px var(--blue); }
+}
+@keyframes news-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--blue) 32%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--blue) 0%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .main-nav a.has-news,
+  .main-nav a.has-news .nav-orb,
+  .mobile-panel a.has-news .nav-orb,
+  .menu-button.has-news::after { animation: none; box-shadow: 0 0 10px var(--blue); }
+  .main-nav a.has-news { box-shadow: none; }
 }
 
 /* Moving between pages: the browser keeps the header still, slides the marked menu item and writing tab to their new
@@ -3647,11 +3704,20 @@ html:not(.js) .filter-bar { display: none; }
 /* Narrow desktops: the longer Albanian and German labels still fit on one line. */
 @media (max-width: 1100px) {
   .header-inner { gap: 18px; }
-  .main-nav { gap: 14px; }
+  .main-nav { gap: 2px; }
+  .main-nav a { gap: 7px; padding: 7px 11px 7px 10px; }
 }
 @media (max-width: 1000px) {
-  .main-nav { gap: 11px; }
-  .main-nav a { font-size: 13px; }
+  .main-nav a { gap: 6px; padding: 6px 9px 6px 8px; font-size: 13px; }
+  .nav-orb { width: 6px; height: 6px; }
+}
+/* Just above the phone menu, the longer German and Albanian labels need the room: only the page you are on and a
+   part with something new keep their planet. */
+@media (max-width: 980px) {
+  .header-inner { gap: 14px; }
+  .main-nav { gap: 0; }
+  .main-nav a { padding: 6px 8px; }
+  .main-nav a:not([aria-current="page"]):not(.has-news) .nav-orb { display: none; }
 }
 
 @media (max-width: 900px) {

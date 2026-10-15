@@ -179,6 +179,11 @@ export default function (eleventyConfig) {
     return imageSizes.get(file);
   });
   // The hash of an inline script, for the Content Security Policy in layouts/base.njk.
+  // A short stamp of what a part of the site holds (Writing, Publications): it changes when an item is added, so the
+  // menu can show the reader that something came out since their last visit (script.js). Items "soon" do not count.
+  eleventyConfig.addFilter("navStamp", (...lists) => createHash("sha256")
+    .update(lists.flat().filter((item) => item && item.data?.status !== "soon").map((item) => item.url || item.slug || item.fileSlug).sort().join("\n"))
+    .digest("hex").slice(0, 10));
   eleventyConfig.addFilter("cspHash", (code) => `'sha256-${createHash("sha256").update(String(code)).digest("base64")}'`);
   const assetUrl = (path) => {
     const file = `src${path}`;
