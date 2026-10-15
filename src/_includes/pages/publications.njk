@@ -1,5 +1,7 @@
 {#- Publications: the monthly Management Review, its operational treatise, the magazine, the book and the Tools
-    Guide, in the three languages. -#}
+    Guide, in the three languages. Above them a month and a kind narrow the page (partials/issue-filter.njk,
+    src/_data/publications.js): each month shows the newest issue or volume of each series that came out in it; the
+    book and the guide stay in every month. Without the script the page shows the newest of each series. -#}
   <section class="shell page-hero publications-hero">
     <p class="eyebrow">{{ "Books, guides, a monthly review, an operational treatise and a magazine from the floor" | t(lang) }}</p>
     {%- set pubTitle = "Publications" | t(lang) %}
@@ -8,12 +10,17 @@
     <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every month a review of the best management research in several issues, an operational treatise in volumes that follow one question from the floor to the protocol, and a magazine from the floor." | t(lang) }}</p>
   </section>
 {%- set ml = lang or "en" %}
-{#- The monthly Management Review: its newest issue, and the way to all of them. -#}
+{%- set P = publications[ml] %}
+{%- import "partials/issue-filter.njk" as filter %}
+  <section class="shell publications-filter" aria-label="{{ P.kinds }}">
+    {{ filter.controls(publications.months, publications.kinds, ml, P, P.kinds, "[data-pub]") }}
+  </section>
+{#- The monthly Management Review: the newest issue of each month, and the way to all of them. -#}
 {%- set WK = weekly[ml] %}
-{%- set wk = weekly.latest %}
+{%- for wk in publications.review %}
 {%- set wkUrl = ("/magazine/" + wk.slug + ".html") | local(lang) %}
 {%- set wkCover = magazinePages[wk.slug][ml].pages[0] %}
-  <section class="shell book-feature magazine-feature" id="weekly">
+  <section class="shell book-feature magazine-feature"{% if loop.first %} id="weekly"{% endif %} data-pub data-block="review" data-month="{{ wk.month }}"{% if not loop.first %} hidden{% endif %}>
     <a class="book-object" href="{{ wkUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ wkCover.image }}" srcset="{{ wkCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ wkCover.width }}" height="{{ wkCover.height }}" alt="" loading="lazy"></span>
     </a>
@@ -28,12 +35,13 @@
       </div>
     </div>
   </section>
-{#- The operational treatise: its newest volume, and the way to all of them. -#}
+{%- endfor %}
+{#- The operational treatise: the newest volume of each month, and the way to all of them. -#}
 {%- set TR = treatise[ml] %}
-{%- set tv = treatise.latest %}
+{%- for tv in publications.treatise %}
 {%- set tvUrl = ("/magazine/" + tv.slug + ".html") | local(lang) %}
 {%- set tvCover = magazinePages[tv.slug][ml].pages[0] %}
-  <section class="shell book-feature magazine-feature" id="treatise">
+  <section class="shell book-feature magazine-feature"{% if loop.first %} id="treatise"{% endif %} data-pub data-block="treatise" data-month="{{ tv.month }}"{% if not loop.first %} hidden{% endif %}>
     <a class="book-object" href="{{ tvUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ tvCover.image }}" srcset="{{ tvCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ tvCover.width }}" height="{{ tvCover.height }}" alt="" loading="lazy"></span>
     </a>
@@ -48,11 +56,12 @@
       </div>
     </div>
   </section>
-{#- The magazine: its newest issue, and the way to all of them, the same way as the Management Review. -#}
-{%- set issue = magazine.latest %}
+{%- endfor %}
+{#- The magazine: the newest issue of each month, and the way to all of them, the same way as the Management Review. -#}
+{%- for issue in publications.floor %}
 {%- set issueUrl = ("/magazine/" + issue.slug + ".html") | local(lang) %}
 {%- set issueCover = magazinePages[issue.slug][ml].pages[0] %}
-  <section class="shell book-feature magazine-feature" id="magazine">
+  <section class="shell book-feature magazine-feature"{% if loop.first %} id="magazine"{% endif %} data-pub data-block="floor" data-month="{{ issue.month }}"{% if not loop.first %} hidden{% endif %}>
     <a class="book-object" href="{{ issueUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ issueCover.image }}" srcset="{{ issueCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy"></span>
     </a>
@@ -67,11 +76,12 @@
       </div>
     </div>
   </section>
+{%- endfor %}
 {#- The Management Review of September 2026: the special edition before the monthly one. -#}
 {%- set R = review[ml] %}
 {%- set reviewUrl = ("/magazine/" + review.slug + ".html") | local(lang) %}
 {%- set reviewCover = magazinePages[review.slug][ml].pages[0] %}
-  <section class="shell book-feature magazine-feature">
+  <section class="shell book-feature magazine-feature" data-pub data-block="review" data-month="{{ publications.special.month }}">
     <a class="book-object" href="{{ reviewUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ reviewCover.image }}" srcset="{{ reviewCover.image | srcsetFor }}" sizes="(max-width: 900px) 200px, 300px" width="{{ reviewCover.width }}" height="{{ reviewCover.height }}" alt="" loading="lazy"></span>
     </a>
@@ -83,6 +93,15 @@
       <a class="button-primary" href="{{ reviewUrl }}">{{ R.labels.open_edition }}</a>
     </div>
   </section>
+{#- The guide and the book: not tied to a month, in every month. #}
+<div data-pub data-block="books">
 {% include "partials/guide-feature.njk" %}
+</div>
+<div data-pub data-block="books">
 {% include "partials/book-feature.njk" %}
+</div>
+  <div class="shell publications-more">
+    {{ filter.more(P) }}
+  </div>
+<script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>
 {% include "partials/newsletter.njk" %}

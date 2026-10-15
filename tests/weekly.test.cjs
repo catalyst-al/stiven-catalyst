@@ -197,6 +197,22 @@ test('the lists of all issues can be narrowed to the month of an edition', { ski
   }
 });
 
+test('Publications can be narrowed by month and kind: the newest of each series in each month, the book and the guide in every month', { skip: !hasSite }, async () => {
+  const publications = (await import('../src/_data/publications.js')).default;
+  const weekly = await load();
+  assert.equal(publications.months[0].id, weekly.latest.month, 'the newest month first');
+  for (const lang of LANGS) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    const page = built(`${prefix}publications.html`);
+    for (const month of publications.months) assert.ok(page.includes(`data-month="${month.id}">${escaped(month[lang])}`), `${lang}: the button of ${month.id}`);
+    for (const kind of publications.kinds) assert.ok(page.includes(`data-block="${kind.id}">${escaped(kind[lang])}`), `${lang}: the kind ${kind.id}`);
+    const dated = publications.review.length + publications.treatise.length + publications.floor.length + 1;
+    assert.equal((page.match(/data-pub data-block="[a-z]+" data-month="\d{4}-\d{2}"/g) || []).length, dated, `${lang}: every dated publication has its month`);
+    assert.ok(page.includes('<div data-pub data-block="books">'), `${lang}: the book and the guide in every month`);
+    for (const issue of publications.review) assert.ok(page.includes(`/${prefix}magazine/${issue.slug}.html`), `${lang}: ${issue.slug}`);
+  }
+});
+
 test('the monthly magazine is gathered the same way: its newest issue on Publications, all of them on their list', { skip: !hasSite }, async () => {
   const { default: magazine } = await import('../src/_data/magazine.js');
   for (const lang of LANGS) {
@@ -206,7 +222,12 @@ test('the monthly magazine is gathered the same way: its newest issue on Publica
     const publications = built(`${prefix}publications.html`);
     assert.ok(publications.includes(`/${prefix}magazine/${magazine.latest.slug}.html`), `${lang}: newest issue`);
     assert.ok(publications.includes(`/${prefix}magazine/from-the-floor.html`), `${lang}: all issues`);
-    for (const issue of magazine.issues.slice(0, -1)) assert.ok(!publications.includes(`/${prefix}magazine/${issue.slug}.html`), `${lang}: ${issue.slug} only on the list`);
+    // Publications shows the newest issue of each month (by month, src/_data/publications.js); without the script
+    // only the newest of all is shown, the others wait hidden for their month.
+    for (const issue of magazine.issues) {
+      const newestOfMonth = magazine.issues.filter((other) => other.month === issue.month).at(-1) === issue;
+      assert.equal(publications.includes(`/${prefix}magazine/${issue.slug}.html`), newestOfMonth, `${lang}: ${issue.slug}`);
+    }
   }
 });
 
