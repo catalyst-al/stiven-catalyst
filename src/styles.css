@@ -1126,7 +1126,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 /* The arrow of "Read more" and "View project" leans towards where it leads. */
 .text-link > span[aria-hidden="true"] { display: inline-block; transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
 .text-link:hover > span[aria-hidden="true"],
-:is(.article-card, .project-card, .mini-card):hover .text-link > span[aria-hidden="true"] { translate: 4px 0; }
+:is(.article-card, .project-card, .mini-card, .tool-card):hover .text-link > span[aria-hidden="true"] { translate: 4px 0; }
 
 .mini-card {
   padding: 28px;
@@ -1538,12 +1538,32 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   background:
     radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 40%),
     var(--card);
-  transition: transform .25s ease, border-color .25s ease;
+  position: relative;
+  isolation: isolate;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease;
+}
+/* Like the article cards: under the pointer a tool card rises, takes the colour of its family (blue without one) on
+   its edge and in its shadow, a soft light of that colour follows the pointer (--mx, --my from script.js), and the
+   picture of its result comes a little closer. */
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(440px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--family, var(--blue)) 15%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
 }
 .tool-card:has(a):hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+  box-shadow: 0 26px 60px -34px color-mix(in srgb, var(--family, var(--blue)) 80%, transparent), 0 18px 40px -28px rgba(0, 0, 0, .5);
 }
+.tool-card:has(a):hover::before { opacity: 1; }
+.tool-card-preview img { transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.tool-card:hover .tool-card-preview img { scale: 1.035; }
 /* The picture of the tool's result at the top of its card. */
 .tool-card.has-preview { gap: 22px; }
 .tool-card-preview { display: block; margin: -12px -12px 0; border-radius: calc(var(--radius) - 10px); overflow: hidden; border: 1px solid var(--line); background: #0b1117; }
@@ -1880,12 +1900,13 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   border: 1px solid var(--line);
   border-radius: 20px;
   background: var(--card);
-  transition: transform .25s ease, border-color .25s ease;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease;
 }
 .family-card:hover,
 .family-card:focus-visible {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: color-mix(in srgb, var(--family) 60%, var(--line));
+  box-shadow: 0 24px 54px -30px color-mix(in srgb, var(--family) 85%, transparent);
 }
 .family-card-text {
   container-type: inline-size;
@@ -4831,7 +4852,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .list-row, .weekly-grid > li, .challenge-essays li) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .list-row, .weekly-grid > li, .challenge-essays li) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
