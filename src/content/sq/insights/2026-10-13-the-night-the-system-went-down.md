@@ -31,11 +31,15 @@ firstMove:
   - "Para turnit të radhës, gjej ku është procedura zyrtare e vazhdimësisë së punës. Mos e lexo natën kur të duhet."
   - "Shkruaj një fjali: kujt i drejtohem natën nëse sistemi ndalet, dhe si e arrij."
   - "Pyet një koleg me përvojë çfarë bën kur sistemi nuk punon. Dëgjo sa nga përgjigjja është e shkruar diku, dhe sa është vetëm në kujtesën e tij."
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15 tetor 2026"
+    t: "Një version i mëparshëm e datonte këtë natë të parë trajnimi në hotel në shtator 2026. Jam Night Manager i hotelit që nga nëntori 2025, prandaj data u hoq."
 ---
 
 Kur sistemi ndalet, kupton sa shumë nga puna jote varet prej tij dhe sa mirë je përgatitur për të vazhduar.
 
-Në shtator 2026 isha në natën time të parë të trajnimit në hotel. Kisha ardhur për të mësuar proceset e natës. Pak pas mesnatës, sistemi i hotelit u bë i padisponueshëm për shkak të një përditësimi, dhe mbeti ashtu për rreth pesë orë, deri afër mëngjesit.
+Isha në natën time të parë të trajnimit në hotel. Kisha ardhur për të mësuar proceset e natës. Pak pas mesnatës, sistemi i hotelit u bë i padisponueshëm për shkak të një përditësimi, dhe mbeti ashtu për rreth pesë orë, deri afër mëngjesit.
 
 Kjo është skena e vetme në këtë seri që nuk është figurë. Ndodhi, dhe isha aty.
 

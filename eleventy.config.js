@@ -268,6 +268,8 @@ export default function (eleventyConfig) {
       local: (url) => localUrl(url, lang),
     }));
   });
+  // The pieces of a collection that carry a correction made after publication (corrections in their front matter).
+  eleventyConfig.addFilter("corrected", (items = []) => items.filter((item) => item.data.corrections?.length));
   // The entries of a language's feed, essays and publications together, newest first (lib/feed-entries.js).
   eleventyConfig.addFilter("feedEntries", (posts, lang, data) => feedEntries(posts, lang, { ...data, local: (url) => localUrl(url, lang) }));
   // The link preview of an essay or a reflection (made by scripts/page-cards.mjs), if there is one; it follows

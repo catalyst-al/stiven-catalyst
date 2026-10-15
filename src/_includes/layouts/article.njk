@@ -22,6 +22,8 @@ ogType: article
       {#- Save for later: on "My shelf", in this browser only (js/shelf.js). -#}
       <button type="button" class="essay-save" data-shelf-save data-save-label="{{ 'Save for later' | t(lang) }}" data-saved-label="{{ 'Saved' | t(lang) }}" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1V20l-6-3.6L6 20V4.5a1 1 0 0 1 1-1z"/></svg><span data-shelf-label>{{ "Save for later" | t(lang) }}</span></button>
     </p>
+    {#- Corrections made after publication (corrections in the front matter), dated, as on a corrected issue. #}
+    {%- include "partials/book-corrections.njk" %}
   </div>
 </section>
 {#- The text with ids on its section titles; with three sections or more, a list of them beside the text

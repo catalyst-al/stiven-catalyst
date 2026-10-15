@@ -8,7 +8,7 @@ featured: true
 summary: "A new system does not become part of the work because it has been installed. It does when people understand it, know how to use it, and know what to do when it does not help them."
 teaser: Installation changes the system. Training, communication and daily experience change the way people work.
 description: "A new system seen from the employee's side: “how it is used” versus “why it is changing”, six things before it arrives, and a card for them."
-deck: "The seventh essay in the series “The system is faster than you”: the move to a new planning system in August 2025 and the first weeks of training at a new hotel in September 2026, why a technically better system does not by itself make people ready, and six things that are needed before it arrives."
+deck: "The seventh essay in the series “The system is faster than you”: the move to a new planning system in August 2025 and the first weeks of training at the hotel, why a technically better system does not by itself make people ready, and six things that are needed before it arrives."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/six-sigma-dmaic/
@@ -40,6 +40,10 @@ firstMove:
   - "Before a new system arrives, write in one sentence why it is changing. If you cannot, ask someone who knows."
   - "In the first week, keep a list of everything that did not work or that you did not understand. Send it to someone at the end of the week."
   - "For every document you use beside the system, ask: is it up to date, and who keeps it?"
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15 October 2026"
+    t: "An earlier version dated the first weeks of training at the hotel to September 2026 and called it a new hotel. I have been the hotel’s Night Manager since November 2025, so both are removed."
 ---
 
 Installation changes the system. Training, communication and daily experience change the way people work.
@@ -48,7 +52,7 @@ In [The night the system went down](/insights/the-night-the-system-went-down/) I
 
 ## What I have and what I do not
 
-What I have: in last mile, the move to a new system for calculating routes and travel times, planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries. Calibrations were planned so that the change would affect the drivers as little as possible, and so was the collection of information from the field in the first days. At the hotel, the first weeks of training in September 2026: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. And Front Desk Control, which grew out of that period.
+What I have: in last mile, the move to a new system for calculating routes and travel times, planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries. Calibrations were planned so that the change would affect the drivers as little as possible, and so was the collection of information from the field in the first days. At the hotel, the first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. And Front Desk Control, which grew out of that period.
 
 What I do not have: how I myself was informed about the August change, by training, email or demonstration. What was explained to the drivers and dispatchers. Whether there was resistance or a return to old habits. A verified before-and-after comparison. How many days it took me to learn the hotel system fully.
 

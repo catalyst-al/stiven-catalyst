@@ -36,6 +36,15 @@ test('its list of corrections is exactly the publications that carry a correctio
   const section = page.slice(page.indexOf('<h2>Corrections</h2>'), page.indexOf('<h2>Your data</h2>'));
   const listed = [...section.matchAll(/href="\/magazine\/([^"]+\.html)"/g)].map((m) => m[1]).sort();
   assert.deepEqual(listed, corrected);
+  // The essays corrected after publication, in every language: each listed, and each shows its note.
+  for (const [, prefix] of LANGS) {
+    const dir = `_site/${prefix}insights`;
+    const noted = fs.readdirSync(dir).filter((slug) => fs.existsSync(`${dir}/${slug}/index.html`) && read(`${prefix}insights/${slug}/index.html`).includes('class="book-corrections"')).sort();
+    const html = read(`${prefix}how-this-is-made.html`);
+    const listed = [...new Set([...html.matchAll(new RegExp(`href="/${prefix}insights/([^/"]+)/"`, 'g'))].map((m) => m[1]))].filter((slug) => slug !== 'the-report-a-machine-wrote').sort();
+    assert.deepEqual(listed, noted, `${prefix || 'en'}: the corrected essays`);
+    assert.ok(noted.length >= 3, `${prefix || 'en'}: ${noted}`);
+  }
   // And the podcast episodes whose recording was cut (corrections in audio.json), each linked, in every language, to a
   // podcast page where its note is shown.
   const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'));
@@ -71,4 +80,21 @@ test('the diagram of "The system is faster than you" gives no number it cannot s
   const diagrams = fs.readFileSync('lib/diagrams.js', 'utf8');
   const split = diagrams.slice(diagrams.indexOf('id: "decision-split"'), diagrams.indexOf('id: "dashboard-lag"'));
   assert.doesNotMatch(split, /\b98\b|hundred|hundert|njëqind/);
+});
+
+test('the About page says no more than the essays: years leading teams, the resellers, the systems', { skip: !hasSite }, () => {
+  const essays = fs.readdirSync('src/content/insights').map((file) => fs.readFileSync(`src/content/insights/${file}`, 'utf8')).join('\n');
+  for (const [prefix, linked] of [['', 'linked to revenue growth of around 30–40%'], ['de/', 'mit rund 30–40 % Umsatzwachstum verbunden'], ['sq/', 'i lidhur me rritjen e xhiros me rreth 30–40%']]) {
+    const about = plain(read(`${prefix}about.html`));
+    // More than ten years in operations, about eight of them leading teams (2015–2021 in Albania, then from January 2025).
+    assert.doesNotMatch(about, /led operations and teams for more than ten years|seit mehr als zehn Jahren Betriebe und Teams|drejton operacione dhe ekipe prej më shumë se dhjetë/, prefix || 'en');
+    // The resellers' channel is linked to the growth, as the essay "61 resellers" writes it: "a link, not as proof".
+    assert.ok(about.includes(linked), `${prefix || 'en'}: ${linked}`);
+    // A system the essays are unsure of is not listed: "Excel or Power BI, I do not know for sure".
+    assert.ok(!about.includes('Power BI') || !/Power BI, I do not know for sure/.test(essays), `${prefix || 'en'}: Power BI`);
+  }
+  // The figures of the About page are the essays' own.
+  for (const figure of [/four Shift Leaders and eight dispatchers/, /around 250 drivers/, /80\+ vehicles and 100\+ drivers/, /61 active resellers/, /Since 1 January 2026 I have worked part-time as a Last Mile Dispatcher/]) {
+    assert.match(essays, figure);
+  }
 });

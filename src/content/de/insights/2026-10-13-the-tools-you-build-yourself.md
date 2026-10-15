@@ -33,13 +33,17 @@ firstMove:
   - "Schreiben Sie einen Satz über Ihr Werkzeug: was es tut, und was es nicht tut. Stellen Sie ihn an den Anfang."
   - "Markieren Sie im Werkzeug jedes Verfahren, das noch geprüft wird, damit man es von den bestätigten unterscheiden kann."
   - "Bevor Sie es mit einem Kollegen teilen, fragen Sie: Wer muss das freigeben, und wer pflegt es, wenn ich nicht da bin?"
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15. Oktober 2026"
+    t: "Eine frühere Fassung datierte die ersten Wochen im Hotel auf September 2026. Ich bin seit November 2025 Night Manager des Hotels, daher ist das Datum entfernt."
 ---
 
 Ein kleines Werkzeug kann ein großes Problem lösen. Aber um Teil der Arbeit zu werden, muss es mehr sein als das Projekt der Person, die es gebaut hat.
 
 Stellen Sie sich einen neuen Mitarbeiter an der Rezeption vor, mitten in einem Ablauf, den er erst einmal gesehen hat. Die Anleitung gibt es. Aber sie liegt irgendwo zwischen einer SOP, einem Video, ein paar Fotos und dem, was ihm ein Kollege vor zwei Nächten erklärt hat. Der Ablauf wartet, und er sucht.
 
-Das ist keine Szene, die ich als Vorfall dokumentiert habe. Es ist meine Erfahrung aus den ersten Wochen im Hotel, im September 2026, als Bild geschrieben. Und es ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
+Das ist keine Szene, die ich als Vorfall dokumentiert habe. Es ist meine Erfahrung aus den ersten Wochen im Hotel, als Bild geschrieben. Und es ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
 
 ## Was ich habe und was nicht
 
