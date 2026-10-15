@@ -23,7 +23,8 @@ test('the menu item and the writing tab of the page carry the piece that slides'
     const html = built(file);
     const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
     assert.equal(nav.match(/class="nav-pill"/g)?.length, 1, `${file}: one line under the menu`);
-    assert.match(nav, new RegExp(`aria-current="page" href="${item}">[^<]+<span class="nav-pill" aria-hidden="true"></span></a>`), file);
+    assert.match(nav, new RegExp(`aria-current="page" href="${item}"[^>]*><span class="nav-orb" aria-hidden="true"></span>[^<]+<span class="nav-pill" aria-hidden="true"></span></a>`), file);
+    assert.equal(nav.match(/class="nav-orb"/g)?.length, 5, `${file}: every menu item has its planet`);
     assert.doesNotMatch(html.match(/<nav id="mobile-menu"[\s\S]*?<\/nav>/)[0], /nav-pill/, `${file}: the name stays unique`);
   }
   const reflections = built('reflections.html');
@@ -129,4 +130,43 @@ test('every button changes smoothly and gives under the finger, without touching
     const body = css.slice(css.indexOf(rule), css.indexOf('}', css.indexOf(rule)));
     assert.match(body, /transition:[^;]*scale/, `${rule} lets the press move smoothly`);
   }
+});
+
+test('Writing and Publications carry a stamp of what they hold, which changes when something comes out', { skip: !hasSite }, () => {
+  const stampsOf = (file) => Object.fromEntries([...built(file).match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0]
+    .matchAll(/data-news="([a-z]+)" data-stamp="([0-9a-f]{10})"/g)].map((m) => [m[1], m[2]]));
+  const en = stampsOf('publications.html');
+  assert.deepEqual(Object.keys(en), ['writing', 'publications']);
+  assert.deepEqual(stampsOf('about.html'), en, 'the same on every page of a language');
+  assert.notEqual(stampsOf('sq/about.html').writing, en.writing, 'each language has its own writing');
+  assert.match(built('publications.html'), /data-new-label="New"/);
+});
+
+test('a returning reader sees the pulse where the stamp changed; opening the part stops it', () => {
+  const { JSDOM } = require('jsdom');
+  const page = (current) => `<html><body><header class="site-header"><nav class="main-nav" data-new-label="Neu">
+    <a href="/insights.html" data-news="writing" data-stamp="w2"${current === 'writing' ? ' aria-current="page"' : ''}>Writing</a>
+    <a href="/publications.html" data-news="publications" data-stamp="p1">Publications</a></nav>
+    <button data-menu-toggle data-menu-label="Menu" data-close-label="Close" aria-expanded="false"></button>
+    <nav data-mobile-panel data-open="false"><a href="/insights.html" data-news="writing">Writing</a></nav></header></body></html>`;
+  const visit = (current, storage) => {
+    const dom = new JSDOM(page(current), { url: 'https://example.test/', runScripts: 'outside-only', pretendToBeVisual: true });
+    for (const [key, value] of Object.entries(storage)) dom.window.localStorage.setItem(key, value);
+    dom.window.eval(fs.readFileSync('src/script.js', 'utf8'));
+    const doc = dom.window.document;
+    return {
+      news: [...doc.querySelectorAll('.has-news')].map((el) => el.matches('[data-menu-toggle]') ? 'menu' : el.closest('.main-nav') ? `nav:${el.dataset.news}` : `phone:${el.dataset.news}`),
+      label: doc.querySelector('.main-nav .has-news .visually-hidden')?.textContent,
+      seen: { w: dom.window.localStorage.getItem('sc-seen-writing'), p: dom.window.localStorage.getItem('sc-seen-publications') },
+    };
+  };
+  const first = visit('', {});
+  assert.deepEqual(first.news, [], 'a first visit only notes what is there');
+  assert.deepEqual(first.seen, { w: 'w2', p: 'p1' });
+  const back = visit('', { 'sc-seen-writing': 'w1', 'sc-seen-publications': 'p1' });
+  assert.deepEqual(back.news, ['nav:writing', 'menu', 'phone:writing']);
+  assert.equal(back.label, ' (Neu)');
+  const opened = visit('writing', { 'sc-seen-writing': 'w1', 'sc-seen-publications': 'p1' });
+  assert.deepEqual(opened.news, [], 'on Writing itself nothing pulses');
+  assert.equal(opened.seen.w, 'w2', 'and the new stamp is noted');
 });
