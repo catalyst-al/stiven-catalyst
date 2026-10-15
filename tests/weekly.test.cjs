@@ -291,3 +291,19 @@ test('Reflections can be searched, by month once there are two, twelve at a time
     assert.ok(page.includes('data-filter-search') && page.includes('data-filter-more') && page.includes('/js/filter.js'), `${lang}: search and show more`);
   }
 });
+
+test('Field Notes shows a month and twelve notes at a time, and a link to one note still finds it', { skip: !hasSite }, () => {
+  for (const lang of LANGS) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    const page = built(`${prefix}field-notes.html`);
+    const cards = page.match(/<article class="note-card"[^>]*>/g) || [];
+    assert.ok(cards.length > 12, `${lang}: more notes than a page`);
+    for (const card of cards) assert.match(card, /data-month="\d{4}-\d{2}"/, `${lang}: every note has its month`);
+    const months = new Set(cards.map((card) => card.match(/data-month="([^"]+)"/)[1]));
+    assert.equal((page.match(/data-filter-month="/g) || []).length, months.size > 1 ? months.size : 0, `${lang}: a button for each month, once there are two`);
+    assert.ok(page.includes('data-page="12"') && page.includes('data-filter-more'), `${lang}: twelve at a time, with show more`);
+    if (page.includes('filter-chips')) assert.ok(page.includes('data-chip-count'), `${lang}: the count of each topic`);
+  }
+  // The script opens the month and the page of a note named in the address.
+  assert.match(fs.readFileSync('src/js/filter.js', 'utf8'), /location\.hash[\s\S]*linked\.dataset\.month/);
+});
