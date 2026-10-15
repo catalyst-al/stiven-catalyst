@@ -10,7 +10,7 @@
 // sources by id) and drawn by the same pages (print/weekly-page.njk) under the name of the magazine: the cover with
 // the picture, the figure and the teasers, the charts with their sources, a page of sources.
 import { langs as reviewLangs, resolve, blocks, common } from "../../lib/weekly/common.js";
-import { issueText, pageNumbers, sourceLineFor } from "../../lib/weekly/build.js";
+import { issueText, pageNumbers, sourceLineFor, monthOf, monthsOf, blocksOf } from "../../lib/weekly/build.js";
 import floor1 from "../../lib/floor/01.js";
 import floor2 from "../../lib/floor/02.js";
 
@@ -68,6 +68,7 @@ const asReview = (issue) => {
     no: pad(issue.number),
     slug: issue.slug,
     block: issue.block,
+    month: monthOf(issue, "From the Floor"),
     pageOf: pageNumbers(issue),
     pageCount: issue.pages.length,
     sources: issue.sources,
@@ -96,6 +97,9 @@ export default {
   review,
   issues,
   latest: issues[issues.length - 1],
+  // The topics and the months that have at least one issue, for the list of issues.
+  blocks: blocksOf(issues),
+  months: monthsOf(issues),
   // One print page per issue and language (src/guide-print/magazine.njk).
   prints: issues.flatMap((issue) => langs.map((lang) => ({ issue, lang }))),
 };
