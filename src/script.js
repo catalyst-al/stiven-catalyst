@@ -49,6 +49,21 @@
     }
   });
 
+  // A tap on the dimmed page closes the open menu and does nothing else; the header's buttons keep working. The menu
+  // closes as the finger goes down (before the focus moves), and the click that follows is swallowed.
+  let closedAt = 0;
+  document.addEventListener("pointerdown", (event) => {
+    if (panel?.dataset.open !== "true" || event.target.closest?.(".site-header")) return;
+    closedAt = event.timeStamp;
+    setMenu(false);
+  }, true);
+  document.addEventListener("click", (event) => {
+    if (!closedAt || event.timeStamp - closedAt > 1000) return;
+    closedAt = 0;
+    event.preventDefault();
+    event.stopPropagation();
+  }, true);
+
   // Focus that leaves the open menu (Tab past its last link, Shift+Tab before the button) closes it, so nothing the
   // keyboard reaches is hidden behind the panel.
   document.addEventListener("focusin", (event) => {
