@@ -31,11 +31,15 @@ firstMove:
   - "Finden Sie vor Ihrer nächsten Schicht heraus, wo das offizielle Verfahren zur Aufrechterhaltung des Betriebs liegt. Lesen Sie es nicht in der Nacht, in der Sie es brauchen."
   - "Schreiben Sie einen Satz: an wen Sie sich nachts wenden, wenn das System stillsteht, und wie Sie diese Person erreichen."
   - "Fragen Sie eine erfahrene Kollegin oder einen erfahrenen Kollegen, was diese Person tut, wenn das System nicht funktioniert. Hören Sie darauf, wie viel von der Antwort irgendwo aufgeschrieben ist, und wie viel nur in ihrem Gedächtnis."
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15. Oktober 2026"
+    t: "Eine frühere Fassung datierte diese erste Einarbeitungsnacht im Hotel auf September 2026. Ich bin seit November 2025 Night Manager des Hotels, daher ist das Datum entfernt."
 ---
 
 Wenn das System stillsteht, merken Sie, wie viel Ihrer Arbeit davon abhängt und wie gut Sie vorbereitet sind, weiterzumachen.
 
-Im September 2026 war ich in meiner ersten Einarbeitungsnacht im Hotel. Ich war gekommen, um die Nachtprozesse zu lernen. Kurz nach Mitternacht wurde das Hotelsystem wegen eines Updates nicht verfügbar, und es blieb etwa fünf Stunden so, bis gegen Morgen.
+Ich war in meiner ersten Einarbeitungsnacht im Hotel. Ich war gekommen, um die Nachtprozesse zu lernen. Kurz nach Mitternacht wurde das Hotelsystem wegen eines Updates nicht verfügbar, und es blieb etwa fünf Stunden so, bis gegen Morgen.
 
 Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei.
 

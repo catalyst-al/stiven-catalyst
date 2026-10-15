@@ -39,13 +39,17 @@ firstMove:
   - "Write one sentence about your tool: what it does, and what it does not do. Put it at the top."
   - "Mark in the tool every procedure that is still being verified, so it can be told apart from the confirmed ones."
   - "Before you share it with a colleague, ask: who has to approve this, and who keeps it up if I am not there?"
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15 October 2026"
+    t: "An earlier version dated the first weeks at the hotel to September 2026. I have been the hotel’s Night Manager since November 2025, so the date is removed."
 ---
 
 A small tool can solve a big problem. But to become part of the work, it has to be more than the project of the person who built it.
 
 Imagine a new employee at reception, in the middle of a process they have seen only once. The instruction exists. But it is somewhere between an SOP, a video, a few photographs and what a colleague explained to them two nights earlier. The process waits, and they search.
 
-This is not a scene I have documented as an incident. It is my experience of the first weeks at the hotel, in September 2026, written as a picture. And it is the reason I began to build a tool of my own.
+This is not a scene I have documented as an incident. It is my experience of the first weeks at the hotel, written as a picture. And it is the reason I began to build a tool of my own.
 
 ## What I have and what I do not
 

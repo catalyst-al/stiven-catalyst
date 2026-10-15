@@ -8,7 +8,7 @@ featured: true
 summary: "Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin, dhe dinë çfarë të bëjnë kur ai nuk i ndihmon."
 teaser: Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
 description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë, dhe një kartelë për to."
-deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në një hotel të ri në shtator 2026, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu, dhe gjashtë gjëra që duhen para se të vijë."
+deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në hotel, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu, dhe gjashtë gjëra që duhen para se të vijë."
 relatedTools:
   - /tools/six-sigma-dmaic/
   - /tools/shift-handover/
@@ -34,6 +34,10 @@ firstMove:
   - "Para se të vijë një sistem i ri, shkruaj me një fjali pse po ndryshon. Nëse nuk mundesh, pyet dikë që e di."
   - "Në javën e parë, mbaj një listë me çdo gjë që nuk funksionoi ose që nuk e kuptove. Dërgoja dikujt në fund të javës."
   - "Për çdo dokument që përdor pranë sistemit, pyet: a është i përditësuar, dhe kush e mban?"
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15 tetor 2026"
+    t: "Një version i mëparshëm i datonte javët e para të trajnimit në hotel në shtator 2026 dhe e quante hotelin të ri. Jam Night Manager i hotelit që nga nëntori 2025, prandaj të dyja u hoqën."
 ---
 
 Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
@@ -42,7 +46,7 @@ Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova p
 
 ## Çfarë kam dhe çfarë nuk kam
 
-Ajo që kam: në last mile, kalimin në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit, të planifikuar për 19 gusht 2025. Sipas informacionit të asaj periudhe, qëllimi ishte saktësi më e mirë e planifikimit dhe më pak itinerare jorealiste. Ishin parashikuar kalibrime që ndryshimi të ndikonte sa më pak te shoferët, dhe mbledhje informacioni nga terreni në ditët e para. Në hotel, javët e para të trajnimit në shtator 2026: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, dhe informacioni që nuk ishte gjithmonë në një vend. Dhe Front Desk Control, që lindi nga ajo periudhë.
+Ajo që kam: në last mile, kalimin në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit, të planifikuar për 19 gusht 2025. Sipas informacionit të asaj periudhe, qëllimi ishte saktësi më e mirë e planifikimit dhe më pak itinerare jorealiste. Ishin parashikuar kalibrime që ndryshimi të ndikonte sa më pak te shoferët, dhe mbledhje informacioni nga terreni në ditët e para. Në hotel, javët e para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, dhe informacioni që nuk ishte gjithmonë në një vend. Dhe Front Desk Control, që lindi nga ajo periudhë.
 
 Ajo që nuk kam: si u informova vetë për ndryshimin e gushtit, me trajnim, email apo demonstrim. Çfarë iu shpjegua shoferëve dhe dispeçerëve. Nëse pati rezistencë apo kthim te zakonet e vjetra. Një krahasim të verifikuar para dhe pas. Sa ditë m'u deshën për ta mësuar plotësisht sistemin e hotelit.
 

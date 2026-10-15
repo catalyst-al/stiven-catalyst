@@ -8,7 +8,7 @@ featured: true
 summary: "Ein neues System wird nicht Teil der Arbeit, weil es installiert ist. Es wird es, wenn die Menschen es verstehen, wissen, wie man es benutzt, und wissen, was zu tun ist, wenn es ihnen nicht hilft."
 teaser: Die Installation verändert das System. Schulung, Kommunikation und die tägliche Erfahrung verändern die Art, wie Menschen arbeiten.
 description: "Ein neues System aus Sicht der Mitarbeiter: „wie man es benutzt“ und „warum es sich ändert“, sechs Dinge, bevor es kommt, und eine Karte dafür."
-deck: "Der siebte Essay der Reihe „Das System ist schneller als Sie“: der Wechsel zu einem neuen Planungssystem im August 2025 und die ersten Wochen der Einarbeitung in einem neuen Hotel im September 2026, warum ein technisch besseres System die Menschen nicht von selbst bereit macht, und sechs Dinge, die es braucht, bevor es kommt."
+deck: "Der siebte Essay der Reihe „Das System ist schneller als Sie“: der Wechsel zu einem neuen Planungssystem im August 2025 und die ersten Wochen der Einarbeitung im Hotel, warum ein technisch besseres System die Menschen nicht von selbst bereit macht, und sechs Dinge, die es braucht, bevor es kommt."
 relatedTools:
   - /tools/six-sigma-dmaic/
   - /tools/shift-handover/
@@ -34,6 +34,10 @@ firstMove:
   - "Bevor ein neues System kommt, schreiben Sie in einem Satz auf, warum es sich ändert. Wenn Sie es nicht können, fragen Sie jemanden, der es weiß."
   - "Führen Sie in der ersten Woche eine Liste mit allem, was nicht funktioniert hat oder was Sie nicht verstanden haben. Schicken Sie sie am Ende der Woche an jemanden."
   - "Fragen Sie bei jedem Dokument, das Sie neben dem System nutzen: Ist es aktuell, und wer pflegt es?"
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15. Oktober 2026"
+    t: "Eine frühere Fassung datierte die ersten Wochen der Einarbeitung im Hotel auf September 2026 und nannte es ein neues Hotel. Ich bin seit November 2025 Night Manager des Hotels, daher ist beides entfernt."
 ---
 
 Die Installation verändert das System. Schulung, Kommunikation und die tägliche Erfahrung verändern die Art, wie Menschen arbeiten.
@@ -42,7 +46,7 @@ In [Die Nacht, in der das System ausfiel](/de/insights/the-night-the-system-went
 
 ## Was ich habe und was nicht
 
-Was ich habe: auf der letzten Meile den Wechsel zu einem neuen System für die Berechnung von Routen und Fahrzeiten, geplant für den 19. August 2025. Nach den Informationen aus jener Zeit war das Ziel eine genauere Planung und weniger unrealistische Routen. Vorgesehen waren Kalibrierungen, damit die Änderung die Fahrer so wenig wie möglich trifft, und das Sammeln von Informationen aus dem Feld in den ersten Tagen. Im Hotel die ersten Wochen der Einarbeitung im September 2026: die Erklärungen der Kollegen, die SOPs, die visuellen Materialien und die Videos, und Informationen, die nicht immer an einem Ort lagen. Und Front Desk Control, das aus dieser Zeit entstanden ist.
+Was ich habe: auf der letzten Meile den Wechsel zu einem neuen System für die Berechnung von Routen und Fahrzeiten, geplant für den 19. August 2025. Nach den Informationen aus jener Zeit war das Ziel eine genauere Planung und weniger unrealistische Routen. Vorgesehen waren Kalibrierungen, damit die Änderung die Fahrer so wenig wie möglich trifft, und das Sammeln von Informationen aus dem Feld in den ersten Tagen. Im Hotel die ersten Wochen der Einarbeitung: die Erklärungen der Kollegen, die SOPs, die visuellen Materialien und die Videos, und Informationen, die nicht immer an einem Ort lagen. Und Front Desk Control, das aus dieser Zeit entstanden ist.
 
 Was ich nicht habe: wie ich selbst über die Änderung im August informiert wurde, durch Schulung, E-Mail oder Vorführung. Was den Fahrern und Disponenten erklärt wurde. Ob es Widerstand gab oder eine Rückkehr zu alten Gewohnheiten. Einen geprüften Vorher-Nachher-Vergleich. Wie viele Tage ich gebraucht habe, um das Hotelsystem vollständig zu lernen.
 

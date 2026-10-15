@@ -37,11 +37,15 @@ firstMove:
   - "Before your next shift, find out where the official business continuity procedure is. Do not read it on the night you need it."
   - "Write one sentence: whom you turn to at night if the system stops, and how you reach them."
   - "Ask an experienced colleague what they do when the system is not working. Listen for how much of the answer is written down somewhere, and how much is only in their memory."
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15 October 2026"
+    t: "An earlier version dated this first night of training at the hotel to September 2026. I have been the hotel’s Night Manager since November 2025, so the date is removed."
 ---
 
 When the system stops, you realise how much of your work depends on it and how well prepared you are to carry on.
 
-In September 2026 I was on my first night of training at the hotel. I had come to learn the night processes. A little after midnight, the hotel system became unavailable because of an update, and it stayed that way for about five hours, until close to morning.
+I was on my first night of training at the hotel. I had come to learn the night processes. A little after midnight, the hotel system became unavailable because of an update, and it stayed that way for about five hours, until close to morning.
 
 This is the only scene in this series that is not a picture. It happened, and I was there.
 

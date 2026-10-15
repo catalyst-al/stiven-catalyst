@@ -33,13 +33,17 @@ firstMove:
   - "Shkruaj një fjali për mjetin tënd: çfarë bën, dhe çfarë nuk bën. Vendose në krye të tij."
   - "Shëno në mjet çdo procedurë që është ende në verifikim, që të dallohet nga ato të konfirmuara."
   - "Para se ta ndash me një koleg, pyet: kush duhet ta miratojë këtë, dhe kush e mban nëse unë nuk jam?"
+# Corrections made after publication (layouts/article.njk shows them under the deck, dated).
+corrections:
+  - date: "15 tetor 2026"
+    t: "Një version i mëparshëm i datonte javët e para në hotel në shtator 2026. Jam Night Manager i hotelit që nga nëntori 2025, prandaj data u hoq."
 ---
 
 Një mjet i vogël mund të zgjidhë një problem të madh. Por që të bëhet pjesë e punës, duhet të jetë më shumë se projekti i personit që e ndërtoi.
 
 Përfytyro një punonjës të ri në recepsion, në mes të një procesi që e ka parë vetëm një herë. Udhëzimi ekziston. Por është diku mes një SOP-je, një videoje, disa fotografive dhe asaj që i shpjegoi një koleg dy net më parë. Procesi pret, dhe ai kërkon.
 
-Kjo nuk është një skenë që e kam të dokumentuar si incident. Është përvoja ime e javëve të para në hotel, në shtator 2026, e shkruar si figurë. Dhe është arsyeja pse nisa të ndërtoj një mjet timin.
+Kjo nuk është një skenë që e kam të dokumentuar si incident. Është përvoja ime e javëve të para në hotel, e shkruar si figurë. Dhe është arsyeja pse nisa të ndërtoj një mjet timin.
 
 ## Çfarë kam dhe çfarë nuk kam
 
