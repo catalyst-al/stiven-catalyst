@@ -201,3 +201,11 @@ test('the light follows a mouse across a card, and touch leaves it alone', () =>
   assert.equal(card.style.getPropertyValue('--mx'), '60px');
   assert.equal(card.style.getPropertyValue('--my'), '40px');
 });
+
+test('tool cards light up in the colour of their family and rise into view like the article cards', () => {
+  assert.match(css, /\.tool-card::before \{[\s\S]*?color-mix\(in srgb, var\(--family, var\(--blue\)\) 15%, transparent\)/);
+  assert.match(css, /\.tool-card:has\(a\):hover \{[\s\S]*?box-shadow: 0 26px 60px -34px color-mix\(in srgb, var\(--family, var\(--blue\)\) 80%/);
+  assert.match(css, /\.family-card:hover,\s*\.family-card:focus-visible \{[\s\S]*?box-shadow: 0 24px 54px -30px color-mix\(in srgb, var\(--family\) 85%/);
+  assert.match(css, /:where\(\.article-card, \.note-card, \.project-card, \.mini-card, \.tool-card, \.family-card,/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /closest\?\.\("\.article-card, \.note-card, \.project-card, \.mini-card, \.tool-card, a\.list-row"\)/);
+});
