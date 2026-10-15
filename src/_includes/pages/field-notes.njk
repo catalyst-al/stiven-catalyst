@@ -15,7 +15,7 @@
 <div class="notes-grid">
 {%- for note in noteList %}
 <article class="note-card" id="note-{{ note.fileSlug }}" data-filter-item data-topic="{{ note.data.topic }}" data-search="{{ [note.data.quote, note.data.topic] | join(' ') | lower }}">
-  <blockquote>{{ note.data.quote | quoted(lang) }}</blockquote>
+  <blockquote data-fit>{{ note.data.quote | quoted(lang) }}</blockquote>
   {%- set link = noteLinks[note.fileSlug] %}
   {%- set noteEssay = (essayList | byOriginal(link.essay)) if link and link.essay else null %}
   {%- set noteTool = (toolList | toolAt(link.tool, lang)) if link and link.tool else null %}
