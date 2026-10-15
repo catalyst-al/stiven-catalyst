@@ -22,14 +22,14 @@ test('each language its own quotes, and the inner ones for a quotation inside', 
 
 test('the German pages quote the field notes and the pull quotes in German', { skip: !hasSite }, () => {
   const notes = built('de/field-notes.html');
-  const quotes = [...notes.matchAll(/<blockquote>([\s\S]*?)<\/blockquote>/g)].map((m) => m[1].trim());
+  const quotes = [...notes.matchAll(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/g)].map((m) => m[1].trim());
   assert.ok(quotes.length > 100, 'the notes are on the page');
   for (const q of quotes) assert.match(q, /^„[^„]*“$/, q);
   assert.ok(!/<blockquote>“/.test(built('de/index.html')), 'the note of the day');
   const issue = built('de/magazine/management-review-nr-01.html');
   assert.ok(!/<p class="quote">“/.test(issue), 'the pull quotes of an issue');
-  assert.match(built('field-notes.html'), /<blockquote>“[^<]*”<\/blockquote>/);
-  assert.match(built('sq/field-notes.html'), /<blockquote>“[^<]*”<\/blockquote>/);
+  assert.match(built('field-notes.html'), /<blockquote[^>]*>“[^<]*”<\/blockquote>/);
+  assert.match(built('sq/field-notes.html'), /<blockquote[^>]*>“[^<]*”<\/blockquote>/);
 });
 
 test('on German pages a number and its per cent sign stay on one line; scripts, styles and other languages stay as they are', async () => {

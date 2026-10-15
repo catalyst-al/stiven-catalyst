@@ -890,7 +890,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 .manifesto-line span {
   display: block;
-  font-size: min(1em, 12.5cqi);
+  font-size: min(1em, 12.5cqi, var(--fit-d, 1000px));
 }
 .manifesto-line .blue { color: var(--blue); }
 .manifesto-line .red { color: var(--red); }
@@ -1060,6 +1060,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 
 .note-card {
+  container-type: inline-size;
   padding: 34px;
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--blue) 7%, transparent), transparent 45%),
@@ -1069,7 +1070,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .note-card blockquote {
   margin: 0 0 38px;
   font-family: var(--serif);
-  font-size: clamp(28px, 3vw, 43px);
+  font-size: min(clamp(28px, 3vw, 43px), var(--fit-s, 1000px));
   line-height: 1.08;
   letter-spacing: -.03em;
 }
@@ -2407,6 +2408,8 @@ main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
   font-variant-numeric: tabular-nums;
 }
 .dl-stat-note { color: var(--muted); font-size: 13px; }
+/* A value that is a word ("Verspätete") breaks at a syllable when the card is narrow. */
+main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dl-warning {
   margin: 0 0 20px;
   padding: 12px 16px;
@@ -4458,8 +4461,14 @@ html:has(.book-zoom[open]) { overflow: hidden; }
   .issue-more-card img { width: 64px; }
   .issue-more-title { font-size: 22px; }
 }
-.book-text-body h2 { margin: .5em 0 .8em; }
-.book-text-body h3 { margin: 2em 0 .6em; font-size: 28px; font-weight: 400; line-height: 1.15; }
+.book-text-body { container-type: inline-size; }
+.book-text-body h2 { margin: .5em 0 .8em; font-size: min(42px, var(--fit-s, 1000px)); }
+@media (max-width: 900px) { .book-text-body h2 { font-size: min(34px, var(--fit-s, 1000px)); } }
+.book-text-body h3 { margin: 2em 0 .6em; font-size: min(28px, var(--fit-s, 1000px)); font-weight: 400; line-height: 1.15; }
+/* The sources: a long title ("Beschäftigtengrößenklassen") breaks at a syllable, with a hyphen, in the language it
+   is in (lang on a German title); its web address breaks anywhere, with no hyphen added. */
+.book-text-sources li { hyphens: auto; hyphenate-limit-chars: 12 5 5; }
+.book-text-sources a { hyphens: manual; }
 .book-text-body .book-text-kicker {
   margin: 4em 0 0;
   color: var(--blue);
@@ -6785,6 +6794,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .essay-series { margin: 52px 0 8px; font-family: var(--sans); }
 .essay-series .kicker { margin: 0 0 14px; }
 .essay-series-next {
+  container-type: inline-size;
   position: relative;
   display: grid;
   gap: 10px;
@@ -6801,9 +6811,10 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var(--blue); transform: translateY(-2px); }
 .essay-series-next small { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .essay-series-next strong {
+  --measure: calc(100cqi - 40px);
   padding-right: 40px;
   font-family: var(--serif);
-  font-size: clamp(28px, 3.4vw, 40px);
+  font-size: min(clamp(28px, 3.4vw, 40px), var(--fit-s, 1000px));
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: -.02em;

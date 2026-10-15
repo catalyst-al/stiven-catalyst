@@ -27,6 +27,7 @@ test('every h1, h2 and h3 and each title marked data-fit gets its widths; other 
   const { fitTitles } = await load();
   assert.equal(fitTitles('<h1>Tools</h1>'), '<h1 style="--wd:3.78;--ws:2.53">Tools</h1>');
   assert.match(fitTitles('<strong data-fit>Karriere</strong><strong>Karriere</strong>'), /^<strong data-fit style="--wd:[\d.]+;--ws:[\d.]+">Karriere<\/strong><strong>Karriere<\/strong>$/);
+  assert.match(fitTitles('<blockquote data-fit>“Quote”</blockquote><blockquote>Other</blockquote>'), /^<blockquote data-fit style="--wd:[\d.]+;--ws:[\d.]+">“Quote”<\/blockquote><blockquote>Other<\/blockquote>$/);
   assert.match(fitTitles('<h2 class="x" style="color:red">Wo</h2>'), /^<h2 class="x" style="--wd:[\d.]+;--ws:[\d.]+;color:red">Wo<\/h2>$/);
   assert.equal(fitTitles('<p>Management</p><h4>Management</h4>'), '<p>Management</p><h4>Management</h4>');
   const script = '<script>el.innerHTML = "<h1>Shift</h1>";</script>';
@@ -47,8 +48,13 @@ test('the large titles are no larger than their longest word allows', () => {
   // The role's name on a card, marked data-fit.
   assert.match(css, /\.role-next-text strong \{[^}]*font-size: min\(26px, var\(--fit-d, 1000px\)\)/);
   assert.match(css, /\.family-card strong \{[^}]*font-size: min\(24px, var\(--fit-d, 1000px\)\)/);
+  // A field note's quote, the next essay of a series, the lines of the manifesto, the titles of a publication's text.
+  assert.match(css, /\.note-card blockquote \{[^}]*font-size: min\(clamp\(28px, 3vw, 43px\), var\(--fit-s, 1000px\)\)/);
+  assert.match(css, /\.essay-series-next strong \{[^}]*--measure: calc\(100cqi - 40px\);[^}]*font-size: min\(clamp\(28px, 3\.4vw, 40px\), var\(--fit-s, 1000px\)\)/);
+  assert.match(css, /\.manifesto-line span \{[^}]*font-size: min\(1em, 12\.5cqi, var\(--fit-d, 1000px\)\)/);
+  assert.match(css, /\.book-text-body h2 \{[^}]*font-size: min\(42px, var\(--fit-s, 1000px\)\)/);
   // Each of them sits in a container, so 100cqi is the width the title has.
-  for (const box of ['.page-hero', '.cosmos-copy', '.article-hero-text', '.book-hero-copy', '.book-feature-copy', '.role-next-text', '.family-card-text']) {
+  for (const box of ['.page-hero', '.cosmos-copy', '.article-hero-text', '.book-hero-copy', '.book-feature-copy', '.role-next-text', '.family-card-text', '.note-card', '.essay-series-next', '.book-text-body']) {
     assert.ok(new RegExp(`(^|[,\\s])${box.replace('.', '\\.')}[^{]*\\{[^}]*container-type: inline-size`, 'm').test(css), box);
   }
 });
@@ -57,4 +63,8 @@ const built = '_site/de/your-challenge.html';
 test('the built pages carry the widths, and the longest German words have a place to break', { skip: !fs.existsSync(built) }, () => {
   assert.match(fs.readFileSync(built, 'utf8'), /<h1 style="--wd:[\d.]+;--ws:[\d.]+">Schicken Sie mir Ihre Heraus\u00adforderung\.<\/h1>/);
   assert.match(fs.readFileSync('_site/magazine/management-review.html', 'utf8'), /<h1 class="hero-long" style="--wd:8\.11;--ws:[\d.]+">Management/);
+  // A German source title on an English page is marked German, so it is read and hyphenated as German.
+  const issue30 = fs.readFileSync('_site/magazine/management-review-nr-30.html', 'utf8');
+  assert.match(issue30, /<ul class="book-text-sources">[\s\S]*?<span lang="de">“Gründe gegen die Nutzung[^<]*Beschäftigtengrößenklassen”<\/span>/);
+  assert.doesNotMatch(fs.readFileSync('_site/de/magazine/management-review-nr-30.html', 'utf8'), /<span lang="de">/, 'not on a German page');
 });

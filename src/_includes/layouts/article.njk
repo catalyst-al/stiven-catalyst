@@ -200,7 +200,7 @@ ogType: article
       {%- if series.next %}
       <a class="essay-series-next" href="{{ series.next.url }}" rel="next">
         <small>{{ "Next essay" | t(lang) }} · {{ (series.number + 1) | pad }}</small>
-        <strong>{{ series.next.data.title }}</strong>
+        <strong data-fit>{{ series.next.data.title }}</strong>
         {%- if series.next.data.teaser or series.next.data.summary %}<span>{{ series.next.data.teaser or series.next.data.summary }}</span>{% endif %}
         <em aria-hidden="true">→</em>
       </a>
@@ -220,7 +220,7 @@ ogType: article
       {#- The last essay of a finished series leads into the next series. #}
       <a class="essay-series-next" href="{{ laterFirst.url }}">
         <small>{{ "The next series" | t(lang) }} · {{ laterSeries.name[lang or "en"] }}</small>
-        <strong>{{ laterFirst.data.title }}</strong>
+        <strong data-fit>{{ laterFirst.data.title }}</strong>
         {%- if laterFirst.data.teaser or laterFirst.data.summary %}<span>{{ laterFirst.data.teaser or laterFirst.data.summary }}</span>{% endif %}
         <em aria-hidden="true">→</em>
       </a>
