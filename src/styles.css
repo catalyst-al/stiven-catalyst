@@ -4513,7 +4513,22 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 
 .weekly-hero .weekly-mark { color: var(--red); }
 .weekly-archive { padding: 50px 0 80px; }
-.weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 36px; }
+.weekly-controls { display: grid; gap: 18px; margin: 0 0 40px; }
+.weekly-months { display: flex; flex-wrap: wrap; gap: 6px; width: fit-content; max-width: 100%; padding: 5px; border: 1px solid var(--line); border-radius: 14px; }
+.weekly-months button {
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font: 800 15px/1.2 var(--sans);
+  cursor: pointer;
+}
+.weekly-months button:hover { color: var(--ink); }
+.weekly-months button[aria-pressed="true"] { background: var(--blue); color: var(--on-blue); }
+.weekly-n { margin-left: 8px; font-weight: 600; opacity: .7; font-variant-numeric: tabular-nums; }
+.weekly-n:empty { display: none; }
+.weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
 .weekly-filter button {
   padding: 9px 16px;
   border: 1px solid var(--line);
@@ -4536,6 +4551,10 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-card strong { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.2; }
 .weekly-card:hover strong { color: var(--blue-soft); }
 .weekly-card-date { color: var(--muted); font-size: 14px; }
+.weekly-none { margin: 0; color: var(--muted); }
+.weekly-more { display: grid; justify-items: center; gap: 14px; margin-top: 48px; }
+.weekly-more[hidden], .weekly-more button[hidden] { display: none; }
+.weekly-shown { margin: 0; color: var(--muted); font-size: 14px; }
 .weekly-special { border-top: 1px solid var(--line); }
 
 /* The operational treatise: its long name as a serif title on the list of volumes, the three layers every chapter is
@@ -4571,6 +4590,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
   .wk-legend b { font-size: 17px; }
   .wk-legend span { font-size: 13px; }
   .weekly-grid { gap: 30px 18px; }
+  .weekly-months { width: 100%; }
+  .weekly-months button { flex: 1; padding: 10px 12px; }
   .weekly-card strong { font-size: 18px; }
 }
 

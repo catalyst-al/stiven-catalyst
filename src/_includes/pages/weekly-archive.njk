@@ -1,5 +1,5 @@
-{#- All issues of the weekly Management Review, the newest first, each as its cover; the topics narrow the list
-    (js/weekly.js). Below them, the special edition of September 2026. Shared by the three languages. -#}
+{#- All issues of the weekly Management Review, the newest first, each as its cover; the month of the edition and
+    the topics narrow the list, twelve covers at a time (js/weekly.js). Below them, the special edition of September 2026. Shared by the three languages. -#}
 {%- set lang = lang or "en" -%}
 {%- set W = weekly[lang] -%}
 {%- set L = W.labels -%}
@@ -11,17 +11,25 @@
   </section>
 
   <section class="shell weekly-archive" aria-label="{{ L.issues }}">
-    {%- if weekly.blocks | length > 1 %}
-    <div class="weekly-filter" role="group" aria-label="{{ L.blocks }}" data-weekly-filter hidden>
-      <button type="button" aria-pressed="true" data-block="">{{ A.all }}</button>
-      {%- for b in weekly.blocks %}<button type="button" aria-pressed="false" data-block="{{ b.id }}">{{ b[lang] }}</button>{% endfor %}
+    {#- One month at a time, then a topic, then "show more": without the script all issues are listed. #}
+    <div class="weekly-controls" data-weekly-filter data-page="12" data-shown="{{ A.shown }}" hidden>
+      {%- if weekly.months | length > 1 %}
+      <div class="weekly-months" role="group" aria-label="{{ A.months }}">
+        {%- for m in weekly.months %}<button type="button" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-month="{{ m.id }}">{{ m[lang] }}<span class="weekly-n">{{ m.count }}</span></button>{% endfor %}
+      </div>
+      {%- endif %}
+      {%- if weekly.blocks | length > 1 %}
+      <div class="weekly-filter" role="group" aria-label="{{ L.blocks }}">
+        <button type="button" aria-pressed="true" data-block="">{{ A.all }}</button>
+        {%- for b in weekly.blocks %}<button type="button" aria-pressed="false" data-block="{{ b.id }}">{{ b[lang] }}<span class="weekly-n"></span></button>{% endfor %}
+      </div>
+      {%- endif %}
     </div>
-    {%- endif %}
     <ol class="weekly-grid" reversed>
       {%- for issue in weekly.issues | reverse %}
       {%- set I = issue[lang] %}
       {%- set cover = magazinePages[issue.slug][lang].pages[0] %}
-      <li data-block="{{ issue.block }}">
+      <li data-block="{{ issue.block }}" data-month="{{ issue.month }}">
         <a class="weekly-card" href="{{ ('/magazine/' + issue.slug + '.html') | local(lang) }}">
           <span class="weekly-card-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 620px) 45vw, 220px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}" decoding="async"></span>
           <span class="weekly-card-meta">{{ L.no }} {{ issue.no }} · {{ I.blockName }}</span>
@@ -31,6 +39,11 @@
       </li>
       {%- endfor %}
     </ol>
+    <p class="weekly-none" data-weekly-none hidden>{{ A.empty }}</p>
+    <div class="weekly-more" data-weekly-more hidden>
+      <p class="weekly-shown" aria-live="polite"></p>
+      <button type="button" class="button-secondary">{{ A.more }}</button>
+    </div>
   </section>
 
 {#- The September edition: one of a kind, before the weekly began. -#}

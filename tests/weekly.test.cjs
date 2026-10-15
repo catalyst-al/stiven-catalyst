@@ -179,6 +179,19 @@ test('the list of all issues and Publications show the weekly in every language'
   }
 });
 
+test('the list of all issues can be narrowed to the month of an edition', { skip: !hasSite }, async () => {
+  const weekly = await load();
+  assert.deepEqual(weekly.months.map((month) => month.id), [...new Set(weekly.issues.map((issue) => issue.month))].sort().reverse(), 'the newest month first');
+  assert.equal(weekly.months.reduce((sum, month) => sum + month.count, 0), weekly.issues.length, 'every issue in one month');
+  for (const issue of weekly.issues) assert.match(issue.month, /^\d{4}-\d{2}$/, `${issue.slug}: month`);
+  for (const lang of LANGS) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    const archive = built(`${prefix}magazine/management-review.html`);
+    for (const month of weekly.months) assert.ok(archive.includes(`data-month="${month.id}">${escaped(month[lang])}`), `${lang}: the button of ${month.id}`);
+    assert.equal((archive.match(/<li data-block="[a-z]+" data-month="\d{4}-\d{2}">/g) || []).length, weekly.issues.length, `${lang}: every cover has its month`);
+  }
+});
+
 test('the monthly magazine is gathered the same way: its newest issue on Publications, all of them on their list', { skip: !hasSite }, async () => {
   const { default: magazine } = await import('../src/_data/magazine.js');
   for (const lang of LANGS) {
