@@ -179,16 +179,20 @@ test('the list of all issues and Publications show the weekly in every language'
   }
 });
 
-test('the list of all issues can be narrowed to the month of an edition', { skip: !hasSite }, async () => {
+test('the lists of all issues can be narrowed to the month of an edition', { skip: !hasSite }, async () => {
   const weekly = await load();
-  assert.deepEqual(weekly.months.map((month) => month.id), [...new Set(weekly.issues.map((issue) => issue.month))].sort().reverse(), 'the newest month first');
-  assert.equal(weekly.months.reduce((sum, month) => sum + month.count, 0), weekly.issues.length, 'every issue in one month');
-  for (const issue of weekly.issues) assert.match(issue.month, /^\d{4}-\d{2}$/, `${issue.slug}: month`);
-  for (const lang of LANGS) {
-    const prefix = lang === 'en' ? '' : `${lang}/`;
-    const archive = built(`${prefix}magazine/management-review.html`);
-    for (const month of weekly.months) assert.ok(archive.includes(`data-month="${month.id}">${escaped(month[lang])}`), `${lang}: the button of ${month.id}`);
-    assert.equal((archive.match(/<li data-block="[a-z]+" data-month="\d{4}-\d{2}">/g) || []).length, weekly.issues.length, `${lang}: every cover has its month`);
+  const magazine = (await import('../src/_data/magazine.js')).default;
+  for (const [data, page] of [[weekly, 'management-review'], [magazine, 'from-the-floor']]) {
+    assert.deepEqual(data.months.map((month) => month.id), [...new Set(data.issues.map((issue) => issue.month))].sort().reverse(), `${page}: the newest month first`);
+    assert.equal(data.months.reduce((sum, month) => sum + month.count, 0), data.issues.length, `${page}: every issue in one month`);
+    for (const issue of data.issues) assert.match(issue.month, /^\d{4}-\d{2}$/, `${issue.slug}: month`);
+    for (const lang of LANGS) {
+      const prefix = lang === 'en' ? '' : `${lang}/`;
+      const archive = built(`${prefix}magazine/${page}.html`);
+      if (data.months.length > 1) for (const month of data.months) assert.ok(archive.includes(`data-month="${month.id}">${escaped(month[lang])}`), `${page} ${lang}: the button of ${month.id}`);
+      assert.equal((archive.match(/<li data-block="[a-z]+" data-month="\d{4}-\d{2}">/g) || []).length, data.issues.length, `${page} ${lang}: every cover has its month`);
+      assert.ok(archive.includes('data-weekly-more') && archive.includes('/js/weekly.js'), `${page} ${lang}: show more`);
+    }
   }
 });
 
