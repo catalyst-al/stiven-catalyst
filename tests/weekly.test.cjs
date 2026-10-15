@@ -278,3 +278,16 @@ test('Insights shows its essays a month and twelve at a time, with "show more" a
     assert.ok(page.includes('data-chip-count'), `${lang}: the count of each challenge`);
   }
 });
+
+test('Reflections can be searched, by month once there are two, twelve at a time', { skip: !hasSite }, () => {
+  for (const lang of LANGS) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    const page = built(`${prefix}reflections.html`);
+    const rows = page.match(/data-filter-item [^>]*>/g) || [];
+    assert.ok(rows.length > 0, `${lang}: reflections listed`);
+    for (const row of rows) assert.match(row, /data-month="\d{4}-\d{2}"/, `${lang}: every reflection has its month`);
+    const months = new Set(rows.map((row) => row.match(/data-month="([^"]+)"/)[1]));
+    assert.equal((page.match(/data-filter-month="/g) || []).length, months.size > 1 ? months.size : 0, `${lang}: a button for each month, once there are two`);
+    assert.ok(page.includes('data-filter-search') && page.includes('data-filter-more') && page.includes('/js/filter.js'), `${lang}: search and show more`);
+  }
+});
