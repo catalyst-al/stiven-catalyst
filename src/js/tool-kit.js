@@ -305,7 +305,9 @@ window.ToolKit = (() => {
 
   const stat = (label, value, note) => {
     const box = el("div", "dl-stat");
-    box.append(el("span", "dl-stat-label", label), el("strong", "dl-stat-value", value));
+    // A value in words (the largest cause, "25 above") is set smaller than a number, so its words fit the card.
+    const words = /\p{L}{4,}/u.test(String(value));
+    box.append(el("span", "dl-stat-label", label), el("strong", words ? "dl-stat-value is-words" : "dl-stat-value", value));
     if (note) box.append(el("span", "dl-stat-note", note));
     return box;
   };
