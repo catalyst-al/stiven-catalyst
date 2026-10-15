@@ -44,7 +44,7 @@
   // "show more". The choice stays in the address (?month=2026-10&topic=people), so the back button returns to it.
   const filter = document.querySelector("[data-weekly-filter]");
   if (filter) {
-    const items = [...document.querySelectorAll(".weekly-grid > li")];
+    const items = [...document.querySelectorAll(filter.dataset.items || ".weekly-grid > li")];
     const monthButtons = [...filter.querySelectorAll("button[data-month]")];
     const blockButtons = [...filter.querySelectorAll("button[data-block]")];
     const topicRow = filter.querySelector(".weekly-filter");
@@ -54,6 +54,13 @@
     const none = document.querySelector("[data-weekly-none]");
     const page = Number(filter.dataset.page) || 12;
     const params = new URLSearchParams(location.search);
+    // A link to one item (publications.html#treatise) opens the month it is in.
+    let target = null;
+    try {
+      target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    } catch {}
+    const linked = target && items.find((item) => item.contains(target));
+    if (linked?.dataset.month && !params.has("month")) params.set("month", linked.dataset.month);
     const pick = (buttons, key, value) => buttons.find((button) => button.dataset[key] === value);
     const state = {
       month: (pick(monthButtons, "month", params.get("month")) || monthButtons[0])?.dataset.month || "",
@@ -62,7 +69,8 @@
     };
 
     const render = () => {
-      const inMonth = items.filter((item) => !state.month || item.dataset.month === state.month);
+      // An item with no month (on Publications: the book, the guide) stays in every month.
+      const inMonth = items.filter((item) => !state.month || !item.dataset.month || item.dataset.month === state.month);
       if (state.block && !inMonth.some((item) => item.dataset.block === state.block)) state.block = "";
       for (const button of monthButtons) button.setAttribute("aria-pressed", String(button.dataset.month === state.month));
       for (const button of blockButtons) {
@@ -109,5 +117,6 @@
     // With one month and one topic there is nothing to choose, only the covers to show twelve at a time.
     filter.hidden = !filter.querySelector("button");
     render();
+    if (linked && !linked.hidden) target.scrollIntoView();
   }
 })();

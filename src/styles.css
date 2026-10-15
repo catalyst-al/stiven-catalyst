@@ -4662,7 +4662,10 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .book-feature h2 { font-size: min(clamp(46px, 6vw, 88px), var(--fit-s, 1000px)); }
 .book-feature-copy > p:not(.kicker, .book-subtitle) { max-width: 560px; margin: 22px 0 30px; color: var(--muted); font-size: 18px; }
 .book-feature .button-primary { display: inline-block; }
-/* Publications: the list of the magazine's issues, under the newest one. */
+/* Publications: the month and the kind above the publications (partials/issue-filter.njk). */
+.publications-filter { padding: 44px 0 0; }
+.publications-filter .weekly-controls { margin: 0; }
+.publications-more .weekly-none { margin: 40px 0; }
 
 @media (max-width: 900px) {
   .book-hero { grid-template-columns: minmax(0, 1fr); gap: 50px; padding: 64px 0 60px; }
