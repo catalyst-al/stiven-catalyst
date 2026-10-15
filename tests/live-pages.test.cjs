@@ -150,14 +150,14 @@ test('at rest the pages being read lie flat, outside any 3D scene, so their text
 });
 
 test('a publication title with a word too long for a phone is set smaller there', { skip: !fs.existsSync('_site/de/magazine/management-review-nr-31.html') }, () => {
-  assert.match(read('src/styles.css'), /\.book-hero h1\.hero-long \{ font-size: clamp\(36px, 10\.5vw, 52px\); \}/);
-  assert.match(read('_site/de/magazine/management-review-nr-31.html'), /<h1 class="hero-long">Selbstwahrnehmung und emotionale Intelligenz<\/h1>/);
-  assert.match(read('_site/sq/magazine/management-review-nr-31.html'), /<h1>V/, 'a title with short words keeps its size');
+  assert.match(read('src/styles.css'), /\.book-hero h1\.hero-long \{ font-size: min\(clamp\(36px, 10\.5vw, 52px\), var\(--fit-s, 1000px\)\); \}/);
+  assert.match(read('_site/de/magazine/management-review-nr-31.html'), /<h1 class="hero-long" style="[^"]*">Selbstwahrnehmung und emotionale Intelligenz<\/h1>/);
+  assert.match(read('_site/sq/magazine/management-review-nr-31.html'), /<h1 style="[^"]*">V/, 'a title with short words keeps its size');
 });
 
 test('the archive of the Management Review is a long title too: "MANAGEMENT" fits on a phone in one piece', { skip: !fs.existsSync('_site/magazine/management-review.html') }, () => {
-  assert.match(read('src/styles.css'), /\.page-hero h1\.hero-long \{ font-size: clamp\(30px, 11cqi, 120px\); \}/);
+  assert.match(read('src/styles.css'), /\.page-hero h1\.hero-long \{ font-size: min\(clamp\(30px, 11cqi, 120px\), var\(--fit-d, 1000px\)\); \}/);
   for (const prefix of ['', 'de/', 'sq/']) {
-    assert.match(read(`_site/${prefix}magazine/management-review.html`), /<h1 class="hero-long">Management <span class="weekly-mark">Review<\/span><\/h1>/, prefix || 'en');
+    assert.match(read(`_site/${prefix}magazine/management-review.html`), /<h1 class="hero-long" style="[^"]*">Management <span class="weekly-mark">Review<\/span><\/h1>/, prefix || 'en');
   }
 });

@@ -35,7 +35,7 @@ test('its list of corrections is exactly the publications that carry a correctio
   const ownCorrection = (html) => /<p>/.test((html.match(/<div class="book-corrections"[^>]*>[\s\S]*?<\/div>/)?.[0] ?? '').replace(/<p data-series>[\s\S]*?<\/p>/g, ''));
   const corrected = fs.readdirSync('_site/magazine').filter((name) => name.endsWith('.html') && ownCorrection(read(`magazine/${name}`))).sort();
   const page = read('how-this-is-made.html');
-  const section = page.slice(page.indexOf('<h2>Corrections</h2>'), page.indexOf('<h2>Your data</h2>'));
+  const section = page.slice(page.search(/<h2[^>]*>Corrections<\/h2>/), page.search(/<h2[^>]*>Your data<\/h2>/));
   const listed = [...section.matchAll(/href="\/magazine\/([^"]+\.html)"/g)].map((m) => m[1]).sort();
   assert.deepEqual(listed, corrected);
   // The essays corrected after publication, in every language: each listed, and each shows its note.

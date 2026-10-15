@@ -5,6 +5,7 @@ import { clearCache, localUrl, quoted, QUOTES, keepUnits } from "./lib/translati
 import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
+import { fitTitles } from "./lib/title-fit.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
 import { withDiagram } from "./lib/diagrams.js";
 import { searchIndex, publicationEntries } from "./lib/search-index.js";
@@ -330,6 +331,11 @@ export default function (eleventyConfig) {
   // Letter pairs that would touch in the tight display titles get their space (lib/display-pairs.js).
   eleventyConfig.addTransform("display-pairs", function (content) {
     return (this.page.outputPath || "").endsWith(".html") ? markPairs(content) : content;
+  });
+  // Each heading carries the width of its longest word, so a large title is never larger than that word allows
+  // and no word is split across two lines (lib/title-fit.js).
+  eleventyConfig.addTransform("title-fit", function (content) {
+    return (this.page.outputPath || "").endsWith(".html") ? fitTitles(content) : content;
   });
   // "5 %" stays on one line on the German pages (keepUnits in lib/translations.js).
   eleventyConfig.addTransform("keep-units", function (content) {

@@ -103,7 +103,7 @@
       {% set planet = target %}{% set planetKey = "next-" + target.id %}{% include "partials/family-planet.njk" %}
       <span class="role-next-text">
         <small>{{ target.name }} · {{ target.scope | t(lang) }}</small>
-        <strong>{{ target.role | t(lang) }}</strong>
+        <strong data-fit>{{ target.role | t(lang) }}</strong>
         <span>{{ target.line | t(lang) }}</span>
       </span>
     </a>
