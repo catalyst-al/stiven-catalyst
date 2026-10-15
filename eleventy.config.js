@@ -6,6 +6,7 @@ import { splitStylesheet } from "./lib/css-split.js";
 import { minifyScripts } from "./lib/js-minify.js";
 import { markPairs } from "./lib/display-pairs.js";
 import { fitTitles } from "./lib/title-fit.js";
+import { softHyphens } from "./lib/soft-hyphens.js";
 import { essayBody, essayContents } from "./lib/essay-body.js";
 import { withDiagram } from "./lib/diagrams.js";
 import { searchIndex, publicationEntries } from "./lib/search-index.js";
@@ -108,6 +109,8 @@ export default function (eleventyConfig) {
   // {{ note.data.quote | quoted(lang) }}: a quotation in the quotes of its language, “…” in English and Albanian,
   // „…“ in German; a quotation inside it takes the inner quotes, ‘…’ or ‚…‘.
   eleventyConfig.addFilter("quoted", quoted);
+  // A long German compound in a source title gets its places to break (lib/soft-hyphens.js).
+  eleventyConfig.addFilter("softHyphens", softHyphens);
   // A value written once for every language ("PubMed") or in each of them ({ en, sq, de }), in one language.
   eleventyConfig.addFilter("inLang", (value, lang) => (value && typeof value === "object" && !Array.isArray(value) ? value[lang] ?? value.en : value));
   // {{ "Add to log" | t(lang) }}: the German or Albanian text on those pages, else the English one.

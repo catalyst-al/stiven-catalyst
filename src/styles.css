@@ -2408,7 +2408,9 @@ main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
   font-variant-numeric: tabular-nums;
 }
 .dl-stat-note { color: var(--muted); font-size: 13px; }
-/* A value that is a word ("Verspätete") breaks at a syllable when the card is narrow. */
+/* A value in words ("Verspätete Beladung", "25 darüber") is set smaller than a number, so a word fits the card. */
+.dl-stat-value.is-words { font-size: clamp(20px, 2.2vw, 26px); line-height: 1.15; }
+/* A longer German word still breaks at a syllable when the card is narrow. */
 main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dl-warning {
   margin: 0 0 20px;
@@ -2581,6 +2583,7 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
   .dl-stats { grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); }
   .dl-stat { padding: 16px; }
   .dl-stat-value { font-size: 22px; }
+  .dl-stat-value.is-words { font-size: 18px; }
 }
 
 

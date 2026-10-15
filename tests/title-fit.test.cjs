@@ -35,6 +35,18 @@ test('every h1, h2 and h3 and each title marked data-fit gets its widths; other 
   assert.equal(fitTitles('<h3></h3>'), '<h3></h3>');
 });
 
+test('a long German compound in a source title has its places to break, in every browser', async () => {
+  const { softHyphens, longWords, hasBreaks, LONG } = await import('../lib/soft-hyphens.js');
+  assert.equal(softHyphens('Betriebsverfassungsgesetz (Works Constitution Act), § 87(1)'), 'Betriebs\u00adverfassungs\u00adgesetz (Works Constitution Act), § 87(1)');
+  assert.equal(softHyphens('Nach Beschäftigtengrößenklassen'), 'Nach Beschäftigten\u00adgrößen\u00adklassen');
+  assert.equal(softHyphens('A short title'), 'A short title');
+  // Every source title, in every list of sources: a word of 19 letters or more is listed with its breaks.
+  const files = ['lib/weekly/sources.js', 'src/_data/review.js', ...fs.readdirSync('lib/floor').map((name) => `lib/floor/${name}`)];
+  const titles = files.flatMap((file) => [...fs.readFileSync(file, 'utf8').matchAll(/\btitle: "((?:[^"\\]|\\.)*)"/g)].map((m) => m[1]));
+  assert.ok(titles.length > 300, `${titles.length} titles`);
+  for (const word of titles.flatMap(longWords)) assert.ok(hasBreaks(word), `${word} (${word.length} letters, ${LONG} or more): add its breaks to lib/soft-hyphens.js`);
+});
+
 const css = fs.readFileSync('src/styles.css', 'utf8');
 test('the large titles are no larger than their longest word allows', () => {
   // The measure of a title: the width of its container (cqi) over the width of its longest word.
@@ -53,6 +65,9 @@ test('the large titles are no larger than their longest word allows', () => {
   assert.match(css, /\.essay-series-next strong \{[^}]*--measure: calc\(100cqi - 40px\);[^}]*font-size: min\(clamp\(28px, 3\.4vw, 40px\), var\(--fit-s, 1000px\)\)/);
   assert.match(css, /\.manifesto-line span \{[^}]*font-size: min\(1em, 12\.5cqi, var\(--fit-d, 1000px\)\)/);
   assert.match(css, /\.book-text-body h2 \{[^}]*font-size: min\(42px, var\(--fit-s, 1000px\)\)/);
+  // A stat value in words is set smaller than a number (js/tool-kit.js marks it is-words).
+  assert.match(css, /\.dl-stat-value\.is-words \{ font-size: clamp\(20px, 2\.2vw, 26px\);/);
+  assert.match(fs.readFileSync('src/js/tool-kit.js', 'utf8'), /words \? "dl-stat-value is-words" : "dl-stat-value"/);
   // Each of them sits in a container, so 100cqi is the width the title has.
   for (const box of ['.page-hero', '.cosmos-copy', '.article-hero-text', '.book-hero-copy', '.book-feature-copy', '.role-next-text', '.family-card-text', '.note-card', '.essay-series-next', '.book-text-body']) {
     assert.ok(new RegExp(`(^|[,\\s])${box.replace('.', '\\.')}[^{]*\\{[^}]*container-type: inline-size`, 'm').test(css), box);
@@ -65,6 +80,10 @@ test('the built pages carry the widths, and the longest German words have a plac
   assert.match(fs.readFileSync('_site/magazine/management-review.html', 'utf8'), /<h1 class="hero-long" style="--wd:8\.11;--ws:[\d.]+">Management/);
   // A German source title on an English page is marked German, so it is read and hyphenated as German.
   const issue30 = fs.readFileSync('_site/magazine/management-review-nr-30.html', 'utf8');
-  assert.match(issue30, /<ul class="book-text-sources">[\s\S]*?<span lang="de">“Gründe gegen die Nutzung[^<]*Beschäftigtengrößenklassen”<\/span>/);
+  assert.match(issue30, /<ul class="book-text-sources">[\s\S]*?<span lang="de">“Gründe gegen die Nutzung[^<]*Beschäftigten\u00adgrößen\u00adklassen”<\/span>/);
   assert.doesNotMatch(fs.readFileSync('_site/de/magazine/management-review-nr-30.html', 'utf8'), /<span lang="de">/, 'not on a German page');
+  // The text version breaks the long compounds; the printed page keeps the title as it is.
+  const issue71 = fs.readFileSync('_site/magazine/management-review-nr-71.html', 'utf8');
+  assert.match(issue71, /<ul class="book-text-sources">[\s\S]*?“Betriebs\u00adverfassungs\u00adgesetz \(Works Constitution Act\)/);
+  assert.match(issue71, /<ol class="src">[\s\S]*?<li>Betriebsverfassungsgesetz \(Works Constitution Act\)/);
 });
