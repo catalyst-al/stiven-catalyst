@@ -191,8 +191,8 @@ button, input, select { font: inherit; }
   gap: 4px;
 }
 
-/* Each menu item is a small pill with a planet in the site's blue, like the family chips on the homepage but quieter:
-   the planet is dim, lights up under the pointer and glows on the page you are on. */
+/* Each menu item is a small chip with a planet in the site's blue, like the family chips on the homepage: a fine blue
+   edge and a breath of blue light behind the planet at rest, brighter under the pointer, glowing on the page you are on. */
 .main-nav a {
   position: relative;
   isolation: isolate;
@@ -200,15 +200,23 @@ button, input, select { font: inherit; }
   align-items: center;
   gap: 8px;
   padding: 8px 14px 8px 12px;
-  border: 1px solid transparent;
+  border: 1px solid color-mix(in srgb, var(--blue) 22%, var(--line));
   border-radius: 999px;
-  color: var(--muted);
+  background:
+    radial-gradient(circle at 18px 50%, color-mix(in srgb, var(--blue) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+  color: color-mix(in srgb, var(--ink) 82%, var(--muted));
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
-  transition: color .2s ease, border-color .25s ease, background-color .25s ease;
+  transition: color .2s ease, border-color .25s ease, background-color .25s ease, box-shadow .3s ease, translate .3s cubic-bezier(.22, 1, .36, 1);
 }
-.main-nav a:hover { color: var(--ink); border-color: var(--line); background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.main-nav a:hover {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--blue) 55%, var(--line));
+  box-shadow: 0 0 18px -6px color-mix(in srgb, var(--blue) 60%, transparent);
+  translate: 0 -1px;
+}
 .main-nav a[aria-current="page"] { color: var(--ink); border-color: transparent; background: none; }
 .nav-orb {
   flex: none;
@@ -216,22 +224,23 @@ button, input, select { font: inherit; }
   height: 7px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--blue) 48%, color-mix(in srgb, var(--blue) 50%, #000) 100%);
-  opacity: .35;
+  opacity: .8;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--blue) 70%, transparent);
   transition: opacity .25s ease, box-shadow .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
 }
-.main-nav a:hover .nav-orb { opacity: .85; }
+.main-nav a:hover .nav-orb { opacity: 1; box-shadow: 0 0 10px var(--blue); }
 .main-nav a[aria-current="page"] .nav-orb { opacity: 1; box-shadow: 0 0 9px var(--blue); }
 /* The pill of the page you are on: it slides to the next item when you change page (see "Moving between pages"). */
 .nav-pill {
   position: absolute;
   inset: -1px;
   z-index: -1;
-  border: 1px solid color-mix(in srgb, var(--blue) 45%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--blue) 80%, transparent);
   border-radius: inherit;
   background:
-    radial-gradient(circle at 14% 50%, color-mix(in srgb, var(--blue) 24%, transparent), transparent 64%),
-    color-mix(in srgb, var(--ink) 4%, transparent);
-  box-shadow: 0 0 20px -8px color-mix(in srgb, var(--blue) 70%, transparent);
+    radial-gradient(circle at 14% 50%, color-mix(in srgb, var(--blue) 36%, transparent), transparent 70%),
+    color-mix(in srgb, var(--blue) 12%, transparent);
+  box-shadow: 0 0 22px -6px color-mix(in srgb, var(--blue) 75%, transparent), inset 0 0 12px -6px color-mix(in srgb, var(--blue) 60%, transparent);
   pointer-events: none;
 }
 /* Something new in Writing or Publications since the reader last opened it (script.js): the planet beats and a ring
@@ -3772,6 +3781,7 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   .main-nav { gap: 0; }
   .main-nav a { padding: 6px 8px; }
   .main-nav a:not([aria-current="page"]):not(.has-news) .nav-orb { display: none; }
+  .main-nav a:not([aria-current="page"]):not(:hover) { border-color: transparent; background: none; }
 }
 
 @media (max-width: 900px) {
