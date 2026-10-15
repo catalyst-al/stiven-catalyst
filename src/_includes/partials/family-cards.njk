@@ -6,7 +6,7 @@
     {% set planet = family %}{% set planetKey = "card-" + family.id %}{% include "partials/family-planet.njk" %}
     <span class="family-card-text">
       <span class="family-role">{{ family.name }} · {{ family.scope | t(lang) }}</span>
-      <strong>{{ family.role | t(lang) }}</strong>
+      <strong data-fit>{{ family.role | t(lang) }}</strong>
       <span class="family-line">{{ family.line | t(lang) }}</span>
       <span class="family-count">{{ ("1 tool" if count == 1 else "{n} tools") | t(lang) | replace("{n}", count) }} <span aria-hidden="true">{{ "→" if familyLink else "↓" }}</span></span>
     </span>
