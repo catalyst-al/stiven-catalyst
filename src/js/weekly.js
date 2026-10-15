@@ -99,6 +99,20 @@
       } catch {}
     };
 
+    // After a click on a month, a topic or "show more", the covers come in one after another (styles.css, .is-entering).
+    const reveal = (from = 0) => {
+      const shown = items.filter((item) => !item.hidden).slice(from);
+      shown.forEach((item) => item.classList.remove("is-entering"));
+      void document.body.offsetWidth;
+      shown.forEach((item, i) => {
+        item.style.setProperty("--i", Math.min(i, 12));
+        item.classList.add("is-entering");
+      });
+    };
+    items.forEach((item) => item.addEventListener("animationend", (event) => {
+      if (event.target === item) item.classList.remove("is-entering");
+    }));
+
     filter.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-month], button[data-block]");
       if (!button) return;
@@ -106,11 +120,13 @@
       else state.block = button.dataset.block;
       state.limit = page;
       render();
+      reveal();
     });
     moreButton.addEventListener("click", () => {
       const before = items.filter((item) => !item.hidden).length;
       state.limit += page;
       render();
+      reveal(before);
       // Keyboard and screen-reader users go on from the first cover that just appeared.
       items.filter((item) => !item.hidden)[before]?.querySelector("a")?.focus();
     });
