@@ -270,6 +270,11 @@ button, input, select { font: inherit; }
 [data-theme="light"] .icon-moon { display: block; }
 
 .menu-button { display: none; }
+/* The three lines of the menu button turn into a cross while the menu is open. */
+.menu-line { transform-origin: 12px 12px; transition: transform .35s cubic-bezier(.22, 1, .36, 1), opacity .2s ease; }
+.menu-button[aria-expanded="true"] .menu-line:nth-child(1) { transform: rotate(45deg) translateY(5px); }
+.menu-button[aria-expanded="true"] .menu-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-button[aria-expanded="true"] .menu-line:nth-child(3) { transform: rotate(-45deg) translateY(-5px); }
 
 /* Homepage hero: the Catalyst light and the tool families on its orbits (js/cosmos.js).
    It stays a dark stage in both themes. */
@@ -3691,7 +3696,32 @@ html:not(.js) .filter-bar { display: none; }
     border-bottom: 1px solid var(--line);
     box-shadow: var(--shadow);
   }
-  .mobile-panel[data-open="true"] { display: grid; gap: 16px; }
+  /* The menu slides down from under the header, the page behind it dims, and its items follow one after another;
+     closed, it is hidden (visibility), so neither the keyboard nor a screen reader reaches it. */
+  .mobile-panel {
+    display: grid;
+    gap: 16px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-12px);
+    box-shadow: var(--shadow), 0 100vmax 0 100vmax rgba(0, 0, 0, 0);
+    transition: opacity .25s ease, transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, visibility 0s linear .35s;
+  }
+  .mobile-panel[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    box-shadow: var(--shadow), 0 100vmax 0 100vmax rgba(0, 0, 0, .38);
+    transition: opacity .25s ease, transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s ease, visibility 0s;
+  }
+  .mobile-panel > * { opacity: 0; transform: translateY(-8px); transition: opacity .2s ease, transform .2s ease; }
+  .mobile-panel[data-open="true"] > * { opacity: 1; transform: none; transition: opacity .35s ease, transform .45s cubic-bezier(.22, 1, .36, 1); }
+  .mobile-panel[data-open="true"] > :nth-child(1) { transition-delay: .05s; }
+  .mobile-panel[data-open="true"] > :nth-child(2) { transition-delay: .09s; }
+  .mobile-panel[data-open="true"] > :nth-child(3) { transition-delay: .13s; }
+  .mobile-panel[data-open="true"] > :nth-child(4) { transition-delay: .17s; }
+  .mobile-panel[data-open="true"] > :nth-child(5) { transition-delay: .21s; }
+  .mobile-panel[data-open="true"] > :nth-child(6) { transition-delay: .25s; }
   .mobile-panel a {
     font-family: var(--display);
     font-size: 24px;

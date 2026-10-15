@@ -45,3 +45,34 @@ test('links are fetched ahead, and the Content Security Policy allows exactly th
     assert.ok(html.match(/script-src([^;]*)/)[1].includes(hash), `${file}: the rules' hash is in script-src`);
   }
 });
+
+test('the menu slides open and its button turns into a cross; closed, nothing in it can be reached', { skip: !hasSite }, () => {
+  const nav = built('publications.html').match(/<button class="menu-button"[\s\S]*?<\/button>/)[0];
+  assert.equal(nav.match(/class="menu-line"/g)?.length, 3, 'three lines that can move');
+  assert.match(css, /\.menu-button\[aria-expanded="true"\] \.menu-line:nth-child\(1\) \{ transform: rotate\(45deg\) translateY\(5px\); \}/);
+  const narrow = css.slice(css.indexOf('@media (max-width: 900px) {'));
+  assert.match(narrow, /\.mobile-panel \{\s*display: grid;[\s\S]*?visibility: hidden;/, 'closed, the menu is hidden, not only transparent');
+  assert.match(narrow, /\.mobile-panel\[data-open="true"\] \{\s*visibility: visible;/);
+});
+
+test('a tap on the dimmed page closes the menu and presses nothing underneath', () => {
+  const { JSDOM } = require('jsdom');
+  const html = `<html><body><header class="site-header"><button data-menu-toggle data-menu-label="Menu" data-close-label="Close" aria-expanded="false"></button>
+    <nav data-mobile-panel data-open="false"><a href="#a">A</a></nav></header><main><button id="under">Under</button></main></body></html>`;
+  const dom = new JSDOM(html, { runScripts: 'outside-only' });
+  const { window } = dom;
+  window.eval(fs.readFileSync('src/script.js', 'utf8'));
+  const doc = window.document;
+  const panel = doc.querySelector('[data-mobile-panel]');
+  let pressed = 0;
+  doc.getElementById('under').addEventListener('click', () => { pressed += 1; });
+  doc.querySelector('[data-menu-toggle]').click();
+  assert.equal(panel.dataset.open, 'true');
+  const under = doc.getElementById('under');
+  under.dispatchEvent(new window.MouseEvent('pointerdown', { bubbles: true }));
+  under.click();
+  assert.equal(panel.dataset.open, 'false');
+  assert.equal(pressed, 0, 'the tap only closed the menu');
+  under.click();
+  assert.equal(pressed, 1, 'with the menu closed, the page works as before');
+});
