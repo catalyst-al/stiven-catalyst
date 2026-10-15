@@ -7,7 +7,8 @@
 {%- import "partials/issue-filter.njk" as filter -%}
   <section class="shell page-hero weekly-hero">
     <p class="eyebrow">{{ A.eyebrow }}</p>
-    <h1>Management <span class="weekly-mark">Review</span></h1>
+    {#- "MANAGEMENT" is too long a word for the full display size on a phone: set as a long title, like the other archives. -#}
+    <h1 class="hero-long">Management <span class="weekly-mark">Review</span></h1>
     <p class="lede">{{ A.lede }}</p>
     {#- The second check of 12 October, and what it changed (weekly.checked). -#}
     {%- set corrections = [{ date: W.checked.date, t: W.checked.archive, series: true }] %}
