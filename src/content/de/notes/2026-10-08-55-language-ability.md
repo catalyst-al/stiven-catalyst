@@ -1,4 +1,4 @@
 ---
-quote: "Eine Sprache noch nicht gut zu sprechen heißt nicht, in seiner Arbeit nicht gut zu sein."
+quote: "Eine Sprache noch nicht gut zu sprechen heißt nicht, dass man seine Arbeit nicht gut macht."
 date: 2026-10-08
 ---

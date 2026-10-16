@@ -1,4 +1,4 @@
 ---
-quote: "Kur përgjigjja e analizës është vetëm “punonjësi ishte i pakujdesshëm”, shumë shpesh analiza ka mbaruar shumë herët."
+quote: "Kur e vetmja përgjigje e analizës është “punonjësi ishte i pakujdesshëm”, shpeshherë analiza është ndalur para kohe."
 date: 2026-10-12
 ---

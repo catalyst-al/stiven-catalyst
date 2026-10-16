@@ -1,4 +1,4 @@
 ---
-quote: "Trajnimi nuk matet nga sa mirë e shpjegoi trajneri. Matet nga sa i njëjtë bëhet rezultati kur trajneri largohet."
+quote: "Trajnimi nuk matet me atë se sa mirë shpjegoi trajneri. Matet me atë se sa i njëtrajtshëm bëhet rezultati pasi trajneri largohet."
 date: 2026-10-08
 ---

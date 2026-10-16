@@ -1,4 +1,4 @@
 ---
-quote: "Mund ta tregosh metodën e organizimit të informacionit pa e publikuar informacionin sensitiv mbi të cilin mbështetet puna."
+quote: "Mund ta tregosh metodën si e organizon informacionin pa publikuar informacionin e ndjeshëm mbi të cilin mbështetet puna."
 date: 2026-10-08
 ---
