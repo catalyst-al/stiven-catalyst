@@ -1,0 +1,452 @@
+# Longing for Durrës: the English translation of Mall për Durrësin, page by page.
+# It follows sq.txt page for page; scripts/book-edition.py sets it in the book's own design.
+# See README.md in this folder.
+
+language: en
+title: Longing for Durrës
+running-head: LONGING FOR DURRËS
+author: STIVEN JANAQI
+year: 2026
+
+== 01
+cover-title: LONGING FOR | DURRËS
+subtitle: A city, a youth, a sea that stays
+
+== 02
+title: Longing for Durrës
+subtitle: A city, a youth, a sea that stays
+dedication: For the friends of the years when our greatest wealth was time; for those who left, for those who stayed, and for Durrës, which, in its own way, did both.
+note-heading: A NOTE ON THE NARRATIVE
+note: The dialogues and some details of the scenes are literary reconstructions based on the memories as told, not transcripts. The station scene in Germany is a literary imagining of longing, not a confirmed episode. No names or biographies of friends have been added.
+note: The photographs in this edition accompany the narrative; they do not necessarily document the place or time of the scene.
+edition: 2026 / Third version, revised / Translated from the Albanian
+
+== 03
+contents: Contents
+contents-note: Seven chapters, a prologue and an epilogue.
+
+== 04
+kicker: PROLOGUE
+chapter: The second city
+
+I don’t know when Durrës began to turn into a memory. When I was small, it wasn’t a city. It was simply the way the world around me had been built: a street that took you somewhere, the noise of the stairs in the apartment block, the salt air that came in without knocking and the voices that rose from below. The sea was somewhere near, even when you couldn’t see it.
+
+Children don’t live in cities. They live in short distances. From home to school, from school to friends, from a corner where you waited for someone to another where going home could be put off a little longer. We measured how far we could walk before hunger caught up with us, how late we could get back without hearing the usual question. Sometimes the conversation had run out, but we kept walking. Nobody wanted to be the first to say he had to go.
+
+Today, when I think about it, I realise that first city no longer exists in that form. Some streets are still there and some buildings still keep their windows, but I no longer know how to walk them with the impatience of a boy who has left his school bag at home and is coming down the stairs two at a time. What is missing among them is the time when it seemed everything would last.
+
+I’m not writing to bring it back. I want to stop at the things I used to run past.
+
+== 05
+section: Two cities, one memory
+
+When I come back now, it feels as if there are two cities in Durrës at once. One is the city I see: denser, noisier, with new facades, building sites and cars looking for space. The other walks beside me unseen. It is the city of school, of friends, of afternoons when evening came late and we believed life too would come just as slowly.
+
+The two overlap. On a present-day corner I look for an old trace and, without realising it, slow down in front of a place other people pass without turning their heads. They have their own things to do; I am trying to remember which way a friend used to come from. Sometimes all that comes to me is the way he raised his hand, not his whole face.
+
+I don’t always know whether I miss the place or the age I was when I was there. Memory gives the city the face we once had, and then convinces us that it is the city that has changed most. But there are changes longing can’t invent: a passage blocked off, a different shop, a name you no longer find above the door.
+
+I have learned streets in other cities; I have made a life that doesn’t belong to this place alone. Even so, one old sentence is enough to sit me down again at a table where we used to laugh. For a few moments I even know where to rest my elbow.
+
+This book follows those small returns. Not everything has stayed clear. Some places I remember in detail; of some days, all I have left is someone’s voice.
+
+== 06
+kicker: CHAPTER I
+chapter: The streets before we had watches
+
+[image]
+
+Before we had watches on our wrists, we had the light. We knew how late it was from the way the sun fell on the blocks, from the shadows lengthening on the pavement, from the voices of the grown-ups who began calling names from the balconies.
+
+The streets of childhood weren’t beautiful in the sense I give the word today. They were simply ours. A crooked tree, the entrance to a block, a kerb we sat on: each one mattered without needing a story.
+
+Back then Durrës seemed endless to me. After one bend came another, and a reason not to go home yet could always be found. Home was close. That let us feel far away.
+
+== 07
+kicker: CHILDHOOD
+section: At the foot of the block
+
+In memory, my childhood has many sounds. There are gates closing, keys clattering, bicycles going past and voices that swell in the afternoon and thin out as soon as it gets dark. From one window came the smell of lunch; from another, a television left on loud. When a name was called from above, even those of us who didn’t have that name stopped for a moment.
+
+Home wasn’t only inside the walls. It began at the door and stretched all the way to the street. There were days when you only had to go downstairs to find someone. Other times we went out and nobody had come. We waited in the same spot, pushed the dust around with the toe of a shoe, watched the entrances. Then one of them appeared, and waiting was no longer called waiting.
+
+When I think about those years, I am struck by how little we needed. Not because everything was easy. Families had their troubles; the grown-ups talked about money, work, prices, people who had left. The talk reached us through the open kitchen door. We understood the odd word and left the rest where it was. Down in the street, they were waiting for us.
+
+I thought the grown-ups knew what they were doing. Later I learned that they were improvising too, but back then my sense of safety took the shape of a light that would be on when I came home.
+
+The sea was part of that safety too. I knew where it was. The air changed as I got closer and the streets opened out little by little, until there were no more blocks ahead. I took that space as something that was mine, just like the yard. It never crossed my mind that one day I would look for it in photographs.
+
+== 08
+section: The things we didn’t photograph
+
+[image]
+
+Childhood knows nothing of nostalgia. It believes that everything that exists today will still be there tomorrow. So it doesn’t look carefully at the entrance to the block, doesn’t photograph the school bag thrown into a corner, and doesn’t think that the neighbourhood vendor’s voice might not be heard again.
+
+I didn’t keep these things on purpose either. They came back to me later, in pieces: a light over the stairs, sand left in a shoe, one hand looking for the key while the other holds the bag. Sometimes I remember the tiredness in my legs and not where we had been.
+
+Maps hold the monuments; details hold the person.
+
+When I see the city from above, the streets join into an orderly, almost calm picture. You can’t see the waiting on corners, or the quarrels over things that didn’t matter, or the two steps taken back to tell a friend one more thing. The Durrës of the photograph can be taken in at a glance. For the other one, I still have to go down into the street.
+
+== 09
+section: The sea ahead of us
+
+[image]
+
+Back then the sea was ahead of us, not behind us. We didn’t count the years going by. We counted how much time we had until we went home, how much money we had left in our pockets, who was coming and who was late.
+
+Summer wasn’t always as beautiful as it looks in photographs. There was heat that stuck your shirt to your back, thirst, sand that wouldn’t come out of your shoes, and the odd afternoon when we were bored and didn’t know what to do. I remember even that boredom fondly, though back then I would have given anything to escape it.
+
+In a summer picture, chairs wait in the shade. In front of them you can set any conversation you miss. I don’t want to fill them all. I want to leave one empty, the way we used to when we were waiting for the friend who said he was on his way and hadn’t even set off.
+
+== 10
+kicker: CHAPTER II
+chapter: When school ended, the city began
+
+The nine-year school gave the city a different map. There was the way to lessons, the way home and, above all, the little detours we made so that the way home would last longer. An unnecessary turn could give us another quarter of an hour together.
+
+At the end of the lesson, bags were shut before the last sentence was quite over. In the corridor the noise rose at once. We came out in the kind of hurry that didn’t stop us from then standing around for a long time in front of the school, waiting for someone who was late. With one hand we held our bag strap and with the other we waved at him to hurry up. As soon as he arrived, nobody was in a hurry any more.
+
+That was where friendship started to be about more than proximity. We didn’t spend time together only because we lived near each other. We chose each other. We shared embarrassment, ambition, the fear of looking ridiculous and the wish to seem a little more grown-up than we were. A bad mark could be survived; it was harder to be seen blushing.
+
+A joke that had started at break would carry on into the street. To get it, you had to have been there, to have heard the tone, seen the face. We couldn’t tell it properly to anyone else, and we liked that: it was something of ours.
+
+When the last bell rang, lessons ended. The city began.
+
+== 11
+section: Walking as a way of being together
+
+There is an age when walking is the best form of conversation. Your bag weighs you down, but you don’t go home. Even the one who complains that it’s a long way comes anyway.
+
+The one who had gone on ahead turned and walked backwards. His bag strap kept slipping and he hitched it up with his shoulder without breaking off what he was saying.
+
+— Don’t act like you know where we’re going.
+— I do know, man.
+— So where?
+— Just walk. What’s the rush?
+— I’m not in a rush. I’m hungry.
+— We worked that out by second period.
+
+We laughed. The hungry one overtook us, as if to show that if it were up to him we would have been there long ago. We followed him without deciding anything.
+
+On those walks we talked about who had said what, who liked whom and who had promised to study and hadn’t opened a book. When the pavement narrowed we went in single file; a sentence passed from one to the next and the last one asked for it to be repeated. A car would drown out our voices. Then we started again from the beginning, even though the joke had lost half its charm.
+
+What has stayed with me from those afternoons is their faces as they laughed, not necessarily the words. Memory makes its own choices. It wipes out the reason for the laughter and keeps the laughter itself.
+
+Where our ways parted, we waited for the other to finish. By then our bags hung from one shoulder only.
+
+== 12
+section: The first split in the map
+
+The last years of the nine-year school brought a feeling we couldn’t name. Everyone was talking about secondary school, about the directions we would take, the places we would go. The grown-ups said it as a practical matter. For us it was the first split in the map.
+
+Until then we had thought friendship was enough to keep people on the same road. Now the question of where each of us would enrol came into the conversation and didn’t let us joke for long. One had made up his mind; another said he didn’t know yet and asked the first again, as if the answer might have changed since the day before.
+
+Nobody made a speech. There was no day when we said that from tomorrow everything would change. First someone was missing one afternoon. Then someone else had new friends. The conversation that used to go on every day grew rarer and, when we did meet, we had to explain to each other names that until yesterday had not been part of our lives.
+
+Still, for a few minutes everything fell back into place. A way of talking was enough, that shrug we knew so well, and the old road opened up again.
+
+At the end of those years, Durrës seemed bigger. We would be moving through parts of it that hadn’t belonged to us before, towards corridors where we would have to introduce ourselves all over again. That drew me and frightened me at the same time. I didn’t want to stay the person I had been, but nor did I want to lose the people who knew me without my having to explain myself.
+
+== 13
+kicker: CHAPTER III
+chapter: Gjergj Kastrioti Skënderbeu
+
+My first year at Gjergj Kastrioti Skënderbeu was my way into a larger world. The same city, but a different crowd. Corridors where I didn’t know every face, voices that no longer belonged only to the neighbourhood or the old class, people who came with other ways of talking and laughing.
+
+At that age every beginning feels like an exam, even when nobody is asking you anything. Where to sit, who to be with, how much to talk. I kept my bag close even when there was no reason to. I watched where the others had sat down and tried not to look as if that was exactly what I was doing.
+
+The nine-year school had left me a ready-made place among people. Here nobody yet knew how I reacted to a joke, what made me uncomfortable, whether my silence was shyness or indifference. I misjudged them too. A few faces that had seemed cold to me began to feel close the moment I heard them laugh.
+
+Little by little, I learned the voices. I came to know the footsteps of the one who hurried in, the chair someone always dragged back hard, the moment in class when a joke began before anyone had said it. School began to feel ordinary to us.
+
+I didn’t notice the day I stopped thinking about where I should sit. I simply walked in and went to my seat.
+
+== 14
+section: A new social world
+
+In class, people began to take shape. Not as names in the register, but as presences you could tell apart without turning your head. One talked while tapping his pen on the desk. Another looked up from his notebook only when he heard something he couldn’t let pass without objecting.
+
+— I know what I’m going to do, said the one with the pen.
+— Have you done your homework?
+— I’m talking about life, man. I’m going to be rich.
+— But how?
+— I haven’t worked that bit out yet.
+
+The one with the notebook didn’t laugh straight away. He closed the cover, put his elbows on it and asked what he could do well enough to be paid for. The other looked at him for a moment, then pointed the pen at him:
+
+— I’m not taking you on as a partner. You’ve spoiled it for me already.
+
+This time he laughed too. The talk moved on to the cars we would buy, though none of us was bothering about how the money would be made. In the end the pen ran out and its owner asked to borrow another.
+
+Today I can smile at our certainty, but I don’t want to judge it from a distance. We needed to say the future out loud, to hear it come out of our own mouths, even when we knew nothing about the road there.
+
+Later, the one who argued with you might be the only one who waited for you after school. That confused the quick lines we had drawn between people.
+
+== 15
+section: The city as a second classroom
+
+After lessons, Durrës became a second classroom. There we learned how to be with different people, how to cover a disappointment with a joke, how to tell that someone wasn’t all right even when he said he was. We didn’t always manage. Sometimes we laughed exactly where we should have kept quiet.
+
+The walking went on. The conversation left school and entered life without any visible border: from an exam to work, from work to money and from there to the word “abroad”. That word didn’t describe any particular country. It was the place where our wishes hadn’t yet come up against obstacles.
+
+— I’m going to leave, someone would say.
+— Leave for where?
+— I’ll find somewhere. Why, what would I do here?
+
+Another would object that something could be done here too. We asked him what, and he got annoyed, because he hadn’t started the conversation to be held to account. A little further on, he was the one complaining about the city. We didn’t let him get away with contradicting himself. “But you were just defending it!” He waved us away and walked on ahead.
+
+We wanted this place to give us more. We didn’t yet know what it would mean to live somewhere else, but we talked as if the hardest part were choosing where.
+
+Today I hear those conversations differently. Back then they were rehearsals without consequences. You could set off for one country at the start of the street and decide to stay by the end of it. Then it was time to go home, and each of us went to his own house, in the same city.
+
+== 16
+kicker: CHAPTER IV
+chapter: “Hen1” and the hours nobody counted
+
+At the crêperie we knew as “Hen1”, ordering was often just the excuse for the table to keep us a little longer. In our conversations the name served as a meeting point: there was no need to give directions or to explain what we would be doing there.
+
+What has stayed with me from those hours is the movement around the table. A chair was pulled further out to make room for whoever came late; bags passed from one side to the other, and the conversation broke off to tell him what he had missed. He wanted to hear it from the beginning. We all started at once and you couldn’t make out a word.
+
+Then came the usual things: the smell of warm batter, paper being unfolded, a corner of napkin crumpled between fingers. We talked with our mouths full, objected without waiting for the end, and forgot the question because someone had slipped another story into the middle. Outside, people went by; every so often one of us looked up and the conversation took a new turn.
+
+The places of youth aren’t measured by their architecture. More than what a wall looked like, I remember how close together we sat and how little it bothered us that we had no particular plan for the evening.
+
+“Five more minutes,” someone who had to leave would say. We didn’t count them. When he finally got up, he had to come back for something he had forgotten, and there he was again, standing beside us.
+
+== 17
+section: The luxury of shared time
+
+At the table, each of us brought his own version of the future. One wanted money, one a job he liked, one just for nobody to tell him what to do. That last wish appealed to everyone, until it came to deciding where we would go after the crêperie. Then everyone wanted to decide for the others.
+
+— When we’re thirty, we’ll come back here.
+— You, thirty? Come on.
+— Why, what’s wrong with me?
+— You’ve been saying “I’m off” for ten minutes. By then you might have got up.
+
+He grabbed his jacket as if to prove it. Someone made room for him to get past, but another asked what we would order when we were rich, and the jacket stayed on his knees. The suggestions began. One promised he would pay for everyone; we reminded him at once that he had no intention of doing the same that evening.
+
+Thirty seemed a faraway place. We could fill it with whatever we liked, because it hadn’t yet come to ask anything of us.
+
+Today a get-together has to find room between work shifts, family, distance and the tiredness you don’t foresee when you say you’re free on Saturday. The conversation starts out picking a day and ends with “we’ll talk”, not because we don’t want to see each other, but because each of us is trying to open up an hour inside his own life.
+
+At “Hen1” that hour was there without our asking for it. We could stay even when we had nothing left to say.
+
+== 18
+section: Before we scattered
+
+A joke had gone a little further than it should have. The one who was usually first to laugh sat this time with his eyes on the paper crumpled in his hand. We carried on talking, relieved that he wasn’t objecting.
+
+Someone tried to put him back at the centre of the jokes. Someone else touched his arm.
+
+— Leave it now.
+— Why, what did I say to him?
+— He heard it once. Come on, finish what you were saying.
+
+There was no great silence. A chair could be heard moving and the conversation went elsewhere. The one who had withdrawn into himself stayed that way a little longer; then he said something small, a correction that didn’t matter, and we answered him with more eagerness than the sentence called for.
+
+I don’t know how often we caught these moments in time. Our friendship had egos in it too, comparisons and pride. When I say I remember those years with longing, I don’t want to erase the days when one of us went home quieter than he had come.
+
+But we often found a simple way to come close again. A seat kept for someone, a phone call for no reason, a question about homework. Not everything got resolved; some things were only covered over. I understand that better now.
+
+When I think of us, I don’t see us at the end of our roads. I see us before we scattered, still able to say “tomorrow” to each other without opening a calendar. Even when we were angry, we knew where we would find each other.
+
+== 19
+section: A door
+
+[image right]
+Some memories have no address. They have only a door. A worn handle, a light over the entrance, the sound of the key as it turns. In front of a door like this, I only have to see a scratch near the lock to remember the hurry of getting home.
+
+After the hours with friends, the climb up the stairs slowly drew us out of the noise of the group. The conversation still went on in my head, but in the hallway there were only footsteps. I looked for the key in the wrong pocket, held my bag in one hand and waited for that small sound that divided the day in two.
+
+Inside, things hadn’t waited for my account to carry on. There were dishes in the kitchen, voices from another room, the question of whether I had eaten. I answered briefly. It seemed to me that nothing worth telling had happened, because we had only gone for a walk and sat around for a little while.
+
+Today I wish I knew how to tell that “little while”. To remember how I had leaned against the door before going in, what I was thinking and why I didn’t hurry straight to my room. Since then I have held other keys. My hand soon learned the new lock; memory has taken longer.
+
+== 20
+kicker: CHAPTER V
+chapter: The city being built over our memory
+
+[image]
+
+Cities have to change. Durrës too needed to grow, to repair, to create jobs and better homes. But we, who once wanted only for it to become “more”, began to ask what it was losing as it grew bigger.
+
+In the street, change wasn’t a word. It was dust that stayed on your shoes, a building-site fence that pushed you off the pavement, a noise that started before the city was fully awake. Behind the fence appeared the clean image of the building to come. Outside it, you had to find a way past.
+
+That division made me angry: inside the promised image there was always light and space; in the real street, you had to draw in your shoulders to make room for someone else. And we were supposed to accept this as a small nuisance while we waited for something big.
+
+== 21
+section: When a landmark is lost
+
+There is an urban pain that comes not from ruins but from their absence. You pass a place and know that something was there, but you can no longer rebuild it accurately in your mind. A courtyard, a facade, a low space now replaced by storeys. Memory tells you: it was here. Your eyes reply: now it is this.
+
+For a moment I am ashamed that I don’t remember enough. Then I get angry. Why should I be the archive of a stretch of street? Why should everything that couldn’t protect itself with a plaque survive only if we keep it in our heads?
+
+I have nothing against a new home. I don’t want anyone to live with damp so that my memory can find the facade as it left it. But that explanation can’t be used for every loss. A pavement taken over is no improvement to the life of the person walking on it; a window that looks only at a wall gets no more light because the wall is new.
+
+It is precisely in these spaces, treated as if they belong to no one until someone takes them, that I feel the thirst for profit. To someone selling, an empty space can be a lost opportunity. For us it was the place where we stopped without buying anything. In the end, we are left to walk on.
+
+A city isn’t measured only by how much it builds. It is also measured by what it decides not to touch. I didn’t think about this when I was young. Now it comes to mind whenever I search for a corner with my eyes and realise that even the explanation “by the place where it used to be” is becoming hard to follow.
+
+== 22
+section: Big words and small sums
+
+While the city rose upwards, not everyone rose with it. We understood this best at the table, when a plan that had just been announced with enthusiasm began to break down into expenses. How much it cost, how much could be saved, what had to be kept back for next month.
+
+In a conversation like that, the question about a job didn’t end with its name. You had to ask about the hours, the pay, the journey there. The one who had mentioned it tried to show the good side. The others did the sums out loud, until they realised they were shrinking his joy and began saying that, anyway, it was a start.
+
+We used that word often: start. As if the hard part were always temporary, as if we only had to hold out a little longer and the road would open by itself.
+
+On television you heard big words: development, opportunity, the future. In our conversations there were wages, rent, work, leaving. Between these two languages lay a space where each of us had to find his own solution. The promises wore me out before they had even finished, not because I didn’t want to believe them, but because I always had to come back to the same sum.
+
+We weren’t experts in economics. We were young people beginning to understand that some dreams cost more than we could pay. The next day, the city opened again. Someone raised a shutter, someone waited for the bus to work, and a postponed plan was still a plan. That wasn’t nothing, but it wasn’t everything we had asked for.
+
+== 23
+section: When the city becomes a stranger
+
+[image]
+
+In the photograph with the snow, Durrës looks as if it has woken up in someone else’s body. The palm trees, the promenade, the footprints on the white: the familiar things are there, but the eye has to find them all over again. I don’t know when it was taken; what stays with me is the strangeness of the sight.
+
+For a while the white hides the differences. Surfaces look unbroken, and the footsteps of the few people about become more visible than the street they walk along. The mind wants to call the city quiet, but the photograph has no sound; I may have given it the quiet myself.
+
+This picture reminds me how easily we replace a place with the impression we have of it. In summer we remember it full, in winter empty. Then a photograph appears that obeys neither and forces us to look longer.
+
+The small figures at the bottom of the picture aren’t contemplating a memory of mine. They are living a day of their own lives. For a moment, I care more about where they are going than about what I want to see.
+
+== 24
+kicker: CHAPTER VI
+chapter: Departures
+
+At first, departures were sentences. “I’m thinking of leaving.” “I’ve got an opportunity abroad.” “I’ll give it a go.” They were said in the middle of some other conversation, the way you say you have something to do next week. Then someone asked when, and the conversation stopped there.
+
+If there was no date yet, we could carry on with the evening almost as before. Once the date had been said, we began counting without letting it show. How many more times would we see each other before then? Did the last day fall at a time when we could all be there?
+
+Nobody said: I’m leaving the life we have had together. People left for work, for study, for better wages, to test themselves. Our questions were about the papers and the journey. We didn’t know what to ask about the afternoons that would stay here.
+
+The absence didn’t show straight away. For a while you kept thinking of calling the other one for a coffee, and only when you picked up the phone did you remember he wasn’t nearby any more. A number with a different code made tangible what the word “abroad” had kept so vague.
+
+Then I too came to know life away from Durrës. I understood how little room the word “work” takes up in a conversation and how much it can hide: tiredness, fear, small achievements, another language. “I’m fine,” you say. And it’s even true. It just doesn’t tell the whole story.
+
+== 25
+section: On the other side of the morning
+
+To explain longing, I think of an ordinary morning in Germany. Not a big event: a station, the light over the departures board, coats buttoned up to the top. An announcement comes over the loudspeaker. People move towards the spot where the doors will open.
+
+I know the way. I’m not lost, and I’m not waiting for someone to rescue me from this life. I have learned the language of everyday things, the timetables, the way a job should be done. It is precisely within this security I have earned that a small thing can shift me out of place.
+
+One of the passengers hitches his bag up with his shoulder. The movement is familiar. For a moment I no longer see his coat but a school-bag strap slipping and the friend walking backwards, telling us not to rush. A smile comes to me of its own accord. The man in front of me hasn’t said anything.
+
+The train comes; the doors open and I get on with the others. My phone is in my hand. I could write to someone, but the message I have in mind isn’t a question. It’s just: “I just remembered something.”
+
+Here I have people, obligations, an everyday life I have built. Longing doesn’t deny them. It doesn’t tell me that everything would be better if I were somewhere else. It only reminds me how easy it once was to call a name in the street and have the head I was waiting for turn round.
+
+My face as it is now appears in the glass. Buildings pass in front of it while I am still searching for the words to a message that began many years ago.
+
+== 26
+section: Staying is a choice too
+
+Not everyone left. Some stayed because they wanted to, some because life tied them there. Even an answer that seems simple can hold a family inside it, a job, an obligation that isn’t mentioned at the table.
+
+Over the years, dreams began to be put off. “Next year.” “When I’m a bit more settled.” “When I’m in a better position.” Those of us who lived far away used these sentences too. Only the obstacles had different names. That should have made us more careful with the advice we gave each other.
+
+A friendship at a distance isn’t always lost for lack of love. It is lost, too, through the small things we no longer see. The other has a new colleague, a daily worry, a joy he has shared with someone who was close by. You learn the outcome, but you weren’t there while he was waiting.
+
+When we met, we sometimes went straight to the past. There we didn’t have to introduce anyone. A name was enough and the conversation opened up. But the life of today sat beside us and needed patience to be told. We had to learn to listen to stories we hadn’t been part of, too.
+
+Those who stayed hadn’t kept our places empty. They had gone on living. I understood this with my head before I could accept it without a small sting. I wanted to find them well, but part of me also wanted them to have waited for me.
+
+I have had to let go of this silent unfairness. Only then could a return become a meeting, and not an inspection of what I had left behind.
+
+== 27
+kicker: CHAPTER VII
+chapter: Returns
+
+[image]
+
+Returning isn’t the opposite of leaving. When you leave, you leave behind a city you think you know. When you return, it has opened new doors, closed others, gathered people you don’t know and lost some your eyes are still looking for.
+
+On a return you become a tourist of your own memory. You don’t necessarily photograph the monuments. You stop at a bend, a facade, a light over the street. You look for proof that you didn’t invent that old city.
+
+A familiar view calms me, but it doesn’t tell me everything. Standing in front of it could be me, come back, or someone seeing it for the first time. The city lets both of us stop. It doesn’t ask how long we have been away.
+
+== 28
+section: Two versions of myself on the same street
+
+There are streets I walk more slowly now. The grown man sees the traffic, the facades, the changes. The boy I was looks for his friends, the school timetable, some reason not to go home yet. Every so often one of them stops the other from seeing clearly.
+
+Memory isn’t an accurate map. It has stretched some distances and shortened others. A building seems smaller than I remembered. The walk that used to take us an afternoon is soon over when I do it alone. It wasn’t its length that held us up.
+
+Near a school, the noise of break time still has that sudden burst. I don’t recognise a single face. A group stops at the gate, one turns back to wait for someone and the others complain without leaving. For a moment I want to see them as we were. Then someone laughs in a completely different way and the comparison falls apart.
+
+It does me good that it falls apart. They aren’t there to act out my youth. They have their own conversations, jokes I don’t get, a city still widening out in front of them. What I call a changed place may be, for them, the first place.
+
+I walk on without trying to find myself in each of them. I pass an entrance I have no business going into and a shop I never knew. My stops no longer belong to a shared map. And yet, when someone asks me which way to go, my hand rises to point before I have thought of the answer.
+
+== 29
+section: To love it without idealising it
+
+I love Durrës, but love doesn’t make it innocent. There are things that make me angry, and I don’t want to hide them behind a pretty photograph. Even so, anger doesn’t give me the right to call the life that people go on living here lost.
+
+When I was young, I wanted to leave because I was looking for more. Today I can admit that I have found important things far away and that I still miss something, without turning one into an accusation against the other. I don’t need to choose Durrës against every city I have lived in.
+
+There are places more orderly, calmer for my everyday life. But here a street can remind me how I used to stand, what I did with my hands when I didn’t know what to say, how I tried to look confident in front of people who wanted the same thing.
+
+They weren’t all happy days. We waited, we got fed up, we wanted to be someone else. Memory tends to leave these things out and keep only the laughter. I have to stop it now and then. Otherwise I wouldn’t be writing about the city I grew up in, but about the one I would have liked to have had.
+
+What I have here isn’t all visible. It is time spent in places that may serve other people today. I can’t ask them to keep every chair for me. I can sit down somewhere, listen to what is being said around me and give the city the chance to tell me something I don’t know.
+
+== 30
+section: A place at the table
+
+On a return, a meeting begins with practical things. Where are you, how long are you staying, what time do you have to leave. The phones go down on the table and the conversation starts carefully, trying to sum up whole months without tiring the other.
+
+Then an old expression comes up. Someone says it in the same tone, and for a few moments we don’t need to explain anything. Our bodies lean in over the table by themselves. We talk at the same time, correct each other over a detail nobody can prove, and laugh more than the story deserves.
+
+— Is that how you remember it?
+— Why, how was it?
+— Forget it, you always come out looking good in the end.
+
+One of us looks at his watch. This time we don’t tell him “five more minutes” with the old certainty. We know there may be someone waiting for him, work that can’t be put off, a part of his day we don’t know. He stays a little longer, but now we feel it as time he is giving us, not as something we simply have.
+
+When we get up, the conversation carries on standing. We have to step aside to let someone past. For a moment we are back where our ways parted after school, not wanting to go before the other has finished his sentence. Only the bags are gone.
+
+We haven’t gone back to what we were. We have managed to be together as we are now. That is less easy, but it isn’t less.
+
+I stay a moment longer on the pavement. The noise of chairs comes from behind me. Then I take the street that leads me out towards the water.
+
+== 31
+kicker: EPILOGUE
+chapter: In the end, the sea stays
+
+[image]
+
+After the streets, the voices and the meetings, I reach the sea. The wind stirs the clothes on my back. Among the stones the water runs in and draws back with a short sound, quite different from the one I give it when I remember it from far away.
+
+For a long time I have asked this view to calm me. I have given it names according to what I was missing: freedom, distance, longing. Today I don’t need to choose one. I stop and watch a small wave wet the stone a little higher than the others.
+
+The friends of that afternoon haven’t come back. Nor has the boy who thought only about how late he would go home. Yet their presence no longer needs me to see them in front of me. I have brought them with me in the way I stop.
+
+I stay without taking out my phone. This time I don’t want to save the view for another day. I want to be here for as long as it lasts.
+
+== 32
+section: The city within us
+
+When I think of Durrës, fragments come to me: a school corridor with the noise of break time, a bag slipping from a shoulder, the table at “Hen1”, the question from inside whether I have eaten. They don’t form an orderly picture. In some places memory stops; in others it passes whole years without showing me anything.
+
+I have wanted to come close to them without embellishing them until they ring false. The city of my youth had its hardships, families who counted their money, young people who couldn’t see where they would end up. There were also days when I couldn’t bear how close everything was and wanted to get as far away as I could. That impatience was mine too.
+
+Today I don’t ask the city to give me back my youth. Nor do I ask it to stop for those who are missing. Somewhere another group is waiting for a friend who is late. A chair is being pulled out to make room for him. It is beautiful, this life that doesn’t need us in order to go on, even when accepting it hurts a little.
+
+From the shore I turn my head towards the buildings. Not all the streets I have walked through can be seen, but I know they are there and that soon I will step back into their noise. I have a life to carry on with, not only a past to look for.
+
+I take with me what I can: a voice, the movement of a hand, a little of this evening’s light. The rest I leave in the street.
+
+quote: Durrës is not only the city where I left my youth. | It is the city where my youth goes on walking without me.
+
+== 33
+heading: One city. | Many ways to return.
+blurb: A school bag slipping from a shoulder. A table where nobody is in a hurry to get up. A door, a changed street, a message that sets out far from the city where it began.
+blurb: Longing for Durrës follows the youth, friendships, departures and returns of one man in the city that raised him. Not to find it untouched, but to recognise what has remained within it.
+quote: Durrës is not only the city where I left my youth. | It is the city where my youth goes on walking without me.

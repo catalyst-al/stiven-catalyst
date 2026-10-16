@@ -1,14 +1,16 @@
 {#- The book, shown on Publications and the About page. -#}
 {%- set bookUrl = "/books/mall-per-durresin.html" | local(lang) -%}
+{%- set book = books[lang or "en"] or books.sq -%}
+{%- set bookLang = (' lang="' + book.language + '"') if book.language != (lang or "en") else "" -%}
 {%- set cover = book.pages[0] -%}
   <section class="shell book-feature">
     <a class="book-object" href="{{ bookUrl }}" tabindex="-1" aria-hidden="true">
       <span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 900px) 240px, 300px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="lazy"></span>
     </a>
     <div class="book-feature-copy">
-      <p class="kicker">{{ "The book · in Albanian" | t(lang) }}</p>
-      <h2 lang="sq"><a href="{{ bookUrl }}">{{ book.title }}</a></h2>
-      <p class="book-subtitle" lang="sq">{{ book.subtitle }}</p>
+      <p class="kicker">{{ ("The book · in Albanian" if book.language == "sq" else "The book · translated from the Albanian") | t(lang) }}</p>
+      <h2{{ bookLang | safe }}><a href="{{ bookUrl }}">{{ book.title }}</a></h2>
+      <p class="book-subtitle"{{ bookLang | safe }}>{{ book.subtitle }}</p>
       <p>{{ "Seven chapters about growing up in Durrës: friends, the leaving and the coming back. Leaf through it page by page, like a real book." | t(lang) }}</p>
       <a class="button-primary" href="{{ bookUrl }}">{{ "Open the book" | t(lang) }}</a>
     </div>

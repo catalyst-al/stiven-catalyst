@@ -1,13 +1,14 @@
 """Turn the PDF of a book into the pages of the online book reader.
 
     pip install pymupdf pillow
-    python3 scripts/book-pages.py path/to/book.pdf
+    python3 scripts/book-pages.py path/to/book.pdf          # the Albanian original
+    python3 scripts/book-pages.py path/to/book.pdf en       # a translation (scripts/book-edition.py runs this itself)
 
-Writes, for "Mall për Durrësin":
+Writes, for "Mall për Durrësin" (a translation into src/media/books/mall-per-durresin/<lang>/ instead):
   src/media/books/mall-per-durresin/page-01.webp ...  one image per page, and page-01-2000.webp ... for sharp
                                                       screens (scripts/page_images.py)
   src/media/books/mall-per-durresin/social.jpg        the preview for social media
-  src/_data/book.json                                 page list, chapters and the text
+  src/_data/books/sq.json                             page list, chapters and the text (en.json, de.json)
 
 Run it again whenever a new version of the PDF is ready.
 """
@@ -24,10 +25,11 @@ from page_images import save_page
 SLUG = "mall-per-durresin"
 ROOT = Path(__file__).resolve().parent.parent
 MEDIA = ROOT / "src" / "media" / "books" / SLUG
-DATA = ROOT / "src" / "_data" / "book.json"
+DATA = ROOT / "src" / "_data" / "books"
+LANGUAGES = ("sq", "en", "de")  # the original, then the translations
 
 RUNNING_HEAD = 7.0  # the small "MALL PËR DURRËSIN" at the top of each page
-KICKER = 8.0        # "KAPITULLI I", "PROLOG"
+KICKER = 8.0        # "KAPITULLI I", "PROLOG", "CHAPTER I"
 CHAPTER = 21.0      # chapter titles
 SECTION = 15.0      # section titles inside a chapter
 
@@ -101,7 +103,7 @@ def contents(page):
     chapters = []
     for i in range(len(words) - 2):
         label, title, number = words[i], words[i + 1], words[i + 2]
-        if re.fullmatch(r"PROLOG|EPILOG|[IVX]+", label) and re.fullmatch(r"\d{2}", number):
+        if re.fullmatch(r"PROLOGU?E?|EPILOGU?E?|[IVX]+", label) and re.fullmatch(r"\d{2}", number):
             chapters.append({"label": label, "title": title, "page": int(number)})
     return chapters
 
@@ -139,20 +141,29 @@ def social(cover):
     return canvas
 
 
-def main(pdf_path):
+def main(pdf_path, lang="sq"):
     doc = pymupdf.open(pdf_path)
-    MEDIA.mkdir(parents=True, exist_ok=True)
-    for old in MEDIA.glob("page-*.webp"):
+    media = MEDIA if lang == "sq" else MEDIA / lang
+    url = f"/media/books/{SLUG}" + ("" if lang == "sq" else f"/{lang}")
+    if lang == "sq":
+        pdf = f"{url}/{SLUG}.pdf"  # copied there by hand (UDHEZUES.md)
+    else:
+        source = Path(pdf_path).resolve()
+        if media not in source.parents:
+            sys.exit(f"The PDF of a translation lives in {media.relative_to(ROOT)}/ (scripts/book-edition.py puts it there).")
+        pdf = f"{url}/{source.name}"
+    media.mkdir(parents=True, exist_ok=True)
+    for old in media.glob("page-*.webp"):
         old.unlink()
 
     pages, blocks = [], []
     chapters, back, subtitle = [], [], ""
     for index, page in enumerate(doc):
         number = index + 1
-        image, entry = save_page(page, MEDIA, f"page-{number:02d}", f"/media/books/{SLUG}")
+        image, entry = save_page(page, media, f"page-{number:02d}", url)
         pages.append({"number": number, **entry})
         if index == 0:
-            social(image).save(MEDIA / "social.jpg", "JPEG", quality=84, optimize=True, progressive=True)
+            social(image).save(media / "social.jpg", "JPEG", quality=84, optimize=True, progressive=True)
         found = contents(page)
         if found:
             chapters = found
@@ -169,11 +180,15 @@ def main(pdf_path):
     # The title page repeats the title and subtitle that the book page already shows.
     repeated = {(meta.get("title") or "").lower(), subtitle.lower()}
     blocks = [b for b in blocks if b["text"].lower() not in repeated]
-    DATA.write_text(json.dumps({
+    DATA.mkdir(parents=True, exist_ok=True)
+    (DATA / f"{lang}.json").write_text(json.dumps({
         "slug": SLUG,
+        "language": lang,
         "title": meta.get("title") or "",
         "subtitle": subtitle,
         "author": meta.get("author") or "",
+        "pdf": pdf,
+        "social": f"{url}/social.jpg",
         "pageCount": len(pages),
         "pages": pages,
         "chapters": chapters,
@@ -181,11 +196,11 @@ def main(pdf_path):
         "quote": " ".join(b["text"] for b in back if b["kind"] == "quote"),
         "text": join_across_pages(blocks),
     }, ensure_ascii=False, indent=1) + "\n", encoding="utf8")
-    size = sum(f.stat().st_size for f in MEDIA.iterdir()) / 1e6
-    print(f"{len(pages)} pages, {len(chapters)} chapters, {size:.1f} MB in {MEDIA.relative_to(ROOT)}")
+    size = sum(f.stat().st_size for f in media.iterdir() if f.is_file()) / 1e6
+    print(f"{len(pages)} pages, {len(chapters)} chapters, {size:.1f} MB in {media.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in (2, 3) or (len(sys.argv) == 3 and sys.argv[2] not in LANGUAGES):
         sys.exit(__doc__)
-    main(sys.argv[1])
+    main(*sys.argv[1:])

@@ -135,10 +135,17 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ## Libri “Mall për Durrësin”
 
-Libri shfletohet në `/sq/books/mall-per-durresin.html` (edhe në anglisht dhe gjermanisht, me tekstin e librit në shqip).
-Faqet janë imazhe të nxjerra nga PDF-ja, plus teksti i plotë për kërkim dhe lexues ekrani.
+Libri shfletohet në tri gjuhë, secila me botimin e vet, me të njëjtin dizajn dhe të njëjtën kopertinë:
 
-Kur ke një version të ri të PDF-së, kjo bëhet në kompjuter (jo nga paneli):
+- shqip, origjinali: `/sq/books/mall-per-durresin.html`
+- anglisht, *Longing for Durrës*: `/books/mall-per-durresin.html`
+- gjermanisht, *Sehnsucht nach Durrës*: `/de/books/mall-per-durresin.html`
+
+Përkthimet ndjekin origjinalin faqe për faqe: çdo kapitull nis në të njëjtën faqe në çdo gjuhë, kështu që kur
+ndërrohet gjuha, lexuesi vazhdon nga e njëjta faqe. Faqet janë imazhe të nxjerra nga PDF-ja e secilës gjuhë, plus
+teksti i plotë për kërkim dhe lexues ekrani.
+
+**Kur ke një version të ri të PDF-së shqip**, kjo bëhet në kompjuter (jo nga paneli):
 
 ```
 pip install pymupdf pillow
@@ -146,7 +153,22 @@ python3 scripts/book-pages.py rruga/per/te/libri.pdf
 ```
 
 Kopjo edhe PDF-në e re te `src/media/books/mall-per-durresin/mall-per-durresin.pdf` (për shkarkim).
-Skripti rishkruan faqet te `src/media/books/mall-per-durresin/` dhe tekstin te `src/_data/book.json`.
+Skripti rishkruan faqet te `src/media/books/mall-per-durresin/` dhe tekstin te `src/_data/books/sq.json`.
+Pastaj ndrysho të njëjtat fjali edhe te `scripts/book/sq.txt`, `en.txt` dhe `de.txt`, që përkthimet të mbeten të
+njëjta me origjinalin.
+
+**Për të ndrequr një fjalë në përkthim** (ose titullin), ndryshoje te `scripts/book/en.txt` ose `scripts/book/de.txt`
+(çdo paragraf është një rresht; formati shpjegohet te `scripts/book/README.md`) dhe pastaj:
+
+```
+pip install pymupdf pillow reportlab
+python3 scripts/book-edition.py en      # ose: de
+node scripts/thumbnails.mjs
+```
+
+Skripti e radhit tekstin me të njëjtat shkronja, ngjyra, fotografi dhe kopertinë si libri shqip, shkruan PDF-në te
+`src/media/books/mall-per-durresin/en/` (ose `de/`), faqet dhe `src/_data/books/en.json`. Për çdo faqe tregon sa
+vend ka mbetur; nëse një tekst del shumë i gjatë, e thotë vetë cila faqe duhet shkurtuar. Libri shqip nuk preket.
 
 ---
 

@@ -1,5 +1,10 @@
-{#- The book reader, shared by the three languages. The pages, chapters and text
-    come from src/_data/book.json, made from the PDF by scripts/book-pages.py. -#}
+{#- The book reader, shared by the three languages. Each language reads its own edition: the Albanian original and
+    the English and German translations, set page for page in the same design (scripts/book-edition.py). The pages,
+    chapters and text come from src/_data/books/<lang>.json, made from each PDF by scripts/book-pages.py. -#}
+{%- set book = books[lang or "en"] or books.sq -%}
+{%- set bookLang = (' lang="' + book.language + '"') if book.language != (lang or "en") else "" -%}
+{%- set chapterWord = {"sq": "Kapitulli", "en": "Chapter", "de": "Kapitel"}[book.language] -%}
+{%- set editions = [["en", "English"], ["de", "Deutsch"], ["sq", "Shqip"]] -%}
 {%- set cover = book.pages[0] -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
@@ -11,21 +16,28 @@
 } -%}
   <section class="shell book-hero">
     <div class="book-hero-copy">
-      <p class="eyebrow">{{ "A book by Stiven Janaqi · in Albanian" | t(lang) }}</p>
-      <h1 lang="sq"{{ book.title | longTitle | safe }}>{{ book.title }}</h1>
-      <p class="book-subtitle" lang="sq">{{ book.subtitle }}</p>
+      <p class="eyebrow">{{ ("A book by Stiven Janaqi · in Albanian" if book.language == "sq" else "A book by Stiven Janaqi · translated from the Albanian") | t(lang) }}</p>
+      <h1{{ bookLang | safe }}{{ book.title | longTitle | safe }}>{{ book.title }}</h1>
+      <p class="book-subtitle"{{ bookLang | safe }}>{{ book.subtitle }}</p>
       <p class="lede">{{ "A short book about growing up in Durrës: the streets before we had watches, the friends, the leaving and the coming back. Not to find the city untouched, but to see what of it is still there." | t(lang) }}</p>
       <dl class="book-facts">
         <div><dt>{{ "Chapters" | t(lang) }}</dt><dd>{{ book.chapters.length - 2 }} <span>+ {{ "prologue and epilogue" | t(lang) }}</span></dd></div>
         <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ book.pageCount }}</dd></div>
-        <div><dt>{{ "Language" | t(lang) }}</dt><dd>{{ "Albanian" | t(lang) }}</dd></div>
+        <div><dt>{{ "Language" | t(lang) }}</dt><dd>{% if book.language == "sq" %}{{ "Albanian" | t(lang) }}{% else %}{{ {"en": "English", "de": "Deutsch"}[book.language] }} <span>{{ "from the Albanian" | t(lang) }}</span>{% endif %}</dd></div>
         <div><dt>{{ "Edition" | t(lang) }}</dt><dd>2026</dd></div>
       </dl>
       <div class="hero-actions">
         <a class="button-primary" href="#reader" data-book-open>{{ "Open the book" | t(lang) }}</a>
         <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
-        <a class="button-secondary" href="/media/books/{{ book.slug }}/{{ book.slug }}.pdf" download>{{ "Download PDF" | t(lang) }}</a>
+        <a class="button-secondary" href="{{ book.pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
       </div>
+      {#- The same book in the other languages, each named in its own language; the page is the same in each, so the
+          reader's place (sc-book-<slug>) carries over. -#}
+      {%- set others = [] %}
+      {%- for edition in editions %}{% if edition[0] != book.language and books[edition[0]] %}{% set _ = others.push(edition) %}{% endif %}{% endfor %}
+      {%- if others.length %}
+      <p class="book-editions">{{ "Also in:" | t(lang) }} {% for edition in others %}<a href="{{ ('/books/' + book.slug + '.html') | local(edition[0]) }}" hreflang="{{ edition[0] }}" lang="{{ edition[0] }}">{{ edition[1] }}</a>{% if edition[0] == "sq" %} <span>{{ "(the original)" | t(lang) }}</span>{% endif %}{% if not loop.last %}<span aria-hidden="true"> · </span>{% endif %}{% endfor %}</p>
+      {%- endif %}
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ 'Open the book' | t(lang) }}">
       <span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="(max-width: 900px) min(calc(100vw - 32px), 360px), 360px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" fetchpriority="high"></span>
@@ -46,7 +58,7 @@
         <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <div class="book-status">
           <p aria-live="polite"><strong data-book-where></strong> <span data-book-total></span></p>
-          <p class="book-chapter" lang="sq" data-book-chapter></p>
+          <p class="book-chapter"{{ bookLang | safe }} data-book-chapter></p>
           <input class="book-scrub" type="range" min="1" max="{{ book.pageCount }}" value="1" step="1" data-book-scrub aria-label="{{ 'Go to page' | t(lang) }}">
         </div>
         <button class="book-button" type="button" data-book-next aria-label="{{ 'Next page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -55,15 +67,15 @@
           <button class="book-chip" type="button" data-book-fullscreen hidden>{{ "Full screen" | t(lang) }}</button>
           <button class="book-chip" type="button" data-book-view data-one="{{ 'One large page' | t(lang) }}" data-two="{{ 'Two pages' | t(lang) }}" hidden>{{ "Two pages" | t(lang) }}</button>
           <button class="book-chip" type="button" data-book-zoom data-label="{{ 'The pages, enlarged' | t(lang) }}" data-close="{{ 'Close the enlarged pages' | t(lang) }}" hidden>{{ "Zoom in" | t(lang) }}</button>
-          <a class="book-chip" href="/media/books/{{ book.slug }}/{{ book.slug }}.pdf" download>{{ "Download PDF" | t(lang) }}</a>
+          <a class="book-chip" href="{{ book.pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
           <button class="book-chip is-accent" type="button" data-book-resume hidden></button>
         </div>
       </div>
 
       <nav class="book-contents" id="book-contents" data-book-contents aria-label="{{ 'Contents' | t(lang) }}" hidden>
-        <ol lang="sq">
+        <ol{{ bookLang | safe }}>
           {%- for chapter in book.chapters %}
-          <li><button type="button" data-book-goto="{{ chapter.page }}"><span class="book-contents-label">{% if chapter.label in ["PROLOG", "EPILOG"] %}{{ chapter.label | capitalize }}{% else %}Kapitulli {{ chapter.label }}{% endif %}</span><span class="book-contents-title">{{ chapter.title }}</span><span class="book-contents-page">{{ chapter.page | pad }}</span></button></li>
+          <li><button type="button" data-book-goto="{{ chapter.page }}"><span class="book-contents-label">{% if "PROLOG" in chapter.label or "EPILOG" in chapter.label %}{{ chapter.label | capitalize }}{% else %}{{ chapterWord }} {{ chapter.label }}{% endif %}</span><span class="book-contents-title">{{ chapter.title }}</span><span class="book-contents-page">{{ chapter.page | pad }}</span></button></li>
           {%- endfor %}
         </ol>
       </nav>
@@ -73,7 +85,7 @@
   </section>
 
   <section class="shell book-closing">
-    <blockquote lang="sq">
+    <blockquote{{ bookLang | safe }}>
       <p>{{ book.quote }}</p>
       <footer>{{ book.author }}, <cite>{{ book.title }}</cite></footer>
     </blockquote>
@@ -86,7 +98,7 @@
         <span class="book-text-title">{{ "Read the book as text" | t(lang) }}</span>
         <span class="book-text-note">{{ "For reading on a small screen, searching or a screen reader. The same words, without the page design." | t(lang) }}</span>
       </summary>
-      <div class="article-content book-text-body" lang="sq">
+      <div class="article-content book-text-body"{{ bookLang | safe }}>
         {%- for block in book.text %}
         {%- if block.kind == "kicker" %}
         <p class="book-text-kicker">{{ block.text }}</p>
