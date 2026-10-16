@@ -542,3 +542,15 @@ test('Publications: the title lifts like a page, each series keeps its colour, t
   assert.ok(doc.querySelectorAll('.weekly-n.is-bumped').length > 0, 'a changed count beats');
   assert.ok(doc.querySelector('[data-pub]:not([hidden]).is-entering'), 'the shown publications come in');
 });
+
+test('Contact: the title finds its signal, the ways to write follow, each planet sends a ring in turn, a card gives under the press', () => {
+  assert.match(fs.readFileSync('_site/contact.html', 'utf8'), /class="shell page-hero contact-hero"/);
+  assert.match(fs.readFileSync('_site/sq/contact.html', 'utf8'), /class="shell page-hero contact-hero"/);
+  assert.match(css, /\.contact-hero h1 \{ animation: contact-signal/);
+  assert.match(css, /\.contact-card-orb \{ animation: news-ring 2\.8s ease-out 1\.4s infinite; \}/);
+  assert.match(css, /\.contact-card \+ \.contact-card \.contact-card-orb \{ animation-delay: 2\.8s; \}/);
+  assert.match(css, /\.contact-card:is\(:hover, :focus-visible\) \.contact-card-orb \{ animation: none; \}/, 'the hover glow is not covered by the ring');
+  assert.match(css, /\.contact-card:active \{ transform: translateY\(-1px\) scale\(\.985\);/);
+  assert.match(css, /\.contact-form \.field:focus-within label \{ color: var\(--blue\); \}/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes contact-signal/);
+});
