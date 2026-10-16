@@ -5,15 +5,15 @@ category: Führung
 series: without-you
 status: published
 featured: true
-summary: Ein gutes Eskalationssystem bringt Menschen nicht bei, für alles um Erlaubnis zu fragen. Es bringt ihnen bei, die Grenze ihrer eigenen Entscheidung zu verstehen.
+summary: Ein gutes Eskalationssystem lehrt Menschen nicht, für alles um Erlaubnis zu fragen. Es lehrt sie, die Grenze ihrer eigenen Entscheidung zu verstehen.
 description: "Eskalation als System, nicht als Temperament: was nachts im Hotel in meiner Rolle lag, was eine gute Eskalation enthält, und eine Matrix für die Schicht."
-teaser: Ownership heißt nicht „Ich löse es immer selbst“. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.
+teaser: Verantwortung übernehmen heißt nicht „Ich löse es immer selbst“. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.
 deck: 'Der vierte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Grenze zwischen Initiative und Befugnis als klare Regel, die drei Eskalationsfehler, was eine gute Eskalation enthält, und die Eskalationsmatrix für die Schicht.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Beantworten Sie beim nächsten Problem fünf Fragen, bevor Sie handeln: meine Befugnis, Sicherheit, umkehrbar, außerhalb meiner Schicht, was passiert beim Warten."
   - "Bringen Sie beim Eskalieren fünf Dinge mit: was passiert ist, die Auswirkung jetzt, was getan wurde, welche Entscheidung nötig ist, wie dringend."
-  - Finden Sie eine Situation, in der zwei Kollegen unterschiedlich entscheiden würden, und bitten Sie darum, die Linie zu ziehen.
+  - Finden Sie eine Situation, in der zwei Kollegen unterschiedlich entscheiden würden, und bitten Sie darum, dass die Grenze gezogen wird.
 checklist:
   title: Die Eskalationsmatrix für die Schicht
   fill: true
@@ -35,57 +35,47 @@ diagram: escalation-matrix
 
 „Es gibt ein Problem. Was soll ich tun?“
 
-Das ist die häufigste Eskalation und die am wenigsten nützliche. Sie sagt nicht, was passiert ist, was schon getan wurde oder welche Entscheidung gebraucht wird. Sie schiebt das Problem nur eine Ebene höher, zusammen mit allen Fragen, die der Mensch selbst hätte klären können.
+Das ist die häufigste Eskalation und die am wenigsten nützliche. Sie sagt weder, was passiert ist, noch, was schon getan wurde oder welche Entscheidung gebraucht wird. Sie schiebt das Problem eine Ebene nach oben, samt allen Fragen, die der Betreffende selbst hätte klären können.
 
-Aber auch das Gegenteil ist ein Problem. Wer nie etwas nach oben gibt, kann sehr selbstständig wirken, bis zu dem Moment, in dem er in seiner Rolle ein Problem festhält, das seine Grenze längst überschritten hat.
+Das Gegenteil ist genauso ein Problem. Wer nie etwas nach oben gibt, kann sehr selbstständig wirken, bis zu dem Moment, in dem er ein Problem festhält, das die Grenze seiner Rolle längst überschritten hat.
 
-Zwischen diesen beiden Extremen liegt eine der wichtigsten Fragen für einen Betrieb, der ohne die Führungskraft in der Nähe laufen soll: Wann lösen Sie es selbst, und wann geben Sie es nach oben?
+Zwischen diesen beiden Extremen liegt eine der wichtigsten Fragen für einen Betrieb, der ohne die Führungskraft in der Nähe laufen muss: Wann lösen Sie es selbst, und wann geben Sie es nach oben?
 
-In [Führung ohne Titel](/de/insights/leadership-without-a-title/) habe ich geschrieben, dass Initiative und Befugnis zwei verschiedene Dinge sind. Dieser Essay ist der Versuch, aus diesem Unterschied eine klare Regel zu machen statt eines persönlichen Gefühls.
+In [Führung ohne Titel](/de/insights/leadership-without-a-title/) habe ich geschrieben, dass Initiative und Befugnis zwei verschiedene Dinge sind. Dieser Essay versucht, aus diesem Unterschied eine klare Regel zu machen, statt ihn dem persönlichen Gefühl zu überlassen.
 
-## Was ich habe und was nicht
+Er stützt sich auf zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? Technische Probleme in Zimmern gingen an die Haustechnik; Housekeeping-Themen gingen an diese Abteilung und zur Nachverfolgung in die Übergabe. Auf der letzten Meile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
 
-Nachts im Hotel kam es bei einem Problem darauf an zu unterscheiden, ob ich es innerhalb meiner Rolle lösen konnte, ob es an die zuständige Abteilung gehen musste oder ob es eine Entscheidung weiter oben brauchte.
-
-Ich hatte konkrete Fälle, in denen technische Probleme in Zimmern an die Haustechnik gehen mussten, während Housekeeping-Themen von der zuständigen Abteilung übernommen und für das Follow-up in der Übergabe festgehalten werden mussten.
-
-Ich werde nicht sagen, ob es eine feste Liste von Personen gab, die nachts anzurufen waren, einen festgelegten Duty Manager oder eine schriftliche Regel, was jemanden weckt und was bis zum Morgen warten kann. Da bin ich mir nicht sicher.
-
-Auch für die letzte Meile habe ich keine dokumentierte Matrix, wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren. Ich weiß, dass der Team Leader sehr nah am täglichen Betrieb war: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen und Probleme, die live passierten. Ich weiß, dass es Regeln gab, nach denen der Team Leader informiert werden musste, wenn ein betriebliches Problem auftrat, zum Beispiel wenn beim Beladen eine Tasche fehlte. Ich weiß, dass es für Schäden und die Kühlkette klare Standards und Kontrollen gab. Aber ich werde nicht sagen „das ging immer an den Area Manager“, ohne es dokumentiert zu haben.
-
-Und ich habe keinen dokumentierten Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand, „selbst lösen oder nach oben geben“. Ich werde keinen erfinden.
-
-Sicher bin ich mir bei dem Prinzip, das ich schon in der Einarbeitung angewendet habe.
+Was mir dagegen fehlt, ist eine Dokumentation darüber, wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren, und ein dokumentierter Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand. Die Stufen und die Matrix weiter unten zeigen, wo ich die Linie heute ziehen würde. Beschreiben kann ich das Prinzip, nach dem ich seit der Einarbeitung gearbeitet habe.
 
 ## Ich habe nicht improvisiert
 
-Die Checkliste zeigte, was zu tun war. Die Dokumente zeigten, wie es gemacht wurde. Aber wenn es einen Widerspruch zwischen ihnen gab oder etwas außerhalb des Standards lag, habe ich nicht improvisiert. Ich habe es bestätigen lassen oder eskaliert.
+Die Checkliste zeigte, was zu tun war, die Unterlagen zeigten, wie. Widersprachen sie sich aber oder lag etwas außerhalb des Standards, habe ich nicht improvisiert. Ich habe es mir bestätigen lassen oder es eskaliert.
 
-Das kann wie fehlende Initiative aussehen. Für mich war es das Gegenteil. Initiative ergibt Sinn innerhalb der Grenze, die man kennt. Jenseits davon ist Improvisieren kein Mut. Es ist ein Risiko, das man übernimmt, ohne die Befugnis zu haben, es zu tragen.
+Das kann nach fehlender Initiative aussehen. Für mich war es das Gegenteil. Initiative ist sinnvoll innerhalb der Grenze, die man kennt. Jenseits davon ist Improvisieren kein Mut, sondern ein Risiko, das man eingeht, ohne die Befugnis zu haben, es zu tragen.
 
 ## Unklarheit ist ein Systemproblem
 
-Wenn zwei Menschen in derselben Rolle zur selben Situation zwei völlig unterschiedliche Entscheidungen treffen würden, liegt das Problem vielleicht nicht bei den Menschen. Vielleicht ist die Eskalationsgrenze nicht gut festgelegt.
+Würden zwei Menschen in derselben Rolle in derselben Situation völlig unterschiedlich entscheiden, liegt der Fehler vielleicht weniger bei ihnen als bei einer Eskalationsgrenze, die nie sauber gezogen wurde.
 
-Deshalb sollte Eskalation nicht vom Temperament abhängen. Der eine ist vorsichtiger und ruft wegen allem an. Der andere ist selbstsicherer und ruft wegen nichts an. Wenn das System nicht klar sagt, wo die Grenze liegt, hängt das Ergebnis davon ab, wer in dieser Nacht Schicht hatte.
+Deshalb sollte Eskalation nicht vom Temperament abhängen. Der eine ist vorsichtiger und ruft bei allem an, der andere ist selbstsicherer und ruft bei nichts an. Sagt das System nicht, wo die Grenze liegt, hängt das Ergebnis davon ab, wer in dieser Nacht zufällig Schicht hatte.
 
 Und ein Betrieb, der davon abhängt, wer Schicht hatte, ist noch kein Betrieb, der ohne Sie läuft.
 
 ## Die drei Fehler
 
-Hier äußere ich eine Meinung, keine Statistik aus meiner Erfahrung.
+Was jetzt folgt, ist meine Meinung, keine Statistik aus meiner Erfahrung.
 
-**Der erste: Alles wird eskaliert.** Der Mensch baut nie Ownership auf. Jede Abweichung wird zum Problem des Chefs, und der Chef wird zu dem Punkt, an dem der ganze Betrieb stockt.
+**Der erste: Alles wird eskaliert.** Der Mitarbeiter lernt nie, Verantwortung zu übernehmen. Jede Abweichung wird zum Problem des Chefs, und der Chef wird zu dem Punkt, an dem der ganze Betrieb stockt.
 
-**Der zweite: Nichts wird eskaliert.** Das ist der gefährlichste. Der Mensch kann ein Problem in seiner Rolle festhalten, auch wenn die Situation die Grenze seiner Befugnis, des Risikos oder seiner Kompetenz schon überschritten hat. Und wenn es schließlich sichtbar wird, ist es meist größer und später.
+**Der zweite: Nichts wird eskaliert.** Das ist der gefährlichste. Der Mitarbeiter hält ein Problem womöglich auch dann noch in seiner Rolle fest, wenn es die Grenze seiner Befugnis, des Risikos oder seiner Kompetenz schon überschritten hat. Kommt es schließlich ans Licht, dann meist größer und später.
 
-**Der dritte: Eskalation ohne Information.** Dieser scheint mir sehr häufig. Das Problem wandert nur eine Ebene höher. Es wird nicht gelöst. Wer es bekommt, muss zehn Fragen stellen, nur um die Grundfakten herauszufinden, und die Zeit, die dabei verloren geht, ist oft genau die Zeit, die die Entscheidung gebraucht hätte.
+**Der dritte: Eskalation ohne Information.** Diesen Fehler halte ich für sehr häufig. Das Problem wandert eine Ebene höher, ohne einer Lösung näherzukommen. Wer es bekommt, muss zehn Fragen stellen, nur um die Grundfakten zu erfahren, und die Zeit, die dabei verloren geht, ist oft genau die Zeit, die die Entscheidung gebraucht hätte.
 
-**Ownership heißt nicht „Ich löse es immer selbst“. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.**
+**Verantwortung übernehmen heißt nicht, es selbst zu lösen. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.**
 
-## Wie eine gute Eskalation aussieht
+## Was eine gute Eskalation enthält
 
-Eine gute Eskalation sollte sehr schnell fünf Dinge enthalten:
+Eine gute Eskalation sollte fünf Dinge liefern, und zwar schnell:
 
 1. **Was passiert ist.**
 2. **Welche Auswirkung es jetzt hat.**
@@ -93,34 +83,29 @@ Eine gute Eskalation sollte sehr schnell fünf Dinge enthalten:
 4. **Welche Entscheidung gebraucht wird.**
 5. **Wie dringend es ist.**
 
-Wenn mir jemand etwas eskaliert, möchte ich die Situation verstehen, ohne zehn Fragen zu stellen.
-
-Die Regel, die ich verwenden würde, lautet:
+Wenn mir jemand etwas eskaliert, möchte ich die Lage verstehen, ohne zehn Fragen stellen zu müssen. Die Regel, die ich anwenden würde, lautet:
 
 **Eskalieren Sie die Entscheidung, nicht die Unklarheit, die Sie selbst hätten klären können.**
 
-Aber diese Regel hat eine Grenze. Wenn Sie fünf Minuten haben, um die Fakten zu prüfen, ohne das Risiko zu erhöhen, prüfen Sie sie. Wenn das Risiko unmittelbar ist, eskalieren Sie sofort mit dem, was Sie wissen. Eine vollständige Eskalation, die zu spät kommt, ist schlechter als eine kurze, die rechtzeitig kommt.
+Auch diese Regel hat eine Grenze. Haben Sie fünf Minuten, um die Fakten zu prüfen, ohne das Risiko zu erhöhen, dann prüfen Sie sie. Ist das Risiko unmittelbar, eskalieren Sie sofort mit dem, was Sie wissen. Eine vollständige Eskalation, die zu spät kommt, ist schlechter als eine kurze, die rechtzeitig kommt.
 
 ## Drei Stufen
 
-Das Wort „nie“ würde ich für kleine Probleme nicht verwenden. Auch ein kleines Problem kann sich je nach Kontext verändern. Aber so würde ich es aufteilen:
+„Nie“ würde ich bei kleinen Problemen nicht sagen; der Kontext kann auch ein kleines Problem verändern. Aber so würde ich sie aufteilen.
 
-**Selbst lösen.**
-Wenn es in Ihrer Rolle liegt, der Standard klar ist, das Risiko gering ist und die Entscheidung rückgängig gemacht werden kann.
+**Selbst lösen**, wenn es in Ihrer Rolle liegt, der Standard klar ist, das Risiko gering ist und sich die Entscheidung rückgängig machen lässt.
 
-**Lösen und informieren.**
-Wenn Sie es innerhalb Ihrer Befugnis lösen können, die Situation aber für die nächste Schicht, eine KPI oder den Kunden wichtig ist oder sich wiederholen kann. Hier ist die Übergabe der natürliche Ort, um zu informieren.
+**Lösen und informieren**, wenn Sie es innerhalb Ihrer Befugnis lösen können, die Lage aber für die nächste Schicht, eine KPI oder den Kunden wichtig ist oder sich wiederholen kann. Der natürliche Ort für diese Information ist die Übergabe.
 
-**Nicht anfassen, eskalieren.**
-Wenn es um Sicherheit, Security, Compliance, sensible Daten, Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen, ein großes finanzielles Risiko geht oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
+**Nicht anfassen, eskalieren**, wenn es um Sicherheit, Security, Compliance oder sensible Daten geht; um Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen oder ein großes finanzielles Risiko; oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
 
-Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit, die Compliance oder den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis braucht, ist es keine Frage der Initiative mehr. Es ist Eskalation.
+Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit oder die Compliance berührt, den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis verlangt, wird aus der Frage der Initiative eine Eskalation.
 
 {diagram}
 
 ## Die Eskalationsmatrix für die Schicht
 
-Die drei Stufen oben sind die Spalten. Um zu entscheiden, in welche Spalte eine Situation fällt, fünf Kontrollfragen:
+Die drei Stufen sind die Spalten. Fünf Fragen entscheiden, in welche Spalte eine Situation gehört:
 
 1. **Liegt es in meiner Befugnis?**
 2. **Gibt es ein Sicherheits- oder Compliance-Risiko?**
@@ -128,16 +113,14 @@ Die drei Stufen oben sind die Spalten. Um zu entscheiden, in welche Spalte eine 
 4. **Betrifft es jemanden außerhalb meiner Schicht?**
 5. **Was passiert, wenn ich warte?**
 
-So werden sie gelesen:
+So lesen Sie die Antworten:
 
-- Wenn die Antwort auf Frage 1 „nein“ oder auf Frage 2 „ja“ ist: **nicht anfassen, eskalieren**.
-- Wenn sich die Entscheidung nicht rückgängig machen lässt, treffen Sie sie nicht allein: mindestens **lösen und informieren**, und bei Risiko eskalieren.
-- Wenn es jemanden außerhalb Ihrer Schicht betrifft, aber in Ihrer Befugnis liegt: **lösen und informieren**.
-- Wenn alle Antworten unbedenklich sind: **selbst lösen**.
-- Die fünfte Frage bestimmt das Tempo: Wenn Warten das Risiko erhöht, eskalieren Sie sofort mit dem, was Sie wissen.
+- Lautet die Antwort auf Frage 1 „nein“ oder auf Frage 2 „ja“: **nicht anfassen, eskalieren**.
+- Lässt sich die Entscheidung nicht rückgängig machen, treffen Sie sie nicht allein: mindestens **lösen und informieren**, und bei Risiko eskalieren.
+- Betrifft es jemanden außerhalb Ihrer Schicht, liegt aber in Ihrer Befugnis: **lösen und informieren**.
+- Sind alle Antworten unbedenklich: **selbst lösen**.
+- Die fünfte Frage bestimmt das Tempo: Erhöht Warten das Risiko, eskalieren Sie sofort mit dem, was Sie wissen.
 
-Und wenn Sie eskalieren, die fünf Dinge einer guten Eskalation: was passiert ist, welche Auswirkung es hat, was getan wurde, welche Entscheidung gebraucht wird, wie dringend es ist.
+Wenn Sie eskalieren, bringen Sie die fünf Dinge einer guten Eskalation mit.
 
-Die Matrix ersetzt kein Urteilsvermögen. Aber sie gibt dem Urteil dieselben Fragen, egal wer Schicht hat. So wird Eskalation ein System und kein Temperament.
-
-**Ein gutes Eskalationssystem bringt Menschen nicht bei, für alles um Erlaubnis zu fragen. Es bringt ihnen bei, die Grenze ihrer eigenen Entscheidung zu verstehen.**
+Die Matrix ersetzt kein Urteilsvermögen. Sie gibt dem Urteil dieselben Fragen vor, egal wer Schicht hat, und erst das macht Eskalation zu einem System statt zu einer Frage des Temperaments. Ein gutes Eskalationssystem bringt Menschen nicht bei, für alles um Erlaubnis zu fragen. Es bringt ihnen bei, die Grenze ihrer eigenen Entscheidung zu verstehen.

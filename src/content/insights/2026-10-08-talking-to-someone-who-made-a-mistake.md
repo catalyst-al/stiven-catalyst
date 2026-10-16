@@ -42,29 +42,19 @@ If we look only at the person, we risk leaving untouched a process that will pro
 
 If we look only at the process, we risk taking responsibility away from individual decisions.
 
-This essay is about the moment a manager exercises authority over people more directly than ever: the conversation after a mistake. To me, asking for accountability and respecting the employee's dignity are not two things that work against each other.
+This essay is about the moment when a manager exercises authority over people more directly than at any other: the conversation after a mistake. I do not see asking for accountability and respecting the employee's dignity as two things that work against each other.
 
-## What I have and what I do not
-
-I worked as a Team Leader On Road and then as an Area Manager in last mile. My responsibilities included following performance, operational problems, KPIs and coordinating people.
-
-But for a specific conversation after a mistake, where it took place and how I opened it, I do not have a case documented well enough. Nor for a conversation I remember because it went very well or very badly. Nor for a mistake of my own and the conversation I had after it, in the hotel or in last mile.
-
-I will not invent them. We do not need an emotional story just to make the writing more interesting.
-
-What I can state clearly are the principles I stand for as a manager. Where I use examples, they are hypothetical and I mark them as such.
+I worked in last mile as a Team Leader On Road and then as an Area Manager, and following performance, operational problems and KPIs, and coordinating people, were part of the job. What follows are the principles I stand for in that conversation, not the record of a particular talk. Where I use an example, it is hypothetical, and I say so.
 
 ## In private, once you understand the facts
 
-As a principle, I would prefer a corrective conversation to take place in private, once I had understood the facts.
+As a rule, I would rather hold a corrective conversation in private, and only once I have understood the facts.
 
-There is one clear exception: if there is an immediate safety risk, you step in at that moment. You do not wait for the right conversation in the right place. You stop what is happening.
-
-I will not present this as a procedure I followed in every case. It is the standard I stand for.
+There is one clear exception. If there is an immediate safety risk, you step in at that moment. You do not wait for the right conversation in the right place; you stop what is happening.
 
 ## The person's mistake or the process's
 
-To me this is the question a manager has to ask before judging anyone. If an employee makes a mistake, I first want to understand:
+This is the question a manager has to ask before judging anyone. When an employee makes a mistake, I first want to understand:
 
 - Did they know the standard?
 - Had they been trained, and had they understood it?
@@ -74,21 +64,15 @@ To me this is the question a manager has to ask before judging anyone. If an emp
 
 If someone has not been trained properly, I cannot automatically treat their mistake as negligence. That links directly to what I wrote in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/).
 
-If the standard was clear, the training had been done and the person had the conditions to follow it, then we also have to discuss individual responsibility.
+If the standard was clear, the training had been done and the person had the conditions to follow it, then individual responsibility has to be discussed too.
 
-But there is a third possibility: the process can have weaknesses and the employee can have made a wrong decision at the same time. In that case we have to correct both.
+And there is a third possibility: the process can have weaknesses and the employee can have made a wrong decision at the same time. Then both need correcting. Good management means seeing both, without looking for someone to blame at any cost and without hiding responsibility when it exists.
 
-**Good management means seeing both, without looking for someone to blame at any cost and without hiding responsibility when it exists.**
+## Demanding without humiliating
 
-## Pressure can be fair. Humiliation is not.
+There are things I would never do in a conversation like this. I would not use someone's mistake to humiliate them in front of the team. I would not shout at an employee to show authority. I would not call them incompetent because they made a mistake. And I would not take a disciplinary decision without hearing their explanation and checking the facts.
 
-There are things I would never do in a conversation like this.
-
-I would not use someone's mistake to humiliate them in front of the team. I would not shout at an employee to show authority. I would not call them incompetent just because they made a mistake. I would not take a disciplinary decision without hearing their explanation and checking the facts.
-
-But that does not mean explaining every mistake away.
-
-If someone knowingly broke a safety rule, acted beyond their authority, or keeps failing to respect a clear standard, the responsibility has to be dealt with seriously and according to the relevant procedures.
+None of that means explaining every mistake away. If someone knowingly broke a safety rule, acted beyond their authority or keeps failing to respect a clear standard, the responsibility has to be dealt with seriously and according to the relevant procedures.
 
 **Pressure can be fair. Humiliation is not.**
 
@@ -96,25 +80,21 @@ A manager can be demanding, decisive and very clear without violating the dignit
 
 ## When you talk to yesterday's colleagues
 
-The career step itself is confirmed. In January 2025 I started as a Team Leader On Road, and a few months later I became an Area Manager. In that role I had four Shift Leaders and eight dispatchers reporting directly to me, while the operation involved around 250 drivers indirectly. I wrote about that step at more length in [Leading people without losing the person](/insights/leading-people-without-losing-the-person/).
+In January 2025 I started as a Team Leader On Road, and a few months later I became an Area Manager. In that role I had four Shift Leaders and eight dispatchers reporting directly to me, while the operation involved around 250 drivers indirectly. I wrote about that step at more length in [Leading people without losing the person](/insights/leading-people-without-losing-the-person/).
 
-As for how colleagues reacted to my promotion, or whether our relationship changed, I do not have a confirmed personal account.
-
-My view is that a promotion should not turn authority into a show of strength. When you become responsible for people you used to work alongside, you have to be clear about expectations, fair in your decisions, and not use the position to show who is in charge.
+How colleagues reacted to my promotion, and whether our relationships changed, I cannot report with certainty. My view is that a promotion should not turn authority into a show of strength. When you become responsible for people you used to work alongside, you have to be clear about expectations and fair in your decisions, and you must not use the position to show who is in charge.
 
 **Formal authority gives you the right to make decisions. Trust is built by the way you make them.**
 
-That matters most in the conversation after a mistake. It is the moment when people see most clearly how you use the position.
+Nowhere does that matter more than in the conversation after a mistake. It is the moment when people see most clearly how you use the position.
 
 ## What helps after a mistake
 
-As a principle, I believe the most useful response after a mistake is the one that helps you understand what happened, what responsibility you have, and how not to repeat it.
+I believe the most useful response to a mistake is the one that helps you understand what happened, what your responsibility is and how not to repeat it: not the one that leaves you alone with the guilt, and not the one that passes over the mistake as if it had not happened.
 
-Not the one that leaves you alone with the guilt. And not the one that passes over the mistake as if it had not happened.
+Take a hypothetical example. A driver leaves without checking one step of the procedure. A conversation that opens with “you always do this” is over before it starts. A conversation that opens with “today you left without this check; tell me how it went” has somewhere to go. In both cases the mistake is named. The difference is whether the person can learn something from it.
 
-A hypothetical example: a driver leaves without checking one step of the procedure. A conversation that opens with “you always do this” closes the conversation before it starts. A conversation that opens with “today you left without this check; tell me how it went” opens it. In both cases the mistake is named. The only difference is whether the person can learn something from it.
-
-## The five steps of the conversation after a mistake
+## Five steps for the conversation
 
 This is the structure I would propose. You can use it during a real conversation, or fill it in beforehand to prepare.
 
@@ -124,10 +104,8 @@ This is the structure I would propose. You can use it during a real conversation
 4. **Clarify the responsibility.** Which part of the mistake was within the person's control.
 5. **Agree the action.** What changes, who does it, and when the result is checked.
 
-The order matters. If you start at step four, you have judged before you listened. If you stop at step three, you have understood the process but left the person out.
+The order matters. Start at step four and you have judged before you listened. Stop at step three and you have understood the process but left the person out.
 
-It is a guide, not a disciplinary procedure. Serious breaches follow the safety and HR procedures and the organisation's policies.
+The sheet is a guide for the conversation, and it does not replace the disciplinary procedure: serious breaches follow the safety and HR procedures and the organisation's policies.
 
-The point of the conversation after a mistake is not that the employee leaves afraid of the next one.
-
-It is that they leave knowing what to do differently.
+The test comes when the conversation is over. The employee should walk out not afraid of the next mistake, but knowing what to do differently.
