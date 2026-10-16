@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -6871,6 +6871,39 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .family-more-list strong { font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: -.03em; line-height: 1.05; }
 .family-more-list span { color: var(--muted); font-size: 14px; }
 .family-more-list em { position: absolute; right: 20px; top: 20px; font-style: normal; font-weight: 800; }
+
+/* A tool page in motion: the other tools of the role and the essays behind the tool answer the pointer with a
+   light in the role's colour, the box you are filling in glows softly at its edge, and the role's badge breathes. */
+.family-more-list a, .tool-essays-list li a { isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.tool-essays-list li a { position: relative; }
+.family-more-list a::before, .tool-essays-list li a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--family, var(--blue)) 15%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.family-more-list a:hover, .tool-essays-list li a:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--family, var(--blue)) 80%, transparent); }
+.family-more-list a:hover::before, .tool-essays-list li a:hover::before { opacity: 1; }
+.family-more-list strong, .tool-essays-list li a strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.family-more-list a:hover strong, .tool-essays-list li a:hover strong { translate: 4px 0; }
+.family-more-list em, .tool-essays-list li a em { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.family-more-list a:hover em, .tool-essays-list li a:hover em { translate: 3px -3px; }
+:where(.tool-panel .dl-box, .tool-panel .result-card, .work-backup-card) { transition: border-color .35s ease, box-shadow .45s ease; }
+:where(.tool-panel .dl-box, .work-backup-card):focus-within {
+  border-color: color-mix(in srgb, var(--family, var(--blue)) 45%, var(--line));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--family, var(--blue)) 10%, transparent), 0 24px 54px -40px color-mix(in srgb, var(--family, var(--blue)) 90%, transparent);
+}
+.family-badge { transition: border-color .3s ease, background-color .3s ease, translate .35s cubic-bezier(.22, 1, .36, 1); }
+.family-badge:hover { translate: 0 -2px; background-color: color-mix(in srgb, var(--family) 16%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .family-badge > span { animation: badge-breathe 3.2s ease-in-out infinite; }
+}
+@keyframes badge-breathe { 50% { box-shadow: 0 0 16px 2px var(--family); scale: 1.15; } }
 
 /* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
 .role-hero .eyebrow { color: var(--sky-ink); }
