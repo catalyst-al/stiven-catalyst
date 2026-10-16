@@ -8304,3 +8304,11 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .weekly-card:hover .weekly-card-cover { transform: perspective(700px) translateY(-4px) rotateY(calc((var(--px, .5) - .5) * 14deg)) rotateX(calc((.5 - var(--py, .5)) * 10deg)); transition: transform .2s ease-out, box-shadow .45s ease; }
 }
 @keyframes mark-draw { from { scale: 0 1; } }
+
+/* From the Floor: the title rises from the floor as the page opens; its lower edge stays where the line of the text
+   ends, so the words come up from below it rather than fading in. The words of the lede follow. */
+@media (prefers-reduced-motion: no-preference) {
+  .floor-hero h1 { animation: floor-rise 1s cubic-bezier(.22, 1, .36, 1) .2s both; }
+  .floor-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .6s both; }
+}
+@keyframes floor-rise { from { clip-path: inset(-.2em -.2em 100% -.2em); translate: 0 100%; } to { clip-path: inset(-.2em -.2em -.3em -.2em); translate: 0 0; } }

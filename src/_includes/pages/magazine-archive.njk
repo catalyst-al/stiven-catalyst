@@ -6,7 +6,8 @@
 {%- set A = magazine.archive[lang] -%}
 {%- set F = weekly[lang].archive -%}
 {%- import "partials/issue-filter.njk" as filter -%}
-  <section class="shell page-hero weekly-hero">
+  {#- The title rises from the floor as the page opens (styles.css: .floor-hero). -#}
+  <section class="shell page-hero weekly-hero floor-hero">
     <p class="eyebrow">{{ A.eyebrow }}</p>
     <h1{% if N.name | length > 10 %} class="hero-long"{% endif %}>{{ N.name }}</h1>
     <p class="lede">{{ A.lede }}</p>

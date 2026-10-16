@@ -463,3 +463,11 @@ test('Management Review: "Review" is underlined as the page opens, a cover tilts
   assert.match(css, /\.weekly-card-cover::before \{[\s\S]*?radial-gradient\(220px circle at var\(--mx, 50%\) var\(--my, 0%\)/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes mark-draw/);
 });
+
+test('From the Floor: the title rises from below its own line as the page opens, the lede follows', () => {
+  assert.match(fs.readFileSync('src/_includes/pages/magazine-archive.njk', 'utf8'), /<section class="shell page-hero weekly-hero floor-hero">/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.floor-hero h1 \{ animation: floor-rise/);
+  assert.match(css, /@keyframes floor-rise \{ from \{ clip-path: inset\(-\.2em -\.2em 100% -\.2em\); translate: 0 100%; \}/, 'the clip and the move cancel out, so the lower edge stays put');
+  for (const page of ['_site/magazine/from-the-floor.html', '_site/sq/magazine/from-the-floor.html', '_site/de/magazine/from-the-floor.html']) assert.match(fs.readFileSync(page, 'utf8'), /floor-hero/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes floor-rise/);
+});
