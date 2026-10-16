@@ -554,3 +554,15 @@ test('Contact: the title finds its signal, the ways to write follow, each planet
   assert.match(css, /\.contact-form \.field:focus-within label \{ color: var\(--blue\); \}/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes contact-signal/);
 });
+
+test('About: the title comes on like the bulb, the portrait opens into focus, each step of the path lights as it is reached', () => {
+  for (const page of ['about.html', 'sq/about.html', 'de/about.html']) assert.match(fs.readFileSync(`_site/${page}`, 'utf8'), /class="shell page-hero about-hero"/);
+  assert.match(css, /\.about-hero h1 \{ animation: about-light/);
+  assert.match(css, /\.about-intro \.about-portrait img \{ animation: about-focus/);
+  assert.match(css, /\.about-timeline li:not\(:first-child\) \.about-when::before \{ animation: about-reach linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.about-timeline li:hover \.about-when::before \{ animation: none; \}/, 'the hover glow is not covered by the scroll');
+  assert.match(css, /\.about-copy \.large-copy \{ animation: closing-words linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.about-more > div:hover \{/);
+  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  for (const name of ['about-light', 'about-focus', 'about-reach', 'about-years']) assert.match(light, new RegExp(`@keyframes ${name}`));
+});
