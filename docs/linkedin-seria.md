@@ -59,7 +59,7 @@ Vegla: https://stivencatalyst.com/de/tools/delay-analyzer/
 >
 > #Logistik #LastMile #Schichtleitung #Operations
 
-## Eseja 3: KPI-të nuk përmirësohen nga Excel-i
+## Eseja 3: KPI-të nuk përmirësohen në Excel
 
 Lidhja: https://stivencatalyst.com/de/insights/kpis-do-not-improve-in-excel/
 Vegla: https://stivencatalyst.com/de/tools/kpi-diagnostic/
@@ -201,7 +201,7 @@ Faqja: https://stivencatalyst.com/de/projects.html
 >
 > #Operations #SOP #Hotellerie #Logistik
 
-## Eseja 9: Pse handover-i është një nga proceset më të nënvlerësuara
+## Eseja 9: Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara
 
 Lidhja: https://stivencatalyst.com/de/insights/why-the-handover-is-underrated/
 Vegla: https://stivencatalyst.com/de/tools/shift-handover/
@@ -225,7 +225,7 @@ Vegla: https://stivencatalyst.com/de/tools/shift-handover/
 >
 > #Hotellerie #NightAudit #Schichtleitung #Operations
 
-## Eseja 10: Leadership pa titull
+## Eseja 10: Udhëheqje pa titull
 
 Lidhja: https://stivencatalyst.com/de/insights/leadership-without-a-title/
 Eseja 1: https://stivencatalyst.com/de/insights/starting-from-zero/

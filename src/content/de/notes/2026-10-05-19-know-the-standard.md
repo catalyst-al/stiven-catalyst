@@ -1,4 +1,4 @@
 ---
-quote: "Ein Mensch muss den Standard kennen, bevor man ihn dafür beurteilt, dass er ihn nicht einhält."
+quote: "Bevor man jemanden danach beurteilt, ob er den Standard einhält, muss er ihn kennen."
 date: 2026-10-05
 ---

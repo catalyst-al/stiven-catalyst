@@ -1,4 +1,4 @@
 ---
-quote: "Ein nützliches Werkzeug wird erst dann ein Werkzeug des Teams, wenn es richtig, aktuell, für die Nutzung freigegeben, die man ihm gibt, und sicher für die Information ist, die es verarbeitet."
+quote: "Ein nützliches Werkzeug wird erst dann zum Werkzeug des Teams, wenn es korrekt und aktuell ist, für den Zweck freigegeben, für den man es nutzt, und sicher für die Informationen, die es verarbeitet."
 date: 2026-10-13
 ---

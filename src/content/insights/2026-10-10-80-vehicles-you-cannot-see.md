@@ -40,51 +40,43 @@ firstMove:
   - Give every open case a name and a confirmation, not only an instruction.
 ---
 
-On the ramp you can see a problem with your own eyes.
-
-From a distance, you often have to understand it through the information you receive.
+On the ramp, you see a problem for yourself. From a distance, you often know it only through the information that reaches you.
 
 That is the biggest difference between the two ways I have worked in last mile. In 2025, as a Team Leader and then as an Area Manager, I was in the operation: on the ramp, at the loading, next to the dispatchers, with the KPIs every day. Since 1 January 2026 I have worked part-time as a Last Mile Dispatcher, remotely, from home. The role covers the operational coordination of 80+ vehicles and 100+ drivers: tours, drivers, delays and problems during delivery.
 
-The same problems. A completely different position in front of them.
+The problems are the same. My position in front of them is completely different.
 
-## What I have and what I do not
-
-I will not write the names of applications or systems, the exact way we communicate, or the shift times. Some of these I do not know precisely, and I do not publish internal work details. Nor will I say exactly what the system shows (live location, stops or ETA), because I am not sure.
-
-I do not have a documented incident from this role that I can describe with certainty from start to resolution. I have documented cases from my earlier work in last mile, with vehicles and with delays, but I will not present them as cases solved from a distance.
-
-So this essay is not a success story. It is a comparison of two ways of working, from someone who has been in both. And it is my analysis, not a measured result.
+This essay compares the two positions, from someone who has worked in both. It is my analysis, not a measured result or a success story. I leave out internal details, some of which I do not know precisely: the systems and what they show, the channels we use and the shift times. I have no incident from the remote role documented from start to resolution. The documented cases I do have, with vehicles and with delays, come from my earlier work in last mile, and I do not present them as solved from a distance.
 
 ## What you lose
 
 You lose the chance to observe every situation yourself.
 
-In [Gemba](/insights/gemba/) I wrote that the report shows the result and the floor shows how that result is made. From a distance, the floor is not there. What is left is the information that comes from it.
+In [Gemba](/insights/gemba/) I wrote that the report shows the result and the floor shows how that result is made. From a distance, the floor is gone. What is left is the information that comes from it.
 
-And information reported from a distance is not always the same as what you could observe yourself. When you are on the ramp, the problem appears in front of you. When you are remote, the problem only reaches you if someone sees it, understands it and reports it. Any one of those three steps can be missing.
+And information reported from a distance is not always the same as what you could observe yourself. When you are on the ramp, the problem appears in front of you. When you are remote, it only reaches you if someone sees it, understands it and reports it, and any one of those three steps can be missing.
 
 ## What you gain
 
-But distance is not only a loss.
+Distance has its gains too.
 
-On the ramp you see well what is in front of you. From a distance, if the information and the tools support it, you can see the coordination of many tours as one operation. Not one van, but all of them together. Not one delay, but whether delays are gathering somewhere.
+On the ramp you see well what is in front of you. From a distance, if the information and the tools support it, you can see the coordination of many tours as one operation: all the vans at once, and whether delays are gathering somewhere rather than one delay at a time.
 
-That does not happen by itself. It only happens if the information you receive is sufficient and reliable.
+That view depends on the information you receive being sufficient and reliable.
 
 ## Information becomes the work
 
-From a distance, three things become even more important than on the ramp: the quality of the information you receive, the communication, and the clarity of responsibilities.
+From a distance, three things matter even more than on the ramp: the quality of the information you receive, the communication, and the clarity of responsibilities.
 
 **When you cannot see the vehicle, you need a reliable way to understand what is happening with it.**
 
-On the ramp, you can make up for unclear information by going to look. From a distance, you cannot. Unclear information stays unclear, and the decision you take on it stays just as uncertain.
+On the ramp, you can make up for unclear information by going to look. From a distance, you cannot. Unclear information stays unclear, and so does any decision you take on it.
 
-On communication, I have no documented rules that I set myself: when I call, when I write, when I escalate. But as a principle I believe good communication should be short, clear, and say which action is needed. A message that needs three follow-up questions to be understood has lost the time it was supposed to save.
+As for communication, I have no documented rules of my own, but I believe it should be short, clear, and say which action is needed. A message that needs three follow-up questions to be understood has lost the time it was supposed to save.
 
 ## What I would watch for
 
-I do not have a documented personal method I use to spot problems before they happen. But today I would pay attention to three things.
+Nor do I have a documented method for spotting problems early. Today I would pay attention to three things.
 
 **Deviations that repeat.** One delay is an event. The same delay, in the same place, several days in a row, is a pattern.
 
@@ -92,12 +84,12 @@ I do not have a documented personal method I use to spot problems before they ha
 
 **Information that arrives late.** When information arrives late, the lateness itself is a signal. The problem has had time to grow before you learn about it.
 
-## Coordination, not just instruction
+## More than instructions
 
 **Remote coordination is not just giving drivers instructions. It is building a way of communicating in which problems become visible, responsibilities are clear and decisions are taken in time.**
 
-This links to this whole series. An improvement holds when it does not depend on someone being there. In remote coordination, being there does not exist at all. All that is left is the system: who sees the problem, how they say it, who takes it on, when it is closed.
+This connects to the whole series. An improvement holds when it does not depend on someone being there, and in remote coordination nobody is there at all. What is left is the system: who sees the problem, how they say it, who takes it on, when it is closed.
 
-You can fill in the sheet below for a problem you cannot see and copy it. [Last-Mile CX Control Tower](/tools/cx-control-tower/) gathers the cases, actions and causes of many tours in one view, so the operation can be seen as one, not as a hundred phone calls.
+You can fill in the sheet below for a problem you cannot see and copy it. [Last-Mile CX Control Tower](/tools/cx-control-tower/) gathers the cases, actions and causes of many tours in one view, so the operation can be seen as one rather than as a hundred phone calls.
 
 On the ramp, the problem appears in front of you. From a distance, either you go looking for it, or you have built a way for it to come to you.

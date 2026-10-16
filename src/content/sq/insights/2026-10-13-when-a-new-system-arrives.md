@@ -5,98 +5,90 @@ category: Operacione
 series: the-system
 status: published
 featured: true
-summary: "Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin, dhe dinë çfarë të bëjnë kur ai nuk i ndihmon."
+summary: "Një sistem i ri bëhet pjesë e punës jo kur instalohet, por kur njerëzit e kuptojnë, dinë ta përdorin dhe dinë çfarë të bëjnë kur nuk i ndihmon."
 teaser: Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
-description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë, dhe një kartelë për to."
-deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në hotel, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu, dhe gjashtë gjëra që duhen para se të vijë."
+description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë dhe një kartelë për to."
+deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në hotel, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu dhe gjashtë gjëra që duhen para se të vijë."
 relatedTools:
   - /tools/six-sigma-dmaic/
   - /tools/shift-handover/
 checklist:
   title: Para se të vijë sistemi i ri
   fill: true
-  note: "Për kë e drejton ndryshimin, por edhe për kë e pret. Nëse nuk i di përgjigjet si punonjës, pyet para ditës së parë."
+  note: "Për atë që e drejton ndryshimin, por edhe për atë që e pret. Nëse si punonjës nuk i di përgjigjet, pyet para ditës së parë."
   items:
     - label: "Pse po ndryshon?"
       hint: "Me një fjali që e kupton edhe ai që nuk ishte në takim. Jo vetëm çfarë bën sistemi i ri."
-    - label: "Çfarë ndryshon konkretisht në punën time të përditshme?"
+    - label: "Çfarë ndryshon në punën time të përditshme?"
       hint: "Hapi që zhduket, hapi i ri, ekrani që ndryshon. Për rolin tim, jo për të gjithë."
     - label: "Ku e mësoj me situata reale?"
       hint: "Një rast i zakonshëm dhe një rast i vështirë, jo vetëm një prezantim i funksioneve."
     - label: "Kujt i drejtohem kur diçka nuk funksionon?"
       hint: "Një emër ose një rol, edhe natën, edhe në ditët e para."
-    - label: "Ku shkojnë problemet e ditëve të para, dhe kush kthen përgjigje?"
+    - label: "Ku shkojnë problemet e ditëve të para dhe kush kthen përgjigje?"
       hint: "Nëse problemet mblidhen dhe askush nuk përgjigjet, njerëzit ndalojnë së raportuari."
-    - label: "Cili është burimi zyrtar, dhe kush i përditëson udhëzimet?"
-      hint: "SOP-të, listat dhe udhëzimet ndryshojnë bashkë me sistemin, ose bëhen gabim pa e ditur askush."
+    - label: "Cili është burimi zyrtar dhe kush i përditëson udhëzimet?"
+      hint: "SOP-të, listat dhe udhëzimet ndryshojnë bashkë me sistemin, përndryshe bëhen të gabuara pa e ditur askush."
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Para se të vijë një sistem i ri, shkruaj me një fjali pse po ndryshon. Nëse nuk mundesh, pyet dikë që e di."
   - "Në javën e parë, mbaj një listë me çdo gjë që nuk funksionoi ose që nuk e kuptove. Dërgoja dikujt në fund të javës."
-  - "Për çdo dokument që përdor pranë sistemit, pyet: a është i përditësuar, dhe kush e mban?"
+  - "Për çdo dokument që përdor pranë sistemit, pyet: a është i përditësuar dhe kush e mban?"
 # Corrections made after publication (layouts/article.njk shows them under the deck, dated).
 corrections:
   - date: "15 tetor 2026"
     t: "Një version i mëparshëm i datonte javët e para të trajnimit në hotel në shtator 2026 dhe e quante hotelin të ri. Jam Night Manager i hotelit që nga nëntori 2025, prandaj të dyja u hoqën."
 ---
 
-Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
+Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova për natën time të parë të trajnimit në hotel, kur një përditësim e la sistemin jashtë funksionit për orë të tëra. Kisha ardhur për të mësuar proceset dhe e kalova pjesën më të madhe të natës duke pritur. Kjo ese nis aty ku mbaroi ajo dhe kalon nga sistemi që ndalet te sistemi që vjen, e te njerëzit që duhet ta mësojnë.
 
-Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova për natën time të parë të trajnimit në hotel, kur një përditësim e la sistemin të padisponueshëm për orë të tëra. Kisha ardhur për të mësuar proceset dhe e kalova pjesën më të madhe të natës duke pritur. Kjo ese fillon aty ku mbaroi ajo: jo te sistemi që ndalet, por te sistemi që vjen, dhe te njerëzit që duhet ta mësojnë.
+Mbështetet në dy përvoja. Në last mile, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në hotel ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control. Për ndryshimin e gushtit nuk kam asnjë krahasim të verifikuar para dhe pas, as ndonjë të dhënë për rezistencë apo për kthim te zakonet e vjetra.
 
-## Çfarë kam dhe çfarë nuk kam
-
-Ajo që kam: në last mile, kalimin në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit, të planifikuar për 19 gusht 2025. Sipas informacionit të asaj periudhe, qëllimi ishte saktësi më e mirë e planifikimit dhe më pak itinerare jorealiste. Ishin parashikuar kalibrime që ndryshimi të ndikonte sa më pak te shoferët, dhe mbledhje informacioni nga terreni në ditët e para. Në hotel, javët e para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, dhe informacioni që nuk ishte gjithmonë në një vend. Dhe Front Desk Control, që lindi nga ajo periudhë.
-
-Ajo që nuk kam: si u informova vetë për ndryshimin e gushtit, me trajnim, email apo demonstrim. Çfarë iu shpjegua shoferëve dhe dispeçerëve. Nëse pati rezistencë apo kthim te zakonet e vjetra. Një krahasim të verifikuar para dhe pas. Sa ditë m'u deshën për ta mësuar plotësisht sistemin e hotelit.
-
-Dhe një gjë që duhet thënë: në ato javë në last mile kishim probleme me ngarkimin, bag-et që mungonin, trolley-t e çorganizuara dhe vonesat. I kam të dokumentuara. Por nuk kam asnjë provë që i shkaktoi sistemi i ri, dhe nuk do t'ia vë atij probleme që mund të kenë pasur shkaqe të tjera. Është tundimi më i lehtë kur vjen një sistem i ri: çdo gjë që shkon keq në javët e para i faturohet atij.
+Në ato javë në last mile kishim probleme me ngarkimin, me çantat që mungonin, me karrocat e çrregullta dhe me vonesat, dhe i kam të dokumentuara. Nuk kam asnjë provë që i shkaktoi sistemi i ri, dhe mund të kenë pasur shkaqe të tjera. Ky është tundimi më i lehtë kur vjen një sistem i ri: t'ia vesh fajin atij për gjithçka që shkon keq në javët e para.
 
 ## Dy anë të së njëjtës derë
 
-Këto dy përvoja janë nga dy vende të ndryshme. Në të parën isha pjesë e një operacioni ku ndryshonte teknologjia e planifikimit. Në të dytën isha i riu që duhej të mësonte sistemin që ishte tashmë aty.
+Në last mile isha pjesë e një operacioni ku po ndryshonte teknologjia e planifikimit; në hotel isha i porsaardhuri që duhej të mësonte një sistem që ishte tashmë aty. Kur i vë krah njëra-tjetrës, të dyja përvojat tregojnë të njëjtën gjë: një sistem mund të jetë teknikisht më i mirë se ai që zëvendëson, pa qenë njerëzit gati të punojnë me të. Gatishmëria ndërtohet, ose nuk ndërtohet, në javët pas instalimit.
 
-Por kur i vë pranë njëra-tjetrës, shoh të njëjtën gjë. Një sistem mund të jetë teknikisht më i mirë se ai që zëvendëson. Kjo nuk do të thotë që njerëzit janë gati të punojnë me të. Gatishmëria nuk instalohet. Ndërtohet, ose nuk ndërtohet, në javët pas instalimit.
-
-**Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin, dhe dinë çfarë të bëjnë kur ai nuk i ndihmon.**
+**Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin dhe dinë çfarë të bëjnë kur ai nuk i ndihmon.**
 
 ## “Si përdoret” dhe “pse ndryshon”
 
-Arsyet e deklaruara të ndryshimit të gushtit ishin të qarta në letër: planifikim më i mirë, kohë më të sakta, më pak përjashtime operative. Nëse këto arsye iu shpjeguan ekipit në një takim, nuk e di.
+Në letër, arsyet e ndryshimit të gushtit ishin të qarta: planifikim më i mirë, kohë më të sakta, më pak përjashtime operative. Nuk e di nëse iu shpjeguan ekipit në një takim apo çfarë iu tha shoferëve dhe dispeçerëve, dhe nuk kam asnjë shënim se si u informova vetë.
 
-Por kam një bindje për dallimin mes dy gjërave që shpesh ngatërrohen. T'i tregosh dikujt si përdoret një sistem është trajnim. T'i shpjegosh pse organizata po ndryshon mënyrën e punës është diçka tjetër. E para i jep njeriut aftësinë për të klikuar. E dyta i jep arsyen për të raportuar kur diçka nuk shkon, sepse e di çfarë duhej të përmirësonte sistemi dhe e sheh kur nuk e bën.
+Megjithatë jam i bindur se dy gjëra ngatërrohen shpesh. T'i tregosh dikujt si përdoret një sistem është trajnim. T'i shpjegosh pse organizata po e ndryshon mënyrën e punës është tjetër gjë. E para i jep njeriut aftësinë për të klikuar. E dyta i jep një arsye për të njoftuar kur diçka nuk shkon, sepse e di çfarë duhej të përmirësonte sistemi dhe e sheh kur nuk e bën.
 
-Ndryshimi i gushtit parashikonte mbledhje informacioni nga terreni. Ky informacion vjen vetëm nga njerëz që e dinë pse po pyeten. Te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) shkrova që një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson. Një sistem i ri është momenti më i mirë për ta ndalur këtë, dhe më i lehti për ta humbur.
+Ndryshimi i gushtit parashikonte mbledhjen e informacionit nga terreni në ditët e para, dhe ky informacion vjen vetëm nga njerëz që e dinë pse po u kërkohet. Te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) shkrova se një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson. Një sistem i ri është momenti më i mirë për ta ndryshuar këtë, dhe momenti që humbet më lehtë.
 
 ## Informacioni në pesë vende
 
-Në hotel, vështirësia që mund ta konfirmoj nuk ishte vetëm përdorimi i programit. Ishte gjetja e informacionit të duhur, në momentin kur duhej kryer një proces. Mësimi mbështetej te shpjegimet e kolegëve, te SOP-të, te materialet vizuale dhe te videot, dhe asnjëra nuk i kishte të gjitha.
+Në hotel, vështirësia që mund ta konfirmoj shkonte përtej përdorimit të programit. Mësimi mbështetej në shpjegimet e kolegëve, në SOP-të, në materialet vizuale dhe në videot, dhe asnjëri prej tyre nuk i kishte të gjitha.
 
-Prandaj nisa [Front Desk Control](/sq/insights/how-i-built-front-desk-control/): për t'i organizuar udhëzimet, pamjet dhe proceset në një vend më të qartë dhe të kërkueshëm. Nuk e zëvendësoi sistemin e hotelit, dhe nuk kam asnjë matje që thotë se e shkurtoi trajnimin. Ishte përgjigjja ime për një problem që e kisha vetë si i ri.
+Prandaj nisa [Front Desk Control](/sq/insights/how-i-built-front-desk-control/): për t'i mbledhur udhëzimet, pamjet dhe proceset në një vend më të qartë, ku mund të kërkoja. Nuk e zëvendësoi sistemin e hotelit, dhe nuk kam asnjë matje që tregon se e shkurtoi trajnimin. Ishte përgjigjja ime për një problem që e kisha vetë si i porsaardhur.
 
-**Vështirësia e një sistemi të ri nuk është vetëm të dish ku të klikosh. Është të gjesh informacionin e duhur në momentin kur të duhet.**
+**Vështirësia e një sistemi të ri nuk është vetëm të dish ku të klikosh. Është të gjesh informacionin e duhur në çastin kur të duhet.**
 
 ## Dokumenti pranë sistemit
 
-Në hotel kam punuar me SOP, lista kontrolli, raporte Excel dhe udhëzime të shpërndara në materiale të ndryshme. Shërbenin si mbështetje për proceset. Nuk kam një rast ku një listë e vjetër kundërshtonte të dhënat e sistemit, as ku Excel-i përdorej për të anashkaluar sistemin.
+Në hotel kam punuar me SOP, lista kontrolli, raporte në Excel dhe udhëzime të shpërndara në materiale të ndryshme, që shërbenin si mbështetje për proceset. Nuk kam asnjë rast ku një listë e vjetër binte ndesh me të dhënat e sistemit, as ku Excel-i përdorej për ta anashkaluar sistemin.
 
-Dhe nuk mendoj se çdo dokument jashtë sistemit është zakon i keq. Një listë kontrolli pranë ekranit mund të jetë pikërisht ajo që e bën një proces të sigurt. Problemi lind kur punonjësi nuk e di cili informacion është i përditësuar dhe cili është burimi zyrtar. Një sistem i ri e bën këtë problem më të madh, sepse çdo dokument që ishte i saktë një ditë më parë mund të jetë gabim pa e ditur askush. Siç shkrova te [Një SOP e mirë nuk është dokument](/sq/insights/a-good-sop-is-not-a-document/), vlera e një udhëzimi është që të gjendet dhe të zbatohet në momentin e duhur. Një udhëzim i vjetëruar gjendet po aq lehtë.
+As nuk mendoj se çdo dokument jashtë sistemit është zakon i keq. Një listë kontrolli pranë ekranit mund të jetë pikërisht ajo që e bën një proces të sigurt. Problemi lind kur punonjësi nuk e di cili informacion është i përditësuar dhe cili është burimi zyrtar. Një sistem i ri e rëndon këtë problem, sepse çdo dokument që ishte i saktë një ditë më parë mund të jetë tani i gabuar pa e ditur askush. Siç shkrova te [Një SOP e mirë nuk është dokument](/sq/insights/a-good-sop-is-not-a-document/), vlera e një udhëzimi është që të gjendet dhe të zbatohet në çastin e duhur. Një udhëzim i vjetëruar gjendet po aq lehtë.
 
 ## Gjashtë gjëra para se të vijë
 
-Sot, kur vjen një sistem i ri, do t'i jepja përparësi përgatitjes së njerëzve, jo vetëm instalimit të programit. Nuk kam drejtuar një program të tillë ndryshimi. Por këto janë gjërat që do të rekomandoja:
+Sot, kur vjen një sistem i ri, do t'i jepja përparësi përgatitjes së njerëzve, jo vetëm instalimit të programit. Nuk kam drejtuar një program ndryshimi të tillë; këto janë gjërat që do të rekomandoja:
 
 1. **Të shpjegohet pse po bëhet ndryshimi.** Jo vetëm çfarë bën sistemi i ri.
-2. **Të tregohet çfarë ndryshon konkretisht në punën e përditshme.** Për çdo rol, jo një prezantim për të gjithë.
+2. **Të tregohet çfarë ndryshon në punën e përditshme.** Për çdo rol, jo një prezantim për të gjithë.
 3. **Trajnim me situata reale, jo vetëm prezantim i funksioneve.** Rasti i zakonshëm dhe rasti i vështirë.
 4. **Të jetë e qartë ku kërkohet ndihmë kur diçka nuk funksionon.** Edhe natën, edhe në ditët e para.
-5. **Të mblidhen problemet e ditëve të para dhe t'u kthehet përgjigje punonjësve.** Një problem i raportuar pa përgjigje është mësimi i fundit që njerëzit marrin për të raportuar.
-6. **Udhëzimet të përditësohen bashkë me sistemin.** Përndryshe dokumenti dhe ekrani thonë dy gjëra, dhe i riu nuk e di cilit t'i besojë.
+5. **Të mblidhen problemet e ditëve të para dhe t'u kthehet përgjigje punonjësve.** Një problem i raportuar pa përgjigje është mësimi i fundit që marrin njerëzit për raportimin.
+6. **Udhëzimet të përditësohen bashkë me sistemin.** Përndryshe dokumenti dhe ekrani thonë dy gjëra të ndryshme, dhe i porsaardhuri nuk e di cilit t'i besojë.
 
-Pika e pestë është ajo që do ta theksoja. Ndryshimi i gushtit parashikonte mbledhjen e informacionit nga terreni. Mbledhja është gjysma. Gjysma tjetër është që ai që e dha informacionin të mësojë çfarë u bë me të.
+Pikën e pestë do ta theksoja më shumë se të tjerat. Mbledhja e informacionit nga terreni, siç e parashikonte ndryshimi i gushtit, është gjysma; gjysma tjetër është që ai që e dha informacionin të mësojë çfarë u bë me të.
 
 ## Para se të vijë sistemi i ri
 
-Kartela më poshtë është për atë që e drejton ndryshimin, por edhe për atë që e pret: pse po ndryshon, çfarë ndryshon në punën tënde, ku e mëson me situata reale, kujt i drejtohesh, ku shkojnë problemet e ditëve të para dhe kush kthen përgjigje, dhe cili është burimi zyrtar. Nëse si punonjës nuk i di përgjigjet, pyet para ditës së parë. [Six Sigma DMAIC](/sq/tools/six-sigma-dmaic/) ka fazën Control për pikërisht këtë: si mbahet një ndryshim pasi ka ikur ai që e solli.
+Kartela më poshtë vlen për atë që e drejton ndryshimin, por edhe për atë që e pret. Nëse si punonjës nuk i di përgjigjet, pyet para ditës së parë. [Six Sigma në magazinë](/sq/tools/six-sigma-dmaic/) e ka fazën Control pikërisht për këtë: si mbahet një ndryshim pasi ka ikur ai që e solli.
 
-**Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.**
+Sistemi ndryshon ditën kur instalohet. Mënyra si punojnë njerëzit ndryshon më pas, përmes trajnimit, komunikimit dhe përvojës së përditshme: rasti i zakonshëm dhe ai i vështirë, të ushtruar para ditës së parë, përgjigjja për problemin e raportuar në javën e parë, udhëzimi i përditësuar në të njëjtën ditë me ekranin.

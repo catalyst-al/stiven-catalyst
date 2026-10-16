@@ -1,4 +1,4 @@
 ---
-quote: "Vlera e një menaxheri nuk është sa gjëra kalojnë nëpër duart e tij, por sa mirë vazhdojnë kur nuk kalojnë më."
+quote: "Vlera e një menaxheri nuk është në sa gjëra kalojnë nëpër duart e tij, por në sa mirë ecin ato kur nuk kalojnë më."
 date: 2026-10-08
 ---

@@ -34,64 +34,56 @@ firstMove:
   - Jepi çdo rasti të hapur një emër dhe një konfirmim, jo vetëm një udhëzim.
 ---
 
-Në rampë mund ta shohësh një problem me sytë e tu.
+Në rampë, problemin e sheh vetë. Nga distanca, shpesh e njeh vetëm përmes informacionit që të vjen.
 
-Nga distanca, shpesh duhet ta kuptosh përmes informacionit që merr.
+Ky është dallimi më i madh mes dy mënyrave si kam punuar në last mile. Në vitin 2025, si Team Leader dhe pastaj si Area Manager, isha brenda operacionit: në rampë, te ngarkimi, pranë dispeçerëve, me KPI-të çdo ditë. Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, nga shtëpia. Roli përfshin koordinimin operacional të 80+ automjeteve dhe 100+ shoferëve: turet, shoferët, vonesat dhe problemet gjatë shpërndarjes.
 
-Ky është dallimi më i madh mes dy mënyrave si kam punuar në last mile. Në vitin 2025, si Team Leader dhe pastaj si Area Manager, isha në operacion: në rampë, te ngarkimi, pranë dispeçerëve, me KPI-të çdo ditë. Nga 1 janari 2026 punoj part-time si Last Mile Dispatcher, në distancë, nga shtëpia. Roli përfshin koordinimin operacional të 80+ automjeteve dhe 100+ shoferëve: turet, shoferët, vonesat dhe problemet gjatë shpërndarjes.
+Problemet janë të njëjta. Vendi im përballë tyre është krejt tjetër.
 
-Të njëjtat probleme. Një pozicion krejt tjetër përballë tyre.
-
-## Çfarë kam dhe çfarë nuk kam
-
-Nuk do të shkruaj emrat e aplikacioneve apo të sistemeve, as mënyrën e saktë të komunikimit, as orarin e turneve. Disa nga këto nuk i kam të sakta, dhe të dhënat e brendshme të punës nuk i publikoj. As nuk do të them çfarë tregon saktësisht sistemi, vendndodhje live, ndalesa apo ETA, sepse për këtë nuk jam i sigurt.
-
-Nuk kam një incident të dokumentuar nga ky rol që mund ta përshkruaj me siguri nga fillimi deri në zgjidhje. Kam raste të dokumentuara nga puna ime e mëparshme në last mile, me automjete dhe me vonesa, por nuk do t'i paraqes si raste të zgjidhura nga distanca.
-
-Kjo ese, pra, nuk është histori suksesi. Është krahasimi i dy mënyrave të punës, nga dikush që ka qenë në të dyja. Dhe është analiza ime, jo një rezultat i matur.
+Kjo ese i krahason të dy pozicionet, nga dikush që ka qenë në të dyja. Është analiza ime, jo një rezultat i matur dhe as një histori suksesi. Detajet e brendshme i lë jashtë, e disa prej tyre as nuk i di me saktësi: sistemet dhe çfarë tregojnë ato, kanalet e komunikimit dhe oraret e turneve. Nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri në zgjidhje. Rastet e dokumentuara që kam, me automjete dhe me vonesa, vijnë nga puna ime e mëparshme në last mile, dhe nuk i paraqes si raste të zgjidhura nga distanca.
 
 ## Çfarë humbet
 
-Humbet mundësinë për ta vëzhguar vetë çdo situatë.
+Humbet mundësinë ta vëzhgosh vetë çdo situatë.
 
-Te [Gemba](/sq/insights/gemba/) shkrova që raporti tregon rezultatin, dhe terreni tregon si krijohet ai rezultat. Nga distanca, terreni nuk është aty. Mbetet informacioni që vjen prej tij.
+Te [Gemba](/sq/insights/gemba/) shkrova se raporti tregon rezultatin, ndërsa terreni tregon si krijohet ai rezultat. Nga distanca, terreni mungon. Mbetet informacioni që vjen prej tij.
 
-Dhe informacioni i raportuar nga distanca nuk është gjithmonë i njëjtë me atë që mund të vëzhgosh vetë. Kur je në rampë, problemi të del përpara. Kur je në distancë, problemi të vjen vetëm nëse dikush e sheh, e kupton dhe e raporton. Secili nga këta tre hapa mund të mungojë.
+Dhe ajo që raportohet nga distanca nuk është gjithmonë e njëjtë me atë që do të vëzhgoje vetë. Kur je në rampë, problemi të del përpara. Kur je në distancë, të arrin vetëm nëse dikush e sheh, e kupton dhe e raporton, dhe secili prej këtyre tre hapave mund të mungojë.
 
 ## Çfarë fiton
 
-Por distanca nuk është vetëm humbje.
+Distanca ka edhe fitimet e veta.
 
-Në rampë sheh mirë atë që ke përpara. Nga distanca, nëse informacioni dhe mjetet e punës e mbështesin, mund të shohësh koordinimin e shumë tureve si një operacion të vetëm. Jo një makinë, por të gjitha bashkë. Jo një vonesë, por nëse vonesat po mblidhen diku.
+Në rampë sheh mirë atë që ke përpara. Nga distanca, nëse informacioni dhe mjetet e punës e lejojnë, mund ta shohësh koordinimin e shumë tureve si një operacion të vetëm: të gjitha makinat njëherësh, dhe nëse vonesat po mblidhen diku, në vend të një vonese të vetme.
 
-Kjo nuk vjen vetvetiu. Vjen vetëm nëse informacioni që merr është i mjaftueshëm dhe i besueshëm.
+Kjo pamje varet nga informacioni që merr: ai duhet të jetë i mjaftueshëm dhe i besueshëm.
 
 ## Informacioni bëhet vetë puna
 
-Nga distanca, tri gjëra bëhen edhe më të rëndësishme se në rampë: cilësia e informacionit që merr, komunikimi, dhe qartësia e përgjegjësive.
+Nga distanca, tri gjëra kanë edhe më shumë rëndësi se në rampë: cilësia e informacionit që merr, komunikimi dhe qartësia e përgjegjësive.
 
 **Kur nuk e sheh automjetin, duhet të kesh një mënyrë të besueshme për të kuptuar çfarë po ndodh me të.**
 
-Në rampë, një informacion i paqartë mund ta kompensosh duke shkuar e duke parë. Nga distanca, nuk mundesh. Informacioni i paqartë mbetet i paqartë, dhe vendimi që merr mbi të mbetet po aq i pasigurt.
+Në rampë, informacionin e paqartë mund ta plotësosh duke shkuar vetë të shohësh. Nga distanca nuk mundesh. Informacioni i paqartë mbetet i paqartë, dhe po ashtu çdo vendim që merr mbi të.
 
-Për komunikimin, nuk kam rregulla të dokumentuara që kam vendosur vetë: kur telefonoj, kur shkruaj, kur eskaloj. Por si parim besoj se një komunikim i mirë duhet të jetë i shkurtër, i qartë, dhe të thotë cili veprim nevojitet. Një mesazh që kërkon tri pyetje pasuese për t'u kuptuar e ka humbur kohën që duhej të fitonte.
+Për komunikimin nuk kam rregulla të miat të dokumentuara, por besoj se duhet të jetë i shkurtër, i qartë dhe të thotë cili veprim nevojitet. Një mesazh që kërkon tri pyetje pasuese për t'u kuptuar e ka humbur kohën që duhej të kursente.
 
 ## Çfarë do të shikoja
 
-Për një metodë personale të dokumentuar që e përdor për të parë problemet para se të ndodhin, nuk kam. Por sot do t'u kushtoja vëmendje tri gjërave.
+As një metodë të dokumentuar për t'i dalluar problemet herët nuk kam. Sot do t'u kushtoja vëmendje tri gjërave.
 
 **Devijimeve që përsëriten.** Një vonesë është rast. E njëjta vonesë, në të njëjtin vend, disa ditë me radhë, është model.
 
-**Problemeve të pazgjidhura.** Nga distanca është e lehtë që një problem të raportohet dhe pastaj të mbetet pezull, sepse askush nuk e sheh më.
+**Problemeve që mbeten pa zgjidhje.** Nga distanca ndodh lehtë që një problem të raportohet dhe pastaj të mbetet pezull, sepse askush nuk e sheh më.
 
-**Informacionit që vjen me vonesë.** Kur një informacion arrin vonë, vonesa vetë është sinjal. Problemi ka pasur kohë të rritet para se ta mësosh.
+**Informacionit që vjen me vonesë.** Kur një informacion arrin vonë, vetë vonesa është sinjal. Problemi ka pasur kohë të rritet para se ta mësosh.
 
-## Koordinim, jo vetëm udhëzim
+## Më shumë se udhëzime
 
 **Koordinimi në distancë nuk është thjesht t'u japësh udhëzime shoferëve. Është të ndërtosh një mënyrë komunikimi ku problemet bëhen të dukshme, përgjegjësitë janë të qarta dhe vendimet merren në kohë.**
 
-Kjo lidhet me gjithë këtë seri. Një përmirësim mbahet kur nuk varet nga prania e dikujt. Në koordinimin në distancë, prania nuk ekziston fare. Mbetet vetëm sistemi: kush e sheh problemin, si e thotë, kush e merr, kur mbyllet.
+Kjo e lidh esenë me gjithë serinë. Një përmirësim mbahet kur nuk varet nga prania e dikujt, dhe në koordinimin në distancë askush nuk është i pranishëm. Mbetet sistemi: kush e sheh problemin, si e thotë, kush e merr përsipër, kur mbyllet.
 
-Fletën më poshtë mund ta plotësosh për një problem që nuk e sheh dhe ta kopjosh. [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/) i mbledh rastet, veprimet dhe shkaqet e shumë tureve në një pamje, që operacioni të shihet si një i vetëm dhe jo si njëqind telefonata.
+Fletën më poshtë mund ta plotësosh për një problem që nuk e sheh dhe ta kopjosh. [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/) i mbledh rastet, veprimet dhe shkaqet e shumë tureve në një pamje të vetme, që operacioni të shihet si një i tërë dhe jo si njëqind telefonata.
 
-Në rampë, problemi të del përpara. Nga distanca, ose e kërkon, ose ke ndërtuar një mënyrë që ai të të vijë vetë.
+Në rampë, problemi të del përpara. Nga distanca, ose shkon ta kërkosh, ose ke ndërtuar një mënyrë që ai të të vijë vetë.

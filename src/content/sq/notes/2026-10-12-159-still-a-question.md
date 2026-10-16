@@ -1,4 +1,4 @@
 ---
-quote: "Te dera e klientit, një bag që mungon është ankesë. Te rampa, është ende një pyetje."
+quote: "Te dera e klientit, një çantë që mungon është ankesë. Në rampë, është ende pyetje."
 date: 2026-10-12
 ---

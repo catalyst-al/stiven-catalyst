@@ -9,93 +9,87 @@ teaser: Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat
 deck: 'Der elfte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was ich aus der strukturierten Arbeitsweise in Deutschland mitgenommen habe, was ich aus Albanien bewahrt habe, und die Frage, die sich mehr verändert hat als alles andere.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Schreiben Sie beim nächsten Problem, das Sie lösen, auf, wem es danach gehört und was sich ändert, damit es nicht zurückkommt.
-  - Dokumentieren Sie einen Prozess, der heute nur funktioniert, weil Sie sich an ihn erinnern.
-  - Nehmen Sie eine Entscheidung dieser Woche und markieren Sie, wo Ihre Initiative endet und die Befugnis eines anderen beginnt.
+  - Halten Sie beim nächsten Problem, das Sie lösen, fest, wer es danach verantwortet und was sich ändert, damit es nicht wiederkommt.
+  - Dokumentieren Sie einen Prozess, der heute nur funktioniert, weil Sie ihn im Kopf haben.
+  - Nehmen Sie sich eine Entscheidung dieser Woche vor und markieren Sie, wo Ihre Initiative endet und die Befugnis eines anderen beginnt.
 checklist:
   title: Gelöst. Und dann?
   fill: true
   items:
     - label: Was haben wir gelöst?
-      hint: Das Problem, wie es aufgetreten ist, in einer Zeile.
+      hint: Das Problem, wie es sich gezeigt hat, in einer Zeile.
     - label: Warum ist es passiert?
-      hint: Die Ursache im Prozess, nicht der Name der Person.
-    - label: Wem gehört es ab morgen?
+      hint: Die Ursache im Prozess, nicht der Name einer Person.
+    - label: Wer verantwortet es ab morgen?
       hint: Ein Name, keine Abteilung.
-    - label: Was ändert sich, damit es nicht zurückkommt?
+    - label: Was ändert sich, damit es nicht wiederkommt?
       hint: Ein Schritt, eine Prüfung, eine Regel, ein Werkzeug.
-    - label: Wo steht es geschrieben?
+    - label: Wo ist es festgehalten?
       hint: Damit das System es weiß, nicht nur ich.
 ---
 
 Früher habe ich öfter gefragt: „Wie lösen wir das?“
 
-Heute lautet meine Frage: „Wie lösen wir das, wem gehört es danach, und was ändern wir, damit es nicht wiederkommt?“
-
-Vielleicht ist das die größte Veränderung, die ich als Führungskraft vollzogen habe.
+Heute ist sie länger: „Wie lösen wir das, wer verantwortet es danach, und was ändern wir, damit es nicht wiederkommt?“ Vielleicht ist das die größte Veränderung, die ich als Führungskraft vollzogen habe.
 
 ## Wie ich in Albanien geführt habe
 
-In Albanien hatte ich Rollen mit breiter Managementverantwortung. Ich war nah an Verkauf, Bestand, Lager, Kosten, Cashflow und dem Aufbau des Partnernetzes. Ich habe auch ein Netz mit 61 aktiven Wiederverkäufern geführt.
+In Albanien hatte ich Rollen mit breiter Managementverantwortung. Ich war nah an Verkauf, Bestand, Lager, Kosten, Cashflow und am Aufbau des Partnernetzes und habe ein Netz mit 61 aktiven Wiederverkäufern geführt.
 
-Das bedeutete, dass ich viele Probleme nicht nur aus der Sicht einer Abteilung betrachten konnte. Eine Entscheidung im Verkauf wirkte sich auf den Bestand aus. Ein Problem mit dem Bestand wirkte sich auf den Kunden aus. Eine schwache Beziehung zu einem Partner wirkte sich auf den Umsatz aus.
+Viele Probleme ließen sich deshalb nicht aus der Sicht einer einzelnen Abteilung betrachten. Eine Entscheidung im Verkauf wirkte sich auf den Bestand aus, ein Problem im Bestand landete beim Kunden, und eine schwache Beziehung zu einem Partner zeigte sich im Umsatz.
 
-Mein Stil war direkter und sehr lösungsorientiert. Wenn es ein Problem gab, war mein Instinkt, hineinzugehen, zu verstehen, was passierte, und darauf zu drängen, dass wir uns schnell auf eine Lösung zubewegen.
+Mein Stil war direkter und stark auf die Lösung ausgerichtet. Wenn ein Problem auftauchte, wollte ich instinktiv hineingehen, verstehen, was los war, und darauf drängen, dass wir schnell zu einer Lösung kommen.
 
-Auch mit dem Team war mir die Nähe zum Betrieb immer lieber. Die Vorstellung eines Managers, der nur den Bericht kennt, aber nicht das, was dort passiert, wo die Arbeit gemacht wird, hat mir nie gefallen.
+Auch im Umgang mit dem Team war ich immer lieber nah am Betrieb. Die Vorstellung eines Managers, der nur den Bericht kennt, aber nicht weiß, was dort passiert, wo gearbeitet wird, hat mir nie gefallen.
 
 ## Das Gewicht des Prozesses
 
-Was für mich in Deutschland viel sichtbarer geworden ist, ist das Gewicht des Prozesses.
+In Deutschland ist mir das Gewicht des Prozesses viel deutlicher geworden.
 
-In vielen meiner Rollen hier reicht es nicht, dass die Arbeit erledigt ist. Sie muss nach dem Prozess erledigt sein, sie muss dokumentiert sein, und wenn nötig, muss man nachweisen können, dass sie kontrolliert wurde.
+In vielen meiner Rollen hier ist mit der erledigten Arbeit erst ein Teil getan: Sie muss nach Prozess erledigt und dokumentiert sein, und wenn nötig, muss man nachweisen können, dass sie kontrolliert wurde.
 
-Das habe ich in der Logistik genauso deutlich gesehen wie in der Hotellerie. In der Logistik gab es KPIs, eine klare Aufteilung der Verantwortlichkeiten, Abläufe, Betriebsregeln und Eskalation, wenn etwas vom Standard abwich. In der Hotellerie wird das noch sichtbarer. Es gibt Checklisten, Berichte, Schichtübergaben, Kontrollen und viel klarere Grenzen zwischen dem, was man selbst entscheiden kann, und dem, was man eskalieren muss.
+Das habe ich in der Logistik genauso erlebt wie in der Hotellerie. In der Logistik gab es KPIs, eine klare Aufteilung der Verantwortlichkeiten, Abläufe, Betriebsregeln und eine Eskalation, sobald etwas vom Standard abwich. In der Hotellerie ist es noch sichtbarer: Checklisten, Berichte, Schichtübergaben, Kontrollen und viel schärfere Grenzen zwischen dem, was man selbst entscheiden darf, und dem, was man eskalieren muss.
 
-Ein weiterer Punkt: Dokumentation hat Gewicht. Ein Problem, das nur eine Person kennt, ist trotzdem ein Problem der Organisation. Aber wenn es dokumentiert ist, kann man es verfolgen, einem Verantwortlichen zuweisen und sehen, ob es sich wiederholt.
+Auch die Dokumentation hat Gewicht. Ein Problem, das nur eine Person kennt, ist trotzdem ein Problem der Organisation. Sobald es dokumentiert ist, kann man es nachverfolgen, jemandem die Verantwortung dafür übertragen und sehen, ob es sich wiederholt.
 
 ## Was ich aus Deutschland mitgenommen habe
 
 Die größte Veränderung ist die Prozessdisziplin.
 
-Früher war ich sehr auf das Ergebnis ausgerichtet: Das Problem ist da, es muss gelöst werden. Heute füge ich eine weitere Frage hinzu: Was muss sich im Prozess ändern, damit wir dasselbe Problem nicht noch einmal lösen müssen?
+Früher war ich vor allem auf das Ergebnis ausgerichtet: Das Problem ist da, also muss es gelöst werden. Heute stelle ich eine zweite Frage: Was muss sich im Prozess ändern, damit wir dasselbe Problem nicht noch einmal lösen müssen?
 
-Deshalb lege ich heute viel mehr Wert auf SOPs, Checklisten, KPIs, die Übergabe, Dokumentation und darauf, wem eine Aufgabe gehört.
+Deshalb lege ich heute viel mehr Wert auf SOPs, Checklisten, KPIs, die Übergabe, die Dokumentation und darauf, dass für jede Aufgabe feststeht, wer sie verantwortet.
 
-Ich habe auch gelernt, Initiative und Autorität klarer zu trennen. Ich kann ein Problem erkennen, es analysieren, eine Lösung vorschlagen und meinen Teil erledigen. Aber das heißt nicht automatisch, dass jede Entscheidung bei mir liegt. Diese Grenze ist mir heute viel wichtiger als früher.
+Ich habe auch gelernt, Initiative und Befugnis klarer auseinanderzuhalten. Ich kann ein Problem erkennen, es analysieren, eine Lösung vorschlagen und meinen Teil erledigen. Deshalb liegt aber nicht automatisch jede Entscheidung bei mir. Diese Grenze ist mir heute viel wichtiger als früher.
 
-Und ich habe etwas gelernt, das am Anfang bürokratisch wirken kann, im Betrieb aber viel wert ist: Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat, hat man noch keinen guten Prozess.
+Und ich habe etwas gelernt, das zunächst bürokratisch wirken mag, im Betrieb aber viel wert ist: Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat, hat man noch keinen guten Prozess.
 
 ## Was ich aus Albanien bewahrt habe
 
-Ich habe die Nähe zum Betrieb bewahrt. Ich glaube immer noch nicht, dass man einen Prozess allein aus Berichten gut führen kann. Man muss sehen, was dort passiert, wo gearbeitet wird. In der Logistik heißt das, zu verstehen, was an der Rampe und mit den Menschen während der Schicht wirklich passiert, und nicht nur den Prozentwert am Ende des Tages anzuschauen. Im Hotel heißt das, zu verstehen, was an der Rezeption während einer Schicht wirklich passiert, und nicht nur morgens den Bericht zu lesen.
+Ich bin nah am Betrieb geblieben. Ich glaube nach wie vor nicht, dass man einen Prozess allein über Berichte gut führen kann; man muss sehen, was dort passiert, wo gearbeitet wird. In der Logistik heißt das, zu wissen, was an der Rampe und mit den Menschen während der Schicht passiert, statt am Ende des Tages nur auf den Prozentwert zu schauen. Im Hotel heißt das, zu wissen, was während einer Schicht an der Rezeption passiert, statt morgens nur den Bericht zu lesen.
 
-Ich habe auch die Flexibilität bewahrt. Wenn ein Problem auftaucht, antworte ich nicht gern sofort mit: „Das ist nicht meine Aufgabe.“ Ich versuche zuerst zu verstehen, ob ich der Situation helfen kann, ohne die Grenzen meiner Rolle zu überschreiten.
+Auch meine Flexibilität habe ich behalten. Wenn ein Problem auftaucht, antworte ich ungern sofort mit „Das ist nicht meine Aufgabe“. Zuerst prüfe ich, ob ich helfen kann, ohne die Grenzen meiner Rolle zu überschreiten.
 
-Und ich habe die menschliche Beziehung zum Team bewahrt. Der Prozess ist wichtig, aber Menschen sind keine Prozesse. Ein Mitarbeiter kann dieselbe Aufgabe haben wie gestern und heute in einer ganz anderen Verfassung zur Arbeit kommen. Führung muss auch das sehen.
+Und ich habe die menschliche Beziehung zum Team bewahrt. Der Prozess ist wichtig, aber Menschen sind keine Prozesse. Ein Mitarbeiter kann dieselbe Aufgabe haben wie gestern und heute in einer ganz anderen Verfassung zur Arbeit kommen. Auch das muss Führung sehen.
 
-Ich würde nicht sagen, dass diese Dinge in Deutschland „fehlen“. Das wäre eine Verallgemeinerung, die ich aus meiner Erfahrung nicht belegen kann. Ich kann nur sagen, dass es Teile meines Stils sind, die ich mitgebracht habe und nicht verlieren wollte, während ich mich an eine strukturiertere Arbeitskultur angepasst habe.
+Ich würde nicht behaupten, dass diese Dinge in Deutschland „fehlen“; eine solche Verallgemeinerung kann ich aus meiner Erfahrung nicht belegen. Es sind Teile meines Stils, die ich mitgebracht habe und nicht verlieren wollte, während ich mich an eine strukturiertere Arbeitskultur angepasst habe.
 
 ## Was ich anders machen würde
 
-Ich habe keine einzelne, klar dokumentierte Entscheidung aus Albanien, die ich sicher rekonstruieren und von der ich sagen könnte: „Das war der Fehler, und heute würde ich es so machen.“ Und ich würde keine Geschichte erfinden, nur weil der Essay einen dramatischen Moment braucht.
+Ändern würde ich nicht eine bestimmte Entscheidung aus Albanien, die ich sicher rekonstruieren könnte, sondern eine Gewohnheit: Ich würde mehr dokumentieren.
 
-Aber eines würde ich heute generell anders machen: Ich würde mehr dokumentieren.
+Wenn ein Prozess funktionierte, weil ich ihn kannte, würde ich heute versuchen, ihn so festzuhalten, dass das System ihn kennt. Wenn ein Problem gelöst war, würde es mir nicht reichen, dass es verschwunden ist. Ich würde verstehen wollen, warum es entstanden ist und ob sich im Prozess etwas ändern muss.
 
-Wenn ein Prozess funktionierte, weil ich ihn kannte, würde ich heute versuchen, dafür zu sorgen, dass das System ihn kennt. Wenn ein Problem gelöst war, würde ich mich nicht damit zufriedengeben, dass es weg ist. Ich würde verstehen wollen, warum es passiert ist und ob sich im Prozess etwas ändern muss.
-
-Und ich würde persönliche Verantwortung früher von organisatorischer Verantwortung trennen. Es ist nicht immer gut, wenn eine Führungskraft zu der Person wird, die alles löst. Denn die Organisation kann anfangen, von ihr abhängig zu werden, statt ihre Arbeitsweise zu verbessern.
+Außerdem würde ich persönliche und organisatorische Verantwortung früher trennen. Es ist nicht immer gut, wenn eine Führungskraft zu der Person wird, die alles löst, denn dann kann die Organisation von ihr abhängig werden, statt ihre Arbeitsweise zu verbessern.
 
 ## Zwei Stärken, die sich ergänzen
 
-Ich glaube nicht, dass eine Arbeitskultur die andere kopieren sollte. Aber aus dem, was ich erlebt habe, sehe ich zwei Stärken, die sich sehr gut ergänzen können.
+Ich glaube nicht, dass eine Arbeitskultur die andere kopieren sollte. Aus dem, was ich erlebt habe, sehe ich aber zwei Stärken, die sich gut ergänzen können.
 
-Aus der strukturierten Arbeitsweise, die ich in Deutschland erlebt habe, kann man mehr Prozessdisziplin mitnehmen: klarere Standards, Dokumentation, definierte Rollen, Messung und Kontinuität. Das macht eine Organisation weniger abhängig vom Einzelnen.
+Von der strukturierten Arbeitsweise, die ich in Deutschland kennengelernt habe, kann man mehr Prozessdisziplin übernehmen: klarere Standards, Dokumentation, definierte Rollen, Messung und Kontinuität. Das macht eine Organisation unabhängiger vom Einzelnen.
 
-Aus meiner Erfahrung in Albanien würde ich die Schnelligkeit der Reaktion bewahren, die Nähe zu den Menschen und die Fähigkeit, sich anzupassen, wenn die Realität nicht zum Plan passt. Denn auch der beste Prozess auf dem Papier wird eines Tages auf eine Situation treffen, die dort nicht steht.
+Aus meiner Erfahrung in Albanien würde ich die schnelle Reaktion bewahren, die Nähe zu den Menschen und die Fähigkeit, sich anzupassen, wenn die Wirklichkeit nicht zum Plan passt. Auch der beste Prozess auf dem Papier trifft eines Tages auf eine Lage, die darin nicht vorkommt.
 
-Heute sehe ich meine Art zu führen genau zwischen diesen beiden Welten. Aus der einen habe ich den Instinkt mitgenommen, in das Problem hineinzugehen und nicht zu warten, bis jemand anderes es löst. Aus der anderen habe ich gelernt, dass es nicht reicht, das Problem zu lösen. Man muss eine Arbeitsweise aufbauen, die seine Rückkehr unwahrscheinlicher macht.
+Meine Art zu führen liegt heute zwischen diesen beiden Welten. Aus der einen habe ich den Instinkt mitgenommen, in das Problem hineinzugehen, statt zu warten, bis jemand anderes es löst. In der anderen habe ich gelernt, dass zu einer Lösung eine Arbeitsweise gehört, die die Rückkehr des Problems unwahrscheinlicher macht.
 
-Ich bin nicht weniger flexibel geworden.
-
-Ich bin weniger bereit, Flexibilität an die Stelle des Systems treten zu lassen.
+Weniger flexibel bin ich nicht geworden, nur weniger bereit, Flexibilität an die Stelle des Systems treten zu lassen. Ist heute ein Problem gelöst, folgen ihm zwei Fragen: Wer verantwortet es jetzt, und was ändert sich, damit es nicht wiederkommt?

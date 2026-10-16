@@ -6,66 +6,56 @@ series: improvement
 status: published
 featured: true
 summary: Një porosi mund të mbërrijë jo e plotë te klienti, por problemi mund të ketë filluar shumë përpara dorëzimit.
-teaser: Kur mungonte një bag, rregulli ishte i qartë. Shoferi njofton Team Leader-in, dhe trolley nuk lëviz nga zona e vet derisa problemi të zgjidhet.
-description: "Incomplete si KPI në last mile: rregulli kur mungonte një bag, pse një porosi jo e plotë ka një histori para derës së klientit, dhe kontrolli para nisjes."
-deck: 'Eseja e dytë e serisë “Përmirësimi që mbahet”: Incomplete si KPI në last mile, rregulli kur mungonte një bag, pse një porosi jo e plotë ka një histori para derës së klientit, dhe kontrolli para nisjes në pesë pika.'
+teaser: 'Kur mungonte një çantë, rregulli ishte i qartë: shoferi njoftonte Team Leader-in, dhe karroca nuk lëvizte nga zona e vet derisa të zgjidhej problemi.'
+description: "Incomplete si KPI në last mile: rregulli kur mungonte një çantë, pse një porosi jo e plotë ka një histori para derës së klientit dhe kontrolli para nisjes."
+deck: 'Eseja e dytë e serisë “Përmirësimi që mbahet”: Incomplete si KPI në last mile, rregulli kur mungonte një çantë, pse një porosi jo e plotë ka një histori para derës së klientit dhe kontrolli para nisjes në pesë pika.'
 relatedTools:
   - /tools/incomplete-control/
   - /tools/pareto/
 checklist:
   title: Kontrolli para nisjes
   copy: Kopjo listën
-  note: Listë orientuese me masat që do t'i rekomandoja sot, jo me ndryshime që i kam zbatuar vetë.
+  note: Masa që do t'i rekomandoja sot, jo ndryshime që i kam zbatuar vetë.
   items:
-    - Çdo bag është i identifikueshëm dhe i lidhur me porosinë e vet.
-    - Numri i bag-eve përputhet me atë që duhet ngarkuar.
-    - Trolley është kontrolluar që të mos ketë ngarkesa të përziera.
-    - Nëse mungon një bag, procesi ndalet për atë problem dhe njoftohet Team Leader-i.
+    - Çdo çantë është e identifikueshme dhe e lidhur me porosinë e vet.
+    - Numri i çantave përputhet me atë që duhet ngarkuar.
+    - Karroca është kontrolluar që të mos ketë ngarkesa të përziera.
+    - Nëse mungon një çantë, procesi ndalet për atë problem dhe njoftohet Team Leader-i.
     - Çdo mungesë e zbuluar para nisjes regjistrohet me shkakun, kur dihet.
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Para nisjes, kontrollo që numri i çantave përputhet dhe që asnjë karrocë nuk është e përzier.
   - Kur mungon një çantë, ndale atë karrocë dhe njofto Team Leader-in. Mos e lër të niset sikur gjithçka të ishte në rregull.
-  - Regjistro çdo mungesë të gjetur në rampë me shkakun e saj. Aty fillon Incomplete.
+  - Regjistro me shkakun e saj çdo mungesë që gjendet në rampë. Aty fillon Incomplete.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: check-before-departure
 ---
 
-Kur mungonte një bag, rregulli ishte i qartë.
+Për një çantë që mungonte, rregulli kishte tri pjesë. Shoferi duhej të njoftonte Team Leader-in. Karroca duhej të qëndronte brenda zonës së caktuar derisa të zgjidhej problemi. Dhe produktet e ftohura dhe të ngrira duhej të skanoheshin brenda zonave të tyre me temperaturë të kontrolluar.
 
-Shoferi duhej të njoftonte Team Leader-in. Trolley duhej të qëndronte brenda zonës së përcaktuar derisa problemi të zgjidhej. Dhe produktet chilled dhe frozen duhej të skanoheshin brenda zonave përkatëse të temperaturës së kontrolluar.
+Ky rregull tregon diçka që raporti nuk e thotë: një çantë që mungon zbulohet shpesh në rampë, gjatë ngarkimit, shumë kohë para se porosia të arrijë te klienti.
 
-Ky rregull thotë diçka që raporti nuk e thotë. Një bag që mungon zbulohet shpesh te rampa, gjatë ngarkimit. Pra, shumë para se porosia të arrijë te klienti.
+Te [Si punonim me dëmet](/sq/insights/how-we-worked-with-damage/) shkrova se përqindja nuk ka adresë. E njëjta gjë vlen për Incomplete, me një ndryshim të rëndësishëm: këtu ka një moment kur problemi mund të ndalet ende.
 
-Te [Si punonim me dëmet](/sq/insights/how-we-worked-with-damage/) shkrova se përqindja nuk ka adresë. Me Incomplete ndodh e njëjta gjë, me një ndryshim të rëndësishëm: këtu ka një moment kur problemi mund të ndalet ende.
+Incomplete e kuptoja si porosi që nuk i mbërrinte e plotë klientit; formulën zyrtare dhe rregullat e sakta të numërimit nuk i di. Nga raportet kam këto shifra: në prill 2025 Incomplete ishte 1,18% kundrejt një objektivi prej 0,8%, ndërsa në një raport të qershorit 2025 ishte 0,63%, me 13 raste.
 
-## Çfarë kam dhe çfarë nuk kam
+Shifrat janë të vërteta, por nuk tregojnë se cilat masa e sollën ndryshimin, dhe nuk e paraqes atë si rezultat të punës sime. Nuk e di as nga cili kanal dhe në cilin sistem regjistrohej çdo rast, as cili problem ndodhte më shpesh.
 
-Praktikisht, Incomplete e kuptoja si një porosi që nuk i dorëzohej e plotë klientit. Për formulën zyrtare dhe kriteret e sakta të numërimit, nuk e di.
+## Çfarë gjetëm në magazinë
 
-Kam të dokumentuara këto shifra. Në prill 2025, Incomplete ishte 1,18% kundrejt objektivit 0,8%. Në një raport të qershorit 2025 ishte 0,63%, me 13 raste.
+Dy probleme mund t'i konfirmoj: çanta që mungonin dhe karroca të përziera ose të organizuara gabim. Me përgatitjen dhe organizimin e ngarkesave kishim vërtet vështirësi, por nuk kam asnjë hetim të dokumentuar që ta ketë ndjekur deri në magazinë një rast për të cilin fillimisht u fajësua shoferi.
 
-Janë shifra të vërteta, por nuk provojnë vetë se cilat masa sollën ndryshimin. Nuk e paraqes atë ndryshim si rezultat të punës sime.
-
-Nuk e di me saktësi si regjistrohej një porosi jo e plotë: nga ankesa e klientit, nga raportimi i shoferit apo nga një kontroll tjetër, dhe në cilin sistem. Nuk e di cili problem ndodhte më shpesh. Dhe nuk kam një rast të dokumentuar ku hetimi provoi se një Incomplete, i atribuar fillimisht shoferit, kishte lindur në magazinë. Kemi hasur probleme me përgatitjen dhe organizimin e ngarkesave, por nuk do të shpik një hetim apo një përfundim.
-
-## Çfarë gjenim në magazinë
-
-Dy probleme i kam të konfirmuara: bag-e që mungonin, dhe trolley të përzier ose të organizuar gabim.
-
-Asnjëri prej tyre nuk lind te dera e klientit. Bag-u që mungon ka munguar diku më herët: në përgatitje, në trolley ose në ngarkim. Trolley i përzier është organizuar keq para se të arrijë te shoferi. Por nëse askush nuk e ndal, të dyja përfundojnë në të njëjtin rresht të raportit: porosi jo e plotë te klienti.
-
-**Një porosi mund të mbërrijë jo e plotë te klienti, por problemi mund të ketë filluar shumë përpara dorëzimit.**
+Asnjëri prej tyre nuk lind te dera e klientit. Çanta që mungon ka humbur diku më herët: në përgatitje, në karrocë ose gjatë ngarkimit. Karroca e përzier është organizuar keq para se të arrijë te shoferi. Megjithatë, nëse askush nuk i ndal, të dy përfundojnë në të njëjtin rresht të raportit: porosi që i mbërriti klientit jo e plotë.
 
 ## Pse rregulli kishte kuptim
 
-Secila pjesë e rregullit, siç e shoh unë sot, mbron diçka.
+Siç e shoh sot, secila pjesë e rregullit mbron diçka.
 
-Njoftimi i Team Leader-it e kthen mungesën në problem të operacionit, jo në problem të shoferit vetëm. Shoferi e sheh mungesën. Por gjetja e bag-ut, ose vendimi çfarë bëhet me porosinë, nuk varet vetëm prej tij.
+Njoftimi i Team Leader-it e kthen mungesën në problem të operacionit. Mungesën e sheh shoferi, por gjetja e çantës, ose vendimi se çfarë bëhet me porosinë, nuk varet vetëm prej tij.
 
-Trolley që nuk lëviz nga zona e vet ruan gjurmën. Nëse trolley-i fillon të lëvizë ndërkohë që kërkohet bag-u, mund të ngatërrohet më shumë se ç'ishte, dhe pyetja “ku humbi?” bëhet më e vështirë.
+Karroca që nuk lëviz nga zona e vet ruan gjurmën. Nëse fillon të lëvizë ndërkohë që kërkohet çanta, gjërat mund të ngatërrohen edhe më shumë, dhe pyetjes “ku humbi?” i përgjigjesh më me vështirësi.
 
-Dhe rregulli për chilled dhe frozen tregon që standardi nuk thotë vetëm çfarë bëhet. Thotë edhe ku bëhet. Kur një problem zgjidhet me nxitim, vendi është gjëja e parë që harrohet.
+Dhe rregulli për produktet e ftohura dhe të ngrira tregon se një standard nuk thotë vetëm çfarë bëhet, por edhe ku. Kur një problem zgjidhet me nxitim, vendi është gjëja e parë që harrohet.
 
 {diagram}
 
@@ -73,30 +63,28 @@ Dhe rregulli për chilled dhe frozen tregon që standardi nuk thotë vetëm çfa
 
 Incomplete e ndiqnim si KPI në raportet operative. Si çdo KPI, mund të lexohet në dy mënyra.
 
-E para: një numër negativ që duhet ulur, dhe një emër shoferi pranë çdo rasti. Kjo mënyrë është e shpejtë. Por pyetjen që ka më shumë rëndësi e lë pa përgjigje.
+Leximi i parë e sheh si një numër negativ që duhet ulur, me emrin e një shoferi pranë çdo rasti. Është lexim i shpejtë, por pyetjen më të rëndësishme e lë pa përgjigje.
 
-E dyta:
+I dyti:
 
 **Incomplete nuk duhet parë vetëm si numër negativ apo gabim i shoferit. Duhet të na ndihmojë të kuptojmë ku humbi produkti ose informacioni dhe si mund ta parandalojmë përsëritjen.**
 
-Dallimi me dëmet është ky. Një dëm, kur zbulohet, ka ndodhur tashmë. Një bag që mungon, nëse zbulohet te rampa, është ende vetëm një mungesë. Nuk është bërë ende porosi jo e plotë te klienti. Prandaj kontrolli më i vlefshëm nuk është ai që numëron rastet pasi kanë ndodhur. Është ai që e kap mungesën para nisjes.
+Këtu Incomplete dallon nga dëmet. Dëmi, kur zbulohet, ka ndodhur tashmë. Një çantë që mungon, nëse zbulohet në rampë, është ende vetëm një mungesë; nuk është bërë ende porosi jo e plotë te dera e klientit. Prandaj kontrolli vlen më shumë para nisjes.
 
 ## Kontrolli para nisjes
 
-Nëse do ta ndërtoja sot, do të vendosja një kontroll të qartë para se makina të nisë. Pesë pika:
+Ajo që do të rekomandoja sot, dhe jo diçka që e kam zbatuar vetë, është një kontroll i qartë para se të niset furgoni. Pesë pika:
 
-1. **Çdo bag është i identifikueshëm** dhe i lidhur me porosinë e vet.
-2. **Numri i bag-eve përputhet** me atë që duhet ngarkuar.
-3. **Trolley është kontrolluar** që të mos ketë ngarkesa të përziera.
-4. **Nëse mungon një bag, procesi ndalet** për atë problem dhe njoftohet Team Leader-i.
-5. **Çdo mungesë e zbuluar para nisjes regjistrohet** me shkakun, kur dihet.
+1. **Çdo çantë është e identifikueshme** dhe e lidhur me porosinë e vet.
+2. **Numri i çantave përputhet** me atë që duhet ngarkuar.
+3. **Karroca është kontrolluar** që të mos ketë ngarkesa të përziera.
+4. **Nëse mungon një çantë, procesi ndalet** për atë problem dhe njoftohet Team Leader-i.
+5. **Çdo mungesë e zbuluar para nisjes regjistrohet** me shkakun e saj, kur dihet.
 
-Këto janë masa që do të rekomandoja sot, jo ndryshime që pretendoj se i kam zbatuar personalisht.
+Pika e pestë harrohet më lehtë se të tjerat. Një mungesë që gjendet dhe zgjidhet para nisjes nuk del kurrë në raportin e Incomplete. Për klientin kjo është mirë. Por nëse nuk shënohet askund, procesi nuk mëson asgjë prej saj, dhe nesër dikush tjetër do ta gjejë sërish të njëjtën mungesë, me pak fat.
 
-Pika e pestë është ajo që harrohet më lehtë. Një mungesë që gjendet dhe zgjidhet para nisjes nuk del kurrë në raportin e Incomplete. Kjo është mirë për klientin. Por nëse nuk shkruhet askund, procesi nuk mëson asgjë prej saj, dhe nesër e njëjta mungesë do të gjendet përsëri, nga dikush tjetër, me pak fat.
-
-[Kontrolli i plotësisë](/sq/tools/incomplete-control/) i regjistron rastet me fazën e procesit ku lindën dhe me arsyen, dhe tregon ku lindin më shpesh. Lista më poshtë mund të shënohet këtu dhe të kopjohet për turnin.
-
-Te dera e klientit, një bag që mungon është ankesë. Te rampa, është ende një pyetje.
+[Kontrolli i plotësisë](/sq/tools/incomplete-control/) e regjistron çdo rast me fazën e procesit ku nisi dhe me arsyen, dhe tregon ku nisin më shpesh rastet. Listën më poshtë mund ta shënosh këtu dhe ta kopjosh për turnin.
 
 **Kontrolli më i mirë nuk është ai që numëron porositë jo të plota. Është ai që i ndal para se të nisen.**
+
+Te dera e klientit, një çantë që mungon është ankesë. Në rampë, është ende një pyetje.
