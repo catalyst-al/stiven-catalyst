@@ -57,6 +57,8 @@
     const show = (at = position()) => {
       now.textContent = clock(at);
       if (!scrubbing) scrub.value = String(Math.round(at));
+      // How much has been heard, as the filled part of the line (styles.css: --heard).
+      scrub.style.setProperty("--heard", `${length() ? Math.min(100, (at / length()) * 100).toFixed(1) : 0}%`);
       scrub.setAttribute("aria-valuetext", (d.timeLabel || "{a} of {b}").replace("{a}", clock(at)).replace("{b}", clock(length())));
     };
     const labelFor = () => (media.paused ? (position() > 1 ? d.resumeLabel : d.playLabel) : d.pauseLabel);
@@ -99,7 +101,11 @@
     });
 
     // Dragging the slider moves the time shown at once and the playback when it is let go.
-    scrub.addEventListener("input", () => { scrubbing = true; now.textContent = clock(Number(scrub.value)); });
+    scrub.addEventListener("input", () => {
+      scrubbing = true;
+      now.textContent = clock(Number(scrub.value));
+      scrub.style.setProperty("--heard", `${length() ? Math.min(100, (Number(scrub.value) / length()) * 100).toFixed(1) : 0}%`);
+    });
     scrub.addEventListener("change", () => { scrubbing = false; seek(Number(scrub.value)); remember(true); });
 
     media.addEventListener("play", () => { state(); session(); });

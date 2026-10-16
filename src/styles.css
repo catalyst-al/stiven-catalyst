@@ -8396,3 +8396,17 @@ a.essay-series-next:hover em { translate: 5px 0; }
   }
 }
 @keyframes edition-mark { from { background: transparent; box-shadow: none; scale: .6; } }
+
+/* The podcast player's line fills with what has been heard (--heard, from audio-player.js) and its knob glows while
+   an episode plays; on the podcast page, the address and its button glow green for as long as "Copied" shows. */
+.audio-player-scrub { height: 18px; background: transparent; appearance: none; -webkit-appearance: none; }
+.audio-player-scrub::-webkit-slider-runnable-track { height: 4px; border-radius: 99px; background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--heard, 0%) 100% no-repeat, var(--line); }
+.audio-player-scrub::-moz-range-track { height: 4px; border-radius: 99px; background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--heard, 0%) 100% no-repeat, var(--line); }
+.audio-player-scrub::-webkit-slider-thumb { width: 14px; height: 14px; margin-top: -5px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); transition: box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); -webkit-appearance: none; }
+.audio-player-scrub::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.audio-player-scrub:hover::-webkit-slider-thumb { scale: 1.15; }
+.audio-player.is-playing .audio-player-scrub::-webkit-slider-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 22%, transparent), 0 0 12px var(--blue); }
+.audio-player.is-playing .audio-player-scrub::-moz-range-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 22%, transparent), 0 0 12px var(--blue); }
+.podcast-address-row input, .podcast-address-row .button-primary { transition: border-color .3s ease, box-shadow .35s ease, background-color .3s ease; }
+.podcast-address.is-done .podcast-address-row input { border-color: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 16%, transparent); }
+.podcast-address.is-done .podcast-address-row .button-primary { background: var(--ok); border-color: var(--ok); box-shadow: 0 0 18px color-mix(in srgb, var(--ok) 45%, transparent); }

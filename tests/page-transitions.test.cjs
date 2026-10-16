@@ -498,3 +498,23 @@ test('Tools guide: each change of an edition lights its mark as it is reached, a
   assert.match(css, /\.book-editions a\[download\]:hover::after \{ translate: 0 3px; \}/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes edition-mark/);
 });
+
+test('Podcast player: the line fills with what has been heard; "Copied" glows green on the address', async () => {
+  const player = fs.readFileSync('src/js/audio-player.js', 'utf8');
+  assert.equal((player.match(/scrub\.style\.setProperty\("--heard"/g) || []).length, 2, 'while playing and while dragging');
+  assert.match(css, /\.audio-player-scrub::-webkit-slider-runnable-track \{[^}]*0 0 \/ var\(--heard, 0%\) 100% no-repeat/);
+  assert.match(css, /\.podcast-address\.is-done \.podcast-address-row \.button-primary \{ background: var\(--ok\);/);
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM('<div class="podcast-address" data-podcast-copy data-copied="Kopjuar"><input data-podcast-url value="https://x/podcast.xml"><button data-podcast-copy-button>Kopjo</button><span data-podcast-status></span></div>', { url: 'https://stivencatalyst.com/sq/podcast.html', runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  Object.defineProperty(window.navigator, 'clipboard', { value: { writeText: async () => {} } });
+  Object.defineProperty(window, 'isSecureContext', { value: true });
+  window.eval(fs.readFileSync('src/js/podcast.js', 'utf8'));
+  window.document.querySelector('button').click();
+  await new Promise((resolve) => window.setTimeout(resolve, 20));
+  const box = window.document.querySelector('.podcast-address');
+  assert.ok(box.classList.contains('is-done'));
+  assert.equal(window.document.querySelector('button').textContent, 'Kopjuar');
+  await new Promise((resolve) => window.setTimeout(resolve, 2600));
+  assert.ok(!box.classList.contains('is-done'), 'the glow goes with the word');
+});
