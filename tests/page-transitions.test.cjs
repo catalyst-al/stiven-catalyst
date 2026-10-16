@@ -374,3 +374,11 @@ test('Projects: the cards fill in one after another, a project in progress beats
   }
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.tag\.is-live/);
 });
+
+test('Start here: the portrait breathes, each step number lights up as it is reached, the closing links draw their line', () => {
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.start-intro img \{ animation: portrait-breathe/);
+  assert.match(css, /\.start-number \{ animation: step-reach linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.start-more a:hover \{ background-size: 100% 1px; \}/);
+  assert.match(css, /:where\([^)]*\.start-intro[^)]*\) \{\s*animation: scroll-rise/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes step-reach/);
+});
