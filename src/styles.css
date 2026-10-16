@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -7101,6 +7101,67 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 @media print {
   .role-rings,
   .role-grow { display: none !important; }
+}
+
+/* A role page in motion: the rings at the top lift and fill with the planet's colour, the ring you jump to greets
+   you, the borrowed tools, the reading and the next planets answer the pointer, and the routine's line draws
+   itself down the day while each moment lights up as it is reached. */
+.role-rings a { transition: border-color .25s ease, background-color .25s ease, translate .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.role-rings a:hover { translate: 0 -2px; box-shadow: 0 12px 26px -18px var(--family); }
+.role-rings b { transition: background-color .3s ease, color .3s ease, box-shadow .3s ease; }
+.role-rings a:hover b { background: var(--family); color: var(--paper); box-shadow: 0 0 14px var(--family); }
+.role-ring-head h2 { position: relative; }
+.role-ring:target .role-ring-head h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  width: 72px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--family);
+  box-shadow: 0 0 14px var(--family);
+  transform-origin: left;
+  animation: ring-arrive 2.2s cubic-bezier(.22, 1, .36, 1) 1 both;
+}
+@keyframes ring-arrive { 0% { scale: 0 1; opacity: 1; } 35% { scale: 1 1; opacity: 1; } 100% { scale: 1 1; opacity: 0; } }
+.role-borrowed a, .role-reading a, .role-next-card { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.role-borrowed a::before, .role-reading a::before, .role-next-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--family) 15%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.role-next-card::before { z-index: 1; }
+.role-borrowed a:hover, .role-reading a:hover, .role-next-card:hover { box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--family) 80%, transparent); }
+.role-borrowed a:hover::before, .role-reading a:hover::before, .role-next-card:hover::before { opacity: 1; }
+.role-borrowed a:hover { transform: translateY(-3px); }
+.role-reading a:hover { transform: translateY(-4px); }
+.role-dot { transition: scale .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease; }
+.role-borrowed a:hover .role-dot { scale: 1.3; box-shadow: 0 0 18px 2px var(--family); }
+.role-borrowed em, .role-reading strong, .role-next-text strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.role-borrowed a:hover em { translate: 3px 0; }
+.role-reading a:hover strong, .role-next-card:hover .role-next-text strong { translate: 4px 0; }
+.role-next-card .family-visual { transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.role-next-card:hover .family-visual { scale: 1.06; }
+.role-routine li::before { transition: scale .35s cubic-bezier(.22, 1, .36, 1), background-color .35s ease; }
+.role-routine li:hover::before { scale: 1.25; background: var(--family); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .role-routine::before { transform-origin: top; animation: routine-draw linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+    .role-routine li::before { animation: routine-reach linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+  }
+}
+@keyframes routine-draw { from { scale: 1 0; } }
+@keyframes routine-reach { from { box-shadow: none; } 70% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--family) 25%, transparent), 0 0 18px var(--family); } to { box-shadow: 0 0 10px color-mix(in srgb, var(--family) 60%, transparent); } }
+@media (prefers-reduced-motion: reduce) {
+  .role-ring:target .role-ring-head h2::after { animation: none; opacity: 0; }
+  .role-rings a, .role-borrowed a, .role-reading a, .role-next-card, .role-next-card .family-visual { transition: none; }
 }
 
 @media (max-width: 900px) {

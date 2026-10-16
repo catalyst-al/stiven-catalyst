@@ -333,3 +333,12 @@ test('Tool pages: sibling tools and essays answer the pointer in the role colour
   assert.match(css, /:where\([^)]*\.family-more-list li, \.tool-essays-list li[^)]*\) \{\s*animation: scroll-rise/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.family-more-list a, \.tool-essays-list li a, /);
 });
+
+test('Role pages: rings fill with the planet colour, the ring jumped to greets you, cards answer the pointer, the routine draws itself', () => {
+  assert.match(css, /\.role-rings a:hover b \{ background: var\(--family\);/);
+  assert.match(css, /\.role-ring:target \.role-ring-head h2::after \{[\s\S]*?animation: ring-arrive/);
+  assert.match(css, /\.role-borrowed a::before, \.role-reading a::before, \.role-next-card::before \{[\s\S]*?radial-gradient\(380px circle at var\(--mx, 30%\)/);
+  assert.match(css, /@supports \(animation-timeline: view\(\)\) \{\s*@media \(prefers-reduced-motion: no-preference\) \{\s*\.role-routine::before \{[^}]*animation: routine-draw/);
+  assert.match(css, /:where\([^)]*\.role-borrowed li, \.role-reading li, \.role-next-card[^)]*\) \{\s*animation: scroll-rise/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.role-borrowed a, \.role-reading a, \.role-next-card, /);
+});
