@@ -215,8 +215,8 @@ test('a publication answers the pointer as a whole, and a magazine cover catches
   assert.match(css, /\.book-feature:hover \.book-object-cover \{ transform: rotateY\(-9deg\) rotateX\(1deg\); \}/);
   assert.match(css, /@media \(max-width: 620px\) \{ \.book-feature::after \{ inset: 10px -10px; \} \}/, 'the band stays inside the phone margin');
   assert.match(css, /\.weekly-card:hover \.weekly-card-cover::after \{[^}]*background-position: -30% 0; \}/);
-  assert.match(css, /:where\([^)]*\.book-feature, \.list-row,/);
-  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.tool-card, \.book-feature, a\.list-row"/);
+  assert.match(css, /:where\([^)]*\.book-feature, [^)]*\.list-row,/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.tool-card, \.book-feature, [^"]*a\.list-row"/);
 });
 
 test('a project card carries a chip with a planet that lights up, and its title steps forward', () => {
@@ -224,4 +224,27 @@ test('a project card carries a chip with a planet that lights up, and its title 
   assert.match(css, /\.project-card:hover \.tag \{[^}]*box-shadow: 0 0 16px -6px/);
   assert.match(css, /\.project-card:has\(a\):hover h2 \{ translate: 5px 0;/);
   assert.match(css, /\.project-card:hover \.project-image \{ scale: 1\.025; \}/);
+});
+
+test('About: the figures count up once in view and keep their own writing, and screen readers get the figure', async () => {
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM('<html><body><dl class="about-stats"><div><dt>years</dt><dd>10+</dd></div><div><dt>drivers</dt><dd>~250</dd></div></dl></body></html>', { runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  let seen = null;
+  window.matchMedia = () => ({ matches: false });
+  window.IntersectionObserver = class { constructor(cb) { seen = cb; this.cb = cb; } observe(el) { (this.els ||= []).push(el); } unobserve() {} };
+  window.eval(fs.readFileSync('src/script.js', 'utf8'));
+  const dds = [...window.document.querySelectorAll('dd')];
+  seen(dds.map((target) => ({ target, isIntersecting: true })));
+  assert.deepEqual(dds.map((dd) => dd.getAttribute('aria-label')), ['10+', '~250']);
+  await new Promise((resolve) => window.setTimeout(resolve, 1500));
+  assert.deepEqual(dds.map((dd) => dd.textContent), ['10+', '~250'], 'they end on the figure as written');
+});
+
+test('About: pillars, figures and the steps of the path answer the pointer like the cards', () => {
+  assert.match(css, /\.pillar::before \{[\s\S]*?radial-gradient\(260px circle at var\(--mx, 50%\) var\(--my, 0%\)/);
+  assert.match(css, /\.about-timeline li::before \{[\s\S]*?radial-gradient\(480px circle at var\(--mx, 20%\) var\(--my, 50%\)/);
+  assert.match(css, /@media \(max-width: 620px\) \{ \.about-timeline li::before \{ inset: 4px -10px; \} \}/);
+  assert.match(css, /\.about-portrait \{[\s\S]*?animation: portrait-breathe 5s ease-in-out infinite;/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.pillar, \.about-timeline li, a\.list-row"/);
 });

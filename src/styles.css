@@ -3585,6 +3585,14 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   font-size: 13px;
   line-height: 1.35;
 }
+/* About, like the cards elsewhere: the figures count up once when they come into view (script.js) and each one rises
+   with a blue edge under the pointer. */
+.about-stats > div { transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease; }
+.about-stats > div:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+  box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--blue) 75%, transparent);
+}
 .about-links {
   display: flex;
   flex-wrap: wrap;
@@ -3600,11 +3608,45 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 }
 
 .pillar {
+  position: relative;
+  isolation: isolate;
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--card);
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease;
 }
+/* The four pillars: a planet beside each name, and under the pointer the card rises with the light that follows it. */
+.pillar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--blue) 14%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.pillar:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+  box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--blue) 75%, transparent);
+}
+.pillar:hover::before { opacity: 1; }
+.pillar strong::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--blue) 48%, color-mix(in srgb, var(--blue) 50%, #000) 100%);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--blue) 70%, transparent);
+  vertical-align: .08em;
+  transition: box-shadow .3s ease, scale .3s cubic-bezier(.22, 1, .36, 1);
+}
+.pillar:hover strong::before { scale: 1.3; box-shadow: 0 0 10px var(--blue); }
 
 .pillar strong {
   display: block;
@@ -3707,8 +3749,14 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: 0 0 0 8px color-mix(in srgb, var(--blue) 10%, transparent), 0 24px 60px rgba(0,0,0,.35);
+  animation: portrait-breathe 5s ease-in-out infinite;
 }
-.about-portrait img { display: block; width: 100%; height: auto; }
+.about-portrait img { display: block; width: 100%; height: auto; transition: scale .8s cubic-bezier(.22, 1, .36, 1); }
+.about-portrait:hover img { scale: 1.04; }
+/* The ring of light around the portrait breathes slowly, like the bulb of the brand. */
+@keyframes portrait-breathe {
+  50% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--blue) 16%, transparent), 0 0 46px -6px color-mix(in srgb, var(--blue) 45%, transparent), 0 24px 60px rgba(0,0,0,.35); }
+}
 
 /* About: the path so far, newest first. */
 .about-path { border-bottom: 1px solid var(--line); }
@@ -3720,6 +3768,8 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   border-top: 1px solid var(--line);
 }
 .about-timeline li {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 160px minmax(0, 1fr);
   gap: 8px 40px;
@@ -3732,6 +3782,51 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   font-weight: 800;
   letter-spacing: .1em;
   padding-top: 4px;
+}
+/* Each step of the path: a planet before its years; under the pointer the step lights up as a band, the planet glows
+   and the title steps forward, like the rows of Insights. */
+.about-when::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--blue) 48%, color-mix(in srgb, var(--blue) 50%, #000) 100%);
+  opacity: .6;
+  vertical-align: .08em;
+  transition: opacity .3s ease, box-shadow .3s ease, scale .3s cubic-bezier(.22, 1, .36, 1);
+}
+.about-timeline li:first-child .about-when::before { opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
+.about-timeline li::before {
+  content: "";
+  position: absolute;
+  inset: 4px -18px;
+  z-index: -1;
+  border-radius: 16px;
+  background:
+    radial-gradient(480px circle at var(--mx, 20%) var(--my, 50%), color-mix(in srgb, var(--blue) 10%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .35s ease, scale .45s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.about-timeline li:hover::before { opacity: 1; scale: 1; }
+.about-timeline li:hover .about-when::before { opacity: 1; scale: 1.3; box-shadow: 0 0 10px var(--blue); }
+.about-timeline h3 { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.about-timeline li:hover h3 { translate: 5px 0; }
+@media (max-width: 620px) { .about-timeline li::before { inset: 4px -10px; } }
+/* The bulb on the About poster breathes, and glows brighter under the pointer. */
+.about-brand-poster .brand-bulb { animation: bulb-breathe 4.5s ease-in-out infinite; transition: filter .5s ease; }
+.about-brand-poster:hover .brand-bulb { filter: brightness(1.12) drop-shadow(0 0 22px rgba(82, 184, 247, .8)); }
+@keyframes bulb-breathe {
+  50% { box-shadow: 0 0 18px #fff, 0 0 64px rgba(255, 255, 255, .95), 0 0 130px rgba(82, 184, 247, .85); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-portrait,
+  .about-brand-poster .brand-bulb,
+  .about-timeline li:first-child .about-when::before { animation: none; }
 }
 .about-timeline h3 {
   margin: 0 0 6px;
@@ -4877,7 +4972,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .book-feature, .list-row, .weekly-grid > li, .challenge-essays li) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .book-feature, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
