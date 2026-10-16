@@ -353,3 +353,13 @@ test('Essays: the next essay and the tools answer the pointer, a principle draws
   const light = fs.readFileSync('_site/styles-light.css', 'utf8');
   assert.match(light, /@keyframes ring-arrive/, 'essays use the light stylesheet, which keeps the arrival line');
 });
+
+test('Publications: the cover floats, the contents open softly, the reader buttons glow, the other issues answer the pointer', () => {
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.book-object \{ animation: cover-float/);
+  assert.match(css, /\.book-contents:not\(\[hidden\]\) \{ animation: contents-in/);
+  assert.match(css, /\[data-book-next\]:hover:not\(:disabled\) svg \{ translate: 2px 0; \}/);
+  assert.match(css, /\.issue-more-card::before \{[\s\S]*?radial-gradient\(380px circle at var\(--mx, 30%\)/);
+  assert.match(css, /\.book-closing blockquote p::before \{ animation: closing-line linear both; animation-timeline: view\(\);/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.issue-more-card, /);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes contents-in/, 'publications use the light stylesheet');
+});

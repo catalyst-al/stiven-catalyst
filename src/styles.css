@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -7910,4 +7910,55 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @media (prefers-reduced-motion: reduce) {
   .article-content h2[id]:target::after { animation: none; opacity: 0; }
   .essay-tools li a, a.essay-series-next, .essay-series-end-links a, .article-toc a { transition: none; }
+}
+
+/* A publication in motion (a book, an issue, the guide): the cover floats and catches the light, the reader's
+   buttons and chips glow, the contents open softly over the book, the full text unfolds, the closing quote draws
+   its line as it is reached, and the other issues answer the pointer. */
+@media (prefers-reduced-motion: no-preference) {
+  .book-object { animation: cover-float 6s ease-in-out infinite; }
+  .book-object::before { animation: cover-glow 6s ease-in-out infinite; }
+  .book-contents:not([hidden]) { animation: contents-in .35s cubic-bezier(.22, 1, .36, 1) both; }
+  .book-text details[open] .book-text-body { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; }
+}
+@keyframes cover-float { 50% { translate: 0 -8px; } }
+@keyframes cover-glow { 50% { opacity: .65; scale: .96; } }
+@keyframes contents-in { from { opacity: 0; translate: 0 -10px; scale: .98; } }
+.book-button { transition: border-color .2s, color .2s, background .2s, box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.book-button:hover:not(:disabled) { box-shadow: 0 0 0 5px rgba(74, 181, 247, .12), 0 0 22px rgba(74, 181, 247, .3); }
+.book-button svg { transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+[data-book-prev]:hover:not(:disabled) svg { translate: -2px 0; }
+[data-book-next]:hover:not(:disabled) svg { translate: 2px 0; }
+.book-chip { transition: border-color .25s ease, color .25s ease, background-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.book-chip:hover, .book-chip[aria-expanded="true"] { translate: 0 -2px; background: rgba(74, 181, 247, .08); box-shadow: 0 12px 26px -18px rgba(74, 181, 247, .9); }
+.book-scrub::-webkit-slider-thumb { transition: box-shadow .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.book-scrub:hover::-webkit-slider-thumb { scale: 1.2; box-shadow: 0 0 0 7px rgba(74, 181, 247, .25), 0 0 14px rgba(74, 181, 247, .6); }
+.book-contents-title { transition: color .25s ease, translate .35s cubic-bezier(.22, 1, .36, 1); }
+.book-contents button:hover .book-contents-title { translate: 4px 0; }
+.book-text details { transition: border-color .35s ease, box-shadow .45s ease; }
+.book-text details:hover, .book-text details[open] { border-color: color-mix(in srgb, var(--blue) 40%, var(--line)); box-shadow: 0 24px 54px -40px color-mix(in srgb, var(--blue) 90%, transparent); }
+.issue-more-card { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.issue-more-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 14%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.issue-more-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--blue) 80%, transparent); }
+.issue-more-card:hover::before { opacity: 1; }
+.issue-more-card img { transition: transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease; }
+.issue-more-card:hover img { transform: rotate(-3deg) translateY(-2px); box-shadow: 0 16px 30px rgba(0, 0, 0, .45); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-closing blockquote p::before { animation: closing-line linear both; animation-timeline: view(); animation-range: entry 20% cover 40%; }
+  }
+}
+@keyframes closing-line { from { scale: 0 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .book-chip, .book-button, .book-button svg, .issue-more-card, .issue-more-card img, .book-text details { transition: none; }
 }
