@@ -178,3 +178,28 @@ test('the built pages: the shelf in three languages with its catalogue, the book
   }
   assert.match(built('sq/insights/gemba/index.html'), /class="essay-save" data-shelf-save data-save-label="Ruaje për më vonë"/);
 });
+
+test('the shelf in motion: rows come in one after another the first time, reading shows how far, a removed row slides away first', async () => {
+  const storage = {
+    'sc-shelf': { v: 1, items: [{ u: '/tools/pareto/', t: 'Pareto 80/20', k: 'tool', l: 'en', at: 3 }, { u: '/sq/insights/gemba/', t: 'Gemba (sq)', k: 'essay', l: 'sq', at: 2 }] },
+    'sc-reading': { gemba: { p: 0.4, done: false, t: 5 } },
+  };
+  const dom = new JSDOM(shelfPage('sq'), { url: 'https://stivencatalyst.com/sq/shelf.html', runScripts: 'outside-only', pretendToBeVisual: true });
+  const w = dom.window;
+  for (const [k, v] of Object.entries(storage)) w.localStorage.setItem(k, JSON.stringify(v));
+  w.matchMedia = () => ({ matches: false });
+  w.eval(script);
+  const $ = (s) => w.document.querySelector(s);
+  const $$ = (s) => [...w.document.querySelectorAll(s)];
+  assert.deepEqual($$('[data-shelf-saved] .shelf-row').map((li) => [li.classList.contains('is-entering'), li.style.getPropertyValue('--i')]), [[true, '0'], [true, '1']]);
+  const reading = $('[data-shelf-started] .shelf-row-link');
+  assert.ok(reading.classList.contains('has-progress'));
+  assert.equal(reading.style.getPropertyValue('--p'), '0.4');
+  assert.ok(!$('[data-shelf-saved] .shelf-row-link').classList.contains('has-progress'), 'only reading shows a line');
+  $('[data-shelf-saved] .shelf-remove').click();
+  assert.ok($('[data-shelf-saved] .shelf-row').classList.contains('is-leaving'), 'the row slides away first');
+  assert.equal($('[data-shelf-count]').textContent, '1', 'the badge follows at once');
+  await new Promise((resolve) => w.setTimeout(resolve, 380));
+  assert.deepEqual($$('[data-shelf-saved] .shelf-row strong').map((s) => s.textContent), ['Pareto 80/20']);
+  assert.ok(!$('[data-shelf-saved] .shelf-row').classList.contains('is-entering'), 'a redraw does not play the entrance again');
+});

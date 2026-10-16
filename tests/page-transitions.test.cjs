@@ -410,3 +410,11 @@ test('Podcast: the cover floats, a playing episode glows and breathes, apps and 
 test('a player in a narrow column takes the phone layout from its own width, above the narrowest phones', () => {
   assert.match(css, /\.audio-player \{ container-type: inline-size; \}\n@media \(min-width: 381px\) \{ @container \(max-width: 480px\) \{/);
 });
+
+test('Shelf: rows lift under the pointer, reading fills its line, a removed row slides away', () => {
+  assert.match(css, /\.shelf-row-link\.has-progress::after \{[\s\S]*?width: calc\(var\(--p, 0\) \* 100%\);/);
+  assert.match(css, /\.shelf-row-link\.has-progress::after \{ animation: progress-fill/);
+  assert.match(css, /\.shelf-row\.is-leaving \{ animation: row-leave/);
+  assert.match(css, /:where\([^)]*\.shelf-section[^)]*\) \{\s*animation: scroll-rise/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes row-leave/);
+});

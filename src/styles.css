@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -8095,3 +8095,29 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .audio-player-scrub { grid-area: scrub; margin: 0; }
   .audio-player-time { grid-area: time; }
 } }
+
+/* The shelf in motion: its rows come in one after another the first time, a row lifts and lights up under the
+   pointer, an essay begun shows how far it was read with a line that fills up, and a removed row slides away. */
+.shelf-row-link { position: relative; overflow: hidden; transition: border-color .3s ease, translate .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease, background-color .3s ease; }
+.shelf-row-link:hover { translate: 3px 0; background: color-mix(in srgb, var(--blue) 5%, transparent); box-shadow: 0 14px 30px -24px color-mix(in srgb, var(--blue) 85%, transparent); }
+.shelf-row-link.has-progress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(var(--p, 0) * 100%);
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-soft, var(--blue)));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 60%, transparent);
+}
+.shelf-remove, .shelf-clear { transition: color .25s ease, border-color .25s ease, background-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.shelf-remove:hover { background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.shelf-section { transition: border-color .35s ease; }
+.shelf-section:hover { border-color: color-mix(in srgb, var(--blue) 30%, var(--line)); }
+@media (prefers-reduced-motion: no-preference) {
+  .shelf-row-link.has-progress::after { animation: progress-fill 1.1s cubic-bezier(.22, 1, .36, 1) .3s both; }
+  .shelf-row.is-leaving { animation: row-leave .32s cubic-bezier(.55, 0, .45, 1) both; }
+}
+@keyframes progress-fill { from { width: 0; } }
+@keyframes row-leave { to { opacity: 0; transform: translateX(24px); } }
+@media (prefers-reduced-motion: reduce) { .shelf-row-link { transition: none; } }
