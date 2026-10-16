@@ -80,12 +80,12 @@
     {
       "id": "beyond",
       "name": "Jashtë kufijve",
-      "text": "Një ditë mbi kufirin e sipërm (ose nën të poshtmin). Diçka ishte ndryshe atë ditë: gjejeni sa njerëzit ende e mbajnë mend."
+      "text": "Një ditë mbi kufirin e sipërm (ose nën të poshtmin). Diçka ishte ndryshe atë ditë: gjeje sa njerëzit e mbajnë ende mend."
     },
     {
       "id": "run",
       "name": "Zhvendosje",
-      "text": "Tetë ditë ose më shumë radhazi në të njëjtën anë të vijës qendrore. Procesi ka lëvizur: pas një ndryshimi që bëtë, kjo është prova që funksionoi; pa ndryshim, gjeni çfarë ndryshoi."
+      "text": "Tetë ditë ose më shumë radhazi në të njëjtën anë të vijës qendrore. Procesi ka lëvizur: pas një ndryshimi që bëre, kjo është prova që funksionoi; pa ndryshim, gjej çfarë ndryshoi."
     },
     {
       "id": "trend",
@@ -94,10 +94,10 @@
     }
   ],
   "verdicts": {
-    "stable": "Asnjë sinjal. Ngritjet dhe uljet janë zhurma normale e këtij procesi. Reagimi ndaj ditëve të veçanta nuk ndihmon dhe mund ta përkeqësojë: për një numër më të mirë, ndryshoni vetë procesin.",
-    "badSpecial": "Karta tregon ditë që nuk janë zhurmë normale. Hetoni së pari ato ditë: çfarë ishte ndryshe në volum, njerëz, pajisje ose metodë?",
-    "goodSpecial": "Karta tregon një përmirësim të qëndrueshëm. Gjeni çfarë bëri diferencën dhe bëjeni standard, pastaj rillogaritni kufijtë nga niveli i ri.",
-    "short": "Më pak se 12 ditë në kartë. Kufijtë janë të përafërt; vazhdoni të shtoni ditë para se t'i besoni një sinjali.",
-    "shortWeek": "Më pak se 12 javë në kartë. Kufijtë janë të përafërt; vazhdoni të shtoni javë para se t'i besoni një sinjali."
+    "stable": "Asnjë sinjal. Ngritjet dhe uljet janë zhurma normale e këtij procesi. Reagimi ndaj ditëve të veçanta nuk ndihmon dhe mund ta përkeqësojë: për një numër më të mirë, ndrysho vetë procesin.",
+    "badSpecial": "Karta tregon ditë që nuk janë zhurmë normale. Heto së pari ato ditë: çfarë ishte ndryshe në volum, njerëz, pajisje ose metodë?",
+    "goodSpecial": "Karta tregon një përmirësim të qëndrueshëm. Gjej çfarë e bëri ndryshimin dhe bëje standard, pastaj rillogarit kufijtë nga niveli i ri.",
+    "short": "Më pak se 12 ditë në kartë. Kufijtë janë të përafërt; vazhdo të shtosh ditë para se t'i besosh një sinjali.",
+    "shortWeek": "Më pak se 12 javë në kartë. Kufijtë janë të përafërt; vazhdo të shtosh javë para se t'i besosh një sinjali."
   }
 }

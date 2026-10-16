@@ -5,7 +5,7 @@ category: Betrieb
 series: without-you
 status: published
 featured: true
-summary: Die zehn Minuten vor der Schicht sind nicht dafür da, alles zu erzählen, was wir wissen. Sie sind dafür da, zu entscheiden, was das Team wissen muss, bevor die Arbeit beginnt.
+summary: Die zehn Minuten vor der Schicht sind nicht dafür da, alles zu erzählen, was wir wissen. Sie klären, was das Team wissen muss, bevor die Arbeit beginnt.
 description: "Das Briefing vor der Schicht: Stand-ups auf der letzten Meile, der Beginn der Nacht im Hotel, wo sich Briefing und Übergabe trennen, und eine Vorlage."
 teaser: Die Übergabe zeigt, welchen Zustand Sie übernehmen. Das Briefing entscheidet, was jetzt zählt.
 deck: 'Der zweite Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Morning Stand-ups auf der letzten Meile, die Hotelnacht, die nie bei null beginnt, der Unterschied zwischen Übergabe und Briefing, und die Vorlage für das Zehn-Minuten-Briefing.'
@@ -39,23 +39,15 @@ diagram: handover-to-briefing
 
 „Delay liegt bei 2,8 %.“
 
-Diesen Satz kann man in jedem Briefing hören. Er stimmt. Er kann sogar wichtig sein. Aber wenn danach die Schicht beginnt und niemand weiß, was er anders machen soll, haben Sie Information gegeben, keine Richtung.
+Diesen Satz hört man in jedem Briefing. Er stimmt, und vielleicht ist er sogar wichtig. Aber wenn nur diese Zahl fällt und die Schicht beginnt, ohne dass jemand weiß, was er anders machen soll, haben Sie Information gegeben, keine Richtung.
 
-Dieser Essay handelt von den wenigen Minuten, bevor die Arbeit beginnt. Das Schichtbriefing ist vielleicht das günstigste Führungsinstrument überhaupt: Es braucht kein System, kein Budget und kein Projekt. Es braucht nur jemanden, der weiß, was gesagt werden muss, und was nicht.
+Es geht hier um die wenigen Minuten, bevor die Arbeit beginnt. Das Schichtbriefing ist vielleicht das günstigste Führungsinstrument überhaupt: Es braucht kein System, kein Budget und kein Projekt, nur jemanden, der weiß, was gesagt werden muss und was nicht.
 
-## Was ich habe und was nicht
+Was folgt, stammt aus zwei Bereichen, in denen ich gearbeitet habe. In der Last Mile sind die täglichen Morning Stand-ups dokumentiert: Ich weiß, was dort besprochen wurde, aber nicht, wer sie jeweils geleitet hat oder wie lange sie dauerten. Im Hotel kannte ich eher die Übergabe zwischen den Schichten als ein klassisches Zehn-Minuten-Briefing, mit einem Front Office Daily Stand-up und einem Übergabeblatt, das Nacht-, Früh- und Spätschicht verband. Die Vorlage am Ende ist mein heutiger Vorschlag; ob ich das Briefing als Team Leader oder Area Manager in dieser Form verändert habe, kann ich nicht mit Sicherheit sagen.
 
-Ich schreibe diesen Essay aus zwei Bereichen, in denen ich gearbeitet habe: der letzten Meile und einem Hotel. Für beide habe ich echtes Material, aber nicht für jedes Detail.
+## Last Mile: Zahlen und ihre Gründe
 
-Auf der letzten Meile sind die Daily Morning Stand-ups dokumentiert. Ich weiß nicht sicher, wer sie jedes Mal geleitet hat, wie viele Minuten sie dauerten oder ob sie immer an der Rampe stattfanden, und ich werde das nicht mit Vermutungen füllen.
-
-Im Hotel habe ich eher Übergaben zwischen den Schichten erlebt als ein klassisches Zehn-Minuten-Briefing vor der Schicht. Es gab ein Front Office Daily Stand-up und ein Übergabeblatt, das Nacht-, Früh- und Spätschicht verband. Auch hier werde ich nicht sagen, wie lange es dauerte, wer es leitete oder ob es im Stehen oder im Büro stattfand.
-
-Und ich werde nicht behaupten, dass ich als Team Leader oder Area Manager das Format des Briefings auf eine bestimmte Weise verändert habe. Dafür bin ich mir nicht sicher genug, um es als Tatsache darzustellen. Was ich sagen kann: was ich gesehen habe, was ein Briefing meiner Meinung nach wertvoll macht, und warum.
-
-## Auf der letzten Meile: Zahlen, Gründe und konkrete Punkte
-
-Die Morning Stand-ups waren klar mit dem Betrieb des Tages und mit den KPIs verbunden. Zu den Themen gehörten:
+Die Morning Stand-ups hingen eng mit dem Betrieb des Tages und mit den KPIs zusammen. Zu den Themen gehörten:
 
 - Damage %, Incomplete %, Delay % und Loading Time;
 - die Hauptgründe für Verspätungen;
@@ -67,46 +59,38 @@ Die Morning Stand-ups waren klar mit dem Betrieb des Tages und mit den KPIs verb
 - die Kontrolle der Kühlkette;
 - die Abstimmung zwischen Last Mile und Outbound.
 
-Es ging also nicht nur um „Wie lief es gestern?“. Es gab Zahlen, Gründe und konkrete Punkte, die korrigiert werden mussten.
+Es ging also um mehr als „Wie lief es gestern?“: um Zahlen, um Gründe und um Punkte, die korrigiert werden mussten.
 
-Wertvoll wurde es, wenn das Briefing mit etwas verbunden war, das die Leute in der Schicht sofort erleben würden. Wenn Delay das Problem war, reichte es nicht, die Prozentzahl zu nennen. Man musste sehen, warum es passierte. Wenn das Problem mit dem Beladen, dem Stapeln, der Leistung der Fahrer oder einem Prozessschritt zusammenhing, hatte das Briefing einen Wert, weil es dem Team eine konkrete Sache gab, auf die es während der Arbeit achten konnte.
+Seinen Wert hatte das Briefing dann, wenn es an etwas anknüpfte, das die Leute in der Schicht sofort erleben würden. War Delay das Problem, war die Prozentzahl nur der Anfang; man musste herausfinden, warum es dazu kam. Lag die Ursache beim Beladen, beim Stapeln, bei der Leistung der Fahrer oder in einem Prozessschritt, gab das Briefing dem Team eine Sache mit, auf die es während der Arbeit achten konnte.
 
-So wollte ich das Stand-up sehen: KPIs, 5 Why, Pareto, 5S und Sicherheit nicht als getrennte Themen, sondern verbunden mit der tatsächlichen Wirkung auf den Betrieb. Es ist dieselbe Idee wie in [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/), nur dass man hier zehn Minuten dafür hat.
-
-**Ein Briefing ergibt Sinn, wenn aus einer KPI ein klares Verhalten oder eine klare Handlung wird.**
+Ein Briefing ergibt Sinn, wenn aus einer KPI ein Verhalten oder eine Handlung wird, die das Team sehen kann. So sollte das Stand-up für mich funktionieren: KPIs, 5 Whys, Pareto, 5S und Sicherheit nicht als getrennte Themen, sondern verknüpft mit ihrer Wirkung auf den Betrieb. Dieselbe Idee steht hinter [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/), nur hat man hier zehn Minuten dafür.
 
 ## Information oder Richtung
 
-Ein Briefing verliert seinen Wert, wenn es bei den Zahlen stehen bleibt.
+Ein Briefing verliert seinen Wert, wenn es bei den Zahlen stehen bleibt. Sagen Sie „Delay liegt bei 2,8 %“, und die Schicht beginnt, ohne dass jemand weiß, was er anders machen soll, dann ist die Zahl vom Bericht zum Team gewandert, ohne unterwegs etwas zu bewirken.
 
-Wenn Sie sagen „Delay liegt bei 2,8 %“ und dann die Schicht beginnt, aber niemand weiß, was er anders machen soll, ist die Zahl vom Bericht zum Team gewandert, ohne unterwegs etwas zu verändern.
-
-Der Unterschied ist klein in Worten und groß in der Wirkung:
+In Worten ist der Unterschied klein, in der Wirkung groß:
 
 - **Information:** Delay liegt bei 2,8 %.
 - **Richtung:** Delay liegt bei 2,8 %. Der Hauptgrund, den wir sehen, ist [der Grund]. Heute achten alle während der Arbeit auf [eine konkrete Sache].
 
-Die zweite Fassung dauert zehn Sekunden länger. Aber sie ist die einzige, die das Team mit in die Schicht nehmen kann.
+Die zweite Fassung dauert zehn Sekunden länger, und nur sie kann das Team mit in die Schicht nehmen.
 
-## Im Hotel: Die Nacht beginnt nicht bei null
+## Hotel: Die Nacht beginnt nie bei null
 
-Im Hotel begann die Nachtschicht mit den Informationen aus der Spätschicht und endete mit den Informationen, die sie an die Frühschicht weitergab.
+Im Hotel begann die Nachtschicht mit dem, was die Spätschicht übergab, und endete mit dem, was sie an die Frühschicht weitergab. Bei null fing die Arbeit nie an: Es gab offene Punkte, Fälle, die nachverfolgt werden mussten, technische Probleme, Gästeanliegen, Zahlungen oder betriebliche Themen, die weiterlaufen mussten.
 
-Die Arbeit begann also nicht bei null. Es gab offene Punkte, Fälle, die Follow-up brauchten, technische Probleme, Gästeanliegen, Zahlungen oder betriebliche Themen, die weiterlaufen mussten.
+Die Übergabe umfasste Anreisen, Beschwerden, Rechnungs- und Zahlungsfragen, VIPs, technische Probleme, besondere Absprachen und Folgeaufgaben. Auf dem Blatt des Front Office Daily Stand-ups standen außerdem Abreisen, Belegung, No-Shows, offene Fälle, Zimmerwechsel, Traces und andere betriebliche Themen.
 
-Die Übergabe umfasste Anreisen, Beschwerden, Rechnungs- und Zahlungsfragen, VIPs, technische Probleme, besondere Absprachen und Follow-up-Aufgaben. Auf dem Blatt des Front Office Daily Stand-ups wurden außerdem Abreisen, Belegung, No-Shows, offene Fälle, Zimmerwechsel, Traces und andere betriebliche Themen festgehalten.
+Warum dieser Übergang so unterschätzt wird, beschreibe ich ausführlicher im [Essay über die Schichtübergabe](/de/insights/why-the-handover-is-underrated/). Hier geht es um etwas anderes: was mit all diesen Informationen in den ersten Minuten der Schicht geschieht.
 
-Warum dieser Übergang so unterschätzt wird, habe ich ausführlicher im [Essay über die Schichtübergabe](/de/insights/why-the-handover-is-underrated/) beschrieben. Hier interessiert mich etwas anderes: was mit all diesen Informationen in den ersten Minuten der Schicht passiert.
-
-## Übergabe und Briefing sind nicht dasselbe
-
-Für mich ist das der wichtigste Teil dieses Essays.
+## Übergabe und Briefing haben verschiedene Aufgaben
 
 **Die Übergabe zeigt, welchen Zustand Sie übernehmen. Das Briefing entscheidet, was jetzt zählt.**
 
-Die Übergabe muss vollständig sein. Das Briefing muss auswählen. Wenn das Briefing zum lauten Vorlesen der Übergabe wird, hört das Team alles und weiß nicht, was es behalten soll.
+Die Übergabe muss vollständig sein, das Briefing muss auswählen. Wird das Briefing zum Vorlesen der Übergabe, hört das Team alles und weiß nicht, was es sich merken soll.
 
-Deshalb sollte ein gutes Briefing vor der Schicht genau dort beginnen, wo die Übergabe endet:
+Deshalb sollte ein gutes Briefing vor der Schicht dort ansetzen, wo die Übergabe endet:
 
 - Was haben wir übernommen?
 - Was hat sich verändert?
@@ -118,27 +102,27 @@ Deshalb sollte ein gutes Briefing vor der Schicht genau dort beginnen, wo die Ü
 
 {diagram}
 
-## Die Vorlage für das Zehn-Minuten-Briefing
+## Eine Vorlage für zehn Minuten
 
-Das ist die Vorlage, die ich vorschlagen würde. Fünf Fragen, jeweils etwa zwei Minuten. Kein Formular zum Ausfüllen, sondern die Reihenfolge des Gesprächs.
+So würde ich es vorschlagen: fünf Fragen, jeweils etwa zwei Minuten, als Reihenfolge des Gesprächs und nicht als Formular zum Ausfüllen.
 
 **1. Was übernehmen wir?**
-Der Stand aus der vorherigen Schicht oder vom Vortag: die offenen Punkte und die Fälle, die auf Follow-up warten. Die Quelle ist die Übergabe, nicht das Gedächtnis von jemandem.
+Der Stand aus der vorherigen Schicht oder vom Vortag: die offenen Punkte und die Fälle, die auf Nachverfolgung warten. Die Quelle ist die Übergabe, nicht das Gedächtnis von irgendjemandem.
 
 **2. Was hat sich verändert?**
-Nur die Veränderungen, die diese Schicht betreffen: das Volumen, ein Prozess, ein System, das Team.
+Nur, was diese Schicht betrifft: das Volumen, ein Prozess, ein System, das Team.
 
 **3. Wo liegt heute das Risiko?**
-Wo am ehesten etwas schiefgehen kann: eine KPI, die abrutscht, und ihr Grund, ein offener Punkt mit Frist, ein technisches Problem.
+Dort, wo am ehesten etwas schiefgeht: eine KPI, die abrutscht, und ihr Grund, ein offener Punkt mit Frist, ein technisches Problem.
 
 **4. Was sind die zwei, drei Prioritäten?**
-Nicht zehn. Jede als Handlung formuliert, die das Team während der Arbeit sieht, nicht als Zahl.
+Nicht zehn. Jede als Handlung formuliert, die das Team während der Arbeit sehen kann.
 
 **5. Wer übernimmt was?**
-Jede Priorität und jeder offene Punkt mit einem Namen. Eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt.
+Jede Priorität und jeder offene Punkt bekommt einen Namen. Eine Aufgabe ohne Verantwortlichen ist schon fast eine Aufgabe, die niemand erledigt.
 
-**Was nicht ins Briefing gehört:** die ganze Geschichte von gestern, Zahlen ohne Gründe und Diskussionen, die länger als eine Minute brauchen. Die werden notiert und nach dem Briefing geklärt, mit den Leuten, die dafür nötig sind.
+**Was nicht ins Briefing gehört:** die ganze Geschichte von gestern, Zahlen ohne Gründe und Diskussionen, die länger als eine Minute dauern. Sie werden notiert und nach dem Briefing mit den Leuten geklärt, die dafür gebraucht werden.
 
-**Woran Sie erkennen, dass es funktioniert hat:** Fragen Sie nach dem Briefing eine Person aus dem Team: Was sind die zwei Prioritäten heute? Wenn sie es nicht sagen kann, war das Briefing Information, keine Richtung.
+**Woran Sie erkennen, dass es funktioniert hat:** Fragen Sie nach dem Briefing eine Person aus dem Team, was heute die zwei Prioritäten sind. Kann sie es nicht sagen, war das Briefing Information, keine Richtung.
 
-Ein gutes Briefing misst sich nicht daran, wie viel gesagt wurde. Es misst sich daran, was das Team in der ersten Stunde der Schicht anders macht.
+Dann achten Sie auf die erste Stunde der Schicht. Dort zeigt sich ein gutes Briefing: an dem, was das Team anders macht, nicht daran, wie viel gesagt wurde.

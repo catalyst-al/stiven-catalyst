@@ -1,24 +1,24 @@
 ---
-title: 'Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo'
+title: 'Nga shitja me pakicë te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo'
 date: 2026-10-03
 category: Operacione
 status: published
 featured: true
-summary: Kam kaluar nga kontrolli i një kutie në magazinë, te kontrolli i një porosie që lëviz, te kontrolli i një transaksioni që ekziston vetëm në sistem. Parimi mbeti i njëjtë.
+summary: Kalova nga kontrolli i një kutie në magazinë te një porosi në lëvizje, pastaj te një transaksion që ekziston vetëm në sistem. Parimi mbeti i njëjtë.
 description: "Nga kontrolli i një kutie në magazinë te një porosi që lëviz dhe një transaksion që ekziston vetëm në sistem. Parimi mbeti i njëjtë."
 teaser: Klientit nuk i intereson cili departament bëri gabimin. Në atë moment, personi përballë tij është e gjithë kompania.
 deck: 'Eseja e gjashtë e serisë “Dhjetë vite pranë punës”: çfarë mbetet e njëjtë kur kalon nga dyqani te rampa dhe te recepsioni i natës, dhe çfarë duhet mësuar nga e para.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - "Merr një gjë që sistemi thotë se e ke dhe kontrollo nëse ekziston: një pako, një status dhome, një pagesë."
+  - "Merr një gjë që sipas sistemit e ke dhe kontrollo nëse ekziston: një pako, një status dhome, një pagesë."
   - Gjej pikën në punën e sotme ku informacioni, përgjegjësia dhe ekzekutimi nuk u takuan.
-  - Për një partner ose departament që nuk e komandon, shkruaj interesin e përbashkët që e mban të punojë me ty.
+  - Për një partner ose departament që nuk e drejton ti, shkruaj interesin e përbashkët që e mban të punojë me ty.
 checklist:
   title: Sistemi dhe realiteti
   fill: true
   items:
     - label: Çfarë thotë sistemi se kemi?
-      hint: Numri, statusi, shuma, siç e tregon ekrani.
+      hint: Numri, statusi, shuma, siç i tregon ekrani.
     - label: Çfarë ekziston vërtet?
       hint: E numëruar, e parë ose e konfirmuar, jo e raportuar.
     - label: Ku është hendeku, dhe që kur?
@@ -26,41 +26,43 @@ checklist:
     - label: Kush duhet të veprojë?
       hint: Një emër, në departamentin ku lindi hendeku.
     - label: Çfarë sheh klienti prej tij?
-      hint: Te dera, te recepsioni, në faturë.
+      hint: Te dera, në recepsion, në faturë.
 ---
 
-Kam punuar në retail dhe në shitje me shumicë në Shqipëri, pastaj në logjistikën e miljes së fundit dhe sot në hoteleri në Gjermani. Nga jashtë duken tri botë të ndryshme. Nga brenda, problemi që kam parë pothuajse kudo është i njëjti: diferenca mes asaj që duhet të ndodhë sipas procesit dhe asaj që ndodh realisht në terren.
+Kam punuar në shitjen me pakicë dhe me shumicë në Shqipëri, pastaj në logjistikën last mile dhe sot në hoteleri në Gjermani. Nga jashtë janë tri botë të ndryshme. Nga brenda, pothuajse kudo, kam hasur të njëjtin problem: hendekun mes asaj që sipas procesit duhet të ndodhë dhe asaj që ndodh vërtet në terren.
 
-Në retail dhe në shitjen me shumicë mund ta kishe mallin, por nëse stoku nuk ishte i kontrolluar, nëse magazina dhe shitja nuk komunikonin mirë ose nëse informacioni nuk ishte i saktë, problemi përfundonte te klienti.
+Në shitjen me pakicë dhe me shumicë mund ta kishe mallin, por nëse stoku nuk kontrollohej, nëse magazina dhe shitja nuk komunikonin mirë ose nëse informacioni nuk ishte i saktë, problemi përfundonte te klienti.
 
-Në logjistikë, e njëjta gjë merrte formë tjetër. Nuk ishte më një produkt në raft. Ishte një pako që mungonte, një ngarkim që zgjaste më shumë se ç'duhej, një porosi e paplotë, një itinerar që nisej me vonesë, ose një problem që duhej zgjidhur ndërsa shoferi ishte tashmë në rrugë.
+Në logjistikë i njëjti problem merrte një formë tjetër. Nuk ishte më një produkt në raft, por një pako që mungonte, një ngarkim që zgjaste më shumë se ç'duhej, një porosi e paplotë, një itinerar që nisej me vonesë ose një problem që duhej zgjidhur kur shoferi ishte tashmë në rrugë.
 
-Në hotel, problemi ndryshon përsëri pamje. Mund të jetë një rezervim, një pagesë, një dhomë që nuk është mbyllur siç duhet në sistem, një no-show, një faturë ose një informacion që nuk ka kaluar nga një turn te tjetri.
+Në hotel problemi ndryshon sërish pamje: një rezervim, një pagesë, një dhomë që nuk është mbyllur siç duhet në sistem, një no-show, një faturë ose një informacion që nuk ka kaluar nga një turn te tjetri.
 
-Industria ndryshon. Objekti që kontrollon ndryshon. Por problemi i menaxhimit mbetet i njëjtë: nëse informacioni, përgjegjësia dhe ekzekutimi nuk takohen në të njëjtën pikë, diku do të dalë një gabim.
+Industria ndryshon. Ajo që kontrollon ndryshon. Por problemi i menaxhimit mbetet i njëjtë: nëse informacioni, përgjegjësia dhe ekzekutimi nuk takohen në të njëjtën pikë, diku do të dalë një gabim.
 
-Këtë e shoh më qartë kur mendoj se çfarë ishte “inventari” në secilën industri.
+Këtë e shoh më qartë kur mendoj çfarë ishte “inventari” në secilën nga këto industri.
 
-Në retail, inventari ishte inventar në kuptimin klasik: produkti, magazina dhe ajo që kishe realisht në dispozicion për të shitur. Në Shqipëri kam pasur përgjegjësi mbi inventarin, magazinën, shitjen, kostot dhe cash flow-n, dhe në një nga kompanitë një nga detyrat e mia ishte përmirësimi i menaxhimit të inventarit. Inventari nuk ishte thjesht numër produktesh. Ishte kapital i kompanisë, dhe duhej të përputhej me shitjen dhe me nevojën reale.
+Në shitjen me pakicë, inventari kishte kuptimin e tij klasik: produkti, magazina dhe ajo që kishe realisht në dispozicion për të shitur. Në Shqipëri kam pasur përgjegjësi për inventarin, magazinën, shitjen, kostot dhe fluksin e parave, dhe në njërën nga kompanitë një nga detyrat e mia ishte përmirësimi i menaxhimit të inventarit. Pas çdo numri produktesh qëndronte kapitali i kompanisë, dhe ai kapital duhej të përputhej me shitjen dhe me kërkesën reale.
 
-Në logjistikë, inventari u bë fluksi fizik i porosive. Duhej të kontrolloje nëse ngarkimi po bëhej në kohë, nëse kishte pako që mungonin, porosi të paplota ose dëmtime, dhe nëse shoferët po dilnin në kohën e duhur. Punoja me tregues konkretë: koha e ngarkimit, vonesat, porositë e paplota, dëmet. Si dispatcher koordinoja mbi 70 shoferë në një turn, me ndarjen e itinerareve, kontrollin e nisjeve dhe zgjidhjen e problemeve live.
+Në logjistikë inventari u bë fluksi fizik i porosive. Duhej të kontrolloje nëse ngarkimi bëhej në kohë, nëse mungonin pako, nëse kishte porosi të paplota ose dëmtime dhe nëse shoferët niseshin në kohën e duhur. Treguesit me të cilët punoja ishin koha e ngarkimit, vonesat, porositë e paplota dhe dëmtimet. Si dispeçer koordinoja mbi 70 shoferë në një turn: ndaja itineraret, kontrolloja nisjet dhe zgjidhja problemet në çast, ndërsa ndodhnin.
 
-Në hotel, inventari bëhet më abstrakt. Janë dhomat, rezervimet, statuset e tyre dhe paratë që lidhen me to. Gjatë natës kontrolloj rezervimet, no-show-t, pagesat, kreditin, lëvizjet financiare, dhomat që duhet të jenë mbyllur ose zgjatur, dhe në fund nëse dita mund të mbyllet pa lënë gabime për turnin tjetër.
+Në hotel inventari bëhet më abstrakt: dhomat, rezervimet, statuset e tyre dhe paratë që lidhen me to. Gjatë natës kontrolloj rezervimet, no-show-t, pagesat, kreditin dhe lëvizjet financiare, si edhe dhomat që duhej të ishin liruar ose zgjatur. Në fund kontrolloj nëse dita mund të mbyllet pa i lënë gabime turnit tjetër.
 
-Kam kaluar nga kontrolli i një kutie në magazinë, te kontrolli i një porosie që lëviz, dhe pastaj te kontrolli i një dhome ose transaksioni që shpesh ekziston vetëm si informacion në sistem. Parimi është i njëjtë: ajo që sistemi thotë se ke dhe ajo që ekziston realisht duhet të jenë e njëjta gjë.
+Kalova kështu nga kontrolli i një kutie në magazinë te kontrolli i një porosie në lëvizje, dhe pastaj te kontrolli i një dhome ose i një transaksioni që shpesh ekziston vetëm si informacion në sistem. Parimi nuk ka ndryshuar: ajo që sistemi thotë se ke dhe ajo që ekziston vërtet duhet të jenë e njëjta gjë.
 
-Edhe klienti ndryshon. Në dyqan është përballë teje. E sheh, e kupton reagimin e tij dhe ke më shumë mundësi ta drejtosh bisedën. Në last mile, marrëdhënia është shumë më e shkurtër. Klienti pret që porosia të vijë në kohë, e plotë dhe pa dëmtime. Ai nuk sheh magazinën, ngarkimin, problemet e itinerarit apo atë që ndodh pas ekranit. Për të, rezultati është i thjeshtë: porosia erdhi siç duhej ose jo. Në hotel, sidomos natën, njerëzit mund të vijnë të lodhur nga udhëtimi, me një problem me rezervimin, pagesën ose dhomën, dhe në atë orë nuk ke pas vetes gjithë strukturën e menaxhimit që ekziston ditën. Duhet ta menaxhosh situatën vetë, dhe të dish edhe ku mbaron autoriteti yt.
+Edhe klienti ndryshon. Në dyqan e ke përballë: e sheh, ia lexon reagimin dhe ke më shumë hapësirë ta drejtosh bisedën. Në last mile marrëdhënia është shumë më e shkurtër. Klienti pret që porosia të arrijë në kohë, e plotë dhe pa dëmtime. Ai nuk e sheh magazinën, ngarkimin, problemet e itinerarit apo atë që ndodh pas ekranit. Për të rezultati është i thjeshtë: porosia erdhi siç duhej, ose jo.
 
-Ajo që nuk ndryshon është pritshmëria. Klientit nuk i intereson shumë cili departament bëri gabimin. Ai sheh vetëm kompaninë përballë tij. Në dyqan je ti. Te dera është shoferi. Në hotel është recepsionisti. Në atë moment, për klientin, ai person është e gjithë kompania.
+Në hotel, sidomos natën, njerëzit mund të vijnë të lodhur nga udhëtimi, me një problem me rezervimin, pagesën ose dhomën. Në atë orë nuk ke pas vetes gjithë strukturën drejtuese që ekziston gjatë ditës. Situatën duhet ta përballosh vetë dhe njëkohësisht të dish ku mbaron autoriteti yt.
 
-Një mësim tjetër e mora nga shitja me shumicë, dhe më ka shërbyer më shumë nga sa e prisja. Kam ndërtuar dhe menaxhuar një rrjet kombëtar me 61 rishitës aktivë, dhe ai kanal lidhej me një rritje të të ardhurave prej rreth 30 deri në 40 përqind. Ajo eksperiencë më mësoi se partneri nuk menaxhohet si punonjës. Një punonjësi mund t'i japësh një procedurë dhe një përgjegjësi direkte. Me një partner duhet të krijosh interes të përbashkët, komunikim dhe vazhdimësi, dhe marrëdhënia duhet të funksionojë ekonomikisht për të dyja palët. Kur ke 61 partnerë, nuk mund të mbështetesh vetëm te marrëdhënia personale me secilin. Duhet një mënyrë pune që përsëritet.
+Ajo që nuk ndryshon është pritshmëria. Klientit nuk i intereson shumë cili departament bëri gabimin. Ai sheh vetëm kompaninë përballë. Në dyqan je ti, te dera shoferi, në hotel recepsionisti. Në atë çast, për klientin, ai person është e gjithë kompania.
 
-Kjo më ndihmoi më vonë, edhe kur njerëzit nuk quheshin më rishitës. Në logjistikë punon me shoferë, operatorë dhe kompani partnere. Në hotel punon me departamente të tjera, furnitorë dhe struktura që nuk i kontrollon drejtpërdrejt. Menaxhimi nuk është gjithmonë të kesh autoritet mbi dikë. Shpesh është të arrish që njerëz mbi të cilët nuk ke autoritet të punojnë në të njëjtin drejtim me ty.
+Një mësim tjetër e mora nga shitja me shumicë, dhe më ka shërbyer më shumë nga ç'e prisja. Kam ndërtuar dhe menaxhuar një rrjet kombëtar me 61 rishitës aktivë, dhe ai kanal lidhej me një rritje të të ardhurave prej rreth 30 deri në 40 përqind. Ajo përvojë më mësoi se partneri nuk menaxhohet si punonjësi. Punonjësit mund t'i japësh një procedurë dhe një përgjegjësi të drejtpërdrejtë. Me partnerin duhet të ndërtosh interes të përbashkët, komunikim dhe vazhdimësi, dhe marrëdhënia duhet të ketë leverdi ekonomike për të dyja palët. Kur ke 61 partnerë, nuk mund të mbështetesh vetëm në marrëdhënien personale me secilin. Të duhet një mënyrë pune që përsëritet.
 
-Çfarë u transferua lehtë nga një industri te tjetra? Kontrolli operacional. Kudo kam pasur të njëjtin instinkt: çfarë duhet të ndodhë, çfarë po ndodh realisht, ku është diferenca dhe kush duhet të veprojë. Edhe puna me njerëzit u transferua. Titulli i pozicionit ndryshon më shpejt se natyra njerëzore. Presioni, keqkuptimi, përgjegjësia dhe nevoja për komunikim ekzistojnë kudo.
+Kjo më ndihmoi më vonë, edhe kur njerëzit nuk quheshin më rishitës. Në logjistikë punon me shoferë, operatorë dhe kompani partnere, në hotel me departamente të tjera, furnitorë dhe struktura që nuk i kontrollon drejtpërdrejt. Menaxhimi nuk është gjithmonë të kesh autoritet mbi dikë. Shpesh është të arrish që njerëzit mbi të cilët nuk ke autoritet të punojnë në të njëjtin drejtim me ty.
 
-Ajo që nuk u transferua automatikisht ishte njohuria teknike e industrisë. Nuk mund të hysh në logjistikë vetëm sepse di të menaxhosh një dyqan. Duhet të mësosh routing, dispatch, ngarkimin dhe mënyrën si funksionon operacioni live. Dhe akoma më shumë në hoteleri: sistemi i menaxhimit të pronës, rezervimet, kreditë, pagesat, no-show-t, procedurat e night audit-it dhe mbyllja e ditës janë një gjuhë më vete. Atë gjuhë duhej ta mësoja.
+Kontrolli operacional kaloi lehtë nga një industri te tjetra. Kudo kam pasur të njëjtin instinkt: çfarë duhet të ndodhë, çfarë po ndodh vërtet, ku është hendeku dhe kush duhet të veprojë. Edhe puna me njerëzit kaloi. Titujt e punës ndryshojnë më shpejt se natyra njerëzore. Presioni, keqkuptimi, përgjegjësia dhe nevoja për komunikim ekzistojnë kudo.
 
-Prandaj sot nuk besoj shumë te ideja se një menaxher i mirë duhet ta njohë që ditën e parë çdo detaj të industrisë. Industrinë mund ta mësosh. Më e vështirë është të mësosh të shohësh kur një proces nuk funksionon, të mos kalosh indiferent pranë problemit, dhe ta marrësh përsipër deri në fund.
+Ajo që nuk kaloi vetvetiu ishte njohuria teknike e secilës industri. Nuk mund të hysh në logjistikë vetëm sepse di të drejtosh një dyqan: duhet të mësosh planifikimin e itinerareve, dispeçerimin, ngarkimin dhe si funksionon një operacion në kohë reale. Hoteleria kërkon edhe më shumë. Sistemi i menaxhimit të pronës, rezervimet, kreditë, pagesat, no-show-t, procedurat e Night Audit-it dhe mbyllja e ditës janë një gjuhë më vete, dhe atë gjuhë m'u desh ta mësoja.
 
-Këtë pjesë e kam marrë me vete nga një industri në tjetrën.
+Prandaj nuk besoj shumë te ideja se një menaxher i mirë duhet ta njohë që ditën e parë çdo hollësi të industrisë. Industrinë mund ta mësosh. Më e vështirë është të mësosh ta shohësh kur një proces nuk funksionon, të mos kalosh indiferent pranë problemit dhe ta marrësh përsipër deri në fund.
+
+Këtë pjesë e kam mbajtur me vete nga një industri në tjetrën.

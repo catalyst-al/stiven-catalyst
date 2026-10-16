@@ -1,4 +1,4 @@
 ---
-quote: "Eine organisierte Rampe ist nicht nur sauberer. Sie macht das Verladen klarer, lässt Fehler schneller erkennen und lässt Menschen unter sichereren Bedingungen arbeiten."
+quote: "Eine organisierte Rampe ist nicht nur sauberer. Sie macht das Verladen übersichtlicher, Fehler fallen früher auf, und die Menschen arbeiten unter sichereren Bedingungen."
 date: 2026-10-10
 ---

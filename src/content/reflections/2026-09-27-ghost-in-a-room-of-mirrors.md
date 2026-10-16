@@ -13,7 +13,7 @@ We live in a fascinating and deeply confused age, one in which people would rath
 
 To be invisible today? Ah... that is no longer a modest retreat. It is an act of rebellion. Quiet, shameless, almost aristocratic.
 
-This society has fallen madly in love with the smooth surface of glass. Everything must be framed, filtered, lit by that cold LED glow and displayed like meat hanging in a street market in Marrakesh. People sacrifice mystery, intimacy and a portion of their dignity so that a crowd of strangers can confirm that they are breathing. Without an image, without some proof pressed into a few square centimetres, they feel as though they do not exist.
+This society has fallen madly in love with the smooth surface of glass. Everything must be framed, filtered, lit by that cold LED glow and displayed like meat hanging in a street market in Marrakesh. People sacrifice mystery, intimacy and a piece of their dignity so that a crowd of strangers can confirm that they are breathing. Without an image, without some proof pressed into a few square centimetres, they feel as though they do not exist.
 
 But they forget an old truth, almost a sacred one: whoever insists on being seen gives up the only power that truly carries weight. The power of observation.
 
@@ -25,8 +25,8 @@ I have seen the same scene in offices and meeting rooms. The manager who talks t
 
 I know. I am writing this on a public website, under my own name. The irony has not escaped me. But writing is not posing. It is taking notes from the corner of the room and sharing them with those who want to see.
 
-In this endless carnival, invisibility is not failure. It is the ultimate luxury. It is a seat in the private box, behind heavy velvet curtains, while the rest of the world sweats on stage for brief applause. When you refuse to play by the rules of the spectacle, something extraordinary happens: they cannot measure you. They cannot package you. And above all, they never quite know where you are coming from.
+In this carnival, invisibility is not failure. It is a seat in the private box, behind heavy velvet curtains, while the rest of the world sweats on stage for a moment of applause. Refuse to play by the rules of the spectacle, and they cannot measure you. They cannot package you. And above all, they never quite know where you are coming from.
 
-So let them photograph their plates, let them retouch their wrinkles, let them wait for the world's approval. You simply take a deep breath, enjoy your coffee in peace, and smile.
+So let them photograph their plates, let them retouch their wrinkles, let them wait for the world's approval. You take a deep breath, enjoy your coffee in peace, and smile.
 
 It is wonderful to be a ghost in a room full of mirrors.

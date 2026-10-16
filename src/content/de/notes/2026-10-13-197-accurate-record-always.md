@@ -1,4 +1,4 @@
 ---
-quote: "Eine korrekte Erfassung ist nicht immer ein Beweis dafür, dass der physische Prozess korrekt abgeschlossen wurde."
+quote: "Eine korrekte Erfassung beweist nicht immer, dass der physische Prozess richtig abgeschlossen wurde."
 date: 2026-10-13
 ---

@@ -6,9 +6,9 @@ series: without-you
 status: published
 featured: true
 summary: 10 minuta para turnit nuk janë për të treguar gjithçka që dimë. Janë për të vendosur çfarë duhet të dijë ekipi para se puna të fillojë.
-description: "Briefing-u para turnit: stand-up-et e mëngjesit në last mile, si fillonte nata në hotel, ku ndahet briefing-u nga handover-i, dhe një shabllon 10-minutësh."
-teaser: Handover-i tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.
-deck: 'Eseja e dytë e serisë “Operacioni që punon pa ty”: stand-up-et e mëngjesit në last mile, nata që nuk fillon nga zero në hotel, dallimi mes handover-it dhe briefing-ut, dhe shablloni i briefing-ut 10-minutësh.'
+description: "Briefing-u para turnit: stand-up-et e mëngjesit në last mile, si nisej nata në hotel, ku ndahet briefing-u nga dorëzimi i turnit dhe një shabllon 10-minutësh."
+teaser: Dorëzimi i turnit të tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.
+deck: 'Eseja e dytë e serisë “Operacioni që punon pa ty”: stand-up-et e mëngjesit në last mile, nata që nuk fillon nga zero në hotel, dallimi mes dorëzimit të turnit dhe briefing-ut, dhe shablloni i briefing-ut 10-minutësh.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -39,78 +39,62 @@ diagram: handover-to-briefing
 
 “Delay është 2,8%.”
 
-Kjo është një fjali që mund ta dëgjosh në çdo briefing. Është e saktë. Mund të jetë edhe e rëndësishme. Por nëse pas saj turni fillon dhe askush nuk e di çfarë duhet bërë ndryshe, ke dhënë informacion, jo drejtim.
+Këtë fjali mund ta dëgjosh në çdo briefing. Është e saktë dhe ndoshta edhe e rëndësishme. Por nëse thua vetëm numrin, turni fillon dhe askush nuk e di çfarë duhet bërë ndryshe, ke dhënë informacion, jo drejtim.
 
-Kjo ese është për ato pak minuta para se puna të fillojë. Briefing-u i turnit është ndoshta mjeti më i lirë i menaxhimit: nuk kërkon sistem, buxhet apo projekt. Kërkon vetëm që dikush ta dijë çfarë duhet thënë, dhe çfarë jo.
+Kjo ese merret me ato pak minuta para se të fillojë puna. Briefing-u i turnit është ndoshta mjeti më i lirë i menaxhimit: nuk kërkon as sistem, as buxhet, as projekt. Mjafton dikush që di çfarë duhet thënë dhe çfarë duhet lënë jashtë.
 
-## Çfarë kam dhe çfarë nuk kam
+Ajo që vijon vjen nga dy vende ku kam punuar. Në last mile, stand-up-et e përditshme të mëngjesit janë të dokumentuara: e di çfarë trajtonin, por jo kush i drejtonte çdo herë apo sa zgjatnin. Në hotel njihja më shumë dorëzimin e turnit sesa një briefing klasik 10-minutësh: një Front Office Daily Stand-Up dhe një fletë dorëzimi që lidhte turnin e natës, të mëngjesit dhe të pasdites. Shablloni në fund është ajo që do të propozoja sot; nuk mund të them me siguri se si Team Leader ose Area Manager e ndryshova briefing-un në këtë mënyrë.
 
-E shkruaj këtë ese nga dy vende ku kam punuar: last mile dhe hotel. Për të dyja kam material real, por jo për çdo detaj.
+## Në last mile: numrat dhe arsyet e tyre
 
-Në last mile kam të dokumentuara daily morning stand-up-et. Nuk kam të sigurt kush i drejtonte çdo herë, sa minuta zgjatnin apo nëse bëheshin gjithmonë në rampë, dhe nuk do ta plotësoj me hamendje.
-
-Në hotel kam përjetuar më shumë handover mes turneve sesa një briefing klasik 10-minutësh para turnit. Kishte një Front Office Daily Stand-Up dhe një fletë handover-i që lidhte turnin e natës, të mëngjesit dhe të pasdites. As këtu nuk do të them sa zgjaste, kush e drejtonte apo nëse bëhej në këmbë apo në zyrë.
-
-Dhe nuk do të them që unë, si Team Leader ose Area Manager, e ndryshova formatin e briefing-ut në një mënyrë të caktuar. Këtë nuk e kam të sigurt mjaftueshëm për ta paraqitur si fakt. Ajo që mund të them është çfarë pashë, çfarë mendoj se e bën një briefing të vlefshëm, dhe pse.
-
-## Në last mile: numra, arsye dhe pika konkrete
-
-Stand-up-et e mëngjesit lidheshin qartë me operacionin e ditës dhe me KPI-të. Temat që kemi trajtuar përfshinin:
+Stand-up-et e mëngjesit lidheshin ngushtë me operacionin e ditës dhe me KPI-të. Ndër temat që trajtonim ishin:
 
 - Damage %, Incomplete %, Delay % dhe Loading Time;
 - arsyet kryesore të vonesave;
-- 5S dhe disiplinën në rampë;
-- scanner ownership, pra kush përgjigjet për cilin skaner;
-- safe stacking;
-- SOP-të dhe QA-në;
-- follow-up me DSP-të;
-- kontrollin e cold chain;
-- alignment-in mes Last Mile dhe Outbound.
+- 5S dhe disiplina në rampë;
+- kush përgjigjet për cilin skaner (scanner ownership);
+- stivimi i sigurt (safe stacking);
+- SOP-të dhe QA-ja;
+- ndjekja me DSP-të, partnerët e dorëzimit;
+- kontrolli i zinxhirit të ftohtë;
+- koordinimi mes Last Mile dhe Outbound.
 
-Pra nuk ishte vetëm “si shkoi dje”. Kishte numra, arsye dhe pika konkrete që duhej korrigjuar.
+Pra stand-up-i ishte më shumë se “si shkoi dje”: kishte numra, arsye dhe pika që duheshin korrigjuar.
 
-Ajo që e bënte të vlefshëm ishte kur briefing-u lidhej me diçka që njerëzit do ta përjetonin menjëherë në turn. Nëse Delay ishte problem, nuk mjaftonte të thuhej përqindja. Duhej të shihej pse po ndodhte. Nëse problemi lidhej me loading-un, me stacking-un, me performancën e shoferit ose me një hap të procesit, atëherë briefing-u kishte vlerë, sepse i jepte ekipit një gjë konkrete për të parë gjatë punës.
+Vlerën e kishte kur briefing-u lidhej me diçka që njerëzit do ta hasnin menjëherë në turn. Nëse problemi ishte Delay, përqindja ishte vetëm fillimi; duhej parë pse po ndodhte. Nëse shkaku qëndronte te ngarkimi, te stivimi, te performanca e shoferëve ose te një hap i procesit, briefing-u i jepte ekipit një gjë për të ndjekur gjatë punës.
 
-Kështu doja ta shihja stand-up-in: KPI-të, 5 Why, Pareto, 5S dhe siguria jo si tema më vete, por të lidhura me ndikimin real në operacion. Është e njëjta ide që e kam shkruar te [KPI-të nuk përmirësohen nga Excel-i](/sq/insights/kpis-do-not-improve-in-excel/), vetëm se këtu ka vetëm 10 minuta për ta bërë.
-
-**Briefing-u ka kuptim kur një KPI kthehet në një sjellje ose veprim të qartë.**
+Briefing-u ka kuptim kur një KPI kthehet në një sjellje ose në një veprim që ekipi e sheh. Kështu doja ta shihja stand-up-in: KPI-të, 5 Whys, Pareto, 5S dhe sigurinë jo si tema më vete, por të lidhura me ndikimin e tyre në operacion. Është e njëjta ide si te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/), vetëm se këtu ke 10 minuta për ta bërë.
 
 ## Informacion apo drejtim
 
-Një briefing humbet vlerën kur mbetet vetëm te numrat.
-
-Nëse thua “Delay është 2,8%” dhe pastaj turni fillon, por askush nuk e di çfarë duhet bërë ndryshe, numri ka kaluar nga raporti te ekipi pa ndryshuar asgjë rrugës.
+Një briefing e humbet vlerën kur mbetet te numrat. Nëse thua “Delay është 2,8%”, turni fillon dhe askush nuk e di çfarë duhet bërë ndryshe, numri ka kaluar nga raporti te ekipi pa ndryshuar asgjë gjatë rrugës.
 
 Dallimi është i vogël në fjalë dhe i madh në efekt:
 
 - **Informacion:** Delay është 2,8%.
-- **Drejtim:** Delay është 2,8%. Arsyeja kryesore që po shohim është [arsyeja]. Sot, gjatë punës, të gjithë shikojmë [një gjë konkrete].
+- **Drejtim:** Delay është 2,8%. Arsyeja kryesore që po shohim është [arsyeja]. Sot, gjatë punës, të gjithë ndjekim [një gjë konkrete].
 
-Fjalia e dytë zgjat dhjetë sekonda më shumë. Por është e vetmja që ekipi mund ta marrë me vete në turn.
+Versioni i dytë zgjat dhjetë sekonda më shumë, por vetëm atë ekipi mund ta marrë me vete në turn.
 
-## Në hotel: nata nuk fillon nga zero
+## Në hotel: nata nuk fillon kurrë nga zero
 
-Në hotel, turni i natës fillonte me informacionin që vinte nga Late Shift dhe mbyllej me informacionin që i kalonte Morning Shift-it.
+Në hotel, turni i natës fillonte me atë që dorëzonte turni i pasdites dhe mbyllej me atë që i kalonte turnit të mëngjesit. Puna nuk fillonte kurrë nga zero: kishte pika të hapura, raste që duheshin ndjekur, probleme teknike, çështje me mysafirët, pagesa ose çështje operative që duhej të vazhdonin.
 
-Pra puna nuk fillonte nga zero. Kishte gjëra të hapura, raste që kërkonin follow-up, probleme teknike, çështje me mysafirët, pagesa ose çështje operative që duhej të vazhdonin.
+Dorëzimi i turnit përfshinte mbërritjet, ankesat, çështjet e faturimit dhe të pagesave, VIP-at, problemet teknike, marrëveshjet e veçanta dhe detyrat për t'u ndjekur. Në fletën e Daily Stand-Up-it të Front Office-it shënoheshin gjithashtu nisjet, zënia e dhomave, no-show-t, rastet e hapura, ndërrimet e dhomave, traces dhe çështje të tjera operative.
 
-Handover-i përfshinte arrivals, ankesa, çështje faturimi dhe pagesash, VIP-a, probleme teknike, rregullime të veçanta dhe detyra follow-up. Te fleta e Daily Stand-Up-it të Front Office-it dokumentoheshin edhe departures, occupancy, no-shows, rastet e hapura, room moves, traces dhe çështje të tjera operative.
+Pse ky kalim nënvlerësohet kaq shumë e kam shpjeguar më gjatë te [eseja për dorëzimin e turnit](/sq/insights/why-the-handover-is-underrated/). Këtu më intereson diçka tjetër: çfarë ndodh me gjithë këtë informacion në minutat e para të turnit.
 
-E kam shkruar më gjatë te [eseja për handover-in](/sq/insights/why-the-handover-is-underrated/) pse ky kalim është kaq i nënvlerësuar. Këtu më intereson diçka tjetër: çfarë ndodh me gjithë këtë informacion në minutat e para të turnit.
+## Dorëzimi i turnit dhe briefing-u kanë punë të ndryshme
 
-## Handover-i dhe briefing-u nuk janë e njëjta gjë
+**Dorëzimi i turnit të tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.**
 
-Për mua kjo është pjesa më e rëndësishme e esesë.
+Dorëzimi i turnit duhet të jetë i plotë; briefing-u duhet të zgjedhë. Nëse briefing-u kthehet në lexim me zë të dorëzimit, ekipi dëgjon gjithçka dhe nuk e di çfarë të mbajë mend.
 
-**Handover-i tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.**
-
-Handover-i duhet të jetë i plotë. Briefing-u duhet të jetë i zgjedhur. Nëse briefing-u bëhet thjesht leximi me zë i handover-it, ekipi dëgjon gjithçka dhe nuk e di çfarë të mbajë.
-
-Prandaj një briefing i mirë para turnit duhet të fillojë pikërisht aty ku mbaron handover-i:
+Prandaj një briefing i mirë para turnit duhet të nisë aty ku mbaron dorëzimi i turnit:
 
 - Çfarë morëm?
 - Çfarë ka ndryshuar?
-- Çfarë është prioritet?
+- Çfarë ka përparësi?
 - Kush duhet ta dijë?
 - Çfarë nuk duhet të humbasë gjatë turnit?
 
@@ -118,27 +102,27 @@ Prandaj një briefing i mirë para turnit duhet të fillojë pikërisht aty ku m
 
 {diagram}
 
-## Shablloni i briefing-ut 10-minutësh
+## Një shabllon për 10 minuta
 
-Ky është shablloni që do të propozoja. Pesë pyetje, rreth dy minuta secila. Nuk është formular për t'u plotësuar, por rendi i bisedës.
+Ja shablloni që do të propozoja: pesë pyetje, rreth dy minuta secila, si radhë e bisedës dhe jo si formular për t'u plotësuar.
 
 **1. Çfarë po trashëgojmë?**
-Gjendja nga turni i mëparshëm ose nga dita e djeshme: pikat e hapura dhe rastet që presin vazhdim. Burimi është handover-i, jo kujtesa e dikujt.
+Gjendja nga turni i mëparshëm ose nga dita e djeshme: pikat e hapura dhe rastet që presin ndjekje. Burimi është dorëzimi i turnit, jo kujtesa e dikujt.
 
 **2. Çfarë ka ndryshuar?**
 Vetëm ndryshimet që e prekin këtë turn: volumi, një proces, një sistem, ekipi.
 
 **3. Ku është rreziku sot?**
-Ku ka më shumë gjasa që diçka të shkojë keq: një KPI që po rrëshqet dhe arsyeja e saj, një pikë e hapur me afat, një problem teknik.
+Aty ku ka më shumë gjasa që diçka të shkojë keq: një KPI që po bie dhe arsyeja e saj, një pikë e hapur me afat, një problem teknik.
 
 **4. Cilat janë 2–3 prioritetet?**
-Jo dhjetë. Secili i thënë si veprim që ekipi e sheh gjatë punës, jo si numër.
+Jo dhjetë. Secili thuhet si veprim që ekipi e sheh gjatë punës.
 
 **5. Kush mban çfarë?**
-Çdo prioritet dhe çdo pikë e hapur me një emër. Një detyrë pa pronar është shumë afër një detyre që nuk do ta bëjë askush.
+Çdo prioritet dhe çdo pikë e hapur me një emër. Një detyrë pa zot është shumë afër një detyre që s'do ta bëjë askush.
 
-**Çfarë nuk hyn në briefing:** historia e plotë e ditës së djeshme, numrat pa arsye, dhe diskutimet që kërkojnë më shumë se një minutë. Ato shënohen dhe merren pas briefing-ut, me njerëzit që duhen.
+**Çfarë nuk hyn në briefing:** historia e plotë e së djeshmes, numrat pa arsye dhe diskutimet që kërkojnë më shumë se një minutë. Ato shënohen dhe trajtohen pas briefing-ut, me njerëzit që duhen.
 
-**Si e di që funksionoi:** pas briefing-ut, pyet një person nga ekipi: cilat janë dy prioritetet e sotme? Nëse nuk i thotë dot, briefing-u ishte informacion, jo drejtim.
+**Si e kupton që funksionoi:** pas briefing-ut, pyet një njeri nga ekipi cilat janë dy prioritetet e sotme. Nëse nuk i thotë dot, briefing-u ishte informacion, jo drejtim.
 
-Një briefing i mirë nuk matet nga sa gjëra u thanë. Matet nga ajo që ekipi bën ndryshe në orën e parë të turnit.
+Pastaj shiko orën e parë të turnit. Aty matet një briefing i mirë: nga ajo që ekipi bën ndryshe, jo nga sa gjëra u thanë.

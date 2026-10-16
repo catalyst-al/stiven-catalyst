@@ -24,44 +24,34 @@ checklist:
       hint: A ishin të qarta standardi, trajnimi, mjetet dhe kushtet?
     - label: Qartëso përgjegjësinë
       hint: Cila pjesë e gabimit ishte brenda kontrollit të personit?
-    - label: Dakordëso veprimin
+    - label: Përcakto bashkë veprimin
       hint: Çfarë ndryshon, kush e bën dhe kur kontrollohet rezultati?
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Kuptoji faktet para bisedës, dhe bëje atë privatisht.
-  - Përshkruaj çfarë ndodhi, dëgjo, kontrollo procesin, dhe vetëm pastaj fol për përgjegjësinë.
+  - Kuptoji faktet para bisedës dhe bëje atë privatisht.
+  - Përshkruaj çfarë ndodhi, dëgjo, kontrollo procesin dhe vetëm pastaj fol për përgjegjësinë.
   - "Mbylle me një veprim të rënë dakord: çfarë ndryshon, kush e bën, kur kontrollohet."
 ---
 
-Një gabim duhet të na çojë te dy pyetje: çfarë nuk funksionoi në proces, dhe çfarë përgjegjësie kishte personi që e kreu punën?
+Një gabim duhet të na çojë te dy pyetje: çfarë nuk funksionoi në proces, dhe çfarë përgjegjësie kishte personi që e bëri punën?
 
 Nëse shohim vetëm personin, rrezikojmë të lëmë të paprekur një proces që do ta prodhojë sërish të njëjtin problem.
 
-Nëse shohim vetëm procesin, rrezikojmë të heqim përgjegjësinë nga vendimet individuale.
+Nëse shohim vetëm procesin, rrezikojmë t'ua heqim përgjegjësinë vendimeve individuale.
 
-Kjo ese merret me momentin kur një menaxher ushtron autoritetin mbi njerëzit më drejtpërdrejt se kurrë: bisedën pas një gabimi. Për mua, të kërkosh përgjegjësi dhe të respektosh dinjitetin e punonjësit nuk janë dy gjëra që kundërshtojnë njëra-tjetrën.
+Kjo ese merret me çastin kur një menaxher e ushtron autoritetin mbi njerëzit më drejtpërdrejt se në çdo rast tjetër: bisedën pas një gabimi. Të kërkosh llogari dhe të respektosh dinjitetin e punonjësit, për mua, nuk janë dy gjëra që përjashtojnë njëra-tjetrën.
 
-## Çfarë kam dhe çfarë nuk kam
-
-Kam punuar si Team Leader On Road dhe më pas si Area Manager në last mile. Në përgjegjësitë e mia përfshiheshin ndjekja e performancës, problemet operative, KPI-të dhe koordinimi i njerëzve.
-
-Por për një bisedë konkrete pas një gabimi, vendin ku u zhvillua dhe mënyrën si e nisa, nuk kam një rast të dokumentuar mjaftueshëm mirë. As për një bisedë që e mbaj mend sepse shkoi shumë mirë ose shumë keq. As për një gabim timin dhe bisedën që pata pas tij, në hotel ose në last mile.
-
-Nuk do t'i shpik. Nuk kemi nevojë për një histori emocionale vetëm për ta bërë shkrimin më interesant.
-
-Ajo që mund të them qartë janë parimet që mbështes si menaxher. Ku përdor shembuj, ata janë hipotetikë dhe i shënoj si të tillë.
+Kam punuar në last mile si Team Leader On Road dhe më pas si Area Manager, ku ndjekja e performancës, problemet operative, KPI-të dhe koordinimi i njerëzve ishin pjesë e punës. Ajo që vijon janë parimet që mbroj në këtë bisedë, jo rrëfimi i një bisede të caktuar. Kur përdor një shembull, ai është hipotetik dhe e them hapur.
 
 ## Privatisht, pasi i ke kuptuar faktet
 
-Si parim, do të preferoja që një bisedë korrigjuese të zhvillohej privatisht, pasi të kisha kuptuar faktet.
+Si parim, një bisedë korrigjuese do të preferoja ta bëja privatisht, dhe vetëm pasi t'i kisha kuptuar faktet. Ky është standardi që mbroj, jo një procedurë që e kam ndjekur në çdo rast.
 
-Ka një përjashtim të qartë: nëse ekziston rrezik i menjëhershëm për sigurinë, ndërhyrja bëhet në moment. Aty nuk pret bisedën e duhur në vendin e duhur. Ndalon atë që po ndodh.
-
-Nuk do ta paraqes këtë si procedurë që e kam ndjekur në çdo rast. Është standardi që mbështes.
+Ka një përjashtim të qartë. Nëse ka rrezik të menjëhershëm për sigurinë, ndërhyn në atë çast. Nuk pret bisedën e duhur në vendin e duhur; ndal atë që po ndodh.
 
 ## Gabim i personit apo gabim i procesit
 
-Për mua kjo është pyetja që një menaxher duhet ta bëjë përpara se të gjykojë dikë. Nëse një punonjës gabon, fillimisht dua të kuptoj:
+Për mua, kjo është pyetja që një menaxher duhet ta bëjë përpara se të gjykojë dikë. Kur një punonjës gabon, fillimisht dua të kuptoj:
 
 - A e njihte standardin?
 - A ishte trajnuar, dhe a e kishte kuptuar?
@@ -69,23 +59,17 @@ Për mua kjo është pyetja që një menaxher duhet ta bëjë përpara se të gj
 - A ishte udhëzimi i qartë, apo linte vend për interpretime?
 - A mori një vendim të gabuar edhe pse i kishte kushtet për të vepruar saktë?
 
-Nëse një person nuk është trajnuar siç duhet, nuk mund ta trajtoj automatikisht gabimin e tij si neglizhencë. Kjo lidhet drejtpërdrejt me atë që shkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/).
+Nëse dikush nuk është trajnuar siç duhet, nuk mund ta trajtoj automatikisht gabimin e tij si neglizhencë. Kjo lidhet drejtpërdrejt me atë që shkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/).
 
-Nëse standardi ishte i qartë, trajnimi ishte bërë dhe personi kishte kushtet për ta ndjekur, atëherë duhet të diskutojmë edhe përgjegjësinë individuale.
+Nëse standardi ishte i qartë, trajnimi ishte bërë dhe personi i kishte kushtet për ta ndjekur, atëherë duhet folur edhe për përgjegjësinë individuale.
 
-Por ka edhe një mundësi të tretë: procesi mund të ketë dobësi dhe punonjësi mund të ketë marrë një vendim të gabuar njëkohësisht. Në atë rast duhet të korrigjojmë të dyja.
+Dhe ka edhe një mundësi të tretë: procesi mund të ketë dobësi dhe njëkohësisht punonjësi mund të ketë marrë një vendim të gabuar. Atëherë duhen korrigjuar të dyja. Menaxhimi i mirë kërkon t'i shohësh të dyja, pa kërkuar fajtor me çdo kusht dhe pa e fshehur përgjegjësinë kur ajo ekziston.
 
-**Menaxhimi i mirë kërkon t'i shohësh të dyja, pa kërkuar fajtor me çdo kusht dhe pa e fshehur përgjegjësinë kur ajo ekziston.**
+## Kërkues, por pa poshtëruar
 
-## Presioni mund të jetë i drejtë. Poshtërimi jo.
+Ka gjëra që nuk do t'i bëja kurrë në një bisedë të tillë. Nuk do ta përdorja gabimin e dikujt për ta poshtëruar para ekipit. Nuk do t'i bërtisja një punonjësi për të treguar autoritet. Nuk do ta quaja të paaftë sepse gaboi. Dhe nuk do të merrja vendim disiplinor pa dëgjuar shpjegimin e tij dhe pa i verifikuar faktet.
 
-Ka gjëra që nuk do t'i bëja kurrë në një bisedë të tillë.
-
-Nuk do ta përdorja gabimin e dikujt për ta poshtëruar përpara ekipit. Nuk do t'i bërtisja një punonjësi për të treguar autoritet. Nuk do ta quaja të paaftë vetëm sepse gaboi. Nuk do të merrja vendim disiplinor pa dëgjuar shpjegimin e tij dhe pa kontrolluar faktet.
-
-Por kjo nuk do të thotë ta relativizoj çdo gabim.
-
-Nëse dikush ka shkelur me vetëdije një rregull sigurie, ka vepruar jashtë autoritetit, ose vazhdon të mos respektojë një standard të qartë, përgjegjësia duhet trajtuar seriozisht dhe sipas procedurave përkatëse.
+Kjo nuk do të thotë që çdo gabim të justifikohet. Nëse dikush ka shkelur me vetëdije një rregull sigurie, ka vepruar përtej autoritetit të vet ose vazhdon të mos respektojë një standard të qartë, përgjegjësia duhet trajtuar seriozisht dhe sipas procedurave përkatëse.
 
 **Presioni mund të jetë i drejtë. Poshtërimi jo.**
 
@@ -93,38 +77,32 @@ Një menaxher mund të jetë kërkues, i vendosur dhe shumë i qartë, pa e cenu
 
 ## Kur flet me kolegët e djeshëm
 
-Kalimin profesional e kam të konfirmuar. Në janar 2025 fillova si Team Leader On Road, dhe disa muaj më vonë u bëra Area Manager. Në atë rol kisha katër Shift Leaders dhe tetë dispeçerë në strukturën time direkte, ndërsa operacioni përfshinte rreth 250 shoferë në mënyrë indirekte. Për këtë kalim kam shkruar më gjatë te [Të drejtosh njerëzit pa humbur njeriun](/sq/insights/leading-people-without-losing-the-person/).
+Në janar 2025 fillova si Team Leader On Road, dhe disa muaj më vonë u bëra Area Manager. Në atë rol më raportonin drejtpërdrejt katër drejtues turni dhe tetë dispeçerë, ndërsa operacioni përfshinte në mënyrë indirekte rreth 250 shoferë. Për këtë kalim kam shkruar më gjatë te [Të drejtosh njerëzit pa humbur njeriun](/sq/insights/leading-people-without-losing-the-person/).
 
-Për mënyrën si reaguan kolegët ndaj promovimit tim, ose nëse ndryshoi marrëdhënia jonë, nuk kam një përshkrim personal të konfirmuar.
-
-Mendimi im është se promovimi nuk duhet ta kthejë autoritetin në demonstrim force. Kur bëhesh përgjegjës për njerëz me të cilët ke punuar më parë, duhet të jesh i qartë për pritshmëritë, i drejtë në vendime, dhe të mos e përdorësh pozicionin për të treguar kush komandon.
+Si reaguan kolegët ndaj promovimit tim, dhe nëse ndryshuan marrëdhëniet tona, nuk mund ta them me siguri. Mendimi im është se promovimi nuk duhet ta kthejë autoritetin në demonstrim force. Kur bëhesh përgjegjës për njerëz me të cilët dikur punoje krah për krah, duhet të jesh i qartë për pritshmëritë dhe i drejtë në vendime, dhe të mos e përdorësh pozicionin për të treguar kush komandon.
 
 **Autoriteti formal të jep të drejtën për të marrë vendime. Besimi ndërtohet nga mënyra si i merr ato.**
 
-Kjo vlen sidomos në bisedën pas një gabimi. Është momenti kur njerëzit shohin më qartë se si e përdor pozicionin.
+Askund kjo nuk ka më shumë rëndësi se në bisedën pas një gabimi. Është çasti kur njerëzit shohin më qartë si e përdor pozicionin.
 
 ## Çfarë ndihmon pas një gabimi
 
-Si parim, besoj se reagimi më i dobishëm pas një gabimi është ai që të ndihmon të kuptosh çfarë ndodhi, çfarë përgjegjësie ke, dhe si të mos e përsëritësh.
+Besoj se reagimi më i dobishëm pas një gabimi është ai që të ndihmon të kuptosh çfarë ndodhi, çfarë përgjegjësie ke dhe si të mos e përsëritësh: jo ai që të lë vetëm me ndjenjën e fajit, dhe as ai që e kalon gabimin sikur të mos kishte ndodhur.
 
-Jo ai që të lë vetëm me ndjenjën e fajit. Dhe as ai që e kalon gabimin sikur nuk ka ndodhur.
+Le të marrim një shembull hipotetik. Një shofer niset pa e kontrolluar një hap të procedurës. Një bisedë që nis me “gjithmonë kështu bën” mbaron para se të fillojë. Një bisedë që nis me “sot u nise pa këtë kontroll; më trego si shkoi” ka ku të shkojë. Në të dyja rastet gabimi emërtohet. Dallimi është nëse personi mund të mësojë diçka prej tij.
 
-Një shembull hipotetik: një shofer niset pa e kontrolluar një hap të procedurës. Një bisedë që fillon me “gjithmonë e bën këtë” e mbyll bisedën para se të nisë. Një bisedë që fillon me “sot u nise pa këtë kontroll; më trego si shkoi” e hap atë. Në të dyja rastet, gabimi emërtohet. Ndryshon vetëm nëse personi mund të mësojë diçka prej tij.
+## Pesë hapa për bisedën
 
-## Pesë hapat e bisedës pas gabimit
-
-Kjo është struktura që do të propozoja. Mund ta përdorësh gjatë një bisede reale, ose ta plotësosh përpara saj për t'u përgatitur.
+Kjo është struktura që do të propozoja. Mund ta përdorësh gjatë një bisede të vërtetë, ose ta plotësosh më parë për t'u përgatitur.
 
 1. **Përshkruaj faktin.** Çfarë ndodhi realisht, pa etiketa personale dhe pa supozime.
 2. **Dëgjo shpjegimin.** Çfarë pa, dinte dhe kuptoi punonjësi në atë moment.
 3. **Kontrollo procesin.** A ishin të qarta standardi, trajnimi, mjetet dhe kushtet.
 4. **Qartëso përgjegjësinë.** Cila pjesë e gabimit ishte brenda kontrollit të personit.
-5. **Dakordëso veprimin.** Çfarë ndryshon, kush e bën, dhe kur kontrollohet rezultati.
+5. **Përcakto bashkë veprimin.** Çfarë ndryshon, kush e bën dhe kur kontrollohet rezultati.
 
-Rendi ka rëndësi. Nëse fillon nga hapi i katërt, ke gjykuar para se të dëgjosh. Nëse ndalesh te hapi i tretë, ke kuptuar procesin, por ke lënë jashtë personin.
+Rendi ka rëndësi. Nëse fillon nga hapi i katërt, ke gjykuar para se të dëgjosh. Nëse ndalesh te hapi i tretë, ke kuptuar procesin, por e ke lënë personin jashtë.
 
-Është një shabllon orientues, jo procedurë disiplinore. Për shkeljet serioze ndiqen procedurat e sigurisë, HR-së dhe politikat e organizatës.
+Fleta është një udhërrëfyes për bisedën dhe nuk zëvendëson procedurën disiplinore: për shkeljet serioze ndiqen procedurat e sigurisë dhe të HR-së, si dhe politikat e organizatës.
 
-Qëllimi i bisedës pas gabimit nuk është që punonjësi të largohet me frikë nga gabimi i radhës.
-
-Është të largohet duke ditur çfarë duhet të bëjë ndryshe.
+Prova vjen më vonë, ditën kur kontrollohet veprimi i rënë dakord. Atëherë shihet nëse punonjësi doli nga biseda duke ditur çfarë duhej të bënte ndryshe, apo vetëm me frikë nga gabimi i radhës.

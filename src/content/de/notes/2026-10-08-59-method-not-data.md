@@ -1,4 +1,4 @@
 ---
-quote: "Man kann die Methode zeigen, mit der man Information ordnet, ohne die sensible Information zu veröffentlichen."
+quote: "Man kann zeigen, wie man Informationen ordnet, ohne die sensiblen Informationen zu veröffentlichen, auf denen die Arbeit beruht."
 date: 2026-10-08
 ---

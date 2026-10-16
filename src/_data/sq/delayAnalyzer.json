@@ -5,26 +5,26 @@
   "text": {
     "pasteRow": "Një rresht për çdo linjë",
     "pasteColumns": "data, turni, linja, nisja e planifikuar, nisja reale, mbërritja e planifikuar, mbërritja reale, arsyeja, shënimi",
-    "pasteHelp": "Orët si 07:45, 7.45 ose 0745 funksionojnë të gjitha; po ashtu tab-et, pikëpresjet ose presjet, dhe rreshti i titujve anashkalohet. Emrat tuaj për arsyet mbeten siç janë.",
+    "pasteHelp": "Orët si 07:45, 7.45 ose 0745 funksionojnë të gjitha; po ashtu tabulatorët, pikëpresjet ose presjet; rreshti i titujve anashkalohet. Emrat e tu për arsyet mbeten siç janë.",
     "pastePlaceholder": "14.09.2026\tPasdite\tR12\t11:15\t11:50\t15:15\t15:55\tValë e vonë",
     "empty": "Ende asnjë linjë e regjistruar.",
     "tips": [
       [
-        "Regjistroni çdo linjë.",
+        "Regjistro çdo linjë.",
         "Linjat në kohë janë baza: pa to nuk ka përqindje në kohë dhe as model sipas orës."
       ],
       [
-        "Përdorni orën e premtuar.",
-        "Mbërritja e planifikuar është ajo që u premtua: ndalesa e parë, një dritare dorëzimi ose fundi i linjës. Përdorni të njëjtën çdo ditë."
+        "Përdor orën e premtuar.",
+        "Mbërritja e planifikuar është ajo që u premtua: ndalesa e parë, një dritare dorëzimi ose fundi i linjës. Përdor të njëjtën çdo ditë."
       ],
       [
         "Rampa apo rruga.",
         "Minutat me të cilat linja u nis me vonesë llogariten si vonesë e rampës; minutat që humbi pas nisjes llogariten si vonesë e rrugës."
       ]
     ],
-    "vitalFew": "Zakonisht dy ose tri arsye qëndrojnë pas shumicës së linjave me vonesë. Filloni aty, pastaj çojeni arsyen kryesore te",
+    "vitalFew": "Zakonisht dy ose tri arsye qëndrojnë pas shumicës së linjave me vonesë. Fillo aty, pastaj çoje arsyen kryesore te",
     "checkTitle": "A niset mjeti në kohë?",
-    "checkIntro": "Qëndroni te rampa gjatë një vale nisjesh dhe shënoni atë që shihni realisht sot. Çdo rresht i pashënuar është një vend ku krijohen minutat e para të vonesës."
+    "checkIntro": "Qëndro te rampa gjatë një vale nisjesh dhe shëno atë që sheh realisht sot. Çdo rresht i pashënuar është një vend ku krijohen minutat e para të vonesës."
   },
   "shifts": ["Mëngjes", "Pasdite", "Natë"],
   "reasons": [
@@ -33,9 +33,9 @@
       "side": "dock",
       "meaning": "Mjeti ishte gati, ngarkesa jo. Ngarkimi nisi vonë, ecte ngadalë ose priti pako që mungonin.",
       "moves": [
-        "Jepini çdo linje një orë fikse për nisjen e ngarkimit dhe një slot ngarkimi në një rampë të caktuar.",
-        "Përgatitni ngarkesën sipas linjës para se të mbërrijë mjeti, që ngarkimi të jetë mbartje, jo kërkim.",
-        "Matni kohën e ngarkimit për një javë: gjeni linjat që zgjasin gjithmonë më shumë dhe pse."
+        "Jepi çdo linje një orë fikse për nisjen e ngarkimit dhe një slot ngarkimi në një rampë të caktuar.",
+        "Përgatit ngarkesën sipas linjës para se të mbërrijë mjeti, që ngarkimi të jetë mbartje, jo kërkim.",
+        "Mat kohën e ngarkimit për një javë: gjej linjat që zgjasin gjithmonë më shumë dhe pse."
       ],
       "question": "Çfarë pret mjeti në pesëmbëdhjetë minutat e fundit para se të niset?"
     },
@@ -44,9 +44,9 @@
       "side": "dock",
       "meaning": "Volumi mbërriti pas orës së mbylljes, ose një pik ra mbi të njëjtat orare nisjeje çdo ditë. Linjat presin pakot e fundit.",
       "moves": [
-        "Bini dakord për një orë mbylljeje të prerë: pakot që e humbasin shkojnë me linjën e radhës, jo në një nisje të vonë.",
-        "Largoni linjat më të rënda nga vala e pikut aty ku dritaret e dorëzimit e lejojnë.",
-        "Ndani çdo ditë numrat e valëve të vona me qendrën ose sortuesin paraardhës, bashkë me nisjet që kushtuan."
+        "Bjer dakord për një orë mbylljeje të prerë: pakot që e humbasin shkojnë me linjën e radhës, jo në një nisje të vonë.",
+        "Largo linjat më të rënda nga vala e pikut aty ku dritaret e dorëzimit e lejojnë.",
+        "Ndaj çdo ditë numrat e valëve të vona me qendrën ose sortuesin paraardhës, bashkë me nisjet që kushtuan."
       ],
       "question": "Kush vendos ta mbajë një linjë për volumin e vonë, dhe sa u kushton klientëve të parë?"
     },
@@ -55,9 +55,9 @@
       "side": "dock",
       "meaning": "Mjeti mbërriti vonë te rampa, nuk kaloi një kontroll ose nuk ishte furnizuar apo karikuar.",
       "moves": [
-        "Kontrolloni, furnizoni ose karikoni mjetet në fund të turnit të mëparshëm, jo në nisje.",
-        "Mbani një mjet rezervë gati në pik, me çelësat dhe dokumentet.",
-        "Regjistroni problemet e mjeteve sipas targës: zakonisht pak mjete shkaktojnë shumicën."
+        "Kontrollo, furnizo ose kariko mjetet në fund të turnit të mëparshëm, jo në nisje.",
+        "Mbaj një mjet rezervë gati në pik, me çelësat dhe dokumentet.",
+        "Regjistro problemet e mjeteve sipas targës: zakonisht pak mjete shkaktojnë shumicën."
       ],
       "question": "Kur e marrim vesh që një mjet nuk është gati, dhe a mund ta dinim një orë më herët?"
     },
@@ -66,9 +66,9 @@
       "side": "dock",
       "meaning": "Shoferi erdhi vonë, briefing-u zgjati ose linja u ricaktua në minutën e fundit.",
       "moves": [
-        "Nisni briefing-un në kohë dhe mbajeni të shkurtër; shënimet e linjës jepini me shkrim.",
-        "Konfirmoni shoferët e linjave të hershme një mbrëmje më parë.",
-        "Ricaktimet bëjini para se të nisë ngarkimi, kurrë te mjeti."
+        "Nise briefing-un në kohë dhe mbaje të shkurtër; shënimet e linjës jepi me shkrim.",
+        "Konfirmo shoferët e linjave të hershme një mbrëmje më parë.",
+        "Ricaktimet bëji para se të nisë ngarkimi, kurrë te mjeti."
       ],
       "question": "Sa minuta kalojnë nga mbërritja e shoferit deri te nisja e mjetit, dhe ku shkojnë?"
     },
@@ -77,20 +77,20 @@
       "side": "dock",
       "meaning": "Skanerët, çelësat, fletëdërgesat ose dokumentet doganore nuk ishin gati kur ishte gati mjeti.",
       "moves": [
-        "Përgatitni skanerët, çelësat dhe dokumentet për çdo linjë në një vend para se të mbarojë ngarkimi.",
-        "Karikoni dhe testoni skanerët në fund të çdo turni.",
-        "Shtojini dokumentet dhe pajisjet te kontrolli i nisjes, jo te kujtesa e shoferit."
+        "Përgatit skanerët, çelësat dhe dokumentet për çdo linjë në një vend para se të mbarojë ngarkimi.",
+        "Kariko dhe testo skanerët në fund të çdo turni.",
+        "Shtoji dokumentet dhe pajisjet te kontrolli i nisjes, jo te kujtesa e shoferit."
       ],
       "question": "Çfarë duhet të shkojë të gjejë një shofer para se të niset?"
     },
     {
       "name": "Trafik ose punime në rrugë",
       "side": "road",
-      "meaning": "Linja humbi kohë nga trafiku, bllokimet ose punimet. Një pjesë është jashtë kontrollit tuaj; modelet që përsëriten jo.",
+      "meaning": "Linja humbi kohë nga trafiku, bllokimet ose punimet. Një pjesë është jashtë kontrollit tënd; modelet që përsëriten jo.",
       "moves": [
-        "Kërkoni në regjistër të njëjtat rrugë dhe orë: trafiku që përsëritet i përket planit të linjës.",
-        "Zhvendosni nisjet ose radhën e ndalesave për të shmangur pikët e njohura.",
-        "Kontrolloni nëse koha e planifikuar përfshin kohë realiste udhëtimi për atë orë."
+        "Kërko në regjistër të njëjtat rrugë dhe orë: trafiku që përsëritet i përket planit të linjës.",
+        "Zhvendos nisjet ose radhën e ndalesave për të shmangur pikët e njohura.",
+        "Kontrollo nëse koha e planifikuar përfshin kohë realiste udhëtimi për atë orë."
       ],
       "question": "A është ky trafik një surprizë, apo ndodh në këtë orë çdo javë?"
     },
@@ -99,9 +99,9 @@
       "side": "road",
       "meaning": "Adresat e gabuara, portat e mbyllura, mungesa e parkimit ose pikat e paqarta të dorëzimit kushtojnë minuta në çdo ndalesë.",
       "moves": [
-        "Mblidhni shënimet e hyrjes (porta, kode, zona shkarkimi) dhe vendosini në të dhënat e linjës.",
-        "Rregulloni adresat e gabuara te burimi, jo me kujtesën e një shoferi.",
-        "U jepni shoferëve të rinj shënimet për ndalesat e vështira para se të nisen."
+        "Mblidh shënimet e hyrjes (porta, kode, zona shkarkimi) dhe vendosi në të dhënat e linjës.",
+        "Rregullo adresat e gabuara te burimi, jo me kujtesën e një shoferi.",
+        "Jepu shoferëve të rinj shënimet për ndalesat e vështira para se të nisen."
       ],
       "question": "Cilat ndalesa kushtojnë më shumë se dhjetë minuta çdo herë, dhe a e di shoferi i radhës?"
     },
@@ -110,9 +110,9 @@
       "side": "road",
       "meaning": "Klienti nuk ishte aty, ndaj shoferi priti, telefonoi ose u kthye përsëri.",
       "moves": [
-        "I dërgoni klientit një dritare dorëzimi dhe konfirmojeni para se të niset linja.",
-        "Bini dakord për një kohë pritjeje fikse dhe një hap të qartë pasues për çdo lloj klienti.",
-        "Kërkoni klientët që përsëriten: një marrëveshje e përhershme dorëzimi kursen të njëjtat minuta çdo javë."
+        "Dërgoji klientit një dritare dorëzimi dhe konfirmoje para se të niset linja.",
+        "Bjer dakord për një kohë pritjeje fikse dhe një hap të qartë pasues për çdo lloj klienti.",
+        "Kërko klientët që përsëriten: një marrëveshje e përhershme dorëzimi kursen të njëjtat minuta çdo javë."
       ],
       "question": "Sa pret një shofer para se të vazhdojë, dhe kush e vendosi këtë?"
     },
@@ -121,9 +121,9 @@
       "side": "road",
       "meaning": "Linja u planifikua me më shumë ndalesa ose distancë sesa lejon koha. Shoferi nuk mund ta rikuperojë.",
       "moves": [
-        "Krahasoni kohët e planifikuara dhe reale të ndalesave për çdo linjë: planifikoni me atë që ndodh realisht.",
-        "Kufizoni ndalesat për linjë sipas zonës dhe orës së ditës, jo sipas mesatares.",
-        "Zhvendosni ndalesa nga linjat më të gjata para se të ngarkohet mjeti."
+        "Krahaso kohët e planifikuara dhe reale të ndalesave për çdo linjë: planifiko me atë që ndodh realisht.",
+        "Kufizo ndalesat për linjë sipas zonës dhe orës së ditës, jo sipas mesatares.",
+        "Zhvendos ndalesa nga linjat më të gjata para se të ngarkohet mjeti."
       ],
       "question": "A do ta mbaronte shoferi ynë më i mirë këtë linjë në kohë në një ditë normale?"
     },
@@ -132,9 +132,9 @@
       "side": "road",
       "meaning": "Bora, stuhitë ose nxehtësia e ngadalësuan udhëtimin dhe ndalesat.",
       "moves": [
-        "Planifikoni ditët me mot të keq: më pak ndalesa për linjë dhe nisje më të hershme kur ka paralajmërim.",
-        "Njoftojini klientët herët kur dritaret do të zhvendosen.",
-        "Mbajeni motin jashtë arsyeve të tjera, që modeli normal të mbetet i dukshëm."
+        "Planifiko ditët me mot të keq: më pak ndalesa për linjë dhe nisje më të hershme kur ka paralajmërim.",
+        "Njoftoji klientët herët kur dritaret do të zhvendosen.",
+        "Mbaje motin veçmas nga arsyet e tjera, që modeli normal të mbetet i dukshëm."
       ],
       "question": "Çfarë ndryshojmë në plan një mbrëmje para motit të keq?"
     }
@@ -143,12 +143,12 @@
     "dock": {
       "name": "Rampa",
       "lede": "nisën te rampa, para se mjeti të nisej",
-      "advice": "Rregulloni së pari nisjen. Një mjet që niset 30 minuta vonë nuk mund të jetë në kohë për ndalesat e para, çfarëdo që të bëjë shoferi në rrugë."
+      "advice": "Rregullo së pari nisjen. Një mjet që niset 30 minuta vonë nuk mund të jetë në kohë për ndalesat e para, çfarëdo që të bëjë shoferi në rrugë."
     },
     "road": {
       "name": "Rruga",
       "lede": "u krijuan në rrugë, pasi mjeti u nis",
-      "advice": "Pjesa më e madhe e vonesës rritet në rrugë, pasi mjeti është nisur. Shikoni dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikoni ngasjen."
+      "advice": "Pjesa më e madhe e vonesës rritet në rrugë, pasi mjeti është nisur. Shiko dizajnin e linjës, numrin e ndalesave dhe dritaret e dorëzimit para se të shikosh ngasjen."
     }
   },
   "checklist": [

@@ -1,10 +1,10 @@
 ---
 title: Betriebshandbücher
 tag: Management
-summary: Komplexes Schichtwissen in praktische, wiederholbare Systeme verwandeln, die Teams auch unter Druck wirklich nutzen können.
+summary: Komplexes Schichtwissen in einfache, wiederholbare Systeme übersetzen, die Teams auch unter Druck nutzen können.
 order: 3
 link: "/de/tools/shift-handover/"
-link_label: "Passendes Übergabe-Tool ausprobieren"
+link_label: "Tool Schichtübergabe ausprobieren"
 image: ""
 file: ""
 ---

@@ -5,103 +5,93 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "Ein Scan zeigt, dass eine Handlung erfasst wurde. Er zeigt nicht die ganze Geschichte des Produkts, und er zeigt nicht, wer schuld ist."
+summary: "Ein Scan zeigt, dass eine Handlung erfasst wurde. Er zeigt weder die ganze Geschichte des Produkts noch, wer schuld ist."
 teaser: Das System sagt Ihnen, was erfasst wurde. Die Führungskraft muss verstehen, was passiert ist.
-description: "Was ein Scan beweist und was nicht, warum er rekonstruiert und nicht urteilt, fünf Schritte bei einer Abweichung von System und Realität, und eine Karte."
-deck: "Der vierte Essay der Reihe „Das System ist schneller als Sie“: was ein Scan beweist, warum eine korrekte Erfassung nicht beweist, dass der physische Prozess korrekt abgeschlossen wurde, fünf Schritte für eine Abweichung, und eine Karte, die den Erfassungsfehler vom Beladungsfehler trennt."
+description: "Was ein Scan beweist und was nicht, warum er rekonstruiert und nicht urteilt, fünf Schritte bei einer Abweichung von System und Realität sowie eine Karte."
+deck: "Der vierte Essay der Reihe „Das System ist schneller als Sie“: was ein Scan beweist, warum eine korrekte Erfassung nicht beweist, dass der physische Prozess korrekt abgeschlossen wurde, fünf Schritte für eine Abweichung und eine Karte, die den Erfassungsfehler vom Beladungsfehler trennt."
 relatedTools:
   - /tools/incomplete-control/
   - /tools/five-whys/
 checklist:
   title: Eine Abweichung zwischen System und Realität
   fill: true
-  note: "Eine Karte für jeden Fall, in dem das System das eine sagt und der Trolley, das Regal oder das Zimmer etwas anderes. Ausfüllen, bevor Sie über Schuld sprechen."
+  note: "Eine Karte für jeden Fall, in dem das System das eine sagt und der Trolley, das Regal oder das Zimmer etwas anderes. Füllen Sie sie aus, bevor Sie über Schuld sprechen."
   items:
     - label: "Was wurde erfasst, und wann?"
-      hint: "Die Handlung, die Uhrzeit, der Ort. Nur, was die Erfassung sagt, noch ohne sie zu deuten."
+      hint: "Die Handlung, die Uhrzeit, der Ort. Nur, was in der Erfassung steht, noch ohne Deutung."
     - label: "Was zeigt der physische Zustand jetzt?"
       hint: "Der Trolley, das Regal, die Temperaturzone. Jemand, der es mit eigenen Augen gesehen hat, kein weiterer Scan."
     - label: "Wo ist der letzte Punkt, an dem Erfassung und Realität übereinstimmten?"
       hint: "Das Lager, die Vorbereitung, die Beladung, die Straße. Die Abweichung ist nach diesem Punkt entstanden."
     - label: "Erfassungsfehler, oder Fehler bei Vorbereitung oder Beladung?"
-      hint: "War das Produkt da und der Scan falsch, oder war der Scan richtig und das Produkt wurde falsch bewegt?"
+      hint: "War das Produkt da und der Scan falsch, oder stimmte der Scan und das Produkt wurde falsch bewegt?"
     - label: "Was ist die bestätigte Ursache, und was verhindert sie beim nächsten Mal?"
       hint: "Bestätigt, nicht vermutet. Und eine Maßnahme, nicht nur ein Name."
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - "Wenn ein Scan und ein Trolley das nächste Mal nicht übereinstimmen, fragen Sie zuerst, wo sie zuletzt übereinstimmten, nicht wer es war."
+  - "Wenn Scan und Trolley das nächste Mal nicht zusammenpassen, fragen Sie zuerst, wo sie zuletzt übereinstimmten, und nicht, wer es war."
   - "Bevor Sie eine Abweichung als „Fehler des Fahrers“ stehen lassen, trennen Sie den Erfassungsfehler vom Beladungsfehler."
-  - "Schreiben Sie am Ende der Woche zu jeder Abweichung die bestätigte Ursache und die Maßnahme auf. Die ohne bestätigte Ursache sind die Arbeit der nächsten Woche."
+  - "Notieren Sie am Ende der Woche zu jeder Abweichung die bestätigte Ursache und die Maßnahme. Was noch keine bestätigte Ursache hat, ist die Arbeit der nächsten Woche."
 ---
 
-Das System sagt Ihnen, was erfasst wurde. Die Führungskraft muss verstehen, was passiert ist.
+Auf der letzten Meile hat der Scanner meistens das letzte Wort. Dieser Essay fragt, was dieses Wort eigentlich besagt. In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich zum Schluss die kommenden Essays aufgezählt; einer davon sollte vom Scanner handeln, der Zeuge ist und nicht Richter. Hier ist er.
 
-In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich mit einer Liste der kommenden Essays geschlossen, und einer davon handelte vom Scanner, der Zeuge ist und nicht Richter. Das ist dieser Essay. Über das Gerät, das auf der letzten Meile meistens das letzte Wort hat, und über die Frage, was dieses Wort eigentlich sagt.
-
-## Was ich habe und was nicht
-
-Was ich habe: die Arbeit auf der letzten Meile mit den Problemen bei der Beladung, den fehlenden Taschen und den vermischten Trolleys. Die Berichte, in denen auch Abweichungen beim Scannen und Beladen erwähnt wurden. Incomplete und Damage als KPIs, die wir jeden Tag verfolgt haben. Die Regeln der operativen Anweisungen: Wenn eine Tasche fehlte, informierte der Fahrer den Team Leader, und der Trolley verließ die festgelegte Zone nicht, und Chilled- und Frozen-Produkte wurden innerhalb der temperaturkontrollierten Zonen gescannt. Aus dem Hotel den Unterschied zwischen dem, was das System erfasst, und dem tatsächlichen Zustand eines Zimmers, über den ich im ersten Essay geschrieben habe.
-
-Was ich nicht habe: einen verifizierten Fall, in dem das System eine Tasche als gescannt zeigte und ich selbst sah, dass sie fehlte. Das Originaldokument der Trolley-Regel, sein Datum und seinen Verfasser. Einen Fall, in dem die Scan-Historie benutzt wurde, um einem Fahrer die Schuld zu geben, oder in dem ich sie selbst benutzt habe, um die Verantwortung festzulegen. Einen Fall, in dem der Scanner nicht funktionierte, und wie die Arbeit weiterging. Und aus dem Hotel keinen Fall, in dem ein erfasster Status oder eine Buchung nicht mit der Realität übereinstimmte.
-
-Dieser Essay baut also auf den Problemen und Regeln auf, die ich jeden Tag vor mir hatte, und auf dem, was ich heute empfehlen würde. Es gibt darin keinen rekonstruierten Vorfall.
+Grundlage ist meine Arbeit auf der letzten Meile mit ihren Problemen bei der Beladung, den fehlenden Taschen und vermischten Trolleys. Dazu kommen Berichte, in denen auch Abweichungen beim Scannen und Beladen vorkamen, Incomplete und Damage als KPIs, die wir jeden Tag verfolgt haben, und die Regeln der operativen Anweisungen, auf die ich weiter unten eingehe. Aus dem Hotel stammt der Unterschied zwischen dem, was das System erfasst, und dem tatsächlichen Zustand eines Zimmers, über den ich im ersten Essay geschrieben habe. Einen rekonstruierten Vorfall enthält der Essay nicht: Ich habe keinen belegten Fall, in dem das System eine Tasche als gescannt zeigte und ich selbst sah, dass sie fehlte, und keinen, in dem die Scan-Historie dazu diente, einem Fahrer die Schuld zu geben, oder in dem ich selbst damit die Verantwortung festgelegt habe. Die fünf Schritte weiter unten würde ich heute empfehlen; als Protokoll habe ich sie nicht in jedem Fall angewendet.
 
 ## Was ein Scan beweist
 
-Ein Scan ist ein kurzer und präziser Satz: Dieser Code wurde gelesen, an diesem Ort, zu dieser Uhrzeit. Mehr nicht.
+Ein Scan ist ein kurzer, präziser Satz: Dieser Code wurde gelesen, an diesem Ort, zu dieser Uhrzeit. Mehr nicht.
 
-Er sagt nicht, dass die Tasche noch da ist. Er sagt nicht, dass sie auf den richtigen Trolley gelegt wurde. Er sagt nicht, dass der richtige Trolley zum richtigen Fahrer kam, und auch nicht, dass der Fahrer alles mitnahm, bevor er losfuhr. All das sind Schritte, die nach dem Scan passieren, in der physischen Welt, und der Scanner sieht sie nicht.
+Er sagt nicht, dass die Tasche noch da ist oder dass sie auf den richtigen Trolley kam. Er sagt nicht, dass der richtige Trolley beim richtigen Fahrer ankam oder dass der Fahrer vor der Abfahrt alles mitnahm. All das geschieht nach dem Scan, in der physischen Welt, und dorthin sieht der Scanner nicht.
 
-Das macht den Scan nicht weniger wertvoll. Es macht klar, wofür er wertvoll ist. Ein guter Zeuge sagt genau, was er gesehen hat. Er sagt nicht, was passiert ist, als er nicht da war.
+Der Scan behält seinen Wert; diese Grenzen zeigen, wofür er wertvoll ist. Ein guter Zeuge sagt genau, was er gesehen hat, und nichts darüber, was geschah, als er nicht dabei war.
 
 **Eine korrekte Erfassung ist nicht immer ein Beweis dafür, dass der physische Prozess korrekt abgeschlossen wurde.**
 
 ## Die Trolley-Regel
 
-In [Wo ein Teil der Bestellung verloren geht](/de/insights/where-part-of-the-order-goes-missing/) habe ich über die Regel geschrieben, wenn eine Tasche fehlte: Der Fahrer informierte den Team Leader, und der Trolley blieb in der festgelegten Zone, bis das Problem gelöst war.
+In [Wo ein Teil der Bestellung verloren geht](/de/insights/where-part-of-the-order-goes-missing/) habe ich die Regel für eine fehlende Tasche beschrieben: Der Fahrer informierte den Team Leader, und der Trolley blieb in der festgelegten Zone, bis das Problem gelöst war.
 
-Ich weiß nicht, wer diese Regel geschrieben hat und wann. Aber meine Lesart ist diese: Die Regel verlangt von niemandem, auf den Bildschirm zu schauen. Sie verlangt von jemandem, anzuhalten und den Trolley anzusehen. In dem Moment, in dem Erfassung und Realität vielleicht nicht übereinstimmen, gibt die Regel der physischen Kontrolle das Wort und hält den Trolley dort, wo diese Kontrolle noch möglich ist.
+Wer diese Regel wann geschrieben hat, weiß ich nicht. Was folgt, ist also meine Lesart und kein Zitat aus einem Verfahren. Die Regel verlangt von niemandem, auf einen Bildschirm zu schauen. Sie verlangt, dass jemand stehen bleibt und sich den Trolley ansieht. Genau in dem Moment, in dem Erfassung und Realität auseinanderlaufen könnten, gibt sie der physischen Kontrolle das Wort und hält den Trolley dort, wo diese Kontrolle noch möglich ist. Dieses Prinzip trägt den ganzen Essay.
 
-Das ist meine Deutung des Prinzips, kein Zitat aus einem Verfahren. Aber es ist das Prinzip, an dem ich in diesem ganzen Essay festhalte.
+## Der Name in der letzten Zeile
 
-## Zeuge, nicht Richter
+Fehlt eine Tasche, lautet die erste Frage in den meisten Betrieben „Wer war das?“ statt „Wo ist sie verloren gegangen?“. Und die Scan-Historie scheint die schnellste Antwort zu liefern: Hier steht, wer sie zuletzt gescannt hat.
 
-Wenn eine Tasche fehlt, ist die erste Frage in den meisten Betrieben nicht „wo ist sie verloren gegangen“. Sie lautet „wer war es“. Und die Scan-Historie sieht aus wie die schnellste Antwort: Da steht, wer ihn zuletzt gescannt hat.
+Aber eine Tasche kann im Lager verloren gehen, bei der Vorbereitung, bei der Beladung oder unterwegs, und die Probleme, die wir auf der letzten Meile hatten, konnten jeden dieser Abschnitte betreffen. Der letzte Scan zeigt, wer die Tasche im System zuletzt in der Hand hatte; wo sie von ihrem Platz getrennt wurde, kann er nicht zeigen.
 
-Aber eine fehlende Tasche kann im Lager verloren gegangen sein, bei der Vorbereitung, bei der Beladung oder unterwegs. Die Probleme, die wir auf der letzten Meile hatten, konnten jeden dieser Teile betreffen. Der letzte Scan zeigt, wer die Tasche im System zuletzt angefasst hat. Er zeigt nicht, wo die Tasche von ihrem Platz getrennt wurde.
+In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben: Wenn Sie die Zahl für die Antwort halten, bestrafen Sie den Fahrer für eine Tasche, die nie auf seinem Trolley war. Die Scan-Historie verleitet zum selben Fehler, nur einen Schritt näher.
 
-In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben, dass Sie, wenn Sie die Zahl als Antwort behandeln, den Fahrer für eine Tasche bestrafen, die nie in seinem Trolley war. Mit dem Scan ist es dasselbe, eine Stufe näher.
-
-Das heißt nicht, dass niemand verantwortlich ist. Wenn nachgewiesen wird, dass jemand gegen den Standard verstoßen hat, bleibt die individuelle Verantwortung. Aber der Beweis kommt aus der Rekonstruktion des Prozesses, nicht aus dem Namen in der letzten Zeile der Historie.
+Ist nachgewiesen, dass jemand gegen den Standard verstoßen hat, bleibt die individuelle Verantwortung bestehen. Der Nachweis entsteht aber aus der Rekonstruktion des Prozesses, nicht aus dem Namen in der letzten Zeile der Historie.
 
 **Der Scanner ist Zeuge einer Handlung. Ein Urteil verlangt, den ganzen Prozess zu verstehen.**
 
 ## Wenn der Scan fehlt
 
-Es gibt auch die andere Seite: den Scanner, der nicht funktioniert, den Scan, der nicht gemacht wird. Ich habe keinen Fall, den ich beschreiben könnte, und ich weiß nicht, wie es offiziell geregelt war.
+Dann gibt es die andere Seite: den Scanner, der nicht funktioniert, den Scan, der nicht gemacht wird. Einen Fall dazu kann ich nicht beschreiben, und wie es offiziell geregelt war, weiß ich nicht. Dieser Teil ist also eine Empfehlung.
 
-Aber eines würde ich nicht vorschlagen: dass die Arbeit ohne Scan weitergeht, wenn das Verfahren ihn verlangt. Das gilt besonders für Chilled- und Frozen-Produkte, bei denen der Scan innerhalb der Temperaturzone selbst Teil der Regel ist. Ein fehlender Zeuge wird nicht durch eine Annahme ersetzt. Jede Ausnahme wird nach den genehmigten Regeln behandelt, und aufgeschrieben.
+Eines würde ich nicht vorschlagen: ohne Scan weiterzuarbeiten, wo das Verfahren einen verlangt. Das gilt vor allem für Chilled- und Frozen-Produkte, bei denen der Scan innerhalb der Temperaturzone selbst Teil der Regel ist. Ein fehlender Zeuge wird nicht durch eine Annahme ersetzt. Jede Ausnahme wird nach den genehmigten Regeln behandelt und schriftlich festgehalten.
 
-## Fünf Schritte für eine Abweichung
+## Fünf Schritte bei einer Abweichung
 
-Was ich heute anders machen würde, ist die Art, wie eine Abweichung zwischen System und Realität untersucht wird. Ich habe das nicht in jedem Fall als Protokoll angewendet. Aber ich würde es so empfehlen:
+Heute würde ich eine Abweichung zwischen System und Realität so untersuchen:
 
-1. **Prüfen Sie die Erfassung und ihre Uhrzeit.** Was das System genau sagt, und wann es das gesagt hat.
-2. **Verifizieren Sie den physischen Zustand der Ladung.** Mit eigenen Augen, nicht mit einem weiteren Scan.
-3. **Finden Sie den letzten Punkt, an dem Information und Realität übereinstimmten.** Die Abweichung ist danach entstanden, und dort beginnt die Suche.
-4. **Trennen Sie den Erfassungsfehler vom Fehler bei Vorbereitung oder Beladung.** Es sind zwei verschiedene Probleme, mit zwei verschiedenen Lösungen.
+1. **Prüfen Sie die Erfassung und ihre Uhrzeit.** Was genau sagt das System, und wann hat es das gesagt?
+2. **Prüfen Sie den physischen Zustand der Ladung.** Mit eigenen Augen, nicht mit einem weiteren Scan.
+3. **Suchen Sie den letzten Punkt, an dem Information und Realität übereinstimmten.** Danach ist die Abweichung entstanden, und dort beginnt die Suche.
+4. **Trennen Sie den Erfassungsfehler vom Fehler bei Vorbereitung oder Beladung.** Das sind zwei verschiedene Probleme mit zwei verschiedenen Lösungen.
 5. **Dokumentieren Sie die bestätigte Ursache und die Maßnahme, die eine Wiederholung verhindert.** Bestätigt, nicht vermutet. Und eine Maßnahme, nicht nur ein Name.
 
-Der dritte Schritt ist der, der oft übersprungen wird. Ohne ihn beginnt die Suche bei der letzten Zeile der Historie, und endet dort.
+Gerade der dritte Schritt wird oft übersprungen. Ohne ihn beginnt die Suche bei der letzten Zeile der Historie und endet auch dort.
 
 ## An der Rezeption
 
-Im Front Office und im Night Audit erfasst das System Reservierungen, Zimmerstatus, Check-ins, Check-outs und andere operative Informationen. Die Beschwerden über den Wasserdruck und die Sauberkeit der Zimmer, die ich dokumentiert habe, verlangten die Abstimmung mit den zuständigen Abteilungen, weil der tatsächliche Zustand dort geprüft werden musste, wo er war, nicht auf dem Bildschirm.
+Im Front Office und im Night Audit erfasst das System Reservierungen, Zimmerstatus, Check-ins, Check-outs und andere operative Informationen. Die Beschwerden über Wasserdruck und Sauberkeit der Zimmer, die ich dokumentiert habe, erforderten die Abstimmung mit den zuständigen Abteilungen, denn der tatsächliche Zustand musste dort geprüft werden, wo er war, und nicht auf dem Bildschirm.
 
-Ich habe keinen Fall, in dem das System ein Zimmer als in Ordnung zeigte und ich das Gegenteil vorfand. Ich werde keinen erfinden, um den Vergleich schöner zu machen. Das Prinzip ist dasselbe wie beim Scanner, und ich habe es im ersten Essay geschrieben: Der Status im System und die ganze Geschichte eines Problems sind nicht dasselbe.
+Einen Fall, in dem das System ein Zimmer als in Ordnung zeigte und ich das Gegenteil vorfand, habe ich nicht. Das Prinzip ist dasselbe wie beim Scanner, und ich habe es im ersten Essay beschrieben: Der Status im System und die ganze Geschichte eines Problems sind zweierlei.
 
 ## Eine Abweichung zwischen System und Realität
 
-Die Karte unten ist für jeden Fall, in dem das System das eine sagt und der Trolley, das Regal oder das Zimmer etwas anderes: was erfasst wurde und wann, was der physische Zustand zeigt, wo sie zuletzt übereinstimmten, ob es ein Erfassungsfehler oder ein Beladungsfehler ist, und was die bestätigte Ursache ist, mit ihrer Maßnahme. Füllen Sie sie aus, bevor Sie über Schuld sprechen. Die [Vollständigkeitskontrolle](/de/tools/incomplete-control/) hält die Fälle nebeneinander, damit eine Abweichung, die sich an derselben Stelle wiederholt, wie ein Muster aussieht und nicht wie Pech.
+Die Karte unten gilt für jeden Fall, in dem das System das eine sagt und der Trolley, das Regal oder das Zimmer etwas anderes. Füllen Sie sie aus, bevor Sie über Schuld sprechen. Die [Vollständigkeitskontrolle](/de/tools/incomplete-control/) hält die Fälle nebeneinander, damit eine Abweichung, die sich an derselben Stelle wiederholt, als Muster sichtbar wird und nicht nach Pech aussieht.
 
-**Das System sagt Ihnen, was erfasst wurde. Die Führungskraft muss verstehen, was passiert ist. Zwischen beidem liegt der Prozess, und dort wird die Arbeit gemacht.**
+Die Scan-Historie sagt Ihnen, was erfasst wurde. Was passiert ist, liegt im Prozess zwischen der Erfassung und dem Trolley, und dort liegt die eigentliche Arbeit: ihn Schritt für Schritt zurückzuverfolgen, bis zu dem Punkt, an dem System und Realität zuletzt noch übereinstimmten.

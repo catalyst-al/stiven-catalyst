@@ -22,11 +22,11 @@ Kalendari bëhet nga skriptet e bisedës që e krijoi; nëse ndryshon një tekst
 | Java | Data | Lloji | Postimi |
 |---|---|---|---|
 | 1 | e hënë, 12 tetor | Shënim | “Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht…” |
-| 1 | e martë, 13 tetor | Ese | Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
+| 1 | e martë, 13 tetor | Ese | Nga shitja me pakicë te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo |
 | 1 | e enjte, 15 tetor | Mjet | Dorëzimi i turnit |
 | 1 | e premte, 16 tetor | Botim | Nga terreni · Nr. 1 |
 | 2 | e hënë, 19 tetor | Shënim | “Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët që aktivi…” |
-| 2 | e martë, 20 tetor | Ese | Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin |
+| 2 | e martë, 20 tetor | Ese | Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin kurrë |
 | 2 | e enjte, 22 tetor | Mjet | Kontrolli i dëmeve |
 | 2 | e premte, 23 tetor | Botim | Udhëzuesi i mjeteve |
 | 3 | e hënë, 26 tetor | Shënim | “Testi i një SOP-je nuk është nëse autori e kupton. Është nëse një pers…” |
@@ -34,14 +34,14 @@ Kalendari bëhet nga skriptet e bisedës që e krijoi; nëse ndryshon një tekst
 | 3 | e enjte, 29 tetor | Mjet | Pareto 80/20 |
 | 3 | e premte, 30 tetor | Botim | Management Review · Seria e parë |
 | 4 | e hënë, 2 nëntor | Shënim | “Handover-i nuk është thjesht transferim informacioni. Është transferim…” |
-| 4 | e martë, 3 nëntor | Ese | Pse handover-i është një nga proceset më të nënvlerësuara |
+| 4 | e martë, 3 nëntor | Ese | Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara |
 | 4 | e enjte, 5 nëntor | Mjet | Diagnostikimi i KPI-së |
 | 4 | e premte, 6 nëntor | Botim | Nga terreni · Nr. 2 |
 | 5 | e hënë, 9 nëntor | Shënim | “Autoriteti pa titull nuk fitohet duke u sjellë sikur ke një titull. Fi…” |
-| 5 | e martë, 10 nëntor | Ese | Leadership pa titull |
+| 5 | e martë, 10 nëntor | Ese | Udhëheqje pa titull |
 | 5 | e enjte, 12 nëntor | Mjet | Kontrolli i plotësisë |
 | 6 | e hënë, 16 nëntor | Shënim | “Nuk jam bërë më pak fleksibël. Jam bërë më pak i gatshëm që fleksibili…” |
-| 6 | e martë, 17 nëntor | Ese | Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj |
+| 6 | e martë, 17 nëntor | Ese | Nga Shqipëria në Gjermani: çfarë kam ndryshuar në mënyrën si drejtoj |
 | 6 | e enjte, 19 nëntor | Mjet | Shift Pulse |
 | 7 | e hënë, 23 nëntor | Shënim | “Nëse rezultati varet nga fakti që personi i duhur është në turn, organ…” |
 | 7 | e martë, 24 nëntor | Ese | Operations Manager-i që dua të jem |
@@ -82,14 +82,14 @@ Imazhi për t'u bashkëngjitur: `src/media/notes/de/12-handover.jpg` · `src/med
 
 > “Një problem që nuk kalon në handover nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që nuk e di ende se ekziston.”
 >
-> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Pse handover-i është një nga proceset më të nënvlerësuara”:
+> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara”:
 > https://stivencatalyst.com/sq/insights/why-the-handover-is-underrated/
 >
 > Cili është problemi i fundit që humbi te ju mes dy turneve?
 >
 > #Menaxhim #Operacione #Udhëheqje #Logjistikë
 
-### Java 1 · e martë, 13 tetor · Ese: Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo
+### Java 1 · e martë, 13 tetor · Ese: Nga shitja me pakicë te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo
 
 Lidhja: https://stivencatalyst.com/de/insights/the-industry-changes-management-problems-do-not/ · https://stivencatalyst.com/sq/insights/the-industry-changes-management-problems-do-not/
 
@@ -226,14 +226,14 @@ Imazhi për t'u bashkëngjitur: `src/media/notes/de/11-traces.jpg` · `src/media
 
 > “Gjatë ditës menaxhmenti sheh aktivitetin. Natën sheh gjurmët që aktiviteti ka lënë pas.”
 >
-> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin”:
+> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin kurrë”:
 > https://stivencatalyst.com/sq/insights/what-a-night-auditor-learns/
 >
 > Cilën gjurmë të natës e lexoni të parën në mëngjes?
 >
 > #Menaxhim #Operacione #Udhëheqje #Logjistikë
 
-### Java 2 · e martë, 20 tetor · Ese: Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin
+### Java 2 · e martë, 20 tetor · Ese: Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin kurrë
 
 Lidhja: https://stivencatalyst.com/de/insights/what-a-night-auditor-learns/ · https://stivencatalyst.com/sq/insights/what-a-night-auditor-learns/
 
@@ -552,14 +552,14 @@ Imazhi për t'u bashkëngjitur: `src/media/notes/de/30-responsibility.jpg` · `s
 
 > “Handover-i nuk është thjesht transferim informacioni. Është transferim përgjegjësie.”
 >
-> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Pse handover-i është një nga proceset më të nënvlerësuara”:
+> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara”:
 > https://stivencatalyst.com/sq/insights/why-the-handover-is-underrated/
 >
 > Si e kuptoni te ju kush është përgjegjës pas handover-it?
 >
 > #Menaxhim #Operacione #Udhëheqje #Logjistikë
 
-### Java 4 · e martë, 3 nëntor · Ese: Pse handover-i është një nga proceset më të nënvlerësuara
+### Java 4 · e martë, 3 nëntor · Ese: Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara
 
 Lidhja: https://stivencatalyst.com/de/insights/why-the-handover-is-underrated/ · https://stivencatalyst.com/sq/insights/why-the-handover-is-underrated/
 
@@ -708,14 +708,14 @@ Imazhi për t'u bashkëngjitur: `src/media/notes/de/08-authority.jpg` · `src/me
 
 > “Autoriteti pa titull nuk fitohet duke u sjellë sikur ke një titull. Fitohet duke qenë i dobishëm.”
 >
-> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Leadership pa titull”:
+> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Udhëheqje pa titull”:
 > https://stivencatalyst.com/sq/insights/leadership-without-a-title/
 >
 > Kush është i dobishëm në ekipin tuaj pa pasur titull për këtë?
 >
 > #Menaxhim #Operacione #Udhëheqje #Logjistikë
 
-### Java 5 · e martë, 10 nëntor · Ese: Leadership pa titull
+### Java 5 · e martë, 10 nëntor · Ese: Udhëheqje pa titull
 
 Lidhja: https://stivencatalyst.com/de/insights/leadership-without-a-title/ · https://stivencatalyst.com/sq/insights/leadership-without-a-title/
 
@@ -742,7 +742,7 @@ Lidhja: https://stivencatalyst.com/de/insights/leadership-without-a-title/ · ht
 
 **Shqip**
 
-> Leadership pa titull nuk do të thotë të bësh punën e shefit pa qenë shef. Do të thotë të mos fshihesh pas përshkrimit të vendit të punës kur një situatë ka nevojë për përgjegjësi. Dhe të dish kur duhet të ndalosh.
+> Udhëheqje pa titull nuk do të thotë të bësh punën e shefit pa qenë shef. Do të thotë të mos fshihesh pas përshkrimit të vendit të punës kur një situatë ka nevojë për përgjegjësi. Dhe të dish kur duhet të ndalosh.
 >
 > Iniciativa thotë: “Nuk e injoroj problemin.” Autoriteti thotë: “Kam të drejtë ta marr këtë vendim.” Mund të kesh shumë nga e para pa pretenduar të dytën.
 >
@@ -818,14 +818,14 @@ Imazhi për t'u bashkëngjitur: `src/media/notes/de/07-flexibility.jpg` · `src/
 
 > “Nuk jam bërë më pak fleksibël. Jam bërë më pak i gatshëm që fleksibiliteti të zëvendësojë sistemin.”
 >
-> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj”:
+> Nga shënimet e mia nga terreni. I gjithë mendimi është te eseja “Nga Shqipëria në Gjermani: çfarë kam ndryshuar në mënyrën si drejtoj”:
 > https://stivencatalyst.com/sq/insights/from-albania-to-germany/
 >
 > Ku po e zëvendëson fleksibiliteti sistemin në operacionin tuaj?
 >
 > #Menaxhim #Operacione #Udhëheqje #Logjistikë
 
-### Java 6 · e martë, 17 nëntor · Ese: Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj
+### Java 6 · e martë, 17 nëntor · Ese: Nga Shqipëria në Gjermani: çfarë kam ndryshuar në mënyrën si drejtoj
 
 Lidhja: https://stivencatalyst.com/de/insights/from-albania-to-germany/ · https://stivencatalyst.com/sq/insights/from-albania-to-germany/
 
@@ -1373,7 +1373,7 @@ Imazhi për t'u bashkëngjitur: `src/media/notes/de/44-escalate-the-decision.jpg
 
 > „Eskalieren Sie die Entscheidung, nicht die Unklarheit, die Sie selbst hätten klären können.“
 >
-> Aus meinen Field Notes. Der ganze Gedanke steht im Essay „Wann Sie es selbst lösen und wann Sie es nach oben geben“:
+> Aus meinen Field Notes. Der ganze Gedanke steht im Essay „Wann Sie es selbst lösen und wann Sie es nach oben weitergeben“:
 > https://stivencatalyst.com/de/insights/solve-it-or-escalate-it/
 >
 > Was kommt bei Ihnen öfter nach oben: Entscheidungen oder Unklarheit?

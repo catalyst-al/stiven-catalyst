@@ -1,4 +1,4 @@
 ---
-quote: "Rregulli nuk provohet nga një poster në mur. Provohet nga mënyra si funksionon vendi i punës kur dita është e vështirë."
+quote: "Rregulli nuk provohet me një poster në mur. Provohet nga mënyra si ecën vendi i punës në një ditë të vështirë."
 date: 2026-10-10
 ---

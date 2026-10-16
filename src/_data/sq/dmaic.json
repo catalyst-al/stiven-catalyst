@@ -2,19 +2,19 @@
   "storageKey": "sc-dmaic-sq",
   "case": {
     "title": "Rasti: dëmet në daljen e mallit në një qendër pakosh",
-    "text": "Një qendër dërgon rreth 18.400 njësi në javë. Klientët ankohen për pako të shtypura, dhe shkalla e dëmeve është pothuajse dyfishi i asaj që u premtua. Ndiqni një projekt përmirësimi nëpër të pesë hapat, me të njëjtët numra që mund t'i ngarkoni si shembuj në mjete."
+    "text": "Një qendër dërgon rreth 18.400 njësi në javë. Klientët ankohen për pako të shtypura, dhe shkalla e dëmeve është pothuajse dyfishi i asaj që u premtua. Ndiq një projekt përmirësimi nëpër të pesë hapat, me të njëjtët numra që mund t'i ngarkosh si shembuj në mjete."
   },
   "modules": [
     {
       "id": "define",
       "letter": "D",
       "name": "Përcakto",
-      "goal": "Bini dakord cilin problem po zgjidhni, për kë, si do ta matni dhe çfarë mbetet jashtë.",
+      "goal": "Bjer dakord cilin problem po zgjidh, për kë, si do ta matësh dhe çfarë mbetet jashtë.",
       "output": "Një kartë projekti",
       "ideas": [
-        ["Zëri i klientit → CTQ", "Filloni nga ajo që vë re klienti, pastaj kthejeni në diçka që mund ta matni: kërkesa kritike për cilësinë (Critical to Quality)."],
+        ["Zëri i klientit → CTQ", "Fillo nga ajo që vë re klienti, pastaj ktheje në diçka që mund ta matësh: kërkesa kritike për cilësinë (Critical to Quality)."],
         ["SIPOC", "Një rresht kutish: Furnitorët, Hyrjet, Procesi (pesë deri në shtatë hapa), Daljet, Klientët. I cakton kufijtë e projektit para se dikush të debatojë për detajet."],
-        ["Përshkrimi i problemit", "Çfarë, ku, që kur, sa, dhe diferenca nga objektivi. Ende pa shkak dhe pa zgjidhje: ato vijnë më vonë, nga të dhënat."]
+        ["Përshkrimi i problemit", "Çfarë, ku, që kur, sa, dhe dallimi nga objektivi. Ende pa shkak dhe pa zgjidhje: ato vijnë më vonë, nga të dhënat."]
       ],
       "case": [
         ["Problemi", "Në javët 36 deri 38, 0,57% e njësive në dalje u larguan nga qendra të dëmtuara (104 nga 18.400 në javën 38) kundrejt 0,30% të premtuar klientit. Kompensimet kushtuan rreth 1.150 € në javë."],
@@ -32,7 +32,7 @@
         ["Karta e projektit", "#dm-charter", "në fund të kësaj faqeje"]
       ],
       "checklist": [
-        "Problemi ka një numër, një periudhë kohe dhe një diferencë nga objektivi.",
+        "Problemi ka një numër, një periudhë kohe dhe një dallim nga objektivi.",
         "CTQ-ja është shkruar nga ana e klientit.",
         "Është rënë dakord çfarë hyn dhe çfarë mbetet jashtë.",
         "Një sponsor e ka miratuar kartën."
@@ -47,7 +47,7 @@
             "Na duhet një standard i ri stivimi."
           ],
           "answer": 2,
-          "why": "Thotë çfarë, kur, sa dhe diferencën, dhe nuk hamendëson as shkakun, as zgjidhjen."
+          "why": "Thotë çfarë, kur, sa dhe dallimin, dhe nuk hamendëson as shkakun, as zgjidhjen."
         },
         {
           "q": "Çfarë do të thotë CTQ?",
@@ -58,7 +58,7 @@
             "Kontrollo sasinë"
           ],
           "answer": 1,
-          "why": "Një CTQ e kthen atë që i intereson klientit në një kërkesë që mund ta matni."
+          "why": "Një CTQ e kthen atë që i intereson klientit në një kërkesë që mund ta matësh."
         },
         {
           "q": "Për çfarë shërben një SIPOC?",
@@ -77,12 +77,12 @@
       "id": "measure",
       "letter": "M",
       "name": "Mat",
-      "goal": "Zbuloni si performon procesi sot, me të dhëna që mund t'u besoni, para se të ndryshoni ndonjë gjë.",
+      "goal": "Zbulo si ecën procesi sot, me të dhëna që mund t'u besosh, para se të ndryshosh ndonjë gjë.",
       "output": "Një pikë nisjeje",
       "ideas": [
-        ["Përkufizimi operacional", "Shkruani saktësisht çfarë numërohet, me foto. “I dëmtuar” do të thotë gjëra të ndryshme për njerëz të ndryshëm derisa të shkruhet."],
-        ["Plani i mbledhjes së të dhënave", "Çfarë regjistrohet, ku, nga kush, sa shpesh dhe në çfarë formati. Regjistroni hapin dhe shkakun në momentin kur gjendet problemi."],
-        ["Kontrolloni matjen", "Lërini dy njerëz të gjykojnë të njëjtat njëzet raste. Nëse nuk pajtohen, rregulloni përkufizimin para se t'u besoni të dhënave."],
+        ["Përkufizimi operacional", "Shkruaj saktësisht çfarë numërohet, me foto. “I dëmtuar” do të thotë gjëra të ndryshme për njerëz të ndryshëm derisa të shkruhet."],
+        ["Plani i mbledhjes së të dhënave", "Çfarë regjistrohet, ku, nga kush, sa shpesh dhe në çfarë formati. Regjistro hapin dhe shkakun në momentin kur gjendet problemi."],
+        ["Kontrollo matjen", "Lëri dy njerëz të gjykojnë të njëjtat njëzet raste. Nëse nuk pajtohen, rregullo përkufizimin para se t'u besosh të dhënave."],
         ["Pika e nisjes", "Niveli aktual si shkallë, DPMO dhe nivel sigma, gjatë dy deri katër javëve."]
       ],
       "case": [
@@ -126,13 +126,13 @@
         {
           "q": "Dy shefa turni gjykojnë të njëjtat 20 kuti dhe nuk pajtohen për pesë. Çfarë vjen së pari?",
           "options": [
-            "Nisni përmirësimin gjithsesi",
-            "Merrni mesataren e përgjigjeve të tyre",
-            "Rregulloni përkufizimin dhe matjen para se t'u besoni të dhënave",
-            "Përdorni përgjigjet e shefit më të rreptë"
+            "Nis përmirësimin gjithsesi",
+            "Merr mesataren e përgjigjeve të tyre",
+            "Rregullo përkufizimin dhe matjen para se t'u besosh të dhënave",
+            "Përdor përgjigjet e shefit më të rreptë"
           ],
           "answer": 2,
-          "why": "Një matje që nuk mund ta përsërisni do të fshehë ose do të shpikë përmirësime më vonë."
+          "why": "Një matje që nuk mund ta përsëritësh do të fshehë ose do të shpikë përmirësime më vonë."
         }
       ]
     },
@@ -140,14 +140,14 @@
       "id": "analyze",
       "letter": "A",
       "name": "Analizo",
-      "goal": "Gjeni shkaqet e pakta rrënjësore pas pjesës më të madhe të problemit, dhe provojini me të dhëna, jo me mendime.",
+      "goal": "Gjej shkaqet e pakta rrënjësore pas pjesës më të madhe të problemit dhe provoji me të dhëna, jo me mendime.",
       "output": "Shkaqe rrënjësore të verifikuara",
       "ideas": [
-        ["Pareto", "Renditni shkaqet sipas madhësisë. Zakonisht dy ose tre përbëjnë rreth 80% të problemit: të paktat thelbësore."],
-        ["Shtresëzoni", "Ndani të dhënat sipas hapit, turnit, orës, produktit ose linjës. Problemet fshihen te mesataret."],
-        ["Shkoni e shikoni", "Shikoni punën aty ku prodhohet numri, në kohën kur shkon keq."],
-        ["5 Whys dhe diagrami kurriz peshku", "Pyesni pse derisa të arrini te diçka në proces që mund ta ndryshoni. Diagrami kurriz peshku kontrollon njerëzit, metodën, makineritë, materialin, matjen dhe mjedisin."],
-        ["Shkak i zakonshëm apo i veçantë", "Një kartë kontrolli ju tregon nëse po shihni nivelin normal të procesit apo disa ditë të pazakonta."]
+        ["Pareto", "Rendit shkaqet sipas madhësisë. Zakonisht dy ose tre përbëjnë rreth 80% të problemit: të paktat thelbësore."],
+        ["Shtresëzo", "Ndaj të dhënat sipas hapit, turnit, orës, produktit ose linjës. Problemet fshihen te mesataret."],
+        ["Shko e shiko", "Shiko punën aty ku prodhohet numri, në kohën kur shkon keq."],
+        ["5 Whys dhe diagrami kurriz peshku", "Pyet pse derisa të arrish te diçka në proces që mund ta ndryshosh. Diagrami kurriz peshku kontrollon njerëzit, metodën, makineritë, materialin, matjen dhe mjedisin."],
+        ["Shkak i zakonshëm apo i veçantë", "Një kartë kontrolli të tregon nëse po sheh nivelin normal të procesit apo disa ditë të pazakonta."]
       ],
       "case": [
         ["Pareto", "Stivimi 56%, sigurimi i ngarkesës 14%, manipulimi 11%: tre shkaqe përbëjnë 81% të dëmeve."],
@@ -162,7 +162,7 @@
       ],
       "tools": [
         ["Kontrolli i dëmeve", "/tools/damage-control/", "për Pareton dhe matricën hap × lloj"],
-        ["5 Whys", "/tools/five-whys/", "për të arritur te një shkak që mund ta ndryshoni"],
+        ["5 Whys", "/tools/five-whys/", "për të arritur te një shkak që mund ta ndryshosh"],
         ["Karta e kontrollit", "/tools/sigma-control-chart/", "për të dalluar shkaqet e zakonshme nga të veçantat"]
       ],
       "checklist": [
@@ -173,7 +173,7 @@
       ],
       "quiz": [
         {
-          "q": "Pareto tregon stivimin 56%, sigurimin e ngarkesës 14%, manipulimin 11% dhe katër shkaqe të tjera 19%. Ku filloni?",
+          "q": "Pareto tregon stivimin 56%, sigurimin e ngarkesës 14%, manipulimin 11% dhe katër shkaqe të tjera 19%. Ku fillon?",
           "options": [
             "Me të shtatë njëherësh",
             "Me stivimin, pastaj sigurimin e ngarkesës: bashkë 70%",
@@ -188,19 +188,19 @@
           "options": [
             "Po, sepse tregon kush e bëri",
             "Po, nëse ndodhi dy herë",
-            "Ende jo: pyesni pse procesi e bëri të mundur",
+            "Ende jo: pyet pse procesi e bëri të mundur",
             "Jo, sepse ngarkuesit nuk janë kurrë shkaku"
           ],
           "answer": 2,
-          "why": "Njerëzit punojnë brenda një procesi. Pyesni çfarë e bëri mënyrën e gabuar më të shpejtë ose më të lehtë se mënyrën e duhur."
+          "why": "Njerëzit punojnë brenda një procesi. Pyet çfarë e bëri mënyrën e gabuar më të shpejtë ose më të lehtë se mënyrën e duhur."
         },
         {
           "q": "Karta e kontrollit nuk tregon sinjale, por niveli është shumë i lartë. Çfarë do të thotë?",
           "options": [
             "Të dhënat janë të gabuara",
             "Nuk duhet ndryshuar asgjë",
-            "Gjeni ditën e keqe dhe rregullojeni",
-            "Niveli vjen nga vetë procesi: ndryshoni metodën, mos ndiqni ditë të veçanta"
+            "Gjej ditën e keqe dhe rregulloje",
+            "Niveli vjen nga vetë procesi: ndrysho metodën, mos ndiq ditë të veçanta"
           ],
           "answer": 3,
           "why": "Ky është variacion nga shkaqe të zakonshme. Vetëm një ndryshim në mënyrën si bëhet puna e lëviz nivelin."
@@ -211,13 +211,13 @@
       "id": "improve",
       "letter": "I",
       "name": "Përmirëso",
-      "goal": "Projektoni, testoni dhe provoni një kundërmasë që e heq shkakun rrënjësor.",
+      "goal": "Projekto, testo dhe provo një kundërmasë që e heq shkakun rrënjësor.",
       "output": "Një kundërmasë e provuar",
       "ideas": [
-        ["Mundësitë, pastaj zgjedhja", "Mblidhni disa kundërmasa dhe zgjidhni sipas ndikimit dhe mundimit. Ideja e parë rrallë është më e mira."],
-        ["Poka-yoke", "Bëjeni gabimin të vështirë për t'u bërë: planimetria, shenjat, fiksimet dhe cilësimet e paracaktuara në vend të kujtesave."],
-        ["Puna standarde", "Shkruajeni mënyrën e re si një standard të shkurtër dhe vizual që një person i ri mund ta ndjekë që ditën e parë."],
-        ["Piloti", "Testoni në shkallë të vogël, në një rampë ose një turn, aq gjatë sa të shihet efekti. Planifiko, bëj, kontrollo, vepro."]
+        ["Mundësitë, pastaj zgjedhja", "Mblidh disa kundërmasa dhe zgjidh sipas ndikimit dhe mundimit. Ideja e parë rrallë është më e mira."],
+        ["Poka-yoke", "Bëje gabimin të vështirë për t'u bërë: planimetria, shenjat, fiksimet dhe cilësimet e paracaktuara në vend të kujtesave."],
+        ["Puna standarde", "Shkruaje mënyrën e re si një standard të shkurtër dhe vizual që një person i ri mund ta ndjekë që ditën e parë."],
+        ["Piloti", "Testo në shkallë të vogël, në një rampë ose një turn, aq gjatë sa të shihet efekti. Planifiko, bëj, kontrollo, vepro."]
       ],
       "case": [
         ["Kundërmasat", "Një figurë stivimi te çdo rampë (të rëndat poshtë, të brishtat lart, pa boshllëqe), zona në dysheme të mjetit për pakot e rënda, shufra fiksimi pas murit të fundit me një foto, dhe dhjetë minuta më shumë për orët e pikut të ngarkimit."],
@@ -249,7 +249,7 @@
             "Edhe një inspektim para nisjes"
           ],
           "answer": 1,
-          "why": "Kujtesat zbehen dhe inspektimet e gjejnë dëmin pasi ka ndodhur. Ndërtojeni mënyrën e duhur brenda punës."
+          "why": "Kujtesat zbehen dhe inspektimet e gjejnë dëmin pasi ka ndodhur. Ndërtoje mënyrën e duhur brenda punës."
         },
         {
           "q": "Pse bëhet pilot para shtrirjes?",
@@ -265,13 +265,13 @@
         {
           "q": "Pas pilotit, dëmet ranë, por koha e ngarkimit u rrit me gjashtë minuta për linjë. Po tani?",
           "options": [
-            "Injorojeni: qëllimi ishin dëmet",
-            "Ndaloni projektin",
-            "Shikoni efektin anësor dhe rregulloni para shtrirjes",
-            "Shtrijeni dhe shpresoni që të qetësohet"
+            "Injoroje: qëllimi ishin dëmet",
+            "Ndalo projektin",
+            "Shiko efektin anësor dhe rregullo para shtrirjes",
+            "Shtrije dhe shpreso që të qetësohet"
           ],
           "answer": 2,
-          "why": "Një rregullim që prish një numër tjetër nuk mbijeton. Rregulloni, pastaj vendosni me sponsorin."
+          "why": "Një rregullim që prish një numër tjetër nuk mbijeton. Rregullo, pastaj vendos me sponsorin."
         }
       ]
     },
@@ -279,13 +279,13 @@
       "id": "control",
       "letter": "C",
       "name": "Kontrollo",
-      "goal": "Ruajeni fitimin: bëjeni mënyrën e re standard, ndiqeni dhe dorëzojeni te pronari i procesit.",
+      "goal": "Ruaje fitimin: bëje mënyrën e re standard, ndiqe dhe dorëzoje te përgjegjësi i procesit.",
       "output": "Një plan kontrolli dhe një dorëzim",
       "ideas": [
-        ["Standardi dhe trajnimi", "Vendoseni mënyrën e re në SOP dhe në trajnimin e punonjësve të rinj, që të mos varet nga ekipi i projektit."],
+        ["Standardi dhe trajnimi", "Vendose mënyrën e re në SOP dhe në trajnimin e punonjësve të rinj, që të mos varet nga ekipi i projektit."],
         ["Plani i kontrollit", "Çfarë matet, sa shpesh, nga kush, dhe çfarë bëhet kur shfaqet një sinjal: plani i reagimit."],
-        ["Karta e kontrollit", "Rillogaritni kufijtë nga niveli i ri i qëndrueshëm dhe ndiqni sinjalet, jo ditët e veçanta të këqija."],
-        ["Mbyllja e projektit", "Dorëzojeni te pronari i procesit, regjistroni kursimet dhe mësimet, dhe festojeni ekipin."]
+        ["Karta e kontrollit", "Rillogarit kufijtë nga niveli i ri i qëndrueshëm dhe ndiq sinjalet, jo ditët e veçanta të këqija."],
+        ["Mbyllja e projektit", "Dorëzoje te përgjegjësi i procesit, regjistro kursimet dhe mësimet, dhe festo me ekipin."]
       ],
       "case": [
         ["Standardi", "Standardi i stivimit është në SOP dhe në trajnimin e të rinjve, me figurat e rampave."],
@@ -295,7 +295,7 @@
       "mistakes": [
         "Të shpallësh fitoren kur mbaron piloti.",
         "T'i mbash kufijtë e vjetër në kartë, që të mos shfaqet kurrë asnjë sinjal.",
-        "Asnjë pronar pasi largohet ekipi i projektit."
+        "Asnjë përgjegjës pasi largohet ekipi i projektit."
       ],
       "tools": [
         ["Karta e kontrollit", "/tools/sigma-control-chart/", "me kufijtë e rinj"],
@@ -333,13 +333,13 @@
         {
           "q": "Sot është më lart se dje, por brenda kufijve. Çfarë thotë plani i reagimit?",
           "options": [
-            "Asgjë të veçantë: është zhurmë, vazhdoni të ndiqni",
-            "Thërrisni një mbledhje",
-            "Bëni 5 Whys për atë ditë",
-            "Ndryshoni standardin"
+            "Asgjë të veçantë: është zhurmë, vazhdo ta ndjekësh",
+            "Thirr një mbledhje",
+            "Bëj 5 Whys për atë ditë",
+            "Ndrysho standardin"
           ],
           "answer": 0,
-          "why": "Reagimi ndaj zhurmës humb kohë dhe mund ta përkeqësojë procesin. Reagoni ndaj sinjaleve."
+          "why": "Reagimi ndaj zhurmës humb kohë dhe mund ta përkeqësojë procesin. Reago ndaj sinjaleve."
         }
       ]
     }
@@ -352,11 +352,11 @@
     ["Rendimenti", "Pjesa e njësive të bëra saktë herën e parë."],
     ["SIPOC", "Suppliers, Inputs, Process, Outputs, Customers: një hartë e procesit në një rresht."],
     ["Përkufizimi operacional", "Një përshkrim i saktë dhe i përbashkët i asaj që numërohet, që të gjithë të matin njësoj."],
-    ["Pika e nisjes", "Si performon procesi para se ta ndryshoni."],
+    ["Pika e nisjes", "Si ecën procesi para se ta ndryshosh."],
     ["Pareto", "Shkaqet e renditura sipas madhësisë; zakonisht pak shkaqe të mëdha përbëjnë pjesën më të madhe të problemit."],
     ["Shkaku rrënjësor", "Shkaku në proces që, po të hiqet, e ndalon problemin të kthehet."],
     ["Shkak i zakonshëm", "Variacioni normal i ndërtuar brenda një procesi. Vetëm ndryshimi i procesit e ndryshon."],
-    ["Shkak i veçantë", "Diçka e pazakontë në një ditë ose një seri të caktuar. Gjejeni dhe hiqeni."],
+    ["Shkak i veçantë", "Diçka e pazakontë në një ditë ose një seri të caktuar. Gjeje dhe hiqe."],
     ["Karta e kontrollit", "Një grafik i një mase në kohë, me kufij që ndajnë zhurmën normale nga sinjalet e vërteta."],
     ["Poka-yoke", "Mbrojtja nga gabimi: dizajn që e bën gabimin të vështirë ose të pamundur."],
     ["Puna standarde", "Mënyra më e mirë e tanishme për të bërë një punë, e shkruar shkurt dhe vizualisht."],
@@ -376,13 +376,13 @@
   ],
   "charter": [
     ["name", "Emri i projektit", "p.sh. Dëmet në dalje nën 0,30%", false],
-    ["problem", "Përshkrimi i problemit", "Çfarë, ku, që kur, sa, dhe diferenca nga objektivi", true],
+    ["problem", "Përshkrimi i problemit", "Çfarë, ku, që kur, sa, dhe dallimi nga objektivi", true],
     ["ctq", "CTQ dhe matja", "p.sh. Pakoja mbërrin pa dëme; njësi të dëmtuara ÷ njësi të dërguara", true],
     ["baseline", "Pika e nisjes", "p.sh. 0,57%, DPMO 5.652, sigma 4,03 (java 38)", false],
     ["target", "Objektivi", "p.sh. 0,30% deri në javën 46", false],
     ["scopeIn", "Brenda fushës", "p.sh. Nga rafti i mbledhjes te dorëzimi te shoferi", false],
     ["scopeOut", "Jashtë fushës", "p.sh. Transporti ndërqytetës, ambalazhi i furnitorit", false],
-    ["sponsor", "Sponsori", "Kush e ka në pronësi rezultatin", false],
+    ["sponsor", "Sponsori", "Kush përgjigjet për rezultatin", false],
     ["team", "Ekipi", "Emrat dhe rolet", false],
     ["benefit", "Përfitimi i pritur", "p.sh. Rreth 500 € në javë kompensime", false],
     ["dates", "Pikat kryesore", "p.sh. D java 39 · M java 41 · A java 42 · I java 45 · C java 47", true]
