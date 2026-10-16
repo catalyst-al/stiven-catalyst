@@ -299,3 +299,21 @@ test('Reflections: a warm gold light for the personal pieces, and a sign-up row 
   assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{ \.reflection-hero::before \{ animation: none; \} \}/);
   assert.match(css, /\.newsletter-row:focus-within \{[\s\S]*?box-shadow: 0 0 0 4px/);
 });
+
+test('Field Notes: "Copy" says it is done with a short glow, and a shared note greets the reader', async () => {
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM('<html><body><div data-note-actions hidden><button data-copy-text="x" data-copied-label="Kopjuar">Kopjo</button></div></body></html>', { runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  Object.defineProperty(window.navigator, 'clipboard', { value: { writeText: async () => {} } });
+  window.eval(fs.readFileSync('src/js/share.js', 'utf8'));
+  const button = window.document.querySelector('button');
+  button.click();
+  await new Promise((resolve) => window.setTimeout(resolve, 20));
+  assert.equal(button.textContent, 'Kopjuar');
+  assert.ok(button.classList.contains('is-done'));
+  await new Promise((resolve) => window.setTimeout(resolve, 1700));
+  assert.equal(button.textContent, 'Kopjo');
+  assert.ok(!button.classList.contains('is-done'), 'the glow goes with the word');
+  assert.match(css, /\.note-card:target \{[\s\S]*?animation: note-arrive 2\.2s ease-out 1;/);
+  assert.match(css, /\.note-actions \.is-done,\s*\.share-links \.is-done \{[\s\S]*?color: var\(--ok\);/);
+});

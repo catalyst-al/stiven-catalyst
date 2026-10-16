@@ -3417,6 +3417,31 @@ html:not(.js) .filter-bar { display: none; }
 .note-links a small { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .note-links a.is-tool span { color: var(--blue); }
 .note-links a:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+/* Field Notes: a note's two ways on lift and glow under the pointer; "Copy" says it is done with a short green glow
+   (share.js, .is-done); and a note opened from a shared link (#note-…) greets the reader with a ring of light that
+   fades into a steady edge. */
+.note-links a { transition: border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease, background-color .25s ease; }
+.note-links a:hover { translate: 0 -2px; background: color-mix(in srgb, var(--blue) 6%, transparent); box-shadow: 0 12px 26px -18px color-mix(in srgb, var(--blue) 80%, transparent); }
+.note-actions .is-done,
+.share-links .is-done {
+  color: var(--ok);
+  border-color: color-mix(in srgb, var(--ok) 60%, var(--line));
+  box-shadow: 0 0 16px -4px color-mix(in srgb, var(--ok) 60%, transparent);
+  animation: done-pop .45s cubic-bezier(.22, 1, .36, 1);
+}
+@keyframes done-pop { 40% { scale: 1.08; } }
+.note-card:target {
+  border-color: color-mix(in srgb, var(--blue) 65%, var(--line));
+  animation: note-arrive 2.2s ease-out 1;
+}
+@keyframes note-arrive {
+  0%, 20% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 35%, transparent), 0 0 60px -6px color-mix(in srgb, var(--blue) 70%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .note-card:target,
+  .note-actions .is-done,
+  .share-links .is-done { animation: none; }
+}
 .note-actions button,
 .note-actions a,
 .share-links button,
