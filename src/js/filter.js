@@ -36,6 +36,8 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
 
   // An item can belong to several topics, written "a|b" (the essays and their challenges); the notes have one.
   const inTopic = (item, id) => item.dataset.topic.split("|").includes(id);
+  // What a word is searched in: the item's data-search, or, for a field note, its quote and its topic (read once).
+  const searchText = (item) => item.dataset.search ?? (item.searchText ??= `${item.querySelector("blockquote")?.textContent || item.textContent} ${item.dataset.topic || ""}`.toLowerCase());
 
   const apply = () => {
     const words = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -48,7 +50,7 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
       chip.hidden = n.textContent === "0";
     });
     if (topic && chips.find((chip) => chip.dataset.topic === topic)?.hidden) topic = "";
-    const matches = inMonth.filter((item) => (!topic || inTopic(item, topic)) && words.every((word) => item.dataset.search.includes(word)));
+    const matches = inMonth.filter((item) => (!topic || inTopic(item, topic)) && words.every((word) => searchText(item).includes(word)));
     const visible = new Set(matches.slice(0, limit));
     items.forEach((item) => { item.hidden = !visible.has(item); });
     chips.forEach((chip) => chip.setAttribute("aria-pressed", String(chip.dataset.topic === topic)));

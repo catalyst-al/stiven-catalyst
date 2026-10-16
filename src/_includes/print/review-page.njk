@@ -18,7 +18,7 @@
       <div class="cover-theme">{{ R.theme }}</div>
       <p class="cover-sub">{{ R.sub }}</p>
     </div>
-    <img src="{{ R.cover.src }}" alt="">
+    <img src="{{ R.cover.src }}" alt="" width="{{ R.cover.width }}" height="{{ R.cover.height }}">
   </div>
   <div class="inside">
     <p class="k">{{ L.inside }}</p>
@@ -63,7 +63,7 @@
 </section>
 {%- elif page.type == "back" %}
 <section class="pg back">
-  <img src="{{ R.cover.src }}" alt="">
+  <img src="{{ R.cover.src }}" alt="" width="{{ R.cover.width }}" height="{{ R.cover.height }}">
   <div class="masthead">Management<span class="accent">Review</span></div>
   <p class="cover-tag">{{ R.tagline }}</p>
   <p>{{ R.back.line }}</p>
@@ -79,7 +79,7 @@
   <p class="kicker">{{ page.kicker }}</p>
   <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
   {%- if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
-  {%- if page.image %}</div><img src="{{ page.image.src }}" alt=""></div>{% endif %}
+  {%- if page.image %}</div><img src="{{ page.image.src }}" alt="" width="{{ page.image.width }}" height="{{ page.image.height }}"></div>{% endif %}
   {%- for b in page.blocks %}
   {%- if b.type == "p" %}<div class="body-text"><p>{{ b.text }}</p></div>
   {%- elif b.type == "cards" %}<div class="cards c{{ b.cols }}{{ ' plain' if b.plain }}">{% for c in b.items %}<div class="card">{% if not b.plain %}<span class="cn">{{ c.n or (loop.index | pad) }}</span>{% endif %}<h4>{{ c.h }}</h4><p>{{ c.p }}</p></div>{% endfor %}</div>

@@ -1,6 +1,6 @@
 // "Listen" (src/js/listen.js): an essay read aloud by the browser's own voice, sentence by sentence, with the
-// block being read marked, pause as a stop that remembers the sentence, and the bar hidden or explained when
-// the browser has no voice for the page's language.
+// block being read marked, pause as a stop that remembers the sentence, and the bar in its place at once, with the
+// button on hold until the voices are known and explained when the browser has no voice for the page's language.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -118,7 +118,7 @@ test('without a voice for the language the bar says so and the button is off; wi
   assert.equal(dom.window.document.querySelector('[data-listen]').hidden, true);
 });
 
-test('the voices may arrive later: the bar waits for them', () => {
+test('the voices may arrive later: the bar is in its place at once and the button waits for them', () => {
   const dom = new JSDOM(page('en'), { url: 'https://example.test/insights/x/', runScripts: 'outside-only' });
   const w = dom.window;
   let voices = [];
@@ -127,11 +127,16 @@ test('the voices may arrive later: the bar waits for them', () => {
   w.SpeechSynthesisUtterance = class { constructor(text) { this.text = text; } };
   w.eval(fs.readFileSync('src/js/listen.js', 'utf8'));
   const box = w.document.querySelector('[data-listen]');
-  assert.equal(box.hidden, true);
+  const toggle = w.document.querySelector('[data-listen-toggle]');
+  assert.equal(box.hidden, false, 'the bar takes its room before the voices are known, so the text below never moves');
+  assert.equal(toggle.disabled, true);
+  assert.equal(toggle.getAttribute('aria-busy'), 'true');
+  assert.equal(w.document.querySelector('[data-listen-note]').textContent, 'Read by your browser.', 'no verdict yet');
   voices = [{ lang: 'en-GB', name: 'Daniel', localService: true }];
   listeners.voiceschanged();
   assert.equal(box.hidden, false);
-  assert.equal(w.document.querySelector('[data-listen-toggle]').disabled, false);
+  assert.equal(toggle.disabled, false);
+  assert.equal(toggle.hasAttribute('aria-busy'), false);
 });
 
 test('the article layout carries the bar before the moves box, loads the script, and its texts are translated', () => {
