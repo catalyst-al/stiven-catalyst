@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -7978,3 +7978,28 @@ a.essay-series-next:hover em { translate: 5px 0; }
 }
 .project-link[href^="http"] > span[aria-hidden="true"] { display: inline-block; transition: translate .4s cubic-bezier(.22, 1, .36, 1), rotate .4s cubic-bezier(.22, 1, .36, 1); }
 .project-card:hover .project-link[href^="http"] > span[aria-hidden="true"] { translate: 3px -2px; rotate: -45deg; }
+
+/* Start here in motion: the portrait breathes in a ring of light, like the one on About; each step's number lights up
+   as the step is reached, so the page reads as a path; the links at the end draw their line under the pointer. */
+.start-intro img { box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 10%, transparent); transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.start-intro img:hover { scale: 1.05; }
+.start-number { transition: background-color .4s ease, color .4s ease, box-shadow .4s ease; }
+.start-step:hover .start-number { background: var(--blue); border-color: var(--blue); color: var(--on-blue); box-shadow: 0 0 14px color-mix(in srgb, var(--blue) 60%, transparent); }
+.start-more a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: border-color .3s ease, background-size .45s cubic-bezier(.22, 1, .36, 1); }
+.start-more a:hover { background-size: 100% 1px; }
+@media (prefers-reduced-motion: no-preference) {
+  .start-intro img { animation: portrait-breathe 5s ease-in-out infinite; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .start-number { animation: step-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+  }
+}
+@keyframes step-reach {
+  0% { background: transparent; color: inherit; box-shadow: none; }
+  60% { background: var(--blue); border-color: var(--blue); color: var(--on-blue); box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 18%, transparent), 0 0 18px var(--blue); }
+  100% { background: var(--blue); border-color: var(--blue); color: var(--on-blue); box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 50%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .start-intro img, .start-more a { transition: none; }
+}
