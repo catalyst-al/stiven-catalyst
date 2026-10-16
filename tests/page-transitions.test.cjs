@@ -518,3 +518,27 @@ test('Podcast player: the line fills with what has been heard; "Copied" glows gr
   await new Promise((resolve) => window.setTimeout(resolve, 2600));
   assert.ok(!box.classList.contains('is-done'), 'the glow goes with the word');
 });
+
+test('Publications: the title lifts like a page, each series keeps its colour, the covers turn in after a choice, a changed count beats', () => {
+  assert.match(css, /\.publications-hero h1 \{ transform-origin: 50% 100%; animation: pub-leaf/);
+  assert.match(css, /\[data-pub\]\[data-block="floor"\] \{ --series: var\(--red\); \}/);
+  assert.match(css, /\[data-pub\] \.kicker::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\[data-pub\]\.is-entering \.book-object-cover,/);
+  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  for (const name of ['pub-leaf', 'pub-cover-in', 'pub-count']) assert.match(light, new RegExp(`@keyframes ${name}`));
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM(fs.readFileSync('_site/publications.html', 'utf8'), { url: 'https://stivencatalyst.com/publications.html', runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  window.matchMedia = () => ({ matches: false, addEventListener() {} });
+  window.eval(fs.readFileSync('src/js/weekly.js', 'utf8'));
+  const doc = window.document;
+  const counts = () => [...doc.querySelectorAll('.weekly-filter .weekly-n')].map((n) => n.textContent);
+  const before = counts();
+  assert.equal(doc.querySelectorAll('.is-bumped').length, 0, 'no beat when the page opens');
+  const months = [...doc.querySelectorAll('.weekly-months button')];
+  const other = months.find((button) => button.getAttribute('aria-pressed') === 'false' && button.dataset.month === '2026-09');
+  other.click();
+  assert.notDeepEqual(counts(), before);
+  assert.ok(doc.querySelectorAll('.weekly-n.is-bumped').length > 0, 'a changed count beats');
+  assert.ok(doc.querySelector('[data-pub]:not([hidden]).is-entering'), 'the shown publications come in');
+});
