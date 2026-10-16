@@ -12,11 +12,16 @@
     }
   };
 
+  // The button says it is done and, while it does, carries .is-done (styles.css: a short green glow).
   const confirm = (button, label) => {
     const original = button.dataset.label || (button.dataset.label = button.textContent);
     button.textContent = label;
+    button.classList.add("is-done");
     clearTimeout(button.timer);
-    button.timer = setTimeout(() => { button.textContent = original; }, 1600);
+    button.timer = setTimeout(() => {
+      button.textContent = original;
+      button.classList.remove("is-done");
+    }, 1600);
   };
 
   document.querySelectorAll("[data-note-actions]").forEach((node) => { node.hidden = false; });
