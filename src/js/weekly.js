@@ -78,7 +78,14 @@
         const count = button.querySelector(".weekly-n");
         if (!count) continue;
         // A topic with no issue in the month is left out of its row.
-        count.textContent = inMonth.filter((item) => item.dataset.block === button.dataset.block).length;
+        const n = String(inMonth.filter((item) => item.dataset.block === button.dataset.block).length);
+        // A count that changes gives a small beat (styles.css, .is-bumped).
+        if (count.textContent && count.textContent !== n) {
+          count.classList.remove("is-bumped");
+          void count.offsetWidth;
+          count.classList.add("is-bumped");
+        }
+        count.textContent = n;
         button.hidden = count.textContent === "0";
       }
       // With fewer than two topics in the month there is nothing to choose between.
