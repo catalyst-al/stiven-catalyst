@@ -92,4 +92,4 @@ Today, before settling on a cause, I would compare the result with the volume of
 
 Many operations jump straight from the first layer to the third: the number comes out bad, and a measure is demanded at once. The middle layer, the one that says whether this day differs from the others, is the one most often missing.
 
-A bad day is a signal to check, not automatically proof that the whole process has to change. [Sigma & Control Chart](/tools/sigma-control-chart/) draws the middle layer for your days or weeks and explains what counts as a signal and what does not. Before you change a rule, fill in the sheet below and copy it.
+[Sigma & Control Chart](/tools/sigma-control-chart/) draws the middle layer for your days or weeks and explains what counts as a signal and what does not. Before you change a rule, fill in the sheet below and copy it.

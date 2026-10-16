@@ -38,9 +38,9 @@ firstMove:
 diagram: improvement-paths
 ---
 
-Könnte ich mir an meinem ersten Tag als Team Leader einen einzigen Satz mitgeben, wäre es dieser: Es reicht nicht, das Problem heute zu lösen; entscheidend ist, ob es morgen auch ohne dich gelöst wird. Mit derselben Frage schließt diese Reihe.
+Könnte ich mir an meinem ersten Tag als Team Leader einen einzigen Satz mitgeben, wäre es dieser: Wenn du ein Problem heute gelöst hast, frag dich, ob es morgen auch ohne dich gelöst würde. Mit derselben Frage schließt diese Reihe.
 
-Mit Standards habe ich auf beiden Seiten dieser Frage gearbeitet. Auf der letzten Meile ging es um Verladen, Scannen, die Organisation der Rampe und Sicherheit; ich hatte mit Abläufen zu tun, die nicht eingehalten wurden, und mit Fahrern, die die Standards noch nicht verinnerlicht hatten. Im Hotel habe ich die SOPs für Front Office und Night Audit organisiert. Was mir fehlt, ist ausgerechnet der Fall, den der Titel verspricht: eine dokumentierte Verbesserung von mir, die einige Monate hielt und dann aufgegeben wurde. Für einen Essay über verblassende Verbesserung ist diese Lücke kein Detail. Sie ist das Thema.
+Auf der letzten Meile habe ich mit Standards für Verladen, Scannen, die Organisation der Rampe und Sicherheit gearbeitet. Dabei bin ich auf Probleme gestoßen: mit Abläufen, die nicht eingehalten wurden, und mit Fahrern, die mit den Standards noch nicht ganz vertraut waren. Im Hotel habe ich die SOPs für Front Office und Night Audit organisiert. Was mir fehlt, ist ausgerechnet der Fall, den der Titel verspricht: eine dokumentierte Verbesserung von mir, die einige Monate hielt und dann aufgegeben wurde. Für einen Essay über verblassende Verbesserung ist diese Lücke kein Detail. Sie ist das Thema.
 
 ## Die Frage, die ich nicht beantworten kann
 
@@ -58,13 +58,13 @@ Was folgt, ist eine Meinung, kein belegter Fall. Ich glaube, eine Verbesserung i
 
 Personalwechsel machen dieses Risiko sichtbarer. Auf der letzten Meile hatten wir kurzfristig eingesprungene Fahrer und Fahrer in der Ramp-up-Phase, die mit den SOPs noch nicht vertraut waren. Das machte es schwer, die Einhaltung auf demselben Niveau zu halten.
 
-Ein Standard muss auch mit Leuten funktionieren, die ihn nicht seit Jahren kennen. Lernt jede neue Kraft den Prozess nur, indem sie einer Kollegin oder einem Kollegen zuschaut, hängt das Ergebnis davon ab, wer einarbeitet. Darüber habe ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben. Hier zeigt sich der Preis: Ein Standard, der nur von Mensch zu Mensch weitergegeben wird, verliert bei jedem Wechsel ein Stück.
+Ein Standard sollte auch mit Leuten funktionieren, die ihn nicht seit Jahren kennen. Lernt jede neue Kraft den Prozess nur, indem sie einer Kollegin oder einem Kollegen zuschaut, hängt das Ergebnis davon ab, wer einarbeitet. Darüber habe ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben. Hier zeigt sich der Preis: Ein Standard, der nur von Mensch zu Mensch weitergegeben wird, verliert bei jedem Wechsel ein Stück.
 
 {diagram}
 
 ## Was einen Standard am Leben hält
 
-Ein einzelnes Element reicht nicht. Ich würde fünf hervorheben:
+Aus meiner Sicht reicht kein einzelnes Element. Ich würde fünf hervorheben:
 
 - **Dokumentation:** Der Standard ist klar und leicht zu finden.
 - **Schulung:** Die Leute wissen nicht nur, was sie tun sollen, sondern auch warum.
@@ -76,15 +76,15 @@ Ich denke dabei an die SOPs für Front Office und Night Audit, über die ich in 
 
 ## Zehn Essays, eine Frage
 
-Nebeneinander gelesen, zeigen die neun vorigen Essays offenbar dasselbe Problem aus verschiedenen Blickwinkeln.
+Nebeneinander gelesen, scheinen die neun vorigen Essays dasselbe Problem aus verschiedenen Blickwinkeln zu zeigen.
 
 [Schäden](/de/insights/how-we-worked-with-damage/) und [unvollständige Bestellungen](/de/insights/where-part-of-the-order-goes-missing/) zeigen, dass wir verstehen müssen, wo ein Fehler entsteht. [Gemba](/de/insights/gemba/) erinnert daran, dass der Bericht den Prozess nicht immer erklärt. [6S](/de/insights/6s-without-a-poster/) zeigt, warum sichtbare Ordnung zählt. [Die Regelkarte](/de/insights/a-bad-day-or-a-problem/) und [DMAIC](/de/insights/dmaic-without-a-black-belt/) lehren, nicht von einem schlechten Ergebnis zu einer ungeprüften Lösung zu springen. [Die Remote-Koordination](/de/insights/80-vehicles-you-cannot-see/) zeigt, wie viel von verlässlichen Informationen abhängt. [Tage mit hohem Aufkommen](/de/insights/high-volume-days/) zeigen, ob die Standards dem Druck standhalten. Und [die Arbeit im Hotel](/de/insights/the-angry-guest-at-2am/) hat mir gezeigt, wie viel Verantwortung und Kontinuität zwischen den Schichten bedeuten.
 
 Die Frage, die sie alle verbindet, lautet:
 
-**Haben wir eine Verbesserung gebaut, die Teil des Systems wird, oder ein vorübergehendes Ergebnis, das von der Aufmerksamkeit der Führungskraft abhängt?**
+**Haben wir eine Verbesserung geschaffen, die Teil des Systems wird, oder ein vorübergehendes Ergebnis, das von der Aufmerksamkeit der Führungskraft abhängt?**
 
-Diese Frage ist der Kern der ganzen Reihe.
+Für mich ist diese Frage der Kern der ganzen Reihe.
 
 ## Am ersten Tag als Team Leader
 
@@ -92,7 +92,7 @@ Könnte ich an meinem ersten Tag als Team Leader mit mir selbst sprechen, würde
 
 Vor allem aber würde ich mir den Satz mitgeben, mit dem dieser Essay beginnt.
 
-Man kann eine Kennzahl verbessern, eine Rampe organisieren, ein Verfahren schreiben oder ein schwieriges Problem lösen. Mit dem besseren Ergebnis ist die Verbesserung aber nicht abgeschlossen. Man muss noch herausfinden, ob sich das Ergebnis halten lässt, ob neue Leute demselben Standard folgen können und ob der Prozess ohne ständiges Eingreifen läuft.
+Sie können eine Kennzahl verbessern, eine Rampe organisieren, ein Verfahren schreiben oder ein schwieriges Problem lösen. Ein besseres Ergebnis heißt, dass die Verbesserung die erste Prüfung bestanden hat. Die weiteren folgen: ob sich das Ergebnis halten lässt, ob neue Leute demselben Standard folgen können und ob der Prozess ohne Ihr ständiges Eingreifen läuft.
 
 **Eine gute Führungskraft kann einen Arbeitstag verbessern. Ein gutes System hält die Verbesserung auch an dem Tag am Leben, an dem sie nicht da ist.**
 

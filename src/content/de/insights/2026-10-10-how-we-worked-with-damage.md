@@ -35,11 +35,11 @@ firstMove:
 
 So sah Damage im Bericht vom April 2025 aus. Auf der letzten Meile gehörte die Kennzahl zu den wichtigsten, die wir täglich verfolgten, zusammen mit Incomplete, Delay und Loading Time. Die Zahl stimmte, und sie zeigte uns, dass wir ein Problem hatten. Wo der Schaden entstanden war, am Rollwagen, beim Verladen, im Fahrzeug oder an der Tür des Kunden, sagte sie nicht.
 
-Mit diesem Essay beginnt die Reihe „Verbesserung, die hält“, und eine Verbesserung, die hält, beginnt bei dem, was man weiß, nicht bei dem, was in einer Präsentation gut klingt. Ich weiß, wie wir Schäden verfolgt haben und welche Probleme wir gesehen haben. Belegen kann ich zwei Zahlen: die vom April und 0,97 % in einem Bericht vom Juni 2025. Zwei Berichte sind noch keine Reihe. Ob die Veränderung ein Trend war, an der Saison lag oder Zufall war, kann ich deshalb nicht sagen, und ich stelle sie nicht als direktes Ergebnis meiner Arbeit dar. Ich weiß auch nicht genau, wo die meisten Schäden entstanden, und ich habe keinen dokumentierten Fall, an dem ich Schaden, Ursache und Korrekturmaßnahme beschreiben könnte, ohne Details zu erfinden.
+Mit diesem Essay beginnt die Reihe „Verbesserung, die hält“, und eine Verbesserung, die hält, beginnt bei dem, was man weiß. Ich weiß, wie wir Schäden verfolgt haben und welche Probleme wir gesehen haben. Belegen kann ich zwei Zahlen: die vom April und 0,97 % in einem Bericht vom Juni 2025. Zwei Berichte sind noch keine Reihe. Ob die Veränderung ein Trend war, an der Saison lag oder Zufall war, kann ich deshalb nicht sagen, und ich stelle sie nicht als direktes Ergebnis meiner Arbeit dar. Ich weiß auch nicht genau, wo die meisten Schäden entstanden, und ich habe keinen dokumentierten Fall, an dem ich Schaden, Ursache und Korrekturmaßnahme beschreiben könnte, ohne Details zu erfinden.
 
 ## Wie wir sie verfolgt haben
 
-Damage verfolgten wir in den operativen Berichten und im Daily Stand-up. Wir betrachteten die Zahl nicht für sich allein, sondern zusammen mit den anderen Kennzahlen und den täglichen Problemen des Betriebs.
+Damage verfolgten wir in den operativen Berichten und im Daily Stand-up. Wir betrachteten die Zahl zusammen mit den anderen Kennzahlen und den täglichen Problemen des Betriebs.
 
 Die Probleme, die wir sahen, waren operativ: wie die Ladung organisiert war, wie die Rollwagen genutzt und wie die Produkte platziert wurden. Im Betrieb gab es Standards für die Sicherheit, für die Organisation der Rampe, für das Verladen und für den Umgang mit den Produkten. Die Schichtleiter und Disponenten verfolgten die operativen Probleme, und die Abstimmung mit den DSPs gehörte zur täglichen Arbeit.
 
@@ -55,7 +55,7 @@ Eine Schadensquote fasst in einer einzigen Zahl zusammen, was an ganz verschiede
 
 Hinzu kommt, dass ein Schaden meist dort gemeldet wird, wo er entdeckt wird, nicht dort, wo er entsteht. Für Fehler im Allgemeinen habe ich das in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) beschrieben. Bei Schäden liegt man noch leichter daneben, denn wenn ein beschädigtes Produkt entdeckt wird, hat es immer jemand in der Hand, und diese Person wird sehr schnell zur Antwort.
 
-Wenn eine Führungskraft nicht sagen kann, in welchem Schritt ein Schaden entsteht, arbeitet sie an der Quote, nicht am Prozess.
+Wenn eine Führungskraft nicht sagen kann, in welchem Schritt ein Schaden entsteht, kann sie nur an der Quote arbeiten.
 
 ## Zwei Wege, eine Zahl zu senken
 
@@ -63,15 +63,15 @@ Dieser Teil ist meine Meinung, kein Fall aus meiner Erfahrung.
 
 Eine Quote kann sich bewegen, ohne dass jemand den Prozess verstanden hat. Man kann Druck auf das Team machen, bei dem der Schaden gemeldet wird, und ihn jeden Morgen zum Thema machen. Die Zahl sinkt dann vielleicht eine Zeit lang. Wird der Rollwagen aber genauso beladen, die Ladung genauso organisiert und bleibt der Standard genauso unklar, kommt der Schaden zurück, sobald sich die Aufmerksamkeit anderem zuwendet.
 
-Der andere Weg ist langsamer. Man verfolgt den Schaden im Prozess zurück bis zu dem Schritt, in dem er entstanden ist, und ändert dort etwas. Schadensmanagement darf nicht nur der Versuch sein, die Quote im Bericht zu senken. Es muss der Versuch sein, Schäden im Prozess zu verstehen und zu verhindern.
+Der andere Weg ist langsamer. Man verfolgt den Schaden im Prozess zurück bis zu dem Schritt, in dem er entstanden ist, und ändert dort etwas. Schadensmanagement sollte nicht nur der Versuch sein, die Quote im Bericht zu senken. Es sollte der Versuch sein, Schäden im Prozess zu verstehen und zu verhindern.
 
 Das meint auch der Name dieser Reihe. Eine Verbesserung, die von der Aufmerksamkeit der Führungskraft abhängt, hält so lange wie diese Aufmerksamkeit. Eine Verbesserung, die den Prozess verändert, hält auch dann, wenn die Führungskraft mit anderem beschäftigt ist.
 
 ## Wie ich es heute machen würde
 
-Heute würde ich zuerst den Schritt suchen, in dem der Schaden entsteht, und nicht nur auf die Person oder das Team schauen, bei dem er gemeldet wird.
+Heute würde ich zuerst den Schritt suchen, in dem der Schaden entsteht, und erst danach auf die Person oder das Team schauen, bei dem er gemeldet wird.
 
-Die persönliche Verantwortung fällt damit nicht weg. Wurde ein klarer und umsetzbarer Standard nicht eingehalten, muss das gesagt werden. Aber diese Frage kommt erst, wenn man verstanden hat, wo der Schaden passiert ist, nicht vorher. Für jeden Schadensfall würde ich vier Antworten suchen.
+Die persönliche Verantwortung fällt damit nicht weg: Wurde ein klarer und umsetzbarer Standard nicht eingehalten, muss das gesagt werden. Diese Frage kommt nur eben an zweiter Stelle. Für jeden Schadensfall würde ich vier Antworten suchen.
 
 ## Ein Schadensfall, vier Fragen
 

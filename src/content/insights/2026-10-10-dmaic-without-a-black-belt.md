@@ -41,9 +41,7 @@ firstMove:
 diagram: dmaic-loop
 ---
 
-You do not need a Black Belt certificate to ask good questions.
-
-But knowing the name of a method is not enough to claim you have applied it.
+Asking good questions does not take a Black Belt certificate. Claiming to have applied a method takes more than knowing its name.
 
 This essay sits between those two sentences.
 

@@ -88,4 +88,4 @@ Heute würde ich das Ergebnis, bevor ich mich auf eine Ursache festlege, mit der
 
 Viele Betriebe springen von der ersten Ebene direkt zur dritten: Die Zahl ist schlecht, also wird sofort eine Maßnahme verlangt. Die mittlere Ebene, die zeigt, ob sich dieser Tag von den anderen unterscheidet, fehlt am häufigsten.
 
-Ein schlechter Tag ist ein Signal zum Prüfen, nicht automatisch der Beweis, dass der ganze Prozess geändert werden muss. [Sigma & Regelkarte](/de/tools/sigma-control-chart/) zeichnet die mittlere Ebene für Ihre Tage oder Wochen und erklärt, was ein Signal ist und was nicht. Bevor Sie eine Regel ändern, füllen Sie das Blatt unten aus und kopieren es.
+[Sigma & Regelkarte](/de/tools/sigma-control-chart/) zeichnet die mittlere Ebene für Ihre Tage oder Wochen und erklärt, was ein Signal ist und was nicht. Bevor Sie eine Regel ändern, füllen Sie das Blatt unten aus und kopieren es.

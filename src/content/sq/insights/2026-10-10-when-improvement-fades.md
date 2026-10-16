@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: Përmirësimi i vërtetë nuk është ai që funksionon vetëm kur menaxheri është aty. Është ai që vazhdon të funksionojë edhe kur menaxheri largohet.
 teaser: Mos u mjafto me faktin që sot e zgjidhe problemin. Pyet veten nëse nesër ai problem mund të zgjidhet edhe pa praninë tënde.
-description: "Eseja përmbyllëse e serisë: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë."
-deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja për punën time të cilës nuk di t''i përgjigjem, pyetja që i lidh të dhjetë esetë, dhe një provë nëse përmirësimi do të zgjasë.'
+description: "Eseja përmbyllëse e serisë: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që i lidh të dhjetë esetë dhe kontrolli i qëndrueshmërisë."
+deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja për punën time të cilës nuk di t''i përgjigjem, pyetja që i lidh të dhjetë esetë dhe një provë nëse përmirësimi do të zgjasë.'
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-handover/
@@ -32,15 +32,15 @@ checklist:
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Merr një përmirësim që bëre këtë vit dhe pyet veten nëse do të ecte javën tjetër pa ty.
-  - Thuaj me emër kush kontrollon që standardi zbatohet ende, dhe sa shpesh.
-  - Gjej një udhëzim që nuk përputhet më me procesin, dhe përditësoje sot.
+  - Thuaj me emër kush kontrollon që standardi zbatohet ende dhe sa shpesh.
+  - Gjej një udhëzim që nuk përputhet më me procesin dhe përditësoje sot.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: improvement-paths
 ---
 
-Po të mund t'i thosha vetes një fjali të vetme në ditën e parë si Team Leader, do të ishte kjo: nuk mjafton ta zgjidhësh problemin sot; ajo që ka rëndësi është nëse nesër mund të zgjidhet edhe pa ty. Me këtë pyetje mbyllet edhe kjo seri.
+Po të mund t'i thosha vetes një fjali të vetme në ditën e parë si Team Leader, do të ishte kjo: kur ta kesh zgjidhur një problem sot, pyet veten nëse nesër do të zgjidhej edhe pa ty. Me këtë pyetje mbyllet edhe kjo seri.
 
-Me standardet kam punuar nga të dyja anët e kësaj pyetjeje. Në last mile ato kishin të bënin me ngarkimin, skanimin, organizimin e rampës dhe sigurinë, dhe më është dashur të merrem me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar me to. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. Ajo që nuk e kam është pikërisht rasti që premton titulli: një përmirësim imi i dokumentuar, që mbajti disa muaj dhe pastaj u braktis. Për një ese mbi përmirësimin që shuhet, kjo mungesë nuk është detaj. Është vetë tema.
+Në last mile kam punuar me standardet e ngarkimit, të skanimit, të organizimit të rampës dhe të sigurisë, dhe kam hasur probleme me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar plotësisht me standardet. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. Ajo që nuk e kam është pikërisht rasti që premton titulli: një përmirësim imi i dokumentuar, që mbajti disa muaj dhe pastaj u braktis. Për një ese mbi përmirësimin që shuhet, kjo mungesë nuk është detaj. Është vetë tema.
 
 ## Pyetja që nuk di t'i përgjigjem
 
@@ -64,7 +64,7 @@ Një standard duhet të funksionojë edhe me ata që nuk e njohin prej vitesh. N
 
 ## Çfarë e mban gjallë një standard
 
-Asnjë element i vetëm nuk mjafton. Unë do të veçoja pesë:
+Për mua, asnjë element i vetëm nuk mjafton. Do të veçoja pesë:
 
 - **Dokumentimi:** standardi është i qartë dhe gjendet lehtë.
 - **Trajnimi:** njerëzit dinë jo vetëm çfarë të bëjnë, por edhe pse.
@@ -84,15 +84,15 @@ Pyetja që i lidh të gjitha është kjo:
 
 **A kemi ndërtuar një përmirësim që bëhet pjesë e sistemit, apo një rezultat të përkohshëm që varet nga vëmendja e menaxherit?**
 
-Kjo pyetje është thelbi i gjithë serisë.
+Sipas meje, kjo pyetje është thelbi i gjithë serisë.
 
 ## Ditën e parë si Team Leader
 
-Po të mund të flisja me veten në ditën e parë si Team Leader, do t'i thosha: mos u përpiq t'i zgjidhësh vetë të gjitha problemet. Rri pranë operacionit, dëgjoji njerëzit dhe kuptoje procesin para se të ndryshosh rregullat. Mos e gjyko një shofer nga një KPI e vetme negative, dhe mos e ngatërro një ditë të keqe me një problem të sistemit.
+Po të mund të flisja me veten në ditën e parë si Team Leader, do t'i thosha: mos u përpiq t'i zgjidhësh vetë të gjitha problemet. Rri pranë operacionit, dëgjoji njerëzit dhe kuptoje procesin para se të ndryshosh rregullat. Mos e gjyko një shofer nga një KPI e vetme negative dhe mos e ngatërro një ditë të keqe me një problem të sistemit.
 
 Por mbi të gjitha, do t'i thosha fjalinë me të cilën e nisa këtë ese.
 
-Mund të përmirësosh një KPI, të organizosh një rampë, të shkruash një procedurë ose të zgjidhësh një problem të vështirë. Por përmirësimi nuk mbaron kur rezultati bëhet më i mirë. Duhet të kuptosh edhe nëse ai rezultat mund të mbahet, nëse njerëzit e rinj mund ta ndjekin të njëjtin standard, dhe nëse procesi ecën pa ndërhyrjen tënde të vazhdueshme.
+Mund të përmirësosh një KPI, të organizosh një rampë, të shkruash një procedurë ose të zgjidhësh një problem të vështirë. Një rezultat më i mirë do të thotë që përmirësimi ka kaluar provën e parë. Pas saj vijnë të tjerat: nëse rezultati mund të mbahet, nëse të porsaardhurit mund ta ndjekin të njëjtin standard dhe nëse procesi ecën pa ndërhyrjen tënde të vazhdueshme.
 
 **Një menaxher i mirë mund ta përmirësojë një ditë pune. Një sistem i mirë e mban përmirësimin gjallë edhe ditën kur ai nuk është aty.**
 

@@ -40,11 +40,11 @@ firstMove:
 
 That is how Damage looked in the April 2025 report. In last mile it was one of the main KPIs we followed every day, together with Incomplete, Delay and Loading Time. The figure was accurate, and it told us we had a problem. Where the damage had started, on the trolley, during loading, in the van or at the customer's door, it did not say.
 
-This essay opens the series “Improvement that holds”, and an improvement that holds starts from what you know, not from what sounds good in a presentation. What I know is how we followed damage and which problems we saw. I have two figures on record: April's, and 0.97% in a June 2025 report. Two reports are not a series, so I cannot say whether the change was a trend, the season or chance, and I do not present it as the direct result of what I did. Nor do I know precisely where most of the damage happened, or have a documented case in which I could describe the damage, the cause and the corrective action without inventing details.
+This essay opens the series “Improvement that holds”, and an improvement that holds starts from what you know. What I know is how we followed damage and which problems we saw. I have two figures on record: April's, and 0.97% in a June 2025 report. Two reports are not a series, so I cannot say whether the change was a trend, the season or chance, and I do not present it as the direct result of what I did. Nor do I know precisely where most of the damage happened, or have a documented case in which I could describe the damage, the cause and the corrective action without inventing details.
 
 ## How we followed it
 
-We followed Damage in the operational reports and in the daily stand-up. We did not look at it on its own, but analysed it alongside the other indicators and the everyday problems of the operation.
+We followed Damage in the operational reports and in the daily stand-up. We analysed it alongside the other indicators and the everyday problems of the operation.
 
 The problems we saw were operational: how the load was organised, how the trolleys were used, how the products were placed. The operation had standards for safety, for organising the ramp, for loading and for handling products. The Shift Leaders and dispatchers followed the operational problems, and coordinating with the DSPs was part of the daily work.
 
@@ -60,7 +60,7 @@ A damage rate gathers into one number things that started in different places. A
 
 Damage is also usually reported where it is found, not where it starts. I made the same point about mistakes in general in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/). With damage it is even easier to get wrong, because when a damaged product is found, someone always has it in their hands, and that person very easily becomes the answer.
 
-If a manager cannot say at which stage damage starts, they are working on the percentage, not on the process.
+If a manager cannot say at which stage damage starts, all they can work on is the percentage.
 
 ## Two ways to lower a number
 
@@ -74,9 +74,9 @@ That is also what the name of the series means. An improvement that depends on t
 
 ## What I would do today
 
-Today I would look first for the stage where the damage starts, not only at the person or team where it is reported.
+Today I would look first for the stage where the damage starts, and only then at the person or team where it is reported.
 
-That does not remove individual accountability. If a clear and workable standard was not followed, that has to be said. But the question comes after you understand where the damage happened, not before. For every damage case, I would look for four answers.
+That does not remove individual accountability: if a clear and workable standard was not followed, that has to be said. It just comes second. For every damage case, I would look for four answers.
 
 ## One damage case, four questions
 

@@ -36,15 +36,13 @@ firstMove:
 diagram: dmaic-loop
 ---
 
-Man braucht kein Black-Belt-Zertifikat, um gute Fragen zu stellen.
-
-Aber wer nur den Namen einer Methode kennt, kann nicht behaupten, sie angewendet zu haben.
+Um gute Fragen zu stellen, braucht man kein Black-Belt-Zertifikat. Wer behaupten will, eine Methode angewendet zu haben, muss aber mehr kennen als ihren Namen.
 
 Zwischen diesen beiden Sätzen bewegt sich dieser Essay.
 
 DMAIC ist der Six-Sigma-Zyklus zur Verbesserung eines Prozesses: Define, Measure, Analyze, Improve, Control. Man legt das Problem fest, misst es, analysiert die Ursachen, verbessert und prüft, ob die Verbesserung hält. In Büchern sieht das nach einem großen Projekt aus, mit Team, Frist und jemandem mit farbigem Gürtel.
 
-Was ich mitbringe, ist Erfahrung mit echten operativen Problemen auf der letzten Meile: Damage, Incomplete, Delay und Loading Time. Six Sigma, Pareto und 5 Why sind Methoden, die ich kenne und die in mein Verständnis von Führung eingegangen sind. Ein bestätigtes Zertifikat habe ich nicht, weder Yellow noch Green noch Black Belt, und auch kein Projekt, in dem ich alle fünf Phasen von DMAIC angewendet und dokumentiert hätte. Selbst für Pareto und 5 Why kann ich keinen Fall vorweisen, den ich selbst von Anfang bis Ende durchgezogen habe. In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über ein 5 Why mit nur zwei dokumentierten „Warum“ geschrieben und darüber, warum ich die übrigen nicht ergänzt habe.
+Was ich mitbringe, ist Erfahrung mit echten operativen Problemen auf der letzten Meile: Damage, Incomplete, Delay und Loading Time. Six Sigma, Pareto und 5 Why sind Methoden, die ich kenne und die in mein Verständnis von Führung eingegangen sind. Ein bestätigtes Zertifikat habe ich nicht, weder Yellow noch Green noch Black Belt, und auch kein Projekt, in dem ich alle fünf Phasen von DMAIC angewendet und dokumentiert hätte. Selbst für Pareto und 5 Why kann ich keinen Fall vorweisen, den ich selbst von Anfang bis Ende durchgeführt habe. In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über ein 5 Why mit nur zwei dokumentierten „Warum“ geschrieben und darüber, warum ich die übrigen nicht ergänzt habe.
 
 ## Die fünf Phasen, so wie ich sie hatte
 
@@ -70,7 +68,7 @@ Diese Liste ist aufschlussreich. Die ersten drei Phasen erledigt ein Betrieb fas
 
 Diese Disziplin liefert weder der Name noch ein Zertifikat. Zuerst verstehen Sie das Problem, dann messen Sie es, analysieren die Ursachen, probieren die Verbesserung aus und prüfen, ob sie weiter wirkt.
 
-Im Betrieb ist die Versuchung immer der Sprung. Die Kennzahl ist schlecht, und jemand hat sofort eine Lösung. In [Ein schlechter Tag oder ein Problem?](/de/insights/a-bad-day-or-a-problem/) habe ich über das Risiko geschrieben, die Regeln nach jeder Schwankung zu ändern. DMAIC ist der strukturierte Weg, das zu vermeiden: Zwischen Problem und Lösung liegen drei Schritte, und keiner davon wird übersprungen.
+Im Betrieb ist die Versuchung immer dieselbe: der Sprung. Die Kennzahl ist schlecht, und jemand hat sofort eine Lösung. In [Ein schlechter Tag oder ein Problem?](/de/insights/a-bad-day-or-a-problem/) habe ich über das Risiko geschrieben, die Regeln nach jeder Schwankung zu ändern. DMAIC ist der strukturierte Weg, das zu vermeiden: Zwischen Problem und Lösung liegen drei Schritte, und keiner davon wird übersprungen.
 
 ## Control, die schwierigste Phase
 

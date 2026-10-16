@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Druck erzeugt nicht immer die Probleme. Oft macht er sie sichtbarer.
-teaser: Wir hatten Tage, an denen die Nachfrage über dem Forecast lag. Kurzfristig gerufene Fahrer, manche noch in der Ramp-up-Phase. An diesen Tagen sah man, wie gut der Betrieb vorbereitet war.
+teaser: Wir hatten Tage, an denen die Nachfrage über dem Forecast lag. Kurzfristig einbestellte Fahrer, manche noch in der Ramp-up-Phase. An diesen Tagen sah man, wie gut der Betrieb vorbereitet war.
 description: "Tage mit Nachfrage über dem Forecast: wo der Druck auf der letzten Meile ankam, warum Kapazität mehr als Köpfe ist, und fünf Kontrollen vor dem großen Tag."
 deck: 'Der achte Essay der Reihe „Verbesserung, die hält“: die Tage, an denen die Nachfrage über dem Forecast lag, wo der Druck ankam, warum Kapazität keine Kopfzahl ist, und fünf Kontrollen vor dem großen Tag.'
 relatedTools:
@@ -29,7 +29,7 @@ firstMove:
   - Machen Sie klar, wer entscheidet und wer informiert wird, wenn der Plan nicht reicht.
 ---
 
-An manchen Tagen auf der letzten Meile lag die Nachfrage über dem Forecast. Fahrer mussten kurzfristig gerufen werden, manche kamen zu spät, und einige waren in ihrer Ramp-up-Phase noch nicht ganz mit den SOPs vertraut. All das schlug auf die Organisation des Verladens und auf den Abfahrtsplan durch. So steht es in meinen Berichten von der letzten Meile aus dem Juni 2025.
+An manchen Tagen auf der letzten Meile lag die Nachfrage über dem Forecast. Fahrer mussten kurzfristig einbestellt werden, manche kamen zu spät, und einige waren in ihrer Ramp-up-Phase noch nicht ganz mit den SOPs vertraut. All das schlug auf die Organisation des Verladens und auf den Abfahrtsplan durch. So steht es in meinen Berichten von der letzten Meile aus dem Juni 2025.
 
 Das Datum eines bestimmten Tages, die Gesamtzahl der Bestellungen oder die genauen Abfahrtsverspätungen stehen nicht darin. Es waren auch nicht unbedingt Feiertage, sondern echte Situationen mit operativem Druck, keine belegte Saison. Fahrer, Fahrzeuge und Abfahrten wurden operativ geplant, aber von einem formalen Peak-Plan mit Kapazitätsstufen und besonderen Verfahren weiß ich nichts, und welcher Standard zuerst nachgab, als das Volumen stieg, kann ich nicht sagen. Gezeigt haben mir diese Tage trotzdem etwas, das ein gewöhnlicher Tag nicht zeigt.
 
@@ -70,12 +70,12 @@ In [6S ohne Plakat](/de/insights/6s-without-a-poster/) habe ich geschrieben, das
 Einer Führungskraft vor dem ersten großen Tag der Saison würde ich heute sagen: Warten Sie nicht, bis das Volumen steigt, um herauszufinden, ob das Team bereit ist. Ich würde fünf Dinge empfehlen, als Rat aus heutiger Sicht, nicht als Plan, von dem ich behaupte, ihn damals vollständig umgesetzt zu haben:
 
 1. **Die echte Kapazität prüfen**, nicht nur die Zahl der eingeplanten Fahrer.
-2. **Prüfen, ob neue Mitarbeitende geschult sind** für den Prozess.
+2. **Prüfen, ob neue Mitarbeitende für den Prozess geschult sind.**
 3. **Festlegen, welche Standards nicht gebrochen werden dürfen**, vor allem Sicherheit und kritische Kontrollen.
 4. **Einen Plan haben** für Ausfälle, Verspätungen und Probleme mit Fahrzeugen.
 5. **Vor der Schicht klären, wer entscheidet** und wer informiert werden muss, wenn sich die Lage ändert.
 
-Am wichtigsten ist mir der dritte Punkt. Am schweren Tag wird etwas verschoben. Die Frage ist, ob Sie vorher entschieden haben, was nie verschoben wird, oder ob Sie es mitten im Druck entscheiden.
+Am wichtigsten ist mir der dritte Punkt. Am schweren Tag wird etwas verschoben. Die Frage ist, ob Sie vorher entschieden haben, was nie verschoben wird, oder ob Sie es erst entscheiden, wenn der Druck schon da ist.
 
 **Der Standard beweist sich nicht an dem Tag, an dem alles nach Plan läuft. Er beweist sich an dem Tag, an dem der Plan nicht reicht.**
 

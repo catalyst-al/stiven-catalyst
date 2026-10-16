@@ -6,9 +6,9 @@ series: improvement
 status: published
 featured: true
 summary: Një KPI të tregon se ke një problem. Nuk të tregon automatikisht ku ka filluar dhe kush e ka shkaktuar.
-description: "Damage si KPI në last mile: pse përqindja nuk tregon ku lind dëmi, dallimi mes uljes së një numri dhe parandalimit të dëmit, dhe katër pyetje për një dëm."
-teaser: 1,06%, kundrejt objektivit 0,8%. Numri ishte i saktë. Por nuk thoshte nëse dëmi kishte lindur te karroca, gjatë ngarkimit, në makinë apo te dera e klientit.
-deck: 'Eseja e parë e serisë “Përmirësimi që mbahet”: Damage si KPI në last mile, çfarë tregojnë dokumentet dhe ku ndalen, dallimi mes uljes së një përqindjeje dhe parandalimit të dëmit, dhe kontrolli i një dëmi në katër pyetje.'
+description: "Damage si KPI në last mile: pse përqindja nuk tregon ku lind dëmi, dallimi mes uljes së një numri dhe parandalimit të dëmit, si dhe katër pyetje për një dëm."
+teaser: 1,06%, kundrejt objektivit 0,8%. Numri ishte i saktë. Por nuk thoshte nëse dëmi kishte lindur te karroca, gjatë ngarkimit, në furgon apo te dera e klientit.
+deck: 'Eseja e parë e serisë “Përmirësimi që mbahet”: Damage si KPI në last mile, çfarë tregojnë dokumentet dhe ku ndalen, dallimi mes uljes së një përqindjeje dhe parandalimit të dëmit, si dhe kontrolli i një dëmi në katër pyetje.'
 relatedTools:
   - /tools/damage-control/
   - /tools/pareto/
@@ -27,7 +27,7 @@ checklist:
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Merr një rast dëmtimi dhe pyet ku ndodhi, jo kush e bëri.
-  - Kontrollo nëse ekzistonte një standard për atë fazë, dhe nëse ishte i zbatueshëm atë ditë.
+  - Kontrollo nëse ekzistonte një standard për atë fazë dhe nëse ishte i zbatueshëm atë ditë.
   - Regjistroje rastin sipas fazës dhe shkakut, që Pareto-ja e javës tjetër të ketë një adresë.
 ---
 
@@ -35,13 +35,13 @@ firstMove:
 
 Kështu dukej Damage në raportin e prillit 2025. Në last mile ishte një nga KPI-të kryesore që ndiqnim çdo ditë, bashkë me Incomplete, Delay dhe Loading Time. Numri ishte i saktë dhe na tregonte se kishim një problem. Ku kishte lindur dëmi, te karroca, gjatë ngarkimit, në furgon apo te dera e klientit, këtë nuk e thoshte.
 
-Me këtë ese nis seria “Përmirësimi që mbahet”, dhe përmirësimi që mbahet nis nga ajo që di, jo nga ajo që tingëllon mirë në një prezantim. Ajo që di është si i ndiqnim dëmet dhe çfarë problemesh shihnim. Kam të dokumentuara dy shifra: atë të prillit dhe 0,97% në një raport të qershorit 2025. Dy raporte nuk bëjnë një seri, ndaj nuk mund të them nëse ndryshimi ishte trend, efekt i sezonit apo rastësi, dhe nuk e paraqes si rezultat të drejtpërdrejtë të punës sime. As nuk e di me saktësi ku ndodhnin më shumë dëmet, dhe nuk kam ndonjë rast të dokumentuar ku të mund ta përshkruaj dëmin, shkakun dhe masën korrigjuese pa shpikur detaje.
+Kjo ese hap serinë “Përmirësimi që mbahet”, dhe një përmirësim që mbahet nis nga ajo që di. Ajo që di është si i ndiqnim dëmet dhe çfarë problemesh shihnim. Kam të dokumentuara dy shifra: atë të prillit dhe 0,97% në një raport të qershorit 2025. Dy raporte nuk bëjnë një seri, ndaj nuk mund të them nëse ndryshimi ishte trend, efekt i sezonit apo rastësi, dhe nuk e paraqes si rezultat të drejtpërdrejtë të punës sime. As nuk e di me saktësi ku ndodhnin më shumë dëmet dhe nuk kam ndonjë rast të dokumentuar ku të mund ta përshkruaj dëmin, shkakun dhe masën korrigjuese pa shpikur detaje.
 
 ## Si e ndiqnim
 
-Damage e ndiqnim në raportet operative dhe në daily stand-up. Nuk e shikonim më vete, por e analizonim krahas treguesve të tjerë dhe problemeve të përditshme të operacionit.
+Damage e ndiqnim në raportet operative dhe në stand-up-in e përditshëm. E analizonim krahas treguesve të tjerë dhe problemeve të përditshme të operacionit.
 
-Problemet që shihnim ishin operative: si organizohej ngarkesa, si përdoreshin karrocat, si vendoseshin produktet. Operacioni kishte standarde për sigurinë, për organizimin e rampës, për ngarkimin dhe për trajtimin e produkteve. Shift Leaders dhe dispeçerët ndiqnin problemet operative, dhe koordinimi me DSP-të ishte pjesë e punës së përditshme.
+Problemet që shihnim ishin operative: si organizohej ngarkesa, si përdoreshin karrocat, si vendoseshin produktet. Operacioni kishte standarde për sigurinë, për organizimin e rampës, për ngarkimin dhe për trajtimin e produkteve. Drejtuesit e turnit dhe dispeçerët ndiqnin problemet operative, dhe koordinimi me DSP-të ishte pjesë e punës së përditshme.
 
 Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për masat që dolën në atë periudhë nga rastet e ngarkimit. Por nuk kam shënime të sakta për ndryshimet që vendosa vetë, as për mënyrën si ndryshoi sjellja e secilit grup, prandaj nuk i rrëfej këtu si histori suksesi.
 
@@ -55,7 +55,7 @@ Një përqindje dëmesh mbledh në një numër të vetëm gjëra që kanë lindu
 
 Për më tepër, dëmi zakonisht raportohet aty ku zbulohet, jo aty ku lind. Për gabimet në përgjithësi e kam shkruar këtë edhe te [Gabimet humbasin mes departamenteve](/sq/insights/mistakes-get-lost-between-departments/). Me dëmet gabohet edhe më lehtë, sepse kur zbulohet një produkt i dëmtuar, dikush e ka gjithmonë në dorë, dhe ai person shumë lehtë bëhet përgjigjja.
 
-Nëse menaxheri nuk mund të thotë në cilën fazë lind dëmi, ai punon me përqindjen, jo me procesin.
+Nëse menaxheri nuk mund të thotë në cilën fazë lind dëmi, ai mund të punojë vetëm me përqindjen.
 
 ## Dy mënyra për të ulur një numër
 
@@ -63,15 +63,15 @@ Kjo pjesë është mendim, jo rast nga përvoja ime.
 
 Një përqindje mund të lëvizë edhe pa e kuptuar njeri procesin. Mund t'i bësh presion ekipit ku raportohet dëmi dhe ta kthesh në temë çdo mëngjes, dhe numri ndoshta ulet për njëfarë kohe. Por nëse karroca mbushet njësoj, ngarkesa organizohet njësoj dhe standardi mbetet po aq i paqartë, dëmi do të kthehet sapo vëmendja të kalojë diku tjetër.
 
-Mënyra tjetër është më e ngadaltë. E ndjek dëmin mbrapsht në proces deri te faza ku lindi, dhe ndryshon diçka aty. Menaxhimi i dëmeve nuk duhet të jetë vetëm përpjekje për të ulur përqindjen në raport. Duhet të jetë përpjekje për të kuptuar dhe parandaluar dëmet në proces.
+Mënyra tjetër është më e ngadaltë. E ndjek dëmin mbrapsht në proces deri te faza ku lindi dhe ndryshon diçka aty. Menaxhimi i dëmeve nuk duhet të jetë vetëm përpjekje për të ulur përqindjen në raport. Duhet të jetë përpjekje për të kuptuar dhe parandaluar dëmet në proces.
 
 Ky është edhe kuptimi i emrit të serisë. Një përmirësim që varet nga vëmendja e menaxherit zgjat sa zgjat vëmendja. Një përmirësim që ndryshon procesin mbahet edhe kur menaxheri merret me diçka tjetër.
 
 ## Si do ta bëja sot
 
-Sot do të kërkoja së pari fazën ku lind dëmi, dhe nuk do të shikoja vetëm personin ose ekipin ku raportohet.
+Sot do të kërkoja së pari fazën ku lind dëmi dhe vetëm pas saj personin ose ekipin ku raportohet.
 
-Kjo nuk e heq përgjegjësinë individuale. Nëse nuk u respektua një standard i qartë dhe i zbatueshëm, kjo duhet thënë. Por kjo pyetje vjen pasi ke kuptuar ku ndodhi dëmi, jo më parë. Për çdo rast dëmtimi do të kërkoja katër përgjigje.
+Kjo nuk e heq përgjegjësinë individuale: nëse nuk u respektua një standard i qartë dhe i zbatueshëm, kjo duhet thënë. Vetëm se kjo pyetje vjen e dyta. Për çdo rast dëmtimi do të kërkoja katër përgjigje.
 
 ## Një rast dëmtimi, katër pyetje
 

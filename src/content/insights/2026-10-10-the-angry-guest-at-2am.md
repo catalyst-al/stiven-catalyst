@@ -38,9 +38,9 @@ firstMove:
   - Hand it over with a name, so the guest does not tell the story again at breakfast.
 ---
 
-By 2 a.m. most of a hotel is asleep. Fewer people are on duty, fewer departments can be reached, fewer options are open. A guest with a problem still has the same problem they would have at midday. This essay is about that gap. The hour in the title stands for that kind of night; it is not the time of an incident I can prove.
+By 2 a.m. most of a hotel is asleep. Fewer people are on duty, fewer departments can be reached, fewer options are open. A guest's problem is no smaller than it would be at midday. This essay is about that gap. The hour in the title stands for that kind of night; it is not the time of an incident I can prove.
 
-It rests on my work in the night audit and on the room problems I have on record from it: weak water pressure in the shower, problems with how clean the bathroom was, technical issues that needed the responsible department, and open problems the next shift had to follow up. They are real examples of the work, not the story of a confrontation with a guest. I have no record of a whole night with an angry guest at the desk: what I said, what I did and how it ended. The way of calming a guest described below is how I would do it today.
+It rests on my work in the night audit and on the room problems I have on record from it: weak water pressure in the shower, problems with how clean the bathroom was, technical issues that needed the responsible department, and open problems the next shift had to follow up. I have no record of a whole night with an angry guest at the desk: what I said, what I did and how it ended. The way of calming a guest described below is how I would do it today.
 
 ## What can be done at night
 
@@ -60,15 +60,15 @@ Today I would handle it like this:
 4. **Explain clearly what you can do at that moment.**
 5. **If the solution takes time, tell them what the next step is.**
 
-An angry guest does not need a long explanation of why the problem happened, at least not straight away. First they need to see that their concern is being taken seriously.
+What an angry guest needs first is to see that their concern is being taken seriously. The explanation of why the problem happened can wait.
 
-Take the weak water pressure, which I have on record as a problem, not as a conversation. At night you cannot fix it. You can listen, check it, record it accurately, pass it to the responsible department and tell the guest what will happen next. The shower stays as it is, but the guest's night changes: they are no longer someone who was ignored, but someone whose problem has a name and a next step.
+Take the weak water pressure, which I have on record as a problem, not as a conversation. At night you cannot fix it. You can listen, check it, record it accurately, pass it to the responsible department and tell the guest what will happen next. The shower stays as it is, but the guest leaves the desk with a problem that has a name and a next step.
 
 ## After the guest leaves the desk
 
 **A complaint is not closed just because the guest walks away from the front desk.**
 
-In [Why the shift handover is one of the most underrated processes](/insights/why-the-handover-is-underrated/) I wrote about why the handover matters. For a complaint it matters in another way. If the guest has to explain the same problem from the start in the morning, the night's complaint was not closed. It was lost.
+In [Why the shift handover is one of the most underrated processes](/insights/why-the-handover-is-underrated/) I wrote about why the handover matters. For a complaint it matters in another way. If the guest has to explain the same problem from the start in the morning, the night's complaint was lost.
 
 The shift report included problems with rooms, open issues and the information that needed following up. A useful handover for a complaint, as I would set it up today, shows five things: what was reported, what was verified, what has been done so far, what is still unresolved, and who follows it up, with what the guest should be told. Whether every complaint was recorded with exactly these fields at the time, I do not know.
 

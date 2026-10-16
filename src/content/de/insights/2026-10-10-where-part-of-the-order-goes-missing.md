@@ -67,7 +67,7 @@ Die erste Lesart sieht darin eine negative Zahl, die sinken muss, und schreibt n
 
 Die zweite:
 
-**Incomplete darf nicht nur als negative Zahl oder als Fehler des Fahrers gesehen werden. Es soll uns helfen zu verstehen, wo die Ware oder die Information verloren gegangen ist und wie wir verhindern, dass das wieder passiert.**
+**Incomplete sollte nicht nur als negative Zahl oder als Fehler des Fahrers gesehen werden. Es sollte uns helfen zu verstehen, wo die Ware oder die Information verloren gegangen ist und wie wir verhindern, dass das wieder passiert.**
 
 Hier unterscheidet sich Incomplete von Schäden. Ein Schaden ist bereits passiert, wenn man ihn entdeckt. Eine fehlende Tasche, die an der Rampe auffällt, ist dagegen erst ein Fehlbestand; noch ist daraus keine unvollständige Bestellung an der Tür des Kunden geworden. Deshalb ist eine Kontrolle vor der Abfahrt am meisten wert.
 
@@ -77,13 +77,13 @@ Was ich heute empfehlen würde, ohne es selbst eingeführt zu haben, ist eine kl
 
 1. **Jede Tasche ist eindeutig erkennbar** und ihrer Bestellung zugeordnet.
 2. **Die Zahl der Taschen stimmt** mit dem überein, was geladen werden muss.
-3. **Der Trolley ist geprüft**, damit keine vermischten Ladungen darauf sind.
+3. **Der Trolley ist auf vermischte Ladungen geprüft.**
 4. **Fehlt eine Tasche, stoppt der Prozess** für dieses Problem, und der Team Leader wird informiert.
 5. **Jeder Fehlbestand, der vor der Abfahrt entdeckt wird, wird erfasst**, mit seiner Ursache, sofern sie bekannt ist.
 
 Den fünften Punkt vergisst man am leichtesten. Ein Fehlbestand, der vor der Abfahrt gefunden und behoben wird, taucht im Incomplete-Bericht nie auf. Für den Kunden ist das gut. Wird er aber nirgends festgehalten, lernt der Prozess nichts daraus, und morgen muss jemand anderes denselben Fehlbestand wieder finden, mit etwas Glück.
 
-Die [Vollständigkeitskontrolle](/de/tools/incomplete-control/) erfasst jeden Fall mit dem Prozessschritt, in dem er entstanden ist, und dem Grund, und zeigt, wo die meisten Fälle entstehen. Die Liste unten können Sie hier abhaken und für die Schicht kopieren.
+Die [Vollständigkeitskontrolle](/de/tools/incomplete-control/) erfasst jeden Fall mit dem Prozessschritt, in dem er entstanden ist, und dem Grund, und zeigt, wo die meisten Fälle entstehen. Die Liste unten können Sie abhaken und für die Schicht kopieren.
 
 **Die beste Kontrolle ist nicht die, die unvollständige Bestellungen zählt. Es ist die, die sie aufhält, bevor sie losfahren.**
 

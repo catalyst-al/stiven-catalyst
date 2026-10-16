@@ -42,9 +42,9 @@ firstMove:
 diagram: improvement-paths
 ---
 
-If I could give myself one sentence on my first day as a Team Leader, it would be this: solving the problem today is not enough; what counts is whether it can be solved tomorrow without you. It is also the question this series closes on.
+If I could give myself one sentence on my first day as a Team Leader, it would be this: once you have solved a problem today, ask whether it could be solved tomorrow without you. It is also the question this series closes on.
 
-I have worked with standards on both sides of that question. In last mile they covered loading, scanning, the organisation of the ramp and safety, and I dealt with procedures that were not followed and with drivers who were not yet used to them. In the hotel I organised the SOPs for Front Office and Night Audit. What I do not have is the case the title of this essay promises: a documented improvement of mine that held for a few months and was then abandoned. For an essay about improvement that fades, that gap is not a detail. It is the subject.
+In last mile I worked with standards for loading, scanning, the organisation of the ramp and safety, and I ran into problems with procedures that were not followed and with drivers who were not yet fully used to the standards. In the hotel I organised the SOPs for Front Office and Night Audit. What I do not have is the case the title of this essay promises: a documented improvement of mine that held for a few months and was then abandoned. For an essay about improvement that fades, that gap is not a detail. It is the subject.
 
 ## The question I cannot answer
 
@@ -62,13 +62,13 @@ What follows is opinion, not a proven case. I believe an improvement is at risk 
 
 Turnover makes the risk easier to see. In last mile we had drivers called in at short notice, and drivers in ramp-up who were not yet used to the SOPs. That made it hard to hold compliance at the same level.
 
-A standard has to work with more than the people who have known it for years. If every new employee learns the process only by watching a colleague, the result depends on who trains them. I wrote about this in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/). Here you see its price: a standard that passes only from person to person loses a little with every change of staff.
+A standard should work with more than the people who have known it for years. If every new employee learns the process only by watching a colleague, the result depends on who trains them. I wrote about this in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/). Here you see its price: a standard that passes only from person to person loses a little with every change of staff.
 
 {diagram}
 
 ## What keeps a standard alive
 
-No single element is enough. I would pick out five:
+For me, no single element is enough. I would pick out five:
 
 - **Documentation:** the standard is clear and easy to find.
 - **Training:** people know not only what to do, but why.
@@ -88,7 +88,7 @@ The question that links them all is this:
 
 **Have we built an improvement that becomes part of the system, or a temporary result that depends on the manager's attention?**
 
-That question is the heart of the whole series.
+In my view, that question is the heart of the whole series.
 
 ## On my first day as a Team Leader
 
@@ -96,7 +96,7 @@ If I could talk to myself on my first day as a Team Leader, I would say: do not 
 
 Above all, I would give myself the sentence this essay opened with.
 
-You can improve a KPI, organise a ramp, write a procedure or solve a hard problem. But improvement does not end when the result gets better. You still have to find out whether the result can be held, whether new people can follow the same standard, and whether the process works without your constant intervention.
+You can improve a KPI, organise a ramp, write a procedure or solve a hard problem. A better result means the improvement has passed its first test. The others follow: whether the result can be held, whether new people can follow the same standard, and whether the process works without your constant intervention.
 
 **A good manager can improve a working day. A good system keeps the improvement alive even on the day the manager is not there.**
 

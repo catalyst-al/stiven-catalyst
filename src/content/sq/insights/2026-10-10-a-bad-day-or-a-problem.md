@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: Një ditë e keqe është sinjal për të kontrolluar. Nuk është automatikisht provë se i gjithë procesi duhet ndryshuar.
 teaser: Në një raport të qershorit 2025, Delay ishte 2,8%. Ditë e keqe apo problem? Nga përgjigjja varet nëse e ndryshon procesin, dhe vetëm numri nuk ta jep.
-description: "Një ditë me KPI të këqija: pse një numër i vetëm nuk tregon nëse procesi ndryshoi, dy gabimet e kundërta, dhe katër pyetje para se të ndryshosh procesin."
-deck: 'Eseja e pestë e serisë “Përmirësimi që mbahet”: si i ndiqnim KPI-të çdo ditë, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, dy gabimet e kundërta, kur ndërhyn menjëherë, dhe katër pyetje para se të ndryshosh procesin.'
+description: "Një ditë me KPI të këqija: pse një numër i vetëm nuk tregon nëse procesi ndryshoi, ideja e kartës së kontrollit dhe katër pyetje para se të ndryshosh procesin."
+deck: 'Eseja e pestë e serisë “Përmirësimi që mbahet”: si i ndiqnim KPI-të çdo ditë, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, dy gabimet e kundërta, kur ndërhyn menjëherë dhe katër pyetje para se të ndryshosh procesin.'
 relatedTools:
   - /tools/sigma-control-chart/
   - /tools/delay-analyzer/
@@ -38,7 +38,7 @@ diagram: three-layers
 
 Kaq ishte Delay në një raport të qershorit 2025. Ishte një ditë e keqe, apo kishte ndryshuar diçka në proces? Vetëm numri nuk ta thotë.
 
-Në last mile ndiqnim çdo ditë Delay, Damage, Incomplete dhe Loading Time. Rezultatet diskutoheshin në daily stand-up, çdo devijim duhej shpjeguar, dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative. Mbi këtë rutinë mbështetet kjo ese. Nuk mund ta rindërtoj, nga ana tjetër, si zgjidhnim mes pritjes dhe ndërhyrjes: nëse e linim një rezultat të përsëritej para se të ndërhynim, nëse ndiqnim trendet ditore ose javore në Excel apo Power BI, nëse kam përdorur vetë një kartë kontrolli statistikore me kufij kontrolli. Metoda që vijon është mënyra si do ta lexoja sot një ditë të keqe.
+Në last mile ndiqnim çdo ditë Delay, Damage, Incomplete dhe Loading Time. Rezultatet diskutoheshin në stand-up-in e përditshëm, çdo devijim duhej shpjeguar dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative. Mbi këtë rutinë mbështetet kjo ese. Ajo që nuk mund ta rindërtoj është si zgjidhnim mes pritjes dhe ndërhyrjes: nëse e linim një rezultat të përsëritej para se të ndërhynim, nëse ndiqnim trendet ditore ose javore në Excel apo Power BI, nëse kam përdorur vetë një kartë kontrolli statistikore me kufij kontrolli. Metoda që vijon është mënyra si do ta lexoja sot një ditë të keqe.
 
 ## Një numër pa histori
 
@@ -54,11 +54,11 @@ Mbi këtë ide ngrihet karta e kontrollit. Ajo i vendos ditët njëra pas tjetr�
 
 Një ditë e keqe mund të lexohet gabim në dy mënyra të kundërta. Ajo që vijon është mendimi im, jo raste që mund t'i dokumentoj.
 
-Gabimi i parë e trajton çdo ditë të keqe si problem. Ndryshohet një rregull, shtohet një kontroll, thirret një mbledhje. Të nesërmen numri kthehet në normë, dhe duket sikur masa dha efekt. Por ndoshta do të ishte kthyer vetë, dhe tani procesi ka një rregull më shumë, që askush nuk e di pse ekziston.
+Gabimi i parë e trajton çdo ditë të keqe si problem. Ndryshohet një rregull, shtohet një kontroll, thirret një mbledhje. Të nesërmen numri kthehet në normë dhe duket sikur masa dha efekt. Por ndoshta do të ishte kthyer vetë, dhe tani procesi ka një rregull më shumë, që askush nuk e di pse ekziston.
 
 **Nëse ndryshojmë rregullat pas çdo luhatjeje, rrezikojmë të krijojmë më shumë paqëndrueshmëri sesa përmirësim.**
 
-Gabimi i dytë është e kundërta. Asnjë ditë nuk duket aq e keqe sa të reagosh, sepse secila është vetëm pak më keq se e djeshmja. Numri ngjitet ngadalë, dhe askush nuk e vë re, sepse askush nuk i shikon ditët bashkë.
+Gabimi i dytë është e kundërta. Asnjë ditë nuk duket aq e keqe sa të reagosh, sepse secila është vetëm pak më keq se e djeshmja. Numri ngjitet ngadalë dhe askush nuk e vë re, sepse askush nuk i shikon ditët bashkë.
 
 Karta e kontrollit ndihmon në të dyja rastet. Të qetëson kur dita mbetet brenda luhatjes së zakonshme, dhe të zgjon kur disa ditë me radhë shkojnë në të njëjtin drejtim, edhe pse asnjëra prej tyre nuk duket alarmante më vete.
 
@@ -88,4 +88,4 @@ Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e pu
 
 Shumë operacione kalojnë drejt e nga shtresa e parë te e treta: numri del keq dhe menjëherë kërkohet një masë. Shtresa e mesme, ajo që tregon nëse kjo ditë ndryshon nga të tjerat, është ajo që mungon më shpesh.
 
-Një ditë e keqe është sinjal për të kontrolluar, jo automatikisht provë se i gjithë procesi duhet ndryshuar. [Sigma dhe karta e kontrollit](/sq/tools/sigma-control-chart/) e vizaton shtresën e mesme për ditët ose javët e tua dhe shpjegon çfarë është sinjal e çfarë jo. Para se të ndryshosh një rregull, plotëso fletën më poshtë dhe kopjoje.
+[Sigma dhe karta e kontrollit](/sq/tools/sigma-control-chart/) e vizaton shtresën e mesme për ditët ose javët e tua dhe shpjegon çfarë është sinjal e çfarë jo. Para se të ndryshosh një rregull, plotëso fletën më poshtë dhe kopjoje.

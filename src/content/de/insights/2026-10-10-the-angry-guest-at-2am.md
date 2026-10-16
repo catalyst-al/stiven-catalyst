@@ -33,17 +33,17 @@ firstMove:
   - Übergeben Sie sie mit einem Namen, damit der Gast die Geschichte beim Frühstück nicht noch einmal erzählt.
 ---
 
-Um 2 Uhr nachts schläft der größte Teil eines Hotels. Weniger Leute sind im Dienst, weniger Abteilungen erreichbar, weniger Möglichkeiten offen. Ein Gast mit einem Problem hat aber dasselbe Problem, das er am Mittag hätte. Um diese Lücke geht es in diesem Essay. Die Uhrzeit im Titel steht für diese Art von Nacht, nicht für einen Vorfall, den ich belegen kann.
+Um 2 Uhr nachts schläft der größte Teil eines Hotels. Weniger Leute sind im Dienst, weniger Abteilungen erreichbar, weniger Möglichkeiten offen. Das Problem eines Gastes ist deshalb nicht kleiner als mittags. Um diese Lücke geht es in diesem Essay. Die Uhrzeit im Titel steht für diese Art von Nacht, nicht für einen Vorfall, den ich belegen kann.
 
-Der Essay beruht auf meiner Arbeit im Night Audit und auf den Zimmerproblemen, die ich aus dieser Zeit belegen kann: schwacher Wasserdruck in der Dusche, Mängel bei der Sauberkeit des Badezimmers, technische Störungen, für die die zuständige Abteilung gebraucht wurde, und offene Probleme, die die nächste Schicht weiterverfolgen musste. Sie sind echte Beispiele aus der Arbeit, nicht die Geschichte einer Konfrontation mit einem Gast. Einen belegten Ablauf einer Nacht mit einem verärgerten Gast an der Rezeption habe ich nicht: was ich gesagt, was ich getan habe und wie es ausging. Wie man einen Gast beruhigt, beschreibe ich so, wie ich es heute machen würde.
+Der Essay beruht auf meiner Arbeit im Night Audit und auf den Zimmerproblemen, die ich aus dieser Zeit belegen kann: schwacher Wasserdruck in der Dusche, Mängel bei der Sauberkeit des Badezimmers, technische Störungen, für die die zuständige Abteilung gebraucht wurde, und offene Probleme, die die nächste Schicht weiterverfolgen musste. Einen belegten Ablauf einer Nacht mit einem verärgerten Gast an der Rezeption habe ich nicht: was ich gesagt, was ich getan habe und wie es ausging. Wie man einen Gast beruhigt, beschreibe ich so, wie ich es heute machen würde.
 
 ## Was nachts möglich ist
 
 Als Night Auditor kümmerte ich mich um die Probleme, die sich im Rahmen der Zuständigkeit der Rezeption lösen ließen. Brauchte ein Problem eine andere Abteilung, ging es an die zuständige Person, und was in der Nacht nicht abgeschlossen wurde, kam in die Übergabe.
 
-In [Wann Sie es selbst lösen und wann Sie es nach oben weitergeben](/de/insights/solve-it-or-escalate-it/) habe ich über die Grenze zwischen Initiative und Befugnis in der Nacht geschrieben. Hier kommt zu derselben Frage eine dritte Partei hinzu: der Gast, der vor Ihnen steht und wartet.
+In [Wann Sie es selbst lösen und wann Sie es nach oben weitergeben](/de/insights/solve-it-or-escalate-it/) habe ich über die Grenze zwischen Initiative und Befugnis in der Nacht geschrieben. Hier kommt zu derselben Frage ein Dritter hinzu: der Gast, der vor Ihnen steht und wartet.
 
-Diese dritte Partei macht die Versuchung größer. Wenn jemand verärgert vor Ihnen steht, möchten Sie die Situation so schnell wie möglich beenden. Ich würde aber keine Entscheidung außerhalb meiner Befugnis treffen, nur um eine Beschwerde schneller abzuschließen. Ein Versprechen, das nicht von Ihnen abhängt, löst das Problem nicht. Es schiebt es auf den Morgen und macht es schwerer. Nachts sind die Möglichkeiten für eine Lösung nicht immer dieselben wie am Tag. Das heißt aber nicht, dass die Verantwortung für das Problem verloren gehen darf.
+Dieser Dritte macht die Versuchung größer. Wenn jemand verärgert vor Ihnen steht, möchten Sie die Situation so schnell wie möglich beenden. Ich würde aber keine Entscheidung außerhalb meiner Befugnis treffen, nur um eine Beschwerde schneller abzuschließen. Ein Versprechen, das nicht von Ihnen abhängt, löst das Problem nicht. Es schiebt es auf den Morgen und macht es schwerer. Nachts sind die Möglichkeiten für eine Lösung nicht immer dieselben wie am Tag. Das heißt aber nicht, dass die Verantwortung für das Problem verloren gehen darf.
 
 ## Erst zuhören, dann erklären
 
@@ -55,15 +55,15 @@ Heute würde ich so vorgehen:
 4. **Klar erklären, was man in diesem Moment tun kann.**
 5. **Wenn die Lösung Zeit braucht, ihm sagen, was der nächste Schritt ist.**
 
-Ein verärgerter Gast braucht keine lange Erklärung, warum das Problem entstanden ist, jedenfalls nicht sofort. Zuerst muss er merken, dass sein Anliegen ernst genommen wird.
+Ein verärgerter Gast muss zuerst merken, dass sein Anliegen ernst genommen wird. Die Erklärung, warum das Problem entstanden ist, kann warten.
 
-Nehmen Sie den schwachen Wasserdruck, den ich als Problem belegen kann, nicht als Gespräch. Nachts lässt er sich nicht beheben. Sie können aber zuhören, ihn prüfen, ihn genau festhalten, an die zuständige Abteilung weitergeben und dem Gast sagen, was als Nächstes passiert. Die Dusche bleibt, wie sie ist, aber die Nacht des Gastes verändert sich: Er ist nicht mehr jemand, der übergangen wurde, sondern jemand, dessen Problem einen Namen und einen nächsten Schritt hat.
+Nehmen Sie den schwachen Wasserdruck, den ich als Problem belegen kann, nicht als Gespräch. Nachts lässt er sich nicht beheben. Sie können aber zuhören, ihn prüfen, ihn genau festhalten, an die zuständige Abteilung weitergeben und dem Gast sagen, was als Nächstes passiert. Die Dusche bleibt, wie sie ist, aber der Gast verlässt die Rezeption mit einem Problem, das einen Namen und einen nächsten Schritt hat.
 
 ## Wenn der Gast die Rezeption verlässt
 
 **Eine Beschwerde ist nicht erledigt, nur weil der Gast die Rezeption verlässt.**
 
-In [Warum die Schichtübergabe einer der am meisten unterschätzten Prozesse ist](/de/insights/why-the-handover-is-underrated/) habe ich beschrieben, warum die Übergabe zählt. Bei einer Beschwerde zählt sie noch auf andere Weise. Muss der Gast am Morgen dasselbe Problem von vorn erklären, wurde die Beschwerde der Nacht nicht abgeschlossen. Sie ist verloren gegangen.
+In [Warum die Schichtübergabe einer der am meisten unterschätzten Prozesse ist](/de/insights/why-the-handover-is-underrated/) habe ich beschrieben, warum die Übergabe zählt. Bei einer Beschwerde zählt sie noch auf andere Weise. Muss der Gast am Morgen dasselbe Problem von vorn erklären, ist die Beschwerde der Nacht verloren gegangen.
 
 Im Schichtbericht standen Probleme mit Zimmern, offene Punkte und die Informationen, die weiterverfolgt werden mussten. Eine brauchbare Übergabe für eine Beschwerde zeigt, so wie ich sie heute aufsetzen würde, fünf Dinge: was gemeldet wurde, was überprüft wurde, was bisher getan wurde, was noch ungelöst ist und wer es weiterverfolgt, zusammen mit dem, was dem Gast gesagt werden soll. Ob jede Beschwerde damals genau mit diesen Feldern festgehalten wurde, weiß ich nicht.
 
