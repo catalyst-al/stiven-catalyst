@@ -418,3 +418,12 @@ test('Shelf: rows lift under the pointer, reading fills its line, a removed row 
   assert.match(css, /:where\([^)]*\.shelf-section[^)]*\) \{\s*animation: scroll-rise/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes row-leave/);
 });
+
+test('404: the title comes into focus, the three lines follow, and a small planet drifts around the orbit it slipped off', () => {
+  assert.match(fs.readFileSync('src/404.njk', 'utf8'), /<div class="lost-orbit" aria-hidden="true"><i><\/i><b><\/b><\/div>/);
+  assert.match(css, /\.lost-orbit \{ display: none; \}\n@media \(min-width: 980px\)/, 'only where there is room beside the lines');
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.lost-hero h1 \{ animation: lost-focus/);
+  assert.match(css, /\.lost-orbit i \{ animation: lost-drift 14s linear infinite; \}/);
+  assert.match(fs.readFileSync('_site/404.html', 'utf8'), /class="shell page-hero lost-hero"/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes lost-drift/);
+});
