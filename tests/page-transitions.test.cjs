@@ -207,5 +207,14 @@ test('tool cards light up in the colour of their family and rise into view like 
   assert.match(css, /\.tool-card:has\(a\):hover \{[\s\S]*?box-shadow: 0 26px 60px -34px color-mix\(in srgb, var\(--family, var\(--blue\)\) 80%/);
   assert.match(css, /\.family-card:hover,\s*\.family-card:focus-visible \{[\s\S]*?box-shadow: 0 24px 54px -30px color-mix\(in srgb, var\(--family\) 85%/);
   assert.match(css, /:where\(\.article-card, \.note-card, \.project-card, \.mini-card, \.tool-card, \.family-card,/);
-  assert.match(fs.readFileSync('src/script.js', 'utf8'), /closest\?\.\("\.article-card, \.note-card, \.project-card, \.mini-card, \.tool-card, a\.list-row"\)/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /closest\?\.\("\.article-card, \.note-card, \.project-card, \.mini-card, \.tool-card, [^"]*a\.list-row"\)/);
+});
+
+test('a publication answers the pointer as a whole, and a magazine cover catches the light', () => {
+  assert.match(css, /\.book-feature::after \{[\s\S]*?radial-gradient\(620px circle at var\(--mx, 30%\) var\(--my, 50%\)/);
+  assert.match(css, /\.book-feature:hover \.book-object-cover \{ transform: rotateY\(-9deg\) rotateX\(1deg\); \}/);
+  assert.match(css, /@media \(max-width: 620px\) \{ \.book-feature::after \{ inset: 10px -10px; \} \}/, 'the band stays inside the phone margin');
+  assert.match(css, /\.weekly-card:hover \.weekly-card-cover::after \{[^}]*background-position: -30% 0; \}/);
+  assert.match(css, /:where\([^)]*\.book-feature, \.list-row,/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.tool-card, \.book-feature, a\.list-row"/);
 });
