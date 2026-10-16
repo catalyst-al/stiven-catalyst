@@ -12,7 +12,8 @@ import toolsGuide from "./toolsGuide.js";
 
 const langs = ["en", "sq", "de"];
 const read = (name) => JSON.parse(fs.readFileSync(new URL(name, import.meta.url), "utf8"));
-const book = read("./book.json");
+// The book in each language: the Albanian original and its translations (src/_data/books/<lang>.json).
+const editions = Object.fromEntries(langs.map((lang) => [lang, read(`./books/${lang}.json`)]));
 const audio = read("./audio.json");
 
 // The size of a file under src/media, or null when it is not there.
@@ -36,7 +37,7 @@ const labels = {
     eyebrow: "Everything to keep", heading: "Downloads",
     lede: "Every publication of the site as a file to keep, read offline or print: the book, the guide, every issue and volume as a PDF, and the conversations about the issues as MP3. In your language, where it exists.",
     books: "Book and guide", review: "Management Review", treatise: treatise.en.short, floor: magazine.names.en.name,
-    bookMeta: "A book · in Albanian", guideMeta: `Edition ${toolsGuide.edition} · ${toolsGuide.editions[0].date.en}`, earlier: "Edition {n}",
+    bookMeta: "A book · translated from the Albanian", original: "the Albanian original", guideMeta: `Edition ${toolsGuide.edition} · ${toolsGuide.editions[0].date.en}`, earlier: "Edition {n}",
     special: "Special edition", no: "No.", volume: "Volume", issue: "Issue", open: "Open", more: "All {n} issues",
     files: "{n} files", note: "The PDFs are the printed pages; the MP3s are AI conversations about an issue, the issue is the reference.",
   },
@@ -44,7 +45,7 @@ const labels = {
     eyebrow: "Gjithçka për ta mbajtur", heading: "Shkarkime",
     lede: "Çdo botim i faqes si skedar për ta mbajtur, për ta lexuar pa internet ose për ta printuar: libri, udhëzuesi, çdo numër dhe vëllim si PDF, dhe bisedat për numrat si MP3. Në gjuhën tënde, aty ku ekziston.",
     books: "Libri dhe udhëzuesi", review: "Management Review", treatise: treatise.sq.short, floor: magazine.names.sq.name,
-    bookMeta: "Libër · në shqip", guideMeta: `Botimi ${toolsGuide.edition} · ${toolsGuide.editions[0].date.sq}`, earlier: "Botimi {n}",
+    bookMeta: "Libër · në shqip", original: "origjinali shqip", guideMeta: `Botimi ${toolsGuide.edition} · ${toolsGuide.editions[0].date.sq}`, earlier: "Botimi {n}",
     special: "Botim i veçantë", no: "Nr.", volume: "Vëllimi", issue: "Numri", open: "Hape", more: "Të gjithë {n} numrat",
     files: "{n} skedarë", note: "PDF-të janë faqet e printuara; MP3-të janë biseda me AI për një numër, referenca mbetet numri.",
   },
@@ -52,7 +53,7 @@ const labels = {
     eyebrow: "Alles zum Behalten", heading: "Downloads",
     lede: "Jede Publikation der Seite als Datei zum Behalten, offline Lesen oder Drucken: das Buch, der Leitfaden, jede Ausgabe und jeder Band als PDF und die Gespräche über die Ausgaben als MP3. In deiner Sprache, wo es sie gibt.",
     books: "Buch und Leitfaden", review: "Management Review", treatise: treatise.de.short, floor: magazine.names.de.name,
-    bookMeta: "Ein Buch · auf Albanisch", guideMeta: `Ausgabe ${toolsGuide.edition} · ${toolsGuide.editions[0].date.de}`, earlier: "Ausgabe {n}",
+    bookMeta: "Ein Buch · aus dem Albanischen", original: "das albanische Original", guideMeta: `Ausgabe ${toolsGuide.edition} · ${toolsGuide.editions[0].date.de}`, earlier: "Ausgabe {n}",
     special: "Sonderausgabe", no: "Nr.", volume: "Band", issue: "Ausgabe", open: "Öffnen", more: "Alle {n} Ausgaben",
     files: "{n} Dateien", note: "Die PDFs sind die gedruckten Seiten; die MP3s sind KI-Gespräche über eine Ausgabe, maßgeblich ist die Ausgabe.",
   },
@@ -61,7 +62,13 @@ const labels = {
 const sectionsFor = (lang) => {
   const L = labels[lang];
   const books = [
-    { title: book.title, meta: L.bookMeta, page: `/books/${book.slug}.html`, files: [file("PDF", `/media/books/${book.slug}/${book.slug}.pdf`, lang)].filter(Boolean) },
+    {
+      title: editions[lang].title,
+      meta: L.bookMeta,
+      page: `/books/${editions[lang].slug}.html`,
+      // The edition in the reader's language, and with a translation the Albanian original beside it.
+      files: [file("PDF", editions[lang].pdf, lang), lang === "sq" ? null : file("PDF", editions.sq.pdf, lang, L.original)].filter(Boolean),
+    },
     {
       title: toolsGuide[lang].title,
       meta: L.guideMeta,
