@@ -291,3 +291,11 @@ test('Insights: series light up, the next essay beats, search and the chosen top
   assert.match(css, /\.filter-chips \.chip\[aria-pressed="true"\]::before \{[\s\S]*?border-radius: 50%;/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.series-panel, /);
 });
+
+test('Reflections: a warm gold light for the personal pieces, and a sign-up row that glows', () => {
+  assert.match(css, /\.reflection-list a\.list-row::before \{[\s\S]*?color-mix\(in srgb, var\(--gold\) 13%, transparent\)/);
+  assert.match(css, /\.reflection-list \.number time::before \{[\s\S]*?var\(--gold\) 50%/);
+  assert.match(css, /\.reflection-hero::before \{[\s\S]*?animation: reflection-breathe 7s ease-in-out infinite;/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{ \.reflection-hero::before \{ animation: none; \} \}/);
+  assert.match(css, /\.newsletter-row:focus-within \{[\s\S]*?box-shadow: 0 0 0 4px/);
+});
