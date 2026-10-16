@@ -7853,3 +7853,61 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 .essay-checklist-note { margin: 14px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.45; }
 .article-content .essay-checklist-note { margin: 14px 0 0; }
 @media print { .essay-checklist-actions { display: none; } }
+
+/* An essay in motion: the reading bar ends in a small glowing tip, the cover settles into place, a principle or
+   a quote draws its line as it is reached, the section jumped to from the contents greets you, the next essay
+   in the series beats, and the next essay and the tools after the text answer the pointer. */
+.reading-progress span { position: relative; box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 60%, transparent); }
+.essay-tools li a { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.essay-tools li a::before, a.essay-series-next::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 14%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.essay-tools li a:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--blue) 80%, transparent); }
+.essay-tools li a:hover::before, a.essay-series-next:hover::before { opacity: 1; }
+.essay-tools li a strong, .essay-tools li a em, .essay-series-next em { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.essay-tools li a:hover strong { translate: 4px 0; }
+.essay-tools li a:hover em { translate: 3px 0; }
+a.essay-series-next { isolation: isolate; transition: border-color .3s ease, transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s ease; }
+a.essay-series-next:hover, a.essay-series-next:focus-visible { transform: translateY(-4px); box-shadow: 0 26px 56px -34px color-mix(in srgb, var(--blue) 85%, transparent); }
+a.essay-series-next:hover em { translate: 5px 0; }
+.essay-series-end-links a { transition: border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease; }
+.essay-series-end-links a:hover { translate: 0 -2px; box-shadow: 0 12px 26px -18px color-mix(in srgb, var(--blue) 85%, transparent); }
+.article-toc a { transition: color .25s ease, border-color .35s ease, padding-left .35s cubic-bezier(.22, 1, .36, 1); }
+.article-toc a:hover, .article-toc a[aria-current] { padding-left: 18px; }
+.article-content h2[id] { position: relative; }
+.article-content h2[id]:target::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 64px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--blue);
+  box-shadow: 0 0 14px var(--blue);
+  transform-origin: left;
+  animation: ring-arrive 2.2s cubic-bezier(.22, 1, .36, 1) 1 both;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .series-track .series-dots a.is-next { animation: dot-next 2.2s ease-in-out infinite; }
+  .article-hero-media img { animation: cover-settle 1.6s cubic-bezier(.22, 1, .36, 1) both; }
+}
+@keyframes cover-settle { from { scale: 1.08; opacity: .4; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .article-content :is(p.essay-principle, blockquote) { animation: principle-in linear both; animation-timeline: view(); animation-range: entry 10% entry 100%; }
+  }
+}
+@keyframes principle-in { from { border-left-color: transparent; translate: -10px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .article-content h2[id]:target::after { animation: none; opacity: 0; }
+  .essay-tools li a, a.essay-series-next, .essay-series-end-links a, .article-toc a { transition: none; }
+}

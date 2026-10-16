@@ -342,3 +342,14 @@ test('Role pages: rings fill with the planet colour, the ring jumped to greets y
   assert.match(css, /:where\([^)]*\.role-borrowed li, \.role-reading li, \.role-next-card[^)]*\) \{\s*animation: scroll-rise/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.role-borrowed a, \.role-reading a, \.role-next-card, /);
 });
+
+test('Essays: the next essay and the tools answer the pointer, a principle draws its line, the section jumped to greets you, the cover settles', () => {
+  assert.match(css, /\.essay-tools li a::before, a\.essay-series-next::before \{[\s\S]*?radial-gradient\(420px circle at var\(--mx, 30%\)/);
+  assert.match(css, /\.article-content h2\[id\]:target::after \{[\s\S]*?animation: ring-arrive/);
+  assert.match(css, /\.article-content :is\(p\.essay-principle, blockquote\) \{ animation: principle-in linear both; animation-timeline: view\(\);/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.series-track \.series-dots a\.is-next \{ animation: dot-next/);
+  assert.match(css, /\.article-hero-media img \{ animation: cover-settle/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.essay-tools li a, a\.essay-series-next, /);
+  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  assert.match(light, /@keyframes ring-arrive/, 'essays use the light stylesheet, which keeps the arrival line');
+});
