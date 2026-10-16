@@ -453,3 +453,13 @@ test('Operational treatise: the three layers come in one after another, each lig
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.treatise-layer, /);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes layer-bar/);
 });
+
+test('Management Review: "Review" is underlined as the page opens, a cover tilts towards the pointer with a glare', () => {
+  const js = fs.readFileSync('src/script.js', 'utf8');
+  assert.match(js, /\.treatise-layer, \.weekly-card, /);
+  assert.match(js, /card\.style\.setProperty\("--px", Math\.min\(Math\.max\(\(event\.clientX - box\.left\) \/ box\.width, 0\), 1\)\.toFixed\(2\)\)/);
+  assert.match(css, /\.weekly-hero \.weekly-mark::after \{ animation: mark-draw/);
+  assert.match(css, /\.weekly-card:hover \.weekly-card-cover \{ transform: perspective\(700px\) translateY\(-4px\) rotateY\(calc\(\(var\(--px, \.5\) - \.5\) \* 14deg\)\)/);
+  assert.match(css, /\.weekly-card-cover::before \{[\s\S]*?radial-gradient\(220px circle at var\(--mx, 50%\) var\(--my, 0%\)/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes mark-draw/);
+});
