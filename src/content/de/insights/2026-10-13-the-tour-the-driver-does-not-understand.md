@@ -5,7 +5,7 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "Das System plant die Tour mit den Daten, die es hat. Der Fahrer fährt sie unter den Bedingungen, die er hat. Das Problem beginnt, wenn die Organisation nicht von dem lernt, der sie jeden Tag fährt."
+summary: "Das System plant die Tour mit seinen Daten, der Fahrer fährt sie unter realen Bedingungen. Das Problem beginnt, wenn die Organisation nicht vom Fahrer lernt."
 teaser: Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt.
 description: "Die Tour des Systems und die des Fahrers: warum keiner immer recht hat, vier Schritte von der Ortskenntnis zur Verbesserung, und eine Karte."
 deck: "Der dritte Essay der Reihe „Das System ist schneller als Sie“: die geplante Tour und die gefahrene Tour, der neue Fahrer und die Ortskenntnis, vier Schritte, die das, was der Fahrer weiß, in eine Verbesserung des Plans verwandeln, und eine Karte für ein Problem, das sich wiederholt."
@@ -15,84 +15,78 @@ relatedTools:
 checklist:
   title: Ein Problem, das sich auf einer Tour wiederholt
   fill: true
-  note: "Eine Karte für jedes Problem, auf das Fahrer mehr als einmal auf derselben Tour oder im selben Gebiet stoßen. Ausfüllen, wenn Sie es zum zweiten Mal hören, nicht zum fünften."
+  note: "Eine Karte für jedes Problem, auf das Fahrer mehr als einmal auf derselben Tour oder im selben Gebiet stoßen. Füllen Sie sie aus, wenn Sie davon zum zweiten Mal hören, nicht erst beim fünften Mal."
   items:
     - label: "Worauf stößt der Fahrer, und wo?"
       hint: "Eine Einfahrt, eine Uhrzeit, eine Adresse, eine Reihenfolge. In den Worten des Fahrers, noch nicht übersetzt."
     - label: "Vorübergehendes Hindernis oder dauerhafter Fehler?"
-      hint: "Eine heute gesperrte Straße, oder jede Woche dasselbe Problem? Das Erste geht vorbei, das Zweite kommt wieder."
+      hint: "Eine heute gesperrte Straße oder jede Woche dasselbe Problem? Das Erste geht vorbei, das Zweite kommt wieder."
     - label: "Wer prüft es, bevor sich etwas ändert?"
       hint: "Ein Name oder eine Rolle. Ein ungeprüfter Hinweis kann den Plan für alle verderben."
     - label: "Wer kann die Änderung vorschlagen, wer genehmigt sie, wo wird sie festgehalten?"
-      hint: "Wenn Sie es nicht wissen, ist das das Erste, was Sie herausfinden müssen."
+      hint: "Wenn Sie es nicht wissen, finden Sie das zuerst heraus."
     - label: "Wie bekommt der nächste Fahrer die Korrektur?"
       hint: "Der, der morgen auf diese Tour kommt, oder der, der den erfahrenen Fahrer an dem Tag vertritt, an dem er fehlt."
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - "Wenn ein Fahrer Ihnen etwas über eine Tour sagt, schreiben Sie es in seinen Worten und mit der Tour auf, bevor Sie es bewerten."
+  - "Wenn ein Fahrer Ihnen etwas über eine Tour sagt, notieren Sie es in seinen Worten und mit der Tour, bevor Sie es bewerten."
   - "Wenn Sie dasselbe zum zweiten Mal hören, fragen Sie: ein Hindernis von heute oder ein Fehler, der wiederkommt?"
   - "Finden Sie vor Ende der Woche heraus, wer eine Änderung an einer Tour genehmigen kann und wo sie festgehalten wird. Schreiben Sie es auf."
 ---
 
-Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt.
+In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich ein Bild verwendet: eine Tour, geplant für einen neuen Fahrer, ein Laden, der um zehn öffnet, ein Stopp, der auf halb neun gelegt ist. Dieser Essay betrachtet dasselbe Bild von der anderen Seite: nicht das System, das die Öffnungszeiten nicht kannte, sondern den Fahrer, der sie kennt, und die Frage, wo sein Wissen landet.
 
-In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich ein Bild benutzt: eine Tour, geplant für einen neuen Fahrer, ein Laden, der um zehn öffnet, ein Stopp, auf halb neun gelegt. Dieser Essay nimmt dieses Bild von der anderen Seite. Nicht das System, das die Öffnungszeiten nicht kannte, sondern den Fahrer, der sie kennt, und die Frage, wohin das geht, was er weiß.
+Grundlage ist meine Arbeit auf der letzten Meile: die Koordination von Fahrern, Touren und operativen Problemen während der Zustellung, heute als Disponent aus der Ferne. Dazu kommen die Fahrer in der Ramp-up-Phase, die, wie ich in [Tage mit hohem Volumen: der Standard unter Druck](/de/insights/high-volume-days/) geschrieben habe, mit den Verfahren noch nicht ganz vertraut waren, und die Umstellung der Tourenplanung im August 2025.
 
-## Was ich habe und was nicht
-
-Was ich habe: die Arbeit auf der letzten Meile mit der Koordination von Fahrern, Touren und operativen Problemen während der Zustellung, heute als Dispatcher aus der Ferne. Fahrer in der Ramp-up-Phase, die, wie ich in [Tage mit hohem Volumen: der Standard unter Druck](/de/insights/high-volume-days/) geschrieben habe, noch nicht ganz mit den Verfahren vertraut waren. Und die Änderung der Tourenplanung im August 2025, die realistischere Pläne zum Ziel hatte und die Nutzung von Informationen aus dem Feld vorsah.
-
-Was ich nicht habe: einen Fahrer, der mir konkret gesagt hat, dass seine Tour keinen Sinn ergab. Eine Liste der Fragen, die Fahrer mir am häufigsten zu Touren stellen. Wie neue Fahrer die Touren lernten, und ob die Ortskenntnis die Leistung veränderte. Wer genau die Befugnis hatte, eine Tour während des Tages zu ändern, und wie das technisch ging. Und ob das, was Fahrer über ein Gebiet wussten, irgendwo festgehalten wurde.
-
-Das ist viel „ich weiß es nicht“ für einen Essay. Aber genau darum geht es. Was ein Fahrer über seine eigene Tour weiß, gehört zu den Dingen, die ein Betrieb am wenigsten aufgeschrieben hat, selbst wenn er ein neues System hat, das es nutzen will. Dieser Essay ist also meine Analyse und das, was ich heute empfehlen würde, kein Prozess, den ich aufgebaut habe. Die Szenen darin sind Bilder.
+Ich habe keinen Fall, in dem mir ein Fahrer ausdrücklich gesagt hätte, seine Tour ergebe keinen Sinn. Ich weiß nicht, wie neue Fahrer die Touren lernten, ob die Ortskenntnis die Leistung veränderte, wer genau eine Tour während des Tages ändern durfte und wie das technisch ging, und ob das, was Fahrer über ein Gebiet wussten, irgendwo festgehalten wurde. Das ist viel „Ich weiß es nicht“ für einen Essay, und genau darum geht es: Was ein Fahrer über seine eigene Tour weiß, gehört zu den Dingen, die ein Betrieb am wenigsten aufgeschrieben hat, selbst wenn ein neues System es nutzen will. Was folgt, ist also meine Analyse und meine Empfehlung von heute, kein Prozess, den ich aufgebaut habe; die Szenen sind Bilder.
 
 ## Die geplante Tour und die gefahrene Tour
 
-Ein System plant eine Tour auf Grundlage der Daten, die es hat: die Adressen, die Lieferzeiten, die Entfernungen, die Durchschnittszeiten. Der Fahrer dagegen fährt die Tour unter den Bedingungen, die er hat: die Einfahrt, die hinter dem Gebäude liegt, das Tor, das sich nur mit der Klingel öffnet, der Laden, der über Mittag schließt, die Straße, die jeden Dienstag vom Markt blockiert ist.
+Ein System plant eine Tour mit den Daten, die es hat: Adressen, Lieferzeiten, Entfernungen, Durchschnittszeiten. Der Fahrer fährt sie unter den Bedingungen, die er vorfindet: die Einfahrt hinter dem Gebäude, das Tor, das erst nach dem Klingeln aufgeht, der Laden, der über Mittag schließt, die Straße, die jeden Dienstag der Markt blockiert.
 
-Keines von beiden ist an sich falsch. Es sind zwei Beschreibungen derselben Tour, von zwei verschiedenen Orten aus. Die erste ist schnell, vollständig für alle Touren auf einmal, und weiß nichts, was man ihr nicht aufgeschrieben hat. Die zweite ist langsam, beschränkt auf die Gebiete, die der Fahrer kennt, und weiß Dinge, die niemand aufgeschrieben hat.
+Keines von beiden ist an sich falsch. Es sind zwei Beschreibungen derselben Tour, von zwei verschiedenen Standorten aus. Die erste ist schnell, deckt alle Touren auf einmal ab und weiß nichts, was man ihr nicht aufgeschrieben hat. Die zweite ist langsam, auf die Gebiete beschränkt, die der Fahrer kennt, und weiß Dinge, die niemand aufgeschrieben hat.
 
-Die Änderung vom August 2025 hat das anerkannt, in ihrer eigenen Sprache: Ein realistischerer Plan braucht auch die Informationen aus dem Feld. Aber das beweist nicht, dass es einen vollständigen Prozess gab, in dem jede Korrektur eines Fahrers festgehalten wurde und den Plan verbesserte. Und ohne diesen Prozess bleibt die Information aus dem Feld dort, wo sie entstanden ist: im Kopf des Fahrers.
+Die Umstellung vom August 2025 hat das in ihrer eigenen Sprache anerkannt: Sie zielte auf realistischere Pläne und sah vor, Informationen aus dem Feld zu nutzen. Das beweist aber nicht, dass es einen vollständigen Prozess gab, in dem jede Korrektur eines Fahrers festgehalten wurde und den Plan verbesserte. Ohne einen solchen Prozess bleibt die Information aus dem Feld, wo sie entstanden ist: im Kopf des Fahrers.
 
 **Das System plant die Tour mit den Daten, die es hat. Der Fahrer fährt sie unter den Bedingungen, die er hat. Keiner hat das Ganze ohne den anderen.**
 
 ## Weder der Fahrer noch das System
 
-Es wäre leicht, diesen Essay als Geschichte vom klugen Fahrer und vom blinden System zu schreiben. Es wäre nicht wahr.
+Es wäre leicht, diesen Essay als Geschichte vom klugen Fahrer und vom blinden System zu erzählen. Wahr wäre sie nicht.
 
-Der Fahrer hat nicht immer recht. Ein Fahrer kann die Reihenfolge ändern, weil sie ihm besser vorkommt, und sein Weg kann länger sein oder eine Lieferung verspäten, die ein Zeitfenster hatte. Ein Hindernis, auf das er einmal gestoßen ist, ist vielleicht nicht mehr da. Und ein Fahrer in der Ramp-up-Phase, der noch nicht mit den Verfahren vertraut ist, nennt vielleicht etwas eine „Tour ohne Sinn“, das Sinn ergibt, das ihm aber niemand erklärt hat.
+Der Fahrer hat nicht immer recht. Er kann die Reihenfolge ändern, weil sie ihm besser erscheint, und sein Weg ist dann vielleicht länger oder verspätet eine Lieferung mit Zeitfenster. Ein Hindernis, auf das er einmal gestoßen ist, ist vielleicht nicht mehr da. Und ein Fahrer in der Ramp-up-Phase, der mit den Verfahren noch nicht vertraut ist, nennt vielleicht etwas eine „Tour ohne Sinn“, das durchaus Sinn ergibt, nur hat es ihm niemand erklärt.
 
-Die Frage ist also nicht, wer recht hat. Die Frage ist: Wenn ein Fahrer etwas entdeckt, das das System nicht vorhergesehen hat, hat die Organisation eine Möglichkeit, diese Information zu prüfen? Wenn ja, kann die Information zu einer Verbesserung werden. Wenn nein, gibt es nur zwei Wege: Entweder ignoriert der Fahrer das System still, oder das System ignoriert den Fahrer.
+Wer recht hat, ist deshalb weniger wichtig als eine andere Frage: Hat die Organisation einen Weg, die Information zu prüfen, wenn ein Fahrer etwas entdeckt, das das System nicht vorhergesehen hat? Wenn ja, kann daraus eine Verbesserung werden. Wenn nicht, bleiben nur zwei Möglichkeiten: Entweder ignoriert der Fahrer stillschweigend das System, oder das System ignoriert den Fahrer.
 
 ## Der neue Fahrer und der fehlende Fahrer
 
-Stellen Sie sich ein Gebiet vor, das nur ein Fahrer gut kennt. Er fährt die Tour jeden Tag und fährt sie gut, weil er weiß, wo er parken muss, welche Tür er nehmen soll, welchen Kunden er für später lässt. Nichts davon steht im Plan. Der Plan braucht es nicht, weil der Fahrer da ist.
+Stellen Sie sich ein Gebiet vor, das nur ein Fahrer gut kennt. Er fährt die Tour jeden Tag, und er fährt sie gut, weil er weiß, wo er parken kann, welche Tür er nehmen muss und welchen Kunden er besser für später lässt. Nichts davon steht im Plan, und solange er da ist, braucht der Plan es auch nicht.
 
-Dann fehlt er eines Tages. Die Tour übernimmt ein neuer Fahrer, vielleicht in der Ramp-up-Phase. Er folgt dem Plan, weil der Plan alles ist, was er hat. Und der Tag stockt an denselben Stellen, an denen der erfahrene Fahrer nie ins Stocken kam.
+Dann fehlt er eines Tages. Ein neuer Fahrer übernimmt die Tour, vielleicht noch in der Ramp-up-Phase, und folgt dem Plan, weil der Plan alles ist, was er hat. Der Tag stockt genau an den Stellen, an denen der erfahrene Fahrer nie ins Stocken kam.
 
-Das ist kein Fall, den ich dokumentiert habe. Es ist das Bild dessen, was ich in [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) „volles Misstrauen“ genannt habe: Wissen, das in einem Kopf bleibt. Und es ist dasselbe, worüber ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben habe, nur fehlt hier nicht der Trainer. Es fehlt der Ort, an dem sein Wissen hätte aufgeschrieben werden können.
+Das ist das Bild dessen, was ich in [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) „volles Misstrauen“ genannt habe: Wissen, das in einem Kopf bleibt. Es ist auch das, worüber ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben habe, nur fehlt hier nicht der Trainer, sondern ein Ort, an dem das Wissen des Fahrers hätte aufgeschrieben werden können.
 
-**Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt.** Nicht weil er keinen Wert hat. Sondern weil sein Wert zu groß ist, um nur an einem Ort zu bleiben.
+Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt. Das sagt nichts gegen seinen Wert: Was er weiß, ist zu wertvoll, um nur an einem Ort zu liegen.
 
 ## Vier Schritte vom Fahrer zum Plan
 
-Ich habe einen solchen Prozess nicht aufgebaut, und ich weiß nicht, ob es dort, wo ich gearbeitet habe, einen gab. Aber heute würde ich mich darauf konzentrieren, wie Informationen von Fahrern zu einer Verbesserung der Planung werden, und ich würde diese vier Schritte empfehlen.
+Ob es dort, wo ich gearbeitet habe, einen solchen Prozess gab, weiß ich nicht. Heute würde ich vier Schritte empfehlen, damit aus dem Wissen der Fahrer eine bessere Planung wird:
 
-1. **Ein einfacher Weg, ein Problem zu melden, das sich auf einer Tour wiederholt.** Einfach heißt, der Fahrer erledigt es in einer Minute, am Ende der Tour, ohne langes Formular. Wenn das Melden länger dauert als die stille Korrektur, gewinnt die Stille.
-2. **Die Unterscheidung zwischen einem vorübergehenden Hindernis und einem dauerhaften Fehler.** Eine heute gesperrte Straße ist kein Planungsfehler. Dieselbe falsche Einfahrt jede Woche schon. Das Erste geht von selbst vorbei, das Zweite kommt wieder.
-3. **Eine verantwortliche Person, die die Information prüft, bevor die Tour geändert wird.** Nicht weil man dem Fahrer nicht vertraut, sondern weil eine Änderung im Plan alle betrifft, die die Tour danach fahren.
-4. **Ein Weg, damit die bestätigte Korrektur auch den anderen Fahrern zur Verfügung steht.** Sonst hat die Korrektur das Problem für einen Menschen gelöst, für einen Tag.
+1. **Ein einfacher Weg, ein Problem zu melden, das sich auf einer Tour wiederholt.** Einfach heißt: Der Fahrer erledigt es in einer Minute, am Ende der Tour, ohne langes Formular. Dauert das Melden länger als die stille Korrektur, gewinnt die Stille.
+2. **Die Unterscheidung zwischen einem vorübergehenden Hindernis und einem dauerhaften Fehler.** Eine heute gesperrte Straße ist kein Planungsfehler, dieselbe falsche Einfahrt jede Woche schon. Das Erste geht von selbst vorbei, das Zweite kommt wieder.
+3. **Eine verantwortliche Person, die die Information prüft, bevor die Tour geändert wird.** Eine Änderung im Plan betrifft alle, die die Tour danach fahren, deshalb wird sie auch dann geprüft, wenn man dem Fahrer vertraut.
+4. **Ein Weg, auf dem die bestätigte Korrektur auch die anderen Fahrer erreicht.** Sonst hat sie das Problem für einen Menschen gelöst, für einen Tag.
 
-Und wie in den ersten Essays: Es muss klar sein, wer die Änderung vorschlagen kann, wer sie genehmigt und wie sie festgehalten wird.
+Und wie in den ersten Essays muss klar sein, wer die Änderung vorschlagen kann, wer sie genehmigt und wie sie festgehalten wird.
 
 ## Was ich anders machen würde
 
-Als Dispatcher gehören die Kommunikation mit den Fahrern und die Verfolgung von Problemen während der Zustellung zu meiner Arbeit. Aber was ich heute anders machen würde, liegt nicht im Gespräch. Es liegt danach. Ein Problem, das mir ein Fahrer sagt und das ich am Telefon löse, ist für diesen Tag gelöst. Wenn ich es nicht irgendwo aufschreibe, wo jemand anderes es finden kann, löst es morgen wieder jemand anderes, am Telefon.
+Als Disponent gehört es zu meiner Arbeit, mit den Fahrern zu sprechen und Probleme während der Zustellung zu verfolgen. Was ich heute anders machen würde, kommt nach dem Gespräch. Ein Problem, das mir ein Fahrer schildert und das ich am Telefon löse, ist für diesen Tag gelöst. Schreibe ich es nicht dort auf, wo jemand anderes es finden kann, löst es morgen wieder jemand anderes, am Telefon.
 
-**Das Problem ist nicht nur, wenn das System die Tour nicht kennt. Das Problem ist, wenn die Organisation nicht von den Menschen lernt, die sie jeden Tag fahren.**
+**Ein Problem ist es nicht nur, wenn das System die Tour nicht kennt. Zum Problem wird es, wenn die Organisation nicht von den Menschen lernt, die sie jeden Tag fahren.**
 
 ## Ein Problem, das sich auf einer Tour wiederholt
 
-Die Karte unten ist für ein Problem, auf das Fahrer mehr als einmal auf derselben Tour oder im selben Gebiet stoßen: worauf sie stoßen und wo, ob es ein vorübergehendes Hindernis oder ein dauerhafter Fehler ist, wer es prüft, wer die Änderung vorschlägt und wer sie genehmigt, und wie der nächste Fahrer die Korrektur bekommt. Füllen Sie sie aus, wenn Sie es zum zweiten Mal hören, nicht zum fünften. Die [Verspätungsanalyse](/de/tools/delay-analyzer/) zeigt Ihnen, wo die Verspätung beginnt, an der Rampe oder auf der Straße, damit sich ein Problem der Tour von einem Problem der Beladung unterscheiden lässt, bevor Sie es zum Plan bringen.
+Die Karte unten gilt für ein Problem, auf das Fahrer mehr als einmal auf derselben Tour oder im selben Gebiet stoßen. Füllen Sie sie aus, wenn Sie davon zum zweiten Mal hören, nicht erst beim fünften Mal. Die [Verspätungsanalyse](/de/tools/delay-analyzer/) zeigt Ihnen, wo eine Verspätung beginnt, an der Rampe oder auf der Straße, damit Sie ein Problem der Tour von einem Beladungsproblem unterscheiden können, bevor Sie es in die Planung tragen.
 
-**Die Tour, die der Fahrer nicht versteht, ist manchmal ein Fehler des Plans, manchmal etwas, das ihm niemand erklärt hat. Den Unterschied erkennt man nur, wenn jemand zuhört, es prüft und aufschreibt.**
+Die Tour, die der Fahrer nicht versteht, ist manchmal ein Fehler im Plan und manchmal etwas, das ihm niemand erklärt hat. Was davon zutrifft, zeigt sich erst, wenn jemand dem Fahrer zuhört, prüft, was er sagt, und es dort aufschreibt, wo der nächste Fahrer es findet.
