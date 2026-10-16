@@ -262,3 +262,14 @@ test('Contact: the two ways to write are cards with a planet that answer the poi
   assert.match(css, /\.contact-card::before \{[\s\S]*?radial-gradient\(380px circle at var\(--mx, 30%\) var\(--my, 50%\)/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.contact-card, /);
 });
+
+test('Home: the featured essay answers the pointer, the outline fills with blue and the manifesto comes in line by line', () => {
+  assert.match(css, /\.feature-card::before \{[\s\S]*?z-index: -1;[\s\S]*?radial-gradient\(560px circle at var\(--mx, 70%\) var\(--my, 20%\)/);
+  assert.match(css, /\.feature-card:hover::after \{ color: color-mix\(in srgb, var\(--blue\) 40%, transparent\);/);
+  assert.match(css, /\.meta-strip strong::before \{[\s\S]*?border-radius: 50%;/);
+  const scroll = css.slice(css.indexOf('.cta h2 span {\n      background:') - 200, css.indexOf('@keyframes manifesto-in'));
+  assert.match(scroll, /@supports \(animation-timeline: view\(\)\) \{\s*@media \(prefers-reduced-motion: no-preference\) \{/, 'only where scroll-driven animations run, and not for reduced motion');
+  assert.match(scroll, /animation: cta-fill linear both;/);
+  assert.match(scroll, /\.manifesto-line span:nth-child\(4\) \{ animation-range: entry 55% cover 40%; \}/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.feature-card, \.meta-strip > div, /);
+});
