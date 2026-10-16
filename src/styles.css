@@ -1999,6 +1999,43 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .challenge-essays ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .challenge-essays li a { display: grid; gap: 6px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-decoration: none; background: var(--card); transition: border-color .2s ease, transform .2s ease; }
 .challenge-essays li a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+/* Challenges: the essays of a challenge answer the pointer like the other cards (a lift, a blue shadow, the light
+   that follows the pointer, a title that steps forward); the index chips lift and their numbers glow; and the
+   challenge reached from the index (#red-number …) flashes a band of light once, so the eye lands on it. */
+.challenge-essays li a { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.challenge-essays li a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 13%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.challenge-essays li a:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--blue) 80%, transparent); }
+.challenge-essays li a:hover::before { opacity: 1; }
+.challenge-essays li a strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.challenge-essays li a:hover strong { translate: 4px 0; }
+.challenge-index a:hover { translate: 0 -2px; box-shadow: 0 12px 26px -18px color-mix(in srgb, var(--blue) 85%, transparent); }
+.challenge-index a { transition: border-color .25s ease, color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.challenge-index a b { transition: text-shadow .3s ease; }
+.challenge-index a:hover b { text-shadow: 0 0 12px color-mix(in srgb, var(--blue) 80%, transparent); }
+.challenge { position: relative; isolation: isolate; }
+.challenge::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 340px;
+  z-index: -1;
+  background: radial-gradient(600px 260px at 200px 120px, color-mix(in srgb, var(--blue) 16%, transparent), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+}
+.challenge:target::before { animation: challenge-arrive 1.8s ease-out 1; }
+@keyframes challenge-arrive { 0%, 25% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .challenge:target::before { animation: none; } }
 .challenge-essays li a small { color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
 .challenge-essays li a strong { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; letter-spacing: -.02em; line-height: 1.15; }
 .challenge-essays li a > span:not(.row-badges) { color: var(--muted); font-size: .95rem; line-height: 1.45; }

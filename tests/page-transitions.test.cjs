@@ -317,3 +317,11 @@ test('Field Notes: "Copy" says it is done with a short glow, and a shared note g
   assert.match(css, /\.note-card:target \{[\s\S]*?animation: note-arrive 2\.2s ease-out 1;/);
   assert.match(css, /\.note-actions \.is-done,\s*\.share-links \.is-done \{[\s\S]*?color: var\(--ok\);/);
 });
+
+test('Challenges: essays answer the pointer, index chips glow, and the challenge reached from the index flashes once', () => {
+  assert.match(css, /\.challenge-essays li a::before \{[\s\S]*?radial-gradient\(380px circle at var\(--mx, 30%\) var\(--my, 0%\)/);
+  assert.match(css, /\.challenge:target::before \{ animation: challenge-arrive 1\.8s ease-out 1; \}/);
+  assert.match(css, /\.challenge::before \{[\s\S]*?inset: 0 0 auto;/, 'the light stays inside the page width');
+  assert.match(css, /\.challenge-index a:hover b \{ text-shadow:/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.challenge-essays li a, /);
+});
