@@ -36,7 +36,7 @@
       {%- set others = [] %}
       {%- for edition in editions %}{% if edition[0] != book.language and books[edition[0]] %}{% set _ = others.push(edition) %}{% endif %}{% endfor %}
       {%- if others.length %}
-      <p class="book-editions">{{ "Also in:" | t(lang) }} {% for edition in others %}<a href="{{ ('/books/' + book.slug + '.html') | local(edition[0]) }}" hreflang="{{ edition[0] }}" lang="{{ edition[0] }}">{{ edition[1] }}</a>{% if edition[0] == "sq" %} <span>{{ "(the original)" | t(lang) }}</span>{% endif %}{% if not loop.last %}<span aria-hidden="true"> · </span>{% endif %}{% endfor %}</p>
+      <p class="book-languages">{{ "Also in:" | t(lang) }} {% for edition in others %}<a href="{{ ('/books/' + book.slug + '.html') | local(edition[0]) }}" hreflang="{{ edition[0] }}" lang="{{ edition[0] }}">{{ edition[1] }}</a>{% if edition[0] == "sq" %} <span>{{ "(the original)" | t(lang) }}</span>{% endif %}{% if not loop.last %}<span aria-hidden="true"> · </span>{% endif %}{% endfor %}</p>
       {%- endif %}
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ 'Open the book' | t(lang) }}">

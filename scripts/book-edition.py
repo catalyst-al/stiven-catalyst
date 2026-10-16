@@ -251,6 +251,13 @@ def fitted(text, font, size, width):
     return min(size, size * width / pdfmetrics.stringWidth(text, font, size))
 
 
+def snug(text, font, size, width, most=0.04):
+    """The size of a title or a closing line: its lines ("|") are kept whole by setting them up to 4% smaller,
+    which the eye does not see; a line longer than that wraps at the original size instead."""
+    smallest = min(fitted(line.strip(), font, size, width) for line in text.split("|"))
+    return smallest if smallest >= size * (1 - most) else size
+
+
 def cover(canvas, page, meta, images):
     background(canvas, NAVY)
     spaced(canvas, meta["author"], 41, 55, "SansSemiBold", 10.2, white, 1.9)
@@ -268,7 +275,7 @@ def cover(canvas, page, meta, images):
 def title_page(canvas, page, meta):
     background(canvas, PAPER)
     spaced(canvas, meta["author"], 41, 58, "SansSemiBold", 9.1, NAVY, 1.5)
-    bottom = place(canvas, paragraph(page["title"], style("Display", 30, 35, NAVY)), 41, 96, WIDE)
+    bottom = place(canvas, paragraph(page["title"], style("Display", snug(page["title"], "Display", 30, WIDE), 35, NAVY)), 41, 96, WIDE)
     place(canvas, paragraph(page["subtitle"], style("SerifItalic", 11.1, 16, GOLD)), 41, max(144, bottom + 13), WIDE)
     rule(canvas, 41, 71, 214, 0.65)
     place(canvas, paragraph(page["dedication"], style("SerifItalic", 11.2, 17, NAVY, TA_JUSTIFY)), 41, 236, FRAME)
@@ -302,14 +309,15 @@ def contents(canvas, page, meta, pages):
     spaced(canvas, meta["running-head"], x0, 27, "SansSemiBold", 6.5, GREY, 0.75)
     place(canvas, paragraph(page["contents"], style("Display", 25, 27.8, NAVY)), x0, 65, FRAME)
     for row, (label, title, number) in enumerate(chapters_of(pages)):
+        # Label, title, page number: the order of the original, which book-pages.py reads the contents in.
         spaced(canvas, label, x0, 140 + 44 * row, "SansSemiBold", 6.2, GOLD, 0.2)
-        canvas.setFillColor(NAVY)
-        canvas.setFont("Sans", 9.5)
-        canvas.drawRightString(x0 + FRAME, H - 142 - 44 * row, f"{number:02d}")
         width = x0 + FRAME - 24 - (x0 + 48)
         if pdfmetrics.stringWidth(title, "Serif", 10.6) > width:
             raise SystemExit(f"page 03: the chapter title '{title}' does not fit on one line of the contents")
         place(canvas, paragraph(title, style("Serif", 10.6, 14.3, NAVY)), x0 + 48, 132 + 44 * row, width)
+        canvas.setFillColor(NAVY)
+        canvas.setFont("Sans", 9.5)
+        canvas.drawRightString(x0 + FRAME, H - 142 - 44 * row, f"{number:02d}")
     note = paragraph(page["contents-note"], style("Sans", 8.1, 12, GREY))
     note.wrap(FRAME, H)
     note.drawOn(canvas, x0, 43)
@@ -326,7 +334,7 @@ def back_cover(canvas, page, meta, images):
     if top - 10 > image["top"] - 4:
         raise SystemExit("page 33: the description reaches the photograph; it has to be shorter")
     photo(canvas, image, 0, image["top"], W, image["height"])
-    place(canvas, paragraph(page["quote"], style("DisplayItalic", 12.6, 18, white)), 41, H - 141, WIDE)
+    place(canvas, paragraph(page["quote"], style("DisplayItalic", snug(page["quote"], "DisplayItalic", 12.6, WIDE), 18, white)), 41, H - 141, WIDE)
     spaced(canvas, f"{meta['author']}  /  {meta['year']}", 41, H - 42, "SansSemiBold", 7.7, white, 0.8)
 
 
@@ -367,7 +375,7 @@ def layout(page, images, body, x0):
             continue
         if block["kind"] == "quote":
             top += 18 - body["gap"]
-            para = paragraph(block["text"], style("DisplayItalic", 12.3, 18, NAVY))
+            para = paragraph(block["text"], style("DisplayItalic", snug(block["text"], "DisplayItalic", 12.3, FRAME), 18, NAVY))
             width = FRAME
         elif block["kind"] == "dialogue":
             para = Paragraph("<br/>".join(escape(line) for line in block["lines"]), style("Serif", body["size"], body["dialogue"], INK))
