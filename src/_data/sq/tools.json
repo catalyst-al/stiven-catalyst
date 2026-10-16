@@ -11,7 +11,7 @@
     "name": "5 Whys",
     "type": "Fletë pune",
     "time": "10 min",
-    "summary": "Nga simptoma te një shkak që mund ta ndryshoni, pastaj një kundërmasë, një përgjegjës dhe një kontroll. Printojeni ose ruajeni si PDF.",
+    "summary": "Nga simptoma te një shkak që mund ta ndryshosh, pastaj një kundërmasë, një përgjegjës dhe një kontroll. Printoje ose ruaje si PDF.",
     "url": "/sq/tools/five-whys/",
     "cta": "Hap fletën e punës"
   },
@@ -19,7 +19,7 @@
     "name": "Kontrolli i dëmeve",
     "type": "Magazinë",
     "time": "Vazhdimisht",
-    "summary": "Regjistroni njësitë e dëmtuara sipas hapit të procesit dhe shkakut. Shkalla e dëmeve, DPMO dhe niveli sigma, shkaqet e pakta pas shumicës së dëmeve dhe ku të filloni.",
+    "summary": "Regjistro njësitë e dëmtuara sipas hapit të procesit dhe shkakut. Shkalla e dëmeve, DPMO dhe niveli sigma, shkaqet e pakta pas shumicës së dëmeve dhe ku të fillosh.",
     "url": "/sq/tools/damage-control/",
     "cta": "Hap regjistrin e dëmeve"
   },
@@ -27,7 +27,7 @@
     "name": "Kontrolli i plotësisë",
     "type": "Magazinë",
     "time": "Vazhdimisht",
-    "summary": "Regjistroni porositë që dolën pa të gjithë artikujt ose pakot. Shkalla, DPMO dhe niveli sigma, shkaqet pas shumicës së gabimeve dhe ku lindin.",
+    "summary": "Regjistro porositë që dolën pa të gjithë artikujt ose pakot. Shkalla, DPMO dhe niveli sigma, shkaqet pas shumicës së gabimeve dhe ku lindin.",
     "url": "/sq/tools/incomplete-control/",
     "cta": "Hap regjistrin e porosive"
   },
@@ -35,7 +35,7 @@
     "name": "Analiza e vonesave",
     "type": "Magazinë",
     "time": "Vazhdimisht",
-    "summary": "Regjistroni orët e planifikuara dhe reale të linjave. Përqindja në kohë, sa vonesë nis te rampa dhe sa në rrugë, arsyet dhe orët pas saj.",
+    "summary": "Regjistro orët e planifikuara dhe reale të linjave. Përqindja në kohë, sa vonesë nis te rampa dhe sa në rrugë, arsyet dhe orët pas saj.",
     "url": "/sq/tools/delay-analyzer/",
     "cta": "Hap regjistrin e linjave"
   },
@@ -43,7 +43,7 @@
     "name": "Sigma dhe karta e kontrollit",
     "type": "Six Sigma",
     "time": "5 min",
-    "summary": "Ktheni defektet në nivel sigma, bashkoni në kohë, pa dëme dhe të plota në dorëzimin e përsosur, dhe shihni nëse një ditë e keqe është sinjal apo zhurmë.",
+    "summary": "Ktheji defektet në nivel sigma, bashko përqindjet në kohë, pa dëme dhe të plota në dorëzimin e përsosur, dhe shih nëse një ditë e keqe është sinjal apo zhurmë.",
     "url": "/sq/tools/sigma-control-chart/",
     "cta": "Hap llogaritësin"
   },
@@ -59,7 +59,7 @@
     "name": "Last-Mile CX Control Tower",
     "type": "Milja e fundit",
     "time": "Çdo javë",
-    "summary": "Perfect Delivery për çdo porosi, në kohë, të paplota, dëme, zinxhiri i ftohtë, ngarkimi dhe nisjet, kartat e partnerëve dhe shoferëve, rreziku i linjave, Pareto e shkaqeve, veprimet dhe rishikimi javor. Një analizë e thelluar për një dështim: ku përqendrohet, rreshtat e evidencës dhe një hetim që bëhet veprim i verifikuar. Lexon librin tuaj Excel.",
+    "summary": "Perfect Delivery për çdo porosi, në kohë, të paplota, dëme, zinxhiri i ftohtë, ngarkimi dhe nisjet, kartat e partnerëve dhe shoferëve, rreziku i linjave, Pareto e shkaqeve, veprimet dhe rishikimi javor. Një analizë e thelluar për një dështim: ku përqendrohet, rreshtat e evidencës dhe një hetim që bëhet veprim i verifikuar. Lexon librin tënd Excel.",
     "url": "/sq/tools/cx-control-tower/",
     "cta": "Hap qendrën e kontrollit"
   },
@@ -83,7 +83,7 @@
     "name": "Shift Pulse",
     "type": "Pasqyrë",
     "time": "1 min",
-    "summary": "Dëmet, porositë e paplota, linjat me vonesë dhe çështjet e hapura të dorëzimit në një pamje, sipas ditës ose javës. Grafikë trendi dhe përqindje, sinjalizime për ato mbi normalen dhe një përmbledhje për ta kopjuar ose printuar.",
+    "summary": "Dëmet, porositë e paplota, linjat me vonesë dhe çështjet e hapura të dorëzimit në një pamje, sipas ditës ose javës. Grafikë të ecurisë dhe përqindje, sinjalizime për ato mbi normalen dhe një përmbledhje për ta kopjuar ose printuar.",
     "url": "/sq/tools/shift-pulse/",
     "cta": "Hap Shift Pulse"
   },
@@ -99,7 +99,7 @@
     "name": "CV për ATS",
     "type": "Karriera",
     "time": "10 min",
-    "summary": "Ngarkoni CV-në që keni, si PDF ose Word. Merrni një version të pastër me një kolonë që programet e rekrutimit e lexojnë, të krahasuar me njoftimin e punës, si PDF, Word ose tekst.",
+    "summary": "Ngarko CV-në që ke, si PDF ose Word. Merr një version të pastër me një kolonë që programet e rekrutimit e lexojnë, të krahasuar me njoftimin e punës, si PDF, Word ose tekst.",
     "url": "/sq/tools/ats-cv/",
     "cta": "Ktheje CV-në"
   },
@@ -107,7 +107,7 @@
     "name": "Letër motivimi",
     "type": "Karriera",
     "time": "15 min",
-    "summary": "Letra me të njëjtin dizajn si CV-ja juaj, me të dhënat e marra prej saj dhe një draft të parë nga disa përgjigje. PDF ose Word.",
+    "summary": "Letra me të njëjtin dizajn si CV-ja jote, me të dhënat e marra prej saj dhe një draft të parë nga disa përgjigje. PDF ose Word.",
     "url": "/sq/tools/cover-letter/",
     "cta": "Shkruaj letrën"
   }
