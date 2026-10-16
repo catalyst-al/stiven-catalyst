@@ -491,3 +491,10 @@ test('The book: the title comes into focus, the book turns towards the pointer, 
   assert.match(css, /\.book-closing blockquote p \{ animation: closing-words/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes closing-words/);
 });
+
+test('Tools guide: each change of an edition lights its mark as it is reached, an earlier edition points its arrow down', () => {
+  assert.match(css, /\.book-editions li::before \{ animation: edition-mark linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.book-editions a\[download\]::after \{ content: "↓";/);
+  assert.match(css, /\.book-editions a\[download\]:hover::after \{ translate: 0 3px; \}/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes edition-mark/);
+});

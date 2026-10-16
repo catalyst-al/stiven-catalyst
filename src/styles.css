@@ -8368,3 +8368,31 @@ a.essay-series-next:hover em { translate: 5px 0; }
   }
 }
 @keyframes closing-words { from { opacity: .15; translate: 0 18px; } }
+
+/* The guide's editions: each change is a small blue mark that lights up as it is reached, the line of text sliding
+   into place beside it; an earlier edition to download lifts and its arrow points down under the pointer. */
+.book-editions ul { padding-left: 0; list-style: none; }
+.book-editions li { position: relative; padding-left: 22px; }
+.book-editions li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  background: var(--blue);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 50%, transparent);
+}
+.book-editions a[download] { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid color-mix(in srgb, var(--blue) 40%, transparent); transition: color .25s ease, border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1); }
+.book-editions a[download]::after { content: "↓"; color: var(--blue); transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.book-editions a[download]:hover { color: var(--blue); border-color: var(--blue); translate: 0 -1px; }
+.book-editions a[download]:hover::after { translate: 0 3px; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-editions li::before { animation: edition-mark linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+    .book-editions li { animation: principle-in linear both; animation-timeline: view(); animation-range: entry 10% entry 100%; }
+  }
+}
+@keyframes edition-mark { from { background: transparent; box-shadow: none; scale: .6; } }
