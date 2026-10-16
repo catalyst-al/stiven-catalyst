@@ -1,5 +1,5 @@
 ---
-title: Pse handover-i është një nga proceset më të nënvlerësuara
+title: Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara
 date: 2026-10-03T06:30:00Z
 category: Operacione
 status: published

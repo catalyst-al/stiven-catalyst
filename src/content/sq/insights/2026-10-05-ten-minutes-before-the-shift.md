@@ -63,7 +63,7 @@ Pra stand-up-i ishte më shumë se “si shkoi dje”: kishte numra, arsye dhe p
 
 Vlerën e kishte kur briefing-u lidhej me diçka që njerëzit do ta hasnin menjëherë në turn. Nëse problemi ishte Delay, nuk mjaftonte të thuhej përqindja; duhej parë pse po ndodhte. Nëse shkaku qëndronte te ngarkimi, te stivimi, te performanca e shoferëve ose te një hap i procesit, briefing-u i jepte ekipit një gjë për të ndjekur gjatë punës.
 
-Briefing-u ka kuptim kur një KPI kthehet në një sjellje ose në një veprim që ekipi e sheh. Kështu doja ta shihja stand-up-in: KPI-të, 5 Why, Pareto, 5S dhe sigurinë jo si tema më vete, por të lidhura me ndikimin e tyre në operacion. Është e njëjta ide si te [KPI-të nuk përmirësohen nga Excel-i](/sq/insights/kpis-do-not-improve-in-excel/), vetëm se këtu ke 10 minuta për ta bërë.
+Briefing-u ka kuptim kur një KPI kthehet në një sjellje ose në një veprim që ekipi e sheh. Kështu doja ta shihja stand-up-in: KPI-të, 5 Why, Pareto, 5S dhe sigurinë jo si tema më vete, por të lidhura me ndikimin e tyre në operacion. Është e njëjta ide si te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/), vetëm se këtu ke 10 minuta për ta bërë.
 
 ## Informacion apo drejtim
 

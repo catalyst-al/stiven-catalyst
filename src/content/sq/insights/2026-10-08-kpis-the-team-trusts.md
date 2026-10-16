@@ -1,5 +1,5 @@
 ---
-title: 'KPI që ekipi i beson'
+title: 'KPI-të që ekipi u beson'
 date: 2026-10-08T20:00:00Z
 category: Operacione
 series: without-you
@@ -30,7 +30,7 @@ firstMove:
 
 Le të supozojmë se një shofer niset me vonesë sepse porosia nuk ishte gati. Vonesa shfaqet te nisja dhe raporti e regjistron saktë. A lexohet pastaj drejt ky numër, kjo është tjetër punë: një KPI mund të llogaritet saktë dhe prapë të interpretohet padrejtësisht.
 
-Te [KPI-të nuk përmirësohen nga Excel-i](/sq/insights/kpis-do-not-improve-in-excel/) shkrova se numri vetë nuk e përmirëson punën. Kjo ese merret me pyetjen që vjen pas: si ndërtohet një KPI që njerëzit e besojnë, që e kuptojnë, që nuk i ndëshkon për atë që nuk e kontrollojnë dhe që i çon te një veprim? Për mua, ky besim ndërtohet nga tri gjëra: **përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi që vjen pas rezultatit.**
+Te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/) shkrova se numri vetë nuk e përmirëson punën. Kjo ese merret me pyetjen që vjen pas: si ndërtohet një KPI që njerëzit e besojnë, që e kuptojnë, që nuk i ndëshkon për atë që nuk e kontrollojnë dhe që i çon te një veprim? Për mua, ky besim ndërtohet nga tri gjëra: **përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi që vjen pas rezultatit.**
 
 Ajo që vijon mbështetet te raportet dhe stand-up-et në last mile me të cilat kam punuar, si dhe te puna ime në Night Audit. Përkufizimet tregojnë si i kuptoja unë treguesit, jo formulat zyrtare të kompanisë. Shembujt e një numri të lexuar padrejtësisht ose të një KPI-je që nxit sjellje të gabuar janë ilustrime, jo raste të dokumentuara.
 

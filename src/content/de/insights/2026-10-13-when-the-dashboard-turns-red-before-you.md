@@ -71,7 +71,7 @@ Wer schon vor einem Dashboard gesessen hat, kennt drei Reaktionen auf eine rote 
 
 **Ignorieren.** „Um diese Uhrzeit ist es immer rot.“ Ein Alarm, der sich ständig ohne nützliche Information wiederholt, droht seine Bedeutung zu verlieren, und an dem Tag, an dem das Rot etwas bedeutet, schaut niemand hin. In [Ein schlechter Tag oder ein Problem?](/de/insights/a-bad-day-or-a-problem/) habe ich über die Ebene geschrieben, die die meisten Betriebe überspringen: die, die zeigt, ob heute anders ist als die letzten zehn Tage. Ein Rot, das Sie aus Gewohnheit ignorieren, ist ein Rot ohne Geschichte.
 
-**Rot weiterreichen.** Die Zahl geht eine Ebene nach oben, rot und nackt. Das ist der dritte Fehler aus [Wann Sie es selbst lösen und wann Sie es nach oben geben](/de/insights/solve-it-or-escalate-it/): Eskalation ohne Information. Einer Lösung ist das Problem damit nicht näher gekommen; es ist nur bei jemandem gelandet, der jetzt die Fragen stellen muss, die Sie selbst hätten stellen können.
+**Rot weiterreichen.** Die Zahl geht eine Ebene nach oben, rot und nackt. Das ist der dritte Fehler aus [Wann Sie es selbst lösen und wann Sie es nach oben weitergeben](/de/insights/solve-it-or-escalate-it/): Eskalation ohne Information. Einer Lösung ist das Problem damit nicht näher gekommen; es ist nur bei jemandem gelandet, der jetzt die Fragen stellen muss, die Sie selbst hätten stellen können.
 
 ## Vier Schritte vor der Entscheidung
 

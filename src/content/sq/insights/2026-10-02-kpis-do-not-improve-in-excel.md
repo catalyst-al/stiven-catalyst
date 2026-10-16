@@ -1,5 +1,5 @@
 ---
-title: KPI-të nuk përmirësohen nga Excel-i
+title: KPI-të nuk përmirësohen në Excel
 date: 2026-10-02T06:00:00Z
 category: Operacione
 status: published

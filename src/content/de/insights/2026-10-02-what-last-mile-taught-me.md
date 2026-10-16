@@ -1,5 +1,5 @@
 ---
-title: Was mir die Last Mile über echtes Operations-Management beigebracht hat
+title: Was mir die Last Mile über echte Betriebsführung beigebracht hat
 date: 2026-10-02
 category: Betrieb
 status: published

@@ -1,5 +1,5 @@
 ---
-title: 'Wann Sie es selbst lösen und wann Sie es nach oben geben'
+title: 'Wann Sie es selbst lösen und wann Sie es nach oben weitergeben'
 date: 2026-10-08T14:00:00Z
 category: Führung
 series: without-you

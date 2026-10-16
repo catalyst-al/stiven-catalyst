@@ -38,7 +38,7 @@
   <p>Ich entscheide, was hier erscheint, und ich verantworte es. Ich bin der Herausgeber, der in jeder Ausgabe der Management Review genannt ist; wo eine Publikation von „der Redaktion“ spricht, bin das ich.</p>
 
   <h2>Was aus meiner Arbeit kommt</h2>
-  <p>Die Essays, die Reflexionen und die Antworten in „Aus der Praxis“ sind in der ersten Person geschrieben, aus meiner eigenen Arbeit. Mehrere Essays sagen offen, was ich nicht getan habe oder nicht belegen kann („Was ich nicht habe“), statt eine Erfahrung zu erfinden.</p>
+  <p>Die Essays, die Reflexionen und die Antworten in „Aus der Praxis“ sind in der ersten Person geschrieben, aus meiner eigenen Arbeit. Wo ein Essay beschreibt, was ich heute tun würde, und nicht, was ich getan habe, sagt er das, statt eine Erfahrung zu erfinden. Am 16. Oktober 2026 wurden alle Essays in den drei Sprachen sprachlich und im Aufbau überarbeitet; was sie sagen, hat sich nicht geändert.</p>
 
   <h2>Was aus der Forschung kommt</h2>
   <p>Jede Zahl in den Publikationen stammt aus einer Quelle, die auf der Quellenseite der Ausgabe mit ihrem Jahr steht. Jede Zahl wird auf Jahr, Herausgeber und genaue Bedeutung geprüft. Eine Zahl, die an einer Zusammenfassung statt am Original geprüft wurde, ist mit „über“ markiert; meine Deutung mit „Unsere Lesart“. Eine Zahl, die sich nicht bestätigen lässt, erscheint nicht.</p>
@@ -69,7 +69,7 @@
   <p>Unë vendos çfarë botohet këtu dhe unë përgjigjem për të. Unë jam redaktori që përmendet në çdo numër të Management Review; kur një botim flet për “redaksinë”, ajo jam unë.</p>
 
   <h2>Çfarë vjen nga puna ime</h2>
-  <p>Esetë, reflektimet dhe përgjigjet te “Nga terreni” janë shkruar në vetën e parë, nga puna ime. Disa ese thonë hapur çfarë nuk kam bërë ose nuk mund ta provoj (“Ajo që nuk kam”), në vend që të shpikin një përvojë.</p>
+  <p>Esetë, reflektimet dhe përgjigjet te “Nga terreni” janë shkruar në vetën e parë, nga puna ime. Kur një ese përshkruan çfarë do të bëja sot dhe jo çfarë kam bërë, e thotë, në vend që të shpikë një përvojë. Më 16 tetor 2026 të gjitha esetë u redaktuan në tri gjuhët për gjuhën dhe strukturën; ajo që thonë nuk ndryshoi.</p>
 
   <h2>Çfarë vjen nga kërkimi</h2>
   <p>Çdo shifër në botime vjen nga një burim që jepet me vitin e tij në faqen e burimeve të numrit. Çdo shifër kontrollohet për vitin, botuesin dhe çfarë mat saktësisht. Një shifër e kontrolluar te një përmbledhje dhe jo te origjinali shënohet me “përmes”; interpretimi im me “Leximi ynë”. Një shifër që nuk konfirmohet nuk botohet.</p>
@@ -83,10 +83,10 @@
   <p>Një numër i Management Review mban muajin e botimit të vet, si kopertina e një reviste: numrat 41 deri në 80 janë botimi i nëntorit 2026 dhe janë online që nga tetori. Ditën kur një botim doli online e tregon faqja e tij, te “Online që më”.</p>
 
   <h2>Korrigjimet</h2>
-  <p>Kur një tekst i botuar korrigjohet, faqja e thotë: me një shënim me datë nën përmbledhje, dhe, kur korrigjohet një numër i vetëm, me të njëjtin shënim në faqen e burimeve të PDF-së së tij. Kur nga një episod i podcast-it hiqet diçka, kjo shkruhet me datë poshtë player-it të tij dhe në feed-in e podcast-it. Deri tani: Management Review {% for n, label in corrected %}<a href="{{ (issueBase + n + '.html') | local(lang) }}">Nr. {{ label }}</a>{{ ", " if not loop.last }}{% endfor %}, <a href="{{ '/magazine/management-review-2026-09.html' | local(lang) }}">botimi special i shtatorit 2026</a>{{ "," if fixedEssays.length else " dhe" }} {{ "episodi i podcast-it" if cut.length == 1 else "episodet e podcast-it" }} për {% for c in cut %}{% if not loop.first %}{{ " dhe " if loop.last else ", " }}{% endif %}<a href="{{ c.url }}">{{ c.label }}</a> (në {{ c.languages }}){% endfor %}{% if fixedEssays.length %} dhe {{ "eseja" if fixedEssays.length == 1 else "esetë" }} {% for e in fixedEssays %}{% if not loop.first %}{{ " dhe " if loop.last else ", " }}{% endif %}<a href="{{ e.url }}">“{{ e.data.title }}”</a>{% endfor %}{% endif %}. Përveç tyre, kontrolli i dytë i çdo shifre në numrat 1 deri në 80, më 12 tetor 2026, brenda katër ditësh nga dalja online: ndryshoi 64 numra, secili e thotë, dhe <a href="{{ checkedUrl }}">arkivi thotë çfarë ndryshoi</a>. Nëse gjeni një gabim, <a href="{{ '/contact.html' | local(lang) }}">më shkruani</a>.</p>
+  <p>Kur një tekst i botuar korrigjohet, faqja e thotë: me një shënim me datë nën përmbledhje, dhe, kur korrigjohet një numër i vetëm, me të njëjtin shënim në faqen e burimeve të PDF-së së tij. Kur nga një episod i podcast-it hiqet diçka, kjo shkruhet me datë poshtë player-it të tij dhe në feed-in e podcast-it. Deri tani: Management Review {% for n, label in corrected %}<a href="{{ (issueBase + n + '.html') | local(lang) }}">Nr. {{ label }}</a>{{ ", " if not loop.last }}{% endfor %}, <a href="{{ '/magazine/management-review-2026-09.html' | local(lang) }}">botimi special i shtatorit 2026</a>{{ "," if fixedEssays.length else " dhe" }} {{ "episodi i podcast-it" if cut.length == 1 else "episodet e podcast-it" }} për {% for c in cut %}{% if not loop.first %}{{ " dhe " if loop.last else ", " }}{% endif %}<a href="{{ c.url }}">{{ c.label }}</a> (në {{ c.languages }}){% endfor %}{% if fixedEssays.length %} dhe {{ "eseja" if fixedEssays.length == 1 else "esetë" }} {% for e in fixedEssays %}{% if not loop.first %}{{ " dhe " if loop.last else ", " }}{% endif %}<a href="{{ e.url }}">“{{ e.data.title }}”</a>{% endfor %}{% endif %}. Përveç tyre, kontrolli i dytë i çdo shifre në numrat 1 deri në 80, më 12 tetor 2026, brenda katër ditësh nga dalja online: ndryshoi 64 numra, secili e thotë, dhe <a href="{{ checkedUrl }}">arkivi thotë çfarë ndryshoi</a>. Nëse gjen një gabim, <a href="{{ '/contact.html' | local(lang) }}">më shkruaj</a>.</p>
 
   <h2>Të dhënat tuaja</h2>
-  <p>Mjetet punojnë në shfletuesin tuaj: puna juaj mbetet në pajisjen tuaj.{% if legal.name and legal.city %} Çfarë tjetër përpunon faqja, e shkruan <a href="{{ '/datenschutz.html' | local(lang) }}">politika e privatësisë</a>.{% endif %}</p>
+  <p>Mjetet punojnë në shfletuesin tënd: puna jote mbetet në pajisjen tënde.{% if legal.name and legal.city %} Çfarë tjetër përpunon faqja, e shkruan <a href="{{ '/datenschutz.html' | local(lang) }}">politika e privatësisë</a>.{% endif %}</p>
 </section>
 {%- else %}
 <section class="shell page-hero legal-hero">
@@ -100,7 +100,7 @@
   <p>I decide what is published here, and I answer for it. I am the editor named on every issue of the Management Review; where a publication speaks of “the editors”, that means me.</p>
 
   <h2>What comes from my work</h2>
-  <p>The essays, the reflections and the answers in From the Floor are written in the first person, from my own work. Several essays say plainly what I have not done or cannot prove (“What I do not have”) instead of inventing an experience.</p>
+  <p>The essays, the reflections and the answers in From the Floor are written in the first person, from my own work. Where an essay describes what I would do today rather than what I did, it says so, instead of inventing an experience. On 16 October 2026 every essay was edited for language and structure, in the three languages; what they say did not change.</p>
 
   <h2>What comes from research</h2>
   <p>Every figure in the publications comes from a source listed, with its year, on the sources page of the issue. Each figure is checked for its year, its publisher and what exactly it measures. A figure checked through a summary rather than the original is marked “via”; my interpretation is marked “Our reading”. A figure that cannot be confirmed is not published.</p>

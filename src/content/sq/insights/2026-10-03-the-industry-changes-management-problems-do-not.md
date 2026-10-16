@@ -1,5 +1,5 @@
 ---
-title: 'Nga retail-i te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo'
+title: 'Nga shitja me pakicë te logjistika dhe hoteleria: industria ndryshon, problemet e menaxhimit jo'
 date: 2026-10-03
 category: Operacione
 status: published

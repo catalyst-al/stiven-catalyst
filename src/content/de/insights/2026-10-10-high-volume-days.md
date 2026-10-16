@@ -1,5 +1,5 @@
 ---
-title: 'Tage mit hohem Volumen: der Standard unter Druck'
+title: 'Tage mit hohem Aufkommen: der Standard unter Druck'
 date: 2026-10-10T21:00:00Z
 category: Betrieb
 series: improvement
@@ -57,7 +57,7 @@ Der Satz, der mir aus diesen Berichten geblieben ist, ist aber ein anderer: Eini
 
 Bei den Fahrzeugen ist es genauso. Im August 2025 wurde ihre Verfügbarkeit zum Problem: Ein DSP setzte seine eigenen Fahrzeuge nicht ein, und die Reservekapazität war bereits verplant. Auf dem Papier gab es eine Reserve. In der Praxis war sie schon vergeben.
 
-In [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) habe ich beschrieben, warum jemand Neues nicht bereit ist, nur weil er einem anderen bei der Arbeit zugesehen hat. Am Tag mit hohem Volumen kostet diese Lektion am meisten.
+In [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) habe ich beschrieben, warum jemand Neues nicht bereit ist, nur weil er einem anderen bei der Arbeit zugesehen hat. An einem Tag mit hohem Aufkommen kostet diese Lektion am meisten.
 
 ## Was der schwere Tag zeigt
 

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një SOP bëhet e dobishme kur personi që ka nevojë për të mund ta gjejë, ta kuptojë dhe ta zbatojë në momentin e duhur.
-description: "Rasti konkret i serisë: si i ktheva listat e kontrollit dhe shënimet e shpërndara në një faqe pune për Front Office dhe Night Audit, dhe çfarë do të bëja ndryshe."
+description: "Rasti konkret i serisë: si i ktheva listat e kontrollit dhe shënimet e shpërndara në një faqe për Front Office dhe Night Audit, dhe çfarë do të bëja ndryshe."
 teaser: Nuk e ndërtova sepse mungonin dokumentet. Dokumentet ekzistonin, por informacioni që më duhej gjatë punës ishte i shpërndarë.
 deck: 'Eseja e nëntë e serisë “Operacioni që punon pa ty”: një projekt real, i zhvilluar hap pas hapi, i paraqitur si punë në zhvillim dhe jo si sukses i matur, me kartën për ta kthyer një dosje me SOP në një mjet pune.'
 checklist:

@@ -63,7 +63,7 @@ Le të marrim presionin e dobët të ujit, që e kam të dokumentuar si problem,
 
 **Një ankesë nuk mbyllet vetëm sepse mysafiri largohet nga recepsioni.**
 
-Te [Pse handover-i është një nga proceset më të nënvlerësuara](/sq/insights/why-the-handover-is-underrated/) shkrova pse ka rëndësi dorëzimi i turnit. Për një ankesë, ai ka rëndësi edhe në një mënyrë tjetër. Nëse në mëngjes mysafiri duhet ta tregojë të njëjtin problem nga e para, ankesa e natës nuk u mbyll. Humbi.
+Te [Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara](/sq/insights/why-the-handover-is-underrated/) shkrova pse ka rëndësi dorëzimi i turnit. Për një ankesë, ai ka rëndësi edhe në një mënyrë tjetër. Nëse në mëngjes mysafiri duhet ta tregojë të njëjtin problem nga e para, ankesa e natës nuk u mbyll. Humbi.
 
 Në raportin e turnit përfshiheshin problemet me dhomat, çështjet e hapura dhe informacioni që duhej ndjekur. Një dorëzim i dobishëm për një ankesë, ashtu siç do ta ngrija sot, tregon pesë gjëra: çfarë u raportua, çfarë u verifikua, çfarë është bërë deri tani, çfarë ka mbetur pa zgjidhur, dhe kush e ndjek, bashkë me atë që duhet t'i thuhet mysafirit. Nëse çdo ankesë regjistrohej atëherë me pikërisht këto fusha, nuk e di.
 

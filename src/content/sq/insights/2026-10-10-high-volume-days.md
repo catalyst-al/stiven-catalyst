@@ -1,5 +1,5 @@
 ---
-title: 'Ditët me shumë volum: standardi nën presion'
+title: 'Ditët me volum të lartë: standardi nën presion'
 date: 2026-10-10T21:00:00Z
 category: Operacione
 series: improvement

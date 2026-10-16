@@ -41,7 +41,7 @@ Edhe e kundërta është problem. Ai që nuk çon kurrë asgjë lart mund të du
 
 Mes këtyre dy skajeve qëndron një nga pyetjet më të rëndësishme për një operacion që duhet të punojë pa menaxherin pranë: kur e zgjidh vetë dhe kur e çon lart?
 
-Te [Leadership pa titull](/sq/insights/leadership-without-a-title/) shkrova se iniciativa dhe autoriteti janë dy gjëra të ndryshme. Kjo ese përpiqet ta kthejë atë dallim nga një ndjesi personale në një rregull të qartë.
+Te [Udhëheqje pa titull](/sq/insights/leadership-without-a-title/) shkrova se iniciativa dhe autoriteti janë dy gjëra të ndryshme. Kjo ese përpiqet ta kthejë atë dallim nga një ndjesi personale në një rregull të qartë.
 
 Mbështetet te dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e housekeeping-ut i merrte përsipër ai departament, dhe unë i lija në handover për t'u ndjekur. Në last mile, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
 

@@ -41,7 +41,7 @@ Der Essay beruht auf meiner Arbeit im Night Audit und auf den Zimmerproblemen, d
 
 Als Night Auditor kümmerte ich mich um die Probleme, die sich im Rahmen der Zuständigkeit der Rezeption lösen ließen. Brauchte ein Problem eine andere Abteilung, ging es an die zuständige Person, und was in der Nacht nicht abgeschlossen wurde, kam in die Übergabe.
 
-In [Wann Sie es selbst lösen und wann Sie es nach oben geben](/de/insights/solve-it-or-escalate-it/) habe ich über die Grenze zwischen Initiative und Befugnis in der Nacht geschrieben. Hier kommt zu derselben Frage eine dritte Partei hinzu: der Gast, der vor Ihnen steht und wartet.
+In [Wann Sie es selbst lösen und wann Sie es nach oben weitergeben](/de/insights/solve-it-or-escalate-it/) habe ich über die Grenze zwischen Initiative und Befugnis in der Nacht geschrieben. Hier kommt zu derselben Frage eine dritte Partei hinzu: der Gast, der vor Ihnen steht und wartet.
 
 Diese dritte Partei macht die Versuchung größer. Wenn jemand verärgert vor Ihnen steht, möchten Sie die Situation so schnell wie möglich beenden. Ich würde aber keine Entscheidung außerhalb meiner Befugnis treffen, nur um eine Beschwerde schneller abzuschließen. Ein Versprechen, das nicht von Ihnen abhängt, löst das Problem nicht. Es schiebt es auf den Morgen und macht es schwerer. Nachts sind die Möglichkeiten für eine Lösung nicht immer dieselben wie am Tag. Das heißt aber nicht, dass die Verantwortung für das Problem verloren gehen darf.
 

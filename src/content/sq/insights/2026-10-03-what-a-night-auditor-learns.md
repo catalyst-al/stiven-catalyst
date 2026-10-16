@@ -1,5 +1,5 @@
 ---
-title: Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin
+title: Çfarë mëson një Night Auditor për një biznes që shumica e menaxherëve nuk e shohin kurrë
 date: 2026-10-03T06:00:00Z
 category: Operacione
 status: published

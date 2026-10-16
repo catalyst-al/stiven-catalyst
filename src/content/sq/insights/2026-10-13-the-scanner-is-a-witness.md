@@ -60,7 +60,7 @@ Kur mungon një çantë, në shumicën e operacioneve pyetja e parë nuk është
 
 Por një çantë mund të humbasë në magazinë, gjatë përgatitjes, gjatë ngarkimit ose në rrugë, dhe problemet që kishim në last mile mund të preknin secilën nga këto pjesë. Skanimi i fundit tregon kush e preku çantën i fundit në sistem. Nuk tregon ku u nda ajo nga vendi i vet.
 
-Te [KPI-të nuk përmirësohen nga Excel-i](/sq/insights/kpis-do-not-improve-in-excel/) shkrova që, kur e trajton numrin si përgjigje, e ndëshkon shoferin për një çantë që nuk ka qenë kurrë në karrocën e tij. Historiku i skanimit të shtyn drejt të njëjtit gabim, vetëm një hap më afër.
+Te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/) shkrova që, kur e trajton numrin si përgjigje, e ndëshkon shoferin për një çantë që nuk ka qenë kurrë në karrocën e tij. Historiku i skanimit të shtyn drejt të njëjtit gabim, vetëm një hap më afër.
 
 Kjo nuk do të thotë se askush nuk mban përgjegjësi. Kur provohet që dikush e ka shkelur standardin, përgjegjësia individuale mbetet. Por prova vjen nga rindërtimi i procesit, jo nga emri në rreshtin e fundit të historikut.
 

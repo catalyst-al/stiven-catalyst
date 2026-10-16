@@ -1,5 +1,5 @@
 ---
-title: Leadership pa titull
+title: Udhëheqje pa titull
 date: 2026-10-03T06:45:00Z
 category: Udhëheqje
 status: published

@@ -1,5 +1,5 @@
 ---
-title: 'Nga Shqipëria në Gjermani: çfarë kam ndryshuar te mënyra si drejtoj'
+title: 'Nga Shqipëria në Gjermani: çfarë kam ndryshuar në mënyrën si drejtoj'
 date: 2026-10-03T07:00:00Z
 category: Udhëheqje
 status: published

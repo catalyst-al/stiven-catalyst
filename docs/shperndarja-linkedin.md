@@ -276,7 +276,7 @@ Titullin e parë e përshtat me rolin aktual; pjesa tjetër mbetet.
 >
 > Deutsch, Englisch, Albanisch.
 
-**Seksioni "Im Fokus" (Featured), tre karta:** faqja kryesore, Verspätungsanalyse (vegla me hyrjen më të lehtë), eseja 2 "Was mir die Last Mile über echtes Operations-Management beigebracht hat".
+**Seksioni "Im Fokus" (Featured), tre karta:** faqja kryesore, Verspätungsanalyse (vegla me hyrjen më të lehtë), eseja 2 "Was mir die Last Mile über echte Betriebsführung beigebracht hat".
 
 **Foto e sfondit:** pamja e rezultatit të një vegle ose karta sociale e faqes (`src/media/social/home.jpg`), jo një foto stoku.
 
