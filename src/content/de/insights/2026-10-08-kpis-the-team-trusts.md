@@ -5,7 +5,7 @@ category: Betrieb
 series: without-you
 status: published
 featured: true
-summary: Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist. Es ist die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
+summary: Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist, sondern die, die klar misst, fair gelesen wird und hilft, besser zu werden.
 description: "Eine Kennzahl, der Menschen vertrauen: Damage, Incomplete, Delay und Loading Time auf der letzten Meile, Ergebnis und Grund, und die Kennzahlenkarte."
 teaser: Eine Kennzahl kann mathematisch richtig sein und trotzdem unfair gelesen werden.
 deck: 'Der sechste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: eine klare Definition, faire Verantwortung und die Handlung nach dem Ergebnis, mit der Kennzahlenkarte, die man ausfüllt, bevor man zu messen beginnt.'
@@ -28,86 +28,66 @@ firstMove:
   - Lesen Sie sie neben ihrer Nachbarkennzahl, bevor Sie darauf reagieren.
 ---
 
-Eine Kennzahl kann mathematisch richtig sein und trotzdem unfair gelesen werden.
+Angenommen, ein Fahrer fährt verspätet ab, weil der Auftrag nicht bereit war. Die Verspätung zeigt sich bei der Abfahrt, und der Bericht erfasst sie korrekt. Ob die Zahl danach fair gelesen wird, ist eine andere Frage: Eine Kennzahl kann richtig berechnet und trotzdem unfair gedeutet werden.
 
-In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben, dass die Zahl allein die Arbeit nicht verbessert. Dieser Essay geht der nächsten Frage nach: Wie baut man eine Kennzahl, der Menschen vertrauen? Eine, die sie verstehen, die sie nicht für das bestraft, was sie nicht steuern, und die sie zu einer Handlung führt.
+In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben, dass die Zahl allein die Arbeit nicht verbessert. Hier geht es um die nächste Frage: Wie baut man eine Kennzahl, der Menschen vertrauen, die sie verstehen, die sie nicht für etwas bestraft, das sie nicht steuern, und die sie zu einer Handlung führt? Für mich entsteht dieses Vertrauen aus drei Dingen: **einer klaren Definition, fairer Verantwortung und der Handlung, die auf das Ergebnis folgt.**
 
-Für mich entsteht Vertrauen in eine Kennzahl aus drei Dingen: **einer klaren Definition, fairer Verantwortung und der Handlung, die auf das Ergebnis folgt.**
+Was folgt, beruht auf den Berichten und Stand-ups auf der letzten Meile, mit denen ich gearbeitet habe, und auf meiner Arbeit im Night Audit. Die Definitionen geben wieder, wie ich die Werte verstanden habe, nicht die offiziellen Formeln des Unternehmens. Die Beispiele für eine unfair gelesene Zahl oder für eine Kennzahl, die falsches Verhalten auslöst, sind Veranschaulichungen, keine dokumentierten Fälle.
 
 ## Vier Werte auf der letzten Meile
 
-Auf der letzten Meile haben wir vor allem mit vier Werten gearbeitet: Damage, Incomplete, Delay und Loading Time.
-
-So habe ich sie verstanden:
+Auf der letzten Meile haben wir vor allem mit vier Werten gearbeitet: Damage, Incomplete, Delay und Loading Time. So habe ich sie verstanden:
 
 - **Damage:** Schäden an Produkten oder Aufträgen.
 - **Incomplete:** Aufträge, die unvollständig beim Kunden ankamen.
 - **Delay:** Verspätungen in der Ausführung des Zustellprozesses.
 - **Loading Time:** die Zeit, die das Beladen des Fahrzeugs vor der Abfahrt dauerte.
 
-Es waren vier Arten, auf Qualität, Zeit und betriebliche Disziplin zu schauen.
+Zusammen waren es vier Blickwinkel auf Qualität, Zeit und betriebliche Disziplin.
 
-Aber für die offizielle Definition jedes Werts, die genaue Berechnung und das, was aus einer Verspätung herausgerechnet wurde, habe ich kein bestätigtes Dokument, das ich zitieren kann. Und mir ist wichtig, die praktische Bedeutung eines Werts nicht mit der offiziellen Formel zu verwechseln, die ein Unternehmen verwendet.
-
-Dieser Unterschied ist kein Detail. Wenn das Team eine Kennzahl auf die eine Weise versteht und der Bericht sie auf eine andere berechnet, geht Vertrauen verloren, bevor das erste Ergebnis überhaupt zu sehen ist.
+Die praktische Bedeutung eines Werts und die offizielle Formel, die ein Unternehmen verwendet, sind zwei verschiedene Dinge, und der Unterschied zählt. Wenn das Team eine Kennzahl auf die eine Weise versteht und der Bericht sie auf eine andere berechnet, geht Vertrauen verloren, bevor das erste Ergebnis überhaupt zu sehen ist.
 
 ## Wenn die Zahl stimmt und die Lesart unfair ist
 
-Für einen konkreten Streit, in dem eine von Outbound verursachte Verspätung unfair einem Fahrer angerechnet wurde, habe ich keinen dokumentierten Fall, den ich als Tatsache darstellen kann.
+Ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Taschen, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
 
-Aber ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Taschen, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
+Nehmen wir den Fahrer, der verspätet abfährt, weil der Auftrag nicht bereit war. Das Problem zeigt sich bei der Abfahrt, aber deshalb liegt die Verantwortung nicht automatisch allein beim Fahrer. Wie ich in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben habe: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 
-Wenn ein Fahrer verspätet abfährt, weil der Auftrag nicht bereit war, zeigt sich das Problem bei der Abfahrt. Das heißt aber nicht automatisch, dass die Verantwortung allein beim Fahrer liegt. Das habe ich auch in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
+Bevor ich die Leistung von jemandem bewerte, will ich deshalb verstehen, welchen Teil des Ergebnisses er tatsächlich steuern konnte.
 
-Bevor ich die Leistung von jemandem bewerte, möchte ich deshalb verstehen, **welchen Teil des Ergebnisses er tatsächlich steuern konnte.**
-
-Das heißt nicht, individuelle Verantwortung aufzuheben, nur weil der Prozess komplex ist. Ich kann von einem Mitarbeiter nicht verlangen, für alles verantwortlich zu sein, was in einem Prozess mit mehreren Abteilungen passiert. Aber ich kann seine Verantwortung auch nicht streichen.
+Das heißt nicht, individuelle Verantwortung aufzuheben, nur weil der Prozess komplex ist. Ich kann einen Mitarbeiter nicht für alles verantwortlich machen, was in einem Prozess mit mehreren Abteilungen passiert, aber ich kann seine Verantwortung auch nicht streichen.
 
 **Die Aufgabe der Führungskraft ist es, das zu trennen, was die Person steuert, von dem, was im System korrigiert werden muss.**
 
 ## Ergebnis und Grund
 
-Auf der letzten Meile haben wir die Kennzahlen in den betrieblichen Berichten und im Daily Stand-up verfolgt. Ich habe mit Berichten zu Damage, Incomplete, Delay und Loading Time gearbeitet, außerdem mit Auswertungen zu Fahrern und DSPs. In der Berichtsarbeit habe ich auch Aktualisierungen während des Tages angefordert, darunter einen 90-Minuten-Rhythmus für die Beobachtung einiger Werte.
+Auf der letzten Meile haben wir die Kennzahlen in den betrieblichen Berichten und im Daily Stand-up verfolgt. Ich habe mit Berichten zu Damage, Incomplete, Delay und Loading Time gearbeitet, außerdem mit Auswertungen zu Fahrern und DSPs. In der Berichtsarbeit habe ich auch Aktualisierungen im Lauf des Tages angefordert, darunter einen 90-Minuten-Rhythmus für die Beobachtung einiger Werte.
 
-Mir war wichtig, zwei Arten von Information zu unterscheiden.
+Ich wollte zwei Arten von Information auseinanderhalten. Die eine zeigte **das Ergebnis**: wie viele Verspätungen, wie viele Schäden, wie viele unvollständige Aufträge. Die andere zeigte **den Grund**: was im Prozess geschehen war und zu diesem Ergebnis geführt hat. Ohne den zweiten Teil werden Zahlen leicht zu Berichten, aus denen niemand lernt.
 
-Die eine zeigte **das Ergebnis**: wie viele Verspätungen, wie viele Schäden, wie viele unvollständige Aufträge.
+Wenn Delay hoch ist, will ich wissen, warum. Liegt es an der Vorbereitung der Aufträge, an der Organisation der Rampe, an der Ladezeit oder an etwas anderem? Wenn Damage steigt, frage ich nicht nur, wer den Auftrag hatte, sondern auch, in welcher Phase der Schaden entstanden sein könnte und wie wir ihn verhindern.
 
-Die andere zeigte **den Grund**: was im Prozess passiert ist und zu diesem Ergebnis geführt hat.
-
-Ohne den zweiten Teil können Zahlen zu Berichten ohne Lernen werden.
-
-Wenn Delay hoch ist, will ich verstehen, warum. Hängt es mit der Vorbereitung der Aufträge zusammen, mit der Organisation der Rampe, mit der Ladezeit oder mit einer anderen Ursache? Wenn Damage steigt, ist meine Frage nicht nur, wer den Auftrag hatte. Ich will wissen, in welcher Phase der Schaden entstanden sein könnte und wie wir ihn verhindern.
-
-## Wie das Team es sah
-
-Eine konkrete dokumentierte Reaktion, in der das Team Kennzahlen als Strafe oder als Hilfe erlebt hat, habe ich nicht. Ich werde keine erfinden.
-
-Aber meine Haltung ist klar. Eine Kennzahl, die nur benutzt wird, um jemandem zu zeigen, dass er unter dem Ziel liegt, hilft ihm nicht unbedingt, besser zu werden.
-
-Ich glaube, Menschen haben mehr Grund, einer Kennzahl zu vertrauen, wenn sie genutzt wird, um die Arbeit zu verstehen und zu verbessern, nicht nur, um Einzelne zu vergleichen.
+Eine Kennzahl, die nur dazu dient, jemandem zu zeigen, dass er unter dem Ziel liegt, hilft ihm nicht unbedingt, besser zu werden. Ich glaube, Menschen haben mehr Grund, einer Kennzahl zu vertrauen, wenn sie genutzt wird, um die Arbeit zu verstehen und zu verbessern, und nicht nur, um Einzelne zu vergleichen.
 
 ## Kein Wert wird allein gelesen
 
-Für eine konkrete Episode, in der eine Kennzahl zu falschem Verhalten geführt hat, habe ich keinen Fall, den ich selbst erlebt habe und sicher beschreiben kann. Aber ich sehe das Risiko klar.
+Angenommen, eine Organisation misst nur, wie schnell beladen wird, ohne das mit Qualität und Sicherheit zu verbinden. Dann kann sie einen Anreiz schaffen, zu hetzen. Deshalb würde ich Loading Time nie getrennt von Damage, Incomplete und Sicherheit bewerten.
 
-Wenn eine Organisation nur die Geschwindigkeit des Beladens misst, ohne sie mit Qualität und Sicherheit zu verbinden, kann sie einen Anreiz schaffen, dass Menschen hetzen. Das ist ein mögliches Beispiel, kein Vorfall, den ich als Tatsache darstelle.
-
-Deshalb würde ich Loading Time nie getrennt von Damage, Incomplete und Sicherheit bewerten.
-
-Wenn sich ein Wert verbessert, ein anderer sich aber wegen der Art dieser Verbesserung verschlechtert, müssen wir prüfen, ob wir das richtige Verhalten messen.
+Wenn sich ein Wert verbessert, ein anderer sich aber gerade wegen der Art dieser Verbesserung verschlechtert, müssen wir prüfen, ob wir das richtige Verhalten messen.
 
 ## Im Hotel: Werte, die keine KPIs sind
 
 Im Hotel arbeitet man mit anderen betrieblichen Informationen. Im Night Audit habe ich die Tagesberichte geprüft, den Zimmerstatus, Anreisen, Abreisen, No-Shows, den Forecast für den nächsten Tag und die offenen Punkte, die den Betrieb beeinflussen konnten. Ein wichtiger Teil war die Prüfung, ob die Informationen stimmten, bevor der Tag abgeschlossen wurde.
 
-Aber ich möchte unterscheiden. Das waren betriebliche Werte und Kontrollen, die ich in der Arbeit genutzt habe. Ich habe nicht dokumentiert, dass sie alle formale KPIs mit individuellen Zielen für den Night Auditor waren.
+Das waren betriebliche Werte und Kontrollen, die ich in der Arbeit genutzt habe; dass sie alle formale KPIs mit individuellen Zielen für den Night Auditor waren, kann ich nicht belegen.
 
-Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze Lage zeigt. Man kann einen korrekten Bericht haben und ein offenes Problem, das noch gelöst werden muss. Deshalb muss der Bericht mit dem tatsächlichen Status, mit der Verantwortung und mit der Übergabe an die nächste Schicht verbunden sein.
+Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze Lage zeigt. Man kann einen korrekten Bericht haben und zugleich ein offenes Problem, das noch gelöst werden muss. Deshalb muss der Bericht mit dem tatsächlichen Status verbunden sein, mit der Verantwortung und mit der Übergabe an die nächste Schicht.
 
 ## Die Kennzahlenkarte
 
-Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie nicht alle sechs ausfüllen können, ist die Kennzahl noch nicht bereit, dem Team gezeigt zu werden.
+Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist. Es ist die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
+
+Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie nicht alle sechs ausfüllen können, ist die Kennzahl noch nicht so weit, dass Sie sie dem Team zeigen sollten.
 
 1. **Was messen wir?** In Worten, die jeder im Team versteht, nicht nur der, der den Bericht erstellt.
 2. **Wie wird sie berechnet?** Was zählt, was nicht, und aus welcher Quelle.
@@ -116,8 +96,4 @@ Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie
 5. **Welcher Kontext muss geprüft werden?** Welche anderen Werte mit ihr gelesen werden, damit die Verbesserung des einen nicht die Verschlechterung des anderen verdeckt.
 6. **Was tun wir, wenn sie abweicht?** Wer es sieht, wann und was der erste Schritt ist.
 
-Die Karte unten können Sie direkt hier ausfüllen und für Ihr Team kopieren.
-
-Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist.
-
-Es ist die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
+Füllen Sie die Karte unten aus und kopieren Sie sie für Ihr Team.

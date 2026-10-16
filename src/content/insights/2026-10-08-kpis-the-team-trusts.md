@@ -5,7 +5,7 @@ category: Operations
 series: without-you
 status: published
 featured: true
-summary: A KPI the team trusts is not necessarily the one that always shows green. It is the one that measures clearly, is read fairly and helps people understand what they can do better.
+summary: A KPI the team trusts is not necessarily the one that always shows green. It is the one that measures clearly, is read fairly and helps people improve.
 description: "How to build a KPI people trust: Damage, Incomplete, Delay and Loading Time in last mile, the result and the reason, and a six-line card for a KPI."
 teaser: A KPI can be mathematically correct and its interpretation still be unfair.
 deck: 'The sixth essay in the series “The operation that runs without you”: a clear definition, fair responsibility and the action that follows the result, with the KPI card to fill in before you start measuring.'
@@ -31,40 +31,34 @@ firstMove:
   - Read it next to its neighbouring indicator before you react to it.
 ---
 
-A KPI can be mathematically correct and its interpretation still be unfair.
+Suppose a driver leaves late because the order was not ready. The delay shows up at departure, and the report records it correctly. Whether the number is then read fairly is another question: a KPI can be calculated correctly and still be interpreted unfairly.
 
-In [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/) I wrote that the number on its own does not improve the work. This essay deals with the next question: how do you build a KPI people trust? One they understand, that does not punish them for what they do not control, and that leads them to an action.
+In [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/) I wrote that the number on its own does not improve the work. This essay takes the next question: how do you build a KPI people trust, one they understand, that does not punish them for what they do not control, and that leads them to an action? For me, that trust is built from three things: **a clear definition, fair responsibility and the action that follows the result.**
 
-For me, trust in a KPI is built from three things: **a clear definition, fair responsibility and the action that follows the result.**
+What follows rests on the last-mile reports and stand-ups I worked with and on my Night Audit work in the hotel. The definitions are how I understood the indicators, not the company's official formulas, and the examples of a number read unfairly or of a KPI that drives the wrong behaviour are illustrations, not documented cases.
 
 ## Four indicators in last mile
 
-In last mile we worked mainly with four indicators: Damage, Incomplete, Delay and Loading Time.
-
-This is how I understood them:
+In last mile we worked mainly with four indicators: Damage, Incomplete, Delay and Loading Time. This is how I understood them:
 
 - **Damage:** damage to products or orders.
 - **Incomplete:** orders that reached the customer incomplete.
 - **Delay:** delays in carrying out the delivery process.
 - **Loading Time:** the time it took to load the vehicle before departure.
 
-They were four ways of looking at quality, time and operational discipline.
+Together they were four ways of looking at quality, time and operational discipline.
 
-But for the official definition of each indicator, the exact way it was calculated and what was excluded from a delay, I do not have a confirmed document I can quote. And to me it matters not to confuse the practical meaning of an indicator with the official formula a company uses.
-
-That distinction is not a detail. If the team understands a KPI one way and the report calculates it another, trust is lost before the first result is even seen.
+The practical meaning of an indicator and the official formula a company uses are two different things, and the difference matters. If the team understands a KPI one way and the report calculates it another, trust is lost before the first result is even seen.
 
 ## When the number is right and the reading is unfair
 
-For a concrete dispute where a delay caused by Outbound was unfairly charged to a driver, I do not have a documented case I can present as fact.
+I have worked with problems that involved more than one stage of the process: missing bags, mixed trolleys, load organisation and delays at departure. Those situations changed the way I see a KPI.
 
-But I have worked with problems that involved more than one stage of the process: missing bags, mixed trolleys, load organisation and delays at departure. Those situations made me see a KPI differently.
+Take the driver who leaves late because the order was not ready. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
 
-If a driver leaves late because the order was not ready, the problem shows up at departure. But that does not automatically mean the responsibility is the driver's alone. I wrote this in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/) too: the place where a mistake is measured is not necessarily the place where it was born.
+So before I judge someone's performance, I want to understand which part of the result they could actually control.
 
-So before I judge someone's performance, I want to understand **which part of the result they could really control.**
-
-That does not mean removing individual accountability just because the process is complex. I cannot ask an employee to be accountable for everything that happens in a process several departments take part in. But I cannot erase their accountability either.
+That does not mean dropping individual accountability because the process is complex. I cannot hold an employee accountable for everything that happens in a process several departments take part in, but I cannot erase their accountability either.
 
 **The manager's job is to separate what the person controls from what has to be corrected in the system.**
 
@@ -72,43 +66,29 @@ That does not mean removing individual accountability just because the process i
 
 In last mile we followed the KPIs in the operational reports and in the daily stand-up. I worked with reports on Damage, Incomplete, Delay and Loading Time, and with analyses for drivers and DSPs. In the reporting work I also asked for updates during the day, including a 90-minute rhythm for monitoring some of the indicators.
 
-To me it mattered to distinguish two kinds of information.
+I wanted to keep two kinds of information apart. One showed **the result**: how many delays, how much damage, how many incomplete orders. The other showed **the reason**: what happened in the process to produce that result. Without the second, numbers can turn into reporting without learning.
 
-One showed **the result**: how many delays, how much damage, how many incomplete orders.
+If Delay is high, I want to know why. Is it linked to order preparation, the organisation of the dock, loading time or another cause? If Damage rises, I ask more than who had the order: I want to know at which stage the damage may have happened and how we can prevent it.
 
-The other showed **the reason**: what happened in the process that led to that result.
-
-Without the second part, numbers can turn into reporting without learning.
-
-If Delay is high, I want to understand why. Is it linked to order preparation, the organisation of the dock, loading time or another cause? If Damage rises, my question is not only who had the order. I want to know at which stage the damage may have happened and how we can prevent it.
-
-## How the team saw it
-
-I do not have a concrete documented reaction where the team experienced KPIs as punishment or as help. I will not invent one.
-
-But my position is clear. A KPI that is used only to show someone they are below target does not necessarily help them improve.
-
-I believe people have more reason to trust a KPI when it is used to understand and improve the work, not only to compare individuals.
+A KPI used only to show someone they are below target does not necessarily help them improve. I believe people have more reason to trust a KPI when it is used to understand and improve the work, rather than only to compare individuals.
 
 ## No indicator is read alone
 
-For a concrete episode where a KPI led to the wrong behaviour, I do not have a case I witnessed and can describe with certainty. But I see the risk clearly.
+Suppose an organisation measures only the speed of loading, without linking it to quality and safety. It can create an incentive for people to rush. That is why I would never judge Loading Time in isolation from Damage, Incomplete and safety.
 
-If an organisation measures only the speed of loading, without linking it to quality and safety, it can create an incentive for people to rush. That is a possible example, not an incident I am claiming happened.
-
-That is why I would never judge Loading Time in isolation from Damage, Incomplete and safety.
-
-If one indicator improves but another gets worse because of the way the improvement was achieved, we have to check whether we are measuring the right behaviour.
+If one indicator improves while another gets worse because of the way the improvement was achieved, we have to check whether we are measuring the right behaviour.
 
 ## In the hotel: indicators that are not KPIs
 
 A hotel works with a different set of operational information. During Night Audit I checked the daily reports, room status, arrivals, departures, no-shows, the forecast for the next day and the open matters that could affect the operation. An important part was checking that the information was accurate before closing the day.
 
-But I want to make a distinction. These were operational indicators and checks I used in the work. I have no documentation showing that they were all formal KPIs with individual targets for the Night Auditor.
+These were operational indicators and checks I used in the work; nothing I have shows that they were all formal KPIs with individual targets for the Night Auditor.
 
 In the hotel I understood even better that a number does not always show the whole situation. You can have an accurate report and an open problem that still needs action. That is why the report has to be linked to the real status, to responsibility and to passing the information on to the next shift.
 
 ## The KPI card
+
+A KPI the team trusts is not necessarily the one that always shows green. It is the one that measures clearly, is read fairly and helps people understand what they can do better.
 
 Before you start measuring something, fill in these six lines. If you cannot fill in all six, the KPI is not yet ready to show the team.
 
@@ -119,8 +99,4 @@ Before you start measuring something, fill in these six lines. If you cannot fil
 5. **What context has to be checked?** Which other indicators are read with it, so that improving one does not hide another getting worse.
 6. **What do we do when it deviates?** Who sees it, when, and what the first step is.
 
-You can fill in the card below right here and copy it for your team.
-
-A KPI the team trusts is not necessarily the one that always shows green.
-
-It is the one that measures clearly, is read fairly and helps people understand what they can do better.
+Fill in the card below and copy it for your team.
