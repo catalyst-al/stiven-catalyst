@@ -98,12 +98,40 @@
   // The light on a card or a row follows the pointer (styles.css: --mx, --my).
   document.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse") return;
-    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, a.list-row");
+    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .pillar, .about-timeline li, a.list-row");
     if (!card) return;
     const box = card.getBoundingClientRect();
     card.style.setProperty("--mx", `${Math.round(event.clientX - box.left)}px`);
     card.style.setProperty("--my", `${Math.round(event.clientY - box.top)}px`);
   }, { passive: true });
+
+  // About: the figures (10+, ~250, …) count up once when they come into view, keeping their own way of writing the
+  // number; screen readers get the figure itself. With reduced motion they are simply shown.
+  const figures = [...document.querySelectorAll(".about-stats dd")];
+  if (figures.length && "IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const countUp = (el) => {
+      const text = el.textContent;
+      const match = text.match(/\d+/);
+      if (!match) return;
+      const target = Number(match[0]);
+      el.setAttribute("aria-label", text);
+      const start = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / 1200);
+        el.textContent = text.replace(match[0], String(Math.round(target * (1 - (1 - t) ** 3))));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const watch = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        watch.unobserve(entry.target);
+        countUp(entry.target);
+      }
+    }, { threshold: 0.6 });
+    figures.forEach((figure) => watch.observe(figure));
+  }
 
   // The month buttons of the lists (Insights, Reflections, Field Notes, Publications, the magazines): the blue of the
   // chosen month is one pill that slides to the month chosen next. filter.js and weekly.js only set aria-pressed.
