@@ -95,16 +95,16 @@
   });
   if (fresh.size) menuButton?.classList.add("has-news");
 
-  // The light on a card or a row follows the pointer (styles.css: --mx, --my); a magazine cover also tilts towards it
+  // The light on a card or a row follows the pointer (styles.css: --mx, --my); a magazine cover or a book also turns towards it
   // (--px, --py: where the pointer is on the cover, from 0 to 1).
   document.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse") return;
-    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .contact-card, .feature-card, .meta-strip > div, .series-panel, .challenge-essays li a, .family-more-list a, .tool-essays-list li a, .essay-tools li a, a.essay-series-next, .issue-more-card, .search-results a, .podcast-app, .podcast-episode, .treatise-layer, .weekly-card, .weekly-chart, .role-borrowed a, .role-reading a, .role-next-card, .pillar, .about-timeline li, a.list-row");
+    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .contact-card, .feature-card, .meta-strip > div, .series-panel, .challenge-essays li a, .family-more-list a, .tool-essays-list li a, .essay-tools li a, a.essay-series-next, .issue-more-card, .search-results a, .podcast-app, .podcast-episode, .treatise-layer, .weekly-card, .weekly-chart, .book-object, .role-borrowed a, .role-reading a, .role-next-card, .pillar, .about-timeline li, a.list-row");
     if (!card) return;
     const box = (card.querySelector(".weekly-card-cover") || card).getBoundingClientRect();
     card.style.setProperty("--mx", `${Math.round(event.clientX - box.left)}px`);
     card.style.setProperty("--my", `${Math.round(event.clientY - box.top)}px`);
-    if (card.classList.contains("weekly-card")) {
+    if (card.classList.contains("weekly-card") || card.classList.contains("book-object")) {
       card.style.setProperty("--px", Math.min(Math.max((event.clientX - box.left) / box.width, 0), 1).toFixed(2));
       card.style.setProperty("--py", Math.min(Math.max((event.clientY - box.top) / box.height, 0), 1).toFixed(2));
     }
