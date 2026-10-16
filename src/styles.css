@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart, .downloads-list > .downloads-row) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -8410,3 +8410,47 @@ a.essay-series-next:hover em { translate: 5px 0; }
 .podcast-address-row input, .podcast-address-row .button-primary { transition: border-color .3s ease, box-shadow .35s ease, background-color .3s ease; }
 .podcast-address.is-done .podcast-address-row input { border-color: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 16%, transparent); }
 .podcast-address.is-done .podcast-address-row .button-primary { background: var(--ok); border-color: var(--ok); box-shadow: 0 0 18px color-mix(in srgb, var(--ok) 45%, transparent); }
+
+/* Downloads (pages/downloads.njk): the kinds of publication as chips with their count, then each kind as a list of
+   rows, a title with the files beside it. In motion: the rows rise into place, a row lights up under the pointer, a
+   file's arrow drops towards the reader and the button settles when it is pressed; the rest of a long list unfolds. */
+.downloads-jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+.downloads-jump a { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px 9px 16px; border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line)); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; transition: border-color .25s ease, background-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease; }
+.downloads-jump a span { display: grid; place-items: center; min-width: 26px; height: 22px; padding: 0 7px; border-radius: 999px; background: color-mix(in srgb, var(--blue) 14%, transparent); color: var(--blue); font-size: 12px; font-variant-numeric: tabular-nums; }
+.downloads-jump a:hover { translate: 0 -2px; border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 12px 26px -18px var(--blue); }
+.downloads-section { padding-top: 56px; scroll-margin-top: 80px; }
+.downloads-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.downloads-head h2 { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3.4vw, 42px); font-weight: 400; line-height: 1.05; }
+.downloads-head span { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.downloads-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.downloads-row { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.downloads-row::before { content: ""; position: absolute; inset: 4px -16px; z-index: -1; border-radius: 16px; background: radial-gradient(460px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 10%, transparent), transparent 65%), color-mix(in srgb, var(--ink) 3%, transparent); opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+.downloads-row:hover::before { opacity: 1; }
+.downloads-copy { display: grid; gap: 4px; min-width: 0; }
+.downloads-title { color: var(--ink); font-family: var(--serif); font-size: clamp(19px, 2vw, 23px); line-height: 1.2; text-decoration: none; overflow-wrap: anywhere; transition: color .25s ease, translate .4s cubic-bezier(.22, 1, .36, 1); }
+.downloads-row:hover .downloads-title { translate: 4px 0; color: color-mix(in srgb, var(--blue-soft, var(--blue)) 70%, var(--ink)); }
+.downloads-meta { color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+.downloads-files { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.downloads-file { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 13px; text-decoration: none; white-space: nowrap; transition: border-color .25s ease, background-color .25s ease, box-shadow .3s ease, scale .2s cubic-bezier(.22, 1, .36, 1); }
+.downloads-file b { color: var(--blue); font-size: 12px; letter-spacing: .08em; }
+.downloads-file span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.downloads-file i { color: var(--blue); font-style: normal; font-weight: 800; transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.downloads-file:hover { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 10px 22px -16px var(--blue); }
+.downloads-file:hover i { translate: 0 3px; }
+.downloads-file:active { scale: .96; box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.downloads-more summary { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; transition: border-color .25s ease, background-color .25s ease; }
+.downloads-more summary::-webkit-details-marker { display: none; }
+.downloads-more summary::after { content: "+"; color: var(--blue); font-weight: 800; transition: rotate .35s cubic-bezier(.22, 1, .36, 1); }
+.downloads-more[open] summary::after { rotate: 45deg; }
+.downloads-more summary:hover { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.downloads-more[open] .downloads-list { margin-top: 8px; }
+.downloads-note { margin-top: 40px; margin-bottom: 90px; }
+@media (max-width: 620px) {
+  .downloads-row { grid-template-columns: minmax(0, 1fr); }
+  .downloads-row::before { inset: 4px -10px; }
+  .downloads-files { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .downloads-more[open] .downloads-row { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 30ms); }
+}
+@media (prefers-reduced-motion: reduce) { .downloads-title, .downloads-file, .downloads-file i, .downloads-jump a { transition: none; } }
