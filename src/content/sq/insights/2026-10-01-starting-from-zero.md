@@ -10,7 +10,7 @@ deck: 'Eseja e parë e serisë “Dhjetë vite pranë punës”: çfarë mbetet 
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Shkruaj tri gjëra që di t'i bësh sot dhe që nuk varen nga asnjë titull.
-  - Pyet një person që e bën punën si funksionon vërtet procesi, dhe dëgjo para se ta krahasosh me atë që dije.
+  - Pyet një person që e bën punën si funksionon vërtet procesi dhe dëgjo para se ta krahasosh me atë që dije.
   - Përmende atë që ke qenë vetëm kur i ndihmon punës që ke përpara.
 checklist:
   title: Çfarë merr me vete
@@ -24,7 +24,7 @@ checklist:
       hint: “Kam qenë menaxher, pra duhet të jem menaxher.”
     - label: Ku e tregoj së pari
       hint: Një detyrë, një turn, një problem që askush nuk e ka marrë përsipër.
-    - label: Puna që nuk do ta quaj poshtë meje
+    - label: Puna që nuk do ta quaj poshtë dinjitetit tim
       hint: Ajo që ma mëson procesin nga ana tjetër.
 ---
 
@@ -32,7 +32,7 @@ Në Shqipëri, roli im i fundit ishte Cluster Manager: drejtoja operacionet e dy
 
 Me këtë kontrast nis seria “Dhjetë vite pranë punës”, jo për ta bërë dramë apo për të treguar një histori emigrimi, por sepse pa të nuk kuptohet asgjë nga ç'shkruaj më pas: si mendoj kur kam përpara një problem operacional, si i drejtoj njerëzit dhe pse i shoh proceset nga të dyja anët.
 
-Dyqanin kryesor nuk e mora gati. Mora pjesë në ngritjen e tij nga zero deri në ditën e hapjes, duke koordinuar arkitektë, marangozë, bojaxhinj dhe ekipet e zbatimit. Pastaj erdhën shitjet, standardi i shërbimit, përvoja e klientit, organizimi operacional dhe ekipi: tetë shitës, katër arkëtare dhe një asistente. Ngritëm faqen e parë të shitjeve online të kompanisë dhe ekipin e saj të parë të tregtisë online (e-commerce). Në të njëjtën periudhë rrjeti u ristrukturua: dy dyqane me rezultate të dobëta u mbyllën dhe aktiviteti u përqendrua më shumë te dyqani kryesor.
+Mora pjesë në ngritjen e dyqanit kryesor nga zero deri në ditën e hapjes, duke koordinuar arkitektë, marangozë, bojaxhinj dhe ekipet e zbatimit. Pastaj erdhën shitjet, standardi i shërbimit, përvoja e klientit, organizimi operacional dhe ekipi: tetë shitës, katër arkëtare dhe një asistente. Ngritëm faqen e parë të shitjeve online të kompanisë dhe ekipin e saj të parë të tregtisë online (e-commerce). Në të njëjtën periudhë rrjeti u ristrukturua: dy dyqane me rezultate të dobëta u mbyllën dhe aktiviteti u përqendrua më shumë te dyqani kryesor.
 
 Para kësaj, si General Sales Manager te një distributor pajisjesh shtëpiake, kisha drejtuar shitjen me shumicë: një rrjet me 61 rishitës aktivë dhe një strukturë që përfshinte magazinën, shitjet B2B, kontabilitetin, ekipin teknik dhe shërbimin ndaj klientit. Kur u largova nga Shqipëria, isha mësuar të merrja vendime, të drejtoja njerëz dhe të përgjigjesha për rezultatet e biznesit.
 
@@ -52,10 +52,10 @@ Këto vite më dhanë më shumë se gjuhën. Ma treguan punën nga ana e atij q�
 
 Si shpërndarës pakosh e kupton ndryshe kohën, itinerarin dhe presionin, dhe e di ç'do të thotë një proces që nuk funksionon ose një vendim i marrë nga dikush që nuk është në terren. Si steward e sheh hotelin nga një nivel krejt tjetër: punë fizike, ritëm, bashkëpunim mes departamenteve, dhe sa shumë varet përvoja e mysafirit nga njerëz që ai mund të mos i shohë kurrë. Si night auditor pashë çfarë mbetet nga një ditë pune pasi të gjithë të tjerët kanë ikur: gabimet, pagesat, raportet, ankesat, no-show-t, kontrollet dhe dorëzimi i turnit.
 
-Kur u ktheva në drejtim në last mile, nuk i drejtoja njerëzit vetëm nga teoria. Kisha qenë vetë në anën tjetër të procesit, dhe kjo qëndron pas çdo eseje të kësaj serie.
+Kur u ktheva në drejtim në last mile, i drejtoja njerëzit me më shumë se teori: kisha qëndruar vetë në anën tjetër të procesit. Kjo përvojë qëndron pas çdo eseje të kësaj serie.
 
-Nëse dikush që ka qenë shef do të më pyeste si të nisë sërish nga zero, nuk do t'i thosha se është e lehtë. Do t'i thosha të mos e ngatërrojë humbjen e titullit me humbjen e vlerës së vet profesionale. Titulli mund të humbasë brenda një dite, kur ndërron vend, kompani apo industri. Ajo që ke mësuar nuk humbet.
+Nëse dikush që ka qenë shef do të më pyeste si të niste sërish nga zero, nuk do t'i thosha se është e lehtë, por do t'i thosha të mos e ngatërronte humbjen e titullit me humbjen e vlerës së vet profesionale. Titulli mund të humbasë brenda një dite, kur ndërron vend, kompani apo industri. Ajo që ke mësuar nuk humbet.
 
-Megjithatë, ka një kusht. Mos hyr në punën e re duke pritur që të tjerët të respektojnë atë që ke qenë. Fillo të tregosh çfarë di të bësh aty ku je. Unë kalova nga drejtimi i njerëzve dhe i bizneseve në Shqipëri te shpërndarja e pakove dhe puna si steward në Gjermani, pastaj te night audit-i, te Team Leader dhe te Area Manager. Po të kisha menduar se disa punë ishin poshtë meje, ndoshta nuk do ta kisha mësuar kurrë atë që më duhej për t'u ngritur përsëri.
+Megjithatë, ka një kusht. Mos hyr në punën e re duke pritur që të tjerët të respektojnë atë që ke qenë. Fillo të tregosh çfarë di të bësh aty ku je. Unë kalova nga drejtimi i njerëzve dhe i bizneseve në Shqipëri te shpërndarja e pakove dhe puna si steward në Gjermani, pastaj te night audit-i, te Team Leader dhe te Area Manager. Po të kisha menduar se disa punë ishin poshtë dinjitetit tim, ndoshta nuk do ta kisha mësuar kurrë atë që më duhej për t'u ngritur përsëri.
 
 Mos u kap pas karriges që kishe. Merr me vete atë që mësove ndërsa rrije ulur në të.

@@ -44,7 +44,7 @@ In the hotel I have worked much more directly with checklists and SOPs for Front
 
 It starts with the real work. First I want to understand what result the process has to deliver at the end. Then I look at what actually happens in the shift: where the mistakes happen, what gets forgotten most often, which steps depend on each other. Only then do I turn the process into a structure.
 
-I try to remove everything the person does not need at the moment they are working. A document full of theory that does not help you when you have several things to solve at once is not a good SOP.
+I try to remove everything the person does not need at the moment they are working. A document full of theory that does not help you when you have several things to solve at once is not, for me, a good SOP.
 
 Order matters too. The person has to understand not only what to do, but what must have been checked before they carry on.
 
@@ -54,7 +54,7 @@ The principle I work by is simple: the SOP has to be understandable even to some
 
 ## The problem I have seen most often
 
-What I have seen most often are documents that exist but, in the real work, are too long, scattered across several places, or no help to the employee at the moment they need the information.
+I have no clear case of an SOP I created and put in place that then failed in practice. What I have seen most often is something else: documents that exist but, in the real work, are too long, scattered across several places, or no help to the employee at the moment they need the information.
 
 That is one of the reasons I later began to think more about how a procedure is presented, not only about what is written in it.
 
@@ -64,7 +64,7 @@ An SOP cannot be treated as a document that is written once and then forgotten.
 
 Processes, systems and teams change. A screen in the software may change, or a responsibility may move to another department. And sometimes the work itself shows you that a step that looked logical in the document is not so practical in the shift.
 
-That is why an SOP has to be updated every time the reality it describes changes. The person who knows the process has to flag the change, and the version the team uses has to be corrected, so that two different ways of working do not keep circulating.
+That is why, for me, an SOP has to be updated every time the reality it describes changes. The person who knows the process has to flag the change, and the version the team uses has to be corrected, so that two different ways of working do not keep circulating.
 
 One of the biggest problems I have seen with operational documentation is when the “official” version says one thing while the people on shift have learned another way. At that moment the SOP has stopped being a standard.
 
@@ -86,7 +86,7 @@ The person doing the work should not have to search for the information. The inf
 
 Front Desk Control came out of this problem.
 
-In Front Office and Night Audit work, information can be scattered across many places: checklists, separate documents, instructions, screenshots and notes created at different moments. When you are learning a new hotel or a new system, a lack of information is not always the problem. Sometimes you have plenty of it and cannot find the piece you need at the right moment.
+In Front Office and Night Audit work, information can be scattered across many places: checklists, separate documents, instructions, screenshots and notes created at different moments. When you are learning a new hotel or a new system, you can have plenty of information and still not find the piece you need at the right moment.
 
 So I gathered these processes into one digital structure on a single page, built as a working tool rather than a manual to read from start to finish. The processes are split by function: you find the SOP you need, see the matching instruction and use the visual references without searching through many different documents.
 
@@ -96,4 +96,4 @@ What interests me about Front Desk Control is less the website than the problem 
 
 This is where the meaning of an SOP changes. A document tells you how the work should be done. A good SOP helps you do the work correctly at exactly the moment you need it.
 
-An SOP's author will always understand it, having written it. The real test is whether someone else can use it under pressure and get the same result.
+An SOP's author will always understand it, having written it. The best test of an SOP, in my view, is whether someone else can use it under pressure and get the same result.

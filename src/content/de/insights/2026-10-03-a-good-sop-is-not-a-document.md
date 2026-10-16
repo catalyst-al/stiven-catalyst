@@ -37,7 +37,7 @@ Im Hotel habe ich viel direkter mit Checklisten und SOPs für Front Office und N
 
 Sie beginnt bei der echten Arbeit. Zuerst will ich verstehen, welches Ergebnis der Prozess am Ende liefern muss. Dann schaue ich, was in der Schicht tatsächlich passiert: wo die Fehler entstehen, was am häufigsten vergessen wird, welche Schritte voneinander abhängen. Erst danach mache ich aus dem Prozess eine Struktur.
 
-Ich versuche, alles wegzulassen, was die Person in dem Moment, in dem sie arbeitet, nicht braucht. Ein Dokument voller Theorie, das Ihnen nicht hilft, wenn Sie mehrere Dinge gleichzeitig lösen müssen, ist keine gute SOP.
+Ich versuche, alles wegzulassen, was die Person in dem Moment, in dem sie arbeitet, nicht braucht. Ein Dokument voller Theorie, das Ihnen nicht hilft, wenn Sie mehrere Dinge gleichzeitig lösen müssen, ist für mich keine gute SOP.
 
 Auch die Reihenfolge zählt. Die Person muss nicht nur verstehen, was sie tun soll, sondern auch, was geprüft sein muss, bevor sie weitermacht.
 
@@ -47,7 +47,7 @@ Mein Prinzip dabei ist einfach: Die SOP muss auch für jemanden verständlich se
 
 ## Das Problem, das ich am häufigsten gesehen habe
 
-Am häufigsten habe ich Dokumente gesehen, die zwar existieren, in der echten Arbeit aber zu lang sind, über mehrere Orte verstreut liegen oder dem Mitarbeiter genau in dem Moment nicht helfen, in dem er die Information braucht.
+Einen klaren Fall, in dem eine SOP, die ich erstellt und eingeführt habe, in der Praxis gescheitert wäre, habe ich nicht. Am häufigsten habe ich etwas anderes gesehen: Dokumente, die zwar existieren, in der echten Arbeit aber zu lang sind, über mehrere Orte verstreut liegen oder dem Mitarbeiter genau in dem Moment nicht helfen, in dem er die Information braucht.
 
 Das ist einer der Gründe, warum ich später stärker darüber nachgedacht habe, wie eine Prozedur dargestellt wird, und nicht nur darüber, was in ihr steht.
 
@@ -57,7 +57,7 @@ Eine SOP kann man nicht wie ein Dokument behandeln, das einmal geschrieben und d
 
 Prozesse, Systeme und Teams verändern sich. Ein Bildschirm in der Software kann sich ändern, eine Zuständigkeit in eine andere Abteilung wandern. Und manchmal zeigt Ihnen die Arbeit selbst, dass ein Schritt, der im Dokument logisch aussah, in der Schicht nicht so praktisch ist.
 
-Deshalb muss eine SOP jedes Mal aktualisiert werden, wenn sich die Realität ändert, die sie beschreibt. Wer den Prozess kennt, muss die Änderung melden, und die Version, mit der das Team arbeitet, muss korrigiert werden, damit nicht zwei verschiedene Arbeitsweisen im Umlauf bleiben.
+Deshalb muss eine SOP aus meiner Sicht jedes Mal aktualisiert werden, wenn sich die Realität ändert, die sie beschreibt. Wer den Prozess kennt, muss die Änderung melden, und die Version, mit der das Team arbeitet, muss korrigiert werden, damit nicht zwei verschiedene Arbeitsweisen im Umlauf bleiben.
 
 Eines der größten Probleme, die ich bei operativer Dokumentation gesehen habe: Die „offizielle“ Version sagt das eine, während die Leute in der Schicht einen anderen Weg gelernt haben. In diesem Moment ist die SOP kein Standard mehr.
 
@@ -79,14 +79,14 @@ Wer arbeitet, soll die Information nicht suchen müssen. Die Information soll do
 
 Aus diesem Problem ist Front Desk Control entstanden.
 
-Im Front Office und im Night Audit kann die Information an vielen Orten verstreut sein: Checklisten, einzelne Dokumente, Anleitungen, Screenshots und Notizen, die zu unterschiedlichen Zeitpunkten entstanden sind. Wer ein neues Hotel oder ein neues System kennenlernt, hat nicht immer zu wenig Information. Manchmal hat er viel davon und findet im richtigen Moment nicht das, was er braucht.
+Im Front Office und im Night Audit kann die Information an vielen Orten verstreut sein: Checklisten, einzelne Dokumente, Anleitungen, Screenshots und Notizen, die zu unterschiedlichen Zeitpunkten entstanden sind. Wer ein neues Hotel oder ein neues System kennenlernt, kann viel Information haben und im richtigen Moment trotzdem nicht finden, was er braucht.
 
 Also habe ich diese Prozesse in einer einzigen digitalen Struktur auf einer einzigen Seite zusammengeführt, gebaut als Arbeitswerkzeug und nicht als Handbuch, das man von vorne bis hinten liest. Die Prozesse sind nach Funktion gegliedert: Sie finden die SOP, die Sie brauchen, sehen die passende Anleitung und nutzen die visuellen Referenzen, ohne in vielen verschiedenen Dokumenten zu suchen.
 
 Auch die Qualität des Materials war mir wichtig. Ich habe die Bilder und Screenshots in den Anleitungen geprüft und nur die behalten, die denselben Prozessschritt klar zeigen und wirklich lesbar sind.
 
-Mich interessiert an Front Desk Control weniger die Website als das Problem, das sie löst, eines, das ich selbst im Betrieb gesehen habe: Das Wissen ist da, aber nicht immer dort, wo der Mitarbeiter es braucht.
+Mich interessiert an Front Desk Control weniger die Website als das Problem, das sie angeht, eines, das ich selbst im Betrieb gesehen habe: Das Wissen ist da, aber nicht immer dort, wo der Mitarbeiter es braucht.
 
 Genau hier ändert sich die Bedeutung einer SOP. Ein Dokument sagt Ihnen, wie die Arbeit gemacht werden soll. Eine gute SOP hilft Ihnen, die Arbeit genau in dem Moment richtig zu machen, in dem Sie sie brauchen.
 
-Wer eine SOP geschrieben hat, versteht sie immer. Der eigentliche Test ist, ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht.
+Wer eine SOP geschrieben hat, versteht sie immer. Der beste Test einer SOP ist aus meiner Sicht, ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht.

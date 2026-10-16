@@ -18,16 +18,16 @@ checklist:
   fill: true
   items:
     - label: A kërkon kjo situatë veprim, apo një vendim që duhet ta marrë dikush tjetër?
-      hint: Nismë, apo tejkalim i mandatit.
+      hint: Nismë apo tejkalim i mandatit.
     - label: A kam informacionin dhe kompetencën për ta marrë përsipër?
       hint: Fakti që askush tjetër nuk vepron nuk më bën vetvetiu personin e duhur për të vendosur.
     - label: Pas kësaj, te kush mbetet përgjegjësia?
       hint: Problemi fillon kur përjashtimi bëhet rregull dhe askush nuk e di më kush përgjigjet për çfarë.
-    - label: Çfarë eskaloj, dhe te kush?
+    - label: Çfarë eskaloj dhe te kush?
       hint: Politikat, kostot e mëdha, personeli, siguria, përjashtimet nga një procedurë.
 ---
 
-Kur një situatë kërkon përgjegjësi, të udhëheqësh pa titull do të thotë të mos fshihesh pas përshkrimit të vendit të punës. Nuk do të thotë të bësh punën e shefit pa qenë shef, dhe po aq rëndësi ka të dish kur duhet të ndalesh.
+Kur një situatë kërkon përgjegjësi, për mua të udhëheqësh pa titull do të thotë të mos fshihesh pas përshkrimit të vendit të punës. Nuk do të thotë të bësh punën e shefit pa qenë shef, dhe po aq rëndësi ka të dish kur duhet të ndalesh.
 
 ## Përtej rolit, jo përtej mandatit
 
@@ -35,7 +35,7 @@ Në last mile kam pasur një rol operacional, por kishte momente kur puna kërko
 
 Në hotel ka ndodhur ndryshe. Roli im është operacional, por kam shkuar përtej punës së turnit: kam strukturuar lista kontrolli, SOP, materiale trajnimi dhe, më vonë, një sistem digjital për Front Office dhe Night Audit.
 
-Kjo nuk do të thotë se mora autoritetin e menaxhimit. Mora përgjegjësinë për mënyrën si e organizoja dhe e dokumentoja punën që njihja. Ky dallim për mua ka rëndësi: të marrësh më shumë përgjegjësi nuk do të thotë të marrësh vendime që nuk të takojnë.
+Autoriteti i menaxhimit mbeti te menaxhimi. Përgjegjësia që mora ishte për mënyrën si e organizoja dhe e dokumentoja punën që njihja. Ky dallim për mua ka rëndësi: të marrësh më shumë përgjegjësi nuk do të thotë të marrësh vendime që nuk të takojnë.
 
 Ajo që mund të tregoj është çfarë pasoi. Kam vazhduar të përfshihem në koordinim, përmirësime operative, dokumentim dhe ndërtim procesesh, dhe në hotel kam vazhduar të punoj për strukturimin e Night Audit-it dhe të mjeteve që e bëjnë punën më të qartë. Kjo më tregon se kontributi im është përdorur, edhe pse nuk thotë asgjë për mënyrën si reaguan të gjithë apo për ndonjë njohje formale për çdo përgjegjësi shtesë.
 
@@ -63,7 +63,7 @@ Kam mësuar se nisma dhe autoriteti janë dy gjëra të ndryshme. Nisma thotë: 
 
 Çmimi më i dukshëm është lodhja. Kur fillon ta shohësh gjithçka si problem që duhet zgjidhur, është shumë e lehtë të marrësh përsipër më shumë përgjegjësi sesa të takon.
 
-Rreziku tjetër duket më pak: nëse vazhdon t'i mbulosh boshllëqet e një sistemi, mund të krijosh përshtypjen se sistemi funksionon, sepse dikush e shpëton gjithmonë.
+Rreziku tjetër dallohet më vështirë: nëse vazhdon t'i mbulosh boshllëqet e një sistemi, mund të krijosh përshtypjen se sistemi funksionon, sepse dikush e shpëton gjithmonë.
 
 Sot do ta hiqja më qartë një vijë: mes “po e zgjidh tani që operacioni të vazhdojë” dhe “ky problem kërkon një zgjidhje strukturore nga personi që ka autoritetin për të”. Do të dokumentoja më shumë dhe do ta bëja më të qartë kush përgjigjet për një problem. Dhe nuk do ta ngatërroja gatishmërinë për të ndihmuar me detyrimin për të mbajtur mbi supe çdo problem të organizatës.
 

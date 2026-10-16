@@ -25,7 +25,7 @@ checklist:
 
 In der Last Mile gehörten Pareto und 5 Why zur täglichen Analyse der Kennzahlen, vor allem bei Verspätungen, Schäden, unvollständigen Bestellungen und Ladezeit. Gerade deshalb möchte ich sie so beschreiben, wie ich sie genutzt habe, und nicht so, wie sie auf einer Folie aussehen.
 
-Der am besten dokumentierte Fall, den ich aufbewahrt habe, ist ein Verspätungsbericht von einem Tag im August 2025 mit 19 Fällen. Die Ursachen waren sehr unterschiedlich. Im Bericht stehen fehlende Taschen und ein ganzer Wagen, der fehlte; Taschen mit falschem Etikett und eine Tasche, die am falschen Ort abgestellt oder verladen wurde; unordentliche Wagen oder vermischte Taschen; Wagen, die nicht bereitstanden, sodass der Fahrer selbst scannen musste; viele Wagen und lange Ladezeiten; beschädigte Taschen, die ins Lager zurückmussten. Dazu kommen Bestellungen mit schweren Kisten und Kontrollen, die Zeit kosteten, Verkehr und Parkprobleme, lange Stopps und ein Problem mit der Zahlung.
+Der am besten dokumentierte Fall, den ich aufbewahrt habe, ist ein Verspätungsbericht von einem Tag im August 2025 mit 19 Fällen. Die Ursachen waren unterschiedlich. Im Bericht stehen fehlende Taschen und ein voller Wagen, der fehlte; Taschen mit falschem Etikett und eine Tasche, die am falschen Ort abgestellt oder verladen wurde; unordentliche Wagen oder vermischte Taschen; Wagen, die nicht bereitstanden, sodass der Fahrer selbst scannen musste; viele Wagen und lange Ladezeiten; beschädigte Taschen, die ins Lager zurückmussten. Dazu kommen Bestellungen mit schweren Kisten und Kontrollen, die Zeit kosteten, Verkehr und Parkprobleme, lange Stopps und ein Problem mit der Zahlung.
 
 Die Daten stammten aus den operativen Fällen des Tages und den tatsächlichen Gründen für jede Verspätung, nicht aus einer theoretischen Umfrage. Eine Grenze ist hier wichtig: Die ursprüngliche Pareto-Tabelle mit der Zahl der Fälle pro Kategorie und dem kumulierten Anteil habe ich nicht aufbewahrt. Einen Satz wie „42 % der Verspätungen gingen auf fehlende Taschen zurück“ kann ich Ihnen deshalb nicht bieten. Er würde professionell aussehen und wäre nicht belegt.
 
@@ -37,9 +37,9 @@ Mit 5 Why passiert etwas Ähnliches.
 
 Ich habe einen echten Fall, aber nur den Anfang der Kette. Das Problem: Eine falsche Tasche war verladen worden. Warum gab es ein Problem mit der Zustellung? Weil die falsche Tasche verladen worden war. Warum war die falsche Tasche verladen worden? Weil sie beim Laden am falschen Ort abgestellt worden war. Aus der Analyse ergab sich eine Korrekturmaßnahme: Beladung doppelt prüfen. Und noch etwas war wichtig: Das Problem wurde Lager und Beladung zugeordnet, nicht automatisch dem Fahrer als Fehler angelastet.
 
-So viel ist dokumentiert. Das dritte, vierte und fünfte Warum wurden nie aufgeschrieben. Ich könnte sie jetzt mit Sätzen füllen, die gut klingen; das ergäbe ein schönes 5 Why auf dem Papier, aber nicht unbedingt das, das ich tatsächlich gemacht habe. Das will ich vermeiden: 5 Why heißt nicht, fünfmal „warum“ zu fragen, um ein Formular auszufüllen.
+So viel ist dokumentiert. Das dritte, vierte und fünfte Warum liegen mir nicht schriftlich vor. Ich könnte die Lücke jetzt mit Sätzen füllen, die gut klingen; das ergäbe ein schönes 5 Why auf dem Papier, aber nicht unbedingt das, was ich tatsächlich gemacht habe. Genau dieses 5 Why will ich vermeiden: fünfmal „warum“, nur um ein Formular auszufüllen.
 
-Es soll von der Frage „Wer war es?“ zu der Frage führen: „Was im Prozess hat das möglich gemacht, und was können wir ändern?“
+Die Methode soll von der Frage „Wer war es?“ zu der Frage führen: „Was im Prozess hat das möglich gemacht, und was können wir ändern?“
 
 Man bleibt sehr leicht bei der Person stehen. „Der Fahrer hat die falsche Tasche genommen.“ Wer dort aufhört, hat einen Schuldigen gefunden, nicht unbedingt eine Ursache. Entscheidend ist die nächste Frage: Warum konnte der Fahrer überhaupt die falsche Tasche nehmen? War die Tasche im falschen Wagen? Waren die Taschen vermischt? War das Etikett falsch? Fehlte eine Kontrolle vor der Abfahrt? War der Ladeprozess so unklar, dass derselbe Fehler auch einem anderen Fahrer passieren konnte?
 
@@ -49,6 +49,6 @@ Aus diesem und anderen Fällen desselben Zeitraums entstanden Maßnahmen: doppel
 
 In einzelnen Monaten dieses Zeitraums erreichte das Team das Schadensziel, aber nicht in jedem Monat, und ich habe keine Messungen, die einen stetigen Rückgang zeigen würden. Wo das Ziel erreicht wurde, sehe ich es als Ergebnis der Arbeit des Teams und eines breiteren Kontrollsystems, nicht eines einzelnen 5 Why. Einen Beleg dafür, dass gerade dieser Fall dazu beigetragen hat, habe ich nicht.
 
-Auf das Wesentliche gebracht, das eine Führungskraft morgen nutzen kann, sind es drei Dinge. Prüfen Sie die Kategorien, bevor Sie dem Diagramm trauen. Beenden Sie die Analyse nicht beim Namen einer Person. Und schreiben Sie nur so viele „Warums“ auf, wie Sie tatsächlich gefragt haben, und fragen Sie dann weiter, an der Rampe und nicht im Formular.
+Auf das gebracht, was eine Führungskraft morgen nutzen kann, sind es drei Dinge. Prüfen Sie die Kategorien, bevor Sie dem Diagramm trauen. Beenden Sie die Analyse nicht beim Namen einer Person. Und schreiben Sie nur so viele „Warums“ auf, wie Sie tatsächlich gefragt haben, und fragen Sie dann weiter, an der Rampe und nicht im Formular.
 
 Eine Analyse, die aufgefüllt wurde, damit sie gut aussieht, ist gefährlicher als eine unvollständige Analyse, die ihre eigene Grenze zugibt.

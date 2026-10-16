@@ -11,7 +11,7 @@ deck: 'Eseja e katërt e serisë “Dhjetë vite pranë punës”: si i përdorj
 firstMove:
   - Hap rastet e djeshme të vonesave ose dëmtimeve dhe kontrollo kategorinë e secilit para se t'i numërosh.
   - Merr një rast dhe pyet “pse” vetëm aq herë sa mund të përgjigjesh nga terreni.
-  - Shkruaje kundërmasën me një përgjegjës, dhe shëno ku ndaloi zinxhiri i pse-ve.
+  - Shkruaje kundërmasën me një përgjegjës dhe shëno ku ndaloi zinxhiri i pse-ve.
 checklist:
   title: Para se t'i besosh grafikut
   copy: Kopjo listën
@@ -25,7 +25,7 @@ checklist:
 
 Në last mile, Pareto dhe 5 Why ishin pjesë e analizës së përditshme të KPI-ve, sidomos për vonesat, dëmet, porositë e paplota dhe kohën e ngarkimit. Pikërisht për këtë dua t'i përshkruaj ashtu siç i kam përdorur, jo ashtu siç duken në një prezantim.
 
-Rasti më i dokumentuar që kam ruajtur është një raport vonesash nga një ditë e gushtit 2025, me 19 raste. Shkaqet ishin të ndryshme. Raporti përmend çanta që mungonin dhe një karrocë të plotë që mungonte; çanta me etiketë të gabuar dhe një çantë të vendosur ose të ngarkuar në vendin e gabuar; karroca të çrregullta ose çanta të përziera; karroca që nuk ishin gati, ku shoferi duhej ta bënte vetë skanimin; shumë karroca dhe ngarkim të gjatë; çanta të dëmtuara që duhej të ktheheshin në magazinë. Përmend edhe porosi me arka të rënda dhe kontrolle që merrnin kohë, trafik dhe probleme parkimi, ndalesa të gjata dhe një problem me pagesën.
+Rasti më i dokumentuar që kam ruajtur është një raport vonesash nga një ditë e gushtit 2025, me 19 raste. Shkaqet ishin të ndryshme. Raporti përmend çanta që mungonin dhe një karrocë të plotë që mungonte; çanta me etiketë të gabuar dhe një çantë të vendosur ose të ngarkuar në vendin e gabuar; karroca të çrregullta ose çanta të përziera; karroca që nuk ishin gati, saqë shoferi duhej ta bënte vetë skanimin; shumë karroca dhe ngarkim të gjatë; çanta të dëmtuara që duhej të ktheheshin në magazinë. Përmend edhe porosi me arka të rënda dhe kontrolle që merrnin kohë, trafik dhe probleme parkimi, ndalesa të gjata dhe një problem me pagesën.
 
 Të dhënat vinin nga rastet operative të ditës dhe nga arsyet reale të çdo vonese, jo nga një anketë teorike. Këtu ka një kufi që duhet thënë: tabelën origjinale të Pareto-s, me numrin e rasteve për çdo kategori dhe përqindjen kumulative, nuk e kam ruajtur. Prandaj nuk mund të të jap një fjali si “42% e vonesave vinin nga çantat që mungonin”. Do të dukej profesionale, por nuk do të ishte e dokumentuar.
 
@@ -37,15 +37,15 @@ Me 5 Why ndodh diçka e ngjashme.
 
 Kam një rast real, por vetëm fillimin e zinxhirit. Problemi: ishte ngarkuar një çantë e gabuar. Pse pati problem me dorëzimin? Sepse ishte ngarkuar çanta e gabuar. Pse ishte ngarkuar çanta e gabuar? Sepse ishte vendosur në vend të gabuar gjatë ngarkimit. Nga analiza doli një veprim korrigjues: ngarkimi duhej kontrolluar dy herë (Beladung doppelt prüfen). Dhe një gjë tjetër kishte rëndësi: problemi u klasifikua si i shkaktuar nga magazina dhe ngarkimi, jo automatikisht si faj i shoferit.
 
-Kaq është e dokumentuar. Pyetja e tretë, e katërt dhe e pestë nuk u shkruan kurrë. Mund t'i plotësoja tani me fjali që tingëllojnë mirë; do të dilte një 5 Why i bukur në letër, por jo domosdoshmërisht ai që bëra vërtet. Këtë dua të shmang: 5 Why nuk është pesë herë “pse” për të plotësuar një formular.
+Kaq është e dokumentuar. Nuk kam asgjë të shkruar për pse-në e tretë, të katërt dhe të pestë. Mund t'i plotësoja tani me fjali që tingëllojnë mirë; do të dilte një 5 Why i bukur në letër, por jo domosdoshmërisht ai që bëra vërtet. Pikërisht këtë 5 Why dua të shmang: pesë herë “pse” vetëm për të plotësuar një formular.
 
-Qëllimi i tij është të të çojë nga pyetja “kush e bëri?” te pyetja “çfarë në proces e lejoi që kjo të ndodhte, dhe çfarë mund të ndryshojmë?”
+Qëllimi i metodës është të të çojë nga pyetja “kush e bëri?” te pyetja “çfarë në proces e lejoi që kjo të ndodhte, dhe çfarë mund të ndryshojmë?”
 
-Është shumë e lehtë të ndalesh te personi. “Shoferi mori çantën e gabuar.” Po u ndale aty, ke gjetur një fajtor, jo domosdoshmërisht një shkak. Pyetja që ka rëndësi vjen pas kësaj: pse ishte e mundur që shoferi të merrte çantën e gabuar? A ishte çanta në karrocën e gabuar? A ishin çantat të përziera? A ishte etiketa gabim? A mungonte një kontroll para nisjes? A ishte procesi i ngarkimit aq i paqartë sa i njëjti gabim mund t'i ndodhte përsëri edhe një shoferi tjetër?
+Është shumë e lehtë të ndalesh te personi. “Shoferi mori çantën e gabuar.” Po u ndale aty, ke gjetur një fajtor, jo domosdoshmërisht një shkak. Pyetja që ka rëndësi vjen pas kësaj: pse ishte e mundur që shoferi të merrte çantën e gabuar? A ishte çanta në karrocën e gabuar? A ishin çantat të përziera? A ishte etiketa e gabuar? A mungonte një kontroll para nisjes? A ishte procesi i ngarkimit aq i paqartë sa i njëjti gabim mund t'i ndodhte përsëri edhe një shoferi tjetër?
 
 Kur e vetmja përgjigje që jep një analizë është “punonjësi ishte i pakujdesshëm”, shumë shpesh analiza ka mbaruar para kohe. Nëse nesër në të njëjtin proces vjen personi tjetër dhe i njëjti gabim mund t'i ndodhë edhe atij, nuk e ke ndryshuar sistemin. Ke ndërruar vetëm emrin në raport.
 
-Nga ai rast dhe nga raste të tjera të së njëjtës periudhë dolën masa: kontrolli i dyfishtë i ngarkimit, çanta të papërziera në të njëjtën karrocë ose kuti, karroca të renditura sipas itinerarit, kontroll më i qartë i ngarkimit, respektimi i procesit të skanimit, auditime të rampës dhe standarde më të qarta për shoferët dhe për dispeçimin. Përgjegjësia operative ndahej mes strukturës së turnit, dispeçimit dhe njerëzve përgjegjës për çdo proces; si menaxher, unë i ndiqja KPI-të dhe problemet me drejtuesit e turnit dhe dispeçerët.
+Nga ai rast dhe nga raste të tjera të së njëjtës periudhë dolën masa: kontrolli i dyfishtë i ngarkimit, mospërzierja e çantave në të njëjtën karrocë ose kuti, renditja e karrocave sipas itinerarit, kontroll më i qartë i ngarkimit, respektimi i procesit të skanimit, auditime të rampës dhe standarde më të qarta për shoferët dhe për dispeçimin. Përgjegjësia operative ndahej mes strukturës së turnit, dispeçimit dhe njerëzve përgjegjës për çdo proces; si menaxher, unë i ndiqja KPI-të dhe problemet me drejtuesit e turnit dhe dispeçerët.
 
 Në disa muaj të asaj periudhe ekipi e arriti objektivin e dëmeve, por jo në çdo muaj, dhe nuk kam matje që do të tregonin një rënie të qëndrueshme. Aty ku objektivi u arrit, e shoh si rezultat të punës së ekipit dhe të një sistemi më të gjerë kontrolli, jo të një 5 Why të vetëm. Nuk kam asnjë provë se ky rast i veçantë ndikoi në këtë.
 

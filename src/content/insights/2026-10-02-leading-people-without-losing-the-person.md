@@ -36,7 +36,7 @@ checklist:
       hint: Behaviour and accountability in one case, the process in the other, sometimes both.
 ---
 
-In last mile it is not enough to tell someone to “work better”. They have to understand what “better” means.
+In last mile, telling someone to “work better” only helps once they understand what “better” means.
 
 So the standards had to be concrete. Loading had to stay within target. Drivers had to stay in their own area rather than crowd around the Shift Leader's desk. After loading, the gate was closed. Chilled and frozen were scanned in their own areas. When a bag was missing, nobody carried on as if everything was normal: the problem was reported. Safety, cleanliness and order on the ramp were part of the standard, and damage, incomplete orders, delays and loading time were measured every day.
 
@@ -46,7 +46,7 @@ But something else mattered too, and it is often forgotten. A person has to know
 
 That leads to the question that perhaps shapes the way you lead people more than any other: when something goes wrong, is it the process's error or the person's?
 
-If a delivery came out incomplete, I did not automatically start from “the driver made a mistake”. We looked at the process. Was the bag already missing in the warehouse? Had it gone into the wrong trolley? Did it have the wrong label? Were the bags mixed? Had the scanning been done properly? Had the complete route left the loading area? If the problem had started earlier in the process, it was not fair to turn it automatically into a performance problem of the driver's.
+If a delivery came out incomplete, we looked at the process before anyone concluded that “the driver made a mistake”. Was the bag already missing in the warehouse? Had it gone into the wrong trolley? Did it have the wrong label? Were the bags mixed? Had the scanning been done properly? Had the complete route left the loading area? If the problem had started earlier in the process, it was not fair to turn it automatically into a performance problem of the driver's.
 
 If, on the other hand, the process was in order, the standard was clear, the tools were there and the person still did not follow the procedure, then individual responsibility began.
 

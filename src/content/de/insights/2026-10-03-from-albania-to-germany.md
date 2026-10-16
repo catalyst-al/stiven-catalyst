@@ -28,9 +28,9 @@ checklist:
       hint: Damit das System es weiß, nicht nur ich.
 ---
 
-Früher lautete meine Frage: „Wie lösen wir das?“
+Früher habe ich öfter gefragt: „Wie lösen wir das?“
 
-Heute ist sie länger: „Wie lösen wir das, wer verantwortet es danach, und was ändern wir, damit es nicht wiederkommt?“ Vielleicht ist das die größte Veränderung, die ich als Führungskraft durchgemacht habe.
+Heute ist sie länger: „Wie lösen wir das, wer verantwortet es danach, und was ändern wir, damit es nicht wiederkommt?“ Vielleicht ist das die größte Veränderung, die ich als Führungskraft vollzogen habe.
 
 ## Wie ich in Albanien geführt habe
 
@@ -46,7 +46,7 @@ Auch im Umgang mit dem Team war ich immer lieber nah am Betrieb. Die Vorstellung
 
 In Deutschland ist mir das Gewicht des Prozesses viel deutlicher geworden.
 
-In vielen meiner Rollen hier reicht es nicht, dass die Arbeit erledigt ist. Sie muss nach Prozess erledigt und dokumentiert sein, und wenn nötig, muss man nachweisen können, dass sie kontrolliert wurde.
+In vielen meiner Rollen hier ist mit der erledigten Arbeit erst ein Teil getan: Sie muss nach Prozess erledigt und dokumentiert sein, und wenn nötig, muss man nachweisen können, dass sie kontrolliert wurde.
 
 Das habe ich in der Logistik genauso erlebt wie in der Hotellerie. In der Logistik gab es KPIs, eine klare Aufteilung der Verantwortlichkeiten, Abläufe, Betriebsregeln und eine Eskalation, sobald etwas vom Standard abwich. In der Hotellerie ist es noch sichtbarer: Checklisten, Berichte, Schichtübergaben, Kontrollen und viel schärfere Grenzen zwischen dem, was man selbst entscheiden darf, und dem, was man eskalieren muss.
 
@@ -60,7 +60,7 @@ Früher war ich vor allem auf das Ergebnis ausgerichtet: Das Problem ist da, als
 
 Deshalb lege ich heute viel mehr Wert auf SOPs, Checklisten, KPIs, die Übergabe, die Dokumentation und darauf, dass für jede Aufgabe feststeht, wer sie verantwortet.
 
-Ich habe auch gelernt, Initiative und Befugnis auseinanderzuhalten. Ich kann ein Problem erkennen, es analysieren, eine Lösung vorschlagen und meinen Teil erledigen. Deshalb liegt aber nicht jede Entscheidung bei mir. Diese Grenze ist mir heute viel wichtiger als früher.
+Ich habe auch gelernt, Initiative und Befugnis klarer auseinanderzuhalten. Ich kann ein Problem erkennen, es analysieren, eine Lösung vorschlagen und meinen Teil erledigen. Deshalb liegt aber nicht automatisch jede Entscheidung bei mir. Diese Grenze ist mir heute viel wichtiger als früher.
 
 Und ich habe etwas gelernt, das zunächst bürokratisch wirken mag, im Betrieb aber viel wert ist: Wenn ein Prozess nur funktioniert, weil ein guter Mensch ihn im Kopf hat, hat man noch keinen guten Prozess.
 
@@ -90,6 +90,6 @@ Von der strukturierten Arbeitsweise, die ich in Deutschland kennengelernt habe, 
 
 Aus meiner Erfahrung in Albanien würde ich die schnelle Reaktion bewahren, die Nähe zu den Menschen und die Fähigkeit, sich anzupassen, wenn die Wirklichkeit nicht zum Plan passt. Auch der beste Prozess auf dem Papier trifft eines Tages auf eine Lage, die darin nicht vorkommt.
 
-Meine Art zu führen liegt heute zwischen diesen beiden Welten. Aus der einen habe ich den Instinkt mitgenommen, in das Problem hineinzugehen, statt zu warten, bis jemand anderes es löst. In der anderen habe ich gelernt, dass es nicht reicht, das Problem zu lösen: Man muss eine Arbeitsweise aufbauen, die seine Rückkehr unwahrscheinlicher macht.
+Meine Art zu führen liegt heute zwischen diesen beiden Welten. Aus der einen habe ich den Instinkt mitgenommen, in das Problem hineinzugehen, statt zu warten, bis jemand anderes es löst. In der anderen habe ich gelernt, dass zu einer Lösung eine Arbeitsweise gehört, die die Rückkehr des Problems unwahrscheinlicher macht.
 
-Ich bin nicht weniger flexibel geworden. Ich bin weniger bereit, die Flexibilität an die Stelle des Systems treten zu lassen.
+Weniger flexibel bin ich nicht geworden, nur weniger bereit, Flexibilität an die Stelle des Systems treten zu lassen. Ist heute ein Problem gelöst, folgen ihm zwei Fragen: Wer verantwortet es jetzt, und was ändert sich, damit es nicht wiederkommt?

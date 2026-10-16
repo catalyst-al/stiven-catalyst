@@ -20,7 +20,7 @@ checklist:
       hint: KPI-ja dhe vlera e saj, nga raporti i sotëm.
     - label: Ku ishte gjithçka në rregull për herë të fundit?
       hint: "Çanta, karroca, rruga, skanimi: pika e fundit që ishte në rregull."
-    - label: Kush e vuri re problemin, dhe kur?
+    - label: Kush e vuri re problemin dhe kur?
       hint: Shoferi, dispeçeri, klienti, auditi.
     - label: Çfarë tregoi rampa që tabela nuk e tregoi?
       hint: Një karrocë e përzier, një etiketë e gabuar, pritje në ngarkim, një portë e hapur.
@@ -38,17 +38,17 @@ Por kur kontrollon procesin fizik, tabloja ndryshon.
 
 Në një nga rastet që dokumentuam, mungonte një çantë nga një sektor i magazinës. Në raste të tjera, çantat rezultonin të skanuara, por ishte marrë ose dorëzuar çanta e gabuar. Gjetëm edhe karroca të përziera në magazinë, madje edhe një karrocë të plotë që mungonte nga rrjedha normale e ngarkimit.
 
-Dashboard-i thoshte “incomplete delivery”. Terreni ngrinte një pyetje tjetër: a ishte vërtet gabim i shoferit te dera e klientit, apo porosia kishte dalë e paplotë që nga magazina? Në këtë pyetje qëndron i gjithë dallimi mes një tabele dhe një operacioni.
+Dashboard-i thoshte “incomplete delivery”. Terreni ngrinte një pyetje tjetër: a ishte gabim i shoferit te dera e klientit, apo porosia kishte dalë e paplotë që nga magazina? Në këtë pyetje qëndron i gjithë dallimi mes një tabele dhe një operacioni.
 
 {diagram}
 
 Tabela mund të të thotë: incomplete = 1. Nuk mund të të thotë çfarë mund të ketë ndodhur fizikisht: çanta u përgatit, hyri në proces, ndoshta madje u skanua, e pastaj përfundoi në karrocën e gabuar ose në itinerarin e gabuar. Në Excel kjo mbetet një numër. Në rampë është një objekt fizik në vendin e gabuar, dhe prandaj shkaku i vërtetë nuk gjendet gjithmonë në dashboard.
 
-Kur doja ta kuptoja një problem operacional, nuk mbetesha te tabela. Shkoja aty ku ndodhte procesi, që për mua do të thoshte kryesisht rampa dhe zona e ngarkimit.
+Kur doja ta kuptoja një problem operacional, e lija tabelën mënjanë dhe shkoja aty ku ndodhte procesi, që do të thoshte kryesisht rampa dhe zona e ngarkimit.
 
-Aty shihje atë që në Excel nuk ekziston: nëse karrocat ishin të renditura sipas itinerarit apo të përziera, nëse mungonin çanta, nëse etiketat ishin të sakta dhe nëse shoferët skanonin siç duhej. Shihje nëse mallrat e thata, të ftohura dhe të ngrira ndiqnin procesin e duhur, nëse pajisje ose karroca e bllokonin zonën, dhe nëse portat, parkimi dhe zona e ngarkimit ishin të organizuara. Mbi të gjitha, shihje nëse një problem që më vonë do të dilte si KPI kishte nisur pikërisht aty.
+Aty shihje atë që në Excel nuk ekziston: nëse karrocat ishin të renditura sipas itinerarit apo të përziera, nëse mungonin çanta, nëse etiketat ishin të sakta dhe nëse shoferët skanonin siç duhej. Shihje nëse mallrat e thata, të ftohura dhe të ngrira ndiqnin procesin e duhur, nëse pajisje ose karroca e bllokonin zonën dhe nëse portat, parkimi dhe zona e ngarkimit ishin të organizuara. Mbi të gjitha, shihje nëse një problem që më vonë do të dilte si KPI kishte nisur pikërisht aty.
 
-Mallrat e ftohura dhe të ngrira kishin rregullat e tyre. Produktet e ftohura duhej të skanoheshin brenda zonës së ftohtë, ato të ngrira brenda zonës së tyre. Nëse mungonte një çantë, problemi duhej raportuar, dhe karroca nuk duhej të dilte sikur gjithçka ishte në rregull. Një rregull i tillë duket i vogël në letër. Në rampë është dallimi mes një problemi që kapet në kohë dhe një klienti që e merr porosinë të paplotë.
+Mallrat e ftohura dhe të ngrira kishin rregullat e tyre. Produktet e ftohura duhej të skanoheshin brenda zonës së ftohtë, ato të ngrira brenda zonës së tyre. Nëse mungonte një çantë, problemi duhej raportuar dhe karroca nuk duhej të dilte sikur gjithçka ishte në rregull. Një rregull i tillë duket i vogël në letër. Në rampë është dallimi mes një problemi që kapet në kohë dhe një klienti që e merr porosinë të paplotë.
 
 Kishim edhe auditime të rampës dhe kontrolle të drejtpërdrejta të procesit. Por terreni nuk është vetëm vend ku shikon. Është vend ku rindërton atë që ka ndodhur.
 
@@ -60,7 +60,7 @@ Mësova se një version i vetëm nuk mjafton, as ai i tabelës, as ai i një per
 
 Dhe ajo që sheh duhet shënuar, përndryshe nesër është vetëm një kujtim. Për operacionin shkruaja raporte ditore të strukturuara, ku çdo rast shtohej me të njëjtën strukturë si i mëparshmi. Rastet e veçanta kalonin në komunikim operacional me shkrim, me përshkrimin e incidentit dhe të shkakut. Fotot dhe pamjet e ekranit i përdornim kur duheshin për të dokumentuar situata reale: trafik ose parkim në rrugë, por edhe probleme fizike në rampë, si karroca të çrregullta, kuti ose karroca në vend të gabuar, porta të hapura ose një zonë ngarkimi e organizuar keq.
 
-Me kalimin e kohës, kontrollet u bënë shumë më të strukturuara: përputhja e çdo karroce me itinerarin e saj, kontrolli i mallrave të thata, të ftohura dhe të ngrira, auditimet e rampës, analiza me Pareto dhe 5 Why. Paraskanimi dhe kontrollet përfundimtare të plotësisë mbetën rekomandime; nuk mund të them se u zbatuan. Më vonë punova edhe me struktura më të organizuara, ku çdo rast kishte incidentin, veprimin, shkakun dhe ndjekjen e KPI-së. Të gjitha këto lindën nga ajo që shihej në rampë.
+Me kalimin e kohës, kontrollet u bënë shumë më të strukturuara: përputhja e çdo karroce me itinerarin e saj, kontrolli i mallrave të thata, të ftohura dhe të ngrira, auditimet e rampës, analiza me Pareto dhe 5 Why. Paraskanimi dhe kontrollet përfundimtare të plotësisë ishin rekomandime, jo masa që mund të them se u zbatuan. Më vonë punova edhe me struktura më të organizuara, ku çdo rast kishte incidentin, veprimin, shkakun dhe ndjekjen e KPI-së. Të gjitha këto lindën nga ajo që shihej në rampë.
 
 Tabela gjithsesi ka vlerën e saj: pa të nuk do ta dije as që duhet të shkosh në rampë. Por tabela është pika e nisjes, jo përgjigjja. Po ta trajtosh numrin si përgjigje, e ndëshkon shoferin për një çantë që nuk ka qenë kurrë në karrocën e tij.
 

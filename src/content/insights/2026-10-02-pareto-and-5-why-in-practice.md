@@ -45,9 +45,9 @@ Something similar happens with 5 Why.
 
 I have a real case, but only the start of the chain. The problem: a wrong bag had been loaded. Why was there a problem with the delivery? Because the wrong bag had been loaded. Why had the wrong bag been loaded? Because it had been put in the wrong place during loading. The analysis produced a corrective action: the loading had to be checked twice (Beladung doppelt prüfen). One more thing mattered: the problem was classified as caused by the warehouse and loading, not automatically as the driver's fault.
 
-That much is documented. The third, fourth and fifth whys were never written down. I could fill them in now with sentences that sound good; it would make a beautiful 5 Why on paper, but not necessarily the one I actually did. That is what I want to avoid: 5 Why is not asking “why” five times to fill in a form.
+That much is documented. I do not have the third, fourth and fifth whys written down. I could fill them in now with sentences that sound good; it would make a beautiful 5 Why on paper, but not necessarily the one I actually did. That is the 5 Why I want to avoid: “why” asked five times to fill in a form.
 
-Its purpose is to move from the question “who did it?” to the question “what in the process allowed this to happen, and what can we change?”
+The method's purpose is to move from the question “who did it?” to the question “what in the process allowed this to happen, and what can we change?”
 
 It is very easy to stop at the person. “The driver took the wrong bag.” Stop there and you have found someone to blame, not necessarily a cause. The question that matters comes next: why was it possible for the driver to take the wrong bag? Was the bag in the wrong trolley? Were the bags mixed? Was the label wrong? Was a check missing before departure? Was the loading process so unclear that the same mistake could happen again with another driver?
 

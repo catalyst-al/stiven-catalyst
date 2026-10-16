@@ -10,7 +10,7 @@ deck: 'Der erste Essay der Reihe „Zehn Jahre nah an der Arbeit“: was von ein
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Schreiben Sie drei Dinge auf, die Sie heute können und die von keinem Titel abhängen.
-  - Fragen Sie jemanden, der die Arbeit macht, wie der Prozess wirklich läuft, und hören Sie zu, bevor Sie vergleichen.
+  - Fragen Sie jemanden, der die Arbeit macht, wie der Prozess wirklich läuft, und hören Sie zu, bevor Sie es mit dem vergleichen, was Sie kannten.
   - Erwähnen Sie, was Sie früher waren, nur dann, wenn es der Aufgabe vor Ihnen hilft.
 checklist:
   title: Was Sie mitnehmen
@@ -32,7 +32,7 @@ In Albanien war ich zuletzt Cluster Manager: Ich leitete den Betrieb eines Flags
 
 Mit diesem Kontrast beginnt die Reihe „Zehn Jahre nah an der Arbeit“, nicht um etwas zu dramatisieren oder eine Migrationsgeschichte zu erzählen, sondern weil ohne ihn nichts von dem verständlich ist, was ich danach schreibe: wie ich denke, wenn ein operatives Problem vor mir liegt, wie ich Menschen führe und warum ich Prozesse von beiden Seiten sehe.
 
-Den Flagship-Store habe ich nicht fertig übernommen. Ich habe ihn von null bis zur Eröffnung mit aufgebaut und dabei Architekten, Schreiner, Maler und die Ausbauteams koordiniert. Danach kamen Verkauf, Servicestandard, Kundenerlebnis, die operative Organisation und das Team: acht Verkäufer, vier Kassiererinnen und eine Assistentin. Wir haben die erste Online-Verkaufsseite des Unternehmens aufgebaut und dazu sein erstes E-Commerce-Team. Im selben Zeitraum wurde das Filialnetz umstrukturiert: Zwei schwache Filialen wurden geschlossen, und das Geschäft konzentrierte sich stärker auf den Flagship-Store.
+Den Flagship-Store habe ich von null bis zur Eröffnung mit aufgebaut und dabei Architekten, Schreiner, Maler und die Ausbauteams koordiniert. Danach kamen Verkauf, Servicestandard, Kundenerlebnis, die operative Organisation und das Team: acht Verkäufer, vier Kassiererinnen und eine Assistentin. Wir haben die erste Online-Verkaufsseite des Unternehmens aufgebaut und dazu sein erstes E-Commerce-Team. Im selben Zeitraum wurde das Filialnetz umstrukturiert: Zwei leistungsschwache Filialen wurden geschlossen, und das Geschäft konzentrierte sich stärker auf den Flagship-Store.
 
 Davor hatte ich als General Sales Manager bei einem Händler für Haushaltsgeräte den Großhandel geleitet: ein Netz aus 61 aktiven Wiederverkäufern und eine Struktur mit Lager, B2B-Vertrieb, Buchhaltung, technischem Team und Kundenservice. Als ich Albanien verließ, war ich es gewohnt, Entscheidungen zu treffen, Menschen zu führen und für Geschäftsergebnisse geradezustehen.
 
@@ -52,9 +52,9 @@ Diese Jahre haben mir mehr gegeben als die Sprache. Sie haben mir die Arbeit aus
 
 Als Paketzusteller versteht man Zeit, Tour und Druck anders, und man weiß, was es heißt, wenn ein Prozess nicht funktioniert oder jemand entscheidet, der nicht vor Ort ist. Als Steward sieht man das Hotel von einer ganz anderen Ebene aus: körperliche Arbeit, Rhythmus, Zusammenarbeit zwischen den Abteilungen und wie sehr das Erlebnis des Gastes von Menschen abhängt, die er vielleicht nie zu Gesicht bekommt. Als Night Auditor sah ich, was von einem Arbeitstag übrig bleibt, wenn alle anderen gegangen sind: die Fehler, die Zahlungen, die Berichte, die Beschwerden, die No-Shows, die Kontrollen und die Übergabe.
 
-Als ich in der Last Mile in die Führung zurückkehrte, führte ich Menschen nicht nur aus der Theorie heraus. Ich hatte selbst auf der anderen Seite des Prozesses gestanden, und das steht hinter jedem Essay dieser Reihe.
+Als ich in der Last Mile in die Führung zurückkehrte, hatte ich mehr als Theorie im Rücken: Ich hatte selbst auf der anderen Seite des Prozesses gestanden. Diese Erfahrung steht hinter jedem Essay dieser Reihe.
 
-Wenn mich jemand, der Chef war, fragen würde, wie man noch einmal bei null anfängt, würde ich nicht sagen, dass es leicht ist. Ich würde sagen: Verwechseln Sie den Verlust des Titels nicht mit dem Verlust Ihres beruflichen Werts. Ein Titel kann an einem einzigen Tag verschwinden, wenn Sie Land, Unternehmen oder Branche wechseln. Was Sie gelernt haben, nicht.
+Würde mich jemand, der selbst Chef war, fragen, wie man noch einmal bei null anfängt, würde ich ihm nicht weismachen, dass es leicht ist. Aber ich würde ihm sagen: Verwechseln Sie den Verlust des Titels nicht mit dem Verlust Ihres beruflichen Werts. Ein Titel kann an einem einzigen Tag verschwinden, wenn Sie Land, Unternehmen oder Branche wechseln. Was Sie gelernt haben, nicht.
 
 Eine Bedingung gibt es allerdings. Erwarten Sie im neuen Job nicht, dass andere respektieren, was Sie früher waren. Zeigen Sie, was Sie dort können, wo Sie jetzt sind. Mein Weg führte von der Führung von Menschen und Unternehmen in Albanien zur Paketzustellung und zur Arbeit als Steward in Deutschland, dann zum Night Audit, zum Team Leader und zum Area Manager. Hätte ich manche Jobs für unter meiner Würde gehalten, hätte ich vielleicht nie gelernt, was ich brauchte, um wieder aufzusteigen.
 

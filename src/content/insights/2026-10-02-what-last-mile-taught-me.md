@@ -34,7 +34,7 @@ checklist:
 
 I have seen last mile from three places: as a parcel courier, as a dispatcher with more than 70 drivers on a shift, and then as Team Leader and Area Manager, with four Shift Leaders, eight dispatchers and around 250 drivers indirectly under my responsibility. The same operation looks completely different from each of them.
 
-As a courier, your day is very concrete. You take the route, load the van and go out on the road. Out there the theory of the process does not interest you. What matters is whether the parcels are in the right order, whether the route is well organised, whether you have enough time, and what you do when traffic, an address, a customer or a problem with the load breaks your plan. From that seat I understood something that is not always visible from the office: a small problem in the warehouse can cost the person on the road a lot of time.
+As a courier, your day is very concrete. You take the route, load the van and go out on the road. Out there, the theory of the process matters less than whether the parcels are in the right order, whether the route is well organised, whether you have enough time, and what you do when traffic, an address, a customer or a problem with the load breaks your plan. From that seat I understood something that is not always visible from the office: a small problem in the warehouse can cost the person on the road a lot of time.
 
 As a dispatcher I no longer looked only at my own route. I had to keep track of how the routes were split, how the drivers set off, the delays, the live problems and the communication throughout the day. In that position you begin to see that an individual problem can in fact be a system problem.
 
@@ -48,7 +48,7 @@ Take loading time. The target was around 20 minutes; for a period our average wa
 
 It would have been easy to say the drivers were loading slowly. But 24 minutes do not tell you by themselves why you have a problem. You have to go to the ramp and see what is physically happening. There you found missing bags, trolleys that did not match the route or the floor as they should, problems with the order of the stops, loads that took longer than normal, drivers waiting. You looked at the scanners, at how dry, chilled and frozen were organised, and at whether the driver was taking everything before leaving.
 
-So we went to the process instead of blaming the driver straight away, and worked on better checks of the trolleys and the routes, a clearer organisation of dry, chilled and frozen, and ramp audits. Scanners closer to the ramps, pre-scanning and final completeness checks remained recommendations; I cannot say they were put in place. In other periods loading time came down to the range of 16 to 19 minutes.
+So we went to the process instead of blaming the driver straight away, and worked on better checks of the trolleys and the routes, a clearer organisation of dry, chilled and frozen, and ramp audits. Scanners closer to the ramps, pre-scanning and final completeness checks were recommendations, not measures I can say were put in place. In other periods loading time came down to the range of 16 to 19 minutes.
 
 What I took from it is that a KPI improves when you change the process that produces it.
 
@@ -56,13 +56,13 @@ Incomplete orders work the same way. Behind the Incomplete percentage was a cust
 
 That is why the daily KPI review with the operational structure and the responsible leads could not be mere reporting. We looked at what had happened with damage, incomplete orders, delays, loading time and the main problems of the operation, and for each of them we asked why, not only how high the number was.
 
-If you had 58 delays, it was not enough to say “2.8% delays”. You had to understand which routes they came from, which causes kept repeating, and which part of the problem was in our hands. We used Pareto to see which reasons made up the largest part of the problem, and 5 Why so as not to stop at the first answer. The review had to end in a concrete action: who takes the problem, what we change and what we check the next day. Otherwise the meeting was just reporting.
+If you had 58 delays, “2.8% delays” was only the start. You had to understand which routes they came from, which causes kept repeating, and which part of the problem was in our hands. We used Pareto to see which reasons made up the largest part of the problem, and 5 Why so as not to stop at the first answer. The review had to end in a concrete action: who takes the problem, what we change and what we check the next day. Otherwise the meeting was just reporting.
 
 Pressure in last mile comes from many directions at once: the departure time, the customers waiting, the targets, the drivers, the warehouse, the missing bags, one route running late while another has just created a problem. And the operation does not stop so that you can analyse the problem in peace.
 
 My lesson was that pressure must not be passed down as panic. If a manager sees a red KPI and the first reaction is to shout, very soon you have 20 people trying to look busy and nobody solving the cause. I tried to turn the pressure into concrete questions. Where is the problem? How many cases do we have? Which reason keeps repeating? What can we do now? What do we need to change for tomorrow?
 
-Accountability does not mean looking for someone to blame every time a number turns red. It means finding who owns the problem and following it until it is closed.
+For me, accountability does not mean looking for someone to blame every time a number turns red. It means finding who owns the problem and following it until it is closed.
 
 If you ask me which KPI misleads most when you read it only as a number, I would say Delays. The number gives the impression that you are measuring only the driver's delay. But the delay may have started much earlier: at loading, with a missing bag, a mixed-up trolley, the order of the route, or an operational problem before the driver had even left the ramp. On the dashboard you then see only one driver who is “late”.
 

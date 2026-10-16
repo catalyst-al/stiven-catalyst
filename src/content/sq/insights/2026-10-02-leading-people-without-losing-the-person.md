@@ -11,7 +11,7 @@ deck: 'Eseja e pestë e serisë “Dhjetë vite pranë punës”: standardet, ga
 firstMove:
   - Para se t'i flasësh dikujt për një gabim, kontrollo nëse standardi i është bërë ndonjëherë i qartë.
   - "Pyet së pari procesin: ku shkoi keq çanta, porosia ose koha para se të arrinte te personi?"
-  - Ktheji sot një problem personit që e ka për detyrë, dhe qëndro i gatshëm.
+  - Ktheji sot një problem personit që e ka për detyrë dhe qëndro i gatshëm.
 checklist:
   title: Procesi apo personi?
   fill: true
@@ -24,11 +24,11 @@ checklist:
       hint: Skaneri, karroca, hapësira në rampë, minutat para nisjes.
     - label: Çfarë ishte në dorën e personit?
       hint: Pjesa që mund ta bënte ndryshe, me atë që dinte.
-    - label: Çfarë them, dhe çfarë rregulloj?
+    - label: Çfarë them dhe çfarë rregulloj?
       hint: Sjelljen dhe përgjegjësinë në njërin rast, procesin në tjetrin, ndonjëherë të dyja.
 ---
 
-Në last mile nuk mjafton t'i thuash dikujt “puno më mirë”. Duhet të kuptojë çfarë do të thotë “më mirë”.
+Në last mile, t'i thuash dikujt “puno më mirë” ndihmon vetëm kur ai e kupton çfarë do të thotë “më mirë”.
 
 Prandaj standardet duhej të ishin konkrete. Ngarkimi duhej të mbetej brenda objektivit. Shoferët duhej të qëndronin në zonën e tyre, jo të grumbulloheshin te tavolina e drejtuesit të turnit. Pas ngarkimit, porta mbyllej. Mallrat e ftohura dhe të ngrira skanoheshin në zonat e tyre. Kur mungonte një çantë, askush nuk vazhdonte sikur gjithçka ishte normale: problemi raportohej. Siguria, pastërtia dhe rregulli në rampë ishin pjesë e standardit, ndërsa dëmet, porositë e paplota, vonesat dhe koha e ngarkimit mateshin çdo ditë.
 
@@ -38,9 +38,9 @@ Por kishte rëndësi edhe një gjë tjetër, që shpesh harrohet. Njeriu duhet t
 
 Kjo të çon te pyetja që ndoshta, më shumë se çdo tjetër, përcakton si i drejton njerëzit: kur diçka shkon keq, gabimi është i procesit apo i personit?
 
-Nëse një dorëzim dilte i paplotë, nuk nisja automatikisht nga “shoferi bëri gabim”. Shihnim procesin. A mungonte çanta që në magazinë? Ishte futur në karrocën e gabuar? Kishte etiketë të gabuar? Ishin përzier çantat? Ishte bërë skanimi siç duhej? Kishte dalë itinerari i plotë nga zona e ngarkimit? Nëse problemi kishte nisur më herët në proces, nuk ishte e drejtë ta ktheje automatikisht në problem performance të shoferit.
+Nëse një dorëzim dilte i paplotë, shihnim procesin para se dikush të nxirrte përfundimin “shoferi bëri gabim”. A mungonte çanta që në magazinë? Ishte futur në karrocën e gabuar? Kishte etiketë të gabuar? Ishin përzier çantat? Ishte bërë skanimi siç duhej? Kishte dalë itinerari i plotë nga zona e ngarkimit? Nëse problemi kishte nisur më herët në proces, nuk ishte e drejtë ta ktheje automatikisht në problem të performancës së shoferit.
 
-Nga ana tjetër, nëse procesi ishte në rregull, standardi i qartë, mjetet në vend, dhe personi prapë nuk e ndiqte procedurën, atëherë fillonte përgjegjësia individuale.
+Nga ana tjetër, nëse procesi ishte në rregull, standardi i qartë, mjetet në vend dhe personi prapë nuk e ndiqte procedurën, atëherë fillonte përgjegjësia individuale.
 
 Pra, pyetja ishte: a e krijoi sistemi mundësinë e gabimit, apo personi nuk ndoqi një proces që funksiononte dhe që e njihte?
 

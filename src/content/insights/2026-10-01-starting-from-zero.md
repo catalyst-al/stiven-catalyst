@@ -39,7 +39,7 @@ In Albania, my last role was Cluster Manager: I ran the operations of a flagship
 
 The series “Ten years close to the work” starts with that contrast, not for drama or to tell a migration story, but because nothing I write afterwards makes sense without it: how I think when an operational problem lands in front of me, how I lead people, and why I see processes from both sides.
 
-I did not take over the flagship store ready-made. I helped build it from zero to opening day, coordinating architects, carpenters, painters and the fit-out crews. Then came sales, the service standard, the customer experience, the operational organisation and the team: eight sales staff, four cashiers and one assistant. We built the company's first online sales website and its first e-commerce team. In the same period the network was restructured: two underperforming stores closed, and the business concentrated more on the flagship.
+I helped build the flagship store from zero to opening day, coordinating architects, carpenters, painters and the fit-out crews. Then came sales, the service standard, the customer experience, the operational organisation and the team: eight sales staff, four cashiers and one assistant. We built the company's first online sales website and its first e-commerce team. In the same period the network was restructured: two underperforming stores closed, and the business concentrated more on the flagship.
 
 Before that, as General Sales Manager at a distributor of household appliances, I had led the wholesale business: a network of 61 active resellers, and a structure that took in the warehouse, B2B sales, accounting, the technical team and customer service. By the time I left Albania, I was used to making decisions, leading people and answering for business results.
 
@@ -59,9 +59,9 @@ These years gave me more than the language. They showed me the work from the sid
 
 As a parcel courier you understand time, the route and pressure differently, and you know what it means when a process does not work or a decision is taken by someone who is not on the ground. As a steward you see the hotel from another level entirely: physical work, rhythm, cooperation between departments, and how much the guest's experience depends on people the guest may never see. As a night auditor I saw what is left of a working day after everyone else has gone: the errors, the payments, the reports, the complaints, the no-shows, the checks and the handover.
 
-When I returned to leadership in last mile, I was not leading people from theory alone. I had been on the other side of the process myself, and that sits behind every essay in this series.
+When I returned to leadership in last mile, I led people with more than theory behind me: I had stood on the other side of the process myself. That experience sits behind every essay in this series.
 
-If someone who has been a boss asked me how to start again from zero, I would not tell them it is easy. I would tell them not to confuse losing the title with losing their professional value. A title can disappear in a single day, when you change country, company or industry. What you have learned does not.
+If someone who has been a boss asked me how to start again from zero, I would not pretend it is easy, but I would tell them not to confuse losing the title with losing their professional value. A title can disappear in a single day, when you change country, company or industry. What you have learned does not.
 
 There is one condition. Do not walk into the new job expecting others to respect what you used to be. Start showing what you can do where you are. I went from leading people and businesses in Albania to delivering parcels and working as a steward in Germany, then to night audit, to Team Leader and to Area Manager. If I had thought some jobs were beneath me, I might never have learned what I needed to rise again.
 

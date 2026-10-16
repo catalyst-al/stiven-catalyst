@@ -38,13 +38,13 @@ Wer sich den physischen Prozess ansieht, bekommt ein anderes Bild.
 
 In einem der Fälle, die wir dokumentiert haben, fehlte eine Tasche aus einem Bereich des Lagers. In anderen waren die Taschen als gescannt erfasst, aber die falsche Tasche war abgeholt oder zugestellt worden. Wir fanden auch vermischte Rollwagen im Lager und sogar einen vollen Wagen, der im normalen Ladeablauf fehlte.
 
-Das Dashboard sagte „incomplete delivery“. An der Rampe stellte sich eine andere Frage: War es wirklich ein Fehler des Fahrers an der Haustür, oder hatte die Bestellung das Lager schon unvollständig verlassen? In dieser Frage liegt der ganze Unterschied zwischen einer Tabelle und einem Betrieb.
+Das Dashboard sagte „incomplete delivery“. An der Rampe stellte sich eine andere Frage: War es ein Fehler des Fahrers an der Haustür, oder hatte die Bestellung das Lager schon unvollständig verlassen? In dieser Frage liegt der ganze Unterschied zwischen einer Tabelle und einem Betrieb.
 
 {diagram}
 
 Die Tabelle kann Ihnen sagen: incomplete = 1. Sie kann Ihnen nicht sagen, was physisch passiert sein könnte: Die Tasche wurde vorbereitet, kam in den Prozess, wurde vielleicht sogar gescannt und landete dann im falschen Wagen oder auf der falschen Tour. In Excel wird daraus eine Zahl. An der Rampe ist es ein Gegenstand am falschen Ort, und deshalb steht die eigentliche Ursache nicht immer im Dashboard.
 
-Wenn ich ein operatives Problem verstehen wollte, bin ich nicht bei der Tabelle geblieben. Ich bin dorthin gegangen, wo der Prozess stattfand, und das waren vor allem die Rampe und der Ladebereich.
+Wenn ich ein operatives Problem verstehen wollte, ließ ich die Tabelle liegen und ging dorthin, wo der Prozess stattfand, meist also an die Rampe und in den Ladebereich.
 
 Dort sah man, was es in Excel nicht gibt: ob die Wagen nach Touren sortiert oder vermischt waren, ob Taschen fehlten, ob die Etiketten stimmten und die Fahrer richtig scannten. Man sah, ob Trocken-, Kühl- und Tiefkühlware dem richtigen Ablauf folgten, ob Geräte oder Wagen den Bereich blockierten und ob Tore, Park- und Ladebereich ordentlich organisiert waren. Vor allem sah man, ob ein Problem, das später als Kennzahl auftauchen würde, genau dort begonnen hatte.
 
@@ -60,7 +60,7 @@ Gelernt habe ich daraus, dass eine einzige Version nicht reicht, weder die der T
 
 Und was man sieht, muss festgehalten werden, sonst ist es morgen nur eine Erinnerung. Für den Betrieb schrieb ich strukturierte Tagesberichte, in die jeder Fall in derselben Struktur eingetragen wurde wie der vorige. Einzelne Fälle liefen über schriftliche operative Kommunikation, mit einer Beschreibung des Vorfalls und seiner Ursache. Fotos und Screenshots dokumentierten bei Bedarf reale Situationen: Verkehr oder Parken auf der Straße, aber auch physische Probleme an der Rampe wie unordentliche Wagen, Kisten oder Wagen am falschen Platz, offene Tore oder einen schlecht organisierten Ladebereich.
 
-Mit der Zeit wurden die Kontrollen deutlich strukturierter: Abgleich jedes Wagens mit seiner Tour, Kontrollen von Trocken-, Kühl- und Tiefkühlware, Rampen-Audits, Analysen mit Pareto und 5 Why. Pre-Scan und abschließende Vollständigkeitskontrollen blieben Empfehlungen; ich kann nicht sagen, dass sie umgesetzt wurden. Später arbeitete ich auch mit stärker organisierten Strukturen, in denen zu jedem Fall Vorfall, Maßnahme, Ursache und KPI-Nachverfolgung gehörten. All das ist aus dem entstanden, was man an der Rampe sehen konnte.
+Mit der Zeit wurden die Kontrollen deutlich strukturierter: Abgleich jedes Wagens mit seiner Tour, Kontrollen von Trocken-, Kühl- und Tiefkühlware, Rampen-Audits, Analysen mit Pareto und 5 Why. Pre-Scan und abschließende Vollständigkeitskontrollen waren Empfehlungen, keine Maßnahmen, von denen ich sagen kann, dass sie umgesetzt wurden. Später arbeitete ich auch mit stärker organisierten Strukturen, in denen zu jedem Fall Vorfall, Maßnahme, Ursache und KPI-Nachverfolgung gehörten. All das ist aus dem entstanden, was man an der Rampe sehen konnte.
 
 Wertlos ist die Tabelle trotzdem nicht: Ohne sie wüssten Sie nicht einmal, dass Sie an die Rampe gehen müssen. Aber die Tabelle ist der Ausgangspunkt, nicht die Antwort. Wer die Zahl für die Antwort hält, bestraft den Fahrer für eine Tasche, die nie in seinem Wagen war.
 

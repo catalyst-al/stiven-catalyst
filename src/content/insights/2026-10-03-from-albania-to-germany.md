@@ -34,7 +34,7 @@ checklist:
       hint: So that the system knows it, not only I.
 ---
 
-My question used to be: “How do we solve this?”
+I used to ask more often: “How do we solve this?”
 
 Today it is longer: “How do we solve this, who owns it afterwards, and what do we change so it does not come back?” That may be the biggest change I have made as a leader.
 
@@ -52,7 +52,7 @@ With the team, too, I always preferred to stay close to the operation. I never l
 
 In Germany, what has become far more visible to me is the weight of the process.
 
-In many of the roles I have had here, it is not enough for the work to be done. It has to be done according to the process, it has to be documented and, when necessary, it has to be possible to prove that it was checked.
+In many of the roles I have had here, getting the work done is only part of it: it has to be done according to the process, it has to be documented and, when necessary, it has to be possible to prove that it was checked.
 
 I have seen this in logistics and in hospitality alike. In logistics there were KPIs, a clear split of responsibilities, procedures, operating rules and escalation whenever something went outside the standard. In hospitality it is even more visible: checklists, reports, shift handovers, checks, and much sharper limits between what you can decide yourself and what you have to escalate.
 
@@ -66,7 +66,7 @@ I used to focus mainly on the result: the problem exists, so it has to be solved
 
 That is why I now give far more weight to SOPs, checklists, KPIs, the handover, documentation and the ownership of each task.
 
-I have also learned to separate initiative from authority. I can identify a problem, analyse it, propose a solution and do my part, but that does not make every decision mine. This line matters much more to me today than it used to.
+I have also learned to separate initiative from authority more clearly. I can identify a problem, analyse it, propose a solution and do my part, but that does not automatically make every decision mine. This line matters much more to me today than it used to.
 
 And I have learned something that can look bureaucratic at first but is worth a great deal in operations: if a process only works because a good person remembers it, you do not yet have a good process.
 
@@ -96,6 +96,6 @@ From the structured way of working I have experienced in Germany, you can take m
 
 From my experience in Albania, I would keep the speed of reaction, the closeness to people and the ability to adapt when reality does not match the plan. Even the best process on paper will one day meet a situation it does not describe.
 
-My way of leading today sits between these two worlds. From one I took the instinct to get into the problem instead of waiting for someone else to solve it. From the other I learned that solving it is not enough: you have to build a way of working that makes its return less likely.
+My way of leading today sits between these two worlds. From one I took the instinct to get into the problem instead of waiting for someone else to solve it. From the other I learned that a solution needs a way of working around it that makes the problem's return less likely.
 
-I have not become less flexible. I have become less willing to let flexibility replace the system.
+I am no less flexible than I was, only less willing to let flexibility replace the system. When a problem is solved today, two questions follow it: who owns it now, and what changes so it does not come back?

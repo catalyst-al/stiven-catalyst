@@ -34,7 +34,7 @@ checklist:
       hint: Policy, significant costs, personnel, security, exceptions to a procedure.
 ---
 
-When a situation needs responsibility, leadership without a title means not hiding behind your job description. It does not mean doing the boss's job without being the boss, and it depends just as much on knowing when to stop.
+When a situation needs responsibility, leadership without a title means, for me, not hiding behind your job description. It does not mean doing the boss's job without being the boss, and it depends just as much on knowing when to stop.
 
 ## Beyond the role, not beyond the mandate
 
@@ -42,7 +42,7 @@ In last mile I had an operational role, but there were moments when the work ask
 
 In the hotel it has happened differently. My role is operational, but I have gone beyond running the shift by structuring checklists, SOPs, training materials and, later, a digital system for Front Office and Night Audit.
 
-That does not mean I took on management's authority. I took responsibility for the way I organised and documented the work I knew. The distinction matters to me: taking on more responsibility does not mean making decisions that are not yours to make.
+Management's authority stayed with management. What I took responsibility for was the way I organised and documented the work I knew. The distinction matters to me: taking on more responsibility does not mean making decisions that are not yours to make.
 
 What I can point to is what followed. I have kept being involved in coordination, operational improvements, documentation and building processes, and in the hotel I have kept working on structuring the Night Audit and the tools that make the work clearer. That tells me my contribution has been used, though it says nothing about how everyone reacted or about formal recognition for every extra responsibility.
 
