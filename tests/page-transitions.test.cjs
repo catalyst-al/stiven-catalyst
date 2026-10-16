@@ -325,3 +325,11 @@ test('Challenges: essays answer the pointer, index chips glow, and the challenge
   assert.match(css, /\.challenge-index a:hover b \{ text-shadow:/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.challenge-essays li a, /);
 });
+
+test('Tool pages: sibling tools and essays answer the pointer in the role colour, the box being filled glows, the badge breathes', () => {
+  assert.match(css, /\.family-more-list a::before, \.tool-essays-list li a::before \{[\s\S]*?var\(--family, var\(--blue\)\)/);
+  assert.match(css, /:where\(\.tool-panel \.dl-box, \.work-backup-card\):focus-within \{[\s\S]*?box-shadow: 0 0 0 4px/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.family-badge > span \{ animation: badge-breathe/);
+  assert.match(css, /:where\([^)]*\.family-more-list li, \.tool-essays-list li[^)]*\) \{\s*animation: scroll-rise/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.family-more-list a, \.tool-essays-list li a, /);
+});
