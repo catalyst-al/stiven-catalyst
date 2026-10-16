@@ -480,3 +480,14 @@ test('Issue pages: the facts come in one after another, the charts answer the po
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.weekly-card, \.weekly-chart, /);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.weekly-chart::before/);
 });
+
+test('The book: the title comes into focus, the book turns towards the pointer, chapters in the full text draw their mark', () => {
+  const js = fs.readFileSync('src/script.js', 'utf8');
+  assert.match(js, /\.weekly-chart, \.book-object, /);
+  assert.match(js, /card\.classList\.contains\("weekly-card"\) \|\| card\.classList\.contains\("book-object"\)/);
+  assert.match(css, /\.book-object:hover \.book-object-cover \{ transform: rotateY\(calc\(-20deg \+ var\(--px, \.5\) \* 22deg\)\)/);
+  assert.match(css, /\.book-hero h1 \{ animation: lost-focus/);
+  assert.match(css, /\.book-text-body \.book-text-kicker::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.book-closing blockquote p \{ animation: closing-words/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes closing-words/);
+});
