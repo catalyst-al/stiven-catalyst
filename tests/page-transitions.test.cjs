@@ -435,3 +435,12 @@ test('legal pages: each heading draws a short blue line as it is reached, the te
   assert.doesNotMatch(css, /\.legal p \{[^}]*animation/, 'the text itself does not move');
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes legal-tick/);
 });
+
+test('How this is made reads as a path: a line that fills as the page is read, a stop at each heading that lights up', () => {
+  assert.equal((fs.readFileSync('src/how-this-is-made.njk', 'utf8').match(/<section class="shell legal how-made">/g) || []).length, 3, 'in all three languages');
+  assert.match(css, /\.how-made::after \{ animation: how-fill linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.how-made h2::before \{ animation: how-reach linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.how-made > \*, \.how-made h2 \{ padding-left: 30px; \}/, 'headings and text start on the same line');
+  for (const page of ['_site/how-this-is-made.html', '_site/sq/how-this-is-made.html', '_site/de/how-this-is-made.html']) assert.match(fs.readFileSync(page, 'utf8'), /class="shell legal how-made"/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes how-fill/);
+});
