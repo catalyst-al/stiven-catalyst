@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Das System plant die Tour mit seinen Daten, der Fahrer fährt sie unter realen Bedingungen. Das Problem beginnt, wenn die Organisation nicht vom Fahrer lernt."
 teaser: Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt.
-description: "Die Tour des Systems und die des Fahrers: warum keiner immer recht hat, vier Schritte von der Ortskenntnis zur Verbesserung, und eine Karte."
+description: "Die Tour des Systems und die des Fahrers: warum keiner immer recht hat, vier Schritte von der Ortskenntnis zur Verbesserung und eine Karte."
 deck: "Der dritte Essay der Reihe „Das System ist schneller als Sie“: die geplante Tour und die gefahrene Tour, der neue Fahrer und die Ortskenntnis, vier Schritte, die das, was der Fahrer weiß, in eine Verbesserung des Plans verwandeln, und eine Karte für ein Problem, das sich wiederholt."
 relatedTools:
   - /tools/delay-analyzer/
@@ -34,7 +34,7 @@ firstMove:
   - "Finden Sie vor Ende der Woche heraus, wer eine Änderung an einer Tour genehmigen kann und wo sie festgehalten wird. Schreiben Sie es auf."
 ---
 
-In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich ein Bild verwendet: eine Tour, geplant für einen neuen Fahrer, ein Laden, der um zehn öffnet, ein Stopp, der auf halb neun gelegt ist. Dieser Essay betrachtet dasselbe Bild von der anderen Seite: nicht das System, das die Öffnungszeiten nicht kannte, sondern den Fahrer, der sie kennt, und die Frage, wo sein Wissen landet.
+In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich ein Bild verwendet: eine Tour, geplant für einen neuen Fahrer, ein Laden, der um zehn öffnet, ein Stopp, der auf halb neun gelegt ist. Dieser Essay betrachtet dasselbe Bild von der anderen Seite, vom Fahrer aus, der die Öffnungszeiten kennt, und fragt, wo sein Wissen landet.
 
 Grundlage ist meine Arbeit auf der letzten Meile: die Koordination von Fahrern, Touren und operativen Problemen während der Zustellung, heute als Disponent aus der Ferne. Dazu kommen die Fahrer in der Ramp-up-Phase, die, wie ich in [Tage mit hohem Aufkommen: der Standard unter Druck](/de/insights/high-volume-days/) geschrieben habe, mit den Verfahren noch nicht ganz vertraut waren, und die Umstellung der Tourenplanung im August 2025.
 
@@ -44,7 +44,7 @@ Ich habe keinen Fall, in dem mir ein Fahrer ausdrücklich gesagt hätte, seine T
 
 Ein System plant eine Tour mit den Daten, die es hat: Adressen, Lieferzeiten, Entfernungen, Durchschnittszeiten. Der Fahrer fährt sie unter den Bedingungen, die er vorfindet: die Einfahrt hinter dem Gebäude, das Tor, das erst nach dem Klingeln aufgeht, der Laden, der über Mittag schließt, die Straße, die jeden Dienstag der Markt blockiert.
 
-Keines von beiden ist an sich falsch. Es sind zwei Beschreibungen derselben Tour, von zwei verschiedenen Standorten aus. Die erste ist schnell, deckt alle Touren auf einmal ab und weiß nichts, was man ihr nicht aufgeschrieben hat. Die zweite ist langsam, auf die Gebiete beschränkt, die der Fahrer kennt, und weiß Dinge, die niemand aufgeschrieben hat.
+Es sind zwei Beschreibungen derselben Tour, von zwei verschiedenen Standorten aus, und keine von beiden ist an sich falsch. Die erste ist schnell, deckt alle Touren auf einmal ab und weiß nichts, was man ihr nicht aufgeschrieben hat. Die zweite ist langsam, auf die Gebiete beschränkt, die der Fahrer kennt, und weiß Dinge, die niemand aufgeschrieben hat.
 
 Die Umstellung vom August 2025 hat das in ihrer eigenen Sprache anerkannt: Sie zielte auf realistischere Pläne und sah vor, Informationen aus dem Feld zu nutzen. Das beweist aber nicht, dass es einen vollständigen Prozess gab, in dem jede Korrektur eines Fahrers festgehalten wurde und den Plan verbesserte. Ohne einen solchen Prozess bleibt die Information aus dem Feld, wo sie entstanden ist: im Kopf des Fahrers.
 
@@ -64,7 +64,7 @@ Stellen Sie sich ein Gebiet vor, das nur ein Fahrer gut kennt. Er fährt die Tou
 
 Dann fehlt er eines Tages. Ein neuer Fahrer übernimmt die Tour, vielleicht noch in der Ramp-up-Phase, und folgt dem Plan, weil der Plan alles ist, was er hat. Der Tag stockt genau an den Stellen, an denen der erfahrene Fahrer nie ins Stocken kam.
 
-Das ist das Bild dessen, was ich in [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) „volles Misstrauen“ genannt habe: Wissen, das in einem Kopf bleibt. Es ist auch das, worüber ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben habe, nur fehlt hier nicht der Trainer, sondern ein Ort, an dem das Wissen des Fahrers hätte aufgeschrieben werden können.
+Das ist das Bild dessen, was ich in [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) „völliges Misstrauen“ genannt habe: Wissen, das in einem Kopf bleibt. Es ist auch das, worüber ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben habe, nur fehlt hier ein Ort, an dem das Wissen des Fahrers hätte aufgeschrieben werden können.
 
 Ein erfahrener Fahrer sollte nicht die dauerhafte Korrektur eines Systems sein, das nicht lernt. Das sagt nichts gegen seinen Wert: Was er weiß, ist zu wertvoll, um nur an einem Ort zu liegen.
 

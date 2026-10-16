@@ -47,13 +47,13 @@ On my first night of training at the hotel, I had come to learn the night proces
 
 This is the only scene in this series that is not a picture. It happened, and I was there. What I can report is what a trainee could see: the practical training that could not go ahead normally, and the colleague who was training me explaining that the practical part would continue on the following shift. Whether there was an official fallback procedure, what the team used instead of the system, how the departments were informed and what was checked when it came back, I did not see.
 
-One distinction matters from the start. It was an interruption caused by an update, and I have no evidence of an unexpected fault. The title says “went down”, but that night was not a breakdown. It was something more ordinary, and for that reason more useful to understand.
+One distinction matters from the start. It was an interruption caused by an update, and I have no evidence of an unexpected fault. The title says “went down”, but what happened that night was more ordinary than a breakdown, and for that reason more useful to understand.
 
 ## Five hours of waiting
 
 For most of those hours I stood, waited and watched. The experienced colleague could explain the work to me but could not show it. The processes I had come to learn lived on the screen, and the screen was not there.
 
-It was not a dramatic night; nobody ran. But it taught me something I had not planned to learn: how large the part of my work is that does not exist without the system. A new receptionist learns by watching someone click, fill in and check. When there is nothing to click, only the explanation is left, and an explanation is not enough for a process you have never seen.
+The night had no drama; nobody ran. But it taught me something I had not planned to learn: how large the part of my work is that does not exist without the system. A new receptionist learns by watching someone click, fill in and check. When there is nothing to click, only the explanation is left, and an explanation is not enough for a process you have never seen.
 
 In [How I built Front Desk Control](/insights/how-i-built-front-desk-control/) I wrote about the period of the September trainings and about my need to organise the information into a clear structure. That night was, in a way, where that need began.
 
@@ -65,7 +65,7 @@ In the first essay of this series I promised an essay about “the night the sys
 
 I was in training, and I relied on my colleague. I do not know what information was used without the system, or whether it was written down anywhere. It would be easy to write that the staff kept everything they needed in their heads. I do not know that, and it is just the kind of sentence that sounds good and cannot be proved.
 
-What I can say is smaller. From where I stood, a newcomer on the first night, I had no way of knowing what is done when the system is not there. I did not know where the procedure was, or whether there was one. That is the real finding of the night: what I did not know, and what nobody had had any reason to tell me before it happened.
+What I can say is smaller. From where I stood, a newcomer on the first night, I had no way of knowing what is done when the system is not there. I did not know where the procedure was, or whether there was one. That, for me, is the real finding of the night: what I did not know, and what nobody had had any reason to tell me before it happened.
 
 ## Coming back is not the end
 

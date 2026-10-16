@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: 10 minuta para turnit nuk janë për të treguar gjithçka që dimë. Janë për të vendosur çfarë duhet të dijë ekipi para se puna të fillojë.
-description: "Briefing-u para turnit: stand-up-et e mëngjesit në last mile, si fillonte nata në hotel, ku ndahet briefing-u nga dorëzimi i turnit, dhe një shabllon 10-minutësh."
+description: "Briefing-u para turnit: stand-up-et e mëngjesit në last mile, si nisej nata në hotel, ku ndahet briefing-u nga dorëzimi i turnit dhe një shabllon 10-minutësh."
 teaser: Dorëzimi i turnit të tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.
 deck: 'Eseja e dytë e serisë “Operacioni që punon pa ty”: stand-up-et e mëngjesit në last mile, nata që nuk fillon nga zero në hotel, dallimi mes dorëzimit të turnit dhe briefing-ut, dhe shablloni i briefing-ut 10-minutësh.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).

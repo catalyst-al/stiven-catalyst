@@ -67,7 +67,7 @@ By the time you see the red, the van may already have left. Or it may still be t
 
 The same logic works in both directions. A red can describe a problem that has been solved in the meantime. A green can describe the floor as it was before something started to go wrong, or measure something other than what you think.
 
-So the question is not “what colour is it?” but “what does this number measure, when was it updated, and what is happening now?”. The colour shows you where to look, not what to decide.
+So the question to ask is what this number measures, when it was updated and what is happening now. The colour shows you where to look and leaves the decision to you.
 
 ## Three wrong reactions
 
@@ -96,7 +96,7 @@ When these four steps are settled before the shift, the first minutes after a re
 
 One more thing, for the end of the week rather than the shift. Look at the reds that led to no action because, when you checked them, they had already been solved or were not problems. If they are the majority, the alarm is training everyone to ignore it.
 
-A higher threshold that only makes the screen look better is not the answer. A threshold raised without data hides the useless reds together with the ones that mattered. The alarm is reviewed on the data: how many reds there were, how many of them needed action, and what those had in common. That count is also the best argument you can take to the people who set the alarm. Do not tell them “the dashboard is wrong”; tell them how many reds there were this week and how many of them asked for something.
+A threshold raised without data, just to make the screen look better, hides the useless reds together with the ones that mattered. The alarm is reviewed on the data: how many reds there were, how many of them needed action, and what those had in common. That count is also the best argument you can take to the people who set the alarm. Instead of “the dashboard is wrong”, tell them how many reds there were this week and how many of them asked for something.
 
 ## My red number
 

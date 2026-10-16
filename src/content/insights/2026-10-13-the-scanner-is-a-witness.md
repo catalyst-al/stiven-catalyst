@@ -42,7 +42,7 @@ firstMove:
 
 In last mile, the scanner usually has the last word. This essay asks what that word actually says. In [The system is faster than you](/insights/the-system-is-faster-than-you/) I closed with a list of the essays still to come, and one of them was about the scanner as a witness rather than a judge. This is that essay.
 
-What follows rests on my work in last mile, with its loading problems, missing bags and mixed trolleys; on the reports that also mentioned mismatches during scanning and loading; on Incomplete and Damage, KPIs we followed every day; and on the rules of the operational instructions, which come up below. From the hotel it takes the gap between what the system records and the real state of a room, which I wrote about in the first essay. It contains no reconstructed incident: I have no verified case of a bag the system showed as scanned that I then saw was missing, and none in which the scan history was used to blame a driver, or in which I used it myself to establish responsibility. The five steps further down are what I would recommend today, not a protocol I applied in every case.
+What follows rests on my work in last mile, with its loading problems, missing bags and mixed trolleys. Its other sources are the reports that also mentioned mismatches during scanning and loading, Incomplete and Damage, KPIs we followed every day, and the rules of the operational instructions, which come up below. From the hotel it takes the gap between what the system records and the real state of a room, which I wrote about in the first essay. It contains no reconstructed incident: I have no verified case of a bag the system showed as scanned that I then saw was missing, and none in which the scan history was used to blame a driver, or in which I used it myself to establish responsibility. The five steps further down are what I would recommend today, not a protocol I applied in every case.
 
 ## What a scan proves
 
@@ -50,7 +50,7 @@ A scan is a short, precise sentence: this code was read, in this place, at this 
 
 It does not say that the bag is still there, or that it went onto the right trolley. It does not say that the right trolley reached the right driver, or that the driver took everything before leaving. All of that happens after the scan, in the physical world, where the scanner cannot see.
 
-None of this makes the scan less valuable. It shows what the scan is valuable for. A good witness says precisely what they saw, and nothing about what happened while they were not there.
+The scan keeps its value; these limits show what it is valuable for. A good witness says precisely what they saw, and nothing about what happened while they were not there.
 
 **An accurate record is not always proof that the physical process ended correctly.**
 
@@ -62,13 +62,13 @@ I do not know who wrote that rule or when, so what follows is my reading of it, 
 
 ## The name on the last line
 
-When a bag is missing, the first question in most operations is not “where did it go missing?” but “who did it?”, and the scan history looks like the quickest answer: here is who scanned it last.
+When a bag is missing, the first question in most operations is “who did it?” rather than “where did it go missing?”, and the scan history looks like the quickest answer: here is who scanned it last.
 
-But a missing bag may have gone missing in the warehouse, during preparation, during loading or on the road, and the problems we had in last mile could involve any of these stages. The last scan shows who last touched the bag in the system. It does not show where the bag was separated from its place.
+But a missing bag may have gone missing in the warehouse, during preparation, during loading or on the road, and the problems we had in last mile could involve any of these stages. The last scan shows who last touched the bag in the system; where the bag was separated from its place, it cannot show.
 
 In [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/) I wrote that when you treat the number as the answer, you punish the driver for a bag that was never on their trolley. The scan history invites the same mistake, one step closer.
 
-None of this means that nobody is responsible. When it is proven that someone broke the standard, individual responsibility remains. But the proof comes from reconstructing the process, not from the name on the last line of the history.
+When it is proven that someone broke the standard, individual responsibility remains. But the proof comes from reconstructing the process, not from the name on the last line of the history.
 
 **The scanner is a witness to an action. Judging requires understanding the whole process.**
 

@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Një numër i kuq në ekran është një sinjal për të kontrolluar, jo një diagnozë. Pyet çfarë mat dhe sa i vjetër është para se të veprosh mbi të."
 teaser: E kuqja në ekranin tënd është sinjal, jo diagnozë. Pyet çfarë mat dhe sa e vjetër është para se të veprosh.
-description: "Pse një numër i kuq në tabelë ka një moshë, katër hapat mes terrenit dhe ekranit, tri reagimet e gabuara, dhe një kartelë për numrin tënd të kuq."
-deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq është sinjal dhe jo diagnozë, tri reagimet e gabuara ndaj një të kuqeje, katër hapa mes alarmit dhe vendimit, dhe një kartelë për numrin tënd të kuq."
+description: "Pse një numër i kuq në tabelë ka një moshë, katër hapat mes terrenit dhe ekranit, tri reagimet e gabuara dhe një kartelë për numrin tënd të kuq."
+deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq është sinjal dhe jo diagnozë, tri reagimet e gabuara ndaj një të kuqeje, katër hapa mes alarmit dhe vendimit, si dhe një kartelë për numrin tënd të kuq."
 relatedTools:
   - /tools/shift-pulse/
   - /tools/delay-analyzer/
@@ -18,16 +18,16 @@ checklist:
   fill: true
   note: "Një kartelë për çdo numër që ndjek në një ekran. Plotësoje para turnit, jo gjatë të kuqes."
   items:
-    - label: "Cili numër është, çfarë mat saktësisht, dhe cili është objektivi i tij?"
+    - label: "Cili numër është, çfarë mat saktësisht dhe cili është objektivi i tij?"
       hint: "Delay, Loading Time, Incomplete, Damage, dhoma të hapura, koha e pritjes. Një për kartelë."
     - label: "Sa i vjetër është kur e shoh?"
       hint: "Koha mes terrenit dhe ekranit: sekonda, minuta, mëngjesi tjetër? Nëse nuk e di, mësoje sot."
-    - label: "Çfarë di me siguri, dhe çfarë më është raportuar?"
+    - label: "Çfarë di me siguri dhe çfarë më është raportuar?"
       hint: "Numri është një raport. Çfarë ka parë dikush me sytë e vet? A është problemi ende i hapur?"
     - label: "Kush e ka informacionin më të afërt me situatën?"
       hint: "Një emër ose një rol për çdo zonë. Shkruaje tani, mos e kërko kur ekrani është i kuq."
     - label: "Brenda rolit tim, apo eskalim? Dhe me çfarë informacioni?"
-      hint: "Kufiri i vendimit tim, dhe tri faktet që i duhen nivelit tjetër."
+      hint: "Kufiri i vendimit tim dhe tri faktet që i duhen nivelit tjetër."
     - label: "Çfarë nuk pret verifikimin?"
       hint: "Rreziqet e menjëhershme të sigurisë: njoftohen menjëherë, analiza vjen pas."
 # Three moves for tomorrow's shift, shown before the text.
@@ -41,9 +41,9 @@ diagram: dashboard-lag
 
 Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) shkrova se sistemi vendos i pari dhe përgjegjësia në turn mbetet prapë jotja. Kjo ese merret me momentin që ndodh më shpesh: ende nuk është vendosur asgjë, por një numër në ekran është skuqur dhe të gjithë presin të shohin çfarë do të bësh.
 
-Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, dhe koordinoj 80+ automjete dhe 100+ shoferë. Çfarë i bën kjo një menaxheri e kam shkruar te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/). Nga larg nuk mund të shkosh te rampa për të parë çfarë fshihet pas një numri. Mbështetesh te informacioni që të vjen nga sistemi dhe nga njerëzit në terren, dhe të dy burimet vijnë gjithmonë pak pas asaj që po ndodh.
+Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, dhe koordinoj 80+ automjete dhe 100+ shoferë. Çfarë i bën kjo një menaxheri e kam shkruar te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/). Nga larg nuk mund të shkosh te rampa për të parë çfarë fshihet pas një numri. Mbështetesh në informacionin që të vjen nga sistemi dhe nga njerëzit në terren, dhe të dy burimet vijnë gjithmonë pak pas asaj që po ndodh.
 
-Ajo që vijon mbështetet te ky rol në distancë; te përvoja ime e mëparshme në last mile, ku punoja çdo ditë me Delay, Damage, Incomplete dhe Loading Time; dhe te një model demonstrues që e kam ndërtuar vetë, [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/), me tregues për nisjet, vonesat, ngarkimin dhe incidentet. Është demonstrim, jo sistemi i ndonjë kompanie. Nuk e di listën e saktë të treguesve që shfaq sistemi i punës sime aktuale, dhe nuk kam asnjë rast të dokumentuar ku një numër u skuq, unë reagova dhe e di si përfundoi, as ndonjë prag apo objektiv që kam kërkuar ta ndryshoj. Prandaj kjo është analiza ime dhe mënyra si do të veproja sot, jo një protokoll që e kam ndjekur.
+Ajo që vijon mbështetet në këtë rol në distancë; në përvojën time të mëparshme në last mile, ku punoja çdo ditë me Delay, Damage, Incomplete dhe Loading Time; dhe në një model demonstrues që e kam ndërtuar vetë, [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/), me tregues për nisjet, vonesat, ngarkimin dhe incidentet. Është demonstrim, jo sistemi i ndonjë kompanie. Nuk e di listën e saktë të treguesve që shfaq sistemi i punës sime aktuale, dhe nuk kam asnjë rast të dokumentuar ku një numër u skuq, unë reagova dhe e di si përfundoi, as ndonjë prag apo objektiv që kam kërkuar ta ndryshoj. Prandaj kjo është analiza ime dhe mënyra si do të veproja sot, jo një protokoll që e kam ndjekur.
 
 ## Mes terrenit dhe të kuqes
 
@@ -61,7 +61,7 @@ Kur e sheh të kuqen, furgoni mund të jetë nisur tashmë. Ose mund të jetë e
 
 E njëjta logjikë vlen në të dy drejtimet. Një e kuqe mund të përshkruajë një problem që është zgjidhur ndërkohë. Një e gjelbër mund ta përshkruajë terrenin siç ishte para se diçka të fillonte të shkonte keq, ose të masë diçka tjetër nga ajo që mendon ti.
 
-Prandaj pyetja nuk është “çfarë ngjyre ka?”, por “çfarë mat ky numër, kur u përditësua dhe çfarë po ndodh tani?”. Ngjyra të tregon ku të shikosh, jo çfarë të vendosësh.
+Prandaj pyetja që duhet bërë është çfarë mat ky numër, kur u përditësua dhe çfarë po ndodh tani. Ngjyra të tregon ku të shikosh dhe vendimin ta lë ty.
 
 ## Tri reagime të gabuara
 
@@ -69,7 +69,7 @@ Kushdo që ka ndenjur para një tabele i njeh tri reagime ndaj një numri të ku
 
 **Të telefonosh menjëherë.** Numri skuqet dhe telefoni është në dorën tënde para se të kesh menduar. Personi që përgjigjet mund të jetë në mes të zgjidhjes së pikërisht asaj gjëje, dhe tani duhet të ndalet për të ta shpjeguar ty. Ke reaguar ndaj një situate që mund të mos ekzistojë më, dhe për këtë ke hequr një palë duar nga problemi.
 
-**Ta shpërfillësh.** “Në këtë orë është gjithmonë e kuqe.” Një alarm që përsëritet pa pushim pa informacion të dobishëm rrezikon ta humbasë kuptimin, dhe ditën kur e kuqja do të thotë diçka, askush nuk e shikon. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për shtresën që e kapërcejnë shumica e operacioneve: atë që tregon nëse sot është ndryshe nga dhjetë ditët e fundit. Një e kuqe që e shpërfill nga zakoni është një e kuqe pa histori.
+**Ta shpërfillësh.** “Në këtë orë është gjithmonë e kuqe.” Një alarm që përsëritet vazhdimisht pa informacion të dobishëm rrezikon ta humbasë kuptimin, dhe ditën kur e kuqja do të thotë diçka, askush nuk e shikon. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për shtresën që e kapërcejnë shumica e operacioneve: atë që tregon nëse sot është ndryshe nga dhjetë ditët e fundit. Një e kuqe që e shpërfill nga zakoni është një e kuqe pa histori.
 
 **Ta çosh lart ashtu të kuqe.** Numri dërgohet një nivel më lart, i kuq dhe i zhveshur. Ky është gabimi i tretë te [Kur ta zgjidhësh vetë dhe kur ta çosh lart](/sq/insights/solve-it-or-escalate-it/): eskalimi pa informacion. Problemi nuk iu afrua aspak zgjidhjes; vetëm përfundoi te dikush që tani duhet të bëjë pyetjet që mund t'i kishe bërë vetë.
 
@@ -90,7 +90,7 @@ Kur këto katër hapa janë vendosur para turnit, minutat e para pas një të ku
 
 Edhe diçka, më shumë për fundin e javës sesa për turnin. Shiko të kuqet që nuk çuan në asnjë veprim, sepse kur i kontrollove ishin zgjidhur tashmë ose nuk ishin fare probleme. Nëse janë shumica, alarmi po i mëson të gjithë ta shpërfillin.
 
-Një prag më i lartë, vetëm që ekrani të duket më mirë, nuk është zgjidhje. Një prag i ngritur pa të dhëna i fsheh të kuqet e padobishme bashkë me ato që kishin rëndësi. Alarmi rishikohet mbi bazën e të dhënave: sa të kuqe pati, sa prej tyre kërkuan veprim dhe çfarë kishin të përbashkët ato. Ky numërim është edhe argumenti më i mirë që mund t'u çosh atyre që e caktojnë alarmin. Mos u thuaj “tabela gabon”; thuaju sa të kuqe pati këtë javë dhe sa prej tyre kërkuan diçka.
+Një prag i ngritur pa të dhëna, vetëm që ekrani të duket më mirë, i fsheh të kuqet e padobishme bashkë me ato që kishin rëndësi. Alarmi rishikohet mbi bazën e të dhënave: sa të kuqe pati, sa prej tyre kërkuan veprim dhe çfarë kishin të përbashkët ato. Ky numërim është edhe argumenti më i mirë që mund t'u çosh atyre që e caktojnë alarmin. Në vend të “tabela gabon”, thuaju sa të kuqe pati këtë javë dhe sa prej tyre kërkuan diçka.
 
 ## Numri im i kuq
 

@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Sistemi e planifikon rrugën me të dhënat e veta, shoferi e përshkon në kushtet reale. Problemi fillon kur organizata nuk mëson nga shoferi."
 teaser: Një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson.
-description: "Rruga e sistemit dhe rruga e shoferit: pse asnjëri s'ka gjithmonë të drejtë, katër hapa që e kthejnë njohjen e zonës në përmirësim, dhe një kartelë."
-deck: "Eseja e tretë e serisë “Sistemi është më i shpejtë se ti”: rruga e planifikuar dhe rruga e përshkuar, shoferi i ri dhe njohja e zonës, katër hapa që e kthejnë atë që di shoferi në përmirësim të planit, dhe një kartelë për një problem që përsëritet."
+description: "Rruga e sistemit dhe rruga e shoferit: pse asnjëri s'ka gjithmonë të drejtë, katër hapa që e kthejnë njohjen e zonës në përmirësim dhe një kartelë."
+deck: "Eseja e tretë e serisë “Sistemi është më i shpejtë se ti”: rruga e planifikuar dhe rruga e përshkuar, shoferi i porsaardhur dhe njohja e zonës, katër hapa që e kthejnë atë që di shoferi në përmirësim të planit dhe një kartelë për një problem që përsëritet."
 relatedTools:
   - /tools/delay-analyzer/
   - /tools/five-whys/
@@ -17,7 +17,7 @@ checklist:
   fill: true
   note: "Një kartelë për çdo problem që shoferët e hasin më shumë se një herë në të njëjtën rrugë ose zonë. Plotësoje kur e dëgjon herën e dytë, jo të pestën."
   items:
-    - label: "Çfarë has shoferi, dhe ku?"
+    - label: "Çfarë has shoferi dhe ku?"
       hint: "Një hyrje, një orar, një adresë, një renditje. Me fjalët e shoferit, pa e përkthyer ende."
     - label: "Pengesë e përkohshme apo gabim i vazhdueshëm?"
       hint: "Rrugë e mbyllur sot, apo i njëjti problem çdo javë? E para kalon, e dyta kthehet."
@@ -34,17 +34,17 @@ firstMove:
   - "Para fundit të javës, merr vesh kush mund ta miratojë një ndryshim rruge dhe ku regjistrohet. Shkruaje."
 ---
 
-Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) përdora një figurë: një rrugë e planifikuar për një shofer të ri, një dyqan që hap në orën dhjetë, një ndalesë e vënë në tetë e gjysmë. Këtu e shoh të njëjtën figurë nga ana tjetër: jo sistemin që nuk e dinte orarin, por shoferin që e di, dhe pyetjen se ku përfundon ajo që di ai.
+Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) përdora një figurë: një rrugë e planifikuar për një shofer të porsaardhur, një dyqan që hap në orën dhjetë, një ndalesë e vënë në tetë e gjysmë. Këtu e shoh të njëjtën figurë nga ana tjetër, nga shoferi që e di orarin, dhe pyes ku përfundon ajo që di ai.
 
-Mbështetem te puna ime në last mile: koordinimi i shoferëve, i itinerareve dhe i problemeve operative gjatë shpërndarjes, sot si dispeçer në distancë. Mbështetem edhe te shoferët në fazën e ramp-up që, siç shkrova te [Ditët me volum të lartë](/sq/insights/high-volume-days/), nuk ishin mësuar ende plotësisht me procedurat, dhe te ndryshimi i planifikimit të rrugëve në gusht 2025.
+Mbështetem në punën time në last mile: koordinimi i shoferëve, i itinerareve dhe i problemeve operative gjatë shpërndarjes, sot si dispeçer në distancë. Mbështetem edhe në përvojën me shoferët në fazën e ramp-up, të cilët, siç shkrova te [Ditët me volum të lartë](/sq/insights/high-volume-days/), nuk ishin mësuar ende plotësisht me procedurat, dhe në ndryshimin e planifikimit të rrugëve në gusht 2025.
 
-Nuk kam asnjë rast ku një shofer të më ketë thënë shprehimisht se rruga e tij nuk kishte kuptim. Nuk e di si i mësonin rrugët shoferët e rinj, nëse njohja e zonës e ndryshonte performancën, kush e kishte saktësisht autoritetin për ta ndryshuar një rrugë gjatë ditës dhe si bëhej kjo teknikisht, as nëse ajo që shoferët dinin për një zonë ruhej diku. Janë shumë “nuk e di” për një ese, dhe pikërisht aty qëndron çështja: ajo që një shofer di për rrugën e vet është ndër gjërat që një operacion i ka më pak të shkruara, edhe kur një sistem i ri kërkon ta përdorë. Prandaj kjo është analiza ime dhe ajo që do të rekomandoja sot, jo një proces që e kam ndërtuar; skenat janë figura.
+Nuk kam asnjë rast ku një shofer të më ketë thënë shprehimisht se rruga e tij nuk kishte kuptim. Nuk e di si i mësonin rrugët shoferët e porsaardhur, nëse njohja e zonës e ndryshonte performancën, kush e kishte saktësisht autoritetin për ta ndryshuar një rrugë gjatë ditës dhe si bëhej kjo teknikisht, as nëse ajo që shoferët dinin për një zonë ruhej diku. Janë shumë “nuk e di” për një ese, dhe pikërisht aty qëndron çështja: ajo që një shofer di për rrugën e vet është ndër gjërat që një operacion i ka më pak të shkruara, edhe kur një sistem i ri kërkon ta përdorë. Prandaj kjo është analiza ime dhe ajo që do të rekomandoja sot, jo një proces që e kam ndërtuar; skenat janë figura.
 
 ## Rruga e planifikuar dhe rruga e përshkuar
 
 Një sistem e planifikon rrugën me të dhënat që ka: adresat, oraret e dorëzimit, distancat, kohët mesatare. Shoferi e përshkon me kushtet që gjen: hyrjen prapa ndërtesës, portën që hapet vetëm me zile, dyqanin që mbyllet në drekë, rrugën që e bllokon tregu çdo të martë.
 
-Asnjëri nuk është i gabuar në vetvete. Janë dy përshkrime të së njëjtës rrugë, nga dy pika vështrimi të ndryshme. I pari është i shpejtë, i mbulon të gjitha rrugët njëherësh dhe nuk di asgjë që nuk i është shkruar. I dyti është i ngadaltë, i kufizuar te zonat që shoferi i njeh, dhe di gjëra që nuk i ka shkruar askush.
+Janë dy përshkrime të së njëjtës rrugë, nga dy pika vështrimi të ndryshme, dhe asnjëri nuk është i gabuar në vetvete. I pari është i shpejtë, i mbulon të gjitha rrugët njëherësh dhe nuk di asgjë që nuk i është shkruar. I dyti është i ngadaltë, i kufizuar te zonat që shoferi i njeh, dhe di gjëra që nuk i ka shkruar askush.
 
 Ndryshimi i gushtit 2025 e pranonte këtë me gjuhën e vet: synonte plane më realiste dhe parashikonte përdorimin e informacionit nga terreni. Kjo nuk provon se ekzistonte një proces i plotë ku çdo korrigjim i shoferit regjistrohej dhe e përmirësonte planin. Pa një proces të tillë, informacioni nga terreni mbetet aty ku lindi: në kokën e shoferit.
 
@@ -58,15 +58,15 @@ Shoferi nuk ka gjithmonë të drejtë. Mund ta ndryshojë renditjen sepse i duke
 
 Prandaj më pak rëndësi ka kush ka të drejtë, e më shumë kjo: kur një shofer zbulon diçka që sistemi nuk e ka parashikuar, a ka organizata një mënyrë për ta verifikuar atë informacion? Nëse po, informacioni mund të bëhet përmirësim. Nëse jo, mbeten vetëm dy rrugë: ose shoferi e shpërfill sistemin në heshtje, ose sistemi e shpërfill shoferin.
 
-## Shoferi i ri dhe shoferi që mungon
+## Shoferi i porsaardhur dhe shoferi që mungon
 
 Përfytyro një zonë që e njeh mirë vetëm një shofer. Ai e bën rrugën çdo ditë dhe e bën mirë, sepse e di ku të parkojë, cilën derë të përdorë dhe cilin klient ta lërë për më vonë. Asgjë nga këto nuk është në plan, dhe për sa kohë ai është aty, plani nuk ka nevojë për to.
 
-Pastaj një ditë ai mungon. Rrugën e merr një shofer i ri, ndoshta ende në ramp-up, dhe ndjek planin, sepse plani është gjithçka që ka. Dita ngec pikërisht në vendet ku shoferi me përvojë nuk ngecte kurrë.
+Pastaj një ditë ai mungon. Rrugën e merr një shofer i porsaardhur, ndoshta ende në ramp-up, dhe ndjek planin, sepse plani është gjithçka që ka. Dita ngec pikërisht në vendet ku shoferi me përvojë nuk ngecte kurrë.
 
-Kjo është figura e asaj që te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e quajta “mosbesimi i plotë”: dija që mbetet në një kokë. Është edhe ajo për të cilën shkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/), vetëm se këtu nuk mungon trajneri, por një vend ku të mund të shkruhej dija e shoferit.
+Kjo është figura e asaj që te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e quajta “mosbesimi i plotë”: dija që mbetet në një kokë. Është edhe ajo për të cilën shkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/), vetëm se këtu mungon një vend ku të mund të shkruhej dija e shoferit.
 
-Një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson. Kjo nuk ia ul vlerën: ajo që di ai vlen shumë për të mbetur vetëm në një vend.
+Një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson. Kjo nuk ia ul vlerën: ajo që di ai vlen aq shumë sa nuk duhet të mbetet vetëm në një vend.
 
 ## Katër hapa nga shoferi te plani
 

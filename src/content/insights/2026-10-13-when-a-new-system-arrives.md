@@ -46,15 +46,15 @@ corrections:
     t: "An earlier version dated the first weeks of training at the hotel to September 2026 and called it a new hotel. I have been the hotel’s Night Manager since November 2025, so both are removed."
 ---
 
-In [The night the system went down](/insights/the-night-the-system-went-down/) I wrote about my first night of training at the hotel, when an update left the system unavailable for hours. I had come to learn the processes and spent most of the night waiting. This essay starts where that one ended: not with the system that stops, but with the system that arrives, and with the people who have to learn it.
+In [The night the system went down](/insights/the-night-the-system-went-down/) I wrote about my first night of training at the hotel, when an update left the system unavailable for hours. I had come to learn the processes and spent most of the night waiting. This essay picks up where that one ended and turns from the system that stops to the system that arrives, and to the people who have to learn it.
 
 It draws on two experiences. In last mile, the move to a new system for calculating routes and travel times was planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries, and calibrations were planned so that the change would affect the drivers as little as possible. At the hotel, there were my first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. Front Desk Control grew out of that period. For the August change I have no verified before-and-after comparison, and no record of resistance or of a return to old habits.
 
-One thing needs saying. In those weeks in last mile we had problems with loading, missing bags, disorganised trolleys and delays, and I have them documented. I have no evidence that the new system caused them, and they may have had other causes. That is the easiest temptation when a new system arrives: billing it for everything that goes wrong in the first weeks.
+In those weeks in last mile we had problems with loading, missing bags, disorganised trolleys and delays, and I have them documented. I have no evidence that the new system caused them, and they may have had other causes. That is the easiest temptation when a new system arrives: billing it for everything that goes wrong in the first weeks.
 
 ## Two sides of the same door
 
-In last mile I was part of an operation whose planning technology was changing; at the hotel I was the newcomer who had to learn a system that was already there. Side by side, the two experiences show the same thing: a system can be technically better than the one it replaces without people being ready to work with it. Readiness is not installed. It is built, or not built, in the weeks after installation.
+In last mile I was part of an operation whose planning technology was changing; at the hotel I was the newcomer who had to learn a system that was already there. Side by side, the two experiences show the same thing: a system can be technically better than the one it replaces without people being ready to work with it. Readiness is built, or not built, in the weeks after installation.
 
 **A new system does not become part of the work because it has been installed. It does when people understand it, know how to use it, and know what to do when it does not help them.**
 
@@ -97,4 +97,4 @@ The fifth point is the one I would stress. Collecting information from the field
 
 The card below is for whoever leads the change, and also for whoever receives it. If you are an employee and do not know the answers, ask before the first day. [Six Sigma DMAIC](/tools/six-sigma-dmaic/) has its Control phase for exactly this: how a change holds once the person who brought it has gone.
 
-Installation changes the system. The way people work changes afterwards, through training, communication and daily experience: the ordinary and the difficult case practised before the first day, an answer to the problem reported in the first week, the instruction updated on the same day as the screen.
+The system changes on the day it is installed. The way people work changes afterwards, through training, communication and daily experience: the ordinary and the difficult case practised before the first day, an answer to the problem reported in the first week, the instruction updated on the same day as the screen.

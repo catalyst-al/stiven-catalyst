@@ -5,7 +5,7 @@ category: Operations
 series: the-system
 status: published
 featured: true
-summary: "A report generated quickly and written well is no guarantee that the information is complete. The responsibility for what it says stays with a person."
+summary: "A report generated quickly and written well is no guarantee that the information is complete. Responsibility for its content has to stay with a person."
 teaser: A generated report looks finished. Whether it is true, and what is still open, is for a person to check.
 description: "Reports from the system and from AI: why two correct reports can disagree, what to check before you trust one, and a report in three parts."
 deck: "The fifth essay in the series “The system is faster than you”: the automatic reports of last mile and of Night Audit, AI that writes the text more clearly, why a well-written report does not mean the problem has been understood, and a card for a report in three parts."
@@ -42,7 +42,7 @@ firstMove:
 
 At the end of the first essay in this series I promised an essay about the report a machine wrote. I was thinking then of the reports the system produces by itself: the numbers of the day, the close of the night. Today there is a second machine as well, one that does not produce the numbers but summarises them and writes them up in professional language. This essay is about both.
 
-It draws on the reports I worked with every day. In last mile: the daily KPI reports for Damage, Incomplete, Delay and Loading Time, the performance reports by DSP and by driver, and the reporting on operational problems, delays and incomplete orders. In the hotel, during Night Audit: the hotel status and occupancy reports, arrivals, departures and no-shows, the breakfast report and forecast, the end-of-day reports and the information for the following shift. None of this is the story of a report that got it wrong. I have no case in which I proved an automatic report wrong and corrected it, and none of an official report written by AI and sent without a person looking at it. The question here is the one I ask whenever a report looks finished: what does it tell me, and what does it let me believe?
+It draws on the reports I worked with every day. In last mile: the daily KPI reports for Damage, Incomplete, Delay and Loading Time, the performance reports by DSP and by driver, and the reporting on operational problems, delays and incomplete orders. In the hotel, during Night Audit: the hotel status and occupancy reports, arrivals, departures and no-shows, the breakfast report and forecast, the end-of-day reports and the information for the following shift. None of this is the story of a report that got it wrong: I have no case in which I proved an automatic report wrong and corrected it, and none of an official report written by AI and sent without a person looking at it. The question here is the one I ask whenever a report looks finished: what does it tell me, and what does it let me believe?
 
 ## Two reports, two numbers
 
@@ -64,7 +64,7 @@ In [What a Night Auditor learns](/insights/what-a-night-auditor-learns/) I wrote
 
 ## The second machine
 
-I have used ChatGPT to organise operational material, to prepare SOP instructions, to structure information and to draft professional texts. It does well what it is asked to do: it takes a messy list and turns it into something that reads well.
+I have used ChatGPT to organise operational material, to prepare SOP instructions, to structure information and to draft professional texts. It is good at what it is asked to do: it takes a messy list and turns it into something that reads well.
 
 That is where the risk lies. A well-written text gives the impression that someone has thought it through. A report with orderly paragraphs and words like “verified” and “resolved” sounds checked, even when nobody has checked anything. And an AI tool can add something that was not in your notes, in the same confident tone as everything else.
 
@@ -90,7 +90,7 @@ The reason is simple. I would not want a well-written report to give the impress
 
 I have no case of a report that was produced and that nobody read. In last mile, the KPIs were part of the operational discussions and the daily stand-up. In the hotel, the reports were used to close the day and to keep the work continuous from one shift to the next.
 
-That does not prove that every report was read and used in the same way. And the easier it becomes to produce a report, by the system or by AI, the more reports there will be, and the less time for each one. The question is no longer who writes the report. It is who reads it, and what they do after reading it. A report should help a person understand reality, not replace the checking of reality.
+That does not prove that every report was read and used in the same way. And the easier it becomes to produce a report, by the system or by AI, the more reports there will be, and the less time for each one. The question shifts from who writes the report to who reads it, and what they do after reading it. A report should help a person understand reality, not replace the checking of reality.
 
 ## A report in three parts
 

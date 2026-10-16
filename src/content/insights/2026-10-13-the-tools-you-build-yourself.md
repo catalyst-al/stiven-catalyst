@@ -47,7 +47,7 @@ corrections:
 
 Imagine a new employee at reception, in the middle of a process they have seen only once. The instruction exists, but it is somewhere between an SOP, a video, a few photographs and what a colleague explained to them two nights earlier. The process waits while they search.
 
-This is not a scene I documented as an incident. It is my experience of the first weeks at the hotel, written as a picture, and it is the reason I began to build a tool of my own.
+The scene is my experience of the first weeks at the hotel, written as a picture rather than documented as an incident, and it is the reason I began to build a tool of my own.
 
 That tool is [Front Desk Control](/insights/how-i-built-front-desk-control/), which I developed in September 2026 to organise the work in Front Office and Night Audit: SOP instructions, checklists, information search and visual explanations with screenshots of the processes. Around it I worked on structures for Shift Handover and the night reports, on organising the Breakfast Forecast processes, and on checklists and step-by-step instructions. I use it myself. What I cannot say is whether colleagues use it regularly, and I know of no case in which an outdated procedure in it caused an error.
 
@@ -57,9 +57,9 @@ The essay in which I described Front Desk Control presented it as work in progre
 
 I did not build it because information was missing. I built it because the information was scattered across SOP documents, colleagues' explanations, photographs, videos and checklists. I often had to search through several of them to understand how a process was carried out. The instruction existed; I could not find it at the moment I needed it.
 
-I was not trying to replace the hotel system. I wanted a place where I could find the instructions faster.
+I wanted a place where I could find the instructions faster, beside the hotel system rather than instead of it.
 
-I believe most of the small lists beside the official system appear this way: not from distrust of the system, but from a gap between the system and the work. An Excel sheet, a printed page beside the screen, a page built in the evening. Each of them is a report nobody asked for, and it says one thing: here the information does not reach where it should.
+I believe most of the small lists beside the official system appear this way, out of a gap between the system and the work rather than out of distrust of the system. An Excel sheet, a printed page beside the screen, a page built in the evening. Each of them is a report nobody asked for, and it says one thing: here the information does not reach where it should.
 
 **When an employee builds a tool to make the work easier, they may be showing a gap in the way the organisation distributes information.**
 
@@ -107,4 +107,4 @@ Nor would I measure success only by whether the tool works technically. I would 
 
 The card below is for every tool you have built for yourself and think could serve others too. Fill it in before you hand the tool over, not after it has spread. [Shift Handover](/tools/shift-handover/) is one example of a tool that holds the method and nobody else's data: handovers stay in your browser, and nothing is sent or uploaded.
 
-A small tool can solve a big problem. Whether it has become part of the work shows on the night its builder is not there: when someone else opens it, can trust what it says, and knows who keeps it up to date.
+Whether a small tool has become part of the work shows on the night its builder is not there: when someone else opens it, can trust what it says, and knows who keeps it up to date.

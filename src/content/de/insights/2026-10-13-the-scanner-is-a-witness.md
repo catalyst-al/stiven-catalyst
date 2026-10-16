@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Ein Scan zeigt, dass eine Handlung erfasst wurde. Er zeigt weder die ganze Geschichte des Produkts noch, wer schuld ist."
 teaser: Das System sagt Ihnen, was erfasst wurde. Die Führungskraft muss verstehen, was passiert ist.
-description: "Was ein Scan beweist und was nicht, warum er rekonstruiert und nicht urteilt, fünf Schritte bei einer Abweichung von System und Realität, und eine Karte."
-deck: "Der vierte Essay der Reihe „Das System ist schneller als Sie“: was ein Scan beweist, warum eine korrekte Erfassung nicht beweist, dass der physische Prozess korrekt abgeschlossen wurde, fünf Schritte für eine Abweichung, und eine Karte, die den Erfassungsfehler vom Beladungsfehler trennt."
+description: "Was ein Scan beweist und was nicht, warum er rekonstruiert und nicht urteilt, fünf Schritte bei einer Abweichung von System und Realität sowie eine Karte."
+deck: "Der vierte Essay der Reihe „Das System ist schneller als Sie“: was ein Scan beweist, warum eine korrekte Erfassung nicht beweist, dass der physische Prozess korrekt abgeschlossen wurde, fünf Schritte für eine Abweichung und eine Karte, die den Erfassungsfehler vom Beladungsfehler trennt."
 relatedTools:
   - /tools/incomplete-control/
   - /tools/five-whys/
@@ -36,7 +36,7 @@ firstMove:
 
 Auf der letzten Meile hat der Scanner meistens das letzte Wort. Dieser Essay fragt, was dieses Wort eigentlich besagt. In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you/) habe ich zum Schluss die kommenden Essays aufgezählt; einer davon sollte vom Scanner handeln, der Zeuge ist und nicht Richter. Hier ist er.
 
-Grundlage ist meine Arbeit auf der letzten Meile mit ihren Problemen bei der Beladung, den fehlenden Taschen und vermischten Trolleys; dazu kommen Berichte, in denen auch Abweichungen beim Scannen und Beladen vorkamen, Incomplete und Damage als KPIs, die wir jeden Tag verfolgt haben, und die Regeln der operativen Anweisungen, auf die ich weiter unten eingehe. Aus dem Hotel stammt der Unterschied zwischen dem, was das System erfasst, und dem tatsächlichen Zustand eines Zimmers, über den ich im ersten Essay geschrieben habe. Einen rekonstruierten Vorfall enthält der Essay nicht: Ich habe keinen belegten Fall, in dem das System eine Tasche als gescannt zeigte und ich selbst sah, dass sie fehlte, und keinen, in dem die Scan-Historie dazu diente, einem Fahrer die Schuld zu geben, oder in dem ich selbst damit die Verantwortung festgelegt habe. Die fünf Schritte weiter unten würde ich heute empfehlen; als Protokoll habe ich sie nicht in jedem Fall angewendet.
+Grundlage ist meine Arbeit auf der letzten Meile mit ihren Problemen bei der Beladung, den fehlenden Taschen und vermischten Trolleys. Dazu kommen Berichte, in denen auch Abweichungen beim Scannen und Beladen vorkamen, Incomplete und Damage als KPIs, die wir jeden Tag verfolgt haben, und die Regeln der operativen Anweisungen, auf die ich weiter unten eingehe. Aus dem Hotel stammt der Unterschied zwischen dem, was das System erfasst, und dem tatsächlichen Zustand eines Zimmers, über den ich im ersten Essay geschrieben habe. Einen rekonstruierten Vorfall enthält der Essay nicht: Ich habe keinen belegten Fall, in dem das System eine Tasche als gescannt zeigte und ich selbst sah, dass sie fehlte, und keinen, in dem die Scan-Historie dazu diente, einem Fahrer die Schuld zu geben, oder in dem ich selbst damit die Verantwortung festgelegt habe. Die fünf Schritte weiter unten würde ich heute empfehlen; als Protokoll habe ich sie nicht in jedem Fall angewendet.
 
 ## Was ein Scan beweist
 
@@ -44,7 +44,7 @@ Ein Scan ist ein kurzer, präziser Satz: Dieser Code wurde gelesen, an diesem Or
 
 Er sagt nicht, dass die Tasche noch da ist oder dass sie auf den richtigen Trolley kam. Er sagt nicht, dass der richtige Trolley beim richtigen Fahrer ankam oder dass der Fahrer vor der Abfahrt alles mitnahm. All das geschieht nach dem Scan, in der physischen Welt, und dorthin sieht der Scanner nicht.
 
-Das macht den Scan nicht weniger wertvoll. Es zeigt nur, wofür er wertvoll ist. Ein guter Zeuge sagt genau, was er gesehen hat, und nichts darüber, was geschah, als er nicht dabei war.
+Der Scan behält seinen Wert; diese Grenzen zeigen, wofür er wertvoll ist. Ein guter Zeuge sagt genau, was er gesehen hat, und nichts darüber, was geschah, als er nicht dabei war.
 
 **Eine korrekte Erfassung ist nicht immer ein Beweis dafür, dass der physische Prozess korrekt abgeschlossen wurde.**
 
@@ -56,13 +56,13 @@ Wer diese Regel wann geschrieben hat, weiß ich nicht. Was folgt, ist also meine
 
 ## Der Name in der letzten Zeile
 
-Fehlt eine Tasche, lautet die erste Frage in den meisten Betrieben nicht „Wo ist sie verloren gegangen?“, sondern „Wer war das?“. Und die Scan-Historie scheint die schnellste Antwort zu liefern: Hier steht, wer sie zuletzt gescannt hat.
+Fehlt eine Tasche, lautet die erste Frage in den meisten Betrieben „Wer war das?“ statt „Wo ist sie verloren gegangen?“. Und die Scan-Historie scheint die schnellste Antwort zu liefern: Hier steht, wer sie zuletzt gescannt hat.
 
-Aber eine Tasche kann im Lager verloren gehen, bei der Vorbereitung, bei der Beladung oder unterwegs, und die Probleme, die wir auf der letzten Meile hatten, konnten jeden dieser Abschnitte betreffen. Der letzte Scan zeigt, wer die Tasche im System zuletzt in der Hand hatte. Wo sie von ihrem Platz getrennt wurde, zeigt er nicht.
+Aber eine Tasche kann im Lager verloren gehen, bei der Vorbereitung, bei der Beladung oder unterwegs, und die Probleme, die wir auf der letzten Meile hatten, konnten jeden dieser Abschnitte betreffen. Der letzte Scan zeigt, wer die Tasche im System zuletzt in der Hand hatte; wo sie von ihrem Platz getrennt wurde, kann er nicht zeigen.
 
 In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben: Wenn Sie die Zahl für die Antwort halten, bestrafen Sie den Fahrer für eine Tasche, die nie auf seinem Trolley war. Die Scan-Historie verleitet zum selben Fehler, nur einen Schritt näher.
 
-Das heißt nicht, dass niemand verantwortlich ist. Ist nachgewiesen, dass jemand gegen den Standard verstoßen hat, bleibt die individuelle Verantwortung bestehen. Der Nachweis entsteht aber aus der Rekonstruktion des Prozesses, nicht aus dem Namen in der letzten Zeile der Historie.
+Ist nachgewiesen, dass jemand gegen den Standard verstoßen hat, bleibt die individuelle Verantwortung bestehen. Der Nachweis entsteht aber aus der Rekonstruktion des Prozesses, nicht aus dem Namen in der letzten Zeile der Historie.
 
 **Der Scanner ist Zeuge einer Handlung. Ein Urteil verlangt, den ganzen Prozess zu verstehen.**
 

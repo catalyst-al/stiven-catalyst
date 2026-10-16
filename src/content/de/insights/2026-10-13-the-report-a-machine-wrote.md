@@ -5,7 +5,7 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "Ein schnell erzeugter, gut geschriebener Bericht garantiert nicht, dass die Information vollständig ist. Die Verantwortung dafür bleibt beim Menschen."
+summary: "Ein schnell erzeugter, gut geschriebener Bericht garantiert nicht, dass die Information vollständig ist. Verantworten muss seinen Inhalt ein Mensch."
 teaser: Ein erzeugter Bericht wirkt fertig. Ob er stimmt und was noch offen ist, muss ein Mensch prüfen.
 description: "Berichte vom System und von KI: warum zwei korrekte Berichte abweichen können, was Sie prüfen, bevor Sie einem vertrauen, und ein Bericht in drei Teilen."
 deck: "Der fünfte Essay der Reihe „Das System ist schneller als Sie“: die automatischen Berichte der letzten Meile und des Night Audit, KI, die den Text klarer schreibt, warum ein gut geschriebener Bericht nicht bedeutet, dass das Problem verstanden wurde, und eine Karte für einen Bericht in drei Teilen."
@@ -36,7 +36,7 @@ firstMove:
 
 Am Ende des ersten Essays dieser Reihe habe ich einen Essay über den Bericht angekündigt, den eine Maschine geschrieben hat. Damals dachte ich an die Berichte, die das System von selbst erzeugt: die Zahlen des Tages, den Abschluss der Nacht. Heute gibt es aber noch eine zweite Maschine. Sie erzeugt die Zahlen nicht, sondern fasst sie zusammen und formuliert sie in professioneller Sprache aus. Dieser Essay handelt von beiden.
 
-Er stützt sich auf die Berichte, mit denen ich täglich gearbeitet habe. Auf der letzten Meile: die täglichen KPI-Berichte zu Damage, Incomplete, Delay und Loading Time, die Leistungsberichte nach DSP und nach Fahrer sowie die Meldungen zu operativen Problemen, Verspätungen und unvollständigen Aufträgen. Im Hotel, im Night Audit: die Berichte zu Hotelstatus und Belegung, Anreisen, Abreisen und No-Shows, den Frühstücksbericht und die Frühstücksprognose, die Tagesabschlussberichte und die Informationen für die nächste Schicht. Eine Geschichte über einen fehlerhaften Bericht ist das nicht. Ich habe keinen Fall, in dem ich einem automatischen Bericht einen Fehler nachgewiesen und ihn korrigiert hätte, und keinen offiziellen Bericht, den eine KI geschrieben hat und der verschickt wurde, ohne dass ein Mensch ihn angesehen hat. Es geht um die Frage, die ich mir jedes Mal stelle, wenn ein Bericht fertig aussieht: Was sagt er mir tatsächlich, und was lässt er mich glauben?
+Er stützt sich auf die Berichte, mit denen ich täglich gearbeitet habe. Auf der letzten Meile: die täglichen KPI-Berichte zu Damage, Incomplete, Delay und Loading Time, die Leistungsberichte nach DSP und nach Fahrer sowie die Meldungen zu operativen Problemen, Verspätungen und unvollständigen Aufträgen. Im Hotel, im Night Audit: die Berichte zu Hotelstatus und Belegung, Anreisen, Abreisen und No-Shows, den Frühstücksbericht und die Frühstücksprognose, die Tagesabschlussberichte und die Informationen für die nächste Schicht. Eine Geschichte über einen fehlerhaften Bericht ist das nicht: Ich habe keinen Fall, in dem ich einem automatischen Bericht einen Fehler nachgewiesen und ihn korrigiert hätte, und keinen offiziellen Bericht, den eine KI geschrieben hat und der verschickt wurde, ohne dass ein Mensch ihn angesehen hat. Es geht um die Frage, die ich mir jedes Mal stelle, wenn ein Bericht fertig aussieht: Was sagt er mir, und was lässt er mich glauben?
 
 ## Zwei Berichte, zwei Zahlen
 
@@ -58,7 +58,7 @@ In [Was ein Night Auditor lernt](/de/insights/what-a-night-auditor-learns/) habe
 
 ## Die zweite Maschine
 
-Ich habe ChatGPT genutzt, um operatives Material zu ordnen, SOP-Anleitungen vorzubereiten, Informationen zu strukturieren und professionelle Texte zu entwerfen. Was man von ihm verlangt, macht es gut: Aus einer ungeordneten Liste wird etwas, das sich gut liest.
+Ich habe ChatGPT genutzt, um operatives Material zu ordnen, SOP-Anleitungen vorzubereiten, Informationen zu strukturieren und professionelle Texte zu entwerfen. Was man von ChatGPT verlangt, erledigt es gut: Aus einer ungeordneten Liste wird etwas, das sich gut liest.
 
 Genau darin liegt das Risiko. Ein gut geschriebener Text erweckt den Eindruck, jemand habe ihn gründlich durchdacht. Ein Bericht mit ordentlichen Absätzen und Wörtern wie „geprüft“ und „gelöst“ klingt geprüft, auch wenn niemand etwas geprüft hat. Und ein KI-Werkzeug kann etwas hinzufügen, das nicht in Ihren Notizen stand, im selben sicheren Ton wie alles andere.
 
@@ -84,7 +84,7 @@ Der Grund ist einfach. Ich möchte nicht, dass ein gut geschriebener Bericht den
 
 Einen Fall, in dem ein Bericht erzeugt und von niemandem gelesen wurde, habe ich nicht. Auf der letzten Meile gehörten die KPIs zu den operativen Besprechungen und zum täglichen Stand-up. Im Hotel dienten die Berichte dem Tagesabschluss und der Kontinuität von Schicht zu Schicht.
 
-Das beweist aber nicht, dass jeder Bericht auf dieselbe Weise gelesen und genutzt wurde. Und je leichter es wird, einen Bericht zu erzeugen, ob durch das System oder durch KI, desto mehr Berichte wird es geben und desto weniger Zeit für jeden einzelnen. Die Frage ist nicht mehr, wer den Bericht schreibt. Sie lautet, wer ihn liest und was er danach tut. Ein Bericht soll dem Menschen helfen, die Wirklichkeit zu verstehen, und nicht die Prüfung der Wirklichkeit ersetzen.
+Das beweist aber nicht, dass jeder Bericht auf dieselbe Weise gelesen und genutzt wurde. Und je leichter es wird, einen Bericht zu erzeugen, ob durch das System oder durch KI, desto mehr Berichte wird es geben und desto weniger Zeit für jeden einzelnen. Damit verschiebt sich die Frage: weg davon, wer den Bericht schreibt, hin dazu, wer ihn liest und was er danach tut. Ein Bericht soll dem Menschen helfen, die Wirklichkeit zu verstehen, und nicht die Prüfung der Wirklichkeit ersetzen.
 
 ## Ein Bericht in drei Teilen
 

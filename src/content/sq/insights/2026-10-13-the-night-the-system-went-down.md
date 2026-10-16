@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Natën e parë të trajnimit tim në hotel, një përditësim e ndali sistemin për orë të tëra. Ajo natë tregoi sa shumë nga puna varet prej tij."
 teaser: Kur sistemi ndalet, kupton sa shumë nga puna jote varet prej tij dhe sa mirë je përgatitur për të vazhduar.
-description: "Një natë trajnimi pa sistem: çfarë nuk mësohet dot nga ekrani, pse incidenti nuk mbaron kur sistemi rikthehet, dhe pesë gjëra për t'i ditur para turnit."
-deck: "Eseja e gjashtë e serisë “Sistemi është më i shpejtë se ti”: nata e parë e trajnimit në hotel, kur një përditësim e ndali sistemin për orë të tëra, çfarë tregoi ajo natë për punën që varet nga një ekran, dhe pesë gjëra për t'i ditur para se sistemi të ndalet."
+description: "Një natë trajnimi pa sistem: çfarë nuk mësohet dot nga ekrani, pse incidenti nuk mbaron kur sistemi rikthehet dhe pesë gjëra për t'i ditur para turnit."
+deck: "Eseja e gjashtë e serisë “Sistemi është më i shpejtë se ti”: nata e parë e trajnimit në hotel, kur një përditësim e ndali sistemin për orë të tëra, çfarë tregoi ajo natë për punën që varet nga një ekran dhe pesë gjëra për t'i ditur para se sistemi të ndalet."
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -21,7 +21,7 @@ checklist:
     - label: "Çfarë mund të bëj brenda rolit tim kur sistemi nuk është aty?"
       hint: "Dhe çfarë nuk duhet të bëj pa autorizim, edhe nëse duket e thjeshtë."
     - label: "Kujt i drejtohem për ndihmë ose vendime?"
-      hint: "Një emër ose një rol, dhe si e arrij natën."
+      hint: "Një emër ose një rol dhe si e kontaktoj natën."
     - label: "Si dokumentoj dhe dorëzoj çështjet e hapura?"
       hint: "Pa cenuar konfidencialitetin dhe në mënyrë që turni tjetër t'i gjejë."
     - label: "Si konfirmohet që operacioni ka rifilluar normalisht?"
@@ -29,8 +29,8 @@ checklist:
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Para turnit të radhës, gjej ku është procedura zyrtare e vazhdimësisë së punës. Mos e lexo natën kur të duhet."
-  - "Shkruaj një fjali: kujt i drejtohesh natën nëse sistemi ndalet, dhe si e gjen."
-  - "Pyet një koleg me përvojë çfarë bën kur sistemi nuk punon. Vëre sa nga përgjigjja e tij është e shkruar diku, dhe sa ruhet vetëm në kujtesën e tij."
+  - "Shkruaj një fjali: kujt i drejtohesh natën nëse sistemi ndalet, dhe si e kontakton."
+  - "Pyet një koleg me përvojë çfarë bën kur sistemi nuk punon. Vëre sa nga përgjigjja e tij është e shkruar diku dhe sa ruhet vetëm në kujtesën e tij."
 # Corrections made after publication (layouts/article.njk shows them under the deck, dated).
 corrections:
   - date: "15 tetor 2026"
@@ -41,13 +41,13 @@ Natën e parë të trajnimit në hotel kisha ardhur për të mësuar proceset e 
 
 Kjo është e vetmja skenë në këtë seri që nuk është figurë. Ndodhi, dhe unë isha aty. Ajo që mund të tregoj është ajo që mund të shihte dikush në trajnim: trajnimi praktik nuk mund të zhvillohej normalisht, dhe kolegu që po më trajnonte më shpjegoi se pjesa praktike do të vazhdonte në turnin pasardhës. Nëse kishte një procedurë zyrtare rezervë, me çfarë punoi ekipi në vend të sistemit, si u njoftuan departamentet dhe çfarë u kontrollua kur sistemi u kthye, këto nuk i pashë.
 
-Një dallim ka rëndësi që në fillim. Ishte një ndërprerje për shkak të një përditësimi, dhe nuk kam asnjë provë për një defekt të papritur. Titulli thotë “ra sistemi”, por ajo natë nuk ishte avari. Ishte diçka më e zakonshme, dhe pikërisht për këtë më e dobishme për t'u kuptuar.
+Një dallim ka rëndësi që në fillim. Ishte një ndërprerje për shkak të një përditësimi, dhe nuk kam asnjë provë për një defekt të papritur. Titulli thotë “ra sistemi”, por ajo që ndodhi atë natë ishte më e zakonshme se një avari, dhe pikërisht për këtë më e dobishme për t'u kuptuar.
 
 ## Pesë orë pritje
 
 Pjesën më të madhe të atyre orëve qëndrova në këmbë, duke pritur e duke vëzhguar. Kolegu me përvojë mund të ma shpjegonte punën, por jo të ma tregonte. Proceset që kisha ardhur t'i mësoja jetonin në ekran, dhe ekrani nuk ishte aty.
 
-Nuk ishte natë dramatike; askush nuk vrapoi. Por më mësoi diçka që nuk e kisha në plan: sa e madhe është pjesa e punës sime që nuk ekziston pa sistemin. Një recepsionist i ri mëson duke parë dikë që klikon, plotëson dhe kontrollon. Kur s'ka ku të klikosh, mbetet vetëm shpjegimi, dhe shpjegimi nuk mjafton për një proces që nuk e ke parë kurrë.
+Nata kaloi pa drama; askush nuk vrapoi. Por më mësoi diçka që nuk e kisha në plan: sa e madhe është pjesa e punës sime që nuk ekziston pa sistemin. Një recepsionist i porsaardhur mëson duke parë dikë që klikon, plotëson dhe kontrollon. Kur s'ka ku të klikosh, mbetet vetëm shpjegimi, dhe shpjegimi nuk mjafton për një proces që nuk e ke parë kurrë.
 
 Te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/) shkrova për periudhën e trajnimeve të shtatorit dhe për nevojën që kisha ta rendisja informacionin në një strukturë të qartë. Në një farë mënyre, ajo nevojë nisi atë natë.
 
@@ -57,9 +57,9 @@ Te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-contr
 
 Në esenë e parë të kësaj serie premtova një ese për “natën kur ra sistemi dhe pamë çfarë dinte ekipi vërtet”. Duhet ta them hapur: këtë nuk e pashë.
 
-Isha në trajnim dhe mbështetesha te kolegu. Nuk e di çfarë informacioni u përdor pa sistemin, as nëse ishte shkruar diku. Do të ishte e lehtë të shkruaja se stafi i kishte në kokë të gjitha informacionet e nevojshme. Por këtë nuk e di, dhe është pikërisht lloji i fjalisë që tingëllon bukur e nuk provohet dot.
+Isha në trajnim dhe mbështetesha në kolegun. Nuk e di çfarë informacioni u përdor pa sistemin, as nëse ishte shkruar diku. Do të ishte e lehtë të shkruaja se stafi i kishte në kokë të gjitha informacionet e nevojshme. Por këtë nuk e di, dhe është pikërisht lloji i fjalisë që tingëllon bukur e nuk provohet dot.
 
-Ajo që mund të them është më modeste. Nga vendi ku isha, një i ri në natën e parë, nuk kisha si ta dija çfarë bëhet kur sistemi nuk është aty. Nuk e dija ku ishte procedura, madje as nëse kishte një të tillë. Ky është zbulimi i vërtetë i asaj nate: çfarë nuk dija unë, dhe që askush nuk kishte pasur arsye të ma thoshte para se të ndodhte.
+Ajo që mund të them është më modeste. Nga vendi ku isha, si i porsaardhur në natën e parë, nuk kisha si ta dija çfarë bëhet kur sistemi nuk është aty. Nuk e dija ku ishte procedura, madje as nëse kishte një të tillë. Ky është, për mua, zbulimi i vërtetë i asaj nate: çfarë nuk dija unë, dhe që askush nuk kishte pasur arsye të ma thoshte para se të ndodhte.
 
 ## Rikthimi nuk është fundi
 
@@ -85,7 +85,7 @@ Ajo që do të bëja ndryshe sot qëndron te ditët para asaj nate. Do t'i jepja
 4. **Si dokumentohen dhe dorëzohen çështjet e hapura, pa cenuar konfidencialitetin.**
 5. **Si konfirmohet që operacioni ka rifilluar normalisht.**
 
-Këto do të rekomandoja t'i përgatitje dhe t'i mësoje paraprakisht; nuk janë procedura që i zbatova atë natë. Dhe në trajnimin e çdo të riu do të shtoja diçka: përveç punës me sistemin, edhe çfarë bëhet ditën kur sistemi nuk është aty. I riu është ai që di më pak dhe që ka më pak mundësi të pyesë.
+Këto do të rekomandoja t'i përgatitje dhe t'i mësoje paraprakisht; nuk janë procedura që i zbatova atë natë. Dhe në trajnimin e çdo të porsaardhuri do të shtoja diçka: përveç punës me sistemin, edhe çfarë bëhet ditën kur sistemi nuk është aty. I porsaardhuri është ai që di më pak dhe që ka më pak mundësi të pyesë.
 
 **Një operacion i përgatitur nuk bën sikur sistemi nuk do të ndalet kurrë. E di si ta ruajë përgjegjësinë dhe vazhdimësinë e punës kur sistemi ndalet.**
 

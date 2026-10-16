@@ -41,7 +41,7 @@ corrections:
 
 Stellen Sie sich einen neuen Mitarbeiter an der Rezeption vor, mitten in einem Ablauf, den er erst einmal gesehen hat. Die Anleitung gibt es, aber sie steckt irgendwo zwischen einer SOP, einem Video, ein paar Fotos und dem, was ihm ein Kollege vor zwei Nächten erklärt hat. Der Ablauf steht still, und er sucht.
 
-Diese Szene habe ich nicht als Vorfall dokumentiert. Sie gibt meine Erfahrung aus den ersten Wochen im Hotel als Bild wieder, und sie ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
+Die Szene gibt meine Erfahrung aus den ersten Wochen im Hotel als Bild wieder, nicht als dokumentierten Vorfall, und sie ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
 
 Dieses Werkzeug ist [Front Desk Control](/de/insights/how-i-built-front-desk-control/). Ich habe es im September 2026 entwickelt, um die Arbeit in Front Office und Night Audit zu ordnen: SOP-Anleitungen, Checklisten, eine Informationssuche und visuelle Erklärungen mit Screenshots der Abläufe. Daneben habe ich an Strukturen für Shift Handover und die Nachtberichte gearbeitet, an der Ordnung der Abläufe für den Breakfast Forecast sowie an Checklisten und Schritt-für-Schritt-Anleitungen. Ich nutze es selbst. Ob die Kollegen es regelmäßig nutzen, kann ich nicht sagen, und mir ist kein Fall bekannt, in dem ein veraltetes Verfahren darin einen Fehler verursacht hat.
 
@@ -51,9 +51,9 @@ In dem Essay, in dem ich Front Desk Control beschrieben habe, habe ich es als un
 
 Ich habe es nicht gebaut, weil Informationen fehlten, sondern weil sie verstreut waren: in SOP-Dokumenten, Erklärungen von Kollegen, Fotos, Videos und Checklisten. Oft musste ich mehrere davon durchsuchen, um zu verstehen, wie ein Ablauf ausgeführt wird. Die Anleitung gab es, ich fand sie nur nicht in dem Moment, in dem ich sie brauchte.
 
-Ich wollte das Hotelsystem nicht ersetzen. Ich wollte einen Ort, an dem ich die Anleitungen schneller finde.
+Ich wollte einen Ort, an dem ich die Anleitungen schneller finde, neben dem Hotelsystem und nicht an seiner Stelle.
 
-Ich glaube, so entstehen die meisten kleinen Listen neben dem offiziellen System: nicht aus Misstrauen gegenüber dem System, sondern aus einer Lücke zwischen System und Arbeit. Eine Excel-Tabelle, ein ausgedrucktes Blatt neben dem Bildschirm, eine Seite, die abends entstanden ist. Jede davon ist ein Bericht, den niemand bestellt hat, und jede sagt dasselbe: Hier kommt die Information nicht dort an, wo sie hingehört.
+Ich glaube, so entstehen die meisten kleinen Listen neben dem offiziellen System: aus einer Lücke zwischen System und Arbeit und nicht aus Misstrauen gegenüber dem System. Eine Excel-Tabelle, ein ausgedrucktes Blatt neben dem Bildschirm, eine Seite, die abends entstanden ist. Jede davon ist ein Bericht, den niemand bestellt hat, und jede sagt dasselbe: Hier kommt die Information nicht dort an, wo sie hingehört.
 
 **Wenn ein Mitarbeiter ein Werkzeug baut, um sich die Arbeit zu erleichtern, zeigt er vielleicht eine Lücke darin, wie die Organisation Informationen verteilt.**
 
@@ -101,4 +101,4 @@ Den Erfolg würde ich auch nicht nur daran messen, dass das Werkzeug technisch f
 
 Die Karte unten gilt für jedes Werkzeug, das Sie für sich selbst gebaut haben und das Ihrer Meinung nach auch anderen dienen könnte. Füllen Sie sie aus, bevor Sie das Werkzeug weitergeben, nicht erst, wenn es sich verbreitet hat. Die [Schichtübergabe](/de/tools/shift-handover/) ist ein Beispiel für ein Werkzeug, das die Methode enthält und keine fremden Daten: Übergaben bleiben in Ihrem Browser, nichts wird gesendet oder hochgeladen.
 
-Ein kleines Werkzeug kann ein großes Problem lösen. Ob es Teil der Arbeit geworden ist, zeigt sich in der Nacht, in der derjenige fehlt, der es gebaut hat: wenn jemand anderes es öffnet, sich auf das verlassen kann, was darin steht, und weiß, wer es aktuell hält.
+Ob ein kleines Werkzeug Teil der Arbeit geworden ist, zeigt sich in der Nacht, in der derjenige fehlt, der es gebaut hat: wenn jemand anderes es öffnet, sich auf das verlassen kann, was darin steht, und weiß, wer es aktuell hält.

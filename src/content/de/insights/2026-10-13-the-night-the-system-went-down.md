@@ -41,13 +41,13 @@ In meiner ersten Einarbeitungsnacht im Hotel wollte ich die Nachtprozesse lernen
 
 Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei. Berichten kann ich, was man in der Einarbeitung sehen konnte: dass die praktische Einarbeitung nicht wie vorgesehen stattfinden konnte und dass mir der Kollege, der mich einarbeitete, erklärte, der praktische Teil gehe in der nächsten Schicht weiter. Ob es ein offizielles Ausweichverfahren gab, womit das Team statt des Systems arbeitete, wie die Abteilungen informiert wurden und was geprüft wurde, als das System zurückkam, habe ich nicht gesehen.
 
-Ein Unterschied ist von Anfang an wichtig. Es war eine Unterbrechung wegen eines Updates, und ich habe keinen Beleg für einen unerwarteten Defekt. Der Titel sagt „ausfiel“, aber eine Panne war diese Nacht nicht. Es war etwas Gewöhnlicheres und gerade deshalb lehrreicher.
+Ein Unterschied ist von Anfang an wichtig. Es war eine Unterbrechung wegen eines Updates, und ich habe keinen Beleg für einen unerwarteten Defekt. Der Titel sagt „ausfiel“, doch was in dieser Nacht geschah, war gewöhnlicher als eine Panne und gerade deshalb lehrreicher.
 
 ## Fünf Stunden Warten
 
 Die meiste Zeit stand ich da, wartete und sah zu. Der erfahrene Kollege konnte mir die Arbeit erklären, aber nicht zeigen. Die Prozesse, die ich lernen wollte, lebten auf dem Bildschirm, und der Bildschirm war nicht da.
 
-Dramatisch war die Nacht nicht; niemand rannte. Aber sie brachte mir etwas bei, das nicht auf dem Plan stand: wie groß der Teil meiner Arbeit ist, der ohne das System nicht existiert. Eine neue Rezeptionskraft lernt, indem sie jemandem zusieht, der klickt, ausfüllt und prüft. Gibt es nichts zu klicken, bleibt nur die Erklärung, und eine Erklärung reicht nicht für einen Prozess, den man nie gesehen hat.
+Die Nacht verlief ohne Dramatik; niemand rannte. Aber sie brachte mir etwas bei, das nicht auf dem Plan stand: wie groß der Teil meiner Arbeit ist, der ohne das System nicht existiert. Eine neue Rezeptionskraft lernt, indem sie jemandem zusieht, der klickt, ausfüllt und prüft. Gibt es nichts zu klicken, bleibt nur die Erklärung, und eine Erklärung reicht nicht für einen Prozess, den man nie gesehen hat.
 
 In [Wie ich Front Desk Control gebaut habe](/de/insights/how-i-built-front-desk-control/) habe ich über die Zeit der Einarbeitungen im September geschrieben und darüber, dass ich die Informationen in eine klare Struktur bringen musste. In gewisser Weise begann dieses Bedürfnis in jener Nacht.
 
@@ -59,7 +59,7 @@ Im ersten Essay dieser Reihe habe ich einen Essay über „die Nacht, in der das
 
 Ich war in der Einarbeitung und habe mich auf den Kollegen verlassen. Welche Informationen ohne das System genutzt wurden und ob sie irgendwo aufgeschrieben waren, weiß ich nicht. Es wäre leicht zu schreiben, das Personal habe alles Nötige im Kopf gehabt. Ich weiß es aber nicht, und es ist genau die Art Satz, die gut klingt und sich nicht beweisen lässt.
 
-Was ich sagen kann, ist bescheidener. Von meinem Platz aus, als Neuer in der ersten Nacht, konnte ich nicht wissen, was man tut, wenn das System nicht da ist. Ich wusste nicht, wo das Verfahren lag, nicht einmal, ob es eines gab. Das ist die eigentliche Erkenntnis dieser Nacht: was ich nicht wusste, und dass niemand einen Grund gehabt hatte, es mir vorher zu sagen.
+Was ich sagen kann, ist bescheidener. Von meinem Platz aus, als Neuer in der ersten Nacht, konnte ich nicht wissen, was man tut, wenn das System nicht da ist. Ich wusste nicht, wo das Verfahren lag, nicht einmal, ob es eines gab. Das ist für mich die eigentliche Erkenntnis dieser Nacht: was ich nicht wusste, und dass niemand einen Grund gehabt hatte, es mir vorher zu sagen.
 
 ## Die Rückkehr ist nicht das Ende
 
@@ -85,9 +85,9 @@ Was ich heute anders machen würde, liegt in den Tagen vor dieser Nacht. Ich wü
 4. **Wie offene Punkte dokumentiert und übergeben werden, ohne die Vertraulichkeit zu verletzen.**
 5. **Wie bestätigt wird, dass der Betrieb wieder normal läuft.**
 
-Das würde ich empfehlen, im Voraus vorzubereiten und zu lernen; es sind keine Verfahren, die ich in jener Nacht angewendet habe. Und in die Einarbeitung jedes Neuen würde ich etwas aufnehmen: neben der Arbeit mit dem System auch, was an dem Tag zu tun ist, an dem es nicht da ist. Wer neu ist, weiß am wenigsten und hat die wenigsten Gelegenheiten zu fragen.
+Ich würde empfehlen, diese Punkte im Voraus vorzubereiten und zu lernen; es sind keine Verfahren, die ich in jener Nacht angewendet habe. Und in die Einarbeitung jedes Neuen würde ich etwas aufnehmen: neben der Arbeit mit dem System auch, was an dem Tag zu tun ist, an dem es nicht da ist. Wer neu ist, weiß am wenigsten und hat die wenigsten Gelegenheiten zu fragen.
 
-**Ein vorbereiteter Betrieb tut nicht so, als könne das System nie stillstehen. Er weiß, wie er Verantwortung und Kontinuität der Arbeit hält, wenn das System stillsteht.**
+**Ein vorbereiteter Betrieb tut nicht so, als könne das System nie stillstehen. Er weiß, wie er Verantwortung und Kontinuität der Arbeit sichert, wenn das System stillsteht.**
 
 ## Wenn das System stillsteht
 

@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Mjeti që ndërton vetë një punonjës tregon edhe një boshllëk në mënyrën si organizata shpërndan informacionin. Dobia nuk e bën pjesë të sistemit."
 teaser: Një mjet i vogël mund të zgjidhë një problem të madh. Që të bëhet pjesë e punës, duhet të jetë më shumë se projekti i personit që e ndërtoi.
-description: "Pse punonjësit ndërtojnë mjetet e tyre pranë sistemit, mjeti personal kundrejt atij të autorizuar, dhe pesë kushte para se ta ndash me ekipin."
-deck: "Eseja e tetë dhe e fundit e serisë “Sistemi është më i shpejtë se ti”: Front Desk Control dhe listat e vogla që lindin pranë sistemit zyrtar, çfarë tregojnë për boshllëqet e organizatës, pse një mjet i dobishëm nuk është vetvetiu një mjet i autorizuar, dhe pesë kushte para se të bëhet mjet i ekipit."
+description: "Pse punonjësit ndërtojnë mjetet e tyre pranë sistemit, mjeti personal kundrejt atij të autorizuar dhe pesë kushte para se ta ndash me ekipin."
+deck: "Eseja e tetë dhe e fundit e serisë “Sistemi është më i shpejtë se ti”: Front Desk Control dhe listat e vogla që lindin pranë sistemit zyrtar, çfarë tregojnë për boshllëqet e organizatës, pse një mjet i dobishëm nuk është vetvetiu një mjet i autorizuar dhe pesë kushte para se të bëhet mjet i ekipit."
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -16,7 +16,7 @@ checklist:
   fill: true
   note: "Për çdo mjet që e ke ndërtuar për veten dhe që mendon se mund t'u shërbejë edhe të tjerëve. Plotësoje para se ta japësh, jo pasi të jetë përhapur."
   items:
-    - label: "Cili është qëllimi, dhe ku mbaron?"
+    - label: "Cili është qëllimi dhe ku mbaron?"
       hint: "Çfarë bën mjeti dhe çfarë nuk bën. Sistemin zyrtar nuk e zëvendëson."
     - label: "A është përmbajtja e verifikuar kundrejt SOP-ve zyrtare?"
       hint: "Çdo hap që jep mjeti duhet të gjendet edhe në burimin zyrtar. Shëno atë që është ende në verifikim."
@@ -24,26 +24,26 @@ checklist:
       hint: "Mysafirë, rezervime, pagesa, kredenciale, dokumente konfidenciale. Pa autorizim dhe pa ditur ku ruhen, nuk futet asgjë reale."
     - label: "Kush e ka miratuar përdorimin me ekipin ose me të dhëna reale?"
       hint: "Një emër ose një rol. Nëse askush, mjeti është ende personal."
-    - label: "Kush e përditëson kur mungoj, dhe si dihet cili version është i fundit?"
+    - label: "Kush e përditëson kur mungoj dhe si dihet cili version është i fundit?"
       hint: "Nëse përgjigjja është “vetëm unë”, mjeti varet nga ti."
     - label: "Kush tjetër e ka provuar?"
       hint: "Që funksionon për ty nuk do të thotë se funksionon edhe për të tjerët."
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - "Shkruaj një fjali për mjetin tënd: çfarë bën, dhe çfarë nuk bën. Vendose në krye të tij."
+  - "Shkruaj një fjali për mjetin tënd: çfarë bën dhe çfarë nuk bën. Vendose në krye të tij."
   - "Shëno në mjet çdo procedurë që është ende në verifikim, që askush të mos e marrë për të konfirmuar."
-  - "Para se ta ndash me një koleg, pyet: kush duhet ta miratojë këtë, dhe kush e mban të përditësuar kur unë nuk jam?"
+  - "Para se ta ndash me një koleg, pyet: kush duhet ta miratojë këtë dhe kush e mban të përditësuar kur unë nuk jam?"
 # Corrections made after publication (layouts/article.njk shows them under the deck, dated).
 corrections:
   - date: "15 tetor 2026"
     t: "Një version i mëparshëm i datonte javët e para në hotel në shtator 2026. Jam Night Manager i hotelit që nga nëntori 2025, prandaj data u hoq."
 ---
 
-Përfytyro një punonjës të ri në recepsion, në mes të një procesi që e ka parë vetëm një herë. Udhëzimi ekziston, por është diku mes një SOP-je, një videoje, disa fotografive dhe asaj që i shpjegoi një koleg dy net më parë. Procesi pret, ndërsa ai kërkon.
+Përfytyro një punonjës të porsaardhur në recepsion, në mes të një procesi që e ka parë vetëm një herë. Udhëzimi ekziston, por është diku mes një SOP-je, një videoje, disa fotografive dhe asaj që i shpjegoi një koleg dy net më parë. Procesi pret, ndërsa ai kërkon.
 
-Këtë skenë nuk e kam të dokumentuar si incident. Është përvoja ime e javëve të para në hotel, e shkruar si pamje, dhe është arsyeja pse nisa të ndërtoj një mjet timin.
+Skena është përvoja ime e javëve të para në hotel, e shkruar si figurë dhe jo e dokumentuar si incident, dhe është arsyeja pse nisa të ndërtoj një mjet timin.
 
-Ky mjet është [Front Desk Control](/sq/insights/how-i-built-front-desk-control/), që e zhvillova në shtator 2026 për ta organizuar punën në Front Office dhe Night Audit: udhëzime SOP, lista kontrolli, kërkim informacioni dhe shpjegime vizuale me pamje nga proceset. Rreth tij punova me struktura për Shift Handover dhe raportet e natës, me organizimin e proceseve të Breakfast Forecast, si dhe me lista kontrolli e udhëzime hap pas hapi. E përdor vetë. Nuk mund të them nëse kolegët e përdorin rregullisht, dhe nuk di asnjë rast ku një procedurë e vjetëruar në të të ketë shkaktuar gabim.
+Ky mjet është [Front Desk Control](/sq/insights/how-i-built-front-desk-control/), që e zhvillova në shtator 2026 për ta organizuar punën në Front Office dhe Night Audit: udhëzime SOP, lista kontrolli, kërkim informacioni dhe shpjegime vizuale me pamje nga proceset. Rreth tij punova me struktura për dorëzimin e turnit dhe raportet e natës, me organizimin e proceseve të Breakfast Forecast, si dhe me lista kontrolli e udhëzime hap pas hapi. E përdor vetë. Nuk mund të them nëse kolegët e përdorin rregullisht, dhe nuk di asnjë rast ku një procedurë e vjetëruar në të të ketë shkaktuar gabim.
 
 Te eseja ku e përshkrova Front Desk Control, e paraqita si punë në zhvillim. Këtu pyetja është tjetër: çfarë ndodh me një mjet të tillë pasi ekziston, dhe kur pushon së qeni vetëm yti.
 
@@ -51,9 +51,9 @@ Te eseja ku e përshkrova Front Desk Control, e paraqita si punë në zhvillim. 
 
 Nuk e ndërtova sepse mungonte informacioni, por sepse ishte i shpërndarë: në dokumente SOP, në shpjegimet e kolegëve, në fotografi, video dhe lista kontrolli. Shpesh më duhej të kërkoja në disa prej tyre për të kuptuar si kryhej një proces. Udhëzimi ekzistonte, por nuk e gjeja dot në çastin kur më duhej.
 
-Nuk synoja ta zëvendësoja sistemin e hotelit. Doja një vend ku t'i gjeja udhëzimet më shpejt.
+Doja një vend ku t'i gjeja udhëzimet më shpejt, pranë sistemit të hotelit dhe jo në vend të tij.
 
-Besoj se kështu lindin shumica e listave të vogla pranë sistemit zyrtar: jo nga mosbesimi te sistemi, por nga një boshllëk mes sistemit dhe punës. Një tabelë në Excel, një fletë e printuar pranë ekranit, një faqe e ndërtuar në mbrëmje. Secila prej tyre është një raport që askush nuk e kërkoi, dhe të gjitha thonë të njëjtën gjë: këtu informacioni nuk arrin aty ku duhet.
+Besoj se kështu lindin shumica e listave të vogla pranë sistemit zyrtar: nga një boshllëk mes sistemit dhe punës, e jo nga mosbesimi ndaj sistemit. Një tabelë në Excel, një fletë e printuar pranë ekranit, një faqe e ndërtuar në mbrëmje. Secila prej tyre është një raport që askush nuk e kërkoi, dhe të gjitha thonë të njëjtën gjë: këtu informacioni nuk arrin aty ku duhet.
 
 **Kur një punonjës ndërton një mjet për ta lehtësuar punën, ndoshta po tregon një boshllëk në mënyrën si organizata e shpërndan informacionin.**
 
@@ -83,7 +83,7 @@ Front Desk Control ka kaluar nëpër disa versione. Kam punuar t'i përditësoj 
 
 Por ka një kufi që e shoh qartë: askush tjetër nuk është përgjegjës për ta përditësuar kur unë mungoj. Nëse vetëm unë e kuptoj dhe e përditësoj mjetin, ai mbetet i varur nga unë.
 
-Është ajo që shkrova te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) për shoferin me përvojë, vetëm se kësaj here jam unë. Dija që mbetet në një kokë nuk bëhet më pak e brishtë pse është shkruar në një faqe që e mban vetëm një njeri. Dhe një udhëzim i vjetëruar në një mjet që duket i rregullt është më i rrezikshëm se një udhëzim që mungon, sepse askush nuk shkon ta kontrollojë dy herë.
+Është ajo që shkrova te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) për shoferin me përvojë, vetëm se kësaj here jam unë. Dija që mbetet në një kokë nuk bëhet më pak e brishtë vetëm ngaqë është shkruar në një faqe që e mban vetëm një njeri. Dhe një udhëzim i vjetëruar në një mjet që duket i rregullt është më i rrezikshëm se një udhëzim që mungon, sepse askush nuk shkon ta kontrollojë dy herë.
 
 ## Pesë kushte para se ta ndash
 
@@ -101,4 +101,4 @@ Dhe suksesin nuk do ta matja vetëm me faktin që mjeti funksionon teknikisht. D
 
 Kartela më poshtë vlen për çdo mjet që e ke ndërtuar për veten dhe që mendon se mund t'u shërbejë edhe të tjerëve. Plotësoje para se ta japësh mjetin, jo pasi të jetë përhapur. [Dorëzimi i turnit](/sq/tools/shift-handover/) është një shembull mjeti që mban metodën dhe jo të dhënat e askujt tjetër: dorëzimet mbeten në shfletuesin tënd dhe asgjë nuk dërgohet apo ngarkohet.
 
-Një mjet i vogël mund të zgjidhë një problem të madh. Nëse është bërë pjesë e punës, kjo duket natën kur mungon ai që e ndërtoi: kur dikush tjetër e hap, mund t'i besojë asaj që thotë dhe e di kush e mban të përditësuar.
+Nëse një mjet i vogël është bërë pjesë e punës, kjo duket natën kur mungon ai që e ndërtoi: kur dikush tjetër e hap, mund t'i besojë asaj që thotë dhe e di kush e mban të përditësuar.

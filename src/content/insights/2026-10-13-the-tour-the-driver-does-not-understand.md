@@ -40,7 +40,7 @@ firstMove:
   - "Before the end of the week, find out who can approve a change to a tour and where it is recorded. Write it down."
 ---
 
-In [The system is faster than you](/insights/the-system-is-faster-than-you/) I used a picture: a tour planned for a new driver, a shop that opens at ten, a stop placed at half past eight. This essay looks at the same picture from the other side: not the system that did not know the opening hours, but the driver who knows them, and the question of where that knowledge goes.
+In [The system is faster than you](/insights/the-system-is-faster-than-you/) I used a picture: a tour planned for a new driver, a shop that opens at ten, a stop placed at half past eight. This essay looks at the same picture from the other side, from the driver who knows the opening hours, and asks where that knowledge goes.
 
 It comes from my work in last mile coordinating drivers, tours and operational problems during delivery, today as a remote dispatcher; from the drivers in the ramp-up phase who, as I wrote in [High-volume days: the standard under pressure](/insights/high-volume-days/), were not yet fully used to the procedures; and from the change to tour planning in August 2025.
 
@@ -50,7 +50,7 @@ I have no case of a driver telling me specifically that their tour made no sense
 
 A system plans a tour on the data it has: addresses, delivery times, distances, average times. The driver drives it in the conditions they find: the entrance behind the building, the gate that opens only when you ring, the shop that closes at lunchtime, the street the market blocks every Tuesday.
 
-Neither is wrong in itself. They are two descriptions of the same tour, made from two different places. The first is fast, covers all tours at once, and knows nothing that has not been written down for it. The second is slow, limited to the areas the driver knows, and knows things nobody has written down.
+They are two descriptions of the same tour, made from two different places, and neither is wrong in itself. The first is fast, covers all tours at once, and knows nothing that has not been written down for it. The second is slow, limited to the areas the driver knows, and knows things nobody has written down.
 
 The change of August 2025 accepted this in its own language: it aimed at more realistic plans and provided for the use of information from the field. That does not prove there was a complete process in which every correction by a driver was recorded and improved the plan. Without such a process, information from the field stays where it was born, in the driver's head.
 
@@ -70,7 +70,7 @@ Imagine an area that only one driver knows well. They drive the tour every day a
 
 Then one day they are absent. A new driver takes the tour, perhaps one still in ramp-up, and follows the plan, because the plan is all they have. The day stalls in exactly the places where the experienced driver never stalled.
 
-This is the picture of what I called “full distrust” in [The system is faster than you](/insights/the-system-is-faster-than-you/): knowledge that stays in one head. It is also what I wrote about in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/), except that here what is missing is not the trainer but a place where the driver's knowledge could have been written down.
+This is the picture of what I called “full distrust” in [The system is faster than you](/insights/the-system-is-faster-than-you/): knowledge that stays in one head. It is also what I wrote about in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/), except that what is missing here is a place where the driver's knowledge could have been written down.
 
 An experienced driver should not be the permanent correction of a system that does not learn. That is no judgement on their value: what they know is worth too much to stay in only one place.
 

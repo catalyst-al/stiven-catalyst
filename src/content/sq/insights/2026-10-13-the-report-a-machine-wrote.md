@@ -5,10 +5,10 @@ category: Operacione
 series: the-system
 status: published
 featured: true
-summary: "Një raport i gjeneruar shpejt dhe i shkruar bukur nuk garanton që informacioni është i plotë. Përgjegjësia për përmbajtjen e tij mbetet te njeriu."
+summary: "Një raport i gjeneruar shpejt dhe i shkruar bukur nuk garanton që informacioni është i plotë. Përgjegjësia për përmbajtjen e tij duhet të mbetet te njeriu."
 teaser: Një raport i gjeneruar duket i përfunduar. Nëse është i saktë dhe çfarë mbetet ende e hapur, duhet ta kontrollojë një njeri.
-description: "Raportet e sistemit dhe ato të AI: pse dy raporte të sakta mund të mos përputhen, çfarë kontrollon para se t'i besosh, dhe një raport në tri pjesë."
-deck: "Eseja e pestë e serisë “Sistemi është më i shpejtë se ti”: raportet automatike të last mile dhe të Night Audit, AI që e shkruan tekstin më qartë, pse një raport i bukur nuk do të thotë që problemi është kuptuar, dhe një kartelë për një raport në tri pjesë."
+description: "Raportet e sistemit dhe ato të AI: pse dy raporte të sakta mund të mos përputhen, çfarë kontrollon para se t'i besosh dhe një raport në tri pjesë."
+deck: "Eseja e pestë e serisë “Sistemi është më i shpejtë se ti”: raportet automatike të last mile dhe të Night Audit, AI që e shkruan tekstin më qartë, pse një raport i bukur nuk do të thotë që problemi është kuptuar dhe një kartelë për një raport në tri pjesë."
 relatedTools:
   - /tools/shift-handover/
   - /tools/kpi-diagnostic/
@@ -19,14 +19,14 @@ checklist:
   items:
     - label: "Faktet: çfarë tregojnë të dhënat e konfirmuara?"
       hint: "Vetëm ato që i ke parë në burimin origjinal. Me burimin pranë."
-    - label: "Çfarë është gjeneruar automatikisht, dhe çfarë ka verifikuar një njeri?"
+    - label: "Çfarë është gjeneruar automatikisht dhe çfarë ka verifikuar një njeri?"
       hint: "Shënoje dallimin në raport, jo vetëm në kokën tënde."
-    - label: "Interpretimi: çfarë mund të nënkuptojnë, dhe çfarë mbetet për t'u verifikuar?"
+    - label: "Interpretimi: çfarë mund të nënkuptojnë dhe çfarë mbetet për t'u verifikuar?"
       hint: "Dy raporte me shifra të ndryshme ndoshta numërojnë me kritere të ndryshme. Shkruaje si pyetje, jo si përfundim."
-    - label: "Çfarë është zgjidhur, dhe çfarë është ende e hapur?"
+    - label: "Çfarë është zgjidhur dhe çfarë është ende e hapur?"
       hint: "Një raport i mbyllur nuk do të thotë se është mbyllur çdo çështje e ditës."
     - label: "Veprimi: çfarë duhet bërë, nga kush, deri kur?"
-      hint: "Një emër ose një rol, dhe një orë ose një ditë."
+      hint: "Një emër ose një rol dhe një orë ose një ditë."
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Para se t'i besosh raportit të sotëm, krahasoje me një gjë që e di nga turni. Nëse nuk përputhen, pyet pse, para se të vendosësh cili ka të drejtë."
@@ -36,7 +36,7 @@ firstMove:
 
 Në fund të esesë së parë të kësaj serie premtova një ese për raportin që e shkroi një makinë. Atëherë mendoja për raportet që i prodhon vetë sistemi: numrat e ditës, mbylljen e natës. Sot ka edhe një makinë të dytë, që nuk i prodhon numrat, por i përmbledh dhe i shkruan në gjuhë profesionale. Kjo ese është për të dyja.
 
-Ajo mbështetet te raportet me të cilat kam punuar çdo ditë. Në last mile: raportet ditore të KPI-ve për Damage, Incomplete, Delay dhe Loading Time, raportet e performancës sipas DSP-së dhe sipas shoferit, si dhe raportimet për problemet operative, vonesat dhe porositë jo të plota. Në hotel, gjatë Night Audit: raportet e gjendjes së hotelit dhe të zënies, mbërritjet, largimet dhe mosparaqitjet, raportin dhe parashikimin e mëngjesit, raportet e mbylljes së ditës dhe informacionin për turnin pasardhës. Kjo nuk është historia e një raporti që gaboi. Nuk kam asnjë rast ku kam provuar se një raport automatik ishte i gabuar dhe e kam korrigjuar, as ndonjë raport zyrtar të shkruar nga AI e të dërguar pa e parë një njeri. Pyetja këtu është ajo që ia bëj vetes sa herë që një raport më duket i gatshëm: çfarë më thotë në të vërtetë, dhe çfarë më lë të besoj?
+Ajo mbështetet në raportet me të cilat kam punuar çdo ditë. Në last mile: raportet ditore të KPI-ve për Damage, Incomplete, Delay dhe Loading Time, raportet e performancës sipas DSP-së dhe sipas shoferit, si dhe raportimet për problemet operative, vonesat dhe porositë jo të plota. Në hotel, gjatë Night Audit: raportet e gjendjes së hotelit dhe të zënies, mbërritjet, largimet dhe mosparaqitjet, raportin dhe parashikimin e mëngjesit, raportet e mbylljes së ditës dhe informacionin për turnin pasardhës. Kjo nuk është historia e një raporti që gaboi: nuk kam asnjë rast ku kam provuar se një raport automatik ishte i gabuar dhe e kam korrigjuar, as ndonjë raport zyrtar të shkruar nga AI e të dërguar pa e parë një njeri. Pyetja këtu është ajo që ia bëj vetes sa herë që një raport më duket i gatshëm: çfarë më thotë dhe çfarë më lë të besoj?
 
 ## Dy raporte, dy numra
 
@@ -76,7 +76,7 @@ Ajo që do të bëja ndryshe sot është struktura e vetë raportit. Do ta ndaja
 
 **Faktet:** çfarë tregojnë të dhënat e konfirmuara. **Interpretimi:** çfarë mund të nënkuptojnë dhe çfarë mbetet për t'u verifikuar. **Veprimi:** çfarë duhet bërë, nga kush dhe deri kur.
 
-Dhe do ta shënoja dukshëm cilin informacion e ka prodhuar automatikisht sistemi ose një mjet, dhe cilin e ka verifikuar një njeri. Të dy kanë vlerë, por lexuesi duhet ta dijë cilin po lexon.
+Dhe do ta shënoja dukshëm cilin informacion e ka prodhuar automatikisht sistemi ose një mjet dhe cilin e ka verifikuar një njeri. Të dy kanë vlerë, por lexuesi duhet ta dijë cilin po lexon.
 
 Arsyeja është e thjeshtë. Nuk do të doja që një raport i shkruar bukur të krijonte përshtypjen se problemi është kuptuar ose zgjidhur, kur ende nuk është kontrolluar. I shkruar si fakt i thatë, rasti i dy numrave të mëngjesit do të ishte “sistemi gaboi”. I shkruar në tri pjesë, bëhet: dy raporte japin dy numra; ndoshta numërojnë me kritere të ndryshme; dikush duhet ta sqarojë para shërbimit të mëngjesit.
 
@@ -84,7 +84,7 @@ Arsyeja është e thjeshtë. Nuk do të doja që një raport i shkruar bukur të
 
 Nuk kam një rast ku një raport prodhohej dhe nuk e lexonte askush. Në last mile, KPI-të ishin pjesë e diskutimeve operative dhe e stand-up-it ditor. Në hotel, raportet përdoreshin për mbylljen e ditës dhe për vazhdimësinë e punës nga një turn te tjetri.
 
-Por kjo nuk provon që çdo raport lexohej dhe përdorej njësoj. Dhe sa më lehtë të prodhohet një raport, nga sistemi apo nga AI, aq më shumë raporte do të ketë dhe aq më pak kohë për secilin. Pyetja nuk është më kush e shkruan raportin. Është kush e lexon dhe çfarë bën pasi e lexon. Raporti duhet ta ndihmojë njeriun të kuptojë realitetin, jo ta zëvendësojë kontrollin e realitetit.
+Por kjo nuk provon që çdo raport lexohej dhe përdorej njësoj. Dhe sa më lehtë të prodhohet një raport, nga sistemi apo nga AI, aq më shumë raporte do të ketë dhe aq më pak kohë për secilin. Kështu pyetja zhvendoset nga ai që e shkruan raportin te ai që e lexon, dhe te ajo që bën pasi e lexon. Raporti duhet ta ndihmojë njeriun të kuptojë realitetin, jo ta zëvendësojë kontrollin e realitetit.
 
 ## Një raport në tri pjesë
 

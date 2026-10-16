@@ -8,7 +8,7 @@ featured: true
 summary: "Eine rote Zahl auf dem Bildschirm ist ein Signal zum Prüfen, keine Diagnose. Fragen Sie, was sie misst und wie alt sie ist, bevor Sie danach handeln."
 teaser: Das Rot auf Ihrem Bildschirm ist ein Signal, keine Diagnose. Fragen Sie, was es misst und wie alt es ist, bevor Sie handeln.
 description: "Warum eine rote Zahl auf dem Dashboard ein Alter hat, der Weg vom Geschehen vor Ort zum Bildschirm, drei falsche Reaktionen und eine Karte für Ihre Zahl."
-deck: "Der zweite Essay der Reihe „Das System ist schneller als Sie“: warum eine rote Zahl ein Signal ist und keine Diagnose, die drei falschen Reaktionen auf ein Rot, vier Schritte zwischen Alarm und Entscheidung, und eine Karte für Ihre eigene rote Zahl."
+deck: "Der zweite Essay der Reihe „Das System ist schneller als Sie“: warum eine rote Zahl ein Signal ist und keine Diagnose, die drei falschen Reaktionen auf ein Rot, vier Schritte zwischen Alarm und Entscheidung und eine Karte für Ihre eigene rote Zahl."
 relatedTools:
   - /tools/shift-pulse/
   - /tools/delay-analyzer/
@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: Meine rote Zahl
   fill: true
-  note: "Eine Karte für jede Zahl, die Sie auf einem Bildschirm verfolgen. Füllen Sie sie vor der Schicht aus, nicht während des Rots."
+  note: "Eine Karte für jede Zahl, die Sie auf einem Bildschirm verfolgen. Füllen Sie sie vor der Schicht aus, nicht erst, wenn der Bildschirm rot ist."
   items:
     - label: "Welche Zahl ist es, was misst sie genau, und was ist ihr Ziel?"
       hint: "Delay, Loading Time, Incomplete, Damage, offene Zimmer, Wartezeit. Eine pro Karte."
@@ -34,7 +34,7 @@ checklist:
 firstMove:
   - "Finden Sie für jede Zahl, die Sie auf einem Bildschirm verfolgen, heraus, was sie genau misst und wie alt sie ist, wenn Sie sie sehen, und schreiben Sie es daneben."
   - "Legen Sie vor der Schicht die vier Schritte nach einem Rot fest: was es misst und wann es aktualisiert wurde, ob es noch offen ist, wen Sie fragen, innerhalb Ihrer Rolle oder nach oben."
-  - "Schauen Sie sich einmal pro Woche die Rots an, die zu keiner Handlung geführt haben. Sind sie in der Mehrheit, muss der Alarm anhand der Daten überprüft werden; eine höhere Schwelle allein reicht nicht."
+  - "Schauen Sie sich einmal pro Woche die roten Werte an, die zu keiner Handlung geführt haben. Sind sie in der Mehrheit, muss der Alarm anhand der Daten überprüft werden; eine höhere Schwelle allein reicht nicht."
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: dashboard-lag
 ---
@@ -61,7 +61,7 @@ Wenn Sie das Rot sehen, ist der Transporter vielleicht schon weg. Oder er steht 
 
 Dieselbe Logik gilt in beide Richtungen. Ein Rot kann ein Problem beschreiben, das inzwischen gelöst ist. Ein Grün kann die Lage so beschreiben, wie sie war, bevor etwas schiefzulaufen begann, oder etwas anderes messen, als Sie denken.
 
-Die Frage lautet also nicht „Welche Farbe hat es?“, sondern „Was misst diese Zahl, wann wurde sie aktualisiert, und was passiert jetzt?“. Die Farbe zeigt Ihnen, wohin Sie schauen sollen, nicht, was Sie entscheiden sollen.
+Zu fragen ist also, was diese Zahl misst, wann sie aktualisiert wurde und was jetzt passiert. Die Farbe zeigt Ihnen, wohin Sie schauen sollen, und überlässt die Entscheidung Ihnen.
 
 ## Drei falsche Reaktionen
 
@@ -88,9 +88,9 @@ Stehen diese vier Schritte vor der Schicht fest, sind die ersten Minuten nach ei
 
 ## Der Alarm, einmal pro Woche
 
-Noch etwas, eher für das Ende der Woche als für die Schicht. Schauen Sie sich die Rots an, die zu keiner Handlung geführt haben, weil sie bei der Prüfung schon gelöst oder gar keine Probleme waren. Sind sie in der Mehrheit, erzieht der Alarm alle dazu, ihn zu ignorieren.
+Noch etwas, eher für das Ende der Woche als für die Schicht. Schauen Sie sich die roten Werte an, die zu keiner Handlung geführt haben, weil das Problem bei der Prüfung schon gelöst war oder gar keines vorlag. Sind sie in der Mehrheit, erzieht der Alarm alle dazu, ihn zu ignorieren.
 
-Eine höhere Schwelle, nur damit der Bildschirm besser aussieht, ist keine Antwort. Eine Schwelle, die ohne Daten angehoben wird, verdeckt die nutzlosen Rots zusammen mit denen, auf die es ankam. Der Alarm wird anhand der Daten überprüft: wie viele Rots es gab, bei wie vielen gehandelt werden musste und was diese gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie denen vorlegen können, die den Alarm einstellen. Sagen Sie nicht „Das Dashboard ist falsch“, sondern wie viele Rots es diese Woche gab und wie viele davon tatsächlich etwas verlangt haben.
+Eine Schwelle, die ohne Daten angehoben wird, nur damit der Bildschirm besser aussieht, verdeckt die nutzlosen roten Werte zusammen mit denen, auf die es ankam. Der Alarm wird anhand der Daten überprüft: wie viele rote Werte es gab, bei wie vielen gehandelt werden musste und was diese gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie denen vorlegen können, die den Alarm einstellen. Statt „Das Dashboard ist falsch“ zu sagen, nennen Sie ihnen die Zahl der roten Werte dieser Woche und wie viele davon etwas verlangt haben.
 
 ## Meine rote Zahl
 

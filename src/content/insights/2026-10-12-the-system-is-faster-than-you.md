@@ -49,9 +49,9 @@ In a shift, nobody asks whether we should use technology. It is there when you a
 
 And behind it lies a harder one: when the system was wrong and I followed it, who is responsible?
 
-This essay opens a series about that question: not which systems to buy or what they will do in five years, but what is left for the person on shift when the system is faster than they are.
+This essay opens a series about that question. The series asks what is left for the person on shift when the system is faster than they are, and leaves aside which systems to buy and what they will do in five years.
 
-It rests on three things: a change to the route and time planning system in last mile in August 2025, the daily work with drivers, tours and the problems that arise between the plan and the ramp, and documented complaints from the hotel about water pressure and bathroom cleanliness. What I do not have is a documented case in which a system took a wrong decision and I discovered and corrected it, or any measurement of how often the system is right. I cannot say that it is often wrong, nor that it is rarely wrong. So the scenes with drivers and tours in this essay are pictures, marked as such, not memories. As elsewhere on this site, I name no systems or applications and do not describe how they work inside.
+It rests on three things: a change to the route and time planning system in last mile in August 2025, the daily work with drivers, tours and the problems that arise between the plan and the ramp, and documented complaints from the hotel about water pressure and bathroom cleanliness. I have no documented case in which a system took a wrong decision that I discovered and corrected, and no measurement of how often the system is right, so I cannot say whether it is often wrong or rarely; the scenes with drivers and tours are pictures, marked as such, not memories. As elsewhere on this site, I name no systems or applications and do not describe how they work inside.
 
 ## August 2025: the plan that wanted to learn from the floor
 
@@ -59,15 +59,15 @@ In August 2025, in last mile, a change was introduced to the system that planned
 
 What changed afterwards I cannot say, because I have not measured it. But the aims themselves say something, and this is my reading of them. A system that has to reduce unrealistic plans has been producing unrealistic plans. And a system that needs information from the field admits, in its own language, what the floor has known for a long time: some things can only be seen out there.
 
-That leaves the question of who brings it the information. The system does not collect it by itself. It gets it only if someone on the floor sees it, writes it down and sends it to a place where someone can use it.
+That leaves the question of who brings it the information. The system gets it only if someone on the floor sees it, writes it down and sends it to a place where someone can use it.
 
-## Right, until the moment it is wrong
+## Right, until the moment it is not
 
 The first picture. Imagine a tour that the system has planned for a new driver. The order of the stops is perfect for the system: the shortest distance, the least time, no doubling back. The driver follows it. The third stop is a shop that opens at ten, and the system has put it at half past eight because it was nearer.
 
 The system did what it was built for: it calculated distances. It did not know that the shop has opening hours, because nobody told it. A driver who knows the area would have seen it in a second. The new driver trusted the screen, because the screen was faster and surer than the driver's own judgement.
 
-Checking every decision of the system by hand would not make a shift safer, only slower, and fighting the system is not the work. The work is recognising the cases in which the system is wrong when they come. Those cases often have the same shape: the system did not know something the floor knew. The opening hours. That the second gate is broken. That the guest in that room is the one who complained yesterday. That the bag with that code was on the wrong trolley, even though the scan said yes.
+Checking every decision by hand would make the shift slower without making it any safer. The job is to recognise, without fighting the system, the cases in which it is wrong, when they come. Those cases often have the same shape: the system did not know something the floor knew. The opening hours. That the second gate is broken. That the guest in that room is the one who complained yesterday. That the bag with that code was on the wrong trolley, even though the scan said yes.
 
 **The system is faster than you in everything it was told. It knows nothing of what it was not told. And most of what the floor knows has never been told to anyone.**
 
@@ -89,7 +89,7 @@ In the hotel, the system knows the reservations, the room statuses, the arrivals
 
 From Night Audit I have documented complaints about the water pressure in a shower and about a bathroom that had not been cleaned properly. Neither was solved at the front desk: the first belonged to Maintenance, the second to Housekeeping, as I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/). And when they stayed open, the next shift had to know.
 
-The lesson I draw from them does not need a wrong status on the screen: the status in the system and the full history of a problem are not the same thing. A room can be “free” on the screen and have a complaint behind it that nobody has closed. The system does not keep that history. The [handover](/insights/why-the-handover-is-underrated/) does, if someone writes it down.
+The lesson I draw from them does not need a wrong status on the screen: the status in the system and the full history of a problem are not the same thing. A room can be “free” on the screen and have a complaint behind it that nobody has closed. Only the [handover](/insights/why-the-handover-is-underrated/) keeps that history, and only if someone writes it down.
 
 ## Three questions for every decision
 
@@ -103,9 +103,9 @@ After the questions comes the rule. A decision suggested by the system does not 
 
 ## The rule that remains
 
-The system may have been wrong, and the name on the shift is still yours. That is not unfair; it comes with the job.
+The system may have been wrong, and the name on the shift is still yours. That comes with the job, and there is nothing unfair about it.
 
-There is no need to choose between the system and experience. What you need is a process in which the system helps you work faster, and people have a way to notice, report and correct what the system does not understand. The system gives you speed, memory and numbers you would never have on your own. In exchange you give it what it lacks: eyes on the floor, a question when something does not make sense, and a name that answers.
+The system and experience belong in the same process: one in which the system helps you work faster and people have a way to notice, report and correct what it does not understand. The system gives you speed, memory and numbers you would never have on your own. In exchange you give it what it lacks: eyes on the floor, a question when something does not make sense, and a name that answers.
 
 **The system decides first. What is left for you is the part it was never told, and the name that answers for all of it.**
 
