@@ -98,7 +98,7 @@
   // The light on a card or a row follows the pointer (styles.css: --mx, --my).
   document.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse") return;
-    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .pillar, .about-timeline li, a.list-row");
+    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .contact-card, .pillar, .about-timeline li, a.list-row");
     if (!card) return;
     const box = card.getBoundingClientRect();
     card.style.setProperty("--mx", `${Math.round(event.clientX - box.left)}px`);
