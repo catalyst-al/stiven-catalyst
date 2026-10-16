@@ -471,3 +471,12 @@ test('From the Floor: the title rises from below its own line as the page opens,
   for (const page of ['_site/magazine/from-the-floor.html', '_site/sq/magazine/from-the-floor.html', '_site/de/magazine/from-the-floor.html']) assert.match(fs.readFileSync(page, 'utf8'), /floor-hero/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes floor-rise/);
 });
+
+test('Issue pages: the facts come in one after another, the charts answer the pointer and a bar lights up under it', () => {
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.book-hero \.book-facts > div \{ animation: list-in/);
+  assert.match(css, /\.weekly-chart::before \{[\s\S]*?radial-gradient\(460px circle at var\(--mx, 30%\)/);
+  assert.match(css, /\.wk-svg :is\(\.wk-bar, \.wk-col, \.wk-dot, \.wk-person, \.wk-day\):hover \{ filter: brightness\(1\.25\)/);
+  assert.match(css, /:where\([^)]*\.weekly-chart[^)]*\) \{\s*animation: scroll-rise/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.weekly-card, \.weekly-chart, /);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.weekly-chart::before/);
+});
