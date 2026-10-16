@@ -8195,3 +8195,46 @@ a.essay-series-next:hover em { translate: 5px 0; }
   }
 }
 @keyframes legal-tick { from { scale: 0 1; opacity: 0; } }
+
+/* How this is made reads as a path: a thin line runs down beside the text and fills as the page is read, each heading
+   is a stop on it that lights up as it is reached, and the opening sentence stands a little apart. */
+.how-made { position: relative; }
+.how-made > *, .how-made h2 { padding-left: 30px; }
+.how-made::before, .how-made::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 72px;
+  bottom: 120px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.how-made::after { background: linear-gradient(var(--blue), color-mix(in srgb, var(--blue) 40%, transparent)); box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 45%, transparent); transform-origin: top; }
+.how-made h2::before {
+  left: 0;
+  top: calc(50% - 7px);
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 0 4px var(--paper);
+}
+.how-made > p:first-child { color: var(--ink); font-size: 1.12em; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .how-made::after { animation: how-fill linear both; animation-timeline: view(); animation-range: cover 10% cover 85%; }
+    .how-made h2::before { animation: how-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 40%; }
+  }
+}
+@keyframes how-fill { from { scale: 1 0; } }
+@keyframes how-reach {
+  0% { background: var(--paper); }
+  60% { background: var(--blue); box-shadow: 0 0 0 4px var(--paper), 0 0 16px var(--blue); }
+  100% { background: var(--blue); box-shadow: 0 0 0 4px var(--paper), 0 0 8px color-mix(in srgb, var(--blue) 60%, transparent); }
+}
+@media (max-width: 560px) {
+  .how-made > *, .how-made h2 { padding-left: 24px; }
+}
