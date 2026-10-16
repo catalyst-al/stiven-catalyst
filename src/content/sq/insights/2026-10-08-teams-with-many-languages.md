@@ -5,7 +5,7 @@ category: Njerëz
 series: without-you
 status: published
 featured: true
-summary: Një standard i mirë nuk matet me sa bukur është shkruar, por me sa saktë e zbatojnë njerëz të ndryshëm, edhe kur nuk flasin të njëjtën gjuhë.
+summary: Një standard i mirë matet me sa saktë mund ta zbatojnë njerëz të ndryshëm, edhe kur nuk flasin të njëjtën gjuhë.
 description: "Si e bën një standard të kuptueshëm për një ekip që flet shumë gjuhë: gjuha dhe aftësia si dy probleme të ndryshme, dhe karta e udhëzimit të qartë."
 teaser: Të mos e flasësh ende mirë një gjuhë nuk do të thotë të mos jesh i aftë në punën tënde.
 deck: 'Eseja e tetë e serisë “Operacioni që punon pa ty”: çfarë mësova duke punuar në Gjermani, pse përkthimi nuk mjafton, pesë gjërat e një udhëzimi të mirë, dhe karta për ta kthyer një udhëzim të paqartë në standard të kontrollueshëm.'
@@ -35,9 +35,9 @@ Në një ekip mund të ketë njerëz që flasin gjuhë të ndryshme. Standardi i
 
 Për mua kjo temë është edhe personale. Erdha në Gjermani në nëntor 2021, pas një jete pune në Shqipëri, dhe punova në operacione ku gjermanishtja ishte pjesë e komunikimit profesional. Më duhej të mësoja jo vetëm gjuhën, por edhe mënyrën si komunikohet në punë. Për këtë kalim kam shkruar te [Nga Shqipëria në Gjermani](/sq/insights/from-albania-to-germany/).
 
-Kjo ese nuk flet për gjuhën. Flet për standardin, dhe për mënyrën si e bën të kuptueshëm për njerëz që nuk e flasin të njëjtën gjuhë në të njëjtin nivel.
+Kjo ese flet më pak për gjuhën dhe më shumë për standardin: si e bën të kuptueshëm për njerëz që nuk e flasin të njëjtën gjuhë në të njëjtin nivel.
 
-Mbështetet te ekipet ku kam punuar dhe te materialet me të cilat kam punuar. Në last mile kjo do të thoshte disa DSP dhe një strukturë me shumë shoferë, dispeçerë dhe drejtues turni; në hotelet në Gjermani, kolegë nga departamente të ndryshme dhe mysafirë ndërkombëtarë. Kam parë dhe trajtuar probleme operative, por nuk kam asnjë rast të dokumentuar ku mund të them me siguri se gabimi ndodhi për shkak të gjuhës, ndaj nuk ia vesh gjuhës asnjë gabim.
+Mbështetet në ekipet ku kam bërë pjesë dhe në materialet me të cilat kam punuar. Në last mile kjo do të thoshte disa DSP dhe një strukturë me shumë shoferë, dispeçerë dhe drejtues turni; në hotelet në Gjermani, kolegë nga departamente të ndryshme dhe mysafirë ndërkombëtarë. Kam parë dhe trajtuar probleme operative, por nuk kam asnjë rast të dokumentuar ku mund të them me siguri se gabimi ndodhi për shkak të gjuhës, ndaj nuk ia vesh gjuhës asnjë gabim.
 
 ## Gjuha dhe aftësia janë dy probleme të ndryshme
 
@@ -59,13 +59,13 @@ Kur po mësoja proceset e Night Audit, më ndihmonte të shihja një hap konkret
 
 ## Përkthimi nuk mjafton
 
-Nuk mjafton ta përkthesh një dokument. Duhet të sigurohesh që kuptimi dhe veprimi mbeten të njëjtë.
+Përkthimi i një dokumenti është vetëm hapi i parë. Kuptimi dhe veprimi duhet të dalin nga përkthimi të pandryshuar.
 
 Le të marrim një udhëzim hipotetik që thotë vetëm “kontrollo ngarkesën”. Dy njerëz mund ta lexojnë ndryshe: njëri kontrollon numrin e çantave, tjetri rendin e ngarkimit.
 
 Në këtë shembull, faji mund të jetë më shumë te standardi sesa te gjuha. Dhe një standard i paqartë mbetet i paqartë në çdo gjuhë që ta përkthesh.
 
-Një udhëzim i mirë ka:
+Për mua, një udhëzim i mirë ka:
 
 - **një veprim të qartë** për çdo hap;
 - **fjali të shkurtra** dhe fjalë të qëndrueshme, që e njëjta gjë të quhet gjithmonë njësoj;
@@ -89,7 +89,7 @@ Kur dikush nuk e kupton një udhëzim, përgjegjësia jonë si menaxherë nuk mb
 
 ## Karta e udhëzimit të qartë
 
-Një standard i mirë nuk matet me sa bukur është shkruar, por me sa saktë mund ta zbatojnë njerëz të ndryshëm, edhe kur nuk flasin të njëjtën gjuhë. Për ta provuar, merr një udhëzim të paqartë nga operacioni yt, për shembull “kontrollo ngarkesën”, dhe kaloje nëpër këto pesë rreshta:
+Një standard i mirë nuk matet me sa mirë është shkruar, por me sa saktë mund ta zbatojnë njerëz të ndryshëm, edhe kur nuk flasin të njëjtën gjuhë. Për ta provuar, merr një udhëzim të paqartë nga operacioni yt, për shembull “kontrollo ngarkesën”, dhe kaloje nëpër këto pesë rreshta:
 
 1. **Veprimi.** Çfarë duhet të bëjë saktësisht personi?
 2. **Vendi dhe momenti.** Ku dhe kur duhet të kryhet?

@@ -48,13 +48,13 @@ I worked in last mile as a Team Leader On Road and then as an Area Manager, and 
 
 ## In private, once you understand the facts
 
-As a rule, I would rather hold a corrective conversation in private, and only once I have understood the facts.
+As a principle, I would rather hold a corrective conversation in private, and only once I have understood the facts. It is the standard I stand for, not a procedure I followed in every case.
 
 There is one clear exception. If there is an immediate safety risk, you step in at that moment. You do not wait for the right conversation in the right place; you stop what is happening.
 
 ## The person's mistake or the process's
 
-This is the question a manager has to ask before judging anyone. When an employee makes a mistake, I first want to understand:
+To me, this is the question a manager has to ask before judging anyone. When an employee makes a mistake, I first want to understand:
 
 - Did they know the standard?
 - Had they been trained, and had they understood it?
@@ -108,4 +108,4 @@ The order matters. Start at step four and you have judged before you listened. S
 
 The sheet is a guide for the conversation, and it does not replace the disciplinary procedure: serious breaches follow the safety and HR procedures and the organisation's policies.
 
-The test comes when the conversation is over. The employee should walk out not afraid of the next mistake, but knowing what to do differently.
+The conversation is tested later, on the day the agreed action is checked. That is when you see whether the employee left knowing what to do differently, or only afraid of the next mistake.

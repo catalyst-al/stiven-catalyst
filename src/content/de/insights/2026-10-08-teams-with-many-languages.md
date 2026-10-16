@@ -35,9 +35,9 @@ In einem Team können Menschen verschiedene Sprachen sprechen. Der Arbeitsstanda
 
 Das Thema ist für mich auch persönlich. Ich bin im November 2021 aus einem Arbeitsleben in Albanien nach Deutschland gekommen und habe in Betrieben gearbeitet, in denen Deutsch zur beruflichen Kommunikation gehörte. Ich musste nicht nur die Sprache lernen, sondern auch, wie bei der Arbeit kommuniziert wird. Über diesen Schritt habe ich in [Von Albanien nach Deutschland](/de/insights/from-albania-to-germany/) geschrieben.
 
-Dieser Essay handelt nicht von Sprache. Er handelt vom Standard und von der Frage, wie man ihn Menschen verständlich macht, die dieselbe Sprache nicht auf demselben Niveau sprechen.
+In diesem Essay geht es weniger um Sprache als um den Standard: wie man ihn Menschen verständlich macht, die dieselbe Sprache nicht auf demselben Niveau sprechen.
 
-Er stützt sich auf die Teams, in denen ich gearbeitet habe, und auf die Materialien, mit denen ich gearbeitet habe. Auf der letzten Meile waren das mehrere DSPs und eine Struktur aus vielen Fahrern, Disponenten und Schichtleitern, in den Hotels in Deutschland Kollegen aus verschiedenen Abteilungen und internationale Gäste. Betriebliche Probleme habe ich gesehen und bearbeitet, aber ich habe keinen dokumentierten Fall, in dem ein Fehler sicher auf die Sprache zurückging. Deshalb schreibe ich ihr auch keinen zu.
+Er stützt sich auf die Teams, in denen ich tätig war, und auf die Materialien, mit denen ich gearbeitet habe. Auf der letzten Meile waren das mehrere DSPs und eine Struktur aus vielen Fahrern, Disponenten und Schichtleitern, in den Hotels in Deutschland Kollegen aus verschiedenen Abteilungen und internationale Gäste. Betriebliche Probleme habe ich gesehen und bearbeitet, aber ich habe keinen dokumentierten Fall, in dem ein Fehler sicher auf die Sprache zurückging. Deshalb schreibe ich ihr auch keinen zu.
 
 ## Sprache und Können sind zwei verschiedene Probleme
 
@@ -59,13 +59,13 @@ Als ich die Abläufe des Night Audits lernte, half es mir, einen konkreten Schri
 
 ## Übersetzen reicht nicht
 
-Ein Dokument zu übersetzen reicht nicht. Sie müssen sicherstellen, dass Bedeutung und Handlung gleich bleiben.
+Ein Dokument zu übersetzen ist nur der erste Schritt. Bedeutung und Handlung müssen die Übersetzung unverändert überstehen.
 
 Nehmen Sie eine hypothetische Anweisung, die nur „Ladung prüfen“ lautet. Zwei Menschen können sie unterschiedlich verstehen: Der eine prüft die Zahl der Taschen, der andere die Ladereihenfolge.
 
 In diesem Beispiel liegt der Fehler vielleicht eher am Standard als an der Sprache. Und ein unklarer Standard bleibt unklar, in welche Sprache man ihn auch übersetzt.
 
-Eine gute Anweisung hat:
+Eine gute Anweisung hat für mich:
 
 - **eine klare Handlung** pro Schritt;
 - **kurze Sätze** und gleichbleibende Wörter, damit dieselbe Sache immer gleich heißt;
@@ -89,7 +89,7 @@ Wenn jemand eine Anweisung nicht versteht, endet unsere Verantwortung als Führu
 
 ## Die Karte für eine klare Anweisung
 
-Ein guter Standard zeigt sich nicht daran, wie schön er geschrieben ist, sondern daran, wie genau verschiedene Menschen ihn umsetzen können, auch wenn sie nicht dieselbe Sprache sprechen. Um das zu prüfen, nehmen Sie eine unklare Anweisung aus Ihrem Betrieb, zum Beispiel „Ladung prüfen“, und führen Sie sie durch diese fünf Zeilen:
+Ein guter Standard zeigt sich nicht daran, wie gut er geschrieben ist, sondern daran, wie genau verschiedene Menschen ihn umsetzen können, auch wenn sie nicht dieselbe Sprache sprechen. Um das zu prüfen, nehmen Sie eine unklare Anweisung aus Ihrem Betrieb, zum Beispiel „Ladung prüfen“, und führen Sie sie durch diese fünf Zeilen:
 
 1. **Die Handlung.** Was genau muss die Person tun?
 2. **Ort und Zeitpunkt.** Wo und wann muss es erledigt werden?

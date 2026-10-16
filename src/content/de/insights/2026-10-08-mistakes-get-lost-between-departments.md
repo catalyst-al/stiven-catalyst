@@ -56,7 +56,7 @@ Auf der letzten Meile waren die Übergabepunkte noch sichtbarer. Outbound bereit
 
 Ich hatte mit Fällen zu tun, in denen Taschen fehlten oder verspätet ankamen, Wagen schlecht organisiert oder Ladungen vermischt waren und es beim Beladen Verzögerungen gab.
 
-Ein Beispiel ist eine fehlende Tasche beim Beladen. Die Regel war, dass der Fahrer den Team Leader informiert und nach Verfahren wartet, ohne den Wagen aus dem festgelegten Bereich zu bringen. Diese Regel deckt den Moment ab, aber das Problem muss auch weiter vorn im Ablauf betrachtet werden.
+Ein Beispiel ist eine fehlende Tasche beim Beladen. Die Regel war, dass der Fahrer den Team Leader informiert und nach Verfahren wartet, ohne den Wagen aus dem festgelegten Bereich zu bringen. Diese Regel deckt den Moment ab, aber für mich muss das Problem auch weiter vorn im Ablauf betrachtet werden.
 
 Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die Verspätung bei der Abfahrt, und im Bericht kann sie wie eine Verspätung des Fahrers aussehen. Damit ist der Fahrer aber nicht automatisch die Ursache. Eine Verspätung kann mehrere haben: verspätete Vorbereitung, fehlende Taschen, die Organisation der Rampe oder die Bereitschaft des Fahrers.
 
@@ -66,7 +66,7 @@ Ein Fehler kann an einer Stelle gemessen werden und an einer anderen entstanden 
 
 ## „Ich habe Bescheid gegeben“ reicht nicht
 
-Eine gute Übergabe muss zwei Dinge klarmachen: **wer dafür verantwortlich ist, die Arbeit zu übergeben**, und **wer dafür verantwortlich ist, sie anzunehmen**.
+Für mich muss eine gute Übergabe zwei Dinge klarmachen: **wer dafür verantwortlich ist, die Arbeit zu übergeben**, und **wer dafür verantwortlich ist, sie anzunehmen**.
 
 Es reicht nicht, wenn die erste Abteilung sagt: „Ich habe Bescheid gegeben.“ Es muss klar sein, ob die andere Abteilung die Sache übernommen hat, was von ihr erwartet wird und ob es eine Frist gibt.
 
@@ -80,7 +80,7 @@ Im Hotel kam es sehr auf eine strukturierte Übergabe an. Wenn ein Problem in de
 
 Auf der letzten Meile halfen klare Meldewege, die Kontakte zu den Team Leadern und die Abstimmung zwischen Last Mile, Outbound und den DSPs.
 
-Für mich entscheiden drei Dinge über jede Übergabe:
+Meiner Ansicht nach entscheiden drei Dinge über jede Übergabe:
 
 - **Status:** Wo steht die Arbeit wirklich?
 - **Verantwortung:** Wer muss jetzt handeln?
@@ -94,7 +94,7 @@ Wenn sich ein Fehler zwischen zwei Teams wiederholt, würde ich nicht mit „Wer
 
 **An welchem Punkt ist die Arbeit in andere Hände übergegangen, und welche Information ist bei diesem Übergang verloren gegangen?**
 
-Dann würde ich prüfen, ob beide Teams dasselbe darunter verstanden, was übergeben werden musste. Gab es einen klaren Standard? War die Arbeit wirklich bereit für das nächste Team? Wurde der Empfang bestätigt? War jemand verantwortlich, falls ein Problem auftritt?
+Dann würde ich prüfen, ob beide Teams dasselbe darunter verstanden, was übergeben werden musste. Gab es einen klaren Standard? War die Arbeit wirklich bereit für das nächste Team? Wurde der Empfang bestätigt? War jemand verantwortlich, falls ein Problem auftrat?
 
 Gibt es auf diese Fragen keine Antworten, haben wir einen Prozess, in dem sich Fehler wiederholen können, ganz gleich, wie gut die Menschen sind.
 

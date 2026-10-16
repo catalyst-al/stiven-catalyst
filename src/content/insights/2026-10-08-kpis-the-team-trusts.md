@@ -5,7 +5,7 @@ category: Operations
 series: without-you
 status: published
 featured: true
-summary: A KPI the team trusts is not necessarily the one that always shows green. It is the one that measures clearly, is read fairly and helps people improve.
+summary: A KPI the team trusts is not necessarily always green. It measures clearly, is read fairly and helps people understand what they can do better.
 description: "How to build a KPI people trust: Damage, Incomplete, Delay and Loading Time in last mile, the result and the reason, and a six-line card for a KPI."
 teaser: A KPI can be mathematically correct and its interpretation still be unfair.
 deck: 'The sixth essay in the series “The operation that runs without you”: a clear definition, fair responsibility and the action that follows the result, with the KPI card to fill in before you start measuring.'
@@ -54,7 +54,7 @@ The practical meaning of an indicator and the official formula a company uses ar
 
 I have worked with problems that involved more than one stage of the process: missing bags, mixed trolleys, load organisation and delays at departure. Those situations changed the way I see a KPI.
 
-Take the driver who leaves late because the order was not ready. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
+Take the driver from the example above. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
 
 So before I judge someone's performance, I want to understand which part of the result they could actually control.
 

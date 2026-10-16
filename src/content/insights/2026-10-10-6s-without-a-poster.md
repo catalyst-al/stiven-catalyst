@@ -53,13 +53,13 @@ In last mile there were concrete standards:
 
 And we had run into problems in exactly those places: mixed trolleys, loads organised wrongly, ramp rules that were not followed.
 
-None of these is cosmetic. Each one is tied to a number that shows up in the report the next day. A mixed trolley can become an incomplete order. A product placed badly can become damage. A disorderly ramp makes loading take longer.
+Each of these standards is tied to a number that shows up in the report the next day. A mixed trolley can become an incomplete order. A product placed badly can become damage. A disorderly ramp makes loading take longer.
 
 ## Why it is not cleaning
 
 When someone sees 6S as cleaning, I would tell them that cleaning is only one part of it.
 
-The value of 5S and 6S is that the work becomes more organised, safer and less dependent on any one person's memory. If someone loses time looking for the right equipment, if loads get mixed or if the ramp rules are not followed, the problem goes well beyond appearance. It is operational.
+For me, the value of 5S and 6S is that the work becomes more organised, safer and less dependent on any one person's memory. If someone loses time looking for the right equipment, if loads get mixed or if the ramp rules are not followed, the cost shows up in the operation.
 
 **An organised ramp is more than a cleaner ramp. It makes loading clearer, lets mistakes be spotted sooner and lets people work in safer conditions.**
 
@@ -67,7 +67,7 @@ That is why order has to be visible. When everything has its place, the thing th
 
 ## The sixth S
 
-In last mile, safety was part of the operation itself rather than a separate principle on the wall:
+In last mile, safety was part of the operation itself:
 
 - closing the gates after loading;
 - the rules for moving and standing on the ramp;

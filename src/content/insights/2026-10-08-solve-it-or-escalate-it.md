@@ -49,7 +49,7 @@ Between these two extremes sits one of the most important questions for an opera
 
 In [Leadership without a title](/insights/leadership-without-a-title/) I wrote that initiative and authority are two different things. This essay tries to turn that difference from a personal feeling into a clear rule.
 
-It draws on two jobs. At night in the hotel, every problem began with the same sorting: could I solve it within my role, did it belong to the responsible department, or did it need a decision higher up? Technical problems in rooms went to Maintenance; housekeeping matters went to that department, and into the handover for follow-up. In last mile, the Team Leader worked very close to the daily operation: loading, the dock, drivers, absences, delays, problems as they happened. Rules said when the Team Leader had to be informed, for example when a bag was missing during loading, and damage and the cold chain had clear standards and checks.
+It draws on two jobs. At night in the hotel, every problem began with the same sorting: could I solve it within my role, did it belong to the responsible department, or did it need a decision higher up? In the cases I had, technical problems in rooms went to Maintenance; housekeeping matters went to that department, and into the handover for follow-up. In last mile, the Team Leader worked very close to the daily operation: loading, the dock, drivers, absences, delays, problems as they happened. Rules said when the Team Leader had to be informed, for example when a bag was missing during loading, and damage and the cold chain had clear standards and checks.
 
 I have no documented record of how authority was split between the Team Leader, the Area Manager and the levels above for each kind of incident, nor of a moment when I myself stood between the two choices. The levels and the matrix below are how I would draw the line today. What I can describe is the principle I worked by from training onwards.
 
@@ -69,7 +69,7 @@ And an operation that depends on who was on shift is not yet an operation that r
 
 ## The three mistakes
 
-What follows is my opinion, not a statistic drawn from my experience.
+The three mistakes are my opinion; I have no statistic from my own experience behind them.
 
 **The first: everything gets escalated.** The person never learns to take ownership. Every deviation becomes the boss's problem, and the boss becomes the point where the whole operation stalls.
 
@@ -77,7 +77,7 @@ What follows is my opinion, not a statistic drawn from my experience.
 
 **The third: escalation without information.** This one seems very common to me. The problem moves one level up without getting any closer to a solution. Whoever receives it has to ask ten questions to learn the basic facts, and the time lost there is often the time the decision needed.
 
-**Ownership does not mean solving it yourself. It means taking the problem to where the right decision can be made, with the right information.**
+**Ownership does not mean always solving it yourself. It means taking the problem to where the right decision can be made, with the right information.**
 
 ## What a good escalation contains
 
@@ -129,4 +129,4 @@ Reading the answers:
 
 When you do escalate, bring the five things of a good escalation.
 
-The matrix does not replace judgement. It gives judgement the same questions, whoever is on shift, and that is what makes escalation a system rather than a temperament. A good escalation system does not teach people to ask permission for everything. It teaches them to understand the limit of their own decision.
+The matrix leaves the judgement with the person on shift. What it adds is the same five questions, whoever that person is, so that escalation stops depending on temperament. Where two colleagues would still answer them differently, the line itself is probably what needs taking higher.

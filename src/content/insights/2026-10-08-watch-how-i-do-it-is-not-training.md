@@ -60,7 +60,7 @@ From last mile I know there were clear operational rules for safety, loading, sc
 
 When the process is not written down as a clear path, it lives in the person who does it every day.
 
-The fault is not theirs. Usually they are the best person you have, which is why you chose them to train others. But even the best person has their own interpretation. They know why they leave one step for later, or why they check something a different way. The new person sees only the action; the reason stays in the other person's head.
+None of this is their fault; usually they are the best person you have, which is why you chose them to train others. But even the best person has their own interpretation. They know why they leave one step for later, or why they check something a different way. The new person sees only the action; the reason stays in the other person's head.
 
 If two new people are trained by two different colleagues, they do not learn the same job. They learn two versions of it. A few months later, where there was one standard, you have several habits that resemble each other.
 
@@ -76,7 +76,7 @@ If all three work, the training has started to deliver. If only the first works,
 
 ## The first hour
 
-In the first hour I would not try to teach someone everything. I would want them to know five things:
+In the first hour I would limit myself to five things the new person should know:
 
 1. What role they have.
 2. What result is expected of them.
@@ -84,7 +84,7 @@ In the first hour I would not try to teach someone everything. I would want them
 4. Who they turn to when they do not know something.
 5. What they must not decide on their own without authorisation.
 
-These five things do not make someone capable of the job. But they make sure the first mistakes are small ones.
+These five things are only a start. What they do is keep the first mistakes small while the person learns the job.
 
 ## The first week
 
@@ -94,7 +94,7 @@ The order I would follow is simple:
 
 **Watch. Do it with me. You do it while I watch. Do it alone. Then explain it to me.**
 
-That is far stronger than “stay with them today and watch how they do it”. Watching is still the first step; it has stopped being the only one. What counts in the end is how consistent and safe the result stays once the trainer has gone.
+To me, that is far stronger than “stay with them today and watch how they do it”. Watching is still the first step; it has stopped being the only one. What counts in the end is how consistent and safe the result stays once the trainer has gone.
 
 ## The first-week plan for a new employee
 

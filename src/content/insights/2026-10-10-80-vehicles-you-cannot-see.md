@@ -46,7 +46,7 @@ That is the biggest difference between the two ways I have worked in last mile. 
 
 The problems are the same. My position in front of them is completely different.
 
-This essay compares the two positions, from someone who has worked in both. It is my analysis, not a measured result or a success story. I leave out internal details such as the systems and what they show, the channels we use and the shift times, and I have no incident from the remote role documented from start to resolution. The documented cases I do have, with vehicles and with delays, come from my earlier work in last mile, and I do not present them as solved from a distance.
+This essay compares the two positions, from someone who has worked in both. It is my analysis, not a measured result or a success story. I leave out internal details, some of which I do not know precisely: the systems and what they show, the channels we use and the shift times. I have no incident from the remote role documented from start to resolution. The documented cases I do have, with vehicles and with delays, come from my earlier work in last mile, and I do not present them as solved from a distance.
 
 ## What you lose
 
@@ -62,7 +62,7 @@ Distance has its gains too.
 
 On the ramp you see well what is in front of you. From a distance, if the information and the tools support it, you can see the coordination of many tours as one operation: all the vans at once, and whether delays are gathering somewhere rather than one delay at a time.
 
-That does not happen by itself. It happens only if the information you receive is sufficient and reliable.
+That view depends on the information you receive being sufficient and reliable.
 
 ## Information becomes the work
 
@@ -72,11 +72,11 @@ From a distance, three things matter even more than on the ramp: the quality of 
 
 On the ramp, you can make up for unclear information by going to look. From a distance, you cannot. Unclear information stays unclear, and so does any decision you take on it.
 
-As for communication, I hold to one principle: it should be short, clear, and say which action is needed. A message that needs three follow-up questions to be understood has lost the time it was supposed to save.
+As for communication, I have no documented rules of my own, but I believe it should be short, clear, and say which action is needed. A message that needs three follow-up questions to be understood has lost the time it was supposed to save.
 
 ## What I would watch for
 
-Today I would pay attention to three things.
+Nor do I have a documented method for spotting problems early. Today I would pay attention to three things.
 
 **Deviations that repeat.** One delay is an event. The same delay, in the same place, several days in a row, is a pattern.
 

@@ -41,7 +41,7 @@ A team can have people who speak different languages. The work standard still ha
 
 The subject is personal for me too. I came to Germany in November 2021 from a working life in Albania, and worked in operations where German was part of professional communication. I had to learn not only the language but also the way people communicate at work. I wrote about that move in [From Albania to Germany](/insights/from-albania-to-germany/).
 
-This essay is not about language. It is about the standard, and about how you make a standard clear to people who do not speak the same language at the same level.
+This essay is less about language than about the standard: how you make it clear to people who do not speak the same language at the same level.
 
 It draws on the teams I worked in and the materials I worked with. In last mile that meant several DSPs and a structure with many drivers, dispatchers and Shift Leaders; in the hotels in Germany, colleagues from different departments and international guests. I saw and handled operational problems, but I have no documented case of a mistake I can say for certain was caused by language, so I do not attribute any to it.
 
@@ -65,13 +65,13 @@ When I was learning the Night Audit processes, it helped to see a concrete step 
 
 ## Translation is not enough
 
-Translating a document is not enough. You have to make sure the meaning and the action stay the same.
+Translating a document is only the first step. The meaning and the action have to come through the translation unchanged.
 
 Take a hypothetical instruction that says only “check the load”. Two people can read it differently: one checks the number of bags, the other the loading order.
 
 In this example the fault may lie with the standard rather than with language. And an unclear standard stays unclear in whatever language you translate it into.
 
-A good instruction has:
+For me, a good instruction has:
 
 - **one clear action** for each step;
 - **short sentences** and consistent words, so the same thing is always called the same;

@@ -5,7 +5,7 @@ category: Betrieb
 series: without-you
 status: published
 featured: true
-summary: Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist, sondern die, die klar misst, fair gelesen wird und hilft, besser zu werden.
+summary: Eine Kennzahl, der das Team vertraut, ist nicht unbedingt immer grün. Sie misst klar, wird fair gelesen und hilft zu verstehen, was man besser machen kann.
 description: "Eine Kennzahl, der Menschen vertrauen: Damage, Incomplete, Delay und Loading Time auf der letzten Meile, Ergebnis und Grund, und die Kennzahlenkarte."
 teaser: Eine Kennzahl kann mathematisch richtig sein und trotzdem unfair gelesen werden.
 deck: 'Der sechste Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: eine klare Definition, faire Verantwortung und die Handlung nach dem Ergebnis, mit der Kennzahlenkarte, die man ausfüllt, bevor man zu messen beginnt.'
@@ -30,7 +30,7 @@ firstMove:
 
 Angenommen, ein Fahrer fährt verspätet ab, weil der Auftrag nicht bereit war. Die Verspätung zeigt sich bei der Abfahrt, und der Bericht erfasst sie korrekt. Ob die Zahl danach fair gelesen wird, ist eine andere Frage: Eine Kennzahl kann richtig berechnet und trotzdem unfair gedeutet werden.
 
-In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben, dass die Zahl allein die Arbeit nicht verbessert. Hier geht es um die nächste Frage: Wie baut man eine Kennzahl, der Menschen vertrauen, die sie verstehen, die sie nicht für etwas bestraft, das sie nicht steuern, und die sie zu einer Handlung führt? Für mich entsteht dieses Vertrauen aus drei Dingen: **einer klaren Definition, fairer Verantwortung und der Handlung, die auf das Ergebnis folgt.**
+In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben, dass die Zahl allein die Arbeit nicht verbessert. Hier geht es um die nächste Frage: Wie entwickelt man eine Kennzahl, der Menschen vertrauen, die sie verstehen, die sie nicht für etwas bestraft, das sie nicht steuern, und die sie zu einer Handlung führt? Für mich entsteht dieses Vertrauen aus drei Dingen: **einer klaren Definition, fairer Verantwortung und der Handlung, die auf das Ergebnis folgt.**
 
 Was folgt, beruht auf den Berichten und Stand-ups auf der letzten Meile, mit denen ich gearbeitet habe, und auf meiner Arbeit im Night Audit. Die Definitionen geben wieder, wie ich die Werte verstanden habe, nicht die offiziellen Formeln des Unternehmens. Die Beispiele für eine unfair gelesene Zahl oder für eine Kennzahl, die falsches Verhalten auslöst, sind Veranschaulichungen, keine dokumentierten Fälle.
 
@@ -51,7 +51,7 @@ Die praktische Bedeutung eines Werts und die offizielle Formel, die ein Unterneh
 
 Ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Taschen, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
 
-Nehmen wir den Fahrer, der verspätet abfährt, weil der Auftrag nicht bereit war. Das Problem zeigt sich bei der Abfahrt, aber deshalb liegt die Verantwortung nicht automatisch allein beim Fahrer. Wie ich in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben habe: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
+Nehmen wir den Fahrer aus dem Beispiel oben. Das Problem zeigt sich bei der Abfahrt, aber deshalb liegt die Verantwortung nicht automatisch allein beim Fahrer. Wie ich in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben habe: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 
 Bevor ich die Leistung von jemandem bewerte, will ich deshalb verstehen, welchen Teil des Ergebnisses er tatsächlich steuern konnte.
 
@@ -85,7 +85,7 @@ Im Hotel habe ich noch besser verstanden, dass eine Zahl nicht immer die ganze L
 
 ## Die Kennzahlenkarte
 
-Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist. Es ist die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
+Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün ist, sondern die, die klar misst, fair gelesen wird und den Menschen hilft zu verstehen, was sie besser machen können.
 
 Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie nicht alle sechs ausfüllen können, ist die Kennzahl noch nicht so weit, dass Sie sie dem Team zeigen sollten.
 

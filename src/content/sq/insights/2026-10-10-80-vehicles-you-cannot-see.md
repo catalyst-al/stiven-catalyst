@@ -38,9 +38,9 @@ Në rampë, problemin e sheh vetë. Nga distanca, shpesh e njeh vetëm përmes i
 
 Ky është dallimi më i madh mes dy mënyrave si kam punuar në last mile. Në vitin 2025, si Team Leader dhe pastaj si Area Manager, isha brenda operacionit: në rampë, te ngarkimi, pranë dispeçerëve, me KPI-të çdo ditë. Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, nga shtëpia. Roli përfshin koordinimin operacional të 80+ automjeteve dhe 100+ shoferëve: turet, shoferët, vonesat dhe problemet gjatë shpërndarjes.
 
-Problemet janë të njëjtat. Vendi im përballë tyre është krejt tjetër.
+Problemet janë të njëjta. Vendi im përballë tyre është krejt tjetër.
 
-Kjo ese i krahason të dy pozicionet, nga dikush që ka qenë në të dyja. Është analiza ime, jo një rezultat i matur dhe as një histori suksesi. Detajet e brendshme, si sistemet dhe çfarë tregojnë ato, kanalet e komunikimit dhe oraret e turneve, i lë jashtë, dhe nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri në zgjidhje. Rastet e dokumentuara që kam, me automjete dhe me vonesa, vijnë nga puna ime e mëparshme në last mile, dhe nuk i paraqes si raste të zgjidhura nga distanca.
+Kjo ese i krahason të dy pozicionet, nga dikush që ka qenë në të dyja. Është analiza ime, jo një rezultat i matur dhe as një histori suksesi. Detajet e brendshme i lë jashtë, e disa prej tyre as nuk i di me saktësi: sistemet dhe çfarë tregojnë ato, kanalet e komunikimit dhe oraret e turneve. Nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri në zgjidhje. Rastet e dokumentuara që kam, me automjete dhe me vonesa, vijnë nga puna ime e mëparshme në last mile, dhe nuk i paraqes si raste të zgjidhura nga distanca.
 
 ## Çfarë humbet
 
@@ -56,7 +56,7 @@ Distanca ka edhe fitimet e veta.
 
 Në rampë sheh mirë atë që ke përpara. Nga distanca, nëse informacioni dhe mjetet e punës e lejojnë, mund ta shohësh koordinimin e shumë tureve si një operacion të vetëm: të gjitha makinat njëherësh, dhe nëse vonesat po mblidhen diku, në vend të një vonese të vetme.
 
-Kjo nuk ndodh vetvetiu. Ndodh vetëm nëse informacioni që merr është i mjaftueshëm dhe i besueshëm.
+Kjo pamje varet nga informacioni që merr: ai duhet të jetë i mjaftueshëm dhe i besueshëm.
 
 ## Informacioni bëhet vetë puna
 
@@ -66,11 +66,11 @@ Nga distanca, tri gjëra kanë edhe më shumë rëndësi se në rampë: cilësia
 
 Në rampë, informacionin e paqartë mund ta plotësosh duke shkuar vetë të shohësh. Nga distanca nuk mundesh. Informacioni i paqartë mbetet i paqartë, dhe po ashtu çdo vendim që merr mbi të.
 
-Për komunikimin mbaj një parim: duhet të jetë i shkurtër, i qartë dhe të thotë cili veprim nevojitet. Një mesazh që kërkon tri pyetje pasuese për t'u kuptuar e ka humbur kohën që duhej të kursente.
+Për komunikimin nuk kam rregulla të miat të dokumentuara, por besoj se duhet të jetë i shkurtër, i qartë dhe të thotë cili veprim nevojitet. Një mesazh që kërkon tri pyetje pasuese për t'u kuptuar e ka humbur kohën që duhej të kursente.
 
 ## Çfarë do të shikoja
 
-Sot do t'u kushtoja vëmendje tri gjërave.
+As një metodë të dokumentuar për t'i dalluar problemet herët nuk kam. Sot do t'u kushtoja vëmendje tri gjërave.
 
 **Devijimeve që përsëriten.** Një vonesë është rast. E njëjta vonesë, në të njëjtin vend, disa ditë me radhë, është model.
 

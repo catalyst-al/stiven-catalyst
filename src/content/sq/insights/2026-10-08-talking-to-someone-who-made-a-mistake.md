@@ -28,8 +28,8 @@ checklist:
       hint: Çfarë ndryshon, kush e bën dhe kur kontrollohet rezultati?
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Kuptoji faktet para bisedës, dhe bëje atë privatisht.
-  - Përshkruaj çfarë ndodhi, dëgjo, kontrollo procesin, dhe vetëm pastaj fol për përgjegjësinë.
+  - Kuptoji faktet para bisedës dhe bëje atë privatisht.
+  - Përshkruaj çfarë ndodhi, dëgjo, kontrollo procesin dhe vetëm pastaj fol për përgjegjësinë.
   - "Mbylle me një veprim të rënë dakord: çfarë ndryshon, kush e bën, kur kontrollohet."
 ---
 
@@ -45,13 +45,13 @@ Kam punuar në last mile si Team Leader On Road dhe më pas si Area Manager, ku 
 
 ## Privatisht, pasi i ke kuptuar faktet
 
-Si rregull, një bisedë korrigjuese do ta bëja më mirë privatisht, dhe vetëm pasi t'i kem kuptuar faktet.
+Si parim, një bisedë korrigjuese do të preferoja ta bëja privatisht, dhe vetëm pasi t'i kisha kuptuar faktet. Ky është standardi që mbroj, jo një procedurë që e kam ndjekur në çdo rast.
 
 Ka një përjashtim të qartë. Nëse ka rrezik të menjëhershëm për sigurinë, ndërhyn në atë çast. Nuk pret bisedën e duhur në vendin e duhur; ndal atë që po ndodh.
 
 ## Gabim i personit apo gabim i procesit
 
-Kjo është pyetja që një menaxher duhet ta bëjë përpara se të gjykojë dikë. Kur një punonjës gabon, fillimisht dua të kuptoj:
+Për mua, kjo është pyetja që një menaxher duhet ta bëjë përpara se të gjykojë dikë. Kur një punonjës gabon, fillimisht dua të kuptoj:
 
 - A e njihte standardin?
 - A ishte trajnuar, dhe a e kishte kuptuar?
@@ -99,10 +99,10 @@ Kjo është struktura që do të propozoja. Mund ta përdorësh gjatë një bise
 2. **Dëgjo shpjegimin.** Çfarë pa, dinte dhe kuptoi punonjësi në atë moment.
 3. **Kontrollo procesin.** A ishin të qarta standardi, trajnimi, mjetet dhe kushtet.
 4. **Qartëso përgjegjësinë.** Cila pjesë e gabimit ishte brenda kontrollit të personit.
-5. **Përcakto bashkë veprimin.** Çfarë ndryshon, kush e bën, dhe kur kontrollohet rezultati.
+5. **Përcakto bashkë veprimin.** Çfarë ndryshon, kush e bën dhe kur kontrollohet rezultati.
 
 Rendi ka rëndësi. Nëse fillon nga hapi i katërt, ke gjykuar para se të dëgjosh. Nëse ndalesh te hapi i tretë, ke kuptuar procesin, por e ke lënë personin jashtë.
 
 Fleta është një udhërrëfyes për bisedën dhe nuk zëvendëson procedurën disiplinore: për shkeljet serioze ndiqen procedurat e sigurisë dhe të HR-së, si dhe politikat e organizatës.
 
-Prova vjen kur biseda mbaron. Punonjësi duhet të dalë prej saj jo me frikë nga gabimi i radhës, por duke ditur çfarë duhet të bëjë ndryshe.
+Prova vjen më vonë, ditën kur kontrollohet veprimi i rënë dakord. Atëherë shihet nëse punonjësi doli nga biseda duke ditur çfarë duhej të bënte ndryshe, apo vetëm me frikë nga gabimi i radhës.

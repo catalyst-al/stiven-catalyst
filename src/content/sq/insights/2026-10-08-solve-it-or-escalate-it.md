@@ -13,7 +13,7 @@ deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes in
 firstMove:
   - "Për problemin tjetër, përgjigju pesë pyetjeve para se të veprosh: autoriteti im, siguria, e kthyeshme, jashtë turnit tim, çfarë ndodh nëse pres."
   - "Kur eskalon, sill pesë gjëra: çfarë ndodhi, ndikimi tani, çfarë është bërë, cili vendim duhet, sa urgjente është."
-  - Gjej një situatë ku dy kolegë do të vendosnin ndryshe, dhe kërko që të hiqet vija.
+  - Gjej një situatë ku dy kolegë do të vendosnin ndryshe, dhe kërko që të përcaktohet kufiri.
 checklist:
   title: Matrica e eskalimit për turnin
   fill: true
@@ -22,7 +22,7 @@ checklist:
     - label: A është brenda autoritetit tim?
       hint: Roli, standardi, miratimet që më takojnë.
     - label: A ka rrezik sigurie ose pajtueshmërie?
-      hint: Siguria në punë, security, të dhëna të ndjeshme, pagesa përtej autoritetit tim.
+      hint: Siguria në punë, siguria fizike, të dhëna të ndjeshme, pagesa përtej autoritetit tim.
     - label: A mund të kthehet vendimi?
       hint: Nesër, nga unë ose nga dikush tjetër, pa dëm.
     - label: A prek dikë jashtë turnit tim?
@@ -43,9 +43,9 @@ Mes këtyre dy skajeve qëndron një nga pyetjet më të rëndësishme për një
 
 Te [Udhëheqje pa titull](/sq/insights/leadership-without-a-title/) shkrova se iniciativa dhe autoriteti janë dy gjëra të ndryshme. Kjo ese përpiqet ta kthejë atë dallim nga një ndjesi personale në një rregull të qartë.
 
-Mbështetet te dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e housekeeping-ut i merrte përsipër ai departament, dhe unë i lija në handover për t'u ndjekur. Në last mile, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
+Mbështetet në dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Në rastet që kam pasur, problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e shërbimit të katit i merrte përsipër ai departament, dhe unë i lija në dorëzimin e turnit për t'u ndjekur. Në last mile, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
 
-Nuk kam të dokumentuar se si ndahej autoriteti mes Team Leader-it, Area Manager-it dhe niveleve më lart për çdo lloj incidenti, as ndonjë rast kur vetë jam gjendur mes dy zgjedhjeve. Nivelet dhe matrica më poshtë tregojnë ku do ta hiqja vijën sot. Ajo që mund ta përshkruaj është parimi me të cilin punoja që nga trajnimi.
+Nuk kam të dokumentuar se si ndahej autoriteti mes Team Leader-it, Area Manager-it dhe niveleve më lart për çdo lloj incidenti, as ndonjë rast kur vetë jam gjendur mes dy zgjedhjeve. Nivelet dhe matrica më poshtë tregojnë ku do ta vendosja kufirin sot. Ajo që mund ta përshkruaj është parimi me të cilin punoja që nga trajnimi.
 
 ## Nuk improvizoja
 
@@ -55,7 +55,7 @@ Kjo mund të duket si mungesë iniciative. Për mua ishte e kundërta. Iniciativ
 
 ## Paqartësia është problem sistemi
 
-Nëse dy njerëz me të njëjtin rol do të merrnin vendime krejt të ndryshme për të njëjtën situatë, faji ndoshta është më pak te njerëzit dhe më shumë te një kufi eskalimi që nuk është hequr kurrë si duhet.
+Nëse dy njerëz me të njëjtin rol do të merrnin vendime krejt të ndryshme për të njëjtën situatë, faji ndoshta është më pak te njerëzit dhe më shumë te një kufi eskalimi që nuk është përcaktuar kurrë si duhet.
 
 Prandaj eskalimi nuk duhet të varet nga temperamenti. Njëri është më i kujdesshëm dhe telefonon për gjithçka; tjetri është më i sigurt në vetvete dhe nuk telefonon për asgjë. Nëse sistemi nuk e thotë ku është kufiri, rezultati varet nga kush rastisi në turn atë natë.
 
@@ -63,15 +63,15 @@ Dhe një operacion që varet nga kush ishte në turn nuk është ende një opera
 
 ## Tri gabimet
 
-Ajo që vijon është mendimi im, jo statistikë nga përvoja ime.
+Tri gabimet janë mendimi im; nuk kam statistikë nga përvoja ime që t'i mbështesë.
 
 **I pari: eskalohet gjithçka.** Personi nuk mëson kurrë të marrë përgjegjësi. Çdo devijim bëhet problem i shefit, dhe shefi bëhet pika ku ngec i gjithë operacioni.
 
-**I dyti: nuk eskalohet asgjë.** Ky është më i rrezikshmi. Personi mund ta mbajë problemin brenda rolit të vet edhe pasi ai ka kaluar kufirin e autoritetit, të rrezikut ose të kompetencës së tij. Kur më në fund del në sipërfaqe, zakonisht është më i madh dhe më vonë.
+**I dyti: nuk eskalohet asgjë.** Ky është më i rrezikshmi. Personi mund ta mbajë problemin brenda rolit të vet edhe pasi ai ka kaluar kufirin e autoritetit, të rrezikut që mund të mbajë ose të kompetencës së tij. Kur më në fund del në sipërfaqe, zakonisht është më i madh dhe më vonë.
 
 **I treti: eskalohet pa informacion.** Ky më duket shumë i zakonshëm. Problemi ngjitet një nivel më lart pa iu afruar zgjidhjes. Kush e merr duhet të bëjë dhjetë pyetje vetëm për të mësuar faktet bazë, dhe koha që humbet aty është shpesh pikërisht koha që i duhej vendimit.
 
-**Të marrësh përgjegjësi nuk do të thotë ta zgjidhësh vetë. Do të thotë ta çosh problemin atje ku mund të merret vendimi i duhur, me informacionin e duhur.**
+**Të marrësh përgjegjësi nuk do të thotë ta zgjidhësh gjithmonë vetë. Do të thotë ta çosh problemin atje ku mund të merret vendimi i duhur, me informacionin e duhur.**
 
 ## Çfarë duhet të ketë një eskalim i mirë
 
@@ -95,9 +95,9 @@ Fjalën “kurrë” nuk do ta përdorja për problemet e vogla; konteksti mund 
 
 **Zgjidhe vetë** kur është brenda rolit tënd, standardi është i qartë, rreziku është i ulët dhe vendimi mund të kthehet mbrapsht.
 
-**Zgjidhe dhe njofto** kur mund ta zgjidhësh brenda autoritetit tënd, por situata ka rëndësi për turnin tjetër, për një KPI ose për klientin, ose mund të përsëritet. Vendi natyral për njoftimin është handover-i.
+**Zgjidhe dhe njofto** kur mund ta zgjidhësh brenda autoritetit tënd, por situata ka rëndësi për turnin tjetër, për një KPI ose për klientin, ose mund të përsëritet. Vendi natyral për njoftimin është dorëzimi i turnit.
 
-**Mos e prek dhe eskaloje** kur bëhet fjalë për sigurinë, security-n, pajtueshmërinë ose të dhëna të ndjeshme; për pagesa përtej autoritetit tënd, vendime disiplinore serioze ose një rrezik të madh financiar; ose për çdo situatë ku vendimi e tejkalon qartë përgjegjësinë e rolit.
+**Mos e prek dhe eskaloje** kur bëhet fjalë për sigurinë në punë, sigurinë fizike, pajtueshmërinë ose të dhëna të ndjeshme; për pagesa përtej autoritetit tënd, vendime disiplinore serioze ose një rrezik të madh financiar; ose për çdo situatë ku vendimi e tejkalon qartë përgjegjësinë e rolit.
 
 Në last mile, siç e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë një problem operacional brenda standardit. Sapo problemi prek sigurinë ose pajtueshmërinë, e prek klientin seriozisht ose kërkon një vendim përtej autoritetit të tij, çështja e iniciativës kthehet në çështje eskalimi.
 
@@ -123,4 +123,4 @@ Si lexohen përgjigjet:
 
 Kur eskalon, sill pesë gjërat e një eskalimi të mirë.
 
-Matrica nuk e zëvendëson gjykimin. I jep gjykimit të njëjtat pyetje, kushdo që të jetë në turn, dhe pikërisht kjo e bën eskalimin sistem e jo çështje temperamenti. Një sistem i mirë eskalimi nuk i mëson njerëzit të kërkojnë leje për çdo gjë. I mëson të kuptojnë kufirin e vendimit të tyre.
+Gjykimi mbetet te ai që është në turn. Matrica i shton vetëm të njëjtat pesë pyetje, kushdo qoftë ai, që eskalimi të mos varet më nga temperamenti. Aty ku dy kolegë do t'u përgjigjeshin ende ndryshe, ndoshta vetë kufiri është ajo që duhet çuar lart.

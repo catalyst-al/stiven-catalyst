@@ -5,8 +5,8 @@ category: Operacione
 series: without-you
 status: published
 featured: true
-summary: Një KPI që ekipi e beson nuk është domosdoshmërisht ajo që del gjithmonë jeshil, por ajo që mat qartë, lexohet drejt dhe i ndihmon njerëzit të përmirësohen.
-description: "Si ndërtohet një KPI që njerëzit e besojnë: katër tregues në last mile, rezultati dhe arsyeja, pse asnjë tregues nuk lexohet i vetëm, dhe karta e KPI-së."
+summary: Një KPI që ekipi i beson nuk del domosdoshmërisht gjithmonë e gjelbër. Mat qartë, lexohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
+description: "Si ndërtohet një KPI që njerëzit i besojnë: katër tregues në last mile, rezultati dhe arsyeja, pse asnjë tregues nuk lexohet i vetëm, dhe karta e KPI-së."
 teaser: Një KPI mund të jetë matematikisht e saktë dhe interpretimi i saj të jetë i padrejtë.
 deck: 'Eseja e gjashtë e serisë “Operacioni që punon pa ty”: përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi pas rezultatit, me kartën e një KPI-je që plotësohet para se të fillosh ta matësh.'
 relatedTools:
@@ -17,7 +17,7 @@ checklist:
   items:
     - Çfarë po matim?
     - Si llogaritet?
-    - Kush mund të ndikojë te rezultati?
+    - Kush mund të ndikojë në rezultat?
     - Cili është standardi?
     - Çfarë konteksti duhet kontrolluar?
     - Çfarë bëjmë kur devijon?
@@ -28,11 +28,11 @@ firstMove:
   - Lexoje pranë treguesit fqinj para se të reagosh ndaj saj.
 ---
 
-Le të supozojmë se një shofer niset me vonesë sepse porosia nuk ishte gati. Vonesa shfaqet te nisja dhe raporti e regjistron saktë. A lexohet pastaj drejt ky numër, kjo është tjetër punë: një KPI mund të llogaritet saktë dhe prapë të interpretohet padrejtësisht.
+Le të supozojmë se një shofer niset me vonesë sepse porosia nuk ishte gati. Vonesa shfaqet në nisje dhe raporti e regjistron saktë. A lexohet pastaj drejt ky numër, kjo është tjetër punë: një KPI mund të llogaritet saktë dhe prapë të interpretohet padrejtësisht.
 
-Te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/) shkrova se numri vetë nuk e përmirëson punën. Kjo ese merret me pyetjen që vjen pas: si ndërtohet një KPI që njerëzit e besojnë, që e kuptojnë, që nuk i ndëshkon për atë që nuk e kontrollojnë dhe që i çon te një veprim? Për mua, ky besim ndërtohet nga tri gjëra: **përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi që vjen pas rezultatit.**
+Te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/) shkrova se numri vetë nuk e përmirëson punën. Kjo ese merret me pyetjen që vjen pas: si ndërtohet një KPI që njerëzit i besojnë, që e kuptojnë, që nuk i ndëshkon për atë që nuk e kontrollojnë dhe që i çon te një veprim? Për mua, ky besim ndërtohet nga tri gjëra: **përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi që vjen pas rezultatit.**
 
-Ajo që vijon mbështetet te raportet dhe stand-up-et në last mile me të cilat kam punuar, si dhe te puna ime në Night Audit. Përkufizimet tregojnë si i kuptoja unë treguesit, jo formulat zyrtare të kompanisë. Shembujt e një numri të lexuar padrejtësisht ose të një KPI-je që nxit sjellje të gabuar janë ilustrime, jo raste të dokumentuara.
+Ajo që vijon mbështetet në raportet dhe stand-up-et në last mile me të cilat kam punuar, si dhe në punën time në Night Audit. Përkufizimet tregojnë si i kuptoja unë treguesit, jo formulat zyrtare të kompanisë. Shembujt e një numri të lexuar padrejtësisht ose të një KPI-je që nxit sjellje të gabuar janë ilustrime, jo raste të dokumentuara.
 
 ## Katër tregues në last mile
 
@@ -51,7 +51,7 @@ Kuptimi praktik i një treguesi dhe formula zyrtare që përdor një kompani jan
 
 Kam punuar me probleme që përfshinin më shumë se një fazë të procesit: çanta që mungonin, karroca të përziera, organizimi i ngarkesës dhe vonesa gjatë nisjes. Këto situata ma ndryshuan mënyrën si e shoh një KPI.
 
-Le të marrim shoferin që niset me vonesë sepse porosia nuk ishte gati. Problemi shfaqet te nisja, por kjo nuk do të thotë automatikisht se përgjegjësia është vetëm e shoferit. Siç e kam shkruar te [Gabimet humbasin mes departamenteve](/sq/insights/mistakes-get-lost-between-departments/), vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ka lindur.
+Le të marrim shoferin nga shembulli më lart. Problemi shfaqet në nisje, por kjo nuk do të thotë automatikisht se përgjegjësia është vetëm e shoferit. Siç e kam shkruar te [Gabimet humbasin mes departamenteve](/sq/insights/mistakes-get-lost-between-departments/), vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ka lindur.
 
 Prandaj, para se të vlerësoj performancën e dikujt, dua të kuptoj cilën pjesë të rezultatit mund ta kontrollonte vërtet.
 
@@ -85,13 +85,13 @@ Në hotel e kuptova edhe më mirë se një numër nuk e tregon gjithmonë gjith�
 
 ## Karta e një KPI-je
 
-Një KPI që ekipi e beson nuk është domosdoshmërisht ajo që del gjithmonë jeshil. Është ajo që mat qartë, lexohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
+Një KPI që ekipi i beson nuk është domosdoshmërisht ajo që del gjithmonë e gjelbër, por ajo që mat qartë, lexohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
 
 Para se të fillosh të matësh diçka, plotëso këto gjashtë rreshta. Nëse nuk i plotëson dot të gjashtë, KPI-ja nuk është ende gati për t'ia treguar ekipit.
 
 1. **Çfarë po matim?** Me fjalë që i kupton çdokush në ekip, jo vetëm ai që bën raportin.
 2. **Si llogaritet?** Çfarë numërohet, çfarë jo, dhe nga cili burim.
-3. **Kush mund të ndikojë te rezultati?** Cila pjesë është në dorë të personit dhe cila te procesi, te një fazë tjetër ose te një departament tjetër.
+3. **Kush mund të ndikojë në rezultat?** Cila pjesë është në dorë të personit dhe cila varet nga procesi, nga një fazë tjetër ose nga një departament tjetër.
 4. **Cili është standardi?** Çfarë quhet rezultat i mirë, dhe pse.
 5. **Çfarë konteksti duhet kontrolluar?** Cilët tregues të tjerë lexohen bashkë me të, që përmirësimi i njërit të mos fshehë përkeqësimin e tjetrit.
 6. **Çfarë bëjmë kur devijon?** Kush e sheh, kur, dhe cili është hapi i parë.

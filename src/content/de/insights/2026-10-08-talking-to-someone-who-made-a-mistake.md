@@ -45,13 +45,13 @@ Ich habe auf der letzten Meile als Team Leader On Road und danach als Area Manag
 
 ## Unter vier Augen, wenn die Fakten klar sind
 
-Grundsätzlich würde ich ein Korrekturgespräch lieber unter vier Augen führen, und erst dann, wenn ich die Fakten verstanden habe.
+Als Grundsatz gilt für mich: Ein Korrekturgespräch würde ich lieber unter vier Augen führen, und erst dann, wenn ich die Fakten verstanden habe. Das ist der Standard, für den ich stehe, kein Verfahren, das ich in jedem Fall eingehalten habe.
 
 Es gibt eine klare Ausnahme. Besteht eine unmittelbare Sicherheitsgefahr, greifen Sie sofort ein. Sie warten nicht auf das richtige Gespräch am richtigen Ort; Sie stoppen, was gerade passiert.
 
 ## Fehler der Person oder Fehler des Prozesses
 
-Diese Frage muss eine Führungskraft stellen, bevor sie jemanden beurteilt. Macht ein Mitarbeiter einen Fehler, will ich zuerst verstehen:
+Für mich ist das die Frage, die eine Führungskraft stellen muss, bevor sie jemanden beurteilt. Macht ein Mitarbeiter einen Fehler, will ich zuerst verstehen:
 
 - Kannte er den Standard?
 - War er eingearbeitet, und hatte er es verstanden?
@@ -105,4 +105,4 @@ Die Reihenfolge zählt. Wer mit Schritt vier beginnt, hat geurteilt, bevor er zu
 
 Der Bogen ist eine Orientierung für das Gespräch und ersetzt kein Disziplinarverfahren: Bei schweren Verstößen gelten die Sicherheits- und HR-Verfahren und die Richtlinien der Organisation.
 
-Ob das Gespräch gelungen ist, zeigt sich, wenn es vorbei ist. Der Mitarbeiter sollte nicht mit Angst vor dem nächsten Fehler hinausgehen, sondern mit dem Wissen, was er anders machen soll.
+Ob das Gespräch gelungen ist, zeigt sich später, an dem Tag, an dem die vereinbarte Maßnahme geprüft wird. Dann sieht man, ob der Mitarbeiter mit dem Wissen hinausgegangen ist, was er anders machen soll, oder nur mit der Angst vor dem nächsten Fehler.

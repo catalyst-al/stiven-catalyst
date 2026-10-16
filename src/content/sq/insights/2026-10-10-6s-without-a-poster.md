@@ -17,7 +17,7 @@ checklist:
   copy: Kopjo listën
   note: Listë orientuese me atë që do ta zbatoja sot, jo një procedurë historike që mund ta konfirmoj.
   items:
-    - Zona ka një standard të dukshëm, dhe dihet kush e kontrollon.
+    - Zona ka një standard të dukshëm dhe dihet kush e kontrollon.
     - Pajisjet janë në vendin e duhur.
     - Ngarkesat janë sistemuar, pa porosi të përziera.
     - Portat e ngarkimit janë mbyllur.
@@ -25,7 +25,7 @@ checklist:
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Kalo një zonë në fund të turnit: pajisjet në vend, ngarkesat të ndara, portat të mbyllura."
-  - Emëro kush e kontrollon atë zonë, dhe bëje standardin të dukshëm aty, jo në një poster diku tjetër.
+  - Emëro kush e kontrollon atë zonë dhe bëje standardin të dukshëm aty, jo në një poster diku tjetër.
   - Dorëzoji problemet e hapura të asaj zone turnit tjetër, me emër.
 ---
 
@@ -49,13 +49,13 @@ Në last mile kishte standarde konkrete:
 
 Dhe pikërisht aty kishim hasur probleme: karroca të përziera, ngarkesa të organizuara gabim, rregulla të rampës që nuk respektoheshin.
 
-Asnjëra prej tyre nuk është çështje kozmetike. Secila lidhet me një numër që del të nesërmen në raport. Një karrocë e përzier mund të kthehet në porosi jo të plotë, një produkt i vendosur keq në dëm. Një rampë e çrregullt e zgjat ngarkimin.
+Secili prej këtyre standardeve lidhet me një numër që del të nesërmen në raport. Një karrocë e përzier mund të kthehet në porosi jo të plotë, një produkt i vendosur keq në dëm. Një rampë e çrregullt e zgjat ngarkimin.
 
 ## Pse nuk është pastrim
 
 Kur dikush e sheh 6S si pastrim, do t'i thosha se pastrimi është vetëm një pjesë e saj.
 
-Vlera e 5S dhe e 6S është që puna bëhet më e organizuar, më e sigurt dhe më pak e varur nga kujtesa e një individi. Nëse dikush humbet kohë duke kërkuar pajisjen e duhur, nëse ngarkesat përzihen ose rregullat e rampës nuk respektohen, problemi shkon shumë përtej pamjes. Është problem operacional.
+Për mua, vlera e 5S dhe e 6S është që puna bëhet më e organizuar, më e sigurt dhe më pak e varur nga kujtesa e një individi. Nëse dikush humbet kohë duke kërkuar pajisjen e duhur, nëse ngarkesat përzihen ose rregullat e rampës nuk respektohen, pasojat i ndien vetë operacioni.
 
 **Një rampë e organizuar është më shumë se një rampë e pastër. Ajo e bën ngarkimin më të qartë, i nxjerr gabimet në pah më shpejt dhe i lë njerëzit të punojnë në kushte më të sigurta.**
 
@@ -63,7 +63,7 @@ Prandaj rregulli duhet të duket. Kur çdo gjë ka vendin e vet, ajo që nuk ës
 
 ## S-ja e gjashtë
 
-Në last mile, siguria ishte pjesë e vetë operacionit, jo një parim më vete në mur:
+Në last mile, siguria ishte pjesë e vetë operacionit:
 
 - mbyllja e portave pas ngarkimit;
 - rregullat se si lëviz dhe ku qëndron në rampë;
@@ -85,7 +85,7 @@ Sot do të rekomandoja që çdo zonë pune të ketë një standard të dukshëm 
 
 Nëse do ta ndërtoja sot, do ta mbaja të shkurtër. Pesë pika, për një zonë, në fund të çdo turni:
 
-1. **Zona ka një standard të dukshëm**, dhe dihet kush e kontrollon.
+1. **Zona ka një standard të dukshëm** dhe dihet kush e kontrollon.
 2. **Pajisjet janë në vendin e duhur.**
 3. **Ngarkesat janë sistemuar**, pa porosi të përziera.
 4. **Portat e ngarkimit janë mbyllur.**

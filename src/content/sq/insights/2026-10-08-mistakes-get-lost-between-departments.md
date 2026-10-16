@@ -36,9 +36,9 @@ Ajo që vijon vjen nga raste konkrete në kalimet e punës në hotel dhe në las
 
 ## Në hotel: kush e merr, kush e zgjidh, kush e mbyll
 
-Në hotel, kalimi më i dukshëm për mua ishte mes recepsionit, Housekeeping-ut dhe mirëmbajtjes.
+Në hotel, kalimi më i dukshëm për mua ishte mes recepsionit, shërbimit të katit dhe mirëmbajtjes.
 
-Kam pasur raste kur një mysafir raportonte problem me presionin e ujit në dush: recepsioni e merrte ankesën, por zgjidhja teknike i takonte mirëmbajtjes. Në një rast tjetër një banjë nuk ishte pastruar siç duhej, dhe problemi duhej ndjekur me Housekeeping-un.
+Kam pasur raste kur një mysafir raportonte problem me presionin e ujit në dush: recepsioni e merrte ankesën, por zgjidhja teknike i takonte mirëmbajtjes. Në një rast tjetër një banjë nuk ishte pastruar siç duhej, dhe problemi duhej ndjekur me shërbimin e katit.
 
 Në raste të tilla dalloj tri përgjegjësi të ndryshme:
 
@@ -48,7 +48,7 @@ Në raste të tilla dalloj tri përgjegjësi të ndryshme:
 
 Shpesh këta janë tre njerëz të ndryshëm. Dhe nëse për të tretën nuk përgjigjet askush, problemi mund t'i jetë “kaluar” departamentit të duhur, por mysafiri nuk e di nëse është zgjidhur. As ne.
 
-Një kalim tjetër i rëndësishëm ishte ai mes turneve. Night Audit merrte çështje të hapura nga turni i mëparshëm dhe duhej t'ia kalonte turnit të mëngjesit ato që nuk ishin përfunduar. Për këtë kam shkruar më gjatë te [eseja për handover-in](/sq/insights/why-the-handover-is-underrated/).
+Një kalim tjetër i rëndësishëm ishte ai mes turneve. Night Audit merrte çështje të hapura nga turni i mëparshëm dhe duhej t'ia kalonte turnit të mëngjesit ato që nuk ishin përfunduar. Për këtë kam shkruar më gjatë te [eseja për dorëzimin e turnit](/sq/insights/why-the-handover-is-underrated/).
 
 ## Në last mile: zinxhiri para shoferit
 
@@ -56,9 +56,9 @@ Në last mile, pikat e kalimit ishin edhe më të dukshme. Outbound përgatiste 
 
 Kam trajtuar raste me çanta që mungonin ose mbërrinin me vonesë, karroca të organizuara keq, ngarkesa të përziera dhe vonesa gjatë ngarkimit.
 
-Një shembull është mungesa e një çante gjatë ngarkimit. Rregulli ishte që shoferi të njoftonte Team Leader-in dhe të priste sipas procedurës, pa e nxjerrë karrocën nga zona e caktuar. Ky rregull e zgjidh çastin, por problemi duhet parë edhe më herët në zinxhir.
+Një shembull është mungesa e një çante gjatë ngarkimit. Rregulli ishte që shoferi të njoftonte Team Leader-in dhe të priste sipas procedurës, pa e nxjerrë karrocën nga zona e caktuar. Ky rregull e zgjidh çastin, por për mua problemi duhet parë edhe më herët në zinxhir.
 
-Nëse shoferi është gati, por porosia nuk është e plotë, vonesa shfaqet te nisja, dhe në raport mund të duket si vonesë e shoferit. Kjo nuk e bën automatikisht shoferin shkaktar. Një vonesë mund të ketë disa shkaqe: përgatitja e vonuar, çantat që mungojnë, organizimi i rampës ose gatishmëria e shoferit.
+Nëse shoferi është gati, por porosia nuk është e plotë, vonesa shfaqet në nisje, dhe në raport mund të duket si vonesë e shoferit. Kjo nuk e bën automatikisht shoferin shkaktar. Një vonesë mund të ketë disa shkaqe: përgatitja e vonuar, çantat që mungojnë, organizimi i rampës ose gatishmëria e shoferit.
 
 Një gabim mund të matet në një vend dhe të ketë lindur në një tjetër. Prandaj, kur shoh një KPI negative, nuk do të nisja duke kërkuar fajtorin. Fillimisht do të përpiqesha të kuptoja në cilën pikë të procesit filloi devijimi. Është e njëjta logjikë si te [Pareto dhe 5 Why](/sq/insights/pareto-and-5-why-in-practice/): numri të tregon ku ta kërkosh problemin, jo kush e shkaktoi.
 
@@ -66,7 +66,7 @@ Një gabim mund të matet në një vend dhe të ketë lindur në një tjetër. P
 
 ## “E njoftova” nuk mjafton
 
-Një kalim i mirë duhet të qartësojë dy gjëra: **kush përgjigjet për ta dorëzuar punën** dhe **kush përgjigjet për ta pranuar**.
+Për mua, një kalim i mirë duhet të qartësojë dy gjëra: **kush përgjigjet për ta dorëzuar punën** dhe **kush përgjigjet për ta pranuar**.
 
 Nuk mjafton që departamenti i parë të thotë: “E njoftova.” Duhet të jetë e qartë nëse departamenti tjetër e ka marrë përsipër çështjen, çfarë pritet të bëjë dhe nëse ka një afat.
 
@@ -76,7 +76,7 @@ Prandaj gabimet mes departamenteve kapen kaq vështirë. Parë nga brenda, secil
 
 ## Statusi, përgjegjësia, konfirmimi
 
-Në hotel, një handover i strukturuar kishte shumë rëndësi. Nëse një problem nuk zgjidhej gjatë natës, duhej të mbetej i dokumentuar dhe i dukshëm për turnin tjetër. Prandaj doja që shënimet të tregonin çfarë ishte ende e hapur, e jo vetëm të përmblidhnin ngjarjet.
+Në hotel, një dorëzim i strukturuar i turnit kishte shumë rëndësi. Nëse një problem nuk zgjidhej gjatë natës, duhej të mbetej i dokumentuar dhe i dukshëm për turnin tjetër. Prandaj doja që shënimet të tregonin çfarë ishte ende e hapur, e jo vetëm të përmblidhnin ngjarjet.
 
 Në last mile ndihmonin procedurat e qarta të njoftimit, kontaktet me Team Leader-at dhe koordinimi mes Last Mile, Outbound dhe DSP-ve.
 

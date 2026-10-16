@@ -61,7 +61,7 @@ In last mile, the handover points were even more visible. Outbound prepared the 
 
 I handled cases with bags that were missing or arrived late, trolleys that were badly organised, mixed loads and delays during loading.
 
-One example is a bag missing during loading. The rule was that the driver informed the Team Leader and waited according to the procedure, without moving the trolley out of the designated area. That rule handles the moment, but the problem also has to be looked at further back.
+One example is a bag missing during loading. The rule was that the driver informed the Team Leader and waited according to the procedure, without moving the trolley out of the designated area. That rule handles the moment, but to me the problem also has to be looked at further back.
 
 If the driver is ready but the order is not complete, the delay shows up at departure, and in the report it may look like a driver delay. That does not automatically make the driver the cause. A delay can have several: late preparation, missing bags, the organisation of the dock, or the driver's readiness.
 
@@ -71,7 +71,7 @@ A mistake can be measured in one place and born in another. So when I see a nega
 
 ## “I informed them” is not enough
 
-A good handover has to make two things clear: **who is responsible for handing the work over** and **who is responsible for accepting it**.
+For me, a good handover has to make two things clear: **who is responsible for handing the work over** and **who is responsible for accepting it**.
 
 It is not enough for the first department to say “I informed them.” It has to be clear whether the other department has taken the matter on, what it is expected to do, and whether there is a deadline.
 

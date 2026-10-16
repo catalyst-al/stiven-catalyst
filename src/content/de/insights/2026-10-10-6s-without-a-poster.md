@@ -49,13 +49,13 @@ Auf der letzten Meile gab es konkrete Standards:
 
 Und genau an diesen Stellen hatten wir Probleme: vermischte Trolleys, falsch organisierte Ladungen, Rampenregeln, die nicht eingehalten wurden.
 
-Nichts davon ist Kosmetik. Jeder Punkt hängt an einer Zahl, die am nächsten Tag im Bericht steht. Aus einem vermischten Trolley kann eine unvollständige Bestellung werden, aus einem schlecht platzierten Produkt ein Schaden. Eine ungeordnete Rampe verlängert das Verladen.
+Jeder dieser Standards hängt an einer Zahl, die am nächsten Tag im Bericht steht. Aus einem vermischten Trolley kann eine unvollständige Bestellung werden, aus einem schlecht platzierten Produkt ein Schaden. Eine ungeordnete Rampe verlängert das Verladen.
 
 ## Warum es kein Putzen ist
 
 Wer 6S für Putzen hält, dem würde ich sagen, dass Putzen nur ein Teil davon ist.
 
-Der Wert von 5S und 6S liegt darin, dass die Arbeit organisierter und sicherer wird und weniger vom Gedächtnis eines Einzelnen abhängt. Wenn jemand Zeit verliert, weil er das richtige Arbeitsmittel sucht, wenn Ladungen vermischt werden oder die Rampenregeln nicht eingehalten werden, geht das Problem weit über das Aussehen hinaus. Es ist ein betriebliches.
+Für mich liegt der Wert von 5S und 6S darin, dass die Arbeit organisierter und sicherer wird und weniger vom Gedächtnis eines Einzelnen abhängt. Wenn jemand Zeit verliert, weil er das richtige Arbeitsmittel sucht, wenn Ladungen vermischt werden oder die Rampenregeln nicht eingehalten werden, schlägt sich das im Betrieb nieder.
 
 **Eine organisierte Rampe ist mehr als eine saubere Rampe. Sie macht das Verladen klarer, lässt Fehler schneller erkennen und lässt Menschen unter sichereren Bedingungen arbeiten.**
 
@@ -63,7 +63,7 @@ Deshalb muss Ordnung sichtbar sein. Wenn alles seinen Platz hat, fällt auf, was
 
 ## Das sechste S
 
-Auf der letzten Meile war Sicherheit Teil des Betriebs selbst und kein eigenes Prinzip an der Wand:
+Auf der letzten Meile war Sicherheit Teil des Betriebs selbst:
 
 - die Tore nach dem Verladen schließen;
 - die Regeln, wie man sich an der Rampe bewegt und wo man steht;
@@ -79,7 +79,7 @@ Das meiste davon ist Ordnung, Sicherheit und Qualität zugleich. Ein geschlossen
 
 An einem ruhigen Tag sieht fast jede Rampe ordentlich aus. An einem Tag mit hohem Volumen, fehlenden Leuten und Verspätungen sieht man, ob der Standard Teil der Arbeit ist oder etwas, das man erledigt, wenn Zeit ist.
 
-Heute würde ich empfehlen, dass jeder Arbeitsbereich einen sichtbaren Standard hat und jemanden, der ihn kontrolliert. Am Schichtende würde ich prüfen, ob die Arbeitsmittel an ihrem Platz sind, ob die Ladungen sortiert sind und ob offene Punkte an die nächste Schicht übergeben wurden. 6S muss Teil der täglichen Arbeitsweise sein, nicht etwas, das man vor einer Kontrolle macht.
+Heute würde ich empfehlen, dass jeder Arbeitsbereich einen sichtbaren Standard hat und jemanden, der ihn kontrolliert. Am Schichtende würde ich prüfen, ob die Arbeitsmittel an ihrem Platz sind, ob die Ladungen sortiert sind und ob offene Punkte an die nächste Schicht übergeben wurden. 6S sollte Teil der täglichen Arbeitsweise sein, nicht etwas, das man vor einer Kontrolle macht.
 
 ## Kontrolle eines Bereichs am Schichtende
 

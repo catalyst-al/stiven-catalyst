@@ -40,7 +40,7 @@ Das ist der größte Unterschied zwischen den beiden Arten, wie ich auf der letz
 
 Die Probleme sind dieselben. Meine Position ihnen gegenüber ist eine völlig andere.
 
-Dieser Essay vergleicht die beiden Positionen aus der Sicht von jemandem, der beide kennt. Er ist meine Analyse, kein gemessenes Ergebnis und keine Erfolgsgeschichte. Interne Details wie die Systeme und was sie anzeigen, die Kommunikationswege und die Schichtzeiten lasse ich weg, und aus der Remote-Rolle habe ich keinen Vorfall, der vom Anfang bis zur Lösung dokumentiert ist. Die dokumentierten Fälle, die ich habe, mit Fahrzeugen und mit Verspätungen, stammen aus meiner früheren Arbeit auf der letzten Meile, und ich stelle sie nicht als aus der Ferne gelöst dar.
+Dieser Essay vergleicht die beiden Positionen aus der Sicht von jemandem, der beide kennt. Er ist meine Analyse, kein gemessenes Ergebnis und keine Erfolgsgeschichte. Interne Details lasse ich weg, manche davon kenne ich auch nicht genau: die Systeme und was sie anzeigen, die Kommunikationswege und die Schichtzeiten. Aus der Remote-Rolle habe ich keinen Vorfall, der vom Anfang bis zur Lösung dokumentiert ist. Die dokumentierten Fälle, die ich habe, mit Fahrzeugen und mit Verspätungen, stammen aus meiner früheren Arbeit auf der letzten Meile, und ich stelle sie nicht als aus der Ferne gelöst dar.
 
 ## Was man verliert
 
@@ -56,7 +56,7 @@ Die Entfernung hat auch ihre Vorteile.
 
 An der Rampe sehen Sie gut, was vor Ihnen liegt. Aus der Ferne können Sie, wenn Informationen und Werkzeuge es hergeben, die Koordination vieler Touren als einen Betrieb sehen: alle Fahrzeuge zugleich, und ob sich irgendwo Verspätungen häufen, statt immer nur eine einzelne Verspätung.
 
-Das kommt nicht von selbst. Es gelingt nur, wenn die Informationen, die Sie bekommen, ausreichend und verlässlich sind.
+Dieser Blick hängt davon ab, dass die Informationen, die Sie bekommen, ausreichend und verlässlich sind.
 
 ## Information wird zur Arbeit
 
@@ -66,11 +66,11 @@ Aus der Ferne zählen drei Dinge noch mehr als an der Rampe: die Qualität der I
 
 An der Rampe können Sie unklare Informationen ausgleichen, indem Sie hingehen und nachsehen. Aus der Ferne geht das nicht. Unklare Information bleibt unklar, und jede Entscheidung, die darauf beruht, ebenso.
 
-Für die Kommunikation halte ich mich an einen Grundsatz: Sie sollte kurz und klar sein und sagen, welche Maßnahme nötig ist. Eine Nachricht, die drei Rückfragen braucht, um verstanden zu werden, hat die Zeit verloren, die sie sparen sollte.
+Für die Kommunikation habe ich keine eigenen dokumentierten Regeln, aber ich glaube, sie sollte kurz und klar sein und sagen, welche Maßnahme nötig ist. Eine Nachricht, die drei Rückfragen braucht, um verstanden zu werden, hat die Zeit verloren, die sie sparen sollte.
 
 ## Worauf ich achten würde
 
-Heute würde ich auf drei Dinge achten.
+Auch eine dokumentierte Methode, Probleme früh zu erkennen, habe ich nicht. Heute würde ich auf drei Dinge achten.
 
 **Abweichungen, die sich wiederholen.** Eine Verspätung ist ein Ereignis. Dieselbe Verspätung, am selben Ort, mehrere Tage hintereinander, ist ein Muster.
 
@@ -86,4 +86,4 @@ Das verbindet diesen Essay mit der ganzen Reihe. Eine Verbesserung hält, wenn s
 
 Das Blatt unten können Sie für ein Problem ausfüllen, das Sie nicht sehen, und kopieren. Der [Last-Mile CX Control Tower](/de/tools/cx-control-tower/) sammelt die Fälle, Maßnahmen und Ursachen vieler Touren in einer Ansicht, damit der Betrieb als Ganzes sichtbar wird und nicht als hundert Telefonate.
 
-An der Rampe steht das Problem vor Ihnen. Aus der Ferne suchen Sie es entweder, oder Sie haben einen Weg gebaut, auf dem es von selbst zu Ihnen kommt.
+An der Rampe steht das Problem vor Ihnen. Aus der Ferne suchen Sie es entweder, oder Sie haben einen Weg geschaffen, auf dem es von selbst zu Ihnen kommt.

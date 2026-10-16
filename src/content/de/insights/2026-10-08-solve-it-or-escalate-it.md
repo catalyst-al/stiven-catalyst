@@ -43,7 +43,7 @@ Zwischen diesen beiden Extremen liegt eine der wichtigsten Fragen für einen Bet
 
 In [Führung ohne Titel](/de/insights/leadership-without-a-title/) habe ich geschrieben, dass Initiative und Befugnis zwei verschiedene Dinge sind. Dieser Essay versucht, aus diesem Unterschied eine klare Regel zu machen, statt ihn dem persönlichen Gefühl zu überlassen.
 
-Er stützt sich auf zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? Technische Probleme in Zimmern gingen an die Haustechnik; Housekeeping-Themen gingen an diese Abteilung und zur Nachverfolgung in die Übergabe. Auf der letzten Meile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
+Er stützt sich auf zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? In den Fällen, die ich hatte, gingen technische Probleme in Zimmern an die Haustechnik; Housekeeping-Themen übernahm diese Abteilung, und zur Nachverfolgung kamen sie in die Übergabe. Auf der letzten Meile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
 
 Was mir dagegen fehlt, ist eine Dokumentation darüber, wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren, und ein dokumentierter Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand. Die Stufen und die Matrix weiter unten zeigen, wo ich die Linie heute ziehen würde. Beschreiben kann ich das Prinzip, nach dem ich seit der Einarbeitung gearbeitet habe.
 
@@ -63,15 +63,15 @@ Und ein Betrieb, der davon abhängt, wer Schicht hatte, ist noch kein Betrieb, d
 
 ## Die drei Fehler
 
-Was jetzt folgt, ist meine Meinung, keine Statistik aus meiner Erfahrung.
+Die drei Fehler beschreiben meine Meinung; eine Statistik aus meiner eigenen Erfahrung habe ich dafür nicht.
 
 **Der erste: Alles wird eskaliert.** Der Mitarbeiter lernt nie, Verantwortung zu übernehmen. Jede Abweichung wird zum Problem des Chefs, und der Chef wird zu dem Punkt, an dem der ganze Betrieb stockt.
 
-**Der zweite: Nichts wird eskaliert.** Das ist der gefährlichste. Der Mitarbeiter hält ein Problem womöglich auch dann noch in seiner Rolle fest, wenn es die Grenze seiner Befugnis, des Risikos oder seiner Kompetenz schon überschritten hat. Kommt es schließlich ans Licht, dann meist größer und später.
+**Der zweite: Nichts wird eskaliert.** Das ist der gefährlichste. Der Mitarbeiter hält ein Problem womöglich auch dann noch in seiner Rolle fest, wenn es die Grenze seiner Befugnis, des Risikos, das er tragen kann, oder seiner Kompetenz schon überschritten hat. Kommt es schließlich ans Licht, dann meist größer und später.
 
 **Der dritte: Eskalation ohne Information.** Diesen Fehler halte ich für sehr häufig. Das Problem wandert eine Ebene höher, ohne einer Lösung näherzukommen. Wer es bekommt, muss zehn Fragen stellen, nur um die Grundfakten zu erfahren, und die Zeit, die dabei verloren geht, ist oft genau die Zeit, die die Entscheidung gebraucht hätte.
 
-**Verantwortung übernehmen heißt nicht, es selbst zu lösen. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.**
+**Verantwortung übernehmen heißt nicht, es immer selbst zu lösen. Es heißt, das Problem dorthin zu bringen, wo die richtige Entscheidung getroffen werden kann, mit den richtigen Informationen.**
 
 ## Was eine gute Eskalation enthält
 
@@ -123,4 +123,4 @@ So lesen Sie die Antworten:
 
 Wenn Sie eskalieren, bringen Sie die fünf Dinge einer guten Eskalation mit.
 
-Die Matrix ersetzt kein Urteilsvermögen. Sie gibt dem Urteil dieselben Fragen vor, egal wer Schicht hat, und erst das macht Eskalation zu einem System statt zu einer Frage des Temperaments. Ein gutes Eskalationssystem bringt Menschen nicht bei, für alles um Erlaubnis zu fragen. Es bringt ihnen bei, die Grenze ihrer eigenen Entscheidung zu verstehen.
+Das Urteil bleibt bei dem, der Schicht hat. Die Matrix gibt ihm nur dieselben fünf Fragen vor, ganz gleich, wer es ist, damit Eskalation nicht länger vom Temperament abhängt. Würden zwei Kollegen sie trotzdem unterschiedlich beantworten, ist wahrscheinlich die Grenze selbst das, was Sie nach oben geben sollten.
