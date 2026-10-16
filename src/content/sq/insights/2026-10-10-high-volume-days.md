@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Presioni nuk i krijon gjithmonë problemet. Shpesh i bën më të dukshme.
-teaser: Kishim ditë kur kërkesa ishte më e lartë se parashikimi. Shoferë të thirrur me njoftim të shkurtër, disa ende në ramp-up. Atë ditë shihej sa ishte përgatitur vërtet operacioni.
+teaser: Kishim ditë kur kërkesa ishte më e lartë se parashikimi. Shoferë të thirrur në minutën e fundit, disa ende në ramp-up. Në ato ditë shihej sa i përgatitur ishte operacioni.
 description: "Ditët kur kërkesa kalonte parashikimin në last mile: ku binte presioni, pse kapaciteti nuk matet vetëm me njerëz, dhe pesë kontrolle para ditës së madhe."
 deck: 'Eseja e tetë e serisë “Përmirësimi që mbahet”: ditët kur kërkesa kalonte parashikimin, ku binte presioni, pse kapaciteti nuk është numri i njerëzve, dhe pesë kontrolle para ditës së madhe.'
 relatedTools:
@@ -24,64 +24,50 @@ checklist:
     - Para turnit është sqaruar kush vendos dhe kush njoftohet kur situata ndryshon.
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Numëro njerëzit që e bëjnë dot punën sipas standardit, jo njerëzit në plan.
+  - Numëro njerëzit që dinë ta bëjnë punën sipas standardit, jo njerëzit në plan.
   - Thuaj para turnit cilat standarde nuk do të thyhen, pavarësisht volumit.
   - Bëje të qartë kush vendos, dhe kush njoftohet, kur plani nuk mjafton.
 ---
 
-Kishim ditë kur kërkesa ishte më e lartë se parashikimi.
+Në disa ditë në last mile, kërkesa e kalonte parashikimin. Shoferët duhej të thirreshin në minutën e fundit, disa mbërrinin me vonesë, dhe disa, ende në fazën e ramp-up, nuk ishin mësuar plotësisht me SOP-të. E gjithë kjo binte mbi organizimin e ngarkimit dhe mbi orarin e nisjeve. Kështu është shënuar në raportimet e mia nga last mile, në qershor 2025.
 
-Duheshin shoferë të thirrur me njoftim të shkurtër. Kishte raste kur shoferët mbërrinin me vonesë. Disa prej tyre, në fazën e ramp-up, nuk ishin ende plotësisht të përshtatur me SOP-të. Dhe e gjithë kjo binte mbi organizimin e ngarkimit dhe mbi orarin e nisjeve.
-
-Kështu e kam të shkruar në raportimet e mia nga last mile, në qershor 2025.
-
-Në ato ditë kuptova diçka që një ditë e zakonshme nuk ta tregon.
-
-## Çfarë kam dhe çfarë nuk kam
-
-Nuk e kam datën e një dite specifike, numrin total të porosive apo vonesën e saktë të nisjeve. Dhe këto nuk ishin domosdoshmërisht ditë festash. Ishin situata reale presioni operacional, jo një sezon i konfirmuar.
-
-Nuk e di cili standard prishej i pari kur rritej volumi, dhe nuk dua të krijoj një renditje pa të dhëna. Kishte planifikim operacional të shoferëve, të automjeteve dhe të nisjeve, por për një plan zyrtar peak, me nivele kapaciteti dhe procedura të veçanta, nuk e di. Nuk kam të konfirmuar as një briefing të veçantë që e kam drejtuar vetë para një dite të tillë, as një checklist për përgatitjen e saj.
-
-Dhe nuk kam një vendim konkret ku mund të shpjegoj me siguri çfarë lashë mënjanë për të mbrojtur një prioritet tjetër. Nuk do të shpik një të tillë për ta bërë esenë më dramatike.
+Raportimet nuk e japin datën e një dite të caktuar, numrin total të porosive apo vonesën e saktë të nisjeve. As nuk ishin domosdoshmërisht ditë festash: ishin situata reale presioni operacional, jo një sezon i konfirmuar. Shoferët, automjetet dhe nisjet planifikoheshin operacionalisht, por nuk di për ndonjë plan zyrtar peak me nivele kapaciteti dhe procedura të veçanta, dhe nuk mund të them cili standard u lëkund i pari kur u rrit volumi. Megjithatë, ato ditë më treguan diçka që një ditë e zakonshme nuk ta tregon.
 
 ## Ku binte presioni
 
-Si Area Manager kisha katër Shift Leaders dhe tetë Dispatchers. Në daily stand-up flisnim për rezultatet e KPI-ve, problemet e ngarkimit, vonesat, sigurinë dhe koordinimin operacional.
+Si Area Manager kisha katër Shift Leaders dhe tetë dispeçerë. Në daily stand-up flisnim për rezultatet e KPI-ve, problemet e ngarkimit, vonesat, sigurinë dhe koordinimin operacional.
 
-Nga problemet e dokumentuara, pikat që kërkonin vëmendje kur rritej presioni ishin këto:
+Problemet e dokumentuara tregojnë ku duhej vëmendje kur rritej presioni:
 
-- organizimi i trolley-ve dhe i ngarkesave;
+- organizimi i karrocave dhe i ngarkesave;
 - koha e ngarkimit dhe respektimi i orarit të nisjes;
-- skanimi i produkteve në zonat e përcaktuara;
+- skanimi i produkteve në zonat e caktuara;
 - disiplina dhe siguria në rampë;
-- komunikimi mes shoferëve, dispeçerëve dhe përgjegjësve të turnit.
+- komunikimi mes shoferëve, dispeçerëve dhe Shift Leaders.
 
-Nuk janë probleme të reja. Janë të njëjtat që shfaqen në një ditë të zakonshme. Vetëm se në ditën e rëndë nuk ka më kohë t'i fshehësh.
+Asnjë nga këto probleme nuk është i ri. Të njëjtat shfaqen edhe në një ditë të zakonshme. Presioni nuk i krijon gjithmonë problemet. Shpesh i bën më të dukshme, sepse në ditën e rëndë nuk mbetet më kohë për t'i fshehur.
 
-**Presioni nuk i krijon gjithmonë problemet. Shpesh i bën më të dukshme.**
+## Kapaciteti është më shumë se numri i njerëzve
 
-## Kapaciteti nuk është një numër
+Në ditë të tilla, pyetja e parë zakonisht është: sa shoferë kemi?
 
-Në ditë të tilla, pyetja e parë është zakonisht: sa shoferë kemi?
-
-Por fjalia që më ka mbetur nga ato raportime është tjetër: disa shoferë në ramp-up nuk ishin ende plotësisht të përshtatur me SOP-të. Ishin aty. Numëroheshin. Por nuk mund ta bënin ende punën njësoj si të tjerët.
+Por fjalia që më ka mbetur nga ato raportime është tjetër: disa shoferë në ramp-up nuk ishin mësuar ende plotësisht me SOP-të. Ishin aty. Numëroheshin. Punën nuk e bënin dot ende si të tjerët.
 
 **Kapaciteti nuk është vetëm numri i njerëzve që ke në dispozicion. Është numri i njerëzve që mund ta kryejnë punën sipas standardit.**
 
-E njëjta gjë vlen për automjetet. Në gusht 2025 pati një problem me disponibilitetin e tyre: një DSP nuk po përdorte automjetet e veta, dhe kapaciteti rezervë ishte tashmë i planifikuar. Në letër kishte rezervë. Në praktikë, rezerva ishte zënë.
+Njësoj është edhe me automjetet. Në gusht 2025, disponueshmëria e tyre u bë problem: një DSP nuk po i përdorte automjetet e veta, dhe kapaciteti rezervë ishte planifikuar tashmë. Në letër kishte rezervë. Në praktikë, rezerva ishte zënë.
 
-Te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/) shkrova pse një njeri i ri nuk është gati vetëm sepse ka parë dikë tjetër ta bëjë punën. Dita me shumë volum është ajo ku kjo kuptohet më shtrenjtë.
+Te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/) shkrova pse një njeri i ri nuk është gati vetëm sepse ka parë dikë tjetër ta bëjë punën. Dita me shumë volum është ajo ku ky mësim kushton më shtrenjtë.
 
 ## Çfarë zbulon dita e rëndë
 
-Kur kërkesa rritet, kuptohet sa mirë është përgatitur operacioni, sa qartë janë përcaktuar përgjegjësitë dhe sa të aftë janë njerëzit ta zbatojnë standardin.
+Kur kërkesa rritet, del në pah sa mirë është përgatitur operacioni, sa qartë janë ndarë përgjegjësitë dhe sa të aftë janë njerëzit ta zbatojnë standardin.
 
-Te [6S pa poster](/sq/insights/6s-without-a-poster/) shkrova se rregulli provohet në ditën e vështirë. Këtu është e njëjta ide, nga ana e planit. Një plan që funksionon vetëm kur gjithçka shkon sipas parashikimit nuk është plan për ditën e rëndë. Është përshkrim i ditës së zakonshme.
+Te [6S pa poster](/sq/insights/6s-without-a-poster/) shkrova se rregulli provohet në ditën e vështirë. E njëjta gjë vlen për planin. Një plan që funksionon vetëm kur gjithçka shkon sipas parashikimit është përshkrim i një dite të zakonshme, jo plan për ditën e rëndë.
 
 ## Para ditës së madhe
 
-Sot, një menaxheri para ditës së parë të madhe të sezonit do t'i thosha të mos presë derisa të rritet volumi për të zbuluar nëse ekipi është gati. Do t'i rekomandoja pesë gjëra:
+Sot, një menaxheri përpara ditës së parë të madhe të sezonit do t'i thosha: mos prit derisa të rritet volumi për të zbuluar nëse ekipi është gati. Do t'i rekomandoja pesë gjëra, si këshillë për sot dhe jo si një plan që pretendoj se e kam zbatuar të plotë atëherë:
 
 1. **Të kontrollojë kapacitetin real**, jo vetëm numrin e shoferëve të planifikuar.
 2. **Të verifikojë nëse njerëzit e rinj janë trajnuar** për procesin.
@@ -89,10 +75,8 @@ Sot, një menaxheri para ditës së parë të madhe të sezonit do t'i thosha t�
 4. **Të ketë një plan** për mungesat, vonesat dhe problemet me automjetet.
 5. **Të sqarojë para turnit kush vendos** dhe kush duhet njoftuar kur situata ndryshon.
 
-Këto janë rekomandimet e mia sot, jo një plan historik që pretendoj se e kam zbatuar të plotë.
-
-Pika e tretë është ajo që, për mua, ka më shumë rëndësi. Në ditën e rëndë, diçka do të shtyhet. Pyetja është nëse e ke vendosur më parë çfarë nuk shtyhet kurrë, apo e vendos në mes të presionit.
-
-Lista më poshtë mund të shënohet këtu dhe të kopjohet para turnit. [Analiza e vonesave](/sq/tools/delay-analyzer/) ndan pas ditës sa nga vonesa nisi te rampa dhe sa në rrugë, që dita e rëndë e radhës të nisë me më shumë se një kujtim.
+Pika e tretë është ajo që peshon më shumë për mua. Në ditën e rëndë, diçka do të shtyhet. Pyetja është nëse e ke vendosur më parë çfarë nuk shtyhet kurrë, apo e vendos në mes të presionit.
 
 **Standardi nuk provohet në ditën kur gjithçka shkon sipas planit. Provohet në ditën kur plani nuk mjafton.**
+
+Para turnit, shëno listën më poshtë dhe kopjoje. Pas ditës, [Analiza e vonesave](/sq/tools/delay-analyzer/) ndan sa nga vonesa nisi në rampë dhe sa në rrugë, që dita e rëndë e radhës të nisë me më shumë se një kujtim.

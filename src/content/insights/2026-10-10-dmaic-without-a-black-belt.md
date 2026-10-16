@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: DMAIC in five questions
   fill: true
-  note: A guide to how I would do it today. It is not a formal Six Sigma project I have led.
+  note: A guide to how I would do it today, not a formal Six Sigma project I have led.
   items:
     - label: What is the concrete problem?
       hint: One problem, one place, one period. Not “quality is poor”.
@@ -47,21 +47,13 @@ But knowing the name of a method is not enough to claim you have applied it.
 
 This essay sits between those two sentences.
 
-DMAIC is the Six Sigma cycle for improving a process: Define, Measure, Analyze, Improve, Control. Define the problem, measure it, analyse the causes, improve, and check that the improvement holds. In books it looks like a big project, with a team, a deadline and someone wearing a coloured belt.
+DMAIC is the Six Sigma cycle for improving a process: Define, Measure, Analyze, Improve, Control. You define the problem, measure it, analyse the causes, improve, and check that the improvement holds. In books it looks like a big project, with a team, a deadline and someone wearing a coloured belt.
 
-## What I have and what I do not
-
-Six Sigma, Pareto and 5 Why are methods I know and have made part of how I think about management. Where exactly I learned them, on a course, at university or on my own, I do not know. And I do not have a confirmed certificate, not Yellow, Green or Black Belt.
-
-I also do not have a concrete project where I applied and documented all five phases of DMAIC. I will not claim to have led a formal Six Sigma project without proof.
-
-Even for Pareto and 5 Why, I do not have a confirmed case where I can show that I applied them myself from start to finish. In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about a 5 Why with only two documented “whys”, and why I did not fill in the rest.
-
-What I do have is experience with real operational problems in last mile: Damage, Incomplete, Delay and Loading Time.
+What I bring to it is experience with real operational problems in last mile: Damage, Incomplete, Delay and Loading Time. Six Sigma, Pareto and 5 Why are methods I know and have made part of how I think about management. I have no confirmed certificate, Yellow, Green or Black Belt, and no project in which I applied and documented all five phases of DMAIC. Even for Pareto and 5 Why, I cannot show a case I carried through myself from start to finish. In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about a 5 Why with only two documented “whys”, and why I did not fill in the rest.
 
 ## The five phases, as I actually had them
 
-If I set that experience against DMAIC, without dressing it up, it looks like this:
+Set against DMAIC, without dressing it up, that experience looks like this:
 
 **Define.** We worked with problems defined through the KPIs.
 
@@ -69,37 +61,35 @@ If I set that experience against DMAIC, without dressing it up, it looks like th
 
 **Analyze.** We looked into the reasons for delays, missing bags and problems with how loads were organised.
 
-**Improve.** Which concrete measures I put in place myself, and what their results were, I do not know precisely.
+**Improve.** Which measures I put in place myself, and what they achieved, I cannot say precisely.
 
-**Control.** Whether there was a documented system of control after improvements, I do not know.
+**Control.** Whether there was a documented system of control after an improvement, I do not know.
 
-This list tells me something. The first three phases are the ones an operation almost does by itself, because the report demands them every day: there is a problem, there is a number, there is a question “why”. The last two phases are the ones that need someone to hold them. And they are exactly the ones I have the least proof for.
+The list is revealing. The first three phases are the ones an operation almost does by itself, because the report demands them every day: there is a problem, there is a number, there is a “why”. The last two need someone to hold them, and they are the ones I have the least proof for.
 
 {diagram}
 
 ## The discipline not to jump
 
-For me, the value of DMAIC is not in the name, nor in the certificate.
-
 **The value of DMAIC lies in the discipline not to jump straight from the problem to the solution.**
 
-First understand the problem. Then measure, analyse the causes, try the improvement and check whether it keeps working.
+Neither the name nor a certificate gives you that. You first understand the problem, then measure it, analyse the causes, try the improvement and check whether it keeps working.
 
-In operations, the temptation is always the jump. The KPI comes out bad, and someone has a solution straight away. In [A bad day or a problem?](/insights/a-bad-day-or-a-problem/) I wrote about the risk of changing the rules after every fluctuation. DMAIC is the structured way to avoid that: between the problem and the solution there are three steps, and none of them is skipped.
+In operations, the temptation is always the jump. The KPI comes out bad, and someone has a solution straight away. In [A bad day or a problem?](/insights/a-bad-day-or-a-problem/) I wrote about the risk of changing the rules after every fluctuation. DMAIC is the structured way to avoid it: between the problem and the solution lie three steps, and you skip none of them.
 
 ## Control, the hardest phase
 
-Today I would single out Control, keeping the improvement. I present this as my view as a manager, not as the conclusion of a formal project I led.
+Of the five phases, today I would single out Control: keeping the improvement.
 
-A problem can be solved for a while. But if the standard is not documented, people are not trained and the result is not checked, there is a risk that the problem comes back.
+A problem can be solved for a while. But if the standard is not documented, people are not trained and nobody checks the result, the problem risks coming back.
 
-That is why this series is called “Improvement that holds”. The improvement has to continue even when the manager who started it is no longer there. If it only holds as long as that person is there, it was not an improvement of the process. It was one person's presence.
+That is why this series is called “Improvement that holds”. The improvement has to continue after the manager who started it has gone. If it only holds as long as that person is there, it was not an improvement of the process. It was one person's presence.
 
 **A problem is not solved just because it did not happen again today.**
 
 ## For the shift manager
 
-I would tell a shift manager that they do not need to be a Black Belt to start thinking systematically. They can start with five questions, one for each phase:
+I would tell a shift manager that they do not need to be a Black Belt to start thinking systematically. Five questions are enough to begin with, one for each phase:
 
 1. **What is the concrete problem?**
 2. **How do we measure it?**
@@ -107,8 +97,8 @@ I would tell a shift manager that they do not need to be a Black Belt to start t
 4. **What can we change?**
 5. **How will we check that the improvement lasts?**
 
-There is no need to turn every problem on the shift into a complex project. But they should avoid changing procedures just because a KPI came out bad.
+Not every problem on the shift has to become a complex project. But they should avoid changing procedures just because a KPI came out bad.
 
-You can fill in the sheet below here for a single problem and copy it. If you want to see what the whole cycle looks like on a complete case, [Six Sigma in the Warehouse](/tools/six-sigma-dmaic/) follows a teaching case step by step. It is an example to learn from, not a story from my work.
+You can fill in the sheet below for a single problem and copy it. If you want to see the whole cycle on a complete case, [Six Sigma in the Warehouse](/tools/six-sigma-dmaic/) follows a teaching case step by step. It is an example to learn from, not a story from my work.
 
-Five questions do not make you a black belt. But they stop you jumping from the problem to the solution. And on an ordinary shift, that is half the work.
+Five questions will not make you a black belt. They do stop you jumping from the problem to the solution, and on an ordinary shift that is half the work.

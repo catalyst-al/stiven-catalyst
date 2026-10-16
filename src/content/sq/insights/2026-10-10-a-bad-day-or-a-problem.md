@@ -6,21 +6,21 @@ series: improvement
 status: published
 featured: true
 summary: Një ditë e keqe është sinjal për të kontrolluar. Nuk është automatikisht provë se i gjithë procesi duhet ndryshuar.
-teaser: 2,8%. Kaq ishte Delay në një raport të qershorit 2025. Ishte kjo një ditë e keqe apo një problem? Vetëm nga ky numër, nuk mund ta them.
+teaser: Në një raport të qershorit 2025, Delay ishte 2,8%. Ditë e keqe apo problem? Nga përgjigjja varet nëse e ndryshon procesin, dhe vetëm numri nuk ta jep.
 description: "Një ditë me KPI të këqija: pse një numër i vetëm nuk tregon nëse procesi ndryshoi, dy gabimet e kundërta, dhe katër pyetje para se të ndryshosh procesin."
-deck: 'Eseja e pestë e serisë “Përmirësimi që mbahet”: si ndiqnim KPI-të çdo ditë, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, dy gabimet e kundërta, kur ndërhyn menjëherë, dhe katër pyetje para se të ndryshosh procesin.'
+deck: 'Eseja e pestë e serisë “Përmirësimi që mbahet”: si i ndiqnim KPI-të çdo ditë, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, dy gabimet e kundërta, kur ndërhyn menjëherë, dhe katër pyetje para se të ndryshosh procesin.'
 relatedTools:
   - /tools/sigma-control-chart/
   - /tools/delay-analyzer/
 checklist:
   title: Para se të ndryshosh procesin
   fill: true
-  note: Fletë orientuese, si do ta bëja sot. Nuk është një metodë e dokumentuar që e kam përdorur.
+  note: Fletë orientuese, si do ta bëja sot, jo një metodë që e kam përdorur në mënyrë të dokumentuar.
   items:
     - label: A ka një problem të menjëhershëm sigurie ose shërbimi?
-      hint: Nëse po, ndërhyn tani. Analiza vjen pas.
-    - label: Si krahasohet dita me volumin, kushtet dhe ditët e mëparshme?
-      hint: Sa punë ishte, çfarë ndodhi atë ditë, si dukeshin ditët para saj.
+      hint: Nëse po, ndërhyn tani. Analiza vjen më pas.
+    - label: Si krahasohet dita me volumin, me kushtet dhe me ditët e mëparshme?
+      hint: Sa punë kishte, çfarë ndodhi atë ditë, si ishin ditët para saj.
     - label: Është përjashtim apo pjesë e një tendence?
       hint: Një ditë jashtë zakonit, apo disa ditë me radhë në të njëjtin drejtim?
     - label: A kemi gjetur një shkak konkret?
@@ -36,63 +36,49 @@ diagram: three-layers
 
 2,8%.
 
-Kaq ishte Delay në një raport të qershorit 2025.
+Kaq ishte Delay në një raport të qershorit 2025. Ishte një ditë e keqe, apo kishte ndryshuar diçka në proces? Vetëm numri nuk ta thotë.
 
-Ishte kjo një ditë e keqe apo një problem? Vetëm nga ky numër, nuk mund ta them. Dhe pikërisht këtu nis kjo ese.
-
-## Çfarë kam dhe çfarë nuk kam
-
-Në last mile ndiqnim çdo ditë Delay, Damage, Incomplete dhe Loading Time. Rezultatet diskutoheshin në daily stand-up, dhe për devijimet kërkoheshin shpjegime. I analizonim edhe sipas DSP-ve dhe sipas problemeve operative.
-
-Nuk e di nëse prisnim të shihnim përsëritjen para se të merrnim masa, apo ndërhynim gjithmonë menjëherë. Nuk e di nëse kam përdorur vetë një grafik kontrolli statistikor, me kufij kontrolli. Për trendet ditore ose javore në Excel apo Power BI, nuk e di me siguri. Dhe nuk dua ta paraqes njohjen e metodës Six Sigma si provë se e kam përdorur atë metodë në atë punë.
-
-Nuk kam as një rast të dokumentuar ku një ditë e keqe u trajtua si krizë dhe të nesërmen gjithçka u normalizua. As të kundërtën: një përkeqësim i ngadaltë që u pa vonë.
-
-Prandaj kjo ese nuk është histori. Është një pyetje që çdo menaxher e has çdo ditë, dhe mënyra si do t'i përgjigjesha sot.
+Në last mile ndiqnim çdo ditë Delay, Damage, Incomplete dhe Loading Time. Rezultatet diskutoheshin në daily stand-up, çdo devijim duhej shpjeguar, dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative. Mbi këtë rutinë mbështetet kjo ese. Nuk mund ta rindërtoj, nga ana tjetër, si zgjidhnim mes pritjes dhe ndërhyrjes: nëse e linim një rezultat të përsëritej para se të ndërhynim, nëse ndiqnim trendet ditore ose javore në Excel apo Power BI, nëse kam përdorur vetë një kartë kontrolli statistikore me kufij kontrolli. Metoda që vijon është mënyra si do ta lexoja sot një ditë të keqe.
 
 ## Një numër pa histori
 
-2,8% më vete nuk thotë shumë. Krahasuar me çfarë?
+2,8% më vete thotë pak. Krahasuar me çfarë?
 
-Le të marrim një shembull të shpikur, vetëm për të sqaruar mendimin. Supozojmë që mesatarja e javëve të fundit ishte 2,5%. A është 2,8% një sinjal?
+Le të marrim një shembull të shpikur. Supozojmë se mesatarja e javëve të fundit ishte 2,5%. A është 2,8% sinjal?
 
-Varet. Çdo proces luhatet. Asnjë ditë nuk del njësoj si tjetra, edhe kur askush nuk ka ndryshuar asgjë. Volumi ndryshon, njerëzit ndryshojnë, rrugët ndryshojnë. Pyetja nuk është nëse sot është më keq se mesatarja. Shumë ditë do të jenë. Pyetja është nëse sot është më keq se sa luhatet zakonisht ky proces.
+Varet. Çdo proces luhatet. Asnjë ditë nuk del njësoj si tjetra, edhe kur askush nuk ka ndryshuar asgjë: ndryshon volumi, ndryshojnë njerëzit, ndryshojnë rrugët. Pyetja nuk është nëse sot është më keq se mesatarja. Shumë ditë do të jenë të tilla. Pyetja është nëse sot është më keq se sa luhatet zakonisht ky proces.
 
-Kjo është ideja e kartës së kontrollit. Vizaton ditët njëra pas tjetrës, me mesataren dhe me dy kufij që tregojnë sa larg luhatet procesi zakonisht. Një ditë brenda kufijve është, me shumë gjasa, luhatje e zakonshme. Një ditë jashtë tyre, ose disa ditë me radhë në të njëjtën anë të mesatares, tregojnë se diçka mund të ketë ndryshuar.
-
-Nuk po them që e kam përdorur kështu. Po them që sot do ta bëja.
+Mbi këtë ide ngrihet karta e kontrollit. Ajo i vendos ditët njëra pas tjetrës, bashkë me mesataren dhe me dy kufij që tregojnë sa larg luhatet zakonisht procesi. Një ditë brenda kufijve ka shumë gjasa të jetë luhatje e zakonshme. Një ditë jashtë tyre, ose disa ditë me radhë në të njëjtën anë të mesatares, tregon se diçka mund të ketë ndryshuar.
 
 ## Dy gabimet e kundërta
 
-Ka dy mënyra për ta lexuar keq një ditë të keqe. I përshkruaj si mendim, jo si raste nga përvoja ime.
+Një ditë e keqe mund të lexohet gabim në dy mënyra të kundërta. Ajo që vijon është mendimi im, jo raste që mund t'i dokumentoj.
 
-E para: çdo ditë e keqe trajtohet si problem. Ndryshohet një rregull, shtohet një kontroll, mbahet një mbledhje. Të nesërmen numri kthehet në normë, dhe duket sikur masa funksionoi. Por ndoshta do të ishte kthyer vetë. Dhe tani procesi ka një rregull më shumë, që askush nuk e di pse ekziston.
+Gabimi i parë e trajton çdo ditë të keqe si problem. Ndryshohet një rregull, shtohet një kontroll, thirret një mbledhje. Të nesërmen numri kthehet në normë, dhe duket sikur masa dha efekt. Por ndoshta do të ishte kthyer vetë, dhe tani procesi ka një rregull më shumë, që askush nuk e di pse ekziston.
 
 **Nëse ndryshojmë rregullat pas çdo luhatjeje, rrezikojmë të krijojmë më shumë paqëndrueshmëri sesa përmirësim.**
 
-E dyta është e kundërta: asnjë ditë nuk duket aq e keqe sa të reagosh, sepse çdo ditë është vetëm pak më keq se dje. Numri rritet ngadalë, dhe askush nuk e sheh sepse askush nuk shikon ditët bashkë.
+Gabimi i dytë është e kundërta. Asnjë ditë nuk duket aq e keqe sa të reagosh, sepse secila është vetëm pak më keq se e djeshmja. Numri ngjitet ngadalë, dhe askush nuk e vë re, sepse askush nuk i shikon ditët bashkë.
 
-Karta e kontrollit ndihmon për të dyja. Të qetëson kur dita është brenda luhatjes. Dhe të zgjon kur disa ditë me radhë shkojnë në të njëjtin drejtim, edhe pse asnjëra prej tyre nuk duket alarmante më vete.
+Karta e kontrollit ndihmon në të dyja rastet. Të qetëson kur dita mbetet brenda luhatjes së zakonshme, dhe të zgjon kur disa ditë me radhë shkojnë në të njëjtin drejtim, edhe pse asnjëra prej tyre nuk duket alarmante më vete.
 
 ## Kur ndërhyn menjëherë
 
-Kjo nuk do të thotë të presësh çdo herë statistikën.
+Kjo nuk do të thotë të presësh çdo herë statistikën. Një menaxher duhet të dijë kur të ndërhyjë menjëherë dhe kur të mbledhë më shumë informacion.
 
-Një ditë me shumë vonesa meriton vëmendje. Por jo çdo devijim kërkon një procedurë të re. Do t'i thosha një menaxheri të mos ngatërrojë një rezultat të keq me provën se procesi ka ndryshuar. Dhe do të kontrolloja tri gjëra.
+Një ditë me shumë vonesa meriton vëmendje, por jo çdo devijim kërkon një procedurë të re. Këshilla ime do të ishte të mos ngatërrosh një rezultat të keq me provën se procesi ka ndryshuar, dhe të kontrollosh tri gjëra.
 
-E para: a kemi një problem të menjëhershëm sigurie ose shërbimi? Nëse po, ndërhyn tani. Një klient që pret, një rrezik në rampë, nuk presin që të mblidhen pesë pika në grafik.
+E para: a ka një problem të menjëhershëm sigurie ose shërbimi? Nëse po, ndërhyn tani. Një klient që pret ose një rrezik në rampë nuk presin derisa të mblidhen pesë pika në grafik.
 
-E dyta: a është rezultati një përjashtim apo pjesë e një tendence?
+E dyta: a është rezultati përjashtim apo pjesë e një tendence?
 
-E treta: a kemi identifikuar një shkak konkret përpara se të ndryshojmë procesin?
-
-**Një menaxher duhet të dijë kur të ndërhyjë menjëherë dhe kur të mbledhë më shumë informacion.**
+E treta: a e kemi gjetur një shkak konkret para se të ndryshojmë procesin?
 
 ## Volumi, moti dhe procesi
 
-Në last mile ndiqnim shkaqe operative: bag-e që mungonin, trolley të përzier, vonesa në përgatitje, probleme gjatë ngarkimit. Për një metodë të dokumentuar që ndante ndikimin e motit dhe të volumit nga problemi i procesit, nuk e di.
+Në last mile ndiqnim shkaqe operative: çanta që mungonin, karroca të përziera, vonesa në përgatitje, probleme gjatë ngarkimit. Nuk di për ndonjë metodë të dokumentuar me të cilën ta ndanim ndikimin e motit dhe të volumit nga një problem i procesit.
 
-Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e punës, me kushtet e ditës dhe me të dhënat e ditëve të mëparshme. 2,8% vonesa në një ditë me volum të jashtëzakonshëm nuk thotë të njëjtën gjë si 2,8% në një ditë të zakonshme.
+Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e punës, me kushtet e ditës dhe me të dhënat e ditëve të mëparshme. 2,8% vonesa në një ditë me volum të jashtëzakonshëm nuk do të thotë e njëjta gjë si 2,8% në një ditë të zakonshme.
 
 {diagram}
 
@@ -100,8 +86,6 @@ Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e pu
 
 **KPI-ja tregon çfarë ndodhi. Trendi ndihmon të kuptojmë nëse po ndryshon diçka. Analiza e procesit na ndihmon të vendosim çfarë duhet bërë.**
 
-Shumë operacione kalojnë direkt nga shtresa e parë te e treta. Numri del keq, dhe menjëherë kërkohet një masë. Shtresa e mesme, ajo që thotë nëse kjo ditë është ndryshe nga të tjerat, është ajo që mungon më shpesh.
+Shumë operacione kalojnë drejt e nga shtresa e parë te e treta: numri del keq dhe menjëherë kërkohet një masë. Shtresa e mesme, ajo që tregon nëse kjo ditë ndryshon nga të tjerat, është ajo që mungon më shpesh.
 
-[Sigma dhe karta e kontrollit](/sq/tools/sigma-control-chart/) e vizaton këtë shtresë për ditët ose javët e tua, me shpjegimin çfarë është sinjal dhe çfarë jo. Fleta më poshtë mund të plotësohet këtu para se të ndryshosh një rregull, dhe të kopjohet.
-
-**Një ditë e keqe është sinjal për të kontrolluar. Nuk është automatikisht provë se i gjithë procesi duhet ndryshuar.**
+Një ditë e keqe është sinjal për të kontrolluar, jo automatikisht provë se i gjithë procesi duhet ndryshuar. [Sigma dhe karta e kontrollit](/sq/tools/sigma-control-chart/) e vizaton shtresën e mesme për ditët ose javët e tua dhe shpjegon çfarë është sinjal e çfarë jo. Para se të ndryshosh një rregull, plotëso fletën më poshtë dhe kopjoje.
