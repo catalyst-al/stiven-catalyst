@@ -34,7 +34,7 @@ test('every cover has its small copies, and every tool preview its 720 px copy',
 test('every page of the online readers has a sharp copy twice as wide', () => {
   const read = (name) => JSON.parse(fs.readFileSync(`src/_data/${name}`, 'utf8'));
   const lists = [
-    ['book', read('book.json').pages],
+    ...fs.readdirSync('src/_data/books').map((file) => [`book ${file}`, read(`books/${file}`).pages]),
     ...Object.entries(read('toolsGuidePages.json')).map(([lang, entry]) => [`tools-guide ${lang}`, entry.pages]),
     ...Object.entries(read('magazinePages.json')).flatMap(([slug, langs]) => Object.entries(langs).map(([lang, entry]) => [`${slug} ${lang}`, entry.pages])),
   ];

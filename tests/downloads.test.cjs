@@ -29,7 +29,9 @@ test('every file listed is on the site, in the language of the page, with its si
       assert.equal(kind, href.endsWith('.mp3') ? 'MP3' : 'PDF');
       if (lang !== 'en') assert.doesNotMatch(size, /\./, 'a decimal comma in sq and de');
     }
-    assert.match(html, /href="\/media\/books\/mall-per-durresin\/mall-per-durresin\.pdf" download/);
+    assert.match(html, /href="\/media\/books\/mall-per-durresin\/mall-per-durresin\.pdf" download/, 'the Albanian original');
+    const edition = JSON.parse(fs.readFileSync(`src/_data/books/${lang}.json`, 'utf8'));
+    assert.ok(html.includes(`href="${edition.pdf}" download`), `${file}: the book in its own language`);
     assert.ok(html.includes(`management-review-nr-80-${lang}.pdf`) && html.includes(`management-review-nr-01-${lang}.pdf`), 'the newest and the first issue');
   }
 });

@@ -4464,6 +4464,10 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   overflow-wrap: break-word;
 }
 .book-facts dd span { color: var(--muted); font-size: 14px; }
+/* The same book in the other languages (pages/book.njk), under the buttons: the original and its translations. */
+.book-languages { margin: 18px 0 0; color: var(--muted); font-size: 15px; }
+.book-languages a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+.book-languages a:hover { text-decoration-color: var(--blue); }
 /* Five facts (with "Online since"): one row on a wide screen, the gap a little narrower; a phone keeps two columns. */
 @media (min-width: 901px) { .book-facts:has(> :nth-child(5)) { grid-template-columns: repeat(5, auto); column-gap: 30px; } }
 
