@@ -4,6 +4,7 @@
     python3 scripts/book-edition.py en     # the English edition
     python3 scripts/book-edition.py de     # the German edition
     python3 scripts/book-edition.py sq     # a check: the Albanian text set again, compared with the PDF
+    python3 scripts/book-edition.py de --fit   # only says how much room each page has left; writes nothing
 
 The text of each edition is scripts/book/<lang>.txt (the format is described in scripts/book/README.md). The
 design is the one of the Albanian PDF, src/media/books/mall-per-durresin/mall-per-durresin.pdf, which was made with
@@ -460,9 +461,27 @@ def compare(made, original):
     return report
 
 
-def main(lang):
+def fit(text):
+    """The room left on each page of a text, without writing anything (negative: it does not fit at 10.8 pt)."""
+    images = photographs(ORIGINAL)
+    for number in sorted(text["pages"]):
+        page = text["pages"][number]
+        if "chapter" not in page and "section" not in page:
+            continue
+        pictures = images.get(number, [])
+        rows = []
+        for body in BODY[1:] if pictures else BODY:
+            _, bottom = layout(page, pictures, body, margin(number))
+            rows.append(f"{body['size']} pt: {BOTTOM - bottom:6.1f}")
+        print(f"page {number:02d}  " + "   ".join(rows))
+
+
+def main(lang, only_fit=False):
     fonts()
     original = read_text("sq")
+    if only_fit:
+        fit(read_text(lang))
+        return
     if lang == "sq":
         out = Path(tempfile.mkdtemp(prefix="book-sq-")) / f"{SLUG}.pdf"
         build(original, out)
@@ -490,6 +509,6 @@ def main(lang):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2 or sys.argv[1] not in ("en", "de", "sq"):
+    if len(sys.argv) not in (2, 3) or sys.argv[1] not in ("en", "de", "sq") or sys.argv[2:] not in ([], ["--fit"]):
         sys.exit(__doc__)
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2:] == ["--fit"])
