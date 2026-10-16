@@ -273,3 +273,11 @@ test('Home: the featured essay answers the pointer, the outline fills with blue 
   assert.match(scroll, /\.manifesto-line span:nth-child\(4\) \{ animation-range: entry 55% cover 40%; \}/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.feature-card, \.meta-strip > div, /);
 });
+
+test('Tools: a role section carries its colour, and the section reached from its card flashes once', () => {
+  assert.match(css, /\.family-section::before \{[\s\S]*?inset: 0 0 auto;[\s\S]*?color-mix\(in srgb, var\(--family, var\(--blue\)\) 12%, transparent\)/, 'the light stays inside the page width');
+  assert.match(css, /\.family-section:target::before \{ animation: family-arrive 1\.6s ease-out 1; \}/);
+  assert.match(css, /@keyframes family-arrive \{ 0%, 25% \{ filter: brightness\(2\.6\) saturate\(1\.4\); \} \}/);
+  assert.match(css, /\.family-card:hover \.family-count > span \{ translate: 0 3px; \}/);
+  assert.match(css, /:where\([^)]*\.family-head,/);
+});
