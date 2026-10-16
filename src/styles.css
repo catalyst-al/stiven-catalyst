@@ -4852,7 +4852,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .list-row, .weekly-grid > li, .challenge-essays li) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .book-feature, .list-row, .weekly-grid > li, .challenge-essays li) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -4879,12 +4879,26 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 40px 28px; margin: 0; padding: 0; list-style: none; }
 .weekly-grid > li[hidden] { display: none; }
 .weekly-card { display: grid; gap: 8px; color: inherit; text-decoration: none; }
-.weekly-card-cover { display: block; overflow: hidden; border-radius: 5px; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .6); transition: transform .3s ease; }
+.weekly-card-cover { position: relative; display: block; overflow: hidden; border-radius: 5px; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .6); transition: transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s ease; }
+/* Under the pointer a cover lifts, glows blue beneath and a line of light crosses it, like a page catching the lamp. */
+.weekly-card-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  background-position: 130% 0;
+  pointer-events: none;
+}
+.weekly-card:hover .weekly-card-cover::after { transition: background-position .9s cubic-bezier(.22, 1, .36, 1); background-position: -30% 0; }
+.weekly-card:hover .weekly-card-cover,
+.weekly-card:focus-visible .weekly-card-cover { box-shadow: 0 26px 50px -18px color-mix(in srgb, var(--blue) 55%, rgba(0, 0, 0, .6)); }
 .weekly-card-cover img { display: block; width: 100%; height: auto; }
 .weekly-card:hover .weekly-card-cover,
 .weekly-card:focus-visible .weekly-card-cover { transform: translateY(-4px) rotate(-.6deg); }
 .weekly-card-meta { margin-top: 10px; color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
 .weekly-card strong { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.2; }
+.weekly-card strong { transition: color .3s ease; }
 .weekly-card:hover strong { color: var(--blue-soft); }
 .weekly-card-date { color: var(--muted); font-size: 14px; }
 .weekly-none { margin: 0; color: var(--muted); }
@@ -4915,6 +4929,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .weekly-card-cover { transition: none; }
   .weekly-card:hover .weekly-card-cover { transform: none; }
+  .weekly-card:hover .weekly-card-cover::after { transition: none; background-position: 130% 0; }
+  .book-feature:hover .book-object-cover { transform: rotateY(-24deg) rotateX(3deg); }
 }
 .wk-narrow { display: none; }
 @media (max-width: 620px) {
@@ -4941,6 +4957,31 @@ html:has(.book-zoom[open]) { overflow: hidden; }
   border-bottom: 1px solid var(--line);
 }
 .book-feature .book-object { width: min(100%, 300px); }
+/* A publication (Publications, the homepage, Reflections) answers the pointer as a whole, like the article cards: a
+   soft band of light follows the pointer behind it (--mx, --my from script.js), its book turns towards the reader and
+   glows brighter, and its title takes the light blue. */
+.book-feature { position: relative; isolation: isolate; }
+.book-feature::after {
+  content: "";
+  position: absolute;
+  inset: 14px -18px;
+  z-index: -1;
+  border-radius: 28px;
+  background:
+    radial-gradient(620px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 12%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 2.5%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .4s ease, scale .5s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.book-feature:hover::after { opacity: 1; scale: 1; }
+.book-feature:hover .book-object-cover { transform: rotateY(-9deg) rotateX(1deg); }
+.book-object::before { transition: filter .5s ease, scale .6s cubic-bezier(.22, 1, .36, 1); }
+.book-feature:hover .book-object::before { scale: 1.12; filter: blur(30px) brightness(1.35); }
+.book-feature h2 a { transition: color .3s ease; }
+.book-feature:hover h2 a { color: var(--blue-soft); }
+@media (max-width: 620px) { .book-feature::after { inset: 10px -10px; } }
 /* "All issues" below an issue lands here, clear of the sticky header. */
 .magazine-feature { scroll-margin-top: 80px; }
 .book-feature h2 { font-size: min(clamp(46px, 6vw, 88px), var(--fit-s, 1000px)); }
