@@ -363,3 +363,14 @@ test('Publications: the cover floats, the contents open softly, the reader butto
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.issue-more-card, /);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes contents-in/, 'publications use the light stylesheet');
 });
+
+test('Projects: the cards fill in one after another, a project in progress beats, an outside link turns its arrow', () => {
+  assert.match(css, /\.project-grid \.project-card > :is\(\.tag, div\) \{ animation: list-in/);
+  assert.match(css, /\.project-card \.tag\.is-live::before \{ animation: news-beat/);
+  assert.match(css, /\.project-card:hover \.project-link\[href\^="http"\] > span\[aria-hidden="true"\] \{[^}]*rotate: -45deg;/);
+  for (const page of ['_site/projects.html', '_site/sq/projects.html', '_site/de/projects.html']) {
+    const html = fs.readFileSync(page, 'utf8');
+    assert.equal((html.match(/class="tag is-live"/g) || []).length, 1, `${page}: only the project in progress beats`);
+  }
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.tag\.is-live/);
+});
