@@ -8003,3 +8003,37 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @media (prefers-reduced-motion: reduce) {
   .start-intro img, .start-more a { transition: none; }
 }
+
+/* Search in motion: the box glows while typed in, the results come in one after another, the words found are
+   swept in with a highlighter, and a result answers the pointer like the rows of Insights. */
+.search-form { transition: border-color .3s ease, box-shadow .35s ease; }
+.search-form:hover { border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
+.search-form:focus-within { box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 14%, transparent), 0 16px 38px -24px color-mix(in srgb, var(--blue) 75%, transparent); }
+.search-form svg { transition: stroke .3s ease, scale .35s cubic-bezier(.22, 1, .36, 1); }
+.search-form:focus-within svg { stroke: var(--blue); scale: 1.1; }
+.search-results a { position: relative; isolation: isolate; }
+.search-results a::before {
+  content: "";
+  position: absolute;
+  inset: 6px -18px;
+  z-index: -1;
+  border-radius: 20px;
+  background:
+    radial-gradient(520px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 11%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .35s ease, scale .45s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.search-results a:hover::before { opacity: 1; scale: 1; }
+@media (max-width: 620px) { .search-results a::before { inset: 4px -10px; } }
+.search-results strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1), color .3s ease; }
+.search-results a:hover strong { translate: 6px 0; }
+.search-results mark { background: linear-gradient(color-mix(in srgb, var(--blue) 26%, transparent), color-mix(in srgb, var(--blue) 26%, transparent)) 0 0 / 100% 100% no-repeat; }
+@media (prefers-reduced-motion: no-preference) {
+  .search-results .is-entering mark { animation: mark-sweep .6s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 35ms + .2s); }
+}
+@keyframes mark-sweep { from { background-size: 0 100%; } }
+.search-count:not(:empty) { animation: list-in .4s cubic-bezier(.22, 1, .36, 1) both; }
+@media (prefers-reduced-motion: reduce) { .search-count:not(:empty) { animation: none; } }
