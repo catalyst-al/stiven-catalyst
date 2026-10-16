@@ -3306,7 +3306,15 @@ html:not(.js) .filter-bar { display: none; }
   border-radius: 999px;
   background: var(--card);
 }
-.filter-search:focus-within { border-color: color-mix(in srgb, var(--blue) 60%, var(--line)); }
+.filter-search { transition: border-color .3s ease, box-shadow .35s ease, background-color .3s ease; }
+.filter-search:hover { border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
+.filter-search:focus-within {
+  border-color: color-mix(in srgb, var(--blue) 60%, var(--line));
+  background: color-mix(in srgb, var(--blue) 5%, var(--card));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 14%, transparent), 0 14px 34px -22px color-mix(in srgb, var(--blue) 70%, transparent);
+}
+.filter-search svg { transition: stroke .3s ease, scale .35s cubic-bezier(.22, 1, .36, 1); }
+.filter-search:focus-within svg { stroke: var(--blue); scale: 1.1; }
 .filter-search svg {
   flex: 0 0 auto;
   width: 18px;
@@ -3344,6 +3352,20 @@ html:not(.js) .filter-bar { display: none; }
 }
 .chip[hidden] { display: none; }
 .chip:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+/* The chosen topic carries a small planet, like the menu; a chip lifts a pixel under the pointer. */
+.chip:hover { translate: 0 -1px; }
+.chip { transition: color .25s ease, background .25s ease, border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), scale .25s cubic-bezier(.22, 1, .36, 1); }
+.filter-chips .chip[aria-pressed="true"]::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
+  vertical-align: .12em;
+}
 .chip[aria-pressed="true"] {
   border-color: var(--blue);
   background: color-mix(in srgb, var(--blue) 12%, transparent);
@@ -5138,7 +5160,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -7325,6 +7347,8 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .series-dots.is-large a::before { inset: -4.5px; }
 
 .series-panel {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
@@ -7332,6 +7356,49 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
 }
+/* A series on Insights lights up as a band under the pointer, like the rows below it; the dot of the next essay to
+   read beats softly, and the dots come in one after another as the series scrolls into view. */
+.series-panel::before {
+  content: "";
+  position: absolute;
+  inset: 6px -18px;
+  z-index: -1;
+  border-radius: 20px;
+  background:
+    radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--blue) 10%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 2.5%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .35s ease, scale .45s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.series-panel:hover::before { opacity: 1; scale: 1; }
+@media (max-width: 620px) { .series-panel::before { inset: 4px -10px; } }
+.series-dots a { transition: transform .25s cubic-bezier(.22, 1, .36, 1), background-color .25s ease, box-shadow .3s ease; }
+.series-dots a:hover { box-shadow: 0 0 12px color-mix(in srgb, var(--blue) 70%, transparent); }
+.series-panel .series-dots a.is-next { animation: dot-next 2.2s ease-in-out infinite; }
+@keyframes dot-next {
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 12%, transparent), 0 0 14px color-mix(in srgb, var(--blue) 55%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) { .series-panel .series-dots a.is-next { animation: none; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .series-panel .series-dots li { animation: dot-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    .series-panel .series-dots li:nth-child(1) { animation-range: entry 4% entry 44%; }
+    .series-panel .series-dots li:nth-child(2) { animation-range: entry 8% entry 48%; }
+    .series-panel .series-dots li:nth-child(3) { animation-range: entry 12% entry 52%; }
+    .series-panel .series-dots li:nth-child(4) { animation-range: entry 16% entry 56%; }
+    .series-panel .series-dots li:nth-child(5) { animation-range: entry 20% entry 60%; }
+    .series-panel .series-dots li:nth-child(6) { animation-range: entry 24% entry 64%; }
+    .series-panel .series-dots li:nth-child(7) { animation-range: entry 28% entry 68%; }
+    .series-panel .series-dots li:nth-child(8) { animation-range: entry 32% entry 72%; }
+    .series-panel .series-dots li:nth-child(9) { animation-range: entry 36% entry 76%; }
+    .series-panel .series-dots li:nth-child(10) { animation-range: entry 40% entry 80%; }
+    .series-panel .series-dots li:nth-child(11) { animation-range: entry 44% entry 84%; }
+    .series-panel .series-dots li:nth-child(12) { animation-range: entry 48% entry 88%; }
+  }
+}
+@keyframes dot-in { from { opacity: 0; scale: .4; } }
 .series-panel-copy .kicker { margin: 0 0 4px; }
 .series-panel-count { margin: 0; color: var(--muted); font-size: 15px; }
 .series-panel .series-dots { justify-content: center; }

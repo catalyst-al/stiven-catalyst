@@ -281,3 +281,13 @@ test('Tools: a role section carries its colour, and the section reached from its
   assert.match(css, /\.family-card:hover \.family-count > span \{ translate: 0 3px; \}/);
   assert.match(css, /:where\([^)]*\.family-head,/);
 });
+
+test('Insights: series light up, the next essay beats, search and the chosen topic glow', () => {
+  assert.match(css, /\.series-panel::before \{[\s\S]*?var\(--mx, 50%\) var\(--my, 50%\)/);
+  assert.match(css, /@media \(max-width: 620px\) \{ \.series-panel::before \{ inset: 4px -10px; \} \}/);
+  assert.match(css, /\.series-panel \.series-dots a\.is-next \{ animation: dot-next 2\.2s ease-in-out infinite; \}/);
+  assert.match(css, /\.series-panel \.series-dots li:nth-child\(12\) \{ animation-range: entry 48% entry 88%; \}/);
+  assert.match(css, /\.filter-search:focus-within \{[\s\S]*?box-shadow: 0 0 0 4px/);
+  assert.match(css, /\.filter-chips \.chip\[aria-pressed="true"\]::before \{[\s\S]*?border-radius: 50%;/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.series-panel, /);
+});
