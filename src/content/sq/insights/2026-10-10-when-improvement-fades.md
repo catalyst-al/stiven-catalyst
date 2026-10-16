@@ -8,14 +8,14 @@ featured: true
 summary: Përmirësimi i vërtetë nuk është ai që funksionon vetëm kur menaxheri është aty. Është ai që vazhdon të funksionojë edhe kur menaxheri largohet.
 teaser: Mos u mjafto me faktin që sot e zgjidhe problemin. Pyet veten nëse nesër ai problem mund të zgjidhet edhe pa praninë tënde.
 description: "Eseja përmbyllëse e serisë: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë."
-deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja që nuk di t''i përgjigjem për punën time, pyetja që i lidh të dhjetë esetë, dhe kontrolli i qëndrueshmërisë.'
+deck: 'Eseja e dhjetë dhe e fundit e serisë “Përmirësimi që mbahet”: pse një përmirësim shuhet, çfarë e mban gjallë një standard, pyetja për punën time të cilës nuk di t''i përgjigjem, pyetja që i lidh të dhjetë esetë, dhe një provë nëse përmirësimi do të zgjasë.'
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-handover/
 checklist:
   title: Kontrolli i qëndrueshmërisë
   fill: true
-  note: Fletë orientuese, si do ta bëja sot. Nuk është një vlerësim që e kam bërë për punën time të mëparshme.
+  note: Si do ta kontrolloja sot. Nuk është vlerësim i punës sime të mëparshme.
   items:
     - label: Dokumentimi
       hint: A është standardi i qartë dhe i lehtë për t'u gjetur?
@@ -24,90 +24,76 @@ checklist:
     - label: Përgjegjësia
       hint: Kush e ndjek zbatimin, me emër?
     - label: Kontrolli
-      hint: Si dhe kur verifikohet nëse standardi funksionon ende?
+      hint: Si dhe kur verifikon nëse standardi funksionon ende?
     - label: Përditësimi
       hint: Kush e ndryshon udhëzimin kur ndryshon procesi?
     - label: Pa ty
-      hint: A do të funksiononte nesër, nëse ti nuk do të ishe aty?
+      hint: A do të funksiononte nesër, po të mos ishe ti aty?
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Merr një përmirësim që bëre këtë vit dhe pyet nëse do të ecte javën tjetër pa ty.
-  - Emëro, me emër, kush kontrollon që standardi zbatohet ende, dhe sa shpesh.
+  - Merr një përmirësim që bëre këtë vit dhe pyet veten nëse do të ecte javën tjetër pa ty.
+  - Thuaj me emër kush kontrollon që standardi zbatohet ende, dhe sa shpesh.
   - Gjej një udhëzim që nuk përputhet më me procesin, dhe përditësoje sot.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: improvement-paths
 ---
 
-Mos u mjafto me faktin që sot e zgjidhe problemin.
+Po të mund t'i thosha vetes një fjali të vetme në ditën e parë si Team Leader, do të ishte kjo: nuk mjafton ta zgjidhësh problemin sot; ajo që ka rëndësi është nëse nesër mund të zgjidhet edhe pa ty. Me këtë pyetje mbyllet edhe kjo seri.
 
-Pyet veten nëse nesër ai problem mund të zgjidhet edhe pa praninë tënde.
-
-Kjo është fjalia që do t'ia thosha vetes në ditën e parë si Team Leader. Dhe është pyetja me të cilën mbyllet kjo seri.
-
-## Çfarë kam dhe çfarë nuk kam
-
-Në last mile kam punuar me standarde për ngarkimin, për skanimin, për organizimin e rampës dhe për sigurinë. Kam hasur probleme me respektimin e procedurave, dhe me shoferë që nuk ishin ende plotësisht të përshtatur me standardet. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit.
-
-Por nuk kam një rast të dokumentuar ku një përmirësim që e vendosa vetë funksionoi për disa muaj dhe pastaj u braktis. Nuk kam një rast që provon pse një standard i caktuar u zbeh. Nuk kam një rast ku largimi i një kolegu shkaktoi humbjen e një standardi. Dhe nuk kam matur kurrë nëse rezultatet vazhduan pasi unë ndërrova rol.
-
-Për një ese që quhet “Kur përmirësimi shuhet”, kjo nuk është detaj. Është pikërisht tema.
+Me standardet kam punuar nga të dyja anët e kësaj pyetjeje. Në last mile ato kishin të bënin me ngarkimin, skanimin, organizimin e rampës dhe sigurinë, dhe më është dashur të merrem me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar me to. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. Ajo që nuk e kam është pikërisht rasti që premton titulli: një përmirësim imi i dokumentuar, që mbajti disa muaj dhe pastaj u braktis. Për një ese mbi përmirësimin që shuhet, kjo mungesë nuk është detaj. Është vetë tema.
 
 ## Pyetja që nuk di t'i përgjigjem
 
-Në vitin 2025 punova si Team Leader dhe pastaj si Area Manager në last mile. Më vonë kalova te koordinimi në distancë.
+Në vitin 2025 punova në last mile, fillimisht si Team Leader e pastaj si Area Manager. Më vonë kalova te koordinimi në distancë.
 
-Çfarë mbeti nga mënyra ime e punës pasi u largova nga ai rol? Cilat kontrolle vazhduan? Cilat u harruan në javën e parë?
+Çfarë mbeti nga mënyra ime e punës pasi e lashë atë rol? Cilat kontrolle vazhduan dhe cilat u harruan që në javën e parë?
 
-Nuk e di.
+Nuk e di. Nuk e kam matur kurrë nëse rezultatet vazhduan pasi ndërrova rol.
 
-Dhe kjo është gjëja që do të doja ta kuptoja më mirë sot: nëse rezultatet e një menaxheri vazhdojnë edhe kur ai nuk është më aty për t'i kontrolluar. Sepse nëse nuk e di këtë, nuk e di nëse ajo që bëra ishte përmirësim i procesit, apo vetëm prania ime.
+Kjo është ajo që do të doja më shumë ta kuptoja sot: nëse rezultatet e një menaxheri vazhdojnë kur ai nuk është më aty për t'i ndjekur. Pa këtë përgjigje, nuk mund ta them nëse ajo që bëra e përmirësoi procesin, apo ishte thjesht prania ime.
 
 ## Pse shuhet një përmirësim
 
-Si mendim, jo si rast i provuar: besoj se një përmirësim rrezikon të humbasë kur varet vetëm nga personi që e nisi, në vend që të bëhet pjesë e mënyrës së përditshme të punës.
+Ajo që vijon është mendim, jo rast i provuar. Besoj se një përmirësim rrezikon kur varet vetëm nga personi që e nisi, në vend që të bëhet pjesë e mënyrës së përditshme të punës.
 
-Ndërrimi i njerëzve e bën këtë më të dukshme. Në last mile kemi pasur shoferë të thirrur me njoftim të shkurtër, dhe shoferë në ramp-up që nuk ishin ende të përshtatur me SOP-të. Kjo e bënte të vështirë ruajtjen e të njëjtit nivel zbatimi.
+Qarkullimi i njerëzve e bën këtë rrezik më të dukshëm. Në last mile kishim shoferë të thirrur me pak njoftim dhe shoferë në ramp-up që ende nuk ishin mësuar me SOP-të. Kjo e bënte të vështirë që zbatimi të mbahej në të njëjtin nivel.
 
-Një standard nuk duhet të funksionojë vetëm me njerëzit që e njohin prej vitesh. Nëse çdo punonjës i ri duhet ta mësojë procesin vetëm duke parë një koleg, rezultati varet nga kush e trajnon. E shkrova këtë te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/). Këtu shihet çmimi i saj: një standard që kalon vetëm nga njeriu te njeriu humbet pak nga pak me çdo ndërrim.
+Një standard duhet të funksionojë edhe me ata që nuk e njohin prej vitesh. Nëse çdo punonjës i ri e mëson procesin vetëm duke parë një koleg, rezultati varet nga kush e trajnon. Për këtë kam shkruar te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/). Këtu shihet çmimi: një standard që kalon vetëm nga njeriu te njeriu humbet diçka me çdo ndërrim njerëzish.
 
 {diagram}
 
 ## Çfarë e mban gjallë një standard
 
-Për mua nuk mjafton një element i vetëm. Do të veçoja pesë:
+Asnjë element i vetëm nuk mjafton. Unë do të veçoja pesë:
 
-- **Dokumentimi:** standardi duhet të jetë i qartë dhe i lehtë për t'u gjetur.
-- **Trajnimi:** njerëzit duhet të dinë jo vetëm çfarë të bëjnë, por edhe pse.
-- **Përgjegjësia:** duhet të dihet kush e ndjek zbatimin.
-- **Kontrolli:** duhet të verifikohet nëse standardi vazhdon të funksionojë.
-- **Përditësimi:** kur procesi ndryshon, duhet të ndryshojë edhe udhëzimi.
+- **Dokumentimi:** standardi është i qartë dhe gjendet lehtë.
+- **Trajnimi:** njerëzit dinë jo vetëm çfarë të bëjnë, por edhe pse.
+- **Përgjegjësia:** dihet kush e ndjek zbatimin.
+- **Kontrolli:** dikush verifikon nëse standardi funksionon ende.
+- **Përditësimi:** kur ndryshon procesi, ndryshon edhe udhëzimi.
 
-Këtë e lidh me organizimin e SOP-ve për Front Office dhe Night Audit, për të cilin shkrova te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/). Një dokument i mirë është i dobishëm. Por nuk garanton vetë që procesi ndiqet saktë.
-
-**Një standard që ekziston vetëm në dokument nuk është domosdoshmërisht një standard që zbatohet.**
+Këtë e lidh me organizimin e SOP-ve për Front Office dhe Night Audit, për të cilin shkrova te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/). Një dokument i mirë të ndihmon. Por vetëm ai nuk garanton që procesi të ndiqet siç duhet. Një standard që ekziston vetëm në letër nuk do të thotë domosdoshmërisht se zbatohet.
 
 ## Dhjetë ese, një pyetje
 
-Kur i shoh të nëntë esetë e mëparshme bashkë, më duket se tregojnë të njëjtin problem nga këndvështrime të ndryshme.
+Kur i lexoj bashkë të nëntë esetë e mëparshme, më duket se tregojnë të njëjtin problem nga kënde të ndryshme.
 
-[Dëmet](/sq/insights/how-we-worked-with-damage/) dhe [porositë jo të plota](/sq/insights/where-part-of-the-order-goes-missing/) tregojnë se duhet të kuptojmë ku lind gabimi. [Gemba](/sq/insights/gemba/) na kujton se raporti nuk e shpjegon gjithmonë procesin. [6S](/sq/insights/6s-without-a-poster/) tregon rëndësinë e organizimit të dukshëm. [Karta e kontrollit](/sq/insights/a-bad-day-or-a-problem/) dhe [DMAIC](/sq/insights/dmaic-without-a-black-belt/) na mësojnë të mos nxitojmë nga një rezultat i keq te një zgjidhje e paprovuar. [Koordinimi në distancë](/sq/insights/80-vehicles-you-cannot-see/) tregon sa i rëndësishëm është informacioni i besueshëm. [Ditët me volum të lartë](/sq/insights/high-volume-days/) tregojnë nëse standardet janë mjaftueshëm të forta për t'i rezistuar presionit. Dhe [puna në hotel](/sq/insights/the-angry-guest-at-2am/) më ka treguar rëndësinë e përgjegjësisë dhe të vazhdimësisë mes turneve.
+[Dëmet](/sq/insights/how-we-worked-with-damage/) dhe [porositë jo të plota](/sq/insights/where-part-of-the-order-goes-missing/) tregojnë se duhet të kuptojmë ku lind gabimi. [Gemba](/sq/insights/gemba/) na kujton se raporti nuk e shpjegon gjithmonë procesin. [6S](/sq/insights/6s-without-a-poster/) tregon pse ka rëndësi rregulli i dukshëm. [Karta e kontrollit](/sq/insights/a-bad-day-or-a-problem/) dhe [DMAIC](/sq/insights/dmaic-without-a-black-belt/) na mësojnë të mos nxitojmë nga një rezultat i keq te një zgjidhje e paprovuar. [Koordinimi në distancë](/sq/insights/80-vehicles-you-cannot-see/) tregon sa shumë varet nga informacioni i besueshëm. [Ditët me volum të lartë](/sq/insights/high-volume-days/) tregojnë nëse standardet i bëjnë ballë presionit. Dhe [puna në hotel](/sq/insights/the-angry-guest-at-2am/) më ka mësuar sa rëndësi kanë përgjegjësia dhe vazhdimësia nga një turn te tjetri.
 
 Pyetja që i lidh të gjitha është kjo:
 
 **A kemi ndërtuar një përmirësim që bëhet pjesë e sistemit, apo një rezultat të përkohshëm që varet nga vëmendja e menaxherit?**
 
-Për mua, ky është thelbi i gjithë serisë.
+Kjo pyetje është thelbi i gjithë serisë.
 
 ## Ditën e parë si Team Leader
 
-Nëse do të flisja me veten time në ditën e parë si Team Leader, do t'i thosha të mos përpiqej t'i zgjidhte vetë të gjitha problemet. Të ishte pranë operacionit, të dëgjonte njerëzit dhe të kuptonte procesin para se të ndryshonte rregullat. Të mos gjykonte një shofer vetëm nga një KPI negative, dhe të mos e ngatërronte një ditë të keqe me një problem sistematik.
+Po të mund të flisja me veten në ditën e parë si Team Leader, do t'i thosha: mos u përpiq t'i zgjidhësh vetë të gjitha problemet. Rri pranë operacionit, dëgjoji njerëzit dhe kuptoje procesin para se të ndryshosh rregullat. Mos e gjyko një shofer nga një KPI e vetme negative, dhe mos e ngatërro një ditë të keqe me një problem të sistemit.
 
-Por mbi të gjitha, do t'i thosha fjalinë me të cilën nisa këtë ese.
+Por mbi të gjitha, do t'i thosha fjalinë me të cilën e nisa këtë ese.
 
-Mund të përmirësosh një KPI, të organizosh një rampë, të shkruash një procedurë ose të zgjidhësh një problem të vështirë. Por përmirësimi nuk përfundon në momentin kur rezultati bëhet më i mirë. Duhet të kuptosh nëse ai rezultat mund të ruhet, nëse njerëzit e rinj mund ta ndjekin të njëjtin standard, dhe nëse procesi funksionon pa ndërhyrjen tënde të vazhdueshme.
-
-**Përmirësimi i vërtetë nuk është ai që funksionon vetëm kur menaxheri është aty. Është ai që vazhdon të funksionojë edhe kur menaxheri largohet.**
-
-Fletën më poshtë mund ta plotësosh për një përmirësim që ke bërë, dhe ta kopjosh. Pyetja e fundit e saj është ajo që ka më shumë rëndësi.
+Mund të përmirësosh një KPI, të organizosh një rampë, të shkruash një procedurë ose të zgjidhësh një problem të vështirë. Por përmirësimi nuk mbaron kur rezultati bëhet më i mirë. Duhet të kuptosh edhe nëse ai rezultat mund të mbahet, nëse njerëzit e rinj mund ta ndjekin të njëjtin standard, dhe nëse procesi ecën pa ndërhyrjen tënde të vazhdueshme.
 
 **Një menaxher i mirë mund ta përmirësojë një ditë pune. Një sistem i mirë e mban përmirësimin gjallë edhe ditën kur ai nuk është aty.**
+
+Fleta më poshtë është për një përmirësim që ke bërë vetë: plotësoje dhe kopjoje. Pyetja e saj e fundit është ajo që ka më shumë rëndësi.
