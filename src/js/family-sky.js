@@ -3,7 +3,10 @@
   const sky = document.querySelector("[data-family-sky]");
   const main = document.getElementById("main");
   const hero = document.querySelector(".tool-hero");
-  if (!sky || !main || !hero) return;
+  // The drawing stays invisible until it is placed (styles.css: .js .family-sky:not(.is-ready)), so the page does not
+  // shift under the reader's eyes while the planet moves to its spot; without a hero to measure it shows at once.
+  const ready = () => sky?.classList.add("is-ready");
+  if (!sky || !main || !hero) { ready(); return; }
 
   const planet = sky.querySelector(".sky-planet");
   const svg = planet?.querySelector("svg");
@@ -110,6 +113,7 @@
     planet.hidden = true;
   };
   place();
+  ready();
   if ("ResizeObserver" in window) new ResizeObserver(place).observe(hero);
   window.addEventListener("resize", place);
   document.fonts?.ready.then(place);

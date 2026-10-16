@@ -139,6 +139,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("uiStringsUrl", (lang) =>
     `/js/ui-${lang}.js?v=${createHash("sha256").update(JSON.stringify(scriptStrings(lang))).digest("hex").slice(0, 10)}`
   );
+  // A short stamp of any data (its JSON), for the address of a file made from it, so the browser keeps the file
+  // until the data changes: {{ dayNotes | noteDayData(lang) | stamp }}.
+  eleventyConfig.addFilter("stamp", (value) => createHash("sha256").update(JSON.stringify(value)).digest("hex").slice(0, 10));
   // JSON embedded in HTML must not be able to close its script element.
   eleventyConfig.addFilter("scriptJson", (value) => JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`));
   // The coaching curriculum as one file (src/coaching-data.njk) the browser keeps; its address changes with the content.
