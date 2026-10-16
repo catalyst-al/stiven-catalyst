@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -8037,3 +8037,61 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @keyframes mark-sweep { from { background-size: 0 100%; } }
 .search-count:not(:empty) { animation: list-in .4s cubic-bezier(.22, 1, .36, 1) both; }
 @media (prefers-reduced-motion: reduce) { .search-count:not(:empty) { animation: none; } }
+
+/* The podcast in motion: the cover floats and catches the light like a book's; an episode that plays glows and its
+   play button breathes; the apps and the episodes answer the pointer; the steps light up as they are reached; an
+   episode reached from a link greets you; "Copied" comes in softly. */
+@media (prefers-reduced-motion: no-preference) {
+  .podcast-cover { animation: cover-float 6s ease-in-out infinite; }
+  .audio-player.is-playing .audio-player-play { animation: news-ring 2.4s ease-out infinite; }
+  .podcast-copied:not(:empty) { animation: list-in .4s cubic-bezier(.22, 1, .36, 1) both; }
+  .podcast-episode:target { animation: episode-arrive 2.2s ease-out 1; }
+}
+@keyframes episode-arrive { 0%, 30% { border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent), 0 24px 54px -34px var(--blue); } }
+.audio-player { transition: border-color .4s ease, box-shadow .5s ease; }
+.audio-player.is-playing { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 10%, transparent), 0 20px 46px -32px var(--blue); }
+/* Inside an episode the player has no frame of its own, so the whole episode glows instead. */
+.podcast-episode .audio-player.is-playing { border-color: var(--line); box-shadow: none; }
+.podcast-episode:has(.audio-player.is-playing) { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 10%, transparent), 0 24px 54px -36px var(--blue); }
+.audio-player-skip, .audio-player-rate { transition: border-color .25s ease, background-color .25s ease, color .25s ease, box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.audio-player-skip:hover, .audio-player-rate:hover { color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 8px 20px -14px var(--blue); }
+.podcast-app, .podcast-episode { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.podcast-app::before, .podcast-episode::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 12%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.podcast-app:hover::before, .podcast-episode:hover::before { opacity: 1; }
+.podcast-app:hover, .podcast-app:focus-visible { transform: translateY(-3px); box-shadow: 0 18px 40px -28px color-mix(in srgb, var(--blue) 85%, transparent); }
+.podcast-app span { transition: translate .4s cubic-bezier(.22, 1, .36, 1); }
+.podcast-app:hover span { translate: 3px -2px; }
+.podcast-episode:hover { border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
+.podcast-episode > img { transition: transform .6s cubic-bezier(.22, 1, .36, 1), box-shadow .6s ease; }
+.podcast-episode:hover > img { transform: rotate(-1.5deg) scale(1.02); box-shadow: 0 0 0 1px var(--line), 0 18px 36px rgba(0, 0, 0, .35); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .podcast-steps li b { animation: step-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .podcast-app, .podcast-episode, .podcast-episode > img, .audio-player { transition: none; }
+}
+/* A player in a narrow column (an episode beside its cover on a tablet, 621–900 px) takes the phone layout from its own
+   width, so a longer label ("Abspielen", "Luaj") never pushes the speed past the edge of the page. */
+.audio-player { container-type: inline-size; }
+@media (min-width: 381px) { @container (max-width: 480px) {
+  .audio-player-row { display: grid; grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "play back fwd . rate" "scrub scrub scrub scrub time"; gap: 12px 8px; }
+  .audio-player-row[hidden] { display: none; }
+  .audio-player-play { grid-area: play; }
+  .audio-player-skip[data-audio-skip^="-"] { grid-area: back; }
+  .audio-player-skip:not([data-audio-skip^="-"]) { grid-area: fwd; }
+  .audio-player-rate { grid-area: rate; justify-self: end; }
+  .audio-player-scrub { grid-area: scrub; margin: 0; }
+  .audio-player-time { grid-area: time; }
+} }
