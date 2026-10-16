@@ -566,3 +566,15 @@ test('About: the title comes on like the bulb, the portrait opens into focus, ea
   const light = fs.readFileSync('_site/styles-light.css', 'utf8');
   for (const name of ['about-light', 'about-focus', 'about-reach', 'about-years']) assert.match(light, new RegExp(`@keyframes ${name}`));
 });
+
+test('Homepage: the note of the day rises and its quotation mark drifts, the strip lights its planets in turn, each section opens with a drawn line', () => {
+  assert.match(css, /\.note-of-day::before \{ animation: home-quote-drift linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.note-of-day-quote p \{ animation: closing-words linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.meta-strip > div:nth-child\(4\) strong::before \{ animation-range: entry 75% cover 45%; \}/);
+  assert.match(css, /\.meta-strip > div:hover strong::before \{ animation: none; \}/, 'the hover glow is not covered by the scroll');
+  assert.match(css, /\.meta-strip ~ \.section \.section-heading h2 \{ animation: home-heading linear both; animation-timeline: view\(\);/);
+  const home = fs.readFileSync('_site/index.html', 'utf8');
+  assert.ok(home.indexOf('class="shell meta-strip"') < home.indexOf('class="section-heading"'), 'the strip comes before the sections it opens');
+  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  for (const name of ['home-quote-drift', 'home-dot', 'home-heading']) assert.match(light, new RegExp(`@keyframes ${name}`));
+});
