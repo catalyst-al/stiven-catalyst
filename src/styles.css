@@ -8171,3 +8171,27 @@ a.essay-series-next:hover em { translate: 5px 0; }
   50% { rotate: 180deg; translate: 14px -10px; }
   100% { rotate: 360deg; translate: 0 0; }
 }
+
+/* The legal pages stay calm, so they are read: each heading draws a short blue line before it as it is reached, the
+   text itself does not move, and a link turns blue with its underline under the pointer. */
+.legal h2 { position: relative; padding-left: 22px; }
+.legal h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--blue);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 55%, transparent);
+  transform-origin: left;
+}
+.legal a { transition: color .25s ease, border-color .25s ease, box-shadow .3s ease; }
+.legal a:hover { color: var(--blue); box-shadow: 0 6px 12px -10px var(--blue); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .legal h2::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+  }
+}
+@keyframes legal-tick { from { scale: 0 1; opacity: 0; } }

@@ -427,3 +427,11 @@ test('404: the title comes into focus, the three lines follow, and a small plane
   assert.match(fs.readFileSync('_site/404.html', 'utf8'), /class="shell page-hero lost-hero"/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes lost-drift/);
 });
+
+test('legal pages: each heading draws a short blue line as it is reached, the text stays still, links turn blue', () => {
+  assert.match(css, /\.legal h2::before \{[\s\S]*?background: var\(--blue\);/);
+  assert.match(css, /\.legal h2::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.legal a:hover \{ color: var\(--blue\);/);
+  assert.doesNotMatch(css, /\.legal p \{[^}]*animation/, 'the text itself does not move');
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes legal-tick/);
+});
