@@ -4,7 +4,7 @@
 {%- for project in collections["projects" + (lang | langSuffix)] %}
 <article class="project-card">
   {%- if project.data.image %}{% set projectSize = project.data.image | imageSize %}<img class="project-image" src="{{ project.data.image }}" alt="" loading="lazy" decoding="async"{% if projectSize %} width="{{ projectSize.width }}" height="{{ projectSize.height }}"{% endif %}>{% endif %}
-  <span class="tag">{{ project.data.tag }}</span>
+  <span class="tag{% if project.data.live %} is-live{% endif %}">{{ project.data.tag }}</span>
   <div>
     <h2>{{ project.data.title }}</h2>
     <p>{{ project.data.summary }}</p>

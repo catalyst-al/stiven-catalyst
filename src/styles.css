@@ -7962,3 +7962,19 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @media (prefers-reduced-motion: reduce) {
   .book-chip, .book-button, .book-button svg, .issue-more-card, .issue-more-card img, .book-text details { transition: none; }
 }
+
+/* The Projects page in motion: inside each card the tag, the title, the text and the link come in one after another,
+   card after card; a project still in progress says so with a live, beating dot; a link that leaves the site turns
+   its arrow towards the corner. */
+@media (prefers-reduced-motion: no-preference) {
+  .project-grid .project-card > :is(.tag, div) { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both; }
+  .project-grid .project-card > div { animation-delay: .12s; }
+  .project-grid .project-card:nth-child(2) > * { animation-delay: .14s; }
+  .project-grid .project-card:nth-child(2) > div { animation-delay: .26s; }
+  .project-grid .project-card:nth-child(n + 3) > * { animation-delay: .28s; }
+  .project-grid .project-card:nth-child(n + 3) > div { animation-delay: .4s; }
+  .project-card .tag.is-live::before { animation: news-beat 2.4s ease-in-out infinite; }
+  .project-card .tag.is-live { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both, news-ring 2.4s ease-out infinite; }
+}
+.project-link[href^="http"] > span[aria-hidden="true"] { display: inline-block; transition: translate .4s cubic-bezier(.22, 1, .36, 1), rotate .4s cubic-bezier(.22, 1, .36, 1); }
+.project-card:hover .project-link[href^="http"] > span[aria-hidden="true"] { translate: 3px -2px; rotate: -45deg; }
