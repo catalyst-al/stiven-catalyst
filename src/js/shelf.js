@@ -113,11 +113,13 @@ window.Shelf = (() => {
     const fill = (t, vars) => String(t || "").replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
     const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
     const kindLabel = (k) => labels.kinds?.[k] || k;
-    const row = ({ url, title, meta, action }) => {
+    const row = ({ url, title, meta, action, progress }) => {
       const li = el("li", "shelf-row");
       const link = el("a", "shelf-row-link"); link.href = url;
       link.append(el("strong", "", title));
       if (meta) link.append(el("span", "shelf-row-meta", meta));
+      // How far an essay was read, as a thin line under it that fills up (styles.css: .has-progress).
+      if (progress !== undefined) { link.classList.add("has-progress"); link.style.setProperty("--p", Math.min(Math.max(progress, 0), 1)); }
       li.append(link);
       if (action) li.append(action);
       return li;
@@ -128,15 +130,25 @@ window.Shelf = (() => {
       const ul = box.querySelector("ul");
       const note = box.querySelector(".shelf-empty");
       ul.replaceChildren(...list);
+      // The first time the shelf is drawn its rows come in one after another (styles.css: .is-entering).
+      if (!drawn) list.forEach((li, i) => { li.classList.add("is-entering"); li.style.setProperty("--i", Math.min(i, 12)); });
       if (note) note.hidden = list.length > 0;
       if (note && !list.length) note.textContent = empty;
     };
+    let drawn = false;
     const draw = () => {
       // Saved for later, this language's pages first.
       const saved = items().sort((a, b) => (a.l === lang ? 0 : 1) - (b.l === lang ? 0 : 1) || b.at - a.at).map((item) => {
         const button = el("button", "shelf-remove", labels.remove || "Remove");
         button.type = "button";
-        button.addEventListener("click", () => { remove(item.u); badge(); draw(); });
+        button.addEventListener("click", () => {
+          remove(item.u); badge();
+          // The row slides away first, then the shelf is drawn again; at once when motion is reduced.
+          const li = button.closest("li");
+          if (!li || !window.matchMedia || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { draw(); return; }
+          li.classList.add("is-leaving");
+          setTimeout(draw, 320);
+        });
         return row({ url: item.u, title: item.t, meta: [kindLabel(item.k), item.l !== lang ? item.l.toUpperCase() : ""].filter(Boolean).join(" · "), action: button });
       });
       section("saved", saved, labels.noSaved);
@@ -147,12 +159,13 @@ window.Shelf = (() => {
       // Reading: begun and not finished, with how far, then finished.
       const reading = read("sc-reading", {});
       const entries = Object.entries(reading).filter(([slug]) => bySlug[slug]).sort((a, b) => (b[1].t || 0) - (a[1].t || 0));
-      const started = entries.filter(([, r]) => !r.done).map(([slug, r]) => row({ url: bySlug[slug].u, title: bySlug[slug].t, meta: `${kindLabel(bySlug[slug].k)} · ${fill(labels.percent, { p: Math.round((r.p || 0) * 100) })}` }));
+      const started = entries.filter(([, r]) => !r.done).map(([slug, r]) => row({ url: bySlug[slug].u, title: bySlug[slug].t, meta: `${kindLabel(bySlug[slug].k)} · ${fill(labels.percent, { p: Math.round((r.p || 0) * 100) })}`, progress: r.p || 0 }));
       const finished = entries.filter(([, r]) => r.done).map(([slug]) => row({ url: bySlug[slug].u, title: bySlug[slug].t, meta: kindLabel(bySlug[slug].k) }));
       section("started", started, labels.noReading);
       section("finished", finished, labels.noReading);
       const total = saved.length + inProgress.length + entries.length;
       root.querySelectorAll("[data-shelf-clear]").forEach((b) => { b.hidden = total === 0; });
+      drawn = true;
     };
     root.querySelectorAll("[data-shelf-clear]").forEach((b) => b.addEventListener("click", () => {
       if (!window.confirm(labels.confirmClear || "Clear the shelf?")) return;
