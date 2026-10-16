@@ -8,6 +8,13 @@ const path = require('node:path');
 const hasSite = fs.existsSync('_site/publications.html');
 const built = (file) => fs.readFileSync(path.join('_site', file), 'utf8');
 const css = fs.readFileSync('src/styles.css', 'utf8');
+// The stylesheet a built page loads: one per kind of page (lib/css-split.js), with only the rules its kind can use.
+const sheetOf = (page) => {
+  const html = fs.readFileSync(`_site/${page}`, 'utf8');
+  const name = html.match(/<link rel="stylesheet" href="\/(styles-[a-z]+\.css)\?v=[0-9a-f]+"/)?.[1];
+  assert.ok(name, `${page}: its stylesheet`);
+  return fs.readFileSync(`_site/${name}`, 'utf8');
+};
 
 test('pages move into each other only for readers who have not asked for less motion', () => {
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*@view-transition \{ navigation: auto; \}\s*\}/);
@@ -285,7 +292,7 @@ test('Tools: a role section carries its colour, and the section reached from its
 test('Insights: series light up, the next essay beats, search and the chosen topic glow', () => {
   assert.match(css, /\.series-panel::before \{[\s\S]*?var\(--mx, 50%\) var\(--my, 50%\)/);
   assert.match(css, /@media \(max-width: 620px\) \{ \.series-panel::before \{ inset: 4px -10px; \} \}/);
-  assert.match(css, /\.series-panel \.series-dots a\.is-next \{ animation: dot-next 2\.2s ease-in-out infinite; \}/);
+  assert.match(css, /\.series-panel \.series-dots a\.is-next::after \{ animation: dot-next 2\.2s ease-in-out infinite; \}/);
   assert.match(css, /\.series-panel \.series-dots li:nth-child\(12\) \{ animation-range: entry 48% entry 88%; \}/);
   assert.match(css, /\.filter-search:focus-within \{[\s\S]*?box-shadow: 0 0 0 4px/);
   assert.match(css, /\.filter-chips \.chip\[aria-pressed="true"\]::before \{[\s\S]*?border-radius: 50%;/);
@@ -347,21 +354,20 @@ test('Essays: the next essay and the tools answer the pointer, a principle draws
   assert.match(css, /\.essay-tools li a::before, a\.essay-series-next::before \{[\s\S]*?radial-gradient\(420px circle at var\(--mx, 30%\)/);
   assert.match(css, /\.article-content h2\[id\]:target::after \{[\s\S]*?animation: ring-arrive/);
   assert.match(css, /\.article-content :is\(p\.essay-principle, blockquote\) \{ animation: principle-in linear both; animation-timeline: view\(\);/);
-  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.series-track \.series-dots a\.is-next \{ animation: dot-next/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.series-track \.series-dots a\.is-next::after \{ animation: dot-next/);
   assert.match(css, /\.article-hero-media img \{ animation: cover-settle/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.essay-tools li a, a\.essay-series-next, /);
-  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
-  assert.match(light, /@keyframes ring-arrive/, 'essays use the light stylesheet, which keeps the arrival line');
+  assert.match(sheetOf('insights/gemba/index.html'), /@keyframes ring-arrive/, 'the essays\' stylesheet keeps the arrival line');
 });
 
 test('Publications: the cover floats, the contents open softly, the reader buttons glow, the other issues answer the pointer', () => {
-  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.book-object \{ animation: cover-float/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.book-object-cover \{ animation: cover-float/);
   assert.match(css, /\.book-contents:not\(\[hidden\]\) \{ animation: contents-in/);
   assert.match(css, /\[data-book-next\]:hover:not\(:disabled\) svg \{ translate: 2px 0; \}/);
   assert.match(css, /\.issue-more-card::before \{[\s\S]*?radial-gradient\(380px circle at var\(--mx, 30%\)/);
   assert.match(css, /\.book-closing blockquote p::before \{ animation: closing-line linear both; animation-timeline: view\(\);/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.issue-more-card, /);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes contents-in/, 'publications use the light stylesheet');
+  assert.match(sheetOf('magazine/management-review-nr-80.html'), /@keyframes contents-in/, 'the readers\' stylesheet keeps the contents\' entrance');
 });
 
 test('Projects: the cards fill in one after another, a project in progress beats, an outside link turns its arrow', () => {
@@ -372,7 +378,7 @@ test('Projects: the cards fill in one after another, a project in progress beats
     const html = fs.readFileSync(page, 'utf8');
     assert.equal((html.match(/class="tag is-live"/g) || []).length, 1, `${page}: only the project in progress beats`);
   }
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.tag\.is-live/);
+  assert.match(sheetOf('projects.html'), /\.tag\.is-live/);
 });
 
 test('Start here: the portrait breathes, each step number lights up as it is reached, the closing links draw their line', () => {
@@ -380,7 +386,7 @@ test('Start here: the portrait breathes, each step number lights up as it is rea
   assert.match(css, /\.start-number \{ animation: step-reach linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.start-more a:hover \{ background-size: 100% 1px; \}/);
   assert.match(css, /:where\([^)]*\.start-intro[^)]*\) \{\s*animation: scroll-rise/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes step-reach/);
+  assert.match(sheetOf('start.html'), /@keyframes step-reach/);
 });
 
 test('Search: the box glows, results come in one after another with the words swept in, a result answers the pointer', () => {
@@ -391,19 +397,19 @@ test('Search: the box glows, results come in one after another with the words sw
   assert.match(css, /\.search-results \.is-entering mark \{ animation: mark-sweep/);
   assert.match(css, /\.search-results a::before \{[\s\S]*?radial-gradient\(520px circle at var\(--mx, 30%\)/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.search-results a, /);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes mark-sweep/);
+  assert.match(sheetOf('search.html'), /@keyframes mark-sweep/);
 });
 
 test('Podcast: the cover floats, a playing episode glows and breathes, apps and episodes answer the pointer, steps light up', () => {
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.podcast-cover \{ animation: cover-float/);
-  assert.match(css, /\.audio-player\.is-playing \.audio-player-play \{ animation: news-ring/);
+  assert.match(css, /\.audio-player\.is-playing \.audio-player-play::after \{ animation: news-ring/);
   assert.match(css, /\.audio-player\.is-playing \{ border-color:/);
   assert.match(css, /\.podcast-episode:has\(\.audio-player\.is-playing\) \{ border-color:/, 'inside an episode the whole card glows');
   assert.match(css, /\.podcast-app::before, \.podcast-episode::before \{[\s\S]*?radial-gradient\(420px circle at var\(--mx, 30%\)/);
   assert.match(css, /\.podcast-steps li b \{ animation: step-reach linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.podcast-episode:target \{ animation: episode-arrive/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.podcast-app, \.podcast-episode, /);
-  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  const light = sheetOf('podcast.html');
   for (const name of ['cover-float', 'episode-arrive', 'step-reach', 'news-ring']) assert.match(light, new RegExp(`@keyframes ${name}`));
 });
 
@@ -416,7 +422,7 @@ test('Shelf: rows lift under the pointer, reading fills its line, a removed row 
   assert.match(css, /\.shelf-row-link\.has-progress::after \{ animation: progress-fill/);
   assert.match(css, /\.shelf-row\.is-leaving \{ animation: row-leave/);
   assert.match(css, /:where\([^)]*\.shelf-section[^)]*\) \{\s*animation: scroll-rise/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes row-leave/);
+  assert.match(sheetOf('shelf.html'), /@keyframes row-leave/);
 });
 
 test('404: the title comes into focus, the three lines follow, and a small planet drifts around the orbit it slipped off', () => {
@@ -425,7 +431,7 @@ test('404: the title comes into focus, the three lines follow, and a small plane
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.lost-hero h1 \{ animation: lost-focus/);
   assert.match(css, /\.lost-orbit i \{ animation: lost-drift 14s linear infinite; \}/);
   assert.match(fs.readFileSync('_site/404.html', 'utf8'), /class="shell page-hero lost-hero"/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes lost-drift/);
+  assert.match(sheetOf('404.html'), /@keyframes lost-drift/);
 });
 
 test('legal pages: each heading draws a short blue line as it is reached, the text stays still, links turn blue', () => {
@@ -433,7 +439,7 @@ test('legal pages: each heading draws a short blue line as it is reached, the te
   assert.match(css, /\.legal h2::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.legal a:hover \{ color: var\(--blue\);/);
   assert.doesNotMatch(css, /\.legal p \{[^}]*animation/, 'the text itself does not move');
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes legal-tick/);
+  assert.match(sheetOf('impressum.html'), /@keyframes legal-tick/);
 });
 
 test('How this is made reads as a path: a line that fills as the page is read, a stop at each heading that lights up', () => {
@@ -442,7 +448,7 @@ test('How this is made reads as a path: a line that fills as the page is read, a
   assert.match(css, /\.how-made h2::before \{ animation: how-reach linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.how-made > \*, \.how-made h2 \{ padding-left: 30px; \}/, 'headings and text start on the same line');
   for (const page of ['_site/how-this-is-made.html', '_site/sq/how-this-is-made.html', '_site/de/how-this-is-made.html']) assert.match(fs.readFileSync(page, 'utf8'), /class="shell legal how-made"/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes how-fill/);
+  assert.match(sheetOf('how-this-is-made.html'), /@keyframes how-fill/);
 });
 
 test('Operational treatise: the three layers come in one after another, each lights up in its own colour under the pointer', () => {
@@ -451,7 +457,7 @@ test('Operational treatise: the three layers come in one after another, each lig
   assert.match(css, /\.treatise-layer:nth-child\(3\) \{ animation-range: entry 60px entry 200px; \}/);
   assert.match(css, /\.treatise-layer::before \{ animation: layer-bar linear both; animation-timeline: view\(\);/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.treatise-layer, /);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes layer-bar/);
+  assert.match(sheetOf('magazine/operational-treatise-vol-02.html'), /@keyframes layer-bar/);
 });
 
 test('Management Review: "Review" is underlined as the page opens, a cover tilts towards the pointer with a glare', () => {
@@ -461,7 +467,7 @@ test('Management Review: "Review" is underlined as the page opens, a cover tilts
   assert.match(css, /\.weekly-hero \.weekly-mark::after \{ animation: mark-draw/);
   assert.match(css, /\.weekly-card:hover \.weekly-card-cover \{ transform: perspective\(700px\) translateY\(-4px\) rotateY\(calc\(\(var\(--px, \.5\) - \.5\) \* 14deg\)\)/);
   assert.match(css, /\.weekly-card-cover::before \{[\s\S]*?radial-gradient\(220px circle at var\(--mx, 50%\) var\(--my, 0%\)/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes mark-draw/);
+  assert.match(sheetOf('magazine/management-review.html'), /@keyframes mark-draw/);
 });
 
 test('From the Floor: the title rises from below its own line as the page opens, the lede follows', () => {
@@ -469,7 +475,7 @@ test('From the Floor: the title rises from below its own line as the page opens,
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.floor-hero h1 \{ animation: floor-rise/);
   assert.match(css, /@keyframes floor-rise \{ from \{ clip-path: inset\(-\.2em -\.2em 100% -\.2em\); translate: 0 100%; \}/, 'the clip and the move cancel out, so the lower edge stays put');
   for (const page of ['_site/magazine/from-the-floor.html', '_site/sq/magazine/from-the-floor.html', '_site/de/magazine/from-the-floor.html']) assert.match(fs.readFileSync(page, 'utf8'), /floor-hero/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes floor-rise/);
+  assert.match(sheetOf('magazine/from-the-floor.html'), /@keyframes floor-rise/);
 });
 
 test('Issue pages: the facts come in one after another, the charts answer the pointer and a bar lights up under it', () => {
@@ -478,7 +484,7 @@ test('Issue pages: the facts come in one after another, the charts answer the po
   assert.match(css, /\.wk-svg :is\(\.wk-bar, \.wk-col, \.wk-dot, \.wk-person, \.wk-day\):hover \{ filter: brightness\(1\.25\)/);
   assert.match(css, /:where\([^)]*\.weekly-chart[^)]*\) \{\s*animation: scroll-rise/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.weekly-card, \.weekly-chart, /);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.weekly-chart::before/);
+  assert.match(sheetOf('magazine/management-review-nr-05.html'), /\.weekly-chart::before/);
 });
 
 test('The book: the title comes into focus, the book turns towards the pointer, chapters in the full text draw their mark', () => {
@@ -489,14 +495,14 @@ test('The book: the title comes into focus, the book turns towards the pointer, 
   assert.match(css, /\.book-hero h1 \{ animation: lost-focus/);
   assert.match(css, /\.book-text-body \.book-text-kicker::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.book-closing blockquote p \{ animation: closing-words/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes closing-words/);
+  assert.match(sheetOf('books/mall-per-durresin.html'), /@keyframes closing-words/);
 });
 
 test('Tools guide: each change of an edition lights its mark as it is reached, an earlier edition points its arrow down', () => {
   assert.match(css, /\.book-editions li::before \{ animation: edition-mark linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.book-editions a\[download\]::after \{ content: "↓";/);
   assert.match(css, /\.book-editions a\[download\]:hover::after \{ translate: 0 3px; \}/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes edition-mark/);
+  assert.match(sheetOf('guides/tools-guide.html'), /@keyframes edition-mark/);
 });
 
 test('Podcast player: the line fills with what has been heard; "Copied" glows green on the address', async () => {
@@ -524,7 +530,7 @@ test('Publications: the title lifts like a page, each series keeps its colour, t
   assert.match(css, /\[data-pub\]\[data-block="floor"\] \{ --series: var\(--red\); \}/);
   assert.match(css, /\[data-pub\] \.kicker::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
   assert.match(css, /\[data-pub\]\.is-entering \.book-object-cover,/);
-  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  const light = sheetOf('publications.html');
   for (const name of ['pub-leaf', 'pub-cover-in', 'pub-count']) assert.match(light, new RegExp(`@keyframes ${name}`));
   const { JSDOM } = require('jsdom');
   const dom = new JSDOM(fs.readFileSync('_site/publications.html', 'utf8'), { url: 'https://stivencatalyst.com/publications.html', runScripts: 'outside-only', pretendToBeVisual: true });
@@ -547,12 +553,12 @@ test('Contact: the title finds its signal, the ways to write follow, each planet
   assert.match(fs.readFileSync('_site/contact.html', 'utf8'), /class="shell page-hero contact-hero"/);
   assert.match(fs.readFileSync('_site/sq/contact.html', 'utf8'), /class="shell page-hero contact-hero"/);
   assert.match(css, /\.contact-hero h1 \{ animation: contact-signal/);
-  assert.match(css, /\.contact-card-orb \{ animation: news-ring 2\.8s ease-out 1\.4s infinite; \}/);
-  assert.match(css, /\.contact-card \+ \.contact-card \.contact-card-orb \{ animation-delay: 2\.8s; \}/);
-  assert.match(css, /\.contact-card:is\(:hover, :focus-visible\) \.contact-card-orb \{ animation: none; \}/, 'the hover glow is not covered by the ring');
+  assert.match(css, /\.contact-card-orb::after \{ animation: news-ring 2\.8s ease-out 1\.4s infinite; \}/);
+  assert.match(css, /\.contact-card \+ \.contact-card \.contact-card-orb::after \{ animation-delay: 2\.8s; \}/);
+  assert.match(css, /\.contact-card:is\(:hover, :focus-visible\) \.contact-card-orb::after \{ animation: none; \}/, 'the hover glow is not covered by the ring');
   assert.match(css, /\.contact-card:active \{ transform: translateY\(-1px\) scale\(\.985\);/);
   assert.match(css, /\.contact-form \.field:focus-within label \{ color: var\(--blue\); \}/);
-  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes contact-signal/);
+  assert.match(sheetOf('contact.html'), /@keyframes contact-signal/);
 });
 
 test('About: the title comes on like the bulb, the portrait opens into focus, each step of the path lights as it is reached', () => {
@@ -563,7 +569,7 @@ test('About: the title comes on like the bulb, the portrait opens into focus, ea
   assert.match(css, /\.about-timeline li:hover \.about-when::before \{ animation: none; \}/, 'the hover glow is not covered by the scroll');
   assert.match(css, /\.about-copy \.large-copy \{ animation: closing-words linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.about-more > div:hover \{/);
-  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  const light = sheetOf('about.html');
   for (const name of ['about-light', 'about-focus', 'about-reach', 'about-years']) assert.match(light, new RegExp(`@keyframes ${name}`));
 });
 
@@ -575,6 +581,6 @@ test('Homepage: the note of the day rises and its quotation mark drifts, the str
   assert.match(css, /\.meta-strip ~ \.section \.section-heading h2 \{ animation: home-heading linear both; animation-timeline: view\(\);/);
   const home = fs.readFileSync('_site/index.html', 'utf8');
   assert.ok(home.indexOf('class="shell meta-strip"') < home.indexOf('class="section-heading"'), 'the strip comes before the sections it opens');
-  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  const light = sheetOf('index.html');
   for (const name of ['home-quote-drift', 'home-dot', 'home-heading']) assert.match(light, new RegExp(`@keyframes ${name}`));
 });

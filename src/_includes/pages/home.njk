@@ -143,5 +143,8 @@
       <a class="text-link" href="{{ '/about.html' | local(lang) }}">{{ "About Stiven Catalyst" | t(lang) }} <span aria-hidden="true">→</span></a>
     </div>
   </section>
+{#- The field notes of this language, one file the browser keeps (src/notes-data.njk), before the script that reads
+    them: deferred scripts run in the order they stand. -#}
+<script src="/js/notes-{{ lang or 'en' }}.js?v={{ dayNotes | noteDayData(lang) | stamp }}" defer></script>
 <script src="{{ '/js/note-of-the-day.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/share.js' | assetUrl }}" defer></script>

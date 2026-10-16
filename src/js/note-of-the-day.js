@@ -1,13 +1,15 @@
 // The field note of the day on the home page (partials/note-of-the-day.njk): the reader's own date picks
 // one note from the fixed list, the same for everyone that day, and the two cards further down show the two
-// notes after it. Runs before js/share.js reads the copy and share buttons (both are deferred, this one first).
+// notes after it. The list comes from /js/notes-<lang>.js (window.DayNotes, loaded first; src/notes-data.njk),
+// or from the section's own data-notes. Runs before js/share.js reads the copy and share buttons (both are
+// deferred, this one first).
 (() => {
   const box = document.querySelector("[data-note-of-day]");
   if (!box) return;
   // Each note comes already in the quotes of the page's language ("quoted" in eleventy.config.js).
   let notes = [];
-  try { notes = JSON.parse(box.dataset.notes || "[]"); } catch { return; }
-  if (!notes.length) return;
+  try { notes = box.dataset.notes ? JSON.parse(box.dataset.notes) : window.DayNotes; } catch { return; }
+  if (!Array.isArray(notes) || !notes.length) return;
 
   // Whole days since 1 January 1970 by the reader's calendar, so the note changes at the reader's midnight.
   const now = new Date();

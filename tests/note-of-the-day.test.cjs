@@ -44,6 +44,19 @@ test('the note follows the calendar day and the cards below show the two after i
   assert.equal($('[data-note-share]').dataset.shareUrl, `https://example.test/field-notes.html#note-0${index + 1}-x`);
 });
 
+test('the list may come from the notes file (window.DayNotes) instead of the section', () => {
+  const notes = ['A', 'B', 'C', 'D'].map((q, i) => ({ q: `“Note ${q}”`, id: `note-0${i + 1}-x`, d: `${i + 1} October 2026`, iso: `2026-10-0${i + 1}` }));
+  const dom = new JSDOM(`<body><section data-note-of-day data-page="https://example.test/field-notes.html">
+    <p data-note-quote>“Note A”</p><a data-note-link href="/field-notes.html#note-01-x">All</a>
+    <button data-note-copy data-copy-text="x">Copy</button><button data-note-share data-share-url="x" data-share-text="x">Share</button></section></body>`, { url: 'https://example.test/', runScripts: 'outside-only' });
+  dom.window.DayNotes = notes;
+  dom.window.eval(fs.readFileSync('src/js/note-of-the-day.js', 'utf8'));
+  const quote = dom.window.document.querySelector('[data-note-quote]').textContent;
+  const day = Math.floor(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) / 864e5);
+  assert.equal(quote, notes[day % 4].q);
+  assert.equal(dom.window.document.querySelector('[data-note-share]').dataset.shareUrl, `https://example.test/field-notes.html#${notes[day % 4].id}`);
+});
+
 test('the same day in the morning and late at night shows the same note; the next day another', () => {
   const morning = home('2026-10-05T00:05:00').$('[data-note-quote]').textContent;
   const night = home('2026-10-05T23:55:00').$('[data-note-quote]').textContent;

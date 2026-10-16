@@ -20,7 +20,7 @@
       <div class="cover-theme">{{ (I.coverTheme or I.theme)[0] }}<span class="accent">{{ (I.coverTheme or I.theme)[1] }}</span></div>
       <p class="cover-sub">{{ I.sub }}</p>
     </div>
-    <div class="wk-art"><img src="{{ W.cover.src }}" alt=""><p class="wk-no"><small>{{ L.no }}</small>{{ issue.no }}</p></div>
+    <div class="wk-art"><img src="{{ W.cover.src }}" alt="" width="{{ W.cover.width }}" height="{{ W.cover.height }}"><p class="wk-no"><small>{{ L.no }}</small>{{ issue.no }}</p></div>
   </div>
   {%- if I.figure %}
   <div class="wk-figure-cover"><b>{{ I.figure.n }}</b><p>{{ I.figure.t }}<i>{{ I.figure.by }}</i></p></div>
@@ -59,7 +59,7 @@
 </section>
 {%- elif page.type == "back" %}
 <section class="pg back">
-  <img src="{{ W.cover.src }}" alt="">
+  <img src="{{ W.cover.src }}" alt="" width="{{ W.cover.width }}" height="{{ W.cover.height }}">
   <div class="masthead">{{ W.mast[0] }}<span class="accent">{{ W.mast[1] }}</span></div>
   <p class="cover-tag">{{ W.tagline }}</p>
   <p>{{ W.back.line }}</p>

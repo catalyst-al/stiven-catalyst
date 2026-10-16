@@ -2,6 +2,10 @@
     publications of this language. js/search.js reads the index (/search-index.json, /de/…, /sq/…) once and searches in the browser;
     nothing is sent anywhere. Without JavaScript the form still shows what was asked and points to the lists. -#}
 {%- set indexUrl = "/search-index.json" if not lang or lang == "en" else "/" + lang + "/search-index.json" -%}
+{#- The address carries a stamp of the index (the same JSON partials/search-index.njk writes), so after a new essay the
+    browser fetches the new index instead of one it kept. -#}
+{%- set indexStamp -%}{% include "partials/search-index.njk" %}{%- endset -%}
+{%- set indexUrl = indexUrl + "?v=" + (indexStamp | stamp) -%}
 <section class="shell page-hero search-hero">
   <p class="eyebrow">{{ "Essays, field notes, tools" | t(lang) }}</p>
   <h1>{{ "Search" | t(lang) }}</h1>

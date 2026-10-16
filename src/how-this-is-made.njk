@@ -4,7 +4,8 @@
   // One page per language: /how-this-is-made.html (English), /de/how-this-is-made.html, /sq/how-this-is-made.html. What
   // it says is what can be checked: the byline of the issues, the method on their sources pages, the podcast's own note,
   // the corrections in the publications' data and the dates in online.json.
-  pagination: { data: "pageLangs", size: 1, alias: "lang" },
+  // Every language version joins the collections (and so the sitemap), not only the first page of the pagination.
+  pagination: { data: "pageLangs", size: 1, alias: "lang", addAllPagesToCollections: true },
   pageLangs: ["en", "de", "sq"],
   eleventyComputed: {
     title: (data) => ({ en: "How this is made", de: "Wie diese Seite entsteht", sq: "Si bëhet kjo faqe" })[data.lang],

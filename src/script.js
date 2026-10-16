@@ -110,6 +110,16 @@
     }
   }, { passive: true });
 
+  // What moves for ever (the planets' chips and shelf, the drawing behind a tool, the family cards, a floating cover,
+  // the breathing portrait) pauses while it is out of view, and goes on a little before it comes back (styles.css,
+  // .is-offscreen), so a page costs nothing while the reader is elsewhere on it.
+  if ("IntersectionObserver" in window) {
+    const still = new IntersectionObserver((entries) => {
+      for (const entry of entries) entry.target.classList.toggle("is-offscreen", !entry.isIntersecting);
+    }, { rootMargin: "25% 0px" });
+    document.querySelectorAll("[data-cosmos], [data-family-sky], .family-index, .family-visual, .family-more, .book-feature, .book-hero, .book-shelf, .podcast-cover, .about-brand-poster, .about-portrait, .start-intro, .lost-orbit, .role-rings, .family-badge-row").forEach((node) => still.observe(node));
+  }
+
   // About: the figures (10+, ~250, …) count up once when they come into view, keeping their own way of writing the
   // number; screen readers get the figure itself. With reduced motion they are simply shown.
   const figures = [...document.querySelectorAll(".about-stats dd")];

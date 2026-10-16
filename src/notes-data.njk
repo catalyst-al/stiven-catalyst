@@ -1,0 +1,14 @@
+---
+pagination:
+  data: noteLangs
+  size: 1
+  alias: noteLang
+noteLangs: ["en", "de", "sq"]
+permalink: "/js/notes-{{ noteLang }}.js"
+eleventyExcludeFromCollections: true
+---
+{#- The field notes of one language, oldest first, as the home page's note of the day reads them (js/note-of-the-day.js):
+    one file the browser keeps between visits instead of the whole list in the HTML of every home page. Its address
+    carries a stamp of the content (pages/home.njk), so a new note gives it a new address. -#}
+// The field notes in this language, in the order the note of the day cycles through (src/content/notes).
+window.DayNotes = {{ collections["notes" + (noteLang | langSuffix)] | chronological | noteDayData(noteLang) | scriptJson | safe }};

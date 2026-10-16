@@ -10,14 +10,16 @@
   /* While Archivo Black downloads, the headings are drawn with the device's bold sans (Arial, Liberation,
      Arimo, Roboto) widened to its measure: Archivo Black is about 13% wider than Arial Bold, with an ascent
      of 88% and a descent of 21% of the font size. So the text keeps its width and line height when the
-     real font arrives, and nothing on the page moves (layout shift). */
+     real font arrives, and nothing on the page moves (layout shift). Browsers scale the ascent and descent
+     overrides by size-adjust as well, so they are written divided by 1.13: 77.9% × 1.13 = 88%, 18.6% × 1.13 = 21%
+     (measured in Chromium: the text sits exactly where Archivo Black puts it). */
   font-family: "Archivo Black Fallback";
   src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"), local("Arimo Bold"), local("Arimo-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Helvetica Bold"), local("Helvetica-Bold");
   font-weight: 400 900;
   font-style: normal;
   size-adjust: 113%;
-  ascent-override: 88%;
-  descent-override: 21%;
+  ascent-override: 77.9%;
+  descent-override: 18.6%;
   line-gap-override: 0%;
 }
 
@@ -247,7 +249,7 @@ button, input, select { font: inherit; }
    of light leaves the pill, the way the family chips call. In the phone menu the planet follows the name, and the
    menu button carries a dot. */
 .main-nav a.has-news .nav-orb { opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
-.main-nav a.has-news { animation: news-ring 2.6s ease-out infinite; }
+.main-nav a.has-news::after { animation: news-ring 2.6s ease-out infinite; }
 .mobile-panel .nav-orb { display: none; }
 .mobile-panel a.has-news .nav-orb { display: inline-block; width: 9px; height: 9px; margin-left: 12px; vertical-align: .3em; opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
 .menu-button { position: relative; }
@@ -264,13 +266,29 @@ button, input, select { font: inherit; }
   animation: news-beat 1.8s ease-in-out infinite;
 }
 .menu-button.has-news[aria-expanded="true"]::after { opacity: 0; }
+/* The pulses of the site move only scale and opacity, which the compositor draws without the main thread: a
+   box-shadow or a filter that changes would repaint the element and its surroundings on every frame. The beat is the
+   planet growing, its own glow growing with it. */
 @keyframes news-beat {
-  0%, 100% { scale: 1; box-shadow: 0 0 6px var(--blue); }
-  50% { scale: 1.4; box-shadow: 0 0 14px var(--blue); }
+  0%, 100% { scale: 1; }
+  50% { scale: 1.4; }
 }
+/* The ring a pulse sends out is a pseudo-element with the ring drawn once, fading as it widens into place. */
 @keyframes news-ring {
-  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--blue) 32%, transparent); }
-  70%, 100% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--blue) 0%, transparent); }
+  0% { opacity: 1; scale: .94; }
+  70%, 100% { opacity: 0; scale: 1; }
+}
+.main-nav a.has-news::after,
+.project-card .tag.is-live::after,
+.audio-player.is-playing .audio-player-play::after,
+.contact-card-orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--blue) 32%, transparent);
+  opacity: 0;
+  pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .main-nav a.has-news,
@@ -278,6 +296,7 @@ button, input, select { font: inherit; }
   .mobile-panel a.has-news .nav-orb,
   .menu-button.has-news::after { animation: none; box-shadow: 0 0 10px var(--blue); }
   .main-nav a.has-news { box-shadow: none; }
+  .main-nav a.has-news::after { animation: none; }
 }
 
 /* Moving between pages: the browser keeps the header still, slides the marked menu item and writing tab to their new
@@ -469,8 +488,19 @@ button, input, select { font: inherit; }
   font: inherit;
   text-align: left;
   cursor: pointer;
-  animation: chip-ring 3.2s ease-out infinite;
   transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+/* The ring each chip sends out, drawn once on a pseudo-element and faded by the compositor. */
+.cosmos-chip { position: relative; }
+.cosmos-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 12px color-mix(in srgb, var(--family) 45%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  animation: chip-ring 3.2s ease-out infinite;
 }
 /* Each chip's dot is a small planet that beats, one after the other around the row. */
 .cosmos-chip-dot {
@@ -482,11 +512,11 @@ button, input, select { font: inherit; }
   box-shadow: 0 0 10px var(--family);
   animation: chip-beat 1.6s ease-in-out infinite;
 }
-.cosmos-chip:nth-child(2),
+.cosmos-chip:nth-child(2)::after,
 .cosmos-chip:nth-child(2) .cosmos-chip-dot { animation-delay: .4s; }
-.cosmos-chip:nth-child(3),
+.cosmos-chip:nth-child(3)::after,
 .cosmos-chip:nth-child(3) .cosmos-chip-dot { animation-delay: .8s; }
-.cosmos-chip:nth-child(4),
+.cosmos-chip:nth-child(4)::after,
 .cosmos-chip:nth-child(4) .cosmos-chip-dot { animation-delay: 1.2s; }
 /* The planet's name, and under it the role it stands for. */
 .cosmos-chip-text {
@@ -522,22 +552,25 @@ button, input, select { font: inherit; }
   animation: none;
 }
 @keyframes chip-beat {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 8px var(--family); }
-  50% { transform: scale(1.45); box-shadow: 0 0 18px var(--family); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.45); }
 }
 @keyframes chip-ring {
-  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--family) 45%, transparent); }
-  70%, 100% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--family) 0%, transparent); }
+  0% { opacity: 1; scale: .94; }
+  70%, 100% { opacity: 0; scale: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cosmos-chip,
+  .cosmos-chip::after,
   .cosmos-chip-dot { animation: none; }
   .cosmos-chip:hover { transform: none; }
 }
 /* Stopped with "Pause the motion" (js/cosmos.js), as with reduced motion; so are the books of the open planet. */
 .cosmos.is-paused .cosmos-chip,
+.cosmos.is-paused .cosmos-chip::after,
 .cosmos.is-paused .cosmos-chip-dot,
-.cosmos.is-paused .book-shelf-item .book-object { animation: none; }
+.cosmos.is-paused .book-shelf-item .book-object,
+.cosmos.is-paused .book-shelf-item .book-object-cover { animation: none; }
 
 /* Small books, as on Publications: the shelf under the homepage hero and the guide at the end of a tool page. */
 .book-shelf {
@@ -571,11 +604,14 @@ button, input, select { font: inherit; }
   color: var(--ink);
   text-decoration: none;
 }
-.book-shelf-item .book-object { width: 78px; flex: none; animation: shelf-float 6s ease-in-out infinite; }
-.book-shelf-item:nth-of-type(2) .book-object { animation-delay: -2s; }
-.book-shelf-item:nth-of-type(3) .book-object { animation-delay: -4s; }
-.book-shelf-item:nth-of-type(4) .book-object { animation-delay: -1s; }
-.book-shelf-item:nth-of-type(5) .book-object { animation-delay: -3s; }
+.book-shelf-item .book-object { width: 78px; flex: none; }
+/* The cover floats (translate, which the compositor moves and which composes with the cover's turn under the pointer);
+   the glow under it stays and breathes on the object itself. With both on one element the float ran on the main thread. */
+.book-shelf-item .book-object-cover { animation: shelf-float 6s ease-in-out infinite; }
+.book-shelf-item:nth-of-type(2) .book-object-cover { animation-delay: -2s; }
+.book-shelf-item:nth-of-type(3) .book-object-cover { animation-delay: -4s; }
+.book-shelf-item:nth-of-type(4) .book-object-cover { animation-delay: -1s; }
+.book-shelf-item:nth-of-type(5) .book-object-cover { animation-delay: -3s; }
 .book-shelf-item .book-object::before { inset: 10% -30% 0; filter: blur(18px); }
 .book-shelf-item .book-object-cover { box-shadow: 1px 1px 0 #f3efe6, 2px 2px 0 #d9d2c3, 3px 3px 0 #f3efe6, 4px 4px 0 #cbc3b2, 18px 22px 30px -8px rgba(0, 0, 0, .6); }
 .book-shelf-item:hover .book-object-cover,
@@ -586,12 +622,10 @@ a.book-shelf-item:focus-visible .book-object-cover { transform: rotateY(-9deg) r
 .book-shelf-text strong { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.15; }
 .book-shelf-text span { color: var(--blue); font-size: 13px; font-weight: 600; }
 a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--blue)); }
-@keyframes shelf-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
+@keyframes shelf-float { 50% { translate: 0 -5px; } }
 @media (prefers-reduced-motion: reduce) {
-  .book-shelf-item .book-object { animation: none; }
+  .book-shelf-item .book-object,
+  .book-shelf-item .book-object-cover { animation: none; }
 }
 @media (max-width: 1180px) {
   .hero-shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
@@ -4048,10 +4082,9 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 }
 .about-portrait img { display: block; width: 100%; height: auto; transition: scale .8s cubic-bezier(.22, 1, .36, 1); }
 .about-portrait:hover img { scale: 1.04; }
-/* The ring of light around the portrait breathes slowly, like the bulb of the brand. */
-@keyframes portrait-breathe {
-  50% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--blue) 16%, transparent), 0 0 46px -6px color-mix(in srgb, var(--blue) 45%, transparent), 0 24px 60px rgba(0,0,0,.35); }
-}
+/* The portrait breathes slowly, like the bulb of the brand: a gentle change of size, drawn by the compositor, with its
+   ring of light. */
+@keyframes portrait-breathe { 50% { scale: 1.015; } }
 
 /* About: the path so far, newest first. */
 .about-path { border-bottom: 1px solid var(--line); }
@@ -4092,7 +4125,7 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   vertical-align: .08em;
   transition: opacity .3s ease, box-shadow .3s ease, scale .3s cubic-bezier(.22, 1, .36, 1);
 }
-.about-timeline li:first-child .about-when::before { opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
+.about-timeline li:first-child .about-when::before { opacity: 1; box-shadow: 0 0 8px var(--blue); animation: news-beat 1.8s ease-in-out infinite; }
 .about-timeline li::before {
   content: "";
   position: absolute;
@@ -4113,14 +4146,23 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .about-timeline li:hover h3 { translate: 5px 0; }
 @media (max-width: 620px) { .about-timeline li::before { inset: 4px -10px; } }
 /* The bulb on the About poster breathes, and glows brighter under the pointer. */
-.about-brand-poster .brand-bulb { animation: bulb-breathe 4.5s ease-in-out infinite; transition: filter .5s ease; }
-.about-brand-poster:hover .brand-bulb { filter: brightness(1.12) drop-shadow(0 0 22px rgba(82, 184, 247, .8)); }
-@keyframes bulb-breathe {
-  50% { box-shadow: 0 0 18px #fff, 0 0 64px rgba(255, 255, 255, .95), 0 0 130px rgba(82, 184, 247, .85); }
+.about-brand-poster .brand-bulb { transition: filter .5s ease; }
+/* The bulb breathes: a pseudo-element with the brighter glow, faded in and out by the compositor. */
+.about-brand-poster .brand-bulb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 18px rgba(255, 255, 255, .7), 0 0 64px rgba(255, 255, 255, .55), 0 0 130px rgba(82, 184, 247, .6);
+  opacity: 0;
+  pointer-events: none;
+  animation: bulb-breathe 4.5s ease-in-out infinite;
 }
+.about-brand-poster:hover .brand-bulb { filter: brightness(1.12) drop-shadow(0 0 22px rgba(82, 184, 247, .8)); }
+@keyframes bulb-breathe { 50% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   .about-portrait,
-  .about-brand-poster .brand-bulb,
+  .about-brand-poster .brand-bulb::after,
   .about-timeline li:first-child .about-when::before { animation: none; }
 }
 .about-timeline h3 {
@@ -5654,6 +5696,10 @@ html:has(.book-zoom[open]) { overflow: hidden; }
   font-weight: 800;
 }
 .cv-badge.is-done { color: var(--ok); }
+/* The badge is filled by the tool's script ("CV check: 3 of 7"); until then it keeps the room of one line, unseen,
+   so the toolbar and the CV below it do not move when the text arrives. */
+.cv-badge:empty { visibility: hidden; }
+.cv-badge:empty::before { content: "\200B"; }
 .cv-status { min-height: 0; margin: 0; }
 .cv-status:empty { display: none; }
 .cv-stage { position: relative; overflow: hidden; }
@@ -6395,6 +6441,13 @@ body.in-family {
   mask-image: linear-gradient(180deg, #000 calc(100% - 300px), transparent);
 }
 .family-sky > * { position: absolute; }
+/* What moves for ever (the planets' chips and shelf, the drawing behind a tool, the family cards, a floating cover, the
+   breathing portrait) pauses while it is out of view and goes on a little before it comes back (script.js). */
+.is-offscreen, .is-offscreen *, .is-offscreen *::before, .is-offscreen *::after { animation-play-state: paused !important; }
+/* With scripts, the drawing appears once js/family-sky.js has placed the planet (.is-ready), so nothing in it
+   moves while it is visible and the page keeps its layout stable; without scripts it is simply there. */
+.js .family-sky { transition: opacity .6s ease; }
+.js .family-sky:not(.is-ready) { opacity: 0; }
 
 .family-badge-row { padding-top: 40px; }
 .family-badge-row + .tool-hero { padding-top: 26px; }
@@ -6907,7 +6960,21 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 @media (prefers-reduced-motion: no-preference) {
   .family-badge > span { animation: badge-breathe 3.2s ease-in-out infinite; }
 }
-@keyframes badge-breathe { 50% { box-shadow: 0 0 16px 2px var(--family); scale: 1.15; } }
+@keyframes badge-breathe { 50% { scale: 1.15; } }
+.family-badge > span { position: relative; }
+.family-badge > span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 16px 2px var(--family);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .family-badge > span::after { animation: badge-glow 3.2s ease-in-out infinite; }
+}
+@keyframes badge-glow { 50% { opacity: 1; } }
 
 /* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
 .role-hero .eyebrow { color: var(--sky-ink); }
@@ -7502,10 +7569,11 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   margin-right: 6px;
   border-radius: 50%;
   background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
   vertical-align: .12em;
   animation: news-beat 1.8s ease-in-out infinite;
 }
-@media (prefers-reduced-motion: reduce) { .new-badge::before { animation: none; box-shadow: 0 0 8px var(--blue); } }
+@media (prefers-reduced-motion: reduce) { .new-badge::before { animation: none; } }
 .new-badge {
   display: inline-block;
   margin-right: 10px;
@@ -7581,11 +7649,19 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 @media (max-width: 620px) { .series-panel::before { inset: 4px -10px; } }
 .series-dots a { transition: transform .25s cubic-bezier(.22, 1, .36, 1), background-color .25s ease, box-shadow .3s ease; }
 .series-dots a:hover { box-shadow: 0 0 12px color-mix(in srgb, var(--blue) 70%, transparent); }
-.series-panel .series-dots a.is-next { animation: dot-next 2.2s ease-in-out infinite; }
-@keyframes dot-next {
-  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 12%, transparent), 0 0 14px color-mix(in srgb, var(--blue) 55%, transparent); }
+/* The next essay's dot beats: a pseudo-element with the wider ring and the glow, faded in and out by the compositor. */
+.series-dots a.is-next::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 12%, transparent), 0 0 14px color-mix(in srgb, var(--blue) 55%, transparent);
+  opacity: 0;
+  pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { .series-panel .series-dots a.is-next { animation: none; } }
+.series-panel .series-dots a.is-next::after { animation: dot-next 2.2s ease-in-out infinite; }
+@keyframes dot-next { 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .series-panel .series-dots a.is-next::after { animation: none; } }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .series-panel .series-dots li { animation: dot-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
@@ -7901,7 +7977,7 @@ a.essay-series-next:hover em { translate: 5px 0; }
   animation: ring-arrive 2.2s cubic-bezier(.22, 1, .36, 1) 1 both;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .series-track .series-dots a.is-next { animation: dot-next 2.2s ease-in-out infinite; }
+  .series-track .series-dots a.is-next::after { animation: dot-next 2.2s ease-in-out infinite; }
   .article-hero-media img { animation: cover-settle 1.6s cubic-bezier(.22, 1, .36, 1) both; }
 }
 @keyframes cover-settle { from { scale: 1.08; opacity: .4; } }
@@ -7920,7 +7996,7 @@ a.essay-series-next:hover em { translate: 5px 0; }
    buttons and chips glow, the contents open softly over the book, the full text unfolds, the closing quote draws
    its line as it is reached, and the other issues answer the pointer. */
 @media (prefers-reduced-motion: no-preference) {
-  .book-object { animation: cover-float 6s ease-in-out infinite; }
+  .book-object-cover { animation: cover-float 6s ease-in-out infinite; }
   .book-object::before { animation: cover-glow 6s ease-in-out infinite; }
   .book-contents:not([hidden]) { animation: contents-in .35s cubic-bezier(.22, 1, .36, 1) both; }
   .book-text details[open] .book-text-body { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; }
@@ -7978,7 +8054,8 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .project-grid .project-card:nth-child(n + 3) > * { animation-delay: .28s; }
   .project-grid .project-card:nth-child(n + 3) > div { animation-delay: .4s; }
   .project-card .tag.is-live::before { animation: news-beat 2.4s ease-in-out infinite; }
-  .project-card .tag.is-live { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both, news-ring 2.4s ease-out infinite; }
+  .project-card .tag.is-live { position: relative; animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both; }
+  .project-card .tag.is-live::after { animation: news-ring 2.4s ease-out infinite; }
 }
 .project-link[href^="http"] > span[aria-hidden="true"] { display: inline-block; transition: translate .4s cubic-bezier(.22, 1, .36, 1), rotate .4s cubic-bezier(.22, 1, .36, 1); }
 .project-card:hover .project-link[href^="http"] > span[aria-hidden="true"] { translate: 3px -2px; rotate: -45deg; }
@@ -8047,7 +8124,8 @@ a.essay-series-next:hover em { translate: 5px 0; }
    episode reached from a link greets you; "Copied" comes in softly. */
 @media (prefers-reduced-motion: no-preference) {
   .podcast-cover { animation: cover-float 6s ease-in-out infinite; }
-  .audio-player.is-playing .audio-player-play { animation: news-ring 2.4s ease-out infinite; }
+  .audio-player.is-playing .audio-player-play { position: relative; }
+  .audio-player.is-playing .audio-player-play::after { animation: news-ring 2.4s ease-out infinite; }
   .podcast-copied:not(:empty) { animation: list-in .4s cubic-bezier(.22, 1, .36, 1) both; }
   .podcast-episode:target { animation: episode-arrive 2.2s ease-out 1; }
 }
@@ -8162,14 +8240,16 @@ a.essay-series-next:hover em { translate: 5px 0; }
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .lost-hero h1 { animation: lost-focus 1s cubic-bezier(.22, 1, .36, 1) both; }
+  .lost-hero h1 { animation: lost-focus 1s cubic-bezier(.22, 1, .36, 1) both; transform-origin: left; }
   .lost-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both; animation-delay: .35s; }
   .lost-hero .lede + .lede { animation-delay: .5s; }
   .lost-hero .lede + .lede + .lede { animation-delay: .65s; }
   .lost-orbit i { animation: lost-drift 14s linear infinite; }
   .lost-orbit b { animation: news-beat 4s ease-in-out infinite; }
 }
-@keyframes lost-focus { from { opacity: 0; filter: blur(8px); letter-spacing: -.02em; } }
+/* The tightening is a horizontal scale, not letter-spacing: spacing changes the width of the words, and a title near the
+   width of its column re-wrapped while it came into focus, moving everything under it (the book, 16 October 2026). */
+@keyframes lost-focus { from { opacity: 0; filter: blur(8px); scale: .98 1; } }
 @keyframes lost-drift {
   0% { rotate: 0deg; translate: 0 0; }
   50% { rotate: 180deg; translate: 14px -10px; }
@@ -8526,17 +8606,18 @@ a.essay-series-next:hover em { translate: 5px 0; }
 .contact-form button:active { scale: .96; }
 @media (prefers-reduced-motion: no-preference) {
   .contact-hero .eyebrow { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; }
-  .contact-hero h1 { animation: contact-signal 1.1s cubic-bezier(.22, 1, .36, 1) .1s both; }
+  .contact-hero h1 { animation: contact-signal 1.1s cubic-bezier(.22, 1, .36, 1) .1s both; transform-origin: left; }
   .contact-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .4s both; }
   .contact-hero ~ .contact .contact-card { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) backwards; animation-delay: .55s; }
   .contact-hero ~ .contact .contact-card + .contact-card { animation-delay: .67s; }
   .contact-hero ~ .contact .contact-form { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .5s backwards; }
-  .contact-card-orb { animation: news-ring 2.8s ease-out 1.4s infinite; }
-  .contact-card + .contact-card .contact-card-orb { animation-delay: 2.8s; }
-  .contact-card:is(:hover, :focus-visible) .contact-card-orb { animation: none; }
+  .contact-card-orb { position: relative; }
+  .contact-card-orb::after { animation: news-ring 2.8s ease-out 1.4s infinite; }
+  .contact-card + .contact-card .contact-card-orb::after { animation-delay: 2.8s; }
+  .contact-card:is(:hover, :focus-visible) .contact-card-orb::after { animation: none; }
 }
 @keyframes contact-signal {
-  0% { opacity: 0; letter-spacing: .06em; filter: blur(10px); }
+  0% { opacity: 0; scale: 1.06 1; filter: blur(10px); }
   60% { opacity: 1; filter: blur(0); }
 }
 @media (prefers-reduced-motion: reduce) { .contact-card:active { transform: none; } .contact-form button, .contact-form .field label { transition: none; } }

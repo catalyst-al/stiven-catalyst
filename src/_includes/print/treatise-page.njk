@@ -21,7 +21,7 @@
       <div class="cover-theme">{{ V.theme[0] }}<span class="accent">{{ V.theme[1] }}</span></div>
       <p class="cover-sub">{{ V.sub }}</p>
     </div>
-    <div class="wk-art"><img src="{{ treatise.cover.src }}" alt=""><p class="wk-no tr-no"><small>{{ L.volume }}</small>{{ volume.number }}</p></div>
+    <div class="wk-art"><img src="{{ treatise.cover.src }}" alt="" width="{{ treatise.cover.width }}" height="{{ treatise.cover.height }}"><p class="wk-no tr-no"><small>{{ L.volume }}</small>{{ volume.number }}</p></div>
   </div>
   {%- if V.figure %}
   <div class="wk-figure-cover"><b>{{ V.figure.n }}</b><p>{{ V.figure.t }}<i>{{ V.figure.by }}</i></p></div>
@@ -74,7 +74,7 @@
 </section>
 {%- elif page.type == "back" %}
 <section class="pg back">
-  <img src="{{ treatise.cover.src }}" alt="">
+  <img src="{{ treatise.cover.src }}" alt="" width="{{ treatise.cover.width }}" height="{{ treatise.cover.height }}">
   <div class="masthead">Management<span class="accent">Review</span></div>
   <p class="cover-tag">{{ W.tagline }}</p>
   <p>{{ W.back.line }}</p>

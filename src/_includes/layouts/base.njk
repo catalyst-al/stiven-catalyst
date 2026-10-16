@@ -1,5 +1,8 @@
 {%- set shortTitle = seo_title or title -%}
-{%- set pageTitle = (shortTitle + " | " + site.title) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
+{#- The site's name follows the title only while the whole stays within about 60 characters, what a search result
+    shows; a longer title stands alone, since the name would be the part cut off (the site name is in the structured
+    data, partials/structured-data.njk). -#}
+{%- set pageTitle = ((shortTitle + " | " + site.title) if (shortTitle | length) + 3 + (site.title | length) <= 60 else shortTitle) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set homeUrl = "/" | local(lang) -%}
 {#- The menu: five places. "Writing" covers Insights, Reflections and Field Notes (the third item lists the pages
