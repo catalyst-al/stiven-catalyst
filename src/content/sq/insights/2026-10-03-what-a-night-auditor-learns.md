@@ -38,7 +38,7 @@ Në fillim marr dorëzimin nga turni i mëparshëm dhe përpiqem të kuptoj gjen
 
 Në mes të turnit nis kontrolli më i thellë, dhe pikërisht atëherë dalin shumë nga mospërputhjet mes asaj që tregon sistemi dhe asaj që ka ndodhur vërtet gjatë ditës. Kontrollohen rezervimet, statuset, dokumentacioni, çështjet financiare dhe çdo problem operacional që mund të pengojë mbylljen e ditës.
 
-Pastaj vjen mbyllja, pjesa ku mund të dalë në pah çdo problem i vogël i lënë pas gjatë ditës. Para se të mbyllet dita, duhet të jem i bindur se gjërat kryesore janë në rregull dhe se ajo që kalon në ditën tjetër kuptohet.
+Pastaj vjen mbyllja, që për mua është pjesa ku mund të dalë në pah çdo problem i vogël i lënë pas gjatë ditës. Para se të mbyllet dita, duhet të jem i bindur se gjërat kryesore janë në rregull dhe se ajo që kalon në ditën tjetër kuptohet.
 
 Në fund vjen dorëzimi. Një turn nate nuk mbaron kur mbyllet sistemi. Mbaron kur personi që vjen pas meje e kupton qartë çfarë ndodhi, çfarë u zgjidh dhe çfarë mbetet për t'u ndjekur.
 
@@ -48,9 +48,9 @@ Shumica janë gjëra të vogla, aspak spektakolare, që krijojnë problem më vo
 
 Kam hasur rezervime që nuk përputhen plotësisht me atë që ndodhi vërtet dhe statuse dhomash që duhen verifikuar. Ka dokumentacion të papërfunduar, fatura apo postime që duhen kontrolluar dhe informacione që nuk kaluan siç duhet nga një turn te tjetri. Pastaj janë çështjet që askush nuk i harroi me qëllim, por që mbetën pezull sepse gjatë ditës kishte shumë punë.
 
-Nata i nxjerr në dritë këto gjëra sepse ndryshon ritmi. Para recepsionit fluksi i njerëzve bie, dhe arrin të shohësh më qartë prapa procesit.
+Nata i nxjerr në dritë këto gjëra sepse ndryshon ritmi. Para recepsionit fluksi i njerëzve bie, dhe arrin të shohësh më qartë çfarë fshihet pas procesit.
 
-Kjo punë më ka mësuar se shumë gabime nuk lindin nga mungesa e aftësisë, por nga ndërprerjet, komunikimi i paplotë dhe fjalia “Do ta bëjmë më vonë.” Shpesh, “më vonë” është turni i natës.
+Kjo punë më ka mësuar se shumë gabime kanë pak të bëjnë me aftësinë: ato lindin nga ndërprerjet, komunikimi i paplotë dhe fjalia “Do ta bëjmë më vonë.” Shpesh, “më vonë” është turni i natës.
 
 ## No-show-t dhe pagesat
 
@@ -68,7 +68,7 @@ Mbyllja e ditës më ka mësuar ta mbyll një proces kur gjërat që varen prej 
 
 Në javët e para, natyrisht, vëmendja ime ishte kryesisht te lista: cili hap vjen pas cilit, çfarë duhet hapur, çfarë duhet kontrolluar dhe me çfarë radhe.
 
-Sot e shoh ndryshe. Pyetja nuk është më vetëm “A e bëra këtë hap?”, por “A është vërtet në rregull ajo që ky hap duhet të kontrollojë?”
+Sot e shoh ndryshe. Pas pyetjes “A e bëra këtë hap?” vjen një e dytë: “A është vërtet në rregull ajo që ky hap duhet të kontrollojë?”
 
 Ky është ndryshim i madh. Një listë kontrolli mund të plotësohet mekanikisht, por një Night Audit i mirë kërkon të kuptosh si varen proceset nga njëri-tjetri. Nëse diçka më herët nuk është mbyllur siç duhet, nuk ka kuptim ta nxitosh procesin vetëm që lista të duket e përfunduar.
 
@@ -86,7 +86,7 @@ Kjo ka rëndësi të veçantë natën, kur tundimi për të thënë “Jam vetë
 
 ## Pesë minuta me menaxherët e ditës
 
-Po të kisha pesë minuta me menaxherët e ditës, do t'u kërkoja të mos e lexonin raportin e natës vetëm si provë se hoteli kaloi edhe një natë. Ai tregon shumë më tepër.
+Po të kisha pesë minuta me menaxherët e ditës, do t'u kërkoja ta lexonin raportin e natës për atë që tregon, e që është shumë më tepër se prova që hoteli kaloi edhe një natë.
 
 Pesë gjërat që do të shihja çdo mëngjes:
 

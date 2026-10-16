@@ -48,23 +48,23 @@ Operacionet nuk ecin pa njerëzit që i mbajnë në këmbë çdo ditë.
 
 Kam punuar në mjedise me presion, objektiva, vonesa, gabime dhe çaste kur duhej reaguar shpejt. Kam mësuar se standardi mund të jetë i lartë dhe kërkesa e prerë pa e cenuar dinjitetin e personit përballë. Presioni mund të jetë i drejtë; poshtërimi jo.
 
-Një menaxher duhet të dijë të kërkojë llogari pa e përdorur frikën si mënyrë drejtimi, sepse një ekip që ka frikë t'i tregojë gabimet nuk ka më pak gabime. Ka vetëm më pak gabime të dukshme.
+Për mua, një menaxher duhet të dijë të kërkojë llogari pa e përdorur frikën si mënyrë drejtimi, sepse një ekip që ka frikë t'i tregojë gabimet nuk ka më pak gabime. Ka vetëm më pak gabime të dukshme.
 
 ## 2. Standardet
 
 Kam mësuar të mos u besoj shumë proceseve që funksionojnë vetëm sepse një person me përvojë “e di si bëhet”. Nëse rezultati varet nga fakti që në turn është personi i duhur, atëherë organizata ka njohuri, por ende nuk ka standard.
 
-Prandaj besoj te SOP-të, te listat e kontrollit dhe te mënyrat e qarta të punës. Prova e një SOP-je është nëse një person tjetër arrin të njëjtin rezultat, edhe nën presion dhe pa autorin pranë për ta pyetur, jo sa profesionale duket në një dokument.
+Prandaj besoj në SOP-të, në listat e kontrollit dhe në mënyrat e qarta të punës. Prova e një SOP-je është nëse një person tjetër arrin të njëjtin rezultat, edhe nën presion dhe pa autorin pranë për ta pyetur, jo sa profesionale duket në një dokument.
 
 Për mua standardizimi ekziston që njerëzit të mos detyrohen të shpikin nga e para atë që organizata duhet ta dijë tashmë, jo për t'ua hequr të menduarit.
 
 ## 3. Të dhënat
 
-Një KPI është sinjal, jo përfundim.
+Një KPI është sinjal. Përfundimi del nga ajo që fshihet pas tij.
 
-Kam mësuar të mos kënaqem me faktin që një përqindje është e kuqe ose e gjelbër. Nëse vonesat rriten, dua të di pse, jo vetëm sa janë. Nëse kemi dëmtime, gabime, kohë ngarkimi jashtë standardit ose një problem tjetër operacional, dua të di ku përqendrohet problemi dhe çfarë e shkakton.
+Kam mësuar të mos kënaqem me faktin që një përqindje është e kuqe ose e gjelbër. Nëse vonesat rriten, dua të di sa janë dhe pse ndodhin. Nëse kemi dëmtime, gabime, kohë ngarkimi jashtë standardit ose një problem tjetër operacional, dua të di ku përqendrohet problemi dhe çfarë e shkakton.
 
-Këtu më ndihmojnë mënyra të të menduarit si Pareto dhe 5 Whys, jo sepse çdo problem kërkon një metodologji të madhe, por sepse është shumë e lehtë të luftosh simptomën dhe ta quash përmirësim.
+Këtu më ndihmojnë mënyra të të menduarit si Pareto dhe 5 Whys. Jo çdo problem kërkon një metodologji të madhe, por është shumë e lehtë të luftosh simptomën dhe ta quash përmirësim.
 
 Të dhënat duhet të më çojnë në terren. Dhe terreni duhet të më ndihmojë t'i kuptoj të dhënat. Nëse këto dy botë nuk takohen, raporti mund të duket i mirë, ndërsa operacioni vazhdon të ketë të njëjtin problem.
 
@@ -94,7 +94,7 @@ Operacionet përmirësohen me shumë korrigjime të vogla, të bëra vazhdimisht
 
 Nuk dua ta përdor frikën si mjet drejtimi. Nuk dua t'u kërkoj njerëzve një standard që vetë nuk jam i gatshëm ta kuptoj ose ta respektoj. Nuk dua të fsheh një problem vetëm sepse KPI-ja duket më mirë pa të. Nuk dua të bëhem menaxheri që di gjithçka sepse askush tjetër nuk është trajnuar. Dhe nuk dua që ekipi të ketë nevojë për praninë time për çdo vendim të vogël.
 
-Nëse një ekip funksionon vetëm kur menaxheri është në dhomë, ai menaxher nuk ka ndërtuar ende një sistem.
+Nëse një ekip funksionon vetëm kur menaxheri është në dhomë, për mua ai menaxher nuk ka ndërtuar ende një sistem.
 
 ## Si do të dukej java ime ideale si Operations Manager
 
@@ -160,7 +160,7 @@ Tre muaj nuk janë magji, dhe deri në ditën e 90-të nuk do të pretendoja se 
 - Standardet që përdoren vërtet.
 - Një ritëm i rregullt ku ekipi shqyrton jo vetëm performancën, por edhe përmirësimin.
 
-Qëllimi im për 90 ditët do të ishte që organizata të kishte një pamje më të qartë të vetes dhe disa mekanizma më të mirë për t'u përmirësuar, jo të tregoja sa shumë ndryshova.
+Qëllimi im për 90 ditët do të ishte që organizata të kishte një pamje më të qartë të vetes dhe disa mekanizma më të mirë për t'u përmirësuar, jo të tregoja sa shumë gjëra kisha ndryshuar.
 
 ## Ku po mësoj ende
 

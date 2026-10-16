@@ -45,7 +45,7 @@ At the start I take the handover from the previous shift and try to understand t
 
 In the middle of the shift the deeper checking begins, and this is when many of the differences appear between what the system shows and what really happened during the day. Reservations, statuses, documentation, financial matters and any operational problem that could stop the day from being closed are all checked.
 
-Then comes the closing, the part where every small problem left behind during the day can become visible. Before the day is closed, I have to be convinced that the main things are in order and that whatever passes into the next day can be understood.
+Then comes the closing, which for me is the part where every small problem left behind during the day can become visible. Before the day is closed, I have to be convinced that the main things are in order and that whatever passes into the next day can be understood.
 
 At the end comes the handover. A night shift does not end when the system closes. It ends when the person who comes after me clearly understands what happened, what was solved and what is left to follow up.
 
@@ -57,7 +57,7 @@ I have come across reservations that do not fully match what really happened and
 
 The night brings these things to light because the rhythm changes. The flow of people at the reception desk thins out, and you can see more clearly behind the process.
 
-This work has taught me that many mistakes are born not from a lack of skill but from interruptions, incomplete communication and the sentence “We'll do it later.” Often, “later” is the night shift.
+This work has taught me that many mistakes have little to do with skill: they come from interruptions, incomplete communication and the sentence “We'll do it later.” Often, “later” is the night shift.
 
 ## No-shows and payments
 
@@ -75,7 +75,7 @@ Closing the day has taught me to close a process when the things that depend on 
 
 In the first weeks my attention was, naturally, on the list: which step comes after which, what has to be opened, what has to be checked and in what order.
 
-Today I see it differently. The question is no longer only “Did I do this step?” but “Is what this step is meant to check actually in order?”
+Today I see it differently. After “Did I do this step?” comes a second question: “Is what this step is meant to check actually in order?”
 
 That is a big change. A checklist can be completed mechanically, but a good Night Audit requires you to understand how the processes depend on each other. If something earlier has not been closed properly, there is no point in rushing the process just so the list looks finished.
 
@@ -93,7 +93,7 @@ This matters especially at night, when the temptation to say “I'm alone, I hav
 
 ## Five minutes with the day managers
 
-If I had five minutes with the day managers, I would ask them not to read the night report only as proof that the hotel got through another night. It shows much more.
+If I had five minutes with the day managers, I would ask them to read the night report for what it shows, which is much more than proof that the hotel got through another night.
 
 The five things I would look at every morning:
 

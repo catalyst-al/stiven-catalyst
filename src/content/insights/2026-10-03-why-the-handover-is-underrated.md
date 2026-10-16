@@ -51,7 +51,7 @@ Instead of leaving the information as a loose note, or as a list of things with 
 
 This way of working has also found its way into the SOPs and the structures I later built for the handover.
 
-The main improvement is that the next shift should not have to rebuild the story on its own. It should receive the current state.
+For me the main improvement is that the next shift should receive the current state instead of having to rebuild the story on its own.
 
 {diagram}
 
@@ -69,13 +69,13 @@ Leaving the specific content aside, the handover I use or have structured around
 - open tasks and follow-ups;
 - notes the next shift needs so it does not start work without context.
 
-In my reports, a problem that needs follow-up should not read as a story of what happened. It has to be clear that something is still open, because “reported” and “resolved” are not the same thing.
+In my reports, a problem that needs follow-up has to stand out as still open rather than read as a story of what happened, because “reported” and “resolved” are not the same thing.
 
 ## A document the next person can use
 
 The information has to be clear enough that the other person does not need to interpret what I meant.
 
-A note like “problem with the room” is not a good handover. It has to be clear what kind of problem it is, what state it is in and whether there is still something to follow up, without adding unnecessary information.
+A note like “problem with the room” falls short. The handover has to make clear what kind of problem it is, what state it is in and whether there is still something to follow up, without adding unnecessary information.
 
 I have no fixed rule of always adding a verbal handover as well. What the way I have built the reporting does make clear is that the document has to be usable by the person who receives it, not merely proof that the handover happened.
 
@@ -87,7 +87,7 @@ I check what has been left open, what was resolved during the night, and which i
 
 When I take over the shift from someone else, I do the opposite and try to build a picture of the current state as quickly as possible: what I am inheriting, what is normal, what has deviated and which points need attention.
 
-The two moments almost mirror each other. When I hand over the shift, I have to reduce the uncertainty for the other person. When I take it over, I have to uncover the uncertainty that has been left behind.
+To me the two moments almost mirror each other. When I hand over the shift, I have to reduce the uncertainty for the other person. When I take it over, I have to uncover the uncertainty that has been left behind.
 
 ## What a tool does and what it does not
 
@@ -97,6 +97,6 @@ The figures and the operational state give a snapshot of the moment. Open points
 
 No tool fully replaces the human context. A system can record that a point is open, who has to follow it up and by when, but it cannot by itself guarantee that the person taking over the shift has understood why it matters.
 
-That is why, for me, a handover is not just a transfer of information. It is a transfer of responsibility. And this is exactly where many organisations go wrong.
+That is why, for me, a handover is a transfer of responsibility and not just of information. This is exactly where many organisations go wrong.
 
 If the information does not cross the line between two shifts, the good work of the first shift no longer belongs to the organisation. It stays only in the head of the person who has just gone home.

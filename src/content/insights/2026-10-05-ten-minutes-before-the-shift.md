@@ -65,9 +65,9 @@ The morning stand-ups were tied to the day's operation and to the KPIs. The topi
 
 So the stand-up was more than “how did yesterday go”: there were numbers, reasons and specific points to put right.
 
-The briefing earned its minutes when it connected to something people would meet straight away in the shift. If Delay was the problem, stating the percentage was not enough; you had to look at why it was happening. If the cause lay in loading, stacking, driver performance or a step in the process, the briefing gave the team one thing to watch during the work, and that was its value.
+The briefing earned its minutes when it connected to something people would meet straight away in the shift. If Delay was the problem, the percentage was only the start; you had to look at why it was happening. If the cause lay in loading, stacking, driver performance or a step in the process, the briefing gave the team one thing to watch during the work, and that was its value.
 
-A briefing makes sense when a KPI turns into a behaviour or an action the team can see. That is how I wanted the stand-up to work: KPIs, 5 Why, Pareto, 5S and safety tied to their effect on the operation rather than treated as separate topics. It is the idea behind [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/), with ten minutes to do it in.
+A briefing makes sense when a KPI turns into a behaviour or an action the team can see. That is how I wanted the stand-up to work: KPIs, 5 Whys, Pareto, 5S and safety tied to their effect on the operation rather than treated as separate topics. It is the idea behind [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/), with ten minutes to do it in.
 
 ## Information or direction
 
@@ -120,7 +120,7 @@ Only the changes that affect this shift: the volume, a process, a system, the te
 Where something is most likely to go wrong: a KPI that is slipping and its reason, an open item with a deadline, a technical problem.
 
 **4. What are the two or three priorities?**
-Not ten. Say each one as an action the team can see during the work, not as a number.
+Not ten. Say each one as an action the team can see during the work.
 
 **5. Who holds what?**
 Every priority and every open item gets a name. A task without an owner is close to a task nobody will do.

@@ -22,9 +22,9 @@ checklist:
     - label: Proceset kryesore
       hint: Dhe rezultati që duhet të japë secili.
     - label: Njerëzit kyç
-      hint: Kush e bën punën, dhe kë pyesin të tjerët kur nuk dinë.
+      hint: Kush e bën punën dhe kë pyesin të tjerët kur nuk dinë.
     - label: Numrat
-      hint: Cilat KPI ndiqen, kush i lexon, dhe çfarë nuk tregojnë.
+      hint: Cilat KPI ndiqen, kush i lexon dhe çfarë nuk tregojnë.
     - label: Standardi dhe realiteti
       hint: Ku ndryshojnë SOP-ja dhe puna reale, dhe pse.
     - label: Problemet që kthehen vazhdimisht
@@ -35,7 +35,7 @@ checklist:
 
 Natën e parë në hotelin e ri nuk punova dot si Night Auditor.
 
-Sistemi po kalonte një përditësim dhe për disa orë praktikisht nuk punohej dot normalisht. Kështu, pjesën më të madhe të natës e kalova në back office, duke mbledhur çfarë mundja për hotelin, për proceset bazë dhe për mënyrën si ishte organizuar puna.
+Sistemi po kalonte një përditësim dhe për disa orë praktikisht nuk punohej dot normalisht. Kështu, pjesën më të madhe të natës e kalova në zyrën e pasme, duke mbledhur çfarë mundja për hotelin, për proceset bazë dhe për mënyrën si ishte organizuar puna.
 
 Dukej si një natë e humbur. Në fakt më mësoi gjënë e parë: në një vend të ri, para se ta bësh punën, duhet të kuptosh si bëhet.
 
@@ -43,11 +43,11 @@ Me këtë ese nis një seri e re. E para, *Dhjetë vite pranë punës*, tregonte
 
 ## Netët e para: njerëzit para dokumenteve
 
-Në javën e parë nuk erdha për të ndryshuar gjëra. Erdha për të kuptuar si funksiononte realisht nata.
+Në javën e parë doja vetëm të kuptoja si funksiononte realisht nata.
 
 Në netët që pasuan u përqendrova te lista e kontrollit e Night Audit, te mënyra si kolegët i kryenin hapat dhe te videot, pamjet e ekranit dhe dokumentet e trajnimit. Mbaja shënime.
 
-Doja të kuptoja jo vetëm çfarë duhej bërë, por edhe me çfarë radhe dhe pse. Lista e kontrollit të jep hapat. Nuk të thotë gjithmonë pse një hap vjen para një tjetri, ose çfarë prishet nëse e kapërcen.
+Doja të kuptoja çfarë duhej bërë, me çfarë radhe dhe pse. Lista e kontrollit të jep hapat. Nuk të thotë gjithmonë pse një hap vjen para një tjetri, ose çfarë prishet nëse e kapërcen.
 
 Në fillim u qëndrova më afër njerëzve që e bënin punën çdo natë sesa teorisë së dokumenteve. Dokumenti të tregon si duhet të jetë puna. Njerëzit të tregojnë si është.
 
@@ -57,14 +57,14 @@ Mësova shumë nga kolegët që e mbanin realisht turnin. Një gjë e kuptova ve
 
 Ajo që më ra më shumë në sy ishte se informacioni ekzistonte, por ishte i shpërndarë: lista kontrolli, dokumente të veçanta, pamje ekrani, video dhe shpjegime që njerëzit me përvojë i dinin pothuajse përmendësh. Për dikë që punonte aty çdo natë, kalimi nga një dokument te tjetri mund të dukej normal. E kishte bërë qindra herë.
 
-Si i ri, e pashë menjëherë se problemi nuk ishte mungesa e informacionit. Problemi ishte se ai nuk ishte gjithmonë i renditur në mënyrë që të të tregonte shpejt:
+Si i porsaardhur, e pashë menjëherë se problemi nuk ishte mungesa e informacionit. Problemi ishte se ai nuk ishte gjithmonë i renditur në mënyrë që të të tregonte shpejt:
 
 - Ku jam në proces?
 - Çfarë duhet të kontrolloj tani?
 - Çfarë vjen më pas?
 - Si e di që mund të vazhdoj?
 
-Këtë e sheh më mirë në ditët e para sesa pas një viti. Pas një viti i di përgjigjet përmendësh dhe nuk e vë më re që dokumenti nuk t'i jep. Prandaj ditët e para të një njeriu të ri janë një burim informacioni që shumica e organizatave e shpërdorojnë.
+Këtë e sheh më mirë në ditët e para sesa pas një viti. Pas një viti i di përgjigjet përmendësh dhe nuk e vë më re që dokumenti nuk t'i jep. Prandaj ditët e para të një të porsaardhuri janë një burim informacioni që shumica e organizatave e shpërdorojnë.
 
 Për këtë arsye, më vonë fillova ta strukturoja materialin në një [SOP më të thjeshtë dhe të kërkueshme](/sq/insights/a-good-sop-is-not-a-document/).
 
@@ -74,13 +74,13 @@ Që në fillim vendosa ta ndiqja procesin ekzistues ashtu siç ishte përcaktuar
 
 Fillimisht duhej të kuptoja varësitë. Një hap që nga jashtë duket i panevojshëm mund të ekzistojë sepse prej tij varet një departament tjetër, një raport ose një proces i mëvonshëm. Nëse e heq në javën e dytë, ndoshta nuk sheh asnjë problem. Problemi del diku tjetër, më vonë, te dikush tjetër.
 
-Vetëm pasi fillova ta kuptoja rrjedhën, nisa ta organizoja informacionin më mirë. Synimi ishte ta bëja operacionin më të lexueshëm, për veten dhe për njeriun tjetër që do të duhej ta mësonte, jo ta ndryshoja.
+Vetëm pasi fillova ta kuptoja rrjedhën, nisa ta organizoja informacionin më mirë. Synimi ishte ta bëja operacionin më të lexueshëm, për veten dhe për personin e radhës që do të duhej ta mësonte, jo ta ndryshoja.
 
 **Një hap që duket i panevojshëm mund të jetë hapi nga i cili varet dikush tjetër.**
 
 ## Tri gjëra për 30 ditët e para
 
-Nëse një menaxher i ri do të më pyeste nesër çfarë të bëjë në 30 ditët e para, do t'i thosha tri gjëra.
+Nëse një menaxher i ri do të më pyeste nesër çfarë të bënte në 30 ditët e para, do t'i thosha tri gjëra.
 
 **E para: mos hyr për të treguar sa shumë di. Hyr për të kuptuar.**
 Shiko procesin nga fillimi në fund. Fol me njerëzit që e bëjnë punën çdo ditë. Kupto çfarë ndodh kur gjithçka shkon mirë, por sidomos çfarë ndodh kur diçka del nga rruga.
@@ -91,11 +91,11 @@ Lexo SOP-në, listën e kontrollit dhe raportet, pastaj shiko si punohet në të
 **E treta: krijo një hartë të operacionit.**
 Cilat janë proceset kryesore? Cilët janë njerëzit kyç? Cilat janë KPI-të? Ku janë varësitë? Cilat probleme përsëriten? Çfarë mund të vendosësh vetë dhe çfarë duhet eskaluar?
 
-Dhe një gjë që do t'i thosha të mos e bëjë: mos ndrysho diçka vetëm sepse dëshiron të tregosh se ke ardhur për të sjellë ndryshim.
+Dhe një gjë që do t'i thosha të mos e bënte: mos ndrysho diçka vetëm sepse dëshiron të tregosh se ke ardhur për të sjellë ndryshim.
 
 ## 30 pyetje për 30 ditët e para
 
-Në 30 ditët e para, një menaxher i ri nuk ka nevojë për 30 zgjidhje, por për 30 pyetje të mira. Këto janë pyetjet që do të doja t'i kisha shkruar në netët e mia të para. Përgjigjet nuk duhet t'i dish që ditën e parë. Duhet t'i kesh pas 30 ditësh.
+Në 30 ditët e para, një menaxher i ri ka më shumë nevojë për 30 pyetje të mira sesa për 30 zgjidhje. Këto janë pyetjet që do të doja t'i kisha shkruar që në netët e mia të para. Përgjigjet nuk duhet t'i dish që ditën e parë. Duhet t'i kesh pas 30 ditësh.
 
 **Procesi**
 
@@ -115,8 +115,8 @@ Në 30 ditët e para, një menaxher i ri nuk ka nevojë për 30 zgjidhje, por p�
 
 **Informacioni**
 
-11. Ku e gjen informacionin një njeri i ri?
-12. Sa vende duhet të hapë për të kryer një hap të vetëm?
+11. Ku e gjen informacionin një i porsaardhur?
+12. Sa dokumente duhet të hapë për të kryer një hap të vetëm?
 13. Çfarë dinë përmendësh vetëm njerëzit me përvojë?
 14. Si kalon informacioni nga një turn te tjetri?
 15. Çfarë mbetet e hapur në fund të turnit, dhe kush e merr përsipër?

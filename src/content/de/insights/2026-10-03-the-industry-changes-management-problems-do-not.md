@@ -41,7 +41,7 @@ Die Branche ändert sich. Das, was man kontrolliert, ändert sich. Das Problem d
 
 Am deutlichsten sehe ich das, wenn ich überlege, was „Bestand“ in jeder dieser Branchen bedeutete.
 
-Im Einzelhandel war Bestand Bestand im klassischen Sinn: das Produkt, das Lager und das, was man tatsächlich zum Verkauf zur Verfügung hatte. In Albanien war ich für Bestand, Lager, Verkauf, Kosten und Cashflow verantwortlich, und in einem der Unternehmen gehörte es zu meinen Aufgaben, das Bestandsmanagement zu verbessern. Bestand war mehr als eine Stückzahl. Er war Kapital des Unternehmens und musste zum Verkauf und zur tatsächlichen Nachfrage passen.
+Im Einzelhandel bedeutete Bestand das, was man klassisch darunter versteht: das Produkt, das Lager und das, was man tatsächlich zum Verkauf zur Verfügung hatte. In Albanien war ich für Bestand, Lager, Verkauf, Kosten und Cashflow verantwortlich, und in einem der Unternehmen gehörte es zu meinen Aufgaben, das Bestandsmanagement zu verbessern. Hinter jeder Stückzahl stand Kapital des Unternehmens, und dieses Kapital musste zum Verkauf und zur tatsächlichen Nachfrage passen.
 
 In der Logistik wurde der Bestand zum physischen Fluss der Aufträge. Man musste prüfen, ob die Beladung pünktlich lief, ob Pakete fehlten, ob es unvollständige Aufträge oder Schäden gab und ob die Fahrer rechtzeitig losfuhren. Meine Kennzahlen waren Ladezeit, Verspätungen, unvollständige Aufträge und Schäden. Als Disponent koordinierte ich in einer Schicht mehr als 70 Fahrer: Ich teilte die Touren auf, kontrollierte die Abfahrten und löste Probleme, während sie auftraten.
 

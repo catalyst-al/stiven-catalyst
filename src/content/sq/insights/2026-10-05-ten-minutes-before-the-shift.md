@@ -6,9 +6,9 @@ series: without-you
 status: published
 featured: true
 summary: 10 minuta para turnit nuk janë për të treguar gjithçka që dimë. Janë për të vendosur çfarë duhet të dijë ekipi para se puna të fillojë.
-description: "Briefing-u para turnit: stand-up-et e mëngjesit në last mile, si fillonte nata në hotel, ku ndahet briefing-u nga handover-i, dhe një shabllon 10-minutësh."
-teaser: Handover-i tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.
-deck: 'Eseja e dytë e serisë “Operacioni që punon pa ty”: stand-up-et e mëngjesit në last mile, nata që nuk fillon nga zero në hotel, dallimi mes handover-it dhe briefing-ut, dhe shablloni i briefing-ut 10-minutësh.'
+description: "Briefing-u para turnit: stand-up-et e mëngjesit në last mile, si fillonte nata në hotel, ku ndahet briefing-u nga dorëzimi i turnit, dhe një shabllon 10-minutësh."
+teaser: Dorëzimi i turnit të tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.
+deck: 'Eseja e dytë e serisë “Operacioni që punon pa ty”: stand-up-et e mëngjesit në last mile, nata që nuk fillon nga zero në hotel, dallimi mes dorëzimit të turnit dhe briefing-ut, dhe shablloni i briefing-ut 10-minutësh.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -43,7 +43,7 @@ Këtë fjali mund ta dëgjosh në çdo briefing. Është e saktë dhe ndoshta ed
 
 Kjo ese merret me ato pak minuta para se të fillojë puna. Briefing-u i turnit është ndoshta mjeti më i lirë i menaxhimit: nuk kërkon as sistem, as buxhet, as projekt. Mjafton dikush që di çfarë duhet thënë dhe çfarë duhet lënë jashtë.
 
-Ajo që vijon vjen nga dy vende ku kam punuar. Në last mile, stand-up-et e përditshme të mëngjesit janë të dokumentuara: e di çfarë trajtonin, por jo kush i drejtonte çdo herë apo sa zgjatnin. Në hotel njihja më shumë handover-in mes turneve sesa një briefing klasik 10-minutësh: një Front Office Daily Stand-Up dhe një fletë handover-i që lidhte turnin e natës, të mëngjesit dhe të pasdites. Shablloni në fund është ajo që do të propozoja sot; nuk mund të them me siguri se si Team Leader ose Area Manager e ndryshova briefing-un në këtë mënyrë.
+Ajo që vijon vjen nga dy vende ku kam punuar. Në last mile, stand-up-et e përditshme të mëngjesit janë të dokumentuara: e di çfarë trajtonin, por jo kush i drejtonte çdo herë apo sa zgjatnin. Në hotel njihja më shumë dorëzimin e turnit sesa një briefing klasik 10-minutësh: një Front Office Daily Stand-Up dhe një fletë dorëzimi që lidhte turnin e natës, të mëngjesit dhe të pasdites. Shablloni në fund është ajo që do të propozoja sot; nuk mund të them me siguri se si Team Leader ose Area Manager e ndryshova briefing-un në këtë mënyrë.
 
 ## Në last mile: numrat dhe arsyet e tyre
 
@@ -61,9 +61,9 @@ Stand-up-et e mëngjesit lidheshin ngushtë me operacionin e ditës dhe me KPI-t
 
 Pra stand-up-i ishte më shumë se “si shkoi dje”: kishte numra, arsye dhe pika që duheshin korrigjuar.
 
-Vlerën e kishte kur briefing-u lidhej me diçka që njerëzit do ta hasnin menjëherë në turn. Nëse problemi ishte Delay, nuk mjaftonte të thuhej përqindja; duhej parë pse po ndodhte. Nëse shkaku qëndronte te ngarkimi, te stivimi, te performanca e shoferëve ose te një hap i procesit, briefing-u i jepte ekipit një gjë për të ndjekur gjatë punës.
+Vlerën e kishte kur briefing-u lidhej me diçka që njerëzit do ta hasnin menjëherë në turn. Nëse problemi ishte Delay, përqindja ishte vetëm fillimi; duhej parë pse po ndodhte. Nëse shkaku qëndronte te ngarkimi, te stivimi, te performanca e shoferëve ose te një hap i procesit, briefing-u i jepte ekipit një gjë për të ndjekur gjatë punës.
 
-Briefing-u ka kuptim kur një KPI kthehet në një sjellje ose në një veprim që ekipi e sheh. Kështu doja ta shihja stand-up-in: KPI-të, 5 Why, Pareto, 5S dhe sigurinë jo si tema më vete, por të lidhura me ndikimin e tyre në operacion. Është e njëjta ide si te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/), vetëm se këtu ke 10 minuta për ta bërë.
+Briefing-u ka kuptim kur një KPI kthehet në një sjellje ose në një veprim që ekipi e sheh. Kështu doja ta shihja stand-up-in: KPI-të, 5 Whys, Pareto, 5S dhe sigurinë jo si tema më vete, por të lidhura me ndikimin e tyre në operacion. Është e njëjta ide si te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/), vetëm se këtu ke 10 minuta për ta bërë.
 
 ## Informacion apo drejtim
 
@@ -80,17 +80,17 @@ Versioni i dytë zgjat dhjetë sekonda më shumë, por vetëm atë ekipi mund ta
 
 Në hotel, turni i natës fillonte me atë që dorëzonte turni i pasdites dhe mbyllej me atë që i kalonte turnit të mëngjesit. Puna nuk fillonte kurrë nga zero: kishte pika të hapura, raste që duheshin ndjekur, probleme teknike, çështje me mysafirët, pagesa ose çështje operative që duhej të vazhdonin.
 
-Handover-i përfshinte mbërritjet, ankesat, çështjet e faturimit dhe të pagesave, VIP-at, problemet teknike, marrëveshjet e veçanta dhe detyrat për t'u ndjekur. Në fletën e Daily Stand-Up-it të Front Office-it shënoheshin gjithashtu nisjet, zënia e dhomave, no-show-t, rastet e hapura, ndërrimet e dhomave, traces dhe çështje të tjera operative.
+Dorëzimi i turnit përfshinte mbërritjet, ankesat, çështjet e faturimit dhe të pagesave, VIP-at, problemet teknike, marrëveshjet e veçanta dhe detyrat për t'u ndjekur. Në fletën e Daily Stand-Up-it të Front Office-it shënoheshin gjithashtu nisjet, zënia e dhomave, no-show-t, rastet e hapura, ndërrimet e dhomave, traces dhe çështje të tjera operative.
 
-Pse ky kalim nënvlerësohet kaq shumë e kam shpjeguar më gjatë te [eseja për handover-in](/sq/insights/why-the-handover-is-underrated/). Këtu më intereson diçka tjetër: çfarë ndodh me gjithë këtë informacion në minutat e para të turnit.
+Pse ky kalim nënvlerësohet kaq shumë e kam shpjeguar më gjatë te [eseja për dorëzimin e turnit](/sq/insights/why-the-handover-is-underrated/). Këtu më intereson diçka tjetër: çfarë ndodh me gjithë këtë informacion në minutat e para të turnit.
 
-## Handover-i dhe briefing-u kanë punë të ndryshme
+## Dorëzimi i turnit dhe briefing-u kanë punë të ndryshme
 
-**Handover-i tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.**
+**Dorëzimi i turnit të tregon çfarë gjendjeje po trashëgon. Briefing-u vendos çfarë ka rëndësi tani.**
 
-Handover-i duhet të jetë i plotë; briefing-u duhet të zgjedhë. Nëse briefing-u kthehet në lexim me zë të handover-it, ekipi dëgjon gjithçka dhe nuk e di çfarë të mbajë mend.
+Dorëzimi i turnit duhet të jetë i plotë; briefing-u duhet të zgjedhë. Nëse briefing-u kthehet në lexim me zë të dorëzimit, ekipi dëgjon gjithçka dhe nuk e di çfarë të mbajë mend.
 
-Prandaj një briefing i mirë para turnit duhet të nisë aty ku mbaron handover-i:
+Prandaj një briefing i mirë para turnit duhet të nisë aty ku mbaron dorëzimi i turnit:
 
 - Çfarë morëm?
 - Çfarë ka ndryshuar?
@@ -107,7 +107,7 @@ Prandaj një briefing i mirë para turnit duhet të nisë aty ku mbaron handover
 Ja shablloni që do të propozoja: pesë pyetje, rreth dy minuta secila, si radhë e bisedës dhe jo si formular për t'u plotësuar.
 
 **1. Çfarë po trashëgojmë?**
-Gjendja nga turni i mëparshëm ose nga dita e djeshme: pikat e hapura dhe rastet që presin ndjekje. Burimi është handover-i, jo kujtesa e dikujt.
+Gjendja nga turni i mëparshëm ose nga dita e djeshme: pikat e hapura dhe rastet që presin ndjekje. Burimi është dorëzimi i turnit, jo kujtesa e dikujt.
 
 **2. Çfarë ka ndryshuar?**
 Vetëm ndryshimet që e prekin këtë turn: volumi, një proces, një sistem, ekipi.
@@ -116,7 +116,7 @@ Vetëm ndryshimet që e prekin këtë turn: volumi, një proces, një sistem, ek
 Aty ku ka më shumë gjasa që diçka të shkojë keq: një KPI që po bie dhe arsyeja e saj, një pikë e hapur me afat, një problem teknik.
 
 **4. Cilat janë 2–3 prioritetet?**
-Jo dhjetë. Secili thuhet si veprim që ekipi e sheh gjatë punës, jo si numër.
+Jo dhjetë. Secili thuhet si veprim që ekipi e sheh gjatë punës.
 
 **5. Kush mban çfarë?**
 Çdo prioritet dhe çdo pikë e hapur me një emër. Një detyrë pa zot është shumë afër një detyre që s'do ta bëjë askush.

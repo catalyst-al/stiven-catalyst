@@ -46,9 +46,9 @@ Heute würde ich meine Arbeitsphilosophie in fünf Prinzipien zusammenfassen.
 
 Kein Betrieb läuft ohne die Menschen, die ihn jeden Tag am Laufen halten.
 
-Ich habe in Umgebungen mit Druck, Zielvorgaben, Verspätungen, Fehlern und Momenten gearbeitet, in denen man schnell reagieren musste. Dabei habe ich gelernt, dass ein Standard hoch und eine Anforderung deutlich sein kann, ohne die Würde des Gegenübers zu verletzen. Druck kann berechtigt sein, Demütigung nicht.
+Ich habe in Umgebungen mit Druck, Zielvorgaben, Verspätungen, Fehlern und Momenten gearbeitet, in denen man schnell reagieren musste. Dabei habe ich gelernt, dass ein Standard hoch und eine Anforderung deutlich sein können, ohne die Würde des Gegenübers zu verletzen. Druck kann berechtigt sein, Demütigung nicht.
 
-Eine Führungskraft muss Verantwortung einfordern können, ohne mit Angst zu führen. Denn ein Team, das Angst hat, seine Fehler zu zeigen, hat nicht weniger Fehler. Es hat nur weniger sichtbare.
+Für mich muss eine Führungskraft Verantwortung einfordern können, ohne mit Angst zu führen. Denn ein Team, das Angst hat, seine Fehler zu zeigen, hat nicht weniger Fehler. Es hat nur weniger sichtbare.
 
 ## 2. Standards
 
@@ -60,11 +60,11 @@ Standardisierung soll für mich verhindern, dass Menschen neu erfinden müssen, 
 
 ## 3. Daten
 
-Ein KPI ist ein Signal, keine Schlussfolgerung.
+Ein KPI ist ein Signal. Die Schlussfolgerung ergibt sich erst aus dem, was dahintersteckt.
 
-Ich habe gelernt, mich nicht damit zufriedenzugeben, dass ein Prozentwert rot oder grün ist. Wenn die Verspätungen steigen, will ich wissen, warum, und nicht nur, wie viele es sind. Wenn wir Schäden, Fehler, Ladezeiten außerhalb des Standards oder ein anderes operatives Problem haben, will ich wissen, wo es sich konzentriert und was es verursacht.
+Ich habe gelernt, mich nicht damit zufriedenzugeben, dass ein Prozentwert rot oder grün ist. Wenn die Verspätungen steigen, will ich wissen, wie viele es sind und warum. Wenn wir Schäden, Fehler, Ladezeiten außerhalb des Standards oder ein anderes operatives Problem haben, will ich wissen, wo es sich konzentriert und was es verursacht.
 
-Hier helfen mir Denkweisen wie Pareto und 5 Whys, nicht weil jedes Problem eine große Methodik braucht, sondern weil man sehr leicht das Symptom bekämpft und es Verbesserung nennt.
+Hier helfen mir Denkweisen wie Pareto und 5 Whys. Nicht jedes Problem braucht eine große Methodik, aber man bekämpft sehr leicht das Symptom und nennt es Verbesserung.
 
 Die Daten müssen mich auf die Fläche führen. Und die Fläche muss mir helfen, die Daten zu verstehen. Wenn diese beiden Welten nicht zusammenkommen, kann der Bericht gut aussehen, während der Betrieb dasselbe Problem behält.
 
@@ -94,7 +94,7 @@ Betriebe werden durch viele kleine Korrekturen besser, die laufend gemacht werde
 
 Ich will Angst nicht als Führungsinstrument einsetzen. Ich will von Menschen keinen Standard verlangen, den ich selbst nicht zu verstehen oder einzuhalten bereit bin. Ich will kein Problem verstecken, nur weil der KPI ohne es besser aussieht. Ich will nicht der Manager werden, der alles weiß, weil niemand sonst eingearbeitet wurde. Und ich will nicht, dass das Team für jede kleine Entscheidung meine Anwesenheit braucht.
 
-Wenn ein Team nur funktioniert, wenn der Manager im Raum ist, hat dieser Manager noch kein System aufgebaut.
+Wenn ein Team nur funktioniert, solange der Manager im Raum ist, hat dieser Manager für mich noch kein System aufgebaut.
 
 ## Wie meine ideale Woche als Operations Manager aussähe
 
@@ -160,7 +160,7 @@ Drei Monate sind keine Zauberei, und bis Tag 90 würde ich nicht behaupten, den 
 - Die Standards, die tatsächlich genutzt werden.
 - Ein regelmäßiger Rhythmus, in dem das Team nicht nur die Leistung prüft, sondern auch die Verbesserung.
 
-Mein Ziel für die 90 Tage wäre, dass die Organisation ein klareres Bild von sich selbst hat und einige bessere Mechanismen, um sich zu verbessern, und nicht, zu zeigen, wie viel ich verändert habe.
+Mein Ziel für die 90 Tage wäre, dass die Organisation ein klareres Bild von sich selbst hat und über einige bessere Mechanismen verfügt, um sich zu verbessern – nicht, dass ich vorführe, wie viel ich verändert habe.
 
 ## Wo ich noch lerne
 

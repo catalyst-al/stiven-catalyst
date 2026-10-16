@@ -48,7 +48,7 @@ The industry changes. The thing you control changes. But the management problem 
 
 I see this most clearly when I think about what “inventory” meant in each industry.
 
-In retail, inventory meant what it classically means: the product, the warehouse and what you actually had available to sell. In Albania I was responsible for inventory, the warehouse, sales, costs and cash flow, and at one of the companies one of my tasks was to improve inventory management. Inventory was more than a count of products. It was the company's capital, and it had to match sales and real demand.
+In retail, inventory meant what it classically means: the product, the warehouse and what you actually had available to sell. In Albania I was responsible for inventory, the warehouse, sales, costs and cash flow, and at one of the companies one of my tasks was to improve inventory management. Every count of products stood for the company's capital, and that capital had to match sales and real demand.
 
 In logistics, inventory became the physical flow of orders. You had to check whether loading ran on time, whether parcels were missing, whether there were incomplete orders or damage, and whether the drivers left at the right time. The indicators I worked with were loading time, delays, incomplete orders and damage. As a dispatcher I coordinated more than 70 drivers in a shift, splitting routes, checking departures and solving problems as they happened.
 

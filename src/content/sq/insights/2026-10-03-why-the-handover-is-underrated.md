@@ -29,7 +29,7 @@ Mund të kesh dy turne që, secili më vete, janë shumë të mirë. I pari mund
 
 Një problem që nuk hyn në dorëzimin e turnit nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që ende nuk e di se ekziston.
 
-Këtë e them si parim të nxjerrë nga puna në hotel, ku kam parë çështje të pambyllura, probleme teknike, kërkesa që duheshin ndjekur dhe mospërputhje operative që duhej të kalonin te turni tjetër. Ai nuk mbështetet te një rast i vetëm i dokumentuar, ku një informacion që mungonte shkaktoi një pasojë të caktuar.
+Këtë e them si parim të nxjerrë nga puna në hotel, ku kam parë çështje të pambyllura, probleme teknike, kërkesa që duheshin ndjekur dhe mospërputhje operative që duhej të kalonin te turni tjetër. Ai nuk mbështetet në një rast të vetëm të dokumentuar, në të cilin një informacion që mungonte shkaktoi një pasojë të caktuar.
 
 ## Nga shënimi i lirë te gjendja aktuale
 
@@ -45,7 +45,7 @@ Në vend që informacioni të mbetej si shënim i lirë, ose si listë gjërash 
 
 Kjo mënyrë pune ka hyrë edhe në SOP-të dhe në strukturat që ndërtova më vonë për dorëzimin e turnit.
 
-Përmirësimi kryesor është se turni tjetër nuk duhet ta rindërtojë vetë historinë. Ai duhet të marrë gjendjen aktuale.
+Për mua përmirësimi kryesor është që turni tjetër të marrë gjendjen aktuale, në vend që ta rindërtojë vetë historinë.
 
 {diagram}
 
@@ -63,13 +63,13 @@ Pa hyrë në përmbajtje të veçanta, dorëzimi që përdor ose që kam struktu
 - detyra të hapura dhe ndjekje;
 - shënime që i duhen turnit tjetër që të mos e nisë punën pa kontekst.
 
-Në raportet e mia, një problem që kërkon ndjekje nuk duhet të lexohet thjesht si histori e asaj që ndodhi. Duhet të dallohet që diçka është ende e hapur, sepse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë.
+Në raportet e mia, një problem që kërkon ndjekje duhet të dallohet si ende i hapur, në vend që të lexohet thjesht si histori e asaj që ndodhi, sepse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë.
 
 ## Një dokument me të cilin punon personi tjetër
 
 Informacioni duhet të jetë aq i qartë sa personi tjetër të mos ketë nevojë të hamendësojë çfarë kam dashur të them.
 
-Një shënim si “problem me dhomën” nuk është dorëzim i mirë. Duhet të kuptohet çfarë lloj problemi është, në çfarë gjendjeje ndodhet dhe nëse ka ende diçka për t'u ndjekur, pa shtuar informacion të panevojshëm.
+Një shënim si “problem me dhomën” nuk mjafton. Dorëzimi duhet ta bëjë të qartë çfarë lloj problemi është, në çfarë gjendjeje ndodhet dhe nëse ka ende diçka për t'u ndjekur, pa shtuar informacion të panevojshëm.
 
 Nuk kam rregull të prerë që çdo dorëzim ta shoqëroj gjithmonë edhe me gojë. Por mënyra si e kam ndërtuar raportimin e bën të qartë një gjë: dokumenti duhet t'i shërbejë personit që e merr, jo vetëm të provojë se dorëzimi u bë.
 
@@ -81,7 +81,7 @@ Kontrolloj çfarë ka mbetur e hapur, çfarë u zgjidh gjatë natës dhe cilat �
 
 Kur e marr turnin nga dikush tjetër, bëj të kundërtën dhe përpiqem të krijoj sa më shpejt një pamje të gjendjes aktuale: çfarë po trashëgoj, çfarë është normale, çfarë ka devijuar dhe cilat pika kërkojnë vëmendje.
 
-Këto dy momente pothuajse pasqyrojnë njëri-tjetrin. Kur e dorëzoj turnin, duhet ta zvogëloj paqartësinë për tjetrin. Kur e marr, duhet ta zbuloj paqartësinë që ka mbetur pas.
+Për mua këto dy momente pothuajse pasqyrojnë njëri-tjetrin. Kur e dorëzoj turnin, duhet ta zvogëloj paqartësinë për tjetrin. Kur e marr, duhet ta zbuloj paqartësinë që ka mbetur pas.
 
 ## Çfarë bën një mjet dhe çfarë nuk bën
 
@@ -91,6 +91,6 @@ Shifrat dhe gjendja operative japin një fotografi të çastit. Pikat e hapura n
 
 Kontekstin njerëzor nuk e zëvendëson plotësisht asnjë mjet. Një sistem mund të regjistrojë se një pikë është e hapur, kush duhet ta ndjekë dhe deri kur, por nuk mund të garantojë vetë që personi që merr turnin e ka kuptuar pse ka rëndësi.
 
-Prandaj për mua dorëzimi i turnit nuk është thjesht transferim informacioni. Është transferim përgjegjësie. Dhe pikërisht këtu shumë organizata gabojnë.
+Prandaj për mua dorëzimi i turnit është transferim përgjegjësie, jo thjesht informacioni. Pikërisht këtu shumë organizata gabojnë.
 
 Nëse informacioni nuk e kalon kufirin mes dy turneve, puna e mirë e turnit të parë nuk i përket më organizatës. Mbetet vetëm në kokën e personit që sapo shkoi në shtëpi.

@@ -45,7 +45,7 @@ Statt die Information als lose Notiz stehen zu lassen oder als Liste von Dingen 
 
 Diese Arbeitsweise ist auch in die SOPs und Strukturen eingeflossen, die ich später für die Übergabe aufgebaut habe.
 
-Die wichtigste Verbesserung: Die nächste Schicht soll die Geschichte nicht selbst rekonstruieren müssen. Sie soll den aktuellen Stand bekommen.
+Die wichtigste Verbesserung ist für mich, dass die nächste Schicht den aktuellen Stand bekommen soll, statt die Geschichte selbst rekonstruieren zu müssen.
 
 {diagram}
 
@@ -63,13 +63,13 @@ Ohne auf einzelne Inhalte einzugehen: Die Übergabe, die ich für die Nachtarbei
 - offene Aufgaben und Nachverfolgungen;
 - Hinweise, die die nächste Schicht braucht, damit sie nicht ohne Kontext anfängt.
 
-In meinen Berichten soll ein Problem, das nachverfolgt werden muss, nicht einfach wie die Geschichte dessen klingen, was passiert ist. Es muss erkennbar sein, dass noch etwas offen ist, denn „gemeldet“ und „gelöst“ sind nicht dasselbe.
+In meinen Berichten muss ein Problem, das noch Nacharbeit braucht, als offen erkennbar sein, statt wie die bloße Geschichte dessen zu klingen, was passiert ist. Denn „gemeldet“ und „gelöst“ sind nicht dasselbe.
 
 ## Ein Dokument, mit dem die nächste Person arbeiten kann
 
 Die Information muss so klar sein, dass die andere Person nicht deuten muss, was ich gemeint habe.
 
-Eine Notiz wie „Problem mit dem Zimmer“ ist keine gute Übergabe. Es muss klar sein, welcher Art das Problem ist, in welchem Zustand es sich befindet und ob noch etwas nachzuverfolgen ist, ohne unnötige Information hinzuzufügen.
+Eine Notiz wie „Problem mit dem Zimmer“ reicht nicht. Die Übergabe muss klarmachen, welcher Art das Problem ist, in welchem Zustand es sich befindet und ob noch etwas nachzuverfolgen ist, ohne unnötige Information hinzuzufügen.
 
 Eine feste Regel, jede Übergabe zusätzlich mündlich zu machen, habe ich nicht. Die Art, wie ich das Reporting aufgebaut habe, macht aber eines deutlich: Das Dokument muss für die Person, die es bekommt, brauchbar sein und darf nicht bloß belegen, dass die Übergabe stattgefunden hat.
 
@@ -81,16 +81,16 @@ Ich prüfe, was offen geblieben ist, was in der Nacht gelöst wurde und welche T
 
 Wenn ich die Schicht von jemand anderem übernehme, mache ich das Gegenteil und versuche, mir so schnell wie möglich ein Bild vom aktuellen Stand zu machen: was ich übernehme, was normal ist, was abweicht und welche Punkte Aufmerksamkeit brauchen.
 
-Die beiden Momente spiegeln sich fast. Wenn ich die Schicht übergebe, muss ich die Unsicherheit für den anderen verringern. Wenn ich sie übernehme, muss ich die Unsicherheit aufdecken, die zurückgeblieben ist.
+Für mich spiegeln sich die beiden Momente fast. Wenn ich die Schicht übergebe, muss ich die Unsicherheit für den anderen verringern. Wenn ich sie übernehme, muss ich die Unsicherheit aufdecken, die zurückgeblieben ist.
 
 ## Was ein Werkzeug kann und was nicht
 
 Das Übergabe-Werkzeug, das ich gebaut habe, folgt fast derselben Logik.
 
-Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte trennen das, was passiert ist, von dem, was noch zu tun ist. Der Verantwortliche ist wichtig, denn eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt. Uhrzeit oder Frist unterscheiden eine Information, die man nur kennen muss, von etwas, bei dem man handeln muss. Die Hinweise bewahren den Kontext, der in keine Zahl und keinen Status passt. Auch Sicherheit ist eine Kategorie, ihr Inhalt und ihre Abläufe bleiben aber außerhalb dieses Essays.
+Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte trennen das, was passiert ist, von dem, was noch zu tun ist. Der Verantwortliche ist wichtig, denn eine Aufgabe ohne Verantwortlichen kommt einer Aufgabe, die niemand erledigt, sehr nahe. Uhrzeit oder Frist unterscheiden eine Information, die man nur kennen muss, von etwas, bei dem man handeln muss. Die Hinweise bewahren den Kontext, der in keine Zahl und keinen Status passt. Auch Sicherheit ist eine Kategorie, ihr Inhalt und ihre Abläufe bleiben aber außerhalb dieses Essays.
 
 Den menschlichen Kontext ersetzt kein Werkzeug vollständig. Ein System kann festhalten, dass ein Punkt offen ist, wer ihn weiterverfolgen muss und bis wann. Es kann aber nicht von sich aus garantieren, dass die Person, die die Schicht übernimmt, verstanden hat, warum er wichtig ist.
 
-Deshalb ist eine Übergabe für mich nicht nur eine Weitergabe von Information. Sie ist eine Weitergabe von Verantwortung. Und genau hier machen viele Organisationen Fehler.
+Deshalb ist eine Übergabe für mich eine Weitergabe von Verantwortung und nicht nur von Information. Genau hier machen viele Organisationen Fehler.
 
 Wenn die Information die Grenze zwischen zwei Schichten nicht überquert, gehört die gute Arbeit der ersten Schicht nicht mehr der Organisation. Sie bleibt nur im Kopf der Person, die gerade nach Hause gegangen ist.

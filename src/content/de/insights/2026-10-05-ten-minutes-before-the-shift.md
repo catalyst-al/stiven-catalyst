@@ -43,9 +43,9 @@ Diesen Satz hört man in jedem Briefing. Er stimmt, und vielleicht ist er sogar 
 
 Es geht hier um die wenigen Minuten, bevor die Arbeit beginnt. Das Schichtbriefing ist vielleicht das günstigste Führungsinstrument überhaupt: Es braucht kein System, kein Budget und kein Projekt, nur jemanden, der weiß, was gesagt werden muss und was nicht.
 
-Was folgt, stammt aus zwei Bereichen, in denen ich gearbeitet habe. Auf der letzten Meile sind die täglichen Morning Stand-ups dokumentiert: Ich weiß, was dort besprochen wurde, aber nicht, wer sie jeweils geleitet hat oder wie lange sie dauerten. Im Hotel kannte ich eher die Übergabe zwischen den Schichten als ein klassisches Zehn-Minuten-Briefing, mit einem Front Office Daily Stand-up und einem Übergabeblatt, das Nacht-, Früh- und Spätschicht verband. Die Vorlage am Ende ist mein heutiger Vorschlag; ob ich das Briefing als Team Leader oder Area Manager in dieser Form verändert habe, kann ich nicht mit Sicherheit sagen.
+Was folgt, stammt aus zwei Bereichen, in denen ich gearbeitet habe. In der Last Mile sind die täglichen Morning Stand-ups dokumentiert: Ich weiß, was dort besprochen wurde, aber nicht, wer sie jeweils geleitet hat oder wie lange sie dauerten. Im Hotel kannte ich eher die Übergabe zwischen den Schichten als ein klassisches Zehn-Minuten-Briefing, mit einem Front Office Daily Stand-up und einem Übergabeblatt, das Nacht-, Früh- und Spätschicht verband. Die Vorlage am Ende ist mein heutiger Vorschlag; ob ich das Briefing als Team Leader oder Area Manager in dieser Form verändert habe, kann ich nicht mit Sicherheit sagen.
 
-## Letzte Meile: Zahlen und ihre Gründe
+## Last Mile: Zahlen und ihre Gründe
 
 Die Morning Stand-ups hingen eng mit dem Betrieb des Tages und mit den KPIs zusammen. Zu den Themen gehörten:
 
@@ -61,9 +61,9 @@ Die Morning Stand-ups hingen eng mit dem Betrieb des Tages und mit den KPIs zusa
 
 Es ging also um mehr als „Wie lief es gestern?“: um Zahlen, um Gründe und um Punkte, die korrigiert werden mussten.
 
-Seinen Wert hatte das Briefing dann, wenn es an etwas anknüpfte, das die Leute in der Schicht sofort erleben würden. War Delay das Problem, genügte es nicht, die Prozentzahl zu nennen; man musste herausfinden, warum es dazu kam. Lag die Ursache beim Beladen, beim Stapeln, bei der Leistung der Fahrer oder in einem Prozessschritt, gab das Briefing dem Team eine Sache mit, auf die es während der Arbeit achten konnte.
+Seinen Wert hatte das Briefing dann, wenn es an etwas anknüpfte, das die Leute in der Schicht sofort erleben würden. War Delay das Problem, war die Prozentzahl nur der Anfang; man musste herausfinden, warum es dazu kam. Lag die Ursache beim Beladen, beim Stapeln, bei der Leistung der Fahrer oder in einem Prozessschritt, gab das Briefing dem Team eine Sache mit, auf die es während der Arbeit achten konnte.
 
-Ein Briefing ergibt Sinn, wenn aus einer KPI ein Verhalten oder eine Handlung wird, die das Team sehen kann. So sollte das Stand-up für mich funktionieren: KPIs, 5 Why, Pareto, 5S und Sicherheit nicht als getrennte Themen, sondern verknüpft mit ihrer Wirkung auf den Betrieb. Dieselbe Idee steht hinter [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/), nur hat man hier zehn Minuten dafür.
+Ein Briefing ergibt Sinn, wenn aus einer KPI ein Verhalten oder eine Handlung wird, die das Team sehen kann. So sollte das Stand-up für mich funktionieren: KPIs, 5 Whys, Pareto, 5S und Sicherheit nicht als getrennte Themen, sondern verknüpft mit ihrer Wirkung auf den Betrieb. Dieselbe Idee steht hinter [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/), nur hat man hier zehn Minuten dafür.
 
 ## Information oder Richtung
 
@@ -116,7 +116,7 @@ Nur, was diese Schicht betrifft: das Volumen, ein Prozess, ein System, das Team.
 Dort, wo am ehesten etwas schiefgeht: eine KPI, die abrutscht, und ihr Grund, ein offener Punkt mit Frist, ein technisches Problem.
 
 **4. Was sind die zwei, drei Prioritäten?**
-Nicht zehn. Jede als Handlung formuliert, die das Team während der Arbeit sehen kann, nicht als Zahl.
+Nicht zehn. Jede als Handlung formuliert, die das Team während der Arbeit sehen kann.
 
 **5. Wer übernimmt was?**
 Jede Priorität und jeder offene Punkt bekommt einen Namen. Eine Aufgabe ohne Verantwortlichen ist schon fast eine Aufgabe, die niemand erledigt.

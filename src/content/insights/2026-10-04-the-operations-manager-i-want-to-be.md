@@ -55,7 +55,7 @@ Operations do not work without the people who keep them running every day.
 
 I have worked in environments with pressure, targets, delays, mistakes and moments when you had to react quickly. I have learned that a standard can be high and a demand can be firm without diminishing the dignity of the person in front of you. Pressure can be fair; humiliation is not.
 
-A manager has to be able to ask for accountability without using fear as a way of managing, because a team that is afraid to show its mistakes does not have fewer mistakes. It only has fewer visible mistakes.
+For me, a manager has to be able to ask for accountability without using fear as a way of managing, because a team that is afraid to show its mistakes does not have fewer mistakes. It only has fewer visible mistakes.
 
 ## 2. Standards
 
@@ -67,11 +67,11 @@ For me, standardisation exists to stop people reinventing what the organisation 
 
 ## 3. Data
 
-A KPI is a signal, not a conclusion.
+A KPI is a signal. The conclusion comes from what lies behind it.
 
-I have learned not to be satisfied with a percentage being red or green. If delays go up, I want to know why, not only how many there are. If we have damage, mistakes, loading times outside the standard or another operational problem, I want to know where the problem is concentrated and what is causing it.
+I have learned not to be satisfied with a percentage being red or green. If delays go up, I want to know how many there are and why. If we have damage, mistakes, loading times outside the standard or another operational problem, I want to know where the problem is concentrated and what is causing it.
 
-This is where ways of thinking like Pareto and 5 Whys help me, not because every problem needs a big methodology, but because it is very easy to fight the symptom and call it improvement.
+This is where ways of thinking like Pareto and 5 Whys help me. Not every problem needs a big methodology, but it is very easy to fight the symptom and call it improvement.
 
 The data has to take me to the floor. And the floor has to help me understand the data. If these two worlds do not meet, the report can look good while the operation keeps having the same problem.
 
@@ -101,7 +101,7 @@ Operations improve through many small corrections, made continuously and grounde
 
 I do not want to use fear as a tool for leading. I do not want to ask people for a standard that I myself am not willing to understand or respect. I do not want to hide a problem just because the KPI looks better without it. I do not want to become the manager who knows everything because nobody else has been trained. And I do not want the team to need my presence for every small decision.
 
-If a team only works when the manager is in the room, that manager has not yet built a system.
+If a team only works when the manager is in the room, then in my view that manager has not yet built a system.
 
 ## What my ideal week as an Operations Manager would look like
 

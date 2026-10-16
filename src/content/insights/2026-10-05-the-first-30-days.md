@@ -50,11 +50,11 @@ This essay opens a new series. The first, *Ten years close to the work*, was abo
 
 ## The first nights: the people before the documents
 
-In the first week I did not come in to change things. I came in to understand how the night really worked.
+In the first week my only aim was to understand how the night really worked.
 
 In the nights that followed I concentrated on the Night Audit checklist, on the way my colleagues carried out the steps, and on the videos, screenshots and training documents, and I took notes.
 
-I wanted to understand not only what had to be done, but in what order and for what reason. A checklist gives you the steps. It does not always tell you why one step comes before another, or what breaks if you skip it.
+I wanted to understand what had to be done, in what order and for what reason. A checklist gives you the steps. It does not always tell you why one step comes before another, or what breaks if you skip it.
 
 At the start I stayed closer to the people who did the work every night than to the theory in the documents. The document tells you how the work should be. The people tell you how it is.
 
@@ -102,7 +102,7 @@ And one thing I would tell them not to do: do not change something just because 
 
 ## 30 questions for the first 30 days
 
-In the first 30 days, a new manager does not need 30 solutions; they need 30 good questions. These are the ones I would have liked to have written down in my first nights. You do not need the answers on day one. You should have them after 30 days.
+In the first 30 days, a new manager needs 30 good questions more than 30 solutions. These are the ones I wish I had written down in my first nights. You do not need the answers on day one. You should have them after 30 days.
 
 **The process**
 
@@ -123,7 +123,7 @@ In the first 30 days, a new manager does not need 30 solutions; they need 30 goo
 **Information**
 
 11. Where does a new person find the information?
-12. How many places do they have to open to carry out one step?
+12. How many documents do they have to open to carry out one step?
 13. What do only the experienced people know by heart?
 14. How does information pass from one shift to the next?
 15. What is left open at the end of the shift, and who takes it on?

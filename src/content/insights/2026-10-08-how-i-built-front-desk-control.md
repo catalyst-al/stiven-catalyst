@@ -38,13 +38,13 @@ firstMove:
   - Ask a colleague to follow it without your explanation, and note where they stopped.
 ---
 
-No document was missing when I started Front Desk Control. The documents existed; the information I needed during a shift was scattered across them.
+When I started Front Desk Control, no document was missing. The trouble was finding what I needed in them during a shift.
 
 This is the most concrete case in the series: a real project, developed step by step, that anyone can open and check. What it shows is a way of organising information. What it has done for training time or mistakes has not been measured.
 
 ## What it is
 
-Front Desk Control is a work tool in the browser that I built to have the information and processes of Front Office and Night Audit in one place. I did not want another folder of documents. I wanted a page where I could quickly find what I had to do, in what order, and where to look for help if I was not sure.
+Front Desk Control is a work tool in the browser that I built to have the information and processes of Front Office and Night Audit in one place. Instead of another folder of documents, I wanted a page where I could quickly find what I had to do, in what order, and where to look for help if I was not sure.
 
 It uses HTML pages, step-by-step instructions, checklists and screenshots to explain the processes visually. The public version is [open here](https://catalyst-al.github.io/frontdesk-control-web/), with anonymised content.
 
@@ -54,7 +54,7 @@ At first the need was personal: I was learning new processes and wanted to organ
 
 I developed the project in several phases during September 2026, while I was working through training and Night Audit processes. It was never finished in one go: as I learned more about the processes, I kept adding, improving and revising the way the instructions were presented.
 
-The problem was practical. The information I needed existed, but it was spread across checklists, documents, screenshots, videos and notes. The checklist told me what had to be done; another document or a colleague showed me how. To understand one procedure, I sometimes had to move from one source to the next. The information was all there. What cost time was finding it and using it.
+The problem was practical. The information I needed existed, but it was spread across checklists, documents, screenshots, videos and notes. The checklist told me what had to be done; another document or a colleague showed me how. To understand one procedure, I sometimes had to move from one source to the next. What cost time was finding the information and using it.
 
 This follows directly from the first essay of the series, [The first 30 days](/insights/the-first-30-days/). At first I was trying to understand the operation; then I began to build a way to stop the information staying scattered. [A good SOP is not a document](/insights/a-good-sop-is-not-a-document/) explains why. This essay shows how.
 
@@ -62,7 +62,7 @@ I did not want to remember where every document was. I wanted to know where to g
 
 ## How I organised it
 
-I chose not to write a long manual to be read from start to finish. I organised the tool around the work that had to be done, with dedicated parts for Front Office and Night Audit: instructions, search, checklists and images that explain the steps.
+Instead of writing a long manual to be read from start to finish, I organised the tool around the work that had to be done, with dedicated parts for Front Office and Night Audit: instructions, search, checklists and images that explain the steps.
 
 One of the most important decisions was that the user should not need to remember the name of the original document to find an answer. If you are carrying out a procedure, you should be able to search for the procedure, not dig through folders until you find the right PDF.
 

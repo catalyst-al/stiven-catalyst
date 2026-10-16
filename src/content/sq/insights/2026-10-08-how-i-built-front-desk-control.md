@@ -31,13 +31,13 @@ firstMove:
   - Kërkoji një kolegu ta ndjekë pa shpjegimin tënd, dhe shëno ku u ndal.
 ---
 
-Kur nisa Front Desk Control, nuk mungonte asnjë dokument. Dokumentet ekzistonin; informacioni që më duhej gjatë turnit ishte i shpërndarë nëpër to.
+Kur nisa Front Desk Control, nuk mungonte asnjë dokument. Problemi im ishte të gjeja në to, gjatë turnit, atë që më duhej.
 
-Ky është rasti më konkret i serisë: një projekt real, i zhvilluar hap pas hapi, që kushdo mund ta hapë dhe ta kontrollojë. Ai tregon një mënyrë për ta organizuar informacionin. Sa ka ndikuar në kohën e trajnimit apo te gabimet nuk është matur.
+Ky është rasti më konkret i serisë: një projekt real, i zhvilluar hap pas hapi, që kushdo mund ta hapë dhe ta kontrollojë. Ai tregon një mënyrë për ta organizuar informacionin. Sa ka ndikuar në kohën e trajnimit apo në gabimet nuk është matur.
 
 ## Çfarë është
 
-Front Desk Control është një mjet pune në shfletues, që e ndërtova për t'i pasur informacionin dhe proceset e Front Office dhe Night Audit në një vend. Nuk doja një dosje tjetër me dokumente. Doja një faqe ku të gjeja shpejt çfarë duhej të bëja, me çfarë radhe, dhe ku të kërkoja ndihmë kur nuk isha i sigurt.
+Front Desk Control është një mjet pune në shfletues, që e ndërtova për t'i pasur informacionin dhe proceset e Front Office dhe Night Audit në një vend. Në vend të një dosjeje tjetër me dokumente, doja një faqe ku të gjeja shpejt çfarë duhej të bëja, me çfarë radhe, dhe ku të kërkoja ndihmë kur nuk isha i sigurt.
 
 Përbëhet nga faqe HTML, udhëzime hap pas hapi, lista kontrolli dhe pamje ekrani që i shpjegojnë proceset me figurë. Versioni publik është [i hapur këtu](https://catalyst-al.github.io/frontdesk-control-web/), me përmbajtje të anonimizuar.
 
@@ -47,7 +47,7 @@ Në fillim nevoja ishte personale: po mësoja procese të reja dhe doja ta rregu
 
 Projektin e zhvillova në disa faza gjatë shtatorit 2026, kur po merresha me trajnimin dhe me proceset e Night Audit. Nuk u përfundua me një të rënë: sa më shumë mësoja për proceset, aq më shumë shtoja, përmirësoja dhe rishikoja mënyrën si ishin paraqitur udhëzimet.
 
-Problemi ishte praktik. Informacioni që më duhej ekzistonte, por ishte i shpërndarë në lista kontrolli, dokumente, pamje ekrani, video dhe shënime. Lista e kontrollit më thoshte çfarë duhej bërë; një dokument tjetër ose një koleg më tregonte si. Për të kuptuar një procedurë, ndonjëherë më duhej të kaloja nga një burim te tjetri. Informacioni ishte i gjithi aty. Kohë merrte gjetja dhe përdorimi i tij.
+Problemi ishte praktik. Informacioni që më duhej ekzistonte, por ishte i shpërndarë në lista kontrolli, dokumente, pamje ekrani, video dhe shënime. Lista e kontrollit më thoshte çfarë duhej bërë; një dokument tjetër ose një koleg më tregonte si. Për të kuptuar një procedurë, ndonjëherë më duhej të kaloja nga një burim te tjetri. Kohë merrte gjetja dhe përdorimi i informacionit.
 
 Kjo vjen drejtpërdrejt nga eseja e parë e serisë, [30 ditët e para](/sq/insights/the-first-30-days/). Në fillim po përpiqesha ta kuptoja operacionin; më pas nisa të ndërtoja diçka që informacioni të mos mbetej i shpërndarë. Pse, e kam shkruar te [Një SOP e mirë nuk është dokument](/sq/insights/a-good-sop-is-not-a-document/). Këtu tregoj si.
 
@@ -55,7 +55,7 @@ Nuk doja të mbaja mend ku ndodhej çdo dokument. Doja të dija ku të shkoja p�
 
 ## Si e organizova
 
-Nuk doja të shkruaja një manual të gjatë që lexohet nga fillimi në fund. E organizova mjetin sipas punës që duhej kryer, me pjesë më vete për Front Office dhe Night Audit: udhëzime, kërkim, lista kontrolli dhe pamje që shpjegojnë hapat.
+Në vend që të shkruaja një manual të gjatë që lexohet nga fillimi në fund, e organizova mjetin sipas punës që duhej kryer, me pjesë më vete për Front Office dhe Night Audit: udhëzime, kërkim, lista kontrolli dhe pamje që shpjegojnë hapat.
 
 Një nga vendimet më të rëndësishme ishte që përdoruesi të mos kishte nevojë ta mbante mend emrin e dokumentit origjinal për të gjetur një përgjigje. Nëse po kryen një procedurë, duhet të mund të kërkosh procedurën, jo të gërmosh nëpër dosje derisa të gjesh PDF-në e duhur.
 

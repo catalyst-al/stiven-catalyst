@@ -38,7 +38,7 @@ Zu Beginn übernehme ich die Übergabe der vorherigen Schicht und versuche, den 
 
 In der Mitte der Schicht beginnt die genauere Prüfung, und genau dann zeigen sich viele Abweichungen zwischen dem, was das System anzeigt, und dem, was tagsüber wirklich passiert ist. Geprüft werden Reservierungen, Status, Dokumentation, Finanzielles und jedes operative Problem, das den Tagesabschluss verhindern könnte.
 
-Dann kommt der Abschluss, der Teil, in dem jedes kleine Problem sichtbar werden kann, das tagsüber liegen geblieben ist. Bevor der Tag abgeschlossen wird, muss ich überzeugt sein, dass die wichtigsten Dinge in Ordnung sind und dass verständlich ist, was in den nächsten Tag übergeht.
+Dann kommt der Abschluss, für mich der Teil, in dem jedes kleine Problem sichtbar werden kann, das tagsüber liegen geblieben ist. Bevor der Tag abgeschlossen wird, muss ich überzeugt sein, dass die wichtigsten Dinge in Ordnung sind und dass verständlich ist, was in den nächsten Tag übergeht.
 
 Am Ende steht die Übergabe. Eine Nachtschicht endet nicht, wenn das System abgeschlossen ist. Sie endet, wenn die Person nach mir klar versteht, was passiert ist, was gelöst wurde und was noch weiterverfolgt werden muss.
 
@@ -50,7 +50,7 @@ Ich bin auf Reservierungen gestoßen, die nicht ganz zu dem passen, was tatsäch
 
 Die Nacht bringt diese Dinge ans Licht, weil sich der Rhythmus ändert. Vor der Rezeption wird es ruhiger, und man kann klarer hinter den Prozess sehen.
 
-Diese Arbeit hat mich gelehrt, dass viele Fehler nicht aus fehlendem Können entstehen, sondern aus Unterbrechungen, unvollständiger Kommunikation und dem Satz „Machen wir später“. Oft ist „später“ die Nachtschicht.
+Diese Arbeit hat mich gelehrt, dass viele Fehler wenig mit Können zu tun haben: Sie entstehen aus Unterbrechungen, unvollständiger Kommunikation und dem Satz „Machen wir später“. Oft ist „später“ die Nachtschicht.
 
 ## No-Shows und Zahlungen
 
@@ -68,7 +68,7 @@ Der Tagesabschluss hat mich gelehrt, einen Prozess dann abzuschließen, wenn die
 
 In den ersten Wochen lag meine Aufmerksamkeit natürlich vor allem auf der Liste: welcher Schritt nach welchem kommt, was geöffnet und was geprüft werden muss und in welcher Reihenfolge.
 
-Heute sehe ich das anders. Die Frage lautet nicht mehr nur „Habe ich diesen Schritt erledigt?“, sondern „Ist das, was dieser Schritt prüfen soll, tatsächlich in Ordnung?“
+Heute sehe ich das anders. Auf „Habe ich diesen Schritt erledigt?“ folgt eine zweite Frage: „Ist das, was dieser Schritt prüfen soll, tatsächlich in Ordnung?“
 
 Das ist ein großer Unterschied. Eine Checkliste lässt sich mechanisch abarbeiten, aber ein guter Night Audit verlangt, dass man versteht, wie die Prozesse voneinander abhängen. Wenn vorher etwas nicht richtig abgeschlossen wurde, hat es keinen Sinn, den Prozess zu beschleunigen, nur damit die Liste fertig aussieht.
 
@@ -86,7 +86,7 @@ Das ist nachts besonders wichtig, weil die Versuchung groß ist zu sagen: „Ich
 
 ## Fünf Minuten mit den Tagesmanagern
 
-Hätte ich fünf Minuten mit den Tagesmanagern, würde ich sie bitten, den Nachtbericht nicht nur als Beleg dafür zu lesen, dass das Hotel wieder eine Nacht überstanden hat. Er zeigt viel mehr.
+Hätte ich fünf Minuten mit den Tagesmanagern, würde ich sie bitten, den Nachtbericht auf das hin zu lesen, was er zeigt. Und das ist viel mehr als der Beleg, dass das Hotel wieder eine Nacht überstanden hat.
 
 Die fünf Dinge, die ich mir jeden Morgen ansehen würde:
 
