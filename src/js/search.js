@@ -111,6 +111,9 @@
         link.append(p);
       }
       li.append(link);
+      // The results come in one after another (styles.css: .is-entering).
+      li.className = "is-entering";
+      li.style.setProperty("--i", Math.min(list.children.length, 12));
       list.append(li);
     }
   };

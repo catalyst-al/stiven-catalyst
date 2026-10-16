@@ -382,3 +382,14 @@ test('Start here: the portrait breathes, each step number lights up as it is rea
   assert.match(css, /:where\([^)]*\.start-intro[^)]*\) \{\s*animation: scroll-rise/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes step-reach/);
 });
+
+test('Search: the box glows, results come in one after another with the words swept in, a result answers the pointer', () => {
+  const js = fs.readFileSync('src/js/search.js', 'utf8');
+  assert.match(js, /li\.className = "is-entering";/);
+  assert.match(js, /li\.style\.setProperty\("--i", Math\.min\(list\.children\.length, 12\)\)/, 'the delay stops growing after a dozen results');
+  assert.match(css, /\.search-form:focus-within \{ box-shadow: 0 0 0 4px/);
+  assert.match(css, /\.search-results \.is-entering mark \{ animation: mark-sweep/);
+  assert.match(css, /\.search-results a::before \{[\s\S]*?radial-gradient\(520px circle at var\(--mx, 30%\)/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.search-results a, /);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes mark-sweep/);
+});
