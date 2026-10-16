@@ -248,3 +248,17 @@ test('About: pillars, figures and the steps of the path answer the pointer like 
   assert.match(css, /\.about-portrait \{[\s\S]*?animation: portrait-breathe 5s ease-in-out infinite;/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.pillar, \.about-timeline li, a\.list-row"/);
 });
+
+test('Contact: the two ways to write are cards with a planet that answer the pointer', { skip: !hasSite }, () => {
+  for (const [file, prefix] of [['contact.html', ''], ['sq/contact.html', '/sq'], ['de/contact.html', '/de']]) {
+    const html = built(file);
+    const cards = html.match(/<a class="contact-card"[\s\S]*?<\/a>/g) || [];
+    assert.equal(cards.length, 2, file);
+    assert.match(cards[0], /href="mailto:[^"]+@[^"]+"/);
+    assert.match(cards[0], /<strong>[^<]+@<wbr>[^<]+<\/strong>/, `${file}: the address breaks after the @ if it must`);
+    assert.match(cards[1], new RegExp(`href="${prefix}/your-challenge.html"`));
+    for (const card of cards) assert.match(card, /<span class="contact-card-orb" aria-hidden="true"><\/span>/);
+  }
+  assert.match(css, /\.contact-card::before \{[\s\S]*?radial-gradient\(380px circle at var\(--mx, 30%\) var\(--my, 50%\)/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.contact-card, /);
+});

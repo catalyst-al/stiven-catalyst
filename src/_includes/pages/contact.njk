@@ -4,7 +4,7 @@
   <h1>{{ "Contact" | t(lang) }}</h1>
   <p class="lede">{{ "Questions, ideas or a conversation about leadership, operations and systems. Messages are read personally." | t(lang) }}</p>
 </section>
-<section class="shell contact">
+<section class="shell contact{% if not site.contact.action %} is-cards{% endif %}">
   {%- if site.contact.action %}
   <form class="contact-form" action="{{ site.contact.action }}" method="post">
     {%- if site.contact.key %}
@@ -29,10 +29,20 @@
     <p class="form-note">{{ "Your details are only used to reply to you." | t(lang) }}{% if legal.name and legal.city %} {{ "Details in the" | t(lang) }} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) }}</a>.{% endif %}</p>
   </form>
   {%- endif %}
+  {#- The two ways to write: each a card with a planet, like the chips of the menu (styles.css, .contact-card). #}
   <aside class="contact-aside">
-    <p class="kicker">{{ "Email" | t(lang) }}</p>
-    <a class="text-link" href="mailto:{{ site.email }}">{{ site.email }} <span aria-hidden="true">→</span></a>
-    <p class="kicker">{{ "Your challenge" | t(lang) }}</p>
-    <a class="text-link" href="{{ '/your-challenge.html' | local(lang) }}">{{ "Send me your situation" | t(lang) }} <span aria-hidden="true">→</span></a>
+    <a class="contact-card" href="mailto:{{ site.email }}">
+      <span class="contact-card-orb" aria-hidden="true"></span>
+      <span class="kicker">{{ "Email" | t(lang) }}</span>
+      {#- If the address must break on a narrow phone, it breaks after the @. #}
+      <strong>{{ site.email | replace("@", "@<wbr>") | safe }}</strong>
+      <span class="contact-card-go" aria-hidden="true">→</span>
+    </a>
+    <a class="contact-card" href="{{ '/your-challenge.html' | local(lang) }}">
+      <span class="contact-card-orb" aria-hidden="true"></span>
+      <span class="kicker">{{ "Your challenge" | t(lang) }}</span>
+      <strong>{{ "Send me your situation" | t(lang) }}</strong>
+      <span class="contact-card-go" aria-hidden="true">→</span>
+    </a>
   </aside>
 </section>
