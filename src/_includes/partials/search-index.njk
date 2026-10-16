@@ -8,6 +8,7 @@
   { title: "Tools" | t(lang), summary: "Small tools built from the essays. They run in your browser, and your work stays on your device." | t(lang), url: "/tools.html" },
   { title: "Your challenge" | t(lang), summary: "A situation from your shift, your area or your front desk: a number you cannot explain, a handover that keeps failing, a conversation you are putting off. I read every one, and answer the ones I can in public, anonymised, so the next reader with the same problem finds it." | t(lang), url: "/your-challenge.html" },
   { title: "My shelf" | t(lang), summary: "What you saved for later, the cards you started and the essays you read. Kept in this browser only, with no account; “Save all my work” takes it to another device." | t(lang), url: "/shelf.html" },
+  { title: downloads[lang or "en"].heading, summary: downloads[lang or "en"].lede, url: "/downloads.html" },
   { title: "Contact" | t(lang), summary: "Questions, ideas or a conversation about leadership, operations and systems. Messages are read personally." | t(lang), url: "/contact.html" }
 ] -%}
 {{ lang | searchIndex(collections, toolList, pages, { weekly: weekly, treatise: treatise, magazine: magazine, review: review, toolsGuide: toolsGuide, podcast: podcast }) | safe }}

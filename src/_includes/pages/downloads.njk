@@ -1,0 +1,52 @@
+{#- The Downloads page, shared by the three languages (src/_data/downloads.js): every file of the site to keep, by
+    kind of publication, each with the page it belongs to. A long list shows its newest eight and keeps the rest
+    one tap away. -#}
+{%- set lang = lang or "en" -%}
+{%- set D = downloads[lang] -%}
+{%- macro row(item, i) -%}
+      <li class="downloads-row" style="--i: {{ i if i < 12 else 12 }}">
+        <div class="downloads-copy">
+          <a class="downloads-title" href="{{ item.page | local(lang) }}">{{ item.title }}</a>
+          <span class="downloads-meta">{{ item.meta }}</span>
+        </div>
+        <div class="downloads-files">
+          {%- for f in item.files %}
+          <a class="downloads-file" href="{{ f.href }}" download><b>{{ f.kind }}</b>{% if f.label %} {{ f.label }}{% endif %}<span>{{ f.size }}</span><i aria-hidden="true">↓</i></a>
+          {%- endfor %}
+        </div>
+      </li>
+{%- endmacro -%}
+<section class="shell page-hero downloads-hero">
+  <p class="eyebrow">{{ D.eyebrow }}</p>
+  <h1>{{ D.heading }}</h1>
+  <p class="lede">{{ D.lede }}</p>
+  <nav class="downloads-jump" aria-label="{{ D.heading }}">
+    {%- for s in D.sections %}
+    <a href="#{{ s.id }}">{{ s.name }}<span>{{ s.count }}</span></a>
+    {%- endfor %}
+  </nav>
+</section>
+{%- for s in D.sections %}
+<section class="shell downloads-section" id="{{ s.id }}" aria-labelledby="{{ s.id }}-title">
+  <header class="downloads-head">
+    <h2 id="{{ s.id }}-title">{{ s.name }}</h2>
+    <span>{{ D.files | replace("{n}", s.count) }}</span>
+  </header>
+  <ol class="downloads-list">
+    {%- for item in s.items %}{% if loop.index <= 8 %}
+    {{ row(item, loop.index0) }}
+    {%- endif %}{% endfor %}
+  </ol>
+  {%- if s.items | length > 8 %}
+  <details class="downloads-more">
+    <summary>{{ D.more | replace("{n}", s.items | length) }}</summary>
+    <ol class="downloads-list" start="9">
+      {%- for item in s.items %}{% if loop.index > 8 %}
+      {{ row(item, loop.index0 - 8) }}
+      {%- endif %}{% endfor %}
+    </ol>
+  </details>
+  {%- endif %}
+</section>
+{%- endfor %}
+<p class="shell downloads-note form-note">{{ D.note }}</p>

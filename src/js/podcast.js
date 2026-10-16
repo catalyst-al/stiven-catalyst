@@ -12,8 +12,10 @@
   const done = () => {
     button.textContent = box.dataset.copied;
     status.textContent = box.dataset.copied;
+    // The button and the address glow while "Copied" shows (styles.css: .is-done).
+    box.classList.add("is-done");
     clearTimeout(timer);
-    timer = setTimeout(() => { button.textContent = label; status.textContent = ""; }, 2500);
+    timer = setTimeout(() => { button.textContent = label; status.textContent = ""; box.classList.remove("is-done"); }, 2500);
   };
   const select = () => { input.focus(); input.select(); input.setSelectionRange(0, input.value.length); };
   input.addEventListener("focus", select);

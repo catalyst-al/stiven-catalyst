@@ -5271,7 +5271,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart, .downloads-list > .downloads-row) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -8344,3 +8344,170 @@ a.essay-series-next:hover em { translate: 5px 0; }
 .wk-svg :is(.wk-bar, .wk-col, .wk-dot, .wk-person, .wk-day) { transition: filter .25s ease; }
 .wk-svg :is(.wk-bar, .wk-col, .wk-dot, .wk-person, .wk-day):hover { filter: brightness(1.25) drop-shadow(0 0 4px color-mix(in srgb, var(--blue) 70%, transparent)); }
 @media (prefers-reduced-motion: reduce) { .weekly-chart { transition: none; } .weekly-chart:hover { transform: none; } }
+
+/* The book in motion: the title comes into focus and the subtitle follows as the page opens; under the pointer the
+   book turns towards it, as if picked up; in the full text each chapter's mark draws its line and the chapter's title
+   rises as it is reached; the closing words come in after their line. */
+.book-text-body .book-text-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: left;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .book-hero h1 { animation: lost-focus 1s cubic-bezier(.22, 1, .36, 1) both; }
+  .book-hero .book-subtitle { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .3s both; }
+  .book-object:hover .book-object-cover { transform: rotateY(calc(-20deg + var(--px, .5) * 22deg)) rotateX(calc((.5 - var(--py, .5)) * 6deg)); transition: transform .3s ease-out; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-text-body .book-text-kicker::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 20% entry 100%; }
+    .book-text-body .book-text-kicker + :is(h2, h3) { animation: scroll-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 120px; }
+    .book-closing blockquote p { animation: closing-words linear both; animation-timeline: view(); animation-range: entry 30% cover 45%; }
+  }
+}
+@keyframes closing-words { from { opacity: .15; translate: 0 18px; } }
+
+/* The guide's editions: each change is a small blue mark that lights up as it is reached, the line of text sliding
+   into place beside it; an earlier edition to download lifts and its arrow points down under the pointer. */
+.book-editions ul { padding-left: 0; list-style: none; }
+.book-editions li { position: relative; padding-left: 22px; }
+.book-editions li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  background: var(--blue);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 50%, transparent);
+}
+.book-editions a[download] { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid color-mix(in srgb, var(--blue) 40%, transparent); transition: color .25s ease, border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1); }
+.book-editions a[download]::after { content: "↓"; color: var(--blue); transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.book-editions a[download]:hover { color: var(--blue); border-color: var(--blue); translate: 0 -1px; }
+.book-editions a[download]:hover::after { translate: 0 3px; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-editions li::before { animation: edition-mark linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+    .book-editions li { animation: principle-in linear both; animation-timeline: view(); animation-range: entry 10% entry 100%; }
+  }
+}
+@keyframes edition-mark { from { background: transparent; box-shadow: none; scale: .6; } }
+
+/* The podcast player's line fills with what has been heard (--heard, from audio-player.js) and its knob glows while
+   an episode plays; on the podcast page, the address and its button glow green for as long as "Copied" shows. */
+.audio-player-scrub { height: 18px; background: transparent; appearance: none; -webkit-appearance: none; }
+.audio-player-scrub::-webkit-slider-runnable-track { height: 4px; border-radius: 99px; background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--heard, 0%) 100% no-repeat, var(--line); }
+.audio-player-scrub::-moz-range-track { height: 4px; border-radius: 99px; background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--heard, 0%) 100% no-repeat, var(--line); }
+.audio-player-scrub::-webkit-slider-thumb { width: 14px; height: 14px; margin-top: -5px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); transition: box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); -webkit-appearance: none; }
+.audio-player-scrub::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.audio-player-scrub:hover::-webkit-slider-thumb { scale: 1.15; }
+.audio-player.is-playing .audio-player-scrub::-webkit-slider-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 22%, transparent), 0 0 12px var(--blue); }
+.audio-player.is-playing .audio-player-scrub::-moz-range-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 22%, transparent), 0 0 12px var(--blue); }
+.podcast-address-row input, .podcast-address-row .button-primary { transition: border-color .3s ease, box-shadow .35s ease, background-color .3s ease; }
+.podcast-address.is-done .podcast-address-row input { border-color: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 16%, transparent); }
+.podcast-address.is-done .podcast-address-row .button-primary { background: var(--ok); border-color: var(--ok); box-shadow: 0 0 18px color-mix(in srgb, var(--ok) 45%, transparent); }
+
+/* Downloads (pages/downloads.njk): the kinds of publication as chips with their count, then each kind as a list of
+   rows, a title with the files beside it. In motion: the rows rise into place, a row lights up under the pointer, a
+   file's arrow drops towards the reader and the button settles when it is pressed; the rest of a long list unfolds. */
+.downloads-jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+.downloads-jump a { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px 9px 16px; border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line)); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; transition: border-color .25s ease, background-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease; }
+.downloads-jump a span { display: grid; place-items: center; min-width: 26px; height: 22px; padding: 0 7px; border-radius: 999px; background: color-mix(in srgb, var(--blue) 14%, transparent); color: var(--blue); font-size: 12px; font-variant-numeric: tabular-nums; }
+.downloads-jump a:hover { translate: 0 -2px; border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 12px 26px -18px var(--blue); }
+.downloads-section { padding-top: 56px; scroll-margin-top: 80px; }
+.downloads-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.downloads-head h2 { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3.4vw, 42px); font-weight: 400; line-height: 1.05; }
+.downloads-head span { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.downloads-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.downloads-row { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.downloads-row::before { content: ""; position: absolute; inset: 4px -16px; z-index: -1; border-radius: 16px; background: radial-gradient(460px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 10%, transparent), transparent 65%), color-mix(in srgb, var(--ink) 3%, transparent); opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+.downloads-row:hover::before { opacity: 1; }
+.downloads-copy { display: grid; gap: 4px; min-width: 0; }
+.downloads-title { color: var(--ink); font-family: var(--serif); font-size: clamp(19px, 2vw, 23px); line-height: 1.2; text-decoration: none; overflow-wrap: anywhere; transition: color .25s ease, translate .4s cubic-bezier(.22, 1, .36, 1); }
+.downloads-row:hover .downloads-title { translate: 4px 0; color: color-mix(in srgb, var(--blue-soft, var(--blue)) 70%, var(--ink)); }
+.downloads-meta { color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+.downloads-files { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.downloads-file { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 13px; text-decoration: none; white-space: nowrap; transition: border-color .25s ease, background-color .25s ease, box-shadow .3s ease, scale .2s cubic-bezier(.22, 1, .36, 1); }
+.downloads-file b { color: var(--blue); font-size: 12px; letter-spacing: .08em; }
+.downloads-file span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.downloads-file i { color: var(--blue); font-style: normal; font-weight: 800; transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.downloads-file:hover { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 10px 22px -16px var(--blue); }
+.downloads-file:hover i { translate: 0 3px; }
+.downloads-file:active { scale: .96; box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.downloads-more summary { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; transition: border-color .25s ease, background-color .25s ease; }
+.downloads-more summary::-webkit-details-marker { display: none; }
+.downloads-more summary::after { content: "+"; color: var(--blue); font-weight: 800; transition: rotate .35s cubic-bezier(.22, 1, .36, 1); }
+.downloads-more[open] summary::after { rotate: 45deg; }
+.downloads-more summary:hover { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.downloads-more[open] .downloads-list { margin-top: 8px; }
+.downloads-note { margin-top: 40px; margin-bottom: 90px; }
+@media (max-width: 620px) {
+  .downloads-row { grid-template-columns: minmax(0, 1fr); }
+  .downloads-row::before { inset: 4px -10px; }
+  .downloads-files { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .downloads-more[open] .downloads-row { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 30ms); }
+}
+@media (prefers-reduced-motion: reduce) { .downloads-title, .downloads-file, .downloads-file i, .downloads-jump a { transition: none; } }
+
+/* Publications in motion: the title lifts like a page being turned up, each series keeps its own colour (the
+   Management Review blue, the treatise violet, From the Floor red, the book and the guide green) in the light that
+   follows the pointer and in a short mark before its kicker, drawn as the publication comes into view; after a
+   month or a kind is chosen, the covers turn in towards the reader one after another, and a count that changes
+   gives a small beat. */
+[data-pub] { --series: var(--blue); }
+[data-pub][data-block="treatise"] { --series: color-mix(in srgb, var(--blue) 50%, var(--red)); }
+[data-pub][data-block="floor"] { --series: var(--red); }
+[data-pub][data-block="books"] { --series: var(--ok); }
+[data-pub].book-feature::after,
+[data-pub] .book-feature::after {
+  background:
+    radial-gradient(620px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--series) 13%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 2.5%, transparent);
+}
+[data-pub] .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  margin: 0 10px 0 0;
+  border-radius: 3px;
+  background: var(--series);
+  vertical-align: .28em;
+  transform-origin: left;
+  transition: width .45s cubic-bezier(.22, 1, .36, 1);
+}
+[data-pub]:hover .kicker::before { width: 38px; }
+.publications-filter .weekly-filter button[data-block="review"]:hover { border-color: var(--blue); }
+.publications-filter .weekly-filter button[data-block="treatise"]:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--red)); }
+.publications-filter .weekly-filter button[data-block="floor"]:hover { border-color: var(--red); }
+.publications-filter .weekly-filter button[data-block="books"]:hover { border-color: var(--ok); }
+.weekly-n { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .publications-hero .eyebrow { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; }
+  .publications-hero h1 { transform-origin: 50% 100%; animation: pub-leaf 1s cubic-bezier(.22, 1, .36, 1) .12s both; }
+  .publications-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .4s both; }
+  .publications-filter .weekly-controls:not([hidden]) { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) .55s both; }
+  [data-pub].is-entering .book-object-cover,
+  [data-pub].is-entering .book-feature .book-object-cover { animation: pub-cover-in .8s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 35ms + .08s); }
+  .weekly-n.is-bumped { animation: pub-count .45s cubic-bezier(.22, 1, .36, 1); }
+  .publications-more .weekly-none:not([hidden]) { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-pub] .kicker::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+  }
+}
+@keyframes pub-leaf { from { opacity: 0; transform: perspective(900px) rotateX(55deg) translateY(.12em); filter: blur(4px); } }
+@keyframes pub-cover-in { from { opacity: 0; transform: perspective(1200px) rotateY(-38deg) translateX(-14px); } }
+@keyframes pub-count { 40% { scale: 1.35; opacity: 1; color: var(--ink); } }
+@media (prefers-reduced-motion: reduce) { [data-pub] .kicker::before { transition: none; } }

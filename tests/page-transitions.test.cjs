@@ -480,3 +480,65 @@ test('Issue pages: the facts come in one after another, the charts answer the po
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.weekly-card, \.weekly-chart, /);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /\.weekly-chart::before/);
 });
+
+test('The book: the title comes into focus, the book turns towards the pointer, chapters in the full text draw their mark', () => {
+  const js = fs.readFileSync('src/script.js', 'utf8');
+  assert.match(js, /\.weekly-chart, \.book-object, /);
+  assert.match(js, /card\.classList\.contains\("weekly-card"\) \|\| card\.classList\.contains\("book-object"\)/);
+  assert.match(css, /\.book-object:hover \.book-object-cover \{ transform: rotateY\(calc\(-20deg \+ var\(--px, \.5\) \* 22deg\)\)/);
+  assert.match(css, /\.book-hero h1 \{ animation: lost-focus/);
+  assert.match(css, /\.book-text-body \.book-text-kicker::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.book-closing blockquote p \{ animation: closing-words/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes closing-words/);
+});
+
+test('Tools guide: each change of an edition lights its mark as it is reached, an earlier edition points its arrow down', () => {
+  assert.match(css, /\.book-editions li::before \{ animation: edition-mark linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.book-editions a\[download\]::after \{ content: "↓";/);
+  assert.match(css, /\.book-editions a\[download\]:hover::after \{ translate: 0 3px; \}/);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes edition-mark/);
+});
+
+test('Podcast player: the line fills with what has been heard; "Copied" glows green on the address', async () => {
+  const player = fs.readFileSync('src/js/audio-player.js', 'utf8');
+  assert.equal((player.match(/scrub\.style\.setProperty\("--heard"/g) || []).length, 2, 'while playing and while dragging');
+  assert.match(css, /\.audio-player-scrub::-webkit-slider-runnable-track \{[^}]*0 0 \/ var\(--heard, 0%\) 100% no-repeat/);
+  assert.match(css, /\.podcast-address\.is-done \.podcast-address-row \.button-primary \{ background: var\(--ok\);/);
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM('<div class="podcast-address" data-podcast-copy data-copied="Kopjuar"><input data-podcast-url value="https://x/podcast.xml"><button data-podcast-copy-button>Kopjo</button><span data-podcast-status></span></div>', { url: 'https://stivencatalyst.com/sq/podcast.html', runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  Object.defineProperty(window.navigator, 'clipboard', { value: { writeText: async () => {} } });
+  Object.defineProperty(window, 'isSecureContext', { value: true });
+  window.eval(fs.readFileSync('src/js/podcast.js', 'utf8'));
+  window.document.querySelector('button').click();
+  await new Promise((resolve) => window.setTimeout(resolve, 20));
+  const box = window.document.querySelector('.podcast-address');
+  assert.ok(box.classList.contains('is-done'));
+  assert.equal(window.document.querySelector('button').textContent, 'Kopjuar');
+  await new Promise((resolve) => window.setTimeout(resolve, 2600));
+  assert.ok(!box.classList.contains('is-done'), 'the glow goes with the word');
+});
+
+test('Publications: the title lifts like a page, each series keeps its colour, the covers turn in after a choice, a changed count beats', () => {
+  assert.match(css, /\.publications-hero h1 \{ transform-origin: 50% 100%; animation: pub-leaf/);
+  assert.match(css, /\[data-pub\]\[data-block="floor"\] \{ --series: var\(--red\); \}/);
+  assert.match(css, /\[data-pub\] \.kicker::before \{ animation: legal-tick linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\[data-pub\]\.is-entering \.book-object-cover,/);
+  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  for (const name of ['pub-leaf', 'pub-cover-in', 'pub-count']) assert.match(light, new RegExp(`@keyframes ${name}`));
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM(fs.readFileSync('_site/publications.html', 'utf8'), { url: 'https://stivencatalyst.com/publications.html', runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom;
+  window.matchMedia = () => ({ matches: false, addEventListener() {} });
+  window.eval(fs.readFileSync('src/js/weekly.js', 'utf8'));
+  const doc = window.document;
+  const counts = () => [...doc.querySelectorAll('.weekly-filter .weekly-n')].map((n) => n.textContent);
+  const before = counts();
+  assert.equal(doc.querySelectorAll('.is-bumped').length, 0, 'no beat when the page opens');
+  const months = [...doc.querySelectorAll('.weekly-months button')];
+  const other = months.find((button) => button.getAttribute('aria-pressed') === 'false' && button.dataset.month === '2026-09');
+  other.click();
+  assert.notDeepEqual(counts(), before);
+  assert.ok(doc.querySelectorAll('.weekly-n.is-bumped').length > 0, 'a changed count beats');
+  assert.ok(doc.querySelector('[data-pub]:not([hidden]).is-entering'), 'the shown publications come in');
+});
