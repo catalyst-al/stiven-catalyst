@@ -393,3 +393,20 @@ test('Search: the box glows, results come in one after another with the words sw
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.search-results a, /);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes mark-sweep/);
 });
+
+test('Podcast: the cover floats, a playing episode glows and breathes, apps and episodes answer the pointer, steps light up', () => {
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.podcast-cover \{ animation: cover-float/);
+  assert.match(css, /\.audio-player\.is-playing \.audio-player-play \{ animation: news-ring/);
+  assert.match(css, /\.audio-player\.is-playing \{ border-color:/);
+  assert.match(css, /\.podcast-episode:has\(\.audio-player\.is-playing\) \{ border-color:/, 'inside an episode the whole card glows');
+  assert.match(css, /\.podcast-app::before, \.podcast-episode::before \{[\s\S]*?radial-gradient\(420px circle at var\(--mx, 30%\)/);
+  assert.match(css, /\.podcast-steps li b \{ animation: step-reach linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.podcast-episode:target \{ animation: episode-arrive/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.podcast-app, \.podcast-episode, /);
+  const light = fs.readFileSync('_site/styles-light.css', 'utf8');
+  for (const name of ['cover-float', 'episode-arrive', 'step-reach', 'news-ring']) assert.match(light, new RegExp(`@keyframes ${name}`));
+});
+
+test('a player in a narrow column takes the phone layout from its own width, above the narrowest phones', () => {
+  assert.match(css, /\.audio-player \{ container-type: inline-size; \}\n@media \(min-width: 381px\) \{ @container \(max-width: 480px\) \{/);
+});
