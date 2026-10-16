@@ -933,6 +933,32 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   color: var(--muted);
   font-size: 12px;
 }
+/* The four words under the hero: a planet before each, lit under the pointer with a soft band behind it. */
+.meta-strip > div { isolation: isolate; transition: background-color .35s ease; }
+.meta-strip > div::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(260px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 12%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.meta-strip > div:hover::before { opacity: 1; }
+.meta-strip strong::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--blue) 48%, color-mix(in srgb, var(--blue) 50%, #000) 100%);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--blue) 70%, transparent);
+  vertical-align: .14em;
+  transition: box-shadow .3s ease, scale .3s cubic-bezier(.22, 1, .36, 1);
+}
+.meta-strip > div:hover strong::before { scale: 1.35; box-shadow: 0 0 12px var(--blue); }
 
 .section {
   padding: 100px 0;
@@ -1036,6 +1062,30 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   position: relative;
 }
 
+/* The featured essay answers the pointer like the other cards: it rises, the light follows the pointer
+   (--mx, --my from script.js), its big number glows blue and its title steps forward. */
+.feature-card { isolation: isolate; transition: transform .45s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .45s ease; }
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(560px circle at var(--mx, 70%) var(--my, 20%), color-mix(in srgb, var(--blue) 14%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .45s ease;
+  pointer-events: none;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+  box-shadow: var(--shadow), 0 30px 70px -36px color-mix(in srgb, var(--blue) 75%, transparent);
+}
+.feature-card:hover::before { opacity: 1; }
+.feature-card::after { transition: color .5s ease, text-shadow .5s ease, translate .6s cubic-bezier(.22, 1, .36, 1); }
+.feature-card:hover::after { color: color-mix(in srgb, var(--blue) 40%, transparent); text-shadow: 0 0 40px color-mix(in srgb, var(--blue) 45%, transparent); translate: -6px 4px; }
+.feature-card h3 { transition: translate .5s cubic-bezier(.22, 1, .36, 1); }
+.feature-card:hover h3 { translate: 6px 0; }
 .feature-card::after {
   content: attr(data-number);
   position: absolute;
@@ -1323,6 +1373,32 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 78%, transparent);
 }
 
+/* "Lead people better." fills with the site's blue, left to right, as it scrolls into view (scroll-driven; browsers
+   without it keep the outline). The four lines of the manifesto come in one after another the same way. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cta h2 span {
+      background: linear-gradient(90deg, color-mix(in srgb, var(--blue) 85%, transparent) 0 50%, transparent 50%) no-repeat;
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: cta-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 60% cover 55%;
+    }
+    .manifesto-line span {
+      animation: manifesto-in linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 90%;
+    }
+    .manifesto-line span:nth-child(2) { animation-range: entry 25% entry 100%; }
+    .manifesto-line span:nth-child(3) { animation-range: entry 40% cover 30%; }
+    .manifesto-line span:nth-child(4) { animation-range: entry 55% cover 40%; }
+  }
+}
+@keyframes cta-fill { to { background-position: 0 0; } }
+@keyframes manifesto-in { from { opacity: 0; translate: -24px 0; } }
 .cta-side { color: var(--muted); }
 .cta-side .text-link { color: var(--ink); margin-top: 16px; }
 
@@ -5028,7 +5104,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .book-feature, .contact-card, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
