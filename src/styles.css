@@ -5267,7 +5267,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
    without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart) {
       animation: scroll-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 140px;
@@ -8312,3 +8312,31 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .floor-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .6s both; }
 }
 @keyframes floor-rise { from { clip-path: inset(-.2em -.2em 100% -.2em); translate: 0 100%; } to { clip-path: inset(-.2em -.2em -.3em -.2em); translate: 0 0; } }
+
+/* An issue in motion (Management Review, From the Floor, a treatise volume): its facts (number, pages, sources,
+   topics, online since) come in one after another as the page opens; the charts of the issue answer the pointer,
+   a card lifting with a light that follows it, and a bar, a column or a point lights up under the pointer. */
+@media (prefers-reduced-motion: no-preference) {
+  .book-hero .book-facts > div { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(.25s + var(--f, 0) * 80ms); }
+  .book-hero .book-facts > div:nth-child(2) { --f: 1; }
+  .book-hero .book-facts > div:nth-child(3) { --f: 2; }
+  .book-hero .book-facts > div:nth-child(4) { --f: 3; }
+  .book-hero .book-facts > div:nth-child(n + 5) { --f: 4; }
+}
+.weekly-chart { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.weekly-chart::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(460px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 11%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.weekly-chart:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); box-shadow: 0 22px 48px -32px color-mix(in srgb, var(--blue) 80%, transparent); }
+.weekly-chart:hover::before { opacity: 1; }
+.wk-svg :is(.wk-bar, .wk-col, .wk-dot, .wk-person, .wk-day) { transition: filter .25s ease; }
+.wk-svg :is(.wk-bar, .wk-col, .wk-dot, .wk-person, .wk-day):hover { filter: brightness(1.25) drop-shadow(0 0 4px color-mix(in srgb, var(--blue) 70%, transparent)); }
+@media (prefers-reduced-motion: reduce) { .weekly-chart { transition: none; } .weekly-chart:hover { transform: none; } }

@@ -99,7 +99,7 @@
   // (--px, --py: where the pointer is on the cover, from 0 to 1).
   document.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse") return;
-    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .contact-card, .feature-card, .meta-strip > div, .series-panel, .challenge-essays li a, .family-more-list a, .tool-essays-list li a, .essay-tools li a, a.essay-series-next, .issue-more-card, .search-results a, .podcast-app, .podcast-episode, .treatise-layer, .weekly-card, .role-borrowed a, .role-reading a, .role-next-card, .pillar, .about-timeline li, a.list-row");
+    const card = event.target.closest?.(".article-card, .note-card, .project-card, .mini-card, .tool-card, .book-feature, .contact-card, .feature-card, .meta-strip > div, .series-panel, .challenge-essays li a, .family-more-list a, .tool-essays-list li a, .essay-tools li a, a.essay-series-next, .issue-more-card, .search-results a, .podcast-app, .podcast-episode, .treatise-layer, .weekly-card, .weekly-chart, .role-borrowed a, .role-reading a, .role-next-card, .pillar, .about-timeline li, a.list-row");
     if (!card) return;
     const box = (card.querySelector(".weekly-card-cover") || card).getBoundingClientRect();
     card.style.setProperty("--mx", `${Math.round(event.clientX - box.left)}px`);
