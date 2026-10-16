@@ -8582,3 +8582,40 @@ a.essay-series-next:hover em { translate: 5px 0; }
 }
 @keyframes about-years { from { opacity: .3; translate: -8px 0; } }
 @media (prefers-reduced-motion: reduce) { .about-more > div, .about-links .text-link span { transition: none; } .about-more > div:hover { transform: none; } }
+
+/* The homepage in motion, below the cosmos: the field note of the day rises into place, its big quotation mark
+   drifts and turns slowly as the page moves and the words of the note brighten as they are read; the four words of
+   the strip light their planets one after another as they come into view; and each section opens with a short blue
+   line drawn before its kicker, its title rising out of a soft blur, its note following. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .note-of-day { animation: scroll-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    .note-of-day::before { animation: home-quote-drift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    .note-of-day-quote p { animation: closing-words linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
+    .meta-strip strong::before { animation: home-dot linear both; animation-timeline: view(); animation-range: entry 30% cover 30%; }
+    .meta-strip > div:nth-child(2) strong::before { animation-range: entry 45% cover 35%; }
+    .meta-strip > div:nth-child(3) strong::before { animation-range: entry 60% cover 40%; }
+    .meta-strip > div:nth-child(4) strong::before { animation-range: entry 75% cover 45%; }
+    .meta-strip > div:hover strong::before { animation: none; }
+    .meta-strip ~ .section .section-heading .kicker::before { animation: mark-draw linear both; animation-timeline: view(); animation-range: entry 20% entry 80%; }
+    .meta-strip ~ .section .section-heading h2 { animation: home-heading linear both; animation-timeline: view(); animation-range: entry 5% entry 75%; }
+    .meta-strip ~ .section .section-heading > p { animation: list-in linear both; animation-timeline: view(); animation-range: entry 25% entry 100%; }
+  }
+}
+.meta-strip ~ .section .section-heading .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  margin-right: 10px;
+  border-radius: 2px;
+  background: currentColor;
+  vertical-align: .3em;
+  transform-origin: left;
+}
+@keyframes home-quote-drift { from { translate: 0 -20px; rotate: -8deg; opacity: .4; } to { translate: 0 30px; rotate: 6deg; } }
+@keyframes home-dot {
+  0% { scale: .5; opacity: .3; box-shadow: none; }
+  60% { scale: 1.6; opacity: 1; box-shadow: 0 0 14px var(--blue); }
+}
+@keyframes home-heading { from { opacity: 0; translate: 0 28px; filter: blur(5px); } }
