@@ -9,9 +9,9 @@ teaser: Ein Problem, das nicht in die Übergabe kommt, hört nicht auf zu existi
 deck: 'Der neunte Essay der Reihe „Zehn Jahre nah an der Arbeit“: warum „gemeldet“ und „gelöst“ nicht dasselbe sind, was eine Schichtübergabe enthalten sollte, und die zwei Momente, die sich spiegeln.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - "Schreiben Sie am Ende der heutigen Schicht die Übergabe nach Kategorien: Zustand, was geschah, erledigt, offen, wer übernimmt."
+  - "Schreiben Sie am Ende der heutigen Schicht die Übergabe nach Kategorien: Zustand, was geschah, erledigt, offen, wer sich darum kümmert."
   - "Ersetzen Sie jedes „Problem mit dem Zimmer“ durch: welches Problem, in welchem Zustand, was noch zu tun ist."
-  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem Punkt ohne Verantwortlichen.
+  - Lesen Sie bei der Übernahme zuerst die offenen Punkte und fragen Sie nach dem Punkt, für den niemand verantwortlich ist.
 checklist:
   title: Bevor Sie übergeben
   copy: Liste kopieren
@@ -19,85 +19,77 @@ checklist:
     - Der aktuelle Zustand steht da, nicht die Geschichte der Schicht.
     - Jeder offene Punkt ist als offen markiert, mit seinem Stand.
     - Jeder offene Punkt hat einen Namen und eine Uhrzeit oder Frist.
-    - „Gemeldet“ und „erledigt“ sind nicht verwechselt.
+    - „Gemeldet“ und „gelöst“ werden nicht verwechselt.
     - Die Person nach mir kann danach handeln, ohne mich anzurufen.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: handover-gap
 ---
 
-Ein Problem, das nicht in die Übergabe kommt, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
+Man kann zwei Schichten haben, die jede für sich sehr gut sind. Die erste hat vielleicht alles richtig gemacht, in der zweiten arbeiten vielleicht Menschen, die genauso fähig sind. Doch zwischen ihnen liegt ein Punkt, an dem die Organisation ihr Gedächtnis verlieren kann. Dieser Punkt ist die Übergabe.
 
-Ich sage das als Prinzip, nicht als Geschichte. In der Hotelarbeit habe ich offene Vorgänge, technische Probleme, Anliegen, die nachverfolgt werden mussten, oder operative Abweichungen gesehen, die an die nächste Schicht gehen mussten. Aber ich habe keinen einzelnen Fall, der so klar dokumentiert ist, dass ich sagen könnte: Diese Information fehlte in der Übergabe, und genau das hat diese Folge verursacht. Und ich will nicht mehrere Fälle zu einer Geschichte zusammensetzen, bei der ich mir nicht sicher bin.
+Ein Problem, das es nicht in die Übergabe schafft, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
 
-Das Prinzip reicht mir. Man kann zwei Schichten haben, die für sich genommen sehr gut sind. Die erste Schicht hat vielleicht alles richtig gemacht. Die zweite hat vielleicht Menschen, die genauso fähig sind. Aber zwischen ihnen gibt es einen Punkt, an dem die Organisation ihr Gedächtnis verlieren kann.
-
-Dieser Punkt heißt Übergabe.
+Ich formuliere das als Prinzip aus der Hotelarbeit, in der ich offene Vorgänge, technische Probleme, nachzuverfolgende Anliegen und operative Abweichungen gesehen habe, die an die nächste Schicht gehen mussten. Es stützt sich nicht auf einen einzelnen dokumentierten Fall, in dem eine fehlende Information eine bestimmte Folge hatte.
 
 ## Von der losen Notiz zum aktuellen Stand
 
-Die Veränderung, die ich in meiner Arbeitsweise mit Sicherheit benennen kann, ist der Schritt zu einer strukturierteren Übergabe.
+Was sich an meiner eigenen Arbeitsweise sicher benennen lässt, ist der Schritt zu einer strukturierteren Übergabe.
 
-Statt die Information nur als lose Notiz stehen zu lassen oder als Liste von Dingen ohne klaren Zusammenhang, habe ich sie nach Arbeitskategorien geordnet:
+Statt die Information als lose Notiz stehen zu lassen oder als Liste von Dingen ohne klaren Zusammenhang, habe ich sie nach Arbeitskategorien geordnet:
 
-Wie ist der Zustand des Hotels?
+- Wie ist der Zustand des Hotels?
+- Was ist während der Schicht passiert?
+- Was wurde gelöst?
+- Was ist noch offen?
+- Wer muss es weiterverfolgen?
 
-Was ist während der Schicht passiert?
+Diese Arbeitsweise ist auch in die SOPs und Strukturen eingeflossen, die ich später für die Übergabe aufgebaut habe.
 
-Was wurde gelöst?
-
-Was ist noch offen?
-
-Wer muss es weiterverfolgen?
-
-Diese Arbeitsweise ist auch in die SOPs und die Strukturen eingeflossen, die ich später für die Übergabe aufgebaut habe.
-
-Für mich ist die wichtigste Verbesserung genau diese: der nächsten Schicht nicht die Last zu überlassen, die Geschichte selbst zu rekonstruieren. Sie soll den aktuellen Stand bekommen.
+Die wichtigste Verbesserung: Die nächste Schicht soll die Geschichte nicht selbst rekonstruieren müssen. Sie soll den aktuellen Stand bekommen.
 
 {diagram}
 
 ## Was eine Nachtübergabe enthält
 
-Ohne auf konkrete Inhalte einzugehen: Die Übergabe, die ich für die Nachtarbeit nutze oder strukturiert habe, umfasst Kategorien wie:
+Ohne auf einzelne Inhalte einzugehen: Die Übergabe, die ich für die Nachtarbeit nutze oder strukturiert habe, umfasst Kategorien wie:
 
-- der allgemeine operative Zustand des Hotels;
+- den allgemeinen operativen Zustand des Hotels;
 - die wichtigsten Bewegungen des Tages und die, die die nächste Schicht betreffen;
 - Reservierungen oder Status, die Aufmerksamkeit brauchen;
 - offene administrative oder finanzielle Vorgänge;
-- Probleme oder Anliegen von Gästen, die weiterverfolgt werden müssen;
+- Probleme oder Anliegen von Gästen, um die man sich weiter kümmern muss;
 - technische Themen;
-- Informationen für das Housekeeping, wenn es etwas Relevantes für die nächste Schicht gibt;
-- offene Aufgaben und Follow-ups;
-- Hinweise, die die nächste Schicht braucht, um nicht ohne Kontext anzufangen.
+- Informationen für das Housekeeping, wenn es für die nächste Schicht etwas Relevantes gibt;
+- offene Aufgaben und Nachverfolgungen;
+- Hinweise, die die nächste Schicht braucht, damit sie nicht ohne Kontext anfängt.
 
-In meinen Berichten sollen Probleme, die nachverfolgt werden müssen, nicht einfach als Geschichte dessen erscheinen, was passiert ist. Es muss erkennbar sein, dass etwas noch offen ist.
+In meinen Berichten soll ein Problem, das nachverfolgt werden muss, nicht einfach wie die Geschichte dessen klingen, was passiert ist. Es muss erkennbar sein, dass noch etwas offen ist, denn „gemeldet“ und „gelöst“ sind nicht dasselbe.
 
-Denn „gemeldet“ und „gelöst“ sind nicht dasselbe.
+## Ein Dokument, mit dem die nächste Person arbeiten kann
 
-## Ein Dokument, das genutzt wird, nicht nur ein Nachweis
+Die Information muss so klar sein, dass die andere Person nicht deuten muss, was ich gemeint habe.
 
-Die Information muss so klar sein, dass die andere Person nicht interpretieren muss, was ich gemeint habe.
+Eine Notiz wie „Problem mit dem Zimmer“ ist keine gute Übergabe. Es muss klar sein, welcher Art das Problem ist, in welchem Zustand es sich befindet und ob noch etwas nachzuverfolgen ist, ohne unnötige Information hinzuzufügen.
 
-Eine Notiz wie „Problem mit dem Zimmer“ ist keine gute Übergabe. Es muss klar sein, welcher Art das Problem ist, in welchem Zustand es ist und ob noch etwas nachverfolgt werden muss, ohne unnötige Information hinzuzufügen.
-
-Ich habe keine absolute persönliche Regel, dass ich jede Übergabe immer auch mündlich mache, deshalb stelle ich das nicht als Tatsache dar. Aber eines ist aus der Art, wie ich das Reporting aufgebaut habe, klar: Das Dokument soll nicht nur ein Nachweis sein, dass die Übergabe stattgefunden hat. Es muss für die Person, die es bekommt, nutzbar sein.
+Eine feste Regel, jede Übergabe zusätzlich mündlich zu machen, habe ich nicht. Die Art, wie ich das Reporting aufgebaut habe, macht aber eines deutlich: Das Dokument muss für die Person, die es bekommt, brauchbar sein und darf nicht bloß belegen, dass die Übergabe stattgefunden hat.
 
 ## Zwei Momente, die sich spiegeln
 
-Am Ende der Schicht verschiebt sich mein Fokus von „Was muss ich tun?“ zu „Was muss die Person nach mir wissen?“
+Am Ende der Schicht verschiebt sich mein Blick von „Was muss ich tun?“ zu „Was muss die Person nach mir wissen?“
 
-Ich prüfe, was offen geblieben ist, was in der Nacht gelöst wurde und welche Themen beim Schichtwechsel nicht verloren gehen dürfen. Besonders wichtig ist mir, dass ein offenes Problem nicht wie ein erledigtes aussieht, nur weil meine Schicht endet.
+Ich prüfe, was offen geblieben ist, was in der Nacht gelöst wurde und welche Themen beim Schichtwechsel nicht verloren gehen dürfen. Besonders achte ich darauf, dass ein offenes Problem nicht wie ein erledigtes aussieht, nur weil meine Schicht endet.
 
-Wenn ich die Schicht von jemand anderem übernehme, mache ich das Gegenteil. Ich versuche, so schnell wie möglich ein Bild vom aktuellen Stand zu bekommen: was ich übernehme, was normal ist, was abweicht und welche Punkte Aufmerksamkeit brauchen.
+Wenn ich die Schicht von jemand anderem übernehme, mache ich das Gegenteil und versuche, mir so schnell wie möglich ein Bild vom aktuellen Stand zu machen: was ich übernehme, was normal ist, was abweicht und welche Punkte Aufmerksamkeit brauchen.
 
-Für mich spiegeln sich diese beiden Momente fast. Wenn ich die Schicht übergebe, muss ich die Unklarheit für den anderen verringern. Wenn ich die Schicht übernehme, muss ich die Unklarheit aufdecken, die übrig geblieben ist.
+Die beiden Momente spiegeln sich fast. Wenn ich die Schicht übergebe, muss ich die Unsicherheit für den anderen verringern. Wenn ich sie übernehme, muss ich die Unsicherheit aufdecken, die zurückgeblieben ist.
 
 ## Was ein Werkzeug kann und was nicht
 
 Das Übergabe-Werkzeug, das ich gebaut habe, folgt fast derselben Logik.
 
-Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte trennen das, was passiert ist, von dem, was noch zu tun ist. Der Verantwortliche ist wichtig, denn eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt. Die Uhrzeit oder Frist unterscheidet eine Information, die man nur wissen muss, von etwas, bei dem man handeln muss. Die Hinweise bewahren den Kontext, der in keine Zahl und keinen Status passt. Auch Sicherheit gibt es als Kategorie, aber auf ihren Inhalt und ihre Abläufe gehe ich hier nicht ein.
+Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte trennen das, was passiert ist, von dem, was noch zu tun ist. Der Verantwortliche ist wichtig, denn eine Aufgabe ohne Verantwortlichen ist sehr nah an einer Aufgabe, die niemand erledigt. Uhrzeit oder Frist unterscheiden eine Information, die man nur kennen muss, von etwas, bei dem man handeln muss. Die Hinweise bewahren den Kontext, der in keine Zahl und keinen Status passt. Auch Sicherheit ist eine Kategorie, ihr Inhalt und ihre Abläufe bleiben aber außerhalb dieses Essays.
 
-Eines ersetzt kein Werkzeug vollständig: den menschlichen Kontext. Ein System kann festhalten, dass ein Punkt offen ist, wer ihn weiterverfolgen muss und bis wann. Aber es kann nicht von sich aus garantieren, dass die Person, die die Schicht übernimmt, verstanden hat, wie wichtig er ist.
+Den menschlichen Kontext ersetzt kein Werkzeug vollständig. Ein System kann festhalten, dass ein Punkt offen ist, wer ihn weiterverfolgen muss und bis wann. Es kann aber nicht von sich aus garantieren, dass die Person, die die Schicht übernimmt, verstanden hat, warum er wichtig ist.
 
 Deshalb ist eine Übergabe für mich nicht nur eine Weitergabe von Information. Sie ist eine Weitergabe von Verantwortung. Und genau hier machen viele Organisationen Fehler.
 

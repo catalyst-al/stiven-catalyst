@@ -9,95 +9,91 @@ teaser: Viele Fehler entstehen nicht aus fehlendem Können. Sie entstehen aus de
 deck: 'Der siebte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was sichtbar wird, wenn das Hotel schläft, warum der Tagesabschluss Prozessdisziplin ist, und fünf Dinge, auf die ein Tagesmanager im Nachtbericht achten sollte.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
-  - Lesen Sie den Nachtbericht danach, was noch offen ist, nicht als Beleg, dass die Nacht vorbei ist.
-  - Nehmen Sie eine Abweichung zwischen System und Wirklichkeit und fragen Sie, an welchem Punkt des Tages sie begann.
-  - Markieren Sie die Probleme, die diese Woche mehr als einmal aufgetaucht sind. Das ist ein Prozess, kein Zufall.
+  - Lesen Sie den Nachtbericht auf das hin, was noch offen ist, und nicht als Beleg dafür, dass die Nacht vorbei ist.
+  - Nehmen Sie eine Abweichung zwischen System und Wirklichkeit und fragen Sie, an welchem Punkt des Tages sie entstanden ist.
+  - Markieren Sie die Probleme, die diese Woche mehr als einmal aufgetaucht sind. Dahinter steckt ein Prozess, kein Zufall.
 checklist:
   title: Der Nachtbericht in fünf Zeilen
   fill: true
   items:
-    - label: Was blieb ungelöst?
-      hint: Nicht, was passiert ist, sondern was noch Handeln braucht, mit einem Namen.
+    - label: Was ist ungelöst geblieben?
+      hint: Nicht, was passiert ist, sondern was noch getan werden muss, mit einem Namen.
     - label: Wo wichen System und Wirklichkeit voneinander ab?
       hint: Reservierungen, Status, Dokumentation, Geld.
     - label: Welches Problem wiederholt sich?
-      hint: Einmal ist Zufall. Mehrmals ist ein Prozess.
-    - label: Was hat den Gast oder den Betrieb betroffen?
-      hint: Wo ein internes Problem begann, ein Kundenproblem zu werden.
+      hint: Einmal ist Zufall. Mehrmals ist es ein Prozess.
+    - label: Was hat den Gast oder den Betrieb getroffen?
+      hint: Wo ein internes Problem anfing, zum Problem des Kunden zu werden.
     - label: Was muss die nächste Schicht wissen, bevor die Arbeit beginnt?
       hint: Die Zeile, die den beginnenden Tag sicherer macht.
 ---
 
-Tagsüber sieht das Management die Aktivität. Nachts sieht man die Spuren, die die Aktivität hinterlassen hat.
+Tagsüber sieht das Management die Aktivität. Nachts sieht man die Spuren, die sie hinterlassen hat.
 
-Das habe ich als Night Auditor in einem Hotel in Deutschland verstanden. Nachts erfährt man, ob die Prozesse, die tagsüber gut aussehen, wirklich funktionieren, wenn der Moment kommt, sie abzustimmen, zu prüfen und abzuschließen.
+Das habe ich als Night Auditor in einem Hotel in Deutschland gelernt. Nachts zeigt sich, ob die Prozesse, die tagsüber gut aussehen, tatsächlich funktionieren, wenn es darum geht, sie abzustimmen, zu prüfen und abzuschließen.
 
 Meine Nacht teilt sich ganz natürlich in vier Phasen.
 
-Am Anfang übernehme ich die Übergabe von der vorherigen Schicht und versuche, den tatsächlichen Zustand des Hotels zu verstehen: was abgeschlossen ist, was noch offen ist, wo es Probleme gibt und welche Themen in der Nacht Aufmerksamkeit brauchen.
+Zu Beginn übernehme ich die Übergabe der vorherigen Schicht und versuche, den tatsächlichen Zustand des Hotels zu erfassen: was abgeschlossen ist, was noch offen ist, wo es Probleme gibt und welche Themen in der Nacht Aufmerksamkeit brauchen.
 
-In der Mitte der Schicht beginnt die genauere Kontrolle. Genau dann zeigen sich viele Unterschiede zwischen dem, was das System anzeigt, und dem, was tagsüber wirklich passiert ist. Geprüft werden Reservierungen, Status, Dokumentation, finanzielle Themen und jedes operative Problem, das den Tagesabschluss verhindern könnte.
+In der Mitte der Schicht beginnt die genauere Prüfung, und genau dann zeigen sich viele Abweichungen zwischen dem, was das System anzeigt, und dem, was tagsüber wirklich passiert ist. Geprüft werden Reservierungen, Status, Dokumentation, Finanzielles und jedes operative Problem, das den Tagesabschluss verhindern könnte.
 
-Dann kommt der Abschluss. Für mich ist das der Teil, in dem jedes kleine Problem, das tagsüber liegen geblieben ist, sichtbar werden kann. Bevor der Tag abgeschlossen wird, muss ich überzeugt sein, dass die wichtigsten Dinge in Ordnung sind und dass das, was in den nächsten Tag übergeht, verständlich ist.
+Dann kommt der Abschluss, der Teil, in dem jedes kleine Problem sichtbar werden kann, das tagsüber liegen geblieben ist. Bevor der Tag abgeschlossen wird, muss ich überzeugt sein, dass die wichtigsten Dinge in Ordnung sind und dass verständlich ist, was in den nächsten Tag übergeht.
 
 Am Ende steht die Übergabe. Eine Nachtschicht endet nicht, wenn das System abgeschlossen ist. Sie endet, wenn die Person nach mir klar versteht, was passiert ist, was gelöst wurde und was noch weiterverfolgt werden muss.
 
 ## Die Fehler des Tages, die nachts sichtbar werden
 
-Die meisten sind keine spektakulären Fehler. Es sind kleine Dinge, die später ein Problem verursachen, wenn man sie nicht auffängt.
+Die meisten sind kleine, unspektakuläre Dinge, die später zum Problem werden, wenn niemand sie auffängt.
 
-Ich bin auf Reservierungen gestoßen, die nicht ganz zu dem passen, was wirklich passiert ist, auf Zimmerstatus, die überprüft werden müssen, auf Dokumentation, die nicht abgeschlossen wurde, auf Rechnungen oder Buchungen, die kontrolliert werden müssen, und auf Informationen, die nicht richtig von einer Schicht zur nächsten weitergegeben wurden. Eine weitere Kategorie sind Themen, die niemand absichtlich vergessen hat, die aber liegen geblieben sind, weil tagsüber viel zu tun war.
+Ich bin auf Reservierungen gestoßen, die nicht ganz zu dem passen, was tatsächlich passiert ist, und auf Zimmerstatus, die überprüft werden müssen. Es gibt Dokumentation, die nicht abgeschlossen wurde, Rechnungen oder Buchungen, die kontrolliert werden müssen, und Informationen, die nicht richtig von einer Schicht an die nächste weitergegeben wurden. Und dann sind da die Themen, die niemand absichtlich vergessen hat und die liegen geblieben sind, weil tagsüber viel zu tun war.
 
-Die Nacht bringt diese Dinge ans Licht, weil sich der Rhythmus ändert. Vor der Rezeption ist nicht mehr derselbe Andrang, und man hat die Möglichkeit, klarer hinter den Prozess zu sehen.
+Die Nacht bringt diese Dinge ans Licht, weil sich der Rhythmus ändert. Vor der Rezeption wird es ruhiger, und man kann klarer hinter den Prozess sehen.
 
-Diese Arbeit hat mich gelehrt, dass viele Fehler nicht aus fehlendem Können entstehen. Sie entstehen aus Unterbrechungen, unvollständiger Kommunikation und dem Satz: „Machen wir später.“
-
-Oft ist „später“ die Nachtschicht.
+Diese Arbeit hat mich gelehrt, dass viele Fehler nicht aus fehlendem Können entstehen, sondern aus Unterbrechungen, unvollständiger Kommunikation und dem Satz „Machen wir später“. Oft ist „später“ die Nachtschicht.
 
 ## No-Shows und Zahlungen
 
-Eine Reservierung, die im System existiert, bedeutet nicht automatisch, dass alles dahinter in Ordnung ist.
+Dass eine Reservierung im System existiert, heißt noch nicht, dass alles dahinter in Ordnung ist.
 
-No-Shows sind wichtig, weil sie beeinflussen, wie das Hotel den Tag abschließt und erfasst, was wirklich passiert ist. Wenn sie nicht geprüft werden, können Reservierungen mit falschem Status bleiben, Unterschiede im Reporting entstehen oder Probleme erst später auftauchen.
+No-Shows sind wichtig, weil sie beeinflussen, wie das Hotel den Tag abschließt und erfasst, was wirklich passiert ist. Werden sie nicht geprüft, können Reservierungen mit falschem Status stehen bleiben, Abweichungen im Reporting entstehen oder Probleme erst später auftauchen.
 
-Dasselbe gilt für Zahlungen. Die Kontrolle dient nicht nur dazu, zu sehen, ob „Geld da ist“. Sie dient dazu, zu sehen, ob das, was erfasst wurde, mit dem übereinstimmt, was hätte erfasst werden müssen.
+Dasselbe gilt für Zahlungen. Bei der Kontrolle geht es um mehr als die Frage, ob „Geld da ist“: Sie prüft, ob das, was erfasst wurde, mit dem übereinstimmt, was hätte erfasst werden müssen.
 
-Wenn niemand diese Kontrolle macht, verschwinden die Fehler nicht. Sie wandern nur von einem Tag in den nächsten. Und je länger sie wandern, desto schwieriger wird es zu verstehen, wo sie entstanden sind.
+Wenn niemand diese Kontrolle macht, wandern die Fehler von einem Tag in den nächsten. Und je länger sie wandern, desto schwerer lässt sich erkennen, wo sie entstanden sind.
 
-## Der Tagesabschluss ist keine Liste
+## Der Tagesabschluss ist mehr als eine Liste
 
-Der Tagesabschluss hat mich gelehrt, dass man einen Prozess nicht nur deshalb abschließen sollte, weil „der Moment zum Abschließen gekommen ist“. Man sollte ihn abschließen, wenn die Dinge, die von ihm abhängen, wirklich bereit sind.
+Der Tagesabschluss hat mich gelehrt, einen Prozess dann abzuschließen, wenn die Dinge, die von ihm abhängen, wirklich bereit sind, und nicht nur, weil „es Zeit zum Abschließen ist“.
 
-In den ersten Wochen lag meine Aufmerksamkeit natürlich stark auf der Liste: welcher Schritt nach welchem kommt, was geöffnet werden muss, was geprüft werden muss und in welcher Reihenfolge ich vorgehen muss.
+In den ersten Wochen lag meine Aufmerksamkeit natürlich vor allem auf der Liste: welcher Schritt nach welchem kommt, was geöffnet und was geprüft werden muss und in welcher Reihenfolge.
 
-Heute sehe ich es anders. Ich denke nicht nur: „Habe ich diesen Schritt gemacht?“ Ich denke: „Ist das, was dieser Schritt prüfen soll, wirklich in Ordnung?“
+Heute sehe ich das anders. Die Frage lautet nicht mehr nur „Habe ich diesen Schritt erledigt?“, sondern „Ist das, was dieser Schritt prüfen soll, tatsächlich in Ordnung?“
 
-Das ist ein großer Unterschied. Eine Checkliste kann man mechanisch abarbeiten. Aber ein guter Night Audit verlangt, dass man die Abhängigkeiten zwischen den Prozessen versteht. Wenn etwas vorher nicht richtig abgeschlossen wurde, hat es keinen Sinn, den Prozess zu beschleunigen, nur damit die Liste fertig aussieht.
+Das ist ein großer Unterschied. Eine Checkliste lässt sich mechanisch abarbeiten, aber ein guter Night Audit verlangt, dass man versteht, wie die Prozesse voneinander abhängen. Wenn vorher etwas nicht richtig abgeschlossen wurde, hat es keinen Sinn, den Prozess zu beschleunigen, nur damit die Liste fertig aussieht.
 
-Das hat mich auch bei der Übergabe sorgfältiger gemacht. Wenn etwas offen bleibt, muss klar sein, warum es offen geblieben ist und wer es weiterführen muss.
+Das hat mich auch bei der Übergabe sorgfältiger gemacht. Wenn etwas offen bleibt, muss klar sein, warum, und wer es weiterführt.
 
 ## Wenn man nachts der Hauptverantwortliche ist
 
-Die Nacht zwingt einen, Entscheidungen zu treffen. Tagsüber gibt es mehr Abteilungen, mehr Führungskräfte und mehr Menschen, die man fragen kann. Nachts kommen viele Situationen zuerst bei einem selbst an.
+Die Nacht zwingt einen zu Entscheidungen. Tagsüber gibt es mehr Abteilungen, mehr Führungskräfte und mehr Menschen, die man fragen kann. Nachts landen viele Situationen zuerst bei einem selbst. Das heißt nicht, dass man alles selbst machen muss.
 
-Das heißt nicht, dass man alles selbst machen muss.
-
-Für mich ist die Grenze ziemlich klar. Wenn es ein operatives Problem ist, das in meine Rolle fällt, analysiere ich es und versuche, es zu lösen. Wenn es eine Situation ist, die eine Entscheidung außerhalb meiner Befugnis verlangt, ein finanzielles Risiko birgt, die Sicherheit berührt, ernste Folgen haben könnte oder eine Freigabe braucht, die mir nicht zusteht, dann eskaliere ich.
+Für mich ist die Grenze ziemlich klar. Ist es ein operatives Problem, das in meine Rolle fällt, analysiere ich es und versuche, es zu lösen. Verlangt eine Situation eine Entscheidung außerhalb meiner Befugnis, birgt sie ein finanzielles Risiko, berührt sie die Sicherheit, könnte sie ernste Folgen haben oder braucht sie eine Freigabe, die mir nicht zusteht, dann eskaliere ich.
 
 Ich habe gelernt, dass Verantwortung nicht heißt, jede Entscheidung zu treffen. Verantwortung heißt zu wissen, welche Entscheidung man selbst treffen kann und welche man nicht treffen sollte.
 
-Das ist nachts besonders wichtig, weil die Versuchung groß ist, zu sagen: „Ich bin allein, ich muss es selbst lösen.“ Nicht immer. Manchmal ist die professionellste Entscheidung genau die, die Grenze der eigenen Befugnis nicht zu überschreiten.
+Das ist nachts besonders wichtig, weil die Versuchung groß ist zu sagen: „Ich bin allein, ich muss es selbst lösen.“ Das stimmt nicht immer, und manchmal ist die professionellste Entscheidung gerade die, die Grenze der eigenen Befugnis nicht zu überschreiten.
 
 ## Fünf Minuten mit den Tagesmanagern
 
-Wenn ich fünf Minuten mit den Tagesmanagern hätte, würde ich ihnen sagen, den Nachtbericht nicht nur als Beweis zu sehen, dass das Hotel wieder eine Nacht überstanden hat. Dieser Bericht zeigt viel mehr.
+Hätte ich fünf Minuten mit den Tagesmanagern, würde ich sie bitten, den Nachtbericht nicht nur als Beleg dafür zu lesen, dass das Hotel wieder eine Nacht überstanden hat. Er zeigt viel mehr.
 
 Die fünf Dinge, die ich mir jeden Morgen ansehen würde:
 
 1. **Was ungelöst geblieben ist.** Nicht nur, was passiert ist, sondern was noch zu tun ist.
-2. **Wo es Unterschiede zwischen System und Realität gab.** Reservierungen, Status, Dokumentation oder finanzielle Themen, die ein Eingreifen brauchten.
+2. **Wo System und Wirklichkeit voneinander abwichen.** Reservierungen, Status, Dokumentation oder Finanzielles, bei denen jemand eingreifen musste.
 3. **Welche Probleme sich wiederholen.** Einmal kann ein Fehler Zufall sein. Derselbe Fehler mehrmals ist ein Prozess.
-4. **Was den Gast oder den Betrieb betroffen hat.** Denn dort sieht man, ob ein internes Problem anfängt, zum Problem des Kunden zu werden.
-5. **Was die nächste Schicht wissen muss, bevor die Arbeit beginnt.** Ein guter Bericht soll nicht nur die Vergangenheit erzählen. Er soll den Tag, der beginnt, sicherer machen.
+4. **Was den Gast oder den Betrieb getroffen hat.** Dort sieht man, ob ein internes Problem anfängt, zum Problem des Kunden zu werden.
+5. **Was die nächste Schicht wissen muss, bevor die Arbeit beginnt.** Ein guter Bericht soll nicht nur die Vergangenheit beschreiben; er soll den Tag, der beginnt, sicherer machen.
 
 Das gilt für jedes Unternehmen, nicht nur für ein Hotel. Und manchmal zeigt sich nachts sehr deutlich, was ein Unternehmen tagsüber vor sich selbst versteckt.
