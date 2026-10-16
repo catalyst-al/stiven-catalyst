@@ -8272,3 +8272,35 @@ a.essay-series-next:hover em { translate: 5px 0; }
 }
 @keyframes layer-bar { from { width: 0; } }
 @media (prefers-reduced-motion: reduce) { .treatise-layer, .treatise-layer::before { transition: none; } }
+
+/* Management Review in motion: "Review" in the title is underlined in red as the page opens, and a cover under the
+   pointer tilts towards it with a glare that follows, like a magazine turned in the hand under a lamp. */
+.weekly-hero .weekly-mark { position: relative; display: inline-block; }
+.weekly-hero .weekly-mark::after {
+  content: "";
+  position: absolute;
+  left: .04em;
+  right: .04em;
+  bottom: .02em;
+  height: .07em;
+  border-radius: 999px;
+  background: var(--red);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--red) 50%, transparent);
+  transform-origin: left;
+}
+.weekly-card-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, .22), transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.weekly-card:hover .weekly-card-cover::before { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .weekly-hero .weekly-mark::after { animation: mark-draw .9s cubic-bezier(.22, 1, .36, 1) .35s both; }
+  .weekly-card:hover .weekly-card-cover { transform: perspective(700px) translateY(-4px) rotateY(calc((var(--px, .5) - .5) * 14deg)) rotateX(calc((.5 - var(--py, .5)) * 10deg)); transition: transform .2s ease-out, box-shadow .45s ease; }
+}
+@keyframes mark-draw { from { scale: 0 1; } }
