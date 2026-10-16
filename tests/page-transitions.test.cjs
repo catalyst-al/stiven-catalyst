@@ -218,3 +218,10 @@ test('a publication answers the pointer as a whole, and a magazine cover catches
   assert.match(css, /:where\([^)]*\.book-feature, \.list-row,/);
   assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.tool-card, \.book-feature, a\.list-row"/);
 });
+
+test('a project card carries a chip with a planet that lights up, and its title steps forward', () => {
+  assert.match(css, /\.project-card \.tag::before \{[\s\S]*?border-radius: 50%;[\s\S]*?radial-gradient\(circle at 35% 30%, #fff 0 12%, var\(--blue\) 48%/);
+  assert.match(css, /\.project-card:hover \.tag \{[^}]*box-shadow: 0 0 16px -6px/);
+  assert.match(css, /\.project-card:has\(a\):hover h2 \{ translate: 5px 0;/);
+  assert.match(css, /\.project-card:hover \.project-image \{ scale: 1\.025; \}/);
+});
