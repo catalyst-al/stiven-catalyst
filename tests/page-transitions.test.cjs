@@ -444,3 +444,12 @@ test('How this is made reads as a path: a line that fills as the page is read, a
   for (const page of ['_site/how-this-is-made.html', '_site/sq/how-this-is-made.html', '_site/de/how-this-is-made.html']) assert.match(fs.readFileSync(page, 'utf8'), /class="shell legal how-made"/);
   assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes how-fill/);
 });
+
+test('Operational treatise: the three layers come in one after another, each lights up in its own colour under the pointer', () => {
+  assert.match(css, /\.treatise-layer\.is-scene \{ --layer: var\(--red\); \}/);
+  assert.match(css, /\.treatise-layer::after \{[\s\S]*?color-mix\(in srgb, var\(--layer\) 13%, transparent\)/);
+  assert.match(css, /\.treatise-layer:nth-child\(3\) \{ animation-range: entry 60px entry 200px; \}/);
+  assert.match(css, /\.treatise-layer::before \{ animation: layer-bar linear both; animation-timeline: view\(\);/);
+  assert.match(fs.readFileSync('src/script.js', 'utf8'), /\.treatise-layer, /);
+  assert.match(fs.readFileSync('_site/styles-light.css', 'utf8'), /@keyframes layer-bar/);
+});

@@ -8238,3 +8238,37 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @media (max-width: 560px) {
   .how-made > *, .how-made h2 { padding-left: 24px; }
 }
+
+/* The operational treatise in motion: the three layers of a chapter (scene, breakdown, protocol) come in one after
+   another as they are reached, each in its own colour; under the pointer a layer lifts, its light follows the pointer,
+   its number glows and its bar runs along the top. */
+.treatise-layer { --layer: var(--blue); isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.treatise-layer.is-scene { --layer: var(--red); }
+.treatise-layer.is-protocol { --layer: var(--ink); }
+.treatise-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--layer) 13%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.treatise-layer::before { transition: width .55s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.treatise-layer:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--layer) 40%, var(--line)); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--layer) 70%, transparent); }
+.treatise-layer:hover::after { opacity: 1; }
+.treatise-layer:hover::before { width: calc(100% - 44px); box-shadow: 0 0 12px color-mix(in srgb, var(--layer) 60%, transparent); }
+.treatise-layer-n { transition: text-shadow .4s ease, translate .45s cubic-bezier(.22, 1, .36, 1); }
+.treatise-layer:hover .treatise-layer-n { translate: 0 -2px; text-shadow: 0 0 18px color-mix(in srgb, var(--layer) 60%, transparent); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .treatise-layer { animation: scroll-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 140px; }
+    .treatise-layer:nth-child(2) { animation-range: entry 30px entry 170px; }
+    .treatise-layer:nth-child(3) { animation-range: entry 60px entry 200px; }
+    .treatise-layer::before { animation: layer-bar linear both; animation-timeline: view(); animation-range: entry 40% cover 30%; }
+  }
+}
+@keyframes layer-bar { from { width: 0; } }
+@media (prefers-reduced-motion: reduce) { .treatise-layer, .treatise-layer::before { transition: none; } }
