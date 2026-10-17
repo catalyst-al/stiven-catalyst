@@ -38,9 +38,7 @@ Në rampë, problemin e sheh vetë. Nga distanca, shpesh e njeh vetëm përmes i
 
 Ky është dallimi më i madh mes dy mënyrave si kam punuar në last mile. Në vitin 2025, si Team Leader dhe pastaj si Area Manager, isha brenda operacionit: në rampë, te ngarkimi, pranë dispeçerëve, me KPI-të çdo ditë. Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, nga shtëpia. Roli përfshin koordinimin operacional të 80+ automjeteve dhe 100+ shoferëve: turet, shoferët, vonesat dhe problemet gjatë shpërndarjes.
 
-Problemet janë të njëjta. Vendi im përballë tyre është krejt tjetër.
-
-Kjo ese i krahason të dy pozicionet, nga dikush që ka qenë në të dyja. Është analiza ime, jo një rezultat i matur dhe as një histori suksesi. Detajet e brendshme i lë jashtë, e disa prej tyre as nuk i di me saktësi: sistemet dhe çfarë tregojnë ato, kanalet e komunikimit dhe oraret e turneve. Nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri në zgjidhje. Rastet e dokumentuara që kam, me automjete dhe me vonesa, vijnë nga puna ime e mëparshme në last mile, dhe nuk i paraqes si raste të zgjidhura nga distanca.
+Problemet janë të njëjta. Vendi im përballë tyre është krejt tjetër, dhe ajo që vijon është analiza ime e të dy pozicioneve, nga dikush që ka qëndruar në të dyja.
 
 ## Çfarë humbet
 
@@ -56,7 +54,7 @@ Distanca ka edhe fitimet e veta.
 
 Në rampë sheh mirë atë që ke përpara. Nga distanca, nëse informacioni dhe mjetet e punës e lejojnë, mund ta shohësh koordinimin e shumë tureve si një operacion të vetëm: të gjitha makinat njëherësh, dhe nëse vonesat po mblidhen diku, në vend të një vonese të vetme.
 
-Kjo pamje varet nga informacioni që merr: ai duhet të jetë i mjaftueshëm dhe i besueshëm.
+Kjo pamje varet nga informacioni që merr: ai duhet të jetë i mjaftueshëm dhe i besueshëm. Cilat sisteme përdorim dhe çfarë tregojnë, si edhe kanalet e komunikimit dhe oraret e turneve, i lë jashtë: janë detaje të brendshme, dhe disa prej tyre as nuk i di me saktësi.
 
 ## Informacioni bëhet vetë puna
 
@@ -70,7 +68,7 @@ Për komunikimin nuk kam rregulla të miat të dokumentuara, por besoj se duhet 
 
 ## Çfarë do të shikoja
 
-As një metodë të dokumentuar për t'i dalluar problemet herët nuk kam. Sot do t'u kushtoja vëmendje tri gjërave.
+Nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri në zgjidhje, as një metodë të dokumentuar për t'i dalluar problemet herët. Rastet e dokumentuara që kam, me automjete dhe me vonesa, vijnë nga puna ime e mëparshme në last mile, dhe nuk i paraqes si raste të zgjidhura nga distanca. Sot do t'u kushtoja vëmendje tri gjërave.
 
 **Devijimeve që përsëriten.** Një vonesë është rast. E njëjta vonesë, në të njëjtin vend, disa ditë me radhë, është model.
 
@@ -84,6 +82,6 @@ As një metodë të dokumentuar për t'i dalluar problemet herët nuk kam. Sot d
 
 Kjo e lidh esenë me gjithë serinë. Një përmirësim mbahet kur nuk varet nga prania e dikujt, dhe në koordinimin në distancë askush nuk është i pranishëm. Mbetet sistemi: kush e sheh problemin, si e thotë, kush e merr përsipër, kur mbyllet.
 
-Fletën më poshtë mund ta plotësosh për një problem që nuk e sheh dhe ta kopjosh. [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/) i mbledh rastet, veprimet dhe shkaqet e shumë tureve në një pamje të vetme, që operacioni të shihet si një i tërë dhe jo si njëqind telefonata.
+Fletën më poshtë mund ta plotësosh për një problem që nuk e sheh dhe ta kopjosh. [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/) i mbledh rastet, veprimet dhe shkaqet e shumë tureve në një pamje të vetme, që njëqind telefonata të bashkohen në një pamje të vetme të operacionit.
 
 Në rampë, problemi të del përpara. Nga distanca, ose shkon ta kërkosh, ose ke ndërtuar një mënyrë që ai të të vijë vetë.

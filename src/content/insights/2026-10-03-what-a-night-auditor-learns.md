@@ -97,10 +97,10 @@ If I had five minutes with the day managers, I would ask them to read the night 
 
 The five things I would look at every morning:
 
-1. **What was left unresolved.** Not only what happened, but what still needs action.
+1. **What was left unresolved.** Beyond what happened: what still needs action.
 2. **Where there were differences between the system and reality.** Reservations, statuses, documentation or financial matters that needed intervention.
 3. **Which problems keep repeating.** A mistake once can be chance. The same mistake several times is a process.
 4. **What affected the guest or the operation.** That is where you see whether an internal problem is starting to become a customer problem.
 5. **What the next shift needs to know before the work starts.** A good report should not only describe the past; it should make the day that is starting safer.
 
-This holds for every business, not only for a hotel. And sometimes what a business hides from itself during the day shows up very clearly at night.
+This holds for every business. And sometimes what a business hides from itself during the day shows up very clearly at night.

@@ -35,9 +35,7 @@ Në një ekip mund të ketë njerëz që flasin gjuhë të ndryshme. Standardi i
 
 Për mua kjo temë është edhe personale. Erdha në Gjermani në nëntor 2021, pas një jete pune në Shqipëri, dhe punova në operacione ku gjermanishtja ishte pjesë e komunikimit profesional. Më duhej të mësoja jo vetëm gjuhën, por edhe mënyrën si komunikohet në punë. Për këtë kalim kam shkruar te [Nga Shqipëria në Gjermani](/sq/insights/from-albania-to-germany/).
 
-Kjo ese flet më pak për gjuhën dhe më shumë për standardin: si e bën të kuptueshëm për njerëz që nuk e flasin të njëjtën gjuhë në të njëjtin nivel.
-
-Mbështetet në ekipet ku kam bërë pjesë dhe në materialet me të cilat kam punuar. Në last mile kjo do të thoshte disa DSP dhe një strukturë me shumë shoferë, dispeçerë dhe drejtues turni; në hotelet në Gjermani, kolegë nga departamente të ndryshme dhe mysafirë ndërkombëtarë. Kam parë dhe trajtuar probleme operative, por nuk kam asnjë rast të dokumentuar ku mund të them me siguri se gabimi ndodhi për shkak të gjuhës, ndaj nuk ia vesh gjuhës asnjë gabim.
+Këtu më intereson standardi: si e bën të kuptueshëm për njerëz që nuk e flasin të njëjtën gjuhë në të njëjtin nivel.
 
 ## Gjuha dhe aftësia janë dy probleme të ndryshme
 
@@ -51,6 +49,8 @@ Prandaj një standard pune nuk duhet të varet nga aftësia e dikujt për të nd
 
 ## Rregulla të shkurtra, hapa të dukshëm
 
+Në last mile kam punuar me disa DSP dhe me një strukturë me shumë shoferë, dispeçerë dhe drejtues turni; në hotelet në Gjermani, me kolegë nga departamente të ndryshme dhe me mysafirë ndërkombëtarë.
+
 Nga materialet operative që kam përdorur, di se në last mile kishte udhëzime dhe rregulla të shkruara në gjermanisht dhe në anglisht. Ato mbulonin sigurinë, higjienën, procedurat e ngarkimit, skanimin dhe disiplinën në rampë. Rregullat ishin të shkurtra dhe të lidhura me veprime të qarta: ku pret shoferi, kur njoftohet Team Leader-i, si bëhet skanimi, çfarë nuk lejohet gjatë ngarkimit.
 
 Në hotel kam punuar me lista kontrolli dhe SOP në gjermanisht, si dhe me materiale në anglisht për komunikimin me mysafirët dhe për shërbimet e hotelit. Kam përdorur lista kontrolli, pamje ekrani, video dhe demonstrime nga kolegët.
@@ -63,7 +63,9 @@ Përkthimi i një dokumenti është vetëm hapi i parë. Kuptimi dhe veprimi duh
 
 Le të marrim një udhëzim hipotetik që thotë vetëm “kontrollo ngarkesën”. Dy njerëz mund ta lexojnë ndryshe: njëri kontrollon numrin e çantave, tjetri rendin e ngarkimit.
 
-Në këtë shembull, faji mund të jetë më shumë te standardi sesa te gjuha. Dhe një standard i paqartë mbetet i paqartë në çdo gjuhë që ta përkthesh.
+Në këtë shembull, faji mund të jetë fare mirë te standardi, dhe një standard i paqartë mbetet i paqartë në çdo gjuhë që ta përkthesh.
+
+Kam parë dhe trajtuar probleme operative, por nuk kam asnjë rast të dokumentuar ku mund të them me siguri se gabimi ndodhi për shkak të gjuhës, ndaj nuk ia vesh gjuhës asnjë gabim.
 
 Për mua, një udhëzim i mirë ka:
 
@@ -83,9 +85,9 @@ Dikush mund të thotë “po” sepse mendon se e ka kuptuar, sepse nuk do të d
 
 Pastaj do të kontrolloja nëse personi e bën saktë, nëse e di rezultatin që duhet të arrijë dhe nëse e di kur duhet të kërkojë ndihmë.
 
-Ky është një standard që e mbroj, jo një skenë që mund ta citoj, dhe është i njëjti test që përshkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/): bëje vetë, më thuaj pse, më trego çfarë bën kur del një përjashtim.
+Këtë e mbaj si standard; nuk kam ndonjë skenë për ta cituar. Është i njëjti test që përshkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/): bëje vetë, më thuaj pse, më trego çfarë bën kur del një përjashtim.
 
-Kur dikush nuk e kupton një udhëzim, përgjegjësia jonë si menaxherë nuk mbaron duke përsëritur të njëjtën fjali me zë më të lartë. Duhet të kontrollojmë nëse udhëzimi është i qartë, nëse është demonstruar dhe nëse personi mund ta zbatojë.
+Kur dikush nuk e kupton një udhëzim, nuk fitohet asgjë duke përsëritur të njëjtën fjali me zë më të lartë. Si menaxherë duhet të kontrollojmë nëse udhëzimi është i qartë, nëse është demonstruar dhe nëse personi mund ta zbatojë.
 
 ## Karta e udhëzimit të qartë
 

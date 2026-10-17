@@ -39,15 +39,15 @@ Nëse shohim vetëm personin, rrezikojmë të lëmë të paprekur një proces q�
 
 Nëse shohim vetëm procesin, rrezikojmë t'ua heqim përgjegjësinë vendimeve individuale.
 
-Kjo ese merret me çastin kur një menaxher e ushtron autoritetin mbi njerëzit më drejtpërdrejt se në çdo rast tjetër: bisedën pas një gabimi. Të kërkosh llogari dhe të respektosh dinjitetin e punonjësit, për mua, nuk janë dy gjëra që përjashtojnë njëra-tjetrën.
+Biseda pas një gabimi është çasti kur një menaxher e ushtron autoritetin mbi njerëzit më drejtpërdrejt se në çdo rast tjetër. Të kërkosh llogari dhe të respektosh dinjitetin e punonjësit, për mua, nuk janë dy gjëra që përjashtojnë njëra-tjetrën.
 
-Kam punuar në last mile si Team Leader On Road dhe më pas si Area Manager, ku ndjekja e performancës, problemet operative, KPI-të dhe koordinimi i njerëzve ishin pjesë e punës. Ajo që vijon janë parimet që mbroj në këtë bisedë, jo rrëfimi i një bisede të caktuar. Kur përdor një shembull, ai është hipotetik dhe e them hapur.
+Kam punuar në last mile si Team Leader On Road dhe më pas si Area Manager, ku ndjekja e performancës, problemet operative, KPI-të dhe koordinimi i njerëzve ishin pjesë e punës. Nga aty e shoh këtë bisedë.
 
 ## Privatisht, pasi i ke kuptuar faktet
 
-Si parim, një bisedë korrigjuese do të preferoja ta bëja privatisht, dhe vetëm pasi t'i kisha kuptuar faktet. Ky është standardi që mbroj, jo një procedurë që e kam ndjekur në çdo rast.
+Si parim, një bisedë korrigjuese do të preferoja ta bëja privatisht, dhe vetëm pasi t'i kisha kuptuar faktet. Ky është standardi që mbroj, jo një procedurë që e kam ndjekur në çdo rast; edhe ajo që vijon janë parime, jo rrëfimi i një bisede të caktuar.
 
-Ka një përjashtim të qartë. Nëse ka rrezik të menjëhershëm për sigurinë, ndërhyn në atë çast. Nuk pret bisedën e duhur në vendin e duhur; ndal atë që po ndodh.
+Ka një përjashtim të qartë. Nëse ka rrezik të menjëhershëm për sigurinë, ndërhyn në atë çast. Ndal atë që po ndodh, aty për aty. Biseda e duhur në vendin e duhur vjen më pas.
 
 ## Gabim i personit apo gabim i procesit
 
@@ -87,7 +87,7 @@ Askund kjo nuk ka më shumë rëndësi se në bisedën pas një gabimi. Është 
 
 ## Çfarë ndihmon pas një gabimi
 
-Besoj se reagimi më i dobishëm pas një gabimi është ai që të ndihmon të kuptosh çfarë ndodhi, çfarë përgjegjësie ke dhe si të mos e përsëritësh: jo ai që të lë vetëm me ndjenjën e fajit, dhe as ai që e kalon gabimin sikur të mos kishte ndodhur.
+Besoj se reagimi më i dobishëm pas një gabimi është ai që të ndihmon të kuptosh çfarë ndodhi, çfarë përgjegjësie ke dhe si të mos e përsëritësh. Kjo nuk arrihet duke e lënë njeriun vetëm me ndjenjën e fajit, e as duke e kaluar gabimin sikur të mos kishte ndodhur.
 
 Le të marrim një shembull hipotetik. Një shofer niset pa e kontrolluar një hap të procedurës. Një bisedë që nis me “gjithmonë kështu bën” mbaron para se të fillojë. Një bisedë që nis me “sot u nise pa këtë kontroll; më trego si shkoi” ka ku të shkojë. Në të dyja rastet gabimi emërtohet. Dallimi është nëse personi mund të mësojë diçka prej tij.
 

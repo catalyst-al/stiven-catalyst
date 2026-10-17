@@ -46,9 +46,11 @@ Die Frage lautete also: Hat das System den Fehler möglich gemacht, oder hat die
 
 Die Antwort verändert das ganze Gespräch mit dem Menschen. Im ersten Fall bringen Sie den Prozess in Ordnung. Im zweiten arbeiten Sie an Verhalten und Verantwortung. Manchmal haben Sie beides zugleich.
 
-Dieselbe Logik gilt, wenn der Druck von oben kommt. Ich habe versucht, den Druck wegen der Kennzahlen in ein operatives Problem zu übersetzen. Was ist passiert? Wo ist es passiert? Welche Fälle wiederholen sich? Was prüfen wir heute? Wer übernimmt die Maßnahme? Wenn Schäden, Verspätungen oder unvollständige Bestellungen zunahmen, musste ich den Grund verstehen, statt einen Schuldigen zu suchen.
+Dieselbe Logik gilt, wenn der Druck von oben kommt. Ich habe versucht, den Druck wegen der Kennzahlen in ein operatives Problem zu übersetzen. Was ist passiert? Wo ist es passiert? Welche Fälle wiederholen sich? Was prüfen wir heute? Wer übernimmt die Maßnahme? Wenn Schäden, Verspätungen oder unvollständige Bestellungen zunahmen, musste ich den Grund verstehen, und den hätte mir kein Schuldiger geliefert.
 
-Ich will daraus keine Heldengeschichte machen, in der ich das Team immer vor dem Management geschützt hätte; der Betrieb ist komplizierter. Sagen kann ich Folgendes: Druck kann berechtigt sein. Menschen zu demütigen ist keine Führungsmethode. Ein Standard kann sehr streng sein, ohne den Menschen wie eine Zahl zu behandeln.
+Ich werde nicht behaupten, dass ich das Team immer vor dem Management geschützt habe; der Betrieb ist komplizierter. Sagen kann ich Folgendes: Druck kann berechtigt sein. Menschen zu demütigen ist keine Führungsmethode. Ein Standard kann sehr streng sein, ohne den Menschen wie eine Zahl zu behandeln.
+
+So verstehe ich auch Respekt bei der Arbeit. Respekt heißt nicht, Menschen nie zur Verantwortung zu ziehen. Respekt heißt, ihnen den Standard klarzumachen, ihnen zuzuhören, bevor man urteilt, und ihnen nicht zu verschweigen, wenn die Verantwortung bei ihnen liegt.
 
 Am schwersten war es, diese Haltung durchzuhalten, als sich meine eigene Position änderte.
 
@@ -59,5 +61,3 @@ Ich konnte nicht mehr derjenige sein, der hereinkommt und jedes Problem selbst l
 Das ist ein echter Wechsel in der Führung, besonders wenn man aus den eigenen Reihen befördert wird. Gestern haben Sie das Problem vielleicht noch gemeinsam mit einem Kollegen gelöst. Heute müssen Sie derselben Person sagen, mit Worten oder durch die Art, wie Sie arbeiten: Das ist jetzt dein Problem, du löst es. Ich bin da und unterstütze dich, aber die Arbeit mache ich nicht für dich.
 
 Wer befördert wird, sollte nicht plötzlich ein anderer Mensch werden, nur um zu zeigen, dass er jetzt der Chef ist. Er kann aber auch nicht weitermachen, als hätte sich nichts geändert. Er muss die Beziehung zu den Menschen halten und gleichzeitig Dinge von ihnen verlangen, die zu verlangen gestern nicht seine Aufgabe war.
-
-So verstehe ich auch Respekt bei der Arbeit. Respekt heißt nicht, Menschen nie zur Verantwortung zu ziehen. Respekt heißt, ihnen den Standard klarzumachen, ihnen zuzuhören, bevor man urteilt, und ihnen nicht zu verschweigen, wenn die Verantwortung bei ihnen liegt.

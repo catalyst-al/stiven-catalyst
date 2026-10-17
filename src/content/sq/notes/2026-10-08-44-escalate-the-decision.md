@@ -1,4 +1,4 @@
 ---
-quote: "Eskalo vendimin, jo paqartësinë që mund ta kishe sqaruar vetë."
+quote: "Çoje më lart vendimin, jo paqartësinë që mund ta kishe sqaruar vetë."
 date: 2026-10-08
 ---

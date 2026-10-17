@@ -53,7 +53,7 @@ Today I would sum up my working philosophy in five principles.
 
 Operations do not work without the people who keep them running every day.
 
-I have worked in environments with pressure, targets, delays, mistakes and moments when you had to react quickly. I have learned that a standard can be high and a demand can be firm without diminishing the dignity of the person in front of you. Pressure can be fair; humiliation is not.
+I have worked in environments with pressure, targets, delays, mistakes and moments when you had to react quickly. I have learned that a standard can be high and a demand can be firm without diminishing the dignity of the person in front of you. Pressure has its place. Humiliation never does.
 
 For me, a manager has to be able to ask for accountability without using fear as a way of managing, because a team that is afraid to show its mistakes does not have fewer mistakes. It only has fewer visible mistakes.
 
@@ -61,7 +61,7 @@ For me, a manager has to be able to ask for accountability without using fear as
 
 I have learned not to put much trust in processes that only work because an experienced person “knows how it's done”. If the result depends on the right person being on shift, then the organisation has knowledge, but it does not yet have a standard.
 
-That is why I believe in SOPs, checklists and clear ways of working. The test of an SOP is whether someone else gets the same result, even under pressure and without its author nearby to ask, not how professional it looks in a document.
+That is why I believe in SOPs, checklists and clear ways of working. The test of an SOP is whether someone else gets the same result with it, even under pressure and with its author nowhere near to ask. How professional it looks in a document comes a long way second.
 
 For me, standardisation exists to stop people reinventing what the organisation should already know, not to take thinking away from them.
 
@@ -77,7 +77,7 @@ The data has to take me to the floor. And the floor has to help me understand th
 
 ## 4. Ownership
 
-For me, ownership means that no problem is left without an owner, which is different from taking every problem onto your own shoulders.
+For me, ownership means that no problem is left without an owner. I do not have to carry every one of them on my own shoulders.
 
 The handover taught me this. A shift can work very well, but if the information does not pass to the next shift, the organisation loses part of that work.
 
@@ -95,7 +95,7 @@ My question often used to be: “How do we solve this problem?” Today it is: �
 
 This change in the way I think is perhaps one of the most important professional developments I have made.
 
-Operations improve through many small corrections, made continuously and grounded in the reality of the work, rather than through one big project once a year.
+Operations improve through many small corrections, made all the time and grounded in the reality of the work, far more than through one big project a year.
 
 ## What I never want to do as a manager
 
@@ -105,9 +105,9 @@ If a team only works when the manager is in the room, then in my view that manag
 
 ## What my ideal week as an Operations Manager would look like
 
-Every day I would start with a short overview of the operation, not an hour-long report. I want to know what has deviated, what is still open, where we have risk and where my presence is needed.
+Every day I would start with a short overview of the operation, a few minutes long. I want to know what has deviated, what is still open, where we have risk and where my presence is needed.
 
-I would check the main KPIs, but I would not spend the day just looking at dashboards.
+I would check the main KPIs and then get away from the dashboards.
 
 An important part of my week has to be on the floor: seeing the process, talking to people, and understanding the problems that do not always make it into the report.
 
@@ -120,9 +120,9 @@ Once a week I would want a deeper review of performance:
 - Who owns them?
 - And which problems are no longer incidents, but patterns?
 
-I would also want dedicated time for people: feedback, coaching, and conversations where the question is not only “what went wrong” but also “what is stopping you from doing the job well?”
+I would also want dedicated time for people: feedback, coaching, and conversations where, after “what went wrong?”, someone also asks “what is stopping you from doing the job well?”
 
-Reports tell me where to look. The floor tells me what is happening. A manager has to do both.
+Reports tell me where to look. The floor tells me what is happening. A manager needs both.
 
 ## The first 90 days in a new role
 
@@ -139,11 +139,11 @@ I would also try to understand what does not show up straight away on the dashbo
 - What has to be done by hand because the process does not work well?
 - Where do we have one critical person without whom the work gets stuck?
 
-At the end of the 30 days I want a clear map of the operation, not a long list of things I want to change.
+At the end of the 30 days I want a clear map of the operation. The list of things to change can wait.
 
 ### Days 31–60: Set the priorities
 
-In the second phase I would start separating the symptoms from the real problems. I would look at the data and for the patterns that repeat, and I would choose a few priorities, not twenty projects at once.
+In the second phase I would start separating the symptoms from the real problems. I would look at the data and for the patterns that repeat, and I would choose a few priorities and leave the rest for later.
 
 For each priority I want it to be clear:
 
@@ -165,9 +165,9 @@ Three months are not magic, and by day 90 I would not claim to have transformed 
 - The way the handover is done.
 - The process for following up actions.
 - The standards that are actually used.
-- A regular rhythm in which the team checks not only performance, but also improvement.
+- A regular rhythm in which the team checks its performance and its improvement.
 
-My goal for the 90 days would be for the organisation to have a clearer picture of itself and some better mechanisms for improving, not a show of how much I had changed.
+My goal for the 90 days would be for the organisation to have a clearer picture of itself and some better mechanisms for improving. How much I had changed would not be the measure.
 
 ## Where I am still learning
 
@@ -177,7 +177,7 @@ I want to gain more experience leading operations with a larger organisational s
 
 And I want to keep improving at something I do not think is ever finished: knowing when to step in and when to let people solve things themselves.
 
-My goal is to become the manager who builds a team where the answers do not always have to come from him, rather than the person who has the answer to everything.
+My goal is to become the manager who builds a team where the answers do not always have to come from him.
 
 ## How I would like to be described
 
@@ -185,4 +185,4 @@ If one day I asked the people who have worked with me how they would describe me
 
 **“He asked a lot of us, but he was there with us, he listened to us, and he tried to leave the process better than he found it.”**
 
-That is the Operations Manager I want to be: not the one who looks most important when the operation is in trouble, but the one who builds an operation that needs rescuing less and less.
+That is the Operations Manager I want to be: one who builds an operation that needs rescuing less and less.

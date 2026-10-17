@@ -42,13 +42,13 @@ corrections:
 
 Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova për natën time të parë të trajnimit në hotel, kur një përditësim e la sistemin jashtë funksionit për orë të tëra. Kisha ardhur për të mësuar proceset dhe e kalova pjesën më të madhe të natës duke pritur. Kjo ese nis aty ku mbaroi ajo dhe kalon nga sistemi që ndalet te sistemi që vjen, e te njerëzit që duhet ta mësojnë.
 
-Mbështetet në dy përvoja. Në last mile, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në hotel ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control. Për ndryshimin e gushtit nuk kam asnjë krahasim të verifikuar para dhe pas, as ndonjë të dhënë për rezistencë apo për kthim te zakonet e vjetra.
+Pas saj qëndrojnë dy përvoja. Në last mile, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në hotel ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control.
 
 Në ato javë në last mile kishim probleme me ngarkimin, me çantat që mungonin, me karrocat e çrregullta dhe me vonesat, dhe i kam të dokumentuara. Nuk kam asnjë provë që i shkaktoi sistemi i ri, dhe mund të kenë pasur shkaqe të tjera. Ky është tundimi më i lehtë kur vjen një sistem i ri: t'ia vesh fajin atij për gjithçka që shkon keq në javët e para.
 
 ## Dy anë të së njëjtës derë
 
-Në last mile isha pjesë e një operacioni ku po ndryshonte teknologjia e planifikimit; në hotel isha i porsaardhuri që duhej të mësonte një sistem që ishte tashmë aty. Kur i vë krah njëra-tjetrës, të dyja përvojat tregojnë të njëjtën gjë: një sistem mund të jetë teknikisht më i mirë se ai që zëvendëson, pa qenë njerëzit gati të punojnë me të. Gatishmëria ndërtohet, ose nuk ndërtohet, në javët pas instalimit.
+Në last mile isha pjesë e një operacioni ku po ndryshonte teknologjia e planifikimit; në hotel isha i porsaardhuri që duhej të mësonte një sistem që ishte tashmë aty. Kur i vë krah njëra-tjetrës, të dyja përvojat tregojnë të njëjtën gjë: një sistem mund të jetë teknikisht më i mirë se ai që zëvendëson, pa qenë njerëzit gati të punojnë me të. Gatishmëria ndërtohet, ose nuk ndërtohet, në javët pas instalimit. Si shkoi kjo pas ndryshimit të gushtit nuk mund ta tregoj: nuk kam asnjë krahasim të verifikuar para dhe pas, as ndonjë të dhënë për rezistencë apo për kthim te zakonet e vjetra.
 
 **Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin dhe dinë çfarë të bëjnë kur ai nuk i ndihmon.**
 
@@ -79,7 +79,7 @@ As nuk mendoj se çdo dokument jashtë sistemit është zakon i keq. Një listë
 Sot, kur vjen një sistem i ri, do t'i jepja përparësi përgatitjes së njerëzve, jo vetëm instalimit të programit. Nuk kam drejtuar një program ndryshimi të tillë; këto janë gjërat që do të rekomandoja:
 
 1. **Të shpjegohet pse po bëhet ndryshimi.** Jo vetëm çfarë bën sistemi i ri.
-2. **Të tregohet çfarë ndryshon në punën e përditshme.** Për çdo rol, jo një prezantim për të gjithë.
+2. **Të tregohet çfarë ndryshon në punën e përditshme.** Rol për rol, në vend të një prezantimi të vetëm për të gjithë.
 3. **Trajnim me situata reale, jo vetëm prezantim i funksioneve.** Rasti i zakonshëm dhe rasti i vështirë.
 4. **Të jetë e qartë ku kërkohet ndihmë kur diçka nuk funksionon.** Edhe natën, edhe në ditët e para.
 5. **Të mblidhen problemet e ditëve të para dhe t'u kthehet përgjigje punonjësve.** Një problem i raportuar pa përgjigje është mësimi i fundit që marrin njerëzit për raportimin.

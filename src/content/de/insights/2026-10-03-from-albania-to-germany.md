@@ -66,17 +66,17 @@ Und ich habe etwas gelernt, das zunächst bürokratisch wirken mag, im Betrieb a
 
 ## Was ich aus Albanien bewahrt habe
 
-Ich bin nah am Betrieb geblieben. Ich glaube nach wie vor nicht, dass man einen Prozess allein über Berichte gut führen kann; man muss sehen, was dort passiert, wo gearbeitet wird. In der Logistik heißt das, zu wissen, was an der Rampe und mit den Menschen während der Schicht passiert, statt am Ende des Tages nur auf den Prozentwert zu schauen. Im Hotel heißt das, zu wissen, was während einer Schicht an der Rezeption passiert, statt morgens nur den Bericht zu lesen.
+Ich bin nah am Betrieb geblieben. Ich glaube nach wie vor nicht, dass man einen Prozess allein über Berichte gut führen kann; man muss sehen, was dort passiert, wo gearbeitet wird. In der Logistik heißt das, zu wissen, was an der Rampe und mit den Menschen während der Schicht passiert, und dazu den Prozentwert am Ende des Tages zu kennen; im Hotel, zu wissen, was während einer Schicht an der Rezeption passiert, und dazu, was im Bericht am Morgen steht.
 
 Auch meine Flexibilität habe ich behalten. Wenn ein Problem auftaucht, antworte ich ungern sofort mit „Das ist nicht meine Aufgabe“. Zuerst prüfe ich, ob ich helfen kann, ohne die Grenzen meiner Rolle zu überschreiten.
 
 Und ich habe die menschliche Beziehung zum Team bewahrt. Der Prozess ist wichtig, aber Menschen sind keine Prozesse. Ein Mitarbeiter kann dieselbe Aufgabe haben wie gestern und heute in einer ganz anderen Verfassung zur Arbeit kommen. Auch das muss Führung sehen.
 
-Ich würde nicht behaupten, dass diese Dinge in Deutschland „fehlen“; eine solche Verallgemeinerung kann ich aus meiner Erfahrung nicht belegen. Es sind Teile meines Stils, die ich mitgebracht habe und nicht verlieren wollte, während ich mich an eine strukturiertere Arbeitskultur angepasst habe.
+Ich behaupte nicht, dass diese Dinge in Deutschland fehlen; eine solche Verallgemeinerung kann ich aus meiner Erfahrung nicht belegen. Es sind Teile meines Stils, die ich mitgebracht habe und nicht verlieren wollte, während ich mich an eine strukturiertere Arbeitskultur angepasst habe.
 
 ## Was ich anders machen würde
 
-Ändern würde ich nicht eine bestimmte Entscheidung aus Albanien, die ich sicher rekonstruieren könnte, sondern eine Gewohnheit: Ich würde mehr dokumentieren.
+Eine einzelne Entscheidung aus Albanien kann ich nicht sicher rekonstruieren; ändern würde ich deshalb eine Gewohnheit: Ich würde heute mehr dokumentieren.
 
 Wenn ein Prozess funktionierte, weil ich ihn kannte, würde ich heute versuchen, ihn so festzuhalten, dass das System ihn kennt. Wenn ein Problem gelöst war, würde es mir nicht reichen, dass es verschwunden ist. Ich würde verstehen wollen, warum es entstanden ist und ob sich im Prozess etwas ändern muss.
 

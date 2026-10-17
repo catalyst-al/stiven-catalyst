@@ -37,13 +37,13 @@ checklist:
 
 In Albania, my last role was Cluster Manager: I ran the operations of a flagship store in Tirana and coordinated part of the store network. My first job in Germany was delivering parcels.
 
-The series “Ten years close to the work” starts with that contrast, not for drama or to tell a migration story, but because nothing I write afterwards makes sense without it: how I think when an operational problem lands in front of me, how I lead people, and why I see processes from both sides.
+The series “Ten years close to the work” starts with that contrast because nothing I write afterwards makes sense without it: how I think when an operational problem lands in front of me, how I lead people, and why I see processes from both sides.
 
 I helped build the flagship store from zero to opening day, coordinating architects, carpenters, painters and the fit-out crews. Then came sales, the service standard, the customer experience, the operational organisation and the team: eight sales staff, four cashiers and one assistant. We built the company's first online sales website and its first e-commerce team. In the same period the network was restructured: two underperforming stores closed, and the business concentrated more on the flagship.
 
 Before that, as General Sales Manager at a distributor of household appliances, I had led the wholesale business: a network of 61 active resellers, and a structure that took in the warehouse, B2B sales, accounting, the technical team and customer service. By the time I left Albania, I was used to making decisions, leading people and answering for business results.
 
-Then came Germany. From November 2021 to June 2022 I worked for a last-mile delivery company, first as a parcel courier and later in dispatch. From July 2022 to April 2023 I was a steward in a hotel. In May 2023 I started as a night auditor at a hotel in Frankfurt. From December 2023 to October 2024 I delivered parcels again alongside night audit, and from October 2024 to January 2025 I worked as a care assistant (Pflegehelfer). In January 2025 I went back to last mile, this time as Team Leader On Road. In June 2025 I became Area Manager.
+Then came Germany. From November 2021 to June 2022 I worked for a last-mile delivery company, first behind the wheel as a parcel courier, later in dispatch. The hotel came next: steward from July 2022 to April 2023, then, from May 2023, night auditor at a hotel in Frankfurt. Between December 2023 and October 2024 I went back to delivering parcels alongside the night audit, and from October 2024 to January 2025 I worked in care, as a care assistant (Pflegehelfer). In January 2025 I returned to last mile as Team Leader On Road; in June 2025 I became Area Manager.
 
 I have no reason to hide the jobs as a parcel courier, a steward or a care assistant. Without them, my road back into management makes no sense.
 

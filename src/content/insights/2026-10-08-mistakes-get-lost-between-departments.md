@@ -37,8 +37,6 @@ A department can do its own work very well, and the operation can still fail. It
 
 Inside a team it is usually clear who does what. There is someone responsible, a standard, a rhythm. But work rarely stays inside a single team. It passes from reception to Maintenance, from preparation to the dock, from the dock to the driver, from the night shift to the morning shift. It is in these handovers, where work changes hands, that many mistakes get lost.
 
-What follows comes from concrete cases at handovers in a hotel and in last mile, and from the SOPs, checklists, instructions and notification rules I worked with. The picture of a mistake that ends up with no owner at all is a general one, not a documented case.
-
 ## In the hotel: who receives it, who solves it, who closes it
 
 In the hotel, the most visible handover for me was between reception, Housekeeping and Maintenance.
@@ -51,7 +49,7 @@ In cases like these I distinguish three different responsibilities:
 - **who solves the problem**;
 - **who checks that the matter is closed.**
 
-Often these are three different people. And if the third belongs to nobody, the problem may have been “passed on” to the right department, but the guest does not know whether it has been solved. Neither do we.
+Often these are three different people. And if the third belongs to nobody (I describe that in general terms; I have no documented case of a mistake left with no owner at all), the problem may have been “passed on” to the right department, but the guest does not know whether it has been solved. Neither do we.
 
 Another important handover was the one between shifts. Night Audit took on open matters from the previous shift and had to pass on to the morning shift whatever had not been finished. I have written about that at more length in [the essay on the handover](/insights/why-the-handover-is-underrated/).
 
@@ -81,7 +79,7 @@ That is why mistakes between departments are so hard to catch. Seen from the ins
 
 ## Status, responsibility, confirmation
 
-In the hotel, a structured handover mattered a great deal. If a problem was not solved during the night, it had to stay documented and visible to the next shift. That is why I wanted the notes to show what was still open, and not only to summarise events.
+In the hotel, a structured handover mattered a great deal. If a problem was not solved during the night, it had to stay documented and visible to the next shift. That is why I wanted the notes to show what was still open as well as what had happened.
 
 In last mile, what helped were clear notification procedures, contacts with the Team Leaders and coordination between Last Mile, Outbound and the DSPs.
 

@@ -36,13 +36,13 @@ firstMove:
 
 Në last mile, fjalën e fundit zakonisht e ka skaneri. Kjo ese pyet çfarë thotë në të vërtetë ajo fjalë. Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e mbylla me listën e eseve që do të vinin, dhe njëra prej tyre ishte për skanerin si dëshmitar dhe jo si gjykatës. Kjo është ajo ese.
 
-Ajo që vijon mbështetet në punën time në last mile, me problemet e ngarkimit, çantat që mungonin dhe karrocat e përziera. Mbështetet gjithashtu në raportimet ku përmendeshin edhe mospërputhje gjatë skanimit dhe ngarkimit, në KPI-të Incomplete dhe Damage, që i ndiqnim çdo ditë, dhe në rregullat e udhëzimeve operative, për të cilat flas më poshtë. Nga hoteli merr dallimin mes asaj që regjistron sistemi dhe gjendjes reale të një dhome, për të cilin shkrova në esenë e parë. Nuk përmban asnjë incident të rindërtuar: nuk kam asnjë rast të verifikuar ku sistemi e tregonte një çantë si të skanuar dhe unë pashë vetë që mungonte, as ndonjë rast ku historiku i skanimit u përdor për të fajësuar një shofer, ose ku e përdora vetë për të përcaktuar përgjegjësinë. Pesë hapat më poshtë janë ato që do të rekomandoja sot, jo një protokoll që e kam zbatuar në çdo rast.
+Te kjo temë vij nga last mile, me problemet e ngarkimit, çantat që mungonin dhe karrocat e përziera; nga raportimet ku përmendeshin edhe mospërputhje gjatë skanimit dhe ngarkimit; nga Incomplete dhe Damage, KPI që i ndiqnim çdo ditë; dhe nga rregullat e udhëzimeve operative, për të cilat flas më poshtë. Nga hoteli sjell dallimin mes asaj që regjistron sistemi dhe gjendjes reale të një dhome, për të cilin shkrova në esenë e parë.
 
 ## Çfarë dëshmon një skanim
 
 Një skanim është një fjali e shkurtër dhe e saktë: ky kod u lexua, në këtë vend, në këtë orë. Asgjë më shumë.
 
-Nuk thotë që çanta është ende aty, as që u vu në karrocën e duhur. Nuk thotë që karroca e duhur shkoi te shoferi i duhur, as që shoferi i mori të gjitha para se të nisej. Të gjitha këto ndodhin pas skanimit, në botën fizike, ku skaneri nuk sheh.
+Nuk thotë që çanta është ende aty, as që u vu në karrocën e duhur. Nuk thotë që karroca e duhur shkoi te shoferi i duhur, as që shoferi i mori të gjitha para se të nisej. Të gjitha këto ndodhin pas skanimit, në botën fizike, ku skaneri nuk sheh. Nuk kam asnjë rast të verifikuar ku sistemi e tregonte një çantë si të skanuar dhe unë pashë vetë që mungonte, por kufiri qëndron që në atë që regjistron një skanim.
 
 Skanimi e ruan vlerën e vet; këta kufij tregojnë për çfarë vlen. Një dëshmitar i mirë thotë saktë atë që pa, dhe asgjë për atë që ndodhi kur ai nuk ishte aty.
 
@@ -52,11 +52,11 @@ Skanimi e ruan vlerën e vet; këta kufij tregojnë për çfarë vlen. Një dës
 
 Te [Ku humbet një pjesë e porosisë](/sq/insights/where-part-of-the-order-goes-missing/) përshkrova rregullin kur mungonte një çantë: shoferi njoftonte Team Leader-in, dhe karroca qëndronte brenda zonës së përcaktuar derisa të zgjidhej problemi.
 
-Nuk e di kush e shkroi këtë rregull dhe kur, ndaj ajo që vijon është leximi im, jo citim nga një procedurë. Rregulli nuk i kërkon askujt të shohë ekranin. I kërkon dikujt të ndalet dhe ta shohë karrocën. Pikërisht kur regjistrimi dhe realiteti mund të jenë ndarë, ai ia jep fjalën kontrollit fizik dhe e mban karrocën aty ku ky kontroll mund të bëhet ende. Mbi këtë parim qëndron gjithë kjo ese.
+Nuk e di kush e shkroi këtë rregull dhe kur, ndaj ajo që vijon është leximi im. Rregulli nuk i kërkon askujt të shohë ekranin. I kërkon dikujt të ndalet dhe ta shohë karrocën. Pikërisht kur regjistrimi dhe realiteti mund të jenë ndarë, ai ia jep fjalën kontrollit fizik dhe e mban karrocën aty ku ky kontroll mund të bëhet ende. Mbi këtë parim qëndron gjithë kjo ese.
 
 ## Emri në rreshtin e fundit
 
-Kur mungon një çantë, në shumicën e operacioneve pyetja e parë është “kush e bëri?” në vend të “ku humbi?”. Dhe historiku i skanimit duket si përgjigjja më e shpejtë: ja kush e skanoi i fundit.
+Kur mungon një çantë, në shumicën e operacioneve pyetja e parë është “kush e bëri?” në vend të “ku humbi?”. Dhe historiku i skanimit duket si përgjigjja më e shpejtë: ja kush e skanoi i fundit. Nuk kam asnjë rast ku u përdor për të fajësuar një shofer, ose ku e përdora vetë për të përcaktuar përgjegjësinë, por shkurtimi i rrugës bie në sy.
 
 Por një çantë mund të humbasë në magazinë, gjatë përgatitjes, gjatë ngarkimit ose në rrugë, dhe problemet që kishim në last mile mund të preknin secilën nga këto pjesë. Skanimi i fundit tregon kush e preku çantën i fundit në sistem; ku u nda ajo nga vendi i vet, këtë nuk e tregon dot.
 
@@ -70,17 +70,17 @@ Kur provohet që dikush e ka shkelur standardin, përgjegjësia individuale mbet
 
 Ka edhe anën tjetër: skaneri që nuk punon, skanimi që nuk bëhet. Nuk kam një rast për të treguar dhe nuk e di si ishte rregulluar zyrtarisht, ndaj kjo pjesë është rekomandim.
 
-Një gjë nuk do ta sugjeroja: që puna të vazhdojë pa skanim aty ku procedura e kërkon. Kjo vlen sidomos për produktet chilled dhe frozen, ku vetë skanimi brenda zonës së temperaturës është pjesë e rregullit. Një dëshmitar që mungon nuk zëvendësohet me një supozim. Çdo përjashtim trajtohet sipas rregullave të autorizuara dhe shënohet me shkrim.
+Një gjë nuk do ta sugjeroja: që puna të vazhdojë pa skanim aty ku procedura e kërkon. Kjo vlen sidomos për produktet e ftohura dhe të ngrira, ku vetë skanimi brenda zonës së temperaturës është pjesë e rregullit. Aty ku mungon dëshmitari, askush nuk e mbush boshllëkun me një supozim: çdo përjashtim trajtohet sipas rregullave të autorizuara dhe shënohet me shkrim.
 
 ## Pesë hapa për një mospërputhje
 
-Sot një mospërputhje mes sistemit dhe realitetit do ta hetoja kështu:
+Sot një mospërputhje mes sistemit dhe realitetit do ta hetoja kështu. Është rekomandim, jo protokoll që e kam zbatuar në çdo rast:
 
 1. **Kontrollo regjistrimin dhe kohën e tij.** Çfarë thotë saktësisht sistemi dhe kur e tha.
 2. **Verifiko gjendjen fizike të ngarkesës.** Me sytë e tu, jo me një skanim tjetër.
 3. **Gjej pikën e fundit ku informacioni dhe realiteti përputheshin.** Mospërputhja lindi pas saj, dhe aty fillon kërkimi.
 4. **Ndaje gabimin e regjistrimit nga gabimi i përgatitjes ose i ngarkimit.** Janë dy probleme të ndryshme, me dy zgjidhje të ndryshme.
-5. **Dokumento shkakun e konfirmuar dhe masën që e parandalon përsëritjen.** I konfirmuar, jo i supozuar. Dhe një masë, jo vetëm një emër.
+5. **Dokumento shkakun e konfirmuar dhe masën që e parandalon përsëritjen.** Vetëm atë që është konfirmuar, dhe gjithmonë një masë, jo thjesht një emër.
 
 Hapi i tretë është ai që shpesh anashkalohet. Pa të, kërkimi fillon te rreshti i fundit i historikut dhe aty mbaron.
 
@@ -92,6 +92,6 @@ Nuk kam asnjë rast ku sistemi e tregonte një dhomë në rregull dhe unë gjeta
 
 ## Një mospërputhje mes sistemit dhe realitetit
 
-Kartela më poshtë vlen për çdo rast kur sistemi thotë një gjë dhe karroca, rafti ose dhoma thotë tjetër. Plotësoje para se të flasësh për fajin. [Kontrolli i plotësisë](/sq/tools/incomplete-control/) i mban rastet krah njëri-tjetrit, që një mospërputhje që përsëritet në të njëjtën pikë të duket si model dhe jo si fat i keq.
+Kartela më poshtë vlen për çdo rast kur sistemi thotë një gjë dhe karroca, rafti ose dhoma thotë tjetër. Plotësoje para se të flasësh për fajin. [Kontrolli i plotësisë](/sq/tools/incomplete-control/) i mban rastet krah njëri-tjetrit, që një mospërputhje që përsëritet në të njëjtën pikë të dallohet si skemë që përsëritet.
 
 Historiku i skanimit të tregon çfarë është regjistruar. Ajo që ka ndodhur qëndron te procesi mes regjistrimit dhe karrocës, dhe aty bëhet puna: ta ndjekësh mbrapsht, hap pas hapi, deri te pika e fundit ku sistemi dhe realiteti ende përputheshin.

@@ -33,7 +33,7 @@ Ich habe in Albanien im Einzel- und Großhandel gearbeitet, danach in der Last-M
 
 Im Einzel- und Großhandel konnte man die Ware haben. Wenn aber der Bestand nicht kontrolliert war, wenn Lager und Verkauf schlecht miteinander sprachen oder die Informationen nicht stimmten, landete das Problem beim Kunden.
 
-In der Logistik nahm dasselbe Problem eine andere Form an. Es war kein Produkt im Regal mehr, sondern ein fehlendes Paket, eine Beladung, die länger dauerte als nötig, ein unvollständiger Auftrag, eine Tour, die zu spät losfuhr, oder ein Problem, das gelöst werden musste, während der Fahrer schon unterwegs war.
+In der Logistik nahm dasselbe Problem eine andere Form an: ein fehlendes Paket, eine Beladung, die länger dauerte als nötig, ein unvollständiger Auftrag, eine Tour, die zu spät losfuhr, oder ein Problem, das gelöst werden musste, während der Fahrer schon unterwegs war.
 
 Im Hotel ändert es wieder seine Gestalt: eine Reservierung, eine Zahlung, ein Zimmer, das im System nicht richtig abgeschlossen wurde, ein No-Show, eine Rechnung oder eine Information, die nicht von einer Schicht an die nächste weitergegeben wurde.
 
@@ -55,7 +55,7 @@ Im Hotel, besonders nachts, kommen Gäste womöglich müde von der Reise an, mit
 
 Was sich nicht ändert, ist die Erwartung. Den Kunden interessiert kaum, welche Abteilung den Fehler gemacht hat. Er sieht nur das Unternehmen vor sich. Im Laden ist man das selbst, an der Tür der Fahrer, im Hotel der Rezeptionist. In diesem Moment ist diese Person für den Kunden das ganze Unternehmen.
 
-Eine weitere Lektion stammt aus dem Großhandel, und sie hat mir mehr genützt, als ich erwartet hatte. Ich habe ein landesweites Netz mit 61 aktiven Wiederverkäufern aufgebaut und geführt, und dieser Kanal war mit einem Umsatzwachstum von etwa 30 bis 40 Prozent verbunden. Daraus habe ich gelernt, dass man einen Partner nicht wie einen Mitarbeiter führt. Einem Mitarbeiter kann man ein Verfahren und eine direkte Verantwortung übertragen. Mit einem Partner muss man ein gemeinsames Interesse, Kommunikation und Kontinuität aufbauen, und die Beziehung muss sich für beide Seiten wirtschaftlich lohnen. Bei 61 Partnern kann man sich nicht allein auf die persönliche Beziehung zu jedem Einzelnen verlassen. Man braucht eine Arbeitsweise, die sich wiederholen lässt.
+Eine weitere Lektion stammt aus dem Großhandel, und sie hat mir mehr genützt, als ich erwartet hatte. Ich habe ein landesweites Netz mit 61 aktiven Wiederverkäufern aufgebaut und geführt, und dieser Kanal war mit einem Umsatzwachstum von etwa 30 bis 40 Prozent verbunden. Daraus habe ich gelernt, dass ein Partner anders geführt werden muss als ein Mitarbeiter. Einem Mitarbeiter kann man ein Verfahren und eine direkte Verantwortung übertragen. Mit einem Partner muss man ein gemeinsames Interesse, Kommunikation und Kontinuität aufbauen, und die Beziehung muss sich für beide Seiten wirtschaftlich lohnen. Bei 61 Partnern kann man sich nicht allein auf die persönliche Beziehung zu jedem Einzelnen verlassen. Man braucht eine Arbeitsweise, die sich wiederholen lässt.
 
 Das hat mir später geholfen, auch als die Menschen nicht mehr Wiederverkäufer hießen. In der Logistik arbeitet man mit Fahrern, Operatoren und Partnerfirmen, im Hotel mit anderen Abteilungen, Lieferanten und Strukturen, die man nicht direkt steuert. Führung heißt nicht immer, Autorität über jemanden zu haben. Oft heißt sie, Menschen, über die man keine Autorität hat, dazu zu bringen, in dieselbe Richtung zu arbeiten wie man selbst.
 

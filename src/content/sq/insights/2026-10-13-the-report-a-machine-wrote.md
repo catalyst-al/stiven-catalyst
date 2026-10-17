@@ -36,19 +36,19 @@ firstMove:
 
 Në fund të esesë së parë të kësaj serie premtova një ese për raportin që e shkroi një makinë. Atëherë mendoja për raportet që i prodhon vetë sistemi: numrat e ditës, mbylljen e natës. Sot ka edhe një makinë të dytë, që nuk i prodhon numrat, por i përmbledh dhe i shkruan në gjuhë profesionale. Kjo ese është për të dyja.
 
-Ajo mbështetet në raportet me të cilat kam punuar çdo ditë. Në last mile: raportet ditore të KPI-ve për Damage, Incomplete, Delay dhe Loading Time, raportet e performancës sipas DSP-së dhe sipas shoferit, si dhe raportimet për problemet operative, vonesat dhe porositë jo të plota. Në hotel, gjatë Night Audit: raportet e gjendjes së hotelit dhe të zënies, mbërritjet, largimet dhe mosparaqitjet, raportin dhe parashikimin e mëngjesit, raportet e mbylljes së ditës dhe informacionin për turnin pasardhës. Kjo nuk është historia e një raporti që gaboi: nuk kam asnjë rast ku kam provuar se një raport automatik ishte i gabuar dhe e kam korrigjuar, as ndonjë raport zyrtar të shkruar nga AI e të dërguar pa e parë një njeri. Pyetja këtu është ajo që ia bëj vetes sa herë që një raport më duket i gatshëm: çfarë më thotë dhe çfarë më lë të besoj?
+Pas saj qëndrojnë raportet me të cilat kam punuar çdo ditë. Në last mile: raportet ditore të KPI-ve për Damage, Incomplete, Delay dhe Loading Time, raportet e performancës sipas DSP-së dhe sipas shoferit, si dhe raportimet për problemet operative, vonesat dhe porositë jo të plota. Në hotel, gjatë Night Audit: raportet e gjendjes së hotelit dhe të zënies, mbërritjet, largimet dhe mosparaqitjet, raportin dhe parashikimin e mëngjesit, raportet e mbylljes së ditës dhe informacionin për turnin pasardhës. Tek ato shkoj me pyetjen që ia bëj vetes sa herë që një raport më duket i gatshëm: çfarë më thotë dhe çfarë më lë të besoj?
 
 ## Dy raporte, dy numra
 
 Në Night Audit kam pasur një rast ku numri i personave në parashikimin e mëngjesit ndryshonte nga ai në raportin e gjendjes së hotelit: dy raporte, nga i njëjti sistem, për të njëjtën natë, me dy numra të ndryshëm.
 
-Reagimi i parë është të pyesësh cili prej tyre është gabim. Por nuk mund të them që sistemi kishte gabuar. Dy raporte mund të numërojnë me kritere të ndryshme dhe të tregojnë shifra të ndryshme pa qenë asnjëri i pasaktë. Rasti kërkonte më shumë një kontroll sesa një korrigjim: t'i krahasoje dy burimet dhe të kuptoje çfarë numëron secili.
+Reagimi i parë është të pyesësh cili prej tyre është gabim. Por nuk mund të them që sistemi kishte gabuar, dhe nuk kam asnjë rast ku kam provuar se një raport automatik ishte i gabuar dhe e kam korrigjuar. Dy raporte mund të numërojnë me kritere të ndryshme dhe të tregojnë shifra të ndryshme pa qenë asnjëri i pasaktë. Rasti kërkonte një kontroll: t'i krahasoje dy burimet dhe të kuptoje çfarë numëron secili.
 
 Kjo është pjesa e raporteve automatike që harrohet më lehtë. Një raport i gjeneruar duket përfundimtar sepse është i rregullt: tabela, kolona, totale. Por rregulli i tij nuk thotë asgjë për pyetjen që ke ti. Thotë vetëm se sistemi iu përgjigj pyetjes që iu bë, me kriteret që iu dhanë.
 
 **Dy raporte me dy numra të ndryshëm nuk do të thotë që njëri gabon. Do të thotë që duhet të dish çfarë numëron secili.**
 
-## Mbyllja e ditës nuk i mbyll çështjet
+## Mbyllja e ditës dhe çfarë mbetet e hapur
 
 Gjatë Night Audit, raportet e mbylljes së ditës gjenerohen në një moment të caktuar të natës. Para se t'u besoja, kontrolloja disa gjëra. A përputhej informacioni me gjendjen operative të turnit? A ishin trajtuar sipas procesit mbërritjet, largimet dhe mosparaqitjet? A kishte çështje të hapura që kërkonin ndjekje, apo mospërputhje mes raporteve të lidhura që duheshin sqaruar? Dhe a ishte dokumentuar informacioni që i duhej turnit tjetër?
 
@@ -60,7 +60,7 @@ Te [Çfarë mëson një Night Auditor](/sq/insights/what-a-night-auditor-learns/
 
 Kam përdorur ChatGPT për të organizuar materiale operative, për të përgatitur udhëzime SOP, për të strukturuar informacione dhe për të hartuar tekste profesionale. Atë që i kërkohet e bën mirë: merr një listë të çrregullt dhe e kthen në diçka që lexohet lehtë.
 
-Pikërisht aty qëndron rreziku. Një tekst i shkruar mirë krijon përshtypjen se dikush e ka menduar me kujdes. Një raport me paragrafë të rregullt dhe me fjalë si “u verifikua” e “u zgjidh” tingëllon i kontrolluar, edhe kur askush nuk ka kontrolluar gjë. Dhe një mjet AI mund të shtojë diçka që nuk ishte në shënimet e tua, me të njëjtin ton të sigurt si gjithçka tjetër.
+Pikërisht aty qëndron rreziku, edhe pse nuk kam asnjë rast të një raporti zyrtar të shkruar nga AI e të dërguar pa e parë një njeri. Një tekst i shkruar mirë krijon përshtypjen se dikush e ka menduar me kujdes. Një raport me paragrafë të rregullt dhe me fjalë si “u verifikua” e “u zgjidh” tingëllon i kontrolluar, edhe kur askush nuk ka kontrolluar gjë. Dhe një mjet AI mund të shtojë diçka që nuk ishte në shënimet e tua, me të njëjtin ton të sigurt si gjithçka tjetër.
 
 AI mund të më ndihmojë ta shkruaj më qartë një raport. Nuk duhet të vendosë vetë se çfarë është e vërtetë. Prandaj, para se të përdor një tekst të përgatitur me AI, mbaj këtë standard:
 
@@ -82,7 +82,7 @@ Arsyeja është e thjeshtë. Nuk do të doja që një raport i shkruar bukur të
 
 ## Kush i lexon
 
-Nuk kam një rast ku një raport prodhohej dhe nuk e lexonte askush. Në last mile, KPI-të ishin pjesë e diskutimeve operative dhe e stand-up-it ditor. Në hotel, raportet përdoreshin për mbylljen e ditës dhe për vazhdimësinë e punës nga një turn te tjetri.
+Nuk kam një rast ku një raport prodhohej dhe nuk e lexonte askush. Në last mile, KPI-të ishin pjesë e diskutimeve operative dhe e takimit të shkurtër ditor (stand-up). Në hotel, raportet përdoreshin për mbylljen e ditës dhe për vazhdimësinë e punës nga një turn te tjetri.
 
 Por kjo nuk provon që çdo raport lexohej dhe përdorej njësoj. Dhe sa më lehtë të prodhohet një raport, nga sistemi apo nga AI, aq më shumë raporte do të ketë dhe aq më pak kohë për secilin. Kështu pyetja zhvendoset nga ai që e shkruan raportin te ai që e lexon, dhe te ajo që bën pasi e lexon. Raporti duhet ta ndihmojë njeriun të kuptojë realitetin, jo ta zëvendësojë kontrollin e realitetit.
 

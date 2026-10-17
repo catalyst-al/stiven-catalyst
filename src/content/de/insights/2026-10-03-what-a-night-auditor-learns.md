@@ -36,7 +36,7 @@ Meine Nacht teilt sich ganz natürlich in vier Phasen.
 
 Zu Beginn übernehme ich die Übergabe der vorherigen Schicht und versuche, den tatsächlichen Zustand des Hotels zu erfassen: was abgeschlossen ist, was noch offen ist, wo es Probleme gibt und welche Themen in der Nacht Aufmerksamkeit brauchen.
 
-In der Mitte der Schicht beginnt die genauere Prüfung, und genau dann zeigen sich viele Abweichungen zwischen dem, was das System anzeigt, und dem, was tagsüber wirklich passiert ist. Geprüft werden Reservierungen, Status, Dokumentation, Finanzielles und jedes operative Problem, das den Tagesabschluss verhindern könnte.
+In der Mitte der Schicht beginnt die genauere Prüfung, und genau dann zeigen sich viele Abweichungen zwischen dem, was das System anzeigt, und dem, was tagsüber wirklich passiert ist. Geprüft werden Reservierungen und ihr Status, Dokumentation, Finanzielles und jedes operative Problem, das den Tagesabschluss verhindern könnte.
 
 Dann kommt der Abschluss, für mich der Teil, in dem jedes kleine Problem sichtbar werden kann, das tagsüber liegen geblieben ist. Bevor der Tag abgeschlossen wird, muss ich überzeugt sein, dass die wichtigsten Dinge in Ordnung sind und dass verständlich ist, was in den nächsten Tag übergeht.
 
@@ -46,7 +46,7 @@ Am Ende steht die Übergabe. Eine Nachtschicht endet nicht, wenn das System abge
 
 Die meisten sind kleine, unspektakuläre Dinge, die später zum Problem werden, wenn niemand sie auffängt.
 
-Ich bin auf Reservierungen gestoßen, die nicht ganz zu dem passen, was tatsächlich passiert ist, und auf Zimmerstatus, die überprüft werden müssen. Es gibt Dokumentation, die nicht abgeschlossen wurde, Rechnungen oder Buchungen, die kontrolliert werden müssen, und Informationen, die nicht richtig von einer Schicht an die nächste weitergegeben wurden. Und dann sind da die Themen, die niemand absichtlich vergessen hat und die liegen geblieben sind, weil tagsüber viel zu tun war.
+Ich bin auf Reservierungen gestoßen, die nicht ganz zu dem passen, was tatsächlich passiert ist, und auf Zimmer, deren Status überprüft werden muss. Es gibt Dokumentation, die nicht abgeschlossen wurde, Rechnungen oder Buchungen, die kontrolliert werden müssen, und Informationen, die nicht richtig von einer Schicht an die nächste weitergegeben wurden. Und dann sind da die Themen, die niemand absichtlich vergessen hat und die liegen geblieben sind, weil tagsüber viel zu tun war.
 
 Die Nacht bringt diese Dinge ans Licht, weil sich der Rhythmus ändert. Vor der Rezeption wird es ruhiger, und man kann klarer hinter den Prozess sehen.
 
@@ -70,7 +70,7 @@ In den ersten Wochen lag meine Aufmerksamkeit natürlich vor allem auf der Liste
 
 Heute sehe ich das anders. Auf „Habe ich diesen Schritt erledigt?“ folgt eine zweite Frage: „Ist das, was dieser Schritt prüfen soll, tatsächlich in Ordnung?“
 
-Das ist ein großer Unterschied. Eine Checkliste lässt sich mechanisch abarbeiten, aber ein guter Night Audit verlangt, dass man versteht, wie die Prozesse voneinander abhängen. Wenn vorher etwas nicht richtig abgeschlossen wurde, hat es keinen Sinn, den Prozess zu beschleunigen, nur damit die Liste fertig aussieht.
+Das ist ein großer Unterschied. Eine Checkliste lässt sich mechanisch abarbeiten, aber ein gutes Night Audit verlangt, dass man versteht, wie die Prozesse voneinander abhängen. Wenn vorher etwas nicht richtig abgeschlossen wurde, hat es keinen Sinn, den Prozess zu beschleunigen, nur damit die Liste fertig aussieht.
 
 Das hat mich auch bei der Übergabe sorgfältiger gemacht. Wenn etwas offen bleibt, muss klar sein, warum, und wer es weiterführt.
 
@@ -90,10 +90,10 @@ Hätte ich fünf Minuten mit den Tagesmanagern, würde ich sie bitten, den Nacht
 
 Die fünf Dinge, die ich mir jeden Morgen ansehen würde:
 
-1. **Was ungelöst geblieben ist.** Nicht nur, was passiert ist, sondern was noch zu tun ist.
-2. **Wo System und Wirklichkeit voneinander abwichen.** Reservierungen, Status, Dokumentation oder Finanzielles, bei denen jemand eingreifen musste.
+1. **Was ungelöst geblieben ist.** Über das Geschehene hinaus: was noch zu tun ist.
+2. **Wo System und Wirklichkeit voneinander abwichen.** Reservierungen und ihr Status, Dokumentation oder Finanzielles, bei denen jemand eingreifen musste.
 3. **Welche Probleme sich wiederholen.** Einmal kann ein Fehler Zufall sein. Derselbe Fehler mehrmals ist ein Prozess.
 4. **Was den Gast oder den Betrieb getroffen hat.** Dort sieht man, ob ein internes Problem anfängt, zum Problem des Kunden zu werden.
 5. **Was die nächste Schicht wissen muss, bevor die Arbeit beginnt.** Ein guter Bericht soll nicht nur die Vergangenheit beschreiben; er soll den Tag, der beginnt, sicherer machen.
 
-Das gilt für jedes Unternehmen, nicht nur für ein Hotel. Und manchmal zeigt sich nachts sehr deutlich, was ein Unternehmen tagsüber vor sich selbst versteckt.
+Das gilt für jedes Unternehmen. Und manchmal zeigt sich nachts sehr deutlich, was ein Unternehmen tagsüber vor sich selbst versteckt.

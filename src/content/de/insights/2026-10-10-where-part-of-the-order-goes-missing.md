@@ -37,9 +37,7 @@ Diese Regel verrät etwas, das im Bericht nicht steht: Eine fehlende Tasche fäl
 
 In [Wie wir mit Schäden gearbeitet haben](/de/insights/how-we-worked-with-damage/) habe ich geschrieben, dass eine Quote keine Adresse hat. Für Incomplete gilt das genauso, mit einem wichtigen Unterschied: Hier gibt es einen Moment, in dem sich das Problem noch aufhalten lässt.
 
-Unter Incomplete habe ich eine Bestellung verstanden, die nicht vollständig beim Kunden ankam; die offizielle Formel und die genauen Zählregeln kenne ich nicht. Aus den Berichten habe ich diese Zahlen: Im April 2025 lag Incomplete bei 1,18 % bei einem Ziel von 0,8 %, in einem Bericht vom Juni 2025 bei 0,63 % mit 13 Fällen.
-
-Die Zahlen sind echt, aber sie zeigen nicht, welche Maßnahmen die Veränderung bewirkt haben, und ich stelle sie nicht als Ergebnis meiner Arbeit dar. Ich weiß auch nicht, auf welchem Weg und in welchem System die einzelnen Fälle erfasst wurden und welches Problem am häufigsten vorkam.
+Unter Incomplete habe ich eine Bestellung verstanden, die nicht vollständig beim Kunden ankam; die offizielle Formel und die genauen Zählregeln habe ich nie gekannt. Aus den Berichten habe ich diese Zahlen: Im April 2025 lag Incomplete bei 1,18 % bei einem Ziel von 0,8 %, in einem Bericht vom Juni 2025 bei 0,63 % mit 13 Fällen. Welche Maßnahmen die Veränderung bewirkt haben, sagen sie nicht, deshalb verbuche ich sie nicht als Ergebnis meiner Arbeit. Auf welchem Weg und in welchem System die einzelnen Fälle erfasst wurden und welches Problem am häufigsten vorkam, kann ich ebenfalls nicht sagen.
 
 ## Was wir im Lager fanden
 
@@ -81,7 +79,7 @@ Was ich heute empfehlen würde, ohne es selbst eingeführt zu haben, ist eine kl
 4. **Fehlt eine Tasche, stoppt der Prozess** für dieses Problem, und der Team Leader wird informiert.
 5. **Jeder Fehlbestand, der vor der Abfahrt entdeckt wird, wird erfasst**, mit seiner Ursache, sofern sie bekannt ist.
 
-Den fünften Punkt vergisst man am leichtesten. Ein Fehlbestand, der vor der Abfahrt gefunden und behoben wird, taucht im Incomplete-Bericht nie auf. Für den Kunden ist das gut. Wird er aber nirgends festgehalten, lernt der Prozess nichts daraus, und morgen muss jemand anderes denselben Fehlbestand wieder finden, mit etwas Glück.
+Den fünften Punkt vergisst man am leichtesten. Ein Fehlbestand, der vor der Abfahrt gefunden und behoben wird, taucht im Incomplete-Bericht nie auf. Für den Kunden ist das gut. Wird er aber nirgends festgehalten, lernt der Prozess nichts daraus, und morgen findet jemand anderes denselben Fehlbestand wieder, mit etwas Glück.
 
 Die [Vollständigkeitskontrolle](/de/tools/incomplete-control/) erfasst jeden Fall mit dem Prozessschritt, in dem er entstanden ist, und dem Grund, und zeigt, wo die meisten Fälle entstehen. Die Liste unten können Sie abhaken und für die Schicht kopieren.
 

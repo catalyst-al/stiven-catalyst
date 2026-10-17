@@ -35,7 +35,7 @@ You can have two shifts that are each very good on their own. The first may have
 
 A problem that does not make it into the handover does not stop existing. It just becomes the problem of someone who does not yet know it exists.
 
-I state this as a principle drawn from hotel work, where I have seen open issues, technical problems, requests that needed follow-up and operational differences that had to pass to the next shift. It does not rest on one documented case in which a missing piece of information caused a particular consequence.
+I hold this as a principle from hotel work, where I have watched open issues, technical problems, requests that needed follow-up and operational differences pass to the next shift. I cannot point to a single documented case in which a missing piece of information had a particular consequence.
 
 ## From a loose note to the current state
 
@@ -77,7 +77,7 @@ The information has to be clear enough that the other person does not need to in
 
 A note like “problem with the room” falls short. The handover has to make clear what kind of problem it is, what state it is in and whether there is still something to follow up, without adding unnecessary information.
 
-I have no fixed rule of always adding a verbal handover as well. What the way I have built the reporting does make clear is that the document has to be usable by the person who receives it, not merely proof that the handover happened.
+I have no fixed rule of always adding a verbal handover as well. What the way I have built the reporting does make clear is that the document has to be something the person who receives it can work from. Proof that the handover happened is not enough.
 
 ## Two moments that mirror each other
 
@@ -97,6 +97,6 @@ The figures and the operational state give a snapshot of the moment. Open points
 
 No tool fully replaces the human context. A system can record that a point is open, who has to follow it up and by when, but it cannot by itself guarantee that the person taking over the shift has understood why it matters.
 
-That is why, for me, a handover is a transfer of responsibility and not just of information. This is exactly where many organisations go wrong.
+That is why, for me, a handover passes on responsibility as well as information, and this is exactly where many organisations go wrong.
 
 If the information does not cross the line between two shifts, the good work of the first shift no longer belongs to the organisation. It stays only in the head of the person who has just gone home.

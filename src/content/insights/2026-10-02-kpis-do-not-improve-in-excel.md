@@ -51,7 +51,7 @@ The dashboard said “incomplete delivery”. The floor raised a different quest
 
 {diagram}
 
-The table can tell you: incomplete = 1. It cannot tell you what may have happened physically: the bag was prepared and entered the process, was perhaps even scanned, and then went into the wrong trolley or onto the wrong route. In Excel, this ends up as a number. On the ramp, it is a physical object in the wrong place, which is why the real cause is not always on the dashboard.
+The table can tell you: incomplete = 1. It cannot tell you what may have happened physically: the bag was prepared and entered the process, was perhaps even scanned, and then went into the wrong trolley or onto the wrong route. In Excel, a mistake is a number. On the ramp, it has an address, and that address does not always make it onto the dashboard.
 
 When I wanted to understand an operational problem, I left the table and went where the process was happening, which mostly meant the ramp and the loading area.
 
@@ -69,8 +69,6 @@ What I learned is that a single version is not enough, neither the table's nor o
 
 And what you see has to be written down, otherwise tomorrow it is only a memory. I wrote structured daily reports for the operation, adding each case in the same structure as the one before. Specific cases went into written operational communication, with a description of the incident and its cause. Photos and screenshots documented real situations when they were needed: traffic or parking on the road, and physical problems on the ramp such as disorganised trolleys, boxes or trolleys in the wrong place, open gates or a badly organised loading area.
 
-Over time the checks became much more structured: each trolley matched to its route, checks of dry, chilled and frozen, ramp audits, analysis with Pareto and 5 Why. Pre-scanning and final completeness checks were recommendations, not measures I can say were put in place. Later I also worked with more organised structures, in which every case carried the incident, the action, the cause and the KPI follow-up. All of it grew out of what could be seen on the ramp.
+Over time the checks became much more structured: each trolley matched to its route, checks of dry, chilled and frozen, ramp audits, analysis with Pareto and 5 Why. Pre-scanning and final completeness checks I recommended; I cannot say they were put in place. Later I also worked with more organised structures, in which every case carried the incident, the action, the cause and the KPI follow-up. All of it grew out of what could be seen on the ramp.
 
 The table still has its value: without it you would not even know you had to go to the ramp. But the table is the starting point, not the answer. Treat the number as the answer, and you punish the driver for a bag that was never in his trolley.
-
-In Excel, a mistake is a number. On the ramp, it has an address.

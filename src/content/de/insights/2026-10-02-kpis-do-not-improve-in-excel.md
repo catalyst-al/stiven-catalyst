@@ -42,7 +42,7 @@ Das Dashboard sagte „incomplete delivery“. An der Rampe stellte sich eine an
 
 {diagram}
 
-Die Tabelle kann Ihnen sagen: incomplete = 1. Sie kann Ihnen nicht sagen, was physisch passiert sein könnte: Die Tasche wurde vorbereitet, kam in den Prozess, wurde vielleicht sogar gescannt und landete dann im falschen Wagen oder auf der falschen Tour. In Excel wird daraus eine Zahl. An der Rampe ist es ein Gegenstand am falschen Ort, und deshalb steht die eigentliche Ursache nicht immer im Dashboard.
+Die Tabelle kann Ihnen sagen: incomplete = 1. Sie kann Ihnen nicht sagen, was physisch passiert sein könnte: Die Tasche wurde vorbereitet, kam in den Prozess, wurde vielleicht sogar gescannt und landete dann im falschen Wagen oder auf der falschen Tour. In Excel ist ein Fehler eine Zahl. An der Rampe hat er eine Adresse, und die taucht im Dashboard nicht immer auf.
 
 Wenn ich ein operatives Problem verstehen wollte, ließ ich die Tabelle liegen und ging dorthin, wo der Prozess stattfand, meist also an die Rampe und in den Ladebereich.
 
@@ -50,7 +50,7 @@ Dort sah man, was es in Excel nicht gibt: ob die Wagen nach Touren sortiert oder
 
 Für Kühl- und Tiefkühlware galten eigene Regeln. Kühlware musste im Kühlbereich gescannt werden, Tiefkühlware in ihrem eigenen Bereich. Fehlte eine Tasche, musste das gemeldet werden, und der Wagen durfte nicht hinausgehen, als wäre alles in Ordnung. Eine solche Regel wirkt auf dem Papier klein. An der Rampe entscheidet sie darüber, ob ein Problem rechtzeitig erkannt wird oder ein Kunde eine unvollständige Bestellung erhält.
 
-Wir hatten auch Rampen-Audits und direkte Kontrollen des Prozesses. Aber an der Rampe schaut man nicht nur zu. Man rekonstruiert, was passiert ist.
+Wir hatten auch Rampen-Audits und direkte Kontrollen des Prozesses. An der Rampe schaut man aber nicht nur zu, man rekonstruiert, was passiert ist.
 
 Fehlte eine Tasche, waren die Fragen einfach. Wo wurde sie zuletzt gesehen? War sie im Wagen? War sie gescannt? Fehlte schon vor der Abfahrt etwas? Wer hat das Problem bemerkt? Stimmten Tour und Wagen? Gab es Wartezeiten oder ein Problem beim Beladen?
 
@@ -60,8 +60,6 @@ Gelernt habe ich daraus, dass eine einzige Version nicht reicht, weder die der T
 
 Und was man sieht, muss festgehalten werden, sonst ist es morgen nur eine Erinnerung. Für den Betrieb schrieb ich strukturierte Tagesberichte, in die jeder Fall in derselben Struktur eingetragen wurde wie der vorige. Einzelne Fälle liefen über schriftliche operative Kommunikation, mit einer Beschreibung des Vorfalls und seiner Ursache. Fotos und Screenshots dokumentierten bei Bedarf reale Situationen: Verkehr oder Parken auf der Straße, aber auch physische Probleme an der Rampe wie unordentliche Wagen, Kisten oder Wagen am falschen Platz, offene Tore oder einen schlecht organisierten Ladebereich.
 
-Mit der Zeit wurden die Kontrollen deutlich strukturierter: Abgleich jedes Wagens mit seiner Tour, Kontrollen von Trocken-, Kühl- und Tiefkühlware, Rampen-Audits, Analysen mit Pareto und 5 Why. Pre-Scan und abschließende Vollständigkeitskontrollen waren Empfehlungen, keine Maßnahmen, von denen ich sagen kann, dass sie umgesetzt wurden. Später arbeitete ich auch mit stärker organisierten Strukturen, in denen zu jedem Fall Vorfall, Maßnahme, Ursache und KPI-Nachverfolgung gehörten. All das ist aus dem entstanden, was man an der Rampe sehen konnte.
+Mit der Zeit wurden die Kontrollen deutlich strukturierter: Abgleich jedes Wagens mit seiner Tour, Kontrollen von Trocken-, Kühl- und Tiefkühlware, Rampen-Audits, Analysen mit Pareto und 5 Why. Pre-Scan und abschließende Vollständigkeitskontrollen habe ich empfohlen; ob sie umgesetzt wurden, kann ich nicht sagen. Später arbeitete ich auch mit stärker organisierten Strukturen, in denen zu jedem Fall Vorfall, Maßnahme, Ursache und KPI-Nachverfolgung gehörten. All das ist aus dem entstanden, was man an der Rampe sehen konnte.
 
 Wertlos ist die Tabelle trotzdem nicht: Ohne sie wüssten Sie nicht einmal, dass Sie an die Rampe gehen müssen. Aber die Tabelle ist der Ausgangspunkt, nicht die Antwort. Wer die Zahl für die Antwort hält, bestraft den Fahrer für eine Tasche, die nie in seinem Wagen war.
-
-In Excel ist ein Fehler eine Zahl. An der Rampe hat er eine Adresse.

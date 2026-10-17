@@ -33,7 +33,7 @@ firstMove:
 
 Als ich mit Front Desk Control anfing, fehlte kein Dokument. Mein Problem war, darin während der Schicht zu finden, was ich brauchte.
 
-Es ist der konkreteste Fall dieser Reihe: ein echtes Projekt, Schritt für Schritt entwickelt, das jeder öffnen und prüfen kann. Es zeigt eine Art, Information zu ordnen. Was es für die Einarbeitungszeit oder für Fehler bewirkt hat, wurde nicht gemessen.
+Es ist der konkreteste Fall dieser Reihe: ein echtes Projekt, Schritt für Schritt entwickelt, das jeder öffnen und prüfen kann. Es zeigt eine Art, Information zu ordnen.
 
 ## Was es ist
 
@@ -57,7 +57,7 @@ Ich wollte mir nicht merken müssen, wo jedes Dokument liegt. Ich wollte wissen,
 
 Statt ein langes Handbuch zu schreiben, das man von vorn bis hinten liest, habe ich das Werkzeug nach der Arbeit geordnet, die zu erledigen war, mit eigenen Bereichen für Front Office und Night Audit: Anleitungen, Suche, Checklisten und Bilder, die die Schritte erklären.
 
-Eine der wichtigsten Entscheidungen war, dass man sich den Namen des Originaldokuments nicht merken muss, um eine Antwort zu finden. Wer gerade ein Verfahren ausführt, sollte nach dem Verfahren suchen können, statt sich durch Ordner zu klicken, bis er das richtige PDF findet.
+Eine der wichtigsten Entscheidungen war, dass man sich den Namen des Originaldokuments nicht merken muss, um eine Antwort zu finden. Wer gerade ein Verfahren ausführt, sollte nach dem Verfahren selbst suchen können, ohne sich auf der Suche nach dem richtigen PDF durch Ordner zu klicken.
 
 **Nach dem Verfahren suchen, nicht nach dem Dokument.**
 
@@ -71,11 +71,11 @@ Die öffentliche Version durfte keine echten Gästedaten enthalten, keine Reserv
 
 ## Was ich heute anders machen würde
 
-Belegt ist nur meine eigene Nutzung, während ich das Werkzeug gebaut und dabei gelernt habe. Es hat mir geholfen, die Information in eine klarere Struktur zu bringen. Vielleicht nützt es auch jemandem in der Einarbeitung; das ist eine Möglichkeit, kein Ergebnis, und dass die Abteilung es übernommen hätte, kann ich nicht sagen.
+Belegt ist nur meine eigene Nutzung, während ich das Werkzeug gebaut und dabei gelernt habe; was es für die Einarbeitungszeit oder für Fehler bewirkt hat, wurde nicht gemessen. Es hat mir geholfen, die Information in eine klarere Struktur zu bringen. Vielleicht nützt es auch jemandem in der Einarbeitung, aber das bleibt eine Möglichkeit, und dass die Abteilung es übernommen hätte, kann ich nicht sagen.
 
 Heute würde ich noch früher mit der Struktur der Information beginnen, bevor ich mich um das Aussehen der Seite kümmere. Ich würde zuerst festlegen, welche Fragen in einer Schicht am häufigsten auftauchen und welche Verfahren am wichtigsten sind, und dann die Antworten um diese Bedürfnisse herum bauen.
 
-Außerdem würde ich drei Kategorien klarer trennen. Das ist eine Verbesserung, die ich heute empfehlen würde, keine Funktion, die das Projekt schon vollständig hat:
+Außerdem würde ich drei Kategorien klarer trennen. Das empfehle ich heute; vollständig umgesetzt ist es im Projekt nicht:
 
 - **Bestätigt:** Das Verfahren ist geprüft und dokumentiert.
 - **In Prüfung:** Das Material ist da, muss aber in der Praxis geprüft werden.
@@ -89,7 +89,7 @@ Bei der Entwicklung habe ich verstanden, dass die größte Herausforderung darin
 
 Dafür müssen Sie keine Anwendung bauen. Die Methode funktioniert genauso für ein einzelnes Dokument, eine Intranetseite oder eine Tabelle. Fünf Schritte:
 
-1. **Die Arbeit bestimmen.** Welchen Prozess wollen Sie leichter machen? Fangen Sie mit einem an, nicht mit allen.
+1. **Die Arbeit bestimmen.** Welchen Prozess wollen Sie leichter machen? Fangen Sie mit einem an.
 2. **Die Quellen sammeln.** Wo liegt die Information heute? Checklisten, Dokumente, Videos, Notizen, Kollegen.
 3. **Einen klaren Weg bauen.** Wie kann jemand das Verfahren finden und ihm folgen, ohne den Namen des Originaldokuments zu kennen?
 4. **Information prüfen und schützen.** Was ist bestätigt, was ist noch in Prüfung, und was muss anonymisiert werden?

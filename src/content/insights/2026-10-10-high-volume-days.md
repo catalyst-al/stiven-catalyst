@@ -35,7 +35,7 @@ firstMove:
 
 Some days in last mile, demand ran higher than the forecast. Drivers had to be called in at short notice, some arrived late, and some, still in their ramp-up phase, were not yet fully used to the SOPs. All of it landed on how the loading was organised and on the departure schedule. That is how my reports from last mile record it, in June 2025.
 
-The reports do not give the date of a particular day, the total number of orders or the exact departure delays. Nor were these necessarily holidays: they were real situations of operational pressure, not a confirmed season. There was operational planning of drivers, vehicles and departures, but I know of no formal peak plan with capacity levels and special procedures, and I cannot say which standard gave way first when the volume rose. What those days did show me is something an ordinary day does not.
+The reports give no date for a particular day, no total of orders and no exact departure delays, and the days were not necessarily holidays: they were real situations of operational pressure, with no confirmed season behind them. What they showed me is something an ordinary day does not.
 
 ## Where the pressure landed
 
@@ -55,7 +55,7 @@ None of these problems is new. The same ones show up on an ordinary day. Pressur
 
 On days like that, the first question is usually: how many drivers do we have?
 
-But the sentence that has stayed with me from those reports is a different one: some drivers in ramp-up were not yet fully used to the SOPs. They were there. They were counted. They could not yet do the work the way the others did.
+The sentence that has stayed with me from those reports is a different one: some drivers in ramp-up were not yet fully used to the SOPs. They were there. They were counted. They could not yet do the work the way the others did.
 
 **Capacity is not just the number of people you have available. It is the number of people who can do the work to the standard.**
 
@@ -67,13 +67,13 @@ In [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-
 
 When demand rises, you find out how well the operation has been prepared, how clearly responsibilities have been set and how able people are to apply the standard.
 
-In [6S without a poster](/insights/6s-without-a-poster/) I wrote that order is proved on the hard day. The same holds for the plan. A plan that only works when everything goes as forecast is a description of an ordinary day, not a plan for the hard one.
+In [6S without a poster](/insights/6s-without-a-poster/) I wrote that order is proved on the hard day. The same holds for the plan. A plan that only works when everything goes as forecast describes an ordinary day.
 
 ## Before the big day
 
-To a manager facing the first big day of the season, I would say today: do not wait for the volume to rise to find out whether the team is ready. I would recommend five things, as advice for today rather than a plan I claim to have carried out in full:
+To a manager facing the first big day of the season, I would say today: do not wait for the volume to rise to find out whether the team is ready. There was operational planning of drivers, vehicles and departures back then, but I know of no formal peak plan with capacity levels and special procedures, and I cannot say which standard gave way first when the volume rose. So the five things I would recommend are advice for today, and I do not claim to have carried them out in full:
 
-1. **Check real capacity**, not just the number of drivers planned.
+1. **Check real capacity**, beyond the number of drivers planned.
 2. **Verify that new people have been trained** for the process.
 3. **Decide which standards must not be broken**, above all safety and the critical checks.
 4. **Have a plan** for absences, delays and problems with vehicles.

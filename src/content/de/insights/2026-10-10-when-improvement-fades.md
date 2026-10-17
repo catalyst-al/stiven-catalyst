@@ -40,7 +40,7 @@ diagram: improvement-paths
 
 Könnte ich mir an meinem ersten Tag als Team Leader einen einzigen Satz mitgeben, wäre es dieser: Wenn du ein Problem heute gelöst hast, frag dich, ob es morgen auch ohne dich gelöst würde. Mit derselben Frage schließt diese Reihe.
 
-Auf der letzten Meile habe ich mit Standards für Verladen, Scannen, die Organisation der Rampe und Sicherheit gearbeitet. Dabei bin ich auf Probleme gestoßen: mit Abläufen, die nicht eingehalten wurden, und mit Fahrern, die mit den Standards noch nicht ganz vertraut waren. Im Hotel habe ich die SOPs für Front Office und Night Audit organisiert. Was mir fehlt, ist ausgerechnet der Fall, den der Titel verspricht: eine dokumentierte Verbesserung von mir, die einige Monate hielt und dann aufgegeben wurde. Für einen Essay über verblassende Verbesserung ist diese Lücke kein Detail. Sie ist das Thema.
+Auf der letzten Meile habe ich mit Standards für Verladen, Scannen, die Organisation der Rampe und Sicherheit gearbeitet. Dabei bin ich auf Probleme gestoßen: mit Abläufen, die nicht eingehalten wurden, und mit Fahrern, die mit den Standards noch nicht ganz vertraut waren. Im Hotel habe ich die SOPs für Front Office und Night Audit organisiert. Was mir fehlt, ist ausgerechnet der Fall, den der Titel verspricht: eine dokumentierte Verbesserung von mir, die einige Monate hielt und dann aufgegeben wurde. In einem Essay über verblassende Verbesserungen gehört diese Lücke in die Mitte.
 
 ## Die Frage, die ich nicht beantworten kann
 
@@ -54,7 +54,7 @@ Genau das würde ich heute am liebsten verstehen: ob die Ergebnisse einer Führu
 
 ## Warum eine Verbesserung verblasst
 
-Was folgt, ist eine Meinung, kein belegter Fall. Ich glaube, eine Verbesserung ist gefährdet, wenn sie allein an der Person hängt, die sie angestoßen hat, statt in die tägliche Arbeitsweise einzugehen.
+Einen belegten Fall habe ich dafür nicht, aber ich glaube, eine Verbesserung ist gefährdet, wenn sie allein an der Person hängt, die sie angestoßen hat, statt in die tägliche Arbeitsweise einzugehen.
 
 Personalwechsel machen dieses Risiko sichtbarer. Auf der letzten Meile hatten wir kurzfristig eingesprungene Fahrer und Fahrer in der Ramp-up-Phase, die mit den SOPs noch nicht vertraut waren. Das machte es schwer, die Einhaltung auf demselben Niveau zu halten.
 
@@ -94,6 +94,6 @@ Vor allem aber würde ich mir den Satz mitgeben, mit dem dieser Essay beginnt.
 
 Sie können eine Kennzahl verbessern, eine Rampe organisieren, ein Verfahren schreiben oder ein schwieriges Problem lösen. Ein besseres Ergebnis heißt, dass die Verbesserung die erste Prüfung bestanden hat. Die weiteren folgen: ob sich das Ergebnis halten lässt, ob neue Leute demselben Standard folgen können und ob der Prozess ohne Ihr ständiges Eingreifen läuft.
 
-**Eine gute Führungskraft kann einen Arbeitstag verbessern. Ein gutes System hält die Verbesserung auch an dem Tag am Leben, an dem sie nicht da ist.**
+**Eine gute Führungskraft kann einen Arbeitstag verbessern. Ein gutes System hält die Verbesserung auch an dem Tag am Leben, an dem die Führungskraft nicht da ist.**
 
 Das Blatt unten ist für eine Verbesserung gedacht, die Sie selbst eingeführt haben: Füllen Sie es aus und kopieren Sie es. Die letzte Frage ist die wichtigste.

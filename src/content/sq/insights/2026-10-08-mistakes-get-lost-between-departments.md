@@ -32,8 +32,6 @@ Një departament mund ta bëjë punën e vet shumë mirë, dhe operacioni prapë
 
 Brenda një ekipi zakonisht dihet kush bën çfarë. Ka një përgjegjës, një standard, një ritëm. Por puna rrallë mbetet brenda një ekipi të vetëm. Ajo kalon nga recepsioni te mirëmbajtja, nga përgatitja te rampa, nga rampa te shoferi, nga turni i natës te turni i mëngjesit. Pikërisht në këto kalime, aty ku puna ndërron duar, humbasin shumë gabime.
 
-Ajo që vijon vjen nga raste konkrete në kalimet e punës në hotel dhe në last mile, si dhe nga SOP-të, listat e kontrollit, udhëzimet dhe rregullat e njoftimit me të cilat kam punuar. Tabloja e një gabimi që në fund s'ka fare zot është një model i përgjithshëm, jo një rast i dokumentuar.
-
 ## Në hotel: kush e merr, kush e zgjidh, kush e mbyll
 
 Në hotel, kalimi më i dukshëm për mua ishte mes recepsionit, shërbimit të katit dhe mirëmbajtjes.
@@ -46,7 +44,7 @@ Në raste të tilla dalloj tri përgjegjësi të ndryshme:
 - **kush e zgjidh problemin**;
 - **kush kontrollon që çështja është mbyllur.**
 
-Shpesh këta janë tre njerëz të ndryshëm. Dhe nëse për të tretën nuk përgjigjet askush, problemi mund t'i jetë “kaluar” departamentit të duhur, por mysafiri nuk e di nëse është zgjidhur. As ne.
+Shpesh këta janë tre njerëz të ndryshëm. Dhe nëse për të tretën nuk përgjigjet askush (këtu flas në përgjithësi; nuk kam një rast të dokumentuar ku gabimi mbeti fare pa zot), problemi mund t'i jetë “kaluar” departamentit të duhur, por mysafiri nuk e di nëse është zgjidhur. As ne.
 
 Një kalim tjetër i rëndësishëm ishte ai mes turneve. Night Audit merrte çështje të hapura nga turni i mëparshëm dhe duhej t'ia kalonte turnit të mëngjesit ato që nuk ishin përfunduar. Për këtë kam shkruar më gjatë te [eseja për dorëzimin e turnit](/sq/insights/why-the-handover-is-underrated/).
 
@@ -76,7 +74,7 @@ Prandaj gabimet mes departamenteve kapen kaq vështirë. Parë nga brenda, secil
 
 ## Statusi, përgjegjësia, konfirmimi
 
-Në hotel, një dorëzim i strukturuar i turnit kishte shumë rëndësi. Nëse një problem nuk zgjidhej gjatë natës, duhej të mbetej i dokumentuar dhe i dukshëm për turnin tjetër. Prandaj doja që shënimet të tregonin çfarë ishte ende e hapur, e jo vetëm të përmblidhnin ngjarjet.
+Në hotel, një dorëzim i strukturuar i turnit kishte shumë rëndësi. Nëse një problem nuk zgjidhej gjatë natës, duhej të mbetej i dokumentuar dhe i dukshëm për turnin tjetër. Prandaj doja që shënimet të tregonin, krahas asaj që kishte ndodhur, edhe çfarë ishte ende e hapur.
 
 Në last mile ndihmonin procedurat e qarta të njoftimit, kontaktet me Team Leader-at dhe koordinimi mes Last Mile, Outbound dhe DSP-ve.
 

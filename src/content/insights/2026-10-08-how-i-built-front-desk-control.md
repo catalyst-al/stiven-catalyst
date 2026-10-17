@@ -40,7 +40,7 @@ firstMove:
 
 When I started Front Desk Control, no document was missing. The trouble was finding what I needed in them during a shift.
 
-This is the most concrete case in the series: a real project, developed step by step, that anyone can open and check. What it shows is a way of organising information. What it has done for training time or mistakes has not been measured.
+This is the most concrete case in the series: a real project, developed step by step, that anyone can open and check. What it shows is a way of organising information.
 
 ## What it is
 
@@ -64,7 +64,7 @@ I did not want to remember where every document was. I wanted to know where to g
 
 Instead of writing a long manual to be read from start to finish, I organised the tool around the work that had to be done, with dedicated parts for Front Office and Night Audit: instructions, search, checklists and images that explain the steps.
 
-One of the most important decisions was that the user should not need to remember the name of the original document to find an answer. If you are carrying out a procedure, you should be able to search for the procedure, not dig through folders until you find the right PDF.
+One of the most important decisions was that the user should not need to remember the name of the original document to find an answer. If you are carrying out a procedure, you should be able to search for the procedure itself, without digging through folders for the right PDF.
 
 **Search for the procedure, not the document.**
 
@@ -78,11 +78,11 @@ The public version could not include real guest data, reservations, payment info
 
 ## What I would do differently today
 
-The only use I can confirm is my own, while I was building the tool and learning. It helped me bring the information into a clearer structure. It may also be useful to someone in training; that is a possibility, not a result, and I cannot say the department adopted it.
+The only use I can confirm is my own, while I was building the tool and learning; what it has done for training time or mistakes has not been measured. It helped me bring the information into a clearer structure. It may also be useful to someone in training, but that remains a possibility, and I cannot say the department adopted it.
 
 Today I would start even earlier with the structure of the information, before working on the look of the page. I would first define which questions come up most often during a shift and which procedures matter most, and then build the answers around those needs.
 
-I would also separate three categories more clearly. This is a change I would recommend today, not a feature the project fully has:
+I would also separate three categories more clearly. This is a recommendation for today; the project does not fully have it:
 
 - **Confirmed:** the procedure has been checked and documented.
 - **Being verified:** the material exists, but has to be checked in practice.
@@ -96,7 +96,7 @@ While building it I understood that the most important challenge was organising 
 
 You do not have to build an application for that. The method works just as well for a single document, an intranet page or a spreadsheet. Five steps:
 
-1. **Identify the work.** Which process will you make easier? Start with one, not all of them.
+1. **Identify the work.** Which process will you make easier? Start with one.
 2. **Gather the sources.** Where is the information today? Checklists, documents, videos, notes, colleagues.
 3. **Build a clear path.** How can someone find and follow the procedure without knowing the name of the original document?
 4. **Verify and protect the information.** What is confirmed, what is still being verified, and what has to be anonymised?

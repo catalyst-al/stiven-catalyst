@@ -46,17 +46,17 @@ Në fund vjen dorëzimi. Një turn nate nuk mbaron kur mbyllet sistemi. Mbaron k
 
 Shumica janë gjëra të vogla, aspak spektakolare, që krijojnë problem më vonë nëse nuk i kap njeri.
 
-Kam hasur rezervime që nuk përputhen plotësisht me atë që ndodhi vërtet dhe statuse dhomash që duhen verifikuar. Ka dokumentacion të papërfunduar, fatura apo postime që duhen kontrolluar dhe informacione që nuk kaluan siç duhet nga një turn te tjetri. Pastaj janë çështjet që askush nuk i harroi me qëllim, por që mbetën pezull sepse gjatë ditës kishte shumë punë.
+Kam hasur rezervime që nuk përputhen plotësisht me atë që ndodhi vërtet dhe statuse dhomash që duhen verifikuar. Ka dokumentacion të papërfunduar, fatura apo regjistrime kontabël që duhen kontrolluar dhe informacione që nuk kaluan siç duhet nga një turn te tjetri. Pastaj janë çështjet që askush nuk i harroi me qëllim, por që mbetën pezull sepse gjatë ditës kishte shumë punë.
 
 Nata i nxjerr në dritë këto gjëra sepse ndryshon ritmi. Para recepsionit fluksi i njerëzve bie, dhe arrin të shohësh më qartë çfarë fshihet pas procesit.
 
 Kjo punë më ka mësuar se shumë gabime kanë pak të bëjnë me aftësinë: ato lindin nga ndërprerjet, komunikimi i paplotë dhe fjalia “Do ta bëjmë më vonë.” Shpesh, “më vonë” është turni i natës.
 
-## No-show-t dhe pagesat
+## Mysafirët që nuk paraqiten dhe pagesat
 
 Që një rezervim ekziston në sistem nuk do të thotë vetvetiu se gjithçka pas tij është në rregull.
 
-No-show-t kanë rëndësi sepse ndikojnë në mënyrën si hoteli e mbyll ditën dhe si e njeh atë që ka ndodhur vërtet. Nëse nuk kontrollohen, rezervimet mund të mbeten me status të gabuar, mund të dalin mospërputhje në raportim ose problemet mund të shfaqen vetëm më vonë.
+Rezervimet e mysafirëve që nuk u paraqitën (no-show) kanë rëndësi sepse ndikojnë në mënyrën si hoteli e mbyll ditën dhe si e njeh atë që ka ndodhur vërtet. Nëse nuk kontrollohen, rezervimet mund të mbeten me status të gabuar, mund të dalin mospërputhje në raportim ose problemet mund të shfaqen vetëm më vonë.
 
 E njëjta gjë vlen për pagesat. Kontrolli nuk ka të bëjë vetëm me pyetjen nëse “ka para”: ai shikon nëse ajo që është regjistruar përputhet me atë që duhej regjistruar.
 
@@ -70,7 +70,7 @@ Në javët e para, natyrisht, vëmendja ime ishte kryesisht te lista: cili hap v
 
 Sot e shoh ndryshe. Pas pyetjes “A e bëra këtë hap?” vjen një e dytë: “A është vërtet në rregull ajo që ky hap duhet të kontrollojë?”
 
-Ky është ndryshim i madh. Një listë kontrolli mund të plotësohet mekanikisht, por një Night Audit i mirë kërkon të kuptosh si varen proceset nga njëri-tjetri. Nëse diçka më herët nuk është mbyllur siç duhet, nuk ka kuptim ta nxitosh procesin vetëm që lista të duket e përfunduar.
+Ky është ndryshim i madh. Një listë kontrolli mund të plotësohet mekanikisht, por një auditim i mirë i natës kërkon të kuptosh si varen proceset nga njëri-tjetri. Nëse diçka më herët nuk është mbyllur siç duhet, nuk ka kuptim ta nxitosh procesin vetëm që lista të duket e përfunduar.
 
 Kjo më ka bërë më të kujdesshëm edhe me dorëzimin e turnit. Nëse diçka mbetet e hapur, duhet të jetë e qartë pse dhe kush duhet ta çojë më tej.
 
@@ -78,7 +78,7 @@ Kjo më ka bërë më të kujdesshëm edhe me dorëzimin e turnit. Nëse diçka 
 
 Nata të detyron të marrësh vendime. Gjatë ditës ka më shumë departamente, më shumë drejtues dhe më shumë njerëz që mund t'i pyesësh. Natën shumë situata vijnë së pari te ti. Kjo nuk do të thotë se duhet t'i bësh të gjitha vetë.
 
-Për mua kufiri është mjaft i qartë. Nëse është një problem operacional që hyn në rolin tim, e analizoj dhe përpiqem ta zgjidh. Nëse një situatë kërkon vendim jashtë autoritetit tim, mbart rrezik financiar, prek sigurinë, mund të ketë pasoja serioze ose kërkon një miratim që nuk më takon ta jap, atëherë e eskaloj.
+Për mua kufiri është mjaft i qartë. Nëse është një problem operacional që hyn në rolin tim, e analizoj dhe përpiqem ta zgjidh. Nëse një situatë kërkon vendim jashtë autoritetit tim, mbart rrezik financiar, prek sigurinë, mund të ketë pasoja serioze ose kërkon një miratim që nuk më takon ta jap, atëherë ia përcjell më lart.
 
 Kam mësuar se përgjegjësia nuk është të marrësh çdo vendim. Përgjegjësia është të dish cilin vendim mund ta marrësh vetë dhe cilin nuk duhet ta marrësh.
 
@@ -90,10 +90,10 @@ Po të kisha pesë minuta me menaxherët e ditës, do t'u kërkoja ta lexonin ra
 
 Pesë gjërat që do të shihja çdo mëngjes:
 
-1. **Çfarë mbeti e pazgjidhur.** Jo vetëm çfarë ndodhi, por çfarë kërkon ende veprim.
+1. **Çfarë mbeti e pazgjidhur.** Përtej asaj që ndodhi: çfarë kërkon ende veprim.
 2. **Ku nuk përputheshin sistemi dhe realiteti.** Rezervime, statuse, dokumentacion apo çështje financiare që kërkuan ndërhyrje.
 3. **Cilat probleme përsëriten.** Një gabim një herë mund të jetë rastësi. I njëjti gabim disa herë është proces.
 4. **Çfarë preku mysafirin ose operacionin.** Aty shihet nëse një problem i brendshëm po fillon të bëhet problem i klientit.
 5. **Çfarë duhet të dijë turni tjetër para se të fillojë puna.** Një raport i mirë nuk duhet vetëm të përshkruajë të kaluarën; duhet ta bëjë më të sigurt ditën që po nis.
 
-Kjo vlen për çdo biznes, jo vetëm për hotelin. Dhe ndonjëherë ajo që një biznes ia fsheh vetes gjatë ditës del shumë qartë natën.
+Kjo vlen për çdo biznes. Dhe ndonjëherë ajo që një biznes ia fsheh vetes gjatë ditës del shumë qartë natën.

@@ -46,17 +46,19 @@ It starts with the real work. First I want to understand what result the process
 
 I try to remove everything the person does not need at the moment they are working. A document full of theory that does not help you when you have several things to solve at once is not, for me, a good SOP.
 
-Order matters too. The person has to understand not only what to do, but what must have been checked before they carry on.
+Order matters too. The person has to know what to do next and what must already have been checked before they carry on.
 
 Before I consider a process finished, I compare it with the real work once more and correct it wherever the document and reality do not match.
 
 The principle I work by is simple: the SOP has to be understandable even to someone who does not carry the process in their head the way its author does. I have applied it without a formal step in which a set group of people tested every SOP before it was used.
 
+An SOP's author will always understand it, having written it. The best test of an SOP, in my view, is whether someone else can use it under pressure and get the same result.
+
 ## The problem I have seen most often
 
-I have no clear case of an SOP I created and put in place that then failed in practice. What I have seen most often is something else: documents that exist but, in the real work, are too long, scattered across several places, or no help to the employee at the moment they need the information.
+I have no clear case of an SOP I created and put in place that then failed in practice. What I have met far more often are documents that exist but, in the real work, are too long, scattered across several places, or no help to the employee at the moment they need the information.
 
-That is one of the reasons I later began to think more about how a procedure is presented, not only about what is written in it.
+That is one of the reasons I later began to think more about how a procedure is presented, as well as what is written in it.
 
 ## How an SOP stays alive
 
@@ -92,8 +94,6 @@ So I gathered these processes into one digital structure on a single page, built
 
 The quality of the material mattered as well. I reviewed the images and screenshots used in the instructions and kept only those that clearly show the same step of the process and are actually readable.
 
-What interests me about Front Desk Control is less the website than the problem it addresses, one I have seen myself in operations: the knowledge exists, but it is not always where the employee needs it.
+What interests me about Front Desk Control is the problem it addresses, one I have seen myself in operations: the knowledge exists, but it is not always where the employee needs it.
 
 This is where the meaning of an SOP changes. A document tells you how the work should be done. A good SOP helps you do the work correctly at exactly the moment you need it.
-
-An SOP's author will always understand it, having written it. The best test of an SOP, in my view, is whether someone else can use it under pressure and get the same result.

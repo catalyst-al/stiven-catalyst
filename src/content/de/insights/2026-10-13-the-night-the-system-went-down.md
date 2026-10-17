@@ -39,9 +39,9 @@ corrections:
 
 In meiner ersten Einarbeitungsnacht im Hotel wollte ich die Nachtprozesse lernen. Kurz nach Mitternacht fiel das Hotelsystem wegen eines Updates aus, und zwar für etwa fünf Stunden, bis gegen Morgen.
 
-Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei. Berichten kann ich, was man in der Einarbeitung sehen konnte: dass die praktische Einarbeitung nicht wie vorgesehen stattfinden konnte und dass mir der Kollege, der mich einarbeitete, erklärte, der praktische Teil gehe in der nächsten Schicht weiter. Ob es ein offizielles Ausweichverfahren gab, womit das Team statt des Systems arbeitete, wie die Abteilungen informiert wurden und was geprüft wurde, als das System zurückkam, habe ich nicht gesehen.
+Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei. Berichten kann ich, was man in der Einarbeitung sehen konnte: dass die praktische Einarbeitung nicht wie vorgesehen stattfinden konnte und dass mir der Kollege, der mich einarbeitete, erklärte, der praktische Teil gehe in der nächsten Schicht weiter. Darüber hinaus habe ich wenig gesehen, und ich sage es jeweils an der Stelle, an der es zählt.
 
-Ein Unterschied ist von Anfang an wichtig. Es war eine Unterbrechung wegen eines Updates, und ich habe keinen Beleg für einen unerwarteten Defekt. Der Titel sagt „ausfiel“, doch was in dieser Nacht geschah, war gewöhnlicher als eine Panne und gerade deshalb lehrreicher.
+Es war eine Unterbrechung wegen eines Updates, und ich habe keinen Beleg für einen unerwarteten Defekt. Der Titel sagt „ausfiel“, doch was in dieser Nacht geschah, war gewöhnlicher als eine Panne und gerade deshalb lehrreicher.
 
 ## Fünf Stunden Warten
 

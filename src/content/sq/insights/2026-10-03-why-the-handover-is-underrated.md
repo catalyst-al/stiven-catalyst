@@ -29,7 +29,7 @@ Mund të kesh dy turne që, secili më vete, janë shumë të mirë. I pari mund
 
 Një problem që nuk hyn në dorëzimin e turnit nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që ende nuk e di se ekziston.
 
-Këtë e them si parim të nxjerrë nga puna në hotel, ku kam parë çështje të pambyllura, probleme teknike, kërkesa që duheshin ndjekur dhe mospërputhje operative që duhej të kalonin te turni tjetër. Ai nuk mbështetet në një rast të vetëm të dokumentuar, në të cilin një informacion që mungonte shkaktoi një pasojë të caktuar.
+Këtë e kam parim nga puna në hotel, ku kam parë si kalonin te turni tjetër çështje të pambyllura, probleme teknike, kërkesa që duheshin ndjekur dhe mospërputhje operative. Nuk kam në dorë asnjë rast të dokumentuar ku një informacion që mungonte të ketë sjellë një pasojë të caktuar.
 
 ## Nga shënimi i lirë te gjendja aktuale
 
@@ -71,7 +71,7 @@ Informacioni duhet të jetë aq i qartë sa personi tjetër të mos ketë nevoj�
 
 Një shënim si “problem me dhomën” nuk mjafton. Dorëzimi duhet ta bëjë të qartë çfarë lloj problemi është, në çfarë gjendjeje ndodhet dhe nëse ka ende diçka për t'u ndjekur, pa shtuar informacion të panevojshëm.
 
-Nuk kam rregull të prerë që çdo dorëzim ta shoqëroj gjithmonë edhe me gojë. Por mënyra si e kam ndërtuar raportimin e bën të qartë një gjë: dokumenti duhet t'i shërbejë personit që e merr, jo vetëm të provojë se dorëzimi u bë.
+Nuk kam rregull të prerë që çdo dorëzim ta shoqëroj gjithmonë edhe me gojë. Por mënyra si e kam ndërtuar raportimin e bën të qartë një gjë: dokumenti duhet t'i shërbejë personit që e merr. Nuk mjafton që të provojë se dorëzimi u bë.
 
 ## Dy momente që pasqyrojnë njëri-tjetrin
 
@@ -91,6 +91,6 @@ Shifrat dhe gjendja operative japin një fotografi të çastit. Pikat e hapura n
 
 Kontekstin njerëzor nuk e zëvendëson plotësisht asnjë mjet. Një sistem mund të regjistrojë se një pikë është e hapur, kush duhet ta ndjekë dhe deri kur, por nuk mund të garantojë vetë që personi që merr turnin e ka kuptuar pse ka rëndësi.
 
-Prandaj për mua dorëzimi i turnit është transferim përgjegjësie, jo thjesht informacioni. Pikërisht këtu shumë organizata gabojnë.
+Prandaj për mua me dorëzimin e turnit kalon përgjegjësia bashkë me informacionin, dhe pikërisht këtu shumë organizata gabojnë.
 
 Nëse informacioni nuk e kalon kufirin mes dy turneve, puna e mirë e turnit të parë nuk i përket më organizatës. Mbetet vetëm në kokën e personit që sapo shkoi në shtëpi.

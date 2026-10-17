@@ -45,13 +45,11 @@ diagram: handover-to-briefing
 
 You could hear that sentence in any briefing. It is accurate, and it may even matter. But if that number is all you say, and the shift starts with nobody knowing what to do differently, you have given information, not direction.
 
-This essay is about the few minutes before the work begins. The shift briefing is perhaps the cheapest management tool there is: it needs no system, no budget and no project, only someone who knows what to say and what to leave out.
-
-What follows comes from two places I have worked. In last mile, the daily morning stand-ups are documented: I know what they covered, though not who led each one or how long it lasted. In the hotel, what I knew was the handover between shifts more than a classic ten-minute briefing: a Front Office Daily Stand-Up and a handover sheet that linked the night, early and late shifts. The template at the end is what I would propose today; I cannot say for certain that I changed the briefing in this way as a Team Leader or Area Manager.
+The few minutes before the work begins hold perhaps the cheapest management tool there is. The shift briefing needs no system, no budget and no project, only someone who knows what to say and what to leave out. I have seen it from two sides, in last mile and in a hotel.
 
 ## Last mile: the numbers and their reasons
 
-The morning stand-ups were tied to the day's operation and to the KPIs. The topics included:
+In last mile, the daily morning stand-ups are documented: I know what they covered, though not who led each one or how long it lasted. They were tied to the day's operation and to the KPIs. The topics included:
 
 - Damage %, Incomplete %, Delay % and Loading Time;
 - the main reasons for delays;
@@ -67,7 +65,7 @@ So the stand-up was more than “how did yesterday go”: there were numbers, re
 
 The briefing earned its minutes when it connected to something people would meet straight away in the shift. If Delay was the problem, the percentage was only the start; you had to look at why it was happening. If the cause lay in loading, stacking, driver performance or a step in the process, the briefing gave the team one thing to watch during the work, and that was its value.
 
-A briefing makes sense when a KPI turns into a behaviour or an action the team can see. That is how I wanted the stand-up to work: KPIs, 5 Whys, Pareto, 5S and safety tied to their effect on the operation rather than treated as separate topics. It is the idea behind [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/), with ten minutes to do it in.
+A briefing makes sense when a KPI turns into a behaviour or an action the team can see. That is how I wanted the stand-up to work: KPIs, 5 Whys, Pareto, 5S and safety, each tied to its effect on the operation. It is the idea behind [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/), with ten minutes to do it in.
 
 ## Information or direction
 
@@ -82,7 +80,7 @@ The second version takes ten seconds longer, and it is the only one the team can
 
 ## The hotel: a night that never starts from zero
 
-In the hotel, the night shift began with what the Late Shift handed over and ended with what it passed on to the Morning Shift. The work never started from zero: there were open items, cases that needed follow-up, technical problems, guest issues, payments or operational matters that had to carry on.
+In the hotel, what I knew was the handover between shifts more than a classic ten-minute briefing: a Front Office Daily Stand-Up and a handover sheet that linked the night, early and late shifts. The night shift began with what the Late Shift handed over and ended with what it passed on to the Morning Shift. The work never started from zero: there were open items, cases that needed follow-up, technical problems, guest issues, payments or operational matters that had to carry on.
 
 The handover covered arrivals, complaints, billing and payment issues, VIPs, technical issues, special arrangements and follow-up tasks. The Front Office Daily Stand-Up sheet also recorded departures, occupancy, no-shows, open cases, room moves, traces and other operational matters.
 
@@ -108,10 +106,10 @@ That is why a good pre-shift briefing should begin where the handover ends:
 
 ## A ten-minute template
 
-This is the template I would propose: five questions, about two minutes each, used as the order of the conversation rather than as a form to fill in.
+This is the template I would propose today. I cannot say for certain that I changed the briefing in this way as a Team Leader or Area Manager. Five questions, about two minutes each, give the conversation its order; nobody fills in a form.
 
 **1. What are we inheriting?**
-The state from the previous shift or from yesterday: the open items and the cases waiting for follow-up. The source is the handover, not someone's memory.
+The state from the previous shift or from yesterday: the open items and the cases waiting for follow-up. The source is the written handover.
 
 **2. What has changed?**
 Only the changes that affect this shift: the volume, a process, a system, the team.
@@ -127,6 +125,6 @@ Every priority and every open item gets a name. A task without an owner is close
 
 **What does not belong in the briefing:** the full story of yesterday, numbers without reasons, and any discussion that needs more than a minute. Note those and take them after the briefing, with the people who need to be there.
 
-**How you know it worked:** after the briefing, ask one person from the team what today's two priorities are. If they cannot say, the briefing was information, not direction.
+**How you know it worked:** after the briefing, ask one person from the team what today's two priorities are. If they cannot say, the team got the information and missed the direction.
 
 Then watch the first hour of the shift. That is where a good briefing is measured: by what the team does differently, not by how much was said.

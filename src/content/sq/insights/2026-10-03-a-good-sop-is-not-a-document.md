@@ -29,9 +29,9 @@ Një SOP që vetëm lexohet mund të duket shumë profesionale: faqe të bukura,
 
 Këtë e kam parë si në logjistikë, ashtu edhe në hotel.
 
-Në logjistikë kam punuar për standardizimin e proceseve që lidhen me rrjedhën e turnit: ngarkimin, disiplinën në rampë, trajtimin e porosive problematike, kontrollin e dëmtimeve dhe të porosive të paplota, respektimin e proceseve të temperaturës dhe mënyrën si përshkallëzohen problemet gjatë operacionit. Ideja ishte gjithmonë e njëjta: kur ke shumë njerëz, shumë porosi dhe presion kohe, nuk mund të mbështetesh vetëm në kujtesë ose në një punonjës me përvojë që “e di si bëhet”.
+Në logjistikë kam punuar për standardizimin e proceseve që lidhen me rrjedhën e turnit: ngarkimin, disiplinën në rampë, trajtimin e porosive problematike, kontrollin e dëmtimeve dhe të porosive të paplota, respektimin e proceseve të temperaturës dhe mënyrën si përcillen më lart problemet gjatë operacionit. Ideja ishte gjithmonë e njëjta: kur ke shumë njerëz, shumë porosi dhe presion kohe, nuk mund të mbështetesh vetëm në kujtesë ose në një punonjës me përvojë që “e di si bëhet”.
 
-Në hotel kam punuar shumë më drejtpërdrejt me lista kontrolli dhe SOP për Front Office dhe Night Audit: kontrollin e rezervimeve dhe të statuseve, mbylljen e ditës, raportet, dorëzimin e turnit dhe proceset që duhen verifikuar para se puna të quhet e mbaruar.
+Në hotel kam punuar shumë më drejtpërdrejt me lista kontrolli dhe SOP për recepsionin (Front Office) dhe auditimin e natës (Night Audit): kontrollin e rezervimeve dhe të statuseve, mbylljen e ditës, raportet, dorëzimin e turnit dhe proceset që duhen verifikuar para se puna të quhet e mbaruar.
 
 ## Një SOP nuk fillon në Word
 
@@ -39,15 +39,17 @@ Fillon te puna reale. Së pari dua të kuptoj çfarë rezultati duhet të japë 
 
 Përpiqem të heq gjithçka që personit nuk i duhet në momentin kur punon. Një dokument plot teori, që nuk të ndihmon kur ke disa gjëra për të zgjidhur njëherësh, për mua nuk është SOP e mirë.
 
-Ka rëndësi edhe radha. Personi duhet të kuptojë jo vetëm çfarë duhet të bëjë, por edhe çfarë duhet të jetë kontrolluar para se të vazhdojë.
+Ka rëndësi edhe radha. Personi duhet ta dijë çfarë bën më pas dhe çfarë duhet të jetë kontrolluar tashmë para se të vazhdojë.
 
 Para se ta quaj një proces të mbaruar, e krahasoj edhe një herë me punën reale dhe e korrigjoj kudo ku dokumenti dhe realiteti nuk përputhen.
 
 Parimi që ndjek është i thjeshtë: SOP-ja duhet të jetë e kuptueshme edhe për dikë që nuk e ka procesin në kokë si autori i saj. E kam zbatuar pa një hap formal ku një grup i caktuar njerëzish ta testonte çdo SOP para se të përdorej.
 
+Kush e ka shkruar një SOP, e kupton gjithmonë. Sipas meje, testi më i mirë i një SOP-je është nëse dikush tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat.
+
 ## Problemi që kam parë më shpesh
 
-Nuk kam një rast të qartë kur mund të them se krijova një SOP, e futa në zbatim dhe ajo dështoi në praktikë. Më shpesh kam parë diçka tjetër: dokumente që ekzistojnë, por që në punën reale janë shumë të gjata, të shpërndara në disa vende ose nuk e ndihmojnë punonjësin pikërisht në momentin kur i duhet informacioni.
+Nuk kam një rast të qartë kur mund të them se krijova një SOP, e futa në zbatim dhe ajo dështoi në praktikë. Shumë më shpesh kam hasur dokumente që ekzistojnë, por që në punën reale janë shumë të gjata, të shpërndara në disa vende ose nuk e ndihmojnë punonjësin pikërisht në momentin kur i duhet informacioni.
 
 Kjo është një nga arsyet pse më vonë nisa të mendoj më shumë për mënyrën si paraqitet një procedurë, jo vetëm për atë që shkruhet në të.
 
@@ -79,14 +81,12 @@ Njeriu që punon nuk duhet të kërkojë informacionin. Informacioni duhet të j
 
 Nga ky problem lindi Front Desk Control.
 
-Në punën e Front Office dhe të Night Audit, informacioni mund të jetë i shpërndarë në shumë vende: lista kontrolli, dokumente të veçanta, udhëzime, pamje ekrani dhe shënime të krijuara në momente të ndryshme. Kur po mëson një hotel ose një sistem të ri, mund të kesh shumë informacion dhe prapë të mos e gjesh dot atë që të duhet në momentin e duhur.
+Në punën e recepsionit dhe të auditimit të natës, informacioni mund të jetë i shpërndarë në shumë vende: lista kontrolli, dokumente të veçanta, udhëzime, pamje ekrani dhe shënime të krijuara në momente të ndryshme. Kur po mëson një hotel ose një sistem të ri, mund të kesh shumë informacion dhe prapë të mos e gjesh dot atë që të duhet në momentin e duhur.
 
 Prandaj i mblodha këto procese në një strukturë të vetme digjitale, në një faqe të vetme, të ndërtuar si mjet pune dhe jo si manual për t'u lexuar nga fillimi në fund. Proceset ndahen sipas funksionit: gjen SOP-në që të duhet, sheh udhëzimin përkatës dhe përdor referencat vizuale pa kërkuar në shumë dokumente të ndryshme.
 
 Kishte rëndësi edhe cilësia e materialeve. Rishikova imazhet dhe pamjet e ekranit që përdoren në udhëzime dhe mbajta vetëm ato që tregojnë qartë të njëjtin hap të procesit dhe që lexohen vërtet.
 
-Te Front Desk Control më intereson më pak faqja e internetit dhe më shumë problemi që trajton, një problem që e kam parë vetë në operacione: njohuria ekziston, por nuk është gjithmonë aty ku i duhet punonjësit.
+Te Front Desk Control më intereson problemi që trajton, një problem që e kam parë vetë në operacione: njohuria ekziston, por nuk është gjithmonë aty ku i duhet punonjësit.
 
 Pikërisht këtu ndryshon kuptimi i një SOP-je. Një dokument të tregon si duhet bërë puna. Një SOP e mirë të ndihmon ta bësh punën saktë pikërisht në momentin kur të duhet.
-
-Kush e ka shkruar një SOP, e kupton gjithmonë. Sipas meje, testi më i mirë i një SOP-je është nëse dikush tjetër mund ta përdorë nën presion dhe të arrijë të njëjtin rezultat.

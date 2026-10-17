@@ -27,9 +27,9 @@ checklist:
       hint: Richtlinien, erhebliche Kosten, Personal, Sicherheit, Ausnahmen von einem Verfahren.
 ---
 
-Wenn eine Situation Verantwortung verlangt, heißt Führung ohne Titel für mich, sich nicht hinter der Stellenbeschreibung zu verstecken. Es heißt nicht, die Arbeit des Chefs zu machen, ohne Chef zu sein, und es setzt genauso voraus, dass man weiß, wann man aufhören muss.
+Wenn eine Situation Verantwortung verlangt, heißt Führung ohne Titel für mich, hinter der Stellenbeschreibung hervorzutreten, ohne die Arbeit des Chefs zu übernehmen. Ebenso gehört dazu, zu wissen, wann man aufhören muss.
 
-## Über die Rolle hinaus, nicht über das Mandat hinaus
+## Über die Rolle hinaus, innerhalb des Mandats
 
 In der Last Mile hatte ich eine operative Rolle, aber es gab Momente, in denen die Arbeit mehr verlangte als meine eigene Aufgabe. Ich habe Verantwortung übernommen: für die Koordination von Problemen während der Schicht, für das Verfolgen der KPIs, für die Prozessdisziplin an der Rampe, für die Kommunikation mit den Fahrern und dafür, Probleme anzusprechen, die sich wiederholten. Wenn ich sah, dass aus einem Vorfall ein Muster wurde, versuchte ich, die Diskussion von „Wer hat den Fehler gemacht?“ zu „Was muss sich im Prozess ändern?“ zu lenken.
 
@@ -45,9 +45,9 @@ Ich glaube nicht, dass man Autorität ohne Titel gewinnt, indem man sich verhäl
 
 Im Betrieb merken die Leute sehr schnell, ob die Person vor ihnen nur Meinungen äußert oder da ist, wenn es ein Problem gibt.
 
-Ich habe versucht, klar zu sein, keine Panik zu verbreiten, wenn etwas schiefging, und kein Problem an jemand anderen weiterzuschieben, nur damit es von meinem Tisch war.
+Ich habe versucht, klar zu sein, Panik gar nicht erst aufkommen zu lassen, wenn etwas schiefging, und ein Problem bei mir zu behalten, statt es an jemand anderen weiterzuschieben, nur damit es von meinem Tisch war.
 
-Dazu gehörte auch, den Prozess zu verstehen, bevor ich etwas von den Leuten verlangte. Einen Standard einzufordern ist viel leichter, wenn man selbst versteht, warum es ihn gibt. Und wenn es ein Problem gab, habe ich versucht, über die Fakten und den Prozess zu sprechen, statt die Person anzugreifen.
+Dazu gehörte auch, den Prozess zu verstehen, bevor ich etwas von den Leuten verlangte. Einen Standard einzufordern ist viel leichter, wenn man selbst versteht, warum es ihn gibt. Und wenn es ein Problem gab, habe ich versucht, beim Gespräch über Fakten und Prozess zu bleiben und die Person aus dem Spiel zu lassen.
 
 Autorität, die nur aus der Position kommt, wirkt so lange, wie die Leute auf einen hören müssen. Autorität aus Glaubwürdigkeit wirkt auch dann, wenn sie dazu nicht verpflichtet sind.
 
@@ -71,10 +71,8 @@ Führung heißt nicht, die Person zu werden, ohne die nichts funktioniert. Führ
 
 ## Drei Fragen, bevor Sie etwas übernehmen, das nicht Ihre Aufgabe ist
 
-Heute würde ich mir drei Fragen stellen:
+Berufliche Reife misst sich daran, wie viel Verantwortung man zu übernehmen bereit ist, und ebenso daran, ob man weiß, welche Verantwortung man nicht übernehmen sollte. Heute würde ich mir drei Fragen stellen:
 
 1. **Helfe ich, weil diese Situation Handeln verlangt, oder treffe ich eine Entscheidung, die jemand anderes treffen müsste?** Das hilft mir, Initiative von der Überschreitung des Mandats zu trennen.
 2. **Habe ich die Informationen und die Kompetenz, die ich dafür brauche?** Dass in diesem Moment niemand sonst handelt, macht mich nicht automatisch zur richtigen Person für die Entscheidung.
 3. **Bei wem liegt danach die Verantwortung?** Kurz etwas außerhalb der eigenen Rolle zu tun, ist nicht immer das größte Problem. Das Problem beginnt, wenn die Ausnahme zur Regel wird und niemand mehr weiß, wer was verantwortet.
-
-Berufliche Reife misst sich nicht nur daran, wie viel Verantwortung man zu übernehmen bereit ist, sondern auch daran, ob man weiß, welche Verantwortung man nicht übernehmen sollte.

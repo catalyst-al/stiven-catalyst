@@ -43,13 +43,13 @@ Stellen Sie sich einen neuen Mitarbeiter an der Rezeption vor, mitten in einem A
 
 Die Szene gibt meine Erfahrung aus den ersten Wochen im Hotel als Bild wieder, nicht als dokumentierten Vorfall, und sie ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
 
-Dieses Werkzeug ist [Front Desk Control](/de/insights/how-i-built-front-desk-control/). Ich habe es im September 2026 entwickelt, um die Arbeit in Front Office und Night Audit zu ordnen: SOP-Anleitungen, Checklisten, eine Informationssuche und visuelle Erklärungen mit Screenshots der Abläufe. Daneben habe ich an Strukturen für Shift Handover und die Nachtberichte gearbeitet, an der Ordnung der Abläufe für den Breakfast Forecast sowie an Checklisten und Schritt-für-Schritt-Anleitungen. Ich nutze es selbst. Ob die Kollegen es regelmäßig nutzen, kann ich nicht sagen, und mir ist kein Fall bekannt, in dem ein veraltetes Verfahren darin einen Fehler verursacht hat.
+Dieses Werkzeug ist [Front Desk Control](/de/insights/how-i-built-front-desk-control/). Ich habe es im September 2026 entwickelt, um die Arbeit in Front Office und Night Audit zu ordnen: SOP-Anleitungen, Checklisten, eine Informationssuche und visuelle Erklärungen mit Screenshots der Abläufe. Daneben habe ich an Strukturen für Shift Handover und die Nachtberichte gearbeitet, an der Ordnung der Abläufe für den Breakfast Forecast sowie an Checklisten und Schritt-für-Schritt-Anleitungen. Ich nutze es selbst. Ob die Kollegen es regelmäßig nutzen, kann ich nicht sagen.
 
 In dem Essay, in dem ich Front Desk Control beschrieben habe, habe ich es als unfertige Arbeit vorgestellt. Hier geht es um etwas anderes: was mit einem solchen Werkzeug geschieht, wenn es einmal da ist, und wann es aufhört, nur Ihres zu sein.
 
 ## Warum die kleinen Listen entstehen
 
-Ich habe es nicht gebaut, weil Informationen fehlten, sondern weil sie verstreut waren: in SOP-Dokumenten, Erklärungen von Kollegen, Fotos, Videos und Checklisten. Oft musste ich mehrere davon durchsuchen, um zu verstehen, wie ein Ablauf ausgeführt wird. Die Anleitung gab es, ich fand sie nur nicht in dem Moment, in dem ich sie brauchte.
+Ich habe es gebaut, weil die Informationen verstreut waren: in SOP-Dokumenten, Erklärungen von Kollegen, Fotos, Videos und Checklisten. Oft musste ich mehrere davon durchsuchen, um zu verstehen, wie ein Ablauf ausgeführt wird. Die Anleitung gab es, ich fand sie nur nicht in dem Moment, in dem ich sie brauchte.
 
 Ich wollte einen Ort, an dem ich die Anleitungen schneller finde, neben dem Hotelsystem und nicht an seiner Stelle.
 
@@ -83,7 +83,7 @@ Front Desk Control hat mehrere Versionen durchlaufen. Ich habe daran gearbeitet,
 
 Eine Grenze sehe ich aber deutlich: Niemand sonst ist dafür zuständig, es zu aktualisieren, wenn ich fehle. Solange nur ich das Werkzeug verstehe und aktualisiere, bleibt es von mir abhängig.
 
-Das ist dasselbe, was ich in [Die Tour, die der Fahrer nicht versteht](/de/insights/the-tour-the-driver-does-not-understand/) über den erfahrenen Fahrer geschrieben habe, nur bin ich es diesmal selbst. Wissen, das in einem Kopf bleibt, wird nicht dadurch weniger zerbrechlich, dass es auf einer Seite steht, die nur ein Mensch pflegt. Und eine veraltete Anleitung in einem ordentlich wirkenden Werkzeug ist gefährlicher als eine fehlende, weil niemand sie ein zweites Mal nachschlägt.
+Das ist dasselbe, was ich in [Die Tour, die der Fahrer nicht versteht](/de/insights/the-tour-the-driver-does-not-understand/) über den erfahrenen Fahrer geschrieben habe, nur bin ich es diesmal selbst. Wissen, das in einem Kopf bleibt, wird nicht dadurch weniger zerbrechlich, dass es auf einer Seite steht, die nur ein Mensch pflegt. Und eine veraltete Anleitung in einem ordentlich wirkenden Werkzeug ist gefährlicher als eine fehlende, weil niemand sie ein zweites Mal nachschlägt. Mir ist kein Fall bekannt, in dem ein veraltetes Verfahren in Front Desk Control einen Fehler verursacht hat; das Risiko liegt in der Form.
 
 ## Fünf Bedingungen, bevor Sie es teilen
 

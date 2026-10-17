@@ -38,21 +38,19 @@ firstMove:
   - Hand it over with a name, so the guest does not tell the story again at breakfast.
 ---
 
-By 2 a.m. most of a hotel is asleep. Fewer people are on duty, fewer departments can be reached, fewer options are open. A guest's problem is no smaller than it would be at midday. This essay is about that gap. The hour in the title stands for that kind of night; it is not the time of an incident I can prove.
-
-It rests on my work in the night audit and on the room problems I have on record from it: weak water pressure in the shower, problems with how clean the bathroom was, technical issues that needed the responsible department, and open problems the next shift had to follow up. I have no record of a whole night with an angry guest at the desk: what I said, what I did and how it ended. The way of calming a guest described below is how I would do it today.
+By 2 a.m. most of a hotel is asleep. Fewer people are on duty, fewer departments can be reached, fewer options are open. A guest's problem is no smaller than it would be at midday. That gap is the subject here, and the hour in the title stands for that kind of night rather than for an incident I can prove.
 
 ## What can be done at night
 
-As Night Auditor I dealt with the problems that could be handled within the front desk's responsibilities. A problem that needed another department was passed to the person responsible, and whatever was not finished during the night was recorded in the handover.
+As Night Auditor I dealt with the problems that could be handled within the front desk's responsibilities. A problem that needed another department was passed to the person responsible, and whatever was not finished during the night was recorded in the handover. The room problems I have on record from those nights are weak water pressure in the shower, problems with how clean the bathroom was, technical issues that needed the responsible department, and open problems the next shift had to follow up.
 
 In [When to solve it yourself and when to take it higher](/insights/solve-it-or-escalate-it/) I wrote about the line between initiative and authority at night. Here the same question has a third party: the guest waiting in front of you.
 
-That third party makes the temptation bigger. When someone is angry in front of you, the urge is to close the situation as fast as possible. But I would not take a decision outside my authority just to close a complaint faster. A promise that does not depend on you does not solve the problem. It pushes it to the morning, and makes it heavier. At night, the options for a solution are not always the same as during the day. But that does not mean the responsibility for the problem should get lost.
+That third party makes the temptation bigger. When someone is angry in front of you, the urge is to close the situation as fast as possible. But I would not take a decision outside my authority just to close a complaint faster. A promise that does not depend on you pushes the problem to the morning and makes it heavier. At night, the options for a solution are not always the same as during the day. But that does not mean the responsibility for the problem should get lost.
 
 ## Listening before explaining
 
-Today I would handle it like this:
+I have no record of a whole night with an angry guest at the desk: what I said, what I did and how it ended. Today I would handle it like this:
 
 1. **Listen to the guest without interrupting.**
 2. **Understand what happened and what they are asking for.**
@@ -62,7 +60,7 @@ Today I would handle it like this:
 
 What an angry guest needs first is to see that their concern is being taken seriously. The explanation of why the problem happened can wait.
 
-Take the weak water pressure, which I have on record as a problem, not as a conversation. At night you cannot fix it. You can listen, check it, record it accurately, pass it to the responsible department and tell the guest what will happen next. The shower stays as it is, but the guest leaves the desk with a problem that has a name and a next step.
+Take the weak water pressure, which I have on record as a problem; of the conversation I have no record. At night you cannot fix it. You can listen, check it, record it accurately, pass it to the responsible department and tell the guest what will happen next. The shower stays as it is, but the guest leaves the desk with a problem that has a name and a next step.
 
 ## After the guest leaves the desk
 
@@ -78,6 +76,6 @@ To a new receptionist before their first night shift, I would say: do not think 
 
 Know your responsibilities, stay calm and communicate with respect. If you can solve the problem, do it to the standard. If you cannot, do not hide it, and do not make promises that do not depend on you. Above all, do not leave an issue open without information for the colleague who takes over the next shift. Professionalism is listening, checking, doing what is within your remit and making sure the work carries on when someone else has to be involved.
 
-For a complaint handed to the next shift, you can fill in the sheet below and copy it. [Shift Handover](/tools/shift-handover/) keeps open issues with an owner and a time, and carries them over to the next shift by itself.
-
 **The guest should not pay in time and nerves for the fact that the hotel works in shifts.**
+
+For a complaint handed to the next shift, you can fill in the sheet below and copy it. [Shift Handover](/tools/shift-handover/) keeps open issues with an owner and a time, and carries them over to the next shift by itself.

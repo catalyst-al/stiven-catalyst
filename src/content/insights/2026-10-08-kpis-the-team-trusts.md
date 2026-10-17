@@ -35,11 +35,9 @@ Suppose a driver leaves late because the order was not ready. The delay shows up
 
 In [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/) I wrote that the number on its own does not improve the work. This essay takes the next question: how do you build a KPI people trust, one they understand, that does not punish them for what they do not control, and that leads them to an action? For me, that trust is built from three things: **a clear definition, fair responsibility and the action that follows the result.**
 
-What follows rests on the last-mile reports and stand-ups I worked with and on my Night Audit work in the hotel. The definitions are how I understood the indicators, not the company's official formulas, and the examples of a number read unfairly or of a KPI that drives the wrong behaviour are illustrations, not documented cases.
-
 ## Four indicators in last mile
 
-In last mile we worked mainly with four indicators: Damage, Incomplete, Delay and Loading Time. This is how I understood them:
+In last mile we worked mainly with four indicators: Damage, Incomplete, Delay and Loading Time. This is how I understood them, in my words; they are not the company's official formulas:
 
 - **Damage:** damage to products or orders.
 - **Incomplete:** orders that reached the customer incomplete.
@@ -54,7 +52,7 @@ The practical meaning of an indicator and the official formula a company uses ar
 
 I have worked with problems that involved more than one stage of the process: missing bags, mixed trolleys, load organisation and delays at departure. Those situations changed the way I see a KPI.
 
-Take the driver from the example above. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
+Take the driver from the example above, an illustration rather than a documented case. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
 
 So before I judge someone's performance, I want to understand which part of the result they could actually control.
 
@@ -70,11 +68,11 @@ I wanted to keep two kinds of information apart. One showed **the result**: how 
 
 If Delay is high, I want to know why. Is it linked to order preparation, the organisation of the dock, loading time or another cause? If Damage rises, I ask more than who had the order: I want to know at which stage the damage may have happened and how we can prevent it.
 
-A KPI used only to show someone they are below target does not necessarily help them improve. I believe people have more reason to trust a KPI when it is used to understand and improve the work, rather than only to compare individuals.
+A KPI used only to show someone they are below target does not necessarily help them improve. I believe people have more reason to trust a KPI when it is used to understand and improve the work, and less when it only compares individuals.
 
 ## No indicator is read alone
 
-Suppose an organisation measures only the speed of loading, without linking it to quality and safety. It can create an incentive for people to rush. That is why I would never judge Loading Time in isolation from Damage, Incomplete and safety.
+Suppose, as a second illustration, an organisation measures only the speed of loading, without linking it to quality and safety. It can create an incentive for people to rush. That is why I would never judge Loading Time in isolation from Damage, Incomplete and safety.
 
 If one indicator improves while another gets worse because of the way the improvement was achieved, we have to check whether we are measuring the right behaviour.
 
@@ -92,7 +90,7 @@ A KPI the team trusts is not necessarily the one that always shows green. It is 
 
 Before you start measuring something, fill in these six lines. If you cannot fill in all six, the KPI is not yet ready to show the team.
 
-1. **What are we measuring?** In words everyone on the team understands, not only the person who builds the report.
+1. **What are we measuring?** In words everyone on the team understands, including those who never build a report.
 2. **How is it calculated?** What counts, what does not, and from which source.
 3. **Who can influence the result?** Which part is in the person's hands and which lies in the process, in another stage or in another department.
 4. **What is the standard?** What counts as a good result, and why.

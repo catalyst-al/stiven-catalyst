@@ -36,9 +36,9 @@ diagram: three-layers
 
 2,8%.
 
-Kaq ishte Delay në një raport të qershorit 2025. Ishte një ditë e keqe, apo kishte ndryshuar diçka në proces? Vetëm numri nuk ta thotë.
+Kaq ishte treguesi i vonesave, Delay, në një raport të qershorit 2025. Një ditë e keqe, apo shenjë se diçka kishte ndryshuar në proces? Vetëm numri nuk ta thotë.
 
-Në last mile ndiqnim çdo ditë Delay, Damage, Incomplete dhe Loading Time. Rezultatet diskutoheshin në stand-up-in e përditshëm, çdo devijim duhej shpjeguar dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative. Mbi këtë rutinë mbështetet kjo ese. Ajo që nuk mund ta rindërtoj është si zgjidhnim mes pritjes dhe ndërhyrjes: nëse e linim një rezultat të përsëritej para se të ndërhynim, nëse ndiqnim trendet ditore ose javore në Excel apo Power BI, nëse kam përdorur vetë një kartë kontrolli statistikore me kufij kontrolli. Metoda që vijon është mënyra si do ta lexoja sot një ditë të keqe.
+Në last mile ndiqnim çdo ditë Delay, Damage (dëmtimet), Incomplete (porositë jo të plota) dhe Loading Time (koha e ngarkimit). Rezultatet diskutoheshin në takimin e shkurtër të përditshëm (daily stand-up), çdo devijim duhej shpjeguar dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative.
 
 ## Një numër pa histori
 
@@ -46,13 +46,15 @@ Në last mile ndiqnim çdo ditë Delay, Damage, Incomplete dhe Loading Time. Rez
 
 Le të marrim një shembull të shpikur. Supozojmë se mesatarja e javëve të fundit ishte 2,5%. A është 2,8% sinjal?
 
-Varet. Çdo proces luhatet. Asnjë ditë nuk del njësoj si tjetra, edhe kur askush nuk ka ndryshuar asgjë: ndryshon volumi, ndryshojnë njerëzit, ndryshojnë rrugët. Pyetja nuk është nëse sot është më keq se mesatarja. Shumë ditë do të jenë të tilla. Pyetja është nëse sot është më keq se sa luhatet zakonisht ky proces.
+Varet. Çdo proces luhatet. Asnjë ditë nuk del njësoj si tjetra, edhe kur askush nuk ka ndryshuar asgjë: ndryshon volumi, ndryshojnë njerëzit, ndryshojnë rrugët. Shumë ditë do të jenë më keq se mesatarja. Ajo që ka rëndësi është nëse sot është më keq se sa luhatet zakonisht ky proces.
 
 Mbi këtë ide ngrihet karta e kontrollit. Ajo i vendos ditët njëra pas tjetrës, bashkë me mesataren dhe me dy kufij që tregojnë sa larg luhatet zakonisht procesi. Një ditë brenda kufijve ka shumë gjasa të jetë luhatje e zakonshme. Një ditë jashtë tyre, ose disa ditë me radhë në të njëjtën anë të mesatares, tregon se diçka mund të ketë ndryshuar.
 
+Nëse kam përdorur vetë një kartë të tillë, me kufij kontrolli, nuk mund ta rindërtoj, ashtu si nuk mund të rindërtoj si zgjidhnim atëherë mes pritjes dhe ndërhyrjes: nëse e linim një rezultat të përsëritej para se të ndërhynim, apo ndiqnim trendet ditore ose javore në Excel a Power BI. Ajo që vijon është mënyra si do ta lexoja sot një ditë të keqe.
+
 ## Dy gabimet e kundërta
 
-Një ditë e keqe mund të lexohet gabim në dy mënyra të kundërta. Ajo që vijon është mendimi im, jo raste që mund t'i dokumentoj.
+Sipas mendimit tim, një ditë e keqe mund të lexohet gabim në dy mënyra të kundërta.
 
 Gabimi i parë e trajton çdo ditë të keqe si problem. Ndryshohet një rregull, shtohet një kontroll, thirret një mbledhje. Të nesërmen numri kthehet në normë dhe duket sikur masa dha efekt. Por ndoshta do të ishte kthyer vetë, dhe tani procesi ka një rregull më shumë, që askush nuk e di pse ekziston.
 

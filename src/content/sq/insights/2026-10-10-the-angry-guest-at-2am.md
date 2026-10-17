@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: Një ankesë nuk mbyllet vetëm sepse mysafiri largohet nga recepsioni.
 teaser: Natën, hoteli ka më pak njerëz, më pak departamente të arritshme dhe më pak mundësi. Mysafiri ka të njëjtin problem si në mesditë.
-description: "Ankesat në Night Audit: çfarë mund të zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit dhe pesë fushat e një ankese që i kalon turnit tjetër."
-deck: 'Eseja e nëntë e serisë “Përmirësimi që mbahet”: ankesat gjatë Night Audit, çfarë mund të zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit dhe ankesa që kalon te turni tjetër pa u treguar nga e para.'
+description: "Ankesat gjatë auditimit të natës: çfarë zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit dhe pesë fushat e një ankese që i kalon turnit tjetër."
+deck: 'Eseja e nëntë e serisë “Përmirësimi që mbahet”: ankesat gjatë auditimit të natës, çfarë mund të zgjidhet natën dhe çfarë jo, pse dëgjimi vjen para shpjegimit dhe ankesa që kalon te turni tjetër pa u treguar nga e para.'
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -33,21 +33,19 @@ firstMove:
   - Dorëzoje me një emër, që mysafiri të mos e tregojë historinë përsëri në mëngjes.
 ---
 
-Në orën 2 të natës, pjesa më e madhe e hotelit fle. Më pak njerëz janë në detyrë, më pak departamente mund të arrihen, më pak mundësi janë të hapura. Por problemi i një mysafiri nuk është më i vogël se në mesditë. Kjo ese merret me këtë hendek. Ora në titull tregon atë lloj nate, jo orën e një incidenti që mund ta vërtetoj.
-
-Ajo mbështetet në punën time në Night Audit dhe në problemet me dhomat që i kam të dokumentuara prej saj: presion i dobët i ujit në dush, probleme me pastërtinë e banjës, defekte teknike që kërkonin departamentin përgjegjës dhe probleme të hapura që duhej t'i ndiqte turni i radhës. Nuk kam një rast të dokumentuar nga fillimi në fund të një nate me një mysafir të zemëruar në recepsion: çfarë i thashë, çfarë bëra dhe si përfundoi. Si ta qetësosh një mysafir, e përshkruaj më poshtë ashtu siç do ta bëja sot.
+Në orën 2 të natës, pjesa më e madhe e hotelit fle. Më pak njerëz janë në detyrë, më pak departamente mund të arrihen, më pak mundësi janë të hapura. Por problemi i një mysafiri nuk është më i vogël se në mesditë. Për këtë hendek bëhet fjalë këtu, dhe ora në titull tregon atë lloj nate, jo orën e një incidenti që mund ta vërtetoj.
 
 ## Çfarë mund të bëhet natën
 
-Si Night Auditor, merresha me problemet që mund të zgjidheshin brenda përgjegjësive të recepsionit. Kur një problem kërkonte një departament tjetër, i kalohej personit përgjegjës, dhe çfarë nuk mbaronte gjatë natës shënohej në dorëzimin e turnit.
+Si Night Auditor, merresha me problemet që mund të zgjidheshin brenda përgjegjësive të recepsionit. Kur një problem kërkonte një departament tjetër, i kalohej personit përgjegjës, dhe çfarë nuk mbaronte gjatë natës shënohej në dorëzimin e turnit. Problemet me dhomat që i kam të dokumentuara nga ato net janë presioni i dobët i ujit në dush, probleme me pastërtinë e banjës, defekte teknike që kërkonin departamentin përgjegjës dhe probleme të hapura që duhej t'i ndiqte turni i radhës.
 
 Te [Kur ta zgjidhësh vetë dhe kur ta çosh lart](/sq/insights/solve-it-or-escalate-it/) shkrova për kufirin mes iniciativës dhe autoritetit gjatë natës. Këtu e njëjta pyetje ka një palë të tretë: mysafirin që pret përballë teje.
 
-Kjo palë e tretë e bën tundimin më të madh. Kur dikush është i zemëruar para teje, të vjen ta mbyllësh situatën sa më shpejt. Por unë nuk do të merrja një vendim jashtë autoritetit tim vetëm për ta mbyllur më shpejt një ankesë. Një premtim që nuk varet nga ti nuk e zgjidh problemin. E shtyn deri në mëngjes dhe e bën më të rëndë. Natën, mundësitë për zgjidhje nuk janë gjithmonë të njëjta si gjatë ditës. Por kjo nuk do të thotë që përgjegjësia për problemin duhet të humbasë.
+Kjo palë e tretë e bën tundimin më të madh. Kur dikush është i zemëruar para teje, të vjen ta mbyllësh situatën sa më shpejt. Por unë nuk do të merrja një vendim jashtë autoritetit tim vetëm për ta mbyllur më shpejt një ankesë. Një premtim që nuk varet nga ti e shtyn problemin deri në mëngjes dhe e bën më të rëndë. Natën, mundësitë për zgjidhje nuk janë gjithmonë të njëjta si gjatë ditës. Por kjo nuk do të thotë që përgjegjësia për problemin duhet të humbasë.
 
 ## Së pari dëgjo, pastaj shpjego
 
-Sot do të veproja kështu:
+Nuk kam një rast të dokumentuar nga fillimi në fund të një nate me një mysafir të zemëruar në recepsion: çfarë i thashë, çfarë bëra dhe si përfundoi. Sot do të veproja kështu:
 
 1. **Ta dëgjosh mysafirin pa e ndërprerë.**
 2. **Të kuptosh çfarë ka ndodhur dhe çfarë kërkon.**
@@ -57,7 +55,7 @@ Sot do të veproja kështu:
 
 Një mysafiri të zemëruar i duhet së pari të shohë që shqetësimi i tij merret seriozisht. Shpjegimi se pse ndodhi problemi mund të presë.
 
-Le të marrim presionin e dobët të ujit, që e kam të dokumentuar si problem, jo si bisedë. Natën nuk mund ta riparosh. Mund ta dëgjosh mysafirin, ta verifikosh problemin, ta regjistrosh saktë, t'ia kalosh departamentit përgjegjës dhe t'i thuash mysafirit çfarë do të ndodhë më pas. Dushi mbetet siç është, por mysafiri largohet nga recepsioni me një problem që ka një emër dhe një hap të radhës.
+Le të marrim presionin e dobët të ujit, që e kam të dokumentuar si problem; për bisedën nuk kam dokument. Natën nuk mund ta riparosh. Mund ta dëgjosh mysafirin, ta verifikosh problemin, ta regjistrosh saktë, t'ia kalosh departamentit përgjegjës dhe t'i thuash mysafirit çfarë do të ndodhë më pas. Dushi mbetet siç është, por mysafiri largohet nga recepsioni me një problem që ka një emër dhe një hap të radhës.
 
 ## Pasi mysafiri largohet nga recepsioni
 
@@ -73,6 +71,6 @@ Një recepsionisti që sapo fillon, para turnit të tij të parë të natës, do
 
 Njih përgjegjësitë e tua, ruaj qetësinë dhe komuniko me respekt. Nëse mund ta zgjidhësh problemin, bëje sipas standardit. Nëse nuk mundesh, mos e fshih dhe mos bëj premtime që nuk varen nga ti. Mbi të gjitha, mos lër asnjë çështje të hapur pa informacion për kolegun që merr turnin tjetër. Profesionalizmi është të dëgjosh, të verifikosh, të bësh atë që ke në kompetencë dhe të sigurohesh që puna të vazhdojë kur duhet të përfshihet dikush tjetër.
 
-Për një ankesë që kalon te turni tjetër, mund ta plotësosh fletën më poshtë dhe ta kopjosh. [Dorëzimi i turnit](/sq/tools/shift-handover/) i mban çështjet e hapura me përgjegjës dhe orë, dhe i kalon vetë te turni i radhës.
-
 **Mysafiri nuk duhet ta paguajë me kohë dhe nerva faktin që hoteli punon me turne.**
+
+Për një ankesë që kalon te turni tjetër, mund ta plotësosh fletën më poshtë dhe ta kopjosh. [Dorëzimi i turnit](/sq/tools/shift-handover/) i mban çështjet e hapura me përgjegjës dhe orë, dhe i kalon vetë te turni i radhës.

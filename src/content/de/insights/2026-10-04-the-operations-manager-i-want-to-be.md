@@ -46,7 +46,7 @@ Heute würde ich meine Arbeitsphilosophie in fünf Prinzipien zusammenfassen.
 
 Kein Betrieb läuft ohne die Menschen, die ihn jeden Tag am Laufen halten.
 
-Ich habe in Umgebungen mit Druck, Zielvorgaben, Verspätungen, Fehlern und Momenten gearbeitet, in denen man schnell reagieren musste. Dabei habe ich gelernt, dass ein Standard hoch und eine Anforderung deutlich sein können, ohne die Würde des Gegenübers zu verletzen. Druck kann berechtigt sein, Demütigung nicht.
+Ich habe in Umgebungen mit Druck, Zielvorgaben, Verspätungen, Fehlern und Momenten gearbeitet, in denen man schnell reagieren musste. Dabei habe ich gelernt, dass ein Standard hoch und eine Anforderung deutlich sein können, ohne die Würde des Gegenübers zu verletzen. Druck hat seinen Platz, Demütigung nie.
 
 Für mich muss eine Führungskraft Verantwortung einfordern können, ohne mit Angst zu führen. Denn ein Team, das Angst hat, seine Fehler zu zeigen, hat nicht weniger Fehler. Es hat nur weniger sichtbare.
 
@@ -54,7 +54,7 @@ Für mich muss eine Führungskraft Verantwortung einfordern können, ohne mit An
 
 Ich habe gelernt, Prozessen wenig zu trauen, die nur funktionieren, weil eine erfahrene Person „weiß, wie es geht“. Wenn das Ergebnis davon abhängt, dass die richtige Person in der Schicht ist, hat die Organisation Wissen, aber noch keinen Standard.
 
-Deshalb glaube ich an SOPs, Checklisten und klare Arbeitsweisen. Ob eine SOP gut ist, zeigt sich daran, dass jemand anderes dasselbe Ergebnis erreicht, auch unter Druck und ohne den Verfasser in der Nähe, den er fragen könnte, und nicht daran, wie professionell sie im Dokument aussieht.
+Deshalb glaube ich an SOPs, Checklisten und klare Arbeitsweisen. Ob eine SOP taugt, zeigt sich daran, ob jemand anderes mit ihr dasselbe Ergebnis erreicht, auch unter Druck und ohne den Verfasser in Rufweite. Wie professionell sie als Dokument aussieht, kommt weit dahinter.
 
 Standardisierung soll für mich verhindern, dass Menschen neu erfinden müssen, was die Organisation schon wissen sollte, und ihnen nicht das Denken abnehmen.
 
@@ -66,11 +66,11 @@ Ich habe gelernt, mich nicht damit zufriedenzugeben, dass ein Prozentwert rot od
 
 Hier helfen mir Denkweisen wie Pareto und 5 Whys. Nicht jedes Problem braucht eine große Methodik, aber man bekämpft sehr leicht das Symptom und nennt es Verbesserung.
 
-Die Daten müssen mich auf die Fläche führen. Und die Fläche muss mir helfen, die Daten zu verstehen. Wenn diese beiden Welten nicht zusammenkommen, kann der Bericht gut aussehen, während der Betrieb dasselbe Problem behält.
+Die Daten müssen mich vor Ort führen. Und was ich vor Ort sehe, muss mir helfen, die Daten zu verstehen. Wenn diese beiden Welten nicht zusammenkommen, kann der Bericht gut aussehen, während der Betrieb dasselbe Problem behält.
 
 ## 4. Verantwortung
 
-Verantwortung heißt für mich, dass kein Problem ohne Verantwortlichen bleibt, und das ist etwas anderes, als jedes Problem auf die eigenen Schultern zu laden.
+Verantwortung heißt für mich, dass kein Problem ohne Verantwortlichen bleibt. Tragen muss ich sie deshalb nicht alle selbst.
 
 Gelernt habe ich das bei der Schichtübergabe. Eine Schicht kann sehr gut arbeiten, aber wenn die Information nicht an die nächste Schicht geht, verliert die Organisation einen Teil dieser Arbeit.
 
@@ -88,7 +88,7 @@ Früher lautete meine Frage oft: „Wie lösen wir dieses Problem?“ Heute laut
 
 Diese Veränderung in meinem Denken ist vielleicht einer der wichtigsten beruflichen Entwicklungsschritte, die ich gemacht habe.
 
-Betriebe werden durch viele kleine Korrekturen besser, die laufend gemacht werden und auf der Wirklichkeit der Arbeit beruhen, und nicht durch ein großes Projekt einmal im Jahr.
+Betriebe werden durch viele kleine Korrekturen besser, die laufend gemacht werden und auf der Wirklichkeit der Arbeit beruhen, weit mehr als durch ein großes Projekt im Jahr.
 
 ## Was ich als Manager nie tun will
 
@@ -98,11 +98,11 @@ Wenn ein Team nur funktioniert, solange der Manager im Raum ist, hat dieser Mana
 
 ## Wie meine ideale Woche als Operations Manager aussähe
 
-Jeden Tag würde ich mit einem kurzen Überblick über den Betrieb beginnen, nicht mit einem einstündigen Bericht. Ich will wissen, was abgewichen ist, was noch offen ist, wo wir Risiken haben und wo meine Anwesenheit gebraucht wird.
+Jeden Tag würde ich mit einem kurzen Überblick über den Betrieb beginnen, ein paar Minuten lang. Ich will wissen, was abgewichen ist, was noch offen ist, wo wir Risiken haben und wo meine Anwesenheit gebraucht wird.
 
-Ich würde die wichtigsten KPIs prüfen, aber nicht den ganzen Tag auf Dashboards schauen.
+Ich würde die wichtigsten KPIs prüfen und dann von den Dashboards weggehen.
 
-Ein wichtiger Teil meiner Woche muss auf der Fläche stattfinden: den Prozess sehen, mit den Menschen sprechen und die Probleme verstehen, die es nicht immer in den Bericht schaffen.
+Ein wichtiger Teil meiner Woche gehört dem Betrieb vor Ort: den Prozess sehen, mit den Menschen sprechen und die Probleme verstehen, die es nicht immer in den Bericht schaffen.
 
 Einmal pro Woche würde ich mir eine gründlichere Überprüfung der Leistung wünschen:
 
@@ -113,9 +113,9 @@ Einmal pro Woche würde ich mir eine gründlichere Überprüfung der Leistung w�
 - Wer verantwortet sie?
 - Und welche Probleme sind keine Vorfälle mehr, sondern Muster?
 
-Ich würde mir auch feste Zeit für die Menschen wünschen: Feedback, Coaching und Gespräche, in denen es nicht nur um „Was ist schiefgelaufen?“ geht, sondern auch um „Was hindert dich daran, deine Arbeit gut zu machen?“.
+Ich würde mir auch feste Zeit für die Menschen wünschen: Feedback, Coaching und Gespräche, in denen nach „Was ist schiefgelaufen?“ auch jemand fragt: „Was hindert dich daran, deine Arbeit gut zu machen?“
 
-Berichte zeigen mir, wo ich hinschauen muss. Die Fläche zeigt mir, was passiert. Ein Manager muss beides tun.
+Berichte zeigen mir, wo ich hinschauen muss. Vor Ort sehe ich, was passiert. Ein Manager braucht beides.
 
 ## Die ersten 90 Tage in einer neuen Rolle
 
@@ -123,7 +123,7 @@ Berichte zeigen mir, wo ich hinschauen muss. Die Fläche zeigt mir, was passiert
 
 Im ersten Monat würde ich nicht mit der Vorstellung antreten, die Organisation „reparieren“ zu müssen. Ich würde lernen.
 
-Ich würde das Team, die Prozesse, die KPIs, den Kunden, die Abhängigkeiten zwischen den Abteilungen und die Art kennenlernen, wie Entscheidungen getroffen werden. Ich würde viel Zeit auf der Fläche verbringen und mit den Menschen sprechen, die die Arbeit jeden Tag machen. Ich würde mir die SOPs ansehen und sie mit der Wirklichkeit vergleichen.
+Ich würde das Team, die Prozesse, die KPIs, den Kunden, die Abhängigkeiten zwischen den Abteilungen und die Art kennenlernen, wie Entscheidungen getroffen werden. Ich würde viel Zeit vor Ort verbringen und mit den Menschen sprechen, die die Arbeit jeden Tag machen. Ich würde mir die SOPs ansehen und sie mit der Wirklichkeit vergleichen.
 
 Ich würde auch versuchen zu verstehen, was nicht sofort im Dashboard auftaucht:
 
@@ -132,11 +132,11 @@ Ich würde auch versuchen zu verstehen, was nicht sofort im Dashboard auftaucht:
 - Was muss von Hand erledigt werden, weil der Prozess nicht gut funktioniert?
 - Wo haben wir eine kritische Person, ohne die die Arbeit stockt?
 
-Am Ende der 30 Tage will ich eine klare Landkarte des Betriebs haben, keine lange Liste von Dingen, die ich ändern will.
+Am Ende der 30 Tage will ich eine klare Landkarte des Betriebs haben. Die Liste der Änderungen kann warten.
 
 ### Tage 31–60: Prioritäten festlegen
 
-In der zweiten Phase würde ich anfangen, Symptome von echten Problemen zu trennen. Ich würde mir die Daten ansehen und nach Mustern suchen, die sich wiederholen, und ich würde wenige Prioritäten wählen, nicht zwanzig Projekte gleichzeitig.
+In der zweiten Phase würde ich anfangen, Symptome von echten Problemen zu trennen. Ich würde mir die Daten ansehen und nach Mustern suchen, die sich wiederholen, und ich würde wenige Prioritäten wählen und den Rest zurückstellen.
 
 Für jede Priorität soll klar sein:
 
@@ -158,9 +158,9 @@ Drei Monate sind keine Zauberei, und bis Tag 90 würde ich nicht behaupten, den 
 - Die Art der Schichtübergabe.
 - Der Prozess zur Nachverfolgung von Maßnahmen.
 - Die Standards, die tatsächlich genutzt werden.
-- Ein regelmäßiger Rhythmus, in dem das Team nicht nur die Leistung prüft, sondern auch die Verbesserung.
+- Ein regelmäßiger Rhythmus, in dem das Team seine Leistung und seine Verbesserung prüft.
 
-Mein Ziel für die 90 Tage wäre, dass die Organisation ein klareres Bild von sich selbst hat und über einige bessere Mechanismen verfügt, um sich zu verbessern – nicht, dass ich vorführe, wie viel ich verändert habe.
+Mein Ziel für die 90 Tage wäre, dass die Organisation ein klareres Bild von sich selbst hat und über einige bessere Mechanismen verfügt, um sich zu verbessern. Wie viel ich verändert habe, wäre nicht der Maßstab.
 
 ## Wo ich noch lerne
 
@@ -170,7 +170,7 @@ Ich will mehr Erfahrung darin sammeln, Betriebe mit größerem organisatorischem
 
 Und ich will in einer Sache besser werden, die meiner Meinung nach nie abgeschlossen ist: zu wissen, wann man eingreifen muss und wann man die Menschen die Dinge selbst lösen lässt.
 
-Mein Ziel ist, der Manager zu werden, der ein Team aufbaut, in dem die Antworten nicht immer von ihm kommen müssen, und nicht der Mensch, der auf alles eine Antwort hat.
+Mein Ziel ist, der Manager zu werden, der ein Team aufbaut, in dem die Antworten nicht immer von ihm kommen müssen.
 
 ## Wie ich beschrieben werden möchte
 
@@ -178,4 +178,4 @@ Wenn ich eines Tages die Menschen, die mit mir gearbeitet haben, fragen würde, 
 
 **„Er hat viel von uns verlangt, aber er war bei uns, hat uns zugehört und versucht, den Prozess besser zu hinterlassen, als er ihn vorgefunden hat.“**
 
-Das ist der Operations Manager, der ich sein will: nicht der, der am wichtigsten wirkt, wenn der Betrieb Probleme hat, sondern der, der einen Betrieb aufbaut, der immer seltener gerettet werden muss.
+Das ist der Operations Manager, der ich sein will: einer, der einen Betrieb aufbaut, der immer seltener gerettet werden muss.

@@ -43,13 +43,13 @@ In [Das System ist schneller als Sie](/de/insights/the-system-is-faster-than-you
 
 Seit dem 1. Januar 2026 arbeite ich in Teilzeit als Last-Mile-Dispatcher aus der Ferne und koordiniere 80+ Fahrzeuge und 100+ Fahrer. Was das mit einer Führungskraft macht, habe ich in [80+ Fahrzeuge führen, die man nicht sieht](/de/insights/80-vehicles-you-cannot-see/) beschrieben. Aus der Ferne kann man nicht zur Rampe gehen und nachsehen, was hinter einer Zahl steckt. Man verlässt sich auf die Informationen, die einen aus dem System und von den Menschen draußen erreichen, und beide kommen immer etwas später an, als die Dinge geschehen.
 
-Grundlage sind diese Rolle aus der Ferne, meine frühere Arbeit auf der letzten Meile, wo ich jeden Tag mit Delay, Damage, Incomplete und Loading Time zu tun hatte, und ein Demonstrationsmodell, das ich selbst gebaut habe: der [Last-Mile CX Control Tower](/de/tools/cx-control-tower/) mit Kennzahlen für Abfahrten, Verspätungen, Beladung und Vorfälle. Er ist eine Demonstration, nicht das System eines Unternehmens. Welche Kennzahlen das System meiner jetzigen Arbeit genau anzeigt, weiß ich nicht. Ich habe auch keinen dokumentierten Fall, in dem eine Zahl rot wurde, ich reagiert habe und weiß, wie es ausging, und keine Schwelle und kein Ziel, deren Änderung ich verlangt hätte. Was folgt, ist also meine Analyse und die Art, wie ich heute vorgehen würde, kein Protokoll, dem ich gefolgt bin.
+Drei Quellen speisen diesen Essay: diese Rolle aus der Ferne, meine frühere Arbeit auf der letzten Meile, wo ich jeden Tag mit Delay, Damage, Incomplete und Loading Time zu tun hatte, und ein Demonstrationsmodell, das ich selbst gebaut habe: der [Last-Mile CX Control Tower](/de/tools/cx-control-tower/) mit Kennzahlen für Abfahrten, Verspätungen, Beladung und Vorfälle. Er ist eine Demonstration, nicht das System eines Unternehmens.
 
 ## Zwischen der Rampe und dem Rot
 
 Stellen Sie sich einen Transporter vor, der vor zehn Minuten von der Rampe hätte abfahren sollen. Auf dem Dashboard ist seine Tour rot. Was musste geschehen, damit sie rot wurde?
 
-Jemand musste sehen, dass der Transporter noch dasteht, oder bis zu einer bestimmten Uhrzeit musste ein Scan fehlen. Jemand oder etwas musste es melden. Das System musste es in seinem eigenen Takt mit dem Ziel abgleichen. Dann musste Ihr Bildschirm es darstellen. Das sind vier Schritte, jeder mit seiner eigenen Verzögerung. Wie groß diese Verzögerung ist, unterscheidet sich von System zu System, und bei meinem weiß ich nicht, ob die Daten in Sekunden, in Minuten oder noch später aktualisiert werden. Genau deshalb ist das die erste Frage.
+Jemand musste sehen, dass der Transporter noch dasteht, oder bis zu einer bestimmten Uhrzeit musste ein Scan fehlen. Jemand oder etwas musste es melden. Das System musste es in seinem eigenen Takt mit dem Ziel abgleichen. Dann musste Ihr Bildschirm es darstellen. Das sind vier Schritte, jeder mit seiner eigenen Verzögerung. Wie groß diese Verzögerung ist, unterscheidet sich von System zu System, und bei dem System, mit dem ich jetzt arbeite, kenne ich weder die genaue Liste der Kennzahlen, noch weiß ich, ob die Daten in Sekunden, in Minuten oder noch später aktualisiert werden. Genau deshalb ist das die erste Frage.
 
 {diagram}
 
@@ -65,7 +65,7 @@ Zu fragen ist also, was diese Zahl misst, wann sie aktualisiert wurde und was je
 
 ## Drei falsche Reaktionen
 
-Wer schon vor einem Dashboard gesessen hat, kennt drei Reaktionen auf eine rote Zahl. Es sind Muster, keine Fälle, die ich dokumentiert habe.
+Wer schon vor einem Dashboard gesessen hat, kennt drei Reaktionen auf eine rote Zahl. Es sind Muster: Einen eigenen dokumentierten Fall, in dem eine Zahl rot wurde, ich reagiert habe und weiß, wie es ausging, habe ich nicht.
 
 **Sofort anrufen.** Die Zahl wird rot, und das Telefon ist in Ihrer Hand, bevor Sie nachgedacht haben. Die Person, die abnimmt, ist vielleicht gerade dabei, genau das zu lösen, und muss jetzt unterbrechen, um es Ihnen zu erklären. Sie haben auf eine Lage reagiert, die es vielleicht nicht mehr gibt, und dafür ein Paar Hände vom Problem abgezogen.
 
@@ -75,7 +75,7 @@ Wer schon vor einem Dashboard gesessen hat, kennt drei Reaktionen auf eine rote 
 
 ## Vier Schritte vor der Entscheidung
 
-Allen drei Reaktionen ist gemeinsam, dass über sie entschieden wird, während der Bildschirm rot ist, und das ist der schlechteste Moment für jede Entscheidung. Der richtige Moment ist vor der Schicht. Diese Reihenfolge würde ich empfehlen:
+Allen drei Reaktionen ist gemeinsam, dass über sie entschieden wird, während der Bildschirm rot ist, und das ist der schlechteste Moment für jede Entscheidung. Der richtige Moment ist vor der Schicht. Diese Reihenfolge würde ich heute empfehlen; es ist meine Analyse, kein Protokoll, dem ich gefolgt bin:
 
 1. **Ich prüfe, was die Kennzahl misst und wann sie aktualisiert wurde.** Ohne das weiß ich nicht, ob ich die Gegenwart sehe oder die Vergangenheit.
 2. **Ich prüfe, ob das Problem echt und noch offen ist.** Die Zahl ist ein Bericht, und jemand muss ihn bestätigen.
@@ -90,7 +90,7 @@ Stehen diese vier Schritte vor der Schicht fest, sind die ersten Minuten nach ei
 
 Noch etwas, eher für das Ende der Woche als für die Schicht. Schauen Sie sich die roten Werte an, die zu keiner Handlung geführt haben, weil das Problem bei der Prüfung schon gelöst war oder gar keines vorlag. Sind sie in der Mehrheit, erzieht der Alarm alle dazu, ihn zu ignorieren.
 
-Eine Schwelle, die ohne Daten angehoben wird, nur damit der Bildschirm besser aussieht, verdeckt die nutzlosen roten Werte zusammen mit denen, auf die es ankam. Der Alarm wird anhand der Daten überprüft: wie viele rote Werte es gab, bei wie vielen gehandelt werden musste und was diese gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie denen vorlegen können, die den Alarm einstellen. Statt „Das Dashboard ist falsch“ zu sagen, nennen Sie ihnen die Zahl der roten Werte dieser Woche und wie viele davon etwas verlangt haben.
+Eine Schwelle, die ohne Daten angehoben wird, nur damit der Bildschirm besser aussieht, verdeckt die nutzlosen roten Werte zusammen mit denen, auf die es ankam. Der Alarm wird anhand der Daten überprüft: wie viele rote Werte es gab, bei wie vielen gehandelt werden musste und was diese gemeinsam hatten. Diese Zählung ist auch das beste Argument, das Sie denen vorlegen können, die den Alarm einstellen. Einen dokumentierten Fall, in dem ich selbst die Änderung einer Schwelle oder eines Ziels verlangt hätte, habe ich nicht; so würde ich dafür argumentieren. Statt „Das Dashboard ist falsch“ zu sagen, nennen Sie ihnen die Zahl der roten Werte dieser Woche und wie viele davon etwas verlangt haben.
 
 ## Meine rote Zahl
 

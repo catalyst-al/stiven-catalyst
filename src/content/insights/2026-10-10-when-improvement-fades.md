@@ -44,7 +44,7 @@ diagram: improvement-paths
 
 If I could give myself one sentence on my first day as a Team Leader, it would be this: once you have solved a problem today, ask whether it could be solved tomorrow without you. It is also the question this series closes on.
 
-In last mile I worked with standards for loading, scanning, the organisation of the ramp and safety, and I ran into problems with procedures that were not followed and with drivers who were not yet fully used to the standards. In the hotel I organised the SOPs for Front Office and Night Audit. What I do not have is the case the title of this essay promises: a documented improvement of mine that held for a few months and was then abandoned. For an essay about improvement that fades, that gap is not a detail. It is the subject.
+In last mile I worked with standards for loading, scanning, the organisation of the ramp and safety, and I ran into problems with procedures that were not followed and with drivers who were not yet fully used to the standards. In the hotel I organised the SOPs for Front Office and Night Audit. What I do not have is the case the title of this essay promises: a documented improvement of mine that held for a few months and was then abandoned. In an essay about improvement that fades, that gap belongs at the centre.
 
 ## The question I cannot answer
 
@@ -58,7 +58,7 @@ That is what I would most like to understand today: whether a manager's results 
 
 ## Why an improvement fades
 
-What follows is opinion, not a proven case. I believe an improvement is at risk when it depends only on the person who started it, instead of becoming part of the everyday way of working.
+I have no proven case for this part, but I believe an improvement is at risk when it depends only on the person who started it, instead of becoming part of the everyday way of working.
 
 Turnover makes the risk easier to see. In last mile we had drivers called in at short notice, and drivers in ramp-up who were not yet used to the SOPs. That made it hard to hold compliance at the same level.
 

@@ -30,7 +30,7 @@ checklist:
     - label: Problemet që kthehen vazhdimisht
       hint: Të konsideruara tashmë “normale” nga ekipi.
     - label: Kufijtë
-      hint: Çfarë mund të vendos vetë, dhe çfarë duhet eskaluar, te kush.
+      hint: Çfarë mund të vendos vetë, dhe çfarë duhet çuar më lart, te kush.
 ---
 
 Natën e parë në hotelin e ri nuk punova dot si Night Auditor.
@@ -39,7 +39,7 @@ Sistemi po kalonte një përditësim dhe për disa orë praktikisht nuk punohej 
 
 Dukej si një natë e humbur. Në fakt më mësoi gjënë e parë: në një vend të ri, para se ta bësh punën, duhet të kuptosh si bëhet.
 
-Me këtë ese nis një seri e re. E para, *Dhjetë vite pranë punës*, tregonte çfarë kam mësuar. Kjo merret me mënyrën si ndërtohet një operacion që funksionon edhe kur menaxheri nuk është aty, dhe kjo nis shumë përpara se të ndryshosh diçka: me mënyrën si e lexon operacionin. Ajo që vijon vjen nga javët e mia të para në atë hotel, nga lista e kontrollit, materialet e trajnimit dhe kolegët që e mbanin natën në këmbë.
+Me këtë ese nis një seri e re. E para, *Dhjetë vite pranë punës*, tregonte çfarë kam mësuar. Kjo merret me mënyrën si ndërtohet një operacion që funksionon edhe kur menaxheri nuk është aty, dhe kjo nis shumë përpara se të ndryshosh diçka: me mënyrën si e lexon operacionin. Lënda ime janë javët e para në atë hotel: lista e kontrollit, materialet e trajnimit dhe kolegët që e mbanin natën në këmbë.
 
 ## Netët e para: njerëzit para dokumenteve
 
@@ -74,7 +74,7 @@ Që në fillim vendosa ta ndiqja procesin ekzistues ashtu siç ishte përcaktuar
 
 Fillimisht duhej të kuptoja varësitë. Një hap që nga jashtë duket i panevojshëm mund të ekzistojë sepse prej tij varet një departament tjetër, një raport ose një proces i mëvonshëm. Nëse e heq në javën e dytë, ndoshta nuk sheh asnjë problem. Problemi del diku tjetër, më vonë, te dikush tjetër.
 
-Vetëm pasi fillova ta kuptoja rrjedhën, nisa ta organizoja informacionin më mirë. Synimi ishte ta bëja operacionin më të lexueshëm, për veten dhe për personin e radhës që do të duhej ta mësonte, jo ta ndryshoja.
+Vetëm pasi fillova ta kuptoja rrjedhën, nisa ta organizoja informacionin më mirë. Synimi ishte ta bëja operacionin më të lexueshëm, për veten dhe për personin e radhës që do të duhej ta mësonte. Ndryshimet mund të prisnin.
 
 **Një hap që duket i panevojshëm mund të jetë hapi nga i cili varet dikush tjetër.**
 
@@ -89,7 +89,7 @@ Shiko procesin nga fillimi në fund. Fol me njerëzit që e bëjnë punën çdo 
 Lexo SOP-në, listën e kontrollit dhe raportet, pastaj shiko si punohet në të vërtetë. Aty ku ka dallim, mos vendos menjëherë kush e ka gabim. Kupto pse ekziston dallimi.
 
 **E treta: krijo një hartë të operacionit.**
-Cilat janë proceset kryesore? Cilët janë njerëzit kyç? Cilat janë KPI-të? Ku janë varësitë? Cilat probleme përsëriten? Çfarë mund të vendosësh vetë dhe çfarë duhet eskaluar?
+Cilat janë proceset kryesore? Cilët janë njerëzit kyç? Cilat janë KPI-të? Ku janë varësitë? Cilat probleme përsëriten? Çfarë mund të vendosësh vetë dhe çfarë duhet çuar më lart?
 
 Dhe një gjë që do t'i thosha të mos e bënte: mos ndrysho diçka vetëm sepse dëshiron të tregosh se ke ardhur për të sjellë ndryshim.
 
@@ -140,7 +140,7 @@ Në 30 ditët e para, një menaxher i ri ka më shumë nevojë për 30 pyetje t�
 **Kufijtë**
 
 26. Çfarë mund të vendos vetë?
-27. Çfarë duhet eskaluar, dhe te kush?
+27. Çfarë duhet çuar më lart, dhe te kush?
 28. Kush përgjigjet për secilin proces?
 29. Nga cilat departamente varet puna ime, dhe cilat varen prej saj?
 30. Çfarë duhet të kuptoj para se të propozoj ndryshimin e parë?

@@ -42,7 +42,7 @@ Kjo ese lëviz mes këtyre dy fjalive.
 
 DMAIC është cikli i Six Sigma për përmirësimin e një procesi: Define, Measure, Analyze, Improve, Control. Përcakton problemin, e mat, analizon shkaqet, përmirëson dhe kontrollon nëse përmirësimi mbahet. Në libra duket si projekt i madh, me ekip, me afat dhe me dikë që mban një rrip me ngjyrë.
 
-Ajo që sjell unë është përvoja me probleme reale operative në last mile: Damage, Incomplete, Delay dhe Loading Time. Six Sigma, Pareto dhe 5 Why janë metoda që i njoh dhe që janë bërë pjesë e mënyrës si e mendoj drejtimin. Nuk kam certifikatë të konfirmuar, as Yellow, as Green, as Black Belt, dhe as ndonjë projekt ku t'i kem zbatuar e dokumentuar të pesë fazat e DMAIC. Edhe për Pareto dhe 5 Why, nuk mund të tregoj një rast që e kam çuar vetë nga fillimi në fund. Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për një 5 Why me vetëm dy “pse” të dokumentuara dhe pse nuk i plotësova të tjerat.
+Ajo që sjell unë është përvoja me probleme reale operative në last mile: Damage (dëmtimet), Incomplete (porositë jo të plota), Delay (vonesat) dhe Loading Time (koha e ngarkimit). Six Sigma, Pareto dhe 5 Why janë metoda që i njoh dhe që janë bërë pjesë e mënyrës si e mendoj drejtimin. Nuk kam certifikatë të konfirmuar, as Yellow, as Green, as Black Belt. Nuk kam asnjë projekt ku t'i kem zbatuar e dokumentuar të pesë fazat e DMAIC, madje as një Pareto apo një 5 Why që mund ta tregoj si të çuar prej meje nga fillimi në fund. Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për një 5 Why me vetëm dy “pse” të dokumentuara dhe pse nuk i plotësova të tjerat.
 
 ## Pesë fazat, ashtu siç i kam pasur
 
@@ -76,7 +76,7 @@ Nga pesë fazat, sot do të veçoja Control: ruajtjen e përmirësimit.
 
 Një problem mund të zgjidhet për njëfarë kohe. Por nëse standardi nuk dokumentohet, njerëzit nuk trajnohen dhe askush nuk e kontrollon rezultatin, problemi rrezikon të rikthehet.
 
-Prandaj kjo seri quhet “Përmirësimi që mbahet”. Përmirësimi duhet të vazhdojë edhe kur menaxheri që e nisi nuk është më aty. Nëse mbahet vetëm sa kohë ai është aty, nuk ishte përmirësim i procesit. Ishte prania e një personi.
+Prandaj kjo seri quhet “Përmirësimi që mbahet”. Përmirësimi duhet të vazhdojë edhe kur menaxheri që e nisi nuk është më aty. Nëse mbahet vetëm sa kohë ai është aty, atëherë ajo që mbajti ishte prania e një njeriu.
 
 **Një problem nuk quhet i zgjidhur vetëm sepse sot nuk u përsërit.**
 
@@ -92,6 +92,6 @@ Një menaxheri turni do t'i thosha se nuk ka nevojë të jetë Black Belt për t
 
 Jo çdo problem i turnit duhet kthyer në projekt kompleks. Por duhet shmangur ndryshimi i procedurave vetëm sepse një KPI doli keq.
 
-Fletën më poshtë mund ta plotësosh për një problem të vetëm dhe ta kopjosh. Nëse do ta shohësh gjithë ciklin në një rast të plotë, [Six Sigma në magazinë](/sq/tools/six-sigma-dmaic/) e ndjek hap pas hapi një rast mësimor. Është shembull për të mësuar, jo histori nga puna ime.
+Fletën më poshtë mund ta plotësosh për një problem të vetëm dhe ta kopjosh. Nëse do ta shohësh gjithë ciklin në një rast të plotë, [Six Sigma në magazinë](/sq/tools/six-sigma-dmaic/) e ndjek hap pas hapi një rast mësimor. Është shembull mësimor dhe nuk vjen nga puna ime.
 
-Pesë pyetje nuk të bëjnë black belt. Por të ndalojnë të kërcesh nga problemi drejt e te zgjidhja, dhe në një turn të zakonshëm kjo është gjysma e punës.
+Pesë pyetje mjaftojnë që të mos kërcesh nga problemi drejt e te zgjidhja, dhe në një turn të zakonshëm kjo është gjysma e punës.

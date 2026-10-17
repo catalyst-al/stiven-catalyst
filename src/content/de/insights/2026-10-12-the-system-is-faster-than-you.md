@@ -40,29 +40,27 @@ diagram: decision-split
 
 In jedem Job, den ich gemacht habe, gab es ein System, das schneller war als ich. Die Kasse im Laden. Der Scanner und die Tourenplanung auf der letzten Meile. Das Hotelsystem an der Rezeption und im Night Audit. Das Dashboard, das rot wird. In mehr als dreißig Essays auf dieser Seite tauchen diese Systeme auf den meisten Seiten auf, aber auf keiner sind sie das Thema. Sie sind da wie der Tisch in einer Erzählung: Alle arbeiten daran, niemand beschreibt ihn.
 
-In einer Schicht fragt niemand, ob wir Technik einsetzen sollen. Sie ist da, wenn man kommt, und sie ist noch da, wenn man geht. Die Frage, die tatsächlich auftaucht, in immer neuen Worten, ist eine andere: Das System sagt das eine, die Leute auf der Fläche sagen etwas anderes, wem glaube ich?
+In einer Schicht fragt niemand, ob wir Technik einsetzen sollen. Sie ist da, wenn man kommt, und sie ist noch da, wenn man geht. Die Frage, die tatsächlich auftaucht, in immer neuen Worten, ist eine andere: Das System sagt das eine, die Leute vor Ort sagen etwas anderes, wem glaube ich?
 
 Dahinter steht eine schwerere: Wenn das System falsch lag und ich ihm gefolgt bin, wer trägt dann die Verantwortung?
 
-Mit diesem Essay beginnt eine Reihe über diese Frage. Die Reihe fragt, was der Person in der Schicht bleibt, wenn das System schneller ist als sie, und lässt beiseite, welche Systeme man kaufen soll und was sie in fünf Jahren können.
+Mit diesem Essay beginnt eine Reihe über diese Frage. Die Reihe fragt, was der Person in der Schicht bleibt, wenn das System schneller ist als sie, und lässt beiseite, welche Systeme man kaufen soll und was sie in fünf Jahren können. Ihr Material sind eine Änderung am System für die Touren- und Zeitplanung auf der letzten Meile im August 2025, die tägliche Arbeit mit Fahrern, Touren und den Problemen, die zwischen Plan und Rampe entstehen, und dokumentierte Beschwerden aus dem Hotel über Wasserdruck und Sauberkeit im Bad. Wie überall auf dieser Seite nenne ich keine Systeme oder Anwendungen und beschreibe nicht, wie sie intern funktionieren.
 
-Der Essay stützt sich auf drei Dinge: eine Änderung am System für die Touren- und Zeitplanung auf der letzten Meile im August 2025, die tägliche Arbeit mit Fahrern, Touren und den Problemen, die zwischen Plan und Rampe entstehen, und dokumentierte Beschwerden aus dem Hotel über Wasserdruck und Sauberkeit im Bad. Einen dokumentierten Fall, in dem ein System falsch entschieden hat und ich das entdeckt und korrigiert habe, habe ich nicht, ebenso wenig eine Messung, wie oft das System richtig liegt. Ob es oft oder selten falsch liegt, kann ich deshalb nicht sagen; die Szenen mit Fahrern und Touren sind Bilder, als solche gekennzeichnet, keine Erinnerungen. Wie überall auf dieser Seite nenne ich keine Systeme oder Anwendungen und beschreibe nicht, wie sie intern funktionieren.
-
-## August 2025: der Plan, der von der Fläche lernen wollte
+## August 2025: der Plan, der aus der Praxis lernen wollte
 
 Im August 2025 wurde auf der letzten Meile das System geändert, das Touren und Zeiten plante. Eines der Ziele war, unrealistische Pläne, Planungsfehler und operative Ausnahmen zu verringern. Außerdem sollten Informationen aus dem Feld genutzt werden, um die Planung zu verbessern.
 
-Was sich danach verändert hat, kann ich nicht sagen, weil ich es nicht gemessen habe. Aber schon die Ziele verraten etwas, und das ist meine Lesart. Ein System, das unrealistische Pläne verringern soll, hat unrealistische Pläne gemacht. Und ein System, das Informationen aus dem Feld braucht, gibt in seiner eigenen Sprache zu, was die Leute auf der Fläche längst wissen: Manches sieht man nur draußen.
+Was sich danach verändert hat, kann ich nicht sagen, weil ich es nicht gemessen habe. Aber schon die Ziele verraten etwas, und das ist meine Lesart. Ein System, das unrealistische Pläne verringern soll, hat unrealistische Pläne gemacht. Und ein System, das Informationen aus dem Feld braucht, gibt in seiner eigenen Sprache zu, was man vor Ort längst weiß: Manches sieht man nur draußen.
 
 Bleibt die Frage, wer ihm diese Informationen liefert. Das System bekommt sie nur, wenn jemand vor Ort sie sieht, aufschreibt und dorthin schickt, wo jemand sie nutzen kann.
 
 ## Richtig, bis es falsch liegt
 
-Das erste Bild. Stellen Sie sich eine Tour vor, die das System für einen neuen Fahrer geplant hat. Die Reihenfolge der Stopps ist aus Sicht des Systems perfekt: kürzeste Strecke, kürzeste Zeit, kein Zurückfahren. Der Fahrer hält sich daran. Der dritte Stopp ist ein Laden, der um zehn öffnet, und das System hat ihn auf halb neun gelegt, weil er näher lag.
+Die erste Szene ist ein Bild, keine Erinnerung: Einen dokumentierten Fall, in dem ein System falsch entschieden hat und ich das entdeckt und korrigiert habe, habe ich nicht. Stellen Sie sich eine Tour vor, die das System für einen neuen Fahrer geplant hat. Die Reihenfolge der Stopps ist aus Sicht des Systems perfekt: kürzeste Strecke, kürzeste Zeit, kein Zurückfahren. Der Fahrer hält sich daran. Der dritte Stopp ist ein Laden, der um zehn öffnet, und das System hat ihn auf halb neun gelegt, weil er näher lag.
 
 Das System hat getan, wofür es gebaut wurde: Strecken berechnet. Dass der Laden Öffnungszeiten hat, wusste es nicht, weil es ihm niemand gesagt hat. Ein Fahrer, der das Gebiet kennt, hätte es auf einen Blick gesehen. Der neue Fahrer hat dem Bildschirm vertraut, weil der Bildschirm schneller und sicherer war als sein eigenes Urteil.
 
-Jede Entscheidung von Hand nachzuprüfen würde die Schicht verlangsamen, ohne sie sicherer zu machen. Die Aufgabe ist, ohne Kampf gegen das System die Fälle zu erkennen, in denen es falsch liegt, und zwar dann, wenn sie eintreten. Diese Fälle haben oft dieselbe Form: Das System wusste etwas nicht, was man vor Ort wusste. Die Öffnungszeiten. Dass das zweite Tor kaputt ist. Dass der Gast in diesem Zimmer derjenige ist, der sich gestern beschwert hat. Dass die Tasche mit diesem Code auf dem falschen Trolley lag, obwohl der Scan sie bestätigt hatte.
+Jede Entscheidung von Hand nachzuprüfen würde die Schicht verlangsamen, ohne sie sicherer zu machen. Die Aufgabe ist, ohne Kampf gegen das System die Fälle zu erkennen, in denen es falsch liegt, und zwar dann, wenn sie eintreten. Wie oft das vorkommt, kann ich nicht sagen, denn wie oft das System richtig liegt, habe ich nie gemessen. Aber diese Fälle haben oft dieselbe Form: Das System wusste etwas nicht, was man vor Ort wusste. Die Öffnungszeiten. Dass das zweite Tor kaputt ist. Dass der Gast in diesem Zimmer derjenige ist, der sich gestern beschwert hat. Dass die Tasche mit diesem Code auf dem falschen Trolley lag, obwohl der Scan sie bestätigt hatte.
 
 **Das System ist schneller als Sie in allem, was man ihm gesagt hat. Von dem, was man ihm nicht gesagt hat, weiß es nichts. Und das meiste, was man vor Ort weiß, hat nie jemand irgendwem gesagt.**
 
@@ -80,11 +78,11 @@ Eine Schichtleitung kann hier auf drei Arten danebenliegen. Es sind Muster, kein
 
 ## An der Rezeption: der Status und die Geschichte
 
-Im Hotel kennt das System die Reservierungen, die Zimmerstatus, die Anreisen, die Abreisen und die Zahlungsvorgänge. Die Rezeption weiß außerdem, was der Gast am Tresen sagt und was aus den anderen Abteilungen kommt.
+Im Hotel kennt das System die Reservierungen, den Stand jedes Zimmers, die Anreisen, die Abreisen und die Zahlungsvorgänge. Die Rezeption weiß außerdem, was der Gast am Tresen sagt und was aus den anderen Abteilungen kommt.
 
 Aus dem Night Audit habe ich dokumentierte Beschwerden über den Wasserdruck in einer Dusche und über ein Bad, das nicht richtig gereinigt war. Keine von beiden wurde an der Rezeption gelöst: Die erste war Sache der Technik, die zweite Sache des Housekeepings, wie ich in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben habe. Und solange sie offen blieben, musste die nächste Schicht davon wissen.
 
-Die Lehre, die ich daraus ziehe, braucht keinen falschen Status auf dem Bildschirm: Der Status im System und die ganze Geschichte eines Problems sind nicht dasselbe. Ein Zimmer kann auf dem Bildschirm „frei“ sein und trotzdem eine Beschwerde hinter sich haben, die niemand abgeschlossen hat. Diese Geschichte hält nur die [Übergabe](/de/insights/why-the-handover-is-underrated/) fest, und auch sie nur, wenn jemand sie aufschreibt.
+Die Lehre, die ich daraus ziehe, braucht keinen falschen Status auf dem Bildschirm: Der Status im System und die ganze Geschichte eines Problems sind nicht dasselbe. Ein Zimmer kann auf dem Bildschirm „frei“ sein, während eine Beschwerde dazu noch offen ist, die niemand abgeschlossen hat. Diese Geschichte hält nur die [Übergabe](/de/insights/why-the-handover-is-underrated/) fest, und auch sie nur, wenn jemand sie aufschreibt.
 
 ## Drei Fragen zu jeder Entscheidung
 
@@ -92,7 +90,7 @@ Zu jeder Entscheidung, die das System in meiner Schicht trifft, würde ich heute
 
 Die ersten beiden Fragen beantwortet man einmal und schreibt die Antworten auf. Die dritte ist die eigentliche Arbeit. Auf der letzten Meile kann die Antwort ein Anruf des Fahrers sein, ein Trolley, der nicht zu seiner Tour passt, oder eine Zahl im Stand-up, die nicht zum Tag passt. Aus der Ferne, wie ich in [80+ Fahrzeuge führen, die man nicht sieht](/de/insights/80-vehicles-you-cannot-see/) geschrieben habe, ist die Antwort dünner: Das Problem erreicht Sie nur, wenn jemand es sieht, versteht und meldet.
 
-Kann ich die dritte Frage zu einer Entscheidung nicht beantworten, dann führe ich diesen Teil des Betriebs nicht. Ich laufe ihm hinterher.
+Kann ich die dritte Frage zu einer Entscheidung nicht beantworten, dann laufe ich in diesem Teil des Betriebs nur mit.
 
 Nach den Fragen kommt die Regel. Schlägt das System eine Entscheidung vor, nimmt das dem Menschen nicht die Verantwortung ab, sie zu prüfen, vor allem dann nicht, wenn es Anzeichen gibt, dass etwas nicht stimmt. Das gilt aber nur, wenn klar ist, wer die Entscheidung korrigieren darf, wer die Änderung genehmigt und wie das Problem festgehalten wird. Ohne diese drei bedeutet „Prüfen Sie das“ in Wahrheit „Korrigieren Sie es stillschweigend“.
 
@@ -100,7 +98,7 @@ Nach den Fragen kommt die Regel. Schlägt das System eine Entscheidung vor, nimm
 
 Das System mag falsch gelegen haben, verantwortlich für die Schicht sind trotzdem Sie. Das gehört zum Job, und ungerecht ist daran nichts.
 
-System und Erfahrung gehören in denselben Prozess: einen, in dem das System Ihnen hilft, schneller zu arbeiten, und in dem Menschen erkennen, melden und korrigieren können, was es nicht versteht. Das System gibt Ihnen Tempo, Gedächtnis und Zahlen, die Sie allein nie hätten. Im Gegenzug geben Sie ihm, was ihm fehlt: Augen vor Ort, eine Frage, wenn etwas keinen Sinn ergibt, und jemanden, der dafür einsteht.
+System und Erfahrung gehören in denselben Prozess: einen, in dem das System Ihnen hilft, schneller zu arbeiten, und in dem Menschen erkennen, melden und korrigieren können, was es nicht versteht. Das System gibt Ihnen Tempo, Gedächtnis und Zahlen, die Sie allein nie hätten. Im Gegenzug geben Sie ihm, was ihm fehlt: jemanden, der vor Ort hinschaut, eine Frage, wenn etwas keinen Sinn ergibt, und jemanden, der dafür einsteht.
 
 **Das System entscheidet zuerst. Ihnen bleibt der Teil, den man ihm nie gesagt hat, und die Verantwortung für alles.**
 

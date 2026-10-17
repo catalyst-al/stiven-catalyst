@@ -31,11 +31,11 @@ firstMove:
 
 Ein Plakat mit sechs Prinzipien passt an jede Wand. Die Rampe liest es nie.
 
-Was die Rampe zeigt, ist, ob die Ordnung lebt: ob die Trolleys organisiert sind, ob die Tore geschlossen werden, ob Bestellungen vermischt werden, ob die Leute sich dort bewegen, wo sie sollen. Am deutlichsten zeigt sie es am schweren Tag, nicht an dem Tag, an dem eine Kontrolle kommt.
+Was die Rampe zeigt, ist, ob die Ordnung lebt: ob die Trolleys organisiert sind, ob die Tore geschlossen werden, ob Bestellungen vermischt werden, ob die Leute sich dort bewegen, wo sie sollen. Am deutlichsten zeigt sie es am schweren Tag.
 
 5S ist eine Methode aus Japan mit fünf Schritten: Nötiges von Unnötigem trennen, alles an seinen Platz bringen, sauber machen, standardisieren und dranbleiben. 6S fügt einen sechsten hinzu: Sicherheit. Auf dem Papier wirkt das einfach. In der Praxis wird kaum etwas so leicht missverstanden.
 
-Auf der letzten Meile in Deutschland gehörte 5S zu den operativen Themen in unserer Kommunikation und im Daily Stand-up. Meine Arbeit betraf direkt die Organisation der Rampe, des Lagers und der Ladebereiche, und ich habe die Prinzipien von 5S mit der Sicherheit, der operativen Disziplin und Kennzahlen wie Damage, Incomplete und Loading Time verbunden. Es gab operative Kontrollen und Vorgaben, die Rampenstandards einzuhalten. Ob es darüber hinaus ein offizielles 6S-Programm des Unternehmens gab, mit eigenen Audits, Bewertungen, Bodenmarkierungen oder farbigen Zonen, weiß ich nicht, und ich behaupte nicht, eines geleitet zu haben.
+Auf der letzten Meile in Deutschland gehörte 5S zu den operativen Themen in unserer Kommunikation und im Daily Stand-up. Meine Arbeit betraf direkt die Organisation der Rampe, des Lagers und der Ladebereiche, und ich habe die Prinzipien von 5S mit der Sicherheit, der operativen Disziplin und Kennzahlen wie Damage, Incomplete und Loading Time verbunden. Es gab operative Kontrollen und Vorgaben, die Rampenstandards einzuhalten.
 
 ## Wie Ordnung an der Rampe aussah
 
@@ -63,7 +63,7 @@ Deshalb muss Ordnung sichtbar sein. Wenn alles seinen Platz hat, fällt auf, was
 
 ## Das sechste S
 
-Auf der letzten Meile war Sicherheit Teil des Betriebs selbst:
+Ob das Unternehmen darüber hinaus ein offizielles 6S-Programm hatte, mit eigenen Audits, Bewertungen, Bodenmarkierungen oder farbigen Zonen, weiß ich nicht, und ich behaupte nicht, eines geleitet zu haben. Ich weiß aber, dass Sicherheit auf der letzten Meile Teil des Betriebs selbst war:
 
 - die Tore nach dem Verladen schließen;
 - die Regeln, wie man sich an der Rampe bewegt und wo man steht;
@@ -71,7 +71,7 @@ Auf der letzten Meile war Sicherheit Teil des Betriebs selbst:
 - Produkte so platzieren, dass Schäden und Gefahren vermieden werden;
 - die festgelegten Zonen und die Hygieneregeln einhalten.
 
-Das meiste davon ist Ordnung, Sicherheit und Qualität zugleich. Ein geschlossenes Tor schützt Menschen. Eine organisierte Ladung schützt das Produkt. Eine eingehaltene Zone schützt die Kühlkette. Sicherheit ist deshalb nicht einfach das letzte S, das an die Liste angehängt wurde, sondern der Grund, warum es die Liste gibt.
+Das meiste davon ist Ordnung, Sicherheit und Qualität zugleich. Ein geschlossenes Tor schützt Menschen. Eine organisierte Ladung schützt das Produkt. Eine eingehaltene Zone schützt die Kühlkette. Die Sicherheit kam deshalb zwar als letztes S auf die Liste, ist aber der Grund, warum es die Liste gibt.
 
 ## Der schwere Tag
 
@@ -91,6 +91,6 @@ Würde ich sie heute aufbauen, hielte ich sie kurz. Fünf Punkte, für einen Ber
 4. **Die Ladetore sind geschlossen.**
 5. **Offene Probleme sind an die nächste Schicht übergeben.**
 
-Der letzte Punkt verbindet die Ordnung des Ortes mit der Ordnung der Information. Ein aufgeräumter Bereich mit einem offenen Problem, von dem niemand weiß, ist kein aufgeräumter Bereich. Für diesen Teil hält die [Schichtübergabe](/de/tools/shift-handover/) die offenen Punkte mit Verantwortlichem und Uhrzeit fest und trägt sie von selbst in die nächste Schicht. Die Liste unten können Sie abhaken und für Ihren Bereich kopieren.
+Der letzte Punkt verbindet die Ordnung des Ortes mit der Ordnung der Information. Auch ein aufgeräumter Bereich kann ein offenes Problem verbergen, von dem niemand weiß. Für diesen Teil hält die [Schichtübergabe](/de/tools/shift-handover/) die offenen Punkte mit Verantwortlichem und Uhrzeit fest und trägt sie von selbst in die nächste Schicht. Die Liste unten können Sie abhaken und für Ihren Bereich kopieren.
 
-Das Plakat sagt, was sein soll. Die Rampe am Schichtende zeigt, was ist.
+Gehen Sie danach am Schichtende die Rampe ab und vergleichen Sie sie mit dem Plakat.

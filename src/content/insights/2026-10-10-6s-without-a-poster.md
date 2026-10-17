@@ -35,11 +35,11 @@ firstMove:
 
 Any wall can carry a poster with six principles. The ramp never reads it.
 
-What the ramp shows is whether the order is alive: whether the trolleys are organised, whether the gates get closed, whether orders get mixed up, whether people move where they should. It shows this most clearly on the hard day, not on the day an inspection comes.
+What the ramp shows is whether the order is alive: whether the trolleys are organised, whether the gates get closed, whether orders get mixed up, whether people move where they should. It shows this most clearly on the hard day.
 
 5S is a method from Japan with five steps: separate what is needed from what is not, put everything in its place, clean, standardise, and sustain. 6S adds a sixth: safety. On paper it looks simple. At work it is one of the easiest things to misunderstand.
 
-In last mile in Germany, 5S was one of the operational topics in our communication and in the daily stand-up. My work dealt directly with organising the ramp, the warehouse and the loading areas, and I linked the principles of 5S to safety, to operational discipline and to KPIs such as Damage, Incomplete and Loading Time. We had operational checks and requirements to follow the ramp standards. Whether there was also a formal company 6S programme, with its own audits, scoring, floor markings or colour-coded zones, I do not know, and I do not claim to have run one.
+In last mile in Germany, 5S was one of the operational topics in our communication and in the daily stand-up. My work dealt directly with organising the ramp, the warehouse and the loading areas, and I linked the principles of 5S to safety, to operational discipline and to KPIs such as Damage, Incomplete and Loading Time. We had operational checks and requirements to follow the ramp standards.
 
 ## What order looked like on the ramp
 
@@ -67,7 +67,7 @@ That is why order has to be visible. When everything has its place, the thing th
 
 ## The sixth S
 
-In last mile, safety was part of the operation itself:
+Whether the company also had a formal 6S programme, with its own audits, scoring, floor markings or colour-coded zones, I do not know, and I do not claim to have run one. What I do know is that in last mile, safety was part of the operation itself:
 
 - closing the gates after loading;
 - the rules for moving and standing on the ramp;
@@ -75,7 +75,7 @@ In last mile, safety was part of the operation itself:
 - placing products so that damage and hazards were avoided;
 - keeping to the designated zones and the hygiene rules.
 
-Most of these are order, safety and quality at the same time. A closed gate protects people. An organised load protects the product. A respected zone protects the cold chain. So safety, rather than being the last S added to the list, is the reason the list exists.
+Most of these are order, safety and quality at the same time. A closed gate protects people. An organised load protects the product. A respected zone protects the cold chain. So safety came last onto the list, and it is the reason the list exists.
 
 ## The hard day
 
@@ -95,6 +95,6 @@ If I were building it today, I would keep it short. Five points, for one area, a
 4. **The loading gates are closed.**
 5. **Open problems have been handed over to the next shift.**
 
-The last point links the order of the place to the order of the information. A tidy area with an open problem nobody knows about is not a tidy area. For that part, [Shift Handover](/tools/shift-handover/) keeps the open issues with an owner and a time, and carries them over to the next shift by itself. You can tick off the list below and copy it for your area.
+The last point links the order of the place to the order of the information. A tidy area can still hide an open problem nobody knows about. For that part, [Shift Handover](/tools/shift-handover/) keeps the open issues with an owner and a time, and carries them over to the next shift by itself. You can tick off the list below and copy it for your area.
 
-The poster says what should be. The ramp at the end of the shift shows what is.
+Then, at the end of the shift, walk the ramp and compare it with the poster.

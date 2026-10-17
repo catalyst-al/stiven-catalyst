@@ -48,13 +48,13 @@ corrections:
 
 In [The night the system went down](/insights/the-night-the-system-went-down/) I wrote about my first night of training at the hotel, when an update left the system unavailable for hours. I had come to learn the processes and spent most of the night waiting. This essay picks up where that one ended and turns from the system that stops to the system that arrives, and to the people who have to learn it.
 
-It draws on two experiences. In last mile, the move to a new system for calculating routes and travel times was planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries, and calibrations were planned so that the change would affect the drivers as little as possible. At the hotel, there were my first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. Front Desk Control grew out of that period. For the August change I have no verified before-and-after comparison, and no record of resistance or of a return to old habits.
+Two experiences stand behind it. In last mile, the move to a new system for calculating routes and travel times was planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries, and calibrations were planned so that the change would affect the drivers as little as possible. At the hotel, there were my first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. Front Desk Control grew out of that period.
 
 In those weeks in last mile we had problems with loading, missing bags, disorganised trolleys and delays, and I have them documented. I have no evidence that the new system caused them, and they may have had other causes. That is the easiest temptation when a new system arrives: billing it for everything that goes wrong in the first weeks.
 
 ## Two sides of the same door
 
-In last mile I was part of an operation whose planning technology was changing; at the hotel I was the newcomer who had to learn a system that was already there. Side by side, the two experiences show the same thing: a system can be technically better than the one it replaces without people being ready to work with it. Readiness is built, or not built, in the weeks after installation.
+In last mile I was part of an operation whose planning technology was changing; at the hotel I was the newcomer who had to learn a system that was already there. Side by side, the two experiences show the same thing: a system can be technically better than the one it replaces without people being ready to work with it. Readiness is built, or not built, in the weeks after installation. How that went after the August change I cannot show: I have no verified before-and-after comparison, and no record of resistance or of a return to old habits.
 
 **A new system does not become part of the work because it has been installed. It does when people understand it, know how to use it, and know what to do when it does not help them.**
 
@@ -85,7 +85,7 @@ Nor do I think that every document outside the system is a bad habit. A checklis
 When a new system arrives, I would today give priority to preparing the people, not only to installing the program. I have not led a change programme of that kind; these are the things I would recommend:
 
 1. **Explain why the change is being made.** Not only what the new system does.
-2. **Show what changes in the daily work.** For each role, not one presentation for everyone.
+2. **Show what changes in the daily work.** Role by role, rather than in one presentation for everyone.
 3. **Training with real situations, not only a presentation of the functions.** The ordinary case and the difficult case.
 4. **Make it clear where to get help when something does not work.** At night as well, and in the first days as well.
 5. **Collect the problems of the first days and give the employees an answer.** A reported problem with no answer is the last lesson people learn about reporting.

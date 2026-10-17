@@ -49,9 +49,7 @@ In a shift, nobody asks whether we should use technology. It is there when you a
 
 And behind it lies a harder one: when the system was wrong and I followed it, who is responsible?
 
-This essay opens a series about that question. The series asks what is left for the person on shift when the system is faster than they are, and leaves aside which systems to buy and what they will do in five years.
-
-It rests on three things: a change to the route and time planning system in last mile in August 2025, the daily work with drivers, tours and the problems that arise between the plan and the ramp, and documented complaints from the hotel about water pressure and bathroom cleanliness. I have no documented case in which a system took a wrong decision that I discovered and corrected, and no measurement of how often the system is right, so I cannot say whether it is often wrong or rarely; the scenes with drivers and tours are pictures, marked as such, not memories. As elsewhere on this site, I name no systems or applications and do not describe how they work inside.
+This essay opens a series about that question. The series asks what is left for the person on shift when the system is faster than they are, and leaves aside which systems to buy and what they will do in five years. Its material is a change to the route and time planning system in last mile in August 2025, the daily work with drivers, tours and the problems that arise between the plan and the ramp, and documented complaints from the hotel about water pressure and bathroom cleanliness. As elsewhere on this site, I name no systems or applications and do not describe how they work inside.
 
 ## August 2025: the plan that wanted to learn from the floor
 
@@ -63,11 +61,11 @@ That leaves the question of who brings it the information. The system gets it on
 
 ## Right, until the moment it is not
 
-The first picture. Imagine a tour that the system has planned for a new driver. The order of the stops is perfect for the system: the shortest distance, the least time, no doubling back. The driver follows it. The third stop is a shop that opens at ten, and the system has put it at half past eight because it was nearer.
+The first scene is a picture rather than a memory: I have no documented case of a wrong system decision that I discovered and corrected. Imagine a tour that the system has planned for a new driver. The order of the stops is perfect for the system: the shortest distance, the least time, no doubling back. The driver follows it. The third stop is a shop that opens at ten, and the system has put it at half past eight because it was nearer.
 
 The system did what it was built for: it calculated distances. It did not know that the shop has opening hours, because nobody told it. A driver who knows the area would have seen it in a second. The new driver trusted the screen, because the screen was faster and surer than the driver's own judgement.
 
-Checking every decision by hand would make the shift slower without making it any safer. The job is to recognise, without fighting the system, the cases in which it is wrong, when they come. Those cases often have the same shape: the system did not know something the floor knew. The opening hours. That the second gate is broken. That the guest in that room is the one who complained yesterday. That the bag with that code was on the wrong trolley, even though the scan said yes.
+Checking every decision by hand would make the shift slower without making it any safer. The job is to recognise, without fighting the system, the cases in which it is wrong, when they come. How often that is I cannot say, because I have never measured how often the system is right. But the cases often have the same shape: the system did not know something the floor knew. The opening hours. That the second gate is broken. That the guest in that room is the one who complained yesterday. That the bag with that code was on the wrong trolley, even though the scan said yes.
 
 **The system is faster than you in everything it was told. It knows nothing of what it was not told. And most of what the floor knows has never been told to anyone.**
 
@@ -97,7 +95,7 @@ For every decision the system takes in my shift, today I would want to know thre
 
 The first two questions are answered once and written down. The third is the work. In last mile the answer can be a call from the driver, a trolley that does not match its tour, or a number in the stand-up that does not match the day. From a distance, as I wrote in [Leading 80+ vehicles you cannot see](/insights/80-vehicles-you-cannot-see/), the answer is thinner: the problem reaches you only if someone sees it, understands it and reports it.
 
-If I cannot answer the third question for a decision, I am not running that part of the operation. I am following it.
+If I cannot answer the third question for a decision, then in that part of the operation I am only following.
 
 After the questions comes the rule. A decision suggested by the system does not remove the human responsibility to check it, especially when there are signs that something is not right. But that only holds if it is clear who can correct the decision, who approves the change and how the problem is recorded. Without those three, “check it” means “correct it in silence”.
 

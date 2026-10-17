@@ -43,9 +43,7 @@ That rule says something the report does not: a missing bag is often found at th
 
 In [How we worked with damage](/insights/how-we-worked-with-damage/) I wrote that a percentage has no address. The same is true of Incomplete, with one important difference: here there is a moment when the problem can still be stopped.
 
-I understood Incomplete as an order that did not reach the customer complete; I do not know the official formula or the exact counting rules. The reports give me these figures: in April 2025, Incomplete was 1.18% against a 0.8% target, and in a June 2025 report it was 0.63%, with 13 cases.
-
-The figures are real, but they do not show which measures brought the change, and I do not present that change as the result of my work. Nor do I know through which channel and in which system each case was recorded, or which problem occurred most often.
+I understood Incomplete as an order that did not reach the customer complete; the official formula and the exact counting rules I never knew. The reports give me these figures: in April 2025, Incomplete was 1.18% against a 0.8% target, and in a June 2025 report it was 0.63%, with 13 cases. They do not say which measures brought the change, so I do not claim it as the result of my work, and I cannot say through which channel and system each case was recorded, or which problem occurred most often.
 
 ## What we found in the warehouse
 

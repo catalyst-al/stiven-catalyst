@@ -33,7 +33,7 @@ firstMove:
 
 Kur nisa Front Desk Control, nuk mungonte asnjë dokument. Problemi im ishte të gjeja në to, gjatë turnit, atë që më duhej.
 
-Ky është rasti më konkret i serisë: një projekt real, i zhvilluar hap pas hapi, që kushdo mund ta hapë dhe ta kontrollojë. Ai tregon një mënyrë për ta organizuar informacionin. Sa ka ndikuar në kohën e trajnimit apo në gabimet nuk është matur.
+Ky është rasti më konkret i serisë: një projekt real, i zhvilluar hap pas hapi, që kushdo mund ta hapë dhe ta kontrollojë. Ai tregon një mënyrë për ta organizuar informacionin.
 
 ## Çfarë është
 
@@ -57,7 +57,7 @@ Nuk doja të mbaja mend ku ndodhej çdo dokument. Doja të dija ku të shkoja p�
 
 Në vend që të shkruaja një manual të gjatë që lexohet nga fillimi në fund, e organizova mjetin sipas punës që duhej kryer, me pjesë më vete për Front Office dhe Night Audit: udhëzime, kërkim, lista kontrolli dhe pamje që shpjegojnë hapat.
 
-Një nga vendimet më të rëndësishme ishte që përdoruesi të mos kishte nevojë ta mbante mend emrin e dokumentit origjinal për të gjetur një përgjigje. Nëse po kryen një procedurë, duhet të mund të kërkosh procedurën, jo të gërmosh nëpër dosje derisa të gjesh PDF-në e duhur.
+Një nga vendimet më të rëndësishme ishte që përdoruesi të mos kishte nevojë ta mbante mend emrin e dokumentit origjinal për të gjetur një përgjigje. Nëse po kryen një procedurë, duhet të mund ta kërkosh drejtpërdrejt procedurën, pa gërmuar nëpër dosje për PDF-në e duhur.
 
 **Kërko procedurën, jo dokumentin.**
 
@@ -71,11 +71,11 @@ Versioni publik nuk mund të përfshinte të dhëna reale të mysafirëve, rezer
 
 ## Çfarë do të bëja ndryshe sot
 
-I konfirmuar është vetëm përdorimi im, ndërsa e ndërtoja mjetin dhe mësoja. Më ndihmoi ta sillja informacionin në një strukturë më të qartë. Mund t'i hyjë në punë edhe dikujt që është në trajnim; kjo është mundësi, jo rezultat, dhe nuk mund të them se departamenti e mori në përdorim.
+I konfirmuar është vetëm përdorimi im, ndërsa e ndërtoja mjetin dhe mësoja; sa ka ndikuar në kohën e trajnimit apo në gabimet nuk është matur. Më ndihmoi ta sillja informacionin në një strukturë më të qartë. Mund t'i hyjë në punë edhe dikujt që është në trajnim, por kjo mbetet mundësi, dhe nuk mund të them se departamenti e mori në përdorim.
 
 Sot do ta nisja edhe më herët strukturën e informacionit, para se të merresha me pamjen e faqes. Fillimisht do të përcaktoja cilat pyetje lindin më shpesh gjatë një turni dhe cilat procedura kanë më shumë rëndësi, e pastaj do t'i ndërtoja përgjigjet rreth këtyre nevojave.
 
-Do t'i ndaja gjithashtu më qartë tri kategori. Këtë e rekomandoj sot si përmirësim; nuk është funksion që projekti e ka plotësisht:
+Do t'i ndaja gjithashtu më qartë tri kategori. Këtë e rekomandoj sot; projekti nuk e ka ende plotësisht:
 
 - **E konfirmuar:** procedura është kontrolluar dhe dokumentuar.
 - **Në verifikim:** materiali ekziston, por duhet kontrolluar në praktikë.
@@ -89,7 +89,7 @@ Gjatë ndërtimit kuptova se sfida më e rëndësishme ishte ta organizoja infor
 
 Për këtë nuk ke nevojë të ndërtosh një aplikacion. Metoda vlen njësoj për një dokument të vetëm, një faqe në intranet ose një tabelë. Pesë hapa:
 
-1. **Identifiko punën.** Cilin proces do ta bësh më të lehtë? Fillo nga një, jo nga të gjithë.
+1. **Identifiko punën.** Cilin proces do ta bësh më të lehtë? Fillo nga një.
 2. **Mblidh burimet.** Ku ndodhet sot informacioni? Lista kontrolli, dokumente, video, shënime, kolegë.
 3. **Ndërto një rrugë të qartë.** Si mund ta gjejë dhe ta ndjekë dikush procedurën pa e ditur emrin e dokumentit origjinal?
 4. **Verifiko dhe mbro informacionin.** Çfarë është konfirmuar, çfarë është ende në verifikim dhe çfarë duhet anonimizuar?
