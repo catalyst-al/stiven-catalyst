@@ -1,6 +1,6 @@
 // The monthly Management Review (lib/weekly, src/_data/weekly.js): every issue has its ten pages in the three
-// languages, every figure names a source that exists, the charts are drawn for print and for phones, and the
-// printed issue (scripts/weekly.mjs) is there for the reader.
+// languages, every figure names a source that exists, the charts are drawn for print and for phones with a note on
+// what they count, and the printed issue (scripts/weekly.mjs) is there for the reader.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -98,7 +98,7 @@ test('a source line never names the same thing twice: two sources by one author 
   }
 });
 
-test('the charts are drawn for the print and again, narrower, for phones', async () => {
+test('the charts are drawn for the print and again, narrower, for phones, each with a note on what it counts', async () => {
   const weekly = await load();
   for (const issue of weekly.issues) {
     for (const lang of LANGS) {
@@ -110,6 +110,8 @@ test('the charts are drawn for the print and again, narrower, for phones', async
         assert.ok(!chart.svg.includes('NaN') && !chart.svg.includes('undefined'), `${issue.slug} ${lang} ${chart.type}`);
         if (chart.type !== 'donut') assert.match(chart.svgNarrow, /viewBox="0 0 230 /, `${issue.slug} ${lang} ${chart.type}`);
         assert.ok(chart.sourceLine, `${issue.slug} ${lang} ${chart.type}: source`);
+        // What it counts (its base, unit or limit): its own note or its page's, never a bare figure.
+        assert.ok(chart.note && chart.note.trim().length > 20, `${issue.slug} ${lang} ${chart.type}: no note`);
       }
     }
   }
