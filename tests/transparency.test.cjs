@@ -78,6 +78,28 @@ test('the publications say when they went online, and tell search engines the sa
   for (const [, prefix] of LANGS) assert.doesNotMatch(read(`${prefix}magazine/management-review.html`), /every month brings|çdo muaj vjen|jeden Monat kommt/);
 });
 
+// The essays and reflections: the day their text last changed (src/_data/edited.json, scripts/online-dates.mjs) is the
+// one the byline, the search engines, the feed and the sitemap give, so a correction or an edit shows everywhere.
+test('an essay edited after it came out says so in its byline, to search engines, in the feed and in the sitemap', { skip: !hasSite }, () => {
+  const edited = JSON.parse(fs.readFileSync('src/_data/edited.json', 'utf8'));
+  const essays = fs.readdirSync('src/content/insights').filter((file) => file.endsWith('.md'));
+  assert.equal(Object.keys(edited).filter((file) => file.startsWith('src/content/insights/')).length, essays.length);
+  for (const day of Object.values(edited)) assert.match(day, /^2026-\d\d-\d\d$/);
+  const file = 'src/content/insights/2026-10-13-the-tools-you-build-yourself.md';
+  const day = edited[file];
+  assert.ok(day > '2026-10-13', 'the essay was corrected after 13 October');
+  for (const [lang, prefix, word] of [['en', '', 'revised'], ['de', 'de/', 'überarbeitet am'], ['sq', 'sq/', 'rishikuar më']]) {
+    const html = read(`${prefix}insights/the-tools-you-build-yourself/index.html`);
+    assert.equal(html.match(/"datePublished":"([^"]+)"/)[1], '2026-10-13', lang);
+    assert.equal(html.match(/"dateModified":"([^"]+)"/)[1], edited[file.replace('content/', `content/${prefix}`)], lang);
+    assert.match(html, new RegExp(`class="article-byline"[\\s\\S]*?${word} <time datetime="${edited[file.replace('content/', `content/${prefix}`)]}">`), lang);
+  }
+  const feed = read('feed.xml');
+  const entry = feed.slice(feed.indexOf('/insights/the-tools-you-build-yourself/'));
+  assert.match(entry, new RegExp(`<updated>${day}T00:00:00Z</updated>`));
+  assert.match(read('sitemap.xml'), new RegExp(`insights/the-tools-you-build-yourself/</loc><lastmod>${day}</lastmod>`));
+});
+
 test('the diagram of "The system is faster than you" gives no number it cannot source', () => {
   const diagrams = fs.readFileSync('lib/diagrams.js', 'utf8');
   const split = diagrams.slice(diagrams.indexOf('id: "decision-split"'), diagrams.indexOf('id: "dashboard-lag"'));

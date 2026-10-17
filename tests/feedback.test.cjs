@@ -1,5 +1,6 @@
 // The feedback question at the end of a tool page: its texts are translated, the script and the partial
-// agree on their names, the mail fallback opens the visitor's mail program, and a form action is posted to.
+// agree on their names, the mail fallback opens the visitor's mail program and keeps the text to copy, and a form
+// action is posted to.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -20,7 +21,7 @@ test('every text of the feedback form has a German and an Albanian translation',
 });
 
 test('the partial carries every name and attribute the script reads', () => {
-  for (const name of ['data-tool-feedback', 'data-tool-feedback-status', 'data-sent', 'data-opened', 'data-failed', 'data-subject', 'name="helped"', 'name="message"', 'name="email"', 'name="website"', 'name="page"', 'name="tool"', 'name="lang"']) {
+  for (const name of ['data-tool-feedback', 'data-tool-feedback-status', 'data-sent', 'data-opened', 'data-failed', 'data-copied', 'data-copy-failed', 'data-feedback-copy', 'data-subject', 'name="helped"', 'name="message"', 'name="email"', 'name="website"', 'name="page"', 'name="tool"', 'name="lang"']) {
     assert.ok(partial.includes(name), name);
   }
   for (const key of ['dataset.sent', 'dataset.opened', 'dataset.failed', 'dataset.subject', 'dataset.mail', 'dataset.line', 'helped:', 'email:', '"website"', '"page"']) {
@@ -31,12 +32,12 @@ test('the partial carries every name and attribute the script reads', () => {
 // The form as the partial renders it, with the action or the mail address of the site.
 const page = ({ action = '', mail = 'contact@example.test' } = {}) => {
   const attrs = action ? `action="${action}" method="post"` : `data-mail="${mail}"`;
-  const dom = new JSDOM(`<html><body><form data-tool-feedback ${attrs} data-sent="Thank you." data-opened="Your email program opens. If not, write to" data-failed="Could not send. Write to" data-subject="Feedback: Pareto 80/20">
+  const dom = new JSDOM(`<html><body><form data-tool-feedback ${attrs} data-sent="Thank you." data-opened="Your email program opens. If not, write to" data-failed="Could not send. Write to" data-copied="Copied. Paste it into an email to" data-copy-failed="Copying did not work." data-subject="Feedback: Pareto 80/20">
     <input type="hidden" name="subject" value="Feedback: Pareto 80/20"><input type="hidden" name="tool" value="/tools/pareto/"><input type="hidden" name="lang" value="de"><input type="hidden" name="page" value="https://example.test/de/tools/pareto/">
     <fieldset><label><input type="radio" name="helped" value="yes" required><span>Yes</span></label><label><input type="radio" name="helped" value="no"><span>No</span></label></fieldset>
     <label class="tf-field"><textarea name="message"></textarea></label><label class="tf-field"><input type="email" name="email"></label>
     <div class="tf-trap"><input type="text" name="website"></div>
-    <div class="tf-actions"><button type="submit">Send</button></div>
+    <div class="tf-actions"><button type="submit">Send</button>${action ? '' : '<button type="button" data-feedback-copy>Copy message</button>'}</div>
     <p data-tool-feedback-status hidden></p></form></body></html>`, { url: 'https://example.test/de/tools/pareto/', runScripts: 'outside-only' });
   const w = dom.window;
   w.eval(script);
@@ -66,7 +67,48 @@ test('without an action the answer goes by email through a mailto: link', async 
   assert.equal(status.hidden, false);
   assert.ok(status.textContent.startsWith('Your email program opens.'));
   assert.equal(status.querySelector('a').getAttribute('href'), 'mailto:contact@example.test');
-  assert.equal(form.querySelector('fieldset').hidden, true, 'the question is folded away once answered');
+  // Nothing is sent yet: the answer stays on the page, the button can prepare it again.
+  assert.equal(form.querySelector('fieldset').hidden, false);
+  assert.equal(form.querySelector('.tf-field').hidden, false);
+  assert.equal(form.querySelector('textarea').value, 'Ein Export nach Excel fehlt.');
+  assert.equal(form.querySelector('button[type=submit]').disabled, false);
+});
+
+test('without an action "Copy message" puts the subject and the body on the clipboard, and says where to send it', async () => {
+  const { w, form, status } = page();
+  const copied = [];
+  Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async (text) => { copied.push(text); } } });
+  form.querySelector('input[value=yes]').checked = true;
+  form.querySelector('textarea').value = 'Passt.';
+  form.querySelector('[data-feedback-copy]').click();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(copied.length, 1);
+  assert.match(copied[0], /^Feedback: Pareto 80\/20\n\nHelped: yes\n\nPasst\.\n\nPage: /);
+  assert.ok(status.textContent.startsWith('Copied.'));
+  assert.equal(status.querySelector('a').getAttribute('href'), 'mailto:contact@example.test');
+  assert.equal(form.querySelector('fieldset').hidden, false);
+});
+
+test('a clipboard the browser refuses says so, and the text stays in the field', async () => {
+  const { w, form, status } = page();
+  Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async () => { throw new Error('denied'); } } });
+  form.querySelector('textarea').value = 'Passt.';
+  form.querySelector('[data-feedback-copy]').click();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(status.textContent, 'Copying did not work.');
+  assert.equal(form.querySelector('textarea').value, 'Passt.');
+});
+
+test('without a form service the button says it prepares the email, and the note says nothing is sent from the page', () => {
+  for (const file of ['src/_includes/partials/tool-feedback.njk', 'src/_includes/partials/essay-feedback.njk', 'src/_includes/pages/your-challenge.njk']) {
+    const source = fs.readFileSync(file, 'utf8');
+    const mailOnly = source.slice(source.indexOf('{%- else %}', source.indexOf('class="tf-actions"')));
+    assert.match(mailOnly, /"Prepare the email" \| t\(lang\)/, file);
+    assert.match(mailOnly, /data-feedback-copy>\{\{ "Copy message" \| t\(lang\) \}\}/, file);
+    assert.match(mailOnly, /"Nothing is sent from this page\./, file);
+    assert.ok(source.includes("data-copied=") && source.includes("data-copy-failed="), file);
+  }
+  assert.ok(script.includes('dataset.copied') && script.includes('dataset.copyFailed'));
 });
 
 test('with an action the answer is posted there and the form thanks the visitor', async () => {

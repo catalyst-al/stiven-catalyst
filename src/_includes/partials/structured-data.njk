@@ -27,6 +27,8 @@
     last changed (online.json, from scripts/online-dates.mjs); other pages give their own date. -#}
 {%- set onlineKey = issue.slug if (issue and issue.slug) else (volume.slug if (volume and volume.slug) else (review.slug if (review and review.slug in page.url) else "")) %}
 {%- set onlineDates = online[onlineKey] if onlineKey else null %}
+{#- An essay or a reflection: the day its text last changed on main (edited.json, from the same script). -#}
+{%- set editedDay = edited[page.inputPath | replace("./", "")] %}
 {%- if ogType == "article" %}
   {%- set minutes = (readingTime or "") | replace(" min", "") | trim %}
   {%- set article = {
@@ -37,7 +39,7 @@
     "description": pageDescription,
     "image": [socialImage | absoluteUrl],
     "datePublished": onlineDates.published if onlineDates else (page.date | isoDate),
-    "dateModified": onlineDates.modified if onlineDates else (page.date | isoDate),
+    "dateModified": onlineDates.modified if onlineDates else (editedDay or (page.date | isoDate)),
     "inLanguage": lang or "en",
     "author": { "@id": siteUrl + "#author" },
     "publisher": { "@id": siteUrl + "#publisher" },
