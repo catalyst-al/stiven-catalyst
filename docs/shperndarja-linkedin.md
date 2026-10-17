@@ -138,7 +138,7 @@ Lidhja: https://stivencatalyst.com/de/tools/kpi-diagnostic/
 
 Lidhja: https://stivencatalyst.com/de/tools/incomplete-control/
 
-> Unvollständige Lieferungen: Zuerst mussten wir aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Eine Bestellung kann das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür steht: durch eine fehlende Tasche oder einen vermischten Trolley.
+> Unvollständige Lieferungen: Zuerst mussten wir aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, und vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
 >
 > Jeder unvollständige Auftrag kostet eine Nachlieferung und das Vertrauen des Kunden. Die Vollständigkeitskontrolle erfasst jeden Fall mit dem Prozessschritt, an dem er entstand, und dem Grund: Bestandsgenauigkeit, Pickfehler, Packfehler, ausgelassener Scan, Sortier- oder Ladefehler. Sie zeigt die Quote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Fehlern und wo sie entstehen.
 >
