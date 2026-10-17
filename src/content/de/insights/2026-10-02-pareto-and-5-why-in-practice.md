@@ -55,6 +55,4 @@ Lautet die einzige Antwort einer Analyse „Der Mitarbeiter war unaufmerksam“,
 
 In diesem Zeitraum führten wir Maßnahmen gegen Probleme dieser Art ein: doppelte Kontrolle der Beladung, keine vermischten Taschen im selben Wagen oder in derselben Kiste, Wagen nach Touren sortiert, klarere Kontrolle der Beladung, Einhaltung des Scan-Prozesses, Rampen-Audits und klarere Standards für die Fahrer und die Disposition. Die operative Verantwortung teilten sich die Schichtorganisation, die Disposition und die für den jeweiligen Prozess Verantwortlichen; als Manager verfolgte ich die Kennzahlen und Probleme mit den Schichtleitern und Disponenten.
 
-In einzelnen Monaten dieses Zeitraums erreichte das Team das Schadensziel, aber nicht in jedem Monat. Wo das Ziel erreicht wurde, führe ich das auf die Arbeit des Teams und ein breiteres Kontrollsystem zurück, nicht auf ein einzelnes 5 Why.
-
 Auf das gebracht, was eine Führungskraft morgen nutzen kann, sind es drei Dinge. Prüfen Sie die Kategorien, bevor Sie dem Diagramm trauen. Beenden Sie die Analyse nicht beim Namen einer Person. Und schreiben Sie nur so viele „Warums“ auf, wie Sie tatsächlich gefragt haben, und fragen Sie dann draußen an der Rampe weiter.

@@ -63,6 +63,4 @@ When the only answer an analysis gives is “the employee was careless”, very 
 
 In that period we put measures in place against problems of this kind: double-checking the loading, not mixing bags in the same trolley or box, organising trolleys by route, clearer control of loading, following the scanning process, ramp audits, and clearer standards for the drivers and for dispatch. Operational responsibility was shared between the shift structure, dispatch and the people responsible for each process; as a manager, I followed the KPIs and the problems with the Shift Leaders and the dispatchers.
 
-In some months of that period the team met the damage target, though not in every month. Where the target was met, I put it down to the team's work and a wider system of controls rather than to any single 5 Why.
-
 Boiled down to something a manager can use tomorrow, it comes to three things. Check the categories before you trust the chart. Do not stop the analysis at a person's name. And write down only as many “whys” as you have actually asked, then keep asking, out on the ramp.

@@ -55,6 +55,4 @@ Kur e vetmja përgjigje që jep një analizë është “punonjësi ishte i paku
 
 Në atë periudhë vumë në zbatim masa kundër problemeve të këtij lloji: kontrolli i dyfishtë i ngarkimit, mospërzierja e çantave në të njëjtën karrocë ose kuti, renditja e karrocave sipas itinerarit, kontroll më i qartë i ngarkimit, respektimi i procesit të skanimit, auditime të rampës dhe standarde më të qarta për shoferët dhe për dispeçimin. Përgjegjësia operative ndahej mes strukturës së turnit, dispeçimit dhe njerëzve përgjegjës për çdo proces; si menaxher, unë i ndiqja KPI-të dhe problemet me drejtuesit e turnit dhe dispeçerët.
 
-Në disa muaj të asaj periudhe ekipi e arriti objektivin e dëmeve, por jo në çdo muaj. Aty ku objektivi u arrit, e shoh si meritë të punës së ekipit dhe të një sistemi më të gjerë kontrolli, jo të ndonjë 5 Why të vetëm.
-
 Po ta përmbledh në diçka që një menaxher mund ta përdorë nesër, janë tri gjëra. Kontrollo kategoritë para se t'i besosh grafikut. Mos e ndal analizën te emri i një personi. Dhe shkruaj vetëm aq “pse” sa ke pyetur vërtet, pastaj vazhdo të pyesësh atje, në rampë.
