@@ -36,7 +36,7 @@ test('the note sits under the lede, and an issue without a correction has none',
   const html = fs.readFileSync('_site/magazine/management-review-nr-47.html', 'utf8');
   assert.ok(html.indexOf('class="lede"') < html.indexOf('class="book-corrections"'));
   assert.ok(html.indexOf('class="book-corrections"') < html.indexOf('class="book-facts"'));
-  for (const path of ['magazine/management-review-nr-46.html', 'de/magazine/management-review-nr-04.html', 'sq/magazine/management-review-nr-79.html']) {
+  for (const path of ['magazine/management-review-nr-46.html', 'de/magazine/management-review-nr-05.html', 'sq/magazine/management-review-nr-78.html']) {
     assert.equal(note(path), '', path);
   }
 });

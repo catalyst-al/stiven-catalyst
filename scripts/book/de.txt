@@ -17,7 +17,7 @@ title: Sehnsucht nach Durrës
 subtitle: Eine Stadt, eine Jugend, ein Meer, das bleibt
 dedication: Für die Freunde der Jahre, in denen unser größter Reichtum die Zeit war; für die, die gingen, für die, die blieben, und für Durrës, das auf seine Weise beides tat.
 note-heading: ANMERKUNG ZUR ERZÄHLUNG
-note: Die Dialoge und einige szenische Details sind literarische Rekonstruktionen auf Grundlage der erzählten Erinnerungen, keine Transkriptionen. Die Bahnhofsszene in Deutschland ist eine literarische Imagination der Sehnsucht, keine belegte Episode. Es wurden keine Namen oder Biografien von Freunden hinzugefügt.
+note: Die Dialoge und einige szenische Details sind literarische Rekonstruktionen auf Grundlage der erzählten Erinnerungen, keine Transkriptionen. Die Bahnhofsszene in Deutschland ist ein literarisch imaginiertes Bild der Sehnsucht, keine belegte Episode. Es wurden keine Namen oder Biografien von Freunden hinzugefügt.
 note: Die Fotografien dieser Ausgabe begleiten die Erzählung; sie dokumentieren nicht unbedingt Ort oder Zeit der Szene.
 edition: 2026 / Dritte, überarbeitete Fassung / Aus dem Albanischen
 
@@ -48,7 +48,7 @@ Ich weiß nicht immer, ob mir der Ort fehlt oder das Alter, das ich hatte, als i
 
 Ich habe die Straßen anderer Städte gelernt, ich habe mir ein Leben aufgebaut, das nicht nur diesem Ort gehört. Dennoch genügt ein alter Satz, und ich sitze wieder an einem Tisch, an dem wir einst lachten. Für ein paar Augenblicke weiß ich sogar, wohin mein Ellbogen gehört.
 
-Dieses Buch folgt solchen kleinen Wegen zurück. Nicht alles ist klar geblieben. An manche Orte erinnere ich mich genau; von manchen Tagen ist mir nur die Stimme eines Menschen geblieben.
+Dieses Buch folgt solchen kleinen Rückwegen. Nicht alles ist klar geblieben. An manche Orte erinnere ich mich genau; von manchen Tagen ist mir nur die Stimme eines Menschen geblieben.
 
 == 06
 kicker: KAPITEL I
@@ -126,7 +126,7 @@ Wer vorausgegangen war, drehte sich um und ging rückwärts. Der Taschenriemen r
 — Na, wohin?
 — Geh einfach. Was hast du’s so eilig?
 — Ich hab’s nicht eilig. Ich hab Hunger.
-— Das haben wir seit der zweiten Stunde gemerkt.
+— Das wissen wir seit der zweiten Stunde.
 
 Wir lachten. Der Hungrige überholte uns, als wollte er zeigen, dass wir längst angekommen wären, hätte er es allein in der Hand. Wir folgten ihm, ohne etwas zu entscheiden.
 
@@ -153,7 +153,7 @@ Am Ende jener Jahre wirkte Durrës größer. Wir würden uns durch Teile der Sta
 kicker: KAPITEL III
 chapter: Gjergj Kastrioti Skënderbeu
 
-Das erste Jahr an der Gjergj Kastrioti Skënderbeu war mein Eintritt in eine größere Welt. Dieselbe Stadt, aber eine andere Gesellschaft. Flure, in denen ich nicht jedes Gesicht kannte, Stimmen, die nicht mehr nur zum Viertel oder zur alten Klasse gehörten, Menschen, die eine andere Art zu reden und zu lachen mitbrachten.
+Das erste Jahr bei Gjergj Kastrioti Skënderbeu war mein Eintritt in eine größere Welt. Dieselbe Stadt, aber andere Leute. Flure, in denen ich nicht jedes Gesicht kannte, Stimmen, die nicht mehr nur zum Viertel oder zur alten Klasse gehörten, Menschen, die eine andere Art zu reden und zu lachen mitbrachten.
 
 In diesem Alter wirkt jeder Anfang wie eine Prüfung, auch wenn einen niemand abfragt. Wo man sich hinsetzt, mit wem man zusammen ist, wie viel man redet. Ich behielt die Tasche bei mir, auch wenn es keinen Grund dafür gab. Ich sah, wo die anderen saßen, und versuchte, nicht so zu wirken, als täte ich genau das.
 
@@ -195,7 +195,7 @@ Wir liefen weiter. Das Gespräch verließ die Schule und trat ohne sichtbare Gre
 — Wohin denn?
 — Muss ich erst rausfinden. Was soll ich denn hier?
 
-Ein anderer hielt dagegen, auch hier lasse sich etwas machen. Wir fragten, was, und er wurde ärgerlich, weil er das Gespräch nicht angefangen hatte, um Rechenschaft abzulegen. Ein Stück weiter beklagte sich derselbe über die Stadt. Wir ließen ihn aus seinem Widerspruch nicht heraus. „Du hast sie doch gerade verteidigt!“ Er winkte ab und ging vorneweg.
+Ein anderer hielt dagegen, auch hier lasse sich etwas machen. Wir fragten, was, und er wurde ärgerlich, weil er das Gespräch nicht angefangen hatte, um Rechenschaft abzulegen. Ein Stück weiter beklagte sich derselbe über die Stadt. Wir ließen ihm den Widerspruch nicht durchgehen. „Du hast sie doch gerade verteidigt!“ Er winkte ab und ging vorneweg.
 
 Wir wollten, dass uns dieses Land mehr gab. Noch wussten wir nicht, was es hieß, woanders zu leben, aber wir redeten, als wäre die Wahl des Ortes das Schwerste.
 
@@ -218,7 +218,7 @@ Die Orte der Jugend misst man nicht an der Architektur. Eher als an eine Wand er
 == 17
 section: Der Luxus gemeinsamer Zeit
 
-Am Tisch brachte jeder seine eigene Fassung der Zukunft mit. Einer wollte Geld, einer eine Arbeit, die ihm gefiel, einer nur, dass ihm niemand sagte, was er zu tun hatte. Der letzte Wunsch gefiel allen, bis wir entscheiden mussten, wohin es nach der Crêperie ging. Dann wollte jeder für die anderen entscheiden.
+Am Tisch brachte jeder seine eigene Fassung der Zukunft mit. Einer wollte Geld, einer eine Arbeit, die ihm gefiel, einer nur, dass ihm niemand sagte, was er zu tun hatte. Dieser letzte Wunsch gefiel allen, bis wir entscheiden mussten, wohin es nach der Crêperie ging. Dann wollte jeder für die anderen entscheiden.
 
 — Wenn wir dreißig sind, kommen wir wieder hierher.
 — Du und dreißig? Ach komm.
@@ -378,7 +378,7 @@ Es gibt Straßen, durch die ich heute langsamer gehe. Der Erwachsene sieht den V
 
 Die Erinnerung ist keine genaue Karte. Manche Entfernungen hat sie gedehnt, manche verkürzt. Ein Gebäude wirkt kleiner, als ich es im Gedächtnis hatte. Der Weg, der uns früher einen Nachmittag kostete, ist schnell zu Ende, wenn ich ihn allein gehe. Nicht seine Länge hielt uns auf.
 
-Bei einer Schule hat der Pausenlärm noch immer jenen plötzlichen Ausbruch. Ich kenne kein Gesicht. Eine Gruppe bleibt am Ausgang stehen, einer kehrt um, um auf jemanden zu warten, und die anderen beschweren sich, ohne zu gehen. Kurz will ich sie sehen, wie wir waren. Dann lacht jemand ganz anders, und der Vergleich zerbricht.
+Vor einer Schule hat der Pausenlärm noch immer jenen plötzlichen Ausbruch. Ich kenne kein Gesicht. Eine Gruppe bleibt am Ausgang stehen, einer kehrt um, um auf jemanden zu warten, und die anderen beschweren sich, ohne zu gehen. Kurz will ich sie sehen, wie wir waren. Dann lacht jemand ganz anders, und der Vergleich zerbricht.
 
 Es tut mir gut, dass er zerbricht. Sie sind nicht da, um meine Jugend nachzuspielen. Sie haben ihre Gespräche, Scherze, die ich nicht verstehe, eine Stadt, die sich vor ihnen noch weitet. Was ich einen veränderten Ort nenne, kann für sie der erste Ort sein.
 
