@@ -80,7 +80,7 @@ Lidhja: https://stivencatalyst.com/de/tools/shift-handover/
 
 Lidhja: https://stivencatalyst.com/de/tools/damage-control/
 
-> Schadensquote im April 2025: 1,06 %, bei einem Ziel von 0,8 %. In einzelnen Monaten haben wir das Ziel erreicht, nicht in jedem. Und wenn, dann nie durch eine einzige Maßnahme, sondern durch die Arbeit eines Teams mit vielen Maßnahmen gleichzeitig: doppelte Kontrolle der Beladung, keine vermischten Taschen, Trolleys nach Tour, Rampen-Audits.
+> Schadensquote im April 2025: 1,06 %, bei einem Ziel von 0,8 %. In diesem Zeitraum arbeiteten wir mit mehreren Maßnahmen gleichzeitig: doppelte Kontrolle der Beladung, keine vermischten Taschen, Trolleys nach Tour, Rampen-Audits.
 >
 > Was ich dabei gelernt habe: Die Quote allein hilft nicht. „1,06 %“ sagt nicht, ob die Schäden beim Stapeln, beim Verladen oder auf der Straße entstehen, und ob die Ursache Verpackung, Handhabung oder Ladungssicherung ist. Ohne diese zwei Fragen, wo und warum, arbeitet man an allem gleichzeitig und an nichts richtig.
 >
@@ -138,9 +138,7 @@ Lidhja: https://stivencatalyst.com/de/tools/kpi-diagnostic/
 
 Lidhja: https://stivencatalyst.com/de/tools/incomplete-control/
 
-> Unvollständige Lieferungen: Das Ziel haben wir in einzelnen Monaten erreicht, nicht in jedem. Wieder: die Arbeit des Teams, nicht eine Maßnahme.
->
-> Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, und vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
+> Unvollständige Lieferungen: Zuerst mussten wir aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Eine Bestellung kann das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür steht: durch eine fehlende Tasche oder einen vermischten Trolley.
 >
 > Jeder unvollständige Auftrag kostet eine Nachlieferung und das Vertrauen des Kunden. Die Vollständigkeitskontrolle erfasst jeden Fall mit dem Prozessschritt, an dem er entstand, und dem Grund: Bestandsgenauigkeit, Pickfehler, Packfehler, ausgelassener Scan, Sortier- oder Ladefehler. Sie zeigt die Quote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Fehlern und wo sie entstehen.
 >
