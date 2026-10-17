@@ -866,7 +866,7 @@ const de = {
       how: [
         "Nennen Sie den KPI, wenn Sie möchten.",
         "Bewerten Sie zehn Aussagen.",
-        "Drücken Sie [[See the result]].",
+        "Klicken Sie auf [[See the result]].",
       ],
       get: "Die Ursache, die am besten passt (Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung), mit drei ersten Schritten und einer [[Question for the floor]]; wenn keine einzelne Ursache heraussticht, der Rat, sich die Arbeit vor Ort anzusehen. In jedem Fall ein Wert für jede Ursache.",
       data: "Nichts, was Sie eingeben, wird gespeichert oder gesendet.",
@@ -1003,7 +1003,7 @@ const editions = [
         "5 Whys dhe Six Sigma në magazinë: printimi tregon tekstin e plotë të çdo fushe.",
       ],
       de: [
-        "Sigma & Regelkarte: Ein Beispiel wird gezeigt, aber nie gespeichert, und Tage aus einem anderen Tool ersetzen ein Beispiel, das noch in der Karte steht, statt zu ihm hinzugefügt zu werden.",
+        "Sigma & Regelkarte: Ein Beispiel wird gezeigt, aber nie gespeichert, und Tage aus einem anderen Tool ersetzen ein Beispiel, das noch auf der Regelkarte steht, statt zu ihm hinzugefügt zu werden.",
         "Shift Pulse und Schichtübergabe: Ein Tourenprotokoll, das nur einen Teil der Touren des Zeitraums enthält, ergibt die Zahl der verspäteten Touren, keinen Anteil; Shift Pulse markiert eine Zahl nur jenseits der Grenze der Regelkarte für ihr übliches Niveau.",
         "Schadenskontrolle und Vollständigkeitskontrolle: Eine eingetragene Gesamtzahl gilt nur für den Zeitraum, für den sie eingetragen wurde; ein anderer Zeitraum wird nicht mehr durch sie geteilt.",
         "CX Control Tower: Ein Ziel ist erst gesetzt, wenn Sie es eintragen.",
