@@ -1,6 +1,6 @@
 // The homepage's way in: the three essays to read first (src/_data/homeEssays.json, chosen by the author) exist in
 // English, German and Albanian, each with its sentence on why in every language, and the homepage shows them with the
-// two paths (Start here, the tools) in every language.
+// two paths (Start here, the tools) in every language; Start here recommends the same three.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -45,5 +45,18 @@ test('the homepage shows the way in and the three essays with their sentences, i
     // "Start here" in the menu, and in the phone menu.
     assert.match(html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0], new RegExp(`class="nav-start" href="/${prefix}start.html"`));
     assert.ok(html.match(/<nav id="mobile-menu"[\s\S]*?<\/nav>/)[0].includes(`href="/${prefix}start.html"`), `${lang}: phone menu`);
+  }
+});
+
+test('Start here recommends the same three essays, in the same order and with the same sentences, in every language', { skip: !hasSite }, () => {
+  for (const [lang, prefix] of [['en', ''], ['de', 'de/'], ['sq', 'sq/']]) {
+    const html = fs.readFileSync(path.join('_site', prefix, 'start.html'), 'utf8');
+    const read = html.match(/<section class="shell section start-step" aria-labelledby="start-read">[\s\S]*?<\/section>/)?.[0] || '';
+    const linked = [...read.matchAll(/href="\/(?:de\/|sq\/)?insights\/([^/"]+)\/"/g)].map((m) => m[1]);
+    assert.deepEqual(linked, data.essays.map((e) => e.slug), `${lang}: the homepage's essays, in order`);
+    for (const essay of data.essays) {
+      const why = essay.why[lang].replace(/&/g, '&amp;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+      assert.ok(read.includes(why) || read.includes(essay.why[lang]), `${lang}: ${essay.slug} has its sentence`);
+    }
   }
 });
