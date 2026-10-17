@@ -22,6 +22,11 @@ ogType: article
       {#- Save for later: on "My shelf", in this browser only (js/shelf.js). -#}
       <button type="button" class="essay-save" data-shelf-save data-save-label="{{ 'Save for later' | t(lang) }}" data-saved-label="{{ 'Saved' | t(lang) }}" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1V20l-6-3.6L6 20V4.5a1 1 0 0 1 1-1z"/></svg><span data-shelf-label>{{ "Save for later" | t(lang) }}</span></button>
     </p>
+    {#- How the essays are written, said once here instead of in every paragraph: from the author's own work, with
+        what he would do today marked as such in the text. #}
+    {%- if "/insights/" in page.inputPath %}
+    <p class="article-method">{{ "Written from my own work. Where a passage is how I would act today rather than something I did, or an example is made up, the text says so." | t(lang) }} <a href="{{ '/how-this-is-made.html' | local(lang) }}">{{ "How this is made" | t(lang) }}</a></p>
+    {%- endif %}
     {#- Corrections made after publication (corrections in the front matter), dated, as on a corrected issue. #}
     {%- include "partials/book-corrections.njk" %}
   </div>
