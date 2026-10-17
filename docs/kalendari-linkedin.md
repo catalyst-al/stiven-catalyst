@@ -288,7 +288,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/damage-control.jpg` · `src/
 
 **Gjermanisht**
 
-> Schadensquote im April 2025: 1,06 %, bei einem Ziel von 0,8 %. In einzelnen Monaten haben wir das Ziel erreicht, nicht in jedem. Und wenn, dann nie durch eine einzige Maßnahme, sondern durch die Arbeit eines Teams mit vielen Maßnahmen gleichzeitig: doppelte Kontrolle der Beladung, keine vermischten Taschen, Trolleys nach Tour, Rampen-Audits.
+> Schadensquote im April 2025: 1,06 %, bei einem Ziel von 0,8 %. In diesem Zeitraum arbeiteten wir mit mehreren Maßnahmen gleichzeitig: doppelte Kontrolle der Beladung, keine vermischten Taschen, Trolleys nach Tour, Rampen-Audits.
 >
 > Was ich dabei gelernt habe: Die Quote allein hilft nicht. „1,06 %“ sagt nicht, ob die Schäden beim Stapeln, beim Verladen oder auf der Straße entstehen, und ob die Ursache Verpackung, Handhabung oder Ladungssicherung ist. Ohne diese zwei Fragen, wo und warum, arbeitet man an allem gleichzeitig und an nichts richtig.
 >
@@ -304,7 +304,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/damage-control.jpg` · `src/
 
 **Shqip**
 
-> Norma e dëmeve në prill 2025: 1,06%, me objektiv 0,8%. Objektivin e arritëm në disa muaj, jo në çdo muaj. Dhe kur u arrit, nuk ishte një masë e vetme, por puna e një ekipi me shumë masa njëherësh: kontroll i dyfishtë i ngarkimit, pa bag-e të përziera, trolley sipas rrugës, auditime të rampës.
+> Norma e dëmeve në prill 2025: 1,06%, me objektiv 0,8%. Në atë periudhë punuam me disa masa njëherësh: kontroll i dyfishtë i ngarkimit, pa bag-e të përziera, trolley sipas rrugës, auditime të rampës.
 >
 > Çfarë mësova: norma vetëm nuk ndihmon. “1,06%” nuk të thotë nëse dëmet ndodhin gjatë stivimit, ngarkimit apo në rrugë, dhe nëse shkaku është paketimi, trajtimi apo sigurimi i ngarkesës. Pa këto dy pyetje, ku dhe pse, punon për gjithçka njëherësh dhe për asgjë siç duhet.
 >
@@ -768,9 +768,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/incomplete-control.jpg` · `
 
 **Gjermanisht**
 
-> Unvollständige Lieferungen: Das Ziel haben wir in einzelnen Monaten erreicht, nicht in jedem. Wieder: die Arbeit des Teams, nicht eine Maßnahme.
->
-> Aber eine Sache musste zuerst passieren. Wir mussten aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, und vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
+> Unvollständige Lieferungen: Zuerst mussten wir aufhören, „incomplete“ als Fehler des Fahrers zu lesen. Im Lager fanden wir Taschen, die in einem Bereich fehlten, und vermischte Trolleys. Die Bestellung hatte das Lager unvollständig verlassen, lange bevor der Fahrer an der Tür stand.
 >
 > Jeder unvollständige Auftrag kostet eine Nachlieferung und das Vertrauen des Kunden. Die Vollständigkeitskontrolle erfasst jeden Fall mit dem Prozessschritt, an dem er entstand, und dem Grund: Bestandsgenauigkeit, Pickfehler, Packfehler, ausgelassener Scan, Sortier- oder Ladefehler. Sie zeigt die Quote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Fehlern und wo sie entstehen.
 >
@@ -784,9 +782,7 @@ Imazhi për t'u bashkëngjitur: `src/media/tools/de/incomplete-control.jpg` · `
 
 **Shqip**
 
-> Dorëzimet jo të plota: objektivin e arritëm në disa muaj, jo në çdo muaj. Përsëri: puna e ekipit, jo një masë e vetme.
->
-> Por një gjë duhej të ndodhte e para. Duhej të ndalonim së lexuari “incomplete” si gabim të shoferit. Në magazinë gjetëm bag-e që mungonin në një zonë dhe trolley të përziera. Porosia e kishte lënë magazinën jo të plotë, shumë kohë para se shoferi të ishte te dera.
+> Dorëzimet jo të plota: së pari duhej të ndalonim së lexuari “incomplete” si gabim të shoferit. Në magazinë gjetëm bag-e që mungonin në një zonë dhe trolley të përziera. Porosia e kishte lënë magazinën jo të plotë, shumë kohë para se shoferi të ishte te dera.
 >
 > Çdo porosi jo e plotë kushton një dërgesë shtesë dhe besimin e klientit. Kontrolli i plotësisë regjistron çdo rast me hapin e procesit ku lindi dhe arsyen: saktësia e stokut, gabim në picking, gabim në paketim, skanim i anashkaluar, gabim në renditje ose ngarkim. Tregon normën, DPMO-në dhe nivelin sigma, shkaqet e pakta pas shumicës së gabimeve dhe ku lindin.
 >
