@@ -9,8 +9,8 @@
 {%- set featured = essays | featured -%}
 {#- The three newest essays besides the featured one, newest first. -#}
 {%- set others = essays | except(featured) | last(3) | reverse -%}
-{#- The three essays to read first, chosen by slug in src/_data/homeEssays.json (a provisional choice until the author
-    confirms it), each with the sentence on why, in this language. -#}
+{#- The three essays to read first, chosen by the author by slug in src/_data/homeEssays.json, each with the sentence on
+    why, in this language. -#}
 {%- set picks = homeEssays.essays -%}
 {% include "partials/cosmos-hero.njk" %}
 

@@ -1,6 +1,6 @@
-// The homepage's way in: the three essays to read first (src/_data/homeEssays.json, a provisional choice until the
-// author confirms it) exist in English, German and Albanian, each with its sentence on why in every language, and the
-// homepage shows them with the two paths (Start here, the tools) in every language.
+// The homepage's way in: the three essays to read first (src/_data/homeEssays.json, chosen by the author) exist in
+// English, German and Albanian, each with its sentence on why in every language, and the homepage shows them with the
+// two paths (Start here, the tools) in every language.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -11,7 +11,7 @@ const DIRS = { en: 'src/content/insights', de: 'src/content/de/insights', sq: 's
 const fileOf = (dir, slug) => fs.readdirSync(dir).find((file) => file.replace(/^\d{4}-\d{2}-\d{2}-/, '') === `${slug}.md`);
 
 test('three essays, each published in every language, each with a why sentence per language', () => {
-  assert.match(data._note, /provisional/i, 'the file says the choice awaits the author');
+  assert.match(data._note, /confirmed by the author/, 'the file says the author chose them');
   assert.equal(data.essays.length, 3);
   assert.equal(new Set(data.essays.map((e) => e.slug)).size, 3, 'three different essays');
   for (const essay of data.essays) {

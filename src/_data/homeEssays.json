@@ -1,6 +1,5 @@
 {
-  "_note": "PROVISIONAL SELECTION, AWAITING THE AUTHOR. The three essays the homepage recommends (pages/home.njk, 'Read first'), by file slug without the date, in the order shown, each with one sentence per language on why it is worth the reader's time. Proposed after the reader audit of 17 October 2026, which praised these three for their concrete basis and honest limits; the author has not confirmed them yet. Each 'why' says only what the essay itself says. To change the choice, change the slugs and write the three sentences anew (tests/home-essays.test.cjs checks that every essay exists in English, German and Albanian, and that every sentence is there).",
-  "provisional": true,
+  "_note": "The three essays the homepage recommends (pages/home.njk, 'Read first'), by file slug without the date, in the order shown, each with one sentence per language on why it is worth the reader's time. Chosen and confirmed by the author on 17 October 2026, with their sentences, after the reader audit of that day: they stand for rebuilding a career, solving operational problems and building practical tools from what was learned. Each 'why' says only what the essay itself says. To change the choice, change the slugs and write the three sentences anew (tests/home-essays.test.cjs checks that every essay exists in English, German and Albanian, and that every sentence is there).",
   "essays": [
     {
       "slug": "starting-from-zero",

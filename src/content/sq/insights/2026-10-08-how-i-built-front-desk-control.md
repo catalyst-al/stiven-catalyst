@@ -29,6 +29,14 @@ firstMove:
   - Zgjidh një procedurë dhe numëro sa vende duhet të hapë dikush për ta kryer.
   - Vendose atë procedurë aty ku gjendet sipas asaj që bën, jo sipas emrit të dokumentit.
   - Kërkoji një kolegu ta ndjekë pa shpjegimin tënd, dhe shëno ku u ndal.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "Shtator 2026, Front Office dhe Night Audit në hotel"
+  problem: "Informacioni për Front Office dhe Night Audit ishte i shpërndarë në SOP, lista kontrolli, video, pamje ekrani dhe shënime."
+  knew: "Për të gjetur dhe kuptuar procedurën e duhur duhej të kaloje nga një burim te tjetri."
+  did: "Nisa të ndërtoja një mjet në shfletues, të organizuar sipas detyrave të turnit, me kërkim, lista kontrolli dhe shpjegime me pamje."
+  happened: "Një projekt personal që funksionon, i zhvilluar me disa hapa. Një version publik i anonimizuar mund të shihet."
+  unconfirmed: "Kohën e kursyer, përdorimin nga ekipi apo ndonjë miratim zyrtar: nuk është një sistem që e drejton hoteli."
 ---
 
 Kur nisa Front Desk Control, nuk mungonte asnjë dokument. Problemi im ishte të gjeja në to, gjatë turnit, atë që më duhej.
@@ -71,7 +79,7 @@ Versioni publik nuk mund të përfshinte të dhëna reale të mysafirëve, rezer
 
 ## Çfarë do të bëja ndryshe sot
 
-I vetmi përdorim që mund ta konfirmoj është i imi, ndërsa e ndërtoja mjetin dhe mësoja. Më ndihmoi ta sillja informacionin në një strukturë më të qartë. Mund t'i hyjë në punë edhe dikujt që është në trajnim; për tani kjo është një mundësi.
+I vetmi përdorim që mund ta konfirmoj është i imi, ndërsa e ndërtoja mjetin dhe mësoja. Më ndihmoi ta sillja informacionin në një strukturë më të qartë. Mund t'i hyjë në punë edhe dikujt që është në trajnim; për tani kjo është një mundësi. Front Desk Control është një projekt personal, ende në zhvillim: nuk është një sistem i miratuar apo i përdorur zyrtarisht nga një hotel, dhe nuk kam matur sa kohë kursen.
 
 Sot do ta nisja edhe më herët strukturën e informacionit, para se të merresha me pamjen e faqes. Fillimisht do të përcaktoja cilat pyetje lindin më shpesh gjatë një turni dhe cilat procedura kanë më shumë rëndësi, e pastaj do t'i ndërtoja përgjigjet rreth këtyre nevojave.
 

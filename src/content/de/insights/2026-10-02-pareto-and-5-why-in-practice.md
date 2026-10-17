@@ -21,6 +21,14 @@ checklist:
     - Die Kette der Warums endet bei einem Prozess, nicht bei einem Namen.
     - Nur die Warums, die wirklich gefragt wurden, stehen auf dem Papier.
     - Die Gegenmaßnahme hat einen Verantwortlichen und ein Datum, an dem sie geprüft wird.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "August 2025, Last Mile"
+  problem: "Ein dokumentierter Verspätungsbericht mit 19 Fällen: fehlende Taschen, falsche Etiketten, vermischte Wagen, Probleme beim Verladen und andere Ursachen."
+  knew: "Den gemeldeten Grund jeder Verspätung. Manche Probleme, die beim Fahrer erfasst wurden, hatten früher begonnen, beim Verladen."
+  did: "Im Rahmen meiner operativen Verantwortung habe ich die Ursachen untersucht, statt jede Verspätung als Leistung des Fahrers zu behandeln. In diesem Zeitraum entstanden unter anderem zusätzliche Kontrollen beim Verladen, eine bessere Ordnung der Wagen, Scan-Kontrollen und Rampen-Audits."
+  happened: "Der Bericht zeigt konkrete Beispiele der Probleme und wie wir mit ihnen umgegangen sind."
+  unconfirmed: "Die ursprüngliche Pareto-Verteilung, geprüfte Vorher-nachher-Ergebnisse oder eine messbare Verbesserung, die sich dieser Analyse der 19 Fälle zuschreiben ließe."
 ---
 
 In der Last Mile gehörten Pareto und 5 Why zur täglichen Analyse der Kennzahlen, vor allem bei Verspätungen, Schäden, unvollständigen Bestellungen und Ladezeit. Deshalb beschreibe ich sie so, wie ich sie im Alltag genutzt habe.
@@ -45,7 +53,7 @@ Man bleibt sehr leicht bei der Person stehen. „Der Fahrer hat die falsche Tasc
 
 Lautet die einzige Antwort einer Analyse „Der Mitarbeiter war unaufmerksam“, hat die Analyse sehr oft zu früh aufgehört. Wenn morgen die nächste Person in denselben Prozess kommt und ihr derselbe Fehler passieren kann, haben Sie das System nicht verändert. Sie haben nur den Namen im Bericht geändert.
 
-Aus diesem und anderen Fällen desselben Zeitraums entstanden Maßnahmen: doppelte Kontrolle der Beladung, keine vermischten Taschen im selben Wagen oder in derselben Kiste, Wagen nach Touren sortiert, klarere Kontrolle der Beladung, Einhaltung des Scan-Prozesses, Rampen-Audits und klarere Standards für die Fahrer und die Disposition. Die operative Verantwortung teilten sich die Schichtorganisation, die Disposition und die für den jeweiligen Prozess Verantwortlichen; als Manager verfolgte ich die Kennzahlen und Probleme mit den Schichtleitern und Disponenten.
+In diesem Zeitraum führten wir Maßnahmen gegen Probleme dieser Art ein: doppelte Kontrolle der Beladung, keine vermischten Taschen im selben Wagen oder in derselben Kiste, Wagen nach Touren sortiert, klarere Kontrolle der Beladung, Einhaltung des Scan-Prozesses, Rampen-Audits und klarere Standards für die Fahrer und die Disposition. Die operative Verantwortung teilten sich die Schichtorganisation, die Disposition und die für den jeweiligen Prozess Verantwortlichen; als Manager verfolgte ich die Kennzahlen und Probleme mit den Schichtleitern und Disponenten.
 
 In einzelnen Monaten dieses Zeitraums erreichte das Team das Schadensziel, aber nicht in jedem Monat. Wo das Ziel erreicht wurde, führe ich das auf die Arbeit des Teams und ein breiteres Kontrollsystem zurück, nicht auf ein einzelnes 5 Why.
 

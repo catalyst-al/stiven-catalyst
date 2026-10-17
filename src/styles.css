@@ -8008,6 +8008,17 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
   .project-card h2 { font-size: 34px; }
 }
 
+/* The case behind an essay (layouts/article.njk, "caseRecord" in the front matter): a quiet record, the last row,
+   what cannot be confirmed, set apart by a line. */
+.essay-case { margin: 40px 0 8px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 18px; font-family: var(--sans); }
+.essay-case .kicker { margin: 0 0 4px; }
+.article-content .essay-case-when { margin: 0 0 14px; color: var(--muted); font-size: .95rem; }
+.article-content .essay-case dl { display: grid; gap: 12px; margin: 0; }
+.essay-case dl > div { display: grid; grid-template-columns: minmax(130px, 11rem) 1fr; gap: 4px 18px; }
+.essay-case dt { font-weight: 700; color: var(--ink); font-size: .95rem; line-height: 1.45; }
+.essay-case dd { margin: 0; font-size: 1rem; line-height: 1.5; }
+.essay-case dl > .is-limit { padding-top: 12px; border-top: 1px solid var(--line); }
+@media (max-width: 620px) { .essay-case { padding: 18px 18px; } .essay-case dl > div { grid-template-columns: 1fr; } }
 /* The checklist an essay can end with (layouts/article.njk, "checklist" in the front matter). */
 .essay-checklist { margin: 40px 0 8px; padding: 24px 26px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); border-radius: 18px; background: var(--card); font-family: var(--sans); }
 .essay-checklist-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 14px; }

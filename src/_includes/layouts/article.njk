@@ -135,6 +135,20 @@ ogType: article
     </details>
     {%- endif %}
 {{ body | safe }}
+    {#- The case behind the essay, as the record shows it ("caseRecord" in the front matter: when, then the problem, what
+        was known, what was done, what happened and what cannot be confirmed), so the evidence and its limits stand in
+        one place. -#}
+    {%- if caseRecord %}
+    <section class="essay-case" aria-labelledby="essay-case-title">
+      <p class="kicker" id="essay-case-title">{{ "The case on record" | t(lang) }}</p>
+      <p class="essay-case-when">{{ caseRecord.when }}</p>
+      <dl>
+        {%- for row in [["problem", "The problem"], ["knew", "What I knew"], ["did", "What I did"], ["happened", "What happened"], ["unconfirmed", "What cannot be confirmed"]] %}
+        {%- if caseRecord[row[0]] %}<div{% if row[0] == "unconfirmed" %} class="is-limit"{% endif %}><dt>{{ row[1] | t(lang) }}</dt><dd>{{ caseRecord[row[0]] }}</dd></div>{% endif %}
+        {%- endfor %}
+      </dl>
+    </section>
+    {%- endif %}
     {#- A checklist the essay ends with ("checklist" in its front matter: title, items as text or { label, hint }, "fill" for a card of answers, an optional note, and "copy" for the copy button's label): the reader ticks the
         questions off and can copy them. Nothing is kept or sent (js/article.js). -#}
     {%- if checklist and checklist.items %}

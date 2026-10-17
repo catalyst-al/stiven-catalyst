@@ -29,6 +29,14 @@ firstMove:
   - Merr një rast dëmtimi dhe pyet ku ndodhi, jo kush e bëri.
   - Kontrollo nëse ekzistonte një standard për atë fazë dhe nëse ishte i zbatueshëm atë ditë.
   - Regjistroje rastin sipas fazës dhe shkakut, që Pareto-ja e javës tjetër të ketë një adresë.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "Prill dhe qershor 2025, milja e fundit"
+  problem: "Dëmet në 1,06% në prill 2025, me objektiv 0,8%."
+  knew: "Një vlerë të dytë të dokumentuar, 0,97% në qershor 2025. Dëmet ishin ndër KPI-të që ndiqnim dhe diskutonim."
+  did: "Ndoqëm shifrat dhe shqyrtuam çështje praktike me karrocat, ngarkimin dhe trajtimin e produkteve. Mësimi që nxjerr sot: vendi ku gjendet dëmi nuk është domosdoshmërisht vendi ku nisi."
+  happened: "Dy raporte me dy vlera të ndryshme në dy momente."
+  unconfirmed: "Një prirje të vazhdueshme, vendin ku ndodhën dëmet, apo që një masë e caktuar e shkaktoi ndryshimin. Kalimi nga 1,06% në 0,97% nuk paraqitet si rezultat i imi."
 ---
 
 1,06%. Objektivi ishte 0,8%.
@@ -43,7 +51,7 @@ Dëmet i ndiqnim në raportet operative dhe në takimin e shkurtër të përdits
 
 Problemet që shihnim ishin operative: si organizohej ngarkesa, si përdoreshin karrocat, si vendoseshin produktet. Operacioni kishte standarde për sigurinë, për organizimin e rampës, për ngarkimin dhe për trajtimin e produkteve. Drejtuesit e turnit dhe dispeçerët ndiqnin problemet operative, dhe koordinimi me DSP-të ishte pjesë e punës së përditshme.
 
-Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për masat që dolën në atë periudhë nga rastet e ngarkimit. Nuk e di me saktësi ku ndodhnin më shumë dëmet.
+Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për masat që vumë në atë periudhë kundër problemeve të ngarkimit. Nuk e di me saktësi ku ndodhnin më shumë dëmet.
 
 ## Përqindja nuk ka adresë
 

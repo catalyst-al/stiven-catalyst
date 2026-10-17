@@ -8,7 +8,7 @@ featured: true
 summary: "Një sistem i ri bëhet pjesë e punës jo kur instalohet, por kur njerëzit e kuptojnë, dinë ta përdorin dhe dinë çfarë të bëjnë kur nuk i ndihmon."
 teaser: Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
 description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë dhe një kartë për to."
-deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në hotel, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu dhe gjashtë gjëra që duhen para se të vijë."
+deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në një hotel tjetër, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu dhe gjashtë gjëra që duhen para se të vijë."
 relatedTools:
   - /tools/six-sigma-dmaic/
   - /tools/shift-handover/
@@ -38,11 +38,13 @@ firstMove:
 corrections:
   - date: "15 tetor 2026"
     t: "Një version i mëparshëm i datonte javët e para të trajnimit në hotel në shtator 2026 dhe e quante hotelin të ri. Jam Night Manager i hotelit që nga nëntori 2025, prandaj të dyja u hoqën."
+  - date: "17 tetor 2026"
+    t: "Korrigjimi i 15 tetorit ishte vetë i pasaktë. Javët e trajnimit ishin në një hotel tjetër në Frankfurt, në shtator 2026, ku po mësoja procedurat dhe sistemet e një vendi tjetër pune; roli im si Night Manager është i dokumentuar që nga nëntori 2025. Muaji dhe “një hotel tjetër” u rikthyen."
 ---
 
-Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova për natën time të parë të trajnimit në hotel, kur një përditësim e la sistemin jashtë funksionit për orë të tëra. Kisha ardhur për të mësuar proceset dhe e kalova pjesën më të madhe të natës duke pritur. Kjo ese nis aty ku mbaroi ajo dhe kalon nga sistemi që ndalet te sistemi që vjen, e te njerëzit që duhet ta mësojnë.
+Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova për natën time të parë të trajnimit në një hotel tjetër, në shtator 2026, kur një përditësim e la sistemin jashtë përdorimit për rreth pesë orë. Kisha ardhur për të mësuar proceset dhe e kalova pjesën më të madhe të natës duke pritur. Kjo ese nis aty ku mbaroi ajo dhe kalon nga sistemi që ndalet te sistemi që vjen, e te njerëzit që duhet ta mësojnë.
 
-Pas saj qëndrojnë dy përvoja. Në miljen e fundit, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në hotel ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control.
+Pas saj qëndrojnë dy përvoja. Në miljen e fundit, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në atë hotel, në shtator 2026, ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control.
 
 Në ato javë, në miljen e fundit kishim probleme me ngarkimin, me çantat që mungonin, me karrocat e çrregullta dhe me vonesat, dhe i kam të dokumentuara. Asgjë nuk tregon se i shkaktoi sistemi i ri; mund të kenë pasur shkaqe të tjera. Ky është tundimi më i lehtë kur vjen një sistem i ri: t'ia vesh fajin atij për gjithçka që shkon keq në javët e para.
 

@@ -41,7 +41,7 @@ Në hotelin ku fillova si Night Auditor pata tri net trajnimi, nga e marta deri 
 
 Trajnimi përbëhej nga disa gjëra: lista e kontrollit e auditimit të natës, dokumente të veçanta për procese të ndryshme, kolegë që më tregonin në praktikë çfarë bënin, video dhe pamje ekrani. Unë mbaja shënime.
 
-Nata e parë pati edhe një pengesë. Sistemi ra për disa orë, ndaj nuk mundëm ta bënim trajnimin normal për të gjithë procesin; nata u kthye më shumë në një njohje me punën dhe me ambientin. Për të kam shkruar te [30 ditët e para](/sq/insights/the-first-30-days/).
+Nata e parë pati edhe një pengesë. Për shkak të një përditësimi sistemi nuk ishte në përdorim për disa orë, ndaj nuk mundëm ta bënim trajnimin normal për të gjithë procesin; nata u kthye më shumë në një njohje me punën dhe me ambientin. Për të kam shkruar te [30 ditët e para](/sq/insights/the-first-30-days/).
 
 Më shumë se gjithçka më mungoi një rrugë e vetme dhe e qartë nga fillimi në fund.
 

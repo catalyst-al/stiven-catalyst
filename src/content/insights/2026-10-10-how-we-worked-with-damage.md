@@ -34,6 +34,14 @@ firstMove:
   - Take one damage case and ask where it happened, not who did it.
   - Check whether a standard existed for that stage, and whether it was workable that day.
   - Record the case by stage and cause, so that next week's Pareto has an address.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "April and June 2025, last mile"
+  problem: "Damage at 1.06% in April 2025, against a target of 0.8%."
+  knew: "A second documented figure, 0.97% in June 2025. Damage was one of the KPIs we followed and discussed."
+  did: "We followed the figures and looked at practical issues with trolleys, loading and product handling. The lesson I draw today: where damage is found is not necessarily where it started."
+  happened: "Two reports with two different values at two points in time."
+  unconfirmed: "A continuous trend, where the damage happened, or that a particular measure caused the difference. The change from 1.06% to 0.97% is not presented as my result."
 ---
 
 1.06%. The target was 0.8%.
@@ -48,7 +56,7 @@ We followed Damage in the operational reports and in the daily stand-up. We anal
 
 The problems we saw were operational: how the load was organised, how the trolleys were used, how the products were placed. The operation had standards for safety, for organising the ramp, for loading and for handling products. The Shift Leaders and dispatchers followed the operational problems, and coordinating with the DSPs was part of the daily work.
 
-In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about the measures that came out of the loading cases in that period. Where most of the damage happened, I do not know precisely.
+In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about the measures we put in place against loading problems in that period. Where most of the damage happened, I do not know precisely.
 
 ## A percentage has no address
 
