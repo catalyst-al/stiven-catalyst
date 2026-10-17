@@ -72,13 +72,19 @@ test("a Management Review issue → its text version → the next page in the re
   await expectTheme(page, theme);
   await expectAccessible(page);
 
-  // "Read it as text" opens the whole text below the reader.
+  // On a phone the whole text is open from the start, above the magazine layout; on a wider screen "Read it as
+  // text" opens it below the reader.
   const details = page.locator("[data-book-details]");
-  await expect(details).not.toHaveAttribute("open");
-  await page.locator("[data-book-text]").first().click();
-  await expect(details).toHaveAttribute("open");
-  await expect(details.locator(".book-text-body")).toBeVisible();
-  await expect(page).toHaveURL(/#text$/);
+  if ((page.viewportSize()?.width || 0) <= 620) {
+    await expect(details).toHaveAttribute("open");
+    await expect(details.locator(".book-text-body")).toBeVisible();
+  } else {
+    await expect(details).not.toHaveAttribute("open");
+    await page.locator("[data-book-text]").first().click();
+    await expect(details).toHaveAttribute("open");
+    await expect(details.locator(".book-text-body")).toBeVisible();
+    await expect(page).toHaveURL(/#text$/);
+  }
 
   // "Open the issue" brings the reader into view and lifts the cover.
   const where = page.locator("[data-book-where]");
