@@ -54,7 +54,7 @@ test('notes of the same day keep their numeric order past 99', { skip: !hasSite 
 test('"Start here" has its three steps and the newsletter in every language, and the footer links to it', { skip: !hasSite }, () => {
   for (const [file, home] of [['start.html', 'index.html'], ['de/start.html', 'de/index.html'], ['sq/start.html', 'sq/index.html']]) {
     const page = built(file);
-    assert.equal((page.match(/class="article-card"/g) || []).length, 3, `${file}: three essays`);
+    assert.equal((page.match(/class="article-card home-pick"/g) || []).length, 3, `${file}: three essays`);
     assert.match(page, /class="article-card start-tool"/, `${file}: the tool`);
     assert.match(page, /class="note-card"/, `${file}: the field note`);
     assert.match(page, /data-newsletter /, `${file}: the newsletter`);
