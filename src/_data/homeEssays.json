@@ -1,0 +1,30 @@
+{
+  "_note": "PROVISIONAL SELECTION, AWAITING THE AUTHOR. The three essays the homepage recommends (pages/home.njk, 'Read first'), by file slug without the date, in the order shown, each with one sentence per language on why it is worth the reader's time. Proposed after the reader audit of 17 October 2026, which praised these three for their concrete basis and honest limits; the author has not confirmed them yet. Each 'why' says only what the essay itself says. To change the choice, change the slugs and write the three sentences anew (tests/home-essays.test.cjs checks that every essay exists in English, German and Albanian, and that every sentence is there).",
+  "provisional": true,
+  "essays": [
+    {
+      "slug": "starting-from-zero",
+      "why": {
+        "en": "From Cluster Manager in Albania to delivering parcels in Germany: the starting point of the series, and what stays with you when the title does not cross the border.",
+        "de": "Vom Cluster Manager in Albanien zur Paketzustellung in Deutschland: der Ausgangspunkt der Reihe, und was bleibt, wenn der Titel nicht mit über die Grenze kommt.",
+        "sq": "Nga Cluster Manager në Shqipëri te shpërndarja e pakove në Gjermani: pika nga nis seria, dhe çfarë të mbetet kur titulli nuk e kalon kufirin bashkë me ty."
+      }
+    },
+    {
+      "slug": "pareto-and-5-why-in-practice",
+      "why": {
+        "en": "One real delay report with 19 cases: how a wrong category leads to the wrong cause, and why the analysis says where its record stops instead of filling it in.",
+        "de": "Ein echter Verspätungsbericht mit 19 Fällen: wie eine falsche Kategorie zur falschen Ursache führt und warum die Analyse sagt, wo ihre Aufzeichnung endet, statt sie aufzufüllen.",
+        "sq": "Një raport i vërtetë vonesash me 19 raste: si një kategori e gabuar të çon te shkaku i gabuar, dhe pse analiza thotë ku ndalen shënimet, në vend që t'i mbushë."
+      }
+    },
+    {
+      "slug": "the-tools-you-build-yourself",
+      "why": {
+        "en": "Front Desk Control as the case: what a tool you build yourself shows about gaps in the information, what it still lacks, and five conditions before a team uses it.",
+        "de": "Front Desk Control als Fall: was ein selbst gebautes Werkzeug über Lücken in der Information zeigt, was ihm noch fehlt, und fünf Bedingungen, bevor ein Team es nutzt.",
+        "sq": "Front Desk Control si rast: çfarë tregon një mjet që e ndërton vetë për boshllëqet e informacionit, çfarë i mungon ende, dhe pesë kushte para se ta përdorë një ekip."
+      }
+    }
+  ]
+}

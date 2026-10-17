@@ -5,8 +5,9 @@
 {%- set pageTitle = ((shortTitle + " | " + site.title) if (shortTitle | length) + 3 + (site.title | length) <= 60 else shortTitle) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set homeUrl = "/" | local(lang) -%}
-{#- The menu: five places. "Writing" covers Insights, Reflections and Field Notes (the third item lists the pages
-    it is active on); the brand takes you home. -#}
+{#- The menu: "Start here" for someone new, then five places. "Writing" covers Insights, Reflections and Field Notes
+    (the third item lists the pages it is active on); the brand takes you home. "Start here" gives way first when
+    the header is narrow (styles.css, .nav-start); the phone menu always has it. -#}
 {%- set writingPages = ["/insights.html" | local(lang), "/challenges.html" | local(lang), "/reflections.html" | local(lang), "/field-notes.html" | local(lang)] -%}
 {#- Writing and Publications also carry a stamp of what they hold (navStamp): when it changes, their menu item
     pulses for a reader who has been here before (script.js). -#}
@@ -14,6 +15,7 @@
 {%- set writingStamp = collections["insights" + sfx] | navStamp(collections["reflections" + sfx], collections["notes" + sfx]) -%}
 {%- set pubStamp = publications.review | navStamp(publications.treatise, publications.floor, [publications.special]) -%}
 {%- set nav = [
+  ["/start.html" | local(lang), "Start here" | t(lang), null, null, null, "nav-start"],
   ["/insights.html" | local(lang), "Writing" | t(lang), writingPages, "writing", writingStamp],
   ["/tools.html" | local(lang), "Tools" | t(lang)],
   ["/publications.html" | local(lang), "Publications" | t(lang), null, "publications", pubStamp],
@@ -112,7 +114,7 @@
     <nav class="main-nav" aria-label="{{ 'Primary' | t(lang) }}" data-new-label="{{ 'New' | t(lang) }}">
       {%- for item in nav %}
       {%- set current = activeNav == item[0] or (item[2] and activeNav in item[2]) %}
-      <a{% if current %} aria-current="page"{% endif %} href="{{ item[0] }}"{% if item[4] %} data-news="{{ item[3] }}" data-stamp="{{ item[4] }}"{% endif %}><span class="nav-orb" aria-hidden="true"></span>{{ item[1] }}{% if current %}<span class="nav-pill" aria-hidden="true"></span>{% endif %}</a>
+      <a{% if current %} aria-current="page"{% endif %}{% if item[5] %} class="{{ item[5] }}"{% endif %} href="{{ item[0] }}"{% if item[4] %} data-news="{{ item[3] }}" data-stamp="{{ item[4] }}"{% endif %}><span class="nav-orb" aria-hidden="true"></span>{{ item[1] }}{% if current %}<span class="nav-pill" aria-hidden="true"></span>{% endif %}</a>
       {%- endfor %}
     </nav>
     <div class="header-actions">

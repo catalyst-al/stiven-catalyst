@@ -17,6 +17,9 @@
   </section>
 
   <section class="shell weekly-archive" aria-label="{{ L.issues }}">
+    {#- How the series works, above the list: one edition a month, and why 80 issues are online before November
+        (the facts of How this is made, where the link goes). -#}
+    <p class="weekly-model"><strong>{{ A.model }}.</strong> {{ A.modelText }} <a href="{{ '/how-this-is-made.html' | local(lang) }}#dates">{{ A.modelLink }} <span aria-hidden="true">→</span></a></p>
     {{ filter.controls(weekly.months, weekly.blocks, lang, A, L.blocks) }}
     <ol class="weekly-grid" reversed>
       {%- for issue in weekly.issues | reverse %}

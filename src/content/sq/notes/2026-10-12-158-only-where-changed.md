@@ -1,4 +1,4 @@
 ---
-quote: "Përqindja të thotë sa. Pyetjet të thonë ku. Dhe vetëm “ku”-ja mund të ndryshohet."
+quote: "Përqindja të thotë sa. Pyetjet të thonë ku. Dhe ndryshimi nis te “ku”-ja."
 date: 2026-10-12
 ---

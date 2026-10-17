@@ -1732,7 +1732,8 @@
   "Prepare the email": "E-Mail vorbereiten",
   "Copy message": "Nachricht kopieren",
   "Nothing is sent from this page. The button opens your email program with the message, and you send it from there.": "Von dieser Seite wird nichts gesendet. Die Schaltfläche öffnet Ihr E-Mail-Programm mit der Nachricht, und Sie schicken sie dort ab.",
-  "The page itself keeps no analytics.": "Die Seite selbst nutzt keine Webanalyse.",  "The message could not be sent. Please write to": "Die Nachricht konnte nicht gesendet werden. Bitte schreiben Sie an",
+  "The page itself keeps no analytics.": "Die Seite selbst nutzt keine Webanalyse.",
+  "The message could not be sent. Please write to": "Die Nachricht konnte nicht gesendet werden. Bitte schreiben Sie an",
   "Nothing is sent until you press Send. The page itself keeps no analytics.": "Nichts wird gesendet, bevor Sie auf Senden drücken. Die Seite selbst nutzt keine Webanalyse.",
   "Open the guide": "Leitfaden öffnen",
   "The guide, page by page": "Der Leitfaden, Seite für Seite",
@@ -2159,5 +2160,11 @@
   "Show more reflections": "Mehr Reflexionen zeigen",
   "No reflections match that yet. Try another word.": "Dazu passt noch keine Reflexion. Versuchen Sie ein anderes Wort.",
   "Show more notes": "Mehr Field Notes zeigen",
-  "Written from my own work. Where a passage is how I would act today rather than something I did, or an example is made up, the text says so.": "Aus meiner eigenen Arbeit geschrieben. Wo eine Passage beschreibt, wie ich heute handeln würde, und nicht, was ich getan habe, oder wo ein Beispiel erfunden ist, steht das im Text."
+  "Written from my own work. Where a passage is how I would act today rather than something I did, or an example is made up, the text says so.": "Aus meiner eigenen Arbeit geschrieben. Wo eine Passage beschreibt, wie ich heute handeln würde, und nicht, was ich getan habe, oder wo ein Beispiel erfunden ist, steht das im Text.",
+  "Read my experience": "Meine Erfahrung lesen",
+  "Three essays, one tool and a field note: the first ten minutes.": "Drei Essays, ein Tool und eine Field Note: die ersten zehn Minuten.",
+  "Solve a work problem": "Ein Problem bei der Arbeit lösen",
+  "Pick your role and find the tool for the problem in front of you.": "Wählen Sie Ihre Rolle und finden Sie das Tool für das Problem vor Ihnen.",
+  "Not the newest, but three that show the work with its evidence and its limits.": "Nicht die neuesten, sondern drei, die die Arbeit mit ihren Belegen und ihren Grenzen zeigen.",
+  "Why this one": "Warum dieser"
 }

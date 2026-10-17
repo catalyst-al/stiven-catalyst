@@ -1373,6 +1373,64 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   letter-spacing: 0;
 }
 .start-tool { max-width: 760px; min-height: 0; }
+
+/* The way in on the homepage, under the hero: where the writing comes from, and two quiet paths. */
+.home-start {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 48px;
+  align-items: center;
+  padding: 64px 0;
+  border-bottom: 1px solid var(--line);
+}
+.home-start .kicker { margin: 0 0 12px; }
+.home-start h2 {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+.home-start-intro p:not(.kicker) { margin: 0; max-width: 46ch; color: var(--muted); }
+.home-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.home-path {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--ink);
+  transition: border-color .3s ease, background .3s ease;
+}
+.home-path strong { font-size: 18px; line-height: 1.25; }
+.home-path strong > span { display: inline-block; color: var(--blue); transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.home-path > span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+.home-path:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.home-path:hover strong > span { translate: 4px 0; }
+.home-path:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+/* The three essays to read first: the sentence on why stands where the teaser would. */
+.home-pick { min-height: 0; }
+.home-pick h3 { margin-top: 28px; }
+.article-card .home-pick-why { color: var(--ink); }
+.home-pick-why > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.home-pick .text-link { margin-top: auto; }
+@media (max-width: 900px) {
+  .home-start { grid-template-columns: 1fr; gap: 28px; padding: 48px 0; }
+}
+@media (max-width: 620px) {
+  .home-paths { grid-template-columns: 1fr; }
+}
 .start-tool h3 { margin-top: 0; }
 .start-links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
 .start-step .note-card { max-width: 900px; }
@@ -4017,6 +4075,13 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   font-size: 20px;
 }
 
+/* On a desktop the title leaves room for the start of the text: a smaller top and a smaller title than the
+   display size of the other pages. */
+@media (min-width: 901px) {
+  .article-hero { padding: 64px 0 44px; }
+  .article-hero h1 { font-size: min(clamp(56px, 6.2vw, 88px), var(--fit-s, 1000px)); margin-bottom: 22px; }
+}
+
 /* An essay with a photo: the picture sits to the right and fades into the page,
    tinted with the brand's red and blue; the title runs over its faded edge. */
 .article-hero.has-image {
@@ -4242,6 +4307,11 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 
 .mobile-panel { display: none; }
 
+/* "Start here" is the menu's sixth item: it gives way first when the header narrows, before the five places have to
+   squeeze (the phone menu always lists it, and the homepage leads to it). */
+@media (max-width: 1240px) {
+  .main-nav .nav-start { display: none; }
+}
 /* Narrow desktops: the longer Albanian and German labels still fit on one line. */
 @media (max-width: 1100px) {
   .header-inner { gap: 18px; }
@@ -5274,6 +5344,10 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 
 .weekly-hero .weekly-mark { color: var(--red); }
 .weekly-archive { padding: 50px 0 80px; }
+/* How the series works: a quiet line above the list, the width of a paragraph. */
+.weekly-model { max-width: 72ch; margin: 0 0 28px; padding: 14px 18px; border-left: 3px solid var(--blue); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--blue) 6%, transparent); color: var(--muted); font-size: 15px; line-height: 1.6; }
+.weekly-model strong { color: var(--ink); }
+.weekly-model a { color: var(--blue); font-weight: 700; white-space: nowrap; }
 .weekly-controls { display: grid; gap: 18px; margin: 0 0 40px; }
 .weekly-months { display: flex; flex-wrap: wrap; gap: 6px; width: fit-content; max-width: 100%; padding: 5px; border: 1px solid var(--line); border-radius: 14px; }
 .weekly-months button {
@@ -7342,6 +7416,16 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 }
 .share-orbit.is-open .share-orbit-ring { animation-duration: 3s; }
 @keyframes share-turn { to { transform: rotate(360deg); } }
+/* While an essay is read, the things around the text stay still and quieter: the share planet stops turning and
+   dims until it is pointed at, the "new" pulses in the menu rest, and the invitations after the text lose their
+   card. The identity stays; only the motion and the weight go. */
+body:has([data-article]) .share-orbit:not(.is-open) .share-orbit-ring { animation: none; opacity: .45; }
+body:has([data-article]) .share-orbit:not(.is-open) .share-orbit-button { box-shadow: 0 8px 22px rgba(0, 0, 0, .35); opacity: .78; transition: opacity .3s ease, transform .2s ease, box-shadow .3s ease; }
+body:has([data-article]) .share-orbit:not(.is-open) .share-orbit-button:is(:hover, :focus-visible) { opacity: 1; }
+body:has([data-article]) :is(.main-nav, .mobile-panel) a.has-news .nav-orb,
+body:has([data-article]) .main-nav a.has-news::after,
+body:has([data-article]) .menu-button.has-news::after { animation: none; }
+body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { background: transparent; }
 
 .share-orbit-panel {
   position: absolute;

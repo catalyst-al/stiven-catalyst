@@ -94,4 +94,4 @@ Gather these four answers across many damage cases, and something appears that t
 
 **The goal is not a lower percentage in the report. It is one less damaged unit in the process.**
 
-The percentage tells you how much. The questions tell you where. And only the “where” can be changed.
+The percentage tells you how much. The questions tell you where. And change begins with the “where”.

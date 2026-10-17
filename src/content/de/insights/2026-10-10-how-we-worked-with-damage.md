@@ -89,4 +89,4 @@ Sammelt man diese vier Antworten für viele Schadensfälle, wird etwas sichtbar,
 
 **Das Ziel ist keine niedrigere Quote im Bericht. Das Ziel ist ein Schaden weniger im Prozess.**
 
-Die Quote sagt Ihnen, wie viel. Die Fragen sagen Ihnen, wo. Und nur das „Wo“ lässt sich ändern.
+Die Quote sagt Ihnen, wie viel. Die Fragen sagen Ihnen, wo. Und beim „Wo“ beginnt die Änderung.

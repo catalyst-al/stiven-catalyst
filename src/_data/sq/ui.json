@@ -1732,7 +1732,8 @@
   "Prepare the email": "Përgatit emailin",
   "Copy message": "Kopjo mesazhin",
   "Nothing is sent from this page. The button opens your email program with the message, and you send it from there.": "Nga kjo faqe nuk dërgohet asgjë. Butoni hap programin tënd të emailit me mesazhin, dhe e dërgon ti prej andej.",
-  "The page itself keeps no analytics.": "Vetë faqja nuk mbledh të dhëna analitike.",  "The message could not be sent. Please write to": "Mesazhi nuk u dërgua dot. Të lutem, shkruaj te",
+  "The page itself keeps no analytics.": "Vetë faqja nuk mbledh të dhëna analitike.",
+  "The message could not be sent. Please write to": "Mesazhi nuk u dërgua dot. Të lutem, shkruaj te",
   "Nothing is sent until you press Send. The page itself keeps no analytics.": "Asgjë nuk dërgohet para se të shtypësh Dërgo. Vetë faqja nuk mbledh të dhëna analitike.",
   "Open the guide": "Hape udhëzuesin",
   "The guide, page by page": "Udhëzuesi, faqe pas faqeje",
@@ -2159,5 +2160,11 @@
   "Show more reflections": "Shfaq më shumë reflektime",
   "No reflections match that yet. Try another word.": "Ende asnjë reflektim nuk përputhet. Provo një fjalë tjetër.",
   "Show more notes": "Shfaq më shumë shënime",
-  "Written from my own work. Where a passage is how I would act today rather than something I did, or an example is made up, the text says so.": "Shkruar nga puna ime. Kur një pjesë tregon si do të veproja sot dhe jo çfarë kam bërë, ose kur një shembull është i sajuar, teksti e thotë."
+  "Written from my own work. Where a passage is how I would act today rather than something I did, or an example is made up, the text says so.": "Shkruar nga puna ime. Kur një pjesë tregon si do të veproja sot dhe jo çfarë kam bërë, ose kur një shembull është i sajuar, teksti e thotë.",
+  "Read my experience": "Lexo përvojën time",
+  "Three essays, one tool and a field note: the first ten minutes.": "Tri ese, një mjet dhe një shënim nga terreni: dhjetë minutat e para.",
+  "Solve a work problem": "Zgjidh një problem në punë",
+  "Pick your role and find the tool for the problem in front of you.": "Zgjidh rolin tënd dhe gjej mjetin për problemin që ke përpara.",
+  "Not the newest, but three that show the work with its evidence and its limits.": "Jo më të rejat, por tri që e tregojnë punën me provat dhe kufijtë e saj.",
+  "Why this one": "Pse kjo"
 }

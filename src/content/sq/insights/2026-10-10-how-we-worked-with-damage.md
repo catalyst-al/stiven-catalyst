@@ -89,4 +89,4 @@ Kur këto katër përgjigje mblidhen për shumë raste dëmtimi, del në pah di�
 
 **Qëllimi nuk është një përqindje më e ulët në raport. Është një dëm më pak në proces.**
 
-Përqindja të thotë sa. Pyetjet të thonë ku. Dhe vetëm “ku”-ja mund të ndryshohet.
+Përqindja të thotë sa. Pyetjet të thonë ku. Dhe ndryshimi nis te “ku”-ja.
