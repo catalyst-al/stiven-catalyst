@@ -1,8 +1,10 @@
 // When each publication went online, and when its text last changed, from the history of main (git log
 // --first-parent, so a branch counts from the day it was merged). Writes src/_data/online.json, which the
 // publication pages show ("Online since") and give to search engines (datePublished, dateModified in
-// partials/structured-data.njk). The site is built from a shallow clone, without this history, so the file is kept in
-// the repository: run this again after a publication is added or changed, with main fetched in full.
+// partials/structured-data.njk). The essays and reflections get the day their text last changed the same way, in
+// src/_data/edited.json, for their byline, their dateModified, the feed and the sitemap. The site is built from a
+// shallow clone, without this history, so both files are kept in the repository: run this again after a publication,
+// an essay or a reflection is added or changed, with main fetched in full.
 //
 //   node scripts/online-dates.mjs            from origin/main
 //   node scripts/online-dates.mjs HEAD       from the branch checked out
@@ -34,3 +36,19 @@ for (const [slug, file] of publications.sort(([a], [b]) => a.localeCompare(b))) 
 }
 fs.writeFileSync(path.join(ROOT, "src/_data/online.json"), JSON.stringify(online, null, 1) + "\n");
 console.log(`${Object.keys(online).length} publications written to src/_data/online.json from ${ref}.`);
+
+// The essays and reflections in every language, by their path in the repository (Eleventy's page.inputPath without
+// its "./").
+const edited = {};
+for (const prefix of ["", "de/", "sq/"]) {
+  for (const kind of ["insights", "reflections"]) {
+    const dir = path.join(ROOT, "src/content", prefix, kind);
+    for (const name of fs.readdirSync(dir).filter((name) => name.endsWith(".md")).sort()) {
+      const file = `src/content/${prefix}${kind}/${name}`;
+      const seen = days(file);
+      if (seen.length) edited[file] = seen[0];
+    }
+  }
+}
+fs.writeFileSync(path.join(ROOT, "src/_data/edited.json"), JSON.stringify(edited, null, 1) + "\n");
+console.log(`${Object.keys(edited).length} essays and reflections written to src/_data/edited.json from ${ref}.`);

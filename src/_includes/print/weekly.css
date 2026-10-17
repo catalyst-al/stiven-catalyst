@@ -46,7 +46,9 @@
 .mr .pg .wk-legend-box p { font-size: 7pt; margin: 0; line-height: 1.38; }
 
 .mr .pg .wk-figure { margin: 0 0 3.8mm; }
-.mr .pg .wk-fig-note { font-size: 6.6pt; color: var(--muted); font-style: italic; margin: 1.6mm 0 0; line-height: 1.4; }
+.mr .pg .wk-fig-note { font-size: 6.4pt; color: var(--muted); font-style: italic; margin: .6mm 0 0; line-height: 1.3; }
+/* A chart with a note below it leaves a little less space after it. */
+.mr .pg .wk-figure:has(.wk-fig-note) { margin-bottom: 3mm; }
 .mr .pg .wk-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mr .pg .wk-grid { stroke: rgba(255,255,255,.1); stroke-width: .6; }
 .mr .pg .wk-axis { fill: var(--muted); font-size: 7.2px; font-weight: 500; }
@@ -89,6 +91,7 @@
 .mr .pg .wk-legend span { display: block; font-size: 7.2pt; line-height: 1.32; margin-top: .6mm; }
 .mr .pg .wk-donut-row { display: grid; grid-template-columns: 30mm 1fr; gap: 5mm; align-items: center; margin: .6mm 0 3.8mm; }
 .mr .pg .wk-donut-row p { margin: 0; font-family: var(--mr-serif); font-size: 10.4pt; line-height: 1.42; color: var(--ink); }
+.mr .pg .wk-donut-row .wk-fig-note { display: block; font-family: var(--mr-sans); }
 .mr .pg .callout.is-reading { border-color: rgba(255,75,92,.42); }
 .mr .pg .callout.is-reading .label { color: var(--red); }
 

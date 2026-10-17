@@ -10,7 +10,9 @@
 <section class="shell contact your-challenge">
   <form class="contact-form tool-feedback-form challenge-form" data-tool-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
         data-sent="{{ 'Thank you. I read every one. What I can answer in public becomes a field note or a reader question, anonymised; the rest gets an answer by email, if you left one.' | t(lang) }}"
-        data-opened="{{ 'Your email program opens with the message. If it does not, write to' | t(lang) }}"
+        data-opened="{{ 'Your email program opens with the message ready. Nothing is sent until you send it there. If no program opens, copy the message and send it to' | t(lang) }}"
+        data-copied="{{ 'Message copied. Paste it into an email to' | t(lang) }}"
+        data-copy-failed="{{ 'Copying did not work here. Select your text in the field above and copy it.' | t(lang) }}"
         data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
         data-subject="{{ 'Your challenge' | t(lang) }}">
     {%- if site.contact.action and site.contact.key %}
@@ -47,9 +49,16 @@
       <input id="challenge-email" type="email" name="email" autocomplete="email" data-line="{{ 'Reply to' | t(lang) }}">
     </div>
     <div class="tf-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    {#- Without a form service the button only prepares the email, and the text stays on the page to copy. #}
     <div class="tf-actions">
+      {%- if site.contact.action %}
       <button type="submit" class="button-primary">{{ "Send the situation" | t(lang) }}</button>
       <p class="form-note">{{ "Nothing is sent until you press Send." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
+      {%- else %}
+      <button type="submit" class="button-primary">{{ "Prepare the email" | t(lang) }}</button>
+      <button type="button" class="button-secondary" data-feedback-copy>{{ "Copy message" | t(lang) }}</button>
+      <p class="form-note">{{ "Nothing is sent from this page. The button opens your email program with the message, and you send it from there." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
+      {%- endif %}
     </div>
     <p class="form-note tf-status" data-tool-feedback-status role="status" aria-live="polite" hidden></p>
   </form>

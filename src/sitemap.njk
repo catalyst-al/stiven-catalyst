@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
 {%- if (item.url and item.url.endsWith(".html") or item.url and item.url.endsWith("/")) and not item.data.noindex %}
 {#- A page without a date of its own would carry the time of the checkout that built it, which changes
     on every deploy; only content with a real date (essays, notes, projects, reflections) says when it changed. -#}
-  <url><loc>{{ item.url | absoluteUrl }}</loc>{% if item.data.date or "/content/" in item.inputPath %}<lastmod>{{ item.date | isoDate }}</lastmod>{% endif %}</url>
+  <url><loc>{{ item.url | absoluteUrl }}</loc>{% if item.data.date or "/content/" in item.inputPath %}{% set editedDay = edited[item.inputPath | replace("./", "")] %}<lastmod>{{ editedDay if (editedDay and editedDay > (item.date | isoDate)) else (item.date | isoDate) }}</lastmod>{% endif %}</url>
 {%- endif %}
 {%- endfor %}
 </urlset>

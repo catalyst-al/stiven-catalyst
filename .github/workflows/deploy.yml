@@ -26,9 +26,14 @@ jobs:
       - run: npm ci
       # The site is built first: many tests read the built pages, and without them they are skipped.
       - run: npm run build
-      - name: npm test (no test may be skipped)
+      # bash with pipefail: a failing test fails the step even though its output goes through tee; then no test may
+      # have been skipped and none may have failed.
+      - name: npm test (no test may fail or be skipped)
+        shell: bash
         run: |
+          set -o pipefail
           npm test 2>&1 | tee test.log
+          grep -q '^# fail 0$' test.log
           grep -q '^# skipped 0$' test.log
       - run: node scripts/check-coaching-build.mjs
       - if: github.event_name != 'pull_request'

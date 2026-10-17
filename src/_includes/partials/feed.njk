@@ -5,7 +5,7 @@
 {%- set feedLang = feedLang or "en" -%}
 {%- set feedPath = "/feed.xml" if feedLang == "en" else "/" + feedLang + "/feed.xml" -%}
 {%- set homePath = "/" | local(feedLang) -%}
-{%- set feed = collections["feed" + (feedLang | langSuffix)] | reverse | feedEntries(feedLang, { weekly: weekly, review: review, treatise: treatise, magazine: magazine, toolsGuide: toolsGuide, online: online }) -%}
+{%- set feed = collections["feed" + (feedLang | langSuffix)] | reverse | feedEntries(feedLang, { weekly: weekly, review: review, treatise: treatise, magazine: magazine, toolsGuide: toolsGuide, online: online, edited: edited }) -%}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ feedLang }}">
   <title>{{ site.title }}{% if feedLang == "de" %} (Deutsch){% elif feedLang == "sq" %} (Shqip){% endif %}</title>

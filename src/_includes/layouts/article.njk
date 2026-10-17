@@ -18,7 +18,8 @@ ogType: article
     {#- Who wrote it, when, and how long it takes: one line, so the text starts on the first screen. -#}
     <p class="article-byline">
       {%- if not author and site.authorImage %}<img class="author-photo" src="{{ site.authorImage }}" alt="" width="44" height="44" decoding="async">{% endif -%}
-      <span><strong>{{ author or site.author }}</strong><span><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>{% if readingTime %} · {{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</span></span>
+      <span><strong>{{ author or site.author }}</strong><span><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(lang) }}</time>
+      {%- set editedDay = edited[page.inputPath | replace("./", "")] %}{% if editedDay and editedDay > (page.date | isoDate) %} · {{ "revised" | t(lang) }} <time datetime="{{ editedDay }}">{{ editedDay | readableDate(lang) }}</time>{% endif %}{% if readingTime %} · {{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</span></span>
       {#- Save for later: on "My shelf", in this browser only (js/shelf.js). -#}
       <button type="button" class="essay-save" data-shelf-save data-save-label="{{ 'Save for later' | t(lang) }}" data-saved-label="{{ 'Saved' | t(lang) }}" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1V20l-6-3.6L6 20V4.5a1 1 0 0 1 1-1z"/></svg><span data-shelf-label>{{ "Save for later" | t(lang) }}</span></button>
     </p>

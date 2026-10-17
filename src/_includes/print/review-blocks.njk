@@ -3,7 +3,7 @@
     b.svg) and L (the labels of the publication). -#}
   {%- for b in page.blocks %}
   {%- if b.type == "p" %}<div class="body-text"><p>{{ b.text }}</p></div>
-  {%- elif b.type == "donut" %}<div class="wk-donut-row">{{ b.svg | safe }}<p>{{ b.t }}</p></div>
+  {%- elif b.type == "donut" %}<div class="wk-donut-row">{{ b.svg | safe }}<p>{{ b.t }}{% if b.note %}<span class="wk-fig-note">{{ b.note }}</span>{% endif %}</p></div>
   {%- elif b.chart %}<div class="wk-figure">{% if b.label %}<p class="block-label">{{ b.label }}</p>{% endif %}{{ b.svg | safe }}{% if b.note %}<p class="wk-fig-note">{{ b.note }}</p>{% endif %}</div>
   {%- elif b.type == "timeline" %}<ol class="wk-timeline" style="--n:{{ b.items | length }}">{% for item in b.items %}<li><b>{{ item.k }}</b><span>{{ item.t }}</span></li>{% endfor %}</ol>
   {%- elif b.type == "tiles" %}<div class="wk-tiles">{% for g in b.groups %}<div class="wk-tile-group tone-{{ g.tone }}"><h4>{{ g.h }}</h4><ol>{% for item in g.items %}<li><b>{{ item.n }}</b><span>{{ item.t }}{% if item.isNew %}<br><em>{{ b.badge }}</em>{% endif %}</span></li>{% endfor %}</ol></div>{% endfor %}</div>

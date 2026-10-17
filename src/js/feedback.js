@@ -1,7 +1,8 @@
 // The feedback question at the end of a tool page (partials/tool-feedback.njk) and the form for a reader's
 // challenge (pages/your-challenge.njk).
-// With an action the form posts there and stays on the page; without one it opens the visitor's
-// mail program with the answer. Nothing leaves the browser until "Send" is pressed.
+// With an action the form posts there and stays on the page; without one "Prepare the email" opens the visitor's
+// mail program with the answer, the text stays in the form, and "Copy message" puts it on the clipboard for a visitor
+// without a mail program. Nothing leaves the browser until the visitor sends it.
 (() => {
   const form = document.querySelector("[data-tool-feedback]");
   if (!form) return;
@@ -42,6 +43,20 @@
     return out.join("\n\n");
   };
 
+  // The whole message to copy: the subject, then the body the mail would carry.
+  const copy = form.querySelector("[data-feedback-copy]");
+  if (copy) {
+    copy.addEventListener("click", async () => {
+      const text = `${form.dataset.subject || "Feedback"}\n\n${lines(new FormData(form))}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        say(form.dataset.copied, mail);
+      } catch {
+        say(form.dataset.copyFailed);
+      }
+    });
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(form);
@@ -52,7 +67,8 @@
     if (!action) {
       const subject = encodeURIComponent(form.dataset.subject || "Feedback");
       const body = encodeURIComponent(lines(data));
-      finish(form.dataset.sent);
+      // The fields stay as they are: the message is not sent yet, and a visitor without a mail program copies it.
+      button.disabled = false;
       say(form.dataset.opened, mail);
       // A clicked link, not location.href, so the page stays where it is in every browser.
       const link = document.createElement("a");
