@@ -5,7 +5,8 @@
   "scripts": {
     "build": "eleventy",
     "test": "node --test tests/*.test.cjs",
-    "start": "eleventy --serve"
+    "start": "eleventy --serve",
+    "test:browser": "playwright test -c tests/browser/playwright.config.mjs"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,9 @@
   },
   "homepage": "https://github.com/catalyst-al/stiven-catalyst#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy": "^3.1.7",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "1.56.1",
     "jsdom": "^26.1.0",
     "terser": "^5.51.2"
   },
