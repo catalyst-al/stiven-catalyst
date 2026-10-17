@@ -7,7 +7,9 @@
 //   node scripts/magazine.mjs 1          only issue 1
 //
 // 1. Eleventy renders the print pages (src/guide-print/magazine.njk) into a temporary folder (GUIDE_PRINT).
-// 2. Chromium (Playwright) prints each one to src/media/magazine/<slug>/<slug>-<lang>.pdf.
+// 2. Chromium (Playwright) checks that every page fits its box (lib/page-fit.js) and stops with the list of
+//    those that do not (node scripts/page-fit.mjs sets them tighter); then it prints each one to
+//    src/media/magazine/<slug>/<slug>-<lang>.pdf.
 // 3. scripts/guide-pages.py draws the cover of each PDF (COVER_ONLY) and adds the issue to src/_data/magazinePages.json.
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -15,6 +17,7 @@ import http from "node:http";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { checkPagesFit, unfitMessage } from "../lib/page-fit.js";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const { default: magazine } = await import(path.join(ROOT, "src", "_data", "magazine.js"));
@@ -50,6 +53,17 @@ const require = createRequire(import.meta.url);
 let playwright;
 try { playwright = require("playwright"); } catch { playwright = require(path.join(execFileSync("npm", ["root", "-g"]).toString().trim(), "playwright")); }
 const browser = await playwright.chromium.launch(fs.existsSync("/opt/pw-browsers/chromium") ? { executablePath: "/opt/pw-browsers/chromium" } : {});
+
+// Every page has to fit its box before anything is printed (lib/page-fit.js, with the steps of src/_data/pageFit.json):
+// a page that runs into the block at its foot, or past the page, stops the print with the list of such pages.
+const unfit = await checkPagesFit(browser, issues.flatMap((issue) => magazine.langs.map((lang) => ({ label: `${issue.slug} ${lang}`, url: `${base}/guide-print/magazine/${issue.slug}/${lang}/` }))));
+if (unfit.length) {
+  await browser.close();
+  server.close();
+  fs.rmSync(tmp, { recursive: true, force: true });
+  console.error(unfitMessage(unfit));
+  process.exit(1);
+}
 
 for (const issue of issues) {
   const out = path.join(ROOT, "src", "media", "magazine", issue.slug);
