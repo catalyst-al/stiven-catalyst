@@ -1,3 +1,5 @@
+/* This stylesheet is put together from the files in src/css/, in the order of their numbers, before every build
+   (lib/css-parts.js). Edit those files, not src/styles.css. */
 @font-face {
   /* Fallback only: used where Arial Black is not installed (Android, Linux). */
   font-family: "Archivo Black";

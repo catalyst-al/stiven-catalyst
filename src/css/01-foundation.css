@@ -1,0 +1,365 @@
+/* This stylesheet is put together from the files in src/css/, in the order of their numbers, before every build
+   (lib/css-parts.js). Edit those files, not src/styles.css. */
+@font-face {
+  /* Fallback only: used where Arial Black is not installed (Android, Linux). */
+  font-family: "Archivo Black";
+  src: url("fonts/archivo-black-latin-400-normal.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  /* While Archivo Black downloads, the headings are drawn with the device's bold sans (Arial, Liberation,
+     Arimo, Roboto) widened to its measure: Archivo Black is about 13% wider than Arial Bold, with an ascent
+     of 88% and a descent of 21% of the font size. So the text keeps its width and line height when the
+     real font arrives, and nothing on the page moves (layout shift). Browsers scale the ascent and descent
+     overrides by size-adjust as well, so they are written divided by 1.13: 77.9% × 1.13 = 88%, 18.6% × 1.13 = 21%
+     (measured in Chromium: the text sits exactly where Archivo Black puts it). */
+  font-family: "Archivo Black Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"), local("Arimo Bold"), local("Arimo-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Helvetica Bold"), local("Helvetica-Bold");
+  font-weight: 400 900;
+  font-style: normal;
+  size-adjust: 113%;
+  ascent-override: 77.9%;
+  descent-override: 18.6%;
+  line-gap-override: 0%;
+}
+
+:root {
+  color-scheme: dark;
+  /* Colour roles (BRAND.md): neutrals carry the page, blue is the one accent, red is the signature,
+     gold belongs to the light-bulb mark, and ok / warn / danger only report a state inside a tool. */
+  --paper: #060a10;
+  --paper-2: #0c131c;
+  --ink: #f6f7f4;
+  --muted: #a5b0b8;
+  --line: rgba(255,255,255,.12);
+  --red: #df1119;
+  --blue: #4ab5f7;
+  --blue-soft: #79c9f7;
+  --on-blue: #001018;
+  --gold: #d1a553;
+  --ok: #3cc47c;
+  --warn: #d1a553;
+  --danger: #ff5a5f;
+  --card: rgba(255,255,255,.045);
+  --shadow: 0 34px 100px rgba(0,0,0,.34);
+  --radius: 24px;
+  --max: 1240px;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --display: "Arial Black", "Archivo Black", "Archivo Black Fallback", "Helvetica Neue", Arial, sans-serif;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper: #f6f7f5;
+  --paper-2: #eceff0;
+  --ink: #0b1015;
+  --muted: #5f6870;
+  --line: rgba(11, 16, 21, 0.14);
+  --red: #c90912;
+  /* Dark enough to read as text on the light paper (4.5:1 and more): blue 5.3:1, gold 5.7:1. */
+  --blue: #0a6ab0;
+  --blue-soft: #63bdf3;
+  --on-blue: #fff;
+  --gold: #7f5c1f;
+  --ok: #1d7a45;
+  --warn: #7f5c1f;
+  --danger: #c2141b;
+  --card: rgba(255,255,255,.74);
+  --shadow: 0 28px 80px rgba(15, 28, 40, .12);
+}
+
+* { box-sizing: border-box; }
+/* The sticky header (74 px) must not cover what the keyboard or a link brings into view. */
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1100px 680px at 62% 0%, color-mix(in srgb, var(--blue) 23%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--paper), var(--paper));
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button, input, select { font: inherit; }
+
+::selection { background: var(--blue); color: #001018; }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 999;
+  left: 16px;
+  top: -100px;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 999px;
+}
+.skip-link:focus { top: 16px; }
+
+.shell {
+  width: min(calc(100% - 40px), var(--max));
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(18px) saturate(130%);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  position: relative;
+  width: 29px;
+  height: 36px;
+  display: block;
+  flex: 0 0 auto;
+  font-size: 0;
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 9px;
+  width: 13px;
+  height: 17px;
+  border-radius: 50% 50% 46% 46%;
+  background: #fff;
+  box-shadow:
+    0 0 7px rgba(255,255,255,.95),
+    0 0 20px color-mix(in srgb, var(--blue) 75%, transparent),
+    0 0 34px color-mix(in srgb, var(--blue) 36%, transparent);
+}
+
+[data-theme="light"] .brand-mark::before {
+  box-shadow:
+    0 0 0 1px rgba(11,16,21,.28),
+    0 0 12px color-mix(in srgb, var(--blue) 70%, transparent),
+    0 0 26px color-mix(in srgb, var(--blue) 34%, transparent);
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 25px;
+  width: 7px;
+  height: 5px;
+  border-radius: 1px 1px 3px 3px;
+  background: var(--gold);
+  box-shadow: 0 -20px 0 -3px var(--ink);
+}
+
+.main-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Each menu item is a small chip with a planet in the site's blue, like the family chips on the homepage: a fine blue
+   edge and a breath of blue light behind the planet at rest, brighter under the pointer, glowing on the page you are on. */
+.main-nav a {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--blue) 22%, var(--line));
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 18px 50%, color-mix(in srgb, var(--blue) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+  color: color-mix(in srgb, var(--ink) 82%, var(--muted));
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color .2s ease, border-color .25s ease, background-color .25s ease, box-shadow .3s ease, translate .3s cubic-bezier(.22, 1, .36, 1);
+}
+.main-nav a:hover {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--blue) 55%, var(--line));
+  box-shadow: 0 0 18px -6px color-mix(in srgb, var(--blue) 60%, transparent);
+  translate: 0 -1px;
+}
+.main-nav a[aria-current="page"] { color: var(--ink); border-color: transparent; background: none; }
+.nav-orb {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--blue) 48%, color-mix(in srgb, var(--blue) 50%, #000) 100%);
+  opacity: .8;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--blue) 70%, transparent);
+  transition: opacity .25s ease, box-shadow .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
+}
+.main-nav a:hover .nav-orb { opacity: 1; box-shadow: 0 0 10px var(--blue); }
+.main-nav a[aria-current="page"] .nav-orb { opacity: 1; box-shadow: 0 0 9px var(--blue); }
+/* The pill of the page you are on: it slides to the next item when you change page (see "Moving between pages"). */
+.nav-pill {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--blue) 80%, transparent);
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 14% 50%, color-mix(in srgb, var(--blue) 36%, transparent), transparent 70%),
+    color-mix(in srgb, var(--blue) 12%, transparent);
+  box-shadow: 0 0 22px -6px color-mix(in srgb, var(--blue) 75%, transparent), inset 0 0 12px -6px color-mix(in srgb, var(--blue) 60%, transparent);
+  pointer-events: none;
+}
+/* Something new in Writing or Publications since the reader last opened it (script.js): the planet beats and a ring
+   of light leaves the pill, the way the family chips call. In the phone menu the planet follows the name, and the
+   menu button carries a dot. */
+.main-nav a.has-news .nav-orb { opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
+.main-nav a.has-news::after { animation: news-ring 2.6s ease-out infinite; }
+.mobile-panel .nav-orb { display: none; }
+.mobile-panel a.has-news .nav-orb { display: inline-block; width: 9px; height: 9px; margin-left: 12px; vertical-align: .3em; opacity: 1; animation: news-beat 1.8s ease-in-out infinite; }
+.menu-button { position: relative; }
+.menu-button.has-news::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 10px var(--blue);
+  animation: news-beat 1.8s ease-in-out infinite;
+}
+.menu-button.has-news[aria-expanded="true"]::after { opacity: 0; }
+/* The pulses of the site move only scale and opacity, which the compositor draws without the main thread: a
+   box-shadow or a filter that changes would repaint the element and its surroundings on every frame. The beat is the
+   planet growing, its own glow growing with it. */
+@keyframes news-beat {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.4; }
+}
+/* The ring a pulse sends out is a pseudo-element with the ring drawn once, fading as it widens into place. */
+@keyframes news-ring {
+  0% { opacity: 1; scale: .94; }
+  70%, 100% { opacity: 0; scale: 1; }
+}
+.main-nav a.has-news::after,
+.project-card .tag.is-live::after,
+.audio-player.is-playing .audio-player-play::after,
+.contact-card-orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--blue) 32%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .main-nav a.has-news,
+  .main-nav a.has-news .nav-orb,
+  .mobile-panel a.has-news .nav-orb,
+  .menu-button.has-news::after { animation: none; box-shadow: 0 0 10px var(--blue); }
+  .main-nav a.has-news { box-shadow: none; }
+  .main-nav a.has-news::after { animation: none; }
+}
+
+/* Moving between pages: the browser keeps the header still, slides the marked menu item and writing tab to their new
+   place and lets the new page rise in (cross-document view transitions; browsers without them just load the page). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+.site-header { view-transition-name: site-header; }
+.nav-pill { view-transition-name: nav-pill; }
+.writing-tabs { view-transition-name: writing-tabs; }
+.tab-pill { view-transition-name: tab-pill; }
+::view-transition-old(root) { animation: page-out .2s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: page-in .42s cubic-bezier(.2, .8, .2, 1) .05s both; }
+::view-transition-group(site-header),
+::view-transition-group(writing-tabs) { animation-duration: .3s; }
+::view-transition-group(nav-pill),
+::view-transition-group(tab-pill) { animation-duration: .45s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+::view-transition-old(nav-pill),
+::view-transition-new(nav-pill),
+::view-transition-old(tab-pill),
+::view-transition-new(tab-pill) { height: 100%; }
+@keyframes page-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(14px); } }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button,
+.menu-button {
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.icon-button svg,
+.menu-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-moon { display: none; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: block; }
+
+.menu-button { display: none; }
+/* The three lines of the menu button turn into a cross while the menu is open. */
+.menu-line { transform-origin: 12px 12px; transition: transform .35s cubic-bezier(.22, 1, .36, 1), opacity .2s ease; }
+.menu-button[aria-expanded="true"] .menu-line:nth-child(1) { transform: rotate(45deg) translateY(5px); }
+.menu-button[aria-expanded="true"] .menu-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-button[aria-expanded="true"] .menu-line:nth-child(3) { transform: rotate(-45deg) translateY(-5px); }
+

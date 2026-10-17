@@ -13,6 +13,7 @@ import { searchIndex, publicationEntries } from "./lib/search-index.js";
 import { feedEntries } from "./lib/feed-entries.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
+import { writeStylesheet } from "./lib/css-parts.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -336,6 +337,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("lc", (text, lang) => (lang === "de" ? String(text) : String(text).toLowerCase()));
   eleventyConfig.addWatchTarget("src/_data/de/");
   eleventyConfig.addWatchTarget("src/_data/sq/");
+  // The stylesheet from its parts in src/css/ (lib/css-parts.js), before anything reads or copies it.
+  eleventyConfig.on("eleventy.before", () => writeStylesheet());
+  eleventyConfig.addWatchTarget("src/css/");
   eleventyConfig.on("eleventy.before", () => { ui.clear(); clearCache(); assetVersions.clear(); imageSizes.clear(); clearLivePages(); });
   // A minified stylesheet, and a lighter one for the pages that are not tools (lib/css-split.js).
   eleventyConfig.on("eleventy.after", ({ dir }) => splitStylesheet(dir?.output || "_site"));

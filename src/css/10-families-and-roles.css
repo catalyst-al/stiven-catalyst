@@ -1,0 +1,876 @@
+/* ---------------------------------------------------------------------------
+   Tool pages: each family has its own drawn background above the title
+   (partials/family-stage.njk, js/family-sky.js). It lives only around the
+   title and fades out before the work area; print leaves it out. */
+body.in-family {
+  --sky-ink: var(--family);
+  --sky-star: #f4f7fb;
+  --sky-glow: 1;
+  background:
+    radial-gradient(1100px 640px at 72% -14%, color-mix(in srgb, var(--family) 18%, transparent), transparent 62%),
+    radial-gradient(900px 560px at 6% -12%, color-mix(in srgb, var(--family) 8%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--paper), var(--paper));
+}
+[data-theme="light"] body.in-family {
+  --sky-ink: color-mix(in srgb, var(--family) 62%, #0b1015);
+  --sky-star: color-mix(in srgb, var(--family) 55%, #1b2330);
+  --sky-glow: .55;
+}
+[data-theme="light"] body.in-family[data-family="atlas"] { --sky-ink: #56606b; --sky-star: #56606b; }
+.in-family main { position: relative; }
+
+.family-sky {
+  --hero-bottom: 560px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: calc(var(--hero-bottom) + 220px);
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 300px), transparent);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 300px), transparent);
+}
+.family-sky > * { position: absolute; }
+/* What moves for ever (the planets' chips and shelf, the drawing behind a tool, the family cards, a floating cover, the
+   breathing portrait) pauses while it is out of view and goes on a little before it comes back (script.js). */
+.is-offscreen, .is-offscreen *, .is-offscreen *::before, .is-offscreen *::after { animation-play-state: paused !important; }
+/* With scripts, the drawing appears once js/family-sky.js has placed the planet (.is-ready), so nothing in it
+   moves while it is visible and the page keeps its layout stable; without scripts it is simply there. */
+.js .family-sky { transition: opacity .6s ease; }
+.js .family-sky:not(.is-ready) { opacity: 0; }
+
+.family-badge-row { padding-top: 40px; }
+.family-badge-row + .tool-hero { padding-top: 26px; }
+.family-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--family) 45%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--family) 10%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.family-badge > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sky-ink);
+  box-shadow: 0 0 10px var(--family);
+}
+.family-badge small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.family-badge:hover { border-color: var(--family); }
+.in-family .tool-hero .eyebrow { color: var(--sky-ink); }
+.in-family .tool-hero .lede { text-shadow: 0 0 18px var(--paper), 0 0 4px var(--paper); }
+
+/* The role's planet over its drawing, in the open space beside the title; it keeps the
+   physics and the moons of the role cards (partials/family-planet.njk). */
+.family-sky .sky-planet {
+  width: 440px;
+  aspect-ratio: 4 / 3;
+  transform: translate(-50%, -50%);
+}
+.sky-pulse .sky-planet { left: 78%; top: calc(var(--hero-bottom) * .4); }
+.sky-zenith .sky-planet { left: 60%; top: calc(var(--hero-bottom) * .18); width: 340px; }
+.sky-lumen .sky-planet { left: 74%; top: calc(var(--hero-bottom) * .5); }
+.sky-atlas .sky-planet { left: 66%; top: calc(var(--hero-bottom) * .3); width: 380px; }
+.sky-learn .sky-planet { left: 48%; top: 90px; width: 300px; }
+@media (max-width: 900px) {
+  .family-sky .sky-planet { left: auto; right: -90px; top: 30px; width: 260px; transform: none; }
+}
+/* js/family-sky.js moves the planet where it touches no words (the title, the badge, the moons): beside the
+   title, above it, or smaller; the rules above are its home and the fallback without scripts. */
+.family-sky .sky-planet.is-placed { left: var(--planet-x); top: var(--planet-y); right: auto; width: var(--planet-w); transform: translate(-50%, -50%); }
+
+/* Lumen: a beam of light from the bulb, dust drifting in it. */
+.sky-lumen .lumen-cable {
+  left: 84%;
+  top: 0;
+  width: 1.5px;
+  height: 36px;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--sky-star) 55%, transparent));
+}
+.sky-lumen .lumen-bulb {
+  left: 84%;
+  top: 46px;
+  width: 26px;
+  height: 32px;
+  margin-left: -12px;
+  border-radius: 48% 48% 52% 52%;
+  background: radial-gradient(circle at 45% 55%, #fff, #fff6df 60%, #ffe2a8);
+  box-shadow: 0 0 12px #fff, 0 0 40px rgba(255, 236, 190, .9);
+}
+.sky-lumen .lumen-halo {
+  left: 84%;
+  top: 62px;
+  width: 420px;
+  height: 420px;
+  margin: -210px 0 0 -210px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 236, 190, calc(.42 * var(--sky-glow))), rgba(245, 200, 106, calc(.14 * var(--sky-glow))) 45%, transparent);
+  animation: lumen-breathe 5s ease-in-out infinite;
+}
+.sky-lumen .lumen-bulb::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: -11px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(#050607, #1b1e20);
+  border-bottom: 2px solid #d1a553;
+}
+@keyframes lumen-breathe {
+  50% { opacity: .7; transform: scale(.92); }
+}
+.sky-lumen .lumen-beam { inset: 0; filter: blur(16px); }
+.sky-lumen .lumen-cone,
+.sky-lumen .lumen-core,
+.sky-lumen .lumen-dust { position: absolute; inset: 0; }
+.sky-lumen .lumen-cone,
+.sky-lumen .lumen-dust { clip-path: polygon(calc(84% - 14px) 70px, calc(84% + 16px) 70px, 104% 100%, 34% 100%); }
+.sky-lumen .lumen-cone { background: linear-gradient(180deg, rgba(255, 240, 205, .30), rgba(255, 226, 170, .12) 58%, rgba(255, 226, 170, 0)); }
+.sky-lumen .lumen-core {
+  clip-path: polygon(calc(84% - 6px) 70px, calc(84% + 8px) 70px, 90% 100%, 64% 100%);
+  background: linear-gradient(180deg, rgba(255, 250, 235, .30), rgba(255, 236, 190, 0) 80%);
+}
+[data-theme="light"] .sky-lumen .lumen-cone { background: linear-gradient(180deg, rgba(209, 165, 83, .30), rgba(209, 165, 83, .10) 58%, rgba(209, 165, 83, 0)); }
+[data-theme="light"] .sky-lumen .lumen-core { background: linear-gradient(180deg, rgba(209, 165, 83, .22), rgba(209, 165, 83, 0) 80%); }
+.sky-lumen .lumen-pool {
+  left: 64%;
+  top: var(--hero-bottom);
+  width: 1000px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(255, 226, 170, calc(.16 * var(--sky-glow))), transparent);
+}
+.sky-lumen .lumen-dust i {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #fff4dc;
+  box-shadow: 0 0 6px rgba(255, 226, 170, .9);
+  opacity: 0;
+  animation: lumen-dust var(--t) linear var(--d) infinite;
+}
+[data-theme="light"] .sky-lumen .lumen-dust i { background: #b88a3b; box-shadow: none; }
+@keyframes lumen-dust {
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  18% { opacity: .9; }
+  80% { opacity: .6; }
+  100% { opacity: 0; transform: translate3d(var(--dx), -80px, 0); }
+}
+
+/* Pulse: a monitor grid and a heartbeat running along the foot of the title. */
+.sky-pulse .pulse-grid {
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--sky-ink) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--sky-ink) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--sky-ink) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--sky-ink) 5%, transparent) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 80% at 72% 45%, #000, transparent 78%);
+  mask-image: radial-gradient(ellipse 60% 80% at 72% 45%, #000, transparent 78%);
+}
+.sky-pulse .pulse-ecg {
+  left: 0;
+  top: calc(var(--hero-bottom) - 90px);
+  width: 100%;
+  height: 180px;
+  overflow: visible;
+}
+.sky-pulse path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.sky-pulse .pulse-base { stroke: color-mix(in srgb, var(--sky-ink) 42%, transparent); stroke-width: 1.4; }
+.sky-pulse .pulse-trace {
+  stroke: var(--sky-ink);
+  stroke-width: 2.6;
+  stroke-dasharray: 80 1000;
+  stroke-dashoffset: 1080;
+  filter: drop-shadow(0 0 6px var(--family));
+  animation: pulse-run 3.4s linear infinite;
+}
+@keyframes pulse-run { to { stroke-dashoffset: 0; } }
+
+/* Zenith: the landscape from above and a radar turning over it. */
+.sky-zenith .zenith-map,
+.sky-zenith .zenith-radar {
+  left: 82%;
+  top: calc(var(--hero-bottom) * .34);
+  transform: translate(-50%, -50%);
+}
+.sky-zenith .zenith-map { width: 980px; height: 980px; }
+.sky-zenith .zenith-map path { fill: none; stroke: color-mix(in srgb, var(--sky-ink) 16%, transparent); stroke-width: 1; }
+.sky-zenith .zenith-map path.is-major { stroke: color-mix(in srgb, var(--sky-ink) 36%, transparent); stroke-dasharray: 2 5; }
+.sky-zenith .zenith-radar {
+  width: 460px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.sky-zenith .zenith-radar svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sky-zenith .zenith-radar circle,
+.sky-zenith .zenith-radar path { fill: none; stroke: color-mix(in srgb, var(--sky-ink) 30%, transparent); stroke-width: .5; }
+.sky-zenith .zenith-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 285deg, color-mix(in srgb, var(--family) calc(22% * var(--sky-glow) + 8%), transparent) 360deg);
+  animation: zenith-turn var(--sweep) linear infinite;
+}
+.sky-zenith .zenith-sweep::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1.5px;
+  height: 50%;
+  margin-left: -.75px;
+  background: linear-gradient(color-mix(in srgb, var(--family) 90%, #fff), transparent);
+}
+@keyframes zenith-turn { to { transform: rotate(360deg); } }
+.sky-zenith .zenith-radar i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sky-ink);
+  box-shadow: 0 0 12px var(--family);
+  opacity: .14;
+  transform: translate(-50%, -50%);
+  animation: zenith-blip var(--sweep) linear infinite;
+}
+@keyframes zenith-blip {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1.7); }
+  30% { opacity: .3; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: .14; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Atlas: a career drawn as a constellation, rising to its brightest star, and a compass. */
+.atlas-stars { inset: 0; }
+.atlas-stars i {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--sky-star);
+  animation: atlas-twinkle var(--t) ease-in-out var(--d) infinite;
+}
+@keyframes atlas-twinkle { 50% { opacity: .2; } }
+.sky-atlas .atlas-map { top: 0; right: 0; width: 100%; height: var(--hero-bottom); overflow: visible; }
+.sky-atlas .atlas-compass circle,
+.sky-atlas .atlas-compass path { fill: none; stroke: color-mix(in srgb, var(--sky-ink) 26%, transparent); stroke-width: 1; }
+.sky-atlas .atlas-compass .is-dashed { stroke-dasharray: 2 6; }
+.sky-atlas .atlas-compass .is-inner { fill: color-mix(in srgb, var(--sky-ink) 6%, transparent); }
+.sky-atlas .atlas-compass text { fill: color-mix(in srgb, var(--sky-ink) 45%, transparent); font: 800 14px var(--sans); letter-spacing: .2em; }
+.sky-atlas .atlas-compass .atlas-needle {
+  fill: color-mix(in srgb, var(--sky-ink) 30%, transparent);
+  stroke: none;
+  transform-box: view-box;
+  transform-origin: 912px 330px;
+  animation: atlas-needle 9s ease-in-out infinite;
+}
+@keyframes atlas-needle { 50% { transform: rotate(-10deg); } }
+.sky-atlas .atlas-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--sky-star) 50%, transparent);
+  stroke-width: 1.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: atlas-draw 3.4s cubic-bezier(.4, 0, .2, 1) .3s forwards;
+}
+@keyframes atlas-draw { to { stroke-dashoffset: 0; } }
+.sky-atlas .atlas-star { opacity: 0; animation: atlas-appear .8s ease-out forwards; }
+.sky-atlas .atlas-star circle { fill: var(--sky-star); }
+.sky-atlas .atlas-star .halo { fill: color-mix(in srgb, var(--sky-ink) 20%, transparent); }
+.sky-atlas .atlas-star path { fill: var(--sky-star); filter: drop-shadow(0 0 6px var(--family)); }
+.sky-atlas .atlas-star.is-goal { animation: atlas-appear .8s ease-out forwards, atlas-glow 4s ease-in-out 4s infinite; }
+@keyframes atlas-appear { to { opacity: 1; } }
+@keyframes atlas-glow { 50% { opacity: .55; } }
+
+/* A training module (a "learn" page): five moons from crescent to full, one per DMAIC step; a completed step lights its moon. */
+.sky-learn .learn-arc {
+  left: 55%;
+  top: 40px;
+  width: 42%;
+  height: 90px;
+  border-top: 1px dashed color-mix(in srgb, var(--sky-ink) 40%, transparent);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.sky-learn .learn-moon {
+  top: calc(40px + var(--drop));
+  width: 46px;
+  aspect-ratio: 1;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #fffaf2, #ffe1c8 45%, color-mix(in srgb, var(--family) 55%, #fff) 100%);
+  box-shadow: inset var(--shade) 0 0 0 color-mix(in srgb, var(--paper) 92%, transparent);
+  opacity: .3;
+  filter: grayscale(.7);
+  transition: opacity .6s ease, filter .6s ease;
+}
+.sky-learn .learn-moon.is-lit { opacity: 1; filter: grayscale(0) drop-shadow(0 0 16px color-mix(in srgb, var(--family) 75%, transparent)); }
+.sky-learn .learn-moon.is-current { opacity: .75; filter: grayscale(0); }
+.sky-learn .learn-moon.is-current::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 1px solid var(--sky-ink);
+  border-radius: 50%;
+  animation: learn-ring 2.8s ease-out infinite;
+}
+@keyframes learn-ring {
+  from { transform: scale(.9); opacity: 1; }
+  to { transform: scale(1.35); opacity: 0; }
+}
+.sky-learn .learn-moon b {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--sky-ink);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .2em;
+}
+
+/* Inside the tool, the family colour becomes the accent: labels, links, focus,
+   selected states, progress and the main buttons. Colours that carry meaning
+   (right and wrong, better and worse, priority, warnings) keep their own, and
+   the CV documents keep their themes. */
+body.in-family {
+  --signal: #4ab5f7;
+  --blue: var(--sky-ink);
+  --blue-soft: color-mix(in srgb, var(--sky-ink) 72%, #fff);
+  --accent-fill: var(--family);
+  --accent-on: #0b1015;
+}
+[data-theme="light"] body.in-family { --signal: #0a6ab0; }
+[data-theme="light"] body.in-family[data-family="atlas"] { --accent-fill: #56606b; --accent-on: #fff; }
+[data-theme="light"] .in-family ::selection { color: #fff; }
+
+.in-family .button-primary,
+.in-family .scale-option input:checked + span,
+.in-family .chip[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--accent-fill), color-mix(in srgb, var(--accent-fill) 72%, #fff));
+  color: var(--accent-on);
+}
+.in-family .bar-row.is-top .bar-fill,
+.in-family .dm-progress .bar-fill { background: linear-gradient(90deg, var(--accent-fill), var(--blue-soft)); }
+.in-family .dm-letter { background-image: linear-gradient(135deg, var(--sky-ink), color-mix(in srgb, var(--sky-ink) 50%, #fff)); }
+.in-family .dm-steps a.is-done .dm-step-letter { color: var(--accent-on); background: var(--accent-fill); }
+
+.in-family .dm-option.is-right { border-color: var(--signal); background: color-mix(in srgb, var(--signal) 10%, transparent); }
+.in-family .dm-feedback.is-right { border-left-color: var(--signal); }
+.in-family .sh-priority.is-medium { border-color: color-mix(in srgb, var(--signal) 60%, var(--line)); }
+.in-family .dl-tag:not(.is-warn) { border-color: color-mix(in srgb, var(--signal) 55%, var(--line)); color: var(--signal); }
+.in-family .sc-key-better { border-color: var(--signal); }
+.in-family .sc-dot.is-better { stroke: var(--signal); }
+/* Atlas is silver, close to the text colour, so its text buttons are underlined. */
+[data-family="atlas"] :is(.button-ghost, .cv-jump, .ats-paste > summary) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+/* Chosen answers, pressed chips and selected tabs light up in the family colour:
+   a short flare and a sweep of light when chosen, then a soft glow that breathes.
+   Only opacity and position move, so it stays light on phones. */
+body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --glow-soft: color-mix(in srgb, var(--family) 26%, transparent); }
+[data-theme="light"] body.in-family { --glow: color-mix(in srgb, var(--family) 48%, transparent); --glow-soft: color-mix(in srgb, var(--family) 18%, transparent); }
+
+.in-family .scale-option span,
+.in-family .chip,
+.in-family .cv-theme { position: relative; isolation: isolate; }
+.in-family .scale-option:hover input:not(:checked) + span,
+.in-family .chip:hover:not([aria-pressed="true"]) { border-color: var(--glow); box-shadow: 0 0 16px -6px var(--glow); }
+
+.in-family .scale-option input:checked + span::before,
+.in-family .chip[aria-pressed="true"]::before,
+.in-family .cv-theme:has(input:checked)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 18px 1px var(--glow), 0 0 44px 8px var(--glow-soft);
+  animation: family-flare .7s ease-out both, family-breathe 3.4s ease-in-out .7s infinite;
+}
+.in-family .scale-option input:checked + span::after,
+.in-family .chip[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  pointer-events: none;
+  animation: family-sweep .8s ease-out both;
+}
+@keyframes family-flare {
+  0% { opacity: 0; transform: scale(.9); }
+  35% { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes family-breathe { 50% { opacity: .5; } }
+@keyframes family-sweep {
+  from { background-position: 120% 0; opacity: 1; }
+  to { background-position: -20% 0; opacity: 0; }
+}
+.in-family .cx-tab[aria-selected="true"] { box-shadow: 0 10px 18px -12px var(--glow); }
+/* A field being typed in and a chosen course answer take a steady light too. */
+.in-family :is(.field input, .field textarea, .field select, .sh-in):focus { box-shadow: 0 0 0 1px var(--glow), 0 0 24px -6px var(--glow); transition: box-shadow .25s ease; }
+.in-family .dm-option { position: relative; isolation: isolate; }
+.in-family .dm-option:has(input:checked)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 20px -2px var(--glow-soft);
+  animation: family-flare .7s ease-out both;
+}
+
+/* The main buttons glow on hover and flare when pressed; a sweep of light crosses them on hover. */
+.in-family .button-primary {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 22px -8px var(--glow);
+  transition: box-shadow .35s ease, transform .15s ease, filter .2s ease;
+}
+.in-family .button-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  background-position: 120% 0;
+  pointer-events: none;
+}
+.in-family .button-primary:hover { box-shadow: 0 0 30px -4px var(--glow), 0 0 60px -10px var(--glow-soft); }
+.in-family .button-primary:hover::after { animation: family-sweep .9s ease-out both; }
+.in-family .button-primary:active {
+  transform: scale(.97);
+  box-shadow: 0 0 36px 2px var(--glow), 0 0 80px 10px var(--glow-soft);
+  transition-duration: .05s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .in-family .scale-option input:checked + span::before,
+  .in-family .chip[aria-pressed="true"]::before,
+  .in-family .cv-theme:has(input:checked)::before { animation: none; opacity: .85; }
+  .in-family .scale-option input:checked + span::after,
+  .in-family .chip[aria-pressed="true"]::after,
+  .in-family .button-primary:hover::after { animation: none; opacity: 0; }
+  .in-family .button-primary:active { transform: none; }
+}
+
+/* More from the same family, at the end of a tool page. */
+.family-more { padding: 72px 0 110px; border-top: 1px solid var(--line); }
+.family-more-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin-bottom: 26px;
+}
+.family-more-head .kicker { flex-basis: 100%; margin: 0; color: var(--sky-ink); }
+.family-more-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.family-more-head .text-link { margin-left: auto; }
+.family-more-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.family-more-list a {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  padding: 22px 48px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--family) 14%, transparent), transparent 50%),
+    var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.family-more-list a:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.family-more-list small { color: var(--sky-ink); font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.family-more-list strong { font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: -.03em; line-height: 1.05; }
+.family-more-list span { color: var(--muted); font-size: 14px; }
+.family-more-list em { position: absolute; right: 20px; top: 20px; font-style: normal; font-weight: 800; }
+
+/* A tool page in motion: the other tools of the role and the essays behind the tool answer the pointer with a
+   light in the role's colour, the box you are filling in glows softly at its edge, and the role's badge breathes. */
+.family-more-list a, .tool-essays-list li a { isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.tool-essays-list li a { position: relative; }
+.family-more-list a::before, .tool-essays-list li a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--family, var(--blue)) 15%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.family-more-list a:hover, .tool-essays-list li a:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--family, var(--blue)) 80%, transparent); }
+.family-more-list a:hover::before, .tool-essays-list li a:hover::before { opacity: 1; }
+.family-more-list strong, .tool-essays-list li a strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.family-more-list a:hover strong, .tool-essays-list li a:hover strong { translate: 4px 0; }
+.family-more-list em, .tool-essays-list li a em { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.family-more-list a:hover em, .tool-essays-list li a:hover em { translate: 3px -3px; }
+:where(.tool-panel .dl-box, .tool-panel .result-card, .work-backup-card) { transition: border-color .35s ease, box-shadow .45s ease; }
+:where(.tool-panel .dl-box, .work-backup-card):focus-within {
+  border-color: color-mix(in srgb, var(--family, var(--blue)) 45%, var(--line));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--family, var(--blue)) 10%, transparent), 0 24px 54px -40px color-mix(in srgb, var(--family, var(--blue)) 90%, transparent);
+}
+.family-badge { transition: border-color .3s ease, background-color .3s ease, translate .35s cubic-bezier(.22, 1, .36, 1); }
+.family-badge:hover { translate: 0 -2px; background-color: color-mix(in srgb, var(--family) 16%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .family-badge > span { animation: badge-breathe 3.2s ease-in-out infinite; }
+}
+@keyframes badge-breathe { 50% { scale: 1.15; } }
+.family-badge > span { position: relative; }
+.family-badge > span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 16px 2px var(--family);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .family-badge > span::after { animation: badge-glow 3.2s ease-in-out infinite; }
+}
+@keyframes badge-glow { 50% { opacity: 1; } }
+
+/* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
+.role-hero .eyebrow { color: var(--sky-ink); }
+.role-rings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+.role-rings a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--family) 40%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: border-color .2s ease, background .2s ease;
+}
+.role-rings a:hover { border-color: var(--family); background: color-mix(in srgb, var(--family) 14%, transparent); }
+.role-rings b {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid color-mix(in srgb, var(--family) 60%, transparent);
+  border-radius: 50%;
+  color: var(--sky-ink);
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.role-ring {
+  padding: 64px 0 20px;
+  scroll-margin-top: 84px;
+}
+.role-ring + .role-ring { border-top: 1px solid var(--line); }
+.role-grow { padding-bottom: 110px; }
+.role-ring-head .kicker { margin: 0 0 10px; color: var(--sky-ink); }
+.role-ring-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(30px, 4.6vw, 54px);
+  letter-spacing: -.045em;
+  line-height: .95;
+  text-transform: uppercase;
+}
+.role-subhead {
+  margin: 44px 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.role-borrowed {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.role-borrowed a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "dot name arrow" "dot home arrow";
+  align-items: center;
+  gap: 2px 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.role-borrowed a:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.role-dot {
+  grid-area: dot;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--family);
+  box-shadow: 0 0 12px var(--family);
+}
+.role-borrowed strong { grid-area: name; font-weight: 800; }
+.role-borrowed small { grid-area: home; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.role-borrowed em { grid-area: arrow; font-style: normal; font-weight: 800; }
+
+/* The routine: a line of moments, each with the tool it calls for. */
+.role-routine {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.role-routine::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: linear-gradient(var(--family), color-mix(in srgb, var(--family) 10%, transparent));
+}
+.role-routine li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px 28px;
+  padding: 18px 0 18px 38px;
+}
+.role-routine li + li { border-top: 1px solid var(--line); }
+.role-routine li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 24px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--family);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--family) 60%, transparent);
+}
+.role-when { color: var(--sky-ink); font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.role-routine p { margin: 0; font-size: 17px; }
+.role-routine .text-link { white-space: nowrap; }
+
+.role-reading {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.role-reading a {
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.role-reading a:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.role-reading small { color: var(--sky-ink); font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.role-reading strong { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -.03em; line-height: 1.1; }
+.role-reading span { color: var(--muted); font-size: 14px; }
+
+.role-next {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+}
+.role-next-card {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.role-next-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--family) 60%, var(--line)); }
+.role-next-card .family-visual { aspect-ratio: auto; height: 100%; min-height: 150px; }
+.role-next-text { container-type: inline-size; display: grid; align-content: center; gap: 6px; padding: 20px 22px; }
+.role-next-text small { color: var(--family); font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
+[data-theme="light"] .role-next-text small { color: color-mix(in srgb, var(--family) 45%, #000); }
+.role-next-text strong { font-family: var(--display); font-size: min(26px, var(--fit-d, 1000px)); letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
+.role-next-text span { color: var(--muted); font-size: 14px; }
+
+@media (max-width: 760px) {
+  .role-ring { padding-top: 48px; }
+  .role-routine li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .role-routine .text-link { white-space: normal; }
+  .role-next-card { grid-template-columns: 110px minmax(0, 1fr); }
+  .role-next-card .family-visual { min-height: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .role-borrowed a,
+  .role-reading a,
+  .role-next-card { transition: none; }
+}
+@media print {
+  .role-rings,
+  .role-grow { display: none !important; }
+}
+
+/* A role page in motion: the rings at the top lift and fill with the planet's colour, the ring you jump to greets
+   you, the borrowed tools, the reading and the next planets answer the pointer, and the routine's line draws
+   itself down the day while each moment lights up as it is reached. */
+.role-rings a { transition: border-color .25s ease, background-color .25s ease, translate .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.role-rings a:hover { translate: 0 -2px; box-shadow: 0 12px 26px -18px var(--family); }
+.role-rings b { transition: background-color .3s ease, color .3s ease, box-shadow .3s ease; }
+.role-rings a:hover b { background: var(--family); color: var(--paper); box-shadow: 0 0 14px var(--family); }
+.role-ring-head h2 { position: relative; }
+.role-ring:target .role-ring-head h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  width: 72px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--family);
+  box-shadow: 0 0 14px var(--family);
+  transform-origin: left;
+  animation: ring-arrive 2.2s cubic-bezier(.22, 1, .36, 1) 1 both;
+}
+@keyframes ring-arrive { 0% { scale: 0 1; opacity: 1; } 35% { scale: 1 1; opacity: 1; } 100% { scale: 1 1; opacity: 0; } }
+.role-borrowed a, .role-reading a, .role-next-card { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.role-borrowed a::before, .role-reading a::before, .role-next-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--family) 15%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.role-next-card::before { z-index: 1; }
+.role-borrowed a:hover, .role-reading a:hover, .role-next-card:hover { box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--family) 80%, transparent); }
+.role-borrowed a:hover::before, .role-reading a:hover::before, .role-next-card:hover::before { opacity: 1; }
+.role-borrowed a:hover { transform: translateY(-3px); }
+.role-reading a:hover { transform: translateY(-4px); }
+.role-dot { transition: scale .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease; }
+.role-borrowed a:hover .role-dot { scale: 1.3; box-shadow: 0 0 18px 2px var(--family); }
+.role-borrowed em, .role-reading strong, .role-next-text strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.role-borrowed a:hover em { translate: 3px 0; }
+.role-reading a:hover strong, .role-next-card:hover .role-next-text strong { translate: 4px 0; }
+.role-next-card .family-visual { transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.role-next-card:hover .family-visual { scale: 1.06; }
+.role-routine li::before { transition: scale .35s cubic-bezier(.22, 1, .36, 1), background-color .35s ease; }
+.role-routine li:hover::before { scale: 1.25; background: var(--family); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .role-routine::before { transform-origin: top; animation: routine-draw linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+    .role-routine li::before { animation: routine-reach linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+  }
+}
+@keyframes routine-draw { from { scale: 1 0; } }
+@keyframes routine-reach { from { box-shadow: none; } 70% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--family) 25%, transparent), 0 0 18px var(--family); } to { box-shadow: 0 0 10px color-mix(in srgb, var(--family) 60%, transparent); } }
+@media (prefers-reduced-motion: reduce) {
+  .role-ring:target .role-ring-head h2::after { animation: none; opacity: 0; }
+  .role-rings a, .role-borrowed a, .role-reading a, .role-next-card, .role-next-card .family-visual { transition: none; }
+}
+
+@media (max-width: 900px) {
+  .sky-lumen .lumen-cable,
+  .sky-lumen .lumen-bulb,
+  .sky-lumen .lumen-halo { left: 88%; }
+  .sky-lumen .lumen-halo { top: 56px; width: 260px; height: 260px; margin: -130px 0 0 -130px; }
+  .sky-lumen .lumen-cable { height: 30px; }
+  .sky-lumen .lumen-bulb { top: 40px; transform: scale(.8); }
+  .sky-lumen .lumen-cone,
+  .sky-lumen .lumen-dust { clip-path: polygon(calc(88% - 12px) 64px, calc(88% + 14px) 64px, 100% 100%, 18% 100%); }
+  .sky-lumen .lumen-core { clip-path: polygon(calc(88% - 5px) 64px, calc(88% + 7px) 64px, 96% 100%, 56% 100%); }
+  .sky-zenith .zenith-map { width: 720px; height: 720px; }
+  .sky-zenith .zenith-map,
+  .sky-zenith .zenith-radar { left: 86%; top: calc(var(--hero-bottom) * .3); }
+  .sky-zenith .zenith-radar { width: 340px; }
+  /* Phones: the moons line up at the right of the badge. */
+  .sky-learn .learn-arc,
+  .sky-learn .learn-moon b { display: none; }
+  .sky-learn .learn-moon {
+    top: 42px;
+    left: calc(100% - 26px - (4 - var(--i)) * 30px) !important;
+    width: 22px;
+    margin: -11px 0 0 -11px;
+    box-shadow: inset calc(var(--shade) * .48) 0 0 0 color-mix(in srgb, var(--paper) 92%, transparent);
+  }
+  .sky-learn .learn-moon.is-current::after { inset: -5px; }
+  .family-more-head .text-link { margin-left: 0; }
+}
+@media (max-width: 620px) {
+  .family-badge-row { padding-top: 26px; }
+  .family-badge-row + .tool-hero { padding-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .family-sky *,
+  .family-sky *::before,
+  .family-sky *::after { animation: none !important; transition: none !important; }
+  .sky-lumen .lumen-dust i { opacity: .6; }
+  .sky-atlas .atlas-line { stroke-dashoffset: 0; }
+  .sky-atlas .atlas-star { opacity: 1; }
+  .sky-pulse .pulse-trace { stroke-dashoffset: 700; }
+}
+@media print {
+  .family-sky,
+  .family-badge-row,
+  .family-more { display: none !important; }
+  body.in-family { --blue: #0b5f9e; --blue-soft: #0b5f9e; --signal: #0b5f9e; --sky-ink: #0b5f9e; }
+}
+

@@ -1,0 +1,1038 @@
+/* The book: "Mall për Durrësin" */
+.book-hero {
+  display: grid;
+  /* The 3D cover's shadow may reach into the page margin, not past the screen (1024-1100 px scrolled sideways). */
+  overflow-x: clip;
+  overflow-clip-margin: 20px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+  gap: 60px;
+  align-items: center;
+  padding: 90px 0 84px;
+}
+.book-hero-copy, .book-feature-copy { container-type: inline-size; }
+.book-hero h1,
+.book-feature h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: min(clamp(52px, 7.2vw, 108px), var(--fit-s, 1000px));
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .92;
+}
+.book-subtitle {
+  margin: 18px 0 0;
+  color: var(--blue-soft);
+  font-family: var(--serif);
+  font-size: clamp(19px, 2vw, 24px);
+  font-style: italic;
+}
+/* On the light paper the soft blue is too faint for text; the darker blue reads at 5:1. */
+[data-theme="light"] .book-subtitle,
+[data-theme="light"] .book-text-body .book-text-quote { color: var(--blue); }
+.book-hero .lede {
+  max-width: 600px;
+  margin: 30px 0 0;
+  color: var(--muted);
+  font-size: 19px;
+}
+/* A correction made after publication (partials/book-corrections.njk), under the lede: dated, and saying what changed. */
+.book-corrections { max-width: 600px; margin: 22px 0 0; padding: 12px 16px; border-left: 3px solid var(--blue); border-radius: 0 12px 12px 0; background: var(--card); color: var(--muted); font-size: 15px; line-height: 1.5; }
+.book-corrections p { margin: 0; }
+.book-corrections p + p { margin-top: 8px; }
+.book-corrections strong { color: var(--ink); }
+.book-facts {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  gap: 16px 40px;
+  margin: 36px 0 38px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.book-facts dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.book-facts dd {
+  margin: 4px 0 0;
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1.1;
+  /* The columns are as wide as their facts: a word is not split to make one narrower ("Operation/s"). */
+  overflow-wrap: break-word;
+}
+.book-facts dd span { color: var(--muted); font-size: 14px; }
+/* The same book in the other languages (pages/book.njk), under the buttons: the original and its translations. */
+.book-languages { margin: 18px 0 0; color: var(--muted); font-size: 15px; }
+.book-languages a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+.book-languages a:hover { text-decoration-color: var(--blue); }
+/* Five facts (with "Online since"): one row on a wide screen, the gap a little narrower; a phone keeps two columns. */
+@media (min-width: 901px) { .book-facts:has(> :nth-child(5)) { grid-template-columns: repeat(5, auto); column-gap: 30px; } }
+
+/* The audio overview of an issue (partials/audio-player.njk, js/audio-player.js): under the buttons of the hero,
+   the browser's player until the script puts one line of controls in its place. */
+.audio-player { max-width: 560px; margin: 28px 0 0; padding: 16px 18px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.audio-player .kicker { margin: 0 0 6px; }
+.audio-player-title { margin: 0 0 14px; font-family: var(--serif); font-size: 21px; line-height: 1.2; }
+.audio-player-native { display: block; width: 100%; }
+.audio-player-native[hidden] { display: none; }
+.audio-player-row { display: flex; align-items: center; gap: 8px; }
+.audio-player-row[hidden] { display: none; }
+.audio-player-play { display: inline-flex; flex: none; align-items: center; gap: 8px; min-height: 40px; white-space: nowrap; padding: 8px 16px 8px 13px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.audio-player-play:hover { filter: brightness(1.08); }
+.audio-player-play svg { width: 13px; height: 13px; flex: none; fill: currentColor; }
+.audio-player-play .audio-icon-pause,
+.audio-player-play[aria-pressed="true"] .audio-icon-play { display: none; }
+.audio-player-play[aria-pressed="true"] .audio-icon-pause { display: inline; }
+.audio-player-skip,
+.audio-player-rate { flex: none; min-width: 44px; min-height: 40px; padding: 0 10px; white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; cursor: pointer; }
+.audio-player-skip:hover,
+.audio-player-rate:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.audio-player-rate { min-width: 56px; }
+.audio-player-scrub { flex: 1 1 auto; min-width: 60px; margin: 0 4px; accent-color: var(--blue); cursor: pointer; }
+.audio-player-time { color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.audio-player-note { margin: 12px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.audio-player-note a { color: var(--ink); font-weight: 700; white-space: nowrap; }
+.audio-player-error { color: var(--ink); }
+/* A recording edited after publication, dated, under its player: the note of a corrected issue, smaller. */
+.audio-player-correction { margin: 10px 0 0; padding: 8px 12px; border-left: 3px solid var(--blue); border-radius: 0 10px 10px 0; background: var(--paper); color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.audio-player-correction strong { color: var(--ink); }
+/* On a phone: the buttons on one line, the position and the time under them. */
+@media (max-width: 560px) {
+  .audio-player { padding: 14px 14px 12px; }
+  .audio-player-row { display: grid; grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "play back fwd . rate" "scrub scrub scrub scrub time"; gap: 12px 8px; }
+  .audio-player-row[hidden] { display: none; }
+  .audio-player-play { grid-area: play; }
+  .audio-player-skip[data-audio-skip^="-"] { grid-area: back; }
+  .audio-player-skip:not([data-audio-skip^="-"]) { grid-area: fwd; }
+  .audio-player-rate { grid-area: rate; justify-self: end; }
+  .audio-player-scrub { grid-area: scrub; margin: 0; }
+  .audio-player-time { grid-area: time; }
+}
+/* The narrowest phones (320 px): the play button and the speed on one line, back, forward and the position under them,
+   the time last, so a longer label ("Abspielen") never pushes the row past the screen. */
+@media (max-width: 380px) {
+  .audio-player-row { grid-template-columns: auto auto minmax(0, 1fr) auto; grid-template-areas: "play play . rate" "back fwd scrub scrub" "time time time time"; }
+  .audio-player-time { justify-self: end; }
+}
+@media print { .audio-player { display: none; } }
+
+/* The podcast of the Management Review (pages/podcast.njk, js/podcast.js): the cover beside what it is, the apps
+   that follow it in one tap, three steps for any other app with the address to copy, and every episode with its
+   player. */
+.podcast-cover { justify-self: center; width: min(100%, 420px); height: auto; border-radius: 22px; box-shadow: 0 30px 70px rgba(0,0,0,.45), 0 0 0 1px var(--line); }
+.podcast-other { margin: 18px 0 0; color: var(--muted); font-size: 15px; }
+.podcast-follow,
+.podcast-episodes,
+.podcast-how { padding: 70px 0 0; scroll-margin-top: 80px; }
+.podcast-how { padding-bottom: 110px; }
+.podcast-how > * { max-width: 720px; }
+.podcast-follow h2,
+.podcast-episodes h2,
+.podcast-how h2 { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(30px, 3.8vw, 48px); font-weight: 400; line-height: 1.05; }
+.podcast-follow-text,
+.podcast-how > p:not(.kicker) { max-width: 640px; margin: 0 0 28px; color: var(--muted); font-size: 17px; line-height: 1.55; }
+.podcast-apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.podcast-app { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; padding: 16px 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); color: var(--ink); font-size: 17px; font-weight: 800; text-decoration: none; transition: border-color .2s ease, transform .2s ease; }
+.podcast-app span { color: var(--blue); }
+.podcast-app:hover,
+.podcast-app:focus-visible { border-color: var(--blue); transform: translateY(-1px); }
+.podcast-steps { margin-top: 26px; padding: 26px 28px 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
+.podcast-steps h3 { margin: 0 0 18px; font-size: 18px; font-weight: 800; }
+.podcast-steps ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 28px; margin: 0 0 24px; padding: 0; list-style: none; }
+.podcast-steps li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; color: var(--muted); font-size: 16px; line-height: 1.45; }
+.podcast-steps li b { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--blue); border-radius: 50%; color: var(--blue); font-size: 15px; font-weight: 800; }
+.podcast-address label { display: block; margin: 0 0 8px; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.podcast-address-row { display: flex; gap: 10px; }
+.podcast-address-row input { flex: 1 1 auto; min-width: 0; padding: 13px 18px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: 600 15px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.podcast-address-row input:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.podcast-address-row .button-primary { flex: none; min-width: 120px; }
+.podcast-copied { display: block; min-height: 1.2em; margin-top: 8px; color: var(--blue); font-size: 14px; font-weight: 700; }
+.podcast-list { display: grid; gap: 22px; margin: 26px 0 0; padding: 0; list-style: none; }
+.podcast-episode { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 30px; align-items: start; padding: 24px; border: 1px solid var(--line); border-radius: 24px; background: var(--card); scroll-margin-top: 90px; }
+.podcast-episode > img { width: 100%; height: auto; border-radius: 14px; box-shadow: 0 0 0 1px var(--line); }
+.podcast-episode-meta { margin: 2px 0 8px; color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.podcast-episode h3 { margin: 0 0 10px; font-family: var(--serif); font-size: clamp(24px, 2.6vw, 32px); font-weight: 400; line-height: 1.12; }
+.podcast-episode-issue { max-width: 640px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.podcast-episode-issue a { color: var(--ink); font-weight: 700; }
+.podcast-episode .audio-player { max-width: none; margin-top: 20px; padding: 18px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+@media (max-width: 900px) {
+  .podcast-hero .podcast-cover { order: -1; justify-self: start; width: min(56%, 240px); border-radius: 16px; }
+  .podcast-steps ol { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  .podcast-episode { display: block; padding: 16px; }
+  .podcast-episode > img { float: left; width: 88px; margin: 0 16px 10px 0; border-radius: 10px; }
+  .podcast-episode .audio-player { clear: both; }
+  .podcast-steps { padding: 20px 18px 22px; }
+  .podcast-address-row { flex-direction: column; }
+}
+
+/* A closed book standing at an angle: cover, spine shade and page edges. */
+.book-object {
+  position: relative;
+  display: block;
+  justify-self: center;
+  width: min(100%, 360px);
+  perspective: 1800px;
+}
+.book-object::before {
+  content: "";
+  position: absolute;
+  inset: 8% -18% 0;
+  z-index: -1;
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--blue) 30%, transparent), transparent);
+  filter: blur(26px);
+}
+.book-object-cover {
+  position: relative;
+  display: block;
+  border-radius: 2px 7px 7px 2px;
+  transform: rotateY(-24deg) rotateX(3deg);
+  transform-origin: 20% 50%;
+  box-shadow:
+    1px 1px 0 #f3efe6, 3px 2px 0 #d9d2c3, 5px 3px 0 #f3efe6, 7px 4px 0 #cbc3b2,
+    9px 5px 0 #efeae0, 11px 6px 0 #bdb4a2,
+    40px 50px 70px -10px rgba(0, 0, 0, .6);
+  transition: transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+.book-object-cover img { width: 100%; height: auto; border-radius: inherit; }
+.book-object-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(0,0,0,.4), rgba(255,255,255,.14) 2.5%, rgba(0,0,0,.12) 5%, transparent 9%, transparent 80%, rgba(255,255,255,.06));
+  pointer-events: none;
+}
+.book-object:hover .book-object-cover,
+.book-object:focus-visible .book-object-cover { transform: rotateY(-9deg) rotateX(1deg); }
+
+/* The stage: always dark, like the cover, whatever the site theme. */
+.book-stage {
+  --ink: #f6f7f4;
+  --muted: #a5b0b8;
+  --line: rgba(255, 255, 255, .13);
+  --blue: #4ab5f7;
+  --blue-soft: #79c9f7;
+  --on-blue: #001018;
+  --gold: #d1a553;
+  color-scheme: dark;
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  padding: 40px 0 48px;
+  background:
+    radial-gradient(900px 480px at 50% -5%, rgba(74, 181, 247, .16), transparent 70%),
+    linear-gradient(180deg, #0c1a21, #081015);
+  border-block: 1px solid var(--line);
+  color: var(--ink);
+  scroll-margin-top: 74px;
+}
+.book-reader {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 26px;
+  width: min(calc(100% - 32px), var(--max));
+  margin-inline: auto;
+}
+.book-viewport { display: flex; justify-content: center; width: 100%; }
+
+/* Without the script: the pages one below the other. */
+.book {
+  display: grid;
+  gap: 28px;
+  width: min(100%, 560px);
+}
+.book-page { margin: 0; }
+.book-page > img {
+  width: 100%;
+  height: auto;
+  background: #fbfaf6;
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .7);
+}
+
+/* With the script: a book. */
+.js .book-reader:not(.is-ready) .book-page:nth-child(n+2) { display: none; }
+.js .book {
+  position: relative;
+  display: block;
+  width: min(100%, max(280px, (100svh - 330px) * .705));
+  aspect-ratio: 1000 / 1419;
+  perspective: 2600px;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  transition: transform .8s cubic-bezier(.3, .7, .2, 1);
+}
+.js .book-reader.is-spread .book {
+  width: min(100%, max(640px, (100svh - 300px) * 1.41));
+  aspect-ratio: 2000 / 1419;
+}
+/* On a wide screen: one page at a time, 1000 px wide, so the small print is read at its own size and
+   the 1000 px picture is shown pixel for pixel. The page is taller than the window and is read by
+   scrolling; the controls wait under it, where the reading ends (js/book.js). */
+.js .book-reader.is-large .book {
+  width: min(100%, 1000px);
+  scroll-margin-top: 84px;
+}
+.book.is-closed-front { transform: translateX(-25%); }
+.book.is-closed-back { transform: translateX(25%); }
+
+.book-sheet {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform var(--turn, 900ms) cubic-bezier(.45, .05, .25, 1);
+}
+.is-spread .book-sheet { left: 50%; width: 50%; }
+.book-sheet.is-turned { transform: rotateY(-180deg); }
+/* On a phone a turned page swings away and fades; the next one lies beneath. */
+.is-single .book-sheet { transition: transform var(--turn, 900ms) cubic-bezier(.45, .05, .25, 1), opacity calc(var(--turn, 900ms) * .35) linear calc(var(--turn, 900ms) * .45); }
+.is-single .book-sheet:not(.is-turned) { transition: transform var(--turn, 900ms) cubic-bezier(.45, .05, .25, 1), opacity 0s; }
+.is-single .book-sheet.is-turned { opacity: 0; }
+
+.book-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #fbfaf6;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 34px 60px -26px rgba(0, 0, 0, .75);
+}
+.book-face:empty { display: none; }
+.book-face.is-back { transform: rotateY(180deg); }
+.book-face .book-page,
+.book-face .book-page > img { width: 100%; height: 100%; box-shadow: none; }
+.book-face .book-page > img { object-fit: cover; pointer-events: none; }
+/* The fold: pages darken towards the spine. */
+.book-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,0,0,.2), rgba(0,0,0,.05) 3%, transparent 10%);
+}
+/* Light and shade run over a page while it turns. */
+.book-sheet.is-moving .book-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,0,0,.28), transparent 45%, rgba(255,255,255,.22) 80%, transparent);
+  animation: book-sheen var(--turn, 900ms) ease-in-out both;
+}
+@keyframes book-sheen {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+.is-spread .book-face.is-back::after { background: linear-gradient(270deg, rgba(0,0,0,.24), rgba(0,0,0,.06) 4%, transparent 12%, transparent 94%, rgba(0,0,0,.05)); }
+.is-spread .book-face.is-front::after { background: linear-gradient(90deg, rgba(0,0,0,.24), rgba(0,0,0,.06) 4%, transparent 12%, transparent 94%, rgba(0,0,0,.05)); }
+.book-page.is-blank { height: 100%; background: #f4f1ea; }
+
+/* The thickness of the pages still to read, and of those already read. */
+.book-edge {
+  position: absolute;
+  top: .8%;
+  bottom: .8%;
+  width: calc(max(0, var(--n, 0) - 1) * .7px);
+  background: repeating-linear-gradient(90deg, #f1ede4 0 1px, #c9c1b0 1px 2px);
+  border-radius: 2px;
+}
+.book-edge.is-left { right: 100%; --n: var(--left-stack); }
+.book-edge.is-right { left: 100%; --n: var(--right-stack); }
+/* The magazines, the Management Review and the Tools Guide are printed on dark paper: their page edges, and the
+   pages while they load, are dark too. (The pages of the Management Review are alive, not pictures: their own
+   stylesheet, /review-pages.css, scales them to the book; see src/_includes/print/review-web.css.) */
+.book-reader.is-dark .book-edge { background: repeating-linear-gradient(90deg, #27313b 0 1px, #0b1117 1px 2px); }
+.book-reader.is-dark .book-face,
+.book-reader.is-dark .book-page,
+.book-reader.is-dark .book-zoom-pages img { background: #060a10; }
+.book-reader.is-dark .book-page.is-blank { background: #0b1117; }
+
+/* At rest the pages being read are flat. A page in a 3D scene is drawn as a picture and then placed, which leaves
+   small print soft (and on iPhones after a pinch); flat, the browser draws the text straight onto the screen, as
+   sharp as the rest of the site. The scene comes back for the turn itself (js/book.js takes "is-still" away while a
+   sheet moves). A sheet not yet turned lies flat with its back hidden; on a phone or one large page the turned
+   sheets, unseen, are hidden too and the book needs no depth at all. Open on two pages, the left page stays the
+   back of a turned sheet. */
+.book.is-still .book-sheet:not(.is-turned) { transform-style: flat; }
+.book.is-still .book-sheet:not(.is-turned) .book-face { -webkit-backface-visibility: visible; backface-visibility: visible; }
+.book.is-still .book-sheet:not(.is-turned) .book-face.is-back { visibility: hidden; }
+.is-single .book.is-still { perspective: none; }
+.is-single .book.is-still .book-sheet.is-turned { visibility: hidden; }
+
+@media (hover: hover) and (pointer: fine) {
+  .is-spread .book-sheet.is-right:not(.is-turned):hover { transform: rotateY(-6deg); }
+  .is-spread .book-sheet.is-left.is-turned:hover { transform: rotateY(-174deg); }
+}
+
+/* On the back cover, the next issue or volume right under the page (partials/book-onward.njk): folded away while
+   the pages are read, it opens and moves in when the last page comes into view (js/book.js), its border lit by a
+   light that goes round and its arrow pointing on. Folded, it gives back the gap of the reader above it. */
+@property --onward-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.book-onward {
+  --onward-angle: 0deg;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(100%, 560px);
+  max-height: 0;
+  margin-bottom: -26px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background:
+    linear-gradient(color-mix(in srgb, var(--blue) 9%, #0b1117), color-mix(in srgb, var(--blue) 9%, #0b1117)) padding-box,
+    conic-gradient(from var(--onward-angle), var(--line) 0 62%, var(--blue) 80%, var(--blue-soft) 86%, var(--line) 96%) border-box;
+  color: var(--ink);
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(18px) scale(.97);
+  transition: max-height .5s cubic-bezier(.2, .8, .2, 1), margin .5s cubic-bezier(.2, .8, .2, 1), padding .5s cubic-bezier(.2, .8, .2, 1), opacity .4s ease, transform .6s cubic-bezier(.2, .9, .25, 1.2), box-shadow .2s;
+}
+.book-onward.is-shown {
+  max-height: 180px;
+  margin-bottom: 0;
+  padding: 14px 20px;
+  opacity: 1;
+  transform: none;
+  animation: onward-light 3.2s linear .4s infinite;
+}
+.book-onward:hover,
+.book-onward:focus-visible { box-shadow: 0 0 34px -6px color-mix(in srgb, var(--blue) 70%, transparent); }
+.book-onward img { flex: none; width: 64px; height: auto; border-radius: 4px; box-shadow: 0 10px 24px rgba(0, 0, 0, .45); }
+.book-onward-copy { display: grid; flex: 1; gap: 4px; min-width: 0; text-align: left; }
+.book-onward-label { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.book-onward-title { font-family: var(--serif); font-size: clamp(18px, 2.2vw, 22px); line-height: 1.2; }
+.book-onward-meta { color: var(--muted); font-size: 13px; }
+.book-onward-arrow {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--on-blue);
+}
+.book-onward-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.book-onward.is-shown .book-onward-arrow svg { animation: onward-nudge 1.6s ease-in-out .8s infinite; }
+@keyframes onward-light { to { --onward-angle: 360deg; } }
+@keyframes onward-nudge { 0%, 55%, 100% { transform: none; } 25% { transform: translateX(5px); } }
+@media (max-width: 520px) {
+  .book-onward { gap: 12px; }
+  .book-onward.is-shown { padding: 12px 14px; }
+  .book-onward img { width: 48px; }
+  .book-onward-arrow { width: 40px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-onward { transform: none; transition: opacity .2s; }
+  .book-onward.is-shown,
+  .book-onward.is-shown .book-onward-arrow svg { animation: none; }
+}
+
+/* Controls under the book. */
+.book-controls {
+  display: grid;
+  grid-template-columns: auto minmax(0, 380px) auto;
+  justify-content: center;
+  align-items: center;
+  gap: 18px 24px;
+  width: 100%;
+}
+.book-button {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .05);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s, scale .25s cubic-bezier(.22, 1, .36, 1);
+}
+.book-button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.book-button:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); background: rgba(74, 181, 247, .08); }
+.book-button:disabled { opacity: .3; cursor: default; }
+.book-status { display: grid; gap: 6px; text-align: center; }
+.book-status p { margin: 0; }
+.book-status strong { font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.book-status span { color: var(--muted); font-size: 12px; letter-spacing: .08em; }
+.book-chapter { min-height: 1.5em; color: var(--blue-soft); font-family: var(--serif); font-size: 16px; font-style: italic; }
+.book-scrub {
+  width: 100%;
+  height: 18px;
+  margin: 6px 0 0;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.book-scrub::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--progress, 0%) 100% no-repeat, rgba(255, 255, 255, .14);
+}
+.book-scrub::-moz-range-track {
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--progress, 0%) 100% no-repeat, rgba(255, 255, 255, .14);
+}
+.book-scrub::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  margin-top: -6px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 5px rgba(74, 181, 247, .22);
+  -webkit-appearance: none;
+}
+.book-scrub::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 5px rgba(74, 181, 247, .22);
+}
+.book-tools { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.book-chip {
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .04);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.book-chip:hover,
+.book-chip[aria-expanded="true"] { border-color: var(--blue); color: var(--blue); }
+.book-chip.is-accent { border-color: color-mix(in srgb, var(--blue) 55%, transparent); color: var(--blue); }
+
+/* The contents open over the book. */
+.book-contents {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 200;
+  width: min(100%, 620px);
+  max-height: min(100%, 640px);
+  overflow: auto;
+  padding: 26px 30px 18px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(8, 16, 21, .94);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
+  backdrop-filter: blur(14px);
+  transform: translateX(-50%);
+}
+.book-contents ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.book-contents button {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: baseline;
+  width: 100%;
+  padding: 14px 4px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.book-contents button:hover .book-contents-title,
+.book-contents button[aria-current] .book-contents-title { color: var(--blue); }
+.book-contents-label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.book-contents-title { font-family: var(--serif); font-size: 19px; line-height: 1.25; }
+.book-contents-page { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.book-hint { margin: -6px 0 0; color: var(--muted); font-size: 13px; text-align: center; }
+
+.book-reader.is-fullscreen {
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background: radial-gradient(900px 480px at 50% -5%, rgba(74, 181, 247, .16), transparent 70%), #081015;
+  overflow: auto;
+}
+.book-reader.is-fullscreen .book-hint { display: none; }
+/* In full screen only the controls stay around the book, so the pages take the rest of the height. */
+.js .book-reader.is-fullscreen .book { width: min(100%, max(280px, (100svh - 230px) * .705)); }
+.js .book-reader.is-fullscreen.is-spread .book { width: min(100%, max(640px, (100svh - 200px) * 1.41)); }
+.js .book-reader.is-fullscreen.is-large .book { width: min(100%, 1000px); scroll-margin-top: 20px; }
+
+/* Zoom: the pages in view at the width of the screen, one under the other (src/js/book.js). */
+.book-zoom {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.book-zoom::backdrop { background: rgba(6, 10, 16, .97); }
+html:has(.book-zoom[open]) { overflow: hidden; }
+.book-zoom-pages {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  min-height: 100%;
+  padding: 68px 16px 32px;
+}
+.book-zoom-pages img {
+  display: block;
+  width: min(100%, 1100px);
+  height: auto;
+  background: #fbfaf6;
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .7);
+}
+.book-zoom-close {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 50%;
+  background: rgba(6, 10, 16, .82);
+  color: #fff;
+  cursor: pointer;
+}
+.book-zoom-close:hover { border-color: #fff; }
+.book-zoom-close:focus-visible { outline: 2px solid var(--blue, #4ab5f7); outline-offset: 3px; }
+.book-zoom-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+
+/* The closing lines and the plain text. */
+.book-closing { padding: 96px 0 40px; }
+.book-closing blockquote {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.book-closing blockquote p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.6vw, 46px);
+  font-style: italic;
+  line-height: 1.18;
+  letter-spacing: -.02em;
+}
+.book-closing blockquote p::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: 0 auto 34px;
+  background: var(--blue);
+}
+.book-closing footer {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.book-closing cite { font-style: normal; color: var(--ink); }
+
+.book-text { padding: 40px 0 110px; scroll-margin-top: 90px; }
+.book-text details {
+  max-width: 860px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.book-text summary {
+  display: grid;
+  gap: 6px;
+  padding: 30px 34px;
+  cursor: pointer;
+  list-style: none;
+}
+.book-text summary::-webkit-details-marker { display: none; }
+.book-text summary .kicker { margin: 0; }
+.book-text-title { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); line-height: 1.1; }
+.book-text-title::after { content: " +"; color: var(--blue); }
+.book-text details[open] .book-text-title::after { content: " −"; }
+.book-text summary .book-text-note { color: var(--muted); font-size: 15px; }
+.book-text-body { max-width: 680px; margin: 0 auto; padding: 10px 24px 60px; }
+/* Below an issue of the magazine: the issue before and after it, and the way to all issues. */
+.book-text:has(+ .issue-more) { padding-bottom: 24px; }
+/* The editions of the Tools Guide (pages/guide.njk), under its text: what changed, and the earlier ones in PDF. */
+.book-text:has(+ .book-editions) { padding-bottom: 24px; }
+.book-editions { max-width: 860px; padding-bottom: 110px; scroll-margin-top: 90px; }
+@media (min-width: 700px) { .book-editions { padding-inline: 35px; } }
+.book-editions h2 { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); font-weight: 400; line-height: 1.1; }
+.book-editions h3 { margin: 28px 0 8px; font-size: 1rem; }
+.book-editions p, .book-editions li { color: var(--muted); line-height: 1.55; }
+.book-editions ul { margin: 0; padding-left: 1.2em; }
+.book-editions li + li { margin-top: 6px; }
+.book-editions a { color: var(--ink); font-weight: 700; }
+.issue-more { padding: 24px 0 110px; scroll-margin-top: 90px; }
+.issue-more h2 { margin: 0 0 22px; font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); font-weight: 400; line-height: 1.1; }
+.issue-more-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 14px; margin-bottom: 22px; }
+.issue-more-card {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .2s ease;
+}
+.issue-more-card:hover,
+.issue-more-card:focus-visible { border-color: var(--blue); }
+.issue-more-card img { flex: none; width: 96px; height: auto; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+.issue-more-copy { display: grid; gap: 6px; min-width: 0; }
+.issue-more-label { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.issue-more-title { font-family: var(--serif); font-size: 24px; line-height: 1.1; }
+.issue-more-meta { color: var(--muted); font-size: 14px; }
+/* On a phone a smaller cover leaves the title room for its longest word ("Psychologisch/e"). */
+@media (max-width: 480px) {
+  .issue-more-card { gap: 14px; }
+  .issue-more-card img { width: 64px; }
+  .issue-more-title { font-size: 22px; }
+}
+.book-text-body { container-type: inline-size; }
+.book-text-body h2 { margin: .5em 0 .8em; font-size: min(42px, var(--fit-s, 1000px)); }
+@media (max-width: 900px) { .book-text-body h2 { font-size: min(34px, var(--fit-s, 1000px)); } }
+.book-text-body h3 { margin: 2em 0 .6em; font-size: min(28px, var(--fit-s, 1000px)); font-weight: 400; line-height: 1.15; }
+/* The sources: a long title ("Beschäftigtengrößenklassen") breaks at a syllable, with a hyphen, in the language it
+   is in (lang on a German title); its web address breaks anywhere, with no hyphen added. */
+.book-text-sources li { hyphens: auto; hyphenate-limit-chars: 12 5 5; }
+.book-text-sources a { hyphens: manual; }
+.book-text-body .book-text-kicker {
+  margin: 4em 0 0;
+  color: var(--blue);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .18em;
+}
+.book-text-body .book-text-quote { font-style: italic; color: var(--blue-soft); }
+.book-text-body .book-text-note { color: var(--muted); font-family: var(--sans); font-size: 15px; }
+
+/* The weekly Management Review. The charts of an issue are the SVG of the printed pages (lib/weekly/charts.js),
+   coloured here for the screen and moving in once when they come into view (js/weekly.js adds .wk-anim, then .is-in;
+   never with reduced motion). Below them, the list of all issues. */
+.weekly-glance { padding: 84px 0 34px; scroll-margin-top: 80px; }
+.weekly-glance h2 { margin: 0 0 12px; font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.05; }
+.weekly-glance-note { max-width: 640px; margin: 0 0 34px; color: var(--muted); font-size: 17px; }
+.weekly-charts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 470px), 1fr)); gap: 22px; }
+.weekly-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 26px 26px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.weekly-chart figcaption { display: grid; gap: 6px; }
+.weekly-chart figcaption span { color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .19em; text-transform: uppercase; }
+.weekly-chart figcaption strong { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.2; }
+.weekly-chart-note { margin: 0; color: var(--muted); font-size: 14px; font-style: italic; }
+.weekly-chart-source { margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+.weekly-donut { display: grid; grid-template-columns: minmax(110px, 170px) minmax(0, 1fr); gap: 26px; align-items: center; }
+.weekly-donut p { margin: 0; font-family: var(--serif); font-size: 21px; line-height: 1.35; }
+.weekly-donut p strong { color: var(--blue); font-weight: 400; }
+
+.wk-svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
+.wk-grid { stroke: var(--line); stroke-width: .6; }
+.wk-axis { fill: var(--muted); font-size: 7.4px; font-weight: 600; }
+.wk-label { fill: var(--ink); font-size: 8.2px; font-weight: 700; }
+.wk-value { fill: var(--ink); font-size: 8.4px; font-weight: 800; }
+.wk-value.is-key { font-size: 10.5px; }
+.wk-value.is-key.is-alert { fill: var(--red); }
+.wk-value.is-a { fill: var(--muted); font-weight: 600; }
+.wk-path { fill: none; stroke: var(--blue); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.wk-path.is-alert { stroke: var(--red); }
+.wk-path.is-dim { stroke: var(--muted); stroke-dasharray: 3 3; }
+.wk-area { fill: var(--blue); opacity: .14; }
+.wk-area.is-alert { fill: var(--red); }
+.wk-dot { fill: var(--blue); stroke: var(--paper); stroke-width: 1.5; }
+.wk-dot.is-alert { fill: var(--red); }
+.wk-dot-a { fill: var(--paper); stroke: var(--muted); stroke-width: 1.4; }
+.wk-dot-key { fill: var(--ink); }
+.wk-track { stroke: var(--line); stroke-width: 1; }
+.wk-seg { stroke: var(--blue); stroke-width: 3.2; stroke-linecap: round; opacity: .6; }
+.wk-seg.is-alert { stroke: var(--red); }
+.wk-ring { fill: none; stroke: var(--line); stroke-width: 13; }
+.wk-arc { fill: none; stroke: var(--blue); stroke-width: 13; }
+.wk-arc.is-alert { stroke: var(--red); }
+.wk-donut-n { fill: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 900; letter-spacing: -.03em; }
+.wk-person.tone-red { fill: var(--red); }
+.wk-person.tone-blue { fill: var(--blue); }
+.wk-person.tone-dim { fill: color-mix(in srgb, var(--ink) 18%, transparent); }
+.wk-bar { fill: var(--blue); }
+.wk-bar.is-alert { fill: var(--red); }
+.wk-bar-a { fill: color-mix(in srgb, var(--ink) 26%, transparent); }
+.wk-col { fill: var(--blue); }
+.wk-col.is-alert { fill: var(--red); }
+.wk-day { fill: color-mix(in srgb, var(--ink) 16%, transparent); }
+.wk-day.is-key { fill: none; stroke: var(--red); stroke-width: .8; }
+.wk-day-part { fill: var(--red); }
+.wk-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 4px 0 0; padding: 0; list-style: none; }
+.wk-legend li { padding-top: 8px; border-top: 2px solid var(--line); }
+.wk-legend li.tone-red { border-color: var(--red); }
+.wk-legend li.tone-blue { border-color: var(--blue); }
+.wk-legend b { display: block; font-family: var(--display); font-size: 20px; font-weight: 900; letter-spacing: -.03em; }
+.wk-legend .tone-red b { color: var(--red); }
+.wk-legend .tone-blue b { color: var(--blue); }
+.wk-legend span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+
+.wk-grow, .wk-rise { transform-box: fill-box; transform-origin: 0 50%; }
+.wk-grow.is-back { transform-origin: 100% 50%; }
+.wk-rise { transform-origin: 50% 100%; }
+.wk-anim .wk-path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.wk-anim .wk-area { opacity: 0; }
+.wk-anim .wk-pop { opacity: 0; transform: translateY(4px); }
+.wk-anim .wk-grow { transform: scaleX(0); }
+.wk-anim .wk-rise { transform: scaleY(0); }
+.wk-anim .wk-arc { stroke-dasharray: 0 100; }
+.wk-anim .wk-legend li { opacity: 0; transform: translateY(8px); }
+.wk-anim.is-in .wk-path { stroke-dashoffset: 0; transition: stroke-dashoffset 1.5s cubic-bezier(.3, .7, .2, 1); }
+.wk-anim.is-in .wk-area { opacity: .14; transition: opacity .9s ease .7s; }
+.wk-anim.is-in .wk-pop { opacity: 1; transform: none; transition: opacity .45s ease, transform .45s ease; transition-delay: calc(var(--i, 0) * 120ms + .35s); }
+.wk-anim.is-in .wk-grow,
+.wk-anim.is-in .wk-rise { transform: none; transition: transform 1s cubic-bezier(.3, .7, .2, 1) calc(var(--i, 0) * 140ms + .1s); }
+.wk-anim.is-in .wk-arc { stroke-dasharray: var(--v) 100; transition: stroke-dasharray 1.4s cubic-bezier(.3, .7, .2, 1) .15s; }
+.wk-anim.is-in .wk-legend li { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
+.wk-anim.is-in .wk-legend li:nth-child(2) { transition-delay: .9s; }
+.wk-anim.is-in .wk-legend li:nth-child(3) { transition-delay: 1.3s; }
+.wk-anim.is-in .wk-legend li:first-child { transition-delay: .5s; }
+
+.weekly-hero .weekly-mark { color: var(--red); }
+.weekly-archive { padding: 50px 0 80px; }
+/* How the series works: a quiet line above the list, the width of a paragraph. */
+.weekly-model { max-width: 72ch; margin: 0 0 28px; padding: 14px 18px; border-left: 3px solid var(--blue); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--blue) 6%, transparent); color: var(--muted); font-size: 15px; line-height: 1.6; }
+.weekly-model strong { color: var(--ink); }
+.weekly-model a { color: var(--blue); font-weight: 700; white-space: nowrap; }
+.weekly-controls { display: grid; gap: 18px; margin: 0 0 40px; }
+.weekly-months { display: flex; flex-wrap: wrap; gap: 6px; width: fit-content; max-width: 100%; padding: 5px; border: 1px solid var(--line); border-radius: 14px; }
+.weekly-months button {
+  /* A month's name stays whole ("Novemb/er"): a button that cannot hold it moves to the next row. */
+  overflow-wrap: normal;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font: 800 15px/1.2 var(--sans);
+  cursor: pointer;
+}
+.weekly-months button:hover { color: var(--ink); }
+.weekly-months button[aria-pressed="true"] { background: var(--blue); color: var(--on-blue); }
+/* With script.js the blue is one pill under the buttons that slides to the month chosen; the text changes colour with it. */
+.weekly-months { position: relative; isolation: isolate; }
+.weekly-months button { transition: color .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.weekly-months.has-pill button[aria-pressed="true"] { background: transparent; }
+.month-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 10px;
+  background: var(--blue);
+  box-shadow: 0 8px 22px -10px color-mix(in srgb, var(--blue) 85%, transparent);
+  pointer-events: none;
+}
+.month-pill[hidden] { display: none; }
+.weekly-months.is-ready .month-pill { transition: transform .45s cubic-bezier(.22, 1, .36, 1), width .45s cubic-bezier(.22, 1, .36, 1), height .45s cubic-bezier(.22, 1, .36, 1); }
+/* After a month, a topic or "show more" is chosen, the items of the list come in one after another (filter.js, weekly.js). */
+.is-entering { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 35ms); }
+@keyframes list-in { from { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) { .is-entering { animation: none; } }
+/* Cards and rows rise into place as they scroll into view (a scroll-driven animation: no script, and browsers
+   without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart, .downloads-list > .downloads-row) {
+      animation: scroll-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 140px;
+    }
+  }
+}
+@keyframes scroll-rise { from { opacity: 0; translate: 0 26px; } }
+.weekly-n { margin-left: 8px; font-weight: 600; opacity: .7; font-variant-numeric: tabular-nums; }
+.weekly-n:empty { display: none; }
+.weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
+.weekly-filter button {
+  transition: color .25s ease, background .25s ease, border-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: 700 13px/1.2 var(--sans);
+  cursor: pointer;
+}
+.weekly-filter button:hover { color: var(--ink); border-color: var(--blue); }
+.weekly-filter[hidden], .weekly-filter button[hidden] { display: none; }
+.weekly-filter button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: var(--on-blue); }
+.weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 40px 28px; margin: 0; padding: 0; list-style: none; }
+.weekly-grid > li[hidden] { display: none; }
+.weekly-card { display: grid; gap: 8px; color: inherit; text-decoration: none; }
+.weekly-card-cover { position: relative; display: block; overflow: hidden; border-radius: 5px; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .6); transition: transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s ease; }
+/* Under the pointer a cover lifts, glows blue beneath and a line of light crosses it, like a page catching the lamp. */
+.weekly-card-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  background-position: 130% 0;
+  pointer-events: none;
+}
+.weekly-card:hover .weekly-card-cover::after { transition: background-position .9s cubic-bezier(.22, 1, .36, 1); background-position: -30% 0; }
+.weekly-card:hover .weekly-card-cover,
+.weekly-card:focus-visible .weekly-card-cover { box-shadow: 0 26px 50px -18px color-mix(in srgb, var(--blue) 55%, rgba(0, 0, 0, .6)); }
+.weekly-card-cover img { display: block; width: 100%; height: auto; }
+.weekly-card:hover .weekly-card-cover,
+.weekly-card:focus-visible .weekly-card-cover { transform: translateY(-4px) rotate(-.6deg); }
+.weekly-card-meta { margin-top: 10px; color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.weekly-card strong { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.2; }
+.weekly-card strong { transition: color .3s ease; }
+.weekly-card:hover strong { color: var(--blue-soft); }
+.weekly-card-date { color: var(--muted); font-size: 14px; }
+.weekly-none { margin: 0; color: var(--muted); }
+.weekly-more { display: grid; justify-items: center; gap: 14px; margin-top: 48px; }
+.weekly-more[hidden] { display: none; }
+.weekly-shown { margin: 0; color: var(--muted); font-size: 14px; }
+.weekly-special { border-top: 1px solid var(--line); }
+
+/* The operational treatise: its long name as a serif title on the list of volumes, the three layers every chapter is
+   built in (above the reader of a volume and on the list), and the line that points back to the monthly issues. The
+   pages themselves are styled by /treatise-pages.css (lib/live-pages.js). */
+.page-hero.treatise-hero h1 { --measure: min(100cqi, 1000px); max-width: 1000px; font-family: var(--serif); font-size: min(clamp(34px, 6vw, 76px), var(--fit-s, 1000px)); font-weight: 400; letter-spacing: -.035em; line-height: 1.02; text-transform: none; }
+.treatise-layers { padding: 44px 0 8px; }
+.treatise-layers .kicker { margin-bottom: 22px; }
+.treatise-layer-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
+.treatise-layer { position: relative; display: grid; gap: 10px; align-content: start; padding: 24px 22px 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.treatise-layer::before { content: ""; position: absolute; top: -1px; left: 22px; width: 44px; height: 3px; border-radius: 0 0 3px 3px; background: var(--blue); }
+.treatise-layer.is-scene::before { background: var(--red); }
+.treatise-layer.is-protocol::before { background: var(--ink); }
+.treatise-layer-n { font-family: var(--display); font-size: 26px; font-weight: 900; letter-spacing: -.03em; line-height: 1; color: var(--blue); }
+.treatise-layer.is-scene .treatise-layer-n { color: var(--red); }
+.treatise-layer.is-protocol .treatise-layer-n { color: var(--ink); }
+.treatise-layer strong { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.2; }
+.treatise-layer p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.treatise-monthly { margin: 52px 0 0; color: var(--muted); font-size: 15px; }
+.treatise-monthly .text-link { margin-left: 6px; }
+.book-feature-actions { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+@media (prefers-reduced-motion: reduce) {
+  .weekly-card-cover { transition: none; }
+  .weekly-card:hover .weekly-card-cover { transform: none; }
+  .weekly-card:hover .weekly-card-cover::after { transition: none; background-position: 130% 0; }
+  .book-feature:hover .book-object-cover { transform: rotateY(-24deg) rotateX(3deg); }
+}
+.wk-narrow { display: none; }
+@media (max-width: 620px) {
+  .wk-wide { display: none; }
+  .wk-narrow { display: block; }
+  .weekly-chart { padding: 20px 18px 16px; }
+  .weekly-donut { grid-template-columns: 1fr; justify-items: start; gap: 16px; }
+  .weekly-donut .wk-svg { width: 150px; }
+  .wk-legend b { font-size: 17px; }
+  .wk-legend span { font-size: 13px; }
+  .weekly-grid { gap: 30px 18px; }
+  .weekly-months { width: 100%; }
+  .weekly-months button { flex: 1; padding: 10px 12px; }
+  .weekly-card strong { font-size: 18px; }
+}
+
+/* The book on the homepage and the Reflections page. */
+.book-feature {
+  display: grid;
+  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+  gap: 70px;
+  align-items: center;
+  padding: 90px 0;
+  border-bottom: 1px solid var(--line);
+}
+.book-feature .book-object { width: min(100%, 300px); }
+/* A publication (Publications, the homepage, Reflections) answers the pointer as a whole, like the article cards: a
+   soft band of light follows the pointer behind it (--mx, --my from script.js), its book turns towards the reader and
+   glows brighter, and its title takes the light blue. */
+.book-feature { position: relative; isolation: isolate; }
+.book-feature::after {
+  content: "";
+  position: absolute;
+  inset: 14px -18px;
+  z-index: -1;
+  border-radius: 28px;
+  background:
+    radial-gradient(620px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 12%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 2.5%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .4s ease, scale .5s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.book-feature:hover::after { opacity: 1; scale: 1; }
+.book-feature:hover .book-object-cover { transform: rotateY(-9deg) rotateX(1deg); }
+.book-object::before { transition: filter .5s ease, scale .6s cubic-bezier(.22, 1, .36, 1); }
+.book-feature:hover .book-object::before { scale: 1.12; filter: blur(30px) brightness(1.35); }
+.book-feature h2 a { transition: color .3s ease; }
+.book-feature:hover h2 a { color: var(--blue-soft); }
+@media (max-width: 620px) { .book-feature::after { inset: 10px -10px; } }
+/* "All issues" below an issue lands here, clear of the sticky header. */
+.magazine-feature { scroll-margin-top: 80px; }
+.book-feature h2 { font-size: min(clamp(46px, 6vw, 88px), var(--fit-s, 1000px)); }
+.book-feature-copy > p:not(.kicker, .book-subtitle) { max-width: 560px; margin: 22px 0 30px; color: var(--muted); font-size: 18px; }
+.book-feature .button-primary { display: inline-block; }
+/* Publications: the month and the kind above the publications (partials/issue-filter.njk). */
+.publications-filter { padding: 44px 0 0; }
+.publications-filter .weekly-controls { margin: 0; }
+.publications-more .weekly-none { margin: 40px 0; }
+
+@media (max-width: 900px) {
+  .book-hero { grid-template-columns: minmax(0, 1fr); gap: 50px; padding: 64px 0 60px; }
+  .book-hero .book-object { order: -1; justify-self: start; width: min(44%, 190px); }
+  .book-facts { grid-template-columns: repeat(2, auto); }
+  .book-facts dd { font-size: 23px; }
+  .book-feature { grid-template-columns: 1fr; gap: 44px; padding: 70px 0; }
+  .book-feature .book-object { justify-self: start; width: min(56%, 230px); }
+  .book-controls { grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; }
+  .book-stage { padding: 40px 0 44px; }
+}
+@media (max-width: 620px) {
+  .book-contents button { grid-template-columns: 1fr auto; gap: 2px 12px; }
+  .book-contents-label { grid-column: 1 / -1; }
+  .book-text summary { padding: 24px 22px; }
+  .book-text-body { padding: 0 20px 40px; }
+}
+@media print {
+  .book-stage, .book-feature { display: none; }
+}
+

@@ -1,0 +1,646 @@
+/* Tools */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 70px 0 110px;
+}
+
+.tool-card {
+  min-height: 360px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 40%),
+    var(--card);
+  position: relative;
+  isolation: isolate;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease;
+}
+/* Like the article cards: under the pointer a tool card rises, takes the colour of its family (blue without one) on
+   its edge and in its shadow, a soft light of that colour follows the pointer (--mx, --my from script.js), and the
+   picture of its result comes a little closer. */
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(440px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--family, var(--blue)) 15%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.tool-card:has(a):hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+  box-shadow: 0 26px 60px -34px color-mix(in srgb, var(--family, var(--blue)) 80%, transparent), 0 18px 40px -28px rgba(0, 0, 0, .5);
+}
+.tool-card:has(a):hover::before { opacity: 1; }
+.tool-card-preview img { transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.tool-card:hover .tool-card-preview img { scale: 1.035; }
+/* The picture of the tool's result at the top of its card. */
+.tool-card.has-preview { gap: 22px; }
+.tool-card-preview { display: block; margin: -12px -12px 0; border-radius: calc(var(--radius) - 10px); overflow: hidden; border: 1px solid var(--line); background: #0b1117; }
+.tool-card-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+.tool-card.is-soon { background: var(--card); }
+.tool-card :is(h2, h3) {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-size: clamp(34px, 3.4vw, 48px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+.tool-card p { margin: 0 0 24px; color: var(--muted); }
+
+/* Essays and tools point at each other: "Tools for this essay" under an essay, "Read the story behind this tool" on a tool page. */
+.essay-tools { margin: 44px 0 8px; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.essay-tools .kicker { margin: 0 0 14px; }
+.essay-tools ul, .tool-essays-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.essay-tools li a, .tool-essays-list li a {
+  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "small arrow" "strong arrow" "span arrow"; align-items: center; column-gap: 16px;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; background: color-mix(in srgb, var(--card) 60%, transparent);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.essay-tools li a:hover, .tool-essays-list li a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+.essay-tools li a small, .tool-essays-list li a small { grid-area: small; color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.essay-tools li a strong, .tool-essays-list li a strong { grid-area: strong; font-size: 1.05rem; }
+.essay-tools li a span, .tool-essays-list li a span { grid-area: span; color: var(--muted); font-size: .92rem; }
+.essay-tools li a em, .tool-essays-list li a em { grid-area: arrow; font-style: normal; color: var(--blue); }
+.tool-essays { padding-top: 28px; padding-bottom: 8px; }
+.tool-feedback { padding-top: 28px; padding-bottom: 8px; }
+.tool-feedback h2 { margin: 0 0 16px; }
+.tool-feedback-form { display: grid; gap: 14px; max-width: 640px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.tf-choices { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; border: 0; }
+.tf-choice { position: relative; }
+.tf-choice input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.tf-choice span { display: inline-block; padding: 10px 22px; border: 1px solid var(--line); border-radius: 999px; font-weight: 800; transition: border-color .2s, background .2s, color .2s; }
+.tf-choice input:checked + span { border-color: var(--blue); background: var(--blue); color: var(--on-blue); }
+.tf-choice input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; }
+.tf-field { display: grid; gap: 6px; }
+.tf-field span { color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.tf-field textarea, .tf-field input { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; }
+.tf-field textarea { resize: vertical; min-height: 72px; }
+.tf-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.tf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.tf-actions .form-note { margin: 0; }
+.tf-status { margin: 0; font-size: .95rem; color: var(--ink); }
+@media print { .tool-feedback { display: none; } }
+.tool-essays .kicker { margin: 0 0 6px; }
+.tool-essays h2 { margin: 0 0 18px; font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(26px, 3vw, 36px); }
+/* The field notes drawn from an essay, or pointing to a tool: their words, each a link to the note. */
+.essay-notes { margin: 20px 0 8px; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.essay-notes.is-tool { margin-top: 18px; }
+.essay-notes .kicker { margin: 0 0 12px; }
+.essay-notes ul { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 4px; }
+.essay-notes li a { display: block; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-family: var(--serif); font-size: 1.2rem; line-height: 1.3; text-decoration: none; }
+.essay-notes li:last-child a { border-bottom: 0; }
+.essay-notes li a:hover { color: var(--blue); }
+.essay-notes .text-link { display: inline-block; margin-top: 8px; }
+@media print { .essay-tools, .tool-essays, .essay-series, .essay-notes { display: none; } }
+
+/* Under an essay: join in, on LinkedIn (the essay's post, or the author's profile) or with a situation of your own. */
+.essay-join { margin: 44px 0 0; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-join .kicker { margin: 0 0 14px; }
+.essay-join-links { display: grid; gap: 10px; }
+.article-content .essay-join-links a { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "strong arrow" "span arrow"; align-items: center; column-gap: 16px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; transition: border-color .2s ease, transform .2s ease; }
+.article-content .essay-join-links a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+.essay-join-links strong { grid-area: strong; font-size: 1.02rem; }
+.essay-join-links span { grid-area: span; color: var(--muted); font-size: .9rem; line-height: 1.4; }
+.essay-join-links em { grid-area: arrow; font-style: normal; color: var(--blue); }
+@media (min-width: 700px) { .essay-join-links { grid-template-columns: 1fr 1fr; } }
+@media print { .essay-join { display: none; } }
+
+/* "Send me your challenge": the contact layout, with the choices of the feedback form. */
+.challenge-form .field select { appearance: auto; }
+.challenge-publish { margin: 0; padding: 0; border: 0; }
+.challenge-publish legend { margin-bottom: 8px; color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.challenge-publish .tf-choice { display: inline-block; margin: 0 8px 8px 0; }
+.challenge-publish .tf-choice span { font-size: .92rem; font-weight: 600; }
+.challenge-aside .kicker { margin: 22px 0 8px; }
+.challenge-aside .kicker:first-child { margin-top: 0; }
+.challenge-aside p:not(.kicker) { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.5; }
+.challenge-steps { margin: 0; padding: 0 0 0 1.2em; color: var(--muted); font-size: .95rem; line-height: 1.5; display: grid; gap: 6px; }
+.challenge-steps li::marker { color: var(--blue); font-weight: 800; }
+
+/* The diagrams inside an essay (lib/diagrams.js): HTML and CSS, so the words wrap in every language and the
+   picture reflows on a phone. Flow and loop are steps in a line with arrows between (a column on a phone);
+   handoff is two sides and what crosses; ladder, layers and paths are built from the same pieces. */
+.essay-diagram { container-type: inline-size; margin: 36px 0; padding: 22px 24px 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.article-content .essay-diagram :is(p, ol, ul, li) { margin: 0; font-family: var(--sans); font-size: 1rem; line-height: 1.4; }
+.article-content .essay-diagram :is(p, ol, ul) { padding: 0; }
+.essay-diagram .dg-title { margin: 0 0 16px; color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.essay-diagram figcaption { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; line-height: 1.45; }
+.essay-diagram .dg-n { display: block; margin-bottom: 4px; color: var(--blue); font-size: .72rem; font-weight: 800; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.essay-diagram .dg-sub { display: block; margin-top: 4px; color: var(--muted); font-size: .84rem; line-height: 1.4; }
+.essay-diagram .dg-tag { display: inline-block; margin-top: 8px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 10.5px; font-style: normal; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+/* Steps in a line, an arrow between each pair. */
+.essay-diagram .dg-steps { list-style: none; display: flex; align-items: stretch; gap: 26px; }
+.essay-diagram .dg-step { position: relative; flex: 1 1 0; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--bg) 40%, transparent); }
+.essay-diagram .dg-step strong { display: block; font-size: .98rem; line-height: 1.25; }
+.essay-diagram .dg-step + .dg-step::before { content: "→"; position: absolute; top: 50%; left: -22px; transform: translateY(-50%); color: var(--blue); font-size: 1.1rem; line-height: 1; }
+.essay-diagram .dg-step.is-start { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); }
+.essay-diagram .dg-step.is-start .dg-tag { border-color: var(--blue); color: var(--blue); }
+.essay-diagram .dg-step.is-measured { border-style: dashed; }
+.essay-diagram .dg-step.is-measured .dg-tag { border-color: var(--muted); color: var(--ink); }
+.essay-diagram .dg-step.is-gate { border-width: 2px; border-color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.essay-diagram .dg-step.is-gate .dg-tag { background: var(--blue); border-color: var(--blue); color: var(--on-blue); }
+.essay-diagram .dg-step.is-key { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+/* The loop: the way back under the steps. */
+.essay-diagram .dg-return { position: relative; margin: 14px 8px 0 !important; padding: 12px 14px 0 34px !important; border-top: 1px solid var(--blue); color: var(--muted); font-size: .88rem !important; }
+.essay-diagram .dg-return::before, .essay-diagram .dg-return::after { content: ""; position: absolute; top: -10px; width: 1px; height: 10px; background: var(--blue); }
+.essay-diagram .dg-return::before { left: 0; } .essay-diagram .dg-return::after { right: 0; }
+.essay-diagram .dg-return > span { position: absolute; left: 6px; top: 8px; color: var(--blue); font-size: 1.1rem; }
+/* The handoff: two sides, and the gap between them that the work must cross. */
+.essay-diagram .dg-handoff { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 14px; align-items: stretch; }
+.essay-diagram .dg-side { padding: 14px; border: 1px solid var(--line); border-radius: 12px; }
+.essay-diagram .dg-side strong, .essay-diagram .dg-gap strong { display: block; margin-bottom: 8px; font-size: .98rem; line-height: 1.25; }
+.essay-diagram .dg-side span { display: block; color: var(--muted); font-size: .86rem; line-height: 1.4; }
+.essay-diagram .dg-side span + span { margin-top: 4px; }
+.essay-diagram .dg-gap { position: relative; padding: 14px 16px; border: 2px solid var(--blue); border-radius: 12px; background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.essay-diagram .dg-gap ul { list-style: none; display: grid; gap: 5px; }
+.essay-diagram .dg-gap li { padding-left: 16px; position: relative; font-size: .88rem !important; line-height: 1.35 !important; }
+.essay-diagram .dg-gap li::before { content: "→"; position: absolute; left: 0; color: var(--blue); }
+.essay-diagram .dg-lost { margin: 12px 0 0 !important; padding: 10px 14px; border-left: 3px solid var(--line); color: var(--muted); font-size: .88rem !important; line-height: 1.45 !important; }
+/* The ladder: levels side by side, the questions, the rules that lead to a level. */
+.essay-diagram .dg-levels { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.essay-diagram .dg-level { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
+.essay-diagram .dg-level strong { display: block; font-size: .98rem; line-height: 1.25; }
+.essay-diagram .is-level-1 { background: color-mix(in srgb, var(--bg) 40%, transparent); }
+.essay-diagram .is-level-2 { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); }
+.essay-diagram .is-level-3 { border-width: 2px; border-color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.essay-diagram .dg-questions { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 6px 14px; margin-top: 16px !important; padding-top: 14px !important; border-top: 1px solid var(--line); }
+.essay-diagram .dg-questions li { font-size: .88rem !important; line-height: 1.4 !important; }
+.essay-diagram .dg-questions b { display: inline-block; min-width: 1.4em; color: var(--blue); }
+.essay-diagram .dg-rules { list-style: none; display: grid; gap: 6px; margin-top: 14px !important; }
+.essay-diagram .dg-rules li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: .88rem !important; line-height: 1.35 !important; }
+.essay-diagram .dg-rules li.is-level-3 { border-color: var(--blue); }
+.essay-diagram .dg-rules li.is-note { border-style: dashed; color: var(--muted); }
+.essay-diagram .dg-rules em { flex: none; color: var(--blue); font-style: normal; font-weight: 800; font-variant-numeric: tabular-nums; }
+/* The layers: bands one under the other. */
+.essay-diagram .dg-layers { list-style: none; display: grid; gap: 8px; }
+.essay-diagram .dg-layer { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
+.essay-diagram .dg-layer .dg-n { margin: 3px 0 0; }
+.essay-diagram .dg-layer strong { display: block; font-size: .98rem; line-height: 1.25; }
+.essay-diagram .is-layer-1 { margin-right: 24%; }
+.essay-diagram .is-layer-2 { margin-right: 12%; border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.essay-diagram .is-layer-3 { border-width: 2px; border-color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, transparent); }
+/* Two paths with different ends. */
+.essay-diagram .dg-paths { display: grid; gap: 14px; }
+.essay-diagram .dg-path-title { margin: 0 0 8px !important; color: var(--muted); font-size: 12px !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.essay-diagram .dg-path.is-hold .dg-path-title { color: var(--blue); }
+.essay-diagram .dg-outcome { border-width: 2px; }
+.essay-diagram .is-fade .dg-outcome { border-style: dashed; color: var(--muted); }
+.essay-diagram .is-hold .dg-outcome { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, transparent); }
+@media (max-width: 700px) {
+  .essay-diagram { padding: 18px 16px 14px; }
+  .essay-diagram .dg-handoff { grid-template-columns: 1fr; }
+  .essay-diagram .dg-levels { grid-template-columns: 1fr; }
+  .essay-diagram .is-layer-1, .essay-diagram .is-layer-2 { margin-right: 0; }
+}
+/* The steps go into a column, the arrows pointing down, when the line would leave a step narrower than its words:
+   about 150 px a step, so a line of five needs 860 px ("Analysiere/n" at 768 px). */
+@container (max-width: 500px) {
+  .essay-diagram .dg-steps { flex-direction: column; gap: 24px; }
+  .essay-diagram .dg-step + .dg-step::before { content: "↓"; top: -22px; left: 50%; transform: translateX(-50%); }
+}
+@container (max-width: 680px) {
+  .essay-diagram .dg-steps:has(> :nth-child(4)) { flex-direction: column; gap: 24px; }
+  .essay-diagram .dg-steps:has(> :nth-child(4)) > .dg-step + .dg-step::before { content: "↓"; top: -22px; left: 50%; transform: translateX(-50%); }
+}
+@container (max-width: 860px) {
+  .essay-diagram .dg-steps:has(> :nth-child(5)) { flex-direction: column; gap: 24px; }
+  .essay-diagram .dg-steps:has(> :nth-child(5)) > .dg-step + .dg-step::before { content: "↓"; top: -22px; left: 50%; transform: translateX(-50%); }
+}
+@container (max-width: 1040px) {
+  .essay-diagram .dg-steps:has(> :nth-child(6)) { flex-direction: column; gap: 24px; }
+  .essay-diagram .dg-steps:has(> :nth-child(6)) > .dg-step + .dg-step::before { content: "↓"; top: -22px; left: 50%; transform: translateX(-50%); }
+}
+@media print { .essay-diagram { break-inside: avoid; border-color: var(--line); } }
+
+/* Under an essay: what readers who tried it wrote, and the question "Did you try it?". */
+.essay-readers { margin: 44px 0 0; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-readers .kicker { margin: 0 0 6px; }
+.article-content .essay-readers-lede { margin: 0 0 14px; color: var(--muted); font-size: .9rem; }
+.article-content .essay-readers ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.article-content .essay-readers li { margin: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; }
+.article-content .essay-readers blockquote { margin: 0; padding: 0; border: 0; font-family: var(--serif); font-size: 1.15rem; line-height: 1.35; }
+.article-content .essay-readers cite { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; font-style: normal; letter-spacing: .06em; text-transform: uppercase; }
+.essay-feedback { margin: 24px 0 0; padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-feedback .kicker { margin: 0 0 6px; }
+.article-content .essay-feedback-lede { margin: 0 0 16px; color: var(--muted); font-size: .95rem; line-height: 1.45; }
+.essay-feedback .tool-feedback-form { max-width: none; padding: 0; border: 0; background: transparent; }
+.essay-feedback .tf-row { display: grid; gap: 14px; }
+@media (min-width: 640px) { .essay-feedback .tf-row { grid-template-columns: 1fr 1fr; } }
+.essay-feedback .tf-field select { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; }
+.essay-feedback .tf-check { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; }
+.essay-feedback .tf-check input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--blue); }
+.essay-feedback .tf-check span { color: var(--ink); font-size: .95rem; letter-spacing: 0; text-transform: none; }
+@media print { .essay-feedback { display: none; } }
+
+/* My shelf (js/shelf.js): the bookmark in the header with its count, the bookmark on an essay, and the page. */
+.shelf-link { position: relative; }
+.shelf-link svg path { fill: none; }
+.shelf-link .shelf-count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--blue); color: var(--on-blue); font-family: var(--sans); font-size: 10px; font-weight: 800; line-height: 16px; text-align: center; }
+.shelf-link .shelf-count[hidden] { display: none; }
+.essay-save { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: color .2s, border-color .2s, background .2s, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.essay-save svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.essay-save:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.essay-save.is-saved { color: var(--blue); border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.essay-save.is-saved svg { fill: currentColor; }
+.essay-save[disabled] { display: none; }
+.share-orbit-planets [data-shelf-save].is-saved .share-planet svg path { fill: currentColor; }
+@media print { .essay-save, .shelf-link { display: none; } }
+.shelf { padding-top: 10px; padding-bottom: 40px; }
+.shelf-grid { display: grid; gap: 18px; }
+@media (min-width: 820px) { .shelf-grid { grid-template-columns: 1fr 1fr; } }
+.shelf-section { padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.shelf-section h2 { margin: 0 0 14px; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+.shelf-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.shelf-list:empty { display: none; }
+.shelf-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+.shelf-row-link { display: grid; gap: 3px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; transition: border-color .2s ease; }
+.shelf-row-link:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.shelf-row-link strong { font-size: 1rem; line-height: 1.3; }
+.shelf-row-meta { color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.shelf-remove, .shelf-clear { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .82rem; cursor: pointer; }
+.shelf-remove:hover, .shelf-clear:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.shelf-empty { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.45; }
+.shelf-note { margin: 18px 0 0; }
+.shelf-note a { color: var(--ink); }
+.shelf-clear { margin-left: 10px; }
+.shelf-blocked { margin: 0 0 16px; }
+
+/* The Listen bar at the top of an essay (js/listen.js): play or pause, start again, the speed, the paragraph being
+   read, and a note on where the voice comes from. The block being read is marked in the text. */
+.essay-listen { margin: 0 0 20px; padding: 12px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-family: var(--sans); }
+.essay-listen[hidden] { display: none; }
+.essay-listen-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.essay-listen-play { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: var(--on-blue); font: inherit; font-size: .92rem; font-weight: 800; line-height: 1; cursor: pointer; transition: filter .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.essay-listen-play:hover { filter: brightness(1.08); }
+.essay-listen-play svg { width: 13px; height: 13px; fill: currentColor; }
+.essay-listen-play[aria-pressed="true"] svg path { d: path("M6 4h4v16H6zM14 4h4v16h-4z"); }
+.essay-listen-play small { font-size: .8rem; font-weight: 600; opacity: .8; }
+.essay-listen-play[disabled] { opacity: .45; cursor: default; filter: none; }
+.essay-listen-stop { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .85rem; line-height: 1; cursor: pointer; }
+.essay-listen-stop:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.essay-listen-rate select { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font: inherit; font-size: .85rem; line-height: 1; }
+.essay-listen-rate select[disabled] { opacity: .45; }
+.essay-listen-status { color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.essay-listen-status:empty { display: none; }
+.essay-listen-bar { height: 3px; margin: 10px 0 8px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.essay-listen-bar span { display: block; height: 100%; width: 0; background: var(--blue); transition: width .3s ease; }
+.article-content .essay-listen-note { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+.article-content .is-speaking { background: color-mix(in srgb, var(--blue) 12%, transparent); box-shadow: 0 0 0 7px color-mix(in srgb, var(--blue) 12%, transparent); border-radius: 4px; transition: background .3s ease, box-shadow .3s ease; }
+@media print { .essay-listen { display: none; } }
+
+/* Before the text of an essay: the three moves for tomorrow's shift ("firstMove"), the way to the checklist, the
+   first tool and the challenges the essay answers. Printed with the essay, without its links. */
+.essay-moves { margin: 0 0 36px; padding: 22px 26px 20px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); border-left: 4px solid var(--blue); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-moves-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 14px; }
+.essay-moves-head .kicker { margin: 0; color: var(--blue); }
+.essay-moves-head p:not(.kicker) { margin: 0; color: var(--muted); font-size: .9rem; }
+.article-content .essay-moves ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.article-content .essay-moves li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; margin: 0; padding: 0; font-size: 1.02rem; line-height: 1.45; }
+.essay-moves li b { color: var(--blue); font-variant-numeric: tabular-nums; font-size: .85rem; letter-spacing: .04em; padding-top: 3px; }
+.essay-moves-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); font-size: .9rem; }
+.article-content .essay-moves-links a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.article-content .essay-moves-links a:hover { color: var(--blue); }
+.article-content .essay-moves-links a.essay-moves-challenge { padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.article-content .essay-moves-links a.essay-moves-challenge:hover { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+@media print { .essay-moves { border-color: var(--line); } .essay-moves-links { display: none; } }
+
+/* On the Insights list and the Challenges page: what an essay carries besides its text. */
+.row-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.row-badge { display: inline-block; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-family: var(--sans); font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; line-height: 1.5; }
+.list-row:hover .row-badge { border-color: color-mix(in srgb, var(--blue) 40%, var(--line)); }
+.filter-more { margin: 14px 0 0; font-size: .95rem; }
+.filter-more a { color: var(--muted); text-decoration: none; }
+.filter-more a:hover { color: var(--blue); }
+
+/* The Challenges page: a short index of the situations, then one section per challenge with its essays on the
+   left and its tools and field notes on the right. */
+.challenge-index { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 0; padding-bottom: 30px; }
+.challenge-index a { display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-family: var(--sans); font-size: .92rem; font-weight: 600; text-decoration: none; transition: border-color .2s ease, color .2s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.challenge-index a:hover { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.challenge-index a b { color: var(--blue); font-size: .75rem; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.challenge-index a small { color: var(--muted); font-size: .75rem; }
+.challenge { padding-top: 54px; padding-bottom: 30px; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+.challenge-head { max-width: 760px; margin-bottom: 30px; }
+.challenge-head .kicker { margin: 0 0 10px; }
+.challenge-head h2 { margin: 0 0 12px; font-family: var(--serif); font-weight: 400; letter-spacing: -.025em; line-height: 1.02; font-size: clamp(32px, 4.6vw, 56px); }
+.challenge-line { margin: 0; color: var(--muted); font-size: 1.15rem; line-height: 1.45; }
+.challenge-body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+.challenge-essays .kicker { margin: 0 0 12px; }
+.challenge-essays ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.challenge-essays li a { display: grid; gap: 6px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-decoration: none; background: var(--card); transition: border-color .2s ease, transform .2s ease; }
+.challenge-essays li a:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-2px); }
+/* Challenges: the essays of a challenge answer the pointer like the other cards (a lift, a blue shadow, the light
+   that follows the pointer, a title that steps forward); the index chips lift and their numbers glow; and the
+   challenge reached from the index (#red-number …) flashes a band of light once, so the eye lands on it. */
+.challenge-essays li a { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.challenge-essays li a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 13%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.challenge-essays li a:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--blue) 80%, transparent); }
+.challenge-essays li a:hover::before { opacity: 1; }
+.challenge-essays li a strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.challenge-essays li a:hover strong { translate: 4px 0; }
+.challenge-index a:hover { translate: 0 -2px; box-shadow: 0 12px 26px -18px color-mix(in srgb, var(--blue) 85%, transparent); }
+.challenge-index a { transition: border-color .25s ease, color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.challenge-index a b { transition: text-shadow .3s ease; }
+.challenge-index a:hover b { text-shadow: 0 0 12px color-mix(in srgb, var(--blue) 80%, transparent); }
+.challenge { position: relative; isolation: isolate; }
+.challenge::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 340px;
+  z-index: -1;
+  background: radial-gradient(600px 260px at 200px 120px, color-mix(in srgb, var(--blue) 16%, transparent), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+}
+.challenge:target::before { animation: challenge-arrive 1.8s ease-out 1; }
+@keyframes challenge-arrive { 0%, 25% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .challenge:target::before { animation: none; } }
+.challenge-essays li a small { color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.challenge-essays li a strong { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; letter-spacing: -.02em; line-height: 1.15; }
+.challenge-essays li a > span:not(.row-badges) { color: var(--muted); font-size: .95rem; line-height: 1.45; }
+.challenge-essays .row-badges { margin-top: 6px; }
+.challenge-side { display: grid; gap: 18px; }
+.challenge-side .essay-tools, .challenge-side .essay-notes { margin: 0; }
+.challenge-foot { padding-top: 40px; padding-bottom: 20px; border-top: 1px solid var(--line); color: var(--muted); }
+.challenge-foot p { margin: 0; }
+.challenge-foot a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.challenge-foot a:hover { color: var(--blue); }
+@media (max-width: 860px) {
+  .challenge-body { grid-template-columns: 1fr; }
+  .essay-moves { padding: 18px 18px 16px; }
+}
+
+/* Tools page: the five families (families.json), each with its own planet. */
+.tool-card.has-family {
+  background:
+    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--family) 16%, transparent), transparent 42%),
+    var(--card);
+}
+.tool-card.has-family:has(a):hover { border-color: color-mix(in srgb, var(--family) 55%, var(--line)); }
+.tool-card.has-family .text-link:hover { color: var(--family); }
+
+.family-index {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 44px 0 20px;
+}
+.home-families { padding: 0; }
+.home-families-link { margin-top: 28px; }
+.family-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease;
+}
+.family-card:hover,
+.family-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--family) 60%, var(--line));
+  box-shadow: 0 24px 54px -30px color-mix(in srgb, var(--family) 85%, transparent);
+}
+.family-card-text {
+  container-type: inline-size;
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  align-content: start;
+  padding: 16px 18px 18px;
+}
+.family-role {
+  color: var(--family);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+[data-theme="light"] .family-role { color: color-mix(in srgb, var(--family) 45%, #000); }
+.family-card strong {
+  font-family: var(--display);
+  font-size: min(24px, var(--fit-d, 1000px));
+  letter-spacing: -.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.family-line {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.family-count {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+/* The arrow of a role card points where it leads (down to the role's section, or on to its page) and nudges that
+   way under the pointer; the count takes the role's colour. */
+.family-count > span { display: inline-block; transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.family-count { transition: color .3s ease; }
+.family-card:hover .family-count { color: color-mix(in srgb, var(--family) 65%, var(--ink)); }
+.family-card:hover .family-count > span { translate: 0 3px; }
+.home-families .family-card:hover .family-count > span { translate: 4px 0; }
+
+/* The planet on a small piece of night sky; stays dark in both themes. */
+.family-visual {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background:
+    radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.8), transparent),
+    radial-gradient(1px 1px at 32% 78%, rgba(255,255,255,.55), transparent),
+    radial-gradient(1.5px 1.5px at 72% 16%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 88% 64%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 56% 90%, rgba(255,255,255,.45), transparent),
+    radial-gradient(1px 1px at 22% 52%, rgba(255,255,255,.35), transparent),
+    radial-gradient(1px 1px at 92% 30%, rgba(255,255,255,.4), transparent),
+    radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--family) 24%, transparent), transparent 62%),
+    #05080b;
+}
+/* The planet itself is an SVG (partials/family-planet.njk): Pulse beats inside its heartbeat ring,
+   Zenith's radar sweeps its contour map, Lumen's ring of dust turns, Atlas keeps its constellation still. */
+.family-planet {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform .35s ease;
+}
+.family-card:hover .family-planet,
+.role-next-card:hover .family-planet { transform: scale(1.06); }
+.planet-moon { fill: color-mix(in srgb, var(--family) 45%, #fff); }
+.planet-atlas .planet-moon { fill: #fff; }
+.pulse-cracks { animation: family-beat 1.15s ease-in-out infinite; }
+@keyframes family-beat {
+  0%, 100% { opacity: .3; }
+  12% { opacity: 1; }
+  26% { opacity: .45; }
+  36% { opacity: .85; }
+  52% { opacity: .3; }
+}
+.pulse-ring { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--family) 80%, transparent)); }
+.zenith-radar {
+  transform-box: view-box;
+  transform-origin: 200px 150px;
+  animation: family-sweep 6s linear infinite;
+}
+@keyframes family-sweep { to { transform: rotate(360deg); } }
+.lumen-ring ellipse { animation: family-ring 70s linear infinite; }
+@keyframes family-ring { to { stroke-dashoffset: -100; } }
+
+.family-section {
+  position: relative;
+  isolation: isolate;
+  padding: 64px 0 20px;
+  scroll-margin-top: 84px;
+}
+/* Tools page: each role's section carries a soft light of its colour behind its head; the planet comes a little
+   closer and glows under the pointer; and a section reached from its card above (#pulse …) flashes its light once,
+   so the eye lands on it. */
+.family-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 420px;
+  z-index: -1;
+  background: radial-gradient(520px 300px at 120px 140px, color-mix(in srgb, var(--family, var(--blue)) 12%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.family-head .family-visual { transition: transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease; }
+.family-head:hover .family-visual {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--family) 45%, transparent), 0 22px 50px -26px color-mix(in srgb, var(--family) 85%, transparent);
+}
+.family-section:target::before { animation: family-arrive 1.6s ease-out 1; }
+.family-section:target .family-visual { animation: family-visual-arrive 1.6s ease-out 1; }
+@keyframes family-arrive { 0%, 25% { filter: brightness(2.6) saturate(1.4); } }
+@keyframes family-visual-arrive { 25% { box-shadow: 0 0 0 2px var(--family), 0 0 60px -8px var(--family); } }
+@media (prefers-reduced-motion: reduce) {
+  .family-section:target::before,
+  .family-section:target .family-visual { animation: none; }
+}
+.family-section + .family-section { border-top: 1px solid var(--line); }
+.family-section:last-child { padding-bottom: 110px; }
+.family-head {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+.family-head.is-plain { grid-template-columns: minmax(0, 1fr); }
+.family-head .family-visual { border-radius: 18px; }
+.family-head .kicker { color: var(--family); margin-bottom: 10px; }
+[data-theme="light"] .family-head .kicker { color: color-mix(in srgb, var(--family) 45%, #000); }
+.family-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 76px);
+  letter-spacing: -.05em;
+  line-height: .9;
+  text-transform: uppercase;
+}
+.family-head p:not(.kicker) {
+  max-width: 640px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+.family-tools {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  padding: 30px 0 0;
+}
+.family-tools .tool-card { min-height: 300px; }
+
+@media (max-width: 1100px) {
+  .family-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .family-index {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: min(74%, 280px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+  }
+  .family-card { scroll-snap-align: start; }
+  .family-head { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .family-head .family-visual { max-width: 320px; aspect-ratio: 16 / 9; }
+  .family-tools { grid-template-columns: minmax(0, 1fr); }
+  .family-tools .tool-card { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-cracks,
+  .zenith-radar,
+  .lumen-ring ellipse { animation: none; }
+  .family-card,
+  .family-planet { transition: none; }
+}
+
+.page-hero.tool-hero h1 { font-size: min(clamp(38px, 12.5cqi, 120px), var(--fit-d, 1000px)); }
+/* A title is no larger than its longest word allows, so no word is split across two lines: lib/title-fit.js
+   gives each heading --wd and --ws, the width of its longest word in em in the display face and in the serif,
+   and the width the title has (--measure, its container unless a rule says otherwise) over that width is the
+   largest size its word fits at. The large title rules take the smaller of their size and this one. */
+h1, h2, h3, [data-fit] {
+  --fit-d: calc(var(--measure, 100cqi) / var(--wd));
+  --fit-s: calc(var(--measure, 100cqi) / var(--ws));
+}
+/* German compounds are long: titles break at a soft hyphen, the longest ones
+   are set smaller, and no title is ever wider than the screen. */
+h1:lang(de), h2:lang(de), h3:lang(de) { overflow-wrap: break-word; }
+/* A long German compound (Verbesserungsmöglichkeiten, Unvollständigkeitsquote) that a phone or a narrow column
+   cannot hold breaks at a syllable, with a hyphen, instead of anywhere: words of 12 letters or more, 5 on each
+   side. The large titles keep to their own breaks: they are set so their longest word fits. */
+main:lang(de) { hyphens: auto; hyphenate-limit-chars: 12 5 5; }
+/* What a reader types, and the CV it becomes, stay as typed. */
+main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
+@media (max-width: 480px) {
+  h2:lang(de), h3:lang(de) { hyphens: auto; }
+  /* The large serif title of a publication with a word too long for a phone ("Selbstwahrnehmung"): smaller. */
+  .book-hero h1.hero-long { font-size: min(clamp(36px, 10.5vw, 52px), var(--fit-s, 1000px)); }
+}
+.page-hero.tool-hero h1.hero-long { font-size: min(clamp(28px, 8.4cqi, 88px), var(--fit-d, 1000px)); }
+.page-hero h1.hero-long { font-size: min(clamp(30px, 11cqi, 120px), var(--fit-d, 1000px)); }
+/* Letter pairs whose bars would run into one line in the tight display titles ("SHIFT" read "SHI—T"):
+   lib/display-pairs.js wraps the first letter, and it gets the space the pair is missing at -.06em, less the
+   slack of a title whose tracking is looser (--slack). Outside the display titles nothing changes. */
+.kp1 { margin-inline-end: max(0em, calc(.02em - var(--slack, 1em))); }
+.kp2 { margin-inline-end: max(0em, calc(.035em - var(--slack, 1em))); }
+.kp3 { margin-inline-end: max(0em, calc(.05em - var(--slack, 1em))); }
+.kp4 { margin-inline-end: max(0em, calc(.065em - var(--slack, 1em))); }
+.cosmos h1 { --slack: -.005em; }
+.page-hero h1, .cta h2 { --slack: 0em; }
+.manifesto-line { --slack: .005em; }
+.family-head h2 { --slack: .01em; }
+.role-ring-head h2 { --slack: .015em; }
+.family-more-head h2, .work-backup-copy h2 { --slack: .02em; }
+.career-copy h2, .family-card strong, .cosmos-family-head strong, .role-next-text strong { --slack: .03em; }
