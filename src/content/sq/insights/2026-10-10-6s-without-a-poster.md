@@ -7,15 +7,15 @@ status: published
 featured: true
 summary: Rregulli nuk provohet nga një poster në mur. Provohet nga mënyra si funksionon vendi i punës kur dita është e vështirë.
 teaser: Një poster me gjashtë parime mund të varet në çdo mur. Por rampa nuk e lexon posterin. Rampa tregon nëse rregulli jeton.
-description: "5S dhe 6S në last mile: standardet e rampës, pse 6S nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit."
-deck: 'Eseja e katërt e serisë “Përmirësimi që mbahet”: 5S dhe 6S në last mile, si dukej rregulli në rampë, pse nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit.'
+description: "5S dhe 6S në miljen e fundit: standardet e rampës, pse 6S nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit."
+deck: 'Eseja e katërt e serisë “Përmirësimi që mbahet”: 5S dhe 6S në miljen e fundit, si dukej rregulli në rampë, pse nuk është pastrim, siguria si S-ja e gjashtë, dhe kontrolli i një zone në fund të turnit.'
 relatedTools:
   - /tools/shift-handover/
   - /tools/shift-pulse/
 checklist:
   title: Kontrolli i zonës në fund të turnit
   copy: Kopjo listën
-  note: Listë orientuese me atë që do ta zbatoja sot, jo një procedurë historike që mund ta konfirmoj.
+  note: Si do ta bëja sot.
   items:
     - Zona ka një standard të dukshëm dhe dihet kush e kontrollon.
     - Pajisjet janë në vendin e duhur.
@@ -31,15 +31,15 @@ firstMove:
 
 Një poster me gjashtë parime mund të varet në çdo mur. Rampa nuk e lexon kurrë.
 
-Ajo që tregon rampa është nëse rregulli jeton: nëse karrocat janë të organizuara, nëse portat mbyllen, nëse porositë përzihen, nëse njerëzit lëvizin aty ku duhet. Dhe këtë e tregon më qartë në ditën e vështirë.
+Rampa tregon nëse rregulli jeton: nëse karrocat janë të organizuara, nëse portat mbyllen, nëse porositë përzihen, nëse njerëzit lëvizin aty ku duhet. Dhe këtë e tregon më qartë në ditën e vështirë.
 
-5S është një metodë që vjen nga Japonia, me pesë hapa: ndaj atë që duhet nga ajo që nuk duhet, vendos çdo gjë në vendin e vet, pastro, standardizo dhe mbaje. 6S shton një të gjashtë: sigurinë. Në letër duket e thjeshtë. Në punë është nga gjërat që keqkuptohen më lehtë.
+5S është një metodë japoneze me pesë hapa: ndaj atë që duhet nga ajo që nuk duhet, vendos çdo gjë në vendin e vet, pastro, standardizo dhe mbaje. 6S shton një të gjashtë: sigurinë. Në letër duket e thjeshtë. Në punë është nga gjërat që keqkuptohen më lehtë.
 
-Në last mile, në Gjermani, 5S ishte një nga temat operative në komunikimin tonë dhe në takimin e përditshëm (daily stand-up). Puna ime lidhej drejtpërdrejt me organizimin e rampës, të magazinës dhe të zonave të ngarkimit, dhe parimet e 5S i lidhja me sigurinë, me disiplinën operative dhe me KPI-të si Damage (dëmtimet), Incomplete (porositë jo të plota) dhe Loading Time (koha e ngarkimit). Kishim kontrolle operative dhe kërkesa për respektimin e standardeve të rampës.
+Në miljen e fundit, në Gjermani, 5S ishte një nga temat operative në komunikimin tonë dhe në takimin e shkurtër të përditshëm. Puna ime lidhej drejtpërdrejt me organizimin e rampës, të magazinës dhe të zonave të ngarkimit, dhe parimet e 5S i lidhja me sigurinë, me disiplinën operative dhe me KPI-të si dëmet, porositë e paplota dhe koha e ngarkimit. Kishim kontrolle operative dhe kërkesa për respektimin e standardeve të rampës.
 
 ## Si dukej rregulli në rampë
 
-Në last mile kishte standarde konkrete:
+Në miljen e fundit kishte standarde konkrete:
 
 - karrocat dhe ngarkesat duhej të organizoheshin siç duhet, pa përzier porositë;
 - portat e ngarkimit duhej t'i mbyllnin shoferët pasi mbaronte ngarkimi;
@@ -49,11 +49,11 @@ Në last mile kishte standarde konkrete:
 
 Dhe pikërisht aty kishim hasur probleme: karroca të përziera, ngarkesa të organizuara gabim, rregulla të rampës që nuk respektoheshin.
 
-Secili prej këtyre standardeve lidhet me një numër që del të nesërmen në raport. Një karrocë e përzier mund të kthehet në porosi jo të plotë, një produkt i vendosur keq në dëm. Një rampë e çrregullt e zgjat ngarkimin.
+Secili prej këtyre standardeve lidhet me një numër që del të nesërmen në raport. Një karrocë e përzier mund të kthehet në porosi të paplotë, një produkt i vendosur keq në dëm. Një rampë e çrregullt e zgjat ngarkimin.
 
 ## Pse nuk është pastrim
 
-Kur dikush e sheh 6S si pastrim, do t'i thosha se pastrimi është vetëm një pjesë e saj.
+Kujt e sheh 6S si pastrim do t'i thosha se pastrimi është vetëm një pjesë e saj.
 
 Për mua, vlera e 5S dhe e 6S është që puna bëhet më e organizuar, më e sigurt dhe më pak e varur nga kujtesa e një individi. Nëse dikush humbet kohë duke kërkuar pajisjen e duhur, nëse ngarkesat përzihen ose rregullat e rampës nuk respektohen, pasojat i ndien vetë operacioni.
 
@@ -63,7 +63,7 @@ Prandaj rregulli duhet të duket. Kur çdo gjë ka vendin e vet, ajo që nuk ës
 
 ## S-ja e gjashtë
 
-Nëse kompania kishte edhe një program zyrtar 6S, me auditime, pikëzime, shenja në dysheme ose zona me ngjyra, nuk e di, dhe nuk pretendoj se kam drejtuar një të tillë. Di, megjithatë, që në last mile siguria ishte pjesë e vetë operacionit:
+Një program zyrtar 6S nuk kam drejtuar kurrë. Por në miljen e fundit siguria ishte pjesë e vetë operacionit:
 
 - mbyllja e portave pas ngarkimit;
 - rregullat se si lëviz dhe ku qëndron në rampë;

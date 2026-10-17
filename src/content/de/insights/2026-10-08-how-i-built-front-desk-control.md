@@ -8,7 +8,7 @@ featured: true
 summary: Eine SOP wird erst dann nützlich, wenn die Person, die sie braucht, sie im richtigen Moment finden, verstehen und anwenden kann.
 description: "Der konkrete Fall: wie aus verstreuten Checklisten und Notizen eine Arbeitsseite für Front Office und Night Audit wurde und was ich heute ändern würde."
 teaser: Ich habe es nicht gebaut, weil Dokumente fehlten. Die Dokumente waren da, aber die Information, die ich bei der Arbeit brauchte, war verstreut.
-deck: 'Der neunte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: ein echtes Projekt, Schritt für Schritt entwickelt, als Arbeit im Werden dargestellt und nicht als gemessener Erfolg, mit der Karte, um aus einem SOP-Ordner ein Arbeitswerkzeug zu machen.'
+deck: 'Der neunte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: ein echtes Projekt, Schritt für Schritt entwickelt und noch nicht abgeschlossen, mit der Karte, um aus einem SOP-Ordner ein Arbeitswerkzeug zu machen.'
 checklist:
   title: Die Karte zur Ordnung der SOPs
   fill: true
@@ -71,11 +71,11 @@ Die öffentliche Version durfte keine echten Gästedaten enthalten, keine Reserv
 
 ## Was ich heute anders machen würde
 
-Belegt ist nur meine eigene Nutzung, während ich das Werkzeug gebaut und dabei gelernt habe; was es für die Einarbeitungszeit oder für Fehler bewirkt hat, wurde nicht gemessen. Es hat mir geholfen, die Information in eine klarere Struktur zu bringen. Vielleicht nützt es auch jemandem in der Einarbeitung, aber das bleibt eine Möglichkeit, und dass die Abteilung es übernommen hätte, kann ich nicht sagen.
+Die einzige Nutzung, die ich bestätigen kann, ist meine eigene, während ich das Werkzeug baute und dabei lernte. Es hat mir geholfen, die Information in eine klarere Struktur zu bringen. Vielleicht nützt es auch jemandem in der Einarbeitung; vorerst ist das eine Möglichkeit.
 
 Heute würde ich noch früher mit der Struktur der Information beginnen, bevor ich mich um das Aussehen der Seite kümmere. Ich würde zuerst festlegen, welche Fragen in einer Schicht am häufigsten auftauchen und welche Verfahren am wichtigsten sind, und dann die Antworten um diese Bedürfnisse herum bauen.
 
-Außerdem würde ich drei Kategorien klarer trennen. Das empfehle ich heute; vollständig umgesetzt ist es im Projekt nicht:
+Außerdem würde ich drei Kategorien klarer trennen:
 
 - **Bestätigt:** Das Verfahren ist geprüft und dokumentiert.
 - **In Prüfung:** Das Material ist da, muss aber in der Praxis geprüft werden.

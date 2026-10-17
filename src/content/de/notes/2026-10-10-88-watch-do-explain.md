@@ -1,4 +1,4 @@
 ---
-quote: "Schau zu. Mach es mit mir. Mach du es, während ich zuschaue. Mach es allein. Dann erklär es mir."
+quote: "Schauen Sie zu. Machen Sie es mit mir. Machen Sie es selbst, während ich zuschaue. Machen Sie es allein. Dann erklären Sie es mir."
 date: 2026-10-10
 ---

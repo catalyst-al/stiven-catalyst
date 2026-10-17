@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Një problem që nuk e sheh
   fill: true
-  note: Fletë orientuese, si do ta bëja sot. Nuk është një metodë e dokumentuar nga roli im aktual.
+  note: Si do ta bëja sot.
   items:
     - label: Çfarë di me siguri, dhe çfarë më është raportuar?
       hint: Fakti dhe raporti për faktin nuk janë e njëjta gjë.
@@ -24,7 +24,7 @@ checklist:
     - label: Është rast i vetëm apo përsëritje?
       hint: I njëjti tur, i njëjti vend, e njëjta orë?
     - label: Çfarë është ende e hapur, dhe kush e ka?
-      hint: Një problem pa pronar nuk është i hapur. Është i harruar.
+      hint: Një problem pa përgjegjës nuk është i hapur. Është i harruar.
     - label: Çfarë veprimi duhet tani, dhe kush e konfirmon?
       hint: I shkurtër, i qartë, me veprimin që nevojitet.
 # Three moves for tomorrow's shift, shown before the text.
@@ -36,7 +36,7 @@ firstMove:
 
 Në rampë, problemin e sheh vetë. Nga distanca, shpesh e njeh vetëm përmes informacionit që të vjen.
 
-Ky është dallimi më i madh mes dy mënyrave si kam punuar në last mile. Në vitin 2025, si Team Leader dhe pastaj si Area Manager, isha brenda operacionit: në rampë, te ngarkimi, pranë dispeçerëve, me KPI-të çdo ditë. Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, nga shtëpia. Roli përfshin koordinimin operacional të 80+ automjeteve dhe 100+ shoferëve: turet, shoferët, vonesat dhe problemet gjatë shpërndarjes.
+Ky është dallimi më i madh mes dy mënyrave si kam punuar në miljen e fundit. Në vitin 2025, si Team Leader dhe pastaj si Area Manager, isha brenda operacionit: në rampë, te ngarkimi, pranë dispeçerëve, me KPI-të çdo ditë. Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, nga shtëpia. Roli përfshin koordinimin operacional të 80+ automjeteve dhe 100+ shoferëve: turet, shoferët, vonesat dhe problemet gjatë shpërndarjes.
 
 Problemet janë të njëjta. Vendi im përballë tyre është krejt tjetër, dhe ajo që vijon është analiza ime e të dy pozicioneve, nga dikush që ka qëndruar në të dyja.
 
@@ -54,7 +54,7 @@ Distanca ka edhe fitimet e veta.
 
 Në rampë sheh mirë atë që ke përpara. Nga distanca, nëse informacioni dhe mjetet e punës e lejojnë, mund ta shohësh koordinimin e shumë tureve si një operacion të vetëm: të gjitha makinat njëherësh, dhe nëse vonesat po mblidhen diku, në vend të një vonese të vetme.
 
-Kjo pamje varet nga informacioni që merr: ai duhet të jetë i mjaftueshëm dhe i besueshëm. Cilat sisteme përdorim dhe çfarë tregojnë, si edhe kanalet e komunikimit dhe oraret e turneve, i lë jashtë: janë detaje të brendshme, dhe disa prej tyre as nuk i di me saktësi.
+Që ta kesh këtë pamje, informacioni që merr duhet të jetë i mjaftueshëm dhe i besueshëm. Nuk po i përshkruaj këtu sistemet që përdorim dhe çfarë tregojnë ato, as kanalet e komunikimit dhe oraret e turneve; disa prej tyre nuk i di me saktësi.
 
 ## Informacioni bëhet vetë puna
 
@@ -62,13 +62,13 @@ Nga distanca, tri gjëra kanë edhe më shumë rëndësi se në rampë: cilësia
 
 **Kur nuk e sheh automjetin, duhet të kesh një mënyrë të besueshme për të kuptuar çfarë po ndodh me të.**
 
-Në rampë, informacionin e paqartë mund ta plotësosh duke shkuar vetë të shohësh. Nga distanca nuk mundesh. Informacioni i paqartë mbetet i paqartë, dhe po ashtu çdo vendim që merr mbi të.
+Në rampë, kur informacioni është i paqartë, shkon e shikon vetë. Nga distanca nuk mundesh. Informacioni i paqartë mbetet i paqartë, dhe po ashtu çdo vendim që merr mbi të.
 
-Për komunikimin nuk kam rregulla të miat të dokumentuara, por besoj se duhet të jetë i shkurtër, i qartë dhe të thotë cili veprim nevojitet. Një mesazh që kërkon tri pyetje pasuese për t'u kuptuar e ka humbur kohën që duhej të kursente.
+Komunikimi, besoj, duhet të jetë i shkurtër, i qartë dhe të thotë cili veprim nevojitet. Një mesazh që kërkon tri pyetje pasuese për t'u kuptuar e ka humbur kohën që duhej të kursente.
 
 ## Çfarë do të shikoja
 
-Nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri në zgjidhje, as një metodë të dokumentuar për t'i dalluar problemet herët. Rastet e dokumentuara që kam, me automjete dhe me vonesa, vijnë nga puna ime e mëparshme në last mile, dhe nuk i paraqes si raste të zgjidhura nga distanca. Sot do t'u kushtoja vëmendje tri gjërave.
+Sot do t'u kushtoja vëmendje tri gjërave.
 
 **Devijimeve që përsëriten.** Një vonesë është rast. E njëjta vonesë, në të njëjtin vend, disa ditë me radhë, është model.
 
@@ -82,6 +82,6 @@ Nga roli në distancë nuk kam asnjë incident të dokumentuar nga fillimi deri 
 
 Kjo e lidh esenë me gjithë serinë. Një përmirësim mbahet kur nuk varet nga prania e dikujt, dhe në koordinimin në distancë askush nuk është i pranishëm. Mbetet sistemi: kush e sheh problemin, si e thotë, kush e merr përsipër, kur mbyllet.
 
-Fletën më poshtë mund ta plotësosh për një problem që nuk e sheh dhe ta kopjosh. [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/) i mbledh rastet, veprimet dhe shkaqet e shumë tureve në një pamje të vetme, që njëqind telefonata të bashkohen në një pamje të vetme të operacionit.
+Fletën më poshtë mund ta plotësosh për një problem që nuk e sheh dhe ta kopjosh. [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/) i mbledh rastet, veprimet dhe shkaqet e shumë tureve në një pamje të vetme, që njëqind telefonata të bëhen një tablo e vetme e operacionit.
 
 Në rampë, problemi të del përpara. Nga distanca, ose shkon ta kërkosh, ose ke ndërtuar një mënyrë që ai të të vijë vetë.

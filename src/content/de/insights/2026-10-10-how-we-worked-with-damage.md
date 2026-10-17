@@ -6,9 +6,9 @@ series: improvement
 status: published
 featured: true
 summary: Eine Kennzahl zeigt Ihnen, dass Sie ein Problem haben. Sie zeigt nicht automatisch, wo es angefangen hat und wer es verursacht hat.
-description: "Damage als Kennzahl der letzten Meile: warum eine Quote nicht zeigt, wo Schaden entsteht, eine Zahl senken oder Schaden verhindern, und vier Prüffragen."
+description: "Die Schadensquote als Kennzahl der Last Mile: warum eine Quote nicht zeigt, wo Schaden entsteht, eine Zahl senken oder Schaden verhindern, und vier Prüffragen."
 teaser: 1,06 % bei einem Ziel von 0,8 %. Die Zahl stimmte. Aber sie sagte nicht, ob der Schaden am Rollwagen, beim Verladen, im Fahrzeug oder an der Tür des Kunden entstanden war.
-deck: 'Der erste Essay der Reihe „Verbesserung, die hält“: Damage als Kennzahl auf der letzten Meile, was die Unterlagen zeigen und wo sie aufhören, der Unterschied zwischen dem Senken einer Quote und dem Verhindern von Schäden, und die Prüfung eines Schadensfalls in vier Fragen.'
+deck: 'Der erste Essay der Reihe „Verbesserung, die hält“: die Schadensquote als Kennzahl in der Last Mile, was die Unterlagen zeigen und wo sie aufhören, der Unterschied zwischen dem Senken einer Quote und dem Verhindern von Schäden, und die Prüfung eines Schadensfalls in vier Fragen.'
 relatedTools:
   - /tools/damage-control/
   - /tools/pareto/
@@ -33,17 +33,17 @@ firstMove:
 
 1,06 %. Das Ziel lag bei 0,8 %.
 
-So sah Damage im Bericht vom April 2025 aus. Auf der letzten Meile gehörte die Kennzahl zu den wichtigsten, die wir täglich verfolgten, zusammen mit Incomplete, Delay und Loading Time. Die Zahl stimmte, und sie zeigte uns, dass wir ein Problem hatten. Wo der Schaden entstanden war, am Rollwagen, beim Verladen, im Fahrzeug oder an der Tür des Kunden, sagte sie nicht.
+So sah die Schadensquote im Bericht vom April 2025 aus. In der Last Mile gehörte sie zu den wichtigsten Kennzahlen, die wir täglich verfolgten, zusammen mit Unvollständigkeitsquote, Verspätungen und Ladezeit. Die Zahl stimmte, und sie zeigte uns, dass wir ein Problem hatten. Wo der Schaden entstanden war, am Rollwagen, beim Verladen, im Fahrzeug oder an der Tür des Kunden, sagte sie nicht.
 
 Mit diesem Essay beginnt die Reihe „Verbesserung, die hält“, und eine Verbesserung, die hält, beginnt bei dem, was man weiß: wie wir Schäden verfolgt haben und welche Probleme wir gesehen haben.
 
 ## Wie wir sie verfolgt haben
 
-Damage verfolgten wir in den operativen Berichten und im Daily Stand-up. Wir betrachteten die Zahl zusammen mit den anderen Kennzahlen und den täglichen Problemen des Betriebs. Belegen kann ich zwei Zahlen: die vom April und 0,97 % in einem Bericht vom Juni 2025. Zwei Berichte sind noch keine Reihe. Ob die Veränderung ein Trend war, an der Saison lag oder Zufall war, kann ich deshalb nicht sagen, und ich stelle sie nicht als direktes Ergebnis meiner Arbeit dar.
+Die Schadensquote verfolgten wir in den operativen Berichten und im täglichen Stand-up. Wir betrachteten die Zahl zusammen mit den anderen Kennzahlen und den täglichen Problemen des Betriebs. Belegen kann ich zwei Zahlen: die vom April und 0,97 % in einem Bericht vom Juni 2025. Zwei Berichte sind noch keine Reihe, und ich stelle die Veränderung nicht als Ergebnis meiner Arbeit dar.
 
 Die Probleme, die wir sahen, waren operativ: wie die Ladung organisiert war, wie die Rollwagen genutzt und wie die Produkte platziert wurden. Im Betrieb gab es Standards für die Sicherheit, für die Organisation der Rampe, für das Verladen und für den Umgang mit den Produkten. Die Schichtleiter und Disponenten verfolgten die operativen Probleme, und die Abstimmung mit den DSPs gehörte zur täglichen Arbeit.
 
-In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über die Maßnahmen geschrieben, die in diesem Zeitraum aus den Fällen beim Verladen entstanden. Wo die meisten Schäden entstanden, weiß ich nicht genau. Ich habe keinen dokumentierten Fall, an dem ich Schaden, Ursache und Korrekturmaßnahme beschreiben könnte, ohne Details zu erfinden, und ich kann nicht genau belegen, welche Änderungen ich selbst eingeführt habe und wie sich das Verhalten der einzelnen Gruppen verändert hat. Als Erfolgsgeschichte erzähle ich hier deshalb nichts davon.
+In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über die Maßnahmen geschrieben, die in diesem Zeitraum aus den Fällen beim Verladen entstanden. Wo die meisten Schäden entstanden, weiß ich nicht genau.
 
 ## Eine Quote hat keine Adresse
 
@@ -59,7 +59,7 @@ Wenn eine Führungskraft nicht sagen kann, in welchem Schritt ein Schaden entste
 
 ## Zwei Wege, eine Zahl zu senken
 
-Eine Quote kann sich, so meine Meinung, bewegen, ohne dass jemand den Prozess verstanden hat. Man kann Druck auf das Team machen, bei dem der Schaden gemeldet wird, und ihn jeden Morgen zum Thema machen. Die Zahl sinkt dann vielleicht eine Zeit lang. Wird der Rollwagen aber genauso beladen, die Ladung genauso organisiert und bleibt der Standard genauso unklar, kommt der Schaden zurück, sobald sich die Aufmerksamkeit anderem zuwendet.
+Meiner Meinung nach kann sich eine Quote bewegen, ohne dass jemand den Prozess verstanden hat. Man kann Druck auf das Team machen, bei dem der Schaden gemeldet wird, und ihn jeden Morgen zum Thema machen. Die Zahl sinkt dann vielleicht eine Zeit lang. Wird der Rollwagen aber genauso beladen, die Ladung genauso organisiert und bleibt der Standard genauso unklar, kommt der Schaden zurück, sobald sich die Aufmerksamkeit anderem zuwendet.
 
 Der andere Weg ist langsamer. Man verfolgt den Schaden im Prozess zurück bis zu dem Schritt, in dem er entstanden ist, und ändert dort etwas. Schadensmanagement sollte nicht nur der Versuch sein, die Quote im Bericht zu senken. Es sollte der Versuch sein, Schäden im Prozess zu verstehen und zu verhindern.
 

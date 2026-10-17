@@ -14,7 +14,7 @@ relatedTools:
 checklist:
   title: Ankesa që kalon te turni tjetër
   fill: true
-  note: Struktura që rekomandoj sot. Nëse çdo ankesë regjistrohej atëherë me pikërisht këto pesë fusha, nuk e di.
+  note: Si do ta bëja sot.
   items:
     - label: Çfarë problemi është raportuar?
       hint: Me fjalët e mysafirit, jo me përfundimin tonë.
@@ -33,19 +33,19 @@ firstMove:
   - Dorëzoje me një emër, që mysafiri të mos e tregojë historinë përsëri në mëngjes.
 ---
 
-Në orën 2 të natës, pjesa më e madhe e hotelit fle. Më pak njerëz janë në detyrë, më pak departamente mund të arrihen, më pak mundësi janë të hapura. Por problemi i një mysafiri nuk është më i vogël se në mesditë. Për këtë hendek bëhet fjalë këtu, dhe ora në titull tregon atë lloj nate, jo orën e një incidenti që mund ta vërtetoj.
+Në orën 2 të natës, pjesa më e madhe e hotelit fle. Më pak njerëz janë në detyrë, më pak departamente mund të arrihen, më pak mundësi janë të hapura. Por problemi i një mysafiri nuk është më i vogël se në mesditë. Kjo ese flet për këtë hendek, dhe ora në titull qëndron për atë lloj nate.
 
 ## Çfarë mund të bëhet natën
 
 Si Night Auditor, merresha me problemet që mund të zgjidheshin brenda përgjegjësive të recepsionit. Kur një problem kërkonte një departament tjetër, i kalohej personit përgjegjës, dhe çfarë nuk mbaronte gjatë natës shënohej në dorëzimin e turnit. Problemet me dhomat që i kam të dokumentuara nga ato net janë presioni i dobët i ujit në dush, probleme me pastërtinë e banjës, defekte teknike që kërkonin departamentin përgjegjës dhe probleme të hapura që duhej t'i ndiqte turni i radhës.
 
-Te [Kur ta zgjidhësh vetë dhe kur ta çosh lart](/sq/insights/solve-it-or-escalate-it/) shkrova për kufirin mes iniciativës dhe autoritetit gjatë natës. Këtu e njëjta pyetje ka një palë të tretë: mysafirin që pret përballë teje.
+Te [Kur ta zgjidhësh vetë dhe kur ta çosh lart](/sq/insights/solve-it-or-escalate-it/) shkrova për kufirin mes nismës dhe autoritetit për të vendosur gjatë natës. Këtu e njëjta pyetje ka një palë të tretë: mysafirin që pret përballë teje.
 
-Kjo palë e tretë e bën tundimin më të madh. Kur dikush është i zemëruar para teje, të vjen ta mbyllësh situatën sa më shpejt. Por unë nuk do të merrja një vendim jashtë autoritetit tim vetëm për ta mbyllur më shpejt një ankesë. Një premtim që nuk varet nga ti e shtyn problemin deri në mëngjes dhe e bën më të rëndë. Natën, mundësitë për zgjidhje nuk janë gjithmonë të njëjta si gjatë ditës. Por kjo nuk do të thotë që përgjegjësia për problemin duhet të humbasë.
+Kjo palë e tretë e shton tundimin. Kur ke përpara dikë të zemëruar, të vjen ta mbyllësh situatën sa më shpejt. Por unë nuk do të merrja një vendim jashtë autoritetit tim vetëm për ta mbyllur më shpejt një ankesë. Një premtim që nuk varet nga ti e shtyn problemin deri në mëngjes dhe e bën më të rëndë. Natën, mundësitë për zgjidhje nuk janë gjithmonë të njëjta si gjatë ditës. Por kjo nuk do të thotë që përgjegjësia për problemin duhet të humbasë.
 
 ## Së pari dëgjo, pastaj shpjego
 
-Nuk kam një rast të dokumentuar nga fillimi në fund të një nate me një mysafir të zemëruar në recepsion: çfarë i thashë, çfarë bëra dhe si përfundoi. Sot do të veproja kështu:
+Sot do të veproja kështu:
 
 1. **Ta dëgjosh mysafirin pa e ndërprerë.**
 2. **Të kuptosh çfarë ka ndodhur dhe çfarë kërkon.**
@@ -53,9 +53,9 @@ Nuk kam një rast të dokumentuar nga fillimi në fund të një nate me një mys
 4. **T'i shpjegosh qartë çfarë mund të bësh në atë moment.**
 5. **Nëse zgjidhja kërkon kohë, t'i tregosh cili është hapi tjetër.**
 
-Një mysafiri të zemëruar i duhet së pari të shohë që shqetësimi i tij merret seriozisht. Shpjegimi se pse ndodhi problemi mund të presë.
+Mysafiri i zemëruar do të shohë së pari që shqetësimin e tij e marrin seriozisht. Shpjegimi se pse ndodhi problemi mund të presë.
 
-Le të marrim presionin e dobët të ujit, që e kam të dokumentuar si problem; për bisedën nuk kam dokument. Natën nuk mund ta riparosh. Mund ta dëgjosh mysafirin, ta verifikosh problemin, ta regjistrosh saktë, t'ia kalosh departamentit përgjegjës dhe t'i thuash mysafirit çfarë do të ndodhë më pas. Dushi mbetet siç është, por mysafiri largohet nga recepsioni me një problem që ka një emër dhe një hap të radhës.
+Supozojmë se një mysafir ankohet për presionin e dobët të ujit, një nga problemet që i kam të dokumentuara. Natën nuk mund ta riparosh. Mund ta dëgjosh mysafirin, ta verifikosh problemin, ta regjistrosh saktë, t'ia kalosh departamentit përgjegjës dhe t'i thuash mysafirit çfarë do të ndodhë më pas. Dushi mbetet siç është, por mysafiri largohet nga recepsioni me një problem që ka një emër dhe një hap të radhës.
 
 ## Pasi mysafiri largohet nga recepsioni
 
@@ -63,7 +63,7 @@ Le të marrim presionin e dobët të ujit, që e kam të dokumentuar si problem;
 
 Te [Pse dorëzimi i turnit është një nga proceset më të nënvlerësuara](/sq/insights/why-the-handover-is-underrated/) shkrova pse ka rëndësi dorëzimi i turnit. Për një ankesë, ai ka rëndësi edhe në një mënyrë tjetër. Nëse në mëngjes mysafiri duhet ta tregojë të njëjtin problem nga e para, ankesa e natës ka humbur.
 
-Në raportin e turnit përfshiheshin problemet me dhomat, çështjet e hapura dhe informacioni që duhej ndjekur. Një dorëzim i dobishëm për një ankesë, ashtu siç do ta organizoja sot, tregon pesë gjëra: çfarë u raportua, çfarë u verifikua, çfarë është bërë deri tani, çfarë ka mbetur pa zgjidhur dhe kush e ndjek, bashkë me atë që duhet t'i thuhet mysafirit. Nëse çdo ankesë regjistrohej atëherë me pikërisht këto fusha, nuk e di.
+Raporti i turnit përfshinte problemet me dhomat, çështjet e hapura dhe informacioni që duhej ndjekur. Një dorëzim i dobishëm për një ankesë, ashtu siç do ta organizoja sot, tregon pesë gjëra: çfarë u raportua, çfarë u verifikua, çfarë është bërë deri tani, çfarë ka mbetur pa zgjidhur dhe kush e ndjek, bashkë me atë që duhet t'i thuhet mysafirit.
 
 ## Për recepsionistin që sapo fillon
 

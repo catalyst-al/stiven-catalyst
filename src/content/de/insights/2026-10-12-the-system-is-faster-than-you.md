@@ -18,7 +18,7 @@ checklist:
   note: "Eine Zeile für jede Entscheidung, die das System in Ihrer Schicht trifft. Einmal ausfüllen, dann an dem Tag berichtigen, an dem das System falsch liegt."
   items:
     - label: "Welche Entscheidung trifft das System in meiner Schicht?"
-      hint: "Die Tour, die Reihenfolge der Stopps, die geplante Zeit, der Zimmerstatus, der Alarm. Eine pro Karte."
+      hint: "Die Tour, die Reihenfolge der Stopps, die geplante Zeit, der Zimmerstatus, der Alarm. Eine pro Zeile."
     - label: "Was weiß das System, wenn es sie trifft?"
       hint: "Adressen, Zeiten, Bestand, die bisherigen Scans. Nur, was jemand eingetippt oder gescannt hat."
     - label: "Was weiß es nicht?"
@@ -38,29 +38,29 @@ firstMove:
 diagram: decision-split
 ---
 
-In jedem Job, den ich gemacht habe, gab es ein System, das schneller war als ich. Die Kasse im Laden. Der Scanner und die Tourenplanung auf der letzten Meile. Das Hotelsystem an der Rezeption und im Night Audit. Das Dashboard, das rot wird. In mehr als dreißig Essays auf dieser Seite tauchen diese Systeme auf den meisten Seiten auf, aber auf keiner sind sie das Thema. Sie sind da wie der Tisch in einer Erzählung: Alle arbeiten daran, niemand beschreibt ihn.
+In jedem Job, den ich gemacht habe, gab es ein System, das schneller war als ich. Die Kasse im Laden. Der Scanner und die Tourenplanung in der Last Mile. Das Hotelsystem an der Rezeption und im Night Audit. Das Dashboard, das rot wird. In mehr als dreißig Essays auf dieser Seite tauchen diese Systeme auf den meisten Seiten auf, aber auf keiner sind sie das Thema. Sie sind da wie der Tisch in einer Erzählung: Alle arbeiten daran, niemand beschreibt ihn.
 
 In einer Schicht fragt niemand, ob wir Technik einsetzen sollen. Sie ist da, wenn man kommt, und sie ist noch da, wenn man geht. Die Frage, die tatsächlich auftaucht, in immer neuen Worten, ist eine andere: Das System sagt das eine, die Leute vor Ort sagen etwas anderes, wem glaube ich?
 
 Dahinter steht eine schwerere: Wenn das System falsch lag und ich ihm gefolgt bin, wer trägt dann die Verantwortung?
 
-Mit diesem Essay beginnt eine Reihe über diese Frage. Die Reihe fragt, was der Person in der Schicht bleibt, wenn das System schneller ist als sie, und lässt beiseite, welche Systeme man kaufen soll und was sie in fünf Jahren können. Ihr Material sind eine Änderung am System für die Touren- und Zeitplanung auf der letzten Meile im August 2025, die tägliche Arbeit mit Fahrern, Touren und den Problemen, die zwischen Plan und Rampe entstehen, und dokumentierte Beschwerden aus dem Hotel über Wasserdruck und Sauberkeit im Bad. Wie überall auf dieser Seite nenne ich keine Systeme oder Anwendungen und beschreibe nicht, wie sie intern funktionieren.
+Mit diesem Essay beginnt eine Reihe über diese Frage. Die Reihe fragt, was der Person in der Schicht bleibt, wenn das System schneller ist als sie, und lässt beiseite, welche Systeme man kaufen soll und was sie in fünf Jahren können. Ihr Material sind eine Änderung am System für die Touren- und Zeitplanung in der Last Mile im August 2025, die tägliche Arbeit mit Fahrern, Touren und den Problemen, die zwischen Plan und Rampe entstehen, und dokumentierte Beschwerden aus dem Hotel über Wasserdruck und Sauberkeit im Bad. Wie überall auf dieser Seite nenne ich keine Systeme oder Anwendungen und beschreibe nicht, wie sie intern funktionieren.
 
 ## August 2025: der Plan, der aus der Praxis lernen wollte
 
-Im August 2025 wurde auf der letzten Meile das System geändert, das Touren und Zeiten plante. Eines der Ziele war, unrealistische Pläne, Planungsfehler und operative Ausnahmen zu verringern. Außerdem sollten Informationen aus dem Feld genutzt werden, um die Planung zu verbessern.
+Im August 2025 wurde in der Last Mile das System geändert, das Touren und Zeiten plante. Eines der Ziele war, unrealistische Pläne, Planungsfehler und operative Ausnahmen zu verringern. Außerdem sollten Informationen aus dem Feld genutzt werden, um die Planung zu verbessern.
 
-Was sich danach verändert hat, kann ich nicht sagen, weil ich es nicht gemessen habe. Aber schon die Ziele verraten etwas, und das ist meine Lesart. Ein System, das unrealistische Pläne verringern soll, hat unrealistische Pläne gemacht. Und ein System, das Informationen aus dem Feld braucht, gibt in seiner eigenen Sprache zu, was man vor Ort längst weiß: Manches sieht man nur draußen.
+Schon die Ziele verraten etwas, und das ist meine Lesart. Ein System, das unrealistische Pläne verringern soll, hat unrealistische Pläne gemacht. Und ein System, das Informationen aus dem Feld braucht, gibt in seiner eigenen Sprache zu, was man vor Ort längst weiß: Manches sieht man nur draußen.
 
 Bleibt die Frage, wer ihm diese Informationen liefert. Das System bekommt sie nur, wenn jemand vor Ort sie sieht, aufschreibt und dorthin schickt, wo jemand sie nutzen kann.
 
 ## Richtig, bis es falsch liegt
 
-Die erste Szene ist ein Bild, keine Erinnerung: Einen dokumentierten Fall, in dem ein System falsch entschieden hat und ich das entdeckt und korrigiert habe, habe ich nicht. Stellen Sie sich eine Tour vor, die das System für einen neuen Fahrer geplant hat. Die Reihenfolge der Stopps ist aus Sicht des Systems perfekt: kürzeste Strecke, kürzeste Zeit, kein Zurückfahren. Der Fahrer hält sich daran. Der dritte Stopp ist ein Laden, der um zehn öffnet, und das System hat ihn auf halb neun gelegt, weil er näher lag.
+Die erste Szene ist erfunden. Stellen Sie sich eine Tour vor, die das System für einen neuen Fahrer geplant hat. Die Reihenfolge der Stopps ist aus Sicht des Systems perfekt: kürzeste Strecke, kürzeste Zeit, kein Zurückfahren. Der Fahrer hält sich daran. Der dritte Stopp ist ein Laden, der um zehn öffnet, und das System hat ihn auf halb neun gelegt, weil er näher lag.
 
 Das System hat getan, wofür es gebaut wurde: Strecken berechnet. Dass der Laden Öffnungszeiten hat, wusste es nicht, weil es ihm niemand gesagt hat. Ein Fahrer, der das Gebiet kennt, hätte es auf einen Blick gesehen. Der neue Fahrer hat dem Bildschirm vertraut, weil der Bildschirm schneller und sicherer war als sein eigenes Urteil.
 
-Jede Entscheidung von Hand nachzuprüfen würde die Schicht verlangsamen, ohne sie sicherer zu machen. Die Aufgabe ist, ohne Kampf gegen das System die Fälle zu erkennen, in denen es falsch liegt, und zwar dann, wenn sie eintreten. Wie oft das vorkommt, kann ich nicht sagen, denn wie oft das System richtig liegt, habe ich nie gemessen. Aber diese Fälle haben oft dieselbe Form: Das System wusste etwas nicht, was man vor Ort wusste. Die Öffnungszeiten. Dass das zweite Tor kaputt ist. Dass der Gast in diesem Zimmer derjenige ist, der sich gestern beschwert hat. Dass die Tasche mit diesem Code auf dem falschen Trolley lag, obwohl der Scan sie bestätigt hatte.
+Jede Entscheidung von Hand nachzuprüfen würde die Schicht verlangsamen, ohne sie sicherer zu machen. Die Aufgabe ist, ohne Kampf gegen das System die Fälle zu erkennen, in denen es falsch liegt, und zwar dann, wenn sie eintreten. Diese Fälle haben oft dieselbe Form: Das System wusste etwas nicht, was man vor Ort wusste. Die Öffnungszeiten. Dass das zweite Tor kaputt ist. Dass der Gast in diesem Zimmer derjenige ist, der sich gestern beschwert hat. Dass die Tasche mit diesem Code auf dem falschen Trolley lag, obwohl der Scan sie bestätigt hatte.
 
 **Das System ist schneller als Sie in allem, was man ihm gesagt hat. Von dem, was man ihm nicht gesagt hat, weiß es nichts. Und das meiste, was man vor Ort weiß, hat nie jemand irgendwem gesagt.**
 
@@ -68,7 +68,7 @@ Jede Entscheidung von Hand nachzuprüfen würde die Schicht verlangsamen, ohne s
 
 ## Drei Arten, es falsch zu machen
 
-Eine Schichtleitung kann hier auf drei Arten danebenliegen. Es sind Muster, keine Fälle, die ich dokumentiert habe, und jeder, der neben einem Planungssystem gearbeitet hat, wird sie wiedererkennen.
+Eine Schichtleitung kann hier auf drei Arten danebenliegen. Es sind Muster, keine Einzelfälle, und jeder, der neben einem Planungssystem gearbeitet hat, wird sie wiedererkennen.
 
 **Blindes Vertrauen.** Das System hat es gesagt, also stimmt es. Geht es schief, heißt es: „Das System hat es so eingeteilt.“ Das ist die bequemste Antwort und die gefährlichste, weil sie die Verantwortung an etwas abgibt, das sie nicht tragen kann. Der Kunde vor dem geschlossenen Laden fragt nicht das System.
 
@@ -88,7 +88,7 @@ Die Lehre, die ich daraus ziehe, braucht keinen falschen Status auf dem Bildschi
 
 Zu jeder Entscheidung, die das System in meiner Schicht trifft, würde ich heute drei Dinge wissen wollen: was das System weiß, wenn es sie trifft, was es nicht weiß und woran ich vor Ort merke, dass es falsch liegt.
 
-Die ersten beiden Fragen beantwortet man einmal und schreibt die Antworten auf. Die dritte ist die eigentliche Arbeit. Auf der letzten Meile kann die Antwort ein Anruf des Fahrers sein, ein Trolley, der nicht zu seiner Tour passt, oder eine Zahl im Stand-up, die nicht zum Tag passt. Aus der Ferne, wie ich in [80+ Fahrzeuge führen, die man nicht sieht](/de/insights/80-vehicles-you-cannot-see/) geschrieben habe, ist die Antwort dünner: Das Problem erreicht Sie nur, wenn jemand es sieht, versteht und meldet.
+Die ersten beiden Fragen beantwortet man einmal und schreibt die Antworten auf. Die dritte ist die eigentliche Arbeit. In der Last Mile kann die Antwort ein Anruf des Fahrers sein, ein Trolley, der nicht zu seiner Tour passt, oder eine Zahl im Stand-up, die nicht zum Tag passt. Aus der Ferne, wie ich in [80+ Fahrzeuge führen, die man nicht sieht](/de/insights/80-vehicles-you-cannot-see/) geschrieben habe, ist die Antwort dünner: Das Problem erreicht Sie nur, wenn jemand es sieht, versteht und meldet.
 
 Kann ich die dritte Frage zu einer Entscheidung nicht beantworten, dann laufe ich in diesem Teil des Betriebs nur mit.
 

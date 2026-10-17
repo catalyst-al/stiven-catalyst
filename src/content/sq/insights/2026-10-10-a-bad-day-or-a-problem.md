@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Një ditë e keqe është sinjal për të kontrolluar. Nuk është automatikisht provë se i gjithë procesi duhet ndryshuar.
-teaser: Në një raport të qershorit 2025, Delay ishte 2,8%. Ditë e keqe apo problem? Nga përgjigjja varet nëse e ndryshon procesin, dhe vetëm numri nuk ta jep.
+teaser: Në një raport të qershorit 2025, vonesat ishin 2,8%. Ditë e keqe apo problem? Nga përgjigjja varet nëse e ndryshon procesin, dhe vetëm numri nuk ta jep.
 description: "Një ditë me KPI të këqija: pse një numër i vetëm nuk tregon nëse procesi ndryshoi, ideja e kartës së kontrollit dhe katër pyetje para se të ndryshosh procesin."
 deck: 'Eseja e pestë e serisë “Përmirësimi që mbahet”: si i ndiqnim KPI-të çdo ditë, pse një numër i vetëm nuk tregon nëse procesi ka ndryshuar, dy gabimet e kundërta, kur ndërhyn menjëherë dhe katër pyetje para se të ndryshosh procesin.'
 relatedTools:
@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Para se të ndryshosh procesin
   fill: true
-  note: Fletë orientuese, si do ta bëja sot, jo një metodë që e kam përdorur në mënyrë të dokumentuar.
+  note: Si do ta bëja sot.
   items:
     - label: A ka një problem të menjëhershëm sigurie ose shërbimi?
       hint: Nëse po, ndërhyn tani. Analiza vjen më pas.
@@ -36,9 +36,9 @@ diagram: three-layers
 
 2,8%.
 
-Kaq ishte treguesi i vonesave, Delay, në një raport të qershorit 2025. Një ditë e keqe, apo shenjë se diçka kishte ndryshuar në proces? Vetëm numri nuk ta thotë.
+Kaq ishin vonesat (Delay) në një raport të qershorit 2025. Një ditë e keqe, apo shenjë se diçka kishte ndryshuar në proces? Vetëm numri nuk ta thotë.
 
-Në last mile ndiqnim çdo ditë Delay, Damage (dëmtimet), Incomplete (porositë jo të plota) dhe Loading Time (koha e ngarkimit). Rezultatet diskutoheshin në takimin e shkurtër të përditshëm (daily stand-up), çdo devijim duhej shpjeguar dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative.
+Në miljen e fundit ndiqnim çdo ditë vonesat, dëmet, porositë e paplota dhe kohën e ngarkimit. Rezultatet i diskutonim në takimin e shkurtër të përditshëm, çdo devijim duhej shpjeguar dhe shifrat i analizonim edhe sipas DSP-ve dhe sipas problemeve operative.
 
 ## Një numër pa histori
 
@@ -46,15 +46,15 @@ Në last mile ndiqnim çdo ditë Delay, Damage (dëmtimet), Incomplete (porosit�
 
 Le të marrim një shembull të shpikur. Supozojmë se mesatarja e javëve të fundit ishte 2,5%. A është 2,8% sinjal?
 
-Varet. Çdo proces luhatet. Asnjë ditë nuk del njësoj si tjetra, edhe kur askush nuk ka ndryshuar asgjë: ndryshon volumi, ndryshojnë njerëzit, ndryshojnë rrugët. Shumë ditë do të jenë më keq se mesatarja. Ajo që ka rëndësi është nëse sot është më keq se sa luhatet zakonisht ky proces.
+Varet. Çdo proces luhatet. Asnjë ditë nuk del njësoj si tjetra, edhe kur askush nuk ka ndryshuar asgjë: ndryshon volumi, ndryshojnë njerëzit, ndryshojnë rrugët. Shumë ditë do të jenë më keq se mesatarja. Rëndësi ka nëse dita e sotme del më keq nga sa luhatet zakonisht ky proces.
 
 Mbi këtë ide ngrihet karta e kontrollit. Ajo i vendos ditët njëra pas tjetrës, bashkë me mesataren dhe me dy kufij që tregojnë sa larg luhatet zakonisht procesi. Një ditë brenda kufijve ka shumë gjasa të jetë luhatje e zakonshme. Një ditë jashtë tyre, ose disa ditë me radhë në të njëjtën anë të mesatares, tregon se diçka mund të ketë ndryshuar.
 
-Nëse kam përdorur vetë një kartë të tillë, me kufij kontrolli, nuk mund ta rindërtoj, ashtu si nuk mund të rindërtoj si zgjidhnim atëherë mes pritjes dhe ndërhyrjes: nëse e linim një rezultat të përsëritej para se të ndërhynim, apo ndiqnim trendet ditore ose javore në Excel a Power BI. Ajo që vijon është mënyra si do ta lexoja sot një ditë të keqe.
+Më poshtë është mënyra si do ta lexoja sot një ditë të keqe.
 
 ## Dy gabimet e kundërta
 
-Sipas mendimit tim, një ditë e keqe mund të lexohet gabim në dy mënyra të kundërta.
+Për mendimin tim, një ditë e keqe mund të keqlexohet në dy mënyra të kundërta.
 
 Gabimi i parë e trajton çdo ditë të keqe si problem. Ndryshohet një rregull, shtohet një kontroll, thirret një mbledhje. Të nesërmen numri kthehet në normë dhe duket sikur masa dha efekt. Por ndoshta do të ishte kthyer vetë, dhe tani procesi ka një rregull më shumë, që askush nuk e di pse ekziston.
 
@@ -78,7 +78,7 @@ E treta: a e kemi gjetur një shkak konkret para se të ndryshojmë procesin?
 
 ## Volumi, moti dhe procesi
 
-Në last mile ndiqnim shkaqe operative: çanta që mungonin, karroca të përziera, vonesa në përgatitje, probleme gjatë ngarkimit. Nuk di për ndonjë metodë të dokumentuar me të cilën ta ndanim ndikimin e motit dhe të volumit nga një problem i procesit.
+Në miljen e fundit ndiqnim shkaqe operative: çanta që mungonin, karroca të përziera, vonesa në përgatitje, probleme gjatë ngarkimit.
 
 Sot, para se të përcaktoja shkakun, do ta krahasoja rezultatin me volumin e punës, me kushtet e ditës dhe me të dhënat e ditëve të mëparshme. 2,8% vonesa në një ditë me volum të jashtëzakonshëm nuk do të thotë e njëjta gjë si 2,8% në një ditë të zakonshme.
 

@@ -11,12 +11,12 @@ deck: 'Der zwölfte und letzte Essay der Reihe „Zehn Jahre nah an der Arbeit�
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Beginnen Sie morgen mit vier Fragen: Was ist abgewichen, was ist noch offen, wo liegt das Risiko, wo werde ich gebraucht?"
-  - Verbringen Sie dreißig Minuten auf der Fläche und bringen Sie ein Problem mit, das der Bericht nicht zeigt.
+  - Verbringen Sie dreißig Minuten vor Ort und bringen Sie ein Problem mit, das der Bericht nicht zeigt.
   - Geben Sie heute einem Problem, für das bisher niemand verantwortlich war, einen Verantwortlichen.
 checklist:
   title: Die Wochenrunde
   fill: true
-  note: Die Fragen meiner idealen Woche. Kein Meeting, von dem ich ein Protokoll habe.
+  note: Die Fragen meiner idealen Woche.
   items:
     - label: Was wird besser?
       hint: Und wissen wir, warum?
@@ -30,7 +30,7 @@ checklist:
       hint: Den bemerkt das Team als Erstes.
 ---
 
-Nach Jahren im Einzelhandel, im Verkauf, in der Logistik und in der Hotellerie habe ich erkannt, dass sich Branchen viel schneller ändern als die Prinzipien des Managements. Das Produkt kann Ware im Lager sein, ein Auftrag, der pünktlich rausgehen muss, oder ein Hotelzimmer. Systeme ändern sich, KPIs ändern sich, sogar die Stellenbezeichnungen ändern sich.
+Nach Jahren im Einzelhandel, im Verkauf, in der Logistik und in der Hotellerie habe ich erkannt, dass sich Branchen viel schneller ändern als die Prinzipien des Managements. Das Produkt kann Ware im Lager sein, ein Auftrag, der pünktlich rausgehen muss, oder ein Hotelzimmer. Systeme ändern sich, Kennzahlen ändern sich, sogar die Stellenbezeichnungen ändern sich.
 
 Am Ende steht ein Operations Manager aber fast immer vor denselben Fragen:
 
@@ -60,11 +60,11 @@ Standardisierung soll für mich verhindern, dass Menschen neu erfinden müssen, 
 
 ## 3. Daten
 
-Ein KPI ist ein Signal. Die Schlussfolgerung ergibt sich erst aus dem, was dahintersteckt.
+Eine Kennzahl ist ein Signal. Die Schlussfolgerung ergibt sich erst aus dem, was dahintersteckt.
 
 Ich habe gelernt, mich nicht damit zufriedenzugeben, dass ein Prozentwert rot oder grün ist. Wenn die Verspätungen steigen, will ich wissen, wie viele es sind und warum. Wenn wir Schäden, Fehler, Ladezeiten außerhalb des Standards oder ein anderes operatives Problem haben, will ich wissen, wo es sich konzentriert und was es verursacht.
 
-Hier helfen mir Denkweisen wie Pareto und 5 Whys. Nicht jedes Problem braucht eine große Methodik, aber man bekämpft sehr leicht das Symptom und nennt es Verbesserung.
+Hier helfen mir Denkweisen wie die Pareto-Analyse und die 5-Why-Methode. Nicht jedes Problem braucht eine große Methodik, aber man bekämpft sehr leicht das Symptom und nennt es Verbesserung.
 
 Die Daten müssen mich vor Ort führen. Und was ich vor Ort sehe, muss mir helfen, die Daten zu verstehen. Wenn diese beiden Welten nicht zusammenkommen, kann der Bericht gut aussehen, während der Betrieb dasselbe Problem behält.
 
@@ -92,7 +92,7 @@ Betriebe werden durch viele kleine Korrekturen besser, die laufend gemacht werde
 
 ## Was ich als Manager nie tun will
 
-Ich will Angst nicht als Führungsinstrument einsetzen. Ich will von Menschen keinen Standard verlangen, den ich selbst nicht zu verstehen oder einzuhalten bereit bin. Ich will kein Problem verstecken, nur weil der KPI ohne es besser aussieht. Ich will nicht der Manager werden, der alles weiß, weil niemand sonst eingearbeitet wurde. Und ich will nicht, dass das Team für jede kleine Entscheidung meine Anwesenheit braucht.
+Ich will Angst nicht als Führungsinstrument einsetzen. Ich will von Menschen keinen Standard verlangen, den ich selbst nicht zu verstehen oder einzuhalten bereit bin. Ich will kein Problem verstecken, nur weil die Kennzahl ohne es besser aussieht. Ich will nicht der Manager werden, der alles weiß, weil niemand sonst eingearbeitet wurde. Und ich will nicht, dass das Team für jede kleine Entscheidung meine Anwesenheit braucht.
 
 Wenn ein Team nur funktioniert, solange der Manager im Raum ist, hat dieser Manager für mich noch kein System aufgebaut.
 
@@ -100,7 +100,7 @@ Wenn ein Team nur funktioniert, solange der Manager im Raum ist, hat dieser Mana
 
 Jeden Tag würde ich mit einem kurzen Überblick über den Betrieb beginnen, ein paar Minuten lang. Ich will wissen, was abgewichen ist, was noch offen ist, wo wir Risiken haben und wo meine Anwesenheit gebraucht wird.
 
-Ich würde die wichtigsten KPIs prüfen und dann von den Dashboards weggehen.
+Ich würde die wichtigsten Kennzahlen prüfen und dann von den Dashboards weggehen.
 
 Ein wichtiger Teil meiner Woche gehört dem Betrieb vor Ort: den Prozess sehen, mit den Menschen sprechen und die Probleme verstehen, die es nicht immer in den Bericht schaffen.
 
@@ -113,7 +113,7 @@ Einmal pro Woche würde ich mir eine gründlichere Überprüfung der Leistung w�
 - Wer verantwortet sie?
 - Und welche Probleme sind keine Vorfälle mehr, sondern Muster?
 
-Ich würde mir auch feste Zeit für die Menschen wünschen: Feedback, Coaching und Gespräche, in denen nach „Was ist schiefgelaufen?“ auch jemand fragt: „Was hindert dich daran, deine Arbeit gut zu machen?“
+Ich würde mir auch feste Zeit für die Menschen wünschen: Rückmeldungen, Anleitung und Gespräche, in denen nach „Was ist schiefgelaufen?“ auch jemand fragt: „Was hindert dich daran, deine Arbeit gut zu machen?“
 
 Berichte zeigen mir, wo ich hinschauen muss. Vor Ort sehe ich, was passiert. Ein Manager braucht beides.
 
@@ -123,7 +123,7 @@ Berichte zeigen mir, wo ich hinschauen muss. Vor Ort sehe ich, was passiert. Ein
 
 Im ersten Monat würde ich nicht mit der Vorstellung antreten, die Organisation „reparieren“ zu müssen. Ich würde lernen.
 
-Ich würde das Team, die Prozesse, die KPIs, den Kunden, die Abhängigkeiten zwischen den Abteilungen und die Art kennenlernen, wie Entscheidungen getroffen werden. Ich würde viel Zeit vor Ort verbringen und mit den Menschen sprechen, die die Arbeit jeden Tag machen. Ich würde mir die SOPs ansehen und sie mit der Wirklichkeit vergleichen.
+Ich würde das Team, die Prozesse, die Kennzahlen, den Kunden, die Abhängigkeiten zwischen den Abteilungen und die Art kennenlernen, wie Entscheidungen getroffen werden. Ich würde viel Zeit vor Ort verbringen und mit den Menschen sprechen, die die Arbeit jeden Tag machen. Ich würde mir die SOPs ansehen und sie mit der Wirklichkeit vergleichen.
 
 Ich würde auch versuchen zu verstehen, was nicht sofort im Dashboard auftaucht:
 
@@ -153,7 +153,7 @@ In dieser Phase würde ich auch mit den kleinen Korrekturen beginnen, die sich v
 
 Drei Monate sind keine Zauberei, und bis Tag 90 würde ich nicht behaupten, den Betrieb transformiert zu haben. Aber ich würde mir wünschen, dass einige Dinge klarer geworden sind:
 
-- Die wichtigsten KPIs und was sie bedeuten.
+- Die wichtigsten Kennzahlen und was sie bedeuten.
 - Wer welche Probleme verantwortet.
 - Die Art der Schichtübergabe.
 - Der Prozess zur Nachverfolgung von Maßnahmen.
@@ -164,7 +164,7 @@ Mein Ziel für die 90 Tage wäre, dass die Organisation ein klareres Bild von si
 
 ## Wo ich noch lerne
 
-Es gibt vieles, das ich weiterentwickeln will. Ich will mein Wissen in der Datenanalyse vertiefen und besser verstehen, wie der Betrieb mit der GuV, dem Forecasting und finanziellen Entscheidungen auf einer breiteren Ebene zusammenhängt.
+Es gibt vieles, das ich weiterentwickeln will. Ich will mein Wissen in der Datenanalyse vertiefen und besser verstehen, wie der Betrieb mit der GuV, den Prognosen und finanziellen Entscheidungen auf einer breiteren Ebene zusammenhängt.
 
 Ich will mehr Erfahrung darin sammeln, Betriebe mit größerem organisatorischem Umfang zu führen, in denen Entscheidungen über eine Schicht oder eine Funktion hinausgehen und mehrere Teams gleichzeitig betreffen.
 

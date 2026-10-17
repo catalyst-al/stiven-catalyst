@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Man braucht kein Black-Belt-Zertifikat, um gute Fragen zu stellen. Aber wer nur den Namen einer Methode kennt, kann nicht behaupten, sie angewendet zu haben.
 teaser: Der Wert von DMAIC liegt nicht im Zertifikat. Er liegt in der Disziplin, nicht sofort vom Problem zur Lösung zu springen.
-description: "DMAIC ohne Zertifikat: fünf Phasen, wie ich sie auf der letzten Meile erlebte, warum Control am schwersten ist, und fünf Fragen für die Schichtleitung."
+description: "DMAIC ohne Zertifikat: fünf Phasen, wie ich sie in der Last Mile erlebte, warum Control am schwersten ist, und fünf Fragen für die Schichtleitung."
 deck: 'Der sechste Essay der Reihe „Verbesserung, die hält“: was DMAIC ist, welche Phasen ich in meiner Arbeit hatte und welche nicht, warum Control die schwierigste Phase ist, und fünf Fragen für eine Schichtleitung, die kein Black Belt ist.'
 relatedTools:
   - /tools/six-sigma-dmaic/
@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: DMAIC in fünf Fragen
   fill: true
-  note: Eine Orientierung, wie ich heute vorgehen würde, kein formales Six-Sigma-Projekt, das ich geleitet habe.
+  note: So würde ich es heute machen.
   items:
     - label: Was ist das konkrete Problem?
       hint: Ein Problem, ein Ort, ein Zeitraum. Nicht „die Qualität ist schlecht“.
@@ -42,7 +42,7 @@ Zwischen diesen beiden Sätzen bewegt sich dieser Essay.
 
 DMAIC ist der Six-Sigma-Zyklus zur Verbesserung eines Prozesses: Define, Measure, Analyze, Improve, Control. Man legt das Problem fest, misst es, analysiert die Ursachen, verbessert und prüft, ob die Verbesserung hält. In Büchern sieht das nach einem großen Projekt aus, mit Team, Frist und jemandem mit farbigem Gürtel.
 
-Was ich mitbringe, ist Erfahrung mit echten operativen Problemen auf der letzten Meile: Damage, Incomplete, Delay und Loading Time. Six Sigma, Pareto und 5 Why sind Methoden, die ich kenne und die in mein Verständnis von Führung eingegangen sind. Ein bestätigtes Zertifikat habe ich nicht, weder Yellow noch Green noch Black Belt. Ich habe kein Projekt, in dem ich alle fünf Phasen von DMAIC angewendet und dokumentiert hätte, und nicht einmal ein Pareto oder ein 5 Why, das ich als von mir selbst von Anfang bis Ende durchgeführt vorweisen kann. In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über ein 5 Why mit nur zwei dokumentierten „Warum“ geschrieben und darüber, warum ich die übrigen nicht ergänzt habe.
+Was ich mitbringe, ist Erfahrung mit echten operativen Problemen in der Last Mile: Schadensquote, Unvollständigkeitsquote, Verspätungen und Ladezeit. Six Sigma, Pareto und 5 Why sind Methoden, die ich kenne und die in mein Verständnis von Führung eingegangen sind, auch wenn ich kein vollständiges eigenes Pareto oder 5 Why vorzeigen kann. Ein bestätigtes Zertifikat habe ich nicht, weder Yellow noch Green noch Black Belt, und auch kein dokumentiertes Projekt, das alle fünf Phasen von DMAIC durchlaufen hätte. In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über ein 5 Why mit nur zwei dokumentierten „Warum“ geschrieben und darüber, warum ich die übrigen nicht ergänzt habe.
 
 ## Die fünf Phasen, so wie ich sie hatte
 

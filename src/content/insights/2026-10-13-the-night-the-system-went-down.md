@@ -45,9 +45,9 @@ corrections:
 
 On my first night of training at the hotel, I had come to learn the night processes. A little after midnight the hotel system became unavailable because of an update, and it stayed that way for about five hours, until close to morning.
 
-This is the only scene in this series that is not a picture. It happened, and I was there. What I can report is what a trainee could see: the practical training that could not go ahead normally, and the colleague who was training me explaining that the practical part would continue on the following shift. Beyond that I saw little, and I say so at each point where it matters.
+This is the only scene in this series that is not a picture. It happened, and I was there. What I can report is what a trainee could see: the practical training that could not go ahead normally, and the colleague who was training me explaining that the practical part would continue on the following shift.
 
-It was an interruption caused by an update, and I have no evidence of an unexpected fault. The title says “went down”, but what happened that night was more ordinary than a breakdown, and for that reason more useful to understand.
+It was an interruption caused by an update; nothing I saw pointed to an unexpected fault. The title says “went down”, but what happened that night was more ordinary than a breakdown, and for that reason more useful to understand.
 
 ## Five hours of waiting
 
@@ -61,15 +61,15 @@ In [How I built Front Desk Control](/insights/how-i-built-front-desk-control/) I
 
 ## What the team knew
 
-In the first essay of this series I promised an essay about “the night the system went down and we saw what the team really knew”. I have to be honest: I did not see that.
+In the first essay of this series I promised an essay about “the night the system went down and we saw what the team really knew”. I did not see that.
 
-I was in training, and I relied on my colleague. I do not know what information was used without the system, or whether it was written down anywhere. It would be easy to write that the staff kept everything they needed in their heads. I do not know that, and it is just the kind of sentence that sounds good and cannot be proved.
+I was in training, and I relied on my colleague. I do not know what information was used without the system, or whether it was written down anywhere. It would be easy to write that the staff kept everything they needed in their heads. It would sound good, and I cannot prove it.
 
 What I can say is smaller. From where I stood, a newcomer on the first night, I had no way of knowing what is done when the system is not there. I did not know where the procedure was, or whether there was one. That, for me, is the real finding of the night: what I did not know, and what nobody had had any reason to tell me before it happened.
 
 ## Coming back is not the end
 
-I do not know what was checked that night when the system came back. But there is a principle I would hold to.
+There is a principle I would hold to.
 
 Technically, the system coming back is not the end of the incident. The screen can be there again while work that should have been done in the hours without it is still waiting: issues left pending, information that still has to be entered. Before anyone says that everything is normal, it has to be confirmed, according to the authorised procedures, that the work can continue normally and that every open issue has someone responsible for it.
 
@@ -77,7 +77,7 @@ I made the same point about closing the day in [The report a machine wrote](/ins
 
 ## Communication
 
-The only communication I can confirm from that night is the one between my colleague and me: why we could not continue with the practical part, and when it would resume. Of the official notification chain I know nothing.
+The only communication I can confirm from that night is the one between my colleague and me: why we could not continue with the practical part, and when it would resume.
 
 The principle I hold to is simple, and it matters more at night than during the day: during an interruption, communication has to be clear and coordinated, and only the authorised people should carry it out. An interruption is the moment when everyone wants to say something, and when a wrong word to the wrong person costs more.
 
@@ -91,7 +91,7 @@ What I would do differently today lies in the days before that night. I would gi
 4. **How the open issues are documented and handed over, without breaching confidentiality.**
 5. **How it is confirmed that operations have resumed normally.**
 
-I would recommend preparing and learning these in advance; they are not procedures I applied that night. And I would add one thing to every newcomer's training: what is done on the day the system is not there, alongside how to work with it. The newcomer is the one who knows the least, and who has the least chance to ask.
+I would recommend preparing and learning these in advance. And I would add one thing to every newcomer's training: what is done on the day the system is not there, alongside how to work with it. The newcomer is the one who knows the least, and who has the least chance to ask.
 
 **A prepared operation is not one that pretends the system will never stop. It is one that knows how to keep responsibility and the continuity of the work when the system stops.**
 

@@ -41,9 +41,9 @@ corrections:
 
 Përfytyro një punonjës të porsaardhur në recepsion, në mes të një procesi që e ka parë vetëm një herë. Udhëzimi ekziston, por është diku mes një SOP-je, një videoje, disa fotografive dhe asaj që i shpjegoi një koleg dy net më parë. Procesi pret, ndërsa ai kërkon.
 
-Skena është përvoja ime e javëve të para në hotel, e shkruar si përfytyrim dhe jo e dokumentuar si incident, dhe është arsyeja pse nisa të ndërtoj një mjet timin.
+Skena është një tablo, e marrë nga javët e mia të para në hotel, dhe prej saj nisa të ndërtoj një mjet timin.
 
-Ky mjet është [Front Desk Control](/sq/insights/how-i-built-front-desk-control/), që e zhvillova në shtator 2026 për ta organizuar punën në Front Office dhe Night Audit: udhëzime SOP, lista kontrolli, kërkim informacioni dhe shpjegime vizuale me pamje nga proceset. Rreth tij punova me struktura për dorëzimin e turnit dhe raportet e natës, me organizimin e proceseve të parashikimit të mëngjesit (Breakfast Forecast), si dhe me lista kontrolli e udhëzime hap pas hapi. E përdor vetë. Nuk mund të them nëse kolegët e përdorin rregullisht.
+Ky mjet është [Front Desk Control](/sq/insights/how-i-built-front-desk-control/), që e zhvillova në shtator 2026 për ta organizuar punën në Front Office dhe Night Audit: udhëzime SOP, lista kontrolli, kërkim informacioni dhe shpjegime vizuale me pamje nga proceset. Rreth tij punova me struktura për dorëzimin e turnit dhe raportet e natës, me organizimin e proceseve të parashikimit të mëngjesit, si dhe me lista kontrolli e udhëzime hap pas hapi. E përdor vetë.
 
 Te eseja ku e përshkrova Front Desk Control, e paraqita si punë në zhvillim. Këtu pyetja është tjetër: çfarë ndodh me një mjet të tillë pasi ekziston, dhe kur pushon së qeni vetëm yti.
 
@@ -83,7 +83,7 @@ Front Desk Control ka kaluar nëpër disa versione. Kam punuar t'i përditësoj 
 
 Por ka një kufi që e shoh qartë: askush tjetër nuk është përgjegjës për ta përditësuar kur unë mungoj. Nëse vetëm unë e kuptoj dhe e përditësoj mjetin, ai mbetet i varur nga unë.
 
-Është ajo që shkrova te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) për shoferin me përvojë, vetëm se kësaj here jam unë. Dija që mbetet në një kokë nuk bëhet më pak e brishtë vetëm ngaqë është shkruar në një faqe që e mban vetëm një njeri. Dhe një udhëzim i vjetëruar në një mjet që duket i rregullt është më i rrezikshëm se një udhëzim që mungon, sepse askush nuk shkon ta kontrollojë dy herë. Nuk di asnjë rast ku një procedurë e vjetëruar në Front Desk Control të ketë shkaktuar gabim; rreziku qëndron te forma.
+Është ajo që shkrova te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) për shoferin me përvojë, vetëm se kësaj here jam unë. Dija që mbetet në një kokë nuk bëhet më pak e brishtë vetëm ngaqë është shkruar në një faqe që e mban vetëm një njeri. Dhe një udhëzim i vjetëruar në një mjet që duket i rregullt është më i rrezikshëm se një udhëzim që mungon, sepse askush nuk shkon ta kontrollojë dy herë.
 
 ## Pesë kushte para se ta ndash
 
@@ -95,10 +95,10 @@ Sot do ta ndaja më prerë zhvillimin personal nga përdorimi zyrtar. Për çdo 
 4. **Një përgjegjës për përditësimet dhe kontrollin e versioneve.** Dikë tjetër përveç meje.
 5. **Testim nga përdorues të tjerë** para se dikush të thotë që mjeti është gati për përdorim të përbashkët.
 
-Dhe suksesin nuk do ta matja vetëm me faktin që mjeti funksionon teknikisht. Do të doja të dija nëse u ndihmon punonjësve, nëse informacioni është i saktë dhe nëse mund të mirëmbahet edhe pa mua. Për Front Desk Control nuk kam ende përgjigje të matur për asnjërën prej tyre. Kjo është puna që mbetet.
+Dhe suksesin nuk do ta matja vetëm me faktin që mjeti funksionon teknikisht. Do të doja të dija nëse u ndihmon punonjësve, nëse informacioni është i saktë dhe nëse mund të mirëmbahet edhe pa mua. Këtë duhet ta mas ende te Front Desk Control: kjo është puna që mbetet.
 
 ## Para se ta ndash mjetin tënd
 
-Kartela më poshtë vlen për çdo mjet që e ke ndërtuar për veten dhe që mendon se mund t'u shërbejë edhe të tjerëve. Plotësoje para se ta japësh mjetin, jo pasi të jetë përhapur. [Dorëzimi i turnit](/sq/tools/shift-handover/) është një shembull mjeti që mban metodën dhe jo të dhënat e askujt tjetër: dorëzimet mbeten në shfletuesin tënd dhe asgjë nuk dërgohet apo ngarkohet.
+Karta më poshtë vlen për çdo mjet që e ke ndërtuar për veten dhe që mendon se mund t'u shërbejë edhe të tjerëve. Plotësoje para se ta japësh mjetin, jo pasi të jetë përhapur. [Dorëzimi i turnit](/sq/tools/shift-handover/) është një shembull mjeti që mban metodën dhe jo të dhënat e askujt tjetër: dorëzimet mbeten në shfletuesin tënd dhe asgjë nuk dërgohet apo ngarkohet.
 
 Nëse një mjet i vogël është bërë pjesë e punës, kjo duket natën kur mungon ai që e ndërtoi: kur dikush tjetër e hap, mund t'i besojë asaj që thotë dhe e di kush e mban të përditësuar.

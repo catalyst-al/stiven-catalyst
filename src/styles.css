@@ -7709,6 +7709,16 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   line-height: 1.4;
 }
 .has-image .article-byline { margin-left: 0; }
+/* How the essays are written (layouts/article.njk), said once under the byline instead of in the text. */
+.article-method {
+  max-width: 720px;
+  margin: 14px 0 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.article-method a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.has-image .article-method { margin-left: 0; }
 /* A correction of the essay (layouts/article.njk): in the column of the deck and the byline. */
 .article-hero-text .book-corrections { max-width: 720px; margin: 24px 0 0 auto; }
 .has-image .article-hero-text .book-corrections { margin-left: 0; }

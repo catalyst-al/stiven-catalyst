@@ -5,7 +5,7 @@ category: Operacione
 status: published
 featured: true
 summary: Në Excel, një porosi e paplotë është një numër. Në rampë është një objekt fizik në vendin e gabuar.
-teaser: Dashboard-i thoshte “incomplete delivery”. Terreni të detyronte të pyesje nëse gabimi kishte ndodhur te dera e klientit apo që në magazinë.
+teaser: Paneli i treguesve thoshte “incomplete delivery”. Terreni të detyronte të pyesje nëse gabimi kishte ndodhur te dera e klientit apo që në magazinë.
 deck: 'Eseja e tretë e serisë “Dhjetë vite pranë punës”: pse duhet të shkosh aty ku ndodh procesi, para se të kërkosh rezultat nga një tabelë.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
@@ -32,17 +32,17 @@ checklist:
 diagram: table-to-ramp
 ---
 
-Raporti tregonte diçka shumë të thjeshtë: klienti nuk e kishte marrë porosinë të plotë. Incomplete. Po ta shohësh vetëm përmes KPI-së, mendimi i parë vjen vetvetiu: shoferi ka harruar një çantë gjatë dorëzimit.
+Raporti tregonte diçka shumë të thjeshtë: klienti nuk e kishte marrë porosinë të plotë. Incomplete. Po ta shohësh vetëm përmes KPI-së, mendimi i parë të vjen vetvetiu: shoferi ka harruar një çantë gjatë dorëzimit.
 
 Por kur kontrollon procesin fizik, tabloja ndryshon.
 
 Në një nga rastet që dokumentuam, mungonte një çantë nga një sektor i magazinës. Në raste të tjera, çantat rezultonin të skanuara, por ishte marrë ose dorëzuar çanta e gabuar. Gjetëm edhe karroca të përziera në magazinë, madje edhe një karrocë të plotë që mungonte nga rrjedha normale e ngarkimit.
 
-Dashboard-i thoshte “incomplete delivery”. Në rampë lindte një pyetje tjetër: a ishte gabim i shoferit te dera e klientit, apo porosia kishte dalë e paplotë që nga magazina? Në këtë pyetje qëndron i gjithë dallimi mes një tabele dhe një operacioni.
+Paneli i treguesve thoshte “incomplete delivery”. Në rampë lindte një pyetje tjetër: a ishte gabim i shoferit te dera e klientit, apo porosia kishte dalë e paplotë që nga magazina? Në këtë pyetje qëndron i gjithë dallimi mes një tabele dhe një operacioni.
 
 {diagram}
 
-Tabela mund të të thotë: incomplete = 1. Nuk mund të të thotë çfarë mund të ketë ndodhur fizikisht: çanta u përgatit, hyri në proces, ndoshta madje u skanua, e pastaj përfundoi në karrocën e gabuar ose në itinerarin e gabuar. Në Excel, gabimi është një numër. Në rampë, ka një adresë, dhe kjo adresë nuk del gjithmonë në panelin e treguesve.
+Tabela mund të të thotë: incomplete = 1. Nuk mund të të thotë çfarë mund të ketë ndodhur fizikisht: çanta u përgatit, hyri në proces, ndoshta madje u skanua, e pastaj përfundoi në karrocën e gabuar ose në itinerarin e gabuar. Në Excel, gabimi është një numër. Në rampë, ka një adresë, dhe kjo adresë nuk del gjithmonë në panel.
 
 Kur doja ta kuptoja një problem operacional, e lija tabelën mënjanë dhe shkoja aty ku ndodhte procesi, që do të thoshte kryesisht rampa dhe zona e ngarkimit.
 
@@ -60,6 +60,6 @@ Mësova se një version i vetëm nuk mjafton, as ai i tabelës, as ai i një per
 
 Dhe ajo që sheh duhet shënuar, përndryshe nesër është vetëm një kujtim. Për operacionin shkruaja raporte ditore të strukturuara, ku çdo rast shtohej me të njëjtën strukturë si i mëparshmi. Rastet e veçanta kalonin në komunikim operacional me shkrim, me përshkrimin e incidentit dhe të shkakut. Fotot dhe pamjet e ekranit i përdornim kur duheshin për të dokumentuar situata reale: trafik ose parkim në rrugë, por edhe probleme fizike në rampë, si karroca të çrregullta, kuti ose karroca në vend të gabuar, porta të hapura ose një zonë ngarkimi e organizuar keq.
 
-Me kalimin e kohës, kontrollet u bënë shumë më të strukturuara: përputhja e çdo karroce me itinerarin e saj, kontrolli i mallrave të thata, të ftohura dhe të ngrira, auditimet e rampës, analiza me Pareto dhe 5 Why. Paraskanimin dhe kontrollet përfundimtare të plotësisë i rekomandova; nuk mund të them se u zbatuan. Më vonë punova edhe me struktura më të organizuara, ku çdo rast kishte incidentin, veprimin, shkakun dhe ndjekjen e KPI-së. Të gjitha këto lindën nga ajo që shihej në rampë.
+Me kalimin e kohës, kontrollet u bënë shumë më të strukturuara: përputhja e çdo karroce me itinerarin e saj, kontrolli i mallrave të thata, të ftohura dhe të ngrira, auditimet e rampës, analiza me Pareto dhe 5 Why. Paraskanimin dhe kontrollet përfundimtare të plotësisë i rekomandova, por nuk mund të them nëse u zbatuan. Më vonë punova edhe me struktura më të organizuara, ku çdo rast kishte incidentin, veprimin, shkakun dhe ndjekjen e KPI-së. Të gjitha këto lindën nga ajo që shihej në rampë.
 
 Tabela gjithsesi ka vlerën e saj: pa të nuk do ta dije as që duhet të shkosh në rampë. Por tabela është pika e nisjes, jo përgjigjja. Po ta trajtosh numrin si përgjigje, e ndëshkon shoferin për një çantë që nuk ka qenë kurrë në karrocën e tij.

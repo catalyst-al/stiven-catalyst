@@ -8,7 +8,7 @@ featured: true
 summary: Një SOP bëhet e dobishme kur personi që ka nevojë për të mund ta gjejë, ta kuptojë dhe ta zbatojë në momentin e duhur.
 description: "Rasti konkret i serisë: si i ktheva listat e kontrollit dhe shënimet e shpërndara në një faqe për Front Office dhe Night Audit, dhe çfarë do të bëja ndryshe."
 teaser: Nuk e ndërtova sepse mungonin dokumentet. Dokumentet ekzistonin, por informacioni që më duhej gjatë punës ishte i shpërndarë.
-deck: 'Eseja e nëntë e serisë “Operacioni që punon pa ty”: një projekt real, i zhvilluar hap pas hapi, i paraqitur si punë në zhvillim dhe jo si sukses i matur, me kartën për ta kthyer një dosje me SOP në një mjet pune.'
+deck: 'Eseja e nëntë e serisë “Operacioni që punon pa ty”: një projekt real, i zhvilluar hap pas hapi dhe ende i papërfunduar, me kartën për ta kthyer një dosje me SOP në një mjet pune.'
 checklist:
   title: Karta e organizimit të SOP-ve
   fill: true
@@ -67,15 +67,15 @@ Pamjet e ekranit kishin punën e tyre. Duhej të tregonin të njëjtin hap që s
 
 Versioni publik nuk mund të përfshinte të dhëna reale të mysafirëve, rezervime, informacione pagesash, kredenciale, dokumente konfidenciale apo materiale që mund ta zbulonin operacionin e brendshëm. Kjo ndarje është thelbësore.
 
-**Mund ta tregosh metodën e organizimit të informacionit pa e publikuar informacionin e ndjeshëm mbi të cilin mbështetet puna.**
+**Mund ta tregosh metodën e organizimit të informacionit pa e publikuar informacionin e ndjeshëm ku mbështetet puna.**
 
 ## Çfarë do të bëja ndryshe sot
 
-I konfirmuar është vetëm përdorimi im, ndërsa e ndërtoja mjetin dhe mësoja; sa ka ndikuar në kohën e trajnimit apo në gabimet nuk është matur. Më ndihmoi ta sillja informacionin në një strukturë më të qartë. Mund t'i hyjë në punë edhe dikujt që është në trajnim, por kjo mbetet mundësi, dhe nuk mund të them se departamenti e mori në përdorim.
+I vetmi përdorim që mund ta konfirmoj është i imi, ndërsa e ndërtoja mjetin dhe mësoja. Më ndihmoi ta sillja informacionin në një strukturë më të qartë. Mund t'i hyjë në punë edhe dikujt që është në trajnim; për tani kjo është një mundësi.
 
 Sot do ta nisja edhe më herët strukturën e informacionit, para se të merresha me pamjen e faqes. Fillimisht do të përcaktoja cilat pyetje lindin më shpesh gjatë një turni dhe cilat procedura kanë më shumë rëndësi, e pastaj do t'i ndërtoja përgjigjet rreth këtyre nevojave.
 
-Do t'i ndaja gjithashtu më qartë tri kategori. Këtë e rekomandoj sot; projekti nuk e ka ende plotësisht:
+Do t'i ndaja gjithashtu më qartë tri kategori:
 
 - **E konfirmuar:** procedura është kontrolluar dhe dokumentuar.
 - **Në verifikim:** materiali ekziston, por duhet kontrolluar në praktikë.

@@ -44,11 +44,11 @@ This essay opens the series “Improvement that holds”, and an improvement tha
 
 ## How we followed it
 
-We followed Damage in the operational reports and in the daily stand-up. We analysed it alongside the other indicators and the everyday problems of the operation. I have two figures on record: April's, and 0.97% in a June 2025 report. Two reports are not a series, so I cannot say whether the change was a trend, the season or chance, and I do not present it as the direct result of what I did.
+We followed Damage in the operational reports and in the daily stand-up. We analysed it alongside the other indicators and the everyday problems of the operation. I have two figures on record: April's, and 0.97% in a June 2025 report. Two reports are not a series, and I do not present the change as the result of what I did.
 
 The problems we saw were operational: how the load was organised, how the trolleys were used, how the products were placed. The operation had standards for safety, for organising the ramp, for loading and for handling products. The Shift Leaders and dispatchers followed the operational problems, and coordinating with the DSPs was part of the daily work.
 
-In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about the measures that came out of the loading cases in that period. Where most of the damage happened, I do not know precisely. I have no documented case in which I could describe the damage, the cause and the corrective action without inventing details, and no exact record of the changes I put in place myself or of how each group's behaviour changed, so I do not write any of it up here as a success story.
+In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about the measures that came out of the loading cases in that period. Where most of the damage happened, I do not know precisely.
 
 ## A percentage has no address
 

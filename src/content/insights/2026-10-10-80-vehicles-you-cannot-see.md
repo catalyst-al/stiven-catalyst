@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: A problem you cannot see
   fill: true
-  note: A guide to how I would do it today. It is not a documented method from my current role.
+  note: How I would do it today.
   items:
     - label: What do I know for sure, and what has been reported to me?
       hint: The fact and the report about the fact are not the same thing.
@@ -60,7 +60,7 @@ Distance has its gains too.
 
 On the ramp you see well what is in front of you. From a distance, if the information and the tools support it, you can see the coordination of many tours as one operation: all the vans at once, and whether delays are gathering somewhere rather than one delay at a time.
 
-That view depends on the information you receive being sufficient and reliable. Which systems we use and what they show, like the channels and the shift times, I leave out: they are internal details, and some of them I do not know precisely.
+That view depends on the information you receive being sufficient and reliable. I do not describe which systems we use and what they show, nor the channels and the shift times; some of them I do not know precisely.
 
 ## Information becomes the work
 
@@ -70,11 +70,11 @@ From a distance, three things matter even more than on the ramp: the quality of 
 
 On the ramp, you can make up for unclear information by going to look. From a distance, you cannot. Unclear information stays unclear, and so does any decision you take on it.
 
-As for communication, I have no documented rules of my own, but I believe it should be short, clear, and say which action is needed. A message that needs three follow-up questions to be understood has lost the time it was supposed to save.
+Communication, I believe, should be short, clear, and say which action is needed. A message that needs three follow-up questions to be understood has lost the time it was supposed to save.
 
 ## What I would watch for
 
-From the remote role I have no incident documented from start to resolution, and no documented method for spotting problems early. The documented cases I do have, with vehicles and with delays, come from my earlier work in last mile, and I do not present them as solved from a distance. Today I would pay attention to three things.
+Today I would pay attention to three things.
 
 **Deviations that repeat.** One delay is an event. The same delay, in the same place, several days in a row, is a pattern.
 

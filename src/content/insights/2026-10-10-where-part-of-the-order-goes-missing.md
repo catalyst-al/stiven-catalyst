@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: The check before departure
   copy: Copy the checklist
-  note: Measures I would recommend today, not changes I put in place myself.
+  note: What I would recommend today.
   items:
     - Every bag can be identified and is linked to its order.
     - The number of bags matches what has to be loaded.
@@ -43,11 +43,11 @@ That rule says something the report does not: a missing bag is often found at th
 
 In [How we worked with damage](/insights/how-we-worked-with-damage/) I wrote that a percentage has no address. The same is true of Incomplete, with one important difference: here there is a moment when the problem can still be stopped.
 
-I understood Incomplete as an order that did not reach the customer complete; the official formula and the exact counting rules I never knew. The reports give me these figures: in April 2025, Incomplete was 1.18% against a 0.8% target, and in a June 2025 report it was 0.63%, with 13 cases. They do not say which measures brought the change, so I do not claim it as the result of my work, and I cannot say through which channel and system each case was recorded, or which problem occurred most often.
+I understood Incomplete as an order that did not reach the customer complete; the official formula I never knew. The reports give me these figures: in April 2025, Incomplete was 1.18% against a 0.8% target, and in a June 2025 report it was 0.63%, with 13 cases. They do not say which measures brought the change, so I do not claim it as the result of my work.
 
 ## What we found in the warehouse
 
-I can confirm two problems: bags that were missing, and trolleys that were mixed or wrongly organised. We did have trouble with how loads were prepared and organised, but I have no investigation on record that traced a case first put down to the driver back to the warehouse.
+I can confirm two problems: bags that were missing, and trolleys that were mixed or wrongly organised, though I have no case on record traced from the driver back to the warehouse. We did have trouble with how loads were prepared and organised.
 
 Neither problem starts at the customer's door. A missing bag went missing somewhere earlier: in preparation, on the trolley or during loading. A mixed trolley was organised badly before it reached the driver. Yet if nobody stops them, both end up on the same line of the report: an order that reached the customer incomplete.
 
@@ -77,7 +77,7 @@ This is where Incomplete differs from damage. Damage has already happened by the
 
 ## The check before departure
 
-What I would recommend today, rather than something I put in place myself, is a clear check before the van leaves. Five points:
+Today I would recommend a clear check before the van leaves. Five points:
 
 1. **Every bag can be identified** and is linked to its order.
 2. **The number of bags matches** what has to be loaded.

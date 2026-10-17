@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: Before you change the process
   fill: true
-  note: A guide to how I would do it today, not a method I have on record as having used.
+  note: How I would do it today.
   items:
     - label: Is there an immediate safety or service problem?
       hint: If so, step in now. The analysis comes after.
@@ -54,7 +54,7 @@ It depends. Every process varies. No two days come out the same, even when nobod
 
 That is the idea behind a control chart. It plots the days one after another, with the average and two limits that show how far the process usually varies. A day inside the limits is most likely ordinary variation. A day outside them, or several days in a row on the same side of the average, suggests that something may have changed.
 
-Whether I used such a chart myself, with control limits, I cannot reconstruct, any more than how we chose between waiting and acting back then: whether we let a result repeat before stepping in, or followed daily or weekly trends in Excel or Power BI. What follows is how I would read a bad day today.
+What follows is how I would read a bad day today.
 
 ## Two opposite mistakes
 
@@ -82,7 +82,7 @@ Third: have we found a concrete cause before we change the process?
 
 ## Volume, weather and the process
 
-In last mile we tracked operational causes: missing bags, mixed trolleys, delays in preparation, problems during loading. I know of no documented method we used to separate the effect of weather and volume from a problem in the process.
+In last mile we tracked operational causes: missing bags, mixed trolleys, delays in preparation, problems during loading.
 
 Today, before settling on a cause, I would compare the result with the volume of work, the conditions of the day and the data from the days before. 2.8% delays on a day with exceptional volume does not mean the same as 2.8% on an ordinary day.
 

@@ -40,7 +40,7 @@ const pages = [
     id: "ai", part: 1, image: { src: `/media/magazine/${slug}/art/manager.jpg`, width: 495, height: 550 },
     kicker: x("Cover story", "Tema kryesore", "Titelthema"),
     title: [x("The manager", "Menaxheri", "Die Führungskraft"), x("in the age of AI", "në epokën e AI-së", "im Zeitalter der KI")],
-    lead: x("How work is being redesigned, and what leaders must keep human.", "Si po riorganizohet puna dhe çfarë duhet të mbajnë njerëzore drejtuesit.", "Wie Arbeit neu gestaltet wird und was Führung menschlich halten muss."),
+    lead: x("How work is being redesigned, and what leaders must keep human.", "Si po riorganizohet puna dhe çfarë duhet ta ruajnë drejtuesit si punë të njeriut.", "Wie Arbeit neu gestaltet wird und was Führung menschlich halten muss."),
     blocks: [
       { type: "p", text: x(
         "AI is changing the tools we work with, and with them how work is divided, how results are measured and how decisions are made. The new manager asks two questions: what can be automated, and what must stay human.",
@@ -51,7 +51,7 @@ const pages = [
           p: x("Let AI remove repetitive work, but keep people accountable for results, ethics and impact.", "Lëre AI-në të heqë punën që përsëritet, por mbaji njerëzit përgjegjës për rezultatet, etikën dhe ndikimin.", "Überlassen Sie KI die wiederkehrende Arbeit. Für Ergebnisse, Ethik und Wirkung bleiben Menschen verantwortlich.") },
         { h: x("Redesign how work flows", "Riorganizo rrjedhën e punës", "Den Arbeitsfluss neu gestalten"),
           p: x("Rethink how work moves between people, AI and processes. A new task list is not enough.", "Rimendo si kalon puna mes njerëzve, AI-së dhe proceseve. Një listë e re detyrash nuk mjafton.", "Denken Sie neu, wie Arbeit zwischen Menschen, KI und Prozessen läuft. Eine neue Aufgabenliste reicht nicht.") },
-        { h: x("Keep judgment, trust and context human", "Mbaj njerëzore gjykimin, besimin dhe kontekstin", "Urteil, Vertrauen und Kontext menschlich halten"),
+        { h: x("Keep judgment, trust and context human", "Gjykimi, besimi dhe konteksti mbeten te njeriu", "Urteil, Vertrauen und Kontext menschlich halten"),
           p: x("Use AI for speed and scale, but keep judgment, trust and context in the hard decisions.", "Përdore AI-në për shpejtësi dhe shtrirje, por ruaj gjykimin, besimin dhe kontekstin në vendimet e vështira.", "Nutzen Sie KI für Tempo und Skalierung, aber bewahren Sie Urteil, Vertrauen und Kontext bei schwierigen Entscheidungen.") },
       ] },
       { type: "quote", text: x("A great manager designs the boundary between human judgment and machine speed.", "Një menaxher i mirë e përcakton vetë kufirin mes gjykimit njerëzor dhe shpejtësisë së makinës.", "Eine gute Führungskraft gestaltet die Grenze zwischen menschlichem Urteil und maschinellem Tempo.") },
@@ -68,16 +68,16 @@ const pages = [
           p: x("AI is moving from individual help to running multi-step workflows.", "AI po kalon nga ndihma për individin te kryerja e rrjedhave të punës me disa hapa.", "KI entwickelt sich von der Hilfe für Einzelne zur Ausführung mehrstufiger Abläufe.") },
         { h: x("Middle management is being redefined", "Menaxhimi i mesëm po ripërkufizohet", "Das mittlere Management wird neu definiert"),
           p: x("The role is shifting from administrative coordination to judgment, coaching and prioritisation.", "Roli po zhvendoset nga koordinimi administrativ te gjykimi, mentorimi dhe prioritizimi.", "Die Rolle verschiebt sich von administrativer Koordination zu Urteil, Coaching und Priorisierung.") },
-        { h: x("Skills beat job descriptions", "Aftësitë mbi përshkrimet e punës", "Fähigkeiten zählen mehr als Stellenbeschreibungen"),
+        { h: x("Skills beat job descriptions", "Aftësitë para përshkrimeve të punës", "Fähigkeiten zählen mehr als Stellenbeschreibungen"),
           p: x("Companies look for adaptability and transferable skills, not only titles.", "Kompanitë po kërkojnë përshtatshmëri dhe aftësi të transferueshme, jo vetëm tituj.", "Unternehmen suchen Anpassungsfähigkeit und übertragbare Fähigkeiten, nicht nur Titel.") },
         { h: x("Productivity pressure is rising", "Presioni për produktivitet po rritet", "Der Produktivitätsdruck steigt"),
           p: x("More data and more visibility raise the pressure on managers.", "Më shumë të dhëna dhe më shumë dukshmëri rrisin presionin mbi menaxherët.", "Mehr Daten und mehr Sichtbarkeit erhöhen den Druck auf Führungskräfte.") },
         { h: x("Culture becomes an AI issue", "Kultura bëhet çështje e AI-së", "Kultur wird zur KI-Frage"),
           p: x("How people work together is becoming part of the return on AI.", "Mënyra si njerëzit bashkëpunojnë po bëhet pjesë e kthimit nga investimi në AI.", "Wie Menschen zusammenarbeiten, wird Teil der Rendite von KI.") },
       ] },
-      { type: "box", title: x("What should a leader do?", "Çfarë duhet të bëjë një lider?", "Was sollte eine Führungskraft tun?"), items: [
+      { type: "box", title: x("What should a leader do?", "Çfarë duhet të bëjë një drejtues?", "Was sollte eine Führungskraft tun?"), items: [
         x("Clarify how decisions are made.", "Qartëso si merren vendimet.", "Klären Sie, wie Entscheidungen fallen."),
-        x("Turn trends into work standards.", "Ktheji trendet në standarde pune.", "Übersetzen Sie Trends in Arbeitsstandards."),
+        x("Turn trends into work standards.", "Ktheji prirjet në standarde pune.", "Übersetzen Sie Trends in Arbeitsstandards."),
         x("Watch the impact on people, not only the output.", "Shiko ndikimin te njerëzit, jo vetëm rezultatin.", "Achten Sie auf die Wirkung auf Menschen, nicht nur auf die Ergebnisse."),
       ] },
     ],
@@ -96,7 +96,7 @@ const pages = [
       { type: "cards", cols: 2, items: [
         { h: x("From personal productivity to process redesign", "Nga produktiviteti personal te riprojektimi i procesit", "Von persönlicher Produktivität zum Prozessdesign"),
           p: x("From individual time saved to a simpler core process.", "Nga fitimi individual i kohës te thjeshtimi i procesit kryesor.", "Von individueller Zeitersparnis zu einem einfacheren Kernprozess.") },
-        { h: x("From faster output to clearer decision rights", "Nga rezultati më i shpejtë te të drejta vendimi më të qarta", "Von schnelleren Ergebnissen zu klaren Entscheidungsrechten"),
+        { h: x("From faster output to clearer decision rights", "Nga rezultati më i shpejtë te qartësia se kush vendos", "Von schnelleren Ergebnissen zu klaren Entscheidungsrechten"),
           p: x("Speed is not enough. It must be clear who decides, when and on what basis.", "Shpejtësia nuk mjafton. Duhet të jetë e qartë kush vendos, kur dhe mbi çfarë baze.", "Tempo reicht nicht. Es muss klar sein, wer entscheidet, wann und auf welcher Grundlage.") },
         { h: x("From isolated use to team-wide standards", "Nga përdorimi i veçuar te standardet e ekipit", "Von Einzelnutzung zu Teamstandards"),
           p: x("Value grows when individual use becomes a shared way of working.", "Vlera rritet kur përdorimi individual kthehet në mënyrë pune të përbashkët.", "Der Wert wächst, wenn Einzelnutzung zu einer gemeinsamen Arbeitsweise wird.") },
@@ -111,14 +111,14 @@ const pages = [
     id: "numbers", part: 1,
     kicker: x("At a glance", "Me një shikim", "Auf einen Blick"),
     title: [x("The", "Shifrat", "Die"), x("numbers", "e botimit", "Zahlen")],
-    lead: x("The figures behind this edition, each with its source.", "Shifrat që mbajnë këtë botim, secila me burimin e vet.", "Die Zahlen hinter dieser Ausgabe, jede mit ihrer Quelle."),
+    lead: x("The figures behind this edition, each with its source.", "Shifrat që e mbajnë në këmbë këtë botim, secila me burimin e vet.", "Die Zahlen hinter dieser Ausgabe, jede mit ihrer Quelle."),
     blocks: [
       { type: "stats", cols: 2, items: [
         { n: pc(66), t: x("of AI users say AI gives them more time for high-value work.", "e përdoruesve të AI-së thonë se AI u jep më shumë kohë për punë me vlerë të lartë.", "der KI-Nutzenden sagen, dass KI ihnen mehr Zeit für wertvolle Arbeit gibt."), by: "Microsoft" },
         { n: pc(58), t: x("say AI helps them produce work they could not have done a year ago.", "thonë se AI i ndihmon të bëjnë punë që nuk mund ta bënin një vit më parë.", "sagen, dass sie mit KI Arbeit leisten, die vor einem Jahr nicht möglich war."), by: "Microsoft" },
         { n: pc(40), t: x("higher productivity growth in the companies most exposed to AI.", "rritje më e lartë e produktivitetit te kompanitë më të ekspozuara ndaj AI-së.", "höheres Produktivitätswachstum in den am stärksten KI-exponierten Unternehmen."), by: "PwC" },
         { n: pc(85), t: x("of leaders say building adaptability is critical.", "e drejtuesve thonë se ndërtimi i përshtatshmërisë është kritik.", "der Führungskräfte halten den Aufbau von Anpassungsfähigkeit für entscheidend."), by: "Deloitte" },
-        { n: pc(7), t: x("say they are leading in helping their workforce grow and adapt.", "thonë se janë në pararojë kur bëhet fjalë për t'i ndihmuar njerëzit e tyre të rriten dhe të përshtaten.", "sehen sich als führend darin, ihre Belegschaft beim Wachsen und Anpassen zu unterstützen."), by: "Deloitte" },
+        { n: pc(7), t: x("say they are leading in helping their workforce grow and adapt.", "thonë se prijnë kur vjen puna te ndihma për njerëzit e tyre, që të rriten dhe të përshtaten.", "sehen sich als führend darin, ihre Belegschaft beim Wachsen und Anpassen zu unterstützen."), by: "Deloitte" },
         { n: pc(65), t: x("of organisations believe their culture needs significant change because of AI.", "e organizatave besojnë se kultura e tyre duhet të ndryshojë ndjeshëm për shkak të AI-së.", "der Organisationen glauben, dass sich ihre Kultur wegen KI deutlich ändern muss."), by: "Deloitte" },
       ] },
       { type: "callout", label: x("For the manager", "Për menaxherin", "Für die Führungskraft"),
@@ -130,7 +130,7 @@ const pages = [
     id: "human", part: 1,
     kicker: x("Human × machine", "Njeriu × makina", "Mensch × Maschine"),
     title: [x("Who decides", "Kush vendos", "Wer entscheidet"), x("what?", "çfarë?", "was?")],
-    lead: x("Handing work to AI blindly is easy. A good manager first draws the line between machine speed and human judgment.", "T'ia lësh punën verbërisht AI-së është e lehtë. Menaxheri i mirë e heq më parë vijën midis shpejtësisë së makinës dhe gjykimit njerëzor.", "Arbeit blind an KI abzugeben ist leicht. Eine gute Führungskraft zieht zuerst die Grenze zwischen maschinellem Tempo und menschlichem Urteil."),
+    lead: x("Handing work to AI blindly is easy. A good manager first draws the line between machine speed and human judgment.", "E lehtë është t'ia lësh punën AI-së verbërisht. Menaxheri i mirë e heq që më parë vijën mes shpejtësisë së makinës dhe gjykimit njerëzor.", "Arbeit blind an KI abzugeben ist leicht. Eine gute Führungskraft zieht zuerst die Grenze zwischen maschinellem Tempo und menschlichem Urteil."),
     blocks: [
       { type: "lists", cols: [
         { h: x("Best for AI", "Më e mira për AI-në", "Am besten für KI"), items: [
@@ -189,7 +189,7 @@ const pages = [
         { n: pc(40), t: x("higher productivity growth in the companies most exposed to AI than in the least exposed.", "rritje më e lartë e produktivitetit te kompanitë më të ekspozuara ndaj AI-së, krahasuar me ato më pak të ekspozuara.", "höheres Produktivitätswachstum in den am stärksten KI-exponierten Unternehmen als in den am wenigsten exponierten.") },
         { n: x("2×", "2×", "2×"), t: x("Skills in the most AI-exposed jobs are changing more than twice as fast.", "Aftësitë te punët më të ekspozuara ndaj AI-së po ndryshojnë më shumë se dy herë më shpejt.", "Die Fähigkeiten in den am stärksten KI-exponierten Jobs ändern sich mehr als doppelt so schnell.") },
         { n: x("7×", "7×", "7×"), t: x("In the US, AI-exposed junior roles are seven times more likely to ask for skills that used to be senior, such as leadership.", "Në SHBA, rolet fillestare të ekspozuara ndaj AI-së kanë shtatë herë më shumë gjasa të kërkojnë aftësi që dikur u kërkoheshin vetëm punonjësve me përvojë, si udhëheqja.", "In den USA verlangen KI-exponierte Einstiegsrollen siebenmal häufiger Fähigkeiten, die früher Senior-Rollen vorbehalten waren, etwa Führung.") },
-        { n: x("2.5×", "2,5×", "2,5×"), t: x("The most AI-exposed jobs are adding tasks that rely on empathy, judgment and creativity 2.5 times faster.", "Punët më të ekspozuara ndaj AI-së po shtojnë 2,5 herë më shpejt detyra që mbështeten te empatia, gjykimi dhe kreativiteti.", "In den am stärksten KI-exponierten Jobs kommen Aufgaben, die Empathie, Urteil und Kreativität brauchen, 2,5-mal schneller hinzu.") },
+        { n: x("2.5×", "2,5×", "2,5×"), t: x("The most AI-exposed jobs are adding tasks that rely on empathy, judgment and creativity 2.5 times faster.", "Punët më të ekspozuara ndaj AI-së po shtojnë 2,5 herë më shpejt detyra që mbështeten në empati, gjykim dhe kreativitet.", "In den am stärksten KI-exponierten Jobs kommen Aufgaben, die Empathie, Urteil und Kreativität brauchen, 2,5-mal schneller hinzu.") },
       ] },
       { type: "callout", label: x("What it means for managers", "Çfarë do të thotë për menaxherët", "Was das für Führungskräfte bedeutet"),
         text: x("When you take tasks out of a role, plan what the person learns next and which bigger responsibility they grow into.", "Kur heq detyra nga një rol, planifiko çfarë do të mësojë personi më pas dhe në cilën përgjegjësi më të madhe do të rritet.", "Wenn Sie Aufgaben aus einer Rolle herausnehmen, planen Sie, was die Person als Nächstes lernt und in welche größere Verantwortung sie hineinwächst.") },
@@ -219,13 +219,13 @@ const pages = [
     id: "squeeze", part: 2,
     kicker: x("People and performance", "Njerëzit dhe performanca", "Menschen und Leistung"),
     title: [x("The manager", "Angazhimi i menaxherëve", "Das Engagement der"), x("engagement squeeze", "nën presion", "Führungskräfte schrumpft")],
-    lead: x("Managers used to have an engagement advantage. In 2025 it almost disappeared.", "Menaxherët dikur kishin një avantazh angazhimi. Në 2025 ky avantazh pothuajse u zhduk.", "Führungskräfte hatten früher einen Engagement-Vorsprung. 2025 ist er fast verschwunden."),
+    lead: x("Managers used to have an engagement advantage. In 2025 it almost disappeared.", "Menaxherët dikur kishin një avantazh angazhimi. Më 2025 ky avantazh pothuajse u zhduk.", "Führungskräfte hatten früher einen Engagement-Vorsprung. 2025 ist er fast verschwunden."),
     blocks: [
       { type: "bars", label: x("Engaged managers worldwide", "Menaxherë të angazhuar në botë", "Engagierte Führungskräfte weltweit"), max: 35, items: [
         { k: "2022", v: 31, n: pc(31) }, { k: "2023", v: 30, n: pc(30) }, { k: "2024", v: 27, n: pc(27) }, { k: "2025", v: 22, n: pc(22), alert: true },
       ] },
       { type: "stats", cols: 2, items: [
-        { n: pc(20), t: x("of employees worldwide were engaged in 2025.", "e punonjësve në botë ishin të angazhuar në 2025.", "der Beschäftigten weltweit waren 2025 engagiert.") },
+        { n: pc(20), t: x("of employees worldwide were engaged in 2025.", "e punonjësve në botë ishin të angazhuar më 2025.", "der Beschäftigten weltweit waren 2025 engagiert.") },
         { n: pc(79), t: x("of managers were engaged in Gallup's best-practice organisations.", "e menaxherëve ishin të angazhuar në organizatat me praktikat më të mira sipas Gallup-it.", "der Führungskräfte waren in Gallups Best-Practice-Organisationen engagiert.") },
       ] },
       { type: "callout", label: x("Why it matters", "Pse ka rëndësi", "Warum das wichtig ist"),
@@ -250,7 +250,7 @@ const pages = [
         { n: pc(11), t: x("less likely to be actively looking or watching for a new job", "më pak gjasa të kërkojnë aktivisht një punë tjetër ose të jenë në pritje të një rasti", "geringer, dass sie aktiv eine neue Stelle suchen oder nach einer Ausschau halten") },
       ] },
       { type: "callout", label: x("One practical move", "Një hap praktik", "Ein praktischer Schritt"),
-        text: x("Build onboarding for new managers that covers prioritising, feedback, coaching, delegation and escalation. Do not let them learn the role only by burning out in it.", "Ndërto për menaxherët e rinj një program hyrjeje në rol që mbulon prioritizimin, reagimet, mentorimin, delegimin dhe përshkallëzimin. Mos i lër ta mësojnë rolin vetëm duke u rraskapitur në të.", "Bauen Sie für neue Führungskräfte eine Einarbeitung auf, die Priorisieren, Feedback, Coaching, Delegieren und Eskalieren abdeckt. Lassen Sie sie die Rolle nicht nur dadurch lernen, dass sie darin ausbrennen.") },
+        text: x("Build onboarding for new managers that covers prioritising, feedback, coaching, delegation and escalation. Do not let them learn the role only by burning out in it.", "Ndërto për menaxherët e rinj një program hyrjeje në rol që mbulon prioritizimin, reagimet, mentorimin, delegimin dhe çuarjen e çështjeve lart. Mos i lër ta mësojnë rolin vetëm duke u rraskapitur.", "Bauen Sie für neue Führungskräfte eine Einarbeitung auf, die Priorisieren, Rückmeldung, Anleitung, Delegieren und Eskalieren abdeckt. Lassen Sie sie die Rolle nicht nur dadurch lernen, dass sie darin ausbrennen.") },
     ],
     source: sourceLine("frontline"),
   },
@@ -271,7 +271,7 @@ const pages = [
           ["25+", pc(37), pc(32)],
         ],
         note: x("“Own work”: the share of time the manager still spends on individual contributor work.", "“Punë vetjake”: pjesa e kohës që menaxheri ende harxhon për punë individuale, jo menaxhim.", "„Eigene Arbeit“: der Anteil der Zeit, den die Führungskraft noch mit eigener Facharbeit verbringt.") },
-      { type: "callout", label: x("The player-coach problem", "Problemi i lojtarit-trajner", "Das Spielertrainer-Problem"),
+      { type: "callout", label: x("The player-coach problem", "Menaxheri që luan edhe vetë", "Das Spielertrainer-Problem"),
         text: x("97% of US managers in Gallup's study also carry individual work, at a median of 40% of their time. When that load stays high and the team grows, management weakens.", "97% e menaxherëve në SHBA në studimin e Gallup-it kanë edhe përgjegjësi individuale, me një medianë prej 40% të kohës. Kur kjo ngarkesë mbetet e lartë dhe ekipi rritet, menaxhimi dobësohet.", "97 % der US-Führungskräfte in Gallups Studie haben auch eigene Facharbeit, im Median 40 % ihrer Zeit. Bleibt diese Last hoch und wächst das Team, leidet die Führung.") },
     ],
     source: sourceLine("span"),
@@ -325,7 +325,7 @@ const pages = [
     id: "kpi", part: 3, tool: "/tools/kpi-diagnostic/",
     kicker: x("Tool of the month", "Mjeti i muajit", "Werkzeug der Ausgabe"),
     title: [x("A KPI is a signal,", "Një KPI është sinjal,", "Ein KPI ist ein Signal,"), x("not a conclusion.", "jo përfundim.", "keine Schlussfolgerung.")],
-    lead: x("A red KPI starts an investigation. Whether the process should change is decided later.", "Një KPI e kuqe hap një hetim. Nëse procesi duhet ndryshuar, vendoset më vonë.", "Ein roter KPI eröffnet eine Untersuchung. Ob sich der Prozess ändern soll, wird erst danach entschieden."),
+    lead: x("A red KPI starts an investigation. Whether the process should change is decided later.", "Një KPI e kuqe hap një hetim. Nëse procesi duhet ndryshuar, vendoset më vonë.", "Eine rote Kennzahl eröffnet eine Untersuchung. Ob sich der Prozess ändern soll, wird erst danach entschieden."),
     blocks: [
       { type: "steps", items: [
         { h: x("Segment", "Segmento", "Segmentieren"), p: x("Split the problem by shift, zone, category, channel or team.", "Ndaje problemin sipas turnit, zonës, kategorisë, kanalit ose ekipit.", "Teilen Sie das Problem nach Schicht, Zone, Kategorie, Kanal oder Team auf.") },
@@ -334,7 +334,7 @@ const pages = [
         { h: x("Ask why", "Pyet pse", "Nach dem Warum fragen"), p: x("Only now use 5 Why or another cause analysis.", "Vetëm tani përdor 5 Why ose një analizë tjetër për shkakun.", "Nutzen Sie erst jetzt 5 Why oder eine andere Ursachenanalyse.") },
         { h: x("Countermeasure", "Kundërmasa", "Gegenmaßnahme"), p: x("Try one small change and measure the result.", "Provo një ndryshim të vogël dhe mat rezultatin.", "Testen Sie eine kleine Änderung und messen Sie das Ergebnis.") },
       ] },
-      { type: "quote", text: x("A KPI shows you where to start asking questions.", "Një KPI të tregon ku të fillosh të bësh pyetje.", "Ein KPI zeigt Ihnen, wo Sie mit den Fragen anfangen sollten.") },
+      { type: "quote", text: x("A KPI shows you where to start asking questions.", "Një KPI të tregon ku të fillosh të bësh pyetje.", "Eine Kennzahl zeigt Ihnen, wo Sie mit den Fragen anfangen sollten.") },
       { type: "pull", text: x("Don't fight the symptom. Find the pattern.", "Mos lufto simptomën. Gjej modelin.", "Bekämpfen Sie nicht das Symptom. Finden Sie das Muster.") },
     ],
   },
@@ -342,16 +342,16 @@ const pages = [
     id: "pareto", part: 3, more: "pareto-and-5-why-in-practice", tool: "/tools/pareto/",
     kicker: x("Operations lab", "Laboratori i operacioneve", "Betriebslabor"),
     title: [x("Pareto", "Pareto", "Pareto"), x("before 5 Why", "para 5 Why", "vor 5 Why")],
-    lead: x("Do not look for the root cause of a problem you have not located yet.", "Mos kërko shkakun rrënjësor të një problemi që ende nuk e ke lokalizuar.", "Suchen Sie nicht nach der Grundursache eines Problems, das Sie noch nicht verortet haben."),
+    lead: x("Do not look for the root cause of a problem you have not located yet.", "Mos kërko shkakun rrënjësor të një problemi kur ende nuk e di ku ndodh.", "Suchen Sie nicht nach der Grundursache eines Problems, das Sie noch nicht verortet haben."),
     blocks: [
       { type: "pareto", label: x("Illustration: cases by category", "Ilustrim: rastet sipas kategorisë", "Illustration: Fälle nach Kategorie") },
       { type: "steps", items: [
-        { h: x("Pareto finds the concentration.", "Pareto gjen përqendrimin.", "Pareto findet die Häufung."), p: x("Which category, zone or visible cause is producing most of the cases?", "Cila kategori, zonë ose shkak i dukshëm po prodhon shumicën e rasteve?", "Welche Kategorie, Zone oder sichtbare Ursache erzeugt die meisten Fälle?") },
+        { h: x("Pareto finds the concentration.", "Pareto tregon ku mblidhen rastet.", "Pareto findet die Häufung."), p: x("Which category, zone or visible cause is producing most of the cases?", "Cila kategori, zonë ose shkak i dukshëm po prodhon shumicën e rasteve?", "Welche Kategorie, Zone oder sichtbare Ursache erzeugt die meisten Fälle?") },
         { h: x("Gemba checks reality.", "Gemba verifikon realitetin.", "Gemba prüft die Realität."), p: x("What looks true in the report has to be seen in the process.", "Ajo që duket në raport duhet parë në proces.", "Was im Bericht so aussieht, muss im Prozess gesehen werden.") },
         { h: x("5 Why looks for the cause.", "5 Why kërkon shkakun.", "5 Why sucht die Ursache."), p: x("Only once you have chosen the right problem, ask why it happened.", "Vetëm pasi ke zgjedhur problemin e duhur, pyet pse ndodhi.", "Erst wenn Sie das richtige Problem gewählt haben, fragen Sie, warum es passiert ist.") },
       ] },
       { type: "callout", label: x("Rule of thumb", "Rregull praktik", "Faustregel"),
-        text: x("Go from wide to narrow: KPI, segment, Pareto, process, 5 Why, countermeasure.", "Shko nga e gjera te e ngushta: KPI, segment, Pareto, proces, 5 Why, kundërmasë.", "Gehen Sie vom Breiten zum Engen: KPI, Segment, Pareto, Prozess, 5 Why, Gegenmaßnahme.") },
+        text: x("Go from wide to narrow: KPI, segment, Pareto, process, 5 Why, countermeasure.", "Shko nga e gjera te e ngushta: KPI, segment, Pareto, proces, 5 Why, kundërmasë.", "Gehen Sie vom Breiten zum Engen: Kennzahl, Segment, Pareto, Prozess, 5 Why, Gegenmaßnahme.") },
     ],
   },
   {
@@ -375,7 +375,7 @@ const pages = [
     id: "handover", part: 3, more: "why-the-handover-is-underrated", tool: "/tools/shift-handover/",
     kicker: x("Operating discipline", "Disiplina operative", "Betriebsdisziplin"),
     title: [x("Handover is", "Dorëzimi i turnit është", "Die Übergabe ist das"), x("organisational memory.", "memoria e organizatës.", "Gedächtnis der Organisation.")],
-    lead: x("A shift can do perfect work. The organisation still fails if the information does not reach the next shift.", "Një turn mund të bëjë punë perfekte. Organizata prapë dështon nëse informacioni nuk kalon te turni tjetër.", "Eine Schicht kann perfekt arbeiten. Die Organisation scheitert trotzdem, wenn die Information nicht bei der nächsten Schicht ankommt."),
+    lead: x("A shift can do perfect work. The organisation still fails if the information does not reach the next shift.", "Një turn mund ta bëjë punën në përsosmëri, e megjithatë organizata dështon nëse informacioni nuk kalon te turni tjetër.", "Eine Schicht kann perfekt arbeiten. Die Organisation scheitert trotzdem, wenn die Information nicht bei der nächsten Schicht ankommt."),
     blocks: [
       { type: "steps", items: [
         { h: x("State", "Gjendja", "Stand"), p: x("What is the situation now?", "Çfarë është gjendja tani?", "Wie ist die Lage jetzt?") },
@@ -411,7 +411,7 @@ const pages = [
     lead: x("In a new operation, the first job is to understand what needs to change, well before you show how fast you can change it.", "Në një operacion të ri, detyra e parë është të kuptosh çfarë duhet të ndryshojë, shumë përpara se të tregosh sa shpejt mund ta ndryshosh.", "In einem neuen Betrieb geht es zuerst darum zu verstehen, was sich ändern muss, lange bevor Sie zeigen, wie schnell Sie es ändern können."),
     blocks: [
       { type: "cards", cols: 1, items: [
-        { n: x("Days 1–30", "Ditët 1–30", "Tage 1–30"), h: x("Understand", "Kupto", "Verstehen"), p: x("The team, the process, the KPIs, the customer, the handover, the dependencies and the problems that have become “normal”.", "Ekipi, procesi, KPI-të, klienti, dorëzimi i turnit, varësitë dhe problemet që janë bërë “normale”.", "Das Team, der Prozess, die KPIs, der Kunde, die Übergabe, die Abhängigkeiten und die Probleme, die „normal“ geworden sind.") },
+        { n: x("Days 1–30", "Ditët 1–30", "Tage 1–30"), h: x("Understand", "Kupto", "Verstehen"), p: x("The team, the process, the KPIs, the customer, the handover, the dependencies and the problems that have become “normal”.", "Ekipi, procesi, KPI-të, klienti, dorëzimi i turnit, varësitë dhe problemet që janë bërë “normale”.", "Das Team, der Prozess, die Kennzahlen, der Kunde, die Übergabe, die Abhängigkeiten und die Probleme, die „normal“ geworden sind.") },
         { n: x("Days 31–60", "Ditët 31–60", "Tage 31–60"), h: x("Prioritise", "Prioritizo", "Priorisieren"), p: x("Separate symptoms from real problems. Choose a few priorities and give each an owner.", "Ndaji simptomat nga problemet reale. Zgjidh pak prioritete dhe cakto një përgjegjës për secilin.", "Trennen Sie Symptome von echten Problemen. Wählen Sie wenige Prioritäten und geben Sie jeder eine verantwortliche Person.") },
         { n: x("Days 61–90", "Ditët 61–90", "Tage 61–90"), h: x("Standardise", "Standardizo", "Standardisieren"), p: x("Turn improvements into a working rhythm: review, standard, measurement, feedback and follow-up.", "Ktheji përmirësimet në ritëm pune: rishikim, standard, matje, reagim dhe ndjekje.", "Bringen Sie Verbesserungen in einen Arbeitsrhythmus: Überprüfung, Standard, Messung, Rückmeldung und Nachverfolgung.") },
       ] },
@@ -444,7 +444,7 @@ const pages = [
       { type: "rows", items: [
         { h: x("People", "Njerëzit", "Menschen"), p: x("Pressure can be fair. Humiliation cannot.", "Presioni mund të jetë i drejtë. Poshtërimi jo.", "Druck kann fair sein. Demütigung nicht.") },
         { h: x("Standards", "Standardet", "Standards"), p: x("If the result depends on having the right person on shift, you do not have a standard yet.", "Nëse rezultati varet nga personi i duhur në turn, nuk ke ende standard.", "Wenn das Ergebnis davon abhängt, dass die richtige Person in der Schicht ist, gibt es noch keinen Standard.") },
-        { h: x("Data", "Të dhënat", "Daten"), p: x("The KPI is the signal. The floor tells you what it means.", "KPI është sinjal. Terreni të tregon kuptimin.", "Der KPI ist das Signal. Die Praxis sagt, was er bedeutet.") },
+        { h: x("Data", "Të dhënat", "Daten"), p: x("The KPI is the signal. The floor tells you what it means.", "KPI-ja është sinjal; kuptimin ta tregon terreni.", "Die Kennzahl ist das Signal. Die Praxis sagt, was sie bedeutet.") },
         { h: x("Ownership", "Përgjegjësia", "Verantwortung"), p: x("A problem must not be left without an owner, but it must not cross the limits of authority either.", "Problemi nuk duhet të mbetet pa përgjegjës, por as të kalojë kufijtë e autoritetit.", "Ein Problem darf nicht ohne Verantwortlichen bleiben, aber auch nicht die Grenzen der Befugnis überschreiten.") },
         { h: x("Continuous improvement", "Përmirësimi i vazhdueshëm", "Kontinuierliche Verbesserung"), p: x("Once a problem is solved, ask what to change so that it does not come back.", "Pasi zgjidhet një problem, pyet çfarë duhet ndryshuar që të mos kthehet.", "Ist ein Problem gelöst, fragen Sie, was sich ändern muss, damit es nicht wiederkommt.") },
       ] },
@@ -470,7 +470,7 @@ const common = {
     },
   ],
   theme: x("The manager in the age of AI", "Menaxheri në epokën e AI-së", "Die Führungskraft im Zeitalter der KI"),
-  sub: x("How work is being redesigned, and what leaders must keep human.", "Si po riorganizohet puna dhe çfarë duhet të mbajnë njerëzore drejtuesit.", "Wie Arbeit neu gestaltet wird und was Führung menschlich halten muss."),
+  sub: x("How work is being redesigned, and what leaders must keep human.", "Si po riorganizohet puna dhe çfarë duhet ta ruajnë drejtuesit si punë të njeriut.", "Wie Arbeit neu gestaltet wird und was Führung menschlich halten muss."),
   cover: { src: `/media/magazine/${slug}/art/bulb.jpg`, width: 350, height: 700 },
   inside: ["trends", "numbers", "human", "kpi", "review"],
   editor: {

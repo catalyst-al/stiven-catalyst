@@ -46,9 +46,9 @@ At the hotel where I started as a Night Auditor, I had three nights of training,
 
 The training combined several things: the Night Audit checklist, separate documents for different processes, colleagues who showed me in practice what they did, videos and screenshots. I took notes.
 
-The first night had an obstacle as well. The system was down for several hours, so we could not train on the whole process; the night was more of an introduction to the work and the surroundings. I wrote about it in [The first 30 days](/insights/the-first-30-days/). Whether I was working completely on my own straight after the third night, I cannot say for certain.
+The first night had an obstacle as well. The system was down for several hours, so we could not train on the whole process; the night was more of an introduction to the work and the surroundings. I wrote about it in [The first 30 days](/insights/the-first-30-days/).
 
-What I can say with certainty is what I missed most: a single, clear path from start to finish.
+What I missed most was a single, clear path from start to finish.
 
 The information existed, but it was scattered. The checklist told you what had to be done. Another document showed you how. A video showed one specific case. A colleague explained the rest. Each piece was useful, but connecting them was up to me.
 
@@ -74,7 +74,7 @@ If all three work, the training has started to deliver. If only the first works,
 
 ## The first hour
 
-From here on I describe how I would do it, and I speak as the one who was trained: I have no well-documented case of taking a new employee through the work step by step myself. From last mile I know there were clear operational rules for safety, loading, scanning, the dock, the cold chain and the way of working, and that retraining was required where standards were broken. Whether new dispatchers, dock workers or DSP drivers went through a structured programme over several days or mainly learned next to someone, I cannot say with confidence.
+From here on I describe how I would do it today, speaking as the one who was trained. From last mile I know there were clear operational rules for safety, loading, scanning, the dock, the cold chain and the way of working, and that retraining was required where standards were broken.
 
 In the first hour I would limit myself to five things the new person should know:
 

@@ -48,7 +48,7 @@ Behind it are the reports I worked with every day. In last mile: the daily KPI r
 
 In Night Audit I had a case in which the number of people in the breakfast forecast differed from the number in the hotel status report: two reports, from the same system, for the same night, with two different numbers.
 
-The first reaction is to ask which one is wrong. But I cannot say that the system had made a mistake, and I have no case in which I proved an automatic report wrong and corrected it. Two reports can count with different criteria and show different figures without either of them being inaccurate. The case called for a check: comparing the two sources and understanding what each one counts.
+The first reaction is to ask which one is wrong. But I cannot say that the system had made a mistake. Two reports can count with different criteria and show different figures without either of them being inaccurate. The case called for a check: comparing the two sources and understanding what each one counts.
 
 This is the part of automatic reports that is most easily forgotten. A generated report looks final because it is orderly: tables, columns, totals. But its order says nothing about the question you have. It says only that the system answered the question it was set, with the criteria it was given.
 
@@ -66,7 +66,7 @@ In [What a Night Auditor learns](/insights/what-a-night-auditor-learns/) I wrote
 
 I have used ChatGPT to organise operational material, to prepare SOP instructions, to structure information and to draft professional texts. It is good at what it is asked to do: it takes a messy list and turns it into something that reads well.
 
-That is where the risk lies, even though I have no case of an official report written by AI and sent without a person looking at it. A well-written text gives the impression that someone has thought it through. A report with orderly paragraphs and words like “verified” and “resolved” sounds checked, even when nobody has checked anything. And an AI tool can add something that was not in your notes, in the same confident tone as everything else.
+That is where the risk lies. A well-written text gives the impression that someone has thought it through. A report with orderly paragraphs and words like “verified” and “resolved” sounds checked, even when nobody has checked anything. And an AI tool can add something that was not in your notes, in the same confident tone as everything else.
 
 AI can help me write a report more clearly. It must not decide by itself what is true. So before I use a text prepared with AI, this is the standard I hold to:
 
@@ -88,7 +88,7 @@ The reason is simple. I would not want a well-written report to give the impress
 
 ## Who reads it
 
-I have no case of a report that was produced and that nobody read. In last mile, the KPIs were part of the operational discussions and the daily stand-up. In the hotel, the reports were used to close the day and to keep the work continuous from one shift to the next.
+In last mile, the KPIs were part of the operational discussions and the daily stand-up. In the hotel, the reports were used to close the day and to keep the work continuous from one shift to the next.
 
 That does not prove that every report was read and used in the same way. And the easier it becomes to produce a report, by the system or by AI, the more reports there will be, and the less time for each one. The question shifts from who writes the report to who reads it, and what they do after reading it. A report should help a person understand reality, not replace the checking of reality.
 

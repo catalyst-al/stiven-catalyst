@@ -16,7 +16,7 @@ firstMove:
 checklist:
   title: Rishikimi javor
   fill: true
-  note: Pyetjet e javës sime ideale. Jo një mbledhje për të cilën kam procesverbal.
+  note: Pyetjet e javës sime ideale.
   items:
     - label: Çfarë po përmirësohet?
       hint: Dhe a e dimë pse?
@@ -54,9 +54,9 @@ Për mua, një menaxher duhet të dijë të kërkojë llogari pa e përdorur fri
 
 Kam mësuar të mos u besoj shumë proceseve që funksionojnë vetëm sepse një person me përvojë “e di si bëhet”. Nëse rezultati varet nga fakti që në turn është personi i duhur, atëherë organizata ka njohuri, por ende nuk ka standard.
 
-Prandaj besoj në SOP-të, në listat e kontrollit dhe në mënyrat e qarta të punës. Prova e një SOP-je është nëse një person tjetër arrin me të të njëjtin rezultat, edhe nën presion dhe pa autorin afër për ta pyetur. Sa profesionale duket si dokument vjen shumë më pas.
+Prandaj besoj në SOP-të, në listat e kontrollit dhe në mënyrat e qarta të punës. Prova e një SOP-je është nëse një person tjetër arrin me të të njëjtin rezultat, edhe nën presion dhe pa autorin afër për ta pyetur. Pamja profesionale e dokumentit vjen shumë më pas.
 
-Për mua standardizimi ekziston që njerëzit të mos detyrohen të shpikin nga e para atë që organizata duhet ta dijë tashmë, jo për t'ua hequr të menduarit.
+Për mua standardizimi nuk u heq njerëzve të menduarit. Ai i kursen që të mos shpikin nga e para atë që organizata duhet ta dijë tashmë.
 
 ## 3. Të dhënat
 
@@ -64,7 +64,7 @@ Një KPI është sinjal. Përfundimi del nga ajo që fshihet pas tij.
 
 Kam mësuar të mos kënaqem me faktin që një përqindje është e kuqe ose e gjelbër. Nëse vonesat rriten, dua të di sa janë dhe pse ndodhin. Nëse kemi dëmtime, gabime, kohë ngarkimi jashtë standardit ose një problem tjetër operacional, dua të di ku përqendrohet problemi dhe çfarë e shkakton.
 
-Këtu më ndihmojnë mënyra të të menduarit si Pareto dhe 5 Whys. Jo çdo problem kërkon një metodologji të madhe, por është shumë e lehtë të luftosh simptomën dhe ta quash përmirësim.
+Këtu më ndihmojnë mënyra të të menduarit si analiza Pareto dhe 5 pyetjet “pse”. Jo çdo problem kërkon një metodologji të madhe, por është shumë e lehtë të luftosh simptomën dhe ta quash përmirësim.
 
 Të dhënat duhet të më çojnë në terren. Dhe terreni duhet të më ndihmojë t'i kuptoj të dhënat. Nëse këto dy botë nuk takohen, raporti mund të duket i mirë, ndërsa operacioni vazhdon të ketë të njëjtin problem.
 
@@ -160,7 +160,7 @@ Tre muaj nuk janë magji, dhe deri në ditën e 90-të nuk do të pretendoja se 
 - Standardet që përdoren vërtet.
 - Një ritëm i rregullt ku ekipi shqyrton performancën dhe përmirësimin e vet.
 
-Qëllimi im për 90 ditët do të ishte që organizata të kishte një pamje më të qartë të vetes dhe disa mekanizma më të mirë për t'u përmirësuar. Sa shumë gjëra do të kisha ndryshuar unë nuk do të ishte masa.
+Qëllimi im për 90 ditët do të ishte që organizata të kishte një pamje më të qartë të vetes dhe disa mekanizma më të mirë për t'u përmirësuar. Masa nuk do të ishte sa gjëra kam ndryshuar unë.
 
 ## Ku po mësoj ende
 

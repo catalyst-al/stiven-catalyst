@@ -8,7 +8,7 @@ featured: true
 summary: An SOP becomes useful when the person who needs it can find it, understand it and apply it at the right moment.
 description: "The series' concrete case: how scattered checklists and notes became one work page for Front Office and Night Audit, and what I would do differently."
 teaser: I did not build it because documents were missing. The documents existed, but the information I needed during work was scattered.
-deck: 'The ninth essay in the series “The operation that runs without you”: a real project, developed step by step, presented as work in progress rather than a measured success, with the card for turning a folder of SOPs into a working tool.'
+deck: 'The ninth essay in the series “The operation that runs without you”: a real project, developed step by step and still in progress, with the card for turning a folder of SOPs into a working tool.'
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -78,11 +78,11 @@ The public version could not include real guest data, reservations, payment info
 
 ## What I would do differently today
 
-The only use I can confirm is my own, while I was building the tool and learning; what it has done for training time or mistakes has not been measured. It helped me bring the information into a clearer structure. It may also be useful to someone in training, but that remains a possibility, and I cannot say the department adopted it.
+The only use I can confirm is my own, while I was building the tool and learning. It helped me bring the information into a clearer structure. It may also help someone in training; for now that is a possibility.
 
 Today I would start even earlier with the structure of the information, before working on the look of the page. I would first define which questions come up most often during a shift and which procedures matter most, and then build the answers around those needs.
 
-I would also separate three categories more clearly. This is a recommendation for today; the project does not fully have it:
+I would also separate three categories more clearly:
 
 - **Confirmed:** the procedure has been checked and documented.
 - **Being verified:** the material exists, but has to be checked in practice.

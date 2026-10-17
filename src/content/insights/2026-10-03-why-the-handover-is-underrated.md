@@ -35,11 +35,11 @@ You can have two shifts that are each very good on their own. The first may have
 
 A problem that does not make it into the handover does not stop existing. It just becomes the problem of someone who does not yet know it exists.
 
-I hold this as a principle from hotel work, where I have watched open issues, technical problems, requests that needed follow-up and operational differences pass to the next shift. I cannot point to a single documented case in which a missing piece of information had a particular consequence.
+I hold this as a principle from hotel work, where I have watched open issues, technical problems, requests that needed follow-up and operational differences pass to the next shift.
 
 ## From a loose note to the current state
 
-The change in my own way of working that I can name with certainty is the move towards a more structured handover.
+The change I can name in my own way of working is the move towards a more structured handover.
 
 Instead of leaving the information as a loose note, or as a list of things with no clear link between them, I have organised it by categories of work:
 
@@ -77,7 +77,7 @@ The information has to be clear enough that the other person does not need to in
 
 A note like “problem with the room” falls short. The handover has to make clear what kind of problem it is, what state it is in and whether there is still something to follow up, without adding unnecessary information.
 
-I have no fixed rule of always adding a verbal handover as well. What the way I have built the reporting does make clear is that the document has to be something the person who receives it can work from. Proof that the handover happened is not enough.
+The way I have built the reporting makes one thing clear: the person who receives the document has to be able to work from it. Proof that the handover happened is not enough.
 
 ## Two moments that mirror each other
 

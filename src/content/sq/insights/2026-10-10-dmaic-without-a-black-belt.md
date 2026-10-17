@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Nuk ke nevojë për një certifikatë Black Belt për të bërë pyetje të mira. Por nuk mjafton as ta njohësh emrin e metodës për të pretenduar se e ke zbatuar.
 teaser: Vlera e DMAIC nuk është te certifikata. Është te disiplina për të mos kaluar menjëherë nga problemi te zgjidhja.
-description: "DMAIC pa certifikatë: pesë fazat ashtu siç i kam pasur në last mile, pse Control është faza më e vështirë dhe pesë pyetje për një menaxher turni."
+description: "DMAIC pa certifikatë: pesë fazat ashtu siç i kam pasur në miljen e fundit, pse Control është faza më e vështirë dhe pesë pyetje për një menaxher turni."
 deck: 'Eseja e gjashtë e serisë “Përmirësimi që mbahet”: çfarë është DMAIC, cilat faza i kam pasur në punë dhe cilat jo, pse Control është faza më e vështirë dhe pesë pyetje për një menaxher turni që nuk është black belt.'
 relatedTools:
   - /tools/six-sigma-dmaic/
@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: DMAIC në pesë pyetje
   fill: true
-  note: Fletë orientuese, si do ta bëja sot, jo një projekt formal Six Sigma që kam drejtuar.
+  note: Si do ta bëja sot.
   items:
     - label: Cili është problemi konkret?
       hint: Një problem, një vend, një periudhë. Jo “cilësia është e dobët”.
@@ -38,11 +38,11 @@ diagram: dmaic-loop
 
 Për të bërë pyetje të mira nuk të duhet një certifikatë Black Belt. Për të pretenduar se e ke zbatuar një metodë, të duhet më shumë sesa ta njohësh emrin e saj.
 
-Kjo ese lëviz mes këtyre dy fjalive.
+Kjo ese qëndron mes këtyre dy fjalive.
 
 DMAIC është cikli i Six Sigma për përmirësimin e një procesi: Define, Measure, Analyze, Improve, Control. Përcakton problemin, e mat, analizon shkaqet, përmirëson dhe kontrollon nëse përmirësimi mbahet. Në libra duket si projekt i madh, me ekip, me afat dhe me dikë që mban një rrip me ngjyrë.
 
-Ajo që sjell unë është përvoja me probleme reale operative në last mile: Damage (dëmtimet), Incomplete (porositë jo të plota), Delay (vonesat) dhe Loading Time (koha e ngarkimit). Six Sigma, Pareto dhe 5 Why janë metoda që i njoh dhe që janë bërë pjesë e mënyrës si e mendoj drejtimin. Nuk kam certifikatë të konfirmuar, as Yellow, as Green, as Black Belt. Nuk kam asnjë projekt ku t'i kem zbatuar e dokumentuar të pesë fazat e DMAIC, madje as një Pareto apo një 5 Why që mund ta tregoj si të çuar prej meje nga fillimi në fund. Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për një 5 Why me vetëm dy “pse” të dokumentuara dhe pse nuk i plotësova të tjerat.
+Unë sjell përvojën me probleme reale operative në miljen e fundit: dëmet, porositë e paplota, vonesat dhe kohën e ngarkimit. Six Sigma, Pareto dhe 5 Why janë metoda që i njoh dhe që janë bërë pjesë e mënyrës si e mendoj drejtimin, edhe pse nuk kam një Pareto apo 5 Why të plotë timin për të treguar. Nuk kam certifikatë të konfirmuar, as Yellow, as Green, as Black Belt, dhe as ndonjë projekt të dokumentuar që të ketë kaluar nëpër të pesë fazat e DMAIC. Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për një 5 Why me vetëm dy “pse” të dokumentuara dhe pse nuk i plotësova të tjerat.
 
 ## Pesë fazat, ashtu siç i kam pasur
 
@@ -54,9 +54,9 @@ Po ta vë këtë përvojë përballë DMAIC, pa e zbukuruar, del kështu:
 
 **Analyze.** Shqyrtonim arsyet e vonesave, çantat që mungonin dhe problemet me organizimin e ngarkesave.
 
-**Improve.** Cilat masa kam zbatuar vetë dhe çfarë dhanë ato nuk mund ta them me saktësi.
+**Improve.** Nuk mund ta them me saktësi cilat masa kam zbatuar vetë dhe çfarë dhanë ato.
 
-**Control.** Nëse pas një përmirësimi kishte një sistem të dokumentuar kontrolli, nuk e di.
+**Control.** Nuk e di nëse pas një përmirësimi kishte një sistem të dokumentuar kontrolli.
 
 Kjo listë thotë shumë. Tri fazat e para një operacion i bën pothuajse vetë, sepse raporti i kërkon çdo ditë: ka një problem, ka një numër, ka një “pse”. Dy të fundit kërkojnë dikë që t'i mbajë, dhe pikërisht për to kam më pak prova.
 
@@ -68,7 +68,7 @@ Kjo listë thotë shumë. Tri fazat e para një operacion i bën pothuajse vetë
 
 Këtë disiplinë nuk ta jep as emri, as certifikata. Së pari e kupton problemin, pastaj e mat, analizon shkaqet, provon përmirësimin dhe kontrollon nëse vazhdon të funksionojë.
 
-Në operacion, tundimi është gjithmonë kërcimi. KPI-ja del keq dhe dikush ka menjëherë gati një zgjidhje. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për rrezikun e ndryshimit të rregullave pas çdo luhatjeje. DMAIC është mënyra e strukturuar për ta shmangur këtë: mes problemit dhe zgjidhjes ka tre hapa dhe asnjëri nuk kapërcehet.
+Në operacion tundimi është gjithmonë i njëjti: kërcimi. KPI-ja del keq dhe dikush ka menjëherë gati një zgjidhje. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për rrezikun e ndryshimit të rregullave pas çdo luhatjeje. DMAIC është mënyra e strukturuar për ta shmangur këtë: mes problemit dhe zgjidhjes ka tre hapa dhe asnjëri nuk kapërcehet.
 
 ## Control, faza më e vështirë
 
@@ -90,7 +90,7 @@ Një menaxheri turni do t'i thosha se nuk ka nevojë të jetë Black Belt për t
 4. **Çfarë mund të ndryshojmë?**
 5. **Si do ta kontrollojmë që përmirësimi të zgjasë?**
 
-Jo çdo problem i turnit duhet kthyer në projekt kompleks. Por duhet shmangur ndryshimi i procedurave vetëm sepse një KPI doli keq.
+Jo çdo problem i turnit duhet kthyer në projekt kompleks. Por procedurat nuk duhen ndryshuar vetëm sepse një KPI doli keq.
 
 Fletën më poshtë mund ta plotësosh për një problem të vetëm dhe ta kopjosh. Nëse do ta shohësh gjithë ciklin në një rast të plotë, [Six Sigma në magazinë](/sq/tools/six-sigma-dmaic/) e ndjek hap pas hapi një rast mësimor. Është shembull mësimor dhe nuk vjen nga puna ime.
 

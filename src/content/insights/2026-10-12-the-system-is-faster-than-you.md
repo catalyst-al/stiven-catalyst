@@ -19,7 +19,7 @@ checklist:
   note: "One row for each decision the system takes in your shift. Fill it in once, then correct it on the day the system is wrong."
   items:
     - label: "Which decision does the system take in my shift?"
-      hint: "The tour, the order of the stops, the planned time, the room status, the alarm. One per card."
+      hint: "The tour, the order of the stops, the planned time, the room status, the alarm. One per row."
     - label: "What does the system know when it takes it?"
       hint: "Addresses, times, stock, the scans so far. Only what someone typed in or scanned."
     - label: "What does it not know?"
@@ -55,17 +55,17 @@ This essay opens a series about that question. The series asks what is left for 
 
 In August 2025, in last mile, a change was introduced to the system that planned the tours and the time. One of its aims was to reduce unrealistic plans, planning errors and operational exceptions. Information from the field was also meant to be used to improve the planning.
 
-What changed afterwards I cannot say, because I have not measured it. But the aims themselves say something, and this is my reading of them. A system that has to reduce unrealistic plans has been producing unrealistic plans. And a system that needs information from the field admits, in its own language, what the floor has known for a long time: some things can only be seen out there.
+The aims themselves say something, and this is my reading of them. A system that has to reduce unrealistic plans has been producing unrealistic plans. And a system that needs information from the field admits, in its own language, what the floor has known for a long time: some things can only be seen out there.
 
 That leaves the question of who brings it the information. The system gets it only if someone on the floor sees it, writes it down and sends it to a place where someone can use it.
 
 ## Right, until the moment it is not
 
-The first scene is a picture rather than a memory: I have no documented case of a wrong system decision that I discovered and corrected. Imagine a tour that the system has planned for a new driver. The order of the stops is perfect for the system: the shortest distance, the least time, no doubling back. The driver follows it. The third stop is a shop that opens at ten, and the system has put it at half past eight because it was nearer.
+The first scene is made up. Imagine a tour that the system has planned for a new driver. The order of the stops is perfect for the system: the shortest distance, the least time, no doubling back. The driver follows it. The third stop is a shop that opens at ten, and the system has put it at half past eight because it was nearer.
 
 The system did what it was built for: it calculated distances. It did not know that the shop has opening hours, because nobody told it. A driver who knows the area would have seen it in a second. The new driver trusted the screen, because the screen was faster and surer than the driver's own judgement.
 
-Checking every decision by hand would make the shift slower without making it any safer. The job is to recognise, without fighting the system, the cases in which it is wrong, when they come. How often that is I cannot say, because I have never measured how often the system is right. But the cases often have the same shape: the system did not know something the floor knew. The opening hours. That the second gate is broken. That the guest in that room is the one who complained yesterday. That the bag with that code was on the wrong trolley, even though the scan said yes.
+Checking every decision by hand would make the shift slower without making it any safer. The job is to recognise, without fighting the system, the cases in which it is wrong, when they come. The cases often have the same shape: the system did not know something the floor knew. The opening hours. That the second gate is broken. That the guest in that room is the one who complained yesterday. That the bag with that code was on the wrong trolley, even though the scan said yes.
 
 **The system is faster than you in everything it was told. It knows nothing of what it was not told. And most of what the floor knows has never been told to anyone.**
 
@@ -73,7 +73,7 @@ Checking every decision by hand would make the shift slower without making it an
 
 ## Three ways to get it wrong
 
-A shift lead can get this wrong in three ways. They are patterns, not cases I have documented, and anyone who has worked next to a planning system will recognise them.
+A shift lead can get this wrong in three ways. They are patterns rather than cases, and anyone who has worked next to a planning system will recognise them.
 
 **Full trust.** The system said it, so it is so. When it goes badly, the answer is “the system assigned it”. It is the most comfortable answer and the most dangerous, because it hands responsibility to something that cannot carry it. The customer standing in front of the closed shop does not ask the system.
 

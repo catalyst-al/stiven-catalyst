@@ -7,15 +7,15 @@ status: published
 featured: true
 summary: "Sistemi e planifikon rrugën me të dhënat e veta, shoferi e përshkon në kushtet reale. Problemi fillon kur organizata nuk mëson nga shoferi."
 teaser: Një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson.
-description: "Rruga e sistemit dhe rruga e shoferit: pse asnjëri s'ka gjithmonë të drejtë, katër hapa që e kthejnë njohjen e zonës në përmirësim dhe një kartelë."
-deck: "Eseja e tretë e serisë “Sistemi është më i shpejtë se ti”: rruga e planifikuar dhe rruga e përshkuar, shoferi i porsaardhur dhe njohja e zonës, katër hapa që e kthejnë atë që di shoferi në përmirësim të planit dhe një kartelë për një problem që përsëritet."
+description: "Rruga e sistemit dhe rruga e shoferit: pse asnjëri s'ka gjithmonë të drejtë, katër hapa që e kthejnë njohjen e zonës në përmirësim dhe një kartë."
+deck: "Eseja e tretë e serisë “Sistemi është më i shpejtë se ti”: rruga e planifikuar dhe rruga e përshkuar, shoferi i porsaardhur dhe njohja e zonës, katër hapa që e kthejnë atë që di shoferi në përmirësim të planit dhe një kartë për një problem që përsëritet."
 relatedTools:
   - /tools/delay-analyzer/
   - /tools/five-whys/
 checklist:
   title: Një problem që përsëritet në rrugë
   fill: true
-  note: "Një kartelë për çdo problem që shoferët e hasin më shumë se një herë në të njëjtën rrugë ose zonë. Plotësoje kur e dëgjon herën e dytë, jo të pestën."
+  note: "Një kartë për çdo problem që shoferët e hasin më shumë se një herë në të njëjtën rrugë ose zonë. Plotësoje kur e dëgjon herën e dytë, jo të pestën."
   items:
     - label: "Çfarë has shoferi dhe ku?"
       hint: "Një hyrje, një orar, një adresë, një renditje. Me fjalët e shoferit, pa e përkthyer ende."
@@ -36,7 +36,7 @@ firstMove:
 
 Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) përdora një skenë të përfytyruar: një rrugë e planifikuar për një shofer të porsaardhur, një dyqan që hap në orën dhjetë, një ndalesë e vënë në tetë e gjysmë. Këtu e shoh të njëjtën skenë nga ana tjetër, nga shoferi që e di orarin, dhe pyes ku përfundon ajo që di ai.
 
-E shoh nga last mile, ku koordinoj shoferë, itinerare dhe probleme operative gjatë shpërndarjes, sot si dispeçer në distancë; përmes shoferëve në fazën e përshtatjes, të cilët, siç shkrova te [Ditët me volum të lartë](/sq/insights/high-volume-days/), nuk ishin mësuar ende plotësisht me procedurat; dhe përmes ndryshimit të planifikimit të rrugëve në gusht 2025. Ajo që vijon është analiza ime dhe ajo që do të rekomandoja sot, jo një proces që e kam ndërtuar.
+E shoh nga milja e fundit, ku koordinoj shoferë, itinerare dhe probleme operative gjatë shpërndarjes, sot si dispeçer në distancë; përmes shoferëve në fazën e përshtatjes, që, siç shkrova te [Ditët me volum të lartë](/sq/insights/high-volume-days/), nuk ishin mësuar ende plotësisht me procedurat; dhe përmes ndryshimit të planifikimit të rrugëve në gusht 2025. Më poshtë vjen analiza ime dhe ajo që do të rekomandoja sot.
 
 ## Rruga e planifikuar dhe rruga e përshkuar
 
@@ -52,23 +52,23 @@ Ndryshimi i gushtit 2025 e pranonte këtë me gjuhën e vet: synonte plane më r
 
 Do të ishte e lehtë ta shkruaja këtë ese si historinë e shoferit të mençur dhe të sistemit të verbër. Por nuk do të ishte e vërtetë.
 
-Shoferi nuk ka gjithmonë të drejtë. Mund ta ndryshojë renditjen sepse i duket më mirë, dhe rruga e tij mund të dalë më e gjatë ose ta vonojë një dorëzim që kishte orar të caktuar. Një pengesë që e hasi një herë mund të mos jetë më aty. Dhe një shofer ende në fazën e përshtatjes, që nuk është mësuar me procedurat, mund ta quajë “rrugë pa kuptim” diçka që ka kuptim, por që askush nuk ia ka shpjeguar. Nuk kam asnjë rast ku një shofer të ma ketë thënë këtë shprehimisht.
+Shoferi nuk ka gjithmonë të drejtë. Mund ta ndryshojë renditjen sepse i duket më mirë, dhe rruga e tij mund të dalë më e gjatë ose ta vonojë një dorëzim që kishte orar të caktuar. Një pengesë që e hasi një herë mund të mos jetë më aty. Dhe një shofer ende në fazën e përshtatjes, që nuk është mësuar me procedurat, mund ta quajë “rrugë pa kuptim” diçka që ka kuptim, por që askush nuk ia ka shpjeguar.
 
 Prandaj më pak rëndësi ka kush ka të drejtë, e më shumë kjo: kur një shofer zbulon diçka që sistemi nuk e ka parashikuar, a ka organizata një mënyrë për ta verifikuar atë informacion? Nëse po, informacioni mund të bëhet përmirësim. Nëse jo, mbeten vetëm dy rrugë: ose shoferi e shpërfill sistemin në heshtje, ose sistemi e shpërfill shoferin.
 
 ## Shoferi i porsaardhur dhe shoferi që mungon
 
-Përfytyro një zonë që e njeh mirë vetëm një shofer. Ai e bën rrugën çdo ditë dhe e bën mirë, sepse e di ku të parkojë, cilën derë të përdorë dhe cilin klient ta lërë për më vonë. Asgjë nga këto nuk është në plan, dhe për sa kohë ai është aty, plani nuk ka nevojë për to. Nëse njohja e zonës e ndryshonte vërtet performancën aty ku kam punuar, nuk e di.
+Përfytyro një zonë që e njeh mirë vetëm një shofer. Ai e bën rrugën çdo ditë dhe e bën mirë, sepse e di ku të parkojë, cilën derë të përdorë dhe cilin klient ta lërë për më vonë. Asgjë nga këto nuk është në plan, dhe për sa kohë ai është aty, plani nuk ka nevojë për to.
 
 Pastaj një ditë ai mungon. Rrugën e merr një shofer i porsaardhur, ndoshta ende në fazën e përshtatjes, dhe ndjek planin, sepse plani është gjithçka që ka. Dita ngec pikërisht në vendet ku shoferi me përvojë nuk ngecte kurrë.
 
-Kjo është pamja e asaj që te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e quajta “mosbesimi i plotë”: dija që mbetet në një kokë. Është edhe ajo për të cilën shkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/), vetëm se këtu mungon një vend ku të mund të shkruhej dija e shoferit. Nëse ajo që shoferët dinin për një zonë ruhej diku, apo si i mësonin rrugët shoferët e porsaardhur, nuk e di.
+Kjo është pamja e asaj që te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e quajta “mosbesimi i plotë”: dija që mbetet në një kokë. Është edhe ajo për të cilën shkrova te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/), vetëm se këtu mungon një vend ku të mund të shkruhej dija e shoferit.
 
 Një shofer me përvojë nuk duhet të jetë korrigjimi i përhershëm i një sistemi që nuk mëson. Kjo nuk ia ul vlerën: ajo që di ai vlen aq shumë sa nuk duhet të mbetet vetëm në një vend.
 
 ## Katër hapa nga shoferi te plani
 
-Nuk e di nëse ekzistonte një proces i tillë aty ku kam punuar, as kush e kishte saktësisht autoritetin për ta ndryshuar një rrugë gjatë ditës dhe si bëhej kjo teknikisht. Sot do të rekomandoja katër hapa që ajo që dinë shoferët të kthehet në planifikim më të mirë:
+Sot do të rekomandoja katër hapa që ajo që dinë shoferët të kthehet në planifikim më të mirë:
 
 1. **Një mënyrë e thjeshtë për të raportuar një problem që përsëritet në një rrugë.** E thjeshtë do të thotë që shoferi e bën brenda një minute, në fund të rrugës, pa formular të gjatë. Nëse raportimi zgjat më shumë se korrigjimi në heshtje, fiton heshtja.
 2. **Dallimi mes një pengese të përkohshme dhe një gabimi të vazhdueshëm.** Një rrugë e mbyllur sot nuk është gabim planifikimi; e njëjta hyrje e gabuar çdo javë, po. E para kalon vetë, e dyta kthehet.
@@ -85,6 +85,6 @@ Si dispeçer, komunikimi me shoferët dhe ndjekja e problemeve gjatë shpërndar
 
 ## Një problem që përsëritet në rrugë
 
-Kartela më poshtë vlen për një problem që shoferët e hasin më shumë se një herë në të njëjtën rrugë ose zonë. Plotësoje kur e dëgjon herën e dytë, jo të pestën. [Analiza e vonesave](/sq/tools/delay-analyzer/) të tregon ku fillon vonesa, në rampë apo në rrugë, që një problem i rrugës të dallohet nga një problem ngarkimi para se ta çosh te plani.
+Karta më poshtë vlen për një problem që shoferët e hasin më shumë se një herë në të njëjtën rrugë ose zonë. Plotësoje kur e dëgjon herën e dytë, jo të pestën. [Analiza e vonesave](/sq/tools/delay-analyzer/) të tregon ku fillon vonesa, në rampë apo në rrugë, që një problem i rrugës të dallohet nga një problem ngarkimi para se ta çosh te plani.
 
 Rruga që shoferi nuk e kupton është ndonjëherë gabim i planit dhe ndonjëherë diçka që askush nuk ia ka shpjeguar. Cila nga të dyja është, e merr vesh vetëm kur dikush e dëgjon shoferin, e verifikon atë që thotë dhe e shkruan aty ku do ta gjejë shoferi tjetër.

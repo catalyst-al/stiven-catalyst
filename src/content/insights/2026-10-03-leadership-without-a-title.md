@@ -44,7 +44,7 @@ In the hotel it has happened differently. My role is operational, but I have gon
 
 Management's authority stayed with management. What I took responsibility for was the way I organised and documented the work I knew. The distinction matters to me: taking on more responsibility does not mean making decisions that are not yours to make.
 
-What I can point to is what followed. I have kept being involved in coordination, operational improvements, documentation and building processes, and in the hotel I have kept working on structuring the Night Audit and the tools that make the work clearer. That tells me my contribution has been used, though it says nothing about how everyone reacted or about formal recognition for every extra responsibility.
+What I can point to is what followed. I have kept being involved in coordination, operational improvements, documentation and building processes, and in the hotel I have kept working on structuring the Night Audit and the tools that make the work clearer. That tells me my contribution has been used.
 
 ## How authority is earned without a position
 

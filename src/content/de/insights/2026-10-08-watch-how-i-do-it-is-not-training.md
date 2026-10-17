@@ -12,8 +12,8 @@ deck: 'Der dritte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: d
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Sagen Sie einem neuen Kollegen in der ersten Stunde fünf Dinge: die Rolle, das erwartete Ergebnis, die Regeln, die nicht verhandelbar sind, wen er fragt, was er nicht allein entscheidet."
-  - "Ersetzen Sie „Schau, wie ich es mache“ durch: zuschauen, mit mir machen, du machst es und ich schaue zu, allein machen, mir erklären."
-  - "Prüfen Sie einen Kollegen, der „verstanden“ gesagt hat: mach es selbst, sag mir warum, zeig mir, was du bei einer Ausnahme tust."
+  - "Ersetzen Sie „Schau, wie ich es mache“ durch: zuschauen, mit mir machen, Sie machen es und ich schaue zu, allein machen, mir erklären."
+  - "Prüfen Sie einen Kollegen, der „verstanden“ gesagt hat: Machen Sie es selbst, sagen Sie mir, warum, zeigen Sie mir, was Sie bei einer Ausnahme tun."
 checklist:
   title: Die erste Woche eines neuen Mitarbeiters
   copy: Liste kopieren
@@ -24,7 +24,7 @@ checklist:
     - "Tag 3: Er hat den Prozess unter Aufsicht durchgeführt, und wir beide haben notiert, wo Unsicherheit war."
     - "Tag 4: Er hat eine Ausnahme bearbeitet und weiß, wann er hätte eskalieren müssen."
     - "Tag 5: Er hat allein gearbeitet und den Prozess rückwärts erklärt, vom Ergebnis zum ersten Schritt."
-    - "Der Test: mach es selbst, sag mir warum, zeig mir, was du tust, wenn eine Ausnahme auftritt."
+    - "Der Test: Machen Sie es selbst, sagen Sie mir, warum, zeigen Sie mir, was Sie tun, wenn eine Ausnahme auftritt."
 ---
 
 „Bleib heute bei ihm und schau, wie er es macht.“
@@ -41,9 +41,9 @@ In dem Hotel, in dem ich als Night Auditor angefangen habe, hatte ich drei Näch
 
 Sie setzte sich aus mehreren Teilen zusammen: der Night-Audit-Checkliste, einzelnen Dokumenten für verschiedene Prozesse, Kolleginnen und Kollegen, die mir praktisch zeigten, was sie taten, Videos und Screenshots. Ich habe mir Notizen gemacht.
 
-Die erste Nacht hatte zudem ein Hindernis. Das System fiel für mehrere Stunden aus, sodass an eine normale Einarbeitung in den ganzen Prozess nicht zu denken war; die Nacht wurde eher zu einem Kennenlernen der Arbeit und der Umgebung. Darüber habe ich in [Die ersten 30 Tage](/de/insights/the-first-30-days/) geschrieben. Ob ich gleich nach der dritten Nacht ganz allein gearbeitet habe, kann ich nicht sicher sagen.
+Die erste Nacht hatte zudem ein Hindernis. Das System fiel für mehrere Stunden aus, sodass an eine normale Einarbeitung in den ganzen Prozess nicht zu denken war; die Nacht wurde eher zu einem Kennenlernen der Arbeit und der Umgebung. Darüber habe ich in [Die ersten 30 Tage](/de/insights/the-first-30-days/) geschrieben.
 
-Mit Sicherheit sagen kann ich, was mir am meisten gefehlt hat: ein einziger, klarer Weg vom Anfang bis zum Ende.
+Am meisten gefehlt hat mir ein einziger, klarer Weg vom Anfang bis zum Ende.
 
 Die Informationen waren da, aber verstreut. Die Checkliste sagte, was zu tun war. Ein anderes Dokument zeigte, wie. Ein Video zeigte einen konkreten Fall. Den Rest erklärte ein Kollege. Jedes Teil war nützlich, aber die Verbindung dazwischen musste ich selbst herstellen.
 
@@ -63,13 +63,13 @@ Deshalb lässt sich Einarbeitung nicht vom Standard trennen. Ohne [eine SOP, die
 
 Man kann sehr gut nachmachen, was man einmal gesehen hat, ohne den Prozess unbedingt zu verstehen. Dass jemand gelernt hat, erkenne ich daran, dass er den Prozess ausführen kann, ohne dass ihm jemand jeden Schritt vorsagt, dass er weiß, warum er eine Kontrolle macht, und vor allem daran, dass er weiß, was zu tun ist, wenn etwas vom normalen Ablauf abweicht.
 
-Mein Test hat drei Teile: Mach es selbst, erklär mir, warum, zeig mir, was du tust, wenn eine Ausnahme kommt.
+Mein Test hat drei Teile: Machen Sie es selbst, erklären Sie mir, warum, zeigen Sie mir, was Sie tun, wenn eine Ausnahme kommt.
 
 Funktionieren alle drei, beginnt die Einarbeitung zu wirken. Funktioniert nur das Erste, hat der Neue bloß das Nachmachen gelernt. Das reicht für normale Tage, aber nicht für die Nacht, in der etwas anders läuft als gewohnt.
 
 ## Die erste Stunde
 
-Ab hier beschreibe ich, wie ich es machen würde, und ich spreche als derjenige, der eingearbeitet wurde: Für eine Einarbeitung, die ich selbst Schritt für Schritt geleitet habe, fehlt mir ein gut dokumentierter Fall. Von der letzten Meile weiß ich, dass es klare betriebliche Regeln für Sicherheit, Beladung, Scannen, die Rampe, die Kühlkette und die Arbeitsweise gab und dass bei Verstößen gegen Standards eine Nachschulung verlangt wurde. Ob neue Disponenten, Rampenmitarbeiter oder DSP-Fahrer ein strukturiertes Programm über mehrere Tage durchliefen oder vor allem neben jemandem lernten, kann ich nicht sicher sagen.
+Ab hier beschreibe ich, wie ich es heute machen würde, und zwar aus der Sicht dessen, der eingearbeitet wurde. Von der Last Mile weiß ich, dass es klare betriebliche Regeln für Sicherheit, Beladung, Scannen, die Rampe, die Kühlkette und die Arbeitsweise gab und dass bei Verstößen gegen Standards eine Nachschulung verlangt wurde.
 
 In der ersten Stunde würde ich mich auf fünf Dinge beschränken, die der Neue wissen sollte:
 
@@ -87,7 +87,7 @@ Im Lauf der ersten Woche kann dann die Tiefe kommen: der Prozess vom Anfang bis 
 
 Die Reihenfolge, der ich folgen würde, ist einfach:
 
-**Zuschauen. Mit mir zusammen machen. Du machst es, während ich zuschaue. Allein machen. Dann mir erklären.**
+**Zuschauen. Mit mir zusammen machen. Sie machen es, während ich zuschaue. Allein machen. Dann mir erklären.**
 
 Für mich ist das viel stärker als „Bleib heute bei ihm und schau, wie er es macht“. Zuschauen bleibt der erste Schritt, einer von fünf. Was am Ende zählt, ist, wie einheitlich und sicher das Ergebnis bleibt, wenn der Trainer gegangen ist.
 
@@ -105,4 +105,4 @@ Diesen Plan würde ich vorschlagen, ohne ihn auf einen bestimmten Arbeitsplatz z
 
 **Tag 5: allein arbeiten und den Prozess rückwärts erklären.** Der Neue arbeitet allein. Am Ende erklärt er den Prozess vom Ergebnis zurück bis zum ersten Schritt: was herauskommen musste, was es möglich gemacht hat, wo es hätte scheitern können. So sieht man am schnellsten, ob er den Prozess verstanden oder nur behalten hat.
 
-Nach dem fünften Tag folgt der Test in drei Teilen: Mach es selbst, erklär mir, warum, zeig mir, was du tust, wenn eine Ausnahme kommt.
+Nach dem fünften Tag folgt der Test in drei Teilen: Machen Sie es selbst, erklären Sie mir, warum, zeigen Sie mir, was Sie tun, wenn eine Ausnahme kommt.

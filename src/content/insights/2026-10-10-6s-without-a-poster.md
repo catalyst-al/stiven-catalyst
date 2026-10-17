@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: End-of-shift check for one area
   copy: Copy the checklist
-  note: A guide to what I would put in place today, not a historical procedure I can confirm.
+  note: How I would do it today.
   items:
     - The area has a visible standard, and everyone knows who checks it.
     - The equipment is in its place.
@@ -67,7 +67,7 @@ That is why order has to be visible. When everything has its place, the thing th
 
 ## The sixth S
 
-Whether the company also had a formal 6S programme, with its own audits, scoring, floor markings or colour-coded zones, I do not know, and I do not claim to have run one. What I do know is that in last mile, safety was part of the operation itself:
+I never ran a formal 6S programme. But in last mile, safety was part of the operation itself:
 
 - closing the gates after loading;
 - the rules for moving and standing on the ramp;

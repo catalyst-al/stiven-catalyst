@@ -29,11 +29,11 @@ Mund të kesh dy turne që, secili më vete, janë shumë të mirë. I pari mund
 
 Një problem që nuk hyn në dorëzimin e turnit nuk pushon së ekzistuari. Thjesht bëhet problem i dikujt që ende nuk e di se ekziston.
 
-Këtë e kam parim nga puna në hotel, ku kam parë si kalonin te turni tjetër çështje të pambyllura, probleme teknike, kërkesa që duheshin ndjekur dhe mospërputhje operative. Nuk kam në dorë asnjë rast të dokumentuar ku një informacion që mungonte të ketë sjellë një pasojë të caktuar.
+Këtë parim e kam nga puna në hotel. Atje kam parë si kalonin te turni tjetër çështje të pambyllura, probleme teknike, kërkesa që duheshin ndjekur dhe mospërputhje operative.
 
 ## Nga shënimi i lirë te gjendja aktuale
 
-Ndryshimi në mënyrën time të punës që mund ta përmend me siguri është kalimi drejt një dorëzimi më të strukturuar.
+Në mënyrën time të punës ka një ndryshim që e them me siguri: kalova drejt një dorëzimi më të strukturuar.
 
 Në vend që informacioni të mbetej si shënim i lirë, ose si listë gjërash pa lidhje të qartë mes tyre, e kam organizuar sipas kategorive të punës:
 
@@ -51,7 +51,7 @@ Për mua përmirësimi kryesor është që turni tjetër të marrë gjendjen akt
 
 ## Çfarë përmban dorëzimi i turnit të natës
 
-Pa hyrë në përmbajtje të veçanta, dorëzimi që përdor ose që kam strukturuar për punën e natës përfshin kategori si:
+Pa hyrë në hollësi, dorëzimi që përdor për punën e natës, ose që e kam strukturuar vetë, ka kategori si:
 
 - gjendja e përgjithshme operative e hotelit;
 - lëvizjet kryesore të ditës dhe ato që prekin turnin tjetër;
@@ -65,13 +65,13 @@ Pa hyrë në përmbajtje të veçanta, dorëzimi që përdor ose që kam struktu
 
 Në raportet e mia, një problem që kërkon ndjekje duhet të dallohet si ende i hapur, në vend që të lexohet thjesht si histori e asaj që ndodhi, sepse “e raportuar” dhe “e zgjidhur” nuk janë e njëjta gjë.
 
-## Një dokument me të cilin punon personi tjetër
+## Një dokument që i shërben personit tjetër
 
 Informacioni duhet të jetë aq i qartë sa personi tjetër të mos ketë nevojë të hamendësojë çfarë kam dashur të them.
 
 Një shënim si “problem me dhomën” nuk mjafton. Dorëzimi duhet ta bëjë të qartë çfarë lloj problemi është, në çfarë gjendjeje ndodhet dhe nëse ka ende diçka për t'u ndjekur, pa shtuar informacion të panevojshëm.
 
-Nuk kam rregull të prerë që çdo dorëzim ta shoqëroj gjithmonë edhe me gojë. Por mënyra si e kam ndërtuar raportimin e bën të qartë një gjë: dokumenti duhet t'i shërbejë personit që e merr. Nuk mjafton që të provojë se dorëzimi u bë.
+Mënyra si e kam ndërtuar raportimin e bën të qartë një gjë: dokumenti duhet t'i shërbejë personit që e merr. Nuk mjafton që të provojë se dorëzimi u bë.
 
 ## Dy momente që pasqyrojnë njëri-tjetrin
 
@@ -87,7 +87,7 @@ Për mua këto dy momente pothuajse pasqyrojnë njëri-tjetrin. Kur e dorëzoj t
 
 Mjeti i dorëzimit të turnit që kam ndërtuar ndjek pothuajse të njëjtën logjikë.
 
-Shifrat dhe gjendja operative japin një fotografi të çastit. Pikat e hapura ndajnë atë që ka ndodhur nga ajo që kërkon ende veprim. Personi përgjegjës ka rëndësi, sepse një detyrë pa zot është shumë afër një detyre që nuk do ta bëjë askush. Ora ose afati e dallojnë një informacion që thjesht duhet ditur nga diçka për të cilën duhet vepruar. Shënimet ruajnë kontekstin që nuk futet dot në një numër apo status. Edhe siguria është një kategori, por përmbajtja dhe procedura e saj mbeten jashtë kësaj eseje.
+Shifrat dhe gjendja operative japin një fotografi të çastit. Pikat e hapura ndajnë atë që ka ndodhur nga ajo që kërkon ende veprim. Personi përgjegjës ka rëndësi, sepse një detyrë pa zot është shumë afër një detyre që nuk do ta bëjë askush. Ora ose afati ndajnë atë që thjesht duhet ditur nga ajo që kërkon veprim. Shënimet ruajnë kontekstin që nuk futet dot në një numër apo status. Edhe siguria është një kategori, por përmbajtja dhe procedura e saj mbeten jashtë kësaj eseje.
 
 Kontekstin njerëzor nuk e zëvendëson plotësisht asnjë mjet. Një sistem mund të regjistrojë se një pikë është e hapur, kush duhet ta ndjekë dhe deri kur, por nuk mund të garantojë vetë që personi që merr turnin e ka kuptuar pse ka rëndësi.
 

@@ -29,13 +29,13 @@ checklist:
       hint: Te dera, në recepsion, në faturë.
 ---
 
-Kam punuar në shitjen me pakicë dhe me shumicë në Shqipëri, pastaj në logjistikën last mile dhe sot në hoteleri në Gjermani. Nga jashtë janë tri botë të ndryshme. Nga brenda, pothuajse kudo, kam hasur të njëjtin problem: hendekun mes asaj që sipas procesit duhet të ndodhë dhe asaj që ndodh vërtet në terren.
+Kam punuar në shitjen me pakicë dhe me shumicë në Shqipëri, pastaj në logjistikën e miljes së fundit dhe sot në hoteleri në Gjermani. Nga jashtë janë tri botë të ndryshme. Nga brenda, pothuajse kudo, kam hasur të njëjtin problem: hendekun mes asaj që sipas procesit duhet të ndodhë dhe asaj që ndodh vërtet në terren.
 
 Në shitjen me pakicë dhe me shumicë mund ta kishe mallin, por nëse stoku nuk kontrollohej, nëse magazina dhe shitja nuk komunikonin mirë ose nëse informacioni nuk ishte i saktë, problemi përfundonte te klienti.
 
 Në logjistikë i njëjti problem merrte një formë tjetër: një pako që mungonte, një ngarkim që zgjaste më shumë se ç'duhej, një porosi e paplotë, një itinerar që nisej me vonesë ose një problem që duhej zgjidhur kur shoferi ishte tashmë në rrugë.
 
-Në hotel problemi ndryshon sërish pamje: një rezervim, një pagesë, një dhomë që nuk është mbyllur siç duhet në sistem, një mysafir që nuk u paraqit (no-show), një faturë ose një informacion që nuk ka kaluar nga një turn te tjetri.
+Në hotel problemi ndryshon sërish pamje: një rezervim, një pagesë, një dhomë që nuk është mbyllur siç duhet në sistem, një mysafir që nuk u paraqit, një faturë ose një informacion që nuk ka kaluar nga një turn te tjetri.
 
 Industria ndryshon. Ajo që kontrollon ndryshon. Por problemi i menaxhimit mbetet i njëjtë: nëse informacioni, përgjegjësia dhe ekzekutimi nuk takohen në të njëjtën pikë, diku do të dalë një gabim.
 
@@ -43,13 +43,13 @@ Këtë e shoh më qartë kur mendoj çfarë ishte “inventari” në secilën n
 
 Në shitjen me pakicë, inventari kishte kuptimin e tij klasik: produkti, magazina dhe ajo që kishe realisht në dispozicion për të shitur. Në Shqipëri kam pasur përgjegjësi për inventarin, magazinën, shitjen, kostot dhe fluksin e parave, dhe në njërën nga kompanitë një nga detyrat e mia ishte përmirësimi i menaxhimit të inventarit. Pas çdo numri produktesh qëndronte kapitali i kompanisë, dhe ai kapital duhej të përputhej me shitjen dhe me kërkesën reale.
 
-Në logjistikë inventari u bë fluksi fizik i porosive. Duhej të kontrolloje nëse ngarkimi bëhej në kohë, nëse mungonin pako, nëse kishte porosi të paplota ose dëmtime dhe nëse shoferët niseshin në kohën e duhur. Treguesit me të cilët punoja ishin koha e ngarkimit, vonesat, porositë e paplota dhe dëmtimet. Si dispeçer koordinoja mbi 70 shoferë në një turn: ndaja itineraret, kontrolloja nisjet dhe zgjidhja problemet në çast, ndërsa ndodhnin.
+Në logjistikë inventari u bë fluksi fizik i porosive. Duhej të kontrolloje nëse ngarkimi bëhej në kohë, nëse mungonin pako, nëse kishte porosi të paplota ose dëme dhe nëse shoferët niseshin në kohën e duhur. Treguesit që ndiqja ishin koha e ngarkimit, vonesat, porositë e paplota dhe dëmet. Si dispeçer koordinoja mbi 70 shoferë në një turn: ndaja itineraret, kontrolloja nisjet dhe zgjidhja problemet në çast, sapo dilnin.
 
 Në hotel inventari bëhet më abstrakt: dhomat, rezervimet, gjendja e tyre dhe paratë që lidhen me to. Gjatë natës kontrolloj rezervimet, mysafirët që nuk u paraqitën, pagesat, kreditin dhe lëvizjet financiare, si edhe dhomat që duhej të ishin liruar ose zgjatur. Në fund kontrolloj nëse dita mund të mbyllet pa i lënë gabime turnit tjetër.
 
 Kalova kështu nga kontrolli i një kutie në magazinë te kontrolli i një porosie në lëvizje, dhe pastaj te kontrolli i një dhome ose i një transaksioni që shpesh ekziston vetëm si informacion në sistem. Parimi nuk ka ndryshuar: ajo që sistemi thotë se ke dhe ajo që ekziston vërtet duhet të jenë e njëjta gjë.
 
-Edhe klienti ndryshon. Në dyqan e ke përballë: e sheh, ia lexon reagimin dhe ke më shumë hapësirë ta drejtosh bisedën. Në last mile marrëdhënia është shumë më e shkurtër. Klienti pret që porosia të arrijë në kohë, e plotë dhe pa dëmtime. Ai nuk e sheh magazinën, ngarkimin, problemet e itinerarit apo atë që ndodh pas ekranit. Për të rezultati është i thjeshtë: porosia erdhi siç duhej, ose jo.
+Edhe klienti ndryshon. Në dyqan e ke përballë: e sheh, ia lexon reagimin dhe ke më shumë hapësirë ta drejtosh bisedën. Në miljen e fundit marrëdhënia është shumë më e shkurtër. Klienti pret që porosia të arrijë në kohë, e plotë dhe pa dëmtime. Ai nuk e sheh magazinën, ngarkimin, problemet e itinerarit apo atë që ndodh pas ekranit. Për të rezultati është i thjeshtë: porosia erdhi siç duhej, ose jo.
 
 Në hotel, sidomos natën, njerëzit mund të vijnë të lodhur nga udhëtimi, me një problem me rezervimin, pagesën ose dhomën. Në atë orë nuk ke pas vetes gjithë strukturën drejtuese që ekziston gjatë ditës. Situatën duhet ta përballosh vetë dhe njëkohësisht të dish ku mbaron autoriteti yt.
 
@@ -61,7 +61,7 @@ Kjo më ndihmoi më vonë, edhe kur njerëzit nuk quheshin më rishitës. Në lo
 
 Kontrolli operacional kaloi lehtë nga një industri te tjetra. Kudo kam pasur të njëjtin instinkt: çfarë duhet të ndodhë, çfarë po ndodh vërtet, ku është hendeku dhe kush duhet të veprojë. Edhe puna me njerëzit kaloi. Titujt e punës ndryshojnë më shpejt se natyra njerëzore. Presioni, keqkuptimi, përgjegjësia dhe nevoja për komunikim ekzistojnë kudo.
 
-Ajo që nuk kaloi vetvetiu ishte njohuria teknike e secilës industri. Nuk mund të hysh në logjistikë vetëm sepse di të drejtosh një dyqan: duhet të mësosh planifikimin e itinerareve, dispeçimin, ngarkimin dhe si funksionon një operacion në kohë reale. Hoteleria kërkon edhe më shumë. Sistemi i menaxhimit të pronës, rezervimet, kreditë, pagesat, mysafirët që nuk u paraqitën, procedurat e auditimit të natës dhe mbyllja e ditës janë një gjuhë më vete, dhe atë gjuhë m'u desh ta mësoja.
+Ajo që nuk kaloi vetvetiu ishte njohuria teknike e secilës industri. Nuk mund të hysh në logjistikë vetëm sepse di të drejtosh një dyqan: duhet të mësosh planifikimin e itinerareve, dispeçimin, ngarkimin dhe si funksionon një operacion në kohë reale. Hoteleria kërkon edhe më shumë. Sistemi i menaxhimit të hotelit, rezervimet, kreditë, pagesat, mysafirët që nuk u paraqitën, procedurat e auditimit të natës dhe mbyllja e ditës janë një gjuhë më vete, dhe atë gjuhë m'u desh ta mësoja.
 
 Prandaj nuk besoj shumë te ideja se një menaxher i mirë duhet ta njohë që ditën e parë çdo hollësi të industrisë. Industrinë mund ta mësosh. Më e vështirë është të mësosh ta shohësh kur një proces nuk funksionon, të mos kalosh indiferent pranë problemit dhe ta marrësh përsipër deri në fund.
 

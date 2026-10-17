@@ -55,7 +55,7 @@ Three sources feed this essay: that remote role; my earlier work in last mile, w
 
 Imagine a van that should have left the ramp ten minutes ago. On the dashboard its tour is red. What had to happen for it to turn red?
 
-Someone had to see that the van was still there, or a scan had to be missing by a certain time. Someone or something had to report it. The system had to compare it with the target, at its own rhythm. Then your screen had to draw it. That is four steps, each with its own delay. How long that delay is varies from one system to the next, and for the system I work with now I know neither the exact list of indicators nor whether the data is updated in seconds, in minutes or later. That is exactly why it is the first question.
+Someone had to see that the van was still there, or a scan had to be missing by a certain time. Someone or something had to report it. The system had to compare it with the target, at its own rhythm. Then your screen had to draw it. That is four steps, each with its own delay. How long that delay is varies from one system to the next, and for the system I work with now I do not know whether the data is updated in seconds, in minutes or later. That is exactly why it is the first question.
 
 {diagram}
 
@@ -71,7 +71,7 @@ So the question to ask is what this number measures, when it was updated and wha
 
 ## Three wrong reactions
 
-Anyone who has sat in front of a dashboard will recognise three reactions to a red number. They are patterns: I have no documented case of my own in which a number turned red, I reacted and I know how it ended.
+Anyone who has sat in front of a dashboard will recognise three reactions to a red number. They are patterns, not cases.
 
 **Calling at once.** The number turns red and the phone is in your hand before you have thought. The person who takes the call may be in the middle of solving exactly that, and now has to stop to explain it to you. You have reacted to a situation that may no longer exist, and taken a pair of hands off the problem to do it.
 
@@ -81,7 +81,7 @@ Anyone who has sat in front of a dashboard will recognise three reactions to a r
 
 ## Four steps before the decision
 
-All three have one thing in common: the reaction is decided while the screen is red, which is the worst moment to decide anything. The right moment is before the shift. This is the order I would recommend today; it is my analysis, not a protocol I have followed:
+All three have one thing in common: the reaction is decided while the screen is red, which is the worst moment to decide anything. The right moment is before the shift. This is the order I would recommend today:
 
 1. **I check what the indicator measures and when it was updated.** Without that, I do not know whether I am looking at the present or the past.
 2. **I verify whether the problem is real and still open.** The number is a report, and someone has to confirm it.
@@ -96,10 +96,10 @@ When these four steps are settled before the shift, the first minutes after a re
 
 One more thing, for the end of the week rather than the shift. Look at the reds that led to no action because, when you checked them, they had already been solved or were not problems. If they are the majority, the alarm is training everyone to ignore it.
 
-A threshold raised without data, just to make the screen look better, hides the useless reds together with the ones that mattered. The alarm is reviewed on the data: how many reds there were, how many of them needed action, and what those had in common. That count is also the best argument you can take to the people who set the alarm. I have no documented case of asking for a threshold or target to be changed myself; this is how I would argue for it. Instead of “the dashboard is wrong”, tell them how many reds there were this week and how many of them asked for something.
+A threshold raised without data, just to make the screen look better, hides the useless reds together with the ones that mattered. The alarm is reviewed on the data: how many reds there were, how many of them needed action, and what those had in common. That count is also the best argument you can take to the people who set the alarm, and this is how I would use it: instead of “the dashboard is wrong”, tell them how many reds there were this week and how many of them asked for something.
 
 ## My red number
 
-The card below has one row for each number you follow on a screen. Fill it in before the shift. [Shift Pulse](/tools/shift-pulse/) shows the week's numbers side by side, so that a red day has ten days of history next to it before you decide what it means.
+Fill in the card below once for each number you follow on a screen, before the shift. [Shift Pulse](/tools/shift-pulse/) shows the week's numbers side by side, so that a red day has ten days of history next to it before you decide what it means.
 
 **A red number tells you where to look. It does not tell you what is there now. The distance between the two is the age of the number, and knowing it is your job.**

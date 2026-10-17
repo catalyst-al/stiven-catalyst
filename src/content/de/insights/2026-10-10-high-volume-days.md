@@ -6,8 +6,8 @@ series: improvement
 status: published
 featured: true
 summary: Druck erzeugt nicht immer die Probleme. Oft macht er sie sichtbarer.
-teaser: Wir hatten Tage, an denen die Nachfrage über der Prognose lag. Kurzfristig einbestellte Fahrer, manche noch in der Ramp-up-Phase. An diesen Tagen sah man, wie gut der Betrieb vorbereitet war.
-description: "Tage mit Nachfrage über der Prognose: wo der Druck auf der letzten Meile ankam, warum Kapazität mehr als Köpfe ist, und fünf Kontrollen vor dem großen Tag."
+teaser: Wir hatten Tage, an denen die Nachfrage über der Prognose lag. Kurzfristig einbestellte Fahrer, manche noch in der Einarbeitungsphase. An diesen Tagen sah man, wie gut der Betrieb vorbereitet war.
+description: "Tage mit Nachfrage über der Prognose: wo der Druck in der Last Mile ankam, warum Kapazität mehr als Köpfe ist, und fünf Kontrollen vor dem großen Tag."
 deck: 'Der achte Essay der Reihe „Verbesserung, die hält“: die Tage, an denen die Nachfrage über der Prognose lag, wo der Druck ankam, warum Kapazität keine Kopfzahl ist, und fünf Kontrollen vor dem großen Tag.'
 relatedTools:
   - /tools/delay-analyzer/
@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Vor dem großen Tag
   copy: Liste kopieren
-  note: Meine Empfehlungen heute, kein historischer Plan, von dem ich behaupte, ihn vollständig umgesetzt zu haben.
+  note: So würde ich es heute machen.
   items:
     - Die echte Kapazität ist geprüft, nicht nur die Zahl der eingeplanten Fahrer.
     - Neue Mitarbeitende sind für den Prozess geschult.
@@ -29,13 +29,13 @@ firstMove:
   - Machen Sie klar, wer entscheidet und wer informiert wird, wenn der Plan nicht reicht.
 ---
 
-An manchen Tagen auf der letzten Meile lag die Nachfrage über der Prognose. Fahrer mussten kurzfristig einbestellt werden, manche kamen zu spät, und einige waren in ihrer Ramp-up-Phase noch nicht ganz mit den SOPs vertraut. All das schlug auf die Organisation des Verladens und auf den Abfahrtsplan durch. So steht es in meinen Berichten von der letzten Meile aus dem Juni 2025.
+An manchen Tagen lag in der Last Mile die Nachfrage über der Prognose. Fahrer mussten kurzfristig einbestellt werden, manche kamen zu spät, und einige waren in ihrer Einarbeitungsphase noch nicht ganz mit den SOPs vertraut. All das schlug auf die Organisation des Verladens und auf den Abfahrtsplan durch. So steht es in meinen Berichten aus der Last Mile vom Juni 2025.
 
-Ein Datum für einen bestimmten Tag, die Gesamtzahl der Bestellungen oder die genauen Abfahrtsverspätungen stehen nicht darin, und Feiertage waren es nicht unbedingt: Es waren echte Situationen mit operativem Druck, ohne belegte Saison dahinter. Gezeigt haben mir diese Tage etwas, das ein gewöhnlicher Tag nicht zeigt.
+Es waren echte Situationen mit operativem Druck, nicht unbedingt Feiertage oder eine bekannte Saison. Gezeigt haben mir diese Tage etwas, das ein gewöhnlicher Tag nicht zeigt.
 
 ## Wo der Druck ankam
 
-Als Area Manager hatte ich vier Schichtleiter und acht Disponenten. Im Daily Stand-up ging es um die Ergebnisse der Kennzahlen, Probleme beim Verladen, Verspätungen, Sicherheit und die operative Abstimmung.
+Als Area Manager hatte ich vier Schichtleiter und acht Disponenten. Im täglichen Stand-up ging es um die Ergebnisse der Kennzahlen, Probleme beim Verladen, Verspätungen, Sicherheit und die operative Abstimmung.
 
 Die dokumentierten Probleme zeigen, wo Aufmerksamkeit nötig war, wenn der Druck stieg:
 
@@ -51,7 +51,7 @@ Keines dieser Probleme ist neu. Dieselben tauchen auch an einem gewöhnlichen Ta
 
 An solchen Tagen lautet die erste Frage meistens: Wie viele Fahrer haben wir?
 
-Geblieben ist mir aus diesen Berichten ein anderer Satz: Einige Fahrer in der Ramp-up-Phase waren noch nicht ganz mit den SOPs vertraut. Sie waren da. Sie wurden mitgezählt. Die Arbeit konnten sie noch nicht so machen wie die anderen.
+Geblieben ist mir aus diesen Berichten ein anderer Satz: Einige Fahrer in der Einarbeitungsphase waren noch nicht ganz mit den SOPs vertraut. Sie waren da. Sie wurden mitgezählt. Die Arbeit konnten sie noch nicht so machen wie die anderen.
 
 **Kapazität ist nicht nur die Zahl der Menschen, die Sie zur Verfügung haben. Es ist die Zahl der Menschen, die die Arbeit nach Standard machen können.**
 
@@ -67,7 +67,7 @@ In [6S ohne Plakat](/de/insights/6s-without-a-poster/) habe ich geschrieben, das
 
 ## Vor dem großen Tag
 
-Einer Führungskraft vor dem ersten großen Tag der Saison würde ich heute sagen: Warten Sie nicht, bis das Volumen steigt, um herauszufinden, ob das Team bereit ist. Fahrer, Fahrzeuge und Abfahrten wurden damals operativ geplant, aber von einem formalen Peak-Plan mit Kapazitätsstufen und besonderen Verfahren weiß ich nichts, und welcher Standard zuerst nachgab, als das Volumen stieg, kann ich nicht sagen. Die fünf Dinge, die ich empfehlen würde, sind deshalb Rat aus heutiger Sicht, und ich behaupte nicht, sie damals vollständig umgesetzt zu haben:
+Einer Führungskraft vor dem ersten großen Tag der Saison würde ich heute sagen: Warten Sie nicht, bis das Volumen steigt, um herauszufinden, ob das Team bereit ist. Fahrer, Fahrzeuge und Abfahrten wurden damals operativ geplant. Die fünf Dinge, die ich empfehlen würde, sind Rat aus heutiger Sicht:
 
 1. **Die echte Kapazität prüfen**, über die Zahl der eingeplanten Fahrer hinaus.
 2. **Prüfen, ob neue Mitarbeitende für den Prozess geschult sind.**

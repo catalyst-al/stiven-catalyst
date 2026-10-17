@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein guter Standard misst sich daran, wie genau verschiedene Menschen ihn umsetzen können, auch wenn sie nicht dieselbe Sprache sprechen.
-description: "Standards für ein mehrsprachiges Team: Sprache und Können trennen, kurze, visuelle Anweisungen und „Zeig mir, wie du es machen würdest“ statt „Verstanden?“"
+description: "Standards für ein mehrsprachiges Team: Sprache und Können trennen, kurze visuelle Anweisungen und „Zeigen Sie mir, wie Sie es machen würden“ statt „Verstanden?“"
 teaser: Eine Sprache noch nicht gut zu sprechen heißt nicht, in seiner Arbeit nicht gut zu sein.
 deck: 'Der achte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: was mich die Arbeit in Deutschland gelehrt hat, warum Übersetzen nicht reicht, die fünf Dinge einer guten Anweisung, und die Karte, mit der aus einer unklaren Anweisung ein prüfbarer Standard wird.'
 checklist:
@@ -28,7 +28,7 @@ checklist:
 firstMove:
   - Nehmen Sie eine Anweisung, die immer wieder missverstanden wird, und schreiben Sie sie neu als Handlung, Ort und Zeitpunkt, Prüfung, Ausnahme.
   - Fügen Sie ein Foto oder einen Screenshot des richtig ausgeführten Schritts hinzu.
-  - "Statt „Verstanden?“ sagen Sie: „Zeig mir, wie du es machen würdest.“"
+  - "Statt „Verstanden?“ sagen Sie: „Zeigen Sie mir, wie Sie es machen würden.“"
 ---
 
 In einem Team können Menschen verschiedene Sprachen sprechen. Der Arbeitsstandard muss trotzdem für alle dasselbe bedeuten.
@@ -49,9 +49,9 @@ Deshalb sollte ein Arbeitsstandard nicht davon abhängen, ob jemand einer langen
 
 ## Kurze Regeln, sichtbare Schritte
 
-Auf der letzten Meile arbeitete ich mit mehreren DSPs und einer Struktur aus vielen Fahrern, Disponenten und Schichtleitern, in den Hotels in Deutschland mit Kollegen aus verschiedenen Abteilungen und mit internationalen Gästen.
+In der Last Mile arbeitete ich mit mehreren DSPs und einer Struktur aus vielen Fahrern, Disponenten und Schichtleitern, in den Hotels in Deutschland mit Kollegen aus verschiedenen Abteilungen und mit internationalen Gästen.
 
-Aus den betrieblichen Materialien, mit denen ich gearbeitet habe, weiß ich, dass es auf der letzten Meile Anweisungen und Regeln auf Deutsch und auf Englisch gab. Sie betrafen Sicherheit, Hygiene, Ladeverfahren, Scannen und Disziplin an der Rampe. Die Regeln waren kurz und an klare Handlungen gebunden: wo der Fahrer wartet, wann er den Team Leader informiert, wie gescannt wird, was beim Beladen verboten ist.
+Aus den betrieblichen Materialien, mit denen ich gearbeitet habe, weiß ich, dass es in der Last Mile Anweisungen und Regeln auf Deutsch und auf Englisch gab. Sie betrafen Sicherheit, Hygiene, Ladeverfahren, Scannen und Disziplin an der Rampe. Die Regeln waren kurz und an klare Handlungen gebunden: wo der Fahrer wartet, wann er den Team Leader informiert, wie gescannt wird, was beim Beladen verboten ist.
 
 Im Hotel habe ich mit Checklisten und SOPs auf Deutsch gearbeitet und mit englischen Materialien für die Kommunikation mit Gästen und für die Hotelservices. Ich habe Checklisten, Screenshots, Videos und Vorführungen von Kollegen genutzt.
 
@@ -65,8 +65,6 @@ Nehmen Sie eine hypothetische Anweisung, die nur „Ladung prüfen“ lautet. Zw
 
 In diesem Beispiel liegt der Fehler womöglich beim Standard, und ein unklarer Standard bleibt unklar, in welche Sprache man ihn auch übersetzt.
 
-Betriebliche Probleme habe ich gesehen und bearbeitet, aber ich habe keinen dokumentierten Fall, in dem ein Fehler sicher auf die Sprache zurückging. Deshalb schreibe ich ihr auch keinen zu.
-
 Eine gute Anweisung hat für mich:
 
 - **eine klare Handlung** pro Schritt;
@@ -75,17 +73,17 @@ Eine gute Anweisung hat für mich:
 - **eine Möglichkeit, das Ergebnis zu prüfen**;
 - **eine klare Anweisung, was bei einem Problem zu tun ist.**
 
-## „Zeig mir, wie du es machen würdest“
+## „Zeigen Sie mir, wie Sie es machen würden“
 
 „Verstanden?“ reicht nicht immer.
 
 Manche sagen „ja“, weil sie glauben, es verstanden zu haben, weil sie nicht unsicher wirken wollen oder weil sie nicht wissen, wie sie erklären sollen, was unklar ist. In einem Team mit vielen Sprachen passiert das noch leichter. Deshalb würde ich lieber sagen:
 
-**„Zeig mir, wie du es machen würdest.“**
+**„Zeigen Sie mir, wie Sie es machen würden.“**
 
 Dann würde ich prüfen, ob die Person es richtig macht, ob sie weiß, welches Ergebnis sie erreichen muss, und ob sie weiß, wann sie um Hilfe bitten soll.
 
-Daran halte ich mich als Standard; eine Szene, die ich belegen könnte, habe ich dazu nicht. Es ist derselbe Test, den ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) beschrieben habe: Mach es selbst, erklär mir, warum, zeig mir, was du tust, wenn eine Ausnahme kommt.
+Daran halte ich mich als Standard. Es ist derselbe Test, den ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) beschrieben habe: Die Person macht es selbst, erklärt, warum, und zeigt, was sie tut, wenn eine Ausnahme kommt.
 
 Wenn jemand eine Anweisung nicht versteht, ist mit dem lauteren Wiederholen desselben Satzes nichts gewonnen. Als Führungskräfte müssen wir prüfen, ob die Anweisung klar ist, ob sie vorgeführt wurde und ob die Person sie umsetzen kann.
 

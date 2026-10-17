@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Ein schlechter Tag ist ein Signal zum Prüfen. Er ist nicht automatisch der Beweis, dass der ganze Prozess geändert werden muss.
-teaser: Ein Bericht vom Juni 2025 wies für Delay 2,8 % aus. Schlechter Tag oder Problem? Davon hängt ab, ob Sie den Prozess ändern, und die Zahl allein gibt die Antwort nicht her.
+teaser: Ein Bericht vom Juni 2025 wies für die Verspätungen 2,8 % aus. Schlechter Tag oder Problem? Davon hängt ab, ob Sie den Prozess ändern, und die Zahl allein gibt die Antwort nicht her.
 description: "Ein Tag mit schlechten Kennzahlen: warum eine Zahl allein nicht zeigt, ob sich der Prozess geändert hat, die Regelkarte und vier Fragen, bevor Sie handeln."
 deck: 'Der fünfte Essay der Reihe „Verbesserung, die hält“: wie wir die Kennzahlen täglich verfolgten, warum eine einzelne Zahl nicht zeigt, ob sich der Prozess verändert hat, die zwei entgegengesetzten Fehler, wann man sofort eingreift, und vier Fragen, bevor Sie den Prozess ändern.'
 relatedTools:
@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Bevor Sie den Prozess ändern
   fill: true
-  note: Eine Orientierung, wie ich heute vorgehen würde, keine Methode, deren Einsatz ich belegen kann.
+  note: So würde ich es heute machen.
   items:
     - label: Gibt es ein akutes Sicherheits- oder Serviceproblem?
       hint: Wenn ja, greifen Sie jetzt ein. Die Analyse kommt danach.
@@ -36,9 +36,9 @@ diagram: three-layers
 
 2,8 %.
 
-So hoch lag Delay in einem Bericht vom Juni 2025. Ein schlechter Tag, oder ein Zeichen, dass sich im Prozess etwas verändert hatte? Die Zahl allein verrät es nicht.
+So hoch lagen die Verspätungen in einem Bericht vom Juni 2025. Ein schlechter Tag, oder ein Zeichen, dass sich im Prozess etwas verändert hatte? Die Zahl allein verrät es nicht.
 
-Auf der letzten Meile verfolgten wir Delay, Damage, Incomplete und Loading Time täglich. Die Ergebnisse kamen im Daily Stand-up auf den Tisch, jede Abweichung musste erklärt werden, und wir werteten die Zahlen auch nach DSP und nach operativen Problemen aus.
+In der Last Mile verfolgten wir täglich Verspätungen, Schadensquote, Unvollständigkeitsquote und Ladezeit. Die Ergebnisse kamen im täglichen Stand-up auf den Tisch, jede Abweichung musste erklärt werden, und wir werteten die Zahlen auch nach DSP und nach operativen Problemen aus.
 
 ## Eine Zahl ohne Geschichte
 
@@ -50,7 +50,7 @@ Das kommt darauf an. Jeder Prozess schwankt. Kein Tag fällt aus wie der andere,
 
 Genau darauf beruht die Regelkarte. Sie trägt die Tage nacheinander ein, dazu den Durchschnitt und zwei Grenzen, die zeigen, wie weit der Prozess üblicherweise schwankt. Ein Tag innerhalb der Grenzen ist sehr wahrscheinlich gewöhnliche Schwankung. Liegt ein Tag außerhalb, oder liegen mehrere Tage hintereinander auf derselben Seite des Durchschnitts, hat sich womöglich etwas verändert.
 
-Ob ich selbst eine solche Karte mit Eingriffsgrenzen verwendet habe, kann ich nicht mehr rekonstruieren, ebenso wenig, wie wir damals zwischen Abwarten und Eingreifen entschieden: ob wir warteten, bis sich ein Ergebnis wiederholte, oder tägliche oder wöchentliche Trends in Excel oder Power BI verfolgten. Was folgt, beschreibt, wie ich einen schlechten Tag heute lesen würde.
+Was folgt, beschreibt, wie ich einen schlechten Tag heute lesen würde.
 
 ## Zwei entgegengesetzte Fehler
 
@@ -78,7 +78,7 @@ Drittens: Haben wir eine konkrete Ursache gefunden, bevor wir den Prozess änder
 
 ## Menge, Wetter und Prozess
 
-Auf der letzten Meile verfolgten wir operative Ursachen: fehlende Taschen, vermischte Trolleys, Verzögerungen bei der Vorbereitung, Probleme beim Verladen. Eine dokumentierte Methode, mit der wir den Einfluss von Wetter und Menge von einem Prozessproblem getrennt hätten, ist mir nicht bekannt.
+In der Last Mile verfolgten wir operative Ursachen: fehlende Taschen, vermischte Trolleys, Verzögerungen bei der Vorbereitung, Probleme beim Verladen.
 
 Heute würde ich das Ergebnis, bevor ich mich auf eine Ursache festlege, mit der Arbeitsmenge, den Bedingungen des Tages und den Daten der Vortage vergleichen. 2,8 % Verspätungen an einem Tag mit außergewöhnlich hoher Menge bedeuten etwas anderes als 2,8 % an einem gewöhnlichen Tag.
 

@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një KPI që ekipi i beson nuk del domosdoshmërisht gjithmonë e gjelbër. Mat qartë, lexohet drejt dhe i ndihmon njerëzit të kuptojnë çfarë mund të bëjnë më mirë.
-description: "Si ndërtohet një KPI që njerëzit i besojnë: katër tregues në last mile, rezultati dhe arsyeja, pse asnjë tregues nuk lexohet i vetëm, dhe karta e KPI-së."
+description: "Si ndërtohet një KPI që njerëzit i besojnë: katër tregues në miljen e fundit, rezultati dhe arsyeja, pse asnjë tregues nuk lexohet i vetëm, dhe karta e KPI-së."
 teaser: Një KPI mund të jetë matematikisht e saktë dhe interpretimi i saj të jetë i padrejtë.
 deck: 'Eseja e gjashtë e serisë “Operacioni që punon pa ty”: përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi pas rezultatit, me kartën e një KPI-je që plotësohet para se të fillosh ta matësh.'
 relatedTools:
@@ -32,14 +32,14 @@ Le të supozojmë se një shofer niset me vonesë sepse porosia nuk ishte gati. 
 
 Te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/) shkrova se numri vetë nuk e përmirëson punën. Kjo ese merret me pyetjen që vjen pas: si ndërtohet një KPI që njerëzit i besojnë, që e kuptojnë, që nuk i ndëshkon për atë që nuk e kontrollojnë dhe që i çon te një veprim? Për mua, ky besim ndërtohet nga tri gjëra: **përkufizimi i qartë, përgjegjësia e drejtë dhe veprimi që vjen pas rezultatit.**
 
-## Katër tregues në last mile
+## Katër tregues në miljen e fundit
 
-Në last mile punonim kryesisht me katër tregues: Damage, Incomplete, Delay dhe Loading Time. Unë i kuptoja kështu, me fjalët e mia; nuk janë formulat zyrtare të kompanisë:
+Në miljen e fundit punonim kryesisht me katër tregues: dëmet, porositë e paplota, vonesat dhe kohën e ngarkimit (Damage, Incomplete, Delay, Loading Time). Unë i kuptoja kështu, me fjalët e mia, jo sipas formulave zyrtare:
 
-- **Damage:** dëmtimet e produkteve ose të porosive.
-- **Incomplete:** porositë që i arrinin klientit të paplota.
-- **Delay:** vonesat në kryerjen e procesit të dorëzimit.
-- **Loading Time:** koha që merrte ngarkimi i automjetit para nisjes.
+- **Dëmet:** dëmtimet e produkteve ose të porosive.
+- **Porositë e paplota:** ato që i arrinin klientit pa qenë të plota.
+- **Vonesat:** ato që ndodhnin gjatë procesit të dorëzimit.
+- **Koha e ngarkimit:** sa zgjaste ngarkimi i automjetit para nisjes.
 
 Bashkë, ishin katër mënyra për të parë cilësinë, kohën dhe disiplinën operative.
 
@@ -49,7 +49,7 @@ Kuptimi praktik i një treguesi dhe formula zyrtare që përdor një kompani jan
 
 Kam punuar me probleme që përfshinin më shumë se një fazë të procesit: çanta që mungonin, karroca të përziera, organizimi i ngarkesës dhe vonesa gjatë nisjes. Këto situata ma ndryshuan mënyrën si e shoh një KPI.
 
-Le të marrim shoferin nga shembulli më lart, që është ilustrim dhe jo rast i dokumentuar. Problemi shfaqet në nisje, por kjo nuk do të thotë automatikisht se përgjegjësia është vetëm e shoferit. Siç e kam shkruar te [Gabimet humbasin mes departamenteve](/sq/insights/mistakes-get-lost-between-departments/), vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ka lindur.
+Le të marrim shoferin nga shembulli më lart. Problemi shfaqet në nisje, por kjo nuk do të thotë automatikisht se përgjegjësia është vetëm e shoferit. Siç e kam shkruar te [Gabimet humbasin mes departamenteve](/sq/insights/mistakes-get-lost-between-departments/), vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ka lindur.
 
 Prandaj, para se të vlerësoj performancën e dikujt, dua të kuptoj cilën pjesë të rezultatit mund ta kontrollonte vërtet.
 
@@ -59,25 +59,25 @@ Kjo nuk do të thotë ta heqësh përgjegjësinë individuale vetëm sepse proce
 
 ## Rezultati dhe arsyeja
 
-Në last mile i ndiqnim KPI-të në raportet operative dhe në takimin e shkurtër të përditshëm të mëngjesit. Kam punuar me raporte për Damage, Incomplete, Delay dhe Loading Time, si edhe me analiza për shoferët dhe DSP-të. Në punën me raportimet kam kërkuar edhe përditësime gjatë ditës, përfshirë një ritëm prej 90 minutash për ndjekjen e disa treguesve.
+Në miljen e fundit i ndiqnim KPI-të në raportet operative dhe në takimin e shkurtër të përditshëm të mëngjesit. Kam punuar me raporte për dëmet, porositë e paplota, vonesat dhe kohën e ngarkimit, si edhe me analiza për shoferët dhe DSP-të. Në punën me raportimet kam kërkuar edhe përditësime gjatë ditës, përfshirë një ritëm prej 90 minutash për ndjekjen e disa treguesve.
 
 Doja t'i mbaja të ndara dy lloje informacioni. Njëri tregonte **rezultatin**: sa vonesa, sa dëme, sa porosi të paplota. Tjetri tregonte **arsyen**: çfarë ndodhi në proces që solli atë rezultat. Pa pjesën e dytë, numrat mund të kthehen në raportim pa mësim.
 
-Nëse Delay është i lartë, dua të di pse. A lidhet me përgatitjen e porosive, me organizimin e rampës, me kohën e ngarkimit apo me ndonjë shkak tjetër? Nëse Damage rritet, nuk pyes vetëm kush e kishte porosinë. Dua të di në cilën fazë mund të ketë ndodhur dëmtimi dhe si mund ta parandalojmë.
+Nëse vonesat janë të larta, dua të di pse. A lidhet me përgatitjen e porosive, me organizimin e rampës, me kohën e ngarkimit apo me ndonjë shkak tjetër? Nëse rriten dëmet, nuk pyes vetëm kush e kishte porosinë. Dua të di në cilën fazë mund të ketë ndodhur dëmtimi dhe si mund ta parandalojmë.
 
 Një KPI që përdoret vetëm për t'i treguar dikujt se është nën objektiv nuk e ndihmon domosdoshmërisht të përmirësohet. Besoj se njerëzit kanë më shumë arsye t'i besojnë një KPI-je kur ajo përdoret për ta kuptuar dhe për ta përmirësuar punën, dhe më pak kur thjesht krahason individët.
 
 ## Asnjë tregues nuk lexohet i vetëm
 
-Le të supozojmë, si shembull i dytë, se një organizatë mat vetëm shpejtësinë e ngarkimit, pa e lidhur me cilësinë dhe sigurinë. Kështu mund t'i nxisë njerëzit të nxitojnë. Prandaj nuk do ta vlerësoja kurrë Loading Time të shkëputur nga Damage, Incomplete dhe siguria.
+Le të supozojmë se një organizatë mat vetëm shpejtësinë e ngarkimit, pa e lidhur me cilësinë dhe sigurinë. Kështu mund t'i nxisë njerëzit të nxitojnë. Prandaj nuk do ta vlerësoja kurrë kohën e ngarkimit të shkëputur nga dëmet, porositë e paplota dhe siguria.
 
 Nëse një tregues përmirësohet, por një tjetër përkeqësohet pikërisht për shkak të mënyrës si u arrit përmirësimi, duhet të shohim nëse po matim sjelljen e duhur.
 
 ## Në hotel: tregues që nuk janë KPI
 
-Në hotel punohet me një tjetër grup informacioni operativ. Gjatë auditimit të natës kontrolloja raportet ditore, statusin e dhomave, mbërritjet, nisjet, mysafirët që nuk u paraqitën (no-show), parashikimin për ditën tjetër dhe çështjet e hapura që mund të ndikonin në operacion. Një pjesë e rëndësishme ishte të kontrolloja nëse informacioni ishte i saktë para mbylljes së ditës.
+Në hotel punohet me një tjetër grup informacioni operativ. Gjatë auditimit të natës kontrolloja raportet ditore, statusin e dhomave, mbërritjet, nisjet, mysafirët që nuk u paraqitën, parashikimin për ditën tjetër dhe çështjet e hapura që mund të ndikonin në operacion. Një pjesë e rëndësishme ishte të kontrolloja nëse informacioni ishte i saktë para mbylljes së ditës.
 
-Këta ishin tregues dhe kontrolle operative që i përdorja në punë; nuk kam asgjë që tregon se të gjithë ishin KPI formale me objektiva individualë për Night Auditor-in.
+Këta tregues dhe kontrolle i përdorja në punë si mjete operative; asgjë nga ç'kam nuk tregon se ishin KPI formale me objektiva individualë për Night Auditor-in.
 
 Në hotel e kuptova edhe më mirë se një numër nuk e tregon gjithmonë gjithë situatën. Mund të kesh një raport të saktë dhe njëkohësisht një problem të hapur që ende kërkon veprim. Prandaj raporti duhet të lidhet me statusin real, me përgjegjësinë dhe me kalimin e informacionit te turni tjetër.
 

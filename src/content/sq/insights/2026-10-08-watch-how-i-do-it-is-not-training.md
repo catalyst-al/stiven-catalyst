@@ -29,7 +29,7 @@ checklist:
 
 “Rri me të sot dhe shiko si e bën.”
 
-Kështu fillon ndoshta shumica e punonjësve të sapoardhur, dhe kjo nuk është e keqe në vetvete. Të shohësh dikë me përvojë është një nga mënyrat më të shpejta për të kuptuar si duket puna në të vërtetë.
+Kështu e nis punën ndoshta shumica e punonjësve të rinj, dhe kjo në vetvete nuk është keq. Të shohësh dikë me përvojë është një nga mënyrat më të shpejta për të kuptuar si duket puna në të vërtetë.
 
 Problemi nis kur të shikuarit bëhet i gjithë trajnimi. Atëherë i porsaardhuri nuk mëson vetëm standardin, por edhe mënyrën personale të atij që e trajnon: shkurtoret e tij, rendin e tij, gjërat që i kontrollon dy herë dhe ato që i ka lënë pas dore. Dhe nesër, kur të trajnojë vetë dikë tjetër, do t'ia kalojë versionin e vet.
 
@@ -39,11 +39,11 @@ Problemi nis kur të shikuarit bëhet i gjithë trajnimi. Atëherë i porsaardhu
 
 Në hotelin ku fillova si Night Auditor pata tri net trajnimi, nga e marta deri të enjten.
 
-Trajnimi përbëhej nga disa gjëra: lista e kontrollit e Night Audit, dokumente të veçanta për procese të ndryshme, kolegë që më tregonin në praktikë çfarë bënin, video dhe pamje ekrani. Unë mbaja shënime.
+Trajnimi përbëhej nga disa gjëra: lista e kontrollit e auditimit të natës, dokumente të veçanta për procese të ndryshme, kolegë që më tregonin në praktikë çfarë bënin, video dhe pamje ekrani. Unë mbaja shënime.
 
-Nata e parë pati edhe një pengesë. Sistemi ra për disa orë, ndaj nuk mundëm ta bënim trajnimin normal për të gjithë procesin; nata u kthye më shumë në një njohje me punën dhe me ambientin. Për të kam shkruar te [30 ditët e para](/sq/insights/the-first-30-days/). Nëse fillova të punoja krejt vetëm menjëherë pas natës së tretë, nuk mund ta them me siguri.
+Nata e parë pati edhe një pengesë. Sistemi ra për disa orë, ndaj nuk mundëm ta bënim trajnimin normal për të gjithë procesin; nata u kthye më shumë në një njohje me punën dhe me ambientin. Për të kam shkruar te [30 ditët e para](/sq/insights/the-first-30-days/).
 
-Ajo që mund ta them me siguri është çfarë më mungoi më shumë: një rrugë e vetme dhe e qartë nga fillimi në fund.
+Më shumë se gjithçka më mungoi një rrugë e vetme dhe e qartë nga fillimi në fund.
 
 Informacioni ekzistonte, por ishte i shpërndarë. Lista e kontrollit të thoshte çfarë duhej bërë. Një dokument tjetër të tregonte si. Një video tregonte një rast konkret. Pjesën tjetër ta shpjegonte një koleg. Secila pjesë ishte e dobishme, por lidhjen mes tyre duhej ta bëja vetë.
 
@@ -55,7 +55,7 @@ Kur procesi nuk është i shkruar si një rrugë e qartë, ai jeton te personi q
 
 Trajneri nuk ka faj: zakonisht ai është njeriu më i mirë që ke, dhe pikërisht për këtë e ke zgjedhur të trajnojë të tjerët. Por edhe njeriu më i mirë ka interpretimin e vet. Ai e di pse e lë një hap për më vonë, ose pse e kontrollon diçka ndryshe. I porsaardhuri sheh vetëm veprimin; arsyeja mbetet në kokën e tjetrit.
 
-Nëse dy të porsaardhur trajnohen nga dy kolegë të ndryshëm, mësojnë dy versione të së njëjtës punë. Pas disa muajsh, në vend të një standardi ke disa zakone që i ngjajnë njëri-tjetrit.
+Kur dy të porsaardhur i trajnojnë dy kolegë të ndryshëm, ata mësojnë dy versione të së njëjtës punë. Pas disa muajsh, në vend të një standardi ke disa zakone që i ngjajnë njëri-tjetrit.
 
 Prandaj trajnimi nuk mund të ndahet nga standardi. Pa një [SOP që përdoret realisht](/sq/insights/a-good-sop-is-not-a-document/), trajnimi kthehet në kopjim.
 
@@ -69,7 +69,7 @@ Nëse funksionojnë të treja, trajnimi ka nisur të japë rezultat. Nëse funks
 
 ## Ora e parë
 
-Nga këtu e tutje përshkruaj si do ta bëja unë, dhe flas si ai që u trajnua: nuk kam asnjë rast të dokumentuar mirë ku të kem marrë vetë një punonjës të ri hap pas hapi nëpër punë. Nga puna në last mile di që kishte rregulla të qarta operative për sigurinë, ngarkimin, skanimin, rampën, zinxhirin e ftohtë dhe mënyrën e punës, dhe që në rastet kur shkeleshin standardet kërkohej ritrajnim. Si fillonin dispeçerët, punonjësit e rampës ose shoferët e DSP-ve të sapoardhur, me një program të strukturuar disaditor apo duke mësuar kryesisht pranë dikujt, nuk mund ta them me siguri.
+Që këtu e tutje përshkruaj si do ta bëja sot, dhe flas si ai që u trajnua. Nga puna në miljen e fundit di që kishte rregulla të qarta operative për sigurinë, ngarkimin, skanimin, rampën, zinxhirin e ftohtë dhe mënyrën e punës, dhe që, kur shkeleshin standardet, kërkohej ritrajnim.
 
 Në orën e parë do të kufizohesha te pesë gjëra që i porsaardhuri duhet t'i dijë:
 
@@ -89,7 +89,7 @@ Rendi që do të ndiqja është i thjeshtë:
 
 **Shiko. Bëje bashkë me mua. Bëje ti ndërsa unë shikoj. Bëje vetëm. Pastaj ma shpjego.**
 
-Për mua, kjo është shumë më e fortë se “rri me të sot dhe shiko si e bën”. Të shikuarit mbetet hapi i parë, një nga pesë. Në fund ka rëndësi sa i njëjtë dhe i sigurt mbetet rezultati pasi trajneri të jetë larguar.
+Për mua, kjo është shumë më e fortë se “rri me të sot dhe shiko si e bën”. Të shikuarit mbetet hapi i parë, një nga pesë. Në fund ka rëndësi sa i njëjtë dhe i sigurt mbetet rezultati kur trajneri ka ikur.
 
 ## Plani i javës së parë për një punonjës të ri
 

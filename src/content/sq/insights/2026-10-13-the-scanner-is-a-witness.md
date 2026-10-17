@@ -7,15 +7,15 @@ status: published
 featured: true
 summary: "Një skanim tregon që një veprim u regjistrua. Nuk tregon as gjithë historinë e produktit, as kush e ka fajin."
 teaser: Sistemi të tregon çfarë është regjistruar. Menaxheri duhet të kuptojë çfarë ka ndodhur.
-description: "Çfarë dëshmon një skanim dhe çfarë jo, pse rindërton dhe nuk gjykon, pesë hapa për një mospërputhje mes sistemit dhe realitetit, si dhe një kartelë."
-deck: "Eseja e katërt e serisë “Sistemi është më i shpejtë se ti”: çfarë dëshmon një skanim, pse një regjistrim i saktë nuk provon që procesi fizik mbaroi saktë, pesë hapa për një mospërputhje dhe një kartelë që e ndan gabimin e regjistrimit nga gabimi i ngarkimit."
+description: "Çfarë dëshmon një skanim dhe çfarë jo, pse rindërton dhe nuk gjykon, pesë hapa për një mospërputhje mes sistemit dhe realitetit, si dhe një kartë."
+deck: "Eseja e katërt e serisë “Sistemi është më i shpejtë se ti”: çfarë dëshmon një skanim, pse një regjistrim i saktë nuk provon që procesi fizik mbaroi saktë, pesë hapa për një mospërputhje dhe një kartë që e ndan gabimin e regjistrimit nga gabimi i ngarkimit."
 relatedTools:
   - /tools/incomplete-control/
   - /tools/five-whys/
 checklist:
   title: Një mospërputhje mes sistemit dhe realitetit
   fill: true
-  note: "Një kartelë për çdo rast kur sistemi thotë një gjë dhe karroca, rafti ose dhoma thotë tjetër. Plotësoje para se të flasësh për fajin."
+  note: "Një kartë për çdo rast kur sistemi thotë një gjë dhe karroca, rafti ose dhoma thotë tjetër. Plotësoje para se të flasësh për fajin."
   items:
     - label: "Çfarë u regjistrua dhe kur?"
       hint: "Veprimi, ora, vendi. Vetëm ajo që thotë regjistrimi, pa e interpretuar ende."
@@ -34,15 +34,15 @@ firstMove:
   - "Në fund të javës, shkruaj për çdo mospërputhje shkakun e konfirmuar dhe masën. Ato pa shkak të konfirmuar janë puna e javës tjetër."
 ---
 
-Në last mile, fjalën e fundit zakonisht e ka skaneri. Kjo ese pyet çfarë thotë në të vërtetë ajo fjalë. Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e mbylla me listën e eseve që do të vinin, dhe njëra prej tyre ishte për skanerin si dëshmitar dhe jo si gjykatës. Kjo është ajo ese.
+Në miljen e fundit, fjalën e fundit zakonisht e ka skaneri. Kjo ese pyet çfarë thotë në të vërtetë ajo fjalë. Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than-you/) e mbylla me listën e eseve që do të vinin, dhe njëra prej tyre ishte për skanerin si dëshmitar dhe jo si gjykatës. Kjo është ajo ese.
 
-Te kjo temë vij nga last mile, me problemet e ngarkimit, çantat që mungonin dhe karrocat e përziera; nga raportimet ku përmendeshin edhe mospërputhje gjatë skanimit dhe ngarkimit; nga Incomplete dhe Damage, KPI që i ndiqnim çdo ditë; dhe nga rregullat e udhëzimeve operative, për të cilat flas më poshtë. Nga hoteli sjell dallimin mes asaj që regjistron sistemi dhe gjendjes reale të një dhome, për të cilin shkrova në esenë e parë.
+Te kjo temë vij nga milja e fundit, me problemet e ngarkimit, çantat që mungonin dhe karrocat e përziera; nga raportimet ku përmendeshin edhe mospërputhje gjatë skanimit dhe ngarkimit; nga porositë e paplota dhe dëmet, KPI që i ndiqnim çdo ditë; dhe nga rregullat e udhëzimeve operative, për të cilat flas më poshtë. Nga hoteli sjell dallimin mes asaj që regjistron sistemi dhe gjendjes reale të një dhome, për të cilin shkrova në esenë e parë.
 
 ## Çfarë dëshmon një skanim
 
 Një skanim është një fjali e shkurtër dhe e saktë: ky kod u lexua, në këtë vend, në këtë orë. Asgjë më shumë.
 
-Nuk thotë që çanta është ende aty, as që u vu në karrocën e duhur. Nuk thotë që karroca e duhur shkoi te shoferi i duhur, as që shoferi i mori të gjitha para se të nisej. Të gjitha këto ndodhin pas skanimit, në botën fizike, ku skaneri nuk sheh. Nuk kam asnjë rast të verifikuar ku sistemi e tregonte një çantë si të skanuar dhe unë pashë vetë që mungonte, por kufiri qëndron që në atë që regjistron një skanim.
+Nuk thotë që çanta është ende aty, as që u vu në karrocën e duhur. Nuk thotë që karroca e duhur shkoi te shoferi i duhur, as që shoferi i mori të gjitha para se të nisej. Të gjitha këto ndodhin pas skanimit, në botën fizike, ku skaneri nuk sheh.
 
 Skanimi e ruan vlerën e vet; këta kufij tregojnë për çfarë vlen. Një dëshmitar i mirë thotë saktë atë që pa, dhe asgjë për atë që ndodhi kur ai nuk ishte aty.
 
@@ -52,13 +52,13 @@ Skanimi e ruan vlerën e vet; këta kufij tregojnë për çfarë vlen. Një dës
 
 Te [Ku humbet një pjesë e porosisë](/sq/insights/where-part-of-the-order-goes-missing/) përshkrova rregullin kur mungonte një çantë: shoferi njoftonte Team Leader-in, dhe karroca qëndronte brenda zonës së përcaktuar derisa të zgjidhej problemi.
 
-Nuk e di kush e shkroi këtë rregull dhe kur, ndaj ajo që vijon është leximi im. Rregulli nuk i kërkon askujt të shohë ekranin. I kërkon dikujt të ndalet dhe ta shohë karrocën. Pikërisht kur regjistrimi dhe realiteti mund të jenë ndarë, ai ia jep fjalën kontrollit fizik dhe e mban karrocën aty ku ky kontroll mund të bëhet ende. Mbi këtë parim qëndron gjithë kjo ese.
+Unë e lexoj kështu. Rregulli nuk i kërkon askujt të shohë ekranin. I kërkon dikujt të ndalet dhe ta shohë karrocën. Pikërisht kur regjistrimi dhe realiteti mund të jenë ndarë, ai ia jep fjalën kontrollit fizik dhe e mban karrocën aty ku ky kontroll mund të bëhet ende. Mbi këtë parim qëndron gjithë kjo ese.
 
 ## Emri në rreshtin e fundit
 
-Kur mungon një çantë, në shumicën e operacioneve pyetja e parë është “kush e bëri?” në vend të “ku humbi?”. Dhe historiku i skanimit duket si përgjigjja më e shpejtë: ja kush e skanoi i fundit. Nuk kam asnjë rast ku u përdor për të fajësuar një shofer, ose ku e përdora vetë për të përcaktuar përgjegjësinë, por shkurtimi i rrugës bie në sy.
+Kur mungon një çantë, në shumicën e operacioneve pyetja e parë është “kush e bëri?” në vend të “ku humbi?”. Dhe historiku i skanimit duket si përgjigjja më e shpejtë: ja kush e skanoi i fundit. Rruga e shkurtër bie në sy.
 
-Por një çantë mund të humbasë në magazinë, gjatë përgatitjes, gjatë ngarkimit ose në rrugë, dhe problemet që kishim në last mile mund të preknin secilën nga këto pjesë. Skanimi i fundit tregon kush e preku çantën i fundit në sistem; ku u nda ajo nga vendi i vet, këtë nuk e tregon dot.
+Por një çantë mund të humbasë në magazinë, gjatë përgatitjes, gjatë ngarkimit ose në rrugë, dhe problemet që kishim në miljen e fundit mund të preknin secilën nga këto pjesë. Skanimi i fundit tregon kush e preku çantën i fundit në sistem; ku u nda ajo nga vendi i vet, këtë nuk e tregon dot.
 
 Te [KPI-të nuk përmirësohen në Excel](/sq/insights/kpis-do-not-improve-in-excel/) shkrova që, kur e trajton numrin si përgjigje, e ndëshkon shoferin për një çantë që nuk ka qenë kurrë në karrocën e tij. Historiku i skanimit të shtyn drejt të njëjtit gabim, vetëm një hap më afër.
 
@@ -68,13 +68,13 @@ Kur provohet që dikush e ka shkelur standardin, përgjegjësia individuale mbet
 
 ## Kur skanimi mungon
 
-Ka edhe anën tjetër: skaneri që nuk punon, skanimi që nuk bëhet. Nuk kam një rast për të treguar dhe nuk e di si ishte rregulluar zyrtarisht, ndaj kjo pjesë është rekomandim.
+Ka edhe anën tjetër: skaneri që nuk punon, skanimi që nuk bëhet. Këtu mund të them vetëm çfarë do të këshilloja sot.
 
 Një gjë nuk do ta sugjeroja: që puna të vazhdojë pa skanim aty ku procedura e kërkon. Kjo vlen sidomos për produktet e ftohura dhe të ngrira, ku vetë skanimi brenda zonës së temperaturës është pjesë e rregullit. Aty ku mungon dëshmitari, askush nuk e mbush boshllëkun me një supozim: çdo përjashtim trajtohet sipas rregullave të autorizuara dhe shënohet me shkrim.
 
 ## Pesë hapa për një mospërputhje
 
-Sot një mospërputhje mes sistemit dhe realitetit do ta hetoja kështu. Është rekomandim, jo protokoll që e kam zbatuar në çdo rast:
+Sot një mospërputhje mes sistemit dhe realitetit do ta hetoja kështu:
 
 1. **Kontrollo regjistrimin dhe kohën e tij.** Çfarë thotë saktësisht sistemi dhe kur e tha.
 2. **Verifiko gjendjen fizike të ngarkesës.** Me sytë e tu, jo me një skanim tjetër.
@@ -88,10 +88,10 @@ Hapi i tretë është ai që shpesh anashkalohet. Pa të, kërkimi fillon te rre
 
 Në Front Office dhe në Night Audit, sistemi regjistron rezervime, statuse dhomash, check-in, check-out dhe informacione të tjera operative. Ankesat për presionin e ujit dhe pastërtinë e dhomave, që i kam të dokumentuara, kërkonin komunikim me departamentet përgjegjëse, sepse gjendja reale duhej verifikuar aty ku ishte, jo në ekran.
 
-Nuk kam asnjë rast ku sistemi e tregonte një dhomë në rregull dhe unë gjeta të kundërtën. Parimi është i njëjti si me skanerin, dhe e kam shtjelluar te eseja e parë: statusi në sistem dhe historia e plotë e një problemi nuk janë e njëjta gjë.
+Parimi është i njëjti si me skanerin, dhe e kam shtjelluar te eseja e parë: statusi në sistem dhe historia e plotë e një problemi nuk janë e njëjta gjë.
 
 ## Një mospërputhje mes sistemit dhe realitetit
 
-Kartela më poshtë vlen për çdo rast kur sistemi thotë një gjë dhe karroca, rafti ose dhoma thotë tjetër. Plotësoje para se të flasësh për fajin. [Kontrolli i plotësisë](/sq/tools/incomplete-control/) i mban rastet krah njëri-tjetrit, që një mospërputhje që përsëritet në të njëjtën pikë të dallohet si skemë që përsëritet.
+Karta më poshtë vlen për çdo rast kur sistemi thotë një gjë dhe karroca, rafti ose dhoma thotë tjetër. Plotësoje para se të flasësh për fajin. [Kontrolli i plotësisë](/sq/tools/incomplete-control/) i mban rastet krah njëri-tjetrit, që një mospërputhje që përsëritet në të njëjtën pikë të dallohet si skemë.
 
 Historiku i skanimit të tregon çfarë është regjistruar. Ajo që ka ndodhur qëndron te procesi mes regjistrimit dhe karrocës, dhe aty bëhet puna: ta ndjekësh mbrapsht, hap pas hapi, deri te pika e fundit ku sistemi dhe realiteti ende përputheshin.

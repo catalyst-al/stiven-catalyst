@@ -8,7 +8,7 @@ featured: true
 summary: "Një raport i gjeneruar shpejt dhe i shkruar bukur nuk garanton që informacioni është i plotë. Përgjegjësia për përmbajtjen e tij duhet të mbetet te njeriu."
 teaser: Një raport i gjeneruar duket i përfunduar. Nëse është i saktë dhe çfarë mbetet ende e hapur, duhet ta kontrollojë një njeri.
 description: "Raportet e sistemit dhe ato të AI: pse dy raporte të sakta mund të mos përputhen, çfarë kontrollon para se t'i besosh dhe një raport në tri pjesë."
-deck: "Eseja e pestë e serisë “Sistemi është më i shpejtë se ti”: raportet automatike të last mile dhe të Night Audit, AI që e shkruan tekstin më qartë, pse një raport i bukur nuk do të thotë që problemi është kuptuar dhe një kartelë për një raport në tri pjesë."
+deck: "Eseja e pestë e serisë “Sistemi është më i shpejtë se ti”: raportet automatike të miljes së fundit dhe të Night Audit, AI që e shkruan tekstin më qartë, pse një raport i bukur nuk do të thotë që problemi është kuptuar dhe një kartë për një raport në tri pjesë."
 relatedTools:
   - /tools/shift-handover/
   - /tools/kpi-diagnostic/
@@ -36,13 +36,13 @@ firstMove:
 
 Në fund të esesë së parë të kësaj serie premtova një ese për raportin që e shkroi një makinë. Atëherë mendoja për raportet që i prodhon vetë sistemi: numrat e ditës, mbylljen e natës. Sot ka edhe një makinë të dytë, që nuk i prodhon numrat, por i përmbledh dhe i shkruan në gjuhë profesionale. Kjo ese është për të dyja.
 
-Pas saj qëndrojnë raportet me të cilat kam punuar çdo ditë. Në last mile: raportet ditore të KPI-ve për Damage, Incomplete, Delay dhe Loading Time, raportet e performancës sipas DSP-së dhe sipas shoferit, si dhe raportimet për problemet operative, vonesat dhe porositë jo të plota. Në hotel, gjatë Night Audit: raportet e gjendjes së hotelit dhe të zënies, mbërritjet, largimet dhe mosparaqitjet, raportin dhe parashikimin e mëngjesit, raportet e mbylljes së ditës dhe informacionin për turnin pasardhës. Tek ato shkoj me pyetjen që ia bëj vetes sa herë që një raport më duket i gatshëm: çfarë më thotë dhe çfarë më lë të besoj?
+Pas saj qëndrojnë raportet me të cilat kam punuar çdo ditë. Në miljen e fundit: raportet ditore të KPI-ve për dëmet, porositë e paplota, vonesat dhe kohën e ngarkimit, raportet e performancës sipas DSP-së dhe sipas shoferit, si dhe raportimet për problemet operative, vonesat dhe porositë e paplota. Në hotel, gjatë Night Audit: raportet e gjendjes së hotelit dhe të zënies, mbërritjet, largimet dhe mysafirët që nuk u paraqitën, raportin dhe parashikimin e mëngjesit, raportet e mbylljes së ditës dhe informacionin për turnin pasardhës. U qasem me pyetjen që ia bëj vetes sa herë që një raport më duket i gatshëm: çfarë më thotë dhe çfarë më lë të besoj?
 
 ## Dy raporte, dy numra
 
 Në Night Audit kam pasur një rast ku numri i personave në parashikimin e mëngjesit ndryshonte nga ai në raportin e gjendjes së hotelit: dy raporte, nga i njëjti sistem, për të njëjtën natë, me dy numra të ndryshëm.
 
-Reagimi i parë është të pyesësh cili prej tyre është gabim. Por nuk mund të them që sistemi kishte gabuar, dhe nuk kam asnjë rast ku kam provuar se një raport automatik ishte i gabuar dhe e kam korrigjuar. Dy raporte mund të numërojnë me kritere të ndryshme dhe të tregojnë shifra të ndryshme pa qenë asnjëri i pasaktë. Rasti kërkonte një kontroll: t'i krahasoje dy burimet dhe të kuptoje çfarë numëron secili.
+Reagimi i parë është të pyesësh cili prej tyre është gabim. Por nuk mund të them që sistemi kishte gabuar. Dy raporte mund të numërojnë me kritere të ndryshme dhe të tregojnë shifra të ndryshme pa qenë asnjëri i pasaktë. Rasti kërkonte një kontroll: t'i krahasoje dy burimet dhe të kuptoje çfarë numëron secili.
 
 Kjo është pjesa e raporteve automatike që harrohet më lehtë. Një raport i gjeneruar duket përfundimtar sepse është i rregullt: tabela, kolona, totale. Por rregulli i tij nuk thotë asgjë për pyetjen që ke ti. Thotë vetëm se sistemi iu përgjigj pyetjes që iu bë, me kriteret që iu dhanë.
 
@@ -50,7 +50,7 @@ Kjo është pjesa e raporteve automatike që harrohet më lehtë. Një raport i 
 
 ## Mbyllja e ditës dhe çfarë mbetet e hapur
 
-Gjatë Night Audit, raportet e mbylljes së ditës gjenerohen në një moment të caktuar të natës. Para se t'u besoja, kontrolloja disa gjëra. A përputhej informacioni me gjendjen operative të turnit? A ishin trajtuar sipas procesit mbërritjet, largimet dhe mosparaqitjet? A kishte çështje të hapura që kërkonin ndjekje, apo mospërputhje mes raporteve të lidhura që duheshin sqaruar? Dhe a ishte dokumentuar informacioni që i duhej turnit tjetër?
+Gjatë Night Audit, raportet e mbylljes së ditës gjenerohen në një moment të caktuar të natës. Para se t'u besoja, kontrolloja disa gjëra. A përputhej informacioni me gjendjen operative të turnit? A ishin trajtuar sipas procesit mbërritjet, largimet dhe mysafirët që nuk u paraqitën? A kishte çështje të hapura që kërkonin ndjekje, apo mospërputhje mes raporteve të lidhura që duheshin sqaruar? Dhe a ishte dokumentuar informacioni që i duhej turnit tjetër?
 
 Asnjë nga këto nuk e bën raporti vetë. Raporti e mbyll ditën në sistem. Nuk e di nëse mysafiri që u ankua për dushin mori përgjigje, as nëse turni i mëngjesit e di që duhet ta ndjekë çështjen. Gjenerimi i një raporti nuk do të thotë automatikisht që çdo çështje operative është përfunduar.
 
@@ -60,7 +60,7 @@ Te [Çfarë mëson një Night Auditor](/sq/insights/what-a-night-auditor-learns/
 
 Kam përdorur ChatGPT për të organizuar materiale operative, për të përgatitur udhëzime SOP, për të strukturuar informacione dhe për të hartuar tekste profesionale. Atë që i kërkohet e bën mirë: merr një listë të çrregullt dhe e kthen në diçka që lexohet lehtë.
 
-Pikërisht aty qëndron rreziku, edhe pse nuk kam asnjë rast të një raporti zyrtar të shkruar nga AI e të dërguar pa e parë një njeri. Një tekst i shkruar mirë krijon përshtypjen se dikush e ka menduar me kujdes. Një raport me paragrafë të rregullt dhe me fjalë si “u verifikua” e “u zgjidh” tingëllon i kontrolluar, edhe kur askush nuk ka kontrolluar gjë. Dhe një mjet AI mund të shtojë diçka që nuk ishte në shënimet e tua, me të njëjtin ton të sigurt si gjithçka tjetër.
+Pikërisht aty qëndron rreziku. Një tekst i shkruar mirë krijon përshtypjen se dikush e ka menduar me kujdes. Një raport me paragrafë të rregullt dhe me fjalë si “u verifikua” e “u zgjidh” tingëllon i kontrolluar, edhe kur askush nuk ka kontrolluar gjë. Dhe një mjet AI mund të shtojë diçka që nuk ishte në shënimet e tua, me të njëjtin ton të sigurt si gjithçka tjetër.
 
 AI mund të më ndihmojë ta shkruaj më qartë një raport. Nuk duhet të vendosë vetë se çfarë është e vërtetë. Prandaj, para se të përdor një tekst të përgatitur me AI, mbaj këtë standard:
 
@@ -82,12 +82,12 @@ Arsyeja është e thjeshtë. Nuk do të doja që një raport i shkruar bukur të
 
 ## Kush i lexon
 
-Nuk kam një rast ku një raport prodhohej dhe nuk e lexonte askush. Në last mile, KPI-të ishin pjesë e diskutimeve operative dhe e takimit të shkurtër ditor (stand-up). Në hotel, raportet përdoreshin për mbylljen e ditës dhe për vazhdimësinë e punës nga një turn te tjetri.
+Në miljen e fundit, KPI-të ishin pjesë e diskutimeve operative dhe e takimit të shkurtër të mëngjesit. Në hotel, raportet përdoreshin për mbylljen e ditës dhe për vazhdimësinë e punës nga një turn te tjetri.
 
 Por kjo nuk provon që çdo raport lexohej dhe përdorej njësoj. Dhe sa më lehtë të prodhohet një raport, nga sistemi apo nga AI, aq më shumë raporte do të ketë dhe aq më pak kohë për secilin. Kështu pyetja zhvendoset nga ai që e shkruan raportin te ai që e lexon, dhe te ajo që bën pasi e lexon. Raporti duhet ta ndihmojë njeriun të kuptojë realitetin, jo ta zëvendësojë kontrollin e realitetit.
 
 ## Një raport në tri pjesë
 
-Kartela më poshtë është për çdo raport që shkruan ose ia kalon dikujt tjetër, sidomos kur një pjesë e tij është gjeneruar nga sistemi ose nga një mjet AI: faktet e konfirmuara, çfarë është gjeneruar dhe çfarë është verifikuar, interpretimi si pyetje, çfarë është zgjidhur dhe çfarë është ende e hapur, dhe veprimi me një emër dhe një afat. [Dorëzimi i turnit](/sq/tools/shift-handover/) i ndan çështjet në të hapura dhe të mbyllura, që raporti i natës t'i lërë turnit tjetër atë që i duhet, jo vetëm atë që prodhoi sistemi.
+Karta më poshtë është për çdo raport që shkruan ose ia kalon dikujt tjetër, sidomos kur një pjesë e tij është gjeneruar nga sistemi ose nga një mjet AI: faktet e konfirmuara, çfarë është gjeneruar dhe çfarë është verifikuar, interpretimi si pyetje, çfarë është zgjidhur dhe çfarë është ende e hapur, dhe veprimi me një emër dhe një afat. [Dorëzimi i turnit](/sq/tools/shift-handover/) i ndan çështjet në të hapura dhe të mbyllura, që raporti i natës t'i lërë turnit tjetër atë që i duhet, jo vetëm atë që prodhoi sistemi.
 
 **Makina mund ta shkruajë raportin. Përgjegjësinë për atë që thotë raporti duhet ta mbajë njeriu.**

@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Kontrolli i qëndrueshmërisë
   fill: true
-  note: Si do ta kontrolloja sot. Nuk është vlerësim i punës sime të mëparshme.
+  note: Si do ta kontrolloja sot.
   items:
     - label: Dokumentimi
       hint: A është standardi i qartë dhe i lehtë për t'u gjetur?
@@ -40,23 +40,23 @@ diagram: improvement-paths
 
 Po të mund t'i thosha vetes një fjali të vetme në ditën e parë si Team Leader, do të ishte kjo: kur ta kesh zgjidhur një problem sot, pyet veten nëse nesër do të zgjidhej edhe pa ty. Me këtë pyetje mbyllet edhe kjo seri.
 
-Në last mile kam punuar me standardet e ngarkimit, të skanimit, të organizimit të rampës dhe të sigurisë, dhe kam hasur probleme me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar plotësisht me standardet. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. Ajo që nuk e kam është pikërisht rasti që premton titulli: një përmirësim imi i dokumentuar, që mbajti disa muaj dhe pastaj u braktis. Në një ese për përmirësimin që shuhet, kjo mungesë zë vendin qendror.
+Në miljen e fundit kam punuar me standardet e ngarkimit, të skanimit, të organizimit të rampës dhe të sigurisë, dhe kam hasur probleme me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar plotësisht me standardet. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. A mbajti diçka prej tyre, nuk e di; nuk kam asnjë rast të dokumentuar të një përmirësimi tim që mbajti e pastaj u shua. Rreth kësaj pyetjeje sillet kjo ese.
 
 ## Pyetja që nuk di t'i përgjigjem
 
-Në vitin 2025 punova në last mile, fillimisht si Team Leader e pastaj si Area Manager. Më vonë kalova te koordinimi në distancë.
+Në vitin 2025 punova në miljen e fundit, fillimisht si Team Leader e pastaj si Area Manager. Më vonë kalova te koordinimi në distancë.
 
 Çfarë mbeti nga mënyra ime e punës pasi e lashë atë rol? Cilat kontrolle vazhduan dhe cilat u harruan që në javën e parë?
 
 Nuk e di. Nuk e kam matur kurrë nëse rezultatet vazhduan pasi ndërrova rol.
 
-Kjo është ajo që do të doja më shumë ta kuptoja sot: nëse rezultatet e një menaxheri vazhdojnë kur ai nuk është më aty për t'i ndjekur. Pa këtë përgjigje, nuk mund ta them nëse ajo që bëra e përmirësoi procesin, apo ishte thjesht prania ime.
+Sot këtë do të doja ta kuptoja më shumë se gjithçka: nëse rezultatet e një menaxheri vazhdojnë kur ai nuk është më aty për t'i ndjekur. Pa këtë përgjigje, nuk mund ta them nëse ajo që bëra e përmirësoi procesin, apo ishte thjesht prania ime.
 
 ## Pse shuhet një përmirësim
 
-Rast të provuar për këtë nuk kam, por besoj se një përmirësim rrezikon kur varet vetëm nga personi që e nisi, në vend që të bëhet pjesë e mënyrës së përditshme të punës.
+Besoj se një përmirësim rrezikon kur varet vetëm nga personi që e nisi, në vend që të bëhet pjesë e mënyrës së përditshme të punës.
 
-Qarkullimi i njerëzve e bën këtë rrezik më të dukshëm. Në last mile kishim shoferë të thirrur me pak njoftim dhe shoferë ende në fazën e përshtatjes, që nuk ishin mësuar me SOP-të. Kjo e bënte të vështirë që zbatimi të mbahej në të njëjtin nivel.
+Qarkullimi i njerëzve e bën këtë rrezik më të dukshëm. Në miljen e fundit kishim shoferë të thirrur me pak njoftim dhe shoferë ende në fazën e përshtatjes, që nuk ishin mësuar me SOP-të. Kjo e bënte të vështirë që zbatimi të mbahej në të njëjtin nivel.
 
 Një standard duhet të funksionojë edhe me ata që nuk e njohin prej vitesh. Nëse çdo punonjës i ri e mëson procesin vetëm duke parë një koleg, rezultati varet nga kush e trajnon. Për këtë kam shkruar te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/). Këtu shihet çmimi: një standard që kalon vetëm nga njeriu te njeriu humbet diçka me çdo ndërrim njerëzish.
 
@@ -72,13 +72,13 @@ Për mua, asnjë element i vetëm nuk mjafton. Do të veçoja pesë:
 - **Kontrolli:** dikush verifikon nëse standardi funksionon ende.
 - **Përditësimi:** kur ndryshon procesi, ndryshon edhe udhëzimi.
 
-Këtë e lidh me organizimin e SOP-ve për Front Office dhe Night Audit, për të cilin shkrova te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/). Një dokument i mirë të ndihmon. Por vetëm ai nuk garanton që procesi të ndiqet siç duhet. Një standard që ekziston vetëm në letër nuk do të thotë domosdoshmërisht se zbatohet.
+Këtë e lidh me SOP-të që organizova për Front Office dhe Night Audit, për të cilat shkrova te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/). Një dokument i mirë të ndihmon. Por vetëm ai nuk garanton që procesi të ndiqet siç duhet. Një standard që ekziston vetëm në letër nuk do të thotë domosdoshmërisht se zbatohet.
 
 ## Dhjetë ese, një pyetje
 
 Kur i lexoj bashkë të nëntë esetë e mëparshme, më duket se tregojnë të njëjtin problem nga kënde të ndryshme.
 
-[Dëmet](/sq/insights/how-we-worked-with-damage/) dhe [porositë jo të plota](/sq/insights/where-part-of-the-order-goes-missing/) tregojnë se duhet të kuptojmë ku lind gabimi. [Gemba](/sq/insights/gemba/) na kujton se raporti nuk e shpjegon gjithmonë procesin. [6S](/sq/insights/6s-without-a-poster/) tregon pse ka rëndësi rregulli i dukshëm. [Karta e kontrollit](/sq/insights/a-bad-day-or-a-problem/) dhe [DMAIC](/sq/insights/dmaic-without-a-black-belt/) na mësojnë të mos nxitojmë nga një rezultat i keq te një zgjidhje e paprovuar. [Koordinimi në distancë](/sq/insights/80-vehicles-you-cannot-see/) tregon sa shumë varet nga informacioni i besueshëm. [Ditët me volum të lartë](/sq/insights/high-volume-days/) tregojnë nëse standardet i bëjnë ballë presionit. Dhe [puna në hotel](/sq/insights/the-angry-guest-at-2am/) më ka mësuar sa rëndësi kanë përgjegjësia dhe vazhdimësia nga një turn te tjetri.
+[Dëmet](/sq/insights/how-we-worked-with-damage/) dhe [porositë e paplota](/sq/insights/where-part-of-the-order-goes-missing/) tregojnë se duhet të kuptojmë ku lind gabimi. [Gemba](/sq/insights/gemba/) na kujton se raporti nuk e shpjegon gjithmonë procesin. [6S](/sq/insights/6s-without-a-poster/) tregon pse ka rëndësi rregulli i dukshëm. [Karta e kontrollit](/sq/insights/a-bad-day-or-a-problem/) dhe [DMAIC](/sq/insights/dmaic-without-a-black-belt/) na mësojnë të mos nxitojmë nga një rezultat i keq te një zgjidhje e paprovuar. [Koordinimi në distancë](/sq/insights/80-vehicles-you-cannot-see/) tregon sa shumë varet nga informacioni i besueshëm. [Ditët me volum të lartë](/sq/insights/high-volume-days/) tregojnë nëse standardet i bëjnë ballë presionit. Dhe [puna në hotel](/sq/insights/the-angry-guest-at-2am/) më ka mësuar sa rëndësi kanë përgjegjësia dhe vazhdimësia nga një turn te tjetri.
 
 Pyetja që i lidh të gjitha është kjo:
 

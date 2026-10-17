@@ -29,11 +29,11 @@ Man kann zwei Schichten haben, die jede für sich sehr gut sind. Die erste hat v
 
 Ein Problem, das es nicht in die Übergabe schafft, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
 
-Das ist für mich ein Prinzip aus der Hotelarbeit. Dort habe ich erlebt, wie offene Vorgänge, technische Probleme, nachzuverfolgende Anliegen und operative Abweichungen an die nächste Schicht gingen. Einen einzelnen dokumentierten Fall, in dem eine fehlende Information eine bestimmte Folge hatte, kann ich nicht vorweisen.
+Das ist für mich ein Prinzip aus der Hotelarbeit. Dort habe ich erlebt, wie offene Vorgänge, technische Probleme, nachzuverfolgende Anliegen und operative Abweichungen an die nächste Schicht gingen.
 
 ## Von der losen Notiz zum aktuellen Stand
 
-Was sich an meiner eigenen Arbeitsweise sicher benennen lässt, ist der Schritt zu einer strukturierteren Übergabe.
+An meiner eigenen Arbeitsweise lässt sich ein Wandel klar benennen: der Schritt zu einer strukturierteren Übergabe.
 
 Statt die Information als lose Notiz stehen zu lassen oder als Liste von Dingen ohne klaren Zusammenhang, habe ich sie nach Arbeitskategorien geordnet:
 
@@ -71,7 +71,7 @@ Die Information muss so klar sein, dass die andere Person nicht deuten muss, was
 
 Eine Notiz wie „Problem mit dem Zimmer“ reicht nicht. Die Übergabe muss klarmachen, welcher Art das Problem ist, in welchem Zustand es sich befindet und ob noch etwas nachzuverfolgen ist, ohne unnötige Information hinzuzufügen.
 
-Eine feste Regel, jede Übergabe zusätzlich mündlich zu machen, habe ich nicht. Die Art, wie ich das Reporting aufgebaut habe, macht aber eines deutlich: Wer das Dokument bekommt, muss damit arbeiten können. Ein Beleg, dass die Übergabe stattgefunden hat, genügt nicht.
+Die Art, wie ich das Berichtswesen aufgebaut habe, macht eines deutlich: Wer das Dokument bekommt, muss damit arbeiten können. Ein Beleg, dass die Übergabe stattgefunden hat, genügt nicht.
 
 ## Zwei Momente, die sich spiegeln
 

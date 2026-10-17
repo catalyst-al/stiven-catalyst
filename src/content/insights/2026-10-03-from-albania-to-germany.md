@@ -78,11 +78,11 @@ I have kept my flexibility too. When a problem comes up, I do not like to answer
 
 And I have kept the human relationship with the team. Process matters, but people are not processes. An employee can have the same task as yesterday and come to work today in a completely different state. Management has to see that as well.
 
-I am not saying these things are missing in Germany; my own experience could not support that generalisation. They are parts of my style that I brought with me and did not want to lose while adapting to a more structured working culture.
+I am not saying these things are missing in Germany. They are parts of my style that I brought with me and did not want to lose while adapting to a more structured working culture.
 
 ## What I would do differently
 
-I cannot reconstruct any single decision from Albania with certainty, so what I would change is a habit: today I would document more.
+What I would change is not one particular decision but a habit: today I would document more.
 
 If a process worked because I knew it, today I would try to make the system know it. If a problem was solved, it would not be enough for me that it went away. I would want to understand why it happened and whether something in the process has to change.
 

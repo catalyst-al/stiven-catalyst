@@ -428,7 +428,7 @@ const sq = {
       title: "Mjete të vogla që punojnë bashkë",
       body: [
         "Ideja e mjeteve është e thjeshtë: mjete të lindura nga puna në terren, që nuk kërkojnë asgjë tjetër veç një shfletuesi. Pa instalim, pa llogari, pa server që mban të dhënat e tua.",
-        "Ajo që i bën më shumë se kalkulatorë të veçantë është se ia kalojnë punën njëri-tjetrit, brenda shfletuesit tënd:",
+        "Më shumë se kalkulatorë të veçantë i bën fakti që ia kalojnë punën njëri-tjetrit, brenda shfletuesit tënd:",
         { list: [
           "Regjistrat e dëmeve, të plotësisë dhe të vonesave ushqejnë Shift Pulse, dhe Dorëzimi i turnit i merr shifrat e tyre me [[Fill in from the logs]].",
           "Çdo rezultat i një regjistri vazhdon me një buton: [[Take it to 5 Whys]], [[Open in Pareto 80/20]] ose [[Open as control chart]].",
@@ -442,7 +442,7 @@ const sq = {
       kicker: "Para se të nisësh",
       title: "Puna jote mbetet te ti",
       body: [
-        "Çdo mjet e ruan punën tënde vetëm në shfletuesin që përdor. Nuk dërgohet askund, që do të thotë edhe se nuk është në telefon nëse ke punuar në laptop.",
+        "Çdo mjet e ruan punën tënde vetëm në shfletuesin që përdor. Nuk dërgohet askund; prandaj, nëse ke punuar në laptop, nuk do ta gjesh në telefon.",
         "Për t'i ruajtur të gjitha, ose për t'i kaluar në një pajisje tjetër, përdor [[Save all my work]] në fund të çdo faqeje mjeti: një skedar me punën e të gjitha mjeteve. [[Open a saved file]] e kthen përsëri dhe zëvendëson vetëm mjetet që janë në atë skedar.",
         { list: [
           "Shumica e mjeteve printohen ose ruhen si PDF, dhe regjistrat shkarkohen si CSV për Excel.",
@@ -864,7 +864,7 @@ const de = {
     "/tools/kpi-diagnostic/": {
       when: "Eine Zahl ist rot geworden. Bevor Sie mehr Druck machen, finden Sie heraus, wo die Ursache liegt.",
       how: [
-        "Nennen Sie den KPI, wenn Sie möchten.",
+        "Nennen Sie die Kennzahl, wenn Sie möchten.",
         "Bewerten Sie zehn Aussagen.",
         "Klicken Sie auf [[See the result]].",
       ],

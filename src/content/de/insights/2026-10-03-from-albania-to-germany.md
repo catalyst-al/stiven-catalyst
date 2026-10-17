@@ -30,7 +30,7 @@ checklist:
 
 Früher habe ich öfter gefragt: „Wie lösen wir das?“
 
-Heute ist sie länger: „Wie lösen wir das, wer verantwortet es danach, und was ändern wir, damit es nicht wiederkommt?“ Vielleicht ist das die größte Veränderung, die ich als Führungskraft vollzogen habe.
+Heute ist die Frage länger: „Wie lösen wir das, wer verantwortet es danach, und was ändern wir, damit es nicht wiederkommt?“ Vielleicht ist das die größte Veränderung, die ich als Führungskraft vollzogen habe.
 
 ## Wie ich in Albanien geführt habe
 
@@ -48,7 +48,7 @@ In Deutschland ist mir das Gewicht des Prozesses viel deutlicher geworden.
 
 In vielen meiner Rollen hier ist mit der erledigten Arbeit erst ein Teil getan: Sie muss nach Prozess erledigt und dokumentiert sein, und wenn nötig, muss man nachweisen können, dass sie kontrolliert wurde.
 
-Das habe ich in der Logistik genauso erlebt wie in der Hotellerie. In der Logistik gab es KPIs, eine klare Aufteilung der Verantwortlichkeiten, Abläufe, Betriebsregeln und eine Eskalation, sobald etwas vom Standard abwich. In der Hotellerie ist es noch sichtbarer: Checklisten, Berichte, Schichtübergaben, Kontrollen und viel schärfere Grenzen zwischen dem, was man selbst entscheiden darf, und dem, was man eskalieren muss.
+Das habe ich in der Logistik genauso erlebt wie in der Hotellerie. In der Logistik gab es Kennzahlen, eine klare Aufteilung der Verantwortlichkeiten, Abläufe, Betriebsregeln und eine Eskalation, sobald etwas vom Standard abwich. In der Hotellerie ist es noch sichtbarer: Checklisten, Berichte, Schichtübergaben, Kontrollen und viel schärfere Grenzen zwischen dem, was man selbst entscheiden darf, und dem, was man eskalieren muss.
 
 Auch die Dokumentation hat Gewicht. Ein Problem, das nur eine Person kennt, ist trotzdem ein Problem der Organisation. Sobald es dokumentiert ist, kann man es nachverfolgen, jemandem die Verantwortung dafür übertragen und sehen, ob es sich wiederholt.
 
@@ -58,7 +58,7 @@ Die größte Veränderung ist die Prozessdisziplin.
 
 Früher war ich vor allem auf das Ergebnis ausgerichtet: Das Problem ist da, also muss es gelöst werden. Heute stelle ich eine zweite Frage: Was muss sich im Prozess ändern, damit wir dasselbe Problem nicht noch einmal lösen müssen?
 
-Deshalb lege ich heute viel mehr Wert auf SOPs, Checklisten, KPIs, die Übergabe, die Dokumentation und darauf, dass für jede Aufgabe feststeht, wer sie verantwortet.
+Deshalb lege ich heute viel mehr Wert auf SOPs, Checklisten, Kennzahlen, die Übergabe, die Dokumentation und darauf, dass für jede Aufgabe feststeht, wer sie verantwortet.
 
 Ich habe auch gelernt, Initiative und Befugnis klarer auseinanderzuhalten. Ich kann ein Problem erkennen, es analysieren, eine Lösung vorschlagen und meinen Teil erledigen. Deshalb liegt aber nicht automatisch jede Entscheidung bei mir. Diese Grenze ist mir heute viel wichtiger als früher.
 
@@ -72,11 +72,11 @@ Auch meine Flexibilität habe ich behalten. Wenn ein Problem auftaucht, antworte
 
 Und ich habe die menschliche Beziehung zum Team bewahrt. Der Prozess ist wichtig, aber Menschen sind keine Prozesse. Ein Mitarbeiter kann dieselbe Aufgabe haben wie gestern und heute in einer ganz anderen Verfassung zur Arbeit kommen. Auch das muss Führung sehen.
 
-Ich behaupte nicht, dass diese Dinge in Deutschland fehlen; eine solche Verallgemeinerung kann ich aus meiner Erfahrung nicht belegen. Es sind Teile meines Stils, die ich mitgebracht habe und nicht verlieren wollte, während ich mich an eine strukturiertere Arbeitskultur angepasst habe.
+Ich behaupte nicht, dass diese Dinge in Deutschland fehlen. Es sind Teile meines Stils, die ich mitgebracht habe und nicht verlieren wollte, während ich mich an eine strukturiertere Arbeitskultur angepasst habe.
 
 ## Was ich anders machen würde
 
-Eine einzelne Entscheidung aus Albanien kann ich nicht sicher rekonstruieren; ändern würde ich deshalb eine Gewohnheit: Ich würde heute mehr dokumentieren.
+Ändern würde ich nicht eine bestimmte Entscheidung, sondern eine Gewohnheit: Ich würde heute mehr dokumentieren.
 
 Wenn ein Prozess funktionierte, weil ich ihn kannte, würde ich heute versuchen, ihn so festzuhalten, dass das System ihn kennt. Wenn ein Problem gelöst war, würde es mir nicht reichen, dass es verschwunden ist. Ich würde verstehen wollen, warum es entstanden ist und ob sich im Prozess etwas ändern muss.
 

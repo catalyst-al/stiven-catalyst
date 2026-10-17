@@ -48,7 +48,7 @@ I worked in last mile as a Team Leader On Road and then as an Area Manager, and 
 
 ## In private, once you understand the facts
 
-As a principle, I would rather hold a corrective conversation in private, and only once I have understood the facts. It is the standard I stand for, not a procedure I followed in every case, and the same goes for what follows: principles, not the record of a particular talk.
+As a principle, I would rather hold a corrective conversation in private, and only once I have understood the facts.
 
 There is one clear exception. If there is an immediate safety risk, you step in at that moment. You stop what is happening there and then. The right conversation in the right place comes afterwards.
 
@@ -82,7 +82,7 @@ A manager can be demanding, decisive and very clear without violating the dignit
 
 In January 2025 I started as a Team Leader On Road, and a few months later I became an Area Manager. In that role I had four Shift Leaders and eight dispatchers reporting directly to me, while the operation involved around 250 drivers indirectly. I wrote about that step at more length in [Leading people without losing the person](/insights/leading-people-without-losing-the-person/).
 
-How colleagues reacted to my promotion, and whether our relationships changed, I cannot report with certainty. My view is that a promotion should not turn authority into a show of strength. When you become responsible for people you used to work alongside, you have to be clear about expectations and fair in your decisions, and you must not use the position to show who is in charge.
+My view is that a promotion should not turn authority into a show of strength. When you become responsible for people you used to work alongside, you have to be clear about expectations and fair in your decisions, and you must not use the position to show who is in charge.
 
 **Formal authority gives you the right to make decisions. Trust is built by the way you make them.**
 
