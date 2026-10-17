@@ -42,13 +42,13 @@ firstMove:
 
 In last mile, the scanner usually has the last word. This essay asks what that word actually says. In [The system is faster than you](/insights/the-system-is-faster-than-you/) I closed with a list of the essays still to come, and one of them was about the scanner as a witness rather than a judge. This is that essay.
 
-What follows rests on my work in last mile, with its loading problems, missing bags and mixed trolleys. Its other sources are the reports that also mentioned mismatches during scanning and loading, Incomplete and Damage, KPIs we followed every day, and the rules of the operational instructions, which come up below. From the hotel it takes the gap between what the system records and the real state of a room, which I wrote about in the first essay. It contains no reconstructed incident: I have no verified case of a bag the system showed as scanned that I then saw was missing, and none in which the scan history was used to blame a driver, or in which I used it myself to establish responsibility. The five steps further down are what I would recommend today, not a protocol I applied in every case.
+I come to it from last mile, with its loading problems, missing bags and mixed trolleys; from the reports that also mentioned mismatches during scanning and loading; from Incomplete and Damage, KPIs we followed every day; and from the rules of the operational instructions, which come up below. From the hotel I bring the gap between what the system records and the real state of a room, which I wrote about in the first essay.
 
 ## What a scan proves
 
 A scan is a short, precise sentence: this code was read, in this place, at this time. Nothing more.
 
-It does not say that the bag is still there, or that it went onto the right trolley. It does not say that the right trolley reached the right driver, or that the driver took everything before leaving. All of that happens after the scan, in the physical world, where the scanner cannot see.
+It does not say that the bag is still there, or that it went onto the right trolley. It does not say that the right trolley reached the right driver, or that the driver took everything before leaving. All of that happens after the scan, in the physical world, where the scanner cannot see. I have no verified case of a bag the system showed as scanned that I then saw was missing, but the limit is there in what a scan records.
 
 The scan keeps its value; these limits show what it is valuable for. A good witness says precisely what they saw, and nothing about what happened while they were not there.
 
@@ -58,11 +58,11 @@ The scan keeps its value; these limits show what it is valuable for. A good witn
 
 In [Where part of the order goes missing](/insights/where-part-of-the-order-goes-missing/) I described the rule for a missing bag: the driver told the Team Leader, and the trolley stayed inside the designated zone until the problem was solved.
 
-I do not know who wrote that rule or when, so what follows is my reading of it, not a quotation from a procedure. The rule does not ask anyone to look at a screen. It asks someone to stop and look at the trolley. At the very moment when record and reality may have drifted apart, it gives the word to the physical check, and it keeps the trolley where that check is still possible. That principle runs through this whole essay.
+I do not know who wrote that rule or when, so what follows is my reading of it. The rule does not ask anyone to look at a screen. It asks someone to stop and look at the trolley. At the very moment when record and reality may have drifted apart, it gives the word to the physical check, and it keeps the trolley where that check is still possible. That principle runs through this whole essay.
 
 ## The name on the last line
 
-When a bag is missing, the first question in most operations is “who did it?” rather than “where did it go missing?”, and the scan history looks like the quickest answer: here is who scanned it last.
+When a bag is missing, the first question in most operations is “who did it?” rather than “where did it go missing?”, and the scan history looks like the quickest answer: here is who scanned it last. I have no case in which it was used to blame a driver, or in which I used it myself to establish responsibility, but the shortcut is easy to see.
 
 But a missing bag may have gone missing in the warehouse, during preparation, during loading or on the road, and the problems we had in last mile could involve any of these stages. The last scan shows who last touched the bag in the system; where the bag was separated from its place, it cannot show.
 
@@ -76,17 +76,17 @@ When it is proven that someone broke the standard, individual responsibility rem
 
 Then there is the other side: the scanner that does not work, the scan that is not made. I have no case of it to describe and do not know how it was officially regulated, so this part is a recommendation.
 
-One thing I would not suggest is carrying on without a scan where the procedure requires one. That applies above all to chilled and frozen products, where the scan inside the temperature zone is itself part of the rule. A missing witness is not replaced by an assumption. Every exception is handled under the authorised rules, and written down.
+One thing I would not suggest is carrying on without a scan where the procedure requires one. That applies above all to chilled and frozen products, where the scan inside the temperature zone is itself part of the rule. Where the witness is missing, nobody fills the gap with an assumption: every exception is handled under the authorised rules, and written down.
 
 ## Five steps for a mismatch
 
-Today I would investigate a mismatch between the system and reality like this:
+Today I would investigate a mismatch between the system and reality like this. It is a recommendation, not a protocol I applied in every case:
 
 1. **Check the record and its time.** What exactly the system says, and when it said it.
 2. **Verify the physical state of the load.** With your own eyes, not with another scan.
 3. **Find the last point where the information and reality matched.** The mismatch was born after it, and that is where the search starts.
 4. **Separate the recording error from the preparation or loading error.** They are two different problems, with two different solutions.
-5. **Document the confirmed cause and the measure that prevents it repeating.** Confirmed, not assumed. And a measure, not just a name.
+5. **Document the confirmed cause and the measure that prevents it repeating.** Only what is confirmed, and always a measure as well as a name.
 
 The third step is the one people often skip. Without it, the search starts at the last line of the history and ends there.
 
@@ -98,6 +98,6 @@ I have no case of a room that the system showed as in order and that I found oth
 
 ## A mismatch between the system and reality
 
-The card below is for every case where the system says one thing and the trolley, the shelf or the room says another. Fill it in before you talk about blame. [Incomplete Control](/tools/incomplete-control/) keeps the cases side by side, so that a mismatch that repeats at the same point looks like a pattern and not like bad luck.
+The card below is for every case where the system says one thing and the trolley, the shelf or the room says another. Fill it in before you talk about blame. [Incomplete Control](/tools/incomplete-control/) keeps the cases side by side, so that a mismatch that repeats at the same point shows up as a pattern.
 
 The scan history tells you what has been recorded. What has happened lies in the process between the record and the trolley, and that is where the work is done: walking it back, step by step, to the last point where the system and reality still matched.

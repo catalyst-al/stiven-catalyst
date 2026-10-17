@@ -32,11 +32,9 @@ Angenommen, ein Fahrer fährt verspätet ab, weil der Auftrag nicht bereit war. 
 
 In [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/) habe ich geschrieben, dass die Zahl allein die Arbeit nicht verbessert. Hier geht es um die nächste Frage: Wie entwickelt man eine Kennzahl, der Menschen vertrauen, die sie verstehen, die sie nicht für etwas bestraft, das sie nicht steuern, und die sie zu einer Handlung führt? Für mich entsteht dieses Vertrauen aus drei Dingen: **einer klaren Definition, fairer Verantwortung und der Handlung, die auf das Ergebnis folgt.**
 
-Was folgt, beruht auf den Berichten und Stand-ups auf der letzten Meile, mit denen ich gearbeitet habe, und auf meiner Arbeit im Night Audit. Die Definitionen geben wieder, wie ich die Werte verstanden habe, nicht die offiziellen Formeln des Unternehmens. Die Beispiele für eine unfair gelesene Zahl oder für eine Kennzahl, die falsches Verhalten auslöst, sind Veranschaulichungen, keine dokumentierten Fälle.
-
 ## Vier Werte auf der letzten Meile
 
-Auf der letzten Meile haben wir vor allem mit vier Werten gearbeitet: Damage, Incomplete, Delay und Loading Time. So habe ich sie verstanden:
+Auf der letzten Meile haben wir vor allem mit vier Werten gearbeitet: Damage, Incomplete, Delay und Loading Time. So habe ich sie verstanden, in meinen Worten; die offiziellen Formeln des Unternehmens sind das nicht:
 
 - **Damage:** Schäden an Produkten oder Aufträgen.
 - **Incomplete:** Aufträge, die unvollständig beim Kunden ankamen.
@@ -51,7 +49,7 @@ Die praktische Bedeutung eines Werts und die offizielle Formel, die ein Unterneh
 
 Ich habe mit Problemen gearbeitet, die mehr als eine Stufe des Prozesses betrafen: fehlende Taschen, vermischte Wagen, die Organisation der Ladung und Verspätungen bei der Abfahrt. Diese Situationen haben meinen Blick auf Kennzahlen verändert.
 
-Nehmen wir den Fahrer aus dem Beispiel oben. Das Problem zeigt sich bei der Abfahrt, aber deshalb liegt die Verantwortung nicht automatisch allein beim Fahrer. Wie ich in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben habe: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
+Nehmen wir den Fahrer aus dem Beispiel oben, eine Veranschaulichung und kein dokumentierter Fall. Das Problem zeigt sich bei der Abfahrt, aber deshalb liegt die Verantwortung nicht automatisch allein beim Fahrer. Wie ich in [Fehler gehen zwischen den Abteilungen verloren](/de/insights/mistakes-get-lost-between-departments/) geschrieben habe: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 
 Bevor ich die Leistung von jemandem bewerte, will ich deshalb verstehen, welchen Teil des Ergebnisses er tatsächlich steuern konnte.
 
@@ -67,11 +65,11 @@ Ich wollte zwei Arten von Information auseinanderhalten. Die eine zeigte **das E
 
 Wenn Delay hoch ist, will ich wissen, warum. Liegt es an der Vorbereitung der Aufträge, an der Organisation der Rampe, an der Ladezeit oder an etwas anderem? Wenn Damage steigt, frage ich nicht nur, wer den Auftrag hatte, sondern auch, in welcher Phase der Schaden entstanden sein könnte und wie wir ihn verhindern.
 
-Eine Kennzahl, die nur dazu dient, jemandem zu zeigen, dass er unter dem Ziel liegt, hilft ihm nicht unbedingt, besser zu werden. Ich glaube, Menschen haben mehr Grund, einer Kennzahl zu vertrauen, wenn sie genutzt wird, um die Arbeit zu verstehen und zu verbessern, und nicht nur, um Einzelne zu vergleichen.
+Eine Kennzahl, die nur dazu dient, jemandem zu zeigen, dass er unter dem Ziel liegt, hilft ihm nicht unbedingt, besser zu werden. Ich glaube, Menschen haben mehr Grund, einer Kennzahl zu vertrauen, wenn sie genutzt wird, um die Arbeit zu verstehen und zu verbessern, und weniger, wenn sie nur Einzelne vergleicht.
 
 ## Kein Wert wird allein gelesen
 
-Angenommen, eine Organisation misst nur, wie schnell beladen wird, ohne das mit Qualität und Sicherheit zu verbinden. Dann kann sie einen Anreiz schaffen, zu hetzen. Deshalb würde ich Loading Time nie getrennt von Damage, Incomplete und Sicherheit bewerten.
+Angenommen, als zweites Beispiel, eine Organisation misst nur, wie schnell beladen wird, ohne das mit Qualität und Sicherheit zu verbinden. Dann kann sie einen Anreiz schaffen, zu hetzen. Deshalb würde ich Loading Time nie getrennt von Damage, Incomplete und Sicherheit bewerten.
 
 Wenn sich ein Wert verbessert, ein anderer sich aber gerade wegen der Art dieser Verbesserung verschlechtert, müssen wir prüfen, ob wir das richtige Verhalten messen.
 
@@ -89,7 +87,7 @@ Eine Kennzahl, der das Team vertraut, ist nicht unbedingt die, die immer grün i
 
 Bevor Sie etwas zu messen beginnen, füllen Sie diese sechs Zeilen aus. Wenn Sie nicht alle sechs ausfüllen können, ist die Kennzahl noch nicht so weit, dass Sie sie dem Team zeigen sollten.
 
-1. **Was messen wir?** In Worten, die jeder im Team versteht, nicht nur der, der den Bericht erstellt.
+1. **Was messen wir?** In Worten, die jeder im Team versteht, auch wer nie einen Bericht erstellt.
 2. **Wie wird sie berechnet?** Was zählt, was nicht, und aus welcher Quelle.
 3. **Wer kann das Ergebnis beeinflussen?** Welcher Teil in der Hand der Person liegt und welcher im Prozess, in einer anderen Stufe oder in einer anderen Abteilung.
 4. **Was ist der Standard?** Was als gutes Ergebnis gilt, und warum.

@@ -40,7 +40,7 @@ I have worked in retail and wholesale in Albania, then in last-mile logistics, a
 
 In retail and wholesale you could have the goods, but if stock was not controlled, if the warehouse and sales did not communicate well, or if the information was not accurate, the problem ended up with the customer.
 
-In logistics the same problem took another form. It was no longer a product on a shelf but a missing parcel, a loading that took longer than it should, an incomplete order, a route that left late, or a problem that had to be solved while the driver was already on the road.
+In logistics the same problem took another form: a missing parcel, a loading that took longer than it should, an incomplete order, a route that left late, or a problem that had to be solved while the driver was already on the road.
 
 In a hotel it changes shape again: a reservation, a payment, a room that has not been closed properly in the system, a no-show, an invoice, or a piece of information that did not pass from one shift to the next.
 
@@ -62,7 +62,7 @@ In a hotel, especially at night, people may arrive tired from travelling, with a
 
 What does not change is the expectation. The customer does not much care which department made the mistake. They only see the company in front of them. In the shop that is you, at the door the driver, in the hotel the receptionist. In that moment, for the customer, that person is the whole company.
 
-Another lesson came from wholesale, and it has served me more than I expected. I built and managed a national network of 61 active resellers, and that channel was linked to revenue growth of around 30 to 40 per cent. It taught me that you do not manage a partner the way you manage an employee. An employee can be given a procedure and a direct responsibility. With a partner you have to build a shared interest, communication and continuity, and the relationship has to make economic sense for both sides. With 61 partners you cannot rely only on your personal relationship with each one. You need a way of working that repeats.
+Another lesson came from wholesale, and it has served me more than I expected. I built and managed a national network of 61 active resellers, and that channel was linked to revenue growth of around 30 to 40 per cent. It taught me that a partner has to be managed differently from an employee. An employee can be given a procedure and a direct responsibility. With a partner you have to build a shared interest, communication and continuity, and the relationship has to make economic sense for both sides. With 61 partners you cannot rely only on your personal relationship with each one. You need a way of working that repeats.
 
 This helped me later, even when the people were no longer called resellers. In logistics you work with drivers, operators and partner companies. In a hotel you work with other departments, suppliers and structures you do not control directly. Management is not always having authority over someone. Often it is getting people you have no authority over to work in the same direction as you.
 

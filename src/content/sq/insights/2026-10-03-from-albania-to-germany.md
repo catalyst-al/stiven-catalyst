@@ -48,7 +48,7 @@ Në Gjermani, ajo që m'u bë shumë më e dukshme është pesha e procesit.
 
 Në shumë nga rolet që kam pasur këtu, puna e kryer është vetëm një pjesë: ajo duhet të jetë bërë sipas procesit, duhet të jetë dokumentuar dhe, kur duhet, duhet të mund të provohet se është kontrolluar.
 
-Këtë e kam parë si në logjistikë, ashtu edhe në hoteleri. Në logjistikë kishte KPI, ndarje të qartë të përgjegjësive, procedura, rregulla operative dhe eskalim sa herë që diçka dilte jashtë standardit. Në hoteleri kjo duket edhe më shumë: lista kontrolli, raporte, dorëzime turni, kontrolle dhe kufij shumë më të prerë mes asaj që mund të vendosësh vetë dhe asaj që duhet ta eskalosh.
+Këtë e kam parë si në logjistikë, ashtu edhe në hoteleri. Në logjistikë kishte KPI, ndarje të qartë të përgjegjësive, procedura, rregulla operative dhe përcjellje më lart sa herë që diçka dilte jashtë standardit. Në hoteleri kjo duket edhe më shumë: lista kontrolli, raporte, dorëzime turni, kontrolle dhe kufij shumë më të prerë mes asaj që mund të vendosësh vetë dhe asaj që duhet ta përcjellësh më lart.
 
 Edhe dokumentimi ka peshë. Një problem që e di vetëm një person mbetet prapë problem i organizatës. Sapo dokumentohet, mund të ndiqet, mund t'i caktohet dikush që përgjigjet për të dhe mund të shihet nëse po përsëritet.
 
@@ -66,17 +66,17 @@ Dhe kam mësuar diçka që në fillim mund të duket burokratike, por që në op
 
 ## Çfarë ruajta nga Shqipëria
 
-Kam ruajtur zakonin të qëndroj pranë operacionit. Ende nuk besoj se një proces mund të drejtohet mirë vetëm nga raportet; duhet të shohësh çfarë ndodh aty ku punohet. Në logjistikë kjo do të thotë të dish çfarë ndodh në rampë dhe me njerëzit gjatë turnit, jo vetëm të shohësh përqindjen në fund të ditës. Në hotel do të thotë të dish çfarë ndodh në recepsion gjatë turnit, jo vetëm të lexosh raportin në mëngjes.
+Kam ruajtur zakonin të qëndroj pranë operacionit. Ende nuk besoj se një proces mund të drejtohet mirë vetëm nga raportet; duhet të shohësh çfarë ndodh aty ku punohet. Në logjistikë kjo do të thotë të dish çfarë ndodh në rampë dhe me njerëzit gjatë turnit, krahas përqindjes në fund të ditës; në hotel, të dish çfarë ndodh në recepsion gjatë turnit, krahas asaj që thotë raporti i mëngjesit.
 
 Kam ruajtur edhe fleksibilitetin. Kur del një problem, nuk më pëlqen të përgjigjem menjëherë me “Kjo nuk është puna ime.” Së pari shoh nëse mund të ndihmoj pa i kapërcyer kufijtë e rolit tim.
 
 Dhe kam ruajtur marrëdhënien njerëzore me ekipin. Procesi ka rëndësi, por njerëzit nuk janë procese. Një punonjës mund të ketë të njëjtën detyrë si dje dhe të vijë sot në punë në një gjendje krejt tjetër. Edhe këtë duhet ta shohë drejtimi.
 
-Nuk do të thosha se këto gjëra “mungojnë” në Gjermani; një përgjithësim të tillë nuk mund ta mbështes me përvojën time. Janë pjesë të stilit tim që i solla me vete dhe që nuk desha t'i humbja ndërsa përshtatesha me një kulturë pune më të strukturuar.
+Nuk po them se këto gjëra mungojnë në Gjermani; një përgjithësim të tillë nuk mund ta mbështes me përvojën time. Janë pjesë të stilit tim që i solla me vete dhe që nuk desha t'i humbja ndërsa përshtatesha me një kulturë pune më të strukturuar.
 
 ## Çfarë do të bëja ndryshe
 
-Ajo që do të ndryshoja nuk është një vendim i caktuar nga Shqipëria që mund ta rindërtoja me siguri, por një zakon: sot do të dokumentoja më shumë.
+Asnjë vendim të vetëm nga Shqipëria nuk mund ta rindërtoj me siguri, ndaj ajo që do të ndryshoja është një zakon: sot do të dokumentoja më shumë.
 
 Nëse një proces funksiononte sepse e dija unë, sot do të përpiqesha që ta dinte sistemi. Nëse një problem zgjidhej, nuk do të më mjaftonte që ai u zhduk. Do të doja të kuptoja pse ndodhi dhe nëse duhet ndryshuar diçka në proces.
 

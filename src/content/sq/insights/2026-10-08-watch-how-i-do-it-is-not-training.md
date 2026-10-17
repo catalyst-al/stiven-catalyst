@@ -49,15 +49,13 @@ Informacioni ekzistonte, por ishte i shpërndarë. Lista e kontrollit të thosht
 
 Këtu e kuptova dallimin mes **të kesh informacion** dhe **të kesh një sistem trajnimi**. Informacioni të jep pjesët. Sistemi të jep rendin, arsyen dhe pikën ku e di që mund të vazhdosh vetë.
 
-Nga puna në last mile di që kishte rregulla të qarta operative për sigurinë, ngarkimin, skanimin, rampën, zinxhirin e ftohtë dhe mënyrën e punës, dhe që në rastet kur shkeleshin standardet kërkohej ritrajnim. Si fillonin dispeçerët, punonjësit e rampës ose shoferët e DSP-ve të sapoardhur, me një program të strukturuar disaditor apo duke mësuar kryesisht pranë dikujt, nuk mund ta them me siguri, dhe nuk kam asnjë rast të dokumentuar mirë ku të kem trajnuar vetë hap pas hapi një punonjës të ri. Prandaj kjo ese mbështetet në përvojën time si ai që u trajnua dhe në një përgjigje për pyetjen si e kupton që dikush ka mësuar vërtet.
-
 ## Kur procesi jeton te një person
 
 Kur procesi nuk është i shkruar si një rrugë e qartë, ai jeton te personi që e bën çdo ditë.
 
-Asgjë nga këto nuk është faji i tij; zakonisht ai është njeriu më i mirë që ke, dhe pikërisht për këtë e ke zgjedhur të trajnojë të tjerët. Por edhe njeriu më i mirë ka interpretimin e vet. Ai e di pse e lë një hap për më vonë, ose pse e kontrollon diçka ndryshe. I porsaardhuri sheh vetëm veprimin; arsyeja mbetet në kokën e tjetrit.
+Trajneri nuk ka faj: zakonisht ai është njeriu më i mirë që ke, dhe pikërisht për këtë e ke zgjedhur të trajnojë të tjerët. Por edhe njeriu më i mirë ka interpretimin e vet. Ai e di pse e lë një hap për më vonë, ose pse e kontrollon diçka ndryshe. I porsaardhuri sheh vetëm veprimin; arsyeja mbetet në kokën e tjetrit.
 
-Nëse dy të porsaardhur trajnohen nga dy kolegë të ndryshëm, ata nuk mësojnë të njëjtën punë. Mësojnë dy versione të saj. Pas disa muajsh, në vend të një standardi ke disa zakone që i ngjajnë njëri-tjetrit.
+Nëse dy të porsaardhur trajnohen nga dy kolegë të ndryshëm, mësojnë dy versione të së njëjtës punë. Pas disa muajsh, në vend të një standardi ke disa zakone që i ngjajnë njëri-tjetrit.
 
 Prandaj trajnimi nuk mund të ndahet nga standardi. Pa një [SOP që përdoret realisht](/sq/insights/a-good-sop-is-not-a-document/), trajnimi kthehet në kopjim.
 
@@ -71,6 +69,8 @@ Nëse funksionojnë të treja, trajnimi ka nisur të japë rezultat. Nëse funks
 
 ## Ora e parë
 
+Nga këtu e tutje përshkruaj si do ta bëja unë, dhe flas si ai që u trajnua: nuk kam asnjë rast të dokumentuar mirë ku të kem marrë vetë një punonjës të ri hap pas hapi nëpër punë. Nga puna në last mile di që kishte rregulla të qarta operative për sigurinë, ngarkimin, skanimin, rampën, zinxhirin e ftohtë dhe mënyrën e punës, dhe që në rastet kur shkeleshin standardet kërkohej ritrajnim. Si fillonin dispeçerët, punonjësit e rampës ose shoferët e DSP-ve të sapoardhur, me një program të strukturuar disaditor apo duke mësuar kryesisht pranë dikujt, nuk mund ta them me siguri.
+
 Në orën e parë do të kufizohesha te pesë gjëra që i porsaardhuri duhet t'i dijë:
 
 1. Çfarë roli ka.
@@ -83,13 +83,13 @@ Këto pesë gjëra janë vetëm një fillim. Ato bëjnë që gabimet e para të 
 
 ## Java e parë
 
-Gjatë javës së parë mund të vijë thellësia: procesi nga fillimi në fund, sistemet, listat e kontrollit, rastet normale, përjashtimet, dorëzimi i turnit, KPI-të, gabimet më të zakonshme, eskalimi. Pastaj puna nën mbikëqyrje, derisa personi ta bëjë dot vetë.
+Gjatë javës së parë mund të vijë thellësia: procesi nga fillimi në fund, sistemet, listat e kontrollit, rastet normale, përjashtimet, dorëzimi i turnit, KPI-të, gabimet më të zakonshme, përcjellja e problemeve më lart. Pastaj puna nën mbikëqyrje, derisa personi ta bëjë dot vetë.
 
 Rendi që do të ndiqja është i thjeshtë:
 
 **Shiko. Bëje bashkë me mua. Bëje ti ndërsa unë shikoj. Bëje vetëm. Pastaj ma shpjego.**
 
-Për mua, kjo është shumë më e fortë se “rri me të sot dhe shiko si e bën”. Të shikuarit mbetet hapi i parë, vetëm se nuk është më i vetmi. Në fund ka rëndësi sa i njëjtë dhe i sigurt mbetet rezultati pasi trajneri të jetë larguar.
+Për mua, kjo është shumë më e fortë se “rri me të sot dhe shiko si e bën”. Të shikuarit mbetet hapi i parë, një nga pesë. Në fund ka rëndësi sa i njëjtë dhe i sigurt mbetet rezultati pasi trajneri të jetë larguar.
 
 ## Plani i javës së parë për një punonjës të ri
 
@@ -101,7 +101,7 @@ Ky është plani që do të propozoja, pa e lidhur me një vend pune të caktuar
 
 **Dita 3: bëje nën mbikëqyrje.** I porsaardhuri e kryen procesin; trajneri rri pranë dhe ndërhyn vetëm kur duhet. Në fund të ditës, të dy shënojnë ku ka pasur pasiguri.
 
-**Dita 4: trajto edhe një përjashtim.** Një rast që nuk shkon sipas skenarit normal: një status që nuk përputhet, një problem teknik, një kërkesë që duhet eskaluar. Në fund të ditës, personi duhet të dijë jo vetëm çfarë bëri, por edhe kur do të duhej ta çonte lart.
+**Dita 4: trajto edhe një përjashtim.** Një rast që nuk shkon sipas skenarit normal: një status që nuk përputhet, një problem teknik, një kërkesë që duhet përcjellë më lart. Në fund të ditës, personi duhet të dijë jo vetëm çfarë bëri, por edhe kur do të duhej ta çonte lart.
 
 **Dita 5: puno vetë dhe shpjegoje procesin së prapthi.** Personi punon vetë. Në fund e shpjegon procesin nga rezultati deri te hapi i parë: çfarë duhej të dilte, çfarë e bëri të mundur, ku mund të prishej. Kjo është mënyra më e shpejtë për të parë nëse e ka kuptuar procesin apo thjesht e ka mbajtur mend.
 

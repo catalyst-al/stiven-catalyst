@@ -30,13 +30,13 @@ checklist:
 
 In Albanien war ich zuletzt Cluster Manager: Ich leitete den Betrieb eines Flagship-Stores in Tirana und koordinierte einen Teil des Filialnetzes. Mein erster Job in Deutschland war die Paketzustellung.
 
-Mit diesem Kontrast beginnt die Reihe „Zehn Jahre nah an der Arbeit“, nicht um etwas zu dramatisieren oder eine Migrationsgeschichte zu erzählen, sondern weil ohne ihn nichts von dem verständlich ist, was ich danach schreibe: wie ich denke, wenn ein operatives Problem vor mir liegt, wie ich Menschen führe und warum ich Prozesse von beiden Seiten sehe.
+Mit diesem Kontrast beginnt die Reihe „Zehn Jahre nah an der Arbeit“, weil ohne ihn nichts von dem verständlich ist, was ich danach schreibe: wie ich denke, wenn ein operatives Problem vor mir liegt, wie ich Menschen führe und warum ich Prozesse von beiden Seiten sehe.
 
 Den Flagship-Store habe ich von null bis zur Eröffnung mit aufgebaut und dabei Architekten, Schreiner, Maler und die Ausbauteams koordiniert. Danach kamen Verkauf, Servicestandard, Kundenerlebnis, die operative Organisation und das Team: acht Verkäufer, vier Kassiererinnen und eine Assistentin. Wir haben die erste Online-Verkaufsseite des Unternehmens aufgebaut und dazu sein erstes E-Commerce-Team. Im selben Zeitraum wurde das Filialnetz umstrukturiert: Zwei leistungsschwache Filialen wurden geschlossen, und das Geschäft konzentrierte sich stärker auf den Flagship-Store.
 
 Davor hatte ich als General Sales Manager bei einem Händler für Haushaltsgeräte den Großhandel geleitet: ein Netz aus 61 aktiven Wiederverkäufern und eine Struktur mit Lager, B2B-Vertrieb, Buchhaltung, technischem Team und Kundenservice. Als ich Albanien verließ, war ich es gewohnt, Entscheidungen zu treffen, Menschen zu führen und für Geschäftsergebnisse geradezustehen.
 
-Dann kam Deutschland. Von November 2021 bis Juni 2022 arbeitete ich für ein Last-Mile-Zustellunternehmen, zuerst als Paketzusteller, später in der Disposition. Von Juli 2022 bis April 2023 war ich Steward in einem Hotel. Im Mai 2023 fing ich als Night Auditor in einem Hotel in Frankfurt an. Von Dezember 2023 bis Oktober 2024 stellte ich neben dem Night Audit wieder Pakete zu, und von Oktober 2024 bis Januar 2025 arbeitete ich als Pflegehelfer. Im Januar 2025 kehrte ich in die Last Mile zurück, diesmal als Team Leader On Road. Im Juni 2025 wurde ich Area Manager.
+Dann kam Deutschland. Von November 2021 bis Juni 2022 arbeitete ich für ein Last-Mile-Zustellunternehmen, erst als Paketzusteller am Steuer, später in der Disposition. Danach kam das Hotel: von Juli 2022 bis April 2023 als Steward, ab Mai 2023 als Night Auditor in einem Hotel in Frankfurt. Zwischen Dezember 2023 und Oktober 2024 stellte ich neben dem Night Audit wieder Pakete zu, von Oktober 2024 bis Januar 2025 arbeitete ich in der Pflege, als Pflegehelfer. Im Januar 2025 kehrte ich als Team Leader On Road in die Last Mile zurück; im Juni 2025 wurde ich Area Manager.
 
 Ich sehe keinen Grund, die Jobs als Paketzusteller, Steward oder Pflegehelfer zu verschweigen. Ohne sie ergibt mein Weg zurück ins Management keinen Sinn.
 

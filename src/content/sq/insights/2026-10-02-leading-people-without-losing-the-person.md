@@ -46,9 +46,11 @@ Pra, pyetja ishte: a e krijoi sistemi mundësinë e gabimit, apo personi nuk ndo
 
 Përgjigjja e ndryshon krejt bisedën me njeriun. Në rastin e parë rregullon procesin. Në të dytin punon me sjelljen dhe me llogaridhënien. Ndonjëherë i ke të dyja njëherësh.
 
-E njëjta logjikë vlen edhe kur presioni vjen nga lart. Presionin për KPI-të përpiqesha ta ktheja në problem operacional. Çfarë ndodhi? Ku ndodhi? Cilat raste po përsëriten? Çfarë kontrollojmë sot? Kush e merr përsipër veprimin? Nëse dëmet, vonesat ose porositë e paplota rriteshin, më duhej të kuptoja arsyen, jo të gjeja dikë për ta fajësuar.
+E njëjta logjikë vlen edhe kur presioni vjen nga lart. Presionin për KPI-të përpiqesha ta ktheja në problem operacional. Çfarë ndodhi? Ku ndodhi? Cilat raste po përsëriten? Çfarë kontrollojmë sot? Kush e merr përsipër veprimin? Nëse dëmet, vonesat ose porositë e paplota rriteshin, më duhej të kuptoja arsyen, dhe këtë nuk ma jepte një emër për ta fajësuar.
 
-Nuk dua ta kthej këtë në një histori heroike, sikur ta kem mbrojtur gjithmonë ekipin nga menaxhimi; realiteti i operacioneve është më i ndërlikuar. Ajo që mund të them është kjo: presioni mund të jetë i drejtë. Poshtërimi i njerëzve nuk është metodë menaxhimi. Standardi mund të jetë shumë i fortë pa e trajtuar njeriun si numër.
+Nuk do të pretendoj se e kam mbrojtur gjithmonë ekipin nga menaxhimi; realiteti i operacioneve është më i ndërlikuar. Ajo që mund të them është kjo: presioni mund të jetë i drejtë. Poshtërimi i njerëzve nuk është metodë menaxhimi. Standardi mund të jetë shumë i fortë pa e trajtuar njeriun si numër.
+
+Kështu e kuptoj edhe respektin në punë. Respekti nuk është të mos i kërkosh llogari njeriut. Respekti është t'ia bësh të qartë standardin, ta dëgjosh para se ta gjykosh, dhe kur përgjegjësia është e tij, të mos ia fshehësh.
 
 Kjo mënyrë pune u vu më shumë në provë kur ndryshoi pozicioni im.
 
@@ -59,5 +61,3 @@ Nuk mund të isha më ai që hynte dhe e zgjidhte vetë çdo problem. Duhej t'i 
 Ky është një ndryshim i vërtetë në drejtim, sidomos kur ngrihesh nga brenda. Dje mund ta kesh zgjidhur problemin krah për krah me kolegun. Sot duhet t'i thuash të njëjtit person, me fjalë ose me mënyrën si punon: ky tani është problemi yt për ta zgjidhur. Jam këtu të të mbështes, por punën nuk do ta bëj unë në vendin tënd.
 
 Kur ngrihesh në detyrë, nuk duhet të bëhesh papritur njeri tjetër vetëm për të treguar që tani je shefi. Por as nuk mund të vazhdosh sikur asgjë nuk ka ndryshuar. Duhet ta ruash marrëdhënien me njerëzit dhe, njëkohësisht, të kërkosh prej tyre gjëra që dje nuk ishte detyra jote t'ua kërkoje.
-
-Kështu e kuptoj edhe respektin në punë. Respekti nuk është të mos i kërkosh llogari njeriut. Respekti është t'ia bësh të qartë standardin, ta dëgjosh para se ta gjykosh, dhe kur përgjegjësia është e tij, të mos ia fshehësh.

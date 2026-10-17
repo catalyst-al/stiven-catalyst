@@ -45,9 +45,9 @@ corrections:
 
 On my first night of training at the hotel, I had come to learn the night processes. A little after midnight the hotel system became unavailable because of an update, and it stayed that way for about five hours, until close to morning.
 
-This is the only scene in this series that is not a picture. It happened, and I was there. What I can report is what a trainee could see: the practical training that could not go ahead normally, and the colleague who was training me explaining that the practical part would continue on the following shift. Whether there was an official fallback procedure, what the team used instead of the system, how the departments were informed and what was checked when it came back, I did not see.
+This is the only scene in this series that is not a picture. It happened, and I was there. What I can report is what a trainee could see: the practical training that could not go ahead normally, and the colleague who was training me explaining that the practical part would continue on the following shift. Beyond that I saw little, and I say so at each point where it matters.
 
-One distinction matters from the start. It was an interruption caused by an update, and I have no evidence of an unexpected fault. The title says “went down”, but what happened that night was more ordinary than a breakdown, and for that reason more useful to understand.
+It was an interruption caused by an update, and I have no evidence of an unexpected fault. The title says “went down”, but what happened that night was more ordinary than a breakdown, and for that reason more useful to understand.
 
 ## Five hours of waiting
 

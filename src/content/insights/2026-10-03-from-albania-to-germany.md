@@ -72,17 +72,17 @@ And I have learned something that can look bureaucratic at first but is worth a 
 
 ## What I kept from Albania
 
-I have kept the habit of staying close to the operation. I still do not believe you can lead a process well from reports alone; you have to see what happens where the work is done. In logistics that means knowing what happens on the ramp and with the people during the shift, not only the percentage at the end of the day. In a hotel it means knowing what happens at the reception desk during a shift, not only reading the report in the morning.
+I have kept the habit of staying close to the operation. I still do not believe you can lead a process well from reports alone; you have to see what happens where the work is done. In logistics that means knowing what happens on the ramp and with the people during the shift, as well as the percentage at the end of the day; in a hotel, knowing what happens at the reception desk during a shift as well as what the morning report says.
 
 I have kept my flexibility too. When a problem comes up, I do not like to answer straight away with “That's not my job.” First I try to see whether I can help without crossing the limits of my role.
 
 And I have kept the human relationship with the team. Process matters, but people are not processes. An employee can have the same task as yesterday and come to work today in a completely different state. Management has to see that as well.
 
-I would not say these things are “missing” in Germany; my own experience could not support that generalisation. They are parts of my style that I brought with me and did not want to lose while adapting to a more structured working culture.
+I am not saying these things are missing in Germany; my own experience could not support that generalisation. They are parts of my style that I brought with me and did not want to lose while adapting to a more structured working culture.
 
 ## What I would do differently
 
-What I would change is not one decision from Albania that I could reconstruct with certainty, but a habit. Today I would document more.
+I cannot reconstruct any single decision from Albania with certainty, so what I would change is a habit: today I would document more.
 
 If a process worked because I knew it, today I would try to make the system know it. If a problem was solved, it would not be enough for me that it went away. I would want to understand why it happened and whether something in the process has to change.
 

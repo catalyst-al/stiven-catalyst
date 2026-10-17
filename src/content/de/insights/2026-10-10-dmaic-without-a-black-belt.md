@@ -42,7 +42,7 @@ Zwischen diesen beiden Sätzen bewegt sich dieser Essay.
 
 DMAIC ist der Six-Sigma-Zyklus zur Verbesserung eines Prozesses: Define, Measure, Analyze, Improve, Control. Man legt das Problem fest, misst es, analysiert die Ursachen, verbessert und prüft, ob die Verbesserung hält. In Büchern sieht das nach einem großen Projekt aus, mit Team, Frist und jemandem mit farbigem Gürtel.
 
-Was ich mitbringe, ist Erfahrung mit echten operativen Problemen auf der letzten Meile: Damage, Incomplete, Delay und Loading Time. Six Sigma, Pareto und 5 Why sind Methoden, die ich kenne und die in mein Verständnis von Führung eingegangen sind. Ein bestätigtes Zertifikat habe ich nicht, weder Yellow noch Green noch Black Belt, und auch kein Projekt, in dem ich alle fünf Phasen von DMAIC angewendet und dokumentiert hätte. Selbst für Pareto und 5 Why kann ich keinen Fall vorweisen, den ich selbst von Anfang bis Ende durchgeführt habe. In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über ein 5 Why mit nur zwei dokumentierten „Warum“ geschrieben und darüber, warum ich die übrigen nicht ergänzt habe.
+Was ich mitbringe, ist Erfahrung mit echten operativen Problemen auf der letzten Meile: Damage, Incomplete, Delay und Loading Time. Six Sigma, Pareto und 5 Why sind Methoden, die ich kenne und die in mein Verständnis von Führung eingegangen sind. Ein bestätigtes Zertifikat habe ich nicht, weder Yellow noch Green noch Black Belt. Ich habe kein Projekt, in dem ich alle fünf Phasen von DMAIC angewendet und dokumentiert hätte, und nicht einmal ein Pareto oder ein 5 Why, das ich als von mir selbst von Anfang bis Ende durchgeführt vorweisen kann. In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über ein 5 Why mit nur zwei dokumentierten „Warum“ geschrieben und darüber, warum ich die übrigen nicht ergänzt habe.
 
 ## Die fünf Phasen, so wie ich sie hatte
 
@@ -76,7 +76,7 @@ Von den fünf Phasen würde ich heute Control hervorheben: das Halten der Verbes
 
 Ein Problem lässt sich eine Zeit lang lösen. Wird aber der Standard nicht dokumentiert, werden die Leute nicht geschult und prüft niemand das Ergebnis, droht das Problem zurückzukommen.
 
-Deshalb heißt diese Reihe „Verbesserung, die hält“. Die Verbesserung muss weiterlaufen, auch wenn die Führungskraft, die sie angestoßen hat, nicht mehr da ist. Hält sie nur, solange diese Person da ist, war es keine Verbesserung des Prozesses. Es war die Anwesenheit einer Person.
+Deshalb heißt diese Reihe „Verbesserung, die hält“. Die Verbesserung muss weiterlaufen, auch wenn die Führungskraft, die sie angestoßen hat, nicht mehr da ist. Hält sie nur, solange diese Person da ist, dann war es die Anwesenheit eines Menschen, die gehalten hat.
 
 **Ein Problem ist nicht gelöst, nur weil es heute nicht wieder aufgetreten ist.**
 
@@ -92,6 +92,6 @@ Einer Schichtleitung würde ich sagen, dass sie kein Black Belt sein muss, um sy
 
 Nicht jedes Problem der Schicht muss ein komplexes Projekt werden. Verfahren zu ändern, nur weil eine Kennzahl schlecht war, sollte sie aber vermeiden.
 
-Das Blatt unten können Sie für ein einzelnes Problem ausfüllen und kopieren. Wenn Sie den ganzen Zyklus an einem vollständigen Fall sehen möchten: [Six Sigma im Lager](/de/tools/six-sigma-dmaic/) geht Schritt für Schritt einen Übungsfall durch. Er dient zum Lernen und stammt nicht aus meiner Arbeit.
+Das Blatt unten können Sie für ein einzelnes Problem ausfüllen und kopieren. Wenn Sie den ganzen Zyklus an einem vollständigen Fall sehen möchten: [Six Sigma im Lager](/de/tools/six-sigma-dmaic/) geht Schritt für Schritt einen Übungsfall durch. Es ist ein Lehrbeispiel und stammt nicht aus meiner Arbeit.
 
-Fünf Fragen machen niemanden zum Black Belt. Aber sie halten Sie davon ab, vom Problem direkt zur Lösung zu springen, und in einer gewöhnlichen Schicht ist das die halbe Arbeit.
+Fünf Fragen reichen, um den Sprung vom Problem direkt zur Lösung zu verhindern, und in einer gewöhnlichen Schicht ist das die halbe Arbeit.

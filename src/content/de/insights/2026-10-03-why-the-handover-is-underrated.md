@@ -29,7 +29,7 @@ Man kann zwei Schichten haben, die jede für sich sehr gut sind. Die erste hat v
 
 Ein Problem, das es nicht in die Übergabe schafft, hört nicht auf zu existieren. Es wird nur zum Problem von jemandem, der noch nicht weiß, dass es existiert.
 
-Ich formuliere das als Prinzip aus der Hotelarbeit, in der ich offene Vorgänge, technische Probleme, nachzuverfolgende Anliegen und operative Abweichungen gesehen habe, die an die nächste Schicht gehen mussten. Es stützt sich nicht auf einen einzelnen dokumentierten Fall, in dem eine fehlende Information eine bestimmte Folge hatte.
+Das ist für mich ein Prinzip aus der Hotelarbeit. Dort habe ich erlebt, wie offene Vorgänge, technische Probleme, nachzuverfolgende Anliegen und operative Abweichungen an die nächste Schicht gingen. Einen einzelnen dokumentierten Fall, in dem eine fehlende Information eine bestimmte Folge hatte, kann ich nicht vorweisen.
 
 ## Von der losen Notiz zum aktuellen Stand
 
@@ -55,7 +55,7 @@ Ohne auf einzelne Inhalte einzugehen: Die Übergabe, die ich für die Nachtarbei
 
 - den allgemeinen operativen Zustand des Hotels;
 - die wichtigsten Bewegungen des Tages und die, die die nächste Schicht betreffen;
-- Reservierungen oder Status, die Aufmerksamkeit brauchen;
+- Reservierungen oder Zimmerstände, die Aufmerksamkeit brauchen;
 - offene administrative oder finanzielle Vorgänge;
 - Probleme oder Anliegen von Gästen, um die man sich weiter kümmern muss;
 - technische Themen;
@@ -71,7 +71,7 @@ Die Information muss so klar sein, dass die andere Person nicht deuten muss, was
 
 Eine Notiz wie „Problem mit dem Zimmer“ reicht nicht. Die Übergabe muss klarmachen, welcher Art das Problem ist, in welchem Zustand es sich befindet und ob noch etwas nachzuverfolgen ist, ohne unnötige Information hinzuzufügen.
 
-Eine feste Regel, jede Übergabe zusätzlich mündlich zu machen, habe ich nicht. Die Art, wie ich das Reporting aufgebaut habe, macht aber eines deutlich: Das Dokument muss für die Person, die es bekommt, brauchbar sein und darf nicht bloß belegen, dass die Übergabe stattgefunden hat.
+Eine feste Regel, jede Übergabe zusätzlich mündlich zu machen, habe ich nicht. Die Art, wie ich das Reporting aufgebaut habe, macht aber eines deutlich: Wer das Dokument bekommt, muss damit arbeiten können. Ein Beleg, dass die Übergabe stattgefunden hat, genügt nicht.
 
 ## Zwei Momente, die sich spiegeln
 
@@ -91,6 +91,6 @@ Die Zahlen und der operative Zustand geben eine Momentaufnahme. Offene Punkte tr
 
 Den menschlichen Kontext ersetzt kein Werkzeug vollständig. Ein System kann festhalten, dass ein Punkt offen ist, wer ihn weiterverfolgen muss und bis wann. Es kann aber nicht von sich aus garantieren, dass die Person, die die Schicht übernimmt, verstanden hat, warum er wichtig ist.
 
-Deshalb ist eine Übergabe für mich eine Weitergabe von Verantwortung und nicht nur von Information. Genau hier machen viele Organisationen Fehler.
+Deshalb gibt eine Übergabe für mich Verantwortung weiter, nicht nur Information, und genau hier machen viele Organisationen Fehler.
 
 Wenn die Information die Grenze zwischen zwei Schichten nicht überquert, gehört die gute Arbeit der ersten Schicht nicht mehr der Organisation. Sie bleibt nur im Kopf der Person, die gerade nach Hause gegangen ist.

@@ -6,7 +6,7 @@ series: improvement
 status: published
 featured: true
 summary: Presioni nuk i krijon gjithmonë problemet. Shpesh i bën më të dukshme.
-teaser: Kishim ditë kur kërkesa ishte më e lartë se parashikimi. Shoferë të thirrur në minutën e fundit, disa ende në ramp-up. Në ato ditë shihej sa i përgatitur ishte operacioni.
+teaser: Kishim ditë kur kërkesa ishte më e lartë se parashikimi. Shoferë të thirrur në minutën e fundit, disa ende në fazën e përshtatjes. Në ato ditë shihej sa i përgatitur ishte operacioni.
 description: "Ditët kur kërkesa kalonte parashikimin në last mile: ku binte presioni, pse kapaciteti nuk matet vetëm me njerëz dhe pesë kontrolle para ditës së madhe."
 deck: 'Eseja e tetë e serisë “Përmirësimi që mbahet”: ditët kur kërkesa kalonte parashikimin, ku binte presioni, pse kapaciteti nuk është numri i njerëzve dhe pesë kontrolle para ditës së madhe.'
 relatedTools:
@@ -29,13 +29,13 @@ firstMove:
   - Bëje të qartë kush vendos dhe kush njoftohet kur plani nuk mjafton.
 ---
 
-Në disa ditë në last mile, kërkesa e kalonte parashikimin. Shoferët duhej të thirreshin në minutën e fundit, disa mbërrinin me vonesë dhe disa, ende në fazën e ramp-up, nuk ishin mësuar plotësisht me SOP-të. E gjithë kjo binte mbi organizimin e ngarkimit dhe mbi orarin e nisjeve. Kështu është shënuar në raportimet e mia nga last mile, në qershor 2025.
+Në disa ditë në last mile, kërkesa e kalonte parashikimin. Shoferët duhej të thirreshin në minutën e fundit, disa mbërrinin me vonesë dhe disa, ende në fazën e përshtatjes (ramp-up), nuk ishin mësuar plotësisht me SOP-të. E gjithë kjo binte mbi organizimin e ngarkimit dhe mbi orarin e nisjeve. Kështu është shënuar në raportimet e mia nga last mile, në qershor 2025.
 
-Raportimet nuk e japin datën e një dite të caktuar, numrin total të porosive apo vonesën e saktë të nisjeve. As nuk ishin domosdoshmërisht ditë festash: ishin situata reale presioni operacional, jo një sezon i konfirmuar. Shoferët, automjetet dhe nisjet planifikoheshin operacionalisht, por nuk di për ndonjë plan zyrtar për pikun e kërkesës me nivele kapaciteti dhe procedura të veçanta, dhe nuk mund të them cili standard u lëkund i pari kur u rrit volumi. Megjithatë, ato ditë më treguan diçka që një ditë e zakonshme nuk ta tregon.
+Raportimet nuk japin as datën e një dite të caktuar, as numrin total të porosive, as vonesën e saktë të nisjeve, dhe nuk ishin domosdoshmërisht ditë festash: ishin situata reale presioni operacional, pa ndonjë sezon të konfirmuar pas tyre. Ato ditë më treguan diçka që një ditë e zakonshme nuk ta tregon.
 
 ## Ku binte presioni
 
-Si Area Manager kisha katër drejtues turni dhe tetë dispeçerë. Në stand-up-in e përditshëm flisnim për rezultatet e KPI-ve, problemet e ngarkimit, vonesat, sigurinë dhe koordinimin operacional.
+Si Area Manager kisha katër drejtues turni dhe tetë dispeçerë. Në takimin e shkurtër të përditshëm (daily stand-up) flisnim për rezultatet e KPI-ve, problemet e ngarkimit, vonesat, sigurinë dhe koordinimin operacional.
 
 Problemet e dokumentuara tregojnë ku duhej vëmendje kur rritej presioni:
 
@@ -51,7 +51,7 @@ Asnjë nga këto probleme nuk është i ri. Të njëjtat shfaqen edhe në një d
 
 Në ditë të tilla, pyetja e parë zakonisht është: sa shoferë kemi?
 
-Por fjalia që më ka mbetur nga ato raportime është tjetër: disa shoferë në ramp-up nuk ishin mësuar ende plotësisht me SOP-të. Ishin aty. Numëroheshin. Punën nuk e bënin dot ende si të tjerët.
+Fjalia që më ka mbetur nga ato raportime është tjetër: disa shoferë në fazën e përshtatjes nuk ishin mësuar ende plotësisht me SOP-të. Ishin aty. Numëroheshin. Punën nuk e bënin dot ende si të tjerët.
 
 **Kapaciteti nuk është vetëm numri i njerëzve që ke në dispozicion. Është numri i njerëzve që mund ta kryejnë punën sipas standardit.**
 
@@ -63,13 +63,13 @@ Te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-
 
 Kur kërkesa rritet, del në pah sa mirë është përgatitur operacioni, sa qartë janë ndarë përgjegjësitë dhe sa të aftë janë njerëzit ta zbatojnë standardin.
 
-Te [6S pa poster](/sq/insights/6s-without-a-poster/) shkrova se rregulli provohet në ditën e vështirë. E njëjta gjë vlen për planin. Një plan që funksionon vetëm kur gjithçka shkon sipas parashikimit është përshkrim i një dite të zakonshme, jo plan për ditën e rëndë.
+Te [6S pa poster](/sq/insights/6s-without-a-poster/) shkrova se rregulli provohet në ditën e vështirë. E njëjta gjë vlen për planin. Një plan që funksionon vetëm kur gjithçka shkon sipas parashikimit përshkruan një ditë të zakonshme.
 
 ## Para ditës së madhe
 
-Sot, një menaxheri përpara ditës së parë të madhe të sezonit do t'i thosha: mos prit derisa të rritet volumi për të zbuluar nëse ekipi është gati. Do t'i rekomandoja pesë gjëra, si këshillë për sot dhe jo si një plan që pretendoj se e kam zbatuar të plotë atëherë:
+Sot, një menaxheri përpara ditës së parë të madhe të sezonit do t'i thosha: mos prit derisa të rritet volumi për të zbuluar nëse ekipi është gati. Shoferët, automjetet dhe nisjet planifikoheshin atëherë operacionalisht, por nuk di për ndonjë plan zyrtar për kulmin e kërkesës me nivele kapaciteti dhe procedura të veçanta, dhe nuk mund të them cili standard u lëkund i pari kur u rrit volumi. Prandaj pesë gjërat që do t'i rekomandoja janë këshillë për sot, dhe nuk pretendoj se i kam zbatuar të plota atëherë:
 
-1. **Të kontrollojë kapacitetin real**, jo vetëm numrin e shoferëve të planifikuar.
+1. **Të kontrollojë kapacitetin real**, përtej numrit të shoferëve të planifikuar.
 2. **Të verifikojë nëse të porsaardhurit janë trajnuar** për procesin.
 3. **Të përcaktojë cilat standarde nuk lejohen të shkelen**, sidomos siguria dhe kontrollet kritike.
 4. **Të ketë një plan** për mungesat, vonesat dhe problemet me automjetet.

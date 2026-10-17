@@ -42,19 +42,19 @@ firstMove:
 
 At the end of the first essay in this series I promised an essay about the report a machine wrote. I was thinking then of the reports the system produces by itself: the numbers of the day, the close of the night. Today there is a second machine as well, one that does not produce the numbers but summarises them and writes them up in professional language. This essay is about both.
 
-It draws on the reports I worked with every day. In last mile: the daily KPI reports for Damage, Incomplete, Delay and Loading Time, the performance reports by DSP and by driver, and the reporting on operational problems, delays and incomplete orders. In the hotel, during Night Audit: the hotel status and occupancy reports, arrivals, departures and no-shows, the breakfast report and forecast, the end-of-day reports and the information for the following shift. None of this is the story of a report that got it wrong: I have no case in which I proved an automatic report wrong and corrected it, and none of an official report written by AI and sent without a person looking at it. The question here is the one I ask whenever a report looks finished: what does it tell me, and what does it let me believe?
+Behind it are the reports I worked with every day. In last mile: the daily KPI reports for Damage, Incomplete, Delay and Loading Time, the performance reports by DSP and by driver, and the reporting on operational problems, delays and incomplete orders. In the hotel, during Night Audit: the hotel status and occupancy reports, arrivals, departures and no-shows, the breakfast report and forecast, the end-of-day reports and the information for the following shift. The question I bring to them is the one I ask whenever a report looks finished: what does it tell me, and what does it let me believe?
 
 ## Two reports, two numbers
 
 In Night Audit I had a case in which the number of people in the breakfast forecast differed from the number in the hotel status report: two reports, from the same system, for the same night, with two different numbers.
 
-The first reaction is to ask which one is wrong. But I cannot say that the system had made a mistake. Two reports can count with different criteria and show different figures without either of them being inaccurate. What the case called for was a check rather than a correction: comparing the two sources and understanding what each one counts.
+The first reaction is to ask which one is wrong. But I cannot say that the system had made a mistake, and I have no case in which I proved an automatic report wrong and corrected it. Two reports can count with different criteria and show different figures without either of them being inaccurate. The case called for a check: comparing the two sources and understanding what each one counts.
 
 This is the part of automatic reports that is most easily forgotten. A generated report looks final because it is orderly: tables, columns, totals. But its order says nothing about the question you have. It says only that the system answered the question it was set, with the criteria it was given.
 
 **Two reports with two different numbers do not mean that one of them is wrong. They mean you have to know what each one counts.**
 
-## Closing the day is not closing the issues
+## Closing the day, and what stays open
 
 During Night Audit, the end-of-day reports are generated at a certain point in the night. Before I trusted them, I checked a few things. Did the information match the operational state of the shift? Had arrivals, departures and no-shows been handled according to the process? Were there open issues that needed follow-up, or discrepancies between linked reports that needed clearing up? And had the information the next shift needed been documented?
 
@@ -66,7 +66,7 @@ In [What a Night Auditor learns](/insights/what-a-night-auditor-learns/) I wrote
 
 I have used ChatGPT to organise operational material, to prepare SOP instructions, to structure information and to draft professional texts. It is good at what it is asked to do: it takes a messy list and turns it into something that reads well.
 
-That is where the risk lies. A well-written text gives the impression that someone has thought it through. A report with orderly paragraphs and words like “verified” and “resolved” sounds checked, even when nobody has checked anything. And an AI tool can add something that was not in your notes, in the same confident tone as everything else.
+That is where the risk lies, even though I have no case of an official report written by AI and sent without a person looking at it. A well-written text gives the impression that someone has thought it through. A report with orderly paragraphs and words like “verified” and “resolved” sounds checked, even when nobody has checked anything. And an AI tool can add something that was not in your notes, in the same confident tone as everything else.
 
 AI can help me write a report more clearly. It must not decide by itself what is true. So before I use a text prepared with AI, this is the standard I hold to:
 

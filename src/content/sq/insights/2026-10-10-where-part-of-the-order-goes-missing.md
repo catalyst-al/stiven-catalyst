@@ -37,9 +37,7 @@ Ky rregull tregon diçka që raporti nuk e thotë: një çantë që mungon zbulo
 
 Te [Si punonim me dëmet](/sq/insights/how-we-worked-with-damage/) shkrova se përqindja nuk ka adresë. E njëjta gjë vlen për Incomplete, me një ndryshim të rëndësishëm: këtu ka një moment kur problemi mund të ndalet ende.
 
-Incomplete e kuptoja si porosi që nuk i mbërrinte e plotë klientit; formulën zyrtare dhe rregullat e sakta të numërimit nuk i di. Nga raportet kam këto shifra: në prill 2025 Incomplete ishte 1,18% kundrejt një objektivi prej 0,8%, ndërsa në një raport të qershorit 2025 ishte 0,63%, me 13 raste.
-
-Shifrat janë të vërteta, por nuk tregojnë se cilat masa e sollën ndryshimin, dhe nuk e paraqes atë si rezultat të punës sime. Nuk e di as nga cili kanal dhe në cilin sistem regjistrohej çdo rast, as cili problem ndodhte më shpesh.
+Incomplete e kuptoja si porosi që nuk i mbërrinte e plotë klientit; formulën zyrtare dhe rregullat e sakta të numërimit nuk i kam ditur kurrë. Nga raportet kam këto shifra: në prill 2025 Incomplete ishte 1,18% kundrejt një objektivi prej 0,8%, ndërsa në një raport të qershorit 2025 ishte 0,63%, me 13 raste. Ato nuk tregojnë se cilat masa e sollën ndryshimin, prandaj nuk e paraqes si rezultat të punës sime; as nuk mund të them nga cili kanal dhe në cilin sistem regjistrohej çdo rast, apo cili problem ndodhte më shpesh.
 
 ## Çfarë gjetëm në magazinë
 

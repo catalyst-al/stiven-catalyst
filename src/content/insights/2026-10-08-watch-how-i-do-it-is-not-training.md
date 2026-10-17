@@ -54,15 +54,13 @@ The information existed, but it was scattered. The checklist told you what had t
 
 That is where I understood the difference between **having information** and **having a training system**. Information gives you the pieces. A system gives you the order, the reason, and the point at which you know you can carry on alone.
 
-From last mile I know there were clear operational rules for safety, loading, scanning, the dock, the cold chain and the way of working, and that retraining was required in cases where standards were broken. Whether new dispatchers, dock workers or DSP drivers went through a structured programme over several days or mainly learned next to someone, I cannot say with confidence, and I have no well-documented case of training a new employee step by step myself. So this essay rests on my experience as the person being trained, and on a view of how you can tell that someone has really learned.
-
 ## When the process lives in one person
 
 When the process is not written down as a clear path, it lives in the person who does it every day.
 
-None of this is their fault; usually they are the best person you have, which is why you chose them to train others. But even the best person has their own interpretation. They know why they leave one step for later, or why they check something a different way. The new person sees only the action; the reason stays in the other person's head.
+The trainer is not to blame: usually they are the best person you have, which is why you chose them to train others. But even the best person has their own interpretation. They know why they leave one step for later, or why they check something a different way. The new person sees only the action; the reason stays in the other person's head.
 
-If two new people are trained by two different colleagues, they do not learn the same job. They learn two versions of it. A few months later, where there was one standard, you have several habits that resemble each other.
+If two new people are trained by two different colleagues, they learn two versions of the same job. A few months later, where there was one standard, you have several habits that resemble each other.
 
 That is why training cannot be separated from the standard. Without [an SOP that is actually used](/insights/a-good-sop-is-not-a-document/), training becomes copying.
 
@@ -75,6 +73,8 @@ My test has three parts: do it yourself, tell me why, show me what you do when a
 If all three work, the training has started to deliver. If only the first works, the person has learned to copy, which is enough for normal days and falls short on the night when something does not go as usual.
 
 ## The first hour
+
+From here on I describe how I would do it, and I speak as the one who was trained: I have no well-documented case of taking a new employee through the work step by step myself. From last mile I know there were clear operational rules for safety, loading, scanning, the dock, the cold chain and the way of working, and that retraining was required where standards were broken. Whether new dispatchers, dock workers or DSP drivers went through a structured programme over several days or mainly learned next to someone, I cannot say with confidence.
 
 In the first hour I would limit myself to five things the new person should know:
 
@@ -94,7 +94,7 @@ The order I would follow is simple:
 
 **Watch. Do it with me. You do it while I watch. Do it alone. Then explain it to me.**
 
-To me, that is far stronger than “stay with them today and watch how they do it”. Watching is still the first step; it has stopped being the only one. What counts in the end is how consistent and safe the result stays once the trainer has gone.
+To me, that is far stronger than “stay with them today and watch how they do it”. Watching stays the first step, one of five. What counts in the end is how consistent and safe the result stays once the trainer has gone.
 
 ## The first-week plan for a new employee
 

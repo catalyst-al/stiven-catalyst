@@ -33,17 +33,17 @@ firstMove:
 
 1,06%. Objektivi ishte 0,8%.
 
-Kështu dukej Damage në raportin e prillit 2025. Në last mile ishte një nga KPI-të kryesore që ndiqnim çdo ditë, bashkë me Incomplete, Delay dhe Loading Time. Numri ishte i saktë dhe na tregonte se kishim një problem. Ku kishte lindur dëmi, te karroca, gjatë ngarkimit, në furgon apo te dera e klientit, këtë nuk e thoshte.
+Kështu dukej Damage (dëmtimet) në raportin e prillit 2025. Në last mile ishte një nga KPI-të kryesore që ndiqnim çdo ditë, bashkë me Incomplete (porositë jo të plota), Delay (vonesat) dhe Loading Time (koha e ngarkimit). Numri ishte i saktë dhe na tregonte se kishim një problem. Ku kishte lindur dëmi, te karroca, gjatë ngarkimit, në furgon apo te dera e klientit, këtë nuk e thoshte.
 
-Kjo ese hap serinë “Përmirësimi që mbahet”, dhe një përmirësim që mbahet nis nga ajo që di. Ajo që di është si i ndiqnim dëmet dhe çfarë problemesh shihnim. Kam të dokumentuara dy shifra: atë të prillit dhe 0,97% në një raport të qershorit 2025. Dy raporte nuk bëjnë një seri, ndaj nuk mund të them nëse ndryshimi ishte trend, efekt i sezonit apo rastësi, dhe nuk e paraqes si rezultat të drejtpërdrejtë të punës sime. As nuk e di me saktësi ku ndodhnin më shumë dëmet dhe nuk kam ndonjë rast të dokumentuar ku të mund ta përshkruaj dëmin, shkakun dhe masën korrigjuese pa shpikur detaje.
+Kjo ese hap serinë “Përmirësimi që mbahet”, dhe një përmirësim që mbahet nis nga ajo që di: si i ndiqnim dëmet dhe çfarë problemesh shihnim.
 
 ## Si e ndiqnim
 
-Damage e ndiqnim në raportet operative dhe në stand-up-in e përditshëm. E analizonim krahas treguesve të tjerë dhe problemeve të përditshme të operacionit.
+Damage e ndiqnim në raportet operative dhe në takimin e shkurtër të përditshëm (daily stand-up). E analizonim krahas treguesve të tjerë dhe problemeve të përditshme të operacionit. Kam të dokumentuara dy shifra: atë të prillit dhe 0,97% në një raport të qershorit 2025. Dy raporte nuk bëjnë një seri, ndaj nuk mund të them nëse ndryshimi ishte trend, efekt i sezonit apo rastësi, dhe nuk e paraqes si rezultat të drejtpërdrejtë të punës sime.
 
 Problemet që shihnim ishin operative: si organizohej ngarkesa, si përdoreshin karrocat, si vendoseshin produktet. Operacioni kishte standarde për sigurinë, për organizimin e rampës, për ngarkimin dhe për trajtimin e produkteve. Drejtuesit e turnit dhe dispeçerët ndiqnin problemet operative, dhe koordinimi me DSP-të ishte pjesë e punës së përditshme.
 
-Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për masat që dolën në atë periudhë nga rastet e ngarkimit. Por nuk kam shënime të sakta për ndryshimet që vendosa vetë, as për mënyrën si ndryshoi sjellja e secilit grup, prandaj nuk i rrëfej këtu si histori suksesi.
+Te [Pareto dhe 5 Why në praktikë](/sq/insights/pareto-and-5-why-in-practice/) shkrova për masat që dolën në atë periudhë nga rastet e ngarkimit. Ku ndodhnin më shumë dëmet, nuk e di me saktësi. Nuk kam ndonjë rast të dokumentuar ku të mund ta përshkruaj dëmin, shkakun dhe masën korrigjuese pa shpikur detaje, as shënime të sakta për ndryshimet që vendosa vetë dhe për mënyrën si ndryshoi sjellja e secilit grup, prandaj asgjë prej tyre nuk e rrëfej këtu si histori suksesi.
 
 ## Përqindja nuk ka adresë
 
@@ -59,9 +59,7 @@ Nëse menaxheri nuk mund të thotë në cilën fazë lind dëmi, ai mund të pun
 
 ## Dy mënyra për të ulur një numër
 
-Kjo pjesë është mendim, jo rast nga përvoja ime.
-
-Një përqindje mund të lëvizë edhe pa e kuptuar njeri procesin. Mund t'i bësh presion ekipit ku raportohet dëmi dhe ta kthesh në temë çdo mëngjes, dhe numri ndoshta ulet për njëfarë kohe. Por nëse karroca mbushet njësoj, ngarkesa organizohet njësoj dhe standardi mbetet po aq i paqartë, dëmi do të kthehet sapo vëmendja të kalojë diku tjetër.
+Sipas mendimit tim, një përqindje mund të lëvizë edhe pa e kuptuar njeri procesin. Mund t'i bësh presion ekipit ku raportohet dëmi dhe ta kthesh në temë çdo mëngjes, dhe numri ndoshta ulet për njëfarë kohe. Por nëse karroca mbushet njësoj, ngarkesa organizohet njësoj dhe standardi mbetet po aq i paqartë, dëmi do të kthehet sapo vëmendja të kalojë diku tjetër.
 
 Mënyra tjetër është më e ngadaltë. E ndjek dëmin mbrapsht në proces deri te faza ku lindi dhe ndryshon diçka aty. Menaxhimi i dëmeve nuk duhet të jetë vetëm përpjekje për të ulur përqindjen në raport. Duhet të jetë përpjekje për të kuptuar dhe parandaluar dëmet në proces.
 
@@ -76,19 +74,19 @@ Kjo nuk e heq përgjegjësinë individuale: nëse nuk u respektua një standard 
 ## Një rast dëmtimi, katër pyetje
 
 **1. Ku ndodhi dëmtimi?**
-Faza e procesit, jo personi: përgatitja, karroca, ngarkimi, transporti, dorëzimi. Nëse përgjigjja është “nuk e dimë”, edhe kjo është gjetje. Do të thotë që procesi nuk e regjistron vendin ku lind dëmi, dhe pikërisht aty nis puna.
+Faza e procesit: përgatitja, karroca, ngarkimi, transporti, dorëzimi. Nëse përgjigjja është “nuk e dimë”, edhe kjo është gjetje. Do të thotë që procesi nuk e regjistron vendin ku lind dëmi, dhe pikërisht aty nis puna.
 
 **2. Cili standard nuk u respektua, nëse kishte një të tillë?**
 Nëse për atë fazë nuk kishte standard, problemi qëndron te sistemi, që e la atë person të vendoste i vetëm.
 
 **3. A ishte standardi i qartë dhe i zbatueshëm?**
-Jo në letër, por në turn, me volumin, kohën dhe njerëzit e asaj dite. Një standard që mund të respektohet vetëm kur ka kohë të lirë nuk është më shumë se një dëshirë.
+Gjykoje në turn, me volumin, kohën dhe njerëzit e asaj dite. Një standard që mund të respektohet vetëm kur ka kohë të lirë nuk është më shumë se një dëshirë.
 
 **4. Çfarë duhet ndryshuar që dëmi të mos përsëritet?**
 Një ndryshim në proces, me një person që e merr përsipër dhe një datë kur kontrollohet nëse funksionoi. “T'i kujtojmë ekipit të jetë më i kujdesshëm” nuk është ndryshim.
 
 Kur këto katër përgjigje mblidhen për shumë raste dëmtimi, del në pah diçka që përqindja nuk e tregon: fazat ku dëmi lind më shpesh. [Kontrolli i dëmeve](/sq/tools/damage-control/) është ndërtuar për këtë. Regjistron çdo njësi të dëmtuar me fazën e procesit dhe shkakun, dhe tregon ku duhet nisur. Për një rast të vetëm, mund ta plotësosh kartën më poshtë dhe ta kopjosh për ekipin.
 
-Përqindja të thotë sa. Pyetjet të thonë ku. Dhe vetëm “ku”-ja mund të ndryshohet.
-
 **Qëllimi nuk është një përqindje më e ulët në raport. Është një dëm më pak në proces.**
+
+Përqindja të thotë sa. Pyetjet të thonë ku. Dhe vetëm “ku”-ja mund të ndryshohet.

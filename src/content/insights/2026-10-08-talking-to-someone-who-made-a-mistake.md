@@ -42,15 +42,15 @@ If we look only at the person, we risk leaving untouched a process that will pro
 
 If we look only at the process, we risk taking responsibility away from individual decisions.
 
-This essay is about the moment when a manager exercises authority over people more directly than at any other: the conversation after a mistake. I do not see asking for accountability and respecting the employee's dignity as two things that work against each other.
+The conversation after a mistake is the moment when a manager exercises authority over people more directly than at any other. I do not see asking for accountability and respecting the employee's dignity as two things that work against each other.
 
-I worked in last mile as a Team Leader On Road and then as an Area Manager, and following performance, operational problems and KPIs, and coordinating people, were part of the job. What follows are the principles I stand for in that conversation, not the record of a particular talk. Where I use an example, it is hypothetical, and I say so.
+I worked in last mile as a Team Leader On Road and then as an Area Manager, and following performance, operational problems and KPIs, and coordinating people, were part of the job. That is the ground this conversation stands on for me.
 
 ## In private, once you understand the facts
 
-As a principle, I would rather hold a corrective conversation in private, and only once I have understood the facts. It is the standard I stand for, not a procedure I followed in every case.
+As a principle, I would rather hold a corrective conversation in private, and only once I have understood the facts. It is the standard I stand for, not a procedure I followed in every case, and the same goes for what follows: principles, not the record of a particular talk.
 
-There is one clear exception. If there is an immediate safety risk, you step in at that moment. You do not wait for the right conversation in the right place; you stop what is happening.
+There is one clear exception. If there is an immediate safety risk, you step in at that moment. You stop what is happening there and then. The right conversation in the right place comes afterwards.
 
 ## The person's mistake or the process's
 
@@ -90,7 +90,7 @@ Nowhere does that matter more than in the conversation after a mistake. It is th
 
 ## What helps after a mistake
 
-I believe the most useful response to a mistake is the one that helps you understand what happened, what your responsibility is and how not to repeat it: not the one that leaves you alone with the guilt, and not the one that passes over the mistake as if it had not happened.
+I believe the most useful response to a mistake is the one that helps you understand what happened, what your responsibility is and how not to repeat it. Leaving someone alone with the guilt does none of that, and neither does passing over the mistake as if it had not happened.
 
 Take a hypothetical example. A driver leaves without checking one step of the procedure. A conversation that opens with “you always do this” is over before it starts. A conversation that opens with “today you left without this check; tell me how it went” has somewhere to go. In both cases the mistake is named. The difference is whether the person can learn something from it.
 

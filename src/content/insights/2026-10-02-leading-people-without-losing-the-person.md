@@ -54,9 +54,11 @@ So the question was: did the system create the possibility of the error, or did 
 
 The answer changes the whole conversation with that person. In the first case you fix the process. In the second you work on behaviour and accountability. Sometimes you have both at once.
 
-The same logic applies when pressure comes from above. I tried to turn pressure about KPIs into an operational problem. What happened? Where did it happen? Which cases keep repeating? What do we check today? Who takes the action? If damage, delays or incomplete orders went up, I needed to understand the reason, not find someone to blame.
+The same logic applies when pressure comes from above. I tried to turn pressure about KPIs into an operational problem. What happened? Where did it happen? Which cases keep repeating? What do we check today? Who takes the action? If damage, delays or incomplete orders went up, I needed to understand the reason, and a name to blame would not have given me that.
 
-I do not want to make this a heroic story in which I always shielded the team from management; operations are more complicated than that. What I can say is this: pressure can be fair. Humiliating people is not a management method. A standard can be very strong without treating a person as a number.
+I will not claim that I always shielded the team from management; operations are more complicated than that. What I can say is this: pressure can be fair. Humiliating people is not a management method. A standard can be very strong without treating a person as a number.
+
+This is also how I define respect at work. Respect is not never holding someone accountable. Respect is making the standard clear to them, listening to them before you judge them, and, when the responsibility is theirs, not hiding that from them.
 
 This way of working was hardest to hold when my own position changed.
 
@@ -67,5 +69,3 @@ I could no longer be the one who walked in and solved every problem himself. I h
 That is a real change in leadership, especially when you are promoted from within. Yesterday you may have solved the problem side by side with a colleague. Today you have to tell the same person, in words or by the way you work: this is now yours to solve. I am here to support you, but I will not do the job for you.
 
 When you are promoted, you should not suddenly become a different person just to prove that you are the boss now. Nor can you carry on as if nothing had changed. You have to keep the relationship with people and, at the same time, ask of them things that yesterday were not yours to ask.
-
-This is also how I define respect at work. Respect is not never holding someone accountable. Respect is making the standard clear to them, listening to them before you judge them, and, when the responsibility is theirs, not hiding that from them.

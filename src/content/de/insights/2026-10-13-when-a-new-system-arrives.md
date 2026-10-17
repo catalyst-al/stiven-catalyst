@@ -42,13 +42,13 @@ corrections:
 
 In [Die Nacht, in der das System ausfiel](/de/insights/the-night-the-system-went-down/) habe ich über meine erste Nacht der Einarbeitung im Hotel geschrieben, als ein Update das System stundenlang lahmlegte. Ich war gekommen, um die Abläufe zu lernen, und verbrachte den größten Teil der Nacht mit Warten. Dieser Essay setzt dort an, wo jener aufhörte, und wendet sich vom System, das stillsteht, dem System zu, das kommt, und den Menschen, die es lernen müssen.
 
-Er stützt sich auf zwei Erfahrungen. Auf der letzten Meile war für den 19. August 2025 der Wechsel zu einem neuen System für die Berechnung von Routen und Fahrzeiten geplant. Nach den Informationen aus jener Zeit sollte es die Planung genauer machen und unrealistische Routen verringern, und vorgesehen waren Kalibrierungen, damit die Umstellung die Fahrer so wenig wie möglich trifft. Im Hotel waren es meine ersten Wochen der Einarbeitung: die Erklärungen der Kollegen, die SOPs, die visuellen Materialien und die Videos, und Informationen, die nicht immer an einem Ort lagen. Aus dieser Zeit ist Front Desk Control entstanden. Für die Umstellung im August habe ich keinen geprüften Vorher-Nachher-Vergleich und keine Belege für Widerstand oder eine Rückkehr zu alten Gewohnheiten.
+Hinter ihm stehen zwei Erfahrungen. Auf der letzten Meile war für den 19. August 2025 der Wechsel zu einem neuen System für die Berechnung von Routen und Fahrzeiten geplant. Nach den Informationen aus jener Zeit sollte es die Planung genauer machen und unrealistische Routen verringern, und vorgesehen waren Kalibrierungen, damit die Umstellung die Fahrer so wenig wie möglich trifft. Im Hotel waren es meine ersten Wochen der Einarbeitung: die Erklärungen der Kollegen, die SOPs, die visuellen Materialien und die Videos, und Informationen, die nicht immer an einem Ort lagen. Aus dieser Zeit ist Front Desk Control entstanden.
 
 In jenen Wochen hatten wir auf der letzten Meile Probleme mit der Beladung, fehlenden Taschen, ungeordneten Trolleys und Verspätungen, und ich habe sie dokumentiert. Einen Beweis, dass das neue System sie verursacht hat, habe ich nicht, und sie können andere Ursachen gehabt haben. Das ist die bequemste Versuchung, wenn ein neues System kommt: ihm alles in Rechnung zu stellen, was in den ersten Wochen schiefgeht.
 
 ## Zwei Seiten derselben Tür
 
-Auf der letzten Meile war ich Teil eines Betriebs, dessen Planungstechnik sich änderte; im Hotel war ich der Neue, der ein System lernen musste, das schon da war. Nebeneinandergelegt zeigen beide Erfahrungen dasselbe: Ein System kann technisch besser sein als das, das es ersetzt, ohne dass die Menschen bereit sind, damit zu arbeiten. Bereitschaft entsteht in den Wochen nach der Installation, oder sie entsteht nicht.
+Auf der letzten Meile war ich Teil eines Betriebs, dessen Planungstechnik sich änderte; im Hotel war ich der Neue, der ein System lernen musste, das schon da war. Nebeneinandergelegt zeigen beide Erfahrungen dasselbe: Ein System kann technisch besser sein als das, das es ersetzt, ohne dass die Menschen bereit sind, damit zu arbeiten. Bereitschaft entsteht in den Wochen nach der Installation, oder sie entsteht nicht. Wie das nach der Umstellung im August lief, kann ich nicht zeigen: Ich habe keinen geprüften Vorher-Nachher-Vergleich und keine Belege für Widerstand oder eine Rückkehr zu alten Gewohnheiten.
 
 **Ein neues System wird nicht dadurch Teil der Arbeit, dass es installiert ist. Das wird es, wenn die Menschen es verstehen, wissen, wie man es benutzt, und wissen, was zu tun ist, wenn es ihnen nicht hilft.**
 
@@ -79,7 +79,7 @@ Ich halte auch nicht jedes Dokument außerhalb des Systems für eine schlechte A
 Wenn heute ein neues System kommt, würde ich der Vorbereitung der Menschen Vorrang geben, nicht nur der Installation des Programms. Ein solches Veränderungsprogramm habe ich nicht geleitet; empfehlen würde ich Folgendes:
 
 1. **Erklären, warum die Änderung kommt.** Nicht nur, was das neue System kann.
-2. **Zeigen, was sich in der täglichen Arbeit ändert.** Für jede Rolle, nicht eine Präsentation für alle.
+2. **Zeigen, was sich in der täglichen Arbeit ändert.** Rolle für Rolle statt in einer Präsentation für alle.
 3. **Schulung an echten Situationen, nicht nur eine Vorführung der Funktionen.** Der gewöhnliche und der schwierige Fall.
 4. **Klar machen, wo man Hilfe bekommt, wenn etwas nicht funktioniert.** Auch nachts, auch in den ersten Tagen.
 5. **Die Probleme der ersten Tage sammeln und den Mitarbeitern antworten.** Ein gemeldetes Problem ohne Antwort ist die letzte Lektion, die Menschen über das Melden lernen.

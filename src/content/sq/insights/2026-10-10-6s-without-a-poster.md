@@ -31,11 +31,11 @@ firstMove:
 
 Një poster me gjashtë parime mund të varet në çdo mur. Rampa nuk e lexon kurrë.
 
-Ajo që tregon rampa është nëse rregulli jeton: nëse karrocat janë të organizuara, nëse portat mbyllen, nëse porositë përzihen, nëse njerëzit lëvizin aty ku duhet. Dhe këtë e tregon më qartë në ditën e vështirë, jo në ditën kur vjen një kontroll.
+Ajo që tregon rampa është nëse rregulli jeton: nëse karrocat janë të organizuara, nëse portat mbyllen, nëse porositë përzihen, nëse njerëzit lëvizin aty ku duhet. Dhe këtë e tregon më qartë në ditën e vështirë.
 
 5S është një metodë që vjen nga Japonia, me pesë hapa: ndaj atë që duhet nga ajo që nuk duhet, vendos çdo gjë në vendin e vet, pastro, standardizo dhe mbaje. 6S shton një të gjashtë: sigurinë. Në letër duket e thjeshtë. Në punë është nga gjërat që keqkuptohen më lehtë.
 
-Në last mile, në Gjermani, 5S ishte një nga temat operative në komunikimin tonë dhe në takimin e përditshëm (daily stand-up). Puna ime lidhej drejtpërdrejt me organizimin e rampës, të magazinës dhe të zonave të ngarkimit, dhe parimet e 5S i lidhja me sigurinë, me disiplinën operative dhe me KPI-të si Damage, Incomplete dhe Loading Time. Kishim kontrolle operative dhe kërkesa për respektimin e standardeve të rampës. Nëse kishte edhe një program zyrtar 6S të kompanisë, me auditime, pikëzime, shenja në dysheme ose zona me ngjyra, nuk e di, dhe nuk pretendoj se kam drejtuar një të tillë.
+Në last mile, në Gjermani, 5S ishte një nga temat operative në komunikimin tonë dhe në takimin e përditshëm (daily stand-up). Puna ime lidhej drejtpërdrejt me organizimin e rampës, të magazinës dhe të zonave të ngarkimit, dhe parimet e 5S i lidhja me sigurinë, me disiplinën operative dhe me KPI-të si Damage (dëmtimet), Incomplete (porositë jo të plota) dhe Loading Time (koha e ngarkimit). Kishim kontrolle operative dhe kërkesa për respektimin e standardeve të rampës.
 
 ## Si dukej rregulli në rampë
 
@@ -63,7 +63,7 @@ Prandaj rregulli duhet të duket. Kur çdo gjë ka vendin e vet, ajo që nuk ës
 
 ## S-ja e gjashtë
 
-Në last mile, siguria ishte pjesë e vetë operacionit:
+Nëse kompania kishte edhe një program zyrtar 6S, me auditime, pikëzime, shenja në dysheme ose zona me ngjyra, nuk e di, dhe nuk pretendoj se kam drejtuar një të tillë. Di, megjithatë, që në last mile siguria ishte pjesë e vetë operacionit:
 
 - mbyllja e portave pas ngarkimit;
 - rregullat se si lëviz dhe ku qëndron në rampë;
@@ -71,7 +71,7 @@ Në last mile, siguria ishte pjesë e vetë operacionit:
 - vendosja e produkteve në mënyrë që të shmangeshin dëmtimet dhe rreziqet;
 - respektimi i zonave të caktuara dhe i rregullave të higjienës.
 
-Shumica e tyre janë njëkohësisht rregull, siguri dhe cilësi. Porta e mbyllur mbron njerëzit. Ngarkesa e organizuar mbron produktin. Zona e respektuar mbron zinxhirin e ftohtë. Prandaj siguria, më shumë se S-ja e fundit që i shtohet listës, është arsyeja pse lista ekziston.
+Shumica e tyre janë njëkohësisht rregull, siguri dhe cilësi. Porta e mbyllur mbron njerëzit. Ngarkesa e organizuar mbron produktin. Zona e respektuar mbron zinxhirin e ftohtë. Prandaj siguria hyri e fundit në listë, por është arsyeja pse lista ekziston.
 
 ## Dita e vështirë
 
@@ -91,6 +91,6 @@ Nëse do ta ndërtoja sot, do ta mbaja të shkurtër. Pesë pika, për një zon�
 4. **Portat e ngarkimit janë mbyllur.**
 5. **Problemet e hapura i janë kaluar turnit pasardhës.**
 
-Pika e fundit e lidh rregullin e vendit me rregullin e informacionit. Një zonë e rregulluar me një problem të hapur që askush nuk e di nuk është zonë e rregulluar. Për këtë pjesë, [Dorëzimi i turnit](/sq/tools/shift-handover/) i mban çështjet e hapura me përgjegjës dhe orë, dhe i kalon vetë te turni tjetër. Listën më poshtë mund ta shënosh dhe ta kopjosh për zonën tënde.
+Pika e fundit e lidh rregullin e vendit me rregullin e informacionit. Edhe një zonë e rregulluar mund të fshehë një problem të hapur që askush nuk e di. Për këtë pjesë, [Dorëzimi i turnit](/sq/tools/shift-handover/) i mban çështjet e hapura me përgjegjës dhe orë, dhe i kalon vetë te turni tjetër. Listën më poshtë mund ta shënosh dhe ta kopjosh për zonën tënde.
 
-Posteri thotë çfarë duhet të jetë. Rampa në fund të turnit tregon çfarë është.
+Pastaj, në fund të turnit, bëj një xhiro në rampë dhe krahasoje me posterin.

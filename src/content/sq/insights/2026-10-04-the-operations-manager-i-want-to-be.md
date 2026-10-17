@@ -46,7 +46,7 @@ Sot filozofinë time të punës do ta përmblidhja në pesë parime.
 
 Operacionet nuk ecin pa njerëzit që i mbajnë në këmbë çdo ditë.
 
-Kam punuar në mjedise me presion, objektiva, vonesa, gabime dhe çaste kur duhej reaguar shpejt. Kam mësuar se standardi mund të jetë i lartë dhe kërkesa e prerë pa e cenuar dinjitetin e personit përballë. Presioni mund të jetë i drejtë; poshtërimi jo.
+Kam punuar në mjedise me presion, objektiva, vonesa, gabime dhe çaste kur duhej reaguar shpejt. Kam mësuar se standardi mund të jetë i lartë dhe kërkesa e prerë pa e cenuar dinjitetin e personit përballë. Presioni e ka vendin e vet; poshtërimi kurrë.
 
 Për mua, një menaxher duhet të dijë të kërkojë llogari pa e përdorur frikën si mënyrë drejtimi, sepse një ekip që ka frikë t'i tregojë gabimet nuk ka më pak gabime. Ka vetëm më pak gabime të dukshme.
 
@@ -54,7 +54,7 @@ Për mua, një menaxher duhet të dijë të kërkojë llogari pa e përdorur fri
 
 Kam mësuar të mos u besoj shumë proceseve që funksionojnë vetëm sepse një person me përvojë “e di si bëhet”. Nëse rezultati varet nga fakti që në turn është personi i duhur, atëherë organizata ka njohuri, por ende nuk ka standard.
 
-Prandaj besoj në SOP-të, në listat e kontrollit dhe në mënyrat e qarta të punës. Prova e një SOP-je është nëse një person tjetër arrin të njëjtin rezultat, edhe nën presion dhe pa autorin pranë për ta pyetur, jo sa profesionale duket në një dokument.
+Prandaj besoj në SOP-të, në listat e kontrollit dhe në mënyrat e qarta të punës. Prova e një SOP-je është nëse një person tjetër arrin me të të njëjtin rezultat, edhe nën presion dhe pa autorin afër për ta pyetur. Sa profesionale duket si dokument vjen shumë më pas.
 
 Për mua standardizimi ekziston që njerëzit të mos detyrohen të shpikin nga e para atë që organizata duhet ta dijë tashmë, jo për t'ua hequr të menduarit.
 
@@ -70,7 +70,7 @@ Të dhënat duhet të më çojnë në terren. Dhe terreni duhet të më ndihmoj�
 
 ## 4. Përgjegjësia
 
-Për mua, përgjegjësia do të thotë që asnjë problem të mos mbetet pa zot, gjë që është ndryshe nga të marrësh çdo problem mbi supe.
+Për mua, përgjegjësia do të thotë që asnjë problem të mos mbetet pa zot. Kjo nuk më detyron t'i mbaj të gjitha mbi supet e mia.
 
 Këtë ma mësoi dorëzimi i turnit. Një turn mund të punojë shumë mirë, por nëse informacioni nuk kalon te turni tjetër, organizata humbet një pjesë të asaj pune.
 
@@ -88,7 +88,7 @@ Më parë pyetja ime ishte shpesh: “Si e zgjidhim këtë problem?” Sot ësht
 
 Ky ndryshim në mënyrën si mendoj është ndoshta një nga hapat më të rëndësishëm të zhvillimit tim profesional.
 
-Operacionet përmirësohen me shumë korrigjime të vogla, të bëra vazhdimisht dhe të mbështetura në realitetin e punës, dhe jo me një projekt të madh një herë në vit.
+Operacionet përmirësohen me shumë korrigjime të vogla, të bëra vazhdimisht dhe të mbështetura në realitetin e punës, shumë më tepër se me një projekt të madh në vit.
 
 ## Çfarë nuk dua të bëj kurrë si menaxher
 
@@ -98,9 +98,9 @@ Nëse një ekip funksionon vetëm kur menaxheri është në dhomë, për mua ai 
 
 ## Si do të dukej java ime ideale si Operations Manager
 
-Çdo ditë do ta nisja me një pasqyrë të shkurtër të operacionit, jo me një raport njëorësh. Dua të di çfarë ka devijuar, çfarë mbetet e hapur, ku kemi rrezik dhe ku duhet prania ime.
+Çdo ditë do ta nisja me një pasqyrë të shkurtër të operacionit, disa minuta. Dua të di çfarë ka devijuar, çfarë mbetet e hapur, ku kemi rrezik dhe ku duhet prania ime.
 
-Do t'i kontrolloja KPI-të kryesore, por nuk do ta kaloja ditën duke parë vetëm panele treguesish.
+Do t'i kontrolloja KPI-të kryesore dhe pastaj do të largohesha nga panelet e treguesve.
 
 Një pjesë e rëndësishme e javës sime duhet të jetë në terren: ta shoh procesin, të flas me njerëzit dhe t'i kuptoj problemet që nuk arrijnë gjithmonë në raport.
 
@@ -113,9 +113,9 @@ Një herë në javë do të doja një rishikim më të thellë të performancës
 - Kush përgjigjet për to?
 - Dhe cilat probleme nuk janë më incidente, por dukuri që përsëriten?
 
-Do të doja gjithashtu kohë të posaçme për njerëzit: reagime për punën, mentorim dhe biseda ku pyetja nuk është vetëm “çfarë nuk shkoi”, por edhe “çfarë të pengon ta bësh mirë punën?”.
+Do të doja gjithashtu kohë të posaçme për njerëzit: reagime për punën, mentorim dhe biseda ku, pas pyetjes “çfarë nuk shkoi?”, dikush pyet edhe “çfarë të pengon ta bësh mirë punën?”.
 
-Raportet më tregojnë ku të shikoj. Terreni më tregon çfarë po ndodh. Menaxheri duhet t'i bëjë të dyja.
+Raportet më tregojnë ku të shikoj. Terreni më tregon çfarë po ndodh. Menaxherit i duhen të dyja.
 
 ## 90 ditët e para në një rol të ri
 
@@ -132,11 +132,11 @@ Do të përpiqesha të kuptoja edhe atë që nuk del menjëherë në panelin e t
 - Çfarë duhet bërë me dorë sepse procesi nuk funksionon mirë?
 - Ku kemi një person kritik pa të cilin puna ngec?
 
-Në fund të 30 ditëve dua një hartë të qartë të operacionit, jo një listë të gjatë me gjëra që dua të ndryshoj.
+Në fund të 30 ditëve dua një hartë të qartë të operacionit. Lista e ndryshimeve mund të presë.
 
 ### Ditët 31–60: Përcakto prioritetet
 
-Në fazën e dytë do të nisja t'i ndaja simptomat nga problemet reale. Do t'i shikoja të dhënat dhe do të kërkoja dukuritë që përsëriten, dhe do të zgjidhja pak prioritete, jo njëzet projekte njëkohësisht.
+Në fazën e dytë do të nisja t'i ndaja simptomat nga problemet reale. Do t'i shikoja të dhënat dhe do të kërkoja dukuritë që përsëriten, dhe do të zgjidhja pak prioritete, duke e lënë pjesën tjetër për më vonë.
 
 Për secilin prioritet dua të jetë e qartë:
 
@@ -158,9 +158,9 @@ Tre muaj nuk janë magji, dhe deri në ditën e 90-të nuk do të pretendoja se 
 - Mënyra si bëhet dorëzimi i turnit.
 - Procesi i ndjekjes së veprimeve.
 - Standardet që përdoren vërtet.
-- Një ritëm i rregullt ku ekipi shqyrton jo vetëm performancën, por edhe përmirësimin.
+- Një ritëm i rregullt ku ekipi shqyrton performancën dhe përmirësimin e vet.
 
-Qëllimi im për 90 ditët do të ishte që organizata të kishte një pamje më të qartë të vetes dhe disa mekanizma më të mirë për t'u përmirësuar, jo të tregoja sa shumë gjëra kisha ndryshuar.
+Qëllimi im për 90 ditët do të ishte që organizata të kishte një pamje më të qartë të vetes dhe disa mekanizma më të mirë për t'u përmirësuar. Sa shumë gjëra do të kisha ndryshuar unë nuk do të ishte masa.
 
 ## Ku po mësoj ende
 
@@ -170,7 +170,7 @@ Dua të fitoj më shumë përvojë në drejtimin e operacioneve me një shtrirje
 
 Dhe dua të vazhdoj të përmirësohem në diçka që nuk besoj se mbaron ndonjëherë: të dish kur duhet të ndërhysh dhe kur duhet t'i lësh njerëzit t'i zgjidhin vetë gjërat.
 
-Qëllimi im është të bëhem menaxheri që ndërton një ekip ku përgjigjet nuk duhet të vijnë gjithmonë prej tij, jo njeriu që ka përgjigje për çdo gjë.
+Qëllimi im është të bëhem menaxheri që ndërton një ekip ku përgjigjet nuk duhet të vijnë gjithmonë prej tij.
 
 ## Si do të doja të më përshkruanin
 
@@ -178,4 +178,4 @@ Nëse një ditë do t'i pyesja njerëzit që kanë punuar me mua si do të më p
 
 **“Kërkonte shumë nga ne, por ishte aty me ne, na dëgjonte dhe përpiqej ta linte procesin më të mirë sesa e gjeti.”**
 
-Ky është Operations Manager-i që dua të jem: jo ai që duket më i rëndësishëm kur operacioni ka probleme, por ai që ndërton një operacion që ka gjithnjë e më pak nevojë të shpëtohet.
+Ky është Operations Manager-i që dua të jem: ai që ndërton një operacion që ka gjithnjë e më pak nevojë të shpëtohet.

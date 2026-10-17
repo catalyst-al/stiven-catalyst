@@ -21,7 +21,7 @@ checklist:
     - label: "A është përmbajtja e verifikuar kundrejt SOP-ve zyrtare?"
       hint: "Çdo hap që jep mjeti duhet të gjendet edhe në burimin zyrtar. Shëno atë që është ende në verifikim."
     - label: "Çfarë të dhënash nuk hyjnë në të?"
-      hint: "Mysafirë, rezervime, pagesa, kredenciale, dokumente konfidenciale. Pa autorizim dhe pa ditur ku ruhen, nuk futet asgjë reale."
+      hint: "Mysafirë, rezervime, pagesa, të dhëna hyrjeje, dokumente konfidenciale. Pa autorizim dhe pa ditur ku ruhen, nuk futet asgjë reale."
     - label: "Kush e ka miratuar përdorimin me ekipin ose me të dhëna reale?"
       hint: "Një emër ose një rol. Nëse askush, mjeti është ende personal."
     - label: "Kush e përditëson kur mungoj dhe si dihet cili version është i fundit?"
@@ -41,15 +41,15 @@ corrections:
 
 Përfytyro një punonjës të porsaardhur në recepsion, në mes të një procesi që e ka parë vetëm një herë. Udhëzimi ekziston, por është diku mes një SOP-je, një videoje, disa fotografive dhe asaj që i shpjegoi një koleg dy net më parë. Procesi pret, ndërsa ai kërkon.
 
-Skena është përvoja ime e javëve të para në hotel, e shkruar si figurë dhe jo e dokumentuar si incident, dhe është arsyeja pse nisa të ndërtoj një mjet timin.
+Skena është përvoja ime e javëve të para në hotel, e shkruar si përfytyrim dhe jo e dokumentuar si incident, dhe është arsyeja pse nisa të ndërtoj një mjet timin.
 
-Ky mjet është [Front Desk Control](/sq/insights/how-i-built-front-desk-control/), që e zhvillova në shtator 2026 për ta organizuar punën në Front Office dhe Night Audit: udhëzime SOP, lista kontrolli, kërkim informacioni dhe shpjegime vizuale me pamje nga proceset. Rreth tij punova me struktura për dorëzimin e turnit dhe raportet e natës, me organizimin e proceseve të Breakfast Forecast, si dhe me lista kontrolli e udhëzime hap pas hapi. E përdor vetë. Nuk mund të them nëse kolegët e përdorin rregullisht, dhe nuk di asnjë rast ku një procedurë e vjetëruar në të të ketë shkaktuar gabim.
+Ky mjet është [Front Desk Control](/sq/insights/how-i-built-front-desk-control/), që e zhvillova në shtator 2026 për ta organizuar punën në Front Office dhe Night Audit: udhëzime SOP, lista kontrolli, kërkim informacioni dhe shpjegime vizuale me pamje nga proceset. Rreth tij punova me struktura për dorëzimin e turnit dhe raportet e natës, me organizimin e proceseve të parashikimit të mëngjesit (Breakfast Forecast), si dhe me lista kontrolli e udhëzime hap pas hapi. E përdor vetë. Nuk mund të them nëse kolegët e përdorin rregullisht.
 
 Te eseja ku e përshkrova Front Desk Control, e paraqita si punë në zhvillim. Këtu pyetja është tjetër: çfarë ndodh me një mjet të tillë pasi ekziston, dhe kur pushon së qeni vetëm yti.
 
 ## Pse lindin listat e vogla
 
-Nuk e ndërtova sepse mungonte informacioni, por sepse ishte i shpërndarë: në dokumente SOP, në shpjegimet e kolegëve, në fotografi, video dhe lista kontrolli. Shpesh më duhej të kërkoja në disa prej tyre për të kuptuar si kryhej një proces. Udhëzimi ekzistonte, por nuk e gjeja dot në çastin kur më duhej.
+E ndërtova sepse informacioni ishte i shpërndarë: në dokumente SOP, në shpjegimet e kolegëve, në fotografi, video dhe lista kontrolli. Shpesh më duhej të kërkoja në disa prej tyre për të kuptuar si kryhej një proces. Udhëzimi ekzistonte, por nuk e gjeja dot në çastin kur më duhej.
 
 Doja një vend ku t'i gjeja udhëzimet më shpejt, pranë sistemit të hotelit dhe jo në vend të tij.
 
@@ -71,9 +71,9 @@ Front Desk Control nuk ka miratim zyrtar nga menaxhmenti ose nga IT, nuk është
 
 ## Të dhënat që nuk hyjnë
 
-Për versionin publik të Front Desk Control kërkova që të mos përfshiheshin të dhëna reale të mysafirëve, rezervime, informacione pagesash, kredenciale apo dokumente konfidenciale, dhe që pamjet e përdorura për demonstrim të ishin të anonimizuara.
+Për versionin publik të Front Desk Control kërkova që të mos përfshiheshin të dhëna reale të mysafirëve, rezervime, informacione pagesash, të dhëna hyrjeje apo dokumente konfidenciale, dhe që pamjet e përdorura për demonstrim të ishin të anonimizuara.
 
-Nuk e di saktësisht si funksionon pa internet çdo pjesë e tij, as nëse të gjitha të dhënat mbeten në pajisje, dhe nuk do të pretendoja se një mjet është plotësisht offline ose i sigurt vetëm sepse hapet në shfletues. Kjo është nga gjërat që supozohen më lehtë dhe provohen më vështirë.
+Nuk e di saktësisht si funksionon pa internet çdo pjesë e tij, as nëse të gjitha të dhënat mbeten në pajisje, dhe nuk do të pretendoja se një mjet punon plotësisht pa internet ose është i sigurt vetëm sepse hapet në shfletues. Kjo është nga gjërat që supozohen më lehtë dhe provohen më vështirë.
 
 Ndaj rregulli im është ky: informacioni real dhe konfidencial i hotelit nuk futet në një mjet personal pa autorizim dhe pa verifikuar si ruhet. Një mjet që e ndërton vetë mund ta mbajë metodën. Të dhënat reale i përkasin sistemit që është i autorizuar t'i mbajë.
 
@@ -83,7 +83,7 @@ Front Desk Control ka kaluar nëpër disa versione. Kam punuar t'i përditësoj 
 
 Por ka një kufi që e shoh qartë: askush tjetër nuk është përgjegjës për ta përditësuar kur unë mungoj. Nëse vetëm unë e kuptoj dhe e përditësoj mjetin, ai mbetet i varur nga unë.
 
-Është ajo që shkrova te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) për shoferin me përvojë, vetëm se kësaj here jam unë. Dija që mbetet në një kokë nuk bëhet më pak e brishtë vetëm ngaqë është shkruar në një faqe që e mban vetëm një njeri. Dhe një udhëzim i vjetëruar në një mjet që duket i rregullt është më i rrezikshëm se një udhëzim që mungon, sepse askush nuk shkon ta kontrollojë dy herë.
+Është ajo që shkrova te [Rruga që shoferi nuk e kupton](/sq/insights/the-tour-the-driver-does-not-understand/) për shoferin me përvojë, vetëm se kësaj here jam unë. Dija që mbetet në një kokë nuk bëhet më pak e brishtë vetëm ngaqë është shkruar në një faqe që e mban vetëm një njeri. Dhe një udhëzim i vjetëruar në një mjet që duket i rregullt është më i rrezikshëm se një udhëzim që mungon, sepse askush nuk shkon ta kontrollojë dy herë. Nuk di asnjë rast ku një procedurë e vjetëruar në Front Desk Control të ketë shkaktuar gabim; rreziku qëndron te forma.
 
 ## Pesë kushte para se ta ndash
 

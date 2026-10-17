@@ -39,15 +39,15 @@ Wer nur auf die Person schaut, riskiert, einen Prozess unangetastet zu lassen, d
 
 Wer nur auf den Prozess schaut, riskiert, individuelle Entscheidungen aus der Verantwortung zu entlassen.
 
-Dieser Essay handelt von dem Moment, in dem eine Führungskraft ihre Autorität über Menschen so direkt ausübt wie sonst nie: dem Gespräch nach einem Fehler. Verantwortung einzufordern und die Würde des Mitarbeiters zu achten sind für mich keine Gegensätze.
+Im Gespräch nach einem Fehler übt eine Führungskraft ihre Autorität über Menschen so direkt aus wie sonst nie. Verantwortung einzufordern und die Würde des Mitarbeiters zu achten sind für mich keine Gegensätze.
 
-Ich habe auf der letzten Meile als Team Leader On Road und danach als Area Manager gearbeitet; zu meinen Aufgaben gehörten die Leistungskontrolle, betriebliche Probleme, KPIs und die Koordination von Menschen. Was folgt, sind die Prinzipien, für die ich in diesem Gespräch stehe, nicht das Protokoll eines bestimmten Gesprächs. Wo ich ein Beispiel verwende, ist es hypothetisch, und ich sage es dazu.
+Ich habe auf der letzten Meile als Team Leader On Road und danach als Area Manager gearbeitet; zu meinen Aufgaben gehörten die Leistungskontrolle, betriebliche Probleme, KPIs und die Koordination von Menschen. Von dort aus denke ich über dieses Gespräch nach.
 
 ## Unter vier Augen, wenn die Fakten klar sind
 
-Als Grundsatz gilt für mich: Ein Korrekturgespräch würde ich lieber unter vier Augen führen, und erst dann, wenn ich die Fakten verstanden habe. Das ist der Standard, für den ich stehe, kein Verfahren, das ich in jedem Fall eingehalten habe.
+Als Grundsatz gilt für mich: Ein Korrekturgespräch würde ich lieber unter vier Augen führen, und erst dann, wenn ich die Fakten verstanden habe. Das ist der Standard, für den ich stehe, kein Verfahren, das ich in jedem Fall eingehalten habe; auch alles Weitere sind Prinzipien und nicht das Protokoll eines bestimmten Gesprächs.
 
-Es gibt eine klare Ausnahme. Besteht eine unmittelbare Sicherheitsgefahr, greifen Sie sofort ein. Sie warten nicht auf das richtige Gespräch am richtigen Ort; Sie stoppen, was gerade passiert.
+Es gibt eine klare Ausnahme. Besteht eine unmittelbare Sicherheitsgefahr, greifen Sie sofort ein. Sie stoppen, was gerade passiert, sofort. Das richtige Gespräch am richtigen Ort kommt danach.
 
 ## Fehler der Person oder Fehler des Prozesses
 
@@ -87,7 +87,7 @@ Nirgends zählt das mehr als im Gespräch nach einem Fehler. In diesem Moment se
 
 ## Was nach einem Fehler hilft
 
-Ich glaube, die hilfreichste Reaktion auf einen Fehler ist die, die einem hilft zu verstehen, was passiert ist, welche Verantwortung man trägt und wie man ihn nicht wiederholt: nicht die, die einen mit dem Schuldgefühl allein lässt, und auch nicht die, die über den Fehler hinweggeht, als wäre nichts gewesen.
+Ich glaube, die hilfreichste Reaktion auf einen Fehler ist die, die einem hilft zu verstehen, was passiert ist, welche Verantwortung man trägt und wie man ihn nicht wiederholt. Wer jemanden mit dem Schuldgefühl allein lässt, erreicht das nicht, und wer über den Fehler hinweggeht, als wäre nichts gewesen, ebenso wenig.
 
 Ein hypothetisches Beispiel. Ein Fahrer fährt los, ohne einen Schritt des Verfahrens geprüft zu haben. Ein Gespräch, das mit „Das machst du immer“ beginnt, ist vorbei, bevor es angefangen hat. Ein Gespräch, das mit „Heute bist du ohne diese Kontrolle losgefahren; erzähl mir, wie es lief“ beginnt, kann irgendwohin führen. In beiden Fällen wird der Fehler benannt. Der Unterschied liegt darin, ob der Mensch daraus etwas lernen kann.
 

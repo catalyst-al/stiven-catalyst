@@ -41,9 +41,7 @@ A team can have people who speak different languages. The work standard still ha
 
 The subject is personal for me too. I came to Germany in November 2021 from a working life in Albania, and worked in operations where German was part of professional communication. I had to learn not only the language but also the way people communicate at work. I wrote about that move in [From Albania to Germany](/insights/from-albania-to-germany/).
 
-This essay is less about language than about the standard: how you make it clear to people who do not speak the same language at the same level.
-
-It draws on the teams I worked in and the materials I worked with. In last mile that meant several DSPs and a structure with many drivers, dispatchers and Shift Leaders; in the hotels in Germany, colleagues from different departments and international guests. I saw and handled operational problems, but I have no documented case of a mistake I can say for certain was caused by language, so I do not attribute any to it.
+The question here is the standard: how you make it clear to people who do not speak the same language at the same level.
 
 ## Language and ability are two different problems
 
@@ -57,7 +55,9 @@ That is why a work standard should not depend on someone's ability to follow a l
 
 ## Short rules and visible steps
 
-From the operational materials I used, I know that in last mile there were instructions and rules written in German and in English. They covered safety, hygiene, loading procedures, scanning and discipline on the dock. The rules were short and tied to clear actions: where the driver waits, when to inform the Team Leader, how scanning is done, what is not allowed during loading.
+In last mile I worked with several DSPs and a structure of many drivers, dispatchers and Shift Leaders; in the hotels in Germany, with colleagues from different departments and with international guests.
+
+The operational materials I used tell me that last mile had instructions and rules written in German and in English. They covered safety, hygiene, loading procedures, scanning and discipline on the dock. The rules were short and tied to clear actions: where the driver waits, when to inform the Team Leader, how scanning is done, what is not allowed during loading.
 
 In the hotel I worked with checklists and SOPs in German, and with English materials for communicating with guests and for hotel services. I used checklists, screenshots, videos and colleagues' demonstrations.
 
@@ -69,7 +69,9 @@ Translating a document is only the first step. The meaning and the action have t
 
 Take a hypothetical instruction that says only “check the load”. Two people can read it differently: one checks the number of bags, the other the loading order.
 
-In this example the fault may lie with the standard rather than with language. And an unclear standard stays unclear in whatever language you translate it into.
+In this example the fault may well lie with the standard, and an unclear standard stays unclear in whatever language you translate it into.
+
+I saw and handled operational problems, but I have no documented case of a mistake I can say for certain was caused by language, so I blame none on it.
 
 For me, a good instruction has:
 
@@ -89,9 +91,9 @@ People may answer “yes” because they think they have understood, because the
 
 Then I would check whether the person does it correctly, whether they know the result they have to reach, and whether they know when to ask for help.
 
-That is a standard I stand for rather than a scene I can quote, and it is the same test I described in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/): do it yourself, tell me why, show me what you do when an exception comes up.
+I hold to this as a standard; I have no scene of it to quote. It is the same test I described in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/): do it yourself, tell me why, show me what you do when an exception comes up.
 
-When someone does not understand an instruction, our responsibility as managers does not end with repeating the same sentence louder. We have to check whether the instruction is clear, whether it has been demonstrated, and whether the person can carry it out.
+When someone does not understand an instruction, repeating the same sentence louder settles nothing. As managers we have to check whether the instruction is clear, whether it has been demonstrated, and whether the person can carry it out.
 
 ## The clear-instruction card
 

@@ -36,9 +36,9 @@ diagram: three-layers
 
 2,8 %.
 
-So hoch lag Delay in einem Bericht vom Juni 2025. War das ein schlechter Tag, oder hatte sich im Prozess etwas verändert? Die Zahl allein verrät es nicht.
+So hoch lag Delay in einem Bericht vom Juni 2025. Ein schlechter Tag, oder ein Zeichen, dass sich im Prozess etwas verändert hatte? Die Zahl allein verrät es nicht.
 
-Auf der letzten Meile verfolgten wir Delay, Damage, Incomplete und Loading Time täglich. Die Ergebnisse kamen im Daily Stand-up auf den Tisch, jede Abweichung musste erklärt werden, und wir werteten die Zahlen auch nach DSP und nach operativen Problemen aus. Auf dieser Routine beruht der Essay. Wie wir damals zwischen Abwarten und Eingreifen entschieden, kann ich dagegen nicht mehr rekonstruieren: ob wir warteten, bis sich ein Ergebnis wiederholte, ob wir tägliche oder wöchentliche Trends in Excel oder Power BI verfolgten, ob ich selbst eine statistische Regelkarte mit Eingriffsgrenzen verwendet habe. Die Methode, die folgt, beschreibt, wie ich einen schlechten Tag heute lesen würde.
+Auf der letzten Meile verfolgten wir Delay, Damage, Incomplete und Loading Time täglich. Die Ergebnisse kamen im Daily Stand-up auf den Tisch, jede Abweichung musste erklärt werden, und wir werteten die Zahlen auch nach DSP und nach operativen Problemen aus.
 
 ## Eine Zahl ohne Geschichte
 
@@ -46,13 +46,15 @@ Auf der letzten Meile verfolgten wir Delay, Damage, Incomplete und Loading Time 
 
 Nehmen wir ein erfundenes Beispiel: Der Durchschnitt der letzten Wochen lag bei 2,5 %. Sind 2,8 % dann ein Signal?
 
-Das kommt darauf an. Jeder Prozess schwankt. Kein Tag fällt aus wie der andere, auch wenn niemand etwas verändert hat: Die Menge ändert sich, die Leute wechseln, die Touren auch. Die Frage ist nicht, ob heute schlechter ist als der Durchschnitt. Das trifft auf viele Tage zu. Die Frage ist, ob heute schlechter ist, als dieser Prozess normalerweise schwankt.
+Das kommt darauf an. Jeder Prozess schwankt. Kein Tag fällt aus wie der andere, auch wenn niemand etwas verändert hat: Die Menge ändert sich, die Leute wechseln, die Touren auch. Viele Tage fallen schlechter aus als der Durchschnitt. Entscheidend ist, ob heute schlechter ist, als dieser Prozess normalerweise schwankt.
 
 Genau darauf beruht die Regelkarte. Sie trägt die Tage nacheinander ein, dazu den Durchschnitt und zwei Grenzen, die zeigen, wie weit der Prozess üblicherweise schwankt. Ein Tag innerhalb der Grenzen ist sehr wahrscheinlich gewöhnliche Schwankung. Liegt ein Tag außerhalb, oder liegen mehrere Tage hintereinander auf derselben Seite des Durchschnitts, hat sich womöglich etwas verändert.
 
+Ob ich selbst eine solche Karte mit Eingriffsgrenzen verwendet habe, kann ich nicht mehr rekonstruieren, ebenso wenig, wie wir damals zwischen Abwarten und Eingreifen entschieden: ob wir warteten, bis sich ein Ergebnis wiederholte, oder tägliche oder wöchentliche Trends in Excel oder Power BI verfolgten. Was folgt, beschreibt, wie ich einen schlechten Tag heute lesen würde.
+
 ## Zwei entgegengesetzte Fehler
 
-Einen schlechten Tag kann man auf zwei entgegengesetzte Arten falsch lesen. Was folgt, ist meine Einschätzung, keine Sammlung belegter Fälle.
+Einen schlechten Tag kann man, so sehe ich es, auf zwei entgegengesetzte Arten falsch lesen.
 
 Der erste Fehler behandelt jeden schlechten Tag als Problem. Man ändert eine Regel, führt eine Kontrolle ein, setzt eine Besprechung an. Am nächsten Tag ist die Zahl wieder normal, und die Maßnahme scheint gewirkt zu haben. Vielleicht wäre sie aber auch von selbst zurückgegangen, und nun hat der Prozess eine Regel mehr, deren Grund niemand kennt.
 

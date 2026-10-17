@@ -40,9 +40,9 @@ diagram: three-layers
 
 2.8%.
 
-That was Delay in a June 2025 report. Was it a bad day, or had something changed in the process? The number on its own cannot say.
+That was the Delay figure in a June 2025 report. A bad day, or a sign that something in the process had changed? The number on its own cannot say.
 
-In last mile we followed Delay, Damage, Incomplete and Loading Time every day. The results were discussed in the daily stand-up, anything off had to be explained, and we also broke the figures down by DSP and by operational problem. That routine is what this essay rests on. What I cannot reconstruct is how we chose between waiting and acting: whether we let a result repeat before stepping in, whether we followed daily or weekly trends in Excel or Power BI, whether I used a statistical control chart, with control limits, myself. The method below is how I would read a bad day today.
+In last mile we followed Delay, Damage, Incomplete and Loading Time every day. The results were discussed in the daily stand-up, anything off had to be explained, and we also broke the figures down by DSP and by operational problem.
 
 ## A number with no history
 
@@ -50,13 +50,15 @@ In last mile we followed Delay, Damage, Incomplete and Loading Time every day. T
 
 Take a made-up example. Suppose the average of the last few weeks was 2.5%. Is 2.8% a signal?
 
-It depends. Every process varies. No two days come out the same, even when nobody has changed anything: the volume changes, the people change, the routes change. The question is not whether today is worse than the average. Many days will be. The question is whether today is worse than this process usually varies.
+It depends. Every process varies. No two days come out the same, even when nobody has changed anything: the volume changes, the people change, the routes change. Many days will be worse than the average. What matters is whether today is worse than this process usually varies.
 
 That is the idea behind a control chart. It plots the days one after another, with the average and two limits that show how far the process usually varies. A day inside the limits is most likely ordinary variation. A day outside them, or several days in a row on the same side of the average, suggests that something may have changed.
 
+Whether I used such a chart myself, with control limits, I cannot reconstruct, any more than how we chose between waiting and acting back then: whether we let a result repeat before stepping in, or followed daily or weekly trends in Excel or Power BI. What follows is how I would read a bad day today.
+
 ## Two opposite mistakes
 
-A bad day can be misread in two opposite ways. What follows is my view, not a record of cases.
+In my view, a bad day can be misread in two opposite ways.
 
 The first treats every bad day as a problem. A rule gets changed, a check gets added, a meeting gets called. The next day the number is back to normal, and the measure seems to have worked. But it might have come back by itself, and now the process carries one more rule that nobody knows the reason for.
 

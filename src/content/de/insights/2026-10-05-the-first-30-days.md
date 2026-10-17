@@ -39,7 +39,7 @@ Im System lief ein Update, und mehrere Stunden lang war normales Arbeiten prakti
 
 Es sah nach einer verlorenen Nacht aus. Tatsächlich brachte sie mir die erste Lektion bei: An einem neuen Ort muss man verstehen, wie die Arbeit funktioniert, bevor man sie macht.
 
-Mit diesem Essay beginnt eine neue Reihe. Die erste, *Zehn Jahre nah an der Arbeit*, handelte davon, was ich gelernt habe. In dieser geht es darum, wie man einen Betrieb aufbaut, der auch dann funktioniert, wenn die Führungskraft nicht da ist. Das beginnt lange bevor man etwas verändert, nämlich damit, wie man den Betrieb liest. Was folgt, stammt aus meinen ersten Wochen in diesem Hotel: aus der Checkliste, den Schulungsunterlagen und von den Kolleginnen und Kollegen, die die Nacht trugen.
+Mit diesem Essay beginnt eine neue Reihe. Die erste, *Zehn Jahre nah an der Arbeit*, handelte davon, was ich gelernt habe. In dieser geht es darum, wie man einen Betrieb aufbaut, der auch dann funktioniert, wenn die Führungskraft nicht da ist. Das beginnt lange bevor man etwas verändert, nämlich damit, wie man den Betrieb liest. Mein Material sind die ersten Wochen in diesem Hotel: die Checkliste, die Schulungsunterlagen und die Kolleginnen und Kollegen, die nachts Dienst hatten.
 
 ## Die ersten Nächte: erst die Menschen, dann die Dokumente
 
@@ -51,7 +51,7 @@ Ich wollte verstehen, was zu tun ist, in welcher Reihenfolge und warum. Eine Che
 
 Am Anfang hielt ich mich mehr an die Menschen, die die Arbeit jede Nacht machten, als an die Theorie der Dokumente. Das Dokument sagt, wie die Arbeit sein soll. Die Menschen zeigen, wie sie ist.
 
-Ich habe viel von den Kolleginnen und Kollegen gelernt, die die Schicht tatsächlich getragen haben. Eines habe ich allerdings erst mit der Zeit verstanden und nicht in der dritten Nacht: Im Night Audit ist der Bericht nur ein Teil der Wirklichkeit. Um den echten Stand zu sehen, muss man sich auch die Status ansehen, die offenen Punkte, das, was die vorherige Schicht hinterlassen hat, und das, was an die nächste gehen muss.
+Ich habe viel von den Kolleginnen und Kollegen gelernt, die die Schicht tatsächlich geführt haben. Eines habe ich allerdings erst mit der Zeit verstanden und nicht in der dritten Nacht: Im Night Audit ist der Bericht nur ein Teil der Wirklichkeit. Um den echten Stand zu sehen, muss man sich auch die Statusangaben ansehen, die offenen Punkte, das, was die vorherige Schicht hinterlassen hat, und das, was an die nächste gehen muss.
 
 ## Die Information war da, aber verstreut
 
@@ -74,7 +74,7 @@ Am Anfang entschied ich mich, dem bestehenden Prozess genau so zu folgen, wie er
 
 Zuerst musste ich die Abhängigkeiten verstehen. Einen Schritt, der von außen überflüssig wirkt, gibt es vielleicht nur, weil eine andere Abteilung, ein Bericht oder ein späterer Prozess darauf angewiesen ist. Streicht man ihn in der zweiten Woche, sieht man womöglich gar kein Problem. Es zeigt sich woanders, später, bei jemand anderem.
 
-Erst als ich den Ablauf zu verstehen begann, fing ich an, die Information besser zu ordnen. Ich wollte den Betrieb nicht verändern, sondern lesbarer machen, für mich und für die nächste Person, die ihn lernen müsste.
+Erst als ich den Ablauf zu verstehen begann, fing ich an, die Information besser zu ordnen. Ich wollte den Betrieb lesbarer machen, für mich und für die nächste Person, die ihn lernen müsste. Verändern konnte warten.
 
 **Ein Schritt, der überflüssig wirkt, kann der Schritt sein, von dem jemand anderes abhängt.**
 

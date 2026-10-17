@@ -18,7 +18,7 @@ checklist:
       hint: Was genau muss die Person tun?
     - label: Ort und Zeitpunkt
       hint: Wo und wann muss es erledigt werden?
-    - label: Die Demonstration
+    - label: Die Vorführung
       hint: Welches Foto, welcher Screenshot oder welches Beispiel erklärt den Schritt?
     - label: Die Kontrolle
       hint: Woran erkennt der Mitarbeiter, dass er es richtig gemacht hat?
@@ -35,9 +35,7 @@ In einem Team können Menschen verschiedene Sprachen sprechen. Der Arbeitsstanda
 
 Das Thema ist für mich auch persönlich. Ich bin im November 2021 aus einem Arbeitsleben in Albanien nach Deutschland gekommen und habe in Betrieben gearbeitet, in denen Deutsch zur beruflichen Kommunikation gehörte. Ich musste nicht nur die Sprache lernen, sondern auch, wie bei der Arbeit kommuniziert wird. Über diesen Schritt habe ich in [Von Albanien nach Deutschland](/de/insights/from-albania-to-germany/) geschrieben.
 
-In diesem Essay geht es weniger um Sprache als um den Standard: wie man ihn Menschen verständlich macht, die dieselbe Sprache nicht auf demselben Niveau sprechen.
-
-Er stützt sich auf die Teams, in denen ich tätig war, und auf die Materialien, mit denen ich gearbeitet habe. Auf der letzten Meile waren das mehrere DSPs und eine Struktur aus vielen Fahrern, Disponenten und Schichtleitern, in den Hotels in Deutschland Kollegen aus verschiedenen Abteilungen und internationale Gäste. Betriebliche Probleme habe ich gesehen und bearbeitet, aber ich habe keinen dokumentierten Fall, in dem ein Fehler sicher auf die Sprache zurückging. Deshalb schreibe ich ihr auch keinen zu.
+Mir geht es hier um den Standard: wie man ihn Menschen verständlich macht, die dieselbe Sprache nicht auf demselben Niveau sprechen.
 
 ## Sprache und Können sind zwei verschiedene Probleme
 
@@ -51,6 +49,8 @@ Deshalb sollte ein Arbeitsstandard nicht davon abhängen, ob jemand einer langen
 
 ## Kurze Regeln, sichtbare Schritte
 
+Auf der letzten Meile arbeitete ich mit mehreren DSPs und einer Struktur aus vielen Fahrern, Disponenten und Schichtleitern, in den Hotels in Deutschland mit Kollegen aus verschiedenen Abteilungen und mit internationalen Gästen.
+
 Aus den betrieblichen Materialien, mit denen ich gearbeitet habe, weiß ich, dass es auf der letzten Meile Anweisungen und Regeln auf Deutsch und auf Englisch gab. Sie betrafen Sicherheit, Hygiene, Ladeverfahren, Scannen und Disziplin an der Rampe. Die Regeln waren kurz und an klare Handlungen gebunden: wo der Fahrer wartet, wann er den Team Leader informiert, wie gescannt wird, was beim Beladen verboten ist.
 
 Im Hotel habe ich mit Checklisten und SOPs auf Deutsch gearbeitet und mit englischen Materialien für die Kommunikation mit Gästen und für die Hotelservices. Ich habe Checklisten, Screenshots, Videos und Vorführungen von Kollegen genutzt.
@@ -63,7 +63,9 @@ Ein Dokument zu übersetzen ist nur der erste Schritt. Bedeutung und Handlung m�
 
 Nehmen Sie eine hypothetische Anweisung, die nur „Ladung prüfen“ lautet. Zwei Menschen können sie unterschiedlich verstehen: Der eine prüft die Zahl der Taschen, der andere die Ladereihenfolge.
 
-In diesem Beispiel liegt der Fehler vielleicht eher am Standard als an der Sprache. Und ein unklarer Standard bleibt unklar, in welche Sprache man ihn auch übersetzt.
+In diesem Beispiel liegt der Fehler womöglich beim Standard, und ein unklarer Standard bleibt unklar, in welche Sprache man ihn auch übersetzt.
+
+Betriebliche Probleme habe ich gesehen und bearbeitet, aber ich habe keinen dokumentierten Fall, in dem ein Fehler sicher auf die Sprache zurückging. Deshalb schreibe ich ihr auch keinen zu.
 
 Eine gute Anweisung hat für mich:
 
@@ -83,9 +85,9 @@ Manche sagen „ja“, weil sie glauben, es verstanden zu haben, weil sie nicht 
 
 Dann würde ich prüfen, ob die Person es richtig macht, ob sie weiß, welches Ergebnis sie erreichen muss, und ob sie weiß, wann sie um Hilfe bitten soll.
 
-Das ist ein Standard, für den ich stehe, keine Szene, die ich belegen kann, und es ist derselbe Test, den ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) beschrieben habe: Mach es selbst, erklär mir, warum, zeig mir, was du tust, wenn eine Ausnahme kommt.
+Daran halte ich mich als Standard; eine Szene, die ich belegen könnte, habe ich dazu nicht. Es ist derselbe Test, den ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) beschrieben habe: Mach es selbst, erklär mir, warum, zeig mir, was du tust, wenn eine Ausnahme kommt.
 
-Wenn jemand eine Anweisung nicht versteht, endet unsere Verantwortung als Führungskräfte nicht damit, denselben Satz lauter zu wiederholen. Wir müssen prüfen, ob die Anweisung klar ist, ob sie vorgeführt wurde und ob die Person sie umsetzen kann.
+Wenn jemand eine Anweisung nicht versteht, ist mit dem lauteren Wiederholen desselben Satzes nichts gewonnen. Als Führungskräfte müssen wir prüfen, ob die Anweisung klar ist, ob sie vorgeführt wurde und ob die Person sie umsetzen kann.
 
 ## Die Karte für eine klare Anweisung
 
@@ -93,7 +95,7 @@ Ein guter Standard zeigt sich nicht daran, wie gut er geschrieben ist, sondern d
 
 1. **Die Handlung.** Was genau muss die Person tun?
 2. **Ort und Zeitpunkt.** Wo und wann muss es erledigt werden?
-3. **Die Demonstration.** Welches Foto, welcher Screenshot oder welches Beispiel erklärt den Schritt?
+3. **Die Vorführung.** Welches Foto, welcher Screenshot oder welches Beispiel erklärt den Schritt?
 4. **Die Kontrolle.** Woran erkennt der Mitarbeiter, dass er es richtig gemacht hat?
 5. **Die Ausnahme.** Was ist zu tun, wenn etwas nicht funktioniert?
 

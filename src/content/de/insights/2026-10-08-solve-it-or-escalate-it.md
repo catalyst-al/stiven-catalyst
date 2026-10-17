@@ -17,7 +17,7 @@ firstMove:
 checklist:
   title: Die Eskalationsmatrix für die Schicht
   fill: true
-  note: "Wenn 1 „nein“ oder 2 „ja“ ist: nicht anfassen, eskalieren. Wenn es nicht umkehrbar ist oder jemanden außerhalb Ihrer Schicht betrifft: lösen und informieren. Wenn alle Antworten unbedenklich sind: selbst lösen. Die fünfte Frage bestimmt das Tempo."
+  note: "Wenn 1 „nein“ oder 2 „ja“ ist: nicht anfassen, eskalieren. Wenn es nicht umkehrbar ist oder jemanden außerhalb Ihrer Schicht betrifft: lösen und informieren. Wenn keine Antwort Bedenken weckt: selbst lösen. Die fünfte Frage bestimmt das Tempo."
   items:
     - label: Liegt es in meiner Befugnis?
       hint: Die Rolle, der Standard, die Freigaben, die mir zustehen.
@@ -41,17 +41,15 @@ Das Gegenteil ist genauso ein Problem. Wer nie etwas nach oben gibt, kann sehr s
 
 Zwischen diesen beiden Extremen liegt eine der wichtigsten Fragen für einen Betrieb, der ohne die Führungskraft in der Nähe laufen muss: Wann lösen Sie es selbst, und wann geben Sie es nach oben?
 
-In [Führung ohne Titel](/de/insights/leadership-without-a-title/) habe ich geschrieben, dass Initiative und Befugnis zwei verschiedene Dinge sind. Dieser Essay versucht, aus diesem Unterschied eine klare Regel zu machen, statt ihn dem persönlichen Gefühl zu überlassen.
+In [Führung ohne Titel](/de/insights/leadership-without-a-title/) habe ich geschrieben, dass Initiative und Befugnis zwei verschiedene Dinge sind. Hier will ich aus diesem Unterschied eine klare Regel machen, die nicht mehr vom persönlichen Gefühl abhängt.
 
-Er stützt sich auf zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? In den Fällen, die ich hatte, gingen technische Probleme in Zimmern an die Haustechnik; Housekeeping-Themen übernahm diese Abteilung, und zur Nachverfolgung kamen sie in die Übergabe. Auf der letzten Meile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
-
-Was mir dagegen fehlt, ist eine Dokumentation darüber, wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren, und ein dokumentierter Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand. Die Stufen und die Matrix weiter unten zeigen, wo ich die Linie heute ziehen würde. Beschreiben kann ich das Prinzip, nach dem ich seit der Einarbeitung gearbeitet habe.
+Begegnet ist mir die Frage an zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? In den Fällen, die ich hatte, gingen technische Probleme in Zimmern an die Haustechnik; Housekeeping-Themen übernahm diese Abteilung, und zur Nachverfolgung kamen sie in die Übergabe. Auf der letzten Meile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
 
 ## Ich habe nicht improvisiert
 
-Die Checkliste zeigte, was zu tun war, die Unterlagen zeigten, wie. Widersprachen sie sich aber oder lag etwas außerhalb des Standards, habe ich nicht improvisiert. Ich habe es mir bestätigen lassen oder es eskaliert.
+Beschreiben kann ich das Prinzip, nach dem ich seit der Einarbeitung gearbeitet habe; einen dokumentierten Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand, habe ich nicht. Die Checkliste zeigte, was zu tun war, die Unterlagen zeigten, wie. Widersprachen sie sich aber oder lag etwas außerhalb des Standards, habe ich nicht improvisiert. Ich habe es mir bestätigen lassen oder es eskaliert.
 
-Das kann nach fehlender Initiative aussehen. Für mich war es das Gegenteil. Initiative ist sinnvoll innerhalb der Grenze, die man kennt. Jenseits davon ist Improvisieren kein Mut, sondern ein Risiko, das man eingeht, ohne die Befugnis zu haben, es zu tragen.
+Das kann nach fehlender Initiative aussehen. Initiative ist sinnvoll innerhalb der Grenze, die man kennt. Jenseits davon ist Improvisieren kein Mut, sondern ein Risiko, das man eingeht, ohne die Befugnis zu haben, es zu tragen.
 
 ## Unklarheit ist ein Systemproblem
 
@@ -63,7 +61,7 @@ Und ein Betrieb, der davon abhängt, wer Schicht hatte, ist noch kein Betrieb, d
 
 ## Die drei Fehler
 
-Die drei Fehler beschreiben meine Meinung; eine Statistik aus meiner eigenen Erfahrung habe ich dafür nicht.
+Nach meiner Einschätzung geht Eskalation auf drei Arten schief.
 
 **Der erste: Alles wird eskaliert.** Der Mitarbeiter lernt nie, Verantwortung zu übernehmen. Jede Abweichung wird zum Problem des Chefs, und der Chef wird zu dem Punkt, an dem der ganze Betrieb stockt.
 
@@ -91,15 +89,15 @@ Auch diese Regel hat eine Grenze. Haben Sie fünf Minuten, um die Fakten zu prü
 
 ## Drei Stufen
 
-„Nie“ würde ich bei kleinen Problemen nicht sagen; der Kontext kann auch ein kleines Problem verändern. Aber so würde ich sie aufteilen.
+So würde ich die Linie heute ziehen. Wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren, ist bei mir nicht dokumentiert, und „nie“ würde ich bei kleinen Problemen nicht sagen, denn der Kontext kann auch ein kleines Problem verändern. Aber so würde ich sie aufteilen.
 
 **Selbst lösen**, wenn es in Ihrer Rolle liegt, der Standard klar ist, das Risiko gering ist und sich die Entscheidung rückgängig machen lässt.
 
-**Lösen und informieren**, wenn Sie es innerhalb Ihrer Befugnis lösen können, die Lage aber für die nächste Schicht, eine KPI oder den Kunden wichtig ist oder sich wiederholen kann. Der natürliche Ort für diese Information ist die Übergabe.
+**Lösen und informieren**, wenn Sie es innerhalb Ihrer Befugnis lösen können, die Lage aber für die nächste Schicht, einen KPI oder den Kunden wichtig ist oder sich wiederholen kann. Der natürliche Ort für diese Information ist die Übergabe.
 
-**Nicht anfassen, eskalieren**, wenn es um Sicherheit, Security, Compliance oder sensible Daten geht; um Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen oder ein großes finanzielles Risiko; oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
+**Nicht anfassen, eskalieren**, wenn es um Arbeitssicherheit, die Sicherheit von Haus und Menschen, Compliance oder sensible Daten geht; um Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen oder ein großes finanzielles Risiko; oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
 
-Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit oder die Compliance berührt, den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis verlangt, wird aus der Frage der Initiative eine Eskalation.
+Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit oder die Compliance berührt, den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis verlangt, ist es ein Fall für die Eskalation.
 
 {diagram}
 
@@ -118,7 +116,7 @@ So lesen Sie die Antworten:
 - Lautet die Antwort auf Frage 1 „nein“ oder auf Frage 2 „ja“: **nicht anfassen, eskalieren**.
 - Lässt sich die Entscheidung nicht rückgängig machen, treffen Sie sie nicht allein: mindestens **lösen und informieren**, und bei Risiko eskalieren.
 - Betrifft es jemanden außerhalb Ihrer Schicht, liegt aber in Ihrer Befugnis: **lösen und informieren**.
-- Sind alle Antworten unbedenklich: **selbst lösen**.
+- Weckt keine Antwort Bedenken: **selbst lösen**.
 - Die fünfte Frage bestimmt das Tempo: Erhöht Warten das Risiko, eskalieren Sie sofort mit dem, was Sie wissen.
 
 Wenn Sie eskalieren, bringen Sie die fünf Dinge einer guten Eskalation mit.

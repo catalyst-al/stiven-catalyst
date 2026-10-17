@@ -33,9 +33,9 @@ Kam punuar në shitjen me pakicë dhe me shumicë në Shqipëri, pastaj në logj
 
 Në shitjen me pakicë dhe me shumicë mund ta kishe mallin, por nëse stoku nuk kontrollohej, nëse magazina dhe shitja nuk komunikonin mirë ose nëse informacioni nuk ishte i saktë, problemi përfundonte te klienti.
 
-Në logjistikë i njëjti problem merrte një formë tjetër. Nuk ishte më një produkt në raft, por një pako që mungonte, një ngarkim që zgjaste më shumë se ç'duhej, një porosi e paplotë, një itinerar që nisej me vonesë ose një problem që duhej zgjidhur kur shoferi ishte tashmë në rrugë.
+Në logjistikë i njëjti problem merrte një formë tjetër: një pako që mungonte, një ngarkim që zgjaste më shumë se ç'duhej, një porosi e paplotë, një itinerar që nisej me vonesë ose një problem që duhej zgjidhur kur shoferi ishte tashmë në rrugë.
 
-Në hotel problemi ndryshon sërish pamje: një rezervim, një pagesë, një dhomë që nuk është mbyllur siç duhet në sistem, një no-show, një faturë ose një informacion që nuk ka kaluar nga një turn te tjetri.
+Në hotel problemi ndryshon sërish pamje: një rezervim, një pagesë, një dhomë që nuk është mbyllur siç duhet në sistem, një mysafir që nuk u paraqit (no-show), një faturë ose një informacion që nuk ka kaluar nga një turn te tjetri.
 
 Industria ndryshon. Ajo që kontrollon ndryshon. Por problemi i menaxhimit mbetet i njëjtë: nëse informacioni, përgjegjësia dhe ekzekutimi nuk takohen në të njëjtën pikë, diku do të dalë një gabim.
 
@@ -45,7 +45,7 @@ Në shitjen me pakicë, inventari kishte kuptimin e tij klasik: produkti, magazi
 
 Në logjistikë inventari u bë fluksi fizik i porosive. Duhej të kontrolloje nëse ngarkimi bëhej në kohë, nëse mungonin pako, nëse kishte porosi të paplota ose dëmtime dhe nëse shoferët niseshin në kohën e duhur. Treguesit me të cilët punoja ishin koha e ngarkimit, vonesat, porositë e paplota dhe dëmtimet. Si dispeçer koordinoja mbi 70 shoferë në një turn: ndaja itineraret, kontrolloja nisjet dhe zgjidhja problemet në çast, ndërsa ndodhnin.
 
-Në hotel inventari bëhet më abstrakt: dhomat, rezervimet, statuset e tyre dhe paratë që lidhen me to. Gjatë natës kontrolloj rezervimet, no-show-t, pagesat, kreditin dhe lëvizjet financiare, si edhe dhomat që duhej të ishin liruar ose zgjatur. Në fund kontrolloj nëse dita mund të mbyllet pa i lënë gabime turnit tjetër.
+Në hotel inventari bëhet më abstrakt: dhomat, rezervimet, gjendja e tyre dhe paratë që lidhen me to. Gjatë natës kontrolloj rezervimet, mysafirët që nuk u paraqitën, pagesat, kreditin dhe lëvizjet financiare, si edhe dhomat që duhej të ishin liruar ose zgjatur. Në fund kontrolloj nëse dita mund të mbyllet pa i lënë gabime turnit tjetër.
 
 Kalova kështu nga kontrolli i një kutie në magazinë te kontrolli i një porosie në lëvizje, dhe pastaj te kontrolli i një dhome ose i një transaksioni që shpesh ekziston vetëm si informacion në sistem. Parimi nuk ka ndryshuar: ajo që sistemi thotë se ke dhe ajo që ekziston vërtet duhet të jenë e njëjta gjë.
 
@@ -55,13 +55,13 @@ Në hotel, sidomos natën, njerëzit mund të vijnë të lodhur nga udhëtimi, m
 
 Ajo që nuk ndryshon është pritshmëria. Klientit nuk i intereson shumë cili departament bëri gabimin. Ai sheh vetëm kompaninë përballë. Në dyqan je ti, te dera shoferi, në hotel recepsionisti. Në atë çast, për klientin, ai person është e gjithë kompania.
 
-Një mësim tjetër e mora nga shitja me shumicë, dhe më ka shërbyer më shumë nga ç'e prisja. Kam ndërtuar dhe menaxhuar një rrjet kombëtar me 61 rishitës aktivë, dhe ai kanal lidhej me një rritje të të ardhurave prej rreth 30 deri në 40 përqind. Ajo përvojë më mësoi se partneri nuk menaxhohet si punonjësi. Punonjësit mund t'i japësh një procedurë dhe një përgjegjësi të drejtpërdrejtë. Me partnerin duhet të ndërtosh interes të përbashkët, komunikim dhe vazhdimësi, dhe marrëdhënia duhet të ketë leverdi ekonomike për të dyja palët. Kur ke 61 partnerë, nuk mund të mbështetesh vetëm në marrëdhënien personale me secilin. Të duhet një mënyrë pune që përsëritet.
+Një mësim tjetër e mora nga shitja me shumicë, dhe më ka shërbyer më shumë nga ç'e prisja. Kam ndërtuar dhe menaxhuar një rrjet kombëtar me 61 rishitës aktivë, dhe ai kanal lidhej me një rritje të të ardhurave prej rreth 30 deri në 40 përqind. Ajo përvojë më mësoi se partneri duhet menaxhuar ndryshe nga punonjësi. Punonjësit mund t'i japësh një procedurë dhe një përgjegjësi të drejtpërdrejtë. Me partnerin duhet të ndërtosh interes të përbashkët, komunikim dhe vazhdimësi, dhe marrëdhënia duhet të ketë leverdi ekonomike për të dyja palët. Kur ke 61 partnerë, nuk mund të mbështetesh vetëm në marrëdhënien personale me secilin. Të duhet një mënyrë pune që përsëritet.
 
 Kjo më ndihmoi më vonë, edhe kur njerëzit nuk quheshin më rishitës. Në logjistikë punon me shoferë, operatorë dhe kompani partnere, në hotel me departamente të tjera, furnitorë dhe struktura që nuk i kontrollon drejtpërdrejt. Menaxhimi nuk është gjithmonë të kesh autoritet mbi dikë. Shpesh është të arrish që njerëzit mbi të cilët nuk ke autoritet të punojnë në të njëjtin drejtim me ty.
 
 Kontrolli operacional kaloi lehtë nga një industri te tjetra. Kudo kam pasur të njëjtin instinkt: çfarë duhet të ndodhë, çfarë po ndodh vërtet, ku është hendeku dhe kush duhet të veprojë. Edhe puna me njerëzit kaloi. Titujt e punës ndryshojnë më shpejt se natyra njerëzore. Presioni, keqkuptimi, përgjegjësia dhe nevoja për komunikim ekzistojnë kudo.
 
-Ajo që nuk kaloi vetvetiu ishte njohuria teknike e secilës industri. Nuk mund të hysh në logjistikë vetëm sepse di të drejtosh një dyqan: duhet të mësosh planifikimin e itinerareve, dispeçerimin, ngarkimin dhe si funksionon një operacion në kohë reale. Hoteleria kërkon edhe më shumë. Sistemi i menaxhimit të pronës, rezervimet, kreditë, pagesat, no-show-t, procedurat e Night Audit-it dhe mbyllja e ditës janë një gjuhë më vete, dhe atë gjuhë m'u desh ta mësoja.
+Ajo që nuk kaloi vetvetiu ishte njohuria teknike e secilës industri. Nuk mund të hysh në logjistikë vetëm sepse di të drejtosh një dyqan: duhet të mësosh planifikimin e itinerareve, dispeçimin, ngarkimin dhe si funksionon një operacion në kohë reale. Hoteleria kërkon edhe më shumë. Sistemi i menaxhimit të pronës, rezervimet, kreditë, pagesat, mysafirët që nuk u paraqitën, procedurat e auditimit të natës dhe mbyllja e ditës janë një gjuhë më vete, dhe atë gjuhë m'u desh ta mësoja.
 
 Prandaj nuk besoj shumë te ideja se një menaxher i mirë duhet ta njohë që ditën e parë çdo hollësi të industrisë. Industrinë mund ta mësosh. Më e vështirë është të mësosh ta shohësh kur një proces nuk funksionon, të mos kalosh indiferent pranë problemit dhe ta marrësh përsipër deri në fund.
 

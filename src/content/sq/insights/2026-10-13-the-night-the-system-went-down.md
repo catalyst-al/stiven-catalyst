@@ -39,9 +39,9 @@ corrections:
 
 Natën e parë të trajnimit në hotel kisha ardhur për të mësuar proceset e natës. Pak pas mesnatës, sistemi i hotelit u ndal për shkak të një përditësimi dhe mbeti ashtu për rreth pesë orë, deri afër mëngjesit.
 
-Kjo është e vetmja skenë në këtë seri që nuk është figurë. Ndodhi, dhe unë isha aty. Ajo që mund të tregoj është ajo që mund të shihte dikush në trajnim: trajnimi praktik nuk mund të zhvillohej normalisht, dhe kolegu që po më trajnonte më shpjegoi se pjesa praktike do të vazhdonte në turnin pasardhës. Nëse kishte një procedurë zyrtare rezervë, me çfarë punoi ekipi në vend të sistemit, si u njoftuan departamentet dhe çfarë u kontrollua kur sistemi u kthye, këto nuk i pashë.
+Kjo është e vetmja skenë në këtë seri që nuk është përfytyrim. Ndodhi, dhe unë isha aty. Ajo që mund të tregoj është ajo që mund të shihte dikush në trajnim: trajnimi praktik nuk mund të zhvillohej normalisht, dhe kolegu që po më trajnonte më shpjegoi se pjesa praktike do të vazhdonte në turnin pasardhës. Përtej kësaj pashë pak, dhe këtë e them në çdo pikë ku ka rëndësi.
 
-Një dallim ka rëndësi që në fillim. Ishte një ndërprerje për shkak të një përditësimi, dhe nuk kam asnjë provë për një defekt të papritur. Titulli thotë “ra sistemi”, por ajo që ndodhi atë natë ishte më e zakonshme se një avari, dhe pikërisht për këtë më e dobishme për t'u kuptuar.
+Ishte një ndërprerje për shkak të një përditësimi, dhe nuk kam asnjë provë për një defekt të papritur. Titulli thotë “ra sistemi”, por ajo që ndodhi atë natë ishte më e zakonshme se një avari, dhe pikërisht për këtë më e dobishme për t'u kuptuar.
 
 ## Pesë orë pritje
 

@@ -32,8 +32,6 @@ Eine Abteilung kann ihre eigene Arbeit sehr gut machen, und der Betrieb kann tro
 
 Innerhalb eines Teams ist meist klar, wer was macht. Es gibt einen Verantwortlichen, einen Standard, einen Rhythmus. Aber Arbeit bleibt selten in einem einzigen Team. Sie geht von der Rezeption zur Haustechnik, von der Vorbereitung zur Rampe, von der Rampe zum Fahrer, von der Nachtschicht zur Frühschicht. An diesen Übergängen, wo Arbeit in andere Hände geht, gehen viele Fehler verloren.
 
-Was folgt, stammt aus konkreten Fällen an Übergängen im Hotel und auf der letzten Meile und aus den SOPs, Checklisten, Anweisungen und Meldewegen, mit denen ich gearbeitet habe. Das Bild eines Fehlers, für den am Ende überhaupt niemand zuständig ist, beschreibt ein Muster, keinen dokumentierten Fall.
-
 ## Im Hotel: wer es aufnimmt, wer es löst, wer es abschließt
 
 Im Hotel war für mich der sichtbarste Übergang der zwischen Rezeption, Housekeeping und Haustechnik.
@@ -46,7 +44,7 @@ In solchen Fällen unterscheide ich drei Verantwortlichkeiten:
 - **wer das Problem löst**;
 - **wer prüft, dass die Sache abgeschlossen ist.**
 
-Oft sind das drei verschiedene Menschen. Und wenn für die dritte Aufgabe niemand zuständig ist, wurde das Problem vielleicht an die richtige Abteilung „weitergegeben“, aber der Gast weiß nicht, ob es gelöst ist. Wir auch nicht.
+Oft sind das drei verschiedene Menschen. Und wenn für die dritte Aufgabe niemand zuständig ist (ich beschreibe hier ein Muster; einen dokumentierten Fall, in dem ein Fehler am Ende ganz ohne Zuständigen blieb, habe ich nicht), wurde das Problem vielleicht an die richtige Abteilung „weitergegeben“, aber der Gast weiß nicht, ob es gelöst ist. Wir auch nicht.
 
 Ein weiterer wichtiger Übergang war der zwischen den Schichten. Der Night Audit übernahm offene Punkte aus der vorherigen Schicht und musste an die Frühschicht weitergeben, was nicht erledigt war. Darüber habe ich ausführlicher im [Essay über die Schichtübergabe](/de/insights/why-the-handover-is-underrated/) geschrieben.
 
@@ -76,7 +74,7 @@ Deshalb sind Fehler zwischen Abteilungen so schwer zu fassen. Von innen gesehen 
 
 ## Status, Verantwortung, Bestätigung
 
-Im Hotel kam es sehr auf eine strukturierte Übergabe an. Wenn ein Problem in der Nacht nicht gelöst wurde, musste es dokumentiert und für die nächste Schicht sichtbar bleiben. Deshalb wollte ich, dass die Notizen zeigen, was noch offen ist, und nicht nur die Ereignisse zusammenfassen.
+Im Hotel kam es sehr auf eine strukturierte Übergabe an. Wenn ein Problem in der Nacht nicht gelöst wurde, musste es dokumentiert und für die nächste Schicht sichtbar bleiben. Deshalb wollte ich, dass die Notizen neben dem, was passiert war, auch zeigen, was noch offen ist.
 
 Auf der letzten Meile halfen klare Meldewege, die Kontakte zu den Team Leadern und die Abstimmung zwischen Last Mile, Outbound und den DSPs.
 

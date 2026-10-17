@@ -23,7 +23,7 @@ firstMove:
 checklist:
   title: The escalation matrix for the shift
   fill: true
-  note: "If 1 is “no” or 2 is “yes”: do not touch it, escalate it. If it cannot be reversed or affects someone outside your shift: solve it and inform. If all the answers are calm: solve it yourself. The fifth question sets the speed."
+  note: "If 1 is “no” or 2 is “yes”: do not touch it, escalate it. If it cannot be reversed or affects someone outside your shift: solve it and inform. If no answer raises a flag: solve it yourself. The fifth question sets the speed."
   items:
     - label: Is it within my authority?
       hint: The role, the standard, the approvals that are mine.
@@ -47,17 +47,15 @@ The opposite is a problem too. Someone who never takes anything higher can look 
 
 Between these two extremes sits one of the most important questions for an operation that has to run without the manager close by: when do you solve it yourself, and when do you take it higher?
 
-In [Leadership without a title](/insights/leadership-without-a-title/) I wrote that initiative and authority are two different things. This essay tries to turn that difference from a personal feeling into a clear rule.
+In [Leadership without a title](/insights/leadership-without-a-title/) I wrote that initiative and authority are two different things. Here I want to turn that difference from a personal feeling into a clear rule.
 
-It draws on two jobs. At night in the hotel, every problem began with the same sorting: could I solve it within my role, did it belong to the responsible department, or did it need a decision higher up? In the cases I had, technical problems in rooms went to Maintenance; housekeeping matters went to that department, and into the handover for follow-up. In last mile, the Team Leader worked very close to the daily operation: loading, the dock, drivers, absences, delays, problems as they happened. Rules said when the Team Leader had to be informed, for example when a bag was missing during loading, and damage and the cold chain had clear standards and checks.
-
-I have no documented record of how authority was split between the Team Leader, the Area Manager and the levels above for each kind of incident, nor of a moment when I myself stood between the two choices. The levels and the matrix below are how I would draw the line today. What I can describe is the principle I worked by from training onwards.
+I met the question in two jobs. At night in the hotel, every problem began with the same sorting: could I solve it within my role, did it belong to the responsible department, or did it need a decision higher up? In the cases I had, technical problems in rooms went to Maintenance; housekeeping matters went to that department, and into the handover for follow-up. In last mile, the Team Leader worked very close to the daily operation: loading, the dock, drivers, absences, delays, problems as they happened. Rules said when the Team Leader had to be informed, for example when a bag was missing during loading, and damage and the cold chain had clear standards and checks.
 
 ## I did not improvise
 
-The checklist showed what had to be done. The documents showed how to do it. But when the two contradicted each other, or something fell outside the standard, I did not improvise. I had it confirmed, or I escalated it.
+What I can describe is the principle I worked by from training onwards; I have no documented moment when I myself stood between the two choices. The checklist showed what had to be done. The documents showed how to do it. But when the two contradicted each other, or something fell outside the standard, I did not improvise. I had it confirmed, or I escalated it.
 
-That may look like a lack of initiative. To me it was the opposite. Initiative makes sense within the limit you know. Beyond it, improvising is not courage. It is a risk you take on without the authority to carry it.
+That may look like a lack of initiative. Initiative makes sense within the limit you know. Beyond it, improvising is not courage. It is a risk you take on without the authority to carry it.
 
 ## Ambiguity is a system problem
 
@@ -69,7 +67,7 @@ And an operation that depends on who was on shift is not yet an operation that r
 
 ## The three mistakes
 
-The three mistakes are my opinion; I have no statistic from my own experience behind them.
+In my view, escalation goes wrong in three ways.
 
 **The first: everything gets escalated.** The person never learns to take ownership. Every deviation becomes the boss's problem, and the boss becomes the point where the whole operation stalls.
 
@@ -97,7 +95,7 @@ The rule has a limit. If you have five minutes to check the facts without increa
 
 ## Three levels
 
-I would not say “never” about small problems; the context can change even a small one. But this is how I would divide them.
+This is how I would draw the line today. I have no documented record of how authority was split between the Team Leader, the Area Manager and the levels above for each kind of incident, and I would not say “never” about small problems, because the context can change even a small one. But this is how I would divide them.
 
 **Solve it yourself** when it is within your role, the standard is clear, the risk is low and the decision can be reversed.
 
@@ -105,7 +103,7 @@ I would not say “never” about small problems; the context can change even a 
 
 **Do not touch it, escalate it** when it involves safety, security, compliance or sensitive data; when there are payments beyond your authority, serious disciplinary decisions or a large financial risk; or in any situation where the decision clearly goes beyond the responsibility of the role.
 
-In last mile, as I see it today, the Team Leader should have room to solve an operational problem within the standard. The moment the problem affects safety or compliance, affects the customer seriously, or needs a decision beyond their authority, it stops being a question of initiative and becomes an escalation.
+In last mile, as I see it today, the Team Leader should have room to solve an operational problem within the standard. The moment the problem affects safety or compliance, affects the customer seriously, or needs a decision beyond their authority, it becomes a matter for escalation.
 
 {diagram}
 
@@ -124,7 +122,7 @@ Reading the answers:
 - If the answer to question 1 is “no”, or to question 2 is “yes”: **do not touch it, escalate it**.
 - If the decision cannot be reversed, do not take it alone: at least **solve it and inform**, and if there is risk, escalate it.
 - If it affects someone outside your shift but is within your authority: **solve it and inform**.
-- If all the answers are calm: **solve it yourself**.
+- If no answer raises a flag: **solve it yourself**.
 - The fifth question sets the speed: if waiting increases the risk, escalate straight away with what you know.
 
 When you do escalate, bring the five things of a good escalation.

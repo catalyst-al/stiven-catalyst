@@ -46,7 +46,7 @@ The system was running an update, and for several hours normal work was practica
 
 It looked like a lost night. In fact it taught me the first lesson: in a new place, you have to understand how the work is done before you do it.
 
-This essay opens a new series. The first, *Ten years close to the work*, was about what I have learned. This one is about building an operation that keeps working when the manager is not there, and that begins long before you change anything: with how you read the operation. What follows comes from my first weeks in that hotel, from the checklist, the training material and the colleagues who ran the night.
+This essay opens a new series. The first, *Ten years close to the work*, was about what I have learned. This one is about building an operation that keeps working when the manager is not there, and that begins long before you change anything: with how you read the operation. My material is the first weeks in that hotel: the checklist, the training documents and the colleagues who ran the night.
 
 ## The first nights: the people before the documents
 
@@ -81,7 +81,7 @@ At the start I decided to follow the existing process exactly as it was defined.
 
 First I had to understand the dependencies. A step that looks unnecessary from the outside may exist because another department, a report or a later process depends on it. If you remove it in week two, you may see no problem at all. The problem shows up somewhere else, later, with someone else.
 
-Only once I began to understand the flow did I start to organise the information better. The aim was to make the operation easier to read, for myself and for the next person who would have to learn it, rather than to change it.
+Only once I began to understand the flow did I start to organise the information better. The aim was to make the operation easier to read, for myself and for the next person who would have to learn it. Changing it could wait.
 
 **A step that looks unnecessary may be the step someone else depends on.**
 

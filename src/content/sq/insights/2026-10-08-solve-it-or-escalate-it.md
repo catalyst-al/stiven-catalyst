@@ -12,12 +12,12 @@ deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes in
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Për problemin tjetër, përgjigju pesë pyetjeve para se të veprosh: autoriteti im, siguria, e kthyeshme, jashtë turnit tim, çfarë ndodh nëse pres."
-  - "Kur eskalon, sill pesë gjëra: çfarë ndodhi, ndikimi tani, çfarë është bërë, cili vendim duhet, sa urgjente është."
+  - "Kur e çon një problem lart, sill pesë gjëra: çfarë ndodhi, ndikimi tani, çfarë është bërë, cili vendim duhet, sa urgjente është."
   - Gjej një situatë ku dy kolegë do të vendosnin ndryshe, dhe kërko që të përcaktohet kufiri.
 checklist:
   title: Matrica e eskalimit për turnin
   fill: true
-  note: "Nëse 1 është “jo” ose 2 është “po”: mos e prek, eskaloje. Nëse nuk kthehet dot ose prek dikë jashtë turnit tënd: zgjidhe dhe informo. Nëse të gjitha përgjigjet janë të qeta: zgjidhe vetë. Pyetja e pestë cakton shpejtësinë."
+  note: "Nëse 1 është “jo” ose 2 është “po”: mos e prek, çoje lart. Nëse nuk kthehet dot ose prek dikë jashtë turnit tënd: zgjidhe dhe informo. Nëse asnjë përgjigje nuk ngre shqetësim: zgjidhe vetë. Pyetja e pestë cakton shpejtësinë."
   items:
     - label: A është brenda autoritetit tim?
       hint: Roli, standardi, miratimet që më takojnë.
@@ -28,30 +28,28 @@ checklist:
     - label: A prek dikë jashtë turnit tim?
       hint: Turnin tjetër, një KPI, klientin, një departament tjetër.
     - label: Çfarë ndodh nëse pres?
-      hint: Nëse pritja e rrit rrezikun, eskaloje tani me atë që di.
+      hint: Nëse pritja e rrit rrezikun, çoje lart tani me atë që di.
 # The picture of the system in this essay (lib/diagrams.js); the "{diagram}" paragraph in the text marks its place.
 diagram: escalation-matrix
 ---
 
 “Ka problem. Çfarë të bëj?”
 
-Ky është eskalimi më i shpeshtë dhe më pak i dobishëm. Nuk thotë çfarë ka ndodhur, çfarë është bërë apo çfarë vendimi duhet. E shtyn problemin një nivel më lart, bashkë me të gjitha pyetjet që personi mund t'i kishte sqaruar vetë.
+Kjo është mënyra më e shpeshtë për ta çuar një problem më lart (eskalimi) dhe më pak e dobishmja. Nuk thotë çfarë ka ndodhur, çfarë është bërë apo çfarë vendimi duhet. E shtyn problemin një nivel më lart, bashkë me të gjitha pyetjet që personi mund t'i kishte sqaruar vetë.
 
 Edhe e kundërta është problem. Ai që nuk çon kurrë asgjë lart mund të duket shumë i pavarur, deri në çastin kur mbetet me një problem në dorë që e ka kaluar prej kohësh kufirin e rolit të tij.
 
 Mes këtyre dy skajeve qëndron një nga pyetjet më të rëndësishme për një operacion që duhet të punojë pa menaxherin pranë: kur e zgjidh vetë dhe kur e çon lart?
 
-Te [Udhëheqje pa titull](/sq/insights/leadership-without-a-title/) shkrova se iniciativa dhe autoriteti janë dy gjëra të ndryshme. Kjo ese përpiqet ta kthejë atë dallim nga një ndjesi personale në një rregull të qartë.
+Te [Udhëheqje pa titull](/sq/insights/leadership-without-a-title/) shkrova se iniciativa dhe autoriteti janë dy gjëra të ndryshme. Këtu dua ta kthej atë dallim nga një ndjesi personale në një rregull të qartë.
 
-Mbështetet në dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Në rastet që kam pasur, problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e shërbimit të katit i merrte përsipër ai departament, dhe unë i lija në dorëzimin e turnit për t'u ndjekur. Në last mile, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
-
-Nuk kam të dokumentuar se si ndahej autoriteti mes Team Leader-it, Area Manager-it dhe niveleve më lart për çdo lloj incidenti, as ndonjë rast kur vetë jam gjendur mes dy zgjedhjeve. Nivelet dhe matrica më poshtë tregojnë ku do ta vendosja kufirin sot. Ajo që mund ta përshkruaj është parimi me të cilin punoja që nga trajnimi.
+Këtë pyetje e kam hasur në dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Në rastet që kam pasur, problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e shërbimit të katit i merrte përsipër ai departament, dhe unë i lija në dorëzimin e turnit për t'u ndjekur. Në last mile, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
 
 ## Nuk improvizoja
 
-Lista e kontrollit tregonte çfarë duhej bërë, dokumentet tregonin si bëhej. Por kur binin ndesh mes tyre, ose kur diçka dilte jashtë standardit, nuk improvizoja. E konfirmoja ose e eskaloja.
+Ajo që mund ta përshkruaj është parimi me të cilin punoja që nga trajnimi; nuk kam të dokumentuar ndonjë rast kur vetë jam gjendur mes dy zgjedhjeve. Lista e kontrollit tregonte çfarë duhej bërë, dokumentet tregonin si bëhej. Por kur binin ndesh mes tyre, ose kur diçka dilte jashtë standardit, nuk improvizoja. E konfirmoja ose e çoja më lart.
 
-Kjo mund të duket si mungesë iniciative. Për mua ishte e kundërta. Iniciativa ka kuptim brenda kufirit që e njeh. Përtej tij, improvizimi nuk është guxim, por rrezik që e merr përsipër pa pasur autoritetin për ta mbajtur.
+Kjo mund të duket si mungesë iniciative. Iniciativa ka kuptim brenda kufirit që e njeh. Përtej tij, improvizimi nuk është guxim, por rrezik që e merr përsipër pa pasur autoritetin për ta mbajtur.
 
 ## Paqartësia është problem sistemi
 
@@ -63,13 +61,13 @@ Dhe një operacion që varet nga kush ishte në turn nuk është ende një opera
 
 ## Tri gabimet
 
-Tri gabimet janë mendimi im; nuk kam statistikë nga përvoja ime që t'i mbështesë.
+Sipas mendimit tim, eskalimi shkon keq në tri mënyra.
 
-**I pari: eskalohet gjithçka.** Personi nuk mëson kurrë të marrë përgjegjësi. Çdo devijim bëhet problem i shefit, dhe shefi bëhet pika ku ngec i gjithë operacioni.
+**I pari: çohet lart gjithçka.** Personi nuk mëson kurrë të marrë përgjegjësi. Çdo devijim bëhet problem i shefit, dhe shefi bëhet pika ku ngec i gjithë operacioni.
 
-**I dyti: nuk eskalohet asgjë.** Ky është më i rrezikshmi. Personi mund ta mbajë problemin brenda rolit të vet edhe pasi ai ka kaluar kufirin e autoritetit, të rrezikut që mund të mbajë ose të kompetencës së tij. Kur më në fund del në sipërfaqe, zakonisht është më i madh dhe më vonë.
+**I dyti: nuk çohet lart asgjë.** Ky është më i rrezikshmi. Personi mund ta mbajë problemin brenda rolit të vet edhe pasi ai ka kaluar kufirin e autoritetit, të rrezikut që mund të mbajë ose të kompetencës së tij. Kur më në fund del në sipërfaqe, zakonisht është më i madh dhe më vonë.
 
-**I treti: eskalohet pa informacion.** Ky më duket shumë i zakonshëm. Problemi ngjitet një nivel më lart pa iu afruar zgjidhjes. Kush e merr duhet të bëjë dhjetë pyetje vetëm për të mësuar faktet bazë, dhe koha që humbet aty është shpesh pikërisht koha që i duhej vendimit.
+**I treti: çohet lart pa informacion.** Ky më duket shumë i zakonshëm. Problemi ngjitet një nivel më lart pa iu afruar zgjidhjes. Kush e merr duhet të bëjë dhjetë pyetje vetëm për të mësuar faktet bazë, dhe koha që humbet aty është shpesh pikërisht koha që i duhej vendimit.
 
 **Të marrësh përgjegjësi nuk do të thotë ta zgjidhësh gjithmonë vetë. Do të thotë ta çosh problemin atje ku mund të merret vendimi i duhur, me informacionin e duhur.**
 
@@ -83,23 +81,23 @@ Një eskalim i mirë duhet të japë pesë gjëra, dhe t'i japë shpejt:
 4. **Çfarë vendimi nevojitet.**
 5. **Sa urgjente është.**
 
-Kur dikush më eskalon diçka, dua ta kuptoj situatën pa bërë dhjetë pyetje. Rregulli që do të përdorja është ky:
+Kur dikush ma përcjell lart diçka, dua ta kuptoj situatën pa bërë dhjetë pyetje. Rregulli që do të përdorja është ky:
 
-**Eskalo vendimin, jo paqartësinë që mund ta kishe sqaruar vetë.**
+**Çoje lart vendimin, jo paqartësinë që mund ta kishe sqaruar vetë.**
 
-Edhe ky rregull ka një kufi. Nëse ke pesë minuta për të verifikuar faktet pa e rritur rrezikun, verifikoji. Nëse rreziku është i menjëhershëm, eskalo menjëherë me atë që di. Një eskalim i plotë që vjen vonë është më i keq se një eskalim i shkurtër që vjen në kohë.
+Edhe ky rregull ka një kufi. Nëse ke pesë minuta për të verifikuar faktet pa e rritur rrezikun, verifikoji. Nëse rreziku është i menjëhershëm, çoje lart menjëherë me atë që di. Një eskalim i plotë që vjen vonë është më i keq se një eskalim i shkurtër që vjen në kohë.
 
 ## Tri nivele
 
-Fjalën “kurrë” nuk do ta përdorja për problemet e vogla; konteksti mund ta ndryshojë edhe një problem të vogël. Por ja si do t'i ndaja.
+Ja ku do ta vendosja kufirin sot. Nuk kam të dokumentuar se si ndahej autoriteti mes Team Leader-it, Area Manager-it dhe niveleve më lart për çdo lloj incidenti, dhe fjalën “kurrë” nuk do ta përdorja për problemet e vogla, sepse konteksti mund ta ndryshojë edhe një problem të vogël. Por ja si do t'i ndaja.
 
 **Zgjidhe vetë** kur është brenda rolit tënd, standardi është i qartë, rreziku është i ulët dhe vendimi mund të kthehet mbrapsht.
 
 **Zgjidhe dhe njofto** kur mund ta zgjidhësh brenda autoritetit tënd, por situata ka rëndësi për turnin tjetër, për një KPI ose për klientin, ose mund të përsëritet. Vendi natyral për njoftimin është dorëzimi i turnit.
 
-**Mos e prek dhe eskaloje** kur bëhet fjalë për sigurinë në punë, sigurinë fizike, pajtueshmërinë ose të dhëna të ndjeshme; për pagesa përtej autoritetit tënd, vendime disiplinore serioze ose një rrezik të madh financiar; ose për çdo situatë ku vendimi e tejkalon qartë përgjegjësinë e rolit.
+**Mos e prek dhe çoje lart** kur bëhet fjalë për sigurinë në punë, sigurinë fizike, pajtueshmërinë ose të dhëna të ndjeshme; për pagesa përtej autoritetit tënd, vendime disiplinore serioze ose një rrezik të madh financiar; ose për çdo situatë ku vendimi e tejkalon qartë përgjegjësinë e rolit.
 
-Në last mile, siç e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë një problem operacional brenda standardit. Sapo problemi prek sigurinë ose pajtueshmërinë, e prek klientin seriozisht ose kërkon një vendim përtej autoritetit të tij, çështja e iniciativës kthehet në çështje eskalimi.
+Në last mile, siç e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë një problem operacional brenda standardit. Sapo problemi prek sigurinë ose pajtueshmërinë, e prek klientin seriozisht ose kërkon një vendim përtej autoritetit të tij, problemi duhet çuar lart.
 
 {diagram}
 
@@ -115,12 +113,12 @@ Tri nivelet janë kolonat. Pesë pyetje vendosin se në cilën kolonë bie një 
 
 Si lexohen përgjigjet:
 
-- Nëse përgjigjja e pyetjes 1 është “jo”, ose e pyetjes 2 është “po”: **mos e prek dhe eskaloje**.
-- Nëse vendimi nuk kthehet dot mbrapsht, mos e merr i vetëm: të paktën **zgjidhe dhe njofto**, dhe nëse ka rrezik, eskaloje.
+- Nëse përgjigjja e pyetjes 1 është “jo”, ose e pyetjes 2 është “po”: **mos e prek dhe çoje lart**.
+- Nëse vendimi nuk kthehet dot mbrapsht, mos e merr i vetëm: të paktën **zgjidhe dhe njofto**, dhe nëse ka rrezik, çoje lart.
 - Nëse prek dikë jashtë turnit tënd, por është brenda autoritetit tënd: **zgjidhe dhe njofto**.
-- Nëse të gjitha përgjigjet janë të qeta: **zgjidhe vetë**.
-- Pyetja e pestë cakton shpejtësinë: nëse pritja e rrit rrezikun, eskalo menjëherë me atë që di.
+- Nëse asnjë përgjigje nuk ngre shqetësim: **zgjidhe vetë**.
+- Pyetja e pestë cakton shpejtësinë: nëse pritja e rrit rrezikun, çoje lart menjëherë me atë që di.
 
-Kur eskalon, sill pesë gjërat e një eskalimi të mirë.
+Kur e çon lart, sill pesë gjërat e një eskalimi të mirë.
 
 Gjykimi mbetet te ai që është në turn. Matrica i shton vetëm të njëjtat pesë pyetje, kushdo qoftë ai, që eskalimi të mos varet më nga temperamenti. Aty ku dy kolegë do t'u përgjigjeshin ende ndryshe, ndoshta vetë kufiri është ajo që duhet çuar lart.

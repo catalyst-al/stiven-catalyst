@@ -49,15 +49,13 @@ Die Informationen waren da, aber verstreut. Die Checkliste sagte, was zu tun war
 
 Hier habe ich den Unterschied verstanden zwischen **Informationen haben** und **ein Einarbeitungssystem haben**. Informationen geben Ihnen die Teile. Ein System gibt Ihnen die Reihenfolge, den Grund und den Punkt, an dem Sie wissen, dass Sie allein weitermachen können.
 
-Von der letzten Meile weiß ich, dass es klare betriebliche Regeln für Sicherheit, Beladung, Scannen, die Rampe, die Kühlkette und die Arbeitsweise gab und dass in Fällen, in denen Standards verletzt wurden, eine Nachschulung verlangt wurde. Ob neue Disponenten, Rampenmitarbeiter oder DSP-Fahrer ein strukturiertes Programm über mehrere Tage durchliefen oder vor allem neben jemandem lernten, kann ich nicht sicher sagen, und für eine Einarbeitung, die ich selbst Schritt für Schritt geleitet habe, fehlt mir ein gut dokumentierter Fall. Dieser Essay stützt sich deshalb auf meine Erfahrung als derjenige, der eingearbeitet wurde, und auf eine Antwort auf die Frage, woran man erkennt, dass jemand wirklich gelernt hat.
-
 ## Wenn der Prozess in einer Person lebt
 
 Wenn der Prozess nicht als klarer Weg aufgeschrieben ist, lebt er in der Person, die ihn jeden Tag macht.
 
 Ihr ist das nicht vorzuwerfen. Meist ist sie die beste Kraft, die Sie haben, und genau deshalb haben Sie sie ausgewählt, um andere einzuarbeiten. Aber auch die Besten haben ihre eigene Auslegung. Sie wissen, warum sie einen Schritt auf später verschieben oder etwas anders prüfen. Der Neue sieht nur die Handlung; der Grund bleibt im Kopf des anderen.
 
-Werden zwei Neue von zwei verschiedenen Kollegen eingearbeitet, lernen sie nicht dieselbe Arbeit. Sie lernen zwei Versionen davon. Nach ein paar Monaten haben Sie statt eines Standards mehrere Gewohnheiten, die einander ähneln.
+Werden zwei Neue von zwei verschiedenen Kollegen eingearbeitet, lernen sie zwei Versionen derselben Arbeit. Nach ein paar Monaten haben Sie statt eines Standards mehrere Gewohnheiten, die einander ähneln.
 
 Deshalb lässt sich Einarbeitung nicht vom Standard trennen. Ohne [eine SOP, die tatsächlich genutzt wird](/de/insights/a-good-sop-is-not-a-document/), wird Einarbeitung zum Abschauen.
 
@@ -70,6 +68,8 @@ Mein Test hat drei Teile: Mach es selbst, erklär mir, warum, zeig mir, was du t
 Funktionieren alle drei, beginnt die Einarbeitung zu wirken. Funktioniert nur das Erste, hat der Neue bloß das Nachmachen gelernt. Das reicht für normale Tage, aber nicht für die Nacht, in der etwas anders läuft als gewohnt.
 
 ## Die erste Stunde
+
+Ab hier beschreibe ich, wie ich es machen würde, und ich spreche als derjenige, der eingearbeitet wurde: Für eine Einarbeitung, die ich selbst Schritt für Schritt geleitet habe, fehlt mir ein gut dokumentierter Fall. Von der letzten Meile weiß ich, dass es klare betriebliche Regeln für Sicherheit, Beladung, Scannen, die Rampe, die Kühlkette und die Arbeitsweise gab und dass bei Verstößen gegen Standards eine Nachschulung verlangt wurde. Ob neue Disponenten, Rampenmitarbeiter oder DSP-Fahrer ein strukturiertes Programm über mehrere Tage durchliefen oder vor allem neben jemandem lernten, kann ich nicht sicher sagen.
 
 In der ersten Stunde würde ich mich auf fünf Dinge beschränken, die der Neue wissen sollte:
 
@@ -89,7 +89,7 @@ Die Reihenfolge, der ich folgen würde, ist einfach:
 
 **Zuschauen. Mit mir zusammen machen. Du machst es, während ich zuschaue. Allein machen. Dann mir erklären.**
 
-Für mich ist das viel stärker als „Bleib heute bei ihm und schau, wie er es macht“. Zuschauen bleibt der erste Schritt, nur ist es nicht mehr der einzige. Was am Ende zählt, ist, wie einheitlich und sicher das Ergebnis bleibt, wenn der Trainer gegangen ist.
+Für mich ist das viel stärker als „Bleib heute bei ihm und schau, wie er es macht“. Zuschauen bleibt der erste Schritt, einer von fünf. Was am Ende zählt, ist, wie einheitlich und sicher das Ergebnis bleibt, wenn der Trainer gegangen ist.
 
 ## Der Plan für die erste Woche eines neuen Mitarbeiters
 
@@ -101,7 +101,7 @@ Diesen Plan würde ich vorschlagen, ohne ihn auf einen bestimmten Arbeitsplatz z
 
 **Tag 3: unter Begleitung selbst machen.** Der Neue führt den Prozess aus; der Trainer bleibt in der Nähe und greift nur ein, wenn es nötig ist. Am Ende des Tages notieren beide, wo es Unsicherheit gab.
 
-**Tag 4: auch eine Ausnahme bearbeiten.** Ein Fall, der vom normalen Ablauf abweicht: ein Status, der nicht passt, ein technisches Problem, eine Anfrage, die eskaliert werden muss. Am Ende des Tages sollte der Neue nicht nur wissen, was er getan hat, sondern auch, wann er es hätte nach oben geben müssen.
+**Tag 4: auch eine Ausnahme bearbeiten.** Ein Fall, der vom normalen Ablauf abweicht: ein Status, der nicht passt, ein technisches Problem, eine Anfrage, die weitergegeben werden muss. Am Ende des Tages sollte der Neue nicht nur wissen, was er getan hat, sondern auch, wann er es hätte nach oben geben müssen.
 
 **Tag 5: allein arbeiten und den Prozess rückwärts erklären.** Der Neue arbeitet allein. Am Ende erklärt er den Prozess vom Ergebnis zurück bis zum ersten Schritt: was herauskommen musste, was es möglich gemacht hat, wo es hätte scheitern können. So sieht man am schnellsten, ob er den Prozess verstanden oder nur behalten hat.
 

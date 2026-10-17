@@ -47,7 +47,7 @@ This essay sits between those two sentences.
 
 DMAIC is the Six Sigma cycle for improving a process: Define, Measure, Analyze, Improve, Control. You define the problem, measure it, analyse the causes, improve, and check that the improvement holds. In books it looks like a big project, with a team, a deadline and someone wearing a coloured belt.
 
-What I bring to it is experience with real operational problems in last mile: Damage, Incomplete, Delay and Loading Time. Six Sigma, Pareto and 5 Why are methods I know and have made part of how I think about management. I have no confirmed certificate, Yellow, Green or Black Belt, and no project in which I applied and documented all five phases of DMAIC. Even for Pareto and 5 Why, I cannot show a case I carried through myself from start to finish. In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about a 5 Why with only two documented “whys”, and why I did not fill in the rest.
+What I bring to it is experience with real operational problems in last mile: Damage, Incomplete, Delay and Loading Time. Six Sigma, Pareto and 5 Why are methods I know and have made part of how I think about management. I hold no confirmed certificate, Yellow, Green or Black Belt. I have no project in which I applied and documented all five phases of DMAIC, and not even a Pareto or a 5 Why I can show as carried through by me from start to finish. In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about a 5 Why with only two documented “whys”, and why I did not fill in the rest.
 
 ## The five phases, as I actually had them
 
@@ -81,7 +81,7 @@ Of the five phases, today I would single out Control: keeping the improvement.
 
 A problem can be solved for a while. But if the standard is not documented, people are not trained and nobody checks the result, the problem risks coming back.
 
-That is why this series is called “Improvement that holds”. The improvement has to continue after the manager who started it has gone. If it only holds as long as that person is there, it was not an improvement of the process. It was one person's presence.
+That is why this series is called “Improvement that holds”. The improvement has to continue after the manager who started it has gone. If it only holds as long as that person is there, what held was one person's presence.
 
 **A problem is not solved just because it did not happen again today.**
 
@@ -97,6 +97,6 @@ I would tell a shift manager that they do not need to be a Black Belt to start t
 
 Not every problem on the shift has to become a complex project. But they should avoid changing procedures just because a KPI came out bad.
 
-You can fill in the sheet below for a single problem and copy it. If you want to see the whole cycle on a complete case, [Six Sigma in the Warehouse](/tools/six-sigma-dmaic/) follows a teaching case step by step. It is an example to learn from, not a story from my work.
+You can fill in the sheet below for a single problem and copy it. If you want to see the whole cycle on a complete case, [Six Sigma in the Warehouse](/tools/six-sigma-dmaic/) follows a teaching case step by step. It is a teaching example and does not come from my work.
 
-Five questions will not make you a black belt. They do stop you jumping from the problem to the solution, and on an ordinary shift that is half the work.
+Five questions are enough to stop the jump from the problem to the solution, and on an ordinary shift that is half the work.

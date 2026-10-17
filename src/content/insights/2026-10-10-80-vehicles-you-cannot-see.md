@@ -44,9 +44,7 @@ On the ramp, you see a problem for yourself. From a distance, you often know it 
 
 That is the biggest difference between the two ways I have worked in last mile. In 2025, as a Team Leader and then as an Area Manager, I was in the operation: on the ramp, at the loading, next to the dispatchers, with the KPIs every day. Since 1 January 2026 I have worked part-time as a Last Mile Dispatcher, remotely, from home. The role covers the operational coordination of 80+ vehicles and 100+ drivers: tours, drivers, delays and problems during delivery.
 
-The problems are the same. My position in front of them is completely different.
-
-This essay compares the two positions, from someone who has worked in both. It is my analysis, not a measured result or a success story. I leave out internal details, some of which I do not know precisely: the systems and what they show, the channels we use and the shift times. I have no incident from the remote role documented from start to resolution. The documented cases I do have, with vehicles and with delays, come from my earlier work in last mile, and I do not present them as solved from a distance.
+The problems are the same. My position in front of them is completely different, and what follows is my analysis of the two positions, from someone who has stood in both.
 
 ## What you lose
 
@@ -62,7 +60,7 @@ Distance has its gains too.
 
 On the ramp you see well what is in front of you. From a distance, if the information and the tools support it, you can see the coordination of many tours as one operation: all the vans at once, and whether delays are gathering somewhere rather than one delay at a time.
 
-That view depends on the information you receive being sufficient and reliable.
+That view depends on the information you receive being sufficient and reliable. Which systems we use and what they show, like the channels and the shift times, I leave out: they are internal details, and some of them I do not know precisely.
 
 ## Information becomes the work
 
@@ -76,7 +74,7 @@ As for communication, I have no documented rules of my own, but I believe it sho
 
 ## What I would watch for
 
-Nor do I have a documented method for spotting problems early. Today I would pay attention to three things.
+From the remote role I have no incident documented from start to resolution, and no documented method for spotting problems early. The documented cases I do have, with vehicles and with delays, come from my earlier work in last mile, and I do not present them as solved from a distance. Today I would pay attention to three things.
 
 **Deviations that repeat.** One delay is an event. The same delay, in the same place, several days in a row, is a pattern.
 
@@ -90,6 +88,6 @@ Nor do I have a documented method for spotting problems early. Today I would pay
 
 This connects to the whole series. An improvement holds when it does not depend on someone being there, and in remote coordination nobody is there at all. What is left is the system: who sees the problem, how they say it, who takes it on, when it is closed.
 
-You can fill in the sheet below for a problem you cannot see and copy it. [Last-Mile CX Control Tower](/tools/cx-control-tower/) gathers the cases, actions and causes of many tours in one view, so the operation can be seen as one rather than as a hundred phone calls.
+You can fill in the sheet below for a problem you cannot see and copy it. [Last-Mile CX Control Tower](/tools/cx-control-tower/) gathers the cases, actions and causes of many tours in one view, so that a hundred phone calls add up to one picture of the operation.
 
 On the ramp, the problem appears in front of you. From a distance, either you go looking for it, or you have built a way for it to come to you.

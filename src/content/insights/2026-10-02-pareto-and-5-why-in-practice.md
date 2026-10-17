@@ -31,13 +31,13 @@ checklist:
     - The countermeasure has an owner and a date on which it is checked.
 ---
 
-In last mile, Pareto and 5 Why were part of the daily analysis of the KPIs, above all for delays, damage, incomplete orders and loading time. That is why I want to describe them the way I used them, not the way they look on a slide.
+In last mile, Pareto and 5 Why were part of the daily analysis of the KPIs, above all for delays, damage, incomplete orders and loading time. That is why I want to describe them the way I used them, day to day.
 
 The best-documented case I have kept is a delay report from one day in August 2025, with 19 cases. The causes varied. The report lists missing bags and a full trolley that was missing; bags with the wrong label, and a bag placed or loaded in the wrong place; disorganised trolleys or mixed bags; trolleys that were not ready, so that the driver had to do the scanning himself; many trolleys and long loading times; damaged bags that had to go back to the warehouse. It also lists orders with heavy crates and checks that took time, traffic and parking problems, long stops and a payment problem.
 
-The data came from the day's operational cases and the actual reasons for each delay, not from a theoretical survey. One limit matters here: I did not keep the original Pareto table, with the number of cases per category and the cumulative percentage. So I cannot give you a sentence like “42% of delays came from missing bags”. It would look professional, and it would not be documented.
+The data came from the day's operational cases and the actual reason for each delay. I did not keep the original Pareto table, with the number of cases per category and the cumulative percentage, so I cannot give you a sentence like “42% of delays came from missing bags”. It would look professional, and it would not be documented. An analysis padded to look good is more dangerous than an incomplete analysis that admits its own limit.
 
-What I can say for certain is that once we split the delays by cause, patterns began to appear. Missing bags and problems with trolleys and loading come up several times in that report. And many of the problems that ended up as “driver delay” had started before the driver left the ramp.
+Once we split the delays by cause, though, patterns began to appear. Missing bags and problems with trolleys and loading come up several times in that report. And many of the problems that ended up as “driver delay” had started before the driver left the ramp.
 
 That is what makes Pareto such a strong tool, and such a dangerous one. Pareto does not give you the truth if the data you feed it does not describe the truth. If an incident ends up on the dashboard as “driver delay” while on the floor the delay had started in the warehouse, with a missing bag, a trolley that was not ready or a wrong load, the chart is mathematically correct and the operational conclusion is wrong. The wrong category leads you, with great confidence, to the wrong cause.
 
@@ -49,14 +49,12 @@ That much is documented. I do not have the third, fourth and fifth whys written 
 
 The method's purpose is to move from the question “who did it?” to the question “what in the process allowed this to happen, and what can we change?”
 
-It is very easy to stop at the person. “The driver took the wrong bag.” Stop there and you have found someone to blame, not necessarily a cause. The question that matters comes next: why was it possible for the driver to take the wrong bag? Was the bag in the wrong trolley? Were the bags mixed? Was the label wrong? Was a check missing before departure? Was the loading process so unclear that the same mistake could happen again with another driver?
+It is very easy to stop at the person. “The driver took the wrong bag.” Stop there and you have found someone to blame; whether you have found a cause is another matter. The question that matters comes next: why was it possible for the driver to take the wrong bag? Was the bag in the wrong trolley? Were the bags mixed? Was the label wrong? Was a check missing before departure? Was the loading process so unclear that the same mistake could happen again with another driver?
 
 When the only answer an analysis gives is “the employee was careless”, very often the analysis has ended too early. If tomorrow you put the next person into the same process and the same mistake can happen with them, you have not changed the system. You have only changed the name in the report.
 
 That case and others from the same period led to measures: double-checking the loading, not mixing bags in the same trolley or box, organising trolleys by route, clearer control of loading, following the scanning process, ramp audits, and clearer standards for the drivers and for dispatch. Operational responsibility was shared between the shift structure, dispatch and the people responsible for each process; as a manager, I followed the KPIs and the problems with the Shift Leaders and the dispatchers.
 
-In some months of that period the team met the damage target, though not in every month, and I do not have the measurements that would show a steady fall. Where the target was met, I see it as the result of the team's work and of a wider system of controls, not of a single 5 Why. I have no proof that this particular case contributed to it.
+In some months of that period the team met the damage target, though not in every month, and I do not have the measurements that would show a steady fall. Where the target was met, I put it down to the team's work and a wider system of controls rather than to any single 5 Why, and I have no proof that this particular case contributed to it.
 
-Boiled down to something a manager can use tomorrow, it comes to three things. Check the categories before you trust the chart. Do not stop the analysis at a person's name. And write down only as many “whys” as you have actually asked, then keep asking on the floor, not on the form.
-
-An analysis padded to look good is more dangerous than an incomplete analysis that admits its own limit.
+Boiled down to something a manager can use tomorrow, it comes to three things. Check the categories before you trust the chart. Do not stop the analysis at a person's name. And write down only as many “whys” as you have actually asked, then keep asking, out on the ramp.

@@ -40,7 +40,7 @@ diagram: improvement-paths
 
 Po të mund t'i thosha vetes një fjali të vetme në ditën e parë si Team Leader, do të ishte kjo: kur ta kesh zgjidhur një problem sot, pyet veten nëse nesër do të zgjidhej edhe pa ty. Me këtë pyetje mbyllet edhe kjo seri.
 
-Në last mile kam punuar me standardet e ngarkimit, të skanimit, të organizimit të rampës dhe të sigurisë, dhe kam hasur probleme me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar plotësisht me standardet. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. Ajo që nuk e kam është pikërisht rasti që premton titulli: një përmirësim imi i dokumentuar, që mbajti disa muaj dhe pastaj u braktis. Për një ese mbi përmirësimin që shuhet, kjo mungesë nuk është detaj. Është vetë tema.
+Në last mile kam punuar me standardet e ngarkimit, të skanimit, të organizimit të rampës dhe të sigurisë, dhe kam hasur probleme me procedura që nuk respektoheshin e me shoferë që ende nuk ishin mësuar plotësisht me standardet. Në hotel kam organizuar SOP-të për Front Office dhe Night Audit. Ajo që nuk e kam është pikërisht rasti që premton titulli: një përmirësim imi i dokumentuar, që mbajti disa muaj dhe pastaj u braktis. Në një ese për përmirësimin që shuhet, kjo mungesë zë vendin qendror.
 
 ## Pyetja që nuk di t'i përgjigjem
 
@@ -54,9 +54,9 @@ Kjo është ajo që do të doja më shumë ta kuptoja sot: nëse rezultatet e nj
 
 ## Pse shuhet një përmirësim
 
-Ajo që vijon është mendim, jo rast i provuar. Besoj se një përmirësim rrezikon kur varet vetëm nga personi që e nisi, në vend që të bëhet pjesë e mënyrës së përditshme të punës.
+Rast të provuar për këtë nuk kam, por besoj se një përmirësim rrezikon kur varet vetëm nga personi që e nisi, në vend që të bëhet pjesë e mënyrës së përditshme të punës.
 
-Qarkullimi i njerëzve e bën këtë rrezik më të dukshëm. Në last mile kishim shoferë të thirrur me pak njoftim dhe shoferë në ramp-up që ende nuk ishin mësuar me SOP-të. Kjo e bënte të vështirë që zbatimi të mbahej në të njëjtin nivel.
+Qarkullimi i njerëzve e bën këtë rrezik më të dukshëm. Në last mile kishim shoferë të thirrur me pak njoftim dhe shoferë ende në fazën e përshtatjes, që nuk ishin mësuar me SOP-të. Kjo e bënte të vështirë që zbatimi të mbahej në të njëjtin nivel.
 
 Një standard duhet të funksionojë edhe me ata që nuk e njohin prej vitesh. Nëse çdo punonjës i ri e mëson procesin vetëm duke parë një koleg, rezultati varet nga kush e trajnon. Për këtë kam shkruar te [“Shiko si e bëj unë” nuk është trajnim](/sq/insights/watch-how-i-do-it-is-not-training/). Këtu shihet çmimi: një standard që kalon vetëm nga njeriu te njeriu humbet diçka me çdo ndërrim njerëzish.
 
@@ -94,6 +94,6 @@ Por mbi të gjitha, do t'i thosha fjalinë me të cilën e nisa këtë ese.
 
 Mund të përmirësosh një KPI, të organizosh një rampë, të shkruash një procedurë ose të zgjidhësh një problem të vështirë. Një rezultat më i mirë do të thotë që përmirësimi ka kaluar provën e parë. Pas saj vijnë të tjerat: nëse rezultati mund të mbahet, nëse të porsaardhurit mund ta ndjekin të njëjtin standard dhe nëse procesi ecën pa ndërhyrjen tënde të vazhdueshme.
 
-**Një menaxher i mirë mund ta përmirësojë një ditë pune. Një sistem i mirë e mban përmirësimin gjallë edhe ditën kur ai nuk është aty.**
+**Një menaxher i mirë mund ta përmirësojë një ditë pune. Një sistem i mirë e mban përmirësimin gjallë edhe ditën kur menaxheri nuk është aty.**
 
 Fleta më poshtë është për një përmirësim që ke bërë vetë: plotësoje dhe kopjoje. Pyetja e saj e fundit është ajo që ka më shumë rëndësi.
