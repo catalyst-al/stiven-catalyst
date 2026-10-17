@@ -97,6 +97,10 @@ test("a Management Review issue → its text version → the next page in the re
   // The next-page button, then the arrow key, each turn one page; the address and the browser remember where.
   await page.locator("[data-book-next]").click();
   await expect(scrub).toHaveValue("3");
+  // The arrow keys turn pages only while the book is on screen (js/book.js watches at least 15% of it): with smooth
+  // scrolling the book may still be moving into view, so wait for it, and give the observer a moment to report it.
+  await expect(page.locator("[data-book]")).toBeInViewport({ ratio: 0.3 });
+  await page.waitForTimeout(100);
   await page.locator("body").press("ArrowRight");
   await expect(scrub).toHaveValue("4");
   await expect(where).not.toHaveText("");
