@@ -29,6 +29,14 @@ firstMove:
   - Wählen Sie einen Ablauf und zählen Sie, wie viele Stellen jemand öffnen muss, um ihn auszuführen.
   - Legen Sie diesen Ablauf dorthin, wo man ihn nach dem findet, was er tut, nicht nach dem Namen des Dokuments.
   - Bitten Sie einen Kollegen, ihm ohne Ihre Erklärung zu folgen, und notieren Sie, wo er stehen blieb.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "September 2026, Front Office und Night Audit im Hotel"
+  problem: "Die Informationen für Front Office und Night Audit waren auf SOPs, Checklisten, Videos, Screenshots und Notizen verteilt."
+  knew: "Um das richtige Verfahren zu finden und zu verstehen, musste man zwischen mehreren Quellen wechseln."
+  did: "Ich begann, ein Werkzeug im Browser zu bauen, geordnet nach den Aufgaben der Schicht, mit Suche, Checklisten und Erklärungen in Bildern."
+  happened: "Ein funktionierendes persönliches Projekt, in mehreren Schritten entwickelt. Eine anonymisierte öffentliche Fassung lässt sich ansehen."
+  unconfirmed: "Eingesparte Zeit, die Nutzung im Team oder eine offizielle Genehmigung: Es ist kein vom Hotel betriebenes System."
 ---
 
 Als ich mit Front Desk Control anfing, fehlte kein Dokument. Mein Problem war, darin während der Schicht zu finden, was ich brauchte.
@@ -71,7 +79,7 @@ Die öffentliche Version durfte keine echten Gästedaten enthalten, keine Reserv
 
 ## Was ich heute anders machen würde
 
-Die einzige Nutzung, die ich bestätigen kann, ist meine eigene, während ich das Werkzeug baute und dabei lernte. Es hat mir geholfen, die Information in eine klarere Struktur zu bringen. Vielleicht nützt es auch jemandem in der Einarbeitung; vorerst ist das eine Möglichkeit.
+Die einzige Nutzung, die ich bestätigen kann, ist meine eigene, während ich das Werkzeug baute und dabei lernte. Es hat mir geholfen, die Information in eine klarere Struktur zu bringen. Vielleicht nützt es auch jemandem in der Einarbeitung; vorerst ist das eine Möglichkeit. Front Desk Control ist ein persönliches Projekt, noch in Entwicklung: kein von einem Hotel genehmigtes oder betriebenes System, und wie viel Zeit es spart, habe ich nicht gemessen.
 
 Heute würde ich noch früher mit der Struktur der Information beginnen, bevor ich mich um das Aussehen der Seite kümmere. Ich würde zuerst festlegen, welche Fragen in einer Schicht am häufigsten auftauchen und welche Verfahren am wichtigsten sind, und dann die Antworten um diese Bedürfnisse herum bauen.
 

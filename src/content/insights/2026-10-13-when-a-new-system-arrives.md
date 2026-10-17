@@ -8,7 +8,7 @@ featured: true
 summary: "A new system becomes part of the work not when it is installed, but when people understand it, can use it and know what to do when it fails them."
 teaser: Installation changes the system. Training, communication and daily experience change the way people work.
 description: "A new system seen from the employee's side: “how it is used” versus “why it is changing”, six things before it arrives, and a card for them."
-deck: "The seventh essay in the series “The system is faster than you”: the move to a new planning system in August 2025 and the first weeks of training at the hotel, why a technically better system does not by itself make people ready, and six things that are needed before it arrives."
+deck: "The seventh essay in the series “The system is faster than you”: the move to a new planning system in August 2025 and the first weeks of training at another hotel, why a technically better system does not by itself make people ready, and six things that are needed before it arrives."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/six-sigma-dmaic/
@@ -44,11 +44,13 @@ firstMove:
 corrections:
   - date: "15 October 2026"
     t: "An earlier version dated the first weeks of training at the hotel to September 2026 and called it a new hotel. I have been the hotel’s Night Manager since November 2025, so both are removed."
+  - date: "17 October 2026"
+    t: "The correction of 15 October was itself inexact. The weeks of training were at another hotel in Frankfurt, in September 2026, where I was learning the procedures and systems of a different workplace; my Night Manager role is on record from November 2025. The month and “another hotel” are restored."
 ---
 
-In [The night the system went down](/insights/the-night-the-system-went-down/) I wrote about my first night of training at the hotel, when an update left the system unavailable for hours. I had come to learn the processes and spent most of the night waiting. This essay picks up where that one ended and turns from the system that stops to the system that arrives, and to the people who have to learn it.
+In [The night the system went down](/insights/the-night-the-system-went-down/) I wrote about my first night of training at another hotel, in September 2026, when an update left the system unavailable for about five hours. I had come to learn the processes and spent most of the night waiting. This essay picks up where that one ended and turns from the system that stops to the system that arrives, and to the people who have to learn it.
 
-Two experiences stand behind it. In last mile, the move to a new system for calculating routes and travel times was planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries, and calibrations were planned so that the change would affect the drivers as little as possible. At the hotel, there were my first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. Front Desk Control grew out of that period.
+Two experiences stand behind it. In last mile, the move to a new system for calculating routes and travel times was planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries, and calibrations were planned so that the change would affect the drivers as little as possible. At that hotel, in September 2026, there were my first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. Front Desk Control grew out of that period.
 
 In those weeks in last mile we had problems with loading, missing bags, disorganised trolleys and delays, and I have them documented. Nothing shows that the new system caused them; they may have had other causes. That is the easiest temptation when a new system arrives: billing it for everything that goes wrong in the first weeks.
 

@@ -36,6 +36,14 @@ firstMove:
   - Choose one procedure and count how many places someone has to open to carry it out.
   - Put that procedure where it can be found by what it does, not by the name of the document.
   - Ask a colleague to follow it without your explanation, and note where they stopped.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "September 2026, hotel Front Office and Night Audit"
+  problem: "The information for Front Office and Night Audit was spread across SOPs, checklists, videos, screenshots and notes."
+  knew: "Finding and understanding the right procedure meant moving between several sources."
+  did: "I began building a browser-based tool organised around the tasks of the shift, with search, checklists and visual explanations."
+  happened: "A working personal project, developed in several stages. An anonymised public version can be inspected."
+  unconfirmed: "Time saved, use by the team, or any official approval: it is not a system run by the hotel."
 ---
 
 When I started Front Desk Control, no document was missing. The trouble was finding what I needed in them during a shift.
@@ -78,7 +86,7 @@ The public version could not include real guest data, reservations, payment info
 
 ## What I would do differently today
 
-The only use I can confirm is my own, while I was building the tool and learning. It helped me bring the information into a clearer structure. It may also help someone in training; for now that is a possibility.
+The only use I can confirm is my own, while I was building the tool and learning. It helped me bring the information into a clearer structure. It may also help someone in training; for now that is a possibility. Front Desk Control is a personal project, still in development: it is not a system approved or run by a hotel, and I have no measurement of the time it saves.
 
 Today I would start even earlier with the structure of the information, before working on the look of the page. I would first define which questions come up most often during a shift and which procedures matter most, and then build the answers around those needs.
 

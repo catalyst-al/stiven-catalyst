@@ -5,10 +5,10 @@ category: Operations
 series: the-system
 status: published
 featured: true
-summary: "On my first night of training at the hotel, an update made the system unavailable for hours. It showed how much of the work depends on it."
+summary: "My first night of training at another hotel: an update left the system unavailable for about five hours, and showed how much of the work depends on it."
 teaser: When the system stops, you realise how much of your work depends on it and how well prepared you are to carry on.
 description: "A training night without the system: what a screen cannot teach, why the incident does not end when it is back, and five things to know before the shift."
-deck: "The sixth essay in the series “The system is faster than you”: the first night of training at the hotel, when an update stopped the system for hours, what that night showed about work that depends on a screen, and five things to know before the system stops."
+deck: "The sixth essay in the series “The system is faster than you”: the first night of training at another hotel, when an update made the system unavailable for about five hours, what that night showed about work that depends on a screen, and five things to know before the system stops."
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -41,9 +41,11 @@ firstMove:
 corrections:
   - date: "15 October 2026"
     t: "An earlier version dated this first night of training at the hotel to September 2026. I have been the hotel’s Night Manager since November 2025, so the date is removed."
+  - date: "17 October 2026"
+    t: "The correction of 15 October was itself inexact. The night was my first night of training at another hotel in Frankfurt, in September 2026. I had already worked in hotel night operations for years, with my Night Manager role on record from November 2025; at that hotel I was learning the procedures and systems of a different workplace. The month is restored; the exact date is not on record."
 ---
 
-On my first night of training at the hotel, I had come to learn the night processes. A little after midnight the hotel system became unavailable because of an update, and it stayed that way for about five hours, until close to morning.
+In September 2026 I began training at another hotel in Frankfurt. I had worked in hotel night operations for years; there I was learning the procedures, routines and systems of a different workplace. On my first night of training at that hotel, the hotel system was unavailable from around one in the morning until around six, about five hours, because of an update.
 
 This is the only scene in this series that is not a picture. It happened, and I was there. What I can report is what a trainee could see: the practical training that could not go ahead normally, and the colleague who was training me explaining that the practical part would continue on the following shift.
 
@@ -51,11 +53,11 @@ It was an interruption caused by an update; nothing I saw pointed to an unexpect
 
 ## Five hours of waiting
 
-For most of those hours I stood, waited and watched. The experienced colleague could explain the work to me but could not show it. The processes I had come to learn lived on the screen, and the screen was not there.
+The experienced colleague responsible for the shift dealt with the operational matters. I stayed in the back office for most of those hours and waited for the chance to go on learning. The work could be explained to me but not shown. The processes I had come to learn lived on the screen, and the screen was not there.
 
 The night had no drama; nobody ran. But it taught me something I had not planned to learn: how large the part of my work is that does not exist without the system. A new receptionist learns by watching someone click, fill in and check. When there is nothing to click, only the explanation is left, and an explanation is not enough for a process you have never seen.
 
-In [How I built Front Desk Control](/insights/how-i-built-front-desk-control/) I wrote about the period of the September trainings and about my need to organise the information into a clear structure. That night was, in a way, where that need began.
+That night belongs to the same September of training that I describe in [How I built Front Desk Control](/insights/how-i-built-front-desk-control/): weeks of learning one hotel’s Front Office and Night Audit processes from checklists, SOPs, reports, screenshots, videos and colleagues’ explanations, while I built the tool in stages. The night and the tool belong to the same period; the one did not cause the other.
 
 **When many processes depend on one system, its interruption affects not only the way people work, but also the way they learn.**
 
@@ -65,7 +67,7 @@ In the first essay of this series I promised an essay about “the night the sys
 
 I was in training, and I relied on my colleague. I do not know what information was used without the system, or whether it was written down anywhere. It would be easy to write that the staff kept everything they needed in their heads. It would sound good, and I cannot prove it.
 
-What I can say is smaller. From where I stood, a newcomer on the first night, I had no way of knowing what is done when the system is not there. I did not know where the procedure was, or whether there was one. That, for me, is the real finding of the night: what I did not know, and what nobody had had any reason to tell me before it happened.
+What I can say is smaller. From where I stood, new to that hotel on my first night there, I had no way of knowing what is done when the system is not there. I did not know where the procedure was, or whether there was one. That, for me, is the real finding of the night: what I did not know, and what nobody had had any reason to tell me before it happened.
 
 ## Coming back is not the end
 

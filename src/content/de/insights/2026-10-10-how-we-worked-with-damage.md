@@ -29,6 +29,14 @@ firstMove:
   - Nehmen Sie einen Schadensfall und fragen Sie, wo er passiert ist, nicht wer es war.
   - Prüfen Sie, ob es für diesen Schritt einen Standard gab und ob er an diesem Tag umsetzbar war.
   - Erfassen Sie den Fall nach Prozessschritt und Ursache, damit das Pareto nächste Woche eine Adresse hat.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "April und Juni 2025, Last Mile"
+  problem: "Die Schadensquote lag im April 2025 bei 1,06 %, bei einem Ziel von 0,8 %."
+  knew: "Einen zweiten dokumentierten Wert, 0,97 % im Juni 2025. Schäden gehörten zu den Kennzahlen, die wir verfolgten und besprachen."
+  did: "Wir verfolgten die Werte und sahen uns praktische Fragen bei Wagen, Verladen und Umgang mit der Ware an. Was ich heute daraus mitnehme: Wo ein Schaden gefunden wird, ist nicht unbedingt der Ort, an dem er entstand."
+  happened: "Zwei Berichte mit zwei verschiedenen Werten zu zwei Zeitpunkten."
+  unconfirmed: "Einen durchgehenden Trend, wo die Schäden entstanden, oder dass eine bestimmte Maßnahme den Unterschied verursachte. Der Wechsel von 1,06 % auf 0,97 % wird nicht als mein Ergebnis dargestellt."
 ---
 
 1,06 %. Das Ziel lag bei 0,8 %.
@@ -43,7 +51,7 @@ Die Schadensquote verfolgten wir in den operativen Berichten und im täglichen S
 
 Die Probleme, die wir sahen, waren operativ: wie die Ladung organisiert war, wie die Rollwagen genutzt und wie die Produkte platziert wurden. Im Betrieb gab es Standards für die Sicherheit, für die Organisation der Rampe, für das Verladen und für den Umgang mit den Produkten. Die Schichtleiter und Disponenten verfolgten die operativen Probleme, und die Abstimmung mit den DSPs gehörte zur täglichen Arbeit.
 
-In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über die Maßnahmen geschrieben, die in diesem Zeitraum aus den Fällen beim Verladen entstanden. Wo die meisten Schäden entstanden, weiß ich nicht genau.
+In [Pareto und 5 Why in der Praxis](/de/insights/pareto-and-5-why-in-practice/) habe ich über die Maßnahmen geschrieben, die wir in diesem Zeitraum gegen Probleme beim Verladen einführten. Wo die meisten Schäden entstanden, weiß ich nicht genau.
 
 ## Eine Quote hat keine Adresse
 

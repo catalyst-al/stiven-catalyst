@@ -46,7 +46,7 @@ At the hotel where I started as a Night Auditor, I had three nights of training,
 
 The training combined several things: the Night Audit checklist, separate documents for different processes, colleagues who showed me in practice what they did, videos and screenshots. I took notes.
 
-The first night had an obstacle as well. The system was down for several hours, so we could not train on the whole process; the night was more of an introduction to the work and the surroundings. I wrote about it in [The first 30 days](/insights/the-first-30-days/).
+The first night had an obstacle as well. Because of an update the system was unavailable for several hours, so we could not train on the whole process; the night was more of an introduction to the work and the surroundings. I wrote about it in [The first 30 days](/insights/the-first-30-days/).
 
 What I missed most was a single, clear path from start to finish.
 

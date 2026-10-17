@@ -41,7 +41,7 @@ In dem Hotel, in dem ich als Night Auditor angefangen habe, hatte ich drei Näch
 
 Sie setzte sich aus mehreren Teilen zusammen: der Night-Audit-Checkliste, einzelnen Dokumenten für verschiedene Prozesse, Kolleginnen und Kollegen, die mir praktisch zeigten, was sie taten, Videos und Screenshots. Ich habe mir Notizen gemacht.
 
-Die erste Nacht hatte zudem ein Hindernis. Das System fiel für mehrere Stunden aus, sodass an eine normale Einarbeitung in den ganzen Prozess nicht zu denken war; die Nacht wurde eher zu einem Kennenlernen der Arbeit und der Umgebung. Darüber habe ich in [Die ersten 30 Tage](/de/insights/the-first-30-days/) geschrieben.
+Die erste Nacht hatte zudem ein Hindernis. Wegen eines Updates war das System mehrere Stunden nicht verfügbar, sodass an eine normale Einarbeitung in den ganzen Prozess nicht zu denken war; die Nacht wurde eher zu einem Kennenlernen der Arbeit und der Umgebung. Darüber habe ich in [Die ersten 30 Tage](/de/insights/the-first-30-days/) geschrieben.
 
 Am meisten gefehlt hat mir ein einziger, klarer Weg vom Anfang bis zum Ende.
 

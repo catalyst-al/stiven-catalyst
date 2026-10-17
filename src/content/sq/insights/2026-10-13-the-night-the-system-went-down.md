@@ -5,10 +5,10 @@ category: Operacione
 series: the-system
 status: published
 featured: true
-summary: "Natën e parë të trajnimit tim në hotel, një përditësim e ndali sistemin për orë të tëra. Ajo natë tregoi sa shumë nga puna varet prej tij."
+summary: "Natën e parë të trajnimit në një hotel tjetër, një përditësim e la sistemin jashtë përdorimit për rreth pesë orë. Pashë sa shumë nga puna varet prej tij."
 teaser: Kur sistemi ndalet, kupton sa shumë nga puna jote varet prej tij dhe sa mirë je përgatitur për të vazhduar.
 description: "Një natë trajnimi pa sistem: çfarë nuk mësohet dot nga ekrani, pse incidenti nuk mbaron kur sistemi rikthehet dhe pesë gjëra për t'i ditur para turnit."
-deck: "Eseja e gjashtë e serisë “Sistemi është më i shpejtë se ti”: nata e parë e trajnimit në hotel, kur një përditësim e ndali sistemin për orë të tëra, çfarë tregoi ajo natë për punën që varet nga një ekran dhe pesë gjëra për t'i ditur para se sistemi të ndalet."
+deck: "Eseja e gjashtë e serisë “Sistemi është më i shpejtë se ti”: nata e parë e trajnimit në një hotel tjetër, kur një përditësim e la sistemin jashtë përdorimit për rreth pesë orë, çfarë tregoi ajo natë për punën që varet nga një ekran dhe pesë gjëra për t'i ditur para se sistemi të ndalet."
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -35,9 +35,11 @@ firstMove:
 corrections:
   - date: "15 tetor 2026"
     t: "Një version i mëparshëm e datonte këtë natë të parë trajnimi në hotel në shtator 2026. Jam Night Manager i hotelit që nga nëntori 2025, prandaj data u hoq."
+  - date: "17 tetor 2026"
+    t: "Korrigjimi i 15 tetorit ishte vetë i pasaktë. Ishte nata ime e parë e trajnimit në një hotel tjetër në Frankfurt, në shtator 2026. Kisha vite që punoja në operacionet e natës në hotele, me rolin e Night Manager të dokumentuar që nga nëntori 2025; në atë hotel po mësoja procedurat dhe sistemet e një vendi tjetër pune. Muaji u rikthye; data e saktë nuk është e dokumentuar."
 ---
 
-Natën e parë të trajnimit në hotel kisha ardhur për të mësuar proceset e natës. Pak pas mesnatës, sistemi i hotelit u ndal për shkak të një përditësimi dhe mbeti ashtu për rreth pesë orë, deri afër mëngjesit.
+Në shtator 2026 nisa trajnimin në një hotel tjetër në Frankfurt. Kisha vite që punoja në operacionet e natës në hotele; aty po mësoja procedurat, rutinat dhe sistemet e një vendi tjetër pune. Natën e parë të trajnimit në atë hotel, sistemi i hotelit nuk ishte në përdorim nga rreth ora një e natës deri rreth gjashtë e mëngjesit, rreth pesë orë, për shkak të një përditësimi.
 
 Kjo është e vetmja skenë në këtë seri që nuk është përfytyrim. Ndodhi, dhe unë isha aty. Mund të tregoj vetëm atë që shihte dikush në trajnim: trajnimi praktik nuk mund të zhvillohej normalisht, dhe kolegu që po më trajnonte më shpjegoi se pjesa praktike do të vazhdonte në turnin pasardhës.
 
@@ -45,11 +47,11 @@ Ishte një ndërprerje për shkak të një përditësimi; asgjë nga ç'pashë n
 
 ## Pesë orë pritje
 
-Pjesën më të madhe të atyre orëve qëndrova në këmbë, duke pritur e duke vëzhguar. Kolegu me përvojë mund të ma shpjegonte punën, por jo të ma tregonte. Proceset që kisha ardhur t'i mësoja jetonin në ekran, dhe ekrani nuk ishte aty.
+Kolegu me përvojë që ishte përgjegjës për turnin merrej me çështjet operative. Unë qëndrova pjesën më të madhe të atyre orëve në zyrën e pasme dhe prita rastin për të vazhduar të mësoja. Puna mund të më shpjegohej, por jo të më tregohej. Proceset që kisha ardhur t'i mësoja jetonin në ekran, dhe ekrani nuk ishte aty.
 
 Nata kaloi pa drama; askush nuk vrapoi. Por më mësoi diçka që nuk e kisha në plan: sa e madhe është pjesa e punës sime që nuk ekziston pa sistemin. Një recepsionist i porsaardhur mëson duke parë dikë që klikon, plotëson dhe kontrollon. Kur s'ka ku të klikosh, mbetet vetëm shpjegimi, dhe shpjegimi nuk mjafton për një proces që nuk e ke parë kurrë.
 
-Te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/) shkrova për periudhën e trajnimeve të shtatorit dhe për nevojën që kisha ta rendisja informacionin në një strukturë të qartë. Në një farë mënyre, ajo nevojë nisi atë natë.
+Ajo natë i përket të njëjtit shtator trajnimi që e përshkruaj te [Si e ndërtova Front Desk Control](/sq/insights/how-i-built-front-desk-control/): javë kur mësoja proceset e Front Office dhe Night Audit të një hoteli nga listat e kontrollit, SOP-të, raportet, pamjet e ekranit, videot dhe shpjegimet e kolegëve, ndërsa e ndërtoja mjetin me disa hapa. Nata dhe mjeti i përkasin së njëjtës periudhë; njëra nuk e shkaktoi tjetrin.
 
 **Kur shumë procese varen nga një sistem, ndërprerja e tij ndikon jo vetëm te mënyra si punojnë njerëzit, por edhe te mënyra si mësojnë.**
 
@@ -59,7 +61,7 @@ Në esenë e parë të kësaj serie premtova një ese për “natën kur ra sist
 
 Isha në trajnim dhe mbështetesha në kolegun. Nuk e di çfarë informacioni u përdor pa sistemin, as nëse ishte shkruar diku. Do të ishte e lehtë të shkruaja se stafi i kishte në kokë të gjitha informacionet e nevojshme. Do të tingëllonte bukur, por nuk e provoj dot.
 
-Ajo që mund të them është më modeste. Nga vendi ku isha, si i porsaardhur në natën e parë, nuk kisha si ta dija çfarë bëhet kur sistemi nuk është aty. Nuk e dija ku ishte procedura, madje as nëse kishte një të tillë. Ky është, për mua, zbulimi i vërtetë i asaj nate: çfarë nuk dija unë, dhe që askush nuk kishte pasur arsye të ma thoshte para se të ndodhte.
+Ajo që mund të them është më modeste. Nga vendi ku isha, i porsaardhur në atë hotel, në natën time të parë atje, nuk kisha si ta dija çfarë bëhet kur sistemi nuk është aty. Nuk e dija ku ishte procedura, madje as nëse kishte një të tillë. Ky është, për mua, zbulimi i vërtetë i asaj nate: çfarë nuk dija unë, dhe që askush nuk kishte pasur arsye të ma thoshte para se të ndodhte.
 
 ## Rikthimi nuk është fundi
 

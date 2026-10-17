@@ -8,7 +8,7 @@ featured: true
 summary: "Teil der Arbeit wird ein neues System nicht durch die Installation, sondern wenn die Menschen es verstehen, bedienen und wissen, was bei Problemen zu tun ist."
 teaser: Die Installation verändert das System. Schulung, Kommunikation und die tägliche Erfahrung verändern die Art, wie Menschen arbeiten.
 description: "Ein neues System aus Sicht der Mitarbeiter: „wie man es benutzt“ und „warum es sich ändert“, sechs Dinge, bevor es kommt, und eine Karte dafür."
-deck: "Der siebte Essay der Reihe „Das System ist schneller als Sie“: der Wechsel zu einem neuen Planungssystem im August 2025 und die ersten Wochen der Einarbeitung im Hotel, warum ein technisch besseres System die Menschen nicht von selbst bereit macht, und sechs Dinge, die es braucht, bevor es kommt."
+deck: "Der siebte Essay der Reihe „Das System ist schneller als Sie“: der Wechsel zu einem neuen Planungssystem im August 2025 und die ersten Wochen der Einarbeitung in einem anderen Hotel, warum ein technisch besseres System die Menschen nicht von selbst bereit macht, und sechs Dinge, die es braucht, bevor es kommt."
 relatedTools:
   - /tools/six-sigma-dmaic/
   - /tools/shift-handover/
@@ -38,11 +38,13 @@ firstMove:
 corrections:
   - date: "15. Oktober 2026"
     t: "Eine frühere Fassung datierte die ersten Wochen der Einarbeitung im Hotel auf September 2026 und nannte es ein neues Hotel. Ich bin seit November 2025 Night Manager des Hotels, daher ist beides entfernt."
+  - date: "17. Oktober 2026"
+    t: "Die Korrektur vom 15. Oktober war selbst ungenau. Die Wochen der Einarbeitung waren in einem anderen Hotel in Frankfurt, im September 2026, wo ich die Abläufe und Systeme eines anderen Arbeitsplatzes lernte; als Night Manager bin ich seit November 2025 belegt. Der Monat und „ein anderes Hotel“ sind wiederhergestellt."
 ---
 
-In [Die Nacht, in der das System ausfiel](/de/insights/the-night-the-system-went-down/) habe ich über meine erste Nacht der Einarbeitung im Hotel geschrieben, als ein Update das System stundenlang lahmlegte. Ich war gekommen, um die Abläufe zu lernen, und verbrachte den größten Teil der Nacht mit Warten. Dieser Essay setzt dort an, wo jener aufhörte, und wendet sich vom System, das stillsteht, dem System zu, das kommt, und den Menschen, die es lernen müssen.
+In [Die Nacht, in der das System ausfiel](/de/insights/the-night-the-system-went-down/) habe ich über meine erste Nacht der Einarbeitung in einem anderen Hotel geschrieben, im September 2026, als das System wegen eines Updates rund fünf Stunden nicht verfügbar war. Ich war gekommen, um die Abläufe zu lernen, und verbrachte den größten Teil der Nacht mit Warten. Dieser Essay setzt dort an, wo jener aufhörte, und wendet sich vom System, das stillsteht, dem System zu, das kommt, und den Menschen, die es lernen müssen.
 
-Hinter ihm stehen zwei Erfahrungen. In der Last Mile war für den 19. August 2025 der Wechsel zu einem neuen System für die Berechnung von Routen und Fahrzeiten geplant. Nach den Informationen aus jener Zeit sollte es die Planung genauer machen und unrealistische Routen verringern, und vorgesehen waren Kalibrierungen, damit die Umstellung die Fahrer so wenig wie möglich trifft. Im Hotel waren es meine ersten Wochen der Einarbeitung: die Erklärungen der Kollegen, die SOPs, die visuellen Materialien und die Videos, und Informationen, die nicht immer an einem Ort lagen. Aus dieser Zeit ist Front Desk Control entstanden.
+Hinter ihm stehen zwei Erfahrungen. In der Last Mile war für den 19. August 2025 der Wechsel zu einem neuen System für die Berechnung von Routen und Fahrzeiten geplant. Nach den Informationen aus jener Zeit sollte es die Planung genauer machen und unrealistische Routen verringern, und vorgesehen waren Kalibrierungen, damit die Umstellung die Fahrer so wenig wie möglich trifft. In jenem Hotel waren es im September 2026 meine ersten Wochen der Einarbeitung: die Erklärungen der Kollegen, die SOPs, die visuellen Materialien und die Videos, und Informationen, die nicht immer an einem Ort lagen. Aus dieser Zeit ist Front Desk Control entstanden.
 
 In jenen Wochen hatten wir in der Last Mile Probleme mit der Beladung, fehlenden Taschen, ungeordneten Trolleys und Verspätungen, und ich habe sie dokumentiert. Nichts zeigt, dass das neue System sie verursacht hat; sie können andere Ursachen gehabt haben. Das ist die bequemste Versuchung, wenn ein neues System kommt: ihm alles in Rechnung zu stellen, was in den ersten Wochen schiefgeht.
 

@@ -5,10 +5,10 @@ category: Betrieb
 series: the-system
 status: published
 featured: true
-summary: "In meiner ersten Einarbeitungsnacht im Hotel stand das System wegen eines Updates stundenlang still. Da sah ich, wie viel der Arbeit daran hängt."
+summary: "Erste Einarbeitungsnacht in einem anderen Hotel: Ein Update legte das System rund fünf Stunden still. Da sah ich, wie viel der Arbeit daran hängt."
 teaser: Wenn das System stillsteht, merken Sie, wie viel Ihrer Arbeit davon abhängt und wie gut Sie vorbereitet sind, weiterzumachen.
 description: "Eine Einarbeitungsnacht ohne System: was ein Bildschirm nicht lehrt, warum der Vorfall mit seiner Rückkehr nicht endet, und fünf Dinge vor der Schicht."
-deck: "Der sechste Essay der Reihe „Das System ist schneller als Sie“: die erste Einarbeitungsnacht im Hotel, als ein Update das System stundenlang stilllegte, was diese Nacht über Arbeit gezeigt hat, die von einem Bildschirm abhängt, und fünf Dinge, die Sie wissen sollten, bevor das System stillsteht."
+deck: "Der sechste Essay der Reihe „Das System ist schneller als Sie“: die erste Einarbeitungsnacht in einem anderen Hotel, als das System wegen eines Updates rund fünf Stunden nicht verfügbar war, was diese Nacht über Arbeit gezeigt hat, die von einem Bildschirm abhängt, und fünf Dinge, die Sie wissen sollten, bevor das System stillsteht."
 relatedTools:
   - /tools/shift-handover/
 checklist:
@@ -35,9 +35,11 @@ firstMove:
 corrections:
   - date: "15. Oktober 2026"
     t: "Eine frühere Fassung datierte diese erste Einarbeitungsnacht im Hotel auf September 2026. Ich bin seit November 2025 Night Manager des Hotels, daher ist das Datum entfernt."
+  - date: "17. Oktober 2026"
+    t: "Die Korrektur vom 15. Oktober war selbst ungenau. Es war meine erste Einarbeitungsnacht in einem anderen Hotel in Frankfurt, im September 2026. Ich arbeitete schon seit Jahren im Nachtbetrieb von Hotels, als Night Manager belegt seit November 2025; in jenem Hotel lernte ich die Abläufe und Systeme eines anderen Arbeitsplatzes. Der Monat ist wiederhergestellt; das genaue Datum ist nicht belegt."
 ---
 
-In meiner ersten Einarbeitungsnacht im Hotel wollte ich die Nachtprozesse lernen. Kurz nach Mitternacht fiel das Hotelsystem wegen eines Updates aus, und zwar für etwa fünf Stunden, bis gegen Morgen.
+Im September 2026 begann ich meine Einarbeitung in einem anderen Hotel in Frankfurt. Ich arbeitete schon seit Jahren im Nachtbetrieb von Hotels; dort lernte ich die Abläufe, Routinen und Systeme eines anderen Arbeitsplatzes. In meiner ersten Einarbeitungsnacht in diesem Hotel war das Hotelsystem wegen eines Updates von etwa ein Uhr bis etwa sechs Uhr morgens nicht verfügbar, rund fünf Stunden.
 
 Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei. Berichten kann ich, was man in der Einarbeitung sehen konnte: dass die praktische Einarbeitung nicht wie vorgesehen stattfinden konnte und dass mir der Kollege, der mich einarbeitete, erklärte, der praktische Teil gehe in der nächsten Schicht weiter.
 
@@ -45,11 +47,11 @@ Es war eine Unterbrechung wegen eines Updates; nichts, was ich sah, deutete auf 
 
 ## Fünf Stunden Warten
 
-Die meiste Zeit stand ich da, wartete und sah zu. Der erfahrene Kollege konnte mir die Arbeit erklären, aber nicht zeigen. Die Prozesse, die ich lernen wollte, lebten auf dem Bildschirm, und der Bildschirm war nicht da.
+Der erfahrene Kollege, der für die Schicht verantwortlich war, kümmerte sich um die betrieblichen Angelegenheiten. Ich blieb die meiste Zeit im Backoffice und wartete auf die Gelegenheit, weiterzulernen. Man konnte mir die Arbeit erklären, aber nicht zeigen. Die Prozesse, die ich lernen wollte, lebten auf dem Bildschirm, und der Bildschirm war nicht da.
 
 Die Nacht verlief ohne Dramatik; niemand rannte. Aber sie brachte mir etwas bei, das nicht auf dem Plan stand: wie groß der Teil meiner Arbeit ist, der ohne das System nicht existiert. Eine neue Rezeptionskraft lernt, indem sie jemandem zusieht, der klickt, ausfüllt und prüft. Gibt es nichts zu klicken, bleibt nur die Erklärung, und eine Erklärung reicht nicht für einen Prozess, den man nie gesehen hat.
 
-In [Wie ich Front Desk Control gebaut habe](/de/insights/how-i-built-front-desk-control/) habe ich über die Zeit der Einarbeitungen im September geschrieben und darüber, dass ich die Informationen in eine klare Struktur bringen musste. In gewisser Weise begann dieses Bedürfnis in jener Nacht.
+Diese Nacht gehört in denselben September der Einarbeitung, den ich in [Wie ich Front Desk Control gebaut habe](/de/insights/how-i-built-front-desk-control/) beschreibe: Wochen, in denen ich die Front-Office- und Night-Audit-Prozesse eines Hotels aus Checklisten, SOPs, Berichten, Screenshots, Videos und den Erklärungen von Kollegen lernte und das Werkzeug in mehreren Schritten baute. Die Nacht und das Werkzeug gehören in dieselbe Zeit; das eine hat das andere nicht ausgelöst.
 
 **Wenn viele Prozesse von einem System abhängen, wirkt sich seine Unterbrechung nicht nur darauf aus, wie Menschen arbeiten, sondern auch darauf, wie sie lernen.**
 
@@ -59,7 +61,7 @@ Im ersten Essay dieser Reihe habe ich einen Essay über „die Nacht, in der das
 
 Ich war in der Einarbeitung und habe mich auf den Kollegen verlassen. Welche Informationen ohne das System genutzt wurden und ob sie irgendwo aufgeschrieben waren, weiß ich nicht. Es wäre leicht zu schreiben, das Personal habe alles Nötige im Kopf gehabt. Das klänge gut, beweisen kann ich es nicht.
 
-Was ich sagen kann, ist bescheidener. Von meinem Platz aus, als Neuer in der ersten Nacht, konnte ich nicht wissen, was man tut, wenn das System nicht da ist. Ich wusste nicht, wo das Verfahren lag, nicht einmal, ob es eines gab. Das ist für mich die eigentliche Erkenntnis dieser Nacht: was ich nicht wusste, und dass niemand einen Grund gehabt hatte, es mir vorher zu sagen.
+Was ich sagen kann, ist bescheidener. Von meinem Platz aus, als Neuer in diesem Hotel, in meiner ersten Nacht dort, konnte ich nicht wissen, was man tut, wenn das System nicht da ist. Ich wusste nicht, wo das Verfahren lag, nicht einmal, ob es eines gab. Das ist für mich die eigentliche Erkenntnis dieser Nacht: was ich nicht wusste, und dass niemand einen Grund gehabt hatte, es mir vorher zu sagen.
 
 ## Die Rückkehr ist nicht das Ende
 

@@ -29,6 +29,14 @@ checklist:
     - The chain of whys stops at a process, not at a name.
     - Only the whys that were really asked are written down.
     - The countermeasure has an owner and a date on which it is checked.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "August 2025, last mile"
+  problem: "A documented delay report with 19 cases: missing bags, wrong labels, mixed trolleys, loading problems and other causes."
+  knew: "The reported reason for each delay. Some problems recorded at the driver stage had started earlier, during loading."
+  did: "As part of my operational responsibilities, I looked at the causes instead of treating every delay as the driver’s performance. Measures developed in that period included additional loading checks, better trolley organisation, scanning controls and ramp audits."
+  happened: "The report gives concrete examples of the problems and of how we approached them."
+  unconfirmed: "The original Pareto distribution, verified before-and-after results, or a measurable improvement that can be attributed to this 19-case analysis."
 ---
 
 In last mile, Pareto and 5 Why were part of the daily analysis of the KPIs, above all for delays, damage, incomplete orders and loading time. That is why I want to describe them the way I used them, day to day.
@@ -53,8 +61,6 @@ It is very easy to stop at the person. “The driver took the wrong bag.” Stop
 
 When the only answer an analysis gives is “the employee was careless”, very often the analysis has ended too early. If tomorrow you put the next person into the same process and the same mistake can happen with them, you have not changed the system. You have only changed the name in the report.
 
-That case and others from the same period led to measures: double-checking the loading, not mixing bags in the same trolley or box, organising trolleys by route, clearer control of loading, following the scanning process, ramp audits, and clearer standards for the drivers and for dispatch. Operational responsibility was shared between the shift structure, dispatch and the people responsible for each process; as a manager, I followed the KPIs and the problems with the Shift Leaders and the dispatchers.
-
-In some months of that period the team met the damage target, though not in every month. Where the target was met, I put it down to the team's work and a wider system of controls rather than to any single 5 Why.
+In that period we put measures in place against problems of this kind: double-checking the loading, not mixing bags in the same trolley or box, organising trolleys by route, clearer control of loading, following the scanning process, ramp audits, and clearer standards for the drivers and for dispatch. Operational responsibility was shared between the shift structure, dispatch and the people responsible for each process; as a manager, I followed the KPIs and the problems with the Shift Leaders and the dispatchers.
 
 Boiled down to something a manager can use tomorrow, it comes to three things. Check the categories before you trust the chart. Do not stop the analysis at a person's name. And write down only as many “whys” as you have actually asked, then keep asking, out on the ramp.

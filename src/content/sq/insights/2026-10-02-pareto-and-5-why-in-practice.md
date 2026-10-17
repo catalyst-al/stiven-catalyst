@@ -21,6 +21,14 @@ checklist:
     - Zinxhiri i pse-ve ndalon te një proces, jo te një emër.
     - Janë shkruar vetëm pse-të që u pyetën vërtet.
     - Kundërmasa ka një përgjegjës dhe një datë kur kontrollohet.
+# The case behind the essay, as the record shows it (layouts/article.njk): what can and cannot be confirmed.
+caseRecord:
+  when: "Gusht 2025, milja e fundit"
+  problem: "Një raport i dokumentuar vonesash me 19 raste: çanta që mungonin, etiketa të gabuara, karroca të përziera, probleme ngarkimi dhe shkaqe të tjera."
+  knew: "Arsyen e raportuar për çdo vonesë. Disa probleme të regjistruara te shoferi kishin nisur më herët, gjatë ngarkimit."
+  did: "Si pjesë e përgjegjësive të mia operative, shqyrtova shkaqet në vend që çdo vonesë ta trajtoja si performancë të shoferit. Masat e asaj periudhe përfshinin kontrolle shtesë të ngarkimit, renditje më të mirë të karrocave, kontrolle të skanimit dhe auditime në rampë."
+  happened: "Raporti jep shembuj konkretë të problemeve dhe të mënyrës si i trajtuam."
+  unconfirmed: "Shpërndarjen origjinale të Pareto-s, rezultate të verifikuara para dhe pas, apo një përmirësim të matshëm që t’i atribuohet kësaj analize të 19 rasteve."
 ---
 
 Në miljen e fundit, Pareto dhe 5 Why ishin pjesë e analizës së përditshme të KPI-ve, sidomos për vonesat, dëmet, porositë e paplota dhe kohën e ngarkimit. Prandaj dua t'i përshkruaj ashtu siç i kam përdorur në punën e përditshme.
@@ -45,8 +53,6 @@ Qëllimi i metodës është të të çojë nga pyetja “kush e bëri?” te pye
 
 Kur e vetmja përgjigje që jep një analizë është “punonjësi ishte i pakujdesshëm”, shumë shpesh analiza ka mbaruar para kohe. Nëse nesër në të njëjtin proces vjen personi tjetër dhe i njëjti gabim mund t'i ndodhë edhe atij, nuk e ke ndryshuar sistemin. Ke ndërruar vetëm emrin në raport.
 
-Nga ai rast dhe nga raste të tjera të së njëjtës periudhë dolën masa: kontrolli i dyfishtë i ngarkimit, mospërzierja e çantave në të njëjtën karrocë ose kuti, renditja e karrocave sipas itinerarit, kontroll më i qartë i ngarkimit, respektimi i procesit të skanimit, auditime të rampës dhe standarde më të qarta për shoferët dhe për dispeçimin. Përgjegjësia operative ndahej mes strukturës së turnit, dispeçimit dhe njerëzve përgjegjës për çdo proces; si menaxher, unë i ndiqja KPI-të dhe problemet me drejtuesit e turnit dhe dispeçerët.
-
-Në disa muaj të asaj periudhe ekipi e arriti objektivin e dëmeve, por jo në çdo muaj. Aty ku objektivi u arrit, e shoh si meritë të punës së ekipit dhe të një sistemi më të gjerë kontrolli, jo të ndonjë 5 Why të vetëm.
+Në atë periudhë vumë në zbatim masa kundër problemeve të këtij lloji: kontrolli i dyfishtë i ngarkimit, mospërzierja e çantave në të njëjtën karrocë ose kuti, renditja e karrocave sipas itinerarit, kontroll më i qartë i ngarkimit, respektimi i procesit të skanimit, auditime të rampës dhe standarde më të qarta për shoferët dhe për dispeçimin. Përgjegjësia operative ndahej mes strukturës së turnit, dispeçimit dhe njerëzve përgjegjës për çdo proces; si menaxher, unë i ndiqja KPI-të dhe problemet me drejtuesit e turnit dhe dispeçerët.
 
 Po ta përmbledh në diçka që një menaxher mund ta përdorë nesër, janë tri gjëra. Kontrollo kategoritë para se t'i besosh grafikut. Mos e ndal analizën te emri i një personi. Dhe shkruaj vetëm aq “pse” sa ke pyetur vërtet, pastaj vazhdo të pyesësh atje, në rampë.
