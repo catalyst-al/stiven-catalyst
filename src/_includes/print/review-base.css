@@ -113,6 +113,19 @@
 .mr .pg .head-split { display: grid; grid-template-columns: 1fr 44mm; gap: 5mm; align-items: start; }
 .mr .pg .head-split img { width: 44mm; height: 49mm; object-fit: cover; border-radius: 2.6mm; display: block; }
 
+/* A page whose text would run into the block at its foot is set a little tighter, in up to three steps:
+   src/_data/pageFit.json, which scripts/page-fit.mjs writes from measuring every page in Chromium, gives the step of
+   each such page, and the page templates add fit-1, fit-2 or fit-3 to it, in the print and the reader alike. Every
+   block of the page below its title, and what the block at the foot holds, is drawn 4, 8 or 12 per cent smaller
+   (zoom): the type, its line spacing and the space between the blocks together, so the page keeps its proportions
+   and holds a little more. The running head, the kicker, the title, the foot and whatever is pinned to the page keep
+   their size and place; on a cover, the subtitle, the figure and the list of the issue tighten, the masthead and the
+   picture do not. */
+.mr .pg.fit-1 { --fit: .96; } .mr .pg.fit-2 { --fit: .92; } .mr .pg.fit-3 { --fit: .88; }
+.mr .pg:is(.fit-1, .fit-2, .fit-3):not(.cover) > :not(.run, .foot, .bottom, .kicker, h2, .head-split, .tr-layers, .motto, .edition),
+.mr .pg:is(.fit-1, .fit-2, .fit-3) > .bottom > *,
+.mr .pg.cover:is(.fit-1, .fit-2, .fit-3) :is(.cover-sub, .wk-figure-cover, .wk-teasers, .inside) { zoom: var(--fit); }
+
 /* Cover */
 .mr .pg.cover { padding: 13mm 13mm 12mm; display: flex; flex-direction: column; }
 .mr .pg .mast { display: flex; justify-content: space-between; align-items: baseline; font-size: 6.6pt; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); font-weight: 700; }

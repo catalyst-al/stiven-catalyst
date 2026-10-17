@@ -108,3 +108,8 @@
 .tg .pg .open { position: absolute; left: 13mm; right: 13mm; bottom: 19mm; display: flex; justify-content: space-between; align-items: center; background: color-mix(in srgb, var(--family) 10%, transparent); border: .25mm solid color-mix(in srgb, var(--family) 40%, transparent); border-radius: 2.5mm; padding: 2.4mm 3.4mm; font-size: 7.8pt; }
 .tg .pg .open b { color: var(--family); font-weight: 600; }
 .tg .pg .open span { color: var(--ink); }
+/* A page whose text would run into the box that opens its tool, or into the foot, is set a little tighter, as the
+   pages of the Management Review are (print/review-base.css): src/_data/pageFit.json gives its step, fit-1 to fit-3,
+   and what the page says below its head is drawn 4, 8 or 12 per cent smaller. */
+.tg .pg.fit-1 { --fit: .96; } .tg .pg.fit-2 { --fit: .92; } .tg .pg.fit-3 { --fit: .88; }
+.tg .pg:is(.fit-1, .fit-2, .fit-3):not(.cover, .back) > :not(.run, .foot, .open, .tool-head, .kicker, h2) { zoom: var(--fit); }

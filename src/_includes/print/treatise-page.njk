@@ -8,8 +8,11 @@
 <header class="run"><span>{{ W.short }} · {{ L.vol }} {{ volume.number }} · {{ V.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
 <footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
 {%- endmacro -%}
+{#- The step this page is set tighter by, if it needs one (src/_data/pageFit.json, print/review-base.css). #}
+{%- set fit = pageFit[volume.slug][lang][n] -%}
+{%- set fitClass = (" fit-" + fit) if fit else "" -%}
 {%- if page.type == "cover" %}
-<section class="pg cover wk-cover tr-cover">
+<section class="pg cover wk-cover tr-cover{{ fitClass }}">
   <div class="mast"><span>Stiven Catalyst</span><span class="tr-mast-note">{{ W.mastNote[0] }}<br>{{ W.mastNote[1] }}</span></div>
   <div class="mast-rule"></div>
   <div class="cover-main">
@@ -33,7 +36,7 @@
   <p class="cover-foot">stivencatalyst.com</p>
 </section>
 {%- elif page.type == "intro" %}
-<section class="pg tr-intro">
+<section class="pg tr-intro{{ fitClass }}">
   {{ chrome(n, page.run) }}
   <p class="kicker">{{ W.intro.title }} · {{ L.volume }} {{ volume.number }}</p>
   <h2>{{ page.title[0] }}<span class="accent">{{ page.title[1] }}</span></h2>
@@ -46,7 +49,7 @@
   <div class="wk-legend-box">{% for item in V.contract %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
 </section>
 {%- elif page.type == "contents" %}
-<section class="pg tr-toc">
+<section class="pg tr-toc{{ fitClass }}">
   {{ chrome(n, page.run) }}
   <p class="kicker">{{ W.contentsPage.kicker }}</p>
   <h2>{{ W.contentsPage.title[0] }}<span class="accent">{{ W.contentsPage.title[1] }}</span></h2>
@@ -62,7 +65,7 @@
   </ol>
 </section>
 {%- elif page.type == "sources" %}
-<section class="pg is-dense tr-sources">
+<section class="pg is-dense tr-sources{{ fitClass }}">
   {{ chrome(n, L.sources) }}
   <p class="kicker">{{ W.sourcesPage.kicker }}</p>
   <h2>{{ W.sourcesPage.title[0] }}<span class="accent">{{ W.sourcesPage.title[1] }}</span></h2>
@@ -73,7 +76,7 @@
   {%- endif %}
 </section>
 {%- elif page.type == "back" %}
-<section class="pg back">
+<section class="pg back{{ fitClass }}">
   <img src="{{ treatise.cover.src }}" alt="" width="{{ treatise.cover.width }}" height="{{ treatise.cover.height }}">
   <div class="masthead">Management<span class="accent">Review</span></div>
   <p class="cover-tag">{{ W.tagline }}</p>
@@ -83,7 +86,7 @@
   <p class="edition">{{ W.short }} · {{ L.volume }} {{ volume.number }} · {{ V.date }} · Stiven Catalyst</p>
 </section>
 {%- else %}
-<section class="pg{{ ' tr-' + page.layer if page.layer }}">
+<section class="pg{{ ' tr-' + page.layer if page.layer }}{{ fitClass }}">
   {{ chrome(n, page.run) }}
   {%- if page.layer %}
   <ol class="tr-layers" aria-label="{{ L.layers }}">{% for layer in W.layers %}<li{% if layer.id == page.layer %} class="is-on"{% endif %}><b>{{ loop.index }}</b><span>{{ layer.short }}</span></li>{% endfor %}</ol>

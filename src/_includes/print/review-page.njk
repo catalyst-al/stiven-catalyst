@@ -6,8 +6,11 @@
 <header class="run"><span>{{ R.name }} · {{ R.date }}</span>{% if section %}<span class="run-section">{{ section }}</span>{% endif %}</header>
 <footer class="foot"><span>stivencatalyst.com</span><span>Stiven Catalyst</span><span class="num">{{ number }}</span></footer>
 {%- endmacro -%}
+{#- The step this page is set tighter by, if it needs one (src/_data/pageFit.json, print/review-base.css). #}
+{%- set fit = pageFit[review.slug][lang][n] -%}
+{%- set fitClass = (" fit-" + fit) if fit else "" -%}
 {%- if page.type == "cover" %}
-<section class="pg cover">
+<section class="pg cover{{ fitClass }}">
   <div class="mast"><span>Stiven Catalyst</span><span>{{ R.date }}</span></div>
   <div class="mast-rule"></div>
   <div class="cover-main">
@@ -27,7 +30,7 @@
   <p class="cover-foot">stivencatalyst.com</p>
 </section>
 {%- elif page.type == "editor" %}
-<section class="pg">
+<section class="pg{{ fitClass }}">
   {{ chrome(n) }}
   <p class="kicker">{{ R.editor.kicker }}</p>
   <h2>{{ R.editor.title }}</h2>
@@ -37,7 +40,7 @@
   <div class="motto"><i></i><p>{{ R.tagline }}</p></div>
 </section>
 {%- elif page.type == "contents" %}
-<section class="pg">
+<section class="pg{{ fitClass }}">
   {{ chrome(n) }}
   <p class="kicker">{{ R.date }}</p>
   <h2>{{ L.contents }}</h2>
@@ -50,7 +53,7 @@
   <ol class="toc"><li><b>{{ review.pageOf.sources | pad }}</b>{{ R.sourcesPage.kicker }}</li></ol>
 </section>
 {%- elif page.type == "sources" %}
-<section class="pg{{ ' has-correction' if R.corrections and R.corrections.length }}">
+<section class="pg{{ ' has-correction' if R.corrections and R.corrections.length }}{{ fitClass }}">
   {{ chrome(n, L.sources) }}
   <p class="kicker">{{ R.sourcesPage.kicker }}</p>
   <h2>{{ R.sourcesPage.title[0] }}<span class="accent">{{ R.sourcesPage.title[1] }}</span></h2>
@@ -62,7 +65,7 @@
   {%- endfor %}
 </section>
 {%- elif page.type == "back" %}
-<section class="pg back">
+<section class="pg back{{ fitClass }}">
   <img src="{{ R.cover.src }}" alt="" width="{{ R.cover.width }}" height="{{ R.cover.height }}">
   <div class="masthead">Management<span class="accent">Review</span></div>
   <p class="cover-tag">{{ R.tagline }}</p>
@@ -73,7 +76,7 @@
   <p class="edition">{{ R.name }} · {{ R.date }} · Stiven Catalyst</p>
 </section>
 {%- else %}
-<section class="pg">
+<section class="pg{{ fitClass }}">
   {{ chrome(n, R.parts[page.part]) }}
   {%- if page.image %}<div class="head-split"><div>{% endif %}
   <p class="kicker">{{ page.kicker }}</p>
