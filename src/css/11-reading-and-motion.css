@@ -1,0 +1,1438 @@
+/* ---------------------------------------------------------------------------
+   Share, on every page: a small planet at the bottom right (partials/share-orbit.njk,
+   js/share-orbit.js). Tapping it sends out the ways to share on a small piece of
+   night sky, dark in both themes. */
+.share-orbit {
+  --share-glow: var(--family, #4ab5f7);
+  position: fixed;
+  z-index: 55;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  color: #f6f7f4;
+}
+.share-orbit-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--share-glow) 55%, rgba(255, 255, 255, .18));
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #1d2833, #070a0d 70%);
+  color: #f6f7f4;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45), 0 0 22px -6px var(--share-glow);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+.share-orbit-button:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(0, 0, 0, .5), 0 0 30px -2px var(--share-glow); }
+.share-orbit-button:active { transform: scale(.95); }
+.share-orbit-button svg {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.share-orbit-button svg circle { fill: currentColor; stroke: none; }
+.share-orbit-ring {
+  position: absolute;
+  inset: -7px;
+  border: 1px dashed color-mix(in srgb, var(--share-glow) 45%, transparent);
+  border-radius: 50%;
+  animation: share-turn 12s linear infinite;
+  pointer-events: none;
+}
+.share-orbit-ring i {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--share-glow);
+  box-shadow: 0 0 8px var(--share-glow);
+}
+.share-orbit.is-open .share-orbit-ring { animation-duration: 3s; }
+@keyframes share-turn { to { transform: rotate(360deg); } }
+/* While an essay is read, the things around the text stay still and quieter: the share planet stops turning and
+   dims until it is pointed at, the "new" pulses in the menu rest, and the invitations after the text lose their
+   card. The identity stays; only the motion and the weight go. */
+body:has([data-article]) .share-orbit:not(.is-open) .share-orbit-ring { animation: none; opacity: .45; }
+body:has([data-article]) .share-orbit:not(.is-open) .share-orbit-button { box-shadow: 0 8px 22px rgba(0, 0, 0, .35); opacity: .78; transition: opacity .3s ease, transform .2s ease, box-shadow .3s ease; }
+body:has([data-article]) .share-orbit:not(.is-open) .share-orbit-button:is(:hover, :focus-visible) { opacity: 1; }
+body:has([data-article]) :is(.main-nav, .mobile-panel) a.has-news .nav-orb,
+body:has([data-article]) .main-nav a.has-news::after,
+body:has([data-article]) .menu-button.has-news::after { animation: none; }
+body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { background: transparent; }
+
+.share-orbit-panel {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  width: min(318px, calc(100vw - 36px));
+  padding: 18px 16px 14px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 22px;
+  background:
+    radial-gradient(1px 1px at 14% 20%, rgba(255, 255, 255, .7), transparent),
+    radial-gradient(1px 1px at 76% 12%, rgba(255, 255, 255, .5), transparent),
+    radial-gradient(1px 1px at 88% 70%, rgba(255, 255, 255, .45), transparent),
+    radial-gradient(1px 1px at 30% 86%, rgba(255, 255, 255, .4), transparent),
+    radial-gradient(260px 180px at 100% 100%, color-mix(in srgb, var(--share-glow) 22%, transparent), transparent 70%),
+    rgba(7, 10, 13, .92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+  transform-origin: 100% 100%;
+  opacity: 0;
+  transform: translateY(10px) scale(.94);
+  transition: opacity .22s ease, transform .26s cubic-bezier(.2, .8, .2, 1);
+}
+.share-orbit-panel.is-shown { opacity: 1; transform: none; }
+.share-orbit-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.share-orbit-mini {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1px solid color-mix(in srgb, var(--share-glow) 60%, transparent);
+  border-radius: 50%;
+  animation: share-turn 4s linear infinite;
+}
+.share-orbit-mini::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #fff6df;
+  box-shadow: 0 0 8px #fff3d0;
+}
+.share-orbit-mini i {
+  position: absolute;
+  top: -3px;
+  left: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--share-glow);
+}
+.share-orbit-planets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.share-orbit-planets a,
+.share-orbit-planets button {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 8px 2px 6px;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  color: #dfe6ec;
+  font: inherit;
+  cursor: pointer;
+}
+.share-orbit-planets small { font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+.share-orbit-planets.has-business { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.share-orbit-planets.has-business small { font-size: 10.5px; }
+.share-orbit-planets.has-business .share-planet { width: 42px; height: 42px; }
+.share-planet { position: relative; }
+.share-planet b {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 2px solid #070a0d;
+  border-radius: 50%;
+  background: #f6f7f4;
+  color: #0b1015;
+  font-size: 9px;
+  font-weight: 900;
+}
+.share-planet {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--c) 45%, #fff) 0, var(--c) 42%, color-mix(in srgb, var(--c) 30%, #000) 100%);
+  box-shadow: 0 0 18px -4px var(--c);
+  color: #0b1015;
+  transition: transform .2s ease, box-shadow .25s ease;
+}
+.share-planet svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.share-planet .fill { fill: currentColor; stroke: none; }
+.share-orbit-planets a:hover .share-planet,
+.share-orbit-planets button:hover .share-planet,
+.share-orbit-planets :focus-visible .share-planet { transform: translateY(-3px) scale(1.06); box-shadow: 0 0 26px 0 var(--c); }
+.share-orbit-planets .is-done .share-planet { box-shadow: 0 0 30px 4px var(--c); }
+/* The planets fly out from the button, one after another. */
+.share-orbit-panel li { opacity: 0; transform: translate(40px, 60px) scale(.3); }
+.share-orbit-panel.is-shown li { animation: share-launch .5s cubic-bezier(.2, .9, .25, 1.15) calc(var(--i) * 45ms + 40ms) forwards; }
+@keyframes share-launch { to { opacity: 1; transform: none; } }
+.share-orbit-native {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  color: #f6f7f4;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.share-orbit-native:hover { border-color: var(--share-glow); }
+
+@media (max-width: 620px) {
+  .share-orbit-button { width: 50px; height: 50px; }
+  .share-orbit-panel { bottom: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .share-orbit-ring,
+  .share-orbit-mini { animation: none; }
+  .share-orbit-panel { transition: none; }
+  .share-orbit-panel li,
+  .share-orbit-panel.is-shown li { animation: none; opacity: 1; transform: none; }
+}
+@media print {
+  .share-orbit { display: none !important; }
+}
+
+/* All your work in one file (partials/work-backup.njk). */
+.work-backup { padding: 20px 0 60px; }
+.work-backup-card {
+  display: grid;
+  /* The buttons take at most half the width (two rows when they need it), so the text keeps the rest. */
+  grid-template-columns: minmax(0, 1fr) fit-content(50%);
+  align-items: center;
+  gap: 18px 32px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--card);
+}
+.work-backup-copy h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.work-backup-copy p:not(.kicker):not(.form-note) { max-width: 640px; margin: 12px 0 0; color: var(--muted); }
+.work-backup-copy .form-note { margin: 12px 0 0; }
+.work-backup-actions { margin: 0; justify-content: flex-end; }
+.work-backup-open { position: relative; cursor: pointer; }
+.work-backup-open input { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+.work-backup-open:focus-within { outline: 2px solid var(--accent-fill, var(--blue)); outline-offset: 3px; }
+.work-backup-status { grid-column: 1 / -1; margin: 0; }
+.work-backup-status:empty { display: none; }
+@media (max-width: 760px) {
+  .work-backup-card { grid-template-columns: minmax(0, 1fr); padding: 22px 20px; }
+  .work-backup-actions { justify-content: flex-start; }
+}
+@media print { .work-backup { display: none !important; } }
+
+/* Shift Handover: numbers can come from the logs of the same shift. */
+.sh-metric-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.sh-fill-status { margin: 12px 0 0; }
+.sh-fill-status:empty { display: none; }
+.dl-elsewhere { margin: 10px 0 0; }
+
+/* Speed: parts of a tool page that are off screen are not laid out until they come near it
+   (a long log or a big result would otherwise be laid out again on every entry). */
+.dl-results,
+.dl-check,
+.family-more,
+.work-backup,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+@media print {
+  .dl-results,
+  .dl-check,
+  .family-more,
+  .work-backup,
+  .site-footer { content-visibility: visible; }
+}
+.dl-more { margin-top: 12px; }
+/* The note above a result while the example is loaded (tool-kit.js: exampleNote). */
+.dl-example-note { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 18px; padding: 10px 14px; border-left: 2px solid var(--warn, var(--gold)); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--warn, var(--gold)) 10%, transparent); font-size: 14px; }
+.dl-example-note strong { letter-spacing: .06em; text-transform: uppercase; font-size: 12px; color: var(--warn, var(--gold)); }
+.dl-example-note .button-ghost { padding: 6px 12px; font-size: 13px; }
+@media print { .dl-example-note { display: none; } }
+
+/* "New" beside a recent essay in the Insights list: a small planet beats in it, like the menu's. */
+.new-badge::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
+  vertical-align: .12em;
+  animation: news-beat 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .new-badge::before { animation: none; } }
+.new-badge {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 2px 8px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  color: var(--blue);
+  font-family: var(--sans, inherit);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* ---- Writing: the essays, reflections and their lists ---- */
+
+/* The three writing pages: a shorter header, so the list starts on the first screen. */
+.writing-tabs + .page-hero.writing-hero { padding: 44px 0 40px; }
+.writing-hero .lede { margin-top: 22px; }
+
+/* The series "Ten years close to the work" as a path: one dot per essay. */
+.series-dots { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+/* A dot is small, its target is not: 24 px around each (::before), with gaps wide enough that no two targets overlap. */
+.series-dots a {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid color-mix(in srgb, var(--blue) 55%, var(--line));
+  border-radius: 50%;
+  transition: transform .2s ease, background-color .2s ease;
+}
+.series-dots a::before { content: ""; position: absolute; inset: -6.5px; border-radius: 50%; }
+.series-dots a:hover, .series-dots a:focus-visible { transform: scale(1.25); }
+.series-dots a.is-read { background: color-mix(in srgb, var(--blue) 50%, transparent); }
+.series-dots a.is-next { border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 20%, transparent); }
+.series-dots a[aria-current="page"] { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 22%, transparent); }
+.series-track .series-dots { gap: 12px; }
+.series-track .series-dots a { width: 12px; height: 12px; }
+.series-track .series-dots a::before { inset: -7.5px; }
+.series-dots.is-large { gap: 10px; }
+.series-dots.is-large a { width: 18px; height: 18px; }
+.series-dots.is-large a::before { inset: -4.5px; }
+
+.series-panel {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px 36px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+/* A series on Insights lights up as a band under the pointer, like the rows below it; the dot of the next essay to
+   read beats softly, and the dots come in one after another as the series scrolls into view. */
+.series-panel::before {
+  content: "";
+  position: absolute;
+  inset: 6px -18px;
+  z-index: -1;
+  border-radius: 20px;
+  background:
+    radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--blue) 10%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 2.5%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .35s ease, scale .45s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.series-panel:hover::before { opacity: 1; scale: 1; }
+@media (max-width: 620px) { .series-panel::before { inset: 4px -10px; } }
+.series-dots a { transition: transform .25s cubic-bezier(.22, 1, .36, 1), background-color .25s ease, box-shadow .3s ease; }
+.series-dots a:hover { box-shadow: 0 0 12px color-mix(in srgb, var(--blue) 70%, transparent); }
+/* The next essay's dot beats: a pseudo-element with the wider ring and the glow, faded in and out by the compositor. */
+.series-dots a.is-next::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 12%, transparent), 0 0 14px color-mix(in srgb, var(--blue) 55%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.series-panel .series-dots a.is-next::after { animation: dot-next 2.2s ease-in-out infinite; }
+@keyframes dot-next { 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .series-panel .series-dots a.is-next::after { animation: none; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .series-panel .series-dots li { animation: dot-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    .series-panel .series-dots li:nth-child(1) { animation-range: entry 4% entry 44%; }
+    .series-panel .series-dots li:nth-child(2) { animation-range: entry 8% entry 48%; }
+    .series-panel .series-dots li:nth-child(3) { animation-range: entry 12% entry 52%; }
+    .series-panel .series-dots li:nth-child(4) { animation-range: entry 16% entry 56%; }
+    .series-panel .series-dots li:nth-child(5) { animation-range: entry 20% entry 60%; }
+    .series-panel .series-dots li:nth-child(6) { animation-range: entry 24% entry 64%; }
+    .series-panel .series-dots li:nth-child(7) { animation-range: entry 28% entry 68%; }
+    .series-panel .series-dots li:nth-child(8) { animation-range: entry 32% entry 72%; }
+    .series-panel .series-dots li:nth-child(9) { animation-range: entry 36% entry 76%; }
+    .series-panel .series-dots li:nth-child(10) { animation-range: entry 40% entry 80%; }
+    .series-panel .series-dots li:nth-child(11) { animation-range: entry 44% entry 84%; }
+    .series-panel .series-dots li:nth-child(12) { animation-range: entry 48% entry 88%; }
+  }
+}
+@keyframes dot-in { from { opacity: 0; scale: .4; } }
+.series-panel-copy .kicker { margin: 0 0 4px; }
+.series-panel-count { margin: 0; color: var(--muted); font-size: 15px; }
+.series-panel .series-dots { justify-content: center; }
+
+/* "Read" beside an essay this browser has read to the end. */
+.read-mark {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ok) 15%, transparent);
+  color: var(--ok);
+  font-weight: 800;
+}
+.read-mark::before { content: "✓ "; }
+.list-row.is-read .number { opacity: .55; }
+
+/* The essay: who wrote it in one line under the title. */
+.article-byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 720px;
+  margin: 30px 0 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.has-image .article-byline { margin-left: 0; }
+/* How the essays are written (layouts/article.njk), said once under the byline instead of in the text. */
+.article-method {
+  max-width: 720px;
+  margin: 14px 0 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.article-method a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.has-image .article-method { margin-left: 0; }
+/* A correction of the essay (layouts/article.njk): in the column of the deck and the byline. */
+.article-hero-text .book-corrections { max-width: 720px; margin: 24px 0 0 auto; }
+.has-image .article-hero-text .book-corrections { margin-left: 0; }
+.article-byline .author-photo { flex: none; width: 46px; height: 46px; margin: 0; border-width: 1px; }
+.article-byline > span { display: grid; gap: 2px; }
+.article-byline strong { color: var(--ink); font-size: 15px; font-weight: 700; }
+
+/* Beside the text: the place in the series and the sections, kept in view while reading. */
+.article-body.no-aside { grid-template-columns: minmax(0, 720px); }
+.article-aside-inner {
+  position: sticky;
+  top: 104px;
+  display: grid;
+  gap: 34px;
+  max-height: calc(100vh - 128px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.series-track .kicker, .article-toc .kicker { margin: 0 0 10px; }
+.series-track-count { margin: 0 0 12px; color: var(--ink); font-size: 15px; font-weight: 600; }
+.article-toc ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+.article-toc a {
+  display: block;
+  margin-left: -1px;
+  padding: 6px 0 6px 14px;
+  border-left: 2px solid transparent;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s ease, border-color .2s ease;
+}
+.article-toc a:hover { color: var(--ink); }
+.article-toc a[aria-current] { color: var(--ink); border-left-color: var(--blue); }
+.article-toc-fold { display: none; }
+.article-content h2[id] { scroll-margin-top: 100px; }
+
+/* Reading: a calmer rhythm, and a bold line on its own set apart as a stated principle. */
+.article-content { line-height: 1.66; }
+.article-content p { margin: 0 0 1.2em; }
+.article-content p.essay-principle {
+  margin: 1.6em 0;
+  padding: 4px 0 4px 22px;
+  border-left: 3px solid var(--blue);
+  font-size: 1.1em;
+  line-height: 1.42;
+}
+
+/* After the essay: the next one, large; the one before and all essays below it. */
+.essay-series { margin: 52px 0 8px; font-family: var(--sans); }
+.essay-series .kicker { margin: 0 0 14px; }
+.essay-series-next {
+  container-type: inline-size;
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 28px 30px;
+  border: 1px solid color-mix(in srgb, var(--blue) 40%, var(--line));
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 55%),
+    var(--card);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .2s ease, transform .2s ease;
+}
+a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var(--blue); transform: translateY(-2px); }
+.essay-series-next small { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.essay-series-next strong {
+  --measure: calc(100cqi - 40px);
+  padding-right: 40px;
+  font-family: var(--serif);
+  font-size: min(clamp(28px, 3.4vw, 40px), var(--fit-s, 1000px));
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+.essay-series-next > span { color: var(--muted); font-size: 16px; line-height: 1.5; }
+.essay-series-next em { position: absolute; top: 24px; right: 28px; color: var(--blue); font-size: 26px; font-style: normal; }
+.essay-series-end-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.essay-series-end-links a {
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.essay-series-end-links a:first-child { border-color: var(--blue); color: var(--blue); }
+.essay-series-end-links a:hover { border-color: var(--blue); }
+.essay-series .essay-series-more { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 28px; margin: 26px 0 0; font-size: 15px; line-height: 1.45; }
+.essay-series-more a { color: var(--muted); text-decoration: none; }
+.essay-series-more a:hover { color: var(--ink); }
+.essay-series-more small { display: block; margin-bottom: 2px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.essay-series-more .essay-series-all { margin-left: auto; color: var(--ink); border-bottom: 1px solid currentColor; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .article-aside { display: none; }
+  .article-toc-fold {
+    display: block;
+    margin: 0 0 2em;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--card);
+    font-family: var(--sans);
+  }
+  .article-toc-fold summary {
+    padding: 14px 18px;
+    color: var(--blue);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    list-style: none;
+    text-transform: uppercase;
+  }
+  .article-toc-fold summary::-webkit-details-marker { display: none; }
+  .article-toc-fold summary::after { content: " +"; }
+  .article-toc-fold[open] summary::after { content: " −"; }
+  .article-toc-fold ol { display: grid; gap: 10px; margin: 0; padding: 0 18px 18px; list-style: none; font-size: 16px; line-height: 1.35; }
+  .article-toc-fold a { color: var(--ink); text-decoration: none; }
+  .series-panel { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .series-panel .series-dots { justify-content: flex-start; }
+  .series-panel .button-primary { justify-self: start; }
+}
+
+@media (max-width: 700px) {
+  /* The list on a phone: number, topic and length on one line above the title, which gets the full width. */
+  .list-row,
+  .reflection-list .list-row {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "num meta" "body body";
+    gap: 10px 14px;
+    padding: 28px 0;
+    align-items: baseline;
+  }
+  .list-row .number { grid-area: num; font-size: 18px; }
+  .reflection-list .number { font-size: 12px; }
+  .list-row > div { grid-area: body; }
+  .list-row .row-meta { grid-area: meta; display: block; justify-self: start; }
+  .list-row h2 { font-size: 31px; line-height: 1.04; }
+}
+
+@media (max-width: 600px) {
+  .writing-tabs { padding-top: 22px; }
+  .writing-tabs + .page-hero.writing-hero { padding: 30px 0 30px; }
+  .writing-hero .lede { margin-top: 16px; font-size: 17px; }
+  .article-hero { padding-bottom: 36px; }
+  .article-body { padding-top: 36px; }
+  .article-byline { margin-top: 24px; }
+  .article-content { line-height: 1.6; }
+  .article-content p { margin-bottom: 1.05em; }
+  .essay-series-next { padding: 24px 22px; }
+  .essay-series-next em { top: 20px; right: 20px; }
+}
+
+/* The field note of the day, just below the hero on the home page. */
+.note-of-day {
+  position: relative;
+  margin-top: 28px;
+  margin-bottom: 56px;
+  padding: 44px 48px 36px;
+  border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line));
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 50%),
+    var(--card);
+  overflow: hidden;
+}
+.note-of-day::before {
+  content: "“";
+  position: absolute;
+  top: -30px;
+  right: 28px;
+  color: color-mix(in srgb, var(--blue) 16%, transparent);
+  font-family: var(--serif);
+  font-size: 260px;
+  line-height: 1;
+  pointer-events: none;
+}
+.note-of-day .kicker { margin: 0 0 18px; }
+.note-of-day-quote { position: relative; max-width: 980px; margin: 0 0 30px; }
+.note-of-day-quote p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -.03em;
+}
+.note-of-day-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.note-of-day-by { margin: 0; color: var(--muted); font-size: 14px; }
+.note-of-day-by span { color: var(--ink); font-weight: 700; }
+.note-of-day-by a { color: var(--blue); text-decoration: none; border-bottom: 1px solid currentColor; }
+@media (max-width: 600px) {
+  .note-of-day { margin-top: 20px; margin-bottom: 36px; padding: 30px 24px 26px; border-radius: 22px; }
+  .note-of-day::before { font-size: 180px; top: -22px; right: 14px; }
+  .note-of-day-quote p { font-size: 29px; }
+}
+
+/* "Betriebshandbücher" fits a 360 px phone without breaking inside the word. */
+@media (max-width: 400px) {
+  .project-card h2 { font-size: 34px; }
+}
+
+/* The checklist an essay can end with (layouts/article.njk, "checklist" in the front matter). */
+.essay-checklist { margin: 40px 0 8px; padding: 24px 26px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); border-radius: 18px; background: var(--card); font-family: var(--sans); }
+.essay-checklist-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 14px; }
+.essay-checklist-head .kicker { margin: 0; }
+.essay-checklist-count { color: var(--blue); font-weight: 800; font-variant-numeric: tabular-nums; }
+.article-content .essay-checklist ol { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.article-content .essay-checklist li { margin: 0; padding: 0; }
+.essay-checklist label { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; font-size: 1rem; line-height: 1.45; transition: border-color .2s ease; }
+.essay-checklist label:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.essay-checklist input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); }
+.essay-checklist input:checked + span { color: var(--muted); }
+@media print { .essay-checklist button { display: none; } .essay-checklist { border-color: var(--line); } }
+.essay-checklist li.is-field label { grid-template-columns: 1fr; gap: 8px; cursor: auto; }
+.essay-checklist li.is-field b { color: var(--blue); font-variant-numeric: tabular-nums; margin-right: 6px; }
+.essay-checklist textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; font-size: .95rem; resize: vertical; }
+.essay-checklist textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.essay-checklist li.is-field small { color: var(--muted); font-size: .9rem; line-height: 1.4; margin-top: -4px; }
+.essay-checklist-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.essay-checklist-note { margin: 14px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.45; }
+.article-content .essay-checklist-note { margin: 14px 0 0; }
+@media print { .essay-checklist-actions { display: none; } }
+
+/* An essay in motion: the reading bar ends in a small glowing tip, the cover settles into place, a principle or
+   a quote draws its line as it is reached, the section jumped to from the contents greets you, the next essay
+   in the series beats, and the next essay and the tools after the text answer the pointer. */
+.reading-progress span { position: relative; box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 60%, transparent); }
+.essay-tools li a { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.essay-tools li a::before, a.essay-series-next::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 14%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.essay-tools li a:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--blue) 80%, transparent); }
+.essay-tools li a:hover::before, a.essay-series-next:hover::before { opacity: 1; }
+.essay-tools li a strong, .essay-tools li a em, .essay-series-next em { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
+.essay-tools li a:hover strong { translate: 4px 0; }
+.essay-tools li a:hover em { translate: 3px 0; }
+a.essay-series-next { isolation: isolate; transition: border-color .3s ease, transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s ease; }
+a.essay-series-next:hover, a.essay-series-next:focus-visible { transform: translateY(-4px); box-shadow: 0 26px 56px -34px color-mix(in srgb, var(--blue) 85%, transparent); }
+a.essay-series-next:hover em { translate: 5px 0; }
+.essay-series-end-links a { transition: border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease; }
+.essay-series-end-links a:hover { translate: 0 -2px; box-shadow: 0 12px 26px -18px color-mix(in srgb, var(--blue) 85%, transparent); }
+.article-toc a { transition: color .25s ease, border-color .35s ease, padding-left .35s cubic-bezier(.22, 1, .36, 1); }
+.article-toc a:hover, .article-toc a[aria-current] { padding-left: 18px; }
+.article-content h2[id] { position: relative; }
+.article-content h2[id]:target::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 64px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--blue);
+  box-shadow: 0 0 14px var(--blue);
+  transform-origin: left;
+  animation: ring-arrive 2.2s cubic-bezier(.22, 1, .36, 1) 1 both;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .series-track .series-dots a.is-next::after { animation: dot-next 2.2s ease-in-out infinite; }
+  .article-hero-media img { animation: cover-settle 1.6s cubic-bezier(.22, 1, .36, 1) both; }
+}
+@keyframes cover-settle { from { scale: 1.08; opacity: .4; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .article-content :is(p.essay-principle, blockquote) { animation: principle-in linear both; animation-timeline: view(); animation-range: entry 10% entry 100%; }
+  }
+}
+@keyframes principle-in { from { border-left-color: transparent; translate: -10px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .article-content h2[id]:target::after { animation: none; opacity: 0; }
+  .essay-tools li a, a.essay-series-next, .essay-series-end-links a, .article-toc a { transition: none; }
+}
+
+/* A publication in motion (a book, an issue, the guide): the cover floats and catches the light, the reader's
+   buttons and chips glow, the contents open softly over the book, the full text unfolds, the closing quote draws
+   its line as it is reached, and the other issues answer the pointer. */
+@media (prefers-reduced-motion: no-preference) {
+  .book-object-cover { animation: cover-float 6s ease-in-out infinite; }
+  .book-object::before { animation: cover-glow 6s ease-in-out infinite; }
+  .book-contents:not([hidden]) { animation: contents-in .35s cubic-bezier(.22, 1, .36, 1) both; }
+  .book-text details[open] .book-text-body { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; }
+}
+@keyframes cover-float { 50% { translate: 0 -8px; } }
+@keyframes cover-glow { 50% { opacity: .65; scale: .96; } }
+@keyframes contents-in { from { opacity: 0; translate: 0 -10px; scale: .98; } }
+.book-button { transition: border-color .2s, color .2s, background .2s, box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.book-button:hover:not(:disabled) { box-shadow: 0 0 0 5px rgba(74, 181, 247, .12), 0 0 22px rgba(74, 181, 247, .3); }
+.book-button svg { transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+[data-book-prev]:hover:not(:disabled) svg { translate: -2px 0; }
+[data-book-next]:hover:not(:disabled) svg { translate: 2px 0; }
+.book-chip { transition: border-color .25s ease, color .25s ease, background-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.book-chip:hover, .book-chip[aria-expanded="true"] { translate: 0 -2px; background: rgba(74, 181, 247, .08); box-shadow: 0 12px 26px -18px rgba(74, 181, 247, .9); }
+.book-scrub::-webkit-slider-thumb { transition: box-shadow .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.book-scrub:hover::-webkit-slider-thumb { scale: 1.2; box-shadow: 0 0 0 7px rgba(74, 181, 247, .25), 0 0 14px rgba(74, 181, 247, .6); }
+.book-contents-title { transition: color .25s ease, translate .35s cubic-bezier(.22, 1, .36, 1); }
+.book-contents button:hover .book-contents-title { translate: 4px 0; }
+.book-text details { transition: border-color .35s ease, box-shadow .45s ease; }
+.book-text details:hover, .book-text details[open] { border-color: color-mix(in srgb, var(--blue) 40%, var(--line)); box-shadow: 0 24px 54px -40px color-mix(in srgb, var(--blue) 90%, transparent); }
+.issue-more-card { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.issue-more-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 14%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.issue-more-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--blue) 80%, transparent); }
+.issue-more-card:hover::before { opacity: 1; }
+.issue-more-card img { transition: transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease; }
+.issue-more-card:hover img { transform: rotate(-3deg) translateY(-2px); box-shadow: 0 16px 30px rgba(0, 0, 0, .45); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-closing blockquote p::before { animation: closing-line linear both; animation-timeline: view(); animation-range: entry 20% cover 40%; }
+  }
+}
+@keyframes closing-line { from { scale: 0 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .book-chip, .book-button, .book-button svg, .issue-more-card, .issue-more-card img, .book-text details { transition: none; }
+}
+
+/* The Projects page in motion: inside each card the tag, the title, the text and the link come in one after another,
+   card after card; a project still in progress says so with a live, beating dot; a link that leaves the site turns
+   its arrow towards the corner. */
+@media (prefers-reduced-motion: no-preference) {
+  .project-grid .project-card > :is(.tag, div) { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both; }
+  .project-grid .project-card > div { animation-delay: .12s; }
+  .project-grid .project-card:nth-child(2) > * { animation-delay: .14s; }
+  .project-grid .project-card:nth-child(2) > div { animation-delay: .26s; }
+  .project-grid .project-card:nth-child(n + 3) > * { animation-delay: .28s; }
+  .project-grid .project-card:nth-child(n + 3) > div { animation-delay: .4s; }
+  .project-card .tag.is-live::before { animation: news-beat 2.4s ease-in-out infinite; }
+  .project-card .tag.is-live { position: relative; animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both; }
+  .project-card .tag.is-live::after { animation: news-ring 2.4s ease-out infinite; }
+}
+.project-link[href^="http"] > span[aria-hidden="true"] { display: inline-block; transition: translate .4s cubic-bezier(.22, 1, .36, 1), rotate .4s cubic-bezier(.22, 1, .36, 1); }
+.project-card:hover .project-link[href^="http"] > span[aria-hidden="true"] { translate: 3px -2px; rotate: -45deg; }
+
+/* Start here in motion: the portrait breathes in a ring of light, like the one on About; each step's number lights up
+   as the step is reached, so the page reads as a path; the links at the end draw their line under the pointer. */
+.start-intro img { box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 10%, transparent); transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.start-intro img:hover { scale: 1.05; }
+.start-number { transition: background-color .4s ease, color .4s ease, box-shadow .4s ease; }
+.start-step:hover .start-number { background: var(--blue); border-color: var(--blue); color: var(--on-blue); box-shadow: 0 0 14px color-mix(in srgb, var(--blue) 60%, transparent); }
+.start-more a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: border-color .3s ease, background-size .45s cubic-bezier(.22, 1, .36, 1); }
+.start-more a:hover { background-size: 100% 1px; }
+@media (prefers-reduced-motion: no-preference) {
+  .start-intro img { animation: portrait-breathe 5s ease-in-out infinite; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .start-number { animation: step-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+  }
+}
+@keyframes step-reach {
+  0% { background: transparent; color: inherit; box-shadow: none; }
+  60% { background: var(--blue); border-color: var(--blue); color: var(--on-blue); box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 18%, transparent), 0 0 18px var(--blue); }
+  100% { background: var(--blue); border-color: var(--blue); color: var(--on-blue); box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 50%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .start-intro img, .start-more a { transition: none; }
+}
+
+/* Search in motion: the box glows while typed in, the results come in one after another, the words found are
+   swept in with a highlighter, and a result answers the pointer like the rows of Insights. */
+.search-form { transition: border-color .3s ease, box-shadow .35s ease; }
+.search-form:hover { border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
+.search-form:focus-within { box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 14%, transparent), 0 16px 38px -24px color-mix(in srgb, var(--blue) 75%, transparent); }
+.search-form svg { transition: stroke .3s ease, scale .35s cubic-bezier(.22, 1, .36, 1); }
+.search-form:focus-within svg { stroke: var(--blue); scale: 1.1; }
+.search-results a { position: relative; isolation: isolate; }
+.search-results a::before {
+  content: "";
+  position: absolute;
+  inset: 6px -18px;
+  z-index: -1;
+  border-radius: 20px;
+  background:
+    radial-gradient(520px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 11%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+  opacity: 0;
+  scale: .985;
+  transition: opacity .35s ease, scale .45s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.search-results a:hover::before { opacity: 1; scale: 1; }
+@media (max-width: 620px) { .search-results a::before { inset: 4px -10px; } }
+.search-results strong { transition: translate .45s cubic-bezier(.22, 1, .36, 1), color .3s ease; }
+.search-results a:hover strong { translate: 6px 0; }
+.search-results mark { background: linear-gradient(color-mix(in srgb, var(--blue) 26%, transparent), color-mix(in srgb, var(--blue) 26%, transparent)) 0 0 / 100% 100% no-repeat; }
+@media (prefers-reduced-motion: no-preference) {
+  .search-results .is-entering mark { animation: mark-sweep .6s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 35ms + .2s); }
+}
+@keyframes mark-sweep { from { background-size: 0 100%; } }
+.search-count:not(:empty) { animation: list-in .4s cubic-bezier(.22, 1, .36, 1) both; }
+@media (prefers-reduced-motion: reduce) { .search-count:not(:empty) { animation: none; } }
+
+/* The podcast in motion: the cover floats and catches the light like a book's; an episode that plays glows and its
+   play button breathes; the apps and the episodes answer the pointer; the steps light up as they are reached; an
+   episode reached from a link greets you; "Copied" comes in softly. */
+@media (prefers-reduced-motion: no-preference) {
+  .podcast-cover { animation: cover-float 6s ease-in-out infinite; }
+  .audio-player.is-playing .audio-player-play { position: relative; }
+  .audio-player.is-playing .audio-player-play::after { animation: news-ring 2.4s ease-out infinite; }
+  .podcast-copied:not(:empty) { animation: list-in .4s cubic-bezier(.22, 1, .36, 1) both; }
+  .podcast-episode:target { animation: episode-arrive 2.2s ease-out 1; }
+}
+@keyframes episode-arrive { 0%, 30% { border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent), 0 24px 54px -34px var(--blue); } }
+.audio-player { transition: border-color .4s ease, box-shadow .5s ease; }
+.audio-player.is-playing { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 10%, transparent), 0 20px 46px -32px var(--blue); }
+/* Inside an episode the player has no frame of its own, so the whole episode glows instead. */
+.podcast-episode .audio-player.is-playing { border-color: var(--line); box-shadow: none; }
+.podcast-episode:has(.audio-player.is-playing) { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 10%, transparent), 0 24px 54px -36px var(--blue); }
+.audio-player-skip, .audio-player-rate { transition: border-color .25s ease, background-color .25s ease, color .25s ease, box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.audio-player-skip:hover, .audio-player-rate:hover { color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 8px 20px -14px var(--blue); }
+.podcast-app, .podcast-episode { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.podcast-app::before, .podcast-episode::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 12%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.podcast-app:hover::before, .podcast-episode:hover::before { opacity: 1; }
+.podcast-app:hover, .podcast-app:focus-visible { transform: translateY(-3px); box-shadow: 0 18px 40px -28px color-mix(in srgb, var(--blue) 85%, transparent); }
+.podcast-app span { transition: translate .4s cubic-bezier(.22, 1, .36, 1); }
+.podcast-app:hover span { translate: 3px -2px; }
+.podcast-episode:hover { border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
+.podcast-episode > img { transition: transform .6s cubic-bezier(.22, 1, .36, 1), box-shadow .6s ease; }
+.podcast-episode:hover > img { transform: rotate(-1.5deg) scale(1.02); box-shadow: 0 0 0 1px var(--line), 0 18px 36px rgba(0, 0, 0, .35); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .podcast-steps li b { animation: step-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .podcast-app, .podcast-episode, .podcast-episode > img, .audio-player { transition: none; }
+}
+/* A player in a narrow column (an episode beside its cover on a tablet, 621–900 px) takes the phone layout from its own
+   width, so a longer label ("Abspielen", "Luaj") never pushes the speed past the edge of the page. */
+.audio-player { container-type: inline-size; }
+@media (min-width: 381px) { @container (max-width: 480px) {
+  .audio-player-row { display: grid; grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "play back fwd . rate" "scrub scrub scrub scrub time"; gap: 12px 8px; }
+  .audio-player-row[hidden] { display: none; }
+  .audio-player-play { grid-area: play; }
+  .audio-player-skip[data-audio-skip^="-"] { grid-area: back; }
+  .audio-player-skip:not([data-audio-skip^="-"]) { grid-area: fwd; }
+  .audio-player-rate { grid-area: rate; justify-self: end; }
+  .audio-player-scrub { grid-area: scrub; margin: 0; }
+  .audio-player-time { grid-area: time; }
+} }
+
+/* The shelf in motion: its rows come in one after another the first time, a row lifts and lights up under the
+   pointer, an essay begun shows how far it was read with a line that fills up, and a removed row slides away. */
+.shelf-row-link { position: relative; overflow: hidden; transition: border-color .3s ease, translate .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease, background-color .3s ease; }
+.shelf-row-link:hover { translate: 3px 0; background: color-mix(in srgb, var(--blue) 5%, transparent); box-shadow: 0 14px 30px -24px color-mix(in srgb, var(--blue) 85%, transparent); }
+.shelf-row-link.has-progress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(var(--p, 0) * 100%);
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-soft, var(--blue)));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 60%, transparent);
+}
+.shelf-remove, .shelf-clear { transition: color .25s ease, border-color .25s ease, background-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1); }
+.shelf-remove:hover { background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.shelf-section { transition: border-color .35s ease; }
+.shelf-section:hover { border-color: color-mix(in srgb, var(--blue) 30%, var(--line)); }
+@media (prefers-reduced-motion: no-preference) {
+  .shelf-row-link.has-progress::after { animation: progress-fill 1.1s cubic-bezier(.22, 1, .36, 1) .3s both; }
+  .shelf-row.is-leaving { animation: row-leave .32s cubic-bezier(.55, 0, .45, 1) both; }
+}
+@keyframes progress-fill { from { width: 0; } }
+@keyframes row-leave { to { opacity: 0; transform: translateX(24px); } }
+@media (prefers-reduced-motion: reduce) { .shelf-row-link { transition: none; } }
+
+/* The 404 page: the title comes into focus, the three lines follow one after another, and in the space beside them a
+   small planet that slipped off its orbit drifts around the empty ring it left. */
+.lost-hero { position: relative; }
+.lost-orbit { display: none; }
+@media (min-width: 980px) {
+  .lost-orbit {
+    position: absolute;
+    left: 6%;
+    bottom: 64px;
+    display: block;
+    width: 180px;
+    aspect-ratio: 1;
+    border: 1px dashed color-mix(in srgb, var(--blue) 35%, var(--line));
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .lost-orbit b {
+    position: absolute;
+    inset: 38%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--blue-soft, var(--blue)) 70%, #fff), var(--blue) 55%, color-mix(in srgb, var(--blue) 40%, #000));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--blue) 45%, transparent);
+  }
+  .lost-orbit i {
+    position: absolute;
+    top: -7px;
+    left: calc(50% - 7px);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff 0 14%, var(--blue) 55%, color-mix(in srgb, var(--blue) 45%, #000));
+    box-shadow: 0 0 12px var(--blue);
+    transform-origin: 7px 97px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lost-hero h1 { animation: lost-focus 1s cubic-bezier(.22, 1, .36, 1) both; transform-origin: left; }
+  .lost-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) both; animation-delay: .35s; }
+  .lost-hero .lede + .lede { animation-delay: .5s; }
+  .lost-hero .lede + .lede + .lede { animation-delay: .65s; }
+  .lost-orbit i { animation: lost-drift 14s linear infinite; }
+  .lost-orbit b { animation: news-beat 4s ease-in-out infinite; }
+}
+/* The tightening is a horizontal scale, not letter-spacing: spacing changes the width of the words, and a title near the
+   width of its column re-wrapped while it came into focus, moving everything under it (the book, 16 October 2026). */
+@keyframes lost-focus { from { opacity: 0; filter: blur(8px); scale: .98 1; } }
+@keyframes lost-drift {
+  0% { rotate: 0deg; translate: 0 0; }
+  50% { rotate: 180deg; translate: 14px -10px; }
+  100% { rotate: 360deg; translate: 0 0; }
+}
+
+/* The legal pages stay calm, so they are read: each heading draws a short blue line before it as it is reached, the
+   text itself does not move, and a link turns blue with its underline under the pointer. */
+.legal h2 { position: relative; padding-left: 22px; }
+.legal h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--blue);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 55%, transparent);
+  transform-origin: left;
+}
+.legal a { transition: color .25s ease, border-color .25s ease, box-shadow .3s ease; }
+.legal a:hover { color: var(--blue); box-shadow: 0 6px 12px -10px var(--blue); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .legal h2::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+  }
+}
+@keyframes legal-tick { from { scale: 0 1; opacity: 0; } }
+
+/* How this is made reads as a path: a thin line runs down beside the text and fills as the page is read, each heading
+   is a stop on it that lights up as it is reached, and the opening sentence stands a little apart. */
+.how-made { position: relative; }
+.how-made > *, .how-made h2 { padding-left: 30px; }
+.how-made::before, .how-made::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 72px;
+  bottom: 120px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.how-made::after { background: linear-gradient(var(--blue), color-mix(in srgb, var(--blue) 40%, transparent)); box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 45%, transparent); transform-origin: top; }
+.how-made h2::before {
+  left: 0;
+  top: calc(50% - 7px);
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 0 4px var(--paper);
+}
+.how-made > p:first-child { color: var(--ink); font-size: 1.12em; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .how-made::after { animation: how-fill linear both; animation-timeline: view(); animation-range: cover 10% cover 85%; }
+    .how-made h2::before { animation: how-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 40%; }
+  }
+}
+@keyframes how-fill { from { scale: 1 0; } }
+@keyframes how-reach {
+  0% { background: var(--paper); }
+  60% { background: var(--blue); box-shadow: 0 0 0 4px var(--paper), 0 0 16px var(--blue); }
+  100% { background: var(--blue); box-shadow: 0 0 0 4px var(--paper), 0 0 8px color-mix(in srgb, var(--blue) 60%, transparent); }
+}
+@media (max-width: 560px) {
+  .how-made > *, .how-made h2 { padding-left: 24px; }
+}
+
+/* The operational treatise in motion: the three layers of a chapter (scene, breakdown, protocol) come in one after
+   another as they are reached, each in its own colour; under the pointer a layer lifts, its light follows the pointer,
+   its number glows and its bar runs along the top. */
+.treatise-layer { --layer: var(--blue); isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.treatise-layer.is-scene { --layer: var(--red); }
+.treatise-layer.is-protocol { --layer: var(--ink); }
+.treatise-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--layer) 13%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.treatise-layer::before { transition: width .55s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.treatise-layer:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--layer) 40%, var(--line)); box-shadow: 0 22px 48px -30px color-mix(in srgb, var(--layer) 70%, transparent); }
+.treatise-layer:hover::after { opacity: 1; }
+.treatise-layer:hover::before { width: calc(100% - 44px); box-shadow: 0 0 12px color-mix(in srgb, var(--layer) 60%, transparent); }
+.treatise-layer-n { transition: text-shadow .4s ease, translate .45s cubic-bezier(.22, 1, .36, 1); }
+.treatise-layer:hover .treatise-layer-n { translate: 0 -2px; text-shadow: 0 0 18px color-mix(in srgb, var(--layer) 60%, transparent); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .treatise-layer { animation: scroll-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 140px; }
+    .treatise-layer:nth-child(2) { animation-range: entry 30px entry 170px; }
+    .treatise-layer:nth-child(3) { animation-range: entry 60px entry 200px; }
+    .treatise-layer::before { animation: layer-bar linear both; animation-timeline: view(); animation-range: entry 40% cover 30%; }
+  }
+}
+@keyframes layer-bar { from { width: 0; } }
+@media (prefers-reduced-motion: reduce) { .treatise-layer, .treatise-layer::before { transition: none; } }
+
+/* Management Review in motion: "Review" in the title is underlined in red as the page opens, and a cover under the
+   pointer tilts towards it with a glare that follows, like a magazine turned in the hand under a lamp. */
+.weekly-hero .weekly-mark { position: relative; display: inline-block; }
+.weekly-hero .weekly-mark::after {
+  content: "";
+  position: absolute;
+  left: .04em;
+  right: .04em;
+  bottom: .02em;
+  height: .07em;
+  border-radius: 999px;
+  background: var(--red);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--red) 50%, transparent);
+  transform-origin: left;
+}
+.weekly-card-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, .22), transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.weekly-card:hover .weekly-card-cover::before { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .weekly-hero .weekly-mark::after { animation: mark-draw .9s cubic-bezier(.22, 1, .36, 1) .35s both; }
+  .weekly-card:hover .weekly-card-cover { transform: perspective(700px) translateY(-4px) rotateY(calc((var(--px, .5) - .5) * 14deg)) rotateX(calc((.5 - var(--py, .5)) * 10deg)); transition: transform .2s ease-out, box-shadow .45s ease; }
+}
+@keyframes mark-draw { from { scale: 0 1; } }
+
+/* From the Floor: the title rises from the floor as the page opens; its lower edge stays where the line of the text
+   ends, so the words come up from below it rather than fading in. The words of the lede follow. */
+@media (prefers-reduced-motion: no-preference) {
+  .floor-hero h1 { animation: floor-rise 1s cubic-bezier(.22, 1, .36, 1) .2s both; }
+  .floor-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .6s both; }
+}
+@keyframes floor-rise { from { clip-path: inset(-.2em -.2em 100% -.2em); translate: 0 100%; } to { clip-path: inset(-.2em -.2em -.3em -.2em); translate: 0 0; } }
+
+/* An issue in motion (Management Review, From the Floor, a treatise volume): its facts (number, pages, sources,
+   topics, online since) come in one after another as the page opens; the charts of the issue answer the pointer,
+   a card lifting with a light that follows it, and a bar, a column or a point lights up under the pointer. */
+@media (prefers-reduced-motion: no-preference) {
+  .book-hero .book-facts > div { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(.25s + var(--f, 0) * 80ms); }
+  .book-hero .book-facts > div:nth-child(2) { --f: 1; }
+  .book-hero .book-facts > div:nth-child(3) { --f: 2; }
+  .book-hero .book-facts > div:nth-child(4) { --f: 3; }
+  .book-hero .book-facts > div:nth-child(n + 5) { --f: 4; }
+}
+.weekly-chart { position: relative; isolation: isolate; transition: border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease; }
+.weekly-chart::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(460px circle at var(--mx, 30%) var(--my, 0%), color-mix(in srgb, var(--blue) 11%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.weekly-chart:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); box-shadow: 0 22px 48px -32px color-mix(in srgb, var(--blue) 80%, transparent); }
+.weekly-chart:hover::before { opacity: 1; }
+.wk-svg :is(.wk-bar, .wk-col, .wk-dot, .wk-person, .wk-day) { transition: filter .25s ease; }
+.wk-svg :is(.wk-bar, .wk-col, .wk-dot, .wk-person, .wk-day):hover { filter: brightness(1.25) drop-shadow(0 0 4px color-mix(in srgb, var(--blue) 70%, transparent)); }
+@media (prefers-reduced-motion: reduce) { .weekly-chart { transition: none; } .weekly-chart:hover { transform: none; } }
+
+/* The book in motion: the title comes into focus and the subtitle follows as the page opens; under the pointer the
+   book turns towards it, as if picked up; in the full text each chapter's mark draws its line and the chapter's title
+   rises as it is reached; the closing words come in after their line. */
+.book-text-body .book-text-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: left;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .book-hero h1 { animation: lost-focus 1s cubic-bezier(.22, 1, .36, 1) both; }
+  .book-hero .book-subtitle { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .3s both; }
+  .book-object:hover .book-object-cover { transform: rotateY(calc(-20deg + var(--px, .5) * 22deg)) rotateX(calc((.5 - var(--py, .5)) * 6deg)); transition: transform .3s ease-out; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-text-body .book-text-kicker::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 20% entry 100%; }
+    .book-text-body .book-text-kicker + :is(h2, h3) { animation: scroll-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 120px; }
+    .book-closing blockquote p { animation: closing-words linear both; animation-timeline: view(); animation-range: entry 30% cover 45%; }
+  }
+}
+@keyframes closing-words { from { opacity: .15; translate: 0 18px; } }
+
+/* The guide's editions: each change is a small blue mark that lights up as it is reached, the line of text sliding
+   into place beside it; an earlier edition to download lifts and its arrow points down under the pointer. */
+.book-editions ul { padding-left: 0; list-style: none; }
+.book-editions li { position: relative; padding-left: 22px; }
+.book-editions li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  background: var(--blue);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--blue) 50%, transparent);
+}
+.book-editions a[download] { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid color-mix(in srgb, var(--blue) 40%, transparent); transition: color .25s ease, border-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1); }
+.book-editions a[download]::after { content: "↓"; color: var(--blue); transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.book-editions a[download]:hover { color: var(--blue); border-color: var(--blue); translate: 0 -1px; }
+.book-editions a[download]:hover::after { translate: 0 3px; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .book-editions li::before { animation: edition-mark linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+    .book-editions li { animation: principle-in linear both; animation-timeline: view(); animation-range: entry 10% entry 100%; }
+  }
+}
+@keyframes edition-mark { from { background: transparent; box-shadow: none; scale: .6; } }
+
+/* The podcast player's line fills with what has been heard (--heard, from audio-player.js) and its knob glows while
+   an episode plays; on the podcast page, the address and its button glow green for as long as "Copied" shows. */
+.audio-player-scrub { height: 18px; background: transparent; appearance: none; -webkit-appearance: none; }
+.audio-player-scrub::-webkit-slider-runnable-track { height: 4px; border-radius: 99px; background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--heard, 0%) 100% no-repeat, var(--line); }
+.audio-player-scrub::-moz-range-track { height: 4px; border-radius: 99px; background: linear-gradient(var(--blue), var(--blue)) 0 0 / var(--heard, 0%) 100% no-repeat, var(--line); }
+.audio-player-scrub::-webkit-slider-thumb { width: 14px; height: 14px; margin-top: -5px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); transition: box-shadow .3s ease, scale .25s cubic-bezier(.22, 1, .36, 1); -webkit-appearance: none; }
+.audio-player-scrub::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.audio-player-scrub:hover::-webkit-slider-thumb { scale: 1.15; }
+.audio-player.is-playing .audio-player-scrub::-webkit-slider-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 22%, transparent), 0 0 12px var(--blue); }
+.audio-player.is-playing .audio-player-scrub::-moz-range-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 22%, transparent), 0 0 12px var(--blue); }
+.podcast-address-row input, .podcast-address-row .button-primary { transition: border-color .3s ease, box-shadow .35s ease, background-color .3s ease; }
+.podcast-address.is-done .podcast-address-row input { border-color: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 16%, transparent); }
+.podcast-address.is-done .podcast-address-row .button-primary { background: var(--ok); border-color: var(--ok); box-shadow: 0 0 18px color-mix(in srgb, var(--ok) 45%, transparent); }
+
+/* Downloads (pages/downloads.njk): the kinds of publication as chips with their count, then each kind as a list of
+   rows, a title with the files beside it. In motion: the rows rise into place, a row lights up under the pointer, a
+   file's arrow drops towards the reader and the button settles when it is pressed; the rest of a long list unfolds. */
+.downloads-jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+.downloads-jump a { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px 9px 16px; border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line)); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; transition: border-color .25s ease, background-color .25s ease, translate .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease; }
+.downloads-jump a span { display: grid; place-items: center; min-width: 26px; height: 22px; padding: 0 7px; border-radius: 999px; background: color-mix(in srgb, var(--blue) 14%, transparent); color: var(--blue); font-size: 12px; font-variant-numeric: tabular-nums; }
+.downloads-jump a:hover { translate: 0 -2px; border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 12px 26px -18px var(--blue); }
+.downloads-section { padding-top: 56px; scroll-margin-top: 80px; }
+.downloads-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.downloads-head h2 { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3.4vw, 42px); font-weight: 400; line-height: 1.05; }
+.downloads-head span { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.downloads-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.downloads-row { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.downloads-row::before { content: ""; position: absolute; inset: 4px -16px; z-index: -1; border-radius: 16px; background: radial-gradient(460px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--blue) 10%, transparent), transparent 65%), color-mix(in srgb, var(--ink) 3%, transparent); opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+.downloads-row:hover::before { opacity: 1; }
+.downloads-copy { display: grid; gap: 4px; min-width: 0; }
+.downloads-title { color: var(--ink); font-family: var(--serif); font-size: clamp(19px, 2vw, 23px); line-height: 1.2; text-decoration: none; overflow-wrap: anywhere; transition: color .25s ease, translate .4s cubic-bezier(.22, 1, .36, 1); }
+.downloads-row:hover .downloads-title { translate: 4px 0; color: color-mix(in srgb, var(--blue-soft, var(--blue)) 70%, var(--ink)); }
+.downloads-meta { color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+.downloads-files { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.downloads-file { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 13px; text-decoration: none; white-space: nowrap; transition: border-color .25s ease, background-color .25s ease, box-shadow .3s ease, scale .2s cubic-bezier(.22, 1, .36, 1); }
+.downloads-file b { color: var(--blue); font-size: 12px; letter-spacing: .08em; }
+.downloads-file span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.downloads-file i { color: var(--blue); font-style: normal; font-weight: 800; transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.downloads-file:hover { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); box-shadow: 0 10px 22px -16px var(--blue); }
+.downloads-file:hover i { translate: 0 3px; }
+.downloads-file:active { scale: .96; box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.downloads-more summary { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; transition: border-color .25s ease, background-color .25s ease; }
+.downloads-more summary::-webkit-details-marker { display: none; }
+.downloads-more summary::after { content: "+"; color: var(--blue); font-weight: 800; transition: rotate .35s cubic-bezier(.22, 1, .36, 1); }
+.downloads-more[open] summary::after { rotate: 45deg; }
+.downloads-more summary:hover { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.downloads-more[open] .downloads-list { margin-top: 8px; }
+.downloads-note { margin-top: 40px; margin-bottom: 90px; }
+@media (max-width: 620px) {
+  .downloads-row { grid-template-columns: minmax(0, 1fr); }
+  .downloads-row::before { inset: 4px -10px; }
+  .downloads-files { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .downloads-more[open] .downloads-row { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 30ms); }
+}
+@media (prefers-reduced-motion: reduce) { .downloads-title, .downloads-file, .downloads-file i, .downloads-jump a { transition: none; } }
+
+/* Publications in motion: the title lifts like a page being turned up, each series keeps its own colour (the
+   Management Review blue, the treatise violet, From the Floor red, the book and the guide green) in the light that
+   follows the pointer and in a short mark before its kicker, drawn as the publication comes into view; after a
+   month or a kind is chosen, the covers turn in towards the reader one after another, and a count that changes
+   gives a small beat. */
+[data-pub] { --series: var(--blue); }
+[data-pub][data-block="treatise"] { --series: color-mix(in srgb, var(--blue) 50%, var(--red)); }
+[data-pub][data-block="floor"] { --series: var(--red); }
+[data-pub][data-block="books"] { --series: var(--ok); }
+[data-pub].book-feature::after,
+[data-pub] .book-feature::after {
+  background:
+    radial-gradient(620px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--series) 13%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 2.5%, transparent);
+}
+[data-pub] .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  margin: 0 10px 0 0;
+  border-radius: 3px;
+  background: var(--series);
+  vertical-align: .28em;
+  transform-origin: left;
+  transition: width .45s cubic-bezier(.22, 1, .36, 1);
+}
+[data-pub]:hover .kicker::before { width: 38px; }
+.publications-filter .weekly-filter button[data-block="review"]:hover { border-color: var(--blue); }
+.publications-filter .weekly-filter button[data-block="treatise"]:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--red)); }
+.publications-filter .weekly-filter button[data-block="floor"]:hover { border-color: var(--red); }
+.publications-filter .weekly-filter button[data-block="books"]:hover { border-color: var(--ok); }
+.weekly-n { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .publications-hero .eyebrow { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; }
+  .publications-hero h1 { transform-origin: 50% 100%; animation: pub-leaf 1s cubic-bezier(.22, 1, .36, 1) .12s both; }
+  .publications-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .4s both; }
+  .publications-filter .weekly-controls:not([hidden]) { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) .55s both; }
+  [data-pub].is-entering .book-object-cover,
+  [data-pub].is-entering .book-feature .book-object-cover { animation: pub-cover-in .8s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 35ms + .08s); }
+  .weekly-n.is-bumped { animation: pub-count .45s cubic-bezier(.22, 1, .36, 1); }
+  .publications-more .weekly-none:not([hidden]) { animation: list-in .5s cubic-bezier(.22, 1, .36, 1) both; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-pub] .kicker::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
+  }
+}
+@keyframes pub-leaf { from { opacity: 0; transform: perspective(900px) rotateX(55deg) translateY(.12em); filter: blur(4px); } }
+@keyframes pub-cover-in { from { opacity: 0; transform: perspective(1200px) rotateY(-38deg) translateX(-14px); } }
+@keyframes pub-count { 40% { scale: 1.35; opacity: 1; color: var(--ink); } }
+@media (prefers-reduced-motion: reduce) { [data-pub] .kicker::before { transition: none; } }
+
+/* Contact in motion: the title comes in like a signal finding its frequency (wide and blurred, then sharp), the two
+   ways to write follow one after another, each planet sends out a soft ring now and then (the two in turn, like
+   two lights answering each other), a card gives under the press, and in a form the label of the field being
+   written in takes the blue and the send button answers the press. */
+.contact-card:active { transform: translateY(-1px) scale(.985); transition-duration: .12s; }
+.contact-card:focus-visible .contact-card-orb { scale: 1.3; box-shadow: 0 0 16px var(--blue); }
+.contact-card:focus-visible .contact-card-go { translate: 5px 0; }
+.contact-form .field label { transition: color .25s ease; }
+.contact-form .field:focus-within label { color: var(--blue); }
+.contact-form button { transition: filter .25s ease, scale .2s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease; }
+.contact-form button:hover { box-shadow: 0 14px 30px -18px var(--blue); }
+.contact-form button:active { scale: .96; }
+@media (prefers-reduced-motion: no-preference) {
+  .contact-hero .eyebrow { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; }
+  .contact-hero h1 { animation: contact-signal 1.1s cubic-bezier(.22, 1, .36, 1) .1s both; transform-origin: left; }
+  .contact-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .4s both; }
+  .contact-hero ~ .contact .contact-card { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) backwards; animation-delay: .55s; }
+  .contact-hero ~ .contact .contact-card + .contact-card { animation-delay: .67s; }
+  .contact-hero ~ .contact .contact-form { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .5s backwards; }
+  .contact-card-orb { position: relative; }
+  .contact-card-orb::after { animation: news-ring 2.8s ease-out 1.4s infinite; }
+  .contact-card + .contact-card .contact-card-orb::after { animation-delay: 2.8s; }
+  .contact-card:is(:hover, :focus-visible) .contact-card-orb::after { animation: none; }
+}
+@keyframes contact-signal {
+  0% { opacity: 0; scale: 1.06 1; filter: blur(10px); }
+  60% { opacity: 1; filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) { .contact-card:active { transform: none; } .contact-form button, .contact-form .field label { transition: none; } }
+
+/* About in motion: "Clarity into action." comes on like the bulb of the brand (a flash of blue light that settles into
+   the words), the portrait opens into focus, the name and the role follow; along the path each planet lights up as
+   its step is reached while reading, the years sliding in beside it; the two cards under the path rise with a blue
+   edge under the pointer, like the figures; and the large sentences of the philosophy brighten as they are read. */
+.about-more > div { transition: transform .4s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .4s ease; }
+.about-more > div:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+  box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--blue) 75%, transparent);
+}
+.about-links .text-link span { display: inline-block; transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+.about-links .text-link:hover span { translate: 4px 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .about-hero .eyebrow { animation: list-in .6s cubic-bezier(.22, 1, .36, 1) both; }
+  .about-hero h1 { animation: about-light 1.2s cubic-bezier(.22, 1, .36, 1) .1s both; }
+  .about-hero .lede { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) .45s both; }
+  .about-intro .about-portrait img { animation: about-focus 1.1s cubic-bezier(.22, 1, .36, 1) .2s both; }
+  .about-intro-copy > .kicker, .about-intro-copy > h2, .about-intro-copy > .about-role { animation: list-in .7s cubic-bezier(.22, 1, .36, 1) backwards; }
+  .about-intro-copy > h2 { animation-delay: .08s; }
+  .about-intro-copy > .about-role { animation-delay: .16s; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .about-timeline li:not(:first-child) .about-when::before { animation: about-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 40%; }
+    .about-timeline li:hover .about-when::before { animation: none; }
+    .about-timeline .about-when { animation: about-years linear both; animation-timeline: view(); animation-range: entry 20% entry 90%; }
+    .about-copy .large-copy { animation: closing-words linear both; animation-timeline: view(); animation-range: entry 20% cover 40%; }
+  }
+}
+@keyframes about-light {
+  0% { opacity: 0; filter: blur(8px) brightness(2.4); text-shadow: 0 0 40px var(--blue); }
+  45% { opacity: 1; filter: blur(0) brightness(1.6); text-shadow: 0 0 28px color-mix(in srgb, var(--blue) 70%, transparent); }
+}
+@keyframes about-focus { from { opacity: 0; filter: blur(10px) saturate(.4); transform: scale(1.12); } }
+@keyframes about-reach {
+  0% { opacity: .25; scale: .6; box-shadow: none; }
+  60% { opacity: 1; scale: 1.5; box-shadow: 0 0 12px var(--blue); }
+  100% { opacity: .6; scale: 1; box-shadow: none; }
+}
+@keyframes about-years { from { opacity: .3; translate: -8px 0; } }
+@media (prefers-reduced-motion: reduce) { .about-more > div, .about-links .text-link span { transition: none; } .about-more > div:hover { transform: none; } }
+
+/* The homepage in motion, below the cosmos: the field note of the day rises into place, its big quotation mark
+   drifts and turns slowly as the page moves and the words of the note brighten as they are read; the four words of
+   the strip light their planets one after another as they come into view; and each section opens with a short blue
+   line drawn before its kicker, its title rising out of a soft blur, its note following. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .note-of-day { animation: scroll-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    .note-of-day::before { animation: home-quote-drift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    .note-of-day-quote p { animation: closing-words linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
+    .meta-strip strong::before { animation: home-dot linear both; animation-timeline: view(); animation-range: entry 30% cover 30%; }
+    .meta-strip > div:nth-child(2) strong::before { animation-range: entry 45% cover 35%; }
+    .meta-strip > div:nth-child(3) strong::before { animation-range: entry 60% cover 40%; }
+    .meta-strip > div:nth-child(4) strong::before { animation-range: entry 75% cover 45%; }
+    .meta-strip > div:hover strong::before { animation: none; }
+    .meta-strip ~ .section .section-heading .kicker::before { animation: mark-draw linear both; animation-timeline: view(); animation-range: entry 20% entry 80%; }
+    .meta-strip ~ .section .section-heading h2 { animation: home-heading linear both; animation-timeline: view(); animation-range: entry 5% entry 75%; }
+    .meta-strip ~ .section .section-heading > p { animation: list-in linear both; animation-timeline: view(); animation-range: entry 25% entry 100%; }
+  }
+}
+.meta-strip ~ .section .section-heading .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  margin-right: 10px;
+  border-radius: 2px;
+  background: currentColor;
+  vertical-align: .3em;
+  transform-origin: left;
+}
+@keyframes home-quote-drift { from { translate: 0 -20px; rotate: -8deg; opacity: .4; } to { translate: 0 30px; rotate: 6deg; } }
+@keyframes home-dot {
+  0% { scale: .5; opacity: .3; box-shadow: none; }
+  60% { scale: 1.6; opacity: 1; box-shadow: 0 0 14px var(--blue); }
+}
+@keyframes home-heading { from { opacity: 0; translate: 0 28px; filter: blur(5px); } }

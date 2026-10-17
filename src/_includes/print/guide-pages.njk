@@ -75,10 +75,13 @@
 {%- endmacro -%}
 {%- for id in toolsGuide.pages %}
 {%- set number = loop.index %}
+{#- The step this page is set tighter by, if it needs one (src/_data/pageFit.json, print/guide.css). #}
+{%- set fit = pageFit[toolsGuide.slug][lang][number] %}
+{%- set fitClass = (" fit-" + fit) if fit else "" %}
 
 {%- if id == "cover" %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg cover">
+<section class="pg cover{{ fitClass }}">
   <div class="brand"><span>Stiven Catalyst</span><span>{{ g.edition }}</span></div>
   {{ system("cover", true, false) }}
   {#- Not a heading: in the reader the page already has its title as h1, as on the covers of the Management Review. #}
@@ -91,7 +94,7 @@
 {%- elif id == "back" %}
 {%- set s = g.sections.back %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg back">
+<section class="pg back{{ fitClass }}">
   {{ system("back", false, false) }}
   <p class="motto">{% for part in s.motto.split(". ") %}<span>{{ part }}{{ "." if not loop.last }}</span>{% endfor %}</p>
   <p>{{ s.text }}</p>
@@ -102,7 +105,7 @@
 
 {%- elif id == "contents" %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg">
+<section class="pg{{ fitClass }}">
   {{ chrome(number) }}
   <p class="kicker">{{ g.edition }}</p>
   <h2>{{ g.labels.contents }}</h2>
@@ -125,7 +128,7 @@
 {%- elif id.startsWith("family:") %}
 {%- set f = F[id.slice(7)] %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg fam opener" style="--family: {{ f.color }}">
+<section class="pg fam opener{{ fitClass }}" style="--family: {{ f.color }}">
   {{ chrome(number, f.name, f.color) }}
   <div class="fam-hero">
     <div>
@@ -159,7 +162,7 @@
 {%- set text = g.tools[url] %}
 {%- set f = F[toolsGuide.familyOfTool[url]] %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg fam" style="--family: {{ f.color }}">
+<section class="pg fam{{ fitClass }}" style="--family: {{ f.color }}">
   {{ chrome(number, f.name + " · " + (f.role | t(lang)), f.color) }}
   <div class="tool-head">
     <div class="tool-meta"><span class="chip f">{{ f.name }}</span><span class="chip">{{ tool.type }}</span><span class="chip">{{ tool.time }}</span></div>
@@ -177,7 +180,7 @@
 {%- else %}
 {%- set s = g.sections[id] %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg">
+<section class="pg{{ fitClass }}">
   {{ chrome(number, s.kicker) }}
   <p class="kicker">{{ s.kicker }}</p>
   <h2>{{ s.title }}</h2>

@@ -36,6 +36,14 @@ jobs:
           grep -q '^# fail 0$' test.log
           grep -q '^# skipped 0$' test.log
       - run: node scripts/check-coaching-build.mjs
+      # The reader journeys in a real browser (tests/browser): the built site at three widths, in both themes, with
+      # the accessibility check. Only Chromium is installed, with the system libraries it needs.
+      - run: npx playwright install --with-deps chromium
+      - name: Browser tests (no journey may fail)
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:browser 2>&1 | tee browser-test.log
       - if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
       - if: github.event_name != 'pull_request'

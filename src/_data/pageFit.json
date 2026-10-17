@@ -1,0 +1,285 @@
+{
+ "management-review-nr-01": {
+  "sq": {
+   "6": 1
+  },
+  "de": {
+   "3": 1
+  }
+ },
+ "management-review-nr-03": {
+  "de": {
+   "1": 1
+  }
+ },
+ "management-review-nr-04": {
+  "de": {
+   "9": 1
+  }
+ },
+ "management-review-nr-05": {
+  "de": {
+   "5": 1,
+   "6": 1,
+   "7": 1
+  }
+ },
+ "management-review-nr-06": {
+  "de": {
+   "1": 1
+  }
+ },
+ "management-review-nr-16": {
+  "de": {
+   "7": 1
+  }
+ },
+ "management-review-nr-19": {
+  "de": {
+   "4": 2
+  }
+ },
+ "management-review-nr-21": {
+  "sq": {
+   "4": 1
+  },
+  "de": {
+   "4": 1
+  }
+ },
+ "management-review-nr-26": {
+  "de": {
+   "5": 1
+  }
+ },
+ "management-review-nr-27": {
+  "sq": {
+   "5": 1
+  },
+  "de": {
+   "5": 1
+  }
+ },
+ "management-review-nr-30": {
+  "sq": {
+   "5": 1
+  }
+ },
+ "management-review-nr-31": {
+  "sq": {
+   "4": 1
+  },
+  "de": {
+   "4": 1,
+   "5": 1
+  }
+ },
+ "management-review-nr-39": {
+  "sq": {
+   "4": 1,
+   "5": 1
+  },
+  "de": {
+   "4": 1
+  }
+ },
+ "management-review-nr-41": {
+  "de": {
+   "6": 2
+  }
+ },
+ "management-review-nr-43": {
+  "sq": {
+   "8": 1
+  },
+  "de": {
+   "8": 1
+  }
+ },
+ "management-review-nr-45": {
+  "de": {
+   "2": 1
+  }
+ },
+ "management-review-nr-47": {
+  "en": {
+   "7": 1
+  },
+  "de": {
+   "7": 1,
+   "8": 1
+  }
+ },
+ "management-review-nr-49": {
+  "de": {
+   "8": 1
+  }
+ },
+ "management-review-nr-51": {
+  "de": {
+   "8": 1
+  }
+ },
+ "management-review-nr-52": {
+  "en": {
+   "9": 2
+  },
+  "sq": {
+   "9": 2
+  },
+  "de": {
+   "9": 2
+  }
+ },
+ "management-review-nr-53": {
+  "de": {
+   "4": 1
+  }
+ },
+ "management-review-nr-55": {
+  "en": {
+   "3": 1
+  },
+  "sq": {
+   "3": 1
+  },
+  "de": {
+   "3": 2,
+   "7": 1
+  }
+ },
+ "management-review-nr-57": {
+  "sq": {
+   "5": 1
+  },
+  "de": {
+   "5": 2
+  }
+ },
+ "management-review-nr-59": {
+  "sq": {
+   "5": 1
+  },
+  "de": {
+   "1": 1,
+   "2": 1,
+   "5": 1
+  }
+ },
+ "management-review-nr-60": {
+  "sq": {
+   "5": 1
+  },
+  "de": {
+   "5": 2
+  }
+ },
+ "management-review-nr-61": {
+  "sq": {
+   "5": 1
+  },
+  "de": {
+   "1": 1,
+   "5": 1,
+   "7": 1
+  }
+ },
+ "management-review-nr-63": {
+  "de": {
+   "7": 1
+  }
+ },
+ "management-review-nr-64": {
+  "en": {
+   "5": 1
+  },
+  "sq": {
+   "5": 1,
+   "6": 1,
+   "8": 1
+  },
+  "de": {
+   "1": 1,
+   "5": 1,
+   "6": 1
+  }
+ },
+ "management-review-nr-65": {
+  "en": {
+   "1": 1,
+   "5": 1
+  },
+  "sq": {
+   "1": 1,
+   "5": 1
+  },
+  "de": {
+   "1": 1,
+   "5": 1
+  }
+ },
+ "management-review-nr-67": {
+  "sq": {
+   "8": 1
+  },
+  "de": {
+   "8": 1
+  }
+ },
+ "management-review-nr-69": {
+  "de": {
+   "1": 1
+  }
+ },
+ "management-review-nr-70": {
+  "sq": {
+   "3": 1
+  },
+  "de": {
+   "3": 1,
+   "4": 1
+  }
+ },
+ "management-review-nr-71": {
+  "de": {
+   "1": 1
+  }
+ },
+ "management-review-nr-79": {
+  "de": {
+   "9": 1
+  }
+ },
+ "nga-terreni-02": {
+  "de": {
+   "8": 1
+  }
+ },
+ "operational-treatise-vol-01": {
+  "sq": {
+   "6": 1
+  },
+  "de": {
+   "6": 1,
+   "8": 1
+  }
+ },
+ "operational-treatise-vol-02": {
+  "sq": {
+   "17": 1,
+   "25": 1,
+   "26": 1
+  },
+  "de": {
+   "7": 1,
+   "17": 1,
+   "25": 2,
+   "26": 1
+  }
+ },
+ "tools-guide": {
+  "de": {
+   "16": 1
+  }
+ }
+}

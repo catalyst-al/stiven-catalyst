@@ -31,7 +31,7 @@ test('the menu item and the writing tab of the page carry the piece that slides'
     const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
     assert.equal(nav.match(/class="nav-pill"/g)?.length, 1, `${file}: one line under the menu`);
     assert.match(nav, new RegExp(`aria-current="page" href="${item}"[^>]*><span class="nav-orb" aria-hidden="true"></span>[^<]+<span class="nav-pill" aria-hidden="true"></span></a>`), file);
-    assert.equal(nav.match(/class="nav-orb"/g)?.length, 5, `${file}: every menu item has its planet`);
+    assert.equal(nav.match(/class="nav-orb"/g)?.length, 6, `${file}: every menu item has its planet (Start here and the five places)`);
     assert.doesNotMatch(html.match(/<nav id="mobile-menu"[\s\S]*?<\/nav>/)[0], /nav-pill/, `${file}: the name stays unique`);
   }
   const reflections = built('reflections.html');

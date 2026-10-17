@@ -367,6 +367,24 @@
   let saved = 0;
   try { saved = Number(localStorage.getItem(storageKey)) || 0; } catch { /* storage unavailable */ }
 
+  // On a phone the text comes first: the whole text, open, right under the hero, and "Read it as text" as the
+  // first button. The page design stays one tap away: the other button, and the reader under the text. Not when
+  // the address points to a page of the reader (#faqe-12), and not on a wider screen, where the reader leads.
+  const textSection = document.querySelector("#text");
+  const stage = reader.closest("#reader");
+  if (window.matchMedia("(max-width: 620px)").matches && !linked && textSection && stage?.parentNode === textSection.parentNode) {
+    stage.before(textSection);
+    textSection.querySelector("[data-book-details]")?.setAttribute("open", "");
+    const actions = document.querySelector(".book-hero .hero-actions");
+    const toText = actions?.querySelector("[data-book-text]");
+    const toBook = actions?.querySelector("[data-book-open]");
+    if (toText && toBook) {
+      toBook.before(toText);
+      toText.className = "button-primary";
+      toBook.className = "button-secondary";
+    }
+  }
+
   build();
   reader.classList.add("is-ready");
   $("[data-book-controls]").hidden = false;

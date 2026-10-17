@@ -6,7 +6,9 @@
 //
 // 1. Eleventy renders the print pages (src/guide-print/print.njk) into a temporary folder, only when GUIDE_PRINT is set,
 //    so they never reach the published site.
-// 2. Chromium (Playwright) prints each language to src/media/guides/tools-guide/tools-guide-<lang>.pdf.
+// 2. Chromium (Playwright) checks that every page fits its box (lib/page-fit.js) and stops with the list of
+//    those that do not (node scripts/page-fit.mjs sets them tighter); then it prints each language to
+//    src/media/guides/tools-guide/tools-guide-<lang>.pdf.
 // 3. scripts/guide-pages.py draws the cover of every PDF (COVER_ONLY) and writes src/_data/toolsGuidePages.json.
 //
 // Run it again whenever the text in src/_data/toolsGuide.js or a tool changes.
@@ -16,6 +18,7 @@ import http from "node:http";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { checkPagesFit, unfitMessage } from "../lib/page-fit.js";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(ROOT, "src", "media", "guides", "tools-guide");
@@ -48,6 +51,17 @@ const require = createRequire(import.meta.url);
 let playwright;
 try { playwright = require("playwright"); } catch { playwright = require(path.join(execFileSync("npm", ["root", "-g"]).toString().trim(), "playwright")); }
 const browser = await playwright.chromium.launch(fs.existsSync("/opt/pw-browsers/chromium") ? { executablePath: "/opt/pw-browsers/chromium" } : {});
+
+// Every page has to fit its box before anything is printed (lib/page-fit.js, with the steps of src/_data/pageFit.json):
+// a page that runs into the block at its foot, or past the page, stops the print with the list of such pages.
+const unfit = await checkPagesFit(browser, guide.langs.map((lang) => ({ label: `${guide.slug} ${lang}`, url: `${base}/guide-print/${lang}/` })));
+if (unfit.length) {
+  await browser.close();
+  server.close();
+  fs.rmSync(tmp, { recursive: true, force: true });
+  console.error(unfitMessage(unfit));
+  process.exit(1);
+}
 
 fs.mkdirSync(OUT, { recursive: true });
 for (const lang of guide.langs) {

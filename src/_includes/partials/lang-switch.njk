@@ -1,4 +1,5 @@
-{#- The same page in each language; `alternates` is worked out in lib/translations.js. -#}
+{#- The same page in each language; `alternates` is worked out in lib/translations.js. A link's spoken name keeps the
+    letters it shows ("Deutsch, DE"), so a reader who says "DE" to voice control finds it. -#}
 {%- if alternates %}
 {%- set current = lang or "en" %}
 <nav class="lang-switch" aria-label="{{ 'Language' | t(lang) }}">
@@ -6,7 +7,7 @@
   {%- if code == current %}
   <span aria-current="true" title="{{ name }}">{{ code | upper }}</span>
   {%- elif alternates[code] %}
-  <a href="{{ alternates[code] }}" hreflang="{{ code }}" lang="{{ code }}" title="{{ name }}" aria-label="{{ name }}">{{ code | upper }}</a>
+  <a href="{{ alternates[code] }}" hreflang="{{ code }}" lang="{{ code }}" title="{{ name }}" aria-label="{{ name }}, {{ code | upper }}">{{ code | upper }}</a>
   {%- endif %}
   {%- endfor %}
 </nav>
