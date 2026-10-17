@@ -48,7 +48,7 @@ I come to it from last mile, with its loading problems, missing bags and mixed t
 
 A scan is a short, precise sentence: this code was read, in this place, at this time. Nothing more.
 
-It does not say that the bag is still there, or that it went onto the right trolley. It does not say that the right trolley reached the right driver, or that the driver took everything before leaving. All of that happens after the scan, in the physical world, where the scanner cannot see. I have no verified case of a bag the system showed as scanned that I then saw was missing, but the limit is there in what a scan records.
+It does not say that the bag is still there, or that it went onto the right trolley. It does not say that the right trolley reached the right driver, or that the driver took everything before leaving. All of that happens after the scan, in the physical world, where the scanner cannot see.
 
 The scan keeps its value; these limits show what it is valuable for. A good witness says precisely what they saw, and nothing about what happened while they were not there.
 
@@ -58,11 +58,11 @@ The scan keeps its value; these limits show what it is valuable for. A good witn
 
 In [Where part of the order goes missing](/insights/where-part-of-the-order-goes-missing/) I described the rule for a missing bag: the driver told the Team Leader, and the trolley stayed inside the designated zone until the problem was solved.
 
-I do not know who wrote that rule or when, so what follows is my reading of it. The rule does not ask anyone to look at a screen. It asks someone to stop and look at the trolley. At the very moment when record and reality may have drifted apart, it gives the word to the physical check, and it keeps the trolley where that check is still possible. That principle runs through this whole essay.
+Here is how I read it. The rule does not ask anyone to look at a screen. It asks someone to stop and look at the trolley. At the very moment when record and reality may have drifted apart, it gives the word to the physical check, and it keeps the trolley where that check is still possible. That principle runs through this whole essay.
 
 ## The name on the last line
 
-When a bag is missing, the first question in most operations is “who did it?” rather than “where did it go missing?”, and the scan history looks like the quickest answer: here is who scanned it last. I have no case in which it was used to blame a driver, or in which I used it myself to establish responsibility, but the shortcut is easy to see.
+When a bag is missing, the first question in most operations is “who did it?” rather than “where did it go missing?”, and the scan history looks like the quickest answer: here is who scanned it last. The shortcut is easy to see.
 
 But a missing bag may have gone missing in the warehouse, during preparation, during loading or on the road, and the problems we had in last mile could involve any of these stages. The last scan shows who last touched the bag in the system; where the bag was separated from its place, it cannot show.
 
@@ -74,13 +74,13 @@ When it is proven that someone broke the standard, individual responsibility rem
 
 ## When the scan is missing
 
-Then there is the other side: the scanner that does not work, the scan that is not made. I have no case of it to describe and do not know how it was officially regulated, so this part is a recommendation.
+Then there is the other side: the scanner that does not work, the scan that is not made. What follows is how I would advise today.
 
 One thing I would not suggest is carrying on without a scan where the procedure requires one. That applies above all to chilled and frozen products, where the scan inside the temperature zone is itself part of the rule. Where the witness is missing, nobody fills the gap with an assumption: every exception is handled under the authorised rules, and written down.
 
 ## Five steps for a mismatch
 
-Today I would investigate a mismatch between the system and reality like this. It is a recommendation, not a protocol I applied in every case:
+Today I would investigate a mismatch between the system and reality like this:
 
 1. **Check the record and its time.** What exactly the system says, and when it said it.
 2. **Verify the physical state of the load.** With your own eyes, not with another scan.
@@ -94,7 +94,7 @@ The third step is the one people often skip. Without it, the search starts at th
 
 In Front Office and Night Audit, the system records reservations, room statuses, check-ins, check-outs and other operational information. The complaints about water pressure and room cleanliness that I documented needed communication with the responsible departments, because the real state had to be checked where it was, not on the screen.
 
-I have no case of a room that the system showed as in order and that I found otherwise. The principle is the same as with the scanner, and I set it out in the first essay: the status in the system and the full history of a problem are two different things.
+The principle is the same as with the scanner, and I set it out in the first essay: the status in the system and the full history of a problem are two different things.
 
 ## A mismatch between the system and reality
 

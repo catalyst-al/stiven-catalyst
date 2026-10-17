@@ -30,7 +30,7 @@ checklist:
 
 Dikur pyesja më shpesh: “Si e zgjidhim këtë?”
 
-Sot është më e gjatë: “Si e zgjidhim këtë, kush përgjigjet për të më pas dhe çfarë ndryshojmë që të mos na kthehet?” Ndoshta ky është ndryshimi më i madh që kam bërë si drejtues.
+Sot pyetja është më e gjatë: “Si e zgjidhim këtë, kush përgjigjet për të më pas dhe çfarë ndryshojmë që të mos na kthehet?” Ndoshta ky është ndryshimi më i madh që kam bërë si drejtues.
 
 ## Si drejtoja në Shqipëri
 
@@ -60,7 +60,7 @@ Më parë përqendrohesha kryesisht te rezultati: problemi ekziston, pra duhet z
 
 Prandaj sot u jap shumë më tepër rëndësi SOP-ve, listave të kontrollit, KPI-ve, dorëzimit të turnit, dokumentimit dhe qartësisë se kush përgjigjet për çdo detyrë.
 
-Kam mësuar gjithashtu ta ndaj më qartë nismën nga autoriteti. Mund ta dalloj një problem, ta analizoj, të propozoj një zgjidhje dhe ta bëj pjesën time, por kjo nuk do të thotë automatikisht se çdo vendim më takon mua. Ky kufi sot ka për mua shumë më tepër rëndësi se më parë.
+Kam mësuar gjithashtu ta ndaj më qartë nismën nga autoriteti për të vendosur. Mund ta dalloj një problem, ta analizoj, të propozoj një zgjidhje dhe ta bëj pjesën time, por kjo nuk do të thotë automatikisht se çdo vendim më takon mua. Ky kufi sot ka për mua shumë më tepër rëndësi se më parë.
 
 Dhe kam mësuar diçka që në fillim mund të duket burokratike, por që në operacione vlen shumë: nëse një proces funksionon vetëm sepse një person i mirë e mban mend, atëherë nuk ke ende një proces të mirë.
 
@@ -72,11 +72,11 @@ Kam ruajtur edhe fleksibilitetin. Kur del një problem, nuk më pëlqen të për
 
 Dhe kam ruajtur marrëdhënien njerëzore me ekipin. Procesi ka rëndësi, por njerëzit nuk janë procese. Një punonjës mund të ketë të njëjtën detyrë si dje dhe të vijë sot në punë në një gjendje krejt tjetër. Edhe këtë duhet ta shohë drejtimi.
 
-Nuk po them se këto gjëra mungojnë në Gjermani; një përgjithësim të tillë nuk mund ta mbështes me përvojën time. Janë pjesë të stilit tim që i solla me vete dhe që nuk desha t'i humbja ndërsa përshtatesha me një kulturë pune më të strukturuar.
+Nuk po them se këto gjëra mungojnë në Gjermani. Janë pjesë të stilit tim që i solla me vete dhe që nuk desha t'i humbja ndërsa përshtatesha me një kulturë pune më të strukturuar.
 
 ## Çfarë do të bëja ndryshe
 
-Asnjë vendim të vetëm nga Shqipëria nuk mund ta rindërtoj me siguri, ndaj ajo që do të ndryshoja është një zakon: sot do të dokumentoja më shumë.
+Do të ndryshoja jo një vendim të caktuar, por një zakon: sot do të dokumentoja më shumë.
 
 Nëse një proces funksiononte sepse e dija unë, sot do të përpiqesha që ta dinte sistemi. Nëse një problem zgjidhej, nuk do të më mjaftonte që ai u zhduk. Do të doja të kuptoja pse ndodhi dhe nëse duhet ndryshuar diçka në proces.
 

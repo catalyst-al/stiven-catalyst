@@ -8,7 +8,7 @@ featured: true
 summary: Një sistem i mirë eskalimi nuk i mëson njerëzit të kërkojnë leje për çdo gjë. I mëson të kuptojnë kufirin e vendimit të tyre.
 description: "Eskalimi si sistem, jo si temperament: çfarë ishte brenda rolit tim natën në hotel, pesë gjërat e një eskalimi të mirë dhe matrica e eskalimit për turnin."
 teaser: Të marrësh përgjegjësi nuk do të thotë “e zgjidh gjithmonë vetë”. Do të thotë ta çosh problemin deri në vendin ku mund të merret vendimi i duhur, me informacionin e duhur.
-deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes iniciativës dhe autoritetit si rregull i qartë, tri gabimet e eskalimit, çfarë duhet të ketë një eskalim i mirë, dhe matrica e eskalimit për turnin.'
+deck: 'Eseja e katërt e serisë “Operacioni që punon pa ty”: kufiri mes nismës dhe autoritetit si rregull i qartë, tri gabimet e eskalimit, çfarë duhet të ketë një eskalim i mirë, dhe matrica e eskalimit për turnin.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - "Për problemin tjetër, përgjigju pesë pyetjeve para se të veprosh: autoriteti im, siguria, e kthyeshme, jashtë turnit tim, çfarë ndodh nëse pres."
@@ -17,7 +17,7 @@ firstMove:
 checklist:
   title: Matrica e eskalimit për turnin
   fill: true
-  note: "Nëse 1 është “jo” ose 2 është “po”: mos e prek, çoje lart. Nëse nuk kthehet dot ose prek dikë jashtë turnit tënd: zgjidhe dhe informo. Nëse asnjë përgjigje nuk ngre shqetësim: zgjidhe vetë. Pyetja e pestë cakton shpejtësinë."
+  note: "Nëse 1 është “jo” ose 2 është “po”: mos e prek dhe çoje lart. Nëse nuk kthehet dot ose prek dikë jashtë turnit tënd: zgjidhe dhe njofto. Nëse asnjë përgjigje nuk ngre shqetësim: zgjidhe vetë. Pyetja e pestë cakton shpejtësinë."
   items:
     - label: A është brenda autoritetit tim?
       hint: Roli, standardi, miratimet që më takojnë.
@@ -41,15 +41,15 @@ Edhe e kundërta është problem. Ai që nuk çon kurrë asgjë lart mund të du
 
 Mes këtyre dy skajeve qëndron një nga pyetjet më të rëndësishme për një operacion që duhet të punojë pa menaxherin pranë: kur e zgjidh vetë dhe kur e çon lart?
 
-Te [Udhëheqje pa titull](/sq/insights/leadership-without-a-title/) shkrova se iniciativa dhe autoriteti janë dy gjëra të ndryshme. Këtu dua ta kthej atë dallim nga një ndjesi personale në një rregull të qartë.
+Te [Udhëheqje pa titull](/sq/insights/leadership-without-a-title/) shkrova se nisma dhe autoriteti janë dy gjëra të ndryshme. Këtu dua ta kthej atë dallim nga një ndjesi personale në një rregull të qartë.
 
-Këtë pyetje e kam hasur në dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Në rastet që kam pasur, problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e shërbimit të katit i merrte përsipër ai departament, dhe unë i lija në dorëzimin e turnit për t'u ndjekur. Në last mile, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
+Këtë pyetje e kam hasur në dy punë. Natën në hotel, çdo problem fillonte me të njëjtën ndarje: a mund ta zgjidhja brenda rolit tim, a i përkiste departamentit përgjegjës, apo kërkonte vendim më lart? Në rastet që kam pasur, problemet teknike të dhomave shkonin te Mirëmbajtja; çështjet e shërbimit të katit i merrte përsipër ai departament, dhe unë i lija në dorëzimin e turnit për t'u ndjekur. Në miljen e fundit, Team Leader-i punonte shumë afër operacionit të përditshëm: ngarkimi, rampa, shoferët, mungesat, vonesat, problemet në çastin kur ndodhnin. Rregullat përcaktonin kur duhej njoftuar Team Leader-i, për shembull kur gjatë ngarkimit mungonte një çantë, ndërsa për dëmet dhe zinxhirin e ftohtë kishte standarde dhe kontrolle të qarta.
 
 ## Nuk improvizoja
 
-Ajo që mund ta përshkruaj është parimi me të cilin punoja që nga trajnimi; nuk kam të dokumentuar ndonjë rast kur vetë jam gjendur mes dy zgjedhjeve. Lista e kontrollit tregonte çfarë duhej bërë, dokumentet tregonin si bëhej. Por kur binin ndesh mes tyre, ose kur diçka dilte jashtë standardit, nuk improvizoja. E konfirmoja ose e çoja më lart.
+Që nga trajnimi kam punuar me një parim. Lista e kontrollit tregonte çfarë duhej bërë, dokumentet tregonin si bëhej. Por kur binin ndesh mes tyre, ose kur diçka dilte jashtë standardit, nuk improvizoja. E konfirmoja ose e çoja më lart. Nuk kam asnjë moment të vetëm të dokumentuar prej kësaj.
 
-Kjo mund të duket si mungesë iniciative. Iniciativa ka kuptim brenda kufirit që e njeh. Përtej tij, improvizimi nuk është guxim, por rrezik që e merr përsipër pa pasur autoritetin për ta mbajtur.
+Kjo mund të duket si mungesë nisme. Nisma ka kuptim brenda kufirit që e njeh. Përtej tij, improvizimi nuk është guxim, por rrezik që e merr përsipër pa pasur autoritetin për ta mbajtur.
 
 ## Paqartësia është problem sistemi
 
@@ -89,7 +89,7 @@ Edhe ky rregull ka një kufi. Nëse ke pesë minuta për të verifikuar faktet p
 
 ## Tri nivele
 
-Ja ku do ta vendosja kufirin sot. Nuk kam të dokumentuar se si ndahej autoriteti mes Team Leader-it, Area Manager-it dhe niveleve më lart për çdo lloj incidenti, dhe fjalën “kurrë” nuk do ta përdorja për problemet e vogla, sepse konteksti mund ta ndryshojë edhe një problem të vogël. Por ja si do t'i ndaja.
+Ja ku do ta vendosja kufirin sot. Fjalën “kurrë” nuk do ta përdorja për problemet e vogla, sepse konteksti mund ta ndryshojë edhe një problem të vogël. Por ja si do t'i ndaja.
 
 **Zgjidhe vetë** kur është brenda rolit tënd, standardi është i qartë, rreziku është i ulët dhe vendimi mund të kthehet mbrapsht.
 
@@ -97,7 +97,7 @@ Ja ku do ta vendosja kufirin sot. Nuk kam të dokumentuar se si ndahej autoritet
 
 **Mos e prek dhe çoje lart** kur bëhet fjalë për sigurinë në punë, sigurinë fizike, pajtueshmërinë ose të dhëna të ndjeshme; për pagesa përtej autoritetit tënd, vendime disiplinore serioze ose një rrezik të madh financiar; ose për çdo situatë ku vendimi e tejkalon qartë përgjegjësinë e rolit.
 
-Në last mile, siç e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë një problem operacional brenda standardit. Sapo problemi prek sigurinë ose pajtueshmërinë, e prek klientin seriozisht ose kërkon një vendim përtej autoritetit të tij, problemi duhet çuar lart.
+Në miljen e fundit, siç e shoh sot, Team Leader-i duhet të ketë hapësirë ta zgjidhë një problem operacional brenda standardit. Sapo problemi prek sigurinë ose pajtueshmërinë, ka pasoja serioze për klientin ose kërkon një vendim përtej autoritetit të tij, problemi duhet çuar lart.
 
 {diagram}
 

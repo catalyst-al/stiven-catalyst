@@ -89,7 +89,7 @@ Sehen Sie sich den Prozess von Anfang bis Ende an. Sprechen Sie mit den Menschen
 Lesen Sie die SOP, die Checkliste und die Berichte, und sehen Sie sich dann an, wie tatsächlich gearbeitet wird. Wo beides auseinandergeht, entscheiden Sie nicht sofort, wer falschliegt. Finden Sie heraus, warum es die Abweichung gibt.
 
 **Drittens: Erstellen Sie eine Karte des Betriebs.**
-Was sind die Hauptprozesse? Wer sind die Schlüsselpersonen? Welche KPIs gibt es? Wo liegen die Abhängigkeiten? Welche Probleme tauchen immer wieder auf? Was können Sie selbst entscheiden, und was muss eskaliert werden?
+Was sind die Hauptprozesse? Wer sind die Schlüsselpersonen? Welche Kennzahlen gibt es? Wo liegen die Abhängigkeiten? Welche Probleme tauchen immer wieder auf? Was können Sie selbst entscheiden, und was muss eskaliert werden?
 
 Und von einem würde ich ihr abraten: Verändern Sie nichts nur, um zu zeigen, dass Sie gekommen sind, um Veränderung zu bringen.
 
@@ -131,7 +131,7 @@ In den ersten 30 Tagen braucht eine neue Führungskraft eher 30 gute Fragen als 
 
 **Daten**
 
-21. Welche KPIs oder Berichte werden verfolgt?
+21. Welche Kennzahlen oder Berichte werden verfolgt?
 22. Wer liest sie, und wann?
 23. Was zeigt der Bericht nicht?
 24. Welche Probleme tauchen immer wieder auf?

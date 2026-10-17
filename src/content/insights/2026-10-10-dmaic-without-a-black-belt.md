@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: DMAIC in five questions
   fill: true
-  note: A guide to how I would do it today, not a formal Six Sigma project I have led.
+  note: How I would do it today.
   items:
     - label: What is the concrete problem?
       hint: One problem, one place, one period. Not “quality is poor”.
@@ -47,7 +47,7 @@ This essay sits between those two sentences.
 
 DMAIC is the Six Sigma cycle for improving a process: Define, Measure, Analyze, Improve, Control. You define the problem, measure it, analyse the causes, improve, and check that the improvement holds. In books it looks like a big project, with a team, a deadline and someone wearing a coloured belt.
 
-What I bring to it is experience with real operational problems in last mile: Damage, Incomplete, Delay and Loading Time. Six Sigma, Pareto and 5 Why are methods I know and have made part of how I think about management. I hold no confirmed certificate, Yellow, Green or Black Belt. I have no project in which I applied and documented all five phases of DMAIC, and not even a Pareto or a 5 Why I can show as carried through by me from start to finish. In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about a 5 Why with only two documented “whys”, and why I did not fill in the rest.
+What I bring to it is experience with real operational problems in last mile: Damage, Incomplete, Delay and Loading Time. Six Sigma, Pareto and 5 Why are methods I know and have made part of how I think about management, though I have no complete Pareto or 5 Why of my own to show. I hold no confirmed certificate, Yellow, Green or Black Belt, and no documented project that went through all five phases of DMAIC. In [Pareto and 5 Why in practice](/insights/pareto-and-5-why-in-practice/) I wrote about a 5 Why with only two documented “whys”, and why I did not fill in the rest.
 
 ## The five phases, as I actually had them
 

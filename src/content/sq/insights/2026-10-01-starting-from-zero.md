@@ -30,15 +30,15 @@ checklist:
 
 Në Shqipëri, roli im i fundit ishte Cluster Manager: drejtoja operacionet e dyqanit kryesor në Tiranë dhe koordinoja një pjesë të rrjetit të dyqaneve. Puna ime e parë në Gjermani ishte shpërndarja e pakove.
 
-Me këtë kontrast nis seria “Dhjetë vite pranë punës”, sepse pa të nuk kuptohet asgjë nga ç'shkruaj më pas: si mendoj kur kam përpara një problem operacional, si i drejtoj njerëzit dhe pse i shoh proceset nga të dyja anët.
+Seria “Dhjetë vite pranë punës” nis me këtë kontrast, sepse pa të nuk kuptohet asgjë nga ç'shkruaj më pas: si mendoj kur kam përpara një problem operacional, si i drejtoj njerëzit dhe pse i shoh proceset nga të dyja anët.
 
-Mora pjesë në ngritjen e dyqanit kryesor nga zero deri në ditën e hapjes, duke koordinuar arkitektë, marangozë, bojaxhinj dhe ekipet e zbatimit. Pastaj erdhën shitjet, standardi i shërbimit, përvoja e klientit, organizimi operacional dhe ekipi: tetë shitës, katër arkëtare dhe një asistente. Ngritëm faqen e parë të shitjeve online të kompanisë dhe ekipin e saj të parë të tregtisë online (e-commerce). Në të njëjtën periudhë rrjeti u ristrukturua: dy dyqane me rezultate të dobëta u mbyllën dhe aktiviteti u përqendrua më shumë te dyqani kryesor.
+Mora pjesë në ngritjen e dyqanit kryesor nga zero deri në ditën e hapjes, duke koordinuar arkitektë, marangozë, bojaxhinj dhe ekipet e zbatimit. Pastaj erdhën shitjet, standardi i shërbimit, përvoja e klientit, organizimi operacional dhe ekipi: tetë shitës, katër arkëtare dhe një asistente. Ngritëm faqen e parë të shitjeve online të kompanisë dhe ekipin e saj të parë të tregtisë online. Në të njëjtën periudhë rrjeti u ristrukturua: dy dyqane me rezultate të dobëta u mbyllën dhe aktiviteti u përqendrua më shumë te dyqani kryesor.
 
 Para kësaj, si General Sales Manager te një distributor pajisjesh shtëpiake, kisha drejtuar shitjen me shumicë: një rrjet me 61 rishitës aktivë dhe një strukturë që përfshinte magazinën, shitjet B2B, kontabilitetin, ekipin teknik dhe shërbimin ndaj klientit. Kur u largova nga Shqipëria, isha mësuar të merrja vendime, të drejtoja njerëz dhe të përgjigjesha për rezultatet e biznesit.
 
-Pastaj erdhi Gjermania. Nga nëntori 2021 deri në qershor 2022 punova për një kompani dorëzimesh në last mile: fillimisht pas timonit, si shpërndarës pakosh, më pas në dispeçim. Më pas erdhi hoteli: steward nga korriku 2022 deri në prill 2023, dhe që nga maji 2023 night auditor në një hotel në Frankfurt. Nga dhjetori 2023 deri në tetor 2024, krahas auditimit të natës, shpërndava sërish pako, ndërsa nga tetori 2024 deri në janar 2025 punova si ndihmës në kujdes (Pflegehelfer). Në janar 2025 u ktheva në last mile si Team Leader On Road; në qershor 2025 u bëra Area Manager.
+Pastaj erdhi Gjermania. Në nëntor 2021 nisa punë te një kompani shpërndarjeje në miljen e fundit, fillimisht pas timonit si shpërndarës pakosh, pastaj në dispeçim, dhe qëndrova deri në qershor 2022. Erdhi pastaj hoteli. Nga korriku 2022 deri në prill 2023 punova si steward, ndërsa në maj 2023 nisa si night auditor në një hotel në Frankfurt. Nga dhjetori 2023 deri në tetor 2024 shpërndava sërish pako, krahas auditimit të natës. Nga tetori 2024 deri në janar 2025 erdhi kujdesi: punova si ndihmës në kujdes (Pflegehelfer). Në janar 2025 u ktheva në miljen e fundit si Team Leader On Road, dhe në qershor 2025 u bëra Area Manager.
 
-Nuk kam asnjë arsye t'i fsheh punët si shpërndarës pakosh, steward apo ndihmës në kujdes. Pa to, rruga ime e kthimit në menaxhim nuk ka kuptim.
+Nuk kam pse t'i fsheh punët si shpërndarës pakosh, steward apo ndihmës në kujdes. Pa to, rruga ime e kthimit në menaxhim nuk ka kuptim.
 
 Në Gjermani duhej të merrja furgonin, të bëja itinerarin, të respektoja oraret dhe procesin, dhe ta kryeja punën si çdo punonjës tjetër. Titulli që kisha pasur nuk vlente më. Kjo ishte zeroja e vërtetë: përvoja ime nuk ishte zhdukur, por askush nuk ishte i detyruar të ma njihte vetëm për shkak të së kaluarës.
 
@@ -52,7 +52,7 @@ Këto vite më dhanë më shumë se gjuhën. Ma treguan punën nga ana e atij q�
 
 Si shpërndarës pakosh e kupton ndryshe kohën, itinerarin dhe presionin, dhe e di ç'do të thotë një proces që nuk funksionon ose një vendim i marrë nga dikush që nuk është në terren. Si steward e sheh hotelin nga një nivel krejt tjetër: punë fizike, ritëm, bashkëpunim mes departamenteve, dhe sa shumë varet përvoja e mysafirit nga njerëz që ai mund të mos i shohë kurrë. Si night auditor pashë çfarë mbetet nga një ditë pune pasi të gjithë të tjerët kanë ikur: gabimet, pagesat, raportet, ankesat, mysafirët që nuk u paraqitën, kontrollet dhe dorëzimi i turnit.
 
-Kur u ktheva në drejtim në last mile, i drejtoja njerëzit me më shumë se teori: kisha qëndruar vetë në anën tjetër të procesit. Kjo përvojë qëndron pas çdo eseje të kësaj serie.
+Kur u ktheva në drejtim, në miljen e fundit, i drejtoja njerëzit me më shumë se teori: kisha qëndruar vetë në anën tjetër të procesit. Kjo përvojë qëndron pas çdo eseje të kësaj serie.
 
 Nëse dikush që ka qenë shef do të më pyeste si të niste sërish nga zero, nuk do t'i thosha se është e lehtë, por do t'i thosha të mos e ngatërronte humbjen e titullit me humbjen e vlerës së vet profesionale. Titulli mund të humbasë brenda një dite, kur ndërron vend, kompani apo industri. Ajo që ke mësuar nuk humbet.
 

@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: Will it last?
   fill: true
-  note: How I would check it today. It is not an assessment of my own earlier work.
+  note: How I would check it today.
   items:
     - label: Documentation
       hint: Is the standard clear and easy to find?
@@ -44,7 +44,7 @@ diagram: improvement-paths
 
 If I could give myself one sentence on my first day as a Team Leader, it would be this: once you have solved a problem today, ask whether it could be solved tomorrow without you. It is also the question this series closes on.
 
-In last mile I worked with standards for loading, scanning, the organisation of the ramp and safety, and I ran into problems with procedures that were not followed and with drivers who were not yet fully used to the standards. In the hotel I organised the SOPs for Front Office and Night Audit. What I do not have is the case the title of this essay promises: a documented improvement of mine that held for a few months and was then abandoned. In an essay about improvement that fades, that gap belongs at the centre.
+In last mile I worked with standards for loading, scanning, the organisation of the ramp and safety, and I ran into problems with procedures that were not followed and with drivers who were not yet fully used to the standards. In the hotel I organised the SOPs for Front Office and Night Audit. Whether any of it held, I cannot say; I have no documented case of an improvement of mine that held and then faded. That question sits at the centre of this essay.
 
 ## The question I cannot answer
 
@@ -58,7 +58,7 @@ That is what I would most like to understand today: whether a manager's results 
 
 ## Why an improvement fades
 
-I have no proven case for this part, but I believe an improvement is at risk when it depends only on the person who started it, instead of becoming part of the everyday way of working.
+I believe an improvement is at risk when it depends only on the person who started it, instead of becoming part of the everyday way of working.
 
 Turnover makes the risk easier to see. In last mile we had drivers called in at short notice, and drivers in ramp-up who were not yet used to the SOPs. That made it hard to hold compliance at the same level.
 

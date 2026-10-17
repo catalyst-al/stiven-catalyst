@@ -47,9 +47,9 @@ corrections:
 
 Imagine a new employee at reception, in the middle of a process they have seen only once. The instruction exists, but it is somewhere between an SOP, a video, a few photographs and what a colleague explained to them two nights earlier. The process waits while they search.
 
-The scene is my experience of the first weeks at the hotel, written as a picture rather than documented as an incident, and it is the reason I began to build a tool of my own.
+The scene is a picture, drawn from my first weeks at the hotel, and it is the reason I began to build a tool of my own.
 
-That tool is [Front Desk Control](/insights/how-i-built-front-desk-control/), which I developed in September 2026 to organise the work in Front Office and Night Audit: SOP instructions, checklists, information search and visual explanations with screenshots of the processes. Around it I worked on structures for Shift Handover and the night reports, on organising the Breakfast Forecast processes, and on checklists and step-by-step instructions. I use it myself. What I cannot say is whether colleagues use it regularly.
+That tool is [Front Desk Control](/insights/how-i-built-front-desk-control/), which I developed in September 2026 to organise the work in Front Office and Night Audit: SOP instructions, checklists, information search and visual explanations with screenshots of the processes. Around it I worked on structures for Shift Handover and the night reports, on organising the Breakfast Forecast processes, and on checklists and step-by-step instructions. I use it myself.
 
 The essay in which I described Front Desk Control presented it as work in progress. This one asks something else: what happens to a tool like that once it exists, and when it stops being only yours.
 
@@ -89,7 +89,7 @@ Front Desk Control has gone through several versions. I have worked to update th
 
 But there is a limit I see plainly: nobody else is responsible for updating it when I am away. If only I understand and update the tool, it remains dependent on me.
 
-It is what I wrote in [The tour the driver does not understand](/insights/the-tour-the-driver-does-not-understand/) about the experienced driver, only this time it is me. Knowledge that stays in one head is no less fragile for being written on a page that only one person keeps. And an outdated instruction in a tool that looks orderly is more dangerous than a missing one, because nobody looks it up twice. I know of no case in which an outdated procedure in Front Desk Control caused an error; the risk is in the form.
+It is what I wrote in [The tour the driver does not understand](/insights/the-tour-the-driver-does-not-understand/) about the experienced driver, only this time it is me. Knowledge that stays in one head is no less fragile for being written on a page that only one person keeps. And an outdated instruction in a tool that looks orderly is more dangerous than a missing one, because nobody looks it up twice.
 
 ## Five conditions before you share it
 
@@ -101,7 +101,7 @@ Today I would draw a sharper line between personal development and official use.
 4. **Someone responsible for updates and version control.** Someone other than me.
 5. **Testing by other users** before anyone says the tool is ready for shared use.
 
-Nor would I measure success only by whether the tool works technically. I would want to know whether it helps employees, whether the information is accurate, and whether it can be maintained without me. For Front Desk Control I do not yet have a measured answer to any of these. That is the work that remains.
+Nor would I measure success only by whether the tool works technically. I would want to know whether it helps employees, whether the information is accurate, and whether it can be maintained without me. For Front Desk Control, measuring that is the work that remains.
 
 ## Before you share your tool
 

@@ -43,9 +43,9 @@ That is what makes Pareto such a strong tool, and such a dangerous one. Pareto d
 
 Something similar happens with 5 Why.
 
-I have a real case, but only the start of the chain. The problem: a wrong bag had been loaded. Why was there a problem with the delivery? Because the wrong bag had been loaded. Why had the wrong bag been loaded? Because it had been put in the wrong place during loading. The analysis produced a corrective action: the loading had to be checked twice (Beladung doppelt prüfen). One more thing mattered: the problem was classified as caused by the warehouse and loading, not automatically as the driver's fault.
+Take a real case from the ramp. The problem: a wrong bag had been loaded. Why was there a problem with the delivery? Because the wrong bag had been loaded. Why had the wrong bag been loaded? Because it had been put in the wrong place during loading. The analysis produced a corrective action: the loading had to be checked twice (Beladung doppelt prüfen). One more thing mattered: the problem was classified as caused by the warehouse and loading, not automatically as the driver's fault.
 
-That much is documented. I do not have the third, fourth and fifth whys written down. I could fill them in now with sentences that sound good; it would make a beautiful 5 Why on paper, but not necessarily the one I actually did. That is the 5 Why I want to avoid: “why” asked five times to fill in a form.
+The record stops at the second why. I could fill in the third, fourth and fifth now with sentences that sound good; it would make a beautiful 5 Why on paper, but not necessarily the one I actually did. That is the 5 Why I want to avoid: “why” asked five times to fill in a form.
 
 The method's purpose is to move from the question “who did it?” to the question “what in the process allowed this to happen, and what can we change?”
 
@@ -55,6 +55,6 @@ When the only answer an analysis gives is “the employee was careless”, very 
 
 That case and others from the same period led to measures: double-checking the loading, not mixing bags in the same trolley or box, organising trolleys by route, clearer control of loading, following the scanning process, ramp audits, and clearer standards for the drivers and for dispatch. Operational responsibility was shared between the shift structure, dispatch and the people responsible for each process; as a manager, I followed the KPIs and the problems with the Shift Leaders and the dispatchers.
 
-In some months of that period the team met the damage target, though not in every month, and I do not have the measurements that would show a steady fall. Where the target was met, I put it down to the team's work and a wider system of controls rather than to any single 5 Why, and I have no proof that this particular case contributed to it.
+In some months of that period the team met the damage target, though not in every month. Where the target was met, I put it down to the team's work and a wider system of controls rather than to any single 5 Why.
 
 Boiled down to something a manager can use tomorrow, it comes to three things. Check the categories before you trust the chart. Do not stop the analysis at a person's name. And write down only as many “whys” as you have actually asked, then keep asking, out on the ramp.

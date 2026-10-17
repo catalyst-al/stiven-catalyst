@@ -53,7 +53,7 @@ I met the question in two jobs. At night in the hotel, every problem began with 
 
 ## I did not improvise
 
-What I can describe is the principle I worked by from training onwards; I have no documented moment when I myself stood between the two choices. The checklist showed what had to be done. The documents showed how to do it. But when the two contradicted each other, or something fell outside the standard, I did not improvise. I had it confirmed, or I escalated it.
+From training onwards I worked by one principle. The checklist showed what had to be done. The documents showed how to do it. But when the two contradicted each other, or something fell outside the standard, I did not improvise. I had it confirmed, or I escalated it. I have no single moment of it on record.
 
 That may look like a lack of initiative. Initiative makes sense within the limit you know. Beyond it, improvising is not courage. It is a risk you take on without the authority to carry it.
 
@@ -95,7 +95,7 @@ The rule has a limit. If you have five minutes to check the facts without increa
 
 ## Three levels
 
-This is how I would draw the line today. I have no documented record of how authority was split between the Team Leader, the Area Manager and the levels above for each kind of incident, and I would not say “never” about small problems, because the context can change even a small one. But this is how I would divide them.
+This is how I would draw the line today. I would not say “never” about small problems, because the context can change even a small one, but this is how I would divide them.
 
 **Solve it yourself** when it is within your role, the standard is clear, the risk is low and the decision can be reversed.
 

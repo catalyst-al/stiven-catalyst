@@ -37,7 +37,7 @@ In [KPIs do not improve in Excel](/insights/kpis-do-not-improve-in-excel/) I wro
 
 ## Four indicators in last mile
 
-In last mile we worked mainly with four indicators: Damage, Incomplete, Delay and Loading Time. This is how I understood them, in my words; they are not the company's official formulas:
+In last mile we worked mainly with four indicators: Damage, Incomplete, Delay and Loading Time. This is how I understood them, in my own words, not the official formulas:
 
 - **Damage:** damage to products or orders.
 - **Incomplete:** orders that reached the customer incomplete.
@@ -52,7 +52,7 @@ The practical meaning of an indicator and the official formula a company uses ar
 
 I have worked with problems that involved more than one stage of the process: missing bags, mixed trolleys, load organisation and delays at departure. Those situations changed the way I see a KPI.
 
-Take the driver from the example above, an illustration rather than a documented case. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
+Take the driver from the example above. The problem shows up at departure, but that does not automatically make the responsibility the driver's alone. As I wrote in [Mistakes get lost between departments](/insights/mistakes-get-lost-between-departments/), the place where a mistake is measured is not necessarily the place where it was born.
 
 So before I judge someone's performance, I want to understand which part of the result they could actually control.
 
@@ -72,7 +72,7 @@ A KPI used only to show someone they are below target does not necessarily help 
 
 ## No indicator is read alone
 
-Suppose, as a second illustration, an organisation measures only the speed of loading, without linking it to quality and safety. It can create an incentive for people to rush. That is why I would never judge Loading Time in isolation from Damage, Incomplete and safety.
+Suppose an organisation measures only the speed of loading, without linking it to quality and safety. It can create an incentive for people to rush. That is why I would never judge Loading Time in isolation from Damage, Incomplete and safety.
 
 If one indicator improves while another gets worse because of the way the improvement was achieved, we have to check whether we are measuring the right behaviour.
 
@@ -80,7 +80,7 @@ If one indicator improves while another gets worse because of the way the improv
 
 A hotel works with a different set of operational information. During Night Audit I checked the daily reports, room status, arrivals, departures, no-shows, the forecast for the next day and the open matters that could affect the operation. An important part was checking that the information was accurate before closing the day.
 
-These were operational indicators and checks I used in the work; nothing I have shows that they were all formal KPIs with individual targets for the Night Auditor.
+I used them in the work as operational indicators and checks; nothing I have shows they were formal KPIs with individual targets for the Night Auditor.
 
 In the hotel I understood even better that a number does not always show the whole situation. You can have an accurate report and an open problem that still needs action. That is why the report has to be linked to the real status, to responsibility and to passing the information on to the next shift.
 

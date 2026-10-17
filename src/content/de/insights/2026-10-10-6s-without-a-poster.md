@@ -7,15 +7,15 @@ status: published
 featured: true
 summary: Ordnung beweist sich nicht durch ein Plakat an der Wand. Sie beweist sich daran, wie der Arbeitsplatz funktioniert, wenn der Tag schwer ist.
 teaser: Ein Plakat mit sechs Prinzipien kann an jeder Wand hängen. Aber die Rampe liest das Plakat nicht. Die Rampe zeigt, ob die Ordnung lebt.
-description: "5S und 6S auf der letzten Meile: Standards an der Rampe, warum 6S kein Putzen ist, Sicherheit als sechstes S und eine Kontrolle am Schichtende."
-deck: 'Der vierte Essay der Reihe „Verbesserung, die hält“: 5S und 6S auf der letzten Meile, wie Ordnung an der Rampe aussah, warum es kein Putzen ist, Sicherheit als sechstes S, und die Kontrolle eines Bereichs am Schichtende.'
+description: "5S und 6S in der Last Mile: Standards an der Rampe, warum 6S kein Putzen ist, Sicherheit als sechstes S und eine Kontrolle am Schichtende."
+deck: 'Der vierte Essay der Reihe „Verbesserung, die hält“: 5S und 6S in der Last Mile, wie Ordnung an der Rampe aussah, warum es kein Putzen ist, Sicherheit als sechstes S, und die Kontrolle eines Bereichs am Schichtende.'
 relatedTools:
   - /tools/shift-handover/
   - /tools/shift-pulse/
 checklist:
   title: Kontrolle eines Bereichs am Schichtende
   copy: Liste kopieren
-  note: Eine Orientierung mit dem, was ich heute einführen würde, kein historisches Verfahren, das ich belegen kann.
+  note: So würde ich es heute machen.
   items:
     - Der Bereich hat einen sichtbaren Standard, und alle wissen, wer ihn prüft.
     - Die Arbeitsmittel sind an ihrem Platz.
@@ -35,11 +35,11 @@ Was die Rampe zeigt, ist, ob die Ordnung lebt: ob die Trolleys organisiert sind,
 
 5S ist eine Methode aus Japan mit fünf Schritten: Nötiges von Unnötigem trennen, alles an seinen Platz bringen, sauber machen, standardisieren und dranbleiben. 6S fügt einen sechsten hinzu: Sicherheit. Auf dem Papier wirkt das einfach. In der Praxis wird kaum etwas so leicht missverstanden.
 
-Auf der letzten Meile in Deutschland gehörte 5S zu den operativen Themen in unserer Kommunikation und im Daily Stand-up. Meine Arbeit betraf direkt die Organisation der Rampe, des Lagers und der Ladebereiche, und ich habe die Prinzipien von 5S mit der Sicherheit, der operativen Disziplin und Kennzahlen wie Damage, Incomplete und Loading Time verbunden. Es gab operative Kontrollen und Vorgaben, die Rampenstandards einzuhalten.
+In der Last Mile in Deutschland gehörte 5S zu den operativen Themen in unserer Kommunikation und im täglichen Stand-up. Meine Arbeit betraf direkt die Organisation der Rampe, des Lagers und der Ladebereiche, und ich habe die Prinzipien von 5S mit der Sicherheit, der operativen Disziplin und Kennzahlen wie Schadensquote, Unvollständigkeitsquote und Ladezeit verbunden. Es gab operative Kontrollen und Vorgaben, die Rampenstandards einzuhalten.
 
 ## Wie Ordnung an der Rampe aussah
 
-Auf der letzten Meile gab es konkrete Standards:
+In der Last Mile gab es konkrete Standards:
 
 - Trolleys und Ladungen mussten richtig organisiert werden, ohne Bestellungen zu vermischen;
 - die Fahrer mussten die Ladetore schließen, wenn das Verladen beendet war;
@@ -63,7 +63,7 @@ Deshalb muss Ordnung sichtbar sein. Wenn alles seinen Platz hat, fällt auf, was
 
 ## Das sechste S
 
-Ob das Unternehmen darüber hinaus ein offizielles 6S-Programm hatte, mit eigenen Audits, Bewertungen, Bodenmarkierungen oder farbigen Zonen, weiß ich nicht, und ich behaupte nicht, eines geleitet zu haben. Ich weiß aber, dass Sicherheit auf der letzten Meile Teil des Betriebs selbst war:
+Ein offizielles 6S-Programm habe ich nie geleitet. In der Last Mile war Sicherheit aber Teil des Betriebs selbst:
 
 - die Tore nach dem Verladen schließen;
 - die Regeln, wie man sich an der Rampe bewegt und wo man steht;

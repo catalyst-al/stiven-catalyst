@@ -41,11 +41,11 @@ Nëse shohim vetëm procesin, rrezikojmë t'ua heqim përgjegjësinë vendimeve 
 
 Biseda pas një gabimi është çasti kur një menaxher e ushtron autoritetin mbi njerëzit më drejtpërdrejt se në çdo rast tjetër. Të kërkosh llogari dhe të respektosh dinjitetin e punonjësit, për mua, nuk janë dy gjëra që përjashtojnë njëra-tjetrën.
 
-Kam punuar në last mile si Team Leader On Road dhe më pas si Area Manager, ku ndjekja e performancës, problemet operative, KPI-të dhe koordinimi i njerëzve ishin pjesë e punës. Nga aty e shoh këtë bisedë.
+Kam punuar në miljen e fundit si Team Leader On Road dhe më pas si Area Manager, ku ndjekja e performancës, problemet operative, KPI-të dhe koordinimi i njerëzve ishin pjesë e punës. Nga aty e shoh këtë bisedë.
 
 ## Privatisht, pasi i ke kuptuar faktet
 
-Si parim, një bisedë korrigjuese do të preferoja ta bëja privatisht, dhe vetëm pasi t'i kisha kuptuar faktet. Ky është standardi që mbroj, jo një procedurë që e kam ndjekur në çdo rast; edhe ajo që vijon janë parime, jo rrëfimi i një bisede të caktuar.
+Si parim, bisedën korrigjuese do ta bëja më mirë privatisht, dhe vetëm pasi t'i kisha kuptuar faktet.
 
 Ka një përjashtim të qartë. Nëse ka rrezik të menjëhershëm për sigurinë, ndërhyn në atë çast. Ndal atë që po ndodh, aty për aty. Biseda e duhur në vendin e duhur vjen më pas.
 
@@ -79,7 +79,7 @@ Një menaxher mund të jetë kërkues, i vendosur dhe shumë i qartë, pa e cenu
 
 Në janar 2025 fillova si Team Leader On Road, dhe disa muaj më vonë u bëra Area Manager. Në atë rol më raportonin drejtpërdrejt katër drejtues turni dhe tetë dispeçerë, ndërsa operacioni përfshinte në mënyrë indirekte rreth 250 shoferë. Për këtë kalim kam shkruar më gjatë te [Të drejtosh njerëzit pa humbur njeriun](/sq/insights/leading-people-without-losing-the-person/).
 
-Si reaguan kolegët ndaj promovimit tim, dhe nëse ndryshuan marrëdhëniet tona, nuk mund ta them me siguri. Mendimi im është se promovimi nuk duhet ta kthejë autoritetin në demonstrim force. Kur bëhesh përgjegjës për njerëz me të cilët dikur punoje krah për krah, duhet të jesh i qartë për pritshmëritë dhe i drejtë në vendime, dhe të mos e përdorësh pozicionin për të treguar kush komandon.
+Mendimi im është se promovimi nuk duhet ta kthejë autoritetin në demonstrim force. Kur bëhesh përgjegjës për njerëz me të cilët dikur punoje krah për krah, duhet të jesh i qartë për pritshmëritë dhe i drejtë në vendime, dhe të mos e përdorësh pozicionin për të treguar kush komandon.
 
 **Autoriteti formal të jep të drejtën për të marrë vendime. Besimi ndërtohet nga mënyra si i merr ato.**
 

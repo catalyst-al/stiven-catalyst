@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: Führung ohne Titel heißt, sich nicht hinter der Stellenbeschreibung zu verstecken, wenn eine Situation Verantwortung verlangt, und zu wissen, wann man aufhört.
 description: "Führung ohne Titel heißt nicht, die Arbeit des Chefs zu machen, sondern sich nicht hinter der Stellenbeschreibung zu verstecken, wenn es Verantwortung braucht."
-teaser: 'Initiative sagt: „Ich ignoriere das Problem nicht.“ Autorität sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Man kann viel vom Ersten haben, ohne das Zweite zu beanspruchen.'
+teaser: 'Initiative sagt: „Ich ignoriere das Problem nicht.“ Befugnis sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Man kann viel vom Ersten haben, ohne das Zweite zu beanspruchen.'
 deck: 'Der zehnte Essay der Reihe „Zehn Jahre nah an der Arbeit“: was man tut, wenn die eigene Verantwortung größer ist als die Position, wie man Autorität ohne Position gewinnt, und drei Fragen, bevor man etwas übernimmt, das nicht die eigene Aufgabe ist.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
@@ -31,13 +31,13 @@ Wenn eine Situation Verantwortung verlangt, heißt Führung ohne Titel für mich
 
 ## Über die Rolle hinaus, innerhalb des Mandats
 
-In der Last Mile hatte ich eine operative Rolle, aber es gab Momente, in denen die Arbeit mehr verlangte als meine eigene Aufgabe. Ich habe Verantwortung übernommen: für die Koordination von Problemen während der Schicht, für das Verfolgen der KPIs, für die Prozessdisziplin an der Rampe, für die Kommunikation mit den Fahrern und dafür, Probleme anzusprechen, die sich wiederholten. Wenn ich sah, dass aus einem Vorfall ein Muster wurde, versuchte ich, die Diskussion von „Wer hat den Fehler gemacht?“ zu „Was muss sich im Prozess ändern?“ zu lenken.
+In der Last Mile hatte ich eine operative Rolle, aber es gab Momente, in denen die Arbeit mehr verlangte als meine eigene Aufgabe. Ich habe Verantwortung übernommen: für die Koordination von Problemen während der Schicht, für das Verfolgen der Kennzahlen, für die Prozessdisziplin an der Rampe, für die Kommunikation mit den Fahrern und dafür, Probleme anzusprechen, die sich wiederholten. Wenn ich sah, dass aus einem Vorfall ein Muster wurde, versuchte ich, die Diskussion von „Wer hat den Fehler gemacht?“ zu „Was muss sich im Prozess ändern?“ zu lenken.
 
 Im Hotel lief es anders. Meine Rolle ist operativ, aber ich bin über die Schichtarbeit hinausgegangen: Ich habe Checklisten, SOPs, Schulungsmaterialien und später ein digitales System für Front Office und Night Audit strukturiert.
 
 Die Befugnisse des Managements blieben beim Management. Verantwortung übernommen habe ich dafür, wie ich die Arbeit, die ich kannte, organisiert und dokumentiert habe. Dieser Unterschied ist mir wichtig: Mehr Verantwortung zu übernehmen heißt nicht, Entscheidungen zu treffen, die einem nicht zustehen.
 
-Was ich anführen kann, ist das, was folgte. Ich war weiterhin in Koordination, operative Verbesserungen, Dokumentation und den Aufbau von Prozessen eingebunden, und im Hotel habe ich weiter daran gearbeitet, das Night Audit und die Werkzeuge zu strukturieren, die die Arbeit klarer machen. Das zeigt mir, dass mein Beitrag genutzt wurde. Wie alle reagiert haben oder ob es für jede zusätzliche Verantwortung eine formale Anerkennung gab, sagt es allerdings nicht.
+Was ich anführen kann, ist das, was folgte. Ich war weiterhin in Koordination, operative Verbesserungen, Dokumentation und den Aufbau von Prozessen eingebunden, und im Hotel habe ich weiter daran gearbeitet, das Night Audit und die Werkzeuge zu strukturieren, die die Arbeit klarer machen. Das zeigt mir, dass mein Beitrag genutzt wurde.
 
 ## Wie man Autorität ohne Position gewinnt
 
@@ -57,7 +57,7 @@ Die Grenze ziehe ich beim Mandat.
 
 Ich kann ein Problem erkennen, Informationen sammeln, eine Lösung vorschlagen und den Teil erledigen, der in meine Verantwortung fällt. Wenn die Entscheidung aber Unternehmensrichtlinien, erhebliche Kosten, Personalfragen, die Sicherheit oder Ausnahmen von Abläufen berührt oder die Freigabe einer Führungskraft braucht, höre ich dort auf und eskaliere.
 
-Ich habe gelernt, dass Initiative und Autorität zwei verschiedene Dinge sind. Initiative sagt: „Ich ignoriere das Problem nicht.“ Autorität sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Vom Ersten kann man viel haben, ohne das Zweite zu beanspruchen.
+Ich habe gelernt, dass Initiative und Befugnis zwei verschiedene Dinge sind. Initiative sagt: „Ich ignoriere das Problem nicht.“ Befugnis sagt: „Ich habe das Recht, diese Entscheidung zu treffen.“ Vom Ersten kann man viel haben, ohne das Zweite zu beanspruchen.
 
 ## Der Preis
 

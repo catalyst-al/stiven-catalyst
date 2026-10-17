@@ -31,13 +31,13 @@ Kur një situatë kërkon përgjegjësi, për mua të udhëheqësh pa titull do 
 
 ## Përtej rolit, brenda mandatit
 
-Në last mile kam pasur një rol operacional, por kishte momente kur puna kërkonte më shumë sesa të kryeja vetëm detyrën time. Mora përsipër koordinimin e problemeve gjatë turnit, ndjekjen e KPI-ve, disiplinën e procesit në rampë, komunikimin me shoferët dhe ngritjen e problemeve që përsëriteshin. Kur shihja se një rast i veçantë kishte nisur të përsëritej rregullisht, përpiqesha ta çoja diskutimin nga “kush gaboi?” te “çfarë duhet ndryshuar në proces?”.
+Në miljen e fundit kam pasur një rol operacional, por kishte momente kur puna kërkonte më shumë sesa të kryeja vetëm detyrën time. Mora përsipër koordinimin e problemeve gjatë turnit, ndjekjen e KPI-ve, disiplinën e procesit në rampë, komunikimin me shoferët dhe ngritjen e problemeve që përsëriteshin. Kur shihja se një rast i veçantë kishte nisur të përsëritej rregullisht, përpiqesha ta çoja diskutimin nga “kush gaboi?” te “çfarë duhet ndryshuar në proces?”.
 
 Në hotel ka ndodhur ndryshe. Roli im është operacional, por kam shkuar përtej punës së turnit: kam strukturuar lista kontrolli, SOP, materiale trajnimi dhe, më vonë, një sistem digjital për recepsionin dhe auditimin e natës.
 
 Autoriteti i menaxhimit mbeti te menaxhimi. Përgjegjësia që mora ishte për mënyrën si e organizoja dhe e dokumentoja punën që njihja. Ky dallim për mua ka rëndësi: të marrësh më shumë përgjegjësi nuk do të thotë të marrësh vendime që nuk të takojnë.
 
-Ajo që mund të tregoj është çfarë pasoi. Kam vazhduar të përfshihem në koordinim, përmirësime operative, dokumentim dhe ndërtim procesesh, dhe në hotel kam vazhduar të punoj për strukturimin e auditimit të natës dhe të mjeteve që e bëjnë punën më të qartë. Kjo më tregon se kontributi im është përdorur, edhe pse nuk thotë asgjë për mënyrën si reaguan të gjithë apo për ndonjë njohje formale për çdo përgjegjësi shtesë.
+Ajo që mund të tregoj është ajo që pasoi. Kam vazhduar të përfshihem në koordinim, përmirësime operative, dokumentim dhe ndërtim procesesh, dhe në hotel kam vazhduar të punoj për strukturimin e auditimit të natës dhe të mjeteve që e bëjnë punën më të qartë. Kjo më tregon se kontributi im është përdorur.
 
 ## Si fitohet autoriteti pa pozitë
 

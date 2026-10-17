@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Një proces nuk përfundon kur unë e dorëzoj punën. Përfundon kur ekipi tjetër mund ta vazhdojë pa humbur informacionin, përgjegjësinë ose kohën.
-description: "Pse shumë gabime lindin te kalimi i punës nga një ekip te tjetri: si ndodh në hotel dhe në last mile, dhe pesë pyetje për çdo pikë ku puna ndërron duar."
+description: "Pse shumë gabime lindin te kalimi i punës nga një ekip te tjetri: si ndodh në hotel dhe në miljen e fundit, dhe pesë pyetje për çdo pikë ku puna ndërron duar."
 teaser: Vendi ku matet një gabim nuk është domosdoshmërisht vendi ku ai ka lindur.
 deck: 'Eseja e pestë e serisë “Operacioni që punon pa ty”: çfarë ndodh mes dy departamenteve, pse “e njoftova” nuk mjafton, statusi, përgjegjësia dhe konfirmimi, dhe harta e kalimeve me pesë pyetje.'
 relatedTools:
@@ -44,13 +44,13 @@ Në raste të tilla dalloj tri përgjegjësi të ndryshme:
 - **kush e zgjidh problemin**;
 - **kush kontrollon që çështja është mbyllur.**
 
-Shpesh këta janë tre njerëz të ndryshëm. Dhe nëse për të tretën nuk përgjigjet askush (këtu flas në përgjithësi; nuk kam një rast të dokumentuar ku gabimi mbeti fare pa zot), problemi mund t'i jetë “kaluar” departamentit të duhur, por mysafiri nuk e di nëse është zgjidhur. As ne.
+Shpesh këta janë tre njerëz të ndryshëm. Dhe nëse për të tretën nuk përgjigjet askush, problemi mund t'i jetë “kaluar” departamentit të duhur, por mysafiri nuk e di nëse është zgjidhur. As ne.
 
 Një kalim tjetër i rëndësishëm ishte ai mes turneve. Night Audit merrte çështje të hapura nga turni i mëparshëm dhe duhej t'ia kalonte turnit të mëngjesit ato që nuk ishin përfunduar. Për këtë kam shkruar më gjatë te [eseja për dorëzimin e turnit](/sq/insights/why-the-handover-is-underrated/).
 
-## Në last mile: zinxhiri para shoferit
+## Në miljen e fundit: zinxhiri para shoferit
 
-Në last mile, pikat e kalimit ishin edhe më të dukshme. Outbound përgatiste porositë; magazina dhe rampa kishin pjesën e tyre në organizimin fizik; Last Mile koordinonte nisjen; shoferët e DSP-ve merrnin përgjegjësinë për transportin dhe dorëzimin.
+Në miljen e fundit, pikat e kalimit ishin edhe më të dukshme. Outbound përgatiste porositë; magazina dhe rampa kishin pjesën e tyre në organizimin fizik; Last Mile koordinonte nisjen; shoferët e DSP-ve merrnin përgjegjësinë për transportin dhe dorëzimin.
 
 Kam trajtuar raste me çanta që mungonin ose mbërrinin me vonesë, karroca të organizuara keq, ngarkesa të përziera dhe vonesa gjatë ngarkimit.
 
@@ -76,7 +76,7 @@ Prandaj gabimet mes departamenteve kapen kaq vështirë. Parë nga brenda, secil
 
 Në hotel, një dorëzim i strukturuar i turnit kishte shumë rëndësi. Nëse një problem nuk zgjidhej gjatë natës, duhej të mbetej i dokumentuar dhe i dukshëm për turnin tjetër. Prandaj doja që shënimet të tregonin, krahas asaj që kishte ndodhur, edhe çfarë ishte ende e hapur.
 
-Në last mile ndihmonin procedurat e qarta të njoftimit, kontaktet me Team Leader-at dhe koordinimi mes Last Mile, Outbound dhe DSP-ve.
+Në miljen e fundit ndihmonin procedurat e qarta të njoftimit, kontaktet me Team Leader-at dhe koordinimi mes Last Mile, Outbound dhe DSP-ve.
 
 Sipas meje, tri gjëra vendosin në çdo kalim:
 
@@ -98,7 +98,7 @@ Nëse këto pyetje nuk kanë përgjigje, kemi një proces ku gabimet mund të p�
 
 ## Harta e kalimeve
 
-Në last mile kam parë sa shpejt një problem në përgatitje mund të dalë si vonesë në nisje. Në hotel kam parë sa e rëndësishme është t'ia kalosh ankesën departamentit që mund ta zgjidhë dhe të dokumentosh atë që mbetet e hapur. Të dyja të çojnë te i njëjti përfundim: një proces mbaron vetëm kur ekipi tjetër mund ta vazhdojë punën pa humbur informacionin, përgjegjësinë ose kohën.
+Në miljen e fundit kam parë sa shpejt një problem në përgatitje mund të dalë si vonesë në nisje. Në hotel kam parë sa e rëndësishme është t'ia kalosh ankesën departamentit që mund ta zgjidhë dhe të dokumentosh atë që mbetet e hapur. Të dyja të çojnë te i njëjti përfundim: një proces mbaron vetëm kur ekipi tjetër mund ta vazhdojë punën pa humbur informacionin, përgjegjësinë ose kohën.
 
 Mjeti i kësaj eseje është i thjeshtë. Merr çdo pikë të operacionit tënd ku puna ndërron duar: nga një departament te tjetri, nga një turn te tjetri, nga brenda te një partner i jashtëm. Për secilën, bëj të njëjtat pesë pyetje.
 

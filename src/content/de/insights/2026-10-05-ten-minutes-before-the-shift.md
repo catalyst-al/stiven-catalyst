@@ -6,9 +6,9 @@ series: without-you
 status: published
 featured: true
 summary: Die zehn Minuten vor der Schicht sind nicht dafür da, alles zu erzählen, was wir wissen. Sie klären, was das Team wissen muss, bevor die Arbeit beginnt.
-description: "Das Briefing vor der Schicht: Stand-ups auf der letzten Meile, der Beginn der Nacht im Hotel, wo sich Briefing und Übergabe trennen, und eine Vorlage."
+description: "Das Briefing vor der Schicht: Stand-ups in der Last Mile, der Beginn der Nacht im Hotel, wo sich Briefing und Übergabe trennen, und eine Vorlage."
 teaser: Die Übergabe zeigt, welchen Zustand Sie übernehmen. Das Briefing entscheidet, was jetzt zählt.
-deck: 'Der zweite Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die Morning Stand-ups auf der letzten Meile, die Hotelnacht, die nie bei null beginnt, der Unterschied zwischen Übergabe und Briefing, und die Vorlage für das Zehn-Minuten-Briefing.'
+deck: 'Der zweite Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: die morgendlichen Stand-ups in der Last Mile, die Hotelnacht, die nie bei null beginnt, der Unterschied zwischen Übergabe und Briefing, und die Vorlage für das Zehn-Minuten-Briefing.'
 # The tools this essay is about (English addresses; the German and Albanian pages follow this list).
 relatedTools:
   - /tools/shift-handover/
@@ -37,7 +37,7 @@ checklist:
 diagram: handover-to-briefing
 ---
 
-„Delay liegt bei 2,8 %.“
+„Die Verspätungen liegen bei 2,8 %.“
 
 Diesen Satz hört man in jedem Briefing. Er stimmt, und vielleicht ist er sogar wichtig. Aber wenn nur diese Zahl fällt und die Schicht beginnt, ohne dass jemand weiß, was er anders machen soll, haben Sie Information gegeben, keine Richtung.
 
@@ -45,32 +45,32 @@ In den wenigen Minuten, bevor die Arbeit beginnt, steckt vielleicht das günstig
 
 ## Last Mile: Zahlen und ihre Gründe
 
-In der Last Mile sind die täglichen Morning Stand-ups dokumentiert: Ich weiß, was dort besprochen wurde, aber nicht, wer sie jeweils geleitet hat oder wie lange sie dauerten. Sie hingen eng mit dem Betrieb des Tages und mit den KPIs zusammen. Zu den Themen gehörten:
+In der Last Mile hingen die täglichen morgendlichen Stand-ups eng mit dem Betrieb des Tages und mit den Kennzahlen zusammen. Zu den Themen gehörten:
 
-- Damage %, Incomplete %, Delay % und Loading Time;
+- Schadensquote, Unvollständigkeitsquote, Verspätungen und Ladezeit (Damage %, Incomplete %, Delay %, Loading Time);
 - die Hauptgründe für Verspätungen;
 - 5S und Disziplin an der Rampe;
-- Scanner Ownership, also wer für welchen Scanner verantwortlich ist;
-- Safe Stacking;
+- die Verantwortung für die Scanner, also wer für welches Gerät zuständig ist;
+- sicheres Stapeln;
 - SOPs und QA;
-- Follow-up mit den DSPs, den Zustellpartnern;
+- die Nachverfolgung mit den DSPs, den Zustellpartnern;
 - die Kontrolle der Kühlkette;
 - die Abstimmung zwischen Last Mile und Outbound.
 
 Es ging also um mehr als „Wie lief es gestern?“: um Zahlen, um Gründe und um Punkte, die korrigiert werden mussten.
 
-Seinen Wert hatte das Briefing dann, wenn es an etwas anknüpfte, das die Leute in der Schicht sofort erleben würden. War Delay das Problem, war die Prozentzahl nur der Anfang; man musste herausfinden, warum es dazu kam. Lag die Ursache beim Beladen, beim Stapeln, bei der Leistung der Fahrer oder in einem Prozessschritt, gab das Briefing dem Team eine Sache mit, auf die es während der Arbeit achten konnte.
+Seinen Wert hatte das Briefing dann, wenn es an etwas anknüpfte, das die Leute in der Schicht sofort erleben würden. Waren die Verspätungen das Problem, war die Prozentzahl nur der Anfang; man musste herausfinden, warum es dazu kam. Lag die Ursache beim Beladen, beim Stapeln, bei der Leistung der Fahrer oder in einem Prozessschritt, gab das Briefing dem Team eine Sache mit, auf die es während der Arbeit achten konnte.
 
-Ein Briefing ergibt Sinn, wenn aus einem KPI ein Verhalten oder eine Handlung wird, die das Team sehen kann. So sollte das Stand-up für mich funktionieren: KPIs, 5 Whys, Pareto, 5S und Sicherheit, jedes Thema verknüpft mit seiner Wirkung auf den Betrieb. Dieselbe Idee steht hinter [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/), nur hat man hier zehn Minuten dafür.
+Ein Briefing ergibt Sinn, wenn aus einer Kennzahl ein Verhalten oder eine Handlung wird, die das Team sehen kann. So sollte das Stand-up für mich funktionieren: Kennzahlen, 5-Why-Methode, Pareto, 5S und Sicherheit, jedes Thema verknüpft mit seiner Wirkung auf den Betrieb. Dieselbe Idee steht hinter [Kennzahlen werden nicht in Excel besser](/de/insights/kpis-do-not-improve-in-excel/), nur hat man hier zehn Minuten dafür.
 
 ## Information oder Richtung
 
-Ein Briefing verliert seinen Wert, wenn es bei den Zahlen stehen bleibt. Sagen Sie „Delay liegt bei 2,8 %“, und die Schicht beginnt, ohne dass jemand weiß, was er anders machen soll, dann ist die Zahl vom Bericht zum Team gewandert, ohne unterwegs etwas zu bewirken.
+Ein Briefing verliert seinen Wert, wenn es bei den Zahlen stehen bleibt. Sagen Sie „Die Verspätungen liegen bei 2,8 %“, und die Schicht beginnt, ohne dass jemand weiß, was er anders machen soll, dann ist die Zahl vom Bericht zum Team gewandert, ohne unterwegs etwas zu bewirken.
 
 In Worten ist der Unterschied klein, in der Wirkung groß:
 
-- **Information:** Delay liegt bei 2,8 %.
-- **Richtung:** Delay liegt bei 2,8 %. Der Hauptgrund, den wir sehen, ist [der Grund]. Heute achten alle während der Arbeit auf [eine konkrete Sache].
+- **Information:** Die Verspätungen liegen bei 2,8 %.
+- **Richtung:** Die Verspätungen liegen bei 2,8 %. Der Hauptgrund, den wir sehen, ist [der Grund]. Heute achten alle während der Arbeit auf [eine konkrete Sache].
 
 Die zweite Fassung dauert zehn Sekunden länger, und nur sie kann das Team mit in die Schicht nehmen.
 
@@ -102,7 +102,7 @@ Deshalb sollte ein gutes Briefing vor der Schicht dort ansetzen, wo die Übergab
 
 ## Eine Vorlage für zehn Minuten
 
-So würde ich es heute vorschlagen. Ob ich das Briefing als Team Leader oder Area Manager in dieser Form verändert habe, kann ich nicht mit Sicherheit sagen. Fünf Fragen, jeweils etwa zwei Minuten, geben dem Gespräch seine Reihenfolge; ein Formular füllt niemand aus.
+So würde ich es heute vorschlagen. Fünf Fragen, jeweils etwa zwei Minuten, geben dem Gespräch seine Reihenfolge; ein Formular füllt niemand aus.
 
 **1. Was übernehmen wir?**
 Der Stand aus der vorherigen Schicht oder vom Vortag: die offenen Punkte und die Fälle, die auf Nachverfolgung warten. Die Quelle ist die schriftliche Übergabe.
@@ -111,7 +111,7 @@ Der Stand aus der vorherigen Schicht oder vom Vortag: die offenen Punkte und die
 Nur, was diese Schicht betrifft: das Volumen, ein Prozess, ein System, das Team.
 
 **3. Wo liegt heute das Risiko?**
-Dort, wo am ehesten etwas schiefgeht: ein KPI, der abrutscht, und sein Grund, ein offener Punkt mit Frist, ein technisches Problem.
+Dort, wo am ehesten etwas schiefgeht: eine Kennzahl, die abrutscht, und ihr Grund, ein offener Punkt mit Frist, ein technisches Problem.
 
 **4. Was sind die zwei, drei Prioritäten?**
 Nicht zehn. Jede als Handlung formuliert, die das Team während der Arbeit sehen kann.

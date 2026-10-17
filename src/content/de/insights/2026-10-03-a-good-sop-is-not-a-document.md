@@ -43,13 +43,13 @@ Auch die Reihenfolge zählt. Die Person muss wissen, was als Nächstes zu tun is
 
 Bevor ich einen Prozess als fertig betrachte, gleiche ich ihn noch einmal mit der echten Arbeit ab und korrigiere ihn überall dort, wo Dokument und Realität nicht übereinstimmen.
 
-Mein Prinzip dabei ist einfach: Die SOP muss auch für jemanden verständlich sein, der den Prozess nicht so im Kopf hat wie ihr Autor. Angewendet habe ich es ohne einen formalen Schritt, in dem eine feste Gruppe jede SOP vor dem Einsatz getestet hätte.
+Mein Prinzip dabei ist einfach: Die SOP muss auch für jemanden verständlich sein, der den Prozess nicht so im Kopf hat wie ihr Autor.
 
-Wer eine SOP geschrieben hat, versteht sie immer. Der beste Test einer SOP ist aus meiner Sicht, ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht.
+Wer eine SOP geschrieben hat, versteht sie immer. Der beste Test einer SOP ist aus meiner Sicht, ob jemand anderes sie unter Druck nutzen kann und dasselbe Ergebnis erreicht, auch wenn ich diesen Test nicht formell durchgeführt habe.
 
 ## Das Problem, das ich am häufigsten gesehen habe
 
-Einen klaren Fall, in dem eine SOP, die ich erstellt und eingeführt habe, in der Praxis gescheitert wäre, habe ich nicht. Viel häufiger sind mir Dokumente begegnet, die zwar existieren, in der echten Arbeit aber zu lang sind, über mehrere Orte verstreut liegen oder dem Mitarbeiter genau in dem Moment nicht helfen, in dem er die Information braucht.
+Am häufigsten sind mir Dokumente begegnet, die zwar existieren, in der echten Arbeit aber zu lang sind, über mehrere Orte verstreut liegen oder dem Mitarbeiter genau in dem Moment nicht helfen, in dem er die Information braucht.
 
 Das ist einer der Gründe, warum ich später stärker darüber nachgedacht habe, wie eine Prozedur dargestellt wird, und nicht allein darüber, was in ihr steht.
 

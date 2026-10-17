@@ -6,7 +6,7 @@ status: published
 featured: true
 summary: Presioni mund të jetë i drejtë. Poshtërimi i njerëzve nuk është metodë menaxhimi. Standardi mund të jetë shumë i fortë pa e trajtuar njeriun si numër.
 teaser: Nuk mund t'u kërkosh llogari njerëzve për një rregull që askush nuk ua ka bërë të qartë.
-deck: 'Eseja e pestë e serisë “Dhjetë vite pranë punës”: standardet, gabimi i procesit dhe gabimi i personit, dhe çfarë ndryshon kur ngrihesh në detyrë mes njerëzve me të cilët punoje dje.'
+deck: 'Eseja e pestë e serisë “Dhjetë vite pranë punës”: standardet, gabimi i procesit dhe gabimi i personit, dhe çfarë ndryshon kur ngrihesh në detyrë mes njerëzve që dje i kishe kolegë.'
 # Three moves for tomorrow's shift, shown before the text.
 firstMove:
   - Para se t'i flasësh dikujt për një gabim, kontrollo nëse standardi i është bërë ndonjëherë i qartë.
@@ -28,13 +28,13 @@ checklist:
       hint: Sjelljen dhe përgjegjësinë në njërin rast, procesin në tjetrin, ndonjëherë të dyja.
 ---
 
-Në last mile, t'i thuash dikujt “puno më mirë” ndihmon vetëm kur ai e kupton çfarë do të thotë “më mirë”.
+Në miljen e fundit, t'i thuash dikujt “puno më mirë” ndihmon vetëm kur ai e kupton çfarë do të thotë “më mirë”.
 
 Prandaj standardet duhej të ishin konkrete. Ngarkimi duhej të mbetej brenda objektivit. Shoferët duhej të qëndronin në zonën e tyre, jo të grumbulloheshin te tavolina e drejtuesit të turnit. Pas ngarkimit, porta mbyllej. Mallrat e ftohura dhe të ngrira skanoheshin në zonat e tyre. Kur mungonte një çantë, askush nuk vazhdonte sikur gjithçka ishte normale: problemi raportohej. Siguria, pastërtia dhe rregulli në rampë ishin pjesë e standardit, ndërsa dëmet, porositë e paplota, vonesat dhe koha e ngarkimit mateshin çdo ditë.
 
 Për shkeljet e përsëritura të rregullave kishim edhe një sistem pasojash. Standardi nuk ishte një poster në mur. Kishte pritshmëri, kontroll dhe llogaridhënie.
 
-Por kishte rëndësi edhe një gjë tjetër, që shpesh harrohet. Njeriu duhet ta dijë standardin përpara se ta gjykosh pse nuk e respektoi. Askujt nuk mund t'i kërkosh llogari për një rregull që nuk i është bërë kurrë i qartë.
+Por kishte rëndësi edhe një gjë tjetër, që shpesh harrohet. Njeriu duhet ta dijë standardin para se ta gjykosh pse nuk e respektoi. Askujt nuk mund t'i kërkosh llogari për një rregull që nuk i është bërë kurrë i qartë.
 
 Kjo të çon te pyetja që ndoshta, më shumë se çdo tjetër, përcakton si i drejton njerëzit: kur diçka shkon keq, gabimi është i procesit apo i personit?
 

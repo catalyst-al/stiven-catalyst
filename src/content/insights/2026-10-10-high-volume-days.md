@@ -16,7 +16,7 @@ relatedTools:
 checklist:
   title: Before the big day
   copy: Copy the checklist
-  note: My recommendations today, not a historical plan I claim to have carried out in full.
+  note: How I would do it today.
   items:
     - Real capacity has been checked, not just the number of drivers planned.
     - New people have been trained for the process.
@@ -35,7 +35,7 @@ firstMove:
 
 Some days in last mile, demand ran higher than the forecast. Drivers had to be called in at short notice, some arrived late, and some, still in their ramp-up phase, were not yet fully used to the SOPs. All of it landed on how the loading was organised and on the departure schedule. That is how my reports from last mile record it, in June 2025.
 
-The reports give no date for a particular day, no total of orders and no exact departure delays, and the days were not necessarily holidays: they were real situations of operational pressure, with no confirmed season behind them. What they showed me is something an ordinary day does not.
+They were real situations of operational pressure, not necessarily holidays or a known season. What they showed me is something an ordinary day does not.
 
 ## Where the pressure landed
 
@@ -71,7 +71,7 @@ In [6S without a poster](/insights/6s-without-a-poster/) I wrote that order is p
 
 ## Before the big day
 
-To a manager facing the first big day of the season, I would say today: do not wait for the volume to rise to find out whether the team is ready. There was operational planning of drivers, vehicles and departures back then, but I know of no formal peak plan with capacity levels and special procedures, and I cannot say which standard gave way first when the volume rose. So the five things I would recommend are advice for today, and I do not claim to have carried them out in full:
+To a manager facing the first big day of the season, I would say today: do not wait for the volume to rise to find out whether the team is ready. There was operational planning of drivers, vehicles and departures back then. The five things I would recommend are advice for today:
 
 1. **Check real capacity**, beyond the number of drivers planned.
 2. **Verify that new people have been trained** for the process.

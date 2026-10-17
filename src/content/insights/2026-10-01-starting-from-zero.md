@@ -43,7 +43,7 @@ I helped build the flagship store from zero to opening day, coordinating archite
 
 Before that, as General Sales Manager at a distributor of household appliances, I had led the wholesale business: a network of 61 active resellers, and a structure that took in the warehouse, B2B sales, accounting, the technical team and customer service. By the time I left Albania, I was used to making decisions, leading people and answering for business results.
 
-Then came Germany. From November 2021 to June 2022 I worked for a last-mile delivery company, first behind the wheel as a parcel courier, later in dispatch. The hotel came next: steward from July 2022 to April 2023, then, from May 2023, night auditor at a hotel in Frankfurt. Between December 2023 and October 2024 I went back to delivering parcels alongside the night audit, and from October 2024 to January 2025 I worked in care, as a care assistant (Pflegehelfer). In January 2025 I returned to last mile as Team Leader On Road; in June 2025 I became Area Manager.
+Then came Germany. In November 2021 I joined a last-mile delivery company, first behind the wheel as a parcel courier and later in dispatch, and stayed until June 2022. The hotel came next. I worked as a steward from July 2022 until April 2023, and in May 2023 I started as night auditor at a hotel in Frankfurt. From December 2023 to October 2024 I was delivering parcels again alongside the night audit. Care followed, from October 2024 to January 2025, as a care assistant (Pflegehelfer). In January 2025 I went back to last mile as Team Leader On Road, and in June 2025 I became Area Manager.
 
 I have no reason to hide the jobs as a parcel courier, a steward or a care assistant. Without them, my road back into management makes no sense.
 

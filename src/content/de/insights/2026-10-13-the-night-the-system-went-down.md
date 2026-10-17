@@ -39,9 +39,9 @@ corrections:
 
 In meiner ersten Einarbeitungsnacht im Hotel wollte ich die Nachtprozesse lernen. Kurz nach Mitternacht fiel das Hotelsystem wegen eines Updates aus, und zwar für etwa fünf Stunden, bis gegen Morgen.
 
-Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei. Berichten kann ich, was man in der Einarbeitung sehen konnte: dass die praktische Einarbeitung nicht wie vorgesehen stattfinden konnte und dass mir der Kollege, der mich einarbeitete, erklärte, der praktische Teil gehe in der nächsten Schicht weiter. Darüber hinaus habe ich wenig gesehen, und ich sage es jeweils an der Stelle, an der es zählt.
+Das ist die einzige Szene in dieser Reihe, die kein Bild ist. Sie ist passiert, und ich war dabei. Berichten kann ich, was man in der Einarbeitung sehen konnte: dass die praktische Einarbeitung nicht wie vorgesehen stattfinden konnte und dass mir der Kollege, der mich einarbeitete, erklärte, der praktische Teil gehe in der nächsten Schicht weiter.
 
-Es war eine Unterbrechung wegen eines Updates, und ich habe keinen Beleg für einen unerwarteten Defekt. Der Titel sagt „ausfiel“, doch was in dieser Nacht geschah, war gewöhnlicher als eine Panne und gerade deshalb lehrreicher.
+Es war eine Unterbrechung wegen eines Updates; nichts, was ich sah, deutete auf einen unerwarteten Defekt hin. Der Titel sagt „ausfiel“, doch was in dieser Nacht geschah, war gewöhnlicher als eine Panne und gerade deshalb lehrreicher.
 
 ## Fünf Stunden Warten
 
@@ -55,15 +55,15 @@ In [Wie ich Front Desk Control gebaut habe](/de/insights/how-i-built-front-desk-
 
 ## Was das Team wusste
 
-Im ersten Essay dieser Reihe habe ich einen Essay über „die Nacht, in der das System ausfiel und wir sahen, was das Team wirklich wusste“ angekündigt. Ehrlicherweise muss ich sagen: Das habe ich nicht gesehen.
+Im ersten Essay dieser Reihe habe ich einen Essay über „die Nacht, in der das System ausfiel und wir sahen, was das Team wirklich wusste“ angekündigt. Das habe ich nicht gesehen.
 
-Ich war in der Einarbeitung und habe mich auf den Kollegen verlassen. Welche Informationen ohne das System genutzt wurden und ob sie irgendwo aufgeschrieben waren, weiß ich nicht. Es wäre leicht zu schreiben, das Personal habe alles Nötige im Kopf gehabt. Ich weiß es aber nicht, und es ist genau die Art Satz, die gut klingt und sich nicht beweisen lässt.
+Ich war in der Einarbeitung und habe mich auf den Kollegen verlassen. Welche Informationen ohne das System genutzt wurden und ob sie irgendwo aufgeschrieben waren, weiß ich nicht. Es wäre leicht zu schreiben, das Personal habe alles Nötige im Kopf gehabt. Das klänge gut, beweisen kann ich es nicht.
 
 Was ich sagen kann, ist bescheidener. Von meinem Platz aus, als Neuer in der ersten Nacht, konnte ich nicht wissen, was man tut, wenn das System nicht da ist. Ich wusste nicht, wo das Verfahren lag, nicht einmal, ob es eines gab. Das ist für mich die eigentliche Erkenntnis dieser Nacht: was ich nicht wusste, und dass niemand einen Grund gehabt hatte, es mir vorher zu sagen.
 
 ## Die Rückkehr ist nicht das Ende
 
-Was in dieser Nacht geprüft wurde, als das System zurückkam, weiß ich nicht. Aber es gibt einen Grundsatz, an dem ich festhalten würde.
+Es gibt einen Grundsatz, an dem ich festhalten würde.
 
 Technisch gesehen ist die Rückkehr des Systems nicht das Ende des Vorfalls. Der Bildschirm kann wieder da sein, während noch Arbeit wartet, die in den Stunden ohne ihn hätte erledigt werden müssen: offene Punkte, Informationen, die noch eingegeben werden müssen. Bevor jemand sagt, es sei alles wieder normal, muss nach den autorisierten Verfahren bestätigt werden, dass die Arbeit normal weitergehen kann und dass für jeden offenen Punkt jemand verantwortlich ist.
 
@@ -71,7 +71,7 @@ Denselben Gedanken habe ich in [Der Bericht, den eine Maschine geschrieben hat](
 
 ## Die Kommunikation
 
-Die einzige Kommunikation, die ich aus dieser Nacht bestätigen kann, ist die zwischen meinem Kollegen und mir: warum wir mit dem praktischen Teil nicht weitermachen konnten und wann es weitergehen würde. Über die offizielle Meldekette weiß ich nichts.
+Die einzige Kommunikation, die ich aus dieser Nacht bestätigen kann, ist die zwischen meinem Kollegen und mir: warum wir mit dem praktischen Teil nicht weitermachen konnten und wann es weitergehen würde.
 
 Mein Grundsatz ist einfach, und nachts gilt er noch mehr als tagsüber: Während einer Unterbrechung muss die Kommunikation klar und abgestimmt sein, und führen dürfen sie nur die dazu befugten Personen. In einer Unterbrechung will jeder etwas sagen, und ein falsches Wort an die falsche Person kostet dann mehr.
 
@@ -85,7 +85,7 @@ Was ich heute anders machen würde, liegt in den Tagen vor dieser Nacht. Ich wü
 4. **Wie offene Punkte dokumentiert und übergeben werden, ohne die Vertraulichkeit zu verletzen.**
 5. **Wie bestätigt wird, dass der Betrieb wieder normal läuft.**
 
-Ich würde empfehlen, diese Punkte im Voraus vorzubereiten und zu lernen; es sind keine Verfahren, die ich in jener Nacht angewendet habe. Und in die Einarbeitung jedes Neuen würde ich etwas aufnehmen: neben der Arbeit mit dem System auch, was an dem Tag zu tun ist, an dem es nicht da ist. Wer neu ist, weiß am wenigsten und hat die wenigsten Gelegenheiten zu fragen.
+Ich würde empfehlen, diese Punkte im Voraus vorzubereiten und zu lernen. Und in die Einarbeitung jedes Neuen würde ich etwas aufnehmen: neben der Arbeit mit dem System auch, was an dem Tag zu tun ist, an dem es nicht da ist. Wer neu ist, weiß am wenigsten und hat die wenigsten Gelegenheiten zu fragen.
 
 **Ein vorbereiteter Betrieb tut nicht so, als könne das System nie stillstehen. Er weiß, wie er Verantwortung und Kontinuität der Arbeit sichert, wenn das System stillsteht.**
 

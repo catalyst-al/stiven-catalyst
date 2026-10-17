@@ -42,7 +42,7 @@ firstMove:
 
 In [The system is faster than you](/insights/the-system-is-faster-than-you/) I used a picture: a tour planned for a new driver, a shop that opens at ten, a stop placed at half past eight. This essay looks at the same picture from the other side, from the driver who knows the opening hours, and asks where that knowledge goes.
 
-I see it from last mile, where I coordinate drivers, tours and operational problems during delivery, today as a remote dispatcher; through the drivers in the ramp-up phase who, as I wrote in [High-volume days: the standard under pressure](/insights/high-volume-days/), were not yet fully used to the procedures; and through the change to tour planning in August 2025. What follows is my analysis and what I would recommend today, not a process I built.
+I see it from last mile, where I coordinate drivers, tours and operational problems during delivery, today as a remote dispatcher; through the drivers in the ramp-up phase who, as I wrote in [High-volume days: the standard under pressure](/insights/high-volume-days/), were not yet fully used to the procedures; and through the change to tour planning in August 2025. What follows is my analysis, and what I would recommend today.
 
 ## The planned tour and the driven tour
 
@@ -58,23 +58,23 @@ The change of August 2025 accepted this in its own language: it aimed at more re
 
 It would be easy to write this essay as the story of the wise driver and the blind system. It would not be true.
 
-The driver is not always right. They may change the order because it seems better to them, and their route may turn out longer, or delay a delivery that had a time slot. An obstacle they met once may no longer be there. And a driver in ramp-up, not yet used to the procedures, may call something “a tour that makes no sense” when it does make sense and nobody has explained it to them. I have no case of a driver telling me this in so many words.
+The driver is not always right. They may change the order because it seems better to them, and their route may turn out longer, or delay a delivery that had a time slot. An obstacle they met once may no longer be there. And a driver in ramp-up, not yet used to the procedures, may call something “a tour that makes no sense” when it does make sense and nobody has explained it to them.
 
 So who is right matters less than this: when a driver discovers something the system did not foresee, does the organisation have a way to check it? If it does, the information can become an improvement. If it does not, only two outcomes remain: the driver quietly ignores the system, or the system ignores the driver.
 
 ## The new driver and the absent driver
 
-Imagine an area that only one driver knows well. They drive the tour every day and drive it well, because they know where to park, which door to use, which customer to leave for later. None of this is in the plan, and while they are there, the plan does not need it. Whether knowing an area actually changed performance where I worked, I do not know.
+Imagine an area that only one driver knows well. They drive the tour every day and drive it well, because they know where to park, which door to use, which customer to leave for later. None of this is in the plan, and while they are there, the plan does not need it.
 
 Then one day they are absent. A new driver takes the tour, perhaps one still in ramp-up, and follows the plan, because the plan is all they have. The day stalls in exactly the places where the experienced driver never stalled.
 
-This is the picture of what I called “full distrust” in [The system is faster than you](/insights/the-system-is-faster-than-you/): knowledge that stays in one head. It is also what I wrote about in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/), except that what is missing here is a place where the driver's knowledge could have been written down. Whether what drivers knew about an area was kept anywhere, or how new drivers learned the tours, I do not know.
+This is the picture of what I called “full distrust” in [The system is faster than you](/insights/the-system-is-faster-than-you/): knowledge that stays in one head. It is also what I wrote about in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/), except that what is missing here is a place where the driver's knowledge could have been written down.
 
 An experienced driver should not be the permanent correction of a system that does not learn. That is no judgement on their value: what they know is worth too much to stay in only one place.
 
 ## Four steps from the driver to the plan
 
-I do not know whether a process like this existed where I worked, or who exactly had the authority to change a tour during the day and how that was done technically. Today I would recommend four steps for turning what drivers know into better planning:
+Today I would recommend four steps for turning what drivers know into better planning:
 
 1. **A simple way to report a problem that repeats on a tour.** Simple means the driver does it in a minute, at the end of the tour, without a long form. If reporting takes longer than correcting in silence, silence will win.
 2. **A distinction between a temporary obstacle and a recurring error.** A road closed today is not a planning error; the same wrong entrance every week is. The first passes by itself, the second comes back.

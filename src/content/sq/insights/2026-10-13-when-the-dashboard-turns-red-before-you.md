@@ -1,5 +1,5 @@
 ---
-title: Kur tabela skuqet para teje
+title: Kur paneli skuqet para teje
 date: 2026-10-13T16:00:00Z
 category: Operacione
 series: the-system
@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Një numër i kuq në ekran është një sinjal për të kontrolluar, jo një diagnozë. Pyet çfarë mat dhe sa i vjetër është para se të veprosh mbi të."
 teaser: E kuqja në ekranin tënd është sinjal, jo diagnozë. Pyet çfarë mat dhe sa e vjetër është para se të veprosh.
-description: "Pse një numër i kuq në tabelë ka vjetërsinë e vet, katër hapat mes terrenit dhe ekranit, tri reagimet e gabuara dhe një kartelë për numrin tënd të kuq."
-deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq është sinjal dhe jo diagnozë, tri reagimet e gabuara ndaj një të kuqeje, katër hapa mes alarmit dhe vendimit, si dhe një kartelë për numrin tënd të kuq."
+description: "Pse një numër i kuq në panel ka vjetërsinë e vet, katër hapat mes terrenit dhe ekranit, tri reagimet e gabuara dhe një kartë për numrin tënd të kuq."
+deck: "Eseja e dytë e serisë “Sistemi është më i shpejtë se ti”: pse një numër i kuq është sinjal dhe jo diagnozë, tri reagimet e gabuara ndaj një të kuqeje, katër hapa mes alarmit dhe vendimit, si dhe një kartë për numrin tënd të kuq."
 relatedTools:
   - /tools/shift-pulse/
   - /tools/delay-analyzer/
@@ -16,10 +16,10 @@ relatedTools:
 checklist:
   title: Numri im i kuq
   fill: true
-  note: "Një kartelë për çdo numër që ndjek në një ekran. Plotësoje para turnit, jo gjatë të kuqes."
+  note: "Një kartë për çdo numër që ndjek në një ekran. Plotësoje para turnit, jo gjatë të kuqes."
   items:
     - label: "Cili numër është, çfarë mat saktësisht dhe cili është objektivi i tij?"
-      hint: "Delay, Loading Time, Incomplete, Damage, dhoma të hapura, koha e pritjes. Një për kartelë."
+      hint: "Vonesat, koha e ngarkimit, porositë e paplota, dëmet, dhoma të hapura, koha e pritjes. Një për kartë."
     - label: "Sa i vjetër është kur e shoh?"
       hint: "Koha mes terrenit dhe ekranit: sekonda, minuta, mëngjesi tjetër? Nëse nuk e di, mësoje sot."
     - label: "Çfarë di me siguri dhe çfarë më është raportuar?"
@@ -43,13 +43,13 @@ Te [Sistemi është më i shpejtë se ti](/sq/insights/the-system-is-faster-than
 
 Që nga 1 janari 2026 punoj me kohë të pjesshme si Last Mile Dispatcher, në distancë, dhe koordinoj 80+ automjete dhe 100+ shoferë. Çfarë i bën kjo një menaxheri e kam shkruar te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/). Nga larg nuk mund të shkosh te rampa për të parë çfarë fshihet pas një numri. Mbështetesh në informacionin që të vjen nga sistemi dhe nga njerëzit në terren, dhe të dy burimet vijnë gjithmonë pak pas asaj që po ndodh.
 
-Kjo ese ushqehet nga tri burime: nga ky rol në distancë; nga përvoja ime e mëparshme në last mile, ku punoja çdo ditë me Delay, Damage, Incomplete dhe Loading Time; dhe nga një model demonstrues që e kam ndërtuar vetë, [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/), me tregues për nisjet, vonesat, ngarkimin dhe incidentet. Është demonstrim, jo sistemi i ndonjë kompanie.
+Kjo ese ushqehet nga tri burime: nga ky rol në distancë; nga përvoja ime e mëparshme në miljen e fundit, ku punoja çdo ditë me vonesat, dëmet, porositë e paplota dhe kohën e ngarkimit; dhe nga një model demonstrues që e kam ndërtuar vetë, [Last-Mile CX Control Tower](/sq/tools/cx-control-tower/), me tregues për nisjet, vonesat, ngarkimin dhe incidentet. Është demonstrim, jo sistemi i ndonjë kompanie.
 
 ## Mes terrenit dhe të kuqes
 
-Përfytyro një furgon që duhej të ishte nisur nga rampa dhjetë minuta më parë. Në tabelë rruga e tij është e kuqe. Çfarë duhej të ndodhte që ajo të skuqej?
+Përfytyro një furgon që duhej të ishte nisur nga rampa dhjetë minuta më parë. Në panelin e treguesve, rruga e tij është e kuqe. Çfarë duhej të ndodhte që ajo të skuqej?
 
-Dikush duhej të shihte që furgoni është ende aty, ose deri në një orë të caktuar duhej të mungonte një skanim. Dikush ose diçka duhej ta raportonte. Sistemi duhej ta krahasonte me objektivin, me ritmin e vet. Pastaj ekrani yt duhej ta vizatonte. Janë katër hapa, secili me vonesën e vet. Sa e madhe është kjo vonesë ndryshon nga një sistem te tjetri, dhe për sistemin me të cilin punoj tani nuk e di as listën e saktë të treguesve, as nëse të dhënat përditësohen në sekonda, në minuta apo më vonë. Pikërisht prandaj kjo është pyetja e parë.
+Dikush duhej të shihte që furgoni është ende aty, ose deri në një orë të caktuar duhej të mungonte një skanim. Dikush ose diçka duhej ta raportonte. Sistemi duhej ta krahasonte me objektivin, me ritmin e vet. Pastaj ekrani yt duhej ta vizatonte. Janë katër hapa, secili me vonesën e vet. Sa e madhe është kjo vonesë ndryshon nga një sistem te tjetri, dhe për sistemin me të cilin punoj tani nuk e di nëse të dhënat përditësohen në sekonda, në minuta apo më vonë. Pikërisht prandaj kjo është pyetja e parë.
 
 {diagram}
 
@@ -65,9 +65,9 @@ Prandaj pyetja që duhet bërë është çfarë mat ky numër, kur u përditësu
 
 ## Tri reagime të gabuara
 
-Kushdo që ka ndenjur para një tabele i njeh tri reagime ndaj një numri të kuq. Janë skema që përsëriten: nuk kam asnjë rast timin të dokumentuar ku një numër u skuq, unë reagova dhe e di si përfundoi.
+Kushdo që ka ndenjur para një paneli i njeh tri reagime ndaj një numri të kuq. Janë skema që përsëriten, jo raste të veçanta.
 
-**Të telefonosh menjëherë.** Numri skuqet dhe telefoni është në dorën tënde para se të kesh menduar. Personi që përgjigjet mund të jetë në mes të zgjidhjes së pikërisht asaj gjëje, dhe tani duhet të ndalet për të ta shpjeguar ty. Ke reaguar ndaj një situate që mund të mos ekzistojë më, dhe për këtë ke hequr një palë duar nga problemi.
+**Të telefonosh menjëherë.** Numri skuqet dhe telefoni është në dorën tënde para se të kesh menduar. Personi që përgjigjet mund të jetë në mes të zgjidhjes së pikërisht asaj gjëje, dhe tani duhet të ndalet për të ta shpjeguar ty. Ke reaguar ndaj një situate që mund të mos ekzistojë më, dhe për këtë ia ke marrë problemit dikë që po merrej me të.
 
 **Ta shpërfillësh.** “Në këtë orë është gjithmonë e kuqe.” Një alarm që përsëritet vazhdimisht pa informacion të dobishëm rrezikon ta humbasë kuptimin, dhe ditën kur e kuqja do të thotë diçka, askush nuk e shikon. Te [Një ditë e keqe apo një problem?](/sq/insights/a-bad-day-or-a-problem/) shkrova për shtresën që e kapërcejnë shumica e operacioneve: atë që tregon nëse sot është ndryshe nga dhjetë ditët e fundit. Një e kuqe që e shpërfill nga zakoni është një e kuqe pa histori.
 
@@ -75,25 +75,25 @@ Kushdo që ka ndenjur para një tabele i njeh tri reagime ndaj një numri të ku
 
 ## Katër hapa para vendimit
 
-Të trija kanë të përbashkët që reagimi vendoset ndërsa ekrani është i kuq, dhe ky është momenti më i keq për të vendosur çfarëdo. Momenti i duhur është para turnit. Ky është rendi që do të rekomandoja sot; është analiza ime, jo një protokoll që e kam ndjekur:
+Të trija kanë të përbashkët që reagimi vendoset ndërsa ekrani është i kuq, dhe ky është momenti më i keq për të vendosur çfarëdo. Momenti i duhur është para turnit. Ky është rendi që do të rekomandoja sot:
 
 1. **Kontrolloj çfarë mat treguesi dhe kur është përditësuar.** Pa këtë, nuk e di nëse po shoh të tashmen apo të shkuarën.
 2. **Verifikoj nëse problemi është real dhe ende i hapur.** Numri është një raport, dhe dikush duhet ta konfirmojë.
-3. **Kontaktoj personin që ka informacionin më të afërt me situatën.** Ai që është më afër faktit, i cili nuk është gjithmonë ai që më vjen i pari ndër mend.
+3. **Kontaktoj personin që ka informacionin më të afërt me situatën.** Ai që është më afër faktit, e jo domosdoshmërisht ai që më vjen i pari ndër mend.
 4. **Përcaktoj nëse zgjidhet brenda rolit tim apo duhet çuar më lart.** Nëse shkon lart, faktet shkojnë bashkë me të, jo vetëm ngjyra.
 
 Një përjashtim: për një rrezik të menjëhershëm sigurie nuk pres analizën e plotë. Njoftoj menjëherë, dhe verifikimi vjen pas.
 
-Kur këto katër hapa janë vendosur para turnit, minutat e para pas një të kuqeje bëhen rutinë në vend të vendimit. Ngjyra e kuqe është atëherë ajo që duhet të jetë: një sinjal për të kontrolluar, jo diagnozë.
+Kur këto katër hapa janë vendosur para turnit, minutat e para pas një të kuqeje nuk kërkojnë më vendim: bëhen rutinë. Ngjyra e kuqe është atëherë ajo që duhet të jetë: një sinjal për të kontrolluar, jo diagnozë.
 
 ## Alarmi, një herë në javë
 
 Edhe diçka, më shumë për fundin e javës sesa për turnin. Shiko të kuqet që nuk çuan në asnjë veprim, sepse kur i kontrollove ishin zgjidhur tashmë ose nuk ishin fare probleme. Nëse janë shumica, alarmi po i mëson të gjithë ta shpërfillin.
 
-Një prag i ngritur pa të dhëna, vetëm që ekrani të duket më mirë, i fsheh të kuqet e padobishme bashkë me ato që kishin rëndësi. Alarmi rishikohet mbi bazën e të dhënave: sa të kuqe pati, sa prej tyre kërkuan veprim dhe çfarë kishin të përbashkët ato. Ky numërim është edhe argumenti më i mirë që mund t'u çosh atyre që e caktojnë alarmin. Nuk kam asnjë rast të dokumentuar ku të kem kërkuar vetë ndryshimin e një pragu apo objektivi; kështu do ta argumentoja. Në vend të “tabela gabon”, thuaju sa të kuqe pati këtë javë dhe sa prej tyre kërkuan diçka.
+Një prag i ngritur pa të dhëna, vetëm që ekrani të duket më mirë, i fsheh të kuqet e padobishme bashkë me ato që kishin rëndësi. Alarmi rishikohet mbi bazën e të dhënave: sa të kuqe pati, sa prej tyre kërkuan veprim dhe çfarë kishin të përbashkët ato. Ky numërim është edhe argumenti më i mirë që mund t'u çosh atyre që e caktojnë alarmin, dhe unë do ta përdorja kështu: në vend të “paneli gabon”, thuaju sa të kuqe pati këtë javë dhe sa prej tyre kërkuan diçka.
 
 ## Numri im i kuq
 
-Kartela më poshtë ka një rresht për çdo numër që ndjek në një ekran. Plotësoje para turnit. [Shift Pulse](/sq/tools/shift-pulse/) i vendos numrat e javës krah njëri-tjetrit, që një ditë e kuqe të ketë pranë dhjetë ditë histori para se të vendosësh çfarë do të thotë.
+Plotësoje kartën më poshtë një herë për çdo numër që ndjek në një ekran, para turnit. [Shift Pulse](/sq/tools/shift-pulse/) i vendos numrat e javës krah njëri-tjetrit, që një ditë e kuqe të ketë pranë dhjetë ditë histori para se të vendosësh çfarë do të thotë.
 
 **Një numër i kuq të thotë ku të shikosh. Nuk të thotë çfarë ka aty tani. Distanca mes të dyjave është vjetërsia e numrit, dhe ta njohësh atë është puna jote.**

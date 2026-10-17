@@ -50,13 +50,13 @@ Order matters too. The person has to know what to do next and what must already 
 
 Before I consider a process finished, I compare it with the real work once more and correct it wherever the document and reality do not match.
 
-The principle I work by is simple: the SOP has to be understandable even to someone who does not carry the process in their head the way its author does. I have applied it without a formal step in which a set group of people tested every SOP before it was used.
+The principle I work by is simple: the SOP has to be understandable even to someone who does not carry the process in their head the way its author does.
 
-An SOP's author will always understand it, having written it. The best test of an SOP, in my view, is whether someone else can use it under pressure and get the same result.
+An SOP's author will always understand it, having written it. The best test of an SOP, in my view, is whether someone else can use it under pressure and get the same result, though it is a test I did not run formally.
 
 ## The problem I have seen most often
 
-I have no clear case of an SOP I created and put in place that then failed in practice. What I have met far more often are documents that exist but, in the real work, are too long, scattered across several places, or no help to the employee at the moment they need the information.
+What I have met most often are documents that exist but, in the real work, are too long, scattered across several places, or no help to the employee at the moment they need the information.
 
 That is one of the reasons I later began to think more about how a procedure is presented, as well as what is written in it.
 

@@ -48,7 +48,7 @@ Take loading time. The target was around 20 minutes; for a period our average wa
 
 It would have been easy to say the drivers were loading slowly. But 24 minutes do not tell you by themselves why you have a problem. You have to go to the ramp and see what is physically happening. There you found missing bags, trolleys that did not match the route or the floor as they should, problems with the order of the stops, loads that took longer than normal, drivers waiting. You looked at the scanners, at how dry, chilled and frozen were organised, and at whether the driver was taking everything before leaving.
 
-So we went to the process instead of blaming the driver straight away, and worked on better checks of the trolleys and the routes, a clearer organisation of dry, chilled and frozen, and ramp audits. Moving scanners closer to the ramps, pre-scanning and final completeness checks were things I recommended; whether they were put in place, I cannot say. In other periods loading time came down to the range of 16 to 19 minutes.
+So we went to the process instead of blaming the driver straight away, and worked on better checks of the trolleys and the routes, a clearer organisation of dry, chilled and frozen, and ramp audits. I also recommended moving scanners closer to the ramps, pre-scanning and final completeness checks; whether they were put in place, I cannot say. In other periods loading time came down to the range of 16 to 19 minutes.
 
 What I took from it is that a KPI improves when you change the process that produces it.
 

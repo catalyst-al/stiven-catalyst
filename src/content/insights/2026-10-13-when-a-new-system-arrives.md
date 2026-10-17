@@ -50,17 +50,17 @@ In [The night the system went down](/insights/the-night-the-system-went-down/) I
 
 Two experiences stand behind it. In last mile, the move to a new system for calculating routes and travel times was planned for 19 August 2025. According to the information from that period, the aim was better planning accuracy and fewer unrealistic itineraries, and calibrations were planned so that the change would affect the drivers as little as possible. At the hotel, there were my first weeks of training: colleagues' explanations, the SOPs, the visual materials and the videos, and information that was not always in one place. Front Desk Control grew out of that period.
 
-In those weeks in last mile we had problems with loading, missing bags, disorganised trolleys and delays, and I have them documented. I have no evidence that the new system caused them, and they may have had other causes. That is the easiest temptation when a new system arrives: billing it for everything that goes wrong in the first weeks.
+In those weeks in last mile we had problems with loading, missing bags, disorganised trolleys and delays, and I have them documented. Nothing shows that the new system caused them; they may have had other causes. That is the easiest temptation when a new system arrives: billing it for everything that goes wrong in the first weeks.
 
 ## Two sides of the same door
 
-In last mile I was part of an operation whose planning technology was changing; at the hotel I was the newcomer who had to learn a system that was already there. Side by side, the two experiences show the same thing: a system can be technically better than the one it replaces without people being ready to work with it. Readiness is built, or not built, in the weeks after installation. How that went after the August change I cannot show: I have no verified before-and-after comparison, and no record of resistance or of a return to old habits.
+In last mile I was part of an operation whose planning technology was changing; at the hotel I was the newcomer who had to learn a system that was already there. Side by side, the two experiences show the same thing: a system can be technically better than the one it replaces without people being ready to work with it. Readiness is built, or not built, in the weeks after installation.
 
 **A new system does not become part of the work because it has been installed. It does when people understand it, know how to use it, and know what to do when it does not help them.**
 
 ## “How it is used” and “why it is changing”
 
-On paper, the stated reasons for the August change were clear: better planning, more accurate times, fewer operational exceptions. I do not know whether they were explained to the team in a meeting or what the drivers and dispatchers were told, and I have no record of how I was informed myself.
+On paper, the stated reasons for the August change were clear: better planning, more accurate times, fewer operational exceptions.
 
 I am convinced, though, that two things are often confused. Showing someone how a system is used is training. Explaining why the organisation is changing the way it works is something else. The first gives a person the ability to click. The second gives them a reason to report when something is wrong, because they know what the system was supposed to improve and can see when it does not.
 
@@ -70,19 +70,19 @@ The August change provided for collecting information from the field in the firs
 
 At the hotel, the difficulty I can confirm went beyond using the program. Learning relied on colleagues' explanations, the SOPs, the visual materials and the videos, and none of them had everything.
 
-That is why I started [Front Desk Control](/insights/how-i-built-front-desk-control/): to gather the instructions, the screenshots and the processes in one clearer, searchable place. It did not replace the hotel system, and I have no measurement showing that it shortened the training. It was my answer to a problem I had myself as the newcomer.
+That is why I started [Front Desk Control](/insights/how-i-built-front-desk-control/): to gather the instructions, the screenshots and the processes in one clearer, searchable place. It did not replace the hotel system. It was my answer to a problem I had myself as the newcomer.
 
 **The difficulty of a new system is not only knowing where to click. It is finding the right information at the moment you need it.**
 
 ## The document beside the system
 
-At the hotel I have worked with SOPs, checklists, Excel reports and instructions spread across different materials, all of them support for the processes. I have no case of an old list contradicting the system's data, nor of Excel being used to get around the system.
+At the hotel I have worked with SOPs, checklists, Excel reports and instructions spread across different materials, all of them support for the processes.
 
-Nor do I think that every document outside the system is a bad habit. A checklist beside the screen may be exactly what makes a process safe. The problem arises when employees do not know which information is up to date and which is the official source. A new system makes that problem bigger, because every document that was correct the day before may now be wrong without anyone knowing. As I wrote in [A good SOP is not a document](/insights/a-good-sop-is-not-a-document/), the value of an instruction lies in being found and applied at the right moment. An outdated instruction is found just as easily.
+I do not think that every document outside the system is a bad habit. A checklist beside the screen may be exactly what makes a process safe. The problem arises when employees do not know which information is up to date and which is the official source. A new system makes that problem bigger, because every document that was correct the day before may now be wrong without anyone knowing. As I wrote in [A good SOP is not a document](/insights/a-good-sop-is-not-a-document/), the value of an instruction lies in being found and applied at the right moment. An outdated instruction is found just as easily.
 
 ## Six things before it arrives
 
-When a new system arrives, I would today give priority to preparing the people, not only to installing the program. I have not led a change programme of that kind; these are the things I would recommend:
+When a new system arrives, I would today give priority to preparing the people, not only to installing the program. These are the things I would recommend:
 
 1. **Explain why the change is being made.** Not only what the new system does.
 2. **Show what changes in the daily work.** Role by role, rather than in one presentation for everyone.

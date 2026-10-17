@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: "Një sistem i ri bëhet pjesë e punës jo kur instalohet, por kur njerëzit e kuptojnë, dinë ta përdorin dhe dinë çfarë të bëjnë kur nuk i ndihmon."
 teaser: Instalimi e ndryshon sistemin. Trajnimi, komunikimi dhe përvoja e përditshme e ndryshojnë mënyrën si punojnë njerëzit.
-description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë dhe një kartelë për to."
+description: "Një sistem i ri parë nga ana e punonjësit: “si përdoret” dhe “pse ndryshon”, gjashtë gjëra para se të vijë dhe një kartë për to."
 deck: "Eseja e shtatë e serisë “Sistemi është më i shpejtë se ti”: kalimi në një sistem të ri planifikimi në gusht 2025 dhe javët e para të trajnimit në hotel, pse një sistem teknikisht më i mirë nuk i bën njerëzit gati vetvetiu dhe gjashtë gjëra që duhen para se të vijë."
 relatedTools:
   - /tools/six-sigma-dmaic/
@@ -42,19 +42,19 @@ corrections:
 
 Te [Nata kur ra sistemi](/sq/insights/the-night-the-system-went-down/) shkrova për natën time të parë të trajnimit në hotel, kur një përditësim e la sistemin jashtë funksionit për orë të tëra. Kisha ardhur për të mësuar proceset dhe e kalova pjesën më të madhe të natës duke pritur. Kjo ese nis aty ku mbaroi ajo dhe kalon nga sistemi që ndalet te sistemi që vjen, e te njerëzit që duhet ta mësojnë.
 
-Pas saj qëndrojnë dy përvoja. Në last mile, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në hotel ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control.
+Pas saj qëndrojnë dy përvoja. Në miljen e fundit, kalimi në një sistem të ri për llogaritjen e rrugëve dhe të kohës së udhëtimit ishte planifikuar për 19 gusht 2025. Sipas informacionit të asaj kohe, qëllimi ishte një planifikim më i saktë dhe më pak itinerare jorealiste, dhe ishin parashikuar kalibrime që ndryshimi t'i prekte sa më pak shoferët. Në hotel ishin javët e mia të para të trajnimit: shpjegimet e kolegëve, SOP-të, materialet vizuale dhe videot, me informacion që nuk ishte gjithmonë në një vend. Nga ajo periudhë lindi Front Desk Control.
 
-Në ato javë në last mile kishim probleme me ngarkimin, me çantat që mungonin, me karrocat e çrregullta dhe me vonesat, dhe i kam të dokumentuara. Nuk kam asnjë provë që i shkaktoi sistemi i ri, dhe mund të kenë pasur shkaqe të tjera. Ky është tundimi më i lehtë kur vjen një sistem i ri: t'ia vesh fajin atij për gjithçka që shkon keq në javët e para.
+Në ato javë, në miljen e fundit kishim probleme me ngarkimin, me çantat që mungonin, me karrocat e çrregullta dhe me vonesat, dhe i kam të dokumentuara. Asgjë nuk tregon se i shkaktoi sistemi i ri; mund të kenë pasur shkaqe të tjera. Ky është tundimi më i lehtë kur vjen një sistem i ri: t'ia vesh fajin atij për gjithçka që shkon keq në javët e para.
 
 ## Dy anë të së njëjtës derë
 
-Në last mile isha pjesë e një operacioni ku po ndryshonte teknologjia e planifikimit; në hotel isha i porsaardhuri që duhej të mësonte një sistem që ishte tashmë aty. Kur i vë krah njëra-tjetrës, të dyja përvojat tregojnë të njëjtën gjë: një sistem mund të jetë teknikisht më i mirë se ai që zëvendëson, pa qenë njerëzit gati të punojnë me të. Gatishmëria ndërtohet, ose nuk ndërtohet, në javët pas instalimit. Si shkoi kjo pas ndryshimit të gushtit nuk mund ta tregoj: nuk kam asnjë krahasim të verifikuar para dhe pas, as ndonjë të dhënë për rezistencë apo për kthim te zakonet e vjetra.
+Në miljen e fundit isha pjesë e një operacioni ku po ndryshonte teknologjia e planifikimit; në hotel isha i porsaardhuri që duhej të mësonte një sistem që ishte tashmë aty. Kur i vë krah njëra-tjetrës, të dyja përvojat tregojnë të njëjtën gjë: një sistem mund të jetë teknikisht më i mirë se ai që zëvendëson, pa qenë njerëzit gati të punojnë me të. Gatishmëria ndërtohet, ose nuk ndërtohet, në javët pas instalimit.
 
 **Një sistem i ri nuk bëhet pjesë e punës sepse është instaluar. Bëhet kur njerëzit e kuptojnë, dinë ta përdorin dhe dinë çfarë të bëjnë kur ai nuk i ndihmon.**
 
 ## “Si përdoret” dhe “pse ndryshon”
 
-Në letër, arsyet e ndryshimit të gushtit ishin të qarta: planifikim më i mirë, kohë më të sakta, më pak përjashtime operative. Nuk e di nëse iu shpjeguan ekipit në një takim apo çfarë iu tha shoferëve dhe dispeçerëve, dhe nuk kam asnjë shënim se si u informova vetë.
+Në letër, arsyet e ndryshimit të gushtit ishin të qarta: planifikim më i mirë, kohë më të sakta, më pak përjashtime operative.
 
 Megjithatë jam i bindur se dy gjëra ngatërrohen shpesh. T'i tregosh dikujt si përdoret një sistem është trajnim. T'i shpjegosh pse organizata po e ndryshon mënyrën e punës është tjetër gjë. E para i jep njeriut aftësinë për të klikuar. E dyta i jep një arsye për të njoftuar kur diçka nuk shkon, sepse e di çfarë duhej të përmirësonte sistemi dhe e sheh kur nuk e bën.
 
@@ -64,19 +64,19 @@ Ndryshimi i gushtit parashikonte mbledhjen e informacionit nga terreni në ditë
 
 Në hotel, vështirësia që mund ta konfirmoj shkonte përtej përdorimit të programit. Mësimi mbështetej në shpjegimet e kolegëve, në SOP-të, në materialet vizuale dhe në videot, dhe asnjëri prej tyre nuk i kishte të gjitha.
 
-Prandaj nisa [Front Desk Control](/sq/insights/how-i-built-front-desk-control/): për t'i mbledhur udhëzimet, pamjet dhe proceset në një vend më të qartë, ku mund të kërkoja. Nuk e zëvendësoi sistemin e hotelit, dhe nuk kam asnjë matje që tregon se e shkurtoi trajnimin. Ishte përgjigjja ime për një problem që e kisha vetë si i porsaardhur.
+Prandaj nisa [Front Desk Control](/sq/insights/how-i-built-front-desk-control/): për t'i mbledhur udhëzimet, pamjet dhe proceset në një vend më të qartë, ku mund të kërkoja. Nuk e zëvendësoi sistemin e hotelit. Ishte përgjigjja ime për një problem që e kisha vetë si i porsaardhur.
 
 **Vështirësia e një sistemi të ri nuk është vetëm të dish ku të klikosh. Është të gjesh informacionin e duhur në çastin kur të duhet.**
 
 ## Dokumenti pranë sistemit
 
-Në hotel kam punuar me SOP, lista kontrolli, raporte në Excel dhe udhëzime të shpërndara në materiale të ndryshme, që shërbenin si mbështetje për proceset. Nuk kam asnjë rast ku një listë e vjetër binte ndesh me të dhënat e sistemit, as ku Excel-i përdorej për ta anashkaluar sistemin.
+Në hotel kam punuar me SOP, lista kontrolli, raporte në Excel dhe udhëzime të shpërndara në materiale të ndryshme, që shërbenin si mbështetje për proceset.
 
-As nuk mendoj se çdo dokument jashtë sistemit është zakon i keq. Një listë kontrolli pranë ekranit mund të jetë pikërisht ajo që e bën një proces të sigurt. Problemi lind kur punonjësi nuk e di cili informacion është i përditësuar dhe cili është burimi zyrtar. Një sistem i ri e rëndon këtë problem, sepse çdo dokument që ishte i saktë një ditë më parë mund të jetë tani i gabuar pa e ditur askush. Siç shkrova te [Një SOP e mirë nuk është dokument](/sq/insights/a-good-sop-is-not-a-document/), vlera e një udhëzimi është që të gjendet dhe të zbatohet në çastin e duhur. Një udhëzim i vjetëruar gjendet po aq lehtë.
+Nuk mendoj se çdo dokument jashtë sistemit është zakon i keq. Një listë kontrolli pranë ekranit mund të jetë pikërisht ajo që e bën një proces të sigurt. Problemi lind kur punonjësi nuk e di cili informacion është i përditësuar dhe cili është burimi zyrtar. Një sistem i ri e rëndon këtë problem, sepse çdo dokument që ishte i saktë një ditë më parë mund të jetë tani i gabuar pa e ditur askush. Siç shkrova te [Një SOP e mirë nuk është dokument](/sq/insights/a-good-sop-is-not-a-document/), vlera e një udhëzimi është që të gjendet dhe të zbatohet në çastin e duhur. Një udhëzim i vjetëruar gjendet po aq lehtë.
 
 ## Gjashtë gjëra para se të vijë
 
-Sot, kur vjen një sistem i ri, do t'i jepja përparësi përgatitjes së njerëzve, jo vetëm instalimit të programit. Nuk kam drejtuar një program ndryshimi të tillë; këto janë gjërat që do të rekomandoja:
+Sot, kur vjen një sistem i ri, do t'i jepja përparësi përgatitjes së njerëzve, jo vetëm instalimit të programit. Ja çfarë do të rekomandoja:
 
 1. **Të shpjegohet pse po bëhet ndryshimi.** Jo vetëm çfarë bën sistemi i ri.
 2. **Të tregohet çfarë ndryshon në punën e përditshme.** Rol për rol, në vend të një prezantimi të vetëm për të gjithë.
@@ -89,6 +89,6 @@ Pikën e pestë do ta theksoja më shumë se të tjerat. Mbledhja e informacioni
 
 ## Para se të vijë sistemi i ri
 
-Kartela më poshtë vlen për atë që e drejton ndryshimin, por edhe për atë që e pret. Nëse si punonjës nuk i di përgjigjet, pyet para ditës së parë. [Six Sigma në magazinë](/sq/tools/six-sigma-dmaic/) e ka fazën Control pikërisht për këtë: si mbahet një ndryshim pasi ka ikur ai që e solli.
+Karta më poshtë vlen për atë që e drejton ndryshimin, por edhe për atë që e pret. Nëse si punonjës nuk i di përgjigjet, pyet para ditës së parë. [Six Sigma në magazinë](/sq/tools/six-sigma-dmaic/) e ka fazën Control pikërisht për këtë: si mbahet një ndryshim pasi ka ikur ai që e solli.
 
 Sistemi ndryshon ditën kur instalohet. Mënyra si punojnë njerëzit ndryshon më pas, përmes trajnimit, komunikimit dhe përvojës së përditshme: rasti i zakonshëm dhe ai i vështirë, të ushtruar para ditës së parë, përgjigjja për problemin e raportuar në javën e parë, udhëzimi i përditësuar në të njëjtën ditë me ekranin.

@@ -41,9 +41,9 @@ corrections:
 
 Stellen Sie sich einen neuen Mitarbeiter an der Rezeption vor, mitten in einem Ablauf, den er erst einmal gesehen hat. Die Anleitung gibt es, aber sie steckt irgendwo zwischen einer SOP, einem Video, ein paar Fotos und dem, was ihm ein Kollege vor zwei Nächten erklärt hat. Der Ablauf steht still, und er sucht.
 
-Die Szene gibt meine Erfahrung aus den ersten Wochen im Hotel als Bild wieder, nicht als dokumentierten Vorfall, und sie ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
+Die Szene ist ein Bild, gezeichnet aus meinen ersten Wochen im Hotel, und sie ist der Grund, warum ich angefangen habe, ein eigenes Werkzeug zu bauen.
 
-Dieses Werkzeug ist [Front Desk Control](/de/insights/how-i-built-front-desk-control/). Ich habe es im September 2026 entwickelt, um die Arbeit in Front Office und Night Audit zu ordnen: SOP-Anleitungen, Checklisten, eine Informationssuche und visuelle Erklärungen mit Screenshots der Abläufe. Daneben habe ich an Strukturen für Shift Handover und die Nachtberichte gearbeitet, an der Ordnung der Abläufe für den Breakfast Forecast sowie an Checklisten und Schritt-für-Schritt-Anleitungen. Ich nutze es selbst. Ob die Kollegen es regelmäßig nutzen, kann ich nicht sagen.
+Dieses Werkzeug ist [Front Desk Control](/de/insights/how-i-built-front-desk-control/). Ich habe es im September 2026 entwickelt, um die Arbeit in Front Office und Night Audit zu ordnen: SOP-Anleitungen, Checklisten, eine Informationssuche und visuelle Erklärungen mit Screenshots der Abläufe. Daneben habe ich an Strukturen für die Schichtübergabe und die Nachtberichte gearbeitet, an der Ordnung der Abläufe für die Frühstücksprognose sowie an Checklisten und Schritt-für-Schritt-Anleitungen. Ich nutze es selbst.
 
 In dem Essay, in dem ich Front Desk Control beschrieben habe, habe ich es als unfertige Arbeit vorgestellt. Hier geht es um etwas anderes: was mit einem solchen Werkzeug geschieht, wenn es einmal da ist, und wann es aufhört, nur Ihres zu sein.
 
@@ -83,7 +83,7 @@ Front Desk Control hat mehrere Versionen durchlaufen. Ich habe daran gearbeitet,
 
 Eine Grenze sehe ich aber deutlich: Niemand sonst ist dafür zuständig, es zu aktualisieren, wenn ich fehle. Solange nur ich das Werkzeug verstehe und aktualisiere, bleibt es von mir abhängig.
 
-Das ist dasselbe, was ich in [Die Tour, die der Fahrer nicht versteht](/de/insights/the-tour-the-driver-does-not-understand/) über den erfahrenen Fahrer geschrieben habe, nur bin ich es diesmal selbst. Wissen, das in einem Kopf bleibt, wird nicht dadurch weniger zerbrechlich, dass es auf einer Seite steht, die nur ein Mensch pflegt. Und eine veraltete Anleitung in einem ordentlich wirkenden Werkzeug ist gefährlicher als eine fehlende, weil niemand sie ein zweites Mal nachschlägt. Mir ist kein Fall bekannt, in dem ein veraltetes Verfahren in Front Desk Control einen Fehler verursacht hat; das Risiko liegt in der Form.
+Das ist dasselbe, was ich in [Die Tour, die der Fahrer nicht versteht](/de/insights/the-tour-the-driver-does-not-understand/) über den erfahrenen Fahrer geschrieben habe, nur bin ich es diesmal selbst. Wissen, das in einem Kopf bleibt, wird nicht dadurch weniger zerbrechlich, dass es auf einer Seite steht, die nur ein Mensch pflegt. Und eine veraltete Anleitung in einem ordentlich wirkenden Werkzeug ist gefährlicher als eine fehlende, weil niemand sie ein zweites Mal nachschlägt.
 
 ## Fünf Bedingungen, bevor Sie es teilen
 
@@ -95,7 +95,7 @@ Heute würde ich die persönliche Entwicklung schärfer von der offiziellen Nutz
 4. **Eine verantwortliche Person für Aktualisierungen und Versionskontrolle.** Jemand außer mir.
 5. **Tests durch andere Nutzer,** bevor jemand sagt, dass das Werkzeug für die gemeinsame Nutzung bereit ist.
 
-Den Erfolg würde ich auch nicht nur daran messen, dass das Werkzeug technisch funktioniert. Ich würde wissen wollen, ob es den Mitarbeitern hilft, ob die Informationen stimmen und ob es sich auch ohne mich pflegen lässt. Für Front Desk Control habe ich auf keine dieser Fragen bisher eine gemessene Antwort. Das ist die Arbeit, die noch vor mir liegt.
+Den Erfolg würde ich auch nicht nur daran messen, dass das Werkzeug technisch funktioniert. Ich würde wissen wollen, ob es den Mitarbeitern hilft, ob die Informationen stimmen und ob es sich auch ohne mich pflegen lässt. Das bei Front Desk Control zu messen, ist die Arbeit, die noch vor mir liegt.
 
 ## Bevor Sie Ihr Werkzeug teilen
 

@@ -35,9 +35,9 @@ Das macht Pareto zu einem so starken Werkzeug und zugleich zu einem so gefährli
 
 Mit 5 Why passiert etwas Ähnliches.
 
-Ich habe einen echten Fall, aber nur den Anfang der Kette. Das Problem: Eine falsche Tasche war verladen worden. Warum gab es ein Problem mit der Zustellung? Weil die falsche Tasche verladen worden war. Warum war die falsche Tasche verladen worden? Weil sie beim Laden am falschen Ort abgestellt worden war. Aus der Analyse ergab sich eine Korrekturmaßnahme: Beladung doppelt prüfen. Und noch etwas war wichtig: Das Problem wurde Lager und Beladung zugeordnet, nicht automatisch dem Fahrer als Fehler angelastet.
+Nehmen wir einen echten Fall von der Rampe. Das Problem: Eine falsche Tasche war verladen worden. Warum gab es ein Problem mit der Zustellung? Weil die falsche Tasche verladen worden war. Warum war die falsche Tasche verladen worden? Weil sie beim Laden am falschen Ort abgestellt worden war. Aus der Analyse ergab sich eine Korrekturmaßnahme: Beladung doppelt prüfen. Und noch etwas war wichtig: Das Problem wurde Lager und Beladung zugeordnet, nicht automatisch dem Fahrer als Fehler angelastet.
 
-So viel ist dokumentiert. Das dritte, vierte und fünfte Warum liegen mir nicht schriftlich vor. Ich könnte die Lücke jetzt mit Sätzen füllen, die gut klingen; das ergäbe ein schönes 5 Why auf dem Papier, aber nicht unbedingt das, was ich tatsächlich gemacht habe. Genau dieses 5 Why will ich vermeiden: fünfmal „warum“, nur um ein Formular auszufüllen.
+Die Aufzeichnung endet beim zweiten Warum. Das dritte, vierte und fünfte könnte ich jetzt mit Sätzen füllen, die gut klingen; das ergäbe ein schönes 5 Why auf dem Papier, aber nicht unbedingt das, was ich tatsächlich gemacht habe. Genau dieses 5 Why will ich vermeiden: fünfmal „warum“, nur um ein Formular auszufüllen.
 
 Die Methode soll von der Frage „Wer war es?“ zu der Frage führen: „Was im Prozess hat das möglich gemacht, und was können wir ändern?“
 
@@ -47,6 +47,6 @@ Lautet die einzige Antwort einer Analyse „Der Mitarbeiter war unaufmerksam“,
 
 Aus diesem und anderen Fällen desselben Zeitraums entstanden Maßnahmen: doppelte Kontrolle der Beladung, keine vermischten Taschen im selben Wagen oder in derselben Kiste, Wagen nach Touren sortiert, klarere Kontrolle der Beladung, Einhaltung des Scan-Prozesses, Rampen-Audits und klarere Standards für die Fahrer und die Disposition. Die operative Verantwortung teilten sich die Schichtorganisation, die Disposition und die für den jeweiligen Prozess Verantwortlichen; als Manager verfolgte ich die Kennzahlen und Probleme mit den Schichtleitern und Disponenten.
 
-In einzelnen Monaten dieses Zeitraums erreichte das Team das Schadensziel, aber nicht in jedem Monat, und ich habe keine Messungen, die einen stetigen Rückgang zeigen würden. Wo das Ziel erreicht wurde, führe ich das auf die Arbeit des Teams und ein breiteres Kontrollsystem zurück, nicht auf ein einzelnes 5 Why; einen Beleg dafür, dass gerade dieser Fall dazu beigetragen hat, habe ich nicht.
+In einzelnen Monaten dieses Zeitraums erreichte das Team das Schadensziel, aber nicht in jedem Monat. Wo das Ziel erreicht wurde, führe ich das auf die Arbeit des Teams und ein breiteres Kontrollsystem zurück, nicht auf ein einzelnes 5 Why.
 
 Auf das gebracht, was eine Führungskraft morgen nutzen kann, sind es drei Dinge. Prüfen Sie die Kategorien, bevor Sie dem Diagramm trauen. Beenden Sie die Analyse nicht beim Namen einer Person. Und schreiben Sie nur so viele „Warums“ auf, wie Sie tatsächlich gefragt haben, und fragen Sie dann draußen an der Rampe weiter.

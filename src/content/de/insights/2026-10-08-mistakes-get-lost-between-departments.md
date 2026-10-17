@@ -6,7 +6,7 @@ series: without-you
 status: published
 featured: true
 summary: Ein Prozess endet nicht mit meiner Übergabe. Er endet, wenn das nächste Team weitermachen kann, ohne Information, Verantwortung oder Zeit zu verlieren.
-description: "Warum so viele Fehler dort entstehen, wo Arbeit von einem Team zum anderen geht, im Hotel und auf der letzten Meile, und fünf Fragen für jede Übergabe."
+description: "Warum so viele Fehler dort entstehen, wo Arbeit von einem Team zum anderen geht, im Hotel und in der Last Mile, und fünf Fragen für jede Übergabe."
 teaser: Der Ort, an dem ein Fehler gemessen wird, ist nicht unbedingt der Ort, an dem er entstanden ist.
 deck: 'Der fünfte Essay der Reihe „Ein Betrieb, der auch ohne Sie läuft“: was zwischen zwei Abteilungen passiert, warum „Ich habe Bescheid gegeben“ nicht reicht, Status, Verantwortung und Bestätigung, und die Übergabekarte mit fünf Fragen.'
 relatedTools:
@@ -44,13 +44,13 @@ In solchen Fällen unterscheide ich drei Verantwortlichkeiten:
 - **wer das Problem löst**;
 - **wer prüft, dass die Sache abgeschlossen ist.**
 
-Oft sind das drei verschiedene Menschen. Und wenn für die dritte Aufgabe niemand zuständig ist (ich beschreibe hier ein Muster; einen dokumentierten Fall, in dem ein Fehler am Ende ganz ohne Zuständigen blieb, habe ich nicht), wurde das Problem vielleicht an die richtige Abteilung „weitergegeben“, aber der Gast weiß nicht, ob es gelöst ist. Wir auch nicht.
+Oft sind das drei verschiedene Menschen. Und wenn für die dritte Aufgabe niemand zuständig ist, wurde das Problem vielleicht an die richtige Abteilung „weitergegeben“, aber der Gast weiß nicht, ob es gelöst ist. Wir auch nicht.
 
 Ein weiterer wichtiger Übergang war der zwischen den Schichten. Der Night Audit übernahm offene Punkte aus der vorherigen Schicht und musste an die Frühschicht weitergeben, was nicht erledigt war. Darüber habe ich ausführlicher im [Essay über die Schichtübergabe](/de/insights/why-the-handover-is-underrated/) geschrieben.
 
-## Auf der letzten Meile: die Kette vor dem Fahrer
+## In der Last Mile: die Kette vor dem Fahrer
 
-Auf der letzten Meile waren die Übergabepunkte noch sichtbarer. Outbound bereitete die Aufträge vor; Lager und Rampe hatten ihren Teil an der physischen Organisation; Last Mile koordinierte die Abfahrt; die DSP-Fahrer übernahmen die Verantwortung für Transport und Zustellung.
+In der Last Mile waren die Übergabepunkte noch sichtbarer. Outbound bereitete die Aufträge vor; Lager und Rampe hatten ihren Teil an der physischen Organisation; Last Mile koordinierte die Abfahrt; die DSP-Fahrer übernahmen die Verantwortung für Transport und Zustellung.
 
 Ich hatte mit Fällen zu tun, in denen Taschen fehlten oder verspätet ankamen, Wagen schlecht organisiert oder Ladungen vermischt waren und es beim Beladen Verzögerungen gab.
 
@@ -58,7 +58,7 @@ Ein Beispiel ist eine fehlende Tasche beim Beladen. Die Regel war, dass der Fahr
 
 Wenn der Fahrer bereit ist, der Auftrag aber nicht vollständig, zeigt sich die Verspätung bei der Abfahrt, und im Bericht kann sie wie eine Verspätung des Fahrers aussehen. Damit ist der Fahrer aber nicht automatisch die Ursache. Eine Verspätung kann mehrere haben: verspätete Vorbereitung, fehlende Taschen, die Organisation der Rampe oder die Bereitschaft des Fahrers.
 
-Ein Fehler kann an einer Stelle gemessen werden und an einer anderen entstanden sein. Wenn ich eine negative KPI sehe, würde ich deshalb nicht zuerst nach einem Schuldigen suchen, sondern verstehen wollen, an welchem Punkt im Prozess die Abweichung begonnen hat. Es ist dieselbe Logik wie bei [Pareto und 5 Why](/de/insights/pareto-and-5-why-in-practice/): Die Zahl zeigt, wo man das Problem suchen muss, nicht, wer es verursacht hat.
+Ein Fehler kann an einer Stelle gemessen werden und an einer anderen entstanden sein. Wenn ich eine negative Kennzahl sehe, würde ich deshalb nicht zuerst nach einem Schuldigen suchen, sondern verstehen wollen, an welchem Punkt im Prozess die Abweichung begonnen hat. Es ist dieselbe Logik wie bei [Pareto und 5 Why](/de/insights/pareto-and-5-why-in-practice/): Die Zahl zeigt, wo man das Problem suchen muss, nicht, wer es verursacht hat.
 
 {diagram}
 
@@ -76,7 +76,7 @@ Deshalb sind Fehler zwischen Abteilungen so schwer zu fassen. Von innen gesehen 
 
 Im Hotel kam es sehr auf eine strukturierte Übergabe an. Wenn ein Problem in der Nacht nicht gelöst wurde, musste es dokumentiert und für die nächste Schicht sichtbar bleiben. Deshalb wollte ich, dass die Notizen neben dem, was passiert war, auch zeigen, was noch offen ist.
 
-Auf der letzten Meile halfen klare Meldewege, die Kontakte zu den Team Leadern und die Abstimmung zwischen Last Mile, Outbound und den DSPs.
+In der Last Mile halfen klare Meldewege, die Kontakte zu den Team Leadern und die Abstimmung zwischen Last Mile, Outbound und den DSPs.
 
 Meiner Ansicht nach entscheiden drei Dinge über jede Übergabe:
 
@@ -98,7 +98,7 @@ Gibt es auf diese Fragen keine Antworten, haben wir einen Prozess, in dem sich F
 
 ## Die Übergabekarte
 
-Auf der letzten Meile habe ich gesehen, wie schnell ein Problem in der Vorbereitung als Verspätung bei der Abfahrt sichtbar werden kann. Im Hotel habe ich gesehen, wie wichtig es ist, eine Beschwerde an die Abteilung weiterzugeben, die sie lösen kann, und zu dokumentieren, was offen bleibt. Beides führt zum selben Schluss: Ein Prozess endet erst, wenn das nächste Team die Arbeit weiterführen kann, ohne Information, Verantwortung oder Zeit zu verlieren.
+In der Last Mile habe ich gesehen, wie schnell ein Problem in der Vorbereitung als Verspätung bei der Abfahrt sichtbar werden kann. Im Hotel habe ich gesehen, wie wichtig es ist, eine Beschwerde an die Abteilung weiterzugeben, die sie lösen kann, und zu dokumentieren, was offen bleibt. Beides führt zum selben Schluss: Ein Prozess endet erst, wenn das nächste Team die Arbeit weiterführen kann, ohne Information, Verantwortung oder Zeit zu verlieren.
 
 Das Werkzeug dieses Essays ist einfach. Nehmen Sie jeden Punkt in Ihrem Betrieb, an dem Arbeit in andere Hände übergeht: von einer Abteilung zur anderen, von einer Schicht zur nächsten, von innen zu einem externen Partner. Stellen Sie für jeden dieselben fünf Fragen.
 

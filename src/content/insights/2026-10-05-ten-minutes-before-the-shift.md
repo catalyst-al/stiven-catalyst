@@ -49,7 +49,7 @@ The few minutes before the work begins hold perhaps the cheapest management tool
 
 ## Last mile: the numbers and their reasons
 
-In last mile, the daily morning stand-ups are documented: I know what they covered, though not who led each one or how long it lasted. They were tied to the day's operation and to the KPIs. The topics included:
+In last mile, the daily morning stand-ups were tied to the day's operation and to the KPIs. The topics included:
 
 - Damage %, Incomplete %, Delay % and Loading Time;
 - the main reasons for delays;
@@ -106,7 +106,7 @@ That is why a good pre-shift briefing should begin where the handover ends:
 
 ## A ten-minute template
 
-This is the template I would propose today. I cannot say for certain that I changed the briefing in this way as a Team Leader or Area Manager. Five questions, about two minutes each, give the conversation its order; nobody fills in a form.
+This is the template I would propose today. Five questions, about two minutes each, give the conversation its order; nobody fills in a form.
 
 **1. What are we inheriting?**
 The state from the previous shift or from yesterday: the open items and the cases waiting for follow-up. The source is the written handover.

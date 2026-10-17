@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: A complaint handed to the next shift
   fill: true
-  note: The structure I recommend today. Whether every complaint was recorded with exactly these five fields at the time, I do not know.
+  note: How I would do it today.
   items:
     - label: What problem was reported?
       hint: In the guest's words, not our conclusion.
@@ -38,7 +38,7 @@ firstMove:
   - Hand it over with a name, so the guest does not tell the story again at breakfast.
 ---
 
-By 2 a.m. most of a hotel is asleep. Fewer people are on duty, fewer departments can be reached, fewer options are open. A guest's problem is no smaller than it would be at midday. That gap is the subject here, and the hour in the title stands for that kind of night rather than for an incident I can prove.
+By 2 a.m. most of a hotel is asleep. Fewer people are on duty, fewer departments can be reached, fewer options are open. A guest's problem is no smaller than it would be at midday. That gap is the subject here, and the hour in the title stands for that kind of night.
 
 ## What can be done at night
 
@@ -50,7 +50,7 @@ That third party makes the temptation bigger. When someone is angry in front of 
 
 ## Listening before explaining
 
-I have no record of a whole night with an angry guest at the desk: what I said, what I did and how it ended. Today I would handle it like this:
+Today I would handle it like this:
 
 1. **Listen to the guest without interrupting.**
 2. **Understand what happened and what they are asking for.**
@@ -60,7 +60,7 @@ I have no record of a whole night with an angry guest at the desk: what I said, 
 
 What an angry guest needs first is to see that their concern is being taken seriously. The explanation of why the problem happened can wait.
 
-Take the weak water pressure, which I have on record as a problem; of the conversation I have no record. At night you cannot fix it. You can listen, check it, record it accurately, pass it to the responsible department and tell the guest what will happen next. The shower stays as it is, but the guest leaves the desk with a problem that has a name and a next step.
+Suppose a guest reports the weak water pressure, one of the problems I have on record. At night you cannot fix it. You can listen, check it, record it accurately, pass it to the responsible department and tell the guest what will happen next. The shower stays as it is, but the guest leaves the desk with a problem that has a name and a next step.
 
 ## After the guest leaves the desk
 
@@ -68,7 +68,7 @@ Take the weak water pressure, which I have on record as a problem; of the conver
 
 In [Why the shift handover is one of the most underrated processes](/insights/why-the-handover-is-underrated/) I wrote about why the handover matters. For a complaint it matters in another way. If the guest has to explain the same problem from the start in the morning, the night's complaint was lost.
 
-The shift report included problems with rooms, open issues and the information that needed following up. A useful handover for a complaint, as I would set it up today, shows five things: what was reported, what was verified, what has been done so far, what is still unresolved, and who follows it up, with what the guest should be told. Whether every complaint was recorded with exactly these fields at the time, I do not know.
+The shift report included problems with rooms, open issues and the information that needed following up. A useful handover for a complaint, as I would set it up today, shows five things: what was reported, what was verified, what has been done so far, what is still unresolved, and who follows it up, with what the guest should be told.
 
 ## For the new receptionist
 

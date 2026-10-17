@@ -43,11 +43,11 @@ Zwischen diesen beiden Extremen liegt eine der wichtigsten Fragen für einen Bet
 
 In [Führung ohne Titel](/de/insights/leadership-without-a-title/) habe ich geschrieben, dass Initiative und Befugnis zwei verschiedene Dinge sind. Hier will ich aus diesem Unterschied eine klare Regel machen, die nicht mehr vom persönlichen Gefühl abhängt.
 
-Begegnet ist mir die Frage an zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? In den Fällen, die ich hatte, gingen technische Probleme in Zimmern an die Haustechnik; Housekeeping-Themen übernahm diese Abteilung, und zur Nachverfolgung kamen sie in die Übergabe. Auf der letzten Meile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
+Begegnet ist mir die Frage an zwei Stationen meiner Arbeit. Nachts im Hotel begann jedes Problem mit derselben Einordnung: Konnte ich es innerhalb meiner Rolle lösen, gehörte es zur zuständigen Abteilung, oder brauchte es eine Entscheidung weiter oben? In den Fällen, die ich hatte, gingen technische Probleme in Zimmern an die Haustechnik; Housekeeping-Themen übernahm diese Abteilung, und zur Nachverfolgung kamen sie in die Übergabe. In der Last Mile war der Team Leader sehr nah am täglichen Betrieb: Beladung, Rampe, Fahrer, Ausfälle, Verspätungen, Probleme im Moment, in dem sie passierten. Regeln legten fest, wann der Team Leader informiert werden musste, zum Beispiel wenn beim Beladen eine Tasche fehlte, und für Schäden und die Kühlkette gab es klare Standards und Kontrollen.
 
 ## Ich habe nicht improvisiert
 
-Beschreiben kann ich das Prinzip, nach dem ich seit der Einarbeitung gearbeitet habe; einen dokumentierten Fall, in dem ich selbst zwischen den beiden Möglichkeiten stand, habe ich nicht. Die Checkliste zeigte, was zu tun war, die Unterlagen zeigten, wie. Widersprachen sie sich aber oder lag etwas außerhalb des Standards, habe ich nicht improvisiert. Ich habe es mir bestätigen lassen oder es eskaliert.
+Seit der Einarbeitung habe ich nach einem Prinzip gearbeitet. Die Checkliste zeigte, was zu tun war, die Unterlagen zeigten, wie. Widersprachen sie sich aber oder lag etwas außerhalb des Standards, habe ich nicht improvisiert. Ich habe es mir bestätigen lassen oder es eskaliert. Einen einzelnen dokumentierten Moment davon habe ich nicht.
 
 Das kann nach fehlender Initiative aussehen. Initiative ist sinnvoll innerhalb der Grenze, die man kennt. Jenseits davon ist Improvisieren kein Mut, sondern ein Risiko, das man eingeht, ohne die Befugnis zu haben, es zu tragen.
 
@@ -89,15 +89,15 @@ Auch diese Regel hat eine Grenze. Haben Sie fünf Minuten, um die Fakten zu prü
 
 ## Drei Stufen
 
-So würde ich die Linie heute ziehen. Wie die Befugnisse zwischen Team Leader, Area Manager und den Ebenen darüber für jede Art von Vorfall verteilt waren, ist bei mir nicht dokumentiert, und „nie“ würde ich bei kleinen Problemen nicht sagen, denn der Kontext kann auch ein kleines Problem verändern. Aber so würde ich sie aufteilen.
+So würde ich die Grenze heute ziehen. „Nie“ würde ich bei kleinen Problemen nicht sagen, denn der Kontext kann auch ein kleines Problem verändern. Aufteilen würde ich sie aber so.
 
 **Selbst lösen**, wenn es in Ihrer Rolle liegt, der Standard klar ist, das Risiko gering ist und sich die Entscheidung rückgängig machen lässt.
 
-**Lösen und informieren**, wenn Sie es innerhalb Ihrer Befugnis lösen können, die Lage aber für die nächste Schicht, einen KPI oder den Kunden wichtig ist oder sich wiederholen kann. Der natürliche Ort für diese Information ist die Übergabe.
+**Lösen und informieren**, wenn Sie es innerhalb Ihrer Befugnis lösen können, die Lage aber für die nächste Schicht, eine Kennzahl oder den Kunden wichtig ist oder sich wiederholen kann. Der natürliche Ort für diese Information ist die Übergabe.
 
-**Nicht anfassen, eskalieren**, wenn es um Arbeitssicherheit, die Sicherheit von Haus und Menschen, Compliance oder sensible Daten geht; um Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen oder ein großes finanzielles Risiko; oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
+**Nicht anfassen, eskalieren**, wenn es um Arbeitssicherheit, Security, Compliance oder sensible Daten geht; um Zahlungen außerhalb Ihrer Befugnis, ernsthafte disziplinarische Entscheidungen oder ein großes finanzielles Risiko; oder um jede Situation, in der die Entscheidung klar über die Verantwortung der Rolle hinausgeht.
 
-Auf der letzten Meile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit oder die Compliance berührt, den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis verlangt, ist es ein Fall für die Eskalation.
+In der Last Mile sollte der Team Leader, so wie ich es heute sehe, Raum haben, ein betriebliches Problem innerhalb des Standards zu lösen. Sobald das Problem die Sicherheit oder die Compliance berührt, den Kunden ernsthaft betrifft oder eine Entscheidung außerhalb seiner Befugnis verlangt, ist es ein Fall für die Eskalation.
 
 {diagram}
 

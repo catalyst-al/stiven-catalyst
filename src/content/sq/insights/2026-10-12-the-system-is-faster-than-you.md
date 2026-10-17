@@ -7,8 +7,8 @@ status: published
 featured: true
 summary: "Sistemi vendos i pari. Njeriut në turn i mbetet pjesa që sistemit nuk i është thënë kurrë, dhe përgjegjësia për të."
 teaser: Sistemi vendos i pari. Përgjegjësia në turn mbetet prapë jotja.
-description: "Çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si mund ta gabojë një shef turni, dhe një kartelë që tregon kush vendos çfarë."
-deck: "Eseja e parë e serisë “Sistemi është më i shpejtë se ti”: çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si mund ta gabojë një shef turni, dhe një kartelë që tregon kush vendos çfarë në turnin tënd."
+description: "Çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si mund ta gabojë një shef turni, dhe një kartë që tregon kush vendos çfarë."
+deck: "Eseja e parë e serisë “Sistemi është më i shpejtë se ti”: çfarë dinë sistemet e çdo turni dhe çfarë nuk u është thënë kurrë, tri mënyra si mund ta gabojë një shef turni, dhe një kartë që tregon kush vendos çfarë në turnin tënd."
 relatedTools:
   - /tools/kpi-diagnostic/
   - /tools/shift-pulse/
@@ -18,7 +18,7 @@ checklist:
   note: "Një rresht për çdo vendim që merr sistemi në turnin tënd. Plotësoje një herë, pastaj korrigjoje ditën kur sistemi gabon."
   items:
     - label: "Cilin vendim e merr sistemi në turnin tim?"
-      hint: "Rrugën, rendin e ndalesave, kohën e planifikuar, statusin e dhomës, alarmin. Një për kartelë."
+      hint: "Rrugën, rendin e ndalesave, kohën e planifikuar, statusin e dhomës, alarmin. Një për rresht."
     - label: "Çfarë di sistemi kur e merr?"
       hint: "Adresat, oraret, gjendjen në stok, skanimet deri tani. Vetëm atë që dikush e ka shtypur ose skanuar."
     - label: "Çfarë nuk di?"
@@ -38,29 +38,29 @@ firstMove:
 diagram: decision-split
 ---
 
-Në çdo punë që kam bërë ka pasur një sistem më të shpejtë se unë. Arka në dyqan. Skaneri dhe planifikimi i rrugëve në last mile. Sistemi i hotelit në recepsion dhe në Night Audit. Tabela që skuqet. Në më shumë se tridhjetë ese në këtë faqe, këto sisteme dalin në shumicën e faqeve, por në asnjërën nuk janë tema. Janë aty si tavolina në një tregim: të gjithë punojnë mbi të, askush nuk e përshkruan.
+Në çdo punë që kam bërë ka pasur një sistem më të shpejtë se unë. Arka në dyqan. Skaneri dhe planifikimi i rrugëve në miljen e fundit. Sistemi i hotelit në recepsion dhe në Night Audit. Paneli i treguesve që skuqet. Në më shumë se tridhjetë ese në këtë faqe, këto sisteme dalin në shumicën e faqeve, por në asnjërën nuk janë tema. Janë aty si tavolina në një tregim: të gjithë punojnë mbi të, askush nuk e përshkruan.
 
 Në një turn askush nuk pyet nëse duhet ta përdorim teknologjinë. Ajo është aty kur vjen dhe do të jetë aty kur të ikësh. Pyetja që del në të vërtetë, në një formë a në një tjetër, është ndryshe: sistemi thotë një gjë, në terren duket ndryshe, kujt t'i besoj?
 
 Pas saj qëndron një pyetje më e vështirë: kur sistemi gaboi dhe unë e ndoqa, kush mban përgjegjësi?
 
-Kjo ese hap një seri për këtë pyetje. Seria pyet se çfarë i mbetet njeriut në turn kur sistemi është më i shpejtë se ai, dhe i lë mënjanë pyetjet se cilat sisteme duhen blerë dhe çfarë do të bëjnë pas pesë vjetësh. Lënda e saj është një ndryshim i sistemit të planifikimit të rrugëve dhe kohës në last mile, në gusht 2025; puna e përditshme me shoferët, rrugët dhe problemet që lindin mes planit dhe rampës; dhe ankesat e dokumentuara në hotel për presionin e ujit dhe pastërtinë e banjës. Si kudo në këtë faqe, nuk përmend emra sistemesh a aplikacionesh dhe nuk përshkruaj si funksionojnë nga brenda.
+Kjo ese hap një seri për këtë pyetje. Seria pyet se çfarë i mbetet njeriut në turn kur sistemi është më i shpejtë se ai, dhe i lë mënjanë pyetjet se cilat sisteme duhen blerë dhe çfarë do të bëjnë pas pesë vjetësh. Lënda e saj është një ndryshim i sistemit të planifikimit të rrugëve dhe kohës në miljen e fundit, në gusht 2025; puna e përditshme me shoferët, rrugët dhe problemet që lindin mes planit dhe rampës; dhe ankesat e dokumentuara në hotel për presionin e ujit dhe pastërtinë e banjës. Si kudo në këtë faqe, nuk përmend emra sistemesh a aplikacionesh dhe nuk përshkruaj si funksionojnë nga brenda.
 
 ## Gushti 2025: plani që donte të mësonte nga terreni
 
-Në gusht 2025, në last mile, u fut një ndryshim në sistemin që planifikonte rrugët dhe kohën. Një nga qëllimet ishte të pakësoheshin planet jorealiste, gabimet e planifikimit dhe përjashtimet operative. Parashikohej gjithashtu që informacioni nga terreni të përdorej për të përmirësuar planifikimin.
+Në gusht 2025, në miljen e fundit, u fut një ndryshim në sistemin që planifikonte rrugët dhe kohën. Një nga qëllimet ishte të pakësoheshin planet jorealiste, gabimet e planifikimit dhe përjashtimet operative. Parashikohej gjithashtu që informacioni nga terreni të përdorej për të përmirësuar planifikimin.
 
-Çfarë ndryshoi më pas nuk mund ta them, sepse nuk e kam matur. Por vetë qëllimet thonë diçka, dhe ky është leximi im. Një sistem që duhet t'i pakësojë planet jorealiste ka prodhuar plane jorealiste. Dhe një sistem që ka nevojë për informacion nga terreni pranon, me gjuhën e vet, atë që terreni e di prej kohësh: disa gjëra shihen vetëm atje jashtë.
+Vetë qëllimet thonë diçka, dhe ky është leximi im. Një sistem që duhet t'i pakësojë planet jorealiste ka prodhuar plane jorealiste. Dhe një sistem që ka nevojë për informacion nga terreni pranon, me gjuhën e vet, atë që terreni e di prej kohësh: disa gjëra shihen vetëm atje jashtë.
 
 Mbetet pyetja kush ia çon këtë informacion. Sistemi e merr vetëm nëse dikush në terren e sheh, e shkruan dhe e dërgon atje ku dikush mund ta përdorë.
 
 ## Ka të drejtë, deri në çastin kur gabon
 
-Skena e parë është një përfytyrim, jo kujtim: nuk kam asnjë rast të dokumentuar ku një sistem mori një vendim të gabuar dhe unë e zbulova dhe e korrigjova. Përfytyro një rrugë që sistemi e ka planifikuar për një shofer të porsaardhur. Për sistemin, rendi i ndalesave është i përsosur: distanca më e shkurtër, koha më e pakët, asnjë kthim prapa. Shoferi e ndjek. Ndalesa e tretë është një dyqan që hap në orën dhjetë, dhe sistemi e ka vënë në tetë e gjysmë, sepse ishte më afër.
+Skena e parë është e sajuar. Përfytyro një rrugë që sistemi e ka planifikuar për një shofer të porsaardhur. Për sistemin, rendi i ndalesave është i përsosur: distanca më e shkurtër, koha më e pakët, asnjë kthim prapa. Shoferi e ndjek. Ndalesa e tretë është një dyqan që hap në orën dhjetë, dhe sistemi e ka vënë në tetë e gjysmë, sepse ishte më afër.
 
 Sistemi bëri atë për të cilën u ndërtua: llogariti distanca. Nuk e dinte që dyqani ka orar, sepse askush nuk ia kishte thënë. Një shofer që e njeh zonën do ta kishte vënë re menjëherë. Shoferi i porsaardhur i besoi ekranit, sepse ekrani ishte më i shpejtë dhe më i sigurt se gjykimi i tij.
 
-Po ta kontrollosh me dorë çdo vendim të sistemit, turni bëhet më i ngadaltë pa u bërë më i sigurt. Puna është t'i njohësh rastet kur sistemi gabon, në çastin kur vijnë, pa luftuar me të. Sa shpesh ndodh kjo nuk mund ta them, sepse nuk e kam matur kurrë sa shpesh sistemi ka të drejtë. Por këto raste kanë shpesh të njëjtën formë: sistemi nuk dinte diçka që terreni e dinte. Orarin. Që porta e dytë është e prishur. Që mysafiri i asaj dhome është ai që u ankua dje. Që çanta me atë kod ishte në karrocën e gabuar, edhe pse skanimi e kishte konfirmuar.
+Po ta kontrollosh me dorë çdo vendim të sistemit, turni bëhet më i ngadaltë pa u bërë më i sigurt. Puna është t'i njohësh rastet kur sistemi gabon, në çastin kur vijnë, pa luftuar me të. Këto raste kanë shpesh të njëjtën formë: sistemi nuk dinte diçka që terreni e dinte. Orarin. Që porta e dytë është e prishur. Që mysafiri i asaj dhome është ai që u ankua dje. Që çanta me atë kod ishte në karrocën e gabuar, edhe pse skanimi e kishte konfirmuar.
 
 **Sistemi është më i shpejtë se ti në gjithçka që i është thënë. Nuk di asgjë nga ajo që nuk i është thënë. Dhe shumica e asaj që di terreni nuk i është thënë kurrë askujt.**
 
@@ -68,7 +68,7 @@ Po ta kontrollosh me dorë çdo vendim të sistemit, turni bëhet më i ngadalt�
 
 ## Tri mënyra për ta gabuar
 
-Një shef turni mund ta gabojë këtë në tri mënyra. Janë skema që përsëriten, jo raste që i kam të dokumentuara, dhe kushdo që ka punuar pranë një sistemi planifikimi do t'i njohë.
+Një shef turni mund ta gabojë këtë në tri mënyra. Janë skema që përsëriten, jo raste të veçanta, dhe kushdo që ka punuar pranë një sistemi planifikimi do t'i njohë.
 
 **Besimi i plotë.** Sistemi e tha, pra kështu është. Kur gjërat shkojnë keq, përgjigjja është “e caktoi sistemi”. Është përgjigjja më e rehatshme dhe më e rrezikshmja, sepse ia lë përgjegjësinë diçkaje që nuk mund ta mbajë. Klienti para dyqanit të mbyllur nuk e pyet sistemin.
 
@@ -88,7 +88,7 @@ Mësimi që nxjerr prej tyre nuk ka nevojë për një status të gabuar në ekra
 
 Për çdo vendim që merr sistemi në turnin tim, sot do të doja të dija tri gjëra: çfarë di sistemi kur e merr, çfarë nuk di dhe si e kuptoj unë, nga terreni, kur ka gabuar.
 
-Dy pyetjeve të para u përgjigjesh një herë dhe i shkruan përgjigjet. E treta është vetë puna. Në last mile përgjigjja mund të jetë një telefonatë e shoferit, një karrocë që nuk përputhet me rrugën e saj, ose një numër në takimin e shkurtër ditor që nuk përputhet me ditën. Nga distanca, siç shkrova te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/), përgjigjja është më e hollë: problemi të arrin vetëm nëse dikush e sheh, e kupton dhe e raporton.
+Dy pyetjeve të para u përgjigjesh një herë dhe i shkruan përgjigjet. E treta është vetë puna. Në miljen e fundit përgjigjja mund të jetë një telefonatë e shoferit, një karrocë që nuk përputhet me rrugën e saj, ose një numër në takimin e shkurtër të mëngjesit që nuk përputhet me ditën. Nga distanca, siç shkrova te [Të drejtosh 80+ automjete që nuk i sheh](/sq/insights/80-vehicles-you-cannot-see/), përgjigjja është më e hollë: problemi të arrin vetëm nëse dikush e sheh, e kupton dhe e raporton.
 
 Nëse për një vendim nuk i përgjigjem dot pyetjes së tretë, në atë pjesë të operacionit thjesht shkoj pas rrjedhës.
 
@@ -102,8 +102,8 @@ Sistemi dhe përvoja kanë vend në të njëjtin proces: një proces ku sistemi 
 
 **Sistemi vendos i pari. Ty të mbetet pjesa që atij nuk i është thënë kurrë, dhe përgjegjësia për të gjitha.**
 
-Esetë e tjera të kësaj serie flasin për këtë këmbim: për rrugën që shoferi nuk e kupton, për skanerin që është dëshmitar dhe jo gjykatës, për tabelën që skuqet para teje, për raportin që e shkroi një makinë, për natën kur ra sistemi dhe pamë çfarë dinte vërtet ekipi, për sistemin e ri që vjen dhe për listën e vogël që e ndërton vetë pranë tij.
+Esetë e tjera të kësaj serie flasin për këtë këmbim: për rrugën që shoferi nuk e kupton, për skanerin që është dëshmitar dhe jo gjykatës, për panelin që skuqet para teje, për raportin që e shkroi një makinë, për natën kur ra sistemi dhe pamë çfarë dinte vërtet ekipi, për sistemin e ri që vjen dhe për listën e vogël që e ndërton vetë pranë tij.
 
 ## Kush vendos çfarë
 
-Kartela më poshtë ka një rresht për çdo vendim që merr sistemi në turnin tënd. Për secilin bën tri pyetjet e mësipërme dhe shënon kush e korrigjon, kush e miraton dhe ku shkruhet. [Diagnostikimi i KPI-së](/sq/tools/kpi-diagnostic/) të ndihmon me numrat që të tregon sistemi: çfarë të thotë një numër i kuq para se të veprosh mbi të. Rreshti i fundit i kartelës është për korrigjimin që e bën me dorë çdo ditë, atë që duhej raportuar prej kohësh.
+Karta më poshtë ka një rresht për çdo vendim që merr sistemi në turnin tënd. Për secilin bën tri pyetjet e mësipërme dhe shënon kush e korrigjon, kush e miraton dhe ku shkruhet. [Diagnostikimi i KPI-së](/sq/tools/kpi-diagnostic/) të ndihmon me numrat që të tregon sistemi: çfarë të thotë një numër i kuq para se të veprosh mbi të. Rreshti i fundit i kartës është për korrigjimin që e bën me dorë çdo ditë, atë që duhej raportuar prej kohësh.

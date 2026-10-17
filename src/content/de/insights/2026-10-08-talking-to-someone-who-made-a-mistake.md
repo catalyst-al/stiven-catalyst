@@ -41,11 +41,11 @@ Wer nur auf den Prozess schaut, riskiert, individuelle Entscheidungen aus der Ve
 
 Im Gespräch nach einem Fehler übt eine Führungskraft ihre Autorität über Menschen so direkt aus wie sonst nie. Verantwortung einzufordern und die Würde des Mitarbeiters zu achten sind für mich keine Gegensätze.
 
-Ich habe auf der letzten Meile als Team Leader On Road und danach als Area Manager gearbeitet; zu meinen Aufgaben gehörten die Leistungskontrolle, betriebliche Probleme, KPIs und die Koordination von Menschen. Von dort aus denke ich über dieses Gespräch nach.
+Ich habe in der Last Mile als Team Leader On Road und danach als Area Manager gearbeitet; zu meinen Aufgaben gehörten die Leistungskontrolle, betriebliche Probleme, Kennzahlen und die Koordination von Menschen. Von dort aus denke ich über dieses Gespräch nach.
 
 ## Unter vier Augen, wenn die Fakten klar sind
 
-Als Grundsatz gilt für mich: Ein Korrekturgespräch würde ich lieber unter vier Augen führen, und erst dann, wenn ich die Fakten verstanden habe. Das ist der Standard, für den ich stehe, kein Verfahren, das ich in jedem Fall eingehalten habe; auch alles Weitere sind Prinzipien und nicht das Protokoll eines bestimmten Gesprächs.
+Als Grundsatz gilt für mich: Ein Korrekturgespräch würde ich lieber unter vier Augen führen, und erst dann, wenn ich die Fakten verstanden habe.
 
 Es gibt eine klare Ausnahme. Besteht eine unmittelbare Sicherheitsgefahr, greifen Sie sofort ein. Sie stoppen, was gerade passiert, sofort. Das richtige Gespräch am richtigen Ort kommt danach.
 
@@ -79,7 +79,7 @@ Eine Führungskraft kann fordernd, entschlossen und sehr klar sein, ohne die Wü
 
 Im Januar 2025 habe ich als Team Leader On Road angefangen, einige Monate später wurde ich Area Manager. In dieser Rolle berichteten mir vier Schichtleiter und acht Disponenten direkt, und indirekt umfasste der Betrieb rund 250 Fahrer. Über diesen Schritt habe ich ausführlicher in [Menschen führen, ohne den Menschen zu verlieren](/de/insights/leading-people-without-losing-the-person/) geschrieben.
 
-Wie die Kollegen auf meine Beförderung reagiert haben und ob sich unser Verhältnis verändert hat, kann ich nicht mit Sicherheit sagen. Meine Meinung ist, dass eine Beförderung Autorität nicht zur Machtdemonstration machen sollte. Wer für Menschen verantwortlich wird, mit denen er vorher Seite an Seite gearbeitet hat, muss klare Erwartungen setzen und fair entscheiden, und er darf die Position nicht benutzen, um zu zeigen, wer das Sagen hat.
+Meine Meinung ist, dass eine Beförderung Autorität nicht zur Machtdemonstration machen sollte. Wer für Menschen verantwortlich wird, mit denen er vorher Seite an Seite gearbeitet hat, muss klare Erwartungen setzen und fair entscheiden, und er darf die Position nicht benutzen, um zu zeigen, wer das Sagen hat.
 
 **Formale Autorität gibt Ihnen das Recht, Entscheidungen zu treffen. Vertrauen entsteht durch die Art, wie Sie sie treffen.**
 

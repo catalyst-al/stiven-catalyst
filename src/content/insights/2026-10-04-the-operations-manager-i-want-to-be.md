@@ -23,7 +23,7 @@ firstMove:
 checklist:
   title: The weekly review
   fill: true
-  note: The questions of my ideal week. Not a meeting I have minutes of.
+  note: The questions of my ideal week.
   items:
     - label: What is improving?
       hint: And do we know why.

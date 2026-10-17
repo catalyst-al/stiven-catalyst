@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Ein Problem, das man nicht sieht
   fill: true
-  note: Eine Orientierung, wie ich es heute machen würde. Es ist keine dokumentierte Methode aus meiner aktuellen Rolle.
+  note: So würde ich es heute machen.
   items:
     - label: Was weiß ich sicher, und was wurde mir gemeldet?
       hint: Die Tatsache und die Meldung über die Tatsache sind nicht dasselbe.
@@ -36,7 +36,7 @@ firstMove:
 
 An der Rampe sehen Sie ein Problem selbst. Aus der Ferne kennen Sie es oft nur aus den Informationen, die bei Ihnen ankommen.
 
-Das ist der größte Unterschied zwischen den beiden Arten, wie ich auf der letzten Meile gearbeitet habe. 2025 war ich als Team Leader und dann als Area Manager mitten im Betrieb: an der Rampe, beim Verladen, neben den Disponenten, jeden Tag mit den Kennzahlen. Seit dem 1. Januar 2026 arbeite ich in Teilzeit als Last-Mile-Dispatcher, remote, von zu Hause aus. Die Rolle umfasst die operative Koordination von 80+ Fahrzeugen und 100+ Fahrern: Touren, Fahrer, Verspätungen und Probleme bei der Zustellung.
+Das ist der größte Unterschied zwischen den beiden Arten, wie ich in der Last Mile gearbeitet habe. 2025 war ich als Team Leader und dann als Area Manager mitten im Betrieb: an der Rampe, beim Verladen, neben den Disponenten, jeden Tag mit den Kennzahlen. Seit dem 1. Januar 2026 arbeite ich in Teilzeit als Last-Mile-Dispatcher, remote, von zu Hause aus. Die Rolle umfasst die operative Koordination von 80+ Fahrzeugen und 100+ Fahrern: Touren, Fahrer, Verspätungen und Probleme bei der Zustellung.
 
 Die Probleme sind dieselben. Meine Position ihnen gegenüber ist eine völlig andere, und was folgt, ist meine Analyse beider Positionen, aus der Sicht von jemandem, der in beiden gestanden hat.
 
@@ -54,7 +54,7 @@ Die Entfernung hat auch ihre Vorteile.
 
 An der Rampe sehen Sie gut, was vor Ihnen liegt. Aus der Ferne können Sie, wenn Informationen und Werkzeuge es hergeben, die Koordination vieler Touren als einen Betrieb sehen: alle Fahrzeuge zugleich, und ob sich irgendwo Verspätungen häufen, statt immer nur eine einzelne Verspätung.
 
-Dieser Blick hängt davon ab, dass die Informationen, die Sie bekommen, ausreichend und verlässlich sind. Welche Systeme wir nutzen und was sie anzeigen, ebenso die Kommunikationswege und die Schichtzeiten, lasse ich weg: Das sind interne Details, und manche davon kenne ich auch nicht genau.
+Dieser Blick hängt davon ab, dass die Informationen, die Sie bekommen, ausreichend und verlässlich sind. Welche Systeme wir nutzen und was sie anzeigen, beschreibe ich hier nicht, ebenso wenig die Kommunikationswege und die Schichtzeiten; manches davon kenne ich selbst nicht genau.
 
 ## Information wird zur Arbeit
 
@@ -64,11 +64,11 @@ Aus der Ferne zählen drei Dinge noch mehr als an der Rampe: die Qualität der I
 
 An der Rampe können Sie unklare Informationen ausgleichen, indem Sie hingehen und nachsehen. Aus der Ferne geht das nicht. Unklare Information bleibt unklar, und jede Entscheidung, die darauf beruht, ebenso.
 
-Für die Kommunikation habe ich keine eigenen dokumentierten Regeln, aber ich glaube, sie sollte kurz und klar sein und sagen, welche Maßnahme nötig ist. Eine Nachricht, die drei Rückfragen braucht, um verstanden zu werden, hat die Zeit verloren, die sie sparen sollte.
+Kommunikation sollte, so glaube ich, kurz und klar sein und sagen, welche Maßnahme nötig ist. Eine Nachricht, die drei Rückfragen braucht, um verstanden zu werden, hat die Zeit verloren, die sie sparen sollte.
 
 ## Worauf ich achten würde
 
-Aus der Remote-Rolle habe ich keinen Vorfall, der vom Anfang bis zur Lösung dokumentiert ist, und keine dokumentierte Methode, Probleme früh zu erkennen. Die dokumentierten Fälle, die ich habe, mit Fahrzeugen und mit Verspätungen, stammen aus meiner früheren Arbeit auf der letzten Meile, und ich stelle sie nicht als aus der Ferne gelöst dar. Heute würde ich auf drei Dinge achten.
+Heute würde ich auf drei Dinge achten.
 
 **Abweichungen, die sich wiederholen.** Eine Verspätung ist ein Ereignis. Dieselbe Verspätung, am selben Ort, mehrere Tage hintereinander, ist ein Muster.
 

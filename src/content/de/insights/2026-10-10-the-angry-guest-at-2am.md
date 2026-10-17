@@ -14,7 +14,7 @@ relatedTools:
 checklist:
   title: Eine Beschwerde für die nächste Schicht
   fill: true
-  note: Die Struktur, die ich heute empfehle. Ob jede Beschwerde damals genau mit diesen fünf Feldern festgehalten wurde, weiß ich nicht.
+  note: So würde ich es heute machen.
   items:
     - label: Welches Problem wurde gemeldet?
       hint: In den Worten des Gastes, nicht mit unserer Schlussfolgerung.
@@ -33,11 +33,11 @@ firstMove:
   - Übergeben Sie sie mit einem Namen, damit der Gast die Geschichte beim Frühstück nicht noch einmal erzählt.
 ---
 
-Um 2 Uhr nachts schläft der größte Teil eines Hotels. Weniger Leute sind im Dienst, weniger Abteilungen erreichbar, weniger Möglichkeiten offen. Das Problem eines Gastes ist deshalb nicht kleiner als mittags. Um diese Lücke geht es hier, und die Uhrzeit im Titel steht für diese Art von Nacht, nicht für einen Vorfall, den ich belegen könnte.
+Um 2 Uhr nachts schläft der größte Teil eines Hotels. Weniger Leute sind im Dienst, weniger Abteilungen erreichbar, weniger Möglichkeiten offen. Das Problem eines Gastes ist deshalb nicht kleiner als mittags. Um diese Lücke geht es hier, und die Uhrzeit im Titel steht für diese Art von Nacht.
 
 ## Was nachts möglich ist
 
-Als Night Auditor kümmerte ich mich um die Probleme, die sich im Rahmen der Zuständigkeit der Rezeption lösen ließen. Brauchte ein Problem eine andere Abteilung, ging es an die zuständige Person, und was in der Nacht nicht abgeschlossen wurde, kam in die Übergabe. Belegen kann ich aus diesen Nächten folgende Zimmerprobleme: schwachen Wasserdruck in der Dusche, Mängel bei der Sauberkeit des Badezimmers, technische Störungen, für die die zuständige Abteilung gebraucht wurde, und offene Probleme, die die nächste Schicht weiterverfolgen musste.
+Als Night Auditor kümmerte ich mich um die Probleme, die sich im Rahmen der Zuständigkeit der Rezeption lösen ließen. Brauchte ein Problem eine andere Abteilung, ging es an die zuständige Person, und was in der Nacht nicht abgeschlossen wurde, kam in die Übergabe. Aus diesen Nächten sind folgende Zimmerprobleme festgehalten: schwachen Wasserdruck in der Dusche, Mängel bei der Sauberkeit des Badezimmers, technische Störungen, für die die zuständige Abteilung gebraucht wurde, und offene Probleme, die die nächste Schicht weiterverfolgen musste.
 
 In [Wann Sie es selbst lösen und wann Sie es nach oben weitergeben](/de/insights/solve-it-or-escalate-it/) habe ich über die Grenze zwischen Initiative und Befugnis in der Nacht geschrieben. Hier kommt zu derselben Frage ein Dritter hinzu: der Gast, der vor Ihnen steht und wartet.
 
@@ -45,7 +45,7 @@ Dieser Dritte macht die Versuchung größer. Wenn jemand verärgert vor Ihnen st
 
 ## Erst zuhören, dann erklären
 
-Einen belegten Ablauf einer Nacht mit einem verärgerten Gast an der Rezeption habe ich nicht: was ich gesagt, was ich getan habe und wie es ausging. Heute würde ich so vorgehen:
+Heute würde ich so vorgehen:
 
 1. **Dem Gast zuhören, ohne ihn zu unterbrechen.**
 2. **Verstehen, was passiert ist und was er möchte.**
@@ -55,7 +55,7 @@ Einen belegten Ablauf einer Nacht mit einem verärgerten Gast an der Rezeption h
 
 Ein verärgerter Gast muss zuerst merken, dass sein Anliegen ernst genommen wird. Die Erklärung, warum das Problem entstanden ist, kann warten.
 
-Nehmen Sie den schwachen Wasserdruck, den ich als Problem belegen kann; das Gespräch dazu ist nicht belegt. Nachts lässt er sich nicht beheben. Sie können aber zuhören, ihn prüfen, ihn genau festhalten, an die zuständige Abteilung weitergeben und dem Gast sagen, was als Nächstes passiert. Die Dusche bleibt, wie sie ist, aber der Gast verlässt die Rezeption mit einem Problem, das einen Namen und einen nächsten Schritt hat.
+Angenommen, ein Gast meldet den schwachen Wasserdruck, eines der Probleme, die ich belegen kann. Nachts lässt er sich nicht beheben. Sie können aber zuhören, ihn prüfen, ihn genau festhalten, an die zuständige Abteilung weitergeben und dem Gast sagen, was als Nächstes passiert. Die Dusche bleibt, wie sie ist, aber der Gast verlässt die Rezeption mit einem Problem, das einen Namen und einen nächsten Schritt hat.
 
 ## Wenn der Gast die Rezeption verlässt
 
@@ -63,7 +63,7 @@ Nehmen Sie den schwachen Wasserdruck, den ich als Problem belegen kann; das Gesp
 
 In [Warum die Schichtübergabe einer der am meisten unterschätzten Prozesse ist](/de/insights/why-the-handover-is-underrated/) habe ich beschrieben, warum die Übergabe zählt. Bei einer Beschwerde zählt sie noch auf andere Weise. Muss der Gast am Morgen dasselbe Problem von vorn erklären, ist die Beschwerde der Nacht verloren gegangen.
 
-Im Schichtbericht standen Probleme mit Zimmern, offene Punkte und die Informationen, die weiterverfolgt werden mussten. Eine brauchbare Übergabe für eine Beschwerde zeigt, so wie ich sie heute aufsetzen würde, fünf Dinge: was gemeldet wurde, was überprüft wurde, was bisher getan wurde, was noch ungelöst ist und wer es weiterverfolgt, zusammen mit dem, was dem Gast gesagt werden soll. Ob jede Beschwerde damals genau mit diesen Feldern festgehalten wurde, weiß ich nicht.
+Im Schichtbericht standen Probleme mit Zimmern, offene Punkte und die Informationen, die weiterverfolgt werden mussten. Eine brauchbare Übergabe für eine Beschwerde zeigt, so wie ich sie heute aufsetzen würde, fünf Dinge: was gemeldet wurde, was überprüft wurde, was bisher getan wurde, was noch ungelöst ist und wer es weiterverfolgt, zusammen mit dem, was dem Gast gesagt werden soll.
 
 ## Für die neue Rezeptionskraft
 

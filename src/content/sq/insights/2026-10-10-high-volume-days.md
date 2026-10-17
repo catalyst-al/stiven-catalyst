@@ -7,7 +7,7 @@ status: published
 featured: true
 summary: Presioni nuk i krijon gjithmonë problemet. Shpesh i bën më të dukshme.
 teaser: Kishim ditë kur kërkesa ishte më e lartë se parashikimi. Shoferë të thirrur në minutën e fundit, disa ende në fazën e përshtatjes. Në ato ditë shihej sa i përgatitur ishte operacioni.
-description: "Ditët kur kërkesa kalonte parashikimin në last mile: ku binte presioni, pse kapaciteti nuk matet vetëm me njerëz dhe pesë kontrolle para ditës së madhe."
+description: "Ditët kur kërkesa kalonte parashikimin në miljen e fundit: ku binte presioni, pse kapaciteti nuk matet vetëm me njerëz dhe pesë kontrolle para ditës së madhe."
 deck: 'Eseja e tetë e serisë “Përmirësimi që mbahet”: ditët kur kërkesa kalonte parashikimin, ku binte presioni, pse kapaciteti nuk është numri i njerëzve dhe pesë kontrolle para ditës së madhe.'
 relatedTools:
   - /tools/delay-analyzer/
@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Para ditës së madhe
   copy: Kopjo listën
-  note: Rekomandimet e mia sot, jo një plan historik që pretendoj se e kam zbatuar të plotë.
+  note: Si do ta bëja sot.
   items:
     - Kapaciteti real është kontrolluar, jo vetëm numri i shoferëve të planifikuar.
     - Të porsaardhurit janë trajnuar për procesin.
@@ -29,13 +29,13 @@ firstMove:
   - Bëje të qartë kush vendos dhe kush njoftohet kur plani nuk mjafton.
 ---
 
-Në disa ditë në last mile, kërkesa e kalonte parashikimin. Shoferët duhej të thirreshin në minutën e fundit, disa mbërrinin me vonesë dhe disa, ende në fazën e përshtatjes (ramp-up), nuk ishin mësuar plotësisht me SOP-të. E gjithë kjo binte mbi organizimin e ngarkimit dhe mbi orarin e nisjeve. Kështu është shënuar në raportimet e mia nga last mile, në qershor 2025.
+Në miljen e fundit kishte ditë kur kërkesa e kalonte parashikimin. Shoferët duhej të thirreshin në minutën e fundit, disa mbërrinin me vonesë dhe disa, ende në fazën e përshtatjes, nuk ishin mësuar plotësisht me SOP-të. E gjithë kjo binte mbi organizimin e ngarkimit dhe mbi orarin e nisjeve. Kështu e kam shënuar në raportimet e mia nga milja e fundit, në qershor 2025.
 
-Raportimet nuk japin as datën e një dite të caktuar, as numrin total të porosive, as vonesën e saktë të nisjeve, dhe nuk ishin domosdoshmërisht ditë festash: ishin situata reale presioni operacional, pa ndonjë sezon të konfirmuar pas tyre. Ato ditë më treguan diçka që një ditë e zakonshme nuk ta tregon.
+Ishin situata reale presioni operacional, jo domosdoshmërisht ditë festash apo një sezon i njohur. Ato ditë më treguan diçka që një ditë e zakonshme nuk ta tregon.
 
 ## Ku binte presioni
 
-Si Area Manager kisha katër drejtues turni dhe tetë dispeçerë. Në takimin e shkurtër të përditshëm (daily stand-up) flisnim për rezultatet e KPI-ve, problemet e ngarkimit, vonesat, sigurinë dhe koordinimin operacional.
+Si Area Manager kisha katër drejtues turni dhe tetë dispeçerë. Në takimin e shkurtër të përditshëm flisnim për rezultatet e KPI-ve, problemet e ngarkimit, vonesat, sigurinë dhe koordinimin operacional.
 
 Problemet e dokumentuara tregojnë ku duhej vëmendje kur rritej presioni:
 
@@ -67,7 +67,7 @@ Te [6S pa poster](/sq/insights/6s-without-a-poster/) shkrova se rregulli provohe
 
 ## Para ditës së madhe
 
-Sot, një menaxheri përpara ditës së parë të madhe të sezonit do t'i thosha: mos prit derisa të rritet volumi për të zbuluar nëse ekipi është gati. Shoferët, automjetet dhe nisjet planifikoheshin atëherë operacionalisht, por nuk di për ndonjë plan zyrtar për kulmin e kërkesës me nivele kapaciteti dhe procedura të veçanta, dhe nuk mund të them cili standard u lëkund i pari kur u rrit volumi. Prandaj pesë gjërat që do t'i rekomandoja janë këshillë për sot, dhe nuk pretendoj se i kam zbatuar të plota atëherë:
+Sot, një menaxheri që ka përpara ditën e parë të madhe të sezonit do t'i thosha: mos prit derisa të rritet volumi për të zbuluar nëse ekipi është gati. Atëherë shoferët, automjetet dhe nisjet planifikoheshin në nivel operacional. Pesë gjërat që do t'i rekomandoja janë këshillë për sot:
 
 1. **Të kontrollojë kapacitetin real**, përtej numrit të shoferëve të planifikuar.
 2. **Të verifikojë nëse të porsaardhurit janë trajnuar** për procesin.
@@ -75,7 +75,7 @@ Sot, një menaxheri përpara ditës së parë të madhe të sezonit do t'i thosh
 4. **Të ketë një plan** për mungesat, vonesat dhe problemet me automjetet.
 5. **Të sqarojë para turnit kush vendos** dhe kush duhet njoftuar kur situata ndryshon.
 
-Pika e tretë është ajo që peshon më shumë për mua. Në ditën e rëndë, diçka do të shtyhet. Pyetja është nëse e ke vendosur më parë çfarë nuk shtyhet kurrë, apo e vendos në mes të presionit.
+Për mua peshon më shumë pika e tretë. Në ditën e rëndë, diçka do të shtyhet. Pyetja është nëse e ke vendosur më parë çfarë nuk shtyhet kurrë, apo e vendos në mes të presionit.
 
 **Standardi nuk provohet në ditën kur gjithçka shkon sipas planit. Provohet në ditën kur plani nuk mjafton.**
 

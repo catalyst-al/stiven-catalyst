@@ -15,7 +15,7 @@ relatedTools:
 checklist:
   title: Hält es?
   fill: true
-  note: So würde ich es heute prüfen. Es ist keine Bewertung meiner eigenen früheren Arbeit.
+  note: So würde ich es heute prüfen.
   items:
     - label: Dokumentation
       hint: Ist der Standard klar und leicht zu finden?
@@ -40,11 +40,11 @@ diagram: improvement-paths
 
 Könnte ich mir an meinem ersten Tag als Team Leader einen einzigen Satz mitgeben, wäre es dieser: Wenn du ein Problem heute gelöst hast, frag dich, ob es morgen auch ohne dich gelöst würde. Mit derselben Frage schließt diese Reihe.
 
-Auf der letzten Meile habe ich mit Standards für Verladen, Scannen, die Organisation der Rampe und Sicherheit gearbeitet. Dabei bin ich auf Probleme gestoßen: mit Abläufen, die nicht eingehalten wurden, und mit Fahrern, die mit den Standards noch nicht ganz vertraut waren. Im Hotel habe ich die SOPs für Front Office und Night Audit organisiert. Was mir fehlt, ist ausgerechnet der Fall, den der Titel verspricht: eine dokumentierte Verbesserung von mir, die einige Monate hielt und dann aufgegeben wurde. In einem Essay über verblassende Verbesserungen gehört diese Lücke in die Mitte.
+In der Last Mile habe ich mit Standards für Verladen, Scannen, die Organisation der Rampe und Sicherheit gearbeitet. Dabei bin ich auf Probleme gestoßen: mit Abläufen, die nicht eingehalten wurden, und mit Fahrern, die mit den Standards noch nicht ganz vertraut waren. Im Hotel habe ich die SOPs für Front Office und Night Audit organisiert. Ob davon etwas gehalten hat, kann ich nicht sagen; einen dokumentierten Fall einer Verbesserung von mir, die hielt und dann verblasste, habe ich nicht. Um diese Frage geht es in diesem Essay.
 
 ## Die Frage, die ich nicht beantworten kann
 
-2025 war ich auf der letzten Meile erst Team Leader, dann Area Manager. Später bin ich in die Remote-Koordination gewechselt.
+2025 war ich in der Last Mile erst Team Leader, dann Area Manager. Später bin ich in die Remote-Koordination gewechselt.
 
 Was ist von meiner Arbeitsweise geblieben, als ich die Rolle verlassen hatte? Welche Kontrollen liefen weiter, welche waren nach der ersten Woche vergessen?
 
@@ -54,9 +54,9 @@ Genau das würde ich heute am liebsten verstehen: ob die Ergebnisse einer Führu
 
 ## Warum eine Verbesserung verblasst
 
-Einen belegten Fall habe ich dafür nicht, aber ich glaube, eine Verbesserung ist gefährdet, wenn sie allein an der Person hängt, die sie angestoßen hat, statt in die tägliche Arbeitsweise einzugehen.
+Ich glaube, eine Verbesserung ist gefährdet, wenn sie allein an der Person hängt, die sie angestoßen hat, statt in die tägliche Arbeitsweise einzugehen.
 
-Personalwechsel machen dieses Risiko sichtbarer. Auf der letzten Meile hatten wir kurzfristig eingesprungene Fahrer und Fahrer in der Ramp-up-Phase, die mit den SOPs noch nicht vertraut waren. Das machte es schwer, die Einhaltung auf demselben Niveau zu halten.
+Personalwechsel machen dieses Risiko sichtbarer. In der Last Mile hatten wir kurzfristig eingesprungene Fahrer und Fahrer in der Einarbeitungsphase, die mit den SOPs noch nicht vertraut waren. Das machte es schwer, die Einhaltung auf demselben Niveau zu halten.
 
 Ein Standard sollte auch mit Leuten funktionieren, die ihn nicht seit Jahren kennen. Lernt jede neue Kraft den Prozess nur, indem sie einer Kollegin oder einem Kollegen zuschaut, hängt das Ergebnis davon ab, wer einarbeitet. Darüber habe ich in [„Schau, wie ich es mache“ ist keine Einarbeitung](/de/insights/watch-how-i-do-it-is-not-training/) geschrieben. Hier zeigt sich der Preis: Ein Standard, der nur von Mensch zu Mensch weitergegeben wird, verliert bei jedem Wechsel ein Stück.
 

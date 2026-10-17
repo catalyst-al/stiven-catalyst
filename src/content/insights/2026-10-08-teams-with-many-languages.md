@@ -71,8 +71,6 @@ Take a hypothetical instruction that says only “check the load”. Two people 
 
 In this example the fault may well lie with the standard, and an unclear standard stays unclear in whatever language you translate it into.
 
-I saw and handled operational problems, but I have no documented case of a mistake I can say for certain was caused by language, so I blame none on it.
-
 For me, a good instruction has:
 
 - **one clear action** for each step;
@@ -91,7 +89,7 @@ People may answer “yes” because they think they have understood, because the
 
 Then I would check whether the person does it correctly, whether they know the result they have to reach, and whether they know when to ask for help.
 
-I hold to this as a standard; I have no scene of it to quote. It is the same test I described in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/): do it yourself, tell me why, show me what you do when an exception comes up.
+I hold to it as a standard, and it is the same test I described in [“Watch how I do it” is not training](/insights/watch-how-i-do-it-is-not-training/): do it yourself, tell me why, show me what you do when an exception comes up.
 
 When someone does not understand an instruction, repeating the same sentence louder settles nothing. As managers we have to check whether the instruction is clear, whether it has been demonstrated, and whether the person can carry it out.
 

@@ -49,7 +49,7 @@ In cases like these I distinguish three different responsibilities:
 - **who solves the problem**;
 - **who checks that the matter is closed.**
 
-Often these are three different people. And if the third belongs to nobody (I describe that in general terms; I have no documented case of a mistake left with no owner at all), the problem may have been “passed on” to the right department, but the guest does not know whether it has been solved. Neither do we.
+Often these are three different people. And if the third belongs to nobody, the problem may have been “passed on” to the right department, but the guest does not know whether it has been solved. Neither do we.
 
 Another important handover was the one between shifts. Night Audit took on open matters from the previous shift and had to pass on to the morning shift whatever had not been finished. I have written about that at more length in [the essay on the handover](/insights/why-the-handover-is-underrated/).
 
