@@ -26,9 +26,15 @@
 
   document.querySelectorAll("[data-note-actions]").forEach((node) => { node.hidden = false; });
 
+  // A field note's card (pages/field-notes.njk) carries its quote once: the text to copy is the quote, the author and
+  // the card's address, and the text to share is the quote; an empty data-copy-text or data-share-text asks for them.
+  const quoteOf = (button) => button.closest(".note-card")?.querySelector("blockquote")?.textContent.trim() || "";
+  const copyText = (button) => button.dataset.copyText || `${quoteOf(button)} (Stiven Janaqi, Stiven Catalyst) ${button.closest("[data-note-actions]")?.querySelector("[data-share-url]")?.dataset.shareUrl || location.href}`;
+  const shareText = (button) => button.dataset.shareText || quoteOf(button);
+
   document.querySelectorAll("[data-copy-text]").forEach((button) => {
     button.addEventListener("click", async () => {
-      await copy(button.dataset.copyText);
+      await copy(copyText(button));
       confirm(button, button.dataset.copiedLabel || "Copied");
     });
   });
@@ -40,7 +46,8 @@
       button.hidden = false;
     }
     button.addEventListener("click", async () => {
-      const { shareUrl: url, shareText: text } = button.dataset;
+      const url = button.dataset.shareUrl;
+      const text = shareText(button);
       if (navigator.share) {
         try { await navigator.share({ title: document.title, text, url }); } catch { /* dismissed */ }
         return;

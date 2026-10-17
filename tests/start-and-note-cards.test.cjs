@@ -38,7 +38,8 @@ test('the Field Notes page and the note of the day offer each note as an image',
     for (const slug of slugs(dir)) assert.ok(page.includes(`href="/media/notes/${lang}/${slug}.jpg?v=`), `${lang}: ${slug}`);
     const home = built(`${prefix}index.html`);
     assert.match(home, /data-note-image/, `${lang}: note of the day`);
-    assert.match(home, /&quot;img&quot;:&quot;\/media\/notes\//, `${lang}: image in the notes data`);
+    // The notes the home page reads come from one file (src/notes-data.njk), each with its image.
+    assert.match(built(`js/notes-${lang}.js`), /\bimg:"\/media\/notes\//, `${lang}: image in the notes data (the built file is minified: keys without quotes)`);
   }
 });
 

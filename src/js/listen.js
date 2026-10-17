@@ -5,7 +5,8 @@
 // - The block being read is marked, and followed on screen while the reader is near it.
 // - Pause is a stop that remembers the sentence; resume starts again from that sentence. (speechSynthesis.pause
 //   is unreliable on several browsers.)
-// - The bar shows only when the browser has a voice for the page's language; without one it says so.
+// - The bar shows as soon as the browser can speak at all, so the text under it does not move later; the button
+//   waits for the browser's list of voices, and without a voice for the page's language the bar says so.
 // - The speed is kept in this browser only (localStorage "sc-listen-rate"). Nothing is recorded or sent.
 (() => {
   const box = document.querySelector("[data-listen]");
@@ -187,15 +188,20 @@
     match.sort((a, b) => (b.localService === true) - (a.localService === true) || (b.default === true) - (a.default === true));
     return match[0] || null;
   };
+  // The bar takes its place at once, before the voices are known, so the text under it stays where it is; the button
+  // is on hold (aria-busy) until the list of voices arrives, and most browsers have it within a moment.
+  box.hidden = false;
+  toggle.disabled = true;
+  toggle.setAttribute("aria-busy", "true");
   let settled = false;
-  const settle = () => {
+  const settle = (force = false) => {
     if (settled) return;
     voice = pick();
     const any = synth.getVoices ? synth.getVoices().length : 0;
-    if (!voice && !any) return; // the list is not loaded yet
+    if (!voice && !any && !force) return; // the list is not loaded yet
     settled = true;
-    box.hidden = false;
-    if (voice) return;
+    toggle.removeAttribute("aria-busy");
+    if (voice) { toggle.disabled = false; return; }
     // No voice for this language: the bar says so instead of offering a button that would speak another language.
     toggle.disabled = true;
     if (rateSelect) rateSelect.disabled = true;
@@ -203,8 +209,8 @@
   };
   settle();
   if (!settled) {
-    if ("onvoiceschanged" in synth) synth.addEventListener("voiceschanged", settle);
+    if ("onvoiceschanged" in synth) synth.addEventListener("voiceschanged", () => settle());
     // Some browsers never fire the event; after a moment, decide with what there is (and show the note if nothing).
-    setTimeout(() => { if (!settled) { settled = true; voice = pick(); box.hidden = false; if (!voice) { toggle.disabled = true; if (rateSelect) rateSelect.disabled = true; if (note) note.textContent = box.dataset.noVoice || ""; } } }, 2000);
+    setTimeout(() => settle(true), 2000);
   }
 })();
