@@ -918,7 +918,6 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
     gap: 36px;
     padding: 20px 0 56px;
   }
-  .cosmos-system { order: -1; }
   .cosmos-anchor { aspect-ratio: 1 / .86; max-height: none; }
   .hero-side { max-width: 650px; }
   .brand-poster { min-height: 500px; }

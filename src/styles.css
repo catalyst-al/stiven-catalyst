@@ -4344,7 +4344,6 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
     gap: 36px;
     padding: 20px 0 56px;
   }
-  .cosmos-system { order: -1; }
   .cosmos-anchor { aspect-ratio: 1 / .86; max-height: none; }
   .hero-side { max-width: 650px; }
   .brand-poster { min-height: 500px; }
@@ -7566,9 +7565,13 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
 }
 .share-orbit-native:hover { border-color: var(--share-glow); }
 
+/* On a phone the planet is smaller and waits until the reader has scrolled (js/share-orbit.js), so it never covers
+   the opening lines of a page. */
 @media (max-width: 620px) {
-  .share-orbit-button { width: 50px; height: 50px; }
-  .share-orbit-panel { bottom: 64px; }
+  .share-orbit { transition: opacity .3s ease, transform .3s ease, visibility .3s; }
+  .share-orbit.is-resting { opacity: 0; visibility: hidden; transform: translateY(12px); }
+  .share-orbit-button { width: 44px; height: 44px; }
+  .share-orbit-panel { bottom: 58px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .share-orbit-ring,

@@ -7,8 +7,6 @@
 {%- set highlights = (de if lang == "de" else sq).home.highlights if lang == "de" or lang == "sq" else home.highlights -%}
 {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
 {%- set featured = essays | featured -%}
-{#- The three newest essays besides the featured one, newest first. -#}
-{%- set others = essays | except(featured) | last(3) | reverse -%}
 {#- The three essays to read first, chosen by the author by slug in src/_data/homeEssays.json, each with the sentence on
     why, in this language. -#}
 {%- set picks = homeEssays.essays -%}
@@ -98,53 +96,6 @@
     </div>
   </section>
 
-{%- if others.length %}
-  <section class="shell section">
-    <div class="section-heading">
-      <div>
-        <p class="kicker">{{ "Latest insights" | t(lang) }}</p>
-        <h2>{{ "Plain words about real work." | t(lang) }}</h2>
-      </div>
-      <p>{{ "No slogans. No recycled corporate language. Just clearer thinking about people, standards, accountability and execution." | t(lang) }}</p>
-    </div>
-
-    <div class="article-grid">
-      {%- for item in others %}
-      <article class="article-card">
-        <span class="card-number">{{ item.data.number }}</span>
-        <div class="card-meta"><span>{{ item.data.category }}</span></div>
-        <h3>{{ item.data.title }}</h3>
-        <p>{{ item.data.teaser or item.data.summary }}</p>
-        {%- if item.data.status == "soon" %}
-        <span class="soon">{{ "Coming soon" | t(lang) }}</span>
-        {%- else %}
-        <a class="text-link" href="{{ item.url }}">{{ "Read more" | t(lang) }} <span aria-hidden="true">→</span></a>
-        {%- endif %}
-      </article>
-      {%- endfor %}
-    </div>
-  </section>
-{%- endif %}
-
-  <section class="shell section">
-    <div class="section-heading">
-      <div>
-        <p class="kicker">{{ "Field notes" | t(lang) }}</p>
-        <h2>{{ "Short observations. Real work." | t(lang) }}</h2>
-      </div>
-      <p>{{ "Smaller ideas captured close to the moment: from shifts, teams, service environments and everyday operations." | t(lang) }}</p>
-    </div>
-
-    <div class="notes-grid">
-      {%- for offset in [1, 2] %}{% set note = dayNotes[(dayIndex + offset) % dayNotes.length] %}{% if note and dayNotes.length > 2 %}
-      <article class="note-card" data-note-slot="{{ offset }}">
-        <blockquote>{{ note.data.quote | quoted(lang) }}</blockquote>
-        <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate(lang) }}</time>
-      </article>
-      {%- endif %}{% endfor %}
-    </div>
-  </section>
-
 {#- After the writing: the tools, then who writes this and the book. #}
   <section class="shell section">
     <div class="section-heading">
@@ -183,13 +134,6 @@
 
 {% include "partials/newsletter.njk" %}
 
-  <section class="shell cta">
-    <h2>{{ "Build better systems." | t(lang) }} <span>{{ "Lead people better." | t(lang) }}</span></h2>
-    <div class="cta-side">
-      <p>{{ "Stiven Catalyst is an evolving archive of practical management thinking, projects and field experience." | t(lang) }}</p>
-      <a class="text-link" href="{{ '/about.html' | local(lang) }}">{{ "About Stiven Catalyst" | t(lang) }} <span aria-hidden="true">→</span></a>
-    </div>
-  </section>
 {#- The field notes of this language, one file the browser keeps (src/notes-data.njk), before the script that reads
     them: deferred scripts run in the order they stand. -#}
 <script src="/js/notes-{{ lang or 'en' }}.js?v={{ dayNotes | noteDayData(lang) | stamp }}" defer></script>
