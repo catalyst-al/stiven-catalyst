@@ -22,6 +22,18 @@
     }
   };
 
+  // On a phone the planet rests out of sight until the reader has scrolled half a screen, so it does not cover the
+  // opening lines; a page too short to scroll keeps it in view.
+  const phone = matchMedia("(max-width: 620px)");
+  const rest = () => {
+    const scrollable = document.documentElement.scrollHeight > innerHeight * 1.5;
+    root.classList.toggle("is-resting", phone.matches && scrollable && scrollY < innerHeight / 2 && !root.classList.contains("is-open"));
+  };
+  addEventListener("scroll", rest, { passive: true });
+  addEventListener("resize", rest);
+  phone.addEventListener("change", rest);
+  rest();
+
   toggle.addEventListener("click", () => setOpen(!root.classList.contains("is-open")));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && root.classList.contains("is-open")) {

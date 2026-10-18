@@ -159,6 +159,9 @@
   let height = 0;
   let cx = 0;
   let cy = 0;
+  // Where the cable hangs from: the top of the hero, or on a phone, where the system stands under the words, the top of
+  // the system, so the cable does not run through the headline.
+  let top = 0;
   let S = 1;
   let S0 = 1;
   const D = 4;
@@ -201,6 +204,9 @@
     canvas.height = height;
     cx = (spot.left - box.left + spot.width / 2) * dpr;
     cy = (spot.top - box.top + spot.height / 2) * dpr;
+    const copy = root.querySelector(".cosmos-copy");
+    const system = anchor.parentElement.getBoundingClientRect();
+    top = copy && copy.getBoundingClientRect().bottom <= system.top ? (system.top - box.top) * dpr : 0;
     S0 = Math.min(spot.width / 2 / (spot.width < 560 ? 1.24 : 1.32), spot.height / 2 / 0.66) * dpr;
     S = S0 * (1 + ZOOM * zoom);
     const count = Math.round(Math.min(2600, Math.max(900, (spot.width * spot.height) / 120)) * quality);
@@ -305,19 +311,19 @@
   const drawBulb = () => {
     const b = S * BULB;
     ctx.save();
-    ctx.translate(cx, 0);
+    ctx.translate(cx, top);
     ctx.rotate(swing.a + view.hoverX * 0.04);
-    ctx.translate(-cx, 0);
+    ctx.translate(-cx, -top);
     const neck = cy - 0.52 * b;
     const capTop = neck - 0.46 * b;
 
-    const cable = ctx.createLinearGradient(0, 0, 0, capTop);
+    const cable = ctx.createLinearGradient(0, top, 0, capTop);
     cable.addColorStop(0, "rgba(220,230,240,0)");
     cable.addColorStop(1, "rgba(220,230,240,0.6)");
     ctx.strokeStyle = cable;
     ctx.lineWidth = Math.max(1.2, 0.045 * b);
     ctx.beginPath();
-    ctx.moveTo(cx, 0);
+    ctx.moveTo(cx, top);
     ctx.lineTo(cx, capTop);
     ctx.stroke();
 
@@ -385,8 +391,8 @@
 
   const placeBulb = () => {
     const a = swing.a + view.hoverX * 0.04;
-    bx = cx - Math.sin(a) * cy;
-    by = Math.cos(a) * cy;
+    bx = cx - Math.sin(a) * (cy - top);
+    by = top + Math.cos(a) * (cy - top);
   };
 
   const placePlanets = () => {
