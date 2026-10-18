@@ -2349,6 +2349,29 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   .family-tools { grid-template-columns: minmax(0, 1fr); }
   .family-tools .tool-card { min-height: 0; }
 }
+/* On a phone the Tools page reads as a list: the roles as four small links to their sections, each role's planet
+   small beside its name, and the tools without the picture of their result (each tool's own page shows it). */
+@media (max-width: 620px) {
+  nav.family-index {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: auto;
+    overflow: visible;
+    gap: 10px;
+    padding: 28px 0 8px;
+  }
+  nav.family-index .family-visual,
+  nav.family-index .family-line { display: none; }
+  nav.family-index .family-card-text { gap: 4px; padding: 12px 14px; }
+  nav.family-index .family-card strong { font-size: min(18px, var(--fit-d, 1000px)); }
+  .family-section .family-head { grid-template-columns: 64px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .family-section .family-head .family-visual { aspect-ratio: 1; border-radius: 50%; }
+  .family-section .family-head h2 { font-size: 34px; }
+  .family-section .family-head p:not(.kicker) { font-size: 15px; }
+  .family-section .tool-card-preview { display: none; }
+  .family-section .tool-card { gap: 14px; padding: 20px; }
+  .family-section .tool-card h3 { font-size: 26px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .pulse-cracks,
   .zenith-radar,
