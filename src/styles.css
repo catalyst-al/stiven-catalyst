@@ -2461,6 +2461,30 @@ main:lang(de) :is(h1, input, textarea, .cv-doc, .ats-doc) { hyphens: manual; }
   font-size: 15px;
 }
 .tool-aside p { margin: 0 0 14px; }
+/* On a phone the notes beside a tool and the field notes under it fold under their heading (js/tool-fold.js); the
+   privacy note stays in view. The feedback form shows its fields once "Yes" or "No" is chosen. */
+.fold-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.fold-toggle::after { content: "+"; font-size: 1.5em; line-height: 1; }
+.fold-toggle[aria-expanded="true"]::after { content: "\2212"; }
+.fold-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
+.kicker:has(> .fold-toggle) { margin-bottom: 0; }
+.is-folded > :not(.kicker, .privacy-note) { display: none; }
+@media (max-width: 620px) {
+  .tool-feedback-form:not(:has([name="helped"]:checked)) :is(.tf-field, .tf-actions) { display: none; }
+}
 .inline-link { color: var(--ink); border-bottom: 1px solid currentColor; }
 .privacy-note {
   padding: 14px 16px;
