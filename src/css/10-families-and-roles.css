@@ -520,6 +520,16 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .family-more-list strong { font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: -.03em; line-height: 1.05; }
 .family-more-list span { color: var(--muted); font-size: 14px; }
 .family-more-list em { position: absolute; right: 20px; top: 20px; font-style: normal; font-weight: 800; }
+/* On a phone the other tools of the role are a plain list: the kind of tool and its name, without the summary. */
+@media (max-width: 620px) {
+  .family-more { padding: 40px 0 88px; }
+  .family-more-head { margin-bottom: 18px; }
+  .family-more-list { gap: 8px; }
+  .family-more-list a { gap: 4px; padding: 14px 44px 14px 16px; border-radius: 14px; }
+  .family-more-list strong { font-size: 20px; }
+  .family-more-list span { display: none; }
+  .family-more-list em { top: calc(50% - .65em); right: 16px; }
+}
 
 /* A tool page in motion: the other tools of the role and the essays behind the tool answer the pointer with a
    light in the role's colour, the box you are filling in glows softly at its edge, and the role's badge breathes. */
