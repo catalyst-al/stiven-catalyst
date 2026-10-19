@@ -7050,6 +7050,16 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 .family-more-list strong { font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: -.03em; line-height: 1.05; }
 .family-more-list span { color: var(--muted); font-size: 14px; }
 .family-more-list em { position: absolute; right: 20px; top: 20px; font-style: normal; font-weight: 800; }
+/* On a phone the other tools of the role are a plain list: the kind of tool and its name, without the summary. */
+@media (max-width: 620px) {
+  .family-more { padding: 40px 0 88px; }
+  .family-more-head { margin-bottom: 18px; }
+  .family-more-list { gap: 8px; }
+  .family-more-list a { gap: 4px; padding: 14px 44px 14px 16px; border-radius: 14px; }
+  .family-more-list strong { font-size: 20px; }
+  .family-more-list span { display: none; }
+  .family-more-list em { top: calc(50% - .65em); right: 16px; }
+}
 
 /* A tool page in motion: the other tools of the role and the essays behind the tool answer the pointer with a
    light in the role's colour, the box you are filling in glows softly at its edge, and the role's badge breathes. */
@@ -7663,6 +7673,15 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
 @media (max-width: 760px) {
   .work-backup-card { grid-template-columns: minmax(0, 1fr); padding: 22px 20px; }
   .work-backup-actions { justify-content: flex-start; }
+}
+/* On a phone the card is small: a shorter heading and text, and the two buttons side by side. */
+@media (max-width: 620px) {
+  .work-backup { padding: 8px 0 32px; }
+  .work-backup-card { gap: 14px; padding: 18px; }
+  .work-backup-copy h2 { font-size: 20px; }
+  .work-backup-copy p:not(.kicker):not(.form-note) { margin-top: 8px; font-size: 14px; }
+  .work-backup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .work-backup-actions > * { justify-content: center; min-height: 44px; padding: 10px 12px; font-size: 14px; text-align: center; }
 }
 @media print { .work-backup { display: none !important; } }
 

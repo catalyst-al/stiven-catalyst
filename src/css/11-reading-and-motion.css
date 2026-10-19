@@ -258,6 +258,15 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
   .work-backup-card { grid-template-columns: minmax(0, 1fr); padding: 22px 20px; }
   .work-backup-actions { justify-content: flex-start; }
 }
+/* On a phone the card is small: a shorter heading and text, and the two buttons side by side. */
+@media (max-width: 620px) {
+  .work-backup { padding: 8px 0 32px; }
+  .work-backup-card { gap: 14px; padding: 18px; }
+  .work-backup-copy h2 { font-size: 20px; }
+  .work-backup-copy p:not(.kicker):not(.form-note) { margin-top: 8px; font-size: 14px; }
+  .work-backup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .work-backup-actions > * { justify-content: center; min-height: 44px; padding: 10px 12px; font-size: 14px; text-align: center; }
+}
 @media print { .work-backup { display: none !important; } }
 
 /* Shift Handover: numbers can come from the logs of the same shift. */
