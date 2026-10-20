@@ -5,22 +5,46 @@
 {%- set pageTitle = ((shortTitle + " | " + site.title) if (shortTitle | length) + 3 + (site.title | length) <= 60 else shortTitle) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set homeUrl = "/" | local(lang) -%}
-{#- The menu: "Start here" for someone new, then five places. "Writing" opens the Writing page (pages/writing.njk)
-    and covers Insights, Challenges, Reflections and Field Notes (the third item lists the pages it is active on); the brand takes you home. "Start here" gives way first when
-    the header is narrow (styles.css, .nav-start); the phone menu always has it. -#}
+{#- The menu: "Home" and "Start here" for someone new, then four places: Writing, Tools, Publications and About
+    (Projects lives under About). The third field of an item lists the pages it is active on; the seventh is the
+    little menu that opens under it on hover or keyboard focus, so what is inside shows without opening the page:
+    [address, name, line under it, colour of its planet]. "Home" and "Start here" give way first when the header is
+    narrow (styles.css, .nav-start); the phone menu always has them, with the inner pages under each place. -#}
 {%- set writingPages = ["/writing.html" | local(lang), "/insights.html" | local(lang), "/challenges.html" | local(lang), "/reflections.html" | local(lang), "/field-notes.html" | local(lang)] -%}
 {#- Writing and Publications also carry a stamp of what they hold (navStamp): when it changes, their menu item
     pulses for a reader who has been here before (script.js). -#}
 {%- set sfx = {"de": "De", "sq": "Sq"}[lang] or "" -%}
+{%- set ml = lang or "en" -%}
 {%- set writingStamp = collections["insights" + sfx] | navStamp(collections["reflections" + sfx], collections["notes" + sfx]) -%}
 {%- set pubStamp = publications.review | navStamp(publications.treatise, publications.floor, [publications.special]) -%}
+{%- set writingMenu = [
+  ["/insights.html" | local(lang), "Insights" | t(lang), "Essays & analysis" | t(lang)],
+  ["/challenges.html" | local(lang), "Challenges" | t(lang), "By the problem, not the title" | t(lang)],
+  ["/reflections.html" | local(lang), "Reflections" | t(lang), "Personal essays" | t(lang)],
+  ["/field-notes.html" | local(lang), "Field Notes" | t(lang), "Observed close to the work" | t(lang)]
+] -%}
+{%- set toolsMenu = [["/tools.html" | local(lang), "All tools" | t(lang), ""]] -%}
+{%- for family in families %}{% set toolsMenu = (toolsMenu.push([("/tools.html" | local(lang)) + "#" + family.id, family.role | t(lang), family.name, family.color]), toolsMenu) %}{% endfor -%}
+{%- set pubMenu = [
+  ["/magazine/management-review.html" | local(lang), weekly.name, ""],
+  ["/magazine/operational-treatise.html" | local(lang), treatise[ml].short, ""],
+  ["/magazine/from-the-floor.html" | local(lang), magazine.names[ml].name, ""],
+  ["/books/mall-per-durresin.html" | local(lang), (books[ml] or books.sq).title, ""],
+  ["/guides/tools-guide.html" | local(lang), toolsGuide[ml].title, ""],
+  ["/downloads.html" | local(lang), "Downloads" | t(lang), ""]
+] -%}
+{%- set aboutMenu = [
+  ["/about.html" | local(lang), "About" | t(lang), ""],
+  ["/projects.html" | local(lang), "Projects" | t(lang), ""],
+  ["/contact.html" | local(lang), "Contact" | t(lang), ""]
+] -%}
 {%- set nav = [
+  [homeUrl, "Homepage" | t(lang), null, null, null, "nav-start nav-home"],
   ["/start.html" | local(lang), "Start here" | t(lang), null, null, null, "nav-start"],
-  ["/writing.html" | local(lang), "Writing" | t(lang), writingPages, "writing", writingStamp],
-  ["/tools.html" | local(lang), "Tools" | t(lang)],
-  ["/publications.html" | local(lang), "Publications" | t(lang), null, "publications", pubStamp],
-  ["/projects.html" | local(lang), "Projects" | t(lang)],
-  ["/about.html" | local(lang), "About" | t(lang)]
+  ["/writing.html" | local(lang), "Writing" | t(lang), writingPages, "writing", writingStamp, null, writingMenu],
+  ["/tools.html" | local(lang), "Tools" | t(lang), null, null, null, null, toolsMenu],
+  ["/publications.html" | local(lang), "Publications" | t(lang), ["/publications.html" | local(lang), "/downloads.html" | local(lang)], "publications", pubStamp, null, pubMenu],
+  ["/about.html" | local(lang), "About" | t(lang), ["/about.html" | local(lang), "/projects.html" | local(lang), "/contact.html" | local(lang)], null, null, null, aboutMenu]
 ] -%}
 {%- set hasLegal = legal.name and legal.city -%}
 {%- set toolFamily = page.url | familyOf(families) -%}
@@ -114,7 +138,16 @@
     <nav class="main-nav" aria-label="{{ 'Primary' | t(lang) }}" data-new-label="{{ 'New' | t(lang) }}">
       {%- for item in nav %}
       {%- set current = activeNav == item[0] or (item[2] and activeNav in item[2]) %}
+      {%- if item[6] %}<div class="nav-item">{% endif %}
       <a{% if current %} aria-current="page"{% endif %}{% if item[5] %} class="{{ item[5] }}"{% endif %} href="{{ item[0] }}"{% if item[4] %} data-news="{{ item[3] }}" data-stamp="{{ item[4] }}"{% endif %}><span class="nav-orb" aria-hidden="true"></span>{{ item[1] }}{% if current %}<span class="nav-pill" aria-hidden="true"></span>{% endif %}</a>
+      {%- if item[6] %}
+      <div class="nav-menu"><div class="nav-menu-inner">
+        {%- for sub in item[6] %}
+        <a class="nav-menu-link" href="{{ sub[0] }}"{% if activeNav == sub[0] %} aria-current="page"{% endif %}><i aria-hidden="true"{% if sub[3] %} style="--planet: {{ sub[3] }}"{% endif %}></i><span>{{ sub[1] }}{% if sub[2] %}<small>{{ sub[2] }}</small>{% endif %}</span></a>
+        {%- endfor %}
+      </div></div>
+      </div>
+      {%- endif %}
       {%- endfor %}
     </nav>
     <div class="header-actions">
@@ -129,6 +162,11 @@
   <nav id="mobile-menu" class="mobile-panel" data-mobile-panel data-open="false" aria-label="{{ 'Mobile' | t(lang) }}">
     {%- for item in nav %}
     <a{% if activeNav == item[0] or (item[2] and activeNav in item[2]) %} aria-current="page"{% endif %} href="{{ item[0] }}"{% if item[4] %} data-news="{{ item[3] }}"{% endif %}>{{ item[1] }}{% if item[4] %}<span class="nav-orb" aria-hidden="true"></span>{% endif %}</a>
+    {%- if item[6] %}
+    <div class="mobile-sub">
+      {%- for sub in item[6] %}{% if sub[0] != item[0] %}<a href="{{ sub[0] }}"{% if activeNav == sub[0] %} aria-current="page"{% endif %}>{{ sub[1] }}</a>{% endif %}{% endfor %}
+    </div>
+    {%- endif %}
     {%- endfor %}
     {%- include "partials/lang-switch.njk" %}
   </nav>

@@ -902,8 +902,8 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 
 .mobile-panel { display: none; }
 
-/* "Start here" is the menu's sixth item: it gives way first when the header narrows, before the five places have to
-   squeeze (the phone menu always lists it, and the homepage leads to it). */
+/* "Home" and "Start here" open the menu: they give way first when the header narrows, before the four places have to
+   squeeze (the phone menu always lists them, and the brand leads home). */
 @media (max-width: 1240px) {
   .main-nav .nav-start { display: none; }
 }
@@ -1010,7 +1010,11 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   .mobile-panel[data-open="true"] > :nth-child(4) { transition-delay: .17s; }
   .mobile-panel[data-open="true"] > :nth-child(5) { transition-delay: .21s; }
   .mobile-panel[data-open="true"] > :nth-child(6) { transition-delay: .25s; }
-  .mobile-panel a {
+  /* Under each place, its inner pages in small type, so the phone menu shows what is inside too. */
+  .mobile-panel .mobile-sub { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: -8px; padding-left: 2px; }
+  .mobile-panel .mobile-sub a { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--muted); }
+  .mobile-panel .mobile-sub a[aria-current="page"] { color: var(--ink); }
+  .mobile-panel > a {
     font-family: var(--display);
     font-size: 24px;
     letter-spacing: -.03em;
