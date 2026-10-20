@@ -4165,6 +4165,10 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   background: linear-gradient(120deg, color-mix(in srgb, var(--blue) 22%, transparent), transparent 60%);
   mix-blend-mode: soft-light;
 }
+/* The logo of a reflection takes the photo's place and fade, its colours kept: only a little dimmed, so the white
+   of its background glows softly instead of glaring on the dark page. */
+.article-hero-media.is-logo img { filter: brightness(.9); }
+.article-hero-media.is-logo::after { content: none; }
 .has-image .article-hero-text {
   position: relative;
   z-index: 1;
@@ -4174,21 +4178,6 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 }
 .has-image .article-hero-text h1 { font-size: min(clamp(46px, 6.4vw, 92px), var(--fit-s, 1000px)); }
 .has-image .article-deck { margin-left: 0; max-width: 560px; }
-
-/* A reflection's logo: the Stiven Catalyst Coaching banner on its own white card above the title, never cropped. */
-.article-logo {
-  margin: 0 0 40px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  overflow: hidden;
-  background: #fbfbfb;
-}
-.article-logo img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-@media (max-width: 900px) { .article-logo { margin-bottom: 28px; border-radius: 16px; } }
 
 .author-photo {
   display: block;
