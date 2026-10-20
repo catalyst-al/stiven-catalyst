@@ -1,8 +1,10 @@
 # Run from the repository root: python3 scripts/reflection-logo.py (Pillow and NumPy).
 # Makes src/media/stiven-catalyst-coaching-hero.jpg: the logo on the site's dark ground, for the side of a
-# reflection's hero, and scripts/note-card-logo.png, the same logo on a transparent ground for the banner at the
-# foot of the field note cards (scripts/note-cards.mjs). The white background becomes transparent, the black (STIVEN, the cord) turns light,
-# the bulb is lit, the colours of CATALYST and COACHING stay as they are.
+# reflection's hero and of every page heading. The logo is kept inside the middle of the picture, so the page can
+# fade the picture out on every side and it melts into the background. It also writes scripts/note-card-logo.png,
+# the same logo on a transparent ground, for the banner at the foot of the field note cards (scripts/note-cards.mjs).
+# The white background becomes transparent, the black (STIVEN, the cord) turns light, the bulb is lit, the colours
+# of CATALYST and COACHING stay as they are.
 from PIL import Image, ImageFilter, ImageDraw
 import numpy as np
 from collections import deque
@@ -44,10 +46,10 @@ bm=blur(body*255.0,1.0)/255
 col=col*(1-bm[...,None])+np.array([255,247,228])*bm[...,None]
 a=np.maximum(a,bm)
 logo=Image.fromarray(np.dstack([col,a*255]).clip(0,255).astype('uint8'),'RGBA').crop((380,0,1010,290))
-W,H=1440,1224; s=1.6
+W,H=1440,1224; s=1.3
 logo.save('scripts/note-card-logo.png',optimize=True)
 logo=logo.resize((int(logo.width*s),int(logo.height*s)),Image.LANCZOS)
-x=int(W*0.375-(cx-380)*s); y=int(H*0.47-cy*s)
+x=int(W*0.35-(cx-380)*s); y=int(H*0.47-cy*s)
 bg=Image.new('RGB',(W,H),(6,10,16))
 bx,by=x+int((cx-380)*s),y+int(cy*s)
 glow=Image.new('L',(W,H),0); ImageDraw.Draw(glow).ellipse((bx-240,by-240,bx+240,by+240),fill=105); glow=glow.filter(ImageFilter.GaussianBlur(120))
