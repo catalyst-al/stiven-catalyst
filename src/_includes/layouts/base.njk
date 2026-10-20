@@ -5,10 +5,10 @@
 {%- set pageTitle = ((shortTitle + " | " + site.title) if (shortTitle | length) + 3 + (site.title | length) <= 60 else shortTitle) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set homeUrl = "/" | local(lang) -%}
-{#- The menu: "Start here" for someone new, then five places. "Writing" covers Insights, Reflections and Field Notes
-    (the third item lists the pages it is active on); the brand takes you home. "Start here" gives way first when
+{#- The menu: "Start here" for someone new, then five places. "Writing" opens the Writing page (pages/writing.njk)
+    and covers Insights, Challenges, Reflections and Field Notes (the third item lists the pages it is active on); the brand takes you home. "Start here" gives way first when
     the header is narrow (styles.css, .nav-start); the phone menu always has it. -#}
-{%- set writingPages = ["/insights.html" | local(lang), "/challenges.html" | local(lang), "/reflections.html" | local(lang), "/field-notes.html" | local(lang)] -%}
+{%- set writingPages = ["/writing.html" | local(lang), "/insights.html" | local(lang), "/challenges.html" | local(lang), "/reflections.html" | local(lang), "/field-notes.html" | local(lang)] -%}
 {#- Writing and Publications also carry a stamp of what they hold (navStamp): when it changes, their menu item
     pulses for a reader who has been here before (script.js). -#}
 {%- set sfx = {"de": "De", "sq": "Sq"}[lang] or "" -%}
@@ -16,7 +16,7 @@
 {%- set pubStamp = publications.review | navStamp(publications.treatise, publications.floor, [publications.special]) -%}
 {%- set nav = [
   ["/start.html" | local(lang), "Start here" | t(lang), null, null, null, "nav-start"],
-  ["/insights.html" | local(lang), "Writing" | t(lang), writingPages, "writing", writingStamp],
+  ["/writing.html" | local(lang), "Writing" | t(lang), writingPages, "writing", writingStamp],
   ["/tools.html" | local(lang), "Tools" | t(lang)],
   ["/publications.html" | local(lang), "Publications" | t(lang), null, "publications", pubStamp],
   ["/projects.html" | local(lang), "Projects" | t(lang)],

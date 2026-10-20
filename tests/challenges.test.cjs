@@ -67,7 +67,7 @@ test('every English essay names the challenges it answers; each challenge has at
 
 test('the texts of the moves box, the Insights rows and the Challenges page have a German and an Albanian translation', () => {
   const found = new Set();
-  for (const file of ['src/_includes/layouts/article.njk', 'src/_includes/pages/insights.njk', 'src/_includes/pages/challenges.njk', 'src/_includes/partials/writing-tabs.njk']) {
+  for (const file of ['src/_includes/layouts/article.njk', 'src/_includes/pages/insights.njk', 'src/_includes/pages/challenges.njk', 'src/_includes/pages/writing.njk']) {
     const source = fs.readFileSync(file, 'utf8');
     for (const match of source.matchAll(/'((?:[^'\\]|\\.)*)' \| t\(lang\)/g)) found.add(match[1]);
     for (const match of source.matchAll(/"((?:[^"\\]|\\.)*)" \| t\(lang\)/g)) found.add(match[1]);
@@ -145,6 +145,6 @@ test('the Challenges page lists every challenge with its essays, in the three la
       assert.ok(section[0].includes(`href="#${c.id}"`) || html.includes(`href="#${c.id}"`), `${file}: ${c.id} in the index`);
     }
     assert.match(html, /<nav class="lang-switch"/, `${file}: the language switch`);
-    assert.match(html, /class="shell writing-tabs"[\s\S]*?aria-current="page">[^<]+<span class="tab-pill" aria-hidden="true"><\/span><\/a>/, `${file}: the tab is current`);
+    assert.match(html, new RegExp(`aria-current="page" href="${prefix}/writing.html"`), `${file}: Writing is the current menu item`);
   }
 });

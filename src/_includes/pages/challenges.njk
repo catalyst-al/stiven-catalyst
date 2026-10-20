@@ -2,7 +2,6 @@
     or a manager walks in with, and under it the essays that answer it (each with three moves and a checklist),
     the tools and the field notes drawn from those essays. An essay names its challenges in "problems" on the
     English file; the other languages follow it (collections.challengeMap). -#}
-{% include "partials/writing-tabs.njk" %}
 {%- set essays = collections["insights" + (lang | langSuffix)] | published %}
 {%- set notes = collections["notes" + (lang | langSuffix)] %}
 {%- set toolList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
