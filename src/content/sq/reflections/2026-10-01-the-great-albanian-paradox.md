@@ -5,8 +5,6 @@ status: published
 summary: Bota i frikësohet një inteligjence që po e mund në lojën e rregullave. Shqiptari nuk ka mbijetuar kurrë falë rregullave.
 deck: Rreziku nuk është se makina do t'i vjedhë mendjen shqiptarit, por se ai do të përdorë mjetet e së ardhmes me mendësinë e një kusari mesjetar.
 description: Një reflektim për inteligjencën artificiale, mbijetesën shqiptare dhe kurthin e përdorimit të mjeteve të së ardhmes për mashtrimet e së shkuarës.
-image: /media/stiven-microphone.jpg
-image_alt: Stiven Janaqi me kufje, duke folur në mikrofon në një studio podkasti
 ---
 
 Në San Francisko, nëpër ato kullat e xhamta me ajër të filtruar ku djem tridhjetëvjeçarë me bluza pambuku të thjeshta luajnë me modele gjuhësore me miliarda parametra, mbizotëron një panik ekzistencial gati fetar. Ata i frikësohen një inteligjence të ftohtë, të përkryer dhe të pamëshirshme që po vjen të fshijë nga faqja e dheut arsyen njerëzore. Ata vajtojnë fundin e rendit dhe të parashikueshmërisë.

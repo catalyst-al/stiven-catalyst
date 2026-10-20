@@ -5,8 +5,6 @@ status: published
 summary: In einer Zeit, in der alle gesehen werden wollen, liegt die eigentliche Macht bei dem, der beobachtet.
 deck: Wer um jeden Preis gesehen werden will, gibt die einzige Macht auf, die wirklich Gewicht hat.
 description: Eine Reflexion über Aufmerksamkeit, Unsichtbarkeit und warum Führung in der Ecke des Raumes beginnt, nicht auf der Bühne.
-image: /media/stiven-listening.jpg
-image_alt: Stiven Janaqi mit Kopfhörern hört an einem Mikrofon zu
 ---
 
 Wir leben in einer faszinierenden und zutiefst verwirrten Zeit, in der Menschen sich lieber auf dem Marktplatz bei lebendigem Leib verbrennen ließen, als einen einzigen Nachmittag unbemerkt zu verbringen.

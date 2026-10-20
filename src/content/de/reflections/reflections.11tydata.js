@@ -4,6 +4,8 @@ export default {
   layout: "layouts/article.njk",
   lang: "de",
   kind: "Reflection",
+  // Every reflection opens with the Stiven Catalyst Coaching logo (layouts/article.njk), then the text.
+  logo: "/media/stiven-catalyst-coaching.jpg",
   activeNav: "/de/reflections.html",
   // Reflections marked "soon" get no page of their own yet.
   permalink: (data) => (data.status === "soon" ? false : `/de/reflections/${data.page.fileSlug}/`),

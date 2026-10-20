@@ -3,6 +3,8 @@ const WORDS_PER_MINUTE = 200;
 export default {
   layout: "layouts/article.njk",
   kind: "Reflection",
+  // Every reflection opens with the Stiven Catalyst Coaching logo (layouts/article.njk), then the text.
+  logo: "/media/stiven-catalyst-coaching.jpg",
   activeNav: "/reflections.html",
   // Reflections marked "soon" get no page of their own yet.
   permalink: (data) => (data.status === "soon" ? false : `/reflections/${data.page.fileSlug}/`),

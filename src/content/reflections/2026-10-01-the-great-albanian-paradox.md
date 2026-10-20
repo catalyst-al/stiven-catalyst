@@ -5,8 +5,6 @@ status: published
 summary: The world fears an intelligence that is beating it at the game of rules. Albanians have never survived thanks to rules.
 deck: The danger is not that the machine will steal the Albanian's mind, but that he will use the tools of the future with the mindset of a medieval bandit.
 description: A reflection on artificial intelligence, Albanian survival and the trap of using the tools of the future for the swindles of the past.
-image: /media/stiven-microphone.jpg
-image_alt: Stiven Janaqi wearing headphones, speaking into a microphone in a podcast studio
 ---
 
 In San Francisco, in those glass towers with filtered air where thirty-year-olds in plain cotton T-shirts play with language models with billions of parameters, an almost religious existential panic reigns. They fear a cold, perfect and merciless intelligence that is coming to wipe human reason off the face of the earth. They mourn the end of order and predictability.

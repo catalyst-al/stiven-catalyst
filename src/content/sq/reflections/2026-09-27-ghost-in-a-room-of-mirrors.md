@@ -5,8 +5,6 @@ status: published
 summary: Në një kohë kur të gjithë duan të shihen, pushteti i vërtetë i takon atij që vëzhgon.
 deck: Ai që kërkon me çdo kusht të shihet, heq dorë nga i vetmi pushtet që ka peshë vërtet.
 description: Një reflektim për vëmendjen, padukshmërinë dhe pse udhëheqja fillon nga cepi i dhomës, jo nga skena.
-image: /media/stiven-listening.jpg
-image_alt: Stiven Janaqi me kufje, duke dëgjuar pranë një mikrofoni
 ---
 
 Jetojmë në një epokë magjepsëse dhe të çoroditur, ku njerëzit do të pranonin më mirë të digjeshin të gjallë në sheshin e qytetit, sesa të kalonin një pasdite të vetme pa i vënë re njeri.
