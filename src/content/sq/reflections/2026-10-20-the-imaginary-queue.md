@@ -1,5 +1,5 @@
 ---
-title: Rradha imagjinare te dera
+title: Radha imagjinare te dera
 date: 2026-10-20
 status: published
 summary: 'Gënjeshtra e madhe se çdokush është i zëvendësueshëm, dhe korridoret bosh që mbeten kur ajo bie.'
@@ -11,7 +11,7 @@ Për vite me radhë, në zyrat e drejtorëve dhe pronarëve shqiptarë ka qarkul
 
 Ishte përgjigjja e gatshme e një arrogance që nuk njihte kufi. Ishte filozofia e një tregu ku njeriu shihej si një pjesë këmbimi e lirë, e cila sapo konsumohej, hidhej tutje për t'u zëvendësuar me të radhës. Dhe për një kohë të gjatë, varfëria dhe mungesa e alternativave e mbajtën gjallë këtë iluzion. Drejtuesit u mësuan të mendonin se vlera qëndronte vetëm te muret e biznesit të tyre, dhe jo te duart dhe mendjet e atyre që e mbanin atë biznes hapur.
 
-Por sot, kur hapim atë derë ku dikur mendohej se kishte rradhë, shohim vetëm korridore bosh. Rradha nuk ekziston më. Dhe bashkë me të, ka rënë edhe gënjeshtra më e rrezikshme e menaxhimit shqiptar.
+Por sot, kur hapim atë derë ku dikur mendohej se kishte radhë, shohim vetëm korridore bosh. Radha nuk ekziston më. Dhe bashkë me të, ka rënë edhe gënjeshtra më e rrezikshme e menaxhimit shqiptar.
 
 **Më lejoni të jem i drejtpërdrejtë. Ju mund ta zëvendësoni një emër në listëpagesë brenda ditës, por nuk mund të zëvendësoni dot kurrë përvojën, kujtesën e procesit dhe besimin që ikën bashkë me një profesionist.**
 
