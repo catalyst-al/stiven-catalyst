@@ -8972,15 +8972,16 @@ a.essay-series-next:hover em { translate: 5px 0; }
   content: "";
   display: block;
   aspect-ratio: 720 / 612;
-  border-radius: 28px;
   background: url("/media/stiven-catalyst-coaching-hero.jpg") center / cover no-repeat;
   filter: brightness(.92);
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%), linear-gradient(0deg, transparent, #000 26%, #000 86%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(90deg, transparent, #000 38%), linear-gradient(0deg, transparent, #000 26%, #000 86%, transparent);
-  mask-composite: intersect;
+  -webkit-mask-image: var(--logo-fade);
+  mask-image: var(--logo-fade);
 }
+/* The logo's picture fades out on every side, an oval with the logo in its middle, so no edge of it shows and it
+   reads as part of the page's own background (the reflections use the same fade). */
+:root { --logo-fade: radial-gradient(ellipse 46% 47% at 55% 48%, #000 58%, rgba(0, 0, 0, .55) 78%, transparent 100%); }
+.article-hero-media.is-logo { border-radius: 0; -webkit-mask-image: var(--logo-fade); mask-image: var(--logo-fade); }
 @media (min-width: 901px) {
   .page-hero:not(.tool-hero) {
     display: grid;
@@ -9006,12 +9007,11 @@ a.essay-series-next:hover em { translate: 5px 0; }
     aspect-ratio: auto;
     height: 150px;
     margin: 0 0 18px;
-    border-radius: 20px;
-    background-position: 60% 46%;
-    background-size: auto 210%;
-    -webkit-mask-image: linear-gradient(0deg, transparent, #000 45%);
-    mask-image: linear-gradient(0deg, transparent, #000 45%);
+    background-position: 55% 47%;
+    background-size: auto 230%;
+    --logo-fade: radial-gradient(ellipse 50% 50% at 50% 50%, #000 60%, rgba(0, 0, 0, .5) 80%, transparent 100%);
   }
+  .article-hero-media.is-logo { --logo-fade: radial-gradient(ellipse 50% 50% at 52% 46%, #000 58%, rgba(0, 0, 0, .5) 80%, transparent 100%); }
   .page-hero:not(.tool-hero):not(.treatise-hero) h1,
   .page-hero:not(.tool-hero):not(.treatise-hero) h1.hero-long { font-size: min(clamp(30px, 11cqi, 64px), var(--fit-d, 1000px)); }
   .page-hero:not(.tool-hero) .lede { margin: 18px 0 0; font-size: 17px; }
