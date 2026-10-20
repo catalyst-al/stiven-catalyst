@@ -873,13 +873,13 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 @keyframes list-in { from { opacity: 0; transform: translateY(12px); } }
 @media (prefers-reduced-motion: reduce) { .is-entering { animation: none; } }
 /* Cards and rows rise into place as they scroll into view (a scroll-driven animation: no script, and browsers
-   without it simply show them). It moves `translate`, so a card's own hover lift (transform) still works. */
+   without it simply show them), on an easing curve over a longer stretch of the scroll, so they settle softly. It moves `translate`, so a card's own hover lift (transform) still works. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     :where(.article-card, .note-card, .project-card, .mini-card, .tool-card, .family-card, .family-head, .series-panel, .book-feature, .contact-card, .feature-card, .meta-strip > div, .pillar, .about-stats > div, .about-timeline li, .list-row, .weekly-grid > li, .challenge-essays li, .family-more-list li, .tool-essays-list li, .work-backup-card, .role-borrowed li, .role-reading li, .role-next-card, .issue-more-card, .start-intro, .podcast-episode, .podcast-steps, .shelf-section, .weekly-chart, .downloads-list > .downloads-row) {
-      animation: scroll-rise linear both;
+      animation: scroll-rise cubic-bezier(.22, 1, .36, 1) both;
       animation-timeline: view();
-      animation-range: entry 0% entry 140px;
+      animation-range: entry 0% entry 220px;
     }
   }
 }

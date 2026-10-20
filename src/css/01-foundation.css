@@ -374,18 +374,20 @@ button, input, select { font: inherit; }
 .nav-pill { view-transition-name: nav-pill; }
 .writing-tabs { view-transition-name: writing-tabs; }
 .tab-pill { view-transition-name: tab-pill; }
-::view-transition-old(root) { animation: page-out .2s cubic-bezier(.4, 0, 1, 1) both; }
-::view-transition-new(root) { animation: page-in .42s cubic-bezier(.2, .8, .2, 1) .05s both; }
+/* The old page eases out and the new one settles in on a long, soft curve, out of a light blur, so the change reads
+   as one movement rather than a cut. */
+::view-transition-old(root) { animation: page-out .32s cubic-bezier(.4, 0, .2, 1) both; }
+::view-transition-new(root) { animation: page-in .7s cubic-bezier(.16, 1, .3, 1) .06s both; }
 ::view-transition-group(site-header),
-::view-transition-group(writing-tabs) { animation-duration: .3s; }
+::view-transition-group(writing-tabs) { animation-duration: .4s; }
 ::view-transition-group(nav-pill),
-::view-transition-group(tab-pill) { animation-duration: .45s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+::view-transition-group(tab-pill) { animation-duration: .6s; animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
 ::view-transition-old(nav-pill),
 ::view-transition-new(nav-pill),
 ::view-transition-old(tab-pill),
 ::view-transition-new(tab-pill) { height: 100%; }
-@keyframes page-out { to { opacity: 0; transform: translateY(-6px); } }
-@keyframes page-in { from { opacity: 0; transform: translateY(14px); } }
+@keyframes page-out { to { opacity: 0; transform: translateY(-8px); filter: blur(2px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(18px); filter: blur(3px); } }
 
 .header-actions {
   display: flex;
