@@ -5,8 +5,6 @@ status: published
 summary: Die Welt fürchtet eine Intelligenz, die sie im Spiel der Regeln schlägt. Albaner haben nie dank Regeln überlebt.
 deck: Die Gefahr ist nicht, dass die Maschine dem Albaner den Verstand stiehlt, sondern dass er die Werkzeuge der Zukunft mit der Denkweise eines mittelalterlichen Gauners benutzt.
 description: Eine Reflexion über künstliche Intelligenz, albanisches Überleben und die Falle, Werkzeuge der Zukunft für die Betrügereien der Vergangenheit zu nutzen.
-image: /media/stiven-microphone.jpg
-image_alt: Stiven Janaqi mit Kopfhörern spricht in einem Podcast-Studio in ein Mikrofon
 ---
 
 In San Francisco, in jenen gläsernen Türmen mit gefilterter Luft, in denen Dreißigjährige in schlichten Baumwoll-T-Shirts mit Sprachmodellen aus Milliarden von Parametern spielen, herrscht eine beinahe religiöse existenzielle Panik. Sie fürchten eine kalte, vollkommene und gnadenlose Intelligenz, die kommt, um die menschliche Vernunft vom Antlitz der Erde zu tilgen. Sie betrauern das Ende von Ordnung und Vorhersehbarkeit.

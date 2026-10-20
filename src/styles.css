@@ -4175,6 +4175,21 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .has-image .article-hero-text h1 { font-size: min(clamp(46px, 6.4vw, 92px), var(--fit-s, 1000px)); }
 .has-image .article-deck { margin-left: 0; max-width: 560px; }
 
+/* A reflection's logo: the Stiven Catalyst Coaching banner on its own white card above the title, never cropped. */
+.article-logo {
+  margin: 0 0 40px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fbfbfb;
+}
+.article-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 900px) { .article-logo { margin-bottom: 28px; border-radius: 16px; } }
+
 .author-photo {
   display: block;
   width: 96px;

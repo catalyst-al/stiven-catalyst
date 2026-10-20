@@ -5,6 +5,11 @@ ogType: article
 {%- set pageUrl = page.url | absoluteUrl %}
 <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
 <section class="shell article-hero{% if image %} has-image{% endif %}">
+  {#- A reflection opens with the Stiven Catalyst Coaching logo (logo in reflections.11tydata.js), then the text. -#}
+  {%- if logo %}
+  {%- set logoSize = logo | imageSize %}
+  <figure class="article-logo"><img src="{{ logo }}" alt="Stiven Catalyst Coaching"{% if logoSize %} width="{{ logoSize.width }}" height="{{ logoSize.height }}"{% endif %} fetchpriority="high"></figure>
+  {%- endif %}
   {%- if image %}
   {%- set heroSize = image | imageSize %}
   <figure class="article-hero-media"><img src="{{ image }}" alt="{{ image_alt }}"{% if heroSize %} width="{{ heroSize.width }}" height="{{ heroSize.height }}"{% endif %} fetchpriority="high"></figure>

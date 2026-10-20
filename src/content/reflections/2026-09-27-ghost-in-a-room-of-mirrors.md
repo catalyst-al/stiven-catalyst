@@ -5,8 +5,6 @@ status: published
 summary: In an age where everyone wants to be seen, the real power belongs to the one who observes.
 deck: Whoever insists on being seen gives up the only power that truly carries weight.
 description: A reflection on attention, invisibility and why leadership begins in the corner of the room, not on the stage.
-image: /media/stiven-listening.jpg
-image_alt: Stiven Janaqi wearing headphones, listening at a microphone
 ---
 
 We live in a fascinating and deeply confused age, one in which people would rather be burned alive in the town square than spend a single afternoon unnoticed.
