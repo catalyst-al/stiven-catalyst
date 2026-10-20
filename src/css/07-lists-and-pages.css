@@ -350,6 +350,21 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .reflection-list a.list-row:hover .number time::before { opacity: 1; scale: 1.35; box-shadow: 0 0 10px var(--gold); }
 .reflection-list a.list-row:hover .number { color: var(--gold); text-shadow: 0 0 16px color-mix(in srgb, var(--gold) 55%, transparent); }
 .reflection-list a.list-row:hover h2 { color: color-mix(in srgb, var(--gold) 28%, var(--ink)); }
+/* The Writing page lists its four kinds the same way, with how many there are in place of the date. */
+.writing-list .number b { font-weight: inherit; }
+.writing-list .number b::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--gold) 50%, color-mix(in srgb, var(--gold) 55%, #000) 100%);
+  opacity: .55;
+  vertical-align: .12em;
+  transition: opacity .3s ease, box-shadow .3s ease, scale .3s cubic-bezier(.22, 1, .36, 1);
+}
+.writing-list a.list-row:hover .number b::before { opacity: 1; scale: 1.35; box-shadow: 0 0 10px var(--gold); }
 .reflection-hero { position: relative; isolation: isolate; }
 .reflection-hero::before {
   content: "";

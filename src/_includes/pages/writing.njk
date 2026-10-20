@@ -1,0 +1,30 @@
+{#- The Writing page, shared by the three languages: the "Writing" item of the menu opens here, on the four kinds of
+    writing listed the way Reflections lists its pieces (a large title, its line, how many there are), instead of
+    tabs above each list. -#}
+{%- set sfx = lang | langSuffix %}
+{%- set essays = collections["insights" + sfx] | published %}
+{%- set reflections = collections["reflections" + sfx] | published %}
+{%- set notes = collections["notes" + sfx] %}
+{%- set code = lang or "en" %}
+{%- set situations = [] %}
+{%- for item in challenges %}{% if (essays | withChallenge(item.id, collections.challengeMap)).length %}{% set situations = (situations.push(item), situations) %}{% endif %}{% endfor %}
+<section class="shell page-hero writing-hero reflection-hero">
+  <p class="eyebrow">{{ "Everything I write" | t(lang) }}</p>
+  <h1>{{ "Writing" | t(lang) }}</h1>
+  <p class="lede">{{ "Four ways in: the longer essays, the same essays by the problem you face, the personal reflections and the short notes from the floor." | t(lang) }}</p>
+</section>
+<section class="shell listing reflection-list writing-list">
+  {%- for path, name, count, line, kicker in [
+    ["/insights.html", "Insights", "{n} essays" | t(lang) | replace("{n}", essays.length), "Longer thinking on leadership, operations, accountability, service and the systems that shape performance.", "Essays & analysis"],
+    ["/challenges.html", "Challenges", "{n} situations" | t(lang) | replace("{n}", situations.length), "Twelve situations a shift lead or a manager walks in with. Under each one: the essays, their checklists, the tools and the field notes that go with it.", "By the problem, not the title"],
+    ["/reflections.html", "Reflections", "{n} reflections" | t(lang) | replace("{n}", reflections.length), "Slower, more personal pieces on attention, people and the quiet side of leadership.", "Personal essays"],
+    ["/field-notes.html", "Field Notes", "{n} notes" | t(lang) | replace("{n}", notes.length), "Shorter ideas about management, service, standards and what becomes visible when you stay close to the operation.", "Observed close to the work"]
+  ] %}
+  <a class="list-row" href="{{ path | local(lang) }}">
+    <span class="number"><b>{{ count }}</b></span>
+    <div><h2>{{ name | t(lang) }}</h2><p>{{ line | t(lang) }}</p></div>
+    <span class="row-meta">{{ kicker | t(lang) }}</span>
+  </a>
+  {%- endfor %}
+</section>
+{% include "partials/newsletter.njk" %}

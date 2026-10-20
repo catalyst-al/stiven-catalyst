@@ -25,8 +25,8 @@ test('pages move into each other only for readers who have not asked for less mo
   }
 });
 
-test('the menu item and the writing tab of the page carry the piece that slides', { skip: !hasSite }, () => {
-  for (const [file, item] of [['publications.html', '/publications.html'], ['de/tools.html', '/de/tools.html'], ['sq/reflections.html', '/sq/insights.html']]) {
+test('the menu item of the page carries the piece that slides, and Writing lists its four kinds', { skip: !hasSite }, () => {
+  for (const [file, item] of [['publications.html', '/publications.html'], ['de/tools.html', '/de/tools.html'], ['sq/reflections.html', '/sq/writing.html']]) {
     const html = built(file);
     const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
     assert.equal(nav.match(/class="nav-pill"/g)?.length, 1, `${file}: one line under the menu`);
@@ -34,9 +34,12 @@ test('the menu item and the writing tab of the page carry the piece that slides'
     assert.equal(nav.match(/class="nav-orb"/g)?.length, 6, `${file}: every menu item has its planet (Start here and the five places)`);
     assert.doesNotMatch(html.match(/<nav id="mobile-menu"[\s\S]*?<\/nav>/)[0], /nav-pill/, `${file}: the name stays unique`);
   }
-  const reflections = built('reflections.html');
-  assert.equal(reflections.match(/class="tab-pill"/g)?.length, 1);
-  assert.match(reflections, /href="\/reflections.html" aria-current="page">Reflections<span class="tab-pill" aria-hidden="true"><\/span><\/a>/);
+  // No tabs above the lists any more: the Writing page lists the four kinds as rows, the way Reflections lists its pieces.
+  assert.doesNotMatch(built('reflections.html'), /writing-tabs|tab-pill/);
+  for (const prefix of ['', '/de', '/sq']) {
+    const list = built(`${prefix.slice(1)}${prefix ? '/' : ''}writing.html`).match(/<section class="shell listing reflection-list writing-list">[\s\S]*?<\/section>/)[0];
+    for (const page of ['insights', 'challenges', 'reflections', 'field-notes']) assert.match(list, new RegExp(`<a class="list-row" href="${prefix}/${page}.html">`), `${prefix || 'en'}: ${page}`);
+  }
   assert.doesNotMatch(built('index.html'), /nav-pill|tab-pill/, 'the homepage marks no menu item');
 });
 
