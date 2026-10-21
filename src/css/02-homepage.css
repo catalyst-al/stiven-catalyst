@@ -435,8 +435,10 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .hero-cards {
   flex-basis: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(256px, 100%), 1fr));
   gap: 12px;
+  width: 100%;
+  min-width: 0;
   max-width: 640px;
 }
 .hero-actions .hero-review {
