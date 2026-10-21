@@ -31,6 +31,9 @@
           <span class="weekly-card-meta">{{ L.no }} {{ issue.no }} · {{ I.blockName }}</span>
           <strong>{{ I.heading }}</strong>
           <span class="weekly-card-date">{{ I.date }}</span>
+          {%- if I.feature %}
+          <span class="weekly-card-line">{{ I.feature }}</span>
+          {%- endif %}
         </a>
       </li>
       {%- endfor %}

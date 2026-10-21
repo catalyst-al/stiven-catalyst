@@ -32,6 +32,9 @@
           <span class="weekly-card-meta">{{ L.volume }} {{ volume.number }} · {{ volume.chapterCount }} {{ L.chapters | lower }} · {{ V.blockName }}</span>
           <strong>{{ V.heading }}</strong>
           <span class="weekly-card-date">{{ V.date }}</span>
+          {%- if V.feature %}
+          <span class="weekly-card-line">{{ V.feature }}</span>
+          {%- endif %}
         </a>
       </li>
       {%- endfor %}

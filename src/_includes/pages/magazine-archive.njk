@@ -24,6 +24,9 @@
           <span class="weekly-card-meta">{{ L.issue }} {{ issue.number }}</span>
           <strong>{{ issue[lang].theme }}</strong>
           <span class="weekly-card-date">{{ issue[lang].date }}</span>
+          {%- if issue[lang].trend.lead %}
+          <span class="weekly-card-line">{{ issue[lang].trend.lead }}</span>
+          {%- endif %}
         </a>
       </li>
       {%- endfor %}

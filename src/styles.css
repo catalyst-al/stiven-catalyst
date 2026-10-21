@@ -8928,6 +8928,68 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .pub-list .list-row > div { grid-column: 1; grid-row: 2; min-width: 0; }
   .pub-thumb { grid-column: 2; grid-row: 2; width: 78px; align-self: start; justify-self: end; margin-top: 4px; }
 }
+/* The lists of all issues (Management Review, the treatise, From the Floor) read like Reflections too: one row per
+   issue with its date, its number and topic, a serif title and a line about it, and the cover at the end of the row
+   as a small book turned on its spine that floats on its own beat. The band under the pointer and the date take the
+   series' colour. The filter above still shows and hides the rows (the same li[data-block][data-month]). */
+.weekly-archive { --series: var(--blue); }
+.treatise-hero ~ .weekly-archive { --series: color-mix(in srgb, var(--blue) 50%, var(--red)); }
+.floor-hero ~ .weekly-archive { --series: var(--red); }
+.weekly-archive .weekly-grid { display: block; margin-top: 18px; }
+.weekly-archive .weekly-grid > li { border-bottom: 1px solid var(--line); }
+.weekly-archive .weekly-card {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: 120px minmax(0, 1fr) 104px;
+  grid-template-areas: "date meta cover" "date title cover" "date line cover";
+  align-content: center;
+  column-gap: 30px;
+  row-gap: 6px;
+  padding: 30px 0;
+}
+.weekly-archive .weekly-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px -18px;
+  z-index: -1;
+  border-radius: 22px;
+  background:
+    radial-gradient(520px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--series) 13%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.weekly-archive .weekly-card:is(:hover, :focus-visible)::before { opacity: 1; }
+.weekly-archive .weekly-card-date { grid-area: date; align-self: center; color: var(--series); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.weekly-archive .weekly-card-meta { grid-area: meta; margin: 0; color: var(--muted); }
+.weekly-archive .weekly-card strong { grid-area: title; font-size: clamp(26px, 3.3vw, 44px); letter-spacing: -.03em; line-height: 1.02; }
+.weekly-archive .weekly-card:hover strong { color: color-mix(in srgb, var(--series) 26%, var(--ink)); }
+.weekly-card-line { grid-area: line; color: var(--muted); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.weekly-archive .weekly-card-cover {
+  grid-area: cover;
+  align-self: center;
+  justify-self: end;
+  width: 96px;
+  border-radius: 2px 6px 6px 2px;
+  transform: perspective(700px) rotateY(-18deg);
+  box-shadow: 1px 1px 0 #f3efe6, 2px 2px 0 #d9d2c3, 3px 3px 0 #f3efe6, 4px 4px 0 #cbc3b2, 16px 20px 28px -8px rgba(0, 0, 0, .6);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .weekly-archive .weekly-card-cover { animation: cover-float 6s ease-in-out infinite; }
+  .weekly-archive .weekly-grid > li:nth-child(3n + 2) .weekly-card-cover { animation-delay: -2s; }
+  .weekly-archive .weekly-grid > li:nth-child(3n) .weekly-card-cover { animation-delay: -4s; }
+}
+@media (max-width: 900px) {
+  .weekly-archive .weekly-card {
+    grid-template-columns: minmax(0, 1fr) 76px;
+    grid-template-areas: "date date" "meta cover" "title cover" "line cover";
+    column-gap: 18px;
+    padding: 24px 0;
+  }
+  .weekly-archive .weekly-card-cover { width: 72px; align-self: start; }
+  .weekly-archive .weekly-card strong { font-size: 26px; }
+}
+@media (max-width: 620px) { .weekly-archive .weekly-card::before { inset: 4px -10px; } }
 @keyframes pub-leaf { from { opacity: 0; transform: perspective(900px) rotateX(55deg) translateY(.12em); filter: blur(4px); } }
 @keyframes pub-cover-in { from { opacity: 0; transform: perspective(1200px) rotateY(-38deg) translateX(-14px); } }
 @keyframes pub-count { 40% { scale: 1.35; opacity: 1; color: var(--ink); } }
