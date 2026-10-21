@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -128,6 +128,42 @@ në abstraktet.
 - Regjistruar / verifikuar / zgjidhur; vëzhgim / interpretim / vendim; vëre / kupto / parashiko; shpjegim / verifikim /
   autoritet / rikuperim; cikli sinjalizo → verifiko → autorizo → vepro → mëso; katër matjet e pilotit; karta e
   ndërhyrjes: të gjitha propozime të redaksisë, me burimet në shënimin e faqes.
+
+## Vëllimi 4: Kur përmirësimi zbehet, pse zhduken standardet e mira (21 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 4, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/04.js`). Blloku: Operacioni. 30 faqe, si PDF-ja: kopertina, editoriali,
+përmbajtja, shënimi kërkimor, gjashtë kapituj (I–III me tri faqe, IV–VI me katër), karta, eseja e mbylljes, metoda,
+burimet, kopertina e pasme.
+
+### Vendimet
+
+- **Grafikët.** Dy, të dy me burim: Tucker & Edmondson 93% / 7% (përgjigjet e rendit të parë dhe të dytë, të
+  konfirmuara te teksti i plotë i CMR për Nr. 15, `docs/revista/management-review-nr-15.md`) te Kap. IV, dhe Doyle et
+  al. 6 / 6 / 7 nga 19 ekipe (të angazhuara, pjesërisht, të paangazhuara, nga abstrakti) te Kap. V. PDF-ja e autorit nuk
+  i kishte këto grafikë; i kishte dhjetë faktorët e NHS-së si tabelë (mbeten si rreshta) dhe 125 / 2012 si kuti shifrash.
+- **Burimet.** Spear & Bowen (1999) dhe Tucker & Edmondson (2003) ekzistonin tashmë te `lib/weekly/sources.js`
+  (Nr. 15); u shtuan gjashtë: May & Finch 2009, May et al. 2009, Wiltsey Stirman et al. 2012, IHI Sustaining
+  Improvement 2016, Doyle et al. 2013, Williams/IHI 2018. Të tetë adresat u hapën (DOI 302 te botuesi, IHI dhe HBR 200).
+- **Lidhjet me faqen.** Esetë: when-improvement-fades (Kap. I), a-good-sop-is-not-a-document (Kap. II),
+  how-i-built-front-desk-control (Kap. III), solve-it-or-escalate-it (Kap. IV), watch-how-i-do-it-is-not-training
+  (Kap. V), why-the-handover-is-underrated (Kap. VI). Mjeti: Sigma & Control Chart (faqja e matjes citon grafikët e
+  ecurisë dhe të Shewhart-it).
+- **Çfarë u ndryshua nga PDF-ja.** "The editor" u bë "the author"; tekstet e protokolleve dhe disa paragrafë u
+  shkurtuan dukshëm që të hyjnë në A5 në gjermanisht (faqet 4, 7, 10, 13, 17, 21, 25 në DE dhe 25 në EN/SQ janë me
+  fit-3); frazat "Alex knows" mbetën si shembull i përgjithshëm. Mesazhi mbyllës mbetet i njëjti.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Wiltsey Stirman et al., Implementation Science 7:17, 2012: "Two coders identified 125 studies on sustainability that met eligibility criteria"; shumica retrospektive, rreth gjysma me vetëraportime, jo të gjitha me përkufizim | `wiltsey-stirman-2012`, DOI 10.1186/1748-5908-7-17 | U konfirmua te abstrakti (Europe PMC, 21 tetor 2026) |
+| Doyle et al., Implementation Science 8:127, 2013: 19 ekipe, "six engaged, six partially engaged, seven non-engaged"; 12 e gjetën të pranueshëm | `doyle-2013`, DOI 10.1186/1748-5908-8-127 | U konfirmua te abstrakti. Dhjetë faktorët (4 proces, 4 staf, 2 organizatë) janë të modelit të NHS Institute, siç i përshkruan PDF-ja e autorit |
+| Tucker & Edmondson, CMR 45(2), 2003: 239 orë, 26 infermiere, nëntë spitale; 93% rendi i parë, 7% rendi i dytë | `tucker-edmondson-2003` | Si te Nr. 15, teksti i plotë i CMR |
+| Spear & Bowen, HBR shtator–tetor 1999: katër rregullat | `spear-bowen-1999` | Si te Nr. 15 |
+| May et al. 2009 (Implementation Science 4:29) dhe May & Finch 2009 (Sociology 43(3), 535–554): NPT, katër ndërtimet | `may-2009`, `may-finch-2009` | U konfirmuan te abstrakti dhe te DOI |
+| IHI, Sustaining Improvement (Scoville, Little, Rakover, Luther, Mate, 2016); Williams, Shewhart chart (IHI, 2018) | `ihi-sustaining-2016`, `ihi-williams-2018` | Faqet u hapën (200) |
+| Ritmi 30/60/90 ditë; katër raportet e matjes; karta | editoriale | Të shënuara si propozime, jo si rezultate |
 
 ## Si shtohet një vëllim
 
