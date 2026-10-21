@@ -3483,5 +3483,46 @@
     }
    ]
   }
+ },
+ "operational-treatise-vol-03": {
+  "en": {
+   "pageCount": 31,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-03/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-03/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 31,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-03/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-03/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 31,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-03/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-03/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
  }
 }

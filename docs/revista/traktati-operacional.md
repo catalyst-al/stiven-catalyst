@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -76,6 +76,58 @@ përdoren dhe burimi i ri.
   karta e rrjedhës dhe e mbylljes. Të gjitha propozime të redaksisë, me burimet e tyre në shënimin e faqes.
 - Zinxhiri vëzhgo → verifiko → cakto → vepro → trego: hipotezë editoriale, jo vlerësim i botuar.
 - Leximet te "Leximi ynë".
+
+## Vëllimi 3: Ndërhyrja njerëzore, kur automatizimi gabon (21 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 3, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët me të njëjtin sistem si dy vëllimet e para (`lib/treatise/volumes/03.js`). Blloku: Operacioni.
+
+### Vendimet
+
+- **Faqet.** 31 faqe në faqe (PDF-ja e autorit ka 30): kopertina, editoriali, përmbajtja, shënimi kërkimor, gjashtë
+  kapituj (I–III me tri faqe, IV–VI me katër), karta, eseja e mbylljes, metoda, burimet, kopertina e pasme. Faqja e
+  shtuar është "Dy numra, një dizajn" (Kap. III): shembulli me 100 raste ndahet në dy faqe, që të dalin dy grafikë
+  (testi kërkon të paktën dy për vëllim) dhe formula e PPV-së të mos ngjeshet mes tyre.
+- **Grafikët.** Të dy janë nga shembulli i shpikur me 100 raste (5 përjashtime të vërteta, 19 alarme, 4 të sakta,
+  15 të rreme): kolonat 5/19/4/15 dhe shiritat 21,1% / 80% / 78,9%, me flamurin "shembull hipotetik" dhe pa burim.
+  Shifrat e studimeve (13.821 / 74; 35 / 2015–25) dalin si kuti shifrash me burimin e tyre, jo si grafik: 74 nga
+  13.821 nuk vizatohet dot në mënyrë të dobishme.
+- **Skena e Kapitullit V** (turni i trajnimit pa sistem) është përvojë e dokumentuar e autorit, jo skenë e shpikur; flamuri
+  i saj e thotë ("Përvojë e dokumentuar, me hollësi të kufizuara për sigurinë operacionale") dhe teksti thotë shprehimisht
+  çfarë nuk mbështet prova (të dhëna të dëmtuara, faturime, pasoja për mysafirët, rikuperim). Front Desk Control
+  përmendet si projekt i faqes.
+- **Lidhjet me faqen.** Esetë: the-report-a-machine-wrote (Kap. I), the-system-is-faster-than-you (Kap. II),
+  when-the-dashboard-turns-red-before-you (Kap. III), the-tour-the-driver-does-not-understand (Kap. IV),
+  the-night-the-system-went-down (Kap. V), the-scanner-is-a-witness (Kap. VI). Mjeti: Shift Handover (karta e
+  ndërhyrjes ka të njëjtat fusha: çfarë u raportua, çfarë u verifikua, kush vendos, veprimi, kthimi i informacionit).
+- **Çfarë u ndryshua nga PDF-ja.** "The editor" u bë "the author", si kudo në faqe; disa paragrafë të protokolleve u
+  shkurtuan që të hyjnë në faqet A5 në gjermanisht (faqet 14, 18 dhe 26 në DE janë me fit-3); përplasjet e tekstit me
+  fundin e faqes që kishte PDF-ja e autorit (faqet 3, 16, 19) nuk ekzistojnë në printimin e faqes, sepse çdo faqe matet
+  (`node scripts/page-fit.mjs`). Mesazhi mbyllës mbetet i njëjti: "The system can recommend the decision. It cannot
+  inherit the responsibility."
+
+### Tabela e fakteve
+
+Të shtatë burimet u kontrolluan te DOI-ja e tyre (të gjitha hapen, 21 tetor 2026); dy numrat e rishikimeve u lexuan
+në abstraktet.
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Bainbridge, "Ironies of Automation", Automatica 19(6), 1983: automatizimi mund t'i zgjerojë vështirësitë që i mbeten operatorit, sidomos në gjendje të panormalme | `bainbridge-1983`, DOI 10.1016/0005-1098(83)90046-8 | Punim konceptual, jo eksperiment; faqja e thotë |
+| Endsley & Kiris, Human Factors 37(2), 1995: pamje më e ulët e situatës nën automatizim, vendime më të ngadalta pas dështimit të sistemit ekspert, niveli i kontrollit e zbut efektin | `endsley-kiris-1995`, DOI 10.1518/001872095779064555 | Eksperiment navigimi në laborator; nuk jepen shifra të tij |
+| Parasuraman & Riley, Human Factors 39(2), 1997: përdorim, keqpërdorim, braktisje, abuzim; alarmet e rreme nxisin braktisjen | `parasuraman-riley-1997`, DOI 10.1518/001872097778543886 | Kornizë interpretuese |
+| Parasuraman, Sheridan & Wickens, IEEE SMC-A 30(3), 2000: katër klasat (marrja, analiza, zgjedhja, zbatimi) | `parasuraman-sheridan-wickens-2000`, DOI 10.1109/3468.844354 | Model |
+| Lee & See, Human Factors 46(1), 2004: besimi te automatizimi, mbështetja e përshtatshme | `lee-see-2004`, DOI 10.1518/hfes.46.1.50_30392 | Kornizë interpretuese |
+| Goddard, Roudsari & Wyatt, JAMIA 19(1), 2012: "Of 13 821 retrieved papers, 74 met the inclusion criteria"; ndërmjetësues besimi dhe vetëbesimi, përvoja në detyrë, ngarkesa, kompleksiteti, koha; zbutës trajnimi, llogaridhënia, dizajni | `goddard-2012`, DOI 10.1136/amiajnl-2011-000089 | U konfirmua te abstrakti (Europe PMC, 21 tetor 2026); në internet 16 qershor 2011, numri i revistës 2012 |
+| Romeo & Conti, AI & Society, në internet 2025 (vëllimi 41, 2026): 35 studime të recensuara, janar 2015 – prill 2025, PRISMA 2020; shpjegimet vetëm nuk e heqin anshmërinë | `romeo-conti-2025`, DOI 10.1007/s00146-025-02422-7 | U konfirmua te abstrakti (regjistri IRIS i Universitetit të Katanias); vëllimi 41 sipas PDF-së së autorit, i pakonfirmuar te Springer |
+| Shembulli 100 / 5 / 19 / 4 / 15; PPV 4 ÷ 19 = 21,1%; ndjeshmëria 4 ÷ 5 = 80% | i shpikur | Llogaria u kontrollua; flamur hipotetik në faqe |
+
+### Çfarë është editoriale
+
+- Skenat e kapitujve I, II, III, IV dhe VI: të ndërtuara, me flamur. Kapitulli V: përvojë e dokumentuar, e kufizuar.
+- Regjistruar / verifikuar / zgjidhur; vëzhgim / interpretim / vendim; vëre / kupto / parashiko; shpjegim / verifikim /
+  autoritet / rikuperim; cikli sinjalizo → verifiko → autorizo → vepro → mëso; katër matjet e pilotit; karta e
+  ndërhyrjes: të gjitha propozime të redaksisë, me burimet në shënimin e faqes.
 
 ## Si shtohet një vëllim
 
