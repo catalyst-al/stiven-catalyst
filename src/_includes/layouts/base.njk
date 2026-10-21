@@ -143,7 +143,7 @@
       {%- if item[6] %}
       <div class="nav-menu"><div class="nav-menu-inner">
         {%- for sub in item[6] %}
-        <a class="nav-menu-link" href="{{ sub[0] }}"{% if activeNav == sub[0] %} aria-current="page"{% endif %}><i aria-hidden="true"{% if sub[3] %} style="--planet: {{ sub[3] }}"{% endif %}></i><span>{{ sub[1] }}{% if sub[2] %}<small>{{ sub[2] }}</small>{% endif %}</span></a>
+        <a class="nav-menu-link" href="{{ sub[0] }}"{% if activeNav == sub[0] %} aria-current="page"{% endif %}><i aria-hidden="true"{% if sub[3] %} class="is-planet" style="--planet: {{ sub[3] }}"{% endif %}></i><span>{{ sub[1] }}{% if sub[2] %}<small>{{ sub[2] }}</small>{% endif %}</span></a>
         {%- endfor %}
       </div></div>
       </div>

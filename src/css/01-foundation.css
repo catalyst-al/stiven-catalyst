@@ -351,6 +351,37 @@ button, input, select { font: inherit; }
   box-shadow: 0 0 5px #fff, 0 0 12px color-mix(in srgb, var(--planet, #ffd696) 95%, transparent), 0 0 24px color-mix(in srgb, var(--planet, #ffc478) 50%, transparent);
 }
 [data-theme="light"] .nav-menu-link i { opacity: .9; box-shadow: 0 0 0 1px rgba(11, 16, 21, .28), 0 0 6px color-mix(in srgb, var(--planet, #f0be6e) 55%, transparent); }
+/* Under Tools, each role keeps its planet: a small sphere in the role's colour that, under the pointer, glows and
+   sends out a ring of its light, as the planets of the Tools page do. "All tools" keeps the bulb. */
+.nav-menu-link i.is-planet {
+  --bulb: 9px;
+  height: var(--bulb);
+  translate: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 10%, var(--planet) 46%, color-mix(in srgb, var(--planet) 45%, #000) 100%);
+  opacity: .85;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--planet) 60%, transparent);
+}
+.nav-menu-link i.is-planet::after {
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: none;
+  border: 1.5px solid var(--planet);
+  opacity: 0;
+}
+.nav-menu-link:is(:hover, :focus-visible, [aria-current="page"]) i.is-planet {
+  scale: 1.2;
+  box-shadow: 0 0 6px #fff, 0 0 14px var(--planet), 0 0 28px color-mix(in srgb, var(--planet) 55%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nav-menu-link:is(:hover, :focus-visible) i.is-planet::after { animation: planet-burst 1.4s ease-out infinite; }
+}
+@keyframes planet-burst { 0% { opacity: .9; scale: 1; } 100% { opacity: 0; scale: 3.2; } }
+[data-theme="light"] .nav-menu-link i.is-planet { box-shadow: 0 0 0 1px rgba(11, 16, 21, .2), 0 0 8px color-mix(in srgb, var(--planet) 60%, transparent); }
 .nav-menu-link span { display: grid; gap: 1px; }
 .nav-menu-link small { color: var(--muted); font-size: 12px; font-weight: 500; }
 @media (prefers-reduced-motion: reduce) { .nav-menu, .nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { transition: none; translate: -50% 0; } }
