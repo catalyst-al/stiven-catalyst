@@ -1347,6 +1347,36 @@ a.essay-series-next:hover em { translate: 5px 0; }
     [data-pub] .kicker::before { animation: legal-tick linear both; animation-timeline: view(); animation-range: entry 30% entry 100%; }
   }
 }
+/* Publications as one list, like Reflections: the date in small capitals, the series, a serif title and its line,
+   and the cover at the end of the row as a small book that floats on its own beat and turns towards the reader
+   under the pointer. The band under the pointer takes the series' colour. */
+.pub-list { padding-top: 10px; }
+.pub-list .list-row { grid-template-columns: 120px minmax(0, 1fr) 128px; }
+.pub-list .number { color: var(--series); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.pub-list .kicker { margin: 0 0 10px; }
+.pub-list .list-row p:last-child { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.pub-list a.list-row::before {
+  background:
+    radial-gradient(520px circle at var(--mx, 30%) var(--my, 50%), color-mix(in srgb, var(--series) 13%, transparent), transparent 65%),
+    color-mix(in srgb, var(--ink) 3%, transparent);
+}
+.pub-list a.list-row:hover h2 { color: color-mix(in srgb, var(--series) 26%, var(--ink)); }
+.pub-thumb { justify-self: end; width: 104px; perspective: 900px; }
+.pub-thumb .book-object-cover {
+  box-shadow: 1px 1px 0 #f3efe6, 2px 2px 0 #d9d2c3, 3px 3px 0 #f3efe6, 4px 4px 0 #cbc3b2, 16px 20px 28px -8px rgba(0, 0, 0, .6);
+}
+.pub-list a.list-row:is(:hover, :focus-visible) .pub-thumb .book-object-cover { transform: rotateY(-6deg) rotateX(1deg) scale(1.04); }
+@media (prefers-reduced-motion: no-preference) {
+  .pub-list [data-pub]:nth-child(3n + 2) .book-object-cover { animation-delay: -2s; }
+  .pub-list [data-pub]:nth-child(3n) .book-object-cover { animation-delay: -4s; }
+}
+.pub-archives { display: flex; flex-wrap: wrap; gap: 14px 34px; padding: 6px 0 70px; }
+@media (max-width: 900px) {
+  .pub-list .list-row { grid-template-columns: minmax(0, 1fr) 84px; gap: 10px 18px; }
+  .pub-list .number { grid-column: 1 / -1; grid-row: 1; }
+  .pub-list .list-row > div { grid-column: 1; grid-row: 2; min-width: 0; }
+  .pub-thumb { grid-column: 2; grid-row: 2; width: 78px; align-self: start; justify-self: end; margin-top: 4px; }
+}
 @keyframes pub-leaf { from { opacity: 0; transform: perspective(900px) rotateX(55deg) translateY(.12em); filter: blur(4px); } }
 @keyframes pub-cover-in { from { opacity: 0; transform: perspective(1200px) rotateY(-38deg) translateX(-14px); } }
 @keyframes pub-count { 40% { scale: 1.35; opacity: 1; color: var(--ink); } }
