@@ -58,6 +58,6 @@ Stiven Catalyst is broader than a coaching site. It is a modern publication and 
 
 ## Logo files
 The current mark, "STIVEN CATALYST.com" (the Coaching line is gone: the site is about processes and SOPs, not coaching), lives in `src/media/brand/`:
-- `stiven-catalyst-logo-landscape.svg` / `.png` (5996 x 1800 px), white ground, for headers, banners and social covers.
+- `stiven-catalyst-logo-landscape.svg` / `.png` (6896 x 2000 px), white ground, for headers, banners and social covers.
 - `stiven-catalyst-logo-portrait.svg` / `.png` (6000 x 7500 px), white ground, for stories, posters and print.
-The SVGs are vector with the type (Montserrat ExtraBold / Black) converted to outlines, so they scale to any size without the font installed. The PNGs are rendered from them; `scripts/brand/README.md` says how to rebuild both.
+The SVGs are vector with the type (Archivo Black, the site display face, and Montserrat ExtraBold for STIVEN) converted to outlines, so they scale to any size without the font installed. The PNGs are rendered from them; `scripts/brand/README.md` says how to rebuild both.
