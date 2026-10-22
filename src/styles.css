@@ -934,6 +934,53 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   min-height: 48px;
   text-align: center;
 }
+/* The two first steps: "Try the tools" glows softly in blue and a sweep of light crosses it every few seconds, its
+   arrow leaning forward under the pointer; "Read the essays" carries the lit bulb in a warm glass frame that lights
+   up under the pointer. */
+.hero-actions .hero-go {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  gap: 10px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 60%, transparent), 0 12px 32px -14px var(--blue), 0 0 34px -12px var(--blue);
+}
+.hero-go::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(105deg, transparent 28%, rgba(255, 255, 255, .62) 48%, transparent 68%);
+  translate: -130% 0;
+  pointer-events: none;
+}
+.hero-go-label { position: relative; z-index: 2; }
+.hero-go-arrow { position: relative; z-index: 2; display: inline-block; font-weight: 900; transition: translate .3s cubic-bezier(.22, 1, .36, 1); }
+.hero-go:hover .hero-go-arrow { translate: 4px 0; }
+.hero-go:hover { box-shadow: 0 0 0 1px var(--blue), 0 14px 36px -12px var(--blue), 0 0 46px -8px var(--blue); }
+.hero-actions .hero-read {
+  gap: 11px;
+  padding-left: 20px;
+  border-color: color-mix(in srgb, var(--gold) 42%, var(--line));
+  background:
+    radial-gradient(90px 60px at 26px 50%, rgba(255, 214, 150, .16), transparent 70%),
+    color-mix(in srgb, var(--gold) 5%, var(--card));
+}
+.hero-actions .hero-read:hover {
+  border-color: var(--gold);
+  background:
+    radial-gradient(110px 70px at 26px 50%, rgba(255, 214, 150, .24), transparent 70%),
+    color-mix(in srgb, var(--gold) 9%, var(--card));
+  box-shadow: 0 0 26px -8px color-mix(in srgb, var(--gold) 70%, transparent);
+}
+.hero-read .hero-bulb { width: 10px; height: 13px; margin-bottom: 4px; }
+.hero-read .hero-bulb::after { width: 6px; height: 4px; }
+.hero-read:hover .hero-bulb { scale: 1.1; box-shadow: 0 0 8px #fff, 0 0 22px rgba(255, 214, 150, 1), 0 0 44px rgba(255, 196, 120, .6); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-go { animation: hero-go-breathe 3.6s ease-in-out infinite; }
+  .hero-go::after { animation: hero-go-shine 5s cubic-bezier(.4, 0, .2, 1) 1.4s infinite; }
+}
+@keyframes hero-go-breathe { 50% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 80%, transparent), 0 14px 36px -12px var(--blue), 0 0 48px -8px var(--blue); } }
+@keyframes hero-go-shine { 0% { translate: -130% 0; } 28%, 100% { translate: 130% 0; } }
 /* Under the two buttons, two ways straight in side by side: the Management Review (blue) and the Reflections (gold),
    each card with the lit bulb of the logo, which breathes slowly and brightens under the pointer. Where the column
    is too narrow for two, they stack. */
