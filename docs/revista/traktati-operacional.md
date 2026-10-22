@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -164,6 +164,49 @@ burimet, kopertina e pasme.
 | May et al. 2009 (Implementation Science 4:29) dhe May & Finch 2009 (Sociology 43(3), 535–554): NPT, katër ndërtimet | `may-2009`, `may-finch-2009` | U konfirmuan te abstrakti dhe te DOI |
 | IHI, Sustaining Improvement (Scoville, Little, Rakover, Luther, Mate, 2016); Williams, Shewhart chart (IHI, 2018) | `ihi-sustaining-2016`, `ihi-williams-2018` | Faqet u hapën (200) |
 | Ritmi 30/60/90 ditë; katër raportet e matjes; karta | editoriale | Të shënuara si propozime, jo si rezultate |
+
+## Vëllimi 5: Kurthi i kapacitetit, pse operacionet e zëna prishen para se të duken plot (22 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 5, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/05.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Kapitulli III i PDF-së (skena, Kingman, kurba, Whitt) nuk ka protokoll; testi kërkon
+  që çdo kapitull të mbyllet me një. U shtua "Lexo kurbën, pastaj provo bashkimin", me hapat që PDF-ja i mban në
+  paragrafin e fundit të faqes së Whitt-it. U shtua edhe faqja e metodës (PDF-ja e mban metodën te faqja e burimeve),
+  si te vëllimet e tjera.
+- **Grafikët.** Tre, të gjithë hipotetikë me flamur: dy profilet e mbërritjes 10 / 24 (Kap. I), pritja M/M/1 11,7 / 20 /
+  45 / 95 min (Kap. III) dhe zinxhiri 75 / 70 / 55 / 90 (Kap. IV). Tabelat e PDF-së (Little 24 × 0,5, gjendjet A–D,
+  pranimi pa ripunim 100/94 dhe 110/97) janë rreshta.
+- **Aritmetika u rikontrollua.** ρ/(1−ρ): 2,33 / 4 / 9 / 19; × 5 min: 11,7 / 20 / 45 / 95; 95/20 = 4,75. 24 × 0,5 = 12,
+  24 × 0,75 = 18. min(75, 70, 55) = 55; C: min(90, 70, 72) = 70; D: min(90, 52, 72) = 52. 94/100 = 94%, 97/110 = 88,2%.
+  (12 − 10) × 2 = 4. Të gjitha të sakta.
+- **Burimet.** Little 1961 dhe 2011 ekzistonin (Nr. 59, `littlelaw-little-1961`, `littlelaw-little-2011`); u shtuan
+  shtatë: Kingman 1961 dhe 1962, Whitt 1992 dhe 1993, Eick, Massey & Whitt 1993, Factory Physics bot. 3 (Waveland,
+  2011; faqja ekzistuese `littlelaw-hopp-spearman-2000` është botimi i dytë, "përmes") dhe modelet e NHS England.
+  Të nëntë adresat u kontrolluan: DOI-të kthejnë 302 te botuesi, factoryphysics.com 200, faqja e NHS England 202 (pas
+  një kontrolli WAF; nuk tregon datë, prandaj viti i burimit është viti i konsultimit, 2026).
+- **Një korrigjim titulli.** PDF-ja e autorit e quan punimin e Whitt-it të 1992-shit "Understanding Multi-Server
+  Service Systems"; titulli i vërtetë është "Understanding the Efficiency of Multi-Server Service Systems"
+  (Management Science 38(5), 708–723). Faqja mban titullin e saktë.
+- **Lidhjet me faqen.** Esetë: high-volume-days (Kap. I), the-angry-guest-at-2am (Kap. II), 80-vehicles-you-cannot-see
+  (Kap. III), mistakes-get-lost-between-departments (Kap. IV), how-we-worked-with-damage (Kap. V),
+  ten-minutes-before-the-shift (Kap. VI). Mjeti: Last-Mile CX Control Tower.
+- **Çfarë u ndryshua nga PDF-ja.** "The editor" u bë "the author"; tekstet u shkurtuan që të hyjnë në A5 (faqet 26
+  dhe 27 janë me fit-3 në të tri gjuhët).
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| L = λ × W; 24 × 0,5 = 12 | Little, Operations Research 9(3), 1961; 59(3), 2011 | Si te Nr. 59; shembulli hipotetik |
+| Wq ≈ [(ca² + cs²)/2] × [ρ/(1−ρ)] × te (forma VUT); M/M/1: 11,7 / 20 / 45 / 95 min; 4,75× | Kingman 1961, 1962; Factory Physics | Përafrimi i Kingman-it te DOI-ja; llogaria M/M/1 e rikontrolluar |
+| Bashkimi i shërbyesve rrit efikasitetin, luhatshmëria ul shfrytëzimin e pajtueshëm me një standard shërbimi | Whitt, Management Science 38(5), 1992 | DOI hapet; pohimi përputhet me abstraktin e njohur |
+| Përafrime për GI/G/m | Whitt, Production and Operations Management 2(2), 1993 | DOI hapet |
+| Numri i burimeve të zëna varet nga shpërndarja e kohës së shërbimit dhe historia e mbërritjeve (Mt/G/∞) | Eick, Massey & Whitt, Operations Research 41(4), 731–742, 1993 | DOI hapet |
+| Kapaciteti i kërkuar kundrejt të disponueshmit; modele të përditësueshme | NHS England, Demand and capacity models | Faqja ekziston (202, WAF); e padatuar |
+| Zinxhiri 75/70/55, 100/94 dhe 110/97, (12 − 10) × 2 = 4 | të shpikura | Flamur "sintetik" në faqe |
 
 ## Si shtohet një vëllim
 
