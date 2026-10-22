@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -207,6 +207,52 @@ për faqen në tri gjuhët (`lib/treatise/volumes/05.js`). Blloku: Operacioni. 3
 | Numri i burimeve të zëna varet nga shpërndarja e kohës së shërbimit dhe historia e mbërritjeve (Mt/G/∞) | Eick, Massey & Whitt, Operations Research 41(4), 731–742, 1993 | DOI hapet |
 | Kapaciteti i kërkuar kundrejt të disponueshmit; modele të përditësueshme | NHS England, Demand and capacity models | Faqja ekziston (202, WAF); e padatuar |
 | Zinxhiri 75/70/55, 100/94 dhe 110/97, (12 − 10) × 2 = 4 | të shpikura | Flamur "sintetik" në faqe |
+
+## Vëllimi 6: Kurthi i KPI-ve, kur numrat përmirësohen, por puna keqësohet (22 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 6, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/06.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Kapitulli II i PDF-së (skena, Goodhart, Holmström & Milgrom, Bevan & Hood) nuk ka
+  protokoll; u shtua "Mbaje objektivin pa e gllabëruar matjen" me pesë mbrojtje, nga paragrafi i fundit i faqes së
+  kërkimit. U shtua edhe faqja e metodës, si te vëllimet e tjera.
+- **Grafikët.** Tre, hipotetikë me flamur: të vonuarat / të paplotat 80 / 60 / 10 / 30 për 1.000 (Kap. III, si te
+  PDF-ja), objektivi / p₀ / dita / UCL 1,0 / 1,5 / 2,3 / 2,65% (Kap. IV) dhe çiftet A→B 90→100, 40→80, 85,5→83,3
+  (Kap. V, grafik "pairs").
+- **Një korrigjim llogarie.** PDF-ja thotë te faqja 18 se kufiri i poshtëm i p-grafikut "clips to 0%". Me p₀ = 0,015 dhe
+  n = 1.000, 3√[p₀(1−p₀)/n] = 3√(0,000014775) ≈ 0,01153; UCL ≈ 0,02653 (2,65%, si te PDF-ja), por LCL = 0,015 − 0,0115
+  ≈ 0,0035, pra 0,35%, pozitiv, nuk pritet në zero. Faqja jep 0,35% dhe e shënon korrigjimin te metoda.
+- **Një korrigjim citimi.** PDF-ja e citon seksionin 6.3.2 të e-Handbook-ut të NIST si "Control Limits vs.
+  Specification Limits"; seksioni 6.3.2 është "What are Variables Control Charts?". Dallimi kufij kontrolli / kufij
+  specifikimi është te 6.3.1. Faqja citon vetëm 6.3.1 dhe 6.3.3.2 (p-grafikët).
+- **Aritmetika tjetër u rikontrollua.** 80/1.000 = 8%, 60 = 6%, 10 = 1%, 30 = 3%; 90/100, 20/20, 4/10, 80/100; 94/110 =
+  85,45%, 100/120 = 83,33% (paradoksi i Simpson-it, i saktë); 23/1.000 = 2,3% < 2,65%.
+- **Burimet.** Pesë ekzistonin (`kaplan-norton-1992`, `goodhart-1975` përmes Bevan & Hood, `strathern-1997`,
+  `gl-campbell-1979`, `gl-bevan-hood-2006`); u shtuan pesë: Holmström & Milgrom 1991, van Thiel & Leeuw 2002, IHI
+  Establishing Measures, NIST 6.3.1 dhe 6.3.3.2 (faqet e NIST dhe të IHI-së pa datë, viti i konsultimit, si te
+  `nist-ehandbook-arl`). Të dhjetë adresat e PDF-së hapen (DOI 302 te botuesi, NIST/IHI/DAMTP 200, PubMed 203).
+  Shënimi i DAMTP Cambridge për Goodhart (faqja e Michael McIntyre) nuk u shtua si burim: faqja e ka Goodhart-in
+  përmes Bevan & Hood dhe Strathern-in drejtpërdrejt.
+- **Lidhjet me faqen.** Esetë: the-report-a-machine-wrote (Kap. I), kpis-the-team-trusts (Kap. II),
+  where-part-of-the-order-goes-missing (Kap. III), a-bad-day-or-a-problem (Kap. IV), kpis-do-not-improve-in-excel
+  (Kap. V), talking-to-someone-who-made-a-mistake (Kap. VI). Mjeti: KPI Diagnostic.
+- **Çfarë u ndryshua nga PDF-ja.** "The editor" u bë "the author"; tekstet u shkurtuan që të hyjnë në A5.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Goodhart: rregullsia e përdorur për kontroll pushon së silluri si më parë; parafraza "matje → objektiv" është e Strathern-it | `goodhart-1975` (përmes Bevan & Hood), `strathern-1997` | Si te Nr. 1 dhe Nr. 3 |
+| Campbell 1979: treguesit mund të mos zbulojnë nëse ndërhyrja e shkaktoi përmirësimin | `gl-campbell-1979`, DOI 10.1016/0149-7189(79)90048-X | Si te Nr. 3 |
+| Holmström & Milgrom 1991: stimujt e fortë mbi detyrat e matshme largojnë mundimin nga të tjerat | `holmstrom-milgrom-1991`, DOI 10.1093/jleo/7.special_issue.24 | DOI hapet; pohimi përputhet me punimin |
+| Kaplan & Norton 1992: Balanced Scorecard | `kaplan-norton-1992` | Si te Nr. 1 |
+| Bevan & Hood 2006: objektiva dhe manipulim në NHS-në angleze | `gl-bevan-hood-2006` | Si te Nr. 3 |
+| van Thiel & Leeuw 2002: paradoksi i performancës | `van-thiel-leeuw-2002`, DOI 10.1080/15309576.2002.11643661 | DOI hapet |
+| IHI: matje rezultati, procesi, balancimi | `ihi-establishing-measures` | Faqja hapet (200) |
+| NIST 6.3.1 (grafikët e kontrollit), 6.3.3.2 (p-grafikët); UCL = p₀ + 3√[p₀(1−p₀)/n] | `nist-control-charts`, `nist-p-chart` | Faqet hapen (200); formula si te 6.3.3.2 |
+| 80/60/10/30; p-grafiku 1,5% / 2,65% / 0,35% / 2,3%; 90→100, 40→80, 85,5→83,3 | të shpikura | Flamur "sintetik"; llogaritë të rikontrolluara |
 
 ## Si shtohet një vëllim
 
