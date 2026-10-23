@@ -1637,3 +1637,66 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .page-hero:not(.tool-hero) .lede { margin: 18px 0 0; font-size: 17px; }
 }
 @media print { .page-hero::after { display: none !important; } }
+
+/* The small bulb of the logo, wherever the site marks a choice, a step or something read: the glass and its gold cap
+   painted in one box (--bulb-paint), lit by a warm glow (--bulb-glow), the way the menu and the hero carry it. */
+:root {
+  --bulb-paint:
+    radial-gradient(closest-side, #fff 0 34%, #fff4dc 62%, #f0d9a8 88%, transparent 100%) 50% 0 / 100% 74% no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 50% 100% / 54% 30% no-repeat;
+  --bulb-glow: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 5px rgba(255, 214, 150, .95));
+  --bulb-lit: #fff4dc;
+}
+[data-theme="light"] { --bulb-glow: drop-shadow(0 0 .6px rgba(11, 16, 21, .7)) drop-shadow(0 0 4px rgba(240, 180, 90, .9)); }
+
+/* The chosen topic or month of a list: the bulb instead of the blue dot (the tools keep their planets). */
+body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
+  width: 8px;
+  height: 11px;
+  border-radius: 0;
+  background: var(--bulb-paint);
+  box-shadow: none;
+  filter: var(--bulb-glow);
+  vertical-align: -.04em;
+}
+
+/* A project's tag. */
+.project-card .tag::before {
+  width: 7px;
+  height: 10px;
+  border-radius: 0;
+  background: var(--bulb-paint);
+  box-shadow: none;
+  filter: var(--bulb-glow);
+}
+.project-card:hover .tag::before { box-shadow: none; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 9px rgba(255, 214, 150, 1)); }
+
+/* Read: the light is on. */
+.read-mark { background: color-mix(in srgb, var(--gold) 16%, transparent); color: color-mix(in srgb, var(--gold) 70%, var(--ink)); }
+.read-mark::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 9px;
+  margin-right: 6px;
+  background: var(--bulb-paint);
+  filter: var(--bulb-glow);
+  vertical-align: -.04em;
+}
+
+/* Start here: each step's number is a bulb in a gold ring that lights as the step is reached. */
+.start-number { border-color: color-mix(in srgb, var(--gold) 65%, transparent); color: var(--gold); }
+.start-step:hover .start-number { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 6px #fff, 0 0 18px rgba(255, 214, 150, .9), 0 0 36px rgba(255, 196, 120, .45); }
+@keyframes step-reach {
+  0% { background: transparent; color: var(--gold); box-shadow: none; }
+  60% { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 0 6px rgba(255, 214, 150, .16), 0 0 8px #fff, 0 0 24px rgba(255, 214, 150, 1); }
+  100% { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 6px #fff, 0 0 16px rgba(255, 214, 150, .8), 0 0 32px rgba(255, 196, 120, .35); }
+}
+
+/* A series as a row of bulbs: the essays read are lit, the one open now burns brightest, the next one glows softly. */
+.series-dots a.is-read { background: var(--bulb-lit); border-color: var(--gold); box-shadow: 0 0 4px #fff, 0 0 10px rgba(255, 214, 150, .75); }
+.series-dots a[aria-current="page"] { background: #fff; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(255, 214, 150, .18), 0 0 8px #fff, 0 0 20px rgba(255, 214, 150, 1); }
+.series-dots a.is-next { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(255, 214, 150, .14); }
+.series-dots a.is-next::after { box-shadow: 0 0 0 3px rgba(255, 214, 150, .12), 0 0 14px rgba(255, 214, 150, .7); }
+.series-dots a:hover { box-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 214, 150, .9); }
+[data-theme="light"] .series-dots a:is(.is-read, [aria-current="page"]) { box-shadow: 0 0 0 1px rgba(11, 16, 21, .25), 0 0 10px rgba(240, 180, 90, .8); }
