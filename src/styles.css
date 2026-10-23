@@ -1011,6 +1011,8 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   transition: border-color .3s ease, box-shadow .35s ease, translate .3s cubic-bezier(.22, 1, .36, 1);
 }
 .hero-actions .hero-reflections { --accent: var(--gold); }
+.hero-actions .hero-cv { --accent: #c9d3dd; grid-column: 1 / -1; }
+[data-theme="light"] .hero-actions .hero-cv { --accent: #56606b; }
 .hero-review:hover { border-color: var(--accent); box-shadow: 0 0 26px -8px color-mix(in srgb, var(--accent) 70%, transparent); translate: 0 -2px; }
 .hero-review-mast { grid-column: 2; font-weight: 800; font-size: 17px; letter-spacing: -0.01em; white-space: nowrap; }
 .hero-review-mast b { color: var(--blue); }
@@ -1047,6 +1049,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 @media (prefers-reduced-motion: no-preference) {
   .hero-bulb { animation: hero-bulb-breathe 4s ease-in-out infinite; }
   .hero-reflections .hero-bulb { animation-delay: -2s; }
+  .hero-cv .hero-bulb { animation-delay: -1s; }
 }
 @keyframes hero-bulb-breathe { 50% { box-shadow: 0 0 4px #fff, 0 0 10px rgba(255, 214, 150, .55), 0 0 18px rgba(255, 196, 120, .2); } }
 
@@ -4612,11 +4615,11 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .mobile-panel { display: none; }
 
 /* "Home" and "Start here" open the menu: they give way first when the header narrows, Home first (the brand leads
-   home too), then Start here, before the four places have to squeeze (the phone menu always lists them). */
-@media (max-width: 1240px) {
+   home too), then Start here, before the five places have to squeeze (the phone menu always lists them). */
+@media (max-width: 1300px) {
   .main-nav .nav-home { display: none; }
 }
-@media (max-width: 1040px) {
+@media (max-width: 1150px) {
   .main-nav .nav-start { display: none; }
 }
 /* Narrow desktops: the longer Albanian and German labels still fit on one line. */

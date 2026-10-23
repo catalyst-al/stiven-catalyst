@@ -5,7 +5,7 @@
 {%- set pageTitle = ((shortTitle + " | " + site.title) if (shortTitle | length) + 3 + (site.title | length) <= 60 else shortTitle) if shortTitle else (site.title + " | " + ("Leadership, Operations & Ideas" | t(lang))) -%}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set homeUrl = "/" | local(lang) -%}
-{#- The menu: "Home" and "Start here" for someone new, then four places: Writing, Tools, Publications and About
+{#- The menu: "Home" and "Start here" for someone new, then five places: Writing, Tools, CV, Publications and About
     (Projects lives under About). The third field of an item lists the pages it is active on; the seventh is the
     little menu that opens under it on hover or keyboard focus, so what is inside shows without opening the page:
     [address, name, line under it, colour of its planet]. "Home" and "Start here" give way first when the header is
@@ -33,6 +33,14 @@
   ["/guides/tools-guide.html" | local(lang), toolsGuide[ml].title, ""],
   ["/downloads.html" | local(lang), "Downloads" | t(lang), ""]
 ] -%}
+{#- The career tools have their own place, so the CV is one click away from every page, not only at the end of the
+    homepage. -#}
+{%- set cvPages = ["/tools/cv-builder/" | local(lang), "/tools/ats-cv/" | local(lang), "/tools/cover-letter/" | local(lang)] -%}
+{%- set cvMenu = [
+  [cvPages[0], "CV Builder" | t(lang), ""],
+  [cvPages[1], "ATS CV" | t(lang), ""],
+  [cvPages[2], "Cover Letter" | t(lang), ""]
+] -%}
 {%- set aboutMenu = [
   ["/about.html" | local(lang), "About" | t(lang), ""],
   ["/projects.html" | local(lang), "Projects" | t(lang), ""],
@@ -43,6 +51,7 @@
   ["/start.html" | local(lang), "Start here" | t(lang), null, null, null, "nav-start"],
   ["/writing.html" | local(lang), "Writing" | t(lang), writingPages, "writing", writingStamp, null, writingMenu],
   ["/tools.html" | local(lang), "Tools" | t(lang), null, null, null, null, toolsMenu],
+  [cvPages[0], "CV", cvPages, null, null, "nav-cv", cvMenu],
   ["/publications.html" | local(lang), "Publications" | t(lang), ["/publications.html" | local(lang), "/downloads.html" | local(lang)], "publications", pubStamp, null, pubMenu],
   ["/about.html" | local(lang), "About" | t(lang), ["/about.html" | local(lang), "/projects.html" | local(lang), "/contact.html" | local(lang)], null, null, null, aboutMenu]
 ] -%}
