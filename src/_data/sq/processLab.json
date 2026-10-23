@@ -1,0 +1,234 @@
+{
+  "storageKey": "sc-process-lab-sq",
+  "csv": "laboratori-i-procesit",
+  "example": {
+    "name": "Koha e ngarkimit",
+    "unit": "min",
+    "lsl": "30",
+    "usl": "50",
+    "target": "40",
+    "rows": [
+      "2026-09-14|38.4",
+      "2026-09-14|42.4",
+      "2026-09-14|39.9",
+      "2026-09-15|43.6",
+      "2026-09-15|43.1",
+      "2026-09-15|43.4",
+      "2026-09-16|39",
+      "2026-09-16|34.9",
+      "2026-09-16|42.6",
+      "2026-09-17|41",
+      "2026-09-17|39.4",
+      "2026-09-17|37.8",
+      "2026-09-18|42.3",
+      "2026-09-18|33.2",
+      "2026-09-18|42.9",
+      "2026-09-21|41.1",
+      "2026-09-21|43.2",
+      "2026-09-21|40.8",
+      "2026-09-22|41.2",
+      "2026-09-22|42.4",
+      "2026-09-22|41.4",
+      "2026-09-23|47.8",
+      "2026-09-23|56.4",
+      "2026-09-23|42",
+      "2026-09-24|43",
+      "2026-09-24|39.2",
+      "2026-09-24|39.7",
+      "2026-09-25|46.2",
+      "2026-09-25|41.5",
+      "2026-09-25|43.9",
+      "2026-09-28|42.4",
+      "2026-09-28|42.4",
+      "2026-09-28|46.9",
+      "2026-09-29|42.6",
+      "2026-09-29|41.2",
+      "2026-09-29|42.5",
+      "2026-09-30|45.5",
+      "2026-09-30|43.6",
+      "2026-09-30|46.8",
+      "2026-10-01|48.7",
+      "2026-10-01|41.4",
+      "2026-10-01|38",
+      "2026-10-02|42.3",
+      "2026-10-02|44.9",
+      "2026-10-02|40.8",
+      "2026-10-05|48.2",
+      "2026-10-05|29.6",
+      "2026-10-05|43.3",
+      "2026-10-06|49.3",
+      "2026-10-06|45",
+      "2026-10-06|41.1",
+      "2026-10-07|49.2",
+      "2026-10-07|47.1",
+      "2026-10-07|41.6",
+      "2026-10-08|47.7",
+      "2026-10-08|43",
+      "2026-10-08|37.3",
+      "2026-10-09|49.3",
+      "2026-10-09|44.7",
+      "2026-10-09|38.5"
+    ],
+    "proportion": {
+      "label1": "Para",
+      "label2": "Pas",
+      "d1": "104",
+      "n1": "18400",
+      "d2": "61",
+      "n2": "18200"
+    },
+    "means": {
+      "a": "47,2\n44,1\n49,5\n42,8\n46,3\n45,0\n50,1\n43,7\n48,4\n44,9\n41,6\n46,8\n45,5\n49,0\n43,2",
+      "b": "41,3\n39,8\n43,5\n40,2\n42,1\n38,7\n44,0\n40,9\n39,5\n42,6\n41,8\n37,9\n43,1\n40,4\n41,0"
+    },
+    "size": {
+      "p0": "0,57",
+      "p1": "0,34",
+      "alpha": "5",
+      "power": "80",
+      "sd": "4",
+      "delta": "2",
+      "alpha2": "5",
+      "power2": "80"
+    }
+  },
+  "placeholders": {
+    "values": "42,4\n39,9\n43,6\nose  14.09.2026\t42,4",
+    "name": "p.sh. Koha e ngarkimit",
+    "unit": "p.sh. min",
+    "before": "47,2\n44,1\n49,5",
+    "after": "41,3\n39,8\n43,5"
+  },
+  "rules": [
+    {
+      "id": 1,
+      "name": "Jashtë 3σ",
+      "signal": "Pika {n} ({value}) është jashtë kufirit 3σ.",
+      "text": "Një matje shumë jashtë kufijve. Diçka ishte ndryshe për atë një: gjeje sa njerëzit ende e mbajnë mend."
+    },
+    {
+      "id": 2,
+      "name": "Zhvendosje",
+      "signal": "{n} pika radhazi në të njëjtën anë të mesatares (pikat {from}–{to}).",
+      "text": "Niveli ka lëvizur. Pas një ndryshimi që bëre, kjo është prova që funksionoi; pa ndonjë ndryshim, gjej çfarë ndryshoi."
+    },
+    {
+      "id": 3,
+      "name": "Prirje",
+      "signal": "{n} pika radhazi, secila më {direction} se e mëparshmja (pikat {from}–{to}).",
+      "text": "Diçka po rrëshqet: konsumim, një vonesë që rritet, lodhje ose një ndryshim i ngadaltë në përzierje."
+    },
+    {
+      "id": 4,
+      "name": "Dhëmbë sharre",
+      "signal": "{n} pika radhazi që ngjiten dhe zbresin me radhë (pikat {from}–{to}).",
+      "text": "Lart, poshtë, lart, poshtë: zakonisht dy rrjedha të matura me radhë (dy turne, dy rampa, dy operatorë), ose rregullim i tepërt pas çdo vlere."
+    },
+    {
+      "id": 5,
+      "name": "2 nga 3 jashtë 2σ",
+      "signal": "2 nga 3 pika jashtë 2σ në të njëjtën anë (pikat {from}–{to}).",
+      "text": "Një zhvendosje e vogël që ende nuk e ka kaluar kufirin. Trajtoje si paralajmërim të hershëm dhe shiko ato pika."
+    },
+    {
+      "id": 6,
+      "name": "4 nga 5 jashtë 1σ",
+      "signal": "4 nga 5 pika jashtë 1σ në të njëjtën anë (pikat {from}–{to}).",
+      "text": "Procesi anon nga njëra anë. Shpesh një ndryshim në hyrje, në personel ose në orën e ditës."
+    },
+    {
+      "id": 7,
+      "name": "Shumë i qetë",
+      "signal": "{n} pika radhazi brenda 1σ nga mesatarja (pikat {from}–{to}).",
+      "text": "Më pak variacion se ç'tregon ky proces: matja mund të mos i shohë ndryshimet, ose dy rrjedha e mesatarizojnë njëra-tjetrën."
+    },
+    {
+      "id": 8,
+      "name": "Përzierje",
+      "signal": "{n} pika radhazi jashtë 1σ në të dyja anët, asnjë pranë mesatares (pikat {from}–{to}).",
+      "text": "Vlerat kërcejnë mes dy niveleve: dy procese janë përzier në një kartë. Ndaji (sipas turnit, rampës, produktit) dhe bëj kartë për secilin."
+    }
+  ],
+  "directions": {
+    "up": "e lartë",
+    "down": "e ulët"
+  },
+  "control": {
+    "stable": "Asnjë sinjal në {n} matje. Ngritjet dhe uljet janë zhurma normale e këtij procesi; reagimi ndaj vlerave të veçanta nuk ndihmon. Për një numër më të mirë, ndrysho vetë procesin.",
+    "signals": "{count} sinjal(e) që nuk janë zhurmë normale. Heto në fillim ato matje: çfarë ishte ndryshe në vëllim, njerëz, pajisje ose metodë? Pastaj çoje shkakun te 5 Whys.",
+    "short": "Më pak se 20 matje: kufijtë janë të përafërt. Vazhdo të masësh para se t'i besosh një sinjali ose një indeksi aftësie."
+  },
+  "capability": {
+    "none": "Shkruaj një kufi specifikimi (LSL ose USL) për të parë sa i aftë është procesi.",
+    "low": {
+      "label": "Jo i aftë",
+      "text": "Cpk {cpk}: procesi nuk mund të qëndrojë brenda specifikimit. Prit rreth {ppm} për milion jashtë ({pct}). Ul shpërndarjen ose zhvendos mesataren para se dikush t'i premtojë klientit."
+    },
+    "marginal": {
+      "label": "Në kufi",
+      "text": "Cpk {cpk}: përshtatet, por mezi. Prit rreth {ppm} për milion jashtë ({pct}); një zhvendosje e vogël të çon mbi kufi. Mbaje kartën në punë."
+    },
+    "capable": {
+      "label": "I aftë",
+      "text": "Cpk {cpk}: procesi hyn në specifikim me rezervë. Prit rreth {ppm} për milion jashtë ({pct}). Mbaje standardin dhe kontrollo kartën çdo javë."
+    },
+    "six": {
+      "label": "Six Sigma",
+      "text": "Cpk {cpk}: specifikimi është dy herë më i gjerë nga ç'i duhet procesit. Prit rreth {ppm} për milion jashtë. Përqendroje përpjekjen diku tjetër."
+    },
+    "gap": "Cp {cp} por Cpk {cpk}: shpërndarja do të hynte, procesi nuk është në qendër. Zhvendosja e mesatares drejt {target} fiton më shumë se ulja e variacionit.",
+    "shortLong": "Pp/Ppk ({pp}/{ppk}) janë shumë nën Cp/Cpk: procesi zhvendoset mes matjeve. Sinjalet në kartë tregojnë ku."
+  },
+  "normality": {
+    "normal": "Vlerat ndjekin një kurbë normale (Anderson-Darling, {p}): indekset e aftësisë dhe përqindja e pritur jashtë janë të besueshme.",
+    "notNormal": "Vlerat nuk ndjekin një kurbë normale (Anderson-Darling, {p}): lexoji Cp, Cpk dhe përqindjen e pritur jashtë si të përafërta. Shiko histogramin: një bisht i gjatë zakonisht do të thotë pritje ose ripunim në disa raste; dy kodra do të thotë dy procese të përziera.",
+    "outliers": "{n} pika(t) jashtë kufijve tërheqin skajet. Pa to mostra është {verdict} ({p}). Shpjego në fillim ato pika, pastaj gjyko pjesën tjetër.",
+    "normalWord": "normale",
+    "notNormalWord": "ende jo normale",
+    "few": "Më pak se 8 matje: ende asnjë test normaliteti nuk ka kuptim."
+  },
+  "drift": "Në të gjithë mostrën vlerat rrëshqasin me {slope} {unit} për pikë (r = {r}). Një rrëshqitje e ngadaltë nuk është ende sinjal, por do të bëhet.",
+  "proportion": {
+    "real": "Ndryshimi nga {p1} në {p2} është real ({p}): mundësia që të jetë zhurmë është më pak se {chance}. Intervali 95% për diferencën: {low} deri {high}.",
+    "noise": "Ndryshimi nga {p1} në {p2} mund të jetë zhurmë ({p}): me këta numra, një diferencë e kësaj madhësie ndodh rastësisht rreth {chance} të rasteve. Mat më shumë para se ta quash përmirësim, ose problem.",
+    "borderline": "Ndryshimi nga {p1} në {p2} është ndoshta real ({p}), por jo pa dyshim: mundësia që të jetë zhurmë është rreth {chance}. Edhe një javë të dhënash do ta zgjidhte.",
+    "oneInWords": "1 në {n}",
+    "better": "më mirë",
+    "worse": "më keq"
+  },
+  "means": {
+    "real": "Mesatarja lëvizi nga {m1} në {m2} ({diff}): reale (Welch t = {t}, {p}). Intervali 95% për ndryshimin: {low} deri {high}.",
+    "noise": "Mesatarja lëvizi nga {m1} në {m2} ({diff}), por kjo mund të jetë zhurmë ({p}): dy mostrat mbivendosen shumë për ta thënë. Mat më shumë ose ul shpërndarjen.",
+    "borderline": "Mesatarja lëvizi nga {m1} në {m2} ({diff}): ndoshta reale ({p}), ende jo pa dyshim. Disa matje më shumë në secilën anë do ta zgjidhnin.",
+    "need": "Ngjit të paktën dy vlera në secilën anë."
+  },
+  "size": {
+    "alpha": "Alfa është rreziku për të parë një ndryshim që nuk ekziston: 5% do të thotë një alarm i rremë në njëzet teste.",
+    "power": "Fuqia është mundësia për të parë një ndryshim që ekziston: 80% do të thotë që një ndryshim real të shpëton një herë në pesë.",
+    "proportionResult": "Mat {n} njësi para dhe {n} pas për të dalluar {p0} nga {p1}.",
+    "meanResult": "Mat {n} vlera para dhe {n} pas për të parë një ndryshim prej {delta} {unit} kur vlerat e veçanta shpërndahen me {sd}.",
+    "need": "Shkruaj dy norma të ndryshme, alfën dhe fuqinë."
+  },
+  "tips": [
+    [
+      "Mat para se të ndryshosh.",
+      "Njëzet vlera të procesit të vjetër janë e vetmja provë që ndryshimi yt funksionoi. Fillo kartën sot."
+    ],
+    [
+      "Kufijtë vijnë nga procesi, specifikimet nga klienti.",
+      "Kufijtë e kontrollit tregojnë çfarë bën procesi; LSL dhe USL tregojnë çfarë duhet. Një proces i qëndrueshëm mund të jetë prapë i keq."
+    ],
+    [
+      "Ndiq sinjalet, jo vlerat.",
+      "Një vlerë brenda kufijve është zhurmë, sado e keqe të duket. Një rregull Nelson është arsye për të shkuar në terren."
+    ],
+    [
+      "p nuk është provë, por i mbyll debatet.",
+      "p = 0,002 do të thotë që një diferencë e kësaj madhësie ndodh rastësisht 2 herë në 1.000. Vendos me numrin, pastaj vepro."
+    ],
+    [
+      "Shpjego vlerat e jashtëzakonshme para se t'i fshish.",
+      "Një kamion që priti dy orë është real. Gjej historinë e tij; vetëm atëherë vendos nëse i përket mostrës."
+    ]
+  ]
+}

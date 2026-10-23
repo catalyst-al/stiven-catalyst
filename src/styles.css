@@ -9604,6 +9604,94 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
   .db-grid .dl-panel { break-inside: avoid; }
   .db-letter { color: #000; }
 }
+/* ===== Process Lab (js/process-lab.js, js/stats-kit.js) =====
+   Three tabs (measurements, before/after, sample size), each a quiet form; the verdicts are sentences with a bold
+   word, and the state colour on a verdict only repeats what the word says. */
+.pl-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 14px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pl-tabs::-webkit-scrollbar { display: none; }
+.pl-tab {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pl-tab[aria-selected="true"] { border-bottom-color: var(--blue); color: var(--ink); }
+.pl-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.pl-panel { display: grid; gap: 18px; }
+.pl-panel[hidden] { display: none; }
+.pl-example-note { margin: 0 0 14px; }
+
+.pl-help { margin: 0; }
+.pl-entry { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+.pl-entry textarea { width: 100%; min-height: 220px; font-family: var(--mono, ui-monospace, monospace); font-size: 14px; font-variant-numeric: tabular-nums; }
+.dl-grid.pl-spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pl-spec .pl-wide { grid-column: 1 / -1; }
+.pl-spec .optional { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+
+.pl-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.pl-pair textarea { width: 100%; font-variant-numeric: tabular-nums; }
+.pl-side { display: grid; gap: 8px; padding: 12px 14px; border: 1px solid var(--line); border-radius: calc(var(--radius) - 6px); background: var(--paper-2); }
+.pl-side-label { margin: 0; color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.dl-grid.pl-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dl-grid.pl-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.pl-out { display: grid; gap: 14px; min-width: 0; }
+.pl-out:empty { display: none; }
+.pl-stats { margin: 0; }
+.pl-hint { margin: 0; }
+.pl-verdict-card {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--muted);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--card);
+  color: var(--ink);
+  line-height: 1.5;
+}
+.pl-verdict-card.is-real { border-left-color: var(--ok); }
+.pl-verdict-card.is-borderline { border-left-color: var(--warn); }
+.pl-size-text { margin: 0; color: var(--ink); }
+.pl-out .dl-stat { max-width: 260px; }
+.pl-explain { display: grid; gap: 6px; color: var(--muted); font-size: 14px; }
+.pl-explain p { margin: 0; }
+
+.pl-card .pl-verdict { margin: 0; font-size: 17px; line-height: 1.45; }
+.pl-signals { display: grid; gap: 8px; margin: 4px 0 6px; padding-left: 20px; }
+.pl-signals li { line-height: 1.45; }
+.pl-signal-why { color: var(--muted); }
+.pl-table th { text-align: left; white-space: nowrap; }
+.pl-table td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .pl-entry { grid-template-columns: minmax(0, 1fr); }
+  .pl-entry textarea { min-height: 160px; }
+  .dl-grid.pl-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .pl-pair { grid-template-columns: minmax(0, 1fr); }
+  .pl-tab { padding: 10px 10px; font-size: 14px; }
+}
+@media print {
+  /* The measurements print as their results; the before/after and sample-size tabs print as they stand. */
+  .pl-setup .tool-aside, .pl-tabs, .pl-example-note, .pl-results .tool-actions { display: none !important; }
+  .pl-setup:has(+ .pl-results:not([hidden])) { display: none !important; }
+  .pl-results .dl-panel, .pl-card { break-inside: avoid; }
+}
 /* ===== Time Study (js/time-study.js) =====
    Stations with their elements as compact rows, a stopwatch with one large number, the Yamazumi and the element table.
    The type of an element (VA, NVA, W) is told by its letters; the colour only repeats it. */
