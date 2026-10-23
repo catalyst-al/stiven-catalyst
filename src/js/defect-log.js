@@ -1,5 +1,5 @@
 (() => {
-  // Shared by Damage Control and Incomplete Control. Each page supplies its
+  // Shared by Damage Control, Incomplete Control and the Night Audit Log. Each page supplies its
   // fields, wording, advice and example in #defect-log-data. The fields are
   // always shift, stage, type and cause, in that order.
   const root = document.querySelector("[data-defect-log]");
@@ -392,7 +392,7 @@
   const paretoTable = () => ({
     // The tool's name as the page shows it (the title in the browser tab is written for search engines).
     source: data.text?.title || document.querySelector("h1")?.textContent.replace(/\u00ad/g, "").trim() || document.title.split("|")[0].trim(),
-    template: KEY.includes("damage") ? "damage" : "picking-errors",
+    template: data.paretoTemplate || (KEY.includes("damage") ? "damage" : "picking-errors"),
     headers: [tx("Date"), fields.find((f) => f.name === "shift")?.label || "Shift", fields.find((f) => f.name === "stage")?.label || "Stage",
       fields.find((f) => f.name === "type")?.label || "Type", fields.find((f) => f.name === "cause")?.label || "Cause", tx("Units"), tx("Cost (€)")],
     rows: periodRows().map((row) => [row.date, row.shift, row.stage, row.type, row.cause, String(row.units), row.cost == null ? "" : String(row.cost)]),

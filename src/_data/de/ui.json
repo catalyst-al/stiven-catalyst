@@ -42,6 +42,8 @@
   "Counts only. A shift that handles more volume will log more {noun}, so compare with its share of the work.": "Nur Anzahlen. Eine Schicht mit mehr Volumen erfasst auch mehr Fälle. Vergleichen Sie deshalb mit ihrem Anteil an der Arbeit.",
   "Date": "Datum",
   "Download CSV": "CSV herunterladen",
+  "Download Excel": "Excel herunterladen",
+  "Works offline too: once a tool has been opened on this device, it and the other tools of its role open without a connection.": "Funktioniert auch offline: Ist ein Tool auf diesem Gerät einmal geöffnet worden, öffnen sich dieses und die anderen Tools seiner Rolle auch ohne Verbindung.",
   "Each cell counts {many}. The darkest cell is the most specific place to look.": "Jede Zelle zählt {many}. Die dunkelste Zelle zeigt am genauesten, wo Sie hinschauen sollten.",
   "Enter at least one {one}.": "Bitte eine Anzahl von mindestens 1 eingeben.",
   "First moves": "Erste Schritte",
@@ -2176,5 +2178,15 @@
   "{n} situations": "{n} Situationen",
   "{n} reflections": "{n} Reflexionen",
   "{n} notes": "{n} Notizen",
-  "Homepage": "Startseite"
+  "Homepage": "Startseite",
+  "Put the countermeasure on the handover": "Maßnahme in die Übergabe aufnehmen",
+  "Write the countermeasure first, then put it on the handover.": "Schreiben Sie zuerst die Maßnahme, dann nehmen Sie sie in die Übergabe auf.",
+  "Carried over {n} shifts: {text}": "{n} Schichten lang mitgenommen: {text}",
+  "Night Audit Log": "Night-Audit-Protokoll",
+  "“{text}” is already an open issue here.": "„{text}“ ist hier schon ein offener Punkt.",
+  "Added from 5 Whys as an open issue: “{text}”.": "Aus 5 Whys als offener Punkt aufgenommen: „{text}“.",
+  "{kpi} is red; the diagnostic points to {cause}.": "{kpi} ist rot; die Diagnose zeigt auf {cause}.",
+  "{kpi} is red; no single cause stands out in the diagnostic.": "{kpi} ist rot; in der Diagnose sticht keine einzelne Ursache heraus.",
+  "Every night": "Jede Nacht",
+  "In a hotel, log every exception the night audit finds, with its stage and cause, before the audit closes.": "Im Hotel: Erfassen Sie jede Abweichung, die das Night Audit findet, mit Schritt und Ursache, bevor das Audit abgeschlossen wird."
 }

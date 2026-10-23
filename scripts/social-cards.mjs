@@ -228,13 +228,16 @@ const save = async (html, file) => {
   await tab.screenshot({ path: file, type: "jpeg", quality: 88 });
 };
 
+// TOOLS=night-audit,pareto makes only those tools' cards and the Tools card (its count changed); the roles and the
+// homepage are left as they are.
+const wanted = process.env.TOOLS ? new Set(process.env.TOOLS.split(",")) : null;
 let made = 0;
 for (const [lang, { tools }] of Object.entries(LANGS)) {
   const dir = path.join(ROOT, "src/media/social", lang);
   for (const family of families) {
     for (const url of [...family.tools, ...family.learn]) {
       const tool = tools.find((item) => item.url === local(url, lang));
-      if (!tool) continue;
+      if (!tool || (wanted && !wanted.has(slugOf(url)))) continue;
       await save(page({
         color: family.color,
         drawing: art[family.learn.includes(url) ? "learn" : family.id](),
@@ -245,6 +248,7 @@ for (const [lang, { tools }] of Object.entries(LANGS)) {
       }), path.join(dir, `${slugOf(url)}.jpg`));
       made += 1;
     }
+    if (wanted) continue;
     await save(page({
       color: family.color,
       drawing: art[family.id](),
@@ -268,6 +272,7 @@ for (const [lang, { tools }] of Object.entries(LANGS)) {
 }
 // The homepage (and every page without its own image): the real hero, the Catalyst light with the
 // families on their orbits, photographed from the built site at 1200 × 630 without the header and buttons.
+if (wanted) { await browser.close(); console.log(`${made} cards written to src/media/social/`); process.exit(0); }
 execSync("npx @11ty/eleventy --quiet", { cwd: ROOT, stdio: "inherit" });
 const SITE = path.join(ROOT, "_site");
 const TYPES = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".png": "image/png", ".jpg": "image/jpeg" };

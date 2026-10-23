@@ -109,6 +109,9 @@
 {% include "partials/structured-data.njk" %}
 {%- endif %}
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  {#- The site as an app on a phone or desktop (manifest.webmanifest, with sw.js registered from the tool pages by js/offline.js). #}
+  <link rel="manifest" href="/manifest.webmanifest">
   <script>{{ themeScript | safe }}</script>
   <script type="speculationrules">{{ speculationRules | safe }}</script>
   <link rel="stylesheet" href="{{ '/styles.css' | assetUrl }}">
@@ -185,6 +188,9 @@
 {% include "partials/work-backup.njk" %}
 {% include "partials/family-more.njk" %}
 <script src="{{ '/js/tool-fold.js' | assetUrl }}" defer></script>
+{%- endif %}
+{%- if toolFamily or page.url | enPath == "/tools.html" %}
+<script src="{{ '/js/offline.js' | assetUrl }}" defer></script>
 {%- endif %}
 </main>
 

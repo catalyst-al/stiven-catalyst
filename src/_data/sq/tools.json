@@ -40,6 +40,14 @@
     "cta": "Hap regjistrin e linjave"
   },
   {
+    "name": "Regjistri i Night Audit",
+    "type": "Hotel",
+    "time": "Në vazhdim",
+    "summary": "Regjistro no-show-et, kartat e refuzuara, gabimet e postimit dhe bilancet e hapura që gjen night audit. Shiko shkallën e përjashtimeve, DPMO dhe nivelin sigma, shkaqet pas shumicës së tyre dhe ku në qëndrim nisin.",
+    "url": "/sq/tools/night-audit/",
+    "cta": "Hap regjistrin e auditit"
+  },
+  {
     "name": "Sigma dhe karta e kontrollit",
     "type": "Six Sigma",
     "time": "5 min",

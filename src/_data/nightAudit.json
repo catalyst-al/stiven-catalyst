@@ -1,0 +1,216 @@
+{
+  "storageKey": "sc-night-audit",
+  "paretoTemplate": "billing-errors",
+  "text": {
+    "tool": "Night Audit Log",
+    "one": "exception",
+    "many": "exceptions",
+    "allNoun": "exceptions",
+    "volumeNoun": "reservations",
+    "volumeLabel": "Reservations handled",
+    "volumePlaceholder": "e.g. 1260",
+    "targetLabel": "Target exception %",
+    "targetPlaceholder": "e.g. 2",
+    "rateLabel": "Exception rate",
+    "complement": { "label": "Clean reservations", "note": "closed without an exception" },
+    "periodPlaceholder": "e.g. Week 38, front office",
+    "entryLegend": "Log an exception",
+    "countLabel": "Reservations affected",
+    "countShort": "reservations",
+    "notePlaceholder": "e.g. Room 412, card declined twice, guest reached by phone",
+    "pasteRow": "One row per exception",
+    "pastePlaceholder": "2026-09-14\tNight\tPayment\tCard declined\tNo guarantee\t1\t189",
+    "empty": "No exceptions logged yet.",
+    "stageTitle": "Where it is found",
+    "stageNote": "In the order of the stay, from the booking to the close of the audit.",
+    "stagePhrase": "found at",
+    "matrixTitle": "Stage and exception type",
+    "csv": "night-audit-log",
+    "tips": [
+      [
+        "Log it the night you find it.",
+        "The audit is the one moment the whole day is checked. An exception written the next morning has lost its room number, its time and its reason."
+      ],
+      [
+        "Count reservations, not euros.",
+        "One no-show is one reservation, whatever the rate. The lost revenue goes in the cost box, so both are kept."
+      ],
+      [
+        "Add the reservations handled.",
+        "Without the arrivals and in-house reservations of the day you see counts; with them you get a rate, DPMO and sigma level, and a week with 300 arrivals compares with a week with 120."
+      ]
+    ],
+    "checkTitle": "Does the audit standard hold?",
+    "checkIntro": "Tick what was actually done tonight, not what the night audit procedure says. Every unticked line is a place where an exception can start, or where one is found too late."
+  },
+  "fields": [
+    {
+      "name": "shift",
+      "label": "Shift",
+      "options": [
+        "Early",
+        "Late",
+        "Night"
+      ]
+    },
+    {
+      "name": "stage",
+      "label": "Stage",
+      "options": [
+        "Booking",
+        "Arrival",
+        "In-house",
+        "Payment",
+        "Departure",
+        "Audit close"
+      ]
+    },
+    {
+      "name": "type",
+      "label": "Exception type",
+      "options": [
+        "No-show",
+        "Card declined",
+        "Posting error",
+        "Rate mismatch",
+        "Missing registration",
+        "Open balance",
+        "Other"
+      ]
+    },
+    {
+      "name": "cause",
+      "label": "Cause",
+      "options": [
+        "Booking data",
+        "No guarantee",
+        "Handover gap",
+        "System",
+        "Guest",
+        "Training",
+        "Unknown"
+      ]
+    }
+  ],
+  "stages": {
+    "Booking": {
+      "meaning": "An exception found at the booking stage was born before the guest arrived: a rate, a date or a guarantee that was wrong in the reservation and nobody read it before the night.",
+      "moves": [
+        "Check tomorrow's arrivals during the evening shift: rate, guarantee, special requests, and fix what is wrong while the booking source can still be reached.",
+        "Keep “arrived with a wrong booking” apart from “booked wrong here” in the log, so the channel or the agent that sends the errors can be shown the numbers.",
+        "Share the booking errors with reservations and sales every week, with the reservation numbers."
+      ],
+      "question": "Who reads tomorrow's arrivals before the night, and what do they check?"
+    },
+    "Arrival": {
+      "meaning": "At check-in the guest is in front of the desk: a missing registration card, a guarantee not taken or a no-show not released starts here, at the busiest hour of the evening.",
+      "moves": [
+        "Make the registration card and the card guarantee the first two steps of every check-in, before the key is cut.",
+        "Release the no-shows at a fixed time, with the cancellation policy applied the same way every night.",
+        "Walk the arrivals list at the end of the late shift: every expected guest is either in-house, a no-show or a cancellation, never still “expected”."
+      ],
+      "question": "What does the desk do when a guest arrives without a valid card during the evening rush?"
+    },
+    "In-house": {
+      "meaning": "Exceptions in-house are postings: a breakfast, a minibar or a parking fee on the wrong room, a rate that did not roll over, a charge posted twice.",
+      "moves": [
+        "Compare the postings of the day with the outlets' own lists before the audit runs, not after the invoice is printed.",
+        "Post to the room, not to the name: two guests with the same name are the oldest posting error there is.",
+        "Check the rate code of every in-house room against the reservation once a night; a changed rate shows up here first."
+      ],
+      "question": "Which outlet's postings land on the wrong room most often, and at which hour?"
+    },
+    "Payment": {
+      "meaning": "A declined card, a virtual card that fails or a pre-authorisation that was never taken: money that the hotel will chase tomorrow instead of having tonight.",
+      "moves": [
+        "Pre-authorise every card at check-in and record the authorisation code on the reservation.",
+        "Charge virtual cards on arrival, not at departure; a failed VCC is reported to the booking channel the same night.",
+        "Keep a list of the declined cards with the guest's reply, so the morning shift knows who to ask and what was already tried."
+      ],
+      "question": "Which reservations go to sleep tonight with no valid payment behind them?"
+    },
+    "Departure": {
+      "meaning": "At check-out the exception becomes visible to the guest: an open balance, a dispute over a posting, an invoice with the wrong address or company.",
+      "moves": [
+        "Prepare the invoices of tomorrow's departures during the night audit and read each one once.",
+        "Settle the open balances of the day before the audit closes, or name who follows up and by when.",
+        "Ask for the invoice address at check-in, when the guest has time, not at the taxi."
+      ],
+      "question": "How many of tomorrow's invoices have been read by someone before the guest sees them?"
+    },
+    "Audit close": {
+      "meaning": "Found at the close of the audit means found by the system, not by a person: an unbalanced report, a room without a rate, a posting that would not roll over.",
+      "moves": [
+        "Run the pre-audit checks an hour before the close, so what they find can still be fixed tonight.",
+        "Keep the reasons the audit would not balance in the log, with the room: the same three usually return.",
+        "Close with a short written note to the morning shift: what was fixed, what stays open and who owns it."
+      ],
+      "question": "What stopped the audit from closing cleanly this week, and how often was it the same thing?"
+    }
+  },
+  "causes": {
+    "Booking data": "The booking itself was wrong: rate, dates, guarantee or guest details. Show the booking source its own numbers every week; most errors come from one or two channels.",
+    "No guarantee": "A reservation without a valid card or a prepayment is a no-show waiting to happen. Make the guarantee a condition of the booking, not a request at check-in.",
+    "Handover gap": "The late shift knew and the night did not, or the night knew and the morning did not. Put it on the shift handover, with a name and a time.",
+    "System": "Rate codes, interfaces and the audit itself fail in patterns. Write down the exact error and the room; a vendor fixes what is documented.",
+    "Guest": "The guest did not show, did not pay or disputed a charge. Record what was agreed with them, so the next shift does not start the conversation again.",
+    "Training": "The posting was made by hand and made wrong. Watch the step once with the person, then fix the step: a checklist at the desk beats a reminder in the meeting.",
+    "Unknown": "A large Unknown share means the log is not yet good enough. Record stage and cause at the moment the exception is found, during the audit."
+  },
+  "checklist": [
+    "Tomorrow's arrivals were checked during the evening: rate, guarantee and special requests.",
+    "Every expected guest is in-house, a no-show or a cancellation; nobody is still “expected”.",
+    "No-shows were released at the agreed time, with the cancellation policy applied the same way.",
+    "Every in-house room has a valid rate code and a registration card on file.",
+    "Every card was pre-authorised at check-in and the authorisation is on the reservation.",
+    "Virtual cards of today's arrivals were charged tonight, and the failed ones reported to the channel.",
+    "Postings of the day were compared with the outlets' lists before the audit ran.",
+    "Tomorrow's invoices were prepared and read once during the night.",
+    "The pre-audit checks ran before the close, and what they found was fixed or handed over.",
+    "The morning shift has a written note: what was fixed, what stays open and who owns it."
+  ],
+  "example": {
+    "period": "Example week",
+    "volume": 1260,
+    "target": 2,
+    "rows": [
+      "2026-09-14|Night|Arrival|No-show|No guarantee|3|417",
+      "2026-09-14|Late|Payment|Card declined|No guarantee|2|298",
+      "2026-09-14|Night|In-house|Posting error|Training|1|",
+      "2026-09-14|Night|Audit close|Rate mismatch|System|1|",
+      "2026-09-15|Night|Arrival|No-show|No guarantee|2|258",
+      "2026-09-15|Late|Arrival|Missing registration|Handover gap|1|",
+      "2026-09-15|Night|Payment|Card declined|Booking data|1|149",
+      "2026-09-15|Early|Departure|Open balance|Guest|1|62",
+      "2026-09-16|Night|Arrival|No-show|No guarantee|4|552",
+      "2026-09-16|Night|In-house|Posting error|Handover gap|2|",
+      "2026-09-16|Late|Booking|Rate mismatch|Booking data|1|",
+      "2026-09-16|Night|Payment|Card declined|No guarantee|1|139",
+      "2026-09-17|Night|Arrival|No-show|No guarantee|2|276",
+      "2026-09-17|Night|Payment|Card declined|Guest|2|318",
+      "2026-09-17|Early|Departure|Open balance|Handover gap|1|45",
+      "2026-09-17|Night|In-house|Posting error|Training|1|",
+      "2026-09-18|Night|Arrival|No-show|No guarantee|5|705",
+      "2026-09-18|Late|Arrival|Missing registration|Training|2|",
+      "2026-09-18|Night|Payment|Card declined|No guarantee|2|278",
+      "2026-09-18|Night|Audit close|Rate mismatch|System|1|",
+      "2026-09-18|Night|In-house|Posting error|Unknown|1|",
+      "2026-09-19|Night|Arrival|No-show|Booking data|2|238",
+      "2026-09-19|Late|Payment|Card declined|No guarantee|1|119",
+      "2026-09-19|Early|Departure|Open balance|Guest|2|96",
+      "2026-09-19|Night|Booking|Rate mismatch|Booking data|1|",
+      "2026-09-20|Night|Arrival|No-show|No guarantee|1|129",
+      "2026-09-20|Night|In-house|Posting error|Handover gap|1|",
+      "2026-09-20|Early|Departure|Open balance|Guest|1|38"
+    ],
+    "volumes": [
+      "2026-09-14|190",
+      "2026-09-15|180",
+      "2026-09-16|170",
+      "2026-09-17|200",
+      "2026-09-18|210",
+      "2026-09-19|160",
+      "2026-09-20|150"
+    ]
+  }
+}
