@@ -1370,6 +1370,37 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .pub-list [data-pub]:nth-child(3n + 2) .book-object-cover { animation-delay: -2s; }
   .pub-list [data-pub]:nth-child(3n) .book-object-cover { animation-delay: -4s; }
 }
+/* The rows of what Publications holds, at the top of the page: each in its series' colour, the downloads with a
+   small stack of files in place of a cover. */
+.pub-hub-item { --series: var(--blue); }
+.pub-hub-item[data-series="treatise"] { --series: color-mix(in srgb, var(--blue) 50%, var(--red)); }
+.pub-hub-item[data-series="floor"] { --series: var(--red); }
+.pub-hub-item[data-series="books"] { --series: var(--ok); }
+.pub-hub-item[data-series="downloads"] { --series: var(--gold); }
+.pub-hub .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  margin: 0 10px 0 0;
+  border-radius: 3px;
+  background: var(--series);
+  vertical-align: .28em;
+  transition: width .45s cubic-bezier(.22, 1, .36, 1);
+}
+.pub-hub .list-row:hover .kicker::before { width: 38px; }
+.pub-files .book-object-cover {
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  aspect-ratio: 210 / 297;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 22%, #10161e), #0b1016);
+  color: var(--gold);
+  font: 800 13px/1 var(--sans);
+  letter-spacing: .12em;
+  text-align: center;
+}
+.pub-newest-heading { padding-top: 64px; }
 .pub-archives { display: flex; flex-wrap: wrap; gap: 14px 34px; padding: 6px 0 70px; }
 @media (max-width: 900px) {
   .pub-list .list-row { grid-template-columns: minmax(0, 1fr) 84px; gap: 10px 18px; }

@@ -12,6 +12,39 @@
 {%- set ml = lang or "en" %}
 {%- set P = publications[ml] %}
 {%- import "partials/issue-filter.njk" as filter %}
+{#- First, what Publications holds: each series, the book, the guide and the downloads as one row, the way Writing
+    lists its kinds (pages/writing.njk): how many there are, the name, its line, and its newest cover as a small
+    floating book at the end of the row. Under them, the newest of each series month by month. -#}
+{%- set hubBook = books[ml] or books.sq %}
+{%- set D = downloads[ml] %}
+  <section class="shell listing pub-list pub-hub" aria-label="{{ 'Publications' | t(lang) }}">
+  {%- for key, url, count, kicker, title, line, cover in [
+    ["review", "/magazine/management-review.html" | local(lang), "{n} issues" | t(lang) | replace("{n}", weekly.issues | length), weekly[ml].archive.eyebrow, weekly.name, weekly[ml].tagline, magazinePages[weekly.latest.slug][ml].pages[0]],
+    ["treatise", "/magazine/operational-treatise.html" | local(lang), "{n} volumes" | t(lang) | replace("{n}", treatise.volumes | length), treatise[ml].archive.eyebrow, treatise[ml].short, treatise[ml].archive.lede, magazinePages[treatise.latest.slug][ml].pages[0]],
+    ["floor", "/magazine/from-the-floor.html" | local(lang), "{n} issues" | t(lang) | replace("{n}", magazine.issues | length), magazine.archive[ml].eyebrow, magazine.names[ml].name, magazine.names[ml].tagline, magazinePages[magazine.latest.slug][ml].pages[0]],
+    ["books", "/books/mall-per-durresin.html" | local(lang), "{n} pages" | t(lang) | replace("{n}", hubBook.pageCount), ("The book · in Albanian" if hubBook.language == "sq" else "The book · translated from the Albanian") | t(lang), hubBook.title, "Seven chapters about growing up in Durrës: friends, the leaving and the coming back. Leaf through it page by page, like a real book." | t(lang), hubBook.pages[0]],
+    ["books", "/guides/tools-guide.html" | local(lang), "{n} pages" | t(lang) | replace("{n}", toolsGuidePages[ml].pageCount), "The guide · Edition {n}" | t(lang) | replace("{n}", toolsGuide.edition), toolsGuide[ml].title, "Why the tools are a solar system, what each family is for, and how to use every tool, step by step. Leaf through it page by page, or download the PDF." | t(lang), toolsGuidePages[ml].pages[0]],
+    ["downloads", "/downloads.html" | local(lang), "PDF · MP3", D.eyebrow, D.heading, D.lede, null]
+  ] %}
+    <div class="pub-hub-item" data-series="{{ key }}">
+    <a class="list-row pub-row" href="{{ url }}">
+      <span class="number">{{ count }}</span>
+      <div><p class="kicker">{{ kicker }}</p><h2>{{ title }}</h2><p>{{ line }}</p></div>
+      {%- if cover %}
+      <span class="pub-thumb" aria-hidden="true"><span class="book-object-cover"><img src="{{ cover.image }}" srcset="{{ cover.image | srcsetFor }}" sizes="120px" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="lazy"></span></span>
+      {%- else %}
+      <span class="pub-thumb pub-files" aria-hidden="true"><span class="book-object-cover"><b>PDF</b><b>MP3</b></span></span>
+      {%- endif %}
+    </a>
+    </div>
+  {%- endfor %}
+  </section>
+  <div class="shell section-heading pub-newest-heading">
+    <div>
+      <p class="kicker">{{ "Month by month" | t(lang) }}</p>
+      <h2>{{ "The newest of each series" | t(lang) }}</h2>
+    </div>
+  </div>
   <section class="shell publications-filter" aria-label="{{ P.kinds }}">
     {{ filter.controls(publications.months, publications.kinds, ml, P, P.kinds, "[data-pub]") }}
   </section>
