@@ -3647,5 +3647,87 @@
     }
    ]
   }
+ },
+ "operational-treatise-vol-07": {
+  "en": {
+   "pageCount": 32,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-07/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-07/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 32,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-07/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-07/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 32,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-07/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-07/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "operational-treatise-vol-08": {
+  "en": {
+   "pageCount": 31,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-08/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-08/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 31,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-08/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-08/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 31,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/operational-treatise-vol-08/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/operational-treatise-vol-08/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
  }
 }

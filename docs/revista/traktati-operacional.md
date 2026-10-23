@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -253,6 +253,110 @@ për faqen në tri gjuhët (`lib/treatise/volumes/06.js`). Blloku: Operacioni. 3
 | IHI: matje rezultati, procesi, balancimi | `ihi-establishing-measures` | Faqja hapet (200) |
 | NIST 6.3.1 (grafikët e kontrollit), 6.3.3.2 (p-grafikët); UCL = p₀ + 3√[p₀(1−p₀)/n] | `nist-control-charts`, `nist-p-chart` | Faqet hapen (200); formula si te 6.3.3.2 |
 | 80/60/10/30; p-grafiku 1,5% / 2,65% / 0,35% / 2,3%; 90→100, 40→80, 85,5→83,3 | të shpikura | Flamur "sintetik"; llogaritë të rikontrolluara |
+
+## Vëllimi 7: Kostoja e heshtjes, pse ekipet e vijës së parë pushojnë së foluri (23 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 7, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/07.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Të gjashtë kapitujt e PDF-së kanë skenë, shpjegim dhe protokoll, prandaj struktura
+  e kapitujve është e njëjtë. U shtua një faqe modeli te Kapitulli I ("Ku humbet dija rrugës për lart"), grafik
+  hipotetik me 20 → 14 → 9 → 6 → 5 → 3, që e vizaton zinxhirin pesëfazësh të Morrison & Milliken-it të cilin PDF-ja
+  vetëm e përshkruan (faqja e vet ka vetëm hinkën e Kapitullit V); dhe faqja e metodës, si te vëllimet e tjera.
+- **Grafikët.** Dy, hipotetikë me flamur: zinxhiri i sipërm 20/14/9/6/5/3 (Kap. I, i ri) dhe hinka e PDF-së
+  12/9/7/5/3/2 (Kap. V, "Raised / Acknowledged / Assigned / Action started / Told back / Verified closed"). Numrat e
+  studimeve (51, 40, 89, 9) janë blloqe `stat`/`stats` me burim, jo grafikë.
+- **Rrjedha pesëfazëshe** (Vër re, Vlerëso, Fol, Merr, Vepro) e Kapitullit I dhe kuadri pesëhapësh (Fto, Mbro,
+  Verifiko, Vendos, Kthe) i Kapitullit VI mbeten si te PDF-ja, si `chain` dhe `rows`.
+- **Një mospërputhje citimi.** PDF-ja (faqja 5) e citon ilustrimin si "informed by Tucker & Edmondson (2003) and
+  Tucker (2004)", por Tucker (2004) nuk është në listën e dhjetë burimeve të PDF-së. Faqja citon vetëm Tucker &
+  Edmondson (2003) dhe e shënon te metoda.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Edmondson 1999, 51 ekipe në një kompani
+  prodhimi; Milliken, Morrison & Hewlin 2003, 40 intervista; Tucker & Edmondson 2003, infermierë në 9 spitale; Nembhard &
+  Edmondson 2006, 23 NICU (shifra 1.440 e të anketuarve qarkullon vetëm në burime dytësore, nuk u përdor); Detert &
+  Burris 2007, 3.149 punonjës dhe 223 menaxherë në një zinxhir restorantesh, hapja menaxheriale më e qëndrueshme se
+  drejtimi transformues, siguria psikologjike ndërmjetëson; Detert & Treviño 2010, 89 intervista në një kompani
+  teknologjike shumëkombëshe (njësi prodhimi dhe R&D); Liang, Farh & Farh 2012, 239 punonjës, dy valë, siguria
+  psikologjike parashikon zërin ndalues; Frazier et al. 2017, 136 mostra, mbi 22.000 individë, afro 5.000 grupe
+  (online 2016, vëll. 70 i 2017). Asnjë gabim faktik në PDF.
+- **Burimet.** Katër ekzistonin (`edmondson-1999`, `boss-milliken-2003` që është Milliken, Morrison & Hewlin 2003,
+  `tucker-edmondson-2003`, `frazier-2017`); u shtuan gjashtë: Morrison & Milliken 2000, Nembhard & Edmondson 2006,
+  Detert & Burris 2007, Detert & Treviño 2010, Liang, Farh & Farh 2012, Morrison 2014. Të dhjetë DOI-të e PDF-së
+  zgjidhen në Crossref me të njëjtët autorë, revista dhe vite.
+- **Lidhjet me faqen.** Esetë: gemba (Kap. I), teams-with-many-languages (Kap. II),
+  leading-people-without-losing-the-person (Kap. III), why-the-handover-is-underrated (Kap. IV),
+  solve-it-or-escalate-it (Kap. V), the-operations-manager-i-want-to-be (Kap. VI). Mjeti: Shift Handover (Karta e
+  sinjalit ndan strukturën "e vëzhguar / e raportuar / përgjegjësi / e kthyer si përgjigje").
+- **Çfarë u ndryshua nga PDF-ja.** Vija kohore e provës (2 javë / 1 muaj) e Kapitullit VI u fut në paragraf, se
+  protokolli me gjashtë hapa plus vijën kohore nuk hynte në A5; tekstet u shkurtuan që të hyjnë në A5 (DE del ~15% më
+  e gjatë). "The editor" u bë "the author".
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Siguria psikologjike: bindje e përbashkët se ekipi është i sigurt për rreziqe ndërpersonale; 51 ekipe, një kompani prodhimi | `edmondson-1999`, DOI 10.2307/2666999 | Si te Nr. 1 |
+| Heshtja organizative si fenomen kolektiv; kuadër konceptual | `morrison-milliken-2000`, DOI 10.2307/259200 | DOI hapet, AMR 25(4) |
+| 40 punonjës të intervistuar; frika nga etiketat negative dhe marrëdhëniet e dëmtuara | `boss-milliken-2003`, DOI 10.1111/1467-6486.00387 | Ekzistonte |
+| Infermierë në 9 spitale; rimëkëmbja nuk sjell vetvetiu të mësuar | `tucker-edmondson-2003` | Ekzistonte |
+| 23 NICU; gjithëpërfshirja e drejtuesit, statusi profesional, siguria psikologjike | `nembhard-edmondson-2006`, DOI 10.1002/job.413 | DOI hapet, JOB 27(7) |
+| 3.149 punonjës, 223 menaxherë; hapja menaxheriale, siguria ndërmjetësuese | `detert-burris-2007`, DOI 10.5465/amj.2007.26279183 | DOI hapet, AMJ 50(4); abstrakti përputhet |
+| 89 intervista; mbikëqyrësit dhe drejtuesit disa nivele më lart | `detert-trevino-2010`, DOI 10.1287/orsc.1080.0405 | DOI hapet, Org. Sci. 21(1); abstrakti përputhet |
+| 239 punonjës, dy valë; zëri promovues dhe ndalues | `liang-farh-farh-2012`, DOI 10.5465/amj.2010.0176 | DOI hapet, AMJ 55(1); abstrakti përputhet |
+| Rishikimi i zërit dhe heshtjes; kotësia si rrezik më vete | `morrison-2014`, DOI 10.1146/annurev-orgpsych-031413-091328 | DOI hapet, ARIOP 1 |
+| 136 mostra, >22.000 individë, ~5.000 grupe | `frazier-2017` | Ekzistonte; abstrakti përputhet |
+| 20/14/9/6/5/3 dhe 12/9/7/5/3/2 | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
+
+## Vëllimi 8: Iluzioni i trajnimit, pse të shohësh punën nuk do të thotë të jesh gati ta bësh (23 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 8, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/08.js`). Blloku: Operacioni. 31 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Një faqe më shumë se PDF-ja.** Të gjashtë kapitujt kanë skenë, shpjegim dhe protokoll si te PDF-ja; u shtua vetëm
+  faqja e metodës, si te vëllimet e tjera. Shënimi kërkimor, mjeti, eseja e mbylljes dhe burimet mbeten faqe të veta.
+- **Grafikët.** Dy, me të dhëna të botuara dhe me burim (jo hipotetikë): efektet e Keith & Frese 2008, d = 0,44 /
+  0,56 / 0,80 (Kap. IV, shkallë deri në 0,80) dhe efektet e Arthur et al. 2003, d = 0,60 / 0,63 / 0,62 / 0,62 me k =
+  15 / 234 / 122 / 26 (Kap. V, shkallë deri në 0,63), siç i vizaton PDF-ja. Të dyja faqet thonë se vlerat janë vlerësime
+  të bashkuara nga nëngrupe të ndryshme, jo norma gatishmërie.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Taylor, Russ-Eft & Chan 2005, 117 studime,
+  gjashtë lloje rezultatesh, efektet më të mëdha te të mësuarit, më të vogla te sjellja dhe rezultatet, pikat e të
+  mësuarit si rregulla dhe skenarët e të trajnuarve lidhen me transferim më të mirë; Keith & Frese 2008, 24 studime, N
+  = 2.183, d = 0,44, transferimi pas trajnimit 0,56, adaptiv 0,80; Arthur et al. 2003, katër d dhe k-të siç më lart;
+  Blume et al. 2010, 89 studime; Baldwin & Ford 1988, përgjithësim dhe ruajtje. Asnjë gabim faktik në PDF. Vitet:
+  Blume 2010 (online 2009, vëll. 36(4) 2010) dhe Sitzmann & Weinhardt 2018 (online 2015, vëll. 44(2) 2018), si te
+  PDF-ja.
+- **Burimet.** Asnjëri nuk ekzistonte; u shtuan të dhjetë: Baldwin & Ford 1988, Arthur et al. 2003, Taylor et al.
+  2005, Burke & Hutchins 2007, Keith & Frese 2008, Aguinis & Kraiger 2009, Blume et al. 2010, Grossman & Salas 2011,
+  Salas et al. 2012, Sitzmann & Weinhardt 2018. Të dhjetë DOI-të zgjidhen në Crossref me të njëjtët autorë, revista,
+  vëllime dhe faqe.
+- **Konteksti i dokumentuar.** Skena e Kapitullit II (nata e trajnimit e kufizuar nga një përditësim sistemi) është e
+  vetmja me kontekst të vërtetë; eseja the-night-the-system-went-down e tregon atë natë dhe lidhet aty. Front Desk
+  Control përmendet si referencë e autorit, pa efekt të matur.
+- **Lidhjet me faqen.** Esetë: watch-how-i-do-it-is-not-training (Kap. I), the-night-the-system-went-down (Kap. II),
+  how-i-built-front-desk-control (Kap. III), high-volume-days (Kap. IV), when-a-new-system-arrives (Kap. V),
+  a-good-sop-is-not-a-document (Kap. VI). Mjeti: 5 Whys Worksheet, për hapin "rishiko personin dhe sistemin".
+- **Çfarë u ndryshua nga PDF-ja.** Tekstet e protokolleve V dhe VI u shkurtuan që të hyjnë në A5; "the editors" u
+  bë "editorial". Asgjë tjetër.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Transferimi = përgjithësim + ruajtje; karakteristikat e të trajnuarit, projektimi, mjedisi | `baldwin-ford-1988`, DOI 10.1111/j.1744-6570.1988.tb00632.x | DOI hapet, PP 41(1) |
+| d = 0,60 (k = 15), 0,63 (k = 234), 0,62 (k = 122), 0,62 (k = 26) | `arthur-2003`, DOI 10.1037/0021-9010.88.2.234 | Abstrakti përputhet |
+| 117 studime; efektet më të mëdha te të mësuarit, pastaj sjellja, pastaj rezultatet | `taylor-russ-eft-chan-2005`, DOI 10.1037/0021-9010.90.4.692 | Abstrakti përputhet |
+| Rishikim integrues i transferimit | `burke-hutchins-2007`, DOI 10.1177/1534484307303035 | DOI hapet, HRDR 6(3) |
+| 24 studime, N = 2.183, d = 0,44 / 0,56 / 0,80 | `keith-frese-2008`, DOI 10.1037/0021-9010.93.1.59 | Abstrakti përputhet |
+| Dobitë e trajnimit për individë, ekipe, organizata, shoqëri | `aguinis-kraiger-2009`, DOI 10.1146/annurev.psych.60.110707.163505 | DOI hapet, ARP 60 |
+| 89 studime empirike; motivimi dhe mjedisi mbështetës | `blume-2010`, DOI 10.1177/0149206309352880 | DOI hapet, JOM 36(4) |
+| Mbështetja, mundësia për të performuar, ndjekja | `grossman-salas-2011`, DOI 10.1111/j.1468-2419.2011.00373.x | DOI hapet, IJTD 15(2) |
+| Para / gjatë / pas programit | `salas-2012`, DOI 10.1177/1529100612436661 | DOI hapet, PSPI 13(2) |
+| Angazhimi në trajnim në shumë nivele dhe në kohë | `sitzmann-weinhardt-2018`, DOI 10.1177/0149206315574596 | DOI hapet, JOM 44(2) |
+| "Dhjetë vëzhgime" te piloti | editoriale | Thuhet shprehimisht ilustrim, jo madhësi mostre |
 
 ## Si shtohet një vëllim
 
