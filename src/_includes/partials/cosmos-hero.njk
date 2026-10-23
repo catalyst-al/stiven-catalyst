@@ -32,8 +32,9 @@
             <small>{{ "Personal essays" | t(lang) }} · <span>{{ "{n} reflections" | t(lang) | replace("{n}", reflectionCount) }}</span></small>
             <span class="hero-review-arrow" aria-hidden="true">→</span>
           </a>
-          {#- And the CV, in the silver of Atlas (the career orbit), across the width under the two. -#}
-          <a class="hero-review hero-cv" href="{{ '/tools/cv-builder/' | local(lang) }}">
+          {#- And the CV, in the silver of Atlas (the career orbit), across the width under the two: it opens the CV page,
+              which lists the three tools, as the CV item of the menu does. -#}
+          <a class="hero-review hero-cv" href="{{ '/cv.html' | local(lang) }}">
             <i class="hero-bulb" aria-hidden="true"></i>
             <span class="hero-review-mast">{{ "Build your CV" | t(lang) }}</span>
             <small>{{ "CV Builder" | t(lang) }} · {{ "ATS CV" | t(lang) }} · {{ "Cover Letter" | t(lang) }}</small>
