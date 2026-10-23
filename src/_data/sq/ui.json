@@ -2193,5 +2193,9 @@
   "{kpi} is red; the diagnostic points to {cause}.": "{kpi} është e kuqe; diagnoza tregon te {cause}.",
   "{kpi} is red; no single cause stands out in the diagnostic.": "{kpi} është e kuqe; në diagnozë nuk dallon asnjë shkak i vetëm.",
   "Every night": "Çdo natë",
-  "In a hotel, log every exception the night audit finds, with its stage and cause, before the audit closes.": "Në hotel, regjistro çdo përjashtim që gjen night audit, me hapin dhe shkakun, para se të mbyllet auditi."
+  "In a hotel, log every exception the night audit finds, with its stage and cause, before the audit closes.": "Në hotel, regjistro çdo përjashtim që gjen night audit, me hapin dhe shkakun, para se të mbyllet auditi.",
+  "Three ways to the next role: a designed CV, a plain CV that application software reads, and the cover letter that goes with them.": "Tri rrugë drejt rolit të ardhshëm: një CV e dizajnuar, një CV e thjeshtë që e lexojnë programet e aplikimit, dhe letra e motivimit që shkon me to.",
+  "Designed, on A4": "E dizajnuar, në A4",
+  "For application software": "Për programet e aplikimit",
+  "Matches your CV": "Përputhet me CV-në"
 }
