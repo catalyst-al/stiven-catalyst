@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "FMEA", "type": "Risk", "time": "30 min", "summary": "Write down how each process step can fail, rate severity, occurrence and detection, and get the RPN and the AIAG-VDA action priority. A heat map, the top ten risks and the actions with owners until the re-rating shows the risk is gone.", "url": "/tools/fmea/", "cta": "Open the sheet" },
+    "de": { "name": "FMEA", "type": "Risiko", "time": "30 Min.", "summary": "Halten Sie fest, wie jeder Prozessschritt versagen kann, bewerten Sie Bedeutung, Auftreten und Entdeckung und erhalten Sie RPZ und AIAG-VDA-Aufgabenpriorität. Heatmap, die zehn größten Risiken und die Maßnahmen mit Verantwortlichen bis zur Neubewertung.", "url": "/de/tools/fmea/", "cta": "Blatt öffnen" },
+    "sq": { "name": "FMEA", "type": "Rrezik", "time": "30 min", "summary": "Shkruaj si mund të dështojë çdo hap i procesit, vlerëso rëndësinë, shpeshtësinë dhe zbulimin, dhe merr RPN-në dhe prioritetin e veprimit AIAG-VDA. Hartë rreziku, dhjetë rreziqet kryesore dhe veprimet me përgjegjës deri te rivlerësimi.", "url": "/sq/tools/fmea/", "cta": "Hap fletën" }
+  },
+  "routine": { "when": "When a process changes", "do": "Walk the changed steps with the team, rate each failure mode and give every high-priority row an action with an owner and a date.", "de": { "when": "Wenn sich ein Prozess ändert", "do": "Gehen Sie die geänderten Schritte mit dem Team durch, bewerten Sie jede Fehlerart und geben Sie jeder Zeile mit hoher Priorität eine Maßnahme mit Verantwortlichem und Termin." }, "sq": { "when": "Kur ndryshon një proces", "do": "Kalo hapat e ndryshuar me ekipin, vlerëso çdo mënyrë dështimi dhe jepi çdo rreshti me prioritet të lartë një veprim me përgjegjës dhe afat." } },
+  "recipe": "example"
+}

@@ -1,0 +1,176 @@
+{
+  "storageKey": "sc-fmea-sq",
+  "text": {
+    "tool": "FMEA",
+    "csv": "fmea",
+    "processPlaceholder": "p.sh. Dalja e mallit: mbledhja, paketimi, ngarkimi",
+    "ownerPlaceholder": "p.sh. Anna Berg, përgjegjëse e daljes së mallit",
+    "revisionPlaceholder": "p.sh. A",
+    "actionPlaceholder": "Çfarë ndryshon shkakun ose kontrollin",
+    "empty": "Ende asnjë mënyrë dështimi."
+  },
+  "status": { "open": "Hapur", "done": "Kryer" },
+  "ap": { "H": "E lartë", "M": "Mesatare", "L": "E ulët" },
+  "columns": {
+    "step": "Hapi i procesit",
+    "function": "Funksioni / kërkesa",
+    "mode": "Mënyra e mundshme e dështimit",
+    "effect": "Efekti i mundshëm i dështimit",
+    "s": "Rëndësia (S)",
+    "cause": "Shkaku i mundshëm",
+    "o": "Shpeshtësia (O)",
+    "prevention": "Kontrolli aktual parandalues",
+    "detection": "Kontrolli aktual zbulues",
+    "d": "Zbulimi (D)",
+    "rpn": "RPN",
+    "ap": "Prioriteti i veprimit (AP)",
+    "crit": "Kritikaliteti (S×O)",
+    "action": "Veprimi i rekomanduar",
+    "owner": "Përgjegjësi",
+    "due": "Afati",
+    "status": "Statusi",
+    "s2": "S pas veprimit",
+    "o2": "O pas veprimit",
+    "d2": "D pas veprimit",
+    "rpn2": "RPN pas veprimit"
+  },
+  "scales": {
+    "S": {
+      "name": "Rëndësia",
+      "question": "Sa i rëndë është efekti për klientin ose për njerëzit kur dështimi ndodh?",
+      "levels": [
+        ["Asnjë", "Asnjë efekt i dukshëm."],
+        ["Shumë e vogël", "Një shqetësim i lehtë që e vënë re pak veta."],
+        ["E vogël", "Një shqetësim i vogël që e vënë re shumica; pa ripunim."],
+        ["Shumë e ulët", "Pak ripunim ose një vonesë e shkurtër brenda turnit."],
+        ["E ulët", "Ripunim ose një porosi e vonuar; klienti e vë re."],
+        ["Mesatare", "Një dorëzim i dëmtuar ose i paplotë; ankesë dhe ridërgim."],
+        ["E lartë", "Procesi ndalon ose kërkon shumë ripunim; mund të humbet një klient."],
+        ["Shumë e lartë", "Shërbimi dështon për shumë klientë njëherësh."],
+        ["E rrezikshme, me paralajmërim", "Shkelje e sigurisë ose e rregullores që shfaqet paraprakisht."],
+        ["E rrezikshme, pa paralajmërim", "Lëndim ose shkelje e rregullores pa asnjë paralajmërim."]
+      ]
+    },
+    "O": {
+      "name": "Shpeshtësia",
+      "question": "Sa shpesh ky shkak çon te dështimi, me procesin ashtu siç funksionon sot?",
+      "levels": [
+        ["E largët", "Praktikisht e përjashtuar; askush s'e ka parë."],
+        ["Shumë e ulët", "Disa herë në vit."],
+        ["E ulët", "Rreth një herë në muaj."],
+        ["Mesatarisht e ulët", "Disa herë në muaj."],
+        ["Mesatare", "Rreth një herë në javë."],
+        ["Mesatarisht e lartë", "Disa herë në javë."],
+        ["E lartë", "Rreth një herë në turn."],
+        ["Shumë e lartë", "Disa herë në turn."],
+        ["Shumë e lartë, e përsëritur", "Disa herë në orë."],
+        ["Pothuajse e sigurt", "Ndodh pothuajse çdo herë që hapi kryhet."]
+      ]
+    },
+    "D": {
+      "name": "Zbulimi",
+      "question": "Sa e mundshme është që kontrollet e sotme ta kapin dështimin para se të arrijë te klienti?",
+      "levels": [
+        ["Pothuajse i sigurt", "Gabimi s'mund të kalojë hapin; bllokohet në burim."],
+        ["Shumë i lartë", "Një kontroll automatik te hapi e kap çdo herë."],
+        ["I lartë", "Një kontroll automatik në një hap të mëvonshëm e kap."],
+        ["Mesatarisht i lartë", "Një person i dytë e kontrollon te hapi."],
+        ["Mesatar", "Operatori e kontrollon me sy te hapi."],
+        ["I ulët", "Kontroll me sy në një hap të mëvonshëm, ose me mostër."],
+        ["Shumë i ulët", "Gjendet vetëm rastësisht ose në një auditim."],
+        ["I largët", "Gjendet vetëm pas procesit, nga departamenti tjetër."],
+        ["Shumë i largët", "Gjendet vetëm nga klienti."],
+        ["Nuk zbulohet", "Asnjë kontroll; nuk gjendet kurrë, ose gjendet shumë vonë."]
+      ]
+    }
+  },
+  "templates": [
+    {
+      "id": "warehouse",
+      "name": "Magazinë, dalja e mallit",
+      "process": "Dalja e mallit: mbledhja, paketimi, ngarkimi",
+      "steps": [
+        ["Mbledhja", "Artikulli i duhur, sasia e duhur, koshi i duhur"],
+        ["Paketimi", "Kutia, mbushja dhe etiketa e duhur; pakoja e mbyllur dhe e skanuar"],
+        ["Ngarkimi", "Mur i qëndrueshëm në kamionin e duhur; dyert e mbyllura në kohë"]
+      ]
+    },
+    {
+      "id": "hotel",
+      "name": "Hotel: check-in dhe auditimi i natës",
+      "process": "Recepsioni: nga check-in te auditimi i natës",
+      "steps": [
+        ["Check-in", "Mysafiri i identifikuar, dhoma dhe tarifa e duhur, çelësat e dorëzuar"],
+        ["Garancia e pagesës", "Karta e autorizuar ose depozita e marrë për çdo qëndrim"],
+        ["Regjistrimi i faturave", "Çdo shërbim në folion e duhur, në ditën e duhur"],
+        ["Auditimi i natës", "Dita e mbyllur: no-show-t e faturuara, regjistrimet e kontrolluara, raportet e nxjerra"]
+      ]
+    },
+    {
+      "id": "delivery",
+      "name": "Rruga e dorëzimit",
+      "process": "Milja e fundit: ngarko, udhëto, dorëzo, kthehu",
+      "steps": [
+        ["Ngarkimi i furgonit", "Pakot sipas radhës së ndalesave, secila e skanuar në automjet"],
+        ["Udhëtimi te ndalesa", "Adresa e duhur, radha e planifikuar, drejtim i sigurt"],
+        ["Dorëzimi te dera", "Pakoja e duhur te personi i duhur, me provë dorëzimi"],
+        ["Kthimi në depo", "Pakot e padorëzuara të skanuara mbrapsht me një arsye"]
+      ]
+    }
+  ],
+  "advice": {
+    "H": {
+      "meaning": "Prioritet i lartë veprimi: ekipi duhet të gjejë një veprim që ul shpeshtësinë ose përmirëson zbulimin, ose të dokumentojë pse s'mundet. Rëndësia rrallë ndryshon; shkaku dhe kontrollet po.",
+      "moves": [
+        "Bini dakord këtë javë për një veprim me një përgjegjës dhe një datë; një dëshirë pa përgjegjës s'është veprim.",
+        "Parapëlqe një ndryshim që ndal shkakun (parandalim) ndaj një tjetri që e gjen dështimin më vonë (zbulim).",
+        "Kur veprimi kryhet, vlerëso sërish S, O dhe D në të njëjtin rresht dhe krahaso RPN-në."
+      ],
+      "question": "Çfarë duhet të ndryshojë në këtë hap që ky dështim të bëhet i pamundur?"
+    },
+    "M": {
+      "meaning": "Prioritet mesatar veprimi: ekipi duhet të kërkojë një veprim; nëse asnjë s'ia vlen, shkruaj pse rreziku pranohet, bashkë me kontrollet që e mbajnë aty ku është.",
+      "moves": [
+        "Kontrollo së pari kontrollin zbulues: një kontroll i lirë te hapi shpesh e zhvendos D-në me disa pikë.",
+        "Jepi veprimit një përgjegjës dhe një datë, ose regjistro vendimin për ta pranuar rrezikun.",
+        "Rivlerëso pas veprimit; një mesatar që bëhet i ulët e liron ekipin për tjetrin."
+      ],
+      "question": "Cilit kontroll i besojmë këtu, dhe kur e pamë për herë të fundit duke funksionuar?"
+    },
+    "L": {
+      "meaning": "Prioritet i ulët veprimi: s'kërkohet veprim. Ruaj kontrollet që janë dhe rishiko rreshtin kur procesi ndryshon.",
+      "moves": [
+        "Mbaji kontrollet parandaluese dhe zbuluese në punën standarde.",
+        "Rishiko vlerësimin kur ndryshon volumi, stafi ose planimetria.",
+        "Shpenzoje kohën e ekipit së pari te rreshtat e lartë dhe mesatarë."
+      ],
+      "question": "Cili kontroll e mban këtë rrezik të ulët, dhe është ende në vend sot?"
+    }
+  },
+  "example": {
+    "process": "Qendra e pakove, dalja e mallit, turni i pasdites",
+    "owner": "Anna Berg, përgjegjëse e daljes së mallit",
+    "revision": "B",
+    "daysAgo": 6,
+    "rows": [
+      { "step": "Ngarkimi", "function": "Mur i qëndrueshëm në kamion", "mode": "Pako të shtypura gjatë ngarkimit", "effect": "Mall i dëmtuar, ankesë, ridërgim", "s": 6, "cause": "Pako të rënda mbi të lehtat në orën e pikut", "o": 8, "prevention": "Standardi i stivimit në murin e rampës", "detection": "Asnjë, derisa stacioni i dorëzimit skanon dëmin", "d": 7, "action": "Zonë „të rëndat së pari“ te rampa dhe kontroll i murit para mbylljes së dyerve", "owner": "Marko", "dueIn": 10, "status": "open", "s2": 6, "o2": 3, "d2": 4 },
+      { "step": "Etiketimi", "function": "Një etiketë e saktë për çdo pako", "mode": "Etiketë e gabuar mbi pakon", "effect": "Drejtim i gabuar, dorëzim i vonuar, rietiketim", "s": 5, "cause": "Dy etiketa të printuara njëra pas tjetrës dhe të marra me radhë të gabuar", "o": 4, "prevention": "Printim sipas kërkesës te stacioni i paketimit", "detection": "Kontroll me skanim te sorteri", "d": 3, "action": "Printeri e lëshon etiketën vetëm pas skanimit të pakos", "owner": "Lea", "dueIn": 14, "status": "open" },
+      { "step": "Mbledhja", "function": "Artikulli dhe sasia e duhur", "mode": "Artikull që mungon në porosi", "effect": "Dorëzim i paplotë, ankesë", "s": 6, "cause": "Vend bosh në pozicion; mbledhësi e kalon", "o": 5, "prevention": "Rifurnizim para valës", "detection": "Kontroll i peshës te paketimi", "d": 4, "action": "Një mbledhje e paplotë kërkon një kod arsyeje; s'mund të kalohet", "owner": "Jonas", "dueIn": 7, "status": "done", "s2": 6, "o2": 2, "d2": 4 },
+      { "step": "Transferimi i karrocës", "function": "Karroca te linja e paketimit në kohën e valës", "mode": "Karroca mbërrin vonë te paketimi", "effect": "Stacion paketimi pa punë, valë e vonuar, cut-off i humbur", "s": 5, "cause": "Vetëm një ashensor i lirë në orën e pikut", "o": 7, "prevention": "Plani i valëve", "detection": "Mbikëqyrësi e sheh boshllëkun në sallë", "d": 6, "action": "Çelës i dytë ashensori dhe një shpërndarës karrocash nga ora 20:00", "owner": "Marko", "dueIn": 5, "status": "open" },
+      { "step": "Paketimi", "function": "Kutia dhe mbushja e duhur", "mode": "Kuti shumë e madhe, pa mbushje", "effect": "Artikull i dëmtuar gjatë transportit", "s": 5, "cause": "Madhësia e duhur e kutisë s'është te stacioni", "o": 5, "prevention": "Përzierje kutish për çdo stacion", "detection": "Asnjë", "d": 8, "action": "Madhësia e kutisë sipas grupit të artikujve e printuar në listën e paketimit", "owner": "Lea", "dueIn": 12, "status": "open" },
+      { "step": "Sortimi", "function": "Pakoja në kanalin e duhur", "mode": "Pako në kanalin e gabuar", "effect": "Drejtim i gabuar, dorëzim ditën tjetër", "s": 4, "cause": "Etiketë e rrudhur dhe e palexueshme", "o": 3, "prevention": "Kontroll i cilësisë së etiketës te paketimi", "detection": "Alarm no-read te sorteri", "d": 2, "action": "", "owner": "", "dueIn": null, "status": "open" },
+      { "step": "Ngarkimi", "function": "Dyert e mbyllura dhe të vulosura në kohë", "mode": "Kamioni niset pa kafazin e fundit", "effect": "Pako të mbetura në rampë, dorëzim i vonuar", "s": 7, "cause": "Ngarkuesit s'i është thënë numri i kafazeve", "o": 3, "prevention": "Numri i kafazeve në fletën e ngarkimit", "detection": "Dispeçeri kontrollon fletën para lëshimit", "d": 3, "action": "Fleta e ngarkimit e firmosur nga ngarkuesi dhe dispeçeri", "owner": "Dana", "dueIn": 9, "status": "open" },
+      { "step": "Ngarkimi", "function": "Punë e sigurt te rampa", "mode": "Transpaleta godet këmbën e një ngarkuesi", "effect": "Lëndim, kohë e humbur", "s": 9, "cause": "Karroca të parkuara në korsinë e ngushtë të rampës", "o": 3, "prevention": "Korsi të shënuara", "detection": "Raundi i mbikëqyrësit çdo dy orë", "d": 7, "action": "Zonë parkimi për karrocat e shënuar me shirit; asnjë karrocë në korsi", "owner": "Anna", "dueIn": 3, "status": "open", "s2": 9, "o2": 2, "d2": 5 },
+      { "step": "Skanimi në hyrje", "function": "Çdo pako e skanuar në mbërritje", "mode": "Pako hyrëse e paskanuar", "effect": "Pako e padukshme, cut-off i humbur, klienti i painformuar", "s": 5, "cause": "Bateria e skanerit mbaron në mes të turnit", "o": 4, "prevention": "Plani i karikimit", "detection": "Numërim kundrejt manifestit", "d": 5, "action": "Një skaner rezervë për çdo portë", "owner": "Jonas", "dueIn": 7, "status": "done", "s2": 5, "o2": 2, "d2": 5 },
+      { "step": "Paketimi", "function": "Artikujt e brishtë të shënuar dhe të mbrojtur", "mode": "Artikull i brishtë i paketuar pa mbrojtje", "effect": "Artikull i thyer, rimbursim", "s": 6, "cause": "Shenja „i brishtë“ mungon në sistem", "o": 4, "prevention": "Shenja sipas kodit të artikullit", "detection": "Asnjë", "d": 9, "action": "Shëno këtë javë 50 kodet më të brishta", "owner": "Lea", "dueIn": 6, "status": "open" },
+      { "step": "Nisja", "function": "Manifesti i mbyllur para nisjes", "mode": "Manifesti i mbyllur pasi kamioni u nis", "effect": "Pako të pagjurmueshme për një ditë", "s": 3, "cause": "Dispeçeri mbulon dy porta në orën e pikut", "o": 5, "prevention": "Një dispeçer për çdo portë pas orës 21:00", "detection": "Alarm i sistemit kur nisja ndodh para manifestit", "d": 2, "action": "", "owner": "", "dueIn": null, "status": "open" },
+      { "step": "Ngarkimi", "function": "Ngarkesa e siguruar", "mode": "Kafazi i pakyçur në kamion", "effect": "Kafazi rrokulliset, pako të shtypura, ngarkues i lënduar", "s": 8, "cause": "Shufra e kyçjes mungon në disa kamionë", "o": 3, "prevention": "Kontroll i kamionit te porta", "detection": "Kontrolli rrethues i shoferit", "d": 4, "action": "Kamionët pa shufër kyçjeje refuzohen te porta", "owner": "Dana", "dueIn": 14, "status": "open" }
+    ]
+  },
+  "tips": [
+    ["Vlerëso shkakun, jo personin.", "Shpeshtësia tregon sa shpesh shkaku çon te dështimi me procesin ashtu siç funksionon sot, pavarësisht kush është në turn."],
+    ["Zbulimi ka të bëjë me kontrollet e sotme.", "Vlerëso mundësinë që ajo që ke tani e kap gabimin para klientit, jo kontrollin që ke ndërmend të shtosh."],
+    ["AP para RPN.", "Dy rreshta me të njëjtën RPN mund të kenë urgjencë të ndryshme: një rëndësi 9 me shpeshtësi të ulët merr gjithsesi një veprim. Lexo së pari AP-në, pastaj RPN-në."],
+    ["Rivlerëso pas veprimit.", "Ky është qëllimi i fletës: kur veprimi kryhet, vlerëso sërish S, O dhe D në të njëjtin rresht dhe shiko ku është rreziku tani."]
+  ]
+}

@@ -9837,6 +9837,114 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
   .pl-setup:has(+ .pl-results:not([hidden])) { display: none !important; }
   .pl-results .dl-panel, .pl-card { break-inside: avoid; }
 }
+/* ===== FMEA (js/fmea.js) =====
+   The sheet as a grid that scrolls sideways inside its box, the ratings as lists, the action priority as a chip whose
+   letter and word carry the meaning (the colour only repeats it), and the whole sheet in landscape on paper. */
+.fm-template { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+.fm-template .tool-actions { margin: 0; }
+.fm-scales summary { cursor: pointer; }
+.fm-scale-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px 20px; margin-top: 12px; }
+.fm-scale h3 { margin: 0 0 4px; font-size: 15px; }
+.fm-scale p { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+.fm-scale ol { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--muted); }
+.fm-scale strong { color: var(--ink); font-weight: 700; }
+
+.fm-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px 14px; margin: 0 0 12px; }
+.fm-controls .field label { font-size: 12px; }
+
+/* The grid: compact cells, every field the same quiet box. */
+.fm-grid-wrap { max-height: 640px; }
+.fm-grid td { padding: 6px; vertical-align: top; }
+.fm-grid thead th { padding: 9px 8px; white-space: normal; min-width: 60px; vertical-align: bottom; }
+.fm-in {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.fm-in:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.fm-grid textarea.fm-in { width: 150px; min-height: 52px; resize: vertical; white-space: pre-wrap; }
+.fm-grid textarea.fm-wide { width: 190px; }
+.fm-grid .fm-rate { width: 132px; }
+.fm-grid .fm-owner { width: 110px; }
+.fm-grid .fm-due { width: 140px; }
+.fm-grid .fm-status { width: 104px; }
+.fm-no { color: var(--muted); font-weight: 700; padding-top: 12px !important; }
+.fm-rpn { padding-top: 12px !important; }
+.fm-rpn strong { font-size: 15px; font-weight: 800; }
+.fm-red { display: block; color: var(--muted); font-size: 12px; font-weight: 600; }
+.fm-ap-cell { padding-top: 10px !important; }
+.fm-tools { display: flex; align-items: center; gap: 6px; padding-top: 8px !important; }
+.fm-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+.fm-grid tr.is-done .fm-in { color: var(--muted); }
+.fm-file { cursor: pointer; }
+.tool-actions:has(#fm-open:focus-visible) .fm-file { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* The action priority: the letter and its word, in the colour of the result it reports. */
+.fm-ap {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.fm-ap-h { border-color: color-mix(in srgb, var(--danger) 60%, transparent); color: var(--danger); }
+.fm-ap-m { border-color: color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
+.fm-ap-l { border-color: color-mix(in srgb, var(--ok) 60%, transparent); color: var(--ok); }
+
+/* Results. */
+.fm-meta { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.fm-results .dl-stats { margin-bottom: 18px; }
+.fm-key { display: grid; gap: 6px; margin: 12px 0 0; padding-left: 24px; font-size: 14px; }
+.fm-key small { color: var(--muted); }
+.fm-key .fm-ap { margin-left: 2px; }
+.fm-late { color: var(--ink); font-weight: 800; }
+.fm-actions-status { flex-basis: 100%; margin: 0; }
+.fm-paper { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.fm-paper button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+.fm-sheet { grid-column: 1 / -1; }
+.fm-sheet-table td { white-space: normal; min-width: 70px; max-width: 220px; vertical-align: top; }
+
+/* On a wide screen the number and the step stay in view while the grid scrolls sideways. */
+@media (min-width: 761px) {
+  .fm-grid :is(th, td):first-child { position: sticky; left: 0; z-index: 1; width: 40px; min-width: 40px; background: var(--card); }
+  .fm-grid :is(th, td):nth-child(2) { position: sticky; left: 40px; z-index: 1; background: var(--card); box-shadow: 1px 0 0 var(--line); }
+  .fm-grid thead :is(th):is(:first-child, :nth-child(2)) { z-index: 2; background: var(--paper-2); }
+}
+@media (max-width: 600px) {
+  .fm-template { grid-template-columns: minmax(0, 1fr); }
+  .fm-grid textarea.fm-in, .fm-grid textarea.fm-wide { width: 160px; }
+}
+
+/* Paper: the sheet in landscape, A4 or A3 as chosen under the result. */
+@page fm-a4 { size: A4 landscape; margin: 10mm; }
+@page fm-a3 { size: A3 landscape; margin: 10mm; }
+@media print {
+  .fm-setup, .fm-results .dl-focus, .fm-results .tool-actions, .fm-actions-status, body:has(.fm-results) .dl-example-note { display: none !important; }
+  .fm-paper-a4 { page: fm-a4; }
+  .fm-paper-a3 { page: fm-a3; }
+  .fm-results { padding: 0; border: 0; }
+  .fm-results .dl-result-grid { display: flex; flex-direction: column; gap: 14px; }
+  .fm-results .fm-sheet { order: -1; break-inside: auto; }
+  .fm-results .dl-table-wrap { max-height: none; overflow: visible; border: 0; }
+  .fm-sheet-table { font-size: 7.5pt; }
+  .fm-sheet-table :is(th, td) { padding: 3px 4px; min-width: 0; max-width: none; white-space: normal; border-bottom: 1px solid #bbb; }
+  .fm-sheet-table thead th { position: static; font-size: 6.5pt; letter-spacing: .04em; }
+  .fm-paper-a3 .fm-sheet-table { font-size: 9.5pt; }
+  .fm-paper-a3 .fm-sheet-table thead th { font-size: 8pt; }
+  .fm-sheet-table tr { break-inside: avoid; }
+  .fm-ap, .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 /* ===== Time Study (js/time-study.js) =====
    Stations with their elements as compact rows, a stopwatch with one large number, the Yamazumi and the element table.
    The type of an element (VA, NVA, W) is told by its letters; the colour only repeats it. */
