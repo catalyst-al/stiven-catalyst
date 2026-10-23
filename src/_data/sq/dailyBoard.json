@@ -1,0 +1,118 @@
+{
+  "storageKey": "sc-daily-board-sq",
+  "title": "Tabela e ditës",
+  "shifts": ["Mëngjes", "Pasdite", "Natë"],
+  "months": ["Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"],
+  "letters": [
+    {
+      "key": "S",
+      "name": "Siguria",
+      "sources": "Kryqi i sigurisë, Auditi 5S ose me dorë",
+      "red": "Një aksident ose një rast ndihme të parë atë ditë.",
+      "amber": "Një incident i shmangur për pak, një gjendje e pasigurt ose një audit 5S nën objektiv.",
+      "green": "Një ditë pa incident, sapo Kryqi i sigurisë është në përdorim."
+    },
+    {
+      "key": "Q",
+      "name": "Cilësia",
+      "sources": "Kontrolli i dëmeve, Kontrolli i plotësisë, Regjistri i Night Audit",
+      "red": "Dëme, porosi të paplota ose përjashtime auditi mbi shkallën objektiv. Pa volum: një numër dukshëm mbi ditën e zakonshme.",
+      "amber": "Brenda 20 % të objektivit, ose mbi numrin e zakonshëm.",
+      "green": "Asgjë e regjistruar, ose një shkallë nën objektiv."
+    },
+    {
+      "key": "D",
+      "name": "Dorëzimi",
+      "sources": "Analiza e vonesave",
+      "red": "Linja në kohë nën objektiv.",
+      "amber": "Brenda 5 pikëve të objektivit. Kur janë regjistruar vetëm disa linja: linja të vonuara mbi të zakonshmen.",
+      "green": "Në kohë në objektiv ose mbi të."
+    },
+    {
+      "key": "C",
+      "name": "Kostoja",
+      "sources": "Me dorë",
+      "red": "Çfarë vendos ti, për shembull orë shtesë mbi objektivin ditor ose staf agjencie i paplanifikuar.",
+      "amber": "Orë shtesë ose kosto shtesë që mbetën brenda objektivit, por duan një fjalë.",
+      "green": "Një ditë brenda planit."
+    },
+    {
+      "key": "P",
+      "name": "Njerëzit",
+      "sources": "Me dorë",
+      "red": "Mungesa mbi objektivin, ose një turn që punoi me staf të pakët.",
+      "amber": "Një mungesë e mbuluar, një punonjës i ri, një mangësi trajnimi.",
+      "green": "Të gjithë prezent, të gjithë të trajnuar për punën."
+    }
+  ],
+  "states": { "green": "E gjelbër", "amber": "E verdhë", "red": "E kuqe" },
+  "targets": [
+    { "key": "damage", "label": "Shkalla e dëmeve", "unit": "%", "placeholder": "p.sh. 0,3", "default": 0.3 },
+    { "key": "incomplete", "label": "Shkalla e porosive të paplota", "unit": "%", "placeholder": "p.sh. 0,5", "default": 0.5 },
+    { "key": "ontime", "label": "Linja në kohë", "unit": "%", "placeholder": "p.sh. 95", "default": 95 },
+    { "key": "fives", "label": "Rezultati 5S", "unit": "%", "placeholder": "p.sh. 80", "default": 80 },
+    { "key": "cost", "label": "Orë shtesë në ditë", "unit": "h", "placeholder": "p.sh. 8" },
+    { "key": "absence", "label": "Mungesa", "unit": "%", "placeholder": "p.sh. 5" }
+  ],
+  "safetyMessages": [
+    "Dy duar për metrat e fundit: mbaj, kurrë mos hidh.",
+    "Transpaleta ndalon në çdo fund korridori. Një njeri është më i shpejtë se sa mendon.",
+    "Dysheme e lagur: pastroje ose shënoje para se dikush të kalojë.",
+    "Raporto sot incidentin e shmangur për pak. Nesër është aksident.",
+    "Të rëndat poshtë, të lehtat lart, asgjë jashtë skajit.",
+    "Shiko lart para se të ngresh: trarë, sprinklera, kabllo.",
+    "Një derë që rri hapur në shi është një dysheme e lagur pas dhjetë minutash.",
+    "Siguro ngarkesën para se të mbyllen dyert, jo pas.",
+    "Dorezat për xhamin e thyer, metalin e grisur dhe dhomat e ftohta.",
+    "Nëse pajisja është e dëmtuar, hiqe nga përdorimi. Sot, jo pas turnit.",
+    "Ec, mos vrapo. Tri sekondat që kursen nuk vlejnë një rrëzim.",
+    "Punonjësi i ri nuk e di që shkurtoret janë të rrezikshme. Thuaja."
+  ],
+  "tips": [
+    ["Një tabelë, dhjetë minuta, në këmbë.", "Takimi lexohet, nuk shtypet. Hap tabelën, kalo nëpër pesë shkronjat, mbyll me veprimet."],
+    ["E kuqja është pyetje, jo faj.", "Një ditë e kuqe pyet çfarë ndodhi dhe kush e merr hapin tjetër. Kurrë nuk pyet kush e kishte fajin."],
+    ["Një e kuqe pa veprim është gënjeshtër.", "Çdo ditë e kuqe merr një veprim me përgjegjës dhe afat në Listën e veprimeve, përndryshe tabela zbukuron murin."],
+    ["Lëri regjistrat të punojnë.", "Siguria, Cilësia dhe Dorëzimi mbushen vetë nga Kontrolli i dëmeve, Kontrolli i plotësisë, Analiza e vonesave dhe Kryqi i sigurisë në këtë shfletues. Shtyp vetëm Koston dhe Njerëzit."],
+    ["Vendos objektivat një herë.", "Profili i vendit të punës mban vendin, turnet, zonat me përgjegjësit e tyre dhe objektivat. Çdo mjet i lexon."]
+  ],
+  "example": {
+    "note": "Ky është një muaj shembull i shtypur me dorë, që të shohësh çfarë tregon tabela. Në një tabelë reale, Siguria, Cilësia dhe Dorëzimi mbushen vetë nga regjistrat e mjeteve të tjera në këtë shfletues.",
+    "days": 35,
+    "fill": ["S", "Q", "D", "C", "P"],
+    "profile": {
+      "site": "Frankfurt hub · Dalja e mallit",
+      "shifts": ["Mëngjes", "Pasdite", "Natë"],
+      "areas": [
+        { "name": "Rampa 1", "owner": "Anna" },
+        { "name": "Komisionimi", "owner": "Besnik" },
+        { "name": "Paketimi", "owner": "Clara" }
+      ],
+      "targets": { "damage": 0.3, "incomplete": 0.5, "ontime": 95, "fives": 80, "cost": 8, "absence": 5 }
+    },
+    "rows": [
+      { "ago": 1, "shift": "Pasdite", "letter": "Q", "state": "red", "note": "Dëme 0,5 %: 14 njësi të shtypura në ngarkim, objektivi 0,3 %" },
+      { "ago": 1, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 93 %: dy linja u nisën me vonesë nga rampa 3" },
+      { "ago": 1, "shift": "Mëngjes", "letter": "P", "state": "amber", "note": "Dy mungesa në Komisionim, një punonjës agjencie i konfirmuar" },
+      { "ago": 2, "shift": "Pasdite", "letter": "C", "state": "amber", "note": "Orë shtesë 9 h në Paketim për të mbyllur prapambetjen" },
+      { "ago": 3, "shift": "Mëngjes", "letter": "S", "state": "amber", "note": "Incident i shmangur për pak te rampa 2: transpaletë dhe këmbësor, pa lëndim" },
+      { "ago": 5, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Të paplota 0,45 %: tri porosi dolën pa pakon e dytë" },
+      { "ago": 6, "shift": "Mëngjes", "letter": "D", "state": "red", "note": "Në kohë 88 %: borë në A5, katër linja me vonesë" },
+      { "ago": 8, "shift": "Pasdite", "letter": "C", "state": "red", "note": "Orë shtesë 14 h: turni i pasdites qëndroi për tërheqjen e dytë të transportuesit" },
+      { "ago": 8, "shift": "Natë", "letter": "P", "state": "amber", "note": "Një mungesë, pa zëvendësim në turnin e natës" },
+      { "ago": 9, "shift": "Mëngjes", "letter": "C", "state": "amber", "note": "Dy ngarkues agjencie të paplanifikuar" },
+      { "ago": 12, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Dëme 0,26 %, afër objektivit" },
+      { "ago": 13, "shift": "Pasdite", "letter": "P", "state": "red", "note": "Katër mungesa në Ngarkim, turni i pasdites punoi me dy veta më pak" },
+      { "ago": 15, "shift": "Mëngjes", "letter": "S", "state": "amber", "note": "Gjendje e pasigurt: dysheme e lagur te dera e hyrjes, u pastrua dhe u shënua" },
+      { "ago": 16, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 94 %: një rimorkio mbërriti me vonesë" },
+      { "ago": 19, "shift": "Pasdite", "letter": "C", "state": "amber", "note": "Orë shtesë 8 h në ditën e pikut" },
+      { "ago": 22, "shift": "Pasdite", "letter": "Q", "state": "red", "note": "Dëme 0,6 %: një mur paletash i shembur në rimorkion 7" },
+      { "ago": 23, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 93 %" },
+      { "ago": 26, "shift": "Mëngjes", "letter": "P", "state": "amber", "note": "Punonjës i ri në Paketim, i trajnuar nga Clara" },
+      { "ago": 27, "shift": "Pasdite", "letter": "S", "state": "red", "note": "Rast ndihme të parë: dorë e prerë te stacioni i paketimit, leukoplast, u kthye në punë" },
+      { "ago": 29, "shift": "Mëngjes", "letter": "C", "state": "red", "note": "Orë shtesë 12 h, dy veta të shtunën" },
+      { "ago": 30, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Të paplota 0,4 %" },
+      { "ago": 33, "shift": "Mëngjes", "letter": "D", "state": "red", "note": "Në kohë 87 %: dera e rampës 4 e prishur, ngarkimi me vonesë" },
+      { "ago": 34, "shift": "Natë", "letter": "P", "state": "amber", "note": "Një mungesë" }
+    ]
+  }
+}

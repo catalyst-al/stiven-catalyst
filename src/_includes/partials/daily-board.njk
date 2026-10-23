@@ -1,0 +1,125 @@
+{#- The Daily Board: the SQDCP tier board of one site, a month calendar per letter fed from the logs in this browser. daily-board.js does the rest. -#}
+<section class="shell tool-layout db-setup">
+  <div class="tool-panel" data-daily-board>
+
+    <details class="dl-box db-profile">
+      <summary class="kicker">{{ "Workplace profile" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></summary>
+      <p class="form-note">{{ "The site, its shifts, its areas with their owners and the targets that colour the board. Kept once in this browser and read by every tool." | t(lang) }}</p>
+      <div data-workplace></div>
+    </details>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ "Mark a day by hand" | t(lang) }}</legend>
+        <p class="form-note">{{ "Cost and People come only from here. An entry for Safety, Quality or Delivery overrules what the logs say for that day." | t(lang) }}</p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="db-date">{{ "Date" | t(lang) }}</label>
+            <input id="db-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="db-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="db-shift" name="shift">
+              {%- for shift in cfg.shifts %}
+              <option>{{ shift }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="db-letter">{{ "Letter" | t(lang) }}</label>
+            <select id="db-letter" name="letter">
+              {%- for letter in cfg.letters %}
+              <option value="{{ letter.key }}"{% if letter.key == "C" %} selected{% endif %}>{{ letter.key }} · {{ letter.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="db-state">{{ "State" | t(lang) }}</label>
+            <select id="db-state" name="state">
+              <option value="green">✓ {{ cfg.states.green }}</option>
+              <option value="amber">! {{ cfg.states.amber }}</option>
+              <option value="red">✕ {{ cfg.states.red }}</option>
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="db-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="db-note" name="note" placeholder="{{ 'e.g. Overtime 9 h in Packing to clear the backlog' | t(lang) }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to the board" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box db-rules">
+      <summary class="kicker">{{ "What the colours mean" | t(lang) }}</summary>
+      <dl class="db-rule-list">
+        {%- for letter in cfg.letters %}
+        <div class="db-rule">
+          <dt><b class="db-letter">{{ letter.key }}</b> {{ letter.name }} <small>{{ letter.sources }}</small></dt>
+          <dd><span class="db-key is-danger">✕ {{ cfg.states.red }}</span> {{ letter.red }}</dd>
+          <dd><span class="db-key is-warn">! {{ cfg.states.amber }}</span> {{ letter.amber }}</dd>
+          <dd><span class="db-key is-ok">✓ {{ cfg.states.green }}</span> {{ letter.green }}</dd>
+        </div>
+        {%- endfor %}
+      </dl>
+    </details>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ "One row per day and letter" | t(lang) }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "letter" | t(lang) }}, {{ "state" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "The letter as S, Q, D, C or P or its name; the state as green, amber or red or its name." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="db-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="db-paste" rows="5" placeholder="{{ '2026-10-22; Late; C; red; Overtime 14 h' | t(lang) }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "Entries by hand" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col">{{ "Letter" | t(lang) }}</th><th scope="col">{{ "State" | t(lang) }}</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ "No entries by hand yet." | t(lang) }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example month" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "A red that returns has a cause." | t(lang) }}</strong> {{ "When the same letter turns red again, take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results db-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="daily-board-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/daily-board.js' | assetUrl }}" defer></script>

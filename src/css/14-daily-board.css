@@ -1,0 +1,71 @@
+/* ===== Daily Board (js/daily-board.js) =====
+   Five month calendars (S, Q, D, C, P) side by side where there is room, one under the other on a phone. The state of a
+   day is told by its sign (✓ ! ✕) and its words; the colour only repeats it. Printed on one A4 page in landscape. */
+.db-profile .wp-setup { margin-top: 12px; }
+.db-rule-list { display: grid; gap: 14px; margin: 12px 0 0; }
+.db-rule { display: grid; gap: 4px; }
+.db-rule dt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; font-weight: 700; }
+.db-rule dt small { color: var(--muted); font-size: 12px; font-weight: 400; }
+.db-rule dd { margin: 0; color: var(--muted); font-size: 14px; }
+.db-key { display: inline-block; min-width: 76px; color: var(--ink); font-size: 12px; font-weight: 700; }
+.db-key.is-ok { color: var(--ok); }
+.db-key.is-warn { color: var(--warn); }
+.db-key.is-danger { color: var(--danger); }
+
+.db-letter {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto;
+  border: 1px solid var(--line); border-radius: 8px; color: var(--blue); font-size: 15px; font-weight: 800;
+}
+.db-state { white-space: nowrap; font-weight: 600; }
+.db-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--line); vertical-align: middle; }
+.db-state.is-ok .db-dot { background: var(--ok); }
+.db-state.is-warn .db-dot { background: var(--warn); }
+.db-state.is-danger .db-dot { background: var(--danger); }
+
+.db-results .result-head { margin-bottom: 14px; }
+.db-example { margin: 0 0 14px; max-width: 72ch; }
+.db-chips { margin: 0 0 18px; }
+.db-chip { color: var(--ink); }
+.db-chip-letter { font-weight: 800; }
+.db-chip.is-none, .db-chip.is-future { border-style: dashed; color: var(--muted); }
+
+.db-month-nav { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+.db-month-nav .button-ghost { min-width: 40px; padding: 6px 10px; }
+.db-month { margin: 0; min-width: 9em; font-size: 18px; text-align: center; }
+
+.db-calendars { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+.db-cal { display: grid; align-content: start; gap: 6px; min-width: 0; }
+.db-cal-head { display: flex; align-items: center; gap: 10px; }
+.db-cal-head .result-label { margin: 0; }
+.db-cal .dl-panel-note { margin: 0; }
+.db-cal .ck-figure { margin: 4px 0 0; }
+.db-cal .ck-chart { max-width: 360px; }
+
+.db-grid { margin-top: 18px; }
+.db-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.db-list { display: grid; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; font-size: 14px; }
+.db-list li { overflow-wrap: anywhere; }
+.db-list small { color: var(--muted); }
+.db-agenda { display: grid; gap: 12px; margin: 0; padding-left: 22px; }
+.db-agenda > li { padding-left: 4px; }
+.db-agenda-head { display: flex; justify-content: space-between; gap: 12px; }
+.db-min { flex: 0 0 auto; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.db-agenda ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+.db-agenda ul li { margin-bottom: 2px; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .db-month { font-size: 16px; min-width: 0; flex: 1; }
+  .db-key { min-width: 0; margin-right: 4px; }
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 10mm; }
+  .db-setup, .db-month-nav .button-ghost, .db-results .result-actions { display: none !important; }
+  .db-results { padding: 0; }
+  .db-calendars { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+  .db-cal { break-inside: avoid; }
+  .db-cal .ck-chart { min-width: 0; max-width: none; }
+  .db-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); break-before: auto; }
+  .db-grid .dl-panel { break-inside: avoid; }
+  .db-letter { color: #000; }
+}
