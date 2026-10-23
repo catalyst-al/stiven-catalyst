@@ -1,0 +1,103 @@
+{
+  "storageKey": "sc-a3-report-sq",
+  "unit": "%",
+  "statuses": ["Hapur", "Në punë", "Kryer", "Verifikuar"],
+  "fields": {
+    "title": "p.sh. Dëmet në dalje nën 0,30%",
+    "owner": "p.sh. Anna K., Area Manager për daljen",
+    "area": "p.sh. Rampa e daljes, hub-i i Frankfurtit",
+    "baseline": "p.sh. 0,57",
+    "unit": "p.sh. % njësi të dëmtuara",
+    "targetValue": "p.sh. 0,30",
+    "how": "p.sh. Shkalla e dëmeve në javë nga regjistri i dëmeve, në kartën e kontrollit",
+    "result": "p.sh. 0,31% në dy javët pas zbatimit, dhjetë ditë nën vijën e vjetër qendrore",
+    "latest": "p.sh. 0,31",
+    "countermeasure": "Një ndryshim në proces, jo një kujtesë",
+    "cmOwner": "Kush",
+    "step": "Çfarë ndodh, sipas radhës"
+  },
+  "boxes": {
+    "background": {
+      "title": "Konteksti",
+      "question": "Pse ka rëndësi ky problem për klientin dhe për biznesin, tani?",
+      "placeholder": "Dy ose tri fjali: konteksti, kush preket, pse tani."
+    },
+    "current": {
+      "title": "Gjendja aktuale",
+      "question": "Çfarë, ku, që kur, sa? Fakte dhe numra, ende pa shkaqe dhe pa zgjidhje.",
+      "placeholder": "p.sh. Në tri javët e fundit, 0,57% e njësive në dalje u larguan nga hub-i të dëmtuara (104 nga 18.400 në javën e fundit) kundrejt 0,30% të premtuar. Kompensimet kushtojnë rreth 1.150 € në javë."
+    },
+    "target": {
+      "title": "Gjendja e synuar",
+      "question": "Si duket mirë, matur me çfarë, deri kur, dhe çfarë nuk duhet të përkeqësohet?",
+      "placeholder": "p.sh. 0,30% ose më pak brenda tetë javësh, pa kohë më të gjata ngarkimi."
+    },
+    "cause": {
+      "title": "Analiza e shkakut rrënjësor",
+      "question": "Pse ekziston hendeku? Shko në terren dhe pyet pse derisa të arrish te diçka në proces që mund ta ndryshosh.",
+      "placeholder": "Zinxhiri i pyetjeve pse dhe në fund shkaku rrënjësor. Një person nuk është kurrë shkaku rrënjësor: pyet pse ishte e mundur."
+    },
+    "countermeasures": {
+      "title": "Kundërmasat",
+      "question": "Cili ndryshim në proces heq shkakun rrënjësor? Një përgjegjës dhe një afat për secilën."
+    },
+    "plan": {
+      "title": "Zbatimi",
+      "question": "Kush bën çfarë, në cilën radhë, deri kur? Fillimisht pilot, pastaj zbatim i plotë."
+    },
+    "followUp": {
+      "title": "Ndjekja",
+      "question": "Si dhe kur do ta kontrollosh që gjendja e synuar qëndron, dhe çfarë gjete?"
+    }
+  },
+  "checks": {
+    "number": ["Problemi ka një numër", "Vendos një numër në gjendjen aktuale"],
+    "time": ["Problemi ka një periudhë kohore", "Thuaj që kur, ose për cilat javë"],
+    "targetNumber": ["Objektivi ka një numër", "Jep objektivin si numër"],
+    "targetDate": ["Objektivi ka një datë", "Thuaj deri kur vlen objektivi"],
+    "cause": ["Shkaku rrënjësor është në proces", "Emëro një shkak rrënjësor në proces, jo një person"],
+    "owners": ["Çdo kundërmasë ka një përgjegjës", "Jepi çdo kundërmase një përgjegjës"],
+    "dates": ["Çdo kundërmasë ka një afat", "Jepi çdo kundërmase një afat"],
+    "measure": ["Ndjekja emëron një tregues", "Thuaj cilin numër do të kontrollosh, dhe ku"]
+  },
+  "timeWords": ["javë", "javën", "javët", "javësh", "muaj", "muajin", "muajt", "ditë", "ditën", "ditët", "ditësh", "që nga", "deri", "tremujor", "vit", "vitin", "turn", "turni", "turne", "janar", "shkurt", "mars", "prill", "maj", "qershor", "korrik", "gusht", "shtator", "tetor", "nëntor", "dhjetor", "sot", "dje", "fundit"],
+  "blameWords": ["harroi", "harron", "i pakujdesshëm", "e pakujdesshme", "dembel", "s'i intereson", "nuk i intereson", "gabim njerëzor", "gabim i operatorit", "nuk ka vëmendje", "qëndrim", "faji i", "ka faj", "neglizhent", "motivim", "pa motivim"],
+  "measureWords": ["shkalla", "pjesa", "për", "numri", "minuta", "njësi", "porosi", "pako", "rrugë", "linja", "ankesa", "kompensime", "karta", "regjistri", "auditi", "tregues", "kpi", "dpmo", "sigma"],
+  "tips": [
+    ["Një faqe të detyron të jesh i qartë.", "Nëse nuk hyn, ende nuk e ke kuptuar. Hiq fjalë, jo fakte."],
+    ["Gjendja aktuale është fakte dhe numra.", "Çfarë, ku, që kur, sa. Pa opinione dhe pa zgjidhje në kutinë 2; ato shkojnë në kutitë 4 dhe 5."],
+    ["Kundërmasat janë ndryshime në proces.", "Një kujtesë, një trajnim ose një paralajmërim nuk është kundërmasë. Ndrysho atë që puna e bën të mundur."],
+    ["Ndjekja është thelbi.", "Bini dakord si dhe kur do të kontrolloni para se të filloni. Një A3 pa kutinë 7 është plan, jo rezultat."]
+  ],
+  "example": {
+    "title": "Dëmet në dalje nën 0,30%",
+    "owner": "Anna K., Area Manager për daljen",
+    "date": -70,
+    "area": "Rampa e daljes, hub-i i Frankfurtit",
+    "background": "Hub-i dërgon rreth 18.400 njësi në javë. Klientët ankohen për pako të shtypura, dhe shkalla e dëmeve është gati dyfishi i asaj që premton kontrata. Kompensimet dhe ankesat bien mbi tavolinën e Area Manager-it çdo të hënë.",
+    "current": "Në tri javët e fundit, 0,57% e njësive në dalje u larguan nga hub-i të dëmtuara (104 nga 18.400 në javën e fundit) kundrejt 0,30% të premtuar klientit. Kompensimet kushtojnë rreth 1.150 € në javë. Pareto i regjistrit të dëmeve: stivimi 56%, sigurimi i ngarkesës 14%, manipulimi 11%; tri shkaqe mbajnë 81%. Dëmet për 1.000 njësi janë 2,4 herë më të larta në orët e pikut të ngarkimit se në të tjerat.",
+    "baseline": "0,57",
+    "unit": "% njësi të dëmtuara",
+    "target": "0,30% ose më pak brenda tetë javësh, pa kohë më të gjata ngarkimi: objektivi i kohës së ngarkimit mbetet 38 minuta për linjë.",
+    "targetValue": "0,30",
+    "targetBy": -14,
+    "rootCause": "Pse janë të larta dëmet? Pakot shtypen në mjet.\nPse? Pakot e rënda qëndrojnë mbi të lehtat.\nPse? Në valën e vonë ngarkuesit ndërtojnë muret shpejt dhe mbushin boshllëqet me çfarë kanë pranë.\nPse? Te rampa nuk ka rregull stivimi, dhe objektivi i kohës së ngarkimit fiton ndaj radhës së stivimit.\nPse? Standardi nuk u shkrua kurrë: gjithkush duhet ta dijë si stivohet.\nShkaku rrënjësor: asnjë standard i dukshëm stivimi te rampa, dhe një objektiv kohe ngarkimi që shpërblen shpejtësinë mbi një mur të qëndrueshëm.",
+    "countermeasures": [
+      { "text": "Një figurë stivimi te çdo portë e rampës: të rëndat poshtë, të brishtat lart, pa boshllëqe", "owner": "Anna K. (drejtuese e turnit të mëngjesit)", "due": -56, "status": "Verifikuar" },
+      { "text": "Zona në dyshemenë e mjetit për pakot e rënda, të shënuara në dysheme dhe në planin e ngarkimit", "owner": "Besnik H. (drejtues i ekipit të ngarkimit)", "due": -49, "status": "Kryer" },
+      { "text": "Shufra fiksimi pas murit të fundit, me një foto para se të mbyllen dyert", "owner": "Marco P. (koordinator i shoferëve)", "due": -49, "status": "Kryer" },
+      { "text": "Dhjetë minuta më shumë për orët e pikut të ngarkimit në plan", "owner": "Anna K. (Area Manager)", "due": -42, "status": "Verifikuar" }
+    ],
+    "plan": [
+      { "step": "Pilot në rampat 1 deri 3, turni i pasdites", "date": -63 },
+      { "step": "Trajno të dy turnet me figurën e stivimit: 15 minuta në brifing", "date": -56 },
+      { "step": "Zbatim në të gjitha rampat", "date": -42 },
+      { "step": "Kartë p ditore e dëmeve te rampa; një sinjal hap 5 Whys brenda 24 orësh", "date": -35 },
+      { "step": "Dorëzim te menaxheri i daljes si standard", "date": -7 }
+    ],
+    "how": "Shkalla e dëmeve në javë nga regjistri i dëmeve (njësi të dëmtuara ÷ njësi të dërguara) në kartën e kontrollit; koha e ngarkimit për linjë nga plani i linjave.",
+    "checkDate": -7,
+    "result": "Dëmet ranë nga 0,57% në 0,31% (62 nga 20.000 njësi në dy javët pas zbatimit), dhjetë ditë radhazi nën vijën e vjetër qendrore. Koha e ngarkimit u rrit me dy minuta për linjë: e pranuar nga sponsori. Kompensimet rreth 500 € në javë më pak.",
+    "latest": "0,31"
+  }
+}

@@ -9604,6 +9604,151 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
   .db-grid .dl-panel { break-inside: avoid; }
   .db-letter { color: #000; }
 }
+/* ===== A3 Report (js/a3-report.js) =====
+   The form is the seven boxes in order; the sheet in [data-results] is the A3 itself: boxes 1–4 on the left, 5–7 on
+   the right. It prints on A3 or A4 landscape, the choice made under the sheet. */
+.a3-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.a3-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+.a3-item[aria-current="true"] { border-color: var(--blue); }
+.a3-open {
+  grid-column: 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.a3-item[aria-current="true"] .a3-open { color: var(--blue); }
+.a3-open:hover { text-decoration: underline; }
+.a3-meta { grid-column: 1; color: var(--muted); font-size: 13px; }
+.a3-item-tools { display: flex; flex-wrap: wrap; gap: 4px; grid-column: 2; grid-row: 1 / span 2; }
+.a3-item-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+
+.a3-hint { margin: 0; color: var(--muted); font-size: 14px; }
+.a3-nudge {
+  margin: 0;
+  padding: 6px 10px;
+  border-left: 3px solid var(--warn);
+  color: var(--ink);
+  font-size: 13px;
+}
+.a3-form textarea { resize: vertical; }
+.a3-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.a3-pull { align-items: center; }
+.a3-pull .form-note { margin: 0; }
+.a3-rows { display: grid; gap: 10px; }
+.a3-rows:empty { display: none; }
+.a3-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px 12px;
+  align-items: end;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 10px);
+  background: var(--paper-2);
+}
+.a3-row .a3-what { grid-column: 1 / -1; }
+.a3-row .field label { font-size: 12px; }
+.a3-remove { justify-self: start; padding: 4px 8px; font-size: 13px; }
+.a3-step .a3-remove { align-self: end; }
+
+/* The result above the sheet. */
+.a3-quality { display: grid; gap: 10px; margin: 0 0 20px; }
+.a3-quality .result-label { margin: 0; }
+.a3-next { margin: 0; }
+.a3-paper { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.a3-paper .button-ghost[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+
+/* The sheet. */
+.a3-sheet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0 0 20px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 8px);
+  background: var(--card);
+  overflow: hidden;
+}
+.a3-sheet-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.a3-sheet-title { margin: 0; font-size: 18px; font-weight: 800; overflow-wrap: anywhere; }
+.a3-sheet-meta { margin: 0; color: var(--muted); font-size: 13px; }
+.a3-col { display: grid; align-content: start; min-width: 0; }
+.a3-box { display: grid; gap: 8px; align-content: start; min-width: 0; padding: 14px 18px 16px; border-bottom: 1px solid var(--line); }
+.a3-right .a3-box:last-child { border-bottom: 0; }
+.a3-box-title { margin: 0; color: var(--blue); font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.a3-text { margin: 0; font-size: 14px; line-height: 1.5; white-space: pre-line; overflow-wrap: anywhere; }
+.a3-empty { margin: 0; color: var(--muted); font-size: 14px; font-style: italic; }
+.a3-key { margin: 0; font-size: 14px; }
+.a3-key span { color: var(--muted); }
+.a3-gap { margin: 0; color: var(--muted); font-size: 13px; }
+.a3-table { font-size: 13px; }
+.a3-table td { overflow-wrap: anywhere; }
+.a3-table .a3-missing { color: var(--warn); font-style: italic; }
+.a3-table .a3-late { color: var(--danger); font-weight: 700; }
+.a3-steps { display: grid; gap: 6px; margin: 0; padding-left: 20px; font-size: 14px; }
+.a3-steps li { padding-left: 2px; }
+.a3-steps strong { margin-right: 8px; font-variant-numeric: tabular-nums; }
+.a3-box .ck-figure { margin: 4px 0 0; }
+
+@media (min-width: 900px) {
+  .a3-sheet { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .a3-sheet-head { grid-column: 1 / -1; }
+  .a3-left { border-right: 1px solid var(--line); }
+  .a3-left .a3-box:last-child { border-bottom: 0; }
+}
+@media (max-width: 600px) {
+  .a3-item { grid-template-columns: minmax(0, 1fr); }
+  .a3-item-tools { grid-column: 1; grid-row: auto; }
+  .a3-numbers, .a3-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Paper: the A3 on one sheet, landscape, in the size chosen under the sheet. */
+@page a3-big { size: A3 landscape; margin: 10mm; }
+@page a3-small { size: A4 landscape; margin: 7mm; }
+@media print {
+  body:has(.a3-sheet) .page-hero,
+  body:has(.a3-sheet) .dl-example-note,
+  .a3-setup,
+  .a3-results > :not(.a3-sheet) { display: none !important; }
+  .a3-results { padding: 0 !important; border: 0 !important; }
+  .a3-paper-a3 { page: a3-big; }
+  .a3-paper-a4 { page: a3-small; }
+  .a3-sheet { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin: 0; border: 1px solid #999; border-radius: 0; background: #fff; }
+  .a3-sheet-head { grid-column: 1 / -1; padding: 6px 10px; border-color: #999; }
+  .a3-left { border-right: 1px solid #999; }
+  .a3-box { padding: 6px 10px 8px; border-color: #999; break-inside: avoid; }
+  .a3-left .a3-box:last-child { border-bottom: 0; }
+  .a3-box-title { color: #000; }
+  .a3-paper-a3 .a3-text, .a3-paper-a3 .a3-key, .a3-paper-a3 .a3-steps, .a3-paper-a3 .a3-table { font-size: 10.5pt; }
+  .a3-paper-a4 .a3-text, .a3-paper-a4 .a3-key, .a3-paper-a4 .a3-steps, .a3-paper-a4 .a3-table, .a3-paper-a4 .a3-gap { font-size: 8pt; line-height: 1.35; }
+  .a3-paper-a4 .a3-sheet-title { font-size: 12pt; }
+  .a3-paper-a4 .a3-box .ck-figure svg { max-height: 45mm; }
+  .a3-box .ck-figure svg { max-height: 70mm; width: auto; max-width: 100%; }
+  .a3-table th, .a3-table td { padding: 3px 6px; }
+}
 /* ===== Process Lab (js/process-lab.js, js/stats-kit.js) =====
    Three tabs (measurements, before/after, sample size), each a quiet form; the verdicts are sentences with a bold
    word, and the state colour on a verdict only repeats what the word says. */

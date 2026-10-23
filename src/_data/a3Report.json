@@ -1,0 +1,103 @@
+{
+  "storageKey": "sc-a3-report",
+  "unit": "%",
+  "statuses": ["Open", "Doing", "Done", "Verified"],
+  "fields": {
+    "title": "e.g. Outbound damage below 0.30%",
+    "owner": "e.g. Anna K., Area Manager outbound",
+    "area": "e.g. Outbound dock, Frankfurt hub",
+    "baseline": "e.g. 0.57",
+    "unit": "e.g. % damaged units",
+    "targetValue": "e.g. 0.30",
+    "how": "e.g. Damage rate per week from the Damage Control log, on the control chart",
+    "result": "e.g. 0.31% in the two weeks after the roll-out, ten days below the old centre line",
+    "latest": "e.g. 0.31",
+    "countermeasure": "A change to the process, not a reminder",
+    "cmOwner": "Who",
+    "step": "What happens, in order"
+  },
+  "boxes": {
+    "background": {
+      "title": "Background",
+      "question": "Why does this problem matter to the customer and the business, now?",
+      "placeholder": "Two or three sentences: the context, who is affected, why now."
+    },
+    "current": {
+      "title": "Current condition",
+      "question": "What, where, since when, how much? Facts and numbers, no causes and no solutions yet.",
+      "placeholder": "e.g. Over the last three weeks, 0.57% of outbound units left the hub damaged (104 of 18,400 in the last week) against 0.30% promised. Credits cost about €1,150 a week."
+    },
+    "target": {
+      "title": "Target condition",
+      "question": "What does good look like, measured how, by when, and what must not get worse?",
+      "placeholder": "e.g. 0.30% or lower within eight weeks, without longer loading times."
+    },
+    "cause": {
+      "title": "Root-cause analysis",
+      "question": "Why does the gap exist? Go to the floor, ask why until you reach something in the process you can change.",
+      "placeholder": "The chain of whys and the root cause at the end. A person is never the root cause: ask why it was possible."
+    },
+    "countermeasures": {
+      "title": "Countermeasures",
+      "question": "Which change to the process removes the root cause? One owner and one date each."
+    },
+    "plan": {
+      "title": "Plan",
+      "question": "Who does what, in which order, by when? Pilot first, then roll out."
+    },
+    "followUp": {
+      "title": "Follow-up",
+      "question": "How and when will you check that the target condition holds, and what did you find?"
+    }
+  },
+  "checks": {
+    "number": ["The problem has a number", "Put a number in the current condition"],
+    "time": ["The problem has a time frame", "Say since when, or for which weeks"],
+    "targetNumber": ["The target has a number", "Give the target as a number"],
+    "targetDate": ["The target has a date", "Say by when the target holds"],
+    "cause": ["The root cause is in the process", "Name a root cause in the process, not a person"],
+    "owners": ["Every countermeasure has an owner", "Give every countermeasure an owner"],
+    "dates": ["Every countermeasure has a date", "Give every countermeasure a due date"],
+    "measure": ["The follow-up names a measure", "Say which number you will check, and where"]
+  },
+  "timeWords": ["week", "weeks", "month", "months", "day", "days", "since", "until", "by", "quarter", "year", "shift", "shifts", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "sept", "oct", "nov", "dec", "today", "yesterday", "last"],
+  "blameWords": ["forgot", "forgets", "careless", "lazy", "did not care", "didn't care", "human error", "operator error", "not paying attention", "attitude", "fault of", "to blame", "sloppy", "negligent", "motivation"],
+  "measureWords": ["rate", "share", "per", "count", "number of", "minutes", "units", "orders", "parcels", "routes", "complaints", "credits", "chart", "log", "audit", "kpi", "dpmo", "sigma"],
+  "tips": [
+    ["One page forces clarity.", "If it does not fit, you do not understand it yet. Cut words, not facts."],
+    ["Current condition is facts and numbers.", "What, where, since when, how much. No opinions and no solutions in box 2; they belong in boxes 4 and 5."],
+    ["Countermeasures are process changes.", "A reminder, a training or a warning letter is not a countermeasure. Change what the work makes possible."],
+    ["The follow-up is the point.", "Agree how and when you will check before you start. An A3 without box 7 is a plan, not a result."]
+  ],
+  "example": {
+    "title": "Outbound damage below 0.30%",
+    "owner": "Anna K., Area Manager outbound",
+    "date": -70,
+    "area": "Outbound dock, Frankfurt hub",
+    "background": "The hub ships about 18,400 units a week. Customers complain about crushed parcels, and the damage rate is almost twice what the contract promises. The credits and the complaints land on the Area Manager's desk every Monday.",
+    "current": "Over the last three weeks, 0.57% of outbound units left the hub damaged (104 of 18,400 in the last week) against 0.30% promised to the customer. Credits cost about €1,150 a week. Pareto of the damage log: stacking 56%, load securing 14%, handling 11%; three causes carry 81%. Damage per 1,000 units is 2.4 times higher in the peak loading slots than in the others.",
+    "baseline": "0.57",
+    "unit": "% damaged units",
+    "target": "0.30% or lower within eight weeks, without longer loading times: the loading-time target stays at 38 minutes per route.",
+    "targetValue": "0.30",
+    "targetBy": -14,
+    "rootCause": "Why is damage high? Parcels are crushed in the vehicle.\nWhy? Heavy parcels sit on top of light ones.\nWhy? In the late wave the loaders build the walls fast and fill gaps with whatever is at hand.\nWhy? There is no stacking rule at the dock, and the loading-time target wins over the stacking order.\nWhy? The standard was never written down: everybody is supposed to know how to stack.\nRoot cause: no visible stacking standard at the dock, and a loading-time target that rewards speed over a stable wall.",
+    "countermeasures": [
+      { "text": "One stacking picture at every dock door: heavy low, fragile high, no gaps", "owner": "Anna K. (shift lead early)", "due": -56, "status": "Verified" },
+      { "text": "Floor zones in the vehicle for heavy parcels, marked on the floor and in the loading plan", "owner": "Besnik H. (loading team lead)", "due": -49, "status": "Done" },
+      { "text": "Locking bars after the last wall, with a photo before the doors close", "owner": "Marco P. (driver coordinator)", "due": -49, "status": "Done" },
+      { "text": "Ten more minutes for the peak loading slots in the plan", "owner": "Anna K. (Area Manager)", "due": -42, "status": "Verified" }
+    ],
+    "plan": [
+      { "step": "Pilot on docks 1 to 3, late shift", "date": -63 },
+      { "step": "Train both shifts on the stacking picture: 15 minutes at the briefing", "date": -56 },
+      { "step": "Roll out to all docks", "date": -42 },
+      { "step": "Daily p-chart of damage at the dock; a signal opens 5 Whys within 24 hours", "date": -35 },
+      { "step": "Hand over to the outbound manager as the standard", "date": -7 }
+    ],
+    "how": "Damage rate per week from the Damage Control log (damaged units ÷ units shipped) on the control chart; loading time per route from the route plan.",
+    "checkDate": -7,
+    "result": "Damage fell from 0.57% to 0.31% (62 of 20,000 units in the two weeks after the roll-out), ten days in a row below the old centre line. Loading time rose by two minutes per route: accepted by the sponsor. Credits about €500 a week lower.",
+    "latest": "0.31"
+  }
+}
