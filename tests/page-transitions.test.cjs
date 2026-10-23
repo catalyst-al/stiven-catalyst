@@ -31,7 +31,7 @@ test('the menu item of the page carries the piece that slides, and Writing lists
     const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
     assert.equal(nav.match(/class="nav-pill"/g)?.length, 1, `${file}: one line under the menu`);
     assert.match(nav, new RegExp(`aria-current="page" href="${item}"[^>]*><span class="nav-orb" aria-hidden="true"></span>[^<]+<span class="nav-pill" aria-hidden="true"></span></a>`), file);
-    assert.equal(nav.match(/class="nav-orb"/g)?.length, 6, `${file}: every menu item has its planet (Homepage, Start here and the four places)`);
+    assert.equal(nav.match(/class="nav-orb"/g)?.length, 7, `${file}: every menu item has its planet (Homepage, Start here and the five places)`);
     assert.doesNotMatch(html.match(/<nav id="mobile-menu"[\s\S]*?<\/nav>/)[0], /nav-pill/, `${file}: the name stays unique`);
   }
   // No tabs above the lists any more: the Writing page lists the four kinds as rows, the way Reflections lists its pieces.
@@ -40,6 +40,11 @@ test('the menu item of the page carries the piece that slides, and Writing lists
     const list = built(`${prefix.slice(1)}${prefix ? '/' : ''}writing.html`).match(/<section class="shell listing reflection-list writing-list">[\s\S]*?<\/section>/)[0];
     for (const page of ['insights', 'challenges', 'reflections', 'field-notes']) assert.match(list, new RegExp(`<a class="list-row" href="${prefix}/${page}.html">`), `${prefix || 'en'}: ${page}`);
   }
+  // The CV has its own place: on a career tool it is the item marked, with the tool lit in its little menu.
+  const cv = built('sq/tools/ats-cv/index.html').match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
+  assert.match(cv, /aria-current="page" class="nav-cv" href="\/sq\/tools\/cv-builder\/">/);
+  assert.match(cv, /<a class="nav-menu-link" href="\/sq\/tools\/ats-cv\/" aria-current="page">/);
+  assert.doesNotMatch(cv, /aria-current="page" href="\/sq\/tools.html"/, 'Tools is not marked as well');
   const home = built('index.html').match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
   assert.equal(home.match(/class="nav-pill"/g)?.length, 1, 'the homepage marks one menu item');
   assert.match(home, /aria-current="page" class="nav-start nav-home" href="\/"><span class="nav-orb" aria-hidden="true"><\/span>Homepage<span class="nav-pill"/, 'and it is Homepage');

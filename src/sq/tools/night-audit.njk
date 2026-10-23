@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Regjistri i Night Audit
+description: "Regjistër privat i night audit për recepsionin e hotelit: shkalla e përjashtimeve, DPMO dhe niveli sigma, Pareto e shkaqeve dhe ku nis çdo përjashtim."
+activeNav: /sq/tools.html
+permalink: /sq/tools/night-audit/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Hotel</p>
+  <h1>Regjistri i Night Audit</h1>
+  <p class="lede">Regjistro çdo no-show, kartë të refuzuar, gabim postimi dhe bilanc të hapur që gjen auditi, me hapin e qëndrimit ku u gjet dhe shkakun pas tij. Mjeti tregon shkallën e përjashtimeve, shkaqet e pakta pas shumicës së tyre dhe ku në ditë duhet të fillosh.</p>
+</section>
+
+{% set cfg = sq.nightAudit %}
+{% include "partials/defect-log.njk" %}

@@ -26,6 +26,7 @@
     },
     "hotel": {
       "name": "Recepsioni i hotelit",
+      "sources": [null, null, null, null, "noShows", null],
       "metrics": [
         "Mbërritje të mbetura",
         "Largime të mbetura",

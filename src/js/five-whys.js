@@ -54,11 +54,36 @@
     causeField.placeholder = last ? tx("Suggested: {text}", { text: last }) : tx("The last answer that you can act on");
   };
 
+  // The countermeasure as an open issue of the Shift Handover, with its owner and due date (shift-handover.js reads
+  // ?issue=, ?owner= and ?due=). The link carries what is typed; empty, it says to write the countermeasure first.
+  const handoverLink = form.querySelector("[data-handover]");
+  const handoverBase = handoverLink?.getAttribute("href") || "../shift-handover/";
+  const syncHandover = () => {
+    if (!handoverLink) return;
+    const value = (name) => form.elements[name]?.value.trim() || "";
+    const url = new URL(handoverBase, location.href);
+    const action = value("action");
+    if (action) {
+      url.searchParams.set("issue", action);
+      if (value("owner")) url.searchParams.set("owner", value("owner"));
+      if (value("due")) url.searchParams.set("due", value("due"));
+    }
+    handoverLink.href = url.href;
+    handoverLink.dataset.ready = action ? "" : "no";
+  };
+  handoverLink?.addEventListener("click", (event) => {
+    if (form.elements.action.value.trim()) return;
+    event.preventDefault();
+    flash(tx("Write the countermeasure first, then put it on the handover."));
+    form.elements.action.focus();
+  });
+
   const save = () => {
     const values = {};
     form.querySelectorAll("[data-store]").forEach((field) => { values[field.name] = field.value; });
     write(values);
     suggestCause();
+    syncHandover();
     changed();
   };
 
@@ -74,6 +99,7 @@
       if (field) field.value = value;
     });
     suggestCause();
+    syncHandover();
   };
 
   const asText = () => {
@@ -132,6 +158,7 @@
     addButton.hidden = false;
     forget();
     suggestCause();
+    syncHandover();
     changed();
     flash(tx("Worksheet cleared."));
     form.elements.problem.focus();

@@ -1,0 +1,217 @@
+{
+  "storageKey": "sc-night-audit-sq",
+  "unknownCause": "E panjohur",
+  "paretoTemplate": "billing-errors",
+  "text": {
+    "tool": "Regjistri i Night Audit",
+    "one": "përjashtim",
+    "many": "përjashtime",
+    "allNoun": "përjashtimet",
+    "volumeNoun": "rezervime",
+    "volumeLabel": "Rezervime të trajtuara",
+    "volumePlaceholder": "p.sh. 1260",
+    "targetLabel": "Objektivi i përjashtimeve %",
+    "targetPlaceholder": "p.sh. 2",
+    "rateLabel": "Shkalla e përjashtimeve",
+    "complement": { "label": "Rezervime të pastra", "note": "të mbyllura pa asnjë përjashtim" },
+    "periodPlaceholder": "p.sh. Java 38, recepsioni",
+    "entryLegend": "Regjistro një përjashtim",
+    "countLabel": "Rezervime të prekura",
+    "countShort": "rezervime",
+    "notePlaceholder": "p.sh. Dhoma 412, karta u refuzua dy herë, mysafiri u kontaktua në telefon",
+    "pasteRow": "Një rresht për çdo përjashtim",
+    "pastePlaceholder": "14.09.2026\tNatë\tPagesa\tKartë e refuzuar\tPa garanci\t1\t189",
+    "empty": "Ende asnjë përjashtim i regjistruar.",
+    "stageTitle": "Ku gjendet përjashtimi",
+    "stageNote": "Sipas radhës së qëndrimit, nga rezervimi deri te mbyllja e auditit.",
+    "stagePhrase": "në hapin",
+    "matrixTitle": "Hapi dhe lloji i përjashtimit",
+    "csv": "regjistri-i-night-audit",
+    "tips": [
+      [
+        "Regjistroje natën që e gjen.",
+        "Auditi është i vetmi moment kur kontrollohet e gjithë dita. Një përjashtim i shkruar të nesërmen në mëngjes e ka humbur numrin e dhomës, orën dhe arsyen."
+      ],
+      [
+        "Numëro rezervime, jo euro.",
+        "Një no-show është një rezervim, pavarësisht tarifës. Të ardhurat e humbura shkojnë te kutia e kostos, kështu ruhen të dyja."
+      ],
+      [
+        "Shto rezervimet e trajtuara.",
+        "Pa mbërritjet dhe rezervimet in-house të ditës sheh vetëm numra; me to merr shkallën, DPMO dhe nivelin sigma, dhe një javë me 300 mbërritje krahasohet me një javë me 120."
+      ]
+    ],
+    "checkTitle": "A mbahet standardi i auditit?",
+    "checkIntro": "Shëno çfarë u bë realisht sonte, jo çfarë thotë procedura e night audit. Çdo rresht i pashënuar është një vend ku lind një përjashtim, ose ku gjendet tepër vonë."
+  },
+  "fields": [
+    {
+      "name": "shift",
+      "label": "Turni",
+      "options": [
+        "Mëngjes",
+        "Pasdite",
+        "Natë"
+      ]
+    },
+    {
+      "name": "stage",
+      "label": "Hapi",
+      "options": [
+        "Rezervimi",
+        "Mbërritja",
+        "In-house",
+        "Pagesa",
+        "Largimi",
+        "Mbyllja e auditit"
+      ]
+    },
+    {
+      "name": "type",
+      "label": "Lloji i përjashtimit",
+      "options": [
+        "No-show",
+        "Kartë e refuzuar",
+        "Gabim postimi",
+        "Tarifë e gabuar",
+        "Mungon regjistrimi",
+        "Bilanc i hapur",
+        "Tjetër"
+      ]
+    },
+    {
+      "name": "cause",
+      "label": "Shkaku",
+      "options": [
+        "Të dhënat e rezervimit",
+        "Pa garanci",
+        "Boshllëk dorëzimi",
+        "Sistemi",
+        "Mysafiri",
+        "Trajnimi",
+        "E panjohur"
+      ]
+    }
+  ],
+  "stages": {
+    "Rezervimi": {
+      "meaning": "Një përjashtim që gjendet te rezervimi ka lindur para se mysafiri të mbërrinte: një tarifë, një datë ose një garanci ishte gabim në rezervim dhe askush nuk e lexoi para natës.",
+      "moves": [
+        "Kontrollo mbërritjet e nesërme gjatë turnit të pasdites: tarifën, garancinë, kërkesat e veçanta, dhe rregullo çfarë është gabim sa burimi i rezervimit ende arrihet.",
+        "Mbaji veç në regjistër „mbërriti me rezervim të gabuar“ dhe „u rezervua gabim këtu“, që kanalit ose agjentit që dërgon gabimet t'i tregohen numrat e tij.",
+        "Ndaji gabimet e rezervimit me rezervimet dhe shitjet çdo javë, me numrat e rezervimeve."
+      ],
+      "question": "Kush i lexon mbërritjet e nesërme para natës, dhe çfarë kontrollon?"
+    },
+    "Mbërritja": {
+      "meaning": "Në check-in mysafiri është përballë banakut: një kartë regjistrimi që mungon, një garanci e pamarrë ose një no-show i paliruar fillon këtu, në orën më të ngarkuar të mbrëmjes.",
+      "moves": [
+        "Bëji kartën e regjistrimit dhe garancinë me kartë dy hapat e parë të çdo check-in-i, para se të pritet çelësi.",
+        "Liroji no-show-et në një orë fikse, me politikën e anulimit të zbatuar njësoj çdo natë.",
+        "Shiko listën e mbërritjeve në fund të turnit të pasdites: çdo mysafir i pritur është ose in-house, ose no-show, ose anulim, kurrë ende „i pritur“."
+      ],
+      "question": "Çfarë bën recepsioni kur një mysafir mbërrin pa kartë të vlefshme në orën e pikut të mbrëmjes?"
+    },
+    "In-house": {
+      "meaning": "Përjashtimet in-house janë postime: një mëngjes, një minibar ose një parkim në dhomën e gabuar, një tarifë që nuk kaloi në ditën tjetër, një faturim i postuar dy herë.",
+      "moves": [
+        "Krahaso postimet e ditës me listat e vetë outlet-eve para se të nisë auditi, jo pasi është printuar fatura.",
+        "Posto në dhomë, jo në emër: dy mysafirë me të njëjtin emër janë gabimi më i vjetër i postimit që ekziston.",
+        "Kontrollo kodin e tarifës së çdo dhome të zënë kundrejt rezervimit një herë në natë; një tarifë e ndryshuar shfaqet këtu e para."
+      ],
+      "question": "Postimet e cilit outlet bien më shpesh në dhomën e gabuar, dhe në cilën orë?"
+    },
+    "Pagesa": {
+      "meaning": "Një kartë e refuzuar, një kartë virtuale që dështon ose një para-autorizim që nuk u mor kurrë: para që hoteli do t'i ndjekë nesër në vend që t'i ketë sonte.",
+      "moves": [
+        "Para-autorizo çdo kartë në check-in dhe shëno kodin e autorizimit në rezervim.",
+        "Faturoji kartat virtuale në mbërritje, jo në largim; një VCC e dështuar i raportohet kanalit të rezervimit po atë natë.",
+        "Mbaj një listë të kartave të refuzuara me përgjigjen e mysafirit, që turni i mëngjesit të dijë kë të pyesë dhe çfarë është provuar tashmë."
+      ],
+      "question": "Cilat rezervime flenë sonte pa një pagesë të vlefshme pas tyre?"
+    },
+    "Largimi": {
+      "meaning": "Në check-out përjashtimi bëhet i dukshëm për mysafirin: një bilanc i hapur, një mosmarrëveshje për një postim, një faturë me adresë ose kompani të gabuar.",
+      "moves": [
+        "Përgatit faturat e largimeve të nesërme gjatë night audit dhe lexoje secilën një herë.",
+        "Mbyll bilancet e hapura të ditës para se të mbyllet auditi, ose emëro kush ndjek dhe deri kur.",
+        "Kërko adresën e faturës në check-in, kur mysafiri ka kohë, jo te taksia."
+      ],
+      "question": "Sa nga faturat e nesërme i ka lexuar dikush para se t'i shohë mysafiri?"
+    },
+    "Mbyllja e auditit": {
+      "meaning": "E gjetur në mbylljen e auditit do të thotë e gjetur nga sistemi, jo nga një njeri: një raport që nuk rakordon, një dhomë pa tarifë, një postim që nuk kalon në ditën tjetër.",
+      "moves": [
+        "Nis kontrollet para-audit një orë para mbylljes, që çfarë gjejnë të rregullohet ende sonte.",
+        "Mbaji në regjistër arsyet pse auditi nuk rakordoi, me dhomën: zakonisht kthehen të njëjtat tri.",
+        "Mbyll me një shënim të shkurtër me shkrim për turnin e mëngjesit: çfarë u rregullua, çfarë mbetet e hapur dhe kush e ka në dorë."
+      ],
+      "question": "Çfarë e pengoi auditin të mbyllej pastër këtë javë, dhe sa herë ishte e njëjta gjë?"
+    }
+  },
+  "causes": {
+    "Të dhënat e rezervimit": "Vetë rezervimi ishte gabim: tarifa, datat, garancia ose të dhënat e mysafirit. Tregoji burimit të rezervimit numrat e tij çdo javë; shumica e gabimeve vijnë nga një ose dy kanale.",
+    "Pa garanci": "Një rezervim pa kartë të vlefshme ose parapagesë është një no-show që pret të ndodhë. Bëje garancinë kusht të rezervimit, jo kërkesë në check-in.",
+    "Boshllëk dorëzimi": "Turni i pasdites e dinte dhe nata jo, ose nata e dinte dhe mëngjesi jo. Vendose në dorëzimin e turnit, me një emër dhe një orë.",
+    "Sistemi": "Kodet e tarifave, ndërfaqet dhe vetë auditi dështojnë sipas modeleve. Shkruaj gabimin e saktë dhe dhomën; një furnitor rregullon atë që është dokumentuar.",
+    "Mysafiri": "Mysafiri nuk erdhi, nuk pagoi ose kundërshtoi një faturim. Shëno çfarë u ra dakord me të, që turni tjetër të mos e nisë bisedën nga e para.",
+    "Trajnimi": "Postimi u bë me dorë dhe u bë gabim. Shikoje hapin një herë bashkë me personin, pastaj rregullo hapin: një listë kontrolli në banak vlen më shumë se një kujtesë në mbledhje.",
+    "E panjohur": "Një pjesë e madhe „E panjohur“ do të thotë se regjistri nuk është ende mjaft i mirë. Shëno hapin dhe shkakun në momentin që gjendet përjashtimi, gjatë auditit."
+  },
+  "checklist": [
+    "Mbërritjet e nesërme u kontrolluan në mbrëmje: tarifa, garancia dhe kërkesat e veçanta.",
+    "Çdo mysafir i pritur është in-house, no-show ose anulim; askush nuk është ende „i pritur“.",
+    "No-show-et u liruan në orën e rënë dakord, me politikën e anulimit të zbatuar njësoj.",
+    "Çdo dhomë e zënë ka një kod tarife të vlefshëm dhe një kartë regjistrimi në dosje.",
+    "Çdo kartë u para-autorizua në check-in dhe autorizimi është në rezervim.",
+    "Kartat virtuale të mbërritjeve të sotme u faturuan sonte, dhe ato të dështuara iu raportuan kanalit.",
+    "Postimet e ditës u krahasuan me listat e outlet-eve para se të niste auditi.",
+    "Faturat e nesërme u përgatitën dhe u lexuan një herë gjatë natës.",
+    "Kontrollet para-audit u kryen para mbylljes, dhe çfarë gjetën u rregullua ose u dorëzua.",
+    "Turni i mëngjesit ka një shënim me shkrim: çfarë u rregullua, çfarë mbetet e hapur dhe kush e ka në dorë."
+  ],
+  "example": {
+    "period": "Java shembull",
+    "volume": 1260,
+    "target": 2,
+    "rows": [
+      "2026-09-14|Natë|Mbërritja|No-show|Pa garanci|3|417",
+      "2026-09-14|Pasdite|Pagesa|Kartë e refuzuar|Pa garanci|2|298",
+      "2026-09-14|Natë|In-house|Gabim postimi|Trajnimi|1|",
+      "2026-09-14|Natë|Mbyllja e auditit|Tarifë e gabuar|Sistemi|1|",
+      "2026-09-15|Natë|Mbërritja|No-show|Pa garanci|2|258",
+      "2026-09-15|Pasdite|Mbërritja|Mungon regjistrimi|Boshllëk dorëzimi|1|",
+      "2026-09-15|Natë|Pagesa|Kartë e refuzuar|Të dhënat e rezervimit|1|149",
+      "2026-09-15|Mëngjes|Largimi|Bilanc i hapur|Mysafiri|1|62",
+      "2026-09-16|Natë|Mbërritja|No-show|Pa garanci|4|552",
+      "2026-09-16|Natë|In-house|Gabim postimi|Boshllëk dorëzimi|2|",
+      "2026-09-16|Pasdite|Rezervimi|Tarifë e gabuar|Të dhënat e rezervimit|1|",
+      "2026-09-16|Natë|Pagesa|Kartë e refuzuar|Pa garanci|1|139",
+      "2026-09-17|Natë|Mbërritja|No-show|Pa garanci|2|276",
+      "2026-09-17|Natë|Pagesa|Kartë e refuzuar|Mysafiri|2|318",
+      "2026-09-17|Mëngjes|Largimi|Bilanc i hapur|Boshllëk dorëzimi|1|45",
+      "2026-09-17|Natë|In-house|Gabim postimi|Trajnimi|1|",
+      "2026-09-18|Natë|Mbërritja|No-show|Pa garanci|5|705",
+      "2026-09-18|Pasdite|Mbërritja|Mungon regjistrimi|Trajnimi|2|",
+      "2026-09-18|Natë|Pagesa|Kartë e refuzuar|Pa garanci|2|278",
+      "2026-09-18|Natë|Mbyllja e auditit|Tarifë e gabuar|Sistemi|1|",
+      "2026-09-18|Natë|In-house|Gabim postimi|E panjohur|1|",
+      "2026-09-19|Natë|Mbërritja|No-show|Të dhënat e rezervimit|2|238",
+      "2026-09-19|Pasdite|Pagesa|Kartë e refuzuar|Pa garanci|1|119",
+      "2026-09-19|Mëngjes|Largimi|Bilanc i hapur|Mysafiri|2|96",
+      "2026-09-19|Natë|Rezervimi|Tarifë e gabuar|Të dhënat e rezervimit|1|",
+      "2026-09-20|Natë|Mbërritja|No-show|Pa garanci|1|129",
+      "2026-09-20|Natë|In-house|Gabim postimi|Boshllëk dorëzimi|1|",
+      "2026-09-20|Mëngjes|Largimi|Bilanc i hapur|Mysafiri|1|38"
+    ],
+    "volumes": [
+      "2026-09-14|190",
+      "2026-09-15|180",
+      "2026-09-16|170",
+      "2026-09-17|200",
+      "2026-09-18|210",
+      "2026-09-19|160",
+      "2026-09-20|150"
+    ]
+  }
+}

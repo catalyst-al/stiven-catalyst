@@ -40,6 +40,14 @@
     "cta": "Open the route log"
   },
   {
+    "name": "Night Audit Log",
+    "type": "Hotel",
+    "time": "Ongoing",
+    "summary": "Log the no-shows, declined cards, posting errors and open balances the night audit finds. See the exception rate, DPMO and sigma level, the causes behind most of them, and where in the stay they start.",
+    "url": "/tools/night-audit/",
+    "cta": "Open the audit log"
+  },
+  {
     "name": "Sigma & Control Chart",
     "type": "Six Sigma",
     "time": "5 min",

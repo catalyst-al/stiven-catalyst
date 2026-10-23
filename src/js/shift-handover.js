@@ -173,7 +173,13 @@
     [done, text, priority, owner, due].forEach((node) => { node.dataset.index = i; });
     const meta = el("div", "sh-issue-meta");
     meta.append(priority, owner, due);
-    if (issue.carried) meta.append(el("span", `dl-tag${issue.carried >= CARRY_LIMIT ? " is-warn" : ""}`, tx("Carried {n}×", { n: issue.carried })));
+    if (issue.carried >= CARRY_LIMIT) {
+      // Carried this often, it is not a shift problem any more: the tag opens 5 Whys on it.
+      const whys = el("a", "dl-tag is-warn", `${tx("Carried {n}×", { n: issue.carried })} · 5 Whys`);
+      whys.href = fiveWhysUrl(issue.text);
+      whys.title = tx("Take it to 5 Whys");
+      meta.append(whys);
+    } else if (issue.carried) meta.append(el("span", "dl-tag", tx("Carried {n}×", { n: issue.carried })));
     meta.append(removeButton("", "issue", i));
     const main = el("div", "sh-issue-main");
     main.append(text, meta);
@@ -183,6 +189,12 @@
   };
 
   const noIssues = () => el("p", "form-note sh-help", tx("No open issues yet."));
+  // The 5 Whys worksheet in this language (the link in the aside), opened on an issue.
+  const fiveWhysUrl = (problem) => {
+    const url = new URL(document.querySelector("a[data-five-whys]")?.getAttribute("href") || "../five-whys/", location.href);
+    url.searchParams.set("problem", tx("Carried over {n} shifts: {text}", { n: CARRY_LIMIT, text: problem }));
+    return url.href;
+  };
 
   const renderIssues = () => {
     issuesBox.replaceChildren(...(cur().issues.length ? cur().issues.map(issueRow) : [noIssues()]));
@@ -249,9 +261,12 @@
     const departed = routes.filter((row) => row.dep !== null);
     // A route log with only some routes of its period (often the late ones) gives counts, never a share.
     const partial = partialRouteLog(delay.settings);
+    // The Night Audit Log: reservations logged as no-shows on this date and shift.
+    const noShows = logRows("night-audit").rows.filter(mine).filter((row) => /no[- ]?show/i.test(str(row.type)));
     return {
       damage: damage.length ? units(damage) : null,
       incomplete: incomplete.length ? units(incomplete) : null,
+      noShows: noShows.length ? units(noShows) : null,
       departures: departed.length ? { onTime: departed.filter((row) => row.dep <= depGrace).length, total: departed.length, partial } : null,
       arrivals: routes.length ? { onTime: routes.filter((row) => row.arr <= arrGrace).length, total: routes.length, partial } : null,
     };
@@ -265,6 +280,7 @@
   // What each source writes, for the metric it belongs to.
   const fillValue = (source, totals, h) => {
     const fromLog = tx("from the log");
+    if (source === "noShows") return totals.noShows === null ? null : [String(totals.noShows), `${tx("Night Audit Log")} · ${fromLog}`];
     if (source === "damage" || source === "incomplete") {
       const count = totals[source];
       if (count === null) return null;
@@ -685,4 +701,21 @@
 
   if (!cur().date) cur().date = today();
   renderAll();
+
+  // 5 Whys hands its countermeasure over with ?issue=, ?owner= and ?due=: it becomes an open issue of this handover,
+  // once (the same text open already is not added twice). The address is cleaned so a reload does not add it again.
+  const incoming = new URLSearchParams(location.search);
+  const issueText = incoming.get("issue")?.trim();
+  if (issueText) {
+    const open = cur().issues.find((issue) => !issue.done && issue.text.trim() === issueText);
+    if (!open) {
+      cur().issues.push({ text: issueText, priority: data.priorities[0], owner: incoming.get("owner")?.trim() || "", due: incoming.get("due")?.trim() || "", done: false, carried: 0 });
+      save();
+      renderAll();
+    }
+    note(open ? tx("“{text}” is already an open issue here.", { text: issueText }) : tx("Added from 5 Whys as an open issue: “{text}”.", { text: issueText }));
+    ["issue", "owner", "due"].forEach((name) => incoming.delete(name));
+    history.replaceState(null, "", location.pathname + (incoming.size ? `?${incoming}` : "") + location.hash);
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 })();

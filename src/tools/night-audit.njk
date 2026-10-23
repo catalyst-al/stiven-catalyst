@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Night Audit Log
+seo_title: "Night audit log: no-shows, declined cards and posting errors by cause"
+description: "A private night audit log for hotel front office: exception rate, DPMO and sigma level, a Pareto of causes and where in the stay each exception starts."
+activeNav: /tools.html
+permalink: /tools/night-audit/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Hotel</p>
+  <h1>Night Audit Log</h1>
+  <p class="lede">Log every no-show, declined card, posting error and open balance the audit finds, with the stage of the stay where it was found and the cause behind it. The tool shows your exception rate, the few causes behind most of it, and where in the day to start.</p>
+</section>
+
+{% set cfg = nightAudit %}
+{% include "partials/defect-log.njk" %}

@@ -20,8 +20,8 @@
 
   // The work of these tools is an object, and of the logs among them a list of rows. An entry of any other shape was
   // damaged or made by hand: opened, it would wipe the log it replaces, so the whole file is refused.
-  const OBJECT = /^sc-(damage-control|incomplete-control|delay-analyzer|sigma-chart|pareto|cx-tower|shift-handover|six-sigma|dmaic)(-(de|sq))?$/;
-  const LOG = /^sc-(damage-control|incomplete-control|delay-analyzer|sigma-chart)(-(de|sq))?$/;
+  const OBJECT = /^sc-(damage-control|incomplete-control|night-audit|delay-analyzer|sigma-chart|pareto|cx-tower|shift-handover|six-sigma|dmaic)(-(de|sq))?$/;
+  const LOG = /^sc-(damage-control|incomplete-control|night-audit|delay-analyzer|sigma-chart)(-(de|sq))?$/;
   const sound = ([key, value]) => {
     if (!OBJECT.test(key)) return true;
     let parsed;

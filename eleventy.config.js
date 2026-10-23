@@ -34,7 +34,7 @@ export default function (eleventyConfig) {
   // prefixes them with the folder the site lives in (for example /stiven-catalyst/ on a GitHub Pages project address).
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
-  for (const path of ["styles.css", "coaching.css", "script.js", "favicon.svg", "social.png", "fonts", "media", "js"]) {
+  for (const path of ["styles.css", "coaching.css", "script.js", "sw.js", "manifest.webmanifest", "favicon.svg", "social.png", "fonts", "icons", "media", "js"]) {
     eleventyConfig.addPassthroughCopy(`src/${path}`);
   }
 
