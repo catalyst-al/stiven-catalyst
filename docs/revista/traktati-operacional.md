@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -357,6 +357,56 @@ për faqen në tri gjuhët (`lib/treatise/volumes/08.js`). Blloku: Operacioni. 3
 | Para / gjatë / pas programit | `salas-2012`, DOI 10.1177/1529100612436661 | DOI hapet, PSPI 13(2) |
 | Angazhimi në trajnim në shumë nivele dhe në kohë | `sitzmann-weinhardt-2018`, DOI 10.1177/0149206315574596 | DOI hapet, JOM 44(2) |
 | "Dhjetë vëzhgime" te piloti | editoriale | Thuhet shprehimisht ilustrim, jo madhësi mostre |
+
+## Vëllimi 9: Hendeku i rikuperimit, pse ndreqja e dështimit nuk është rikthim i besimit (23 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 9, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/09.js`). Blloku: Operacioni. 33 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Tri faqe më shumë se PDF-ja.** Të gjashtë kapitujt kanë skenë, shpjegim dhe protokoll si te PDF-ja. PDF-ja nuk ka
+  asnjë grafik numerik (vetëm numra studimesh dhe lista cilësore), kurse sistemi kërkon dy grafikë; u shtuan dy faqe
+  modeli, hipotetike me flamur, që vizatojnë dy ide që PDF-ja i përshkruan me fjalë: "Dy orë në një rast të shpikur"
+  (Kap. I: ndreqja teknike 2 h, rasti i brendshëm i mbyllur 3 h, klienti i përditësuar 14 h, marrja e konfirmuar 26
+  h, zgjidhja e verifikuar 38 h) dhe "Dyzet raste të shënuara të mbyllura" (Kap. III: 40 / 36 / 28 / 19 / 14 / 6).
+  Edhe faqja e metodës, si te vëllimet e tjera.
+- **Katër rezultatet e de Matos** (kënaqësia pozitive; riblerja, fjala gojore, imazhi pa efekt domethënës) mbeten
+  rreshta cilësorë, jo grafik: PDF-ja nuk jep madhësi efekti dhe nuk duhen shpikur.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref, abstrakteve dhe tekstit të plotë: Orsingher et al. 2010,
+  60 studime, shpërndarëse > ndërvepruese > procedurale, kënaqësia me trajtimin nuk ndërmjetëson për kënaqësinë e
+  përgjithshme dhe qëllimin e kthimit; de Matos et al. 2007 siç më lart; Maxham & Netemeyer 2002, dy studime në
+  terren (bankë me 116 degë, tri pyetësorë; ndërtues shtëpish), kënaqësia me rikuperimin parashikon më fort fjalën
+  gojore, kënaqësia e përgjithshme parashikon më fort qëllimin e blerjes (teksti i plotë i shkarkuar); Das et al.
+  2026, 147 studime, 82.901 pjesëmarrës, 24 vende, JBR 202, 115752; Bitner et al. 1990, 700 incidente kritike;
+  Van Vaerenbergh et al. 2014, kontrollueshmëria → emocione negative më të forta, qëndrueshmëria → kënaqësia e
+  transaksionit dhe e përgjithshme; Homburg & Fürst 2005, mekanike / organike, plotësuese, dallime B2B/B2C dhe
+  shërbime/prodhim. Asnjë gabim faktik në PDF.
+- **Burimet.** Asnjëri nuk ekzistonte; u shtuan të dhjetë. Nëntë DOI zgjidhen në Crossref me të njëjtët autorë,
+  revista, vëllime dhe faqe; Hart, Heskett & Sasser 1990 (HBR) nuk ka DOI dhe citohet me faqen e HBR-së, si te
+  PDF-ja. Vitet sipas vëllimit të shtypur: Orsingher 2010 (online 2009), Gelbrich & Roschk 2011 (online 2010), Das
+  2026 (online 2025). Emrat e autorëve të Das et al. sipas Crossref (Jinal Sameer Shah, jo "Shah" i panjohur).
+- **Lidhjet me faqen.** Esetë: the-angry-guest-at-2am (Kap. I), 61-resellers (Kap. II), the-scanner-is-a-witness
+  (Kap. III), a-bad-day-or-a-problem (Kap. IV), how-we-worked-with-damage (Kap. V),
+  mistakes-get-lost-between-departments (Kap. VI). Mjeti: Last-Mile CX Control Tower.
+- **Çfarë u ndryshua nga PDF-ja.** Protokollet e Kapitujve I, V dhe VI dhe faqet e modelit u shkurtuan që të hyjnë në
+  A5 (DE); "the editors" u bë "editorial". Asgjë tjetër.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Argument menaxherial për rikuperimin; HBR 68(4), 148–156 | `hart-heskett-sasser-1990` | Faqja e HBR-së; pa DOI |
+| 700 incidente kritike nga linja ajrore, hotele, restorante | `bitner-booms-tetreault-1990`, DOI 10.1177/002224299005400105 | Abstrakti përputhet |
+| Rezultati, procedura, trajtimi ndërpersonal; pa renditje universale | `tax-brown-chandrashekaran-1998`, DOI 10.1177/002224299806200205 | DOI hapet, JM 62(2) |
+| Dy studime në terren; kënaqësia me rikuperimin → fjala gojore, kënaqësia e përgjithshme → blerja | `maxham-netemeyer-2002`, DOI 10.1016/S0022-4359(02)00100-8 | Abstrakti dhe teksti i plotë përputhen |
+| Mekanike / organike, kryesisht plotësuese; dallime B2B/B2C, shërbime/prodhim | `homburg-furst-2005`, DOI 10.1509/jmkg.69.3.95.66367 | DOI hapet, JM 69(3) |
+| Paradoksi: kënaqësia pozitive; riblerja, fjala gojore, imazhi jo domethënëse | `de-matos-2007`, DOI 10.1177/1094670507303012 | Abstrakti përputhet |
+| 60 studime; shpërndarëse > ndërvepruese > procedurale; pa ndërmjetësim për kënaqësinë e përgjithshme dhe kthimin | `orsingher-2010`, DOI 10.1007/s11747-009-0155-z | Abstrakti përputhet |
+| Përgjigjet → drejtësia → kënaqësia → qëllimet | `gelbrich-roschk-2011`, DOI 10.1177/1094670510387914 | DOI hapet, JSR 14(1) |
+| Kontrollueshmëria dhe qëndrueshmëria; emocione, kënaqësi, besnikëri | `van-vaerenbergh-2014`, DOI 10.1177/1094670514538321 | Abstrakti përputhet |
+| 147 studime, 82.901 pjesëmarrës, 24 vende, shërbime online | `das-2026`, DOI 10.1016/j.jbusres.2025.115752 | Abstrakti përputhet |
+| 2 / 3 / 14 / 26 / 38 orë dhe 40 / 36 / 28 / 19 / 14 / 6 | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
 
 ## Si shtohet një vëllim
 
