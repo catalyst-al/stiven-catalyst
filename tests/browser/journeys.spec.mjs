@@ -13,9 +13,15 @@ test("homepage → an essay, read to the end", async ({ page, theme }) => {
   await expectTheme(page, theme);
   await expectAccessible(page);
 
-  // The first essay featured on the homepage.
+  // The first essay featured on the homepage. On a cold runner the homepage can still be laying itself out when the
+  // first journey reaches it (fonts and covers arriving, the treatise and the hero settling), and a link that moves
+  // between the hit check and the click does not navigate: wait for the network to go quiet, bring the card into
+  // view the way a reader would, and only then click.
   const link = page.locator('.feature-card a[href^="/insights/"]').first();
   const href = await link.getAttribute("href");
+  await page.waitForLoadState("networkidle");
+  await link.scrollIntoViewIfNeeded();
+  await expect(link).toBeInViewport();
   await link.click();
   await expect(page).toHaveURL(href);
   const article = page.locator("[data-article]");
