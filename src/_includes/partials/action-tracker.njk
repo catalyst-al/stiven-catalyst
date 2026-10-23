@@ -1,0 +1,108 @@
+{#- The Action Tracker: one list of actions for every tool (js/actions-store.js keeps it, action-tracker.js shows it). -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-action-tracker>
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ "New action" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="at-title">{{ "Action" | t(lang) }}</label>
+            <input id="at-title" name="title" placeholder="{{ 'A verb, a change to the process: e.g. Post the stacking rule as one picture at dock 2' | t(lang) }}" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="at-owner">{{ "Owner" | t(lang) }}</label>
+            <input id="at-owner" name="owner" autocomplete="off" list="at-owners">
+            <datalist id="at-owners"></datalist>
+          </div>
+          <div class="field">
+            <label for="at-due">{{ "Due date" | t(lang) }}</label>
+            <input id="at-due" name="due" type="date">
+          </div>
+          <div class="field">
+            <label for="at-area">{{ "Area" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="at-area" name="area" autocomplete="off" list="at-areas">
+            <datalist id="at-areas"></datalist>
+          </div>
+          <div class="field">
+            <label for="at-priority">{{ "Priority" | t(lang) }}</label>
+            <select id="at-priority" name="priority">
+              {%- for key, label in cfg.priorities %}
+              <option value="{{ key }}"{% if key == "Medium" %} selected{% endif %}>{{ label }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="at-check">{{ "How will you know it worked?" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="at-check" name="check" placeholder="{{ 'e.g. Crushed parcels at loading below 10 a week for four weeks' | t(lang) }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="at-detail">{{ "Detail" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="at-detail" name="detail" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add action" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "The list" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <div class="at-filters" role="group" aria-label="{{ 'Filter' | t(lang) }}">
+        <div class="at-status-filter" data-status-filter>
+          <button type="button" data-status="live" aria-pressed="true">{{ "Open and in progress" | t(lang) }}</button>
+          <button type="button" data-status="overdue" aria-pressed="false">{{ "Overdue" | t(lang) }}</button>
+          <button type="button" data-status="done" aria-pressed="false">{{ "Done" | t(lang) }}</button>
+          <button type="button" data-status="verified" aria-pressed="false">{{ "Verified" | t(lang) }}</button>
+          <button type="button" data-status="all" aria-pressed="false">{{ "All" | t(lang) }}</button>
+        </div>
+        <div class="at-filter-fields">
+          <div class="field">
+            <label for="at-filter-owner">{{ "Owner" | t(lang) }}</label>
+            <select id="at-filter-owner" data-filter="owner"><option value="">{{ "Everyone" | t(lang) }}</option></select>
+          </div>
+          <div class="field">
+            <label for="at-filter-source">{{ "From" | t(lang) }}</label>
+            <select id="at-filter-source" data-filter="source"><option value="">{{ "Every tool" | t(lang) }}</option></select>
+          </div>
+          <div class="field">
+            <label for="at-filter-text">{{ "Search" | t(lang) }}</label>
+            <input id="at-filter-text" type="search" data-filter="text" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <ol class="at-list" data-list></ol>
+      <p class="dl-empty" data-log-empty>{{ "No actions yet." | t(lang) }} {{ "Add the first one above, send one from any tool, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example list" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-ics>{{ "Calendar file (.ics)" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear list" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="privacy-note">{{ "Your actions stay in this browser, the same list in every language. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results at-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="action-tracker-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/action-tracker.js' | assetUrl }}" defer></script>

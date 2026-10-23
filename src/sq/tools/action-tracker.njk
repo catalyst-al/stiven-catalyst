@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Lista e veprimeve
+seo_title: "Lista e veprimeve për ekipet operative: përgjegjës, afate, PDCA dhe verifikim"
+description: "Një listë private e veprimeve nga çdo mjet: përgjegjësi, afati, statusi, verifikimi. Të vonuarat në fillim, shqyrtim javor në dhjetë minuta, kalendar dhe Excel."
+activeNav: /sq/tools.html
+permalink: /sq/tools/action-tracker/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Veprime</p>
+  <h1>Lista e veprimeve</h1>
+  <p class="lede">Çdo kundërmasë, gjetje dhe sinjal nga mjetet e tjera vjen këtu me një përgjegjës, një datë dhe një mënyrë kontrolli. Të vonuarat në fillim, pastaj kjo javë, pastaj çfarë u verifikua. Lista është shqyrtimi javor.</p>
+</section>
+
+{% set cfg = sq.actionTracker %}
+{% include "partials/action-tracker.njk" %}

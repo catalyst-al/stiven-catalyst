@@ -483,7 +483,9 @@ window.ToolKit = (() => {
       const hot = target ? b.total > 0 && b.value > target : max > 0 && i === top1;
       // The chart is one image with one name; a column is a tooltip (its title), not a tab stop of its own.
       const g = svgEl("g", { class: "tr-col" });
-      g.append(svgEl("title", {}, `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`));
+      const tipText = `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`;
+      g.append(svgEl("title", {}, tipText));
+      g.setAttribute("data-tip", tipText);
       g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
       if (b.value > 0) g.append(svgEl("rect", { x: cx - barW / 2, y: y(b.value), width: barW, height: Math.max(1, y(0) - y(b.value)), rx: 2, style: `fill:${hot ? colors.top : colors.bar}` }));
       if (buckets.length <= 16 && b.value > 0) g.append(svgEl("text", { x: cx, y: y(b.value) - 5, "text-anchor": "middle", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, format(b.value)));
@@ -510,7 +512,7 @@ window.ToolKit = (() => {
     svg.setAttribute("width", w);
     svg.setAttribute("height", h);
     svg.insertBefore(svgEl("rect", { x: 0, y: 0, width: w, height: h, fill: "#ffffff" }), svg.firstChild.nextSibling);
-    return new XMLSerializer().serializeToString(svg);
+    return new XMLSerializer().serializeToString(svg).replace(/ data-tip="[^"]*"/g, "");
   };
   const saveBlob = (name, blob) => {
     const link = el("a");
@@ -521,11 +523,37 @@ window.ToolKit = (() => {
     link.remove();
     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
   };
+  // One tooltip per chart: a pointer (or a tap) on a column with data-tip shows its text next to the pointer, the
+  // same text the column carries as its <title>. Used by the trend charts here and by js/chart-kit.js.
+  const chartTooltip = (wrap, svg) => {
+    const tooltip = el("div", "ck-tooltip");
+    tooltip.hidden = true;
+    tooltip.setAttribute("role", "status");
+    wrap.append(tooltip);
+    const show = (event) => {
+      const target = event.target.closest?.("[data-tip]");
+      if (!target) { tooltip.hidden = true; return; }
+      const lines = target.getAttribute("data-tip").split("\n");
+      tooltip.replaceChildren(...lines.map((text, i) => el(i ? "span" : "strong", null, text)));
+      tooltip.hidden = false;
+      const box = wrap.getBoundingClientRect();
+      const left = event.clientX - box.left, top = event.clientY - box.top;
+      const flip = left > box.width * 0.6;
+      tooltip.style.left = `${flip ? left - tooltip.offsetWidth - 12 : left + 12}px`;
+      tooltip.style.top = `${Math.max(0, top - tooltip.offsetHeight - 10)}px`;
+    };
+    svg.addEventListener("pointermove", show);
+    svg.addEventListener("pointerdown", show);
+    svg.addEventListener("pointerleave", () => { tooltip.hidden = true; });
+    return tooltip;
+  };
   // A figure with the chart and its "Chart as SVG / PNG" buttons.
   const trendFigure = (trend, labels, fileName) => {
     const figure = el("figure", "tr-figure");
     const scroller = el("div", "tr-scroll");
-    scroller.append(trendChart(trend, TREND_COLORS, labels));
+    const chart = trendChart(trend, TREND_COLORS, labels);
+    scroller.append(chart);
+    chartTooltip(scroller, chart);
     const actions = el("div", "tool-actions");
     const svgButton = el("button", "button-secondary", tx("Chart as SVG"));
     svgButton.type = "button";
@@ -1150,6 +1178,6 @@ window.ToolKit = (() => {
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
-    panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

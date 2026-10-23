@@ -1,0 +1,46 @@
+/* ===== Action Tracker (js/action-tracker.js) ===== */
+.at-filters { display: grid; gap: 12px; margin: 0 0 12px; }
+.at-status-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.at-status-filter button {
+  padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent;
+  color: var(--muted); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.at-status-filter button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+.at-filter-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px 14px; }
+.at-filter-fields .field label { font-size: 12px; }
+
+.at-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.at-item {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; align-items: start;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+}
+.at-item.is-overdue { border-color: color-mix(in srgb, var(--danger) 55%, transparent); }
+.at-item.is-closed { opacity: .78; }
+.at-item.is-closed .at-title { text-decoration: line-through; text-decoration-color: var(--muted); }
+.at-status { align-self: start; }
+.at-status select { min-width: 0; padding: 6px 8px; font-size: 13px; }
+.at-main { display: grid; gap: 6px; min-width: 0; }
+.at-title { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.at-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; color: var(--muted); font-size: 13px; }
+.at-meta .ck-chip { padding: 2px 8px; font-size: 12px; }
+.at-detail { margin: 0; color: var(--muted); font-size: 14px; }
+.at-edit { display: none; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 12px; margin-top: 6px; }
+.at-item.is-editing .at-edit { display: grid; }
+.at-edit .field label { font-size: 12px; }
+.at-edit .dl-wide { grid-column: 1 / -1; }
+.at-tools { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 1 / -1; }
+.at-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+
+.at-results .dl-stats { margin-bottom: 18px; }
+.at-review { margin: 0 0 18px; }
+.at-review ul { margin: 6px 0 12px; padding-left: 20px; }
+.at-review li { margin-bottom: 4px; }
+.at-review small { color: var(--muted); }
+
+@media (max-width: 600px) {
+  .at-item { grid-template-columns: 1fr; }
+}
+@media print {
+  .at-filters, .at-tools, .at-edit, form[data-entry], .tool-aside, .at-results .tool-actions { display: none !important; }
+  .at-item { break-inside: avoid; }
+}

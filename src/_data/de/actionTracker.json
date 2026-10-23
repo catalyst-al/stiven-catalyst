@@ -1,0 +1,62 @@
+{
+  "storageKey": "sc-actions",
+  "statuses": { "open": "Offen", "doing": "In Arbeit", "done": "Erledigt", "verified": "Bestätigt" },
+  "priorities": { "High": "Hoch", "Medium": "Mittel", "Low": "Niedrig" },
+  "sources": {
+    "manual": "Hier eingetragen",
+    "five-whys": "5 Whys",
+    "five-s-audit": "5S-Audit",
+    "daily-board": "Tagesboard",
+    "a3-report": "A3-Bericht",
+    "fishbone": "Ishikawa",
+    "kaizen-board": "Kaizen-Board",
+    "process-lab": "Prozesslabor",
+    "fmea": "FMEA",
+    "oee": "OEE",
+    "skills-matrix": "Qualifikationsmatrix",
+    "safety-cross": "Sicherheitskreuz",
+    "time-study": "Zeitstudie",
+    "value-stream-map": "Wertstrom",
+    "standard-work": "Standardarbeit",
+    "hotel-kpis": "Hotel-Kennzahlen",
+    "gemba-walk": "Gemba Walk",
+    "shift-handover": "Schichtübergabe",
+    "pareto": "Pareto 80/20",
+    "sigma-control-chart": "Regelkarte",
+    "cx-control-tower": "CX Control Tower",
+    "kpi-diagnostic": "KPI-Diagnose"
+  },
+  "tips": [
+    ["Eine Liste, jedes Tool.", "Eine Maßnahme aus 5 Whys, ein Befund aus dem 5S-Audit, ein Signal aus der Regelkarte: alles landet hier mit Verantwortlichem und Termin."],
+    ["Eine Maßnahme hat drei Dinge.", "Ein Verb, einen Namen und ein Datum. „Beladung verbessern“ ist ein Wunsch; „Anna hängt bis Freitag das Stapelbild an Tor 2“ ist eine Maßnahme."],
+    ["Erledigt ist nicht bestätigt.", "Erledigt heißt: die Änderung wurde gemacht. Bestätigt heißt: die Zahl hat sich bewegt und bleibt dort. Erst Bestätigt schließt den Kreis."],
+    ["Wöchentlich prüfen, in zehn Minuten.", "Zuerst das Überfällige, dann die Woche, dann das Bestätigte. Die Liste ist die Tagesordnung."],
+    ["Weniger, dafür fertig.", "Zehn offene Maßnahmen, die niemand schließt, sind schlimmer als drei, die bestätigt werden. Streichen oder zusammenlegen, was liegen geblieben ist."]
+  ],
+  "verdicts": {
+    "clear": "Nichts überfällig. Die Liste ist unter Kontrolle.",
+    "some": "{n} überfällig. Heute entscheiden: neuer Termin, neuer Verantwortlicher oder streichen.",
+    "many": "{n} überfällig. Die Liste ist kein Plan mehr. Schließen, zusammenlegen oder streichen, bis nur Echtes bleibt."
+  },
+  "review": {
+    "title": "Wöchentliche Maßnahmenprüfung",
+    "overdue": "Überfällig",
+    "week": "Diese Woche fällig",
+    "verified": "Seit letzter Woche bestätigt",
+    "none": "keine"
+  },
+  "example": [
+    { "title": "Stapelregel als ein Bild an Tor 2", "detail": "Schwere Kartons unten, Zerbrechliches oben, max. 1,6 m. Laminiertes A3 an der Laderampe.", "owner": "Anna", "offset": -2, "source": "five-whys", "check": "Gequetschte Pakete beim Beladen vier Wochen lang unter 10 pro Woche", "area": "Tor 2", "priority": "High", "status": "doing", "created": -12 },
+    { "title": "Bodenmarkierung für die drei Rollwagen an Kommissionierung B", "owner": "Besnik", "offset": 3, "source": "five-s-audit", "check": "Audit-Wert „Ordnung“ ≥ 3 beim nächsten Rundgang", "area": "Kommissionierung B", "priority": "Medium", "status": "open", "created": -5 },
+    { "title": "Defekte Scannerhalterung an Packplatz 4 ersetzen", "owner": "Clara", "offset": -6, "source": "five-s-audit", "area": "Packen", "priority": "Medium", "status": "open", "created": -14 },
+    { "title": "Disponent verantwortet den Rampenplan ab 5:30", "detail": "Schichtleitung bestätigt um 6:00 im Briefing.", "owner": "Driton", "offset": -20, "source": "five-whys", "check": "Abfahrten fünf Tage in Folge innerhalb von 5 Minuten", "area": "Rampe", "priority": "High", "status": "done", "created": -34, "closed": -21 },
+    { "title": "Volumen der Woche 41 im Schadensprotokoll nachzählen", "owner": "Anna", "offset": 1, "source": "sigma-control-chart", "area": "Warenausgang", "priority": "Low", "status": "open", "created": -3 },
+    { "title": "Sicherheitsgespräch: Stapler- und Fußgängerwege", "owner": "Emir", "offset": 2, "source": "safety-cross", "check": "Einen Monat keine Beinahe-Unfälle an der Kreuzung", "area": "Wareneingang", "priority": "High", "status": "open", "created": -4 },
+    { "title": "Lina in Retourenbearbeitung schulen", "owner": "Besnik", "offset": 14, "source": "skills-matrix", "check": "Lina auf Stufe 3, von Besnik bestätigt", "area": "Retouren", "priority": "Medium", "status": "open", "created": -1 },
+    { "title": "Etikettendrucker neben den Packtisch stellen", "owner": "Clara", "offset": -27, "source": "kaizen-board", "check": "Laufweg pro Auftrag von 22 auf unter 8 Schritte", "area": "Packen", "priority": "Medium", "status": "verified", "created": -41, "closed": -26, "result": "Gemessen: 6 Schritte pro Auftrag. Beibehalten." },
+    { "title": "Wöchentlicher Anruf beim Carrier wegen später Abholungen", "owner": "Driton", "offset": -9, "source": "cx-control-tower", "area": "Disposition", "priority": "Medium", "status": "done", "created": -23, "closed": -8 },
+    { "title": "Night Audit: abgelehnte Karten vor 23:00 prüfen", "owner": "Mira", "offset": 5, "source": "shift-handover", "check": "Zwei Wochen kein offener Saldo beim Check-out", "area": "Rezeption", "priority": "High", "status": "doing", "created": -6 },
+    { "title": "Spalt unter Tor 7 schließen, durch den Regen eindringt", "owner": "Haustechnik", "offset": -15, "source": "gemba-walk", "area": "Rampe", "priority": "Medium", "status": "open", "created": -29 },
+    { "title": "Maximale Palettenhöhe für den Sorter festlegen", "owner": "Emir", "offset": -33, "source": "fmea", "check": "Einen Monat kein Sorterstau durch Höhe", "area": "Sorter", "priority": "High", "status": "verified", "created": -50, "closed": -31, "result": "Ein Monat ohne Höhenstau." }
+  ]
+}

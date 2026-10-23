@@ -8,13 +8,13 @@
   // Settings of the page itself, not work.
   const SKIP = new Set(["sc-theme", "sc-print-guide-hidden"]);
   // Storage names that differ from the tool's address.
-  const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower" };
+  const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower", actions: "action-tracker" };
 
   const isWork = (key) => typeof key === "string" && key.startsWith("sc-") && !SKIP.has(key);
   // "sc-damage-control-sq-check" → "damage-control": the floor check and calculator settings
   // belong to their tool, and each language of a tool keeps its own log.
   const toolSlug = (key) => {
-    const slug = key.replace(/^sc-/, "").replace(/-(check|calc)$/, "").replace(/-(de|sq)$/, "");
+    const slug = key.replace(/^sc-/, "").replace(/-(check|calc|ui)$/, "").replace(/-(de|sq)$/, "");
     return ALIAS[slug] || slug;
   };
 
