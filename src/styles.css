@@ -9749,6 +9749,90 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
   .a3-box .ck-figure svg { max-height: 70mm; width: auto; max-width: 100%; }
   .a3-table th, .a3-table td { padding: 3px 6px; }
 }
+/* ===== Kaizen Board (js/kaizen-board.js) =====
+   Six columns from Idea to Dropped. On a phone the columns sit side by side in their own scroller, one and a bit in
+   view, so the next column is always hinted; from 760px three per row, from 1100px all six. A card says its state in
+   words (the column, "Overdue", the days waited); colour never carries it alone. Printed on A4 in portrait. */
+.kb-results .kb-heading { margin-bottom: 18px; }
+.kb-board-wrap { margin: 0 0 22px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.kb-board { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 82%); gap: 12px; padding-bottom: 6px; }
+.kb-column {
+  display: grid; align-content: start; gap: 10px; min-width: 0; padding: 12px; scroll-snap-align: start;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper);
+}
+.kb-column-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.kb-column-title { margin: 0; font-size: 16px; font-weight: 800; }
+.kb-column-count { min-width: 1.8em; padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
+.kb-column-hint { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.kb-column-empty { margin: 0; padding: 14px 8px; border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); font-size: 13px; text-align: center; }
+.kb-cards { display: grid; gap: 10px; }
+
+/* A card. */
+.kb-card { display: grid; gap: 8px; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.kb-card:focus-within { border-color: var(--blue); }
+.kb-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.kb-card-title { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.kb-score {
+  flex: none; display: inline-grid; place-items: center; min-width: 30px; height: 26px; padding: 0 6px;
+  border-radius: 8px; background: color-mix(in srgb, var(--blue) 14%, transparent); color: var(--ink); font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums;
+}
+.kb-card-meta, .kb-card-people { margin: 0; color: var(--muted); font-size: 13px; }
+.kb-card-note { margin: 0; color: var(--ink); font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.kb-chips { gap: 6px; }
+.kb-chips .ck-chip { padding: 3px 8px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.kb-card-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.kb-move {
+  min-width: 40px; min-height: 36px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: transparent; color: var(--ink); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.kb-move:hover:not(:disabled) { border-color: var(--blue); }
+.kb-move:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.kb-move:disabled { opacity: .35; cursor: default; }
+.kb-move[aria-expanded="true"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
+
+/* Inline edit, inside the card. */
+.kb-edit { display: grid; gap: 12px; padding-top: 10px; border-top: 1px dashed var(--line); }
+.kb-edit-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.kb-field { display: grid; gap: 4px; min-width: 0; color: var(--muted); font-size: 12px; font-weight: 700; }
+.kb-in {
+  width: 100%; min-width: 0; min-height: 38px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--paper); color: var(--ink); font: inherit; font-size: 14px; font-weight: 400;
+}
+textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
+.kb-in:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.kb-edit-actions { align-items: center; margin: 0; }
+.kb-edit-actions .button-primary, .kb-edit-actions .button-ghost { min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.kb-danger { text-decoration: underline; text-underline-offset: 3px; }
+.kb-links { display: flex; flex-wrap: wrap; gap: 6px 14px; width: 100%; font-size: 14px; }
+
+/* Results around the board. */
+.kb-sub { margin: 20px 0 8px; }
+.kb-focus .kb-focus-note { margin: 0; color: var(--muted); font-size: 14px; }
+
+@media (min-width: 760px) {
+  .kb-board-wrap { overflow: visible; scroll-snap-type: none; }
+  .kb-board { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-columns: auto; }
+}
+@media (min-width: 1100px) {
+  .kb-board { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+  .kb-column { padding: 10px; }
+  .kb-card { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kb-move { transition: none; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .kb-setup, .kb-card-actions, .kb-edit, .kb-results .result-actions, .kb-results .ck-actions, .kb-results .dl-example-note { display: none !important; }
+  .kb-board-wrap { overflow: visible; }
+  .kb-board { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .kb-column { padding: 6px; break-inside: avoid; background: none; }
+  .kb-column-hint { display: none; }
+  .kb-card { padding: 6px; break-inside: avoid; }
+  .kb-score { border: 1px solid #000; background: none; }
+}
 /* ===== Process Lab (js/process-lab.js, js/stats-kit.js) =====
    Three tabs (measurements, before/after, sample size), each a quiet form; the verdicts are sentences with a bold
    word, and the state colour on a verdict only repeats what the word says. */

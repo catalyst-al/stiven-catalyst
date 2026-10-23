@@ -1,0 +1,111 @@
+{#- Kaizen Board: the team's improvement ideas from suggestion to verified result, PDCA columns and an effort/impact matrix; kaizen-board.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout dl-setup kb-setup">
+  <div class="tool-panel" data-kaizen-board>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ "New idea" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="kb-title">{{ "Idea" | t(lang) }}</label>
+            <input id="kb-title" name="title" placeholder="{{ t.titlePlaceholder }}" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="kb-waste">{{ "What it removes" | t(lang) }}</label>
+            <select id="kb-waste" name="waste">
+              {%- for waste in cfg.wastes %}
+              <option>{{ waste }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="kb-area">{{ "Area" | t(lang) }}</label>
+            <input id="kb-area" name="area" list="kb-areas" placeholder="{{ t.areaPlaceholder }}" autocomplete="off">
+            <datalist id="kb-areas" data-areas>
+              {%- for area in cfg.areas %}
+              <option value="{{ area }}"></option>
+              {%- endfor %}
+            </datalist>
+          </div>
+          <div class="field">
+            <label for="kb-by">{{ "Proposed by" | t(lang) }}</label>
+            <input id="kb-by" name="by" placeholder="{{ t.byPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="kb-date">{{ "Date" | t(lang) }}</label>
+            <input id="kb-date" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="kb-effort">{{ "Effort" | t(lang) }}</label>
+            <select id="kb-effort" name="effort">
+              {%- for step in cfg.scales.effort %}
+              <option value="{{ loop.index }}"{% if loop.index == 2 %} selected{% endif %}>{{ step }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="kb-impact">{{ "Impact" | t(lang) }}</label>
+            <select id="kb-impact" name="impact">
+              {%- for step in cfg.scales.impact %}
+              <option value="{{ loop.index }}"{% if loop.index == 3 %} selected{% endif %}>{{ step }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="kb-saving">{{ "Saving € per month" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="kb-saving" name="saving" type="number" min="0" step="1" inputmode="decimal" placeholder="{{ t.savingPlaceholder }}">
+          </div>
+          <div class="field">
+            <label for="kb-owner">{{ "Owner" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="kb-owner" name="owner" placeholder="{{ t.ownerPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="kb-due">{{ "Due date" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="kb-due" name="due" type="date">
+          </div>
+        </div>
+        <p class="form-note">{{ t.scaleNote }}</p>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to the board" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "The board" | t(lang) }}</p>
+        <p class="form-note" data-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-status aria-live="polite"></p>
+      <p class="form-note">{{ "The board is below the form. Move a card with the arrows, open it to edit, drop it with a reason. Every column shows how many days a card has waited there." | t(lang) }}</p>
+      <p class="dl-empty" data-empty>{{ t.empty }} {{ "Add the first one above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example board" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear the board" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Go deeper when it is big." | t(lang) }}</strong> {{ "A project idea gets an" | t(lang) }} <a class="inline-link" href="{{ '/tools/a3-report/' | local(lang) }}" data-a3>A3</a>; {{ "a problem that keeps coming back goes through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results kb-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="kaizen-board-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/kaizen-board.js' | assetUrl }}" defer></script>
