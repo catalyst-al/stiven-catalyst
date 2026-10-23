@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: 5S Audit
+seo_title: "5S audit checklist and score for warehouse, hotel and delivery station: 5S, 6S, 8S"
+description: "Walk one area and score each S from 0 to 4: per-S scores, a radar against the last audit, the trend per area, findings as actions and a red tag register."
+activeNav: /tools.html
+permalink: /tools/five-s-audit/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Lean</p>
+  <h1>5S Audit</h1>
+  <p class="lede">Walk one area with the checklist and score each question as you see it now, from 0 to 4. The tool shows where the area stands on each S, how it moved since the last walk, which areas lead and lag, and turns the findings into actions with an owner.</p>
+</section>
+
+{% set cfg = fiveSAudit %}
+{% include "partials/five-s-audit.njk" %}

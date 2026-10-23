@@ -1,0 +1,98 @@
+/* ===== 5S Audit (js/five-s-audit.js) ===== */
+/* Scope: three pills, one pressed. */
+.fs-scope { display: flex; flex-wrap: wrap; gap: 8px; }
+.fs-scope button {
+  min-height: 40px; min-width: 64px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--ink); font: inherit; font-size: 15px; font-weight: 800; cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.fs-scope button:hover { border-color: var(--blue); }
+.fs-scope button[aria-pressed="true"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 16%, transparent); }
+.fs-scope button:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.fs-scope-note { margin: 0; }
+
+/* The walk. */
+.fs-progress { margin: 0; font-weight: 700; color: var(--ink); }
+.fs-levels { color: var(--muted); font-size: 14px; }
+.fs-levels summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+.fs-level-list { display: grid; gap: 4px; margin: 10px 0 0; padding: 0; list-style: none; }
+.fs-level-list strong { display: inline-block; min-width: 1.6em; color: var(--ink); }
+.fs-questions { display: grid; gap: 22px; min-width: 0; }
+.dl-box .fs-pillar { gap: 10px; }
+.fs-pillar-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.fs-pillar-name { font-size: 18px; font-weight: 800; }
+.fs-pillar-name small { color: var(--muted); font-size: 13px; font-weight: 600; font-style: italic; }
+.fs-pillar-progress { color: var(--muted); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fs-q { display: grid; gap: 10px; padding: 12px 0 12px 12px; border-left: 3px solid transparent; }
+.fs-q + .fs-q { border-top: 1px dashed var(--line); }
+.fs-q.is-finding { border-left-color: var(--warn); }
+.fs-q-text { display: flex; gap: 10px; margin: 0; line-height: 1.4; }
+.fs-q-n { flex: none; min-width: 1.4em; color: var(--muted); font-weight: 800; font-variant-numeric: tabular-nums; }
+.fs-scores { display: flex; flex-wrap: wrap; gap: 6px; }
+.fs-score { position: relative; display: inline-flex; cursor: pointer; }
+.fs-score input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.fs-score span {
+  display: inline-grid; place-items: center; width: 44px; height: 40px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--paper); color: var(--ink); font-weight: 800; font-variant-numeric: tabular-nums;
+  transition: border-color .15s ease, background .15s ease;
+}
+.fs-score:hover span { border-color: var(--blue); }
+.fs-score input:checked + span { border-color: var(--blue); background: var(--blue); color: var(--paper); }
+.fs-score input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.fs-q-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 14px; align-items: center; }
+.fs-note {
+  width: 100%; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px;
+}
+.fs-note:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.fs-act { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; cursor: pointer; }
+.fs-act input { width: 18px; height: 18px; accent-color: var(--blue); }
+.fs-q.is-finding .fs-act { color: var(--ink); }
+.fs-walk [data-audit-status]:empty { display: none; }
+.fs-walk [data-audit-status] { margin: 0; }
+
+/* Log and red tags. */
+.fs-show { padding: 0; border: 0; background: none; color: var(--ink); font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; white-space: nowrap; }
+.fs-log tr.is-current > * { background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.fs-tags form { display: grid; gap: 18px; }
+.fs-tags [data-tag-stats]:empty { display: none; }
+.fs-tags [data-tag-stats] { margin: 0; font-weight: 700; color: var(--ink); }
+.fs-tag-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); }
+.fs-tag-table tr.is-done td:not(:first-child):not(:last-child) { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--muted); }
+
+/* Results. */
+.fs-head h2 span { color: var(--muted); font-weight: 700; }
+.fs-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.fs-band-note { margin: 8px 0 0; max-width: 62ch; }
+.fs-results .dl-stats { margin-bottom: 18px; }
+.fs-panel-radar .ck-chart { max-width: 520px; margin-inline: auto; }
+.fs-tag-list { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; }
+.fs-tag-list li { padding-bottom: 8px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.fs-tag-list li:last-child { border-bottom: 0; }
+
+@media (max-width: 600px) {
+  .fs-q { padding-left: 8px; }
+  .fs-scores { gap: 5px; }
+  .fs-score span { width: 40px; }
+  .fs-q-foot { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The A4 scorecard: only the result of the audit, on one page. */
+@page fs-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  .fs-q { break-inside: avoid; }
+  .fs-score span { width: 30px; height: 26px; border-radius: 6px; }
+  .fs-score input:checked + span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html.fs-scorecard main > :not(.fs-results) { display: none !important; }
+  html.fs-scorecard .fs-results { page: fs-a4; display: block !important; padding: 0; font-size: 12px; }
+  html.fs-scorecard .fs-results .dl-details-summary, html.fs-scorecard .fs-results .result-actions,
+  html.fs-scorecard .fs-panel-league, html.fs-scorecard .fs-panel-tags, html.fs-scorecard .ck-actions { display: none !important; }
+  html.fs-scorecard .fs-results h2 { font-size: 26px; }
+  html.fs-scorecard .fs-results .dl-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 10px; }
+  html.fs-scorecard .fs-results .dl-stat { padding: 8px; }
+  html.fs-scorecard .fs-results .dl-stat-value { font-size: 18px; }
+  html.fs-scorecard .fs-results .dl-result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.fs-scorecard .fs-results .dl-focus { padding: 10px; }
+  html.fs-scorecard .fs-results .ck-chart { max-height: 62mm; }
+  html.fs-scorecard .fs-results .ck-figure { margin-top: 6px; }
+}

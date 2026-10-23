@@ -1,0 +1,1297 @@
+{
+  "storageKey": "sc-five-s-audit-sq",
+  "text": {
+    "tool": "Auditi 5S",
+    "areaPlaceholder": "p.sh. Rampa e pranimit",
+    "auditorPlaceholder": "p.sh. Anna",
+    "notePlaceholder": "Gjetja, p.sh. stacioni i shiritit bosh",
+    "itemPlaceholder": "p.sh. Paletë me kuti të vjetra",
+    "ownerPlaceholder": "p.sh. Besnik",
+    "csvAudits": "auditet-5s",
+    "csvTags": "etiketat-e-kuqe",
+    "checkText": "Në auditin e ardhshëm 5S kjo pyetje merr ≥ 3"
+  },
+  "scopes": {
+    "5S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain"
+    ],
+    "6S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain",
+      "safety"
+    ],
+    "8S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain",
+      "safety",
+      "security",
+      "satisfaction"
+    ]
+  },
+  "shifts": [
+    "Mëngjes",
+    "Pasdite",
+    "Natë"
+  ],
+  "levels": [
+    "Asgjë në vend",
+    "Ka nisur, ende nuk duket",
+    "Pjesërisht, me boshllëqe",
+    "Kryesisht, devijime të vogla",
+    "Standard i plotë, mbahet çdo ditë"
+  ],
+  "bands": [
+    {
+      "name": "Ende jo standard",
+      "note": "Fillo me Seleksiono dhe Rregullo në një zonë. Bëj një cep si duhet para se të zgjerohesh."
+    },
+    {
+      "name": "Boshllëqe",
+      "note": "Standardi ekziston në disa vende. Mbyll S-në më të dobët para se të shtosh gjë të re."
+    },
+    {
+      "name": "Mirë, mbaje",
+      "note": "Mbaje përmes dorëzimit dhe auditeve, dhe vëre rrëshqitjen e parë."
+    },
+    {
+      "name": "Klasë botërore, ruaje",
+      "note": "Tani puna është ruajtja: drejtuesit ecin në zonë, ekipi e zotëron standardin."
+    }
+  ],
+  "reasons": [
+    "Nuk nevojitet",
+    "I prishur",
+    "Tepricë",
+    "Pronar i panjohur"
+  ],
+  "decisions": [
+    "Kthe",
+    "Zhvendos",
+    "Hidh",
+    "Mbaj në pritje"
+  ],
+  "pillars": [
+    {
+      "key": "sort",
+      "name": "Seleksiono",
+      "japanese": "Seiri",
+      "meaning": "Rrëmuja fsheh problemet dhe ha hapësirë. Seleksionimi vendos çfarë i përket kësaj zone dhe heq pjesën tjetër.",
+      "moves": [
+        "Ec nëpër zonë me etiketa të kuqe: çdo gjë që s'është përdorur këtë javë merr etiketë, datë dhe vendim.",
+        "Liro sot një zonë plotësisht, në vend që të pastrosh gjithë zonën pak nga pak.",
+        "Bini dakord ku presin sendet e etiketuara dhe kush vendos brenda shtatë ditësh."
+      ],
+      "question": "Çfarë ka këtu që askush s'e ka prekur për një javë?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "set",
+      "name": "Rregullo",
+      "japanese": "Seiton",
+      "meaning": "Një vend për çdo gjë kursen kërkimin që i bën turnet të ngadalta dhe nervat të shkurtra.",
+      "moves": [
+        "Shëno së pari vendin e dhjetë sendeve më të përdorura: shirit, shënim në dysheme, etiketë.",
+        "Vendos materialet harxhuese aty ku përdoren, me min/max të dukshëm.",
+        "Fotografo standardin dhe vare aty ku jeton sendi."
+      ],
+      "question": "A e gjen një punonjës i ri në 30 sekonda pa pyetur?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "shine",
+      "name": "Pastro",
+      "japanese": "Seiso",
+      "meaning": "Pastrimi është kontroll: një zonë e pastër tregon rrjedhjet, dëmet dhe konsumimin para se të ndalin punën.",
+      "moves": [
+        "Jepi çdo sipërfaqeje dhe çdo makinerie një përgjegjës dhe një moment në turn.",
+        "Rregullo burimin e ndotjes (një guarnicion i grisur, një stacion mbështjelljeje) në vend që të pastrosh përsëri.",
+        "Raporto çfarë gjen pastrimi: llamba, rrjedhje, mbrojtëse të liruara."
+      ],
+      "question": "Çfarë gjeti pastrimi këtë javë, dhe kush e rregulloi?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "standardize",
+      "name": "Standardizo",
+      "japanese": "Seiketsu",
+      "meaning": "Pa një standard të dukshëm çdo turn shpik të vetin, dhe pikët luhaten me njerëzit.",
+      "moves": [
+        "Një foto e „mirës“ në hyrjen e zonës, e rënë dakord me ekipin.",
+        "Bëje devijimin të dukshëm: tabela me hije, kode me ngjyra, një vijë që nuk kalohet.",
+        "Fute kontrollin e zonës në dorëzimin e turnit, që të shihet dy herë në ditë."
+      ],
+      "question": "Si e kupton një vizitor brenda një minute që këtu diçka s'është në rregull?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "sustain",
+      "name": "Mbaj",
+      "japanese": "Shitsuke",
+      "meaning": "Mbajtja është pjesa e drejtuesit: audite që ndodhin, veprime që mbyllen, vëmendje që ndihet çdo javë.",
+      "moves": [
+        "Cakto ditën e auditit dhe çiftin e audituesve për gjashtë javët e ardhshme.",
+        "Mbyll veprimet e auditit të fundit para se të hapësh të reja.",
+        "Trego trendin në tabelë dhe thuaj çfarë u përmirësua dhe kush e bëri."
+      ],
+      "question": "Kur foli për herë të fundit një drejtues për rendin e kësaj zone?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "safety",
+      "name": "Siguria",
+      "japanese": "",
+      "meaning": "Një devijim sigurie është gjetja më e zëshme e 5S: standardi nuk mbahet aty ku ka më shumë rëndësi.",
+      "moves": [
+        "Liro sot daljet, fikëset dhe ndihmën e parë, para çdo gjëje tjetër.",
+        "Ec rrugët e pirunëve dhe të këmbësorëve në orën e pikut dhe shiko ku kryqëzohen.",
+        "Diskuto gati-aksidentin e fundit në briefingun e ardhshëm."
+      ],
+      "question": "Ku u lëndua gati dikush këtu muajin e kaluar?",
+      "scopes": [
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "security",
+      "name": "Mbrojtja",
+      "aka": "Shpirti i ekipit",
+      "japanese": "",
+      "meaning": "Një boshllëk mbrojtjeje kushton më shumë se sendi i humbur: besim, kohë dhe hetime.",
+      "moves": [
+        "Mbyll zonën e mallrave me vlerë dhe regjistro hyrjet që sot.",
+        "Kontrollo dyert dhe portat në fillim dhe në fund të turnit, dhe thuaj kush e bën.",
+        "Sendet personale në dollapë; asgjë personale në rrjedhën e mallit."
+      ],
+      "question": "Kush ishte dje në zonën e mbyllur, dhe si e di?",
+      "scopes": [
+        "8S"
+      ]
+    },
+    {
+      "key": "satisfaction",
+      "name": "Kënaqësia",
+      "aka": "Qëndrueshmëria",
+      "japanese": "",
+      "meaning": "Njerëzit mbajnë një standard që e kanë bërë vetë; një ekip i lodhur dhe i padëgjuar e lë të rrëshqasë.",
+      "moves": [
+        "Përgjigju çdo problemi 5S të ngritur brenda një jave, edhe me një jo.",
+        "Rregullo së pari ergonominë e punës më të rëndë.",
+        "Emëro një rezultat të mirë në tabelë dhe thuaj kush e bëri."
+      ],
+      "question": "Çfarë kërkoi ekipi muajin e kaluar, dhe çfarë u bë me të?",
+      "scopes": [
+        "8S"
+      ]
+    }
+  ],
+  "templates": {
+    "warehouse": {
+      "name": "Magazinë",
+      "areas": [
+        "Rampa e pranimit",
+        "Zona e mbledhjes A",
+        "Paketimi",
+        "Rampa e daljes",
+        "Kthimet"
+      ],
+      "questions": {
+        "sort": [
+          "Në zonë janë vetëm sendet për punën e sotme; asgjë e lënë „për më vonë“.",
+          "Asnjë pajisje e prishur, paletë bosh ose mbeturinë në korridore apo te rampa.",
+          "Çdo send i dyshimtë mban etiketë të kuqe me datë dhe vendim.",
+          "Dokumentet dhe etiketat në mure janë të përditësuara; asgjë e vjetruar ose e dyfishuar."
+        ],
+        "set": [
+          "Çdo mjet, kafaz dhe karrocë ka vend të shënuar, dhe tani është aty.",
+          "Shënimet në dysheme për paletat, kalimet dhe korsitë e përgatitjes janë të plota dhe të dukshme.",
+          "Raftet dhe pozicionet janë etiketuar që një punonjës i ri të gjejë gjithçka në 30 sekonda.",
+          "Materialet harxhuese (shirit, etiketa, film) janë aty ku përdoren, me nivel min/max."
+        ],
+        "shine": [
+          "Dyshemetë janë të pastra dhe të thata; pa derdhje, pluhur ose mbetje filmi.",
+          "Pirunët, skanerët dhe peshoret janë të pastra dhe të kontrolluara, me fletën e kontrollit të plotësuar.",
+          "Plani i pastrimit tregon kush pastron çfarë dhe kur; sot është firmosur.",
+          "Rrjedhjet, dëmet dhe llambat e prishura raportohen, nuk anashkalohen."
+        ],
+        "standardize": [
+          "Standardi 5S i zonës është varur si një foto e vetme e asaj si duket „mirë“.",
+          "Çdokush në turn mund të thotë për cilin rend është përgjegjës.",
+          "Kontrollet vizuale (tabela me hije, min/max, kode me ngjyra) i bëjnë devijimet të dukshme me një shikim.",
+          "Dorëzimi i turnit kontrollon gjendjen e zonës; devijimet shkojnë në tabelën e turnit."
+        ],
+        "sustain": [
+          "Auditet 5S bëhen sipas planit, dhe tri rezultatet e fundit janë në tabelë.",
+          "Veprimet nga auditi i fundit janë mbyllur ose kanë përgjegjës dhe datë.",
+          "Drejtuesit ecin nëpër zonë dhe flasin për 5S të paktën çdo javë.",
+          "Ekipi e përditëson vetë standardin kur ndryshon puna."
+        ],
+        "safety": [
+          "Daljet e emergjencës, fikëset dhe kutitë e ndihmës së parë janë të lira dhe të shenjuara.",
+          "Rrugët e këmbësorëve dhe të pirunëve janë të ndara dhe respektohen.",
+          "Pajisjet mbrojtëse të zonës mbahen, dhe rregulli është i dukshëm.",
+          "Gati-aksidentet në zonë regjistrohen dhe diskutohen."
+        ],
+        "security": [
+          "Mallrat me vlerë dhe të kontrolluara janë në zonë të mbyllur, të etiketuar, me hyrje të regjistruara.",
+          "Dyert dhe portat për në oborr janë të mbyllura dhe të kontrolluara gjatë turnit.",
+          "Asgjë personale (çanta, telefona) nuk ruhet në rrjedhën e mallit.",
+          "Vizitorët dhe kontraktorët regjistrohen dhe shoqërohen."
+        ],
+        "satisfaction": [
+          "Ekipi mund të ngrejë një problem 5S dhe merr përgjigje brenda një jave.",
+          "Zona e pushimit, uji dhe ndriçimi përmbushin standardin që ekipi ra dakord.",
+          "Ergonomia: sendet e rënda në lartësinë e belit, pa zgjatje të përsëritur mbi shpatull.",
+          "Rezultatet e mira 5S tregohen në tabelë, me emra."
+        ]
+      }
+    },
+    "hotel": {
+      "name": "Hotel",
+      "areas": [
+        "Recepsioni",
+        "Depoja e housekeeping-ut",
+        "Kuzhina"
+      ],
+      "questions": {
+        "sort": [
+          "Recepsioni dhe zyra e pasme kanë vetëm atë që i duhet turnit të sotëm; pa fletëpalosje të vjetra ose pajisje rezervë.",
+          "Depoja e housekeeping-ut nuk ka kimikate pa etiketë, sende të prishura ose amenities të skaduara.",
+          "Kuzhina nuk ka mallra të skaduara, enë të dyfishuara ose pajisje të prishura në përdorim.",
+          "Çdo send i dyshimtë mban etiketë të kuqe me datë dhe vendim."
+        ],
+        "set": [
+          "Çelësat, kartat, paratë dhe formularët kanë secili një vend të shënuar në recepsion, dhe tani janë aty.",
+          "Të brendshmet dhe amenities janë në rafte sipas llojit, me etiketa dhe nivele min/max.",
+          "Mjetet e kuzhinës dhe përbërësit ruhen sipas stacionit; asgjë në dysheme.",
+          "Materialet e shtypura për mysafirët janë të përditësuara dhe në mbajtësen e tyre."
+        ],
+        "shine": [
+          "Lobi, recepsioni dhe zyra e pasme janë të pastra; pa kabllo, pluhur ose filxhanë në dukje.",
+          "Karrocat e housekeeping-ut dhe raftet e depos janë të pastra dhe të rimbushura në fund të turnit.",
+          "Sipërfaqet, dyshemetë dhe kanalet e kuzhinës janë të pastra; plani i pastrimit është firmosur sot.",
+          "Defektet (llamba, bravë, rrjedhje) raportohen në sistem, nuk i lihen turnit tjetër."
+        ],
+        "standardize": [
+          "Rregullimi i recepsionit dhe i karrocës tregohen si një foto e vetme e „mirës“.",
+          "Çdokush e di cilat kontrolle i përkasin turnit të tij: kasa, kasaforta, ditari, temperaturat e frigoriferit.",
+          "Kontrolle vizuale: lecka dhe kimikate me kode ngjyrash, rafte të etiketuara, karta të nivelit.",
+          "Dorëzimi i turnit kontrollon gjendjen e zonës dhe regjistron devijimet."
+        ],
+        "sustain": [
+          "Auditet 5S bëhen sipas planit dhe rezultatet janë në tabelën e stafit.",
+          "Veprimet nga auditi i fundit janë mbyllur ose kanë përgjegjës dhe datë.",
+          "Menaxheri i turnit ecën çdo javë nëpër recepsion, depo dhe kuzhinë dhe flet për 5S.",
+          "Ekipi e ndryshon standardin kur ndryshon puna: amenities të reja, një ekran i ri PMS."
+        ],
+        "safety": [
+          "Daljet e emergjencës, fikëset dhe planet e evakuimit janë të lira dhe të dukshme.",
+          "Tabelat „dysheme e lagur“, tapetet kundër rrëshqitjes dhe ruajtja e sigurt e thikave janë në përdorim.",
+          "Kimikatet ruhen të mbyllura, me fletët e sigurisë pranë.",
+          "Gati-aksidentet dhe incidentet me mysafirë regjistrohen dhe shqyrtohen."
+        ],
+        "security": [
+          "Sirtari i kasës, kasaforta dhe kabineti i çelësave janë të mbyllur; hyrja regjistrohet.",
+          "Të dhënat e mysafirëve në letra dhe ekrane nuk shihen nga mysafirë të tjerë.",
+          "Dyert e pjesës së pasme janë të mbyllura dhe me kontroll me kartë.",
+          "Sendet e gjetura regjistrohen, etiketohen dhe ruhen të mbyllura."
+        ],
+        "satisfaction": [
+          "Ekipi mund të ngrejë një problem në recepsion, në depo ose në kuzhinë dhe merr përgjigje brenda një jave.",
+          "Dhoma e stafit, uji dhe pushimet përmbushin standardin e rënë dakord.",
+          "Ergonomia: karrocat rrotullohen, raftet arrihen, pa ngritje mbi shpatull.",
+          "Rezultatet e mira dhe lavdërimet e mysafirëve tregohen në tabelë, me emra."
+        ]
+      }
+    },
+    "delivery-station": {
+      "name": "Stacion shpërndarjeje",
+      "areas": [
+        "Salla e ndarjes",
+        "Korsitë e përgatitjes",
+        "Oborri dhe rampat",
+        "Kafazi i kthimeve"
+      ],
+      "questions": {
+        "sort": [
+          "Në korsitë e përgatitjes janë vetëm linjat dhe karrocat e sotme; asgjë nga dje.",
+          "Asnjë karrocë e prishur, kuti bosh ose mbeturinë në zonën e ndarjes apo te rampa.",
+          "Çdo send i dyshimtë mban etiketë të kuqe me datë dhe vendim.",
+          "Fletët e linjave dhe njoftimet e varura janë të përditësuara; të vjetrat janë hequr."
+        ],
+        "set": [
+          "Çdo linjë ka korsi të shënuar përgatitjeje dhe karrocat qëndrojnë në të.",
+          "Kutitë, çantat dhe karrocat kanë vend të shënuar dhe kthehen aty pas valës.",
+          "Skanerët, karikuesit dhe etiketat janë aty ku përdoren, me nivel min/max.",
+          "Vendparkimet e furgonëve janë të numëruara dhe përputhen me tabelën e linjave."
+        ],
+        "shine": [
+          "Dyshemetë dhe pllakat e rampës janë të pastra dhe të thata; pa mbetje shiriti ose paketimi.",
+          "Karrocat, kutitë dhe skanerët janë të pastra dhe të kontrolluara; defektet janë etiketuar.",
+          "Plani i pastrimit tregon kush pastron çfarë dhe kur; sot është firmosur.",
+          "Ndriçimi i oborrit, barrierat dhe shënimet janë të paprekura, dhe raportohen kur jo."
+        ],
+        "standardize": [
+          "Standardi i ndarjes dhe i nisjes tregohet si një foto e vetme te korsia.",
+          "Çdokush në valë e di korsinë, kontrollet dhe detyrat e tij në fund të valës.",
+          "Kontrollet vizuale (ngjyrat e korsive, numri i karrocave, ora e nisjes) e bëjnë të dukshme një korsi të vonuar.",
+          "Dorëzimi i valës kontrollon gjendjen e zonës dhe regjistron devijimet."
+        ],
+        "sustain": [
+          "Auditet 5S bëhen sipas planit dhe tri rezultatet e fundit janë në tabelë.",
+          "Veprimet nga auditi i fundit janë mbyllur ose kanë përgjegjës dhe datë.",
+          "Drejtuesi i stacionit ecën nëpër sallë dhe flet për 5S të paktën çdo javë.",
+          "Shoferët dhe ndarësit propozojnë ndryshime në standard, dhe disa pranohen."
+        ],
+        "safety": [
+          "Kalimet e këmbësorëve dhe korsitë e furgonëve janë të ndara; manovrat prapa drejtohen.",
+          "Daljet, fikëset dhe ndihma e parë janë të lira dhe të shenjuara.",
+          "Jelekët reflektues dhe këpucët e sigurisë mbahen; rregulli është i dukshëm.",
+          "Gati-aksidentet në oborr dhe në sallë regjistrohen dhe diskutohen."
+        ],
+        "security": [
+          "Pakot me vlerë janë në kafaz të mbyllur me hyrje të regjistruara.",
+          "Portat e oborrit janë të mbyllura; furgonët kyçen kur s'ka njeri pranë.",
+          "Asgjë personale në rrjedhën e mallit; përdoren dollapët.",
+          "Vizitorët dhe shoferët e partnerëve regjistrohen."
+        ],
+        "satisfaction": [
+          "Ndarësit dhe shoferët mund të ngrenë një problem dhe marrin përgjigje brenda një jave.",
+          "Uji, tualetet dhe zona e pushimit përmbushin standardin e rënë dakord.",
+          "Ergonomia: pakot e rënda në lartësinë e belit, karroca që rrotullohen, pa stivim mbi shpatull.",
+          "Rezultatet e mira dhe kapjet e mira tregohen në tabelë, me emra."
+        ]
+      }
+    }
+  },
+  "tips": [
+    [
+      "Audito atë që sheh, jo SOP-në.",
+      "Vlerëso sallën siç është në këtë minutë. Dokumenti thotë si duhet të jetë; auditi thotë si është."
+    ],
+    [
+      "Vlerëso sallën, jo njerëzit.",
+      "Një 2 është boshllëk në sistem, jo gjykim për turnin. Thuaje para se të fillosh."
+    ],
+    [
+      "Një 2 është gjetje.",
+      "Çdo gjë në 2 ose më poshtë merr një shënim dhe një përgjegjës. Pikët pa veprime janë dekor."
+    ],
+    [
+      "E njëjta ditë, i njëjti rrugëtim.",
+      "Audito të njëjtat zona në të njëjtën ditë të javës, në të njëjtën radhë. Një trend ka nevojë për matje të barabarta."
+    ],
+    [
+      "Etiketë e kuqe, jo debat.",
+      "Nuk je i sigurt nëse i përket kësaj zone? Vëri etiketë me datë. Vendimi vjen brenda një jave."
+    ]
+  ],
+  "example": {
+    "template": "warehouse",
+    "scope": "6S",
+    "audits": [
+      {
+        "date": "2026-09-07",
+        "area": "Rampa e pranimit",
+        "auditor": "Anna",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            1,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            0,
+            1,
+            1
+          ],
+          "shine": [
+            2,
+            2,
+            1,
+            2
+          ],
+          "standardize": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "sustain": [
+            0,
+            2,
+            1,
+            1
+          ],
+          "safety": [
+            2,
+            1,
+            2,
+            2
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Rampa e pranimit",
+        "auditor": "Anna",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "shine": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "standardize": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "sustain": [
+            2,
+            1,
+            2,
+            1
+          ],
+          "safety": [
+            2,
+            3,
+            2,
+            2
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Rampa e pranimit",
+        "auditor": "Anna",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "set": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "shine": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "standardize": [
+            2,
+            1,
+            2,
+            2
+          ],
+          "sustain": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "safety": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Rampa e pranimit",
+        "auditor": "Anna",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "sustain": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Rampa e pranimit",
+        "auditor": "Anna",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "set": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "sustain": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Rampa e pranimit",
+        "auditor": "Anna",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            2,
+            4,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "standardize": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {
+          "set-0": "Kafazi 7 i parkuar në kalim, pa vend të shënuar",
+          "standardize-0": "Fotoja e standardit e zbehur, gjysma e mbuluar nga një njoftim"
+        }
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Zona e mbledhjes A",
+        "auditor": "Besnik",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Zona e mbledhjes A",
+        "auditor": "Besnik",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            3,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Zona e mbledhjes A",
+        "auditor": "Besnik",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Zona e mbledhjes A",
+        "auditor": "Besnik",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "set": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "shine": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "sustain": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Zona e mbledhjes A",
+        "auditor": "Besnik",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "shine": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "sustain": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Zona e mbledhjes A",
+        "auditor": "Besnik",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            2
+          ],
+          "standardize": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            3,
+            4,
+            4
+          ]
+        },
+        "notes": {
+          "shine-3": "Llamba e prishur mbi korridorin 4 raportuar dy herë, ende e parregulluar"
+        }
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Paketimi",
+        "auditor": "Clara",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            3
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "sustain": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Paketimi",
+        "auditor": "Clara",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Paketimi",
+        "auditor": "Clara",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            2,
+            3,
+            2
+          ],
+          "shine": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "standardize": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "sustain": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Paketimi",
+        "auditor": "Clara",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "shine": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Paketimi",
+        "auditor": "Clara",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            2,
+            3,
+            2
+          ],
+          "shine": [
+            1,
+            2,
+            2,
+            2
+          ],
+          "standardize": [
+            3,
+            2,
+            3,
+            2
+          ],
+          "sustain": [
+            2,
+            2,
+            1,
+            2
+          ],
+          "safety": [
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Paketimi",
+        "auditor": "Clara",
+        "shift": "Mëngjes",
+        "scores": {
+          "sort": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "set": [
+            1,
+            2,
+            2,
+            1
+          ],
+          "shine": [
+            2,
+            1,
+            2,
+            2
+          ],
+          "standardize": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "sustain": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "safety": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {
+          "sort-1": "Dy paleta me kuti të vjetra pas stacionit 3 që nga muaji i kaluar",
+          "set-3": "Mungojnë shiriti dhe etiketat te stacionet 2 dhe 4",
+          "shine-0": "Mbetje filmi në dysheme te çdo stacion",
+          "sustain-1": "Tri veprime nga auditi i fundit ende të hapura, pa përgjegjës"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "date": "2026-10-02",
+        "area": "Paketimi",
+        "item": "Paletë me kuti të vjetra (B4)",
+        "reason": "Nuk nevojitet",
+        "decision": "Hidh",
+        "owner": "Clara",
+        "due": "2026-10-09",
+        "done": false
+      },
+      {
+        "date": "2026-09-02",
+        "area": "Rampa e pranimit",
+        "item": "Transpaletë me pirun të përkulur",
+        "reason": "I prishur",
+        "decision": "Kthe",
+        "owner": "Besnik",
+        "due": "2026-09-09",
+        "done": false
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Zona e mbledhjes A",
+        "item": "Printer i dytë etiketash, i papërdorur",
+        "reason": "Tepricë",
+        "decision": "Zhvendos",
+        "owner": "Anna",
+        "due": "2026-09-14",
+        "done": true
+      },
+      {
+        "date": "2026-10-06",
+        "area": "Rampa e pranimit",
+        "item": "Tre kafaze pa etiketa",
+        "reason": "Pronar i panjohur",
+        "decision": "Mbaj në pritje",
+        "owner": "Besnik",
+        "due": "2026-10-13",
+        "done": false
+      },
+      {
+        "date": "2026-10-10",
+        "area": "Paketimi",
+        "item": "Kuti me karikues të përzier",
+        "reason": "Pronar i panjohur",
+        "decision": "Mbaj në pritje",
+        "owner": "Clara",
+        "due": "2026-10-17",
+        "done": false
+      }
+    ]
+  }
+}

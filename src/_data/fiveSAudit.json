@@ -1,0 +1,1297 @@
+{
+  "storageKey": "sc-five-s-audit",
+  "text": {
+    "tool": "5S Audit",
+    "areaPlaceholder": "e.g. Inbound dock",
+    "auditorPlaceholder": "e.g. Anna",
+    "notePlaceholder": "Finding, e.g. tape station empty",
+    "itemPlaceholder": "e.g. Pallet of old box sizes",
+    "ownerPlaceholder": "e.g. Besnik",
+    "csvAudits": "5s-audits",
+    "csvTags": "red-tags",
+    "checkText": "Score ≥ 3 on this question at the next 5S audit"
+  },
+  "scopes": {
+    "5S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain"
+    ],
+    "6S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain",
+      "safety"
+    ],
+    "8S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain",
+      "safety",
+      "security",
+      "satisfaction"
+    ]
+  },
+  "shifts": [
+    "Early",
+    "Late",
+    "Night"
+  ],
+  "levels": [
+    "Nothing in place",
+    "Started, not visible yet",
+    "Partly, with gaps",
+    "Mostly, small deviations",
+    "Full standard, holds every day"
+  ],
+  "bands": [
+    {
+      "name": "Not a standard yet",
+      "note": "Start with Sort and Set in order in one zone. Make one corner right before you widen."
+    },
+    {
+      "name": "Gaps",
+      "note": "The standard exists in places. Close the weakest S before you add anything new."
+    },
+    {
+      "name": "Good, hold it",
+      "note": "Hold it through the handover and the audits, and watch for the first slip."
+    },
+    {
+      "name": "World class, sustain",
+      "note": "Sustain is the work now: leaders walk, the team owns the standard."
+    }
+  ],
+  "reasons": [
+    "Not needed",
+    "Broken",
+    "Excess",
+    "Unknown owner"
+  ],
+  "decisions": [
+    "Return",
+    "Move",
+    "Dispose",
+    "Hold"
+  ],
+  "pillars": [
+    {
+      "key": "sort",
+      "name": "Sort",
+      "japanese": "Seiri",
+      "meaning": "Clutter hides problems and eats space. Sort decides what belongs here and removes the rest.",
+      "moves": [
+        "Walk the area with red tags: anything not used this week gets a tag, a date and a decision.",
+        "Clear one zone completely today instead of the whole area a little.",
+        "Agree where tagged items wait and who decides within seven days."
+      ],
+      "question": "What is here that nobody has touched in a week?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "set",
+      "name": "Set in order",
+      "japanese": "Seiton",
+      "meaning": "A place for everything saves the searching that makes shifts slow and tempers short.",
+      "moves": [
+        "Mark the home of the ten most used items first: tape, floor marking, label.",
+        "Put consumables at the point of use with a visible min/max.",
+        "Photograph the standard and post it where the item lives."
+      ],
+      "question": "Can a new starter find it in 30 seconds without asking?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "shine",
+      "name": "Shine",
+      "japanese": "Seiso",
+      "meaning": "Cleaning is inspection: a clean area shows leaks, damage and wear before they stop the work.",
+      "moves": [
+        "Give every surface and machine one owner and one moment in the shift.",
+        "Fix the source of the dirt (a torn seal, a wrap station) instead of cleaning it again.",
+        "Report what cleaning finds: lights, leaks, loose guards."
+      ],
+      "question": "What did cleaning find this week, and who fixed it?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "standardize",
+      "name": "Standardize",
+      "japanese": "Seiketsu",
+      "meaning": "Without a visible standard every shift invents its own, and the score swings with the people.",
+      "moves": [
+        "One picture of “good” at the area entrance, agreed with the team.",
+        "Make deviation obvious: shadow boards, colour codes, a line that must not be crossed.",
+        "Put the area check into the handover so it is seen twice a day."
+      ],
+      "question": "How does a visitor see within a minute that something is wrong here?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "sustain",
+      "name": "Sustain",
+      "japanese": "Shitsuke",
+      "meaning": "Sustain is the leader's part: audits that happen, actions that close, attention that is felt every week.",
+      "moves": [
+        "Fix the audit day and the auditor pair for the next six weeks.",
+        "Close the last audit's actions before opening new ones.",
+        "Show the trend on the board and name what improved and who did it."
+      ],
+      "question": "When did a leader last comment on this area's order?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "safety",
+      "name": "Safety",
+      "japanese": "",
+      "meaning": "A safety deviation is the loudest 5S finding: it says the standard is not held when it matters most.",
+      "moves": [
+        "Clear exits, extinguishers and first aid today, before anything else.",
+        "Walk the forklift and pedestrian routes at peak time and watch where they cross.",
+        "Discuss the last near miss at the next briefing."
+      ],
+      "question": "Where did someone nearly get hurt here in the last month?",
+      "scopes": [
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "security",
+      "name": "Security",
+      "aka": "Spirit",
+      "japanese": "",
+      "meaning": "A security gap costs more than the item lost: trust, time and investigations.",
+      "moves": [
+        "Lock the high-value zone and log access from today.",
+        "Check doors and gates at shift start and end, and name who does it.",
+        "Move personal items to lockers; nothing personal in the goods flow."
+      ],
+      "question": "Who was in the locked zone yesterday, and how do you know?",
+      "scopes": [
+        "8S"
+      ]
+    },
+    {
+      "key": "satisfaction",
+      "name": "Satisfaction",
+      "aka": "Sustainability",
+      "japanese": "",
+      "meaning": "People hold a standard they helped make; a tired, unheard team lets it slip.",
+      "moves": [
+        "Answer every raised 5S problem within a week, even with a no.",
+        "Fix the ergonomics of the heaviest task first.",
+        "Name a good result on the board and say who did it."
+      ],
+      "question": "What did the team ask for last month, and what happened to it?",
+      "scopes": [
+        "8S"
+      ]
+    }
+  ],
+  "templates": {
+    "warehouse": {
+      "name": "Warehouse",
+      "areas": [
+        "Inbound dock",
+        "Picking zone A",
+        "Packing",
+        "Outbound dock",
+        "Returns"
+      ],
+      "questions": {
+        "sort": [
+          "Only items needed for today's work are in the area; nothing parked “for later”.",
+          "No broken equipment, empty pallets or waste standing in aisles or at the dock.",
+          "Every doubtful item carries a red tag with a date and a decision.",
+          "Documents and labels on the walls are current; nothing outdated or duplicated."
+        ],
+        "set": [
+          "Every tool, cage and trolley has a marked home, and it is there now.",
+          "Floor markings for pallets, walkways and staging lanes are complete and visible.",
+          "Shelves and locations are labelled so a new starter finds anything in 30 seconds.",
+          "Consumables (tape, labels, wrap) are at the point of use with a min/max level."
+        ],
+        "shine": [
+          "Floors are clean and dry; no spills, dust or wrap scraps.",
+          "Forklifts, scanners and scales are clean and checked, with the inspection sheet filled in.",
+          "The cleaning schedule shows who cleans what and when; today is signed off.",
+          "Leaks, damage and broken lights are reported, not worked around."
+        ],
+        "standardize": [
+          "The 5S standard of the area is posted as one picture of what “good” looks like.",
+          "Everyone on shift can say what they are responsible for keeping in order.",
+          "Visual controls (shadow boards, min/max, colour codes) make deviations obvious at a glance.",
+          "The handover checks the area's state; deviations go on the shift board."
+        ],
+        "sustain": [
+          "5S audits happen on schedule, and the last three results are on the board.",
+          "Actions from the last audit are closed or have an owner and a date.",
+          "Leaders walk the area and comment on 5S at least weekly.",
+          "The team updates the standard itself when the work changes."
+        ],
+        "safety": [
+          "Emergency exits, fire extinguishers and first-aid kits are free and signed.",
+          "Pedestrian and forklift routes are separated and respected.",
+          "The PPE of the area is worn, and the rule is visible.",
+          "Near misses in the area are recorded and discussed."
+        ],
+        "security": [
+          "High-value and controlled goods are in a locked, labelled zone with access logged.",
+          "Doors and gates to the yard are closed and controlled during the shift.",
+          "Nothing personal (bags, phones) is stored in the goods flow.",
+          "Visitors and contractors are signed in and escorted."
+        ],
+        "satisfaction": [
+          "The team can raise a 5S problem and sees it answered within a week.",
+          "Rest area, water and lighting meet the standard the team agreed.",
+          "Ergonomics: heavy items at waist height, no repeated reaching above the shoulder.",
+          "Good 5S results are shown and named on the board."
+        ]
+      }
+    },
+    "hotel": {
+      "name": "Hotel",
+      "areas": [
+        "Front office",
+        "Housekeeping store",
+        "Kitchen"
+      ],
+      "questions": {
+        "sort": [
+          "The desk and back office hold only what today's shift needs; no old flyers or spare devices.",
+          "The housekeeping store has no unlabelled chemicals, broken items or expired amenities.",
+          "The kitchen has no expired goods, duplicated utensils or broken equipment in use.",
+          "Every doubtful item carries a red tag with a date and a decision."
+        ],
+        "set": [
+          "Keys, cards, cash and forms each have one marked place at the desk, and are there now.",
+          "Linen and amenities are shelved by type with labels and min/max levels.",
+          "Kitchen tools and ingredients are stored by station; nothing on the floor.",
+          "Guest-facing printed materials are current and in their holder."
+        ],
+        "shine": [
+          "Lobby, desk and back office are clean; no cables, dust or cups in view.",
+          "Housekeeping trolleys and store shelves are clean and restocked at shift end.",
+          "Kitchen surfaces, floors and drains are clean; the cleaning plan is signed off today.",
+          "Defects (lights, locks, leaks) are reported in the system, not left for the next shift."
+        ],
+        "standardize": [
+          "The desk setup and the trolley setup are shown as one picture of “good”.",
+          "Everyone knows which checks belong to their shift: cash, safe, logbook, fridge temperatures.",
+          "Visual controls: colour-coded cloths and chemicals, labelled shelves, par-level cards.",
+          "The handover checks the state of the area and logs deviations."
+        ],
+        "sustain": [
+          "5S audits run on schedule and the results are on the staff board.",
+          "Actions from the last audit are closed or have an owner and a date.",
+          "The duty manager walks front office, store and kitchen weekly and comments on 5S.",
+          "The team changes the standard when the work changes: new amenities, a new PMS screen."
+        ],
+        "safety": [
+          "Emergency exits, extinguishers and evacuation plans are free and visible.",
+          "Wet-floor signs, non-slip mats and safe knife storage are in use.",
+          "Chemicals are stored locked with the safety data sheets at hand.",
+          "Near misses and guest incidents are recorded and reviewed."
+        ],
+        "security": [
+          "Cash drawer, safe and key cabinet are locked; access is logged.",
+          "Guest data on printouts and screens is not visible to other guests.",
+          "Back-of-house doors are closed and badge-controlled.",
+          "Lost property is logged, labelled and stored locked."
+        ],
+        "satisfaction": [
+          "The team can raise a problem at the desk, in the store or in the kitchen and sees an answer within a week.",
+          "Staff room, water and breaks meet the agreed standard.",
+          "Ergonomics: trolleys roll, shelves are reachable, no lifting above the shoulder.",
+          "Good results and guest compliments are shown and named on the board."
+        ]
+      }
+    },
+    "delivery-station": {
+      "name": "Delivery station",
+      "areas": [
+        "Sort floor",
+        "Staging lanes",
+        "Yard and docks",
+        "Returns cage"
+      ],
+      "questions": {
+        "sort": [
+          "Only today's routes and carts are in the staging lanes; nothing from yesterday.",
+          "No broken carts, empty totes or waste in the sorting area or at the dock.",
+          "Every doubtful item carries a red tag with a date and a decision.",
+          "Posted route sheets and notices are current; old ones are gone."
+        ],
+        "set": [
+          "Every route has a marked staging lane and the carts stand in it.",
+          "Totes, bags and carts have a marked home and return to it after the wave.",
+          "Scanners, chargers and labels are at the point of use with a min/max level.",
+          "Van parking bays are numbered and match the route board."
+        ],
+        "shine": [
+          "Floors and dock plates are clean and dry; no tape scraps or packaging.",
+          "Carts, totes and scanners are clean and checked; defects are tagged.",
+          "The cleaning schedule shows who cleans what and when; today is signed off.",
+          "Yard lighting, barriers and markings are intact, and reported when not."
+        ],
+        "standardize": [
+          "The sort and dispatch standard is shown as one picture at the lane.",
+          "Everyone on the wave knows their lane, their checks and their end-of-wave tasks.",
+          "Visual controls (lane colours, cart counts, departure clock) make a late lane obvious.",
+          "The wave handover checks the area's state and logs deviations."
+        ],
+        "sustain": [
+          "5S audits run on schedule and the last three results are on the board.",
+          "Actions from the last audit are closed or have an owner and a date.",
+          "The station lead walks the floor and comments on 5S at least weekly.",
+          "Drivers and sorters propose changes to the standard, and some are adopted."
+        ],
+        "safety": [
+          "Walkways and van lanes are separated; reversing is guided.",
+          "Exits, extinguishers and first aid are free and signed.",
+          "Hi-vis and safe footwear are worn; the rule is visible.",
+          "Near misses in the yard and on the floor are recorded and discussed."
+        ],
+        "security": [
+          "High-value parcels are in a locked cage with access logged.",
+          "Yard gates are closed; vans are locked when unattended.",
+          "No personal items in the goods flow; lockers are used.",
+          "Visitors and partner drivers are signed in."
+        ],
+        "satisfaction": [
+          "Sorters and drivers can raise a problem and see it answered within a week.",
+          "Water, toilets and the rest area meet the agreed standard.",
+          "Ergonomics: heavy parcels at waist height, carts that roll, no stacking above the shoulder.",
+          "Good results and good catches are shown and named on the board."
+        ]
+      }
+    }
+  },
+  "tips": [
+    [
+      "Audit what you see, not the SOP.",
+      "Score the floor as it is this minute. The document says what should be; the audit says what is."
+    ],
+    [
+      "Score the floor, not the people.",
+      "A 2 is a gap in the system, not a verdict on the shift. Say so before you start."
+    ],
+    [
+      "A 2 is a finding.",
+      "Anything at 2 or below gets a note and an owner. Scores without actions are decoration."
+    ],
+    [
+      "Same day, same walk.",
+      "Audit the same areas on the same weekday in the same order. A trend needs equal measurements."
+    ],
+    [
+      "Red-tag, don't argue.",
+      "Not sure whether it belongs here? Tag it with a date. The decision follows within a week."
+    ]
+  ],
+  "example": {
+    "template": "warehouse",
+    "scope": "6S",
+    "audits": [
+      {
+        "date": "2026-09-07",
+        "area": "Inbound dock",
+        "auditor": "Anna",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            1,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            0,
+            1,
+            1
+          ],
+          "shine": [
+            2,
+            2,
+            1,
+            2
+          ],
+          "standardize": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "sustain": [
+            0,
+            2,
+            1,
+            1
+          ],
+          "safety": [
+            2,
+            1,
+            2,
+            2
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Inbound dock",
+        "auditor": "Anna",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "shine": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "standardize": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "sustain": [
+            2,
+            1,
+            2,
+            1
+          ],
+          "safety": [
+            2,
+            3,
+            2,
+            2
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Inbound dock",
+        "auditor": "Anna",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "set": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "shine": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "standardize": [
+            2,
+            1,
+            2,
+            2
+          ],
+          "sustain": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "safety": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Inbound dock",
+        "auditor": "Anna",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "sustain": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Inbound dock",
+        "auditor": "Anna",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "set": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "sustain": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Inbound dock",
+        "auditor": "Anna",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            2,
+            4,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "standardize": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {
+          "set-0": "Cage 7 parked in the walkway, no home marked",
+          "standardize-0": "Standard picture faded, half covered by a notice"
+        }
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Picking zone A",
+        "auditor": "Besnik",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Picking zone A",
+        "auditor": "Besnik",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            3,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Picking zone A",
+        "auditor": "Besnik",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Picking zone A",
+        "auditor": "Besnik",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "set": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "shine": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "sustain": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Picking zone A",
+        "auditor": "Besnik",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "shine": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "sustain": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Picking zone A",
+        "auditor": "Besnik",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            2
+          ],
+          "standardize": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            3,
+            4,
+            4
+          ]
+        },
+        "notes": {
+          "shine-3": "Broken light above aisle 4 reported twice, still not fixed"
+        }
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Packing",
+        "auditor": "Clara",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            3
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "sustain": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Packing",
+        "auditor": "Clara",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Packing",
+        "auditor": "Clara",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            2,
+            3,
+            2
+          ],
+          "shine": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "standardize": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "sustain": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Packing",
+        "auditor": "Clara",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "shine": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Packing",
+        "auditor": "Clara",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            2,
+            3,
+            2
+          ],
+          "shine": [
+            1,
+            2,
+            2,
+            2
+          ],
+          "standardize": [
+            3,
+            2,
+            3,
+            2
+          ],
+          "sustain": [
+            2,
+            2,
+            1,
+            2
+          ],
+          "safety": [
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Packing",
+        "auditor": "Clara",
+        "shift": "Early",
+        "scores": {
+          "sort": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "set": [
+            1,
+            2,
+            2,
+            1
+          ],
+          "shine": [
+            2,
+            1,
+            2,
+            2
+          ],
+          "standardize": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "sustain": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "safety": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {
+          "sort-1": "Two pallets of old box sizes behind station 3 since last month",
+          "set-3": "Tape and labels missing at stations 2 and 4",
+          "shine-0": "Wrap scraps on the floor at every station",
+          "sustain-1": "Three actions from the last audit still open, no owner"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "date": "2026-10-02",
+        "area": "Packing",
+        "item": "Pallet of old box sizes (B4)",
+        "reason": "Not needed",
+        "decision": "Dispose",
+        "owner": "Clara",
+        "due": "2026-10-09",
+        "done": false
+      },
+      {
+        "date": "2026-09-02",
+        "area": "Inbound dock",
+        "item": "Pallet jack with a bent fork",
+        "reason": "Broken",
+        "decision": "Return",
+        "owner": "Besnik",
+        "due": "2026-09-09",
+        "done": false
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Picking zone A",
+        "item": "Second label printer, unused",
+        "reason": "Excess",
+        "decision": "Move",
+        "owner": "Anna",
+        "due": "2026-09-14",
+        "done": true
+      },
+      {
+        "date": "2026-10-06",
+        "area": "Inbound dock",
+        "item": "Three cages without labels",
+        "reason": "Unknown owner",
+        "decision": "Hold",
+        "owner": "Besnik",
+        "due": "2026-10-13",
+        "done": false
+      },
+      {
+        "date": "2026-10-10",
+        "area": "Packing",
+        "item": "Box of mixed chargers",
+        "reason": "Unknown owner",
+        "decision": "Hold",
+        "owner": "Clara",
+        "due": "2026-10-17",
+        "done": false
+      }
+    ]
+  }
+}
