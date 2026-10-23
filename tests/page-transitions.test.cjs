@@ -601,5 +601,7 @@ test('the CV item opens a page that lists the three career tools, in every langu
     assert.match(html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0], new RegExp(`aria-current="page" class="nav-cv" href="${prefix}/cv.html">`));
     const list = html.match(/<section class="shell listing reflection-list writing-list cv-list">[\s\S]*?<\/section>/)[0];
     for (const tool of ['cv-builder', 'ats-cv', 'cover-letter']) assert.match(list, new RegExp(`<a class="list-row" href="${prefix}/tools/${tool}/">`), `${prefix || 'en'}: ${tool}`);
+    // The CV card in the homepage hero opens the same page.
+    assert.match(built(`${prefix.slice(1)}${prefix ? '/' : ''}index.html`), new RegExp(`<a class="hero-review hero-cv" href="${prefix}/cv.html">`), `${prefix || 'en'}: hero card`);
   }
 });
