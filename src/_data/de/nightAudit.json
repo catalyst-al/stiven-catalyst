@@ -1,0 +1,217 @@
+{
+  "storageKey": "sc-night-audit-de",
+  "unknownCause": "Unbekannt",
+  "paretoTemplate": "billing-errors",
+  "text": {
+    "tool": "Night-Audit-Protokoll",
+    "one": "Abweichung",
+    "many": "Abweichungen",
+    "allNoun": "Abweichungen",
+    "volumeNoun": "Reservierungen",
+    "volumeLabel": "Bearbeitete Reservierungen",
+    "volumePlaceholder": "z. B. 1260",
+    "targetLabel": "Ziel Abweichungen %",
+    "targetPlaceholder": "z. B. 2",
+    "rateLabel": "Abweichungsquote",
+    "complement": { "label": "Saubere Reservierungen", "note": "ohne Abweichung abgeschlossen" },
+    "periodPlaceholder": "z. B. KW 38, Front Office",
+    "entryLegend": "Abweichung erfassen",
+    "countLabel": "Betroffene Reservierungen",
+    "countShort": "Reservierungen",
+    "notePlaceholder": "z. B. Zimmer 412, Karte zweimal abgelehnt, Gast telefonisch erreicht",
+    "pasteRow": "Eine Zeile pro Abweichung",
+    "pastePlaceholder": "14.09.2026\tNacht\tZahlung\tKarte abgelehnt\tKeine Garantie\t1\t189",
+    "empty": "Noch keine Abweichungen erfasst.",
+    "stageTitle": "Wo die Abweichung gefunden wird",
+    "stageNote": "In der Reihenfolge des Aufenthalts, von der Buchung bis zum Abschluss des Audits.",
+    "stagePhrase": "im Schritt",
+    "matrixTitle": "Schritt und Art der Abweichung",
+    "csv": "night-audit-protokoll",
+    "tips": [
+      [
+        "Erfassen Sie es in der Nacht, in der Sie es finden.",
+        "Das Audit ist der eine Moment, in dem der ganze Tag geprüft wird. Eine Abweichung, die erst am nächsten Morgen geschrieben wird, hat Zimmernummer, Uhrzeit und Grund schon verloren."
+      ],
+      [
+        "Zählen Sie Reservierungen, nicht Euro.",
+        "Ein No-Show ist eine Reservierung, egal zu welcher Rate. Der entgangene Umsatz kommt ins Kostenfeld, so bleibt beides erhalten."
+      ],
+      [
+        "Tragen Sie die bearbeiteten Reservierungen ein.",
+        "Ohne die Anreisen und In-House-Reservierungen des Tages sehen Sie nur Anzahlen. Mit ihnen bekommen Sie Quote, DPMO und Sigma-Niveau, und eine Woche mit 300 Anreisen wird mit einer Woche mit 120 vergleichbar."
+      ]
+    ],
+    "checkTitle": "Hält der Audit-Standard?",
+    "checkIntro": "Haken Sie ab, was heute Nacht tatsächlich getan wurde, nicht, was die Night-Audit-Anweisung sagt. Jede offene Zeile ist eine Stelle, an der eine Abweichung entsteht oder zu spät gefunden wird."
+  },
+  "fields": [
+    {
+      "name": "shift",
+      "label": "Schicht",
+      "options": [
+        "Früh",
+        "Spät",
+        "Nacht"
+      ]
+    },
+    {
+      "name": "stage",
+      "label": "Schritt",
+      "options": [
+        "Buchung",
+        "Anreise",
+        "In-House",
+        "Zahlung",
+        "Abreise",
+        "Audit-Abschluss"
+      ]
+    },
+    {
+      "name": "type",
+      "label": "Art der Abweichung",
+      "options": [
+        "No-Show",
+        "Karte abgelehnt",
+        "Buchungsfehler",
+        "Falsche Rate",
+        "Fehlende Meldekarte",
+        "Offener Saldo",
+        "Sonstiges"
+      ]
+    },
+    {
+      "name": "cause",
+      "label": "Ursache",
+      "options": [
+        "Buchungsdaten",
+        "Keine Garantie",
+        "Übergabelücke",
+        "System",
+        "Gast",
+        "Schulung",
+        "Unbekannt"
+      ]
+    }
+  ],
+  "stages": {
+    "Buchung": {
+      "meaning": "Eine Abweichung, die bei der Buchung gefunden wird, ist entstanden, bevor der Gast kam: Rate, Datum oder Garantie waren in der Reservierung falsch, und niemand hat sie vor der Nacht gelesen.",
+      "moves": [
+        "Prüfen Sie die Anreisen von morgen in der Spätschicht: Rate, Garantie, Sonderwünsche. Korrigieren Sie, was falsch ist, solange die Buchungsquelle noch erreichbar ist.",
+        "Halten Sie „mit falscher Buchung angereist“ und „hier falsch gebucht“ im Protokoll auseinander, damit der Kanal oder der Agent, der die Fehler schickt, seine Zahlen sehen kann.",
+        "Teilen Sie die Buchungsfehler jede Woche mit Reservierung und Verkauf, mit den Reservierungsnummern."
+      ],
+      "question": "Wer liest die Anreisen von morgen vor der Nacht, und was prüft er?"
+    },
+    "Anreise": {
+      "meaning": "Beim Check-in steht der Gast am Tresen: eine fehlende Meldekarte, eine nicht genommene Garantie oder ein nicht freigegebener No-Show beginnt hier, in der vollsten Stunde des Abends.",
+      "moves": [
+        "Machen Sie Meldekarte und Kartengarantie zu den ersten beiden Schritten jedes Check-ins, bevor die Karte codiert wird.",
+        "Geben Sie die No-Shows zu einer festen Uhrzeit frei, mit der Stornobedingung jede Nacht gleich angewendet.",
+        "Gehen Sie die Anreiseliste am Ende der Spätschicht durch: Jeder erwartete Gast ist im Haus, ein No-Show oder eine Stornierung, nie noch „erwartet“."
+      ],
+      "question": "Was tut die Rezeption, wenn ein Gast im Abendgeschäft ohne gültige Karte ankommt?"
+    },
+    "In-House": {
+      "meaning": "Abweichungen im Haus sind Buchungen: ein Frühstück, eine Minibar oder ein Parkplatz auf dem falschen Zimmer, eine Rate, die nicht übernommen wurde, eine doppelt gebuchte Leistung.",
+      "moves": [
+        "Vergleichen Sie die Buchungen des Tages mit den Listen der Outlets, bevor das Audit läuft, nicht nachdem die Rechnung gedruckt ist.",
+        "Buchen Sie auf das Zimmer, nicht auf den Namen: Zwei Gäste mit demselben Namen sind der älteste Buchungsfehler, den es gibt.",
+        "Prüfen Sie einmal pro Nacht den Ratencode jedes belegten Zimmers gegen die Reservierung. Eine geänderte Rate zeigt sich hier zuerst."
+      ],
+      "question": "Welches Outlet bucht am häufigsten auf das falsche Zimmer, und zu welcher Stunde?"
+    },
+    "Zahlung": {
+      "meaning": "Eine abgelehnte Karte, eine virtuelle Karte, die nicht durchgeht, oder eine nie genommene Vorautorisierung: Geld, dem das Hotel morgen hinterherläuft, statt es heute Nacht zu haben.",
+      "moves": [
+        "Autorisieren Sie jede Karte beim Check-in vor und notieren Sie den Autorisierungscode in der Reservierung.",
+        "Belasten Sie virtuelle Karten bei der Anreise, nicht bei der Abreise. Eine gescheiterte VCC wird noch in derselben Nacht an den Buchungskanal gemeldet.",
+        "Führen Sie eine Liste der abgelehnten Karten mit der Antwort des Gastes, damit die Frühschicht weiß, wen sie fragt und was schon versucht wurde."
+      ],
+      "question": "Welche Reservierungen gehen heute Nacht ohne gültige Zahlung dahinter schlafen?"
+    },
+    "Abreise": {
+      "meaning": "Beim Check-out wird die Abweichung für den Gast sichtbar: ein offener Saldo, ein Streit um eine Buchung, eine Rechnung mit falscher Adresse oder Firma.",
+      "moves": [
+        "Bereiten Sie die Rechnungen der Abreisen von morgen im Night Audit vor und lesen Sie jede einmal.",
+        "Begleichen Sie die offenen Salden des Tages vor dem Abschluss des Audits, oder benennen Sie, wer nachfasst und bis wann.",
+        "Fragen Sie die Rechnungsadresse beim Check-in ab, wenn der Gast Zeit hat, nicht am Taxi."
+      ],
+      "question": "Wie viele der Rechnungen von morgen hat jemand gelesen, bevor der Gast sie sieht?"
+    },
+    "Audit-Abschluss": {
+      "meaning": "Beim Abschluss des Audits gefunden heißt vom System gefunden, nicht von einem Menschen: ein Bericht, der nicht aufgeht, ein Zimmer ohne Rate, eine Buchung, die nicht übernommen wird.",
+      "moves": [
+        "Lassen Sie die Vorprüfungen eine Stunde vor dem Abschluss laufen, damit sich noch heute Nacht beheben lässt, was sie finden.",
+        "Halten Sie im Protokoll fest, warum das Audit nicht aufging, mit dem Zimmer: Meist kommen dieselben drei Gründe wieder.",
+        "Schließen Sie mit einer kurzen schriftlichen Notiz an die Frühschicht ab: was behoben ist, was offen bleibt und wer es verantwortet."
+      ],
+      "question": "Was hat das Audit diese Woche am sauberen Abschluss gehindert, und wie oft war es dasselbe?"
+    }
+  },
+  "causes": {
+    "Buchungsdaten": "Die Buchung selbst war falsch: Rate, Daten, Garantie oder Gastdaten. Zeigen Sie der Buchungsquelle jede Woche ihre eigenen Zahlen. Die meisten Fehler kommen aus ein oder zwei Kanälen.",
+    "Keine Garantie": "Eine Reservierung ohne gültige Karte oder Vorauszahlung ist ein No-Show, der nur noch nicht passiert ist. Machen Sie die Garantie zur Bedingung der Buchung, nicht zur Bitte beim Check-in.",
+    "Übergabelücke": "Die Spätschicht wusste es und die Nacht nicht, oder die Nacht wusste es und der Morgen nicht. Nehmen Sie es in die Schichtübergabe auf, mit Namen und Uhrzeit.",
+    "System": "Ratencodes, Schnittstellen und das Audit selbst scheitern in Mustern. Schreiben Sie den genauen Fehler und das Zimmer auf. Ein Anbieter behebt, was dokumentiert ist.",
+    "Gast": "Der Gast ist nicht gekommen, hat nicht bezahlt oder eine Buchung bestritten. Halten Sie fest, was mit ihm vereinbart wurde, damit die nächste Schicht das Gespräch nicht von vorn beginnt.",
+    "Schulung": "Die Buchung wurde von Hand gemacht und falsch gemacht. Schauen Sie sich den Schritt einmal mit der Person an, dann ändern Sie den Schritt: Eine Checkliste am Tresen schlägt eine Erinnerung im Meeting.",
+    "Unbekannt": "Ein großer Anteil „Unbekannt“ heißt: Das Protokoll ist noch nicht gut genug. Erfassen Sie Schritt und Ursache in dem Moment, in dem die Abweichung gefunden wird, während des Audits."
+  },
+  "checklist": [
+    "Die Anreisen von morgen wurden am Abend geprüft: Rate, Garantie und Sonderwünsche.",
+    "Jeder erwartete Gast ist im Haus, ein No-Show oder eine Stornierung. Niemand ist noch „erwartet“.",
+    "Die No-Shows wurden zur vereinbarten Zeit freigegeben, mit der Stornobedingung gleich angewendet.",
+    "Jedes belegte Zimmer hat einen gültigen Ratencode und eine Meldekarte in der Akte.",
+    "Jede Karte wurde beim Check-in vorautorisiert, und die Autorisierung steht in der Reservierung.",
+    "Die virtuellen Karten der heutigen Anreisen wurden heute Nacht belastet, die gescheiterten an den Kanal gemeldet.",
+    "Die Buchungen des Tages wurden mit den Listen der Outlets verglichen, bevor das Audit lief.",
+    "Die Rechnungen von morgen wurden in der Nacht vorbereitet und einmal gelesen.",
+    "Die Vorprüfungen liefen vor dem Abschluss, und was sie fanden, wurde behoben oder übergeben.",
+    "Die Frühschicht hat eine schriftliche Notiz: was behoben ist, was offen bleibt und wer es verantwortet."
+  ],
+  "example": {
+    "period": "Beispielwoche",
+    "volume": 1260,
+    "target": 2,
+    "rows": [
+      "2026-09-14|Nacht|Anreise|No-Show|Keine Garantie|3|417",
+      "2026-09-14|Spät|Zahlung|Karte abgelehnt|Keine Garantie|2|298",
+      "2026-09-14|Nacht|In-House|Buchungsfehler|Schulung|1|",
+      "2026-09-14|Nacht|Audit-Abschluss|Falsche Rate|System|1|",
+      "2026-09-15|Nacht|Anreise|No-Show|Keine Garantie|2|258",
+      "2026-09-15|Spät|Anreise|Fehlende Meldekarte|Übergabelücke|1|",
+      "2026-09-15|Nacht|Zahlung|Karte abgelehnt|Buchungsdaten|1|149",
+      "2026-09-15|Früh|Abreise|Offener Saldo|Gast|1|62",
+      "2026-09-16|Nacht|Anreise|No-Show|Keine Garantie|4|552",
+      "2026-09-16|Nacht|In-House|Buchungsfehler|Übergabelücke|2|",
+      "2026-09-16|Spät|Buchung|Falsche Rate|Buchungsdaten|1|",
+      "2026-09-16|Nacht|Zahlung|Karte abgelehnt|Keine Garantie|1|139",
+      "2026-09-17|Nacht|Anreise|No-Show|Keine Garantie|2|276",
+      "2026-09-17|Nacht|Zahlung|Karte abgelehnt|Gast|2|318",
+      "2026-09-17|Früh|Abreise|Offener Saldo|Übergabelücke|1|45",
+      "2026-09-17|Nacht|In-House|Buchungsfehler|Schulung|1|",
+      "2026-09-18|Nacht|Anreise|No-Show|Keine Garantie|5|705",
+      "2026-09-18|Spät|Anreise|Fehlende Meldekarte|Schulung|2|",
+      "2026-09-18|Nacht|Zahlung|Karte abgelehnt|Keine Garantie|2|278",
+      "2026-09-18|Nacht|Audit-Abschluss|Falsche Rate|System|1|",
+      "2026-09-18|Nacht|In-House|Buchungsfehler|Unbekannt|1|",
+      "2026-09-19|Nacht|Anreise|No-Show|Buchungsdaten|2|238",
+      "2026-09-19|Spät|Zahlung|Karte abgelehnt|Keine Garantie|1|119",
+      "2026-09-19|Früh|Abreise|Offener Saldo|Gast|2|96",
+      "2026-09-19|Nacht|Buchung|Falsche Rate|Buchungsdaten|1|",
+      "2026-09-20|Nacht|Anreise|No-Show|Keine Garantie|1|129",
+      "2026-09-20|Nacht|In-House|Buchungsfehler|Übergabelücke|1|",
+      "2026-09-20|Früh|Abreise|Offener Saldo|Gast|1|38"
+    ],
+    "volumes": [
+      "2026-09-14|190",
+      "2026-09-15|180",
+      "2026-09-16|170",
+      "2026-09-17|200",
+      "2026-09-18|210",
+      "2026-09-19|160",
+      "2026-09-20|150"
+    ]
+  }
+}

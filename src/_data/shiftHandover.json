@@ -34,6 +34,7 @@
     },
     "hotel": {
       "name": "Hotel front office",
+      "sources": [null, null, null, null, "noShows", null],
       "metrics": [
         "Arrivals left",
         "Departures left",

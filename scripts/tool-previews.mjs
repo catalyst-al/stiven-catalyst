@@ -13,10 +13,12 @@ const SITE = path.join(ROOT, "_site");
 const read = (file) => JSON.parse(fs.readFileSync(path.join(ROOT, file), "utf8"));
 const LANGS = { en: {}, de: read("src/_data/de/ui.json"), sq: read("src/_data/sq/ui.json") };
 const t = (lang, text) => LANGS[lang][text] ?? text;
-const tools = read("src/_data/tools.json").filter((tool) => tool.url).map((tool) => tool.url.split("/").filter(Boolean).pop());
+// TOOLS=night-audit,pareto limits the run to those tools (ONLY=de to one language).
+const wanted = process.env.TOOLS ? new Set(process.env.TOOLS.split(",")) : null;
+const tools = read("src/_data/tools.json").filter((tool) => tool.url).map((tool) => tool.url.split("/").filter(Boolean).pop()).filter((slug) => !wanted || wanted.has(slug));
 
 const loadChromium = async () => {
-  for (const spec of ["playwright", "/opt/node-tools/node_modules/playwright"]) {
+  for (const spec of ["playwright", "playwright-core", "/opt/node-tools/node_modules/playwright"]) {
     try { const mod = await import(createRequire(path.join(ROOT, "package.json")).resolve(spec)); return mod.chromium || mod.default?.chromium; } catch { /* next */ }
   }
   throw new Error("Playwright is not installed: npm i -D playwright");
@@ -45,6 +47,7 @@ const RECIPES = {
   "five-whys": { act: async (page, lang) => { const ids = ["ws-problem", "ws-why-1", "ws-why-2", "ws-why-3", "ws-why-4", "ws-cause", "ws-owner", "ws-check"]; for (const [i, id] of ids.entries()) { const el = await page.$(`#${id}`); if (el) await el.fill(WHYS[lang][i]); else { const alt = (await page.$$("textarea, input[type=text]"))[i]; if (alt) await alt.fill(WHYS[lang][i]); } } }, target: "main form, main .ws-sheet" },
   "damage-control": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "incomplete-control": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "night-audit": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "delay-analyzer": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "sigma-control-chart": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "shift-pulse": { before: ["damage-control", "incomplete-control", "delay-analyzer"], act: async () => {}, target: "[data-pulse-results]" },

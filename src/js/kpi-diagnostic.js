@@ -163,7 +163,14 @@
       form.scrollIntoView({ behavior: "smooth", block: "start" });
       form.querySelector("input").focus({ preventScroll: true });
     });
-    actions.append(copyButton, printButton, resetButton);
+    // The result as the problem of a 5 Whys worksheet (the worksheet next to this tool, ?problem=).
+    const whys = el("a", "button-secondary", tx("Take it to 5 Whys"));
+    const whysUrl = new URL(document.querySelector("a[data-five-whys]")?.getAttribute("href") || "../five-whys/", location.href);
+    whysUrl.searchParams.set("problem", top.length
+      ? tx("{kpi} is red; the diagnostic points to {cause}.", { kpi: kpi || "KPI", cause: top.map((key) => data.causes[key].name).join(" + ") })
+      : tx("{kpi} is red; no single cause stands out in the diagnostic.", { kpi: kpi || "KPI" }));
+    whys.href = whysUrl.href;
+    actions.append(copyButton, printButton, whys, resetButton);
     resultBox.append(actions);
 
     resultBox.hidden = false;

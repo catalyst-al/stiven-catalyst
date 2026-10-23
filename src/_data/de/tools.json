@@ -40,6 +40,14 @@
     "cta": "Tourenprotokoll öffnen"
   },
   {
+    "name": "Night-Audit-Protokoll",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Erfassen Sie No-Shows, abgelehnte Karten, Buchungsfehler und offene Salden, die das Night Audit findet. Sehen Sie Abweichungsquote, DPMO und Sigma-Niveau, die Ursachen hinter den meisten Abweichungen und wo im Aufenthalt sie beginnen.",
+    "url": "/de/tools/night-audit/",
+    "cta": "Audit-Protokoll öffnen"
+  },
+  {
     "name": "Sigma & Regel­karte",
     "type": "Six Sigma",
     "time": "5 min",

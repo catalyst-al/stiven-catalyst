@@ -85,6 +85,8 @@ test('every built page loads the stylesheet of its kind, and no other', () => {
   return import('../lib/css-split.js').then(({ groupOf }) => {
     for (const file of walk('_site')) {
       const url = '/' + path.relative('_site', file).split(path.sep).join('/');
+      // The page the service worker shows without a connection carries its few styles itself (src/offline.njk).
+      if (url === '/offline.html') continue;
       const html = fs.readFileSync(file, 'utf8');
       const links = [...html.matchAll(/<link rel="stylesheet" href="\/(styles[a-z-]*\.css)\?v=([0-9a-f]+)"/g)].map((m) => m[1]);
       assert.deepEqual(links, [`styles-${groupOf(url)}.css`], url);

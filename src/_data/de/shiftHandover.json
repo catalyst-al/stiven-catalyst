@@ -26,6 +26,7 @@
     },
     "hotel": {
       "name": "Hotel-Rezeption",
+      "sources": [null, null, null, null, "noShows", null],
       "metrics": [
         "Offene Anreisen",
         "Offene Abreisen",

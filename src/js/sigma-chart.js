@@ -34,7 +34,7 @@
     DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, today,
     parseNumber, parseDate, parseRows, sigma, sigmaText,
-    panel, stat, resultActions, flash, undoNote, downloadCsv, LOG_LIMIT, shownNote, renderOnPause, recentExample, firstVisit, exampleStamp, exampleMatches, exampleNote } = window.ToolKit;
+    panel, stat, resultActions, flash, undoNote, downloadCsv, downloadXlsx, LOG_LIMIT, shownNote, renderOnPause, recentExample, firstVisit, exampleStamp, exampleMatches, exampleNote } = window.ToolKit;
 
   const data = JSON.parse(dataEl.textContent);
   const SVG = "http://www.w3.org/2000/svg";
@@ -669,19 +669,27 @@
     render();
   });
 
-  root.querySelector("[data-csv]").addEventListener("click", () => {
-    if (!state.rows.length) return;
-    // By week, the file holds the weeks of the chart, from their Mondays.
+  // The chart as rows for a file: by week, the file holds the weeks of the chart, from their Mondays. The CSV writes
+  // the percentages as text in the page's decimal mark; the Excel workbook gets them as numbers.
+  const exportRows = (asNumbers) => {
     const exported = chartRows();
     const result = exported.length > 1 ? analyse() : null;
-    downloadCsv(data.csv || "control-chart", [
+    return [
       [weekly() ? tx("Week from") : tx("Date"), unit(), metric(), tx("Rate %"), tx("Average %"), tx("Lower limit %"), tx("Upper limit %"), tx("Signal"), tx("Note")],
       ...exported.map((row, i) => {
         const point = result?.points[i];
-        const fixed = (value) => (value == null ? "" : (value * 100).toFixed(3).replace(".", DECIMAL_COMMA ? "," : "."));
+        const fixed = (value) => (value == null ? "" : asNumbers ? Number((value * 100).toFixed(3)) : (value * 100).toFixed(3).replace(".", DECIMAL_COMMA ? "," : "."));
         return [row.date, row.n, row.d, fixed(row.d / row.n), fixed(result?.pBar), fixed(point?.lcl), fixed(point?.ucl), point ? signalText(point) : "", row.note];
       }),
-    ]);
+    ];
+  };
+  root.querySelector("[data-csv]").addEventListener("click", () => {
+    if (!state.rows.length) return;
+    downloadCsv(data.csv || "control-chart", exportRows(false));
+  });
+  root.querySelector("[data-xlsx]")?.addEventListener("click", () => {
+    if (!state.rows.length) return;
+    downloadXlsx(data.csv || "control-chart", exportRows(true));
   });
 
   // Days handed over by Damage Control, Incomplete Control or Delay Analyzer ("Open as control chart"): defects out of

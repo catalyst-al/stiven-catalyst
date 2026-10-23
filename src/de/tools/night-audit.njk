@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Night-Audit-Protokoll
+seo_title: "Night-Audit-Protokoll: No-Shows, abgelehnte Karten und Buchungsfehler nach Ursache"
+description: "Ein privates Night-Audit-Protokoll für das Front Office: Abweichungsquote, DPMO und Sigma-Niveau, ein Pareto der Ursachen und wo jede Abweichung beginnt."
+activeNav: /de/tools.html
+permalink: /de/tools/night-audit/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Hotel</p>
+  <h1>Night-Audit-&shy;Protokoll</h1>
+  <p class="lede">Erfassen Sie jeden No-Show, jede abgelehnte Karte, jeden Buchungsfehler und jeden offenen Saldo, den das Audit findet, mit dem Schritt des Aufenthalts, in dem er gefunden wurde, und der Ursache dahinter. Das Tool zeigt Ihre Abweichungsquote, die wenigen Ursachen hinter den meisten Abweichungen und wo im Tag Sie anfangen sollten.</p>
+</section>
+
+{% set cfg = de.nightAudit %}
+{% include "partials/defect-log.njk" %}
