@@ -1,0 +1,72 @@
+{
+  "storageKey": "sc-time-study-sq",
+  "title": "Studimi i kohës",
+  "csv": "studimi-i-kohes",
+  "types": {
+    "VA": { "label": "Me vlerë të shtuar", "short": "VA", "note": "Ndryshon produktin ose shërbimin në një mënyrë për të cilën klienti paguan." },
+    "NVA": { "label": "E nevojshme", "short": "NVA", "note": "Nuk shton vlerë, por sot nuk mund të hiqet: skanimi, marrja e një kutie, një kontroll i detyrueshëm." },
+    "W": { "label": "Humbje", "short": "W", "note": "Ecja, kërkimi, pritja, ripunimi. Hiqe para se të blesh ndonjë gjë." }
+  },
+  "advice": {
+    "over": {
+      "meaning": "Një stacion mbi takt vendos ritmin e gjithë linjës: gjithçka para tij pret, gjithçka pas tij mbetet pa punë. Linja prodhon me shpejtësinë e stacionit më të ngadaltë, jo me shpejtësinë e njerëzve më të mirë.",
+      "moves": [
+        "Hiq në fillim elementet e humbjes të këtij stacioni: ecja, kërkimi dhe pritja nuk kushtojnë asgjë për t'u hequr.",
+        "Lëviz elementin e fundit të këtij stacioni te stacioni tjetër me hapësirë, ose të parin te stacioni para tij, që radha e punës të mbetet.",
+        "Vetëm kur puna është e balancuar dhe humbja është hequr, shiko veglat, mbajtëset ose automatizimin për elementet me vlerë të shtuar që mbeten."
+      ],
+      "question": "Çfarë bën operatori i këtij stacioni ndërsa ai pranë tij pret?"
+    },
+    "balanced": {
+      "meaning": "Çdo stacion është nën takt, kështu që linja e përballon kërkesën. Hendeku mes stacionit më të ngadaltë dhe të tjerëve është kapaciteti i fshehur: sa më afër njëri-tjetrit stacionet, aq më pak operatorë i duhen linjës.",
+      "moves": [
+        "Hiq elementet e humbjes që mbeten; është kohë e paguar që nuk shitet.",
+        "Shiko variacionin: një stacion me shpërndarje të gjerë e humbet taktin në ciklet e këqija edhe kur mediana i del në rregull.",
+        "Krahaso operatorët që duhen me ata që ke, pastaj vendos ku shkojnë orët e lira."
+      ],
+      "question": "Cili stacion do të ishte pengesa nëse kërkesa rritej me dhjetë për qind?"
+    },
+    "variation": "Mediana e këtij stacioni është në rregull, por ciklet e tij ndryshojnë shumë. Vëzhgo edhe pesë cikle dhe shëno çfarë është ndryshe në ciklet e ngadalta: një kuti që mungon, një ecje e gjatë, një pyetje për përgjegjësin.",
+    "waste": "Më shumë se një e pesta e kohës së vëzhguar është humbje. Kapaciteti më i lirë i kësaj linje është në ato elemente, jo në një makinë më të shpejtë.",
+    "fewCycles": "Për të paktën një element janë vëzhguar më pak se tre cikle. Mat edhe tre deri në pesë para se të ndryshosh standardin: një cikël tregon një çast, jo punën."
+  },
+  "tips": [
+    ["Vëzhgo, nuk ndërhy.", "Qëndro aty ku i sheh duart dhe ecjen. Thuaji ekipit çfarë mat dhe pse; një kronometër i fshehur i prish dhjetë studimet e ardhshme."],
+    ["Mat punën, jo personin.", "Standardi përshkruan metodën me ritëm normal. Një operator i shpejtë dhe një i ngadaltë me të njëjtën metodë duhet të japin të njëjtat elemente, jo të njëjtat sekonda."],
+    ["Mediana gënjen më pak se mesatarja.", "Një kuti e rënë ose një pyetje për përgjegjësin e ngre mesataren. Mediana qëndron te cikli tipik; vlerat e dala renditen veçmas."],
+    ["Takti është ora e klientit.", "Koha në dispozicion pjesëtuar me kërkesën. Një stacion mbi takt nuk rregullohet duke punuar më fort; i duhet më pak punë ose më shumë duar."],
+    ["Ndaje humbjen nga puna e nevojshme.", "Ecja, kërkimi dhe pritja janë humbje: hiqi në fillim. Skanimi dhe kontrollet e detyrueshme janë të nevojshme: shkurtoji më vonë. Vetëm koha me vlerë të shtuar e meriton automatizimin."]
+  ],
+  "example": {
+    "process": "Linja e paketimit, dalja e mallit",
+    "demand": 540,
+    "available": 432,
+    "stations": [
+      {
+        "name": "Mbledhja dhe skanimi",
+        "elements": [
+          { "name": "Skano etiketën e porosisë", "type": "NVA", "times": [4.8, 5.1, 4.6, 5.0, 4.9] },
+          { "name": "Ecja te rafti", "type": "W", "times": [7.2, 6.8, 8.1, 7.0, 7.5] },
+          { "name": "Merr artikujt", "type": "VA", "times": [18.4, 17.9, 19.2, 18.0, 18.6] },
+          { "name": "Vendos në kuti", "type": "VA", "times": [3.9, 4.2, 3.8, 4.0, 4.1] }
+        ]
+      },
+      {
+        "name": "Paketimi",
+        "elements": [
+          { "name": "Merr kutinë", "type": "NVA", "times": [6.1, 5.8, 6.4, 6.0, 9.8] },
+          { "name": "Kërko shiritin ngjitës", "type": "W", "times": [9.5, 8.9, 10.2, 9.1, 9.8] },
+          { "name": "Paketo artikujt", "type": "VA", "times": [26.2, 25.4, 27.1, 26.0, 26.8] },
+          { "name": "Mbyll kutinë", "type": "VA", "times": [8.1, 7.8, 8.4, 8.0, 8.2] }
+        ]
+      },
+      {
+        "name": "Etiketimi dhe vendosja",
+        "elements": [
+          { "name": "Printo dhe vendos etiketën", "type": "VA", "times": [9.4, 9.0, 9.8, 9.2, 9.6] },
+          { "name": "Vendos në paletë", "type": "NVA", "times": [12.3, 11.9, 12.8, 12.0, 12.5] }
+        ]
+      }
+    ]
+  }
+}

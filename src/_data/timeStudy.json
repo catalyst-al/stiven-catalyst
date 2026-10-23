@@ -1,0 +1,72 @@
+{
+  "storageKey": "sc-time-study",
+  "title": "Time Study",
+  "csv": "time-study",
+  "types": {
+    "VA": { "label": "Value-added", "short": "VA", "note": "Changes the product or the service in a way the customer pays for." },
+    "NVA": { "label": "Necessary", "short": "NVA", "note": "Adds no value but cannot be dropped today: scanning, fetching a box, a required check." },
+    "W": { "label": "Waste", "short": "W", "note": "Walking, searching, waiting, rework. Remove it before you buy anything." }
+  },
+  "advice": {
+    "over": {
+      "meaning": "A station above takt sets the pace of the whole line: everything upstream waits, everything downstream starves. The line produces at the speed of its slowest station, not at the speed of its best people.",
+      "moves": [
+        "Remove the waste elements of this station first: walking, searching and waiting cost nothing to take out.",
+        "Move the last element of this station to the next one with slack, or the first element to the one before it, so the order of the work stays.",
+        "Only when the work is balanced and the waste is gone, look at tools, fixtures or automation for the value-added elements that remain."
+      ],
+      "question": "What does the operator at this station do while the one next to it waits?"
+    },
+    "balanced": {
+      "meaning": "Every station is under takt, so the line can meet the demand. The gap between the slowest station and the others is the hidden capacity: the closer the stations are to each other, the fewer operators the line needs.",
+      "moves": [
+        "Take out the waste elements that remain; they are time paid for and not sold.",
+        "Watch the variation: a station with a wide spread misses takt on bad cycles even when its median is fine.",
+        "Compare the operators needed with the operators you have, then decide where the spare hours go."
+      ],
+      "question": "Which station would be the bottleneck if the demand rose by ten per cent?"
+    },
+    "variation": "The median of a station is fine, but its cycles vary a lot. Watch five more cycles and write down what is different on the slow ones: a missing box, a long walk, a question to the lead.",
+    "waste": "More than a fifth of the observed time is waste. The cheapest capacity on this line is in those elements, not in a faster machine.",
+    "fewCycles": "Fewer than three cycles observed on at least one element. Time three to five more before you change the standard: one cycle shows a moment, not the work."
+  },
+  "tips": [
+    ["Observe, do not interrupt.", "Stand where you see the hands and the walk. Tell the team what you are timing and why; a hidden stopwatch poisons the next ten studies."],
+    ["Time the work, not the person.", "The standard describes the method at a normal pace. A fast operator and a slow one doing the same method should give you the same elements, not the same seconds."],
+    ["The median lies less than the mean.", "One dropped box or one question to the lead pulls the mean up. The median stays with the typical cycle; the outliers are listed on their own."],
+    ["Takt is the customer's clock.", "Available time divided by demand. A station above takt cannot be fixed by working harder; it needs less work or more hands."],
+    ["Split waste from necessary work.", "Walking, searching and waiting are waste: remove them first. Scanning and required checks are necessary: shorten them later. Only value-added time deserves automation."]
+  ],
+  "example": {
+    "process": "Packing line, outbound",
+    "demand": 540,
+    "available": 432,
+    "stations": [
+      {
+        "name": "Pick and scan",
+        "elements": [
+          { "name": "Scan order label", "type": "NVA", "times": [4.8, 5.1, 4.6, 5.0, 4.9] },
+          { "name": "Walk to shelf", "type": "W", "times": [7.2, 6.8, 8.1, 7.0, 7.5] },
+          { "name": "Pick items", "type": "VA", "times": [18.4, 17.9, 19.2, 18.0, 18.6] },
+          { "name": "Place in tote", "type": "VA", "times": [3.9, 4.2, 3.8, 4.0, 4.1] }
+        ]
+      },
+      {
+        "name": "Pack",
+        "elements": [
+          { "name": "Fetch box", "type": "NVA", "times": [6.1, 5.8, 6.4, 6.0, 9.8] },
+          { "name": "Search for tape", "type": "W", "times": [9.5, 8.9, 10.2, 9.1, 9.8] },
+          { "name": "Pack items", "type": "VA", "times": [26.2, 25.4, 27.1, 26.0, 26.8] },
+          { "name": "Seal box", "type": "VA", "times": [8.1, 7.8, 8.4, 8.0, 8.2] }
+        ]
+      },
+      {
+        "name": "Label and stage",
+        "elements": [
+          { "name": "Print and apply label", "type": "VA", "times": [9.4, 9.0, 9.8, 9.2, 9.6] },
+          { "name": "Stage on pallet", "type": "NVA", "times": [12.3, 11.9, 12.8, 12.0, 12.5] }
+        ]
+      }
+    ]
+  }
+}

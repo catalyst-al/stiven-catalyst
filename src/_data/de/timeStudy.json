@@ -1,0 +1,72 @@
+{
+  "storageKey": "sc-time-study-de",
+  "title": "Zeitstudie",
+  "csv": "zeitstudie",
+  "types": {
+    "VA": { "label": "Wertschöpfend", "short": "VA", "note": "Verändert das Produkt oder die Leistung so, dass der Kunde dafür zahlt." },
+    "NVA": { "label": "Notwendig", "short": "NVA", "note": "Schafft keinen Wert, lässt sich heute aber nicht weglassen: Scannen, einen Karton holen, eine vorgeschriebene Prüfung." },
+    "W": { "label": "Verschwendung", "short": "W", "note": "Gehen, Suchen, Warten, Nacharbeit. Erst entfernen, dann über Anschaffungen reden." }
+  },
+  "advice": {
+    "over": {
+      "meaning": "Eine Station über dem Takt bestimmt das Tempo der ganzen Linie: alles davor wartet, alles danach läuft leer. Die Linie produziert so schnell wie ihre langsamste Station, nicht so schnell wie ihre besten Leute.",
+      "moves": [
+        "Entfernen Sie zuerst die Verschwendung dieser Station: Gehen, Suchen und Warten kosten nichts beim Herausnehmen.",
+        "Verschieben Sie das letzte Element dieser Station zur nächsten mit Luft, oder das erste zur Station davor, damit die Reihenfolge der Arbeit bleibt.",
+        "Erst wenn die Arbeit ausgetaktet und die Verschwendung weg ist, schauen Sie bei den verbleibenden wertschöpfenden Elementen auf Werkzeuge, Vorrichtungen oder Automatisierung."
+      ],
+      "question": "Was tut die Person an dieser Station, während die an der Nachbarstation wartet?"
+    },
+    "balanced": {
+      "meaning": "Jede Station liegt unter dem Takt, die Linie schafft den Bedarf. Der Abstand zwischen der langsamsten Station und den anderen ist die verborgene Kapazität: je näher die Stationen beieinander liegen, desto weniger Personen braucht die Linie.",
+      "moves": [
+        "Nehmen Sie die verbleibende Verschwendung heraus; das ist bezahlte Zeit, die nicht verkauft wird.",
+        "Achten Sie auf die Streuung: eine Station mit großer Spannweite verfehlt den Takt in schlechten Zyklen, auch wenn ihr Median passt.",
+        "Vergleichen Sie die benötigten Personen mit den vorhandenen, und entscheiden Sie, wohin die freien Stunden gehen."
+      ],
+      "question": "Welche Station wäre der Engpass, wenn der Bedarf um zehn Prozent stiege?"
+    },
+    "variation": "Der Median dieser Station passt, aber ihre Zyklen streuen stark. Beobachten Sie fünf weitere Zyklen und schreiben Sie auf, was in den langsamen anders ist: ein fehlender Karton, ein langer Weg, eine Frage an die Schichtleitung.",
+    "waste": "Mehr als ein Fünftel der beobachteten Zeit ist Verschwendung. Die günstigste Kapazität dieser Linie steckt in diesen Elementen, nicht in einer schnelleren Maschine.",
+    "fewCycles": "Bei mindestens einem Element wurden weniger als drei Zyklen beobachtet. Messen Sie drei bis fünf weitere, bevor Sie den Standard ändern: ein Zyklus zeigt einen Moment, nicht die Arbeit."
+  },
+  "tips": [
+    ["Beobachten, nicht unterbrechen.", "Stehen Sie dort, wo Sie Hände und Wege sehen. Sagen Sie dem Team, was Sie messen und warum; eine versteckte Stoppuhr vergiftet die nächsten zehn Studien."],
+    ["Messen Sie die Arbeit, nicht die Person.", "Der Standard beschreibt die Methode bei normalem Tempo. Eine schnelle und eine langsame Person mit derselben Methode sollen dieselben Elemente ergeben, nicht dieselben Sekunden."],
+    ["Der Median lügt weniger als der Mittelwert.", "Ein gefallener Karton oder eine Frage an die Schichtleitung zieht den Mittelwert nach oben. Der Median bleibt beim typischen Zyklus; die Ausreißer stehen getrennt da."],
+    ["Der Takt ist die Uhr des Kunden.", "Verfügbare Zeit geteilt durch Bedarf. Eine Station über dem Takt lässt sich nicht durch mehr Anstrengung retten; sie braucht weniger Arbeit oder mehr Hände."],
+    ["Trennen Sie Verschwendung von notwendiger Arbeit.", "Gehen, Suchen und Warten sind Verschwendung: zuerst entfernen. Scannen und vorgeschriebene Prüfungen sind notwendig: später verkürzen. Nur wertschöpfende Zeit verdient Automatisierung."]
+  ],
+  "example": {
+    "process": "Packlinie, Warenausgang",
+    "demand": 540,
+    "available": 432,
+    "stations": [
+      {
+        "name": "Picken und scannen",
+        "elements": [
+          { "name": "Auftragsetikett scannen", "type": "NVA", "times": [4.8, 5.1, 4.6, 5.0, 4.9] },
+          { "name": "Weg zum Regal", "type": "W", "times": [7.2, 6.8, 8.1, 7.0, 7.5] },
+          { "name": "Artikel entnehmen", "type": "VA", "times": [18.4, 17.9, 19.2, 18.0, 18.6] },
+          { "name": "In Behälter legen", "type": "VA", "times": [3.9, 4.2, 3.8, 4.0, 4.1] }
+        ]
+      },
+      {
+        "name": "Packen",
+        "elements": [
+          { "name": "Karton holen", "type": "NVA", "times": [6.1, 5.8, 6.4, 6.0, 9.8] },
+          { "name": "Klebeband suchen", "type": "W", "times": [9.5, 8.9, 10.2, 9.1, 9.8] },
+          { "name": "Artikel verpacken", "type": "VA", "times": [26.2, 25.4, 27.1, 26.0, 26.8] },
+          { "name": "Karton verschließen", "type": "VA", "times": [8.1, 7.8, 8.4, 8.0, 8.2] }
+        ]
+      },
+      {
+        "name": "Etikettieren und bereitstellen",
+        "elements": [
+          { "name": "Etikett drucken und anbringen", "type": "VA", "times": [9.4, 9.0, 9.8, 9.2, 9.6] },
+          { "name": "Auf Palette bereitstellen", "type": "NVA", "times": [12.3, 11.9, 12.8, 12.0, 12.5] }
+        ]
+      }
+    ]
+  }
+}
