@@ -42,7 +42,7 @@ test('the menu item of the page carries the piece that slides, and Writing lists
   }
   // The CV has its own place: on a career tool it is the item marked, with the tool lit in its little menu.
   const cv = built('sq/tools/ats-cv/index.html').match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
-  assert.match(cv, /aria-current="page" class="nav-cv" href="\/sq\/tools\/cv-builder\/">/);
+  assert.match(cv, /aria-current="page" class="nav-cv" href="\/sq\/cv.html">/, "the item opens the CV page, like Writing");
   assert.match(cv, /<a class="nav-menu-link" href="\/sq\/tools\/ats-cv\/" aria-current="page">/);
   assert.doesNotMatch(cv, /aria-current="page" href="\/sq\/tools.html"/, 'Tools is not marked as well');
   const home = built('index.html').match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
@@ -593,4 +593,13 @@ test('Homepage: the note of the day rises and its quotation mark drifts, the str
   assert.ok(home.indexOf('class="shell meta-strip"') < home.indexOf('class="section-heading"'), 'the strip comes before the sections it opens');
   const light = sheetOf('index.html');
   for (const name of ['home-quote-drift', 'home-dot', 'home-heading']) assert.match(light, new RegExp(`@keyframes ${name}`));
+});
+
+test('the CV item opens a page that lists the three career tools, in every language', () => {
+  for (const prefix of ['', '/sq', '/de']) {
+    const html = built(`${prefix.slice(1)}${prefix ? '/' : ''}cv.html`);
+    assert.match(html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0], new RegExp(`aria-current="page" class="nav-cv" href="${prefix}/cv.html">`));
+    const list = html.match(/<section class="shell listing reflection-list writing-list cv-list">[\s\S]*?<\/section>/)[0];
+    for (const tool of ['cv-builder', 'ats-cv', 'cover-letter']) assert.match(list, new RegExp(`<a class="list-row" href="${prefix}/tools/${tool}/">`), `${prefix || 'en'}: ${tool}`);
+  }
 });

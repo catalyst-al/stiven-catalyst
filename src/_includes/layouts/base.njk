@@ -35,11 +35,12 @@
 ] -%}
 {#- The career tools have their own place, so the CV is one click away from every page, not only at the end of the
     homepage. -#}
-{%- set cvPages = ["/tools/cv-builder/" | local(lang), "/tools/ats-cv/" | local(lang), "/tools/cover-letter/" | local(lang)] -%}
+{#- Like Writing, the item opens a page of its own (cv.html) that lists the three tools, rather than the CV Builder. -#}
+{%- set cvPages = ["/cv.html" | local(lang), "/tools/cv-builder/" | local(lang), "/tools/ats-cv/" | local(lang), "/tools/cover-letter/" | local(lang)] -%}
 {%- set cvMenu = [
-  [cvPages[0], "CV Builder" | t(lang), ""],
-  [cvPages[1], "ATS CV" | t(lang), ""],
-  [cvPages[2], "Cover Letter" | t(lang), ""]
+  [cvPages[1], "CV Builder" | t(lang), ""],
+  [cvPages[2], "ATS CV" | t(lang), ""],
+  [cvPages[3], "Cover Letter" | t(lang), ""]
 ] -%}
 {%- set aboutMenu = [
   ["/about.html" | local(lang), "About" | t(lang), ""],
