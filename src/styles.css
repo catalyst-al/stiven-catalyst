@@ -10029,6 +10029,65 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .fm-sheet-table tr { break-inside: avoid; }
   .fm-ap, .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+/* ===== Safety Cross (js/safety-cross.js) =====
+   The cross of the month next to the talk of the day where there is room, one under the other on a phone. A day's state
+   is told by its sign (✓ ! ✕) and its tooltip; the colour only repeats it. Printed on one A4 page with the cross large. */
+.sx-check { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; }
+.sx-check input { width: 18px; height: 18px; margin: 0; }
+.sx-done-field { align-self: end; padding-bottom: 10px; }
+
+.sx-type { white-space: nowrap; font-weight: 600; }
+.sx-type.is-danger { color: var(--danger); }
+.sx-type.is-warn { color: var(--warn); }
+
+.sx-results .result-head { margin-bottom: 14px; }
+.sx-board { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin: 18px 0; }
+.sx-cross { min-width: 0; }
+.sx-cross .ck-figure { margin-top: 8px; }
+.sx-cross .ck-chart { max-width: 460px; margin: 0 auto; }
+.sx-cross .ck-legend { justify-content: center; }
+
+.sx-month-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.sx-month-nav > .button-ghost { min-width: 40px; padding: 6px 10px; }
+.sx-month { margin: 0; min-width: 9em; font-size: 18px; text-align: center; }
+.sx-views { display: inline-flex; gap: 4px; margin-left: auto; }
+.sx-views .button-ghost { padding: 6px 12px; }
+.sx-views [aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+
+.sx-talk { align-self: start; }
+.sx-talk h3 { margin: 4px 0 8px; font-size: 20px; }
+.sx-talk p { max-width: 60ch; }
+.sx-talk .tool-actions { align-items: center; margin-top: 12px; }
+.sx-talk .form-note { margin: 0; }
+
+.sx-actions { display: grid; gap: 10px; margin: 8px 0 12px; padding: 0; list-style: none; }
+.sx-actions li { display: flex; align-items: flex-start; gap: 10px; padding-left: 10px; border-left: 3px solid var(--line); }
+.sx-actions li.is-danger { border-left-color: var(--danger); }
+.sx-actions li.is-warn { border-left-color: var(--warn); }
+.sx-actions input { width: 18px; height: 18px; margin: 2px 0 0; flex: 0 0 auto; }
+.sx-actions label { display: grid; gap: 2px; overflow-wrap: anywhere; cursor: pointer; }
+.sx-actions small { color: var(--muted); font-size: 13px; }
+
+.sx-pyramid { max-width: 640px; }
+
+@media (min-width: 900px) {
+  .sx-board { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
+}
+
+@media (max-width: 600px) {
+  .sx-month { font-size: 16px; min-width: 0; flex: 1; }
+  .sx-views { margin-left: 0; width: 100%; justify-content: center; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .sx-setup, .sx-month-nav > .button-ghost, .sx-views, .sx-results .result-actions, .sx-talk .tool-actions button, .sx-actions + .tool-actions { display: none !important; }
+  .sx-results { padding: 0; }
+  .sx-board { grid-template-columns: 1fr; break-inside: avoid; }
+  .sx-cross .ck-chart { width: 150mm; max-width: none; min-width: 0; }
+  .sx-actions input { display: none; }
+  .sx-results .dl-panel { break-inside: avoid; }
+}
 /* ===== Time Study (js/time-study.js) =====
    Stations with their elements as compact rows, a stopwatch with one large number, the Yamazumi and the element table.
    The type of an element (VA, NVA, W) is told by its letters; the colour only repeats it. */
