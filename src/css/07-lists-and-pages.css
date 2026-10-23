@@ -903,11 +903,11 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .mobile-panel { display: none; }
 
 /* "Home" and "Start here" open the menu: they give way first when the header narrows, Home first (the brand leads
-   home too), then Start here, before the four places have to squeeze (the phone menu always lists them). */
-@media (max-width: 1240px) {
+   home too), then Start here, before the five places have to squeeze (the phone menu always lists them). */
+@media (max-width: 1300px) {
   .main-nav .nav-home { display: none; }
 }
-@media (max-width: 1040px) {
+@media (max-width: 1150px) {
   .main-nav .nav-start { display: none; }
 }
 /* Narrow desktops: the longer Albanian and German labels still fit on one line. */
