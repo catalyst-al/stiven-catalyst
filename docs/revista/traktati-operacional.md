@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -407,6 +407,59 @@ për faqen në tri gjuhët (`lib/treatise/volumes/09.js`). Blloku: Operacioni. 3
 | Kontrollueshmëria dhe qëndrueshmëria; emocione, kënaqësi, besnikëri | `van-vaerenbergh-2014`, DOI 10.1177/1094670514538321 | Abstrakti përputhet |
 | 147 studime, 82.901 pjesëmarrës, 24 vende, shërbime online | `das-2026`, DOI 10.1016/j.jbusres.2025.115752 | Abstrakti përputhet |
 | 2 / 3 / 14 / 26 / 38 orë dhe 40 / 36 / 28 / 19 / 14 / 6 | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
+
+## Vëllimi 10: Ora e vendimit, kur problemi dihet, por askush nuk mund të veprojë (23 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 10, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/10.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Të gjashtë kapitujt kanë skenë, shpjegim dhe protokoll si te PDF-ja; Kapitujt II
+  deri V kanë edhe faqen e provave. PDF-ja nuk ka asnjë grafik numerik, kurse sistemi kërkon dy; u shtuan dy faqe
+  modeli, hipotetike me flamur, që vizatojnë dy ide që PDF-ja i përshkruan me fjalë, të dyja në Kapitullin V:
+  "Dymbëdhjetë përjashtime të hapura sipas gjendjes" (të vëna re 3, të verifikuara me përgjegjës 2, të verifikuara
+  pa përgjegjës 4, të vendosura 1, të ekzekutuara 2) dhe "Një vendim i shpikur, 36 minuta" (verifikimi 11, pritja e
+  vendimit 17, ekzekutimi 8; 17/36 = 47,2 %, siç e llogarit PDF-ja). Edhe faqja e metodës, si te vëllimet e tjera.
+  Përmbyllja mban listën e dhjetë vëllimeve të PDF-së (faqja 28 e saj) si bllok `lists` me dy kolona.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Mintzberg, Raisinghani & Théorêt 1976,
+  25 procese vendimi (shifra e kopertinës); Klein, Calderwood & Clinton-Cirocco 1986, krahasimi i opsioneve në më
+  pak se 12 % të pikave të vendimit (abstrakti në Crossref: "in less than 12% of the decision points"); Eisenhardt
+  1989, tetë firma kompjuterike, vendimmarrësit e shpejtë përdorin më shumë informacion në kohë reale, më shumë
+  alternativa njëkohësisht dhe këshillë me dy nivele; Faraj & Xiao 2006, koordinim i ekspertizës dhe koordinim
+  dialogjik në një qendër traume; Okhuysen & Bechky 2009, llogaridhënia, parashikueshmëria dhe kuptimi i
+  përbashkët (Annals 3(1), 463–502); Bigley & Roberts 2001, sistemi i komandës së incidenteve, AMJ 44(6); Weick &
+  Sutcliffe 2015, kapitulli 7, parimi i pestë, deferenca ndaj ekspertizës; Simon 1955, racionaliteti i kufizuar;
+  Rudolph, Morrison & Carroll 2009, zgjidhja e problemeve e orientuar nga veprimi, AMR 34(4). Asnjë gabim faktik
+  në PDF.
+- **Burimet.** Dy ekzistonin (`tucker-edmondson-2003`, `pressure-kahneman-klein-2009`); u shtuan nëntë. Të
+  njëmbëdhjetë DOI-të zgjidhen; tre prej tyre (10.5465/256434, 10.5465/3069401, 10.1080/19416520903047533) nuk
+  kthejnë JSON në Crossref, por doi.org i ridrejton te faqja e botuesit me të njëjtin artikull. Vitet sipas vëllimit
+  të shtypur.
+- **Lidhjet me faqen.** Esetë: when-the-dashboard-turns-red-before-you (Kap. I), 61-resellers (Kap. II),
+  the-tour-the-driver-does-not-understand (Kap. III), what-last-mile-taught-me (Kap. IV), solve-it-or-escalate-it
+  (Kap. V), the-industry-changes-management-problems-do-not (Kap. VI). Mjeti: Delay Analyzer (`/tools/delay-analyzer/`).
+- **Çfarë u ndryshua nga PDF-ja.** Editoriali (DE), protokollet e Kapitujve I, III, IV dhe VI dhe disa tituj u
+  shkurtuan që të hyjnë në A5; protokolli i Kapitullit IV citon dy burime në vend të tre dhe ai i Kapitullit VI dy
+  në vend të katër (burimet e hequra mbeten te faqet e tjera të vëllimit). Përshkrimi i kërkimit u shkurtua nën 160
+  shenja. Asgjë tjetër.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Racionaliteti i kufizuar, "mjaftueshëm i mirë" në vend të optimumit | `simon-1955`, DOI 10.2307/1884852 | DOI hapet, QJE 69(1) |
+| 25 procese vendimi strategjik; identifikim, zhvillim, përzgjedhje | `mintzberg-raisinghani-theoret-1976`, DOI 10.2307/2392045 | Abstrakti përputhet |
+| Komandantët e zjarrit krahasuan opsione në < 12 % të pikave të vendimit | `klein-calderwood-clinton-cirocco-1986`, DOI 10.1177/154193128603000616 | Abstrakti përputhet |
+| 8 firma; më shumë informacion në kohë reale, më shumë alternativa, këshillë me dy nivele | `eisenhardt-1989`, DOI 10.5465/256434 | doi.org ridrejton te AMJ 32(3) |
+| Sistemi i komandës së incidenteve si organizim me besueshmëri të lartë | `bigley-roberts-2001`, DOI 10.5465/3069401 | doi.org ridrejton te AMJ 44(6) |
+| Koordinim i ekspertizës dhe dialogjik në një qendër traume | `faraj-xiao-2006`, DOI 10.1287/mnsc.1060.0526 | Abstrakti përputhet |
+| Llogaridhënia, parashikueshmëria, kuptimi i përbashkët | `okhuysen-bechky-2009`, DOI 10.1080/19416520903047533 | doi.org ridrejton te Annals 3(1) |
+| Interpretimi dhe zgjedhja të lidhura në zgjidhjen e problemeve | `rudolph-morrison-carroll-2009`, DOI 10.5465/amr.34.4.zok733 | DOI hapet, AMR 34(4) |
+| Deferenca ndaj ekspertizës, parimi i pestë | `weick-sutcliffe-2015`, DOI 10.1002/9781119175834.ch07 | DOI hapet, kap. 7 |
+| Intuita e ekspertit kërkon mjedis të rregullt dhe reagim | `pressure-kahneman-klein-2009` | Ekzistonte |
+| Zgjidhjet e nivelit të parë që nuk mësojnë | `tucker-edmondson-2003` | Ekzistonte |
+| 3 / 2 / 4 / 1 / 2 përjashtime dhe 11 / 17 / 8 minuta | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
 
 ## Si shtohet një vëllim
 
