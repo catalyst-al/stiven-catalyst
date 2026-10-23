@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -253,6 +253,61 @@ për faqen në tri gjuhët (`lib/treatise/volumes/06.js`). Blloku: Operacioni. 3
 | IHI: matje rezultati, procesi, balancimi | `ihi-establishing-measures` | Faqja hapet (200) |
 | NIST 6.3.1 (grafikët e kontrollit), 6.3.3.2 (p-grafikët); UCL = p₀ + 3√[p₀(1−p₀)/n] | `nist-control-charts`, `nist-p-chart` | Faqet hapen (200); formula si te 6.3.3.2 |
 | 80/60/10/30; p-grafiku 1,5% / 2,65% / 0,35% / 2,3%; 90→100, 40→80, 85,5→83,3 | të shpikura | Flamur "sintetik"; llogaritë të rikontrolluara |
+
+## Vëllimi 7: Kostoja e heshtjes, pse ekipet e vijës së parë pushojnë së foluri (23 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 7, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/07.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Të gjashtë kapitujt e PDF-së kanë skenë, shpjegim dhe protokoll, prandaj struktura
+  e kapitujve është e njëjtë. U shtua një faqe modeli te Kapitulli I ("Ku humbet dija rrugës për lart"), grafik
+  hipotetik me 20 → 14 → 9 → 6 → 5 → 3, që e vizaton zinxhirin pesëfazësh të Morrison & Milliken-it të cilin PDF-ja
+  vetëm e përshkruan (faqja e vet ka vetëm hinkën e Kapitullit V); dhe faqja e metodës, si te vëllimet e tjera.
+- **Grafikët.** Dy, hipotetikë me flamur: zinxhiri i sipërm 20/14/9/6/5/3 (Kap. I, i ri) dhe hinka e PDF-së
+  12/9/7/5/3/2 (Kap. V, "Raised / Acknowledged / Assigned / Action started / Told back / Verified closed"). Numrat e
+  studimeve (51, 40, 89, 9) janë blloqe `stat`/`stats` me burim, jo grafikë.
+- **Rrjedha pesëfazëshe** (Vër re, Vlerëso, Fol, Merr, Vepro) e Kapitullit I dhe kuadri pesëhapësh (Fto, Mbro,
+  Verifiko, Vendos, Kthe) i Kapitullit VI mbeten si te PDF-ja, si `chain` dhe `rows`.
+- **Një mospërputhje citimi.** PDF-ja (faqja 5) e citon ilustrimin si "informed by Tucker & Edmondson (2003) and
+  Tucker (2004)", por Tucker (2004) nuk është në listën e dhjetë burimeve të PDF-së. Faqja citon vetëm Tucker &
+  Edmondson (2003) dhe e shënon te metoda.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Edmondson 1999, 51 ekipe në një kompani
+  prodhimi; Milliken, Morrison & Hewlin 2003, 40 intervista; Tucker & Edmondson 2003, infermierë në 9 spitale; Nembhard &
+  Edmondson 2006, 23 NICU (shifra 1.440 e të anketuarve qarkullon vetëm në burime dytësore, nuk u përdor); Detert &
+  Burris 2007, 3.149 punonjës dhe 223 menaxherë në një zinxhir restorantesh, hapja menaxheriale më e qëndrueshme se
+  drejtimi transformues, siguria psikologjike ndërmjetëson; Detert & Treviño 2010, 89 intervista në një kompani
+  teknologjike shumëkombëshe (njësi prodhimi dhe R&D); Liang, Farh & Farh 2012, 239 punonjës, dy valë, siguria
+  psikologjike parashikon zërin ndalues; Frazier et al. 2017, 136 mostra, mbi 22.000 individë, afro 5.000 grupe
+  (online 2016, vëll. 70 i 2017). Asnjë gabim faktik në PDF.
+- **Burimet.** Katër ekzistonin (`edmondson-1999`, `boss-milliken-2003` që është Milliken, Morrison & Hewlin 2003,
+  `tucker-edmondson-2003`, `frazier-2017`); u shtuan gjashtë: Morrison & Milliken 2000, Nembhard & Edmondson 2006,
+  Detert & Burris 2007, Detert & Treviño 2010, Liang, Farh & Farh 2012, Morrison 2014. Të dhjetë DOI-të e PDF-së
+  zgjidhen në Crossref me të njëjtët autorë, revista dhe vite.
+- **Lidhjet me faqen.** Esetë: gemba (Kap. I), teams-with-many-languages (Kap. II),
+  leading-people-without-losing-the-person (Kap. III), why-the-handover-is-underrated (Kap. IV),
+  solve-it-or-escalate-it (Kap. V), the-operations-manager-i-want-to-be (Kap. VI). Mjeti: Shift Handover (Karta e
+  sinjalit ndan strukturën "e vëzhguar / e raportuar / përgjegjësi / e kthyer si përgjigje").
+- **Çfarë u ndryshua nga PDF-ja.** Vija kohore e provës (2 javë / 1 muaj) e Kapitullit VI u fut në paragraf, se
+  protokolli me gjashtë hapa plus vijën kohore nuk hynte në A5; tekstet u shkurtuan që të hyjnë në A5 (DE del ~15% më
+  e gjatë). "The editor" u bë "the author".
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Siguria psikologjike: bindje e përbashkët se ekipi është i sigurt për rreziqe ndërpersonale; 51 ekipe, një kompani prodhimi | `edmondson-1999`, DOI 10.2307/2666999 | Si te Nr. 1 |
+| Heshtja organizative si fenomen kolektiv; kuadër konceptual | `morrison-milliken-2000`, DOI 10.2307/259200 | DOI hapet, AMR 25(4) |
+| 40 punonjës të intervistuar; frika nga etiketat negative dhe marrëdhëniet e dëmtuara | `boss-milliken-2003`, DOI 10.1111/1467-6486.00387 | Ekzistonte |
+| Infermierë në 9 spitale; rimëkëmbja nuk sjell vetvetiu të mësuar | `tucker-edmondson-2003` | Ekzistonte |
+| 23 NICU; gjithëpërfshirja e drejtuesit, statusi profesional, siguria psikologjike | `nembhard-edmondson-2006`, DOI 10.1002/job.413 | DOI hapet, JOB 27(7) |
+| 3.149 punonjës, 223 menaxherë; hapja menaxheriale, siguria ndërmjetësuese | `detert-burris-2007`, DOI 10.5465/amj.2007.26279183 | DOI hapet, AMJ 50(4); abstrakti përputhet |
+| 89 intervista; mbikëqyrësit dhe drejtuesit disa nivele më lart | `detert-trevino-2010`, DOI 10.1287/orsc.1080.0405 | DOI hapet, Org. Sci. 21(1); abstrakti përputhet |
+| 239 punonjës, dy valë; zëri promovues dhe ndalues | `liang-farh-farh-2012`, DOI 10.5465/amj.2010.0176 | DOI hapet, AMJ 55(1); abstrakti përputhet |
+| Rishikimi i zërit dhe heshtjes; kotësia si rrezik më vete | `morrison-2014`, DOI 10.1146/annurev-orgpsych-031413-091328 | DOI hapet, ARIOP 1 |
+| 136 mostra, >22.000 individë, ~5.000 grupe | `frazier-2017` | Ekzistonte; abstrakti përputhet |
+| 20/14/9/6/5/3 dhe 12/9/7/5/3/2 | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
 
 ## Si shtohet një vëllim
 
