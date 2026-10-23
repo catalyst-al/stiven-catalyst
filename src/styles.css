@@ -9381,3 +9381,277 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 .series-dots a.is-next::after { box-shadow: 0 0 0 3px rgba(255, 214, 150, .12), 0 0 14px rgba(255, 214, 150, .7); }
 .series-dots a:hover { box-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 214, 150, .9); }
 [data-theme="light"] .series-dots a:is(.is-read, [aria-current="page"]) { box-shadow: 0 0 0 1px rgba(11, 16, 21, .25), 0 0 10px rgba(240, 180, 90, .8); }
+/* ===== Shared charts (js/chart-kit.js) and the workplace profile (js/workplace.js) =====
+   Every chart is an <svg class="ck-chart"> in a .ck-figure: one tooltip per figure, the SVG and PNG buttons under it.
+   The colours come from the --tr-* variables of the tools (06-tools.css) and the state colours. */
+.ck-figure { margin: 18px 0 0; }
+.ck-scroll, .tr-scroll { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ck-chart { display: block; width: 100%; height: auto; min-width: 280px; }
+.ck-hit { cursor: default; }
+.ck-hit:hover { opacity: .85; }
+.ck-tooltip {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  gap: 2px;
+  max-width: 260px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper-2);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.3;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+  pointer-events: none;
+}
+.ck-tooltip strong { font-size: 14px; }
+.ck-tooltip span { color: var(--muted); }
+.ck-caption { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+.ck-actions { margin-top: 10px; }
+.ck-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
+.ck-legend li { display: inline-flex; align-items: center; gap: 7px; }
+.ck-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+@media print {
+  .ck-actions { display: none; }
+  .ck-tooltip { display: none; }
+}
+
+/* The workplace profile form, wherever a tool shows it. */
+.wp-setup { display: grid; gap: 14px; }
+.wp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 18px; }
+.wp-wide { grid-column: 1 / -1; }
+.wp-targets .field input { max-width: 180px; }
+.wp-setup .form-note { margin-top: 4px; }
+
+/* Shared pieces of the new tools: a row of state chips and a status tag. */
+.ck-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ck-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--muted); font-size: 13px; font-weight: 600;
+}
+.ck-chip.is-ok { border-color: color-mix(in srgb, var(--ok) 60%, transparent); color: var(--ok); }
+.ck-chip.is-warn { border-color: color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
+.ck-chip.is-danger { border-color: color-mix(in srgb, var(--danger) 60%, transparent); color: var(--danger); }
+.ck-chip.is-blue { border-color: color-mix(in srgb, var(--blue) 60%, transparent); color: var(--blue); }
+/* ===== Daily Board (js/daily-board.js) =====
+   Five month calendars (S, Q, D, C, P) side by side where there is room, one under the other on a phone. The state of a
+   day is told by its sign (✓ ! ✕) and its words; the colour only repeats it. Printed on one A4 page in landscape. */
+.db-profile .wp-setup { margin-top: 12px; }
+.db-rule-list { display: grid; gap: 14px; margin: 12px 0 0; }
+.db-rule { display: grid; gap: 4px; }
+.db-rule dt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; font-weight: 700; }
+.db-rule dt small { color: var(--muted); font-size: 12px; font-weight: 400; }
+.db-rule dd { margin: 0; color: var(--muted); font-size: 14px; }
+.db-key { display: inline-block; min-width: 76px; color: var(--ink); font-size: 12px; font-weight: 700; }
+.db-key.is-ok { color: var(--ok); }
+.db-key.is-warn { color: var(--warn); }
+.db-key.is-danger { color: var(--danger); }
+
+.db-letter {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto;
+  border: 1px solid var(--line); border-radius: 8px; color: var(--blue); font-size: 15px; font-weight: 800;
+}
+.db-state { white-space: nowrap; font-weight: 600; }
+.db-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--line); vertical-align: middle; }
+.db-state.is-ok .db-dot { background: var(--ok); }
+.db-state.is-warn .db-dot { background: var(--warn); }
+.db-state.is-danger .db-dot { background: var(--danger); }
+
+.db-results .result-head { margin-bottom: 14px; }
+.db-example { margin: 0 0 14px; max-width: 72ch; }
+.db-chips { margin: 0 0 18px; }
+.db-chip { color: var(--ink); }
+.db-chip-letter { font-weight: 800; }
+.db-chip.is-none, .db-chip.is-future { border-style: dashed; color: var(--muted); }
+
+.db-month-nav { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+.db-month-nav .button-ghost { min-width: 40px; padding: 6px 10px; }
+.db-month { margin: 0; min-width: 9em; font-size: 18px; text-align: center; }
+
+.db-calendars { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+.db-cal { display: grid; align-content: start; gap: 6px; min-width: 0; }
+.db-cal-head { display: flex; align-items: center; gap: 10px; }
+.db-cal-head .result-label { margin: 0; }
+.db-cal .dl-panel-note { margin: 0; }
+.db-cal .ck-figure { margin: 4px 0 0; }
+.db-cal .ck-chart { max-width: 360px; }
+
+.db-grid { margin-top: 18px; }
+.db-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.db-list { display: grid; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; font-size: 14px; }
+.db-list li { overflow-wrap: anywhere; }
+.db-list small { color: var(--muted); }
+.db-agenda { display: grid; gap: 12px; margin: 0; padding-left: 22px; }
+.db-agenda > li { padding-left: 4px; }
+.db-agenda-head { display: flex; justify-content: space-between; gap: 12px; }
+.db-min { flex: 0 0 auto; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.db-agenda ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+.db-agenda ul li { margin-bottom: 2px; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .db-month { font-size: 16px; min-width: 0; flex: 1; }
+  .db-key { min-width: 0; margin-right: 4px; }
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 10mm; }
+  .db-setup, .db-month-nav .button-ghost, .db-results .result-actions { display: none !important; }
+  .db-results { padding: 0; }
+  .db-calendars { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+  .db-cal { break-inside: avoid; }
+  .db-cal .ck-chart { min-width: 0; max-width: none; }
+  .db-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); break-before: auto; }
+  .db-grid .dl-panel { break-inside: avoid; }
+  .db-letter { color: #000; }
+}
+/* ===== Time Study (js/time-study.js) =====
+   Stations with their elements as compact rows, a stopwatch with one large number, the Yamazumi and the element table.
+   The type of an element (VA, NVA, W) is told by its letters; the colour only repeats it. */
+.ts-takt { margin: 0; color: var(--ink); font-weight: 600; }
+.ts-stations { display: grid; gap: 14px; }
+.ts-station {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+}
+.ts-station-head,
+.ts-element { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px 10px; }
+.ts-element { grid-template-columns: auto minmax(0, 1fr) minmax(0, 150px) auto; }
+.ts-elements { display: grid; gap: 8px; padding-left: 6px; }
+.ts-no {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.ts-no-small { min-width: 34px; height: 24px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.ts-in {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+.ts-in:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.ts-station-head .ts-in { font-weight: 700; }
+.ts-type { padding-right: 28px; }
+.ts-add { justify-self: start; padding-left: 0; }
+/* The station without a remove button keeps the same width as the others. */
+.ts-station-head > .ts-in:last-child,
+.ts-element > .ts-type:last-child { grid-column-end: -1; }
+
+/* The stopwatch: one large number, the element being watched under it, two big buttons. */
+.ts-watch-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.ts-clock {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0 0;
+  font-family: var(--display);
+  font-size: clamp(56px, 12vw, 96px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ts-clock-unit { color: var(--muted); font-size: clamp(20px, 3vw, 28px); }
+.ts-current { margin: 4px 0 0; text-align: center; color: var(--muted); }
+.ts-current strong { color: var(--ink); }
+.ts-watch-actions { justify-content: center; }
+.ts-big { min-width: 140px; padding: 16px 28px; font-size: 18px; }
+.ts-entry { align-items: end; }
+.ts-manual textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.ts-type-cell { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.dl-more { margin-top: 10px; }
+
+/* Results: the moves in the focus card, the element table with its totals. */
+.ts-moves li { margin-bottom: 10px; }
+.ts-move-detail { display: block; color: var(--muted); font-size: 14px; }
+.ts-actions-status { flex-basis: 100%; }
+.ts-table .ts-strong { font-weight: 800; color: var(--ink); }
+.ts-table .ts-high { color: var(--warn); font-weight: 700; }
+.ts-table .ts-outliers { color: var(--muted); font-size: 13px; }
+.ts-table tfoot td { border-top: 2px solid var(--line); color: var(--muted); font-size: 13px; }
+.ts-table tfoot .ts-total td:first-child { color: var(--ink); font-weight: 700; }
+.ts-table .is-waste td:first-child { border-left: 3px solid var(--danger); }
+.ts-tag-va { border-color: color-mix(in srgb, var(--blue) 60%, transparent); color: var(--blue); }
+.ts-tag-nva { border-color: color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
+.ts-tag-w { border-color: color-mix(in srgb, var(--danger) 60%, transparent); color: var(--danger); }
+
+@media (max-width: 600px) {
+  .ts-element { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .ts-element .ts-type { grid-column: 2 / 3; }
+  .ts-element .dl-remove { grid-row: 1; grid-column: 3; }
+  .ts-watch-grid { grid-template-columns: minmax(0, 1fr); }
+  .ts-big { flex: 1 1 auto; }
+}
+
+@media print {
+  .ts-setup, .ts-actions-status, .dl-more { display: none !important; }
+  .ts-results { padding: 0; border: 0; }
+  .ts-table { font-size: 11px; }
+  .ts-table .is-waste td:first-child { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+/* ===== Action Tracker (js/action-tracker.js) ===== */
+.at-filters { display: grid; gap: 12px; margin: 0 0 12px; }
+.at-status-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.at-status-filter button {
+  padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent;
+  color: var(--muted); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.at-status-filter button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+.at-filter-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px 14px; }
+.at-filter-fields .field label { font-size: 12px; }
+
+.at-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.at-item {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; align-items: start;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+}
+.at-item.is-overdue { border-color: color-mix(in srgb, var(--danger) 55%, transparent); }
+.at-item.is-closed { opacity: .78; }
+.at-item.is-closed .at-title { text-decoration: line-through; text-decoration-color: var(--muted); }
+.at-status { align-self: start; }
+.at-status select { min-width: 0; padding: 6px 8px; font-size: 13px; }
+.at-main { display: grid; gap: 6px; min-width: 0; }
+.at-title { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.at-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; color: var(--muted); font-size: 13px; }
+.at-meta .ck-chip { padding: 2px 8px; font-size: 12px; }
+.at-detail { margin: 0; color: var(--muted); font-size: 14px; }
+.at-edit { display: none; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 12px; margin-top: 6px; }
+.at-item.is-editing .at-edit { display: grid; }
+.at-edit .field label { font-size: 12px; }
+.at-edit .dl-wide { grid-column: 1 / -1; }
+.at-tools { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 1 / -1; }
+.at-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+
+.at-results .dl-stats { margin-bottom: 18px; }
+.at-review { margin: 0 0 18px; }
+.at-review ul { margin: 6px 0 12px; padding-left: 20px; }
+.at-review li { margin-bottom: 4px; }
+.at-review small { color: var(--muted); }
+
+@media (max-width: 600px) {
+  .at-item { grid-template-columns: 1fr; }
+}
+@media print {
+  .at-filters, .at-tools, .at-edit, form[data-entry], .tool-aside, .at-results .tool-actions { display: none !important; }
+  .at-item { break-inside: avoid; }
+}
