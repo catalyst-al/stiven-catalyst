@@ -19,7 +19,9 @@
       "/tools/daily-board/",
       "/tools/five-s-audit/",
       "/tools/safety-cross/",
-      "/tools/lost-found/"
+      "/tools/lost-found/",
+      "/tools/room-status/",
+      "/tools/guest-complaints/"
     ],
     "learn": [],
     "also": [
@@ -91,6 +93,16 @@
         "when": "During the shift",
         "do": "Log every item handed in with its tag number, contact the guest the same day and clear the items due for a decision before the shift ends.",
         "tool": "/tools/lost-found/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Keep every room's status current as the work happens, clean the queue from the top, and copy the summary into the shift handover.",
+        "tool": "/tools/room-status/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Log every complaint while the guest is still with you, walk through LEARN, resolve it within the target and call the guest back before the shift ends.",
+        "tool": "/tools/guest-complaints/"
       }
     ],
     "next": "zenith"
@@ -116,7 +128,9 @@
       "/tools/gemba-walk/",
       "/tools/ops-report/",
       "/tools/room-inspection/",
-      "/tools/maintenance-planner/"
+      "/tools/maintenance-planner/",
+      "/tools/signals/",
+      "/tools/housekeeping-planner/"
     ],
     "learn": [],
     "also": [
@@ -200,6 +214,16 @@
         "when": "Every week",
         "do": "Print the work list on Monday and give every overdue task on a critical asset a date this week.",
         "tool": "/tools/maintenance-planner/"
+      },
+      {
+        "when": "Every morning",
+        "do": "Read the signals before the morning meeting, take the first high ones to the floor and give each one an owner, a 5 Whys or a date.",
+        "tool": "/tools/signals/"
+      },
+      {
+        "when": "Every morning",
+        "do": "Read today's departures and stay-overs after the night audit, check the attendants needed against the schedule, and hand every attendant the printed sheet of their section.",
+        "tool": "/tools/housekeeping-planner/"
       }
     ],
     "next": "lumen"

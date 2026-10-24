@@ -294,5 +294,37 @@
     "summary": "Planifiko mirëmbajtjen parandaluese dhe kontrollet ligjore të çdo pajisjeje sipas datës ose orëve të punës, regjistro çfarë u krye, u shty ose u prish, dhe shiko çfarë është vonë, zbatimin e planit, MTBF dhe MTTR, dhe listën e punës së javës.",
     "url": "/sq/tools/maintenance-planner/",
     "cta": "Planifiko mirëmbajtjen"
+  },
+  {
+    "name": "Sinjalet",
+    "type": "Pasqyrë",
+    "time": "2 min",
+    "summary": "Çdo mjet në këtë shfletues i lexuar në një listë mëngjesi të renditur: sinjalet e kartave të kontrollit (p, c, u dhe I-MR me rregullat e serisë dhe të prirjes), objektivat e humbura, veprimet, mirëmbajtjet, etiketat e kuqe dhe idetë me vonesë, siguria në krye.",
+    "url": "/sq/tools/signals/",
+    "cta": "Lexo sinjalet"
+  },
+  {
+    "name": "Statusi i dhomave",
+    "type": "Hotel",
+    "time": "Vazhdimisht",
+    "summary": "Tabela e dhomave e turnit: çdo dhomë sipas katit me kodin e housekeeping (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), shënimet DND, VIP dhe mbërritje dhe pastruesin e saj. Tregon dhomën e radhës për pastrim, dhomat gati për mbërritjet e sotme, pjesën jashtë përdorimit dhe minutat nga largimi deri e pastër dhe nga e pastër deri e inspektuar.",
+    "url": "/sq/tools/room-status/",
+    "cta": "Hap tabelën e dhomave"
+  },
+  {
+    "name": "Ankesat e mysafirëve",
+    "type": "Hotel",
+    "time": "Vazhdimisht",
+    "summary": "Regjistri i ankesave dhe i rikuperimit të shërbimit në recepsion: LEARN, veprimi, kompensimi në euro, koha e zgjidhjes dhe telefonata pasuese. Ankesat për 100 net dhome të zëna, pjesa e zgjidhur brenda objektivit, dhomat që përsëriten, Pareto e kategorive dhe një përgjigje për mysafirin.",
+    "url": "/sq/tools/guest-complaints/",
+    "cta": "Hap regjistrin"
+  },
+  {
+    "name": "Planifikuesi i housekeeping-ut",
+    "type": "Hotel",
+    "time": "10 min",
+    "summary": "Plani i stafit i drejtuesit të housekeeping-ut: largimet, qëndrimet e vazhduara, ndërrimet e çarçafëve, dhomat VIP, pastrimet e thella dhe zonat publike bëhen minuta pune (ose kredite) dhe pastruesit e nevojshëm kundrejt atyre në turn, me orë, kosto pune dhe minuta për dhomë të zënë. Sektorë të balancuar sipas minutave në sa më pak kate, të printuar për çdo pastrues ose të vendosur në Statusin e dhomave, dhe java nga parashikimi.",
+    "url": "/sq/tools/housekeeping-planner/",
+    "cta": "Planifiko ekipin e housekeeping-ut"
   }
 ]

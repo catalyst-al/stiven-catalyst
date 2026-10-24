@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Sinjalet
+seo_title: "Sinjalet e mëngjesit: rregullat e kartës së kontrollit, objektivat dhe afatet nga çdo mjet"
+description: "Një listë mëngjesi me atë që kërkon vëmendje: sinjalet e kartave të kontrollit, objektivat e humbura, afatet e kaluara dhe ngjarjet e sigurisë."
+activeNav: /sq/tools.html
+permalink: /sq/tools/signals/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Pasqyrë</p>
+  <h1>Sinjalet</h1>
+  <p class="lede">Një faqe për mëngjesin. Sinjalet lexon çdo mjet që ka të dhëna në këtë shfletues, i jep çdo serie ditore kartën e kontrollit që i duhet, kontrollon objektivat dhe afatet dhe rendit atë që kërkon vëmendje: së pari sigurinë, pastaj të lartat, të mesmet dhe të ulëtat, secila me rregullin dhe numrat që e mbështesin.</p>
+</section>
+
+{% set cfg = sq.signals %}
+{% include "partials/signals.njk" %}

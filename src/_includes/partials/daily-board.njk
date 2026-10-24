@@ -1,4 +1,5 @@
-{#- The Daily Board: the SQDCP tier board of one site, a month calendar per letter fed from the logs in this browser. daily-board.js does the rest. -#}
+{#- The Daily Board: the SQDCP tier board of one site, a month calendar per letter fed from the logs in this browser. daily-board.js does the rest; Room Inspection's checklists and pass mark (its data in this language) go along for its first-time pass rate. -#}
+{%- set roomData = de.roomInspection if lang == "de" else (sq.roomInspection if lang == "sq" else roomInspection) -%}
 <section class="shell tool-layout db-setup">
   <div class="tool-panel" data-daily-board>
 
@@ -118,8 +119,14 @@
 <section class="shell dl-results db-results" data-results tabindex="-1" hidden></section>
 
 <script type="application/json" id="daily-board-data">{{ cfg | scriptJson | safe }}</script>
+{%- if roomData %}
+<script type="application/json" id="daily-board-rooms">{{ { threshold: roomData.threshold, zones: roomData.zones, templates: roomData.templates } | scriptJson | safe }}</script>
+{%- endif %}
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+{#- Their arithmetic only: each script stops before its page code on a page that is not its own. -#}
+<script src="{{ '/js/room-inspection.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/maintenance-planner.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/daily-board.js' | assetUrl }}" defer></script>

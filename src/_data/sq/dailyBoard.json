@@ -15,17 +15,17 @@
     {
       "key": "Q",
       "name": "Cilësia",
-      "sources": "Kontrolli i dëmeve, Kontrolli i plotësisë, Regjistri i Night Audit",
-      "red": "Dëme, porosi të paplota ose përjashtime auditi mbi shkallën objektiv. Pa volum: një numër dukshëm mbi ditën e zakonshme.",
-      "amber": "Brenda 20 % të objektivit, ose mbi numrin e zakonshëm.",
-      "green": "Asgjë e regjistruar, ose një shkallë nën objektiv."
+      "sources": "Kontrolli i dëmeve, Kontrolli i plotësisë, Regjistri i Night Audit, Inspektimi i dhomës",
+      "red": "Dëme, porosi të paplota ose përjashtime auditi mbi shkallën objektiv. Pa volum: një numër dukshëm mbi ditën e zakonshme. Inspektimi i dhomës: kalimi herën e parë nën 75 %.",
+      "amber": "Brenda 20 % të objektivit, ose mbi numrin e zakonshëm. Inspektimi i dhomës: kalimi herën e parë nën pragun e kalimit.",
+      "green": "Asgjë e regjistruar, ose një shkallë nën objektiv. Inspektimi i dhomës: kalimi herën e parë në pragun e kalimit ose mbi të."
     },
     {
       "key": "D",
       "name": "Dorëzimi",
-      "sources": "Analiza e vonesave",
-      "red": "Linja në kohë nën objektiv.",
-      "amber": "Brenda 5 pikëve të objektivit. Kur janë regjistruar vetëm disa linja: linja të vonuara mbi të zakonshmen.",
+      "sources": "Analiza e vonesave, Planifikuesi i mirëmbajtjes",
+      "red": "Linja në kohë nën objektiv, ose më shumë se 60 minuta ndalesë nga prishjet në Planifikuesin e mirëmbajtjes.",
+      "amber": "Brenda 5 pikëve të objektivit. Kur janë regjistruar vetëm disa linja: linja të vonuara mbi të zakonshmen. Një prishje e regjistruar në Planifikuesin e mirëmbajtjes.",
       "green": "Në kohë në objektiv ose mbi të."
     },
     {
@@ -54,6 +54,7 @@
     { "key": "cost", "label": "Orë shtesë në ditë", "unit": "h", "placeholder": "p.sh. 8" },
     { "key": "absence", "label": "Mungesa", "unit": "%", "placeholder": "p.sh. 5" }
   ],
+  "rules": { "roomRed": 75, "downtimeRed": 60 },
   "safetyMessages": [
     "Dy duar për metrat e fundit: mbaj, kurrë mos hidh.",
     "Transpaleta ndalon në çdo fund korridori. Një njeri është më i shpejtë se sa mendon.",
@@ -72,7 +73,8 @@
     ["Një tabelë, dhjetë minuta, në këmbë.", "Takimi lexohet, nuk shtypet. Hap tabelën, kalo nëpër pesë shkronjat, mbyll me veprimet."],
     ["E kuqja është pyetje, jo faj.", "Një ditë e kuqe pyet çfarë ndodhi dhe kush e merr hapin tjetër. Kurrë nuk pyet kush e kishte fajin."],
     ["Një e kuqe pa veprim është gënjeshtër.", "Çdo ditë e kuqe merr një veprim me përgjegjës dhe afat në Listën e veprimeve, përndryshe tabela zbukuron murin."],
-    ["Lëri regjistrat të punojnë.", "Siguria, Cilësia dhe Dorëzimi mbushen vetë nga Kontrolli i dëmeve, Kontrolli i plotësisë, Analiza e vonesave dhe Kryqi i sigurisë në këtë shfletues. Shtyp vetëm Koston dhe Njerëzit."],
+    ["Lëri regjistrat të punojnë.", "Siguria, Cilësia dhe Dorëzimi mbushen vetë nga Kontrolli i dëmeve, Kontrolli i plotësisë, Analiza e vonesave, Kryqi i sigurisë, Inspektimi i dhomës dhe Planifikuesi i mirëmbajtjes në këtë shfletues. Shtyp vetëm Koston dhe Njerëzit."],
+    ["Edhe dhomat dhe pajisjet llogariten.", "Cilësia merr kalimin herën e parë të ditës nga Inspektimi i dhomës: e gjelbër në pragun e kalimit ose mbi të, e verdhë nën të, e kuqe nën 75 %. Këtë vijë e vendos vetë tabela, sepse inspektimi nuk shënon nëse një dhomë që nuk kaloi iu dha një mysafiri. Dorëzimi merr prishjet nga Planifikuesi i mirëmbajtjes: e verdhë për një prishje, e kuqe për më shumë se 60 minuta ndalesë në një ditë. Detyrat e vonuara në pajisjet A lexohen në takim bashkë me veprimet."],
     ["Vendos objektivat një herë.", "Profili i vendit të punës mban vendin, turnet, zonat me përgjegjësit e tyre dhe objektivat. Çdo mjet i lexon."]
   ],
   "example": {

@@ -136,7 +136,13 @@
       });
   };
 
-  window.OeeMath = { LOSSES, GROUP_OF, GROUPS, BANDS, WORLD_CLASS, idealCycle, matchReason, lossOf, known, parseStops, stopsText, loggedOf, entry, combine, verdict, rank };
+  // The stops that count as breakdowns (a reason nobody listed counts as one), one by one: the Maintenance Planner
+  // reads the same stops from this log and takes them over as breakdowns of its assets.
+  const breakdownStops = (rows, reasons = []) => (rows || []).flatMap((row) => (row.stops || [])
+    .filter((stop) => positive(stop.minutes) > 0 && lossOf(stop.reason, reasons) === "breakdowns")
+    .map((stop) => ({ date: row.date, shift: row.shift, equipment: row.equipment, reason: stop.reason, minutes: positive(stop.minutes) })));
+
+  window.OeeMath = { LOSSES, GROUP_OF, GROUPS, BANDS, WORLD_CLASS, idealCycle, matchReason, lossOf, known, parseStops, stopsText, loggedOf, entry, combine, verdict, rank, breakdownStops };
 
   const root = document.querySelector("[data-oee]");
   const dataEl = document.getElementById("oee-data");
@@ -431,12 +437,31 @@
     return box;
   };
 
+  // The breakdowns of the chosen days go on to the Maintenance Planner, where they count in MTBF and MTTR.
+  const plannerUrl = () => new URL(document.querySelector("a[data-planner-link]")?.href || new URL("../maintenance-planner/", window.location.href)).href;
+  const plannerLink = (className) => {
+    const link = el("a", className, tx("Log in the Maintenance Planner"));
+    link.href = plannerUrl();
+    return link;
+  };
+  const breakdownNote = (result) => {
+    const stops = breakdownStops(result.rows, reasons);
+    if (!stops.length) return null;
+    const note = el("p", "dl-panel-note oe-planner-note");
+    note.append(`${tx("{stops} ({minutes}) in these days: the Maintenance Planner takes them over as breakdowns of the asset.", {
+      stops: plural(stops.length, tx("breakdown stop"), tx("breakdown stops")), minutes: minutes(stops.reduce((sum, stop) => sum + stop.minutes, 0)),
+    })} `, plannerLink("inline-link"));
+    return note;
+  };
+
   const reasonPanel = (result) => {
     const items = ["breakdowns", "setup", "smallStops"].flatMap((key) => reasonsOf(result.entries.filter((e) => e.rated), key).map((item) => ({ ...item, loss: key })))
       .sort((a, b) => b.value - a.value).slice(0, 8);
     if (!items.length) return null;
     const box = panel(tx("Stop reasons"), tx("The logged stops by reason, in minutes. Planned stops are not counted."));
     box.append(barList(items, { ranked: true, label: (item) => [int.format(Math.round(item.value)), ` min · ${lossName(item.loss)}`] }));
+    const note = breakdownNote(result);
+    if (note) box.append(note);
     return box;
   };
 
@@ -542,6 +567,7 @@
         priority: "High",
       })));
     }
+    if (breakdownStops(result.rows, reasons).length) actions.append(plannerLink("button-ghost"));
 
     resultLayout(results, {
       head,

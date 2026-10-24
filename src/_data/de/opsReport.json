@@ -22,9 +22,12 @@
     "shift-handover": "Schichtübergabe",
     "safety-cross": "Sicherheitskreuz",
     "oee": "OEE",
+    "maintenance-planner": "Wartungsplaner",
     "five-s-audit": "5S-Audit",
     "gemba-walk": "Gemba Walk",
     "hotel-kpis": "Hotel-Kennzahlen",
+    "lost-found": "Fundsachen",
+    "room-inspection": "Zimmerkontrolle",
     "kaizen-board": "Kaizen-Board",
     "action-tracker": "Maßnahmenliste"
   },
@@ -74,7 +77,9 @@
     "owner": "Verantwortlich",
     "check": "Prüfung",
     "noOwner": "noch ohne Verantwortlichen",
-    "and": "und"
+    "and": "und",
+    "minutes": "{n} Min.",
+    "hours": "{n} Std."
   },
   "metrics": {
     "accidents": { "label": "Unfälle", "noun": "die Unfälle" },
@@ -94,12 +99,21 @@
     "availability": { "label": "Verfügbarkeit", "noun": "die Verfügbarkeit" },
     "performance": { "label": "Leistung", "noun": "die Leistung" },
     "quality": { "label": "Qualitätsrate", "noun": "die Qualitätsrate" },
+    "pm": { "label": "PM-Erfüllung", "noun": "die PM-Erfüllung" },
+    "pmOverdue": { "label": "Überfällige Wartungsaufgaben", "noun": "die überfälligen Wartungsaufgaben" },
+    "breakdowns": { "label": "Störungen", "noun": "die Störungen" },
+    "downtime": { "label": "Ausfallzeit", "noun": "die Ausfallzeit" },
     "fiveS": { "label": "5S-Ergebnis", "noun": "das 5S-Ergebnis" },
     "gemba": { "label": "Gemba-Erfüllungsgrad", "noun": "der Erfüllungsgrad der Gemba Walks" },
     "walks": { "label": "Rundgänge", "noun": "die Rundgänge" },
     "occ": { "label": "Auslastung", "noun": "die Auslastung" },
     "adr": { "label": "ADR", "noun": "die ADR" },
     "revpar": { "label": "RevPAR", "noun": "der RevPAR" },
+    "lostLogged": { "label": "Erfasste Fundsachen", "noun": "die erfassten Fundsachen" },
+    "lostReturned": { "label": "Zurück beim Eigentümer", "noun": "der Anteil der Fundsachen, die an den Eigentümer zurückgingen" },
+    "lostOver": { "label": "Über der Aufbewahrungsfrist", "noun": "die Fundsachen über ihrer Aufbewahrungsfrist" },
+    "firstPass": { "label": "Erstabnahmequote", "noun": "die Erstabnahmequote der Zimmer" },
+    "inspections": { "label": "Zimmerkontrollen", "noun": "die Zimmerkontrollen" },
     "ideas": { "label": "Neue Ideen", "noun": "die neuen Ideen" },
     "adopted": { "label": "Umgesetzte Ideen", "noun": "die umgesetzten Ideen" },
     "saving": { "label": "Einsparung pro Monat", "noun": "die Einsparung" },
@@ -109,7 +123,30 @@
     "overdue": { "label": "Überfällige Maßnahmen", "noun": "die überfälligen Maßnahmen" }
   },
   "factors": { "availability": "Verfügbarkeit", "performance": "Leistung", "quality": "Qualität" },
+  "parts": { "lostFound": "Fundsachen", "inspection": "Zimmerkontrolle", "maintenance": "Wartungsplaner" },
   "sentences": {
+    "parts": {
+      "lostFound": {
+        "logged": { "one": "Eine Fundsache erfasst ({before} im Vorzeitraum).", "many": "{n} Fundsachen erfasst ({before} im Vorzeitraum)." },
+        "returned": "Bis zum Ende des Zeitraums an den Eigentümer zurückgegeben: {trend}.",
+        "over": { "one": "Eine offene Fundsache liegt über ihrer Aufbewahrungsfrist: Entscheiden Sie jetzt darüber.", "many": "{n} offene Fundsachen liegen über ihrer Aufbewahrungsfrist: Entscheiden Sie jetzt darüber." },
+        "overNone": "Keine offene Fundsache liegt über ihrer Aufbewahrungsfrist."
+      },
+      "inspection": {
+        "lead": { "one": "Eine Zimmerkontrolle; Erstabnahmequote bei der Bestehensgrenze von {mark}: {trend}.", "many": "{n} Zimmerkontrollen; Erstabnahmequote bei der Bestehensgrenze von {mark}: {trend}." },
+        "fault": { "one": "Der Punkt mit den meisten Mängeln ist „{item}“ ({zone}): einmal, {share} der Mängel.", "many": "Der Punkt mit den meisten Mängeln ist „{item}“ ({zone}): {n}-mal, {share} der Mängel." },
+        "faultNone": "Kein Punkt wurde beanstandet."
+      },
+      "maintenance": {
+        "pm": "PM-Erfüllung: {trend} ({a} von {b} fälligen Aufgaben pünktlich erledigt).",
+        "pmNone": "Im Zeitraum war keine vorbeugende Aufgabe fällig.",
+        "overdue": { "one": "Am Ende des Zeitraums war eine Wartungsaufgabe überfällig.", "many": "Am Ende des Zeitraums waren {n} Wartungsaufgaben überfällig." },
+        "overdueNone": "Am Ende des Zeitraums war keine Wartungsaufgabe überfällig.",
+        "breakdowns": { "one": "Eine Störung, {minutes} Ausfallzeit ({before} im Vorzeitraum).", "many": "{n} Störungen, {minutes} Ausfallzeit ({before} im Vorzeitraum)." },
+        "breakdownsNone": "Keine Störung im Zeitraum.",
+        "reliability": "Über die {assets} Anlagen des Plans: MTBF {mtbf} ({mtbfBefore} im Vorzeitraum), MTTR {mttr} ({mttrBefore})."
+      }
+    },
     "trend": "{value} gegenüber {before} im Vorzeitraum, {trend}",
     "noTrend": "{value}, ohne Vorzeitraum zum Vergleich",
     "targetMet": "Damit ist das Ziel von {target} erreicht.",
@@ -224,9 +261,24 @@
       ],
       "stops": { "planned": "Pause", "breakdown": "Störung", "setup": "Umrüsten" }
     },
+    "maintenance": {
+      "assets": [
+        { "tag": "SRT-1", "name": "Sorter 1", "crit": "A", "tasks": [[1, 30], [4, 120]], "breakdown": [0.1, 0.07] },
+        { "tag": "SRT-2", "name": "Sorter 2", "crit": "A", "tasks": [[1, 30], [4, 120]], "breakdown": [0.09, 0.07] },
+        { "tag": "WRP-1", "name": "Stretchwickler", "crit": "B", "tasks": [[2, 45]], "breakdown": [0.12, 0.09] },
+        { "tag": "FL-01", "name": "Stapler 1", "crit": "A", "tasks": [[1, 15], [8, 90]], "breakdown": [0.04, 0.03] },
+        { "tag": "FL-02", "name": "Stapler 2", "crit": "B", "tasks": [[1, 15], [8, 90]], "breakdown": [0.05, 0.03] }
+      ],
+      "late": [0.3, 0.12],
+      "open": [[0, 0], [2, 0]],
+      "minutes": [20, 150],
+      "causes": ["sensor", "jam", "wear", "electrical", "hydraulic"]
+    },
     "fiveS": { "score": [1.9, 3.0], "weak": 2 },
     "gemba": { "yes": [0.8, 0.87], "template": "warehouse", "layers": ["team-lead", "area-manager"], "walkers": ["Anna", "Besnik", "Dritan"] },
     "hotel": { "rooms": 120, "occ": [0.74, 0.79], "adr": [112, 115], "budgetOcc": "80", "budgetAdr": "118" },
+    "lostFound": { "perDay": 0.8, "categories": [["clothing", "low"], ["phone", "high"], ["glasses", "medium"], ["keys", "low"], ["documents", "high"], ["bag", "medium"], ["wallet", "high"], ["toy", "low"]], "returned": [0.45, 0.6], "contacted": 0.2, "decided": 0.85 },
+    "inspection": { "perDay": [5, 9], "floors": 4, "rooms": 30, "suites": 0.1, "weak": "bathroom-2", "weakRate": [0.3, 0.16], "fail": [0.025, 0.018], "critical": 0.02, "recheck": 0.8, "attendants": ["Marta", "Ilir", "Sara", "Jonas"], "inspector": "Elena" },
     "kaizen": [
       { "title": "Schattenbrett für das Wickelwerkzeug an Tor 3", "waste": "Bewegung", "area": "Verladung", "by": "Marco", "created": [-11, 1], "adopted": [-9, 3], "saving": 120 },
       { "title": "Farbige Behälteretiketten je Tour", "waste": "Fehler", "area": "Verpackung", "by": "Fatima", "created": [-9, 2], "adopted": [-6, 4], "saving": 350 },

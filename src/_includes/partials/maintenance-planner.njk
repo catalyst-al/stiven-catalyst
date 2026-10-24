@@ -1,4 +1,5 @@
-{#- Maintenance Planner: the preventive maintenance and statutory checks of a site's assets, due dates, the log and the breakdowns; maintenance-planner.js does the rest. -#}
+{#- Maintenance Planner: the preventive maintenance and statutory checks of a site's assets, due dates, the log and the breakdowns; maintenance-planner.js does the rest. The OEE log key and stop reasons of the page's language travel along, so the breakdown stops of OEE can be taken over. -#}
+{%- set oeeData = de.oee if lang == "de" else (sq.oee if lang == "sq" else oee) -%}
 <section class="shell tool-layout">
   <div class="tool-panel" data-maintenance-planner>
     <details class="dl-box mp-setup" data-setup>
@@ -140,6 +141,17 @@
       </div>
     </div>
 
+    <div class="dl-box mp-oee" data-oee-box hidden>
+      <div class="dl-log-head">
+        <p class="kicker">{{ "From OEE" | t(lang) }}</p>
+        <button class="button-ghost mp-small" type="button" data-oee-ignore-all hidden>{{ "Ignore all" | t(lang) }}</button>
+      </div>
+      <p class="form-note">{{ "Breakdown stops logged in" | t(lang) }} <a class="inline-link" href="{{ '/tools/oee/' | local(lang) }}">OEE</a> {{ "that are not in this log yet. Taken over, each one becomes a breakdown of the asset with its minutes and cause, and counts in MTBF and MTTR." | t(lang) }}</p>
+      <p class="form-note" data-oee-note></p>
+      <ul class="mp-oee-list" data-oee-list></ul>
+      <p class="form-note dl-log-status" data-oee-status aria-live="polite"></p>
+    </div>
+
     <div class="dl-box mp-logbox" data-log-form>
       <fieldset class="mp-fieldset">
         <legend class="kicker">3 · {{ "Log work" | t(lang) }}</legend>
@@ -254,6 +266,7 @@
 <section class="shell mp-print" data-print hidden></section>
 
 <script type="application/json" id="maintenance-planner-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="maintenance-planner-oee">{{ ({ "key": oeeData.storageKey, "reasons": oeeData.reasons } if oeeData else {}) | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>

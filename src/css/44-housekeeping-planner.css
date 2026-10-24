@@ -1,0 +1,103 @@
+/* ===== Housekeeping Planner (js/housekeeping-planner.js) ===== */
+/* Today: the source, the counts table and the fields. */
+.hp-today, .hp-week { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
+.hp-today > .kicker, .hp-week > .kicker { margin: 0; }
+.hp-source { display: grid; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.hp-sub { margin: 4px 0 0; padding: 0; font-size: 15px; font-weight: 800; color: var(--ink); }
+.hp-check { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; line-height: 1.4; }
+.hp-check input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); }
+.hp-check input:disabled + span { color: var(--muted); }
+.hp-check .form-note { margin: 0 0 0 4px; }
+.hp-counts, .hp-rooms-box { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; }
+.hp-counts[hidden], .hp-rooms-box[hidden], .hp-standard[hidden] { display: none; }
+.hp-counts > .form-note, .hp-rooms-box > .form-note { margin: 0; }
+.hp-today textarea, .hp-week textarea { width: 100%; min-width: 0; font-family: inherit; }
+.hp-today [aria-live]:empty, .hp-week [aria-live]:empty { display: none; }
+/* The hints after a label are long here: they wrap, so a field never widens the page on a phone. */
+:is(.hp-today, .hp-week, .hp-settings) .field { grid-template-columns: minmax(0, 1fr); }
+:is(.hp-today, .hp-week, .hp-settings) .optional { white-space: normal; }
+.hp-rs-summary { display: grid; gap: 4px; }
+.hp-line { display: block; }
+
+/* Inputs inside the tables: narrow, so the counts fit a phone with a sideways scroll at most. */
+.hp-rows input, .hp-rows select, .hp-standard-table input, .hp-week-input input {
+  min-width: 0; min-height: 36px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px; font-variant-numeric: tabular-nums;
+}
+.hp-rows input[type="number"], .hp-standard-table input, .hp-week-input input { width: 4.4em; text-align: right; }
+.hp-rows input[type="text"] { width: 4.2em; }
+.hp-rows select { width: 8.4em; }
+:is(.hp-counts, .hp-standard, .hp-week) .dl-table-wrap { max-height: none; }
+.hp-rows :is(th, td) { padding-inline: 6px; }
+.hp-rows :is(input, select):focus-visible, .hp-standard-table input:focus-visible, .hp-week-input input:focus-visible {
+  outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent);
+}
+/* Relative cells keep their hidden labels inside the scrolling table, not out at the page's edge. */
+.hp-rows td, .hp-standard-table td, .hp-week-input td { position: relative; vertical-align: middle; }
+.hp-rows tfoot :is(th, td) { font-weight: 800; border-top: 1px solid var(--line); }
+.hp-rows tfoot[hidden] { display: none; }
+.hp-small { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+
+/* The standards: closed once set. */
+.hp-settings { padding-block: 0; }
+.hp-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 18px 0; cursor: pointer; list-style: none; }
+.hp-summary::-webkit-details-marker { display: none; }
+.hp-summary::after { content: "+"; margin-left: auto; color: var(--muted); font-weight: 800; }
+.hp-settings[open] > .hp-summary::after { content: "−"; }
+.hp-summary .kicker, .hp-summary .form-note { margin: 0; }
+.hp-summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+.hp-settings-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding-bottom: 20px; min-width: 0; }
+.hp-standard { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; }
+.hp-clean-list { display: grid; gap: 6px; margin: 0; padding: 0 0 0 18px; color: var(--muted); font-size: 14px; }
+.hp-clean-list strong { color: var(--ink); }
+.hp-week-start { max-width: 220px; }
+
+/* Results. */
+.hp-head h2 span { color: var(--muted); font-weight: 700; }
+.hp-head h2 .hp-short { color: var(--danger); }
+.hp-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.hp-results .dl-stats { margin-bottom: 18px; }
+.hp-results > .result-card + .result-card, .hp-results > .result-actions + .result-card { margin-top: 18px; }
+.hp-formula-lines { display: grid; gap: 6px; margin: 0; padding-left: 20px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.hp-formula .dl-warning { margin-top: 12px; }
+
+/* The sections: a card each, the rooms as a compact list. */
+.hp-sections-result, .hp-week-result { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
+.hp-sections-result > .form-note, .hp-week-result > .form-note { margin: 0; }
+.hp-section-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.hp-section { display: grid; gap: 6px; align-content: start; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.hp-section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; }
+.hp-section-head h4 { margin: 0; font-size: 16px; }
+.hp-load { color: var(--muted); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.hp-load.is-over { color: var(--danger); }
+.hp-section-meta { margin: 0; color: var(--muted); font-size: 13px; }
+.hp-rooms { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 2px 0 0; padding: 0; list-style: none; font-size: 13px; }
+.hp-rooms .hp-room { padding: 2px 7px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-variant-numeric: tabular-nums; }
+.hp-rooms .hp-room.is-departure { border-left: 3px solid var(--blue); }
+.hp-flags { color: var(--muted); font-weight: 700; }
+.hp-apply-note:empty { display: none; }
+.hp-apply-note { margin: 0; }
+.hp-week-table tr.is-short > * { color: var(--ink); font-weight: 800; }
+.hp-week-table tr.is-short > th { box-shadow: inset 3px 0 0 var(--danger); }
+.hp-results .dl-panel .dl-table-wrap { max-height: none; }
+
+/* The attendant sheets (A4, one per section); the rest of the page is hidden while they print. */
+.hp-print[hidden] { display: none; }
+@page hp-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  html:not(.hp-printing) [data-housekeeping-planner], html:not(.hp-printing) .hp-results .tool-actions, html:not(.hp-printing) .hp-results .ck-actions { display: none !important; }
+  html.hp-printing main > :not(.hp-print) { display: none !important; }
+  html.hp-printing .hp-print { page: hp-a4; display: block !important; padding: 0; color: #000; font-size: 11px; }
+  .hp-print h2 { margin: 2px 0 0; font-size: 20px; }
+  .hp-print .kicker { margin: 0; }
+  .hp-print-meta { margin: 2px 0 8px; }
+  .hp-print-person { break-after: page; }
+  .hp-print-person:last-child { break-after: auto; }
+  .hp-print-table { width: 100%; border-collapse: collapse; }
+  .hp-print-table th, .hp-print-table td { height: 22px; padding: 3px 5px; border: 1px solid #999; text-align: left; vertical-align: top; }
+  .hp-print-table thead th { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .hp-print-table tr { break-inside: avoid; }
+  .hp-print-table tfoot :is(th, td) { font-weight: 800; }
+  .hp-print-legend { margin: 10px 0 0; font-size: 9px; }
+  .hp-section, .hp-results .result-card { break-inside: avoid; }
+}

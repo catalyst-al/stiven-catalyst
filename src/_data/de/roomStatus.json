@@ -1,0 +1,407 @@
+{
+  "storageKey": "sc-room-status-de",
+  "inspectionKey": "sc-room-inspection-de",
+  "historyDays": 30,
+  "text": {
+    "tool": "Zimmerstatus",
+    "roomsPlaceholder": "101; Doppelzimmer; 1\n102; Twin; 1\n110; Suite; 1",
+    "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
+    "importPlaceholder": "101 VD\n102 OCC\n103 OOO\n104 DO",
+    "notePlaceholder": "z. B. Zustellbett, Late Check-out 12:00",
+    "maintenanceOwner": "Technik",
+    "checkText": "Zimmer wieder in Ordnung, gereinigt und kontrolliert: Status VI, wieder verkäuflich.",
+    "csvName": "zimmerstatus",
+    "historyName": "zimmerstatus-verlauf",
+    "unassigned": "Nicht zugeteilt"
+  },
+  "statuses": [
+    {
+      "key": "vd",
+      "code": "VD",
+      "name": "Frei – unsauber",
+      "short": "Frei unsauber",
+      "meaning": "Kein Gast, noch nicht gereinigt. Nicht verkäuflich.",
+      "aliases": [
+        "VD"
+      ]
+    },
+    {
+      "key": "vc",
+      "code": "VC",
+      "name": "Frei – sauber",
+      "short": "Frei sauber",
+      "meaning": "Von der Reinigungskraft gereinigt, wartet auf die Kontrolle der Hausdame.",
+      "aliases": [
+        "VC"
+      ]
+    },
+    {
+      "key": "vi",
+      "code": "VI",
+      "name": "Frei – kontrolliert (bezugsfertig)",
+      "short": "Bezugsfertig",
+      "meaning": "Gereinigt und kontrolliert: Die Rezeption kann es einem anreisenden Gast geben.",
+      "aliases": [
+        "VI",
+        "VR"
+      ]
+    },
+    {
+      "key": "occ",
+      "code": "OCC",
+      "name": "Belegt",
+      "short": "Belegt",
+      "meaning": "Gast im Zimmer, gerade kein Service nötig.",
+      "aliases": [
+        "OCC",
+        "OC"
+      ]
+    },
+    {
+      "key": "od",
+      "code": "OD",
+      "name": "Belegt – Service nötig",
+      "short": "Service nötig",
+      "meaning": "Bleibezimmer: Der Gast bleibt, das Zimmer braucht seine tägliche Reinigung.",
+      "aliases": [
+        "OD"
+      ]
+    },
+    {
+      "key": "do",
+      "code": "DO",
+      "name": "Abreise erwartet",
+      "short": "Abreise erwartet",
+      "meaning": "Der Gast reist heute ab und hat noch nicht ausgecheckt.",
+      "aliases": [
+        "DO"
+      ]
+    },
+    {
+      "key": "co",
+      "code": "CO",
+      "name": "Abgereist (ausgecheckt, unsauber)",
+      "short": "Abgereist",
+      "meaning": "Der Gast hat ausgecheckt; das Zimmer wartet auf die Abreisereinigung.",
+      "aliases": [
+        "CO",
+        "C/O"
+      ]
+    },
+    {
+      "key": "ooo",
+      "code": "OOO",
+      "name": "Außer Betrieb",
+      "short": "Außer Betrieb",
+      "meaning": "Nicht verkäuflich: Es braucht die Technik und ist bis zu seinem Datum aus dem Bestand genommen.",
+      "aliases": [
+        "OOO"
+      ]
+    },
+    {
+      "key": "oos",
+      "code": "OOS",
+      "name": "Außer Service",
+      "short": "Außer Service",
+      "meaning": "Ein kleiner Mangel: Es bleibt im Bestand und wird wieder verkauft, sobald er behoben ist.",
+      "aliases": [
+        "OOS"
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "key": "dnd",
+      "code": "DND",
+      "name": "Bitte nicht stören"
+    },
+    {
+      "key": "vip",
+      "code": "VIP",
+      "name": "VIP"
+    },
+    {
+      "key": "early",
+      "code": "FA",
+      "name": "Frühanreise / Priorität"
+    },
+    {
+      "key": "arrival",
+      "code": "ANR",
+      "name": "Anreise heute"
+    }
+  ],
+  "roomTypes": [
+    {
+      "key": "single",
+      "name": "Einzelzimmer"
+    },
+    {
+      "key": "double",
+      "name": "Doppelzimmer"
+    },
+    {
+      "key": "twin",
+      "name": "Twin"
+    },
+    {
+      "key": "suite",
+      "name": "Suite"
+    },
+    {
+      "key": "accessible",
+      "name": "Barrierefrei"
+    }
+  ],
+  "oooReasons": [
+    {
+      "key": "plumbing",
+      "name": "Sanitär / Wasser"
+    },
+    {
+      "key": "electrical",
+      "name": "Elektrik / Licht"
+    },
+    {
+      "key": "hvac",
+      "name": "Heizung / Klimaanlage"
+    },
+    {
+      "key": "furniture",
+      "name": "Möbel / Einrichtung"
+    },
+    {
+      "key": "tv",
+      "name": "TV / Telefon / WLAN"
+    },
+    {
+      "key": "deepclean",
+      "name": "Grundreinigung / Geruch"
+    },
+    {
+      "key": "pest",
+      "name": "Schädlingsbekämpfung"
+    },
+    {
+      "key": "renovation",
+      "name": "Renovierung"
+    },
+    {
+      "key": "other",
+      "name": "Sonstiges"
+    }
+  ],
+  "tips": [
+    [
+      "Ein Status, gesetzt dort, wo die Arbeit geschieht.",
+      "Die Reinigungskraft setzt VC, wenn sie das Zimmer verlässt, die Hausdame VI nach der Kontrolle, die Rezeption OCC beim Check-in. Einem anreisenden Gast gibt die Rezeption nur ein VI-Zimmer."
+    ],
+    [
+      "Abreisen mit Anreise zuerst.",
+      "Die Reihenfolge stellt Frühanreisen und VIP-Anreisen an den Anfang, dann Abreisezimmer mit Anreise heute, dann die übrigen Abreisen, dann die Bleibezimmer. DND-Zimmer warten und stehen gesondert."
+    ],
+    [
+      "DND wird geprüft, nicht vergessen.",
+      "Überspringen Sie das Zimmer und versuchen Sie es später wieder. Hängt das Schild noch zu der Uhrzeit, die Ihre Hausordnung festlegt (oft am frühen Nachmittag), ruft die Hausdame im Zimmer an; ein DND über mehr als einen Tag ist eine Kontrolle des Wohlbefindens des Gastes."
+    ],
+    [
+      "OOO ist nicht OOS.",
+      "Außer Betrieb nimmt das Zimmer aus dem Bestand: Es braucht die Technik und ein Datum, ab dem es zurück ist. Außer Service bleibt verkäuflich und geht nach einer kleinen Reparatur wieder in den Verkauf. Geben Sie jedes OOO in die Maßnahmenliste."
+    ],
+    [
+      "Zweimal am Tag mit dem PMS abgleichen.",
+      "Fügen Sie den Zimmerstatus aus dem PMS morgens und nach dem Mittag ein. Ein Zimmer, das im PMS belegt ist und das Housekeeping leer vorfindet, ist ein Skipper; ein Zimmer, das als frei gilt und in dem ein Gast ist, ein Sleeper. Die Rezeption klärt beides sofort."
+    ],
+    [
+      "Die Codes sind die Codes des PMS.",
+      "VD, VC, VI, OCC, OD, DO, CO, OOO und OOS gelten in jeder Sprache gleich, so sprechen Board und PMS dieselbe Sprache."
+    ]
+  ],
+  "example": {
+    "time": "10:45",
+    "start": "07:00",
+    "floors": [
+      1,
+      4
+    ],
+    "rooms": [
+      1,
+      10
+    ],
+    "default": "double",
+    "types": [
+      {
+        "from": 1,
+        "to": 1,
+        "type": "accessible",
+        "floors": [
+          1
+        ]
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "type": "twin"
+      },
+      {
+        "from": 8,
+        "to": 8,
+        "type": "single"
+      },
+      {
+        "from": 10,
+        "to": 10,
+        "type": "suite",
+        "floors": [
+          3,
+          4
+        ]
+      }
+    ],
+    "attendants": [
+      {
+        "name": "Marta",
+        "floors": [
+          1
+        ]
+      },
+      {
+        "name": "Ilir",
+        "floors": [
+          2
+        ]
+      },
+      {
+        "name": "Sofia",
+        "floors": [
+          3
+        ]
+      },
+      {
+        "name": "Jonas",
+        "floors": [
+          4
+        ]
+      }
+    ],
+    "board": {
+      "101": "do arrival",
+      "102": "od",
+      "103": "od vip",
+      "104": "do arrival",
+      "105": "od",
+      "106": "do",
+      "107": "od",
+      "108": "vi arrival",
+      "109": "do arrival",
+      "110": "od",
+      "201": "od",
+      "202": "do arrival",
+      "203": "od",
+      "204": "od",
+      "205": "vd arrival vip",
+      "206": "do arrival",
+      "207": "do arrival early",
+      "208": "oos",
+      "209": "od",
+      "210": "od",
+      "301": "do arrival",
+      "302": "od",
+      "303": "od",
+      "304": "do arrival",
+      "305": "ooo",
+      "306": "od",
+      "307": "do",
+      "308": "vi arrival",
+      "309": "od",
+      "310": "do arrival vip",
+      "401": "od",
+      "402": "do arrival",
+      "403": "od",
+      "404": "od",
+      "405": "vd arrival",
+      "406": "do arrival early",
+      "407": "od",
+      "408": "od",
+      "409": "do",
+      "410": "od vip"
+    },
+    "ooo": {
+      "305": {
+        "reason": "plumbing",
+        "back": 2
+      },
+      "208": {
+        "reason": "tv",
+        "back": 0
+      }
+    },
+    "events": [
+      "07:30 405 start",
+      "07:35 205 start",
+      "07:40 104 co",
+      "07:40 302 start",
+      "07:45 104 start",
+      "07:50 202 co",
+      "08:00 402 co",
+      "08:05 101 co",
+      "08:05 302 occ",
+      "08:05 405 vc",
+      "08:10 205 vc",
+      "08:10 402 start",
+      "08:15 202 start",
+      "08:20 301 co",
+      "08:20 405 vi",
+      "08:25 104 vc",
+      "08:30 101 start",
+      "08:30 105 +dnd",
+      "08:30 205 vi",
+      "08:30 301 start",
+      "08:40 207 co",
+      "08:50 104 vd",
+      "08:50 402 vc",
+      "08:55 202 vc",
+      "09:00 207 start",
+      "09:00 303 +dnd",
+      "09:00 410 start",
+      "09:05 304 co",
+      "09:05 402 vi",
+      "09:10 301 vc",
+      "09:15 101 vc",
+      "09:15 304 start",
+      "09:20 104 start",
+      "09:20 202 vi",
+      "09:30 104 vc",
+      "09:30 206 co",
+      "09:35 301 vi",
+      "09:40 104 vi",
+      "09:40 207 vc",
+      "09:45 103 start",
+      "09:45 406 co",
+      "09:50 101 vi",
+      "09:50 310 co",
+      "09:50 410 occ",
+      "09:55 207 vi",
+      "09:55 304 vc",
+      "09:55 401 start",
+      "10:00 201 start",
+      "10:05 310 start",
+      "10:10 103 occ",
+      "10:10 109 co",
+      "10:15 102 start",
+      "10:20 401 occ",
+      "10:25 201 occ",
+      "10:25 403 start",
+      "10:30 203 start",
+      "10:40 102 occ",
+      "10:42 107 start"
+    ],
+    "notes": {
+      "305": "Undicht unter dem Waschbecken, Installateur bestellt",
+      "208": "Fernseher geht nicht an, Techniker um 11:00",
+      "310": "VIP: Welcome-Amenity und Brief des Direktors",
+      "406": "Gast kommt um 11:30 von einem Nachtflug",
+      "106": "Late Check-out bis 12:00"
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "storageKey": "sc-guest-complaints-sq",
+  "text": {
+    "tool": "Ankesat e mysafirëve",
+    "csv": "regjistri-i-ankesave",
+    "entryLegend": "Regjistro një ankesë",
+    "whatPlaceholder": "p.sh. Kondicioneri nxjerr ajër të ngrohtë, 26 °C në dhomë",
+    "roomPlaceholder": "p.sh. 412",
+    "takenByPlaceholder": "p.sh. Jonas · Recepsioni",
+    "guestPlaceholder": "p.sh. z. A. Fischer",
+    "guestPrivacy": "Vetëm kur të duhet për ta telefonuar përsëri mysafirin. Fshiji emrat sapo ankesat të mbyllen.",
+    "mePlaceholder": "p.sh. Elena · Front office",
+    "hotelPlaceholder": "p.sh. Airport Hotel Frankfurt",
+    "hotelFallback": "hoteli",
+    "actionPlaceholder": "p.sh. Tekniku rivendosi kondicionerin dhe pastroi filtrin; dhoma ishte 21 °C në 16:35.",
+    "valuePlaceholder": "p.sh. 12",
+    "nightsPlaceholder": "p.sh. 1813",
+    "pasteRow": "Një rresht për çdo ankesë",
+    "pastePlaceholder": "06.10.2026\t16:05\t412\tNë person\tTemperatura / kondicioneri\tE rëndë\tKondicioneri nxjerr ajër të ngrohtë\tz. A. Fischer\tJonas\tTekniku rivendosi kondicionerin\tDhuratë e vogël\t12\t06.10.2026\t16:35\t07.10.2026\tPo",
+    "empty": "Ende asnjë ankesë në regjistër.",
+    "targetNote": "Standardet e markave ndryshojnë: shumë hotele synojnë ta zgjidhin ankesën e një mysafiri në hotel brenda 15 minutave dhe t'u përgjigjen email-eve, vlerësimeve dhe anketave brenda 24 orëve.",
+    "nightsNote": "Dhomat e shitura për natë, të mbledhura për periudhën. Kur KPI-të e hotelit në këtë shfletues kanë çdo natë të periudhës, numri merret prej andej.",
+    "upgradeNote": "Kalimi në një dhomë më të mirë nuk kushton asgjë, përveç kur dhoma më e mirë do të ishte shitur: atëherë shkruaj diferencën e çmimit.",
+    "notCompensation": "Korrigjimi i një pagese të gabuar nuk është kompensim: ktheje dhe shkruaj 0 këtu."
+  },
+  "channels": [
+    { "key": "person", "name": "Në person", "inHouse": true },
+    { "key": "phone", "name": "Telefon", "inHouse": true },
+    { "key": "chat", "name": "Chat / WhatsApp", "inHouse": true },
+    { "key": "email", "name": "Email", "inHouse": false },
+    { "key": "review", "name": "Vlerësim online", "inHouse": false },
+    { "key": "survey", "name": "Anketë e mysafirit", "inHouse": false }
+  ],
+  "categories": [
+    { "key": "cleanliness", "name": "Pastërtia", "dept": "Housekeeping", "issue": "pastërtinë e dhomës suaj" },
+    { "key": "noise", "name": "Zhurma", "dept": "Recepsioni", "issue": "zhurmën gjatë natës suaj" },
+    { "key": "maintenance", "name": "Mirëmbajtja / defekt në dhomë", "dept": "Mirëmbajtja", "roomFix": true, "issue": "defektin në dhomën tuaj" },
+    { "key": "temperature", "name": "Temperatura / kondicioneri", "dept": "Mirëmbajtja", "roomFix": true, "issue": "temperaturën në dhomën tuaj" },
+    { "key": "wifi", "name": "Wi-Fi", "dept": "IT", "issue": "lidhjen Wi-Fi" },
+    { "key": "fnb", "name": "Ushqimi dhe pijet", "dept": "F&B", "issue": "përvojën tuaj në restorantin dhe barin tonë" },
+    { "key": "staff", "name": "Sjellja e stafit", "dept": "Drejtimi", "issue": "mënyrën si ju trajtoi ekipi ynë" },
+    { "key": "billing", "name": "Fatura", "dept": "Recepsioni", "issue": "gabimin në faturën tuaj" },
+    { "key": "booking", "name": "Rezervimi", "dept": "Rezervimet", "issue": "problemin me rezervimin tuaj" },
+    { "key": "checkin", "name": "Pritja në check-in", "dept": "Recepsioni", "issue": "pritjen në check-in" },
+    { "key": "other", "name": "Tjetër", "dept": "Recepsioni", "issue": "problemin që patët" }
+  ],
+  "severities": [
+    { "key": "minor", "name": "E lehtë", "means": "Një bezdi që recepsioni e rregullon aty për aty: një send që mungon, një Wi-Fi i ngadaltë, një pritje e shkurtër. Qëndrimi vazhdon si ishte planifikuar.", "escalate": "Përgjegjësi i turnit" },
+    { "key": "major", "name": "E rëndë", "means": "Qëndrimi preket qartë, ose mysafiri ankohet për herë të dytë: pa gjumë nga zhurma, një kondicioner që nuk punon, një faturë e gabuar.", "escalate": "Menaxheri në detyrë, në të njëjtin turn" },
+    { "key": "critical", "name": "Kritike", "means": "Siguria ose shëndeti (një lëndim, ujë pranë instalimeve elektrike, dyshim për çimka shtrati ose helmim nga ushqimi), diskriminim ose ngacmim, vjedhje, një qëndrim i ndërprerë para kohe, ose kërcënim me padi ose me shtypin.", "escalate": "Drejtori i përgjithshëm menjëherë, dhe një raport incidenti" }
+  ],
+  "learn": [
+    { "key": "listen", "name": "Dëgjo (Listen)", "hint": "Lëre mysafirin të mbarojë. Mos e ndërprit, mos jep shpjegime; mbaj shënime." },
+    { "key": "empathise", "name": "Trego empati (Empathise)", "hint": "Thuaj që e kupton si ndihet: pas një fluturimi të gjatë, kjo është gjëja e fundit që i duhet." },
+    { "key": "apologise", "name": "Kërko falje (Apologise)", "hint": "Kërko falje për përvojën, sinqerisht, pa fajësuar një koleg ose një departament tjetër." },
+    { "key": "resolve", "name": "Zgjidh (Resolve)", "hint": "Bie dakord me mysafirin për zgjidhjen, thuaj deri kur, dhe zbatoje, ose kontrollo që departamenti e bëri." },
+    { "key": "notify", "name": "Njofto (Notify)", "hint": "Njofto departamentin dhe menaxherin në detyrë, regjistroje dhe kthehu te mysafiri, që të mos ndodhë më." }
+  ],
+  "compensation": [
+    { "key": "none", "name": "Asnjë", "value": 0, "phrase": "" },
+    { "key": "apology", "name": "Vetëm kërkim falje", "value": 0, "phrase": "" },
+    { "key": "amenity", "name": "Dhuratë e vogël (fruta, verë, ëmbëlsira)", "value": 12, "phrase": "ju dërguam një dhuratë të vogël në dhomë" },
+    { "key": "upgrade", "name": "Dhomë më e mirë ose ndërrim dhome", "value": 0, "phrase": "ju kaluam në një dhomë më të mirë pa pagesë shtesë" },
+    { "key": "voucher", "name": "Kupon për ushqim e pije", "value": 18, "phrase": "i shtuam qëndrimit tuaj një kupon për ushqim e pije prej {value}" },
+    { "key": "discount", "name": "Ulje e çmimit të dhomës", "value": 30, "phrase": "ua ulëm çmimin e dhomës me {value}" },
+    { "key": "refund", "name": "Rimbursim i një nate dhome", "value": 129, "phrase": "ju rimbursuam një natë dhome ({value})" },
+    { "key": "points", "name": "Pikë besnikërie", "value": 20, "phrase": "ju kaluam në llogari pikë besnikërie në vlerë {value}" }
+  ],
+  "statuses": { "open": "E hapur", "resolved": "E zgjidhur", "followed": "E ndjekur" },
+  "satisfied": { "yes": "Po", "no": "Jo", "unknown": "E panjohur" },
+  "targets": { "inHouse": 15, "postStay": 24 },
+  "repeatDays": 30,
+  "replies": {
+    "email": {
+      "subject": "Subjekti: Qëndrimi juaj – {hotel} ({id})",
+      "hello": "I/E nderuar {guest},",
+      "helloAnon": "I/E nderuar mysafir,",
+      "sorry": "Ju faleminderit që na njoftuat për {issue} më {date}. Më vjen keq: nuk është ky qëndrimi që duam t'ju ofrojmë.",
+      "done": "Çfarë bëmë: {action}",
+      "doing": "Po merremi me të tani dhe do t'ju njoftoj sapo të rregullohet.",
+      "comp": "Si kërkim falje, {comp}.",
+      "prevent": "Ia kam përcjellë ekipit përkatës, që të mos ndodhë më.",
+      "bye": "Me respekt,"
+    },
+    "message": {
+      "inline": true,
+      "hello": "Përshëndetje {guest},",
+      "helloAnon": "Përshëndetje,",
+      "sorry": "ju shkruan {hotel}. Ju faleminderit që na njoftuat për {issue} dhe na vjen keq.",
+      "done": "Çfarë bëmë: {action}",
+      "doing": "Po merremi me të dhe do t'ju shkruajmë sapo të rregullohet.",
+      "comp": "Si kërkim falje, {comp}.",
+      "prevent": "Ekipi përkatës është njoftuar, që të mos ndodhë më.",
+      "bye": "Përshëndetje të përzemërta,"
+    },
+    "review": {
+      "hello": "I/E nderuar mysafir,",
+      "helloAnon": "I/E nderuar mysafir,",
+      "sorry": "Ju faleminderit për vlerësimin dhe që na treguat për {issue}. Na vjen keq që qëndrimi juaj nuk qe ai që prisnit.",
+      "done": "Komentet tuaja ia përcollëm ekipit tonë ({dept}) dhe kemi vepruar tashmë.",
+      "doing": "Komentet tuaja ia përcollëm ekipit tonë ({dept}), që po merret me to.",
+      "comp": "",
+      "prevent": "",
+      "bye": "Do të na gëzonte t'ju mirëpresim përsëri. Me respekt,"
+    }
+  },
+  "advice": {
+    "noise": {
+      "meaning": "Zhurma është ankesa më e shpeshtë në hotelet pranë aeroportit dhe në qytet: korridoret natën, fqinjët, aktivitetet, nisjet e hershme, ashensorët. Mysafiri paguan për gjumin, dhe para një fluturimi të hershëm çdo minutë ka rëndësi.",
+      "moves": [
+        "Ofro menjëherë ndërrimin e dhomës kur zhurma nuk ndalet dot brenda pak minutash; mbaj dy dhoma të qeta (nga oborri, larg ashensorëve) të pashitura sa më gjatë.",
+        "Vendosi ekuipazhet dhe grupet me nisje të hershme në një krah, larg mbërritjeve të vona dhe sallave të aktiviteteve.",
+        "Kalo nëpër katet me grupe në 22:00 dhe 23:30: sigurimi kërkon qetësi para ankesës, jo pas saj."
+      ],
+      "question": "Cilat dhoma dhe cilat orë sjellin më shumë ankesa për zhurmë, dhe a e merr parasysh këtë caktimi i dhomave?"
+    },
+    "temperature": {
+      "meaning": "Ankesat për temperaturën vijnë nga ventilokonvektorët, termostatet dhe kontaktet e dritareve. Të njëjtat dhoma kthehen sërish e sërish, derisa mirëmbajtja të gjejë shkakun në vend që ta rivendosë pajisjen.",
+      "moves": [
+        "Mirëmbajtja i përgjigjet një thirrjeje për temperaturën brenda 15 minutave; kur dhoma nuk rregullohet brenda 30, mysafiri ndërron dhomë.",
+        "Kontrollo filtrat, ventilokonvektorët dhe kontaktet e dritareve sipas planit, dhomë pas dhome, jo vetëm kur telefonon një mysafir.",
+        "Një dhomë me ankesë të dytë për temperaturën brenda 30 ditëve bllokohet derisa shkaku të rregullohet dhe të provohet."
+      ],
+      "question": "Cilat dhoma patën dy herë ankesë për temperaturën, dhe çfarë ndryshoi mirëmbajtja herën e dytë?"
+    },
+    "cleanliness": {
+      "meaning": "Një fije floku, një njollë ose një peshqir i përdorur i tregojnë mysafirit se ndoshta e gjithë dhoma nuk është e pastër. Këto ankesa tregojnë çfarë i shpëtoi kontrollit të dhomës, jo vetëm pastrueses.",
+      "moves": [
+        "Pastroje përsëri menjëherë, në prani të përgjegjëses, dhe ofro ndërrimin e dhomës kur dhoma nuk rregullohet brenda 20 minutave.",
+        "Kontrollo çdo dhomë të një pastrueseje të re dhe çdo ditë një mostër të dhomave të secilës; shtoje në listën e kontrollit pikën që dështoi.",
+        "Dyshim për çimka shtrati: kaloje mysafirin në një kat tjetër (jo në dhomën ngjitur), blloko dhomën dhe thirr dezinsektimin po atë ditë."
+      ],
+      "question": "Cila pikë e kontrollit të dhomës nuk e kapi atë që gjeti mysafiri, dhe kush e kontrollon tani?"
+    },
+    "maintenance": {
+      "meaning": "Një defekt që e gjen mysafiri shpesh e ka parë më parë housekeeping-u ose mysafiri i mëparshëm. Një regjistër i asaj që u prish, dhomë pas dhome, tregon cilat defekte duhen parandaluar në vend që të riparohen.",
+      "moves": [
+        "Mirëmbajtja thirret brenda 5 minutave; një defekt që e bën dhomën të papërdorshme do të thotë ndërrim dhome, jo premtim.",
+        "Housekeeping-u njofton çdo defekt që sheh gjatë pastrimit, që të rregullohet para mbërritjes tjetër.",
+        "Uji në dysheme, instalimet elektrike ose një bravë dere janë çështje sigurie: dhoma mbetet e bllokuar derisa të riparohet dhe të miratohet."
+      ],
+      "question": "Për sa nga këto defekte e dinin housekeeping-u ose mirëmbajtja para se të ankohej mysafiri?"
+    },
+    "checkin": {
+      "meaning": "Pritjet në check-in vijnë me valë: fluturime të vonuara, ekuipazhe dhe grupe që mbërrijnë njëherësh. Mysafiri është i lodhur, dhe dhjetë minutat e para përcaktojnë tonin e qëndrimit.",
+      "moves": [
+        "Ndiq mbërritjet dhe oraret e fluturimeve; thirr një punonjës shtesë në recepsion kur pritet një valë.",
+        "Cakto dhomat dhe përgatit kartat e çelësave për grupet dhe ekuipazhet para se të ulen.",
+        "Përshëndet çdo mysafir në radhë brenda një minute, dhe ofro ujë ose kafe sapo pritja kalon dhjetë minuta."
+      ],
+      "question": "Kur nisi radha e fundit, dhe a mund ta kishim parë valën që po vinte?"
+    },
+    "billing": {
+      "meaning": "Gabimet në faturë i arrijnë mysafirit pas qëndrimit, me email, dhe kushtojnë besim dhe kohë pune. Shumica nisin nga një regjistrim në llogari ose një tarifë e futur në rezervim.",
+      "moves": [
+        "Kontrollo llogarinë me mysafirin në check-out, dhe rresht për rresht gjatë night audit-it për qëndrimet e gjata.",
+        "Korrigjo po atë ditë një gabim të konfirmuar dhe dërgo faturën e korrigjuar; korrigjimi nuk është kompensim.",
+        "Gjej regjistrimin ose tarifën që e shkaktoi dhe rregulloje në burim, në PMS."
+      ],
+      "question": "Cili regjistrim ose tarifë shkaktoi gabimet e fundit në faturë, dhe kush e kontrollon para nisjes?"
+    },
+    "default": {
+      "meaning": "Një kategori sjell shumicën e ankesave. Heqja e shkakut të saj parandalon më shumë ankesa sesa trajtimi i mirë i secilës.",
+      "moves": [
+        "Çoje kategorinë e parë te 5 Whys bashkë me departamentin që e ka në ngarkim.",
+        "Bie dakord për një ndryshim, me përgjegjës dhe afat, te lista e veprimeve.",
+        "Shiko përsëri Pareto-n pas katër javësh: një shtyllë e parë më e vogël është rezultati që kërkohet."
+      ],
+      "question": "Çfarë duhet të ndryshojë që kjo ankesë të mos ndodhë fare?"
+    }
+  },
+  "tips": [
+    ["Regjistroje sa mysafiri është ende me ty.", "Ora, dhoma, kanali dhe çfarë ndodhi, me fjalët e mysafirit. Matja e objektivit nis këtu, jo kur problemi arrin te menaxheri në detyrë."],
+    ["Kalo hapat e LEARN.", "Dëgjo, trego empati, kërko falje, zgjidh, njofto. Një mysafir që ndihet i dëgjuar e fal problemin; një mysafir me të cilin debaton shkruan vlerësimin."],
+    ["Rregulloje, pastaj telefono përsëri.", "Shënoje si të zgjidhur, me atë që u bë dhe kompensimin nëse ka, pastaj kontakto mysafirin brenda orës ose të nesërmen në mëngjes: ajo telefonatë vendos nëse ikën i kënaqur."],
+    ["Kompensimi ndjek ndikimin.", "Një kërkim falje dhe një zgjidhje për një ankesë të lehtë, një gjest për një të rëndë, një rimbursim vetëm për një natë që humbi vërtet. Shkruaj vlerën në euro, që kostoja e rikuperimit të duket."],
+    ["Një dhomë që përsëritet është punë për mirëmbajtjen.", "E njëjta dhomë me të njëjtën ankesë dy herë brenda 30 ditëve nuk është fat i keq: dërgoje te lista e veprimeve me dhomën si zonë."]
+  ],
+  "example": {
+    "me": "Elena · Front office",
+    "hotel": "Airport Hotel (shembull)",
+    "rooms": 150,
+    "nights": { "from": "2026-10-05", "sold": [138, 144, 146, 139, 121, 98, 117, 141, 147, 145, 136, 115, 102, 124] },
+    "rows": [
+      { "date": "2026-10-05", "time": "07:40", "room": "227", "channel": "person", "category": "fnb", "severity": "minor", "what": "Nuk kishte bukë pa gluten në mëngjes; mysafiri kishte fluturim në 9:00.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Kuzhina thekte bukë pa gluten nga rezerva në ngrirje; shefi i kuzhinës e shtoi në listën e hapjes.", "comp": "apology", "value": 0, "resolved": "2026-10-05 07:52", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-05", "time": "22:15", "room": "318", "channel": "phone", "category": "noise", "severity": "minor", "what": "Grup i zhurmshëm në korridor pas një mbërritjeje të vonë.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "Sigurimi i kërkoi grupit qetësi dhe e kontrolloi katin përsëri në 22:40: qetë.", "comp": "apology", "value": 0, "resolved": "2026-10-05 22:27", "followed": "2026-10-06", "satisfied": "yes" },
+      { "date": "2026-10-06", "time": "16:05", "room": "412", "channel": "person", "category": "temperature", "severity": "major", "what": "Kondicioneri nxjerr ajër të ngrohtë, 26 °C në dhomë.", "guest": "z. A. Fischer", "takenBy": "Jonas", "learn": "LEARN", "action": "Tekniku rivendosi ventilokonvektorin dhe pastroi filtrin; në 16:35 dhoma ishte 21 °C.", "comp": "amenity", "value": 12, "resolved": "2026-10-06 16:35", "followed": "2026-10-07", "satisfied": "yes" },
+      { "date": "2026-10-06", "time": "23:40", "room": "509", "channel": "phone", "category": "noise", "severity": "major", "what": "Televizori i fqinjit dëgjohet fort nga dera ndërlidhëse; mysafiri ka fluturim në 6:00.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "E kaluam mysafirin në një dhomë superior nga oborri dhe i kërkuam fqinjit ta ulte televizorin.", "comp": "upgrade", "value": 0, "resolved": "2026-10-07 00:10", "followed": "2026-10-07", "satisfied": "yes" },
+      { "date": "2026-10-07", "time": "06:10", "room": "133", "channel": "person", "category": "checkin", "severity": "minor", "what": "Priti 25 minuta në check-in kur u ul një fluturim i gjatë i vonuar; një punonjës në recepsion.", "guest": "", "takenBy": "Tomasz", "learn": "LERN", "action": "Night auditori thirri më herët punonjësin e turnit të mëngjesit dhe ofroi mëngjesin falas.", "comp": "voucher", "value": 18, "resolved": "2026-10-07 06:18", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-07", "time": "19:30", "room": "241", "channel": "chat", "category": "wifi", "severity": "minor", "what": "Wi-Fi bie çdo disa minuta në dhomë.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "E ndihmuam mysafirin të lidhej me rrjetin 5 GHz; tiketë IT për pikën e aksesit në katin 2.", "comp": "none", "value": 0, "resolved": "2026-10-07 19:41", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-08", "time": "09:10", "room": "615", "channel": "email", "category": "billing", "severity": "minor", "what": "Parkimi u faturua dy herë në faturën përfundimtare; mysafiri u largua dje.", "guest": "znj. J. Nowak", "takenBy": "Elena", "learn": "LEARN", "action": "E kthyem pagesën e dyfishtë të parkimit prej 18 € dhe dërguam faturën e korrigjuar.", "comp": "none", "value": 0, "resolved": "2026-10-08 15:40", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-08", "time": "21:50", "room": "318", "channel": "person", "category": "cleanliness", "severity": "minor", "what": "Flokë në vaskë.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "Housekeeping-u e pastroi përsëri banjën; pastruesja u udhëzua të nesërmen në mëngjes.", "comp": "apology", "value": 0, "resolved": "2026-10-08 22:10", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-09", "time": "07:20", "room": "304", "channel": "person", "category": "noise", "severity": "major", "what": "Karroca e pastrimit dhe stafi duke folur në korridor që nga 7:00; mysafiri punon me turne nate.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Dhoma u vendos në listën e pastrimit të vonë, pa shërbim para 11:00; përgjegjësja e housekeeping-ut kërkoi falje personalisht.", "comp": "voucher", "value": 18, "resolved": "2026-10-09 07:35", "followed": "2026-10-10", "satisfied": "yes" },
+      { "date": "2026-10-09", "time": "18:45", "room": "518", "channel": "person", "category": "maintenance", "severity": "major", "what": "Kullimi i dushit i bllokuar, ujë në dyshemenë e banjës.", "guest": "z. K. Sato", "takenBy": "Jonas", "learn": "LEARN", "action": "Tekniku zhbllokoi kullimin; housekeeping-u e thau dyshemenë dhe ndërroi tapetin e banjës.", "comp": "discount", "value": 30, "resolved": "2026-10-09 19:25", "followed": "2026-10-10", "satisfied": "yes" },
+      { "date": "2026-10-10", "time": "23:55", "room": "221", "channel": "phone", "category": "noise", "severity": "minor", "what": "Muzika e dasmës në sallën e aktiviteteve.", "guest": "", "takenBy": "Tomasz", "learn": "LEAR", "action": "Menaxheri i aktiviteteve e uli menjëherë muzikën dhe e mbylli në 00:30 sipas kontratës; i çuam tapa veshësh në dhomë.", "comp": "apology", "value": 0, "resolved": "2026-10-11 00:08", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-11", "time": "11:20", "room": "106", "channel": "review", "category": "cleanliness", "severity": "major", "what": "Vlerësim online, 3 nga 10: tapet me njolla dhe pluhur poshtë shtratit.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Iu përgjigjëm vlerësimit po atë ditë; dhoma 106 u pastrua thellë dhe tapeti u lau me shampo.", "comp": "none", "value": 0, "resolved": "2026-10-11 16:50", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-12", "time": "06:50", "room": "412", "channel": "person", "category": "temperature", "severity": "major", "what": "Kondicioneri përsëri nuk ftoh; mysafiri fjeti keq.", "guest": "z. A. Fischer", "takenBy": "Jonas", "learn": "LEARN", "action": "E kaluam mysafirin në dhomën 418; mirëmbajtja ndërroi motorin e ventilokonvektorit në 412 dhe e bllokoi dhomën derisa u provua.", "comp": "discount", "value": 40, "resolved": "2026-10-12 07:20", "followed": "2026-10-13", "satisfied": "no" },
+      { "date": "2026-10-12", "time": "20:10", "room": "233", "channel": "person", "category": "staff", "severity": "minor", "what": "Recepsionistja foli prerë në telefon kur mysafiri kërkoi një check-out të vonë.", "guest": "", "takenBy": "Mira", "learn": "LEARN", "action": "Menaxheri në detyrë kërkoi falje personalisht, dha check-out të vonë deri në 13:00 dhe foli me kolegen.", "comp": "apology", "value": 0, "resolved": "2026-10-12 20:22", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-13", "time": "07:05", "room": "129", "channel": "person", "category": "cleanliness", "severity": "minor", "what": "Një peshqir i përdorur në banjë në një mbërritje të hershme.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Housekeeping-u ndërroi të gjithë peshqirët dhe e kontrolloi dhomën përsëri; lista e kontrollit tani i përmend peshqirët.", "comp": "apology", "value": 0, "resolved": "2026-10-13 07:17", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-13", "time": "22:30", "room": "318", "channel": "phone", "category": "noise", "severity": "minor", "what": "Zhurmë e ashensorit nga muri gjithë mbrëmjen.", "guest": "", "takenBy": "Tomasz", "learn": "LEAR", "action": "I ofruam ndërrim dhome; mysafiri preferoi të qëndronte dhe mori tapa veshësh.", "comp": "apology", "value": 0, "resolved": "2026-10-13 22:41", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-14", "time": "09:30", "room": "702", "channel": "survey", "category": "maintenance", "severity": "minor", "what": "Anketë pas qëndrimit: brava e derës së banjës ngec dhe telekomanda e televizorit nuk kishte bateri.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "E falënderuam mysafirin me email; mirëmbajtja riparoi bravën dhe kontrolloi telekomandën në dhomën 702.", "comp": "points", "value": 20, "resolved": "2026-10-14 14:00", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-14", "time": "17:50", "room": "610", "channel": "person", "category": "temperature", "severity": "minor", "what": "Dhoma shumë e ftohtë; ngrohja nuk i përgjigjet termostatit.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Tekniku rivendosi termostatin; ngrohja u ndez brenda dhjetë minutave.", "comp": "none", "value": 0, "resolved": "2026-10-14 18:02", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-15", "time": "02:10", "room": "211", "channel": "phone", "category": "cleanliness", "severity": "critical", "what": "Insekte të vogla në dyshek, dyshim për çimka shtrati; mysafiri u largua një natë më herët.", "guest": "znj. L. Moreau", "takenBy": "Tomasz", "learn": "LEARN", "action": "E kaluam mysafiren menjëherë në një kat tjetër dhe ia futëm bagazhet në thasë për trajtim me nxehtësi; dhoma 211 u bllokua, u thirr dezinsektimi, u njoftua drejtori i përgjithshëm.", "comp": "refund", "value": 129, "resolved": "2026-10-15 02:40", "followed": "2026-10-16", "satisfied": "no" },
+      { "date": "2026-10-15", "time": "19:20", "room": "326", "channel": "chat", "category": "temperature", "severity": "minor", "what": "Kondicioneri zhurmon sa herë që ndizet.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Tekniku shtrëngoi një panel të lirë të ventilokonvektorit.", "comp": "none", "value": 0, "resolved": "2026-10-15 19:33", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-16", "time": "08:15", "room": "405", "channel": "person", "category": "maintenance", "severity": "critical", "what": "Mysafirja rrëshqiti në dyshemenë e lagur të banjës, guarnicioni i dushit rrjedh; gërvishtje në gju.", "guest": "znj. H. Becker", "takenBy": "Mira", "learn": "LEARN", "action": "Ndihma e parë nga personi i ndihmës së parë, u shkrua raporti i incidentit, u ndërrua guarnicioni i dushit; menaxheri në detyrë e telefonoi mysafiren pasdite.", "comp": "refund", "value": 129, "resolved": "2026-10-16 08:50", "followed": "2026-10-16", "satisfied": "yes" },
+      { "date": "2026-10-16", "time": "23:15", "room": "514", "channel": "phone", "category": "maintenance", "severity": "minor", "what": "Dritarja nuk mbyllet plotësisht; zhurmë avionësh në dhomë.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "E kaluam mysafirin në një dhomë nga oborri; dritarja e 514 u regjistrua për mirëmbajtjen.", "comp": "upgrade", "value": 0, "resolved": "2026-10-16 23:35", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-17", "time": "10:30", "room": "117", "channel": "review", "category": "noise", "severity": "minor", "what": "Vlerësim online, 6 nga 10: mure të holla, mysafiri dëgjonte fqinjët.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Iu përgjigjëm vlerësimit po atë ditë dhe shpjeguam izolimin akustik të planifikuar për katin e parë.", "comp": "none", "value": 0, "resolved": "2026-10-17 15:10", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-18", "time": "07:45", "room": "523", "channel": "person", "category": "temperature", "severity": "minor", "what": "Dhoma shumë e ngrohtë natën: kondicioneri është në 20 °C, dhoma mbetet 24 °C.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Tekniku gjeti se kontakti i dritares e fikte kondicionerin dhe e rregulloi.", "comp": "none", "value": 0, "resolved": "2026-10-18 08:15", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-18", "time": "21:40", "room": "308", "channel": "phone", "category": "noise", "severity": "major", "what": "Dyer që përplasen dhe zëra të lartë në korridor nga një ekip sportiv.", "guest": "z. R. Davies", "takenBy": "Tomasz", "learn": "LEA", "action": "", "comp": "none", "value": 0, "resolved": "", "followed": "", "satisfied": "unknown" }
+    ]
+  }
+}

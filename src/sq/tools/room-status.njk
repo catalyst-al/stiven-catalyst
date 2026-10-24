@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Statusi i dhomave
+seo_title: "Tabela e statusit të dhomave në hotel: kodet VD, VC, VI, OOO, dhoma e radhës për pastrim dhe kohët e kthimit"
+description: "Tabela e dhomave për housekeeping dhe recepsionin: VD, VC, VI, OCC, DO, OOO sipas katit, dhoma e radhës, dhomat gati për mbërritjet dhe koha e kthimit."
+activeNav: /sq/tools.html
+permalink: /sq/tools/room-status/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Hotel</p>
+  <h1>Statusi i dhomave</h1>
+  <p class="lede">Tabela e dhomave e turnit, në telefon ose në ekranin e recepsionit: çdo dhomë sipas katit me kodin e housekeeping, shënimet DND, VIP dhe mbërritje, pastruesin dhe një shënim. Një prekje e ndryshon, dhe çdo ndryshim ruhet me orën. Tabela tregon dhomën e radhës për pastrim, dhomat gati për mbërritjet e sotme, çfarë është jashtë përdorimit dhe sa zgjat një dhomë nga largimi deri e pastër dhe nga e pastër deri e inspektuar.</p>
+</section>
+
+{% set cfg = sq.roomStatus %}
+{% include "partials/room-status.njk" %}

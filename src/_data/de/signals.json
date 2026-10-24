@@ -1,0 +1,986 @@
+{
+  "storageKey": "sc-signals-de",
+  "tools": [
+    {
+      "slug": "safety-cross",
+      "name": "Sicherheitskreuz"
+    },
+    {
+      "slug": "damage-control",
+      "name": "Schadenskontrolle"
+    },
+    {
+      "slug": "incomplete-control",
+      "name": "Vollständigkeitskontrolle"
+    },
+    {
+      "slug": "night-audit",
+      "name": "Night-Audit-Protokoll"
+    },
+    {
+      "slug": "delay-analyzer",
+      "name": "Verspätungsanalyse"
+    },
+    {
+      "slug": "oee",
+      "name": "OEE"
+    },
+    {
+      "slug": "five-s-audit",
+      "name": "5S-Audit"
+    },
+    {
+      "slug": "hotel-kpis",
+      "name": "Hotel-Kennzahlen"
+    },
+    {
+      "slug": "room-inspection",
+      "name": "Zimmerkontrolle"
+    },
+    {
+      "slug": "maintenance-planner",
+      "name": "Wartungsplaner"
+    },
+    {
+      "slug": "lost-found",
+      "name": "Fundsachen"
+    },
+    {
+      "slug": "kaizen-board",
+      "name": "Kaizen-Board"
+    },
+    {
+      "slug": "action-tracker",
+      "name": "Maßnahmenliste"
+    },
+    {
+      "slug": "gemba-walk",
+      "name": "Gemba Walk"
+    }
+  ],
+  "series": {
+    "damage-control:rate": "Schadensquote",
+    "damage-control:count": "Beschädigte Einheiten pro Tag",
+    "incomplete-control:rate": "Quote unvollständig",
+    "incomplete-control:count": "Unvollständige Aufträge pro Tag",
+    "night-audit:rate": "Abweichungsquote",
+    "night-audit:count": "Night-Audit-Abweichungen pro Tag",
+    "delay-analyzer:late": "Anteil verspäteter Touren",
+    "delay-analyzer:late-count": "Verspätete Touren pro Tag",
+    "delay-analyzer:minutes": "Minuten Verspätung je verspäteter Tour",
+    "delay-analyzer:on-time": "Pünktliche Touren",
+    "oee": "OEE von {name}",
+    "five-s-audit": "5S-Ergebnis im Bereich {name}",
+    "hotel-kpis:occupancy": "Auslastung",
+    "hotel-kpis:adr": "ADR",
+    "hotel-kpis:no-shows": "No-Show-Quote",
+    "hotel-kpis:complaints": "Beschwerden pro verkauftem Zimmer",
+    "gemba-walk": "LPA-Erfüllungsgrad der Ebene {name}"
+  },
+  "text": {
+    "dayOne": "Tag",
+    "dayMany": "Tagen",
+    "safetyType": {
+      "lost-time": "Unfall mit Ausfallzeit",
+      "no-lost-time": "Unfall ohne Ausfallzeit",
+      "first-aid": "Erste Hilfe"
+    },
+    "safety": "{type} am {date}, {area}: {what}",
+    "safetyNoArea": "{type} am {date}: {what}",
+    "stat": "{series}: {rules}",
+    "rules": {
+      "beyondUp": "über der oberen Eingriffsgrenze",
+      "beyondDown": "unter der unteren Eingriffsgrenze",
+      "runUp": "{n} Punkte in Folge über der Mittellinie",
+      "runDown": "{n} Punkte in Folge unter der Mittellinie",
+      "trendUp": "{n} Punkte in Folge steigend",
+      "trendDown": "{n} Punkte in Folge fallend"
+    },
+    "target": "{series} {value}, schlechter als das Ziel von {target}",
+    "action": "Maßnahme seit {days} überfällig: {title}",
+    "maintenance": "{task} ({asset}) seit {days} überfällig",
+    "lostFound": "{what} ({item}): Aufbewahrungsfrist seit {days} abgelaufen",
+    "redTag": "Rote Karte seit {days} offen: {item}",
+    "kaizen": "Idee seit {days} ohne Antwort: {title}",
+    "reclean": "Zimmer {room}: Nachreinigung nicht erneut kontrolliert",
+    "gemba": "Rundgang der Ebene {layer} seit {days} überfällig",
+    "goodSide": "Das ist die gute Seite: Finden Sie heraus, was gut gelaufen ist, und halten Sie es.",
+    "check": "Das Signal ist aus der Morgenliste verschwunden und bleibt zwei Wochen lang weg.",
+    "quiet": "Jede Reihe liegt innerhalb ihrer Grenzen, jedes Ziel ist erreicht und nichts ist überfällig. Erfassen Sie weiter: Die Liste ist nur so gut wie das, was die Tools enthalten."
+  },
+  "rules": {
+    "safety": "Jeder Unfall (mit oder ohne Ausfallzeit) und jede Erste Hilfe der letzten 7 Tage ist ein Signal und steht immer oben.",
+    "beyond": "Außerhalb der Grenze: Der letzte Punkt liegt mehr als drei Sigma von der Mittellinie entfernt. An diesem Tag hat sich etwas verändert; suchen Sie danach, solange sich die Leute noch erinnern.",
+    "run": "Lauf: Der letzte Punkt beendet 8 oder mehr Punkte in Folge auf derselben Seite der Mittellinie (Western Electric). Das Niveau hat sich verschoben.",
+    "trend": "Trend: Der letzte Punkt beendet 6 Punkte in Folge, jeder höher (oder jeder niedriger) als der vorige (Nelson-Regel 3). Etwas driftet.",
+    "minPoints": "Eine Regelkarte braucht mindestens 8 Punkte. Mit weniger gibt es kein statistisches Signal: Die Grenzen würden ein paar Tage beschreiben, nicht den Prozess.",
+    "charts": "Jede tägliche Reihe bekommt die Regelkarte, die sie braucht: eine Quote mit der Menge jedes Tages eine p-Karte (volle Tage bekommen engere Grenzen), eine Anzahl ohne Menge eine c-Karte, Beschwerden pro verkauftem Zimmer eine u-Karte, ein gemessener Wert (OEE, 5S-Ergebnis, Minuten Verspätung, Auslastung, ADR) eine Einzelwertkarte (I-MR). Die Grenzen kommen aus den Punkten des Zeitraums, und nur der letzte Punkt wird beurteilt.",
+    "change": "Änderung: Markiert ein Ereignis auf der Zeitachse eine Änderung, kommen die Grenzen aus den Punkten danach, sobald es 8 sind; bis dahin aus allen Punkten, und das Signal sagt es.",
+    "target": "Ziel: Der letzte Tag (beim 5S-Audit das letzte Audit, beim Gemba Walk die letzte Woche) ist schlechter als sein Ziel: das im Tool eingetragene, sonst das aus dem Arbeitsplatzprofil.",
+    "action": "Maßnahme: eine offene Maßnahme, deren Fälligkeitsdatum verstrichen ist.",
+    "maintenance": "Wartung: eine Aufgabe nach ihrem Fälligkeitsdatum, wie der Planer es aus der letzten Erledigung, dem Zähler und einer Verschiebung errechnet.",
+    "lostFound": "Fundsachen: eine offene Fundsache nach ihrer Aufbewahrungsfrist.",
+    "redTag": "Rote Karte: eine Karte, die länger als 30 Tage offen ist oder deren Entscheidungsdatum verstrichen ist.",
+    "kaizen": "Kaizen: eine Idee, die nach den 7 Tagen, die das Board für eine Antwort lässt, noch in der Spalte Idee steht.",
+    "reclean": "Nachreinigung: ein Zimmer, dessen letzte Kontrolle der letzten 7 Tage Punkte an die Zimmerreinigung zurückgab, ohne Kontrolle seitdem.",
+    "gemba": "Gemba Walk: eine Ebene, deren nächster Rundgang nach ihrem Rhythmus vor heute fällig war."
+  },
+  "severity": {
+    "high": "Ein Unfall oder eine Erste Hilfe in den letzten 7 Tagen; der letzte Punkt außerhalb einer Eingriffsgrenze auf der schlechten Seite; eine überfällige Maßnahme mit Priorität Hoch oder mehr als 14 Tage zu spät; eine überfällige Wartung an einer A-Anlage oder eine überfällige Prüfpflicht.",
+    "medium": "Ein Lauf von 8 oder ein Trend von 6 auf der schlechten Seite; der letzte Tag, das letzte Audit oder die letzte Woche schlechter als das Ziel; andere überfällige Maßnahmen; überfällige Wartung an einer B-Anlage; Fundsachen nach der Aufbewahrungsfrist; zu lange offene Rote Karten; Ideen ohne Antwort; offene Nachreinigungen von einem früheren Tag; überfällige Rundgänge.",
+    "low": "Ein Signal auf der guten Seite (finden Sie heraus, was gut gelaufen ist, und halten Sie es); überfällige Wartung an einer C-Anlage; eine Nachreinigung von heute, noch nicht kontrolliert."
+  },
+  "moves": {
+    "safety": "Gehen Sie heute an den Ort: Machen Sie ihn sicher, sprechen Sie mit der Person und dem Team und beginnen Sie die 5 Whys vor Schichtende.",
+    "stat": "An diesem Tag hat sich etwas verändert. Fragen Sie die Schicht, was anders war (Menschen, Methode, Material, Maschine, Menge), bevor die Erinnerung verblasst, und tragen Sie die Antwort auf der Zeitachse ein.",
+    "target": "Der Prozess ist stabil, aber nicht dort, wo er sein sollte: Eine Besprechung bewegt ihn nicht. Nehmen Sie die größte Ursache in die 5 Whys und geben Sie der Gegenmaßnahme eine verantwortliche Person und ein Datum.",
+    "overdue": "Rufen Sie heute Morgen die verantwortliche Person an: erledigt, ein neues Datum mit Grund oder eskalieren. Ein überfälliger Punkt, den niemand anfasst, lehrt das Team, dass Termine nicht zählen."
+  },
+  "tips": [
+    [
+      "Öffnen Sie sie zuerst.",
+      "Zwei Minuten vor der Morgenbesprechung: Die Liste ist geordnet, die ersten Zeilen sind die Tagesordnung."
+    ],
+    [
+      "Eine Liste, viele Tools.",
+      "Signale liest nur, was die Tools in diesem Browser enthalten. Erfassen Sie in der Schadenskontrolle, der Verspätungsanalyse, OEE, dem Sicherheitskreuz und den anderen, und sie kommen von selbst dazu."
+    ],
+    [
+      "Vertrauen Sie den Regeln, nicht der Farbe.",
+      "Ein schlechter Tag innerhalb der Grenzen ist Rauschen. Ein Punkt außerhalb einer Grenze, ein Lauf von 8 oder ein Trend von 6 ist ein Signal, das eine Frage in der Halle wert ist."
+    ],
+    [
+      "Markieren Sie die Änderungen.",
+      "Eine neue Methode oder ein neues Schichtmodell kommt auf die Zeitachse des Tools. Die Grenzen beginnen dann ab der Änderung neu, so wirkt eine Verbesserung nicht für immer wie ein Signal."
+    ],
+    [
+      "Mit Bedacht ausblenden.",
+      "Für heute ausblenden verbirgt ein Signal bis morgen. Ist es dann noch wahr, steht es wieder auf der Liste."
+    ],
+    [
+      "Aus Signalen werden Maßnahmen.",
+      "Jedes Signal geht mit einem Tipp in die 5 Whys oder in die Maßnahmenliste. Hoch ist morgen fällig, Mittel in drei Tagen, Niedrig in einer Woche."
+    ]
+  ],
+  "example": {
+    "site": "Paketzentrum, Ausgang",
+    "damage": {
+      "target": "0.3",
+      "volumes": [
+        3000,
+        3100,
+        2900,
+        3200,
+        3050,
+        2800,
+        3150,
+        3000,
+        2950,
+        3100,
+        3200,
+        2900,
+        3050,
+        3000,
+        3100,
+        2850,
+        3000,
+        3200,
+        3100,
+        2950,
+        3050,
+        3000,
+        2900,
+        3150,
+        3100,
+        3000,
+        2950,
+        3200,
+        3050,
+        3100
+      ],
+      "units": [
+        9,
+        11,
+        8,
+        10,
+        9,
+        7,
+        12,
+        9,
+        8,
+        10,
+        11,
+        8,
+        9,
+        10,
+        9,
+        7,
+        10,
+        12,
+        10,
+        8,
+        9,
+        11,
+        8,
+        10,
+        12,
+        9,
+        8,
+        11,
+        9,
+        26
+      ],
+      "split": [
+        6,
+        4,
+        99
+      ],
+      "shifts": [
+        "Früh",
+        "Spät",
+        "Nacht"
+      ],
+      "causes": [
+        {
+          "stage": "Verladung",
+          "type": "Gequetscht",
+          "cause": "Stapeln"
+        },
+        {
+          "stage": "Packen",
+          "type": "Gerissen oder durchstochen",
+          "cause": "Verpackung"
+        },
+        {
+          "stage": "Verladung",
+          "type": "Gebrochen",
+          "cause": "Arbeitsmittel"
+        }
+      ]
+    },
+    "incomplete": {
+      "target": "0.5",
+      "volumes": [
+        1000,
+        1050,
+        980,
+        1020,
+        1100,
+        990,
+        1010,
+        1040,
+        1000,
+        1060,
+        980,
+        1030,
+        1000,
+        1050,
+        1020,
+        990,
+        1040,
+        1000,
+        1060,
+        1010,
+        980,
+        1030,
+        1050,
+        1000,
+        1020,
+        1040,
+        990,
+        1010,
+        1030,
+        1050
+      ],
+      "units": [
+        7,
+        8,
+        6,
+        9,
+        7,
+        8,
+        6,
+        7,
+        9,
+        7,
+        8,
+        6,
+        7,
+        8,
+        4,
+        5,
+        3,
+        5,
+        4,
+        3,
+        5,
+        4,
+        3,
+        5,
+        4,
+        3,
+        4,
+        5,
+        3,
+        7
+      ],
+      "split": [
+        3,
+        99
+      ],
+      "shifts": [
+        "Früh",
+        "Spät"
+      ],
+      "causes": [
+        {
+          "stage": "Kommissionierung",
+          "type": "Fehlmenge",
+          "cause": "Pickfehler"
+        },
+        {
+          "stage": "Packen",
+          "type": "Falscher Artikel",
+          "cause": "Packfehler"
+        }
+      ]
+    },
+    "delay": {
+      "routes": 24,
+      "firstDeparture": 300,
+      "every": 15,
+      "drive": 95,
+      "grace": 15,
+      "target": "90",
+      "prefix": "T",
+      "shifts": [
+        "Früh",
+        "Spät"
+      ],
+      "late": [
+        [
+          25,
+          32
+        ],
+        [
+          19
+        ],
+        [
+          41,
+          22
+        ],
+        [
+          28
+        ],
+        [
+          17,
+          30
+        ],
+        [
+          35
+        ],
+        [
+          21,
+          26
+        ],
+        [
+          29
+        ],
+        [
+          18,
+          40
+        ],
+        [
+          24
+        ],
+        [
+          33,
+          20
+        ],
+        [
+          27
+        ],
+        [
+          22,
+          31
+        ],
+        [
+          38
+        ],
+        [
+          20,
+          26
+        ],
+        [
+          30
+        ],
+        [
+          19,
+          34
+        ],
+        [
+          25
+        ],
+        [
+          36,
+          21
+        ],
+        [
+          28
+        ],
+        [
+          23,
+          30
+        ],
+        [
+          26
+        ],
+        [
+          21,
+          27
+        ],
+        [
+          24,
+          30
+        ],
+        [
+          27,
+          35
+        ],
+        [
+          31,
+          37
+        ],
+        [
+          34,
+          42
+        ],
+        [
+          36,
+          44
+        ]
+      ],
+      "onTime": [
+        -4,
+        3,
+        8,
+        -1,
+        12,
+        0,
+        6,
+        -6,
+        10,
+        2
+      ],
+      "dockShare": [
+        5,
+        0,
+        12,
+        3
+      ],
+      "reasons": [
+        "Verladung verspätet",
+        "Verkehr oder Baustelle",
+        "Späte Welle oder Mengenspitze",
+        "Fahrer nicht bereit"
+      ]
+    },
+    "safety": [
+      {
+        "ago": 2,
+        "shift": "Früh",
+        "type": "first-aid",
+        "area": "Verladung",
+        "what": "Schnitt in die Hand am Stretchwickler",
+        "cause": "Folienschneider ohne Schutz",
+        "severity": 2,
+        "action": "Schutz am Folienschneider anbringen",
+        "owner": "Marco"
+      },
+      {
+        "ago": 5,
+        "shift": "Spät",
+        "type": "near-miss",
+        "area": "Rampe 2",
+        "what": "Palette fiel in der Kurve von der Gabel",
+        "cause": "Ladung nicht gesichert",
+        "severity": 2
+      },
+      {
+        "ago": 9,
+        "shift": "Nacht",
+        "type": "unsafe-condition",
+        "area": "Sortierung",
+        "what": "Öl auf dem Boden am Ausgang des Sorters",
+        "cause": "Undichtes Getriebe",
+        "severity": 1,
+        "done": true
+      },
+      {
+        "ago": 18,
+        "shift": "Früh",
+        "type": "no-lost-time",
+        "area": "Rampe 1",
+        "what": "Fuß von einem Hubwagen eingeklemmt",
+        "cause": "Gehweg zugestellt",
+        "severity": 3,
+        "done": true
+      }
+    ],
+    "oee": {
+      "planned": 450,
+      "rate": 600,
+      "shift": "Früh",
+      "rejects": [
+        30,
+        45,
+        25,
+        40,
+        35
+      ],
+      "stops": [
+        {
+          "reason": "Stau",
+          "minutes": 25
+        },
+        {
+          "reason": "Störung",
+          "minutes": 40
+        },
+        {
+          "reason": "Umrüsten",
+          "minutes": 30
+        },
+        {
+          "reason": "Stau",
+          "minutes": 20
+        }
+      ],
+      "machines": [
+        {
+          "name": "Sorter 1",
+          "offset": 0,
+          "good": [
+            3660,
+            3600,
+            3720,
+            3630,
+            3690,
+            3570,
+            3700,
+            3640,
+            3610,
+            3680,
+            3590,
+            3710,
+            3650,
+            3620,
+            3700,
+            3580,
+            3670,
+            3640,
+            3690,
+            3600,
+            3660,
+            3630,
+            3560,
+            3590,
+            3540,
+            3600,
+            3550,
+            3580,
+            3530,
+            3570
+          ]
+        },
+        {
+          "name": "Stretchwickler",
+          "offset": 2,
+          "good": [
+            3480,
+            3540,
+            3460,
+            3520,
+            3500,
+            3440,
+            3530,
+            3490,
+            3510,
+            3470,
+            3550,
+            3480,
+            3500,
+            3460,
+            3530,
+            3490,
+            3520,
+            3470,
+            3510,
+            3480,
+            3540,
+            3460,
+            3500,
+            3520,
+            3480,
+            3510,
+            3470,
+            3530,
+            3490,
+            3450
+          ]
+        }
+      ]
+    },
+    "fiveS": {
+      "auditors": [
+        "Anna",
+        "Marco",
+        "Fatima"
+      ],
+      "audits": [
+        {
+          "area": "Verladung",
+          "ago": [
+            68,
+            61,
+            54,
+            47,
+            40,
+            33,
+            26,
+            19,
+            12,
+            5
+          ],
+          "totals": [
+            58,
+            61,
+            60,
+            63,
+            62,
+            64,
+            63,
+            65,
+            66,
+            64
+          ]
+        },
+        {
+          "area": "Verpackung",
+          "ago": [
+            26,
+            19,
+            12,
+            5
+          ],
+          "totals": [
+            55,
+            57,
+            54,
+            58
+          ]
+        }
+      ],
+      "tags": [
+        {
+          "ago": 41,
+          "area": "Verladung",
+          "item": "Defekter Hubwagen",
+          "reason": "Defekt",
+          "decision": "Zurückstellen",
+          "owner": "Jonas",
+          "dueAgo": 27
+        },
+        {
+          "ago": 12,
+          "area": "Verpackung",
+          "item": "Karton mit alten Etiketten",
+          "reason": "Nicht benötigt",
+          "decision": "Entsorgen",
+          "owner": "Fatima",
+          "dueAgo": -5
+        },
+        {
+          "ago": 50,
+          "area": "Verladung",
+          "item": "Restliche Stretchfolie vom alten Lieferanten",
+          "reason": "Überschuss",
+          "decision": "Umsetzen",
+          "owner": "Anna",
+          "dueAgo": 40,
+          "done": true
+        }
+      ]
+    },
+    "maintenance": {
+      "site": "warehouse",
+      "assets": [
+        {
+          "tag": "FL-03",
+          "name": "Gabelstapler",
+          "type": "forklift",
+          "area": "Verladung",
+          "crit": "A",
+          "tasks": [
+            {
+              "text": "Jährliche Prüfung durch eine befähigte Person",
+              "every": 12,
+              "unit": "months",
+              "statutory": true,
+              "dueAgo": 9,
+              "who": "external",
+              "minutes": 90
+            },
+            {
+              "text": "Batterie und Ladegerät prüfen",
+              "every": 1,
+              "unit": "weeks",
+              "dueAgo": -2,
+              "minutes": 15
+            }
+          ]
+        },
+        {
+          "tag": "SRT-1",
+          "name": "Sorter 1",
+          "type": "conveyor",
+          "area": "Sortierung",
+          "crit": "B",
+          "tasks": [
+            {
+              "text": "Bandspannung und Bandlauf prüfen",
+              "every": 1,
+              "unit": "months",
+              "dueAgo": -10,
+              "minutes": 45
+            }
+          ]
+        },
+        {
+          "tag": "DK-2",
+          "name": "Überladebrücke 2",
+          "type": "dock",
+          "area": "Rampe 2",
+          "crit": "C",
+          "tasks": [
+            {
+              "text": "Scharnier und Lippe schmieren",
+              "every": 3,
+              "unit": "months",
+              "dueAgo": 4,
+              "minutes": 20
+            }
+          ]
+        }
+      ]
+    },
+    "kaizen": [
+      {
+        "title": "Zweiter Etikettendrucker an Rampe 3",
+        "waste": "Warten",
+        "area": "Verladung",
+        "by": "Jonas",
+        "ago": 12,
+        "effort": 2,
+        "impact": 4,
+        "saving": 280,
+        "status": "idea"
+      },
+      {
+        "title": "Schattenbrett für das Wickelwerkzeug",
+        "waste": "Bewegung",
+        "area": "Verpackung",
+        "by": "Fatima",
+        "ago": 20,
+        "effort": 1,
+        "impact": 3,
+        "status": "do",
+        "owner": "Fatima",
+        "movedAgo": 6,
+        "next": "Test in der Frühschicht"
+      },
+      {
+        "title": "Bodenmarkierung für die Leerpaletten",
+        "waste": "Bewegung",
+        "area": "Rampe 1",
+        "by": "Marco",
+        "ago": 4,
+        "effort": 1,
+        "impact": 2,
+        "status": "idea"
+      },
+      {
+        "title": "Farbige Behälteretiketten je Tour",
+        "waste": "Fehler",
+        "area": "Sortierung",
+        "by": "Anna",
+        "ago": 45,
+        "effort": 2,
+        "impact": 4,
+        "saving": 350,
+        "status": "act",
+        "owner": "Anna",
+        "movedAgo": 25
+      }
+    ],
+    "actions": [
+      {
+        "title": "Lichtvorhang an Rampe 2 reparieren",
+        "owner": "Marco",
+        "dueAgo": 3,
+        "priority": "High",
+        "status": "open",
+        "createdAgo": 10,
+        "area": "Rampe 2",
+        "source": "safety-cross"
+      },
+      {
+        "title": "Spätschicht zur Stapelregel nachschulen",
+        "owner": "Anna",
+        "dueAgo": 6,
+        "priority": "Medium",
+        "status": "doing",
+        "createdAgo": 16,
+        "area": "Verladung",
+        "source": "damage-control"
+      },
+      {
+        "title": "Ersatzfolie für den Stretchwickler bestellen",
+        "owner": "Jonas",
+        "dueAgo": -4,
+        "priority": "Low",
+        "status": "open",
+        "createdAgo": 3,
+        "area": "Verpackung"
+      },
+      {
+        "title": "Gehweg an Tor 4 markieren",
+        "owner": "Fatima",
+        "dueAgo": 8,
+        "priority": "Medium",
+        "status": "done",
+        "createdAgo": 20,
+        "closedAgo": 9,
+        "area": "Rampe 1"
+      }
+    ],
+    "gemba": {
+      "walks": [
+        {
+          "layer": "team-lead",
+          "ago": 12,
+          "area": "Verladung",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyyn"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 11,
+          "area": "Sortierung",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyyy"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 10,
+          "area": "Verladung",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyny"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 9,
+          "area": "Verpackung",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyyy"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 8,
+          "area": "Verladung",
+          "walker": "Jonas",
+          "answers": "yyyyyyynyy"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 5,
+          "area": "Verladung",
+          "walker": "Jonas",
+          "answers": "yyyyyynyyn"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 4,
+          "area": "Sortierung",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyny"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 3,
+          "area": "Verladung",
+          "walker": "Jonas",
+          "answers": "yyyynyyyyn"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 2,
+          "area": "Verpackung",
+          "walker": "Jonas",
+          "answers": "yyyyyyyn-y"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 1,
+          "area": "Verladung",
+          "walker": "Jonas",
+          "answers": "yyyyynyyyn"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 31,
+          "area": "Verladung",
+          "walker": "Anna",
+          "answers": "yyyyyyyynn"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 24,
+          "area": "Sortierung",
+          "walker": "Anna",
+          "answers": "yyyyyyyyyn"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 17,
+          "area": "Verpackung",
+          "walker": "Anna",
+          "answers": "yyyyyyyyyy"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 10,
+          "area": "Verladung",
+          "walker": "Anna",
+          "answers": "yyyyyyyyny"
+        },
+        {
+          "layer": "site-lead",
+          "ago": 20,
+          "area": "Verladung",
+          "walker": "Petra",
+          "answers": "yyyyyyyyyy"
+        }
+      ]
+    },
+    "events": [
+      {
+        "ago": 16,
+        "text": "Pick-by-Light in Zone B in Betrieb",
+        "tools": [
+          "incomplete-control"
+        ]
+      }
+    ]
+  }
+}

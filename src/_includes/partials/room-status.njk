@@ -1,0 +1,222 @@
+{#- Room Status: the live room board of one hotel for housekeeping and reception; room-status.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-room-status>
+    <details class="dl-box rs-setup" data-setup>
+      <summary class="rs-setup-summary"><span class="kicker">1 · {{ "Rooms and team" | t(lang) }}</span> <span class="form-note" data-setup-count></span></summary>
+      <div class="rs-setup-body">
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-from-inspection hidden></button>
+        </div>
+        <fieldset class="rs-generate">
+          <legend class="rs-sub">{{ "Generate rooms" | t(lang) }}</legend>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="rs-floor-from">{{ "Floors from" | t(lang) }}</label>
+              <input id="rs-floor-from" type="number" min="0" max="99" step="1" inputmode="numeric" value="1">
+            </div>
+            <div class="field">
+              <label for="rs-floor-to">{{ "Floors to" | t(lang) }}</label>
+              <input id="rs-floor-to" type="number" min="0" max="99" step="1" inputmode="numeric" value="4">
+            </div>
+            <div class="field">
+              <label for="rs-room-from">{{ "Rooms from" | t(lang) }}</label>
+              <input id="rs-room-from" type="number" min="0" max="99" step="1" inputmode="numeric" value="1">
+            </div>
+            <div class="field">
+              <label for="rs-room-to">{{ "Rooms to" | t(lang) }}</label>
+              <input id="rs-room-to" type="number" min="0" max="99" step="1" inputmode="numeric" value="10">
+            </div>
+            <div class="field">
+              <label for="rs-gen-type">{{ "Room type" | t(lang) }}</label>
+              <select id="rs-gen-type">
+                {%- for type in cfg.roomTypes %}
+                <option value="{{ type.key }}"{% if type.key == "double" %} selected{% endif %}>{{ type.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+          </div>
+          <p class="form-note">{{ "Floor 4, rooms 1 to 30 gives 401 to 430. Run it again with another type to change some rooms, e.g. rooms 29 to 30 as suites." | t(lang) }}</p>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-generate>{{ "Add these rooms" | t(lang) }}</button>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="rs-room-paste">{{ "Or paste a room list" | t(lang) }} <span class="optional">{{ "one room per line: number, type, floor" | t(lang) }}</span></label>
+          <textarea id="rs-room-paste" rows="4" placeholder="{{ cfg.text.roomsPlaceholder }}"></textarea>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-import-rooms>{{ "Import rooms" | t(lang) }}</button>
+        </div>
+        <p class="form-note">{{ "New rooms start as vacant dirty (VD) until you set them or paste the status from the PMS." | t(lang) }}</p>
+        <p class="form-note" data-rooms-status aria-live="polite"></p>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="rs-attendants">{{ "Room attendants" | t(lang) }} <span class="optional">{{ "one per line, floors after a semicolon" | t(lang) }}</span></label>
+            <textarea id="rs-attendants" rows="4" placeholder="{{ cfg.text.attendantsPlaceholder }}"></textarea>
+          </div>
+          <div class="field">
+            <label for="rs-arrivals">{{ "Arrivals expected today" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="rs-arrivals" type="number" min="0" max="9999" step="1" inputmode="numeric">
+          </div>
+        </div>
+        <p class="form-note">{{ "Empty list: the attendants of Room Inspection in this browser, and the teams of the workplace profile. Without a number, the arrivals are counted from the rooms flagged “Arrival today”." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-assign>{{ "Assign rooms by section" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-clear>{{ "Clear the board" | t(lang) }}</button>
+        </div>
+      </div>
+    </details>
+
+    <div class="dl-box rs-board-box">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "Room board" | t(lang) }}</p>
+        <p class="form-note" data-board-head aria-live="polite"></p>
+      </div>
+      <div class="rs-day-note" data-day-note hidden>
+        <p data-day-text></p>
+        <button class="button-secondary" type="button" data-new-day>{{ "Start today's board" | t(lang) }}</button>
+      </div>
+      <div class="rs-tools" data-board-tools hidden>
+        <div class="rs-filters">
+          <div class="field">
+            <label for="rs-filter-status">{{ "Status" | t(lang) }}</label>
+            <select id="rs-filter-status">
+              <option value="">{{ "All statuses" | t(lang) }}</option>
+              <option value="dirty">{{ "To clean (VD, CO, OD)" | t(lang) }}</option>
+              {%- for s in cfg.statuses %}
+              <option value="{{ s.key }}">{{ s.code }} · {{ s.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="rs-filter-floor">{{ "Floor" | t(lang) }}</label>
+            <select id="rs-filter-floor"></select>
+          </div>
+          <div class="field">
+            <label for="rs-filter-attendant">{{ "Room attendant" | t(lang) }}</label>
+            <select id="rs-filter-attendant"></select>
+          </div>
+          <label class="rs-check" for="rs-filter-priority"><input id="rs-filter-priority" type="checkbox"> {{ "Priority only" | t(lang) }}</label>
+        </div>
+      </div>
+      <p class="form-note dl-log-status" data-board-status aria-live="polite"></p>
+      <div class="rs-board" data-board></div>
+      <p class="dl-empty" data-board-empty hidden>{{ "No rooms yet." | t(lang) }} {{ "Set up the rooms above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <ul class="rs-legend" aria-label="{{ 'Status codes' | t(lang) }}">
+        {%- for s in cfg.statuses %}
+        <li><span class="rs-swatch is-{{ s.key }}" aria-hidden="true"></span><strong>{{ s.code }}</strong> {{ s.name }}</li>
+        {%- endfor %}
+        {%- for f in cfg.flags %}
+        <li><strong>{{ f.code }}</strong> {{ f.name }}</li>
+        {%- endfor %}
+        <li><strong>▶</strong> {{ "cleaning in progress, since" | t(lang) }}</li>
+      </ul>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-history-csv>{{ "Download the history (CSV)" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <details class="dl-box rs-import-box">
+      <summary class="rs-setup-summary"><span class="kicker">3 · {{ "Status from the PMS" | t(lang) }}</span> <span class="form-note">{{ "paste room and code" | t(lang) }}</span></summary>
+      <div class="rs-setup-body">
+        <div class="field">
+          <label for="rs-import">{{ "Paste the room status report" | t(lang) }} <span class="optional">{{ "one room per line: room, status code" | t(lang) }}</span></label>
+          <textarea id="rs-import" rows="5" placeholder="{{ cfg.text.importPlaceholder }}"></textarea>
+        </div>
+        <p class="form-note">{{ "Known codes: VD, VC, VI, OC or OCC, OD, DO, CO, OOO, OOS, in any case. A code it does not know is listed and the room stays as it was." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-import>{{ "Import status" | t(lang) }}</button>
+        </div>
+        <p class="form-note rs-import-status" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Clean, then inspected." | t(lang) }}</strong> {{ "VC rooms are inspected in" | t(lang) }} <a class="inline-link" href="{{ '/tools/room-inspection/' | local(lang) }}">{{ "Room Inspection" | t(lang) }}</a>; {{ "the repairs of OOO rooms are planned in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/maintenance-planner/' | local(lang) }}" data-maintenance>{{ "Maintenance Planner" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results rs-results" data-results tabindex="-1" hidden></section>
+<section class="shell rs-print" data-print hidden></section>
+
+<dialog class="rs-sheet" data-sheet aria-labelledby="rs-sheet-title">
+  <div class="rs-sheet-head">
+    <div>
+      <h2 id="rs-sheet-title" data-sheet-title></h2>
+      <p class="form-note" data-sheet-meta></p>
+    </div>
+    <button class="button-secondary" type="button" data-sheet-close>{{ "Close" | t(lang) }}</button>
+  </div>
+  <fieldset class="rs-pick">
+    <legend class="rs-sub">{{ "Status" | t(lang) }}</legend>
+    <div class="rs-pick-grid">
+      {%- for s in cfg.statuses %}
+      <label class="rs-pick-item is-{{ s.key }}" for="rs-status-{{ s.key }}"><input id="rs-status-{{ s.key }}" type="radio" name="rs-status" value="{{ s.key }}"><span><strong>{{ s.code }}</strong> {{ s.name }}</span></label>
+      {%- endfor %}
+    </div>
+  </fieldset>
+  <fieldset class="rs-pick">
+    <legend class="rs-sub">{{ "Flags" | t(lang) }}</legend>
+    <div class="rs-flag-grid">
+      {%- for f in cfg.flags %}
+      <label class="rs-check" for="rs-flag-{{ f.key }}"><input id="rs-flag-{{ f.key }}" type="checkbox" value="{{ f.key }}" data-flag> <strong>{{ f.code }}</strong> {{ f.name }}</label>
+      {%- endfor %}
+    </div>
+  </fieldset>
+  <div class="dl-grid">
+    <div class="field">
+      <label for="rs-attendant">{{ "Room attendant" | t(lang) }}</label>
+      <select id="rs-attendant"></select>
+    </div>
+    <div class="field dl-wide">
+      <label for="rs-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+      <input id="rs-note" type="text" autocomplete="off" maxlength="300" placeholder="{{ cfg.text.notePlaceholder }}">
+    </div>
+  </div>
+  <fieldset class="rs-ooo" data-ooo hidden>
+    <legend class="rs-sub">{{ "Out of order or out of service" | t(lang) }}</legend>
+    <div class="dl-grid">
+      <div class="field">
+        <label for="rs-ooo-reason">{{ "Reason" | t(lang) }}</label>
+        <select id="rs-ooo-reason">
+          <option value="">–</option>
+          {%- for r in cfg.oooReasons %}
+          <option value="{{ r.key }}">{{ r.name }}</option>
+          {%- endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="rs-ooo-back">{{ "Expected back" | t(lang) }}</label>
+        <input id="rs-ooo-back" type="date">
+      </div>
+    </div>
+    <div class="tool-actions">
+      <button class="button-secondary" type="button" data-send-ooo>{{ "Add to actions" | t(lang) }}</button>
+      <a class="button-ghost" href="{{ '/tools/maintenance-planner/' | local(lang) }}">{{ "Open the Maintenance Planner" | t(lang) }}</a>
+    </div>
+  </fieldset>
+  <div class="tool-actions">
+    <button class="button-primary" type="button" data-start aria-pressed="false">{{ "Start cleaning" | t(lang) }}</button>
+  </div>
+  <p class="form-note rs-inspect" data-inspect hidden><a class="inline-link" href="{{ '/tools/room-inspection/' | local(lang) }}">{{ "Inspect in Room Inspection" | t(lang) }}</a> · <span data-inspect-room></span></p>
+  <p class="form-note" data-sheet-status aria-live="polite"></p>
+  <p class="result-label" data-sheet-history-head hidden>{{ "Today's changes" | t(lang) }}</p>
+  <ol class="rs-changes" data-sheet-history></ol>
+</dialog>
+
+<script type="application/json" id="room-status-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/room-status.js' | assetUrl }}" defer></script>

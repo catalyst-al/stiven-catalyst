@@ -1,5 +1,8 @@
-{#- Operations Report: the weekly or monthly management report, written from what the other tools hold in this browser; ops-report.js does the rest. The OEE stop reasons of the page's language travel along, so planned stops count as the OEE tool counts them. -#}
+{#- Operations Report: the weekly or monthly management report, written from what the other tools hold in this browser; ops-report.js does the rest. The OEE stop reasons of the page's language travel along, so planned stops count as the OEE tool counts them; so do the retention rules of Lost & Found, the checklists of Room Inspection and the PM target of the Maintenance Planner, whose scripts the page loads for their arithmetic. -#}
 {%- set oeeData = de.oee if lang == "de" else (sq.oee if lang == "sq" else oee) -%}
+{%- set lfData = de.lostFound if lang == "de" else (sq.lostFound if lang == "sq" else lostFound) -%}
+{%- set riData = de.roomInspection if lang == "de" else (sq.roomInspection if lang == "sq" else roomInspection) -%}
+{%- set mpData = de.maintenancePlanner if lang == "de" else (sq.maintenancePlanner if lang == "sq" else maintenancePlanner) -%}
 <section class="shell tool-layout or-setup">
   <div class="tool-panel" data-ops-report>
     <div class="dl-box">
@@ -53,9 +56,17 @@
 
 <script type="application/json" id="ops-report-data">{{ cfg | scriptJson | safe }}</script>
 <script type="application/json" id="ops-report-oee">{{ (oeeData.reasons if oeeData else []) | scriptJson | safe }}</script>
+<script type="application/json" id="ops-report-tools">{{ {
+  "lostFound": ({ "retention": lfData.retention, "categories": lfData.categories, "followUpDays": lfData.followUpDays, "dueSoonDays": lfData.dueSoonDays } if lfData else null),
+  "roomInspection": ({ "threshold": riData.threshold, "zones": riData.zones, "templates": riData.templates } if riData else null),
+  "maintenance": ({ "target": mpData.target } if mpData else null)
+} | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/lost-found.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/room-inspection.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/maintenance-planner.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/ops-report.js' | assetUrl }}" defer></script>

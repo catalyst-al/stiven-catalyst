@@ -294,5 +294,37 @@
     "summary": "Plan the preventive maintenance and statutory checks of every asset by date or operating hours, log what was done, postponed or broke down, and see what is overdue, the PM compliance, MTBF and MTTR, and the work list of the week.",
     "url": "/tools/maintenance-planner/",
     "cta": "Plan maintenance"
+  },
+  {
+    "name": "Signals",
+    "type": "Overview",
+    "time": "2 min",
+    "summary": "Every tool in this browser read in one ranked morning list: control chart signals (p, c, u and I-MR with the run and trend rules), missed targets, overdue actions, maintenance, red tags and ideas, and safety on top.",
+    "url": "/tools/signals/",
+    "cta": "Read the signals"
+  },
+  {
+    "name": "Room Status",
+    "type": "Hotel",
+    "time": "Ongoing",
+    "summary": "The live room board of the shift: every room by floor with its housekeeping code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), DND, VIP and arrival flags and its attendant. It shows the next room to clean, the rooms ready for today's arrivals, the out-of-order share and the minutes from check-out to clean and from clean to inspected.",
+    "url": "/tools/room-status/",
+    "cta": "Open the room board"
+  },
+  {
+    "name": "Guest Complaints",
+    "type": "Hotel",
+    "time": "Ongoing",
+    "summary": "The complaint and service-recovery log of the front office: LEARN, the action, the compensation in euros, the time to resolve and the call back. Complaints per 100 occupied room nights, the share resolved within target, repeat rooms, the Pareto of the categories and a reply to the guest.",
+    "url": "/tools/guest-complaints/",
+    "cta": "Open the log"
+  },
+  {
+    "name": "Housekeeping Planner",
+    "type": "Hotel",
+    "time": "10 min",
+    "summary": "The executive housekeeper's staffing plan: departures, stay-overs, linen changes, VIP rooms, deep cleans and public areas become workload minutes (or credits) and the attendants needed against those scheduled, with hours, labour cost and minutes per occupied room. Sections balanced by minutes on as few floors as possible, printed per attendant or set into Room Status, and the week from the forecast.",
+    "url": "/tools/housekeeping-planner/",
+    "cta": "Plan the housekeeping team"
   }
 ]

@@ -220,7 +220,10 @@ window.ChartKit = (() => {
     rule(options.target, C.target, tx("Target"), "2 3");
     const labels = series[0]?.points || [];
     const every = Math.ceil(labels.length / 8);
-    labels.forEach((p, i) => { if (i % every === 0 || i === labels.length - 1) svg.append(svgEl("text", { x: x(i), y: top + plotH + 18, "text-anchor": "middle", "font-size": 11, fill: C.text }, shorten(p.x, 10))); });
+    // The last point is always labelled; a regular label too close before it is left out so the two never overlap.
+    const last = labels.length - 1;
+    const labelled = (i) => i === last || (i % every === 0 && last - i >= Math.ceil(every * 0.6));
+    labels.forEach((p, i) => { if (labelled(i)) svg.append(svgEl("text", { x: x(i), y: top + plotH + 18, "text-anchor": "middle", "font-size": 11, fill: C.text }, shorten(p.x, 10))); });
     series.forEach((s, si) => {
       const color = s.color || SERIES[si % SERIES.length];
       const d = s.points.map((p, i) => (Number.isFinite(p.y) ? `${i && Number.isFinite(s.points[i - 1].y) ? "L" : "M"}${x(i).toFixed(1)} ${y(p.y).toFixed(1)}` : "")).join(" ");
@@ -232,10 +235,13 @@ window.ChartKit = (() => {
         svg.append(tip(dot, p.tip || `${p.x}${series.length > 1 ? ` · ${s.label}` : ""}: ${format(p.y)}${options.unit ? ` ${options.unit}` : ""}`));
       });
     });
+    // Each label takes the room its text needs (about 6.6 px a character at 12 px), so a long one never runs into the next.
+    let lx = left;
     if (series.length > 1) series.forEach((s, i) => {
-      const lx = left + i * 120;
+      const label = shorten(s.label, 16);
       svg.append(svgEl("rect", { x: lx, y: 8, width: 12, height: 4, fill: s.color || SERIES[i % SERIES.length] }));
-      svg.append(svgEl("text", { x: lx + 17, y: 14, "font-size": 12, fill: C.text }, shorten(s.label, 16)));
+      svg.append(svgEl("text", { x: lx + 17, y: 14, "font-size": 12, fill: C.text }, label));
+      lx += 17 + Math.ceil(String(label).length * 6.6) + 18;
     });
     else if (options.unit) svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, fill: C.muted }, options.unit));
     return svg;

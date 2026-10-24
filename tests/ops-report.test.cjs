@@ -16,6 +16,9 @@ const close = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-9, `${message}: 
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const DATA = { en: 'src/_data/opsReport.json', de: 'src/_data/de/opsReport.json', sq: 'src/_data/sq/opsReport.json' };
 const OEE = { en: 'src/_data/oee.json', de: 'src/_data/de/oee.json', sq: 'src/_data/sq/oee.json' };
+const dataOf = (name, lang) => read(lang === 'en' ? `src/_data/${name}.json` : `src/_data/${lang}/${name}.json`);
+const OTHER = ['lostFound', 'roomInspection', 'maintenancePlanner'];
+const TOOL_SCRIPTS = ['lost-found', 'room-inspection', 'maintenance-planner'];
 
 const env = new nunjucks.Environment(new nunjucks.FileSystemLoader('src/_includes'), { autoescape: false });
 env.addFilter('t', (text) => text);
@@ -23,8 +26,20 @@ env.addFilter('local', (url, lang) => (lang && lang !== 'en' ? `/${lang}${url}` 
 env.addFilter('assetUrl', (url) => url);
 env.addFilter('scriptJson', (value) => JSON.stringify(value).replace(/</g, '\\u003c'));
 const partial = (lang) => env.render('partials/ops-report.njk', {
-  cfg: read(DATA[lang]), lang: lang === 'en' ? undefined : lang, oee: read(OEE.en), de: { oee: read(OEE.de) }, sq: { oee: read(OEE.sq) },
+  cfg: read(DATA[lang]), lang: lang === 'en' ? undefined : lang, oee: read(OEE.en),
+  ...Object.fromEntries(OTHER.map((name) => [name, dataOf(name, 'en')])),
+  de: { oee: read(OEE.de), ...Object.fromEntries(OTHER.map((name) => [name, dataOf(name, 'de')])) },
+  sq: { oee: read(OEE.sq), ...Object.fromEntries(OTHER.map((name) => [name, dataOf(name, 'sq')])) },
 }).replace(/<script src=[^>]*><\/script>/g, '');
+// The tools the report reads with their own arithmetic, as the page hands them in (the data files of the language).
+const toolsFor = (w, lang = 'en') => {
+  const lf = dataOf('lostFound', lang), ri = dataOf('roomInspection', lang), mp = dataOf('maintenancePlanner', lang);
+  return {
+    lostFound: { M: w.LostFoundMath, cfg: { retention: lf.retention, categories: lf.categories, followUpDays: lf.followUpDays, dueSoonDays: lf.dueSoonDays } },
+    roomInspection: { M: w.RoomInspectionMath, cfg: { threshold: ri.threshold, zones: ri.zones, templates: ri.templates } },
+    maintenance: { M: w.MaintenancePlannerMath, cfg: { target: mp.target } },
+  };
+};
 
 const NOW = '2026-10-24T10:00:00Z'; // a Saturday: last week is 12–18 October
 const load = ({ lang = 'en', page = true, now = NOW, storage = {}, scripts = [] } = {}) => {
@@ -41,7 +56,7 @@ const load = ({ lang = 'en', page = true, now = NOW, storage = {}, scripts = [] 
   w.Blob = class { constructor(parts, options) { this.parts = parts; this.type = options?.type; } };
   Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async (text) => { w.copied = text; } } });
   Object.entries(storage).forEach(([key, value]) => w.localStorage.setItem(key, JSON.stringify(value)));
-  for (const file of ['tool-kit', 'chart-kit', 'workplace', 'actions-store', 'docx-kit', ...scripts, 'ops-report']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  for (const file of ['tool-kit', 'chart-kit', 'workplace', 'actions-store', 'docx-kit', ...TOOL_SCRIPTS, ...scripts, 'ops-report']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
   return w;
 };
 const click = (w, node) => node.dispatchEvent(new w.MouseEvent('click', { bubbles: true }));
@@ -240,6 +255,142 @@ test('the hotel and the Kaizen Board count as Hotel KPIs and the board do', () =
   assert.equal(M.improvement({ rows: ideas }, { from: '2026-07-01', to: '2026-07-31' }), null);
 });
 
+test('Lost & Found counts as the register does: logged in the period, back with the owner by its end, past the keep-until date', () => {
+  const w = load({ page: false });
+  const M = w.OpsReportMath;
+  const tools = toolsFor(w);
+  const range = { from: '2026-10-12', to: '2026-10-18' };
+  const rows = [
+    { date: '2026-10-12', category: 'phone', value: 'high', steps: [{ status: 'contacted', date: '2026-10-12' }, { status: 'returned', date: '2026-10-14' }] },
+    { date: '2026-10-13', category: 'bag', value: 'medium', steps: [{ status: 'contacted', date: '2026-10-13' }, { status: 'returned', date: '2026-10-21' }] },
+    { date: '2026-10-16', category: 'clothing', value: 'low', steps: [] },
+    // Documents are kept 7 days: found on the 8th, still here on the 18th.
+    { date: '2026-10-08', category: 'documents', value: 'high', steps: [{ status: 'contacted', date: '2026-10-08' }] },
+    // A coat found 100 days before the end and never claimed: past its 90 days.
+    { date: '2026-07-10', category: 'clothing', value: 'low', steps: [] },
+    // The same, but given to charity before the end: closed.
+    { date: '2026-07-10', category: 'clothing', value: 'low', steps: [{ status: 'charity', date: '2026-10-11' }] },
+    // Past its date, but decided on after the end: it was still open then.
+    { date: '2026-07-01', category: 'keys', value: 'low', steps: [{ status: 'destroyed', date: '2026-10-20' }] },
+  ];
+  const lf = plain(M.lostFound({ rows }, range, tools.lostFound));
+  assert.equal(lf.logged, 3, 'three found in the period');
+  assert.equal(lf.returned, 1, 'the bag went back after the end, so it does not count yet');
+  close(lf.returnRate, 1 / 3, 'one of three back with its owner');
+  assert.equal(lf.over, 3, 'the passport (7 days), the coat (90 days) and the keys, decided on only after the end');
+  // The register itself, on the last day of the period with the steps known by then, says the same.
+  const L = w.LostFoundMath;
+  const cfg = tools.lostFound.cfg;
+  const asOf = rows.map((row) => ({ ...row, steps: row.steps.filter((step) => step.date <= range.to) }));
+  assert.equal(L.stats(asOf, range.to, cfg, L.rules(cfg, {})).over, lf.over);
+  // A retention typed into the register wins: 120 days for low-value items keeps the coat and the keys.
+  assert.equal(M.lostFound({ rows, retLow: '120' }, range, tools.lostFound).over, 1);
+  assert.equal(M.lostFound({ rows: [] }, range, tools.lostFound), null, 'nothing logged, nothing over: no part');
+  assert.equal(M.lostFound({ rows }, range, null), null, 'without the register\'s arithmetic there is no part');
+});
+
+test('Room Inspection counts as the tool does: the pass mark, a failed critical item, re-checks left out, the item that fails most', () => {
+  const w = load({ page: false });
+  const M = w.OpsReportMath;
+  const tools = toolsFor(w);
+  const R = w.RoomInspectionMath;
+  const cfg = tools.roomInspection.cfg;
+  const zones = cfg.zones.map((z) => z.key);
+  const items = R.itemsOf(cfg.templates.standard, zones);
+  const all = (answer, fails = []) => Object.fromEntries(items.map((item) => [item.qid, fails.includes(item.qid) ? 'fail' : answer]));
+  const range = { from: '2026-10-12', to: '2026-10-18' };
+  const rows = [
+    { date: '2026-10-13', time: '10:00', room: '101', template: 'standard', answers: all('pass') },
+    // A critical item fails the room on its own; the same room again that day is a re-check.
+    { date: '2026-10-13', time: '10:30', room: '102', template: 'standard', answers: all('pass', ['bathroom-0']) },
+    { date: '2026-10-13', time: '11:05', room: '102', template: 'standard', answers: all('pass') },
+    // Two items of weight 2 fail: 58 of 62 = 93.5 %, above the pass mark of 90 %.
+    { date: '2026-10-14', time: '09:40', room: '103', template: 'standard', answers: all('pass', ['bathroom-2', 'minibar-1']) },
+    { date: '2026-10-15', time: '09:40', room: '104', template: 'standard', answers: all('pass', ['bathroom-2']) },
+    { date: '2026-10-08', time: '09:40', room: '101', template: 'standard', answers: all('pass', ['bathroom-2']) },
+  ];
+  const ri = plain(M.inspection({ rows }, range, tools.roomInspection));
+  assert.equal(ri.inspections, 5, 'five in the period, the re-check among them');
+  assert.deepEqual([ri.first, ri.firstPass], [4, 3], 'the re-check is no first inspection');
+  close(ri.rate, 3 / 4, 'first-time pass rate');
+  assert.equal(ri.threshold, 0.9);
+  assert.deepEqual(ri.fault, { name: 'Shower screen, tiles and grout free of lime and mould', zone: 'Bathroom', count: 2, share: 2 / 4 });
+  // The tool's own arithmetic on the same rows.
+  const own = R.overall(R.annotate(rows, (row) => R.itemsOf(cfg.templates[row.template], zones), cfg.threshold).filter((row) => row.date >= range.from && row.date <= range.to));
+  assert.deepEqual([own.first, own.firstPass], [ri.first, ri.firstPass]);
+  // The pass mark saved in the tool counts: at 95 % room 103 fails too.
+  const strict = plain(M.inspection({ rows, threshold: 0.95 }, range, tools.roomInspection));
+  assert.deepEqual([strict.firstPass, strict.threshold], [2, 0.95]);
+  assert.equal(M.inspection({ rows }, { from: '2026-09-01', to: '2026-09-30' }, tools.roomInspection), null);
+});
+
+test('the Maintenance Planner counts as the planner does: PM compliance, overdue at the end, breakdowns, MTTR and MTBF by hand', () => {
+  const w = load({ page: false });
+  const M = w.OpsReportMath;
+  const tools = toolsFor(w);
+  // A weekly task (no tolerance) last done on 28 September: due 5 October, done that day; due 12 October, done three days
+  // late on the 15th; due 22 October, not done.
+  const task = { id: 't1', text: 'Check the sorter belt', every: 1, unit: 'weeks', hours: 0, who: 'internal', minutes: 30, statutory: false, checklist: [], last: '2026-09-28', lastHours: null, start: '' };
+  const saved = {
+    assets: [{ id: 'a1', tag: 'SRT-1', name: 'Sorter 1', tasks: [task] }, { id: 'a2', tag: 'FL-01', name: 'Forklift 1', tasks: [] }],
+    rows: [
+      { id: 'r1', kind: 'done', asset: 'a1', task: 't1', date: '2026-10-05', minutes: 30, hours: null },
+      { id: 'r2', kind: 'done', asset: 'a1', task: 't1', date: '2026-10-15', minutes: 30, hours: null },
+      { id: 'r3', kind: 'breakdown', asset: 'a1', date: '2026-10-13', minutes: 30, cause: 'sensor' },
+      { id: 'r4', kind: 'breakdown', asset: 'a2', date: '2026-10-16', minutes: 90, cause: 'battery' },
+      { id: 'r5', kind: 'breakdown', asset: 'a2', date: '2026-10-08', minutes: 45, cause: 'battery' },
+      { id: 'r6', kind: 'breakdown', asset: 'gone', date: '2026-10-14', minutes: 500, cause: 'other' },
+    ],
+  };
+  const today = '2026-10-24';
+  const last = plain(M.maintenance(saved, { from: '2026-10-12', to: '2026-10-18' }, today, tools.maintenance));
+  assert.deepEqual([last.scheduled, last.onTime, last.pm], [1, 0, 0], 'due on the 12th, done on the 15th: late');
+  assert.equal(last.overdue, 0, 'at the end of the 18th the next date was the 22nd');
+  assert.deepEqual([last.breakdowns, last.minutes], [2, 120], 'an entry of an asset no longer in the plan is left out');
+  assert.equal(last.mttr, 60, 'MTTR = 120 minutes / 2');
+  // MTBF = operating time / failures: 2 assets × 7 days × 24 h = 336 h, less the 2 h stopped, over 2 = 167 h.
+  close(last.mtbf, (2 * 7 * 24 - 120 / 60) / 2, 'MTBF');
+  assert.equal(last.mtbf, 167);
+  assert.equal(last.target, read('src/_data/maintenancePlanner.json').target);
+  const before = plain(M.maintenance(saved, { from: '2026-10-05', to: '2026-10-11' }, today, tools.maintenance));
+  assert.deepEqual([before.scheduled, before.onTime, before.pm, before.overdue, before.breakdowns], [1, 1, 1, 0, 1]);
+  assert.equal(before.mttr, null, 'one breakdown is not enough to say');
+  assert.equal(before.mtbf, null);
+  const now = plain(M.maintenance(saved, { from: '2026-10-19', to: '2026-10-24' }, today, tools.maintenance));
+  assert.deepEqual([now.scheduled, now.onTime, now.overdue], [1, 0, 1], 'due on the 22nd and still open today');
+  // The planner's own compliance over the same weeks.
+  const P = w.MaintenancePlannerMath;
+  const events = saved.rows.filter((r) => r.asset === 'a1');
+  const h = P.history(task, events, P.meterPoints(events));
+  assert.deepEqual(plain(P.compliance([h], '2026-10-05', '2026-10-24', today)), { scheduled: 3, onTime: 1, rate: 1 / 3 });
+  assert.equal(M.maintenance({ assets: [], rows: saved.rows }, { from: '2026-10-12', to: '2026-10-18' }, today, tools.maintenance), null, 'no plan, no part');
+});
+
+test('the hotel and equipment sections take in their other tools, each part against the period before, even without the first tool', () => {
+  const w = load({ page: false });
+  const M = w.OpsReportMath;
+  const tools = toolsFor(w);
+  const range = M.period('lastWeek', '2026-10-24');
+  const src = {
+    lostFound: { rows: [{ date: '2026-10-13', category: 'phone', value: 'high', steps: [{ status: 'returned', date: '2026-10-14' }] }, { date: '2026-10-06', category: 'bag', value: 'medium', steps: [] }] },
+    maintenance: { assets: [{ id: 'a1', tag: 'SRT-1', tasks: [] }], rows: [{ id: 'b1', kind: 'breakdown', asset: 'a1', date: '2026-10-14', minutes: 40, cause: 'jam' }] },
+  };
+  const list = M.sections(src, range, range.before, { tools, today: '2026-10-24' });
+  assert.deepEqual(plain(list.map((s) => s.key)), ['equipment', 'hotel']);
+  const [eq, hotel] = list;
+  assert.equal(eq.data, null, 'no OEE');
+  assert.deepEqual(Object.keys(eq.parts), ['maintenance']);
+  assert.deepEqual(plain(eq.metrics.map((m) => [m.key, m.part, m.value, m.before])), [['pm', 'maintenance', null, null], ['pmOverdue', 'maintenance', 0, null], ['breakdowns', 'maintenance', 1, null], ['downtime', 'maintenance', 40, null]]);
+  assert.equal(hotel.data, null, 'no Hotel KPIs');
+  assert.deepEqual(plain(hotel.metrics.map((m) => [m.key, m.value, m.before])), [['lostLogged', 1, 1], ['lostReturned', 1, 0], ['lostOver', 0, 0]]);
+  assert.equal(hotel.metrics[1].cmp.trend, 'better');
+  // Without the tools' arithmetic the parts stay out, and so do the sections.
+  assert.deepEqual(plain(M.sections(src, range, range.before, {}).map((s) => s.key)), []);
+  const counts = M.counts(src, range);
+  assert.deepEqual([counts['lost-found'], counts['maintenance-planner'], counts['room-inspection']], [1, 1, 0]);
+  assert.equal(M.holdsAnything({ maintenance: { assets: [{ id: 'a1' }], rows: [] } }), true, 'a plan without a log yet is data');
+});
+
 test('actions: opened, closed and verified in the period, overdue as the list stood at its end, and the handovers', () => {
   const { OpsReportMath: M } = load({ page: false });
   const range = { from: '2026-10-12', to: '2026-10-18' };
@@ -284,31 +435,47 @@ test('the comparison: arrows for the direction, words for better or worse, the t
 });
 
 test('the example: fourteen weeks for every source, the same on the same day, and every section of the report', () => {
-  const { OpsReportMath: M } = load({ page: false });
+  const w = load({ page: false });
+  const { OpsReportMath: M } = w;
+  const tools = toolsFor(w);
   const cfg = read(DATA.en);
-  const a = plain(M.exampleSources(cfg.example, '2026-10-24'));
-  const b = plain(M.exampleSources(cfg.example, '2026-10-24'));
+  const a = plain(M.exampleSources(cfg.example, '2026-10-24', tools));
+  const b = plain(M.exampleSources(cfg.example, '2026-10-24', tools));
   assert.deepEqual(a, b, 'seeded: the same day gives the same example');
-  ['damage', 'incomplete', 'night', 'delay', 'safety', 'oee', 'fiveS', 'gemba', 'hotel', 'kaizen'].forEach((key) => assert.ok(a[key].rows.length > 0, key));
+  ['damage', 'incomplete', 'night', 'delay', 'safety', 'oee', 'maintenance', 'fiveS', 'gemba', 'hotel', 'lostFound', 'roomInspection', 'kaizen'].forEach((key) => assert.ok(a[key].rows.length > 0, key));
+  assert.equal(a.maintenance.assets.length, 5);
+  assert.ok(a.maintenance.rows.filter((r) => r.kind === 'breakdown').length >= 20, 'breakdowns through the fourteen weeks');
+  assert.ok(a.roomInspection.rows.length > 500 && a.lostFound.rows.length > 50);
+  // The example's maintenance log is one the planner reads: its tasks have due dates and the open ones are overdue today.
+  const P = w.MaintenancePlannerMath;
+  const overdue = a.maintenance.assets.flatMap((asset) => asset.tasks.map((task) => { const ev = a.maintenance.rows.filter((r) => r.asset === asset.id); return P.statusOf(P.nextDue(task, ev, P.meterPoints(ev)).due, '2026-10-24'); })).filter((st) => st === 'overdue').length;
+  assert.equal(overdue, cfg.example.maintenance.open.length, 'the tasks left open are overdue');
   assert.ok(a.actions.length >= 5);
   assert.ok(a.handover.history.length > 0);
   const dates = ['damage', 'delay', 'safety', 'oee', 'hotel'].flatMap((key) => a[key].rows.map((r) => r.date)).sort();
   assert.equal(dates.at(-1) <= '2026-10-24', true, 'nothing in the future');
   assert.ok(dates[0] <= '2026-07-20', 'the month before last month is covered');
   for (const [name, today] of [['lastWeek', '2026-10-24'], ['thisMonth', '2026-10-24'], ['lastMonth', '2026-10-24'], ['lastWeek', '2026-11-02']]) {
-    const src = M.exampleSources(cfg.example, today);
+    const src = M.exampleSources(cfg.example, today, tools);
     const p = M.period(name, today);
-    const list = M.sections(src, p, p.before, { targets: src.workplace.targets, reasons: read(OEE.en).reasons });
+    const list = M.sections(src, p, p.before, { targets: src.workplace.targets, reasons: read(OEE.en).reasons, tools, today });
     assert.deepEqual(plain(list.map((s) => s.key)), ['safety', 'quality', 'delivery', 'equipment', 'workplace', 'hotel', 'improvement', 'actions'], `${name} on ${today}`);
-    list.forEach((s) => assert.ok(s.metrics.length >= 2 && s.metrics.length <= 4, `${s.key}: two to four numbers`));
+    // Each tool of a section shows two to four numbers: the section's own, then each of its parts.
+    list.forEach((s) => [undefined, ...Object.keys(s.parts || {})].forEach((part) => {
+      const n = s.metrics.filter((m) => m.part === part).length;
+      assert.ok(n >= 2 && n <= 4, `${s.key}${part ? ` · ${part}` : ''}: two to four numbers (${n})`);
+    }));
+    assert.deepEqual(Object.keys(list.find((s) => s.key === 'equipment').parts), ['maintenance']);
+    assert.deepEqual(Object.keys(list.find((s) => s.key === 'hotel').parts), ['lostFound', 'inspection']);
+    assert.ok(list.flatMap((s) => s.metrics).filter((m) => m.part).every((m) => Number.isFinite(m.before) || m.value === null || m.before === null), 'the parts have a period before');
     const high = M.highlights(list);
     assert.ok(high.focus.length === 3, 'three focus items');
     assert.notEqual(high.risk.kind, 'none');
   }
   // Last week holds the example's accident, which leads the risk and the focus.
-  const src = M.exampleSources(cfg.example, '2026-10-24');
+  const src = M.exampleSources(cfg.example, '2026-10-24', tools);
   const p = M.period('lastWeek', '2026-10-24');
-  const high = M.highlights(M.sections(src, p, p.before, { targets: src.workplace.targets, reasons: read(OEE.en).reasons }));
+  const high = M.highlights(M.sections(src, p, p.before, { targets: src.workplace.targets, reasons: read(OEE.en).reasons, tools, today: '2026-10-24' }));
   assert.equal(high.risk.kind, 'accident');
   assert.equal(high.focus[0].kind, 'accident');
 });
@@ -341,6 +508,17 @@ test('a first visit opens on the example: every section with numbers, a chart an
     const cfg = read(DATA[lang]);
     assert.deepEqual(sectionTitles(w), [cfg.sections.summary, cfg.sections.safety, cfg.sections.quality, cfg.sections.delivery, cfg.sections.equipment, cfg.sections.workplace, cfg.sections.hotel, cfg.sections.improvement, cfg.sections.actions, cfg.sections.focusWeek]);
     assert.ok(doc.querySelectorAll('.or-section svg.ck-chart').length >= 6, `${lang}: charts`);
+    // Lost & Found and Room Inspection in the hotel, the Maintenance Planner with the equipment: a title, numbers, a sentence.
+    assert.deepEqual([...doc.querySelectorAll('.or-hotel .or-part-title')].map((h) => h.textContent), [cfg.parts.lostFound, cfg.parts.inspection]);
+    assert.deepEqual([...doc.querySelectorAll('.or-equipment .or-part-title')].map((h) => h.textContent), [cfg.parts.maintenance]);
+    doc.querySelectorAll('.or-part').forEach((part) => {
+      assert.ok(part.querySelectorAll('.or-stat').length >= 2, `${lang}: numbers in ${part.className}`);
+      assert.ok(part.querySelector('.or-sentence').textContent.length > 30, `${lang}: a sentence in ${part.className}`);
+    });
+    assert.match(doc.querySelector('.or-part-inspection .or-sentence').textContent, /90\s?%/, `${lang}: the pass mark in the sentence`);
+    assert.match(doc.querySelector('.or-part-maintenance .or-sentence').textContent, /MTBF .* MTTR /, `${lang}: MTBF and MTTR where there are two breakdowns or more`);
+    const sourceNames = [...doc.querySelectorAll('.or-sources li a')].map((a) => a.textContent);
+    ['maintenance-planner', 'lost-found', 'room-inspection'].forEach((tool) => assert.ok(sourceNames.includes(cfg.sources[tool]), `${lang}: ${tool} in the list of sources`));
     assert.equal(doc.querySelectorAll('.or-focus-list li').length, 3);
     assert.ok(!doc.querySelector('.dl-example-note').hidden, 'the example note says so');
     assert.ok(doc.querySelector('[data-empty]').hidden);

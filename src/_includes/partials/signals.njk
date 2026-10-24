@@ -1,0 +1,73 @@
+{#- Signals: one morning list of everything that needs attention, read from what the other tools hold in this browser. The page sets `cfg` to the Signals data; the stop reasons of OEE, the keep-until days of Lost & Found, the layers of the Gemba Walk and the scopes of the 5S Audit come from those tools' own data, in the page's language. signals.js does the rest. -#}
+{%- set oeeD = de.oee if lang == "de" else (sq.oee if lang == "sq" else oee) -%}
+{%- set lfD = de.lostFound if lang == "de" else (sq.lostFound if lang == "sq" else lostFound) -%}
+{%- set gwD = de.gembaWalk if lang == "de" else (sq.gembaWalk if lang == "sq" else gembaWalk) -%}
+{%- set fsD = de.fiveSAudit if lang == "de" else (sq.fiveSAudit if lang == "sq" else fiveSAudit) -%}
+<section class="shell tool-layout dl-setup sg-setup">
+  <form class="tool-panel" data-signals novalidate>
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Show" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sg-period">{{ "Period" | t(lang) }}</label>
+          <select id="sg-period" name="period">
+            <option value="30">{{ "Last 30 days" | t(lang) }}</option>
+            <option value="60">{{ "Last 60 days" | t(lang) }}</option>
+            <option value="90" selected>{{ "Last 90 days" | t(lang) }}</option>
+            <option value="180">{{ "Last 180 days" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sg-severity">{{ "Minimum severity" | t(lang) }}</label>
+          <select id="sg-severity" name="severity">
+            <option value="low">{{ "All signals" | t(lang) }}</option>
+            <option value="medium">{{ "Medium and high" | t(lang) }}</option>
+            <option value="high">{{ "High only" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sg-tool">{{ "Tool" | t(lang) }}</label>
+          <select id="sg-tool" name="tool">
+            <option value="">{{ "All tools" | t(lang) }}</option>
+          </select>
+        </div>
+      </div>
+      <p class="form-note">{{ "The control charts read the chosen period. Safety, targets and overdue items are always read as of today." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-example>{{ "Show the example" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-restore hidden>{{ "Show the dismissed again" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-status aria-live="polite"></p>
+      <p class="dl-empty" data-empty hidden>{{ "No tool holds data in this browser yet. Log your days in the tools you use and Signals reads them here every morning, or look at the example first." | t(lang) }}</p>
+    </fieldset>
+  </form>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="kicker">{{ "Severity" | t(lang) }}</p>
+    <ul class="tips sg-tips-severity">
+      <li><strong>▲ {{ "High" | t(lang) }}:</strong> {{ cfg.severity.high }}</li>
+      <li><strong>◆ {{ "Medium" | t(lang) }}:</strong> {{ cfg.severity.medium }}</li>
+      <li><strong>○ {{ "Low" | t(lang) }}:</strong> {{ cfg.severity.low }}</li>
+    </ul>
+    <p class="form-note sg-links"><a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> · <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a> · <a class="inline-link" href="{{ '/tools/sigma-control-chart/' | local(lang) }}">{{ "Sigma & Control Chart" | t(lang) }}</a></p>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sg-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="signals-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="signals-sources">{"oeeReasons": {{ (oeeD.reasons if oeeD else []) | scriptJson | safe }}, "lostFound": {{ { retention: lfD.retention, categories: lfD.categories } | scriptJson | safe }}, "gembaLayers": {{ (gwD.layers if gwD else []) | scriptJson | safe }}, "gembaCadences": {{ (gwD.cadences if gwD else []) | scriptJson | safe }}, "fiveSScopes": {{ (fsD.scopes if fsD else {}) | scriptJson | safe }}, "links": { {%- for tool in cfg.tools %}{{ tool.slug | scriptJson | safe }}: {{ ('/tools/' + tool.slug + '/') | local(lang) | scriptJson | safe }}{% if not loop.last %}, {% endif %}{% endfor %} } }</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/stats-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/oee.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/maintenance-planner.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/signals.js' | assetUrl }}" defer></script>

@@ -73,10 +73,66 @@
   // On time against its target: below it red, within 5 points amber.
   const onTimeState = (onTime, target) => (onTime < target ? "red" : onTime < target + 0.05 ? "amber" : "green");
 
-  // What the logs say, day by day. logs: { damage, incomplete, audit, delay, safety, fives } as the tools save them;
-  // targets: { damage, incomplete, ontime, fives } as shares from the workplace profile (null where not set), falling
-  // back to the target each log saved, then to defaults.
-  const facts = (logs = {}, targets = {}, defaults = {}) => {
+  // Room Inspection, day by day, with the tool's own arithmetic (window.RoomInspectionMath; the partial loads its
+  // script): each inspection scored and judged as the tool does (a failed critical item fails the room, otherwise its
+  // pass mark decides), a room inspected again on the day it failed is a re-check, and the first-time pass rate of a
+  // day = first inspections passed / first inspections. saved is what the tool keeps ({ threshold, custom, rows });
+  // cfg its data in this language ({ threshold, zones, templates }).
+  const isObj = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  const roomDays = (saved, cfg, RI = window.RoomInspectionMath) => {
+    const byDate = new Map();
+    const builtIn = isObj(cfg?.templates) ? cfg.templates : null;
+    if (!RI || !builtIn || !Object.keys(builtIn).length) return { byDate, threshold: null };
+    const firstTemplate = Object.keys(builtIn)[0];
+    const custom = Object.fromEntries(Object.entries(isObj(saved?.custom) ? saved.custom : {}).filter(([key, tpl]) => key.startsWith("custom-") && isObj(tpl) && isObj(tpl.questions)));
+    const templateOf = (name) => custom[name] || builtIn[name] || builtIn[firstTemplate];
+    const zones = (Array.isArray(cfg.zones) ? cfg.zones : []).map((zone) => zone?.key).filter(Boolean);
+    const mark = Number(saved?.threshold);
+    const threshold = mark >= 0.5 && mark <= 1 ? mark : Number(cfg.threshold) || 0.9;
+    const rows = rowsOf(saved).filter((row) => typeof row.room === "string" && row.room.trim())
+      .map((row) => ({ ...row, room: row.room.trim(), answers: isObj(row.answers) ? row.answers : {}, flags: isObj(row.flags) ? row.flags : {} }));
+    RI.annotate(rows, (row) => RI.itemsOf(templateOf(row.template), zones), threshold).forEach((row) => {
+      if (row.recheck || row.pass === null) return;
+      const day = byDate.get(row.date) || { first: 0, passed: 0 };
+      day.first++;
+      if (row.pass) day.passed++;
+      byDate.set(row.date, day);
+    });
+    return { byDate, threshold };
+  };
+  // Maintenance Planner breakdowns, day by day: how many and the minutes of downtime, on assets still in the plan.
+  const breakdownDays = (saved) => {
+    const byDate = new Map();
+    const assets = new Set((Array.isArray(saved?.assets) ? saved.assets : []).filter(isObj).map((asset) => asset.id).filter(Boolean));
+    rowsOf(saved).filter((row) => row.kind === "breakdown" && assets.has(row.asset)).forEach((row) => {
+      const day = byDate.get(row.date) || { n: 0, minutes: 0 };
+      day.n++;
+      day.minutes += Number(row.minutes) > 0 ? Number(row.minutes) : 0;
+      byDate.set(row.date, day);
+    });
+    return byDate;
+  };
+  // The tasks past their date on A assets now, by the planner's own due date (MaintenancePlannerMath.nextDue and
+  // statusOf: the interval after the last done or the meter, whichever comes first, moved by a postponement), the
+  // longest overdue first.
+  const overdueOnA = (saved, today, MP = window.MaintenancePlannerMath) => {
+    if (!MP) return [];
+    const assets = (Array.isArray(saved?.assets) ? saved.assets : []).filter((asset) => isObj(asset) && asset.id && asset.crit === "A");
+    const rows = rowsOf(saved).filter((row) => MP.KINDS.includes(row.kind));
+    return assets.flatMap((asset) => {
+      const events = rows.filter((row) => row.asset === asset.id);
+      const points = MP.meterPoints(events);
+      return (Array.isArray(asset.tasks) ? asset.tasks : []).filter((task) => isObj(task) && task.id && String(task.text ?? "").trim()).map((task) => ({ task, due: MP.nextDue(task, events, points).due }))
+        .filter(({ due }) => MP.statusOf(due, today) === "overdue")
+        .map(({ task, due }) => ({ task: String(task.text).trim(), asset: [asset.tag, asset.name].map((part) => String(part ?? "").trim()).filter(Boolean).join(" · "), due, late: MP.daysBetween(due, today) }));
+    }).sort((a, b) => a.due.localeCompare(b.due) || a.asset.localeCompare(b.asset));
+  };
+
+  // What the logs say, day by day. logs: { damage, incomplete, audit, delay, safety, fives, rooms, maintenance } as the
+  // tools save them; targets: { damage, incomplete, ontime, fives } as shares from the workplace profile (null where
+  // not set), falling back to the target each log saved, then to defaults. extra: { rooms: the Room Inspection data,
+  // rules: the board's own thresholds ({ roomRed, downtimeRed }) from its data file }.
+  const facts = (logs = {}, targets = {}, defaults = {}, extra = {}) => {
     const counted = (log, key) => {
       const rows = rowsOf(log);
       const volumes = kit.cleanVolumes ? kit.cleanVolumes(Array.isArray(log?.volumes) ? log.volumes : []) : [];
@@ -130,8 +186,15 @@
       },
       safety: { start: firstDate(safetyRows), byDate: safety },
       fives: { byDate: fives, target: targets.fives ?? defaults.fives ?? null },
+      rooms: { ...roomDays(logs.rooms, extra.rooms), red: Number(extra.rules?.roomRed) > 0 ? Number(extra.rules.roomRed) / 100 : null },
+      breakdowns: { byDate: breakdownDays(logs.maintenance), red: Number(extra.rules?.downtimeRed) > 0 ? Number(extra.rules.downtimeRed) : null },
     };
   };
+  // The first-time pass rate of a day against the pass mark of Room Inspection: at or above it green, below it amber,
+  // below the board's lower line (roomRed) red.
+  const roomState = (rate, mark, red) => (rate >= mark - 1e-9 ? "green" : red !== null && rate < red - 1e-9 ? "red" : "amber");
+  // Breakdowns of a day: any breakdown amber, more downtime than the board's line (downtimeRed minutes) red.
+  const breakdownState = (n, minutes, red) => (!(n > 0) ? "none" : red !== null && minutes > red ? "red" : "amber");
 
   // The state of one letter on one day: "green", "amber", "red", "none" (no data) or "future", with the reasons as
   // codes the page puts into words. A manual entry for that day and letter wins over what the logs say.
@@ -178,19 +241,30 @@
           reasons.push({ code: "clean", key: q.key });
         }
       });
+      const rooms = f.rooms?.byDate.get(date);
+      if (rooms && rooms.first && f.rooms.threshold !== null) {
+        const rate = rooms.passed / rooms.first;
+        state = worse(state, roomState(rate, f.rooms.threshold, f.rooms.red));
+        reasons.push({ code: "rooms", rate, mark: f.rooms.threshold, red: f.rooms.red, n: rooms.passed, first: rooms.first });
+      }
     } else if (letter === "D") {
       const d = f.delivery;
       const day = d.byDate.get(date);
       if (day && day.routes) {
         if (d.partial || d.target === null) {
           const usual = usualBefore(d.lateByDate, d.start, date);
-          state = countState(day.late, usual);
+          state = worse(state, countState(day.late, usual));
           reasons.push({ code: "late", n: day.late, usual, routes: day.routes });
         } else {
           const onTime = 1 - day.late / day.routes;
-          state = onTimeState(onTime, d.target);
+          state = worse(state, onTimeState(onTime, d.target));
           reasons.push({ code: "ontime", pct: onTime, target: d.target, late: day.late, routes: day.routes });
         }
+      }
+      const stops = f.breakdowns?.byDate.get(date);
+      if (stops && stops.n) {
+        state = worse(state, breakdownState(stops.n, stops.minutes, f.breakdowns.red));
+        reasons.push({ code: "breakdown", n: stops.n, minutes: stops.minutes, red: f.breakdowns.red });
       }
     }
     return { state, reasons, manual: false };
@@ -219,7 +293,7 @@
   };
   // One month of the board: every day, every letter, and how many days of each colour a letter had.
   const board = (ym, logs, rows, options = {}) => {
-    const f = options.facts || facts(logs, options.targets, options.defaults);
+    const f = options.facts || facts(logs, options.targets, options.defaults, options.extra);
     const manual = manualMap(rows);
     const days = monthDays(ym).map((date) => ({
       date,
@@ -235,7 +309,7 @@
   // The safety message of the day: the list is walked one message a day, the same for everyone on that date.
   const safetyIndex = (iso, length) => (length > 0 ? Math.floor(Date.parse(`${iso}T00:00:00Z`) / DAY) % length : 0);
 
-  window.DailyBoardMath = { LETTERS, STATES, RANK, minutesLate, fivesScore, usualBefore, countState, rateState, onTimeState, facts, dayState, manualMap, monthOf, addMonths, monthDays, board, safetyIndex };
+  window.DailyBoardMath = { LETTERS, STATES, RANK, minutesLate, fivesScore, usualBefore, countState, rateState, onTimeState, roomState, breakdownState, roomDays, breakdownDays, overdueOnA, facts, dayState, manualMap, monthOf, addMonths, monthDays, board, safetyIndex };
 
   const root = document.querySelector("[data-daily-board]");
   const dataEl = document.getElementById("daily-board-data");
@@ -246,6 +320,9 @@
   const Workplace = window.Workplace;
   const Actions = window.ActionsStore;
   const data = JSON.parse(dataEl.textContent);
+  // The checklists and pass mark of Room Inspection in this language, for its first-time pass rate.
+  const roomsEl = document.getElementById("daily-board-rooms");
+  const roomCfg = roomsEl ? JSON.parse(roomsEl.textContent) : null;
   const KEY = data.storageKey;
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;
   const results = document.querySelector("[data-results]");
@@ -311,7 +388,7 @@
     const saved = read(`sc-${tool}${SUFFIX}`, {});
     return isObject(saved) && Array.isArray(saved.rows) ? { ...saved, rows: saved.rows.filter(isObject) } : { rows: [] };
   };
-  const logs = () => ({ damage: logOf("damage-control"), incomplete: logOf("incomplete-control"), audit: logOf("night-audit"), delay: logOf("delay-analyzer"), safety: logOf("safety-cross"), fives: logOf("five-s-audit") });
+  const logs = () => ({ damage: logOf("damage-control"), incomplete: logOf("incomplete-control"), audit: logOf("night-audit"), delay: logOf("delay-analyzer"), safety: logOf("safety-cross"), fives: logOf("five-s-audit"), rooms: logOf("room-inspection"), maintenance: logOf("maintenance-planner") });
   const logsInUse = (all) => Object.values(all).some((log) => log.rows.length);
   // The open issues of the handover in progress, the carried ones first.
   const handoverIssues = () => {
@@ -353,6 +430,8 @@
         ? tx("{n} of {routes} routes late, no usual day yet", { n: reason.n, routes: reason.routes })
         : tx("{n} of {routes} routes late (usual {usual} a day)", { n: reason.n, routes: reason.routes, usual: int.format(Math.round(reason.usual * 10) / 10) });
       case "ontime": return tx("On time {pct} (target {target}): {late} of {routes} late", { pct: pct(reason.pct, 0), target: pct(reason.target, 0), late: reason.late, routes: reason.routes });
+      case "rooms": return tx("First-time pass {pct} (pass mark {mark}): {a} of {b} rooms", { pct: pct(reason.rate, 0), mark: pct(reason.mark, 0), a: int.format(reason.n), b: int.format(reason.first) });
+      case "breakdown": return tx("{n}, {minutes} of downtime", { n: plural(reason.n, tx("breakdown"), tx("breakdowns")), minutes: tx("{n} min", { n: int.format(reason.minutes) }) });
       default: return "";
     }
   };
@@ -457,7 +536,8 @@
 
   // The huddle in five steps and ten minutes: the message of the day, yesterday's board, the actions, what the
   // handover carries, and who owns what today.
-  const agendaItems = (f, acts, issues) => {
+  // maint: the overdue tasks on A assets (overdueOnA), read out with the actions.
+  const agendaItems = (f, acts, issues, maint = []) => {
     const day = today();
     const yesterday = shiftDay(day, -1);
     const manual = manualMap(state.rows);
@@ -469,7 +549,7 @@
       items: [
         { title: tx("Safety message of the day"), minutes: 1, lines: [message] },
         { title: tx("Yesterday's board"), minutes: 3, lines: alerts.length ? alerts.map((item) => `${item.letter} ${letterOf[item.letter].name}: ${stateName(item.state)} · ${dayText(item)}`) : [tx("No red or amber day yesterday. Say it, then move on.")] },
-        { title: tx("Actions"), minutes: 3, lines: acts.overdue.length || acts.dueToday.length ? [...acts.overdue.map((a) => `${a.title} · ${a.owner || tx("no owner")} · ${lower(tx("Overdue"))} ${showDate(a.due)}`), ...acts.dueToday.map((a) => `${a.title} · ${a.owner || tx("no owner")} · ${lower(tx("Due today"))}`)] : [tx("No action is overdue or due today.")] },
+        { title: tx("Actions"), minutes: 3, lines: acts.overdue.length || acts.dueToday.length || maint.length ? [...acts.overdue.map((a) => `${a.title} · ${a.owner || tx("no owner")} · ${lower(tx("Overdue"))} ${showDate(a.due)}`), ...acts.dueToday.map((a) => `${a.title} · ${a.owner || tx("no owner")} · ${lower(tx("Due today"))}`), ...maint.map((t) => tx("Overdue on an A asset: {task} · {asset} · due {date}", { task: t.task, asset: t.asset, date: showDate(t.due) }))] : [tx("No action is overdue or due today.")] },
         { title: tx("Carried handover issues"), minutes: 2, lines: issues.filter((issue) => issue.carried > 0).length ? issues.filter((issue) => issue.carried > 0).map((issue) => `${issue.text} · ${issue.owner || tx("no owner")}${issue.due ? ` · ${issue.due}` : ""}`) : [tx("Nothing carried over.")] },
         { title: tx("Who owns what today"), minutes: 1, lines: areas.length ? areas.map((area) => (area.owner ? `${area.name} · ${area.owner}` : area.name)) : [tx("Add the areas and their owners in the workplace setup above.")] },
       ],
@@ -521,8 +601,8 @@
     const empty = !state.rows.length && !logsInUse(all) && !acts.open.length && !issues.length;
     results.hidden = empty;
     if (empty) return;
-    const options = { today: today(), targets: targets(), defaults: DEFAULTS };
-    const f = facts(all, options.targets, options.defaults);
+    const options = { today: today(), targets: targets(), defaults: DEFAULTS, extra: { rooms: roomCfg, rules: data.rules } };
+    const f = facts(all, options.targets, options.defaults, options.extra);
     const model = board(view, all, state.rows, { ...options, facts: f });
     const previous = board(addMonths(view, -1), all, state.rows, { ...options, facts: f });
     const day = today();
@@ -537,7 +617,7 @@
     const calendars = el("div", "db-calendars");
     LETTERS.forEach((letter) => calendars.append(calendarPanel(model, letter)));
 
-    const agenda = agendaItems(f, acts, issues);
+    const agenda = agendaItems(f, acts, issues, overdueOnA(all.maintenance, day));
     const grid = el("div", "dl-result-grid db-grid");
     grid.append(agendaPanel(agenda), actionsPanel(acts), handoverPanel(issues), trendPanel(model, previous));
 

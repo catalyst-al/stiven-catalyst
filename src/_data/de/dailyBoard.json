@@ -15,17 +15,17 @@
     {
       "key": "Q",
       "name": "Qualität",
-      "sources": "Schadenskontrolle, Vollständigkeitskontrolle, Night-Audit-Protokoll",
-      "red": "Schäden, unvollständige Aufträge oder Audit-Ausnahmen über der Zielquote. Ohne Volumen: eine Anzahl deutlich über dem üblichen Tag.",
-      "amber": "Innerhalb von 20 % des Ziels oder über der üblichen Anzahl.",
-      "green": "Nichts erfasst oder eine Quote unter dem Ziel."
+      "sources": "Schadenskontrolle, Vollständigkeitskontrolle, Night-Audit-Protokoll, Zimmerkontrolle",
+      "red": "Schäden, unvollständige Aufträge oder Audit-Ausnahmen über der Zielquote. Ohne Volumen: eine Anzahl deutlich über dem üblichen Tag. Zimmerkontrolle: eine Erstabnahmequote unter 75 %.",
+      "amber": "Innerhalb von 20 % des Ziels oder über der üblichen Anzahl. Zimmerkontrolle: eine Erstabnahmequote unter der Bestehensgrenze.",
+      "green": "Nichts erfasst oder eine Quote unter dem Ziel. Zimmerkontrolle: eine Erstabnahmequote auf oder über der Bestehensgrenze."
     },
     {
       "key": "D",
       "name": "Lieferung",
-      "sources": "Verspätungsanalyse",
-      "red": "Pünktliche Touren unter dem Ziel.",
-      "amber": "Innerhalb von 5 Punkten des Ziels. Wenn nur einige Touren erfasst sind: verspätete Touren über dem Üblichen.",
+      "sources": "Verspätungsanalyse, Wartungsplaner",
+      "red": "Pünktliche Touren unter dem Ziel oder mehr als 60 Minuten Ausfallzeit durch Störungen im Wartungsplaner.",
+      "amber": "Innerhalb von 5 Punkten des Ziels. Wenn nur einige Touren erfasst sind: verspätete Touren über dem Üblichen. Eine Störung im Wartungsplaner.",
       "green": "Pünktlich auf oder über dem Ziel."
     },
     {
@@ -54,6 +54,7 @@
     { "key": "cost", "label": "Überstunden pro Tag", "unit": "h", "placeholder": "z. B. 8" },
     { "key": "absence", "label": "Abwesenheit", "unit": "%", "placeholder": "z. B. 5" }
   ],
+  "rules": { "roomRed": 75, "downtimeRed": 60 },
   "safetyMessages": [
     "Zwei Hände für die letzten Meter: tragen, nie werfen.",
     "Der Hubwagen hält an jedem Gangende. Ein Mensch ist schneller, als Sie denken.",
@@ -72,7 +73,8 @@
     ["Ein Board, zehn Minuten, im Stehen.", "Das Huddle wird gelesen, nicht getippt. Board öffnen, die fünf Buchstaben durchgehen, mit den Maßnahmen schließen."],
     ["Rot ist eine Frage, keine Schuld.", "Ein roter Tag fragt, was passiert ist und wer den nächsten Schritt übernimmt. Er fragt nie, wer schuld war."],
     ["Ein Rot ohne Maßnahme ist eine Lüge.", "Jeder rote Tag bekommt eine Maßnahme mit Verantwortlichem und Termin in der Maßnahmenliste, sonst dekoriert das Board die Wand."],
-    ["Lassen Sie die Protokolle arbeiten.", "Sicherheit, Qualität und Lieferung füllen sich aus Schadenskontrolle, Vollständigkeitskontrolle, Verspätungsanalyse und dem Sicherheitskreuz in diesem Browser. Tippen Sie nur Kosten und Menschen."],
+    ["Lassen Sie die Protokolle arbeiten.", "Sicherheit, Qualität und Lieferung füllen sich aus Schadenskontrolle, Vollständigkeitskontrolle, Verspätungsanalyse, dem Sicherheitskreuz, der Zimmerkontrolle und dem Wartungsplaner in diesem Browser. Tippen Sie nur Kosten und Menschen."],
+    ["Zimmer und Anlagen zählen mit.", "Qualität übernimmt die Erstabnahmequote des Tages aus der Zimmerkontrolle: grün auf oder über der Bestehensgrenze, gelb darunter, rot unter 75 %. Diese Linie setzt das Board selbst, weil eine Kontrolle nicht festhält, ob ein durchgefallenes Zimmer an einen Gast ging. Lieferung übernimmt die Störungen aus dem Wartungsplaner: gelb bei einer Störung, rot bei mehr als 60 Minuten Ausfallzeit an einem Tag. Überfällige Aufgaben an A-Anlagen kommen im Huddle mit den Maßnahmen zur Sprache."],
     ["Setzen Sie die Ziele einmal.", "Das Arbeitsplatzprofil hält den Standort, die Schichten, die Bereiche mit ihren Verantwortlichen und die Ziele. Jedes Tool liest sie."]
   ],
   "example": {

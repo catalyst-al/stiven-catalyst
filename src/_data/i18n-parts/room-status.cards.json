@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Room Status", "type": "Hotel", "time": "Ongoing", "summary": "The live room board of the shift: every room by floor with its housekeeping code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), DND, VIP and arrival flags and its attendant. It shows the next room to clean, the rooms ready for today's arrivals, the out-of-order share and the minutes from check-out to clean and from clean to inspected.", "url": "/tools/room-status/", "cta": "Open the room board" },
+    "de": { "name": "Zimmerstatus", "type": "Hotel", "time": "Laufend", "summary": "Das Zimmerboard der Schicht: jedes Zimmer nach Etage mit seinem Housekeeping-Code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), den Markierungen DND, VIP und Anreise und seiner Reinigungskraft. Es zeigt das nächste Zimmer zur Reinigung, die bezugsfertigen Zimmer für die heutigen Anreisen, den Anteil außer Betrieb und die Minuten von der Abreise bis sauber und von sauber bis kontrolliert.", "url": "/de/tools/room-status/", "cta": "Zimmerboard öffnen" },
+    "sq": { "name": "Statusi i dhomave", "type": "Hotel", "time": "Vazhdimisht", "summary": "Tabela e dhomave e turnit: çdo dhomë sipas katit me kodin e housekeeping (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), shënimet DND, VIP dhe mbërritje dhe pastruesin e saj. Tregon dhomën e radhës për pastrim, dhomat gati për mbërritjet e sotme, pjesën jashtë përdorimit dhe minutat nga largimi deri e pastër dhe nga e pastër deri e inspektuar.", "url": "/sq/tools/room-status/", "cta": "Hap tabelën e dhomave" }
+  },
+  "routine": { "when": "During the shift", "do": "Keep every room's status current as the work happens, clean the queue from the top, and copy the summary into the shift handover.", "de": { "when": "Während der Schicht", "do": "Halten Sie den Status jedes Zimmers aktuell, während gearbeitet wird, reinigen Sie die Reihenfolge von oben ab und kopieren Sie die Zusammenfassung in die Schichtübergabe." }, "sq": { "when": "Gjatë turnit", "do": "Mbaje statusin e çdo dhome të përditësuar ndërsa bëhet puna, pastro radhën nga lart dhe kopjo përmbledhjen në dorëzimin e turnit." } },
+  "recipe": "example"
+}

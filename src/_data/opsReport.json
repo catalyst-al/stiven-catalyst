@@ -22,9 +22,12 @@
     "shift-handover": "Shift Handover",
     "safety-cross": "Safety Cross",
     "oee": "OEE",
+    "maintenance-planner": "Maintenance Planner",
     "five-s-audit": "5S Audit",
     "gemba-walk": "Gemba Walk",
     "hotel-kpis": "Hotel KPIs",
+    "lost-found": "Lost & Found",
+    "room-inspection": "Room Inspection",
     "kaizen-board": "Kaizen Board",
     "action-tracker": "Action Tracker"
   },
@@ -74,7 +77,9 @@
     "owner": "Owner",
     "check": "Check",
     "noOwner": "no owner yet",
-    "and": "and"
+    "and": "and",
+    "minutes": "{n} min",
+    "hours": "{n} h"
   },
   "metrics": {
     "accidents": { "label": "Accidents", "noun": "the accidents" },
@@ -94,12 +99,21 @@
     "availability": { "label": "Availability", "noun": "availability" },
     "performance": { "label": "Performance", "noun": "performance" },
     "quality": { "label": "Quality rate", "noun": "the quality rate" },
+    "pm": { "label": "PM compliance", "noun": "PM compliance" },
+    "pmOverdue": { "label": "Maintenance tasks overdue", "noun": "the overdue maintenance tasks" },
+    "breakdowns": { "label": "Breakdowns", "noun": "the breakdowns" },
+    "downtime": { "label": "Downtime", "noun": "the downtime" },
     "fiveS": { "label": "5S score", "noun": "the 5S score" },
     "gemba": { "label": "Gemba compliance", "noun": "Gemba walk compliance" },
     "walks": { "label": "Walks", "noun": "the walks" },
     "occ": { "label": "Occupancy", "noun": "occupancy" },
     "adr": { "label": "ADR", "noun": "the ADR" },
     "revpar": { "label": "RevPAR", "noun": "RevPAR" },
+    "lostLogged": { "label": "Items logged", "noun": "the found items logged" },
+    "lostReturned": { "label": "Returned to the owner", "noun": "the share of found items returned to the owner" },
+    "lostOver": { "label": "Past the keep-until date", "noun": "the found items past their keep-until date" },
+    "firstPass": { "label": "First-time pass rate", "noun": "the first-time pass rate of the rooms" },
+    "inspections": { "label": "Room inspections", "noun": "the room inspections" },
     "ideas": { "label": "New ideas", "noun": "the new ideas" },
     "adopted": { "label": "Ideas adopted", "noun": "the ideas adopted" },
     "saving": { "label": "Savings a month", "noun": "the savings" },
@@ -109,7 +123,30 @@
     "overdue": { "label": "Actions overdue", "noun": "the overdue actions" }
   },
   "factors": { "availability": "availability", "performance": "performance", "quality": "quality" },
+  "parts": { "lostFound": "Lost & Found", "inspection": "Room Inspection", "maintenance": "Maintenance Planner" },
   "sentences": {
+    "parts": {
+      "lostFound": {
+        "logged": { "one": "One found item logged ({before} the period before).", "many": "{n} found items logged ({before} the period before)." },
+        "returned": "Returned to the owner by the end of the period: {trend}.",
+        "over": { "one": "One open item is past its keep-until date: decide on it now.", "many": "{n} open items are past their keep-until date: decide on them now." },
+        "overNone": "No open item is past its keep-until date."
+      },
+      "inspection": {
+        "lead": { "one": "One room inspection; first-time pass rate at the pass mark of {mark}: {trend}.", "many": "{n} room inspections; first-time pass rate at the pass mark of {mark}: {trend}." },
+        "fault": { "one": "The item that fails most is “{item}” ({zone}): once, {share} of the faults.", "many": "The item that fails most is “{item}” ({zone}): {n} times, {share} of the faults." },
+        "faultNone": "No item failed."
+      },
+      "maintenance": {
+        "pm": "PM compliance: {trend} ({a} of {b} tasks due were done on time).",
+        "pmNone": "No preventive task fell due in the period.",
+        "overdue": { "one": "One maintenance task was overdue at the end of the period.", "many": "{n} maintenance tasks were overdue at the end of the period." },
+        "overdueNone": "No maintenance task was overdue at the end of the period.",
+        "breakdowns": { "one": "One breakdown, {minutes} of downtime ({before} the period before).", "many": "{n} breakdowns, {minutes} of downtime ({before} the period before)." },
+        "breakdownsNone": "No breakdown in the period.",
+        "reliability": "Across the {assets} assets of the plan: MTBF {mtbf} ({mtbfBefore} the period before), MTTR {mttr} ({mttrBefore})."
+      }
+    },
     "trend": "{value} against {before} the period before, {trend}",
     "noTrend": "{value}, with no period before to compare",
     "targetMet": "That meets the target of {target}.",
@@ -224,9 +261,24 @@
       ],
       "stops": { "planned": "Break", "breakdown": "Breakdown", "setup": "Changeover" }
     },
+    "maintenance": {
+      "assets": [
+        { "tag": "SRT-1", "name": "Sorter 1", "crit": "A", "tasks": [[1, 30], [4, 120]], "breakdown": [0.1, 0.07] },
+        { "tag": "SRT-2", "name": "Sorter 2", "crit": "A", "tasks": [[1, 30], [4, 120]], "breakdown": [0.09, 0.07] },
+        { "tag": "WRP-1", "name": "Stretch wrapper", "crit": "B", "tasks": [[2, 45]], "breakdown": [0.12, 0.09] },
+        { "tag": "FL-01", "name": "Forklift 1", "crit": "A", "tasks": [[1, 15], [8, 90]], "breakdown": [0.04, 0.03] },
+        { "tag": "FL-02", "name": "Forklift 2", "crit": "B", "tasks": [[1, 15], [8, 90]], "breakdown": [0.05, 0.03] }
+      ],
+      "late": [0.3, 0.12],
+      "open": [[0, 0], [2, 0]],
+      "minutes": [20, 150],
+      "causes": ["sensor", "jam", "wear", "electrical", "hydraulic"]
+    },
     "fiveS": { "score": [1.9, 3.0], "weak": 2 },
     "gemba": { "yes": [0.8, 0.87], "template": "warehouse", "layers": ["team-lead", "area-manager"], "walkers": ["Anna", "Besnik", "Dritan"] },
     "hotel": { "rooms": 120, "occ": [0.74, 0.79], "adr": [112, 115], "budgetOcc": "80", "budgetAdr": "118" },
+    "lostFound": { "perDay": 0.8, "categories": [["clothing", "low"], ["phone", "high"], ["glasses", "medium"], ["keys", "low"], ["documents", "high"], ["bag", "medium"], ["wallet", "high"], ["toy", "low"]], "returned": [0.45, 0.6], "contacted": 0.2, "decided": 0.85 },
+    "inspection": { "perDay": [5, 9], "floors": 4, "rooms": 30, "suites": 0.1, "weak": "bathroom-2", "weakRate": [0.3, 0.16], "fail": [0.025, 0.018], "critical": 0.02, "recheck": 0.8, "attendants": ["Marta", "Ilir", "Sara", "Jonas"], "inspector": "Elena" },
     "kaizen": [
       { "title": "Shadow board for the wrap tools at dock 3", "waste": "Motion", "area": "Loading", "by": "Marco", "created": [-11, 1], "adopted": [-9, 3], "saving": 120 },
       { "title": "Colour-coded tote labels per route", "waste": "Defects", "area": "Packing", "by": "Fatima", "created": [-9, 2], "adopted": [-6, 4], "saving": 350 },

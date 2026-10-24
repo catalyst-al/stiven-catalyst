@@ -200,8 +200,8 @@
   // Settings of the page, the reader and this module, not work of a tool.
   const NOT_TOOL = /^sc-(team|book-|audio-|listen-|import-maps|persist-|restore|theme|print-guide)|-ui$/;
   const offerable = (key) => isWork(key) && !PERSONAL.test(key) && !NOT_TOOL.test(key);
-  // Ticked unless the device says otherwise: the action list, the workplace, the timeline events and the floor logs.
-  const DEFAULT_ON = new Set(["action-tracker", "workplace", "annotations", "damage-control", "incomplete-control", "night-audit", "delay-analyzer", "sigma-control-chart", "lost-found", "room-inspection", "maintenance-planner", "safety-cross"]);
+  // Ticked unless the device says otherwise: the action list, the workplace, the timeline events, the floor logs and the hotel boards.
+  const DEFAULT_ON = new Set(["action-tracker", "workplace", "annotations", "damage-control", "incomplete-control", "night-audit", "delay-analyzer", "sigma-control-chart", "lost-found", "room-inspection", "maintenance-planner", "safety-cross", "room-status", "guest-complaints"]);
   const isOn = (slug, choices = {}) => (typeof choices[slug] === "boolean" ? choices[slug] : DEFAULT_ON.has(slug));
   // A remote entry is taken only when it could have come from a tool here (work-backup.js checks the logs' shape).
   const soundItem = (key, value) => typeof value === "string" && offerable(key) && (!window.WorkBackup?.sound || window.WorkBackup.sound([key, value]));

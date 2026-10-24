@@ -294,5 +294,37 @@
     "summary": "Planen Sie die vorbeugende Wartung und die Prüfpflichten jeder Anlage nach Datum oder Betriebsstunden, erfassen Sie Erledigtes, Verschobenes und Störungen, und sehen Sie Überfälliges, die PM-Erfüllung, MTBF und MTTR und die Arbeitsliste der Woche.",
     "url": "/de/tools/maintenance-planner/",
     "cta": "Wartung planen"
+  },
+  {
+    "name": "Signale",
+    "type": "Übersicht",
+    "time": "2 min",
+    "summary": "Alle Tools in diesem Browser in einer geordneten Morgenliste: Signale der Regelkarten (p, c, u und I-MR mit Lauf- und Trendregeln), verfehlte Ziele, überfällige Maßnahmen, Wartungen, Rote Karten und Ideen, die Sicherheit ganz oben.",
+    "url": "/de/tools/signals/",
+    "cta": "Signale lesen"
+  },
+  {
+    "name": "Zimmerstatus",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Das Zimmerboard der Schicht: jedes Zimmer nach Etage mit seinem Housekeeping-Code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), den Markierungen DND, VIP und Anreise und seiner Reinigungskraft. Es zeigt das nächste Zimmer zur Reinigung, die bezugsfertigen Zimmer für die heutigen Anreisen, den Anteil außer Betrieb und die Minuten von der Abreise bis sauber und von sauber bis kontrolliert.",
+    "url": "/de/tools/room-status/",
+    "cta": "Zimmerboard öffnen"
+  },
+  {
+    "name": "Gästebeschwerden",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Das Beschwerde- und Wiedergutmachungsprotokoll des Empfangs: LEARN, die Maßnahme, die Kompensation in Euro, die Lösungszeit und der Rückruf. Beschwerden pro 100 belegte Zimmernächte, der Anteil innerhalb der Zielzeit gelöst, Wiederholungszimmer, das Pareto der Kategorien und eine Antwort an den Gast.",
+    "url": "/de/tools/guest-complaints/",
+    "cta": "Protokoll öffnen"
+  },
+  {
+    "name": "Housekeeping-Planer",
+    "type": "Hotel",
+    "time": "10 min",
+    "summary": "Der Personalplan der Hausdame: Abreisen, Bleibezimmer, Wäschewechsel, VIP-Zimmer, Grundreinigungen und öffentliche Bereiche werden zu Arbeitsminuten (oder Credits) und zu den benötigten Reinigungskräften gegen den Dienstplan, mit Stunden, Personalkosten und Minuten pro belegtem Zimmer. Reviere nach Minuten ausgeglichen auf möglichst wenigen Etagen, pro Reinigungskraft gedruckt oder in den Zimmerstatus übernommen, und die Woche aus der Vorschau.",
+    "url": "/de/tools/housekeeping-planner/",
+    "cta": "Housekeeping-Team planen"
   }
 ]

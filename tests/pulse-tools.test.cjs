@@ -382,7 +382,9 @@ test('the texts of the Pulse tools and their pages are translated', () => {
   const files = ['src/js/tool-kit.js', 'src/js/defect-log.js', 'src/js/delay-analyzer.js', 'src/js/shift-pulse.js', 'src/js/sigma-chart.js',
     'src/_includes/partials/defect-log.njk', 'src/_includes/partials/shift-pulse.njk', 'src/_includes/partials/sigma-chart.njk'];
   for (const lang of ['de', 'sq']) {
-    const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
+    // The texts Shift Pulse took on with Room Inspection, the Maintenance Planner and Lost & Found are in their part
+    // until the integrator merges it into ui.json.
+    const ui = { ...JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8')), ...JSON.parse(fs.readFileSync('src/_data/i18n-parts/pulse-board-3.json', 'utf8'))[lang] };
     for (const file of files) {
       for (const text of textsOf(file)) assert.ok(ui[text], `${lang}: ${file}: ${text}`);
     }

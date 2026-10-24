@@ -10,7 +10,10 @@ const nunjucks = require('nunjucks');
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const data = { en: read('src/_data/oee.json'), de: read('src/_data/de/oee.json'), sq: read('src/_data/sq/oee.json') };
-const part = read('src/_data/i18n-parts/oee.json');
+const own = read('src/_data/i18n-parts/oee.json');
+// The hand-off to the Maintenance Planner keeps its strings in the links-3 part until the integrator merges them.
+const links = read('src/_data/i18n-parts/links-3.json');
+const part = { de: { ...links.de, ...own.de }, sq: { ...links.sq, ...own.sq } };
 const near = (actual, expected, digits = 6, message) => assert.ok(Math.abs(actual - expected) < 10 ** -digits, `${message || ''} ${actual} ≠ ${expected}`);
 
 // The partial rendered the way the site renders it (the filters stubbed as in scripts/check-tool.mjs), without its
@@ -176,6 +179,24 @@ test('the example: a sorter near 72 % with speed losses, a wrapper near 58 % wit
   }
 });
 
+test('the breakdown stops one by one, as the Maintenance Planner reads them from this log', () => {
+  const w = load();
+  w.eval(fs.readFileSync('src/js/maintenance-planner.js', 'utf8'));
+  const M = w.OeeMath;
+  const rows = [
+    { date: '2026-10-20', shift: 'Early', equipment: 'Sorter S1', stops: [{ reason: 'Break', minutes: 30 }, { reason: 'Breakdown', minutes: 45 }, { reason: 'Jam', minutes: 12 }, { reason: 'Motor smoke', minutes: 20 }] },
+    { date: '2026-10-21', shift: 'Late', equipment: 'Wrapper W2', stops: [{ reason: 'Electrical fault', minutes: 25.5 }, { reason: 'Changeover', minutes: 15 }, { reason: 'Waiting for maintenance', minutes: 11 }] },
+  ];
+  const stops = plain(M.breakdownStops(rows, data.en.reasons));
+  assert.deepEqual(stops.map((s) => [s.equipment, s.reason, s.minutes]), [['Sorter S1', 'Breakdown', 45], ['Sorter S1', 'Motor smoke', 20], ['Wrapper W2', 'Electrical fault', 25.5], ['Wrapper W2', 'Waiting for maintenance', 11]]);
+  // Their minutes are the breakdown minutes of the entries, before anything is capped.
+  near(stops.reduce((sum, s) => sum + s.minutes, 0), rows.reduce((sum, row) => sum + M.loggedOf(row.stops, data.en.reasons).breakdowns, 0));
+  // The example's breakdown stops are the ones the planner would offer (it skips them while they are the example).
+  const example = data.en.example.rows.map((line) => { const [date, shift, equipment, , stops] = line.split('|'); return { date, shift, equipment, stops: M.parseStops(stops, data.en.reasons) }; });
+  assert.equal(w.MaintenancePlannerMath.oeeBreakdowns({ rows: example }, data.en.reasons).length, M.breakdownStops(example, data.en.reasons).length);
+  assert.ok(M.breakdownStops(example, data.en.reasons).length > 20);
+});
+
 test('the page: the example opens on a first visit, with charts, a focus card and the hand-offs', () => {
   const w = load({ lang: 'sq', page: true });
   const doc = w.document;
@@ -211,6 +232,12 @@ test('the page: the example opens on a first visit, with charts, a focus card an
   assert.equal(handoff.template, 'idle-downtime');
   assert.ok(handoff.rows.length > 100);
   assert.ok(handoff.rows.every((row) => data.sq.losses[Object.keys(data.sq.losses).find((k) => data.sq.losses[k].name === row[0])] && Number(row[1]) > 0));
+  // The breakdowns go on to the Maintenance Planner of the same language: a link in the actions and in the stop reasons.
+  const planner = [...results.querySelectorAll('a')].filter((a) => a.href.endsWith('/sq/tools/maintenance-planner/'));
+  assert.equal(planner.length, 2);
+  assert.ok(planner.every((a) => a.textContent === 'Regjistroje në planifikuesin e mirëmbajtjes'));
+  assert.match(results.querySelector('.oe-planner-note').textContent, /^\d+ ndalesa prishjeje \(\d[\d.\s]* min\) në këto ditë/);
+  assert.ok(doc.querySelector('.tool-aside a[data-planner-link]').href.endsWith('/sq/tools/maintenance-planner/'));
   // The equipment filter narrows the result to one machine.
   const filter = doc.querySelector('[data-machine-filter]');
   filter.value = 'Paketuesja W2';
