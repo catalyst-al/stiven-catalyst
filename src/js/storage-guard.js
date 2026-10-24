@@ -3,19 +3,20 @@
 // - it asks the browser to keep the site's data when space runs low (navigator.storage.persist), once there is work;
 // - it keeps restore points on this device: IndexedDB database "sc-restore", store "points", one record per point
 //   { id, created, reason, items, bytes }, items as in the Work Backup file. One a day at most (the first visit of a
-//   tool or the Tools page that day), one before a Work Backup file replaces anything, one before a restore, and one
-//   whenever the visitor asks. The last 14 daily and the last 5 others are kept;
+//   tool or the Tools page that day), one before a Work Backup file replaces anything, one before a restore, one
+//   before team sync (js/team-sync.js) writes the team's work, and one whenever the visitor asks. The last 14 daily,
+//   the last 5 before a team sync and the last 5 others are kept;
 // - it says how much space the work takes, and names the largest tools when localStorage is nearly full.
 // Nothing is sent anywhere. Without IndexedDB (some private windows) there are no restore points and the box works
 // as it did before.
 (() => {
   const DB = "sc-restore";
   const STORE = "points";
-  const KEEP = { daily: 14, other: 5 };
+  const KEEP = { daily: 14, sync: 5, other: 5 };
   // Most browsers give a site about 5 MB of localStorage (counted in characters); past 4 MB a tool may soon fail to save.
   const MB = 1024 * 1024;
   const NEARLY_FULL = 4 * MB;
-  const REASONS = ["daily", "before-open", "before-restore", "manual"];
+  const REASONS = ["daily", "before-open", "before-restore", "manual", "before-sync"];
 
   // ---- Pure logic (tests/storage-guard.test.cjs) ----
   const pad = (n) => String(n).padStart(2, "0");
@@ -28,12 +29,14 @@
     return { id: String(id), created, reason };
   };
   const newestFirst = (a, b) => String(b.id).localeCompare(String(a.id));
-  // The ids to drop: all but the newest `daily` daily points and the newest `other` of the rest.
+  // The ids to drop: all but the newest `daily` daily points, the newest `sync` before a team sync (which may come
+  // often, so they never push out a point made by hand) and the newest `other` of the rest.
   const prune = (points, keep = KEEP) => {
     const sorted = [...points].sort(newestFirst);
     const daily = sorted.filter((p) => p.reason === "daily");
-    const other = sorted.filter((p) => p.reason !== "daily");
-    return [...daily.slice(keep.daily), ...other.slice(keep.other)].map((p) => p.id);
+    const sync = sorted.filter((p) => p.reason === "before-sync");
+    const other = sorted.filter((p) => p.reason !== "daily" && p.reason !== "before-sync");
+    return [...daily.slice(keep.daily), ...sync.slice(keep.sync ?? keep.other), ...other.slice(keep.other)].map((p) => p.id);
   };
   // A daily point is due when there is none from today (the visitor's own calendar day).
   const needsDaily = (points, now = new Date()) => !points.some((p) => p.reason === "daily" && !Number.isNaN(new Date(p.created).getTime()) && localDay(new Date(p.created)) === localDay(now));
@@ -122,7 +125,7 @@
       return null;
     }
   })();
-  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && key !== "sc-theme" && key !== "sc-print-guide-hidden");
+  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-print-guide-hidden", "sc-team", "sc-team-state"].includes(key));
   const toolSlug = (key) => (window.WorkBackup ? window.WorkBackup.toolSlug(key) : String(key).replace(/^sc-/, ""));
   const work = () => snapshot(storage, isWork);
 
@@ -308,7 +311,9 @@
 
     const list = $("[data-sg-list]");
     const toggle = $("[data-sg-toggle]");
-    const reasonLabel = (reason) => (text.reasons || {})[reason] || reason;
+    // The point team sync makes is named by its own section (partials/team-sync.njk), shown only where sync is on.
+    const syncText = (() => { try { return JSON.parse(box.querySelector("[data-team-sync]")?.dataset.text || "{}"); } catch { return {}; } })();
+    const reasonLabel = (reason) => (text.reasons || {})[reason] || (syncText.reasons || {})[reason] || reason;
     const showList = async () => {
       const records = await points().catch(() => []);
       list.replaceChildren(...records.map((point) => {

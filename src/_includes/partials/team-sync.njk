@@ -1,0 +1,95 @@
+{#- Team sync (js/team-sync.js), inside "All your work in one file" when site.sync.endpoint is set: the tools a team
+    ticks stay the same on every device of the team, encrypted on the device with a key from the team code. -#}
+{%- set tmText = {
+  off: "Off" | t(lang),
+  on: "On" | t(lang),
+  onSynced: "On · synced {when}" | t(lang),
+  onError: "On · not synced" | t(lang),
+  today: "today {time}" | t(lang),
+  yesterday: "yesterday {time}" | t(lang),
+  syncing: "Syncing…" | t(lang),
+  synced: "Synced {when} · version {rev} · {size} · {devices}." | t(lang),
+  lastSynced: "Last synced {when}." | t(lang),
+  neverSynced: "Not synced yet." | t(lang),
+  oneDevice: "1 device" | t(lang),
+  devicesN: "{n} devices" | t(lang),
+  devicesLine: "Devices: {list}." | t(lang),
+  thisDevice: "this device" | t(lang),
+  unnamed: "Device {id}" | t(lang),
+  started: "Team started. Give the code to your team now: it is shown only this once." | t(lang),
+  joined: "Joined. This device now syncs the ticked tools with the team." | t(lang),
+  badCode: "A team code is {n} words. Type them with spaces or dashes between them." | t(lang),
+  unknownWords: "Check these words of the code: {words}." | t(lang),
+  noTeam: "No team uses this code. Check the words, or start a team." | t(lang),
+  copied: "Copied" | t(lang),
+  qrLabel: "QR code of the team code" | t(lang),
+  updated: "Updated from the team: {tools}." | t(lang),
+  offline: "No connection: your work is safe here; it will sync later." | t(lang),
+  gone: "The team's copy is no longer on the server (it was deleted, or not used for 180 days)." | t(lang),
+  unreadable: "The team's copy cannot be read with this code. Nothing was changed here." | t(lang),
+  refused: "The server did not accept this team code. Nothing was changed here." | t(lang),
+  tooLarge: "The shared work is larger than 4 MB, so it was not sent. Share fewer tools." | t(lang),
+  busy: "The server is busy; it will try again shortly." | t(lang),
+  conflict: "Another device was saving at the same moment; it will try again shortly." | t(lang),
+  full: "This browser ran out of space, so nothing was changed. Free some space and try again." | t(lang),
+  failed: "The sync did not go through (error {code}). Your work is safe here." | t(lang),
+  noCrypto: "This browser cannot encrypt on this page, so team sync is not available here." | t(lang),
+  leaveConfirm: "Leave the team on this device? The work here stays; this device forgets the code and stops syncing." | t(lang),
+  left: "This device has left the team. The work here stays." | t(lang),
+  deleteConfirm: "Delete the team's copy on the server? Every device of the team stops syncing; the work on each device stays." | t(lang),
+  deleted: "The team's copy is deleted. The work on this device stays." | t(lang),
+  reasons: { "before-sync": "Before a team sync" | t(lang) }
+} %}
+<details class="tm" data-team-sync data-endpoint="{{ site.sync.endpoint }}" data-text="{{ tmText | dump }}">
+  <summary class="tm-summary"><strong>{{ "Team sync" | t(lang) }}</strong> <span class="tm-state" data-tm-summary>{{ "Off" | t(lang) }}</span></summary>
+  <div class="tm-body">
+    <p class="form-note">{{ "Share the tools you choose with your team: every device keeps working without a connection and syncs when it can. The work is encrypted on this device with a key made from the team code, so the server cannot read it." | t(lang) }}</p>
+    <div class="tm-off" data-tm-off>
+      <div class="tm-row">
+        <button class="button-primary" type="button" data-tm-start>{{ "Start a team" | t(lang) }}</button>
+      </div>
+      <div class="tm-join">
+        <div class="field tm-join-field">
+          <label for="tm-join-code">{{ "Join a team: the team code" | t(lang) }}</label>
+          <input id="tm-join-code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="{{ 'six words' | t(lang) }}" data-tm-join-code data-scan>
+        </div>
+        <button class="button-secondary" type="button" data-tm-join>{{ "Join" | t(lang) }}</button>
+      </div>
+    </div>
+    <div class="tm-new" data-tm-new hidden>
+      <p class="kicker">{{ "Your team code" | t(lang) }}</p>
+      <p class="tm-code" data-tm-code></p>
+      <div class="tm-new-row">
+        <div class="tm-qr" data-tm-qr></div>
+        <div class="tm-new-copy">
+          <button class="button-secondary" type="button" data-tm-copy>{{ "Copy" | t(lang) }}</button>
+          <p class="form-note">{{ "On another device, open this box and scan the code or type the six words under “Join a team”. Give it only to your team: whoever has it can read and change the shared work. Write it down; it is not shown again." | t(lang) }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="tm-on" data-tm-on hidden>
+      <p class="form-note tm-status" data-tm-status role="status" aria-live="polite"></p>
+      <p class="form-note tm-devices" data-tm-devices hidden></p>
+      <fieldset class="tm-tools">
+        <legend class="kicker">{{ "What is shared" | t(lang) }}</legend>
+        <div class="tm-tool-list" data-tm-tools></div>
+        <p class="form-note" data-tm-tools-empty hidden>{{ "No tool has work in this browser yet. What the team shares appears here after the first sync." | t(lang) }}</p>
+        <p class="form-note">{{ "Unticking a tool stops this device sharing it; what the team already has stays. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
+      </fieldset>
+      <div class="field tm-device">
+        <label for="tm-device">{{ "Name of this device" | t(lang) }} ({{ "optional" | t(lang) }})</label>
+        <input id="tm-device" type="text" maxlength="60" autocomplete="off" placeholder="{{ 'Phone of …' | t(lang) }}" data-tm-device>
+      </div>
+      <div class="tm-row">
+        <button class="button-primary" type="button" data-tm-sync>{{ "Sync now" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-tm-again hidden>{{ "Send this device's work again" | t(lang) }}</button>
+      </div>
+      <div class="tm-leave">
+        <button class="button-ghost" type="button" data-tm-leave>{{ "Leave the team on this device" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-tm-delete>{{ "Delete the team's copy" | t(lang) }}</button>
+      </div>
+    </div>
+    <p class="form-note tm-message" data-tm-message role="status" aria-live="polite"></p>
+    <p class="tm-reload" data-tm-reload hidden><span class="form-note">{{ "The team changed the work of this tool. Reload the page to see it." | t(lang) }}</span> <button class="button-secondary" type="button" data-tm-reload-button>{{ "Reload" | t(lang) }}</button></p>
+  </div>
+</details>

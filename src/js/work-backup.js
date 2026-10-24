@@ -5,8 +5,9 @@
   const FORMAT = "stiven-catalyst-work";
   const VERSION = 1;
   const MAX_BYTES = 20 * 1024 * 1024;
-  // Settings of the page itself, not work.
-  const SKIP = new Set(["sc-theme", "sc-print-guide-hidden"]);
+  // Settings of the page itself, not work; the team code and what team sync last saw (js/team-sync.js) stay on this
+  // device too, so a saved file never carries the code.
+  const SKIP = new Set(["sc-theme", "sc-print-guide-hidden", "sc-team", "sc-team-state"]);
   // Storage names that differ from the tool's address.
   const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower", actions: "action-tracker" };
 
@@ -48,7 +49,7 @@
     }
     return { format: FORMAT, version: VERSION, exported: now.toISOString(), items };
   };
-  window.WorkBackup = { isWork, toolSlug, readBackup, makeBackup };
+  window.WorkBackup = { isWork, toolSlug, readBackup, makeBackup, sound };
 
   const root = document.querySelector("[data-work-backup]");
   if (!root) return;

@@ -13,4 +13,4 @@ node workers/sync/deploy.mjs
 ```
 
 The site reads the address from `src/_data/site.json` (`sync.endpoint`); leave it empty to hide the box everywhere.
-A space nobody writes to for 180 days deletes itself; "Leave and delete the team's copy" in the box deletes it at once.
+A space nobody writes to for 180 days deletes itself; "Delete the team's copy" in the box deletes it at once.

@@ -206,7 +206,8 @@ pasi janë hapur një herë në atë pajisje.
 
 ### Ku ruhen të dhënat
 
-- Çdo gjë mbetet **vetëm në atë browser**, në atë pajisje. Asgjë nuk dërgohet.
+- Çdo gjë mbetet **vetëm në atë browser**, në atë pajisje. Asgjë nuk dërgohet, përveç kur ndez vetë
+  **Sinkronizimin e ekipit** (më poshtë).
 - Çdo gjuhë mban regjistrat e vet (emrat brenda janë fjalët e asaj gjuhe). Lista e veprimeve dhe profili i vendit të
   punës janë të njëjta në të tri gjuhët.
 - **Ruaj gjithë punën time** (në fund të çdo mjeti dhe te faqja Mjete) bën një skedar me gjithë punën. Me **Hap një skedar
@@ -214,6 +215,13 @@ pasi janë hapur një herë në atë pajisje.
 - **Pikat e rikthimit:** browser-i krijon vetë një pikë rikthimi çdo ditë që hap një mjet, dhe para se një skedar i
   hapur të zëvendësojë diçka. Te kutia e ruajtjes, **Pika rikthimi** tregon listën; **Rikthe** e kthen punën si ishte
   atë ditë. Kutia tregon edhe sa vend zë puna dhe paralajmëron kur hapësira po mbaron.
+- **Sinkronizimi i ekipit** (te kutia e ruajtjes): **Krijo një ekip** jep një kod me gjashtë fjalë dhe
+  një kod QR. Në pajisjet e tjera, te **Bashkohu me një ekip**, shkruhen fjalët ose skanohet kodi. Pastaj mjetet e
+  zgjedhura (lista e veprimeve, profili i vendit të punës, regjistrat) janë të njëjta në çdo pajisje të ekipit, dhe
+  secila punon edhe pa internet. Puna **kriptohet në pajisje** me një çelës nga kodi, kështu që serveri (Cloudflare,
+  `workers/sync/`) nuk mund ta lexojë. Kodi tregohet **vetëm një herë**: shkruaje diku. Mjetet e karrierës, rafti dhe
+  leximet nuk ndahen kurrë. Një ekip që nuk përdoret 180 ditë fshihet vetë; **Fshi kopjen e ekipit** e fshin menjëherë.
+  Për ta fikur kudo, lër bosh `sync.endpoint` te `src/_data/site.json`.
 - Çdo mjet hapet herën e parë me një **shembull**, që të shihet menjëherë çfarë tregon. Shtyp **Fshi shembullin**
   ose shto të dhënat e tua dhe shembulli ikën vetë.
 

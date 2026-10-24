@@ -1,0 +1,44 @@
+/* ===== Team sync (js/team-sync.js), a fold inside "All your work in one file" ===== */
+.tm { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 14px; }
+.tm[hidden], .tm [hidden] { display: none !important; }
+.tm-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; cursor: pointer; list-style: none; }
+.tm-summary::-webkit-details-marker { display: none; }
+.tm-summary::before { content: "+"; display: inline-block; width: 1ch; color: var(--muted); font-weight: 700; }
+.tm[open] > .tm-summary::before { content: "−"; }
+.tm-summary strong { font-size: 16px; }
+.tm-state { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.tm-body { display: grid; gap: 14px; margin-top: 12px; max-width: 760px; }
+.tm-body .form-note { margin: 0; }
+.tm-off { display: grid; gap: 14px; }
+.tm-row, .tm-leave { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.tm-join { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; }
+.tm-join-field { flex: 1 1 260px; min-width: 0; }
+.tm-join-field input { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+/* The code, shown once: large, in a type that keeps the letters apart. */
+.tm-new { display: grid; gap: 10px; padding: 14px 16px; border: 1px solid var(--blue); border-radius: var(--radius); }
+.tm-new .kicker { margin: 0; }
+.tm-code { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: clamp(17px, 2.4vw, 22px); font-weight: 700; color: var(--ink); overflow-wrap: anywhere; user-select: all; }
+.tm-new-row { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: flex-start; }
+.tm-qr { flex: 0 0 auto; width: 168px; max-width: 100%; }
+.tm-qr svg { display: block; width: 100%; height: auto; border-radius: 6px; }
+.tm-new-copy { display: grid; gap: 8px; justify-items: start; flex: 1 1 220px; min-width: 0; }
+.tm-on { display: grid; gap: 12px; }
+.tm-status { color: var(--ink); font-variant-numeric: tabular-nums; }
+/* An error is said in words; the line beside it only repeats it. */
+.tm-status.is-error { padding-left: 12px; border-left: 3px solid var(--warn); }
+.tm-devices { overflow-wrap: anywhere; }
+.tm-tools { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.tm-tools legend { margin-bottom: 6px; padding: 0; }
+.tm-tool-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+.tm-tool { display: flex; gap: 8px; align-items: center; min-height: 32px; overflow-wrap: anywhere; }
+.tm-tool input { width: 18px; height: 18px; margin: 0; flex: 0 0 auto; accent-color: var(--blue); }
+.tm-device { max-width: 360px; }
+.tm-leave .button-ghost { padding: 0; font-size: 14px; }
+.tm-message:empty { display: none; }
+.tm-reload { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 0; }
+@media (max-width: 620px) {
+  .tm-tool-list { grid-template-columns: minmax(0, 1fr); }
+  .tm-tool { min-height: 44px; }
+  .tm-row > *, .tm-join > button { min-height: 44px; }
+  .tm-leave { display: grid; justify-items: start; gap: 12px; }
+}

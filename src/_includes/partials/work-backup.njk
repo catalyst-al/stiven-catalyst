@@ -67,6 +67,9 @@
       <label class="button-secondary work-backup-open">{{ "Open a saved file" | t(lang) }}<input type="file" accept="application/json,.json" data-work-open></label>
     </div>
     <p class="form-note work-backup-status" data-work-status role="status" aria-live="polite"></p>
+{%- if site.sync.endpoint %}
+    {% include "partials/team-sync.njk" %}
+{%- endif %}
   </div>
 </section>
 <script type="application/json" id="work-backup-names">{
@@ -76,3 +79,6 @@
 }</script>
 <script src="{{ '/js/storage-guard.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>
+{%- if site.sync.endpoint %}
+<script src="{{ '/js/team-sync.js' | assetUrl }}" defer></script>
+{%- endif %}
