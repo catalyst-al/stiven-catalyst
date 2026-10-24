@@ -20,7 +20,8 @@
       "/tools/five-s-audit/",
       "/tools/safety-cross/",
       "/tools/lost-found/",
-      "/tools/room-status/"
+      "/tools/room-status/",
+      "/tools/guest-complaints/"
     ],
     "learn": [],
     "also": [
@@ -97,6 +98,11 @@
         "when": "During the shift",
         "do": "Keep every room's status current as the work happens, clean the queue from the top, and copy the summary into the shift handover.",
         "tool": "/tools/room-status/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Log every complaint while the guest is still with you, walk through LEARN, resolve it within the target and call the guest back before the shift ends.",
+        "tool": "/tools/guest-complaints/"
       }
     ],
     "next": "zenith"

@@ -310,5 +310,13 @@
     "summary": "The live room board of the shift: every room by floor with its housekeeping code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), DND, VIP and arrival flags and its attendant. It shows the next room to clean, the rooms ready for today's arrivals, the out-of-order share and the minutes from check-out to clean and from clean to inspected.",
     "url": "/tools/room-status/",
     "cta": "Open the room board"
+  },
+  {
+    "name": "Guest Complaints",
+    "type": "Hotel",
+    "time": "Ongoing",
+    "summary": "The complaint and service-recovery log of the front office: LEARN, the action, the compensation in euros, the time to resolve and the call back. Complaints per 100 occupied room nights, the share resolved within target, repeat rooms, the Pareto of the categories and a reply to the guest.",
+    "url": "/tools/guest-complaints/",
+    "cta": "Open the log"
   }
 ]

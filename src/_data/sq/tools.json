@@ -310,5 +310,13 @@
     "summary": "Tabela e dhomave e turnit: çdo dhomë sipas katit me kodin e housekeeping (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), shënimet DND, VIP dhe mbërritje dhe pastruesin e saj. Tregon dhomën e radhës për pastrim, dhomat gati për mbërritjet e sotme, pjesën jashtë përdorimit dhe minutat nga largimi deri e pastër dhe nga e pastër deri e inspektuar.",
     "url": "/sq/tools/room-status/",
     "cta": "Hap tabelën e dhomave"
+  },
+  {
+    "name": "Ankesat e mysafirëve",
+    "type": "Hotel",
+    "time": "Vazhdimisht",
+    "summary": "Regjistri i ankesave dhe i rikuperimit të shërbimit në recepsion: LEARN, veprimi, kompensimi në euro, koha e zgjidhjes dhe telefonata pasuese. Ankesat për 100 net dhome të zëna, pjesa e zgjidhur brenda objektivit, dhomat që përsëriten, Pareto e kategorive dhe një përgjigje për mysafirin.",
+    "url": "/sq/tools/guest-complaints/",
+    "cta": "Hap regjistrin"
   }
 ]

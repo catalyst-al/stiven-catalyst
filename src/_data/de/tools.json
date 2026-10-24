@@ -310,5 +310,13 @@
     "summary": "Das Zimmerboard der Schicht: jedes Zimmer nach Etage mit seinem Housekeeping-Code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), den Markierungen DND, VIP und Anreise und seiner Reinigungskraft. Es zeigt das nächste Zimmer zur Reinigung, die bezugsfertigen Zimmer für die heutigen Anreisen, den Anteil außer Betrieb und die Minuten von der Abreise bis sauber und von sauber bis kontrolliert.",
     "url": "/de/tools/room-status/",
     "cta": "Zimmerboard öffnen"
+  },
+  {
+    "name": "Gästebeschwerden",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Das Beschwerde- und Wiedergutmachungsprotokoll des Empfangs: LEARN, die Maßnahme, die Kompensation in Euro, die Lösungszeit und der Rückruf. Beschwerden pro 100 belegte Zimmernächte, der Anteil innerhalb der Zielzeit gelöst, Wiederholungszimmer, das Pareto der Kategorien und eine Antwort an den Gast.",
+    "url": "/de/tools/guest-complaints/",
+    "cta": "Protokoll öffnen"
   }
 ]
