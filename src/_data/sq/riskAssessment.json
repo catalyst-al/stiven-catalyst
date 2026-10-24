@@ -1,0 +1,318 @@
+{
+  "storageKey": "sc-risk-assessment-sq",
+  "text": {
+    "tool": "Vlerësimi i rrezikut",
+    "csv": "vleresimi-i-rrezikut",
+    "areaPlaceholder": "p.sh. Porta e ngarkimit",
+    "activityPlaceholder": "p.sh. Ngarkimi dhe shkarkimi i kamionëve",
+    "assessorPlaceholder": "p.sh. Marco (përgjegjës turni) me specialistin e sigurisë",
+    "notePlaceholder": "p.sh. Kontroll në vend me dy shoferë të turnit të dytë; përfaqësuesi i punëmarrësve u njoftua",
+    "hazardPlaceholder": "p.sh. Këmbësorë kalojnë portën pas kamionëve që ecin mbrapsht",
+    "measurePlaceholder": "p.sh. Korsi e shënuar për këmbësorë dhe barrierë përgjatë portave 1–6",
+    "ownerPlaceholder": "p.sh. Anna",
+    "empty": "Ende asnjë burim rreziku në këtë vlerësim.",
+    "catalogueNote": "Njëmbëdhjetë grupet e faktorëve të rrezikut nga manuali i BAuA për vlerësimin e rrezikut, me shembuj tipikë për llojin e vendit të punës të zgjedhur më lart. Zgjidh një për të plotësuar formularin, pastaj shkruaje për vendin tënd të punës.",
+    "measuresNote": "Për çdo burim rreziku: masat sipas rendit STOP (zëvendësim, teknike, organizative, personale), secila me përgjegjës, afat dhe gjendje; pasi kryhet, kontrolli nëse funksionon; pastaj rreziku vlerësohet përsëri, ashtu siç është me masat në vend.",
+    "scalesNote": "Vlerëso gjasat e dëmit që vlerësove, jo të çdo ngjarjeje: një rrëzim nga rampa është i pagjasë, një mavijosje nga një kafaz me rrota jo. Vlerëso pasojën e rëndë më të mundshme, ashtu siç punohet sot.",
+    "reviewNote": "Çdo vlerësim rishikohet në datën e tij, dhe menjëherë pas një lëndimi në zonë, një rreziku të shmangur që mund të ishte vdekjeprurës ose një ndryshimi (proces, pajisje, plan i vendit, lëndë, njerëz të rinj ose të ndjeshëm).",
+    "legal": "Ky mjet të ndihmon të bësh dhe të dokumentosh një vlerësim të rrezikut; nuk është këshillë ligjore. Ndjek praktikën gjermane të Gefährdungsbeurteilung: ligjin për sigurinë në punë (ArbSchG § 5 vlerësimi, § 6 dokumentimi, § 4 masat me mbrojtjen personale në fund, § 3 kontrolli i efektivitetit), faktorët e rrezikut të manualit të BAuA dhe rendin STOP. Kontrollo ligjin që vlen aty ku punon dhe përfshi specialistin e sigurisë: në Shqipëri ligjin nr. 10237/2010 «Për sigurinë dhe shëndetin në punë» dhe aktet nënligjore të tij; në Gjermani Fachkraft für Arbeitssicherheit, mjekun e punës dhe rregullat DGUV të Berufsgenossenschaft.",
+    "legalShort": "Nuk është këshillë ligjore: kontrollo ligjin që vlen te ti me specialistin e sigurisë."
+  },
+  "areas": ["Pranimi", "Magazinimi", "Mbledhja", "Paketimi", "Porta e ngarkimit", "Oborri", "Dhoma e karikimit", "Zyra", "Tjetër"],
+  "sectors": [
+    { "key": "warehouse", "name": "Magazinë dhe qendër pakosh" },
+    { "key": "hotel", "name": "Hotel" },
+    { "key": "delivery", "name": "Pikë shpërndarjeje (milja e fundit)" }
+  ],
+  "exposed": [
+    { "key": "employees", "name": "Punonjësit" },
+    { "key": "temps", "name": "Punonjës me agjenci" },
+    { "key": "contractors", "name": "Kontraktorë dhe shoferë të transportuesve" },
+    { "key": "visitors", "name": "Vizitorë" }
+  ],
+  "special": [
+    { "key": "young", "name": "Të rinj nën 18 vjeç", "note": "Vlerësoje punën e tyre veçmas: asnjë punë mbi forcat e tyre, me lëndë të rrezikshme ose me rrezik të lartë aksidenti, përveç kur e kërkon formimi dhe mbikëqyr një person kompetent (në Gjermani: JArbSchG §§ 22 dhe 28a)." },
+    { "key": "pregnant", "name": "Punonjëse shtatzëna ose me gji", "note": "Vlerëso çdo veprimtari për to, qoftë ose jo dikush shtatzënë tani, dhe cakto masat mbrojtëse para se të njoftohet një shtatzëni (në Gjermani: MuSchG § 10). Ngritja, lëndët e rrezikshme dhe puna e vetme kërkojnë një vendim." },
+    { "key": "disabled", "name": "Punonjës me aftësi të kufizuara", "note": "Përshtate vendin e punës, rrugët e daljes dhe alarmet sipas personit (në Gjermani: ArbStättV § 3a (2))." },
+    { "key": "new", "name": "Punonjës të rinj dhe punonjës që e flasin pak gjuhën vendase", "note": "Instruktoji para se të fillojnë, në një gjuhë që e kuptojnë, dhe kontrollo që e kuptuan (në Gjermani: ArbSchG § 12)." }
+  ],
+  "groups": [
+    {
+      "key": "mechanical", "no": 1, "name": "Rreziqe mekanike",
+      "factors": "Pjesë lëvizëse të pambrojtura, mjete transporti dhe pune në lëvizje (pirunë, kamionë, rripa transportues), pjesë që lëvizin pa kontroll, sipërfaqe të rrezikshme, rrëshqitje, pengesë dhe rrëzim, rënie nga lartësia",
+      "ref": "Gjermani: BetrSichV § 3, ASR A1.8 rrugët e lëvizjes",
+      "examples": {
+        "warehouse": ["Përplasje pirun me këmbësor në fund të korridoreve pa pamje", "Kamioni largohet nga porta gjatë ngarkimit", "Mallra që bien nga raftet", "Pengesë te filmi mbështjellës dhe paletat bosh", "Kapje në një pikë shtrënguese të rripit transportues ose sorterit"],
+        "hotel": ["Rrëshqitje në dysheme të lagura në kuzhinë dhe banjo", "Prerje nga thikat dhe xhamat e thyer", "Rrëzim nga shkalla ose shkallëza", "Kapje në makinën e hekurosjes në lavanteri"],
+        "delivery": ["Rrëshqitje ose pengesë në shkallë dhe trotuare gjatë mbajtjes", "Goditje nga trafiku gjatë shkarkimit buzë rrugës", "Kafazi me rrota rrokulliset nga platforma ngritëse", "Kapje nga dera rrëshqitëse ose e pasme e furgonit"]
+      }
+    },
+    {
+      "key": "electrical", "no": 2, "name": "Rreziqe elektrike",
+      "factors": "Goditje elektrike, hark elektrik, ngarkesë elektrostatike",
+      "ref": "Gjermani: DGUV Vorschrift 3",
+      "examples": {
+        "warehouse": ["Kabllo dhe priza të dëmtuara te karikuesit dhe skanerët", "Qark i shkurtër mbi polet e baterisë", "Punë në kutinë e komandimit të sorterit"],
+        "hotel": ["Ibrikë dhe tharëse flokësh me defekt në dhoma", "Kabllo të dëmtuara te makinat e pastrimit", "Ujë pranë prizave në kuzhinë dhe spa"],
+        "delivery": ["Kabllot e karikimit të furgonëve elektrikë në shi", "Zgjatues të dëmtuar në pikën e shpërndarjes"]
+      }
+    },
+    {
+      "key": "substances", "no": 3, "name": "Lëndë të rrezikshme",
+      "factors": "Kontakt me lëkurën, thithje, gëlltitje, efekte fizike dhe kimike (zjarr, reaksione)",
+      "ref": "Gjermani: GefStoffV § 6, karta e sigurisë",
+      "examples": {
+        "warehouse": ["Acidi i baterive (acid sulfurik) te stacioni i karikimit", "Pako me kimikate që rrjedhin", "Gazrat e naftës nga kamionët te porta"],
+        "hotel": ["Lëndë pastrimi dhe dezinfektimi (lëkura, sytë, përzierja)", "Kimikatet e pishinës (klor)", "Detergjentë dhe heqës gëlqereje për pjatalarëset"],
+        "delivery": ["Mallra të rrezikshme në pako (bateri litiumi, sprej)", "Gazrat e shkarkimit në sallën e ngarkimit"]
+      }
+    },
+    {
+      "key": "biological", "no": 4, "name": "Agjentë biologjikë",
+      "factors": "Infeksion nga mikroorganizmat, efekte alergjizuese ose toksike (myku)",
+      "ref": "Gjermani: BioStoffV § 4",
+      "examples": {
+        "warehouse": ["Jashtëqitje brejtësish dhe zogjsh në magazinë", "Myk te kthimet dhe malli i lagur"],
+        "hotel": ["Gjilpëra të përdorura, gjak dhe lëngje trupore në dhoma", "Legionela në sistemet e ujit dhe dushet", "Trajtimi i ushqimit (salmonela, norovirus)"],
+        "delivery": ["Pako ushqimore të prishura dhe ambalazh i ndotur", "Infeksione të frymëmarrjes nga kontakti me shumë njerëz"]
+      }
+    },
+    {
+      "key": "fire", "no": 5, "name": "Rreziqe zjarri dhe shpërthimi",
+      "factors": "Lëndë të ngurta, lëngje dhe gazra të djegshme, atmosferë shpërthyese, lëndë plasëse",
+      "ref": "Gjermani: ASR A2.2 masat kundër zjarrit, GefStoffV",
+      "examples": {
+        "warehouse": ["Hidrogjen që lirohet gjatë karikimit të baterive të pirunëve", "Bateri litium-jon në pako dhe skanerë", "Ngarkesa e zjarrit nga kartoni dhe paletat e magazinuara", "Rrugë daljeje të bllokuara, dyer zjarri të mbajtura hapur"],
+        "hotel": ["Zjarr nga vaji në kuzhinë", "Mysafirë që pinë duhan në dhomë", "Push në tharëset e lavanterisë"],
+        "delivery": ["Karikimi i biçikletave dhe furgonëve elektrikë brenda", "Karburant i ruajtur në pikën e shpërndarjes"]
+      }
+    },
+    {
+      "key": "thermal", "no": 6, "name": "Rreziqe termike",
+      "factors": "Mjedise dhe sipërfaqe të nxehta ose të ftohta",
+      "ref": "",
+      "examples": {
+        "warehouse": ["Sipërfaqe të nxehta te makinat e tkurrjes dhe saldimit të filmit", "Mallra të ngrira dhe sipërfaqet e frigoriferit"],
+        "hotel": ["Vaj i nxehtë, avull dhe furra në kuzhinë", "Ujë i nxehtë dhe avull në lavanteri"],
+        "delivery": ["Pjesë të nxehta të motorit dhe marmitës", "Akull i thatë në kutitë e zinxhirit të ftohtë"]
+      }
+    },
+    {
+      "key": "physical", "no": 7, "name": "Efekte fizike të veçanta",
+      "factors": "Zhurmë, ultratinguj dhe infratinguj, dridhje të të gjithë trupit dhe dorë-krah, rrezatim optik (UV, lazer), rrezatim jonizues, fusha elektromagnetike, mbipresion ose nënpresion",
+      "ref": "Gjermani: LärmVibrationsArbSchV § 3, OStrV",
+      "examples": {
+        "warehouse": ["Zhurma e sorterit dhe e rripave transportues", "Dridhje të të gjithë trupit në pirunë mbi dysheme të dëmtuara", "Lazeri i skanerëve dhe i sistemeve të matjes"],
+        "hotel": ["Zhurmë në zonën e larjes së enëve", "Rrezatim UV për punonjësit jashtë (pishina, kopshti)"],
+        "delivery": ["Dridhje të të gjithë trupit gjatë drejtimit", "Rrezatim UV dhe vapë në linjat e verës"]
+      }
+    },
+    {
+      "key": "environment", "no": 8, "name": "Mjedisi i punës",
+      "factors": "Klima (vapë, të ftohtë, rryma ajri), ndriçimi, mungesa e oksigjenit, rrugët e daljes dhe të lëvizjes, sinjalistika, hapësira për lëvizje, vendosja e vendit të punës, ambientet sanitare dhe të pushimit",
+      "ref": "Gjermani: ArbStättV dhe ASR (A3.4 ndriçimi, A3.5 temperatura)",
+      "examples": {
+        "warehouse": ["I ftohtë dhe rryma ajri te portat e hapura", "Ndriçim i dobët në korridore", "Vapë nën çati në verë", "Rrugë lëvizjeje dhe daljeje të bllokuara me mallra"],
+        "hotel": ["Vapë në kuzhinë dhe lavanteri", "Ndriçim i dobët në korridore dhe shkallë", "Depo dhe dhoma lino të ngushta"],
+        "delivery": ["Vapë në furgon në verë, i ftohtë në dimër", "Hyrje dhe shkallë të errëta", "Asnjë tualet gjatë linjës"]
+      }
+    },
+    {
+      "key": "load", "no": 9, "name": "Ngarkesa fizike",
+      "factors": "Ngritja, mbajtja, bartja, shtyrja dhe tërheqja e ngarkesave, qëndrime të detyruara, punë e përsëritur, kombinim i punës statike dhe dinamike",
+      "ref": "Gjermani: LasthandhabV, metodat e treguesve kyç (LMM) të BAuA",
+      "examples": {
+        "warehouse": ["Ngritja e pakove të rënda nga dyshemeja e rimorkios", "Trajtim i përsëritur në hyrjen e sorterit", "Qëndrime të detyruara gjatë mbledhjes nga raftet e poshtme", "Shtyrja dhe tërheqja e kafazeve me rrota të plota"],
+        "hotel": ["Rregullimi i shtretërve dhe kthimi i dyshekëve", "Shtyrja e karrocave të rënda të pastrimit", "Qëndrimi në këmbë për orë të tëra në recepsion"],
+        "delivery": ["Bartja e pakove të rënda nëpër shkallë", "Hyrja dhe dalja nga furgoni shumë herë në ditë", "Ngritja e pakove nga dyshemeja e furgonit"]
+      }
+    },
+    {
+      "key": "psych", "no": 10, "name": "Ngarkesa psikologjike",
+      "factors": "Përmbajtja dhe detyra e punës, organizimi i punës (presion kohe, orari, turnet), marrëdhëniet shoqërore, mjedisi i punës, forma të reja pune",
+      "ref": "Gjermani: ArbSchG § 5 (3) nr. 6",
+      "examples": {
+        "warehouse": ["Presion kohe në pik (ritmi i mbledhjes, objektivat e skanerit)", "Turne nate dhe orare që ndryshojnë", "Punë monotone në një vend"],
+        "hotel": ["Mysafirë agresivë ose fyes", "Night audit vetëm me përgjegjësinë për gjithë hotelin", "Turne të ndara dhe ndryshime orari në çast"],
+        "delivery": ["Dritare dorëzimi të ngushta dhe objektiva linje", "Konflikte me marrësit", "Stres në trafik të rënduar"]
+      }
+    },
+    {
+      "key": "other", "no": 11, "name": "Rreziqe të tjera",
+      "factors": "Rreziqe nga njerëzit (dhunë, grabitje), kafshët dhe bimët, trafiku rrugor, puna e vetme dhe çdo gjë që nuk mbulohet më lart",
+      "ref": "Gjermani: DGUV Regel 112-139 për alarmet e punës së vetme",
+      "examples": {
+        "warehouse": ["Punë e vetme në dhomën e karikimit ose natën", "Vjedhje dhe dhunë te porta e hyrjes", "Shoferë kamionësh të jashtëm që nuk i njohin rregullat e vendit"],
+        "hotel": ["Grabitje ose dhunë në recepsion natën", "Punë e vetme në dhomat teknike", "Persona të paautorizuar në zonat e stafit"],
+        "delivery": ["Aksidente rrugore gjatë linjës", "Sulme qensh te dera", "Punë e vetme në linjë, pa ndihmë pas një aksidenti", "Grabitje e parave ose e pakove me vlerë"]
+      }
+    }
+  ],
+  "likelihood": [
+    ["Shumë e pagjasë", "Praktikisht kurrë: nuk pritet në vite me këtë punë, as këtu as gjetkë."],
+    ["E pagjasë", "Mund të ndodhë, por nuk dihet këtu; ndoshta një herë në disa vjet."],
+    ["E mundshme", "Ka ndodhur në punë të ngjashme ose këtu më parë; rreth një herë në vit."],
+    ["E gjasshme", "Ndodh këtu herë pas here; disa herë në vit."],
+    ["Shumë e gjasshme", "Pritet: ndodh shpesh, çdo muaj ose më shpesh, nëse nuk ndryshon asgjë."]
+  ],
+  "severity": [
+    ["E papërfillshme", "Asnjë lëndim, ose një i lehtë që nuk do ndihmë të parë."],
+    ["E lehtë", "Ndihmë e parë ose vizitë te mjeku, kthim në punë brenda tri ditëve."],
+    ["Mesatare", "Lëndim ose sëmundje me më shumë se tri ditë mungesë (në Gjermani aksident që raportohet), me shërim të plotë."],
+    ["E rëndë", "Lëndim i rëndë ose i përhershëm, sëmundje profesionale, mungesë e gjatë."],
+    ["Vdekjeprurëse", "Vdekje, ose disa persona të lënduar rëndë."]
+  ],
+  "bands": {
+    "low": {
+      "name": "I ulët",
+      "meaning": "I pranueshëm ashtu siç është. Mbaji masat në vend dhe shiko sërish në rishikimin e radhës.",
+      "moves": ["Kontrollo në vizitën e radhës që masat ekzistuese janë ende në vend.", "Mbaje burimin e rrezikut në listë, që një ndryshim në punë ta sjellë sërish.", "Përdore instruktimin që njerëzit ta kenë parasysh."],
+      "question": "Çfarë duhet të ndryshojë që ky rrezik të rritet?"
+    },
+    "medium": {
+      "name": "Mesatar",
+      "meaning": "Duhen masa: planifikoji me përgjegjës dhe afat, dhe ule rrezikun sa më shumë që është e arsyeshme.",
+      "moves": ["Planifiko të paktën një masë mbi P në rendin STOP, me përgjegjës dhe afat.", "Bini dakord si dhe kur do të kontrollohet efekti.", "Vlerëso rrezikun e mbetur kur masa të jetë në vend."],
+      "question": "Cila masë do ta zhdukte këtë burim rreziku, jo vetëm ta bënte më pak të gjasshëm?"
+    },
+    "high": {
+      "name": "I lartë",
+      "meaning": "Duhen masa shpejt, para se puna të vazhdojë si zakonisht: kërko së pari zëvendësim dhe masa teknike.",
+      "moves": ["Vendos këtë javë një masë të përkohshme dhe atë të qëndrueshme me afat të caktuar.", "Pyet nëse burimi i rrezikut mund të hiqet ose puna të bëhet ndryshe (S) para se ta mbrosh (T).", "Instrukto të gjithë të ekspozuarit dhe kontrollo efektin brenda një muaji."],
+      "question": "Pse është ky burim rreziku këtu, dhe kush vendosi që duhet të jetë?"
+    },
+    "very-high": {
+      "name": "Shumë i lartë",
+      "meaning": "Mos vazhdo kështu: ndalo ose kufizo punën derisa masat ta kenë ulur rrezikun.",
+      "moves": ["Ndalo ose kufizo punën tani dhe njofto drejtuesin përgjegjës dhe specialistin e sigurisë.", "Bini dakord për masat që duhet të jenë në vend para se puna të rifillojë.", "Vlerëso rrezikun përsëri me masat në vend, dhe vetëm atëherë lejo punën."],
+      "question": "Çfarë duhet të jetë e vërtetë para se dikush ta bëjë sërish këtë punë?"
+    }
+  },
+  "stop": {
+    "S": { "name": "Zëvendësim", "hint": "Hiq burimin e rrezikut ose zëvendësoje: një lëndë, proces, makinë ose mënyrë pune tjetër që është më pak e rrezikshme." },
+    "T": { "name": "Teknike", "hint": "Trajtoje rrezikun te burimi dhe ndaji njerëzit prej tij: mbrojtëse, barriera, bllokime, ventilim, mjete ngritëse." },
+    "O": { "name": "Organizative", "hint": "Ndrysho mënyrën si organizohet puna: rregulla, rrugë, rotacion, orare, leje pune, formim dhe instruktim, ndarje në kohë ose në hapësirë." },
+    "P": { "name": "Personale", "hint": "Pajisjet mbrojtëse personale (PMP) dhe sjellja personale. Vjen e fundit, kur S, T dhe O nuk mjaftojnë, dhe kërkon instruktim dhe kontroll." }
+  },
+  "statuses": { "open": "Planifikuar", "doing": "Në punë", "done": "Kryer" },
+  "checks": { "none": "Ende pa kontrolluar", "effective": "Efektive", "partly": "Pjesërisht efektive", "not-effective": "Jo efektive" },
+  "reviewMonths": [6, 12, 24],
+  "causeGroups": {
+    "Rregull dhe pastërti": ["mechanical", "environment"],
+    "Pirun / mjet": ["mechanical", "environment", "other"],
+    "Ngritje manuale": ["load"],
+    "Rrëzime / rrëshqitje": ["mechanical"],
+    "Pajisje": ["mechanical", "electrical"],
+    "Procedura nuk u ndoq": ["*"],
+    "PMP": ["*"],
+    "Tjetër": ["*"]
+  },
+  "signatures": ["Hartuar nga", "Punëdhënësi ose drejtuesi përgjegjës", "Specialisti i sigurisë (dhe mjeku i punës kur nevojitet)", "Përfaqësuesi i punëmarrësve (në dijeni)"],
+  "tips": [
+    ["Një vlerësim për çdo zonë ose veprimtari.", "Kur puna është e njëjtë, një vlerësim mbulon çdo vend pune të ngjashëm (ArbSchG § 5 (2)). Një qendër pakosh ka nevojë për disa: porta, trafiku, mbledhja, dhoma e karikimit."],
+    ["Shkoje në vend, me njerëzit që e bëjnë punën.", "Burimet e rrezikut gjenden në sallë, jo në tavolinë. Merr një ose dy veta nga turni dhe specialistin e sigurisë, dhe kalo njëmbëdhjetë grupet e katalogut."],
+    ["Vlerësoje ashtu siç është sot.", "Gjasat dhe rëndesa e dëmit me masat që janë vërtet në vend, jo me ato të planifikuara. Rreziku i mbetur vlerësohet veçmas, pas masave."],
+    ["S para T para O para P.", "Pajisjet mbrojtëse personale vijnë të fundit. Një rrezik i lartë që përballohet vetëm me doreza dhe jelek shënohet: kërko së pari një mënyrë për ta hequr burimin e rrezikut ose për t'i mbajtur njerëzit larg tij."],
+    ["E kryer nuk do të thotë ende efektive.", "Kontrollo në një datë nëse masa funksionon dhe shkruaj rezultatin: këtë kërkon ligji kur flet për dokumentimin e kontrollit të efektivitetit."],
+    ["Rishikoje pas çdo ndryshimi.", "Pas një aksidenti ose rreziku të shmangur, një makine ose plani të ri, lëndësh ose njerëzish të rinj, dhe më vonë në datën e rishikimit."]
+  ],
+  "example": {
+    "assessments": [
+      {
+        "area": "Porta e ngarkimit", "activity": "Ngarkimi dhe shkarkimi i kamionëve dhe i kontejnerëve të ndërrueshëm (pako në kafaze me rrota dhe në paleta)", "daysAgo": 120,
+        "assessor": "Marco (përgjegjës turni) me specialistin e sigurisë", "exposed": ["employees", "temps", "contractors"], "special": [], "reviewMonths": 12,
+        "note": "Kontroll në portë me dy shoferë të turnit të dytë; shoferët e transportuesve u pyetën për rrezikun e largimit gjatë ngarkimit.",
+        "hazards": [
+          { "group": "mechanical", "text": "Kamioni largohet gjatë ngarkimit: piruni ose transpaleta bie mes rampës dhe rimorkios", "l": 3, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Bllokues automjeti ose pykë rrotash në çdo portë; drita e portës bëhet jeshile vetëm kur kamioni është i siguruar", "owner": "Mirëmbajtja", "dueIn": 30, "status": "doing", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Shoferët dorëzojnë çelësin e kamionit te porta e hyrjes deri në fund të ngarkimit", "owner": "Anna", "dueIn": -90, "status": "done", "checkIn": -30, "check": "effective" }
+          ] },
+          { "group": "mechanical", "text": "Këmbësorë kalojnë portën pas kamionëve dhe pirunëve që ecin mbrapsht", "l": 4, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Korsi e shënuar për këmbësorë dhe barrierë përgjatë portave 1–6", "owner": "Mirëmbajtja", "dueIn": 14, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Askush nuk kalon korsinë e portës pa kontakt me sy me shoferin; udhëzues kur ecet mbrapsht", "owner": "Luca", "dueIn": -40, "status": "done", "checkIn": -7, "check": "partly" },
+            { "type": "P", "text": "Jelekë me shikueshmëri të lartë për të gjithë te porta, edhe për shoferët e transportuesve", "owner": "Anna", "dueIn": -60, "status": "done", "checkIn": -30, "check": "effective" }
+          ] },
+          { "group": "load", "text": "Ngritja e pakove të rënda (deri në 31,5 kg) nga dyshemeja e rimorkios", "l": 4, "s": 3, "l2": 3, "s2": 2, "measures": [
+            { "type": "T", "text": "Rrip transportues teleskopik brenda rimorkios për pakot e ngarkuara lirshëm", "owner": "Marco", "dueIn": 90, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Ngritje me dy veta mbi 25 kg; pakot e rënda shënohen te sorteri", "owner": "Anna", "dueIn": -50, "status": "done", "checkIn": -20, "check": "effective" }
+          ] },
+          { "group": "environment", "text": "I ftohtë dhe rryma ajri te portat e hapura në dimër", "l": 4, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Izolues portash te portat 1–6", "owner": "Mirëmbajtja", "dueIn": -100, "status": "done", "checkIn": -60, "check": "effective" },
+            { "type": "P", "text": "Xhaketa dimri, doreza dhe të brendshme termike të shpërndara në tetor", "owner": "Anna", "dueIn": 7, "status": "doing", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Magazinimi", "activity": "Trafiku i pirunëve dhe i transpaletave në korridore dhe në korsitë cross-dock", "daysAgo": 345,
+        "assessor": "Luca (përgjegjës magazine) me specialistin e sigurisë", "exposed": ["employees", "temps"], "special": [], "reviewMonths": 12,
+        "note": "",
+        "hazards": [
+          { "group": "mechanical", "text": "Përplasje pirun me këmbësor në fund të korridoreve pa pamje", "l": 3, "s": 5, "l2": 2, "s2": 5, "measures": [
+            { "type": "T", "text": "Drita paralajmëruese blu në të gjithë pirunët, pasqyra konvekse në fund të korridoreve", "owner": "Mirëmbajtja", "dueIn": -200, "status": "done", "checkIn": -150, "check": "effective" },
+            { "type": "O", "text": "Rrugë këmbësorësh të shënuara; shpejtësi maksimale 6 km/h në korridore", "owner": "Luca", "dueIn": -200, "status": "done", "checkIn": -150, "check": "partly" },
+            { "type": "O", "text": "Vetëm drejtues të trajnuar me autorizim me shkrim; instruktim një herë në vit", "owner": "Luca", "dueIn": 20, "status": "open", "checkIn": null, "check": "" }
+          ] },
+          { "group": "mechanical", "text": "Mallra që bien nga raftet (paleta që dalin jashtë, lartësi e gabuar e stivimit)", "l": 3, "s": 4, "l2": 2, "s2": 4, "measures": [
+            { "type": "T", "text": "Raftet kontrollohen çdo vit nga një person kompetent; mbrojtëse goditjesh në fund të korridoreve", "owner": "Mirëmbajtja", "dueIn": -120, "status": "done", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Lartësia maksimale e stivimit e shënuar në çdo raft dhe e kontrolluar dy herë në turn", "owner": "Luca", "dueIn": 7, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "mechanical", "text": "Pengesë te filmi mbështjellës dhe paletat bosh në korridore", "l": 3, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Kosha për filmin mbështjellës në fund të çdo korridori", "owner": "Sofia", "dueIn": -10, "status": "done", "checkIn": 20, "check": "" },
+            { "type": "O", "text": "Një përgjegjës korridori për turn e dorëzon dyshemenë të pastër para se të largohet", "owner": "Sofia", "dueIn": 10, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "physical", "text": "Dridhje të të gjithë trupit kur kalohet mbi fuga dyshemeje dhe ura ngarkimi të dëmtuara", "l": 2, "s": 2, "l2": 1, "s2": 2, "measures": [
+            { "type": "T", "text": "Riparimi i fugës së dyshemesë në korsinë cross-dock 2", "owner": "Mirëmbajtja", "dueIn": 45, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Mbledhja", "activity": "Mbledhja dhe sortimi i pakove dhe i mallrave të vogla te raftet dhe te hyrja e sorterit", "daysAgo": 75,
+        "assessor": "Anna (përgjegjëse turni) me mjekun e punës", "exposed": ["employees", "temps"], "special": ["young"], "reviewMonths": 12,
+        "note": "Dy praktikantë nën 18 vjeç punojnë në mbledhje: detyrat e tyre u vlerësuan bashkë me ta.",
+        "hazards": [
+          { "group": "load", "text": "Ngritje dhe rrotullim i përsëritur te hyrja e sorterit", "l": 4, "s": 3, "l2": 3, "s2": 2, "measures": [
+            { "type": "T", "text": "Tavolina hyrëse me lartësi të rregullueshme dhe rrëshqitëse me rula te kanalet", "owner": "Marco", "dueIn": 60, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Rotacion çdo dy orë mes hyrjes, mbledhjes dhe paketimit", "owner": "Anna", "dueIn": -60, "status": "done", "checkIn": -30, "check": "effective" },
+            { "type": "O", "text": "Trajnim për teknikën e ngritjes me mjekun e punës", "owner": "Anna", "dueIn": -45, "status": "done", "checkIn": -14, "check": "partly" }
+          ] },
+          { "group": "load", "text": "Qëndrime të detyruara gjatë mbledhjes nga raftet e poshtme dhe të sipërme", "l": 3, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Shkallëza me mbajtëse në çdo korridor", "owner": "Sofia", "dueIn": -30, "status": "done", "checkIn": -5, "check": "effective" },
+            { "type": "O", "text": "Artikujt e rëndë dhe me qarkullim të shpejtë mes lartësisë së gjurit dhe të shpatullave (rivendosje)", "owner": "Sofia", "dueIn": 21, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "psych", "text": "Presion kohe në pik (ritmi i mbledhjes, objektivat e skanerit) dhe puna natën", "l": 3, "s": 3, "l2": 2, "s2": 3, "measures": [
+            { "type": "O", "text": "Plan stafi për pikun me punonjës me agjenci të rezervuar dy javë përpara", "owner": "Anna", "dueIn": -20, "status": "done", "checkIn": -2, "check": "" },
+            { "type": "O", "text": "Pushimet të caktuara në planin e turnit dhe pa u hequr në pik", "owner": "Anna", "dueIn": -3, "status": "open", "checkIn": null, "check": "" }
+          ] },
+          { "group": "environment", "text": "Ndriçim i dobët në korridoret 10–14 (llamba të fikura, hije mbi etiketat)", "l": 3, "s": 2, "l2": 1, "s2": 2, "measures": [
+            { "type": "T", "text": "Zëvendësimi i llambave me LED dhe matja e ndriçimit te vendi i marrjes", "owner": "Mirëmbajtja", "dueIn": 30, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Dhoma e karikimit", "activity": "Karikimi dhe ndërrimi i baterive plumb-acid të pirunëve", "daysAgo": 400,
+        "assessor": "Marco me specialistin e sigurisë dhe furnitorin e baterive", "exposed": ["employees", "contractors"], "special": ["pregnant"], "reviewMonths": 12,
+        "note": "Punonjëset shtatzëna ose me gji nuk punojnë në dhomën e karikimit (acid sulfurik, ngritje).",
+        "hazards": [
+          { "group": "fire", "text": "Hidrogjen që lirohet gjatë karikimit: atmosferë shpërthyese nëse ventilimi ndalet", "l": 2, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Ventilim sipas EN IEC 62485-3 me monitor të rrjedhës së ajrit që ndalon karikimin", "owner": "Mirëmbajtja", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" },
+            { "type": "O", "text": "Ndalohet duhani, flaka e hapur dhe shkëndijat: tabela te dera, punë me nxehtësi vetëm me leje pune", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "substances", "text": "Spërkatje acidi (acid sulfurik) gjatë mbushjes me ujë ose trajtimit të baterive", "l": 3, "s": 4, "l2": 2, "s2": 4, "measures": [
+            { "type": "P", "text": "Mburojë fytyre, doreza dhe përparëse rezistente ndaj acidit", "owner": "Anna", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "electrical", "text": "Qark i shkurtër mbi polet e baterisë (një vegël mbi bateri): hark elektrik dhe djegie", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "O", "text": "Vetëm punonjës të instruktuar i karikojnë dhe i ndërrojnë bateritë", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" },
+            { "type": "P", "text": "Vetëm vegla të izoluara; unazat dhe orët hiqen", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "mechanical", "text": "Shtypje gjatë ndërrimit të baterive (deri në 1,5 t)", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "T", "text": "Karrocë për ndërrimin e baterive me rula dhe ndalues në skaje", "owner": "Mirëmbajtja", "dueIn": -300, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "other", "text": "Punë e vetme në dhomën e karikimit në turnin e natës", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "T", "text": "Alarm personal emergjence për punën e vetme", "owner": "Luca", "dueIn": 30, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Lajmërim te përgjegjësi i turnit çdo 30 minuta gjatë punës së vetme", "owner": "Luca", "dueIn": -5, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      }
+    ]
+  }
+}
