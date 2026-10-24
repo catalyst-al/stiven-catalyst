@@ -1,0 +1,116 @@
+{#- Hoshin Kanri: the X-matrix, catchball, the bowling chart and the monthly review of one site; hoshin-kanri.js does the rest. -#}
+<section class="shell tool-layout dl-setup hx-setup">
+  <div class="tool-panel" data-hoshin-kanri>
+
+    <div class="dl-box">
+      <p class="kicker">1 · {{ "The plan" | t(lang) }}</p>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="hx-title">{{ "Site or plan name" | t(lang) }}</label>
+          <input id="hx-title" placeholder="{{ cfg.text.titlePlaceholder }}" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="hx-start">{{ "First month of the plan year" | t(lang) }}</label>
+          <input id="hx-start" type="month" placeholder="YYYY-MM">
+        </div>
+        <div class="field">
+          <label for="hx-review">{{ "Review month" | t(lang) }}</label>
+          <select id="hx-review"></select>
+        </div>
+      </div>
+      <p class="dl-empty" data-empty>{{ "No matrix yet. Start with the breakthrough objectives below, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example site" | t(lang) }}</button>.</p>
+      <div data-pack></div>
+      <p class="form-note" data-status aria-live="polite"></p>
+    </div>
+
+    <fieldset class="dl-box hx-lists">
+      <legend class="kicker">2 · {{ "The five lists of the X-matrix" | t(lang) }}</legend>
+      <p class="form-note">{{ "From the long term to the people: breakthrough objectives, annual objectives, improvement priorities, metrics and the resources who own them." | t(lang) }}</p>
+      <div data-lists></div>
+    </fieldset>
+
+    <fieldset class="dl-box hx-corners">
+      <legend class="kicker">3 · {{ "The four corners" | t(lang) }}</legend>
+      <p class="form-note">{{ "Tap a cell to change it: ● strong, ○ weak, · none. In the resources: ● primary owner, ○ secondary." | t(lang) }}</p>
+      <div data-matrices></div>
+    </fieldset>
+
+    <fieldset class="dl-box hx-monthly">
+      <legend class="kicker">4 · {{ "Monthly targets and actuals" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="hx-metric">{{ "Metric" | t(lang) }}</label>
+          <select id="hx-metric" data-metric-pick></select>
+        </div>
+      </div>
+      <div data-months></div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-spread>{{ "Spread the targets from the baseline to the year-end target" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-months-status aria-live="polite"></p>
+    </fieldset>
+
+    <fieldset class="dl-box hx-deploy">
+      <legend class="kicker">5 · {{ "Projects and catchball" | t(lang) }}</legend>
+      <p class="form-note" data-portfolio-note aria-live="polite"></p>
+      <div data-projects></div>
+      <p class="kicker hx-sub-kicker">{{ "Catchball" | t(lang) }}</p>
+      <p class="form-note">{{ "Each priority is agreed with the level below: their proposal, the answer from above, and the agreement, with dates." | t(lang) }}</p>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="hx-cb-priority">{{ "Improvement priority" | t(lang) }}</label>
+          <select id="hx-cb-priority"></select>
+        </div>
+        <div class="field">
+          <label for="hx-cb-date">{{ "Date" | t(lang) }}</label>
+          <input id="hx-cb-date" type="date">
+        </div>
+        <div class="field">
+          <label for="hx-cb-kind">{{ "Step" | t(lang) }}</label>
+          <select id="hx-cb-kind"></select>
+        </div>
+        <div class="field dl-wide">
+          <label for="hx-cb-from">{{ "From (team or person)" | t(lang) }}</label>
+          <input id="hx-cb-from" autocomplete="off">
+        </div>
+        <div class="field dl-wide">
+          <label for="hx-cb-text">{{ "Note" | t(lang) }}</label>
+          <textarea id="hx-cb-text" rows="2"></textarea>
+        </div>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-catch-add>{{ "Add the note" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-catch-status aria-live="polite"></p>
+      <div data-catch-list></div>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear the matrix" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Where the work goes." | t(lang) }}</strong> {{ "Projects:" | t(lang) }} <a class="inline-link" href="{{ '/tools/project-portfolio/' | local(lang) }}">{{ "Project Portfolio" | t(lang) }}</a>. {{ "Countermeasures:" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>. {{ "A problem without a clear cause:" | t(lang) }} <a class="inline-link" href="{{ '/tools/a3-report/' | local(lang) }}" data-a3>A3</a> {{ "or" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results hx-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="hoshin-kanri-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/template-pack.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/hoshin-kanri.js' | assetUrl }}" defer></script>

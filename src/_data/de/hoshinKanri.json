@@ -1,0 +1,124 @@
+{
+  "storageKey": "sc-hoshin-kanri-de",
+  "portfolioKey": "sc-project-portfolio-de",
+  "text": {
+    "tool": "Hoshin Kanri",
+    "csv": "hoshin-kanri",
+    "titlePlaceholder": "z. B. Distributionszentrum Nord",
+    "breakthroughPlaceholder": "z. B. 99,5 % pünktlich und vollständig bis 2029",
+    "annualPlaceholder": "z. B. OTIF in diesem Jahr von 96,8 % auf 98,5 % steigern",
+    "priorityPlaceholder": "z. B. Cross-Docking für Schnelldreher",
+    "metricPlaceholder": "z. B. Dock-to-Stock-Zeit",
+    "unitPlaceholder": "z. B. %, h, €",
+    "ownerPlaceholder": "Name",
+    "rolePlaceholder": "z. B. Leitung Wareneingang",
+    "countermeasurePlaceholder": "Was sich ändert, wo und ab wann: eine Gegenmaßnahme gegen die Ursache, kein Wunsch"
+  },
+  "quadrants": {
+    "breakthroughs": ["Durchbruchziele (3–5 Jahre)", "Der Süden der Matrix. Wo der Standort in drei bis fünf Jahren stehen muss: wenige, mutige und messbare Ziele, der Grund für alles darüber."],
+    "annual": ["Jahresziele", "Der Westen. Was dieses Jahr auf dem Weg zu den Durchbruchzielen erreichen muss, jeweils mit einer Zahl und einem Termin."],
+    "priorities": ["Verbesserungsprioritäten", "Der Norden. Die obersten Verbesserungsprioritäten (Projekte, Kaizen-Themen), die die Jahresziele erreichen. Weniger ist mehr: Was hier nicht steht, ist nicht die Arbeit dieses Jahres."],
+    "metrics": ["Zu verbessernde Kennzahlen", "Der Osten. Die Kennzahlen, die belegen, dass jede Priorität wirkt, mit Ausgangswert und Ziel zum Jahresende. Monatsziele und Istwerte folgen in Schritt 4."],
+    "owners": ["Ressourcen", "Der äußerste Osten. Die Menschen, die die Prioritäten tragen. Jede Priorität braucht genau eine hauptverantwortliche Person; Mitverantwortliche unterstützen."]
+  },
+  "matrices": {
+    "ba": "Jahresziele ↔ Durchbruchziele (Südwesten)",
+    "pa": "Verbesserungsprioritäten ↔ Jahresziele (Nordwesten)",
+    "pm": "Verbesserungsprioritäten ↔ zu verbessernde Kennzahlen (Nordosten)",
+    "po": "Verbesserungsprioritäten ↔ Ressourcen (äußerster Osten)"
+  },
+  "strengths": { "strong": "stark", "weak": "schwach" },
+  "roles": { "primary": "hauptverantwortlich", "secondary": "mitverantwortlich" },
+  "better": { "higher": "Höher ist besser", "lower": "Niedriger ist besser" },
+  "catchball": { "proposal": "Vorschlag", "feedback": "Rückmeldung", "agreed": "Vereinbart" },
+  "portfolio": {
+    "phases": { "define": "Define", "measure": "Measure", "analyze": "Analyze", "improve": "Improve", "control": "Control" },
+    "statuses": { "on-track": "Im Plan", "at-risk": "Gefährdet", "late": "Verspätet", "on-hold": "Pausiert", "closed": "Abgeschlossen" }
+  },
+  "tips": [
+    ["Wenige Ziele, bis ganz unten entfaltet.", "Drei bis fünf Durchbruchziele, eine Handvoll Jahresziele und jede Priorität mit einem Jahresziel, einer Kennzahl und einer verantwortlichen Person verbunden. Was nicht auf der Matrix steht, ist nicht die Arbeit dieses Jahres."],
+    ["Lesen Sie das X einmal ringsum.", "Die Durchbruchziele (Süden) führen zu den Jahreszielen (Westen), diese zu den Verbesserungsprioritäten (Norden), diese zu den Kennzahlen (Osten) und zu den Menschen, die sie verantworten (äußerster Osten). Jede Ecke zeigt, wie stark zwei Listen zusammenhängen: ● stark, ○ schwach."],
+    ["Spielen Sie Catchball, bevor die Matrix steht.", "Die Ebene darunter schlägt vor, wie sie eine Priorität erreicht, die Ebene darüber antwortet, und eine Notiz hält fest, wann beide sich geeinigt haben. Eine Priorität, der niemand zugestimmt hat, ist noch ein Wunsch."],
+    ["Prüfen Sie jeden Monat das Bowling-Chart.", "Jede Kennzahl hat für jeden Monat ein Ziel: erreicht oder verfehlt, in Worten und in Farbe. Zwei Verfehlungen in Folge verlangen eine Gegenmaßnahme mit Verantwortlichem und Termin und einen A3, wenn die Ursache nicht klar ist."],
+    ["Lassen Sie die Projekte die Prioritäten tragen.", "Verknüpfen Sie eine Priorität mit ihrem Projekt im Projektportfolio dieses Browsers: Phase, Status und Einsparungen erscheinen neben dem Jahresziel, dem es dient. Das Portfolio wird hier nur gelesen."],
+    ["Geben Sie die Matrix als Datei weiter.", "Speichern Sie sie als Vorlagendatei und schicken Sie sie an die nächste Ebene; dort öffnet man sie hier und baut die eigene Matrix unter Ihrer auf."]
+  ],
+  "example": {
+    "reported": 9,
+    "plan": {
+      "title": "Distributionszentrum Nord",
+      "breakthroughs": [
+        { "id": "b1", "text": "Erste Wahl unserer Kunden: 99,5 % der Aufträge pünktlich und vollständig bis 2029" },
+        { "id": "b2", "text": "Kosten pro versandtem Auftrag bis 2029 um 25 % senken" },
+        { "id": "b3", "text": "Ein sicherer Standort, an dem man bleibt: keine Ausfallunfälle, Fluktuation unter 10 % im Jahr" }
+      ],
+      "annual": [
+        { "id": "a1", "text": "OTIF von 96,8 % auf 98,5 % steigern", "savingsTarget": null },
+        { "id": "a2", "text": "Kosten pro Auftrag von 3,40 € auf 3,05 € senken: 180.000 € im Jahr", "savingsTarget": 180000 },
+        { "id": "a3", "text": "Bestandsgenauigkeit von 98,9 % auf 99,6 % steigern", "savingsTarget": null },
+        { "id": "a4", "text": "Unfallrate mit Ausfalltagen halbieren und die Fluktuation auf 14 % senken", "savingsTarget": null }
+      ],
+      "priorities": [
+        { "id": "p1", "text": "Cross-Docking für Schnelldreher: Dock to Stock in unter 4 Stunden", "project": "hx-example-crossdock", "projectTitle": "Cross-Docking für Schnelldreher" },
+        { "id": "p2", "text": "Neue Kommissionierwege und ABC-Lagerplatzvergabe", "project": "hx-example-pickpath", "projectTitle": "Neue Kommissionierwege und ABC-Lagerplatzvergabe" },
+        { "id": "p3", "text": "Permanente Inventur nach ABC-Klassen, Ursache für jede Differenz", "project": "", "projectTitle": "" },
+        { "id": "p4", "text": "Stapler und Fußgänger trennen; Standardarbeit an den Toren", "project": "", "projectTitle": "" },
+        { "id": "p5", "text": "Einarbeitung mit Pate und Qualifikationsmatrix für neue Mitarbeitende", "project": "", "projectTitle": "" },
+        { "id": "p6", "text": "Die fünf meistgenutzten Kartons auf die richtige Größe bringen", "project": "", "projectTitle": "" }
+      ],
+      "metrics": [
+        { "id": "m1", "text": "OTIF", "unit": "%", "better": "higher", "baseline": 96.8, "target": 98.5,
+          "targets": [96.9, 97.1, 97.2, 97.4, 97.5, 97.7, 97.8, 97.9, 98.1, 98.2, 98.4, 98.5],
+          "actuals": [97.0, 97.2, 97.1, 97.6, 97.8, 97.6, 97.9, 98.0, 98.2] },
+        { "id": "m2", "text": "Dock-to-Stock-Zeit", "unit": "h", "better": "lower", "baseline": 7.5, "target": 4.0,
+          "targets": [7.2, 6.9, 6.6, 6.3, 6.0, 5.8, 5.5, 5.2, 4.9, 4.6, 4.3, 4.0],
+          "actuals": [7.4, 7.0, 6.5, 6.1, 6.0, 5.6, 5.4, 5.0, 4.8] },
+        { "id": "m3", "text": "Kosten pro versandtem Auftrag", "unit": "€", "better": "lower", "baseline": 3.40, "target": 3.05,
+          "targets": [3.37, 3.34, 3.31, 3.28, 3.25, 3.23, 3.20, 3.17, 3.14, 3.11, 3.08, 3.05],
+          "actuals": [3.38, 3.33, 3.30, 3.27, 3.26, 3.22, 3.19, 3.21, 3.18] },
+        { "id": "m4", "text": "Bestandsgenauigkeit", "unit": "%", "better": "higher", "baseline": 98.9, "target": 99.6,
+          "targets": [99.0, 99.0, 99.1, 99.1, 99.2, 99.3, 99.3, 99.4, 99.4, 99.5, 99.5, 99.6],
+          "actuals": [98.9, 99.1, 99.1, 99.2, 99.2, 99.3, 99.2, 99.4, 99.5] },
+        { "id": "m5", "text": "Unfallrate mit Ausfalltagen (LTIFR), gleitend 12 Monate (je Million Stunden)", "unit": "", "better": "lower", "baseline": 11.8, "target": 6.0,
+          "targets": [11.3, 10.8, 10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.5, 7.0, 6.5, 6.0],
+          "actuals": [11.5, 10.6, 10.1, 9.8, 9.6, 8.7, 8.5, 7.8, 7.4] },
+        { "id": "m6", "text": "Fluktuation, gleitend 12 Monate", "unit": "%", "better": "lower", "baseline": 19, "target": 14,
+          "targets": [18.6, 18.2, 17.8, 17.3, 16.9, 16.5, 16.1, 15.7, 15.3, 14.8, 14.4, 14.0],
+          "actuals": [18.5, 18.1, 17.9, 17.4, 17.0, 16.6, 16.0, 15.9, 15.6] }
+      ],
+      "owners": [
+        { "id": "r1", "text": "Jonas Weber", "role": "Leitung Wareneingang" },
+        { "id": "r2", "text": "Mira Hoxha", "role": "Leitung Warenausgang" },
+        { "id": "r3", "text": "Arben Krasniqi", "role": "Leitung kontinuierliche Verbesserung" },
+        { "id": "r4", "text": "Nora Albers", "role": "Layoutplanung" },
+        { "id": "r5", "text": "Luca Brandt", "role": "Leitung Bestandskontrolle" },
+        { "id": "r6", "text": "Sara Demiri", "role": "Fachkraft für Arbeitssicherheit" },
+        { "id": "r7", "text": "Petra Lang", "role": "HR Business Partner" }
+      ],
+      "links": {
+        "ba": { "a1|b1": "strong", "a2|b2": "strong", "a3|b1": "strong", "a3|b2": "weak", "a4|b3": "strong" },
+        "pa": { "p1|a1": "strong", "p1|a2": "weak", "p2|a2": "strong", "p2|a1": "weak", "p3|a3": "strong", "p4|a4": "strong", "p5|a4": "strong", "p5|a2": "weak", "p6|a2": "strong" },
+        "pm": { "p1|m2": "strong", "p1|m1": "weak", "p2|m3": "strong", "p2|m1": "weak", "p3|m4": "strong", "p3|m1": "weak", "p4|m5": "strong", "p5|m6": "strong", "p5|m5": "weak", "p6|m3": "weak" },
+        "po": { "p1|r1": "primary", "p1|r3": "secondary", "p2|r2": "primary", "p2|r4": "secondary", "p3|r5": "primary", "p4|r6": "primary", "p4|r1": "secondary", "p5|r7": "primary", "p5|r3": "secondary", "p6|r3": "secondary", "p6|r2": "secondary" }
+      },
+      "catchball": [
+        { "priority": "p4", "date": -110, "kind": "proposal", "from": "Teamleitungen an den Toren", "text": "Gehwege gelb markieren und Einbahnverkehr an den Toren 1 bis 12; die Staplerfahrer unterschreiben den Torstandard." },
+        { "priority": "p4", "date": -101, "kind": "agreed", "from": "Standortleitung", "text": "Wie vorgeschlagen vereinbart. Sara Demiri leitet, Jonas Weber für die Tore im Wareneingang." },
+        { "priority": "p2", "date": -80, "kind": "proposal", "from": "Schichtleitungen Warenausgang", "text": "Erst nach ABC einlagern, den Kommissionierweg nach der Hochsaison ändern." },
+        { "priority": "p2", "date": -66, "kind": "feedback", "from": "Standortleitung", "text": "Das Kostenziel braucht den neuen Weg noch in diesem Jahr. Lässt sich die Wegänderung ins dritte Quartal ziehen?" },
+        { "priority": "p2", "date": -52, "kind": "agreed", "from": "Schichtleitungen Warenausgang", "text": "Lagerplatzvergabe im Juli, Wegänderung im September; zwei Schichtleitungen kommen ins Projektteam." },
+        { "priority": "p6", "date": -20, "kind": "proposal", "from": "Packteam", "text": "Die fünf meistgenutzten Kartons auf die richtige Größe bringen und nicht mehr mit Luftpolstern auffüllen." },
+        { "priority": "p6", "date": -9, "kind": "feedback", "from": "Standortleitung", "text": "Gut, aber wer verantwortet es: Warenausgang oder kontinuierliche Verbesserung? Bitte eine hauptverantwortliche Person benennen." }
+      ],
+      "review": {
+        "m3": { "countermeasure": "Die 200 schnellsten Artikel in die Griffzone verlegen und den Füllgrad der Kartons täglich an jedem Packtisch prüfen", "owner": "Mira Hoxha", "due": 14 }
+      }
+    },
+    "projects": [
+      { "id": "hx-example-crossdock", "title": "Cross-Docking für Schnelldreher", "lead": "Jonas Weber", "area": "Wareneingang", "phase": "improve", "status": "on-track",
+        "savings": { "hard": 64000, "from": 3, "realised": [{ "month": 3, "amount": 4800 }, { "month": 4, "amount": 5200 }, { "month": 5, "amount": 5600 }, { "month": 6, "amount": 5300 }, { "month": 7, "amount": 5500 }, { "month": 8, "amount": 5800 }] } },
+      { "id": "hx-example-pickpath", "title": "Neue Kommissionierwege und ABC-Lagerplatzvergabe", "lead": "Mira Hoxha", "area": "Warenausgang", "phase": "analyze", "status": "at-risk",
+        "savings": { "hard": 96000, "from": 6, "realised": [{ "month": 6, "amount": 5100 }, { "month": 7, "amount": 4600 }, { "month": 8, "amount": 4200 }] } }
+    ]
+  }
+}
