@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: KPI-të e hotelit
+seo_title: "KPI-të e hotelit: zënia, ADR dhe RevPAR kundrejt buxhetit, me parashikim dhe raport mëngjesi"
+description: "Regjistër privat i KPI-ve të hotelit: zënia, ADR dhe RevPAR kundrejt buxhetit, parashikimi i muajit, ditët e javës, no-show, dhoma jashtë përdorimit, ankesa."
+activeNav: /sq/tools.html
+permalink: /sq/tools/hotel-kpis/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Hotel</p>
+  <h1>KPI-të e hotelit</h1>
+  <p class="lede">Regjistro për çdo natë dhomat e shitura, të ardhurat nga dhomat, no-show-et, dhomat jashtë përdorimit dhe ankesat, ose ngjiti nga eksporti i PMS-it. Shiko zënien, ADR dhe RevPAR që nga fillimi i muajit kundrejt buxhetit, parashikimin për muajin, modelin e ditëve të javës, të ardhurat që humbën dhe KPI-në që duhet trajtuar e para, gati për t'u kopjuar si raport i mëngjesit.</p>
+</section>
+
+{% set cfg = sq.hotelKpis %}
+{% include "partials/hotel-kpis.njk" %}
