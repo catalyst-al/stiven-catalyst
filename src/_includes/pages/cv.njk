@@ -1,0 +1,20 @@
+{#- The CV page, shared by the three languages: the "CV" item of the menu opens here, on the three career tools
+    listed the way Writing lists its four kinds (a large title, its line, how long it takes), instead of going
+    straight into the CV Builder. -#}
+{%- set toolList = {"sq": sq.tools, "de": de.tools}[lang] or tools %}
+<section class="shell page-hero writing-hero reflection-hero cv-hero">
+  <p class="eyebrow">{{ "Free · Private · No sign-up" | t(lang) }}</p>
+  <h1>CV</h1>
+  <p class="lede">{{ "Three ways to the next role: a designed CV, a plain CV that application software reads, and the cover letter that goes with them." | t(lang) }}</p>
+</section>
+<section class="shell listing reflection-list writing-list cv-list">
+  {%- for url, kicker in [["/tools/cv-builder/", "Designed, on A4"], ["/tools/ats-cv/", "For application software"], ["/tools/cover-letter/", "Matches your CV"]] %}
+  {%- for tool in toolList %}{% if tool.url == url | local(lang) %}
+  <a class="list-row" href="{{ tool.url }}">
+    <span class="number"><b>{{ tool.time }}</b></span>
+    <div><h2>{{ tool.name }}</h2><p>{{ tool.summary }}</p></div>
+    <span class="row-meta">{{ kicker | t(lang) }}</span>
+  </a>
+  {%- endif %}{% endfor %}
+  {%- endfor %}
+</section>
