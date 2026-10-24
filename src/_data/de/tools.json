@@ -118,5 +118,133 @@
     "summary": "Das Anschreiben im Design Ihres Lebenslaufs, mit Ihren Angaben daraus und einem ersten Entwurf aus wenigen Antworten. PDF oder Word.",
     "url": "/de/tools/cover-letter/",
     "cta": "Anschreiben verfassen"
+  },
+  {
+    "name": "Maßnahmenliste",
+    "type": "Maßnahmen",
+    "time": "Wöchentlich",
+    "summary": "Eine Liste für jede Maßnahme, jeden Befund und jedes Signal aus den anderen Tools: Verantwortlicher, Termin, Status und Nachweis. Überfälliges zuerst, Wochenprüfung in zehn Minuten, Kalender und Excel.",
+    "url": "/de/tools/action-tracker/",
+    "cta": "Liste öffnen"
+  },
+  {
+    "name": "Tagesboard",
+    "type": "Übersicht",
+    "time": "10 min",
+    "summary": "Sicherheit, Qualität, Lieferung, Kosten und Menschen als fünf Monatskalender mit grünen, gelben und roten Tagen, gefüllt aus Ihren Protokollen. Offene Maßnahmen, weitergegebene Übergabepunkte und ein Huddle in zehn Minuten zum Vorlesen oder Drucken.",
+    "url": "/de/tools/daily-board/",
+    "cta": "Board öffnen"
+  },
+  {
+    "name": "5S-Audit",
+    "type": "Lean",
+    "time": "10 min",
+    "summary": "Gehen Sie einen Bereich ab und bewerten Sie jedes S von 0 bis 4, in 5S, 6S oder 8S, mit Checklisten für Lager, Hotel und Zustellbasis. Radar gegen den letzten Rundgang, Trend und Rangliste je Bereich, Befunde direkt als Maßnahmen und ein Register der Roten Karten.",
+    "url": "/de/tools/five-s-audit/",
+    "cta": "Audit starten"
+  },
+  {
+    "name": "Sicherheitskreuz",
+    "type": "Sicherheit",
+    "time": "Laufend",
+    "summary": "Jeder Unfall, jeder Beinahe-Unfall und jeder unsichere Zustand im grünen Kreuz des Monats, mit Tagen seit dem letzten Unfall, LTIFR, TRIR und Bird-Pyramide. Die Ursache, die Sie zuerst angehen, offene Maßnahmen und ein Thema für die heutige Besprechung.",
+    "url": "/de/tools/safety-cross/",
+    "cta": "Kreuz öffnen"
+  },
+  {
+    "name": "A3-Report",
+    "type": "Problemlösung",
+    "time": "20 min",
+    "summary": "Ein Problem auf einem Blatt, wie bei Toyota: Fakten und Zahl, Ziel mit Termin, Grundursache, Maßnahmen mit je einem Verantwortlichen und die Wirksamkeitsprüfung. Eine Prüfung in acht Punkten, Druck auf A3 oder A4, Word.",
+    "url": "/de/tools/a3-report/",
+    "cta": "A3 beginnen"
+  },
+  {
+    "name": "Kaizen-Board",
+    "type": "Verbesserung",
+    "time": "Wöchentlich",
+    "summary": "Alle Verbesserungsideen des Teams auf einem Board, von der Idee über Planen, Umsetzen und Prüfen bis zur Einführung, mit einer Aufwand-Nutzen-Matrix, die die schnellen Erfolge zeigt. Umsetzungsquote, Tage bis zur Einführung, Einsparung pro Monat und Jahr und die Idee des Monats.",
+    "url": "/de/tools/kaizen-board/",
+    "cta": "Board öffnen"
+  },
+  {
+    "name": "Qualifikationsmatrix",
+    "type": "Menschen",
+    "time": "15 min",
+    "summary": "Bewerten Sie jede Person je Aufgabe von 0 bis 4 in einem ILU-Raster, mit Vorlagen für Lager, Hotel-Rezeption und Zustellbasis. Abdeckung gegen Ziel, Einzelabhängigkeiten, Abdeckung je Schicht und ein Schulungsplan, der eine Stufe 4 mit einem Lernenden zusammenbringt, direkt als Maßnahmen.",
+    "url": "/de/tools/skills-matrix/",
+    "cta": "Matrix aufbauen"
+  },
+  {
+    "name": "OEE",
+    "type": "Anlagen",
+    "time": "Laufend",
+    "summary": "Erfassen Sie jede Schicht einer Anlage mit Stopps, Teilen und Ausschuss. Verfügbarkeit, Leistung, Qualität und OEE, die sechs großen Verluste Tag für Tag und der, den Sie zuerst angehen.",
+    "url": "/de/tools/oee/",
+    "cta": "OEE messen"
+  },
+  {
+    "name": "Hotel-Kennzahlen",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Verkaufte Zimmer, Umsatz, No-Shows, Zimmer außer Betrieb und Beschwerden jeder Nacht, eingefügt aus dem PMS. Auslastung, ADR und RevPAR gegen Budget, die Monatsprognose, das Muster der Wochentage, der verlorene Umsatz und ein Morgenbericht zum Kopieren.",
+    "url": "/de/tools/hotel-kpis/",
+    "cta": "Kennzahlen öffnen"
+  },
+  {
+    "name": "Fischgräte",
+    "type": "Ursachen",
+    "time": "15 min",
+    "summary": "Die Wirkung an den Kopf, die Ursachen mit dem Team an die Gräten von 6M, 4P oder Hotel, jede mit ihrem Warum. Stimmen und wahrscheinliche Ursachen ordnen sie, die wahrscheinlichen werden Maßnahmen zur Prüfung, die wichtigste geht zu 5 Whys, die Ursachen gehen zu Pareto.",
+    "url": "/de/tools/fishbone/",
+    "cta": "Fischgräte zeichnen"
+  },
+  {
+    "name": "FMEA",
+    "type": "Risiko",
+    "time": "30 Min.",
+    "summary": "Halten Sie fest, wie jeder Prozessschritt versagen kann, bewerten Sie Bedeutung, Auftreten und Entdeckung und erhalten Sie RPZ und AIAG-VDA-Aufgabenpriorität. Heatmap, die zehn größten Risiken und die Maßnahmen mit Verantwortlichen bis zur Neubewertung.",
+    "url": "/de/tools/fmea/",
+    "cta": "Blatt öffnen"
+  },
+  {
+    "name": "Prozesslabor",
+    "type": "Six Sigma",
+    "time": "10 min",
+    "summary": "Fügen Sie eine Spalte mit Messwerten ein und sehen Sie eine I-MR-Karte mit den Nelson-Regeln, Cp, Cpk und PPM gegen Ihre Spezifikation und ob eine Vorher/Nachher-Änderung echt ist oder Rauschen. Jede Zahl in klaren Worten.",
+    "url": "/de/tools/process-lab/",
+    "cta": "Labor öffnen"
+  },
+  {
+    "name": "Zeitstudie",
+    "type": "Lean",
+    "time": "20 Min.",
+    "summary": "Messen Sie jedes Element über fünf Zyklen mit der Stoppuhr, die Leertaste nimmt die Zwischenzeit. Sie erhalten die Standardzeit pro Station, die Taktzeit aus dem Bedarf, ein Yamazumi dagegen und das erste Element, das sich verlagern lässt.",
+    "url": "/de/tools/time-study/",
+    "cta": "Studie beginnen"
+  },
+  {
+    "name": "Wertstromanalyse",
+    "type": "Lean",
+    "time": "30 Min.",
+    "summary": "Bilden Sie einen Fluss vom Lieferanten bis zum Kunden ab, mit den Teilen, die zwischen den Schritten warten. Sie erhalten die Durchlaufzeit-Treppe, den Flussgrad, die Taktzeit und den Engpass, zeichnen dann den Soll-Zustand und senden seine Kaizen-Blitze an den Maßnahmen-Tracker.",
+    "url": "/de/tools/value-stream-map/",
+    "cta": "Wertstrom aufnehmen"
+  },
+  {
+    "name": "Standardarbeit",
+    "type": "Standard",
+    "time": "20 min",
+    "summary": "Eine Tätigkeit als TWI-Arbeitszerlegung: Hauptschritte, Kernpunkte nach Sicherheit, Qualität, Technik oder Kosten und zu jedem ein Grund, mit der Zeit je Schritt gegen den Takt. Versionen mit Änderungsvermerk, Druck auf A4, Word.",
+    "url": "/de/tools/standard-work/",
+    "cta": "Standard schreiben"
+  },
+  {
+    "name": "Gemba Walk",
+    "type": "Lean",
+    "time": "15 min",
+    "summary": "Layered Process Audits durch Teamleitung, Bereichsleitung und Standortleitung, mit Ja-oder-Nein-Prüfungen des Standards für Lager, Hotel und Zustellbasis, und ein Verschwendungsrundgang, der die 8 Verschwendungsarten, Mura und Muri zählt. Erfüllungsgrad je Woche und Ebene, wo die Nein-Antworten liegen, welche Ebene im Verzug ist, und Befunde direkt als Maßnahmen.",
+    "url": "/de/tools/gemba-walk/",
+    "cta": "Rundgang starten"
   }
 ]

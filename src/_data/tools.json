@@ -118,5 +118,133 @@
     "summary": "The letter in the same design as your CV, with your details taken from it and a first draft from a few answers. PDF or Word.",
     "url": "/tools/cover-letter/",
     "cta": "Write your letter"
+  },
+  {
+    "name": "Action Tracker",
+    "type": "Actions",
+    "time": "Weekly",
+    "summary": "One list for every countermeasure, finding and signal from the other tools: owner, due date, status and how it is verified. Overdue first, a weekly review in ten minutes, calendar and Excel export.",
+    "url": "/tools/action-tracker/",
+    "cta": "Open the list"
+  },
+  {
+    "name": "Daily Board",
+    "type": "Dashboard",
+    "time": "10 min",
+    "summary": "Safety, Quality, Delivery, Cost and People as five month calendars of green, amber and red days, filled from your logs. Open actions, carried handover issues and a ten-minute huddle agenda to read out or print.",
+    "url": "/tools/daily-board/",
+    "cta": "Open the board"
+  },
+  {
+    "name": "5S Audit",
+    "type": "Lean",
+    "time": "10 min",
+    "summary": "Walk one area and score each S from 0 to 4, in 5S, 6S or 8S, with checklists for warehouse, hotel and delivery station. A radar against the last walk, the trend and a league table by area, findings straight into actions and a red tag register.",
+    "url": "/tools/five-s-audit/",
+    "cta": "Start the audit"
+  },
+  {
+    "name": "Safety Cross",
+    "type": "Safety",
+    "time": "Ongoing",
+    "summary": "Every accident, near miss and unsafe condition on the green cross of the month, with days since the last accident, LTIFR, TRIR and the Bird pyramid. The cause to tackle first, open actions and a talk for today's briefing.",
+    "url": "/tools/safety-cross/",
+    "cta": "Open the cross"
+  },
+  {
+    "name": "A3 Report",
+    "type": "Problem solving",
+    "time": "20 min",
+    "summary": "One problem on one sheet, the Toyota way: the facts and the number, the target and its date, the root cause, countermeasures with an owner each, and the follow-up. An eight-point check, print on A3 or A4, Word.",
+    "url": "/tools/a3-report/",
+    "cta": "Start an A3"
+  },
+  {
+    "name": "Kaizen Board",
+    "type": "Improvement",
+    "time": "Weekly",
+    "summary": "Every improvement idea of the team on one board, from Idea through Plan, Do and Check to Adopted, with an effort and impact matrix that shows the quick wins. Adoption rate, days to adopted, savings per month and year, and the idea of the month.",
+    "url": "/tools/kaizen-board/",
+    "cta": "Open the board"
+  },
+  {
+    "name": "Skills Matrix",
+    "type": "People",
+    "time": "15 min",
+    "summary": "Rate each person on each task from 0 to 4 in an ILU grid, with templates for warehouse, hotel front office and delivery station. Cover against target, single points of failure, cover per shift and a training plan that pairs a level 4 with a trainee, straight into actions.",
+    "url": "/tools/skills-matrix/",
+    "cta": "Build the matrix"
+  },
+  {
+    "name": "OEE",
+    "type": "Equipment",
+    "time": "Ongoing",
+    "summary": "Log each shift of a machine with its stops, pieces and rejects. Availability, performance, quality and OEE, the six big losses day by day, and the one to attack first.",
+    "url": "/tools/oee/",
+    "cta": "Measure OEE"
+  },
+  {
+    "name": "Hotel KPIs",
+    "type": "Hotel",
+    "time": "Ongoing",
+    "summary": "Each night's rooms sold, revenue, no-shows, rooms out of order and complaints, pasted from the PMS. Occupancy, ADR and RevPAR against budget, the month's forecast, the weekday pattern, the revenue that leaked and a morning report to copy.",
+    "url": "/tools/hotel-kpis/",
+    "cta": "Open the KPIs"
+  },
+  {
+    "name": "Fishbone",
+    "type": "Root causes",
+    "time": "15 min",
+    "summary": "Put the effect at the head and collect causes with the team on the 6M, 4P or hotel bones, each with its why. Votes and likely causes rank them, the likely ones become actions to verify, and the top one goes to 5 Whys or the causes to Pareto.",
+    "url": "/tools/fishbone/",
+    "cta": "Draw the fishbone"
+  },
+  {
+    "name": "FMEA",
+    "type": "Risk",
+    "time": "30 min",
+    "summary": "Write down how each process step can fail, rate severity, occurrence and detection, and get the RPN and the AIAG-VDA action priority. A heat map, the top ten risks and the actions with owners until the re-rating shows the risk is gone.",
+    "url": "/tools/fmea/",
+    "cta": "Open the sheet"
+  },
+  {
+    "name": "Process Lab",
+    "type": "Six Sigma",
+    "time": "10 min",
+    "summary": "Paste a column of measurements and see an I-MR chart with the Nelson rules, Cp, Cpk and PPM against your specification, and whether a before/after change is real or noise. Every number in plain words.",
+    "url": "/tools/process-lab/",
+    "cta": "Open the lab"
+  },
+  {
+    "name": "Time Study",
+    "type": "Lean",
+    "time": "20 min",
+    "summary": "Time each element over five cycles with a stopwatch, space bar as the lap key. Get the standard time per station, takt from demand, a Yamazumi against it and the first element to move.",
+    "url": "/tools/time-study/",
+    "cta": "Start a study"
+  },
+  {
+    "name": "Value Stream Map",
+    "type": "Lean",
+    "time": "30 min",
+    "summary": "Map one flow from supplier to customer with the pieces waiting between the steps. Get the lead-time ladder, PCE, takt and the bottleneck, then draw the future state and send its kaizen bursts to the Action Tracker.",
+    "url": "/tools/value-stream-map/",
+    "cta": "Map a stream"
+  },
+  {
+    "name": "Standard Work",
+    "type": "Standard",
+    "time": "20 min",
+    "summary": "One job as a TWI breakdown: major steps, key points marked Safety, Quality, Technique or Cost, and a reason for each, with the time per step against the takt. Versions with change notes, print on A4, Word.",
+    "url": "/tools/standard-work/",
+    "cta": "Write a standard"
+  },
+  {
+    "name": "Gemba Walk",
+    "type": "Lean",
+    "time": "15 min",
+    "summary": "Layered process audits by team lead, area manager and site lead, with yes or no checks on the standard for warehouse, hotel and delivery station, and a waste walk that counts the 8 wastes, Mura and Muri. Compliance per week and layer, where the no answers sit, which layer is late, and findings straight into actions.",
+    "url": "/tools/gemba-walk/",
+    "cta": "Start the walk"
   }
 ]

@@ -118,5 +118,133 @@
     "summary": "Letra me të njëjtin dizajn si CV-ja jote, me të dhënat e marra prej saj dhe një draft të parë nga disa përgjigje. PDF ose Word.",
     "url": "/sq/tools/cover-letter/",
     "cta": "Shkruaj letrën"
+  },
+  {
+    "name": "Lista e veprimeve",
+    "type": "Veprime",
+    "time": "Çdo javë",
+    "summary": "Një listë për çdo kundërmasë, gjetje dhe sinjal nga mjetet e tjera: përgjegjësi, afati, statusi dhe si verifikohet. Të vonuarat në fillim, shqyrtim javor në dhjetë minuta, kalendar dhe Excel.",
+    "url": "/sq/tools/action-tracker/",
+    "cta": "Hap listën"
+  },
+  {
+    "name": "Tabela e ditës",
+    "type": "Pasqyrë",
+    "time": "10 min",
+    "summary": "Siguria, Cilësia, Dorëzimi, Kostoja dhe Njerëzit si pesë kalendarë mujorë me ditë të gjelbra, të verdha dhe të kuqe, të mbushura nga regjistrat e tu. Veprimet e hapura, çështjet e mbartura të dorëzimit dhe një takim prej dhjetë minutash për t'u lexuar ose printuar.",
+    "url": "/sq/tools/daily-board/",
+    "cta": "Hap tabelën"
+  },
+  {
+    "name": "Auditi 5S",
+    "type": "Lean",
+    "time": "10 min",
+    "summary": "Kalo nëpër një zonë dhe vlerëso çdo S nga 0 në 4, në 5S, 6S ose 8S, me lista kontrolli për magazinë, hotel dhe stacion shpërndarjeje. Radari kundrejt kontrollit të fundit, trendi dhe renditja e zonave, gjetjet drejt e në veprime dhe një regjistër i etiketave të kuqe.",
+    "url": "/sq/tools/five-s-audit/",
+    "cta": "Nis auditin"
+  },
+  {
+    "name": "Kryqi i sigurisë",
+    "type": "Siguria",
+    "time": "Vazhdimisht",
+    "summary": "Çdo aksident, rrezik i shmangur dhe kusht i pasigurt në kryqin e gjelbër të muajit, me ditët që nga aksidenti i fundit, LTIFR, TRIR dhe piramidën e Bird-it. Shkaku që trajtohet i pari, veprimet e hapura dhe një temë për takimin e sotëm.",
+    "url": "/sq/tools/safety-cross/",
+    "cta": "Hap kryqin"
+  },
+  {
+    "name": "Raporti A3",
+    "type": "Zgjidhja e problemeve",
+    "time": "20 min",
+    "summary": "Një problem në një fletë, si te Toyota: faktet dhe numri, objektivi me afat, shkaku rrënjësor, kundërmasat me nga një përgjegjës dhe ndjekja. Një kontroll me tetë pika, shtyp në A3 ose A4, Word.",
+    "url": "/sq/tools/a3-report/",
+    "cta": "Nis një A3"
+  },
+  {
+    "name": "Tabela Kaizen",
+    "type": "Përmirësim",
+    "time": "Çdo javë",
+    "summary": "Të gjitha idetë e përmirësimit të ekipit në një tabelë, nga ideja te plani, zbatimi dhe kontrolli deri te miratimi, me një matricë përpjekje-ndikim që tregon fitoret e shpejta. Shkalla e miratimit, ditët deri te miratimi, kursimet në muaj e në vit dhe ideja e muajit.",
+    "url": "/sq/tools/kaizen-board/",
+    "cta": "Hap tabelën"
+  },
+  {
+    "name": "Matrica e aftësive",
+    "type": "Njerëzit",
+    "time": "15 min",
+    "summary": "Vlerëso çdo person për çdo detyrë nga 0 në 4 në një rrjetë ILU, me modele për magazinë, recepsion hoteli dhe stacion shpërndarjeje. Mbulimi kundrejt objektivit, pikat e vetme të dështimit, mbulimi për turn dhe një plan trajnimi që çiftëzon një nivel 4 me një të trajnuar, drejt e në veprime.",
+    "url": "/sq/tools/skills-matrix/",
+    "cta": "Ndërto matricën"
+  },
+  {
+    "name": "OEE",
+    "type": "Pajisje",
+    "time": "Vazhdimisht",
+    "summary": "Regjistro çdo turn të një makine me ndalesat, copat dhe skartet. Disponueshmëria, performanca, cilësia dhe OEE, gjashtë humbjet e mëdha ditë pas dite, dhe ajo që duhet sulmuar e para.",
+    "url": "/sq/tools/oee/",
+    "cta": "Mat OEE"
+  },
+  {
+    "name": "KPI-të e hotelit",
+    "type": "Hotel",
+    "time": "Në vazhdim",
+    "summary": "Dhomat e shitura, të ardhurat, no-show-et, dhomat jashtë përdorimit dhe ankesat e çdo nate, të ngjitura nga PMS-i. Zënia, ADR dhe RevPAR kundrejt buxhetit, parashikimi i muajit, modeli i ditëve të javës, të ardhurat që humbën dhe një raport mëngjesi për t'u kopjuar.",
+    "url": "/sq/tools/hotel-kpis/",
+    "cta": "Hap KPI-të"
+  },
+  {
+    "name": "Kurrizi i peshkut",
+    "type": "Shkaqet rrënjësore",
+    "time": "15 min",
+    "summary": "Vendos efektin te koka dhe mblidh me ekipin shkaqet në kockat 6M, 4P ose hotel, secili me pse-në e vet. Votat dhe shkaqet e mundshme i renditin, të mundshmet bëhen veprime verifikimi, kryesori shkon te 5 Whys dhe shkaqet te Pareto.",
+    "url": "/sq/tools/fishbone/",
+    "cta": "Vizato kurrizin e peshkut"
+  },
+  {
+    "name": "FMEA",
+    "type": "Rrezik",
+    "time": "30 min",
+    "summary": "Shkruaj si mund të dështojë çdo hap i procesit, vlerëso rëndësinë, shpeshtësinë dhe zbulimin, dhe merr RPN-në dhe prioritetin e veprimit AIAG-VDA. Hartë rreziku, dhjetë rreziqet kryesore dhe veprimet me përgjegjës deri te rivlerësimi.",
+    "url": "/sq/tools/fmea/",
+    "cta": "Hap fletën"
+  },
+  {
+    "name": "Laboratori i procesit",
+    "type": "Six Sigma",
+    "time": "10 min",
+    "summary": "Ngjit një kolonë me matje dhe shiko një kartë I-MR me rregullat Nelson, Cp, Cpk dhe PPM kundrejt specifikimit, dhe nëse një ndryshim para/pas është real apo zhurmë. Çdo numër me fjalë të qarta.",
+    "url": "/sq/tools/process-lab/",
+    "cta": "Hap laboratorin"
+  },
+  {
+    "name": "Studimi i kohës",
+    "type": "Lean",
+    "time": "20 min",
+    "summary": "Mat çdo element gjatë pesë cikleve me kronometër, tasti i hapësirës merr xhiron. Merr kohën standarde për stacion, taktin nga kërkesa, një Yamazumi kundrejt tij dhe elementin e parë për t'u lëvizur.",
+    "url": "/sq/tools/time-study/",
+    "cta": "Nis një studim"
+  },
+  {
+    "name": "Harta e rrjedhës së vlerës",
+    "type": "Lean",
+    "time": "30 min",
+    "summary": "Harto një rrjedhë nga furnitori te klienti me copat që presin mes hapave. Merr shkallën e kohës së kalimit, PCE-në, taktin dhe pikën e ngushtë, pastaj vizato gjendjen e ardhshme dhe dërgo shpërthimet kaizen te Ndjekësi i veprimeve.",
+    "url": "/sq/tools/value-stream-map/",
+    "cta": "Harto një rrjedhë"
+  },
+  {
+    "name": "Puna standarde",
+    "type": "Standard",
+    "time": "20 min",
+    "summary": "Një punë e ndarë sipas TWI: hapat kryesorë, pikat kyçe sipas sigurisë, cilësisë, teknikës ose kostos, dhe arsyeja e secilës, me kohën e çdo hapi kundrejt taktit. Versione me shënim ndryshimi, printim në A4, Word.",
+    "url": "/sq/tools/standard-work/",
+    "cta": "Shkruaj një standard"
+  },
+  {
+    "name": "Gemba Walk",
+    "type": "Lean",
+    "time": "15 min",
+    "summary": "Auditet e procesit me nivele nga drejtuesi i ekipit, menaxheri i zonës dhe drejtuesi i objektit, me kontrolle po ose jo të standardit për magazinë, hotel dhe stacion shpërndarjeje, dhe një ecje për humbjet që numëron 8 humbjet, Mura dhe Muri. Përputhshmëria për javë dhe nivel, ku janë përgjigjet jo, cili nivel është me vonesë, dhe gjetjet drejt e në veprime.",
+    "url": "/sq/tools/gemba-walk/",
+    "cta": "Nis ecjen"
   }
 ]
