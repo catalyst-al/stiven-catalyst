@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Analiza ABC/XYZ e stokut
+seo_title: "Analiza ABC/XYZ e stokut: klasat sipas vlerës dhe kërkesës, stoku i sigurisë, pika e riporosisë, numërimet ciklike dhe vendosja në magazinë"
+description: "Ndaj artikujt sipas vlerës (ABC) dhe qëndrueshmërisë së kërkesës (XYZ): stoku i sigurisë, pika e riporosisë, numërimet ciklike dhe zona e artë."
+activeNav: /sq/tools.html
+permalink: /sq/tools/inventory-abc/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Stoku</p>
+  <h1>Analiza ABC/XYZ e stokut</h1>
+  <p class="lede">Ndaj artikujt e magazinës sipas vlerës që konsumojnë në një vit (ABC) dhe sipas sa e qëndrueshme është kërkesa e tyre (XYZ). Ngjit ose hap kërkesën për çdo javë apo muaj, dhe shiko nëntë qelizat me politikën për secilën, sa shpesh numërohet çdo klasë, stokun e sigurisë dhe pikën e riporosisë së çdo artikulli për nivelin e shërbimit që zgjedh, cilët artikuj janë tani nën të dhe cilët i përkasin zonës së artë më afër dërgesës.</p>
+</section>
+
+{% set cfg = sq.inventoryAbc %}
+{% include "partials/inventory-abc.njk" %}

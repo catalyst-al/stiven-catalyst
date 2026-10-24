@@ -1,0 +1,354 @@
+{
+  "storageKey": "sc-inventory-abc-sq",
+  "text": {
+    "tool": "Analiza ABC/XYZ e stokut",
+    "csvName": "analiza-abc-xyz",
+    "currency": "€",
+    "pastePlaceholder": "Kodi\tPërshkrimi\tKosto për njësi\tKoha e furnizimit\tStoku\tJan\tShk\tMar\t…\nPK-1001\tFilm shtrëngues 23 µm\t14,90\t10\t337\t360\t453\t338\t…",
+    "exampleSource": "Shembull: magazinë ambalazhi dhe materialesh pune",
+    "owner": "Kontrolli i stokut",
+    "checkReorder": "Porositë janë bërë dhe konfirmuar, dhe në numërimin e radhës stoku është sërish mbi pikën e riporosisë."
+  },
+  "defaults": {
+    "unit": "month",
+    "a": 80,
+    "b": 95,
+    "x": 0.5,
+    "y": 1,
+    "service": 95,
+    "leadTime": 14,
+    "ltSd": 0,
+    "orderCost": 40,
+    "holding": 25,
+    "countA": 12,
+    "countB": 4,
+    "countC": 1
+  },
+  "aliases": {
+    "sku": [
+      "sku",
+      "item",
+      "item no",
+      "item number",
+      "article",
+      "article no",
+      "part",
+      "part no",
+      "part number",
+      "material",
+      "material no",
+      "product code",
+      "code",
+      "artikel",
+      "artikelnummer",
+      "artikel nr",
+      "materialnummer",
+      "sachnummer",
+      "teilenummer",
+      "kodi",
+      "kodi i artikullit",
+      "artikulli",
+      "nr artikulli"
+    ],
+    "name": [
+      "description",
+      "item description",
+      "name",
+      "product",
+      "product name",
+      "material description",
+      "text",
+      "bezeichnung",
+      "beschreibung",
+      "artikelbezeichnung",
+      "materialkurztext",
+      "kurztext",
+      "pershkrimi",
+      "emertimi",
+      "emri",
+      "produkti"
+    ],
+    "cost": [
+      "unit cost",
+      "cost",
+      "unit price",
+      "price",
+      "cost per unit",
+      "standard cost",
+      "standard price",
+      "purchase price",
+      "einstandspreis",
+      "stuckpreis",
+      "preis",
+      "einzelpreis",
+      "standardpreis",
+      "kosten",
+      "kosto",
+      "kosto per njesi",
+      "cmimi",
+      "cmimi per njesi"
+    ],
+    "lt": [
+      "lead time",
+      "lead time days",
+      "lt",
+      "lt days",
+      "replenishment time",
+      "delivery time",
+      "wiederbeschaffungszeit",
+      "wbz",
+      "lieferzeit",
+      "lieferzeit tage",
+      "koha e furnizimit",
+      "afati i furnizimit",
+      "koha e dorezimit"
+    ],
+    "ltSd": [
+      "lead time sd",
+      "lead time std",
+      "lead time sigma",
+      "lead time spread",
+      "sd lead time",
+      "sigma lt",
+      "lt sd",
+      "lt sigma",
+      "streuung lieferzeit",
+      "lieferzeit streuung",
+      "standardabweichung lieferzeit",
+      "wbz streuung",
+      "devijimi i kohes se furnizimit",
+      "shperndarja e kohes se furnizimit"
+    ],
+    "stock": [
+      "stock",
+      "stock on hand",
+      "on hand",
+      "qty on hand",
+      "inventory",
+      "current stock",
+      "available",
+      "bestand",
+      "lagerbestand",
+      "ist bestand",
+      "verfugbar",
+      "stoku",
+      "stoku aktual",
+      "gjendja",
+      "sasia ne magazine"
+    ],
+    "picks": [
+      "picks",
+      "pick lines",
+      "order lines",
+      "lines",
+      "pick count",
+      "picks per year",
+      "zugriffe",
+      "pickpositionen",
+      "auftragspositionen",
+      "positionen",
+      "marrjet",
+      "rreshtat e porosive",
+      "numri i marrjeve"
+    ],
+    "skip": [
+      "total",
+      "sum",
+      "summe",
+      "gesamt",
+      "totali",
+      "shuma",
+      "average",
+      "avg",
+      "mean",
+      "durchschnitt",
+      "mittelwert",
+      "mesatarja",
+      "annual value",
+      "jahreswert",
+      "vlera vjetore",
+      "abc",
+      "xyz",
+      "class",
+      "klasse",
+      "klasa",
+      "safety stock",
+      "sicherheitsbestand",
+      "stoku i sigurise",
+      "reorder point",
+      "meldebestand",
+      "pika e riporosise"
+    ]
+  },
+  "cells": {
+    "AX": {
+      "name": "Vlerë e lartë, kërkesë e qëndrueshme",
+      "policy": "Kontroll i ngushtë: parashiko nga historia, rimbush shpesh me sasi të vogla (kanban, JIT ose i menaxhuar nga furnitori), mbaje stokun e sigurisë të ulët dhe rishikoje çdo muaj.",
+      "slot": "zona e artë, në lartësinë e belit, më afër dërgesës"
+    },
+    "AY": {
+      "name": "Vlerë e lartë, kërkesë e luhatshme",
+      "policy": "Kontroll i ngushtë me trendin dhe sezonin në parashikim; rishiko stokun e sigurisë çdo muaj dhe bie dakord me furnitorin për kulmet.",
+      "slot": "zona e artë, më afër dërgesës"
+    },
+    "AZ": {
+      "name": "Vlerë e lartë, kërkesë e çrregullt",
+      "policy": "Mos mbaj stok me hamendje: porosit sipas kërkesës ose një projekti të sigurt, bie dakord për afate të shkurtra furnizimi dhe mbaj një stok sigurie të vogël e të rishikuar vetëm aty ku mungesa ndalon punën.",
+      "slot": "vende të sigurta e të arritshme pranë zonës së artë"
+    },
+    "BX": {
+      "name": "Vlerë mesatare, kërkesë e qëndrueshme",
+      "policy": "Rimbushje automatike në pikën e riporosisë ose me cikël të rregullt rishikimi, me stok sigurie të moderuar.",
+      "slot": "zona e artikujve të shpejtë pranë zonës së artë"
+    },
+    "BY": {
+      "name": "Vlerë mesatare, kërkesë e luhatshme",
+      "policy": "Rishikim periodik me parashikim sezonal dhe stok sigurie normal; kontrollo parametrat çdo tremujor.",
+      "slot": "rafte standarde, nivelet e mesme"
+    },
+    "BZ": {
+      "name": "Vlerë mesatare, kërkesë e çrregullt",
+      "policy": "Porosit sipas kërkesës aty ku e lejon koha e furnizimit; përndryshe min/maks me një rezervë të vogël, i rishikuar çdo tremujor.",
+      "slot": "rafte standarde"
+    },
+    "CX": {
+      "name": "Vlerë e ulët, kërkesë e qëndrueshme",
+      "policy": "Mbaje të thjeshtë: sasi të mëdha porosie, sistem me dy kosha ose kanban, pak porosi në vit dhe sa më pak administrim.",
+      "slot": "rafte standarde ose dy kosha në vendin e përdorimit"
+    },
+    "CY": {
+      "name": "Vlerë e ulët, kërkesë e luhatshme",
+      "policy": "Këtu një stok sigurie bujar kushton pak: porosit rrallë dhe me sasi të mëdha, pa harxhuar kohë planifikimi.",
+      "slot": "nivelet e sipërme ose pjesa e pasme e magazinës"
+    },
+    "CZ": {
+      "name": "Vlerë e ulët, kërkesë e çrregullt",
+      "policy": "Shqyrto prodhimin sipas porosisë, porosinë sipas kërkesës ose heqjen nga lista; mos mbaj stok sigurie sipas formulës.",
+      "slot": "nivelet e sipërme ose pjesa e pasme e magazinës"
+    }
+  },
+  "noDemand": {
+    "name": "Pa kërkesë",
+    "policy": "Asnjë kërkesë në gjithë periudhën: kontrollo për stok të vjetruar, ktheje te furnitori, shite me ulje ose fshije nga bilanci, dhe blloko artikullin nga riporosia automatike."
+  },
+  "focus": {
+    "reorder": {
+      "meaning": "Këta artikuj kanë më pak stok se kërkesa e pritur gjatë kohës së furnizimit plus stoku i sigurisë për nivelin e shërbimit të zgjedhur. Pa një porosi tani, ka gjasa të mbarojnë para dërgesës së radhës.",
+      "moves": [
+        "Porosit sot artikujt A dhe kërko nga furnitori konfirmimin e datës së dërgesës.",
+        "Kontrollo stokun para porosisë: një regjistrim i harruar ose një gabim numërimi e bën artikullin të duket i pakët.",
+        "Për një artikull që mbetet shpesh pa stok, kontrollo kohën e furnizimit dhe kërkesën pas pikës së tij të riporosisë."
+      ],
+      "question": "Cili prej tyre do të ndalonte një porosi klienti ose një linjë nëse mbaron këtë javë?"
+    },
+    "slotting": {
+      "meaning": "Artikujt AX dhe AY janë artikujt me vlerë të lartë e kërkesë të parashikueshme: u takojnë vendet më të mira të marrjes dhe kontrolli më i ngushtë.",
+      "moves": [
+        "Vendos artikujt AX dhe AY më të marrë në zonën e artë, në lartësinë e belit dhe më afër dërgesës.",
+        "Numëro artikujt A çdo muaj dhe fillo me ata AX.",
+        "Shqyrto artikujt CZ: prodhim sipas porosisë, porosi sipas kërkesës ose heqje nga lista."
+      ],
+      "question": "Cili artikull i shpejtë merret ende nga fundi i magazinës?"
+    },
+    "dead": {
+      "meaning": "Artikujt pa asnjë kërkesë në gjithë periudhën zënë prapë kapital, hapësirë dhe kohë numërimi.",
+      "moves": [
+        "Bëj listën e artikujve pa kërkesë me vlerën e stokut dhe paraqite te prokurimi.",
+        "Vendos për secilin: kthim, shitje me ulje, përdorim diku tjetër ose fshirje nga bilanci.",
+        "Bllokoji nga riporosia automatike derisa të merret vendimi."
+      ],
+      "question": "Kush vendos çfarë ndodh me stokun që nuk ka lëvizur për një vit?"
+    }
+  },
+  "tips": [
+    [
+      "Dymbëdhjetë muaj ose më shumë.",
+      "Merr për çdo artikull të paktën 12 muaj ose 26 javë kërkesë: me më pak periudha koeficienti i variacionit nuk është i besueshëm dhe sezonet nuk duken."
+    ],
+    [
+      "Kërkesa, jo hyrjet.",
+      "Merr atë që morën klientët ose linjat (daljet, marrjet, shitjet), jo atë që erdhi. Një periudhë pa kërkesë është 0, jo boshllëk: lëre qelizën bosh ose shkruaj 0."
+    ],
+    [
+      "Kufijtë janë marrëveshje.",
+      "80/95 % për ABC dhe një koeficient variacioni 0,5/1,0 për XYZ janë më të përhapurit. Të tjerë përdorin 70/90 % ose 75/95 % për ABC, dhe 0,25/0,5 ose 0,2/0,5 për XYZ. Zgjidh një grup dhe mbaje, që klasat të krahasohen nga muaji në muaj."
+    ],
+    [
+      "Stoku i sigurisë supozon kërkesë normale.",
+      "Për artikujt Z dhe pjesët e këmbimit kërkesa vjen me hope, ndaj formula është vetëm orientim: përdor min/maks, porosi sipas kërkesës ose një model Poisson."
+    ],
+    [
+      "Krahaso me pozicionin e stokut.",
+      "Pika e riporosisë vlen për stokun në magazinë plus porositë e hapura minus porositë e prapambetura. Nëse ka porosi të hapura, shtoji në kolonën e stokut para importit."
+    ],
+    [
+      "Niveli i shërbimit është për cikël.",
+      "95 % do të thotë afërsisht një mungesë në njëzet cikle rimbushjeje, jo 95 % e sasisë së dorëzuar. Shumë magazina u japin artikujve A një nivel më të lartë se artikujve C."
+    ]
+  ],
+  "example": {
+    "unit": "month",
+    "rows": [
+      {"sku":"PK-1001","name":"Film shtrëngues 23 µm, rrotull 500 mm","cost":14.9,"lt":10,"ltSd":null,"stock":337,"picks":773,"demand":[360,453,338,420,520,300,375,492,430,417,463,303]},
+      {"sku":"PK-1002","name":"Kuti kartoni 400×300×300, me dy shtresa","cost":1.38,"lt":7,"ltSd":null,"stock":987,"picks":2448,"demand":[4745,5411,4203,5862,4510,5351,4778,5144,4690,4943,4990,6065]},
+      {"sku":"PK-1003","name":"Kuti kartoni 600×400×400, me dy shtresa","cost":2.25,"lt":7,"ltSd":null,"stock":2060,"picks":1879,"demand":[3622,2536,3405,2460,3236,2935,3212,2721,2789,2662,3386,3153]},
+      {"sku":"PK-1004","name":"Kuti kartoni 300×200×150, me një shtresë","cost":0.62,"lt":7,"ltSd":null,"stock":3246,"picks":1638,"demand":[7044,7240,7032,6506,6929,7501,5916,6399,7491,7186,5297,6791]},
+      {"sku":"PK-1005","name":"Shirit paketimi 50 mm × 66 m, kafe","cost":1.15,"lt":5,"ltSd":null,"stock":940,"picks":887,"demand":[2173,2802,2681,2472,2616,2668,2929,2343,2122,2345,2954,2738]},
+      {"sku":"PK-1006","name":"Etiketa transporti 100×150, rrotull me 500","cost":7.4,"lt":5,"ltSd":null,"stock":128,"picks":1831,"demand":[694,746,773,631,729,560,747,625,691,558,737,637]},
+      {"sku":"PK-1007","name":"Paletë EUR, e re","cost":12.8,"lt":3,"ltSd":null,"stock":843,"picks":845,"demand":[892,1479,1039,1558,1987,908,1137,1525,1125,1904,1458,1997]},
+      {"sku":"PK-1008","name":"Fletë mbuluese për paletë 1200×800","cost":0.42,"lt":10,"ltSd":null,"stock":2607,"picks":275,"demand":[2728,2561,2173,2485,2581,2685,2036,2582,2628,2337,2345,2281]},
+      {"sku":"PK-1009","name":"Mbrojtëse cepash 35×35×1000 mm","cost":0.31,"lt":null,"ltSd":null,"stock":6475,"picks":582,"demand":[5214,6115,4633,3829,4666,4286,4894,5042,4982,4829,5033,5811]},
+      {"sku":"PK-1010","name":"Shirit PP për lidhje 12 mm, 3000 m","cost":26.5,"lt":14,"ltSd":null,"stock":65,"picks":324,"demand":[53,46,50,48,58,51,52,60,54,64,64,51]},
+      {"sku":"PK-1011","name":"Kapëse metalike 13 mm, kuti me 1000","cost":18,"lt":null,"ltSd":null,"stock":34,"picks":250,"demand":[16,7,26,18,23,10,17,21,25,38,16,13]},
+      {"sku":"PK-1012","name":"Film me jastëkë ajri, rrotull 400 m","cost":38,"lt":14,"ltSd":null,"stock":31,"picks":560,"demand":[92,102,117,84,96,105,74,76,73,91,74,85]},
+      {"sku":"PK-1013","name":"Letër kraft për mbushje, 450 m","cost":29.5,"lt":14,"ltSd":null,"stock":185,"picks":652,"demand":[131,104,105,129,109,115,126,141,133,107,128,119]},
+      {"sku":"PK-1014","name":"Film shtrëngues dore 17 µm","cost":6.2,"lt":10,"ltSd":null,"stock":393,"picks":682,"demand":[382,392,374,394,416,401,333,349,396,330,306,424]},
+      {"sku":"PK-1015","name":"Xhep dokumentesh C5, kuti me 1000","cost":21,"lt":null,"ltSd":null,"stock":51,"picks":337,"demand":[41,34,44,47,4,18,26,26,47,12,31,34]},
+      {"sku":"PK-1016","name":"Qese dërgese 320×420, pako me 250","cost":16.4,"lt":14,"ltSd":null,"stock":432,"picks":981,"demand":[113,90,112,99,98,119,107,100,105,180,306,417]},
+      {"sku":"PK-1017","name":"Kuti dhurate me motiv Krishtlindjesh","cost":2.1,"lt":28,"ltSd":6,"stock":3374,"picks":158,"demand":[0,0,0,0,0,0,0,0,0,270,1260,2340]},
+      {"sku":"PK-1018","name":"Shirit „Kujdes, i thyeshëm“","cost":2.4,"lt":null,"ltSd":null,"stock":376,"picks":314,"demand":[118,164,89,193,103,113,100,258,240,184,126,176]},
+      {"sku":"PK-1019","name":"Shirit termik transferimi 110 mm","cost":8.9,"lt":10,"ltSd":null,"stock":125,"picks":507,"demand":[193,226,232,194,253,173,205,213,214,231,179,180]},
+      {"sku":"PK-1020","name":"Rrotull etiketash 57×32 për printerin e vjetër","cost":4.6,"lt":null,"ltSd":null,"stock":140,"picks":0,"demand":[0,0,0,0,0,0,0,0,0,0,0,0]},
+      {"sku":"PK-1021","name":"Kuti kartoni 500×350×250, format i vjetër","cost":0.95,"lt":null,"ltSd":null,"stock":1800,"picks":0,"demand":[0,0,0,0,0,0,0,0,0,0,0,0]},
+      {"sku":"PK-1022","name":"Film shtrëngues makinerie 17 µm, 1500 m","cost":39.5,"lt":14,"ltSd":null,"stock":385,"picks":929,"demand":[283,315,323,341,319,284,316,312,324,278,296,275]},
+      {"sku":"PK-1023","name":"Kuti për zinxhirin e ftohtë me akumulatorë","cost":11.8,"lt":21,"ltSd":null,"stock":155,"picks":344,"demand":[38,25,95,187,276,369,397,400,345,288,231,118]},
+      {"sku":"PK-1024","name":"Mbulesë izoluese për paleta","cost":34,"lt":21,"ltSd":null,"stock":289,"picks":457,"demand":[0,0,0,0,70,265,241,208,70,0,0,0]},
+      {"sku":"PK-1025","name":"Paletë plastike higjienike","cost":46,"lt":21,"ltSd":4,"stock":128,"picks":144,"demand":[35,52,51,54,33,40,84,32,62,29,38,57]},
+      {"sku":"PP-2001","name":"Doreza pune me shtresë nitrili, nr. 9","cost":2.35,"lt":10,"ltSd":null,"stock":190,"picks":650,"demand":[647,663,627,631,743,691,702,521,532,609,540,618]},
+      {"sku":"PP-2002","name":"Doreza pune me shtresë nitrili, nr. 10","cost":2.35,"lt":10,"ltSd":null,"stock":410,"picks":402,"demand":[339,477,340,470,394,407,336,377,362,417,379,444]},
+      {"sku":"PP-2003","name":"Doreza kundër prerjes, niveli C","cost":6.8,"lt":null,"ltSd":null,"stock":95,"picks":142,"demand":[89,106,65,39,51,72,40,30,94,26,119,96]},
+      {"sku":"PP-2004","name":"Këpucë sigurie S3, nr. 42","cost":58,"lt":21,"ltSd":5,"stock":20,"picks":80,"demand":[12,8,8,7,7,9,9,4,1,8,7,5]},
+      {"sku":"PP-2005","name":"Këpucë sigurie S3, nr. 44","cost":58,"lt":21,"ltSd":5,"stock":18,"picks":61,"demand":[7,5,6,1,3,5,2,4,1,5,8,9]},
+      {"sku":"PP-2006","name":"Jelek reflektues i verdhë, nr. L","cost":3.9,"lt":null,"ltSd":null,"stock":91,"picks":130,"demand":[58,12,30,58,40,39,81,74,18,63,62,78]},
+      {"sku":"PP-2007","name":"Tapa veshësh, kuti me 200 palë","cost":24,"lt":null,"ltSd":null,"stock":17,"picks":122,"demand":[9,9,11,9,12,8,10,13,12,15,12,13]},
+      {"sku":"PP-2008","name":"Syze mbrojtëse, transparente","cost":3.2,"lt":null,"ltSd":null,"stock":68,"picks":92,"demand":[27,14,46,35,60,63,26,15,0,48,47,60]},
+      {"sku":"PP-2009","name":"Xhaketë pune dimri, nr. L","cost":64,"lt":28,"ltSd":7,"stock":85,"picks":108,"demand":[43,22,9,0,0,0,0,0,0,0,9,24]},
+      {"sku":"PP-2010","name":"Doreza termike për dhomën frigoriferike","cost":9.5,"lt":14,"ltSd":null,"stock":94,"picks":184,"demand":[91,104,81,72,27,31,0,22,37,49,80,76]},
+      {"sku":"CL-3001","name":"Pastrues dyshemeje, bidon 10 l","cost":21.5,"lt":7,"ltSd":null,"stock":34,"picks":211,"demand":[51,33,38,37,35,41,40,38,32,39,37,37]},
+      {"sku":"CL-3002","name":"Peshqir letre, rrotull 2-shtresore","cost":3.4,"lt":7,"ltSd":null,"stock":182,"picks":331,"demand":[273,250,190,262,275,287,234,315,305,314,305,319]},
+      {"sku":"CL-3003","name":"Thasë mbeturinash 120 l, rrotull me 25","cost":4.1,"lt":7,"ltSd":null,"stock":113,"picks":301,"demand":[132,132,127,161,130,119,131,111,132,148,130,135]},
+      {"sku":"CL-3004","name":"Kripë kundër akullit, thes 25 kg","cost":7.9,"lt":10,"ltSd":null,"stock":161,"picks":60,"demand":[156,160,45,0,0,0,0,0,0,0,45,159]},
+      {"sku":"CL-3005","name":"Pastë larëse duarsh, 2 l","cost":11.2,"lt":7,"ltSd":null,"stock":21,"picks":172,"demand":[24,24,29,25,28,25,31,26,29,29,31,28]},
+      {"sku":"CL-3006","name":"Granula thithëse, 20 kg","cost":18.6,"lt":7,"ltSd":null,"stock":13,"picks":102,"demand":[15,7,4,8,16,5,14,1,5,11,13,4]},
+      {"sku":"SP-4001","name":"Gomë lëvizëse piruni, e plotë 18×7-8","cost":245,"lt":21,"ltSd":5,"stock":0,"picks":28,"demand":[4,0,4,0,3,2,3,3,4,4,0,1]},
+      {"sku":"SP-4002","name":"Rrotë ngarkese piruni, poliuretan","cost":48,"lt":14,"ltSd":null,"stock":10,"picks":14,"demand":[0,0,5,2,5,3,0,0,3,4,0,6]},
+      {"sku":"SP-4003","name":"Bateri tërheqëse 24 V për transpaletën elektrike","cost":1650,"lt":35,"ltSd":10,"stock":2,"picks":1,"demand":[0,0,0,0,0,0,0,0,0,0,0,1]},
+      {"sku":"SP-4004","name":"Karikues baterie 24 V","cost":890,"lt":28,"ltSd":null,"stock":2,"picks":1,"demand":[0,0,0,1,0,0,0,0,0,0,0,0]},
+      {"sku":"SP-4005","name":"Tub hidraulik për pirunin me shtyllë","cost":92,"lt":14,"ltSd":null,"stock":3,"picks":5,"demand":[0,0,0,0,0,1,0,0,0,0,2,2]},
+      {"sku":"SP-4006","name":"Bateri për skanerin e dorës","cost":39,"lt":14,"ltSd":null,"stock":11,"picks":56,"demand":[6,9,7,8,9,9,2,14,10,14,10,7]},
+      {"sku":"SP-4007","name":"Skaner dore, i qëndrueshëm","cost":1180,"lt":28,"ltSd":7,"stock":2,"picks":4,"demand":[0,1,0,0,0,0,0,0,1,1,1,0]},
+      {"sku":"SP-4008","name":"Kokë printimi për printerin e etiketave","cost":320,"lt":14,"ltSd":null,"stock":2,"picks":3,"demand":[1,0,1,0,0,0,0,1,0,0,0,0]},
+      {"sku":"SP-4009","name":"Segment rripi transportues 2 m","cost":540,"lt":28,"ltSd":null,"stock":2,"picks":1,"demand":[0,1,0,0,0,0,0,0,0,0,0,0]},
+      {"sku":"SP-4010","name":"Rul transportieri 50 mm","cost":14.5,"lt":14,"ltSd":null,"stock":17,"picks":12,"demand":[0,14,0,0,0,0,0,0,7,8,12,10]},
+      {"sku":"SP-4011","name":"Kunj për urën e ngarkimit","cost":26,"lt":14,"ltSd":null,"stock":3,"picks":2,"demand":[0,0,0,0,0,0,0,2,0,0,0,0]},
+      {"sku":"SP-4012","name":"Sustë për derën e rampës","cost":185,"lt":21,"ltSd":null,"stock":3,"picks":4,"demand":[2,0,1,0,0,0,0,0,0,0,1,0]},
+      {"sku":"SP-4013","name":"Tub LED 150 cm","cost":9.8,"lt":7,"ltSd":null,"stock":18,"picks":45,"demand":[13,15,12,14,19,11,14,24,11,29,6,18]},
+      {"sku":"SP-4014","name":"Transpaletë manuale 2,5 t","cost":420,"lt":21,"ltSd":null,"stock":4,"picks":4,"demand":[0,0,2,0,2,0,0,0,0,0,0,0]},
+      {"sku":"SP-4015","name":"Ndenjëse piruni","cost":210,"lt":28,"ltSd":null,"stock":2,"picks":2,"demand":[1,0,0,0,0,0,0,1,0,0,0,0]},
+      {"sku":"OF-5001","name":"Letër kopjimi A4, kuti me 2500","cost":24.5,"lt":5,"ltSd":null,"stock":5,"picks":157,"demand":[26,30,27,26,28,25,32,23,30,26,29,31]},
+      {"sku":"OF-5002","name":"Toner për printerin laser","cost":89,"lt":7,"ltSd":null,"stock":4,"picks":42,"demand":[2,0,3,5,1,3,3,7,4,5,5,4]},
+      {"sku":"OF-5003","name":"Markera të përhershëm, kuti me 10","cost":7.6,"lt":5,"ltSd":null,"stock":19,"picks":129,"demand":[33,28,34,34,26,32,28,31,35,29,29,25]},
+      {"sku":"OF-5004","name":"Dërrasë me kapëse A4","cost":2.9,"lt":null,"ltSd":null,"stock":32,"picks":37,"demand":[16,3,20,3,18,16,13,16,9,10,18,13]}
+    ]
+  }
+}

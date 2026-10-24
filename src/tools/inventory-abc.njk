@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: ABC/XYZ Inventory
+seo_title: "ABC/XYZ inventory analysis: classes by value and demand, safety stock, reorder points, cycle counts and slotting"
+description: "Classify SKUs by value (ABC) and steadiness of demand (XYZ), and turn it into safety stock, reorder points, cycle counts and golden-zone slotting."
+activeNav: /tools.html
+permalink: /tools/inventory-abc/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Inventory</p>
+  <h1>ABC/XYZ Inventory</h1>
+  <p class="lede">Classify the SKUs of your warehouse by the value they consume in a year (ABC) and by how steady their demand is (XYZ). Paste or open the demand per week or month, and see the nine cells with the policy for each, how often to count every class, the safety stock and reorder point of every SKU at the service level you choose, which SKUs are below it now, and which belong in the golden zone nearest dispatch.</p>
+</section>
+
+{% set cfg = inventoryAbc %}
+{% include "partials/inventory-abc.njk" %}

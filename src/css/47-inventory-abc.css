@@ -1,0 +1,66 @@
+/* ===== ABC/XYZ Inventory (js/inventory-abc.js) ===== */
+/* Import and settings. */
+.ia-import textarea { width: 100%; min-width: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.ia-import input[type="file"] { max-width: 100%; min-width: 0; font: inherit; font-size: 14px; }
+.ia-status:empty { display: none; }
+.ia-map { margin-top: 10px; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+.ia-map[hidden] { display: none; }
+.ia-map-summary { cursor: pointer; font-size: 14px; font-weight: 800; color: var(--ink); }
+.ia-map-summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+.ia-map .dl-grid { margin-top: 10px; }
+.ia-map select { min-width: 0; max-width: 100%; }
+.ia-settings .form-note { margin: 12px 0 0; }
+
+/* The classified list. */
+.ia-filter { max-width: 320px; margin-bottom: 12px; }
+.ia-filter[hidden] { display: none; }
+.ia-table th, .ia-table td { vertical-align: middle; }
+.ia-table td.num, .ia-results td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ia-sku { min-width: 0; text-align: left; font-weight: 400; }
+.ia-sku strong { display: block; color: var(--ink); font-weight: 800; white-space: nowrap; }
+.ia-cell-note { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; overflow-wrap: anywhere; }
+.ia-class { font-weight: 800; letter-spacing: .04em; white-space: nowrap; }
+.ia-flag { display: inline-block; font-size: 13px; font-weight: 800; white-space: nowrap; }
+.ia-flag.is-danger { color: var(--danger); }
+.ia-flag.is-ok, .ia-flag.is-muted { color: var(--muted); font-weight: 700; }
+.ia-table tr:has(.ia-flag.is-danger) th:first-child { box-shadow: inset 3px 0 0 var(--danger); }
+.ia-small { min-height: 32px; padding: 4px 10px; font-size: 13px; white-space: nowrap; }
+.ia-strong { font-weight: 800; }
+.ia-total th, .ia-total td { border-top: 2px solid var(--line); font-weight: 800; }
+
+/* Results: the matrix next to the class shares. */
+.ia-results .result-head { margin-bottom: 14px; }
+.ia-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.ia-results .dl-stats { margin-bottom: 18px; }
+.ia-matrix-block { display: grid; gap: 18px; margin: 0 0 18px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); min-width: 0; }
+.ia-matrix-block .result-label { margin: 0; }
+.ia-matrix-chart, .ia-matrix-side { min-width: 0; }
+.ia-matrix-chart .ck-figure { margin-top: 8px; }
+.ia-matrix-chart .ck-chart { width: 100%; max-width: 320px; height: auto; }
+.ia-class-list { display: grid; gap: 14px; margin: 10px 0 0; padding: 0; list-style: none; }
+.ia-class-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: baseline; font-size: 14px; color: var(--ink); }
+.ia-class-name { grid-row: span 2; font-size: 22px; line-height: 1; }
+.ia-share-bars { display: grid; gap: 3px; }
+.ia-share-bar { display: block; height: 6px; min-width: 2px; border-radius: 3px; background: var(--line); }
+.ia-share-bar.is-value { background: var(--blue); }
+.ia-bars-key { margin: 12px 0 0; }
+@media (min-width: 761px) {
+  .ia-matrix-block { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: start; }
+}
+
+/* Policy per cell and the method. */
+.ia-matrix td { text-align: right; }
+.ia-policies { display: grid; gap: 4px 0; margin: 16px 0 0; font-size: 14px; }
+.ia-policies dt { margin-top: 10px; color: var(--ink); }
+.ia-policies dt strong { margin-right: 4px; }
+.ia-policies dd { margin: 0; color: var(--ink); line-height: 1.5; }
+.ia-policies dd .ia-cell-note { margin-top: 2px; font-size: 13px; }
+.ia-method { display: grid; gap: 8px; margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--ink); }
+.ia-results .ck-chips { margin-top: 12px; }
+
+@media print {
+  .ia-import, .ia-settings, .ia-filter, .ia-list .tool-actions, .ia-list .dl-more, .ia-results .result-actions, .ia-results .ck-actions { display: none !important; }
+  .ia-matrix-block { border: 0; padding: 0; break-inside: avoid; }
+  .ia-share-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ia-list .dl-table-wrap { max-height: none; overflow: visible; }
+}

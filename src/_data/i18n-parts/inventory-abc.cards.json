@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "ABC/XYZ Inventory", "type": "Inventory", "time": "15 min", "summary": "Classify every SKU by annual consumption value and by how steady its demand is, and get the nine-cell matrix with its policies, the cycle counts per week, safety stock and reorder points at your service level, and the SKUs for the golden zone.", "url": "/tools/inventory-abc/", "cta": "Classify the stock" },
+    "de": { "name": "ABC/XYZ-Analyse", "type": "Bestand", "time": "15 Min.", "summary": "Teilen Sie jeden Artikel nach jährlichem Verbrauchswert und nach der Gleichmäßigkeit seines Bedarfs ein, und erhalten Sie die Neun-Felder-Matrix mit ihren Strategien, die Zählungen pro Woche, Sicherheits- und Meldebestände beim gewählten Servicegrad und die Artikel für die goldene Zone.", "url": "/de/tools/inventory-abc/", "cta": "Bestand einteilen" },
+    "sq": { "name": "Analiza ABC/XYZ e stokut", "type": "Stoku", "time": "15 min", "summary": "Ndaj çdo artikull sipas vlerës vjetore të konsumit dhe sipas sa e qëndrueshme është kërkesa e tij, dhe merr matricën me nëntë qeliza e politikat e saj, numërimet në javë, stokun e sigurisë dhe pikat e riporosisë për nivelin tënd të shërbimit, dhe artikujt për zonën e artë.", "url": "/sq/tools/inventory-abc/", "cta": "Klasifiko stokun" }
+  },
+  "routine": { "when": "Every month", "do": "Import last month's demand, reorder every A SKU below its reorder point and move the top AX SKUs into the golden zone.", "de": { "when": "Jeden Monat", "do": "Importieren Sie den Bedarf des letzten Monats, bestellen Sie jeden A-Artikel unter seinem Meldebestand nach und legen Sie die stärksten AX-Artikel in die goldene Zone." }, "sq": { "when": "Çdo muaj", "do": "Importo kërkesën e muajit të kaluar, riporosit çdo artikull A nën pikën e riporosisë dhe vendos artikujt AX më të fortë në zonën e artë." } },
+  "recipe": "example"
+}
