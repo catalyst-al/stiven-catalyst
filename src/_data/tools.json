@@ -294,5 +294,13 @@
     "summary": "Plan the preventive maintenance and statutory checks of every asset by date or operating hours, log what was done, postponed or broke down, and see what is overdue, the PM compliance, MTBF and MTTR, and the work list of the week.",
     "url": "/tools/maintenance-planner/",
     "cta": "Plan maintenance"
+  },
+  {
+    "name": "Signals",
+    "type": "Overview",
+    "time": "2 min",
+    "summary": "Every tool in this browser read in one ranked morning list: control chart signals (p, c, u and I-MR with the run and trend rules), missed targets, overdue actions, maintenance, red tags and ideas, and safety on top.",
+    "url": "/tools/signals/",
+    "cta": "Read the signals"
   }
 ]

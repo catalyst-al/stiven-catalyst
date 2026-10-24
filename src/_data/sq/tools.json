@@ -294,5 +294,13 @@
     "summary": "Planifiko mirëmbajtjen parandaluese dhe kontrollet ligjore të çdo pajisjeje sipas datës ose orëve të punës, regjistro çfarë u krye, u shty ose u prish, dhe shiko çfarë është vonë, zbatimin e planit, MTBF dhe MTTR, dhe listën e punës së javës.",
     "url": "/sq/tools/maintenance-planner/",
     "cta": "Planifiko mirëmbajtjen"
+  },
+  {
+    "name": "Sinjalet",
+    "type": "Pasqyrë",
+    "time": "2 min",
+    "summary": "Çdo mjet në këtë shfletues i lexuar në një listë mëngjesi të renditur: sinjalet e kartave të kontrollit (p, c, u dhe I-MR me rregullat e serisë dhe të prirjes), objektivat e humbura, veprimet, mirëmbajtjet, etiketat e kuqe dhe idetë me vonesë, siguria në krye.",
+    "url": "/sq/tools/signals/",
+    "cta": "Lexo sinjalet"
   }
 ]

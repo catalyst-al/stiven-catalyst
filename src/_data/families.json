@@ -116,7 +116,8 @@
       "/tools/gemba-walk/",
       "/tools/ops-report/",
       "/tools/room-inspection/",
-      "/tools/maintenance-planner/"
+      "/tools/maintenance-planner/",
+      "/tools/signals/"
     ],
     "learn": [],
     "also": [
@@ -200,6 +201,11 @@
         "when": "Every week",
         "do": "Print the work list on Monday and give every overdue task on a critical asset a date this week.",
         "tool": "/tools/maintenance-planner/"
+      },
+      {
+        "when": "Every morning",
+        "do": "Read the signals before the morning meeting, take the first high ones to the floor and give each one an owner, a 5 Whys or a date.",
+        "tool": "/tools/signals/"
       }
     ],
     "next": "lumen"
