@@ -1,0 +1,61 @@
+/* ===== Signals (js/signals.js) =====
+   The morning list: what needs attention across every tool, ranked. A signal's severity is told by its sign (▲ ◆ ○)
+   and its word; the colour of the edge and the word only repeats it. The list prints on A4 without its buttons. */
+.sg-tips-severity li strong { white-space: nowrap; }
+.sg-links { margin-top: 14px; }
+.sg-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.sg-chart { margin: 22px 0 6px; min-width: 0; }
+.sg-chart .ck-caption { max-width: 72ch; }
+
+.sg-list-box { margin-top: 22px; }
+.sg-list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+.sg-item {
+  display: grid; gap: 6px; min-width: 0; padding: 14px 16px 14px 14px; border: 1px solid var(--line);
+  border-left: 4px solid var(--line); border-radius: var(--radius); background: var(--card);
+}
+.sg-item.is-high { border-left-color: var(--danger); }
+.sg-item.is-medium { border-left-color: var(--warn); }
+.sg-item.is-low { border-left-color: var(--muted); }
+.sg-item-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0; font-size: 14px; }
+.sg-rank { min-width: 1.6em; color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.sg-sev { font-weight: 800; letter-spacing: .02em; }
+.sg-sev.is-high { color: var(--danger); }
+.sg-sev.is-medium { color: var(--warn); }
+.sg-sev.is-low { color: var(--muted); }
+.sg-kind { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.sg-date { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sg-text { margin: 2px 0 0; font-size: 17px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
+.sg-numbers { margin: 0; font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.sg-note { margin: 0; font-size: 14px; color: var(--ink); }
+.sg-rule { margin: 0; max-width: 78ch; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.sg-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.sg-actions a, .sg-actions button { padding: 6px 12px; font-size: 14px; }
+
+.sg-read { display: grid; gap: 6px; margin: 8px 0 12px; padding-left: 1.2em; }
+.sg-read li { overflow-wrap: anywhere; }
+.sg-sub { margin-top: 14px; }
+.sg-rules { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; margin: 10px 0 12px; }
+.sg-rules dt { font-size: 14px; }
+.sg-rules dd { margin: 0; font-size: 14px; line-height: 1.5; }
+
+@media (max-width: 600px) {
+  .sg-item { padding: 12px 12px 12px 10px; }
+  .sg-date { margin-left: 0; }
+  .sg-text { font-size: 16px; }
+  .sg-actions { width: 100%; }
+  .sg-rules { grid-template-columns: minmax(0, 1fr); }
+  .sg-rules dd { margin-bottom: 6px; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .sg-setup, .sg-results .result-actions, .sg-results .ck-actions, .sg-actions, .sg-results .dl-example-note button { display: none !important; }
+  .sg-results { padding: 0; }
+  .sg-item { padding: 6px 8px; border: 0; border-left: 3pt solid #c8cdd2; border-radius: 0; background: none; break-inside: avoid; }
+  .sg-item.is-high { border-left-color: #c2141b; }
+  .sg-item.is-medium { border-left-color: #7f5c1f; }
+  .sg-list { gap: 8px; }
+  .sg-text { font-size: 11pt; }
+  .sg-numbers, .sg-note, .sg-rule { font-size: 9pt; }
+  .sg-chart { break-inside: avoid; }
+}

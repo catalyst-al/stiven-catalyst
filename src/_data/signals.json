@@ -1,0 +1,986 @@
+{
+  "storageKey": "sc-signals",
+  "tools": [
+    {
+      "slug": "safety-cross",
+      "name": "Safety Cross"
+    },
+    {
+      "slug": "damage-control",
+      "name": "Damage Control"
+    },
+    {
+      "slug": "incomplete-control",
+      "name": "Incomplete Control"
+    },
+    {
+      "slug": "night-audit",
+      "name": "Night Audit Log"
+    },
+    {
+      "slug": "delay-analyzer",
+      "name": "Delay Analyzer"
+    },
+    {
+      "slug": "oee",
+      "name": "OEE"
+    },
+    {
+      "slug": "five-s-audit",
+      "name": "5S Audit"
+    },
+    {
+      "slug": "hotel-kpis",
+      "name": "Hotel KPIs"
+    },
+    {
+      "slug": "room-inspection",
+      "name": "Room Inspection"
+    },
+    {
+      "slug": "maintenance-planner",
+      "name": "Maintenance Planner"
+    },
+    {
+      "slug": "lost-found",
+      "name": "Lost & Found"
+    },
+    {
+      "slug": "kaizen-board",
+      "name": "Kaizen Board"
+    },
+    {
+      "slug": "action-tracker",
+      "name": "Action Tracker"
+    },
+    {
+      "slug": "gemba-walk",
+      "name": "Gemba Walk"
+    }
+  ],
+  "series": {
+    "damage-control:rate": "Damage rate",
+    "damage-control:count": "Damaged units per day",
+    "incomplete-control:rate": "Incomplete rate",
+    "incomplete-control:count": "Incomplete orders per day",
+    "night-audit:rate": "Exception rate",
+    "night-audit:count": "Night audit exceptions per day",
+    "delay-analyzer:late": "Share of late routes",
+    "delay-analyzer:late-count": "Late routes per day",
+    "delay-analyzer:minutes": "Minutes late per late route",
+    "delay-analyzer:on-time": "On-time routes",
+    "oee": "OEE of {name}",
+    "five-s-audit": "5S score in {name}",
+    "hotel-kpis:occupancy": "Occupancy",
+    "hotel-kpis:adr": "ADR",
+    "hotel-kpis:no-shows": "No-show rate",
+    "hotel-kpis:complaints": "Complaints per room sold",
+    "gemba-walk": "LPA compliance of the {name}"
+  },
+  "text": {
+    "dayOne": "day",
+    "dayMany": "days",
+    "safetyType": {
+      "lost-time": "Accident with lost time",
+      "no-lost-time": "Accident without lost time",
+      "first-aid": "First aid"
+    },
+    "safety": "{type} on {date} in {area}: {what}",
+    "safetyNoArea": "{type} on {date}: {what}",
+    "stat": "{series}: {rules}",
+    "rules": {
+      "beyondUp": "above the upper control limit",
+      "beyondDown": "below the lower control limit",
+      "runUp": "{n} points in a row above the centre line",
+      "runDown": "{n} points in a row below the centre line",
+      "trendUp": "{n} points in a row rising",
+      "trendDown": "{n} points in a row falling"
+    },
+    "target": "{series} {value}, worse than the target of {target}",
+    "action": "Action overdue by {days}: {title}",
+    "maintenance": "{task} ({asset}) overdue by {days}",
+    "lostFound": "{what} ({item}) past its keep-until date by {days}",
+    "redTag": "Red tag open for {days}: {item}",
+    "kaizen": "Idea without an answer for {days}: {title}",
+    "reclean": "Room {room}: re-clean not checked again",
+    "gemba": "{layer} walk overdue by {days}",
+    "goodSide": "This is on the good side: find out what went right, and keep it.",
+    "check": "The signal is gone from the morning list and stays gone for two weeks.",
+    "quiet": "Every series is inside its limits, every target is met and nothing is overdue. Keep logging: the list is only as good as what the tools hold."
+  },
+  "rules": {
+    "safety": "Every accident (with or without lost time) and every first aid of the last 7 days is a signal, and always on top.",
+    "beyond": "Beyond a limit: the latest point lies more than three sigma from the centre line. Something changed that day; look for it while people still remember.",
+    "run": "Run: the latest point ends 8 or more points in a row on the same side of the centre line (Western Electric). The level has moved.",
+    "trend": "Trend: the latest point ends 6 points in a row, each higher (or each lower) than the one before (Nelson rule 3). Something is drifting.",
+    "minPoints": "A control chart needs at least 8 points. With fewer, there is no statistical signal: the limits would describe a few days, not the process.",
+    "charts": "Each daily series gets the control chart it needs: a rate with the volume of each day a p-chart (busy days get narrower limits), a count without a volume a c-chart, complaints per room sold a u-chart, a measured value (OEE, 5S score, minutes late, occupancy, ADR) an individuals chart (I-MR). The limits come from the points of the period, and only the latest point is judged.",
+    "change": "Change: when an event on the timeline marks a change, the limits come from the points after it, once there are 8 of them; until then from all points, and the signal says so.",
+    "target": "Target: the latest day (for the 5S Audit the latest audit, for the Gemba Walk the latest week) is worse than its target: the one typed in the tool, else the one in the workplace profile.",
+    "action": "Action: an open action whose due date has passed.",
+    "maintenance": "Maintenance: a task past its due date, as the planner works it out from the last time it was done, the meter and any postponement.",
+    "lostFound": "Lost and found: an open item past its keep-until date.",
+    "redTag": "Red tag: a tag open more than 30 days, or past the date it was to be decided.",
+    "kaizen": "Kaizen: an idea still in the Idea column after the 7 days the board allows for an answer.",
+    "reclean": "Re-clean: a room whose latest inspection of the last 7 days sent items back to the attendant, with no inspection since.",
+    "gemba": "Gemba Walk: a layer whose next walk, by its cadence, was due before today."
+  },
+  "severity": {
+    "high": "An accident or first aid in the last 7 days; the latest point beyond a control limit on the bad side; an overdue action with High priority or more than 14 days late; an overdue maintenance task on an A asset or a statutory check.",
+    "medium": "A run of 8 or a trend of 6 on the bad side; the latest day, audit or week worse than its target; other overdue actions; overdue maintenance on a B asset; lost and found items past keep-until; red tags open too long; ideas without an answer; re-cleans open from an earlier day; overdue layer walks.",
+    "low": "A signal on the good side (find out what went right and keep it); overdue maintenance on a C asset; a re-clean from today not checked yet."
+  },
+  "moves": {
+    "safety": "Go to the place today: make it safe, talk to the person and the team, and start the 5 Whys before the shift ends.",
+    "stat": "Something changed on that day. Ask the shift what was different (people, method, material, machine, volume) before the memory fades, and write the answer on the timeline.",
+    "target": "The process is stable but not where it should be: a meeting will not move it. Take the largest cause to 5 Whys and give the countermeasure an owner and a date.",
+    "overdue": "Call the owner this morning: done, a new date with a reason, or escalate. An overdue item that nobody touches teaches the team that dates do not matter."
+  },
+  "tips": [
+    [
+      "Open it first thing.",
+      "Two minutes before the morning meeting: the list is ranked, so the first lines are the agenda."
+    ],
+    [
+      "One list, many tools.",
+      "Signals reads only what the tools hold in this browser. Log in Damage Control, the Delay Analyzer, OEE, the Safety Cross and the rest, and they join on their own."
+    ],
+    [
+      "Trust the rules, not the colour.",
+      "A bad day inside the limits is noise. A point beyond a limit, a run of 8 or a trend of 6 is a signal worth a question on the floor."
+    ],
+    [
+      "Mark the changes.",
+      "A new method or a new shift pattern goes on the timeline of the tool. The limits then start again from the change, so an improvement does not look like a signal for ever."
+    ],
+    [
+      "Dismiss with care.",
+      "Dismiss for today hides a signal until tomorrow. If it is still true then, it is back on the list."
+    ],
+    [
+      "Turn signals into actions.",
+      "Each signal goes to 5 Whys or to the Action Tracker with one tap. High is due tomorrow, Medium in three days, Low in a week."
+    ]
+  ],
+  "example": {
+    "site": "Parcel hub, outbound",
+    "damage": {
+      "target": "0.3",
+      "volumes": [
+        3000,
+        3100,
+        2900,
+        3200,
+        3050,
+        2800,
+        3150,
+        3000,
+        2950,
+        3100,
+        3200,
+        2900,
+        3050,
+        3000,
+        3100,
+        2850,
+        3000,
+        3200,
+        3100,
+        2950,
+        3050,
+        3000,
+        2900,
+        3150,
+        3100,
+        3000,
+        2950,
+        3200,
+        3050,
+        3100
+      ],
+      "units": [
+        9,
+        11,
+        8,
+        10,
+        9,
+        7,
+        12,
+        9,
+        8,
+        10,
+        11,
+        8,
+        9,
+        10,
+        9,
+        7,
+        10,
+        12,
+        10,
+        8,
+        9,
+        11,
+        8,
+        10,
+        12,
+        9,
+        8,
+        11,
+        9,
+        26
+      ],
+      "split": [
+        6,
+        4,
+        99
+      ],
+      "shifts": [
+        "Early",
+        "Late",
+        "Night"
+      ],
+      "causes": [
+        {
+          "stage": "Loading",
+          "type": "Crushed",
+          "cause": "Stacking"
+        },
+        {
+          "stage": "Packing",
+          "type": "Torn or punctured",
+          "cause": "Packaging"
+        },
+        {
+          "stage": "Loading",
+          "type": "Broken",
+          "cause": "Equipment"
+        }
+      ]
+    },
+    "incomplete": {
+      "target": "0.5",
+      "volumes": [
+        1000,
+        1050,
+        980,
+        1020,
+        1100,
+        990,
+        1010,
+        1040,
+        1000,
+        1060,
+        980,
+        1030,
+        1000,
+        1050,
+        1020,
+        990,
+        1040,
+        1000,
+        1060,
+        1010,
+        980,
+        1030,
+        1050,
+        1000,
+        1020,
+        1040,
+        990,
+        1010,
+        1030,
+        1050
+      ],
+      "units": [
+        7,
+        8,
+        6,
+        9,
+        7,
+        8,
+        6,
+        7,
+        9,
+        7,
+        8,
+        6,
+        7,
+        8,
+        4,
+        5,
+        3,
+        5,
+        4,
+        3,
+        5,
+        4,
+        3,
+        5,
+        4,
+        3,
+        4,
+        5,
+        3,
+        7
+      ],
+      "split": [
+        3,
+        99
+      ],
+      "shifts": [
+        "Early",
+        "Late"
+      ],
+      "causes": [
+        {
+          "stage": "Picking",
+          "type": "Short quantity",
+          "cause": "Pick error"
+        },
+        {
+          "stage": "Packing",
+          "type": "Wrong item",
+          "cause": "Pack error"
+        }
+      ]
+    },
+    "delay": {
+      "routes": 24,
+      "firstDeparture": 300,
+      "every": 15,
+      "drive": 95,
+      "grace": 15,
+      "target": "90",
+      "prefix": "T",
+      "shifts": [
+        "Early",
+        "Late"
+      ],
+      "late": [
+        [
+          25,
+          32
+        ],
+        [
+          19
+        ],
+        [
+          41,
+          22
+        ],
+        [
+          28
+        ],
+        [
+          17,
+          30
+        ],
+        [
+          35
+        ],
+        [
+          21,
+          26
+        ],
+        [
+          29
+        ],
+        [
+          18,
+          40
+        ],
+        [
+          24
+        ],
+        [
+          33,
+          20
+        ],
+        [
+          27
+        ],
+        [
+          22,
+          31
+        ],
+        [
+          38
+        ],
+        [
+          20,
+          26
+        ],
+        [
+          30
+        ],
+        [
+          19,
+          34
+        ],
+        [
+          25
+        ],
+        [
+          36,
+          21
+        ],
+        [
+          28
+        ],
+        [
+          23,
+          30
+        ],
+        [
+          26
+        ],
+        [
+          21,
+          27
+        ],
+        [
+          24,
+          30
+        ],
+        [
+          27,
+          35
+        ],
+        [
+          31,
+          37
+        ],
+        [
+          34,
+          42
+        ],
+        [
+          36,
+          44
+        ]
+      ],
+      "onTime": [
+        -4,
+        3,
+        8,
+        -1,
+        12,
+        0,
+        6,
+        -6,
+        10,
+        2
+      ],
+      "dockShare": [
+        5,
+        0,
+        12,
+        3
+      ],
+      "reasons": [
+        "Late loading",
+        "Traffic or roadworks",
+        "Late wave or volume peak",
+        "Driver not ready"
+      ]
+    },
+    "safety": [
+      {
+        "ago": 2,
+        "shift": "Early",
+        "type": "first-aid",
+        "area": "Loading",
+        "what": "Cut on the hand at the stretch wrapper",
+        "cause": "Film cutter without guard",
+        "severity": 2,
+        "action": "Fit the guard on the cutter",
+        "owner": "Marco"
+      },
+      {
+        "ago": 5,
+        "shift": "Late",
+        "type": "near-miss",
+        "area": "Dock 2",
+        "what": "Pallet fell from the fork in the turn",
+        "cause": "Load not secured",
+        "severity": 2
+      },
+      {
+        "ago": 9,
+        "shift": "Night",
+        "type": "unsafe-condition",
+        "area": "Sorting",
+        "what": "Oil on the floor at the sorter exit",
+        "cause": "Leak at the gearbox",
+        "severity": 1,
+        "done": true
+      },
+      {
+        "ago": 18,
+        "shift": "Early",
+        "type": "no-lost-time",
+        "area": "Dock 1",
+        "what": "Foot caught by a pallet jack",
+        "cause": "Walkway blocked",
+        "severity": 3,
+        "done": true
+      }
+    ],
+    "oee": {
+      "planned": 450,
+      "rate": 600,
+      "shift": "Early",
+      "rejects": [
+        30,
+        45,
+        25,
+        40,
+        35
+      ],
+      "stops": [
+        {
+          "reason": "Jam",
+          "minutes": 25
+        },
+        {
+          "reason": "Breakdown",
+          "minutes": 40
+        },
+        {
+          "reason": "Changeover",
+          "minutes": 30
+        },
+        {
+          "reason": "Jam",
+          "minutes": 20
+        }
+      ],
+      "machines": [
+        {
+          "name": "Sorter 1",
+          "offset": 0,
+          "good": [
+            3660,
+            3600,
+            3720,
+            3630,
+            3690,
+            3570,
+            3700,
+            3640,
+            3610,
+            3680,
+            3590,
+            3710,
+            3650,
+            3620,
+            3700,
+            3580,
+            3670,
+            3640,
+            3690,
+            3600,
+            3660,
+            3630,
+            3560,
+            3590,
+            3540,
+            3600,
+            3550,
+            3580,
+            3530,
+            3570
+          ]
+        },
+        {
+          "name": "Stretch wrapper",
+          "offset": 2,
+          "good": [
+            3480,
+            3540,
+            3460,
+            3520,
+            3500,
+            3440,
+            3530,
+            3490,
+            3510,
+            3470,
+            3550,
+            3480,
+            3500,
+            3460,
+            3530,
+            3490,
+            3520,
+            3470,
+            3510,
+            3480,
+            3540,
+            3460,
+            3500,
+            3520,
+            3480,
+            3510,
+            3470,
+            3530,
+            3490,
+            3450
+          ]
+        }
+      ]
+    },
+    "fiveS": {
+      "auditors": [
+        "Anna",
+        "Marco",
+        "Fatima"
+      ],
+      "audits": [
+        {
+          "area": "Loading",
+          "ago": [
+            68,
+            61,
+            54,
+            47,
+            40,
+            33,
+            26,
+            19,
+            12,
+            5
+          ],
+          "totals": [
+            58,
+            61,
+            60,
+            63,
+            62,
+            64,
+            63,
+            65,
+            66,
+            64
+          ]
+        },
+        {
+          "area": "Packing",
+          "ago": [
+            26,
+            19,
+            12,
+            5
+          ],
+          "totals": [
+            55,
+            57,
+            54,
+            58
+          ]
+        }
+      ],
+      "tags": [
+        {
+          "ago": 41,
+          "area": "Loading",
+          "item": "Broken pallet jack",
+          "reason": "Broken",
+          "decision": "Hold",
+          "owner": "Jonas",
+          "dueAgo": 27
+        },
+        {
+          "ago": 12,
+          "area": "Packing",
+          "item": "Box of old labels",
+          "reason": "Not needed",
+          "decision": "Dispose",
+          "owner": "Fatima",
+          "dueAgo": -5
+        },
+        {
+          "ago": 50,
+          "area": "Loading",
+          "item": "Spare stretch film from the old supplier",
+          "reason": "Excess",
+          "decision": "Move",
+          "owner": "Anna",
+          "dueAgo": 40,
+          "done": true
+        }
+      ]
+    },
+    "maintenance": {
+      "site": "warehouse",
+      "assets": [
+        {
+          "tag": "FL-03",
+          "name": "Forklift",
+          "type": "forklift",
+          "area": "Loading",
+          "crit": "A",
+          "tasks": [
+            {
+              "text": "Annual inspection by a competent person",
+              "every": 12,
+              "unit": "months",
+              "statutory": true,
+              "dueAgo": 9,
+              "who": "external",
+              "minutes": 90
+            },
+            {
+              "text": "Battery and charger check",
+              "every": 1,
+              "unit": "weeks",
+              "dueAgo": -2,
+              "minutes": 15
+            }
+          ]
+        },
+        {
+          "tag": "SRT-1",
+          "name": "Sorter 1",
+          "type": "conveyor",
+          "area": "Sorting",
+          "crit": "B",
+          "tasks": [
+            {
+              "text": "Belt tension and tracking",
+              "every": 1,
+              "unit": "months",
+              "dueAgo": -10,
+              "minutes": 45
+            }
+          ]
+        },
+        {
+          "tag": "DK-2",
+          "name": "Dock leveller 2",
+          "type": "dock",
+          "area": "Dock 2",
+          "crit": "C",
+          "tasks": [
+            {
+              "text": "Lubricate hinge and lip",
+              "every": 3,
+              "unit": "months",
+              "dueAgo": 4,
+              "minutes": 20
+            }
+          ]
+        }
+      ]
+    },
+    "kaizen": [
+      {
+        "title": "Second label printer at dock 3",
+        "waste": "Waiting",
+        "area": "Loading",
+        "by": "Jonas",
+        "ago": 12,
+        "effort": 2,
+        "impact": 4,
+        "saving": 280,
+        "status": "idea"
+      },
+      {
+        "title": "Shadow board for the wrap tools",
+        "waste": "Motion",
+        "area": "Packing",
+        "by": "Fatima",
+        "ago": 20,
+        "effort": 1,
+        "impact": 3,
+        "status": "do",
+        "owner": "Fatima",
+        "movedAgo": 6,
+        "next": "Trial on the early shift"
+      },
+      {
+        "title": "Floor marking for the empty pallets",
+        "waste": "Motion",
+        "area": "Dock 1",
+        "by": "Marco",
+        "ago": 4,
+        "effort": 1,
+        "impact": 2,
+        "status": "idea"
+      },
+      {
+        "title": "Colour-coded tote labels per route",
+        "waste": "Defects",
+        "area": "Sorting",
+        "by": "Anna",
+        "ago": 45,
+        "effort": 2,
+        "impact": 4,
+        "saving": 350,
+        "status": "act",
+        "owner": "Anna",
+        "movedAgo": 25
+      }
+    ],
+    "actions": [
+      {
+        "title": "Repair the light curtain at dock 2",
+        "owner": "Marco",
+        "dueAgo": 3,
+        "priority": "High",
+        "status": "open",
+        "createdAgo": 10,
+        "area": "Dock 2",
+        "source": "safety-cross"
+      },
+      {
+        "title": "Retrain the late shift on the stacking rule",
+        "owner": "Anna",
+        "dueAgo": 6,
+        "priority": "Medium",
+        "status": "doing",
+        "createdAgo": 16,
+        "area": "Loading",
+        "source": "damage-control"
+      },
+      {
+        "title": "Order spare film for the stretch wrapper",
+        "owner": "Jonas",
+        "dueAgo": -4,
+        "priority": "Low",
+        "status": "open",
+        "createdAgo": 3,
+        "area": "Packing"
+      },
+      {
+        "title": "Mark the walkway at gate 4",
+        "owner": "Fatima",
+        "dueAgo": 8,
+        "priority": "Medium",
+        "status": "done",
+        "createdAgo": 20,
+        "closedAgo": 9,
+        "area": "Dock 1"
+      }
+    ],
+    "gemba": {
+      "walks": [
+        {
+          "layer": "team-lead",
+          "ago": 12,
+          "area": "Loading",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyyn"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 11,
+          "area": "Sorting",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyyy"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 10,
+          "area": "Loading",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyny"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 9,
+          "area": "Packing",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyyy"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 8,
+          "area": "Loading",
+          "walker": "Jonas",
+          "answers": "yyyyyyynyy"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 5,
+          "area": "Loading",
+          "walker": "Jonas",
+          "answers": "yyyyyynyyn"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 4,
+          "area": "Sorting",
+          "walker": "Jonas",
+          "answers": "yyyyyyyyny"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 3,
+          "area": "Loading",
+          "walker": "Jonas",
+          "answers": "yyyynyyyyn"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 2,
+          "area": "Packing",
+          "walker": "Jonas",
+          "answers": "yyyyyyyn-y"
+        },
+        {
+          "layer": "team-lead",
+          "ago": 1,
+          "area": "Loading",
+          "walker": "Jonas",
+          "answers": "yyyyynyyyn"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 31,
+          "area": "Loading",
+          "walker": "Anna",
+          "answers": "yyyyyyyynn"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 24,
+          "area": "Sorting",
+          "walker": "Anna",
+          "answers": "yyyyyyyyyn"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 17,
+          "area": "Packing",
+          "walker": "Anna",
+          "answers": "yyyyyyyyyy"
+        },
+        {
+          "layer": "area-manager",
+          "ago": 10,
+          "area": "Loading",
+          "walker": "Anna",
+          "answers": "yyyyyyyyny"
+        },
+        {
+          "layer": "site-lead",
+          "ago": 20,
+          "area": "Loading",
+          "walker": "Petra",
+          "answers": "yyyyyyyyyy"
+        }
+      ]
+    },
+    "events": [
+      {
+        "ago": 16,
+        "text": "Pick-by-light live in zone B",
+        "tools": [
+          "incomplete-control"
+        ]
+      }
+    ]
+  }
+}

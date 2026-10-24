@@ -1,0 +1,42 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": {
+      "name": "Signals",
+      "type": "Overview",
+      "time": "2 min",
+      "summary": "Every tool in this browser read in one ranked morning list: control chart signals (p, c, u and I-MR with the run and trend rules), missed targets, overdue actions, maintenance, red tags and ideas, and safety on top.",
+      "url": "/tools/signals/",
+      "cta": "Read the signals"
+    },
+    "de": {
+      "name": "Signale",
+      "type": "Übersicht",
+      "time": "2 min",
+      "summary": "Alle Tools in diesem Browser in einer geordneten Morgenliste: Signale der Regelkarten (p, c, u und I-MR mit Lauf- und Trendregeln), verfehlte Ziele, überfällige Maßnahmen, Wartungen, Rote Karten und Ideen, die Sicherheit ganz oben.",
+      "url": "/de/tools/signals/",
+      "cta": "Signale lesen"
+    },
+    "sq": {
+      "name": "Sinjalet",
+      "type": "Pasqyrë",
+      "time": "2 min",
+      "summary": "Çdo mjet në këtë shfletues i lexuar në një listë mëngjesi të renditur: sinjalet e kartave të kontrollit (p, c, u dhe I-MR me rregullat e serisë dhe të prirjes), objektivat e humbura, veprimet, mirëmbajtjet, etiketat e kuqe dhe idetë me vonesë, siguria në krye.",
+      "url": "/sq/tools/signals/",
+      "cta": "Lexo sinjalet"
+    }
+  },
+  "routine": {
+    "when": "Every morning",
+    "do": "Read the signals before the morning meeting, take the first high ones to the floor and give each one an owner, a 5 Whys or a date.",
+    "de": {
+      "when": "Jeden Morgen",
+      "do": "Lesen Sie die Signale vor der Morgenbesprechung, nehmen Sie die ersten hohen mit in die Halle und geben Sie jedem eine verantwortliche Person, ein 5 Whys oder ein Datum."
+    },
+    "sq": {
+      "when": "Çdo mëngjes",
+      "do": "Lexo sinjalet para mbledhjes së mëngjesit, çoji të lartat e para në terren dhe jepi secilit një përgjegjës, një 5 Whys ose një datë."
+    }
+  },
+  "recipe": "example"
+}

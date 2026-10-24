@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Signals
+seo_title: "Morning signals: control chart rules, missed targets and overdue items from every tool"
+description: "One morning list of what needs attention: control chart signals, missed targets, overdue items and safety events from every tool in this browser."
+activeNav: /tools.html
+permalink: /tools/signals/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Overview</p>
+  <h1>Signals</h1>
+  <p class="lede">One page for the morning. Signals reads every tool that holds data in this browser, gives each daily series the control chart it needs, checks the targets and the due dates, and ranks what needs attention: safety first, then high, medium and low, each with the rule and the numbers behind it.</p>
+</section>
+
+{% set cfg = signals %}
+{% include "partials/signals.njk" %}
