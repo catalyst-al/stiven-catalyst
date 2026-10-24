@@ -135,7 +135,7 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ## 8. Mjetet
 
-Te **Mjete** (`/sq/tools.html`) janë **30 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
+Te **Mjete** (`/sq/tools.html`) janë **36 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
 (planetet): çdo rol ka mjetet e veta dhe një rutinë që thotë kur përdoret secili. Mjetet punojnë edhe pa internet,
 pasi janë hapur një herë në atë pajisje.
 
@@ -153,8 +153,9 @@ pasi janë hapur një herë në atë pajisje.
 | **Dorëzimi i turnit** | Numrat, çështjet e hapura me përgjegjës dhe sigurinë, nga një turn te tjetri |
 | **Lista e veprimeve** | Çdo veprim nga çdo mjet, me përgjegjës, afat, status dhe si verifikohet |
 | **Tabela e ditës** | Takimi i mëngjesit: Siguri, Cilësi, Dorëzim, Kosto, Njerëz si ditë jeshile, portokalli, të kuqe |
-| **Auditi 5S** | Auditi 5S, 6S ose 8S sipas zonës, me radar, trend dhe regjistrin e etiketave të kuqe |
+| **Auditi 5S** | Auditi 5S, 6S ose 8S sipas zonës, me radar, trend, etiketat e kuqe, foto para/pas dhe plan auditesh me rotacion |
 | **Kryqi i sigurisë** | Kryqi i muajit për murin, ditët pa aksident, LTIFR, TRIR dhe piramida e ngjarjeve |
+| **Sendet e gjetura** | Regjistri i sendeve të gjetura nga dorëzimi deri te kthimi, policia, bamirësia ose asgjësimi |
 
 **Menaxher zone** (një zonë, javë pas jave):
 
@@ -169,6 +170,9 @@ pasi janë hapur një herë në atë pajisje.
 | **OEE** | Disponueshmëria, performanca dhe cilësia e makinave, me gjashtë humbjet e mëdha |
 | **KPI-të e hotelit** | Zënia, ADR dhe RevPAR kundrejt buxhetit, dhe paratë e humbura nga no-show |
 | **Gemba Walk** | Auditet sipas niveleve (shef turni, menaxher, drejtues) dhe ecjet për humbjet |
+| **Raporti i operacioneve** | Raporti javor ose mujor për menaxherin, i shkruar vetë nga të dhënat e mjeteve të tjera |
+| **Inspektimi i dhomës** | Kontrolli i dhomës së pastruar para se të lirohet, me pikët sipas zonës dhe defektet |
+| **Planifikuesi i mirëmbajtjes** | Mirëmbajtja parandaluese dhe kontrollet ligjore sipas datës ose orëve të punës, me MTBF/MTTR |
 
 **Menaxher procesesh** (një proces, nga problemi te standardi):
 
@@ -182,6 +186,8 @@ pasi janë hapur një herë në atë pajisje.
 | **Studimi i kohës** | Kohët e ciklit me kronometër, takti dhe grafiku Yamazumi |
 | **Harta e rrjedhës së vlerës** | E gjithë rrjedha, ku pret koha, gjendja aktuale dhe e ardhshme |
 | **Puna standarde** | Udhëzimi i punës hap pas hapi, me pikat kyçe dhe arsyet, në A4 dhe Word |
+| **Diagrami spageti** | Rrugët e ecjes mbi planin e katit, në metra, para dhe pas ndryshimit |
+| **Portofoli i projekteve** | Të gjitha projektet DMAIC në një faqe: faza, gjendja, kursimet dhe kalimi i radhës |
 | **Six Sigma në magazinë** | Kursi DMAIC në pesë hapa, me mjetin e duhur te çdo hap |
 
 **Karrierë:** Krijuesi i CV-së, CV për ATS dhe Letër motivimi.
@@ -205,6 +211,9 @@ pasi janë hapur një herë në atë pajisje.
   punës janë të njëjta në të tri gjuhët.
 - **Ruaj gjithë punën time** (në fund të çdo mjeti dhe te faqja Mjete) bën një skedar me gjithë punën. Me **Hap një skedar
   të ruajtur** e hap në një telefon ose kompjuter tjetër, ose ia jep një kolegu.
+- **Pikat e rikthimit:** browser-i krijon vetë një pikë rikthimi çdo ditë që hap një mjet, dhe para se një skedar i
+  hapur të zëvendësojë diçka. Te kutia e ruajtjes, **Pika rikthimi** tregon listën; **Rikthe** e kthen punën si ishte
+  atë ditë. Kutia tregon edhe sa vend zë puna dhe paralajmëron kur hapësira po mbaron.
 - Çdo mjet hapet herën e parë me një **shembull**, që të shihet menjëherë çfarë tregon. Shtyp **Fshi shembullin**
   ose shto të dhënat e tua dhe shembulli ikën vetë.
 
