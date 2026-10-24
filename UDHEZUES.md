@@ -133,6 +133,109 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ---
 
+## 8. Mjetet
+
+Te **Mjete** (`/sq/tools.html`) janë **30 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
+(planetet): çdo rol ka mjetet e veta dhe një rutinë që thotë kur përdoret secili. Mjetet punojnë edhe pa internet,
+pasi janë hapur një herë në atë pajisje.
+
+### Çfarë ka secili rol
+
+**Shef turni** (një turn):
+
+| Mjeti | Për çfarë |
+|---|---|
+| **Shift Pulse** | Turni në një pamje: dëmet, porositë e paplota, vonesat, siguria, OEE dhe veprimet e hapura |
+| **Kontrolli i dëmeve** | Regjistri i dëmeve sipas hapit dhe shkakut, me normën, DPMO-në dhe nivelin sigma |
+| **Kontrolli i plotësisë** | E njëjta gjë për porositë që dolën pa çdo artikull |
+| **Analiza e vonesave** | Rrugët me orën e planifikuar dhe reale: sa vonesë nis te doku, sa në rrugë |
+| **Regjistri i Night Audit** | No-show, karta të refuzuara, gabime postimi dhe bilance të hapura në hotel |
+| **Dorëzimi i turnit** | Numrat, çështjet e hapura me përgjegjës dhe sigurinë, nga një turn te tjetri |
+| **Lista e veprimeve** | Çdo veprim nga çdo mjet, me përgjegjës, afat, status dhe si verifikohet |
+| **Tabela e ditës** | Takimi i mëngjesit: Siguri, Cilësi, Dorëzim, Kosto, Njerëz si ditë jeshile, portokalli, të kuqe |
+| **Auditi 5S** | Auditi 5S, 6S ose 8S sipas zonës, me radar, trend dhe regjistrin e etiketave të kuqe |
+| **Kryqi i sigurisë** | Kryqi i muajit për murin, ditët pa aksident, LTIFR, TRIR dhe piramida e ngjarjeve |
+
+**Menaxher zone** (një zonë, javë pas jave):
+
+| Mjeti | Për çfarë |
+|---|---|
+| **Last-Mile CX Control Tower** | Perfect Delivery, partnerët, shoferët dhe rreziku i rrugëve nga Excel-i yt |
+| **Diagnostikimi i KPI-së** | Kur një numër bëhet i kuq: qartësi, aftësi, kapacitet, proces apo përgjegjësi? |
+| **Pareto 80/20** | Cilat pak shkaqe bëjnë shumicën e humbjeve |
+| **Raporti A3** | Problemi në një faqe, nga gjendja aktuale te ndjekja, me Word |
+| **Tabela Kaizen** | Idetë e ekipit nga propozimi te rezultati, me kursimet |
+| **Matrica e aftësive** | Kush di çfarë, ku varemi nga një person i vetëm, plani i trajnimit |
+| **OEE** | Disponueshmëria, performanca dhe cilësia e makinave, me gjashtë humbjet e mëdha |
+| **KPI-të e hotelit** | Zënia, ADR dhe RevPAR kundrejt buxhetit, dhe paratë e humbura nga no-show |
+| **Gemba Walk** | Auditet sipas niveleve (shef turni, menaxher, drejtues) dhe ecjet për humbjet |
+
+**Menaxher procesesh** (një proces, nga problemi te standardi):
+
+| Mjeti | Për çfarë |
+|---|---|
+| **Sigma dhe karta e kontrollit** | Niveli sigma, Perfect Delivery dhe a është një ditë e keqe sinjal apo zhurmë |
+| **5 Whys** | Nga simptoma te shkaku që mund ta ndryshosh, me një kundërmasë |
+| **Kurrizi i peshkut** | Shkaqet sipas kategorive (6M), me vota dhe shkaqet e mundshme |
+| **FMEA** | Rreziqet e çdo hapi me S, O, D dhe prioritetin AIAG-VDA |
+| **Laboratori i procesit** | Karta I-MR, Cp/Cpk, testet para/pas dhe sa matje duhen |
+| **Studimi i kohës** | Kohët e ciklit me kronometër, takti dhe grafiku Yamazumi |
+| **Harta e rrjedhës së vlerës** | E gjithë rrjedha, ku pret koha, gjendja aktuale dhe e ardhshme |
+| **Puna standarde** | Udhëzimi i punës hap pas hapi, me pikat kyçe dhe arsyet, në A4 dhe Word |
+| **Six Sigma në magazinë** | Kursi DMAIC në pesë hapa, me mjetin e duhur te çdo hap |
+
+**Karrierë:** Krijuesi i CV-së, CV për ATS dhe Letër motivimi.
+
+### Si lidhen me njëri-tjetrin
+
+- **Lista e veprimeve është qendra.** Kundërmasa e 5 Whys, gjetjet e auditit 5S, rreziqet e FMEA-s, çështjet e
+  dorëzimit të turnit dhe problemet e regjistrave shkojnë te lista me butonin **Shto te veprimet**. Lista tregon nga
+  cili mjet erdhi secili veprim, cilat janë të vonuara, dhe e bën shqyrtimin javor.
+- **Profili i vendit të punës** (vendi, turnet, zonat me përgjegjësit, ekipet, objektivat) plotësohet një herë te
+  **Tabela e ditës**, në pjesën e sipërme. Pastaj e marrin edhe mjetet e tjera: auditi 5S ofron zonat, regjistrat
+  marrin turnet dhe objektivat. Një objektiv i shkruar në vetë mjetin ka gjithmonë përparësi.
+- **Tabela e ditës dhe Shift Pulse lexojnë vetë** regjistrat e mjeteve të tjera: dëmet, vonesat, sigurinë, OEE-në,
+  auditin 5S dhe veprimet. Nuk shkruan gjë dy herë.
+- Shumë mjete kanë edhe butonat **Vazhdo me 5 Whys**, **Hape në Pareto 80/20** dhe **Hape si kartë kontrolli**.
+
+### Ku ruhen të dhënat
+
+- Çdo gjë mbetet **vetëm në atë browser**, në atë pajisje. Asgjë nuk dërgohet.
+- Çdo gjuhë mban regjistrat e vet (emrat brenda janë fjalët e asaj gjuhe). Lista e veprimeve dhe profili i vendit të
+  punës janë të njëjta në të tri gjuhët.
+- **Ruaj gjithë punën time** (në fund të çdo mjeti dhe te faqja Mjete) bën një skedar me gjithë punën. Me **Hap një skedar
+  të ruajtur** e hap në një telefon ose kompjuter tjetër, ose ia jep një kolegu.
+- Çdo mjet hapet herën e parë me një **shembull**, që të shihet menjëherë çfarë tregon. Shtyp **Fshi shembullin**
+  ose shto të dhënat e tua dhe shembulli ikën vetë.
+
+### Udhëzuesi i mjeteve
+
+**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e tretë**: një faqe
+për çdo mjet, në tri gjuhë, për t’u shfletuar ose shkarkuar si PDF. Botimet e mëparshme mbeten te faqja si u
+printuan. Te çdo mjet, poshtë, lidhja **Hape te faqja N** të çon te faqja e tij në libër.
+
+### Ndryshimi i një mjeti (në kompjuter, jo nga paneli)
+
+Mjetet nuk ndryshohen nga paneli: janë kod. Teksti i tyre është te `src/_data/` (një skedar për çdo mjet dhe gjuhë,
+p.sh. `src/_data/sq/fmea.json`), përkthimet e butonave te `src/_data/sq/ui.json` dhe `src/_data/de/ui.json`,
+kartat te `src/_data/tools.json` (dhe `de/`, `sq/`), rolet te `src/_data/families.json`.
+
+Pas një ndryshimi:
+
+```
+npm run build && npm test                  # faqja ndërtohet dhe testet kalojnë
+node scripts/check-tool.mjs fmea           # kontrollon një mjet në tri gjuhët, pa build të plotë
+node scripts/tool-previews.mjs             # fotot e kartave (TOOLS=fmea për një mjet të vetëm)
+node scripts/social-cards.mjs              # imazhet për LinkedIn/WhatsApp (TOOLS=fmea)
+node scripts/thumbnails.mjs                # kopjet e vogla të fotove
+node scripts/tools-guide.mjs               # libri i mjeteve, kur ndryshon një mjet
+```
+
+Skriptet e fotove kanë nevojë për Chromium (Playwright). Nëse Chromium është tashmë në kompjuter, jepja rrugën me
+`CHROMIUM_PATH=/rruga/te/chromium` para komandës.
+
+---
+
 ## Libri “Mall për Durrësin”
 
 Libri shfletohet në tri gjuhë, secila me botimin e vet, me të njëjtin dizajn dhe të njëjtën kopertinë:
@@ -226,3 +329,8 @@ Asgjë nuk humbet dhe çdo ndryshim mund të kthehet.
 Dizajni është i ndarë.
 
 **Skedarë të mëdhenj?** Mbaji nën ~20 MB secilin. Për video, përdor YouTube dhe vendos linkun.
+
+**A i shoh të dhënat e mjeteve në një telefon tjetër?** Jo vetë: ato janë vetëm në browser-in ku u shkruan. Bëj
+**Ruaj gjithë punën time** dhe hape skedarin në pajisjen tjetër me **Hap një skedar të ruajtur**.
+
+**Fshiva historinë e browser-it. Humbën të dhënat?** Po, nëse nuk ke ruajtur skedarin. Ruaje një herë në javë.
