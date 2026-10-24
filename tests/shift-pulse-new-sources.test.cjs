@@ -1,6 +1,8 @@
-// Shift Pulse reads the tools that joined later: Safety Cross, OEE, the Action Tracker and the 5S Audit. The numbers
-// are in window.PulseMath (safety, oee, actions, fiveS); OEE is counted there without the OEE tool's script, so the
-// tests hold it against window.OeeMath on the same rows.
+// Shift Pulse reads the tools that joined later: Safety Cross, OEE, the Action Tracker, the 5S Audit, and then Room
+// Inspection, the Maintenance Planner and Lost & Found. The numbers are in window.PulseMath (safety, oee, actions,
+// fiveS, rooms, maintenance, lostFound); OEE is counted there without the OEE tool's script, so the tests hold it
+// against window.OeeMath on the same rows. The last three use the tools' own arithmetic (their scripts are loaded),
+// and the tests check them against values worked out by hand.
 process.env.TZ = 'Europe/Berlin';
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
@@ -228,12 +230,288 @@ test('with only a 5S audit saved, the page still shows its card, with the area a
 test('every new text of Shift Pulse has German and Albanian', () => {
   const source = fs.readFileSync('src/js/shift-pulse.js', 'utf8');
   const extra = JSON.parse(fs.readFileSync('src/_data/i18n-parts/shift-pulse-extra.json', 'utf8'));
+  const third = JSON.parse(fs.readFileSync('src/_data/i18n-parts/pulse-board-3.json', 'utf8'));
   const texts = new Set([...source.matchAll(/tx\("((?:[^"\\]|\\.)*)"/g)].map((m) => JSON.parse(`"${m[1]}"`)));
   for (const m of source.matchAll(/tx\(\w[^?]*\?\s*"((?:[^"\\]|\\.)*)"\s*:\s*"((?:[^"\\]|\\.)*)"/g)) { texts.add(JSON.parse(`"${m[1]}"`)); texts.add(JSON.parse(`"${m[2]}"`)); }
   const partial = fs.readFileSync('src/_includes/partials/shift-pulse.njk', 'utf8');
   for (const m of partial.matchAll(/\{\{ "((?:[^"\\]|\\.)*)" \| t\(lang\) \}\}/g)) texts.add(m[1]);
   for (const lang of ['de', 'sq']) {
-    const ui = { ...JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8')), ...extra[lang] };
+    const ui = { ...JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8')), ...extra[lang], ...third[lang] };
     for (const text of texts) assert.ok(ui[text], `${lang}: ${text}`);
   }
+});
+
+// Room Inspection, Maintenance Planner and Lost & Found: their scripts give the arithmetic.
+const TOOLS = ['src/js/room-inspection.js', 'src/js/maintenance-planner.js', 'src/js/lost-found.js'];
+
+// A checklist small enough to score by hand: weights 3 (critical), 1, 2 and 1, so 7 in all; the pass mark 90 %.
+const roomCfg = {
+  threshold: 0.9,
+  zones: [{ key: 'bathroom', name: 'Bathroom' }, { key: 'bed', name: 'Bed' }],
+  templates: {
+    standard: { name: 'Standard room', questions: {
+      bathroom: [{ text: 'No hair', weight: 3, critical: true, fix: 'reclean' }, { text: 'Mirror polished', weight: 1, fix: 'reclean' }],
+      bed: [{ text: 'Linen clean', weight: 2, fix: 'reclean' }, { text: 'Lamp works', weight: 1, fix: 'maintenance' }],
+    } },
+    suite: { name: 'Suite', questions: { bathroom: [{ text: 'Bath clean', weight: 2 }] } },
+  },
+};
+const allPass = { 'bathroom-0': 'pass', 'bathroom-1': 'pass', 'bed-0': 'pass', 'bed-1': 'pass' };
+const inspect = (date, time, room, fails = {}, flags = {}) => ({ date, time, room, template: 'standard', answers: { ...allPass, ...fails }, flags });
+const roomRows = [
+  inspect('2026-08-20', '10:00', '101', { 'bathroom-0': 'fail' }, { 'bathroom-0': 'reclean' }),
+  inspect('2026-09-01', '10:00', '101'),
+  // 6 of 7 is 86 %, below the pass mark; the lamp goes to maintenance, not back to the attendant.
+  inspect('2026-09-01', '11:00', '102', { 'bed-1': 'fail' }, { 'bed-1': 'maintenance' }),
+  inspect('2026-09-01', '12:00', '102'),
+  // A failed critical item fails the room on its own; nobody checked it again.
+  inspect('2026-09-02', '10:00', '103', { 'bathroom-0': 'fail' }, { 'bathroom-0': 'reclean' }),
+  inspect('2026-09-02', '11:00', '104', { 'bathroom-1': 'fail' }, { 'bathroom-1': 'reclean' }),
+  inspect('2026-09-02', '12:00', '105'),
+  inspect('2026-09-03', '09:00', '104'),
+  // n.a. leaves the weight out: 5 of 5.
+  inspect('2026-09-03', '10:00', '106', { 'bed-0': 'na' }),
+  inspect('2026-09-03', '11:00', '107', { 'bathroom-0': 'fail' }, { 'bathroom-0': 'reclean' }),
+];
+
+test('rooms: first-time pass rate per day by hand, re-checks left out, open re-cleans and the item that fails most', () => {
+  const { PulseMath, RoomInspectionMath: RI } = load(TOOLS);
+  const result = plain(PulseMath.rooms({ rows: roomRows }, { from: '2026-09-01', to: '2026-09-03' }, roomCfg));
+  // First inspections: 1 Sept 101 pass, 102 fail; 2 Sept 103, 104 fail, 105 pass; 3 Sept 104, 106 pass, 107 fail.
+  // The second look at 102 on 1 Sept is a re-check; the 20 August fail is outside the period.
+  assert.deepEqual(result.first, [2, 3, 3]);
+  assert.deepEqual(result.fails, [1, 2, 1]);
+  assert.deepEqual(result.inspections, [3, 3, 3]);
+  close(result.values[0], 1 / 2, '1 Sept');
+  close(result.values[1], 1 / 3, '2 Sept');
+  close(result.values[2], 2 / 3, '3 Sept');
+  assert.equal(result.total.first, 8);
+  assert.equal(result.total.firstPass, 4);
+  assert.equal(result.total.rate, 0.5);
+  assert.equal(result.total.n, 9);
+  assert.equal(result.threshold, 0.9);
+  assert.equal(result.latest.key, '2026-09-03');
+  close(result.latest.rate, 2 / 3, 'the latest day');
+  // Usual: 3 fails of 5 first inspections before the latest day, so 40 % passed.
+  close(result.usual, 0.4, 'the usual pass rate');
+  // p-chart: 0.6 + 3 √(0.6 · 0.4 / 3) = 1.45; one fail of three is inside it.
+  assert.equal(result.above, false);
+  // Re-cleans: 103, 104 (2 Sept) and 107 had an item sent back; 104 passed the next day, so 103 and 107 are open.
+  assert.equal(result.recleans, 3);
+  assert.equal(result.openRecleans, 2);
+  assert.deepEqual(result.worst, { text: 'No hair', count: 2, share: 0.5 });
+  // The same rows through the tool's own overall rate.
+  const items = (row) => RI.itemsOf(roomCfg.templates[row.template], ['bathroom', 'bed']);
+  const tool = RI.overall(RI.annotate(roomRows, items, 0.9).filter((row) => row.date >= '2026-09-01'));
+  assert.equal(result.total.rate, tool.rate);
+
+  // The pass mark the team saved wins: at 80 %, 6 of 7 passes, so 102 passes the first time.
+  const easy = plain(PulseMath.rooms({ threshold: 0.8, rows: roomRows }, { from: '2026-09-01', to: '2026-09-03' }, roomCfg));
+  assert.equal(easy.threshold, 0.8);
+  assert.deepEqual(easy.fails, [0, 1, 1], '102 and 104 pass at 86 %; 103 and 107 still fail, a failed critical item fails the room at any pass mark');
+  // By the week from Monday (31 August): one slot for the three days.
+  const weeks = plain(PulseMath.rooms({ rows: roomRows }, { from: '2026-08-31', to: '2026-09-06', unit: 'week' }, roomCfg));
+  assert.deepEqual(weeks.slots, ['2026-08-31']);
+  assert.equal(weeks.values[0], 0.5);
+  // An unknown checklist is scored with the first one, as the tool does; nothing saved, or no script, no card.
+  assert.equal(plain(PulseMath.rooms({ rows: [{ ...roomRows[1], template: 'gone' }] }, { from: '2026-09-01', to: '2026-09-01' }, roomCfg)).total.rate, 1);
+  assert.equal(PulseMath.rooms({ rows: [] }, { from: '2026-09-01', to: '2026-09-03' }, roomCfg), null);
+  assert.equal(load().PulseMath.rooms({ rows: roomRows }, { from: '2026-09-01', to: '2026-09-03' }, roomCfg), null);
+});
+
+test('rooms: the flag is the p-chart of the fail share of first inspections', () => {
+  const { PulseMath } = load(TOOLS);
+  const rows = [];
+  // Three days of ten rooms with one fail each, then a day of ten rooms with six fails.
+  ['2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04'].forEach((date, d) => {
+    for (let i = 0; i < 10; i++) rows.push(inspect(date, `1${i}:00`, `${d + 1}0${i}`, i < (d === 3 ? 6 : 1) ? { 'bathroom-1': 'fail' } : {}, { 'bathroom-1': 'reclean' }));
+  });
+  const result = plain(PulseMath.rooms({ rows }, { from: '2026-09-01', to: '2026-09-04' }, roomCfg));
+  // Usual fail share 3 / 30 = 10 %; limit 0.1 + 3 √(0.1 · 0.9 / 10) = 38.5 %; 60 % is beyond it.
+  close(result.usual, 0.9, 'usual pass');
+  close(result.latest.rate, 0.4, 'latest');
+  assert.equal(result.above, true);
+  // Fewer rooms on the latest day widen the limit: 4 fails of 8 (50 %) against 0.1 + 3 √(0.09 / 8) = 41.8 % is a
+  // signal, 3 of 7 (42.9 %) against 0.1 + 3 √(0.09 / 7) = 44.0 % is not.
+  const without = (rooms) => plain(PulseMath.rooms({ rows: rows.filter((row) => !(row.date === '2026-09-04' && rooms.includes(row.room))) }, { from: '2026-09-01', to: '2026-09-04' }, roomCfg));
+  const eight = without(['400', '401']);
+  close(eight.latest.rate, 4 / 8, '4 of 8 passed');
+  assert.equal(eight.above, true);
+  const seven = without(['400', '401', '402']);
+  close(seven.latest.rate, 4 / 7, '4 of 7 passed');
+  assert.equal(seven.above, false);
+  // A single failed room is never a signal (at least two, as for every number here).
+  const one = plain(PulseMath.rooms({ rows: [inspect('2026-09-01', '10:00', '101'), inspect('2026-09-02', '10:00', '102', { 'bathroom-0': 'fail' })] }, { from: '2026-09-01', to: '2026-09-02' }, roomCfg));
+  assert.equal(one.latest.rate, 0);
+  assert.equal(one.above, false);
+  // As for damage with a volume: after days without a fail there is no usual share to stand on, so no flag.
+  const clean = rows.filter((row) => row.date === '2026-09-04').concat(['2026-09-01', '2026-09-02'].flatMap((date, d) => [0, 1, 2].map((i) => inspect(date, `0${i}:00`, `9${d}${i}`))));
+  const fresh = plain(PulseMath.rooms({ rows: clean }, { from: '2026-09-01', to: '2026-09-04' }, roomCfg));
+  close(fresh.latest.rate, 0.4, '6 of 10 fail');
+  assert.equal(fresh.usual, 1);
+  assert.equal(fresh.above, false);
+});
+
+// A small plan, due dates worked out by hand for 20 September 2026.
+const plan = {
+  assets: [
+    { id: 'a1', tag: 'SRT-1', name: 'Sorter', crit: 'A', tasks: [
+      // Done on 1 August, monthly: due 1 September, 19 days overdue.
+      { id: 't1', text: 'Belt check', every: 1, unit: 'months', hours: 0, last: '', lastHours: null, start: '' },
+      // Done on 1 September, every two weeks: due 15 September, but postponed to the 25th: not overdue.
+      { id: 't2', text: 'Lubricate chain', every: 2, unit: 'weeks', hours: 0, last: '2026-09-01', lastHours: null, start: '' },
+      // Every 500 operating hours from 1,000: the meter runs 10 h a day and reaches 1,500 h on 11 September.
+      { id: 't5', text: 'Gearbox oil', every: 500, unit: 'hours', hours: 0, last: '', lastHours: 1000, start: '' },
+    ] },
+    { id: 'a2', tag: 'FLT-2', name: 'Forklift', crit: 'B', tasks: [
+      // Yearly, last on 10 September 2025: due 10 September 2026.
+      { id: 't3', text: 'Brake test', every: 1, unit: 'years', hours: 0, last: '2025-09-10', lastHours: null, start: '' },
+    ] },
+    { id: 'a3', tag: 'DOOR-4', name: '', crit: 'C', tasks: [
+      // Every six months from 20 April: due 20 October.
+      { id: 't4', text: 'Hinges', every: 6, unit: 'months', hours: 0, last: '2026-04-20', lastHours: null, start: '' },
+    ] },
+  ],
+  rows: [
+    { kind: 'done', asset: 'a1', task: 't1', date: '2026-08-01', minutes: 30 },
+    { kind: 'postponed', asset: 'a1', task: 't2', date: '2026-09-14', until: '2026-09-25', reason: 'Part on order' },
+    { kind: 'reading', asset: 'a1', date: '2026-09-01', hours: 1400 },
+    { kind: 'reading', asset: 'a1', date: '2026-09-11', hours: 1500 },
+    { kind: 'breakdown', asset: 'a1', date: '2026-08-30', minutes: 50, cause: 'wear' },
+    { kind: 'breakdown', asset: 'a1', date: '2026-09-18', minutes: 30, cause: 'jam' },
+    { kind: 'breakdown', asset: 'a1', date: '2026-09-19', minutes: 45, cause: 'electrical' },
+    { kind: 'breakdown', asset: 'a2', date: '2026-09-19', minutes: 20, cause: 'other' },
+    // An asset that is no longer in the plan is not counted, as in the planner.
+    { kind: 'breakdown', asset: 'gone', date: '2026-09-19', minutes: 100, cause: 'other' },
+  ],
+};
+
+test('maintenance: overdue tasks by the planner\'s own due dates, those on A assets, breakdowns and downtime', () => {
+  const { PulseMath, MaintenancePlannerMath: MP } = load(TOOLS);
+  const result = plain(PulseMath.maintenance(plan, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20'));
+  assert.equal(result.tasks, 5);
+  // Overdue: the belt check (1 Sept, A), the brake test (10 Sept, B) and the gearbox oil (11 Sept, A).
+  assert.equal(result.overdue, 3);
+  assert.equal(result.overdueA, 2);
+  assert.deepEqual(result.oldest, { task: 'Belt check', asset: 'SRT-1 · Sorter', due: '2026-09-01', crit: 'A' });
+  // The dates by hand against the planner's nextDue.
+  const events = plan.rows.filter((row) => row.asset === 'a1');
+  assert.equal(MP.nextDue(plan.assets[0].tasks[2], events).due, '2026-09-11', 'the meter reaches 1,500 h on 11 September');
+  assert.equal(MP.nextDue(plan.assets[0].tasks[1], events).due, '2026-09-25', 'the postponement moves the date');
+  // Breakdowns from 14 to 20 September: one on the 18th, two on the 19th; 30 + 45 + 20 = 95 minutes.
+  assert.deepEqual(result.values, [0, 0, 0, 0, 1, 2, 0]);
+  assert.deepEqual(result.minutesBySlot, [0, 0, 0, 0, 30, 65, 0]);
+  assert.equal(result.breakdowns, 3);
+  assert.equal(result.downtime, 95);
+  // c-chart: the usual day before the 19th is 1 / 5 = 0.2; 0.2 + 3 √0.2 = 1.54, so two breakdowns are a signal.
+  assert.equal(result.latest.key, '2026-09-19');
+  close(result.usual, 0.2, 'usual');
+  close(result.limit, 0.2 + 3 * Math.sqrt(0.2), 'limit');
+  assert.equal(result.above, true);
+  // A week later the plan has moved on: the postponed chain is due on the 25th and is overdue on the 27th.
+  assert.equal(plain(PulseMath.maintenance(plan, { from: '2026-09-21', to: '2026-09-27' }, '2026-09-27')).overdue, 4);
+  // By the week: one slot with the three breakdowns.
+  const weeks = plain(PulseMath.maintenance(plan, { from: '2026-09-14', to: '2026-09-20', unit: 'week' }, '2026-09-20'));
+  assert.deepEqual(weeks.values, [3]);
+  assert.equal(weeks.above, false, 'one week has no week before it');
+  assert.equal(PulseMath.maintenance({ assets: [] }, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20'), null);
+  assert.equal(load().PulseMath.maintenance(plan, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20'), null, 'no planner script, no card');
+});
+
+const lfCfg = JSON.parse(fs.readFileSync('src/_data/lostFound.json', 'utf8'));
+const found = [
+  // High value, kept 180 days: 1 March + 180 = 28 August, past it.
+  { id: 'LF-1', date: '2026-03-01', category: 'phone', what: 'Black phone', value: 'high', steps: [] },
+  // Documents are decided on in 7 days: 10 + 7 = 17 September, past it.
+  { id: 'LF-2', date: '2026-09-10', category: 'documents', what: 'Passport', value: 'high', steps: [] },
+  // Low value, 90 days: 14 December.
+  { id: 'LF-3', date: '2026-09-15', category: 'clothing', what: 'Grey scarf', value: 'low', steps: [] },
+  // Returned: closed.
+  { id: 'LF-4', date: '2026-09-16', category: 'keys', what: 'Car key', value: 'low', steps: [{ status: 'returned', date: '2026-09-17', by: 'Ana' }] },
+  // Medium, 90 days: 1 June + 90 = 30 August; the guest was contacted and never came, still open.
+  { id: 'LF-5', date: '2026-06-01', category: 'bag', what: 'Blue backpack', value: 'medium', steps: [{ status: 'contacted', date: '2026-06-02', by: 'Ana' }] },
+  { id: 'LF-6', date: '2026-09-19', category: 'toy', what: 'Teddy bear', value: 'low', steps: [] },
+];
+
+test('lost & found: items logged per day, open items and those past their keep-until date', () => {
+  const { PulseMath, LostFoundMath: LF } = load(TOOLS);
+  const result = plain(PulseMath.lostFound({ rows: found }, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20', lfCfg));
+  assert.deepEqual(result.values, [0, 1, 1, 0, 0, 1, 0], 'found on the 15th, 16th and 19th');
+  assert.equal(result.logged, 3);
+  assert.equal(result.open, 5);
+  assert.equal(result.over, 3, 'the phone, the backpack and the passport');
+  assert.deepEqual(result.oldest, { what: 'Black phone', until: '2026-08-28' });
+  // The register's own count agrees.
+  const stats = LF.stats(LF.cleanRows(found, lfCfg), '2026-09-20', lfCfg, LF.rules(lfCfg));
+  assert.equal(result.open, stats.open);
+  assert.equal(result.over, stats.over);
+  // The days the team typed win: low value kept 3 days, so the scarf (until the 18th) is past it too.
+  assert.equal(plain(PulseMath.lostFound({ retLow: '3', rows: found }, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20', lfCfg)).over, 4);
+  assert.equal(PulseMath.lostFound({ rows: [] }, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20', lfCfg), null);
+  assert.equal(PulseMath.lostFound({ rows: found }, { from: '2026-09-14', to: '2026-09-20' }, '2026-09-20', {}), null, 'no rules, no card');
+});
+
+test('the page: cards for Room Inspection, the Maintenance Planner and Lost & Found, their flags, links and summary', async () => {
+  const probe = load();
+  const today = probe.ToolKit.today();
+  const ago = (n) => probe.ToolKit.addDays(today, -n);
+  const shiftDates = (rows, from) => rows.map((row) => ({ ...row, date: probe.ToolKit.addDays(today, Math.round((Date.parse(`${row.date}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5)) }));
+  const page = PAGE.replace('"oeeReasons"', `"rooms":${JSON.stringify(roomCfg)},"lostFound":${JSON.stringify({ categories: lfCfg.categories, retention: lfCfg.retention, dueSoonDays: lfCfg.dueSoonDays, followUpDays: lfCfg.followUpDays })},"oeeReasons"`);
+  const storage = {
+    // The room rows with 3 September as today.
+    'sc-room-inspection-sq': { threshold: 0.9, rows: shiftDates(roomRows, '2026-09-03') },
+    // The plan with 20 September as today; postponements and readings move with it.
+    'sc-maintenance-planner-sq': { ...plan, assets: plan.assets.map((asset) => ({ ...asset, tasks: asset.tasks.map((task) => ({ ...task, last: task.last ? shiftDates([{ date: task.last }], '2026-09-20')[0].date : '' })) })), rows: shiftDates(plan.rows, '2026-09-20').map((row) => (row.until ? { ...row, until: shiftDates([{ date: row.until }], '2026-09-20')[0].date } : row)) },
+    'sc-lost-found-sq': { rows: shiftDates(found, '2026-09-20').map((row) => ({ ...row, steps: row.steps.map((step) => ({ ...step, date: shiftDates([step], '2026-09-20')[0].date })) })) },
+    // The English register is not the Albanian page's.
+    'sc-lost-found': { rows: [{ id: 'LF-9', date: today, category: 'toy', what: 'x', steps: [] }] },
+  };
+  const win = load(TOOLS, { lang: 'sq', url: 'https://example.test/sq/tools/shift-pulse/', html: page, storage });
+  let copied = '';
+  Object.defineProperty(win.navigator, 'clipboard', { value: { writeText: async (text) => { copied = text; } } });
+  const cards = [...win.document.querySelectorAll('.sp-card')];
+  const byLabel = (label) => cards.find((card) => card.querySelector('.result-label').textContent === label);
+  assert.deepEqual(cards.slice(3).map((card) => card.querySelector('.result-label').textContent), ['First-time pass', 'Overdue maintenance', 'Breakdowns', 'Found items']);
+  const rooms = byLabel('First-time pass');
+  assert.match(rooms.querySelector('.sp-card-value').textContent, /^50/);
+  assert.match(rooms.textContent, /9 inspections · pass mark 90/);
+  assert.match(rooms.textContent, /4 of 8 rooms passed at the first inspection/);
+  assert.match(rooms.textContent, /Re-cleans open: 2/);
+  assert.match(rooms.textContent, /Fails most: No hair \(2 ×\)/);
+  assert.ok(rooms.querySelector('svg.sp-spark'));
+  assert.ok(!rooms.querySelector('.sp-flag'), 'inside the p-chart limit');
+  assert.equal(rooms.querySelector('a').href, 'https://example.test/sq/tools/room-inspection/');
+  const overdue = byLabel('Overdue maintenance');
+  assert.equal(overdue.querySelector('.sp-card-value').textContent, '3');
+  assert.match(overdue.textContent, /2 on A assets/);
+  assert.match(overdue.textContent, /Belt check · SRT-1 · Sorter/);
+  assert.ok(overdue.querySelector('.sp-flag'));
+  assert.equal(overdue.querySelector('a').href, 'https://example.test/sq/tools/maintenance-planner/');
+  const stops = byLabel('Breakdowns');
+  assert.equal(stops.querySelector('.sp-card-value').textContent, '3');
+  assert.match(stops.textContent, /Downtime: 95 min/);
+  assert.ok(stops.querySelector('.sp-flag'), 'two breakdowns beyond the c-chart limit');
+  const items = byLabel('Found items');
+  assert.equal(items.querySelector('.sp-card-value').textContent, '3');
+  assert.match(items.textContent, /Open items: 5 · Past the keep-until date: 3/);
+  assert.match(items.textContent, /Kept until .*: Black phone/);
+  assert.equal(items.querySelector('.sp-flag').textContent, 'Decision due');
+  assert.equal(items.querySelector('a').href, 'https://example.test/sq/tools/lost-found/');
+  const attention = win.document.querySelector('.sp-attention').textContent;
+  assert.match(attention, /3 maintenance tasks are overdue \(2 on A assets\)/);
+  assert.match(attention, /Breakdowns are above the usual level on/);
+  assert.match(attention, /3 found items are past their keep-until date/);
+  assert.doesNotMatch(attention, /First-time pass is below/);
+  // One shift chosen: the three tools keep no shift, and their cards say so.
+  const shift = win.document.querySelector('[name=shift]');
+  shift.value = 'Early';
+  shift.dispatchEvent(new win.Event('change', { bubbles: true }));
+  assert.match(win.document.querySelector('.sp-card:nth-child(4)').textContent, /This tool keeps no shift/);
+  shift.value = '';
+  shift.dispatchEvent(new win.Event('change', { bubbles: true }));
+  [...win.document.querySelectorAll('button')].find((button) => button.textContent === 'Copy summary').click();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.match(copied, /First-time pass rate: 50\s?% \(4 of 8 rooms\) · 9 inspections · pass mark 90\s?% · Re-cleans open: 2 · Fails most: No hair \(2 ×\)/);
+  assert.match(copied, /Overdue maintenance: 3 \(2 on A assets\) · Breakdowns: 3 · Downtime: 95 min/);
+  assert.match(copied, /Found items: 3 · Open items: 5 · Past the keep-until date: 3/);
 });

@@ -15,17 +15,17 @@
     {
       "key": "Q",
       "name": "Quality",
-      "sources": "Damage Control, Incomplete Control, Night Audit Log",
-      "red": "Damage, incomplete orders or audit exceptions above the target rate. Without a volume: a count clearly above the usual day.",
-      "amber": "Within 20 % of the target, or above the usual count.",
-      "green": "Nothing logged, or a rate under the target."
+      "sources": "Damage Control, Incomplete Control, Night Audit Log, Room Inspection",
+      "red": "Damage, incomplete orders or audit exceptions above the target rate. Without a volume: a count clearly above the usual day. Room Inspection: a first-time pass rate below 75 %.",
+      "amber": "Within 20 % of the target, or above the usual count. Room Inspection: a first-time pass rate below its pass mark.",
+      "green": "Nothing logged, or a rate under the target. Room Inspection: a first-time pass rate at or above its pass mark."
     },
     {
       "key": "D",
       "name": "Delivery",
-      "sources": "Delay Analyzer",
-      "red": "On-time routes below the target.",
-      "amber": "Within 5 points of the target. With only some routes logged, late routes above the usual.",
+      "sources": "Delay Analyzer, Maintenance Planner",
+      "red": "On-time routes below the target, or more than 60 minutes of breakdown downtime in the Maintenance Planner.",
+      "amber": "Within 5 points of the target. With only some routes logged, late routes above the usual. A breakdown logged in the Maintenance Planner.",
       "green": "On time at or above the target."
     },
     {
@@ -54,6 +54,7 @@
     { "key": "cost", "label": "Overtime per day", "unit": "h", "placeholder": "e.g. 8" },
     { "key": "absence", "label": "Absence", "unit": "%", "placeholder": "e.g. 5" }
   ],
+  "rules": { "roomRed": 75, "downtimeRed": 60 },
   "safetyMessages": [
     "Two hands for the last metres: carry, never throw.",
     "A pallet truck stops at every aisle end. A person is faster than you think.",
@@ -72,7 +73,8 @@
     ["One board, ten minutes, standing.", "The huddle is read, not typed. Open the board, go through the five letters, close with the actions."],
     ["Red is a question, not a blame.", "A red day asks what happened and who owns the next step. It never asks whose fault it was."],
     ["A red without an action is a lie.", "Every red day gets an action with an owner and a date in the Action Tracker, or the board decorates the wall."],
-    ["Let the logs do the work.", "Safety, Quality and Delivery fill themselves from Damage Control, Incomplete Control, Delay Analyzer and the Safety Cross in this browser. Type only Cost and People."],
+    ["Let the logs do the work.", "Safety, Quality and Delivery fill themselves from Damage Control, Incomplete Control, Delay Analyzer, the Safety Cross, Room Inspection and the Maintenance Planner in this browser. Type only Cost and People."],
+    ["Rooms and machines count too.", "Quality takes the first-time pass rate of the day from Room Inspection: green at or above its pass mark, amber below it, red below 75 %. The board sets that line itself, because an inspection does not record whether a failed room was given to a guest. Delivery takes the breakdowns of the Maintenance Planner: amber for a breakdown, red for more than 60 minutes of downtime in a day. Overdue tasks on A assets are read out with the actions."],
     ["Set the targets once.", "The workplace profile holds the site, the shifts, the areas with their owners and the targets. Every tool reads them."]
   ],
   "example": {

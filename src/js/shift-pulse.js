@@ -291,7 +291,142 @@
     return { date: last.date, area, overall: series.at(-1), previous: series.length > 1 ? series.at(-2) : null, series, audits: rows.length };
   };
 
-  window.PulseMath = { minutesLate, compute, safety, oee, oeeTarget, actions, fiveS, fiveSOverall };
+  // Room Inspection, Maintenance Planner and Lost & Found are read with each tool's own arithmetic
+  // (window.RoomInspectionMath, MaintenancePlannerMath, LostFoundMath; the partial loads their scripts, which stop
+  // before their page code here). Without that script a card is left out rather than counted another way. None of the
+  // three logs a shift, so they show every shift.
+  const text = (value) => (typeof value === "string" ? value.trim() : "");
+
+  // Room Inspection: saved { threshold, custom, rows: [{ date, time, room, template, answers, flags }] }; cfg is the
+  // tool's data in this language ({ threshold, zones, templates }). Each inspection is scored and judged as the tool
+  // does (RoomInspectionMath.annotate: a failed critical item fails the room, otherwise the pass mark decides; a room
+  // inspected again on the day it failed is a re-check). The first-time pass rate = first inspections passed / first
+  // inspections. The flag is the p-chart of the fail share of first inspections, as for the other shares here. A
+  // re-clean is open when the room's last inspection failed with an item sent back to the attendant.
+  const rooms = (saved, { from, to, unit = "day" }, cfg = {}, RI = window.RoomInspectionMath) => {
+    if (!RI || !isObj(cfg.templates) || !Object.keys(cfg.templates).length) return null;
+    const { slots, indexOf } = slotting(from, to, unit);
+    const zones = listOf(cfg.zones).map((zone) => zone?.key).filter(Boolean);
+    const builtIn = cfg.templates;
+    const firstTemplate = Object.keys(builtIn)[0];
+    const custom = Object.fromEntries(Object.entries(isObj(saved?.custom) ? saved.custom : {}).filter(([key, tpl]) => key.startsWith("custom-") && isObj(tpl) && isObj(tpl.questions)));
+    const known = (name) => Object.prototype.hasOwnProperty.call(builtIn, name) || Object.prototype.hasOwnProperty.call(custom, name);
+    const templateOf = (name) => custom[name] || builtIn[name] || builtIn[firstTemplate];
+    const mark = Number(saved?.threshold);
+    const threshold = mark >= 0.5 && mark <= 1 ? mark : Number(cfg.threshold) || 0.9;
+    const rows = listOf(saved?.rows).filter((row) => isObj(row) && isIso(row.date) && text(row.room))
+      .map((row) => ({ ...row, room: text(row.room), template: known(row.template) ? row.template : firstTemplate, answers: isObj(row.answers) ? row.answers : {}, flags: isObj(row.flags) ? row.flags : {} }));
+    if (!rows.length) return null;
+    const itemsFor = (row) => RI.itemsOf(templateOf(row.template), zones);
+    const all = RI.annotate(rows, itemsFor, threshold);
+    const list = all.filter((row) => row.date >= from && row.date <= to);
+    const first = slots.map(() => 0), fails = slots.map(() => 0), inspections = slots.map(() => 0);
+    list.forEach((row) => {
+      const i = indexOf(row.date);
+      inspections[i]++;
+      if (row.recheck || row.pass === null) return;
+      first[i]++;
+      if (row.pass === false) fails[i]++;
+    });
+    const found = level(slots, fails, first, (i) => first[i] > 0);
+    // As for damage with a volume: a run without a fail before the latest slot is no base for a share, so no flag.
+    const at = found.latest ? slots.indexOf(found.latest.key) : -1;
+    if (!fails.slice(0, Math.max(0, at)).some((n) => n > 0)) found.above = false;
+    const lastOfRoom = new Map();
+    all.forEach((row) => lastOfRoom.set(row.room.toLowerCase(), row));
+    const openRecleans = [...lastOfRoom.values()].filter((row) => row.date >= from && row.date <= to && row.pass === false && row.recleans > 0).length;
+    const top = RI.itemPareto(list)[0];
+    let worst = null;
+    if (top) {
+      const [template, qid] = String(top.key).split("|");
+      const item = RI.itemsOf(templateOf(template), zones).find((entry) => entry.qid === qid);
+      worst = { text: item ? item.text : qid, count: top.count, share: top.share };
+    }
+    return {
+      slots,
+      values: first.map((n, i) => (n ? (n - fails[i]) / n : null)),
+      first, fails, inspections,
+      total: RI.overall(list),
+      threshold,
+      latest: found.latest ? { key: found.latest.key, rate: 1 - found.latest.share, first: first[slots.indexOf(found.latest.key)] } : null,
+      usual: found.usualShare === null ? null : 1 - found.usualShare,
+      above: found.above,
+      recleans: list.filter((row) => row.recleans > 0).length,
+      openRecleans,
+      worst,
+    };
+  };
+
+  // Maintenance Planner: saved { assets: [{ id, tag, name, crit, tasks }], rows: [{ kind, asset, date, task, minutes, ... }] }.
+  // A task is overdue when its next due date (MaintenancePlannerMath.nextDue: the interval after the last done, or the
+  // meter, whichever comes first, moved by a postponement) is before today, as the planner's statusOf says. Breakdowns
+  // and their downtime are counted per slot; the flag is the c-chart of the breakdown count, as for the other counts.
+  const maintenance = (saved, { from, to, unit = "day" }, today, MP = window.MaintenancePlannerMath) => {
+    if (!MP) return null;
+    const { slots, indexOf } = slotting(from, to, unit);
+    const assets = listOf(saved?.assets).filter((asset) => isObj(asset) && text(asset.id));
+    if (!assets.length) return null;
+    const ids = new Set(assets.map((asset) => asset.id));
+    const rows = listOf(saved?.rows).filter((row) => isObj(row) && MP.KINDS.includes(row.kind) && isIso(row.date) && ids.has(row.asset));
+    const tasks = assets.flatMap((asset) => {
+      const events = rows.filter((row) => row.asset === asset.id);
+      const points = MP.meterPoints(events);
+      return listOf(asset.tasks).filter((task) => isObj(task) && text(task.id) && text(task.text)).map((task) => {
+        const info = MP.nextDue(task, events, points);
+        return { asset, task, due: info.due, status: MP.statusOf(info.due, today) };
+      });
+    });
+    const overdue = tasks.filter((t) => t.status === "overdue").sort((a, b) => a.due.localeCompare(b.due));
+    const counts = slots.map(() => 0), minutes = slots.map(() => 0);
+    rows.filter((row) => row.kind === "breakdown" && row.date >= from && row.date <= to).forEach((row) => {
+      const i = indexOf(row.date);
+      counts[i]++;
+      minutes[i] += positive(row.minutes);
+    });
+    const found = level(slots, counts, null, (i) => counts[i] > 0);
+    const label = (asset) => [text(asset.tag), text(asset.name)].filter(Boolean).join(" · ");
+    return {
+      slots,
+      tasks: tasks.length,
+      overdue: overdue.length,
+      overdueA: overdue.filter((t) => t.asset.crit === "A").length,
+      oldest: overdue[0] ? { task: text(overdue[0].task.text), asset: label(overdue[0].asset), due: overdue[0].due, crit: overdue[0].asset.crit } : null,
+      values: counts,
+      minutesBySlot: minutes,
+      breakdowns: sum(counts),
+      downtime: sum(minutes),
+      ...found,
+    };
+  };
+
+  // Lost & Found: saved { rows, retLow, retMedium, retHigh, retDocs }; cfg { categories, retention, dueSoonDays,
+  // followUpDays } from the tool's data. Items logged per slot (by the day found), the items still open (stored or
+  // the guest contacted) and those past their keep-until date (found date + the days kept for its value, or the days
+  // for documents and cards): a decision is due on those, as the register itself says.
+  const lostFound = (saved, { from, to, unit = "day" }, today, cfg = {}, LF = window.LostFoundMath) => {
+    if (!LF || !listOf(cfg.categories).length || !isObj(cfg.retention)) return null;
+    const { slots, indexOf } = slotting(from, to, unit);
+    const rows = LF.cleanRows(listOf(saved?.rows), cfg);
+    if (!rows.length) return null;
+    const r = LF.rules(cfg, isObj(saved) ? saved : {});
+    const counts = slots.map(() => 0);
+    rows.filter((row) => row.date >= from && row.date <= to).forEach((row) => { counts[indexOf(row.date)]++; });
+    const open = rows.filter(LF.isOpen);
+    const over = open.map((row) => ({ row, until: LF.keepUntil(row, cfg, r) })).filter((item) => LF.flagOf(item.row, today, cfg, r) === "over").sort((a, b) => a.until.localeCompare(b.until));
+    const found = level(slots, counts, null, (i) => counts[i] > 0);
+    return {
+      slots,
+      values: counts,
+      logged: sum(counts),
+      open: open.length,
+      over: over.length,
+      oldest: over[0] ? { what: over[0].row.what || LF.categoryOf(cfg, over[0].row.category).name, until: over[0].until } : null,
+      latest: found.latest,
+      usual: found.usual,
+    };
+  };
+
+  window.PulseMath = { minutesLate, compute, safety, oee, oeeTarget, actions, fiveS, fiveSOverall, rooms, maintenance, lostFound };
 
   const root = document.querySelector("[data-shift-pulse]");
   const dataEl = document.getElementById("shift-pulse-data");
@@ -374,11 +509,15 @@
     const oeeLog = logOf("oee");
     const fiveLog = logOf("five-s-audit");
     const acts = actions(read("sc-actions", {}), today());
+    const saved = (tool) => { const value = read(`sc-${tool}${SUFFIX}`, {}); return isObject(value) ? value : {}; };
     return {
       safety: safetyLog.rows.length ? safety(safetyLog, options) : null,
       oee: oeeLog.rows.length ? oee(oeeLog, { ...options, target: window.Workplace?.target("oee") }, data.oeeReasons || []) : null,
       actions: acts.total ? acts : null,
       fiveS: fiveLog.rows.length ? fiveS(fiveLog) : null,
+      rooms: rooms(saved("room-inspection"), options, data.rooms || {}),
+      maintenance: maintenance(saved("maintenance-planner"), options, today()),
+      lostFound: lostFound(saved("lost-found"), options, today(), data.lostFound || {}),
     };
   };
   const hasMore = (more) => Object.values(more).some(Boolean);
@@ -417,6 +556,10 @@
     if (more.safety?.accident) list.push(tx(w ? "Accidents in the week of {day}: {n}." : "Accidents on {day}: {n}.", { day: dayLabel(more.safety.latest.key), n: more.safety.latest.accidents }));
     if (more.oee?.below) list.push(tx(w ? "OEE is below the target in the week of {day}: {pct} (target {target})." : "OEE is below the target on {day}: {pct} (target {target}).", { day: dayLabel(more.oee.latest.key), pct: pct(more.oee.latest.oee, 1), target: pct(more.oee.target, 0) }));
     if (more.actions?.overdue) list.push(tx(more.actions.overdue === 1 ? "{n} action is overdue." : "{n} actions are overdue.", { n: more.actions.overdue }));
+    if (more.rooms?.above) list.push(tx(w ? "First-time pass is below the usual level in the week of {day}: {pct}." : "First-time pass is below the usual level on {day}: {pct}.", { day: dayLabel(more.rooms.latest.key), pct: pct(more.rooms.latest.rate, 0) }));
+    if (more.maintenance?.overdue) list.push(tx(more.maintenance.overdue === 1 ? "{n} maintenance task is overdue ({a} on A assets)." : "{n} maintenance tasks are overdue ({a} on A assets).", { n: more.maintenance.overdue, a: more.maintenance.overdueA }));
+    if (more.maintenance?.above) list.push(tx(w ? "Breakdowns are above the usual level in the week of {day}: {n}." : "Breakdowns are above the usual level on {day}: {n}.", { day: dayLabel(more.maintenance.latest.key), n: more.maintenance.latest.count }));
+    if (more.lostFound?.over) list.push(tx(more.lostFound.over === 1 ? "{n} found item is past its keep-until date: a decision is due." : "{n} found items are past their keep-until date: a decision is due.", { n: more.lostFound.over }));
     if (model.damage.above) list.push(tx(w ? "Damage is above the usual level in the week of {day}: {n}." : "Damage is above the usual level on {day}: {n}.", { day: dayLabel(model.damage.latest.key), n: model.damage.latest.count }));
     if (model.incomplete.above) list.push(tx(w ? "Incomplete orders are above the usual level in the week of {day}: {n}." : "Incomplete orders are above the usual level on {day}: {n}.", { day: dayLabel(model.incomplete.latest.key), n: model.incomplete.latest.count }));
     if (model.delay.above && model.delay.partial) list.push(tx(w ? "Late routes are above the usual level in the week of {day}: {n}." : "Late routes are above the usual level on {day}: {n}.", { day: dayLabel(model.delay.latest.key), n: model.delay.latest.count }));
@@ -435,6 +578,10 @@
     if (o) lines.push(`OEE: ${o.latest ? `${pct(o.latest.oee, 1)} (${slotName(model, o.latest.key)})` : "–"} · ${tx("Period")}: ${o.period.oee === null ? "–" : pct(o.period.oee, 1)} · ${tx("Target")}: ${pct(o.target, 0)}`);
     if (a) lines.push(`${tx("Open actions")}: ${int.format(a.open)} · ${tx("{a} overdue · {b} due today", { a: int.format(a.overdue), b: int.format(a.dueToday) })}`);
     if (f) lines.push(`${tx("5S audit")}: ${pct(f.overall, 0)} · ${f.area || "–"} · ${showDate(f.date)}`);
+    const { rooms: ri, maintenance: mp, lostFound: lf } = more;
+    if (ri) lines.push(`${tx("First-time pass rate")}: ${ri.total.rate === null ? "–" : pct(ri.total.rate, 0)} (${tx("{a} of {b} rooms", { a: int.format(ri.total.firstPass), b: int.format(ri.total.first) })}) · ${tx("{n} inspections", { n: int.format(ri.total.n) })} · ${tx("pass mark {p}", { p: pct(ri.threshold, 0) })} · ${tx("Re-cleans open: {n}", { n: int.format(ri.openRecleans) })}${ri.worst ? ` · ${tx("Fails most: {item} ({n} ×)", { item: ri.worst.text, n: int.format(ri.worst.count) })}` : ""}`);
+    if (mp) lines.push(`${tx("Overdue maintenance")}: ${int.format(mp.overdue)} (${tx("{n} on A assets", { n: int.format(mp.overdueA) })}) · ${tx("Breakdowns")}: ${int.format(mp.breakdowns)} · ${tx("Downtime")}: ${tx("{n} min", { n: int.format(mp.downtime) })}`);
+    if (lf) lines.push(`${tx("Found items")}: ${int.format(lf.logged)} · ${tx("Open items")}: ${int.format(lf.open)} · ${tx("Past the keep-until date: {n}", { n: int.format(lf.over) })}`);
     return lines;
   };
 
@@ -518,6 +665,72 @@
         highlight: f.series.length - 1,
         tool: "five-s-audit",
         linkText: tx("Open 5S Audit"),
+      }));
+    }
+    const { rooms: ri, maintenance: mp, lostFound: lf } = more;
+    // These three tools keep no shift: with one shift chosen, the card says that it shows them all.
+    const everyShift = shiftSelect.value ? tx("This tool keeps no shift: every shift is shown.") : "";
+    if (ri) {
+      const l = ri.latest;
+      const vars = l ? { day: dayLabel(l.key), pct: pct(l.rate, 0), usual: ri.usual === null ? "–" : pct(ri.usual, 0) } : null;
+      list.push(card({
+        label: tx("First-time pass"),
+        value: ri.total.rate === null ? "–" : pct(ri.total.rate, 0),
+        notes: [
+          `${tx("{n} inspections", { n: int.format(ri.total.n) })} · ${tx("pass mark {p}", { p: pct(ri.threshold, 0) })}`,
+          tx("{a} of {b} rooms passed at the first inspection", { a: int.format(ri.total.firstPass), b: int.format(ri.total.first) }),
+          !l ? tx("No entries in this period.") : weekly(model) ? tx("Week of {day}: {pct} first-time pass · usual {usual}", vars) : tx("{day}: {pct} first-time pass · usual {usual}", vars),
+          tx("Re-cleans open: {n}", { n: int.format(ri.openRecleans) }),
+          ri.worst ? tx("Fails most: {item} ({n} ×)", { item: short(ri.worst.text), n: int.format(ri.worst.count) }) : "",
+          everyShift,
+        ],
+        values: ri.values.map((value) => value ?? 0),
+        highlight: l ? ri.slots.indexOf(l.key) : -1,
+        above: ri.above,
+        flag: tx("Below usual"),
+        tool: "room-inspection",
+        linkText: tx("Open Room Inspection"),
+      }));
+    }
+    if (mp) {
+      list.push(card({
+        label: tx("Overdue maintenance"),
+        value: int.format(mp.overdue),
+        notes: [
+          tx("{n} on A assets", { n: int.format(mp.overdueA) }),
+          mp.oldest ? tx("Overdue since {date}: {title}", { date: showDate(mp.oldest.due), title: short(`${mp.oldest.task} · ${mp.oldest.asset}`) }) : "",
+        ],
+        above: mp.overdue > 0,
+        flag: tx("Overdue"),
+        tool: "maintenance-planner",
+        linkText: tx("Open Maintenance Planner"),
+      }), card({
+        label: tx("Breakdowns"),
+        value: int.format(mp.breakdowns),
+        notes: [`${tx("Downtime")}: ${tx("{n} min", { n: int.format(mp.downtime) })}`, latestNote(model, mp, [tx("breakdown"), tx("breakdowns")]), everyShift],
+        values: mp.values,
+        highlight: slotIndex(model, mp.latest),
+        above: mp.above,
+        tool: "maintenance-planner",
+        linkText: tx("Open Maintenance Planner"),
+      }));
+    }
+    if (lf) {
+      list.push(card({
+        label: tx("Found items"),
+        value: int.format(lf.logged),
+        notes: [
+          `${tx("Open items")}: ${int.format(lf.open)} · ${tx("Past the keep-until date: {n}", { n: int.format(lf.over) })}`,
+          lf.oldest ? tx("Kept until {date}: {item}", { date: showDate(lf.oldest.until), item: short(lf.oldest.what) }) : "",
+          latestNote(model, lf, [tx("item"), tx("items")]),
+          everyShift,
+        ],
+        values: lf.values,
+        highlight: slotIndex(model, lf.latest),
+        above: lf.over > 0,
+        flag: tx("Decision due"),
+        tool: "lost-found",
+        linkText: tx("Open Lost & Found"),
       }));
     }
     return list;

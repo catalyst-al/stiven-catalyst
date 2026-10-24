@@ -14,13 +14,15 @@ const data = { en: read('src/_data/dailyBoard.json'), de: read('src/_data/de/dai
 // The partial rendered the way the site renders it (the filters stubbed as in scripts/check-tool.mjs), without its
 // <script src> tags: the test loads the scripts itself.
 const pageHtml = (lang) => {
-  const ui = lang === 'en' ? {} : { ...read(`src/_data/${lang}/ui.json`), ...read('src/_data/i18n-parts/daily-board.json')[lang] };
+  const ui = lang === 'en' ? {} : { ...read(`src/_data/${lang}/ui.json`), ...read('src/_data/i18n-parts/daily-board.json')[lang], ...read('src/_data/i18n-parts/pulse-board-3.json')[lang] };
   const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(['src/_includes']), { autoescape: false });
   env.addFilter('t', (text) => ui[text] ?? text);
   env.addFilter('local', (url) => (lang === 'en' ? url : `/${lang}${url}`));
   env.addFilter('assetUrl', (url) => url);
   env.addFilter('scriptJson', (value) => JSON.stringify(value).replace(/[<>&]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`));
-  const body = env.render('partials/daily-board.njk', { cfg: data[lang], lang: lang === 'en' ? undefined : lang });
+  // The partial takes Room Inspection's data of its language itself, as the site gives it every data file.
+  const rooms = { en: read('src/_data/roomInspection.json'), de: read('src/_data/de/roomInspection.json'), sq: read('src/_data/sq/roomInspection.json') };
+  const body = env.render('partials/daily-board.njk', { cfg: data[lang], lang: lang === 'en' ? undefined : lang, roomInspection: rooms.en, de: { roomInspection: rooms.de }, sq: { roomInspection: rooms.sq } });
   return `<html lang="${lang}"><body>${body.replace(/<script src=[^>]*><\/script>/g, '')}</body></html>`;
 };
 
@@ -33,8 +35,8 @@ const load = ({ lang = 'sq', page = false, now = '2026-10-23T10:00:00Z', storage
   w.HTMLElement.prototype.scrollIntoView = () => {};
   Object.entries(storage).forEach(([key, value]) => w.localStorage.setItem(key, JSON.stringify(value)));
   // The page's translations, as js/ui-de.js and js/ui-sq.js give them (ui.json and this tool's part, not yet merged).
-  if (lang !== 'en') w.UiStrings = { ...read(`src/_data/${lang}/ui.json`), ...read('src/_data/i18n-parts/daily-board.json')[lang] };
-  for (const file of ['tool-kit', 'chart-kit', 'workplace', 'actions-store', 'daily-board']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  if (lang !== 'en') w.UiStrings = { ...read(`src/_data/${lang}/ui.json`), ...read('src/_data/i18n-parts/daily-board.json')[lang], ...read('src/_data/i18n-parts/pulse-board-3.json')[lang] };
+  for (const file of ['tool-kit', 'chart-kit', 'workplace', 'actions-store', 'room-inspection', 'maintenance-planner', 'daily-board']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
   return w;
 };
 
@@ -227,4 +229,176 @@ test('the page: a real profile stays, logs of this language are read, pasted row
   doc.querySelector('[data-import]').click();
   assert.equal(doc.querySelectorAll('[data-log] tr').length, 2);
   assert.match(doc.querySelector('[data-import-status]').textContent, /2 Zeilen/);
+});
+
+// Room Inspection and the Maintenance Planner on the board.
+const roomCfg = {
+  threshold: 0.9,
+  zones: [{ key: 'bathroom' }, { key: 'bed' }],
+  templates: { standard: { questions: {
+    bathroom: [{ text: 'No hair', weight: 3, critical: true }, { text: 'Mirror polished', weight: 1 }],
+    bed: [{ text: 'Linen clean', weight: 2 }, { text: 'Lamp works', weight: 1, fix: 'maintenance' }],
+  } } },
+};
+const RULES = data.en.rules;
+const pass = { 'bathroom-0': 'pass', 'bathroom-1': 'pass', 'bed-0': 'pass', 'bed-1': 'pass' };
+// n rooms inspected on a day, the first `fails` of them with the mirror failed (6 of 7, below the 90 % pass mark).
+const roomsOn = (date, n, fails, extra = {}) => Array.from({ length: n }, (_, i) => ({ date, time: `08:${String(i).padStart(2, '0')}`, room: `${date.slice(8)}${String(i).padStart(2, '0')}`, template: 'standard', answers: i < fails ? { ...pass, 'bathroom-1': 'fail', ...extra } : pass }));
+
+test('the board\'s own lines are in its data file, the same in every language, and its texts say them', () => {
+  assert.deepEqual(RULES, { roomRed: 75, downtimeRed: 60 });
+  for (const lang of ['en', 'de', 'sq']) {
+    const d = data[lang];
+    assert.deepEqual(d.rules, RULES, `${lang} rules`);
+    const q = d.letters.find((l) => l.key === 'Q');
+    const dl = d.letters.find((l) => l.key === 'D');
+    assert.match(q.red, new RegExp(`${RULES.roomRed} %`), `${lang}: the red line of Room Inspection is written out`);
+    assert.match(dl.red, new RegExp(`${RULES.downtimeRed} `), `${lang}: the downtime line is written out`);
+    const tips = d.tips.map((tip) => tip.join(' ')).join(' ');
+    assert.match(tips, new RegExp(`${RULES.roomRed} %`), `${lang}: the tips explain the room line`);
+    assert.match(tips, new RegExp(`${RULES.downtimeRed} `), `${lang}: and the downtime line`);
+  }
+  assert.match(data.en.letters[1].sources, /Room Inspection/);
+  assert.match(data.en.letters[2].sources, /Maintenance Planner/);
+  assert.match(data.de.letters[1].sources, /Zimmerkontrolle/);
+  assert.match(data.de.letters[2].sources, /Wartungsplaner/);
+  assert.match(data.sq.letters[1].sources, /Inspektimi i dhomës/);
+  assert.match(data.sq.letters[2].sources, /Planifikuesi i mirëmbajtjes/);
+});
+
+test('Quality: the first-time pass rate of the day against the pass mark, red below the board\'s line', () => {
+  const w = load();
+  const M = w.DailyBoardMath;
+  assert.equal(M.roomState(0.9, 0.9, 0.75), 'green', 'at the pass mark');
+  assert.equal(M.roomState(0.8, 0.9, 0.75), 'amber');
+  assert.equal(M.roomState(0.75, 0.9, 0.75), 'amber', 'at the line is not below it');
+  assert.equal(M.roomState(0.7, 0.9, 0.75), 'red');
+  assert.equal(M.roomState(0.72, 0.7, 0.75), 'green', 'a pass mark set below the line: at or above it is green first');
+  const rows = [
+    ...roomsOn('2026-10-10', 10, 1), // 9 of 10: 90 %, green
+    ...roomsOn('2026-10-11', 10, 2), // 8 of 10: 80 %, amber
+    ...roomsOn('2026-10-12', 4, 2), // 2 of 4: 50 %, red
+    // A critical item fails the room whatever the score; a room seen again the same day is a re-check, not counted.
+    { date: '2026-10-13', time: '09:00', room: '501', template: 'standard', answers: { ...pass, 'bathroom-0': 'fail' } },
+    { date: '2026-10-13', time: '10:00', room: '501', template: 'standard', answers: pass },
+    { date: '2026-10-13', time: '11:00', room: '502', template: 'standard', answers: pass },
+    { date: '2026-10-13', time: '11:30', room: '503', template: 'standard', answers: pass },
+    { date: '2026-10-13', time: '12:00', room: '504', template: 'standard', answers: pass },
+  ];
+  const f = M.facts({ rooms: { rows } }, {}, {}, { rooms: roomCfg, rules: RULES });
+  const q = (date) => M.dayState('Q', date, f, { today: '2026-10-23' });
+  assert.equal(q('2026-10-10').state, 'green');
+  assert.deepEqual(plain(q('2026-10-10').reasons), [{ code: 'rooms', rate: 0.9, mark: 0.9, red: 0.75, n: 9, first: 10 }]);
+  assert.equal(q('2026-10-11').state, 'amber');
+  assert.equal(q('2026-10-12').state, 'red');
+  const critical = q('2026-10-13');
+  assert.equal(critical.reasons[0].first, 4, 'the re-check of 501 is left out');
+  assert.equal(critical.reasons[0].rate, 0.75);
+  assert.equal(critical.state, 'amber');
+  assert.equal(q('2026-10-14').state, 'none', 'a day without inspections says nothing');
+  // The per-day rate is the tool's own: RoomInspectionMath.rateBy by date.
+  const RI = w.RoomInspectionMath;
+  const byDay = RI.rateBy(RI.annotate(rows, (row) => RI.itemsOf(roomCfg.templates[row.template], ['bathroom', 'bed']), 0.9), (row) => row.date);
+  byDay.forEach((g) => assert.equal(q(g.key).reasons[0].rate, g.rate, g.key));
+  // The pass mark the team saved in Room Inspection wins: at 80 %, 6 of 7 passes, so 11 October is green.
+  const easy = M.facts({ rooms: { threshold: 0.8, rows } }, {}, {}, { rooms: roomCfg, rules: RULES });
+  assert.equal(M.dayState('Q', '2026-10-11', easy).state, 'green');
+  // With the other Quality logs the worst wins, and an entry by hand still overrules.
+  const both = M.facts({ rooms: { rows }, damage: { rows: [{ date: '2026-10-10', units: 2 }], volumes: [{ date: '2026-10-10', volume: 100 }] } }, { damage: 0.003 }, {}, { rooms: roomCfg, rules: RULES });
+  assert.equal(M.dayState('Q', '2026-10-10', both).state, 'red', '2 % damage against 0.3 %');
+  assert.equal(M.dayState('Q', '2026-10-12', f, { manual: { state: 'green', note: 'checked' } }).state, 'green');
+  // Without the tool's script, the rooms are left out rather than counted another way.
+  assert.equal(M.roomDays({ rows }, roomCfg, null).byDate.size, 0);
+});
+
+test('Delivery: a breakdown is amber, more downtime than the board\'s line is red, and the routes still count', () => {
+  const M = load().DailyBoardMath;
+  assert.equal(M.breakdownState(0, 0, 60), 'none');
+  assert.equal(M.breakdownState(1, 20, 60), 'amber');
+  assert.equal(M.breakdownState(2, 60, 60), 'amber', '60 minutes is not more than 60');
+  assert.equal(M.breakdownState(1, 61, 60), 'red');
+  const maintenance = {
+    assets: [{ id: 'a1', tag: 'SRT-1', crit: 'A', tasks: [] }, { id: 'a2', tag: 'FLT-2', crit: 'B', tasks: [] }],
+    rows: [
+      { kind: 'breakdown', asset: 'a1', date: '2026-10-10', minutes: 25 },
+      { kind: 'breakdown', asset: 'a1', date: '2026-10-11', minutes: 40 },
+      { kind: 'breakdown', asset: 'a2', date: '2026-10-11', minutes: 30 },
+      { kind: 'breakdown', asset: 'gone', date: '2026-10-12', minutes: 500 },
+      { kind: 'done', asset: 'a1', date: '2026-10-12', task: 't1', minutes: 90 },
+    ],
+  };
+  const delay = { rows: [{ date: '2026-10-10', planArr: '08:00', actArr: '08:00' }, { date: '2026-10-13', planArr: '08:00', actArr: '09:00' }] };
+  const f = M.facts({ maintenance, delay }, { ontime: 0.95 }, {}, { rules: RULES });
+  const d = (date) => M.dayState('D', date, f, { today: '2026-10-23' });
+  assert.equal(d('2026-10-10').state, 'amber', 'on time, but a breakdown of 25 minutes');
+  assert.deepEqual(plain(d('2026-10-10').reasons.map((r) => r.code)), ['ontime', 'breakdown']);
+  assert.equal(d('2026-10-11').state, 'red', '40 + 30 = 70 minutes of downtime');
+  assert.deepEqual(plain(d('2026-10-11').reasons), [{ code: 'breakdown', n: 2, minutes: 70, red: 60 }]);
+  assert.equal(d('2026-10-12').state, 'none', 'an asset no longer in the plan, and a task done, are no breakdowns');
+  assert.equal(d('2026-10-13').state, 'red', 'the late route alone');
+  assert.equal(M.dayState('D', '2026-10-11', f, { manual: { state: 'green' } }).state, 'green', 'the hand overrules');
+});
+
+test('the huddle hears the overdue tasks on A assets, by the planner\'s own due dates', () => {
+  const w = load();
+  const M = w.DailyBoardMath;
+  const saved = {
+    assets: [
+      { id: 'a1', tag: 'SRT-1', name: 'Sorter', crit: 'A', tasks: [
+        { id: 't1', text: 'Belt check', every: 1, unit: 'months', hours: 0, last: '', lastHours: null, start: '' }, // done 15 August: due 15 September
+        { id: 't2', text: 'Lubricate chain', every: 2, unit: 'weeks', hours: 0, last: '2026-10-01', lastHours: null, start: '' }, // due 15 October, postponed to 30th
+        { id: 't3', text: 'Light curtain test', every: 1, unit: 'weeks', hours: 0, last: '2026-10-20', lastHours: null, start: '' }, // due 27 October
+      ] },
+      { id: 'a2', tag: 'FLT-2', name: 'Forklift', crit: 'B', tasks: [{ id: 't4', text: 'Brake test', every: 1, unit: 'years', hours: 0, last: '2025-09-10', lastHours: null, start: '' }] },
+      { id: 'a3', tag: 'DOCK-1', name: 'Dock leveller', crit: 'A', tasks: [{ id: 't5', text: 'Statutory check', every: 1, unit: 'years', hours: 0, last: '', lastHours: null, start: '2026-10-20' }] },
+    ],
+    rows: [
+      { kind: 'done', asset: 'a1', task: 't1', date: '2026-08-15' },
+      { kind: 'postponed', asset: 'a1', task: 't2', date: '2026-10-14', until: '2026-10-30', reason: 'Part on order' },
+    ],
+  };
+  const list = plain(M.overdueOnA(saved, '2026-10-23'));
+  // The belt check: done 15 August, monthly, so due 15 September, 38 days ago. The chain is postponed to the 30th, the
+  // light curtain due on the 27th, the forklift is a B asset. The dock leveller was never done: due on its start date.
+  assert.deepEqual(list, [
+    { task: 'Belt check', asset: 'SRT-1 · Sorter', due: '2026-09-15', late: 38 },
+    { task: 'Statutory check', asset: 'DOCK-1 · Dock leveller', due: '2026-10-20', late: 3 },
+  ]);
+  assert.equal(list[0].due, w.MaintenancePlannerMath.nextDue(saved.assets[0].tasks[0], saved.rows).due);
+  assert.deepEqual(plain(M.overdueOnA(saved, '2026-10-23', null)), [], 'without the planner\'s script, nothing is guessed');
+});
+
+test('the page: Room Inspection colours Quality, the planner Delivery, and the agenda reads the overdue A tasks', () => {
+  const w = load({
+    lang: 'de',
+    page: true,
+    storage: {
+      'sc-workplace': { site: 'Hotel Nord', areas: [], targets: {} },
+      'sc-room-inspection-de': { threshold: 0.9, rows: roomsOn('2026-10-22', 4, 2).map((row) => ({ ...row, template: 'standard' })) },
+      'sc-maintenance-planner-de': {
+        assets: [{ id: 'a1', tag: 'AUF-1', name: 'Aufzug', crit: 'A', tasks: [{ id: 't1', text: 'Seilprüfung', every: 1, unit: 'months', hours: 0, last: '2026-09-01', lastHours: null, start: '' }] }],
+        rows: [{ kind: 'breakdown', asset: 'a1', date: '2026-10-22', minutes: 90, cause: 'other' }],
+      },
+      'sc-daily-board-de': { rows: [] },
+    },
+  });
+  const doc = w.document;
+  assert.ok(doc.getElementById('daily-board-rooms'), 'the checklists of the German Room Inspection go along');
+  const agenda = doc.querySelector('.db-agenda').textContent;
+  // On the real German checklist bathroom-1 is a critical item (the toilet): two of four rooms fail, 50 %, red.
+  assert.match(agenda, /Qualität: Rot · Erstabnahme 50\s?% \(Bestehensgrenze 90\s?%\): 2 von 4 Zimmern/, 'yesterday\'s rooms on the agenda');
+  assert.match(agenda, /Lieferung: Rot · 1 Störung, 90 Min\. Ausfallzeit/, 'yesterday\'s breakdown, over the 60-minute line');
+  assert.match(agenda, /Überfällig an einer A-Anlage: Seilprüfung · AUF-1 · Aufzug · fällig am 01\.10\.2026/);
+  assert.match(doc.querySelector('.db-rules').textContent, /Zimmerkontrolle/);
+  assert.match(doc.querySelector('.db-rules').textContent, /Wartungsplaner/);
+  assert.match(doc.querySelector('.tips').textContent, /unter 75 %/);
+});
+
+test('every text of the board\'s script has German and Albanian', () => {
+  const source = fs.readFileSync('src/js/daily-board.js', 'utf8');
+  const texts = new Set([...source.matchAll(/tx\("((?:[^"\\]|\\.)*)"/g)].map((m) => JSON.parse(`"${m[1]}"`)));
+  for (const lang of ['de', 'sq']) {
+    const ui = { ...read(`src/_data/${lang}/ui.json`), ...read('src/_data/i18n-parts/daily-board.json')[lang], ...read('src/_data/i18n-parts/pulse-board-3.json')[lang] };
+    for (const text of texts) assert.ok(ui[text], `${lang}: ${text}`);
+  }
 });
