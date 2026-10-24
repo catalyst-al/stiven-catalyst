@@ -11816,3 +11816,27 @@ td > .fc-row-photos { margin-left: 8px; }
   .ri-print-sign { margin: 14px 0 0; }
   .ri-print-list { margin: 0; padding-left: 16px; }
 }
+/* ===== Restore points and space (js/storage-guard.js), inside "All your work in one file" ===== */
+.sg { display: grid; gap: 10px; margin-top: 12px; }
+.sg[hidden], .sg [hidden] { display: none !important; }
+.work-backup-copy .sg .form-note { margin: 0; }
+.sg-keep { padding-left: 12px; border-left: 3px solid var(--line); }
+.sg-keep.is-kept { border-left-color: var(--ok); }
+.sg-space { font-variant-numeric: tabular-nums; }
+/* Nearly full: the one place a state colour reports something. */
+.sg-full { display: grid; gap: 8px; justify-items: start; padding: 12px 14px; border: 1px solid var(--warn); border-radius: var(--radius); }
+.work-backup-copy .sg .sg-full-text { margin: 0; color: var(--ink); font-weight: 700; }
+.sg-points { display: grid; gap: 8px; justify-items: start; }
+.sg-points-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.sg-toggle, .sg-make { padding: 0; font-size: inherit; }
+.sg-list { display: grid; gap: 8px; width: 100%; margin: 0; padding: 0; list-style: none; }
+.sg-point { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-2); }
+.sg-point-head { margin: 0; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sg-point-head strong { color: var(--ink); }
+.work-backup-copy .sg-point-tools { margin: 0; overflow-wrap: anywhere; }
+.sg-point-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 4px; }
+.sg-point-actions .button-secondary { min-height: 36px; padding: 6px 14px; font-size: 14px; }
+.sg-point-actions .button-ghost { padding: 0; font-size: 14px; }
+@media (max-width: 620px) {
+  .sg-point-actions .button-secondary { min-height: 44px; }
+}

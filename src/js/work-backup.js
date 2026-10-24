@@ -126,6 +126,8 @@
       ? (document.documentElement.lang === "en" ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`)
       : "?";
     if (!window.confirm(fill(text.confirm, { date: when, tools: toolNames(keys).join(", ") }))) return;
+    // A restore point of the work as it is (js/storage-guard.js sets the hook), so the wrong file can be undone.
+    try { await window.WorkBackup.beforeReplace?.(keys); } catch { /* opened as before */ }
     // All or nothing: when the browser runs out of space halfway, the tools already written get
     // their old data back, so the device never holds half of one file and half of the other.
     const before = new Map(keys.map((key) => [key, storage.getItem(key)]));

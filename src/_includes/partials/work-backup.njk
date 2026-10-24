@@ -11,6 +11,34 @@
   full: "This browser ran out of space, so nothing was changed. Free some space and open the file again." | t(lang),
   opened: "Opened. The page reloads to show your work." | t(lang)
 } %}
+{#- Restore points, space and the browser's promise to keep it (js/storage-guard.js). -#}
+{%- set sgText = {
+  kept: "Kept by the browser: it does not clear this work when space runs low." | t(lang),
+  mayClear: "The browser may clear it when space runs low — save a file now and then." | t(lang),
+  points: "Restore points: {n}, the latest {when}." | t(lang),
+  noPoints: "No restore points yet. One is made each day you open a tool, and before a file replaces anything." | t(lang),
+  today: "today {time}" | t(lang),
+  yesterday: "yesterday {time}" | t(lang),
+  show: "Show" | t(lang),
+  hide: "Hide" | t(lang),
+  restore: "Restore" | t(lang),
+  download: "Download as file" | t(lang),
+  reasons: {
+    daily: "Daily" | t(lang),
+    "before-open": "Before a file was opened" | t(lang),
+    "before-restore": "Before a restore" | t(lang),
+    manual: "Made by hand" | t(lang)
+  },
+  made: "Restore point made: {tools}." | t(lang),
+  failed: "The browser did not keep the restore point, so nothing was changed. Save a file instead." | t(lang),
+  restoreConfirm: "Go back to the restore point of {date}? For these tools the work in this browser is replaced: {tools}. Other tools stay as they are. A restore point of the work as it is now is made first." | t(lang),
+  restored: "Restored. The page reloads to show your work." | t(lang),
+  full: "This browser ran out of space, so nothing was changed. Free some space and try again." | t(lang),
+  gone: "This restore point is no longer there. Nothing was changed." | t(lang),
+  spaceWork: "Your work takes {work}; the browser gives the tools about 5 MB." | t(lang),
+  spaceDevice: "Offline copies, photos and restore points: {usage} of {quota} the browser allows." | t(lang),
+  nearlyFull: "The space for your work is nearly full ({work} of about 5 MB). The largest: {tools}." | t(lang)
+} %}
 <section class="shell work-backup" data-work-backup data-text="{{ wbText | dump }}" aria-labelledby="work-backup-title">
   <div class="work-backup-card">
     <div class="work-backup-copy">
@@ -18,6 +46,20 @@
       <h2 id="work-backup-title">{{ "All your work in one file" | t(lang) }}</h2>
       <p>{{ "Every tool keeps your work only in this browser. Save it as one file to keep a copy, to carry on from another phone or computer, or to hand it to a colleague. Nothing is uploaded." | t(lang) }}</p>
       <p class="form-note" data-work-summary></p>
+      <div class="sg" data-storage-guard data-text="{{ sgText | dump }}" hidden>
+        <p class="form-note sg-keep" data-sg-keep hidden></p>
+        <p class="form-note sg-space" data-sg-space hidden></p>
+        <div class="sg-full" data-sg-full hidden>
+          <p class="form-note sg-full-text" data-sg-full-text></p>
+          <button class="button-secondary" type="button" data-sg-full-save>{{ "Download them as a file" | t(lang) }}</button>
+          <p class="form-note">{{ "Then clear old entries in these tools to make room: the file keeps them, and opens on any device." | t(lang) }}</p>
+        </div>
+        <div class="sg-points" data-sg-points hidden>
+          <p class="form-note sg-points-line"><span data-sg-points-text></span> <button class="button-ghost sg-toggle" type="button" data-sg-toggle aria-expanded="false" aria-controls="sg-list" hidden>{{ "Show" | t(lang) }}</button></p>
+          <ol class="sg-list" id="sg-list" data-sg-list aria-label="{{ 'Restore points' | t(lang) }}" hidden></ol>
+          <button class="button-ghost sg-make" type="button" data-sg-make>{{ "Make a restore point now" | t(lang) }}</button>
+        </div>
+      </div>
       <p class="form-note" data-offline-note hidden>{{ "Works offline too: once a tool has been opened on this device, it and the other tools of its role open without a connection." | t(lang) }}</p>
     </div>
     <div class="tool-actions work-backup-actions">
@@ -32,4 +74,5 @@
 {#- The reader's own keys (js/shelf.js, js/article.js) travel in the same file. -#}
 "workplace": {{ "Workplace profile" | t(lang) | scriptJson | safe }}, "annotations": {{ "Timeline events" | t(lang) | scriptJson | safe }}, "shelf": {{ "My shelf" | t(lang) | scriptJson | safe }}, "checklists": {{ "Cards in progress" | t(lang) | scriptJson | safe }}, "reading": {{ "Reading progress" | t(lang) | scriptJson | safe }}
 }</script>
+<script src="{{ '/js/storage-guard.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>
