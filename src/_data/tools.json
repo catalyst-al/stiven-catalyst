@@ -350,5 +350,13 @@
     "summary": "Classify every SKU by annual consumption value and by how steady its demand is, and get the nine-cell matrix with its policies, the cycle counts per week, safety stock and reorder points at your service level, and the SKUs for the golden zone.",
     "url": "/tools/inventory-abc/",
     "cta": "Classify the stock"
+  },
+  {
+    "name": "SMED Changeover",
+    "type": "Lean",
+    "time": "30 min",
+    "summary": "Time one changeover element by element, split it into internal and external work, convert and streamline by Shingo's steps, and see the minutes and euros freed and the new changeover standard.",
+    "url": "/tools/smed/",
+    "cta": "Study a changeover"
   }
 ]

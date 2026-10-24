@@ -260,7 +260,8 @@
       "/tools/standard-work/",
       "/tools/spaghetti-diagram/",
       "/tools/project-portfolio/",
-      "/tools/inventory-abc/"
+      "/tools/inventory-abc/",
+      "/tools/smed/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -335,6 +336,11 @@
         "when": "Every month",
         "do": "Import last month's demand, reorder every A SKU below its reorder point and move the top AX SKUs into the golden zone.",
         "tool": "/tools/inventory-abc/"
+      },
+      {
+        "when": "Every month",
+        "do": "Time one changeover of the line with the longest stops, move everything external out of the stop and print the new changeover standard for the machine.",
+        "tool": "/tools/smed/"
       }
     ],
     "next": "atlas"

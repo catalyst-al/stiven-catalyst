@@ -350,5 +350,13 @@
     "summary": "Teilen Sie jeden Artikel nach jährlichem Verbrauchswert und nach der Gleichmäßigkeit seines Bedarfs ein, und erhalten Sie die Neun-Felder-Matrix mit ihren Strategien, die Zählungen pro Woche, Sicherheits- und Meldebestände beim gewählten Servicegrad und die Artikel für die goldene Zone.",
     "url": "/de/tools/inventory-abc/",
     "cta": "Bestand einteilen"
+  },
+  {
+    "name": "SMED-Rüstzeitanalyse",
+    "type": "Lean",
+    "time": "30 Min.",
+    "summary": "Stoppen Sie einen Rüstvorgang Element für Element, trennen Sie internes und externes Rüsten, wandeln Sie um und verbessern Sie nach Shingos Schritten, und sehen Sie die gewonnenen Minuten und Euro und den neuen Rüststandard.",
+    "url": "/de/tools/smed/",
+    "cta": "Rüstvorgang untersuchen"
   }
 ]

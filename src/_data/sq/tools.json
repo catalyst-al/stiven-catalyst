@@ -350,5 +350,13 @@
     "summary": "Ndaj çdo artikull sipas vlerës vjetore të konsumit dhe sipas sa e qëndrueshme është kërkesa e tij, dhe merr matricën me nëntë qeliza e politikat e saj, numërimet në javë, stokun e sigurisë dhe pikat e riporosisë për nivelin tënd të shërbimit, dhe artikujt për zonën e artë.",
     "url": "/sq/tools/inventory-abc/",
     "cta": "Klasifiko stokun"
+  },
+  {
+    "name": "SMED: ndërrimi i shpejtë",
+    "type": "Lean",
+    "time": "30 min",
+    "summary": "Mat një ndërrim element pas elementi, ndaj punën e brendshme nga e jashtmja, shndërroje dhe thjeshtoje sipas hapave të Shingos, dhe shiko minutat dhe eurot e fituara dhe standardin e ri të ndërrimit.",
+    "url": "/sq/tools/smed/",
+    "cta": "Studio një ndërrim"
   }
 ]
