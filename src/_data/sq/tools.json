@@ -227,7 +227,7 @@
     "name": "Harta e rrjedhës së vlerës",
     "type": "Lean",
     "time": "30 min",
-    "summary": "Harto një rrjedhë nga furnitori te klienti me copat që presin mes hapave. Merr shkallën e kohës së kalimit, PCE-në, taktin dhe pikën e ngushtë, pastaj vizato gjendjen e ardhshme dhe dërgo shpërthimet kaizen te Ndjekësi i veprimeve.",
+    "summary": "Harto një rrjedhë nga furnitori te klienti me copat që presin mes hapave. Merr shkallën e kohës së kalimit, PCE-në, taktin dhe pikën e ngushtë, pastaj vizato gjendjen e ardhshme dhe dërgo shpërthimet kaizen te lista e veprimeve.",
     "url": "/sq/tools/value-stream-map/",
     "cta": "Harto një rrjedhë"
   },

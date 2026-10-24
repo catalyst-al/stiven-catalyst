@@ -69,7 +69,10 @@
 .tg .pg.back .edition { position: absolute; left: 0; right: 0; bottom: 12mm; font-size: 7pt; color: var(--muted); }
 
 /* Contents */
-.tg .pg .toc { list-style: none; margin-top: 2mm; }
+/* Contents: two columns, so every page of the guide is listed on one page; a role's heading stays with its tools. */
+.tg .pg .toc { list-style: none; margin-top: 2mm; columns: 2; column-gap: 7mm; }
+.tg .pg .toc li { break-inside: avoid; }
+.tg .pg .toc li.fam { break-after: avoid; }
 .tg .pg .toc li { display: flex; align-items: baseline; gap: 2mm; padding: .75mm 0; border-bottom: .2mm solid rgba(255,255,255,.07); font-size: 8pt; line-height: 1.35; }
 .tg .pg .toc li .t { flex: 1; color: var(--ink); }
 .tg .pg .toc li .n { color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -89,11 +92,17 @@
 .tg .pg .fam-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8mm; margin-bottom: 4mm; }
 .tg .pg .fam-tools div { border: .25mm solid var(--line); border-radius: 2mm; padding: 1.4mm 2.4mm; font-size: 7.8pt; color: var(--ink); display: flex; justify-content: space-between; gap: 2mm; }
 .tg .pg .fam-tools div em { font-style: normal; color: var(--muted); }
+.tg .pg .fam-routine { grid-template-columns: 1fr; }
 .tg .pg .subhead { font-size: 6.6pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 1mm 0 2mm; }
 .tg .pg .routine { width: 100%; border-collapse: collapse; font-size: 7.3pt; }
 .tg .pg .routine td { padding: 1.05mm 0; line-height: 1.38; border-top: .2mm solid var(--line); vertical-align: top; }
 .tg .pg .routine-tool { color: var(--muted); }
 .tg .pg .routine td:first-child { width: 27mm; color: var(--family); font-weight: 600; padding-right: 3mm; }
+/* The routine on a page of its own: the same table, set larger. */
+.tg .pg .routine-note { color: var(--muted); margin-bottom: 3mm; }
+.tg .pg.routine-page .routine { font-size: 7.7pt; }
+.tg .pg.routine-page .routine td { padding: 1.5mm 0; line-height: 1.38; }
+.tg .pg.routine-page .routine td:first-child { width: 29mm; }
 
 /* Tool page */
 .tg .pg .tool-head { margin-bottom: 4mm; }

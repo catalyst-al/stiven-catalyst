@@ -227,7 +227,7 @@
     "name": "Wertstromanalyse",
     "type": "Lean",
     "time": "30 Min.",
-    "summary": "Bilden Sie einen Fluss vom Lieferanten bis zum Kunden ab, mit den Teilen, die zwischen den Schritten warten. Sie erhalten die Durchlaufzeit-Treppe, den Flussgrad, die Taktzeit und den Engpass, zeichnen dann den Soll-Zustand und senden seine Kaizen-Blitze an den Maßnahmen-Tracker.",
+    "summary": "Bilden Sie einen Fluss vom Lieferanten bis zum Kunden ab, mit den Teilen, die zwischen den Schritten warten. Sie erhalten die Durchlaufzeit-Treppe, den Flussgrad, die Taktzeit und den Engpass, zeichnen dann den Soll-Zustand und senden seine Kaizen-Blitze an die Maßnahmenliste.",
     "url": "/de/tools/value-stream-map/",
     "cta": "Wertstrom aufnehmen"
   },

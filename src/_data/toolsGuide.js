@@ -4,7 +4,9 @@
 // Every fact here comes from the tools themselves: what you enter, what you get, where it is kept.
 // Tool names, types and times come from tools.json; roles, scopes, lines and routines from families.json.
 // [[Label]] is a button or field of a tool: it is printed in quotes, in the language of the guide (ui.json).
-// The page order is the same in every language.
+// The page order is the same in every language: the roles and their tools in the order of families.json, the tools of
+// a role first and then its course. A role with a long routine (families.json) gives it a page of its own after the
+// role's opening page ("routine:<id>"); the routine of a role without one stays on its opening page.
 import fs from "node:fs";
 
 const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url), "utf8"));
@@ -13,8 +15,8 @@ const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url)
 // on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
 // the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
 // src/media/guides/tools-guide/editions/).
-const EDITION = 2;
-const EDITION_DATE = "2026-10-14";
+const EDITION = 3;
+const EDITION_DATE = "2026-10-24";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
 
@@ -26,20 +28,41 @@ const pages = [
   "system",
   "families",
   "idea",
+  "machine",
   "data",
   "family:pulse",
+  "routine:pulse",
   "tool:/tools/shift-pulse/",
   "tool:/tools/damage-control/",
   "tool:/tools/incomplete-control/",
   "tool:/tools/delay-analyzer/",
+  "tool:/tools/night-audit/",
   "tool:/tools/shift-handover/",
+  "tool:/tools/action-tracker/",
+  "tool:/tools/daily-board/",
+  "tool:/tools/five-s-audit/",
+  "tool:/tools/safety-cross/",
   "family:zenith",
+  "routine:zenith",
   "tool:/tools/cx-control-tower/",
   "tool:/tools/kpi-diagnostic/",
   "tool:/tools/pareto/",
+  "tool:/tools/a3-report/",
+  "tool:/tools/kaizen-board/",
+  "tool:/tools/skills-matrix/",
+  "tool:/tools/oee/",
+  "tool:/tools/hotel-kpis/",
+  "tool:/tools/gemba-walk/",
   "family:lumen",
+  "routine:lumen",
   "tool:/tools/sigma-control-chart/",
   "tool:/tools/five-whys/",
+  "tool:/tools/fishbone/",
+  "tool:/tools/fmea/",
+  "tool:/tools/process-lab/",
+  "tool:/tools/time-study/",
+  "tool:/tools/value-stream-map/",
+  "tool:/tools/standard-work/",
   "tool:/tools/six-sigma-dmaic/",
   "family:atlas",
   "tool:/tools/cv-builder/",
@@ -52,7 +75,7 @@ const pages = [
 
 const en = {
   title: "The Tools Guide",
-  subtitle: "Fourteen free tools for the people who run the work: what they are for, how to use them, and why they look the way they do.",
+  subtitle: "Thirty free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
   edition: `Edition ${EDITION} · October 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -64,6 +87,7 @@ const en = {
     open: "Open it",
     tools: "Its tools",
     routine: "A routine",
+    routineNote: "Where each tool fits into the work of this role, step by step.",
     learn: "Course",
     page: "Page",
     planet: "The planet",
@@ -73,9 +97,9 @@ const en = {
   sections: {
     about: {
       kicker: "About this guide",
-      title: "Fourteen tools, four planets, one idea",
+      title: "Thirty tools, four planets, one idea",
       body: [
-        "Stiven Catalyst has fourteen free tools for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
+        "Stiven Catalyst has thirty free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
         "This guide explains how the tools are organised, why the site looks the way it does, and how to use each tool, step by step. You do not need to read it in order: find your planet and start there.",
         { cards: [
           { title: "Free", text: "Every tool is free to use." },
@@ -130,12 +154,27 @@ const en = {
         "The idea behind the tools is simple: tools made from the work on the floor, that need nothing but a browser. No installation, no account, no server that keeps your data.",
         "What makes them more than separate calculators is that they pass work to each other, inside your browser:",
         { list: [
-          "The Damage, Incomplete and Delay logs feed Shift Pulse, and the Shift Handover takes their numbers with [[Fill in from the logs]].",
-          "Any log result goes on with one button: [[Take it to 5 Whys]], [[Open in Pareto 80/20]] or [[Open as control chart]].",
-          "The CX Control Tower sends its root causes to Pareto 80/20.",
+          "The Damage, Incomplete and Delay logs feed Shift Pulse and the Daily Board, and the Shift Handover takes their numbers with [[Fill in from the logs]].",
+          "Any log result goes on with one button: [[Take it to 5 Whys]], [[Open in Pareto 80/20]], [[Open as control chart]] or [[Add to actions]].",
+          "5 Whys sends its countermeasure to the Action Tracker or puts it on the Shift Handover.",
+          "The CX Control Tower and the Fishbone send their causes to Pareto 80/20; the A3 Report takes the Pareto result and the 5 Whys worksheet.",
           "The Cover Letter takes your details from the CV Builder or the ATS CV.",
         ] },
         "And on each role page, a coaching workspace turns the tools into a practice: a project with a goal, a measurement and a review date. More on the last pages.",
+      ],
+    },
+    machine: {
+      kicker: "The idea, 4",
+      title: "One list, one workplace",
+      body: [
+        "Sixteen of the tools were made as one daily system for the floor, from the huddle to the standard. Three things hold them together, all in your browser:",
+        { list: [
+          "One list of actions. A countermeasure from 5 Whys, a finding of the 5S Audit, a signal of Process Lab: each becomes an action in the Action Tracker, with an owner, a due date, a status and a way to check it. A tool hands it over once, never twice.",
+          "One workplace profile. The site, its shifts, its areas with their owners, its teams and the targets are typed once, on the Daily Board, in the 5S Audit, the Gemba Walk or the Skills Matrix, and every tool that needs them offers them. Without a profile, each tool works with what you type into it.",
+          "One kind of chart. Point at or tap a chart to read its values, and download it as SVG or PNG in print colours.",
+        ] },
+        "A day with them: the logs and the Safety Cross through the shift, the Daily Board at the huddle, a Gemba Walk or a 5S Audit on the floor, and once a week ten minutes with the Action Tracker: overdue first, then this week, then what was verified.",
+        { note: "The list of actions and the workplace profile are the same in every language of the site; everything else is kept per language." },
       ],
     },
     data: {
@@ -145,8 +184,9 @@ const en = {
         "Every tool keeps your work only in the browser you use. It is not sent anywhere, which also means it is not on your phone if you worked on your laptop.",
         "To keep everything, or to move it to another device, use [[Save all my work]] at the end of any tool page: one file with the work of every tool. [[Open a saved file]] brings it back and replaces only the tools in that file.",
         { list: [
-          "Most tools print or save as PDF, and the logs download as CSV for Excel.",
-          "The log tools keep a separate log for each language of the site.",
+          "Most tools print or save as PDF, and the logs download as CSV and as Excel.",
+          "Each tool keeps its work separately for each language of the site, except the list of actions and the workplace profile.",
+          "A tool you have opened once opens again without a connection, and the site can be installed as an app.",
           "If the browser cannot save, the tool says so: download the CSV or copy the summary to keep your work.",
           "Clearing the browser's data clears your work too. Save a file first.",
         ] },
@@ -170,12 +210,12 @@ const en = {
       ],
     },
     next: {
-      kicker: "Edition 2",
+      kicker: "Edition 3",
       title: "What could come next",
       body: [
         "Ideas under consideration, not promises with dates. Tell me which one would help you most.",
         { list: [
-          "Faster tool pages: smaller scripts, so the tools open more quickly on a phone.",
+          "The workplace profile in every tool, so that the site, the shifts and the targets are typed only once.",
           "The Delay Analyzer for routes without a recorded departure time.",
           "A shared space for a coach and a team, but only with real accounts and access control, because the promise of these tools is that your data stays yours.",
         ] },
@@ -188,9 +228,9 @@ const en = {
     },
   },
   families: {
-    pulse: "Five tools for one shift: log what goes wrong where it happens, see the shift in one picture, and hand it over cleanly.",
-    zenith: "Three tools for one area: read the week, find where a red number really comes from, and start with the causes that matter most.",
-    lumen: "Three tools for the whole system: tell a real change from noise, reach a root cause you can change, and run an improvement as a project.",
+    pulse: "Ten tools for one shift: log what goes wrong where it happens, keep the floor safe and in order, run the huddle, see the shift in one picture, and hand it over cleanly, with every action on one list.",
+    zenith: "Nine tools for one area: read the week, find where a red number really comes from, start with the causes that matter most, put a problem on one sheet, and grow the team's ideas and skills on the floor.",
+    lumen: "Eight tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, rate the risks, time and map the flow, write the standard, and run an improvement as a project.",
     atlas: "Three tools for the next role: a designed CV, a CV that screening software reads correctly, and a letter that matches.",
   },
   tools: {
@@ -202,8 +242,8 @@ const en = {
         "Read the cards and the flags.",
         "Open the trend chart of any number.",
       ],
-      get: "One look at what the Damage, Incomplete, Delay and Handover logs in this browser hold: cards and a trend for each number, flagged [[Above usual]] only beyond the control-chart limit of its usual level, to copy, print or save as PDF.",
-      data: "It keeps only your settings. It reads the other logs and changes nothing in them.",
+      get: "One look at what the Damage, Incomplete, Delay and Handover logs in this browser hold, and the Safety Cross, OEE, the open actions and the latest 5S audit once they have data: cards and a trend for each number, flagged [[Above usual]] only beyond the control-chart limit of its usual level, to copy, print or save as PDF.",
+      data: "It keeps only your settings. It reads the other tools and changes nothing in them.",
     },
     "/tools/damage-control/": {
       when: "Every time a unit is damaged, at the stage where it happens.",
@@ -213,7 +253,7 @@ const en = {
         "Review the log. To try the tool first, load an example week.",
         "Walk the [[Floor check]].",
       ],
-      get: "Damage rate, DPMO and sigma level, the few causes behind most of the damage, the stages where it happens, a trend, and where to start. Download it as CSV, or take it on to 5 Whys, Pareto 80/20 or a control chart.",
+      get: "Damage rate, DPMO and sigma level, the few causes behind most of the damage, the stages where it happens, a trend, and where to start. Download it as CSV or Excel, or take it on to 5 Whys, Pareto 80/20, a control chart or the Action Tracker.",
       data: "The log stays in this browser. Nothing is sent or uploaded.",
     },
     "/tools/incomplete-control/": {
@@ -235,19 +275,74 @@ const en = {
         "Review the log.",
         "Walk the [[Floor check]].",
       ],
-      get: "On-time rate, every late minute split into dock and road, the reasons, the departure hours and shifts behind the delays, and a trend.",
+      get: "On-time rate, every late minute split into dock and road, the reasons, the departure hours and shifts behind the delays, and a trend, with the same exports and next steps as Damage Control.",
+      data: "The log stays in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/night-audit/": {
+      when: "Every night, for each no-show, declined card, posting error or open balance the audit finds.",
+      how: [
+        "Log each exception: date, shift, the stage of the stay where it was found, its type and cause, and the reservations affected, with a cost and a note if you have them. Rows from the PMS or Excel can be pasted with [[Import rows]].",
+        "Set the period: the reservations handled and your target.",
+        "Review the log. To try the tool first, load an example week.",
+        "Walk the [[Floor check]] of the audit standard.",
+      ],
+      get: "Exception rate and clean reservations, DPMO and sigma level, the few causes behind most exceptions and the stage of the stay where they start, with the same exports and next steps as Damage Control. The hotel handover takes its no-shows from here.",
       data: "The log stays in this browser. Nothing is sent or uploaded.",
     },
     "/tools/shift-handover/": {
       when: "At the end of every shift. Most problems are not lost on the shift; they are lost between shifts.",
       how: [
         "Choose a template: warehouse, hotel front office or delivery station. Fill in date, shift, area and both names.",
-        "Add the numbers. [[Fill in from the logs]] takes them from Damage, Incomplete and Delay.",
+        "Add the numbers. [[Fill in from the logs]] takes them from Damage, Incomplete and Delay; the hotel template takes its no-shows from the Night Audit Log.",
         "List the open issues, each with an owner and a time. Add heads-ups, safety and people.",
         "Run the handover check.",
       ],
-      get: "A [[Ready to hand over]] view to copy, print or save as PDF, and send through your own channel. [[Close shift, start the next]] carries the open issues forward and counts how often they were carried. Earlier handovers stay in a history.",
+      get: "A [[Ready to hand over]] view to copy, print or save as PDF, and send through your own channel. [[Close shift, start the next]] carries the open issues forward and counts how often they were carried; an open issue goes on to 5 Whys or the Action Tracker. Earlier handovers stay in a history.",
       data: "The handover stays in this browser. Nothing is sent.",
+    },
+    "/tools/action-tracker/": {
+      when: "Whenever a tool gives you something to do, and once a week to close the loop: one list for every countermeasure, finding and signal.",
+      how: [
+        "Write the action as a verb, with an owner, a due date and how you will know it worked. Or send it from another tool: it arrives with its source.",
+        "Move it from open to in progress, done and verified. Done says the change was made; verified says the number moved and stayed.",
+        "Filter by status, by owner or by the tool it came from.",
+        "Hold the weekly review: overdue first, then due this week, then what was verified. [[Copy the review]] for the meeting.",
+      ],
+      get: "The week in actions: what is overdue and who carries it, the actions closed per week, the due dates on a month calendar, and the review to copy or print. The list downloads as CSV, as Excel or as a [[Calendar file (.ics)]] with every open due date.",
+      data: "The list stays in this browser, the same in every language. An action sent from a tool is added once, never twice.",
+    },
+    "/tools/daily-board/": {
+      when: "At the start of every shift, for a huddle of ten minutes, standing.",
+      how: [
+        "Fill in the [[Workplace profile]] once: the site, its shifts, its areas with their owners, and the targets that colour the board.",
+        "Let the logs in this browser colour Safety, Quality and Delivery: the Safety Cross, the 5S Audit, Damage Control, Incomplete Control, the Night Audit Log and the Delay Analyzer.",
+        "Mark Cost and People by hand with [[Add to the board]]. An entry by hand overrules the logs for that day.",
+        "Read the [[Huddle agenda]] out: yesterday's board, the actions overdue or due today, the carried handover issues and the safety message of the day.",
+      ],
+      get: "Safety, Quality, Delivery, Cost and People as five month calendars of green, amber and red days, the red days per letter against last month, and the agenda to copy or print. A red day goes on with [[Add to actions]] or [[Take it to 5 Whys]].",
+      data: "Your entries by hand stay in this browser and download as CSV or Excel. The board reads the other logs and changes nothing in them.",
+    },
+    "/tools/five-s-audit/": {
+      when: "On a fixed weekday, in the same areas and in the same order, to see whether order on the floor holds.",
+      how: [
+        "Choose 5S, 6S or 8S, a checklist for warehouse, hotel or delivery station, the area and the date.",
+        "Walk the area and score each question as you see it now, from 0, nothing in place, to 4, the full standard. Note what you see at 2 or below.",
+        "[[Save audit]], then [[Add findings to actions]] to give each finding an owner in the Action Tracker.",
+        "Tag what may not belong there in the [[Red tag register]], with a reason, a decision and an owner.",
+      ],
+      get: "A radar of each S against the last walk of the area, the trend and a league table of the areas, the weakest questions, and the open red tags by age. [[Print scorecard]], or download the audits and the red tags as CSV or Excel.",
+      data: "The audits and the red tags stay in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/safety-cross/": {
+      when: "The day it happens: every accident, first aid, near miss, unsafe condition or act, and the positive observations too.",
+      how: [
+        "Log each event: date, shift, type, area, what happened, the cause and its severity as the potential, not the outcome, with an action and an owner. Rows can be imported.",
+        "Enter the hours worked in the month for LTIFR and TRIR and, if you like, a target of near-miss reports and a goal of days without an accident.",
+        "Read the cross of the month, then the cause to tackle first.",
+        "Give the talk of the day at the briefing, then [[Mark as held]].",
+      ],
+      get: "The month as a green cross with a red or amber day for each event, the days since the last accident, LTIFR, TRIR, the Bird pyramid and where the events happen. [[Send open actions to the Action Tracker]], or take the top cause to 5 Whys or Pareto 80/20.",
+      data: "The log stays in this browser and downloads as CSV or Excel. Nothing is sent or uploaded.",
     },
     "/tools/cx-control-tower/": {
       when: "Every week, to go from the customer's outcome to the operational driver, the root cause and an action that is checked.",
@@ -268,7 +363,7 @@ const en = {
         "Rate ten statements.",
         "Press [[See the result]].",
       ],
-      get: "The cause that fits best (clarity, skill, capacity, process design or ownership), with three first moves and a [[Question for the floor]]; when no single cause stands out, the advice to go and see the work. A score for each cause either way.",
+      get: "The cause that fits best (clarity, skill, capacity, process design or ownership), with three first moves and a [[Question for the floor]]; when no single cause stands out, the advice to go and see the work. A score for each cause either way, to take on to 5 Whys or the Action Tracker.",
       data: "Nothing you enter is stored or sent.",
     },
     "/tools/pareto/": {
@@ -281,6 +376,72 @@ const en = {
       ],
       get: "A checked Pareto chart with every row accounted for, [[Where to start]], and exports as PNG, SVG and CSV.",
       data: "Files are read in the browser, Excel included. Up to 20,000 rows are kept.",
+    },
+    "/tools/a3-report/": {
+      when: "When one problem deserves one sheet: the facts, the target, the cause and the follow-up, agreed before anyone starts.",
+      how: [
+        "Start a [[New A3]] with a title, an owner and a date.",
+        "Fill the seven boxes in order: the background, the current condition with its key number, the target and its date, the root cause, the countermeasures with an owner each, the plan, and how you will check.",
+        "Bring in what you already have: [[Read the Pareto result]] for the current condition, [[Take from 5 Whys]] for the root cause.",
+        "Read the [[Quality check]], then [[Send countermeasures to the Action Tracker]].",
+      ],
+      get: "One sheet with the gap between the baseline, the target and the latest value, and an eight-point check of the sheet itself. Print it on A3 or A4, copy it as text or [[Download Word]].",
+      data: "Every A3 is saved in this browser as you type, in a list where you can open, duplicate or delete it.",
+    },
+    "/tools/kaizen-board/": {
+      when: "Every week, to collect the team's ideas and give each one an answer within the week.",
+      how: [
+        "Write the idea, what it removes, the area and who proposed it, rate its effort and impact from 1 to 5, add a saving if you know it, and [[Add to the board]].",
+        "Move each card through Plan, Do and Check to Adopted, or drop it with a reason the person can read.",
+        "Start with the quick wins: low effort and high impact, top left on the matrix.",
+        "A big idea goes on with [[Take to A3]]; the next step of a card goes to the Action Tracker with [[Add to actions]].",
+      ],
+      get: "The board with the days each card has waited, the open ideas ranked by priority, the adoption rate, the days from idea to adopted, the savings per month and per year, and the idea of the month. Download it as CSV or Excel.",
+      data: "The board stays in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/skills-matrix/": {
+      when: "Before you plan the rota or the training, to see which tasks hang on one person.",
+      how: [
+        "Name the team and [[Load the tasks]] of a template, warehouse, hotel front office or delivery station, each with its criticality, minimum level and target.",
+        "Add the people, with their shift.",
+        "Rate each person on each task, together with them, from 0, not trained, to 4, can train. A click raises the level by one.",
+        "[[Suggest a plan]]: it pairs each trainee with a level 4 on the same task, the most critical gaps first. Then [[Send plan to the Action Tracker]].",
+      ],
+      get: "The cover against target of every task and shift, the single points of failure, who is below a minimum and the flexibility index, and with [[Take a snapshot]] each month, whether the training works. The matrix and the plan download as CSV or Excel.",
+      data: "The matrix stays in this browser. [[Anonymise names]] shows each person as a number, on the page and in the exports.",
+    },
+    "/tools/oee/": {
+      when: "Every shift, for the machine or the line that sets the pace.",
+      how: [
+        "Add each machine with its ideal rate from the machine plate, or its ideal cycle, and [[Save machine]].",
+        "Log a shift: the planned minutes, the stops with their reasons and minutes, the pieces made and the rejects. Rows can be imported.",
+        "Planned stops, such as breaks, meetings or no orders, are taken out of the planned time.",
+        "Choose a machine or all of them, and the period.",
+      ],
+      get: "Availability, performance, quality and OEE per machine, the six big losses day by day, the top stop reasons and the loss to attack first, with a [[Question for the floor]]. Copy or print it, or take it on to 5 Whys, Pareto 80/20 or the Action Tracker.",
+      data: "The machines and the log stay in this browser and download as CSV or Excel.",
+    },
+    "/tools/hotel-kpis/": {
+      when: "Every morning, with last night's figures from the night audit or the PMS.",
+      how: [
+        "Enter the total rooms and the budget of the month: occupancy and ADR, and RevPAR if it is not simply the two multiplied.",
+        "Log each night: rooms available and sold, room revenue, arrivals, departures, no-shows, walk-ins, rooms out of order, breakfast covers and complaints. Or paste the PMS export with [[Import rows]].",
+        "Read the month to date against the budget, and where to start.",
+        "[[Copy the morning report]] for the meeting.",
+      ],
+      get: "Occupancy, ADR and RevPAR against the budget, the forecast for the month, the weekday pattern, the best and the worst night, and the revenue that leaked through no-shows and rooms out of order. The weakest KPI goes on to 5 Whys or the Action Tracker.",
+      data: "The log stays in this browser and downloads as CSV or Excel. A night logged twice keeps its latest figures.",
+    },
+    "/tools/gemba-walk/": {
+      when: "Where the work is done: the team lead every day, the area manager every week, the site lead every month.",
+      how: [
+        "Choose a layered process audit or a waste walk, the layer, a checklist for warehouse, hotel or delivery station, and the area.",
+        "On the floor, answer each question yes, no or n.a., or tap + for every waste you see. [[Start the timer]] to know how long the walk took.",
+        "[[Save walk]], then [[Add findings to actions]] for every no you could not fix on the spot.",
+        "Set how often each layer walks: the results flag a layer that is late.",
+      ],
+      get: "Compliance per week and layer, the questions that fail most and the areas where the no answers sit, the wastes by area with the vital few, and the next walk of each layer. [[Print the walk sheet]] to walk with paper.",
+      data: "The walks stay in this browser and download as CSV or Excel.",
     },
     "/tools/sigma-control-chart/": {
       when: "When you need to know how good a process is, and whether a bad day is a real change or normal noise.",
@@ -301,13 +462,79 @@ const en = {
         "Name the root cause: something you can change.",
         "Agree a countermeasure, an owner, a due date and how you will know it worked.",
       ],
-      get: "A worksheet to print, save as PDF or copy as text. The log tools can send their problem straight into it.",
+      get: "A worksheet to print, save as PDF or copy as text. The log tools can send their problem straight into it, and the countermeasure goes on with [[Put the countermeasure on the handover]] or [[Add the countermeasure to the Action Tracker]].",
       data: "The worksheet stays in this browser.",
+    },
+    "/tools/fishbone/": {
+      when: "When the team needs to see every possible cause of one effect before it chooses which to check.",
+      how: [
+        "Write the effect at the head of the fish, as a fact, with the number if you have it.",
+        "Choose the bones: 6M for production, warehouse and delivery, 4P for a service, or the five bones of a hotel.",
+        "Fill each bone with the team, up to 12 causes, each with its why.",
+        "Count the votes and mark the likely causes, then [[Send likely causes to actions]] to have each one verified on the floor.",
+      ],
+      get: "The fish as one picture, the causes ranked by votes, and the top cause ready for 5 Whys or all of them for Pareto 80/20. [[Copy as outline]], print it on one page, or download it as CSV or Excel.",
+      data: "Your diagrams stay in this browser, in a list where you can open, duplicate or delete them.",
+    },
+    "/tools/fmea/": {
+      when: "Before a process starts or changes, or after a failure that must not come back: rate the risks while they are still cheap.",
+      how: [
+        "Name the process, the owner, the date and the revision, and [[Fill the steps]] from a template, or [[+ Add a failure mode]].",
+        "For each step, write how it can fail, the effect, the cause and the controls you have today.",
+        "Rate severity, occurrence and detection from 1 to 10. Read the action priority first, the RPN second.",
+        "Give each high or medium row an action with an owner, and rate the row again when the action is done.",
+      ],
+      get: "The action priority (AIAG-VDA) and the RPN of every row, a heat map of severity against occurrence, the top ten risks, and the RPN before and after the actions. [[Add open actions to the Action Tracker]], print on A3 or A4, or download as CSV or Excel.",
+      data: "The sheet stays in this browser. [[Save the sheet (.json)]] keeps a copy you can open again on another device.",
+    },
+    "/tools/process-lab/": {
+      when: "When you measure one thing at a time, minutes, seconds, weights, and need to know whether the process is stable, whether it is capable, or whether it really changed.",
+      how: [
+        "Paste a column of measurements, or a date and a value per line, and say what is measured and in which unit.",
+        "Add the specification limits, LSL and USL, and a target if you have one.",
+        "Under [[Before / after]], compare two defect rates or two sets of measurements.",
+        "Under [[How many to measure]], find the sample you need to see the change you are after.",
+      ],
+      get: "An I-MR chart with the Nelson rules, the histogram against the specification, Cp, Cpk and PPM, and whether a change is real or noise, every number with a sentence that says what it means. [[Add the signal to actions]], or download as CSV or Excel.",
+      data: "Your numbers stay in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/time-study/": {
+      when: "At the line, with a stopwatch, before you balance the work again or write the standard.",
+      how: [
+        "Enter the demand and the available minutes per shift: the tool gives the takt.",
+        "Add the stations in the order of the flow, each with its elements, marked VA, NVA or W.",
+        "[[Start timing]] and press [[Lap]], or the space bar, at the end of each element. Time at least three cycles per station; five is better.",
+        "Read the Yamazumi against the takt, and the balance moves.",
+      ],
+      get: "The standard time of each element with its spread, a Yamazumi of every station against the takt, how much of the time is waste, the bottleneck and the first element to move. [[Add the balance moves as actions]], or download the standard times as CSV or Excel.",
+      data: "The stations and the timings stay in this browser. Timings can also be typed or pasted.",
+    },
+    "/tools/value-stream-map/": {
+      when: "When the lead time is long and you need to see where it goes, from the supplier to the customer.",
+      how: [
+        "Name the product or service family, the customer demand per day and the working minutes.",
+        "[[Fill the steps]] from a template, or add them: cycle time, changeover, uptime, yield and operators.",
+        "Walk the stream and count the pieces waiting before each step: the tool turns them into time.",
+        "Switch to the [[Future state]], change what the improvements change, and write each change as a kaizen burst.",
+      ],
+      get: "The map with its lead-time ladder, the share of the lead time that is work, the takt and the steps above it, the current and the future state. [[Send kaizen bursts to the Action Tracker]], or download as CSV or Excel.",
+      data: "The map stays in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/standard-work/": {
+      when: "When one job must be done the same way on every shift, and a new person must be able to learn it.",
+      how: [
+        "Start from a template with [[Use this template]], or describe the job: title, process, area, owner, takt or target time, PPE and tools.",
+        "Write the major steps in order, each in a few words, with its time.",
+        "Add the key points that make or break each step, marked Safety, Quality, Technique or Cost, each with its reason.",
+        "Read the [[Quality check]]. When the job changes, start a [[New version]] and write what changed.",
+      ],
+      get: "A job breakdown sheet with the time per step against the takt and its change history, to print, copy as text or [[Download Word]]. [[Train the team on it]] puts the training in the Action Tracker; [[Audit this standard]] opens the 5S Audit.",
+      data: "Every standard is saved in this browser as you type, in a list where you can open, duplicate or delete it.",
     },
     "/tools/six-sigma-dmaic/": {
       when: "When an improvement is a project, not a quick fix.",
       how: [
-        "Work through Define, Measure, Analyse, Improve and Control. Each step has its output, key ideas, common mistakes, a real case and [[Check yourself]].",
+        "Work through Define, Measure, Analyse, Improve and Control. Each step has its output, key ideas, common mistakes, a real case, the tools that belong to it and [[Check yourself]].",
         "Read the eight wastes and the glossary.",
         "Fill in the project charter, or [[Fill with the course case]] to see an example.",
       ],
@@ -352,7 +579,7 @@ const en = {
 
 const sq = {
   title: "Udhëzuesi i mjeteve",
-  subtitle: "Katërmbëdhjetë mjete falas për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
+  subtitle: "Tridhjetë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
   edition: `Botimi ${EDITION} · tetor 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -364,6 +591,7 @@ const sq = {
     open: "Hape mjetin",
     tools: "Mjetet",
     routine: "Një rutinë",
+    routineNote: "Ku hyn secili mjet në punën e këtij roli, hap pas hapi.",
     learn: "Kurs",
     page: "Faqe",
     planet: "Planeti",
@@ -373,9 +601,9 @@ const sq = {
   sections: {
     about: {
       kicker: "Për këtë udhëzues",
-      title: "Katërmbëdhjetë mjete, katër planete, një ide",
+      title: "Tridhjetë mjete, katër planete, një ide",
       body: [
-        "Stiven Catalyst ka katërmbëdhjetë mjete falas për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
+        "Stiven Catalyst ka tridhjetë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
         "Ky udhëzues shpjegon si janë organizuar mjetet, pse faqja duket ashtu siç duket dhe si përdoret çdo mjet, hap pas hapi. Nuk ke nevojë ta lexosh me radhë: gjej planetin tënd dhe nis nga aty.",
         { cards: [
           { title: "Falas", text: "Çdo mjet përdoret falas." },
@@ -430,12 +658,27 @@ const sq = {
         "Ideja e mjeteve është e thjeshtë: mjete të lindura nga puna në terren, që nuk kërkojnë asgjë tjetër veç një shfletuesi. Pa instalim, pa llogari, pa server që mban të dhënat e tua.",
         "Më shumë se kalkulatorë të veçantë i bën fakti që ia kalojnë punën njëri-tjetrit, brenda shfletuesit tënd:",
         { list: [
-          "Regjistrat e dëmeve, të plotësisë dhe të vonesave ushqejnë Shift Pulse, dhe Dorëzimi i turnit i merr shifrat e tyre me [[Fill in from the logs]].",
-          "Çdo rezultat i një regjistri vazhdon me një buton: [[Take it to 5 Whys]], [[Open in Pareto 80/20]] ose [[Open as control chart]].",
-          "CX Control Tower ia dërgon shkaqet rrënjësore Pareto 80/20.",
+          "Regjistrat e dëmeve, të plotësisë dhe të vonesave ushqejnë Shift Pulse dhe Tabelën e ditës, dhe Dorëzimi i turnit i merr shifrat e tyre me [[Fill in from the logs]].",
+          "Çdo rezultat i një regjistri vazhdon me një buton: [[Take it to 5 Whys]], [[Open in Pareto 80/20]], [[Open as control chart]] ose [[Add to actions]].",
+          "5 Whys e dërgon kundërmasën e vet te Lista e veprimeve ose e vendos në Dorëzimin e turnit.",
+          "CX Control Tower dhe Kurrizi i peshkut ia dërgojnë shkaqet e tyre Pareto 80/20; Raporti A3 merr rezultatin e Pareto-s dhe fletën e 5 Whys.",
           "Letra e motivimit i merr të dhënat e tua nga Krijuesi i CV-së ose nga CV për ATS.",
         ] },
         "Dhe në faqen e çdo roli, një hapësirë coaching-u i kthen mjetet në praktikë: një projekt me qëllim, matje dhe datë rishikimi. Më shumë në faqet e fundit.",
+      ],
+    },
+    machine: {
+      kicker: "Ideja, 4",
+      title: "Një listë, një vend pune",
+      body: [
+        "Gjashtëmbëdhjetë nga mjetet u ndërtuan si një sistem i vetëm për punën e përditshme në terren, nga takimi i turnit deri te standardi. Tri gjëra i mbajnë bashkë, të gjitha në shfletuesin tënd:",
+        { list: [
+          "Një listë e vetme veprimesh. Një kundërmasë nga 5 Whys, një gjetje e Auditit 5S, një sinjal i Laboratorit të procesit: secila bëhet veprim te Lista e veprimeve, me përgjegjës, afat, status dhe mënyrën si verifikohet. Një mjet e dorëzon një herë, kurrë dy herë.",
+          "Një profil i vetëm i vendit të punës. Objekti, turnet, zonat me përgjegjësit e tyre, ekipet dhe objektivat shkruhen një herë, te Tabela e ditës, në Auditin 5S, në Gemba Walk ose te Matrica e aftësive, dhe çdo mjet që ka nevojë për to t'i ofron. Pa profil, çdo mjet punon me atë që shkruan në të.",
+          "Një lloj i vetëm grafiku. Kalo treguesin mbi një grafik ose preke për të lexuar vlerat, dhe shkarkoje si SVG ose PNG me ngjyrat e printimit.",
+        ] },
+        "Një ditë me to: regjistrat dhe Kryqi i sigurisë gjatë turnit, Tabela e ditës në takimin e turnit, një Gemba Walk ose një Audit 5S në terren, dhe një herë në javë dhjetë minuta me Listën e veprimeve: në fillim ato me afat të kaluar, pastaj ato të kësaj jave, pastaj ato që u verifikuan.",
+        { note: "Lista e veprimeve dhe profili i vendit të punës janë të njëjta në çdo gjuhë të faqes; gjithçka tjetër ruhet veçmas për çdo gjuhë." },
       ],
     },
     data: {
@@ -445,8 +688,9 @@ const sq = {
         "Çdo mjet e ruan punën tënde vetëm në shfletuesin që përdor. Nuk dërgohet askund; prandaj, nëse ke punuar në laptop, nuk do ta gjesh në telefon.",
         "Për t'i ruajtur të gjitha, ose për t'i kaluar në një pajisje tjetër, përdor [[Save all my work]] në fund të çdo faqeje mjeti: një skedar me punën e të gjitha mjeteve. [[Open a saved file]] e kthen përsëri dhe zëvendëson vetëm mjetet që janë në atë skedar.",
         { list: [
-          "Shumica e mjeteve printohen ose ruhen si PDF, dhe regjistrat shkarkohen si CSV për Excel.",
-          "Mjetet e regjistrave mbajnë një regjistër të veçantë për çdo gjuhë të faqes.",
+          "Shumica e mjeteve printohen ose ruhen si PDF, dhe regjistrat shkarkohen si CSV dhe si Excel.",
+          "Çdo mjet e ruan punën veçmas për çdo gjuhë të faqes, përveç listës së veprimeve dhe profilit të vendit të punës.",
+          "Një mjet që e ke hapur një herë hapet përsëri edhe pa lidhje, dhe faqja mund të instalohet si aplikacion.",
           "Nëse shfletuesi nuk mund të ruajë, mjeti ta thotë: shkarko CSV-në ose kopjo përmbledhjen që ta ruash punën.",
           "Fshirja e të dhënave të shfletuesit fshin edhe punën tënde. Ruaj një skedar më parë.",
         ] },
@@ -470,12 +714,12 @@ const sq = {
       ],
     },
     next: {
-      kicker: "Botimi 2",
+      kicker: "Botimi 3",
       title: "Çfarë mund të vijë më pas",
       body: [
         "Ide në shqyrtim, jo premtime me data. Më thuaj cila do të të ndihmonte më shumë.",
         { list: [
-          "Faqe mjetesh më të shpejta: skripte më të vogla, që mjetet të hapen më shpejt në telefon.",
+          "Profili i vendit të punës në çdo mjet, që objekti, turnet dhe objektivat të shkruhen vetëm një herë.",
           "Analiza e vonesave për linja pa orë nisjeje të regjistruar.",
           "Një hapësirë e përbashkët për një mentor dhe një ekip, por vetëm me llogari të vërteta dhe kontroll aksesi, sepse premtimi i këtyre mjeteve është që të dhënat e tua mbeten të tuat.",
         ] },
@@ -488,9 +732,9 @@ const sq = {
     },
   },
   families: {
-    pulse: "Pesë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, shih turnin në një pamje dhe dorëzoje të pastër.",
-    zenith: "Tri mjete për një zonë: lexo javën, gjej nga vjen realisht një shifër e kuqe dhe nis me shkaqet që peshojnë më shumë.",
-    lumen: "Tri mjete për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh dhe drejto një përmirësim si projekt.",
+    pulse: "Dhjetë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, mbaje terrenin të sigurt dhe në rregull, drejto takimin e turnit, shih turnin në një pamje dhe dorëzoje të pastër, me çdo veprim në një listë.",
+    zenith: "Nëntë mjete për një zonë: lexo javën, gjej nga vjen realisht një shifër e kuqe, nis me shkaqet që peshojnë më shumë, vëre një problem në një fletë dhe rrit idetë dhe aftësitë e ekipit në terren.",
+    lumen: "Tetë mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, vlerëso rreziqet, mat dhe harto rrjedhën, shkruaj standardin dhe drejto një përmirësim si projekt.",
     atlas: "Tri mjete për rolin e ardhshëm: një CV e dizajnuar, një CV që softueri i përzgjedhjes e lexon saktë dhe një letër që përputhet me to.",
   },
   tools: {
@@ -502,8 +746,8 @@ const sq = {
         "Lexo kartat dhe sinjalet.",
         "Hap grafikun e trendit të çdo shifre.",
       ],
-      get: "Një pamje e asaj që mbajnë në këtë shfletues regjistrat e dëmeve, të plotësisë, të vonesave dhe të dorëzimit: karta dhe një trend për çdo shifër, me sinjalin [[Above usual]] vetëm përtej kufirit të kartës së kontrollit për nivelin e saj të zakonshëm, për ta kopjuar, printuar ose ruajtur si PDF.",
-      data: "Ruan vetëm cilësimet e tua. I lexon regjistrat e tjerë dhe nuk ndryshon asgjë në to.",
+      get: "Një pamje e asaj që mbajnë në këtë shfletues regjistrat e dëmeve, të plotësisë, të vonesave dhe të dorëzimit, si dhe Kryqi i sigurisë, OEE, veprimet e hapura dhe auditi i fundit 5S sapo kanë të dhëna: karta dhe një trend për çdo shifër, me sinjalin [[Above usual]] vetëm përtej kufirit të kartës së kontrollit për nivelin e saj të zakonshëm, për ta kopjuar, printuar ose ruajtur si PDF.",
+      data: "Ruan vetëm cilësimet e tua. I lexon mjetet e tjera dhe nuk ndryshon asgjë në to.",
     },
     "/tools/damage-control/": {
       when: "Sa herë dëmtohet një njësi, në hapin e procesit ku ndodh.",
@@ -513,7 +757,7 @@ const sq = {
         "Rishiko regjistrin. Për ta provuar mjetin, ngarko një javë shembull.",
         "Bëj [[Floor check]].",
       ],
-      get: "Shkalla e dëmeve, DPMO dhe niveli sigma, ato pak shkaqe që sjellin shumicën e dëmeve, hapat ku ndodhin, një trend dhe ku të fillosh. Shkarkoje si CSV, ose vazhdo me 5 Whys, Pareto 80/20 ose një kartë kontrolli.",
+      get: "Shkalla e dëmeve, DPMO dhe niveli sigma, ato pak shkaqe që sjellin shumicën e dëmeve, hapat ku ndodhin, një trend dhe ku të fillosh. Shkarkoje si CSV ose Excel, ose vazhdo me 5 Whys, Pareto 80/20, një kartë kontrolli ose Listën e veprimeve.",
       data: "Regjistri mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
     },
     "/tools/incomplete-control/": {
@@ -535,19 +779,74 @@ const sq = {
         "Rishiko regjistrin.",
         "Bëj [[Floor check]].",
       ],
-      get: "Shkalla e përpikërisë, çdo minutë vonese e ndarë mes rampës dhe rrugës, arsyet, orët e nisjes dhe turnet ku përqendrohen vonesat, dhe një trend.",
+      get: "Shkalla e përpikërisë, çdo minutë vonese e ndarë mes rampës dhe rrugës, arsyet, orët e nisjes dhe turnet ku përqendrohen vonesat, dhe një trend, me të njëjtat eksporte dhe hapa të mëtejshëm si Kontrolli i dëmeve.",
+      data: "Regjistri mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/night-audit/": {
+      when: "Çdo natë, për çdo no-show, kartë të refuzuar, gabim postimi ose bilanc të hapur që gjen auditi.",
+      how: [
+        "Regjistro çdo përjashtim: datën, turnin, fazën e qëndrimit ku u gjet, llojin, shkakun dhe rezervimet e prekura, me koston dhe një shënim nëse i ke. Rreshtat nga PMS-ja ose Excel-i ngjiten me [[Import rows]].",
+        "Vendos periudhën: rezervimet e trajtuara dhe objektivin tënd.",
+        "Rishiko regjistrin. Për ta provuar mjetin, ngarko një javë shembull.",
+        "Bëj [[Floor check]] për standardin e auditit.",
+      ],
+      get: "Shkalla e përjashtimeve dhe rezervimet e pastra, DPMO dhe niveli sigma, ato pak shkaqe që sjellin shumicën e përjashtimeve dhe faza e qëndrimit ku nisin, me të njëjtat eksporte dhe hapa të mëtejshëm si Kontrolli i dëmeve. Dorëzimi i hotelit i merr rastet no-show nga këtu.",
       data: "Regjistri mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
     },
     "/tools/shift-handover/": {
       when: "Në fund të çdo turni. Shumica e problemeve nuk humbasin gjatë turnit, humbasin mes turneve.",
       how: [
         "Zgjidh një model: magazinë, recepsion hoteli ose stacion shpërndarjeje. Plotëso datën, turnin, zonën dhe të dy emrat.",
-        "Shto shifrat. [[Fill in from the logs]] i merr nga regjistrat e dëmeve, të plotësisë dhe të vonesave.",
+        "Shto shifrat. [[Fill in from the logs]] i merr nga regjistrat e dëmeve, të plotësisë dhe të vonesave; modeli i hotelit i merr rastet no-show nga Regjistri i Night Audit.",
         "Rendit çështjet e hapura, secilën me përgjegjës dhe orë. Shto paralajmërimet, sigurinë dhe njerëzit.",
         "Bëj kontrollin e dorëzimit.",
       ],
-      get: "Një pamje [[Ready to hand over]] për ta kopjuar, printuar ose ruajtur si PDF dhe për ta dërguar në kanalin tënd. [[Close shift, start the next]] i kalon çështjet e hapura më tej dhe numëron sa herë janë kaluar. Dorëzimet e mëparshme mbeten në një histori.",
+      get: "Një pamje [[Ready to hand over]] për ta kopjuar, printuar ose ruajtur si PDF dhe për ta dërguar në kanalin tënd. [[Close shift, start the next]] i kalon çështjet e hapura më tej dhe numëron sa herë janë kaluar; një çështje e hapur vazhdon te 5 Whys ose te Lista e veprimeve. Dorëzimet e mëparshme mbeten në një histori.",
       data: "Dorëzimi mbetet në këtë shfletues. Asgjë nuk dërgohet.",
+    },
+    "/tools/action-tracker/": {
+      when: "Sa herë që një mjet të jep diçka për të bërë, dhe një herë në javë për ta mbyllur ciklin: një listë e vetme për çdo kundërmasë, gjetje dhe sinjal.",
+      how: [
+        "Shkruaje veprimin me një folje, me përgjegjës, afat dhe si do ta kuptosh që funksionoi. Ose dërgoje nga një mjet tjetër: mbërrin bashkë me burimin e vet.",
+        "Kaloje nga i hapur te në punë, i kryer dhe i verifikuar. I kryer do të thotë që ndryshimi u bë; i verifikuar, që shifra lëvizi dhe mbeti aty.",
+        "Filtro sipas statusit, përgjegjësit ose mjetit nga erdhi.",
+        "Bëj rishikimin javor: në fillim ato me afat të kaluar, pastaj ato me afat këtë javë, pastaj ato që u verifikuan. [[Copy the review]] për takimin.",
+      ],
+      get: "Java në veprime: çfarë e ka kaluar afatin dhe kush e mban, veprimet e mbyllura çdo javë, afatet në një kalendar mujor dhe rishikimi për ta kopjuar ose printuar. Lista shkarkohet si CSV, si Excel ose si [[Calendar file (.ics)]] me çdo afat të hapur.",
+      data: "Lista mbetet në këtë shfletues, e njëjtë në çdo gjuhë. Një veprim i dërguar nga një mjet shtohet një herë, kurrë dy herë.",
+    },
+    "/tools/daily-board/": {
+      when: "Në fillim të çdo turni, për një takim dhjetëminutësh në këmbë.",
+      how: [
+        "Plotëso një herë [[Workplace profile]]: objektin, turnet, zonat me përgjegjësit e tyre dhe objektivat që i japin ngjyrë tabelës.",
+        "Lëri regjistrat në këtë shfletues t'u japin ngjyrë Sigurisë, Cilësisë dhe Dorëzimit: Kryqi i sigurisë, Auditi 5S, Kontrolli i dëmeve, Kontrolli i plotësisë, Regjistri i Night Audit dhe Analiza e vonesave.",
+        "Shëno me dorë Koston dhe Njerëzit me [[Add to the board]]. Një shënim me dorë ka përparësi mbi regjistrat për atë ditë.",
+        "Lexo me zë [[Huddle agenda]]: tabelën e djeshme, veprimet me afat të kaluar ose me afat sot, çështjet e mbartura të dorëzimit dhe mesazhin e sigurisë të ditës.",
+      ],
+      get: "Siguria, Cilësia, Dorëzimi, Kostoja dhe Njerëzit si pesë kalendarë mujorë me ditë të gjelbra, të verdha dhe të kuqe, ditët e kuqe për çdo shkronjë kundrejt muajit të kaluar, dhe rendi i ditës për ta kopjuar ose printuar. Një ditë e kuqe vazhdon me [[Add to actions]] ose [[Take it to 5 Whys]].",
+      data: "Shënimet me dorë mbeten në këtë shfletues dhe shkarkohen si CSV ose Excel. Tabela i lexon regjistrat e tjerë dhe nuk ndryshon asgjë në to.",
+    },
+    "/tools/five-s-audit/": {
+      when: "Në një ditë të caktuar të javës, në të njëjtat zona dhe me të njëjtën radhë, për të parë nëse rregulli në terren mbahet.",
+      how: [
+        "Zgjidh 5S, 6S ose 8S, një listë kontrolli për magazinë, hotel ose stacion shpërndarjeje, zonën dhe datën.",
+        "Ec nëpër zonë dhe vlerëso çdo pyetje ashtu siç e sheh tani, nga 0, asgjë në vend, deri në 4, standardi i plotë. Shëno atë që sheh kudo ku vlerësimi është 2 ose më pak.",
+        "[[Save audit]], pastaj [[Add findings to actions]] që çdo gjetje të ketë një përgjegjës te Lista e veprimeve.",
+        "Shëno te [[Red tag register]] çdo send që mund të mos i përkasë zonës, me arsye, vendim dhe përgjegjës.",
+      ],
+      get: "Një radar i çdo S-je kundrejt auditit të fundit të zonës, trendi dhe renditja e zonave, pyetjet më të dobëta dhe etiketat e kuqe të hapura sipas vjetërsisë. [[Print scorecard]], ose shkarko auditet dhe etiketat e kuqe si CSV ose Excel.",
+      data: "Auditet dhe etiketat e kuqe mbeten në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/safety-cross/": {
+      when: "Ditën që ndodh: çdo aksident, ndihmë e parë, rrezik i shmangur, kusht ose veprim i pasigurt, por edhe vëzhgimet pozitive.",
+      how: [
+        "Regjistro çdo ngjarje: datën, turnin, llojin, zonën, çfarë ndodhi, shkakun dhe rëndësinë sipas asaj që mund të ndodhte, jo sipas pasojës, me një veprim dhe një përgjegjës. Rreshtat mund të importohen.",
+        "Shkruaj orët e punuara në muaj për LTIFR dhe TRIR dhe, nëse do, një objektiv për raportimet e rreziqeve të shmangura dhe një synim për ditët pa aksident.",
+        "Lexo kryqin e muajit, pastaj shkakun me të cilin duhet nisur.",
+        "Mbaj temën e ditës në takim, pastaj shtyp [[Mark as held]].",
+      ],
+      get: "Muaji si një kryq i gjelbër me një ditë të kuqe ose të verdhë për çdo ngjarje, ditët që nga aksidenti i fundit, LTIFR, TRIR, piramida e Bird-it dhe zonat ku ndodhin ngjarjet. [[Send open actions to the Action Tracker]], ose çoje shkakun kryesor te 5 Whys ose Pareto 80/20.",
+      data: "Regjistri mbetet në këtë shfletues dhe shkarkohet si CSV ose Excel. Asgjë nuk dërgohet e nuk ngarkohet.",
     },
     "/tools/cx-control-tower/": {
       when: "Çdo javë, për të shkuar nga rezultati që merr klienti te shkaktari operacional, te shkaku rrënjësor dhe te një veprim i verifikuar.",
@@ -568,7 +867,7 @@ const sq = {
         "Vlerëso dhjetë pohime.",
         "Shtyp [[See the result]].",
       ],
-      get: "Shkaku që përputhet më mirë (qartësia, aftësia, kapaciteti, procesi apo përgjegjësia), me tre hapa të parë dhe një [[Question for the floor]]; kur asnjë shkak i vetëm nuk del në pah, këshilla për të shkuar e për të parë punën. Në çdo rast, një pikë për çdo shkak.",
+      get: "Shkaku që përputhet më mirë (qartësia, aftësia, kapaciteti, procesi apo përgjegjësia), me tre hapa të parë dhe një [[Question for the floor]]; kur asnjë shkak i vetëm nuk del në pah, këshilla për të shkuar e për të parë punën. Në çdo rast, një pikë për çdo shkak, për ta çuar më tej te 5 Whys ose te Lista e veprimeve.",
       data: "Asgjë që shkruan nuk ruhet e nuk dërgohet.",
     },
     "/tools/pareto/": {
@@ -581,6 +880,72 @@ const sq = {
       ],
       get: "Një grafik Pareto i kontrolluar, ku asnjë rresht nuk mbetet jashtë llogarisë, [[Where to start]], dhe eksporte si PNG, SVG dhe CSV.",
       data: "Skedarët lexohen në shfletues, edhe Excel-i. Ruhen deri në 20.000 rreshta.",
+    },
+    "/tools/a3-report/": {
+      when: "Kur një problem meriton një fletë: faktet, objektivi, shkaku dhe ndjekja, të rëna dakord para se të nisë kushdo.",
+      how: [
+        "Nis një [[New A3]] me titull, përgjegjës dhe datë.",
+        "Plotëso me radhë shtatë kutitë: kontekstin, gjendjen aktuale me shifrën e saj kyçe, objektivin dhe afatin, shkakun rrënjësor, kundërmasat me një përgjegjës secila, zbatimin dhe si do ta verifikosh.",
+        "Sill atë që ke tashmë: [[Read the Pareto result]] për gjendjen aktuale, [[Take from 5 Whys]] për shkakun rrënjësor.",
+        "Lexo [[Quality check]], pastaj [[Send countermeasures to the Action Tracker]].",
+      ],
+      get: "Një fletë me diferencën mes bazës, objektivit dhe vlerës së fundit, dhe një kontroll me tetë pika të vetë fletës. Printoje në A3 ose A4, kopjoje si tekst ose [[Download Word]].",
+      data: "Çdo A3 ruhet në këtë shfletues ndërsa shkruan, në një listë ku mund ta hapësh, ta kopjosh ose ta fshish.",
+    },
+    "/tools/kaizen-board/": {
+      when: "Çdo javë, për të mbledhur idetë e ekipit dhe për t'i dhënë secilës një përgjigje brenda javës.",
+      how: [
+        "Shkruaj idenë, çfarë heq, zonën dhe kush e propozoi, vlerëso përpjekjen dhe ndikimin nga 1 në 5, shto kursimin nëse e di, dhe shtyp [[Add to the board]].",
+        "Kaloje çdo kartë nëpër Plan, Zbatim dhe Kontroll deri te E miratuar, ose lëre mënjanë me një arsye që personi mund ta lexojë.",
+        "Nis me fitoret e shpejta: përpjekje e vogël dhe ndikim i madh, lart majtas në matricë.",
+        "Një ide e madhe vazhdon me [[Take to A3]]; hapi i ardhshëm i një karte shkon te Lista e veprimeve me [[Add to actions]].",
+      ],
+      get: "Tabela me ditët që ka pritur çdo kartë, idetë e hapura të renditura sipas përparësisë, shkalla e miratimit, ditët nga ideja te miratimi, kursimet në muaj dhe në vit, dhe ideja e muajit. Shkarkoje si CSV ose Excel.",
+      data: "Tabela mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/skills-matrix/": {
+      when: "Para se të planifikosh turnet ose trajnimin, për të parë cilat detyra varen nga një person i vetëm.",
+      how: [
+        "Emërto ekipin dhe shtyp [[Load the tasks]] për një model, magazinë, recepsion hoteli ose stacion shpërndarjeje, secila detyrë me rëndësinë, nivelin minimal dhe objektivin e saj.",
+        "Shto njerëzit, me turnin e tyre.",
+        "Vlerëso çdo person për çdo detyrë, bashkë me të, nga 0, pa trajnim, deri në 4, mund të trajnojë. Një klik e ngre nivelin me një.",
+        "[[Suggest a plan]]: çdo i trajnuar çiftohet me një person të nivelit 4 në të njëjtën detyrë, me boshllëqet më kritike në fillim. Pastaj [[Send plan to the Action Tracker]].",
+      ],
+      get: "Mbulimi kundrejt objektivit për çdo detyrë dhe turn, pikat e vetme të dështimit, kush është nën minimum dhe indeksi i fleksibilitetit, dhe me [[Take a snapshot]] çdo muaj, nëse trajnimi po funksionon. Matrica dhe plani shkarkohen si CSV ose Excel.",
+      data: "Matrica mbetet në këtë shfletues. [[Anonymise names]] e tregon çdo person me një numër, në faqe dhe në eksporte.",
+    },
+    "/tools/oee/": {
+      when: "Çdo turn, për makinën ose linjën që cakton ritmin.",
+      how: [
+        "Shto çdo makinë me ritmin ideal nga tabela e makinës, ose me ciklin ideal, dhe shtyp [[Save machine]].",
+        "Regjistro një turn: minutat e planifikuara, ndalesat me arsyet dhe minutat e tyre, copat e prodhuara dhe skartet. Rreshtat mund të importohen.",
+        "Ndalesat e planifikuara, si pushimet, takimet ose mungesa e porosive, hiqen nga koha e planifikuar.",
+        "Zgjidh një makinë ose të gjitha, dhe periudhën.",
+      ],
+      get: "Disponueshmëria, performanca, cilësia dhe OEE për çdo makinë, gjashtë humbjet e mëdha ditë pas dite, arsyet kryesore të ndalesave dhe humbja me të cilën duhet nisur, me një [[Question for the floor]]. Kopjoje ose printoje, ose çoje te 5 Whys, Pareto 80/20 ose te Lista e veprimeve.",
+      data: "Makinat dhe regjistri mbeten në këtë shfletues dhe shkarkohen si CSV ose Excel.",
+    },
+    "/tools/hotel-kpis/": {
+      when: "Çdo mëngjes, me shifrat e natës së kaluar nga night audit ose nga PMS-ja.",
+      how: [
+        "Shkruaj numrin e dhomave dhe buxhetin e muajit: zënien dhe ADR-në, dhe RevPAR-in nëse nuk është thjesht prodhimi i të dyjave.",
+        "Regjistro çdo natë: dhomat në dispozicion dhe të shitura, të ardhurat nga dhomat, mbërritjet, largimet, rastet no-show, walk-in, dhomat jashtë përdorimit, mëngjeset dhe ankesat. Ose ngjit eksportin e PMS-së me [[Import rows]].",
+        "Lexo muajin deri sot kundrejt buxhetit, dhe ku të fillosh.",
+        "[[Copy the morning report]] për takimin.",
+      ],
+      get: "Zënia, ADR dhe RevPAR kundrejt buxhetit, parashikimi për muajin, modeli sipas ditëve të javës, nata më e mirë dhe më e dobët, dhe të ardhurat e humbura nga rastet no-show dhe dhomat jashtë përdorimit. KPI-ja më e dobët vazhdon te 5 Whys ose te Lista e veprimeve.",
+      data: "Regjistri mbetet në këtë shfletues dhe shkarkohet si CSV ose Excel. Një natë e regjistruar dy herë mban shifrat e fundit.",
+    },
+    "/tools/gemba-walk/": {
+      when: "Aty ku bëhet puna: drejtuesi i ekipit çdo ditë, menaxheri i zonës çdo javë, drejtuesi i objektit çdo muaj.",
+      how: [
+        "Zgjidh një audit të procesit me nivele ose një ecje për humbjet, nivelin, një listë kontrolli për magazinë, hotel ose stacion shpërndarjeje, dhe zonën.",
+        "Në terren, përgjigju çdo pyetjeje me po, jo ose s'zbatohet, ose prek + për çdo humbje që sheh. [[Start the timer]] për të ditur sa zgjati ecja.",
+        "[[Save walk]], pastaj [[Add findings to actions]] për çdo jo që nuk e rregullove në vend.",
+        "Cakto sa shpesh ecën çdo nivel: rezultatet shënojnë nivelin që ka mbetur pas.",
+      ],
+      get: "Përputhshmëria për javë dhe nivel, pyetjet që dështojnë më shpesh dhe zonat ku janë përgjigjet jo, humbjet sipas zonës me ato pak thelbësoret, dhe ecja e ardhshme e çdo niveli. [[Print the walk sheet]] për të ecur me letër në dorë.",
+      data: "Ecjet mbeten në këtë shfletues dhe shkarkohen si CSV ose Excel.",
     },
     "/tools/sigma-control-chart/": {
       when: "Kur duhet të dish sa i mirë është një proces, dhe nëse një ditë e keqe është ndryshim i vërtetë apo zhurmë e zakonshme.",
@@ -601,13 +966,79 @@ const sq = {
         "Emërto shkakun rrënjësor: diçka që mund ta ndryshosh.",
         "Cakto me të tjerët një kundërmasë, një përgjegjës, një afat dhe si do ta kuptosh që funksionoi.",
       ],
-      get: "Një fletë pune për ta printuar, ruajtur si PDF ose kopjuar si tekst. Mjetet e regjistrave mund t'ia dërgojnë problemin drejtpërdrejt.",
+      get: "Një fletë pune për ta printuar, ruajtur si PDF ose kopjuar si tekst. Mjetet e regjistrave mund t'ia dërgojnë problemin drejtpërdrejt, dhe kundërmasa vazhdon me [[Put the countermeasure on the handover]] ose [[Add the countermeasure to the Action Tracker]].",
       data: "Fleta e punës mbetet në këtë shfletues.",
+    },
+    "/tools/fishbone/": {
+      when: "Kur ekipi duhet të shohë çdo shkak të mundshëm të një efekti para se të zgjedhë cilin të kontrollojë.",
+      how: [
+        "Shkruaj efektin te koka e peshkut, si fakt, me shifrën nëse e ke.",
+        "Zgjidh kockat: 6M për prodhim, magazinë dhe shpërndarje, 4P për një shërbim, ose pesë kockat e një hoteli.",
+        "Plotëso çdo kockë me ekipin, deri në 12 shkaqe, secili me pse-në e vet.",
+        "Numëro votat dhe shëno shkaqet e mundshme, pastaj [[Send likely causes to actions]] që secili të verifikohet në terren.",
+      ],
+      get: "Peshku në një pamje, shkaqet të renditura sipas votave, dhe shkaku kryesor gati për 5 Whys ose të gjithë për Pareto 80/20. [[Copy as outline]], printoje në një faqe ose shkarkoje si CSV ose Excel.",
+      data: "Diagramet e tua mbeten në këtë shfletues, në një listë ku mund t'i hapësh, t'i kopjosh ose t'i fshish.",
+    },
+    "/tools/fmea/": {
+      when: "Para se një proces të nisë ose të ndryshojë, ose pas një dështimi që nuk duhet të përsëritet: vlerëso rreziqet sa kushtojnë ende pak.",
+      how: [
+        "Shkruaj procesin, përgjegjësin, datën dhe rishikimin, dhe shtyp [[Fill the steps]] nga një model, ose [[+ Add a failure mode]].",
+        "Për çdo hap, shkruaj si mund të dështojë, efektin, shkakun dhe kontrollet që ke sot.",
+        "Vlerëso rëndësinë, shpeshtësinë dhe zbulimin nga 1 në 10. Lexo në fillim prioritetin e veprimit, pastaj RPN-në.",
+        "Jepi çdo rreshti me prioritet të lartë ose mesatar një veprim me përgjegjës, dhe vlerësoje rreshtin përsëri kur veprimi të jetë kryer.",
+      ],
+      get: "Prioriteti i veprimit (AIAG-VDA) dhe RPN-ja e çdo rreshti, një hartë nxehtësie e rëndësisë kundrejt shpeshtësisë, dhjetë rreziqet kryesore, dhe RPN-ja para dhe pas veprimeve. [[Add open actions to the Action Tracker]], printoje në A3 ose A4, ose shkarkoje si CSV ose Excel.",
+      data: "Fleta mbetet në këtë shfletues. [[Save the sheet (.json)]] ruan një kopje që mund ta hapësh përsëri në një pajisje tjetër.",
+    },
+    "/tools/process-lab/": {
+      when: "Kur mat një gjë në një kohë, minuta, sekonda, pesha, dhe duhet të dish nëse procesi është i qëndrueshëm, nëse është i aftë, apo nëse ndryshoi vërtet.",
+      how: [
+        "Ngjit një kolonë matjesh, ose një datë dhe një vlerë për rresht, dhe thuaj çfarë matet dhe me cilën njësi.",
+        "Shto kufijtë e specifikimit, LSL dhe USL, dhe një objektiv nëse e ke.",
+        "Te [[Before / after]], krahaso dy shkallë defektesh ose dy grupe matjesh.",
+        "Te [[How many to measure]], gjej sa matje të duhen për të parë ndryshimin që kërkon.",
+      ],
+      get: "Një kartë I-MR me rregullat e Nelson-it, histogrami kundrejt specifikimit, Cp, Cpk dhe PPM, dhe nëse një ndryshim është i vërtetë apo zhurmë, çdo shifër me një fjali që thotë çfarë do të thotë. [[Add the signal to actions]], ose shkarkoje si CSV ose Excel.",
+      data: "Shifrat e tua mbeten në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/time-study/": {
+      when: "Te linja, me kronometër, para se ta balancosh punën përsëri ose ta shkruash standardin.",
+      how: [
+        "Shkruaj kërkesën dhe minutat në dispozicion për turn: mjeti jep taktin.",
+        "Shto stacionet sipas rrjedhës, secilin me elementet e veta, të shënuara VA, NVA ose W.",
+        "Shtyp [[Start timing]] dhe [[Lap]], ose tastin e hapësirës, në fund të çdo elementi. Mat të paktën tre cikle për stacion; pesë është më mirë.",
+        "Lexo Yamazumi-n kundrejt taktit dhe lëvizjet për balancim.",
+      ],
+      get: "Koha standarde e çdo elementi me shpërndarjen e saj, një Yamazumi i çdo stacioni kundrejt taktit, sa nga koha është humbje, pengesa dhe elementi i parë për t'u zhvendosur. [[Add the balance moves as actions]], ose shkarko kohët standarde si CSV ose Excel.",
+      data: "Stacionet dhe matjet mbeten në këtë shfletues. Matjet mund edhe të shkruhen ose të ngjiten.",
+    },
+    "/tools/value-stream-map/": {
+      when: "Kur koha e kalimit është e gjatë dhe duhet të shohësh ku shkon, nga furnitori te klienti.",
+      how: [
+        "Emërto familjen e produktit ose të shërbimit, kërkesën e klientit në ditë dhe minutat e punës.",
+        "Shtyp [[Fill the steps]] nga një model, ose shtoji hapat vetë: koha e ciklit, ndërrimi, disponueshmëria, rendimenti dhe operatorët.",
+        "Ec përgjatë rrjedhës dhe numëro copat që presin para çdo hapi: mjeti i kthen në kohë.",
+        "Kalo te [[Future state]], ndrysho atë që ndryshojnë përmirësimet dhe shkruaje çdo ndryshim si një shpërthim kaizen.",
+      ],
+      get: "Harta me shkallën e kohës së kalimit, pjesa e kohës së kalimit që është punë, takti dhe hapat mbi të, gjendja aktuale dhe ajo e ardhshme. [[Send kaizen bursts to the Action Tracker]], ose shkarkoje si CSV ose Excel.",
+      data: "Harta mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/standard-work/": {
+      when: "Kur një punë duhet bërë njësoj në çdo turn, dhe një person i ri duhet të mund ta mësojë.",
+      how: [
+        "Nis nga një model me [[Use this template]], ose përshkruaj punën: titullin, procesin, zonën, përgjegjësin, taktin ose kohën e synuar, mjetet mbrojtëse dhe veglat.",
+        "Shkruaj me radhë hapat kryesorë, secilin me pak fjalë, me kohën e vet.",
+        "Shto pikat kyçe që e bëjnë ose e prishin çdo hap, të shënuara Siguria, Cilësia, Teknika ose Kostoja, secilën me arsyen e vet.",
+        "Lexo [[Quality check]]. Kur puna ndryshon, nis një [[New version]] dhe shkruaj çfarë ndryshoi.",
+      ],
+      get: "Një fletë e ndarjes së punës me kohën e çdo hapi kundrejt taktit dhe historikun e ndryshimeve, për ta printuar, kopjuar si tekst ose [[Download Word]]. [[Train the team on it]] e vendos trajnimin te Lista e veprimeve; [[Audit this standard]] hap Auditin 5S.",
+      data: "Çdo standard ruhet në këtë shfletues ndërsa shkruan, në një listë ku mund ta hapësh, ta kopjosh ose ta fshish.",
     },
     "/tools/six-sigma-dmaic/": {
       when: "Kur një përmirësim është projekt, jo rregullim i shpejtë.",
       how: [
-        "Kalo nëpër Define, Measure, Analyse, Improve dhe Control. Çdo hap ka rezultatin e vet, idetë kryesore, gabimet e zakonshme, një rast real dhe [[Check yourself]].",
+        "Kalo nëpër Define, Measure, Analyse, Improve dhe Control. Çdo hap ka rezultatin e vet, idetë kryesore, gabimet e zakonshme, një rast real, mjetet që i përkasin dhe [[Check yourself]].",
         "Lexo tetë llojet e humbjeve dhe fjalorthin.",
         "Plotëso kartën e projektit, ose shtyp [[Fill with the course case]] për të parë një shembull.",
       ],
@@ -652,7 +1083,7 @@ const sq = {
 
 const de = {
   title: "Der Werkzeug-Leitfaden",
-  subtitle: "Vierzehn kostenlose Tools für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
+  subtitle: "Dreißig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
   edition: `Ausgabe ${EDITION} · Oktober 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -664,6 +1095,7 @@ const de = {
     open: "Öffnen",
     tools: "Die Tools",
     routine: "Eine Routine",
+    routineNote: "Wo jedes Tool in die Arbeit dieser Rolle passt, Schritt für Schritt.",
     learn: "Kurs",
     page: "Seite",
     planet: "Der Planet",
@@ -673,9 +1105,9 @@ const de = {
   sections: {
     about: {
       kicker: "Über diesen Leitfaden",
-      title: "Vierzehn Tools, vier Planeten, eine Idee",
+      title: "Dreißig Tools, vier Planeten, eine Idee",
       body: [
-        "Stiven Catalyst hat vierzehn kostenlose Tools für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
+        "Stiven Catalyst hat dreißig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
         "Dieser Leitfaden erklärt, wie die Tools geordnet sind, warum die Website so aussieht, wie sie aussieht, und wie Sie jedes Tool Schritt für Schritt nutzen. Sie müssen ihn nicht der Reihe nach lesen: Suchen Sie Ihren Planeten und fangen Sie dort an.",
         { cards: [
           { title: "Kostenlos", text: "Jedes Tool ist kostenlos." },
@@ -730,12 +1162,27 @@ const de = {
         "Die Idee hinter den Tools ist einfach: Tools aus der Arbeit vor Ort, die nichts brauchen außer einem Browser. Keine Installation, kein Konto, kein Server, der Ihre Daten aufbewahrt.",
         "Mehr als einzelne Rechner sind sie, weil sie sich die Arbeit gegenseitig weitergeben, in Ihrem Browser:",
         { list: [
-          "Die Protokolle für Schäden, Vollständigkeit und Verspätungen speisen Shift Pulse, und die Schichtübergabe holt ihre Zahlen mit [[Fill in from the logs]].",
-          "Jedes Ergebnis eines Protokolls geben Sie mit einem Klick weiter: [[Take it to 5 Whys]], [[Open in Pareto 80/20]] oder [[Open as control chart]].",
-          "Der CX Control Tower gibt seine Grundursachen an Pareto 80/20 weiter.",
+          "Die Protokolle für Schäden, Vollständigkeit und Verspätungen speisen Shift Pulse und das Tagesboard, und die Schichtübergabe holt ihre Zahlen mit [[Fill in from the logs]].",
+          "Jedes Ergebnis eines Protokolls geben Sie mit einem Klick weiter: [[Take it to 5 Whys]], [[Open in Pareto 80/20]], [[Open as control chart]] oder [[Add to actions]].",
+          "5 Whys gibt seine Gegenmaßnahme an die Maßnahmenliste weiter oder nimmt sie in die Schichtübergabe auf.",
+          "Der CX Control Tower und die Fischgräte geben ihre Ursachen an Pareto 80/20 weiter; der A3-Report übernimmt das Pareto-Ergebnis und das Arbeitsblatt von 5 Whys.",
           "Das Anschreiben übernimmt Ihre Angaben aus dem Lebenslauf-Generator oder dem ATS-Lebenslauf.",
         ] },
         "Und auf jeder Rollenseite macht ein Coaching-Bereich aus den Tools eine Praxis: ein Projekt mit Ziel, Messung und Termin für die Überprüfung. Mehr dazu auf den letzten Seiten.",
+      ],
+    },
+    machine: {
+      kicker: "Die Idee, 4",
+      title: "Eine Liste, ein Arbeitsplatz",
+      body: [
+        "Sechzehn der Tools sind als ein System für den Alltag vor Ort gebaut, vom Huddle bis zum Standard. Drei Dinge halten sie zusammen, alle in Ihrem Browser:",
+        { list: [
+          "Eine Liste für alle Maßnahmen. Eine Gegenmaßnahme aus 5 Whys, ein Befund des 5S-Audits, ein Signal des Prozesslabors: Jedes wird eine Maßnahme in der Maßnahmenliste, mit Verantwortlichem, Termin, Status und der Art, wie sie geprüft wird. Ein Tool übergibt sie einmal, nie doppelt.",
+          "Ein Arbeitsplatzprofil. Standort, Schichten, Bereiche mit ihren Verantwortlichen, Teams und Ziele tragen Sie einmal ein, im Tagesboard, im 5S-Audit, im Gemba Walk oder in der Qualifikationsmatrix, und jedes Tool, das sie braucht, bietet sie an. Ohne Profil arbeitet jedes Tool mit dem, was Sie dort eingeben.",
+          "Eine Art von Diagramm. Zeigen oder tippen Sie auf ein Diagramm, um seine Werte zu lesen, und laden Sie es als SVG oder PNG in Druckfarben herunter.",
+        ] },
+        "Ein Tag mit ihnen: die Protokolle und das Sicherheitskreuz während der Schicht, das Tagesboard beim Huddle, ein Gemba Walk oder ein 5S-Audit vor Ort und einmal pro Woche zehn Minuten mit der Maßnahmenliste: zuerst das Überfällige, dann diese Woche, dann das Bestätigte.",
+        { note: "Die Maßnahmenliste und das Arbeitsplatzprofil sind in jeder Sprache der Website dieselben; alles andere wird je Sprache getrennt gespeichert." },
       ],
     },
     data: {
@@ -745,8 +1192,9 @@ const de = {
         "Jedes Tool speichert Ihre Arbeit nur in dem Browser, den Sie benutzen. Sie wird nirgendwohin geschickt, und das heißt auch: Sie ist nicht auf Ihrem Handy, wenn Sie am Laptop gearbeitet haben.",
         "Um alles zu sichern oder auf ein anderes Gerät zu bringen, nutzen Sie [[Save all my work]] am Ende jeder Tool-Seite: eine Datei mit der Arbeit aller Tools. [[Open a saved file]] holt sie zurück und ersetzt nur die Tools, die in dieser Datei stehen.",
         { list: [
-          "Die meisten Tools lassen sich drucken oder als PDF speichern, und die Protokolle als CSV für Excel herunterladen.",
-          "Die Protokoll-Tools führen für jede Sprache der Website ein eigenes Protokoll.",
+          "Die meisten Tools lassen sich drucken oder als PDF speichern, und die Protokolle als CSV und als Excel herunterladen.",
+          "Jedes Tool speichert seine Arbeit für jede Sprache der Website getrennt, außer der Maßnahmenliste und dem Arbeitsplatzprofil.",
+          "Ein Tool, das Sie einmal geöffnet haben, öffnet sich auch ohne Verbindung wieder, und die Website lässt sich als App installieren.",
           "Wenn der Browser nicht speichern kann, sagt das Tool es: Laden Sie die CSV herunter oder kopieren Sie die Zusammenfassung, um Ihre Arbeit zu behalten.",
           "Wenn Sie die Browserdaten löschen, löschen Sie auch Ihre Arbeit. Sichern Sie vorher eine Datei.",
         ] },
@@ -770,12 +1218,12 @@ const de = {
       ],
     },
     next: {
-      kicker: "Ausgabe 2",
+      kicker: "Ausgabe 3",
       title: "Was als Nächstes kommen könnte",
       body: [
         "Ideen, über die ich nachdenke, keine Versprechen mit Datum. Sagen Sie mir, welche Ihnen am meisten helfen würde.",
         { list: [
-          "Schnellere Tool-Seiten: kleinere Skripte, damit die Tools auf dem Handy schneller öffnen.",
+          "Das Arbeitsplatzprofil in jedem Tool, damit Standort, Schichten und Ziele nur einmal eingetragen werden.",
           "Die Verspätungsanalyse für Touren ohne erfasste Abfahrtszeit.",
           "Ein gemeinsamer Bereich für einen Coach und ein Team, aber nur mit echten Konten und Zugriffskontrolle, denn das Versprechen dieser Tools ist, dass Ihre Daten Ihre bleiben.",
         ] },
@@ -788,9 +1236,9 @@ const de = {
     },
   },
   families: {
-    pulse: "Fünf Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, die Schicht in einem Bild sehen und sauber übergeben.",
-    zenith: "Drei Tools für einen Bereich: die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, und mit den Ursachen anfangen, die am meisten wiegen.",
-    lumen: "Drei Tools für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, und eine Verbesserung als Projekt führen.",
+    pulse: "Zehn Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, den Bereich sicher und in Ordnung halten, das Huddle führen, die Schicht in einem Bild sehen und sauber übergeben, mit jeder Maßnahme auf einer Liste.",
+    zenith: "Neun Tools für einen Bereich: die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, mit den Ursachen anfangen, die am meisten wiegen, ein Problem auf ein Blatt bringen und die Ideen und Fähigkeiten des Teams vor Ort wachsen lassen.",
+    lumen: "Acht Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, Risiken bewerten, den Fluss messen und abbilden, den Standard schreiben und eine Verbesserung als Projekt führen.",
     atlas: "Drei Tools für die nächste Rolle: ein gestalteter Lebenslauf, ein Lebenslauf, den Bewerbungssoftware richtig liest, und ein Anschreiben, das dazu passt.",
   },
   tools: {
@@ -802,8 +1250,8 @@ const de = {
         "Lesen Sie die Karten und die Hinweise.",
         "Öffnen Sie den Trend jeder Zahl.",
       ],
-      get: "Ein Blick auf das, was die Protokolle für Schäden, Vollständigkeit, Verspätungen und Übergaben in diesem Browser enthalten: Karten und ein Trend für jede Zahl, mit dem Hinweis [[Above usual]] nur jenseits der Grenze der Regelkarte für ihr übliches Niveau, zum Kopieren, Drucken oder als PDF.",
-      data: "Es speichert nur Ihre Einstellungen. Die anderen Protokolle liest es und ändert nichts daran.",
+      get: "Ein Blick auf das, was die Protokolle für Schäden, Vollständigkeit, Verspätungen und Übergaben in diesem Browser enthalten, dazu das Sicherheitskreuz, die OEE, die offenen Maßnahmen und das letzte 5S-Audit, sobald sie Daten haben: Karten und ein Trend für jede Zahl, mit dem Hinweis [[Above usual]] nur jenseits der Grenze der Regelkarte für ihr übliches Niveau, zum Kopieren, Drucken oder als PDF.",
+      data: "Es speichert nur Ihre Einstellungen. Die anderen Tools liest es und ändert nichts daran.",
     },
     "/tools/damage-control/": {
       when: "Jedes Mal, wenn eine Einheit beschädigt wird, an der Stelle im Prozess, an der es passiert.",
@@ -813,7 +1261,7 @@ const de = {
         "Prüfen Sie das Protokoll. Um das Tool erst auszuprobieren, laden Sie eine Beispielwoche.",
         "Gehen Sie den [[Floor check]] durch.",
       ],
-      get: "Schadensquote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Schäden, die Prozessschritte, an denen sie entstehen, ein Trend und wo Sie anfangen. Als CSV herunterladen oder weiter zu 5 Whys, Pareto 80/20 oder einer Regelkarte.",
+      get: "Schadensquote, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Schäden, die Prozessschritte, an denen sie entstehen, ein Trend und wo Sie anfangen. Als CSV oder Excel herunterladen oder weiter zu 5 Whys, Pareto 80/20, einer Regelkarte oder der Maßnahmenliste.",
       data: "Das Protokoll bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
     },
     "/tools/incomplete-control/": {
@@ -835,19 +1283,74 @@ const de = {
         "Prüfen Sie das Protokoll.",
         "Gehen Sie den [[Floor check]] durch.",
       ],
-      get: "Pünktlichkeitsquote, jede verspätete Minute aufgeteilt in Rampe und Straße, die Gründe, die Abfahrtszeiten und Schichten hinter den Verspätungen, und ein Trend.",
+      get: "Pünktlichkeitsquote, jede verspätete Minute aufgeteilt in Rampe und Straße, die Gründe, die Abfahrtszeiten und Schichten hinter den Verspätungen, und ein Trend, mit denselben Exporten und nächsten Schritten wie die Schadenskontrolle.",
+      data: "Das Protokoll bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/night-audit/": {
+      when: "Jede Nacht, für jeden No-Show, jede abgelehnte Karte, jeden Buchungsfehler und jeden offenen Saldo, den das Audit findet.",
+      how: [
+        "Erfassen Sie jede Abweichung: Datum, Schicht, die Phase des Aufenthalts, in der sie gefunden wurde, Art, Ursache und betroffene Reservierungen, dazu Kosten und eine Notiz, wenn Sie sie haben. Zeilen aus dem PMS oder aus Excel fügen Sie mit [[Import rows]] ein.",
+        "Legen Sie den Zeitraum fest: die bearbeiteten Reservierungen und Ihr Ziel.",
+        "Prüfen Sie das Protokoll. Um das Tool erst auszuprobieren, laden Sie eine Beispielwoche.",
+        "Gehen Sie den [[Floor check]] des Audit-Standards durch.",
+      ],
+      get: "Abweichungsquote und saubere Reservierungen, DPMO und Sigma-Niveau, die wenigen Ursachen hinter den meisten Abweichungen und die Phase des Aufenthalts, in der sie beginnen, mit denselben Exporten und nächsten Schritten wie die Schadenskontrolle. Die Hotel-Übergabe übernimmt die No-Shows von hier.",
       data: "Das Protokoll bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
     },
     "/tools/shift-handover/": {
       when: "Am Ende jeder Schicht. Die meisten Probleme gehen nicht in der Schicht verloren, sondern zwischen den Schichten.",
       how: [
         "Wählen Sie eine Vorlage: Lager, Hotel-Rezeption oder Zustellstation. Tragen Sie Datum, Schicht, Bereich und beide Namen ein.",
-        "Tragen Sie die Zahlen ein. [[Fill in from the logs]] übernimmt sie aus Schäden, Vollständigkeit und Verspätungen.",
+        "Tragen Sie die Zahlen ein. [[Fill in from the logs]] übernimmt sie aus Schäden, Vollständigkeit und Verspätungen; die Hotel-Vorlage übernimmt die No-Shows aus dem Night-Audit-Protokoll.",
         "Listen Sie die offenen Punkte auf, jeden mit Verantwortlichem und Uhrzeit. Ergänzen Sie Hinweise, Sicherheit und Personal.",
         "Machen Sie den Übergabe-Check.",
       ],
-      get: "Eine Ansicht [[Ready to hand over]] zum Kopieren, Drucken oder als PDF, die Sie über Ihren eigenen Kanal verschicken. [[Close shift, start the next]] nimmt die offenen Punkte mit und zählt, wie oft sie übergeben wurden. Frühere Übergaben bleiben in einem Verlauf.",
+      get: "Eine Ansicht [[Ready to hand over]] zum Kopieren, Drucken oder als PDF, die Sie über Ihren eigenen Kanal verschicken. [[Close shift, start the next]] nimmt die offenen Punkte mit und zählt, wie oft sie übergeben wurden; ein offener Punkt geht weiter an 5 Whys oder die Maßnahmenliste. Frühere Übergaben bleiben in einem Verlauf.",
       data: "Die Übergabe bleibt in diesem Browser. Nichts wird gesendet.",
+    },
+    "/tools/action-tracker/": {
+      when: "Wenn ein Tool Ihnen etwas zu tun gibt, und einmal pro Woche: eine Liste für jede Gegenmaßnahme, jeden Befund und jedes Signal.",
+      how: [
+        "Schreiben Sie die Maßnahme mit einem Verb, mit Verantwortlichem, Termin und woran Sie merken, dass sie gewirkt hat. Oder schicken Sie sie aus einem anderen Tool: Sie kommt mit ihrer Quelle an.",
+        "Führen Sie sie von offen über in Arbeit und erledigt bis bestätigt: wenn die Zahl sich bewegt hat und geblieben ist.",
+        "Filtern Sie nach Status, nach Verantwortlichem oder nach dem Tool, aus dem sie kommt.",
+        "Halten Sie das Wochenreview: Überfälliges zuerst, dann diese Woche, dann das Bestätigte. [[Copy the review]] für die Besprechung.",
+      ],
+      get: "Die Woche in Maßnahmen: was überfällig ist und wer es trägt, die Abschlüsse pro Woche, die Termine im Monatskalender und das Review zum Kopieren oder Drucken. Die Liste gibt es als CSV, als Excel oder als [[Calendar file (.ics)]] mit jedem offenen Termin.",
+      data: "Die Liste bleibt in diesem Browser, in jeder Sprache dieselbe. Eine Maßnahme aus einem Tool wird einmal übernommen, nie doppelt.",
+    },
+    "/tools/daily-board/": {
+      when: "Zu Beginn jeder Schicht, für ein Huddle von zehn Minuten im Stehen.",
+      how: [
+        "Füllen Sie einmal das [[Workplace profile]] aus: Standort, Schichten, Bereiche mit ihren Verantwortlichen und die Ziele, nach denen sich das Board färbt.",
+        "Lassen Sie die Protokolle in diesem Browser Sicherheit, Qualität und Lieferung färben: das Sicherheitskreuz, das 5S-Audit, die Schadenskontrolle, die Vollständigkeitskontrolle, das Night-Audit-Protokoll und die Verspätungsanalyse.",
+        "Markieren Sie Kosten und Menschen von Hand mit [[Add to the board]]. Ein Eintrag von Hand geht für diesen Tag den Protokollen vor.",
+        "Lesen Sie die [[Huddle agenda]] vor: das Board von gestern, die überfälligen und heute fälligen Maßnahmen, die weitergegebenen Übergabepunkte und die Sicherheitsbotschaft des Tages.",
+      ],
+      get: "Sicherheit, Qualität, Lieferung, Kosten und Menschen als fünf Monatskalender mit grünen, gelben und roten Tagen, die roten Tage je Buchstabe gegenüber dem Vormonat und die Tagesordnung zum Kopieren oder Drucken. Ein roter Tag geht mit [[Add to actions]] oder [[Take it to 5 Whys]] weiter.",
+      data: "Ihre Einträge von Hand bleiben in diesem Browser und lassen sich als CSV oder Excel herunterladen. Das Board liest die anderen Protokolle und ändert nichts daran.",
+    },
+    "/tools/five-s-audit/": {
+      when: "An einem festen Wochentag, in denselben Bereichen und in derselben Reihenfolge, um zu sehen, ob die Ordnung vor Ort hält.",
+      how: [
+        "Wählen Sie 5S, 6S oder 8S, eine Checkliste für Lager, Hotel oder Zustellstation, den Bereich und das Datum.",
+        "Gehen Sie durch den Bereich und bewerten Sie jede Frage so, wie Sie es jetzt sehen, von 0, nichts vorhanden, bis 4, voller Standard. Notieren Sie, was Sie bei 2 oder weniger sehen.",
+        "Klicken Sie auf [[Save audit]] und geben Sie dann mit [[Add findings to actions]] jedem Befund einen Verantwortlichen in der Maßnahmenliste.",
+        "Erfassen Sie im [[Red tag register]], was dort vielleicht nicht hingehört, mit Grund, Entscheidung und Verantwortlichem.",
+      ],
+      get: "Ein Radar jedes S gegenüber dem letzten Audit des Bereichs, der Trend und eine Rangliste der Bereiche, die schwächsten Fragen und die offenen Roten Karten nach Alter. Drucken Sie mit [[Print scorecard]], oder laden Sie Audits und Rote Karten als CSV oder Excel herunter.",
+      data: "Die Audits und die Roten Karten bleiben in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/safety-cross/": {
+      when: "Am Tag, an dem es passiert: jeder Unfall, jede Erste Hilfe, jeder Beinahe-Unfall, jeder unsichere Zustand und jede unsichere Handlung, auch die positiven Beobachtungen.",
+      how: [
+        "Erfassen Sie jedes Ereignis: Datum, Schicht, Art, Bereich, was passiert ist, die Ursache und den Schweregrad als Potenzial, nicht als Folge, mit einer Maßnahme und einem Verantwortlichen. Zeilen lassen sich importieren.",
+        "Tragen Sie die Arbeitsstunden des Monats für LTIFR und TRIR ein und, wenn Sie möchten, ein Ziel für gemeldete Beinahe-Unfälle und für Tage ohne Unfall.",
+        "Lesen Sie das Kreuz des Monats, dann die Ursache, mit der Sie anfangen.",
+        "Sprechen Sie das Thema des Tages in der Besprechung an und klicken Sie dann auf [[Mark as held]].",
+      ],
+      get: "Der Monat als grünes Kreuz mit einem roten oder gelben Tag für jedes Ereignis, die Tage seit dem letzten Unfall, LTIFR, TRIR, die Bird-Pyramide und die Bereiche, in denen die Ereignisse passieren. [[Send open actions to the Action Tracker]], oder geben Sie die wichtigste Ursache an 5 Whys oder Pareto 80/20 weiter.",
+      data: "Das Protokoll bleibt in diesem Browser und lässt sich als CSV oder Excel herunterladen. Nichts wird gesendet oder hochgeladen.",
     },
     "/tools/cx-control-tower/": {
       when: "Jede Woche, um vom Ergebnis beim Kunden zum operativen Treiber, zur Grundursache und zu einer geprüften Maßnahme zu kommen.",
@@ -868,7 +1371,7 @@ const de = {
         "Bewerten Sie zehn Aussagen.",
         "Klicken Sie auf [[See the result]].",
       ],
-      get: "Die Ursache, die am besten passt (Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung), mit drei ersten Schritten und einer [[Question for the floor]]; wenn keine einzelne Ursache heraussticht, der Rat, sich die Arbeit vor Ort anzusehen. In jedem Fall ein Wert für jede Ursache.",
+      get: "Die Ursache, die am besten passt (Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung), mit drei ersten Schritten und einer [[Question for the floor]]; wenn keine einzelne Ursache heraussticht, der Rat, sich die Arbeit vor Ort anzusehen. In jedem Fall ein Wert für jede Ursache, den Sie an 5 Whys oder die Maßnahmenliste weitergeben können.",
       data: "Nichts, was Sie eingeben, wird gespeichert oder gesendet.",
     },
     "/tools/pareto/": {
@@ -881,6 +1384,72 @@ const de = {
       ],
       get: "Ein geprüftes Pareto-Diagramm, in dem jede Zeile mitgezählt ist, [[Where to start]], und Exporte als PNG, SVG und CSV.",
       data: "Dateien werden im Browser gelesen, auch Excel. Bis zu 20.000 Zeilen werden gespeichert.",
+    },
+    "/tools/a3-report/": {
+      when: "Wenn ein Problem ein Blatt verdient: die Fakten, das Ziel, die Ursache und die Nachverfolgung, vereinbart, bevor jemand anfängt.",
+      how: [
+        "Klicken Sie auf [[New A3]] und tragen Sie Titel, Verantwortlichen und Datum ein.",
+        "Füllen Sie die sieben Felder der Reihe nach: Hintergrund, Ist-Zustand mit seiner Kennzahl, Soll-Zustand mit Termin, Ursachenanalyse, Maßnahmen mit je einem Verantwortlichen, Umsetzung und Wirksamkeitsprüfung.",
+        "Übernehmen Sie, was Sie schon haben: [[Read the Pareto result]] für den Ist-Zustand, [[Take from 5 Whys]] für die Grundursache.",
+        "Lesen Sie die [[Quality check]] und klicken Sie dann auf [[Send countermeasures to the Action Tracker]].",
+      ],
+      get: "Ein Blatt mit der Lücke zwischen Ausgangswert, Ziel und letztem Wert und einer Prüfung des Blatts selbst in acht Punkten. Drucken Sie es auf A3 oder A4, kopieren Sie es als Text, oder nutzen Sie [[Download Word]].",
+      data: "Jeder A3-Report wird beim Tippen in diesem Browser gespeichert, in einer Liste, in der Sie ihn öffnen, duplizieren oder löschen können.",
+    },
+    "/tools/kaizen-board/": {
+      when: "Jede Woche, um die Ideen des Teams zu sammeln und jeder innerhalb der Woche eine Antwort zu geben.",
+      how: [
+        "Schreiben Sie die Idee auf, was sie beseitigt, den Bereich und wer sie vorgeschlagen hat, bewerten Sie Aufwand und Nutzen von 1 bis 5, ergänzen Sie eine Einsparung, wenn Sie sie kennen, und klicken Sie auf [[Add to the board]].",
+        "Führen Sie jede Karte über Planen, Umsetzen und Prüfen bis Eingeführt, oder verwerfen Sie sie mit einem Grund, den die Person lesen kann.",
+        "Fangen Sie mit den schnellen Erfolgen an: wenig Aufwand, viel Nutzen, oben links in der Matrix.",
+        "Eine große Idee geht mit [[Take to A3]] weiter; den nächsten Schritt einer Karte übernimmt [[Add to actions]] in die Maßnahmenliste.",
+      ],
+      get: "Das Board mit den Tagen, die jede Karte gewartet hat, die offenen Ideen nach Priorität, die Einführungsquote, die Tage von der Idee bis zur Einführung, die Einsparungen pro Monat und pro Jahr und die Idee des Monats. Als CSV oder Excel herunterladen.",
+      data: "Das Board bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/skills-matrix/": {
+      when: "Bevor Sie Dienstplan oder Schulung planen, um zu sehen, welche Aufgaben an einer einzigen Person hängen.",
+      how: [
+        "Benennen Sie das Team und klicken Sie auf [[Load the tasks]] einer Vorlage, Lager, Hotel-Rezeption oder Zustellstation, jede Aufgabe mit Kritikalität, Mindeststufe und Ziel.",
+        "Fügen Sie die Personen mit ihrer Schicht hinzu.",
+        "Bewerten Sie jede Person für jede Aufgabe, gemeinsam mit ihr, von 0, nicht geschult, bis 4, kann schulen. Ein Klick hebt die Stufe um eins.",
+        "Mit [[Suggest a plan]] bekommt jede Person in Einarbeitung eine Stufe 4 derselben Aufgabe zur Seite, die kritischsten Lücken zuerst. Dann klicken Sie auf [[Send plan to the Action Tracker]].",
+      ],
+      get: "Die Abdeckung gegenüber dem Ziel für jede Aufgabe und Schicht, die Einzelabhängigkeiten, wer unter einer Mindeststufe liegt, der Flexibilitätsindex und, mit [[Take a snapshot]] jeden Monat, ob die Schulung wirkt. Matrix und Plan lassen sich als CSV oder Excel herunterladen.",
+      data: "Die Matrix bleibt in diesem Browser. [[Anonymise names]] zeigt jede Person als Nummer, auf der Seite und in den Exporten.",
+    },
+    "/tools/oee/": {
+      when: "In jeder Schicht, für die Anlage oder die Linie, die den Takt vorgibt.",
+      how: [
+        "Legen Sie jede Anlage mit ihrer idealen Leistung laut Typenschild an, oder mit ihrer idealen Taktzeit, und klicken Sie auf [[Save machine]].",
+        "Erfassen Sie eine Schicht: die geplanten Minuten, die Stopps mit Grund und Minuten, die gefertigten Teile und den Ausschuss. Zeilen lassen sich importieren.",
+        "Geplante Stopps wie Pausen, Besprechungen oder fehlende Aufträge werden von der geplanten Zeit abgezogen.",
+        "Wählen Sie eine Anlage oder alle, und den Zeitraum.",
+      ],
+      get: "Verfügbarkeit, Leistung, Qualität und OEE je Anlage, die sechs großen Verluste Tag für Tag, die häufigsten Stoppgründe und der Verlust, den Sie zuerst angehen, mit einer [[Question for the floor]]. Kopieren oder drucken, oder weiter zu 5 Whys, Pareto 80/20 oder der Maßnahmenliste.",
+      data: "Die Anlagen und das Protokoll bleiben in diesem Browser und lassen sich als CSV oder Excel herunterladen.",
+    },
+    "/tools/hotel-kpis/": {
+      when: "Jeden Morgen, mit den Zahlen der letzten Nacht aus dem Night Audit oder dem PMS.",
+      how: [
+        "Tragen Sie die Zimmerzahl und das Budget des Monats ein: Auslastung und ADR, und RevPAR, wenn er nicht einfach das Produkt der beiden ist.",
+        "Erfassen Sie jede Nacht: verfügbare und verkaufte Zimmer, Logisumsatz, Anreisen, Abreisen, No-Shows, Walk-ins, Zimmer außer Betrieb, Frühstücksgäste und Beschwerden. Oder fügen Sie den PMS-Export mit [[Import rows]] ein.",
+        "Lesen Sie den Monat bis heute gegenüber dem Budget und wo Sie anfangen.",
+        "Mit [[Copy the morning report]] nehmen Sie den Bericht in die Besprechung mit.",
+      ],
+      get: "Auslastung, ADR und RevPAR gegenüber dem Budget, die Prognose für den Monat, das Muster der Wochentage, die beste und die schwächste Nacht und der Umsatz, der durch No-Shows und Zimmer außer Betrieb verloren ging. Die schwächste Kennzahl geht weiter an 5 Whys oder die Maßnahmenliste.",
+      data: "Das Protokoll bleibt in diesem Browser und lässt sich als CSV oder Excel herunterladen. Eine doppelt erfasste Nacht behält ihre letzten Zahlen.",
+    },
+    "/tools/gemba-walk/": {
+      when: "Dort, wo die Arbeit gemacht wird: die Teamleitung jeden Tag, die Bereichsleitung jede Woche, die Standortleitung jeden Monat.",
+      how: [
+        "Wählen Sie ein Layered Process Audit oder einen Verschwendungsrundgang, die Ebene, eine Checkliste für Lager, Hotel oder Zustellstation und den Bereich.",
+        "Beantworten Sie vor Ort jede Frage mit Ja, Nein oder n. z., oder tippen Sie für jede Verschwendung, die Sie sehen, auf +. Mit [[Start the timer]] wissen Sie, wie lange der Rundgang gedauert hat.",
+        "Klicken Sie auf [[Save walk]] und dann auf [[Add findings to actions]] für jedes Nein, das Sie nicht sofort beheben konnten.",
+        "Legen Sie fest, wie oft jede Ebene geht: Die Ergebnisse markieren eine Ebene, die im Verzug ist.",
+      ],
+      get: "Der Erfüllungsgrad je Woche und Ebene, die am häufigsten verfehlten Fragen und die Bereiche, in denen die Neins liegen, die Verschwendung nach Bereich mit den wenigen wichtigsten, und der nächste Rundgang jeder Ebene. Mit [[Print the walk sheet]] gehen Sie mit Papier.",
+      data: "Die Rundgänge bleiben in diesem Browser und lassen sich als CSV oder Excel herunterladen.",
     },
     "/tools/sigma-control-chart/": {
       when: "Wenn Sie wissen müssen, wie gut ein Prozess ist, und ob ein schlechter Tag eine echte Veränderung oder normales Rauschen ist.",
@@ -901,13 +1470,79 @@ const de = {
         "Benennen Sie die Grundursache: etwas, das Sie ändern können.",
         "Vereinbaren Sie eine Gegenmaßnahme, einen Verantwortlichen, einen Termin und woran Sie merken, dass es gewirkt hat.",
       ],
-      get: "Ein Arbeitsblatt, das Sie drucken, als PDF speichern oder als Text kopieren können. Die Protokoll-Tools können ihr Problem direkt hineinschicken.",
+      get: "Ein Arbeitsblatt, das Sie drucken, als PDF speichern oder als Text kopieren können. Die Protokoll-Tools können ihr Problem direkt hineinschicken, und die Gegenmaßnahme geht mit [[Put the countermeasure on the handover]] oder [[Add the countermeasure to the Action Tracker]] weiter.",
       data: "Das Arbeitsblatt bleibt in diesem Browser.",
+    },
+    "/tools/fishbone/": {
+      when: "Wenn das Team jede mögliche Ursache einer Wirkung sehen muss, bevor es entscheidet, welche es prüft.",
+      how: [
+        "Schreiben Sie die Wirkung an den Kopf des Fisches, als Tatsache, mit der Zahl, wenn Sie sie haben.",
+        "Wählen Sie die Gräten: 6M für Produktion, Lager und Zustellung, 4P für eine Dienstleistung oder die fünf Gräten eines Hotels.",
+        "Füllen Sie jede Gräte mit dem Team, bis zu 12 Ursachen, jede mit ihrem Warum.",
+        "Zählen Sie die Stimmen und markieren Sie die wahrscheinlichen Ursachen, dann lassen Sie sie mit [[Send likely causes to actions]] vor Ort prüfen.",
+      ],
+      get: "Der Fisch in einem Bild, die Ursachen nach Stimmen geordnet, und die wichtigste Ursache bereit für 5 Whys oder alle für Pareto 80/20. [[Copy as outline]], auf einer Seite drucken oder als CSV oder Excel herunterladen.",
+      data: "Ihre Diagramme bleiben in diesem Browser, in einer Liste, in der Sie sie öffnen, duplizieren oder löschen können.",
+    },
+    "/tools/fmea/": {
+      when: "Bevor ein Prozess anläuft oder sich ändert, oder nach einem Fehler, der nicht wiederkommen darf: Bewerten Sie die Risiken, solange sie noch wenig kosten.",
+      how: [
+        "Tragen Sie Prozess, Verantwortlichen, Datum und Revision ein und klicken Sie auf [[Fill the steps]] aus einer Vorlage, oder auf [[+ Add a failure mode]].",
+        "Schreiben Sie für jeden Schritt, wie er versagen kann, die Folge, die Ursache und die Maßnahmen, die Sie heute haben, um es zu vermeiden und zu entdecken.",
+        "Bewerten Sie Bedeutung, Auftreten und Entdeckung von 1 bis 10. Lesen Sie zuerst die Aufgabenpriorität, dann die RPZ.",
+        "Geben Sie jeder Zeile mit hoher oder mittlerer Priorität eine Maßnahme mit Verantwortlichem, und bewerten Sie die Zeile neu, wenn die Maßnahme erledigt ist.",
+      ],
+      get: "Die Aufgabenpriorität (AIAG-VDA) und die RPZ jeder Zeile, eine Heatmap von Bedeutung gegen Auftreten, die zehn größten Risiken und die RPZ vor und nach den Maßnahmen. [[Add open actions to the Action Tracker]], auf A3 oder A4 drucken oder als CSV oder Excel herunterladen.",
+      data: "Das Blatt bleibt in diesem Browser. [[Save the sheet (.json)]] sichert eine Kopie, die Sie auf einem anderen Gerät wieder öffnen können.",
+    },
+    "/tools/process-lab/": {
+      when: "Wenn Sie eine Sache nach der anderen messen, Minuten, Sekunden, Gewichte, und wissen müssen, ob der Prozess stabil ist, ob er fähig ist oder ob er sich wirklich verändert hat.",
+      how: [
+        "Fügen Sie eine Spalte Messwerte ein, oder ein Datum und einen Wert pro Zeile, und sagen Sie, was gemessen wird und in welcher Einheit.",
+        "Ergänzen Sie die Spezifikationsgrenzen LSL und USL und ein Ziel, wenn Sie eines haben.",
+        "Unter [[Before / after]] vergleichen Sie zwei Fehlerquoten oder zwei Reihen von Messwerten.",
+        "Unter [[How many to measure]] finden Sie den Stichprobenumfang, den Sie brauchen, um die gesuchte Veränderung zu sehen.",
+      ],
+      get: "Eine I-MR-Karte mit den Nelson-Regeln, das Histogramm gegen die Spezifikation, Cp, Cpk und PPM, und ob eine Veränderung echt oder Rauschen ist, jede Zahl mit einem Satz, der sagt, was sie bedeutet. [[Add the signal to actions]], oder als CSV oder Excel herunterladen.",
+      data: "Ihre Zahlen bleiben in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/time-study/": {
+      when: "An der Linie, mit der Stoppuhr, bevor Sie die Arbeit neu austakten oder den Standard schreiben.",
+      how: [
+        "Tragen Sie den Bedarf und die verfügbaren Minuten pro Schicht ein: Das Tool errechnet den Takt.",
+        "Legen Sie die Stationen in der Reihenfolge des Flusses an, jede mit ihren Elementen, markiert als VA, NVA oder W.",
+        "Klicken Sie auf [[Start timing]] und am Ende jedes Elements auf [[Lap]] oder die Leertaste. Messen Sie mindestens drei Zyklen pro Station, besser fünf.",
+        "Lesen Sie den Yamazumi gegen den Takt und die Verlagerungen zur Austaktung.",
+      ],
+      get: "Die Standardzeit jedes Elements mit ihrer Streuung, ein Yamazumi jeder Station gegen den Takt, wie viel der Zeit Verschwendung ist, der Engpass und das erste Element, das Sie verlagern. [[Add the balance moves as actions]], oder die Standardzeiten als CSV oder Excel herunterladen.",
+      data: "Die Stationen und die Zeiten bleiben in diesem Browser. Zeiten lassen sich auch eintippen oder einfügen.",
+    },
+    "/tools/value-stream-map/": {
+      when: "Wenn die Durchlaufzeit lang ist und Sie sehen müssen, wo sie bleibt, vom Lieferanten bis zum Kunden.",
+      how: [
+        "Benennen Sie die Produkt- oder Dienstleistungsfamilie, den Kundenbedarf pro Tag und die Arbeitsminuten.",
+        "Klicken Sie auf [[Fill the steps]] aus einer Vorlage, oder legen Sie die Schritte selbst an: Zykluszeit, Rüstzeit, Verfügbarkeit, Ausbeute und Mitarbeitende.",
+        "Gehen Sie den Strom ab und zählen Sie die Teile, die vor jedem Schritt warten: Das Tool rechnet sie in Zeit um.",
+        "Wechseln Sie zum [[Future state]], ändern Sie, was die Verbesserungen ändern, und schreiben Sie jede Änderung als Kaizen-Blitz.",
+      ],
+      get: "Die Karte mit der Zeitleiter der Durchlaufzeit, dem Anteil der Durchlaufzeit, der Arbeit ist, dem Takt und den Schritten darüber, im Ist- und im Soll-Zustand. [[Send kaizen bursts to the Action Tracker]], oder als CSV oder Excel herunterladen.",
+      data: "Die Karte bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/standard-work/": {
+      when: "Wenn eine Arbeit in jeder Schicht gleich gemacht werden muss und eine neue Person sie lernen können soll.",
+      how: [
+        "Beginnen Sie mit einer Vorlage über [[Use this template]], oder beschreiben Sie die Arbeit: Titel, Prozess, Bereich, Verantwortlicher, Takt oder Zielzeit, PSA und Arbeitsmittel.",
+        "Schreiben Sie die Hauptschritte der Reihe nach auf, jeden in wenigen Worten, mit seiner Zeit.",
+        "Ergänzen Sie die Kernpunkte, an denen jeder Schritt gelingt oder scheitert, markiert als Sicherheit, Qualität, Technik oder Kosten, jeden mit seinem Grund.",
+        "Lesen Sie die [[Quality check]]. Wenn sich die Arbeit ändert, beginnen Sie eine [[New version]] und schreiben auf, was sich geändert hat.",
+      ],
+      get: "Eine Arbeitszerlegung mit der Zeit je Schritt gegen den Takt und dem Änderungsverlauf, zum Drucken, zum Kopieren als Text oder über [[Download Word]]. [[Train the team on it]] nimmt die Schulung in die Maßnahmenliste auf; [[Audit this standard]] öffnet das 5S-Audit.",
+      data: "Jeder Standard wird beim Tippen in diesem Browser gespeichert, in einer Liste, in der Sie ihn öffnen, duplizieren oder löschen können.",
     },
     "/tools/six-sigma-dmaic/": {
       when: "Wenn eine Verbesserung ein Projekt ist und keine schnelle Lösung.",
       how: [
-        "Gehen Sie durch Define, Measure, Analyse, Improve und Control. Jeder Schritt hat sein Ergebnis, Kernideen, häufige Fehler, einen echten Fall und [[Check yourself]].",
+        "Gehen Sie durch Define, Measure, Analyse, Improve und Control. Jeder Schritt hat sein Ergebnis, Kernideen, häufige Fehler, einen echten Fall, die Tools, die dazugehören, und [[Check yourself]].",
         "Lesen Sie die acht Verschwendungsarten und das Glossar.",
         "Füllen Sie den Projektauftrag aus, oder klicken Sie auf [[Fill with the course case]], um ein Beispiel zu sehen.",
       ],
@@ -981,8 +1616,45 @@ const system = families.map((item) => {
 // What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
 const editions = [
   {
+    number: 3,
+    date: { en: "24 October 2026", sq: "24 tetor 2026", de: "24. Oktober 2026" },
+    changes: {
+      en: [
+        "Seventeen new tools, each with its page in this guide: the Night Audit Log, and sixteen tools made as one daily system: Action Tracker, Daily Board, 5S Audit, Safety Cross, A3 Report, Kaizen Board, Skills Matrix, OEE, Hotel KPIs, Gemba Walk, Fishbone, FMEA, Process Lab, Time Study, Value Stream Map and Standard Work.",
+        "One list of actions: the logs, the control chart, Pareto 80/20, 5 Whys, the Shift Handover, the KPI Diagnostic and the CX Control Tower send what is to be done to the Action Tracker.",
+        "One workplace profile: Damage Control, Incomplete Control, the Night Audit Log and the Delay Analyzer offer its shifts and use its target when their own box is empty.",
+        "Shift Pulse also shows the Safety Cross, OEE, the open actions and the latest 5S audit, once those tools hold data in this browser.",
+        "5 Whys puts its countermeasure on the Shift Handover, an issue carried three shifts leads to 5 Whys, the KPI Diagnostic takes its result to 5 Whys, and the hotel handover takes its no-shows from the Night Audit Log.",
+        "Every log that downloads a CSV also downloads an Excel file.",
+        "A tool opened once opens again without a connection, and the site can be installed as an app.",
+        "Six Sigma in the Warehouse names, in each step, the tools that belong to it.",
+      ],
+      sq: [
+        "Shtatëmbëdhjetë mjete të reja, secili me faqen e vet në këtë udhëzues: Regjistri i Night Audit dhe gjashtëmbëdhjetë mjete të ndërtuara si një sistem i vetëm për çdo ditë: Lista e veprimeve, Tabela e ditës, Auditi 5S, Kryqi i sigurisë, Raporti A3, Tabela Kaizen, Matrica e aftësive, OEE, KPI-të e hotelit, Gemba Walk, Kurrizi i peshkut, FMEA, Laboratori i procesit, Studimi i kohës, Harta e rrjedhës së vlerës dhe Puna standarde.",
+        "Një listë e vetme veprimesh: regjistrat, karta e kontrollit, Pareto 80/20, 5 Whys, Dorëzimi i turnit, Diagnostikimi i KPI-së dhe CX Control Tower e dërgojnë atë që duhet bërë te Lista e veprimeve.",
+        "Një profil i vetëm i vendit të punës: Kontrolli i dëmeve, Kontrolli i plotësisë, Regjistri i Night Audit dhe Analiza e vonesave ofrojnë turnet e tij dhe përdorin objektivin e tij kur fusha e tyre është bosh.",
+        "Shift Pulse tregon edhe Kryqin e sigurisë, OEE-në, veprimet e hapura dhe auditin e fundit 5S, sapo këto mjete kanë të dhëna në këtë shfletues.",
+        "5 Whys e vendos kundërmasën e vet në Dorëzimin e turnit, një çështje e mbartur tre turne të çon te 5 Whys, Diagnostikimi i KPI-së e çon rezultatin te 5 Whys, dhe dorëzimi i hotelit i merr rastet no-show nga Regjistri i Night Audit.",
+        "Çdo regjistër që shkarkohet si CSV shkarkohet edhe si skedar Excel.",
+        "Një mjet i hapur një herë hapet përsëri edhe pa lidhje, dhe faqja mund të instalohet si aplikacion.",
+        "Six Sigma në magazinë emërton, në çdo hap, mjetet që i përkasin.",
+      ],
+      de: [
+        "Siebzehn neue Tools, jedes mit seiner Seite in diesem Leitfaden: das Night-Audit-Protokoll und sechzehn Tools, die als ein System für den Alltag gebaut sind: Maßnahmenliste, Tagesboard, 5S-Audit, Sicherheitskreuz, A3-Report, Kaizen-Board, Qualifikationsmatrix, OEE, Hotel-Kennzahlen, Gemba Walk, Fischgräte, FMEA, Prozesslabor, Zeitstudie, Wertstromanalyse und Standardarbeit.",
+        "Eine Liste für alle Maßnahmen: Die Protokolle, die Regelkarte, Pareto 80/20, 5 Whys, die Schichtübergabe, die KPI-Diagnose und der CX Control Tower geben, was zu tun ist, an die Maßnahmenliste weiter.",
+        "Ein Arbeitsplatzprofil: Schadenskontrolle, Vollständigkeitskontrolle, das Night-Audit-Protokoll und die Verspätungsanalyse bieten seine Schichten an und nutzen sein Ziel, wenn ihr eigenes Feld leer ist.",
+        "Shift Pulse zeigt auch das Sicherheitskreuz, die OEE, die offenen Maßnahmen und das letzte 5S-Audit, sobald diese Tools Daten in diesem Browser haben.",
+        "5 Whys nimmt seine Gegenmaßnahme in die Schichtübergabe auf, ein Punkt, der drei Schichten lang weitergegeben wurde, führt zu 5 Whys, die KPI-Diagnose gibt ihr Ergebnis an 5 Whys weiter, und die Hotel-Übergabe übernimmt die No-Shows aus dem Night-Audit-Protokoll.",
+        "Jedes Protokoll, das sich als CSV herunterladen lässt, lässt sich auch als Excel-Datei herunterladen.",
+        "Ein Tool, das Sie einmal geöffnet haben, öffnet sich auch ohne Verbindung wieder, und die Website lässt sich als App installieren.",
+        "Six Sigma im Lager nennt in jedem Schritt die Tools, die dazugehören.",
+      ],
+    },
+  },
+  {
     number: 2,
     date: { en: "14 October 2026", sq: "14 tetor 2026", de: "14. Oktober 2026" },
+    pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-2-${lang}.pdf`,
     changes: {
       en: [
         "Sigma & Control Chart: an example is shown, never saved, and days sent from another tool replace an example still on the chart instead of joining it.",
@@ -1026,7 +1698,8 @@ export default {
   family,
   familyOfTool,
   tool,
-  toolCount: toolLists.en.length,
+  // The tools of every role, without the course: thirty, as the cover says.
+  toolCount: families.reduce((count, item) => count + item.tools.length, 0),
   pageOf: Object.fromEntries(pages.map((id) => [id, pageOf(id)])),
   system,
   en,
