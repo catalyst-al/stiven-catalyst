@@ -9534,6 +9534,81 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
   html.fs-scorecard .fs-results .ck-chart { max-height: 62mm; }
   html.fs-scorecard .fs-results .ck-figure { margin-top: 6px; }
 }
+
+/* ===== 5S Audit, round 2: before and after photos, the audit plan ===== */
+/* Before and after: a link-like button in the log, the register and the weakest questions. */
+.fs-ba-button { margin-left: 8px; }
+.dl-bar > .fs-ba-button { display: inline-block; margin: 6px 0 0; }
+.fs-photo-offer {
+  padding: 0; border: 0; background: none; color: var(--blue); font: inherit; font-weight: 800;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.fs-photo-offer:focus-visible, .fs-ba-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.fs-ba-dialog { width: min(calc(100% - 32px), 1100px); }
+.fs-ba-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.fs-ba-pair { display: grid; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.fs-ba-pair:last-of-type { border-bottom: 0; }
+.fs-ba-pair h3 { margin: 0; font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
+.fs-ba-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.fs-ba-side { display: grid; gap: 6px; margin: 0; min-width: 0; }
+.fs-ba-image { display: block; width: 100%; height: auto; max-height: 56vh; border-radius: 10px; background: var(--paper-2); object-fit: contain; }
+.fs-ba-side figcaption { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.fs-ba-side figcaption strong { color: var(--ink); }
+.fs-ba-change { font-weight: 700; color: var(--ink); }
+.fs-ba-sheet { display: none; }
+@media (min-width: 640px) {
+  .fs-ba-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* The audit plan: one row per area, what follows from it, the month and the week. */
+.fs-plan-rows { display: grid; gap: 14px; min-width: 0; }
+.fs-plan-row { display: grid; gap: 6px; padding-bottom: 14px; border-bottom: 1px dashed var(--line); }
+.fs-plan-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 12px; align-items: end; }
+.fs-plan-grid > .field { grid-column: 1; min-width: 0; }
+.fs-plan-grid > .dl-remove { grid-column: 2; grid-row: 1; align-self: start; }
+.fs-plan-grid .field input, .fs-plan-grid .field select { width: 100%; min-width: 0; }
+.fs-plan-pick { margin-top: 6px; font-size: 14px; }
+.fs-plan-next { margin: 0; font-size: 14px; }
+.fs-plan-next.is-overdue { color: var(--danger); font-weight: 700; }
+.fs-plan [data-plan-status]:empty, .fs-plan [data-plan-count]:empty { display: none; }
+.fs-plan-view { display: grid; gap: 12px; padding-top: 6px; min-width: 0; }
+.fs-plan-view .result-label { margin: 0; }
+.fs-plan-view > .form-note { margin: 0; }
+.fs-due-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fs-due-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.fs-due-list li:last-child { border-bottom: 0; }
+.fs-due-text { min-width: 0; overflow-wrap: anywhere; }
+.fs-due-list li.is-overdue .fs-due-text { color: var(--danger); }
+.fs-due-list li.is-overdue .fs-due-text strong { color: var(--ink); }
+.fs-due-none { color: var(--muted); }
+.fs-month-switch { display: flex; flex-wrap: wrap; gap: 8px; }
+.fs-month-switch button {
+  min-height: 36px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--ink); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.fs-month-switch button[aria-pressed="true"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 16%, transparent); }
+.fs-month-switch button:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.fs-plan-calendar { min-width: 0; overflow-x: auto; }
+.fs-plan-calendar .ck-chart { max-width: 460px; }
+
+@media (min-width: 761px) {
+  .fs-plan-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, 1.6fr) auto; }
+  .fs-plan-grid > .field { grid-column: auto; }
+  .fs-plan-grid > .dl-remove { grid-column: auto; grid-row: auto; align-self: end; }
+}
+
+/* The before and after sheet for the team board: only the pairs, on A4. */
+@media print {
+  html.fs-ba-print body > :not(.fs-ba-sheet) { display: none !important; }
+  html.fs-ba-print .fs-ba-sheet { page: fs-a4; display: block; color: #000; font-size: 12px; }
+  html.fs-ba-print .fs-ba-sheet h1 { margin: 2px 0 10px; font-size: 22px; }
+  html.fs-ba-print .fs-ba-pair { break-inside: avoid; padding: 0 0 8mm; border: 0; }
+  html.fs-ba-print .fs-ba-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6mm; }
+  html.fs-ba-print .fs-ba-image { max-height: 95mm; border-radius: 0; }
+  html.fs-ba-print .fs-ba-side figcaption { color: #000; font-size: 12px; }
+  html.fs-ba-print .fs-ba-foot { margin: 4mm 0 0; color: #555; font-size: 10px; }
+  .fs-plan .tool-actions, .fs-month-switch, .fs-plan-pick, .fs-plan .dl-remove, .fs-due-list button, .fs-photo-offer { display: none !important; }
+}
 /* ===== Daily Board (js/daily-board.js) =====
    Five month calendars (S, Q, D, C, P) side by side where there is room, one under the other on a phone. The state of a
    day is told by its sign (✓ ! ✕) and its words; the colour only repeats it. Printed on one A4 page in landscape. */

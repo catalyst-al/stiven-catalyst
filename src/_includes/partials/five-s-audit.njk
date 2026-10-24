@@ -1,4 +1,4 @@
-{#- The 5S Audit: a scored walk of one area in 5S, 6S or 8S, a log per area, the red tag register; five-s-audit.js does the rest. -#}
+{#- The 5S Audit: a scored walk of one area in 5S, 6S or 8S, a log per area, the red tag register and the audit plan; five-s-audit.js does the rest. -#}
 <section class="shell tool-layout">
   <div class="tool-panel" data-five-s-audit>
     <div class="dl-box fs-setup">
@@ -153,6 +153,36 @@
         <button class="button-secondary" type="button" data-tag-csv>{{ "Download CSV" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-tag-xlsx>{{ "Download Excel" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-tag-clear>{{ "Clear red tags" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box fs-plan">
+      <div class="dl-log-head">
+        <p class="kicker">5 · {{ "Audit plan" | t(lang) }}</p>
+        <p class="form-note" data-plan-count></p>
+      </div>
+      <p class="form-note">{{ "Who audits which area, and how often. The auditors take turns, so nobody audits the same area twice in a row; the next date follows from the last audit in the log." | t(lang) }}</p>
+      <div class="fs-plan-rows" data-plan-rows></div>
+      <p class="dl-empty" data-plan-empty>{{ "No area in the plan yet." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-plan-add>{{ "Add an area to the plan" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-plan-known>{{ "Plan the known areas" | t(lang) }}</button>
+      </div>
+      <p class="form-note dl-log-status" data-plan-status aria-live="polite"></p>
+      <div class="fs-plan-view" data-plan-view hidden>
+        <h3 class="result-label">{{ "Due this week" | t(lang) }}</h3>
+        <p class="form-note">{{ "Overdue audits and those due in the next seven days." | t(lang) }}</p>
+        <ul class="fs-due-list" data-plan-due></ul>
+        <div class="fs-month-switch" role="group" aria-label="{{ 'Month of the calendar' | t(lang) }}">
+          <button type="button" data-plan-month="0" aria-pressed="true">{{ "This month" | t(lang) }}</button>
+          <button type="button" data-plan-month="1" aria-pressed="false">{{ "Next month" | t(lang) }}</button>
+        </div>
+        <div class="fs-plan-calendar" data-plan-calendar></div>
+        <p class="form-note">{{ "Green: audited. Red: overdue, planned for today. The other days with a number are planned; point at a day to see who audits where." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-plan-ics>{{ "Download calendar (.ics)" | t(lang) }}</button>
+        </div>
+        <p class="form-note">{{ "The calendar file holds the next eight weeks of the plan, one all-day entry per audit, for a phone or Outlook." | t(lang) }}</p>
       </div>
     </div>
   </div>

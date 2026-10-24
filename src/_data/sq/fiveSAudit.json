@@ -9,7 +9,9 @@
     "ownerPlaceholder": "p.sh. Besnik",
     "csvAudits": "auditet-5s",
     "csvTags": "etiketat-e-kuqe",
-    "checkText": "Në auditin e ardhshëm 5S kjo pyetje merr ≥ 3"
+    "checkText": "Në auditin e ardhshëm 5S kjo pyetje merr ≥ 3",
+    "auditorsPlaceholder": "p.sh. Anna, Besnik",
+    "icsName": "plani-i-auditeve-5s"
   },
   "scopes": {
     "5S": [
@@ -414,8 +416,17 @@
     [
       "Etiketë e kuqe, jo debat.",
       "Nuk je i sigurt nëse i përket kësaj zone? Vëri etiketë me datë. Vendimi vjen brenda një jave."
+    ],
+    [
+      "Planifikoni auditet.",
+      "Çdo zone jepini një ritëm dhe dy ose tre auditorë që ndërrohen: sytë e rinj shohin atë që ekipi i zonës nuk e sheh më."
     ]
   ],
+  "cadences": {
+    "weekly": "Çdo javë",
+    "biweekly": "Çdo dy javë",
+    "monthly": "Çdo muaj"
+  },
   "example": {
     "template": "warehouse",
     "scope": "6S",
@@ -1291,6 +1302,41 @@
         "owner": "Clara",
         "due": "2026-10-17",
         "done": false
+      }
+    ],
+    "plan": [
+      {
+        "area": "Rampa e pranimit",
+        "cadence": "weekly",
+        "auditors": [
+          "Anna",
+          "Besnik",
+          "Clara"
+        ]
+      },
+      {
+        "area": "Zona e mbledhjes A",
+        "cadence": "biweekly",
+        "auditors": [
+          "Besnik",
+          "Clara"
+        ]
+      },
+      {
+        "area": "Paketimi",
+        "cadence": "weekly",
+        "auditors": [
+          "Clara",
+          "Anna"
+        ]
+      },
+      {
+        "area": "Kthimet",
+        "cadence": "monthly",
+        "auditors": [
+          "Anna",
+          "Besnik"
+        ]
       }
     ]
   }
