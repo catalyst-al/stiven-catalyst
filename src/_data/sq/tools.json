@@ -91,7 +91,7 @@
     "name": "Shift Pulse",
     "type": "Pasqyrë",
     "time": "1 min",
-    "summary": "Dëmet, porositë e paplota, linjat me vonesë dhe çështjet e hapura të dorëzimit në një pamje, sipas ditës ose javës. Grafikë të ecurisë dhe përqindje, sinjalizime për ato mbi normalen dhe një përmbledhje për ta kopjuar ose printuar.",
+    "summary": "Dëmet, porositë e paplota, linjat me vonesë, siguria, OEE, veprimet e hapura dhe dorëzimi në një pamje, sipas ditës ose javës. Grafikë të ecurisë, sinjalizime për ato jashtë normës dhe një përmbledhje për ta kopjuar ose printuar.",
     "url": "/sq/tools/shift-pulse/",
     "cta": "Hap Shift Pulse"
   },

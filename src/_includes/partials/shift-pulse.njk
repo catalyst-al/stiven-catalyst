@@ -1,4 +1,4 @@
-{#- Shift Pulse: the three logs and the open handover in one picture. The page sets `cfg` to the Shift Handover data (shift and priority names) and `damage` and `incomplete` to the data of the two defect logs (their wording); shift-pulse.js does the rest. -#}
+{#- Shift Pulse: the three logs and the open handover in one picture, with cards for Safety Cross, OEE, the Action Tracker and the 5S Audit when they hold data. The page sets `cfg` to the Shift Handover data (shift and priority names), `damage` and `incomplete` to the data of the two defect logs (their wording) and `oeeData` to the OEE data (its stop reasons, for planned stops); shift-pulse.js does the rest. -#}
 <section class="shell tool-layout dl-setup sp-setup">
   <form class="tool-panel" data-shift-pulse novalidate>
     <fieldset class="dl-box">
@@ -32,6 +32,7 @@
       <li><strong>{{ "Log where it happens." | t(lang) }}</strong> {{ "Shift Pulse draws only what Damage Control, Incomplete Control, Delay Analyzer and Shift Handover hold in this browser." | t(lang) }}</li>
       <li><strong>{{ "Read it before the handover." | t(lang) }}</strong> {{ "Look at the flags, then write the handover with an owner and a time for each open issue." | t(lang) }}</li>
       <li><strong>{{ "Add the volume." | t(lang) }}</strong> {{ "With the volume of each day in Damage Control and Incomplete Control, the cards and charts show rates, not only counts." | t(lang) }}</li>
+      <li><strong>{{ "Read the rest of the floor." | t(lang) }}</strong> {{ "Safety Cross, OEE, the Action Tracker and the 5S Audit join as cards once they hold data in this browser." | t(lang) }}</li>
       <li><strong>{{ "Read the weeks." | t(lang) }}</strong> {{ "Choose the last 8 or 12 weeks to read the logs of your shifts week by week." | t(lang) }}</li>
       <li><strong>{{ "Save the pictures." | t(lang) }}</strong> {{ "Each chart can be saved as PNG or SVG for a report or a message to your manager." | t(lang) }}</li>
     </ul>
@@ -45,7 +46,9 @@
   shifts: cfg.shifts,
   priorities: cfg.priorities,
   damage: { many: damage.text.many, volumeLabel: damage.text.volumeLabel, rateLabel: damage.text.rateLabel },
-  incomplete: { many: incomplete.text.many, volumeLabel: incomplete.text.volumeLabel, rateLabel: incomplete.text.rateLabel }
+  incomplete: { many: incomplete.text.many, volumeLabel: incomplete.text.volumeLabel, rateLabel: incomplete.text.rateLabel },
+  oeeReasons: oeeData.reasons if oeeData else []
 } | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-pulse.js' | assetUrl }}" defer></script>
