@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Wartungsplaner
+seo_title: "Wartungsplaner für die vorbeugende Instandhaltung: Fälligkeiten, Prüfpflichten, Störungen, MTBF und PM-Erfüllung je Anlage"
+description: "Planen Sie Wartung und Prüfpflichten je Anlage: was fällig, überfällig und erledigt ist, Störungen mit MTBF und MTTR, Arbeitsliste der Woche und Kalender."
+activeNav: /de/tools.html
+permalink: /de/tools/maintenance-planner/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Anlagen</p>
+  <h1>Wartungsplaner</h1>
+  <p class="lede">Der Plan der vorbeugenden Wartung und der Prüfpflichten für die Anlagen Ihres Standorts: Stapler, Sorter, Förderbänder, Rolltore, Feuerlöscher, Notbeleuchtung, Aufzüge, Küchengeräte. Jede Aufgabe ist nach ihrem Intervall oder ihren Betriebsstunden fällig; erfassen Sie, was erledigt, verschoben oder ausgefallen ist, und sehen Sie, was überfällig ist, wie viel des Plans pünktlich erledigt wurde und welche Anlage am häufigsten steht, mit einer Arbeitsliste für die Woche und einer Kalenderdatei für das Handy.</p>
+</section>
+
+{% set cfg = de.maintenancePlanner %}
+{% include "partials/maintenance-planner.njk" %}

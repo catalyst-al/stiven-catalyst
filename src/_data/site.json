@@ -18,6 +18,9 @@
   "analytics": {
     "cloudflareToken": "51fb88e35e624e8bb98d558b7293a446"
   },
+  "sync": {
+    "endpoint": "https://stiven-catalyst-sync.stivenjanaqi1.workers.dev"
+  },
   "contact": {
     "action": "",
     "provider": "",

@@ -1,0 +1,110 @@
+/* ===== Maintenance Planner (js/maintenance-planner.js) ===== */
+/* Setup: assets and tasks, closed once there is a plan. */
+.mp-setup { padding-block: 0; }
+.mp-setup-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 18px 0; cursor: pointer; list-style: none; }
+.mp-setup-summary::-webkit-details-marker { display: none; }
+.mp-setup-summary::after { content: "+"; margin-left: auto; color: var(--muted); font-weight: 800; }
+.mp-setup[open] > .mp-setup-summary::after { content: "−"; }
+.mp-setup-summary .kicker, .mp-setup-summary .form-note { margin: 0; }
+.mp-setup-summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+.mp-setup-body { display: grid; gap: 22px; padding-bottom: 20px; min-width: 0; }
+.mp-fieldset { display: grid; gap: 12px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.mp-sub { margin: 4px 0 0; padding: 0; font-size: 15px; font-weight: 800; color: var(--ink); }
+.mp-setup textarea { width: 100%; min-width: 0; font-family: inherit; }
+.mp-fieldset [aria-live]:empty, .mp-plan [data-plan-status]:empty, [data-history-status]:empty { display: none; }
+.mp-legal { margin: 0; }
+
+/* The tasks a type brings: a box to keep each, and the date it was last done. */
+.mp-type-box[hidden] { display: none; }
+.mp-type-tasks { display: grid; gap: 0; margin: 6px 0 0; padding: 0; list-style: none; }
+.mp-type-tasks li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 14px; align-items: center; padding: 10px 0; }
+.mp-type-tasks li + li { border-top: 1px dashed var(--line); }
+.mp-check { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; line-height: 1.4; }
+.mp-check input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); }
+.mp-check > span { display: grid; gap: 2px; min-width: 0; }
+.mp-check-line { align-items: center; }
+.mp-task-meta { color: var(--muted); font-size: 13px; }
+.mp-statutory { justify-self: start; margin-top: 2px; font-size: 12px; }
+.mp-last { min-width: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); font: inherit; font-size: 14px; }
+.mp-last:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+
+/* Tables: the assets, the plan and the log. */
+.mp-row-tools { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.mp-small { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+.mp-cell-note { display: block; color: var(--muted); font-size: 12px; }
+.mp-plan-table td, .mp-log td, .mp-assets td { vertical-align: middle; }
+.mp-show { max-width: 300px; }
+.mp-status { font-weight: 800; white-space: nowrap; }
+.mp-status.is-overdue { color: var(--danger); }
+.mp-status.is-week { color: var(--ink); }
+.mp-status.is-later, .mp-status.is-none { color: var(--muted); font-weight: 700; }
+.mp-plan-table tr:has(.mp-status.is-overdue) td:first-child { box-shadow: inset 3px 0 0 var(--danger); }
+.mp-kind { font-weight: 800; white-space: nowrap; }
+.mp-kind.is-breakdown { color: var(--danger); }
+.mp-kind.is-reading, .mp-kind.is-postponed { color: var(--muted); }
+.mp-whys { white-space: nowrap; }
+
+/* The log form: one kind at a time. */
+.mp-kinds { display: flex; flex-wrap: wrap; gap: 6px; }
+.mp-kind-pick { position: relative; display: inline-flex; cursor: pointer; }
+.mp-kind-pick input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.mp-kind-pick span {
+  display: inline-grid; place-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--paper); color: var(--ink); font-size: 14px; font-weight: 800; white-space: nowrap; transition: border-color .15s ease, background .15s ease;
+}
+.mp-kind-pick:hover span { border-color: var(--blue); }
+.mp-kind-pick input:checked + span { border-color: var(--blue); background: var(--blue); color: var(--paper); }
+.mp-kind-pick input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.mp-logbox [hidden] { display: none !important; }
+.mp-checklist { display: grid; gap: 8px; margin: 0; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius); }
+.mp-checklist legend { padding: 0 6px; }
+.mp-photo { min-width: 0; }
+
+/* Results. */
+.mp-head h2 span { color: var(--muted); font-weight: 700; }
+.mp-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.mp-results .dl-stats { margin-bottom: 18px; }
+.mp-cal-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; margin: 4px 0 8px; }
+.mp-cal-title { font-size: 16px; }
+.mp-cal-title:focus { outline: none; }
+.mp-panel-calendar .ck-chart { max-width: 420px; }
+.mp-list-area { margin: 14px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mp-worklist { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.mp-worklist li { display: grid; grid-template-columns: 1.4em minmax(0, 1fr); gap: 10px; align-items: baseline; padding: 8px 0; }
+.mp-worklist li + li { border-top: 1px dashed var(--line); }
+.mp-worklist li.is-overdue .mp-work-meta { color: var(--ink); }
+.mp-box { font-size: 18px; line-height: 1; color: var(--muted); }
+.mp-work-body { display: grid; gap: 2px; min-width: 0; }
+.mp-work-meta { color: var(--muted); font-size: 13px; }
+.mp-rel td, .mp-rel th { white-space: nowrap; }
+
+@media (max-width: 600px) {
+  .mp-type-tasks li { grid-template-columns: minmax(0, 1fr); }
+  .mp-last { justify-self: start; margin-left: 28px; }
+  .mp-kinds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mp-kind-pick span { width: 100%; padding: 0 8px; }
+  .mp-row-tools { flex-wrap: wrap; }
+}
+
+/* The printed work list of the week (A4, by area, with boxes to tick). */
+.mp-print[hidden] { display: none; }
+@page mp-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  html.mp-printing main > :not(.mp-print) { display: none !important; }
+  html.mp-printing .mp-print { page: mp-a4; display: block !important; padding: 0; color: #000; font-size: 11px; }
+  .mp-print h2 { margin: 2px 0 0; font-size: 22px; }
+  .mp-print h3 { margin: 14px 0 4px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+  .mp-print .kicker { margin: 0; }
+  .mp-print-meta { margin: 2px 0 8px; }
+  .mp-print-table { width: 100%; border-collapse: collapse; }
+  .mp-print-table th, .mp-print-table td { padding: 3px 5px; border: 1px solid #bbb; text-align: left; vertical-align: top; }
+  .mp-print-table thead th { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .mp-print-table tr { break-inside: avoid; }
+  .mp-print-table .num { text-align: right; white-space: nowrap; }
+  .mp-print-table .mp-box { width: 18px; text-align: center; color: #000; font-size: 14px; }
+  .mp-print-check { margin: 3px 0 0; padding: 0; list-style: none; }
+  .mp-print-note { width: 28%; }
+  .mp-print-foot { margin: 10px 0 0; font-size: 10px; }
+  .mp-print-sign { margin: 14px 0 0; }
+  .mp-setup, .mp-logbox, .mp-row-tools, .mp-cal-nav button { display: none !important; }
+}

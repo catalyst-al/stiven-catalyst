@@ -286,5 +286,13 @@
     "summary": "Prüfen Sie ein gereinigtes Zimmer vor der Freigabe: OK, Mangel oder entfällt je Zone, kritische Punkte, die das Zimmer allein durchfallen lassen, ein Foto des Mangels. Nachreinigungen gehen an die Reinigungskraft, Technik in die Maßnahmenliste; die Erstabnahmequote je Reinigungskraft, Etage und Zimmertyp zeigt, wo Coaching hilft.",
     "url": "/de/tools/room-inspection/",
     "cta": "Zimmer prüfen"
+  },
+  {
+    "name": "Wartungsplaner",
+    "type": "Anlagen",
+    "time": "Wöchentlich",
+    "summary": "Planen Sie die vorbeugende Wartung und die Prüfpflichten jeder Anlage nach Datum oder Betriebsstunden, erfassen Sie Erledigtes, Verschobenes und Störungen, und sehen Sie Überfälliges, die PM-Erfüllung, MTBF und MTTR und die Arbeitsliste der Woche.",
+    "url": "/de/tools/maintenance-planner/",
+    "cta": "Wartung planen"
   }
 ]

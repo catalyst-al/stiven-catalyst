@@ -286,5 +286,13 @@
     "summary": "Check a cleaned room before it is released: pass, fail or n.a. by zone, critical items that fail the room on their own, a photo of the fault. Re-cleans go back to the attendant, maintenance to the Action Tracker; the first-time pass rate per attendant, floor and room type shows where to coach.",
     "url": "/tools/room-inspection/",
     "cta": "Inspect a room"
+  },
+  {
+    "name": "Maintenance Planner",
+    "type": "Equipment",
+    "time": "Weekly",
+    "summary": "Plan the preventive maintenance and statutory checks of every asset by date or operating hours, log what was done, postponed or broke down, and see what is overdue, the PM compliance, MTBF and MTTR, and the work list of the week.",
+    "url": "/tools/maintenance-planner/",
+    "cta": "Plan maintenance"
   }
 ]

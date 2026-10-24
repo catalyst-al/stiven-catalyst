@@ -71,12 +71,140 @@
     const open = tags.filter((tag) => !tag.done);
     return { total: tags.length, open: open.length, old: open.filter((tag) => tag.date && tag.date <= limit).length, done: tags.length - open.length, overdue: open.filter((tag) => tag.due && tag.due < today).length };
   };
-  window.FiveSMath = { SCORE_MAX, FINDING_AT, BAND_LIMITS, OLD_TAG_DAYS, addDays, pillarsFor, score, bandIndex, trend, latestByArea, previous, weakest, redTagStats };
+
+  // The audit plan: per area a cadence and the auditors who take turns. Names and areas compare without case and
+  // outer spaces, because they are typed by hand in more than one place.
+  const CADENCES = ["weekly", "biweekly", "monthly"];
+  const norm = (value) => String(value ?? "").trim().toLowerCase();
+  const daysBetween = (from, to) => Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5);
+  // The same day a month later, or the last day of a shorter month (31 January, then 28 February).
+  const addMonths = (iso, months) => {
+    const [y, m, d] = String(iso).split("-").map(Number);
+    if (!y || !m || !d) return iso;
+    const target = new Date(Date.UTC(y, m - 1 + months, 1));
+    const last = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+    target.setUTCDate(Math.min(d, last));
+    return target.toISOString().slice(0, 10);
+  };
+  const stepDate = (iso, cadence) => (cadence === "monthly" ? addMonths(iso, 1) : addDays(iso, cadence === "biweekly" ? 14 : 7));
+  // Who audits next: the name after the last auditor in the rotation, so nobody audits the same area twice in a row
+  // (a rotation of one name cannot help it). A last auditor who is not in the rotation starts it at its first name.
+  const nextAuditor = (auditors, last) => {
+    const list = (Array.isArray(auditors) ? auditors : []).filter((name) => norm(name));
+    if (!list.length) return "";
+    return list[(list.findIndex((name) => norm(name) === norm(last)) + 1) % list.length];
+  };
+  const rotation = (auditors, last, count = 1) => {
+    const out = [];
+    let previousName = last;
+    for (let i = 0; i < count; i++) {
+      previousName = nextAuditor(auditors, previousName);
+      if (!previousName) break;
+      out.push(previousName);
+    }
+    return out;
+  };
+  // The next audit of a planned area: one cadence after its last audit, or today when it has none yet.
+  const nextAudit = (entry, rows, day) => {
+    const last = [...rows].sort(byDate).filter((row) => norm(row.area) === norm(entry?.area)).at(-1) || null;
+    const cadence = CADENCES.includes(entry?.cadence) ? entry.cadence : CADENCES[0];
+    const due = last ? stepDate(last.date, cadence) : day;
+    const late = due < day ? daysBetween(due, day) : 0;
+    return { area: entry?.area || "", cadence, last: last ? last.date : "", lastAuditor: last ? last.auditor || "" : "", due, overdue: late > 0, late, auditor: nextAuditor(entry?.auditors, last ? last.auditor : "") };
+  };
+  // The planned audits from `from` for `days` days. An overdue audit is planned for `from` (it cannot be done
+  // earlier) and says so; the ones after it follow on the cadence, each with the next name of the rotation.
+  const schedule = (plan, rows, from, days = 56) => {
+    const until = addDays(from, days - 1);
+    const out = [];
+    (Array.isArray(plan) ? plan : []).filter((entry) => norm(entry?.area)).forEach((entry) => {
+      const next = nextAudit(entry, rows, from);
+      let date = next.overdue ? from : next.due;
+      let auditor = next.auditor;
+      for (let i = 0; date <= until && i < 400; i++) {
+        out.push({ date, area: entry.area, cadence: next.cadence, auditor, overdue: i === 0 && next.overdue, late: i === 0 ? next.late : 0, due: i === 0 ? next.due : date });
+        date = stepDate(date, next.cadence);
+        auditor = nextAuditor(entry.auditors, auditor);
+      }
+    });
+    return out.sort((a, b) => a.date.localeCompare(b.date) || Number(b.overdue) - Number(a.overdue) || a.area.localeCompare(b.area));
+  };
+  // A calendar file (iCalendar): one all-day entry per planned audit. The UID stays the same for the same area and
+  // day, so a second import updates the entries instead of doubling them. Long lines are folded at 75 bytes.
+  const icsText = (value) => String(value ?? "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  const octets = (char) => { const code = char.codePointAt(0); return code < 0x80 ? 1 : code < 0x800 ? 2 : code < 0x10000 ? 3 : 4; };
+  const fold = (line) => {
+    const parts = [];
+    let part = "";
+    let size = 0;
+    for (const char of line) {
+      if (size + octets(char) > 75) { parts.push(part); part = " "; size = 1; }
+      part += char;
+      size += octets(char);
+    }
+    parts.push(part);
+    return parts.join("\r\n");
+  };
+  const uidOf = (area, date) => {
+    let hash = 5381;
+    for (const char of norm(area)) hash = ((hash * 33) ^ char.codePointAt(0)) >>> 0;
+    return `five-s-audit-${String(date).replace(/-/g, "")}-${hash.toString(36)}@stivencatalyst.com`;
+  };
+  const ics = (events, stamp = new Date()) => {
+    const dt = stamp.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Stiven Catalyst//5S Audit//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+    events.forEach((event) => {
+      lines.push("BEGIN:VEVENT", `UID:${event.uid || uidOf(event.area, event.date)}`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${event.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${addDays(event.date, 1).replace(/-/g, "")}`, `SUMMARY:${icsText(event.summary)}`);
+      if (event.description) lines.push(`DESCRIPTION:${icsText(event.description)}`);
+      if (event.location) lines.push(`LOCATION:${icsText(event.location)}`);
+      lines.push("TRANSP:TRANSPARENT", "END:VEVENT");
+    });
+    lines.push("END:VCALENDAR");
+    return `${lines.map(fold).join("\r\n")}\r\n`;
+  };
+
+  // Before and after: photos of the same question (template and position) in two audits of the same area. Photo
+  // records are { id, ref, created } with ref "auditId|pillar-question". For one audit, each question with photos is
+  // paired with the latest earlier audit of the area that has photos of it (this audit is the after), else with the
+  // first later one (this audit is the before). The before shows its first photo, the after its last.
+  const photoPairs = (rows, records, auditId, onlyQid = "") => {
+    const ordered = [...rows].sort(byDate);
+    const at = ordered.findIndex((row) => row.id === auditId);
+    if (at < 0) return [];
+    const audit = ordered[at];
+    const byRef = new Map();
+    [...records].sort((a, b) => String(a.created).localeCompare(String(b.created))).forEach((record) => {
+      if (!byRef.has(record.ref)) byRef.set(record.ref, []);
+      byRef.get(record.ref).push(record);
+    });
+    const photos = (row, qidText) => byRef.get(`${row.id}|${qidText}`) || [];
+    const qids = [...new Set(records.map((record) => String(record.ref)).filter((ref) => ref.startsWith(`${auditId}|`)).map((ref) => ref.slice(auditId.length + 1)))]
+      .filter((qidText) => /^[a-z]+-\d+$/.test(qidText) && (!onlyQid || qidText === onlyQid)).sort();
+    const sameArea = (row) => row.id !== audit.id && norm(row.area) === norm(audit.area) && String(row.template ?? "") === String(audit.template ?? "");
+    return qids.map((qidText) => {
+      const mine = photos(audit, qidText);
+      const earlier = ordered.slice(0, at).filter((row) => sameArea(row) && photos(row, qidText).length).at(-1);
+      if (earlier) return { qid: qidText, before: { audit: earlier, photo: photos(earlier, qidText)[0] }, after: { audit, photo: mine.at(-1) } };
+      const later = ordered.slice(at + 1).find((row) => sameArea(row) && photos(row, qidText).length);
+      if (later) return { qid: qidText, before: { audit, photo: mine[0] }, after: { audit: later, photo: photos(later, qidText).at(-1) } };
+      return null;
+    }).filter(Boolean);
+  };
+  // A red tag: its photo is kept under the tag's id, the one taken when it is done under "id|after".
+  const TAG_AFTER = "|after";
+  const tagPair = (records, tagId) => {
+    const sorted = [...records].sort((a, b) => String(a.created).localeCompare(String(b.created)));
+    const before = sorted.filter((record) => record.ref === tagId);
+    const after = sorted.filter((record) => record.ref === `${tagId}${TAG_AFTER}`);
+    return before.length && after.length ? { before: before[0], after: after.at(-1) } : null;
+  };
+  window.FiveSMath = { SCORE_MAX, FINDING_AT, BAND_LIMITS, OLD_TAG_DAYS, addDays, pillarsFor, score, bandIndex, trend, latestByArea, previous, weakest, redTagStats,
+    CADENCES, addMonths, stepDate, nextAuditor, rotation, nextAudit, schedule, uidOf, ics, photoPairs, TAG_AFTER, tagPair };
 
   const dataEl = document.getElementById("five-s-audit-data");
   const root = document.querySelector("[data-five-s-audit]");
   if (!dataEl || !root || !window.ToolKit) return;
-  const { tx, num, pct, showDate, dayMonth, read, write, loadState, isObject, str, el, int, today, recentExample, parseDate, flash, undoNote, panel, stat, barList, focusCard, resultActions, resultLayout, exampleNote, exampleStamp, exampleMatches, firstVisit, downloadCsv, downloadXlsx } = window.ToolKit;
+  const { tx, num, pct, showDate, dayMonth, read, write, loadState, isObject, str, el, int, today, recentExample, parseDate, flash, undoNote, panel, stat, barList, focusCard, resultActions, resultLayout, exampleNote, exampleStamp, exampleMatches, firstVisit, downloadCsv, downloadXlsx, monthYear } = window.ToolKit;
   const ChartKit = window.ChartKit;
   const Workplace = window.Workplace;
   const Actions = window.ActionsStore;
@@ -90,9 +218,10 @@
   const id = (prefix) => `${prefix}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 
   // State: the scope and template, the audit in progress (draft), the saved audits (rows), the red tags and the team's
-  // own question sets (custom, keyed "custom-…", the same shape as cfg.templates).
+  // own question sets (custom, keyed "custom-…", the same shape as cfg.templates), and the audit plan (plan: one entry
+  // per area, planExample while it is the example's plan).
   const blankDraft = (keep = {}) => ({ date: keep.date || today(), area: str(keep.area), auditor: str(keep.auditor), shift: str(keep.shift), scores: {}, notes: {}, acts: {} });
-  const state = loadState(KEY, { scope: "", template: "", rows: [], tags: [], draft: {}, view: "", example: {}, custom: {} });
+  const state = loadState(KEY, { scope: "", template: "", rows: [], tags: [], draft: {}, view: "", example: {}, custom: {}, plan: [], planExample: false });
   // An own template (saved here or opened from a template file): questions per S as text, nothing else.
   const cleanTemplate = (raw) => {
     if (!isObject(raw) || !isObject(raw.questions)) return null;
@@ -116,6 +245,9 @@
     id: str(tag.id) || id("t"), date: parseDate(tag.date) || "", area: str(tag.area), item: str(tag.item), reason: str(tag.reason), decision: str(tag.decision),
     owner: str(tag.owner), due: parseDate(tag.due) || "", done: tag.done === true,
   })).filter((tag) => tag.date && tag.item);
+  const names = (value) => [...new Set((Array.isArray(value) ? value : String(value ?? "").split(/[,;\n]/)).map((name) => (typeof name === "string" ? name.trim().slice(0, 60) : "")).filter(Boolean))].slice(0, 12);
+  const cleanPlan = (list) => list.filter(isObject).map((entry) => ({ id: str(entry.id) || id("p"), area: str(entry.area).trim().slice(0, 80), cadence: CADENCES.includes(entry.cadence) ? entry.cadence : CADENCES[0], auditors: names(entry.auditors) })).slice(0, 60);
+  state.plan = cleanPlan(state.plan);
   state.draft = { ...blankDraft(state.draft), scores: cleanScores(state.draft.scores), notes: cleanText(state.draft.notes), acts: isObject(state.draft.acts) ? state.draft.acts : {} };
   if (!parseDate(state.draft.date)) state.draft.date = today();
   const save = () => write(KEY, state);
@@ -149,6 +281,14 @@
   const tagStats = q("[data-tag-stats]");
   const tagStatus = q("[data-tag-status]");
   const results = document.querySelector("[data-results]");
+  const planRows = q("[data-plan-rows]");
+  const planEmpty = q("[data-plan-empty]");
+  const planView = q("[data-plan-view]");
+  const planDue = q("[data-plan-due]");
+  const planCalendar = q("[data-plan-calendar]");
+  const planCount = q("[data-plan-count]");
+  const planStatus = q("[data-plan-status]");
+  const monthButtons = [...root.querySelectorAll("[data-plan-month]")];
 
   const keys = () => pillarsFor(state.scope, cfg.scopes);
   const template = (name = state.template) => cfg.templates[name] || state.custom[name] || cfg.templates[TEMPLATES[0]];
@@ -390,11 +530,17 @@
     // The weakest questions, with their notes: the findings of this audit.
     const weakPanel = panel(tx("Weakest questions"), findings.length ? tx("The gap to the full standard. A {n} or lower is a finding and wants an owner.", { n: FINDING_AT }) : tx("No question at {n} or below in this audit.", { n: FINDING_AT }));
     weakPanel.classList.add("fs-panel-weak");
-    if (findings.length) weakPanel.append(barList(findings.map((f) => ({ key: `${pillarName(f.key)} ${f.index + 1} · ${f.question}`, value: SCORE_MAX - f.score, note: f.note, score: f.score })), {
-      label: (item) => [`${item.score} / ${SCORE_MAX}`, item.note ? ` · ${item.note}` : ""],
-      highlight: (item) => item.score === 0,
-      tag: tx("nothing in place"),
-    }));
+    // The audit and the question of each bar, for the before and after photos (five-s-audit-photos.js).
+    weakPanel.dataset.audit = audit.draft ? "" : audit.id;
+    if (findings.length) {
+      const bars = barList(findings.map((f) => ({ key: `${pillarName(f.key)} ${f.index + 1} · ${f.question}`, value: SCORE_MAX - f.score, note: f.note, score: f.score })), {
+        label: (item) => [`${item.score} / ${SCORE_MAX}`, item.note ? ` · ${item.note}` : ""],
+        highlight: (item) => item.score === 0,
+        tag: tx("nothing in place"),
+      });
+      [...bars.children].forEach((bar, i) => { if (findings[i]) bar.dataset.qid = qid(findings[i].key, findings[i].index); });
+      weakPanel.append(bars);
+    }
     panels.push(weakPanel);
 
     // Open red tags, oldest first.
@@ -476,11 +622,149 @@
     tagStats.textContent = state.tags.length ? tx("{open} open · {old} older than {days} days · {done} done", { open: int.format(stats.open), old: int.format(stats.old), days: OLD_TAG_DAYS, done: int.format(stats.done) }) : "";
   };
 
+  // The audit plan: one row per area (area, cadence, the auditors in turn), then what follows from it: the next date
+  // and auditor of each area, the audits due this week, the month on a calendar and a calendar file.
+  const PLAN_DAYS = 56;
+  let planMonth = 0;
+  let dueItems = [];
+  const cadenceName = (key) => cfg.cadences?.[key] || key;
+  // People to choose from: the owners and teams of the workplace profile, and every name typed here before.
+  const people = () => [...new Set([
+    ...wpAreas().map((area) => area.owner), ...(Workplace ? Workplace.teams() : []),
+    ...state.rows.map((row) => row.auditor), ...state.plan.flatMap((entry) => entry.auditors), ...state.tags.map((tag) => tag.owner),
+  ].map((name) => str(name).trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const weekday = dayMonth(true);
+  const dayLabel = (iso) => `${weekday(new Date(`${iso}T00:00:00Z`))} · ${showDate(iso)}`;
+  const nextText = (entry) => {
+    if (!entry.area) return tx("Name the area to plan it.");
+    const next = nextAudit(entry, state.rows, today());
+    const parts = [next.last ? tx("Last audit {date}", { date: showDate(next.last) }) + (next.lastAuditor ? ` (${next.lastAuditor})` : "") : tx("Not audited yet")];
+    parts.push(next.overdue ? `⚠ ${tx("Overdue by {n} days, due {date}", { n: int.format(next.late), date: showDate(next.due) })}` : next.due === today() ? tx("Due today") : tx("Next due {date}", { date: showDate(next.due) }));
+    parts.push(next.auditor ? tx("Next auditor: {name}", { name: next.auditor }) : tx("No auditor named yet"));
+    if (entry.auditors.length === 1) parts.push(tx("With one name the same person audits every time."));
+    return parts.join(" · ");
+  };
+  const planField = (entry, name, labelText, input) => {
+    const box = el("div", "field");
+    const lab = el("label", null, labelText);
+    input.id = `fs-plan-${name}-${entry.id}`;
+    lab.htmlFor = input.id;
+    input.dataset.planField = name;
+    box.append(lab, input);
+    return box;
+  };
+  const planRow = (entry) => {
+    const row = el("div", "fs-plan-row");
+    row.dataset.planId = entry.id;
+    const grid = el("div", "fs-plan-grid");
+    const area = el("input");
+    area.setAttribute("list", "fs-area-list");
+    area.autocomplete = "off";
+    area.placeholder = cfg.text.areaPlaceholder;
+    area.value = entry.area;
+    const cadence = el("select");
+    CADENCES.forEach((key) => { const option = el("option", null, cadenceName(key)); option.value = key; option.selected = key === entry.cadence; cadence.append(option); });
+    const auditors = el("input");
+    auditors.autocomplete = "off";
+    auditors.placeholder = cfg.text.auditorsPlaceholder;
+    auditors.value = entry.auditors.join(", ");
+    const auditorsField = planField(entry, "auditors", tx("Auditors, in turn"), auditors);
+    grid.append(planField(entry, "area", tx("Area"), area), planField(entry, "cadence", tx("How often"), cadence), auditorsField);
+    const pick = el("select", "fs-plan-pick");
+    pick.dataset.planPick = entry.id;
+    auditorsField.append(pick);
+    const remove = el("button", "dl-remove", "×");
+    remove.type = "button";
+    remove.dataset.planRemove = entry.id;
+    grid.append(remove);
+    const next = el("p", "form-note fs-plan-next");
+    next.dataset.planNext = entry.id;
+    row.append(grid, next);
+    syncRow(entry, row);
+    return row;
+  };
+  // The parts of a row that follow its fields: the next audit, the people to add, the names in the labels.
+  const syncRow = (entry, row) => {
+    const name = entry.area || tx("this area");
+    const next = row.querySelector("[data-plan-next]");
+    next.textContent = nextText(entry);
+    next.classList.toggle("is-overdue", Boolean(entry.area) && nextAudit(entry, state.rows, today()).overdue);
+    row.querySelector("[data-plan-remove]").setAttribute("aria-label", tx("Remove {area} from the plan", { area: name }));
+    const pick = row.querySelector("[data-plan-pick]");
+    pick.setAttribute("aria-label", tx("Add a person to the rotation of {area}", { area: name }));
+    if (pick === document.activeElement) return;
+    const options = people().filter((person) => !entry.auditors.some((n) => n.toLowerCase() === person.toLowerCase()));
+    const first = el("option", null, tx("Add a person…"));
+    first.value = "";
+    pick.replaceChildren(first, ...options.map((person) => el("option", null, person)));
+    pick.hidden = !options.length;
+  };
+  const renderPlanRows = () => {
+    planRows.replaceChildren(...state.plan.map(planRow));
+    planEmpty.hidden = state.plan.length > 0;
+  };
+  // What follows from the plan; drawn again while it is typed, without touching the fields.
+  const renderPlanView = () => {
+    const day = today();
+    state.plan.forEach((entry) => {
+      const row = planRows.querySelector(`[data-plan-id="${entry.id}"]`);
+      if (row) syncRow(entry, row);
+    });
+    const planned = state.plan.filter((entry) => entry.area);
+    planView.hidden = !planned.length;
+    const overdue = planned.filter((entry) => nextAudit(entry, state.rows, day).overdue).length;
+    planCount.textContent = planned.length ? `${tx("{n} areas planned", { n: int.format(planned.length) })}${overdue ? ` · ${tx("{n} overdue", { n: int.format(overdue) })}` : ""}` : "";
+    if (!planned.length) { dueItems = []; planDue.replaceChildren(); planCalendar.replaceChildren(); return; }
+
+    // Due this week: what is overdue and what falls in the next seven days.
+    dueItems = schedule(state.plan, state.rows, day, 7);
+    planDue.replaceChildren(...(dueItems.length ? dueItems.map((item, index) => {
+      const li = el("li", item.overdue ? "is-overdue" : "");
+      const text = el("span", "fs-due-text");
+      const when = item.overdue ? `⚠ ${tx("Overdue by {n} days, due {date}", { n: int.format(item.late), date: showDate(item.due) })}` : item.date === day ? tx("Due today") : dayLabel(item.date);
+      text.append(el("strong", null, item.area), ` · ${item.auditor || tx("No auditor named yet")} · ${when}`);
+      const start = el("button", "button-secondary", tx("Start this audit"));
+      start.type = "button";
+      start.dataset.planStart = String(index);
+      start.setAttribute("aria-label", `${tx("Start this audit")}: ${item.area}${item.auditor ? `, ${item.auditor}` : ""}`);
+      li.append(text, start);
+      return li;
+    }) : [el("li", "fs-due-none", tx("Nothing due in the next seven days."))]));
+
+    // The month: audits done (green), overdue ones on today (red) and the planned ones, who and where in the tip.
+    monthButtons.forEach((button) => button.setAttribute("aria-pressed", String(Number(button.dataset.planMonth) === planMonth)));
+    planCalendar.replaceChildren();
+    if (!ChartKit) return;
+    const start = addMonths(`${day.slice(0, 7)}-01`, planMonth);
+    const [year, month] = start.split("-").map(Number);
+    const monthEnd = addDays(addMonths(start, 1), -1);
+    const byDay = new Map();
+    const put = (iso, item) => { if (!byDay.has(iso)) byDay.set(iso, []); byDay.get(iso).push(item); };
+    state.rows.filter((row) => row.date.slice(0, 7) === start.slice(0, 7)).forEach((row) => put(row.date, { done: true, row }));
+    if (monthEnd >= day) schedule(state.plan, state.rows, day, daysBetween(day, monthEnd) + 1).filter((item) => item.date >= start).forEach((item) => put(item.date, { plan: item }));
+    const svg = ChartKit.calendar(year, month, (iso) => {
+      const items = byDay.get(iso);
+      if (!items) return null;
+      const late = items.some((item) => item.plan?.overdue);
+      const open = items.some((item) => item.plan);
+      const tip = items.map((item) => (item.done
+        ? `✓ ${tx("Audited")}: ${item.row.area}${item.row.auditor ? ` · ${item.row.auditor}` : ""} · ${pct(overallOf(item.row, cfg.scopes), 0)}`
+        : `${item.plan.overdue ? `⚠ ${tx("Overdue")}` : `○ ${tx("Planned")}`}: ${item.plan.area} · ${item.plan.auditor || tx("No auditor named yet")}${item.plan.overdue ? ` (${tx("due {date}", { date: showDate(item.plan.due) })})` : ""}`)).join("\n");
+      return { state: late ? "danger" : open ? undefined : "ok", text: String(items.length), tip: `${showDate(iso)}\n${tip}` };
+    }, { title: `${tx("Audit plan")} · ${monthYear(new Date(`${start}T00:00:00Z`))}` });
+    planCalendar.append(ChartKit.figure(svg, { fileName: "5s-audit-plan" }));
+  };
+  const renderPlan = () => {
+    renderPlanRows();
+    renderPlanView();
+  };
+
   const render = () => {
     renderSetup();
     if (packs) packs.render();
     renderLog();
     renderTags();
+    renderPlan();
     renderResults();
   };
   const changed = () => {
@@ -502,6 +786,9 @@
     state.draft = blankDraft({ area: state.rows.at(-1).area, shift: state.rows.at(-1).shift });
     fitDraft();
     state.example = exampleStamp(state.rows);
+    // The example's plan: its three areas and one not audited yet, each with auditors who take turns.
+    state.plan = cleanPlan((Array.isArray(ex.plan) ? ex.plan : []).map((entry, i) => ({ ...entry, id: `ex-p${i}` })));
+    state.planExample = state.plan.length > 0;
   };
   // The example leaves as a whole: its audits and its red tags, so nothing of it is scored against the visitor's work.
   const dropExample = () => {
@@ -509,6 +796,8 @@
     state.tags = [];
     state.view = "";
     state.example = {};
+    // A plan the visitor has changed is theirs and stays.
+    if (state.planExample) { state.plan = []; state.planExample = false; }
   };
   const ownWork = () => { if (exampleMatches(state)) dropExample(); };
   exampleUi = exampleNote(results, () => { dropExample(); changed(); });
@@ -719,6 +1008,108 @@
     if (exampleMatches(state)) dropExample();
     state.tags = [];
     changed();
+  });
+
+  // The plan: typing changes the entry and what follows from it; adding and removing draw the rows again.
+  const planEntry = (node) => state.plan.find((entry) => entry.id === node.closest("[data-plan-id]")?.dataset.planId);
+  const planChanged = () => { state.planExample = false; save(); renderPlanView(); };
+  planRows.addEventListener("input", (event) => {
+    const input = event.target;
+    const entry = planEntry(input);
+    if (!entry || !input.dataset.planField) return;
+    if (input.dataset.planField === "area") entry.area = input.value.trim().slice(0, 80);
+    else if (input.dataset.planField === "auditors") entry.auditors = names(input.value);
+    else return;
+    planChanged();
+  });
+  planRows.addEventListener("change", (event) => {
+    const input = event.target;
+    const entry = planEntry(input);
+    if (!entry) return;
+    if (input.dataset.planField === "cadence") {
+      entry.cadence = CADENCES.includes(input.value) ? input.value : CADENCES[0];
+      planChanged();
+    } else if (input.dataset.planPick !== undefined && input.value) {
+      entry.auditors = names([...entry.auditors, input.value]);
+      state.planExample = false;
+      save();
+      renderPlan();
+      planRows.querySelector(`#fs-plan-auditors-${entry.id}`)?.focus();
+    }
+  });
+  planRows.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-plan-remove]");
+    if (!button) return;
+    const index = state.plan.findIndex((entry) => entry.id === button.dataset.planRemove);
+    if (index < 0) return;
+    const [removed] = state.plan.splice(index, 1);
+    state.planExample = false;
+    save();
+    renderPlan();
+    undoNote(planStatus, tx("Removed from the plan: {area}.", { area: removed.area || tx("an area without a name") }), () => {
+      state.plan.splice(Math.min(index, state.plan.length), 0, removed);
+      save();
+      renderPlan();
+    });
+  });
+  q("[data-plan-add]").addEventListener("click", () => {
+    const entry = { id: id("p"), area: "", cadence: CADENCES[0], auditors: [] };
+    state.plan.push(entry);
+    state.planExample = false;
+    save();
+    renderPlan();
+    planRows.querySelector(`#fs-plan-area-${entry.id}`)?.focus();
+  });
+  // Every area the page knows (the workplace profile's, else those of the checklist and the log) that is not planned
+  // yet: weekly, with the area's owner and the people who audited it before as the rotation.
+  q("[data-plan-known]").addEventListener("click", () => {
+    const profile = wpAreas();
+    const areas = profile.length ? profile.map((area) => area.name) : knownAreas();
+    const fresh = areas.filter((name) => !state.plan.some((entry) => entry.area.toLowerCase() === name.toLowerCase()));
+    if (!fresh.length) { flash(planStatus, tx("Every known area is in the plan already.")); return; }
+    fresh.forEach((name) => {
+      const before = [...state.rows].sort((a, b) => byDate(b, a)).filter((row) => row.area === name).map((row) => row.auditor);
+      state.plan.push({ id: id("p"), area: name, cadence: CADENCES[0], auditors: names([areaOwner(name), ...before].filter(Boolean)).slice(0, 3) });
+    });
+    state.planExample = false;
+    save();
+    renderPlan();
+    flash(planStatus, tx("{n} areas added to the plan.", { n: int.format(fresh.length) }));
+  });
+  monthButtons.forEach((button) => button.addEventListener("click", () => { planMonth = Number(button.dataset.planMonth) || 0; renderPlanView(); }));
+  // Start this audit: the walk gets the area and the auditor of the plan; what was scored stays.
+  planDue.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-plan-start]");
+    const item = button && dueItems[Number(button.dataset.planStart)];
+    if (!item) return;
+    state.draft.area = item.area;
+    state.draft.auditor = item.auditor;
+    state.draft.date = today();
+    save();
+    renderSetup();
+    renderResults();
+    flash(auditStatus, item.auditor ? tx("The walk is set for {area} with {name}.", { area: item.area, name: item.auditor }) : tx("The walk is set for {area}.", { area: item.area }));
+    const walk = root.querySelector(".fs-walk");
+    walk?.scrollIntoView({ behavior: "smooth", block: "start" });
+    questionsBox.querySelector('input[type="radio"]')?.focus({ preventScroll: true });
+  });
+  // The plan as a calendar file: the next eight weeks, one all-day entry per audit.
+  const planEvents = (from = today()) => schedule(state.plan, state.rows, from, PLAN_DAYS).map((item) => ({
+    uid: uidOf(item.area, item.date), date: item.date, location: item.area,
+    summary: `${tx("5S audit: {area}", { area: item.area })}${item.auditor ? ` · ${item.auditor}` : ""}`,
+    description: [cfg.text.tool, `${tx("Area")}: ${item.area}`, item.auditor ? `${tx("Auditor")}: ${item.auditor}` : "", `${tx("How often")}: ${cadenceName(item.cadence)}`, item.overdue ? tx("Overdue by {n} days, due {date}", { n: item.late, date: showDate(item.due) }) : ""].filter(Boolean).join("\n"),
+  }));
+  q("[data-plan-ics]").addEventListener("click", () => {
+    const events = planEvents();
+    if (!events.length) { flash(planStatus, tx("Nothing planned in the next eight weeks.")); return; }
+    const link = el("a");
+    link.href = URL.createObjectURL(new Blob([ics(events)], { type: "text/calendar;charset=utf-8" }));
+    link.download = `${cfg.text.icsName}-${today()}.ics`;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    flash(planStatus, tx("{n} audits in the calendar file.", { n: int.format(events.length) }));
   });
 
   // A first visit opens on the example, so the result is visible at once; nothing is written until the visitor acts.

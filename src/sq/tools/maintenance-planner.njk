@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Planifikuesi i mirëmbajtjes
+seo_title: "Planifikuesi i mirëmbajtjes parandaluese: afatet, kontrollet ligjore, prishjet, MTBF dhe zbatimi i planit për çdo pajisje"
+description: "Planifiko mirëmbajtjen dhe kontrollet ligjore për çdo pajisje: çfarë ka afat, çfarë është vonë dhe e kryer, prishjet me MTBF e MTTR, lista javore dhe kalendari."
+activeNav: /sq/tools.html
+permalink: /sq/tools/maintenance-planner/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Pajisje</p>
+  <h1>Planifikuesi i mirëmbajtjes</h1>
+  <p class="lede">Plani i mirëmbajtjes parandaluese dhe i kontrolleve ligjore për pajisjet e vendit tënd të punës: pirunët, sorteri, rripat transportues, dyert e rampave, fikëset, ndriçimi emergjent, ashensorët, pajisjet e kuzhinës. Çdo detyrë ka afat pas intervalit ose orëve të punës; regjistro çfarë u krye, u shty ose u prish, dhe shiko çfarë është vonë, sa nga plani u krye në kohë dhe cila pajisje ndalet më shpesh, me një listë pune për javën dhe një skedar kalendari për telefonin.</p>
+</section>
+
+{% set cfg = sq.maintenancePlanner %}
+{% include "partials/maintenance-planner.njk" %}

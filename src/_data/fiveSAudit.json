@@ -9,7 +9,9 @@
     "ownerPlaceholder": "e.g. Besnik",
     "csvAudits": "5s-audits",
     "csvTags": "red-tags",
-    "checkText": "Score ≥ 3 on this question at the next 5S audit"
+    "checkText": "Score ≥ 3 on this question at the next 5S audit",
+    "auditorsPlaceholder": "e.g. Anna, Besnik",
+    "icsName": "5s-audit-plan"
   },
   "scopes": {
     "5S": [
@@ -414,8 +416,17 @@
     [
       "Red-tag, don't argue.",
       "Not sure whether it belongs here? Tag it with a date. The decision follows within a week."
+    ],
+    [
+      "Plan the walks.",
+      "Give every area a cadence and two or three auditors who take turns: fresh eyes see what the area’s own team no longer sees."
     ]
   ],
+  "cadences": {
+    "weekly": "Weekly",
+    "biweekly": "Every two weeks",
+    "monthly": "Monthly"
+  },
   "example": {
     "template": "warehouse",
     "scope": "6S",
@@ -1291,6 +1302,41 @@
         "owner": "Clara",
         "due": "2026-10-17",
         "done": false
+      }
+    ],
+    "plan": [
+      {
+        "area": "Inbound dock",
+        "cadence": "weekly",
+        "auditors": [
+          "Anna",
+          "Besnik",
+          "Clara"
+        ]
+      },
+      {
+        "area": "Picking zone A",
+        "cadence": "biweekly",
+        "auditors": [
+          "Besnik",
+          "Clara"
+        ]
+      },
+      {
+        "area": "Packing",
+        "cadence": "weekly",
+        "auditors": [
+          "Clara",
+          "Anna"
+        ]
+      },
+      {
+        "area": "Returns",
+        "cadence": "monthly",
+        "auditors": [
+          "Anna",
+          "Besnik"
+        ]
       }
     ]
   }

@@ -9,7 +9,9 @@
     "ownerPlaceholder": "z. B. Besnik",
     "csvAudits": "5s-audits",
     "csvTags": "rote-karten",
-    "checkText": "Beim nächsten 5S-Audit bei dieser Frage ≥ 3"
+    "checkText": "Beim nächsten 5S-Audit bei dieser Frage ≥ 3",
+    "auditorsPlaceholder": "z. B. Anna, Besnik",
+    "icsName": "5s-auditplan"
   },
   "scopes": {
     "5S": [
@@ -414,8 +416,17 @@
     [
       "Rote Karte statt Diskussion.",
       "Unsicher, ob es hierher gehört? Karte mit Datum dran. Die Entscheidung folgt innerhalb einer Woche."
+    ],
+    [
+      "Planen Sie die Rundgänge.",
+      "Geben Sie jedem Bereich einen Rhythmus und zwei oder drei Auditoren, die sich abwechseln: Fremde Augen sehen, was das eigene Team des Bereichs nicht mehr sieht."
     ]
   ],
+  "cadences": {
+    "weekly": "Wöchentlich",
+    "biweekly": "Alle zwei Wochen",
+    "monthly": "Monatlich"
+  },
   "example": {
     "template": "warehouse",
     "scope": "6S",
@@ -1291,6 +1302,41 @@
         "owner": "Clara",
         "due": "2026-10-17",
         "done": false
+      }
+    ],
+    "plan": [
+      {
+        "area": "Wareneingang",
+        "cadence": "weekly",
+        "auditors": [
+          "Anna",
+          "Besnik",
+          "Clara"
+        ]
+      },
+      {
+        "area": "Kommissionierzone A",
+        "cadence": "biweekly",
+        "auditors": [
+          "Besnik",
+          "Clara"
+        ]
+      },
+      {
+        "area": "Packen",
+        "cadence": "weekly",
+        "auditors": [
+          "Clara",
+          "Anna"
+        ]
+      },
+      {
+        "area": "Retouren",
+        "cadence": "monthly",
+        "auditors": [
+          "Anna",
+          "Besnik"
+        ]
       }
     ]
   }

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Maintenance Planner
+seo_title: "Preventive maintenance planner: due dates, statutory checks, breakdowns, MTBF and PM compliance per asset"
+description: "Plan preventive maintenance and statutory checks per asset: what is due, overdue and done, breakdowns with MTBF and MTTR, a weekly work list and a calendar."
+activeNav: /tools.html
+permalink: /tools/maintenance-planner/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Equipment</p>
+  <h1>Maintenance Planner</h1>
+  <p class="lede">The plan of preventive maintenance and statutory checks for the assets of your site: forklifts, sorter, conveyors, dock doors, fire extinguishers, emergency lights, lifts, kitchen equipment. Each task is due after its interval or its operating hours; log what was done, postponed or broke down, and see what is overdue, how much of the plan was done on time and which asset stops most, with a work list for the week and a calendar file for the phone.</p>
+</section>
+
+{% set cfg = maintenancePlanner %}
+{% include "partials/maintenance-planner.njk" %}

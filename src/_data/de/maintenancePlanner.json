@@ -1,0 +1,888 @@
+{
+  "storageKey": "sc-maintenance-planner-de",
+  "target": 0.9,
+  "text": {
+    "tool": "Wartungsplaner",
+    "csvName": "wartungsplan",
+    "logName": "wartungsprotokoll",
+    "tagPlaceholder": "z. B. FL-01",
+    "namePlaceholder": "z. B. Stapler 1, elektrisch 2 t",
+    "areaPlaceholder": "z. B. Wareneingang",
+    "supplierPlaceholder": "z. B. der Staplerservice",
+    "contactPlaceholder": "Telefon oder E-Mail",
+    "taskPlaceholder": "z. B. Schließkantensicherung des Tors prüfen",
+    "checklistPlaceholder": "Ein Punkt pro Zeile",
+    "assetPlaceholder": "Kennung scannen oder eingeben",
+    "byPlaceholder": "Wer es gemacht hat",
+    "notePlaceholder": "Was gemacht oder gefunden wurde",
+    "reasonPlaceholder": "Warum es verschoben wird",
+    "maintenanceOwner": "Technik",
+    "checkOverdue": "Die Aufgabe ist erledigt und im Wartungsplaner erfasst, und die nächste ist geplant.",
+    "checkRepeated": "Nach der Maßnahme 30 Tage lang keine Störung dieser Anlage.",
+    "statutory": "Prüfpflichten: Intervall, Form und wer prüfen darf, hängen von Ihrem Land und der Anlage ab. Prüfen Sie die bei Ihnen geltenden Vorschriften und fragen Sie Ihren Lieferanten; dieser Plan ist keine Rechtsberatung."
+  },
+  "sites": [
+    {
+      "key": "warehouse",
+      "name": "Lager",
+      "areas": [
+        "Wareneingang",
+        "Lagerung",
+        "Kommissionierung",
+        "Warenausgang",
+        "Rampen",
+        "Batterieladeraum",
+        "Gebäude"
+      ]
+    },
+    {
+      "key": "hotel",
+      "name": "Hotel",
+      "areas": [
+        "Zimmer",
+        "Küche",
+        "Lobby und öffentliche Bereiche",
+        "Technikraum",
+        "Gebäude"
+      ]
+    },
+    {
+      "key": "station",
+      "name": "Zustellstation",
+      "areas": [
+        "Eingangsrampen",
+        "Sorterhalle",
+        "Ausgangsrampen",
+        "Hof",
+        "Gebäude"
+      ]
+    }
+  ],
+  "criticality": [
+    {
+      "key": "A",
+      "name": "A · stoppt den Betrieb oder ist ein Sicherheitsrisiko"
+    },
+    {
+      "key": "B",
+      "name": "B · bremst den Betrieb, es gibt eine Ausweichlösung"
+    },
+    {
+      "key": "C",
+      "name": "C · wenig Wirkung, wenn sie ausfällt"
+    }
+  ],
+  "causes": [
+    {
+      "key": "wear",
+      "name": "Verschleiß"
+    },
+    {
+      "key": "hydraulic",
+      "name": "Hydraulik- oder Ölleck"
+    },
+    {
+      "key": "electrical",
+      "name": "Elektrischer Fehler"
+    },
+    {
+      "key": "sensor",
+      "name": "Sensor oder Steuerung"
+    },
+    {
+      "key": "jam",
+      "name": "Stau oder Blockade"
+    },
+    {
+      "key": "battery",
+      "name": "Batterie oder Laden"
+    },
+    {
+      "key": "damage",
+      "name": "Schaden durch ein Fahrzeug oder beim Handling"
+    },
+    {
+      "key": "operator",
+      "name": "Bedienfehler"
+    },
+    {
+      "key": "missed",
+      "name": "Wartung versäumt oder verspätet"
+    },
+    {
+      "key": "other",
+      "name": "Sonstiges"
+    }
+  ],
+  "types": [
+    {
+      "key": "forklift",
+      "name": "Gabelstapler",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Tägliche Einsatzprüfung durch den Fahrer",
+          "every": 1,
+          "unit": "days",
+          "who": "internal",
+          "minutes": 5,
+          "optional": true,
+          "checklist": [
+            "Gabeln, Ketten und Hubmast",
+            "Reifen und Räder",
+            "Bremsen und Lenkung",
+            "Hupe, Licht und Warnleuchte",
+            "Kein Hydraulik- oder Ölleck",
+            "Batterie geladen, Kabel unbeschädigt"
+          ]
+        },
+        {
+          "text": "Batterie: Wasserstand, Pole und Reinigung",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 15
+        },
+        {
+          "text": "Wartung durch den Lieferanten",
+          "every": 3,
+          "unit": "months",
+          "hours": 500,
+          "who": "external",
+          "minutes": 120
+        },
+        {
+          "text": "Jährliche Prüfung durch eine befähigte Person (in Deutschland: UVV / DGUV)",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "pallet-truck",
+      "name": "Elektro-Hubwagen",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Wöchentliche Prüfung: Gabeln, Räder, Bremse und Not-Halt",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 10
+        },
+        {
+          "text": "Jährliche Prüfung durch eine befähigte Person",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "sorter",
+      "name": "Sorter",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Wöchentliche Inspektion: Gurte, Sensoren und Not-Halt",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 45,
+          "checklist": [
+            "Jeder Not-Halt getestet",
+            "Gurte laufen gerade, Spannung stimmt",
+            "Lichtschranken und Scanner sauber",
+            "Rutschen und Rollen frei",
+            "Keine ungewöhnlichen Geräusche oder Gerüche"
+          ]
+        },
+        {
+          "text": "Schmieren und Reinigen",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 90
+        },
+        {
+          "text": "Wartung durch den Lieferanten",
+          "every": 6,
+          "unit": "months",
+          "who": "external",
+          "minutes": 480
+        },
+        {
+          "text": "Jährliche Sicherheitsprüfung von Schutzeinrichtungen und Not-Halt",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 120,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "conveyor",
+      "name": "Förderband",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Wöchentliche Prüfung: Rollen, Gurt und Schutzeinrichtungen",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 20
+        },
+        {
+          "text": "Test von Not-Halt und Reißleine",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 15
+        },
+        {
+          "text": "Jährliche Wartung",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 240
+        }
+      ]
+    },
+    {
+      "key": "dock-door",
+      "name": "Rampentor",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Sicht- und Funktionsprüfung",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 10,
+          "checklist": [
+            "Paneele und Dichtungen unbeschädigt",
+            "Federn, Seile und Laufschienen",
+            "Die Schließkantensicherung stoppt das Tor",
+            "Lichtgitter oder Lichtschranke funktioniert"
+          ]
+        },
+        {
+          "text": "Jährliche Prüfung durch eine befähigte Person",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "dock-leveller",
+      "name": "Überladebrücke",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Prüfung: Vorschubblech, Hydraulik und Zehenschutz",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 10
+        },
+        {
+          "text": "Jährliche Prüfung durch eine befähigte Person",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "charger",
+      "name": "Batterieladegeräte",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Prüfung: Kabel, Stecker und Lüftung",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 10
+        },
+        {
+          "text": "Elektrische Sicherheitsprüfung",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "fire-extinguisher",
+      "name": "Feuerlöscher",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Sichtprüfung: am Platz, verplombt, Manometer im grünen Bereich",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 20,
+          "checklist": [
+            "Jeder Löscher an seinem Platz und sichtbar",
+            "Plombe und Sicherungsstift intakt",
+            "Manometer im grünen Bereich",
+            "Schild darüber, Zugang frei"
+          ]
+        },
+        {
+          "text": "Wartung durch eine sachkundige Person",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "emergency-light",
+      "name": "Notbeleuchtung",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kurzer Funktionstest aller Leuchten und Schilder",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 20,
+          "statutory": true
+        },
+        {
+          "text": "Prüfung über die volle Betriebsdauer",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 120,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "lift",
+      "name": "Aufzug",
+      "sites": [
+        "warehouse",
+        "hotel"
+      ],
+      "tasks": [
+        {
+          "text": "Prüfung: Notruftaste und Telefon, Türen, Haltegenauigkeit",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 15,
+          "checklist": [
+            "Die Notruftaste erreicht jemanden",
+            "Türen öffnen und schließen sauber",
+            "Die Kabine hält bündig zum Boden",
+            "Licht und Anzeige funktionieren"
+          ]
+        },
+        {
+          "text": "Wartung durch die Aufzugsfirma",
+          "every": 3,
+          "unit": "months",
+          "who": "external",
+          "minutes": 90
+        },
+        {
+          "text": "Jährliche Prüfung durch eine zugelassene Überwachungsstelle",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "hvac",
+      "name": "Heizung, Lüftung und Klima",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Filterwechsel",
+          "every": 3,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 45
+        },
+        {
+          "text": "Wartung und Dichtheitsprüfung des Kältemittels",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 180,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "kitchen",
+      "name": "Küchengeräte",
+      "sites": [
+        "hotel"
+      ],
+      "tasks": [
+        {
+          "text": "Entkalken und Türdichtung prüfen",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 20
+        },
+        {
+          "text": "Wartung durch den Lieferanten",
+          "every": 6,
+          "unit": "months",
+          "who": "external",
+          "minutes": 120
+        },
+        {
+          "text": "Elektrische Sicherheitsprüfung",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "minibar",
+      "name": "Zimmer-Minibars",
+      "sites": [
+        "hotel"
+      ],
+      "tasks": [
+        {
+          "text": "Abtauen, reinigen und Temperatur prüfen",
+          "every": 3,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 120
+        },
+        {
+          "text": "Elektrische Sicherheitsprüfung der Geräte",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 120,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "Sonstige Anlage",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Prüfung",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 15
+        },
+        {
+          "text": "Jährliche Wartung",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60
+        }
+      ]
+    }
+  ],
+  "advice": {
+    "breakdown": {
+      "meaning": "Dieselbe kritische Anlage steht immer wieder: Jede Störung kostet die Minuten des Stillstands und die Pakete, die sich dahinter stauen. Reparaturen beheben das Symptom; die Ursache bleibt.",
+      "moves": [
+        "Nehmen Sie die letzte Störung mit dem Techniker, der sie behoben hat, in die 5 Whys, solange die Details frisch sind.",
+        "Prüfen Sie den Plan dieser Anlage: Fehlt eine Aufgabe, ist sie zu selten, oder wurde sie vor den Stillständen zu spät erledigt?",
+        "Vereinbaren Sie eine Gegenmaßnahme mit Verantwortlichem und Termin, und beobachten Sie die Anlage danach 30 Tage lang."
+      ],
+      "question": "Was haben wir in den Tagen vor dem letzten Stillstand gesehen, und wer hat es zuerst gesehen?"
+    },
+    "overdue": {
+      "meaning": "Eine Aufgabe an einer kritischen Anlage ist über ihrem Termin. Mit jedem Tag wächst das Risiko eines Stillstands oder einer nicht bestandenen Prüfung, und eine überfällige Prüfpflicht kann bedeuten, dass die Anlage nicht benutzt werden darf.",
+      "moves": [
+        "Planen Sie die Aufgabe in dieser Woche ein: ein Zeitfenster, eine Person oder den Lieferanten, und die Teile.",
+        "Ist es eine Prüfpflicht, entscheiden Sie heute, ob die Anlage bis dahin laufen darf, und halten Sie die Entscheidung schriftlich fest.",
+        "Finden Sie heraus, warum sie liegen geblieben ist: kein Zeitfenster, kein Termin beim Lieferanten, niemand verantwortlich, und beheben Sie auch das."
+      ],
+      "question": "Wem gehört diese Aufgabe, und was hat verhindert, dass sie zum Termin erledigt wurde?"
+    },
+    "none": {
+      "meaning": "Nichts Kritisches ist überfällig, und keine kritische Anlage fällt immer wieder aus. Halten Sie den Rhythmus.",
+      "moves": [
+        "Drucken Sie am Montag die Arbeitsliste und geben Sie jeder Aufgabe einen Verantwortlichen.",
+        "Erfassen Sie jede Aufgabe an dem Tag, an dem sie erledigt ist, mit einem Foto, wo es zählt.",
+        "Erfassen Sie jede Störung, auch die kurzen: Sie zeigen, wo dem Plan eine Aufgabe fehlt."
+      ],
+      "question": "Welche Anlage würde uns am meisten schaden, wenn sie heute ausfällt, und stimmt ihr Plan?"
+    }
+  },
+  "tips": [
+    [
+      "Ein Plan für jede Anlage.",
+      "Erfassen Sie jede Anlage mit Kennung, Bereich und Kritikalität, und übernehmen Sie die typischen Aufgaben ihres Typs. Tragen Sie ein, wann jede Aufgabe zuletzt erledigt wurde, damit die ersten Fälligkeiten stimmen."
+    ],
+    [
+      "Datum oder Stunden.",
+      "Eine Aufgabe ist nach Tagen, Wochen, Monaten oder Jahren fällig oder nach Betriebsstunden, je nachdem, was zuerst kommt. Erfassen Sie Zählerstände, und der Planer verschiebt den Termin nach der tatsächlichen Nutzung."
+    ],
+    [
+      "Am Tag der Erledigung erfassen.",
+      "Erledigt, verschoben mit Grund oder eine Störung mit ihrer Ausfallzeit: Jeder Eintrag bewegt den Plan. Scannen Sie die Kennung an der Anlage, um sie sofort zu wählen."
+    ],
+    [
+      "Ehrliche Erfüllung.",
+      "Eine Aufgabe gilt als pünktlich, wenn sie bis zum Fälligkeitsdatum erledigt ist oder innerhalb eines Zehntels ihres Intervalls (höchstens 7 Tage). Eine verschobene Aufgabe, die zu spät erledigt wird, zählt trotzdem als verspätet."
+    ],
+    [
+      "A für kritisch.",
+      "Überfällige Aufgaben an A-Anlagen und wiederholte Störungen gehen in die Maßnahmenliste; die Ursachen gehen in Pareto, eine einzelne Störung in die 5 Whys."
+    ]
+  ],
+  "example": {
+    "seed": 11,
+    "days": 91,
+    "site": "station",
+    "areas": [
+      "Eingangsrampen",
+      "Sorterhalle",
+      "Ausgangsrampen",
+      "Gebäude"
+    ],
+    "people": [
+      "Ardit",
+      "Jonas",
+      "Mira"
+    ],
+    "parts": 260,
+    "late": 0.12,
+    "assets": [
+      {
+        "tag": "FL-01",
+        "name": "Stapler 1 · elektrisch 2 t",
+        "type": "forklift",
+        "area": 0,
+        "crit": "A",
+        "supplier": "Liftec Service",
+        "contact": "+49 69 4021 300"
+      },
+      {
+        "tag": "FL-02",
+        "name": "Stapler 2 · elektrisch 2 t",
+        "type": "forklift",
+        "area": 0,
+        "crit": "A",
+        "supplier": "Liftec Service",
+        "contact": "+49 69 4021 300"
+      },
+      {
+        "tag": "FL-03",
+        "name": "Stapler 3 · elektrisch 1,6 t",
+        "type": "forklift",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Truckline Service",
+        "contact": "+49 69 5550 120"
+      },
+      {
+        "tag": "FL-04",
+        "name": "Stapler 4 · elektrisch 1,6 t",
+        "type": "forklift",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Truckline Service",
+        "contact": "+49 69 5550 120"
+      },
+      {
+        "tag": "SRT-01",
+        "name": "Paketsorter",
+        "type": "sorter",
+        "area": 1,
+        "crit": "A",
+        "supplier": "Sortline Service",
+        "contact": "service@sortline.example"
+      },
+      {
+        "tag": "CV-01",
+        "name": "Zulaufband",
+        "type": "conveyor",
+        "area": 0,
+        "crit": "A",
+        "supplier": "Sortline Service",
+        "contact": "service@sortline.example"
+      },
+      {
+        "tag": "CV-02",
+        "name": "Ablaufband",
+        "type": "conveyor",
+        "area": 2,
+        "crit": "A",
+        "supplier": "Sortline Service",
+        "contact": "service@sortline.example"
+      },
+      {
+        "tag": "DD-01",
+        "name": "Rampentor 1",
+        "type": "dock-door",
+        "area": 0,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-02",
+        "name": "Rampentor 2",
+        "type": "dock-door",
+        "area": 0,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-03",
+        "name": "Rampentor 3",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-04",
+        "name": "Rampentor 4",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-05",
+        "name": "Rampentor 5",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "C",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-06",
+        "name": "Rampentor 6",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "C",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "FE-ALL",
+        "name": "Feuerlöscher (24)",
+        "type": "fire-extinguisher",
+        "area": 3,
+        "crit": "A",
+        "supplier": "Brandschutz Main",
+        "contact": "+49 69 3300 44"
+      }
+    ],
+    "meters": {
+      "FL-01": 4120,
+      "FL-02": 3870,
+      "FL-03": 6210,
+      "FL-04": 2950
+    },
+    "rates": {
+      "FL-01": 9,
+      "FL-02": 8,
+      "FL-03": 7,
+      "FL-04": 6
+    },
+    "overdue": {
+      "FL-02|3": 12,
+      "SRT-01|0": 3,
+      "FE-ALL|0": 6,
+      "DD-04|0": 9
+    },
+    "postponed": [
+      {
+        "task": "CV-01|2",
+        "due": 4,
+        "days": 6,
+        "reason": 0
+      }
+    ],
+    "reasons": [
+      "Der Techniker des Lieferanten kommt nächste Woche"
+    ],
+    "breakdowns": [
+      [
+        80,
+        "SRT-01",
+        95,
+        "sensor",
+        0,
+        0
+      ],
+      [
+        52,
+        "SRT-01",
+        40,
+        "jam",
+        0,
+        1
+      ],
+      [
+        30,
+        "SRT-01",
+        120,
+        "sensor",
+        180,
+        2
+      ],
+      [
+        6,
+        "SRT-01",
+        75,
+        "sensor",
+        0,
+        0
+      ],
+      [
+        66,
+        "FL-03",
+        240,
+        "hydraulic",
+        320,
+        3
+      ],
+      [
+        41,
+        "FL-03",
+        90,
+        "battery",
+        0,
+        4
+      ],
+      [
+        19,
+        "FL-03",
+        180,
+        "hydraulic",
+        410,
+        3
+      ],
+      [
+        35,
+        "CV-02",
+        150,
+        "wear",
+        260,
+        5
+      ],
+      [
+        12,
+        "CV-02",
+        30,
+        "jam",
+        0,
+        1
+      ],
+      [
+        58,
+        "DD-04",
+        480,
+        "damage",
+        1150,
+        6
+      ],
+      [
+        14,
+        "DD-04",
+        300,
+        "damage",
+        640,
+        6
+      ],
+      [
+        27,
+        "FL-01",
+        60,
+        "operator",
+        0,
+        7
+      ]
+    ],
+    "notes": [
+      "Lichtschranke an Rutsche 14 verschmutzt, Sorter mit Störung stehen geblieben",
+      "Übergroßes Paket an der Zusammenführung eingeklemmt",
+      "Lichtschranke an Rutsche 14 ersetzt",
+      "Hubzylinder undicht, Schlauch ersetzt",
+      "Batterie über Nacht nicht geladen, Ladestecker locker",
+      "Gurt an der Verbindungsstelle verschlissen, Gurt ersetzt",
+      "Lkw hat beim Andocken das Torpaneel getroffen, Paneel ersetzt",
+      "Gabeln auf eine Palettenkante abgesenkt, Hubmastprüfung durch den Lieferanten"
+    ]
+  }
+}
