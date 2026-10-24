@@ -246,5 +246,13 @@
     "summary": "Auditet e procesit me nivele nga drejtuesi i ekipit, menaxheri i zonës dhe drejtuesi i objektit, me kontrolle po ose jo të standardit për magazinë, hotel dhe stacion shpërndarjeje, dhe një ecje për humbjet që numëron 8 humbjet, Mura dhe Muri. Përputhshmëria për javë dhe nivel, ku janë përgjigjet jo, cili nivel është me vonesë, dhe gjetjet drejt e në veprime.",
     "url": "/sq/tools/gemba-walk/",
     "cta": "Nis ecjen"
+  },
+  {
+    "name": "Raporti i operacioneve",
+    "type": "Raport",
+    "time": "5 min",
+    "summary": "Raporti javor ose mujor për menaxherin tënd, i shkruar nga të dhënat e mjeteve të tjera: siguria, cilësia, dorëzimi, OEE, 5S, hoteli, Kaizen dhe veprimet, secili kundrejt periudhës para dhe objektivit. Çfarë u përmirësua, çfarë u përkeqësua, rreziku më i madh, një vendim dhe tri përparësi. Tekst, A4 ose Word.",
+    "url": "/sq/tools/ops-report/",
+    "cta": "Shkruaj raportin"
   }
 ]

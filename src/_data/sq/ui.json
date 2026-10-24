@@ -3737,5 +3737,6 @@
   "This template file holds nothing this tool can use.": "Ky skedar modeli nuk përmban asgjë që ky mjet mund të përdorë.",
   "Own template": "Model vetjak",
   "A new standard from the file: {text}": "Një standard i ri nga skedari: {text}",
-  "{n} tasks loaded from the file.": "{n} detyra u ngarkuan nga skedari."
+  "{n} tasks loaded from the file.": "{n} detyra u ngarkuan nga skedari.",
+  "Choose last week, read the summary and the biggest risk, send the report to your manager and put next week's three priorities into the Action Tracker.": "Zgjidh javën e kaluar, lexo përmbledhjen dhe rrezikun më të madh, dërgoja raportin menaxherit dhe vendos tri përparësitë e javës që vjen në listën e veprimeve."
 }

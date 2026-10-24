@@ -3737,5 +3737,6 @@
   "This template file holds nothing this tool can use.": "Diese Vorlagendatei enthält nichts, was dieses Tool verwenden kann.",
   "Own template": "Eigene Vorlage",
   "A new standard from the file: {text}": "Ein neuer Standard aus der Datei: {text}",
-  "{n} tasks loaded from the file.": "{n} Aufgaben aus der Datei geladen."
+  "{n} tasks loaded from the file.": "{n} Aufgaben aus der Datei geladen.",
+  "Choose last week, read the summary and the biggest risk, send the report to your manager and put next week's three priorities into the Action Tracker.": "Wählen Sie die letzte Woche, lesen Sie die Zusammenfassung und das größte Risiko, senden Sie den Bericht an Ihre Führungskraft und übernehmen Sie die drei Prioritäten der nächsten Woche in die Maßnahmenliste."
 }

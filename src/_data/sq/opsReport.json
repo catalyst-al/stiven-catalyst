@@ -1,0 +1,253 @@
+{
+  "storageKey": "sc-ops-report-sq",
+  "text": {
+    "tool": "Raporti i operacioneve",
+    "file": "raporti-operacioneve",
+    "exampleNote": "Ky është një objekt shembull, që mbahet vetëm në këtë faqe, që të shohësh një raport të gatshëm. Raporti i vërtetë lexon Kontrollin e dëmeve, Analizën e vonesave, OEE, listën e veprimeve dhe mjetet e tjera në këtë shfletues, dhe shkruhet vetë nga ajo që ato mbajnë.",
+    "exampleActions": "Fokusi i shembullit nuk shtohet në listën tënde të veprimeve. Regjistro punën tënde në mjete dhe raporti shkruan tëndin.",
+    "nothing": "Asnjë nga mjetet nuk ka të dhëna për këtë periudhë. Zgjidh një periudhë tjetër, ose regjistro javën më parë në mjete."
+  },
+  "periods": [
+    { "key": "thisWeek", "label": "Këtë javë" },
+    { "key": "lastWeek", "label": "Javën e kaluar" },
+    { "key": "thisMonth", "label": "Këtë muaj" },
+    { "key": "lastMonth", "label": "Muajin e kaluar" },
+    { "key": "custom", "label": "Periudhë sipas zgjedhjes" }
+  ],
+  "sources": {
+    "damage-control": "Kontrolli i dëmeve",
+    "incomplete-control": "Kontrolli i plotësisë",
+    "night-audit": "Regjistri i Night Audit",
+    "delay-analyzer": "Analiza e vonesave",
+    "shift-handover": "Dorëzimi i turnit",
+    "safety-cross": "Kryqi i sigurisë",
+    "oee": "OEE",
+    "five-s-audit": "Auditi 5S",
+    "gemba-walk": "Gemba Walk",
+    "hotel-kpis": "KPI-të e hotelit",
+    "kaizen-board": "Tabela Kaizen",
+    "action-tracker": "Lista e veprimeve"
+  },
+  "targets": [
+    { "key": "damage", "label": "Shkalla e dëmeve", "unit": "%", "placeholder": "p.sh. 0,3" },
+    { "key": "incomplete", "label": "Shkalla e porosive të paplota", "unit": "%", "placeholder": "p.sh. 0,5" },
+    { "key": "nightAudit", "label": "Shkalla e përjashtimeve në Night Audit", "unit": "%", "placeholder": "p.sh. 2" },
+    { "key": "ontime", "label": "Rrugët në kohë", "unit": "%", "placeholder": "p.sh. 95" },
+    { "key": "oee", "label": "OEE", "unit": "%", "placeholder": "p.sh. 85" },
+    { "key": "fives", "label": "Rezultati 5S", "unit": "%", "placeholder": "p.sh. 80" }
+  ],
+  "report": {
+    "title": "Raporti i operacioneve",
+    "weekly": "Raport javor",
+    "monthly": "Raport mujor",
+    "periodReport": "Raport",
+    "period": "Periudha",
+    "before": "Krahasuar me",
+    "site": "Objekti",
+    "written": "Shkruar më {date} nga të dhënat në këtë shfletues.",
+    "table": ["Treguesi", "Kjo periudhë", "Periudha para", "Ndryshimi", "Objektivi"]
+  },
+  "sections": {
+    "summary": "Përmbledhje",
+    "safety": "Siguria",
+    "quality": "Cilësia",
+    "delivery": "Dorëzimi",
+    "equipment": "Pajisjet",
+    "workplace": "Vendi i punës",
+    "hotel": "Hoteli",
+    "improvement": "Përmirësimi",
+    "actions": "Veprimet",
+    "focusWeek": "Fokusi i javës që vjen",
+    "focusMonth": "Fokusi i muajit që vjen"
+  },
+  "words": {
+    "better": "më mirë",
+    "worse": "më keq",
+    "same": "pa ndryshim",
+    "up": "u rrit",
+    "down": "ra",
+    "noBefore": "pa periudhë para",
+    "met": "në objektiv",
+    "missed": "jashtë objektivit",
+    "before": "më parë",
+    "target": "Objektivi",
+    "owner": "Përgjegjësi",
+    "check": "Kontrolli",
+    "noOwner": "ende pa përgjegjës",
+    "and": "dhe"
+  },
+  "metrics": {
+    "accidents": { "label": "Aksidente", "noun": "aksidentet" },
+    "firstAid": { "label": "Ndihmë e parë", "noun": "rastet e ndihmës së parë" },
+    "nearMisses": { "label": "Gati-aksidente dhe veprime të pasigurta", "noun": "gati-aksidentet e raportuara" },
+    "daysSince": { "label": "Ditë pa aksident", "noun": "ditët pa aksident" },
+    "damage": { "label": "Njësi të dëmtuara", "noun": "njësitë e dëmtuara" },
+    "damageRate": { "label": "Shkalla e dëmeve", "noun": "shkalla e dëmeve" },
+    "incomplete": { "label": "Porosi të paplota", "noun": "porositë e paplota" },
+    "incompleteRate": { "label": "Shkalla e porosive të paplota", "noun": "shkalla e porosive të paplota" },
+    "night": { "label": "Përjashtime në Night Audit", "noun": "përjashtimet në Night Audit" },
+    "nightRate": { "label": "Shkalla e përjashtimeve në Night Audit", "noun": "shkalla e përjashtimeve në Night Audit" },
+    "onTime": { "label": "Rrugët në kohë", "noun": "përpikëria e rrugëve" },
+    "late": { "label": "Rrugët me vonesë", "noun": "rrugët me vonesë" },
+    "routes": { "label": "Rrugët", "noun": "rrugët" },
+    "oee": { "label": "OEE", "noun": "OEE" },
+    "availability": { "label": "Disponueshmëria", "noun": "disponueshmëria" },
+    "performance": { "label": "Performanca", "noun": "performanca" },
+    "quality": { "label": "Shkalla e cilësisë", "noun": "shkalla e cilësisë" },
+    "fiveS": { "label": "Rezultati 5S", "noun": "rezultati 5S" },
+    "gemba": { "label": "Përputhshmëria Gemba", "noun": "përputhshmëria e Gemba Walk" },
+    "walks": { "label": "Ecje", "noun": "ecjet" },
+    "occ": { "label": "Zënia", "noun": "zënia e dhomave" },
+    "adr": { "label": "ADR", "noun": "ADR" },
+    "revpar": { "label": "RevPAR", "noun": "RevPAR" },
+    "ideas": { "label": "Ide të reja", "noun": "idetë e reja" },
+    "adopted": { "label": "Ide të zbatuara", "noun": "idetë e zbatuara" },
+    "saving": { "label": "Kursime në muaj", "noun": "kursimet" },
+    "opened": { "label": "Veprime të hapura", "noun": "veprimet e hapura" },
+    "closed": { "label": "Veprime të mbyllura", "noun": "veprimet e mbyllura" },
+    "verified": { "label": "Veprime të verifikuara", "noun": "veprimet e verifikuara" },
+    "overdue": { "label": "Veprime të vonuara", "noun": "veprimet e vonuara" }
+  },
+  "factors": { "availability": "disponueshmëria", "performance": "performanca", "quality": "cilësia" },
+  "sentences": {
+    "trend": "{value} kundrejt {before} në periudhën para, {trend}",
+    "noTrend": "{value}, pa periudhë para për krahasim",
+    "targetMet": "Kjo arrin objektivin prej {target}.",
+    "targetMissed": "Kjo nuk e arrin objektivin prej {target}.",
+    "safety": {
+      "accident": { "one": "Një aksident në periudhë, më {date}{where}.", "many": "{n} aksidente në periudhë, i fundit më {date}{where}." },
+      "none": "Asnjë aksident në periudhë. Ditë pa aksident në fund të saj: {days}.",
+      "where": " në zonën {area}",
+      "near": "Gati-aksidente dhe veprime të pasigurta të raportuara: {near} ({nearBefore} në periudhën para). Çdo raportim është një aksident që nuk ndodhi."
+    },
+    "quality": {
+      "lead": "{metric}: {trend}.",
+      "cause": "Shkaku më i madh është {cause}, me {share} të regjistrimeve."
+    },
+    "delivery": {
+      "lead": "Në kohë: {trend}.",
+      "late": { "one": "Një rrugë mbërriti me vonesë, {minutes} minuta pas planit.", "many": "{late} rrugë mbërritën me vonesë, mesatarisht {minutes} minuta pas planit." },
+      "none": "Asnjë rrugë nuk mbërriti me vonesë.",
+      "partial": "Rrugët me vonesë: {trend}. Vetëm një pjesë e rrugëve është regjistruar, ndaj nuk ka përqindje në kohë."
+    },
+    "equipment": {
+      "lead": "OEE: {trend}.",
+      "machine": "OEE më e ulët është te {machine}, me {low}; faktori më i dobët atje është {factor}."
+    },
+    "workplace": {
+      "fiveS": "Rezultati 5S në auditet e periudhës: {trend}.",
+      "weakest": "Zona më e dobët është {area} me {low}.",
+      "gemba": "Përputhshmëria e Gemba Walk: {trend}."
+    },
+    "hotel": {
+      "lead": "RevPAR: {trend}.",
+      "mix": "Zënia {occ} me një ADR prej {adr}."
+    },
+    "improvement": {
+      "lead": { "one": "Një ide e zbatuar ({before} në periudhën para), me vlerë {saving} në muaj.", "many": "{adopted} ide të zbatuara ({before} në periudhën para), me vlerë {saving} në muaj." },
+      "none": "Asnjë ide nuk u zbatua në periudhë.",
+      "ideas": { "one": "Erdhi një ide e re.", "many": "Erdhën {ideas} ide të reja." }
+    },
+    "actions": {
+      "lead": "Të hapura {opened}, të mbyllura {closed}, të verifikuara {verified}.",
+      "overdue": { "one": "Një veprim ishte i vonuar në fund të periudhës, te {owners}.", "many": "{overdue} veprime ishin të vonuara në fund të periudhës, te {owners}." },
+      "overdueNone": "Asnjë veprim nuk ishte i vonuar në fund të periudhës.",
+      "handover": { "one": "U mbyll një dorëzim turni; çështje të kaluara te turni tjetër: {carried}.", "many": "U mbyllën {n} dorëzime turni; çështje të kaluara te turni tjetër: {carried}." }
+    }
+  },
+  "summary": {
+    "intro": { "one": "Ky raport mbulon {range}{site} dhe e krahason me {beforeRange}. Lexon një mjet në këtë shfletues.", "many": "Ky raport mbulon {range}{site} dhe e krahason me {beforeRange}. Lexon {n} mjete në këtë shfletues." },
+    "site": " në objektin {site}",
+    "better": "Çfarë u përmirësua: {noun}, nga {before} në {value}.",
+    "betterNone": "Asgjë nuk u përmirësua qartë krahasuar me periudhën para.",
+    "worse": "Çfarë u përkeqësua: {noun}, nga {before} në {value}.",
+    "worseNone": "Asgjë nuk u përkeqësua qartë krahasuar me periudhën para.",
+    "risk": {
+      "accident": { "one": "Rreziku më i madh është siguria: një aksident në periudhë, më {date}.", "many": "Rreziku më i madh është siguria: {n} aksidente në periudhë, i fundit më {date}." },
+      "target": "Rreziku më i madh është treguesi {metric}: {value} kundrejt një objektivi prej {target}.",
+      "overdue": { "one": "Rreziku më i madh është plani i veprimeve: një veprim është i vonuar.", "many": "Rreziku më i madh është plani i veprimeve: {n} veprime janë të vonuara." },
+      "worse": "Rreziku më i madh është treguesi {metric}, që u përkeqësua.",
+      "none": "Asnjë rrezik nuk bie në sy: çdo tregues me objektiv e arrin atë."
+    },
+    "decision": {
+      "accident": "Vendimi i vetëm që duhet: kush e kontrollon kundërmasën e aksidentit, dhe deri kur.",
+      "target": "Vendimi i vetëm që duhet: kush e merr përsipër ta kthejë treguesin {metric} në {target}, dhe deri kur.",
+      "overdue": "Vendimi i vetëm që duhet: a marrin veprimet e vonuara afate të reja apo përgjegjës të rinj.",
+      "worse": "Vendimi i vetëm që duhet: kush e gjen deri në raportin tjetër pse u përkeqësua treguesi {metric}.",
+      "none": "Vendimi i vetëm që duhet: asnjë përveç mbajtjes së standardit. Fokusi më poshtë ndihmon për këtë."
+    }
+  },
+  "focus": {
+    "accident": { "title": "Kontrollo kundërmasën e çdo aksidenti të periudhës", "detail": { "one": "Një aksident, më {date}{where}.", "many": "{n} aksidente, i fundit më {date}{where}." }, "check": "Asnjë përsëritje në të njëjtin vend në katër javët e ardhshme" },
+    "target": { "title": "Ktheje treguesin {metric} në {target}", "detail": "Tani {value}; në periudhën para {before}.", "check": "{metric} në {target} ose më mirë në raportin tjetër" },
+    "cause": { "title": "Sulmo shkakun më të madh: {cause} ({metric})", "detail": "{share} e regjistrimeve në periudhë.", "check": "{cause} nuk është më shkaku më i madh në raportin tjetër" },
+    "overdue": { "title": "Mbyll ose riplanifiko veprimet e vonuara", "detail": { "one": "Një veprim është i vonuar, te {owners}.", "many": "{n} veprime janë të vonuara, te {owners}." }, "check": "Asnjë veprim i vonuar në raportin tjetër" },
+    "machine": { "title": "Rrit OEE në {machine}", "detail": "{value} kundrejt një objektivi prej {target}; faktori më i dobët është {factor}.", "check": "OEE në {machine} në {target} ose më mirë në raportin tjetër" },
+    "area": { "title": "Ngri 5S në zonën {area}", "detail": "{value} kundrejt një objektivi prej {target}.", "check": "5S në zonën {area} në {target} ose më mirë në auditin tjetër" },
+    "worse": { "title": "Gjej pse u përkeqësua treguesi {metric}", "detail": "Nga {before} në {value}.", "check": "{metric} përsëri në {before} ose më mirë në raportin tjetër" },
+    "none": "Çdo tregues e mban objektivin. Mbaje standardin dhe dil në sallë."
+  },
+  "tips": [
+    ["Në fillim regjistro, pastaj raporto.", "Raporti nuk ka të dhëna të vetat: lexon atë që mbajnë në këtë shfletues Kontrolli i dëmeve, Analiza e vonesave, OEE, Auditi 5S, lista e veprimeve dhe mjetet e tjera."],
+    ["Lexo periudhën para.", "Çdo numër vihet kundrejt periudhës para dhe objektivit të vet, me fjalë dhe me shigjeta, që raporti të lexohet njësoj edhe në letër."],
+    ["Vendos objektivat një herë.", "Emri i objektit dhe objektivat vijnë nga profili i vendit të punës, që e ndajnë regjistrat. Një objektiv i shkruar në një regjistër ka përparësi mbi profilin."],
+    ["Një vendim, tri përparësi.", "Përmbledhja emërton rrezikun më të madh dhe vendimin e vetëm që kërkon; fokusi rendit tri gjërat për javën që vjen. Me një prekje shkojnë në listën e veprimeve."],
+    ["Dërgoje siç është.", "Kopjo tekstin në një email, printoje në A4 ose shkarkoje si skedar Word për mbledhjen e menaxhimit."]
+  ],
+  "example": {
+    "seed": 11,
+    "site": "Qendra Frankfurt",
+    "shifts": ["Mëngjes", "Pasdite", "Natë"],
+    "areas": [
+      { "name": "Pranimi", "owner": "Anna" },
+      { "name": "Mbledhja e porosive", "owner": "Besnik" },
+      { "name": "Paketimi", "owner": "Fatima" },
+      { "name": "Ngarkimi", "owner": "Marco" }
+    ],
+    "targets": { "damage": 0.3, "incomplete": 0.5, "nightAudit": 2, "ontime": 95, "oee": 85, "fives": 80 },
+    "damage": { "volume": 3600, "rate": [0.42, 0.26], "target": "0.3", "stages": ["Ngarkimi", "Mbledhja e porosive", "Transporti", "Pranimi"], "causes": ["Stivimi", "Trajtimi", "Sigurimi i ngarkesës", "Paketimi"] },
+    "incomplete": { "volume": 2400, "rate": [0.42, 0.62], "target": "0.5", "stages": ["Mbledhja e porosive", "Paketimi", "Nisja"], "causes": ["Mbledhje e gabuar", "Mungon në stok", "Mungon etiketa", "Skanim i kapërcyer"] },
+    "night": { "volume": 180, "rate": [2.8, 2.1], "target": "2", "stages": ["Mbërritja", "Pagesa", "Mbyllja e auditit"], "causes": ["Pa garanci", "Tarifa e pangarkuar", "Postim i vonë"] },
+    "delay": { "routes": 14, "late": [4, 10], "grace": "15", "target": "95" },
+    "safety": {
+      "near": 0.45,
+      "events": [
+        { "week": -1, "day": 2, "type": "no-lost-time", "area": 3 },
+        { "week": -6, "day": 1, "type": "first-aid", "area": 1 }
+      ]
+    },
+    "oee": {
+      "machines": [
+        { "name": "Renditësi 1", "rate": 2400, "breakdown": [45, 24] },
+        { "name": "Renditësi 2", "rate": 2400, "breakdown": [30, 30] },
+        { "name": "Mbështjellësi i paletave", "rate": 60, "breakdown": [55, 50] }
+      ],
+      "stops": { "planned": "Pushim", "breakdown": "Prishje", "setup": "Ndërrim produkti" }
+    },
+    "fiveS": { "score": [1.9, 3.0], "weak": 2 },
+    "gemba": { "yes": [0.8, 0.87], "template": "warehouse", "layers": ["team-lead", "area-manager"], "walkers": ["Anna", "Besnik", "Dritan"] },
+    "hotel": { "rooms": 120, "occ": [0.74, 0.79], "adr": [112, 115], "budgetOcc": "80", "budgetAdr": "118" },
+    "kaizen": [
+      { "title": "Tabelë hijesh për veglat e mbështjelljes te porta 3", "waste": "Lëvizja", "area": "Ngarkimi", "by": "Marco", "created": [-11, 1], "adopted": [-9, 3], "saving": 120 },
+      { "title": "Etiketa me ngjyra për kutitë sipas rrugës", "waste": "Defektet", "area": "Paketimi", "by": "Fatima", "created": [-9, 2], "adopted": [-6, 4], "saving": 350 },
+      { "title": "Artikujt e shpejtë në lartësinë e belit në korridorin 12", "waste": "Lëvizja", "area": "Mbledhja e porosive", "by": "Besnik", "created": [-6, 0], "adopted": [-2, 2], "saving": 480 },
+      { "title": "Mbrojtëse cepash në çdo paletë të përzier", "waste": "Defektet", "area": "Ngarkimi", "by": "Marco", "created": [-3, 1], "adopted": [-1, 3], "saving": 260 },
+      { "title": "Plani i ngarkimit në ekranin e portës", "waste": "Përpunimi i tepërt", "area": "Ngarkimi", "by": "Jonas", "created": [-2, 4], "adopted": null, "status": "do", "saving": 90 },
+      { "title": "Skaner i dytë te vendi i paketimit 4", "waste": "Pritja", "area": "Paketimi", "by": "Fatima", "created": [-1, 1], "adopted": null, "status": "plan", "saving": 150 },
+      { "title": "Lista e mbledhjes e renditur sipas korridoreve", "waste": "Lëvizja", "area": "Mbledhja e porosive", "by": "Anna", "created": [-1, 3], "adopted": null, "status": "idea", "saving": 200 }
+    ],
+    "actions": [
+      { "title": "Vendos rregullin e stivimit si një foto te porta 2", "owner": "Marco", "area": "Ngarkimi", "created": [-5, 0], "due": [-4, 4], "status": "verified", "closed": [-4, 3] },
+      { "title": "Riparo urën e ngarkimit te porta 4", "owner": "Jonas", "area": "Pranimi", "created": [-3, 1], "due": [-2, 4], "status": "open" },
+      { "title": "Trajno turnin e pasdites për sigurimin e ngarkesës", "owner": "Marco", "area": "Ngarkimi", "created": [-2, 0], "due": [-1, 1], "status": "doing" },
+      { "title": "Zëvendëso rripat e konsumuar të rimorkios 7", "owner": "Jonas", "area": "Ngarkimi", "created": [-2, 2], "due": [-1, 4], "status": "done", "closed": [-1, 3] },
+      { "title": "Numëro kutitë bosh para turnit të pasdites", "owner": "Fatima", "area": "Paketimi", "created": [-1, 0], "due": [-1, 2], "status": "verified", "closed": [-1, 2] },
+      { "title": "Shëno kalimin pranë mbështjellësit të paletave", "owner": "Anna", "area": "Ngarkimi", "created": [-1, 2], "due": [0, 4], "status": "open" },
+      { "title": "Kontrollo bateritë e skanerëve çdo mëngjes", "owner": "Besnik", "area": "Mbledhja e porosive", "created": [-1, 3], "due": [-1, 3], "status": "open" }
+    ],
+    "handover": {
+      "issues": ["Ura e portës 4 ngec", "Dy paleta presin një etiketë", "Bateria e skanerit 3 e dobët", "Rimorkio e vonuar nga Mainz", "Po mbaron filmi i mbështjelljes"],
+      "owners": ["Anna", "Marco", "Besnik"]
+    }
+  }
+}

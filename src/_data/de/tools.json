@@ -246,5 +246,13 @@
     "summary": "Layered Process Audits durch Teamleitung, Bereichsleitung und Standortleitung, mit Ja-oder-Nein-Prüfungen des Standards für Lager, Hotel und Zustellbasis, und ein Verschwendungsrundgang, der die 8 Verschwendungsarten, Mura und Muri zählt. Erfüllungsgrad je Woche und Ebene, wo die Nein-Antworten liegen, welche Ebene im Verzug ist, und Befunde direkt als Maßnahmen.",
     "url": "/de/tools/gemba-walk/",
     "cta": "Rundgang starten"
+  },
+  {
+    "name": "Betriebsbericht",
+    "type": "Bericht",
+    "time": "5 min",
+    "summary": "Der Wochen- oder Monatsbericht für Ihre Führungskraft, geschrieben aus den Daten der anderen Tools: Sicherheit, Qualität, Lieferung, OEE, 5S, Hotel, Kaizen und Maßnahmen, jeweils gegen Vorzeitraum und Ziel. Was besser und was schlechter wurde, das größte Risiko, eine Entscheidung und drei Prioritäten. Text, A4 oder Word.",
+    "url": "/de/tools/ops-report/",
+    "cta": "Bericht erstellen"
   }
 ]

@@ -1,0 +1,80 @@
+/* ===== Operations Report (js/ops-report.js) ===== */
+.or-period { margin: 0; padding: 0; border: 0; min-width: 0; }
+.or-choices { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
+.or-choice {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--muted); font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.or-choice input { margin: 0; accent-color: var(--blue); }
+.or-choice:has(input:checked) { border-color: var(--blue); color: var(--ink); }
+.or-choice:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+.or-custom { margin-bottom: 8px; }
+
+.or-sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 6px 18px; margin: 10px 0 12px; padding: 0; list-style: none; }
+.or-sources li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.or-sources a { color: var(--muted); font-weight: 600; text-decoration: none; }
+.or-sources .has-data a { color: var(--ink); }
+.or-sources a:hover, .or-sources a:focus-visible { color: var(--blue); text-decoration: underline; }
+.or-count { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.or-profile summary { cursor: pointer; }
+.or-profile[open] summary { margin-bottom: 8px; }
+
+/* The report reads like a document: one column, its sections in order, hierarchy from type and space. */
+.or-report { display: grid; gap: 34px; max-width: 980px; }
+.or-head { display: grid; gap: 6px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.or-head .kicker { margin: 0; }
+.or-title { margin: 0; font-family: var(--display); font-size: clamp(28px, 4vw, 40px); font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.or-meta { margin: 0; color: var(--muted); font-size: 14px; }
+.or-section { display: grid; gap: 14px; min-width: 0; }
+.or-section-title {
+  margin: 0; padding-bottom: 6px; border-bottom: 1px solid var(--line); color: var(--blue);
+  font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+}
+.or-summary-text { margin: 0; font-size: clamp(17px, 2vw, 19px); line-height: 1.55; }
+.or-sentence { margin: 0; max-width: 72ch; line-height: 1.55; }
+.or-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 12px; }
+.or-stat { padding: 16px 18px; border-radius: 14px; }
+.or-stat .dl-stat-value { font-size: clamp(24px, 2.6vw, 30px); }
+.or-change, .or-target { font-variant-numeric: tabular-nums; }
+/* The words carry the meaning; the colour only repeats it. */
+.or-change.is-better { color: var(--ok); }
+.or-change.is-worse { color: var(--danger); }
+.or-target.is-missed { color: var(--danger); font-weight: 600; }
+.or-target.is-met { color: var(--ok); }
+.or-section .ck-figure { margin: 0; }
+
+.or-focus-list { display: grid; gap: 12px; margin: 0; padding-left: 22px; }
+.or-focus-list li { padding-left: 4px; line-height: 1.5; }
+.or-focus-list strong { font-weight: 700; }
+.or-focus-list small { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
+.or-actions { margin-top: 26px; }
+.or-status { margin-top: 8px; }
+.or-status a { margin-left: 4px; }
+
+@media (max-width: 600px) {
+  .or-report { gap: 26px; }
+  .or-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .or-stat { padding: 12px 14px; }
+}
+
+@page or-a4 { size: A4 portrait; margin: 14mm; }
+@media print {
+  body:has(.or-report) .page-hero,
+  body:has(.or-report) .or-setup,
+  body:has(.or-report) .dl-example-note,
+  .or-actions, .or-status, .or-section .ck-actions { display: none !important; }
+  .or-results { page: or-a4; padding: 0 !important; border: 0 !important; }
+  .or-report { gap: 14px; max-width: none; }
+  .or-head { padding-bottom: 8px; }
+  .or-title { font-size: 20pt; color: #000; }
+  .or-meta, .or-sentence, .or-summary-text, .or-focus-list { font-size: 9.5pt; line-height: 1.4; color: #000; }
+  .or-summary-text { font-size: 10.5pt; }
+  .or-section { gap: 6px; break-inside: avoid; }
+  .or-section-title { color: #000; border-color: #999; font-size: 9pt; }
+  .or-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .or-stat { padding: 6px 8px; border-radius: 6px; border-color: #bbb; }
+  .or-stat .dl-stat-value { font-size: 14pt; }
+  .or-stat .dl-stat-label, .or-stat .dl-stat-note { font-size: 7.5pt; color: #333; }
+  .or-section .ck-figure svg { max-height: 52mm; width: auto; max-width: 100%; }
+  .or-section .ck-scroll { overflow: visible; }
+}

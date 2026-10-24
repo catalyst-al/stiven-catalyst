@@ -246,5 +246,13 @@
     "summary": "Layered process audits by team lead, area manager and site lead, with yes or no checks on the standard for warehouse, hotel and delivery station, and a waste walk that counts the 8 wastes, Mura and Muri. Compliance per week and layer, where the no answers sit, which layer is late, and findings straight into actions.",
     "url": "/tools/gemba-walk/",
     "cta": "Start the walk"
+  },
+  {
+    "name": "Operations Report",
+    "type": "Report",
+    "time": "5 min",
+    "summary": "The weekly or monthly report for your manager, written from the data of the other tools: safety, quality, delivery, OEE, 5S, hotel, Kaizen and actions, each against the period before and its target. What got better, what got worse, the biggest risk, one decision and three priorities. Text, A4 or Word.",
+    "url": "/tools/ops-report/",
+    "cta": "Write the report"
   }
 ]

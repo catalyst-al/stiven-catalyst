@@ -107,7 +107,8 @@
       "/tools/skills-matrix/",
       "/tools/oee/",
       "/tools/hotel-kpis/",
-      "/tools/gemba-walk/"
+      "/tools/gemba-walk/",
+      "/tools/ops-report/"
     ],
     "learn": [],
     "also": [
@@ -176,6 +177,11 @@
         "when": "During the shift",
         "do": "Walk your layer's questions where the work is done, answer each with yes or no against the standard, and give every no you cannot fix on the spot an owner before you leave the floor.",
         "tool": "/tools/gemba-walk/"
+      },
+      {
+        "when": "Every week",
+        "do": "Choose last week, read the summary and the biggest risk, send the report to your manager and put next week's three priorities into the Action Tracker.",
+        "tool": "/tools/ops-report/"
       }
     ],
     "next": "lumen"

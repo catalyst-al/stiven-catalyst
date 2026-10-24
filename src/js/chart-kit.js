@@ -55,6 +55,10 @@ window.ChartKit = (() => {
     return out;
   };
   const digitsFor = (max) => (max >= 100 ? 0 : max >= 10 ? 1 : 2);
+  // Counts are whole numbers: 3, not 3.00. Only values with a fraction get the digits their size needs.
+  // The axis of whole numbers carries whole ticks only (0, 1, 2), never 0.25.
+  const axisTicks = (max, values) => (values.every((v) => !Number.isFinite(v) || Number.isInteger(v)) ? ticks(0, max, 4).filter(Number.isInteger) : ticks(0, max, 4));
+  const digitsOf = (values, max) => (values.every((v) => !Number.isFinite(v) || Number.isInteger(v)) ? 0 : digitsFor(max));
   const shorten = (text, max = 18) => (String(text).length > max ? `${String(text).slice(0, max - 1)}…` : String(text));
 
   const frame = (W, H, title) => {
@@ -108,11 +112,11 @@ window.ChartKit = (() => {
   const bars = (items, options = {}) => {
     const W = 640, H = 300, left = 48, right = 14, top = 28, bottom = 52;
     const svg = frame(W, H, options.title);
-    const format = options.format || ((v) => num(v, digitsFor(Math.max(...items.map((i) => i.value), 0))));
+    const format = options.format || ((v) => num(v, digitsOf(items.map((i) => i.value), Math.max(...items.map((i) => i.value), 0))));
     const max = options.yMax || niceMax(Math.max(...items.map((i) => i.value), options.target || 0, 0));
     const plotW = W - left - right, plotH = H - top - bottom;
     const y = (v) => top + plotH - (v / max) * plotH;
-    ticks(0, max, 4).forEach((v) => {
+    axisTicks(max, items.map((i) => i.value)).forEach((v) => {
       svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(v), y2: y(v), stroke: C.grid, "stroke-width": 1 }));
       svg.append(svgEl("text", { x: left - 8, y: y(v) + 4, "text-anchor": "end", "font-size": 12, fill: C.muted }, format(v)));
     });
@@ -147,10 +151,10 @@ window.ChartKit = (() => {
     const svg = frame(W, H, options.title);
     const totals = groups.map((g) => g.parts.reduce((s, p) => s + p.value, 0));
     const max = options.yMax || niceMax(Math.max(...totals, options.line?.value || 0, 0));
-    const format = options.format || ((v) => num(v, digitsFor(max)));
+    const format = options.format || ((v) => num(v, digitsOf(groups.flatMap((g) => g.parts.map((p) => p.value)), max)));
     const plotW = W - left - right, plotH = H - top - bottom;
     const y = (v) => top + plotH - (v / max) * plotH;
-    ticks(0, max, 4).forEach((v) => {
+    axisTicks(max, groups.flatMap((g) => g.parts.map((p) => p.value))).forEach((v) => {
       svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(v), y2: y(v), stroke: C.grid }));
       svg.append(svgEl("text", { x: left - 8, y: y(v) + 4, "text-anchor": "end", "font-size": 12, fill: C.muted }, format(v)));
     });
