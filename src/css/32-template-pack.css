@@ -1,0 +1,45 @@
+/* ===== Template packs (js/template-pack.js) =====
+   "Save as template file" and "Open a template file" under a tool's own templates, and the editor of a team's own
+   question set: one row per question, its text field growing, the arrows and the remove button beside it. */
+.tp-host { margin-top: 14px; }
+.tp-host:empty { display: none; }
+.tp-pack .tool-actions { margin-top: 0; }
+.tp-status:empty { display: none; }
+.tp-editor {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.tp-editor[hidden] { display: none; }
+.tp-editor > summary { font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+.tp-editor[open] > summary { margin-bottom: 12px; }
+.tp-field { display: grid; gap: 4px; min-width: 0; }
+.tp-field-label { color: var(--muted); font-size: 13px; }
+.tp-field input { width: 100%; min-width: 0; }
+.tp-group { margin: 14px 0 0; padding: 0; border: 0; min-width: 0; }
+.tp-group-name { padding: 0; font-weight: 700; }
+.tp-items { display: grid; gap: 8px; margin: 8px 0; padding: 0; list-style: none; }
+.tp-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.tp-item-fields { display: grid; gap: 6px; min-width: 0; }
+.tp-item-tools { display: flex; gap: 2px; }
+.tp-move { min-width: 34px; padding: 4px 8px; }
+.tp-move:disabled { opacity: 0.35; cursor: default; }
+.tp-add, .tp-delete { padding: 4px 0; }
+
+@media (max-width: 480px) {
+  .tp-item { grid-template-columns: minmax(0, 1fr); }
+  .tp-item-tools { justify-content: flex-end; }
+}
+
+@media print {
+  .tp-host { display: none; }
+}

@@ -1,0 +1,21 @@
+/* ===== The certificate of the Six Sigma course (js/dmaic.js): on screen a preview, on paper one A4 landscape page. ===== */
+.dm-cert-sheet {
+  margin-top: 20px; padding: clamp(24px, 5vw, 56px); border: 1px solid var(--line); border-radius: var(--radius);
+  text-align: center; background: var(--card);
+}
+.dm-cert-sheet p { margin: 0 0 10px; }
+.dm-cert-kicker { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.dm-cert-title { font-family: var(--display); font-size: clamp(22px, 3vw, 32px); letter-spacing: .02em; text-transform: uppercase; }
+.dm-cert-name { margin: 22px 0 12px !important; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: clamp(30px, 5vw, 52px); }
+.dm-cert-course { color: var(--blue); font-family: var(--serif); font-size: clamp(22px, 3vw, 30px); }
+.dm-cert-line { color: var(--muted); }
+.dm-cert-date { margin-top: 18px !important; font-weight: 700; }
+.dm-cert-note { margin-top: 18px !important; color: var(--muted); font-size: 12px; }
+@media print {
+  @page certificate { size: A4 landscape; margin: 14mm; }
+  .print-certificate main > :not(.dm-certificate) { display: none !important; }
+  .print-certificate .dm-certificate > :not(.dm-cert-sheet) { display: none !important; }
+  .print-certificate .dm-certificate { page: certificate; padding: 0; }
+  .print-certificate .dm-cert-sheet { margin: 0; border: 2px solid #1b2330; min-height: 170mm; display: flex; flex-direction: column; justify-content: center; color: #1b2330; background: #fff; }
+  .print-certificate .dm-cert-course { color: #0a6ab0; }
+}

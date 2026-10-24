@@ -89,17 +89,27 @@
   const pillarTitle = (key) => (pillarOf[key]?.aka ? `${pillarName(key)} (${pillarOf[key].aka})` : pillarName(key));
   const id = (prefix) => `${prefix}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 
-  // State: the scope and template, the audit in progress (draft), the saved audits (rows) and the red tags.
+  // State: the scope and template, the audit in progress (draft), the saved audits (rows), the red tags and the team's
+  // own question sets (custom, keyed "custom-…", the same shape as cfg.templates).
   const blankDraft = (keep = {}) => ({ date: keep.date || today(), area: str(keep.area), auditor: str(keep.auditor), shift: str(keep.shift), scores: {}, notes: {}, acts: {} });
-  const state = loadState(KEY, { scope: "", template: "", rows: [], tags: [], draft: {}, view: "", example: {} });
+  const state = loadState(KEY, { scope: "", template: "", rows: [], tags: [], draft: {}, view: "", example: {}, custom: {} });
+  // An own template (saved here or opened from a template file): questions per S as text, nothing else.
+  const cleanTemplate = (raw) => {
+    if (!isObject(raw) || !isObject(raw.questions)) return null;
+    const questions = Object.fromEntries(cfg.pillars.map((p) => [p.key, (Array.isArray(raw.questions[p.key]) ? raw.questions[p.key] : []).filter((v) => typeof v === "string").map((v) => v.slice(0, 300)).slice(0, 30)]));
+    if (!Object.values(questions).some((list) => list.some((v) => v.trim()))) return null;
+    return { name: str(raw.name).trim().slice(0, 80) || tx("Own template"), areas: (Array.isArray(raw.areas) ? raw.areas : []).map(str).filter(Boolean).slice(0, 40), questions };
+  };
+  state.custom = Object.fromEntries(Object.entries(state.custom).filter(([key]) => key.startsWith("custom-")).map(([key, tpl]) => [key, cleanTemplate(tpl)]).filter(([, tpl]) => tpl));
+  const isTemplate = (name) => TEMPLATES.includes(name) || Object.prototype.hasOwnProperty.call(state.custom, name);
   if (!SCOPES.includes(state.scope)) state.scope = SCOPES[0];
-  if (!TEMPLATES.includes(state.template)) state.template = TEMPLATES[0];
+  if (!isTemplate(state.template)) state.template = TEMPLATES[0];
   // Saved data can be damaged; keep only what has the expected shape.
   const cleanScores = (scores) => Object.fromEntries(Object.entries(isObject(scores) ? scores : {}).filter(([key]) => pillarOf[key]).map(([key, list]) => [key, (Array.isArray(list) ? list : []).map((v) => (isScore(v) ? v : null))]));
   const cleanText = (map) => Object.fromEntries(Object.entries(isObject(map) ? map : {}).filter(([, v]) => typeof v === "string" && v.trim()).map(([k, v]) => [k, v.trim()]));
   state.rows = state.rows.filter(isObject).map((row) => ({
     id: str(row.id) || id("a"), date: parseDate(row.date) || "", area: str(row.area), auditor: str(row.auditor), shift: str(row.shift),
-    scope: SCOPES.includes(row.scope) ? row.scope : SCOPES[0], template: TEMPLATES.includes(row.template) ? row.template : state.template,
+    scope: SCOPES.includes(row.scope) ? row.scope : SCOPES[0], template: isTemplate(row.template) ? row.template : state.template,
     scores: cleanScores(row.scores), notes: cleanText(row.notes),
   })).filter((row) => row.date && row.area);
   state.tags = state.tags.filter(isObject).map((tag) => ({
@@ -141,7 +151,7 @@
   const results = document.querySelector("[data-results]");
 
   const keys = () => pillarsFor(state.scope, cfg.scopes);
-  const template = (name = state.template) => cfg.templates[name] || cfg.templates[TEMPLATES[0]];
+  const template = (name = state.template) => cfg.templates[name] || state.custom[name] || cfg.templates[TEMPLATES[0]];
   const questionsOf = (name, key) => template(name).questions?.[key] || [];
   const qid = (key, index) => `${key}-${index}`;
   // The draft keeps one slot per question of the chosen scope and template; a change of either keeps what was scored.
@@ -159,8 +169,10 @@
   const areaOwner = (name) => wpAreas().find((area) => area.name === name)?.owner || "";
   const knownAreas = () => [...new Set([...template().areas, ...state.rows.map((row) => row.area), ...state.tags.map((tag) => tag.area)])].filter(Boolean);
   const fillList = (list, values) => list.replaceChildren(...values.map((value) => el("option", null, value)));
+  let packs = null;
   const renderSetup = () => {
     scopeButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.scopeValue === state.scope)));
+    if (packs) packs.syncOptions();
     templateSelect.value = state.template;
     const profileAreas = wpAreas().map((area) => area.name);
     const useSelect = profileAreas.length > 0;
@@ -466,6 +478,7 @@
 
   const render = () => {
     renderSetup();
+    if (packs) packs.render();
     renderLog();
     renderTags();
     renderResults();
@@ -507,12 +520,28 @@
     renderQuestions();
     changed();
   }));
-  templateSelect.addEventListener("change", () => {
-    state.template = templateSelect.value;
+  const chooseTemplate = (name) => {
+    state.template = name;
     fitDraft();
     renderQuestions();
     changed();
-  });
+  };
+  templateSelect.addEventListener("change", () => chooseTemplate(templateSelect.value));
+  // The team's own question set: a copy of a built-in one to edit, saved and opened as a template file
+  // (js/template-pack.js). Old audits keep their scores by position, so they read the edited questions.
+  const packHost = q("[data-template-pack]");
+  if (window.TemplatePack && packHost) {
+    packs = window.TemplatePack.checklist(packHost, {
+      tool: "five-s-audit", kind: "five-s-questions", validate: cleanTemplate,
+      select: templateSelect, builtIn: cfg.templates, custom: state.custom,
+      current: () => state.template, choose: chooseTemplate,
+      groups: () => keys().map((key) => ({ key, title: pillarTitle(key) })),
+      fields: [{ key: "text", label: tx("Question") }],
+      toEdit: (text) => ({ text: str(text) }), fromEdit: (values) => values.text,
+      changed: () => { fitDraft(); renderQuestions(); save(); renderSetup(); renderResults(); },
+      inUse: (name) => state.rows.some((row) => row.template === name),
+    });
+  }
   const setDraft = (name, value) => { state.draft[name] = value; save(); renderResults(); };
   areaSelect.addEventListener("change", () => setDraft("area", areaSelect.value));
   areaInput.addEventListener("input", () => setDraft("area", areaInput.value.trim()));

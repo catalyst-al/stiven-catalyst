@@ -31,7 +31,7 @@
           </div>
           <div class="field dl-wide">
             <label for="dl-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
-            <input id="dl-note" name="note" placeholder="{{ t.notePlaceholder }}" autocomplete="off">
+            <input id="dl-note" name="note" placeholder="{{ t.notePlaceholder }}" autocomplete="off"{% if cfg.storageKey.indexOf("sc-night-audit") != 0 %} data-scan{% endif %}>
           </div>
         </div>
         <div class="tool-actions">
@@ -46,7 +46,7 @@
       <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {% for f in cfg.fields %}{{ f.label | lc(lang) }}, {% endfor %}{{ t.countShort }}, {{ "cost" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "Your own {a} or {b} names are kept as they are." | t(lang) | replace("{a}", cfg.fields[1].label | lc(lang)) | replace("{b}", cfg.fields[3].label | lc(lang)) }}</p>
       <div class="field">
         <label class="visually-hidden" for="dl-paste">{{ "Rows to import" | t(lang) }}</label>
-        <textarea id="dl-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+        <textarea id="dl-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date",{% for f in cfg.fields %}{{ f.name | dump }},{% endfor %}"units","cost","note"]' data-column-labels='[{{ "date" | t(lang) | dump }},{% for f in cfg.fields %}{{ f.label | lc(lang) | dump }},{% endfor %}{{ t.countShort | dump }},{{ "cost" | t(lang) | dump }},{{ "note" | t(lang) | dump }}]'></textarea>
       </div>
       <div class="tool-actions">
         <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
@@ -109,6 +109,9 @@
         </table>
       </div>
     </details>
+
+    {%- set anPrefix = "dl" %}
+    {% include "partials/annotations-form.njk" %}
 
     <div class="dl-box">
       <div class="dl-log-head">
@@ -175,5 +178,8 @@
 
 <script type="application/json" id="defect-log-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/annotations.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/defect-log.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>

@@ -41,6 +41,7 @@
             <select id="fs-shift"></select>
           </div>
         </div>
+        <div class="tp-host" data-template-pack></div>
       </fieldset>
     </div>
 
@@ -97,7 +98,7 @@
           <div class="dl-grid">
             <div class="field dl-wide">
               <label for="fs-tag-item">{{ "Item" | t(lang) }}</label>
-              <input id="fs-tag-item" name="tagItem" placeholder="{{ cfg.text.itemPlaceholder }}" autocomplete="off" required>
+              <input id="fs-tag-item" name="tagItem" placeholder="{{ cfg.text.itemPlaceholder }}" autocomplete="off" required data-scan>
             </div>
             <div class="field">
               <label for="fs-tag-area">{{ "Area" | t(lang) }}</label>
@@ -175,4 +176,8 @@
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/template-pack.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/five-s-audit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/media-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/five-s-audit-photos.js' | assetUrl }}" defer></script>

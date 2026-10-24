@@ -10912,3 +10912,263 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .at-filters, .at-tools, .at-edit, form[data-entry], .tool-aside, .at-results .tool-actions { display: none !important; }
   .at-item { break-inside: avoid; }
 }
+/* ===== Chart interaction in the logs (Damage Control, Incomplete Control, Night Audit Log, Delay Analyzer) and the
+   Sigma & Control Chart: bars that filter, Day / Week / Month, the period before, events on the timeline. ===== */
+
+/* A bar row that filters the log is a button, with the look of the row it was. */
+button.dl-bar.is-pick {
+  display: block; width: 100%; margin: 0; padding: 6px 8px; border: 1px solid transparent; border-radius: 10px;
+  background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+button.dl-bar.is-pick .dl-bar-label, button.dl-bar.is-pick .bar-track, button.dl-bar.is-pick .bar-fill { display: block; }
+button.dl-bar.is-pick .dl-bar-name { margin-bottom: 2px; }
+button.dl-bar.is-pick:hover { border-color: var(--line); }
+button.dl-bar.is-pick:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+button.dl-bar.is-pick[aria-pressed="true"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, transparent); }
+button.dl-bar.is-pick[aria-pressed="true"] .dl-bar-name { color: var(--ink); }
+
+/* "Filtered: Loading ×": one button that clears the filter. */
+.ci-chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 4px 6px 4px 12px; border: 1px solid var(--blue);
+  border-radius: 999px; background: color-mix(in srgb, var(--blue) 10%, transparent); color: var(--ink);
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.ci-chip-x {
+  display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
+  background: color-mix(in srgb, var(--blue) 22%, transparent); font-size: 15px; line-height: 1;
+}
+.ci-chip:hover .ci-chip-x, .ci-chip:focus-visible .ci-chip-x { background: var(--blue); color: var(--paper); }
+.ci-chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.ci-log-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 10px; }
+.ci-log-filter .form-note { margin: 0; }
+.dl-panel > .ci-chip { justify-self: start; margin: 4px 0 8px; }
+
+/* Day / Week / Month and the period before, above a trend. */
+.ci-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin: 8px 0 12px; }
+.ci-grain { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.ci-grain button {
+  padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent;
+  color: var(--muted); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.ci-grain button[aria-pressed="true"] { border-color: var(--blue); color: var(--ink); background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.ci-grain button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.ci-auto { color: var(--muted); font-size: 12px; }
+.ci-compare { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: 14px; cursor: pointer; }
+.ci-compare input { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
+.ci-compare-line { margin: 4px 0 0; color: var(--ink); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tr-event { cursor: default; }
+
+/* Events on the timeline: the form in each tool, and the lines in the Sigma & Control Chart. */
+.an-box .dl-grid { margin-top: 10px; }
+.an-all { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.an-all input { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
+.an-list { display: grid; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.an-item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.an-item .dl-remove { margin-left: auto; }
+.sc-chart .sc-event { stroke: var(--ink); stroke-width: 1.25; stroke-dasharray: 4 3; pointer-events: none; }
+.sc-chart .sc-flag { fill: var(--ink); pointer-events: none; }
+.sc-chart path.sc-center { fill: none; }
+.sc-changes { margin-top: 14px; }
+.sc-change-list { display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; }
+.sc-change-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 14px; }
+.sc-change-list .form-note { margin: 0; }
+
+@media (max-width: 600px) {
+  .ci-controls { gap: 8px 12px; }
+  .ci-grain button { padding: 6px 12px; }
+}
+
+@media print {
+  .ci-controls, .an-box, .ci-chip-x, .sc-change-list button { display: none; }
+  .ci-chip { border: 0; padding: 0; background: none; }
+}
+/* Floor capture (import-map.js, floor-capture.js): the column mapping under a paste box, the Scan button and its
+   camera dialog, and the photo control with its thumbnails. Quiet: one blue accent, the rest from type and spacing. */
+.fc-map {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper-2);
+}
+.fc-map-title { margin: 0; color: var(--ink); font-weight: 800; }
+.fc-map .form-note { margin: 0; }
+.fc-map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 12px; }
+.fc-map-grid .field select { padding: 10px 36px 10px 14px; border-radius: 12px; font-size: 14px; }
+.fc-map-note { margin: 10px 0 0; }
+
+/* Scan: the field keeps its width, the button sits at its end. */
+.fc-scan-field { display: flex; gap: 8px; align-items: stretch; min-width: 0; }
+.fc-scan-field > input,
+.fc-scan-field > select,
+.fc-scan-field > textarea { flex: 1 1 auto; min-width: 0; }
+.fc-scan { flex: 0 0 auto; padding: 10px 16px; white-space: nowrap; }
+
+/* The dialogs: camera, one photo full size, the photos of an entry. */
+.fc-dialog {
+  width: min(calc(100% - 32px), 560px);
+  max-height: calc(100% - 32px);
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.fc-dialog::backdrop { background: rgba(0, 0, 0, .6); }
+.fc-dialog-head { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.fc-dialog-head h2 { margin: 0; font-size: 19px; line-height: 1.3; overflow-wrap: anywhere; }
+.fc-close { flex: 0 0 auto; padding: 9px 18px; }
+.fc-dialog-body { display: grid; gap: 12px; }
+.fc-dialog-body .form-note { margin: 0; }
+.fc-video { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 14px; background: #000; }
+.fc-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Where to hold the code; it marks the middle, the whole picture is read. */
+.fc-aim { position: absolute; inset: 22% 16%; border: 2px solid var(--blue); border-radius: 12px; pointer-events: none; }
+.fc-viewer { width: min(calc(100% - 32px), 1100px); }
+.fc-full { display: block; max-width: 100%; height: auto; max-height: 72vh; margin: 0 auto; border-radius: 10px; object-fit: contain; }
+.fc-gallery-entry { display: grid; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.fc-gallery-entry:last-of-type { border-bottom: 0; }
+.fc-gallery-entry h3 { margin: 0; font-size: 15px; line-height: 1.4; }
+
+/* The photo control. The file inputs are hidden inside their labels, which look like buttons. */
+.fc-photos { display: grid; gap: 8px; min-width: 0; }
+.fc-photo-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.fc-add { position: relative; display: inline-flex; align-items: center; }
+.fc-photos .button-secondary.fc-add { padding: 8px 16px; font-size: 14px; }
+.fc-photos .button-ghost.fc-add { padding: 8px 0; font-size: 14px; }
+.fc-add:focus-within { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.fc-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.fc-thumbs { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 4px 0 0; list-style: none; }
+.fc-thumb { position: relative; }
+.fc-thumb-open {
+  display: block;
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  cursor: zoom-in;
+}
+.fc-thumb-open img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.fc-thumb-open:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.fc-thumb-remove {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+.fc-photo-status:empty { display: none; }
+.fc-photos .form-note { margin: 0; font-size: 13px; }
+
+/* In a log row and in the 5S walk. */
+.fc-row-photos {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+td > .fc-row-photos { margin-left: 8px; }
+.fs-q-foot > .fc-photos { grid-column: 1 / -1; }
+.fs-photo-note { margin: 0 0 12px; }
+
+@media print {
+  .fc-dialog, .fc-map, .fc-map-note, .fc-scan, .fc-photo-actions, .fc-photo-note, .fc-row-photos { display: none !important; }
+}
+/* ===== Template packs (js/template-pack.js) =====
+   "Save as template file" and "Open a template file" under a tool's own templates, and the editor of a team's own
+   question set: one row per question, its text field growing, the arrows and the remove button beside it. */
+.tp-host { margin-top: 14px; }
+.tp-host:empty { display: none; }
+.tp-pack .tool-actions { margin-top: 0; }
+.tp-status:empty { display: none; }
+.tp-editor {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.tp-editor[hidden] { display: none; }
+.tp-editor > summary { font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+.tp-editor[open] > summary { margin-bottom: 12px; }
+.tp-field { display: grid; gap: 4px; min-width: 0; }
+.tp-field-label { color: var(--muted); font-size: 13px; }
+.tp-field input { width: 100%; min-width: 0; }
+.tp-group { margin: 14px 0 0; padding: 0; border: 0; min-width: 0; }
+.tp-group-name { padding: 0; font-weight: 700; }
+.tp-items { display: grid; gap: 8px; margin: 8px 0; padding: 0; list-style: none; }
+.tp-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.tp-item-fields { display: grid; gap: 6px; min-width: 0; }
+.tp-item-tools { display: flex; gap: 2px; }
+.tp-move { min-width: 34px; padding: 4px 8px; }
+.tp-move:disabled { opacity: 0.35; cursor: default; }
+.tp-add, .tp-delete { padding: 4px 0; }
+
+@media (max-width: 480px) {
+  .tp-item { grid-template-columns: minmax(0, 1fr); }
+  .tp-item-tools { justify-content: flex-end; }
+}
+
+@media print {
+  .tp-host { display: none; }
+}
+/* ===== The certificate of the Six Sigma course (js/dmaic.js): on screen a preview, on paper one A4 landscape page. ===== */
+.dm-cert-sheet {
+  margin-top: 20px; padding: clamp(24px, 5vw, 56px); border: 1px solid var(--line); border-radius: var(--radius);
+  text-align: center; background: var(--card);
+}
+.dm-cert-sheet p { margin: 0 0 10px; }
+.dm-cert-kicker { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.dm-cert-title { font-family: var(--display); font-size: clamp(22px, 3vw, 32px); letter-spacing: .02em; text-transform: uppercase; }
+.dm-cert-name { margin: 22px 0 12px !important; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: clamp(30px, 5vw, 52px); }
+.dm-cert-course { color: var(--blue); font-family: var(--serif); font-size: clamp(22px, 3vw, 30px); }
+.dm-cert-line { color: var(--muted); }
+.dm-cert-date { margin-top: 18px !important; font-weight: 700; }
+.dm-cert-note { margin-top: 18px !important; color: var(--muted); font-size: 12px; }
+@media print {
+  @page certificate { size: A4 landscape; margin: 14mm; }
+  .print-certificate main > :not(.dm-certificate) { display: none !important; }
+  .print-certificate .dm-certificate > :not(.dm-cert-sheet) { display: none !important; }
+  .print-certificate .dm-certificate { page: certificate; padding: 0; }
+  .print-certificate .dm-cert-sheet { margin: 0; border: 2px solid #1b2330; min-height: 170mm; display: flex; flex-direction: column; justify-content: center; color: #1b2330; background: #fff; }
+  .print-certificate .dm-cert-course { color: #0a6ab0; }
+}

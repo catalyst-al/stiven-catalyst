@@ -155,8 +155,19 @@
     area: str(keep.area), walker: str(keep.walker), date: today(), shift: str(keep.shift), minutes: "",
     answers: [], findings: {}, acts: {}, tallies: {}, notes: {}, timer: { started: 0, elapsed: 0 },
   });
-  const state = loadState(KEY, { template: "", cadence: {}, rows: [], draft: {}, example: {} });
-  if (!TEMPLATES.includes(state.template)) state.template = TEMPLATES[0];
+  const state = loadState(KEY, { template: "", cadence: {}, rows: [], draft: {}, example: {}, custom: {} });
+  // The team's own LPA questions (saved here or opened from a template file), keyed "custom-…": per layer a list of
+  // { text, standard, topic }, the shape of cfg.templates.
+  const cleanTemplate = (raw) => {
+    if (!isObject(raw) || !isObject(raw.questions)) return null;
+    const cleanItem = (item) => ({ text: str(item.text).slice(0, 300), standard: str(item.standard).slice(0, 300), topic: Object.prototype.hasOwnProperty.call(cfg.topics || {}, item.topic) ? item.topic : "" });
+    const questions = Object.fromEntries(LAYERS.map((layer) => [layer, (Array.isArray(raw.questions[layer]) ? raw.questions[layer] : []).filter(isObject).map(cleanItem).slice(0, 30)]));
+    if (!Object.values(questions).some((list) => list.some((item) => item.text.trim()))) return null;
+    return { name: str(raw.name).trim().slice(0, 80) || tx("Own template"), areas: (Array.isArray(raw.areas) ? raw.areas : []).map(str).filter(Boolean).slice(0, 40), questions };
+  };
+  state.custom = Object.fromEntries(Object.entries(state.custom).filter(([key]) => key.startsWith("custom-")).map(([key, tpl]) => [key, cleanTemplate(tpl)]).filter(([, tpl]) => tpl));
+  const isTemplate = (name) => TEMPLATES.includes(name) || Object.prototype.hasOwnProperty.call(state.custom, name);
+  if (!isTemplate(state.template)) state.template = TEMPLATES[0];
   state.cadence = { ...defaultCadences(), ...Object.fromEntries(Object.entries(state.cadence).filter(([k, v]) => LAYERS.includes(k) && CADENCES.includes(v))) };
   // Saved data can be damaged; keep only what has the expected shape.
   const cleanText = (map) => Object.fromEntries(Object.entries(isObject(map) ? map : {}).filter(([, v]) => typeof v === "string" && v.trim()).map(([k, v]) => [k, v.trim()]));
@@ -166,7 +177,7 @@
   const cleanMinutes = (value) => { const n = Number(value); return Number.isFinite(n) && n > 0 ? Math.round(n) : ""; };
   const cleanRow = (row) => ({
     id: str(row.id) || id("w"), type: TYPES.includes(row.type) ? row.type : TYPES[0], layer: LAYERS.includes(row.layer) ? row.layer : LAYERS[0],
-    template: TEMPLATES.includes(row.template) ? row.template : state.template, date: parseDate(row.date) || "", area: str(row.area), walker: str(row.walker),
+    template: isTemplate(row.template) ? row.template : state.template, date: parseDate(row.date) || "", area: str(row.area), walker: str(row.walker),
     shift: str(row.shift), minutes: cleanMinutes(row.minutes), answers: cleanAnswers(row.answers), findings: cleanText(row.findings),
     acts: cleanFlags(row.acts), sent: cleanFlags(row.sent), tallies: cleanTallies(row.tallies), notes: cleanText(row.notes),
   });
@@ -216,7 +227,7 @@
   const results = document.querySelector("[data-results]");
   const sheet = document.querySelector("[data-sheet]");
 
-  const template = (name = state.template) => cfg.templates[name] || cfg.templates[TEMPLATES[0]];
+  const template = (name = state.template) => cfg.templates[name] || state.custom[name] || cfg.templates[TEMPLATES[0]];
   const questionsOf = (name, layer) => template(name).questions?.[layer] || [];
   const questionOf = (row, index) => questionsOf(row.template, row.layer)[index] || null;
   const fitDraft = () => {
@@ -231,9 +242,11 @@
   const wpAreas = () => (Workplace ? Workplace.areas() : []);
   const areaOwner = (name) => wpAreas().find((area) => area.name === name)?.owner || "";
   const fillList = (list, values) => list.replaceChildren(...values.map((value) => el("option", null, value)));
+  let packs = null;
   const renderSetup = () => {
     typeButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.typeValue === state.draft.type)));
     layerSelect.value = state.draft.layer;
+    if (packs) packs.syncOptions();
     templateSelect.value = state.template;
     const profileAreas = wpAreas().map((area) => area.name);
     const useSelect = profileAreas.length > 0;
@@ -666,6 +679,7 @@
 
   const render = () => {
     renderSetup();
+    if (packs) packs.render();
     renderProgress();
     renderTimer();
     renderLog();
@@ -723,6 +737,22 @@
     renderQuestions();
     changed();
   });
+  // The team's own LPA questions: a copy of a checklist to edit, saved and opened as a template file
+  // (js/template-pack.js). A copy keeps the answers of the walk in progress, since its questions are the same.
+  const packHost = q("[data-template-pack]");
+  if (window.TemplatePack && packHost) {
+    packs = window.TemplatePack.checklist(packHost, {
+      tool: "gemba-walk", kind: "lpa-questions", validate: cleanTemplate,
+      select: templateSelect, builtIn: cfg.templates, custom: state.custom,
+      current: () => state.template,
+      choose: (name) => { state.template = name; fitDraft(); renderQuestions(); changed(); },
+      groups: () => cfg.layers.map((layer) => ({ key: layer.key, title: layer.name })),
+      fields: [{ key: "text", label: tx("Question") }, { key: "standard", label: tx("Standard") }],
+      fromEdit: (values, item) => ({ topic: "", ...item, text: str(values.text), standard: str(values.standard) }),
+      changed: () => { fitDraft(); renderQuestions(); save(); renderSetup(); renderResults(); },
+      inUse: (name) => state.rows.some((row) => row.template === name),
+    });
+  }
   const setDraft = (name, value) => { state.draft[name] = value; save(); };
   areaSelect.addEventListener("change", () => setDraft("area", areaSelect.value));
   areaInput.addEventListener("input", () => setDraft("area", areaInput.value.trim()));

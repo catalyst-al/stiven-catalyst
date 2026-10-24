@@ -107,7 +107,7 @@
       <p class="form-note">{{ "One row per machine and shift" | t(lang) }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "equipment" | t(lang) }}, {{ "planned minutes" | t(lang) }}, {{ "stops" | t(lang) }}, {{ "pieces" | t(lang) }}, {{ "rejects" | t(lang) }}, {{ "startup rejects" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "The stops as reason: minutes, separated by commas or semicolons; a machine that is not in the list is added without a rate." | t(lang) }}</p>
       <div class="field">
         <label class="visually-hidden" for="oe-paste">{{ "Rows to import" | t(lang) }}</label>
-        <textarea id="oe-paste" rows="5" placeholder="{{ cfg.placeholders.paste }}"></textarea>
+        <textarea id="oe-paste" rows="5" placeholder="{{ cfg.placeholders.paste }}" data-columns='["date","shift","equipment","planned","stops","pieces","rejects","startup","note"]' data-column-labels='[{{ "date" | t(lang) | dump }},{{ "shift" | t(lang) | dump }},{{ "equipment" | t(lang) | dump }},{{ "planned minutes" | t(lang) | dump }},{{ "stops" | t(lang) | dump }},{{ "pieces" | t(lang) | dump }},{{ "rejects" | t(lang) | dump }},{{ "startup rejects" | t(lang) | dump }},{{ "note" | t(lang) | dump }}]'></textarea>
       </div>
       <div class="tool-actions">
         <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
@@ -168,6 +168,7 @@
 
 <script type="application/json" id="oee-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>

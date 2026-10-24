@@ -21,7 +21,7 @@
           </div>
           <div class="field">
             <label for="da-route">{{ "Route" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
-            <input id="da-route" name="route" placeholder="{{ 'e.g. R07' | t(lang) }}" autocomplete="off">
+            <input id="da-route" name="route" placeholder="{{ 'e.g. R07' | t(lang) }}" autocomplete="off" data-scan>
           </div>
           <div class="field">
             <label for="da-plan-dep">{{ "Planned departure" | t(lang) }}</label>
@@ -73,7 +73,7 @@
       <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ t.pasteColumns }}</strong>. {{ t.pasteHelp }}</p>
       <div class="field">
         <label class="visually-hidden" for="da-paste">{{ "Rows to import" | t(lang) }}</label>
-        <textarea id="da-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+        <textarea id="da-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date","shift","route","planDep","actDep","planArr","actArr","reason","note"]' data-column-labels='{{ t.pasteColumns.split(", ") | dump }}'></textarea>
       </div>
       <div class="tool-actions">
         <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
@@ -109,6 +109,9 @@
         </div>
       </div>
     </fieldset>
+
+    {%- set anPrefix = "da" %}
+    {% include "partials/annotations-form.njk" %}
 
     <div class="dl-box">
       <div class="dl-log-head">
@@ -175,5 +178,8 @@
 
 <script type="application/json" id="delay-analyzer-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/annotations.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/delay-analyzer.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>

@@ -596,12 +596,16 @@
   });
   root.querySelector("[data-csv]").addEventListener("click", () => { if (state.rows.length) downloadCsv(fileName(), sheetRows()); });
   root.querySelector("[data-xlsx]").addEventListener("click", () => { if (state.rows.length) downloadXlsx(fileName(), sheetRows(), { sheet: data.text.tool, title: `${data.text.tool}${state.process ? `: ${state.process}` : ""}` }); });
-  // The sheet as a file of its own: to keep a revision, or to hand it to a colleague who opens it in the same tool.
+  // The sheet as a file of its own: to keep a revision, or to hand it to a colleague who opens it in the same tool. It is
+  // a template file (js/template-pack.js, kind "fmea-sheet"); the plain files of earlier versions still open.
+  const Pack = window.TemplatePack;
+  const sheetOf = (raw) => { const sheet = cleanSheet(raw); return sheet && sheet.rows.length ? sheet : null; };
   root.querySelector("[data-json]").addEventListener("click", () => {
     if (!state.rows.length) return;
-    const file = { tool: "fmea", version: 1, process: state.process, owner: state.owner, date: state.date, revision: state.revision, rows: state.rows };
+    const sheet = { process: state.process, owner: state.owner, date: state.date, revision: state.revision, rows: state.rows };
+    if (Pack) { Pack.save({ tool: "fmea", kind: "fmea-sheet", name: [state.process || data.text.tool, state.revision].filter(Boolean).join(" "), data: JSON.parse(JSON.stringify(sheet)) }); return; }
     const link = el("a");
-    link.href = URL.createObjectURL(new Blob([JSON.stringify(file, null, 2)], { type: "application/json" }));
+    link.href = URL.createObjectURL(new Blob([JSON.stringify({ tool: "fmea", version: 1, ...sheet }, null, 2)], { type: "application/json" }));
     link.download = `${fileName()}-${today()}.json`;
     document.body.append(link);
     link.click();
@@ -609,20 +613,25 @@
     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
   });
   const opener = root.querySelector("[data-open]");
+  const openSheet = (sheet, why) => {
+    opener.value = "";
+    if (!sheet) { flash(fileStatus, why || tx("This file is not an FMEA sheet from this tool.")); return; }
+    if (state.rows.length && !state.example && !window.confirm(tx("Replace the sheet in this browser with the file?"))) return;
+    Object.assign(state, sheet, { example: false, filterAp: "", filterStatus: "" });
+    save();
+    renderAll();
+    flash(fileStatus, tx("Opened: {n} failure modes.", { n: sheet.rows.length }));
+  };
   opener.addEventListener("change", () => {
     const file = opener.files?.[0];
     if (!file) return;
+    // A file of another tool, a damaged or a too large one has its own reason; anything else is "not an FMEA sheet".
+    if (Pack) { Pack.readFile(file, { tool: "fmea", kind: "fmea-sheet", validate: sheetOf, legacy: sheetOf }, (result) => openSheet(result.ok ? result.data : null, ["format", "content"].includes(result.error) ? "" : result.message)); return; }
     const reader = new FileReader();
     reader.onload = () => {
-      opener.value = "";
       let sheet = null;
-      try { sheet = cleanSheet(JSON.parse(String(reader.result))); } catch { sheet = null; }
-      if (!sheet || !sheet.rows.length) { flash(fileStatus, tx("This file is not an FMEA sheet from this tool.")); return; }
-      if (state.rows.length && !state.example && !window.confirm(tx("Replace the sheet in this browser with the file?"))) return;
-      Object.assign(state, sheet, { example: false, filterAp: "", filterStatus: "" });
-      save();
-      renderAll();
-      flash(fileStatus, tx("Opened: {n} failure modes.", { n: sheet.rows.length }));
+      try { sheet = sheetOf(JSON.parse(String(reader.result))); } catch { sheet = null; }
+      openSheet(sheet);
     };
     reader.readAsText(file);
   });
