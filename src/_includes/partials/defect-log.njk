@@ -70,6 +70,7 @@
         <div class="field">
           <label for="dl-target">{{ t.targetLabel }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
           <input id="dl-target" name="target" type="number" min="0" step="0.01" inputmode="decimal" placeholder="{{ t.targetPlaceholder }}" data-setting>
+          <span class="form-note" id="dl-target-profile" data-profile-target hidden>{{ "From the workplace profile" | t(lang) }} · <a class="inline-link" href="{{ '/tools/daily-board/' | local(lang) }}">{{ "Edit it on the Daily Board" | t(lang) }}</a></span>
         </div>
       </div>
     </fieldset>
@@ -174,4 +175,5 @@
 
 <script type="application/json" id="defect-log-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/defect-log.js' | assetUrl }}" defer></script>
