@@ -1,0 +1,205 @@
+/* ===== 8D Report (js/eight-d.js) =====
+   The form is D0 to D8 in order, each with its status and date; the sheet in [data-results] is the report in the
+   customary 8D layout: a header with the status of every discipline, then one box per discipline. It prints on A4
+   portrait, the sheet alone. */
+.ed-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ed-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+.ed-item[aria-current="true"] { border-color: var(--blue); }
+.ed-open {
+  grid-column: 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.ed-item[aria-current="true"] .ed-open { color: var(--blue); }
+.ed-open:hover { text-decoration: underline; }
+.ed-item-meta { grid-column: 1; color: var(--muted); font-size: 13px; }
+.ed-item-late { grid-column: 1; color: var(--danger); font-size: 13px; font-weight: 700; }
+.ed-item-tools { display: flex; flex-wrap: wrap; gap: 4px; grid-column: 2; grid-row: 1 / span 3; }
+.ed-item-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+
+.ed-targets-summary { cursor: pointer; }
+.ed-target-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 12px; margin-top: 14px; }
+.ed-target-grid label { font-size: 13px; }
+
+.ed-disc { border-top: 1px solid var(--line); padding-top: 12px; }
+.ed-disc-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; cursor: pointer; }
+.ed-disc-summary .kicker { margin: 0; }
+.ed-disc-state { margin: 0; }
+/* The summary shows the discipline's name; the legend keeps it for screen readers only (.dl-box legend would make it full width). */
+.ed-fieldset > legend.visually-hidden { width: 1px; float: none; }
+.ed-disc-state.is-late { color: var(--danger); font-weight: 700; }
+.ed-disc[open] > .ed-disc-summary { margin-bottom: 14px; }
+.ed-hint { margin: 0; color: var(--muted); font-size: 14px; }
+.ed-sub { margin: 4px 0 0; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.ed-step {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  align-items: end;
+  padding: 10px 12px;
+  border-radius: calc(var(--radius) - 10px);
+  background: var(--paper-2);
+}
+.ed-step .field label { font-size: 12px; }
+.ed-due { grid-column: 1 / -1; margin: 0; }
+.ed-due.is-late { color: var(--danger); font-weight: 700; }
+.ed-criteria-box { display: grid; gap: 6px; }
+.ed-tick { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; line-height: 1.4; }
+.ed-tick input { flex: 0 0 auto; margin-top: 3px; }
+.ed-check-note { margin: 0; }
+.ed-form textarea { resize: vertical; }
+.ed-isnot { display: grid; gap: 10px; }
+.ed-isnot-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 10px);
+}
+.ed-isnot-name { margin: 0; font-weight: 800; }
+.ed-cause-form { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: calc(var(--radius) - 10px); }
+.ed-pull { align-items: center; }
+.ed-pull .form-note { margin: 0; }
+.ed-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ed-prevent-hints { display: grid; gap: 4px; margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+.ed-prevent-hints strong { color: var(--ink); }
+
+.ed-rows { display: grid; gap: 10px; }
+.ed-rows:empty { display: none; }
+.ed-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+  align-items: end;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 10px);
+  background: var(--paper-2);
+}
+.ed-row .ed-wide, .ed-row .ed-span2, .ed-row .ed-row-tools { grid-column: 1 / -1; }
+.ed-row .field label { font-size: 12px; }
+.ed-row .ed-check { display: flex; flex-direction: row; gap: 8px; align-items: center; }
+.ed-row-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.ed-row-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+
+/* The result above the sheet. */
+.ed-timeline { display: grid; gap: 12px; margin: 0 0 20px; }
+.ed-timeline .ck-figure { width: 100%; max-width: 720px; margin: 0; }
+.ed-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.ed-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ed-chip.is-done { border-color: var(--ok); color: var(--ok); }
+.ed-chip.is-doing { border-color: var(--blue); color: var(--blue); }
+.ed-send-status { flex-basis: 100%; margin: 0; }
+.ed-gaps { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.ed-gaps .is-open strong { color: var(--warn); }
+.ed-gaps .is-ok strong { color: var(--ok); }
+.ed-overview-stats { margin-bottom: 12px; }
+
+/* The sheet. */
+.ed-sheet {
+  display: grid;
+  margin: 0 0 20px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 8px);
+  background: var(--card);
+  overflow: hidden;
+}
+.ed-sheet-head { display: grid; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.ed-sheet-kicker { margin: 0; color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.ed-sheet-title { margin: 0; font-size: 20px; font-weight: 800; overflow-wrap: anywhere; }
+.ed-meta { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 6px 16px; margin: 0; }
+.ed-meta div { min-width: 0; }
+.ed-meta dt { color: var(--muted); font-size: 12px; }
+.ed-meta dd { margin: 0; font-size: 14px; font-weight: 700; overflow-wrap: anywhere; }
+.ed-d { display: grid; gap: 8px; align-content: start; min-width: 0; padding: 14px 18px 16px; border-bottom: 1px solid var(--line); }
+.ed-d:last-child { border-bottom: 0; }
+.ed-d-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; }
+.ed-d-title { margin: 0; color: var(--blue); font-size: 14px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.ed-d-state { margin: 0; color: var(--muted); font-size: 13px; font-weight: 700; }
+.ed-d-state.is-done { color: var(--ok); }
+.ed-meta-line { margin: 0; color: var(--muted); font-size: 13px; }
+.ed-table td.ed-nowrap { min-width: 0; white-space: nowrap; }
+.ed-sub-title { margin: 6px 0 0; font-size: 13px; font-weight: 800; }
+.ed-text { margin: 0; font-size: 14px; line-height: 1.5; white-space: pre-line; overflow-wrap: anywhere; }
+.ed-empty { margin: 0; color: var(--muted); font-size: 14px; font-style: italic; }
+.ed-note { margin: 0; font-size: 14px; }
+.ed-pair { margin: 0; font-size: 14px; overflow-wrap: anywhere; }
+.ed-pair span { color: var(--muted); }
+.ed-criteria { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.ed-criteria .is-not { color: var(--muted); }
+.ed-causes { display: grid; gap: 12px; }
+.ed-cause { display: grid; gap: 6px; min-width: 0; }
+.ed-verified { margin: 0; font-size: 13px; }
+.ed-verified.is-yes { color: var(--ok); }
+.ed-verified.is-no { color: var(--warn); font-weight: 700; }
+.ed-table-wrap { max-height: none; }
+.ed-table { font-size: 13px; }
+/* The sheet's tables hold sentences: they wrap instead of scrolling sideways, a column no narrower than a short word. */
+.ed-table td { min-width: 5.5em; white-space: normal; overflow-wrap: break-word; vertical-align: top; }
+.ed-table td:first-child { min-width: 9em; }
+.ed-table th { white-space: normal; }
+.ed-status-table td:first-child { font-weight: 800; }
+.ed-w2h td:first-child, .ed-isnot-table td:first-child { font-weight: 700; }
+.ed-status-table td, .ed-status-table td:first-child { min-width: 0; }
+
+@media (min-width: 900px) {
+  .ed-isnot-row { grid-template-columns: 110px repeat(3, minmax(0, 1fr)); align-items: start; }
+  .ed-row-d3-actions, .ed-row-d5-actions, .ed-row-d7-lines { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ed-row-d6-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ed-row .ed-span2 { grid-column: span 2; }
+  .ed-causes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .ed-item { grid-template-columns: minmax(0, 1fr); }
+  .ed-item-tools { grid-column: 1; grid-row: auto; }
+  .ed-row, .ed-step, .ed-numbers { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Paper: the report alone, A4 portrait, each discipline kept together where it fits. */
+@page ed-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  body:has(.ed-sheet) .page-hero,
+  body:has(.ed-sheet) .dl-example-note,
+  .ed-setup,
+  .ed-results > :not(.ed-sheet) { display: none !important; }
+  .ed-results { page: ed-a4; padding: 0 !important; border: 0 !important; }
+  .ed-sheet { margin: 0; border: 1px solid #999; border-radius: 0; background: #fff; }
+  .ed-sheet-head { padding: 6px 10px; border-color: #999; }
+  .ed-sheet-kicker, .ed-d-title { color: #000; }
+  .ed-sheet-title { font-size: 14pt; }
+  .ed-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ed-meta dd, .ed-text, .ed-pair, .ed-note, .ed-criteria, .ed-table { font-size: 8.5pt; line-height: 1.35; }
+  .ed-d { padding: 6px 10px 8px; border-color: #999; break-inside: avoid; }
+  .ed-causes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ed-table th, .ed-table td { padding: 2px 5px; }
+  .ed-table td, .ed-table td:first-child { min-width: 0; }
+  .ed-table:not(.ed-status-table) td:first-child { width: 28%; }
+  .ed-table th { font-size: 6.5pt; letter-spacing: .04em; }
+  .ed-verified, .ed-meta-line, .ed-d-state, .ed-sub-title { font-size: 8pt; }
+  .ed-table-wrap { overflow: visible !important; }
+}

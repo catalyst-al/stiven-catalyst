@@ -1,0 +1,193 @@
+{
+  "storageKey": "sc-eight-d",
+  "targets": { "d3": 1, "d4": 10, "d5": 14, "d6": 30, "d8": 60 },
+  "stepStatuses": { "todo": "Not started", "doing": "In progress", "done": "Done" },
+  "actionStatuses": { "open": "Open", "doing": "In progress", "done": "Done" },
+  "disciplines": [
+    { "key": "d0", "code": "D0", "title": "Prepare and emergency response", "question": "Does this problem need an 8D, and what protects the customer right now, before anyone knows the cause?" },
+    { "key": "d1", "code": "D1", "title": "Establish the team", "question": "Who knows the product and the process, who leads the team, and who as champion removes the obstacles?" },
+    { "key": "d2", "code": "D2", "title": "Describe the problem", "question": "What is wrong with what, in numbers? Answer 5W2H, set IS against IS NOT, then write one problem statement. No causes yet." },
+    { "key": "d3", "code": "D3", "title": "Interim containment actions", "question": "How do you stop the next bad delivery while the cause is still unknown? Sort every place the suspect stock can be, and prove that the containment works." },
+    { "key": "d4", "code": "D4", "title": "Root cause and escape point", "question": "Why did it happen, and why did nobody catch it? Two root causes, each verified: you can turn the problem on and off with it." },
+    { "key": "d5", "code": "D5", "title": "Permanent corrective actions", "question": "Which actions remove both root causes? Choose them, and verify that they work before you implement them." },
+    { "key": "d6", "code": "D6", "title": "Implement and validate", "question": "Put the actions in place, show with data that the problem is gone, and only then remove the containment." },
+    { "key": "d7", "code": "D7", "title": "Prevent recurrence", "question": "Which systems change so that this cannot happen again, here or anywhere similar?" },
+    { "key": "d8", "code": "D8", "title": "Recognise the team and close", "question": "Thank the team for what it did, write down what you learned, and close the report." }
+  ],
+  "criteria": [
+    "The symptom is defined and measured.",
+    "The customer who saw it and the parties affected are known.",
+    "The numbers show a gap, or its severity, urgency or growth makes it a priority.",
+    "The cause is not known.",
+    "Management commits the people and the time to fix it at the root and prevent it from coming back.",
+    "It is too complex for one person to solve alone."
+  ],
+  "w2h": [
+    { "key": "what", "label": "What is the problem?", "placeholder": "The defect on the object, in plain words: which item, which fault." },
+    { "key": "why", "label": "Why is it a problem?", "placeholder": "What it costs or breaks for the customer: shelf gaps, fees, a missed service level." },
+    { "key": "where", "label": "Where was it seen?", "placeholder": "Route, customer site, line, zone, location on the item." },
+    { "key": "when", "label": "When was it seen?", "placeholder": "Since when, on which shifts or days, in which phase (receipt, pick, delivery)." },
+    { "key": "who", "label": "Who found it, who is affected?", "placeholder": "Who detected it and who is affected. Roles, not blame." },
+    { "key": "how", "label": "How was it found, how does it show?", "placeholder": "How it was detected and how the fault appears in the process." },
+    { "key": "howMany", "label": "How many?", "placeholder": "The count and the base: 144 of 4,800 lines, the trend, other areas for comparison." }
+  ],
+  "isNot": [
+    { "key": "what", "label": "What", "is": "Which object, which defect", "isNot": "Similar objects or defects that could be affected but are not" },
+    { "key": "where", "label": "Where", "is": "Where it is seen", "isNot": "Where it could be, but is not" },
+    { "key": "when", "label": "When", "is": "When it first appeared, when it shows", "isNot": "When it could show, but does not" },
+    { "key": "extent", "label": "Extent", "is": "How many, how big, the trend", "isNot": "How many could be affected, but are not" }
+  ],
+  "locations": [
+    { "key": "transit", "name": "In transit" },
+    { "key": "warehouse", "name": "Warehouse" },
+    { "key": "customer", "name": "At the customer" },
+    { "key": "production", "name": "In production" },
+    { "key": "supplier", "name": "At the supplier" }
+  ],
+  "addresses": { "occurrence": "Root cause (occurrence)", "escape": "Escape point (non-detection)" },
+  "preventions": [
+    { "key": "fmea", "name": "Update the FMEA", "hint": "Add the failure mode and its cause, then re-rate occurrence and detection." },
+    { "key": "controlPlan", "name": "Update the control plan", "hint": "The new check: what, how often, by whom, and what to do when it fails." },
+    { "key": "standardWork", "name": "Update standard work", "hint": "Change the instruction at the workplace, so the new way is the only way." },
+    { "key": "training", "name": "Train the people", "hint": "Everyone who does the work, on every shift, with a sign-off." },
+    { "key": "readAcross", "name": "Read across to similar products and processes", "hint": "Where else can the same cause sit: other sites, lines, zones, products?" },
+    { "key": "other", "name": "Other system change", "hint": "A policy, a supplier agreement, a design rule." }
+  ],
+  "fishboneSets": {
+    "6m": ["People", "Machine", "Method", "Material", "Measurement", "Environment"],
+    "4p": ["Policies", "Procedures", "People", "Place"],
+    "service5": ["People", "Process", "Place", "Equipment", "Information"]
+  },
+  "fields": {
+    "title": "e.g. Wrong items to the retailer on route R7",
+    "customer": "e.g. Retail customer, 12 stores",
+    "ref": "e.g. Complaint 2026-118",
+    "product": "e.g. Beverages, picking zone C",
+    "area": "e.g. Outbound, DC North",
+    "person": "Name, function",
+    "eraText": "e.g. No roll cage of the route leaves without a check; the customer is called today.",
+    "statement": "One or two sentences: what is wrong with what, where, since when and how many. No cause, no blame.",
+    "containment": "e.g. 100 % scan of every roll cage of the route before loading",
+    "verification": "e.g. 0 wrong lines in the customer's receipt audit since",
+    "cleanMark": "e.g. Green dot on the label of every checked roll cage",
+    "occurrence": "Why did it happen? The cause in the process that, when present, makes the problem appear.",
+    "escapePoint": "e.g. Pick confirmation, then the dispatch check",
+    "escape": "Why was it not detected? The control that should have caught it, and why it did not.",
+    "verifyHow": "How it was turned on and off: a trial, a test, the data before and after.",
+    "notes": "Your chain of whys or the likely causes of a fishbone; they can be taken from 5 Whys and Fishbone below.",
+    "pca": "A change to the process that removes the cause, not a reminder.",
+    "pcaCheck": "e.g. Trial pick: 0 wrong in 400 picks",
+    "implementation": "e.g. EAN scan live in zone C on all shifts",
+    "period": "e.g. Two weeks after the change",
+    "result": "What the data shows after the change, and since when.",
+    "prevention": "What changes, where",
+    "recognition": "Who did what; how the team was thanked.",
+    "lessons": "What you would do the same and what differently next time.",
+    "closedBy": "e.g. Champion or the customer's quality contact"
+  },
+  "tips": [
+    ["Contain first, then search.", "D3 protects the customer within a day. Sort every place the suspect stock can be: in the warehouse, on the road, at the customer."],
+    ["Facts before causes.", "D2 is 5W2H and IS / IS NOT. The difference between where it is and where it is not points to the cause; a guess does not."],
+    ["Two root causes, not one.", "Why it happened, and why nobody caught it. A cause is verified when you can turn the problem on and off with it."],
+    ["Verify, then implement, then validate.", "D5 proves an action works in a trial; D6 proves with the data that the problem is gone. Remove the containment only after that."],
+    ["Close the system, not just the case.", "D7 changes the FMEA, the control plan, the standard work and the training, and looks for the same cause elsewhere."]
+  ],
+  "example": {
+    "title": "Wrong items to the retailer on route R7",
+    "customer": "Retail customer, 12 stores in the north region",
+    "ref": "Complaint 2026-118",
+    "product": "Beverages, picking zone C",
+    "area": "Outbound, DC North",
+    "opened": -38,
+    "steps": {
+      "d0": { "status": "done", "date": -38 },
+      "d1": { "status": "done", "date": -38 },
+      "d2": { "status": "done", "date": -37 },
+      "d3": { "status": "done", "date": -37 },
+      "d4": { "status": "done", "date": -30 },
+      "d5": { "status": "done", "date": -25 },
+      "d6": { "status": "done", "date": -10 },
+      "d7": { "status": "doing", "date": "" },
+      "d8": { "status": "todo", "date": "" }
+    },
+    "d0": {
+      "criteria": [true, true, true, true, true, true],
+      "era": "No roll cage of route R7 leaves the dock unchecked from the next loading on. The account manager calls the retailer the same morning and agrees a swap run for the wrong lines.",
+      "eraOwner": "Sara K., Account manager",
+      "eraDate": -38
+    },
+    "d1": {
+      "leader": "Mira S., Quality lead",
+      "champion": "Daniel R., Site manager",
+      "members": [
+        { "name": "Jonas B.", "role": "Outbound shift lead, late shift" },
+        { "name": "Elena P.", "role": "Inventory control and slotting" },
+        { "name": "Tom W.", "role": "WMS key user" },
+        { "name": "Sara K.", "role": "Account manager of the retailer" },
+        { "name": "Ardit H.", "role": "Picker, zone C" }
+      ]
+    },
+    "d2": {
+      "w": {
+        "what": "Stores receive a wrong variant of the ordered item: another size or flavour of the same product line, e.g. 1 L instead of 0.5 L of the same drink.",
+        "why": "The ordered item is missing on the shelf and another is in surplus. The retailer charges €15 per wrong line (€2,160 in five days) and the agreed 99.5 % correct lines is broken.",
+        "where": "Route R7, the retailer's 12 stores in the north region. The lines are picked in zone C of the DC.",
+        "when": "Since the re-slotting of zone C, one week before the complaint, on both shifts. Found in the retailer's goods-receipt audit.",
+        "who": "Found by the store teams and the retailer's receipt audit; the complaint reached our account manager.",
+        "how": "The picker confirms the location's check digit and takes the look-alike from the next slot. The dispatch check counts roll cages and store labels, not items.",
+        "howMany": "144 of 4,800 lines (3.0 %) in five delivery days on R7; the other routes 0.2 % (42 of 21,000)."
+      },
+      "isNot": {
+        "what": { "is": "A wrong variant of the ordered item (other size or flavour, same product line)", "isNot": "Missing lines, damaged goods, wrong quantities, items of another product line", "diff": "Look-alike variants with the same label colour" },
+        "where": { "is": "Route R7, 12 stores; lines picked in zone C", "isNot": "The other routes (0.2 %); zones A, B and D", "diff": "Only R7's stores order both variants (regional range); zone C was re-slotted" },
+        "when": { "is": "Since the re-slotting of zone C, on both shifts", "isNot": "Before the re-slotting (R7 at 0.2 % too)", "diff": "The re-slotting put look-alike variants in adjacent slots" },
+        "extent": { "is": "144 of 4,800 lines (3.0 %), steady from day to day; 9 look-alike pairs", "isNot": "Not growing; not the other SKUs of zone C", "diff": "The 9 pairs sit side by side since the re-slotting" }
+      },
+      "statement": "Since the re-slotting of zone C, 3.0 % of the order lines delivered on route R7 to the retailer's 12 stores are a wrong variant of the ordered item (144 of 4,800 lines in five delivery days), against 0.2 % on the other routes."
+    },
+    "d3": {
+      "actions": [
+        { "text": "100 % item scan of every R7 roll cage at dispatch before loading; wrong lines corrected on the spot", "owner": "Jonas B.", "date": -38, "where": "warehouse", "sorted": "2880", "found": "84", "verified": "84 wrong lines corrected in the first three days; a re-check of 200 scanned lines found none", "status": "done" },
+        { "text": "Check the two R7 trucks already on the road at store arrival and swap the wrong lines", "owner": "Sara K.", "date": -38, "where": "transit", "sorted": "960", "found": "31", "verified": "All 31 swapped the same day; the store teams confirmed by mail", "status": "done" },
+        { "text": "Recount with the stores the deliveries of the last five days; swap run for the wrong lines", "owner": "Sara K.", "date": -37, "where": "customer", "sorted": "4800", "found": "144", "verified": "144 lines swapped in one run; the retailer's credit note matches the 144", "status": "done" }
+      ],
+      "cleanPoint": -37,
+      "cleanMark": "Green dot on the label of every scanned roll cage; the retailer's receipt audit found 0 wrong lines on R7 since the first green-dot delivery."
+    },
+    "d4": {
+      "occurrence": { "text": "The re-slotting of zone C put look-alike variants of the same article (same label colour, sizes 0.5 L and 1 L) in adjacent slots: 9 pairs. Only the R7 stores order both variants, so only R7 lines are exposed.", "verified": true, "how": "Turned on and off in a trial pick: 400 picks from the adjacent look-alike slots, 11 wrong (2.75 %); the same 400 picks with the variants three slots apart, 0 wrong." },
+      "escape": { "point": "Pick confirmation in zone C, then the dispatch check", "text": "A pick is confirmed with the location's check digit only, not the item barcode; the dispatch check counts roll cages and labels, not items. A wrong variant from the right location passes both.", "verified": true, "how": "In the trial all 11 wrong picks passed the check digit and the dispatch check; with an item (EAN) scan at the pick, all 11 were stopped." },
+      "notes": "Fishbone with the late shift: Method (no slotting rule for look-alikes), Material (same label colour), Measurement (check digit, not the item). 5 Whys: wrong variant, because next slot, because re-slotting by sales speed only, because no look-alike rule."
+    },
+    "d5": {
+      "actions": [
+        { "text": "Re-slot zone C: look-alike variants at least three slots apart and on different levels; the rule added to the WMS slotting check", "addresses": "occurrence", "owner": "Elena P.", "due": -27, "verification": "Trial pick: 0 wrong in 400 picks", "verified": true, "status": "done" },
+        { "text": "Confirm every pick in zone C with an item (EAN) scan instead of the location check digit", "addresses": "escape", "owner": "Tom W.", "due": -25, "verification": "Trial: 11 of 11 wrong picks stopped; pick rate −2 %, accepted", "verified": true, "status": "done" }
+      ]
+    },
+    "d6": {
+      "actions": [
+        { "text": "Zone C re-slotted, the 9 look-alike pairs apart", "owner": "Elena P.", "due": -27, "status": "done" },
+        { "text": "EAN scan at the pick live in zone C on all shifts", "owner": "Tom W.", "due": -25, "status": "done" },
+        { "text": "Stop the 100 % dispatch scan of R7 after two clean weeks", "owner": "Jonas B.", "due": -10, "status": "done" }
+      ],
+      "beforeBad": "144",
+      "beforeTotal": "4800",
+      "afterBad": "9",
+      "afterTotal": "9600",
+      "period": "Two weeks after the EAN scan went live, measured at the dispatch scan",
+      "result": "Wrong lines on R7 down from 3.0 % to 0.09 % (9 of 9,600), below the 0.2 % of the other routes. The retailer's receipt audit found none.",
+      "containmentRemoved": -10
+    },
+    "d7": {
+      "lines": [
+        { "kind": "fmea", "text": "Process FMEA, picking: failure mode \"look-alike variant in the adjacent slot\" added; occurrence and detection re-rated after the EAN scan", "owner": "Mira S.", "due": -12, "status": "done" },
+        { "kind": "controlPlan", "text": "Control plan: weekly slotting check for look-alike pairs; EAN scan rate as a daily KPI with a reaction plan", "owner": "Elena P.", "due": 4, "status": "doing" },
+        { "kind": "standardWork", "text": "Standard work for every slotting change: look-alike check before the change is released", "owner": "Daniel R.", "due": 8, "status": "open" },
+        { "kind": "training", "text": "All zone C pickers and the slotting team briefed on look-alikes and the scan rule, both shifts, signed", "owner": "Jonas B.", "due": -11, "status": "done" },
+        { "kind": "readAcross", "text": "Read-across: check zones A, B and D and the second DC for look-alike pairs side by side", "owner": "Mira S.", "due": 12, "status": "open" }
+      ]
+    },
+    "d8": { "recognition": "", "lessons": "", "closedBy": "" }
+  }
+}

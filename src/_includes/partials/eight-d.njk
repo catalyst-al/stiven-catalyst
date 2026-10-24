@@ -1,0 +1,334 @@
+{#- The 8D Report: one report per serious or customer-facing problem, D0 to D8 of the Global 8D, each discipline with its status and date. The page sets `cfg` to its data file; eight-d.js does the rest. -#}
+{%- macro stepHead(d, cfg, lang) -%}
+<details class="ed-disc" data-disc="{{ d.key }}">
+<summary class="ed-disc-summary"><span class="kicker">{{ d.code }} · {{ d.title }}</span> <span class="form-note ed-disc-state" data-disc-state="{{ d.key }}"></span></summary>
+<fieldset class="ed-fieldset">
+<legend class="visually-hidden">{{ d.code }} · {{ d.title }}</legend>
+<p class="ed-hint">{{ d.question }}</p>
+<div class="ed-step">
+  <div class="field">
+    <label for="ed-{{ d.key }}-status">{{ "Status" | t(lang) }}</label>
+    <select id="ed-{{ d.key }}-status" data-f="steps.{{ d.key }}.status">
+      {%- for key, label in cfg.stepStatuses %}
+      <option value="{{ key }}">{{ label }}</option>
+      {%- endfor %}
+    </select>
+  </div>
+  <div class="field">
+    <label for="ed-{{ d.key }}-date">{{ "Done on" | t(lang) }}</label>
+    <input id="ed-{{ d.key }}-date" type="date" data-f="steps.{{ d.key }}.date">
+  </div>
+  {%- if d.key in ["d3", "d4", "d5", "d6", "d8"] %}
+  <p class="form-note ed-due" data-due="{{ d.key }}" aria-live="polite"></p>
+  {%- endif %}
+</div>
+{%- endmacro -%}
+{%- set D = cfg.disciplines -%}
+<section class="shell tool-layout ed-setup">
+  <div class="tool-panel" data-eight-d>
+
+    <div class="dl-box ed-list-box">
+      <div class="dl-log-head">
+        <p class="kicker">{{ "Your 8D reports" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <ul class="ed-list" data-list></ul>
+      <p class="dl-empty" data-list-empty>{{ "No 8D report saved yet." | t(lang) }} {{ "Start a new one below, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example" | t(lang) }}</button>.</p>
+      <p class="form-note dl-log-status" data-list-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-new>{{ "New 8D report" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-example-again hidden>{{ "Load the example" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <details class="dl-box ed-targets">
+      <summary class="ed-targets-summary"><span class="kicker">{{ "Target times" | t(lang) }}</span> <span class="form-note">{{ "Calendar days from the opening date" | t(lang) }}</span></summary>
+      <div class="ed-target-grid">
+        {%- for key in ["d3", "d4", "d5", "d6", "d8"] %}
+        {%- for d in D %}{% if d.key == key %}
+        <div class="field">
+          <label for="ed-target-{{ key }}">{{ d.code }} · {{ d.title }}</label>
+          <input id="ed-target-{{ key }}" type="number" min="0" max="999" step="1" inputmode="numeric" data-target="{{ key }}">
+        </div>
+        {%- endif %}{% endfor %}
+        {%- endfor %}
+      </div>
+      <p class="form-note">{{ "The defaults are common practice in automotive and logistics quality: containment within 24 hours (D3 by the next day), the root cause within 10 days, the corrective actions within 14, implemented within 30, the report closed within 60. Use your customer's rules where they differ." | t(lang) }}</p>
+      <div class="tool-actions"><button class="button-ghost" type="button" data-targets-reset>{{ "Back to the defaults" | t(lang) }}</button></div>
+    </details>
+
+    <form class="dl-box ed-form" data-ed-form novalidate>
+      <fieldset>
+        <legend class="kicker">{{ "The report" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="ed-title">{{ "Title" | t(lang) }}</label>
+            <input id="ed-title" data-f="title" placeholder="{{ cfg.fields.title }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-customer">{{ "Customer" | t(lang) }}</label>
+            <input id="ed-customer" data-f="customer" placeholder="{{ cfg.fields.customer }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-ref">{{ "Reference" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ed-ref" data-f="ref" placeholder="{{ cfg.fields.ref }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-product">{{ "Product or service" | t(lang) }}</label>
+            <input id="ed-product" data-f="product" placeholder="{{ cfg.fields.product }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-area">{{ "Area" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ed-area" data-f="area" placeholder="{{ cfg.fields.area }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-opened">{{ "Opened" | t(lang) }}</label>
+            <input id="ed-opened" type="date" data-f="opened">
+          </div>
+        </div>
+      </fieldset>
+
+      {{ stepHead(D[0], cfg, lang) }}
+        <div class="ed-criteria-box" role="group" aria-labelledby="ed-criteria-title">
+          <p class="ed-sub" id="ed-criteria-title">{{ "Is an 8D needed? Tick what applies:" | t(lang) }}</p>
+          {%- for line in cfg.criteria %}
+          <label class="ed-tick" for="ed-criterion-{{ loop.index0 }}"><input id="ed-criterion-{{ loop.index0 }}" type="checkbox" data-f="d0.criteria.{{ loop.index0 }}"> {{ line }}</label>
+          {%- endfor %}
+          <p class="form-note" data-d0-verdict aria-live="polite"></p>
+        </div>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="ed-era">{{ "Emergency response" | t(lang) }}</label>
+            <textarea id="ed-era" rows="2" data-f="d0.era" placeholder="{{ cfg.fields.eraText }}"></textarea>
+          </div>
+          <div class="field">
+            <label for="ed-era-owner">{{ "Owner" | t(lang) }}</label>
+            <input id="ed-era-owner" data-f="d0.eraOwner" placeholder="{{ cfg.fields.person }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-era-date">{{ "Date" | t(lang) }}</label>
+            <input id="ed-era-date" type="date" data-f="d0.eraDate">
+          </div>
+        </div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[1], cfg, lang) }}
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ed-leader">{{ "Team leader" | t(lang) }}</label>
+            <input id="ed-leader" data-f="d1.leader" placeholder="{{ cfg.fields.person }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-champion">{{ "Champion" | t(lang) }}</label>
+            <input id="ed-champion" data-f="d1.champion" placeholder="{{ cfg.fields.person }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="ed-rows" data-rows="d1.members"></div>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="d1.members">{{ "Add a team member" | t(lang) }}</button></div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[2], cfg, lang) }}
+        <p class="ed-sub">5W2H</p>
+        <div class="dl-grid">
+          {%- for q in cfg.w2h %}
+          <div class="field">
+            <label for="ed-w-{{ q.key }}">{{ q.label }}</label>
+            <textarea id="ed-w-{{ q.key }}" rows="2" data-f="d2.w.{{ q.key }}" placeholder="{{ q.placeholder }}"></textarea>
+          </div>
+          {%- endfor %}
+        </div>
+        <p class="form-note ed-check-note" data-w2h-note aria-live="polite"></p>
+        <p class="ed-sub">{{ "IS / IS NOT" | t(lang) }}</p>
+        <div class="ed-isnot">
+          {%- for row in cfg.isNot %}
+          <div class="ed-isnot-row" role="group" aria-labelledby="ed-isnot-{{ row.key }}">
+            <p class="ed-isnot-name" id="ed-isnot-{{ row.key }}">{{ row.label }}</p>
+            <div class="field">
+              <label for="ed-is-{{ row.key }}">{{ "IS" | t(lang) }}</label>
+              <textarea id="ed-is-{{ row.key }}" rows="2" data-f="d2.isNot.{{ row.key }}.is" placeholder="{{ row.is }}"></textarea>
+            </div>
+            <div class="field">
+              <label for="ed-isnot-{{ row.key }}-not">{{ "IS NOT" | t(lang) }}</label>
+              <textarea id="ed-isnot-{{ row.key }}-not" rows="2" data-f="d2.isNot.{{ row.key }}.isNot" placeholder="{{ row.isNot }}"></textarea>
+            </div>
+            <div class="field">
+              <label for="ed-diff-{{ row.key }}">{{ "Difference" | t(lang) }} <span class="optional">{{ "what is special about the IS?" | t(lang) }}</span></label>
+              <textarea id="ed-diff-{{ row.key }}" rows="2" data-f="d2.isNot.{{ row.key }}.diff"></textarea>
+            </div>
+          </div>
+          {%- endfor %}
+        </div>
+        <p class="form-note ed-check-note" data-isnot-note aria-live="polite"></p>
+        <div class="field">
+          <label for="ed-statement">{{ "Problem statement" | t(lang) }}</label>
+          <textarea id="ed-statement" rows="3" data-f="d2.statement" placeholder="{{ cfg.fields.statement }}"></textarea>
+        </div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[3], cfg, lang) }}
+        <div class="ed-rows" data-rows="d3.actions"></div>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="d3.actions">{{ "Add a containment action" | t(lang) }}</button></div>
+        <p class="form-note ed-check-note" data-d3-note aria-live="polite"></p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ed-clean-point">{{ "Clean point" | t(lang) }} <span class="optional">{{ "first delivery known to be good" | t(lang) }}</span></label>
+            <input id="ed-clean-point" type="date" data-f="d3.cleanPoint">
+          </div>
+          <div class="field">
+            <label for="ed-clean-mark">{{ "How checked stock is marked" | t(lang) }}</label>
+            <input id="ed-clean-mark" data-f="d3.cleanMark" placeholder="{{ cfg.fields.cleanMark }}" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[4], cfg, lang) }}
+        <div class="ed-cause-form">
+          <p class="ed-sub">{{ "Root cause of occurrence" | t(lang) }}</p>
+          <div class="field">
+            <label for="ed-occ">{{ "Why did it happen?" | t(lang) }}</label>
+            <textarea id="ed-occ" rows="3" data-f="d4.occurrence.text" placeholder="{{ cfg.fields.occurrence }}"></textarea>
+          </div>
+          <label class="ed-tick" for="ed-occ-ok"><input id="ed-occ-ok" type="checkbox" data-f="d4.occurrence.verified"> {{ "Verified: the problem can be turned on and off with this cause" | t(lang) }}</label>
+          <div class="field">
+            <label for="ed-occ-how">{{ "How it was verified" | t(lang) }}</label>
+            <textarea id="ed-occ-how" rows="2" data-f="d4.occurrence.how" placeholder="{{ cfg.fields.verifyHow }}"></textarea>
+          </div>
+        </div>
+        <div class="ed-cause-form">
+          <p class="ed-sub">{{ "Root cause of non-detection (escape point)" | t(lang) }}</p>
+          <div class="field">
+            <label for="ed-esc-point">{{ "Escape point" | t(lang) }} <span class="optional">{{ "the first place it should have been caught" | t(lang) }}</span></label>
+            <input id="ed-esc-point" data-f="d4.escape.point" placeholder="{{ cfg.fields.escapePoint }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-esc">{{ "Why was it not detected?" | t(lang) }}</label>
+            <textarea id="ed-esc" rows="3" data-f="d4.escape.text" placeholder="{{ cfg.fields.escape }}"></textarea>
+          </div>
+          <label class="ed-tick" for="ed-esc-ok"><input id="ed-esc-ok" type="checkbox" data-f="d4.escape.verified"> {{ "Verified: the control misses it when the cause is present" | t(lang) }}</label>
+          <div class="field">
+            <label for="ed-esc-how">{{ "How it was verified" | t(lang) }}</label>
+            <textarea id="ed-esc-how" rows="2" data-f="d4.escape.how" placeholder="{{ cfg.fields.verifyHow }}"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label for="ed-notes">{{ "Analysis notes" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <textarea id="ed-notes" rows="4" data-f="d4.notes" placeholder="{{ cfg.fields.notes }}"></textarea>
+        </div>
+        <div class="tool-actions ed-pull">
+          <button class="button-ghost" type="button" data-from-whys hidden>{{ "Take from 5 Whys" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-from-fishbone hidden>{{ "Take from Fishbone" | t(lang) }}</button>
+          <a class="button-ghost" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>{{ "Open 5 Whys" | t(lang) }}</a>
+          <a class="button-ghost" href="{{ '/tools/fishbone/' | local(lang) }}">{{ "Open Fishbone" | t(lang) }}</a>
+          <p class="form-note" data-import-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[5], cfg, lang) }}
+        <div class="ed-rows" data-rows="d5.actions"></div>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="d5.actions">{{ "Add a corrective action" | t(lang) }}</button></div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[6], cfg, lang) }}
+        <div class="ed-rows" data-rows="d6.actions"></div>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="d6.actions">{{ "Add an implementation step" | t(lang) }}</button></div>
+        <p class="ed-sub">{{ "Validation: the defect rate before and after" | t(lang) }}</p>
+        <div class="dl-grid ed-numbers">
+          <div class="field">
+            <label for="ed-before-bad">{{ "Defects before" | t(lang) }}</label>
+            <input id="ed-before-bad" inputmode="decimal" data-f="d6.beforeBad" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-before-total">{{ "Out of (before)" | t(lang) }}</label>
+            <input id="ed-before-total" inputmode="decimal" data-f="d6.beforeTotal" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-after-bad">{{ "Defects after" | t(lang) }}</label>
+            <input id="ed-after-bad" inputmode="decimal" data-f="d6.afterBad" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-after-total">{{ "Out of (after)" | t(lang) }}</label>
+            <input id="ed-after-total" inputmode="decimal" data-f="d6.afterTotal" autocomplete="off">
+          </div>
+        </div>
+        <p class="form-note ed-check-note" data-d6-note aria-live="polite"></p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ed-period">{{ "Period" | t(lang) }}</label>
+            <input id="ed-period" data-f="d6.period" placeholder="{{ cfg.fields.period }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ed-removed">{{ "Containment removed on" | t(lang) }}</label>
+            <input id="ed-removed" type="date" data-f="d6.containmentRemoved">
+          </div>
+          <div class="field dl-wide">
+            <label for="ed-result">{{ "Result" | t(lang) }}</label>
+            <textarea id="ed-result" rows="2" data-f="d6.result" placeholder="{{ cfg.fields.result }}"></textarea>
+          </div>
+        </div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[7], cfg, lang) }}
+        <ul class="ed-prevent-hints">
+          {%- for p in cfg.preventions %}{% if p.key != "other" %}
+          <li><strong>{{ p.name }}.</strong> {{ p.hint }}</li>
+          {%- endif %}{% endfor %}
+        </ul>
+        <div class="ed-rows" data-rows="d7.lines"></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add="d7.lines">{{ "Add a change" | t(lang) }}</button>
+          <a class="button-ghost" href="{{ '/tools/fmea/' | local(lang) }}">{{ "Open FMEA" | t(lang) }}</a>
+          <a class="button-ghost" href="{{ '/tools/standard-work/' | local(lang) }}">{{ "Open Standard Work" | t(lang) }}</a>
+        </div>
+      </fieldset>
+      </details>
+
+      {{ stepHead(D[8], cfg, lang) }}
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="ed-recognition">{{ "Recognition" | t(lang) }}</label>
+            <textarea id="ed-recognition" rows="2" data-f="d8.recognition" placeholder="{{ cfg.fields.recognition }}"></textarea>
+          </div>
+          <div class="field dl-wide">
+            <label for="ed-lessons">{{ "Lessons learned" | t(lang) }}</label>
+            <textarea id="ed-lessons" rows="3" data-f="d8.lessons" placeholder="{{ cfg.fields.lessons }}"></textarea>
+          </div>
+          <div class="field dl-wide">
+            <label for="ed-closed-by">{{ "Closed by" | t(lang) }}</label>
+            <input id="ed-closed-by" data-f="d8.closedBy" placeholder="{{ cfg.fields.closedBy }}" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+      </details>
+      <p class="form-note" data-save-status aria-live="polite">{{ "Saved in this browser." | t(lang) }}</p>
+    </form>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="form-note"><a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Open the Action Tracker" | t(lang) }}</a> · <a class="inline-link" href="{{ '/tools/a3-report/' | local(lang) }}">{{ "A3 Report" | t(lang) }}</a></p>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ed-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="eight-d-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/eight-d.js' | assetUrl }}" defer></script>
