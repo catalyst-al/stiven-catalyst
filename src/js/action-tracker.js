@@ -194,7 +194,7 @@
       field(`at-e-detail-${a.id}`, tx("Detail"), fields.detail, true),
       field(`at-e-result-${a.id}`, tx("Result (what happened, what the number did)"), fields.result, true),
     );
-    const saveEdit = el("button", "button-primary", tx("Save"));
+    const saveEdit = el("button", "button-primary", tx("Save changes"));
     saveEdit.type = "button";
     saveEdit.addEventListener("click", () => {
       const patch = Object.fromEntries(Object.entries(fields).map(([name, node]) => [name, node.value]));
@@ -278,7 +278,7 @@
     const stats = el("div", "dl-stats");
     stats.append(
       stat(tx("Open"), int.format(sum.open), sum.byOwner.length ? tx("{n} owners", { n: sum.byOwner.length }) : ""),
-      stat(tx("Overdue"), int.format(sum.overdue), sum.overdue ? tx("decide today") : tx("none")),
+      stat(tx("Overdue"), int.format(sum.overdue), sum.overdue ? tx("decide today") : data.review.none),
       stat(tx("Due this week"), int.format(sum.dueWeek), ""),
       stat(tx("Closed, last 30 days"), int.format(sum.closedRecent), sum.avgDays !== null ? tx("{n} days on average", { n: Math.round(sum.avgDays) }) : ""),
       stat(tx("Verified"), sum.verifiedShare !== null ? `${Math.round(sum.verifiedShare * 100)}%` : "–", tx("of closed actions")),
