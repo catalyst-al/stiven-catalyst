@@ -1,0 +1,1070 @@
+{
+  "storageKey": "sc-gemba-walk",
+  "text": {
+    "tool": "Gemba Walk",
+    "areaPlaceholder": "e.g. Inbound dock",
+    "walkerPlaceholder": "e.g. Anna",
+    "findingPlaceholder": "Finding, e.g. pallet over the yellow line",
+    "notePlaceholder": "What you saw, e.g. walks 20 m for tape",
+    "csv": "gemba-walks",
+    "checkText": "Answered yes at the next walk of this layer",
+    "sheetTitle": "Gemba walk sheet"
+  },
+  "types": [
+    {
+      "key": "lpa",
+      "name": "Layered process audit",
+      "short": "LPA",
+      "note": "A short check, at the place of work, that the standard is followed; each leadership layer asks its own questions."
+    },
+    {
+      "key": "waste",
+      "name": "Waste walk",
+      "short": "Waste walk",
+      "note": "Count the waste you see in one area: the eight wastes plus Mura and Muri."
+    }
+  ],
+  "layers": [
+    {
+      "key": "team-lead",
+      "name": "Team lead",
+      "short": "TL",
+      "cadence": "daily",
+      "note": "The team lead walks every day and checks the basics of the shift."
+    },
+    {
+      "key": "area-manager",
+      "name": "Area manager",
+      "short": "AM",
+      "cadence": "weekly",
+      "note": "The area manager walks every week and checks that the system around the shift works."
+    },
+    {
+      "key": "site-lead",
+      "name": "Site lead",
+      "short": "SL",
+      "cadence": "monthly",
+      "note": "The site lead walks every month and checks that the layers below close what they find."
+    }
+  ],
+  "cadences": [
+    {
+      "key": "daily",
+      "name": "Daily"
+    },
+    {
+      "key": "weekly",
+      "name": "Weekly"
+    },
+    {
+      "key": "monthly",
+      "name": "Monthly"
+    }
+  ],
+  "answers": [
+    {
+      "key": "yes",
+      "name": "Yes"
+    },
+    {
+      "key": "no",
+      "name": "No"
+    },
+    {
+      "key": "na",
+      "name": "n.a."
+    }
+  ],
+  "shifts": [
+    "Early",
+    "Late",
+    "Night"
+  ],
+  "templates": {
+    "warehouse": {
+      "name": "Warehouse",
+      "areas": [
+        "Inbound dock",
+        "Picking zone A",
+        "Packing",
+        "Outbound dock",
+        "Returns"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Everyone on the floor wears safety shoes and a hi-vis vest.",
+            "standard": "PPE rule at the gate: S3 shoes, vest on.",
+            "topic": "safety"
+          },
+          {
+            "text": "Walkways and yellow lines are free of pallets and cages.",
+            "standard": "Floor marking plan: nothing parked over a line.",
+            "topic": "fives"
+          },
+          {
+            "text": "The pick or pack instruction at each station is the current version.",
+            "standard": "Standard work sheet, version on the board.",
+            "topic": "standard"
+          },
+          {
+            "text": "Scanners and printers are charged and in their home position at shift start.",
+            "standard": "Equipment check at the start of shift.",
+            "topic": "fives"
+          },
+          {
+            "text": "The shift board shows the plan and the last hour against plan.",
+            "standard": "Hourly board filled in by ten past the hour.",
+            "topic": "visual"
+          },
+          {
+            "text": "New starters work with a buddy and their sign-off sheet is at the station.",
+            "standard": "Training matrix: no solo work below level 2.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Team leads did their daily walks this week and every finding has an owner.",
+            "standard": "LPA plan, team lead layer.",
+            "topic": "standard"
+          },
+          {
+            "text": "The forklift pre-use check is signed for every truck and shift.",
+            "standard": "Forklift check sheet, every shift.",
+            "topic": "safety"
+          },
+          {
+            "text": "Damaged goods are tagged and in quarantine, not in the pick face.",
+            "standard": "Damage process: tag, quarantine, log within the shift.",
+            "topic": "quality"
+          },
+          {
+            "text": "Stock on the dock stays below the maximum marked on the floor.",
+            "standard": "Dock maximum: two hours of inbound.",
+            "topic": "flow"
+          },
+          {
+            "text": "The KPI board is current and every red KPI has an action with an owner.",
+            "standard": "Daily board: red means an action.",
+            "topic": "visual"
+          },
+          {
+            "text": "The shift handover is written and the next shift has read it.",
+            "standard": "Handover sheet signed by both leads.",
+            "topic": "flow"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Last month's findings are closed or have a date.",
+            "standard": "Action tracker: no finding older than 30 days without a date.",
+            "topic": "standard"
+          },
+          {
+            "text": "Near misses were reported and discussed in the safety talk.",
+            "standard": "Near-miss process: report within the shift.",
+            "topic": "safety"
+          },
+          {
+            "text": "The 5S score of the areas walked has not dropped since the last audit.",
+            "standard": "5S audit, every month.",
+            "topic": "fives"
+          },
+          {
+            "text": "Each critical task is covered by at least two trained people per shift.",
+            "standard": "Skills matrix: two per critical task.",
+            "topic": "people"
+          },
+          {
+            "text": "The quality KPIs (mis-picks, damage) are on target or have a countermeasure.",
+            "standard": "Quality targets on the site board.",
+            "topic": "quality"
+          },
+          {
+            "text": "Leaders on the floor can explain the standard they check and why it matters.",
+            "standard": "Leader standard work, layers 1 and 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    },
+    "hotel": {
+      "name": "Hotel",
+      "areas": [
+        "Front office",
+        "Housekeeping store",
+        "Kitchen"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "The front desk follows the check-in standard: greeting, ID, payment guarantee, key.",
+            "standard": "Check-in SOP, version in the back office.",
+            "topic": "standard"
+          },
+          {
+            "text": "Room status in the PMS matches housekeeping's report at the agreed times.",
+            "standard": "Room status check at 11:00 and 15:00.",
+            "topic": "quality"
+          },
+          {
+            "text": "Cleaning trolleys are stocked to the list and parked clear of the corridor.",
+            "standard": "Trolley list and corridor rule.",
+            "topic": "fives"
+          },
+          {
+            "text": "Chemicals are labelled and stored closed; gloves are worn.",
+            "standard": "Hazardous substances instruction.",
+            "topic": "safety"
+          },
+          {
+            "text": "The handover book lists the open guest issues with an owner.",
+            "standard": "Shift handover, open issues column.",
+            "topic": "flow"
+          },
+          {
+            "text": "New staff work with a trainer and their checklist is signed for today's tasks.",
+            "standard": "Onboarding checklist.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Team leads did their daily walks this week and every finding has an owner.",
+            "standard": "LPA plan, team lead layer.",
+            "topic": "standard"
+          },
+          {
+            "text": "Fire exits and escape routes are free and the signs are lit.",
+            "standard": "Fire safety round, every week.",
+            "topic": "safety"
+          },
+          {
+            "text": "This week's guest complaints are logged with cause and recovery.",
+            "standard": "Complaint log within 24 hours.",
+            "topic": "quality"
+          },
+          {
+            "text": "Linen and amenities stock is between min and max in every floor store.",
+            "standard": "Par levels per floor store.",
+            "topic": "flow"
+          },
+          {
+            "text": "The department board shows this week's KPIs and every red one has an action.",
+            "standard": "Department board: red means an action.",
+            "topic": "visual"
+          },
+          {
+            "text": "Five inspected rooms meet the room standard.",
+            "standard": "Room inspection checklist.",
+            "topic": "quality"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Last month's findings are closed or have a date.",
+            "standard": "Action tracker: no finding older than 30 days without a date.",
+            "topic": "standard"
+          },
+          {
+            "text": "Accidents and near misses were reviewed with the heads of department.",
+            "standard": "Monthly safety review.",
+            "topic": "safety"
+          },
+          {
+            "text": "The guest score trend was discussed with the team and one improvement chosen.",
+            "standard": "Monthly review score meeting.",
+            "topic": "visual"
+          },
+          {
+            "text": "Each critical task (night audit, check-in, HACCP) has two trained people.",
+            "standard": "Skills matrix: two per critical task.",
+            "topic": "people"
+          },
+          {
+            "text": "The kitchen's HACCP records are complete for the month.",
+            "standard": "HACCP plan, daily records.",
+            "topic": "quality"
+          },
+          {
+            "text": "Leaders on the floor can explain the standard they check and why it matters.",
+            "standard": "Leader standard work, layers 1 and 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    },
+    "delivery-station": {
+      "name": "Delivery station",
+      "areas": [
+        "Sort floor",
+        "Staging lanes",
+        "Yard and docks",
+        "Returns cage"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Everyone in the yard and at the belt wears hi-vis and safety shoes.",
+            "standard": "PPE rule for the station.",
+            "topic": "safety"
+          },
+          {
+            "text": "Bags and totes are staged in the right lane for the right route before the first wave.",
+            "standard": "Staging plan per wave.",
+            "topic": "flow"
+          },
+          {
+            "text": "Loading follows the stop sequence: last stop in first.",
+            "standard": "Loading standard and route sheet.",
+            "topic": "standard"
+          },
+          {
+            "text": "Damaged or wet parcels go to the problem-solve shelf with a label.",
+            "standard": "Damage process at the belt.",
+            "topic": "quality"
+          },
+          {
+            "text": "Scanners, carts and cages are back in their home positions.",
+            "standard": "Floor plan with home positions.",
+            "topic": "fives"
+          },
+          {
+            "text": "Drivers got the route briefing and the safety tip of the day.",
+            "standard": "Morning briefing: five minutes, one safety tip.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Team leads did their daily walks this week and every finding has an owner.",
+            "standard": "LPA plan, team lead layer.",
+            "topic": "standard"
+          },
+          {
+            "text": "In the yard the speed limit and one-way traffic are kept and the walkway is free.",
+            "standard": "Yard traffic plan.",
+            "topic": "safety"
+          },
+          {
+            "text": "Missing and misrouted parcels of the week have a cause.",
+            "standard": "Weekly loss and missort review.",
+            "topic": "quality"
+          },
+          {
+            "text": "No cart waits in a lane more than 20 minutes after loading has started.",
+            "standard": "Lane dwell under 20 minutes.",
+            "topic": "flow"
+          },
+          {
+            "text": "The station board (on-time departure, damage, missing) is current with actions on red.",
+            "standard": "Station board: red means an action.",
+            "topic": "visual"
+          },
+          {
+            "text": "Van checks (tyres, lights, damage) are done and logged before departure.",
+            "standard": "Vehicle check before departure.",
+            "topic": "safety"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Last month's findings are closed or have a date.",
+            "standard": "Action tracker: no finding older than 30 days without a date.",
+            "topic": "standard"
+          },
+          {
+            "text": "Near misses and incidents were reviewed with team leads and delivery partners.",
+            "standard": "Monthly safety review.",
+            "topic": "safety"
+          },
+          {
+            "text": "The 5S score of the areas walked has not dropped since the last audit.",
+            "standard": "5S audit, every month.",
+            "topic": "fives"
+          },
+          {
+            "text": "Each critical task (sort, load, problem-solve) has two trained people per shift.",
+            "standard": "Skills matrix: two per critical task.",
+            "topic": "people"
+          },
+          {
+            "text": "The customer KPIs (delivery success, complaints) are on target or have a countermeasure.",
+            "standard": "Customer targets on the station board.",
+            "topic": "quality"
+          },
+          {
+            "text": "Leaders on the floor can explain the standard they check and why it matters.",
+            "standard": "Leader standard work, layers 1 and 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    }
+  },
+  "topics": {
+    "safety": {
+      "name": "Safety",
+      "meaning": "A safety standard that slips once a day is a standard nobody believes in. The fix is visible leadership, not another poster.",
+      "moves": [
+        "Stop the work the moment you see it and fix it with the person, not about the person.",
+        "Ask what makes the safe way harder than the unsafe one, and remove that.",
+        "Put the rule into the start-of-shift briefing for the next five days."
+      ],
+      "question": "What makes the unsafe way the easier way here?"
+    },
+    "standard": {
+      "name": "Standard work",
+      "meaning": "When the standard is not followed, the standard is often unclear, out of date or impossible in the time given. Check the standard before the people.",
+      "moves": [
+        "Watch one cycle against the written standard and note every difference.",
+        "Rewrite the step with the people who do it and post the new version at the station.",
+        "Check the same question on the next three walks."
+      ],
+      "question": "Can the person show me the standard, and does it work in the time they have?"
+    },
+    "fives": {
+      "name": "Order and 5S",
+      "meaning": "Things out of place come back when they have no home, or when the home is in the wrong place. Give each item a home where it is used.",
+      "moves": [
+        "Mark the home of the item that was out of place, with a label and a floor line.",
+        "Ask why it was parked there: no space, no time, or no rule?",
+        "Score the area in the 5S audit this week."
+      ],
+      "question": "Where would this have to live so that putting it back is the easy choice?"
+    },
+    "quality": {
+      "name": "Quality",
+      "meaning": "A quality check that is skipped lets the error travel to the customer. Find where the check is hard to do and make it part of the flow.",
+      "moves": [
+        "Follow one error back to the step where it was made.",
+        "Make the check visible at that step: a shelf, a colour, a scan.",
+        "Count the errors daily for two weeks on the board."
+      ],
+      "question": "At which step could this error be caught the moment it happens?"
+    },
+    "visual": {
+      "name": "Visual management",
+      "meaning": "A board that is not current tells the team that nobody looks. When leaders use the board every day, the team keeps it up.",
+      "moves": [
+        "Hold the next shift meeting at the board and ask about the red numbers.",
+        "Cut the board to the numbers someone acts on.",
+        "Give each red KPI one owner and one date, written on the board."
+      ],
+      "question": "Who looked at this board today, and what did they do because of it?"
+    },
+    "flow": {
+      "name": "Flow and handover",
+      "meaning": "Stock that piles up and handovers that get lost are signs that the steps are not linked. Limit what waits and make the handover a fixed moment.",
+      "moves": [
+        "Mark a maximum on the floor and agree what happens when it is reached.",
+        "Fix the time and place of the handover and use one sheet.",
+        "Walk the flow from the waiting stock back to the step that sends it."
+      ],
+      "question": "What is waiting here, and who decides when it moves?"
+    },
+    "people": {
+      "name": "People and skills",
+      "meaning": "A standard is only as strong as the training behind it. Gaps show up first with new people and in the tasks only one person can do.",
+      "moves": [
+        "Check the skills matrix for the task and name the second person to train.",
+        "Pair the new starter with a buddy for the rest of the week.",
+        "Ask the leader to explain the standard; where they cannot, train the leader first."
+      ],
+      "question": "If this person is off tomorrow, who does the task to the standard?"
+    }
+  },
+  "wastes": [
+    {
+      "key": "transport",
+      "name": "Transport",
+      "definition": "Moving goods or paperwork more than the work needs.",
+      "example": "Pallets moved twice: dock to buffer, buffer to rack."
+    },
+    {
+      "key": "inventory",
+      "name": "Inventory",
+      "definition": "More stock or work in progress than the next step needs.",
+      "example": "Three hours of inbound waiting on the dock floor."
+    },
+    {
+      "key": "motion",
+      "name": "Motion",
+      "definition": "People walking, bending or searching more than the task needs.",
+      "example": "The packer walks 20 m to fetch tape every hour."
+    },
+    {
+      "key": "waiting",
+      "name": "Waiting",
+      "definition": "People or goods standing still while they wait for something.",
+      "example": "Loaders wait for the truck; the truck waits for the paperwork."
+    },
+    {
+      "key": "overproduction",
+      "name": "Overproduction",
+      "definition": "Making or preparing more, or earlier, than the customer needs.",
+      "example": "Labels printed for the whole wave before the orders are final."
+    },
+    {
+      "key": "overprocessing",
+      "name": "Over-processing",
+      "definition": "Doing more to the product than the customer pays for.",
+      "example": "Every parcel wrapped twice; a second scan nobody reads."
+    },
+    {
+      "key": "defects",
+      "name": "Defects",
+      "definition": "Errors that need rework, a second check or a complaint.",
+      "example": "Mis-picks found at packing and sent back to the aisle."
+    },
+    {
+      "key": "skills",
+      "name": "Unused skills",
+      "definition": "Ideas and abilities of the team that nobody asks for.",
+      "example": "The night shift knows a faster route; nobody wrote it down."
+    },
+    {
+      "key": "mura",
+      "name": "Mura (unevenness)",
+      "definition": "Work that comes in peaks and troughs instead of an even flow.",
+      "example": "80 % of the trucks arrive between 6 and 8; the afternoon is empty."
+    },
+    {
+      "key": "muri",
+      "name": "Muri (overburden)",
+      "definition": "People or machines pushed beyond a safe, sustainable load.",
+      "example": "One person unloads a container alone at the end of a double shift."
+    }
+  ],
+  "tips": [
+    [
+      "Go and see, then ask.",
+      "Stand where the work is done. Ask the person to show you, not to tell you."
+    ],
+    [
+      "Check the standard, not the person.",
+      "A “no” means the standard did not hold today. Ask what made it hard before you ask who."
+    ],
+    [
+      "Every layer walks.",
+      "Team leads daily, managers weekly, the site lead monthly. The higher layers check that the lower ones close their findings."
+    ],
+    [
+      "Count waste without blame.",
+      "On a waste walk, tap + for every waste you see. The count shows where to look; the people show you why."
+    ],
+    [
+      "Close the loop.",
+      "Every “no” you cannot fix on the spot becomes an action with an owner and a date, and the next walk checks it."
+    ]
+  ],
+  "example": {
+    "template": "warehouse",
+    "walks": [
+      {
+        "day": -27,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 10,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Two pallets parked over the yellow line at door 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -26,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Picking zone A",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -26,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Inbound dock",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "yynnyy",
+        "findings": {
+          "2": "Damaged cartons in the pick face, no tag",
+          "3": "Inbound over the floor maximum: three lanes full"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -25,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packing",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 14,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -24,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Outbound dock",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 10,
+        "answers": "yyynyy",
+        "findings": {
+          "3": "Two scanners not charged at shift start"
+        },
+        "acts": []
+      },
+      {
+        "day": -24,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Picking zone A",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Mis-pick KPI red for two days, no action"
+        },
+        "acts": []
+      },
+      {
+        "day": -23,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -22,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Picking zone A",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 14,
+        "answers": "ynyyya",
+        "findings": {
+          "1": "Empty cages in the walkway by the charging point"
+        },
+        "acts": []
+      },
+      {
+        "day": -22,
+        "type": "lpa",
+        "layer": "site-lead",
+        "area": "Inbound dock",
+        "walker": "Elira",
+        "shift": "Early",
+        "minutes": 45,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Damage rate above target, countermeasure not agreed"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -20,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packing",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -19,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Outbound dock",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 12,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Hourly board not filled in since 10:00"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -19,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Outbound dock",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "ynyyny",
+        "findings": {
+          "1": "Truck 4 check sheet not signed on late shift",
+          "4": "Mis-pick KPI red for two days, no action"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -18,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Two pallets parked over the yellow line at door 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -17,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Picking zone A",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -17,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Inbound dock",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "yyynya",
+        "findings": {
+          "3": "Inbound over the floor maximum: three lanes full"
+        },
+        "acts": []
+      },
+      {
+        "day": -16,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packing",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 12,
+        "answers": "yyyyyn",
+        "findings": {
+          "5": "New starter working alone at packing station 4"
+        },
+        "acts": [
+          5
+        ]
+      },
+      {
+        "day": -15,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Outbound dock",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -15,
+        "type": "waste",
+        "layer": "area-manager",
+        "area": "Picking zone A",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "tallies": {
+          "transport": 4,
+          "inventory": 3,
+          "motion": 11,
+          "waiting": 7,
+          "overproduction": 1,
+          "overprocessing": 2,
+          "defects": 3,
+          "skills": 1,
+          "mura": 2,
+          "muri": 1
+        },
+        "notes": {
+          "motion": "Pickers walk back to the start for every new pick list",
+          "waiting": "Waiting for replenishment in aisle 12"
+        }
+      },
+      {
+        "day": -13,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 10,
+        "answers": "yyynya",
+        "findings": {
+          "3": "Two scanners not charged at shift start"
+        },
+        "acts": []
+      },
+      {
+        "day": -12,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Picking zone A",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -12,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Packing",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "yyyynn",
+        "findings": {
+          "4": "Mis-pick KPI red for two days, no action",
+          "5": "Late shift did not read the handover"
+        },
+        "acts": [
+          5
+        ]
+      },
+      {
+        "day": -11,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packing",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Wrap trolley left in the walkway"
+        },
+        "acts": []
+      },
+      {
+        "day": -10,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Outbound dock",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -10,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Inbound dock",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "nyynyy",
+        "findings": {
+          "0": "Two findings from last week without an owner",
+          "3": "Inbound over the floor maximum: three lanes full"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -9,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 12,
+        "answers": "nyyyya",
+        "findings": {
+          "0": "Visitor on the dock without a vest"
+        },
+        "acts": []
+      },
+      {
+        "day": -8,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Picking zone A",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -8,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Picking zone A",
+        "walker": "Dritan",
+        "shift": "Early",
+        "minutes": 30,
+        "answers": "yyynyy",
+        "findings": {
+          "3": "Inbound over the floor maximum: three lanes full"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -6,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packing",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 10,
+        "answers": "yynyyy",
+        "findings": {
+          "2": "Old version of the pack instruction at station 2"
+        },
+        "acts": [
+          2
+        ]
+      },
+      {
+        "day": -5,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Outbound dock",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -4,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Two pallets parked over the yellow line at door 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -3,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Picking zone A",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -3,
+        "type": "waste",
+        "layer": "team-lead",
+        "area": "Inbound dock",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 25,
+        "tallies": {
+          "transport": 8,
+          "inventory": 6,
+          "motion": 4,
+          "waiting": 9,
+          "overproduction": 0,
+          "overprocessing": 1,
+          "defects": 2,
+          "skills": 0,
+          "mura": 5,
+          "muri": 3
+        },
+        "notes": {
+          "waiting": "Trucks wait at the gate for a free door",
+          "mura": "Six trucks between 6:00 and 7:00, none after 10:00",
+          "transport": "Pallets parked in the buffer, then moved again to the rack"
+        }
+      },
+      {
+        "day": -2,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packing",
+        "walker": "Anna",
+        "shift": "Early",
+        "minutes": 12,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Hourly board not filled in since 10:00"
+        },
+        "acts": []
+      },
+      {
+        "day": -1,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Outbound dock",
+        "walker": "Besnik",
+        "shift": "Late",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      }
+    ]
+  }
+}
