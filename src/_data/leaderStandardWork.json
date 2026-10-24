@@ -1,0 +1,1709 @@
+{
+  "storageKey": "sc-leader-standard-work",
+  "text": {
+    "tool": "Leader Standard Work",
+    "csvName": "leader-standard-work",
+    "icsName": "leader-standard-work",
+    "namePlaceholder": "e.g. Lena Vogel",
+    "areaPlaceholder": "e.g. Picking",
+    "shiftPlaceholder": "e.g. Early",
+    "taskPlaceholder": "e.g. Start-of-shift huddle at the board",
+    "donePlaceholder": "What you can see when it is done",
+    "reviewPlaceholder": "What you agreed, and by when",
+    "defaultArea": "Operations",
+    "checkText": "The task is done on every due day for two weeks, checked in the weekly review.",
+    "exampleNote": "This is an example: a warehouse with one area manager, two shift leads and three team leaders over the last three weeks. Add your own leader and it disappears, or clear it now."
+  },
+  "levels": [
+    {
+      "key": "team",
+      "name": "Team leader",
+      "note": "Leads a team on the floor, every shift."
+    },
+    {
+      "key": "shift",
+      "name": "Shift lead",
+      "note": "Leads the team leaders of one shift."
+    },
+    {
+      "key": "area",
+      "name": "Area manager",
+      "note": "Leads an area across its shifts."
+    },
+    {
+      "key": "site",
+      "name": "Site manager",
+      "note": "Leads the site or the hotel."
+    }
+  ],
+  "frequencies": [
+    {
+      "key": "daily",
+      "name": "Daily at a set time",
+      "short": "Daily"
+    },
+    {
+      "key": "shift",
+      "name": "Every shift, after the shift start",
+      "short": "Every shift"
+    },
+    {
+      "key": "weekly",
+      "name": "Weekly on a weekday",
+      "short": "Weekly"
+    },
+    {
+      "key": "monthly",
+      "name": "Monthly on a day of the month",
+      "short": "Monthly"
+    }
+  ],
+  "weekdays": {
+    "long": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "short": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ]
+  },
+  "reasons": [
+    {
+      "key": "firefighting",
+      "excluded": false,
+      "name": "Firefighting",
+      "meaning": "The day ran the leader: an urgent problem took the time the standard needed. Firefighting that comes back is a problem nobody owns yet.",
+      "moves": [
+        "Protect the huddle and the first check of the shift: they go ahead even on a bad day.",
+        "Write down what you fought today and take the fire that comes back to 5 Whys.",
+        "Agree with your manager which task may drop on a red day, and which never does."
+      ],
+      "question": "Which fire did you fight twice this week, and who owns its cause?"
+    },
+    {
+      "key": "absent",
+      "excluded": false,
+      "name": "Absent, not covered",
+      "meaning": "The leader was away and nobody did the standard for them: the routine depends on one person.",
+      "moves": [
+        "Name a deputy for every leader on the board.",
+        "Hand the printed card to the deputy with the handover.",
+        "Review the deputy’s day the same way as the leader’s."
+      ],
+      "question": "Who runs this standard tomorrow if the leader is ill?"
+    },
+    {
+      "key": "notime",
+      "excluded": false,
+      "name": "No time",
+      "meaning": "The standard does not fit the day: more minutes are planned than the job leaves.",
+      "moves": [
+        "Compare the planned minutes with the guide share of the day for this level.",
+        "Move the task to a quieter hour, or make it weekly instead of daily.",
+        "Take away work that is not the leader’s (admin, chasing) before you cut the standard."
+      ],
+      "question": "What did you do in the minutes this task should have had?"
+    },
+    {
+      "key": "notrelevant",
+      "excluded": true,
+      "name": "Not relevant today",
+      "meaning": "The task did not apply today. It is left out of the adherence, but a task that is often not relevant is a standard to change.",
+      "moves": [
+        "Look at the tasks marked not relevant most often: do they belong to this level?",
+        "Turn a task that applies only on some days into a weekly or monthly one.",
+        "Remove what nobody misses after two weeks."
+      ],
+      "question": "If this task is so often not relevant, what would be?"
+    },
+    {
+      "key": "forgot",
+      "excluded": false,
+      "name": "Forgot",
+      "meaning": "The standard is not a habit yet: nothing in the day reminds the leader of it.",
+      "moves": [
+        "Carry the printed card and tick it at the board.",
+        "Put the standard in the calendar with the calendar file.",
+        "Tie the task to a fixed event: right after the huddle, before the handover."
+      ],
+      "question": "What happens just before this task every day that could remind you of it?"
+    }
+  ],
+  "unrecorded": {
+    "meaning": "Nobody marked these tasks on their day. A standard that is not checked off cannot be reviewed, so it counts as missed.",
+    "moves": [
+      "Tick the card at the end of the shift, before the handover.",
+      "Check off on the phone right after each task.",
+      "The next level asks for the card in its daily meeting."
+    ],
+    "question": "When in the shift do you have two minutes to tick the card?"
+  },
+  "sectors": [
+    {
+      "key": "warehouse",
+      "name": "Warehouse"
+    },
+    {
+      "key": "hotel",
+      "name": "Hotel"
+    },
+    {
+      "key": "delivery",
+      "name": "Delivery station"
+    }
+  ],
+  "tools": [
+    {
+      "key": "daily-board",
+      "name": "Daily Board"
+    },
+    {
+      "key": "gemba-walk",
+      "name": "Gemba Walk"
+    },
+    {
+      "key": "five-s-audit",
+      "name": "5S Audit"
+    },
+    {
+      "key": "safety-cross",
+      "name": "Safety Cross"
+    },
+    {
+      "key": "action-tracker",
+      "name": "Action Tracker"
+    },
+    {
+      "key": "kaizen-board",
+      "name": "Kaizen Board"
+    },
+    {
+      "key": "skills-matrix",
+      "name": "Skills Matrix"
+    },
+    {
+      "key": "shift-handover",
+      "name": "Shift Handover"
+    },
+    {
+      "key": "standard-work",
+      "name": "Standard Work"
+    },
+    {
+      "key": "leader-standard-work",
+      "name": "Leader Standard Work"
+    },
+    {
+      "key": "ops-report",
+      "name": "Operations Report"
+    },
+    {
+      "key": "project-portfolio",
+      "name": "Project Portfolio"
+    },
+    {
+      "key": "incomplete-control",
+      "name": "Incomplete Control"
+    },
+    {
+      "key": "damage-control",
+      "name": "Damage Control"
+    },
+    {
+      "key": "delay-analyzer",
+      "name": "Delay Analyzer"
+    },
+    {
+      "key": "cx-control-tower",
+      "name": "Last-Mile CX Control Tower"
+    },
+    {
+      "key": "room-inspection",
+      "name": "Room Inspection"
+    },
+    {
+      "key": "room-status",
+      "name": "Room Status"
+    },
+    {
+      "key": "guest-complaints",
+      "name": "Guest Complaints"
+    },
+    {
+      "key": "hotel-kpis",
+      "name": "Hotel KPIs"
+    },
+    {
+      "key": "night-audit",
+      "name": "Night Audit Log"
+    },
+    {
+      "key": "lost-found",
+      "name": "Lost & Found"
+    },
+    {
+      "key": "maintenance-planner",
+      "name": "Maintenance Planner"
+    }
+  ],
+  "templates": {
+    "warehouse-team": {
+      "name": "Warehouse · Team leader",
+      "sector": "warehouse",
+      "level": "team",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Pre-shift check: attendance, station plan, trucks",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "skills-matrix",
+          "done": "Every station has a trained person before the huddle."
+        },
+        {
+          "title": "Start-of-shift huddle at the board",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Yesterday’s result, today’s plan and one safety point, in 10 minutes."
+        },
+        {
+          "title": "Safety check: walkways, PPE, truck pre-use checks",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "safety-cross",
+          "done": "Every truck checked and signed; the Safety Cross is marked."
+        },
+        {
+          "title": "Tier-2 meeting with the shift lead",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "What the team cannot solve is escalated, with a name and a time."
+        },
+        {
+          "title": "Hour by hour: output against plan (8 × 5 min)",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 40,
+          "tool": "daily-board",
+          "done": "Every hour is on the board; each miss has a reason."
+        },
+        {
+          "title": "Process confirmation at one station",
+          "freq": "shift",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "One operator watched against the standard; gaps noted and coached."
+        },
+        {
+          "title": "Break relief and training at the stations with gaps",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 120,
+          "tool": "skills-matrix",
+          "done": "Every break covered; one trainee signed off on one step."
+        },
+        {
+          "title": "Quality check: 10 orders against the pick list",
+          "freq": "shift",
+          "at": 300,
+          "day": 0,
+          "minutes": 30,
+          "tool": "incomplete-control",
+          "done": "10 orders checked; every fault is in the log."
+        },
+        {
+          "title": "Second process confirmation, another station",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "A second operator watched; one point coached on the spot."
+        },
+        {
+          "title": "5S round of the area",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "five-s-audit",
+          "done": "The area is back to standard; red tags have an owner."
+        },
+        {
+          "title": "Shift handover to the next team leader",
+          "freq": "shift",
+          "at": 455,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Handover written and talked through at the board."
+        },
+        {
+          "title": "Collect one improvement idea from the team",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 15,
+          "tool": "kaizen-board",
+          "done": "One idea on the Kaizen Board with a name and a date."
+        },
+        {
+          "title": "Update the skills matrix after this week’s training",
+          "freq": "weekly",
+          "at": 330,
+          "day": 5,
+          "minutes": 20,
+          "tool": "skills-matrix",
+          "done": "Every step trained this week is signed in the matrix."
+        }
+      ]
+    },
+    "warehouse-shift": {
+      "name": "Warehouse · Shift lead",
+      "sector": "warehouse",
+      "level": "shift",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Read the handover and the board of the last shift",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Every open issue of the last shift has an owner in this shift."
+        },
+        {
+          "title": "Attend one team huddle (rotate the teams)",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "One huddle seen; one point of feedback to the team leader."
+        },
+        {
+          "title": "Tier-2 meeting with the team leaders",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Plan, staffing and yesterday’s misses agreed; escalations written down."
+        },
+        {
+          "title": "Gemba walk with one team leader",
+          "freq": "shift",
+          "at": 75,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Walk done, three observations noted, one action agreed."
+        },
+        {
+          "title": "Check the team leaders’ standard work cards",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 15,
+          "tool": "leader-standard-work",
+          "done": "Every card is ticked up to now; one missed task talked through."
+        },
+        {
+          "title": "Every two hours: plan against actual per area (4 × 10 min)",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 40,
+          "tool": "daily-board",
+          "done": "Every check is on the board; gaps are recovered or escalated."
+        },
+        {
+          "title": "Process confirmation of one standard (rotate the areas)",
+          "freq": "shift",
+          "at": 210,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "One standard checked on the floor; the gap has an action."
+        },
+        {
+          "title": "Chase the open actions of the shift",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "No action overdue without a new date and a reason."
+        },
+        {
+          "title": "Safety walk of the shift and Safety Cross update",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Walk done; every near miss is on the Safety Cross."
+        },
+        {
+          "title": "Lead the shift handover",
+          "freq": "shift",
+          "at": 440,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Handover written; the next shift lead has read and confirmed it."
+        },
+        {
+          "title": "Staffing and skills plan for the week with the team leaders",
+          "freq": "weekly",
+          "at": 360,
+          "day": 1,
+          "minutes": 20,
+          "tool": "skills-matrix",
+          "done": "Every day of the week has a trained person per station."
+        },
+        {
+          "title": "Kaizen review with the team leaders",
+          "freq": "weekly",
+          "at": 300,
+          "day": 4,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Every idea older than two weeks has a decision."
+        },
+        {
+          "title": "5S audit of one area",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit saved; the findings are in the Action Tracker."
+        },
+        {
+          "title": "Monthly safety talk to the whole shift",
+          "freq": "monthly",
+          "at": 30,
+          "day": 5,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Talk given; attendance signed."
+        }
+      ]
+    },
+    "warehouse-area": {
+      "name": "Warehouse · Area manager",
+      "sector": "warehouse",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Tier-3 meeting with the shift leads at the area board",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Yesterday’s KPIs, today’s risks and every escalation answered."
+        },
+        {
+          "title": "Gemba walk with a shift lead (rotate the areas)",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Walk done; one question asked at every stop."
+        },
+        {
+          "title": "Check the shift leads’ standard work and their review notes",
+          "freq": "daily",
+          "at": 120,
+          "day": 0,
+          "minutes": 15,
+          "tool": "leader-standard-work",
+          "done": "Both cards seen; one missed task asked about."
+        },
+        {
+          "title": "Review overdue actions and escalations",
+          "freq": "daily",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Every overdue action has a new date or is escalated."
+        },
+        {
+          "title": "Read the handover between the early and the late shift",
+          "freq": "daily",
+          "at": 480,
+          "day": 0,
+          "minutes": 10,
+          "tool": "shift-handover",
+          "done": "Open issues of the day have an owner on the late shift."
+        },
+        {
+          "title": "Weekly standard work review with each shift lead",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Adherence and the top miss discussed; a note per shift lead."
+        },
+        {
+          "title": "5S audit of one zone (rotating)",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit saved; the worst finding has an owner."
+        },
+        {
+          "title": "Kaizen Board: decide on the open ideas",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Every idea is accepted, rejected with a reason or tested."
+        },
+        {
+          "title": "Weekly KPI review: damage, incomplete, delay",
+          "freq": "weekly",
+          "at": 360,
+          "day": 5,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Report shared; the worst KPI has a countermeasure."
+        },
+        {
+          "title": "Safety audit of the area with the safety officer",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "safety-cross",
+          "done": "Audit done; findings in the Action Tracker."
+        },
+        {
+          "title": "Staffing and skills plan for next month",
+          "freq": "monthly",
+          "at": 180,
+          "day": 25,
+          "minutes": 60,
+          "tool": "skills-matrix",
+          "done": "Every gap in next month’s plan has a training date."
+        }
+      ]
+    },
+    "warehouse-site": {
+      "name": "Warehouse · Site manager",
+      "sector": "warehouse",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Site meeting (tier 4) at the site board",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Safety, service and staffing of every area seen; decisions written down."
+        },
+        {
+          "title": "Site escalations: decide or remove a block",
+          "freq": "daily",
+          "at": 150,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "No escalation waits longer than one day for an answer."
+        },
+        {
+          "title": "Gemba walk with an area manager",
+          "freq": "weekly",
+          "at": 120,
+          "day": 1,
+          "minutes": 60,
+          "tool": "gemba-walk",
+          "done": "Walk done; three observations and one question to coach."
+        },
+        {
+          "title": "Standard work review with the area managers",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Adherence of every level seen; one note per area manager."
+        },
+        {
+          "title": "Weekly site report: KPIs, safety, people",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "ops-report",
+          "done": "Report sent; the three priorities of next week named."
+        },
+        {
+          "title": "Safety walk of the whole site",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Walk done; findings in the Action Tracker with owners."
+        },
+        {
+          "title": "Review the improvement projects of the site",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Every project has a status, a next step and a sponsor."
+        }
+      ]
+    },
+    "hotel-team": {
+      "name": "Hotel · Team leader (housekeeping)",
+      "sector": "hotel",
+      "level": "team",
+      "start": "07:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Room status and room lists for the attendants",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "room-status",
+          "done": "Every attendant has a list; VIPs and early arrivals are marked."
+        },
+        {
+          "title": "Briefing with the attendants",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Arrivals, VIPs and one standard of the week, in 10 minutes."
+        },
+        {
+          "title": "Inspect checkout and VIP rooms before release",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 90,
+          "tool": "room-inspection",
+          "done": "Every VIP room and one checkout in five inspected."
+        },
+        {
+          "title": "Public areas check: lifts, corridors, lobby toilets",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Every public area on the list checked once."
+        },
+        {
+          "title": "Linen room and trolleys: 5S round",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 20,
+          "tool": "five-s-audit",
+          "done": "Shelves labelled and full to the par stock; trolleys set to standard."
+        },
+        {
+          "title": "Coach a new attendant in a room",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "One room cleaned together; one step signed off in the matrix."
+        },
+        {
+          "title": "Second inspection round",
+          "freq": "shift",
+          "at": 300,
+          "day": 0,
+          "minutes": 60,
+          "tool": "room-inspection",
+          "done": "Rooms released to reception within 30 minutes of the call."
+        },
+        {
+          "title": "Walk the floors: trolleys, corridors, rooms in progress",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 45,
+          "tool": "gemba-walk",
+          "done": "Every floor seen; delays reported to reception."
+        },
+        {
+          "title": "Log the lost property found in rooms",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "lost-found",
+          "done": "Every item logged and stored with its number."
+        },
+        {
+          "title": "Handover to the evening supervisor",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Open rooms, guest requests and faults handed over in writing."
+        },
+        {
+          "title": "Walk the open maintenance items of the floors",
+          "freq": "weekly",
+          "at": 240,
+          "day": 2,
+          "minutes": 20,
+          "tool": "maintenance-planner",
+          "done": "Every open item checked; the old ones escalated."
+        },
+        {
+          "title": "One idea from the team on the Kaizen Board",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 20,
+          "tool": "kaizen-board",
+          "done": "One idea with a name and a date."
+        }
+      ]
+    },
+    "hotel-shift": {
+      "name": "Hotel · Shift lead (front office)",
+      "sector": "hotel",
+      "level": "shift",
+      "start": "07:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Read the night audit and the handover",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "night-audit",
+          "done": "No-shows, open payments and guest issues of the night have an owner."
+        },
+        {
+          "title": "Briefing with the front desk team",
+          "freq": "shift",
+          "at": 20,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Arrivals, VIPs, groups and the upsell of the day named."
+        },
+        {
+          "title": "Arrivals against room status with housekeeping",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 20,
+          "tool": "room-status",
+          "done": "Every early arrival has a room and a time."
+        },
+        {
+          "title": "Walk the lobby, breakfast and public areas",
+          "freq": "shift",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Walk done; what a guest would notice is fixed or reported."
+        },
+        {
+          "title": "Follow up the open guest complaints",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "guest-complaints",
+          "done": "Every open complaint has a call back or a recovery today."
+        },
+        {
+          "title": "Chase the open actions of the shift",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "No action overdue without a new date and a reason."
+        },
+        {
+          "title": "Ask two in-house guests how their stay is going",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 20,
+          "tool": "guest-complaints",
+          "done": "Two guests asked; anything to fix is passed on today."
+        },
+        {
+          "title": "Check the numbers of the day: occupancy, ADR, upsell",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "hotel-kpis",
+          "done": "Numbers entered; a gap to the forecast has a reason."
+        },
+        {
+          "title": "Spot-check two released rooms",
+          "freq": "shift",
+          "at": 390,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Two rooms inspected; faults go back to housekeeping."
+        },
+        {
+          "title": "Write and lead the handover",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Handover written; the next shift has read it."
+        },
+        {
+          "title": "Rota and training plan of the week",
+          "freq": "weekly",
+          "at": 300,
+          "day": 1,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Every shift of the week has a trained person at the desk."
+        },
+        {
+          "title": "5S audit of the back office",
+          "freq": "weekly",
+          "at": 300,
+          "day": 4,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit saved; the findings have owners."
+        },
+        {
+          "title": "Fire safety check: exits, doors, extinguishers",
+          "freq": "monthly",
+          "at": 120,
+          "day": 5,
+          "minutes": 30,
+          "tool": "safety-cross",
+          "done": "Checklist signed; every fault reported to maintenance."
+        }
+      ]
+    },
+    "hotel-area": {
+      "name": "Hotel · Area manager (head of department)",
+      "sector": "hotel",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Department meeting with the supervisors",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Yesterday’s guest scores, today’s arrivals and the open issues agreed."
+        },
+        {
+          "title": "Inspect five rooms released today",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Five rooms inspected; the score is in the log."
+        },
+        {
+          "title": "Check yesterday’s KPIs and guest scores",
+          "freq": "daily",
+          "at": 150,
+          "day": 0,
+          "minutes": 15,
+          "tool": "hotel-kpis",
+          "done": "The worst number of yesterday has a reason and an owner."
+        },
+        {
+          "title": "Review the complaints of the last day and their recovery",
+          "freq": "daily",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "guest-complaints",
+          "done": "Every complaint has a recovery and a cause."
+        },
+        {
+          "title": "Standard work review with each supervisor",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Adherence and the top miss discussed; a note per supervisor."
+        },
+        {
+          "title": "5S audit of one area: linen room or back office",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit saved; the worst finding has an owner."
+        },
+        {
+          "title": "Weekly report: occupancy, complaints, inspections",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Report shared; one priority for next week named."
+        },
+        {
+          "title": "Room maintenance plan with the chief engineer",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "maintenance-planner",
+          "done": "Rooms out of order and the plan of the month agreed."
+        },
+        {
+          "title": "Training plan for next month",
+          "freq": "monthly",
+          "at": 180,
+          "day": 25,
+          "minutes": 60,
+          "tool": "skills-matrix",
+          "done": "Every gap in the matrix has a training date."
+        }
+      ]
+    },
+    "hotel-site": {
+      "name": "Hotel · Site manager (general manager)",
+      "sector": "hotel",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Morning meeting of the department heads",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Arrivals, VIPs, complaints and the risks of the day agreed."
+        },
+        {
+          "title": "Walk the hotel: lobby, breakfast, one floor",
+          "freq": "daily",
+          "at": 120,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Walk done; one question asked to a team member on the way."
+        },
+        {
+          "title": "Weekly KPI review with revenue and front office",
+          "freq": "weekly",
+          "at": 240,
+          "day": 1,
+          "minutes": 30,
+          "tool": "hotel-kpis",
+          "done": "Forecast against actual seen; the next week’s actions agreed."
+        },
+        {
+          "title": "Standard work review with the department heads",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Adherence of every department seen; one note each."
+        },
+        {
+          "title": "Read the guest reviews and complaints of the week",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 30,
+          "tool": "guest-complaints",
+          "done": "Every low review has an answer and a cause."
+        },
+        {
+          "title": "Safety and fire walk of the whole hotel",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Walk done; findings in the Action Tracker with owners."
+        },
+        {
+          "title": "Review the improvement projects",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Every project has a status, a next step and a sponsor."
+        }
+      ]
+    },
+    "delivery-team": {
+      "name": "Delivery station · Team leader",
+      "sector": "delivery",
+      "level": "team",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Attendance and station plan: who sorts, stages, loads",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "skills-matrix",
+          "done": "Every lane has a trained person before the first truck is unloaded."
+        },
+        {
+          "title": "Start-of-shift huddle with the station team",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Volume, routes, cut-off and one safety point, in 10 minutes."
+        },
+        {
+          "title": "Safety check: yard, vests, cages, dock doors",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "safety-cross",
+          "done": "Yard rules kept; the Safety Cross is marked."
+        },
+        {
+          "title": "Staging: routes ready against the dispatch time",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 60,
+          "tool": "delay-analyzer",
+          "done": "Every route staged by its time; late routes on the board with a reason."
+        },
+        {
+          "title": "Load-out: van loading and damaged parcels",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 60,
+          "tool": "damage-control",
+          "done": "Damaged parcels logged with a photo; no van leaves with a known damage."
+        },
+        {
+          "title": "Missing parcels: search and log before the vans leave",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 30,
+          "tool": "incomplete-control",
+          "done": "Every missing parcel searched for and logged."
+        },
+        {
+          "title": "Coach the new station staff on sort and staging",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 90,
+          "tool": "skills-matrix",
+          "done": "One new person trained; one step signed off in the matrix."
+        },
+        {
+          "title": "Returns and failed deliveries: check in and log the reasons",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 30,
+          "tool": "cx-control-tower",
+          "done": "Every returned parcel scanned in with its reason."
+        },
+        {
+          "title": "5S round: cages, tape, scanners charged",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "five-s-audit",
+          "done": "Every scanner on its charger; the station is back to standard."
+        },
+        {
+          "title": "Handover to the next shift",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Open parcels, returns and faults handed over in writing."
+        },
+        {
+          "title": "One improvement idea from the team",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 15,
+          "tool": "kaizen-board",
+          "done": "One idea on the Kaizen Board with a name and a date."
+        }
+      ]
+    },
+    "delivery-shift": {
+      "name": "Delivery station · Shift lead",
+      "sector": "delivery",
+      "level": "shift",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Read the handover and the volume forecast",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Staff and vans planned against the forecast."
+        },
+        {
+          "title": "Tier-2 meeting with the team leaders: volume, staff, vans",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Every gap has a plan before the sort starts."
+        },
+        {
+          "title": "Walk the sort and the staging lanes",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Walk done; one observation per lane."
+        },
+        {
+          "title": "Dispatch check: routes out on time, late routes escalated",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 30,
+          "tool": "delay-analyzer",
+          "done": "Every late route has a reason in the log."
+        },
+        {
+          "title": "Check the first delivery attempts and open customer cases",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 20,
+          "tool": "cx-control-tower",
+          "done": "Every open case has an owner at the DSP."
+        },
+        {
+          "title": "Chase the open actions of the shift",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "No action overdue without a new date and a reason."
+        },
+        {
+          "title": "Safety walk: yard traffic, dock, vans",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Walk done; every near miss is on the Safety Cross."
+        },
+        {
+          "title": "Damage and missing parcels of the day: causes noted",
+          "freq": "shift",
+          "at": 400,
+          "day": 0,
+          "minutes": 20,
+          "tool": "damage-control",
+          "done": "The top cause of the day is on the board."
+        },
+        {
+          "title": "Lead the handover",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Handover written; the next shift lead has confirmed it."
+        },
+        {
+          "title": "Staffing plan of the week with the DSPs",
+          "freq": "weekly",
+          "at": 300,
+          "day": 1,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Every day of the week has its routes covered."
+        },
+        {
+          "title": "5S audit of one zone",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit saved; the findings are in the Action Tracker."
+        },
+        {
+          "title": "Monthly safety talk to the station",
+          "freq": "monthly",
+          "at": 60,
+          "day": 5,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Talk given; attendance signed."
+        }
+      ]
+    },
+    "delivery-area": {
+      "name": "Delivery station · Area manager (station manager)",
+      "sector": "delivery",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Tier-3 meeting with the shift leads and the DSP owners",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Yesterday’s quality, today’s volume and every escalation answered."
+        },
+        {
+          "title": "Gemba walk of the station with a shift lead",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Walk done; one question asked at every stop."
+        },
+        {
+          "title": "Review yesterday’s delivery quality: DCR, complaints, late",
+          "freq": "daily",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "cx-control-tower",
+          "done": "The worst DSP of yesterday has a call and an action."
+        },
+        {
+          "title": "Review overdue actions and escalations",
+          "freq": "daily",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Every overdue action has a new date or is escalated."
+        },
+        {
+          "title": "Standard work review with each shift lead",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Adherence and the top miss discussed; a note per shift lead."
+        },
+        {
+          "title": "DSP performance review (scorecard)",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Every DSP has seen its scorecard and one action."
+        },
+        {
+          "title": "Kaizen Board: decide on the open ideas",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Every idea is accepted, rejected with a reason or tested."
+        },
+        {
+          "title": "Safety audit of the station and the yard",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "safety-cross",
+          "done": "Audit done; findings in the Action Tracker."
+        }
+      ]
+    },
+    "delivery-site": {
+      "name": "Delivery station · Site manager (regional lead)",
+      "sector": "delivery",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Site meeting at the station board",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Safety, quality and volume of every station seen."
+        },
+        {
+          "title": "Gemba walk with the station manager",
+          "freq": "weekly",
+          "at": 120,
+          "day": 1,
+          "minutes": 60,
+          "tool": "gemba-walk",
+          "done": "Walk done; three observations and one question to coach."
+        },
+        {
+          "title": "Standard work review with the station managers",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Adherence of every level seen; one note per station manager."
+        },
+        {
+          "title": "Weekly review of delivery quality and customer experience",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 45,
+          "tool": "cx-control-tower",
+          "done": "The worst KPI of the week has a countermeasure."
+        },
+        {
+          "title": "Safety walk of the station, the yard and the vans",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Walk done; findings in the Action Tracker with owners."
+        },
+        {
+          "title": "Review the improvement projects",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Every project has a status, a next step and a sponsor."
+        }
+      ]
+    }
+  },
+  "tips": [
+    [
+      "A standard for the leader, too.",
+      "Leader standard work is the routine of each leader written down: what, when, how long and what done looks like. The share of the day it fills falls with the level (about 80 % for a team leader, 50 % for a shift lead, 25 % for a manager, after David Mann)."
+    ],
+    [
+      "Start from a template.",
+      "Pick your sector and level, then change the times and tasks to your day. Save it as a template file to give it to the next leader."
+    ],
+    [
+      "Tick it on the day.",
+      "Done, missed with a reason, or not due. What is not marked by the end of the day counts as missed (not recorded)."
+    ],
+    [
+      "The next level reviews it.",
+      "Once a week the manager looks at the adherence and the task missed most, with the leader, and writes down what they agreed. The point is help, not control."
+    ],
+    [
+      "A miss is information.",
+      "A task missed three times in two weeks goes to the Action Tracker: either the day needs help or the standard needs changing."
+    ]
+  ],
+  "example": {
+    "seed": 20261024,
+    "weeks": 3,
+    "week": [
+      1.3,
+      1,
+      0.7
+    ],
+    "na": 0.01,
+    "leaders": [
+      {
+        "key": "sabine",
+        "name": "Sabine Krüger",
+        "level": "area",
+        "template": "warehouse-area",
+        "area": "Outbound",
+        "shift": "Day",
+        "start": "08:00",
+        "hours": 9,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "",
+        "miss": 0.14,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 4,
+          "notime": 4,
+          "notrelevant": 1,
+          "forgot": 1
+        }
+      },
+      {
+        "key": "arben",
+        "name": "Arben Hoxha",
+        "level": "shift",
+        "template": "warehouse-shift",
+        "area": "Outbound",
+        "shift": "Early",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "sabine",
+        "miss": 0.09,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 3,
+          "notime": 2,
+          "forgot": 1,
+          "notrelevant": 1
+        }
+      },
+      {
+        "key": "marco",
+        "name": "Marco Rossi",
+        "level": "shift",
+        "template": "warehouse-shift",
+        "area": "Outbound",
+        "shift": "Late",
+        "start": "14:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "sabine",
+        "miss": 0.16,
+        "unrecorded": 0.05,
+        "reasons": {
+          "notime": 4,
+          "firefighting": 3,
+          "forgot": 2,
+          "notrelevant": 1
+        },
+        "recurring": [
+          {
+            "task": 3,
+            "rate": 0.55,
+            "reason": "notime"
+          }
+        ]
+      },
+      {
+        "key": "lena",
+        "name": "Lena Vogel",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Picking",
+        "shift": "Early",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "arben",
+        "miss": 0.06,
+        "unrecorded": 0.01,
+        "reasons": {
+          "notrelevant": 2,
+          "notime": 2,
+          "firefighting": 1
+        }
+      },
+      {
+        "key": "dritan",
+        "name": "Dritan Kola",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Loading",
+        "shift": "Early",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "arben",
+        "miss": 0.1,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 4,
+          "notime": 2,
+          "forgot": 1
+        },
+        "recurring": [
+          {
+            "task": 7,
+            "rate": 0.6,
+            "reason": "firefighting"
+          }
+        ]
+      },
+      {
+        "key": "jonas",
+        "name": "Jonas Weber",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Picking",
+        "shift": "Late",
+        "start": "14:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "marco",
+        "miss": 0.06,
+        "unrecorded": 0.02,
+        "reasons": {
+          "forgot": 3,
+          "notime": 2,
+          "firefighting": 1
+        },
+        "absent": [
+          {
+            "week": -1,
+            "day": 4
+          },
+          {
+            "week": -1,
+            "day": 5
+          }
+        ]
+      }
+    ],
+    "current": "dritan",
+    "reviews": [
+      {
+        "leader": "dritan",
+        "week": -1,
+        "note": "Quality check missed at the loading peak again. Move it to 09:30, before the first wave; Arben covers it on Fridays."
+      },
+      {
+        "leader": "marco",
+        "week": -1,
+        "note": "Gemba walk dropped three times for lack of time. Agreed: walk at 15:15 right after the tier-2 meeting, 20 minutes instead of 30."
+      },
+      {
+        "leader": "jonas",
+        "week": -1,
+        "note": "Absent Thursday and Friday without a deputy. Dritan’s team covers the late huddle next time; card handed over with the handover."
+      }
+    ]
+  }
+}

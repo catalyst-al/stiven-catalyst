@@ -1,0 +1,1709 @@
+{
+  "storageKey": "sc-leader-standard-work-sq",
+  "text": {
+    "tool": "Puna standarde e drejtuesit",
+    "csvName": "puna-standarde-e-drejtuesit",
+    "icsName": "puna-standarde-e-drejtuesit",
+    "namePlaceholder": "p.sh. Lena Vogel",
+    "areaPlaceholder": "p.sh. Mbledhja",
+    "shiftPlaceholder": "p.sh. Paradite",
+    "taskPlaceholder": "p.sh. Takimi i fillimit të turnit te tabela",
+    "donePlaceholder": "Çfarë shihet kur është kryer",
+    "reviewPlaceholder": "Çfarë u ra dakord, dhe deri kur",
+    "defaultArea": "Operacionet",
+    "checkText": "Detyra kryhet çdo ditë kur i takon për dy javë, e kontrolluar në rishikimin javor.",
+    "exampleNote": "Ky është një shembull: një magazinë me një menaxher zone, dy drejtues turni dhe tre drejtues ekipi gjatë tri javëve të fundit. Shto drejtuesin tënd dhe ai zhduket, ose fshije tani."
+  },
+  "levels": [
+    {
+      "key": "team",
+      "name": "Drejtues ekipi",
+      "note": "Drejton një ekip në terren, çdo turn."
+    },
+    {
+      "key": "shift",
+      "name": "Drejtues turni",
+      "note": "Drejton drejtuesit e ekipeve të një turni."
+    },
+    {
+      "key": "area",
+      "name": "Menaxher zone",
+      "note": "Drejton një zonë në të gjitha turnet."
+    },
+    {
+      "key": "site",
+      "name": "Drejtues objekti",
+      "note": "Drejton objektin ose hotelin."
+    }
+  ],
+  "frequencies": [
+    {
+      "key": "daily",
+      "name": "Çdo ditë në një orë të caktuar",
+      "short": "Çdo ditë"
+    },
+    {
+      "key": "shift",
+      "name": "Çdo turn, pas fillimit të turnit",
+      "short": "Çdo turn"
+    },
+    {
+      "key": "weekly",
+      "name": "Çdo javë në një ditë të javës",
+      "short": "Çdo javë"
+    },
+    {
+      "key": "monthly",
+      "name": "Çdo muaj në një ditë të muajit",
+      "short": "Çdo muaj"
+    }
+  ],
+  "weekdays": {
+    "long": [
+      "E hënë",
+      "E martë",
+      "E mërkurë",
+      "E enjte",
+      "E premte",
+      "E shtunë",
+      "E diel"
+    ],
+    "short": [
+      "Hën",
+      "Mar",
+      "Mër",
+      "Enj",
+      "Pre",
+      "Sht",
+      "Die"
+    ]
+  },
+  "reasons": [
+    {
+      "key": "firefighting",
+      "excluded": false,
+      "name": "Shuarje zjarresh",
+      "meaning": "Dita e drejtoi drejtuesin: një problem urgjent mori kohën që i duhej standardit. Zjarri që kthehet është një problem që ende s’e ka askush në dorë.",
+      "moves": [
+        "Mbro takimin dhe kontrollin e parë të turnit: ato bëhen edhe në një ditë të keqe.",
+        "Shëno çfarë shove sot dhe çoje zjarrin që kthehet te 5 Whys.",
+        "Bjer dakord me menaxherin cila detyrë mund të bjerë në një ditë të kuqe dhe cila kurrë."
+      ],
+      "question": "Cilin zjarr e shove dy herë këtë javë, dhe kush e ka në dorë shkakun e tij?"
+    },
+    {
+      "key": "absent",
+      "excluded": false,
+      "name": "Mungon, pa zëvendësim",
+      "meaning": "Drejtuesi mungoi dhe askush nuk e bëri standardin për të: rutina varet nga një person.",
+      "moves": [
+        "Cakto një zëvendës për çdo drejtues në tabelë.",
+        "Jepja zëvendësit kartën e printuar me dorëzimin.",
+        "Rishiko ditën e zëvendësit njësoj si atë të drejtuesit."
+      ],
+      "question": "Kush e mban këtë standard nesër nëse drejtuesi sëmuret?"
+    },
+    {
+      "key": "notime",
+      "excluded": false,
+      "name": "S’pati kohë",
+      "meaning": "Standardi nuk futet në ditë: janë planifikuar më shumë minuta sesa lë puna.",
+      "moves": [
+        "Krahaso minutat e planifikuara me pjesën udhëzuese të ditës për këtë nivel.",
+        "Zhvendose detyrën në një orë më të qetë, ose bëje javore në vend të ditore.",
+        "Hiq punën që nuk është e drejtuesit (administratë, ndjekje) para se të shkurtosh standardin."
+      ],
+      "question": "Çfarë bëre në minutat që i takonin kësaj detyre?"
+    },
+    {
+      "key": "notrelevant",
+      "excluded": true,
+      "name": "Sot nuk vlen",
+      "meaning": "Detyra nuk vlente sot. Ajo lihet jashtë zbatimit, por një detyrë që shpesh nuk vlen është një standard që duhet ndryshuar.",
+      "moves": [
+        "Shiko detyrat e shënuara më shpesh si jo të vlefshme: a i përkasin këtij niveli?",
+        "Bëje javore ose mujore një detyrë që vlen vetëm disa ditë.",
+        "Hiq atë që askush s’e ndien mungesën pas dy javësh."
+      ],
+      "question": "Nëse kjo detyrë kaq shpesh nuk vlen, çfarë do të vlente?"
+    },
+    {
+      "key": "forgot",
+      "excluded": false,
+      "name": "U harrua",
+      "meaning": "Standardi ende nuk është zakon: asgjë gjatë ditës nuk ia kujton drejtuesit.",
+      "moves": [
+        "Mbaje kartën e printuar me vete dhe shëno te tabela.",
+        "Fute standardin në kalendar me skedarin e kalendarit.",
+        "Lidhe detyrën me një ngjarje të caktuar: menjëherë pas takimit, para dorëzimit."
+      ],
+      "question": "Çfarë ndodh çdo ditë pak para kësaj detyre që mund të ta kujtojë?"
+    }
+  ],
+  "unrecorded": {
+    "meaning": "Askush nuk i shënoi këto detyra në ditën e tyre. Një standard që nuk shënohet nuk mund të rishikohet, prandaj llogaritet si i humbur.",
+    "moves": [
+      "Shëno kartën në fund të turnit, para dorëzimit.",
+      "Shëno në telefon menjëherë pas çdo detyre.",
+      "Niveli tjetër e kërkon kartën në takimin e tij ditor."
+    ],
+    "question": "Kur gjatë turnit ke dy minuta për të shënuar kartën?"
+  },
+  "sectors": [
+    {
+      "key": "warehouse",
+      "name": "Magazinë"
+    },
+    {
+      "key": "hotel",
+      "name": "Hotel"
+    },
+    {
+      "key": "delivery",
+      "name": "Stacion shpërndarjeje"
+    }
+  ],
+  "tools": [
+    {
+      "key": "daily-board",
+      "name": "Tabela e ditës"
+    },
+    {
+      "key": "gemba-walk",
+      "name": "Gemba Walk"
+    },
+    {
+      "key": "five-s-audit",
+      "name": "Auditi 5S"
+    },
+    {
+      "key": "safety-cross",
+      "name": "Kryqi i sigurisë"
+    },
+    {
+      "key": "action-tracker",
+      "name": "Lista e veprimeve"
+    },
+    {
+      "key": "kaizen-board",
+      "name": "Tabela Kaizen"
+    },
+    {
+      "key": "skills-matrix",
+      "name": "Matrica e aftësive"
+    },
+    {
+      "key": "shift-handover",
+      "name": "Dorëzimi i turnit"
+    },
+    {
+      "key": "standard-work",
+      "name": "Puna standarde"
+    },
+    {
+      "key": "leader-standard-work",
+      "name": "Puna standarde e drejtuesit"
+    },
+    {
+      "key": "ops-report",
+      "name": "Raporti i operacioneve"
+    },
+    {
+      "key": "project-portfolio",
+      "name": "Portofoli i projekteve"
+    },
+    {
+      "key": "incomplete-control",
+      "name": "Kontrolli i plotësisë"
+    },
+    {
+      "key": "damage-control",
+      "name": "Kontrolli i dëmeve"
+    },
+    {
+      "key": "delay-analyzer",
+      "name": "Analiza e vonesave"
+    },
+    {
+      "key": "cx-control-tower",
+      "name": "Last-Mile CX Control Tower"
+    },
+    {
+      "key": "room-inspection",
+      "name": "Inspektimi i dhomës"
+    },
+    {
+      "key": "room-status",
+      "name": "Statusi i dhomave"
+    },
+    {
+      "key": "guest-complaints",
+      "name": "Ankesat e mysafirëve"
+    },
+    {
+      "key": "hotel-kpis",
+      "name": "KPI-të e hotelit"
+    },
+    {
+      "key": "night-audit",
+      "name": "Regjistri i Night Audit"
+    },
+    {
+      "key": "lost-found",
+      "name": "Sendet e gjetura"
+    },
+    {
+      "key": "maintenance-planner",
+      "name": "Planifikuesi i mirëmbajtjes"
+    }
+  ],
+  "templates": {
+    "warehouse-team": {
+      "name": "Magazinë · Drejtues ekipi",
+      "sector": "warehouse",
+      "level": "team",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Kontrolli para turnit: prania, plani i vendeve, pirunët",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "skills-matrix",
+          "done": "Çdo vend ka një person të trajnuar para takimit."
+        },
+        {
+          "title": "Takimi i fillimit të turnit te tabela",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Rezultati i djeshëm, plani i sotëm dhe një pikë sigurie, në 10 minuta."
+        },
+        {
+          "title": "Kontrolli i sigurisë: kalimet, PPE, kontrolli i pirunëve para përdorimit",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "safety-cross",
+          "done": "Çdo pirun i kontrolluar dhe i firmosur; Kryqi i sigurisë është shënuar."
+        },
+        {
+          "title": "Takimi tier 2 me drejtuesin e turnit",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Çfarë ekipi s’mund ta zgjidhë është përshkallëzuar, me emër dhe orë."
+        },
+        {
+          "title": "Orë pas ore: rezultati kundrejt planit (8 × 5 min)",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 40,
+          "tool": "daily-board",
+          "done": "Çdo orë është në tabelë; çdo mospërmbushje ka një arsye."
+        },
+        {
+          "title": "Konfirmimi i procesit në një vend pune",
+          "freq": "shift",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "Një punonjës i vëzhguar kundrejt standardit; mangësitë të shënuara dhe të trajnuara."
+        },
+        {
+          "title": "Zëvendësimi në pushime dhe trajnimi në vendet me mangësi",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 120,
+          "tool": "skills-matrix",
+          "done": "Çdo pushim i mbuluar; një praktikant ka firmosur një hap."
+        },
+        {
+          "title": "Kontrolli i cilësisë: 10 porosi kundrejt listës së mbledhjes",
+          "freq": "shift",
+          "at": 300,
+          "day": 0,
+          "minutes": 30,
+          "tool": "incomplete-control",
+          "done": "10 porosi të kontrolluara; çdo gabim është në regjistër."
+        },
+        {
+          "title": "Konfirmimi i dytë i procesit, në një vend tjetër",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "Një punonjës i dytë i vëzhguar; një pikë e trajnuar në vend."
+        },
+        {
+          "title": "Raundi 5S i zonës",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "five-s-audit",
+          "done": "Zona është përsëri në standard; etiketat e kuqe kanë një përgjegjës."
+        },
+        {
+          "title": "Dorëzimi i turnit te drejtuesi i ardhshëm i ekipit",
+          "freq": "shift",
+          "at": 455,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Dorëzimi i shkruar dhe i diskutuar te tabela."
+        },
+        {
+          "title": "Merr një ide përmirësimi nga ekipi",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 15,
+          "tool": "kaizen-board",
+          "done": "Një ide në Tabelën Kaizen me emër dhe datë."
+        },
+        {
+          "title": "Përditëso matricën e aftësive pas trajnimit të kësaj jave",
+          "freq": "weekly",
+          "at": 330,
+          "day": 5,
+          "minutes": 20,
+          "tool": "skills-matrix",
+          "done": "Çdo hap i trajnuar këtë javë është firmosur në matricë."
+        }
+      ]
+    },
+    "warehouse-shift": {
+      "name": "Magazinë · Drejtues turni",
+      "sector": "warehouse",
+      "level": "shift",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Lexo dorëzimin dhe tabelën e turnit të kaluar",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Çdo çështje e hapur e turnit të kaluar ka një përgjegjës në këtë turn."
+        },
+        {
+          "title": "Merr pjesë në një takim ekipi (ekipet me radhë)",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Një takim i parë; një koment për drejtuesin e ekipit."
+        },
+        {
+          "title": "Takimi tier 2 me drejtuesit e ekipeve",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Plani, stafi dhe mospërmbushjet e djeshme të rëna dakord; përshkallëzimet të shkruara."
+        },
+        {
+          "title": "Gemba Walk me një drejtues ekipi",
+          "freq": "shift",
+          "at": 75,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë, tre vëzhgime të shënuara, një veprim i rënë dakord."
+        },
+        {
+          "title": "Kontrollo kartat e punës standarde të drejtuesve të ekipeve",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 15,
+          "tool": "leader-standard-work",
+          "done": "Çdo kartë është shënuar deri tani; një detyrë e humbur e diskutuar."
+        },
+        {
+          "title": "Çdo dy orë: plani kundrejt realitetit për çdo zonë (4 × 10 min)",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 40,
+          "tool": "daily-board",
+          "done": "Çdo kontroll është në tabelë; mangësitë janë rikuperuar ose përshkallëzuar."
+        },
+        {
+          "title": "Konfirmimi i procesit të një standardi (zonat me radhë)",
+          "freq": "shift",
+          "at": 210,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "Një standard i kontrolluar në terren; mangësia ka një veprim."
+        },
+        {
+          "title": "Ndiq veprimet e hapura të turnit",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Asnjë veprim i vonuar pa datë të re dhe arsye."
+        },
+        {
+          "title": "Ecja e sigurisë së turnit dhe përditësimi i Kryqit të sigurisë",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Ecja e bërë; çdo rast pothuajse-aksident është në Kryqin e sigurisë."
+        },
+        {
+          "title": "Drejto dorëzimin e turnit",
+          "freq": "shift",
+          "at": 440,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Dorëzimi i shkruar; drejtuesi i turnit tjetër e ka lexuar dhe konfirmuar."
+        },
+        {
+          "title": "Plani i stafit dhe i aftësive për javën me drejtuesit e ekipeve",
+          "freq": "weekly",
+          "at": 360,
+          "day": 1,
+          "minutes": 20,
+          "tool": "skills-matrix",
+          "done": "Çdo ditë e javës ka një person të trajnuar për çdo vend."
+        },
+        {
+          "title": "Rishikimi Kaizen me drejtuesit e ekipeve",
+          "freq": "weekly",
+          "at": 300,
+          "day": 4,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Çdo ide më e vjetër se dy javë ka një vendim."
+        },
+        {
+          "title": "Auditi 5S i një zone",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Auditi i ruajtur; gjetjet janë në listën e veprimeve."
+        },
+        {
+          "title": "Biseda mujore e sigurisë me gjithë turnin",
+          "freq": "monthly",
+          "at": 30,
+          "day": 5,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Biseda e mbajtur; pjesëmarrja e firmosur."
+        }
+      ]
+    },
+    "warehouse-area": {
+      "name": "Magazinë · Menaxher zone",
+      "sector": "warehouse",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Takimi tier 3 me drejtuesit e turneve te tabela e zonës",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "KPI-të e djeshme, rreziqet e sotme dhe çdo përshkallëzim i marrë përgjigje."
+        },
+        {
+          "title": "Gemba Walk me një drejtues turni (zonat me radhë)",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; një pyetje në çdo ndalesë."
+        },
+        {
+          "title": "Kontrollo punën standarde të drejtuesve të turneve dhe shënimet e tyre të rishikimit",
+          "freq": "daily",
+          "at": 120,
+          "day": 0,
+          "minutes": 15,
+          "tool": "leader-standard-work",
+          "done": "Të dyja kartat të para; u pyet për një detyrë të humbur."
+        },
+        {
+          "title": "Rishiko veprimet e vonuara dhe përshkallëzimet",
+          "freq": "daily",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Çdo veprim i vonuar ka një datë të re ose është përshkallëzuar."
+        },
+        {
+          "title": "Lexo dorëzimin midis turnit të paradites dhe të pasdites",
+          "freq": "daily",
+          "at": 480,
+          "day": 0,
+          "minutes": 10,
+          "tool": "shift-handover",
+          "done": "Çështjet e hapura të ditës kanë një përgjegjës në turnin e pasdites."
+        },
+        {
+          "title": "Rishikimi javor i punës standarde me çdo drejtues turni",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Zbatimi dhe mospërmbushja kryesore të diskutuara; një shënim për çdo drejtues turni."
+        },
+        {
+          "title": "Auditi 5S i një zone (me radhë)",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Auditi i ruajtur; gjetja më e keqe ka një përgjegjës."
+        },
+        {
+          "title": "Tabela Kaizen: vendos për idetë e hapura",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Çdo ide është pranuar, refuzuar me arsye ose në provë."
+        },
+        {
+          "title": "Rishikimi javor i KPI-ve: dëme, të paplota, vonesa",
+          "freq": "weekly",
+          "at": 360,
+          "day": 5,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Raporti i ndarë; KPI më i dobët ka një kundërmasë."
+        },
+        {
+          "title": "Auditi i sigurisë së zonës me përgjegjësin e sigurisë",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "safety-cross",
+          "done": "Auditi i bërë; gjetjet në listën e veprimeve."
+        },
+        {
+          "title": "Plani i stafit dhe i aftësive për muajin tjetër",
+          "freq": "monthly",
+          "at": 180,
+          "day": 25,
+          "minutes": 60,
+          "tool": "skills-matrix",
+          "done": "Çdo mangësi në planin e muajit tjetër ka një datë trajnimi."
+        }
+      ]
+    },
+    "warehouse-site": {
+      "name": "Magazinë · Drejtues objekti",
+      "sector": "warehouse",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Takimi i objektit (tier 4) te tabela e objektit",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Siguria, shërbimi dhe stafi i çdo zone të parë; vendimet të shkruara."
+        },
+        {
+          "title": "Përshkallëzimet e objektit: vendos ose hiq një pengesë",
+          "freq": "daily",
+          "at": 150,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Asnjë përshkallëzim nuk pret më shumë se një ditë për përgjigje."
+        },
+        {
+          "title": "Gemba Walk me një menaxher zone",
+          "freq": "weekly",
+          "at": 120,
+          "day": 1,
+          "minutes": 60,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; tre vëzhgime dhe një pyetje për trajnim."
+        },
+        {
+          "title": "Rishikimi i punës standarde me menaxherët e zonave",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Zbatimi i çdo niveli i parë; një shënim për çdo menaxher zone."
+        },
+        {
+          "title": "Raporti javor i objektit: KPI, siguria, njerëzit",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "ops-report",
+          "done": "Raporti i dërguar; tri prioritetet e javës tjetër të emërtuara."
+        },
+        {
+          "title": "Ecja e sigurisë në gjithë objektin",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Ecja e bërë; gjetjet me përgjegjës në listën e veprimeve."
+        },
+        {
+          "title": "Rishiko projektet e përmirësimit të objektit",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Çdo projekt ka një status, një hap tjetër dhe një sponsor."
+        }
+      ]
+    },
+    "hotel-team": {
+      "name": "Hotel · Drejtues ekipi (housekeeping)",
+      "sector": "hotel",
+      "level": "team",
+      "start": "07:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Statusi i dhomave dhe listat e dhomave për pastruesit",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "room-status",
+          "done": "Çdo pastrues ka një listë; VIP-at dhe mbërritjet e hershme janë shënuar."
+        },
+        {
+          "title": "Briefingu me pastruesit",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Mbërritjet, VIP-at dhe një standard i javës, në 10 minuta."
+        },
+        {
+          "title": "Inspekto dhomat pas largimit dhe dhomat VIP para lirimit",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 90,
+          "tool": "room-inspection",
+          "done": "Çdo dhomë VIP dhe një në pesë dhoma pas largimit të inspektuara."
+        },
+        {
+          "title": "Kontrolli i zonave publike: ashensorët, korridoret, tualetet e lobit",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Çdo zonë publike e listës e kontrolluar një herë."
+        },
+        {
+          "title": "Dhoma e çarçafëve dhe karrocat: raundi 5S",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 20,
+          "tool": "five-s-audit",
+          "done": "Raftet të etiketuara dhe të mbushura deri në stokun standard; karrocat sipas standardit."
+        },
+        {
+          "title": "Trajno një pastrues të ri në një dhomë",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Një dhomë e pastruar bashkë; një hap i firmosur në matricë."
+        },
+        {
+          "title": "Raundi i dytë i inspektimit",
+          "freq": "shift",
+          "at": 300,
+          "day": 0,
+          "minutes": 60,
+          "tool": "room-inspection",
+          "done": "Dhomat të liruara te recepsioni brenda 30 minutave nga thirrja."
+        },
+        {
+          "title": "Ec nëpër katet: karrocat, korridoret, dhomat në punë",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 45,
+          "tool": "gemba-walk",
+          "done": "Çdo kat i parë; vonesat të njoftuara te recepsioni."
+        },
+        {
+          "title": "Regjistro sendet e gjetura në dhoma",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "lost-found",
+          "done": "Çdo send i regjistruar dhe i ruajtur me numrin e tij."
+        },
+        {
+          "title": "Dorëzimi te përgjegjësi i mbrëmjes",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Dhomat e hapura, kërkesat e mysafirëve dhe defektet të dorëzuara me shkrim."
+        },
+        {
+          "title": "Ec nëpër çështjet e hapura të mirëmbajtjes në kate",
+          "freq": "weekly",
+          "at": 240,
+          "day": 2,
+          "minutes": 20,
+          "tool": "maintenance-planner",
+          "done": "Çdo çështje e hapur e kontrolluar; të vjetrat të përshkallëzuara."
+        },
+        {
+          "title": "Një ide nga ekipi në Tabelën Kaizen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 20,
+          "tool": "kaizen-board",
+          "done": "Një ide me emër dhe datë."
+        }
+      ]
+    },
+    "hotel-shift": {
+      "name": "Hotel · Drejtues turni (recepsioni)",
+      "sector": "hotel",
+      "level": "shift",
+      "start": "07:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Lexo Night Audit dhe dorëzimin",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "night-audit",
+          "done": "No-show-t, pagesat e hapura dhe çështjet e mysafirëve të natës kanë një përgjegjës."
+        },
+        {
+          "title": "Briefingu me ekipin e recepsionit",
+          "freq": "shift",
+          "at": 20,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Mbërritjet, VIP-at, grupet dhe shitja shtesë e ditës të emërtuara."
+        },
+        {
+          "title": "Mbërritjet kundrejt statusit të dhomave me housekeeping",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 20,
+          "tool": "room-status",
+          "done": "Çdo mbërritje e hershme ka një dhomë dhe një orë."
+        },
+        {
+          "title": "Ec nëpër lobi, mëngjes dhe zonat publike",
+          "freq": "shift",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; çfarë do të vinte re një mysafir është rregulluar ose njoftuar."
+        },
+        {
+          "title": "Ndiq ankesat e hapura të mysafirëve",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "guest-complaints",
+          "done": "Çdo ankesë e hapur ka sot një telefonatë ose një kompensim."
+        },
+        {
+          "title": "Ndiq veprimet e hapura të turnit",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Asnjë veprim i vonuar pa datë të re dhe arsye."
+        },
+        {
+          "title": "Pyet dy mysafirë në hotel si po kalojnë",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 20,
+          "tool": "guest-complaints",
+          "done": "Dy mysafirë të pyetur; çfarë duhet rregulluar u përcoll sot."
+        },
+        {
+          "title": "Kontrollo shifrat e ditës: zënia, ADR, shitja shtesë",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "hotel-kpis",
+          "done": "Shifrat të futura; një diferencë nga parashikimi ka një arsye."
+        },
+        {
+          "title": "Kontrollo me zgjedhje dy dhoma të liruara",
+          "freq": "shift",
+          "at": 390,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Dy dhoma të inspektuara; defektet i kthehen housekeeping-ut."
+        },
+        {
+          "title": "Shkruaj dhe drejto dorëzimin",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Dorëzimi i shkruar; turni tjetër e ka lexuar."
+        },
+        {
+          "title": "Orari dhe plani i trajnimit të javës",
+          "freq": "weekly",
+          "at": 300,
+          "day": 1,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Çdo turn i javës ka një person të trajnuar në recepsion."
+        },
+        {
+          "title": "Auditi 5S i zyrës së pasme",
+          "freq": "weekly",
+          "at": 300,
+          "day": 4,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Auditi i ruajtur; gjetjet kanë përgjegjës."
+        },
+        {
+          "title": "Kontrolli i sigurisë nga zjarri: daljet, dyert, fikëset",
+          "freq": "monthly",
+          "at": 120,
+          "day": 5,
+          "minutes": 30,
+          "tool": "safety-cross",
+          "done": "Lista e firmosur; çdo defekt i njoftuar te mirëmbajtja."
+        }
+      ]
+    },
+    "hotel-area": {
+      "name": "Hotel · Menaxher zone (drejtues departamenti)",
+      "sector": "hotel",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Takimi i departamentit me përgjegjësit",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Vlerësimet e djeshme të mysafirëve, mbërritjet e sotme dhe çështjet e hapura të rëna dakord."
+        },
+        {
+          "title": "Inspekto pesë dhoma të liruara sot",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Pesë dhoma të inspektuara; vlerësimi është në regjistër."
+        },
+        {
+          "title": "Kontrollo KPI-të dhe vlerësimet e mysafirëve të djeshme",
+          "freq": "daily",
+          "at": 150,
+          "day": 0,
+          "minutes": 15,
+          "tool": "hotel-kpis",
+          "done": "Shifra më e keqe e djeshme ka një arsye dhe një përgjegjës."
+        },
+        {
+          "title": "Rishiko ankesat e ditës së fundit dhe kompensimin e tyre",
+          "freq": "daily",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "guest-complaints",
+          "done": "Çdo ankesë ka një kompensim dhe një shkak."
+        },
+        {
+          "title": "Rishikimi i punës standarde me çdo përgjegjës",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Zbatimi dhe mospërmbushja kryesore të diskutuara; një shënim për çdo përgjegjës."
+        },
+        {
+          "title": "Auditi 5S i një zone: dhoma e çarçafëve ose zyra e pasme",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Auditi i ruajtur; gjetja më e keqe ka një përgjegjës."
+        },
+        {
+          "title": "Raporti javor: zënia, ankesat, inspektimet",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Raporti i ndarë; një prioritet për javën tjetër i emërtuar."
+        },
+        {
+          "title": "Plani i mirëmbajtjes së dhomave me shefin teknik",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "maintenance-planner",
+          "done": "Dhomat jashtë përdorimit dhe plani i muajit të rëna dakord."
+        },
+        {
+          "title": "Plani i trajnimit për muajin tjetër",
+          "freq": "monthly",
+          "at": 180,
+          "day": 25,
+          "minutes": 60,
+          "tool": "skills-matrix",
+          "done": "Çdo mangësi në matricë ka një datë trajnimi."
+        }
+      ]
+    },
+    "hotel-site": {
+      "name": "Hotel · Drejtues objekti (drejtori i përgjithshëm)",
+      "sector": "hotel",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Takimi i mëngjesit i drejtuesve të departamenteve",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Mbërritjet, VIP-at, ankesat dhe rreziqet e ditës të rëna dakord."
+        },
+        {
+          "title": "Ec nëpër hotel: lobi, mëngjes, një kat",
+          "freq": "daily",
+          "at": 120,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; një pyetje për një anëtar të ekipit gjatë rrugës."
+        },
+        {
+          "title": "Rishikimi javor i KPI-ve me të ardhurat dhe recepsionin",
+          "freq": "weekly",
+          "at": 240,
+          "day": 1,
+          "minutes": 30,
+          "tool": "hotel-kpis",
+          "done": "Parashikimi kundrejt realitetit i parë; veprimet e javës tjetër të rëna dakord."
+        },
+        {
+          "title": "Rishikimi i punës standarde me drejtuesit e departamenteve",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Zbatimi i çdo departamenti i parë; nga një shënim secili."
+        },
+        {
+          "title": "Lexo vlerësimet dhe ankesat e mysafirëve të javës",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 30,
+          "tool": "guest-complaints",
+          "done": "Çdo vlerësim i dobët ka një përgjigje dhe një shkak."
+        },
+        {
+          "title": "Ecja e sigurisë dhe e zjarrit në gjithë hotelin",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Ecja e bërë; gjetjet me përgjegjës në listën e veprimeve."
+        },
+        {
+          "title": "Rishiko projektet e përmirësimit",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Çdo projekt ka një status, një hap tjetër dhe një sponsor."
+        }
+      ]
+    },
+    "delivery-team": {
+      "name": "Stacion shpërndarjeje · Drejtues ekipi",
+      "sector": "delivery",
+      "level": "team",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Prania dhe plani i stacionit: kush rendit, përgatit, ngarkon",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "skills-matrix",
+          "done": "Çdo korsi ka një person të trajnuar para se të shkarkohet kamioni i parë."
+        },
+        {
+          "title": "Takimi i fillimit të turnit me ekipin e stacionit",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Vëllimi, itineraret, ora e mbylljes dhe një pikë sigurie, në 10 minuta."
+        },
+        {
+          "title": "Kontrolli i sigurisë: oborri, jelekët, kafazet, dyert e rampës",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "safety-cross",
+          "done": "Rregullat e oborrit të respektuara; Kryqi i sigurisë është shënuar."
+        },
+        {
+          "title": "Përgatitja: itineraret gati kundrejt orës së nisjes",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 60,
+          "tool": "delay-analyzer",
+          "done": "Çdo itinerar i përgatitur në kohë; itineraret e vonuara në tabelë me arsye."
+        },
+        {
+          "title": "Ngarkimi: ngarkimi i furgonëve dhe pakot e dëmtuara",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 60,
+          "tool": "damage-control",
+          "done": "Pakot e dëmtuara të regjistruara me foto; asnjë furgon nuk niset me dëm të njohur."
+        },
+        {
+          "title": "Pakot që mungojnë: kërko dhe regjistro para se të nisen furgonët",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 30,
+          "tool": "incomplete-control",
+          "done": "Çdo pako që mungon e kërkuar dhe e regjistruar."
+        },
+        {
+          "title": "Trajno stafin e ri të stacionit për renditjen dhe përgatitjen",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 90,
+          "tool": "skills-matrix",
+          "done": "Një person i ri i trajnuar; një hap i firmosur në matricë."
+        },
+        {
+          "title": "Kthimet dhe dorëzimet e dështuara: regjistroji dhe shëno arsyet",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 30,
+          "tool": "cx-control-tower",
+          "done": "Çdo pako e kthyer e skanuar me arsyen e saj."
+        },
+        {
+          "title": "Raundi 5S: kafazet, shiriti, skanerët të karikuar",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "five-s-audit",
+          "done": "Çdo skaner në karikues; stacioni është përsëri në standard."
+        },
+        {
+          "title": "Dorëzimi te turni tjetër",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Pakot e hapura, kthimet dhe defektet të dorëzuara me shkrim."
+        },
+        {
+          "title": "Një ide përmirësimi nga ekipi",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 15,
+          "tool": "kaizen-board",
+          "done": "Një ide në Tabelën Kaizen me emër dhe datë."
+        }
+      ]
+    },
+    "delivery-shift": {
+      "name": "Stacion shpërndarjeje · Drejtues turni",
+      "sector": "delivery",
+      "level": "shift",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Lexo dorëzimin dhe parashikimin e vëllimit",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Stafi dhe furgonët të planifikuar kundrejt parashikimit."
+        },
+        {
+          "title": "Takimi tier 2 me drejtuesit e ekipeve: vëllimi, stafi, furgonët",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Çdo mangësi ka një plan para se të fillojë renditja."
+        },
+        {
+          "title": "Ec nëpër renditjen dhe korsitë e përgatitjes",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; një vëzhgim për çdo korsi."
+        },
+        {
+          "title": "Kontrolli i nisjes: itineraret në kohë, të vonuarat të përshkallëzuara",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 30,
+          "tool": "delay-analyzer",
+          "done": "Çdo itinerar i vonuar ka një arsye në regjistër."
+        },
+        {
+          "title": "Kontrollo përpjekjet e para të dorëzimit dhe rastet e hapura të klientëve",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 20,
+          "tool": "cx-control-tower",
+          "done": "Çdo rast i hapur ka një përgjegjës te DSP-ja."
+        },
+        {
+          "title": "Ndiq veprimet e hapura të turnit",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Asnjë veprim i vonuar pa datë të re dhe arsye."
+        },
+        {
+          "title": "Ecja e sigurisë: trafiku i oborrit, rampa, furgonët",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Ecja e bërë; çdo rast pothuajse-aksident është në Kryqin e sigurisë."
+        },
+        {
+          "title": "Dëmet dhe pakot që mungojnë të ditës: shkaqet të shënuara",
+          "freq": "shift",
+          "at": 400,
+          "day": 0,
+          "minutes": 20,
+          "tool": "damage-control",
+          "done": "Shkaku kryesor i ditës është në tabelë."
+        },
+        {
+          "title": "Drejto dorëzimin",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Dorëzimi i shkruar; drejtuesi i turnit tjetër e ka konfirmuar."
+        },
+        {
+          "title": "Plani i stafit të javës me DSP-të",
+          "freq": "weekly",
+          "at": 300,
+          "day": 1,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Çdo ditë e javës i ka itineraret të mbuluara."
+        },
+        {
+          "title": "Auditi 5S i një zone",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Auditi i ruajtur; gjetjet janë në listën e veprimeve."
+        },
+        {
+          "title": "Biseda mujore e sigurisë me stacionin",
+          "freq": "monthly",
+          "at": 60,
+          "day": 5,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Biseda e mbajtur; pjesëmarrja e firmosur."
+        }
+      ]
+    },
+    "delivery-area": {
+      "name": "Stacion shpërndarjeje · Menaxher zone (drejtues stacioni)",
+      "sector": "delivery",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Takimi tier 3 me drejtuesit e turneve dhe pronarët e DSP-ve",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Cilësia e djeshme, vëllimi i sotëm dhe çdo përshkallëzim i marrë përgjigje."
+        },
+        {
+          "title": "Gemba Walk në stacion me një drejtues turni",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; një pyetje në çdo ndalesë."
+        },
+        {
+          "title": "Rishiko cilësinë e dorëzimit të djeshme: DCR, ankesat, vonesat",
+          "freq": "daily",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "cx-control-tower",
+          "done": "DSP-ja më e dobët e djeshme ka një telefonatë dhe një veprim."
+        },
+        {
+          "title": "Rishiko veprimet e vonuara dhe përshkallëzimet",
+          "freq": "daily",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Çdo veprim i vonuar ka një datë të re ose është përshkallëzuar."
+        },
+        {
+          "title": "Rishikimi i punës standarde me çdo drejtues turni",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Zbatimi dhe mospërmbushja kryesore të diskutuara; një shënim për çdo drejtues turni."
+        },
+        {
+          "title": "Rishikimi i performancës së DSP-ve (karta e rezultateve)",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Çdo DSP e ka parë kartën e saj dhe një veprim."
+        },
+        {
+          "title": "Tabela Kaizen: vendos për idetë e hapura",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Çdo ide është pranuar, refuzuar me arsye ose në provë."
+        },
+        {
+          "title": "Auditi i sigurisë së stacionit dhe të oborrit",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "safety-cross",
+          "done": "Auditi i bërë; gjetjet në listën e veprimeve."
+        }
+      ]
+    },
+    "delivery-site": {
+      "name": "Stacion shpërndarjeje · Drejtues objekti (drejtues rajonal)",
+      "sector": "delivery",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Takimi i objektit te tabela e stacionit",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Siguria, cilësia dhe vëllimi i çdo stacioni të parë."
+        },
+        {
+          "title": "Gemba Walk me drejtuesin e stacionit",
+          "freq": "weekly",
+          "at": 120,
+          "day": 1,
+          "minutes": 60,
+          "tool": "gemba-walk",
+          "done": "Ecja e bërë; tre vëzhgime dhe një pyetje për trajnim."
+        },
+        {
+          "title": "Rishikimi i punës standarde me drejtuesit e stacioneve",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Zbatimi i çdo niveli i parë; një shënim për çdo drejtues stacioni."
+        },
+        {
+          "title": "Rishikimi javor i cilësisë së dorëzimit dhe përvojës së klientit",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 45,
+          "tool": "cx-control-tower",
+          "done": "KPI më i dobët i javës ka një kundërmasë."
+        },
+        {
+          "title": "Ecja e sigurisë në stacion, oborr dhe furgonë",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Ecja e bërë; gjetjet me përgjegjës në listën e veprimeve."
+        },
+        {
+          "title": "Rishiko projektet e përmirësimit",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Çdo projekt ka një status, një hap tjetër dhe një sponsor."
+        }
+      ]
+    }
+  },
+  "tips": [
+    [
+      "Një standard edhe për drejtuesin.",
+      "Puna standarde e drejtuesit është rutina e çdo drejtuesi e shkruar: çfarë, kur, sa gjatë dhe si duket kur është kryer. Pjesa e ditës që zë bie me nivelin (rreth 80 % për një drejtues ekipi, 50 % për një drejtues turni, 25 % për një menaxher, sipas David Mann)."
+    ],
+    [
+      "Fillo nga një model.",
+      "Zgjidh sektorin dhe nivelin, pastaj ndrysho oraret dhe detyrat sipas ditës tënde. Ruaje si skedar modeli për t’ia dhënë drejtuesit tjetër."
+    ],
+    [
+      "Shëno të njëjtën ditë.",
+      "Kryer, e humbur me arsye, ose nuk i takon. Çfarë nuk është shënuar deri në fund të ditës llogaritet si e humbur (pa regjistruar)."
+    ],
+    [
+      "Niveli tjetër e rishikon.",
+      "Një herë në javë menaxheri shikon me drejtuesin zbatimin dhe detyrën e humbur më shpesh, dhe shkruan çfarë ranë dakord. Qëllimi është ndihma, jo kontrolli."
+    ],
+    [
+      "Një mospërmbushje është informacion.",
+      "Një detyrë e humbur tri herë në dy javë shkon te lista e veprimeve: ose dita ka nevojë për ndihmë, ose standardi duhet ndryshuar."
+    ]
+  ],
+  "example": {
+    "seed": 20261024,
+    "weeks": 3,
+    "week": [
+      1.3,
+      1,
+      0.7
+    ],
+    "na": 0.01,
+    "leaders": [
+      {
+        "key": "sabine",
+        "name": "Sabine Krüger",
+        "level": "area",
+        "template": "warehouse-area",
+        "area": "Dalja",
+        "shift": "Dita",
+        "start": "08:00",
+        "hours": 9,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "",
+        "miss": 0.14,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 4,
+          "notime": 4,
+          "notrelevant": 1,
+          "forgot": 1
+        }
+      },
+      {
+        "key": "arben",
+        "name": "Arben Hoxha",
+        "level": "shift",
+        "template": "warehouse-shift",
+        "area": "Dalja",
+        "shift": "Paradite",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "sabine",
+        "miss": 0.09,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 3,
+          "notime": 2,
+          "forgot": 1,
+          "notrelevant": 1
+        }
+      },
+      {
+        "key": "marco",
+        "name": "Marco Rossi",
+        "level": "shift",
+        "template": "warehouse-shift",
+        "area": "Dalja",
+        "shift": "Pasdite",
+        "start": "14:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "sabine",
+        "miss": 0.16,
+        "unrecorded": 0.05,
+        "reasons": {
+          "notime": 4,
+          "firefighting": 3,
+          "forgot": 2,
+          "notrelevant": 1
+        },
+        "recurring": [
+          {
+            "task": 3,
+            "rate": 0.55,
+            "reason": "notime"
+          }
+        ]
+      },
+      {
+        "key": "lena",
+        "name": "Lena Vogel",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Mbledhja",
+        "shift": "Paradite",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "arben",
+        "miss": 0.06,
+        "unrecorded": 0.01,
+        "reasons": {
+          "notrelevant": 2,
+          "notime": 2,
+          "firefighting": 1
+        }
+      },
+      {
+        "key": "dritan",
+        "name": "Dritan Kola",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Ngarkimi",
+        "shift": "Paradite",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "arben",
+        "miss": 0.1,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 4,
+          "notime": 2,
+          "forgot": 1
+        },
+        "recurring": [
+          {
+            "task": 7,
+            "rate": 0.6,
+            "reason": "firefighting"
+          }
+        ]
+      },
+      {
+        "key": "jonas",
+        "name": "Jonas Weber",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Mbledhja",
+        "shift": "Pasdite",
+        "start": "14:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "marco",
+        "miss": 0.06,
+        "unrecorded": 0.02,
+        "reasons": {
+          "forgot": 3,
+          "notime": 2,
+          "firefighting": 1
+        },
+        "absent": [
+          {
+            "week": -1,
+            "day": 4
+          },
+          {
+            "week": -1,
+            "day": 5
+          }
+        ]
+      }
+    ],
+    "current": "dritan",
+    "reviews": [
+      {
+        "leader": "dritan",
+        "week": -1,
+        "note": "Kontrolli i cilësisë u humb përsëri në pikun e ngarkimit. Zhvendose në 09:30, para valës së parë; të premteve e mbulon Arbeni."
+      },
+      {
+        "leader": "marco",
+        "week": -1,
+        "note": "Gemba Walk u la tri herë për mungesë kohe. Ramë dakord: ecja në 15:15 menjëherë pas takimit tier 2, 20 minuta në vend të 30."
+      },
+      {
+        "leader": "jonas",
+        "week": -1,
+        "note": "Mungoi të enjten dhe të premten pa zëvendës. Herën tjetër takimin e pasdites e mbulon ekipi i Dritanit; karta jepet me dorëzimin."
+      }
+    ]
+  }
+}

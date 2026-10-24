@@ -1,0 +1,1709 @@
+{
+  "storageKey": "sc-leader-standard-work-de",
+  "text": {
+    "tool": "Leader Standard Work",
+    "csvName": "leader-standard-work",
+    "icsName": "leader-standard-work",
+    "namePlaceholder": "z. B. Lena Vogel",
+    "areaPlaceholder": "z. B. Kommissionierung",
+    "shiftPlaceholder": "z. B. Früh",
+    "taskPlaceholder": "z. B. Schichtstart-Runde am Board",
+    "donePlaceholder": "Woran man sieht, dass es erledigt ist",
+    "reviewPlaceholder": "Was vereinbart wurde, und bis wann",
+    "defaultArea": "Betrieb",
+    "checkText": "Die Aufgabe ist zwei Wochen lang an jedem fälligen Tag erledigt, geprüft im Wochenreview.",
+    "exampleNote": "Das ist ein Beispiel: ein Lager mit einer Bereichsleitung, zwei Schichtleitungen und drei Teamleitungen über die letzten drei Wochen. Legen Sie eine eigene Führungskraft an, dann verschwindet es, oder löschen Sie es jetzt."
+  },
+  "levels": [
+    {
+      "key": "team",
+      "name": "Teamleitung",
+      "note": "Führt ein Team auf der Fläche, jede Schicht."
+    },
+    {
+      "key": "shift",
+      "name": "Schichtleitung",
+      "note": "Führt die Teamleitungen einer Schicht."
+    },
+    {
+      "key": "area",
+      "name": "Bereichsleitung",
+      "note": "Führt einen Bereich über alle Schichten."
+    },
+    {
+      "key": "site",
+      "name": "Standortleitung",
+      "note": "Führt den Standort oder das Hotel."
+    }
+  ],
+  "frequencies": [
+    {
+      "key": "daily",
+      "name": "Täglich zur festen Uhrzeit",
+      "short": "Täglich"
+    },
+    {
+      "key": "shift",
+      "name": "Jede Schicht, nach Schichtbeginn",
+      "short": "Jede Schicht"
+    },
+    {
+      "key": "weekly",
+      "name": "Wöchentlich an einem Wochentag",
+      "short": "Wöchentlich"
+    },
+    {
+      "key": "monthly",
+      "name": "Monatlich an einem Tag des Monats",
+      "short": "Monatlich"
+    }
+  ],
+  "weekdays": {
+    "long": [
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag",
+      "Sonntag"
+    ],
+    "short": [
+      "Mo",
+      "Di",
+      "Mi",
+      "Do",
+      "Fr",
+      "Sa",
+      "So"
+    ]
+  },
+  "reasons": [
+    {
+      "key": "firefighting",
+      "excluded": false,
+      "name": "Feuerwehr-Einsatz",
+      "meaning": "Der Tag hat die Führungskraft gesteuert: ein akutes Problem hat die Zeit des Standards gefressen. Feuerwehr, die wiederkommt, ist ein Problem, das noch niemand besitzt.",
+      "moves": [
+        "Schützen Sie die Runde und die erste Kontrolle der Schicht: sie finden auch an einem schlechten Tag statt.",
+        "Notieren Sie, was Sie heute gelöscht haben, und bringen Sie den Brand, der wiederkommt, in die 5 Whys.",
+        "Vereinbaren Sie mit Ihrer Führungskraft, welche Aufgabe an einem roten Tag entfallen darf und welche nie."
+      ],
+      "question": "Welchen Brand haben Sie diese Woche zweimal gelöscht, und wem gehört seine Ursache?"
+    },
+    {
+      "key": "absent",
+      "excluded": false,
+      "name": "Abwesend, nicht vertreten",
+      "meaning": "Die Führungskraft war weg, und niemand hat den Standard für sie übernommen: die Routine hängt an einer Person.",
+      "moves": [
+        "Benennen Sie für jede Führungskraft eine Vertretung am Board.",
+        "Geben Sie der Vertretung die gedruckte Karte mit der Übergabe.",
+        "Prüfen Sie den Tag der Vertretung genauso wie den der Führungskraft."
+      ],
+      "question": "Wer führt diesen Standard morgen, wenn die Führungskraft krank ist?"
+    },
+    {
+      "key": "notime",
+      "excluded": false,
+      "name": "Keine Zeit",
+      "meaning": "Der Standard passt nicht in den Tag: es sind mehr Minuten geplant, als die Aufgabe übrig lässt.",
+      "moves": [
+        "Vergleichen Sie die geplanten Minuten mit dem Richtwert für diese Ebene.",
+        "Legen Sie die Aufgabe in eine ruhigere Stunde oder machen Sie sie wöchentlich statt täglich.",
+        "Nehmen Sie Arbeit weg, die nicht zur Führungskraft gehört (Verwaltung, Hinterherlaufen), bevor Sie den Standard kürzen."
+      ],
+      "question": "Was haben Sie in den Minuten getan, die diese Aufgabe gehabt hätte?"
+    },
+    {
+      "key": "notrelevant",
+      "excluded": true,
+      "name": "Heute nicht relevant",
+      "meaning": "Die Aufgabe galt heute nicht. Sie zählt nicht zur Einhaltung, aber eine Aufgabe, die oft nicht relevant ist, ist ein Standard, den man ändern sollte.",
+      "moves": [
+        "Sehen Sie sich die Aufgaben an, die am häufigsten nicht relevant sind: gehören sie auf diese Ebene?",
+        "Machen Sie aus einer Aufgabe, die nur an manchen Tagen gilt, eine wöchentliche oder monatliche.",
+        "Streichen Sie, was nach zwei Wochen niemand vermisst."
+      ],
+      "question": "Wenn diese Aufgabe so oft nicht relevant ist, was wäre es dann?"
+    },
+    {
+      "key": "forgot",
+      "excluded": false,
+      "name": "Vergessen",
+      "meaning": "Der Standard ist noch keine Gewohnheit: nichts im Tag erinnert die Führungskraft daran.",
+      "moves": [
+        "Tragen Sie die gedruckte Karte bei sich und haken Sie am Board ab.",
+        "Holen Sie den Standard mit der Kalenderdatei in den Kalender.",
+        "Koppeln Sie die Aufgabe an ein festes Ereignis: direkt nach der Runde, vor der Übergabe."
+      ],
+      "question": "Was passiert jeden Tag kurz vor dieser Aufgabe, das Sie daran erinnern könnte?"
+    }
+  ],
+  "unrecorded": {
+    "meaning": "Niemand hat diese Aufgaben an ihrem Tag markiert. Ein Standard, der nicht abgehakt wird, lässt sich nicht prüfen, darum zählt er als verpasst.",
+    "moves": [
+      "Haken Sie die Karte am Schichtende ab, vor der Übergabe.",
+      "Haken Sie direkt nach jeder Aufgabe am Handy ab.",
+      "Die nächste Ebene fragt in ihrer täglichen Runde nach der Karte."
+    ],
+    "question": "Wann in der Schicht haben Sie zwei Minuten, um die Karte abzuhaken?"
+  },
+  "sectors": [
+    {
+      "key": "warehouse",
+      "name": "Lager"
+    },
+    {
+      "key": "hotel",
+      "name": "Hotel"
+    },
+    {
+      "key": "delivery",
+      "name": "Zustellstation"
+    }
+  ],
+  "tools": [
+    {
+      "key": "daily-board",
+      "name": "Tagesboard"
+    },
+    {
+      "key": "gemba-walk",
+      "name": "Gemba Walk"
+    },
+    {
+      "key": "five-s-audit",
+      "name": "5S-Audit"
+    },
+    {
+      "key": "safety-cross",
+      "name": "Sicherheitskreuz"
+    },
+    {
+      "key": "action-tracker",
+      "name": "Maßnahmenliste"
+    },
+    {
+      "key": "kaizen-board",
+      "name": "Kaizen-Board"
+    },
+    {
+      "key": "skills-matrix",
+      "name": "Qualifikationsmatrix"
+    },
+    {
+      "key": "shift-handover",
+      "name": "Schichtübergabe"
+    },
+    {
+      "key": "standard-work",
+      "name": "Standardarbeit"
+    },
+    {
+      "key": "leader-standard-work",
+      "name": "Leader Standard Work"
+    },
+    {
+      "key": "ops-report",
+      "name": "Betriebsbericht"
+    },
+    {
+      "key": "project-portfolio",
+      "name": "Projektportfolio"
+    },
+    {
+      "key": "incomplete-control",
+      "name": "Vollständigkeitskontrolle"
+    },
+    {
+      "key": "damage-control",
+      "name": "Schadenskontrolle"
+    },
+    {
+      "key": "delay-analyzer",
+      "name": "Verspätungsanalyse"
+    },
+    {
+      "key": "cx-control-tower",
+      "name": "Last-Mile CX Control Tower"
+    },
+    {
+      "key": "room-inspection",
+      "name": "Zimmerkontrolle"
+    },
+    {
+      "key": "room-status",
+      "name": "Zimmerstatus"
+    },
+    {
+      "key": "guest-complaints",
+      "name": "Gästebeschwerden"
+    },
+    {
+      "key": "hotel-kpis",
+      "name": "Hotel-Kennzahlen"
+    },
+    {
+      "key": "night-audit",
+      "name": "Night-Audit-Protokoll"
+    },
+    {
+      "key": "lost-found",
+      "name": "Fundsachen"
+    },
+    {
+      "key": "maintenance-planner",
+      "name": "Wartungsplaner"
+    }
+  ],
+  "templates": {
+    "warehouse-team": {
+      "name": "Lager · Teamleitung",
+      "sector": "warehouse",
+      "level": "team",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Vor Schichtbeginn: Anwesenheit, Platzplan, Stapler",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "skills-matrix",
+          "done": "Jeder Platz ist vor der Runde mit einer geschulten Person besetzt."
+        },
+        {
+          "title": "Schichtstart-Runde am Board",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Ergebnis von gestern, Plan für heute und ein Sicherheitspunkt, in 10 Minuten."
+        },
+        {
+          "title": "Sicherheitscheck: Verkehrswege, PSA, Staplerprüfung vor Gebrauch",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "safety-cross",
+          "done": "Jeder Stapler geprüft und abgezeichnet; das Sicherheitskreuz ist eingetragen."
+        },
+        {
+          "title": "Tier-2-Runde mit der Schichtleitung",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Was das Team nicht lösen kann, ist eskaliert, mit Namen und Uhrzeit."
+        },
+        {
+          "title": "Stunde für Stunde: Leistung gegen Plan (8 × 5 Min.)",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 40,
+          "tool": "daily-board",
+          "done": "Jede Stunde steht am Board; jede Abweichung hat einen Grund."
+        },
+        {
+          "title": "Prozessbestätigung an einem Platz",
+          "freq": "shift",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "Eine Person gegen den Standard beobachtet; Abweichungen notiert und gecoacht."
+        },
+        {
+          "title": "Pausenablösung und Anlernen an den Plätzen mit Lücken",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 120,
+          "tool": "skills-matrix",
+          "done": "Jede Pause abgelöst; ein Anlernling hat einen Schritt abgezeichnet."
+        },
+        {
+          "title": "Qualitätscheck: 10 Aufträge gegen die Pickliste",
+          "freq": "shift",
+          "at": 300,
+          "day": 0,
+          "minutes": 30,
+          "tool": "incomplete-control",
+          "done": "10 Aufträge geprüft; jeder Fehler steht im Protokoll."
+        },
+        {
+          "title": "Zweite Prozessbestätigung, anderer Platz",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "Eine zweite Person beobachtet; ein Punkt direkt gecoacht."
+        },
+        {
+          "title": "5S-Runde im Bereich",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "five-s-audit",
+          "done": "Der Bereich ist wieder im Standard; rote Etiketten haben eine verantwortliche Person."
+        },
+        {
+          "title": "Schichtübergabe an die nächste Teamleitung",
+          "freq": "shift",
+          "at": 455,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Übergabe geschrieben und am Board besprochen."
+        },
+        {
+          "title": "Eine Verbesserungsidee aus dem Team aufnehmen",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 15,
+          "tool": "kaizen-board",
+          "done": "Eine Idee auf dem Kaizen-Board mit Namen und Datum."
+        },
+        {
+          "title": "Qualifikationsmatrix nach dem Anlernen der Woche aktualisieren",
+          "freq": "weekly",
+          "at": 330,
+          "day": 5,
+          "minutes": 20,
+          "tool": "skills-matrix",
+          "done": "Jeder in dieser Woche angelernte Schritt ist in der Matrix abgezeichnet."
+        }
+      ]
+    },
+    "warehouse-shift": {
+      "name": "Lager · Schichtleitung",
+      "sector": "warehouse",
+      "level": "shift",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Übergabe und Board der letzten Schicht lesen",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Jeder offene Punkt der letzten Schicht hat eine verantwortliche Person in dieser Schicht."
+        },
+        {
+          "title": "An einer Teamrunde teilnehmen (Teams im Wechsel)",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Eine Runde gesehen; ein Feedback an die Teamleitung."
+        },
+        {
+          "title": "Tier-2-Runde mit den Teamleitungen",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Plan, Besetzung und die Abweichungen von gestern abgestimmt; Eskalationen notiert."
+        },
+        {
+          "title": "Gemba Walk mit einer Teamleitung",
+          "freq": "shift",
+          "at": 75,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht, drei Beobachtungen notiert, eine Maßnahme vereinbart."
+        },
+        {
+          "title": "Standardkarten der Teamleitungen prüfen",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 15,
+          "tool": "leader-standard-work",
+          "done": "Jede Karte ist bis jetzt abgehakt; eine verpasste Aufgabe besprochen."
+        },
+        {
+          "title": "Alle zwei Stunden: Plan gegen Ist je Bereich (4 × 10 Min.)",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 40,
+          "tool": "daily-board",
+          "done": "Jede Kontrolle steht am Board; Lücken sind aufgeholt oder eskaliert."
+        },
+        {
+          "title": "Prozessbestätigung eines Standards (Bereiche im Wechsel)",
+          "freq": "shift",
+          "at": 210,
+          "day": 0,
+          "minutes": 30,
+          "tool": "standard-work",
+          "done": "Ein Standard auf der Fläche geprüft; die Abweichung hat eine Maßnahme."
+        },
+        {
+          "title": "Offene Maßnahmen der Schicht nachhalten",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Keine Maßnahme überfällig ohne neues Datum und Grund."
+        },
+        {
+          "title": "Sicherheitsrundgang der Schicht und Sicherheitskreuz aktualisieren",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Rundgang gemacht; jeder Beinahe-Unfall steht im Sicherheitskreuz."
+        },
+        {
+          "title": "Schichtübergabe leiten",
+          "freq": "shift",
+          "at": 440,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Übergabe geschrieben; die nächste Schichtleitung hat sie gelesen und bestätigt."
+        },
+        {
+          "title": "Personal- und Qualifikationsplan der Woche mit den Teamleitungen",
+          "freq": "weekly",
+          "at": 360,
+          "day": 1,
+          "minutes": 20,
+          "tool": "skills-matrix",
+          "done": "Jeder Tag der Woche hat je Platz eine geschulte Person."
+        },
+        {
+          "title": "Kaizen-Review mit den Teamleitungen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 4,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Jede Idee, die älter als zwei Wochen ist, hat eine Entscheidung."
+        },
+        {
+          "title": "5S-Audit eines Bereichs",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit gespeichert; die Befunde stehen in der Maßnahmenliste."
+        },
+        {
+          "title": "Monatliche Sicherheitsunterweisung der ganzen Schicht",
+          "freq": "monthly",
+          "at": 30,
+          "day": 5,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Unterweisung gehalten; Teilnahme unterschrieben."
+        }
+      ]
+    },
+    "warehouse-area": {
+      "name": "Lager · Bereichsleitung",
+      "sector": "warehouse",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Tier-3-Runde mit den Schichtleitungen am Bereichsboard",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "KPIs von gestern, Risiken von heute und jede Eskalation beantwortet."
+        },
+        {
+          "title": "Gemba Walk mit einer Schichtleitung (Bereiche im Wechsel)",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; an jedem Halt eine Frage gestellt."
+        },
+        {
+          "title": "Standardarbeit der Schichtleitungen und ihre Review-Notizen prüfen",
+          "freq": "daily",
+          "at": 120,
+          "day": 0,
+          "minutes": 15,
+          "tool": "leader-standard-work",
+          "done": "Beide Karten gesehen; nach einer verpassten Aufgabe gefragt."
+        },
+        {
+          "title": "Überfällige Maßnahmen und Eskalationen durchgehen",
+          "freq": "daily",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Jede überfällige Maßnahme hat ein neues Datum oder ist eskaliert."
+        },
+        {
+          "title": "Übergabe zwischen Früh- und Spätschicht lesen",
+          "freq": "daily",
+          "at": 480,
+          "day": 0,
+          "minutes": 10,
+          "tool": "shift-handover",
+          "done": "Offene Punkte des Tages haben eine verantwortliche Person in der Spätschicht."
+        },
+        {
+          "title": "Wöchentliches Review der Standardarbeit mit jeder Schichtleitung",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Einhaltung und häufigste Lücke besprochen; eine Notiz je Schichtleitung."
+        },
+        {
+          "title": "5S-Audit einer Zone (im Wechsel)",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit gespeichert; der schlechteste Befund hat eine verantwortliche Person."
+        },
+        {
+          "title": "Kaizen-Board: über offene Ideen entscheiden",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Jede Idee ist angenommen, mit Grund abgelehnt oder im Test."
+        },
+        {
+          "title": "Wöchentliches KPI-Review: Schäden, Unvollständige, Verspätungen",
+          "freq": "weekly",
+          "at": 360,
+          "day": 5,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Bericht geteilt; die schlechteste Kennzahl hat eine Gegenmaßnahme."
+        },
+        {
+          "title": "Sicherheitsaudit des Bereichs mit der Fachkraft für Arbeitssicherheit",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "safety-cross",
+          "done": "Audit gemacht; Befunde in der Maßnahmenliste."
+        },
+        {
+          "title": "Personal- und Qualifikationsplan für den nächsten Monat",
+          "freq": "monthly",
+          "at": 180,
+          "day": 25,
+          "minutes": 60,
+          "tool": "skills-matrix",
+          "done": "Jede Lücke im Plan des nächsten Monats hat einen Schulungstermin."
+        }
+      ]
+    },
+    "warehouse-site": {
+      "name": "Lager · Standortleitung",
+      "sector": "warehouse",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Standortrunde (Tier 4) am Standortboard",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Sicherheit, Service und Besetzung jedes Bereichs gesehen; Entscheidungen notiert."
+        },
+        {
+          "title": "Standort-Eskalationen: entscheiden oder Hindernis beseitigen",
+          "freq": "daily",
+          "at": 150,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Keine Eskalation wartet länger als einen Tag auf eine Antwort."
+        },
+        {
+          "title": "Gemba Walk mit einer Bereichsleitung",
+          "freq": "weekly",
+          "at": 120,
+          "day": 1,
+          "minutes": 60,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; drei Beobachtungen und eine Coaching-Frage."
+        },
+        {
+          "title": "Review der Standardarbeit mit den Bereichsleitungen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Einhaltung jeder Ebene gesehen; eine Notiz je Bereichsleitung."
+        },
+        {
+          "title": "Wöchentlicher Standortbericht: KPIs, Sicherheit, Personal",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "ops-report",
+          "done": "Bericht versendet; die drei Prioritäten der nächsten Woche benannt."
+        },
+        {
+          "title": "Sicherheitsrundgang über den ganzen Standort",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Rundgang gemacht; Befunde mit Verantwortlichen in der Maßnahmenliste."
+        },
+        {
+          "title": "Verbesserungsprojekte des Standorts prüfen",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Jedes Projekt hat einen Status, einen nächsten Schritt und einen Sponsor."
+        }
+      ]
+    },
+    "hotel-team": {
+      "name": "Hotel · Teamleitung (Housekeeping)",
+      "sector": "hotel",
+      "level": "team",
+      "start": "07:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Zimmerstatus und Zimmerlisten für die Reinigungskräfte",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "room-status",
+          "done": "Jede Reinigungskraft hat eine Liste; VIPs und frühe Anreisen sind markiert."
+        },
+        {
+          "title": "Briefing mit den Reinigungskräften",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Anreisen, VIPs und ein Standard der Woche, in 10 Minuten."
+        },
+        {
+          "title": "Abreise- und VIP-Zimmer vor der Freigabe prüfen",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 90,
+          "tool": "room-inspection",
+          "done": "Jedes VIP-Zimmer und jedes fünfte Abreisezimmer geprüft."
+        },
+        {
+          "title": "Kontrolle der öffentlichen Bereiche: Aufzüge, Flure, Lobby-WCs",
+          "freq": "shift",
+          "at": 150,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Jeder öffentliche Bereich der Liste einmal geprüft."
+        },
+        {
+          "title": "Wäscheraum und Wagen: 5S-Runde",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 20,
+          "tool": "five-s-audit",
+          "done": "Regale beschriftet und bis zum Sollbestand gefüllt; Wagen im Standard bestückt."
+        },
+        {
+          "title": "Eine neue Reinigungskraft im Zimmer coachen",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Ein Zimmer gemeinsam gereinigt; ein Schritt in der Matrix abgezeichnet."
+        },
+        {
+          "title": "Zweite Kontrollrunde",
+          "freq": "shift",
+          "at": 300,
+          "day": 0,
+          "minutes": 60,
+          "tool": "room-inspection",
+          "done": "Zimmer innerhalb von 30 Minuten nach dem Anruf an die Rezeption freigegeben."
+        },
+        {
+          "title": "Etagen ablaufen: Wagen, Flure, Zimmer in Arbeit",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 45,
+          "tool": "gemba-walk",
+          "done": "Jede Etage gesehen; Verzögerungen an die Rezeption gemeldet."
+        },
+        {
+          "title": "Fundsachen aus den Zimmern erfassen",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "lost-found",
+          "done": "Jeder Gegenstand erfasst und mit Nummer eingelagert."
+        },
+        {
+          "title": "Übergabe an die Abendschicht",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Offene Zimmer, Gästewünsche und Mängel schriftlich übergeben."
+        },
+        {
+          "title": "Offene Technik-Punkte der Etagen ablaufen",
+          "freq": "weekly",
+          "at": 240,
+          "day": 2,
+          "minutes": 20,
+          "tool": "maintenance-planner",
+          "done": "Jeder offene Punkt geprüft; alte Punkte eskaliert."
+        },
+        {
+          "title": "Eine Idee aus dem Team auf das Kaizen-Board",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 20,
+          "tool": "kaizen-board",
+          "done": "Eine Idee mit Namen und Datum."
+        }
+      ]
+    },
+    "hotel-shift": {
+      "name": "Hotel · Schichtleitung (Rezeption)",
+      "sector": "hotel",
+      "level": "shift",
+      "start": "07:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Night Audit und Übergabe lesen",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "night-audit",
+          "done": "No-Shows, offene Zahlungen und Gästethemen der Nacht haben eine verantwortliche Person."
+        },
+        {
+          "title": "Briefing mit dem Rezeptionsteam",
+          "freq": "shift",
+          "at": 20,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Anreisen, VIPs, Gruppen und das Upselling des Tages benannt."
+        },
+        {
+          "title": "Anreisen gegen Zimmerstatus mit dem Housekeeping abgleichen",
+          "freq": "shift",
+          "at": 45,
+          "day": 0,
+          "minutes": 20,
+          "tool": "room-status",
+          "done": "Jede frühe Anreise hat ein Zimmer und eine Uhrzeit."
+        },
+        {
+          "title": "Lobby, Frühstück und öffentliche Bereiche ablaufen",
+          "freq": "shift",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; was ein Gast bemerken würde, ist behoben oder gemeldet."
+        },
+        {
+          "title": "Offene Gästebeschwerden nachverfolgen",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "guest-complaints",
+          "done": "Jede offene Beschwerde hat heute einen Rückruf oder eine Wiedergutmachung."
+        },
+        {
+          "title": "Offene Maßnahmen der Schicht nachhalten",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Keine Maßnahme überfällig ohne neues Datum und Grund."
+        },
+        {
+          "title": "Zwei Hausgäste nach ihrem Aufenthalt fragen",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 20,
+          "tool": "guest-complaints",
+          "done": "Zwei Gäste gefragt; was zu beheben ist, heute weitergegeben."
+        },
+        {
+          "title": "Zahlen des Tages prüfen: Auslastung, ADR, Upselling",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "hotel-kpis",
+          "done": "Zahlen eingetragen; eine Abweichung zur Prognose hat einen Grund."
+        },
+        {
+          "title": "Zwei freigegebene Zimmer stichprobenartig prüfen",
+          "freq": "shift",
+          "at": 390,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Zwei Zimmer geprüft; Mängel gehen an das Housekeeping zurück."
+        },
+        {
+          "title": "Übergabe schreiben und leiten",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Übergabe geschrieben; die nächste Schicht hat sie gelesen."
+        },
+        {
+          "title": "Dienstplan und Schulungsplan der Woche",
+          "freq": "weekly",
+          "at": 300,
+          "day": 1,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Jede Schicht der Woche hat eine geschulte Person an der Rezeption."
+        },
+        {
+          "title": "5S-Audit des Back Office",
+          "freq": "weekly",
+          "at": 300,
+          "day": 4,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit gespeichert; die Befunde haben Verantwortliche."
+        },
+        {
+          "title": "Brandschutzkontrolle: Notausgänge, Türen, Feuerlöscher",
+          "freq": "monthly",
+          "at": 120,
+          "day": 5,
+          "minutes": 30,
+          "tool": "safety-cross",
+          "done": "Checkliste unterschrieben; jeder Mangel an die Technik gemeldet."
+        }
+      ]
+    },
+    "hotel-area": {
+      "name": "Hotel · Bereichsleitung (Abteilungsleitung)",
+      "sector": "hotel",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Abteilungsrunde mit den Supervisors",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Gästebewertungen von gestern, Anreisen von heute und offene Punkte abgestimmt."
+        },
+        {
+          "title": "Fünf heute freigegebene Zimmer prüfen",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "room-inspection",
+          "done": "Fünf Zimmer geprüft; die Bewertung steht im Protokoll."
+        },
+        {
+          "title": "KPIs und Gästebewertungen von gestern prüfen",
+          "freq": "daily",
+          "at": 150,
+          "day": 0,
+          "minutes": 15,
+          "tool": "hotel-kpis",
+          "done": "Die schlechteste Zahl von gestern hat einen Grund und eine verantwortliche Person."
+        },
+        {
+          "title": "Beschwerden des letzten Tages und ihre Wiedergutmachung prüfen",
+          "freq": "daily",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "guest-complaints",
+          "done": "Jede Beschwerde hat eine Wiedergutmachung und eine Ursache."
+        },
+        {
+          "title": "Review der Standardarbeit mit jedem Supervisor",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Einhaltung und häufigste Lücke besprochen; eine Notiz je Supervisor."
+        },
+        {
+          "title": "5S-Audit eines Bereichs: Wäscheraum oder Back Office",
+          "freq": "weekly",
+          "at": 240,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit gespeichert; der schlechteste Befund hat eine verantwortliche Person."
+        },
+        {
+          "title": "Wochenbericht: Auslastung, Beschwerden, Zimmerkontrollen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Bericht geteilt; eine Priorität für die nächste Woche benannt."
+        },
+        {
+          "title": "Zimmer-Wartungsplan mit der technischen Leitung",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "maintenance-planner",
+          "done": "Gesperrte Zimmer und der Plan des Monats abgestimmt."
+        },
+        {
+          "title": "Schulungsplan für den nächsten Monat",
+          "freq": "monthly",
+          "at": 180,
+          "day": 25,
+          "minutes": 60,
+          "tool": "skills-matrix",
+          "done": "Jede Lücke in der Matrix hat einen Schulungstermin."
+        }
+      ]
+    },
+    "hotel-site": {
+      "name": "Hotel · Standortleitung (Direktion)",
+      "sector": "hotel",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Morgenrunde der Abteilungsleitungen",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Anreisen, VIPs, Beschwerden und Risiken des Tages abgestimmt."
+        },
+        {
+          "title": "Hotel ablaufen: Lobby, Frühstück, eine Etage",
+          "freq": "daily",
+          "at": 120,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; unterwegs einer Person im Team eine Frage gestellt."
+        },
+        {
+          "title": "Wöchentliches KPI-Review mit Revenue und Rezeption",
+          "freq": "weekly",
+          "at": 240,
+          "day": 1,
+          "minutes": 30,
+          "tool": "hotel-kpis",
+          "done": "Prognose gegen Ist gesehen; die Maßnahmen der nächsten Woche abgestimmt."
+        },
+        {
+          "title": "Review der Standardarbeit mit den Abteilungsleitungen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Einhaltung jeder Abteilung gesehen; je eine Notiz."
+        },
+        {
+          "title": "Gästebewertungen und Beschwerden der Woche lesen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 5,
+          "minutes": 30,
+          "tool": "guest-complaints",
+          "done": "Jede schlechte Bewertung hat eine Antwort und eine Ursache."
+        },
+        {
+          "title": "Sicherheits- und Brandschutzrundgang durch das ganze Hotel",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Rundgang gemacht; Befunde mit Verantwortlichen in der Maßnahmenliste."
+        },
+        {
+          "title": "Verbesserungsprojekte prüfen",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Jedes Projekt hat einen Status, einen nächsten Schritt und einen Sponsor."
+        }
+      ]
+    },
+    "delivery-team": {
+      "name": "Zustellstation · Teamleitung",
+      "sector": "delivery",
+      "level": "team",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Anwesenheit und Platzplan: wer sortiert, bereitstellt, verlädt",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "skills-matrix",
+          "done": "Jede Bahn ist mit einer geschulten Person besetzt, bevor der erste Lkw entladen wird."
+        },
+        {
+          "title": "Schichtstart-Runde mit dem Stationsteam",
+          "freq": "shift",
+          "at": 15,
+          "day": 0,
+          "minutes": 10,
+          "tool": "daily-board",
+          "done": "Menge, Touren, Cut-off und ein Sicherheitspunkt, in 10 Minuten."
+        },
+        {
+          "title": "Sicherheitscheck: Hof, Warnwesten, Rollwagen, Tore",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "safety-cross",
+          "done": "Hofregeln eingehalten; das Sicherheitskreuz ist eingetragen."
+        },
+        {
+          "title": "Bereitstellung: Touren fertig gegen die Abfahrtszeit",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 60,
+          "tool": "delay-analyzer",
+          "done": "Jede Tour zur Zeit bereitgestellt; späte Touren mit Grund am Board."
+        },
+        {
+          "title": "Verladung: Beladung der Fahrzeuge und beschädigte Pakete",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 60,
+          "tool": "damage-control",
+          "done": "Beschädigte Pakete mit Foto erfasst; kein Fahrzeug fährt mit bekanntem Schaden."
+        },
+        {
+          "title": "Fehlende Pakete: suchen und erfassen, bevor die Fahrzeuge fahren",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 30,
+          "tool": "incomplete-control",
+          "done": "Jedes fehlende Paket gesucht und erfasst."
+        },
+        {
+          "title": "Neue Mitarbeitende an Sortierung und Bereitstellung anlernen",
+          "freq": "shift",
+          "at": 240,
+          "day": 0,
+          "minutes": 90,
+          "tool": "skills-matrix",
+          "done": "Eine neue Person angelernt; ein Schritt in der Matrix abgezeichnet."
+        },
+        {
+          "title": "Retouren und Fehlzustellungen: einbuchen und Gründe erfassen",
+          "freq": "shift",
+          "at": 360,
+          "day": 0,
+          "minutes": 30,
+          "tool": "cx-control-tower",
+          "done": "Jedes zurückgekommene Paket mit Grund eingescannt."
+        },
+        {
+          "title": "5S-Runde: Rollwagen, Klebeband, Scanner geladen",
+          "freq": "shift",
+          "at": 420,
+          "day": 0,
+          "minutes": 15,
+          "tool": "five-s-audit",
+          "done": "Jeder Scanner in der Ladestation; die Station ist wieder im Standard."
+        },
+        {
+          "title": "Übergabe an die nächste Schicht",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Offene Pakete, Retouren und Mängel schriftlich übergeben."
+        },
+        {
+          "title": "Eine Verbesserungsidee aus dem Team",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 15,
+          "tool": "kaizen-board",
+          "done": "Eine Idee auf dem Kaizen-Board mit Namen und Datum."
+        }
+      ]
+    },
+    "delivery-shift": {
+      "name": "Zustellstation · Schichtleitung",
+      "sector": "delivery",
+      "level": "shift",
+      "start": "06:00",
+      "hours": 8,
+      "tasks": [
+        {
+          "title": "Übergabe und Mengenprognose lesen",
+          "freq": "shift",
+          "at": 0,
+          "day": 0,
+          "minutes": 15,
+          "tool": "shift-handover",
+          "done": "Personal und Fahrzeuge gegen die Prognose geplant."
+        },
+        {
+          "title": "Tier-2-Runde mit den Teamleitungen: Menge, Personal, Fahrzeuge",
+          "freq": "shift",
+          "at": 30,
+          "day": 0,
+          "minutes": 15,
+          "tool": "daily-board",
+          "done": "Jede Lücke hat einen Plan, bevor die Sortierung beginnt."
+        },
+        {
+          "title": "Sortierung und Bereitstellungsbahnen ablaufen",
+          "freq": "shift",
+          "at": 60,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; eine Beobachtung je Bahn."
+        },
+        {
+          "title": "Abfahrtskontrolle: Touren pünktlich raus, späte eskaliert",
+          "freq": "shift",
+          "at": 120,
+          "day": 0,
+          "minutes": 30,
+          "tool": "delay-analyzer",
+          "done": "Jede späte Tour hat einen Grund im Protokoll."
+        },
+        {
+          "title": "Erste Zustellversuche und offene Kundenfälle prüfen",
+          "freq": "shift",
+          "at": 180,
+          "day": 0,
+          "minutes": 20,
+          "tool": "cx-control-tower",
+          "done": "Jeder offene Fall hat eine verantwortliche Person beim DSP."
+        },
+        {
+          "title": "Offene Maßnahmen der Schicht nachhalten",
+          "freq": "shift",
+          "at": 270,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Keine Maßnahme überfällig ohne neues Datum und Grund."
+        },
+        {
+          "title": "Sicherheitsrundgang: Hofverkehr, Rampe, Fahrzeuge",
+          "freq": "shift",
+          "at": 330,
+          "day": 0,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Rundgang gemacht; jeder Beinahe-Unfall steht im Sicherheitskreuz."
+        },
+        {
+          "title": "Schäden und Fehlmengen des Tages: Ursachen notiert",
+          "freq": "shift",
+          "at": 400,
+          "day": 0,
+          "minutes": 20,
+          "tool": "damage-control",
+          "done": "Die Hauptursache des Tages steht am Board."
+        },
+        {
+          "title": "Übergabe leiten",
+          "freq": "shift",
+          "at": 450,
+          "day": 0,
+          "minutes": 20,
+          "tool": "shift-handover",
+          "done": "Übergabe geschrieben; die nächste Schichtleitung hat sie bestätigt."
+        },
+        {
+          "title": "Personalplan der Woche mit den DSPs",
+          "freq": "weekly",
+          "at": 300,
+          "day": 1,
+          "minutes": 30,
+          "tool": "skills-matrix",
+          "done": "Jeder Tag der Woche hat seine Touren abgedeckt."
+        },
+        {
+          "title": "5S-Audit einer Zone",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "five-s-audit",
+          "done": "Audit gespeichert; die Befunde stehen in der Maßnahmenliste."
+        },
+        {
+          "title": "Monatliche Sicherheitsunterweisung der Station",
+          "freq": "monthly",
+          "at": 60,
+          "day": 5,
+          "minutes": 20,
+          "tool": "safety-cross",
+          "done": "Unterweisung gehalten; Teilnahme unterschrieben."
+        }
+      ]
+    },
+    "delivery-area": {
+      "name": "Zustellstation · Bereichsleitung (Stationsleitung)",
+      "sector": "delivery",
+      "level": "area",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Tier-3-Runde mit den Schichtleitungen und den DSP-Inhabern",
+          "freq": "daily",
+          "at": 30,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Qualität von gestern, Menge von heute und jede Eskalation beantwortet."
+        },
+        {
+          "title": "Gemba Walk durch die Station mit einer Schichtleitung",
+          "freq": "daily",
+          "at": 90,
+          "day": 0,
+          "minutes": 30,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; an jedem Halt eine Frage gestellt."
+        },
+        {
+          "title": "Zustellqualität von gestern prüfen: DCR, Beschwerden, Verspätungen",
+          "freq": "daily",
+          "at": 180,
+          "day": 0,
+          "minutes": 15,
+          "tool": "cx-control-tower",
+          "done": "Der schwächste DSP von gestern hat ein Gespräch und eine Maßnahme."
+        },
+        {
+          "title": "Überfällige Maßnahmen und Eskalationen durchgehen",
+          "freq": "daily",
+          "at": 240,
+          "day": 0,
+          "minutes": 15,
+          "tool": "action-tracker",
+          "done": "Jede überfällige Maßnahme hat ein neues Datum oder ist eskaliert."
+        },
+        {
+          "title": "Review der Standardarbeit mit jeder Schichtleitung",
+          "freq": "weekly",
+          "at": 120,
+          "day": 2,
+          "minutes": 45,
+          "tool": "leader-standard-work",
+          "done": "Einhaltung und häufigste Lücke besprochen; eine Notiz je Schichtleitung."
+        },
+        {
+          "title": "DSP-Leistungsreview (Scorecard)",
+          "freq": "weekly",
+          "at": 240,
+          "day": 4,
+          "minutes": 45,
+          "tool": "ops-report",
+          "done": "Jeder DSP kennt seine Scorecard und eine Maßnahme."
+        },
+        {
+          "title": "Kaizen-Board: über offene Ideen entscheiden",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 30,
+          "tool": "kaizen-board",
+          "done": "Jede Idee ist angenommen, mit Grund abgelehnt oder im Test."
+        },
+        {
+          "title": "Sicherheitsaudit der Station und des Hofs",
+          "freq": "monthly",
+          "at": 120,
+          "day": 15,
+          "minutes": 60,
+          "tool": "safety-cross",
+          "done": "Audit gemacht; Befunde in der Maßnahmenliste."
+        }
+      ]
+    },
+    "delivery-site": {
+      "name": "Zustellstation · Standortleitung (Regionalleitung)",
+      "sector": "delivery",
+      "level": "site",
+      "start": "08:00",
+      "hours": 9,
+      "tasks": [
+        {
+          "title": "Standortrunde am Stationsboard",
+          "freq": "daily",
+          "at": 60,
+          "day": 0,
+          "minutes": 20,
+          "tool": "daily-board",
+          "done": "Sicherheit, Qualität und Menge jeder Station gesehen."
+        },
+        {
+          "title": "Gemba Walk mit der Stationsleitung",
+          "freq": "weekly",
+          "at": 120,
+          "day": 1,
+          "minutes": 60,
+          "tool": "gemba-walk",
+          "done": "Rundgang gemacht; drei Beobachtungen und eine Coaching-Frage."
+        },
+        {
+          "title": "Review der Standardarbeit mit den Stationsleitungen",
+          "freq": "weekly",
+          "at": 300,
+          "day": 3,
+          "minutes": 30,
+          "tool": "leader-standard-work",
+          "done": "Einhaltung jeder Ebene gesehen; eine Notiz je Stationsleitung."
+        },
+        {
+          "title": "Wöchentliches Review von Zustellqualität und Kundenerlebnis",
+          "freq": "weekly",
+          "at": 240,
+          "day": 5,
+          "minutes": 45,
+          "tool": "cx-control-tower",
+          "done": "Die schlechteste Kennzahl der Woche hat eine Gegenmaßnahme."
+        },
+        {
+          "title": "Sicherheitsrundgang durch Station, Hof und Fahrzeuge",
+          "freq": "monthly",
+          "at": 120,
+          "day": 10,
+          "minutes": 90,
+          "tool": "safety-cross",
+          "done": "Rundgang gemacht; Befunde mit Verantwortlichen in der Maßnahmenliste."
+        },
+        {
+          "title": "Verbesserungsprojekte prüfen",
+          "freq": "monthly",
+          "at": 240,
+          "day": 20,
+          "minutes": 60,
+          "tool": "project-portfolio",
+          "done": "Jedes Projekt hat einen Status, einen nächsten Schritt und einen Sponsor."
+        }
+      ]
+    }
+  },
+  "tips": [
+    [
+      "Ein Standard auch für die Führung.",
+      "Leader Standard Work ist die Routine jeder Führungskraft, aufgeschrieben: was, wann, wie lange und woran man sieht, dass es erledigt ist. Ihr Anteil am Tag sinkt mit der Ebene (etwa 80 % für eine Teamleitung, 50 % für eine Schichtleitung, 25 % für eine Leitung, nach David Mann)."
+    ],
+    [
+      "Mit einer Vorlage beginnen.",
+      "Wählen Sie Branche und Ebene und passen Sie Zeiten und Aufgaben an Ihren Tag an. Speichern Sie es als Vorlagendatei, um es der nächsten Führungskraft zu geben."
+    ],
+    [
+      "Am selben Tag abhaken.",
+      "Erledigt, verpasst mit Grund oder nicht fällig. Was am Ende des Tages nicht markiert ist, zählt als verpasst (nicht erfasst)."
+    ],
+    [
+      "Die nächste Ebene prüft.",
+      "Einmal pro Woche schaut die Führungskraft darüber mit der Person auf die Einhaltung und die am häufigsten verpasste Aufgabe und notiert, was vereinbart wurde. Es geht um Hilfe, nicht um Kontrolle."
+    ],
+    [
+      "Eine Lücke ist eine Information.",
+      "Eine Aufgabe, die in zwei Wochen dreimal verpasst wurde, geht in die Maßnahmenliste: entweder braucht der Tag Hilfe oder der Standard eine Änderung."
+    ]
+  ],
+  "example": {
+    "seed": 20261024,
+    "weeks": 3,
+    "week": [
+      1.3,
+      1,
+      0.7
+    ],
+    "na": 0.01,
+    "leaders": [
+      {
+        "key": "sabine",
+        "name": "Sabine Krüger",
+        "level": "area",
+        "template": "warehouse-area",
+        "area": "Warenausgang",
+        "shift": "Tag",
+        "start": "08:00",
+        "hours": 9,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "",
+        "miss": 0.14,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 4,
+          "notime": 4,
+          "notrelevant": 1,
+          "forgot": 1
+        }
+      },
+      {
+        "key": "arben",
+        "name": "Arben Hoxha",
+        "level": "shift",
+        "template": "warehouse-shift",
+        "area": "Warenausgang",
+        "shift": "Früh",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "sabine",
+        "miss": 0.09,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 3,
+          "notime": 2,
+          "forgot": 1,
+          "notrelevant": 1
+        }
+      },
+      {
+        "key": "marco",
+        "name": "Marco Rossi",
+        "level": "shift",
+        "template": "warehouse-shift",
+        "area": "Warenausgang",
+        "shift": "Spät",
+        "start": "14:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "sabine",
+        "miss": 0.16,
+        "unrecorded": 0.05,
+        "reasons": {
+          "notime": 4,
+          "firefighting": 3,
+          "forgot": 2,
+          "notrelevant": 1
+        },
+        "recurring": [
+          {
+            "task": 3,
+            "rate": 0.55,
+            "reason": "notime"
+          }
+        ]
+      },
+      {
+        "key": "lena",
+        "name": "Lena Vogel",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Kommissionierung",
+        "shift": "Früh",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "arben",
+        "miss": 0.06,
+        "unrecorded": 0.01,
+        "reasons": {
+          "notrelevant": 2,
+          "notime": 2,
+          "firefighting": 1
+        }
+      },
+      {
+        "key": "dritan",
+        "name": "Dritan Kola",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Verladung",
+        "shift": "Früh",
+        "start": "06:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reportsTo": "arben",
+        "miss": 0.1,
+        "unrecorded": 0.01,
+        "reasons": {
+          "firefighting": 4,
+          "notime": 2,
+          "forgot": 1
+        },
+        "recurring": [
+          {
+            "task": 7,
+            "rate": 0.6,
+            "reason": "firefighting"
+          }
+        ]
+      },
+      {
+        "key": "jonas",
+        "name": "Jonas Weber",
+        "level": "team",
+        "template": "warehouse-team",
+        "area": "Kommissionierung",
+        "shift": "Spät",
+        "start": "14:00",
+        "hours": 8,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reportsTo": "marco",
+        "miss": 0.06,
+        "unrecorded": 0.02,
+        "reasons": {
+          "forgot": 3,
+          "notime": 2,
+          "firefighting": 1
+        },
+        "absent": [
+          {
+            "week": -1,
+            "day": 4
+          },
+          {
+            "week": -1,
+            "day": 5
+          }
+        ]
+      }
+    ],
+    "current": "dritan",
+    "reviews": [
+      {
+        "leader": "dritan",
+        "week": -1,
+        "note": "Qualitätscheck in der Verladespitze wieder verpasst. Auf 09:30 vor die erste Welle legen; freitags übernimmt Arben."
+      },
+      {
+        "leader": "marco",
+        "week": -1,
+        "note": "Gemba Walk dreimal aus Zeitmangel ausgefallen. Vereinbart: Rundgang um 15:15 direkt nach der Tier-2-Runde, 20 statt 30 Minuten."
+      },
+      {
+        "leader": "jonas",
+        "week": -1,
+        "note": "Donnerstag und Freitag abwesend ohne Vertretung. Nächstes Mal übernimmt Dritans Team die Runde der Spätschicht; Karte mit der Übergabe übergeben."
+      }
+    ]
+  }
+}
