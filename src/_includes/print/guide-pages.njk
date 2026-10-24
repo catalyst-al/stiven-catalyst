@@ -170,7 +170,7 @@
 {%- elif id.startsWith("routine:") %}
 {%- set f = F[id.slice(8)] %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg fam routine-page{{ fitClass }}" style="--family: {{ f.color }}">
+<section class="pg fam routine-page{{ ' is-long' if f.routine.length > 12 }}{{ fitClass }}" style="--family: {{ f.color }}">
   {{ chrome(number, f.name + " · " + (f.role | t(lang)), f.color) }}
   <p class="kicker">{{ f.name }} · {{ f.role | t(lang) }}</p>
   <h2>{{ g.labels.routine }}</h2>
