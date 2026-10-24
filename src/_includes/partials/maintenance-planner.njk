@@ -1,0 +1,263 @@
+{#- Maintenance Planner: the preventive maintenance and statutory checks of a site's assets, due dates, the log and the breakdowns; maintenance-planner.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-maintenance-planner>
+    <details class="dl-box mp-setup" data-setup>
+      <summary class="mp-setup-summary"><span class="kicker">1 · {{ "Assets and tasks" | t(lang) }}</span> <span class="form-note" data-setup-count></span></summary>
+      <div class="mp-setup-body">
+        <fieldset class="mp-fieldset">
+          <legend class="mp-sub">{{ "Add an asset" | t(lang) }}</legend>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="mp-site">{{ "Kind of site" | t(lang) }}</label>
+              <select id="mp-site"></select>
+            </div>
+            <div class="field">
+              <label for="mp-type">{{ "Asset type" | t(lang) }}</label>
+              <select id="mp-type"></select>
+            </div>
+            <div class="field">
+              <label for="mp-tag">{{ "Tag" | t(lang) }} <span class="optional">{{ "the code on its label" | t(lang) }}</span></label>
+              <input id="mp-tag" type="text" autocomplete="off" placeholder="{{ cfg.text.tagPlaceholder }}" data-scan>
+            </div>
+            <div class="field">
+              <label for="mp-name">{{ "Name" | t(lang) }}</label>
+              <input id="mp-name" type="text" autocomplete="off" placeholder="{{ cfg.text.namePlaceholder }}">
+            </div>
+            <div class="field">
+              <label for="mp-area">{{ "Area" | t(lang) }}</label>
+              <input id="mp-area" type="text" list="mp-area-list" autocomplete="off" placeholder="{{ cfg.text.areaPlaceholder }}">
+              <datalist id="mp-area-list"></datalist>
+            </div>
+            <div class="field">
+              <label for="mp-crit">{{ "Criticality" | t(lang) }}</label>
+              <select id="mp-crit"></select>
+            </div>
+            <div class="field">
+              <label for="mp-supplier">{{ "Supplier or service company" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="mp-supplier" type="text" autocomplete="off" placeholder="{{ cfg.text.supplierPlaceholder }}">
+            </div>
+            <div class="field">
+              <label for="mp-contact">{{ "Contact" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="mp-contact" type="text" autocomplete="off" placeholder="{{ cfg.text.contactPlaceholder }}">
+            </div>
+          </div>
+          <div class="mp-type-box" data-type-tasks></div>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-add-asset>{{ "Add asset" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-cancel-edit hidden>{{ "Cancel" | t(lang) }}</button>
+          </div>
+          <p class="form-note" data-asset-status aria-live="polite"></p>
+        </fieldset>
+
+        <div class="dl-table-wrap" tabindex="0" data-assets-wrap hidden>
+          <table class="dl-table mp-assets">
+            <thead>
+              <tr><th scope="col">{{ "Asset" | t(lang) }}</th><th scope="col">{{ "Type" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "Criticality" | t(lang) }}</th><th scope="col">{{ "Supplier" | t(lang) }}</th><th scope="col" class="num">{{ "Tasks" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Edit or remove" | t(lang) }}</span></th></tr>
+            </thead>
+            <tbody data-assets></tbody>
+          </table>
+        </div>
+
+        <fieldset class="mp-fieldset">
+          <legend class="mp-sub">{{ "Add a task to an asset" | t(lang) }}</legend>
+          <div class="dl-grid">
+            <div class="field dl-wide">
+              <label for="mp-task-asset">{{ "Asset" | t(lang) }}</label>
+              <select id="mp-task-asset"></select>
+            </div>
+            <div class="field dl-wide">
+              <label for="mp-task-text">{{ "What" | t(lang) }}</label>
+              <input id="mp-task-text" type="text" autocomplete="off" placeholder="{{ cfg.text.taskPlaceholder }}">
+            </div>
+            <div class="field">
+              <label for="mp-task-every">{{ "Every" | t(lang) }}</label>
+              <input id="mp-task-every" type="number" min="1" step="1" inputmode="numeric" value="1">
+            </div>
+            <div class="field">
+              <label for="mp-task-unit">{{ "Unit" | t(lang) }}</label>
+              <select id="mp-task-unit"></select>
+            </div>
+            <div class="field">
+              <label for="mp-task-hours">{{ "Or after operating hours" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="mp-task-hours" type="number" min="0" step="1" inputmode="numeric" placeholder="500">
+            </div>
+            <div class="field">
+              <label for="mp-task-who">{{ "Who" | t(lang) }}</label>
+              <select id="mp-task-who"></select>
+            </div>
+            <div class="field">
+              <label for="mp-task-minutes">{{ "Duration (minutes)" | t(lang) }}</label>
+              <input id="mp-task-minutes" type="number" min="0" step="5" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="mp-task-last">{{ "Last done" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="mp-task-last" type="date">
+            </div>
+            <div class="field dl-wide">
+              <label for="mp-task-checklist">{{ "Checklist" | t(lang) }} <span class="optional">{{ "optional, one item per line" | t(lang) }}</span></label>
+              <textarea id="mp-task-checklist" rows="3" placeholder="{{ cfg.text.checklistPlaceholder }}"></textarea>
+            </div>
+          </div>
+          <label class="mp-check mp-check-line" for="mp-task-statutory"><input id="mp-task-statutory" type="checkbox"> <span>{{ "Statutory check (required by law or by the insurer)" | t(lang) }}</span></label>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-add-task>{{ "Add task" | t(lang) }}</button>
+          </div>
+          <p class="form-note" data-task-status aria-live="polite"></p>
+        </fieldset>
+        <p class="form-note mp-legal">{{ cfg.text.statutory }}</p>
+      </div>
+    </details>
+
+    <div class="dl-box mp-plan">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "The plan" | t(lang) }}</p>
+        <p class="form-note" data-plan-count></p>
+      </div>
+      <div class="field mp-show">
+        <label for="mp-show">{{ "Show" | t(lang) }}</label>
+        <select id="mp-show">
+          <option value="all">{{ "All tasks" | t(lang) }}</option>
+          <option value="due">{{ "Overdue and due this week" | t(lang) }}</option>
+          <option value="overdue">{{ "Overdue only" | t(lang) }}</option>
+          <option value="statutory">{{ "Statutory checks" | t(lang) }}</option>
+        </select>
+      </div>
+      <p class="form-note dl-log-status" data-plan-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-plan-wrap hidden>
+        <table class="dl-table mp-plan-table">
+          <thead>
+            <tr><th scope="col">{{ "Asset" | t(lang) }}</th><th scope="col">{{ "Task" | t(lang) }}</th><th scope="col">{{ "Interval" | t(lang) }}</th><th scope="col">{{ "Who" | t(lang) }}</th><th scope="col">{{ "Last done" | t(lang) }}</th><th scope="col">{{ "Next due date" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Log or remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-plan></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-plan-empty>{{ "No assets yet." | t(lang) }} {{ "Add the first one above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-ics>{{ "Calendar file (.ics)" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear-plan>{{ "Clear the plan" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box mp-logbox" data-log-form>
+      <fieldset class="mp-fieldset">
+        <legend class="kicker">3 · {{ "Log work" | t(lang) }}</legend>
+        <div class="mp-kinds" role="radiogroup" aria-label="{{ 'What happened' | t(lang) }}">
+          <label class="mp-kind-pick"><input type="radio" name="mp-kind" value="done" checked><span>{{ "Done" | t(lang) }}</span></label>
+          <label class="mp-kind-pick"><input type="radio" name="mp-kind" value="postponed"><span>{{ "Postponed" | t(lang) }}</span></label>
+          <label class="mp-kind-pick"><input type="radio" name="mp-kind" value="breakdown"><span>{{ "Breakdown" | t(lang) }}</span></label>
+          <label class="mp-kind-pick"><input type="radio" name="mp-kind" value="reading"><span>{{ "Meter reading" | t(lang) }}</span></label>
+        </div>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="mp-log-asset">{{ "Asset" | t(lang) }}</label>
+            <input id="mp-log-asset" type="text" list="mp-asset-list" autocomplete="off" placeholder="{{ cfg.text.assetPlaceholder }}" data-scan>
+            <datalist id="mp-asset-list"></datalist>
+          </div>
+          <div class="field" data-kinds="done postponed">
+            <label for="mp-log-task">{{ "Task" | t(lang) }}</label>
+            <select id="mp-log-task"></select>
+          </div>
+          <div class="field">
+            <label for="mp-log-date">{{ "Date" | t(lang) }}</label>
+            <input id="mp-log-date" type="date">
+          </div>
+          <div class="field">
+            <label for="mp-log-by">{{ "Done by" | t(lang) }}</label>
+            <input id="mp-log-by" type="text" autocomplete="off" placeholder="{{ cfg.text.byPlaceholder }}">
+          </div>
+          <div class="field" data-kinds="done">
+            <label for="mp-log-minutes">{{ "Minutes worked" | t(lang) }}</label>
+            <input id="mp-log-minutes" type="number" min="0" step="5" inputmode="numeric">
+          </div>
+          <div class="field" data-kinds="done">
+            <label for="mp-log-parts">{{ "Parts €" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="mp-log-parts" type="text" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field" data-kinds="postponed">
+            <label for="mp-log-until">{{ "New date" | t(lang) }}</label>
+            <input id="mp-log-until" type="date">
+          </div>
+          <div class="field" data-kinds="postponed">
+            <label for="mp-log-reason">{{ "Reason" | t(lang) }}</label>
+            <input id="mp-log-reason" type="text" autocomplete="off" placeholder="{{ cfg.text.reasonPlaceholder }}">
+          </div>
+          <div class="field" data-kinds="breakdown">
+            <label for="mp-log-downtime">{{ "Downtime minutes" | t(lang) }}</label>
+            <input id="mp-log-downtime" type="number" min="0" step="5" inputmode="numeric">
+          </div>
+          <div class="field" data-kinds="breakdown">
+            <label for="mp-log-cause">{{ "Cause" | t(lang) }}</label>
+            <select id="mp-log-cause"></select>
+          </div>
+          <div class="field" data-kinds="breakdown">
+            <label for="mp-log-cost">{{ "Cost €" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="mp-log-cost" type="text" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field" data-kinds="done reading">
+            <label for="mp-log-hours">{{ "Operating hours on the meter" | t(lang) }} <span class="optional" data-kinds="done">{{ "optional" | t(lang) }}</span></label>
+            <input id="mp-log-hours" type="text" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="mp-log-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="mp-log-note" type="text" autocomplete="off" placeholder="{{ cfg.text.notePlaceholder }}">
+          </div>
+        </div>
+        <p class="form-note" data-log-asset-note aria-live="polite"></p>
+        <div data-log-checklist hidden></div>
+        <div class="mp-photo" data-log-photo data-kinds="done breakdown"></div>
+        <div class="tool-actions">
+          <button class="button-primary" type="button" data-log-save>{{ "Add to log" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-log-status aria-live="polite"></p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">4 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-history-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table mp-log">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Asset" | t(lang) }}</th><th scope="col">{{ "Entry" | t(lang) }}</th><th scope="col">{{ "Details" | t(lang) }}</th><th scope="col">{{ "Done by" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ "Nothing logged yet. Log a task when it is done, a postponement or a breakdown above." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-log-csv>{{ "Log as CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-log-xlsx>{{ "Log as Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The same asset stops again?" | t(lang) }}</strong> {{ "Rank the causes in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>, {{ "find the cause of one stop with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "and see what the stops cost in" | t(lang) }} <a class="inline-link" href="{{ '/tools/oee/' | local(lang) }}">OEE</a>.</li>
+    </ul>
+    <p class="form-note mp-legal">{{ cfg.text.statutory }}</p>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results mp-results" data-results tabindex="-1" hidden></section>
+<section class="shell mp-print" data-print hidden></section>
+
+<script type="application/json" id="maintenance-planner-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/media-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/maintenance-planner.js' | assetUrl }}" defer></script>

@@ -115,7 +115,8 @@
       "/tools/hotel-kpis/",
       "/tools/gemba-walk/",
       "/tools/ops-report/",
-      "/tools/room-inspection/"
+      "/tools/room-inspection/",
+      "/tools/maintenance-planner/"
     ],
     "learn": [],
     "also": [
@@ -194,6 +195,11 @@
         "when": "During the shift",
         "do": "Inspect every checkout and VIP room before reception releases it, send each fault back to the attendant or to maintenance, and coach on the item that fails most this week.",
         "tool": "/tools/room-inspection/"
+      },
+      {
+        "when": "Every week",
+        "do": "Print the work list on Monday, give every overdue task on a critical asset a date this week, and take the asset that stopped most to 5 Whys.",
+        "tool": "/tools/maintenance-planner/"
       }
     ],
     "next": "lumen"

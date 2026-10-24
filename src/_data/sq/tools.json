@@ -286,5 +286,13 @@
     "summary": "Kontrollo dhomën e pastruar para se të lirohet: në rregull, defekt ose s'aplikohet sipas zonës, pika kritike që e rrëzojnë dhomën vetëm, një foto e defektit. Ripastrimet i kthehen pastruesit, mirëmbajtja shkon te lista e veprimeve; kalimi herën e parë sipas pastruesit, katit dhe llojit të dhomës tregon ku duhet trajnim.",
     "url": "/sq/tools/room-inspection/",
     "cta": "Inspekto një dhomë"
+  },
+  {
+    "name": "Planifikuesi i mirëmbajtjes",
+    "type": "Pajisje",
+    "time": "Çdo javë",
+    "summary": "Planifiko mirëmbajtjen parandaluese dhe kontrollet ligjore të çdo pajisjeje sipas datës ose orëve të punës, regjistro çfarë u krye, u shty ose u prish, dhe shiko çfarë është vonë, zbatimin e planit, MTBF dhe MTTR, dhe listën e punës së javës.",
+    "url": "/sq/tools/maintenance-planner/",
+    "cta": "Planifiko mirëmbajtjen"
   }
 ]

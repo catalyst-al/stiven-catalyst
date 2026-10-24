@@ -1,0 +1,888 @@
+{
+  "storageKey": "sc-maintenance-planner-sq",
+  "target": 0.9,
+  "text": {
+    "tool": "Planifikuesi i mirëmbajtjes",
+    "csvName": "plani-i-mirembajtjes",
+    "logName": "regjistri-i-mirembajtjes",
+    "tagPlaceholder": "p.sh. FL-01",
+    "namePlaceholder": "p.sh. Piruni 1, elektrik 2 t",
+    "areaPlaceholder": "p.sh. Pritja e mallit",
+    "supplierPlaceholder": "p.sh. servisi i pirunëve",
+    "contactPlaceholder": "Telefon ose e-mail",
+    "taskPlaceholder": "p.sh. Kontrollo sensorin e sigurisë në buzë të derës",
+    "checklistPlaceholder": "Një pikë për rresht",
+    "assetPlaceholder": "Skano ose shkruaj kodin",
+    "byPlaceholder": "Kush e bëri",
+    "notePlaceholder": "Çfarë u bë ose u gjet",
+    "reasonPlaceholder": "Pse shtyhet",
+    "maintenanceOwner": "Mirëmbajtja",
+    "checkOverdue": "Detyra është kryer dhe është regjistruar në Planifikuesin e mirëmbajtjes, dhe e radhës është planifikuar.",
+    "checkRepeated": "Asnjë prishje e kësaj pajisjeje për 30 ditë pas ndërhyrjes.",
+    "statutory": "Kontrollet ligjore: intervali, forma dhe kush mund t'i bëjë varen nga vendi yt dhe nga pajisja. Kontrollo rregullat që vlejnë te ti dhe pyet furnitorin; ky plan nuk është këshillë ligjore."
+  },
+  "sites": [
+    {
+      "key": "warehouse",
+      "name": "Magazinë",
+      "areas": [
+        "Pritja e mallit",
+        "Ruajtja",
+        "Mbledhja e porosive",
+        "Dërgimi i mallit",
+        "Rampat",
+        "Dhoma e karikimit",
+        "Ndërtesa"
+      ]
+    },
+    {
+      "key": "hotel",
+      "name": "Hotel",
+      "areas": [
+        "Dhomat",
+        "Kuzhina",
+        "Lobi dhe zonat publike",
+        "Dhoma teknike",
+        "Ndërtesa"
+      ]
+    },
+    {
+      "key": "station",
+      "name": "Stacion shpërndarjeje",
+      "areas": [
+        "Rampat e pritjes",
+        "Salla e sorterit",
+        "Rampat e dërgimit",
+        "Oborri",
+        "Ndërtesa"
+      ]
+    }
+  ],
+  "criticality": [
+    {
+      "key": "A",
+      "name": "A · ndal punën ose është rrezik sigurie"
+    },
+    {
+      "key": "B",
+      "name": "B · e ngadalëson punën, ka zgjidhje tjetër"
+    },
+    {
+      "key": "C",
+      "name": "C · pak ndikim kur prishet"
+    }
+  ],
+  "causes": [
+    {
+      "key": "wear",
+      "name": "Konsumim"
+    },
+    {
+      "key": "hydraulic",
+      "name": "Rrjedhje hidraulike ose vaji"
+    },
+    {
+      "key": "electrical",
+      "name": "Defekt elektrik"
+    },
+    {
+      "key": "sensor",
+      "name": "Sensor ose komandim"
+    },
+    {
+      "key": "jam",
+      "name": "Bllokim ose ngecje"
+    },
+    {
+      "key": "battery",
+      "name": "Bateria ose karikimi"
+    },
+    {
+      "key": "damage",
+      "name": "Dëmtim nga një mjet ose gjatë trajtimit"
+    },
+    {
+      "key": "operator",
+      "name": "Gabim në përdorim"
+    },
+    {
+      "key": "missed",
+      "name": "Mirëmbajtje e harruar ose e vonuar"
+    },
+    {
+      "key": "other",
+      "name": "Tjetër"
+    }
+  ],
+  "types": [
+    {
+      "key": "forklift",
+      "name": "Pirun ngritës",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontrolli ditor para përdorimit nga drejtuesi",
+          "every": 1,
+          "unit": "days",
+          "who": "internal",
+          "minutes": 5,
+          "optional": true,
+          "checklist": [
+            "Pirunët, zinxhirët dhe direku",
+            "Gomat dhe rrotat",
+            "Frenat dhe drejtimi",
+            "Boria, dritat dhe drita paralajmëruese",
+            "Asnjë rrjedhje hidraulike ose vaji",
+            "Bateria e karikuar, kabllot të paprekura"
+          ]
+        },
+        {
+          "text": "Bateria: niveli i ujit, polet dhe pastrimi",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 15
+        },
+        {
+          "text": "Servis nga furnitori",
+          "every": 3,
+          "unit": "months",
+          "hours": 500,
+          "who": "external",
+          "minutes": 120
+        },
+        {
+          "text": "Inspektim vjetor nga një person i kualifikuar (në Gjermani: UVV / DGUV)",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "pallet-truck",
+      "name": "Transpaletë elektrike",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll javor: pirunët, rrotat, frena dhe ndalesa emergjente",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 10
+        },
+        {
+          "text": "Inspektim vjetor nga një person i kualifikuar",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "sorter",
+      "name": "Sorteri",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Inspektim javor: rripat, sensorët dhe ndalesat emergjente",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 45,
+          "checklist": [
+            "Çdo ndalesë emergjente e testuar",
+            "Rripat ecin drejt, tensioni në rregull",
+            "Fotocelulat dhe skanerët të pastër",
+            "Rrëshqitëset dhe rulat të lira",
+            "Asnjë zhurmë ose erë e pazakontë"
+          ]
+        },
+        {
+          "text": "Lubrifikim dhe pastrim",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 90
+        },
+        {
+          "text": "Servis nga furnitori",
+          "every": 6,
+          "unit": "months",
+          "who": "external",
+          "minutes": 480
+        },
+        {
+          "text": "Inspektim vjetor i sigurisë së mbrojtëseve dhe i ndalesave emergjente",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 120,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "conveyor",
+      "name": "Rrip transportues",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll javor: rulat, rripi dhe mbrojtëset",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 20
+        },
+        {
+          "text": "Testi i ndalesës emergjente dhe i kordonit të ndalimit",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 15
+        },
+        {
+          "text": "Servis vjetor",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 240
+        }
+      ]
+    },
+    {
+      "key": "dock-door",
+      "name": "Dera e rampës",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll vizual dhe funksional",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 10,
+          "checklist": [
+            "Panelet dhe guarnicionet pa dëmtime",
+            "Sustat, kabllot dhe binarët",
+            "Sensori i buzës e ndal derën",
+            "Perdja me drita ose fotocelula funksionon"
+          ]
+        },
+        {
+          "text": "Inspektim vjetor nga një person i kualifikuar",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "dock-leveller",
+      "name": "Ura e ngarkimit",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll: gjuha, hidraulika dhe mbrojtëset anësore",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 10
+        },
+        {
+          "text": "Inspektim vjetor nga një person i kualifikuar",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "charger",
+      "name": "Karikuesit e baterive",
+      "sites": [
+        "warehouse",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll: kabllot, prizat dhe ajrimi",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 10
+        },
+        {
+          "text": "Test i sigurisë elektrike",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "fire-extinguisher",
+      "name": "Fikëset",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll vizual: në vend, të plumbosura, manometri në të gjelbër",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 20,
+          "checklist": [
+            "Çdo fikëse në vendin e saj dhe e dukshme",
+            "Plumbi dhe kunja të paprekura",
+            "Manometri në të gjelbër",
+            "Shenja sipër, qasja e lirë"
+          ]
+        },
+        {
+          "text": "Servis nga një person i kualifikuar",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "emergency-light",
+      "name": "Ndriçimi emergjent",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Test i shkurtër i çdo drite dhe shenje",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 20,
+          "statutory": true
+        },
+        {
+          "text": "Test me kohëzgjatje të plotë",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 120,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "lift",
+      "name": "Ashensori",
+      "sites": [
+        "warehouse",
+        "hotel"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll: butoni i alarmit dhe telefoni, dyert, ndalimi në nivel",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 15,
+          "checklist": [
+            "Butoni i alarmit lidhet me dikë",
+            "Dyert hapen dhe mbyllen pa probleme",
+            "Kabina ndalon në nivel me dyshemenë",
+            "Drita dhe ekrani funksionojnë"
+          ]
+        },
+        {
+          "text": "Servis nga firma e ashensorit",
+          "every": 3,
+          "unit": "months",
+          "who": "external",
+          "minutes": 90
+        },
+        {
+          "text": "Inspektim vjetor nga një organ i autorizuar",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "hvac",
+      "name": "Ngrohja, ventilimi dhe kondicionimi",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Ndërrimi i filtrave",
+          "every": 3,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 45
+        },
+        {
+          "text": "Servis dhe kontroll i rrjedhjes së gazit ftohës",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 180,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "kitchen",
+      "name": "Pajisjet e kuzhinës",
+      "sites": [
+        "hotel"
+      ],
+      "tasks": [
+        {
+          "text": "Heqja e gëlqeres dhe kontrolli i guarnicionit të derës",
+          "every": 1,
+          "unit": "weeks",
+          "who": "internal",
+          "minutes": 20
+        },
+        {
+          "text": "Servis nga furnitori",
+          "every": 6,
+          "unit": "months",
+          "who": "external",
+          "minutes": 120
+        },
+        {
+          "text": "Test i sigurisë elektrike",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 30,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "minibar",
+      "name": "Minibaret e dhomave",
+      "sites": [
+        "hotel"
+      ],
+      "tasks": [
+        {
+          "text": "Shkrirja e akullit, pastrimi dhe kontrolli i temperaturës",
+          "every": 3,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 120
+        },
+        {
+          "text": "Test i sigurisë elektrike i pajisjeve",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 120,
+          "statutory": true
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "Pajisje tjetër",
+      "sites": [
+        "warehouse",
+        "hotel",
+        "station"
+      ],
+      "tasks": [
+        {
+          "text": "Kontroll",
+          "every": 1,
+          "unit": "months",
+          "who": "internal",
+          "minutes": 15
+        },
+        {
+          "text": "Servis vjetor",
+          "every": 1,
+          "unit": "years",
+          "who": "external",
+          "minutes": 60
+        }
+      ]
+    }
+  ],
+  "advice": {
+    "breakdown": {
+      "meaning": "E njëjta pajisje kritike ndalet herë pas here: çdo prishje kushton minutat e ndalesës dhe pakot që mbeten pas saj. Riparimet rregullojnë simptomën; shkaku mbetet aty.",
+      "moves": [
+        "Çoje prishjen e fundit te 5 Whys me teknikun që e riparoi, sa detajet janë ende të freskëta.",
+        "Shiko planin e kësaj pajisjeje: mungon një detyrë, është shumë e rrallë, apo u krye vonë para ndalesave?",
+        "Bini dakord për një kundërmasë me përgjegjës dhe afat, dhe ndiqe pajisjen për 30 ditë pas saj."
+      ],
+      "question": "Çfarë pamë në ditët para ndalesës së fundit, dhe kush e pa i pari?"
+    },
+    "overdue": {
+      "meaning": "Një detyrë në një pajisje kritike e ka kaluar afatin. Çdo ditë që pret, rritet rreziku i një ndalese ose i një inspektimi të dështuar, dhe një kontroll ligjor i vonuar mund të thotë që pajisja nuk duhet përdorur.",
+      "moves": [
+        "Planifikoje detyrën këtë javë: një orar, një person ose furnitorin, dhe pjesët.",
+        "Nëse është kontroll ligjor, vendos sot nëse pajisja mund të punojë deri atëherë, dhe shkruaje vendimin.",
+        "Gjej pse mbeti pas: pa orar, pa datë nga furnitori, pa përgjegjës, dhe rregullo edhe këtë."
+      ],
+      "question": "Kush e ka këtë detyrë, dhe çfarë e pengoi të kryhej në afatin e saj?"
+    },
+    "none": {
+      "meaning": "Asgjë kritike nuk është vonë, dhe asnjë pajisje kritike nuk prishet herë pas here. Mbaje ritmin.",
+      "moves": [
+        "Printo listën e punës të hënën dhe jepi çdo detyre përgjegjësin.",
+        "Regjistro çdo detyrë ditën që kryhet, me foto aty ku ka rëndësi.",
+        "Regjistro çdo prishje, edhe të shkurtrat: ato tregojnë ku planit i mungon një detyrë."
+      ],
+      "question": "Cila pajisje do të na dëmtonte më shumë po të ndalej sot, dhe a është plani i saj i duhuri?"
+    }
+  },
+  "tips": [
+    [
+      "Një plan për çdo pajisje.",
+      "Shto çdo pajisje me kodin, zonën dhe rëndësinë, dhe merr detyrat tipike të llojit të saj. Vendos datën kur u krye çdo detyrë për herë të fundit, që afatet e para të jenë të sakta."
+    ],
+    [
+      "Data ose orë.",
+      "Një detyrë ka afat pas ditësh, javësh, muajsh ose vitesh, ose pas orëve të punës, cila të vijë e para. Regjistro leximet e numëratorit dhe planifikuesi e lëviz datën sipas përdorimit të vërtetë."
+    ],
+    [
+      "Regjistroje ditën që kryhet.",
+      "E kryer, e shtyrë me arsye, ose një prishje me kohën e ndalesës: çdo regjistrim e lëviz planin. Skano kodin mbi pajisje për ta zgjedhur menjëherë."
+    ],
+    [
+      "Zbatimi, me ndershmëri.",
+      "Një detyrë llogaritet në kohë kur kryhet deri në afat, ose brenda një të dhjetës së intervalit (jo më shumë se 7 ditë). Një detyrë e shtyrë që kryhet vonë llogaritet prapë si e vonuar."
+    ],
+    [
+      "A për kritike.",
+      "Detyrat e vonuara në pajisjet A dhe prishjet e përsëritura shkojnë te lista e veprimeve; shkaqet shkojnë te Pareto, një prishje e vetme te 5 Whys."
+    ]
+  ],
+  "example": {
+    "seed": 11,
+    "days": 91,
+    "site": "station",
+    "areas": [
+      "Rampat e pritjes",
+      "Salla e sorterit",
+      "Rampat e dërgimit",
+      "Ndërtesa"
+    ],
+    "people": [
+      "Ardit",
+      "Jonas",
+      "Mira"
+    ],
+    "parts": 260,
+    "late": 0.12,
+    "assets": [
+      {
+        "tag": "FL-01",
+        "name": "Piruni 1 · elektrik 2 t",
+        "type": "forklift",
+        "area": 0,
+        "crit": "A",
+        "supplier": "Liftec Service",
+        "contact": "+49 69 4021 300"
+      },
+      {
+        "tag": "FL-02",
+        "name": "Piruni 2 · elektrik 2 t",
+        "type": "forklift",
+        "area": 0,
+        "crit": "A",
+        "supplier": "Liftec Service",
+        "contact": "+49 69 4021 300"
+      },
+      {
+        "tag": "FL-03",
+        "name": "Piruni 3 · elektrik 1,6 t",
+        "type": "forklift",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Truckline Service",
+        "contact": "+49 69 5550 120"
+      },
+      {
+        "tag": "FL-04",
+        "name": "Piruni 4 · elektrik 1,6 t",
+        "type": "forklift",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Truckline Service",
+        "contact": "+49 69 5550 120"
+      },
+      {
+        "tag": "SRT-01",
+        "name": "Sorteri i pakove",
+        "type": "sorter",
+        "area": 1,
+        "crit": "A",
+        "supplier": "Sortline Service",
+        "contact": "service@sortline.example"
+      },
+      {
+        "tag": "CV-01",
+        "name": "Rripi i hyrjes",
+        "type": "conveyor",
+        "area": 0,
+        "crit": "A",
+        "supplier": "Sortline Service",
+        "contact": "service@sortline.example"
+      },
+      {
+        "tag": "CV-02",
+        "name": "Rripi i daljes",
+        "type": "conveyor",
+        "area": 2,
+        "crit": "A",
+        "supplier": "Sortline Service",
+        "contact": "service@sortline.example"
+      },
+      {
+        "tag": "DD-01",
+        "name": "Dera e rampës 1",
+        "type": "dock-door",
+        "area": 0,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-02",
+        "name": "Dera e rampës 2",
+        "type": "dock-door",
+        "area": 0,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-03",
+        "name": "Dera e rampës 3",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-04",
+        "name": "Dera e rampës 4",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "B",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-05",
+        "name": "Dera e rampës 5",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "C",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "DD-06",
+        "name": "Dera e rampës 6",
+        "type": "dock-door",
+        "area": 2,
+        "crit": "C",
+        "supplier": "Doorwerk Service",
+        "contact": "+49 69 7788 10"
+      },
+      {
+        "tag": "FE-ALL",
+        "name": "Fikëset (24)",
+        "type": "fire-extinguisher",
+        "area": 3,
+        "crit": "A",
+        "supplier": "Brandschutz Main",
+        "contact": "+49 69 3300 44"
+      }
+    ],
+    "meters": {
+      "FL-01": 4120,
+      "FL-02": 3870,
+      "FL-03": 6210,
+      "FL-04": 2950
+    },
+    "rates": {
+      "FL-01": 9,
+      "FL-02": 8,
+      "FL-03": 7,
+      "FL-04": 6
+    },
+    "overdue": {
+      "FL-02|3": 12,
+      "SRT-01|0": 3,
+      "FE-ALL|0": 6,
+      "DD-04|0": 9
+    },
+    "postponed": [
+      {
+        "task": "CV-01|2",
+        "due": 4,
+        "days": 6,
+        "reason": 0
+      }
+    ],
+    "reasons": [
+      "Tekniku i furnitorit vjen javën e ardhshme"
+    ],
+    "breakdowns": [
+      [
+        80,
+        "SRT-01",
+        95,
+        "sensor",
+        0,
+        0
+      ],
+      [
+        52,
+        "SRT-01",
+        40,
+        "jam",
+        0,
+        1
+      ],
+      [
+        30,
+        "SRT-01",
+        120,
+        "sensor",
+        180,
+        2
+      ],
+      [
+        6,
+        "SRT-01",
+        75,
+        "sensor",
+        0,
+        0
+      ],
+      [
+        66,
+        "FL-03",
+        240,
+        "hydraulic",
+        320,
+        3
+      ],
+      [
+        41,
+        "FL-03",
+        90,
+        "battery",
+        0,
+        4
+      ],
+      [
+        19,
+        "FL-03",
+        180,
+        "hydraulic",
+        410,
+        3
+      ],
+      [
+        35,
+        "CV-02",
+        150,
+        "wear",
+        260,
+        5
+      ],
+      [
+        12,
+        "CV-02",
+        30,
+        "jam",
+        0,
+        1
+      ],
+      [
+        58,
+        "DD-04",
+        480,
+        "damage",
+        1150,
+        6
+      ],
+      [
+        14,
+        "DD-04",
+        300,
+        "damage",
+        640,
+        6
+      ],
+      [
+        27,
+        "FL-01",
+        60,
+        "operator",
+        0,
+        7
+      ]
+    ],
+    "notes": [
+      "Fotocelula te rrëshqitësja 14 e pistë, sorteri u ndal me defekt",
+      "Pako shumë e madhe e ngecur te bashkimi i linjave",
+      "Fotocelula te rrëshqitësja 14 u zëvendësua",
+      "Cilindri i ngritjes rrjedh, tubi u zëvendësua",
+      "Bateria nuk u karikua natën, spina e karikuesit e lirë",
+      "Rripi i konsumuar te bashkimi, rripi u zëvendësua",
+      "Kamioni goditi panelin e derës gjatë afrimit, paneli u zëvendësua",
+      "Pirunët u ulën mbi buzën e një palete, kontroll i direkut nga furnitori"
+    ]
+  }
+}
