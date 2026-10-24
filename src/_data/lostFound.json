@@ -1,0 +1,182 @@
+{
+  "storageKey": "sc-lost-found",
+  "text": {
+    "tool": "Lost & Found",
+    "csv": "lost-and-found-register",
+    "entryLegend": "Log a found item",
+    "whatPlaceholder": "e.g. Black smartphone in a blue case, under the pillow",
+    "roomPlaceholder": "e.g. 412",
+    "foundByPlaceholder": "e.g. Housekeeping · Maria",
+    "tagPlaceholder": "e.g. 124",
+    "guestPlaceholder": "e.g. Mr J. Keller",
+    "guestPrivacy": "Only when the item clearly belongs to a guest. Write the name you need to return it, nothing more, and remove it once the case is closed.",
+    "mePlaceholder": "e.g. Elena · Front office",
+    "hotelPlaceholder": "e.g. Airport Hotel Frankfurt",
+    "hotelFallback": "the hotel",
+    "trackingPlaceholder": "e.g. DHL 0034 0434 1612 77",
+    "postagePlaceholder": "e.g. 6.99",
+    "pasteRow": "One row per item",
+    "pastePlaceholder": "2026-10-20\t13:10\tGuest room\t512\tClothing\tPair of trainers, size 43\tlow\tHousekeeping · Maria\tShelf B\t120\tMs K. Weber\tStored",
+    "empty": "No found items in the register yet.",
+    "whereRoom": "in room {room}",
+    "whereArea": "in the {area}",
+    "safeHint": "in the safe",
+    "rulesNote": "These are defaults, not the law. Your house rules and local law decide how long an item is kept and where it goes; in Germany a find worth more than 10 euros is reported to the lost property office (Fundbüro) of the town."
+  },
+  "areas": ["Guest room", "Lobby / reception", "Restaurant / bar", "Spa / fitness", "Parking / garage", "Meeting room", "Shuttle bus", "Back of house / dock", "Other"],
+  "places": ["Safe", "Shelf A", "Shelf B", "Luggage room", "Housekeeping office"],
+  "safe": "Safe",
+  "categories": [
+    { "key": "phone", "name": "Phone / electronics", "value": "high", "decision": "police" },
+    { "key": "documents", "name": "Documents / ID", "value": "high", "decision": "police", "days": true },
+    { "key": "wallet", "name": "Wallet / cards", "value": "high", "decision": "police", "days": true },
+    { "key": "keys", "name": "Keys", "value": "low", "decision": "destroyed" },
+    { "key": "jewellery", "name": "Jewellery / watch", "value": "high", "decision": "police" },
+    { "key": "clothing", "name": "Clothing", "value": "low", "decision": "charity" },
+    { "key": "bag", "name": "Bag / suitcase", "value": "medium", "decision": "charity" },
+    { "key": "glasses", "name": "Glasses", "value": "medium", "decision": "charity" },
+    { "key": "toy", "name": "Toy", "value": "low", "decision": "charity" },
+    { "key": "other", "name": "Other", "value": "low", "decision": "destroyed" }
+  ],
+  "values": { "low": "Low", "medium": "Medium", "high": "High" },
+  "statuses": {
+    "stored": "Stored",
+    "contacted": "Guest contacted",
+    "returned": "Returned",
+    "police": "Handed to the police (lost property office)",
+    "charity": "Given to charity",
+    "destroyed": "Destroyed"
+  },
+  "short": {
+    "stored": "Stored",
+    "contacted": "Contacted",
+    "returned": "Returned",
+    "police": "Police",
+    "charity": "Charity",
+    "destroyed": "Destroyed"
+  },
+  "stepButtons": {
+    "contacted": "Guest contacted",
+    "returned": "Returned",
+    "police": "Hand to the police",
+    "charity": "Give to charity",
+    "destroyed": "Destroy"
+  },
+  "returnHow": { "person": "In person", "post": "Sent by post" },
+  "paidBy": { "guest": "Guest", "hotel": "Hotel" },
+  "retention": { "low": 90, "medium": 90, "high": 180, "docs": 7 },
+  "followUpDays": 14,
+  "dueSoonDays": 7,
+  "postage": 6.99,
+  "replies": {
+    "email": {
+      "subject": "Subject: An item found at {hotel} ({id})",
+      "hello": "Dear {guest},",
+      "helloAnon": "Dear guest,",
+      "found": "Thank you for staying with us. Our team found an item {where} on {date} that may be yours: {item}.",
+      "post": "We can send it to you by tracked post for {postage}. Please reply with your postal address and we will send it within two working days.",
+      "postAsk": "We can also send it to you by post. Reply with your postal address and we will tell you the postage first.",
+      "collect": "You are also welcome to collect it at reception; please bring an ID.",
+      "keep": "We keep it safely for you until {until}.",
+      "ref": "Our reference: {id}",
+      "bye": "Kind regards,"
+    },
+    "whatsapp": {
+      "inline": true,
+      "hello": "Hello {guest},",
+      "helloAnon": "Hello,",
+      "found": "this is {hotel}. We found an item {where} on {date} that may be yours: {item}.",
+      "post": "We can send it by tracked post for {postage}. Just send us your address.",
+      "postAsk": "We can also send it by post: send us your address and we tell you the postage first.",
+      "collect": "Or collect it at reception with an ID.",
+      "keep": "We keep it until {until}.",
+      "ref": "Reference: {id}",
+      "bye": "Best regards,"
+    }
+  },
+  "advice": {
+    "Guest room": {
+      "meaning": "Most items are left in the room: chargers in the socket, clothes on the back of the door, things in the bedside drawer and in the safe. The guest is still in the building the evening before; tomorrow they are at the airport.",
+      "moves": [
+        "Ask \"Have you got everything, also from the safe and the sockets?\" at every check-out, and put it on the key card holder.",
+        "Housekeeping checks the safe, the drawers, the sockets and behind the door before the room is stripped, and hands finds to reception the same hour.",
+        "Call or write to the guest of the room the same day: a guest reached before the flight takes the item along, a guest reached after it pays the postage."
+      ],
+      "question": "Which spot in the room did we find the most items in this month, and does the check-out question name it?"
+    },
+    "Restaurant / bar": {
+      "meaning": "Glasses, scarves, phones and toys at breakfast and in the bar: the guest stands up in a hurry for the shuttle. The table number is the only clue to who it was.",
+      "moves": [
+        "Write the table and the time on the find; breakfast is often matched to the room through the table plan.",
+        "The service team hands finds to reception at the end of every service, not at the end of the week.",
+        "Put a small \"Found something?\" basket at the restaurant exit, emptied into the register twice a day."
+      ],
+      "question": "Who in the service team owns the finds of a service, and when do they reach reception?"
+    },
+    "Lobby / reception": {
+      "meaning": "Power banks, passports and bags left at the desk or on the sofas while the guest waits for a taxi or the shuttle. Many of these guests are still in the hotel or at the airport an hour later.",
+      "moves": [
+        "Check the desk, the sofas and the charging points at every shift change and log what is there.",
+        "A passport or ID found at the desk is checked against the arrivals and departures of the day first.",
+        "Keep the shuttle and taxi times next to the register: a guest who just left can still be reached at the terminal."
+      ],
+      "question": "Which items at the desk could have gone back the same hour, and what stopped it?"
+    },
+    "Shuttle bus": {
+      "meaning": "Documents and wallets slip out of pockets on the shuttle. They are high value and must be decided on fast, because the owner is often about to fly.",
+      "moves": [
+        "The driver checks the seats after every trip and calls reception straight away when there is a document or wallet.",
+        "Note the trip time on the find; the list of guests on that run is the fastest way to the owner.",
+        "Agree with the airport lost property office how documents found on the shuttle are passed on."
+      ],
+      "question": "How long does a passport found on the shuttle take to reach the safe, and who calls the guest?"
+    },
+    "default": {
+      "meaning": "One area gives most of the finds. That is where a simple check before the guest leaves saves the most calls, parcels and shelf space.",
+      "moves": [
+        "Add a one-line check to the routine of that area: look, take it to reception, log it.",
+        "Hand finds to reception within the hour, with the place and the time written on them.",
+        "Look at the area again in four weeks: fewer finds there is the result to aim for."
+      ],
+      "question": "What would make the guest take the item with them before they leave this area?"
+    }
+  },
+  "tips": [
+    ["Log it the moment it reaches reception.", "Date, time, where, who found it and a tag number on the item. An item without a tag number is an item nobody can find again."],
+    ["High value goes in the safe.", "Phones, documents, wallets, cards and jewellery: in the safe the same hour, with the tag number in the register and a photo."],
+    ["Contact the guest the same day.", "Most items go back while the guest is still in the hotel or at the airport. Copy the reply text, and send it by email or WhatsApp."],
+    ["Decide when an item is due.", "The list of items due for a decision shows what has passed its keep-until date. Documents go to the police within days, not months."],
+    ["Guest names are personal data.", "Write only what you need to return the item, and clear the names of closed cases. The register stays in this browser."]
+  ],
+  "example": {
+    "me": "Elena · Front office",
+    "hotel": "Airport Hotel (example)",
+    "rows": [
+      { "date": "2026-07-08", "time": "10:15", "area": "Guest room", "room": "221", "category": "clothing", "what": "Navy winter coat, size L", "value": "low", "foundBy": "Housekeeping · Agnieszka", "place": "Shelf B", "tag": "029", "guest": "", "steps": [["charity", "2026-10-15", "Elena"]] },
+      { "date": "2026-07-14", "time": "09:20", "area": "Guest room", "room": "214", "category": "clothing", "what": "Grey wool cardigan, size M", "value": "low", "foundBy": "Housekeeping · Agnieszka", "place": "Shelf B", "tag": "031", "guest": "", "steps": [] },
+      { "date": "2026-07-22", "time": "18:05", "area": "Restaurant / bar", "room": "", "category": "glasses", "what": "Reading glasses in a brown case", "value": "medium", "foundBy": "Service · Luca", "place": "Shelf A", "tag": "038", "guest": "", "steps": [] },
+      { "date": "2026-10-02", "time": "07:45", "area": "Guest room", "room": "412", "category": "phone", "what": "Black smartphone in a blue case, charger still in the socket", "value": "high", "foundBy": "Housekeeping · Maria", "place": "Safe", "tag": "101", "guest": "Mr J. Keller", "steps": [["contacted", "2026-10-02", "Elena"], ["returned", "2026-10-05", "Elena"]], "delivery": { "how": "post", "tracking": "DHL 0034 0434 1612 77", "postage": 6.99, "paidBy": "guest" } },
+      { "date": "2026-10-02", "time": "22:10", "area": "Lobby / reception", "room": "", "category": "documents", "what": "German passport", "value": "high", "foundBy": "Night audit · Tomasz", "place": "Safe", "tag": "102", "guest": "Ms A. Brandt", "steps": [["contacted", "2026-10-02", "Tomasz"], ["returned", "2026-10-03", "Elena"]], "delivery": { "how": "person" } },
+      { "date": "2026-10-03", "time": "11:30", "area": "Guest room", "room": "305", "category": "clothing", "what": "Child's red rain jacket", "value": "low", "foundBy": "Housekeeping · Maria", "place": "Shelf B", "tag": "103", "guest": "Family Novak", "steps": [["contacted", "2026-10-03", "Elena"]] },
+      { "date": "2026-10-04", "time": "08:15", "area": "Restaurant / bar", "room": "", "category": "toy", "what": "White soft toy rabbit", "value": "low", "foundBy": "Service · Luca", "place": "Shelf A", "tag": "104", "guest": "", "steps": [] },
+      { "date": "2026-10-05", "time": "14:40", "area": "Meeting room", "room": "", "category": "phone", "what": "Laptop charger, USB-C, 65 W", "value": "medium", "foundBy": "Conference · Jana", "place": "Shelf A", "tag": "105", "guest": "", "steps": [] },
+      { "date": "2026-10-05", "time": "16:20", "area": "Shuttle bus", "room": "", "category": "documents", "what": "Polish ID card", "value": "high", "foundBy": "Driver · Ahmet", "place": "Safe", "tag": "106", "guest": "Mr P. Zielinski", "steps": [] },
+      { "date": "2026-10-06", "time": "10:05", "area": "Guest room", "room": "518", "category": "jewellery", "what": "Gold wedding ring, engraved inside", "value": "high", "foundBy": "Housekeeping · Agnieszka", "place": "Safe", "tag": "107", "guest": "Mrs S. Laurent", "steps": [["contacted", "2026-10-06", "Elena"], ["returned", "2026-10-09", "Elena"]], "delivery": { "how": "post", "tracking": "UPS 1Z 999 AA1 01 2345 6784", "postage": 14.9, "paidBy": "guest" } },
+      { "date": "2026-10-07", "time": "07:30", "area": "Parking / garage", "room": "", "category": "keys", "what": "Car key with a gym chip", "value": "medium", "foundBy": "Security · Dennis", "place": "Shelf A", "tag": "108", "guest": "", "steps": [["returned", "2026-10-07", "Tomasz"]], "delivery": { "how": "person" } },
+      { "date": "2026-10-08", "time": "12:50", "area": "Spa / fitness", "room": "", "category": "clothing", "what": "Swimsuit and goggles", "value": "low", "foundBy": "Spa · Lea", "place": "Shelf B", "tag": "109", "guest": "", "steps": [["destroyed", "2026-10-15", "Lea"]] },
+      { "date": "2026-10-09", "time": "09:00", "area": "Guest room", "room": "127", "category": "wallet", "what": "Brown leather wallet with two bank cards and 40 euros", "value": "high", "foundBy": "Housekeeping · Maria", "place": "Safe", "tag": "110", "guest": "Mr D. Okafor", "steps": [["contacted", "2026-10-09", "Elena"]] },
+      { "date": "2026-10-10", "time": "20:15", "area": "Restaurant / bar", "room": "", "category": "phone", "what": "Tablet in a black sleeve", "value": "high", "foundBy": "Service · Luca", "place": "Safe", "tag": "111", "guest": "Ms R. Hansen", "steps": [["contacted", "2026-10-11", "Elena"], ["returned", "2026-10-12", "Tomasz"]], "delivery": { "how": "person" } },
+      { "date": "2026-10-12", "time": "06:40", "area": "Guest room", "room": "609", "category": "clothing", "what": "White business shirt on a hanger", "value": "low", "foundBy": "Housekeeping · Agnieszka", "place": "Shelf B", "tag": "112", "guest": "", "steps": [] },
+      { "date": "2026-10-12", "time": "15:25", "area": "Lobby / reception", "room": "", "category": "bag", "what": "Black backpack with a laptop sleeve, empty", "value": "medium", "foundBy": "Bell desk · Marco", "place": "Luggage room", "tag": "113", "guest": "", "steps": [] },
+      { "date": "2026-10-13", "time": "10:10", "area": "Meeting room", "room": "", "category": "other", "what": "Notebook and pen with a company logo", "value": "low", "foundBy": "Conference · Jana", "place": "Shelf A", "tag": "114", "guest": "", "steps": [["returned", "2026-10-14", "Jana"]], "delivery": { "how": "person" } },
+      { "date": "2026-10-14", "time": "08:05", "area": "Guest room", "room": "233", "category": "phone", "what": "Smartwatch on a charging dock", "value": "high", "foundBy": "Housekeeping · Maria", "place": "Safe", "tag": "115", "guest": "Mr L. Rossi", "steps": [["contacted", "2026-10-14", "Elena"], ["returned", "2026-10-16", "Elena"]], "delivery": { "how": "post", "tracking": "DHL 0034 0434 1612 98", "postage": 6.99, "paidBy": "guest" } },
+      { "date": "2026-10-15", "time": "19:40", "area": "Restaurant / bar", "room": "", "category": "glasses", "what": "Black sunglasses", "value": "medium", "foundBy": "Service · Luca", "place": "Shelf A", "tag": "116", "guest": "", "steps": [] },
+      { "date": "2026-10-17", "time": "07:55", "area": "Guest room", "room": "404", "category": "documents", "what": "Boarding pass and a Turkish ID card", "value": "high", "foundBy": "Housekeeping · Agnieszka", "place": "Safe", "tag": "118", "guest": "Mr E. Yilmaz", "steps": [["contacted", "2026-10-17", "Elena"], ["police", "2026-10-22", "Elena"]] },
+      { "date": "2026-10-19", "time": "09:35", "area": "Spa / fitness", "room": "", "category": "jewellery", "what": "Silver bracelet", "value": "high", "foundBy": "Spa · Lea", "place": "Safe", "tag": "119", "guest": "", "steps": [] },
+      { "date": "2026-10-20", "time": "13:10", "area": "Guest room", "room": "512", "category": "clothing", "what": "Pair of trainers, size 43", "value": "low", "foundBy": "Housekeeping · Maria", "place": "Shelf B", "tag": "120", "guest": "Ms K. Weber", "steps": [["contacted", "2026-10-20", "Elena"]] },
+      { "date": "2026-10-21", "time": "21:45", "area": "Lobby / reception", "room": "", "category": "phone", "what": "Power bank with a cable", "value": "low", "foundBy": "Night audit · Tomasz", "place": "Shelf A", "tag": "121", "guest": "", "steps": [] },
+      { "date": "2026-10-22", "time": "08:20", "area": "Guest room", "room": "318", "category": "keys", "what": "House keys on a red lanyard", "value": "low", "foundBy": "Housekeeping · Agnieszka", "place": "Shelf A", "tag": "122", "guest": "Mr T. Schulz", "steps": [["contacted", "2026-10-22", "Elena"], ["returned", "2026-10-23", "Elena"]], "delivery": { "how": "post", "tracking": "Deutsche Post RR 1234 5678 9DE", "postage": 4.15, "paidBy": "guest" } },
+      { "date": "2026-10-23", "time": "07:10", "area": "Shuttle bus", "room": "", "category": "wallet", "what": "Card holder with a credit card and a hotel key card", "value": "high", "foundBy": "Driver · Ahmet", "place": "Safe", "tag": "123", "guest": "", "steps": [] }
+    ]
+  }
+}

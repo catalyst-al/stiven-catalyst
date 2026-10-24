@@ -270,5 +270,13 @@
     "summary": "Të gjitha projektet DMAIC në një faqe: faza, gjendja, pika e radhës e kalimit me listën e saj, ditët në fazë, sigma para dhe pas, dhe kursimet e planifikuara kundrejt atyre të realizuara. Çdo projekt mban kartën, SIPOC, pemën CTQ, RACI, Kano, RTY, COPQ dhe planin e kontrollit.",
     "url": "/sq/tools/project-portfolio/",
     "cta": "Hap portofolin"
+  },
+  {
+    "name": "Sendet e gjetura",
+    "type": "Hotel",
+    "time": "Vazhdimisht",
+    "summary": "Regjistri i sendeve të gjetura nga dorëzimi deri te kthimi, policia, bamirësia ose asgjësimi, me numër etikete, kasafortë dhe foto për secilin. Afatet e ruajtjes, sendet që presin vendim, vendet ku harrohet më shumë, një përgjigje për mysafirin dhe një etiketë.",
+    "url": "/sq/tools/lost-found/",
+    "cta": "Hap regjistrin"
   }
 ]

@@ -270,5 +270,13 @@
     "summary": "Alle DMAIC-Projekte auf einer Seite: Phase, Status, das nächste Tollgate mit Checkliste, Tage in der Phase, Sigma vorher und nachher und geplante gegen realisierte Einsparungen. Jedes Projekt behält Projektauftrag, SIPOC, CTQ-Baum, RACI, Kano, RTY, COPQ und Kontrollplan.",
     "url": "/de/tools/project-portfolio/",
     "cta": "Portfolio öffnen"
+  },
+  {
+    "name": "Fundsachen",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Das Register der Fundsachen von der Abgabe bis zur Rückgabe, zum Fundbüro, zur Spende oder zur Vernichtung, mit Etikettnummer, Safe und Foto für jede Sache. Aufbewahrungsfristen, fällige Entscheidungen, die Orte, an denen am meisten liegen bleibt, eine Antwort an den Gast und ein Etikett.",
+    "url": "/de/tools/lost-found/",
+    "cta": "Register öffnen"
   }
 ]

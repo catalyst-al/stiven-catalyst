@@ -1,0 +1,760 @@
+{
+  "storageKey": "sc-lost-found-sq",
+  "text": {
+    "tool": "Sendet e gjetura",
+    "csv": "regjistri-i-sendeve-te-gjetura",
+    "entryLegend": "Regjistro një send të gjetur",
+    "whatPlaceholder": "p.sh. Telefon i zi me këllëf blu, nën jastëk",
+    "roomPlaceholder": "p.sh. 412",
+    "foundByPlaceholder": "p.sh. Pastrimi i dhomave · Maria",
+    "tagPlaceholder": "p.sh. 124",
+    "guestPlaceholder": "p.sh. Z. J. Keller",
+    "guestPrivacy": "Vetëm kur sendi i përket qartë një mysafiri. Shkruaj emrin që të duhet për ta kthyer, asgjë më shumë, dhe fshije sapo rasti mbyllet.",
+    "mePlaceholder": "p.sh. Elena · Recepsioni",
+    "hotelPlaceholder": "p.sh. Airport Hotel Frankfurt",
+    "hotelFallback": "hoteli",
+    "trackingPlaceholder": "p.sh. DHL 0034 0434 1612 77",
+    "postagePlaceholder": "p.sh. 6,99",
+    "pasteRow": "Një rresht për çdo send",
+    "pastePlaceholder": "20.10.2026\t13:10\tDhoma e mysafirit\t512\tVeshje\tNjë palë atlete, numri 43\tulët\tPastrimi i dhomave · Maria\tRafti B\t120\tZnj. K. Weber\tI ruajtur",
+    "empty": "Ende nuk ka sende të gjetura në regjistër.",
+    "whereRoom": "në dhomën {room}",
+    "whereArea": "te {area}",
+    "safeHint": "në kasafortë",
+    "rulesNote": "Këto janë vlera fillestare, jo ligji. Sa kohë ruhet një send dhe ku shkon e vendosin rregullat e shtëpisë dhe ligji vendor; në Gjermani një send i gjetur me vlerë mbi 10 euro i njoftohet zyrës së sendeve të gjetura (Fundbüro) të qytetit."
+  },
+  "areas": [
+    "Dhoma e mysafirit",
+    "Holli / recepsioni",
+    "Restoranti / bari",
+    "Spa / palestra",
+    "Parkingu / garazhi",
+    "Salla e mbledhjeve",
+    "Autobusi i transferit",
+    "Pjesa e shërbimit / rampa",
+    "Tjetër"
+  ],
+  "places": [
+    "Kasaforta",
+    "Rafti A",
+    "Rafti B",
+    "Dhoma e bagazheve",
+    "Zyra e pastrimit"
+  ],
+  "safe": "Kasaforta",
+  "categories": [
+    {
+      "key": "phone",
+      "name": "Telefon / elektronikë",
+      "value": "high",
+      "decision": "police"
+    },
+    {
+      "key": "documents",
+      "name": "Dokumente / letërnjoftim",
+      "value": "high",
+      "decision": "police",
+      "days": true
+    },
+    {
+      "key": "wallet",
+      "name": "Portofol / karta",
+      "value": "high",
+      "decision": "police",
+      "days": true
+    },
+    {
+      "key": "keys",
+      "name": "Çelësa",
+      "value": "low",
+      "decision": "destroyed"
+    },
+    {
+      "key": "jewellery",
+      "name": "Bizhuteri / orë",
+      "value": "high",
+      "decision": "police"
+    },
+    {
+      "key": "clothing",
+      "name": "Veshje",
+      "value": "low",
+      "decision": "charity"
+    },
+    {
+      "key": "bag",
+      "name": "Çantë / valixhe",
+      "value": "medium",
+      "decision": "charity"
+    },
+    {
+      "key": "glasses",
+      "name": "Syze",
+      "value": "medium",
+      "decision": "charity"
+    },
+    {
+      "key": "toy",
+      "name": "Lodër",
+      "value": "low",
+      "decision": "charity"
+    },
+    {
+      "key": "other",
+      "name": "Tjetër",
+      "value": "low",
+      "decision": "destroyed"
+    }
+  ],
+  "values": {
+    "low": "E ulët",
+    "medium": "Mesatare",
+    "high": "E lartë"
+  },
+  "statuses": {
+    "stored": "I ruajtur",
+    "contacted": "Mysafiri u kontaktua",
+    "returned": "U kthye",
+    "police": "U dorëzua në polici (zyra e sendeve të gjetura)",
+    "charity": "U dhurua për bamirësi",
+    "destroyed": "U asgjësua"
+  },
+  "short": {
+    "stored": "I ruajtur",
+    "contacted": "Kontaktuar",
+    "returned": "U kthye",
+    "police": "Policia",
+    "charity": "Bamirësi",
+    "destroyed": "Asgjësuar"
+  },
+  "stepButtons": {
+    "contacted": "Mysafiri u kontaktua",
+    "returned": "U kthye",
+    "police": "Dorëzoje në polici",
+    "charity": "Dhuroje për bamirësi",
+    "destroyed": "Asgjësoje"
+  },
+  "returnHow": {
+    "person": "Dorazi",
+    "post": "U dërgua me postë"
+  },
+  "paidBy": {
+    "guest": "Mysafiri",
+    "hotel": "Hoteli"
+  },
+  "retention": {
+    "low": 90,
+    "medium": 90,
+    "high": 180,
+    "docs": 7
+  },
+  "followUpDays": 14,
+  "dueSoonDays": 7,
+  "postage": 6.99,
+  "replies": {
+    "email": {
+      "subject": "Subjekti: Një send i gjetur – {hotel} ({id})",
+      "hello": "I/E nderuar {guest},",
+      "helloAnon": "I/E nderuar mysafir,",
+      "found": "Ju faleminderit që qëndruat te ne. Ekipi ynë gjeti më {date} {where} një send që mund të jetë juaji: {item}.",
+      "post": "Mund t'jua dërgojmë me postë me gjurmim për {postage}. Ju lutemi na ktheni përgjigje me adresën tuaj postare dhe do ta dërgojmë brenda dy ditëve pune.",
+      "postAsk": "Mund t'jua dërgojmë edhe me postë. Na ktheni përgjigje me adresën tuaj postare dhe do t'ju themi më parë koston e postës.",
+      "collect": "Mund ta merrni edhe vetë në recepsion; ju lutemi sillni një dokument identifikimi.",
+      "keep": "E ruajmë të sigurt për ju deri më {until}.",
+      "ref": "Referenca jonë: {id}",
+      "bye": "Me respekt,"
+    },
+    "whatsapp": {
+      "inline": true,
+      "hello": "Përshëndetje {guest},",
+      "helloAnon": "Përshëndetje,",
+      "found": "ju shkruan {hotel}. Gjetëm më {date} {where} një send që mund të jetë juaji: {item}.",
+      "post": "Mund ta dërgojmë me postë me gjurmim për {postage}. Na dërgoni vetëm adresën tuaj.",
+      "postAsk": "Mund ta dërgojmë edhe me postë: na dërgoni adresën dhe ju themi më parë koston e postës.",
+      "collect": "Ose merreni në recepsion me një dokument identifikimi.",
+      "keep": "E ruajmë deri më {until}.",
+      "ref": "Referenca: {id}",
+      "bye": "Përshëndetje të përzemërta,"
+    }
+  },
+  "advice": {
+    "Dhoma e mysafirit": {
+      "meaning": "Shumica e sendeve mbeten në dhomë: karikuesit në prizë, rrobat pas derës, gjërat në sirtarin e komodinës dhe në kasafortë. Mbrëmjen më parë mysafiri është ende në hotel; të nesërmen është në aeroport.",
+      "moves": [
+        "Në çdo check-out pyet: \"I keni marrë të gjitha, edhe nga kasaforta dhe prizat?\", dhe shkruaje te mbajtësja e kartës së dhomës.",
+        "Pastrimi i dhomave kontrollon kasafortën, sirtarët, prizat dhe pas derës para se të hiqen çarçafët, dhe i çon sendet në recepsion brenda së njëjtës orë.",
+        "Telefonoji ose shkruaji mysafirit të dhomës po atë ditë: mysafiri që merret para fluturimit e merr sendin me vete, ai që merret pas paguan postën."
+      ],
+      "question": "Në cilin vend të dhomës gjetëm më shumë sende këtë muaj, dhe a e përmend pyetja e check-out-it?"
+    },
+    "Restoranti / bari": {
+      "meaning": "Syze, shalle, telefona dhe lodra në mëngjes dhe në bar: mysafiri ngrihet me nxitim për transferin. Numri i tavolinës është i vetmi tregues se kush ishte.",
+      "moves": [
+        "Shëno tavolinën dhe orën te sendi; në mëngjes tavolina shpesh lidhet me dhomën përmes planit të tavolinave.",
+        "Ekipi i shërbimit i çon sendet në recepsion në fund të çdo shërbimi, jo në fund të javës.",
+        "Vendos një shportë të vogël \"Gjetët diçka?\" te dalja e restorantit, që zbrazet në regjistër dy herë në ditë."
+      ],
+      "question": "Kush në ekipin e shërbimit përgjigjet për sendet e një shërbimi, dhe kur arrijnë ato në recepsion?"
+    },
+    "Holli / recepsioni": {
+      "meaning": "Bateri të jashtme, pasaporta dhe çanta mbeten te banaku ose në divane ndërsa mysafiri pret taksinë ose transferin. Shumë nga këta mysafirë janë ende në hotel ose në aeroport një orë më vonë.",
+      "moves": [
+        "Kontrollo banakun, divanet dhe pikat e karikimit në çdo ndërrim turni dhe regjistro çfarë ka aty.",
+        "Një pasaportë ose letërnjoftim i gjetur te banaku krahasohet së pari me mbërritjet dhe largimet e ditës.",
+        "Mbaj oraret e transferit dhe të taksive pranë regjistrit: një mysafir që sapo u largua mund të gjendet ende në terminal."
+      ],
+      "question": "Cilat sende nga banaku mund të ishin kthyer brenda së njëjtës orë, dhe çfarë e pengoi?"
+    },
+    "Autobusi i transferit": {
+      "meaning": "Dokumentet dhe portofolat rrëshqasin nga xhepat në transfer. Kanë vlerë të lartë dhe duan vendim të shpejtë, sepse pronari shpesh është gati të fluturojë.",
+      "moves": [
+        "Shoferi kontrollon ndenjëset pas çdo udhëtimi dhe telefonon menjëherë recepsionin kur gjen një dokument ose portofol.",
+        "Shëno orën e udhëtimit te sendi; lista e mysafirëve të atij udhëtimi është rruga më e shpejtë te pronari.",
+        "Bie dakord me zyrën e sendeve të gjetura të aeroportit si dorëzohen dokumentet e gjetura në transfer."
+      ],
+      "question": "Sa kohë i duhet një pasaporte të gjetur në transfer për të arritur në kasafortë, dhe kush e telefonon mysafirin?"
+    },
+    "default": {
+      "meaning": "Një zonë jep shumicën e sendeve të gjetura. Aty një kontroll i thjeshtë para se mysafiri të largohet kursen më shumë telefonata, pako dhe vend në raft.",
+      "moves": [
+        "Shto një kontroll me një rresht në rutinën e asaj zone: shiko, çoje në recepsion, regjistroje.",
+        "Çoji sendet në recepsion brenda një ore, me vendin dhe orën të shkruara mbi to.",
+        "Shiko sërish zonën pas katër javësh: më pak sende të gjetura aty është rezultati që synohet."
+      ],
+      "question": "Çfarë do ta bënte mysafirin ta merrte sendin me vete para se të largohet nga kjo zonë?"
+    }
+  },
+  "tips": [
+    [
+      "Regjistroje sapo arrin në recepsion.",
+      "Data, ora, vendi, kush e gjeti dhe një numër etikete mbi send. Një send pa numër etikete nuk e gjen dot më askush."
+    ],
+    [
+      "Sendet me vlerë të lartë shkojnë në kasafortë.",
+      "Telefonat, dokumentet, portofolat, kartat dhe bizhuteritë: në kasafortë brenda së njëjtës orë, me numrin e etiketës në regjistër dhe një foto."
+    ],
+    [
+      "Kontakto mysafirin po atë ditë.",
+      "Shumica e sendeve kthehen sa mysafiri është ende në hotel ose në aeroport. Kopjo tekstin e përgjigjes dhe dërgoje me email ose WhatsApp."
+    ],
+    [
+      "Vendos kur sendit i vjen afati.",
+      "Lista e sendeve që presin vendim tregon çfarë e ka kaluar afatin e ruajtjes. Dokumentet shkojnë në polici brenda ditësh, jo muajsh."
+    ],
+    [
+      "Emrat e mysafirëve janë të dhëna personale.",
+      "Shkruaj vetëm atë që të duhet për ta kthyer sendin dhe fshi emrat e rasteve të mbyllura. Regjistri mbetet në këtë shfletues."
+    ]
+  ],
+  "example": {
+    "me": "Elena · Recepsioni",
+    "hotel": "Airport Hotel (shembull)",
+    "rows": [
+      {
+        "date": "2026-07-08",
+        "time": "10:15",
+        "area": "Dhoma e mysafirit",
+        "room": "221",
+        "category": "clothing",
+        "what": "Pallto dimri blu e errët, masa L",
+        "value": "low",
+        "foundBy": "Pastrimi i dhomave · Agnieszka",
+        "place": "Rafti B",
+        "tag": "029",
+        "guest": "",
+        "steps": [
+          [
+            "charity",
+            "2026-10-15",
+            "Elena"
+          ]
+        ]
+      },
+      {
+        "date": "2026-07-14",
+        "time": "09:20",
+        "area": "Dhoma e mysafirit",
+        "room": "214",
+        "category": "clothing",
+        "what": "Xhaketë leshi gri, masa M",
+        "value": "low",
+        "foundBy": "Pastrimi i dhomave · Agnieszka",
+        "place": "Rafti B",
+        "tag": "031",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-07-22",
+        "time": "18:05",
+        "area": "Restoranti / bari",
+        "room": "",
+        "category": "glasses",
+        "what": "Syze leximi në një kuti kafe",
+        "value": "medium",
+        "foundBy": "Shërbimi · Luca",
+        "place": "Rafti A",
+        "tag": "038",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-02",
+        "time": "07:45",
+        "area": "Dhoma e mysafirit",
+        "room": "412",
+        "category": "phone",
+        "what": "Telefon i zi me këllëf blu, karikuesi ende në prizë",
+        "value": "high",
+        "foundBy": "Pastrimi i dhomave · Maria",
+        "place": "Kasaforta",
+        "tag": "101",
+        "guest": "Z. J. Keller",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-02",
+            "Elena"
+          ],
+          [
+            "returned",
+            "2026-10-05",
+            "Elena"
+          ]
+        ],
+        "delivery": {
+          "how": "post",
+          "tracking": "DHL 0034 0434 1612 77",
+          "postage": 6.99,
+          "paidBy": "guest"
+        }
+      },
+      {
+        "date": "2026-10-02",
+        "time": "22:10",
+        "area": "Holli / recepsioni",
+        "room": "",
+        "category": "documents",
+        "what": "Pasaportë gjermane",
+        "value": "high",
+        "foundBy": "Auditi i natës · Tomasz",
+        "place": "Kasaforta",
+        "tag": "102",
+        "guest": "Znj. A. Brandt",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-02",
+            "Tomasz"
+          ],
+          [
+            "returned",
+            "2026-10-03",
+            "Elena"
+          ]
+        ],
+        "delivery": {
+          "how": "person"
+        }
+      },
+      {
+        "date": "2026-10-03",
+        "time": "11:30",
+        "area": "Dhoma e mysafirit",
+        "room": "305",
+        "category": "clothing",
+        "what": "Xhaketë shiu e kuqe për fëmijë",
+        "value": "low",
+        "foundBy": "Pastrimi i dhomave · Maria",
+        "place": "Rafti B",
+        "tag": "103",
+        "guest": "Familja Novak",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-03",
+            "Elena"
+          ]
+        ]
+      },
+      {
+        "date": "2026-10-04",
+        "time": "08:15",
+        "area": "Restoranti / bari",
+        "room": "",
+        "category": "toy",
+        "what": "Lepur pelushi i bardhë",
+        "value": "low",
+        "foundBy": "Shërbimi · Luca",
+        "place": "Rafti A",
+        "tag": "104",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-05",
+        "time": "14:40",
+        "area": "Salla e mbledhjeve",
+        "room": "",
+        "category": "phone",
+        "what": "Karikues laptopi, USB-C, 65 W",
+        "value": "medium",
+        "foundBy": "Konferencat · Jana",
+        "place": "Rafti A",
+        "tag": "105",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-05",
+        "time": "16:20",
+        "area": "Autobusi i transferit",
+        "room": "",
+        "category": "documents",
+        "what": "Letërnjoftim polak",
+        "value": "high",
+        "foundBy": "Shoferi · Ahmet",
+        "place": "Kasaforta",
+        "tag": "106",
+        "guest": "Z. P. Zielinski",
+        "steps": []
+      },
+      {
+        "date": "2026-10-06",
+        "time": "10:05",
+        "area": "Dhoma e mysafirit",
+        "room": "518",
+        "category": "jewellery",
+        "what": "Unazë martese prej ari, e gdhendur nga brenda",
+        "value": "high",
+        "foundBy": "Pastrimi i dhomave · Agnieszka",
+        "place": "Kasaforta",
+        "tag": "107",
+        "guest": "Znj. S. Laurent",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-06",
+            "Elena"
+          ],
+          [
+            "returned",
+            "2026-10-09",
+            "Elena"
+          ]
+        ],
+        "delivery": {
+          "how": "post",
+          "tracking": "UPS 1Z 999 AA1 01 2345 6784",
+          "postage": 14.9,
+          "paidBy": "guest"
+        }
+      },
+      {
+        "date": "2026-10-07",
+        "time": "07:30",
+        "area": "Parkingu / garazhi",
+        "room": "",
+        "category": "keys",
+        "what": "Çelës makine me çip palestre",
+        "value": "medium",
+        "foundBy": "Siguria · Dennis",
+        "place": "Rafti A",
+        "tag": "108",
+        "guest": "",
+        "steps": [
+          [
+            "returned",
+            "2026-10-07",
+            "Tomasz"
+          ]
+        ],
+        "delivery": {
+          "how": "person"
+        }
+      },
+      {
+        "date": "2026-10-08",
+        "time": "12:50",
+        "area": "Spa / palestra",
+        "room": "",
+        "category": "clothing",
+        "what": "Rroba banje dhe syze noti",
+        "value": "low",
+        "foundBy": "Spa · Lea",
+        "place": "Rafti B",
+        "tag": "109",
+        "guest": "",
+        "steps": [
+          [
+            "destroyed",
+            "2026-10-15",
+            "Lea"
+          ]
+        ]
+      },
+      {
+        "date": "2026-10-09",
+        "time": "09:00",
+        "area": "Dhoma e mysafirit",
+        "room": "127",
+        "category": "wallet",
+        "what": "Portofol lëkure kafe me dy karta bankare dhe 40 euro",
+        "value": "high",
+        "foundBy": "Pastrimi i dhomave · Maria",
+        "place": "Kasaforta",
+        "tag": "110",
+        "guest": "Z. D. Okafor",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-09",
+            "Elena"
+          ]
+        ]
+      },
+      {
+        "date": "2026-10-10",
+        "time": "20:15",
+        "area": "Restoranti / bari",
+        "room": "",
+        "category": "phone",
+        "what": "Tablet në një këllëf të zi",
+        "value": "high",
+        "foundBy": "Shërbimi · Luca",
+        "place": "Kasaforta",
+        "tag": "111",
+        "guest": "Znj. R. Hansen",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-11",
+            "Elena"
+          ],
+          [
+            "returned",
+            "2026-10-12",
+            "Tomasz"
+          ]
+        ],
+        "delivery": {
+          "how": "person"
+        }
+      },
+      {
+        "date": "2026-10-12",
+        "time": "06:40",
+        "area": "Dhoma e mysafirit",
+        "room": "609",
+        "category": "clothing",
+        "what": "Këmishë e bardhë pune në varëse",
+        "value": "low",
+        "foundBy": "Pastrimi i dhomave · Agnieszka",
+        "place": "Rafti B",
+        "tag": "112",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-12",
+        "time": "15:25",
+        "area": "Holli / recepsioni",
+        "room": "",
+        "category": "bag",
+        "what": "Çantë shpine e zezë me vend për laptop, bosh",
+        "value": "medium",
+        "foundBy": "Portieri · Marco",
+        "place": "Dhoma e bagazheve",
+        "tag": "113",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-13",
+        "time": "10:10",
+        "area": "Salla e mbledhjeve",
+        "room": "",
+        "category": "other",
+        "what": "Bllok shënimesh dhe stilolaps me logon e një kompanie",
+        "value": "low",
+        "foundBy": "Konferencat · Jana",
+        "place": "Rafti A",
+        "tag": "114",
+        "guest": "",
+        "steps": [
+          [
+            "returned",
+            "2026-10-14",
+            "Jana"
+          ]
+        ],
+        "delivery": {
+          "how": "person"
+        }
+      },
+      {
+        "date": "2026-10-14",
+        "time": "08:05",
+        "area": "Dhoma e mysafirit",
+        "room": "233",
+        "category": "phone",
+        "what": "Orë inteligjente në bazën e karikimit",
+        "value": "high",
+        "foundBy": "Pastrimi i dhomave · Maria",
+        "place": "Kasaforta",
+        "tag": "115",
+        "guest": "Z. L. Rossi",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-14",
+            "Elena"
+          ],
+          [
+            "returned",
+            "2026-10-16",
+            "Elena"
+          ]
+        ],
+        "delivery": {
+          "how": "post",
+          "tracking": "DHL 0034 0434 1612 98",
+          "postage": 6.99,
+          "paidBy": "guest"
+        }
+      },
+      {
+        "date": "2026-10-15",
+        "time": "19:40",
+        "area": "Restoranti / bari",
+        "room": "",
+        "category": "glasses",
+        "what": "Syze dielli të zeza",
+        "value": "medium",
+        "foundBy": "Shërbimi · Luca",
+        "place": "Rafti A",
+        "tag": "116",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-17",
+        "time": "07:55",
+        "area": "Dhoma e mysafirit",
+        "room": "404",
+        "category": "documents",
+        "what": "Kartë imbarkimi dhe një letërnjoftim turk",
+        "value": "high",
+        "foundBy": "Pastrimi i dhomave · Agnieszka",
+        "place": "Kasaforta",
+        "tag": "118",
+        "guest": "Z. E. Yilmaz",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-17",
+            "Elena"
+          ],
+          [
+            "police",
+            "2026-10-22",
+            "Elena"
+          ]
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "time": "09:35",
+        "area": "Spa / palestra",
+        "room": "",
+        "category": "jewellery",
+        "what": "Byzylyk argjendi",
+        "value": "high",
+        "foundBy": "Spa · Lea",
+        "place": "Kasaforta",
+        "tag": "119",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-20",
+        "time": "13:10",
+        "area": "Dhoma e mysafirit",
+        "room": "512",
+        "category": "clothing",
+        "what": "Një palë atlete, numri 43",
+        "value": "low",
+        "foundBy": "Pastrimi i dhomave · Maria",
+        "place": "Rafti B",
+        "tag": "120",
+        "guest": "Znj. K. Weber",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-20",
+            "Elena"
+          ]
+        ]
+      },
+      {
+        "date": "2026-10-21",
+        "time": "21:45",
+        "area": "Holli / recepsioni",
+        "room": "",
+        "category": "phone",
+        "what": "Bateri e jashtme me kabllo",
+        "value": "low",
+        "foundBy": "Auditi i natës · Tomasz",
+        "place": "Rafti A",
+        "tag": "121",
+        "guest": "",
+        "steps": []
+      },
+      {
+        "date": "2026-10-22",
+        "time": "08:20",
+        "area": "Dhoma e mysafirit",
+        "room": "318",
+        "category": "keys",
+        "what": "Çelësa shtëpie në një varëse të kuqe",
+        "value": "low",
+        "foundBy": "Pastrimi i dhomave · Agnieszka",
+        "place": "Rafti A",
+        "tag": "122",
+        "guest": "Z. T. Schulz",
+        "steps": [
+          [
+            "contacted",
+            "2026-10-22",
+            "Elena"
+          ],
+          [
+            "returned",
+            "2026-10-23",
+            "Elena"
+          ]
+        ],
+        "delivery": {
+          "how": "post",
+          "tracking": "Deutsche Post RR 1234 5678 9DE",
+          "postage": 4.15,
+          "paidBy": "guest"
+        }
+      },
+      {
+        "date": "2026-10-23",
+        "time": "07:10",
+        "area": "Autobusi i transferit",
+        "room": "",
+        "category": "wallet",
+        "what": "Kartëmbajtëse me një kartë krediti dhe një kartë dhome hoteli",
+        "value": "high",
+        "foundBy": "Shoferi · Ahmet",
+        "place": "Kasaforta",
+        "tag": "123",
+        "guest": "",
+        "steps": []
+      }
+    ]
+  }
+}

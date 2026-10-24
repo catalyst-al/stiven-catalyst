@@ -18,7 +18,8 @@
       "/tools/action-tracker/",
       "/tools/daily-board/",
       "/tools/five-s-audit/",
-      "/tools/safety-cross/"
+      "/tools/safety-cross/",
+      "/tools/lost-found/"
     ],
     "learn": [],
     "also": [
@@ -85,6 +86,11 @@
         "when": "Start of shift",
         "do": "Log what happened yesterday, read the talk of the day at the briefing and ask who saw a near miss.",
         "tool": "/tools/safety-cross/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Log every item handed in with its tag number, contact the guest the same day and clear the items due for a decision before the shift ends.",
+        "tool": "/tools/lost-found/"
       }
     ],
     "next": "zenith"

@@ -1,0 +1,271 @@
+{#- Lost & Found: the register of found items, from hand-in to return, police, charity or destruction, with the keep-until rules, the reply to the guest and the tag label; lost-found.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout lf-setup">
+  <div class="tool-panel" data-lost-found>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ t.entryLegend }}</legend>
+        <p class="form-note lf-new-id">{{ "Item ID" | t(lang) }}: <strong data-new-id></strong></p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="lf-date">{{ "Date found" | t(lang) }}</label>
+            <input id="lf-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="lf-time">{{ "Time" | t(lang) }}</label>
+            <input id="lf-time" name="time" type="time">
+          </div>
+          <div class="field">
+            <label for="lf-area">{{ "Area" | t(lang) }}</label>
+            <select id="lf-area" name="area">
+              {%- for area in cfg.areas %}
+              <option>{{ area }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="lf-room">{{ "Room number" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="lf-room" name="room" inputmode="numeric" placeholder="{{ t.roomPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="lf-category">{{ "Category" | t(lang) }}</label>
+            <select id="lf-category" name="category">
+              {%- for item in cfg.categories %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="lf-value">{{ "Value" | t(lang) }}</label>
+            <select id="lf-value" name="valueClass">
+              {%- for key, name in cfg.values %}
+              <option value="{{ key }}">{{ name }}{% if key == "high" %} · {{ t.safeHint }}{% endif %}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="lf-what">{{ "Description" | t(lang) }}</label>
+            <input id="lf-what" name="what" placeholder="{{ t.whatPlaceholder }}" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="lf-found-by">{{ "Found by" | t(lang) }}</label>
+            <input id="lf-found-by" name="foundBy" placeholder="{{ t.foundByPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="lf-place">{{ "Stored in" | t(lang) }}</label>
+            <select id="lf-place" name="place">
+              {%- for place in cfg.places %}
+              <option>{{ place }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="lf-tag">{{ "Tag number" | t(lang) }}</label>
+            <input id="lf-tag" name="tag" placeholder="{{ t.tagPlaceholder }}" autocomplete="off" data-scan>
+          </div>
+          <div class="field dl-wide">
+            <label for="lf-guest">{{ "Guest name, if known" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="lf-guest" name="guest" placeholder="{{ t.guestPlaceholder }}" autocomplete="off" aria-describedby="lf-guest-note">
+            <span class="form-note" id="lf-guest-note">{{ t.guestPrivacy }}</span>
+          </div>
+        </div>
+        <div class="lf-entry-photos" data-entry-photos></div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to register" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "time" | t(lang) }}, {{ "area" | t(lang) }}, {{ "room" | t(lang) }}, {{ "category" | t(lang) }}, {{ "description" | t(lang) }}, {{ "value (low, medium, high)" | t(lang) }}, {{ "found by" | t(lang) }}, {{ "stored in" | t(lang) }}, {{ "tag number" | t(lang) }}, {{ "guest" | t(lang) }}, {{ "status" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="lf-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="lf-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date","time","area","room","category","what","value","foundBy","place","tag","guest","status"]' data-column-labels='[{{ "date" | t(lang) | dump }},{{ "time" | t(lang) | dump }},{{ "area" | t(lang) | dump }},{{ "room" | t(lang) | dump }},{{ "category" | t(lang) | dump }},{{ "description" | t(lang) | dump }},{{ "value (low, medium, high)" | t(lang) | dump }},{{ "found by" | t(lang) | dump }},{{ "stored in" | t(lang) | dump }},{{ "tag number" | t(lang) | dump }},{{ "guest" | t(lang) | dump }},{{ "status" | t(lang) | dump }}]'></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Settings" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="lf-me">{{ "Your name, for the history" | t(lang) }}</label>
+          <input id="lf-me" name="me" placeholder="{{ t.mePlaceholder }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="lf-hotel">{{ "Hotel name, for the guest reply" | t(lang) }}</label>
+          <input id="lf-hotel" name="hotel" placeholder="{{ t.hotelPlaceholder }}" autocomplete="off" data-setting>
+        </div>
+      </div>
+      <p class="kicker lf-rules-head">{{ "Keep items for (days)" | t(lang) }}</p>
+      <div class="dl-grid lf-rules-grid">
+        <div class="field">
+          <label for="lf-ret-low">{{ "Low value" | t(lang) }}</label>
+          <input id="lf-ret-low" name="retLow" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.retention.low }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="lf-ret-medium">{{ "Medium value" | t(lang) }}</label>
+          <input id="lf-ret-medium" name="retMedium" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.retention.medium }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="lf-ret-high">{{ "High value" | t(lang) }}</label>
+          <input id="lf-ret-high" name="retHigh" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.retention.high }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="lf-ret-docs">{{ "Documents and cards" | t(lang) }}</label>
+          <input id="lf-ret-docs" name="retDocs" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.retention.docs }}" data-setting>
+        </div>
+      </div>
+      <p class="form-note">{{ "Empty boxes use the defaults shown." | t(lang) }} {{ t.rulesNote }}</p>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Register" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table lf-table">
+          <thead>
+            <tr><th scope="col">{{ "ID" | t(lang) }}</th><th scope="col">{{ "Found" | t(lang) }}</th><th scope="col">{{ "Where" | t(lang) }}</th><th scope="col">{{ "Category" | t(lang) }}</th><th scope="col">{{ "Description" | t(lang) }}</th><th scope="col">{{ "Value" | t(lang) }}</th><th scope="col">{{ "Stored in" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example register" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-forget>{{ "Remove guest names of closed items" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box lf-item" data-item-box id="lf-item" tabindex="-1">
+      <p class="kicker">4 · {{ "Item: next step, reply and tag label" | t(lang) }}</p>
+      <p class="form-note" data-item-empty>{{ "Pick an item in the register with Open, or add one above." | t(lang) }}</p>
+      <div data-item-parts hidden>
+        <div class="field">
+          <label for="lf-pick">{{ "Item" | t(lang) }}</label>
+          <select id="lf-pick" name="pick"></select>
+        </div>
+        <div class="lf-item-card" data-item-card aria-live="polite"></div>
+
+        <form class="lf-step" data-step novalidate>
+          <fieldset>
+            <legend class="result-label">{{ "Next step" | t(lang) }}</legend>
+            <div class="dl-grid">
+              <div class="field">
+                <label for="lf-step">{{ "Status" | t(lang) }}</label>
+                <select id="lf-step" name="step">
+                  {%- for key, name in cfg.statuses %}{% if key != "stored" %}
+                  <option value="{{ key }}">{{ name }}</option>
+                  {%- endif %}{% endfor %}
+                </select>
+              </div>
+              <div class="field">
+                <label for="lf-step-date">{{ "Date" | t(lang) }}</label>
+                <input id="lf-step-date" name="stepDate" type="date">
+              </div>
+              <div class="field">
+                <label for="lf-step-by">{{ "Who" | t(lang) }}</label>
+                <input id="lf-step-by" name="stepBy" placeholder="{{ t.mePlaceholder }}" autocomplete="off">
+              </div>
+            </div>
+            <div class="dl-grid" data-return-fields hidden>
+              <div class="field">
+                <label for="lf-how">{{ "Returned how" | t(lang) }}</label>
+                <select id="lf-how" name="how">
+                  {%- for key, name in cfg.returnHow %}
+                  <option value="{{ key }}">{{ name }}</option>
+                  {%- endfor %}
+                </select>
+              </div>
+              <div class="field" data-post-field hidden>
+                <label for="lf-tracking">{{ "Tracking number" | t(lang) }}</label>
+                <input id="lf-tracking" name="tracking" placeholder="{{ t.trackingPlaceholder }}" autocomplete="off">
+              </div>
+              <div class="field" data-post-field hidden>
+                <label for="lf-step-postage">{{ "Postage (€)" | t(lang) }}</label>
+                <input id="lf-step-postage" name="stepPostage" inputmode="decimal" placeholder="{{ t.postagePlaceholder }}" autocomplete="off">
+              </div>
+              <div class="field" data-post-field hidden>
+                <label for="lf-paid">{{ "Paid by" | t(lang) }}</label>
+                <select id="lf-paid" name="paidBy">
+                  {%- for key, name in cfg.paidBy %}
+                  <option value="{{ key }}">{{ name }}</option>
+                  {%- endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="tool-actions">
+              <button class="button-primary" type="submit">{{ "Save the step" | t(lang) }}</button>
+              <button class="button-ghost" type="button" data-undo-step>{{ "Remove last step" | t(lang) }}</button>
+              <p class="form-note" data-step-status aria-live="polite"></p>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="lf-reply">
+          <p class="result-label">{{ "Reply to the guest" | t(lang) }}</p>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="lf-channel">{{ "Channel" | t(lang) }}</label>
+              <select id="lf-channel" name="channel">
+                <option value="email">{{ "Email" | t(lang) }}</option>
+                <option value="whatsapp">WhatsApp</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="lf-postage">{{ "Postage to offer (€)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="lf-postage" name="postage" inputmode="decimal" placeholder="{{ t.postagePlaceholder }}" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label for="lf-reply">{{ "Text to copy" | t(lang) }}</label>
+            <textarea id="lf-reply" rows="10" readonly></textarea>
+          </div>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-copy-reply>{{ "Copy the reply" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-label>{{ "Print tag label" | t(lang) }}</button>
+          </div>
+        </div>
+
+        <div class="lf-item-photos">
+          <p class="result-label">{{ "Photos" | t(lang) }}</p>
+          <div data-item-photos></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "One area keeps collecting items?" | t(lang) }}</strong> {{ "Send it to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>{{ ", or ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }} {{ "Guest names are personal data: keep only what you need to return the item." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results lf-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="lost-found-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/media-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/lost-found.js' | assetUrl }}" defer></script>

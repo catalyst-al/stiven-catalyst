@@ -1,0 +1,76 @@
+/* ===== Lost & Found (js/lost-found.js) =====
+   The register of found items: the entry form, the register, one item with its history, next step, reply and photos,
+   and the result with the items due for a decision. A flag is told by its sign (✕ !) and its words; the colour only
+   repeats it. The register prints on A4; the tag label prints on its own. */
+.lf-new-id { margin: 0 0 10px; }
+.lf-new-id strong { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .02em; }
+.lf-entry-photos { margin-top: 12px; }
+.lf-rules-head { margin: 16px 0 6px; }
+
+.lf-table .lf-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.lf-table .lf-high { font-weight: 700; }
+.lf-status { min-width: 9em; }
+.lf-status > span { display: block; font-weight: 600; }
+.lf-status.is-danger > span { color: var(--danger); }
+.lf-status.is-warn > span { color: var(--warn); }
+.lf-open { margin-top: 4px; padding: 4px 10px; font-size: 13px; }
+
+.lf-item .field { max-width: 640px; }
+.lf-item-card { margin: 12px 0 4px; }
+.lf-item-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 8px; }
+.lf-item-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 18px; }
+.lf-flag { font-weight: 700; font-size: 14px; }
+.lf-flag.is-ok { color: var(--ok); }
+.lf-flag.is-warn { color: var(--warn); }
+.lf-flag.is-danger { color: var(--danger); }
+.lf-facts { display: grid; grid-template-columns: minmax(7em, max-content) minmax(0, 1fr); gap: 4px 14px; margin: 0 0 12px; }
+.lf-facts dt { color: var(--muted); font-size: 14px; }
+.lf-facts dd { margin: 0; overflow-wrap: anywhere; }
+.lf-history { display: grid; gap: 4px; margin: 4px 0 0; padding-left: 1.4em; }
+.lf-history li { overflow-wrap: anywhere; }
+.lf-step, .lf-reply, .lf-item-photos { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.lf-step fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.lf-step [data-return-fields] { margin-top: 10px; }
+.lf-reply textarea { width: 100%; min-height: 12em; font: inherit; line-height: 1.5; background: var(--paper); }
+
+.lf-results .result-head { margin-bottom: 14px; }
+.lf-due { margin: 18px 0; }
+.lf-due-list { display: grid; gap: 12px; margin: 8px 0 12px; padding: 0; list-style: none; }
+.lf-due-list li { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px 14px; padding-left: 10px; border-left: 3px solid var(--line); }
+.lf-due-list li.is-danger { border-left-color: var(--danger); }
+.lf-due-list li.is-warn { border-left-color: var(--warn); }
+.lf-due-text { display: grid; gap: 2px; min-width: 0; flex: 1 1 260px; overflow-wrap: anywhere; }
+.lf-due-text small { color: var(--muted); font-size: 13px; }
+.lf-due-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.lf-due-actions button { padding: 6px 12px; font-size: 14px; }
+.lf-rules { margin: 0; }
+.lf-register { display: none; }
+
+/* The tag label exists only while it is printed. */
+.lf-label-sheet { display: none; }
+
+@media (max-width: 600px) {
+  .lf-facts { grid-template-columns: minmax(0, 1fr); }
+  .lf-facts dd { margin-bottom: 6px; }
+  .lf-due-actions { width: 100%; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .lf-setup, .lf-results .result-actions, .lf-due-actions, .lf-results .ck-actions { display: none !important; }
+  .lf-results { padding: 0; }
+  .lf-results .dl-panel, .lf-due { break-inside: avoid; }
+  .lf-register { display: block; margin-top: 18px; break-before: page; }
+  .lf-register .dl-table { width: 100%; font-size: 10pt; border-collapse: collapse; }
+  .lf-register th, .lf-register td { padding: 3px 5px; border-bottom: 1px solid #c8cdd2; text-align: left; vertical-align: top; }
+
+  body.lf-printing-label > :not(.lf-label-sheet) { display: none !important; }
+  body.lf-printing-label .lf-label-sheet { display: block; }
+  .lf-label { width: 90mm; padding: 6mm; border: 1.5pt solid #1b2330; border-radius: 3mm; color: #1b2330; font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif; break-inside: avoid; }
+  .lf-label p { margin: 0 0 1.5mm; }
+  .lf-label-kicker { font-size: 9pt; text-transform: uppercase; letter-spacing: .06em; }
+  .lf-label-tag { font-size: 40pt; font-weight: 800; line-height: 1.05; }
+  .lf-label-id { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12pt; font-weight: 700; }
+  .lf-label-what { font-size: 11pt; }
+  .lf-label-meta { font-size: 9pt; }
+}
