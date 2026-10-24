@@ -1,0 +1,95 @@
+{
+  "storageKey": "sc-housekeeping-planner",
+  "roomStatusKey": "sc-room-status",
+  "text": {
+    "tool": "Housekeeping Planner",
+    "csvSections": "housekeeping-sections",
+    "csvWeek": "housekeeping-week",
+    "actionOwner": "Executive housekeeper",
+    "actionArea": "Housekeeping",
+    "actionCheck": "Attendants scheduled are at least the attendants needed, and every section has a name on the morning plan.",
+    "namesPlaceholder": "Marta\nIlir\nSofia",
+    "roomsPlaceholder": "e.g. 102, 107, 214",
+    "weekPlaceholder": "2026-10-26; 154; 44; 12\n2026-10-27; 160; 40; 12",
+    "floorPlaceholder": "e.g. 3"
+  },
+  "roomTypes": [
+    { "key": "single", "name": "Single" },
+    { "key": "double", "name": "Double" },
+    { "key": "twin", "name": "Twin" },
+    { "key": "suite", "name": "Suite" },
+    { "key": "accessible", "name": "Accessible" }
+  ],
+  "cleanTypes": [
+    { "key": "departure", "name": "Departure clean", "short": "Departure", "meaning": "The guest has left: full clean, bed made fresh, bathroom, amenities, minibar check." },
+    { "key": "stayover", "name": "Stay-over", "short": "Stay-over", "meaning": "The guest stays: bed made, bathroom refreshed, towels, rubbish, amenities topped up." },
+    { "key": "linen", "name": "Stay-over with linen change", "short": "Linen change", "meaning": "A stay-over on the night the bed linen is changed (house rule, often every third night, or on request)." },
+    { "key": "deep", "name": "Deep clean", "short": "Deep clean", "meaning": "The periodic clean of a vacant room: behind and under the furniture, curtains, vents, grout, mattress turned." },
+    { "key": "vip", "name": "VIP set-up", "short": "VIP", "meaning": "Added to the clean of a VIP room: amenity, letter, extra check by the supervisor." }
+  ],
+  "defaults": {
+    "mode": "minutes",
+    "minutes": {
+      "single": { "departure": 25, "stayover": 15, "linen": 20, "deep": 90 },
+      "double": { "departure": 30, "stayover": 20, "linen": 25, "deep": 120 },
+      "twin": { "departure": 35, "stayover": 20, "linen": 30, "deep": 120 },
+      "suite": { "departure": 50, "stayover": 30, "linen": 40, "deep": 180 },
+      "accessible": { "departure": 40, "stayover": 25, "linen": 30, "deep": 120 }
+    },
+    "vipMinutes": 15,
+    "credits": {
+      "single": { "departure": 1.25, "stayover": 0.75, "linen": 1, "deep": 4.5 },
+      "double": { "departure": 1.5, "stayover": 1, "linen": 1.25, "deep": 6 },
+      "twin": { "departure": 1.75, "stayover": 1, "linen": 1.5, "deep": 6 },
+      "suite": { "departure": 2.5, "stayover": 1.5, "linen": 2, "deep": 9 },
+      "accessible": { "departure": 2, "stayover": 1.25, "linen": 1.5, "deep": 6 }
+    },
+    "vipCredits": 0.75,
+    "creditsPerAttendant": 20,
+    "publicHours": 6,
+    "shiftHours": 8.5,
+    "breakMinutes": 30,
+    "productiveShare": 0.85,
+    "linenEvery": 3
+  },
+  "source": "Where the defaults come from: the planning values of a mid-scale city hotel as housekeeping time studies and brand standards usually put them. A double takes 30 minutes after a departure, 20 as a stay-over and 25 with the linen change; a suite about one and a half to two times a double; a deep clean two hours. A shift is 8.5 hours on site with a 30-minute unpaid break, of which about 85 % is productive: the briefing, setting up the trolley, linen runs and travel between floors take the rest. In credits, one credit is one stay-over of a double (20 minutes), so 20 credits fill a shift. Time ten cleans of each kind in your own rooms and replace these values.",
+  "tips": [
+    ["Plan on minutes, not rooms.", "A suite departure is two stay-overs of work. Sections with the same number of rooms leave one attendant with every departure; sections with the same minutes finish together."],
+    ["Productive time is not paid time.", "Briefing, trolley, linen runs, travel between floors and the end-of-shift report take 10 to 20 % of a shift. The productive share keeps them in the plan instead of in overtime."],
+    ["Read the numbers after the night audit.", "Take departures and stay-overs from Room Status (or the PMS) once the night audit has closed the day: the late check-outs and the extensions of last night are in it."],
+    ["Short is a decision at 7:00, not a surprise at 14:00.", "When the plan is short, decide in the morning: overtime, an agency attendant, stay-overs on request only for guests who chose it, or deep cleans moved to a quieter day. Put the decision in the Action Tracker."],
+    ["Departures with an arrival first.", "Inside a section, clean the departures with an arrival today and the early arrivals first; Room Status keeps that queue for you."],
+    ["Credits if your hotel works with them.", "One credit is one stay-over; a departure, a suite or a deep clean counts more, and each attendant has a quota per shift. The arithmetic is the same as with minutes."],
+    ["The week from the forecast.", "Type or paste the rooms occupied the night before each day and the departures from the PMS forecast. The plan uses today's mix of rooms, so schedule the week on Thursday and check it every morning."]
+  ],
+  "example": {
+    "hotelRooms": 180,
+    "arrivals": 58,
+    "scheduled": 10,
+    "rate": 17.5,
+    "names": ["Marta", "Ilir", "Sofia", "Jonas", "Elena", "Arben", "Lea", "Dritan", "Mira", "Tomasz"],
+    "rows": [
+      { "floor": "1", "type": "single", "departure": 6, "stayover": 10, "linen": 3, "vip": 0, "deep": 1 },
+      { "floor": "1", "type": "accessible", "departure": 2, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "2", "type": "double", "departure": 7, "stayover": 10, "linen": 4, "vip": 0, "deep": 0 },
+      { "floor": "2", "type": "twin", "departure": 3, "stayover": 5, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "3", "type": "double", "departure": 6, "stayover": 11, "linen": 4, "vip": 0, "deep": 1 },
+      { "floor": "3", "type": "twin", "departure": 3, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "4", "type": "double", "departure": 7, "stayover": 10, "linen": 3, "vip": 0, "deep": 0 },
+      { "floor": "4", "type": "twin", "departure": 3, "stayover": 5, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "5", "type": "double", "departure": 6, "stayover": 11, "linen": 4, "vip": 0, "deep": 1 },
+      { "floor": "5", "type": "twin", "departure": 3, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "6", "type": "double", "departure": 4, "stayover": 11, "linen": 3, "vip": 1, "deep": 0 },
+      { "floor": "6", "type": "suite", "departure": 2, "stayover": 5, "linen": 1, "vip": 3, "deep": 0 }
+    ],
+    "week": [
+      { "day": 0, "occupied": 148, "departures": 52, "scheduled": 10 },
+      { "day": 1, "occupied": 154, "departures": 44, "scheduled": 12 },
+      { "day": 2, "occupied": 160, "departures": 40, "scheduled": 12 },
+      { "day": 3, "occupied": 166, "departures": 62, "scheduled": 12 },
+      { "day": 4, "occupied": 171, "departures": 72, "scheduled": 13 },
+      { "day": 5, "occupied": 140, "departures": 70, "scheduled": 11 },
+      { "day": 6, "occupied": 120, "departures": 48, "scheduled": 10 }
+    ]
+  }
+}

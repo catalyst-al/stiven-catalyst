@@ -1,0 +1,95 @@
+{
+  "storageKey": "sc-housekeeping-planner-sq",
+  "roomStatusKey": "sc-room-status-sq",
+  "text": {
+    "tool": "Planifikuesi i housekeeping-ut",
+    "csvSections": "housekeeping-sektoret",
+    "csvWeek": "housekeeping-java",
+    "actionOwner": "Drejtuesi i housekeeping-ut",
+    "actionArea": "Housekeeping",
+    "actionCheck": "Pastruesit në turn janë të paktën sa pastruesit e nevojshëm, dhe çdo sektor ka një emër në planin e mëngjesit.",
+    "namesPlaceholder": "Marta\nIlir\nSofia",
+    "roomsPlaceholder": "p.sh. 102, 107, 214",
+    "weekPlaceholder": "26.10.2026; 154; 44; 12\n27.10.2026; 160; 40; 12",
+    "floorPlaceholder": "p.sh. 3"
+  },
+  "roomTypes": [
+    { "key": "single", "name": "Teke" },
+    { "key": "double", "name": "Dyshe" },
+    { "key": "twin", "name": "Twin" },
+    { "key": "suite", "name": "Suitë" },
+    { "key": "accessible", "name": "E aksesueshme" }
+  ],
+  "cleanTypes": [
+    { "key": "departure", "name": "Pastrim largimi", "short": "Largim", "meaning": "Mysafiri është larguar: pastrim i plotë, shtrati me çarçafë të rinj, banja, produktet e mysafirit, kontrolli i minibarit." },
+    { "key": "stayover", "name": "Qëndrim i vazhduar", "short": "Qëndrim", "meaning": "Mysafiri qëndron: shtrati i rregulluar, banja e freskuar, peshqirët, mbeturinat, produktet e mysafirit të plotësuara." },
+    { "key": "linen", "name": "Qëndrim i vazhduar me ndërrim çarçafësh", "short": "Ndërrim çarçafësh", "meaning": "Një qëndrim i vazhduar në ditën kur ndërrohen çarçafët (rregull i hotelit, shpesh çdo natë të tretë, ose me kërkesë)." },
+    { "key": "deep", "name": "Pastrim i thellë", "short": "Pastrim i thellë", "meaning": "Pastrimi periodik i një dhome të lirë: pas dhe nën mobiljet, perdet, grilat e ajrimit, fugat, dysheku i kthyer." },
+    { "key": "vip", "name": "Përgatitje VIP", "short": "VIP", "meaning": "I shtohet pastrimit të një dhome VIP: dhurata, letra, një kontroll shtesë nga supervizori." }
+  ],
+  "defaults": {
+    "mode": "minutes",
+    "minutes": {
+      "single": { "departure": 25, "stayover": 15, "linen": 20, "deep": 90 },
+      "double": { "departure": 30, "stayover": 20, "linen": 25, "deep": 120 },
+      "twin": { "departure": 35, "stayover": 20, "linen": 30, "deep": 120 },
+      "suite": { "departure": 50, "stayover": 30, "linen": 40, "deep": 180 },
+      "accessible": { "departure": 40, "stayover": 25, "linen": 30, "deep": 120 }
+    },
+    "vipMinutes": 15,
+    "credits": {
+      "single": { "departure": 1.25, "stayover": 0.75, "linen": 1, "deep": 4.5 },
+      "double": { "departure": 1.5, "stayover": 1, "linen": 1.25, "deep": 6 },
+      "twin": { "departure": 1.75, "stayover": 1, "linen": 1.5, "deep": 6 },
+      "suite": { "departure": 2.5, "stayover": 1.5, "linen": 2, "deep": 9 },
+      "accessible": { "departure": 2, "stayover": 1.25, "linen": 1.5, "deep": 6 }
+    },
+    "vipCredits": 0.75,
+    "creditsPerAttendant": 20,
+    "publicHours": 6,
+    "shiftHours": 8.5,
+    "breakMinutes": 30,
+    "productiveShare": 0.85,
+    "linenEvery": 3
+  },
+  "source": "Nga vijnë vlerat fillestare: vlerat e planifikimit të një hoteli qyteti të nivelit të mesëm, siç i vendosin zakonisht studimet e kohës në housekeeping dhe standardet e markave. Një dhomë dyshe kërkon 30 minuta pas një largimi, 20 si qëndrim i vazhduar dhe 25 me ndërrim çarçafësh; një suitë rreth një herë e gjysmë deri në dy herë sa një dyshe; një pastrim i thellë dy orë. Një turn zgjat 8,5 orë në hotel me 30 minuta pushim të papaguar, nga të cilat rreth 85 % janë produktive: udhëzimi në fillim, përgatitja e karrocës, vajtjet për çarçafë dhe lëvizjet mes kateve marrin pjesën tjetër. Me kredite, një kredit është një qëndrim i vazhduar në dhomë dyshe (20 minuta), kështu që 20 kredite mbushin një turn. Mat kohën e dhjetë pastrimeve të çdo lloji në dhomat e tua dhe zëvendëso këto vlera.",
+  "tips": [
+    ["Planifiko me minuta, jo me dhoma.", "Largimi nga një suitë është puna e dy qëndrimeve të vazhduara. Sektorët me të njëjtin numër dhomash i lënë një pastruesi të gjitha largimet; sektorët me të njëjtat minuta mbarojnë bashkë."],
+    ["Koha produktive nuk është koha e paguar.", "Udhëzimi, karroca, vajtjet për çarçafë, lëvizjet mes kateve dhe raporti në fund të turnit marrin 10 deri 20 % të turnit. Pjesa produktive i mban në plan, jo në orët shtesë."],
+    ["Lexo shifrat pas night audit.", "Merr largimet dhe qëndrimet e vazhduara nga Statusi i dhomave (ose nga PMS) pasi night audit ka mbyllur ditën: largimet e vonuara dhe zgjatjet e natës së kaluar janë brenda."],
+    ["Mungesa e stafit është vendim në 7:00, jo surprizë në 14:00.", "Kur plani nuk mbulohet, vendos në mëngjes: orë shtesë, një pastrues nga agjencia, qëndrimet e vazhduara vetëm me kërkesë për mysafirët që e kanë zgjedhur, ose pastrimet e thella në një ditë më të qetë. Shkruaje vendimin në listën e veprimeve."],
+    ["Largimet me mbërritje në fillim.", "Brenda sektorit, pastro në fillim largimet me mbërritje sot dhe mbërritjet e hershme; Statusi i dhomave e mban këtë radhë për ty."],
+    ["Kredite, nëse hoteli yt punon me to.", "Një kredit është një qëndrim i vazhduar; një largim, një suitë ose një pastrim i thellë vlen më shumë, dhe çdo pastrues ka një normë për turn. Llogaritja është e njëjtë si me minuta."],
+    ["Java nga parashikimi.", "Shkruaj ose ngjit dhomat e zëna natën para çdo dite dhe largimet nga parashikimi i PMS. Plani përdor përzierjen e sotme të dhomave: planifiko javën të enjten dhe kontrolloje çdo mëngjes."]
+  ],
+  "example": {
+    "hotelRooms": 180,
+    "arrivals": 58,
+    "scheduled": 10,
+    "rate": 17.5,
+    "names": ["Marta", "Ilir", "Sofia", "Jonas", "Elena", "Arben", "Lea", "Dritan", "Mira", "Tomasz"],
+    "rows": [
+      { "floor": "1", "type": "single", "departure": 6, "stayover": 10, "linen": 3, "vip": 0, "deep": 1 },
+      { "floor": "1", "type": "accessible", "departure": 2, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "2", "type": "double", "departure": 7, "stayover": 10, "linen": 4, "vip": 0, "deep": 0 },
+      { "floor": "2", "type": "twin", "departure": 3, "stayover": 5, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "3", "type": "double", "departure": 6, "stayover": 11, "linen": 4, "vip": 0, "deep": 1 },
+      { "floor": "3", "type": "twin", "departure": 3, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "4", "type": "double", "departure": 7, "stayover": 10, "linen": 3, "vip": 0, "deep": 0 },
+      { "floor": "4", "type": "twin", "departure": 3, "stayover": 5, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "5", "type": "double", "departure": 6, "stayover": 11, "linen": 4, "vip": 0, "deep": 1 },
+      { "floor": "5", "type": "twin", "departure": 3, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "6", "type": "double", "departure": 4, "stayover": 11, "linen": 3, "vip": 1, "deep": 0 },
+      { "floor": "6", "type": "suite", "departure": 2, "stayover": 5, "linen": 1, "vip": 3, "deep": 0 }
+    ],
+    "week": [
+      { "day": 0, "occupied": 148, "departures": 52, "scheduled": 10 },
+      { "day": 1, "occupied": 154, "departures": 44, "scheduled": 12 },
+      { "day": 2, "occupied": 160, "departures": 40, "scheduled": 12 },
+      { "day": 3, "occupied": 166, "departures": 62, "scheduled": 12 },
+      { "day": 4, "occupied": 171, "departures": 72, "scheduled": 13 },
+      { "day": 5, "occupied": 140, "departures": 70, "scheduled": 11 },
+      { "day": 6, "occupied": 120, "departures": 48, "scheduled": 10 }
+    ]
+  }
+}

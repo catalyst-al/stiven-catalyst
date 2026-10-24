@@ -1,0 +1,95 @@
+{
+  "storageKey": "sc-housekeeping-planner-de",
+  "roomStatusKey": "sc-room-status-de",
+  "text": {
+    "tool": "Housekeeping-Planer",
+    "csvSections": "housekeeping-reviere",
+    "csvWeek": "housekeeping-woche",
+    "actionOwner": "Hausdame",
+    "actionArea": "Housekeeping",
+    "actionCheck": "Die eingeplanten Reinigungskräfte decken mindestens den Bedarf, und jedes Revier hat im Morgenplan einen Namen.",
+    "namesPlaceholder": "Marta\nIlir\nSofia",
+    "roomsPlaceholder": "z. B. 102, 107, 214",
+    "weekPlaceholder": "26.10.2026; 154; 44; 12\n27.10.2026; 160; 40; 12",
+    "floorPlaceholder": "z. B. 3"
+  },
+  "roomTypes": [
+    { "key": "single", "name": "Einzelzimmer" },
+    { "key": "double", "name": "Doppelzimmer" },
+    { "key": "twin", "name": "Twin" },
+    { "key": "suite", "name": "Suite" },
+    { "key": "accessible", "name": "Barrierefrei" }
+  ],
+  "cleanTypes": [
+    { "key": "departure", "name": "Abreisereinigung", "short": "Abreise", "meaning": "Der Gast ist abgereist: vollständige Reinigung, Bett frisch bezogen, Bad, Gästeartikel, Minibar-Kontrolle." },
+    { "key": "stayover", "name": "Bleibezimmer", "short": "Bleibe", "meaning": "Der Gast bleibt: Bett gemacht, Bad aufgefrischt, Handtücher, Abfall, Gästeartikel aufgefüllt." },
+    { "key": "linen", "name": "Bleibezimmer mit Wäschewechsel", "short": "Wäschewechsel", "meaning": "Ein Bleibezimmer an dem Tag, an dem die Bettwäsche gewechselt wird (Hausregel, oft jede dritte Nacht, oder auf Wunsch)." },
+    { "key": "deep", "name": "Grundreinigung", "short": "Grundreinigung", "meaning": "Die regelmäßige Reinigung eines freien Zimmers: hinter und unter den Möbeln, Vorhänge, Lüftungsgitter, Fugen, Matratze gewendet." },
+    { "key": "vip", "name": "VIP-Vorbereitung", "short": "VIP", "meaning": "Kommt zur Reinigung eines VIP-Zimmers hinzu: Präsent, Brief, zusätzliche Kontrolle durch die Hausdame." }
+  ],
+  "defaults": {
+    "mode": "minutes",
+    "minutes": {
+      "single": { "departure": 25, "stayover": 15, "linen": 20, "deep": 90 },
+      "double": { "departure": 30, "stayover": 20, "linen": 25, "deep": 120 },
+      "twin": { "departure": 35, "stayover": 20, "linen": 30, "deep": 120 },
+      "suite": { "departure": 50, "stayover": 30, "linen": 40, "deep": 180 },
+      "accessible": { "departure": 40, "stayover": 25, "linen": 30, "deep": 120 }
+    },
+    "vipMinutes": 15,
+    "credits": {
+      "single": { "departure": 1.25, "stayover": 0.75, "linen": 1, "deep": 4.5 },
+      "double": { "departure": 1.5, "stayover": 1, "linen": 1.25, "deep": 6 },
+      "twin": { "departure": 1.75, "stayover": 1, "linen": 1.5, "deep": 6 },
+      "suite": { "departure": 2.5, "stayover": 1.5, "linen": 2, "deep": 9 },
+      "accessible": { "departure": 2, "stayover": 1.25, "linen": 1.5, "deep": 6 }
+    },
+    "vipCredits": 0.75,
+    "creditsPerAttendant": 20,
+    "publicHours": 6,
+    "shiftHours": 8.5,
+    "breakMinutes": 30,
+    "productiveShare": 0.85,
+    "linenEvery": 3
+  },
+  "source": "Woher die Vorgaben stammen: die Planwerte eines Stadthotels der Mittelklasse, wie Zeitstudien im Housekeeping und Markenstandards sie üblicherweise ansetzen. Ein Doppelzimmer braucht nach einer Abreise 30 Minuten, als Bleibezimmer 20 und mit Wäschewechsel 25; eine Suite etwa das Anderthalb- bis Zweifache eines Doppelzimmers; eine Grundreinigung zwei Stunden. Eine Schicht dauert 8,5 Stunden im Haus mit 30 Minuten unbezahlter Pause, davon sind etwa 85 % produktiv: Einweisung, Wagen bestücken, Wäschegänge und Wege zwischen den Etagen brauchen den Rest. In Credits ist ein Credit ein Bleibezimmer im Doppelzimmer (20 Minuten), also füllen 20 Credits eine Schicht. Stoppen Sie je zehn Reinigungen jeder Art in Ihren eigenen Zimmern und ersetzen Sie diese Werte.",
+  "tips": [
+    ["Planen Sie in Minuten, nicht in Zimmern.", "Eine Suite bei Abreise ist die Arbeit von zwei Bleibezimmern. Reviere mit gleich vielen Zimmern lassen einer Reinigungskraft alle Abreisen; Reviere mit gleich vielen Minuten werden gemeinsam fertig."],
+    ["Produktive Zeit ist nicht bezahlte Zeit.", "Einweisung, Wagen, Wäschegänge, Wege zwischen den Etagen und die Abmeldung am Schichtende brauchen 10 bis 20 % einer Schicht. Der produktive Anteil hält sie im Plan statt in den Überstunden."],
+    ["Lesen Sie die Zahlen nach dem Night Audit.", "Übernehmen Sie Abreisen und Bleibezimmer aus dem Zimmerstatus (oder dem PMS), wenn das Night Audit den Tag abgeschlossen hat: Die späten Abreisen und Verlängerungen der letzten Nacht sind dann enthalten."],
+    ["Zu wenig Personal ist eine Entscheidung um 7:00, keine Überraschung um 14:00.", "Fehlt Personal, entscheiden Sie am Morgen: Überstunden, eine Kraft vom Dienstleister, Bleibezimmer nur auf Wunsch für Gäste, die das gewählt haben, oder Grundreinigungen auf einen ruhigeren Tag. Tragen Sie die Entscheidung in die Maßnahmenliste ein."],
+    ["Abreisen mit Anreise zuerst.", "Reinigen Sie im Revier zuerst die Abreisen mit einer Anreise heute und die Frühanreisen; der Zimmerstatus hält diese Reihenfolge für Sie."],
+    ["Credits, wenn Ihr Hotel damit arbeitet.", "Ein Credit ist ein Bleibezimmer; eine Abreise, eine Suite oder eine Grundreinigung zählt mehr, und jede Reinigungskraft hat ein Soll pro Schicht. Die Rechnung ist dieselbe wie mit Minuten."],
+    ["Die Woche aus der Vorschau.", "Tippen oder fügen Sie die belegten Zimmer der Nacht vor jedem Tag und die Abreisen aus der PMS-Vorschau ein. Der Plan rechnet mit dem heutigen Zimmermix: Planen Sie die Woche am Donnerstag und prüfen Sie sie jeden Morgen."]
+  ],
+  "example": {
+    "hotelRooms": 180,
+    "arrivals": 58,
+    "scheduled": 10,
+    "rate": 17.5,
+    "names": ["Marta", "Ilir", "Sofia", "Jonas", "Elena", "Arben", "Lea", "Dritan", "Mira", "Tomasz"],
+    "rows": [
+      { "floor": "1", "type": "single", "departure": 6, "stayover": 10, "linen": 3, "vip": 0, "deep": 1 },
+      { "floor": "1", "type": "accessible", "departure": 2, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "2", "type": "double", "departure": 7, "stayover": 10, "linen": 4, "vip": 0, "deep": 0 },
+      { "floor": "2", "type": "twin", "departure": 3, "stayover": 5, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "3", "type": "double", "departure": 6, "stayover": 11, "linen": 4, "vip": 0, "deep": 1 },
+      { "floor": "3", "type": "twin", "departure": 3, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "4", "type": "double", "departure": 7, "stayover": 10, "linen": 3, "vip": 0, "deep": 0 },
+      { "floor": "4", "type": "twin", "departure": 3, "stayover": 5, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "5", "type": "double", "departure": 6, "stayover": 11, "linen": 4, "vip": 0, "deep": 1 },
+      { "floor": "5", "type": "twin", "departure": 3, "stayover": 6, "linen": 2, "vip": 0, "deep": 0 },
+      { "floor": "6", "type": "double", "departure": 4, "stayover": 11, "linen": 3, "vip": 1, "deep": 0 },
+      { "floor": "6", "type": "suite", "departure": 2, "stayover": 5, "linen": 1, "vip": 3, "deep": 0 }
+    ],
+    "week": [
+      { "day": 0, "occupied": 148, "departures": 52, "scheduled": 10 },
+      { "day": 1, "occupied": 154, "departures": 44, "scheduled": 12 },
+      { "day": 2, "occupied": 160, "departures": 40, "scheduled": 12 },
+      { "day": 3, "occupied": 166, "departures": 62, "scheduled": 12 },
+      { "day": 4, "occupied": 171, "departures": 72, "scheduled": 13 },
+      { "day": 5, "occupied": 140, "departures": 70, "scheduled": 11 },
+      { "day": 6, "occupied": 120, "departures": 48, "scheduled": 10 }
+    ]
+  }
+}

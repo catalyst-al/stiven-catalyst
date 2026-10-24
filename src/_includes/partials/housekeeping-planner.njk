@@ -1,0 +1,206 @@
+{#- Housekeeping Planner: the executive housekeeper's staffing plan of the day and the week, attendants needed and the sections; housekeeping-planner.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-housekeeping-planner>
+    <div class="dl-box hp-today">
+      <p class="kicker">1 · {{ "Today's rooms" | t(lang) }}</p>
+      <fieldset class="hp-source">
+        <legend class="hp-sub">{{ "Where the rooms come from" | t(lang) }}</legend>
+        <label class="hp-check" for="hp-source-counts"><input id="hp-source-counts" type="radio" name="hp-source" value="counts"> <span>{{ "Typed counts by floor and room type" | t(lang) }}</span></label>
+        <label class="hp-check" for="hp-source-rooms"><input id="hp-source-rooms" type="radio" name="hp-source" value="rooms"> <span>{{ "Room Status in this browser" | t(lang) }} <span class="form-note" data-rs-note></span></span></label>
+      </fieldset>
+
+      <div class="hp-counts" data-counts-box>
+        <div class="dl-table-wrap" tabindex="0">
+          <table class="dl-table hp-rows">
+            <thead>
+              <tr><th scope="col">{{ "Floor" | t(lang) }}</th><th scope="col">{{ "Room type" | t(lang) }}</th><th scope="col" class="num">{{ "Departures" | t(lang) }}</th><th scope="col" class="num">{{ "Stay-overs" | t(lang) }}</th><th scope="col" class="num">{{ "of which linen change" | t(lang) }}</th><th scope="col" class="num">{{ "VIP" | t(lang) }}</th><th scope="col" class="num">{{ "Deep cleans" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+            </thead>
+            <tbody data-rows></tbody>
+            <tfoot data-rows-total hidden></tfoot>
+          </table>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-row>{{ "Add a row" | t(lang) }}</button>
+        </div>
+        <p class="form-note dl-log-status" data-rows-status aria-live="polite"></p>
+        <p class="form-note">{{ "One row per floor and room type, from the PMS housekeeping report after the night audit: departures (due out and checked out), stay-overs and, of those, the ones with a linen change today; the VIP rooms among them; vacant rooms planned for a deep clean." | t(lang) }}</p>
+      </div>
+
+      <div class="hp-rooms-box" data-rooms-box hidden>
+        <p class="form-note hp-rs-summary" data-rs-summary aria-live="polite"></p>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="hp-linen-rooms">{{ "Stay-overs with a linen change" | t(lang) }} <span class="optional">{{ "room numbers, from the PMS linen list" | t(lang) }}</span></label>
+            <textarea id="hp-linen-rooms" rows="2" placeholder="{{ cfg.text.roomsPlaceholder }}"></textarea>
+          </div>
+          <div class="field dl-wide">
+            <label for="hp-deep-rooms">{{ "Rooms for a deep clean" | t(lang) }} <span class="optional">{{ "room numbers; OOO rooms with the reason deep clean count anyway" | t(lang) }}</span></label>
+            <textarea id="hp-deep-rooms" rows="2" placeholder="{{ cfg.text.roomsPlaceholder }}"></textarea>
+          </div>
+        </div>
+        <p class="form-note">{{ "How the codes of Room Status are read: DO, CO and VD are departure cleans; OD is a stay-over; OCC is a stay-over already serviced (or a guest who arrived today), so no work, unless the board is still yesterday's; VC and VI are clean; OOO for a deep clean is a deep clean; other OOO and OOS rooms wait for maintenance." | t(lang) }}</p>
+      </div>
+
+      <div class="dl-grid">
+        <div class="field">
+          <label for="hp-scheduled">{{ "Attendants scheduled" | t(lang) }}</label>
+          <input id="hp-scheduled" type="number" min="0" max="999" step="1" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="hp-arrivals">{{ "Arrivals today" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="hp-arrivals" type="number" min="0" max="9999" step="1" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="hp-hotel-rooms">{{ "Rooms in the hotel" | t(lang) }} <span class="optional">{{ "optional, for the occupancy" | t(lang) }}</span></label>
+          <input id="hp-hotel-rooms" type="number" min="0" max="9999" step="1" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="hp-rate">{{ "Hourly rate (€)" | t(lang) }} <span class="optional">{{ "optional, with employer costs" | t(lang) }}</span></label>
+          <input id="hp-rate" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="hp-sections">{{ "Number of sections" | t(lang) }} <span class="optional">{{ "empty: as the rooms need" | t(lang) }}</span></label>
+          <input id="hp-sections" type="number" min="0" max="999" step="1" inputmode="numeric">
+        </div>
+        <div class="field dl-wide">
+          <label for="hp-names">{{ "Attendant names" | t(lang) }} <span class="optional">{{ "one per line, in the order of the sections" | t(lang) }}</span></label>
+          <textarea id="hp-names" rows="3"></textarea>
+        </div>
+      </div>
+      <p class="dl-empty" data-empty hidden>{{ "No rooms yet." | t(lang) }} {{ "Type the counts above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-clear>{{ "Clear the plan" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <details class="dl-box hp-settings" data-settings>
+      <summary class="hp-summary"><span class="kicker">2 · {{ "Workload standards" | t(lang) }}</span> <span class="form-note" data-settings-count></span></summary>
+      <div class="hp-settings-body">
+        <div class="dl-grid">
+          <div class="field">
+            <label for="hp-mode">{{ "Plan in" | t(lang) }}</label>
+            <select id="hp-mode" data-set="mode">
+              <option value="minutes">{{ "Minutes per clean" | t(lang) }}</option>
+              <option value="credits">{{ "Credits (one credit = one stay-over)" | t(lang) }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="hp-shift">{{ "Shift length on site (hours)" | t(lang) }}</label>
+            <input id="hp-shift" type="text" inputmode="decimal" autocomplete="off" data-set="shiftHours">
+          </div>
+          <div class="field">
+            <label for="hp-break">{{ "Unpaid break (minutes)" | t(lang) }}</label>
+            <input id="hp-break" type="number" min="0" max="180" step="5" inputmode="numeric" data-set="breakMinutes">
+          </div>
+          <div class="field">
+            <label for="hp-share">{{ "Productive share of the paid time (%)" | t(lang) }}</label>
+            <input id="hp-share" type="text" inputmode="decimal" autocomplete="off" data-set="productiveShare">
+          </div>
+          <div class="field">
+            <label for="hp-public">{{ "Public areas (hours a day)" | t(lang) }}</label>
+            <input id="hp-public" type="text" inputmode="decimal" autocomplete="off" data-set="publicHours">
+          </div>
+          <div class="field">
+            <label for="hp-linen-every">{{ "Linen change every … nights" | t(lang) }}</label>
+            <input id="hp-linen-every" type="number" min="1" max="30" step="1" inputmode="numeric" data-set="linenEvery">
+          </div>
+        </div>
+
+        <div class="hp-standard" data-minutes-only>
+          <p class="hp-sub">{{ "Minutes per clean" | t(lang) }}</p>
+          <div class="dl-table-wrap" tabindex="0">
+            <table class="dl-table hp-standard-table">
+              <thead><tr><th scope="col">{{ "Room type" | t(lang) }}</th>{% for c in cfg.cleanTypes %}{% if c.key != "vip" %}<th scope="col" class="num">{{ c.short }}</th>{% endif %}{% endfor %}</tr></thead>
+              <tbody>
+                {%- for type in cfg.roomTypes %}
+                <tr><th scope="row">{{ type.name }}</th>{% for c in cfg.cleanTypes %}{% if c.key != "vip" %}<td class="num"><label class="visually-hidden" for="hp-min-{{ type.key }}-{{ c.key }}">{{ type.name }} · {{ c.name }}</label><input id="hp-min-{{ type.key }}-{{ c.key }}" type="text" inputmode="decimal" autocomplete="off" data-set="minutes.{{ type.key }}.{{ c.key }}"></td>{% endif %}{% endfor %}</tr>
+                {%- endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="hp-vip-minutes">{{ "VIP set-up (minutes, added to the clean)" | t(lang) }}</label>
+              <input id="hp-vip-minutes" type="text" inputmode="decimal" autocomplete="off" data-set="vipMinutes">
+            </div>
+          </div>
+        </div>
+
+        <div class="hp-standard" data-credits-only hidden>
+          <p class="hp-sub">{{ "Credits per clean" | t(lang) }}</p>
+          <div class="dl-table-wrap" tabindex="0">
+            <table class="dl-table hp-standard-table">
+              <thead><tr><th scope="col">{{ "Room type" | t(lang) }}</th>{% for c in cfg.cleanTypes %}{% if c.key != "vip" %}<th scope="col" class="num">{{ c.short }}</th>{% endif %}{% endfor %}</tr></thead>
+              <tbody>
+                {%- for type in cfg.roomTypes %}
+                <tr><th scope="row">{{ type.name }}</th>{% for c in cfg.cleanTypes %}{% if c.key != "vip" %}<td class="num"><label class="visually-hidden" for="hp-cr-{{ type.key }}-{{ c.key }}">{{ type.name }} · {{ c.name }}</label><input id="hp-cr-{{ type.key }}-{{ c.key }}" type="text" inputmode="decimal" autocomplete="off" data-set="credits.{{ type.key }}.{{ c.key }}"></td>{% endif %}{% endfor %}</tr>
+                {%- endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="hp-vip-credits">{{ "VIP set-up (credits, added to the clean)" | t(lang) }}</label>
+              <input id="hp-vip-credits" type="text" inputmode="decimal" autocomplete="off" data-set="vipCredits">
+            </div>
+            <div class="field">
+              <label for="hp-quota">{{ "Credits per attendant and shift" | t(lang) }}</label>
+              <input id="hp-quota" type="text" inputmode="decimal" autocomplete="off" data-set="creditsPerAttendant">
+            </div>
+          </div>
+        </div>
+        <ul class="hp-clean-list">
+          {%- for c in cfg.cleanTypes %}
+          <li><strong>{{ c.name }}.</strong> {{ c.meaning }}</li>
+          {%- endfor %}
+        </ul>
+        <p class="form-note">{{ cfg.source }} {{ "Time your rooms with the" | t(lang) }} <a class="inline-link" href="{{ '/tools/time-study/' | local(lang) }}">{{ "Time Study" | t(lang) }}</a>.</p>
+        <div class="tool-actions">
+          <button class="button-ghost" type="button" data-reset-settings>{{ "Reset to the defaults" | t(lang) }}</button>
+        </div>
+      </div>
+    </details>
+
+    <div class="dl-box hp-week">
+      <p class="kicker">3 · {{ "The week from the forecast" | t(lang) }}</p>
+      <div class="field hp-week-start">
+        <label for="hp-week-start">{{ "First day" | t(lang) }}</label>
+        <input id="hp-week-start" type="date">
+      </div>
+      <div class="dl-table-wrap" tabindex="0">
+        <table class="dl-table hp-week-input">
+          <thead><tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col" class="num">{{ "Rooms occupied the night before" | t(lang) }}</th><th scope="col" class="num">{{ "Departures" | t(lang) }}</th><th scope="col" class="num">{{ "Attendants scheduled" | t(lang) }}</th></tr></thead>
+          <tbody data-week-rows></tbody>
+        </table>
+      </div>
+      <div class="field">
+        <label for="hp-week-paste">{{ "Paste from Excel or CSV" | t(lang) }} <span class="optional">{{ "one day per line: date, rooms occupied, departures, attendants scheduled" | t(lang) }}</span></label>
+        <textarea id="hp-week-paste" rows="3" placeholder="{{ cfg.text.weekPlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-week-import>{{ "Import rows" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-week-status aria-live="polite"></p>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The rest of the morning." | t(lang) }}</strong> {{ "The rooms and their codes live in" | t(lang) }} <a class="inline-link" href="{{ '/tools/room-status/' | local(lang) }}" data-room-status>{{ "Room Status" | t(lang) }}</a>, {{ "the checks of the clean rooms in" | t(lang) }} <a class="inline-link" href="{{ '/tools/room-inspection/' | local(lang) }}">{{ "Room Inspection" | t(lang) }}</a>, {{ "and a staffing gap goes to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results hp-results" data-results tabindex="-1" hidden></section>
+<section class="shell hp-print" data-print hidden></section>
+
+<script type="application/json" id="housekeeping-planner-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/housekeeping-planner.js' | assetUrl }}" defer></script>

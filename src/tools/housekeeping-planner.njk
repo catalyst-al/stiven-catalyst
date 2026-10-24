@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Housekeeping Planner
+seo_title: "Housekeeping labour planner: room attendants needed, workload minutes or credits, balanced sections and the week"
+description: "Plan housekeeping staff: workload from departures, stay-overs and linen changes, attendants needed vs scheduled, sections balanced by minutes, the week."
+activeNav: /tools.html
+permalink: /tools/housekeeping-planner/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Hotel</p>
+  <h1>Housekeeping Planner</h1>
+  <p class="lede">The executive housekeeper's staffing plan for the morning. Today's departures, stay-overs, linen changes, VIP rooms, deep cleans and public areas become workload minutes (or credits), and the minutes become the attendants you need, against those scheduled, in persons, hours and labour cost, with the formula written out. The rooms are split into one section per attendant, balanced by minutes on as few floors as possible, printed as a sheet per attendant or set straight into Room Status; and the forecast gives the attendants needed for each day of the week.</p>
+</section>
+
+{% set cfg = housekeepingPlanner %}
+{% include "partials/housekeeping-planner.njk" %}
