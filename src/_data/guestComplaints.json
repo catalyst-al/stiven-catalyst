@@ -1,0 +1,212 @@
+{
+  "storageKey": "sc-guest-complaints",
+  "text": {
+    "tool": "Guest Complaints",
+    "csv": "guest-complaints-log",
+    "entryLegend": "Log a complaint",
+    "whatPlaceholder": "e.g. AC blows warm air, room at 26 °C",
+    "roomPlaceholder": "e.g. 412",
+    "takenByPlaceholder": "e.g. Jonas · Reception",
+    "guestPlaceholder": "e.g. Mr A. Fischer",
+    "guestPrivacy": "Only when you need it to call the guest back. Remove the names once the complaints are closed.",
+    "mePlaceholder": "e.g. Elena · Front office",
+    "hotelPlaceholder": "e.g. Airport Hotel Frankfurt",
+    "hotelFallback": "the hotel",
+    "actionPlaceholder": "e.g. Engineer reset the fan coil and cleaned the filter; room at 21 °C by 16:35.",
+    "valuePlaceholder": "e.g. 12",
+    "nightsPlaceholder": "e.g. 1813",
+    "pasteRow": "One row per complaint",
+    "pastePlaceholder": "2026-10-06\t16:05\t412\tIn person\tTemperature / air conditioning\tMajor\tAC blows warm air\tMr A. Fischer\tJonas\tEngineer reset the fan coil\tAmenity\t12\t2026-10-06\t16:35\t2026-10-07\tYes",
+    "empty": "No complaints in the log yet.",
+    "targetNote": "Brand standards differ: many hotels aim to resolve a complaint of a guest in the house within 15 minutes, and to answer emails, reviews and surveys within 24 hours.",
+    "nightsNote": "Rooms sold per night, added up over the period. When Hotel KPIs in this browser has every night of the period, the number comes from there.",
+    "upgradeNote": "An upgrade or a room move costs nothing unless the better room would have sold: then write the rate difference.",
+    "notCompensation": "Correcting a wrong charge is not compensation: refund it and write 0 here."
+  },
+  "channels": [
+    { "key": "person", "name": "In person", "inHouse": true },
+    { "key": "phone", "name": "Phone", "inHouse": true },
+    { "key": "chat", "name": "Chat / WhatsApp", "inHouse": true },
+    { "key": "email", "name": "Email", "inHouse": false },
+    { "key": "review", "name": "Online review", "inHouse": false },
+    { "key": "survey", "name": "Guest survey", "inHouse": false }
+  ],
+  "categories": [
+    { "key": "cleanliness", "name": "Cleanliness", "dept": "Housekeeping", "issue": "the cleanliness of your room" },
+    { "key": "noise", "name": "Noise", "dept": "Front office", "issue": "the noise during your night" },
+    { "key": "maintenance", "name": "Maintenance / room defect", "dept": "Engineering", "roomFix": true, "issue": "the defect in your room" },
+    { "key": "temperature", "name": "Temperature / air conditioning", "dept": "Engineering", "roomFix": true, "issue": "the temperature in your room" },
+    { "key": "wifi", "name": "Wi-Fi", "dept": "IT", "issue": "the Wi-Fi connection" },
+    { "key": "fnb", "name": "Food & beverage", "dept": "Food & beverage", "issue": "your experience in our restaurant and bar" },
+    { "key": "staff", "name": "Staff behaviour", "dept": "Management", "issue": "the way our team treated you" },
+    { "key": "billing", "name": "Billing", "dept": "Front office", "issue": "the mistake on your bill" },
+    { "key": "booking", "name": "Booking / reservation", "dept": "Reservations", "issue": "the problem with your booking" },
+    { "key": "checkin", "name": "Check-in wait", "dept": "Front office", "issue": "the wait at check-in" },
+    { "key": "other", "name": "Other", "dept": "Front office", "issue": "the problem you had" }
+  ],
+  "severities": [
+    { "key": "minor", "name": "Minor", "means": "An inconvenience the desk fixes on the spot: a missing amenity, a slow Wi-Fi, a short wait. The stay goes on as planned.", "escalate": "Shift leader" },
+    { "key": "major", "name": "Major", "means": "The stay is clearly affected, or the guest complains a second time: no sleep because of noise, an air conditioning that does not work, a wrong bill.", "escalate": "Duty manager, the same shift" },
+    { "key": "critical", "name": "Critical", "means": "Safety, security or health (an injury, water near electrics, suspected bed bugs or food poisoning), discrimination or harassment, theft, a stay ended early, or a threat of legal action or the press.", "escalate": "General manager at once, and an incident report" }
+  ],
+  "learn": [
+    { "key": "listen", "name": "Listen", "hint": "Let the guest finish. Do not interrupt or explain; take notes." },
+    { "key": "empathise", "name": "Empathise", "hint": "Say that you understand how it feels: after a long flight, this is the last thing they need." },
+    { "key": "apologise", "name": "Apologise", "hint": "Apologise for the experience, sincerely, without blaming a colleague or another department." },
+    { "key": "resolve", "name": "Resolve", "hint": "Agree the fix with the guest, say by when, and do it, or check that the department did." },
+    { "key": "notify", "name": "Notify", "hint": "Tell the department and the duty manager, log it, and come back to the guest, so it does not happen again." }
+  ],
+  "compensation": [
+    { "key": "none", "name": "None", "value": 0, "phrase": "" },
+    { "key": "apology", "name": "Apology only", "value": 0, "phrase": "" },
+    { "key": "amenity", "name": "Amenity (fruit, wine, sweets)", "value": 12, "phrase": "we sent a small amenity to your room" },
+    { "key": "upgrade", "name": "Upgrade or room move", "value": 0, "phrase": "we moved you to a better room at no extra cost" },
+    { "key": "voucher", "name": "F&B voucher", "value": 18, "phrase": "we added a food and beverage voucher of {value} to your stay" },
+    { "key": "discount", "name": "Room-rate discount", "value": 30, "phrase": "we reduced your room rate by {value}" },
+    { "key": "refund", "name": "Room night refunded", "value": 129, "phrase": "we refunded one room night ({value})" },
+    { "key": "points", "name": "Loyalty points", "value": 20, "phrase": "we credited loyalty points worth {value} to your account" }
+  ],
+  "statuses": { "open": "Open", "resolved": "Resolved", "followed": "Followed up" },
+  "satisfied": { "yes": "Yes", "no": "No", "unknown": "Not known" },
+  "targets": { "inHouse": 15, "postStay": 24 },
+  "repeatDays": 30,
+  "replies": {
+    "email": {
+      "subject": "Subject: Your stay at {hotel} ({id})",
+      "hello": "Dear {guest},",
+      "helloAnon": "Dear guest,",
+      "sorry": "Thank you for telling us about {issue} on {date}. I am sorry: this is not the stay we want you to have.",
+      "done": "What we did: {action}",
+      "doing": "We are working on it now, and I will let you know as soon as it is put right.",
+      "comp": "As an apology, {comp}.",
+      "prevent": "I have passed it on to the team concerned, so that it does not happen again.",
+      "bye": "Kind regards,"
+    },
+    "message": {
+      "inline": true,
+      "hello": "Hello {guest},",
+      "helloAnon": "Hello,",
+      "sorry": "this is {hotel}. Thank you for telling us about {issue}, and I am sorry.",
+      "done": "What we did: {action}",
+      "doing": "We are on it and will message you as soon as it is put right.",
+      "comp": "As an apology, {comp}.",
+      "prevent": "The team concerned knows, so that it does not happen again.",
+      "bye": "Best regards,"
+    },
+    "review": {
+      "hello": "Dear guest,",
+      "helloAnon": "Dear guest,",
+      "sorry": "Thank you for your review and for telling us about {issue}. We are sorry that your stay was not what you expected.",
+      "done": "We have shared your comments with our {dept} team and have already acted on them.",
+      "doing": "We have shared your comments with our {dept} team, and they are working on it.",
+      "comp": "",
+      "prevent": "",
+      "bye": "We would be glad to welcome you again. Kind regards,"
+    }
+  },
+  "advice": {
+    "noise": {
+      "meaning": "Noise is the most frequent complaint in airport and city hotels: corridors at night, neighbours, events, early departures, lifts. The guest pays for sleep, and an early flight makes every minute count.",
+      "moves": [
+        "Offer a room move at once when the noise cannot be stopped within minutes; keep two quiet rooms (courtyard side, away from the lifts) unsold for as long as possible.",
+        "Allocate early-departure crews and groups to one wing, away from late arrivals and from the event rooms.",
+        "Walk the floors with groups at 22:00 and 23:30: security asks for quiet before the complaint, not after it."
+      ],
+      "question": "Which rooms and which hours give the most noise complaints, and does room allocation take them into account?"
+    },
+    "temperature": {
+      "meaning": "Temperature complaints come from fan coils, thermostats and window contacts. The same rooms come back again and again until engineering finds the cause instead of resetting the unit.",
+      "moves": [
+        "Engineering answers a temperature call within 15 minutes; when the room is not right within 30, the guest is moved.",
+        "Check filters, fan coils and window contacts on a plan, room by room, not only when a guest calls.",
+        "A room with a second temperature complaint in 30 days is blocked until the cause is fixed and tested."
+      ],
+      "question": "Which rooms had a temperature complaint twice, and what did engineering change the second time?"
+    },
+    "cleanliness": {
+      "meaning": "A hair, a stain or a used towel tells the guest that the whole room may not be clean. These complaints show what the room inspection missed, not only what the room attendant missed.",
+      "moves": [
+        "Re-clean at once with the supervisor present, and offer a room move when the room is not right within 20 minutes.",
+        "Inspect every room of a new room attendant and a sample of every attendant's rooms each day; add the item that failed to the checklist.",
+        "Suspected bed bugs: move the guest to another floor (not the next room), block the room and call pest control the same day."
+      ],
+      "question": "Which item of the room inspection missed what the guest found, and who checks it now?"
+    },
+    "maintenance": {
+      "meaning": "A defect the guest finds is often a defect housekeeping or the last guest saw first. A log of what failed, room by room, shows which defects to prevent instead of repair.",
+      "moves": [
+        "Engineering is called within 5 minutes; a defect that makes the room unusable means a room move, not a promise.",
+        "Housekeeping reports every defect it sees while cleaning, so it is fixed before the next arrival.",
+        "Water on the floor, electrics or a door lock is a safety issue: the room stays blocked until it is fixed and signed off."
+      ],
+      "question": "How many of these defects did housekeeping or engineering know about before the guest complained?"
+    },
+    "checkin": {
+      "meaning": "Waits at check-in come in waves: delayed flights, crews and groups arriving together. The guest is tired, and the first ten minutes set the tone of the stay.",
+      "moves": [
+        "Watch the arrivals and the flight times; call an extra agent to the desk when a wave is expected.",
+        "Pre-assign rooms and prepare key cards for groups and crews before they land.",
+        "Greet every guest in the queue within a minute, and offer water or coffee once the wait passes ten minutes."
+      ],
+      "question": "When did the last queue start, and could we have seen the wave coming?"
+    },
+    "billing": {
+      "meaning": "Billing errors reach the guest after the stay, by email, and cost trust and staff time. Most of them start with a posting or a rate loaded at reservation.",
+      "moves": [
+        "Check the folio with the guest at check-out, and line by line at the night audit for long stays.",
+        "Correct a confirmed error the same day and send the corrected invoice; a correction is not compensation.",
+        "Find the posting or the rate that caused it and fix it at the source in the PMS."
+      ],
+      "question": "Which posting or rate caused the last billing errors, and who checks it before departure?"
+    },
+    "default": {
+      "meaning": "One category gives most of the complaints. Removing its cause prevents more complaints than handling each one well.",
+      "moves": [
+        "Take the top category to 5 Whys with the department that owns it.",
+        "Agree one change with an owner and a date in the Action Tracker.",
+        "Look at the Pareto again in four weeks: a smaller first bar is the result to aim for."
+      ],
+      "question": "What would have to change so that this complaint does not happen at all?"
+    }
+  },
+  "tips": [
+    ["Log it while the guest is still with you.", "Time, room, channel and what happened in the guest's words. The clock for the target starts here, not when the problem reaches the duty manager."],
+    ["Walk through LEARN.", "Listen, empathise, apologise, resolve, notify. A guest who feels heard forgives the problem; a guest who is argued with writes the review."],
+    ["Fix it, then call back.", "Mark it resolved with what was done and any compensation, then contact the guest again within the hour or the next morning: that call decides whether they leave satisfied."],
+    ["Compensation follows the impact.", "An apology and a fix for a minor issue, a gesture for a major one, a refund only for a night that was really lost. Write the value in euros, so the cost of recovery is visible."],
+    ["A repeat room is a maintenance job.", "The same room with the same complaint twice in 30 days is not bad luck: send it to the Action Tracker with the room as the area."]
+  ],
+  "example": {
+    "me": "Elena · Front office",
+    "hotel": "Airport Hotel (example)",
+    "rooms": 150,
+    "nights": { "from": "2026-10-05", "sold": [138, 144, 146, 139, 121, 98, 117, 141, 147, 145, 136, 115, 102, 124] },
+    "rows": [
+      { "date": "2026-10-05", "time": "07:40", "room": "227", "channel": "person", "category": "fnb", "severity": "minor", "what": "No gluten-free bread at breakfast; the guest had a flight at 9:00.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "The kitchen toasted gluten-free bread from the freezer reserve; the chef added it to the opening checklist.", "comp": "apology", "value": 0, "resolved": "2026-10-05 07:52", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-05", "time": "22:15", "room": "318", "channel": "phone", "category": "noise", "severity": "minor", "what": "Loud group in the corridor after a late arrival.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "Security asked the group to keep the noise down and checked the floor again at 22:40: quiet.", "comp": "apology", "value": 0, "resolved": "2026-10-05 22:27", "followed": "2026-10-06", "satisfied": "yes" },
+      { "date": "2026-10-06", "time": "16:05", "room": "412", "channel": "person", "category": "temperature", "severity": "major", "what": "Air conditioning blows warm air, room at 26 °C.", "guest": "Mr A. Fischer", "takenBy": "Jonas", "learn": "LEARN", "action": "The engineer reset the fan coil and cleaned the filter; the room was at 21 °C by 16:35.", "comp": "amenity", "value": 12, "resolved": "2026-10-06 16:35", "followed": "2026-10-07", "satisfied": "yes" },
+      { "date": "2026-10-06", "time": "23:40", "room": "509", "channel": "phone", "category": "noise", "severity": "major", "what": "The neighbour's TV is loud through the connecting door; the guest has a flight at 6:00.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "Moved the guest to a superior room on the courtyard side and asked the neighbour to turn the TV down.", "comp": "upgrade", "value": 0, "resolved": "2026-10-07 00:10", "followed": "2026-10-07", "satisfied": "yes" },
+      { "date": "2026-10-07", "time": "06:10", "room": "133", "channel": "person", "category": "checkin", "severity": "minor", "what": "Waited 25 minutes at check-in when a delayed long-haul flight landed; one agent at the desk.", "guest": "", "takenBy": "Tomasz", "learn": "LERN", "action": "The night auditor called the early-shift agent in and offered breakfast on the house.", "comp": "voucher", "value": 18, "resolved": "2026-10-07 06:18", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-07", "time": "19:30", "room": "241", "channel": "chat", "category": "wifi", "severity": "minor", "what": "Wi-Fi drops every few minutes in the room.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Helped the guest onto the 5 GHz network; IT ticket for the access point on floor 2.", "comp": "none", "value": 0, "resolved": "2026-10-07 19:41", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-08", "time": "09:10", "room": "615", "channel": "email", "category": "billing", "severity": "minor", "what": "Charged twice for parking on the final invoice; the guest left yesterday.", "guest": "Ms J. Nowak", "takenBy": "Elena", "learn": "LEARN", "action": "Refunded the double parking charge of €18 and sent the corrected invoice.", "comp": "none", "value": 0, "resolved": "2026-10-08 15:40", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-08", "time": "21:50", "room": "318", "channel": "person", "category": "cleanliness", "severity": "minor", "what": "Hair in the bathtub.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "Housekeeping cleaned the bathroom again; the room attendant was briefed the next morning.", "comp": "apology", "value": 0, "resolved": "2026-10-08 22:10", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-09", "time": "07:20", "room": "304", "channel": "person", "category": "noise", "severity": "major", "what": "Housekeeping trolley and staff talking in the corridor from 7:00; the guest works night shifts.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Room put on the late-service list, no service before 11:00; the housekeeping supervisor apologised in person.", "comp": "voucher", "value": 18, "resolved": "2026-10-09 07:35", "followed": "2026-10-10", "satisfied": "yes" },
+      { "date": "2026-10-09", "time": "18:45", "room": "518", "channel": "person", "category": "maintenance", "severity": "major", "what": "Shower drain blocked, water on the bathroom floor.", "guest": "Mr K. Sato", "takenBy": "Jonas", "learn": "LEARN", "action": "The engineer cleared the drain; housekeeping dried the floor and changed the bath mat.", "comp": "discount", "value": 30, "resolved": "2026-10-09 19:25", "followed": "2026-10-10", "satisfied": "yes" },
+      { "date": "2026-10-10", "time": "23:55", "room": "221", "channel": "phone", "category": "noise", "severity": "minor", "what": "Music from the wedding in the event hall.", "guest": "", "takenBy": "Tomasz", "learn": "LEAR", "action": "The event manager turned the music down at once and ended it at 00:30 as contracted; earplugs sent to the room.", "comp": "apology", "value": 0, "resolved": "2026-10-11 00:08", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-11", "time": "11:20", "room": "106", "channel": "review", "category": "cleanliness", "severity": "major", "what": "Online review, 3 of 10: stained carpet and dust under the bed.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Answered the review the same day; room 106 deep-cleaned and the carpet shampooed.", "comp": "none", "value": 0, "resolved": "2026-10-11 16:50", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-12", "time": "06:50", "room": "412", "channel": "person", "category": "temperature", "severity": "major", "what": "Air conditioning not cooling again; the guest slept badly.", "guest": "Mr A. Fischer", "takenBy": "Jonas", "learn": "LEARN", "action": "Moved the guest to room 418; engineering replaced the fan coil motor in 412 and blocked the room until it was tested.", "comp": "discount", "value": 40, "resolved": "2026-10-12 07:20", "followed": "2026-10-13", "satisfied": "no" },
+      { "date": "2026-10-12", "time": "20:10", "room": "233", "channel": "person", "category": "staff", "severity": "minor", "what": "The receptionist was curt on the phone when the guest asked for a late check-out.", "guest": "", "takenBy": "Mira", "learn": "LEARN", "action": "The duty manager apologised in person, gave a late check-out until 13:00 and spoke with the colleague.", "comp": "apology", "value": 0, "resolved": "2026-10-12 20:22", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-13", "time": "07:05", "room": "129", "channel": "person", "category": "cleanliness", "severity": "minor", "what": "A used towel in the bathroom on an early arrival.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "Housekeeping replaced every towel and inspected the room again; the inspection list now names the towels.", "comp": "apology", "value": 0, "resolved": "2026-10-13 07:17", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-13", "time": "22:30", "room": "318", "channel": "phone", "category": "noise", "severity": "minor", "what": "Lift noise through the wall all evening.", "guest": "", "takenBy": "Tomasz", "learn": "LEAR", "action": "Offered a room move; the guest preferred to stay and took earplugs.", "comp": "apology", "value": 0, "resolved": "2026-10-13 22:41", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-14", "time": "09:30", "room": "702", "channel": "survey", "category": "maintenance", "severity": "minor", "what": "Survey after the stay: the bathroom door lock sticks and the TV remote had no batteries.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Thanked the guest by email; engineering repaired the lock and checked the remote in room 702.", "comp": "points", "value": 20, "resolved": "2026-10-14 14:00", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-14", "time": "17:50", "room": "610", "channel": "person", "category": "temperature", "severity": "minor", "what": "Room too cold; the heating does not respond to the thermostat.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "The engineer reset the thermostat; the heating came on within ten minutes.", "comp": "none", "value": 0, "resolved": "2026-10-14 18:02", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-15", "time": "02:10", "room": "211", "channel": "phone", "category": "cleanliness", "severity": "critical", "what": "Small insects on the mattress, suspected bed bugs; the guest checked out a night early.", "guest": "Ms L. Moreau", "takenBy": "Tomasz", "learn": "LEARN", "action": "Moved the guest at once to another floor and bagged the luggage for heat treatment; room 211 blocked, pest control called, the general manager informed.", "comp": "refund", "value": 129, "resolved": "2026-10-15 02:40", "followed": "2026-10-16", "satisfied": "no" },
+      { "date": "2026-10-15", "time": "19:20", "room": "326", "channel": "chat", "category": "temperature", "severity": "minor", "what": "The air conditioning rattles every time it starts.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "The engineer fixed a loose panel on the fan coil.", "comp": "none", "value": 0, "resolved": "2026-10-15 19:33", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-16", "time": "08:15", "room": "405", "channel": "person", "category": "maintenance", "severity": "critical", "what": "The guest slipped on a wet bathroom floor, shower seal leaking; grazed knee.", "guest": "Mrs H. Becker", "takenBy": "Mira", "learn": "LEARN", "action": "First aid by the first-aider, incident report written, shower seal replaced; the duty manager called the guest in the afternoon.", "comp": "refund", "value": 129, "resolved": "2026-10-16 08:50", "followed": "2026-10-16", "satisfied": "yes" },
+      { "date": "2026-10-16", "time": "23:15", "room": "514", "channel": "phone", "category": "maintenance", "severity": "minor", "what": "The window does not close fully; aircraft noise in the room.", "guest": "", "takenBy": "Tomasz", "learn": "LEARN", "action": "Moved the guest to a courtyard room; the window of 514 logged for engineering.", "comp": "upgrade", "value": 0, "resolved": "2026-10-16 23:35", "followed": "", "satisfied": "yes" },
+      { "date": "2026-10-17", "time": "10:30", "room": "117", "channel": "review", "category": "noise", "severity": "minor", "what": "Online review, 6 of 10: thin walls, the guest heard the neighbours.", "guest": "", "takenBy": "Elena", "learn": "LEARN", "action": "Answered the review the same day and explained the soundproofing planned for the first floor.", "comp": "none", "value": 0, "resolved": "2026-10-17 15:10", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-18", "time": "07:45", "room": "523", "channel": "person", "category": "temperature", "severity": "minor", "what": "Room too warm at night: the AC is set to 20 °C, the room stays at 24 °C.", "guest": "", "takenBy": "Jonas", "learn": "LEARN", "action": "The engineer found the window contact switching the AC off and adjusted it.", "comp": "none", "value": 0, "resolved": "2026-10-18 08:15", "followed": "", "satisfied": "unknown" },
+      { "date": "2026-10-18", "time": "21:40", "room": "308", "channel": "phone", "category": "noise", "severity": "major", "what": "Doors slamming and loud voices in the corridor from a sports team.", "guest": "Mr R. Davies", "takenBy": "Tomasz", "learn": "LEA", "action": "", "comp": "none", "value": 0, "resolved": "", "followed": "", "satisfied": "unknown" }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Guest Complaints", "type": "Hotel", "time": "Ongoing", "summary": "The complaint and service-recovery log of the front office: LEARN, the action, the compensation in euros, the time to resolve and the call back. Complaints per 100 occupied room nights, the share resolved within target, repeat rooms, the Pareto of the categories and a reply to the guest.", "url": "/tools/guest-complaints/", "cta": "Open the log" },
+    "de": { "name": "Gästebeschwerden", "type": "Hotel", "time": "Laufend", "summary": "Das Beschwerde- und Wiedergutmachungsprotokoll des Empfangs: LEARN, die Maßnahme, die Kompensation in Euro, die Lösungszeit und der Rückruf. Beschwerden pro 100 belegte Zimmernächte, der Anteil innerhalb der Zielzeit gelöst, Wiederholungszimmer, das Pareto der Kategorien und eine Antwort an den Gast.", "url": "/de/tools/guest-complaints/", "cta": "Protokoll öffnen" },
+    "sq": { "name": "Ankesat e mysafirëve", "type": "Hotel", "time": "Vazhdimisht", "summary": "Regjistri i ankesave dhe i rikuperimit të shërbimit në recepsion: LEARN, veprimi, kompensimi në euro, koha e zgjidhjes dhe telefonata pasuese. Ankesat për 100 net dhome të zëna, pjesa e zgjidhur brenda objektivit, dhomat që përsëriten, Pareto e kategorive dhe një përgjigje për mysafirin.", "url": "/sq/tools/guest-complaints/", "cta": "Hap regjistrin" }
+  },
+  "routine": { "when": "During the shift", "do": "Log every complaint while the guest is still with you, walk through LEARN, resolve it within the target and call the guest back before the shift ends.", "de": { "when": "Während der Schicht", "do": "Erfassen Sie jede Beschwerde, solange der Gast noch bei Ihnen ist, gehen Sie LEARN durch, lösen Sie sie innerhalb der Zielzeit und rufen Sie den Gast vor Schichtende zurück." }, "sq": { "when": "Gjatë turnit", "do": "Regjistro çdo ankesë sa mysafiri është ende me ty, kalo hapat e LEARN, zgjidhe brenda objektivit dhe telefono përsëri mysafirin para fundit të turnit." } },
+  "recipe": "example"
+}

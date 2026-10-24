@@ -1,0 +1,68 @@
+/* ===== Guest Complaints (js/guest-complaints.js) =====
+   The complaint log of a front office: the entry form, the log, one complaint with LEARN, its resolution and the
+   reply to the guest, and the result with the open complaints and the repeat rooms. A flag is told by its sign
+   (✕ ! ✓) and its words; the colour only repeats it. The log prints on A4. */
+.gc-severity-note { margin: -4px 0 0; }
+
+.gc-table .gc-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.gc-table .gc-critical { font-weight: 700; }
+.gc-status { min-width: 10em; }
+.gc-status > span { display: block; font-weight: 600; }
+.gc-status.is-danger > span { color: var(--danger); }
+.gc-status.is-warn > span { color: var(--warn); }
+.gc-open { margin-top: 4px; padding: 4px 10px; font-size: 13px; }
+
+.gc-case .field { max-width: 640px; }
+.gc-case-card { margin: 12px 0 4px; }
+.gc-case-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 8px; }
+.gc-case-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 18px; }
+.gc-flag { font-weight: 700; font-size: 14px; }
+.gc-flag.is-ok { color: var(--ok); }
+.gc-flag.is-warn { color: var(--warn); }
+.gc-flag.is-danger { color: var(--danger); }
+.gc-facts { display: grid; grid-template-columns: minmax(7em, max-content) minmax(0, 1fr); gap: 4px 14px; margin: 0 0 12px; }
+.gc-facts dt { color: var(--muted); font-size: 14px; }
+.gc-facts dd { margin: 0; overflow-wrap: anywhere; }
+
+.gc-recovery, .gc-reply { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.gc-recovery fieldset { margin: 0 0 14px; padding: 0; border: 0; min-width: 0; }
+.gc-learn-list { display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; }
+.gc-learn-list li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.gc-learn-list li:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.gc-learn-list input { flex: 0 0 auto; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--blue); }
+.gc-learn-list label { display: grid; gap: 2px; cursor: pointer; }
+.gc-learn-list label span { color: var(--muted); font-size: 14px; }
+.gc-when { margin-top: 10px; }
+.gc-reply textarea { width: 100%; min-height: 12em; font: inherit; line-height: 1.5; background: var(--paper); }
+
+.gc-severity-list { margin: 18px 0; }
+.gc-severity-list dt { font-weight: 700; }
+.gc-severity-list dd { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+.gc-severity-list em { font-style: normal; color: var(--ink); }
+
+.gc-results .result-head { margin-bottom: 14px; }
+.gc-open-card, .gc-repeat-card { margin: 18px 0; }
+.gc-list { display: grid; gap: 12px; margin: 8px 0 4px; padding: 0; list-style: none; }
+.gc-list li { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px 14px; padding-left: 10px; border-left: 3px solid var(--line); }
+.gc-list li.is-danger { border-left-color: var(--danger); }
+.gc-list li.is-warn { border-left-color: var(--warn); }
+.gc-list-text { display: grid; gap: 2px; min-width: 0; flex: 1 1 260px; overflow-wrap: anywhere; }
+.gc-list-text small { color: var(--muted); font-size: 13px; }
+.gc-list li > .button-secondary, .gc-list li > .button-ghost { padding: 6px 12px; font-size: 14px; }
+.gc-register { display: none; }
+
+@media (max-width: 600px) {
+  .gc-facts { grid-template-columns: minmax(0, 1fr); }
+  .gc-facts dd { margin-bottom: 6px; }
+  .gc-list li > .button-secondary, .gc-list li > .button-ghost { width: 100%; text-align: center; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .gc-setup, .gc-results .result-actions, .gc-results .ck-actions, .gc-list .button-secondary, .gc-list .button-ghost, .gc-results .dl-focus .tool-actions { display: none !important; }
+  .gc-results { padding: 0; }
+  .gc-results .dl-panel, .gc-open-card, .gc-repeat-card { break-inside: avoid; }
+  .gc-register { display: block; margin-top: 18px; break-before: page; }
+  .gc-register .dl-table { width: 100%; font-size: 9.5pt; border-collapse: collapse; }
+  .gc-register th, .gc-register td { padding: 3px 5px; border-bottom: 1px solid #c8cdd2; text-align: left; vertical-align: top; }
+}

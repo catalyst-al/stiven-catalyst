@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Guest Complaints
+seo_title: "Guest complaint log for hotels: LEARN, service recovery, cost and complaints per 100 room nights"
+description: "A private guest complaint log for the front office: LEARN, compensation, time to resolve, follow-up, repeat rooms, a Pareto and a reply to the guest."
+activeNav: /tools.html
+permalink: /tools/guest-complaints/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Hotel</p>
+  <h1>Guest Complaints</h1>
+  <p class="lede">Log every complaint the moment the guest makes it: time, room, channel, category and severity, in the guest's words. Walk through LEARN, write what was done and what it cost, resolve it against the target and call the guest back. The log gives the complaints per 100 occupied room nights, the share resolved within target, the median time to resolve, the cost of recovery, how many guests left satisfied, the rooms that complain twice and the Pareto of the categories, with a reply to the guest to copy and a summary for the handover.</p>
+</section>
+
+{% set cfg = guestComplaints %}
+{% include "partials/guest-complaints.njk" %}

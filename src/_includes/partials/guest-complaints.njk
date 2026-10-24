@@ -1,0 +1,263 @@
+{#- Guest Complaints: the complaint and service-recovery log of a front office, from the complaint to the call back, with LEARN, compensation, the rate per 100 occupied room nights and the reply to the guest; guest-complaints.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout gc-setup">
+  <div class="tool-panel" data-guest-complaints>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ t.entryLegend }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="gc-date">{{ "Date" | t(lang) }}</label>
+            <input id="gc-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="gc-time">{{ "Time" | t(lang) }}</label>
+            <input id="gc-time" name="time" type="time" required>
+          </div>
+          <div class="field">
+            <label for="gc-room">{{ "Room number" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="gc-room" name="room" inputmode="numeric" placeholder="{{ t.roomPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="gc-channel">{{ "Channel" | t(lang) }}</label>
+            <select id="gc-channel" name="channel">
+              {%- for item in cfg.channels %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="gc-category">{{ "Category" | t(lang) }}</label>
+            <select id="gc-category" name="category">
+              {%- for item in cfg.categories %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="gc-severity">{{ "Severity" | t(lang) }}</label>
+            <select id="gc-severity" name="severity" aria-describedby="gc-severity-note">
+              {%- for item in cfg.severities %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <p class="form-note dl-wide gc-severity-note" id="gc-severity-note" data-severity-note aria-live="polite"></p>
+          <div class="field dl-wide">
+            <label for="gc-what">{{ "What happened" | t(lang) }}</label>
+            <textarea id="gc-what" name="what" rows="2" placeholder="{{ t.whatPlaceholder }}" required></textarea>
+          </div>
+          <div class="field">
+            <label for="gc-taken-by">{{ "Taken by" | t(lang) }}</label>
+            <input id="gc-taken-by" name="takenBy" placeholder="{{ t.takenByPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="gc-guest">{{ "Guest name" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="gc-guest" name="guest" placeholder="{{ t.guestPlaceholder }}" autocomplete="off" aria-describedby="gc-guest-note">
+            <span class="form-note" id="gc-guest-note">{{ t.guestPrivacy }}</span>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "time" | t(lang) }}, {{ "room" | t(lang) }}, {{ "channel" | t(lang) }}, {{ "category" | t(lang) }}, {{ "severity" | t(lang) }}, {{ "what happened" | t(lang) }}, {{ "guest" | t(lang) }}, {{ "taken by" | t(lang) }}, {{ "action taken" | t(lang) }}, {{ "compensation" | t(lang) }}, {{ "value €" | t(lang) }}, {{ "resolved date" | t(lang) }}, {{ "resolved time" | t(lang) }}, {{ "follow-up date" | t(lang) }}, {{ "guest satisfied" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="gc-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="gc-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date","time","room","channel","category","severity","what","guest","takenBy","action","comp","value","resolvedDate","resolvedTime","followed","satisfied"]' data-column-labels='[{{ "date" | t(lang) | dump }},{{ "time" | t(lang) | dump }},{{ "room" | t(lang) | dump }},{{ "channel" | t(lang) | dump }},{{ "category" | t(lang) | dump }},{{ "severity" | t(lang) | dump }},{{ "what happened" | t(lang) | dump }},{{ "guest" | t(lang) | dump }},{{ "taken by" | t(lang) | dump }},{{ "action taken" | t(lang) | dump }},{{ "compensation" | t(lang) | dump }},{{ "value €" | t(lang) | dump }},{{ "resolved date" | t(lang) | dump }},{{ "resolved time" | t(lang) | dump }},{{ "follow-up date" | t(lang) | dump }},{{ "guest satisfied" | t(lang) | dump }}]'></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Period and targets" | t(lang) }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "gc" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field">
+          <label for="gc-target-house">{{ "Target in the house (minutes)" | t(lang) }}</label>
+          <input id="gc-target-house" name="targetInHouse" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.targets.inHouse }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="gc-target-after">{{ "Target after the stay (hours)" | t(lang) }}</label>
+          <input id="gc-target-after" name="targetPostStay" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.targets.postStay }}" data-setting>
+        </div>
+        <p class="form-note dl-wide">{{ "Empty boxes use the defaults shown." | t(lang) }} {{ t.targetNote }}</p>
+        <div class="field dl-wide">
+          <label for="gc-nights">{{ "Occupied room nights in the period" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="gc-nights" name="roomNights" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.nightsPlaceholder }}" aria-describedby="gc-nights-note" data-setting data-period-total>
+          <span class="form-note" id="gc-nights-note" data-nights-note aria-live="polite">{{ t.nightsNote }}</span>
+        </div>
+        <div class="field">
+          <label for="gc-me">{{ "Your name, for the reply" | t(lang) }}</label>
+          <input id="gc-me" name="me" placeholder="{{ t.mePlaceholder }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="gc-hotel">{{ "Hotel name, for the guest reply" | t(lang) }}</label>
+          <input id="gc-hotel" name="hotel" placeholder="{{ t.hotelPlaceholder }}" autocomplete="off" data-setting>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table gc-table">
+          <thead>
+            <tr><th scope="col">{{ "ID" | t(lang) }}</th><th scope="col">{{ "Logged" | t(lang) }}</th><th scope="col">{{ "Room" | t(lang) }}</th><th scope="col">{{ "Category" | t(lang) }}</th><th scope="col">{{ "Severity" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example log" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-forget>{{ "Remove guest names of closed complaints" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box gc-case" data-case-box id="gc-case" tabindex="-1">
+      <p class="kicker">4 · {{ "Recovery: LEARN, compensation, follow-up and reply" | t(lang) }}</p>
+      <p class="form-note" data-case-empty>{{ "Pick a complaint in the log with Open, or log one above." | t(lang) }}</p>
+      <div data-case-parts hidden>
+        <div class="field">
+          <label for="gc-pick">{{ "Complaint" | t(lang) }}</label>
+          <select id="gc-pick" name="pick"></select>
+        </div>
+        <div class="gc-case-card" data-case-card aria-live="polite"></div>
+
+        <form class="gc-recovery" data-recovery novalidate>
+          <fieldset class="gc-learn">
+            <legend class="result-label">{{ "LEARN with the guest" | t(lang) }}</legend>
+            <ol class="gc-learn-list">
+              {%- for step in cfg.learn %}
+              <li>
+                <input id="gc-learn-{{ step.key }}" type="checkbox" name="learn" value="{{ step.key }}">
+                <label for="gc-learn-{{ step.key }}"><strong>{{ step.name }}</strong> <span>{{ step.hint }}</span></label>
+              </li>
+              {%- endfor %}
+            </ol>
+          </fieldset>
+          <fieldset>
+            <legend class="result-label">{{ "Resolution" | t(lang) }}</legend>
+            <div class="dl-grid">
+              <div class="field dl-wide">
+                <label for="gc-action">{{ "Action taken" | t(lang) }}</label>
+                <textarea id="gc-action" name="action" rows="2" placeholder="{{ t.actionPlaceholder }}"></textarea>
+              </div>
+              <div class="field">
+                <label for="gc-comp">{{ "Compensation" | t(lang) }}</label>
+                <select id="gc-comp" name="comp" aria-describedby="gc-comp-note">
+                  {%- for item in cfg.compensation %}
+                  <option value="{{ item.key }}">{{ item.name }}</option>
+                  {%- endfor %}
+                </select>
+              </div>
+              <div class="field">
+                <label for="gc-value">{{ "Value (€)" | t(lang) }}</label>
+                <input id="gc-value" name="compValue" inputmode="decimal" placeholder="{{ t.valuePlaceholder }}" autocomplete="off">
+              </div>
+              <p class="form-note dl-wide" id="gc-comp-note">{{ t.upgradeNote }} {{ t.notCompensation }}</p>
+              <div class="field">
+                <label for="gc-status">{{ "Status" | t(lang) }}</label>
+                <select id="gc-status" name="status">
+                  {%- for key, name in cfg.statuses %}
+                  <option value="{{ key }}">{{ name }}</option>
+                  {%- endfor %}
+                </select>
+              </div>
+              <div class="field">
+                <label for="gc-satisfied">{{ "Guest satisfied" | t(lang) }}</label>
+                <select id="gc-satisfied" name="satisfied">
+                  {%- for key, name in cfg.satisfied %}
+                  <option value="{{ key }}">{{ name }}</option>
+                  {%- endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="dl-grid gc-when" data-resolved-fields hidden>
+              <div class="field">
+                <label for="gc-resolved-date">{{ "Resolved on" | t(lang) }}</label>
+                <input id="gc-resolved-date" name="resolvedDate" type="date">
+              </div>
+              <div class="field">
+                <label for="gc-resolved-time">{{ "Resolved at" | t(lang) }}</label>
+                <input id="gc-resolved-time" name="resolvedTime" type="time">
+              </div>
+              <div class="field" data-followed-field hidden>
+                <label for="gc-followed">{{ "Guest contacted again on" | t(lang) }}</label>
+                <input id="gc-followed" name="followed" type="date">
+              </div>
+            </div>
+            <div class="tool-actions">
+              <button class="button-primary" type="submit">{{ "Save the recovery" | t(lang) }}</button>
+              <p class="form-note" data-recovery-status aria-live="polite"></p>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="gc-reply">
+          <p class="result-label">{{ "Reply to the guest" | t(lang) }}</p>
+          <div class="field">
+            <label for="gc-reply-kind">{{ "Reply as" | t(lang) }}</label>
+            <select id="gc-reply-kind" name="replyKind">
+              <option value="email">{{ "Email" | t(lang) }}</option>
+              <option value="message">{{ "Chat or WhatsApp message" | t(lang) }}</option>
+              <option value="review">{{ "Public answer to an online review" | t(lang) }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="gc-reply">{{ "Text to copy" | t(lang) }}</label>
+            <textarea id="gc-reply" rows="10" readonly></textarea>
+          </div>
+          <div class="tool-actions" data-case-actions>
+            <button class="button-primary" type="button" data-copy-reply>{{ "Copy the reply" | t(lang) }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "One category keeps coming back?" | t(lang) }}</strong> {{ "Open it in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>{{ ", ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>{{ ", and send the fix to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+      <li><strong>{{ "The rate needs the room nights." | t(lang) }}</strong> {{ "Fill in" | t(lang) }} <a class="inline-link" href="{{ '/tools/hotel-kpis/' | local(lang) }}">{{ "Hotel KPIs" | t(lang) }}</a> {{ "every night, and the complaints per 100 occupied room nights compute themselves." | t(lang) }}</li>
+    </ul>
+    <dl class="gc-severity-list">
+      {%- for item in cfg.severities %}
+      <dt>{{ item.name }}</dt>
+      <dd>{{ item.means }} <em>{{ item.escalate }}.</em></dd>
+      {%- endfor %}
+    </dl>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }} {{ "Guest names are personal data: write a name only when you need it to call the guest back." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results gc-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="guest-complaints-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/guest-complaints.js' | assetUrl }}" defer></script>
