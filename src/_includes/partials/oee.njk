@@ -1,0 +1,174 @@
+{#- OEE: machines with their ideal rate, a log of shifts with stops, pieces and rejects, and the six big losses. oee.js does the rest. -#}
+<section class="shell tool-layout oe-setup">
+  <div class="tool-panel" data-oee>
+
+    <div class="dl-box oe-machines">
+      <p class="kicker">1 · {{ "Equipment" | t(lang) }}</p>
+      <p class="form-note">{{ "Each machine with its ideal rate: the pieces per hour it makes at full speed, from the machine plate or the supplier. The ideal cycle in seconds works too." | t(lang) }}</p>
+      <form class="dl-grid" data-machine-form novalidate>
+        <div class="field">
+          <label for="oe-mname">{{ "Name" | t(lang) }}</label>
+          <input id="oe-mname" name="mname" placeholder="{{ cfg.placeholders.machine }}" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="oe-mrate">{{ "Ideal rate (pieces per hour)" | t(lang) }}</label>
+          <input id="oe-mrate" name="mrate" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="oe-mcycle">{{ "or ideal cycle (seconds)" | t(lang) }}</label>
+          <input id="oe-mcycle" name="mcycle" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="oe-mplanned">{{ "Planned minutes per shift" | t(lang) }}</label>
+          <input id="oe-mplanned" name="mplanned" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.defaultPlanned }}">
+        </div>
+        <div class="tool-actions dl-wide">
+          <button class="button-secondary" type="submit">{{ "Save machine" | t(lang) }}</button>
+          <p class="form-note" data-machine-status aria-live="polite"></p>
+        </div>
+      </form>
+      <div class="dl-table-wrap" tabindex="0" data-machine-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Equipment" | t(lang) }}</th><th scope="col" class="num">{{ "Pieces per hour" | t(lang) }}</th><th scope="col" class="num">{{ "Cycle (s)" | t(lang) }}</th><th scope="col" class="num">{{ "Minutes per shift" | t(lang) }}</th><th scope="col" class="num">{{ "Entries" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-machine-list></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-machine-empty>{{ "No machine yet. Add the first one above." | t(lang) }}</p>
+    </div>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">2 · {{ "Log a shift" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="oe-date">{{ "Date" | t(lang) }}</label>
+            <input id="oe-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="oe-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="oe-shift" name="shift">
+              {%- for shift in cfg.shifts %}
+              <option>{{ shift }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="oe-equipment">{{ "Equipment" | t(lang) }}</label>
+            <select id="oe-equipment" name="equipment"></select>
+          </div>
+          <div class="field">
+            <label for="oe-planned">{{ "Planned minutes" | t(lang) }}</label>
+            <input id="oe-planned" name="planned" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ cfg.defaultPlanned }}">
+          </div>
+          <div class="field dl-wide">
+            <label for="oe-stops">{{ "Stops: reason and minutes" | t(lang) }}</label>
+            <input id="oe-stops" name="stops" placeholder="{{ cfg.placeholders.stops }}" autocomplete="off" aria-describedby="oe-stops-note">
+            <p class="form-note" id="oe-stops-note">{{ "Tap a reason to add it, then type its minutes. Planned stops (breaks, meetings, no orders) are taken out of the planned time." | t(lang) }}</p>
+            <div class="oe-reasons">
+              {%- for key in ["breakdowns", "setup", "smallStops", "speed", "planned"] %}
+              <div class="oe-reason-group">
+                <span class="oe-reason-label">{% if key == "planned" %}{{ "Planned stops" | t(lang) }}{% else %}{{ cfg.losses[key].name }}{% endif %}</span>
+                {%- for reason in cfg.reasons %}{% if reason.loss == key %}
+                <button class="oe-reason" type="button" data-reason="{{ reason.name }}">{{ reason.name }}</button>
+                {%- endif %}{% endfor %}
+              </div>
+              {%- endfor %}
+            </div>
+            <p class="form-note oe-preview" data-stops-preview aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="oe-pieces">{{ "Pieces made" | t(lang) }}</label>
+            <input id="oe-pieces" name="pieces" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="oe-rejects">{{ "Rejects" | t(lang) }}</label>
+            <input id="oe-rejects" name="rejects" type="number" min="0" step="1" inputmode="numeric" placeholder="0">
+          </div>
+          <div class="field">
+            <label for="oe-startup">{{ "of them at startup" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="oe-startup" name="startup" type="number" min="0" step="1" inputmode="numeric" placeholder="0">
+          </div>
+          <div class="field dl-wide">
+            <label for="oe-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="oe-note" name="note" placeholder="{{ cfg.placeholders.note }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ "One row per machine and shift" | t(lang) }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "equipment" | t(lang) }}, {{ "planned minutes" | t(lang) }}, {{ "stops" | t(lang) }}, {{ "pieces" | t(lang) }}, {{ "rejects" | t(lang) }}, {{ "startup rejects" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "The stops as reason: minutes, separated by commas or semicolons; a machine that is not in the list is added without a rate." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="oe-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="oe-paste" rows="5" placeholder="{{ cfg.placeholders.paste }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">3 · {{ "Period" | t(lang) }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "oe" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field">
+          <label for="oe-filter">{{ "Equipment" | t(lang) }}</label>
+          <select id="oe-filter" name="machine" data-setting data-machine-filter>
+            <option value="">{{ "All equipment" | t(lang) }}</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">4 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col">{{ "Equipment" | t(lang) }}</th><th scope="col" class="num">{{ "Planned" | t(lang) }}</th><th scope="col">{{ "Stops" | t(lang) }}</th><th scope="col" class="num">{{ "Pieces" | t(lang) }}</th><th scope="col" class="num">{{ "Rejects" | t(lang) }}</th><th scope="col" class="num">OEE</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ "No shifts logged yet." | t(lang) }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example of three weeks" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Attack the biggest loss." | t(lang) }}</strong> {{ "One loss usually carries most of the gap. Take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "and give the countermeasure an owner and a date in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results oe-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="oee-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/oee.js' | assetUrl }}" defer></script>

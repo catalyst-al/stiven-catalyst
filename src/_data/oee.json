@@ -1,0 +1,248 @@
+{
+ "storageKey": "sc-oee",
+ "title": "OEE",
+ "defaultPlanned": 480,
+ "shifts": [
+  "Early",
+  "Late",
+  "Night"
+ ],
+ "reasons": [
+  {
+   "name": "Breakdown",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Electrical fault",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Waiting for maintenance",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Changeover",
+   "loss": "setup"
+  },
+  {
+   "name": "Adjustment",
+   "loss": "setup"
+  },
+  {
+   "name": "Material change",
+   "loss": "setup"
+  },
+  {
+   "name": "Jam",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Blocked or starved",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Misread stop",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Running slow",
+   "loss": "speed"
+  },
+  {
+   "name": "Break",
+   "loss": "planned"
+  },
+  {
+   "name": "Meeting",
+   "loss": "planned"
+  },
+  {
+   "name": "Planned maintenance",
+   "loss": "planned"
+  },
+  {
+   "name": "No orders",
+   "loss": "planned"
+  }
+ ],
+ "losses": {
+  "breakdowns": {
+   "name": "Breakdowns",
+   "meaning": "The machine stopped because something failed: a motor, a sensor, a seal bar. Each breakdown takes the whole run time with it, and the same failures tend to return.",
+   "moves": [
+    "List the breakdowns of the last two weeks by component; the top one gets a 5 Whys this week.",
+    "Agree a reaction standard: who is called after how many minutes, and what the operator checks first.",
+    "Add the failing part to daily operator care: clean, inspect, tighten, with a tick on the machine."
+   ],
+   "question": "Which part failed most often, and what did it look like one shift before?"
+  },
+  "setup": {
+   "name": "Setup and adjustments",
+   "meaning": "Changeovers, adjustments and the start-up after a change: the time from the last good piece of one order to the first good piece of the next.",
+   "moves": [
+    "Film one changeover and split it into steps the machine must be stopped for and steps that can be done while it runs.",
+    "Prepare tools, film and settings before the stop: a changeover cart with a checklist.",
+    "Write the settings of each product on the machine, so nobody adjusts by trial and error."
+   ],
+   "question": "Which steps of the changeover could be done before the machine stops?"
+  },
+  "smallStops": {
+   "name": "Small stops",
+   "meaning": "Jams, misfeeds, a blocked outfeed: stops of a minute or two that the operator clears without calling anyone. One by one they look harmless; together they eat an hour.",
+   "moves": [
+    "Count the small stops of one shift with a tally sheet at the machine, by place.",
+    "Fix the top jam point with the operator and maintenance together, not with a workaround.",
+    "Check the infeed: an uneven flow of parcels or packs starts most jams."
+   ],
+   "question": "Where on the machine does the operator reach in most often?"
+  },
+  "speed": {
+   "name": "Reduced speed",
+   "meaning": "The machine runs, but slower than its ideal rate: set down after a problem and never set back, or running at the pace of the slowest product.",
+   "moves": [
+    "Compare the set speed with the ideal rate on the machine plate and in the settings; write down why they differ.",
+    "Raise the speed in steps of 5 % on one shift and watch rejects and jams.",
+    "Find out what the machine waits for: the infeed, the outfeed or the operator."
+   ],
+   "question": "Why does the machine run at this speed, and who decided it?"
+  },
+  "startupRejects": {
+   "name": "Startup rejects",
+   "meaning": "Bad pieces made while the machine warms up or after a changeover, before the settings are stable.",
+   "moves": [
+    "For one week, count the rejects of the first 15 minutes apart from the rest.",
+    "Write down the start-up settings of each product and check them before the first piece.",
+    "Warm up the parts that need it (seal bars, glue) before the shift starts."
+   ],
+   "question": "How many pieces does it take until the first good one, and why that many?"
+  },
+  "productionRejects": {
+   "name": "Production rejects",
+   "meaning": "Bad pieces in stable running: misreads, missorts, weak seals, damage. Each one used machine time and must be made again.",
+   "moves": [
+    "Sort the rejects of one shift by defect type; the biggest one gets a check at the machine.",
+    "Show the reject count at the machine every hour, so the operator sees a change at once.",
+    "Check the input: many rejects come from labels, packaging or material, not from the machine."
+   ],
+   "question": "What does a typical reject look like, and where was it made?"
+  }
+ },
+ "verdicts": [
+  {
+   "name": "World class",
+   "note": "85 % or more: availability, performance and quality all near their best."
+  },
+  {
+   "name": "Typical",
+   "note": "60 to 85 %: a usual result, with clear losses to win back."
+  },
+  {
+   "name": "Low",
+   "note": "40 to 60 %: large losses; the biggest one is worth a project of its own."
+  },
+  {
+   "name": "Poor",
+   "note": "Under 40 %: check the data first, then the biggest loss."
+  }
+ ],
+ "placeholders": {
+  "machine": "e.g. Sorter S1",
+  "stops": "Jam: 12; Changeover: 20; Break: 30",
+  "note": "e.g. Film from the new supplier",
+  "paste": "2026-10-22; Early; Sorter S1; 480; Break: 30, Jam: 12; 15200; 540; 90"
+ },
+ "tips": [
+  [
+   "Start with the bottleneck.",
+   "Its OEE is the output of the whole line. Measure one machine well before you measure all of them."
+  ],
+  [
+   "Write the reason, not only the minutes.",
+   "A stop without a reason cannot be fixed. Keep the list of reasons short and the same on every shift."
+  ],
+  [
+   "Use the ideal rate from the machine plate.",
+   "Not the speed it usually runs at. When performance shows 100 %, the ideal rate is probably set too low."
+  ],
+  [
+   "Planned stops are not losses.",
+   "Breaks, meetings and no orders are taken out of the planned time, so OEE measures only the time the machine was meant to run."
+  ]
+ ],
+ "example": {
+  "equipment": [
+   {
+    "name": "Sorter S1",
+    "rate": 2400,
+    "planned": 480
+   },
+   {
+    "name": "Wrapper W2",
+    "rate": 1800,
+    "planned": 480
+   }
+  ],
+  "rows": [
+   "2026-09-28|Early|Sorter S1|480|Break: 30; Changeover: 10; Jam: 12|13795|467|77|",
+   "2026-09-28|Early|Wrapper W2|480|Break: 30; Breakdown: 77; Changeover: 22; Waiting for maintenance: 11; Jam: 12|8248|480|190|",
+   "2026-09-28|Late|Sorter S1|480|Break: 30; Jam: 9|13941|466|74|",
+   "2026-09-28|Late|Wrapper W2|480|Break: 30; Breakdown: 78; Changeover: 22; Waiting for maintenance: 17; Jam: 10|8527|451|145|",
+   "2026-09-29|Early|Sorter S1|480|Break: 30; Changeover: 10; Jam: 5|13591|469|90|",
+   "2026-09-29|Early|Wrapper W2|480|Break: 30; Breakdown: 48; Changeover: 18; Electrical fault: 24; Jam: 12|8723|542|167|",
+   "2026-09-29|Late|Sorter S1|480|Break: 30; Jam: 5; Misread stop: 3|14111|595|124|",
+   "2026-09-29|Late|Wrapper W2|480|Break: 30; Breakdown: 83; Changeover: 17; Waiting for maintenance: 13; Jam: 9|8384|472|173|",
+   "2026-09-30|Early|Sorter S1|480|Break: 30; Changeover: 10; Jam: 12|13881|405|90|",
+   "2026-09-30|Early|Wrapper W2|480|Break: 30; Breakdown: 81; Changeover: 15; Jam: 11|8318|566|228|",
+   "2026-09-30|Late|Sorter S1|480|Break: 30; Jam: 8|13923|372|97|",
+   "2026-09-30|Late|Wrapper W2|480|Break: 30; Breakdown: 100; Changeover: 27; Jam: 8|8216|451|192|",
+   "2026-10-01|Early|Sorter S1|480|Break: 30; Changeover: 13; Jam: 4; Breakdown: 11|12900|500|119|",
+   "2026-10-01|Early|Wrapper W2|480|Break: 30; Breakdown: 79; Changeover: 22; Jam: 8|8571|540|235|",
+   "2026-10-01|Late|Sorter S1|480|Break: 30; Jam: 5; Breakdown: 18|13769|522|119|New operator on the infeed",
+   "2026-10-01|Late|Wrapper W2|480|Break: 30; Breakdown: 98; Changeover: 29; Adjustment: 10; Jam: 10|7480|390|142|",
+   "2026-10-02|Early|Sorter S1|480|Break: 30; Changeover: 11; Jam: 10|14132|595|94|",
+   "2026-10-02|Early|Wrapper W2|480|Break: 30; Breakdown: 98; Changeover: 15; Waiting for maintenance: 15; Jam: 11|7818|478|170|",
+   "2026-10-02|Late|Sorter S1|480|Break: 30; Jam: 9|13997|522|98|",
+   "2026-10-02|Late|Wrapper W2|480|Break: 30; Breakdown: 80; Changeover: 19; Waiting for maintenance: 10; Jam: 10|8701|481|194|",
+   "2026-10-05|Early|Sorter S1|480|Break: 30; Changeover: 13; Jam: 12|13101|488|109|Speed set down after the jam on Monday",
+   "2026-10-05|Early|Wrapper W2|480|Break: 30; Breakdown: 46; Changeover: 16; Waiting for maintenance: 13; Jam: 5|8842|611|248|",
+   "2026-10-05|Late|Sorter S1|480|Break: 30; Jam: 8|14057|483|89|",
+   "2026-10-05|Late|Wrapper W2|480|Break: 30; Breakdown: 46; Changeover: 28; Electrical fault: 26; Jam: 11|8525|427|152|",
+   "2026-10-06|Early|Sorter S1|480|Break: 30; Changeover: 14; Jam: 10; Breakdown: 22; Misread stop: 6|12520|464|73|",
+   "2026-10-06|Early|Wrapper W2|480|Break: 30; Breakdown: 41; Changeover: 28; Jam: 11|9829|546|240|",
+   "2026-10-06|Late|Sorter S1|480|Break: 30; Jam: 8; Breakdown: 18; Misread stop: 8|13632|456|87|",
+   "2026-10-06|Late|Wrapper W2|480|Break: 30; Breakdown: 51; Changeover: 21; Waiting for maintenance: 14; Jam: 8|8868|447|196|",
+   "2026-10-07|Early|Sorter S1|480|Break: 30; Changeover: 14; Jam: 10; Breakdown: 19|12984|406|82|",
+   "2026-10-07|Early|Wrapper W2|480|Break: 30; Breakdown: 48; Changeover: 17; Adjustment: 10; Jam: 10|8848|519|192|",
+   "2026-10-07|Late|Sorter S1|480|Break: 30; Jam: 4; Misread stop: 7|13361|370|99|",
+   "2026-10-07|Late|Wrapper W2|480|Break: 30; Breakdown: 64; Changeover: 30; Electrical fault: 23; Jam: 7|8324|467|159|",
+   "2026-10-08|Early|Sorter S1|480|Break: 30; Changeover: 11; Jam: 9; Breakdown: 21|12378|414|64|",
+   "2026-10-08|Early|Wrapper W2|480|Break: 30; Breakdown: 48; Changeover: 26; Jam: 12|9067|463|161|Seal bar heater replaced",
+   "2026-10-08|Late|Sorter S1|480|Break: 30; Jam: 8; Breakdown: 17|13102|393|112|",
+   "2026-10-08|Late|Wrapper W2|480|Break: 30; Breakdown: 69; Changeover: 20; Electrical fault: 28; Jam: 5|7835|435|182|",
+   "2026-10-09|Early|Sorter S1|480|Break: 30; Changeover: 12; Jam: 4; Breakdown: 25|12954|475|131|",
+   "2026-10-09|Early|Wrapper W2|480|Break: 30; Breakdown: 63; Changeover: 19; Adjustment: 14; Jam: 10|8487|463|203|",
+   "2026-10-09|Late|Sorter S1|480|Break: 30; Jam: 5; Misread stop: 8|14163|485|134|",
+   "2026-10-09|Late|Wrapper W2|480|Break: 30; Breakdown: 72; Changeover: 27; Electrical fault: 21; Waiting for maintenance: 12; Jam: 5|8108|534|161|",
+   "2026-10-12|Early|Sorter S1|480|Break: 30; Changeover: 13; Jam: 5; Breakdown: 17; Misread stop: 7|12659|464|91|",
+   "2026-10-12|Early|Wrapper W2|480|Break: 30; Breakdown: 67; Changeover: 18; Waiting for maintenance: 18; Jam: 7|8805|489|193|",
+   "2026-10-12|Late|Sorter S1|480|Break: 30; Jam: 8; Misread stop: 3|13819|545|132|",
+   "2026-10-12|Late|Wrapper W2|480|Break: 30; Breakdown: 51; Changeover: 16; Jam: 9|9593|515|227|",
+   "2026-10-13|Early|Sorter S1|480|Break: 30; Changeover: 11; Jam: 12; Misread stop: 4|14176|433|111|",
+   "2026-10-13|Early|Wrapper W2|480|Break: 30; Breakdown: 78; Changeover: 29; Electrical fault: 20; Jam: 5|7805|420|153|",
+   "2026-10-13|Late|Sorter S1|480|Break: 30; Jam: 12; Breakdown: 19|12758|336|69|",
+   "2026-10-13|Late|Wrapper W2|480|Break: 30; Breakdown: 71; Changeover: 17; Electrical fault: 32; Waiting for maintenance: 12; Jam: 7|7926|524|224|Film from the new supplier",
+   "2026-10-14|Early|Sorter S1|480|Break: 30; Changeover: 13; Jam: 12; Breakdown: 14; Misread stop: 8|13625|489|132|",
+   "2026-10-14|Early|Wrapper W2|480|Break: 30; Breakdown: 83; Changeover: 22; Waiting for maintenance: 19; Adjustment: 13; Jam: 11|7958|529|218|",
+   "2026-10-14|Late|Sorter S1|480|Break: 30; Jam: 6|14124|568|160|",
+   "2026-10-14|Late|Wrapper W2|480|Break: 30; Breakdown: 84; Changeover: 23; Electrical fault: 18; Waiting for maintenance: 24; Jam: 12|7540|430|181|",
+   "2026-10-15|Early|Sorter S1|480|Break: 30; Changeover: 12; Jam: 9|13786|455|122|",
+   "2026-10-15|Early|Wrapper W2|480|Break: 30; Breakdown: 67; Changeover: 23; Waiting for maintenance: 23; Jam: 10|8019|519|178|",
+   "2026-10-15|Late|Sorter S1|480|Break: 30; Jam: 6; Breakdown: 25; Misread stop: 5|13193|368|98|",
+   "2026-10-15|Late|Wrapper W2|480|Break: 30; Breakdown: 82; Changeover: 23; Waiting for maintenance: 17; Jam: 5|7846|478|151|",
+   "2026-10-16|Early|Sorter S1|480|Break: 30; Changeover: 11; Jam: 9|13839|430|109|",
+   "2026-10-16|Early|Wrapper W2|480|Break: 30; Breakdown: 43; Changeover: 15; Jam: 7|9215|468|176|",
+   "2026-10-16|Late|Sorter S1|480|Break: 30; Jam: 10; Misread stop: 3|14084|417|123|",
+   "2026-10-16|Late|Wrapper W2|480|Break: 30; Breakdown: 59; Changeover: 18; Adjustment: 13; Jam: 5|8779|500|181|"
+  ]
+ }
+}

@@ -1,0 +1,248 @@
+{
+ "storageKey": "sc-oee-sq",
+ "title": "OEE",
+ "defaultPlanned": 480,
+ "shifts": [
+  "Mëngjes",
+  "Pasdite",
+  "Natë"
+ ],
+ "reasons": [
+  {
+   "name": "Prishje",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Defekt elektrik",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Pritje për mirëmbajtjen",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Ndërrim produkti",
+   "loss": "setup"
+  },
+  {
+   "name": "Rregullim",
+   "loss": "setup"
+  },
+  {
+   "name": "Ndërrim materiali",
+   "loss": "setup"
+  },
+  {
+   "name": "Bllokim",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Bllokuar ose pa furnizim",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Ndalesë nga leximi",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Punë e ngadaltë",
+   "loss": "speed"
+  },
+  {
+   "name": "Pushim",
+   "loss": "planned"
+  },
+  {
+   "name": "Mbledhje",
+   "loss": "planned"
+  },
+  {
+   "name": "Mirëmbajtje e planifikuar",
+   "loss": "planned"
+  },
+  {
+   "name": "Pa porosi",
+   "loss": "planned"
+  }
+ ],
+ "losses": {
+  "breakdowns": {
+   "name": "Prishjet",
+   "meaning": "Makina ndaloi sepse diçka u prish: një motor, një sensor, një nofull ngjitëse. Çdo prishje merr me vete gjithë kohën e punës, dhe të njëjtat defekte priren të kthehen.",
+   "moves": [
+    "Rendit prishjet e dy javëve të fundit sipas pjesës; e para merr një 5 Whys këtë javë.",
+    "Bini dakord për një standard reagimi: kush thirret pas sa minutash dhe çfarë kontrollon operatori i pari.",
+    "Fute pjesën që prishet në kujdesin ditor të operatorit: pastro, kontrollo, shtrëngo, me një shenjë te makina."
+   ],
+   "question": "Cila pjesë u prish më shpesh, dhe si dukej një turn më parë?"
+  },
+  "setup": {
+   "name": "Përgatitja dhe rregullimet",
+   "meaning": "Ndërrimet e produktit, rregullimet dhe nisja pas një ndërrimi: koha nga copa e fundit e mirë e një porosie deri te copa e parë e mirë e tjetrës.",
+   "moves": [
+    "Filmo një ndërrim dhe ndaje në hapa për të cilët makina duhet të ndalet dhe hapa që mund të bëhen ndërsa punon.",
+    "Përgatit veglat, filmin dhe parametrat para ndalimit: një karrocë ndërrimi me listë kontrolli.",
+    "Shkruaj parametrat e çdo produkti te makina, që askush të mos rregullojë me provë e gabim."
+   ],
+   "question": "Cilët hapa të ndërrimit mund të bëhen para se makina të ndalet?"
+  },
+  "smallStops": {
+   "name": "Ndalesat e shkurtra",
+   "meaning": "Bllokime, futje të gabuara, një dalje e zënë: ndalesa prej një-dy minutash që operatori i zgjidh vetë pa thirrur njeri. Një nga një duken të padëmshme; bashkë hanë një orë.",
+   "moves": [
+    "Numëro ndalesat e shkurtra të një turni me një fletë shënimi te makina, sipas vendit.",
+    "Rregullo pikën kryesore të bllokimit bashkë me operatorin dhe mirëmbajtjen, jo me një zgjidhje të përkohshme.",
+    "Kontrollo hyrjen: një rrjedhë e çrregullt pakosh ose paketimesh nis shumicën e bllokimeve."
+   ],
+   "question": "Ku ndërhyn operatori më shpesh te makina?"
+  },
+  "speed": {
+   "name": "Shpejtësia e ulët",
+   "meaning": "Makina punon, por më ngadalë se ritmi i saj ideal: e ulur pas një problemi dhe e pakthyer më, ose me ritmin e produktit më të ngadaltë.",
+   "moves": [
+    "Krahaso shpejtësinë e vendosur me ritmin ideal në tabelën e makinës dhe në parametra; shëno pse ndryshojnë.",
+    "Rrite shpejtësinë me hapa prej 5 % në një turn dhe ndiq skartet dhe bllokimet.",
+    "Gjej se çfarë pret makina: hyrjen, daljen apo operatorin."
+   ],
+   "question": "Pse punon makina me këtë shpejtësi, dhe kush e vendosi?"
+  },
+  "startupRejects": {
+   "name": "Skartet në nisje",
+   "meaning": "Copa të këqija gjatë ngrohjes së makinës ose pas një ndërrimi, para se parametrat të stabilizohen.",
+   "moves": [
+    "Për një javë, numëro skartet e 15 minutave të para veçmas nga të tjerat.",
+    "Shkruaj parametrat e nisjes së çdo produkti dhe kontrolloji para copës së parë.",
+    "Ngroh pjesët që e kërkojnë (nofullat ngjitëse, ngjitësin) para fillimit të turnit."
+   ],
+   "question": "Sa copa duhen deri te e para e mirë, dhe pse kaq shumë?"
+  },
+  "productionRejects": {
+   "name": "Skartet në prodhim",
+   "meaning": "Copa të këqija gjatë punës së qëndrueshme: lexime të gabuara, sortime të gabuara, ngjitje të dobëta, dëmtime. Secila përdori kohë makine dhe duhet bërë sërish.",
+   "moves": [
+    "Ndaji skartet e një turni sipas llojit të defektit; më i madhi merr një kontroll te makina.",
+    "Shfaq numrin e skarteve te makina çdo orë, që operatori ta shohë menjëherë një ndryshim.",
+    "Kontrollo materialin hyrës: shumë skarte vijnë nga etiketat, paketimi ose materiali, jo nga makina."
+   ],
+   "question": "Si duket një skart tipik, dhe ku u bë?"
+  }
+ },
+ "verdicts": [
+  {
+   "name": "Klasë botërore",
+   "note": "85 % ose më shumë: disponueshmëria, performanca dhe cilësia pranë më të mirës."
+  },
+  {
+   "name": "E zakonshme",
+   "note": "60 deri në 85 %: rezultat i zakonshëm, me humbje të qarta për t'u rifituar."
+  },
+  {
+   "name": "E ulët",
+   "note": "40 deri në 60 %: humbje të mëdha; më e madhja vlen një projekt më vete."
+  },
+  {
+   "name": "E dobët",
+   "note": "Nën 40 %: kontrollo fillimisht të dhënat, pastaj humbjen më të madhe."
+  }
+ ],
+ "placeholders": {
+  "machine": "p.sh. Sortuesi S1",
+  "stops": "Bllokim: 12; Ndërrim produkti: 20; Pushim: 30",
+  "note": "p.sh. Film nga furnitori i ri",
+  "paste": "22.10.2026; Mëngjes; Sortuesi S1; 480; Pushim: 30, Bllokim: 12; 15200; 540; 90"
+ },
+ "tips": [
+  [
+   "Fillo me grykën e ngushtë.",
+   "OEE e saj është prodhimi i gjithë linjës. Mate mirë një makinë para se t'i matësh të gjitha."
+  ],
+  [
+   "Shkruaj arsyen, jo vetëm minutat.",
+   "Një ndalesë pa arsye nuk mund të rregullohet. Mbaje listën e arsyeve të shkurtër dhe të njëjtë në çdo turn."
+  ],
+  [
+   "Merr ritmin ideal nga tabela e makinës.",
+   "Jo shpejtësinë me të cilën punon zakonisht. Kur performanca tregon 100 %, ritmi ideal ka gjasa të jetë vendosur shumë i ulët."
+  ],
+  [
+   "Ndalesat e planifikuara nuk janë humbje.",
+   "Pushimet, mbledhjet dhe mungesa e porosive hiqen nga koha e planifikuar, kështu që OEE mat vetëm kohën kur makina duhej të punonte."
+  ]
+ ],
+ "example": {
+  "equipment": [
+   {
+    "name": "Sortuesi S1",
+    "rate": 2400,
+    "planned": 480
+   },
+   {
+    "name": "Paketuesja W2",
+    "rate": 1800,
+    "planned": 480
+   }
+  ],
+  "rows": [
+   "2026-09-28|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 10; Bllokim: 12|13795|467|77|",
+   "2026-09-28|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 77; Ndërrim produkti: 22; Pritje për mirëmbajtjen: 11; Bllokim: 12|8248|480|190|",
+   "2026-09-28|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 9|13941|466|74|",
+   "2026-09-28|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 78; Ndërrim produkti: 22; Pritje për mirëmbajtjen: 17; Bllokim: 10|8527|451|145|",
+   "2026-09-29|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 10; Bllokim: 5|13591|469|90|",
+   "2026-09-29|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 48; Ndërrim produkti: 18; Defekt elektrik: 24; Bllokim: 12|8723|542|167|",
+   "2026-09-29|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 5; Ndalesë nga leximi: 3|14111|595|124|",
+   "2026-09-29|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 83; Ndërrim produkti: 17; Pritje për mirëmbajtjen: 13; Bllokim: 9|8384|472|173|",
+   "2026-09-30|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 10; Bllokim: 12|13881|405|90|",
+   "2026-09-30|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 81; Ndërrim produkti: 15; Bllokim: 11|8318|566|228|",
+   "2026-09-30|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 8|13923|372|97|",
+   "2026-09-30|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 100; Ndërrim produkti: 27; Bllokim: 8|8216|451|192|",
+   "2026-10-01|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 13; Bllokim: 4; Prishje: 11|12900|500|119|",
+   "2026-10-01|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 79; Ndërrim produkti: 22; Bllokim: 8|8571|540|235|",
+   "2026-10-01|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 5; Prishje: 18|13769|522|119|Operator i ri në hyrje",
+   "2026-10-01|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 98; Ndërrim produkti: 29; Rregullim: 10; Bllokim: 10|7480|390|142|",
+   "2026-10-02|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 11; Bllokim: 10|14132|595|94|",
+   "2026-10-02|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 98; Ndërrim produkti: 15; Pritje për mirëmbajtjen: 15; Bllokim: 11|7818|478|170|",
+   "2026-10-02|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 9|13997|522|98|",
+   "2026-10-02|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 80; Ndërrim produkti: 19; Pritje për mirëmbajtjen: 10; Bllokim: 10|8701|481|194|",
+   "2026-10-05|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 13; Bllokim: 12|13101|488|109|Shpejtësia u ul pas bllokimit të së hënës",
+   "2026-10-05|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 46; Ndërrim produkti: 16; Pritje për mirëmbajtjen: 13; Bllokim: 5|8842|611|248|",
+   "2026-10-05|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 8|14057|483|89|",
+   "2026-10-05|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 46; Ndërrim produkti: 28; Defekt elektrik: 26; Bllokim: 11|8525|427|152|",
+   "2026-10-06|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 14; Bllokim: 10; Prishje: 22; Ndalesë nga leximi: 6|12520|464|73|",
+   "2026-10-06|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 41; Ndërrim produkti: 28; Bllokim: 11|9829|546|240|",
+   "2026-10-06|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 8; Prishje: 18; Ndalesë nga leximi: 8|13632|456|87|",
+   "2026-10-06|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 51; Ndërrim produkti: 21; Pritje për mirëmbajtjen: 14; Bllokim: 8|8868|447|196|",
+   "2026-10-07|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 14; Bllokim: 10; Prishje: 19|12984|406|82|",
+   "2026-10-07|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 48; Ndërrim produkti: 17; Rregullim: 10; Bllokim: 10|8848|519|192|",
+   "2026-10-07|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 4; Ndalesë nga leximi: 7|13361|370|99|",
+   "2026-10-07|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 64; Ndërrim produkti: 30; Defekt elektrik: 23; Bllokim: 7|8324|467|159|",
+   "2026-10-08|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 11; Bllokim: 9; Prishje: 21|12378|414|64|",
+   "2026-10-08|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 48; Ndërrim produkti: 26; Bllokim: 12|9067|463|161|U ndërrua ngrohësi i nofullës ngjitëse",
+   "2026-10-08|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 8; Prishje: 17|13102|393|112|",
+   "2026-10-08|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 69; Ndërrim produkti: 20; Defekt elektrik: 28; Bllokim: 5|7835|435|182|",
+   "2026-10-09|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 12; Bllokim: 4; Prishje: 25|12954|475|131|",
+   "2026-10-09|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 63; Ndërrim produkti: 19; Rregullim: 14; Bllokim: 10|8487|463|203|",
+   "2026-10-09|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 5; Ndalesë nga leximi: 8|14163|485|134|",
+   "2026-10-09|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 72; Ndërrim produkti: 27; Defekt elektrik: 21; Pritje për mirëmbajtjen: 12; Bllokim: 5|8108|534|161|",
+   "2026-10-12|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 13; Bllokim: 5; Prishje: 17; Ndalesë nga leximi: 7|12659|464|91|",
+   "2026-10-12|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 67; Ndërrim produkti: 18; Pritje për mirëmbajtjen: 18; Bllokim: 7|8805|489|193|",
+   "2026-10-12|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 8; Ndalesë nga leximi: 3|13819|545|132|",
+   "2026-10-12|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 51; Ndërrim produkti: 16; Bllokim: 9|9593|515|227|",
+   "2026-10-13|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 11; Bllokim: 12; Ndalesë nga leximi: 4|14176|433|111|",
+   "2026-10-13|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 78; Ndërrim produkti: 29; Defekt elektrik: 20; Bllokim: 5|7805|420|153|",
+   "2026-10-13|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 12; Prishje: 19|12758|336|69|",
+   "2026-10-13|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 71; Ndërrim produkti: 17; Defekt elektrik: 32; Pritje për mirëmbajtjen: 12; Bllokim: 7|7926|524|224|Film nga furnitori i ri",
+   "2026-10-14|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 13; Bllokim: 12; Prishje: 14; Ndalesë nga leximi: 8|13625|489|132|",
+   "2026-10-14|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 83; Ndërrim produkti: 22; Pritje për mirëmbajtjen: 19; Rregullim: 13; Bllokim: 11|7958|529|218|",
+   "2026-10-14|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 6|14124|568|160|",
+   "2026-10-14|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 84; Ndërrim produkti: 23; Defekt elektrik: 18; Pritje për mirëmbajtjen: 24; Bllokim: 12|7540|430|181|",
+   "2026-10-15|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 12; Bllokim: 9|13786|455|122|",
+   "2026-10-15|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 67; Ndërrim produkti: 23; Pritje për mirëmbajtjen: 23; Bllokim: 10|8019|519|178|",
+   "2026-10-15|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 6; Prishje: 25; Ndalesë nga leximi: 5|13193|368|98|",
+   "2026-10-15|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 82; Ndërrim produkti: 23; Pritje për mirëmbajtjen: 17; Bllokim: 5|7846|478|151|",
+   "2026-10-16|Mëngjes|Sortuesi S1|480|Pushim: 30; Ndërrim produkti: 11; Bllokim: 9|13839|430|109|",
+   "2026-10-16|Mëngjes|Paketuesja W2|480|Pushim: 30; Prishje: 43; Ndërrim produkti: 15; Bllokim: 7|9215|468|176|",
+   "2026-10-16|Pasdite|Sortuesi S1|480|Pushim: 30; Bllokim: 10; Ndalesë nga leximi: 3|14084|417|123|",
+   "2026-10-16|Pasdite|Paketuesja W2|480|Pushim: 30; Prishje: 59; Ndërrim produkti: 18; Rregullim: 13; Bllokim: 5|8779|500|181|"
+  ]
+ }
+}

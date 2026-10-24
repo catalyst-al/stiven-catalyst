@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: OEE
+seo_title: "OEE calculator with the six big losses: availability, performance, quality"
+description: "A private OEE log for machines and lines: availability, performance and quality per shift, the six big losses and where to start."
+activeNav: /tools.html
+permalink: /tools/oee/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Equipment</p>
+  <h1>OEE</h1>
+  <p class="lede">Log each shift of a machine: the planned time, the stops with their reasons, the pieces made and the rejects. The tool shows availability, performance, quality and OEE, splits the lost time into the six big losses, and says which one to attack first.</p>
+</section>
+
+{% set cfg = oee %}
+{% include "partials/oee.njk" %}

@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "OEE", "type": "Equipment", "time": "Ongoing", "summary": "Log each shift of a machine with its stops, pieces and rejects. Availability, performance, quality and OEE, the six big losses day by day, and the one to attack first.", "url": "/tools/oee/", "cta": "Measure OEE" },
+    "de": { "name": "OEE", "type": "Anlagen", "time": "Laufend", "summary": "Erfassen Sie jede Schicht einer Anlage mit Stopps, Teilen und Ausschuss. Verfügbarkeit, Leistung, Qualität und OEE, die sechs großen Verluste Tag für Tag und der, den Sie zuerst angehen.", "url": "/de/tools/oee/", "cta": "OEE messen" },
+    "sq": { "name": "OEE", "type": "Pajisje", "time": "Vazhdimisht", "summary": "Regjistro çdo turn të një makine me ndalesat, copat dhe skartet. Disponueshmëria, performanca, cilësia dhe OEE, gjashtë humbjet e mëdha ditë pas dite, dhe ajo që duhet sulmuar e para.", "url": "/sq/tools/oee/", "cta": "Mat OEE" }
+  },
+  "routine": { "when": "End of shift", "do": "Log the shift of each machine with its stops by reason, then attack the biggest of the six losses with an owner and a date.", "de": { "when": "Schichtende", "do": "Erfassen Sie die Schicht jeder Anlage mit ihren Stopps nach Grund, und gehen Sie dann den größten der sechs Verluste mit einem Verantwortlichen und einem Termin an." }, "sq": { "when": "Fundi i turnit", "do": "Regjistro turnin e çdo makine me ndalesat sipas arsyes, pastaj sulmo më të madhen nga gjashtë humbjet me një përgjegjës dhe një afat." } },
+  "recipe": "example"
+}
