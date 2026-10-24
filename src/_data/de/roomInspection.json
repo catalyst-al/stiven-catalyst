@@ -1,0 +1,807 @@
+{
+  "storageKey": "sc-room-inspection-de",
+  "threshold": 0.9,
+  "text": {
+    "tool": "Zimmerkontrolle",
+    "roomPlaceholder": "z. B. 412",
+    "attendantPlaceholder": "Wer das Zimmer gereinigt hat",
+    "inspectorPlaceholder": "Ihr Name",
+    "notePlaceholder": "Was genau, wo",
+    "roomsPlaceholder": "412; 4; Suite\n413\n414 Doppelzimmer",
+    "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
+    "inspectorsPlaceholder": "Elena\nDavid",
+    "maintenanceOwner": "Technik",
+    "checkText": "Zimmer nach der Reparatur erneut prüfen: Der Punkt ist OK.",
+    "csvName": "zimmerkontrollen",
+    "publicArea": "Öffentlicher Bereich"
+  },
+  "roomTypes": [
+    {
+      "key": "single",
+      "name": "Einzelzimmer"
+    },
+    {
+      "key": "double",
+      "name": "Doppelzimmer"
+    },
+    {
+      "key": "suite",
+      "name": "Suite"
+    },
+    {
+      "key": "accessible",
+      "name": "Barrierefrei"
+    }
+  ],
+  "kinds": [
+    {
+      "key": "checkout",
+      "name": "Nach Abreise"
+    },
+    {
+      "key": "stayover",
+      "name": "Bleibegast"
+    },
+    {
+      "key": "vip",
+      "name": "VIP"
+    },
+    {
+      "key": "arrival",
+      "name": "Vor Anreise"
+    }
+  ],
+  "zones": [
+    {
+      "key": "entrance",
+      "name": "Eingang",
+      "meaning": "Der erste Meter entscheidet über den ersten Eindruck des Gastes: Eine fleckige Tür oder ein toter Kartenschalter fällt vor allem anderen auf.",
+      "moves": [
+        "Beginnen Sie jedes Zimmer an der Tür, mit den Augen des Gastes: Griff, Rahmen, Licht, Boden.",
+        "Legen Sie auf jeden Wagen ein Tuch für Tür und Rahmen, damit sie nicht übersprungen werden.",
+        "Melden Sie einen schwachen Türschließer oder ein klemmendes Schloss am selben Tag: Das ist ein Sicherheitspunkt."
+      ],
+      "question": "Was sieht der Gast in den ersten fünf Sekunden, nachdem die Tür aufgeht?"
+    },
+    {
+      "key": "bed",
+      "name": "Bett",
+      "meaning": "Das Bett ist der Grund, warum der Gast das Zimmer bezahlt. Ein Haar oder ein Fleck auf der Wäsche ist eine Beschwerde, oft eine Erstattung.",
+      "moves": [
+        "Prüfen Sie die Wäsche bei Tageslicht, bevor sie aufs Bett kommt, nicht danach.",
+        "Schicken Sie fleckige oder beschädigte Wäsche mit Anhänger an die Wäscherei zurück, damit das Muster sichtbar wird.",
+        "Zeigen Sie den Bettstandard mit einem Foto im Wäscheraum: Ecken, Kissen, Überwurf."
+      ],
+      "question": "Woher kommt die Wäsche, und wer sieht sie an, bevor sie aufs Bett kommt?"
+    },
+    {
+      "key": "bathroom",
+      "name": "Bad",
+      "meaning": "Im Bad schauen Gäste am genauesten hin, und hier fallen die meisten Zimmer durch: Haare, Kalk und Wasserflecken sieht man sofort.",
+      "moves": [
+        "Schließen Sie das Bad mit einem letzten Blick von der Tür auf Bodenhöhe ab: Abfluss, Ecken, hinter der WC-Schüssel.",
+        "Geben Sie jedem Wagen ein eigenes Abflusswerkzeug und ein trockenes Mikrofasertuch für das letzte Abwischen.",
+        "Planen Sie das Entkalken der Duschen etagenweise, damit der Kalk nicht auf eine Beschwerde wartet."
+      ],
+      "question": "Welchen Teil des Bades sieht die Reinigungskraft zuletzt an, und wie viel Zeit bleibt dafür?"
+    },
+    {
+      "key": "desk",
+      "name": "Schreibtisch und Schrank",
+      "meaning": "Staub auf dem Schreibtisch und Sachen in den Schubladen sagen dem Gast, dass niemand wirklich hingeschaut hat.",
+      "moves": [
+        "Öffnen Sie in jedem Abreisezimmer jedes Mal jede Schublade und den Safe.",
+        "Wischen Sie Fernbedienung und Schalter mit Desinfektionsmittel ab: Sie werden am meisten berührt.",
+        "Führen Sie die Zahl der Bügel und Artikel auf der Wagenliste, damit Lücken sofort gefüllt werden."
+      ],
+      "question": "Was hat der letzte Gast zurückgelassen, das wir gefunden haben, und was nicht?"
+    },
+    {
+      "key": "minibar",
+      "name": "Minibar und Gästeartikel",
+      "meaning": "Eine fehlende Tasse oder eine leere Kaffeedose ist für uns klein und für den Gast der erste Anruf an der Rezeption.",
+      "moves": [
+        "Füllen Sie den Wagen nach einer Soll-Liste je Zimmertyp, nicht aus dem Gedächtnis.",
+        "Stellen Sie die Artikel in jedem Zimmer gleich hin, damit eine Lücke auf einen Blick auffällt.",
+        "Klären Sie mit dem Minibar-Team, wer prüft, wer auffüllt und wann."
+      ],
+      "question": "Welcher Artikel geht auf dem Wagen zuerst aus, und warum?"
+    },
+    {
+      "key": "windows",
+      "name": "Fenster und Balkon",
+      "meaning": "Schlieren auf dem Glas und ein Vorhang, der aus den Haken gerutscht ist, fallen im Abendlicht auf, wenn der Gast im Zimmer ist.",
+      "moves": [
+        "Sehen Sie das Glas vor dem Gehen schräg gegen das Licht an.",
+        "Ziehen Sie jeden Vorhang einmal ganz auf und zu: So zeigt sich ein kaputter Haken sofort.",
+        "Melden Sie jedes Fenster und jede Balkontür, die nicht schließt: Das ist ein Sicherheitspunkt."
+      ],
+      "question": "Wann wurden die Fenster dieser Etage zuletzt außen gereinigt, und von wem?"
+    },
+    {
+      "key": "air",
+      "name": "Geruch und Luft",
+      "meaning": "Geruch ist das Erste, was ein Gast bemerkt, und später am schwersten zu beheben. Rauch oder Feuchtigkeit lassen das Zimmer allein durchfallen.",
+      "moves": [
+        "Öffnen Sie das Fenster zu Beginn der Reinigung, nicht am Ende.",
+        "Melden Sie Rauchgeruch sofort der Hausdame: Das Zimmer braucht eine Ozon- oder Grundreinigung, kein Parfum.",
+        "Lassen Sie in einem Zimmer, das tagelang leer stand, in jedem Abfluss Wasser laufen."
+      ],
+      "question": "Wie riecht das Zimmer, wenn die Tür eine Stunde zu war?"
+    },
+    {
+      "key": "general",
+      "name": "Allgemein",
+      "meaning": "Boden, Licht und kleine Schäden: das, was der Gast als Zustand des ganzen Hotels sieht.",
+      "moves": [
+        "Saugen Sie von der hintersten Ecke zur Tür, zuerst die Kanten.",
+        "Schalten Sie während der Reinigung jedes Licht einmal an, nicht nur das Hauptlicht.",
+        "Melden Sie Schäden am selben Tag mit Foto, damit die Technik das Ersatzteil planen kann."
+      ],
+      "question": "An welchem Schaden gehen wir jeden Tag vorbei, weil er schon immer da war?"
+    }
+  ],
+  "templates": {
+    "standard": {
+      "name": "Standardzimmer",
+      "roomTypes": [
+        "single",
+        "double",
+        "accessible"
+      ],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Tür, Rahmen und Griff sauber, ohne Spuren",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Schloss, Türschließer und Sicherheitsriegel funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Kartenhalter, Eingangslicht und Schalter funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Boden und Sockelleisten am Eingang staubfrei",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bed": [
+          {
+            "text": "Bettwäsche ohne Flecken, Haare oder Löcher",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bett nach Standard gemacht: straffe Ecken, Kissen gesetzt, Überwurf gerade",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Unter dem Bett und hinter dem Kopfteil frei von Staub und Gegenständen",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Matratzenschoner sauber und richtig aufgezogen",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Nachttische sauber, Lampen funktionieren",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bathroom": [
+          {
+            "text": "Keine Haare in Dusche, Wanne, Waschbecken oder auf dem Boden",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "WC innen und außen sauber, unter dem Rand und an den Scharnieren",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Duschwand, Fliesen und Fugen frei von Kalk und Schimmel",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Spiegel und Armaturen poliert, keine Wasserflecken",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Handtücher vollständig, frisch und nach Standard gefaltet",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Armatur, Abfluss und Spülung funktionieren, nichts tropft",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "desk": [
+          {
+            "text": "Schreibtisch, Stuhl und TV frei von Staub und Fingerabdrücken",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Schrank: Bügel vollständig, Safe offen und leer, Bügeleisen und Brett vorhanden",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Schubladen leer: nichts vom letzten Gast",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "TV, Fernbedienung und Steckdosen funktionieren; Fernbedienung abgewischt",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "minibar": [
+          {
+            "text": "Minibar nach Liste bestückt und kalt",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Wasserkocher, Tassen und Gläser sauber; Kaffee und Tee vollständig",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Badartikel vollständig und nach Standard platziert",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Gästemappe, Notizblock und Stift an ihrem Platz",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "windows": [
+          {
+            "text": "Fenster und Fensterbänke sauber, keine Schlieren",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Vorhänge und Verdunkelung gerade, ohne Flecken, laufen leicht",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Fenster und Balkontür schließen und verriegeln",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Balkonboden und -möbel sauber (wo vorhanden)",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Kein Geruch nach Rauch, Feuchtigkeit oder Abfluss",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Zimmer gelüftet und auf der eingestellten Temperatur",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Klimaanlage oder Heizung funktioniert und ist leise",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Teppich oder Boden gesaugt, Ecken und Kanten inklusive",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Alle Leuchten funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Keine Schäden an Wänden, Möbeln oder Ausstattung",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Nichts liegen gelassen: keine Tücher, Flaschen oder Sachen des letzten Gastes",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ]
+      }
+    },
+    "suite": {
+      "name": "Suite",
+      "roomTypes": [
+        "suite"
+      ],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Tür, Rahmen und Griff sauber, ohne Spuren",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Schloss, Türschließer und Sicherheitsriegel funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Kartenhalter, Eingangslicht und Schalter funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Boden und Sockelleisten am Eingang staubfrei",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bed": [
+          {
+            "text": "Bettwäsche ohne Flecken, Haare oder Löcher",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bett nach Standard gemacht: straffe Ecken, Kissen gesetzt, Überwurf gerade",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Unter dem Bett und hinter dem Kopfteil frei von Staub und Gegenständen",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Matratzenschoner sauber und richtig aufgezogen",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Nachttische sauber, Lampen funktionieren",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bathroom": [
+          {
+            "text": "Keine Haare in Dusche, Wanne, Waschbecken oder auf dem Boden",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "WC innen und außen sauber, unter dem Rand und an den Scharnieren",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Duschwand, Fliesen und Fugen frei von Kalk und Schimmel",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Spiegel und Armaturen poliert, keine Wasserflecken",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Handtücher vollständig, frisch und nach Standard gefaltet",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Armatur, Abfluss und Spülung funktionieren, nichts tropft",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "desk": [
+          {
+            "text": "Schreibtisch, Stuhl und TV frei von Staub und Fingerabdrücken",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Schrank: Bügel vollständig, Safe offen und leer, Bügeleisen und Brett vorhanden",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Schubladen leer: nichts vom letzten Gast",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "TV, Fernbedienung und Steckdosen funktionieren; Fernbedienung abgewischt",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Wohnbereich: Sofa, Kissen und Couchtisch sauber, keine Krümel",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ],
+        "minibar": [
+          {
+            "text": "Minibar nach Liste bestückt und kalt",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Wasserkocher, Tassen und Gläser sauber; Kaffee und Tee vollständig",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Badartikel vollständig und nach Standard platziert",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Gästemappe, Notizblock und Stift an ihrem Platz",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Willkommensgruß und Karte platziert, wenn gebucht",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ],
+        "windows": [
+          {
+            "text": "Fenster und Fensterbänke sauber, keine Schlieren",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Vorhänge und Verdunkelung gerade, ohne Flecken, laufen leicht",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Fenster und Balkontür schließen und verriegeln",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Balkonboden und -möbel sauber (wo vorhanden)",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Kein Geruch nach Rauch, Feuchtigkeit oder Abfluss",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Zimmer gelüftet und auf der eingestellten Temperatur",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Klimaanlage oder Heizung funktioniert und ist leise",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Teppich oder Boden gesaugt, Ecken und Kanten inklusive",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Alle Leuchten funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Keine Schäden an Wänden, Möbeln oder Ausstattung",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Nichts liegen gelassen: keine Tücher, Flaschen oder Sachen des letzten Gastes",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Gäste-WC im selben Standard wie das Hauptbad",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Esstisch und Stühle sauber und gerade gestellt",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ]
+      }
+    },
+    "public": {
+      "name": "Öffentlicher Bereich (Lobby, Toiletten)",
+      "roomTypes": [],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Eingangstüren und Glas sauber, keine Fingerabdrücke",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Eingangsmatten sauber und flach liegend",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Automatik- oder Drehtür funktioniert",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "bed": [],
+        "bathroom": [
+          {
+            "text": "Toiletten und Urinale sauber, kein Geruch",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Seife, Papier und Handtücher aufgefüllt",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Waschbecken, Spiegel und Boden trocken und sauber",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Reinigungsnachweis an der Tür für die letzte Stunde abgezeichnet",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "desk": [],
+        "minibar": [],
+        "windows": [
+          {
+            "text": "Glas, Fenster und Fensterbänke sauber",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Pflanzen gegossen, keine welken Blätter",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Jalousien und Vorhänge gerade und unbeschädigt",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Lobby riecht frisch: kein Essens-, Rauch- oder Abflussgeruch",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Temperatur angenehm, kein Zug",
+            "weight": 1,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Lüftung der Toiletten funktioniert",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Boden sauber und trocken; Warnschild beim Wischen aufgestellt",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Rezeption, Sitzgruppen und Tische frei von Staub und Krümeln",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mülleimer geleert, Zeitungen und Prospekte ordentlich",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Beleuchtung und Aufzüge funktionieren",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ]
+      }
+    }
+  },
+  "tips": [
+    [
+      "Erst prüfen, dann freigeben.",
+      "Prüfen Sie das Zimmer, bevor die Rezeption es verkauft. Markieren Sie nur, was Sie jetzt sehen: OK, Mangel oder entfällt; ein kritischer Mangel lässt das Zimmer allein durchfallen."
+    ],
+    [
+      "Schnell auf der Etage.",
+      "Scannen Sie den QR-Code an der Tür oder tippen Sie die Zimmernummer; markieren Sie die Mängel, dann „Rest als OK markieren“. Fünf Minuten reichen für ein Standardzimmer."
+    ],
+    [
+      "Nachreinigung oder Technik.",
+      "Jeder Mangel geht an jemanden zurück: Die Reinigungskraft reinigt nach, die Technik repariert. Technik-Punkte gehen beim Speichern in die Maßnahmenliste."
+    ],
+    [
+      "Coachen, nicht beschuldigen.",
+      "Eine niedrige Erstabnahmequote einer Reinigungskraft verlangt nach einem gemeinsamen Gang durchs Zimmer, einem klareren Standard oder mehr Minuten pro Zimmer, nie nach einem Namen an der Wand."
+    ],
+    [
+      "Ihre eigene Checkliste.",
+      "Kopieren Sie eine Checkliste und passen Sie Punkte und Gewichte an Ihren Markenstandard an; speichern Sie sie als Vorlagendatei für die anderen Hotels der Gruppe."
+    ]
+  ],
+  "example": {
+    "seed": 604,
+    "days": 14,
+    "perDay": [
+      7,
+      10
+    ],
+    "floors": [
+      1,
+      6
+    ],
+    "rooms": [
+      1,
+      30
+    ],
+    "types": [
+      {
+        "type": "single",
+        "from": 1,
+        "to": 6
+      },
+      {
+        "type": "accessible",
+        "from": 7,
+        "to": 8,
+        "floors": [
+          1,
+          2
+        ]
+      },
+      {
+        "type": "suite",
+        "from": 29,
+        "to": 30
+      }
+    ],
+    "default": "double",
+    "attendants": [
+      {
+        "name": "Marta",
+        "floors": [
+          1
+        ],
+        "factor": 0.8
+      },
+      {
+        "name": "Ilir",
+        "floors": [
+          2
+        ],
+        "factor": 1.0
+      },
+      {
+        "name": "Sofia",
+        "floors": [
+          3
+        ],
+        "factor": 0.9
+      },
+      {
+        "name": "Jonas",
+        "floors": [
+          4
+        ],
+        "factor": 2.6,
+        "learning": true
+      },
+      {
+        "name": "Ana",
+        "floors": [
+          5
+        ],
+        "factor": 1.1
+      },
+      {
+        "name": "Mehmet",
+        "floors": [
+          6
+        ],
+        "factor": 1.0
+      }
+    ],
+    "inspectors": [
+      "Elena",
+      "David"
+    ],
+    "base": 0.006,
+    "critical": 0.002,
+    "recurring": {
+      "bathroom-0": 0.09,
+      "bathroom-2": 0.12,
+      "bathroom-5": 0.05,
+      "bed-2": 0.07,
+      "minibar-1": 0.05,
+      "general-2": 0.02
+    },
+    "kinds": {
+      "checkout": 0.6,
+      "stayover": 0.25,
+      "vip": 0.08,
+      "arrival": 0.07
+    },
+    "recheck": 0.8,
+    "notes": {
+      "bathroom-0": "Haare im Duschabfluss",
+      "bathroom-1": "Rückstände unter dem WC-Rand",
+      "bathroom-2": "Kalk an der Duschwand",
+      "bathroom-5": "Duscharmatur tropft",
+      "bed-0": "Kleiner Fleck auf dem Kissenbezug",
+      "bed-2": "Staub unter dem Bett",
+      "minibar-1": "Eine Tasse fehlt",
+      "general-2": "Abgeplatzte Kante am Schreibtisch",
+      "air-0": "Rauchgeruch in den Vorhängen"
+    }
+  }
+}

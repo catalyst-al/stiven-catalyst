@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Room Inspection
+seo_title: "Hotel room inspection checklist: housekeeping score by zone, re-cleans and trend per attendant"
+description: "Check a cleaned room before release: pass, fail or n.a. by zone, critical items, re-clean or maintenance, and the trend per attendant, floor and room type."
+activeNav: /tools.html
+permalink: /tools/room-inspection/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Hotel</p>
+  <h1>Room Inspection</h1>
+  <p class="lede">Check a cleaned room before reception sells it: every item of the checklist pass, fail or n.a., zone by zone, with a note and a photo where it fails. The room gets a score and a verdict, each fault goes back to the attendant or to maintenance, and the log shows the first-time pass rate per attendant, floor and room type, and the items that fail most.</p>
+</section>
+
+{% set cfg = roomInspection %}
+{% include "partials/room-inspection.njk" %}

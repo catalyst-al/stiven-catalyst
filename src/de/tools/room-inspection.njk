@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Zimmerkontrolle
+seo_title: "Checkliste für die Zimmerkontrolle im Hotel: Housekeeping-Bewertung je Zone, Nachreinigung und Trend je Reinigungskraft"
+description: "Gereinigtes Zimmer vor der Freigabe prüfen: OK, Mangel oder entfällt je Zone, kritische Punkte, Nachreinigung oder Technik, Trend je Reinigungskraft."
+activeNav: /de/tools.html
+permalink: /de/tools/room-inspection/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Hotel</p>
+  <h1>Zimmerkontrolle</h1>
+  <p class="lede">Prüfen Sie ein gereinigtes Zimmer, bevor die Rezeption es verkauft: jeden Punkt der Checkliste als OK, Mangel oder entfällt, Zone für Zone, mit Notiz und Foto, wo etwas fehlt. Das Zimmer bekommt eine Bewertung und ein Ergebnis, jeder Mangel geht an die Reinigungskraft oder an die Technik zurück, und das Protokoll zeigt die Erstabnahmequote je Reinigungskraft, Etage und Zimmertyp sowie die Punkte, die am häufigsten durchfallen.</p>
+</section>
+
+{% set cfg = de.roomInspection %}
+{% include "partials/room-inspection.njk" %}

@@ -4382,5 +4382,6 @@
   "Removed the inspection of room {room} on {date}.": "U hoq inspektimi i dhomës {room} më {date}.",
   "Clear every saved inspection? The rooms and the team stay.": "Të fshihen të gjitha inspektimet e ruajtura? Dhomat dhe ekipi mbeten.",
   "Answer": "Përgjigjja",
-  "Re-check": "Rikontroll"
+  "Re-check": "Rikontroll",
+  "Inspect every checkout and VIP room before reception releases it, send each fault back to the attendant or to maintenance, and coach on the item that fails most this week.": "Inspekto çdo dhomë pas largimit dhe çdo dhomë VIP para se recepsioni ta lirojë, ktheja çdo defekt pastruesit ose mirëmbajtjes dhe trajno për pikën që dështon më shpesh këtë javë."
 }

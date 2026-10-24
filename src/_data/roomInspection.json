@@ -1,0 +1,807 @@
+{
+  "storageKey": "sc-room-inspection",
+  "threshold": 0.9,
+  "text": {
+    "tool": "Room Inspection",
+    "roomPlaceholder": "e.g. 412",
+    "attendantPlaceholder": "Who cleaned the room",
+    "inspectorPlaceholder": "Your name",
+    "notePlaceholder": "What exactly, where",
+    "roomsPlaceholder": "412; 4; suite\n413\n414 double",
+    "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
+    "inspectorsPlaceholder": "Elena\nDavid",
+    "maintenanceOwner": "Maintenance",
+    "checkText": "Re-inspect the room after the fix: the item passes.",
+    "csvName": "room-inspections",
+    "publicArea": "Public area"
+  },
+  "roomTypes": [
+    {
+      "key": "single",
+      "name": "Single"
+    },
+    {
+      "key": "double",
+      "name": "Double"
+    },
+    {
+      "key": "suite",
+      "name": "Suite"
+    },
+    {
+      "key": "accessible",
+      "name": "Accessible"
+    }
+  ],
+  "kinds": [
+    {
+      "key": "checkout",
+      "name": "After checkout"
+    },
+    {
+      "key": "stayover",
+      "name": "Stayover"
+    },
+    {
+      "key": "vip",
+      "name": "VIP"
+    },
+    {
+      "key": "arrival",
+      "name": "Pre-arrival"
+    }
+  ],
+  "zones": [
+    {
+      "key": "entrance",
+      "name": "Entrance",
+      "meaning": "The first metre decides the guest's first impression: a marked door or a dead key card light is seen before anything else.",
+      "moves": [
+        "Start every room at the door, with the guest's eyes: handle, frame, light, floor.",
+        "Put a cloth for the door and the frame on every trolley, so it is not skipped.",
+        "Report a slow door closer or a weak lock the same day: it is a safety item."
+      ],
+      "question": "What does the guest see in the first five seconds after the door opens?"
+    },
+    {
+      "key": "bed",
+      "name": "Bed",
+      "meaning": "The bed is why the guest pays for the room. A hair or a stain on the linen is a complaint, often a refund.",
+      "moves": [
+        "Check the linen in daylight before it goes on the bed, not after.",
+        "Send stained or damaged linen back to the laundry with a tag, so the pattern is seen.",
+        "Show the bed standard with a photo at the linen room: corners, pillows, throw."
+      ],
+      "question": "Where does the linen come from, and who looks at it before it goes on the bed?"
+    },
+    {
+      "key": "bathroom",
+      "name": "Bathroom",
+      "meaning": "The bathroom is where guests look closest and where most rooms fail: hair, lime and water spots are seen at once.",
+      "moves": [
+        "Finish the bathroom with a last look from the door at floor height: drain, corners, behind the toilet.",
+        "Give every trolley its own drain tool and a dry microfibre cloth for the last wipe.",
+        "Plan descaling of showers by floor, so lime does not wait for a complaint."
+      ],
+      "question": "Which part of the bathroom does the attendant look at last, and how much time is left for it?"
+    },
+    {
+      "key": "desk",
+      "name": "Desk and wardrobe",
+      "meaning": "Dust on the desk and items left in the drawers tell the guest that nobody really looked.",
+      "moves": [
+        "Open every drawer and the safe in every checkout room, every time.",
+        "Wipe the remote and the switches with disinfectant: they are touched most.",
+        "Keep a hanger and amenity count on the trolley list, so gaps are filled at once."
+      ],
+      "question": "What did the last guest leave behind that we found, and what did we not find?"
+    },
+    {
+      "key": "minibar",
+      "name": "Minibar and amenities",
+      "meaning": "A missing cup or an empty coffee box is small for us and the first call to reception for the guest.",
+      "moves": [
+        "Fill the trolley from a par list per room type, not from memory.",
+        "Place amenities the same way in every room, so a gap is seen at a glance.",
+        "Agree with the minibar team who checks and who refills, and when."
+      ],
+      "question": "Which item runs out first on the trolley, and why?"
+    },
+    {
+      "key": "windows",
+      "name": "Windows and balcony",
+      "meaning": "Streaks on the glass and a curtain off its hooks are seen in the evening light, when the guest is in the room.",
+      "moves": [
+        "Look at the glass from an angle against the light before you leave.",
+        "Run each curtain once to the end and back: it shows a broken hook at once.",
+        "Report every window or balcony door that does not lock: it is a safety item."
+      ],
+      "question": "When were the windows of this floor last cleaned outside, and by whom?"
+    },
+    {
+      "key": "air",
+      "name": "Smell and air",
+      "meaning": "Smell is the first thing a guest notices and the hardest to fix later. Smoke or damp fails the room on its own.",
+      "moves": [
+        "Open the window at the start of the clean, not at the end.",
+        "Send a smoke smell to the supervisor at once: the room needs an ozone or deep clean, not perfume.",
+        "Run water in every drain of a room that was empty for days."
+      ],
+      "question": "What does the room smell like when the door has been closed for an hour?"
+    },
+    {
+      "key": "general",
+      "name": "General",
+      "meaning": "The floor, the lights and the small damages: what the guest sees as the state of the whole hotel.",
+      "moves": [
+        "Vacuum from the far corner to the door, edges first.",
+        "Switch every light on once during the clean, not only the main light.",
+        "Report damage with a photo the same day, so maintenance can plan the part."
+      ],
+      "question": "Which damage do we walk past every day because it has always been there?"
+    }
+  ],
+  "templates": {
+    "standard": {
+      "name": "Standard room",
+      "roomTypes": [
+        "single",
+        "double",
+        "accessible"
+      ],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Door, frame and handle clean, no marks",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Lock, door closer and safety latch work",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Key card holder, entrance light and switches work",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Floor and skirting at the entrance free of dust",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bed": [
+          {
+            "text": "Linen without stains, hair or holes",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bed made to standard: tight corners, pillows placed, throw straight",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Under the bed and behind the headboard free of dust and items",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mattress protector clean and in place",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bedside tables clean, lamps work",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bathroom": [
+          {
+            "text": "No hair in the shower, bath, basin or on the floor",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Toilet clean inside and out, under the rim and at the seat hinges",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Shower screen, tiles and grout free of lime and mould",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mirror and fittings polished, no water spots",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Towels complete, fresh and folded to standard",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tap, drain and flush work, nothing drips",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "desk": [
+          {
+            "text": "Desk, chair and TV free of dust and fingerprints",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Wardrobe: hangers complete, safe open and empty, iron and board there",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Drawers empty: nothing left by the last guest",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "TV, remote and sockets work; remote wiped",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "minibar": [
+          {
+            "text": "Minibar stocked to the list and cold",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Kettle, cups and glasses clean; coffee and tea complete",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bathroom amenities complete and placed to standard",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Information folder, notepad and pen in place",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "windows": [
+          {
+            "text": "Windows and sills clean, no streaks",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Curtains and blackout straight, no stains, run freely",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Window and balcony door close and lock",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Balcony floor and furniture clean (where there is one)",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "No smell of smoke, damp or drains",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Room aired and at the set temperature",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Air conditioning or heating works and is quiet",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Carpet or floor vacuumed, corners and edges included",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Every light works",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "No damage to walls, furniture or fittings",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Nothing left behind: no cloths, bottles or the last guest's items",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ]
+      }
+    },
+    "suite": {
+      "name": "Suite",
+      "roomTypes": [
+        "suite"
+      ],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Door, frame and handle clean, no marks",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Lock, door closer and safety latch work",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Key card holder, entrance light and switches work",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Floor and skirting at the entrance free of dust",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bed": [
+          {
+            "text": "Linen without stains, hair or holes",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bed made to standard: tight corners, pillows placed, throw straight",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Under the bed and behind the headboard free of dust and items",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mattress protector clean and in place",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bedside tables clean, lamps work",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bathroom": [
+          {
+            "text": "No hair in the shower, bath, basin or on the floor",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Toilet clean inside and out, under the rim and at the seat hinges",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Shower screen, tiles and grout free of lime and mould",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mirror and fittings polished, no water spots",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Towels complete, fresh and folded to standard",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tap, drain and flush work, nothing drips",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "desk": [
+          {
+            "text": "Desk, chair and TV free of dust and fingerprints",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Wardrobe: hangers complete, safe open and empty, iron and board there",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Drawers empty: nothing left by the last guest",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "TV, remote and sockets work; remote wiped",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Living area: sofa, cushions and coffee table clean, no crumbs",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ],
+        "minibar": [
+          {
+            "text": "Minibar stocked to the list and cold",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Kettle, cups and glasses clean; coffee and tea complete",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bathroom amenities complete and placed to standard",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Information folder, notepad and pen in place",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Welcome amenity and card placed when booked",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ],
+        "windows": [
+          {
+            "text": "Windows and sills clean, no streaks",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Curtains and blackout straight, no stains, run freely",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Window and balcony door close and lock",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Balcony floor and furniture clean (where there is one)",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "No smell of smoke, damp or drains",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Room aired and at the set temperature",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Air conditioning or heating works and is quiet",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Carpet or floor vacuumed, corners and edges included",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Every light works",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "No damage to walls, furniture or fittings",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Nothing left behind: no cloths, bottles or the last guest's items",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Guest toilet to the same standard as the main bathroom",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dining table and chairs clean and set straight",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ]
+      }
+    },
+    "public": {
+      "name": "Public area (lobby, toilets)",
+      "roomTypes": [],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Entrance doors and glass clean, no fingerprints",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Entrance mats clean and lying flat",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Automatic or revolving door works",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "bed": [],
+        "bathroom": [
+          {
+            "text": "Toilets and urinals clean, no smell",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Soap, paper and hand towels refilled",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Basins, mirrors and floor dry and clean",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Cleaning log on the door signed for the last hour",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "desk": [],
+        "minibar": [],
+        "windows": [
+          {
+            "text": "Glass, windows and sills clean",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Plants watered, no dead leaves",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Blinds and curtains straight and undamaged",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Lobby smells fresh: no food, smoke or drain smell",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Temperature comfortable, no draught",
+            "weight": 1,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Toilet ventilation works",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Floor clean and dry; wet-floor sign out while mopping",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Reception desk, seating and tables free of dust and crumbs",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bins emptied, newspapers and leaflets tidy",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Lights and lifts work",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ]
+      }
+    }
+  },
+  "tips": [
+    [
+      "Inspect, then release.",
+      "Check the room before reception sells it. Mark only what you see now: pass, fail or n.a.; a failed critical item fails the room on its own."
+    ],
+    [
+      "Fast on the floor.",
+      "Scan the QR code on the door or type the room; mark the faults, then “Mark the rest as pass”. Five minutes is enough for a standard room."
+    ],
+    [
+      "Re-clean or maintenance.",
+      "Every fault goes back to someone: the attendant cleans it again, maintenance fixes it. Maintenance items go to the Action Tracker when you save."
+    ],
+    [
+      "Coach, do not blame.",
+      "A low first-time pass rate of one attendant asks for a walk through a room together, a clearer standard or more minutes per room, never for a name on the wall."
+    ],
+    [
+      "Your own checklist.",
+      "Copy a checklist and adapt the items and weights to your brand standard; save it as a template file for the other hotels of the group."
+    ]
+  ],
+  "example": {
+    "seed": 604,
+    "days": 14,
+    "perDay": [
+      7,
+      10
+    ],
+    "floors": [
+      1,
+      6
+    ],
+    "rooms": [
+      1,
+      30
+    ],
+    "types": [
+      {
+        "type": "single",
+        "from": 1,
+        "to": 6
+      },
+      {
+        "type": "accessible",
+        "from": 7,
+        "to": 8,
+        "floors": [
+          1,
+          2
+        ]
+      },
+      {
+        "type": "suite",
+        "from": 29,
+        "to": 30
+      }
+    ],
+    "default": "double",
+    "attendants": [
+      {
+        "name": "Marta",
+        "floors": [
+          1
+        ],
+        "factor": 0.8
+      },
+      {
+        "name": "Ilir",
+        "floors": [
+          2
+        ],
+        "factor": 1.0
+      },
+      {
+        "name": "Sofia",
+        "floors": [
+          3
+        ],
+        "factor": 0.9
+      },
+      {
+        "name": "Jonas",
+        "floors": [
+          4
+        ],
+        "factor": 2.6,
+        "learning": true
+      },
+      {
+        "name": "Ana",
+        "floors": [
+          5
+        ],
+        "factor": 1.1
+      },
+      {
+        "name": "Mehmet",
+        "floors": [
+          6
+        ],
+        "factor": 1.0
+      }
+    ],
+    "inspectors": [
+      "Elena",
+      "David"
+    ],
+    "base": 0.006,
+    "critical": 0.002,
+    "recurring": {
+      "bathroom-0": 0.09,
+      "bathroom-2": 0.12,
+      "bathroom-5": 0.05,
+      "bed-2": 0.07,
+      "minibar-1": 0.05,
+      "general-2": 0.02
+    },
+    "kinds": {
+      "checkout": 0.6,
+      "stayover": 0.25,
+      "vip": 0.08,
+      "arrival": 0.07
+    },
+    "recheck": 0.8,
+    "notes": {
+      "bathroom-0": "Hair in the shower drain",
+      "bathroom-1": "Marks under the toilet rim",
+      "bathroom-2": "Lime on the shower screen",
+      "bathroom-5": "Shower tap drips",
+      "bed-0": "Small stain on the pillowcase",
+      "bed-2": "Dust under the bed",
+      "minibar-1": "One cup missing",
+      "general-2": "Chipped edge on the desk",
+      "air-0": "Smoke smell in the curtains"
+    }
+  }
+}

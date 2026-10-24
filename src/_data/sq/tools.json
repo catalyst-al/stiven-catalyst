@@ -278,5 +278,13 @@
     "summary": "Regjistri i sendeve të gjetura nga dorëzimi deri te kthimi, policia, bamirësia ose asgjësimi, me numër etikete, kasafortë dhe foto për secilin. Afatet e ruajtjes, sendet që presin vendim, vendet ku harrohet më shumë, një përgjigje për mysafirin dhe një etiketë.",
     "url": "/sq/tools/lost-found/",
     "cta": "Hap regjistrin"
+  },
+  {
+    "name": "Inspektimi i dhomës",
+    "type": "Hotel",
+    "time": "5 min",
+    "summary": "Kontrollo dhomën e pastruar para se të lirohet: në rregull, defekt ose s'aplikohet sipas zonës, pika kritike që e rrëzojnë dhomën vetëm, një foto e defektit. Ripastrimet i kthehen pastruesit, mirëmbajtja shkon te lista e veprimeve; kalimi herën e parë sipas pastruesit, katit dhe llojit të dhomës tregon ku duhet trajnim.",
+    "url": "/sq/tools/room-inspection/",
+    "cta": "Inspekto një dhomë"
   }
 ]

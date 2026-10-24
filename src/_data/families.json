@@ -114,7 +114,8 @@
       "/tools/oee/",
       "/tools/hotel-kpis/",
       "/tools/gemba-walk/",
-      "/tools/ops-report/"
+      "/tools/ops-report/",
+      "/tools/room-inspection/"
     ],
     "learn": [],
     "also": [
@@ -188,6 +189,11 @@
         "when": "Every week",
         "do": "Choose last week, read the summary and the biggest risk, send the report to your manager and put next week's three priorities into the Action Tracker.",
         "tool": "/tools/ops-report/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Inspect every checkout and VIP room before reception releases it, send each fault back to the attendant or to maintenance, and coach on the item that fails most this week.",
+        "tool": "/tools/room-inspection/"
       }
     ],
     "next": "lumen"

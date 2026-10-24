@@ -78,6 +78,7 @@ const RECIPES = {
   "spaghetti-diagram": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "project-portfolio": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "lost-found": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "room-inspection": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).

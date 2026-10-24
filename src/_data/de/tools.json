@@ -278,5 +278,13 @@
     "summary": "Das Register der Fundsachen von der Abgabe bis zur Rückgabe, zum Fundbüro, zur Spende oder zur Vernichtung, mit Etikettnummer, Safe und Foto für jede Sache. Aufbewahrungsfristen, fällige Entscheidungen, die Orte, an denen am meisten liegen bleibt, eine Antwort an den Gast und ein Etikett.",
     "url": "/de/tools/lost-found/",
     "cta": "Register öffnen"
+  },
+  {
+    "name": "Zimmerkontrolle",
+    "type": "Hotel",
+    "time": "5 min",
+    "summary": "Prüfen Sie ein gereinigtes Zimmer vor der Freigabe: OK, Mangel oder entfällt je Zone, kritische Punkte, die das Zimmer allein durchfallen lassen, ein Foto des Mangels. Nachreinigungen gehen an die Reinigungskraft, Technik in die Maßnahmenliste; die Erstabnahmequote je Reinigungskraft, Etage und Zimmertyp zeigt, wo Coaching hilft.",
+    "url": "/de/tools/room-inspection/",
+    "cta": "Zimmer prüfen"
   }
 ]

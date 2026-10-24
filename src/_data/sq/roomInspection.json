@@ -1,0 +1,807 @@
+{
+  "storageKey": "sc-room-inspection-sq",
+  "threshold": 0.9,
+  "text": {
+    "tool": "Inspektimi i dhomës",
+    "roomPlaceholder": "p.sh. 412",
+    "attendantPlaceholder": "Kush e pastroi dhomën",
+    "inspectorPlaceholder": "Emri juaj",
+    "notePlaceholder": "Çfarë saktësisht, ku",
+    "roomsPlaceholder": "412; 4; suitë\n413\n414 dyshe",
+    "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
+    "inspectorsPlaceholder": "Elena\nDavid",
+    "maintenanceOwner": "Mirëmbajtja",
+    "checkText": "Riinspekto dhomën pas riparimit: pika është në rregull.",
+    "csvName": "inspektimet-e-dhomave",
+    "publicArea": "Zonë publike"
+  },
+  "roomTypes": [
+    {
+      "key": "single",
+      "name": "Teke"
+    },
+    {
+      "key": "double",
+      "name": "Dyshe"
+    },
+    {
+      "key": "suite",
+      "name": "Suitë"
+    },
+    {
+      "key": "accessible",
+      "name": "E aksesueshme"
+    }
+  ],
+  "kinds": [
+    {
+      "key": "checkout",
+      "name": "Pas largimit"
+    },
+    {
+      "key": "stayover",
+      "name": "Qëndrim i vazhduar"
+    },
+    {
+      "key": "vip",
+      "name": "VIP"
+    },
+    {
+      "key": "arrival",
+      "name": "Para mbërritjes"
+    }
+  ],
+  "zones": [
+    {
+      "key": "entrance",
+      "name": "Hyrja",
+      "meaning": "Metri i parë vendos përshtypjen e parë të mysafirit: një derë me njolla ose një çelës karte që nuk punon shihet para çdo gjëje tjetër.",
+      "moves": [
+        "Nise çdo dhomë te dera, me sytë e mysafirit: doreza, korniza, drita, dyshemeja.",
+        "Vendos në çdo karrocë një leckë për derën dhe kornizën, që të mos anashkalohen.",
+        "Raporto të njëjtën ditë një mbyllës dere të ngadaltë ose një bravë të dobët: është çështje sigurie."
+      ],
+      "question": "Çfarë sheh mysafiri në pesë sekondat e para pasi hapet dera?"
+    },
+    {
+      "key": "bed",
+      "name": "Shtrati",
+      "meaning": "Shtrati është arsyeja pse mysafiri paguan dhomën. Një qime ose një njollë në çarçafë është ankesë, shpesh rimbursim.",
+      "moves": [
+        "Kontrollo çarçafët në dritë dite para se të shtrohen, jo pas.",
+        "Ktheje në lavanderi me etiketë çdo çarçaf me njolla ose të dëmtuar, që të shihet modeli.",
+        "Trego standardin e shtratit me një foto në dhomën e çarçafëve: qoshet, jastëkët, mbulesa."
+      ],
+      "question": "Nga vijnë çarçafët dhe kush i shikon para se të shtrohen?"
+    },
+    {
+      "key": "bathroom",
+      "name": "Banjo",
+      "meaning": "Banjoja është vendi ku mysafirët shikojnë më nga afër dhe ku dështojnë shumica e dhomave: qimet, gëlqerja dhe njollat e ujit shihen menjëherë.",
+      "moves": [
+        "Përfundoje banjon me një vështrim të fundit nga dera në lartësinë e dyshemesë: kullimi, qoshet, pas tualetit.",
+        "Jepi çdo karroce mjetin e vet për kullimin dhe një leckë mikrofibër të thatë për fshirjen e fundit.",
+        "Planifiko heqjen e gëlqeres në dushe sipas katit, që gëlqerja të mos presë një ankesë."
+      ],
+      "question": "Cilën pjesë të banjos e shikon pastruesi i fundit, dhe sa kohë i mbetet për të?"
+    },
+    {
+      "key": "desk",
+      "name": "Tavolina dhe dollapi",
+      "meaning": "Pluhuri në tavolinë dhe sendet e lëna në sirtarë i tregojnë mysafirit se askush nuk ka parë vërtet.",
+      "moves": [
+        "Hap çdo sirtar dhe kasafortën në çdo dhomë pas largimit, çdo herë.",
+        "Fshiji telekomandën dhe çelësat me dezinfektues: preken më shumë se çdo gjë.",
+        "Mbaj numrin e varëseve dhe artikujve në listën e karrocës, që mungesat të plotësohen menjëherë."
+      ],
+      "question": "Çfarë la mysafiri i fundit që e gjetëm, dhe çfarë nuk e gjetëm?"
+    },
+    {
+      "key": "minibar",
+      "name": "Minibari dhe artikujt",
+      "meaning": "Një filxhan që mungon ose një kuti kafeje bosh është gjë e vogël për ne dhe telefonata e parë në recepsion për mysafirin.",
+      "moves": [
+        "Mbushe karrocën sipas një liste standarde për çdo lloj dhome, jo nga kujtesa.",
+        "Vendosi artikujt njësoj në çdo dhomë, që një mungesë të shihet me një shikim.",
+        "Bie dakord me ekipin e minibarit kush kontrollon, kush rimbush dhe kur."
+      ],
+      "question": "Cili artikull mbaron i pari në karrocë, dhe pse?"
+    },
+    {
+      "key": "windows",
+      "name": "Dritaret dhe ballkoni",
+      "meaning": "Vijat në xham dhe një perde e dalë nga grepat shihen në dritën e mbrëmjes, kur mysafiri është në dhomë.",
+      "moves": [
+        "Shikoje xhamin anash kundër dritës para se të largohesh.",
+        "Tërhiqe çdo perde një herë deri në fund dhe mbrapsht: kështu del menjëherë një grep i thyer.",
+        "Raporto çdo dritare ose derë ballkoni që nuk mbyllet: është çështje sigurie."
+      ],
+      "question": "Kur u pastruan për herë të fundit nga jashtë dritaret e këtij kati, dhe nga kush?"
+    },
+    {
+      "key": "air",
+      "name": "Era dhe ajri",
+      "meaning": "Era është gjëja e parë që vëren mysafiri dhe më e vështira për t'u rregulluar më pas. Tymi ose lagështia e rrëzojnë dhomën vetëm.",
+      "moves": [
+        "Hape dritaren në fillim të pastrimit, jo në fund.",
+        "Raportoja menjëherë mbikëqyrësit erën e tymit: dhoma ka nevojë për ozon ose pastrim të thellë, jo parfum.",
+        "Lësho ujë në çdo kullim të një dhome që ka qenë bosh për ditë."
+      ],
+      "question": "Si bie era në dhomë kur dera ka qenë e mbyllur për një orë?"
+    },
+    {
+      "key": "general",
+      "name": "Të përgjithshme",
+      "meaning": "Dyshemeja, dritat dhe dëmtimet e vogla: ajo që mysafiri e sheh si gjendjen e gjithë hotelit.",
+      "moves": [
+        "Fshije me fshesë elektrike nga qoshja më e largët drejt derës, së pari anët.",
+        "Ndize çdo dritë një herë gjatë pastrimit, jo vetëm dritën kryesore.",
+        "Raporto dëmtimet me foto të njëjtën ditë, që mirëmbajtja të planifikojë pjesën."
+      ],
+      "question": "Pranë cilit dëmtim kalojmë çdo ditë sepse ka qenë gjithmonë aty?"
+    }
+  ],
+  "templates": {
+    "standard": {
+      "name": "Dhomë standarde",
+      "roomTypes": [
+        "single",
+        "double",
+        "accessible"
+      ],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Dera, korniza dhe doreza të pastra, pa shenja",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Brava, mbyllësi i derës dhe zinxhiri i sigurisë punojnë",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Mbajtësi i kartës, drita e hyrjes dhe çelësat punojnë",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Dyshemeja dhe plintat në hyrje pa pluhur",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bed": [
+          {
+            "text": "Çarçafët pa njolla, qime ose vrima",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Shtrati i shtruar sipas standardit: qoshe të tendosura, jastëkët në vend, mbulesa drejt",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Poshtë shtratit dhe pas kokës së shtratit pa pluhur dhe sende",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mbrojtësja e dyshekut e pastër dhe në vend",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Komodinat e pastra, llambat punojnë",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bathroom": [
+          {
+            "text": "Asnjë qime në dush, vaskë, lavaman ose në dysheme",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tualeti i pastër brenda e jashtë, nën buzë dhe te menteshat e kapakut",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Xhami i dushit, pllakat dhe fugat pa gëlqere dhe myk",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Pasqyra dhe rubinetet të lustruara, pa njolla uji",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Peshqirët të plotë, të freskët dhe të palosur sipas standardit",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Rubineti, kullimi dhe shkarkimi punojnë, asgjë nuk pikon",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "desk": [
+          {
+            "text": "Tavolina, karrigia dhe televizori pa pluhur dhe gjurmë gishtash",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dollapi: varëset të plota, kasaforta e hapur dhe bosh, hekuri dhe tabela aty",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Sirtarët bosh: asgjë nga mysafiri i fundit",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Televizori, telekomanda dhe prizat punojnë; telekomanda e fshirë",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "minibar": [
+          {
+            "text": "Minibari i mbushur sipas listës dhe i ftohtë",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Kazani, filxhanët dhe gotat të pastra; kafeja dhe çaji të plota",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Artikujt e banjos të plotë dhe të vendosur sipas standardit",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dosja informative, blloku dhe stilolapsi në vend",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "windows": [
+          {
+            "text": "Dritaret dhe parvazet të pastra, pa vija",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Perdet dhe errësuesi drejt, pa njolla, rrëshqasin lirshëm",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dritarja dhe dera e ballkonit mbyllen dhe kyçen",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Dyshemeja dhe mobiljet e ballkonit të pastra (ku ka)",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Asnjë erë tymi, lagështie ose kanalizimi",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dhoma e ajrosur dhe në temperaturën e caktuar",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Kondicioneri ose ngrohja punon dhe është i qetë",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Tapeti ose dyshemeja e fshirë me fshesë elektrike, përfshirë qoshet dhe anët",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Çdo dritë punon",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Asnjë dëmtim në mure, mobilje ose pajisje",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Asgjë e harruar: as lecka, as shishe, as sende të mysafirit të fundit",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ]
+      }
+    },
+    "suite": {
+      "name": "Suitë",
+      "roomTypes": [
+        "suite"
+      ],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Dera, korniza dhe doreza të pastra, pa shenja",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Brava, mbyllësi i derës dhe zinxhiri i sigurisë punojnë",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Mbajtësi i kartës, drita e hyrjes dhe çelësat punojnë",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Dyshemeja dhe plintat në hyrje pa pluhur",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bed": [
+          {
+            "text": "Çarçafët pa njolla, qime ose vrima",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Shtrati i shtruar sipas standardit: qoshe të tendosura, jastëkët në vend, mbulesa drejt",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Poshtë shtratit dhe pas kokës së shtratit pa pluhur dhe sende",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Mbrojtësja e dyshekut e pastër dhe në vend",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Komodinat e pastra, llambat punojnë",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "bathroom": [
+          {
+            "text": "Asnjë qime në dush, vaskë, lavaman ose në dysheme",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tualeti i pastër brenda e jashtë, nën buzë dhe te menteshat e kapakut",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Xhami i dushit, pllakat dhe fugat pa gëlqere dhe myk",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Pasqyra dhe rubinetet të lustruara, pa njolla uji",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Peshqirët të plotë, të freskët dhe të palosur sipas standardit",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Rubineti, kullimi dhe shkarkimi punojnë, asgjë nuk pikon",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "desk": [
+          {
+            "text": "Tavolina, karrigia dhe televizori pa pluhur dhe gjurmë gishtash",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dollapi: varëset të plota, kasaforta e hapur dhe bosh, hekuri dhe tabela aty",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Sirtarët bosh: asgjë nga mysafiri i fundit",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Televizori, telekomanda dhe prizat punojnë; telekomanda e fshirë",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Zona e ndenjes: divani, jastëkët dhe tavolina e kafes të pastra, pa thërrime",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ],
+        "minibar": [
+          {
+            "text": "Minibari i mbushur sipas listës dhe i ftohtë",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Kazani, filxhanët dhe gotat të pastra; kafeja dhe çaji të plota",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Artikujt e banjos të plotë dhe të vendosur sipas standardit",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dosja informative, blloku dhe stilolapsi në vend",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dhurata e mirëseardhjes dhe karta të vendosura kur janë rezervuar",
+            "weight": 2,
+            "fix": "reclean"
+          }
+        ],
+        "windows": [
+          {
+            "text": "Dritaret dhe parvazet të pastra, pa vija",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Perdet dhe errësuesi drejt, pa njolla, rrëshqasin lirshëm",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dritarja dhe dera e ballkonit mbyllen dhe kyçen",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Dyshemeja dhe mobiljet e ballkonit të pastra (ku ka)",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Asnjë erë tymi, lagështie ose kanalizimi",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dhoma e ajrosur dhe në temperaturën e caktuar",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Kondicioneri ose ngrohja punon dhe është i qetë",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Tapeti ose dyshemeja e fshirë me fshesë elektrike, përfshirë qoshet dhe anët",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Çdo dritë punon",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Asnjë dëmtim në mure, mobilje ose pajisje",
+            "weight": 2,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Asgjë e harruar: as lecka, as shishe, as sende të mysafirit të fundit",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tualeti i mysafirëve në të njëjtin standard si banjoja kryesore",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tavolina e ngrënies dhe karriget të pastra dhe të vendosura drejt",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ]
+      }
+    },
+    "public": {
+      "name": "Zonë publike (holli, tualetet)",
+      "roomTypes": [],
+      "questions": {
+        "entrance": [
+          {
+            "text": "Dyert e hyrjes dhe xhamat të pastra, pa gjurmë gishtash",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Tapetet e hyrjes të pastra dhe të shtrira rrafsh",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dera automatike ose rrotulluese punon",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "bed": [],
+        "bathroom": [
+          {
+            "text": "Tualetet dhe urinalet të pastra, pa erë",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Sapuni, letra dhe peshqirët e duarve të rimbushura",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Lavamanët, pasqyrat dhe dyshemeja të thata dhe të pastra",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Regjistri i pastrimit në derë i firmosur për orën e fundit",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "desk": [],
+        "minibar": [],
+        "windows": [
+          {
+            "text": "Xhamat, dritaret dhe parvazet të pastra",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Bimët të ujitura, pa gjethe të thara",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Grilat dhe perdet drejt dhe pa dëmtime",
+            "weight": 1,
+            "fix": "reclean"
+          }
+        ],
+        "air": [
+          {
+            "text": "Holli ka erë të freskët: pa erë ushqimi, tymi ose kanalizimi",
+            "weight": 2,
+            "fix": "reclean"
+          },
+          {
+            "text": "Temperatura e këndshme, pa rrymë ajri",
+            "weight": 1,
+            "fix": "maintenance"
+          },
+          {
+            "text": "Ventilimi i tualeteve punon",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ],
+        "general": [
+          {
+            "text": "Dyshemeja e pastër dhe e thatë; tabela e dyshemesë së lagur gjatë larjes",
+            "weight": 3,
+            "critical": true,
+            "fix": "reclean"
+          },
+          {
+            "text": "Recepsioni, ndenjëset dhe tavolinat pa pluhur dhe thërrime",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Koshat të zbrazur, gazetat dhe fletëpalosjet në rregull",
+            "weight": 1,
+            "fix": "reclean"
+          },
+          {
+            "text": "Dritat dhe ashensorët punojnë",
+            "weight": 2,
+            "fix": "maintenance"
+          }
+        ]
+      }
+    }
+  },
+  "tips": [
+    [
+      "Kontrollo, pastaj liroje.",
+      "Kontrollo dhomën para se recepsioni ta shesë. Shëno vetëm atë që sheh tani: në rregull, defekt ose s'aplikohet; një pikë kritike me defekt e rrëzon dhomën vetëm."
+    ],
+    [
+      "Shpejt në kat.",
+      "Skano kodin QR në derë ose shkruaj numrin e dhomës; shëno defektet, pastaj “Shëno të tjerat në rregull”. Pesë minuta mjaftojnë për një dhomë standarde."
+    ],
+    [
+      "Ripastrim apo mirëmbajtje.",
+      "Çdo defekt i kthehet dikujt: pastruesi e pastron sërish, mirëmbajtja e riparon. Pikat e mirëmbajtjes shkojnë te lista e veprimeve kur ruan."
+    ],
+    [
+      "Trajno, mos fajëso.",
+      "Një shkallë e ulët kalimi herën e parë e një pastruesi kërkon një kalim së bashku nëpër dhomë, një standard më të qartë ose më shumë minuta për dhomë, kurrë një emër në mur."
+    ],
+    [
+      "Lista juaj e kontrollit.",
+      "Kopjo një listë kontrolli dhe përshtat pikat dhe peshat me standardin e markës; ruaje si skedar modeli për hotelet e tjera të grupit."
+    ]
+  ],
+  "example": {
+    "seed": 604,
+    "days": 14,
+    "perDay": [
+      7,
+      10
+    ],
+    "floors": [
+      1,
+      6
+    ],
+    "rooms": [
+      1,
+      30
+    ],
+    "types": [
+      {
+        "type": "single",
+        "from": 1,
+        "to": 6
+      },
+      {
+        "type": "accessible",
+        "from": 7,
+        "to": 8,
+        "floors": [
+          1,
+          2
+        ]
+      },
+      {
+        "type": "suite",
+        "from": 29,
+        "to": 30
+      }
+    ],
+    "default": "double",
+    "attendants": [
+      {
+        "name": "Marta",
+        "floors": [
+          1
+        ],
+        "factor": 0.8
+      },
+      {
+        "name": "Ilir",
+        "floors": [
+          2
+        ],
+        "factor": 1.0
+      },
+      {
+        "name": "Sofia",
+        "floors": [
+          3
+        ],
+        "factor": 0.9
+      },
+      {
+        "name": "Jonas",
+        "floors": [
+          4
+        ],
+        "factor": 2.6,
+        "learning": true
+      },
+      {
+        "name": "Ana",
+        "floors": [
+          5
+        ],
+        "factor": 1.1
+      },
+      {
+        "name": "Mehmet",
+        "floors": [
+          6
+        ],
+        "factor": 1.0
+      }
+    ],
+    "inspectors": [
+      "Elena",
+      "David"
+    ],
+    "base": 0.006,
+    "critical": 0.002,
+    "recurring": {
+      "bathroom-0": 0.09,
+      "bathroom-2": 0.12,
+      "bathroom-5": 0.05,
+      "bed-2": 0.07,
+      "minibar-1": 0.05,
+      "general-2": 0.02
+    },
+    "kinds": {
+      "checkout": 0.6,
+      "stayover": 0.25,
+      "vip": 0.08,
+      "arrival": 0.07
+    },
+    "recheck": 0.8,
+    "notes": {
+      "bathroom-0": "Qime në kullimin e dushit",
+      "bathroom-1": "Mbetje nën buzën e tualetit",
+      "bathroom-2": "Gëlqere në xhamin e dushit",
+      "bathroom-5": "Rubineti i dushit pikon",
+      "bed-0": "Njollë e vogël në këllëfin e jastëkut",
+      "bed-2": "Pluhur poshtë shtratit",
+      "minibar-1": "Mungon një filxhan",
+      "general-2": "Cep i thyer në tavolinë",
+      "air-0": "Erë tymi në perde"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{#- Room Inspection: the supervisor's check of a cleaned room before it is released, scored by zone; room-inspection.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-room-inspection>
+    <details class="dl-box ri-setup" data-setup>
+      <summary class="ri-setup-summary"><span class="kicker">1 · {{ "Rooms, team and checklists" | t(lang) }}</span> <span class="form-note" data-setup-count></span></summary>
+      <div class="ri-setup-body">
+        <fieldset class="ri-generate">
+          <legend class="ri-sub">{{ "Generate rooms" | t(lang) }}</legend>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="ri-floor-from">{{ "Floors from" | t(lang) }}</label>
+              <input id="ri-floor-from" type="number" min="0" max="99" step="1" inputmode="numeric" value="1">
+            </div>
+            <div class="field">
+              <label for="ri-floor-to">{{ "Floors to" | t(lang) }}</label>
+              <input id="ri-floor-to" type="number" min="0" max="99" step="1" inputmode="numeric" value="6">
+            </div>
+            <div class="field">
+              <label for="ri-room-from">{{ "Rooms from" | t(lang) }}</label>
+              <input id="ri-room-from" type="number" min="0" max="99" step="1" inputmode="numeric" value="1">
+            </div>
+            <div class="field">
+              <label for="ri-room-to">{{ "Rooms to" | t(lang) }}</label>
+              <input id="ri-room-to" type="number" min="0" max="99" step="1" inputmode="numeric" value="30">
+            </div>
+            <div class="field">
+              <label for="ri-gen-type">{{ "Room type" | t(lang) }}</label>
+              <select id="ri-gen-type">
+                {%- for type in cfg.roomTypes %}
+                <option value="{{ type.key }}"{% if type.key == "double" %} selected{% endif %}>{{ type.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+          </div>
+          <p class="form-note">{{ "Floor 4, rooms 1 to 30 gives 401 to 430. Run it again with another type to change some rooms, e.g. rooms 29 to 30 as suites." | t(lang) }}</p>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-generate>{{ "Add these rooms" | t(lang) }}</button>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="ri-room-paste">{{ "Or paste a room list" | t(lang) }} <span class="optional">{{ "one room per line: number, floor, type" | t(lang) }}</span></label>
+          <textarea id="ri-room-paste" rows="4" placeholder="{{ cfg.text.roomsPlaceholder }}"></textarea>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-import-rooms>{{ "Import rooms" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-clear-rooms>{{ "Clear rooms" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-rooms-status aria-live="polite"></p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ri-attendants">{{ "Room attendants" | t(lang) }} <span class="optional">{{ "one per line, floors after a semicolon" | t(lang) }}</span></label>
+            <textarea id="ri-attendants" rows="4" placeholder="{{ cfg.text.attendantsPlaceholder }}"></textarea>
+          </div>
+          <div class="field">
+            <label for="ri-inspectors">{{ "Inspectors" | t(lang) }} <span class="optional">{{ "one per line" | t(lang) }}</span></label>
+            <textarea id="ri-inspectors" rows="4" placeholder="{{ cfg.text.inspectorsPlaceholder }}"></textarea>
+          </div>
+          <div class="field">
+            <label for="ri-threshold">{{ "Pass mark (%)" | t(lang) }}</label>
+            <input id="ri-threshold" type="number" min="50" max="100" step="1" inputmode="numeric">
+          </div>
+        </div>
+        <p class="form-note">{{ "A room passes at the pass mark or above, and only when no critical item failed." | t(lang) }}</p>
+        <p class="ri-sub">{{ "Own checklists" | t(lang) }}</p>
+        <p class="form-note">{{ "Copy the chosen checklist to change its items. The weight is 1 to 3; C marks a critical item, which fails the room on its own." | t(lang) }}</p>
+        <div class="tp-host" data-template-pack></div>
+      </div>
+    </details>
+
+    <div class="dl-box ri-walk">
+      <fieldset>
+        <legend class="kicker">2 · {{ "Inspect the room" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ri-room">{{ "Room" | t(lang) }}</label>
+            <input id="ri-room" list="ri-room-list" placeholder="{{ cfg.text.roomPlaceholder }}" autocomplete="off" data-scan>
+            <datalist id="ri-room-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="ri-date">{{ "Date" | t(lang) }}</label>
+            <input id="ri-date" type="date">
+          </div>
+          <div class="field">
+            <label for="ri-time">{{ "Time" | t(lang) }}</label>
+            <input id="ri-time" type="time">
+          </div>
+          <div class="field">
+            <label for="ri-attendant">{{ "Room attendant" | t(lang) }}</label>
+            <input id="ri-attendant" list="ri-attendant-list" placeholder="{{ cfg.text.attendantPlaceholder }}" autocomplete="off">
+            <datalist id="ri-attendant-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="ri-inspector">{{ "Inspector" | t(lang) }}</label>
+            <input id="ri-inspector" list="ri-inspector-list" placeholder="{{ cfg.text.inspectorPlaceholder }}" autocomplete="off">
+            <datalist id="ri-inspector-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="ri-kind">{{ "Inspection type" | t(lang) }}</label>
+            <select id="ri-kind">
+              {%- for kind in cfg.kinds %}
+              <option value="{{ kind.key }}">{{ kind.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="ri-template">{{ "Room checklist" | t(lang) }}</label>
+            <select id="ri-template">
+              {%- for key, tpl in cfg.templates %}
+              <option value="{{ key }}">{{ tpl.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+        <p class="form-note ri-room-note" data-room-note aria-live="polite"></p>
+      </fieldset>
+      <p class="ri-live" data-live aria-live="polite"></p>
+      <div class="ri-zones" data-zones></div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-rest-pass>{{ "Mark the rest as pass" | t(lang) }}</button>
+        <button class="button-primary" type="button" data-save disabled>{{ "Save inspection" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-print-sheet>{{ "Print inspection sheet" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-reset>{{ "New inspection" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-walk-status aria-live="polite"></p>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Inspection log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <div class="field ri-period">
+        <label for="ri-period">{{ "Show results for" | t(lang) }}</label>
+        <select id="ri-period">
+          <option value="7">{{ "Last 7 days" | t(lang) }}</option>
+          <option value="30">{{ "Last 30 days" | t(lang) }}</option>
+          <option value="all">{{ "All" | t(lang) }}</option>
+        </select>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table ri-log">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Room" | t(lang) }}</th><th scope="col">{{ "Room attendant" | t(lang) }}</th><th scope="col">{{ "Inspector" | t(lang) }}</th><th scope="col">{{ "Type" | t(lang) }}</th><th scope="col" class="num">{{ "Score" | t(lang) }}</th><th scope="col">{{ "Result" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ "No inspections yet." | t(lang) }} {{ "Inspect a room above and save it, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The same item fails every week?" | t(lang) }}</strong> {{ "Rank the faults in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>, {{ "find the cause with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "and write the standard in" | t(lang) }} <a class="inline-link" href="{{ '/tools/standard-work/' | local(lang) }}">{{ "Standard Work" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ri-results" data-results tabindex="-1" hidden></section>
+<section class="shell ri-print" data-print hidden></section>
+
+<script type="application/json" id="room-inspection-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/template-pack.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/media-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/room-inspection.js' | assetUrl }}" defer></script>

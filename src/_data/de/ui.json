@@ -4382,5 +4382,6 @@
   "Removed the inspection of room {room} on {date}.": "Kontrolle von Zimmer {room} am {date} entfernt.",
   "Clear every saved inspection? The rooms and the team stay.": "Alle gespeicherten Kontrollen löschen? Zimmer und Team bleiben.",
   "Answer": "Antwort",
-  "Re-check": "Nachkontrolle"
+  "Re-check": "Nachkontrolle",
+  "Inspect every checkout and VIP room before reception releases it, send each fault back to the attendant or to maintenance, and coach on the item that fails most this week.": "Prüfen Sie jedes Abreise- und VIP-Zimmer, bevor die Rezeption es freigibt, schicken Sie jeden Mangel an die Reinigungskraft oder an die Technik zurück und coachen Sie den Punkt, der diese Woche am häufigsten durchfällt."
 }
