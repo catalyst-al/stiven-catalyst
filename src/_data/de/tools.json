@@ -302,5 +302,13 @@
     "summary": "Alle Tools in diesem Browser in einer geordneten Morgenliste: Signale der Regelkarten (p, c, u und I-MR mit Lauf- und Trendregeln), verfehlte Ziele, überfällige Maßnahmen, Wartungen, Rote Karten und Ideen, die Sicherheit ganz oben.",
     "url": "/de/tools/signals/",
     "cta": "Signale lesen"
+  },
+  {
+    "name": "Zimmerstatus",
+    "type": "Hotel",
+    "time": "Laufend",
+    "summary": "Das Zimmerboard der Schicht: jedes Zimmer nach Etage mit seinem Housekeeping-Code (VD, VC, VI, OCC, OD, DO, CO, OOO, OOS), den Markierungen DND, VIP und Anreise und seiner Reinigungskraft. Es zeigt das nächste Zimmer zur Reinigung, die bezugsfertigen Zimmer für die heutigen Anreisen, den Anteil außer Betrieb und die Minuten von der Abreise bis sauber und von sauber bis kontrolliert.",
+    "url": "/de/tools/room-status/",
+    "cta": "Zimmerboard öffnen"
   }
 ]

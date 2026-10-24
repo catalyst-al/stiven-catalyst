@@ -5090,5 +5090,6 @@
   "Cleaning started": "Pastrimi nisi",
   "Back in order": "Sërish në rregull",
   "VC rooms are inspected in": "Dhomat VC inspektohen te",
-  "the repairs of OOO rooms are planned in the": "riparimet e dhomave OOO planifikohen te"
+  "the repairs of OOO rooms are planned in the": "riparimet e dhomave OOO planifikohen te",
+  "Keep every room's status current as the work happens, clean the queue from the top, and copy the summary into the shift handover.": "Mbaje statusin e çdo dhome të përditësuar ndërsa bëhet puna, pastro radhën nga lart dhe kopjo përmbledhjen në dorëzimin e turnit."
 }

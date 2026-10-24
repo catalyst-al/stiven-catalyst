@@ -19,7 +19,8 @@
       "/tools/daily-board/",
       "/tools/five-s-audit/",
       "/tools/safety-cross/",
-      "/tools/lost-found/"
+      "/tools/lost-found/",
+      "/tools/room-status/"
     ],
     "learn": [],
     "also": [
@@ -91,6 +92,11 @@
         "when": "During the shift",
         "do": "Log every item handed in with its tag number, contact the guest the same day and clear the items due for a decision before the shift ends.",
         "tool": "/tools/lost-found/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Keep every room's status current as the work happens, clean the queue from the top, and copy the summary into the shift handover.",
+        "tool": "/tools/room-status/"
       }
     ],
     "next": "zenith"
