@@ -342,5 +342,13 @@
     "summary": "Turn the volume forecast and the rate of each process into the heads every shift needs, with breaks, utilisation and absence, and see the gap against the planned team, the bottleneck and how to close it with overtime, agency or qualified people from another process.",
     "url": "/tools/shift-capacity/",
     "cta": "Plan the shifts"
+  },
+  {
+    "name": "ABC/XYZ Inventory",
+    "type": "Inventory",
+    "time": "15 min",
+    "summary": "Classify every SKU by annual consumption value and by how steady its demand is, and get the nine-cell matrix with its policies, the cycle counts per week, safety stock and reorder points at your service level, and the SKUs for the golden zone.",
+    "url": "/tools/inventory-abc/",
+    "cta": "Classify the stock"
   }
 ]

@@ -259,7 +259,8 @@
       "/tools/value-stream-map/",
       "/tools/standard-work/",
       "/tools/spaghetti-diagram/",
-      "/tools/project-portfolio/"
+      "/tools/project-portfolio/",
+      "/tools/inventory-abc/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -329,6 +330,11 @@
         "when": "Every week",
         "do": "Review each project with its lead, tick what the next tollgate still needs, and ask the sponsor to sign the phases that are ready.",
         "tool": "/tools/project-portfolio/"
+      },
+      {
+        "when": "Every month",
+        "do": "Import last month's demand, reorder every A SKU below its reorder point and move the top AX SKUs into the golden zone.",
+        "tool": "/tools/inventory-abc/"
       }
     ],
     "next": "atlas"

@@ -342,5 +342,13 @@
     "summary": "Ktheje parashikimin e volumit dhe ritmin e çdo procesi në njerëzit që i duhen çdo turni, me pushimet, shfrytëzimin dhe mungesat, dhe shiko hendekun me ekipin e planifikuar, pikën e ngushtë dhe si mbyllet me orë shtesë, agjenci ose njerëz të kualifikuar nga një proces tjetër.",
     "url": "/sq/tools/shift-capacity/",
     "cta": "Planifiko turnet"
+  },
+  {
+    "name": "Analiza ABC/XYZ e stokut",
+    "type": "Stoku",
+    "time": "15 min",
+    "summary": "Ndaj çdo artikull sipas vlerës vjetore të konsumit dhe sipas sa e qëndrueshme është kërkesa e tij, dhe merr matricën me nëntë qeliza e politikat e saj, numërimet në javë, stokun e sigurisë dhe pikat e riporosisë për nivelin tënd të shërbimit, dhe artikujt për zonën e artë.",
+    "url": "/sq/tools/inventory-abc/",
+    "cta": "Klasifiko stokun"
   }
 ]
