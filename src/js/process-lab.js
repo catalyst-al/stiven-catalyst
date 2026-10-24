@@ -82,7 +82,8 @@
   const dayLabel = dayMonth(false);
 
   const state = loadState(KEY, { tab: "measure", values: "", name: "", unit: "", lsl: "", usl: "", target: "", prop: {}, means: {}, size: {}, example: false });
-  if (!["measure", "compare", "size"].includes(state.tab)) state.tab = "measure";
+  // The tabs are the page's: the second set (process-lab-2.js) adds its own.
+  if (![...root.querySelectorAll("[data-tab]")].some((tab) => tab.dataset.tab === state.tab)) state.tab = "measure";
   const save = () => write(KEY, state);
   const PROP_FIELDS = ["d1", "n1", "d2", "n2"];
   const SIZE_FIELDS = ["p0", "p1", "alpha", "power", "sd", "delta", "alpha2", "power2"];

@@ -230,5 +230,216 @@
       "Shpjego vlerat e jashtëzakonshme para se t'i fshish.",
       "Një kamion që priti dy orë është real. Gjej historinë e tij; vetëm atëherë vendos nëse i përket mostrës."
     ]
-  ]
+  ],
+  "lab": {
+    "storageKey": "sc-process-lab-sq-calc",
+    "csv": "process-lab-chart",
+    "kinds": [
+      {
+        "id": "imr",
+        "ask": "Një matje, një nga një",
+        "chart": "Karta I-MR",
+        "measure": "Matja",
+        "help": "Një vlerë për rresht, ose një datë apo emërtim dhe një vlerë. Minutat e ngarkimit, pesha e çdo palete, temperatura në çdo kontroll.",
+        "placeholder": "14.10.2026\t42,4\n15.10.2026\t39,9"
+      },
+      {
+        "id": "xbar",
+        "ask": "Matje në grupe të vogla",
+        "chart": "Xbar-R (deri në 8 për grup) ose Xbar-S (më shumë se 8)",
+        "measure": "Matja",
+        "help": "Një grup për rresht: një datë ose emërtim, pastaj vlerat e atij grupi. Pesë paleta të matura çdo ditë, tri kuti të peshuara çdo orë. Deri në 8 vlera për grup japin një kartë Xbar-R, më shumë një kartë Xbar-S.",
+        "placeholder": "14.10.2026\t46,1\t44,8\t47,5\t43,0\t45,2"
+      },
+      {
+        "id": "np",
+        "ask": "Artikuj me defekt nga i njëjti numër çdo herë",
+        "chart": "Karta np",
+        "measure": "Artikuj me defekt",
+        "help": "Një datë ose emërtim, artikujt me defekt, pastaj sa u kontrolluan: i njëjti numër çdo herë, p.sh. 50 porosi të zgjedhura në ditë.",
+        "placeholder": "14.10.2026\t3\t50"
+      },
+      {
+        "id": "p",
+        "ask": "Artikuj me defekt nga një numër që ndryshon",
+        "chart": "Karta p, te Sigma & Karta e Kontrollit",
+        "measure": "Artikuj me defekt",
+        "help": "Një datë, artikujt me defekt, pastaj sa u trajtuan atë ditë. Karta p ndodhet te Sigma & Karta e Kontrollit; kjo faqe ia kalon rreshtat e tu.",
+        "placeholder": "14.10.2026\t12\t1840"
+      },
+      {
+        "id": "c",
+        "ask": "Defekte të numëruara në të njëjtën njësi çdo herë",
+        "chart": "Karta c",
+        "measure": "Defekte",
+        "help": "Një datë ose emërtim dhe numri i defekteve në një njësi me të njëjtën madhësi çdo herë: gabime etiketash për turn, dëmtime për rimorkio të plotë.",
+        "placeholder": "14.10.2026\t6"
+      },
+      {
+        "id": "u",
+        "ask": "Defekte të numëruara në njësi me madhësi që ndryshon",
+        "chart": "Karta u",
+        "measure": "Defekte për njësi",
+        "help": "Një datë ose emërtim, defektet e gjetura, pastaj numri i njësive të kontrolluara: paleta të audituara, dhoma të inspektuara, 100 m² të pastruara.",
+        "placeholder": "14.10.2026\t5\t12"
+      }
+    ],
+    "placeholders": {
+      "chi": "Turni\tI dëmtuar\tEtiketë e gabuar\nMëngjes\t34\t10\nNatë\t22\t38",
+      "reg": "Paleta\tMinuta\n12\t36\n26\t61",
+      "attr": "Pjesa\tStandard\tAnna 1\tAnna 2\tBen 1\tBen 2\n1\tOK\tOK\tOK\tOK\tOK",
+      "gage": "Pjesa\tAnna 1\tAnna 2\tBen 1\tBen 2\n1\t0,29\t0,41\t0,08\t0,25"
+    },
+    "chart": {
+      "stable": "Asnjë sinjal në {n} pika: luhatjet janë zhurma normale e këtij procesi. Reagimi ndaj pikave të veçanta nuk ndihmon; për një numër më të mirë duhet ndryshuar vetë procesi.",
+      "signals": "{count} sinjal(e) që nuk janë zhurmë normale. Shiko së pari ato pika: çfarë ishte ndryshe në vëllim, njerëz, pajisje apo metodë? Pastaj çoje shkakun te 5 Whys.",
+      "spread": "Karta {chart} ka {count} pikë(a) jashtë kufijve: shpërndarja brenda atyre grupeve u hodh. Shiko çfarë ishte përzier në to (dy rampa, dy turne, një person i ri).",
+      "short": "Më pak se 20 pika: kufijtë janë të përafërt. Vazhdo të mbledhësh para se t'i besosh një sinjali.",
+      "phaseLevel": "Nga {label} e tutje, vija qendrore lëvizi nga {before} në {after} ({change}): {verdict}.",
+      "phaseSpread": "Shpërndarja (σ brenda) shkoi nga {before} në {after} ({change}).",
+      "phaseCounts": "Te numërimet shpërndarja ndjek nivelin, prandaj kufijtë lëvizën bashkë me të.",
+      "phaseVerdicts": {
+        "real": "një zhvendosje reale ({p})",
+        "borderline": "ndoshta reale ({p}), por jo ende pa dyshim",
+        "noise": "kjo mund të jetë ende zhurmë ({p})"
+      },
+      "npVarying": "Numri i kontrolluar nuk është i njëjtë në çdo rresht ({min} deri {max}). Karta np kërkon të njëjtin numër; këtu kufijtë ndjekin çdo rresht, por për këto të dhëna karta p është e duhura.",
+      "sizes": "Grupet nuk kanë të gjitha të njëjtën madhësi ({min} deri {max}); çdo grup merr kufijtë e vet.",
+      "skipped": "{n} rresht(a) u lanë jashtë, u mungon ajo që i duhet kësaj karte: {need}",
+      "needRows": "Ngjit të paktën dy rreshta me atë që i duhet kësaj karte: {need}.",
+      "need": {
+        "imr": "një vlerë për rresht",
+        "xbar": "2 deri në 25 vlera për rresht",
+        "np": "artikujt me defekt dhe numri i kontrolluar, jo më shumë me defekt se të kontrolluar",
+        "p": "artikujt me defekt dhe numri i trajtuar",
+        "c": "një numër 0 ose më shumë",
+        "u": "defektet dhe një numër njësish mbi 0"
+      },
+      "pNote": "Artikujt me defekt nga një numër që ndryshon shkojnë në kartën p, me kufij për vëllimin e çdo dite. Sigma & Karta e Kontrollit e vizaton, me rregullat Nelson dhe nivelin sigma; hape me rreshtat e tu.",
+      "pNoDates": "Mund të kalohen vetëm rreshtat me datë, dhe këta nuk kanë. Vendos një datë në fillim të çdo rreshti."
+    },
+    "chi": {
+      "real": "Përzierja nuk është e njëjtë në çdo rresht ({p}): një model kaq i fortë del rastësisht më rrallë se {chance}. Diferenca më e madhe: {row} × {col}, u numëruan {obs} aty ku priteshin {exp} nëse rreshtat dhe kolonat nuk do të kishin lidhje me njëri-tjetrin.",
+      "borderline": "Përzierja ndoshta ndryshon midis rreshtave ({p}), por jo pa dyshim. Diferenca më e madhe: {row} × {col}, u numëruan {obs} aty ku priteshin {exp}. Më shumë të dhëna do ta sqaronin.",
+      "noise": "Asnjë ndryshim real midis rreshtave ({p}): përzierja e këtyre {total} numërimeve është ajo që do të jepte vetëm rastësia. Mos kërko model në këtë tabelë.",
+      "low": "{n} nga {cells} qeliza presin më pak se 5 (më e vogla {min}): vlera p nuk është e besueshme. Bashko rreshtat ose kolonat e vogla, ose mblidh më shumë të dhëna para se të vendosësh.",
+      "need": "Ngjit një tabelë me një rresht titujsh dhe të paktën dy rreshta e dy kolona me numërime (numra të plotë, 0 ose më shumë).",
+      "strength": { "weak": "lidhje e dobët", "moderate": "lidhje mesatare", "strong": "lidhje e fortë" },
+      "problem": "{row} ka më shumë {col} se rreshtat e tjerë ({obs} kundrejt {exp} të pritura)",
+      "action": "Gjej pse {row} ka më shumë {col} se të tjerët ({obs} kundrejt {exp} të pritura)"
+    },
+    "reg": {
+      "sentence": "Me çdo {xUnit} më shumë, {yName} ndryshon me rreth {signed} (intervali 95%: {low} deri {high}).",
+      "r2": "r² = {r2}: {xName} shpjegon {r2pct} të luhatjeve te {yName}; {rest} e tjera vijnë nga shkaqe të tjera.",
+      "real": "Lidhja është reale ({p}): një pjerrësi e tillë del rastësisht më rrallë se {chance}.",
+      "borderline": "Lidhja është ndoshta reale ({p}), por jo pa dyshim; disa pika më shumë do ta sqaronin.",
+      "noise": "Lidhja mund të jetë zhurmë ({p}): me këto pika, një pjerrësi kaq e madhe del rastësisht {chance} të rasteve. Mos planifiko ende me të.",
+      "miss": "Një pikë tipike e humbet vijën me rreth {sd}.",
+      "cause": "Një lidhje nuk është ende shkak: kontrollo në vend se {yName} ndryshon vërtet kur ndryshon {xMid}, dhe se nuk lëviz diçka tjetër bashkë me të dyja.",
+      "need": "Ngjit të paktën tri çifte numrash, x dhe y në çdo rresht.",
+      "flat": "Të gjitha vlerat x janë të njëjta: një vijë kërkon vlera x që ndryshojnë.",
+      "problem": "{yTitle} ndryshon me {signed} për çdo {xUnit} më shumë"
+    },
+    "attr": {
+      "bands": {
+        "excellent": {
+          "label": "Shkëlqyer",
+          "text": "Kappa {kappa}: gjykimit mund t'i besohet. Mbaji mostrat e referencës në vendin e punës dhe përsërite studimin një herë në vit."
+        },
+        "good": {
+          "label": "Mirë",
+          "text": "Kappa {kappa}: i pranueshëm për shumicën e përdorimeve. Kalo me vlerësuesit pjesët e gjykuara ndryshe dhe mpreh standardin aty."
+        },
+        "poor": {
+          "label": "Duhet përmirësuar",
+          "text": "Kappa {kappa}: gjykimi nuk është mjaft i qëndrueshëm për të numëruar defekte. Cakto një standard të qartë me foto dhe mostra kufitare, trajno vlerësuesit, pastaj përsërite studimin."
+        }
+      },
+      "worst": "{name} përputhet më pak me standardin ({pct}): {misses}.",
+      "miss": "{n} × {truth} gjykuar ndryshe",
+      "mixed": "{n} pjesë gjykuar ndryshe nga një provë te tjetra",
+      "noStandard": "Pa kolonën Standard, studimi tregon vetëm nëse vlerësuesit përputhen, jo nëse kanë të drejtë.",
+      "skipped": "{n} rresht(a) me një qelizë bosh u lanë jashtë.",
+      "need": "Ngjit një tabelë me rresht titujsh: Pjesa, pastaj Standard (opsional), pastaj një kolonë për çdo vlerësues dhe provë, p.sh. Anna 1, Anna 2, Ben 1, Ben 2. Të paktën dy pjesë.",
+      "problem": "Kontrolli vizual nuk është i qëndrueshëm (kappa {kappa})",
+      "action": "Mpreh standardin e kontrollit vizual dhe trajno (kappa {kappa})"
+    },
+    "gage": {
+      "bands": {
+        "good": {
+          "label": "Mirë",
+          "text": "Gage R&R totale është {pct} e variacionit të studimit: sistemi i matjes është i mirë. Ndryshimet midis pjesëve janë ndryshime reale."
+        },
+        "depends": {
+          "label": "Varet nga përdorimi",
+          "text": "Gage R&R totale është {pct} e variacionit të studimit: e pranueshme në varësi të asaj që vendos matja, kostos së instrumentit dhe kostos së një vendimi të gabuar. Përmirësoje nëse ndan të mirën nga e keqja pranë një kufiri."
+        },
+        "bad": {
+          "label": "E papranueshme",
+          "text": "Gage R&R totale është {pct} e variacionit të studimit: matja nuk i dallon dot mjaftueshëm pjesët. Rregullo matjen para se të marrësh vendime mbi të dhënat e saj."
+        }
+      },
+      "repeat": "Përsëritshmëria ({pct}) është pjesa më e madhe: instrumenti shpërndahet kur i njëjti person mat sërish të njëjtën pjesë. Shiko pajisjen, mbajtësen, pikën e matjes dhe metodën.",
+      "reprod": "Riprodhueshmëria ({pct}) është pjesa më e madhe: operatorët matin ndryshe. Cakto një metodë (ku, si, sa fort), shkruaje dhe trajnoje.",
+      "ndc": "{ndc} kategori të dallueshme: sistemi mund t'i ndajë pjesët në {ndc} grupe; AIAG kërkon 5 ose më shumë.",
+      "ndcLow": "Vetëm {ndc} kategori të dallueshme: sistemi nuk i ndan dot pjesët në mjaft grupe; AIAG kërkon 5 ose më shumë.",
+      "interaction": "Ndërveprimi pjesë × operator është i rëndësishëm ({p}): disa operatorë matin disa pjesë ndryshe. Ai llogaritet si riprodhueshmëri.",
+      "pooled": "Asnjë ndërveprim pjesë × operator ({p}); ai i bashkohet përsëritshmërisë, si te AIAG dhe Minitab.",
+      "tolerance": "Kundrejt tolerancës {tol}, R&R zë {pct}.",
+      "need": "Ngjit një tabelë me rresht titujsh: Pjesa, pastaj një kolonë për çdo operator dhe provë, p.sh. Anna 1, Anna 2, Anna 3, Ben 1 … Ose tri kolona: pjesa, operatori, vlera. Të paktën dy pjesë.",
+      "unbalanced": "Çdo pjesë kërkon të njëjtin numër provash nga çdo operator, të paktën dy. Kontrollo tabelën për vlera që mungojnë.",
+      "problem": "Matja e {name} nuk është mjaft e mirë (Gage R&R {pct} e variacionit të studimit)",
+      "action": "Përmirëso matjen e {name}: Gage R&R {pct} e variacionit të studimit"
+    },
+    "examples": {
+      "xbar": {
+        "name": "Koha dock-to-stock, 5 paleta në ditë",
+        "unit": "min",
+        "split": 16,
+        "header": [],
+        "rows": ["2026-09-21|62.3|47.6|42.7|46.1|43", "2026-09-22|43.6|46.1|44.5|49.4|42.4", "2026-09-23|46.6|37.4|45.4|42.5|47.5", "2026-09-24|43|44.8|43.6|44.5|44.6", "2026-09-25|48.4|44.5|41.5|47.9|47.7", "2026-09-28|42.7|49.4|48.4|44.8|40.7", "2026-09-29|39.9|46.4|44.2|44.5|42", "2026-09-30|44.2|44.8|46|43.4|41.1", "2026-10-01|57|58.7|47.1|62.2|55.1", "2026-10-02|48.5|41.6|53.4|47.6|47.7", "2026-10-05|45.5|46.1|55.5|46.5|42.8", "2026-10-06|46.3|46.2|50.6|37.3|58.2", "2026-10-07|49.5|55.4|53.5|44.1|47.2", "2026-10-08|39.2|47.2|45.2|50.9|53.7", "2026-10-09|42.8|47.9|47.3|46.5|43.3", "2026-10-12|38.3|37.8|34.8|37.6|35.9", "2026-10-13|37.8|36.9|37|39.5|41", "2026-10-14|39.4|40.9|35.7|41|40.4", "2026-10-15|40.9|36.3|35.8|37.5|41.2", "2026-10-16|34.5|38.1|39.4|36.5|40", "2026-10-19|40.6|38.5|39.9|37.2|40.9", "2026-10-20|44.1|44.2|45.7|41.8|42.6", "2026-10-21|36.6|34.1|38.7|39.4|35.5", "2026-10-22|39.9|40.9|44.2|41.5|34.8", "2026-10-23|44|36.1|35.8|39.3|37.4"]
+      },
+      "np": {
+        "name": "Porosi me vonesë nga 50 të zgjedhura në ditë",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-14|5|50", "2026-09-15|5|50", "2026-09-16|4|50", "2026-09-17|6|50", "2026-09-18|4|50", "2026-09-21|10|50", "2026-09-22|5|50", "2026-09-23|2|50", "2026-09-24|7|50", "2026-09-25|5|50", "2026-09-28|3|50", "2026-09-29|2|50", "2026-09-30|4|50", "2026-10-01|6|50", "2026-10-02|4|50", "2026-10-05|4|50", "2026-10-06|2|50", "2026-10-07|1|50", "2026-10-08|5|50", "2026-10-09|1|50", "2026-10-12|11|50", "2026-10-13|0|50", "2026-10-14|3|50", "2026-10-15|4|50", "2026-10-16|5|50", "2026-10-19|3|50", "2026-10-20|3|50", "2026-10-21|1|50", "2026-10-22|3|50", "2026-10-23|4|50"]
+      },
+      "c": {
+        "name": "Gabime etiketash për turn",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-21|1", "2026-09-22|6", "2026-09-23|11", "2026-09-24|10", "2026-09-25|9", "2026-09-28|12", "2026-09-29|8", "2026-09-30|2", "2026-10-01|2", "2026-10-02|7", "2026-10-05|5", "2026-10-06|9", "2026-10-07|4", "2026-10-08|6", "2026-10-09|9", "2026-10-12|8", "2026-10-13|4", "2026-10-14|17", "2026-10-15|5", "2026-10-16|5", "2026-10-19|1", "2026-10-20|7", "2026-10-21|8", "2026-10-22|7", "2026-10-23|3", "2026-10-26|3"]
+      },
+      "u": {
+        "name": "Defekte për paletë të audituar",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-21|7|18", "2026-09-22|4|20", "2026-09-23|7|17", "2026-09-24|13|19", "2026-09-25|6|18", "2026-09-28|0|10", "2026-09-29|9|15", "2026-09-30|7|17", "2026-10-01|8|15", "2026-10-02|2|10", "2026-10-05|5|19", "2026-10-06|2|8", "2026-10-07|17|16", "2026-10-08|7|16", "2026-10-09|7|12", "2026-10-12|6|18", "2026-10-13|7|15", "2026-10-14|3|10", "2026-10-15|9|19", "2026-10-16|4|13", "2026-10-19|4|11", "2026-10-20|8|12"]
+      },
+      "chi": {
+        "header": ["Turni", "I dëmtuar", "Etiketë e gabuar", "Artikull që mungon", "Artikull i gabuar"],
+        "rows": ["Mëngjes|34|10|9|6", "Pasdite|31|13|11|7", "Natë|22|38|10|8"]
+      },
+      "reg": {
+        "x": "Numri i paletave për kamion",
+        "xUnit": "paletë",
+        "y": "koha e ngarkimit",
+        "yUnit": "min",
+        "header": ["Paleta", "Koha e ngarkimit (min)"],
+        "rows": ["18|39", "24|62", "29|59", "21|55", "26|64", "29|52", "30|76", "23|65", "32|68", "18|35", "11|38", "32|63", "14|29", "12|41", "17|42", "16|28", "27|61", "31|68", "33|77", "29|68", "26|56", "10|33", "11|30", "13|52"]
+      },
+      "attr": {
+        "header": ["Kutia", "Standard", "Anna 1", "Anna 2", "Ben 1", "Ben 2", "Cara 1", "Cara 2"],
+        "rows": ["1|OK|OK|OK|OK|OK|OK|OK", "2|OK|OK|OK|OK|OK|I dëmtuar|OK", "3|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar", "4|OK|OK|OK|OK|OK|OK|OK", "5|OK|OK|OK|OK|OK|OK|OK", "6|I dëmtuar|I dëmtuar|I dëmtuar|OK|OK|I dëmtuar|I dëmtuar", "7|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar", "8|OK|OK|OK|OK|OK|OK|OK", "9|OK|OK|OK|I dëmtuar|OK|OK|OK", "10|OK|OK|OK|OK|OK|OK|OK", "11|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|OK|I dëmtuar", "12|OK|OK|OK|OK|OK|OK|OK", "13|OK|OK|OK|OK|OK|OK|OK", "14|I dëmtuar|I dëmtuar|OK|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar", "15|OK|OK|OK|OK|OK|OK|OK", "16|OK|OK|OK|OK|OK|OK|OK", "17|OK|OK|OK|OK|OK|OK|OK", "18|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|I dëmtuar|OK", "19|OK|OK|OK|OK|OK|OK|OK", "20|OK|OK|OK|OK|OK|OK|OK"]
+      },
+      "gage": {
+        "name": "Gjerësia e vulës, shmangia nga nominalja",
+        "unit": "mm",
+        "tol": "",
+        "header": ["Pjesa", "Anna 1", "Anna 2", "Anna 3", "Ben 1", "Ben 2", "Ben 3", "Cara 1", "Cara 2", "Cara 3"],
+        "rows": ["1|0.29|0.41|0.64|0.08|0.25|0.07|0.04|-0.11|-0.15", "2|-0.56|-0.68|-0.58|-0.47|-1.22|-0.68|-1.38|-1.13|-0.96", "3|1.34|1.17|1.27|1.19|0.94|1.34|0.88|1.09|0.67", "4|0.47|0.50|0.64|0.01|1.03|0.20|0.14|0.20|0.11", "5|-0.80|-0.92|-0.84|-0.56|-1.20|-1.28|-1.46|-1.07|-1.45", "6|0.02|-0.11|-0.21|-0.20|0.22|0.06|-0.29|-0.67|-0.49", "7|0.59|0.75|0.66|0.47|0.55|0.83|0.02|0.01|0.21", "8|-0.31|-0.20|-0.17|-0.63|0.08|-0.34|-0.46|-0.56|-0.49", "9|2.26|1.99|2.01|1.80|2.12|2.19|1.77|1.45|1.87", "10|-1.36|-1.25|-1.31|-1.68|-1.62|-1.50|-1.49|-1.77|-2.16"]
+      }
+    }
+  }
 }

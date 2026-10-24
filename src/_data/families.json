@@ -204,7 +204,8 @@
       "/tools/time-study/",
       "/tools/value-stream-map/",
       "/tools/standard-work/",
-      "/tools/spaghetti-diagram/"
+      "/tools/spaghetti-diagram/",
+      "/tools/project-portfolio/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -269,6 +270,11 @@
         "when": "Every month",
         "do": "Follow one job with the floor plan, draw its walks, and move the stop visited most next to where the work happens.",
         "tool": "/tools/spaghetti-diagram/"
+      },
+      {
+        "when": "Every week",
+        "do": "Review each project with its lead, tick what the next tollgate still needs, and ask the sponsor to sign the phases that are ready.",
+        "tool": "/tools/project-portfolio/"
       }
     ],
     "next": "atlas"

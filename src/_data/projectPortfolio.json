@@ -1,0 +1,373 @@
+{
+  "storageKey": "sc-project-portfolio",
+  "text": {
+    "tool": "Project Portfolio",
+    "csv": "project-portfolio",
+    "newProject": "New project",
+    "titlePlaceholder": "e.g. Outbound damage below 0.30%",
+    "leadPlaceholder": "Who runs the project",
+    "sponsorPlaceholder": "Who owns the result and signs the tollgates",
+    "areaPlaceholder": "e.g. Outbound",
+    "problemPlaceholder": "What, where, since when, how much, and the gap to the target. No cause, no solution.",
+    "goalPlaceholder": "e.g. 0.30% or lower by week 46, without longer loading times",
+    "scopeInPlaceholder": "e.g. From the pick face to handover to the driver",
+    "scopeOutPlaceholder": "e.g. Linehaul, supplier packaging",
+    "teamPlaceholder": "Names and roles",
+    "peoplePlaceholder": "e.g. Sponsor, Shift lead, Loaders, Quality",
+    "softPlaceholder": "e.g. Fewer complaints, calmer late shift",
+    "reasonPlaceholder": "Why the tollgate closes with open points, and when they will be done",
+    "sipocPlaceholder": "One per line"
+  },
+  "areas": ["Inbound", "Picking", "Outbound", "Last mile", "Front office", "Housekeeping"],
+  "belts": {
+    "yellow": "Yellow Belt",
+    "green": "Green Belt",
+    "black": "Black Belt",
+    "mbb": "Master Black Belt",
+    "lead": "Project lead (no belt)"
+  },
+  "phases": {
+    "define": { "letter": "D", "name": "Define" },
+    "measure": { "letter": "M", "name": "Measure" },
+    "analyze": { "letter": "A", "name": "Analyze" },
+    "improve": { "letter": "I", "name": "Improve" },
+    "control": { "letter": "C", "name": "Control" }
+  },
+  "statuses": {
+    "on-track": "On track",
+    "at-risk": "At risk",
+    "late": "Late",
+    "on-hold": "On hold",
+    "closed": "Closed"
+  },
+  "sheets": {
+    "charter": "Project charter",
+    "sipoc": "SIPOC",
+    "ctq": "CTQ tree",
+    "raci": "RACI",
+    "kano": "Kano"
+  },
+  "sipoc": [
+    ["s", "Suppliers", "Who provides what the process needs"],
+    ["i", "Inputs", "Material, information, people"],
+    ["p", "Process", "5 to 7 steps, each starting with a verb"],
+    ["o", "Outputs", "What leaves the process"],
+    ["c", "Customers", "Who receives the outputs"]
+  ],
+  "columns": {
+    "ctq": { "need": "Customer need", "driver": "Driver", "ctq": "Measurable CTQ", "spec": "Specification" },
+    "raci": { "activity": "Activity", "check": "Check" },
+    "kano": { "feature": "Feature", "functional": "If it is there", "dysfunctional": "If it is not there", "set": "Set directly", "category": "Category" },
+    "rty": { "step": "Process step", "fpy": "First-pass yield %" },
+    "realised": { "month": "Month", "amount": "Realised €" },
+    "control": { "what": "What is measured", "spec": "Specification or target", "method": "Method", "frequency": "Frequency", "owner": "Owner", "reaction": "Reaction plan" },
+    "portfolio": {
+      "project": "Project", "lead": "Lead", "belt": "Belt", "sponsor": "Sponsor", "area": "Area", "start": "Start", "end": "Target end",
+      "phase": "Phase", "status": "Status", "gate": "Next tollgate", "gateDate": "Planned", "ready": "Checklist", "days": "Days in phase",
+      "dpmoBefore": "DPMO before", "sigmaBefore": "Sigma before", "dpmoAfter": "DPMO after", "sigmaAfter": "Sigma after",
+      "rty": "RTY", "copq": "COPQ € per month", "hard": "Hard savings € per year", "soft": "Soft savings", "softValue": "Soft estimate € per year",
+      "planned": "Planned this year €", "realised": "Realised this year €"
+    }
+  },
+  "raci": {
+    "R": "Responsible: does the work",
+    "A": "Accountable: owns the result, one per activity",
+    "C": "Consulted: asked before",
+    "I": "Informed: told after",
+    "AR": "Accountable and does the work"
+  },
+  "kano": {
+    "functional": "If the feature is there, how does the customer feel?",
+    "dysfunctional": "If the feature is not there, how does the customer feel?",
+    "auto": "From the answers",
+    "answers": ["I like it", "I expect it", "I am neutral", "I can live with it", "I dislike it"],
+    "categories": {
+      "M": ["Must-be", "Expected. Missing it makes customers angry; having it earns no thanks."],
+      "O": ["One-dimensional", "The more, the better: satisfaction rises with every step."],
+      "A": ["Attractive", "Not expected. Having it delights; missing it costs nothing."],
+      "I": ["Indifferent", "Customers do not care either way. Do not spend on it."],
+      "R": ["Reverse", "Customers would rather not have it."],
+      "Q": ["Questionable", "The two answers contradict each other: ask again."]
+    },
+    "axisX": ["Not fulfilled", "Fully fulfilled"],
+    "axisY": ["Dissatisfied", "Delighted"]
+  },
+  "copq": [
+    ["internal", "Internal failure", "Rework, scrap, re-packing, before the customer sees it"],
+    ["external", "External failure", "Credits, returns, redelivery, complaints"],
+    ["appraisal", "Appraisal", "Checks, audits, inspection"],
+    ["prevention", "Prevention", "Training, standards, mistake-proofing"]
+  ],
+  "tollgates": {
+    "define": [
+      "The problem has a number, a time frame and the gap to the target.",
+      "The goal is measurable and has a date.",
+      "Scope in and out is written down and agreed.",
+      "The SIPOC shows 5 to 7 process steps, from supplier to customer.",
+      "Each CTQ comes from the voice of the customer and has a specification.",
+      "Roles are agreed in the RACI: one person accountable for each activity."
+    ],
+    "measure": [
+      "Every CTQ has an operational definition, with photos where it helps.",
+      "A data collection plan says what is recorded, where, by whom and how often.",
+      "The measurement was checked: two people judged the same cases and agreed.",
+      "The baseline covers at least two to four weeks.",
+      "DPMO, sigma level, RTY and the cost of poor quality are calculated.",
+      "The goal is confirmed or adjusted with the sponsor."
+    ],
+    "analyze": [
+      "The team walked the process where the work is done.",
+      "A Pareto shows which causes carry most of the defects.",
+      "Possible causes were listed and narrowed down with data.",
+      "The root causes are proven with data, not with opinion.",
+      "The 5 Whys end at a cause the team can act on.",
+      "The sponsor agrees which root causes the Improve phase will attack."
+    ],
+    "improve": [
+      "Each countermeasure attacks a proven root cause.",
+      "Solutions were chosen by effort and impact.",
+      "A pilot ran with the same definition and the same log as the baseline.",
+      "The pilot result is compared with the baseline, and the change is clear.",
+      "Side effects on time, cost and safety are checked and accepted.",
+      "The roll-out plan has owners and dates."
+    ],
+    "control": [
+      "The new method is in the standard work and in the training.",
+      "The control plan says what is measured, how often, by whom and what happens when it goes out of control.",
+      "A control chart with limits from the improved process is running.",
+      "The savings are confirmed with finance.",
+      "The process owner has taken over the result.",
+      "Lessons learned are shared and the project is closed."
+    ]
+  },
+  "limits": { "daysInPhase": 45 },
+  "tips": [
+    ["One project, one problem.", "A charter with a number, a time frame and a gap. If the problem has no number, the project has no end."],
+    ["Close each tollgate with the sponsor.", "Tick what is done; a phase closes only when the list is complete, or with a written reason the sponsor signs."],
+    ["Watch the days in a phase.", "More than 45 days in one phase usually means the project is stuck: ask what blocks the next tollgate."],
+    ["Count only what finance confirms.", "Hard savings are euros that leave the cost lines; soft savings are written down with an estimate, not added to the total."],
+    ["Hand the control plan over.", "Every line of the control plan goes to the Action Tracker with its owner, so the result stays after the project closes."]
+  ],
+  "example": {
+    "projects": [
+      {
+        "title": "Outbound damage below 0.30%",
+        "lead": "Mira Hoxha",
+        "belt": "green",
+        "sponsor": "Jonas Weber, outbound manager",
+        "area": "Outbound",
+        "start": -150,
+        "end": 20,
+        "phase": "control",
+        "status": "on-track",
+        "phaseDates": { "define": -150, "measure": -128, "analyze": -110, "improve": -92, "control": -40 },
+        "charter": {
+          "problem": "In weeks 36 to 38, 0.57% of outbound units left the hub damaged (104 of 18,400 in week 38) against 0.30% promised to the customer. Credits cost about €1,150 a week.",
+          "goal": "0.30% or lower by week 46, without longer loading times.",
+          "scopeIn": "From the pick face to handover to the driver.",
+          "scopeOut": "Linehaul and supplier packaging.",
+          "team": "Shift leads early and late, two loaders, one driver, quality coordinator."
+        },
+        "sipoc": {
+          "s": ["Picking and packing", "Route planning", "Fleet and load bars"],
+          "i": ["Packed and labelled parcels", "Departure waves and route plan", "Vehicles with load bars"],
+          "p": ["Pick", "Pack and label", "Sort to the dock", "Stage at the dock", "Load the vehicle", "Secure the load", "Hand over to the driver"],
+          "o": ["Loaded and secured vehicle", "Damage log by stage and cause", "Handover scan"],
+          "c": ["Drivers", "End customers", "Customer service"]
+        },
+        "ctq": [
+          { "need": "My parcel arrives undamaged", "driver": "Stacked right at the dock", "ctq": "Damaged units ÷ units shipped", "spec": "≤ 0.30% a week" },
+          { "need": "My parcel arrives undamaged", "driver": "Load secured in the vehicle", "ctq": "Routes with load bars and photo", "spec": "100% of routes" },
+          { "need": "My parcel arrives on time", "driver": "Loading does not slow down", "ctq": "Loading time per route", "spec": "≤ 40 min (baseline 38)" }
+        ],
+        "raci": {
+          "people": ["Outbound manager", "Shift lead late", "Loaders", "Quality coordinator", "Driver"],
+          "rows": [
+            { "activity": "Approve the stacking standard", "cells": ["A", "R", "C", "C", "I"] },
+            { "activity": "Train the loaders at each dock", "cells": ["I", "AR", "C", "C", ""] },
+            { "activity": "Log damage by stage and cause", "cells": ["I", "A", "R", "C", ""] },
+            { "activity": "Run the daily p-chart and react", "cells": ["I", "R", "", "A", ""] },
+            { "activity": "Check load bars at handover", "cells": ["", "A", "R", "", "C"] },
+            { "activity": "Confirm the savings with finance", "cells": ["A", "I", "", "R", ""] }
+          ]
+        },
+        "kano": [
+          { "feature": "Parcel arrives undamaged", "functional": 1, "dysfunctional": 4, "set": "" },
+          { "feature": "Delivery on the promised day", "functional": 0, "dysfunctional": 4, "set": "" },
+          { "feature": "Photo of the parcel at the door", "functional": 0, "dysfunctional": 2, "set": "" },
+          { "feature": "One-hour delivery window", "functional": 0, "dysfunctional": 3, "set": "" },
+          { "feature": "Branded tape on the carton", "functional": 2, "dysfunctional": 2, "set": "" },
+          { "feature": "Phone call before every delivery", "functional": 4, "dysfunctional": 0, "set": "" }
+        ],
+        "base": { "defects": 104, "units": 18400, "opps": 1 },
+        "after": { "defects": 57, "units": 18400, "opps": 1 },
+        "rty": [
+          { "step": "Pick", "fpy": 99.6 },
+          { "step": "Pack and label", "fpy": 99.3 },
+          { "step": "Sort to the dock", "fpy": 99.8 },
+          { "step": "Load and secure", "fpy": 99.4 },
+          { "step": "Hand over to the driver", "fpy": 99.9 }
+        ],
+        "copq": { "internal": 1200, "external": 4980, "appraisal": 600, "prevention": 300 },
+        "savings": {
+          "hard": 26000,
+          "from": -100,
+          "soft": "Fewer customer complaints, less re-packing on the late shift.",
+          "softValue": 3000,
+          "realised": [
+            { "month": -3, "amount": 1100 },
+            { "month": -2, "amount": 2180 },
+            { "month": -1, "amount": 2140 },
+            { "month": 0, "amount": 1450 }
+          ]
+        },
+        "control": [
+          { "what": "Damaged units per day (p-chart)", "spec": "Inside the limits; ≤ 0.30% a week", "method": "Damage log, p-chart with limits from the pilot weeks", "frequency": "Daily", "owner": "Shift lead late", "reaction": "A day above the upper limit: check the same shift and run 5 Whys within 24 hours." },
+          { "what": "Load bars set after the last wall", "spec": "100% of routes, with photo", "method": "Photo in the handover log", "frequency": "Every route", "owner": "Loaders", "reaction": "No photo: the vehicle does not leave until the shift lead has set the bar and noted why." },
+          { "what": "Stacking standard at the dock", "spec": "Heavy low, fragile high, no gaps", "method": "Floor check against the dock picture", "frequency": "Weekly", "owner": "Jonas Weber", "reaction": "Two failed checks in a row: retrain the team at that dock the same week." }
+        ],
+        "gates": {
+          "define": { "checks": 6, "planned": -130, "sponsor": "Jonas Weber", "date": -128, "reason": "", "closed": true },
+          "measure": { "checks": 6, "planned": -112, "sponsor": "Jonas Weber", "date": -110, "reason": "", "closed": true },
+          "analyze": { "checks": 6, "planned": -95, "sponsor": "Jonas Weber", "date": -92, "reason": "", "closed": true },
+          "improve": { "checks": 5, "planned": -45, "sponsor": "Jonas Weber", "date": -40, "reason": "Side effects were checked on the late shift only; the early shift is checked in the first two weeks of Control.", "closed": true },
+          "control": { "checks": 3, "planned": 20, "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      },
+      {
+        "title": "Late routes on the morning wave",
+        "lead": "Arben Kola",
+        "belt": "green",
+        "sponsor": "Sara Brandt, last-mile manager",
+        "area": "Last mile",
+        "start": -100,
+        "end": 40,
+        "phase": "analyze",
+        "status": "at-risk",
+        "phaseDates": { "define": -100, "measure": -80, "analyze": -52 },
+        "charter": {
+          "problem": "In weeks 30 to 37, 9.4% of morning routes left the depot after 07:45 (113 of 1,200) against 3% agreed with the customer. Each late route costs about €40 in overtime and redelivery.",
+          "goal": "3% or fewer late departures by week 50.",
+          "scopeIn": "From the trailer arriving at the depot to the van leaving the gate.",
+          "scopeOut": "Linehaul timetable, route planning software.",
+          "team": "Depot lead, two drivers, sorter team lead, dispatcher."
+        },
+        "sipoc": {
+          "s": ["Linehaul", "Sorter team", "Dispatch"],
+          "i": ["Trailer with parcels", "Route sheets", "Vans and scanners"],
+          "p": ["Unload the trailer", "Sort to routes", "Load the vans", "Check the load", "Leave the gate"],
+          "o": ["Vans on the road", "Departure times"],
+          "c": ["Drivers", "Recipients", "Customer"]
+        },
+        "ctq": [
+          { "need": "Parcels arrive in the promised window", "driver": "Vans leave on time", "ctq": "Routes leaving after 07:45 ÷ routes", "spec": "≤ 3% a week" }
+        ],
+        "raci": { "people": [], "rows": [] },
+        "kano": [],
+        "base": { "defects": 113, "units": 1200, "opps": 1 },
+        "after": { "defects": null, "units": null, "opps": 1 },
+        "rty": [
+          { "step": "Unload the trailer", "fpy": 97 },
+          { "step": "Sort to routes", "fpy": 94 },
+          { "step": "Load the vans", "fpy": 92 },
+          { "step": "Leave the gate", "fpy": 98 }
+        ],
+        "copq": { "internal": 2100, "external": 2400, "appraisal": 400, "prevention": 0 },
+        "savings": { "hard": 18000, "from": 45, "soft": "Drivers start calmer, fewer calls to customer service.", "softValue": 2000, "realised": [] },
+        "control": [],
+        "gates": {
+          "define": { "checks": 6, "planned": -82, "sponsor": "Sara Brandt", "date": -80, "reason": "", "closed": true },
+          "measure": { "checks": 5, "planned": -55, "sponsor": "Sara Brandt", "date": -52, "reason": "The measurement check is repeated with the new scanner log in week 1 of Analyze.", "closed": true },
+          "analyze": { "checks": 2, "planned": -5, "sponsor": "", "date": "", "reason": "", "closed": false },
+          "improve": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "control": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      },
+      {
+        "title": "Fewer no-shows at the airport hotel",
+        "lead": "Elira Daci",
+        "belt": "yellow",
+        "sponsor": "Thomas Berg, front office manager",
+        "area": "Front office",
+        "start": -40,
+        "end": 110,
+        "phase": "measure",
+        "status": "on-track",
+        "phaseDates": { "define": -40, "measure": -18 },
+        "charter": {
+          "problem": "From July to September, 6.8% of guaranteed reservations were no-shows (612 of 9,000 room nights) against 4% in the budget. A room that could have been resold costs about €95.",
+          "goal": "4% or lower from March, without more cancellations at the desk.",
+          "scopeIn": "From the booking to the night audit of the arrival day.",
+          "scopeOut": "Group bookings, rate strategy.",
+          "team": "Front office manager, two receptionists, night auditor, reservations agent."
+        },
+        "sipoc": {
+          "s": ["Booking channels", "Reservations", "Payment provider"],
+          "i": ["Booking with guarantee", "Card details", "Arrival time"],
+          "p": ["Take the booking", "Check the guarantee", "Send the pre-arrival message", "Hold the room", "Charge the no-show at night audit"],
+          "o": ["Arrived guests", "No-show list", "No-show charges"],
+          "c": ["Guests", "Revenue manager", "Finance"]
+        },
+        "ctq": [],
+        "raci": { "people": [], "rows": [] },
+        "kano": [],
+        "base": { "defects": 612, "units": 9000, "opps": 1 },
+        "after": { "defects": null, "units": null, "opps": 1 },
+        "rty": [],
+        "copq": { "internal": 3800, "external": 900, "appraisal": 600, "prevention": 0 },
+        "savings": { "hard": 21000, "from": 130, "soft": "Better forecast for housekeeping and breakfast.", "softValue": 1500, "realised": [] },
+        "control": [],
+        "gates": {
+          "define": { "checks": 6, "planned": -20, "sponsor": "Thomas Berg", "date": -18, "reason": "", "closed": true },
+          "measure": { "checks": 2, "planned": 12, "sponsor": "", "date": "", "reason": "", "closed": false },
+          "analyze": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "improve": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "control": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      },
+      {
+        "title": "Picking errors in the small-parts zone",
+        "lead": "Luka Meyer",
+        "belt": "black",
+        "sponsor": "Nora Albers, warehouse manager",
+        "area": "Picking",
+        "start": -16,
+        "end": 150,
+        "phase": "define",
+        "status": "late",
+        "phaseDates": { "define": -16 },
+        "charter": {
+          "problem": "In weeks 38 to 41, 0.42% of order lines in the small-parts zone were picked wrong (210 of 50,000) against 0.15% in the service agreement.",
+          "goal": "",
+          "scopeIn": "Small-parts zone, from the pick list to the packing table.",
+          "scopeOut": "",
+          "team": "Shift lead, three pickers, IT key user."
+        },
+        "sipoc": { "s": [], "i": [], "p": ["Print the pick list", "Pick", "Pack"], "o": [], "c": [] },
+        "ctq": [],
+        "raci": {
+          "people": ["Warehouse manager", "Shift lead", "Pickers", "IT key user"],
+          "rows": [
+            { "activity": "Define the error categories", "cells": ["A", "A", "C", "C"] },
+            { "activity": "Collect the error log", "cells": ["I", "R", "C", ""] },
+            { "activity": "Approve the charter", "cells": ["A", "C", "I", "I"] }
+          ]
+        },
+        "kano": [],
+        "base": { "defects": 210, "units": 50000, "opps": 1 },
+        "after": { "defects": null, "units": null, "opps": 1 },
+        "rty": [],
+        "copq": { "internal": 1500, "external": 1100, "appraisal": 800, "prevention": 0 },
+        "savings": { "hard": 15000, "from": "", "soft": "", "softValue": null, "realised": [] },
+        "control": [],
+        "gates": {
+          "define": { "checks": 3, "planned": -2, "sponsor": "", "date": "", "reason": "", "closed": false },
+          "measure": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "analyze": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "improve": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "control": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      }
+    ]
+  }
+}

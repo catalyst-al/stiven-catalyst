@@ -262,5 +262,13 @@
     "summary": "Vizato rrugët e ecjes së një pune mbi planin e katit, prekje pas prekjeje, në metra. Merr metrat dhe minutat e ecjes për turn, ndalesën më të vizituar dhe pjesën më të gjatë që përsëritet, pastaj krahaso paraqitjen pas ndryshimit.",
     "url": "/sq/tools/spaghetti-diagram/",
     "cta": "Vizato ecjet"
+  },
+  {
+    "name": "Portofoli i projekteve",
+    "type": "Six Sigma",
+    "time": "Çdo javë",
+    "summary": "Të gjitha projektet DMAIC në një faqe: faza, gjendja, pika e radhës e kalimit me listën e saj, ditët në fazë, sigma para dhe pas, dhe kursimet e planifikuara kundrejt atyre të realizuara. Çdo projekt mban kartën, SIPOC, pemën CTQ, RACI, Kano, RTY, COPQ dhe planin e kontrollit.",
+    "url": "/sq/tools/project-portfolio/",
+    "cta": "Hap portofolin"
   }
 ]

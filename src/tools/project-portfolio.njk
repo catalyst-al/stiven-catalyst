@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Project Portfolio
+seo_title: "Six Sigma project portfolio: DMAIC tollgates, SIPOC, RACI, Kano, sigma and savings"
+description: "A private DMAIC portfolio: each project with charter, SIPOC, CTQ, RACI, Kano, DPMO, sigma, RTY, COPQ, tollgates, savings and a control plan."
+activeNav: /tools.html
+permalink: /tools/project-portfolio/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Six Sigma</p>
+  <h1>Project Portfolio</h1>
+  <p class="lede">Run several improvement projects at once. Each one moves through Define, Measure, Analyze, Improve and Control, with the worksheets each phase needs and a tollgate the sponsor signs at the end of it. The portfolio shows where every project stands, which one is stuck, and the money they save.</p>
+</section>
+
+{% set cfg = projectPortfolio %}
+{% include "partials/project-portfolio.njk" %}

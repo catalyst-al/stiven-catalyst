@@ -262,5 +262,13 @@
     "summary": "Zeichnen Sie die Laufwege eines Ablaufs Tipp für Tipp auf den Hallenplan, in Metern. Sie erhalten die Meter und Gehminuten pro Schicht, den häufigsten Stopp und die längste wiederholte Strecke und vergleichen dann das Layout nach der Änderung.",
     "url": "/de/tools/spaghetti-diagram/",
     "cta": "Wege zeichnen"
+  },
+  {
+    "name": "Projektportfolio",
+    "type": "Six Sigma",
+    "time": "Wöchentlich",
+    "summary": "Alle DMAIC-Projekte auf einer Seite: Phase, Status, das nächste Tollgate mit Checkliste, Tage in der Phase, Sigma vorher und nachher und geplante gegen realisierte Einsparungen. Jedes Projekt behält Projektauftrag, SIPOC, CTQ-Baum, RACI, Kano, RTY, COPQ und Kontrollplan.",
+    "url": "/de/tools/project-portfolio/",
+    "cta": "Portfolio öffnen"
   }
 ]

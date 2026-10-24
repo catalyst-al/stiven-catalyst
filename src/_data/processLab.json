@@ -82,5 +82,216 @@
     ["Chase signals, not values.", "A value inside the limits is noise, however bad it looks. A Nelson rule is a reason to walk to the floor."],
     ["p is not proof, but it stops arguments.", "p = 0.002 means a difference this size happens by chance 2 times in 1,000. Decide with the number, then act."],
     ["Explain outliers before deleting them.", "A truck that waited two hours is real. Find its story; only then decide whether it belongs in the sample."]
-  ]
+  ],
+  "lab": {
+    "storageKey": "sc-process-lab-calc",
+    "csv": "process-lab-chart",
+    "kinds": [
+      {
+        "id": "imr",
+        "ask": "A measurement, one at a time",
+        "chart": "I-MR chart",
+        "measure": "Measurement",
+        "help": "One value per line, or a date or label and a value. Loading minutes, the weight of each pallet, the temperature at each check.",
+        "placeholder": "14.10.2026\t42.4\n15.10.2026\t39.9"
+      },
+      {
+        "id": "xbar",
+        "ask": "Measurements in small groups",
+        "chart": "Xbar-R (up to 8 per group) or Xbar-S (more than 8)",
+        "measure": "Measurement",
+        "help": "One group per line: a date or label, then the values of that group. Five pallets timed every day, three cartons weighed every hour. Up to 8 values per group give an Xbar-R chart, more an Xbar-S chart.",
+        "placeholder": "14.10.2026\t46.1\t44.8\t47.5\t43.0\t45.2"
+      },
+      {
+        "id": "np",
+        "ask": "Defective items out of the same number every time",
+        "chart": "np chart",
+        "measure": "Defective items",
+        "help": "A date or label, the defective items, then how many were checked: the same number every time, such as 50 sampled orders a day.",
+        "placeholder": "14.10.2026\t3\t50"
+      },
+      {
+        "id": "p",
+        "ask": "Defective items out of a number that changes",
+        "chart": "p chart, in the Sigma & Control Chart",
+        "measure": "Defective items",
+        "help": "A date, the defective items, then how many were handled that day. The p chart lives in the Sigma & Control Chart; this page hands your rows over.",
+        "placeholder": "14.10.2026\t12\t1840"
+      },
+      {
+        "id": "c",
+        "ask": "Defects counted on the same unit every time",
+        "chart": "c chart",
+        "measure": "Defects",
+        "help": "A date or label and the number of defects found on one unit of the same size every time: label errors per shift, damages per full trailer.",
+        "placeholder": "14.10.2026\t6"
+      },
+      {
+        "id": "u",
+        "ask": "Defects counted on units that change in size",
+        "chart": "u chart",
+        "measure": "Defects per unit",
+        "help": "A date or label, the defects found, then the number of units checked: pallets audited, rooms inspected, 100 m² cleaned.",
+        "placeholder": "14.10.2026\t5\t12"
+      }
+    ],
+    "placeholders": {
+      "chi": "Shift\tDamaged\tWrong label\nEarly\t34\t10\nNight\t22\t38",
+      "reg": "Pallets\tMinutes\n12\t36\n26\t61",
+      "attr": "Part\tStandard\tAnna 1\tAnna 2\tBen 1\tBen 2\n1\tOK\tOK\tOK\tOK\tOK",
+      "gage": "Part\tAnna 1\tAnna 2\tBen 1\tBen 2\n1\t0.29\t0.41\t0.08\t0.25"
+    },
+    "chart": {
+      "stable": "No signal in {n} points: the ups and downs are the normal noise of this process. Reacting to single points will not help; to get a better number, change the process itself.",
+      "signals": "{count} signal(s) that are not normal noise. Look at those points first: what was different in volume, people, equipment or method? Then take the cause through 5 Whys.",
+      "spread": "The {chart} chart has {count} point(s) outside its limits: the spread inside those groups jumped. Look at what was mixed in them (two docks, two shifts, a new person).",
+      "short": "Fewer than 20 points: the limits are rough. Keep collecting before you trust a signal.",
+      "phaseLevel": "From {label} on, the centre line moved from {before} to {after} ({change}): {verdict}.",
+      "phaseSpread": "The spread (σ within) went from {before} to {after} ({change}).",
+      "phaseCounts": "For counts the spread follows the level, so the limits moved with it.",
+      "phaseVerdicts": {
+        "real": "a real shift ({p})",
+        "borderline": "probably real ({p}), not yet beyond doubt",
+        "noise": "that could still be noise ({p})"
+      },
+      "npVarying": "The number checked is not the same on every row ({min} to {max}). An np chart needs the same number; the limits here follow each row, but the p chart is the right one for this data.",
+      "sizes": "The groups are not all the same size ({min} to {max}); each group gets its own limits.",
+      "skipped": "{n} row(s) left out, they lack what this chart needs: {need}",
+      "needRows": "Paste at least two rows with what this chart needs: {need}.",
+      "need": {
+        "imr": "a value per row",
+        "xbar": "2 to 25 values per row",
+        "np": "the defective items and the number checked, not more defective than checked",
+        "p": "the defective items and the number handled",
+        "c": "a count of 0 or more",
+        "u": "the defects and a number of units above 0"
+      },
+      "pNote": "Defective items out of a number that changes go on the p chart, with limits for each day's volume. The Sigma & Control Chart draws it, with the Nelson rules and the sigma level; open it with your rows.",
+      "pNoDates": "Only rows with a date can be handed over, and these have none. Put a date at the start of each row."
+    },
+    "chi": {
+      "real": "The mix is not the same in every row ({p}): a pattern this strong comes from chance less often than {chance}. The biggest gap: {row} × {col}, {obs} counted where {exp} were expected if rows and columns had nothing to do with each other.",
+      "borderline": "The mix probably differs between the rows ({p}), but not beyond doubt. The biggest gap: {row} × {col}, {obs} counted where {exp} were expected. More data would settle it.",
+      "noise": "No real difference between the rows ({p}): the mix of these {total} counts is what chance alone would give. Do not chase a pattern in this table.",
+      "low": "{n} of {cells} cells expect fewer than 5 counts (the smallest {min}): the p-value is not reliable. Merge small rows or columns, or collect more data before you decide.",
+      "need": "Paste a table with a header row and at least two rows and two columns of counts (whole numbers, 0 or more).",
+      "strength": { "weak": "weak link", "moderate": "moderate link", "strong": "strong link" },
+      "problem": "{row} has more {col} than the other rows ({obs} against {exp} expected)",
+      "action": "Find out why {row} has more {col} than the others ({obs} against {exp} expected)"
+    },
+    "reg": {
+      "sentence": "Each extra {xUnit} changes {yName} by about {signed} (95% interval {low} to {high}).",
+      "r2": "r² = {r2}: {xName} explains {r2pct} of the ups and downs in {yName}; the other {rest} come from other causes.",
+      "real": "The link is real ({p}): a slope like this comes from chance less often than {chance}.",
+      "borderline": "The link is probably real ({p}), but not beyond doubt; a few more points would settle it.",
+      "noise": "The link could be noise ({p}): with these points a slope this size comes from chance {chance} of the time. Do not plan with it yet.",
+      "miss": "A typical point misses the line by about {sd}.",
+      "cause": "A link is not yet a cause: check on the floor that more {xMid} really changes {yName}, and that nothing else moves with both.",
+      "need": "Paste at least three pairs of numbers, x and y on each line.",
+      "flat": "All x values are the same: a line needs x values that differ.",
+      "problem": "{yTitle} changes by {signed} with each extra {xUnit}"
+    },
+    "attr": {
+      "bands": {
+        "excellent": {
+          "label": "Excellent",
+          "text": "Kappa {kappa}: the judgement can be trusted. Keep the reference samples at the station and repeat the study once a year."
+        },
+        "good": {
+          "label": "Good",
+          "text": "Kappa {kappa}: acceptable for most uses. Go through the parts that were judged differently with the appraisers and sharpen the standard there."
+        },
+        "poor": {
+          "label": "Needs work",
+          "text": "Kappa {kappa}: the judgement is not consistent enough to count defects with. Agree on a clear standard with photos and limit samples, train the appraisers, then run the study again."
+        }
+      },
+      "worst": "{name} agrees least with the standard ({pct}): {misses}.",
+      "miss": "{n} × {truth} judged as something else",
+      "mixed": "{n} part(s) judged differently from one trial to the next",
+      "noStandard": "Without a Standard column the study shows only whether the appraisers agree, not whether they are right.",
+      "skipped": "{n} row(s) with an empty cell were left out.",
+      "need": "Paste a table with a header row: Part, then Standard (optional), then one column per appraiser and trial, such as Anna 1, Anna 2, Ben 1, Ben 2. At least two parts.",
+      "problem": "The visual check is not consistent (kappa {kappa})",
+      "action": "Sharpen the standard for the visual check and train it (kappa {kappa})"
+    },
+    "gage": {
+      "bands": {
+        "good": {
+          "label": "Good",
+          "text": "Total Gage R&R is {pct} of the study variation: the measurement system is good. Differences between parts are real differences."
+        },
+        "depends": {
+          "label": "Depends on the use",
+          "text": "Total Gage R&R is {pct} of the study variation: acceptable depending on what the measurement decides, the cost of the gauge and the cost of a wrong call. Improve it if it sorts good from bad near a limit."
+        },
+        "bad": {
+          "label": "Not acceptable",
+          "text": "Total Gage R&R is {pct} of the study variation: the measurement cannot tell the parts apart well enough. Fix the measurement before you base decisions on its data."
+        }
+      },
+      "repeat": "Repeatability ({pct}) is the larger share: the gauge scatters when the same person measures the same part again. Look at the device, the fixture, the measuring point and the method.",
+      "reprod": "Reproducibility ({pct}) is the larger share: the operators measure differently. Agree on one method (where, how, how hard), write it down and train it.",
+      "ndc": "{ndc} distinct categories: the system can sort the parts into {ndc} groups; AIAG asks for 5 or more.",
+      "ndcLow": "Only {ndc} distinct categories: the system cannot sort the parts into enough groups; AIAG asks for 5 or more.",
+      "interaction": "The part × operator interaction is significant ({p}): some operators measure some parts differently. It counts as reproducibility.",
+      "pooled": "No part × operator interaction ({p}); it is pooled into repeatability, as AIAG and Minitab do.",
+      "tolerance": "Against the tolerance of {tol}, the R&R takes {pct}.",
+      "need": "Paste a table with a header row: Part, then one column per operator and trial, such as Anna 1, Anna 2, Anna 3, Ben 1 … Or three columns: part, operator, value. At least two parts.",
+      "unbalanced": "Every part needs the same number of trials by every operator, at least two. Check the table for missing values.",
+      "problem": "The measurement of {name} is not good enough (Gage R&R {pct} of the study variation)",
+      "action": "Improve the measurement of {name}: Gage R&R {pct} of the study variation"
+    },
+    "examples": {
+      "xbar": {
+        "name": "Dock-to-stock time, 5 pallets a day",
+        "unit": "min",
+        "split": 16,
+        "header": [],
+        "rows": ["2026-09-21|62.3|47.6|42.7|46.1|43", "2026-09-22|43.6|46.1|44.5|49.4|42.4", "2026-09-23|46.6|37.4|45.4|42.5|47.5", "2026-09-24|43|44.8|43.6|44.5|44.6", "2026-09-25|48.4|44.5|41.5|47.9|47.7", "2026-09-28|42.7|49.4|48.4|44.8|40.7", "2026-09-29|39.9|46.4|44.2|44.5|42", "2026-09-30|44.2|44.8|46|43.4|41.1", "2026-10-01|57|58.7|47.1|62.2|55.1", "2026-10-02|48.5|41.6|53.4|47.6|47.7", "2026-10-05|45.5|46.1|55.5|46.5|42.8", "2026-10-06|46.3|46.2|50.6|37.3|58.2", "2026-10-07|49.5|55.4|53.5|44.1|47.2", "2026-10-08|39.2|47.2|45.2|50.9|53.7", "2026-10-09|42.8|47.9|47.3|46.5|43.3", "2026-10-12|38.3|37.8|34.8|37.6|35.9", "2026-10-13|37.8|36.9|37|39.5|41", "2026-10-14|39.4|40.9|35.7|41|40.4", "2026-10-15|40.9|36.3|35.8|37.5|41.2", "2026-10-16|34.5|38.1|39.4|36.5|40", "2026-10-19|40.6|38.5|39.9|37.2|40.9", "2026-10-20|44.1|44.2|45.7|41.8|42.6", "2026-10-21|36.6|34.1|38.7|39.4|35.5", "2026-10-22|39.9|40.9|44.2|41.5|34.8", "2026-10-23|44|36.1|35.8|39.3|37.4"]
+      },
+      "np": {
+        "name": "Late orders in 50 sampled a day",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-14|5|50", "2026-09-15|5|50", "2026-09-16|4|50", "2026-09-17|6|50", "2026-09-18|4|50", "2026-09-21|10|50", "2026-09-22|5|50", "2026-09-23|2|50", "2026-09-24|7|50", "2026-09-25|5|50", "2026-09-28|3|50", "2026-09-29|2|50", "2026-09-30|4|50", "2026-10-01|6|50", "2026-10-02|4|50", "2026-10-05|4|50", "2026-10-06|2|50", "2026-10-07|1|50", "2026-10-08|5|50", "2026-10-09|1|50", "2026-10-12|11|50", "2026-10-13|0|50", "2026-10-14|3|50", "2026-10-15|4|50", "2026-10-16|5|50", "2026-10-19|3|50", "2026-10-20|3|50", "2026-10-21|1|50", "2026-10-22|3|50", "2026-10-23|4|50"]
+      },
+      "c": {
+        "name": "Label errors per shift",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-21|1", "2026-09-22|6", "2026-09-23|11", "2026-09-24|10", "2026-09-25|9", "2026-09-28|12", "2026-09-29|8", "2026-09-30|2", "2026-10-01|2", "2026-10-02|7", "2026-10-05|5", "2026-10-06|9", "2026-10-07|4", "2026-10-08|6", "2026-10-09|9", "2026-10-12|8", "2026-10-13|4", "2026-10-14|17", "2026-10-15|5", "2026-10-16|5", "2026-10-19|1", "2026-10-20|7", "2026-10-21|8", "2026-10-22|7", "2026-10-23|3", "2026-10-26|3"]
+      },
+      "u": {
+        "name": "Defects per pallet audited",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-21|7|18", "2026-09-22|4|20", "2026-09-23|7|17", "2026-09-24|13|19", "2026-09-25|6|18", "2026-09-28|0|10", "2026-09-29|9|15", "2026-09-30|7|17", "2026-10-01|8|15", "2026-10-02|2|10", "2026-10-05|5|19", "2026-10-06|2|8", "2026-10-07|17|16", "2026-10-08|7|16", "2026-10-09|7|12", "2026-10-12|6|18", "2026-10-13|7|15", "2026-10-14|3|10", "2026-10-15|9|19", "2026-10-16|4|13", "2026-10-19|4|11", "2026-10-20|8|12"]
+      },
+      "chi": {
+        "header": ["Shift", "Damaged", "Wrong label", "Missing item", "Wrong item"],
+        "rows": ["Early|34|10|9|6", "Late|31|13|11|7", "Night|22|38|10|8"]
+      },
+      "reg": {
+        "x": "Pallets per truck",
+        "xUnit": "pallet",
+        "y": "Loading time",
+        "yUnit": "min",
+        "header": ["Pallets", "Loading time (min)"],
+        "rows": ["18|39", "24|62", "29|59", "21|55", "26|64", "29|52", "30|76", "23|65", "32|68", "18|35", "11|38", "32|63", "14|29", "12|41", "17|42", "16|28", "27|61", "31|68", "33|77", "29|68", "26|56", "10|33", "11|30", "13|52"]
+      },
+      "attr": {
+        "header": ["Carton", "Standard", "Anna 1", "Anna 2", "Ben 1", "Ben 2", "Cara 1", "Cara 2"],
+        "rows": ["1|OK|OK|OK|OK|OK|OK|OK", "2|OK|OK|OK|OK|OK|Damaged|OK", "3|Damaged|Damaged|Damaged|Damaged|Damaged|Damaged|Damaged", "4|OK|OK|OK|OK|OK|OK|OK", "5|OK|OK|OK|OK|OK|OK|OK", "6|Damaged|Damaged|Damaged|OK|OK|Damaged|Damaged", "7|Damaged|Damaged|Damaged|Damaged|Damaged|Damaged|Damaged", "8|OK|OK|OK|OK|OK|OK|OK", "9|OK|OK|OK|Damaged|OK|OK|OK", "10|OK|OK|OK|OK|OK|OK|OK", "11|Damaged|Damaged|Damaged|Damaged|Damaged|OK|Damaged", "12|OK|OK|OK|OK|OK|OK|OK", "13|OK|OK|OK|OK|OK|OK|OK", "14|Damaged|Damaged|OK|Damaged|Damaged|Damaged|Damaged", "15|OK|OK|OK|OK|OK|OK|OK", "16|OK|OK|OK|OK|OK|OK|OK", "17|OK|OK|OK|OK|OK|OK|OK", "18|Damaged|Damaged|Damaged|Damaged|Damaged|Damaged|OK", "19|OK|OK|OK|OK|OK|OK|OK", "20|OK|OK|OK|OK|OK|OK|OK"]
+      },
+      "gage": {
+        "name": "Seal width, deviation from nominal",
+        "unit": "mm",
+        "tol": "",
+        "header": ["Part", "Anna 1", "Anna 2", "Anna 3", "Ben 1", "Ben 2", "Ben 3", "Cara 1", "Cara 2", "Cara 3"],
+        "rows": ["1|0.29|0.41|0.64|0.08|0.25|0.07|0.04|-0.11|-0.15", "2|-0.56|-0.68|-0.58|-0.47|-1.22|-0.68|-1.38|-1.13|-0.96", "3|1.34|1.17|1.27|1.19|0.94|1.34|0.88|1.09|0.67", "4|0.47|0.50|0.64|0.01|1.03|0.20|0.14|0.20|0.11", "5|-0.80|-0.92|-0.84|-0.56|-1.20|-1.28|-1.46|-1.07|-1.45", "6|0.02|-0.11|-0.21|-0.20|0.22|0.06|-0.29|-0.67|-0.49", "7|0.59|0.75|0.66|0.47|0.55|0.83|0.02|0.01|0.21", "8|-0.31|-0.20|-0.17|-0.63|0.08|-0.34|-0.46|-0.56|-0.49", "9|2.26|1.99|2.01|1.80|2.12|2.19|1.77|1.45|1.87", "10|-1.36|-1.25|-1.31|-1.68|-1.62|-1.50|-1.49|-1.77|-2.16"]
+      }
+    }
+  }
 }

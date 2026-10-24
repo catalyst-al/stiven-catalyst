@@ -262,5 +262,13 @@
     "summary": "Draw the walking paths of one job over the floor plan, tap by tap, in metres. Get the metres and minutes walked per shift, the stop visited most and the longest repeated leg, then compare the layout after the change.",
     "url": "/tools/spaghetti-diagram/",
     "cta": "Draw the walks"
+  },
+  {
+    "name": "Project Portfolio",
+    "type": "Six Sigma",
+    "time": "Weekly",
+    "summary": "Every DMAIC project on one page: phase, status, the next tollgate and its checklist, days in the phase, sigma before and after, and savings planned against realised. Each project keeps its charter, SIPOC, CTQ tree, RACI, Kano, RTY, COPQ and control plan.",
+    "url": "/tools/project-portfolio/",
+    "cta": "Open the portfolio"
   }
 ]

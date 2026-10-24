@@ -230,5 +230,216 @@
       "Erklären Sie Ausreißer, bevor Sie sie löschen.",
       "Ein Lkw, der zwei Stunden gewartet hat, ist echt. Finden Sie seine Geschichte; erst dann entscheiden Sie, ob er in die Stichprobe gehört."
     ]
-  ]
+  ],
+  "lab": {
+    "storageKey": "sc-process-lab-de-calc",
+    "csv": "process-lab-chart",
+    "kinds": [
+      {
+        "id": "imr",
+        "ask": "Ein Messwert nach dem anderen",
+        "chart": "I-MR-Karte",
+        "measure": "Messwert",
+        "help": "Ein Wert pro Zeile, oder ein Datum bzw. eine Bezeichnung und ein Wert. Belademinuten, das Gewicht jeder Palette, die Temperatur bei jeder Kontrolle.",
+        "placeholder": "14.10.2026\t42,4\n15.10.2026\t39,9"
+      },
+      {
+        "id": "xbar",
+        "ask": "Messwerte in kleinen Gruppen",
+        "chart": "Xbar-R (bis 8 pro Gruppe) oder Xbar-S (mehr als 8)",
+        "measure": "Messwert",
+        "help": "Eine Gruppe pro Zeile: ein Datum oder eine Bezeichnung, dann die Werte dieser Gruppe. Fünf Paletten pro Tag gestoppt, drei Kartons pro Stunde gewogen. Bis 8 Werte pro Gruppe ergeben eine Xbar-R-Karte, mehr eine Xbar-S-Karte.",
+        "placeholder": "14.10.2026\t46,1\t44,8\t47,5\t43,0\t45,2"
+      },
+      {
+        "id": "np",
+        "ask": "Fehlerhafte Teile aus immer gleich vielen",
+        "chart": "np-Karte",
+        "measure": "Fehlerhafte Teile",
+        "help": "Ein Datum oder eine Bezeichnung, die fehlerhaften Teile, dann wie viele geprüft wurden: jedes Mal gleich viele, zum Beispiel 50 Stichprobenaufträge pro Tag.",
+        "placeholder": "14.10.2026\t3\t50"
+      },
+      {
+        "id": "p",
+        "ask": "Fehlerhafte Teile aus wechselnd vielen",
+        "chart": "p-Karte, in der Sigma & Regelkarte",
+        "measure": "Fehlerhafte Teile",
+        "help": "Ein Datum, die fehlerhaften Teile, dann wie viele an dem Tag bearbeitet wurden. Die p-Karte steht in der Sigma & Regelkarte; diese Seite übergibt Ihre Zeilen.",
+        "placeholder": "14.10.2026\t12\t1840"
+      },
+      {
+        "id": "c",
+        "ask": "Fehler, gezählt an immer gleich großen Einheiten",
+        "chart": "c-Karte",
+        "measure": "Fehler",
+        "help": "Ein Datum oder eine Bezeichnung und die Zahl der Fehler an einer jedes Mal gleich großen Einheit: Etikettenfehler pro Schicht, Schäden pro vollem Trailer.",
+        "placeholder": "14.10.2026\t6"
+      },
+      {
+        "id": "u",
+        "ask": "Fehler, gezählt an unterschiedlich großen Einheiten",
+        "chart": "u-Karte",
+        "measure": "Fehler pro Einheit",
+        "help": "Ein Datum oder eine Bezeichnung, die gefundenen Fehler, dann die Zahl der geprüften Einheiten: auditierte Paletten, geprüfte Zimmer, gereinigte 100 m².",
+        "placeholder": "14.10.2026\t5\t12"
+      }
+    ],
+    "placeholders": {
+      "chi": "Schicht\tBeschädigt\tFalsches Etikett\nFrüh\t34\t10\nNacht\t22\t38",
+      "reg": "Paletten\tMinuten\n12\t36\n26\t61",
+      "attr": "Teil\tStandard\tAnna 1\tAnna 2\tBen 1\tBen 2\n1\tOK\tOK\tOK\tOK\tOK",
+      "gage": "Teil\tAnna 1\tAnna 2\tBen 1\tBen 2\n1\t0,29\t0,41\t0,08\t0,25"
+    },
+    "chart": {
+      "stable": "Kein Signal in {n} Punkten: Das Auf und Ab ist das normale Rauschen dieses Prozesses. Auf einzelne Punkte zu reagieren hilft nicht; für eine bessere Zahl muss sich der Prozess selbst ändern.",
+      "signals": "{count} Signal(e), die kein normales Rauschen sind. Sehen Sie sich zuerst diese Punkte an: Was war anders bei Menge, Personal, Ausrüstung oder Methode? Dann bringen Sie die Ursache in die 5 Whys.",
+      "spread": "Die {chart}-Karte hat {count} Punkt(e) außerhalb ihrer Grenzen: Die Streuung innerhalb dieser Gruppen ist gesprungen. Prüfen Sie, was darin gemischt war (zwei Tore, zwei Schichten, eine neue Person).",
+      "short": "Weniger als 20 Punkte: Die Grenzen sind grob. Sammeln Sie weiter, bevor Sie einem Signal trauen.",
+      "phaseLevel": "Ab {label} hat sich die Mittellinie von {before} auf {after} verschoben ({change}): {verdict}.",
+      "phaseSpread": "Die Streuung (σ innerhalb) ging von {before} auf {after} ({change}).",
+      "phaseCounts": "Bei Zählwerten folgt die Streuung dem Niveau, deshalb haben sich die Grenzen mitbewegt.",
+      "phaseVerdicts": {
+        "real": "eine echte Verschiebung ({p})",
+        "borderline": "wahrscheinlich echt ({p}), aber noch nicht zweifelsfrei",
+        "noise": "das kann noch Rauschen sein ({p})"
+      },
+      "npVarying": "Die geprüfte Anzahl ist nicht in jeder Zeile gleich ({min} bis {max}). Eine np-Karte braucht immer dieselbe Anzahl; die Grenzen folgen hier jeder Zeile, aber für diese Daten ist die p-Karte die richtige.",
+      "sizes": "Die Gruppen sind nicht alle gleich groß ({min} bis {max}); jede Gruppe bekommt ihre eigenen Grenzen.",
+      "skipped": "{n} Zeile(n) nicht berücksichtigt, ihnen fehlt, was diese Karte braucht: {need}",
+      "needRows": "Fügen Sie mindestens zwei Zeilen mit dem ein, was diese Karte braucht: {need}.",
+      "need": {
+        "imr": "ein Wert pro Zeile",
+        "xbar": "2 bis 25 Werte pro Zeile",
+        "np": "die fehlerhaften Teile und die geprüfte Anzahl, nicht mehr fehlerhafte als geprüfte",
+        "p": "die fehlerhaften Teile und die bearbeitete Anzahl",
+        "c": "eine Zahl ab 0",
+        "u": "die Fehler und eine Zahl von Einheiten über 0"
+      },
+      "pNote": "Fehlerhafte Teile aus einer wechselnden Anzahl gehören auf die p-Karte, mit Grenzen für das Volumen jedes Tages. Die Sigma & Regelkarte zeichnet sie, mit den Nelson-Regeln und dem Sigma-Niveau; öffnen Sie sie mit Ihren Zeilen.",
+      "pNoDates": "Nur Zeilen mit Datum lassen sich übergeben, und diese haben keines. Setzen Sie an den Anfang jeder Zeile ein Datum."
+    },
+    "chi": {
+      "real": "Die Verteilung ist nicht in jeder Zeile gleich ({p}): Ein so starkes Muster entsteht durch Zufall seltener als {chance}. Die größte Abweichung: {row} × {col}, {obs} gezählt, wo {exp} zu erwarten wären, wenn Zeilen und Spalten nichts miteinander zu tun hätten.",
+      "borderline": "Die Verteilung unterscheidet sich wahrscheinlich zwischen den Zeilen ({p}), aber nicht zweifelsfrei. Die größte Abweichung: {row} × {col}, {obs} gezählt, wo {exp} zu erwarten wären. Mehr Daten würden es klären.",
+      "noise": "Kein echter Unterschied zwischen den Zeilen ({p}): Die Verteilung dieser {total} Zählungen ist das, was der Zufall allein ergäbe. Suchen Sie in dieser Tabelle kein Muster.",
+      "low": "{n} von {cells} Zellen erwarten weniger als 5 (die kleinste {min}): Der p-Wert ist nicht verlässlich. Fassen Sie kleine Zeilen oder Spalten zusammen oder sammeln Sie mehr Daten, bevor Sie entscheiden.",
+      "need": "Fügen Sie eine Tabelle mit einer Kopfzeile und mindestens zwei Zeilen und zwei Spalten mit Anzahlen ein (ganze Zahlen ab 0).",
+      "strength": { "weak": "schwacher Zusammenhang", "moderate": "mittlerer Zusammenhang", "strong": "starker Zusammenhang" },
+      "problem": "{row} hat mehr {col} als die anderen Zeilen ({obs} gegenüber {exp} erwartet)",
+      "action": "Klären, warum {row} mehr {col} hat als die anderen ({obs} gegenüber {exp} erwartet)"
+    },
+    "reg": {
+      "sentence": "Pro {xUnit} mehr ändert sich {yName} um etwa {signed} (95-%-Intervall {low} bis {high}).",
+      "r2": "r² = {r2}: {r2pct} des Auf und Ab von {yName} gehen auf {xName} zurück; die übrigen {rest} kommen aus anderen Ursachen.",
+      "real": "Der Zusammenhang ist echt ({p}): Eine solche Steigung entsteht durch Zufall seltener als {chance}.",
+      "borderline": "Der Zusammenhang ist wahrscheinlich echt ({p}), aber nicht zweifelsfrei; ein paar Punkte mehr würden es klären.",
+      "noise": "Der Zusammenhang kann Rauschen sein ({p}): Mit diesen Punkten entsteht eine solche Steigung in {chance} der Fälle durch Zufall. Planen Sie noch nicht damit.",
+      "miss": "Ein typischer Punkt liegt etwa {sd} neben der Linie.",
+      "cause": "Ein Zusammenhang ist noch keine Ursache: Prüfen Sie vor Ort, dass sich {yName} wirklich ändert, wenn sich {xMid} ändert, und dass sich nicht etwas anderes mit beiden bewegt.",
+      "need": "Fügen Sie mindestens drei Zahlenpaare ein, x und y in jeder Zeile.",
+      "flat": "Alle x-Werte sind gleich: Eine Linie braucht unterschiedliche x-Werte.",
+      "problem": "{yTitle} ändert sich um {signed} pro {xUnit} mehr"
+    },
+    "attr": {
+      "bands": {
+        "excellent": {
+          "label": "Ausgezeichnet",
+          "text": "Kappa {kappa}: Dem Urteil kann man trauen. Lassen Sie die Referenzmuster am Arbeitsplatz und wiederholen Sie die Studie einmal im Jahr."
+        },
+        "good": {
+          "label": "Gut",
+          "text": "Kappa {kappa}: für die meisten Zwecke annehmbar. Gehen Sie die unterschiedlich beurteilten Teile mit den Prüfern durch und schärfen Sie dort den Standard."
+        },
+        "poor": {
+          "label": "Verbesserung nötig",
+          "text": "Kappa {kappa}: Das Urteil ist nicht beständig genug, um damit Fehler zu zählen. Vereinbaren Sie einen klaren Standard mit Fotos und Grenzmustern, schulen Sie die Prüfer und wiederholen Sie dann die Studie."
+        }
+      },
+      "worst": "{name} stimmt am wenigsten mit dem Standard überein ({pct}): {misses}.",
+      "miss": "{n} × {truth} anders beurteilt",
+      "mixed": "{n} Teil(e) von Durchgang zu Durchgang unterschiedlich beurteilt",
+      "noStandard": "Ohne Spalte Standard zeigt die Studie nur, ob die Prüfer übereinstimmen, nicht, ob sie richtig liegen.",
+      "skipped": "{n} Zeile(n) mit einer leeren Zelle wurden nicht berücksichtigt.",
+      "need": "Fügen Sie eine Tabelle mit Kopfzeile ein: Teil, dann Standard (optional), dann eine Spalte pro Prüfer und Durchgang, zum Beispiel Anna 1, Anna 2, Ben 1, Ben 2. Mindestens zwei Teile.",
+      "problem": "Die Sichtprüfung ist nicht beständig (Kappa {kappa})",
+      "action": "Standard für die Sichtprüfung schärfen und schulen (Kappa {kappa})"
+    },
+    "gage": {
+      "bands": {
+        "good": {
+          "label": "Gut",
+          "text": "Die gesamte Gage R&R beträgt {pct} der Studienstreuung: Das Messsystem ist gut. Unterschiede zwischen Teilen sind echte Unterschiede."
+        },
+        "depends": {
+          "label": "Je nach Einsatz",
+          "text": "Die gesamte Gage R&R beträgt {pct} der Studienstreuung: annehmbar je nachdem, was die Messung entscheidet, was das Messmittel und was eine Fehlentscheidung kostet. Verbessern Sie das Messsystem, wenn damit nahe an einer Grenze Gut von Schlecht getrennt wird."
+        },
+        "bad": {
+          "label": "Nicht annehmbar",
+          "text": "Die gesamte Gage R&R beträgt {pct} der Studienstreuung: Die Messung kann die Teile nicht gut genug unterscheiden. Bringen Sie die Messung in Ordnung, bevor Sie Entscheidungen auf ihre Daten stützen."
+        }
+      },
+      "repeat": "Die Wiederholbarkeit ({pct}) ist der größere Anteil: Das Messmittel streut, wenn dieselbe Person dasselbe Teil erneut misst. Prüfen Sie Gerät, Aufnahme, Messpunkt und Methode.",
+      "reprod": "Die Vergleichbarkeit ({pct}) ist der größere Anteil: Die Prüfer messen unterschiedlich. Vereinbaren Sie eine Methode (wo, wie, wie fest), schreiben Sie sie auf und schulen Sie sie.",
+      "ndc": "{ndc} unterscheidbare Kategorien: Das System kann die Teile in {ndc} Gruppen einteilen; AIAG verlangt 5 oder mehr.",
+      "ndcLow": "Nur {ndc} unterscheidbare Kategorien: Das System kann die Teile nicht in genug Gruppen einteilen; AIAG verlangt 5 oder mehr.",
+      "interaction": "Die Wechselwirkung Teil × Prüfer ist signifikant ({p}): Manche Prüfer messen manche Teile anders. Sie zählt zur Vergleichbarkeit.",
+      "pooled": "Keine Wechselwirkung Teil × Prüfer ({p}); sie wird wie bei AIAG und Minitab der Wiederholbarkeit zugeschlagen.",
+      "tolerance": "Gegenüber der Toleranz von {tol} beansprucht die R&R {pct}.",
+      "need": "Fügen Sie eine Tabelle mit Kopfzeile ein: Teil, dann eine Spalte pro Prüfer und Durchgang, zum Beispiel Anna 1, Anna 2, Anna 3, Ben 1 … Oder drei Spalten: Teil, Prüfer, Wert. Mindestens zwei Teile.",
+      "unbalanced": "Jedes Teil braucht von jedem Prüfer gleich viele Durchgänge, mindestens zwei. Prüfen Sie die Tabelle auf fehlende Werte.",
+      "problem": "Die Messung von {name} ist nicht gut genug (Gage R&R {pct} der Studienstreuung)",
+      "action": "Messung von {name} verbessern: Gage R&R {pct} der Studienstreuung"
+    },
+    "examples": {
+      "xbar": {
+        "name": "Dock-to-Stock-Zeit, 5 Paletten pro Tag",
+        "unit": "min",
+        "split": 16,
+        "header": [],
+        "rows": ["2026-09-21|62.3|47.6|42.7|46.1|43", "2026-09-22|43.6|46.1|44.5|49.4|42.4", "2026-09-23|46.6|37.4|45.4|42.5|47.5", "2026-09-24|43|44.8|43.6|44.5|44.6", "2026-09-25|48.4|44.5|41.5|47.9|47.7", "2026-09-28|42.7|49.4|48.4|44.8|40.7", "2026-09-29|39.9|46.4|44.2|44.5|42", "2026-09-30|44.2|44.8|46|43.4|41.1", "2026-10-01|57|58.7|47.1|62.2|55.1", "2026-10-02|48.5|41.6|53.4|47.6|47.7", "2026-10-05|45.5|46.1|55.5|46.5|42.8", "2026-10-06|46.3|46.2|50.6|37.3|58.2", "2026-10-07|49.5|55.4|53.5|44.1|47.2", "2026-10-08|39.2|47.2|45.2|50.9|53.7", "2026-10-09|42.8|47.9|47.3|46.5|43.3", "2026-10-12|38.3|37.8|34.8|37.6|35.9", "2026-10-13|37.8|36.9|37|39.5|41", "2026-10-14|39.4|40.9|35.7|41|40.4", "2026-10-15|40.9|36.3|35.8|37.5|41.2", "2026-10-16|34.5|38.1|39.4|36.5|40", "2026-10-19|40.6|38.5|39.9|37.2|40.9", "2026-10-20|44.1|44.2|45.7|41.8|42.6", "2026-10-21|36.6|34.1|38.7|39.4|35.5", "2026-10-22|39.9|40.9|44.2|41.5|34.8", "2026-10-23|44|36.1|35.8|39.3|37.4"]
+      },
+      "np": {
+        "name": "Verspätete Aufträge in 50 Stichproben pro Tag",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-14|5|50", "2026-09-15|5|50", "2026-09-16|4|50", "2026-09-17|6|50", "2026-09-18|4|50", "2026-09-21|10|50", "2026-09-22|5|50", "2026-09-23|2|50", "2026-09-24|7|50", "2026-09-25|5|50", "2026-09-28|3|50", "2026-09-29|2|50", "2026-09-30|4|50", "2026-10-01|6|50", "2026-10-02|4|50", "2026-10-05|4|50", "2026-10-06|2|50", "2026-10-07|1|50", "2026-10-08|5|50", "2026-10-09|1|50", "2026-10-12|11|50", "2026-10-13|0|50", "2026-10-14|3|50", "2026-10-15|4|50", "2026-10-16|5|50", "2026-10-19|3|50", "2026-10-20|3|50", "2026-10-21|1|50", "2026-10-22|3|50", "2026-10-23|4|50"]
+      },
+      "c": {
+        "name": "Etikettenfehler pro Schicht",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-21|1", "2026-09-22|6", "2026-09-23|11", "2026-09-24|10", "2026-09-25|9", "2026-09-28|12", "2026-09-29|8", "2026-09-30|2", "2026-10-01|2", "2026-10-02|7", "2026-10-05|5", "2026-10-06|9", "2026-10-07|4", "2026-10-08|6", "2026-10-09|9", "2026-10-12|8", "2026-10-13|4", "2026-10-14|17", "2026-10-15|5", "2026-10-16|5", "2026-10-19|1", "2026-10-20|7", "2026-10-21|8", "2026-10-22|7", "2026-10-23|3", "2026-10-26|3"]
+      },
+      "u": {
+        "name": "Fehler pro auditierter Palette",
+        "unit": "",
+        "header": [],
+        "rows": ["2026-09-21|7|18", "2026-09-22|4|20", "2026-09-23|7|17", "2026-09-24|13|19", "2026-09-25|6|18", "2026-09-28|0|10", "2026-09-29|9|15", "2026-09-30|7|17", "2026-10-01|8|15", "2026-10-02|2|10", "2026-10-05|5|19", "2026-10-06|2|8", "2026-10-07|17|16", "2026-10-08|7|16", "2026-10-09|7|12", "2026-10-12|6|18", "2026-10-13|7|15", "2026-10-14|3|10", "2026-10-15|9|19", "2026-10-16|4|13", "2026-10-19|4|11", "2026-10-20|8|12"]
+      },
+      "chi": {
+        "header": ["Schicht", "Beschädigt", "Falsches Etikett", "Artikel fehlt", "Falscher Artikel"],
+        "rows": ["Früh|34|10|9|6", "Spät|31|13|11|7", "Nacht|22|38|10|8"]
+      },
+      "reg": {
+        "x": "Paletten pro Lkw",
+        "xUnit": "Palette",
+        "y": "Beladezeit",
+        "yUnit": "min",
+        "header": ["Paletten", "Beladezeit (min)"],
+        "rows": ["18|39", "24|62", "29|59", "21|55", "26|64", "29|52", "30|76", "23|65", "32|68", "18|35", "11|38", "32|63", "14|29", "12|41", "17|42", "16|28", "27|61", "31|68", "33|77", "29|68", "26|56", "10|33", "11|30", "13|52"]
+      },
+      "attr": {
+        "header": ["Karton", "Standard", "Anna 1", "Anna 2", "Ben 1", "Ben 2", "Cara 1", "Cara 2"],
+        "rows": ["1|OK|OK|OK|OK|OK|OK|OK", "2|OK|OK|OK|OK|OK|Beschädigt|OK", "3|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt", "4|OK|OK|OK|OK|OK|OK|OK", "5|OK|OK|OK|OK|OK|OK|OK", "6|Beschädigt|Beschädigt|Beschädigt|OK|OK|Beschädigt|Beschädigt", "7|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt", "8|OK|OK|OK|OK|OK|OK|OK", "9|OK|OK|OK|Beschädigt|OK|OK|OK", "10|OK|OK|OK|OK|OK|OK|OK", "11|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|OK|Beschädigt", "12|OK|OK|OK|OK|OK|OK|OK", "13|OK|OK|OK|OK|OK|OK|OK", "14|Beschädigt|Beschädigt|OK|Beschädigt|Beschädigt|Beschädigt|Beschädigt", "15|OK|OK|OK|OK|OK|OK|OK", "16|OK|OK|OK|OK|OK|OK|OK", "17|OK|OK|OK|OK|OK|OK|OK", "18|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|Beschädigt|OK", "19|OK|OK|OK|OK|OK|OK|OK", "20|OK|OK|OK|OK|OK|OK|OK"]
+      },
+      "gage": {
+        "name": "Siegelbreite, Abweichung vom Nennmaß",
+        "unit": "mm",
+        "tol": "",
+        "header": ["Teil", "Anna 1", "Anna 2", "Anna 3", "Ben 1", "Ben 2", "Ben 3", "Cara 1", "Cara 2", "Cara 3"],
+        "rows": ["1|0.29|0.41|0.64|0.08|0.25|0.07|0.04|-0.11|-0.15", "2|-0.56|-0.68|-0.58|-0.47|-1.22|-0.68|-1.38|-1.13|-0.96", "3|1.34|1.17|1.27|1.19|0.94|1.34|0.88|1.09|0.67", "4|0.47|0.50|0.64|0.01|1.03|0.20|0.14|0.20|0.11", "5|-0.80|-0.92|-0.84|-0.56|-1.20|-1.28|-1.46|-1.07|-1.45", "6|0.02|-0.11|-0.21|-0.20|0.22|0.06|-0.29|-0.67|-0.49", "7|0.59|0.75|0.66|0.47|0.55|0.83|0.02|0.01|0.21", "8|-0.31|-0.20|-0.17|-0.63|0.08|-0.34|-0.46|-0.56|-0.49", "9|2.26|1.99|2.01|1.80|2.12|2.19|1.77|1.45|1.87", "10|-1.36|-1.25|-1.31|-1.68|-1.62|-1.50|-1.49|-1.77|-2.16"]
+      }
+    }
+  }
 }
