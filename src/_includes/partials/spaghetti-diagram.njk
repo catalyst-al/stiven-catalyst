@@ -1,0 +1,129 @@
+{#- Spaghetti Diagram: the walking paths of one job over the floor plan, in metres, before and after a change; spaghetti-diagram.js does the rest. -#}
+<section class="shell tool-layout dl-setup sp2-setup">
+  <div class="tool-panel" data-spaghetti-diagram>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "The job and the plan" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="sp2-title">{{ "Job studied" | t(lang) }}</label>
+          <input id="sp2-title" name="title" placeholder="{{ cfg.text.titlePlaceholder }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="sp2-shift">{{ "Cycles per shift" | t(lang) }}</label>
+          <input id="sp2-shift" name="shift" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ 'e.g. 180' | t(lang) }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="sp2-speed">{{ "Walking speed (m/s)" | t(lang) }}</label>
+          <input id="sp2-speed" name="speed" type="number" min="0.1" step="0.1" inputmode="decimal" placeholder="1.2" data-setting>
+        </div>
+      </div>
+      <div class="dl-grid sp2-plan-grid">
+        <div class="field dl-wide">
+          <label for="sp2-file">{{ "Floor plan image (photo or PNG)" | t(lang) }}</label>
+          <input id="sp2-file" type="file" accept="image/*" data-file>
+        </div>
+        <div class="dl-grid sp2-grid-size" data-grid-fields>
+          <div class="field">
+            <label for="sp2-grid-w">{{ "Grid width (m)" | t(lang) }}</label>
+            <input id="sp2-grid-w" name="gridW" type="number" min="2" max="500" step="1" inputmode="numeric" data-setting>
+          </div>
+          <div class="field">
+            <label for="sp2-grid-h">{{ "Grid depth (m)" | t(lang) }}</label>
+            <input id="sp2-grid-h" name="gridH" type="number" min="2" max="500" step="1" inputmode="numeric" data-setting>
+          </div>
+        </div>
+      </div>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-use-grid hidden>{{ "Use the plain grid instead" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-plan-status aria-live="polite"></p>
+      <p class="form-note">{{ "Without an image the plan is a plain grid in metres. A plan image stays on this device only: it is not sent anywhere and it is not part of the Work Backup file, so keep the original." | t(lang) }}</p>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "The scale" | t(lang) }}</legend>
+      <p class="form-note" data-scale-grid>{{ "The grid is drawn in metres, so there is no scale to set. Each square is one metre on a plan up to 24 m wide." | t(lang) }}</p>
+      <div data-scale-tools hidden>
+        <p class="form-note">{{ "Tap two points on the plan whose real distance you know, for example both ends of a 10 m aisle, then type the distance." | t(lang) }}</p>
+        <div class="dl-grid sp2-scale-grid">
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-scale-start aria-pressed="false">{{ "Tap two points for the scale" | t(lang) }}</button>
+          </div>
+          <div class="field">
+            <label for="sp2-scale-m">{{ "Real distance between the two points (m)" | t(lang) }}</label>
+            <input id="sp2-scale-m" type="number" min="0.1" step="any" inputmode="decimal" placeholder="{{ 'e.g. 10' | t(lang) }}" data-scale-metres>
+          </div>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-scale-set disabled>{{ "Set the scale" | t(lang) }}</button>
+          </div>
+        </div>
+      </div>
+      <p class="form-note sp2-scale-status" data-scale-status aria-live="polite"></p>
+    </fieldset>
+
+    <div class="dl-box">
+      <p class="kicker">3 · {{ "Draw the walks" | t(lang) }}</p>
+      <div class="sp2-views" role="group" aria-label="{{ 'Study to draw' | t(lang) }}">
+        <button class="button-secondary" type="button" data-study="current" aria-pressed="true">{{ "Current" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-study="after" aria-pressed="false">{{ "After the change" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-study-note aria-live="polite"></p>
+      <div class="field sp2-change" data-change-field hidden>
+        <label for="sp2-change">{{ "The change" | t(lang) }}</label>
+        <input id="sp2-change" placeholder="{{ cfg.text.changePlaceholder }}" autocomplete="off" data-change>
+      </div>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-copy-current hidden>{{ "Start from a copy of the current walks" | t(lang) }}</button>
+      </div>
+      <div class="sp2-canvas" data-canvas></div>
+      <p class="form-note">{{ "Tap the plan to add a point to the walk being drawn: each tap is one segment. A drag scrolls the page and adds nothing. The points table below is the same walk for the keyboard." | t(lang) }}</p>
+      <div class="dl-grid sp2-draw-grid">
+        <div class="field">
+          <label for="sp2-stop">{{ "Next point is a stop (optional)" | t(lang) }}</label>
+          <input id="sp2-stop" list="sp2-stops" placeholder="{{ cfg.text.stopPlaceholder }}" autocomplete="off" data-stop-label>
+          <datalist id="sp2-stops" data-stop-list></datalist>
+        </div>
+        <div class="tool-actions sp2-draw-actions">
+          <button class="button-secondary" type="button" data-undo>{{ "Undo last point" | t(lang) }}</button>
+          <button class="button-secondary" type="button" data-finish>{{ "Finish the walk" | t(lang) }}</button>
+          <button class="button-secondary" type="button" data-new-walk>{{ "+ New walk" | t(lang) }}</button>
+        </div>
+      </div>
+      <p class="form-note dl-log-status" data-draw-status aria-live="polite"></p>
+      <div class="sp2-walks" data-walks></div>
+      <p class="dl-empty" data-empty>{{ "No walks yet. Tap the plan to start one, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example" | t(lang) }}</button>.</p>
+      <details class="sp2-table-box">
+        <summary>{{ "Points as a table (keyboard)" | t(lang) }}</summary>
+        <p class="form-note" data-points-title></p>
+        <div data-points></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-point hidden>{{ "+ Add a point" | t(lang) }}</button>
+        </div>
+      </details>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-clear>{{ "Clear both studies" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Then make it stick." | t(lang) }}</strong> {{ "Time the job before and after in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/time-study/' | local(lang) }}" data-time-study>{{ "Time Study" | t(lang) }}</a>, {{ "put the change on the" | t(lang) }} <a class="inline-link" href="{{ '/tools/kaizen-board/' | local(lang) }}" data-kaizen-board>{{ "Kaizen Board" | t(lang) }}</a>, {{ "and take a walk that keeps coming back through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sp2-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="spaghetti-diagram-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/media-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/spaghetti-diagram.js' | assetUrl }}" defer></script>

@@ -211,7 +211,7 @@
     "name": "Laboratori i procesit",
     "type": "Six Sigma",
     "time": "10 min",
-    "summary": "Ngjit një kolonë me matje dhe shiko një kartë I-MR me rregullat Nelson, Cp, Cpk dhe PPM kundrejt specifikimit, dhe nëse një ndryshim para/pas është real apo zhurmë. Çdo numër me fjalë të qarta.",
+    "summary": "Ngjit matjet dhe merr kartën e duhur të kontrollit (I-MR, Xbar-R/S, np, c, u) me rregullat Nelson dhe fazat para/pas ndryshimit, Cpk, chi-katror, regresion dhe një studim Gage R&R ose përputhjeje vlerësimesh. Çdo numër me fjalë të qarta.",
     "url": "/sq/tools/process-lab/",
     "cta": "Hap laboratorin"
   },
@@ -254,5 +254,13 @@
     "summary": "Raporti javor ose mujor për menaxherin tënd, i shkruar nga të dhënat e mjeteve të tjera: siguria, cilësia, dorëzimi, OEE, 5S, hoteli, Kaizen dhe veprimet, secili kundrejt periudhës para dhe objektivit. Çfarë u përmirësua, çfarë u përkeqësua, rreziku më i madh, një vendim dhe tri përparësi. Tekst, A4 ose Word.",
     "url": "/sq/tools/ops-report/",
     "cta": "Shkruaj raportin"
+  },
+  {
+    "name": "Diagrami spageti",
+    "type": "Lean",
+    "time": "15 min",
+    "summary": "Vizato rrugët e ecjes së një pune mbi planin e katit, prekje pas prekjeje, në metra. Merr metrat dhe minutat e ecjes për turn, ndalesën më të vizituar dhe pjesën më të gjatë që përsëritet, pastaj krahaso paraqitjen pas ndryshimit.",
+    "url": "/sq/tools/spaghetti-diagram/",
+    "cta": "Vizato ecjet"
   }
 ]

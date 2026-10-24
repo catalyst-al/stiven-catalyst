@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Spaghetti Diagram", "type": "Lean", "time": "15 min", "summary": "Draw the walking paths of one job over the floor plan, tap by tap, in metres. Get the metres and minutes walked per shift, the stop visited most and the longest repeated leg, then compare the layout after the change.", "url": "/tools/spaghetti-diagram/", "cta": "Draw the walks" },
+    "de": { "name": "Spaghetti-Diagramm", "type": "Lean", "time": "15 Min.", "summary": "Zeichnen Sie die Laufwege eines Ablaufs Tipp für Tipp auf den Hallenplan, in Metern. Sie erhalten die Meter und Gehminuten pro Schicht, den häufigsten Stopp und die längste wiederholte Strecke und vergleichen dann das Layout nach der Änderung.", "url": "/de/tools/spaghetti-diagram/", "cta": "Wege zeichnen" },
+    "sq": { "name": "Diagrami spageti", "type": "Lean", "time": "15 min", "summary": "Vizato rrugët e ecjes së një pune mbi planin e katit, prekje pas prekjeje, në metra. Merr metrat dhe minutat e ecjes për turn, ndalesën më të vizituar dhe pjesën më të gjatë që përsëritet, pastaj krahaso paraqitjen pas ndryshimit.", "url": "/sq/tools/spaghetti-diagram/", "cta": "Vizato ecjet" }
+  },
+  "routine": { "when": "Every month", "do": "Follow one job with the floor plan, draw its walks, and move the stop visited most next to where the work happens.", "de": { "when": "Jeden Monat", "do": "Folgen Sie einem Ablauf mit dem Hallenplan, zeichnen Sie seine Wege und stellen Sie den häufigsten Stopp neben den Arbeitsplatz." }, "sq": { "when": "Çdo muaj", "do": "Ndiq një punë me planin e katit, vizato ecjet e saj dhe vendos ndalesën më të vizituar pranë vendit ku bëhet puna." } },
+  "recipe": "example"
+}

@@ -1,0 +1,56 @@
+{
+  "storageKey": "sc-spaghetti-diagram",
+  "title": "Spaghetti Diagram",
+  "csv": "spaghetti-diagram",
+  "text": {
+    "titlePlaceholder": "e.g. Packing station 3, outbound",
+    "changePlaceholder": "e.g. Label printer and tape moved onto the packing bench",
+    "walkPlaceholder": "e.g. Picker A, order 1",
+    "stopPlaceholder": "e.g. label printer"
+  },
+  "stops": ["Label printer", "Tape", "Cage", "Scanner", "Pallet", "Rack", "Bin", "Desk"],
+  "advice": {
+    "leg": {
+      "meaning": "The leg that repeats is the leg to remove. Every metre on it is paid again in every cycle, so bringing one thing closer saves more than any hurry.",
+      "moves": [
+        "Move what is visited most next to where the work happens: the printer, the tape, the bin within arm's reach of the bench.",
+        "Where it cannot move, bring it to the work: a second unit, a bin refilled at the station, a fixed milk run instead of everyone fetching.",
+        "Walk the job again after the change and draw it under After the change. The metres saved are the proof, and the standard."
+      ],
+      "question": "Why does this have to stand over there, and who would notice if it moved?"
+    },
+    "noScale": "Set the scale first: tap both ends of a distance you know on the plan, for example a 10 m aisle, and type it. Until then the paths have no metres.",
+    "noAfter": "Switch to After the change above to draw the same job with the change made. The tool compares the two studies and puts the saving in metres and minutes per shift."
+  },
+  "tips": [
+    ["Follow one job, not a person.", "Pick one job, such as one order packed or one room turned, and follow it with the plan on your phone. Draw every step it takes, including the ones that look normal."],
+    ["Tap every turn.", "Each tap is a straight segment. Tap at the corners of the aisles, not just at the ends, or the path cuts through the racks and the metres come out short."],
+    ["Name the stops.", "Type a stop's name before you tap it: label printer, cage, scanner. Tap near a stop you already placed and the point snaps to it and counts as another visit."],
+    ["Several cycles, one study.", "Draw three to six cycles of the same job as separate walks; one cycle can be a lucky one. The tool averages the metres per cycle."],
+    ["Before and after.", "Make the change, then walk the job again under After the change. The saving per shift in metres and minutes is what you show at the board."]
+  ],
+  "example": {
+    "title": "Packing station 3, outbound",
+    "shift": 180,
+    "speed": 1.2,
+    "gridW": 20,
+    "gridH": 14,
+    "change": "Label printer and tape moved onto the packing bench",
+    "current": [
+      {"name":"Packer A, order 1","cycles":1,"points":[[6,7,"Packing bench"],[11,6.2],[16.5,7,"Label printer"],[11,7.8],[6,7,"Packing bench"],[10,9.5],[14,11,"Tape"],[6,7,"Packing bench"],[5.4,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer A, order 2","cycles":1,"points":[[6,7,"Packing bench"],[10.5,6],[16.5,7,"Label printer"],[11.5,7.6],[6,7,"Packing bench"],[5.4,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer A, order 3","cycles":1,"points":[[6,7,"Packing bench"],[11.2,6.4],[16.5,7,"Label printer"],[10.6,8],[6,7,"Packing bench"],[10,9.5],[14,11,"Tape"],[6,7,"Packing bench"],[5.4,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer B, order 4","cycles":1,"points":[[6,7,"Packing bench"],[10.8,6.1],[16.5,7,"Label printer"],[11.3,7.9],[6,7,"Packing bench"],[5.4,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer B, order 5","cycles":1,"points":[[6,7,"Packing bench"],[11.4,6.3],[16.5,7,"Label printer"],[10.4,7.7],[6,7,"Packing bench"],[10,9.5],[14,11,"Tape"],[6,7,"Packing bench"],[5.4,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer B, order 6","cycles":1,"points":[[6,7,"Packing bench"],[10.6,6.2],[16.5,7,"Label printer"],[11,8.1],[6,7,"Packing bench"],[5.4,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]}
+    ],
+    "after": [
+      {"name":"Packer A, order 1","cycles":1,"points":[[6,7,"Packing bench"],[8,6.6,"Label printer"],[6,7,"Packing bench"],[7.4,8.2,"Tape"],[6,7,"Packing bench"],[5.6,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer A, order 2","cycles":1,"points":[[6,7,"Packing bench"],[8,6.6,"Label printer"],[6,7,"Packing bench"],[5.6,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer A, order 3","cycles":1,"points":[[6,7,"Packing bench"],[8,6.6,"Label printer"],[6,7,"Packing bench"],[7.4,8.2,"Tape"],[6,7,"Packing bench"],[5.6,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer B, order 4","cycles":1,"points":[[6,7,"Packing bench"],[8,6.6,"Label printer"],[6,7,"Packing bench"],[5.6,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer B, order 5","cycles":1,"points":[[6,7,"Packing bench"],[8,6.6,"Label printer"],[6,7,"Packing bench"],[7.4,8.2,"Tape"],[6,7,"Packing bench"],[5.6,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]},
+      {"name":"Packer B, order 6","cycles":1,"points":[[6,7,"Packing bench"],[8,6.6,"Label printer"],[6,7,"Packing bench"],[5.6,9],[6,11,"Outbound cage"],[6,7,"Packing bench"]]}
+    ]
+  }
+}

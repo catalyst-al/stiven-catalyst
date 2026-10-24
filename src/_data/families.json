@@ -203,7 +203,8 @@
       "/tools/process-lab/",
       "/tools/time-study/",
       "/tools/value-stream-map/",
-      "/tools/standard-work/"
+      "/tools/standard-work/",
+      "/tools/spaghetti-diagram/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -263,6 +264,11 @@
         "when": "When a problem returns",
         "do": "Write the job as a standard with a reason for every key point, start a new version when it changes, and train the team on it.",
         "tool": "/tools/standard-work/"
+      },
+      {
+        "when": "Every month",
+        "do": "Follow one job with the floor plan, draw its walks, and move the stop visited most next to where the work happens.",
+        "tool": "/tools/spaghetti-diagram/"
       }
     ],
     "next": "atlas"

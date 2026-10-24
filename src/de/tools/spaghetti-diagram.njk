@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Spaghetti-Diagramm
+seo_title: "Spaghetti-Diagramm: Laufwege in Metern auf dem Hallenplan"
+description: "Zeichnen Sie die Laufwege eines Ablaufs auf den Hallenplan, in Metern: pro Zyklus und Schicht, die häufigsten Stopps, eine Heatmap, vorher und nachher."
+activeNav: /de/tools.html
+permalink: /de/tools/spaghetti-diagram/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Lean</p>
+  <h1>Spaghetti-Diagramm</h1>
+  <p class="lede">Folgen Sie einem Ablauf über die Fläche und zeichnen Sie jeden Weg, den er nimmt, Tipp für Tipp auf den Hallenplan. Das Tool misst die Wege in Metern, pro Zyklus und pro Schicht, rechnet sie in Gehminuten um, zählt die Besuche an jedem Stopp, zeigt, wo sich die Wege am meisten kreuzen, und vergleicht das Layout vor und nach der Änderung.</p>
+</section>
+
+{% set cfg = de.spaghettiDiagram %}
+{% include "partials/spaghetti-diagram.njk" %}

@@ -211,7 +211,7 @@
     "name": "Prozesslabor",
     "type": "Six Sigma",
     "time": "10 min",
-    "summary": "Fügen Sie eine Spalte mit Messwerten ein und sehen Sie eine I-MR-Karte mit den Nelson-Regeln, Cp, Cpk und PPM gegen Ihre Spezifikation und ob eine Vorher/Nachher-Änderung echt ist oder Rauschen. Jede Zahl in klaren Worten.",
+    "summary": "Fügen Sie Messwerte ein und erhalten Sie die passende Regelkarte (I-MR, Xbar-R/S, np, c, u) mit Nelson-Regeln und Phasen vor/nach einer Änderung, Cpk, Chi-Quadrat, Regression und eine Gage R&R oder attributive Übereinstimmung. Jede Zahl in klaren Worten.",
     "url": "/de/tools/process-lab/",
     "cta": "Labor öffnen"
   },
@@ -254,5 +254,13 @@
     "summary": "Der Wochen- oder Monatsbericht für Ihre Führungskraft, geschrieben aus den Daten der anderen Tools: Sicherheit, Qualität, Lieferung, OEE, 5S, Hotel, Kaizen und Maßnahmen, jeweils gegen Vorzeitraum und Ziel. Was besser und was schlechter wurde, das größte Risiko, eine Entscheidung und drei Prioritäten. Text, A4 oder Word.",
     "url": "/de/tools/ops-report/",
     "cta": "Bericht erstellen"
+  },
+  {
+    "name": "Spaghetti-Diagramm",
+    "type": "Lean",
+    "time": "15 Min.",
+    "summary": "Zeichnen Sie die Laufwege eines Ablaufs Tipp für Tipp auf den Hallenplan, in Metern. Sie erhalten die Meter und Gehminuten pro Schicht, den häufigsten Stopp und die längste wiederholte Strecke und vergleichen dann das Layout nach der Änderung.",
+    "url": "/de/tools/spaghetti-diagram/",
+    "cta": "Wege zeichnen"
   }
 ]

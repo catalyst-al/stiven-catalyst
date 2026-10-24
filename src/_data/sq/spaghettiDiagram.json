@@ -1,0 +1,56 @@
+{
+  "storageKey": "sc-spaghetti-diagram-sq",
+  "title": "Diagrami spageti",
+  "csv": "diagrami-spageti",
+  "text": {
+    "titlePlaceholder": "p.sh. Stacioni i paketimit 3, dalja",
+    "changePlaceholder": "p.sh. Printeri i etiketave dhe shiriti u vendosën mbi tavolinën e paketimit",
+    "walkPlaceholder": "p.sh. Mbledhësi A, porosia 1",
+    "stopPlaceholder": "p.sh. printeri i etiketave"
+  },
+  "stops": ["Printeri i etiketave", "Shiriti ngjitës", "Kafazi", "Skaneri", "Paleta", "Rafti", "Kutia", "Tavolina e punës"],
+  "advice": {
+    "leg": {
+      "meaning": "Pjesa e rrugës që përsëritet është ajo që duhet hequr. Çdo metër i saj paguhet sërish në çdo cikël, prandaj afrimi i një gjëje kursen më shumë se çdo nxitim.",
+      "moves": [
+        "Vendos atë që vizitohet më shpesh pranë vendit ku bëhet puna: printerin, shiritin, kutinë brenda mundësisë së dorës nga tavolina.",
+        "Kur nuk mund të lëvizet, sille te puna: një pajisje e dytë, një kuti që mbushet në stacion, një xhiro e rregullt furnizimi në vend që secili të shkojë vetë.",
+        "Ec sërish punën pas ndryshimit dhe vizatoje te Pas ndryshimit. Metrat e kursyer janë prova dhe standardi i ri."
+      ],
+      "question": "Pse duhet të qëndrojë ajo atje, dhe kush do ta vinte re nëse lëviz?"
+    },
+    "noScale": "Vendos fillimisht shkallën: prek në plan të dy skajet e një distance që e njeh, për shembull një korridor 10 m, dhe shkruaje. Deri atëherë rrugët nuk kanë metra.",
+    "noAfter": "Kalo lart te Pas ndryshimit për të vizatuar të njëjtën punë me ndryshimin e bërë. Mjeti krahason dy studimet dhe tregon kursimin në metra dhe minuta për turn."
+  },
+  "tips": [
+    ["Ndiq një punë, jo një person.", "Zgjidh një punë, si një porosi të paketuar ose një dhomë të pastruar, dhe ndiqe me planin në telefon. Vizato çdo hap që bën, edhe ata që duken normalë."],
+    ["Prek çdo kthesë.", "Çdo prekje është një segment i drejtë. Prek në cepat e korridoreve, jo vetëm në skaje, përndryshe rruga kalon nëpër raftet dhe metrat dalin më pak."],
+    ["Emërto ndalesat.", "Shkruaj emrin e një ndalese para se ta prekësh: printeri i etiketave, kafazi, skaneri. Prek pranë një ndalese që e ke vendosur dhe pika ngjitet aty dhe numërohet si një vizitë tjetër."],
+    ["Disa cikle, një studim.", "Vizato tre deri në gjashtë cikle të së njëjtës punë si ecje të veçanta; një cikël i vetëm mund të ketë qenë me fat. Mjeti nxjerr mesataren e metrave për cikël."],
+    ["Para dhe pas.", "Bëj ndryshimin, pastaj ec sërish punën te Pas ndryshimit. Kursimi për turn në metra dhe minuta është ajo që tregon te tabela."]
+  ],
+  "example": {
+    "title": "Stacioni i paketimit 3, dalja",
+    "shift": 180,
+    "speed": 1.2,
+    "gridW": 20,
+    "gridH": 14,
+    "change": "Printeri i etiketave dhe shiriti u vendosën mbi tavolinën e paketimit",
+    "current": [
+      {"name":"Paketuesi A, porosia 1","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[11,6.2],[16.5,7,"Printeri i etiketave"],[11,7.8],[6,7,"Tavolina e paketimit"],[10,9.5],[14,11,"Shiriti ngjitës"],[6,7,"Tavolina e paketimit"],[5.4,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi A, porosia 2","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[10.5,6],[16.5,7,"Printeri i etiketave"],[11.5,7.6],[6,7,"Tavolina e paketimit"],[5.4,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi A, porosia 3","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[11.2,6.4],[16.5,7,"Printeri i etiketave"],[10.6,8],[6,7,"Tavolina e paketimit"],[10,9.5],[14,11,"Shiriti ngjitës"],[6,7,"Tavolina e paketimit"],[5.4,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi B, porosia 4","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[10.8,6.1],[16.5,7,"Printeri i etiketave"],[11.3,7.9],[6,7,"Tavolina e paketimit"],[5.4,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi B, porosia 5","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[11.4,6.3],[16.5,7,"Printeri i etiketave"],[10.4,7.7],[6,7,"Tavolina e paketimit"],[10,9.5],[14,11,"Shiriti ngjitës"],[6,7,"Tavolina e paketimit"],[5.4,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi B, porosia 6","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[10.6,6.2],[16.5,7,"Printeri i etiketave"],[11,8.1],[6,7,"Tavolina e paketimit"],[5.4,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]}
+    ],
+    "after": [
+      {"name":"Paketuesi A, porosia 1","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[8,6.6,"Printeri i etiketave"],[6,7,"Tavolina e paketimit"],[7.4,8.2,"Shiriti ngjitës"],[6,7,"Tavolina e paketimit"],[5.6,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi A, porosia 2","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[8,6.6,"Printeri i etiketave"],[6,7,"Tavolina e paketimit"],[5.6,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi A, porosia 3","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[8,6.6,"Printeri i etiketave"],[6,7,"Tavolina e paketimit"],[7.4,8.2,"Shiriti ngjitës"],[6,7,"Tavolina e paketimit"],[5.6,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi B, porosia 4","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[8,6.6,"Printeri i etiketave"],[6,7,"Tavolina e paketimit"],[5.6,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi B, porosia 5","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[8,6.6,"Printeri i etiketave"],[6,7,"Tavolina e paketimit"],[7.4,8.2,"Shiriti ngjitës"],[6,7,"Tavolina e paketimit"],[5.6,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]},
+      {"name":"Paketuesi B, porosia 6","cycles":1,"points":[[6,7,"Tavolina e paketimit"],[8,6.6,"Printeri i etiketave"],[6,7,"Tavolina e paketimit"],[5.6,9],[6,11,"Kafazi i daljes"],[6,7,"Tavolina e paketimit"]]}
+    ]
+  }
+}

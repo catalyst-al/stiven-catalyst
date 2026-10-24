@@ -1,0 +1,56 @@
+{
+  "storageKey": "sc-spaghetti-diagram-de",
+  "title": "Spaghetti-Diagramm",
+  "csv": "spaghetti-diagramm",
+  "text": {
+    "titlePlaceholder": "z. B. Packplatz 3, Warenausgang",
+    "changePlaceholder": "z. B. Etikettendrucker und Klebeband auf den Packtisch gestellt",
+    "walkPlaceholder": "z. B. Kommissionierer A, Auftrag 1",
+    "stopPlaceholder": "z. B. Etikettendrucker"
+  },
+  "stops": ["Etikettendrucker", "Klebeband", "Gitterbox", "Scanner", "Palette", "Regal", "Behälter", "Schreibtisch"],
+  "advice": {
+    "leg": {
+      "meaning": "Die Strecke, die sich wiederholt, ist die Strecke, die wegmuss. Jeder Meter darauf wird in jedem Zyklus neu bezahlt. Etwas näher heranzuholen spart mehr als jede Eile.",
+      "moves": [
+        "Stellen Sie das, was am häufigsten aufgesucht wird, direkt neben den Arbeitsplatz: den Drucker, das Klebeband, den Behälter in Griffweite des Tisches.",
+        "Wo es nicht umziehen kann, bringen Sie es zur Arbeit: ein zweites Gerät, ein Behälter, der am Platz aufgefüllt wird, ein fester Milkrun statt jeder holt selbst.",
+        "Gehen Sie den Ablauf nach der Änderung erneut ab und zeichnen Sie ihn unter Nach der Änderung. Die gesparten Meter sind der Beweis und der neue Standard."
+      ],
+      "question": "Warum muss das dort drüben stehen, und wem würde es auffallen, wenn es umzieht?"
+    },
+    "noScale": "Legen Sie zuerst den Maßstab fest: Tippen Sie auf dem Plan beide Enden einer bekannten Strecke an, zum Beispiel eines 10-m-Gangs, und geben Sie sie ein. Bis dahin haben die Wege keine Meter.",
+    "noAfter": "Wechseln Sie oben zu Nach der Änderung, um denselben Ablauf mit der Änderung zu zeichnen. Das Tool vergleicht beide Studien und zeigt die Einsparung in Metern und Minuten pro Schicht."
+  },
+  "tips": [
+    ["Folgen Sie einem Ablauf, nicht einer Person.", "Wählen Sie einen Ablauf, etwa einen gepackten Auftrag oder ein gereinigtes Zimmer, und folgen Sie ihm mit dem Plan auf dem Handy. Zeichnen Sie jeden Schritt, auch die, die normal wirken."],
+    ["Tippen Sie jede Ecke an.", "Jeder Tipp ist ein gerades Teilstück. Tippen Sie an den Ecken der Gänge, nicht nur an den Enden, sonst schneidet der Weg durch die Regale und die Meter fallen zu kurz aus."],
+    ["Benennen Sie die Stopps.", "Geben Sie den Namen eines Stopps ein, bevor Sie ihn antippen: Etikettendrucker, Gitterbox, Scanner. Tippen Sie nahe an einem schon gesetzten Stopp, rastet der Punkt dort ein und zählt als weiterer Besuch."],
+    ["Mehrere Zyklen, eine Studie.", "Zeichnen Sie drei bis sechs Zyklen desselben Ablaufs als einzelne Wege; ein einzelner Zyklus kann Glück gehabt haben. Das Tool bildet den Mittelwert der Meter pro Zyklus."],
+    ["Vorher und nachher.", "Setzen Sie die Änderung um und gehen Sie den Ablauf unter Nach der Änderung erneut ab. Die Einsparung pro Schicht in Metern und Minuten ist das, was Sie am Board zeigen."]
+  ],
+  "example": {
+    "title": "Packplatz 3, Warenausgang",
+    "shift": 180,
+    "speed": 1.2,
+    "gridW": 20,
+    "gridH": 14,
+    "change": "Etikettendrucker und Klebeband auf den Packtisch gestellt",
+    "current": [
+      {"name":"Packer A, Auftrag 1","cycles":1,"points":[[6,7,"Packtisch"],[11,6.2],[16.5,7,"Etikettendrucker"],[11,7.8],[6,7,"Packtisch"],[10,9.5],[14,11,"Klebeband"],[6,7,"Packtisch"],[5.4,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer A, Auftrag 2","cycles":1,"points":[[6,7,"Packtisch"],[10.5,6],[16.5,7,"Etikettendrucker"],[11.5,7.6],[6,7,"Packtisch"],[5.4,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer A, Auftrag 3","cycles":1,"points":[[6,7,"Packtisch"],[11.2,6.4],[16.5,7,"Etikettendrucker"],[10.6,8],[6,7,"Packtisch"],[10,9.5],[14,11,"Klebeband"],[6,7,"Packtisch"],[5.4,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer B, Auftrag 4","cycles":1,"points":[[6,7,"Packtisch"],[10.8,6.1],[16.5,7,"Etikettendrucker"],[11.3,7.9],[6,7,"Packtisch"],[5.4,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer B, Auftrag 5","cycles":1,"points":[[6,7,"Packtisch"],[11.4,6.3],[16.5,7,"Etikettendrucker"],[10.4,7.7],[6,7,"Packtisch"],[10,9.5],[14,11,"Klebeband"],[6,7,"Packtisch"],[5.4,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer B, Auftrag 6","cycles":1,"points":[[6,7,"Packtisch"],[10.6,6.2],[16.5,7,"Etikettendrucker"],[11,8.1],[6,7,"Packtisch"],[5.4,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]}
+    ],
+    "after": [
+      {"name":"Packer A, Auftrag 1","cycles":1,"points":[[6,7,"Packtisch"],[8,6.6,"Etikettendrucker"],[6,7,"Packtisch"],[7.4,8.2,"Klebeband"],[6,7,"Packtisch"],[5.6,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer A, Auftrag 2","cycles":1,"points":[[6,7,"Packtisch"],[8,6.6,"Etikettendrucker"],[6,7,"Packtisch"],[5.6,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer A, Auftrag 3","cycles":1,"points":[[6,7,"Packtisch"],[8,6.6,"Etikettendrucker"],[6,7,"Packtisch"],[7.4,8.2,"Klebeband"],[6,7,"Packtisch"],[5.6,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer B, Auftrag 4","cycles":1,"points":[[6,7,"Packtisch"],[8,6.6,"Etikettendrucker"],[6,7,"Packtisch"],[5.6,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer B, Auftrag 5","cycles":1,"points":[[6,7,"Packtisch"],[8,6.6,"Etikettendrucker"],[6,7,"Packtisch"],[7.4,8.2,"Klebeband"],[6,7,"Packtisch"],[5.6,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]},
+      {"name":"Packer B, Auftrag 6","cycles":1,"points":[[6,7,"Packtisch"],[8,6.6,"Etikettendrucker"],[6,7,"Packtisch"],[5.6,9],[6,11,"Gitterbox Versand"],[6,7,"Packtisch"]]}
+    ]
+  }
+}

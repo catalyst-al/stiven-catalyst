@@ -211,7 +211,7 @@
     "name": "Process Lab",
     "type": "Six Sigma",
     "time": "10 min",
-    "summary": "Paste a column of measurements and see an I-MR chart with the Nelson rules, Cp, Cpk and PPM against your specification, and whether a before/after change is real or noise. Every number in plain words.",
+    "summary": "Paste measurements and get the right control chart (I-MR, Xbar-R/S, np, c, u) with Nelson rules and before/after phases, Cpk, chi-square, regression and a Gage R&R or attribute agreement study. Every number in plain words.",
     "url": "/tools/process-lab/",
     "cta": "Open the lab"
   },
@@ -254,5 +254,13 @@
     "summary": "The weekly or monthly report for your manager, written from the data of the other tools: safety, quality, delivery, OEE, 5S, hotel, Kaizen and actions, each against the period before and its target. What got better, what got worse, the biggest risk, one decision and three priorities. Text, A4 or Word.",
     "url": "/tools/ops-report/",
     "cta": "Write the report"
+  },
+  {
+    "name": "Spaghetti Diagram",
+    "type": "Lean",
+    "time": "15 min",
+    "summary": "Draw the walking paths of one job over the floor plan, tap by tap, in metres. Get the metres and minutes walked per shift, the stop visited most and the longest repeated leg, then compare the layout after the change.",
+    "url": "/tools/spaghetti-diagram/",
+    "cta": "Draw the walks"
   }
 ]
