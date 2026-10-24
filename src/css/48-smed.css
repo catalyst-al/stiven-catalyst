@@ -1,0 +1,188 @@
+/* ===== SMED Changeover (js/smed.js) =====
+   The five steps as a row of numbered buttons, the elements as compact cards with the fields of the step, a stopwatch
+   with one large number, and the changeover standard on A4. Internal and external are told by their words; the
+   colour of a tag only repeats them. */
+.sm-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sm-step {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  width: 100%;
+  height: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 8px);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.sm-step:hover { border-color: var(--blue); }
+.sm-step:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.sm-step[aria-current="step"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.sm-step-no {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+.sm-step[aria-current="step"] .sm-step-no { border-color: var(--blue); background: var(--blue); color: #fff; }
+.sm-step-name { font-size: 14px; font-weight: 750; line-height: 1.25; }
+.sm-step-state { color: var(--muted); font-size: 12px; }
+.sm-step-state:empty { display: none; }
+.sm-step.is-done .sm-step-state { color: var(--ok); font-weight: 700; }
+.sm-step-intro { display: grid; gap: 6px; margin-top: 4px; }
+.sm-step-intro:focus { outline: none; }
+.sm-step-title { margin: 6px 0 0; font-size: 22px; }
+.sm-step-intro p { margin: 0; }
+.sm-step-tip { font-style: italic; }
+.sm-totals { margin: 0; color: var(--ink); font-weight: 600; }
+.sm-totals:empty { display: none; }
+.sm-step-nav { justify-content: space-between; }
+
+/* The stopwatch: one large number, the element under way under it, two big buttons. */
+.sm-watch {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+}
+.sm-watch-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.sm-clock {
+  margin: 4px 0 0;
+  text-align: center;
+  font-family: var(--display);
+  font-size: clamp(56px, 12vw, 96px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.sm-current { margin: 0; text-align: center; color: var(--muted); }
+.sm-current:empty { display: none; }
+.sm-watch-actions { justify-content: center; }
+.sm-big { min-width: 150px; padding: 16px 26px; font-size: 18px; }
+.sm-entry { align-items: end; }
+.sm-manual textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+
+/* The elements: one card each, the fields of the step in a grid. */
+.sm-elements { display: grid; gap: 10px; }
+.sm-elements:empty { display: none; }
+.sm-el {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+}
+.sm-el-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.sm-no {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.sm-el-name { font-weight: 750; }
+.sm-el-meta { flex-basis: 100%; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.sm-tools { display: flex; gap: 4px; margin-left: auto; }
+.sm-tool { min-width: 34px; }
+.sm-el-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px; align-items: end; }
+.sm-el-grid .sm-wide { grid-column: 1 / -1; }
+.sm-el-grid .sm-wide2 { grid-column: span 2; }
+.sm-field label { font-size: 13px; }
+.sm-in {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+.sm-in:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.sm-choice { display: flex; flex-wrap: wrap; gap: 8px 18px; grid-column: 1 / -1; margin: 0; padding: 0; border: 0; }
+.sm-radio { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; cursor: pointer; }
+.sm-radio input { width: 18px; height: 18px; accent-color: var(--blue); }
+.sm-undecided { flex-basis: 100%; margin: 0; }
+.sm-act { justify-self: start; align-self: center; padding-left: 0; }
+.sm-tag { font-size: 11px; }
+.sm-internal { border-color: color-mix(in srgb, var(--blue) 60%, transparent); color: var(--blue); }
+.sm-external { border-color: var(--line); color: var(--muted); }
+.sm-removed { border-style: dashed; color: var(--muted); text-decoration: line-through; }
+
+/* Step 5: the standard as it will print. */
+.sm-standard { display: grid; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: calc(var(--radius) - 6px); }
+.sm-sheet-head .kicker { margin: 0; }
+.sm-sheet-head h2, .sm-sheet-head h3 { margin: 2px 0 0; }
+.sm-sheet-meta { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.sm-sheet-part h4 { margin: 8px 0 6px; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; }
+.sm-sheet-table .sm-box { width: 22px; text-align: center; color: var(--muted); }
+.sm-sheet-check { color: var(--muted); font-size: 14px; }
+.sm-sheet-foot { margin: 0; }
+
+/* Results. */
+.sm-actions-status { flex-basis: 100%; margin: 0; }
+.sm-actions-status:empty { display: none; }
+.sm-table .sm-sub { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+.sm-table .sm-strong, .sm-pareto .sm-strong { font-weight: 800; color: var(--ink); }
+.sm-table .sm-measure { color: var(--muted); font-size: 13px; min-width: 180px; }
+.sm-table tfoot td { border-top: 2px solid var(--line); }
+.sm-batch { margin: 10px 0 0; padding-left: 20px; }
+.sm-batch li { margin-bottom: 8px; }
+.sm-worth { margin-top: 6px; }
+
+@media (max-width: 760px) {
+  .sm-steps { grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr)); }
+  .sm-el-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sm-el-grid .sm-wide2 { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .sm-watch-grid { grid-template-columns: minmax(0, 1fr); }
+  .sm-el-grid { grid-template-columns: minmax(0, 1fr); }
+  .sm-big { flex: 1 1 auto; }
+}
+
+/* The printed changeover standard (A4, with boxes to tick and the signatures). */
+.sm-print[hidden] { display: none; }
+@page sm-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  html.sm-printing main > :not(.sm-print) { display: none !important; }
+  html.sm-printing .sm-print { page: sm-a4; display: block !important; padding: 0; color: #000; font-size: 11px; }
+  .sm-print .sm-sheet-meta, .sm-print .sm-sheet-check, .sm-print .form-note { color: #000; }
+  .sm-print .dl-table-wrap { overflow: visible; border: 0; }
+  .sm-print .sm-sheet-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .sm-print .sm-sheet-table th, .sm-print .sm-sheet-table td { padding: 3px 5px; border: 1px solid #bbb; text-align: left; vertical-align: top; }
+  .sm-print .sm-sheet-table .num { text-align: right; white-space: nowrap; }
+  .sm-print .sm-sheet-table tr { break-inside: avoid; }
+  .sm-print .sm-sheet-table .sm-box { color: #000; font-size: 14px; }
+  .sm-sheet-sign { margin: 18px 0 0; }
+  .sm-setup, .sm-actions-status { display: none !important; }
+  .sm-results { padding: 0; border: 0; }
+  .sm-results .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

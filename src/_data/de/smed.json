@@ -1,0 +1,125 @@
+{
+  "storageKey": "sc-smed-de",
+  "title": "SMED-Rüstzeitanalyse",
+  "csv": "smed-ruesten",
+  "defaults": { "weeks": "48" },
+  "text": {
+    "machinePlaceholder": "z. B. Verpackungslinie 3, Schlauchbeutelmaschine",
+    "fromPlaceholder": "z. B. Granola 375 g",
+    "toPlaceholder": "z. B. Granola 750 g",
+    "observerPlaceholder": "z. B. Schichtleitung",
+    "teamPlaceholder": "z. B. Maschinenführer und Einrichter",
+    "elementPlaceholder": "z. B. Formatteile holen",
+    "whoPlaceholder": "z. B. Maschinenführer",
+    "notePlaceholder": "Was sich genau ändert",
+    "ownerPlaceholder": "Wer es umsetzt",
+    "checkPlaceholder": "z. B. Formschulter auf beiden Stiften, Spanner zu",
+    "pastePlaceholder": "Formatteile holen; 1; 5:00; extern",
+    "changeover": "Rüstvorgang",
+    "singleMinute": "Rüsten im einstelligen Minutenbereich: unter zehn Minuten Maschinenstillstand, das Ziel, nach dem Shingo die Methode benannt hat.",
+    "freedNote": "Gewonnene Maschinenzeit ist nur so viel wert, wenn sie genutzt wird: mehr Ausbringung auf einer vollen Linie, oder öfter rüsten mit kleineren Losen und weniger Bestand.",
+    "oee": "Die OEE zählt einen Rüstvorgang als Rüst- und Einstellverlust: Die Maschine sollte laufen und lief nicht, also senkt jede Minute davon die Verfügbarkeit. Erfassen Sie jeden Rüstvorgang dort mit dem Grund Umrüsten.",
+    "standardFoot": "Die Rüstzeit läuft vom letzten Gutteil des alten Produkts bis zum ersten Gutteil des neuen bei normaler Geschwindigkeit. Stoppen Sie die nächsten Rüstvorgänge gegen diesen Standard und verbessern Sie ihn erneut.",
+    "typicalSource": "Typische Anteile bei einem herkömmlichen Rüstvorgang nach Shigeo Shingo, A Revolution in Manufacturing: The SMED System (1985)."
+  },
+  "categories": [
+    { "key": "prep", "name": "Vorbereiten und Prüfen", "short": "Vorbereiten", "typical": 0.3, "meaning": "Werkzeuge, Teile, Material und Papiere holen, prüfen und wegräumen; das Leerfahren und das Aufräumen." },
+    { "key": "mount", "name": "Ab- und Anbauen", "short": "Ab- und Anbauen", "typical": 0.05, "meaning": "Die Teile des alten Produkts abnehmen und die des neuen anbauen." },
+    { "key": "measure", "name": "Messen, Einstellen und Kalibrieren", "short": "Einstellen", "typical": 0.15, "meaning": "Zentrieren, positionieren, Maße, Temperaturen und Programme einstellen." },
+    { "key": "trial", "name": "Probeläufe und Nachjustieren", "short": "Probeläufe", "typical": 0.5, "meaning": "Probeteile und Korrekturen bis zum ersten Gutteil bei normaler Geschwindigkeit." }
+  ],
+  "measures": [
+    { "key": "prestage", "step": 3, "name": "Werkzeuge, Teile und Material vor dem Stopp bereitstellen (Rüstwagen)" },
+    { "key": "preheat", "step": 3, "name": "Vor dem Stopp vorwärmen oder vorkonditionieren (Werkzeuge, Siegelbacken, Formen)" },
+    { "key": "preassemble", "step": 3, "name": "Außerhalb der Maschine vormontieren und voreinstellen (zweiter Satz, Zwischenvorrichtung)" },
+    { "key": "standardparts", "step": 3, "name": "Funktionsteile vereinheitlichen (gleiche Höhe, Spannung und Zentrierung)" },
+    { "key": "prepare", "step": 3, "name": "Auftrag, Einstellungen und Etiketten vor dem Stopp vorbereiten" },
+    { "key": "checkbefore", "step": 3, "name": "Vor dem Stopp prüfen, ob Werkzeuge und Material funktionieren" },
+    { "key": "quickrelease", "step": 4, "name": "Schnellspanner: Eindreh- oder Einhandverschlüsse statt Schrauben" },
+    { "key": "locate", "step": 4, "name": "Passstifte und einheitliche Höhen: keine Unterlegbleche, kein Suchen" },
+    { "key": "noadjust", "step": 4, "name": "Justieren abschaffen: feste Anschläge, Skalen, Einstellungen je Produkt gespeichert" },
+    { "key": "parallel", "step": 4, "name": "Parallel mit zwei Personen, festem Ablauf und einem Signal" },
+    { "key": "checklist", "step": 4, "name": "Eine Checkliste und ein fester Ablauf für jeden Rüstvorgang" },
+    { "key": "pointofuse", "step": 4, "name": "Werkzeuge und Teile am Einsatzort lagern: kürzere Wege" },
+    { "key": "mechanise", "step": 4, "name": "Schweres Handling mechanisieren (Rollen, Hebehilfe)" }
+  ],
+  "steps": [
+    { "title": "Beobachten und erfassen", "what": "Stoppen Sie einen echten Rüstvorgang, vom letzten Gutteil des alten Produkts bis zum ersten Gutteil des neuen. Jede Zwischenzeit schließt ein Element ab. Schreiben Sie auf, was geschah, nicht was geschehen sollte.", "tip": "Filmen Sie, wenn das Team zustimmt: Ein Video zeigt die Wege und das Suchen, die eine Stoppuhr übersieht." },
+    { "title": "Intern und extern trennen", "what": "Markieren Sie jedes Element: intern, wenn es nur bei stehender Maschine möglich ist, extern, wenn es auch bei laufender Maschine ginge. Dass ein Element heute bei stehender Maschine erledigt wird, macht es noch nicht intern.", "tip": "Allein das Trennen senkt die interne Zeit meist um 30 bis 50 % (Shingo): Holen und Prüfen wandern vor den Stopp." },
+    { "title": "Intern in extern umwandeln", "what": "Sehen Sie sich jedes interne Element noch einmal an und fragen Sie, was es bei laufender Maschine möglich machen würde: vorwärmen, bereitstellen, vormontieren, die Teile vereinheitlichen, die die Maschine berühren.", "tip": "Schauen Sie auf den Zweck des Elements, nicht auf die Art, wie es heute gemacht wird." },
+    { "title": "Beides verbessern", "what": "Verkürzen Sie, was intern bleibt (Schnellspanner, Passstifte, kein Justieren, zwei Personen parallel), und auch die externe Arbeit (Lagerung am Einsatzort, Checklisten). Geben Sie jedem Element seine geplante Zeit nach der Änderung und die Person, die es erledigt.", "tip": "Das Justieren ist der größte Hebel: Schaffen Sie den Bedarf dafür ab, statt schneller zu justieren." },
+    { "title": "Standardisieren", "what": "Schreiben Sie den neuen Rüstvorgang als Standard: was vor dem Stopp, bei stehender Maschine und nach dem Anlauf erledigt wird, von wem, in welcher Zeit und mit welcher Kontrolle. Schulen Sie ihn und stoppen Sie den nächsten Rüstvorgang dagegen.", "tip": "Der Standard ist die Grundlage der nächsten Runde: Stoppen Sie nach einem Monat erneut einen Rüstvorgang." }
+  ],
+  "advice": {
+    "prep": {
+      "meaning": "Holen, Suchen und Prüfen geschehen noch, während die Maschine steht. Das ist die billigste Zeit, die sich gewinnen lässt: Nichts davon braucht die Maschine.",
+      "moves": [
+        "Bauen Sie einen Rüstwagen mit allem für das nächste Produkt, vor dem Stopp gegen eine Liste geprüft.",
+        "Halten Sie die Werkzeuge an einer Schattenwand an der Maschine: kein Weg, kein Suchen.",
+        "Fahren Sie den alten Auftrag auf eine Stückzahl leer, damit der Stopp pünktlich beginnt und niemand wartet."
+      ],
+      "question": "Was hat jemand geholt oder gesucht, während die Maschine stand?"
+    },
+    "mount": {
+      "meaning": "Teile werden noch von Hand ab- und angebaut, Schraube für Schraube. Shingo fand hier bei einem herkömmlichen Rüstvorgang nur etwa 5 %; mehr heißt, die Befestigungen sind langsam.",
+      "moves": [
+        "Ersetzen Sie Schrauben durch Eindreh- oder Einhandspanner; eine Schraube, die nur gelöst werden muss, bekommt ein U-Langloch.",
+        "Geben Sie den Teilen Passstifte und eine Höhe, damit sie nur in einer Lage passen.",
+        "Arbeiten Sie parallel mit zwei Personen und festem Ablauf: wer welche Seite macht, und ein Signal, wenn fertig."
+      ],
+      "question": "Welche Befestigung wird mehr als einmal gedreht, und warum muss sie das?"
+    },
+    "measure": {
+      "meaning": "Einstellungen werden durch Messen und Probieren an der Maschine gefunden. Jede Einstellung, die sich speichern oder fest vorgeben lässt, ist kein Arbeitsschritt mehr.",
+      "moves": [
+        "Speichern Sie die Einstellungen jedes Produkts (Rezept, Skalenmarken, feste Anschläge) und stellen Sie nach Zahl ein, nicht nach Lineal.",
+        "Markieren Sie die Position jedes Formats an der Maschine: eine Skala, eine Farbe, ein Stift.",
+        "Bereiten Sie Drucker, Codierer und Etikettendateien vor dem Stopp vor."
+      ],
+      "question": "Welche Einstellung wird bei jedem Rüstvorgang neu gemessen, obwohl sie für dieses Produkt jedes Mal gleich ist?"
+    },
+    "trial": {
+      "meaning": "Probeläufe und Nachjustieren sind typischerweise die Hälfte eines herkömmlichen Rüstvorgangs (Shingo). Es gibt sie, weil die Einstellungen nicht genau sind; die Abhilfe liegt davor, beim Einstellen und Anbauen.",
+      "moves": [
+        "Schreiben Sie fünf Rüstvorgänge lang jede Korrektur der Probeläufe auf: Die, die immer vorkommt, ist eine Einstellung, die fest werden muss.",
+        "Vereinbaren Sie die Erstteilprüfung mit der Qualität: was gemessen wird, von wem und gegen welches Referenzmuster.",
+        "Zählen Sie die Probeteile und die Minuten bis zum ersten Gutteil: Das ist das Maß des Rüstvorgangs."
+      ],
+      "question": "Was wurde beim Probelauf nachjustiert, und hätte es vor dem Start richtig eingestellt werden können?"
+    }
+  },
+  "tips": [
+    ["Stillstand ist nicht dasselbe wie intern.", "Heute geschieht fast alles bei stehender Maschine. Intern heißt, dass es nicht anders geht; diese Frage ist Schritt 2."],
+    ["Bis zum ersten Gutteil stoppen.", "Der Rüstvorgang endet, wenn das neue Produkt bei normaler Geschwindigkeit gut herauskommt, nicht wenn die letzte Schraube fest ist. Probeläufe gehören dazu."],
+    ["Zuerst die billigen Schritte.", "Trennen und Umwandeln kosten einen Wagen und eine Checkliste. Schnellspanner und gespeicherte Einstellungen kommen danach; Maschinen und Automatisierung zuletzt."],
+    ["Parallelarbeit braucht einen Ablauf.", "Zwei Personen halbieren den Stillstand nur, wenn jede ihre Seite kennt und keine auf die andere wartet. Planen Sie, wer was macht, und stoppen Sie es dann."],
+    ["Ein Rüstvorgang, dann der Standard.", "Untersuchen Sie einen Rüstvorgang gründlich, schreiben Sie den neuen Standard, schulen Sie ihn und stoppen Sie den nächsten dagegen. Dann beginnt die nächste Runde."]
+  ],
+  "example": {
+    "machine": "Verpackungslinie 3 · Schlauchbeutelmaschine",
+    "from": "Granola 375 g",
+    "to": "Granola 750 g",
+    "date": -3,
+    "observer": "Schichtleitung",
+    "team": "Maschinenführer und Einrichter",
+    "target": "20",
+    "perWeek": "8",
+    "costMin": "6",
+    "weeks": "48",
+    "elements": [
+      { "name": "Formatteile und Werkzeug aus dem Lager holen", "cat": "prep", "dur": 300, "kind": "external", "after": "external", "afterDur": 240, "who": "Einrichter", "convert": "prestage", "streamline": "", "note": "Ein Rüstwagen je Format, vom Einrichter vor dem Stopp gepackt", "owner": "Linienleitung", "due": 14, "check": "Wagen vor dem Stopp gegen die Checkliste vollständig", "phase": "before" },
+      { "name": "Rüstblatt und passende Inbusschlüssel suchen", "cat": "prep", "dur": 120, "kind": "external", "after": "external", "afterDur": 60, "who": "Einrichter", "convert": "", "streamline": "checklist", "note": "Rüstblatt und Schlüssel auf dem Wagen, gegen die Liste abgehakt", "owner": "Linienleitung", "due": 14, "check": "Checkliste abgehakt, Schlüssel an der Schattenwand des Wagens", "phase": "before" },
+      { "name": "Letzte Beutel leerfahren und alte Folie abnehmen", "cat": "prep", "dur": 180, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Maschinenführer", "convert": "", "streamline": "checklist", "note": "Der Zulauf stoppt bei der Auftragsmenge; das Leerfahren folgt dem Rüstblatt", "owner": "Linienleitung", "due": 14, "check": "Letzter Gutbeutel gezählt und gekennzeichnet", "phase": "" },
+      { "name": "Alte Formschulter abbauen (8 Schrauben)", "cat": "mount", "dur": 240, "kind": "internal", "after": "internal", "afterDur": 120, "who": "Maschinenführer", "convert": "", "streamline": "quickrelease", "note": "Zwei Schnellspanner statt der 8 Schrauben an der Formschulter", "owner": "Instandhaltung", "due": 28, "check": "Beide Spanner offen, Formschulter auf dem Wagen", "phase": "" },
+      { "name": "Neue Formschulter anbauen und zentrieren", "cat": "mount", "dur": 300, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Maschinenführer", "convert": "standardparts", "streamline": "locate", "note": "Passstifte und eine Einbauhöhe an jeder Formschulter: kein Zentrieren", "owner": "Instandhaltung", "due": 28, "check": "Formschulter auf beiden Stiften, Spanner zu", "phase": "" },
+      { "name": "Folienrolle wechseln und neue Folie einfädeln", "cat": "mount", "dur": 210, "kind": "internal", "after": "internal", "afterDur": 180, "who": "Maschinenführer", "convert": "prestage", "streamline": "", "note": "Neue Rolle bereit auf dem Wagen, Einfädelplan an der Maschine", "owner": "Linienleitung", "due": 14, "check": "Folie läuft mittig über die Formschulter", "phase": "" },
+      { "name": "Siegelbacken tauschen", "cat": "mount", "dur": 150, "kind": "internal", "after": "internal", "afterDur": 90, "who": "Maschinenführer", "convert": "", "streamline": "quickrelease", "note": "Schnellwechselbacken mit Steckverbindern", "owner": "Instandhaltung", "due": 42, "check": "Stecker eingerastet, Backen sitzen", "phase": "" },
+      { "name": "Warten, bis die neuen Backen 165 °C erreichen", "cat": "prep", "dur": 360, "kind": "internal", "after": "external", "afterDur": 360, "who": "Einrichter", "convert": "preheat", "streamline": "", "note": "Eine Heizstation neben der Linie: die neuen Backen haben vor dem Stopp 165 °C", "owner": "Instandhaltung", "due": 42, "check": "Backen vor dem Stopp auf der Heizstation bei 165 °C", "phase": "before" },
+      { "name": "Führungen, Folienbreite und Beutellänge mit dem Lineal einstellen", "cat": "measure", "dur": 270, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Maschinenführer", "convert": "", "streamline": "noadjust", "note": "Ein Rezept je Format am Bedienpanel, Skalenmarken an den Führungen", "owner": "Instandhaltung", "due": 28, "check": "Führungen auf der Marke 750 g, Rezept 750 g geladen", "phase": "" },
+      { "name": "Neuen Datumscode und Etikettendatei eingeben", "cat": "measure", "dur": 90, "kind": "internal", "after": "internal", "afterDur": 30, "who": "Maschinenführer", "convert": "prepare", "streamline": "", "note": "Code und Etikettendatei vor dem Stopp vorbereitet, mit dem Rezept gewählt", "owner": "Linienleitung", "due": 14, "check": "Datumscode und Etikett passen zum Auftrag", "phase": "" },
+      { "name": "Probebeutel: Siegelung und Gewicht nachjustieren, bis sie gut sind", "cat": "trial", "dur": 360, "kind": "internal", "after": "internal", "afterDur": 180, "who": "Maschinenführer", "convert": "", "streamline": "noadjust", "note": "Siegelparameter je Format gespeichert; nur nachjustieren, wenn der Siegeltest scheitert", "owner": "Linienleitung", "due": 28, "check": "Siegeltest und Gewicht an 3 Beuteln geprüft", "phase": "" },
+      { "name": "Auf die Freigabe der ersten Beutel durch die Qualität warten", "cat": "trial", "dur": 150, "kind": "internal", "after": "internal", "afterDur": 90, "who": "Maschinenführer", "convert": "", "streamline": "checklist", "note": "Der Maschinenführer gibt mit der Erstteilkarte frei; die Qualität prüft bei ihrem Rundgang nach", "owner": "Qualität", "due": 21, "check": "Erstteilkarte unterschrieben", "phase": "" },
+      { "name": "Aufräumen und die alten Teile ins Lager bringen", "cat": "prep", "dur": 150, "kind": "external", "after": "external", "afterDur": 150, "who": "Einrichter", "convert": "", "streamline": "", "note": "", "owner": "", "due": "", "check": "Alte Formatteile wieder an ihrem Platz", "phase": "after" }
+    ]
+  }
+}
