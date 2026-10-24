@@ -30,7 +30,7 @@
   if (!root || !dataEl || !window.ToolKit) return;
 
   const {
-    tx, showDate, lower,
+    tx, num, showDate, lower,
     read, write, isObject, str, loadState, el, int, pct, plural, capital, today,
     parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout, periodTotal, rangeText,
@@ -50,6 +50,17 @@
   const preview = root.querySelector("[data-preview]");
   const pasteArea = root.querySelector("#da-paste");
   const results = document.querySelector("[data-results]");
+
+  // The workplace profile (workplace.js), when the page has one: its shifts fill the shift list and its on-time target
+  // stands in for an empty target box, so a site sets them once. Without it the analyzer runs on its own data, as before.
+  const Workplace = window.Workplace || null;
+  const shiftOptions = () => (Workplace?.shifts().length ? Workplace.shifts() : data.shifts);
+  // A per cent, like the box (95 means 95 % on time); null when the profile has none.
+  const profileTarget = () => (Workplace ? Workplace.target("ontime") : null);
+  const typedTarget = () => str(state.target).trim();
+  const targetInput = root.querySelector('[name="target"]');
+  const targetPlaceholder = targetInput?.placeholder || "";
+  const targetNote = root.querySelector("[data-profile-target]");
 
   const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [], example: {}, totalsFor: {} });
   state.from = parseDate(state.from);
@@ -110,7 +121,7 @@
       const note = cells.slice(cells.length >= 12 ? 11 : 8);
       const row = {
         date: parseDate(date),
-        shift: canon(data.shifts, shift, NOT_RECORDED),
+        shift: canon([...new Set([...shiftOptions(), ...data.shifts])], shift, NOT_RECORDED),
         route: (route || "").trim(),
         planDep: parseTime(planDep),
         actDep: parseTime(actDep),
@@ -163,7 +174,9 @@
     const dockMinutes = split.reduce((sum, row) => sum + row.dock, 0);
     const withDep = rows.filter((row) => row.dep !== null);
     const rate = total ? late.length / total : null;
-    const target = parseNumber(state.target) / 100;
+    // The target typed wins, else the profile's.
+    const own = typedTarget() ? null : profileTarget();
+    const target = own === null ? parseNumber(state.target) / 100 : own / 100;
 
     const group = (items, keyOf) => {
       const map = new Map();
@@ -201,8 +214,9 @@
     const withRate = (items) => items.map((item) => ({ ...item, value: item.late / item.routes }));
     const hours = withRate(group(rows.filter((row) => row.planDep), (row) => `${row.planDep.slice(0, 2)}:00`))
       .sort((a, b) => a.key.localeCompare(b.key));
+    const order = shiftOptions();
     const shifts = withRate(group(rows, (row) => row.shift || NOT_RECORDED))
-      .sort((a, b) => (data.shifts.indexOf(a.key) + 1 || 99) - (data.shifts.indexOf(b.key) + 1 || 99));
+      .sort((a, b) => (order.indexOf(a.key) + 1 || 99) - (order.indexOf(b.key) + 1 || 99));
     const worstHour = hours.filter((item) => item.routes >= 3 && item.late).sort((a, b) => b.value - a.value)[0];
 
     const buckets = delayBands(arrGrace).map(([low, high]) => ({
@@ -346,7 +360,20 @@
     return rows.length < 2 ? null : { source: data.tool, metric: tx("Late routes"), unit: capital(tx("routes")), rows, skipped: result.rows.filter((row) => !row.date).length };
   };
 
+  // An empty target box shows the profile's target, and a note says where it comes from.
+  const syncTarget = () => {
+    if (!targetInput) return;
+    const own = typedTarget() ? null : profileTarget();
+    const digits = own === null ? 0 : Math.min(2, (String(own).split(".")[1] || "").length);
+    targetInput.placeholder = own === null ? targetPlaceholder : num(own, digits);
+    if (!targetNote) return;
+    targetNote.hidden = own === null;
+    if (own === null) targetInput.removeAttribute("aria-describedby");
+    else targetInput.setAttribute("aria-describedby", targetNote.id);
+  };
+
   const renderResults = () => {
+    syncTarget();
     results.replaceChildren();
     results.hidden = !state.rows.length;
     if (!state.rows.length) return;
@@ -589,6 +616,27 @@
     flash(entryStatus, tx("Added {route}: {n} min at arrival.", { route: row.route || tx("route"), n: signed(arr) }));
     form.route.focus();
   });
+
+  // The shifts of the profile replace the page's list; a shift chosen before stays, so the next route does not jump.
+  const shiftSelect = entry.elements.shift;
+  let chosenShift = "";
+  shiftSelect?.addEventListener("change", () => { chosenShift = shiftSelect.value; });
+  const fillShifts = () => {
+    if (!Workplace || !shiftSelect) return;
+    Workplace.fillSelect(shiftSelect, shiftOptions(), chosenShift);
+  };
+  fillShifts();
+  // The note goes as soon as a target is typed, without waiting for the results.
+  targetInput?.addEventListener("input", syncTarget);
+  // The profile changed here or in another tab.
+  const profileChanged = () => {
+    fillShifts();
+    book.render();
+  };
+  if (Workplace) {
+    window.addEventListener("workplace:changed", profileChanged);
+    window.addEventListener("storage", (event) => { if (event.key === Workplace.KEY || event.key === null) profileChanged(); });
+  }
 
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
   book.render();

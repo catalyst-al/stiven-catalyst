@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Wertstromanalyse
+seo_title: "Wertstromanalyse mit Durchlaufzeit-Treppe, Taktzeit und Soll-Zustand"
+description: "Einen Fluss vom Lieferanten zum Kunden abbilden: Bestände als Zeit, Durchlaufzeit, Flussgrad, Taktzeit, Engpass und ein Soll-Zustand mit Kaizen-Blitzen."
+activeNav: /de/tools.html
+permalink: /de/tools/value-stream-map/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Lean</p>
+  <h1>Wertstromanalyse</h1>
+  <p class="lede">Zeichnen Sie den Fluss eines Produkts oder einer Dienstleistung vom Lieferanten bis zum Kunden: jeden Schritt mit Zykluszeit, Rüstzeit, Verfügbarkeit und Ausbeute, und die Teile, die zwischen den Schritten warten. Das Tool rechnet die Bestände in Zeit um, zeichnet die Karte mit der Durchlaufzeit-Treppe, zeigt, wie wenig der Durchlaufzeit Arbeit ist, nennt den Schritt über der Taktzeit und lässt Sie den Soll-Zustand mit einem Kaizen-Blitz für jede Änderung zeichnen.</p>
+</section>
+
+{% set cfg = de.valueStreamMap %}
+{% include "partials/value-stream-map.njk" %}

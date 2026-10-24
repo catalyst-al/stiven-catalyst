@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Process Lab
+seo_title: "Process capability and hypothesis tests: I-MR chart, Cp/Cpk, before/after and sample size"
+description: "Paste your measurements: I-MR chart with Nelson rules, Cp/Cpk/Pp/Ppk, PPM and normality, before/after tests and sample size. In plain words, in your browser."
+activeNav: /tools.html
+permalink: /tools/process-lab/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Six Sigma</p>
+  <h1>Process Lab</h1>
+  <p class="lede">Paste a column of measurements and see whether the process is stable, whether it fits the specification, and whether your change made a real difference or only noise. Every number comes with a sentence that says what it means.</p>
+</section>
+
+{% set cfg = processLab %}
+{% include "partials/process-lab.njk" %}

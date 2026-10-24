@@ -1,0 +1,178 @@
+{#- The 5S Audit: a scored walk of one area in 5S, 6S or 8S, a log per area, the red tag register; five-s-audit.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-five-s-audit>
+    <div class="dl-box fs-setup">
+      <fieldset>
+        <legend class="kicker">1 · {{ "Area and scope" | t(lang) }}</legend>
+        <div class="fs-scope" role="group" aria-label="{{ 'Scope' | t(lang) }}">
+          {%- for name, list in cfg.scopes %}
+          <button type="button" data-scope-value="{{ name }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ name }}</button>
+          {%- endfor %}
+        </div>
+        <p class="form-note fs-scope-note">{{ "5S runs from Sort to Sustain. 6S adds Safety; 8S adds Safety, Security and Satisfaction." | t(lang) }}</p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="fs-template">{{ "Checklist" | t(lang) }}</label>
+            <select id="fs-template">
+              {%- for key, tpl in cfg.templates %}
+              <option value="{{ key }}">{{ tpl.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field" hidden>
+            <label for="fs-area-select">{{ "Area" | t(lang) }}</label>
+            <select id="fs-area-select"></select>
+          </div>
+          <div class="field">
+            <label for="fs-area">{{ "Area" | t(lang) }}</label>
+            <input id="fs-area" list="fs-area-list" placeholder="{{ cfg.text.areaPlaceholder }}" autocomplete="off">
+            <datalist id="fs-area-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="fs-auditor">{{ "Auditor" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="fs-auditor" placeholder="{{ cfg.text.auditorPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="fs-date">{{ "Date" | t(lang) }}</label>
+            <input id="fs-date" type="date">
+          </div>
+          <div class="field">
+            <label for="fs-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="fs-shift"></select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="dl-box fs-walk">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "Walk and score" | t(lang) }}</p>
+      </div>
+      <p class="form-note fs-progress" data-progress aria-live="polite"></p>
+      <details class="fs-levels">
+        <summary>{{ "The score scale" | t(lang) }}</summary>
+        <ol class="fs-level-list">
+          {%- for level in cfg.levels %}
+          <li><strong>{{ loop.index0 }}</strong> {{ level }}</li>
+          {%- endfor %}
+        </ol>
+      </details>
+      <div class="fs-questions" data-questions></div>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-save disabled>{{ "Save audit" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-add-actions disabled>{{ "Add findings to actions" | t(lang) }}</button>
+        <a class="button-ghost" href="{{ '/tools/action-tracker/' | local(lang) }}" data-tracker-link>{{ "Open the Action Tracker" | t(lang) }}</a>
+        <button class="button-ghost" type="button" data-reset>{{ "New audit" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-audit-status aria-live="polite"></p>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Audit log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table fs-log">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "Auditor" | t(lang) }}</th><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col">{{ "Scope" | t(lang) }}</th><th scope="col" class="num">{{ "Score" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ "No audits yet." | t(lang) }} {{ "Score the walk above and save it, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box fs-tags">
+      <form data-tag-form novalidate>
+        <fieldset>
+          <legend class="kicker">4 · {{ "Red tag register" | t(lang) }}</legend>
+          <p class="form-note">{{ "Sort in practice: every item that may not belong here gets a tag, a reason, a decision and an owner. The register shows which decisions are still waiting." | t(lang) }}</p>
+          <div class="dl-grid">
+            <div class="field dl-wide">
+              <label for="fs-tag-item">{{ "Item" | t(lang) }}</label>
+              <input id="fs-tag-item" name="tagItem" placeholder="{{ cfg.text.itemPlaceholder }}" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="fs-tag-area">{{ "Area" | t(lang) }}</label>
+              <input id="fs-tag-area" name="tagArea" list="fs-area-list" placeholder="{{ cfg.text.areaPlaceholder }}" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="fs-tag-date">{{ "Tagged on" | t(lang) }}</label>
+              <input id="fs-tag-date" name="tagDate" type="date">
+            </div>
+            <div class="field">
+              <label for="fs-tag-reason">{{ "Reason" | t(lang) }}</label>
+              <select id="fs-tag-reason" name="tagReason">
+                {%- for reason in cfg.reasons %}
+                <option>{{ reason }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="fs-tag-decision">{{ "Decision" | t(lang) }}</label>
+              <select id="fs-tag-decision" name="tagDecision">
+                {%- for decision in cfg.decisions %}
+                <option>{{ decision }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="fs-tag-owner">{{ "Owner" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="fs-tag-owner" name="tagOwner" placeholder="{{ cfg.text.ownerPlaceholder }}" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="fs-tag-due">{{ "Due date" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="fs-tag-due" name="tagDue" type="date">
+            </div>
+          </div>
+          <div class="tool-actions">
+            <button class="button-primary" type="submit">{{ "Add red tag" | t(lang) }}</button>
+            <p class="form-note" data-tag-status aria-live="polite"></p>
+          </div>
+        </fieldset>
+      </form>
+      <p class="form-note" data-tag-stats></p>
+      <div class="dl-table-wrap" tabindex="0" data-tag-wrap hidden>
+        <table class="dl-table fs-tag-table">
+          <thead>
+            <tr><th scope="col">{{ "Done" | t(lang) }}</th><th scope="col">{{ "Tagged on" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "Item" | t(lang) }}</th><th scope="col">{{ "Reason" | t(lang) }}</th><th scope="col">{{ "Decision" | t(lang) }}</th><th scope="col">{{ "Owner" | t(lang) }}</th><th scope="col">{{ "Due date" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-tags></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-tag-empty>{{ "No red tags yet." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-tag-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-tag-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-tag-clear>{{ "Clear red tags" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "A finding keeps coming back?" | t(lang) }}</strong> {{ "Take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}">5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results fs-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="five-s-audit-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/five-s-audit.js' | assetUrl }}" defer></script>

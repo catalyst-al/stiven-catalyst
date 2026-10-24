@@ -1,0 +1,118 @@
+{
+  "storageKey": "sc-daily-board",
+  "title": "Daily Board",
+  "shifts": ["Early", "Late", "Night"],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "letters": [
+    {
+      "key": "S",
+      "name": "Safety",
+      "sources": "Safety Cross, 5S Audit, or by hand",
+      "red": "An accident or a first-aid case that day.",
+      "amber": "A near miss, an unsafe condition, or a 5S audit below its target.",
+      "green": "A day without an incident, once the Safety Cross is in use."
+    },
+    {
+      "key": "Q",
+      "name": "Quality",
+      "sources": "Damage Control, Incomplete Control, Night Audit Log",
+      "red": "Damage, incomplete orders or audit exceptions above the target rate. Without a volume: a count clearly above the usual day.",
+      "amber": "Within 20 % of the target, or above the usual count.",
+      "green": "Nothing logged, or a rate under the target."
+    },
+    {
+      "key": "D",
+      "name": "Delivery",
+      "sources": "Delay Analyzer",
+      "red": "On-time routes below the target.",
+      "amber": "Within 5 points of the target. With only some routes logged, late routes above the usual.",
+      "green": "On time at or above the target."
+    },
+    {
+      "key": "C",
+      "name": "Cost",
+      "sources": "By hand",
+      "red": "What you decide, for example overtime above the daily target or unplanned agency staff.",
+      "amber": "Overtime or extra cost that stayed inside the target but needs a word.",
+      "green": "A day inside the plan."
+    },
+    {
+      "key": "P",
+      "name": "People",
+      "sources": "By hand",
+      "red": "Absences above the target, or a shift that ran short-staffed.",
+      "amber": "An absence covered, a new starter, a training gap.",
+      "green": "Everyone there, everyone trained for the work."
+    }
+  ],
+  "states": { "green": "Green", "amber": "Amber", "red": "Red" },
+  "targets": [
+    { "key": "damage", "label": "Damage rate", "unit": "%", "placeholder": "e.g. 0.3", "default": 0.3 },
+    { "key": "incomplete", "label": "Incomplete rate", "unit": "%", "placeholder": "e.g. 0.5", "default": 0.5 },
+    { "key": "ontime", "label": "On-time routes", "unit": "%", "placeholder": "e.g. 95", "default": 95 },
+    { "key": "fives", "label": "5S score", "unit": "%", "placeholder": "e.g. 80", "default": 80 },
+    { "key": "cost", "label": "Overtime per day", "unit": "h", "placeholder": "e.g. 8" },
+    { "key": "absence", "label": "Absence", "unit": "%", "placeholder": "e.g. 5" }
+  ],
+  "safetyMessages": [
+    "Two hands for the last metres: carry, never throw.",
+    "A pallet truck stops at every aisle end. A person is faster than you think.",
+    "Wet floor: clean it or sign it before you walk on.",
+    "Report the near miss today. Tomorrow it is an accident.",
+    "Heavy low, light high, nothing over the edge.",
+    "Look up before you lift: beams, sprinklers, cables.",
+    "A door that stays open in the rain is a wet floor in ten minutes.",
+    "Secure the load before the doors close, not after.",
+    "Gloves on for broken glass, torn metal and cold rooms.",
+    "If the equipment is damaged, take it out of use. Today, not after the shift.",
+    "Walk, do not run. The three seconds you save are not worth a fall.",
+    "The new starter does not know the shortcuts are dangerous. Tell them."
+  ],
+  "tips": [
+    ["One board, ten minutes, standing.", "The huddle is read, not typed. Open the board, go through the five letters, close with the actions."],
+    ["Red is a question, not a blame.", "A red day asks what happened and who owns the next step. It never asks whose fault it was."],
+    ["A red without an action is a lie.", "Every red day gets an action with an owner and a date in the Action Tracker, or the board decorates the wall."],
+    ["Let the logs do the work.", "Safety, Quality and Delivery fill themselves from Damage Control, Incomplete Control, Delay Analyzer and the Safety Cross in this browser. Type only Cost and People."],
+    ["Set the targets once.", "The workplace profile holds the site, the shifts, the areas with their owners and the targets. Every tool reads them."]
+  ],
+  "example": {
+    "note": "This is an example month typed by hand, so you can see what the board shows. On a real board, Safety, Quality and Delivery fill themselves from the logs of the other tools in this browser.",
+    "days": 35,
+    "fill": ["S", "Q", "D", "C", "P"],
+    "profile": {
+      "site": "Frankfurt hub · Outbound",
+      "shifts": ["Early", "Late", "Night"],
+      "areas": [
+        { "name": "Dock 1", "owner": "Anna" },
+        { "name": "Picking", "owner": "Besnik" },
+        { "name": "Packing", "owner": "Clara" }
+      ],
+      "targets": { "damage": 0.3, "incomplete": 0.5, "ontime": 95, "fives": 80, "cost": 8, "absence": 5 }
+    },
+    "rows": [
+      { "ago": 1, "shift": "Late", "letter": "Q", "state": "red", "note": "Damage 0.5 %: 14 crushed units at loading, target 0.3 %" },
+      { "ago": 1, "shift": "Early", "letter": "D", "state": "amber", "note": "On time 93 %: two routes left dock 3 late" },
+      { "ago": 1, "shift": "Early", "letter": "P", "state": "amber", "note": "Two absent in Picking, one agency worker confirmed" },
+      { "ago": 2, "shift": "Late", "letter": "C", "state": "amber", "note": "Overtime 9 h in Packing to clear the backlog" },
+      { "ago": 3, "shift": "Early", "letter": "S", "state": "amber", "note": "Near miss at dock 2: pallet truck and pedestrian, no injury" },
+      { "ago": 5, "shift": "Late", "letter": "Q", "state": "amber", "note": "Incomplete 0.45 %: three orders left without the second parcel" },
+      { "ago": 6, "shift": "Early", "letter": "D", "state": "red", "note": "On time 88 %: snow on the A5, four routes late" },
+      { "ago": 8, "shift": "Late", "letter": "C", "state": "red", "note": "Overtime 14 h: the late shift stayed for the carrier's second collection" },
+      { "ago": 8, "shift": "Night", "letter": "P", "state": "amber", "note": "One absent, no cover on the night shift" },
+      { "ago": 9, "shift": "Early", "letter": "C", "state": "amber", "note": "Two agency loaders unplanned" },
+      { "ago": 12, "shift": "Late", "letter": "Q", "state": "amber", "note": "Damage 0.26 %, close to the target" },
+      { "ago": 13, "shift": "Late", "letter": "P", "state": "red", "note": "Four absent in Loading, the late shift ran two people short" },
+      { "ago": 15, "shift": "Early", "letter": "S", "state": "amber", "note": "Unsafe condition: wet floor at the inbound door, cleaned and signed" },
+      { "ago": 16, "shift": "Early", "letter": "D", "state": "amber", "note": "On time 94 %: one trailer arrived late" },
+      { "ago": 19, "shift": "Late", "letter": "C", "state": "amber", "note": "Overtime 8 h on the peak day" },
+      { "ago": 22, "shift": "Late", "letter": "Q", "state": "red", "note": "Damage 0.6 %: a collapsed pallet wall in trailer 7" },
+      { "ago": 23, "shift": "Early", "letter": "D", "state": "amber", "note": "On time 93 %" },
+      { "ago": 26, "shift": "Early", "letter": "P", "state": "amber", "note": "New starter in Packing, trained by Clara" },
+      { "ago": 27, "shift": "Late", "letter": "S", "state": "red", "note": "First-aid case: cut hand at the packing station, plaster, back at work" },
+      { "ago": 29, "shift": "Early", "letter": "C", "state": "red", "note": "Overtime 12 h, two people on Saturday" },
+      { "ago": 30, "shift": "Late", "letter": "Q", "state": "amber", "note": "Incomplete 0.4 %" },
+      { "ago": 33, "shift": "Early", "letter": "D", "state": "red", "note": "On time 87 %: dock door 4 broken, loading late" },
+      { "ago": 34, "shift": "Night", "letter": "P", "state": "amber", "note": "One absent" }
+    ]
+  }
+}

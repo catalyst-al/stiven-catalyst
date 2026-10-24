@@ -1,0 +1,214 @@
+{
+  "storageKey": "sc-actions",
+  "statuses": {
+    "open": "Open",
+    "doing": "In progress",
+    "done": "Done",
+    "verified": "Verified"
+  },
+  "priorities": {
+    "High": "High",
+    "Medium": "Medium",
+    "Low": "Low"
+  },
+  "sources": {
+    "manual": "Typed here",
+    "five-whys": "5 Whys",
+    "five-s-audit": "5S Audit",
+    "daily-board": "Daily Board",
+    "a3-report": "A3 Report",
+    "fishbone": "Fishbone",
+    "kaizen-board": "Kaizen Board",
+    "process-lab": "Process Lab",
+    "fmea": "FMEA",
+    "oee": "OEE",
+    "skills-matrix": "Skills Matrix",
+    "safety-cross": "Safety Cross",
+    "time-study": "Time Study",
+    "value-stream-map": "Value Stream Map",
+    "standard-work": "Standard Work",
+    "hotel-kpis": "Hotel KPIs",
+    "gemba-walk": "Gemba Walk",
+    "shift-handover": "Shift Handover",
+    "pareto": "Pareto 80/20",
+    "sigma-control-chart": "Control chart",
+    "cx-control-tower": "CX Control Tower",
+    "kpi-diagnostic": "KPI Diagnostic",
+    "damage-control": "Damage Control",
+    "incomplete-control": "Incomplete Control",
+    "delay-analyzer": "Delay Analyzer",
+    "night-audit": "Night Audit Log"
+  },
+  "tips": [
+    [
+      "One list, every tool.",
+      "A countermeasure from 5 Whys, a finding from the 5S audit, a signal from the control chart: they all land here with an owner and a date."
+    ],
+    [
+      "An action has three things.",
+      "A verb, a name and a date. “Improve loading” is a wish; “Anna posts the stacking picture at dock 2 by Friday” is an action."
+    ],
+    [
+      "Done is not verified.",
+      "Done says the change was made. Verified says the number moved and stayed. Only verified closes the loop."
+    ],
+    [
+      "Review it weekly, in ten minutes.",
+      "Overdue first, then due this week, then what was verified. The list is the agenda."
+    ],
+    [
+      "Fewer, finished.",
+      "Ten open actions nobody closes are worse than three that get verified. Drop or merge what has gone stale."
+    ]
+  ],
+  "verdicts": {
+    "clear": "Nothing overdue. The list is under control.",
+    "some": "{n} overdue. Decide today: a new date, a new owner, or drop it.",
+    "many": "{n} overdue. The list has stopped being a plan. Close, merge or drop until what is left is real."
+  },
+  "review": {
+    "title": "Weekly action review",
+    "overdue": "Overdue",
+    "week": "Due this week",
+    "verified": "Verified since last week",
+    "none": "none"
+  },
+  "example": [
+    {
+      "title": "Stacking rule as one picture at dock 2",
+      "detail": "Heavy boxes below, fragile on top, max 1.6 m. Laminated A3 at the loading bay.",
+      "owner": "Anna",
+      "offset": -2,
+      "source": "five-whys",
+      "check": "Crushed parcels at loading below 10 a week for four weeks",
+      "area": "Dock 2",
+      "priority": "High",
+      "status": "doing",
+      "created": -12
+    },
+    {
+      "title": "Mark the floor positions of the three cages at Picking B",
+      "owner": "Besnik",
+      "offset": 3,
+      "source": "five-s-audit",
+      "check": "Audit score Set in order ≥ 3 at the next walk",
+      "area": "Picking B",
+      "priority": "Medium",
+      "status": "open",
+      "created": -5
+    },
+    {
+      "title": "Replace the broken scanner holder at pack station 4",
+      "owner": "Clara",
+      "offset": -6,
+      "source": "five-s-audit",
+      "area": "Packing",
+      "priority": "Medium",
+      "status": "open",
+      "created": -14
+    },
+    {
+      "title": "Dispatcher owns the dock plan from 5:30",
+      "detail": "Shift lead confirms at 6:00 in the briefing.",
+      "owner": "Driton",
+      "offset": -20,
+      "source": "five-whys",
+      "check": "Departures within 5 minutes of plan, five days in a row",
+      "area": "Dock",
+      "priority": "High",
+      "status": "done",
+      "created": -34,
+      "closed": -21
+    },
+    {
+      "title": "Re-count the volume of week 41 in the damage log",
+      "owner": "Anna",
+      "offset": 1,
+      "source": "sigma-control-chart",
+      "area": "Outbound",
+      "priority": "Low",
+      "status": "open",
+      "created": -3
+    },
+    {
+      "title": "Toolbox talk: forklift and pedestrian lanes",
+      "owner": "Emir",
+      "offset": 2,
+      "source": "safety-cross",
+      "check": "Zero near misses at the crossing for a month",
+      "area": "Receiving",
+      "priority": "High",
+      "status": "open",
+      "created": -4
+    },
+    {
+      "title": "Train Lina on returns processing",
+      "owner": "Besnik",
+      "offset": 14,
+      "source": "skills-matrix",
+      "check": "Lina at level 3, signed by Besnik",
+      "area": "Returns",
+      "priority": "Medium",
+      "status": "open",
+      "created": -1
+    },
+    {
+      "title": "Move the label printer next to the pack bench",
+      "owner": "Clara",
+      "offset": -27,
+      "source": "kaizen-board",
+      "check": "Walking per order from 22 to under 8 steps",
+      "area": "Packing",
+      "priority": "Medium",
+      "status": "verified",
+      "created": -41,
+      "closed": -26,
+      "result": "Measured 6 steps per order. Kept."
+    },
+    {
+      "title": "Weekly call with the carrier on late pick-ups",
+      "owner": "Driton",
+      "offset": -9,
+      "source": "cx-control-tower",
+      "area": "Dispatch",
+      "priority": "Medium",
+      "status": "done",
+      "created": -23,
+      "closed": -8
+    },
+    {
+      "title": "Night audit: check declined cards before 23:00",
+      "owner": "Mira",
+      "offset": 5,
+      "source": "shift-handover",
+      "check": "No open balance at check-out for two weeks",
+      "area": "Front office",
+      "priority": "High",
+      "status": "doing",
+      "created": -6
+    },
+    {
+      "title": "Fix the gap under door 7 that lets rain in",
+      "owner": "Facilities",
+      "offset": -15,
+      "source": "gemba-walk",
+      "area": "Dock",
+      "priority": "Medium",
+      "status": "open",
+      "created": -29
+    },
+    {
+      "title": "Define the max height for pallets going to the sorter",
+      "owner": "Emir",
+      "offset": -33,
+      "source": "fmea",
+      "check": "No sorter jam caused by height in a month",
+      "area": "Sorter",
+      "priority": "High",
+      "status": "verified",
+      "created": -50,
+      "closed": -31,
+      "result": "One month without a height jam."
+    }
+  ]
+}

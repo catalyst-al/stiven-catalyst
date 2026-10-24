@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Process Lab", "type": "Six Sigma", "time": "10 min", "summary": "Paste a column of measurements and see an I-MR chart with the Nelson rules, Cp, Cpk and PPM against your specification, and whether a before/after change is real or noise. Every number in plain words.", "url": "/tools/process-lab/", "cta": "Open the lab" },
+    "de": { "name": "Prozesslabor", "type": "Six Sigma", "time": "10 min", "summary": "Fügen Sie eine Spalte mit Messwerten ein und sehen Sie eine I-MR-Karte mit den Nelson-Regeln, Cp, Cpk und PPM gegen Ihre Spezifikation und ob eine Vorher/Nachher-Änderung echt ist oder Rauschen. Jede Zahl in klaren Worten.", "url": "/de/tools/process-lab/", "cta": "Labor öffnen" },
+    "sq": { "name": "Laboratori i procesit", "type": "Six Sigma", "time": "10 min", "summary": "Ngjit një kolonë me matje dhe shiko një kartë I-MR me rregullat Nelson, Cp, Cpk dhe PPM kundrejt specifikimit, dhe nëse një ndryshim para/pas është real apo zhurmë. Çdo numër me fjalë të qarta.", "url": "/sq/tools/process-lab/", "cta": "Hap laboratorin" }
+  },
+  "routine": { "when": "Before and after a change", "do": "Measure twenty values before you change the process and twenty after, then let the test say whether the change is real.", "de": { "when": "Vor und nach einer Änderung", "do": "Messen Sie zwanzig Werte, bevor Sie den Prozess ändern, und zwanzig danach, dann lassen Sie den Test sagen, ob die Änderung echt ist." }, "sq": { "when": "Para dhe pas një ndryshimi", "do": "Mat njëzet vlera para se të ndryshosh procesin dhe njëzet pas, pastaj le të thotë testi nëse ndryshimi është real." } },
+  "recipe": "example"
+}

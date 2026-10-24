@@ -58,13 +58,30 @@ const RECIPES = {
   "cv-builder": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-stage] > :first-child" },
   "ats-cv": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-stage] > :first-child" },
   "cover-letter": { act: (page) => clickIfVisible(page, '[data-act="example"]'), target: "[data-stage] > :first-child" },
+  "action-tracker": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "daily-board": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "five-s-audit": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "safety-cross": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "a3-report": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "kaizen-board": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "skills-matrix": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "oee": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "hotel-kpis": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "fishbone": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "fmea": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "process-lab": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "time-study": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "value-stream-map": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "standard-work": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "gemba-walk": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).
 const clickIfVisible = async (page, selector) => { const button = await page.$(selector); if (button && await button.isVisible()) await button.click(); };
 
 const chromium = await loadChromium();
-const browser = await chromium.launch();
+// CHROMIUM_PATH=/path/to/chromium uses a browser already on the machine instead of the one Playwright downloads.
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 let made = 0;
 for (const lang of (process.env.ONLY ? [process.env.ONLY] : Object.keys(LANGS))) {
   const context = await browser.newContext({ viewport: { width: 1180, height: 900 }, deviceScaleFactor: 1 });

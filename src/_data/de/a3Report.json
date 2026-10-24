@@ -1,0 +1,103 @@
+{
+  "storageKey": "sc-a3-report-de",
+  "unit": "%",
+  "statuses": ["Offen", "In Arbeit", "Erledigt", "Bestätigt"],
+  "fields": {
+    "title": "z. B. Schäden im Warenausgang unter 0,30 %",
+    "owner": "z. B. Anna K., Area Managerin Warenausgang",
+    "area": "z. B. Rampe Warenausgang, Hub Frankfurt",
+    "baseline": "z. B. 0,57",
+    "unit": "z. B. % beschädigte Einheiten",
+    "targetValue": "z. B. 0,30",
+    "how": "z. B. Schadensquote pro Woche aus dem Schadensprotokoll, auf der Regelkarte",
+    "result": "z. B. 0,31 % in den zwei Wochen nach der Einführung, zehn Tage unter der alten Mittellinie",
+    "latest": "z. B. 0,31",
+    "countermeasure": "Eine Änderung am Prozess, keine Erinnerung",
+    "cmOwner": "Wer",
+    "step": "Was passiert, in dieser Reihenfolge"
+  },
+  "boxes": {
+    "background": {
+      "title": "Hintergrund",
+      "question": "Warum ist dieses Problem für den Kunden und das Unternehmen wichtig, und warum jetzt?",
+      "placeholder": "Zwei oder drei Sätze: der Zusammenhang, wer betroffen ist, warum jetzt."
+    },
+    "current": {
+      "title": "Ist-Zustand",
+      "question": "Was, wo, seit wann, wie viel? Fakten und Zahlen, noch keine Ursachen und keine Lösungen.",
+      "placeholder": "z. B. In den letzten drei Wochen verließen 0,57 % der Einheiten im Warenausgang das Hub beschädigt (104 von 18.400 in der letzten Woche), zugesagt waren 0,30 %. Gutschriften kosten etwa 1.150 € pro Woche."
+    },
+    "target": {
+      "title": "Soll-Zustand",
+      "question": "Wie sieht gut aus, womit gemessen, bis wann, und was darf nicht schlechter werden?",
+      "placeholder": "z. B. 0,30 % oder weniger innerhalb von acht Wochen, ohne längere Ladezeiten."
+    },
+    "cause": {
+      "title": "Ursachenanalyse",
+      "question": "Warum gibt es die Lücke? Gehen Sie an den Ort des Geschehens und fragen Sie so lange warum, bis Sie etwas im Prozess erreichen, das Sie ändern können.",
+      "placeholder": "Die Kette der Warum-Fragen und am Ende die Grundursache. Eine Person ist nie die Grundursache: Fragen Sie, warum es möglich war."
+    },
+    "countermeasures": {
+      "title": "Maßnahmen",
+      "question": "Welche Änderung am Prozess beseitigt die Grundursache? Je ein Verantwortlicher und ein Termin."
+    },
+    "plan": {
+      "title": "Umsetzung",
+      "question": "Wer macht was, in welcher Reihenfolge, bis wann? Erst Pilot, dann Ausrollen."
+    },
+    "followUp": {
+      "title": "Wirksamkeitsprüfung",
+      "question": "Wie und wann prüfen Sie, dass der Soll-Zustand hält, und was haben Sie gefunden?"
+    }
+  },
+  "checks": {
+    "number": ["Das Problem hat eine Zahl", "Schreiben Sie eine Zahl in den Ist-Zustand"],
+    "time": ["Das Problem hat einen Zeitraum", "Sagen Sie, seit wann oder für welche Wochen"],
+    "targetNumber": ["Das Ziel hat eine Zahl", "Nennen Sie das Ziel als Zahl"],
+    "targetDate": ["Das Ziel hat einen Termin", "Sagen Sie, bis wann das Ziel gilt"],
+    "cause": ["Die Grundursache liegt im Prozess", "Nennen Sie eine Grundursache im Prozess, keine Person"],
+    "owners": ["Jede Maßnahme hat einen Verantwortlichen", "Geben Sie jeder Maßnahme einen Verantwortlichen"],
+    "dates": ["Jede Maßnahme hat einen Termin", "Geben Sie jeder Maßnahme einen Termin"],
+    "measure": ["Die Wirksamkeitsprüfung nennt eine Kennzahl", "Sagen Sie, welche Zahl Sie prüfen, und wo"]
+  },
+  "timeWords": ["woche", "wochen", "kw", "monat", "monate", "monaten", "tag", "tage", "tagen", "seit", "bis", "quartal", "jahr", "schicht", "schichten", "januar", "februar", "märz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember", "jan", "feb", "mär", "apr", "jun", "jul", "aug", "sep", "sept", "okt", "nov", "dez", "heute", "gestern", "letzten", "letzte"],
+  "blameWords": ["vergessen", "vergisst", "unachtsam", "faul", "egal", "menschliches versagen", "bedienfehler", "nicht aufgepasst", "einstellung", "schuld", "nachlässig", "fahrlässig", "motivation", "unmotiviert"],
+  "measureWords": ["quote", "anteil", "pro", "anzahl", "minuten", "einheiten", "aufträge", "pakete", "touren", "beschwerden", "gutschriften", "regelkarte", "protokoll", "audit", "kennzahl", "kpi", "dpmo", "sigma"],
+  "tips": [
+    ["Eine Seite zwingt zur Klarheit.", "Wenn es nicht passt, haben Sie es noch nicht verstanden. Streichen Sie Wörter, nicht Fakten."],
+    ["Der Ist-Zustand sind Fakten und Zahlen.", "Was, wo, seit wann, wie viel. Keine Meinungen und keine Lösungen in Feld 2; die gehören in die Felder 4 und 5."],
+    ["Maßnahmen sind Prozessänderungen.", "Eine Erinnerung, eine Schulung oder eine Abmahnung ist keine Maßnahme. Ändern Sie, was die Arbeit möglich macht."],
+    ["Die Wirksamkeitsprüfung ist der Punkt.", "Vereinbaren Sie vor dem Start, wie und wann Sie prüfen. Ein A3 ohne Feld 7 ist ein Plan, kein Ergebnis."]
+  ],
+  "example": {
+    "title": "Schäden im Warenausgang unter 0,30 %",
+    "owner": "Anna K., Area Managerin Warenausgang",
+    "date": -70,
+    "area": "Rampe Warenausgang, Hub Frankfurt",
+    "background": "Das Hub verschickt etwa 18.400 Einheiten pro Woche. Kunden beschweren sich über gequetschte Pakete, und die Schadensquote ist fast doppelt so hoch wie im Vertrag zugesagt. Die Gutschriften und die Beschwerden landen jeden Montag auf dem Tisch der Area Managerin.",
+    "current": "In den letzten drei Wochen verließen 0,57 % der Einheiten im Warenausgang das Hub beschädigt (104 von 18.400 in der letzten Woche), zugesagt waren dem Kunden 0,30 %. Gutschriften kosten etwa 1.150 € pro Woche. Pareto des Schadensprotokolls: Stapeln 56 %, Ladungssicherung 14 %, Handhabung 11 %; drei Ursachen tragen 81 %. Die Schäden pro 1.000 Einheiten sind in den Spitzen-Ladeslots 2,4-mal so hoch wie in den übrigen.",
+    "baseline": "0,57",
+    "unit": "% beschädigte Einheiten",
+    "target": "0,30 % oder weniger innerhalb von acht Wochen, ohne längere Ladezeiten: Das Ladezeit-Ziel bleibt bei 38 Minuten pro Tour.",
+    "targetValue": "0,30",
+    "targetBy": -14,
+    "rootCause": "Warum sind die Schäden hoch? Pakete werden im Fahrzeug gequetscht.\nWarum? Schwere Pakete liegen auf leichten.\nWarum? In der späten Welle bauen die Verlader die Wände schnell und füllen Lücken mit dem, was gerade da ist.\nWarum? An der Rampe gibt es keine Stapelregel, und das Ladezeit-Ziel gewinnt gegen die Stapelreihenfolge.\nWarum? Der Standard wurde nie aufgeschrieben: Jeder soll wissen, wie man stapelt.\nGrundursache: kein sichtbarer Stapelstandard an der Rampe und ein Ladezeit-Ziel, das Tempo über eine stabile Wand stellt.",
+    "countermeasures": [
+      { "text": "Ein Stapelbild an jedem Tor: schwer unten, zerbrechlich oben, keine Lücken", "owner": "Anna K. (Schichtleitung Früh)", "due": -56, "status": "Bestätigt" },
+      { "text": "Bodenzonen im Fahrzeug für schwere Pakete, markiert am Boden und im Ladeplan", "owner": "Besnik H. (Teamleitung Verladung)", "due": -49, "status": "Erledigt" },
+      { "text": "Sperrstangen nach der letzten Wand, mit Foto vor dem Schließen der Türen", "owner": "Marco P. (Fahrerkoordination)", "due": -49, "status": "Erledigt" },
+      { "text": "Zehn Minuten mehr für die Spitzen-Ladeslots im Plan", "owner": "Anna K. (Area Managerin)", "due": -42, "status": "Bestätigt" }
+    ],
+    "plan": [
+      { "step": "Pilot an den Toren 1 bis 3, Spätschicht", "date": -63 },
+      { "step": "Beide Schichten am Stapelbild schulen: 15 Minuten im Briefing", "date": -56 },
+      { "step": "Ausrollen auf alle Tore", "date": -42 },
+      { "step": "Tägliche p-Karte der Schäden an der Rampe; ein Signal öffnet 5 Whys innerhalb von 24 Stunden", "date": -35 },
+      { "step": "Übergabe an den Leiter Warenausgang als Standard", "date": -7 }
+    ],
+    "how": "Schadensquote pro Woche aus dem Schadensprotokoll (beschädigte Einheiten ÷ versendete Einheiten) auf der Regelkarte; Ladezeit pro Tour aus dem Tourenplan.",
+    "checkDate": -7,
+    "result": "Die Schäden sanken von 0,57 % auf 0,31 % (62 von 20.000 Einheiten in den zwei Wochen nach dem Ausrollen), zehn Tage hintereinander unter der alten Mittellinie. Die Ladezeit stieg um zwei Minuten pro Tour: vom Sponsor akzeptiert. Gutschriften etwa 500 € pro Woche niedriger.",
+    "latest": "0,31"
+  }
+}

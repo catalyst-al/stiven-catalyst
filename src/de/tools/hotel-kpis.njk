@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Hotel-Kennzahlen
+seo_title: "Hotel-Kennzahlen: Auslastung, ADR und RevPAR gegen Budget, mit Prognose und Morgenbericht"
+description: "Ein privates Kennzahlen-Protokoll fürs Hotel: Auslastung, ADR und RevPAR gegen Budget, Monatsprognose, Wochentage, No-Shows, Zimmer außer Betrieb, Beschwerden."
+activeNav: /de/tools.html
+permalink: /de/tools/hotel-kpis/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Hotel</p>
+  <h1>Hotel-Kennzahlen</h1>
+  <p class="lede">Erfassen Sie für jede Nacht verkaufte Zimmer, Logisumsatz, No-Shows, Zimmer außer Betrieb und Beschwerden, oder fügen Sie sie aus dem PMS-Export ein. Sie sehen Auslastung, ADR und RevPAR seit Monatsbeginn gegen das Budget, die Prognose für den Monat, das Muster der Wochentage, den verlorenen Umsatz und die Kennzahl, die Sie zuerst angehen sollten, fertig zum Kopieren als Morgenbericht.</p>
+</section>
+
+{% set cfg = de.hotelKpis %}
+{% include "partials/hotel-kpis.njk" %}

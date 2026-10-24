@@ -1,0 +1,93 @@
+/* ===== Fishbone (js/fishbone.js) =====
+   The saved diagrams as a short list, the editor as one fieldset per category, the drawing as one SVG in the result.
+   A likely cause is told by its word, its dot and its weight; the blue only repeats it. Printed on one A4 page in
+   landscape: only the result goes on paper. */
+.fb-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fb-item { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius); }
+.fb-item[aria-current="true"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.fb-open { display: grid; gap: 2px; min-width: 0; padding: 4px 0; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.fb-open strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fb-open:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.fb-open:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+.fb-item-meta { color: var(--muted); font-size: 13px; }
+.fb-dup { padding: 6px 10px; font-size: 13px; }
+.fb-saved [data-list-status]:empty, .fb-editor [data-cause-status]:empty, .fb-set-note:empty { display: none; }
+.fb-set-note { margin: 0; }
+
+/* The editor: one fieldset per bone. */
+.fb-cats { display: grid; gap: 22px; min-width: 0; }
+.dl-box .fb-cat { display: grid; gap: 10px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.fb-cat-head { display: flex; width: 100%; align-items: baseline; justify-content: space-between; gap: 4px 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.fb-cat-name { font-size: 17px; font-weight: 800; }
+.fb-cat-count { color: var(--muted); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fb-causes { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: fb-cause; }
+.fb-cause { display: grid; gap: 6px; padding: 0 0 0 10px; border-left: 3px solid transparent; }
+.fb-cause.is-likely { border-left-color: var(--blue); }
+.fb-cause-main { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: center; gap: 8px; }
+.fb-text, .fb-new, .fb-sub-text {
+  width: 100%; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 15px;
+}
+.fb-sub-text { padding: 7px 10px; font-size: 14px; }
+.fb-text:focus-visible, .fb-new:focus-visible, .fb-sub-text:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.fb-cause.is-likely .fb-text { font-weight: 700; }
+.fb-likely {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--muted); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.fb-likely:hover { border-color: var(--blue); }
+.fb-likely[aria-pressed="true"] { border-color: var(--blue); color: var(--ink); background: color-mix(in srgb, var(--blue) 14%, transparent); }
+.fb-likely-dot { display: inline-block; width: 10px; height: 10px; flex: none; border: 2px solid var(--muted); border-radius: 50%; }
+.fb-likely[aria-pressed="true"] .fb-likely-dot, .fb-verify .fb-likely-dot { border-color: var(--blue); background: var(--blue); }
+.fb-votes { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; }
+.fb-vote { width: 36px; height: 38px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; font-size: 18px; font-weight: 800; cursor: pointer; }
+.fb-vote:disabled { color: var(--line); cursor: default; }
+.fb-vote:first-child { border-radius: 999px 0 0 999px; }
+.fb-vote:last-child { border-radius: 0 999px 999px 0; }
+.fb-vote-count { min-width: 2ch; text-align: center; font-weight: 800; font-variant-numeric: tabular-nums; }
+.fb-likely:focus-visible, .fb-vote:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.fb-subs { display: grid; gap: 6px; margin: 0; padding: 0 0 0 22px; list-style: none; }
+.fb-sub { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; position: relative; }
+.fb-sub::before { content: ""; position: absolute; left: -14px; top: 50%; width: 10px; border-top: 1px solid var(--muted); }
+.fb-add-sub { justify-self: start; margin-left: 22px; padding: 4px 10px; font-size: 13px; }
+.fb-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+
+/* The result. */
+.fb-results .result-head { margin-bottom: 14px; }
+.fb-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.fb-results .dl-stats { margin-bottom: 14px; }
+.fb-verify { display: flex; align-items: baseline; gap: 8px; margin: 0 0 14px; }
+.fb-figure { margin: 0 0 18px; }
+/* The drawing stands outside a .dl-panel, so it takes the chart colours of the panels here (06-tools.css). */
+.fb-figure {
+  --tr-bar: var(--blue); --tr-top: var(--danger); --tr-line: #f6f7f4; --tr-target: var(--warn);
+  --tr-grid: rgba(255, 255, 255, .22); --tr-text: #f6f7f4; --tr-muted: #a5b0b8;
+}
+[data-theme="light"] .fb-figure { --tr-line: #1b2330; --tr-grid: #cfd5dc; --tr-text: #1b2330; --tr-muted: #5f6870; }
+.fb-chart { min-width: 720px; }
+.fb-actions { display: grid; gap: 8px; }
+.fb-action-status { margin: 0; }
+.fb-action-status:empty { display: none; }
+
+@media (max-width: 600px) {
+  .fb-cause-main { grid-template-columns: minmax(0, 1fr) auto auto; }
+  .fb-cause-main .fb-text { grid-column: 1 / -1; }
+  .fb-cause-main .fb-likely { justify-self: start; }
+  .fb-item { grid-template-columns: minmax(0, 1fr) auto; }
+  .fb-item .fb-dup { grid-row: 2; justify-self: start; }
+  .fb-item .dl-remove { grid-row: 1; grid-column: 2; }
+}
+
+/* Paper: the result alone, the drawing across an A4 page in landscape. */
+@page fb-sheet { size: A4 landscape; margin: 10mm; }
+@media print {
+  html.fb-print main > :not(.fb-results) { display: none !important; }
+  html.fb-print .fb-results { page: fb-sheet; display: block !important; padding: 0; }
+  html.fb-print .dl-example-note, html.fb-print .fb-results .result-actions, html.fb-print .fb-results .ck-actions,
+  html.fb-print .fb-results .dl-details-summary, html.fb-print .fb-action-status { display: none !important; }
+  .fb-results .fb-chart { min-width: 0; width: 100%; max-height: 150mm; }
+  .fb-results .dl-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .fb-results .dl-stat { padding: 8px; }
+  .fb-figure, .fb-results .dl-panel { break-inside: avoid; }
+  .fb-chart text { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

@@ -58,6 +58,16 @@
           "Project charter",
           "#dm-charter",
           "at the bottom of this page"
+        ],
+        [
+          "A3 Report",
+          "/tools/a3-report/",
+          "to tell the problem, the target and the gap on one page"
+        ],
+        [
+          "Value Stream Map",
+          "/tools/value-stream-map/",
+          "to see the whole flow and where the time waits"
         ]
       ],
       "checklist": [
@@ -155,6 +165,16 @@
           "Sigma calculator",
           "/tools/sigma-control-chart/",
           "for DPMO and sigma level"
+        ],
+        [
+          "Process Lab",
+          "/tools/process-lab/",
+          "for the baseline, the control chart of a measurement and the capability"
+        ],
+        [
+          "Time Study",
+          "/tools/time-study/",
+          "to time the work on the floor against takt"
         ]
       ],
       "checklist": [
@@ -265,6 +285,16 @@
           "Control chart",
           "/tools/sigma-control-chart/",
           "to tell common from special causes"
+        ],
+        [
+          "Fishbone",
+          "/tools/fishbone/",
+          "to collect the causes by category before you test them"
+        ],
+        [
+          "Gemba Walk",
+          "/tools/gemba-walk/",
+          "to go and see where the standard is not kept"
         ]
       ],
       "checklist": [
@@ -362,6 +392,26 @@
           "Control chart",
           "/tools/sigma-control-chart/",
           "with limits from before the change"
+        ],
+        [
+          "FMEA",
+          "/tools/fmea/",
+          "to weigh the risks of the change before you make it"
+        ],
+        [
+          "Kaizen Board",
+          "/tools/kaizen-board/",
+          "to test the small ideas of the team, one at a time"
+        ],
+        [
+          "Process Lab",
+          "/tools/process-lab/",
+          "to show that the drop is real, not noise"
+        ],
+        [
+          "Action Tracker",
+          "/tools/action-tracker/",
+          "so every countermeasure has an owner, a date and a check"
         ]
       ],
       "checklist": [
@@ -459,6 +509,26 @@
           "Damage Control",
           "/tools/damage-control/",
           "floor check, weekly"
+        ],
+        [
+          "Standard Work",
+          "/tools/standard-work/",
+          "to write the new way down, with its key points"
+        ],
+        [
+          "Skills Matrix",
+          "/tools/skills-matrix/",
+          "to train the team on it and see who is still missing"
+        ],
+        [
+          "Daily Board",
+          "/tools/daily-board/",
+          "to see every morning whether it holds"
+        ],
+        [
+          "5S Audit",
+          "/tools/five-s-audit/",
+          "to audit the workplace that keeps the standard"
         ]
       ],
       "checklist": [

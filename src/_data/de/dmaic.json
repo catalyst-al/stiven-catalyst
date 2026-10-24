@@ -58,6 +58,16 @@
           "Projektauftrag",
           "#dm-charter",
           "unten auf dieser Seite"
+        ],
+        [
+          "A3-Report",
+          "/tools/a3-report/",
+          "um Problem, Ziel und Lücke auf einer Seite zu zeigen"
+        ],
+        [
+          "Wertstromanalyse",
+          "/tools/value-stream-map/",
+          "um den ganzen Fluss zu sehen und wo die Zeit wartet"
         ]
       ],
       "checklist": [
@@ -156,6 +166,16 @@
           "Sigma-Rechner",
           "/tools/sigma-control-chart/",
           "für DPMO und Sigma-Niveau"
+        ],
+        [
+          "Prozesslabor",
+          "/tools/process-lab/",
+          "für die Ausgangslage, die Regelkarte einer Messgröße und die Prozessfähigkeit"
+        ],
+        [
+          "Zeitstudie",
+          "/tools/time-study/",
+          "um die Arbeit vor Ort gegen den Takt zu messen"
         ]
       ],
       "checklist": [
@@ -267,6 +287,16 @@
           "Regelkarte",
           "/tools/sigma-control-chart/",
           "um allgemeine von besonderen Ursachen zu unterscheiden"
+        ],
+        [
+          "Fischgräte",
+          "/tools/fishbone/",
+          "um die Ursachen nach Kategorie zu sammeln, bevor Sie sie prüfen"
+        ],
+        [
+          "Gemba Walk",
+          "/tools/gemba-walk/",
+          "um vor Ort zu sehen, wo der Standard nicht eingehalten wird"
         ]
       ],
       "checklist": [
@@ -365,6 +395,26 @@
           "Regelkarte",
           "/tools/sigma-control-chart/",
           "mit Grenzen aus der Zeit vor der Änderung"
+        ],
+        [
+          "FMEA",
+          "/tools/fmea/",
+          "um die Risiken der Änderung abzuwägen, bevor Sie sie umsetzen"
+        ],
+        [
+          "Kaizen-Board",
+          "/tools/kaizen-board/",
+          "um die kleinen Ideen des Teams einzeln zu testen"
+        ],
+        [
+          "Prozesslabor",
+          "/tools/process-lab/",
+          "um zu zeigen, dass der Rückgang echt ist und kein Zufall"
+        ],
+        [
+          "Maßnahmenliste",
+          "/tools/action-tracker/",
+          "damit jede Maßnahme einen Verantwortlichen, einen Termin und einen Nachweis hat"
         ]
       ],
       "checklist": [
@@ -463,6 +513,26 @@
           "Schadenskontrolle",
           "/tools/damage-control/",
           "Check vor Ort, wöchentlich"
+        ],
+        [
+          "Standardarbeit",
+          "/tools/standard-work/",
+          "um den neuen Ablauf mit seinen Kernpunkten festzuhalten"
+        ],
+        [
+          "Qualifikationsmatrix",
+          "/tools/skills-matrix/",
+          "um das Team darauf zu schulen und zu sehen, wer noch fehlt"
+        ],
+        [
+          "Tagesboard",
+          "/tools/daily-board/",
+          "um jeden Morgen zu sehen, ob es hält"
+        ],
+        [
+          "5S-Audit",
+          "/tools/five-s-audit/",
+          "um den Arbeitsplatz zu auditieren, der den Standard trägt"
         ]
       ],
       "checklist": [

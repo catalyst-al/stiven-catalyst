@@ -29,7 +29,9 @@
       ],
       "tools": [
         ["Diagnostikimi i KPI-së", "/tools/kpi-diagnostic/", "për të kontrolluar nëse numri është i qartë për të gjithë"],
-        ["Karta e projektit", "#dm-charter", "në fund të kësaj faqeje"]
+        ["Karta e projektit", "#dm-charter", "në fund të kësaj faqeje"],
+        ["Raporti A3", "/tools/a3-report/", "për ta treguar problemin, objektivin dhe hendekun në një faqe"],
+        ["Harta e rrjedhës së vlerës", "/tools/value-stream-map/", "për ta parë gjithë rrjedhën dhe ku pret koha"]
       ],
       "checklist": [
         "Problemi ka një numër, një periudhë kohe dhe një dallim nga objektivi.",
@@ -97,7 +99,9 @@
       ],
       "tools": [
         ["Kontrolli i dëmeve", "/tools/damage-control/", "për të regjistruar sipas hapit dhe shkakut"],
-        ["Llogaritësi sigma", "/tools/sigma-control-chart/", "për DPMO-në dhe nivelin sigma"]
+        ["Llogaritësi sigma", "/tools/sigma-control-chart/", "për DPMO-në dhe nivelin sigma"],
+        ["Laboratori i procesit", "/tools/process-lab/", "për nisjen, kartën e kontrollit të një matjeje dhe aftësinë e procesit"],
+        ["Studimi i kohës", "/tools/time-study/", "për ta matur punën në terren kundrejt taktit"]
       ],
       "checklist": [
         "Përkufizimi është shkruar, me foto të asaj që numërohet.",
@@ -163,7 +167,9 @@
       "tools": [
         ["Kontrolli i dëmeve", "/tools/damage-control/", "për Pareton dhe matricën hap × lloj"],
         ["5 Whys", "/tools/five-whys/", "për të arritur te një shkak që mund ta ndryshosh"],
-        ["Karta e kontrollit", "/tools/sigma-control-chart/", "për të dalluar shkaqet e zakonshme nga të veçantat"]
+        ["Karta e kontrollit", "/tools/sigma-control-chart/", "për të dalluar shkaqet e zakonshme nga të veçantat"],
+        ["Kurrizi i peshkut", "/tools/fishbone/", "për t’i mbledhur shkaqet sipas kategorisë para se t’i provosh"],
+        ["Gemba Walk", "/tools/gemba-walk/", "për të shkuar e parë ku standardi nuk mbahet"]
       ],
       "checklist": [
         "Pareto tregon të paktat thelbësore.",
@@ -231,7 +237,11 @@
       ],
       "tools": [
         ["Kontrollet në terren", "/tools/damage-control/", "te Kontrolli i dëmeve, për të parë nëse standardi qëndron"],
-        ["Karta e kontrollit", "/tools/sigma-control-chart/", "me kufijtë nga periudha para ndryshimit"]
+        ["Karta e kontrollit", "/tools/sigma-control-chart/", "me kufijtë nga periudha para ndryshimit"],
+        ["FMEA", "/tools/fmea/", "për t’i peshuar rreziqet e ndryshimit para se ta bësh"],
+        ["Tabela Kaizen", "/tools/kaizen-board/", "për t’i provuar idetë e vogla të ekipit, një nga një"],
+        ["Laboratori i procesit", "/tools/process-lab/", "për të treguar se rënia është reale, jo zhurmë"],
+        ["Lista e veprimeve", "/tools/action-tracker/", "që çdo kundërmasë të ketë përgjegjës, datë dhe kontroll"]
       ],
       "checklist": [
         "Kundërmasa godet shkakun rrënjësor të verifikuar.",
@@ -299,7 +309,11 @@
       ],
       "tools": [
         ["Karta e kontrollit", "/tools/sigma-control-chart/", "me kufijtë e rinj"],
-        ["Kontrolli i dëmeve", "/tools/damage-control/", "kontrolli në terren, çdo javë"]
+        ["Kontrolli i dëmeve", "/tools/damage-control/", "kontrolli në terren, çdo javë"],
+        ["Puna standarde", "/tools/standard-work/", "për ta shkruar mënyrën e re, me pikat e saj kyçe"],
+        ["Matrica e aftësive", "/tools/skills-matrix/", "për ta trajnuar ekipin dhe për të parë kush mungon ende"],
+        ["Tabela e ditës", "/tools/daily-board/", "për të parë çdo mëngjes nëse qëndron"],
+        ["Auditi 5S", "/tools/five-s-audit/", "për të audituar vendin e punës që e mban standardin"]
       ],
       "checklist": [
         "Standardi është shkruar dhe trajnuar.",

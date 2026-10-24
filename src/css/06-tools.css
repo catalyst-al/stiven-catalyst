@@ -369,12 +369,13 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 }
 .dl-panel .result-label { margin: 0; }
 .dl-panel-note { margin: 0; color: var(--muted); font-size: 14px; }
-/* Trend chart: columns per day or week; the colours follow the theme. */
-.dl-panel {
+/* Trend chart: columns per day or week; the colours follow the theme. The shared charts (js/chart-kit.js) take the
+   same colours wherever their figure stands, inside a panel or not. */
+.dl-panel, .ck-figure {
   --tr-bar: var(--blue); --tr-top: var(--danger); --tr-line: #f6f7f4; --tr-target: var(--warn);
   --tr-grid: rgba(255, 255, 255, .12); --tr-text: #f6f7f4; --tr-muted: #a5b0b8;
 }
-[data-theme="light"] .dl-panel {
+[data-theme="light"] .dl-panel, [data-theme="light"] .ck-figure {
   --tr-line: #1b2330;
   --tr-grid: #dfe3e8; --tr-text: #1b2330; --tr-muted: #5f6870;
 }
@@ -410,7 +411,7 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
   border-radius: 50%;
   font-size: 11px;
 }
-.dl-tag {
+.dl-tag, .sh-tracker {
   padding: 2px 8px;
   border: 1px solid color-mix(in srgb, var(--blue) 55%, var(--line));
   border-radius: 999px;

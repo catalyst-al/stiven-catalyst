@@ -1,0 +1,135 @@
+{#- Time Study: elements timed over several cycles, takt, a Yamazumi per station and a balancing suggestion; time-study.js does the rest. -#}
+<section class="shell tool-layout dl-setup ts-setup">
+  <div class="tool-panel" data-time-study>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Process and takt" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="ts-process">{{ "Process" | t(lang) }}</label>
+          <input id="ts-process" name="process" placeholder="{{ 'e.g. Packing line, outbound' | t(lang) }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ts-demand">{{ "Demand per shift" | t(lang) }}</label>
+          <input id="ts-demand" name="demand" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ 'e.g. 540' | t(lang) }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="ts-available">{{ "Available minutes per shift" | t(lang) }}</label>
+          <input id="ts-available" name="available" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ 'e.g. 432' | t(lang) }}" data-setting>
+        </div>
+      </div>
+      <p class="form-note ts-takt" data-takt aria-live="polite"></p>
+      <p class="form-note">{{ "Available time is the shift minus breaks, meetings and planned stops. Takt is that time divided by the demand: the customer's clock." | t(lang) }}</p>
+    </fieldset>
+
+    <div class="dl-box">
+      <p class="kicker">2 · {{ "Stations and elements" | t(lang) }}</p>
+      <p class="form-note">{{ "One to eight stations in the order of the flow. Under each, the elements of its work in the order they happen, each marked VA (value-added), NVA (necessary) or W (waste)." | t(lang) }}</p>
+      <div class="ts-stations" data-stations></div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-add-station>{{ "+ Add a station" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box ts-watch">
+      <p class="kicker">3 · {{ "Stopwatch" | t(lang) }}</p>
+      <div class="dl-grid ts-watch-grid">
+        <div class="field">
+          <label for="ts-watch-station">{{ "Station" | t(lang) }}</label>
+          <select id="ts-watch-station" data-watch-station></select>
+        </div>
+        <div class="field">
+          <label for="ts-watch-cycle">{{ "Cycle" | t(lang) }}</label>
+          <input id="ts-watch-cycle" type="number" min="1" step="1" inputmode="numeric" data-watch-cycle>
+        </div>
+      </div>
+      <div class="ts-clock" aria-hidden="true"><span data-clock>0,0</span><span class="ts-clock-unit">s</span></div>
+      <p class="ts-current" data-current aria-live="polite"></p>
+      <div class="tool-actions ts-watch-actions">
+        <button class="button-primary ts-big" type="button" data-start>{{ "Start timing" | t(lang) }}</button>
+        <button class="button-primary ts-big" type="button" data-lap hidden>{{ "Lap" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-stop hidden>{{ "Stop" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-undo-lap hidden>{{ "Undo last lap" | t(lang) }}</button>
+      </div>
+      <p class="form-note">{{ "Space is the lap key. Each lap closes the element being watched and opens the next; after the last element the next cycle begins. Time at least three cycles per station, five is better." | t(lang) }}</p>
+      <p class="form-note" data-watch-status aria-live="polite"></p>
+    </div>
+
+    <details class="dl-box dl-paste ts-manual">
+      <summary class="kicker">{{ "Type or paste timings" | t(lang) }}</summary>
+      <form class="dl-grid ts-entry" data-entry novalidate>
+        <div class="field">
+          <label for="ts-entry-station">{{ "Station" | t(lang) }}</label>
+          <select id="ts-entry-station" name="station" data-entry-station></select>
+        </div>
+        <div class="field">
+          <label for="ts-entry-element">{{ "Element" | t(lang) }}</label>
+          <select id="ts-entry-element" name="element" data-entry-element></select>
+        </div>
+        <div class="field">
+          <label for="ts-entry-cycle">{{ "Cycle" | t(lang) }}</label>
+          <input id="ts-entry-cycle" name="cycle" type="number" min="1" step="1" inputmode="numeric" value="1">
+        </div>
+        <div class="field">
+          <label for="ts-entry-seconds">{{ "Seconds" | t(lang) }}</label>
+          <input id="ts-entry-seconds" name="seconds" type="number" min="0.1" step="0.1" inputmode="decimal" placeholder="{{ 'e.g. 12.4' | t(lang) }}">
+        </div>
+        <div class="tool-actions dl-wide">
+          <button class="button-secondary" type="submit">{{ "Add the timing" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </form>
+      <p class="form-note">{{ "Or paste rows from Excel, columns in this order:" | t(lang) }} <strong>{{ "station, element, cycle, seconds" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "A station or element may be its name or its number." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="ts-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="ts-paste" rows="4" data-paste placeholder="{{ 'Pack; Seal box; 1; 8.1' | t(lang) }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">4 · {{ "Timings" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Station" | t(lang) }}</th><th scope="col">{{ "Element" | t(lang) }}</th><th scope="col">{{ "Type" | t(lang) }}</th><th scope="col" class="num">{{ "Cycle" | t(lang) }}</th><th scope="col" class="num">{{ "Seconds" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <button class="button-ghost dl-more" type="button" data-more hidden></button>
+      <p class="dl-empty" data-log-empty>{{ "No timings yet. Start the stopwatch, type them in, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example study" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear timings" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Then ask why." | t(lang) }}</strong> {{ "A station that stays above takt after the waste is gone has a cause worth finding. Take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ts-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="time-study-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/time-study.js' | assetUrl }}" defer></script>

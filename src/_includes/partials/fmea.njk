@@ -1,0 +1,161 @@
+{#- FMEA: a process failure mode and effects sheet with S, O, D, RPN and the AIAG-VDA action priority; fmea.js does the rest. -#}
+<section class="shell tool-layout dl-setup fm-setup">
+  <div class="tool-panel" data-fmea>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "The process" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="fm-process">{{ "Process" | t(lang) }}</label>
+          <input id="fm-process" name="process" placeholder="{{ cfg.text.processPlaceholder }}" autocomplete="off" data-header>
+        </div>
+        <div class="field">
+          <label for="fm-owner">{{ "FMEA owner" | t(lang) }}</label>
+          <input id="fm-owner" name="owner" placeholder="{{ cfg.text.ownerPlaceholder }}" autocomplete="off" data-header>
+        </div>
+        <div class="field">
+          <label for="fm-date">{{ "Date" | t(lang) }}</label>
+          <input id="fm-date" name="date" type="date" data-header>
+        </div>
+        <div class="field">
+          <label for="fm-revision">{{ "Revision" | t(lang) }}</label>
+          <input id="fm-revision" name="revision" placeholder="{{ cfg.text.revisionPlaceholder }}" autocomplete="off" data-header>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Start from a template" | t(lang) }}</legend>
+      <div class="dl-grid fm-template">
+        <div class="field">
+          <label for="fm-template">{{ "Template" | t(lang) }}</label>
+          <select id="fm-template" data-template>
+            {%- for template in cfg.templates %}
+            <option value="{{ template.id }}">{{ template.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-fill>{{ "Fill the steps" | t(lang) }}</button>
+        </div>
+      </div>
+      <p class="form-note">{{ "Adds one row per process step with its function. You write how each step can fail, and rate it." | t(lang) }}</p>
+      <p class="form-note" data-template-status aria-live="polite"></p>
+    </fieldset>
+
+    <details class="dl-box fm-scales">
+      <summary class="kicker">{{ "Rating scales" | t(lang) }}</summary>
+      <p class="form-note">{{ "Each rating runs from 1 to 10. The same words appear in the rating lists of the sheet." | t(lang) }}</p>
+      <div class="fm-scale-grid">
+        {%- for key, scale in cfg.scales %}
+        <div class="fm-scale">
+          <h3>{{ key }} · {{ scale.name }}</h3>
+          <p>{{ scale.question }}</p>
+          <ol>
+            {%- for level in scale.levels %}
+            <li><strong>{{ loop.index }} · {{ level[0] }}</strong> {{ level[1] }}</li>
+            {%- endfor %}
+          </ol>
+        </div>
+        {%- endfor %}
+      </div>
+    </details>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Failure modes" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <div class="fm-controls">
+        <div class="field">
+          <label for="fm-sort">{{ "Sort by" | t(lang) }}</label>
+          <select id="fm-sort" data-sort>
+            <option value="ap">{{ "Action priority, then RPN" | t(lang) }}</option>
+            <option value="rpn">{{ cfg.columns.rpn }}</option>
+            <option value="step">{{ cfg.columns.step }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fm-filter-ap">{{ cfg.columns.ap }}</label>
+          <select id="fm-filter-ap" data-filter-ap>
+            <option value="">{{ "All" | t(lang) }}</option>
+            {%- for key, label in cfg.ap %}
+            <option value="{{ key }}">{{ key }} · {{ label }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="fm-filter-status">{{ cfg.columns.status }}</label>
+          <select id="fm-filter-status" data-filter-status>
+            <option value="">{{ "All" | t(lang) }}</option>
+            {%- for key, label in cfg.status %}
+            <option value="{{ key }}">{{ label }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap fm-grid-wrap" tabindex="0" data-grid-wrap hidden>
+        <table class="dl-table fm-grid">
+          <thead>
+            <tr>
+              <th scope="col" class="num">#</th>
+              <th scope="col">{{ cfg.columns.step }}</th>
+              <th scope="col">{{ cfg.columns.function }}</th>
+              <th scope="col">{{ cfg.columns.mode }}</th>
+              <th scope="col">{{ cfg.columns.effect }}</th>
+              <th scope="col">{{ cfg.columns.s }}</th>
+              <th scope="col">{{ cfg.columns.cause }}</th>
+              <th scope="col">{{ cfg.columns.o }}</th>
+              <th scope="col">{{ cfg.columns.prevention }}</th>
+              <th scope="col">{{ cfg.columns.detection }}</th>
+              <th scope="col">{{ cfg.columns.d }}</th>
+              <th scope="col" class="num">{{ cfg.columns.rpn }}</th>
+              <th scope="col">{{ cfg.columns.ap }}</th>
+              <th scope="col">{{ cfg.columns.action }}</th>
+              <th scope="col">{{ cfg.columns.owner }}</th>
+              <th scope="col">{{ cfg.columns.due }}</th>
+              <th scope="col">{{ cfg.columns.status }}</th>
+              <th scope="col">{{ cfg.columns.s2 }}</th>
+              <th scope="col">{{ cfg.columns.o2 }}</th>
+              <th scope="col">{{ cfg.columns.d2 }}</th>
+              <th scope="col" class="num">{{ cfg.columns.rpn2 }}</th>
+              <th scope="col"><span class="visually-hidden">{{ "Row tools" | t(lang) }}</span></th>
+            </tr>
+          </thead>
+          <tbody data-grid></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ cfg.text.empty }} {{ "Add the first row, fill the steps from a template, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example sheet" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-add>{{ "+ Add a failure mode" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-json>{{ "Save the sheet (.json)" | t(lang) }}</button>
+        <label class="button-secondary fm-file" for="fm-open">{{ "Open a sheet (.json)" | t(lang) }}</label>
+        <input class="visually-hidden" id="fm-open" type="file" accept=".json,application/json" data-open>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear the sheet" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-file-status aria-live="polite"></p>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Then ask why." | t(lang) }}</strong> {{ "The cause of the top risk is a guess until someone checks it at the step. Take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results fm-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="fmea-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/fmea.js' | assetUrl }}" defer></script>

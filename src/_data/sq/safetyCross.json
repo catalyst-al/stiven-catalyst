@@ -1,0 +1,170 @@
+{
+  "storageKey": "sc-safety-cross-sq",
+  "months": ["Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"],
+  "text": {
+    "tool": "Kryqi i sigurisë",
+    "csv": "regjistri-i-sigurise",
+    "entryLegend": "Regjistro një ngjarje sigurie",
+    "whatPlaceholder": "p.sh. Paleta rrëshqiti nga pirunët te porta 3, askush poshtë",
+    "actionPlaceholder": "p.sh. Shëno korsinë e këmbësorëve te porta 3",
+    "ownerPlaceholder": "p.sh. Anna",
+    "pasteRow": "Një rresht për çdo ngjarje",
+    "pastePlaceholder": "06.10.2026\tPasdite\tRrezik i shmangur\tPorta e ngarkimit\tPaleta rrëshqiti nga pirunët\tPirun / mjet\t3\tShëno korsinë e këmbësorëve\tAnna\tjo",
+    "empty": "Ende asnjë ngjarje sigurie e regjistruar.",
+    "hoursPlaceholder": "p.sh. 160000",
+    "nearMissPlaceholder": "p.sh. 8",
+    "freeDaysPlaceholder": "p.sh. 365"
+  },
+  "types": {
+    "lost-time": "Aksident me ditë pune të humbura",
+    "no-lost-time": "Aksident pa ditë pune të humbura",
+    "first-aid": "Ndihmë e parë",
+    "near-miss": "Rrezik i shmangur",
+    "unsafe-condition": "Kusht i pasigurt",
+    "unsafe-act": "Veprim i pasigurt",
+    "positive": "Vëzhgim pozitiv"
+  },
+  "short": {
+    "lost-time": "Me ditë të humbura",
+    "no-lost-time": "Pa ditë të humbura",
+    "first-aid": "Ndihmë e parë",
+    "near-miss": "Rrezik i shmangur",
+    "unsafe-condition": "Kusht i pasigurt",
+    "unsafe-act": "Veprim i pasigurt",
+    "positive": "Pozitiv"
+  },
+  "shifts": ["Mëngjes", "Pasdite", "Natë"],
+  "areas": ["Pranimi", "Magazinimi", "Mbledhja", "Paketimi", "Porta e ngarkimit", "Oborri", "Zyra", "Tjetër"],
+  "causes": ["Rregull dhe pastërti", "Pirun / mjet", "Ngritje manuale", "Rrëzime / rrëshqitje", "Pajisje", "Procedura nuk u ndoq", "PMP", "Tjetër"],
+  "severities": ["1 · Potencial i vogël", "2 · Potencial mesatar", "3 · Potencial i rëndë", "4 · Potencial vdekjeprurës"],
+  "pyramid": {
+    "lost-time": "Aksidente me ditë pune të humbura",
+    "recordable": "Aksidente pa ditë të humbura dhe ndihmë e parë",
+    "near-miss": "Rreziqe të shmangura",
+    "unsafe": "Kushte dhe veprime të pasigurta"
+  },
+  "advice": {
+    "Rregull dhe pastërti": {
+      "meaning": "Film streç në dysheme, një paletë e lënë në korridor, një njollë që askush s'e merr përsipër: shumica e pengimeve dhe e devijimeve të pirunëve nisin nga diçka që s'duhej të ishte aty.",
+      "moves": [
+        "Ec nëpër zonën më të keqe në fund të turnit dhe fotografo çfarë është në dysheme; tregoji fotot në takimin e radhës.",
+        "Jepi çdo korridori dhe çdo porte një përgjegjës për turn, që e kontrollon dyshemenë para se të ikë.",
+        "Vendos një kosh, një fshesë dhe një kit për derdhje aty ku krijohet rrëmuja, jo aty ku është rregull."
+      ],
+      "question": "Ku ndotet dyshemeja gjatë turnit, dhe kush duhet ta pastrojë?"
+    },
+    "Pirun / mjet": {
+      "meaning": "Një pirun dhe një njeri në të njëjtin hapësirë janë e vetmja gjë në magazinë që vret. Shumica e rreziqeve të shmangura këtu janë shpejtësia, qoshet e verbëra dhe njerëzit që ecin aty ku lëvizin pirunët.",
+      "moves": [
+        "Ndaji njerëzit nga pirunët me një korsi të vizatuar dhe me rregullin që askush s'e kalon një portë pa kontakt me sy me drejtuesin.",
+        "Ec rrugën te një qoshe ku ndodhi një rrezik i shmangur: pasqyra, ndriçim, një vijë ndalimi.",
+        "Kontrollo shpejtësinë dhe borinë në pikën më të keqe për një turn, dhe përmend drejtuesit që e bëjnë si duhet."
+      ],
+      "question": "Ku ndajnë njerëzit dhe pirunët të njëjtin metër katror, dhe pse?"
+    },
+    "Ngritje manuale": {
+      "meaning": "Lëndimet e shpinës dhe të shpatullave vijnë nga ngritje të rënda, të vështira ose të përsëritura, zakonisht në të njëjtat stacione. Grumbullohen në heshtje dhe pastaj nxjerrin dikë jashtë për javë të tëra.",
+      "moves": [
+        "Listo dhjetë artikujt më të rëndë dhe ku mblidhen; vendosi në lartësinë e belit.",
+        "Bini dakord për rregullin e dy personave ose një mjet ngritës mbi një peshë që e cakton vetë ekipi.",
+        "Vëzhgo dhjetë ngritje te stacioni më i keq dhe ndrysho stacionin, jo personin."
+      ],
+      "question": "Për cilën ngritje ankohen të gjithë, dhe çfarë do ta bënte të panevojshme?"
+    },
+    "Rrëzime / rrëshqitje": {
+      "meaning": "Dysheme të lagura, pllaka rampe të pabarabarta, një shkallë që askush s'e sheh në errësirë: rrëshqitjet janë lëndimi më i zakonshëm në logjistikë dhe gati gjithmonë kthehen te një vend i vetëm.",
+      "moves": [
+        "Shëno në planin e sallës ku ndodhi çdo rrëshqitje ose pengim; rregullo së pari vendin me më shumë shenja.",
+        "Vendos një rutinë tharjeje dhe një tabelë te çdo derë nga ku hyn shiu dhe kondensimi.",
+        "Kontrollo pllakat e rampës dhe shkallët për ndryshime lartësie dhe kënde, dhe lyej këndet."
+      ],
+      "question": "Ku ndodhën tri rrëshqitjet e fundit, dhe çfarë është ende e njëjtë atje?"
+    },
+    "Pajisje": {
+      "meaning": "Një rrotë e prishur, një rrip i konsumuar, një mbrojtëse e hequr për të punuar më shpejt: një defekt që dihet dhe nuk rregullohet është vendim, jo aksident.",
+      "moves": [
+        "Etiketim bllokues: një etiketë e kuqe te çdo gjë me defekt, dhe askush s'e përdor një pajisje të etiketuar derisa të riparohet.",
+        "Fillo çdo turn me një kontroll dy-minutësh të pirunëve, karrocave dhe rripave, me shkrim.",
+        "Bini dakord me mirëmbajtjen sa shpejt riparohet një defekt sigurie, dhe ndiq ato që janë hapur."
+      ],
+      "question": "Cilin defekt e dinë të gjithë dhe vazhdojnë të punojnë duke e anashkaluar?"
+    },
+    "Procedura nuk u ndoq": {
+      "meaning": "Kur njerëzit e kapërcejnë një rregull, rregulli zakonisht është i ngadaltë, i paqartë ose i pamundur me kohën që kanë. Pyet pse para se të fajësosh.",
+      "moves": [
+        "Kërkoji personit që kapërceu hapin të tregojë si bëhet puna normalisht; kërko presionin e kohës pas saj.",
+        "Shkurto rregullin te e vetmja gjë që s'duhet kapërcyer kurrë, dhe vendose aty ku bëhet puna.",
+        "Falenderoji njerëzit që e ndalojnë punën kur s'janë të sigurt; një ndalesë kushton më pak se një barelë."
+      ],
+      "question": "Çfarë e bën këtu mënyrën e sigurt mënyrën e ngadaltë?"
+    },
+    "PMP": {
+      "meaning": "Dorezat, këpucët ose jelekët që mungojnë shihen, prandaj shënohen më shpesh. Shkaku zakonisht është komoditeti, disponueshmëria ose një kulturë ku askush s'thotë asgjë.",
+      "moves": [
+        "Kontrollo që masa e duhur dhe një rezervë të jenë te hyrja; askush s'vesh atë që i shtrëngon.",
+        "Bëj jelekun dhe këpucët gjënë e parë që marrin çdo vizitor dhe çdo punonjës i ri, para kartës.",
+        "Jep shembull: një mbikëqyrës pa jelek anulon çdo poster në mur."
+      ],
+      "question": "Pse nuk vishen pajisjet: s'janë aty, s'janë të rehatshme, ose s'priten?"
+    },
+    "Tjetër": {
+      "meaning": "Ngjarjet pa shkak të qartë grumbullohen kur regjistri mbushet me nxitim. Secila meriton edhe një pyetje.",
+      "moves": [
+        "Kthehu te tri ngjarjet e fundit të shënuara Tjetër dhe pyet çfarë qëndronte vërtet pas tyre.",
+        "Nëse një shkak i ri shfaqet tri herë, shtoje në listë që regjistrimet e ardhshme ta gjejnë.",
+        "Mbaje shkakun te situata, jo te personi: çfarë do ta kishte ndaluar?"
+      ],
+      "question": "Çfarë kanë të përbashkët ngjarjet e shënuara Tjetër?"
+    }
+  },
+  "talks": [
+    { "title": "Rreziqet e shmangura janë mësime falas", "text": "Një rrezik i shmangur është një aksident që ende s'ka ndodhur. Çdo raportim është një mësim që ekipi e merr pa u lënduar askush. Raportoje sot; nesër mund t'i kushtojë një kolegu." },
+    { "title": "Kontakt me sy para se të kalosh", "text": "Drejtuesi i pirunit s'mund t'i lexojë mendimet e tua. Para se të kalosh një portë ose një korridor ku lëvizin pirunët: ndalo, shiko drejtuesin dhe prit shenjën me kokë. Pa kontakt me sy, s'ka kalim." },
+    { "title": "Shpejtësia në korridor", "text": "Një pirun me hap njeriu ndalon brenda një metri. Me dyfishin e shpejtësisë i duhen katër. Korridori s'është pistë garash, pavarësisht çfarë thotë ekrani i dispeçimit." },
+    { "title": "Rregulli është siguri", "text": "Filmi streç në dysheme bëhet pengim. Një paletë në korridor bëhet devijim. Pesë minuta rregullim në fund të turnit janë masa më e lirë e sigurisë që kemi." },
+    { "title": "Ngri me këmbët, ose me një koleg", "text": "Çdo gjë e rëndë, e vështirë ose mbi shpatulla: kërko ndihmë ose një mjet ngritës. Lëndimi i shpinës s'dhemb sot; dhemb pjesën tjetër të muajit." },
+    { "title": "Etiketoje, nuk e anashkalon", "text": "Një pirun, rrip ose karrocë me defekt marrin etiketë të kuqe dhe dalin nga përdorimi derisa të riparohen. Të punosh duke anashkaluar një defekt të njohur është vendim, dhe i keq." },
+    { "title": "Dysheme të lagura dhe pllaka rampe", "text": "Shiu hyn me çdo kamion. Kontrollo pllakat e rampës dhe dyert e hyrjes, thaj çfarë është e lagur dhe vendos tabelën. Rrëshqitja në një pllakë të lagur është lëndimi ynë më i shpeshtë." },
+    { "title": "Dorezat e duhura për punën", "text": "Doreza kundër prerjes për thika dhe rripa, doreza me kapje për paleta. Dorezat që s'të përshtaten janë doreza që hiqen. Thuaje dhe merr masën e duhur." },
+    { "title": "Ndalo kur s'je i sigurt", "text": "Nëse diçka duket gabim, ndalo dhe pyet. Askush s'është ndëshkuar këtu për ndalimin e një pune që duket e pasigurt. E kundërta nuk vlen." },
+    { "title": "Korsitë e këmbësorëve kanë kuptim", "text": "Korsia e vizatuar është i vetmi vend ku drejtuesi të pret. Jashtë saj je një befasi, dhe befasitë me shpejtësinë e portës mbarojnë keq." },
+    { "title": "Lartësia e stivimit dhe qëndrueshmëria", "text": "E rënda poshtë, asgjë jashtë skajit, asgjë mbi lartësinë e shënuar. Një paletë që bie s'pyet kush është poshtë." },
+    { "title": "Karikimi dhe bateritë", "text": "Zonat e karikimit janë për karikim. As ushqim, as shkurtore nëpër to, dhe çdo erë apo kabllo e nxehtë raportohet menjëherë. Një zjarr baterie s'pret fundin e turnit." },
+    { "title": "Kolegët e rinj", "text": "Një punonjës i ri s'e di ku lëvizin pirunët ose cili rrip është i prishur. Ec me të ditën e parë dhe tregoji rreziqet e shmangura të kësaj zone. Sigurinë e tij e ndan ti." },
+    { "title": "Lodhja është rrezik", "text": "Ora e fundit e turnit të natës ka më shumë aksidente se tri të parat. Kujdes për veten dhe për të tjerët: ngadalëso, bisedo dhe merr pushimin që të takon." },
+    { "title": "Raporto kushtin e pasigurt", "text": "Një pllakë rampe e liruar, një qoshe e errët, një pasqyrë që mungon: raportoje, edhe nëse ka qenë kështu për muaj. Regjistri është mënyra si rregullohet më në fund." },
+    { "title": "Lëvizja prapa", "text": "Gjysma e kontakteve me mjete ndodhin prapa. Bori, pasqyra, një shikim mbi shpatull, dhe një udhëzues kur pamja është e bllokuar. Kurrë s'i beso vetëm kamerës." },
+    { "title": "Prerje e sigurt", "text": "Prit larg trupit, me thikë sigurie, dhe kurrë drejt një kolegu. Fute tehun para se ta lësh thikën. Shumica e prerjeve të dorës ndodhin në gjysmë sekonde pas prerjes." },
+    { "title": "Thuaj diçka", "text": "Nëse sheh një koleg pa jelek ose nën një ngarkesë të ngritur, thuaje. Jo për t'e qortuar, por sepse do të doje të njëjtën. Heshtja është leja me të cilën ndodhin aksidentet." },
+    { "title": "Daljet e emergjencës dhe fikëset", "text": "Dije daljen më të afërt dhe fikësen më të afërt nga ku punon tani, jo nga ku punoje vitin e kaluar. Para asnjërës s'qëndron asgjë." },
+    { "title": "Festo ditët e gjelbra", "text": "Çdo ditë e gjelbër në kryq është rezultat i qindra vendimeve të vogla. Shiko kryqin, thuaj faleminderit dhe tregoji ekipit çfarë e bëri këtë muaj të gjelbër." }
+  ],
+  "tips": [
+    ["Një rrezik i shmangur është një mësim falas.", "Askush s'u lëndua dhe mësove nga do të vijë aksidenti i radhës. Sa më shumë rreziqe të shmangura në regjistër, aq më i sigurt është vendi i punës, jo e kundërta."],
+    ["Kryqi është për ekipin, jo për auditorin.", "Printoje, vendose në mur dhe shikoje në çdo takim. Një kryq që askush s'e sheh nuk ndryshon asgjë."],
+    ["Një shkallë raportimi në rritje është lajm i mirë.", "Kur ekipi fillon të raportojë kushte të pasigurta, piramida merr një bazë të gjerë. Kjo është besim, jo problem."],
+    ["Rëndësia është potenciali, jo pasoja.", "Një paletë që ra pranë dikujt është 4, edhe pse askush s'u prek. Vlerëso çfarë mund të kishte ndodhur."],
+    ["Çdo ngjarje merr një veprim dhe një përgjegjës.", "Një ngjarje pa veprim është një histori. Shëno veprimin kur kryhet dhe dërgo ato të hapura te Lista e veprimeve."]
+  ],
+  "example": {
+    "hours": 160000,
+    "nearMissTarget": 8,
+    "freeDaysTarget": 365,
+    "rows": [
+      "2026-09-08|Mëngjes|Rrezik i shmangur|Porta e ngarkimit|Paleta rrëshqiti nga pirunët te porta 3, askush poshtë|Pirun / mjet|3|Kontrollo këndin e pirunëve dhe rampën te porta 3|Marco|po",
+      "2026-09-11|Pasdite|Kusht i pasigurt|Pranimi|Pllaka e rampës te porta 2 e liruar, lëviz kur kalohet sipër|Pajisje|3|Ripara pllakën e rampës, etiketë e kuqe deri atëherë|Mirëmbajtja|po",
+      "2026-09-16|Mëngjes|Aksident me ditë pune të humbura|Mbledhja|Mbledhësi rrëshqiti në dysheme të lagur te korridori 12, kyç i ndrydhur, 4 ditë mungesë|Rrëzime / rrëshqitje|3|Rutinë tharjeje dhe tabelë te dera 5 kur bie shi|Anna|po",
+      "2026-09-19|Natë|Rrezik i shmangur|Oborri|Drejtuesi lëvizi prapa drejt një kolegu që ecte pas kamionit|Pirun / mjet|4|Rregulli i udhëzuesit kur lëvizet prapa në oborr|Luca|jo",
+      "2026-09-24|Pasdite|Vëzhgim pozitiv|Magazinimi|Ekipi ndaloi punën dhe ristivoi një paletë që dilte jashtë skajit para se të binte|Procedura nuk u ndoq|1|Falendero ekipin në takim|Anna|po",
+      "2026-09-29|Mëngjes|Rrezik i shmangur|Paketimi|Thika e rripave rrëshqiti, preu dorezën por jo dorën|Pajisje|2|Zëvendëso thikat e sigurisë të konsumuara te paketimi|Sofia|po",
+      "2026-10-02|Pasdite|Rrezik i shmangur|Porta e ngarkimit|Një këmbësor kaloi portën 1 pas një kamioni që lëvizte prapa|Pirun / mjet|4|Vizato korsinë e këmbësorëve te porta 1|Marco|jo",
+      "2026-10-06|Mëngjes|Ndihmë e parë|Mbledhja|Gisht i prerë nga një kuti e thyer te korridori 8, plaster, u kthye në punë|Pajisje|2|Hiq kutitë e thyera nga qarkullimi çdo turn|Sofia|jo",
+      "2026-10-08|Natë|Kusht i pasigurt|Oborri|Ndriçimi te porta e oborrit i fikur, drejtuesit s'e shohin trotuarin|Pajisje|3|Zëvendëso llambën te porta|Mirëmbajtja|jo",
+      "2026-10-10|Pasdite|Rrezik i shmangur|Pranimi|Paleta e stivuar mbi lartësinë e shënuar u përmbys gjatë lëvizjes|Procedura nuk u ndoq|3|Përsërit lartësinë e stivimit në takim, kontrollo pranimin dy herë në turn|Luca|po",
+      "2026-10-13|Mëngjes|Veprim i pasigurt|Porta e ngarkimit|Drejtuesi në telefon ndërsa drejtonte pirunin|Procedura nuk u ndoq|4|Bisedë me drejtuesin, rregulli i telefonit në tabelë|Anna|jo",
+      "2026-10-15|Pasdite|Vëzhgim pozitiv|Oborri|Turni i natës zbatoi rregullin e udhëzuesit pa iu kërkuar|Pirun / mjet|1|Përmende në shqyrtimin javor|Luca|po",
+      "2026-10-17|Mëngjes|Rrezik i shmangur|Magazinimi|Film streç në dysheme te korridori 4, mbledhësi u pengua por nuk ra|Rregull dhe pastërti|2|Kosh dhe fshesë në fund të korridorit 4|Sofia|jo",
+      "2026-10-20|Pasdite|Vëzhgim pozitiv|Mbledhja|Punonjësi i ri ndaloi dhe pyeti para se të kalonte portën 2|Pirun / mjet|1|Falendero punonjësin e ri|Marco|po"
+    ]
+  }
+}

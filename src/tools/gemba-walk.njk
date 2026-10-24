@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Gemba Walk
+seo_title: "Gemba walk and layered process audit (LPA) checklist with waste walk for warehouse, hotel and delivery station"
+description: "Walk the floor by layer: yes/no LPA checks with compliance per week, a waste walk tally of the 8 wastes, Mura and Muri, a schedule and findings as actions."
+activeNav: /tools.html
+permalink: /tools/gemba-walk/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Lean</p>
+  <h1>Gemba Walk</h1>
+  <p class="lede">Go where the work is done and check it by layer: the team lead every day, the area manager every week, the site lead every month, each with a short list of yes or no questions on the standard. Or count the waste you see. The tool shows compliance per week and layer, where the "no" answers and the wastes sit, which layer is late, and turns findings into actions with an owner.</p>
+</section>
+
+{% set cfg = gembaWalk %}
+{% include "partials/gemba-walk.njk" %}

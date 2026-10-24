@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Hotel KPIs
+seo_title: "Hotel KPI calculator: occupancy, ADR, RevPAR against budget, with forecast and morning report"
+description: "A private hotel KPI log: occupancy, ADR and RevPAR against budget, the month's forecast, weekday pattern, no-shows, rooms out of order and complaints."
+activeNav: /tools.html
+permalink: /tools/hotel-kpis/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Hotel</p>
+  <h1>Hotel KPIs</h1>
+  <p class="lede">Log each night's rooms sold, room revenue, no-shows, rooms out of order and complaints, or paste them from the PMS export. See occupancy, ADR and RevPAR month to date against the budget, the forecast for the month, the weekday pattern, the revenue that leaked, and the KPI to work on first, ready to copy as the morning report.</p>
+</section>
+
+{% set cfg = hotelKpis %}
+{% include "partials/hotel-kpis.njk" %}

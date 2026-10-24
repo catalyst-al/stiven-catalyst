@@ -1,0 +1,86 @@
+{
+  "storageKey": "sc-process-lab",
+  "csv": "process-lab",
+  "example": {
+    "name": "Loading time",
+    "unit": "min",
+    "lsl": "30",
+    "usl": "50",
+    "target": "40",
+    "rows": ["2026-09-14|38.4", "2026-09-14|42.4", "2026-09-14|39.9", "2026-09-15|43.6", "2026-09-15|43.1", "2026-09-15|43.4", "2026-09-16|39", "2026-09-16|34.9", "2026-09-16|42.6", "2026-09-17|41", "2026-09-17|39.4", "2026-09-17|37.8", "2026-09-18|42.3", "2026-09-18|33.2", "2026-09-18|42.9", "2026-09-21|41.1", "2026-09-21|43.2", "2026-09-21|40.8", "2026-09-22|41.2", "2026-09-22|42.4", "2026-09-22|41.4", "2026-09-23|47.8", "2026-09-23|56.4", "2026-09-23|42", "2026-09-24|43", "2026-09-24|39.2", "2026-09-24|39.7", "2026-09-25|46.2", "2026-09-25|41.5", "2026-09-25|43.9", "2026-09-28|42.4", "2026-09-28|42.4", "2026-09-28|46.9", "2026-09-29|42.6", "2026-09-29|41.2", "2026-09-29|42.5", "2026-09-30|45.5", "2026-09-30|43.6", "2026-09-30|46.8", "2026-10-01|48.7", "2026-10-01|41.4", "2026-10-01|38", "2026-10-02|42.3", "2026-10-02|44.9", "2026-10-02|40.8", "2026-10-05|48.2", "2026-10-05|29.6", "2026-10-05|43.3", "2026-10-06|49.3", "2026-10-06|45", "2026-10-06|41.1", "2026-10-07|49.2", "2026-10-07|47.1", "2026-10-07|41.6", "2026-10-08|47.7", "2026-10-08|43", "2026-10-08|37.3", "2026-10-09|49.3", "2026-10-09|44.7", "2026-10-09|38.5"],
+    "proportion": { "label1": "Before", "label2": "After", "d1": "104", "n1": "18400", "d2": "61", "n2": "18200" },
+    "means": {
+      "a": "47.2\n44.1\n49.5\n42.8\n46.3\n45.0\n50.1\n43.7\n48.4\n44.9\n41.6\n46.8\n45.5\n49.0\n43.2",
+      "b": "41.3\n39.8\n43.5\n40.2\n42.1\n38.7\n44.0\n40.9\n39.5\n42.6\n41.8\n37.9\n43.1\n40.4\n41.0"
+    },
+    "size": { "p0": "0.57", "p1": "0.34", "alpha": "5", "power": "80", "sd": "4", "delta": "2", "alpha2": "5", "power2": "80" }
+  },
+  "placeholders": {
+    "values": "42.4\n39.9\n43.6\nor  14.09.2026\t42.4",
+    "name": "e.g. Loading time",
+    "unit": "e.g. min",
+    "before": "47.2\n44.1\n49.5",
+    "after": "41.3\n39.8\n43.5"
+  },
+  "rules": [
+    { "id": 1, "name": "Beyond 3σ", "signal": "Point {n} ({value}) is beyond the 3σ limit.", "text": "One measurement far outside the limits. Something was different for that one: find it while people still remember." },
+    { "id": 2, "name": "Shift", "signal": "{n} points in a row on the same side of the mean (points {from}–{to}).", "text": "The level has moved. After a change you made, that is proof it worked; without one, find what changed." },
+    { "id": 3, "name": "Trend", "signal": "{n} points in a row, each {direction} than the one before (points {from}–{to}).", "text": "Something is drifting: wear, a growing backlog, fatigue, or a slow change in the mix." },
+    { "id": 4, "name": "Sawtooth", "signal": "{n} points in a row alternating up and down (points {from}–{to}).", "text": "Up, down, up, down: usually two streams measured in turn (two shifts, two docks, two operators), or over-adjustment after every value." },
+    { "id": 5, "name": "2 of 3 beyond 2σ", "signal": "2 of 3 points beyond 2σ on the same side (points {from}–{to}).", "text": "A small shift that has not yet crossed the limit. Treat it as an early warning and look at those points." },
+    { "id": 6, "name": "4 of 5 beyond 1σ", "signal": "4 of 5 points beyond 1σ on the same side (points {from}–{to}).", "text": "The process leans to one side. Often a change in the input, the staffing or the time of day." },
+    { "id": 7, "name": "Too quiet", "signal": "{n} points in a row within 1σ of the mean (points {from}–{to}).", "text": "Less variation than this process shows: the measurement may not see the differences, or two streams average each other out." },
+    { "id": 8, "name": "Mixture", "signal": "{n} points in a row beyond 1σ on both sides, none near the mean (points {from}–{to}).", "text": "Values jump between two levels: two processes are mixed in one chart. Separate them (by shift, dock, product) and chart each." }
+  ],
+  "directions": { "up": "higher", "down": "lower" },
+  "control": {
+    "stable": "No signal in {n} measurements. The ups and downs are the normal noise of this process; reacting to single values will not help. To get a better number, change the process itself.",
+    "signals": "{count} signal(s) that are not normal noise. Investigate those measurements first: what was different in volume, people, equipment or method? Then take the cause through 5 Whys.",
+    "short": "Fewer than 20 measurements: the limits are rough. Keep measuring before you trust a signal or a capability index."
+  },
+  "capability": {
+    "none": "Enter a specification limit (LSL or USL) to see how capable the process is.",
+    "low": { "label": "Not capable", "text": "Cpk {cpk}: the process cannot stay inside the specification. Expect about {ppm} per million outside ({pct}). Reduce the spread or move the mean before anyone promises the customer." },
+    "marginal": { "label": "Marginal", "text": "Cpk {cpk}: it fits, but only just. Expect about {ppm} per million outside ({pct}); a small drift puts you over the limit. Keep the chart running." },
+    "capable": { "label": "Capable", "text": "Cpk {cpk}: the process fits the specification with room to spare. Expect about {ppm} per million outside ({pct}). Hold the standard and check the chart weekly." },
+    "six": { "label": "Six sigma", "text": "Cpk {cpk}: the specification is twice as wide as the process needs. Expect about {ppm} per million outside. Spend the effort elsewhere." },
+    "gap": "Cp {cp} but Cpk {cpk}: the spread would fit, the process is off centre. Moving the mean towards {target} gains more than reducing variation.",
+    "shortLong": "Pp/Ppk ({pp}/{ppk}) are well below Cp/Cpk: the process shifts between measurements. The signals on the chart say where."
+  },
+  "normality": {
+    "normal": "The values follow a normal curve (Anderson–Darling, {p}): the capability indices and the expected % outside can be trusted.",
+    "notNormal": "The values do not follow a normal curve (Anderson–Darling, {p}): read Cp, Cpk and the expected % outside as rough. Look at the histogram: a long tail usually means waiting or rework in some cases; two humps mean two processes mixed.",
+    "outliers": "The {n} point(s) beyond the limits pull the tails. Without them the sample is {verdict} ({p}). Explain those points first, then judge the rest.",
+    "normalWord": "normal",
+    "notNormalWord": "still not normal",
+    "few": "Fewer than 8 measurements: no normality test is meaningful yet."
+  },
+  "drift": "Over the whole sample the values drift by {slope} {unit} per point (r = {r}). A slow drift is not a signal yet, but it will be.",
+  "proportion": {
+    "real": "The change from {p1} to {p2} is real ({p}): less than {chance} chance that it is noise. 95% interval for the difference: {low} to {high}.",
+    "noise": "The change from {p1} to {p2} could be noise ({p}): with these numbers, a difference this size happens by chance about {chance} of the time. Measure more before you call it an improvement, or a problem.",
+    "borderline": "The change from {p1} to {p2} is probably real ({p}), but not beyond doubt: about {chance} chance that it is noise. One more week of data would settle it.",
+    "oneInWords": "1 in {n}",
+    "better": "better", "worse": "worse"
+  },
+  "means": {
+    "real": "The average moved from {m1} to {m2} ({diff}): real (Welch t = {t}, {p}). 95% interval for the change: {low} to {high}.",
+    "noise": "The average moved from {m1} to {m2} ({diff}), but that could be noise ({p}): the two samples overlap too much to tell. Measure more or reduce the spread.",
+    "borderline": "The average moved from {m1} to {m2} ({diff}): probably real ({p}), not yet beyond doubt. A few more measurements on each side would settle it.",
+    "need": "Paste at least two values on each side."
+  },
+  "size": {
+    "alpha": "Alpha is the risk of seeing a change that is not there: 5 % means one false alarm in twenty tests.",
+    "power": "Power is the chance of seeing a change that is there: 80 % means you miss a real change one time in five.",
+    "proportionResult": "Measure {n} units before and {n} after to tell {p0} from {p1}.",
+    "meanResult": "Measure {n} values before and {n} after to see a change of {delta} {unit} when single values spread by {sd}.",
+    "need": "Enter two different rates, alpha and power."
+  },
+  "tips": [
+    ["Measure before you change.", "Twenty values of the old process are the only proof your change worked. Start the chart today."],
+    ["Limits come from the process, specs from the customer.", "Control limits say what the process does; LSL and USL say what is needed. A stable process can still be a bad one."],
+    ["Chase signals, not values.", "A value inside the limits is noise, however bad it looks. A Nelson rule is a reason to walk to the floor."],
+    ["p is not proof, but it stops arguments.", "p = 0.002 means a difference this size happens by chance 2 times in 1,000. Decide with the number, then act."],
+    ["Explain outliers before deleting them.", "A truck that waited two hours is real. Find its story; only then decide whether it belongs in the sample."]
+  ]
+}

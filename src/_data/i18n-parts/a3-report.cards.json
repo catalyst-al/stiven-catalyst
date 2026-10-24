@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "A3 Report", "type": "Problem solving", "time": "20 min", "summary": "One problem on one sheet, the Toyota way: the facts and the number, the target and its date, the root cause, countermeasures with an owner each, and the follow-up. An eight-point check, print on A3 or A4, Word.", "url": "/tools/a3-report/", "cta": "Start an A3" },
+    "de": { "name": "A3-Report", "type": "Problemlösung", "time": "20 min", "summary": "Ein Problem auf einem Blatt, wie bei Toyota: Fakten und Zahl, Ziel mit Termin, Grundursache, Maßnahmen mit je einem Verantwortlichen und die Wirksamkeitsprüfung. Eine Prüfung in acht Punkten, Druck auf A3 oder A4, Word.", "url": "/de/tools/a3-report/", "cta": "A3 beginnen" },
+    "sq": { "name": "Raporti A3", "type": "Zgjidhja e problemeve", "time": "20 min", "summary": "Një problem në një fletë, si te Toyota: faktet dhe numri, objektivi me afat, shkaku rrënjësor, kundërmasat me nga një përgjegjës dhe ndjekja. Një kontroll me tetë pika, shtyp në A3 ose A4, Word.", "url": "/sq/tools/a3-report/", "cta": "Nis një A3" }
+  },
+  "routine": { "when": "When a problem returns", "do": "Write the problem on one A3 before you fix it: the number, the root cause, one owner per countermeasure, and the date you will check.", "de": { "when": "Wenn ein Problem wiederkehrt", "do": "Schreiben Sie das Problem auf ein A3, bevor Sie es lösen: die Zahl, die Grundursache, einen Verantwortlichen pro Maßnahme und den Termin der Prüfung." }, "sq": { "when": "Kur një problem kthehet", "do": "Shkruaje problemin në një A3 para se ta zgjidhësh: numri, shkaku rrënjësor, një përgjegjës për çdo kundërmasë dhe data kur do ta kontrollosh." } },
+  "recipe": "example"
+}

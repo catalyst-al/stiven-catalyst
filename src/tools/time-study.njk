@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Time Study
+seo_title: "Time study with stopwatch, takt time and Yamazumi chart for the shop floor"
+description: "Time a process element by element over several cycles. Get the standard time per element, the takt, a Yamazumi per station and a balancing suggestion."
+activeNav: /tools.html
+permalink: /tools/time-study/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Lean</p>
+  <h1>Time Study</h1>
+  <p class="lede">Stand at the line with a stopwatch and time the work element by element, cycle after cycle. The tool gives you the standard time of each element, the takt from demand and available time, a Yamazumi of every station against that takt, how much of the time is waste, and which element to move first.</p>
+</section>
+
+{% set cfg = timeStudy %}
+{% include "partials/time-study.njk" %}

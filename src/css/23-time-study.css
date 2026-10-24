@@ -1,0 +1,103 @@
+/* ===== Time Study (js/time-study.js) =====
+   Stations with their elements as compact rows, a stopwatch with one large number, the Yamazumi and the element table.
+   The type of an element (VA, NVA, W) is told by its letters; the colour only repeats it. */
+.ts-takt { margin: 0; color: var(--ink); font-weight: 600; }
+.ts-stations { display: grid; gap: 14px; }
+.ts-station {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+}
+.ts-station-head,
+.ts-element { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px 10px; }
+.ts-element { grid-template-columns: auto minmax(0, 1fr) minmax(0, 150px) auto; }
+.ts-elements { display: grid; gap: 8px; padding-left: 6px; }
+.ts-no {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.ts-no-small { min-width: 34px; height: 24px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.ts-in {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+.ts-in:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.ts-station-head .ts-in { font-weight: 700; }
+.ts-type { padding-right: 28px; }
+.ts-add { justify-self: start; padding-left: 0; }
+/* The station without a remove button keeps the same width as the others. */
+.ts-station-head > .ts-in:last-child,
+.ts-element > .ts-type:last-child { grid-column-end: -1; }
+
+/* The stopwatch: one large number, the element being watched under it, two big buttons. */
+.ts-watch-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.ts-clock {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0 0;
+  font-family: var(--display);
+  font-size: clamp(56px, 12vw, 96px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ts-clock-unit { color: var(--muted); font-size: clamp(20px, 3vw, 28px); }
+.ts-current { margin: 4px 0 0; text-align: center; color: var(--muted); }
+.ts-current strong { color: var(--ink); }
+.ts-watch-actions { justify-content: center; }
+.ts-big { min-width: 140px; padding: 16px 28px; font-size: 18px; }
+.ts-entry { align-items: end; }
+.ts-manual textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.ts-type-cell { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.dl-more { margin-top: 10px; }
+
+/* Results: the moves in the focus card, the element table with its totals. */
+.ts-moves li { margin-bottom: 10px; }
+.ts-move-detail { display: block; color: var(--muted); font-size: 14px; }
+.ts-actions-status { flex-basis: 100%; }
+.ts-table .ts-strong { font-weight: 800; color: var(--ink); }
+.ts-table .ts-high { color: var(--warn); font-weight: 700; }
+.ts-table .ts-outliers { color: var(--muted); font-size: 13px; }
+.ts-table tfoot td { border-top: 2px solid var(--line); color: var(--muted); font-size: 13px; }
+.ts-table tfoot .ts-total td:first-child { color: var(--ink); font-weight: 700; }
+.ts-table .is-waste td:first-child { border-left: 3px solid var(--danger); }
+.ts-tag-va { border-color: color-mix(in srgb, var(--blue) 60%, transparent); color: var(--blue); }
+.ts-tag-nva { border-color: color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
+.ts-tag-w { border-color: color-mix(in srgb, var(--danger) 60%, transparent); color: var(--danger); }
+
+@media (max-width: 600px) {
+  .ts-element { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .ts-element .ts-type { grid-column: 2 / 3; }
+  .ts-element .dl-remove { grid-row: 1; grid-column: 3; }
+  .ts-watch-grid { grid-template-columns: minmax(0, 1fr); }
+  .ts-big { flex: 1 1 auto; }
+}
+
+@media print {
+  .ts-setup, .ts-actions-status, .dl-more { display: none !important; }
+  .ts-results { padding: 0; border: 0; }
+  .ts-table { font-size: 11px; }
+  .ts-table .is-waste td:first-child { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

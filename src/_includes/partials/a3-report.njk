@@ -1,0 +1,173 @@
+{#- The A3 Report: one page that tells a problem from its background to its follow-up. The page sets `cfg` to its data file; a3-report.js does the rest. -#}
+{%- set b = cfg.boxes -%}
+<section class="shell tool-layout a3-setup">
+  <div class="tool-panel" data-a3-report>
+
+    <div class="dl-box a3-list-box">
+      <div class="dl-log-head">
+        <p class="kicker">{{ "Your A3s" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <ul class="a3-list" data-list></ul>
+      <p class="dl-empty" data-list-empty>{{ "No A3 saved yet." | t(lang) }} {{ "Start a new one below, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example" | t(lang) }}</button>.</p>
+      <p class="form-note dl-log-status" data-list-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-new>{{ "New A3" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-example-again hidden>{{ "Load the example" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <form class="dl-box a3-form" data-a3-form novalidate>
+      <fieldset>
+        <legend class="kicker">{{ "Title, owner, date" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="a3-title">{{ "Title" | t(lang) }}</label>
+            <input id="a3-title" name="title" placeholder="{{ cfg.fields.title }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="a3-owner">{{ "Owner" | t(lang) }}</label>
+            <input id="a3-owner" name="owner" placeholder="{{ cfg.fields.owner }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="a3-date">{{ "Date" | t(lang) }}</label>
+            <input id="a3-date" name="date" type="date">
+          </div>
+          <div class="field dl-wide">
+            <label for="a3-area">{{ "Area or team" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="a3-area" name="area" placeholder="{{ cfg.fields.area }}" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">1 · {{ b.background.title }}</legend>
+        <p class="a3-hint">{{ b.background.question }}</p>
+        <div class="field">
+          <label class="visually-hidden" for="a3-background">{{ b.background.title }}</label>
+          <textarea id="a3-background" name="background" rows="3" placeholder="{{ b.background.placeholder }}"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">2 · {{ b.current.title }}</legend>
+        <p class="a3-hint">{{ b.current.question }}</p>
+        <div class="field">
+          <label class="visually-hidden" for="a3-current">{{ b.current.title }}</label>
+          <textarea id="a3-current" name="current" rows="4" placeholder="{{ b.current.placeholder }}"></textarea>
+        </div>
+        <div class="dl-grid a3-numbers">
+          <div class="field">
+            <label for="a3-baseline">{{ "Key number today" | t(lang) }}</label>
+            <input id="a3-baseline" name="baseline" inputmode="decimal" placeholder="{{ cfg.fields.baseline }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="a3-unit">{{ "Unit" | t(lang) }}</label>
+            <input id="a3-unit" name="unit" placeholder="{{ cfg.fields.unit }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions a3-pull">
+          <button class="button-ghost" type="button" data-from-pareto>{{ "Read the Pareto result" | t(lang) }}</button>
+          <p class="form-note" data-pareto-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">3 · {{ b.target.title }}</legend>
+        <p class="a3-hint">{{ b.target.question }}</p>
+        <div class="field">
+          <label class="visually-hidden" for="a3-target">{{ b.target.title }}</label>
+          <textarea id="a3-target" name="target" rows="2" placeholder="{{ b.target.placeholder }}"></textarea>
+        </div>
+        <div class="dl-grid a3-numbers">
+          <div class="field">
+            <label for="a3-target-value">{{ "Target number" | t(lang) }}</label>
+            <input id="a3-target-value" name="targetValue" inputmode="decimal" placeholder="{{ cfg.fields.targetValue }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="a3-target-by">{{ "By when" | t(lang) }}</label>
+            <input id="a3-target-by" name="targetBy" type="date">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">4 · {{ b.cause.title }}</legend>
+        <p class="a3-hint">{{ b.cause.question }}</p>
+        <div class="field">
+          <label class="visually-hidden" for="a3-cause">{{ b.cause.title }}</label>
+          <textarea id="a3-cause" name="rootCause" rows="5" placeholder="{{ b.cause.placeholder }}"></textarea>
+        </div>
+        <div class="tool-actions a3-pull">
+          <button class="button-ghost" type="button" data-from-whys>{{ "Take from 5 Whys" | t(lang) }}</button>
+          <a class="button-ghost" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>{{ "Open 5 Whys" | t(lang) }}</a>
+          <p class="form-note" data-whys-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">5 · {{ b.countermeasures.title }}</legend>
+        <p class="a3-hint">{{ b.countermeasures.question }}</p>
+        <div class="a3-rows" data-cms></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-cm>{{ "Add a countermeasure" | t(lang) }}</button>
+          <button class="button-secondary" type="button" data-send-actions>{{ "Send countermeasures to the Action Tracker" | t(lang) }}</button>
+          <a class="button-ghost" href="{{ '/tools/action-tracker/' | local(lang) }}" data-tracker>{{ "Open the Action Tracker" | t(lang) }}</a>
+          <p class="form-note" data-actions-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">6 · {{ b.plan.title }}</legend>
+        <p class="a3-hint">{{ b.plan.question }}</p>
+        <div class="a3-rows" data-plan></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-step>{{ "Add a step" | t(lang) }}</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">7 · {{ b.followUp.title }}</legend>
+        <p class="a3-hint">{{ b.followUp.question }}</p>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="a3-how">{{ "How will you check?" | t(lang) }}</label>
+            <input id="a3-how" name="how" placeholder="{{ cfg.fields.how }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="a3-check-date">{{ "Check date" | t(lang) }}</label>
+            <input id="a3-check-date" name="checkDate" type="date">
+          </div>
+          <div class="field">
+            <label for="a3-latest">{{ "Latest value" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="a3-latest" name="latest" inputmode="decimal" placeholder="{{ cfg.fields.latest }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="a3-result">{{ "Result" | t(lang) }}</label>
+            <textarea id="a3-result" name="result" rows="2" placeholder="{{ cfg.fields.result }}"></textarea>
+          </div>
+        </div>
+      </fieldset>
+      <p class="form-note" data-save-status aria-live="polite">{{ "Saved in this browser." | t(lang) }}</p>
+    </form>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results a3-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="a3-report-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/a3-report.js' | assetUrl }}" defer></script>

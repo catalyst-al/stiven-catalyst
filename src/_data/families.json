@@ -8,19 +8,84 @@
     "line": "You run the floor for one shift: people, damage, incomplete orders, delays, and a clean handover at the end.",
     "color": "#a78bfa",
     "orbit": 0.46,
-    "tools": ["/tools/shift-pulse/", "/tools/damage-control/", "/tools/incomplete-control/", "/tools/delay-analyzer/", "/tools/night-audit/", "/tools/shift-handover/"],
+    "tools": [
+      "/tools/shift-pulse/",
+      "/tools/damage-control/",
+      "/tools/incomplete-control/",
+      "/tools/delay-analyzer/",
+      "/tools/night-audit/",
+      "/tools/shift-handover/",
+      "/tools/action-tracker/",
+      "/tools/daily-board/",
+      "/tools/five-s-audit/",
+      "/tools/safety-cross/"
+    ],
     "learn": [],
-    "also": ["/tools/five-whys/"],
+    "also": [
+      "/tools/five-whys/"
+    ],
     "read": [],
     "routine": [
-      { "when": "Start of shift", "do": "Read the last handover before the briefing, not after the first problem.", "tool": "/tools/shift-handover/" },
-      { "when": "During the shift", "do": "Log each damaged unit where it happens, with its stage and cause.", "tool": "/tools/damage-control/" },
-      { "when": "During the shift", "do": "Log every order that leaves without all its items or parcels.", "tool": "/tools/incomplete-control/" },
-      { "when": "Every night", "do": "In a hotel, log every exception the night audit finds, with its stage and cause, before the audit closes.", "tool": "/tools/night-audit/" },
-      { "when": "End of shift", "do": "Before you write the handover, look at the whole shift in one picture.", "tool": "/tools/shift-pulse/" },
-      { "when": "End of shift", "do": "Hand over open issues with an owner and a time, not a story.", "tool": "/tools/shift-handover/" },
-      { "when": "Every week", "do": "See whether late routes started at the dock or on the road.", "tool": "/tools/delay-analyzer/" },
-      { "when": "When a problem returns", "do": "Ask why until you reach something you can change.", "tool": "/tools/five-whys/" }
+      {
+        "when": "Start of shift",
+        "do": "Read the last handover before the briefing, not after the first problem.",
+        "tool": "/tools/shift-handover/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Log each damaged unit where it happens, with its stage and cause.",
+        "tool": "/tools/damage-control/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Log every order that leaves without all its items or parcels.",
+        "tool": "/tools/incomplete-control/"
+      },
+      {
+        "when": "Every night",
+        "do": "In a hotel, log every exception the night audit finds, with its stage and cause, before the audit closes.",
+        "tool": "/tools/night-audit/"
+      },
+      {
+        "when": "End of shift",
+        "do": "Before you write the handover, look at the whole shift in one picture.",
+        "tool": "/tools/shift-pulse/"
+      },
+      {
+        "when": "End of shift",
+        "do": "Hand over open issues with an owner and a time, not a story.",
+        "tool": "/tools/shift-handover/"
+      },
+      {
+        "when": "Every week",
+        "do": "See whether late routes started at the dock or on the road.",
+        "tool": "/tools/delay-analyzer/"
+      },
+      {
+        "when": "When a problem returns",
+        "do": "Ask why until you reach something you can change.",
+        "tool": "/tools/five-whys/"
+      },
+      {
+        "when": "Every week",
+        "do": "Read the actions overdue first, then this week's, then what was verified. Ten minutes, the list is the agenda.",
+        "tool": "/tools/action-tracker/"
+      },
+      {
+        "when": "Every morning",
+        "do": "Open the board at the huddle, read the five letters and the agenda, and give every red day an action with an owner and a date.",
+        "tool": "/tools/daily-board/"
+      },
+      {
+        "when": "Every week",
+        "do": "Walk the same areas on the same day, score what you see, and give every finding at 2 or below an owner before you leave the floor.",
+        "tool": "/tools/five-s-audit/"
+      },
+      {
+        "when": "Start of shift",
+        "do": "Log what happened yesterday, read the talk of the day at the briefing and ask who saw a near miss.",
+        "tool": "/tools/safety-cross/"
+      }
     ],
     "next": "zenith"
   },
@@ -33,17 +98,85 @@
     "line": "You lead the shift leads. You read an area's numbers week by week and decide where the next hour of attention goes.",
     "color": "#4ab5f7",
     "orbit": 0.7,
-    "tools": ["/tools/cx-control-tower/", "/tools/kpi-diagnostic/", "/tools/pareto/"],
+    "tools": [
+      "/tools/cx-control-tower/",
+      "/tools/kpi-diagnostic/",
+      "/tools/pareto/",
+      "/tools/a3-report/",
+      "/tools/kaizen-board/",
+      "/tools/skills-matrix/",
+      "/tools/oee/",
+      "/tools/hotel-kpis/",
+      "/tools/gemba-walk/"
+    ],
     "learn": [],
-    "also": ["/tools/shift-pulse/", "/tools/delay-analyzer/", "/tools/sigma-control-chart/"],
+    "also": [
+      "/tools/shift-pulse/",
+      "/tools/delay-analyzer/",
+      "/tools/sigma-control-chart/"
+    ],
     "read": [],
     "routine": [
-      { "when": "Every morning", "do": "Read yesterday in one view: on time, undamaged, complete and complaints.", "tool": "/tools/cx-control-tower/" },
-      { "when": "When a KPI turns red", "do": "Find out whether it is clarity, skill, capacity, process or ownership before you push.", "tool": "/tools/kpi-diagnostic/" },
-      { "when": "Every week", "do": "Sort the week's losses and start with the few causes behind most of them.", "tool": "/tools/pareto/" },
-      { "when": "Every week", "do": "Read the logs of your shifts week by week: rates, the trend and what is still open.", "tool": "/tools/shift-pulse/" },
-      { "when": "Every week", "do": "Check with your shift leads where route delays begin.", "tool": "/tools/delay-analyzer/" },
-      { "when": "Every month", "do": "Tell a real change from a normal bad day before you react.", "tool": "/tools/sigma-control-chart/" }
+      {
+        "when": "Every morning",
+        "do": "Read yesterday in one view: on time, undamaged, complete and complaints.",
+        "tool": "/tools/cx-control-tower/"
+      },
+      {
+        "when": "When a KPI turns red",
+        "do": "Find out whether it is clarity, skill, capacity, process or ownership before you push.",
+        "tool": "/tools/kpi-diagnostic/"
+      },
+      {
+        "when": "Every week",
+        "do": "Sort the week's losses and start with the few causes behind most of them.",
+        "tool": "/tools/pareto/"
+      },
+      {
+        "when": "Every week",
+        "do": "Read the logs of your shifts week by week: rates, the trend and what is still open.",
+        "tool": "/tools/shift-pulse/"
+      },
+      {
+        "when": "Every week",
+        "do": "Check with your shift leads where route delays begin.",
+        "tool": "/tools/delay-analyzer/"
+      },
+      {
+        "when": "Every month",
+        "do": "Tell a real change from a normal bad day before you react.",
+        "tool": "/tools/sigma-control-chart/"
+      },
+      {
+        "when": "When a problem returns",
+        "do": "Write the problem on one A3 before you fix it: the number, the root cause, one owner per countermeasure, and the date you will check.",
+        "tool": "/tools/a3-report/"
+      },
+      {
+        "when": "Every week",
+        "do": "Answer every new idea within the week, move each card one honest step, and name the idea of the month in front of the team.",
+        "tool": "/tools/kaizen-board/"
+      },
+      {
+        "when": "Every month",
+        "do": "Walk the matrix with each team lead, update the levels you saw on the floor, take a snapshot and give every single point of failure a trainee and a date.",
+        "tool": "/tools/skills-matrix/"
+      },
+      {
+        "when": "End of shift",
+        "do": "Log the shift of each machine with its stops by reason, then attack the biggest of the six losses with an owner and a date.",
+        "tool": "/tools/oee/"
+      },
+      {
+        "when": "Every morning",
+        "do": "Paste last night's figures from the night audit, read the morning report at the meeting and act on the KPI the tool puts first.",
+        "tool": "/tools/hotel-kpis/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Walk your layer's questions where the work is done, answer each with yes or no against the standard, and give every no you cannot fix on the spot an owner before you leave the floor.",
+        "tool": "/tools/gemba-walk/"
+      }
     ],
     "next": "lumen"
   },
@@ -56,15 +189,75 @@
     "line": "You look at the whole system: find where a problem really sits, prove it with data, and change the process so it stays fixed.",
     "color": "#f5c86a",
     "orbit": 0.94,
-    "tools": ["/tools/sigma-control-chart/", "/tools/five-whys/"],
-    "learn": ["/tools/six-sigma-dmaic/"],
-    "also": ["/tools/pareto/", "/tools/kpi-diagnostic/"],
+    "tools": [
+      "/tools/sigma-control-chart/",
+      "/tools/five-whys/",
+      "/tools/fishbone/",
+      "/tools/fmea/",
+      "/tools/process-lab/",
+      "/tools/time-study/",
+      "/tools/value-stream-map/",
+      "/tools/standard-work/"
+    ],
+    "learn": [
+      "/tools/six-sigma-dmaic/"
+    ],
+    "also": [
+      "/tools/pareto/",
+      "/tools/kpi-diagnostic/"
+    ],
     "read": [],
     "routine": [
-      { "when": "Every problem", "do": "Reach a root cause you can change before anyone proposes a fix.", "tool": "/tools/five-whys/" },
-      { "when": "Every week", "do": "Put the process on a control chart and react only to real signals.", "tool": "/tools/sigma-control-chart/" },
-      { "when": "Every quarter", "do": "Rank the losses and choose the next improvement project.", "tool": "/tools/pareto/" },
-      { "when": "Every project", "do": "Run it through Define, Measure, Analyse, Improve and Control.", "tool": "/tools/six-sigma-dmaic/" }
+      {
+        "when": "Every problem",
+        "do": "Reach a root cause you can change before anyone proposes a fix.",
+        "tool": "/tools/five-whys/"
+      },
+      {
+        "when": "Every week",
+        "do": "Put the process on a control chart and react only to real signals.",
+        "tool": "/tools/sigma-control-chart/"
+      },
+      {
+        "when": "Every quarter",
+        "do": "Rank the losses and choose the next improvement project.",
+        "tool": "/tools/pareto/"
+      },
+      {
+        "when": "Every project",
+        "do": "Run it through Define, Measure, Analyse, Improve and Control.",
+        "tool": "/tools/six-sigma-dmaic/"
+      },
+      {
+        "when": "When a problem returns",
+        "do": "Gather the people who do the work for fifteen minutes, fill the bones, vote, and leave with the likely causes as actions to verify on the floor.",
+        "tool": "/tools/fishbone/"
+      },
+      {
+        "when": "When a process changes",
+        "do": "Walk the changed steps with the team, rate each failure mode and give every high-priority row an action with an owner and a date.",
+        "tool": "/tools/fmea/"
+      },
+      {
+        "when": "Before and after a change",
+        "do": "Measure twenty values before you change the process and twenty after, then let the test say whether the change is real.",
+        "tool": "/tools/process-lab/"
+      },
+      {
+        "when": "Every week",
+        "do": "Time one station for five cycles, compare it with takt and move the first element that fits.",
+        "tool": "/tools/time-study/"
+      },
+      {
+        "when": "Every month",
+        "do": "Walk one value stream from the customer back, count every pile, and turn the largest wait into a kaizen burst with an owner.",
+        "tool": "/tools/value-stream-map/"
+      },
+      {
+        "when": "When a problem returns",
+        "do": "Write the job as a standard with a reason for every key point, start a new version when it changes, and train the team on it.",
+        "tool": "/tools/standard-work/"
+      }
     ],
     "next": "atlas"
   },
@@ -77,14 +270,30 @@
     "line": "Carry your experience into the next role: a designed CV, an ATS CV and a matching cover letter.",
     "color": "#e9eef3",
     "orbit": 1.18,
-    "tools": ["/tools/cv-builder/", "/tools/ats-cv/", "/tools/cover-letter/"],
+    "tools": [
+      "/tools/cv-builder/",
+      "/tools/ats-cv/",
+      "/tools/cover-letter/"
+    ],
     "learn": [],
     "also": [],
     "read": [],
     "routine": [
-      { "when": "Every quarter", "do": "Add one result with a number to your CV while you still remember it.", "tool": "/tools/cv-builder/" },
-      { "when": "Before you apply", "do": "Check your CV against the job ad, the way screening software reads it.", "tool": "/tools/ats-cv/" },
-      { "when": "Every application", "do": "Write the letter for this company, not for any company.", "tool": "/tools/cover-letter/" }
+      {
+        "when": "Every quarter",
+        "do": "Add one result with a number to your CV while you still remember it.",
+        "tool": "/tools/cv-builder/"
+      },
+      {
+        "when": "Before you apply",
+        "do": "Check your CV against the job ad, the way screening software reads it.",
+        "tool": "/tools/ats-cv/"
+      },
+      {
+        "when": "Every application",
+        "do": "Write the letter for this company, not for any company.",
+        "tool": "/tools/cover-letter/"
+      }
     ],
     "next": null
   }

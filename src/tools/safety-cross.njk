@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Safety Cross
+seo_title: "Safety cross, LTIFR and TRIR calculator and near-miss log for warehouse teams"
+description: "A private safety cross: every accident, near miss and unsafe condition on a green cross of the month, with LTIFR, TRIR, the Bird pyramid and a daily talk."
+activeNav: /tools.html
+permalink: /tools/safety-cross/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Safety</p>
+  <h1>Safety Cross</h1>
+  <p class="lede">Log every accident, first aid, near miss and unsafe condition the day it happens. The month becomes a green cross with a red or amber day for each event, next to the days since the last accident, LTIFR and TRIR, the Bird pyramid, the cause to tackle first and the talk for today's briefing.</p>
+</section>
+
+{% set cfg = safetyCross %}
+{% include "partials/safety-cross.njk" %}

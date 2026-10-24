@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Maßnahmenliste
+seo_title: "Maßnahmenliste für Operations-Teams: Verantwortliche, Termine, PDCA und Bestätigung"
+description: "Eine private Liste aller Maßnahmen aus jedem Tool: Verantwortlicher, Termin, Status, Nachweis. Überfälliges zuerst, Wochenprüfung in zehn Minuten, Excel."
+activeNav: /de/tools.html
+permalink: /de/tools/action-tracker/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Maßnahmen</p>
+  <h1>Maßnahmen&shy;liste</h1>
+  <p class="lede">Jede Maßnahme, jeder Befund und jedes Signal aus den anderen Tools landet hier mit Verantwortlichem, Termin und Nachweis. Zuerst das Überfällige, dann die Woche, dann das Bestätigte. Die Liste ist die Wochenprüfung.</p>
+</section>
+
+{% set cfg = de.actionTracker %}
+{% include "partials/action-tracker.njk" %}

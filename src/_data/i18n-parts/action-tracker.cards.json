@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Action Tracker", "type": "Actions", "time": "Weekly", "summary": "One list for every countermeasure, finding and signal from the other tools: owner, due date, status and how it is verified. Overdue first, a weekly review in ten minutes, calendar and Excel export.", "url": "/tools/action-tracker/", "cta": "Open the list" },
+    "de": { "name": "Maßnahmenliste", "type": "Maßnahmen", "time": "Wöchentlich", "summary": "Eine Liste für jede Maßnahme, jeden Befund und jedes Signal aus den anderen Tools: Verantwortlicher, Termin, Status und Nachweis. Überfälliges zuerst, Wochenprüfung in zehn Minuten, Kalender und Excel.", "url": "/de/tools/action-tracker/", "cta": "Liste öffnen" },
+    "sq": { "name": "Lista e veprimeve", "type": "Veprime", "time": "Çdo javë", "summary": "Një listë për çdo kundërmasë, gjetje dhe sinjal nga mjetet e tjera: përgjegjësi, afati, statusi dhe si verifikohet. Të vonuarat në fillim, shqyrtim javor në dhjetë minuta, kalendar dhe Excel.", "url": "/sq/tools/action-tracker/", "cta": "Hap listën" }
+  },
+  "routine": { "when": "Every week", "do": "Read the actions overdue first, then this week's, then what was verified. Ten minutes, the list is the agenda.", "de": { "when": "Jede Woche", "do": "Lesen Sie zuerst die überfälligen Maßnahmen, dann die dieser Woche, dann das Bestätigte. Zehn Minuten, die Liste ist die Tagesordnung." }, "sq": { "when": "Çdo javë", "do": "Lexo në fillim veprimet e vonuara, pastaj të kësaj jave, pastaj çfarë u verifikua. Dhjetë minuta, lista është rendi i ditës." } },
+  "recipe": "example"
+}

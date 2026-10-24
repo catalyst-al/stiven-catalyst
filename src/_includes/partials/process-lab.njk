@@ -1,0 +1,189 @@
+{#- Process Lab: I-MR chart, capability and normality of pasted measurements, two before/after tests and a sample-size
+    calculator. The page sets `cfg` to its data file; stats-kit.js has the arithmetic, process-lab.js does the rest. -#}
+<section class="shell tool-layout pl-setup">
+  <div class="tool-panel" data-process-lab>
+
+    <div class="pl-tabs" role="tablist" aria-label="{{ "Process Lab" | t(lang) }}">
+      <button class="pl-tab" type="button" role="tab" id="pl-tab-measure" aria-controls="pl-panel-measure" aria-selected="true" data-tab="measure">1 · {{ "Measurements" | t(lang) }}</button>
+      <button class="pl-tab" type="button" role="tab" id="pl-tab-compare" aria-controls="pl-panel-compare" aria-selected="false" tabindex="-1" data-tab="compare">2 · {{ "Before / after" | t(lang) }}</button>
+      <button class="pl-tab" type="button" role="tab" id="pl-tab-size" aria-controls="pl-panel-size" aria-selected="false" tabindex="-1" data-tab="size">3 · {{ "How many to measure" | t(lang) }}</button>
+    </div>
+
+    {#- 1 · Measurements: a pasted column, the specification, the chart below. -#}
+    <div class="pl-panel" role="tabpanel" id="pl-panel-measure" aria-labelledby="pl-tab-measure" data-panel="measure">
+      <div class="dl-box">
+        <fieldset>
+          <legend class="kicker">{{ "Measurements" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Paste a column from Excel, one value per line, or a date and a value per line. Loading minutes, cycle seconds, weights: anything you measure one at a time." | t(lang) }} {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+          <div class="pl-entry">
+            <div class="field">
+              <label for="pl-values">{{ "Measurements, one per line" | t(lang) }}</label>
+              <textarea id="pl-values" name="values" rows="9" spellcheck="false" placeholder="{{ cfg.placeholders.values }}" data-setting></textarea>
+              <p class="form-note" data-values-count aria-live="polite"></p>
+            </div>
+            <div class="dl-grid pl-spec">
+              <div class="field pl-wide">
+                <label for="pl-name">{{ "What is measured" | t(lang) }}</label>
+                <input id="pl-name" name="name" placeholder="{{ cfg.placeholders.name }}" autocomplete="off" data-setting>
+              </div>
+              <div class="field">
+                <label for="pl-unit">{{ "Unit" | t(lang) }}</label>
+                <input id="pl-unit" name="unit" placeholder="{{ cfg.placeholders.unit }}" autocomplete="off" data-setting>
+              </div>
+              <div class="field">
+                <label for="pl-lsl">LSL <span class="optional">{{ "lower specification limit" | t(lang) }}</span></label>
+                <input id="pl-lsl" name="lsl" inputmode="decimal" autocomplete="off" data-setting>
+              </div>
+              <div class="field">
+                <label for="pl-usl">USL <span class="optional">{{ "upper specification limit" | t(lang) }}</span></label>
+                <input id="pl-usl" name="usl" inputmode="decimal" autocomplete="off" data-setting>
+              </div>
+              <div class="field">
+                <label for="pl-target">{{ "Target" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+                <input id="pl-target" name="target" inputmode="decimal" autocomplete="off" data-setting>
+              </div>
+            </div>
+          </div>
+          <p class="dl-empty" data-empty>{{ "No measurements yet. Paste a column above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example sample" | t(lang) }}</button>.</p>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-clear>{{ "Clear" | t(lang) }}</button>
+            <p class="form-note" data-status aria-live="polite"></p>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    {#- 2 · Before / after: two defect rates, two sets of measurements. -#}
+    <div class="pl-panel" role="tabpanel" id="pl-panel-compare" aria-labelledby="pl-tab-compare" data-panel="compare" hidden>
+      <form class="dl-box" data-proportion novalidate>
+        <fieldset>
+          <legend class="kicker">{{ "Two defect rates" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Defects and units before a change and after it. The test says whether the drop (or the rise) is bigger than chance would make it." | t(lang) }}</p>
+          <div class="pl-pair">
+            <div class="pl-side">
+              <p class="pl-side-label">{{ "Before" | t(lang) }}</p>
+              <div class="dl-grid pl-grid-2">
+                <div class="field">
+                  <label for="pl-d1">{{ "Defects" | t(lang) }}</label>
+                  <input id="pl-d1" name="d1" inputmode="numeric" autocomplete="off" data-prop>
+                </div>
+                <div class="field">
+                  <label for="pl-n1">{{ "Units" | t(lang) }}</label>
+                  <input id="pl-n1" name="n1" inputmode="numeric" autocomplete="off" data-prop>
+                </div>
+              </div>
+            </div>
+            <div class="pl-side">
+              <p class="pl-side-label">{{ "After" | t(lang) }}</p>
+              <div class="dl-grid pl-grid-2">
+                <div class="field">
+                  <label for="pl-d2">{{ "Defects" | t(lang) }}</label>
+                  <input id="pl-d2" name="d2" inputmode="numeric" autocomplete="off" data-prop>
+                </div>
+                <div class="field">
+                  <label for="pl-n2">{{ "Units" | t(lang) }}</label>
+                  <input id="pl-n2" name="n2" inputmode="numeric" autocomplete="off" data-prop>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pl-out" data-prop-out aria-live="polite"></div>
+        </fieldset>
+      </form>
+
+      <form class="dl-box" data-means novalidate>
+        <fieldset>
+          <legend class="kicker">{{ "Two sets of measurements" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Two columns of values, for example loading times before and after the new standard. Welch's t test compares the averages without assuming the same spread." | t(lang) }}</p>
+          <div class="pl-pair">
+            <div class="field">
+              <label for="pl-before">{{ "Before, one value per line" | t(lang) }}</label>
+              <textarea id="pl-before" name="a" rows="7" spellcheck="false" placeholder="{{ cfg.placeholders.before }}" data-mean></textarea>
+            </div>
+            <div class="field">
+              <label for="pl-after">{{ "After, one value per line" | t(lang) }}</label>
+              <textarea id="pl-after" name="b" rows="7" spellcheck="false" placeholder="{{ cfg.placeholders.after }}" data-mean></textarea>
+            </div>
+          </div>
+          <div class="pl-out" data-means-out aria-live="polite"></div>
+        </fieldset>
+      </form>
+    </div>
+
+    {#- 3 · Sample size for a rate and for an average. -#}
+    <div class="pl-panel" role="tabpanel" id="pl-panel-size" aria-labelledby="pl-tab-size" data-panel="size" hidden>
+      <form class="dl-box" data-size novalidate>
+        <fieldset>
+          <legend class="kicker">{{ "A change in a defect rate" | t(lang) }}</legend>
+          <div class="dl-grid pl-grid-4">
+            <div class="field">
+              <label for="pl-p0">{{ "Rate today %" | t(lang) }}</label>
+              <input id="pl-p0" name="p0" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+            <div class="field">
+              <label for="pl-p1">{{ "Rate to detect %" | t(lang) }}</label>
+              <input id="pl-p1" name="p1" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+            <div class="field">
+              <label for="pl-alpha">{{ "Alpha %" | t(lang) }}</label>
+              <input id="pl-alpha" name="alpha" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+            <div class="field">
+              <label for="pl-power">{{ "Power %" | t(lang) }}</label>
+              <input id="pl-power" name="power" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+          </div>
+          <div class="pl-out" data-size-prop-out aria-live="polite"></div>
+        </fieldset>
+        <fieldset>
+          <legend class="kicker">{{ "A change in an average" | t(lang) }}</legend>
+          <div class="dl-grid pl-grid-4">
+            <div class="field">
+              <label for="pl-sd">{{ "Spread of single values (sd)" | t(lang) }}</label>
+              <input id="pl-sd" name="sd" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+            <div class="field">
+              <label for="pl-delta">{{ "Change to detect" | t(lang) }}</label>
+              <input id="pl-delta" name="delta" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+            <div class="field">
+              <label for="pl-alpha2">{{ "Alpha %" | t(lang) }}</label>
+              <input id="pl-alpha2" name="alpha2" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+            <div class="field">
+              <label for="pl-power2">{{ "Power %" | t(lang) }}</label>
+              <input id="pl-power2" name="power2" inputmode="decimal" autocomplete="off" data-size>
+            </div>
+          </div>
+          <div class="pl-out" data-size-mean-out aria-live="polite"></div>
+        </fieldset>
+        <div class="pl-explain">
+          <p><strong>{{ "Alpha" | t(lang) }}.</strong> {{ cfg.size.alpha }}</p>
+          <p><strong>{{ "Power" | t(lang) }}.</strong> {{ cfg.size.power }}</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Defect rates by day belong on the p-chart." | t(lang) }}</strong> {{ "This page is for single measurements; for defects out of a daily volume use the" | t(lang) }} <a class="inline-link" href="{{ '/tools/sigma-control-chart/' | local(lang) }}">{{ "Sigma & Control Chart" | t(lang) }}</a>, {{ "and take a confirmed cause through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your numbers stay in this browser. Nothing is sent or uploaded, and you can clear them at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results pl-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="process-lab-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/stats-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/process-lab.js' | assetUrl }}" defer></script>

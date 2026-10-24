@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: FMEA
+seo_title: "Process FMEA template online: severity, occurrence, detection, RPN and action priority"
+description: "A private process FMEA sheet: failure modes with S, O and D, RPN and the AIAG-VDA action priority, a risk heat map, actions with owners and the re-rating after."
+activeNav: /tools.html
+permalink: /tools/fmea/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Risk</p>
+  <h1>FMEA</h1>
+  <p class="lede">Write down how each step of a process can fail, what it costs, how often it happens and whether anyone would catch it. The sheet rates every failure mode, ranks them by action priority and RPN, and keeps the actions with their owners until the re-rating shows the risk is gone.</p>
+</section>
+
+{% set cfg = fmea %}
+{% include "partials/fmea.njk" %}

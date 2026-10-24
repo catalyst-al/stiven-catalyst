@@ -1,0 +1,152 @@
+{#- Safety Cross: a log of safety events drawn as the green cross of the month, with the rates, the Bird pyramid and the talk of the day; safety-cross.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout sx-setup">
+  <div class="tool-panel" data-safety-cross>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ t.entryLegend }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="sx-date">{{ "Date" | t(lang) }}</label>
+            <input id="sx-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="sx-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="sx-shift" name="shift">
+              {%- for shift in cfg.shifts %}
+              <option>{{ shift }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="sx-type">{{ "Type" | t(lang) }}</label>
+            <select id="sx-type" name="type">
+              {%- for key, name in cfg.types %}
+              <option value="{{ key }}"{% if key == "near-miss" %} selected{% endif %}>{{ name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="sx-area">{{ "Area" | t(lang) }}</label>
+            <select id="sx-area" name="area">
+              {%- for area in cfg.areas %}
+              <option>{{ area }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="sx-what">{{ "What happened" | t(lang) }}</label>
+            <input id="sx-what" name="what" placeholder="{{ t.whatPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sx-cause">{{ "Cause" | t(lang) }}</label>
+            <select id="sx-cause" name="cause">
+              {%- for cause in cfg.causes %}
+              <option>{{ cause }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="sx-severity">{{ "Severity (potential)" | t(lang) }}</label>
+            <select id="sx-severity" name="severity">
+              {%- for level in cfg.severities %}
+              <option value="{{ loop.index }}"{% if loop.index == 2 %} selected{% endif %}>{{ level }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="sx-action">{{ "Action" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sx-action" name="action" placeholder="{{ t.actionPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sx-owner">{{ "Owner" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sx-owner" name="owner" placeholder="{{ t.ownerPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field sx-done-field">
+            <label class="sx-check" for="sx-done"><input id="sx-done" name="done" type="checkbox"> {{ "Action already done" | t(lang) }}</label>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "type" | t(lang) }}, {{ "area" | t(lang) }}, {{ "what happened" | t(lang) }}, {{ "cause" | t(lang) }}, {{ "severity 1–4" | t(lang) }}, {{ "action" | t(lang) }}, {{ "owner" | t(lang) }}, {{ "done (yes or no)" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "The type as its name or its short name, for example near miss or first aid." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="sx-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="sx-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Settings" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sx-hours">{{ "Hours worked per month" | t(lang) }}</label>
+          <input id="sx-hours" name="hours" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.hoursPlaceholder }}" data-setting>
+          <span class="form-note">{{ "All employees and temps together, for LTIFR and TRIR." | t(lang) }}</span>
+        </div>
+        <div class="field">
+          <label for="sx-near">{{ "Target near-miss reports per month" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="sx-near" name="nearMissTarget" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.nearMissPlaceholder }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="sx-free">{{ "Goal: days without an accident" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="sx-free" name="freeDaysTarget" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.freeDaysPlaceholder }}" data-setting>
+        </div>
+      </div>
+      <p class="form-note">{{ "The month shown is chosen with the arrows above the cross." | t(lang) }}</p>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col">{{ "Type" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "What happened" | t(lang) }}</th><th scope="col">{{ "Cause" | t(lang) }}</th><th scope="col" class="num">{{ "Severity" | t(lang) }}</th><th scope="col">{{ "Action" | t(lang) }}</th><th scope="col">{{ "Owner" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load two example months" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "A cause that returns needs a root cause." | t(lang) }}</strong> {{ "Take the top cause through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>{{ ", and see the safety letter of the month on the" | t(lang) }} <a class="inline-link" href="{{ '/tools/daily-board/' | local(lang) }}">{{ "Daily Board" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sx-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="safety-cross-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/safety-cross.js' | assetUrl }}" defer></script>

@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Zeitstudie
+seo_title: "Zeitstudie mit Stoppuhr, Taktzeit und Yamazumi-Diagramm für die Fläche"
+description: "Einen Prozess Element für Element über mehrere Zyklen stoppen. Standardzeit je Element, Taktzeit, Yamazumi je Station und ein Vorschlag zum Austakten."
+activeNav: /de/tools.html
+permalink: /de/tools/time-study/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Lean</p>
+  <h1>Zeitstudie</h1>
+  <p class="lede">Stellen Sie sich mit der Stoppuhr an die Linie und messen Sie die Arbeit Element für Element, Zyklus nach Zyklus. Das Tool gibt Ihnen die Standardzeit jedes Elements, die Taktzeit aus Bedarf und verfügbarer Zeit, ein Yamazumi jeder Station gegen diesen Takt, den Anteil der Verschwendung und das Element, das Sie zuerst verschieben sollten.</p>
+</section>
+
+{% set cfg = de.timeStudy %}
+{% include "partials/time-study.njk" %}

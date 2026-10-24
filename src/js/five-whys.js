@@ -71,6 +71,20 @@
     handoverLink.href = url.href;
     handoverLink.dataset.ready = action ? "" : "no";
   };
+  // The same countermeasure as an action of the Action Tracker, with its owner, due date and the check that closes it.
+  const trackerLink = form.querySelector("[data-tracker]");
+  const syncTracker = () => {
+    if (!trackerLink || !window.ToolKit?.trackerUrl) return;
+    const value = (name) => form.elements[name]?.value.trim() || "";
+    trackerLink.href = window.ToolKit.trackerUrl(value("action") ? { title: value("action"), detail: value("cause") ? `${tx("Root cause")}: ${value("cause")}` : "", owner: value("owner"), due: value("due"), check: value("check"), source: "five-whys", priority: "High" } : {});
+    trackerLink.dataset.ready = value("action") ? "" : "no";
+  };
+  trackerLink?.addEventListener("click", (event) => {
+    if (form.elements.action.value.trim()) return;
+    event.preventDefault();
+    flash(tx("Write the countermeasure first, then add it to the actions."));
+    form.elements.action.focus();
+  });
   handoverLink?.addEventListener("click", (event) => {
     if (form.elements.action.value.trim()) return;
     event.preventDefault();
@@ -84,6 +98,7 @@
     write(values);
     suggestCause();
     syncHandover();
+    syncTracker();
     changed();
   };
 
@@ -100,6 +115,7 @@
     });
     suggestCause();
     syncHandover();
+    syncTracker();
   };
 
   const asText = () => {
@@ -159,6 +175,7 @@
     forget();
     suggestCause();
     syncHandover();
+    syncTracker();
     changed();
     flash(tx("Worksheet cleared."));
     form.elements.problem.focus();

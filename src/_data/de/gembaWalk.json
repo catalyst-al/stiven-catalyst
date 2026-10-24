@@ -1,0 +1,1070 @@
+{
+  "storageKey": "sc-gemba-walk-de",
+  "text": {
+    "tool": "Gemba Walk",
+    "areaPlaceholder": "z. B. Wareneingang",
+    "walkerPlaceholder": "z. B. Anna",
+    "findingPlaceholder": "Befund, z. B. Palette auf der gelben Linie",
+    "notePlaceholder": "Was Sie gesehen haben, z. B. 20 m Weg für Klebeband",
+    "csv": "gemba-rundgaenge",
+    "checkText": "Beim nächsten Rundgang dieser Ebene mit Ja beantwortet",
+    "sheetTitle": "Gemba-Rundgangsbogen"
+  },
+  "types": [
+    {
+      "key": "lpa",
+      "name": "Layered Process Audit",
+      "short": "LPA",
+      "note": "Eine kurze Prüfung am Arbeitsplatz, ob der Standard eingehalten wird; jede Führungsebene stellt ihre eigenen Fragen."
+    },
+    {
+      "key": "waste",
+      "name": "Verschwendungsrundgang",
+      "short": "Verschwendung",
+      "note": "Zählen Sie die Verschwendung, die Sie in einem Bereich sehen: die acht Verschwendungsarten plus Mura und Muri."
+    }
+  ],
+  "layers": [
+    {
+      "key": "team-lead",
+      "name": "Teamleitung",
+      "short": "TL",
+      "cadence": "daily",
+      "note": "Die Teamleitung geht jeden Tag und prüft die Grundlagen der Schicht."
+    },
+    {
+      "key": "area-manager",
+      "name": "Bereichsleitung",
+      "short": "BL",
+      "cadence": "weekly",
+      "note": "Die Bereichsleitung geht jede Woche und prüft, ob das System rund um die Schicht funktioniert."
+    },
+    {
+      "key": "site-lead",
+      "name": "Standortleitung",
+      "short": "SL",
+      "cadence": "monthly",
+      "note": "Die Standortleitung geht jeden Monat und prüft, ob die Ebenen darunter schließen, was sie finden."
+    }
+  ],
+  "cadences": [
+    {
+      "key": "daily",
+      "name": "Täglich"
+    },
+    {
+      "key": "weekly",
+      "name": "Wöchentlich"
+    },
+    {
+      "key": "monthly",
+      "name": "Monatlich"
+    }
+  ],
+  "answers": [
+    {
+      "key": "yes",
+      "name": "Ja"
+    },
+    {
+      "key": "no",
+      "name": "Nein"
+    },
+    {
+      "key": "na",
+      "name": "n. z."
+    }
+  ],
+  "shifts": [
+    "Früh",
+    "Spät",
+    "Nacht"
+  ],
+  "templates": {
+    "warehouse": {
+      "name": "Lager",
+      "areas": [
+        "Wareneingang",
+        "Kommissionierzone A",
+        "Packen",
+        "Warenausgang",
+        "Retouren"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Alle auf der Fläche tragen Sicherheitsschuhe und Warnweste.",
+            "standard": "PSA-Regel am Eingang: S3-Schuhe, Weste an.",
+            "topic": "safety"
+          },
+          {
+            "text": "Gehwege und gelbe Linien sind frei von Paletten und Gitterboxen.",
+            "standard": "Bodenmarkierungsplan: nichts steht auf einer Linie.",
+            "topic": "fives"
+          },
+          {
+            "text": "Die Kommissionier- oder Packanweisung an jeder Station ist die aktuelle Version.",
+            "standard": "Standardarbeitsblatt, Version auf dem Board.",
+            "topic": "standard"
+          },
+          {
+            "text": "Scanner und Drucker sind zu Schichtbeginn geladen und an ihrem festen Platz.",
+            "standard": "Gerätecheck zu Schichtbeginn.",
+            "topic": "fives"
+          },
+          {
+            "text": "Das Schichtboard zeigt den Plan und die letzte Stunde gegen den Plan.",
+            "standard": "Stundenboard bis zehn nach voll ausgefüllt.",
+            "topic": "visual"
+          },
+          {
+            "text": "Neue Mitarbeitende arbeiten mit Pate, ihr Einarbeitungsblatt liegt an der Station.",
+            "standard": "Qualifikationsmatrix: keine Alleinarbeit unter Stufe 2.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Die Teamleitungen haben diese Woche täglich ihre Rundgänge gemacht, und jeder Befund hat einen Verantwortlichen.",
+            "standard": "LPA-Plan, Ebene Teamleitung.",
+            "topic": "standard"
+          },
+          {
+            "text": "Die Staplerprüfung vor Gebrauch ist für jedes Gerät und jede Schicht unterschrieben.",
+            "standard": "Stapler-Checkliste, jede Schicht.",
+            "topic": "safety"
+          },
+          {
+            "text": "Beschädigte Ware ist markiert und in Quarantäne, nicht im Greifplatz.",
+            "standard": "Schadensprozess: markieren, Quarantäne, im Schichtverlauf erfassen.",
+            "topic": "quality"
+          },
+          {
+            "text": "Die Ware auf der Rampe bleibt unter dem am Boden markierten Maximum.",
+            "standard": "Rampenmaximum: zwei Stunden Wareneingang.",
+            "topic": "flow"
+          },
+          {
+            "text": "Das KPI-Board ist aktuell und jede rote Kennzahl hat eine Maßnahme mit Verantwortlichem.",
+            "standard": "Tagesboard: Rot heißt Maßnahme.",
+            "topic": "visual"
+          },
+          {
+            "text": "Die Schichtübergabe ist schriftlich und die nächste Schicht hat sie gelesen.",
+            "standard": "Übergabeblatt von beiden Leitungen unterschrieben.",
+            "topic": "flow"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Die Befunde des letzten Monats sind geschlossen oder haben einen Termin.",
+            "standard": "Maßnahmenliste: kein Befund älter als 30 Tage ohne Termin.",
+            "topic": "standard"
+          },
+          {
+            "text": "Beinaheunfälle wurden gemeldet und im Sicherheitsgespräch besprochen.",
+            "standard": "Beinaheunfall-Prozess: Meldung innerhalb der Schicht.",
+            "topic": "safety"
+          },
+          {
+            "text": "Der 5S-Wert der begangenen Bereiche ist seit dem letzten Audit nicht gesunken.",
+            "standard": "5S-Audit, jeden Monat.",
+            "topic": "fives"
+          },
+          {
+            "text": "Jede kritische Tätigkeit ist pro Schicht von mindestens zwei geschulten Personen abgedeckt.",
+            "standard": "Qualifikationsmatrix: zwei je kritischer Tätigkeit.",
+            "topic": "people"
+          },
+          {
+            "text": "Die Qualitätskennzahlen (Fehlpicks, Schäden) sind im Ziel oder haben eine Gegenmaßnahme.",
+            "standard": "Qualitätsziele auf dem Standortboard.",
+            "topic": "quality"
+          },
+          {
+            "text": "Die Führungskräfte auf der Fläche können den Standard erklären, den sie prüfen, und warum er zählt.",
+            "standard": "Führungsstandard, Ebenen 1 und 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    },
+    "hotel": {
+      "name": "Hotel",
+      "areas": [
+        "Front Office",
+        "Housekeeping-Lager",
+        "Küche"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Die Rezeption folgt dem Check-in-Standard: Begrüßung, Ausweis, Zahlungsgarantie, Schlüssel.",
+            "standard": "Check-in-SOP, Version im Backoffice.",
+            "topic": "standard"
+          },
+          {
+            "text": "Der Zimmerstatus im PMS stimmt zu den vereinbarten Zeiten mit der Housekeeping-Meldung überein.",
+            "standard": "Zimmerstatus-Abgleich um 11:00 und 15:00.",
+            "topic": "quality"
+          },
+          {
+            "text": "Reinigungswagen sind nach Liste bestückt und stehen nicht im Flur.",
+            "standard": "Wagenliste und Flurregel.",
+            "topic": "fives"
+          },
+          {
+            "text": "Chemikalien sind beschriftet und verschlossen gelagert; Handschuhe werden getragen.",
+            "standard": "Betriebsanweisung Gefahrstoffe.",
+            "topic": "safety"
+          },
+          {
+            "text": "Das Übergabebuch führt offene Gästeanliegen mit Verantwortlichem.",
+            "standard": "Schichtübergabe, Spalte offene Punkte.",
+            "topic": "flow"
+          },
+          {
+            "text": "Neue Mitarbeitende arbeiten mit Trainer, ihre Checkliste ist für die heutigen Aufgaben unterschrieben.",
+            "standard": "Einarbeitungs-Checkliste.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Die Teamleitungen haben diese Woche täglich ihre Rundgänge gemacht, und jeder Befund hat einen Verantwortlichen.",
+            "standard": "LPA-Plan, Ebene Teamleitung.",
+            "topic": "standard"
+          },
+          {
+            "text": "Notausgänge und Fluchtwege sind frei und die Schilder beleuchtet.",
+            "standard": "Brandschutzrundgang, jede Woche.",
+            "topic": "safety"
+          },
+          {
+            "text": "Die Gästebeschwerden dieser Woche sind mit Ursache und Wiedergutmachung erfasst.",
+            "standard": "Beschwerdeprotokoll innerhalb von 24 Stunden.",
+            "topic": "quality"
+          },
+          {
+            "text": "Wäsche- und Amenity-Bestand liegt in jedem Etagenlager zwischen Min und Max.",
+            "standard": "Sollbestände je Etagenlager.",
+            "topic": "flow"
+          },
+          {
+            "text": "Das Abteilungsboard zeigt die Kennzahlen der Woche und jede rote hat eine Maßnahme.",
+            "standard": "Abteilungsboard: Rot heißt Maßnahme.",
+            "topic": "visual"
+          },
+          {
+            "text": "Fünf kontrollierte Zimmer erfüllen den Zimmerstandard.",
+            "standard": "Zimmerkontroll-Checkliste.",
+            "topic": "quality"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Die Befunde des letzten Monats sind geschlossen oder haben einen Termin.",
+            "standard": "Maßnahmenliste: kein Befund älter als 30 Tage ohne Termin.",
+            "topic": "standard"
+          },
+          {
+            "text": "Unfälle und Beinaheunfälle wurden mit den Abteilungsleitungen besprochen.",
+            "standard": "Monatliche Sicherheitsbesprechung.",
+            "topic": "safety"
+          },
+          {
+            "text": "Der Trend der Gästebewertung wurde mit dem Team besprochen und eine Verbesserung gewählt.",
+            "standard": "Monatliches Bewertungsgespräch.",
+            "topic": "visual"
+          },
+          {
+            "text": "Jede kritische Tätigkeit (Night Audit, Check-in, HACCP) hat zwei geschulte Personen.",
+            "standard": "Qualifikationsmatrix: zwei je kritischer Tätigkeit.",
+            "topic": "people"
+          },
+          {
+            "text": "Die HACCP-Aufzeichnungen der Küche sind für den Monat vollständig.",
+            "standard": "HACCP-Plan, tägliche Aufzeichnungen.",
+            "topic": "quality"
+          },
+          {
+            "text": "Die Führungskräfte auf der Fläche können den Standard erklären, den sie prüfen, und warum er zählt.",
+            "standard": "Führungsstandard, Ebenen 1 und 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    },
+    "delivery-station": {
+      "name": "Zustellbasis",
+      "areas": [
+        "Sortierfläche",
+        "Bereitstellungsspuren",
+        "Hof und Rampen",
+        "Retourenkäfig"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Alle auf dem Hof und am Band tragen Warnweste und Sicherheitsschuhe.",
+            "standard": "PSA-Regel der Zustellbasis.",
+            "topic": "safety"
+          },
+          {
+            "text": "Säcke und Behälter stehen vor der ersten Welle in der richtigen Spur für die richtige Tour.",
+            "standard": "Bereitstellungsplan je Welle.",
+            "topic": "flow"
+          },
+          {
+            "text": "Die Beladung folgt der Stoppreihenfolge: letzter Stopp zuerst hinein.",
+            "standard": "Beladestandard und Tourenblatt.",
+            "topic": "standard"
+          },
+          {
+            "text": "Beschädigte oder nasse Pakete kommen mit Etikett ins Klärfallregal.",
+            "standard": "Schadensprozess am Band.",
+            "topic": "quality"
+          },
+          {
+            "text": "Scanner, Wagen und Rollcontainer stehen wieder an ihrem festen Platz.",
+            "standard": "Flächenplan mit festen Plätzen.",
+            "topic": "fives"
+          },
+          {
+            "text": "Die Fahrer haben das Tourenbriefing und den Sicherheitstipp des Tages bekommen.",
+            "standard": "Morgenbriefing: fünf Minuten, ein Sicherheitstipp.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Die Teamleitungen haben diese Woche täglich ihre Rundgänge gemacht, und jeder Befund hat einen Verantwortlichen.",
+            "standard": "LPA-Plan, Ebene Teamleitung.",
+            "topic": "standard"
+          },
+          {
+            "text": "Auf dem Hof werden Tempolimit und Einbahnverkehr eingehalten, der Gehweg ist frei.",
+            "standard": "Verkehrsplan Hof.",
+            "topic": "safety"
+          },
+          {
+            "text": "Fehlende und fehlgeleitete Pakete der Woche haben eine Ursache.",
+            "standard": "Wöchentliche Prüfung von Verlusten und Fehlsortierungen.",
+            "topic": "quality"
+          },
+          {
+            "text": "Kein Wagen wartet länger als 20 Minuten nach Ladebeginn in der Spur.",
+            "standard": "Standzeit in der Spur unter 20 Minuten.",
+            "topic": "flow"
+          },
+          {
+            "text": "Das Stationsboard (pünktliche Abfahrt, Schäden, Fehlmengen) ist aktuell, mit Maßnahmen bei Rot.",
+            "standard": "Stationsboard: Rot heißt Maßnahme.",
+            "topic": "visual"
+          },
+          {
+            "text": "Fahrzeugchecks (Reifen, Licht, Schäden) sind vor Abfahrt gemacht und dokumentiert.",
+            "standard": "Fahrzeugcheck vor Abfahrt.",
+            "topic": "safety"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Die Befunde des letzten Monats sind geschlossen oder haben einen Termin.",
+            "standard": "Maßnahmenliste: kein Befund älter als 30 Tage ohne Termin.",
+            "topic": "standard"
+          },
+          {
+            "text": "Beinaheunfälle und Vorfälle wurden mit Teamleitungen und Zustellpartnern besprochen.",
+            "standard": "Monatliche Sicherheitsbesprechung.",
+            "topic": "safety"
+          },
+          {
+            "text": "Der 5S-Wert der begangenen Bereiche ist seit dem letzten Audit nicht gesunken.",
+            "standard": "5S-Audit, jeden Monat.",
+            "topic": "fives"
+          },
+          {
+            "text": "Jede kritische Tätigkeit (Sortieren, Beladen, Klärfälle) hat pro Schicht zwei geschulte Personen.",
+            "standard": "Qualifikationsmatrix: zwei je kritischer Tätigkeit.",
+            "topic": "people"
+          },
+          {
+            "text": "Die Kundenkennzahlen (Zustellquote, Beschwerden) sind im Ziel oder haben eine Gegenmaßnahme.",
+            "standard": "Kundenziele auf dem Stationsboard.",
+            "topic": "quality"
+          },
+          {
+            "text": "Die Führungskräfte auf der Fläche können den Standard erklären, den sie prüfen, und warum er zählt.",
+            "standard": "Führungsstandard, Ebenen 1 und 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    }
+  },
+  "topics": {
+    "safety": {
+      "name": "Sicherheit",
+      "meaning": "Ein Sicherheitsstandard, der einmal am Tag rutscht, ist ein Standard, an den niemand glaubt. Die Lösung ist sichtbare Führung, nicht noch ein Plakat.",
+      "moves": [
+        "Stoppen Sie die Arbeit, sobald Sie es sehen, und beheben Sie es mit der Person, nicht über sie.",
+        "Fragen Sie, was den sicheren Weg schwerer macht als den unsicheren, und beseitigen Sie das.",
+        "Nehmen Sie die Regel die nächsten fünf Tage in die Schichtbesprechung."
+      ],
+      "question": "Was macht hier den unsicheren Weg zum leichteren?"
+    },
+    "standard": {
+      "name": "Standardarbeit",
+      "meaning": "Wenn der Standard nicht eingehalten wird, ist er oft unklar, veraltet oder in der gegebenen Zeit nicht machbar. Prüfen Sie den Standard vor den Menschen.",
+      "moves": [
+        "Beobachten Sie einen Zyklus gegen den schriftlichen Standard und notieren Sie jede Abweichung.",
+        "Schreiben Sie den Schritt mit den Ausführenden neu und hängen Sie die neue Version an der Station aus.",
+        "Prüfen Sie dieselbe Frage bei den nächsten drei Rundgängen."
+      ],
+      "question": "Kann die Person mir den Standard zeigen, und funktioniert er in der Zeit, die sie hat?"
+    },
+    "fives": {
+      "name": "Ordnung und 5S",
+      "meaning": "Dinge am falschen Platz kommen zurück, wenn sie keinen festen Platz haben oder der Platz falsch liegt. Geben Sie jedem Teil einen Platz dort, wo es gebraucht wird.",
+      "moves": [
+        "Markieren Sie den festen Platz des Teils mit Etikett und Bodenlinie.",
+        "Fragen Sie, warum es dort stand: kein Platz, keine Zeit oder keine Regel?",
+        "Bewerten Sie den Bereich diese Woche im 5S-Audit."
+      ],
+      "question": "Wo müsste es stehen, damit das Zurückstellen die leichte Wahl ist?"
+    },
+    "quality": {
+      "name": "Qualität",
+      "meaning": "Eine übersprungene Qualitätsprüfung lässt den Fehler zum Kunden reisen. Finden Sie, wo die Prüfung schwer ist, und machen Sie sie zum Teil des Ablaufs.",
+      "moves": [
+        "Verfolgen Sie einen Fehler zurück bis zu dem Schritt, an dem er entstand.",
+        "Machen Sie die Prüfung an diesem Schritt sichtbar: ein Regal, eine Farbe, ein Scan.",
+        "Zählen Sie die Fehler zwei Wochen lang täglich auf dem Board."
+      ],
+      "question": "An welchem Schritt ließe sich der Fehler im Moment des Entstehens fangen?"
+    },
+    "visual": {
+      "name": "Visuelles Management",
+      "meaning": "Ein Board, das nicht aktuell ist, sagt dem Team, dass niemand hinschaut. Wenn Führungskräfte es täglich nutzen, hält das Team es aktuell.",
+      "moves": [
+        "Halten Sie die nächste Schichtbesprechung am Board ab und fragen Sie nach den roten Zahlen.",
+        "Kürzen Sie das Board auf die Zahlen, nach denen jemand handelt.",
+        "Geben Sie jeder roten Kennzahl einen Verantwortlichen und ein Datum, auf dem Board."
+      ],
+      "question": "Wer hat heute auf dieses Board geschaut, und was hat er deshalb getan?"
+    },
+    "flow": {
+      "name": "Fluss und Übergabe",
+      "meaning": "Bestände, die sich stauen, und Übergaben, die verloren gehen, zeigen, dass die Schritte nicht verbunden sind. Begrenzen Sie, was wartet, und machen Sie die Übergabe zu einem festen Moment.",
+      "moves": [
+        "Markieren Sie ein Maximum am Boden und vereinbaren Sie, was passiert, wenn es erreicht ist.",
+        "Legen Sie Zeit und Ort der Übergabe fest und nutzen Sie ein Blatt.",
+        "Gehen Sie den Fluss von der wartenden Ware zurück bis zu dem Schritt, der sie schickt."
+      ],
+      "question": "Was wartet hier, und wer entscheidet, wann es weitergeht?"
+    },
+    "people": {
+      "name": "Menschen und Qualifikation",
+      "meaning": "Ein Standard ist nur so stark wie die Schulung dahinter. Lücken zeigen sich zuerst bei neuen Leuten und bei Tätigkeiten, die nur eine Person kann.",
+      "moves": [
+        "Prüfen Sie die Qualifikationsmatrix für die Tätigkeit und benennen Sie die zweite Person, die geschult wird.",
+        "Stellen Sie der neuen Person für den Rest der Woche einen Paten zur Seite.",
+        "Lassen Sie die Führungskraft den Standard erklären; wo sie es nicht kann, schulen Sie zuerst sie."
+      ],
+      "question": "Wenn diese Person morgen fehlt, wer macht die Tätigkeit nach Standard?"
+    }
+  },
+  "wastes": [
+    {
+      "key": "transport",
+      "name": "Transport",
+      "definition": "Ware oder Papiere werden mehr bewegt, als die Arbeit braucht.",
+      "example": "Paletten zweimal bewegt: Rampe zum Puffer, Puffer ins Regal."
+    },
+    {
+      "key": "inventory",
+      "name": "Bestände",
+      "definition": "Mehr Ware oder Arbeit in Bearbeitung, als der nächste Schritt braucht.",
+      "example": "Drei Stunden Wareneingang stehen auf der Rampenfläche."
+    },
+    {
+      "key": "motion",
+      "name": "Bewegung",
+      "definition": "Menschen laufen, bücken sich oder suchen mehr, als die Aufgabe braucht.",
+      "example": "Die Packkraft läuft jede Stunde 20 m, um Klebeband zu holen."
+    },
+    {
+      "key": "waiting",
+      "name": "Warten",
+      "definition": "Menschen oder Ware stehen still und warten auf etwas.",
+      "example": "Die Verlader warten auf den Lkw, der Lkw wartet auf die Papiere."
+    },
+    {
+      "key": "overproduction",
+      "name": "Überproduktion",
+      "definition": "Mehr oder früher herstellen oder vorbereiten, als der Kunde braucht.",
+      "example": "Etiketten für die ganze Welle gedruckt, bevor die Aufträge feststehen."
+    },
+    {
+      "key": "overprocessing",
+      "name": "Überbearbeitung",
+      "definition": "Mehr am Produkt tun, als der Kunde bezahlt.",
+      "example": "Jedes Paket doppelt gewickelt; ein zweiter Scan, den niemand liest."
+    },
+    {
+      "key": "defects",
+      "name": "Fehler",
+      "definition": "Fehler, die Nacharbeit, eine zweite Prüfung oder eine Reklamation brauchen.",
+      "example": "Fehlpicks beim Packen entdeckt und zurück in den Gang geschickt."
+    },
+    {
+      "key": "skills",
+      "name": "Ungenutzte Fähigkeiten",
+      "definition": "Ideen und Können des Teams, nach denen niemand fragt.",
+      "example": "Die Nachtschicht kennt einen schnelleren Weg; niemand hat ihn aufgeschrieben."
+    },
+    {
+      "key": "mura",
+      "name": "Mura (Ungleichmäßigkeit)",
+      "definition": "Arbeit kommt in Spitzen und Tälern statt in einem gleichmäßigen Fluss.",
+      "example": "80 % der Lkw kommen zwischen 6 und 8 Uhr; der Nachmittag ist leer."
+    },
+    {
+      "key": "muri",
+      "name": "Muri (Überlastung)",
+      "definition": "Menschen oder Maschinen werden über eine sichere, dauerhafte Last hinaus belastet.",
+      "example": "Eine Person entlädt am Ende einer Doppelschicht allein einen Container."
+    }
+  ],
+  "tips": [
+    [
+      "Hingehen und schauen, dann fragen.",
+      "Stellen Sie sich dorthin, wo die Arbeit gemacht wird. Lassen Sie sich zeigen, nicht erzählen."
+    ],
+    [
+      "Prüfen Sie den Standard, nicht die Person.",
+      "Ein „Nein“ heißt: Der Standard hat heute nicht gehalten. Fragen Sie, was es schwer gemacht hat, bevor Sie fragen, wer."
+    ],
+    [
+      "Jede Ebene geht.",
+      "Teamleitungen täglich, Bereichsleitungen wöchentlich, die Standortleitung monatlich. Die höheren Ebenen prüfen, ob die unteren ihre Befunde schließen."
+    ],
+    [
+      "Zählen Sie Verschwendung ohne Schuld.",
+      "Beim Verschwendungsrundgang tippen Sie für jede Verschwendung auf +. Die Zahl zeigt, wo Sie hinschauen; die Menschen zeigen Ihnen, warum."
+    ],
+    [
+      "Schließen Sie den Kreis.",
+      "Jedes „Nein“, das Sie nicht vor Ort beheben, wird eine Maßnahme mit Verantwortlichem und Termin, und der nächste Rundgang prüft sie."
+    ]
+  ],
+  "example": {
+    "template": "warehouse",
+    "walks": [
+      {
+        "day": -27,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 10,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Zwei Paletten auf der gelben Linie an Tor 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -26,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Kommissionierzone A",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -26,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Wareneingang",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "yynnyy",
+        "findings": {
+          "2": "Beschädigte Kartons im Greifplatz, ohne Markierung",
+          "3": "Wareneingang über dem Bodenmaximum: drei Spuren voll"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -25,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packen",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 14,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -24,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Warenausgang",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 10,
+        "answers": "yyynyy",
+        "findings": {
+          "3": "Zwei Scanner zu Schichtbeginn nicht geladen"
+        },
+        "acts": []
+      },
+      {
+        "day": -24,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Kommissionierzone A",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Fehlpick-Kennzahl seit zwei Tagen rot, keine Maßnahme"
+        },
+        "acts": []
+      },
+      {
+        "day": -23,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -22,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Kommissionierzone A",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 14,
+        "answers": "ynyyya",
+        "findings": {
+          "1": "Leere Gitterboxen im Gehweg an der Ladestation"
+        },
+        "acts": []
+      },
+      {
+        "day": -22,
+        "type": "lpa",
+        "layer": "site-lead",
+        "area": "Wareneingang",
+        "walker": "Elira",
+        "shift": "Früh",
+        "minutes": 45,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Schadensquote über Ziel, Gegenmaßnahme nicht vereinbart"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -20,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packen",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -19,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Warenausgang",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 12,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Stundenboard seit 10:00 nicht ausgefüllt"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -19,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Warenausgang",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "ynyyny",
+        "findings": {
+          "1": "Checkliste Stapler 4 in der Spätschicht nicht unterschrieben",
+          "4": "Fehlpick-Kennzahl seit zwei Tagen rot, keine Maßnahme"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -18,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Zwei Paletten auf der gelben Linie an Tor 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -17,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Kommissionierzone A",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -17,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Wareneingang",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "yyynya",
+        "findings": {
+          "3": "Wareneingang über dem Bodenmaximum: drei Spuren voll"
+        },
+        "acts": []
+      },
+      {
+        "day": -16,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packen",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 12,
+        "answers": "yyyyyn",
+        "findings": {
+          "5": "Neue Kraft arbeitet allein an Packplatz 4"
+        },
+        "acts": [
+          5
+        ]
+      },
+      {
+        "day": -15,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Warenausgang",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -15,
+        "type": "waste",
+        "layer": "area-manager",
+        "area": "Kommissionierzone A",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "tallies": {
+          "transport": 4,
+          "inventory": 3,
+          "motion": 11,
+          "waiting": 7,
+          "overproduction": 1,
+          "overprocessing": 2,
+          "defects": 3,
+          "skills": 1,
+          "mura": 2,
+          "muri": 1
+        },
+        "notes": {
+          "motion": "Kommissionierer laufen für jede neue Pickliste zurück zum Start",
+          "waiting": "Warten auf Nachschub in Gang 12"
+        }
+      },
+      {
+        "day": -13,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 10,
+        "answers": "yyynya",
+        "findings": {
+          "3": "Zwei Scanner zu Schichtbeginn nicht geladen"
+        },
+        "acts": []
+      },
+      {
+        "day": -12,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Kommissionierzone A",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -12,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Packen",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "yyyynn",
+        "findings": {
+          "4": "Fehlpick-Kennzahl seit zwei Tagen rot, keine Maßnahme",
+          "5": "Spätschicht hat die Übergabe nicht gelesen"
+        },
+        "acts": [
+          5
+        ]
+      },
+      {
+        "day": -11,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packen",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Wickelwagen im Gehweg stehen gelassen"
+        },
+        "acts": []
+      },
+      {
+        "day": -10,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Warenausgang",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -10,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Wareneingang",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "nyynyy",
+        "findings": {
+          "0": "Zwei Befunde der Vorwoche ohne Verantwortlichen",
+          "3": "Wareneingang über dem Bodenmaximum: drei Spuren voll"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -9,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 12,
+        "answers": "nyyyya",
+        "findings": {
+          "0": "Besucher ohne Weste auf der Rampe"
+        },
+        "acts": []
+      },
+      {
+        "day": -8,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Kommissionierzone A",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -8,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Kommissionierzone A",
+        "walker": "Dritan",
+        "shift": "Früh",
+        "minutes": 30,
+        "answers": "yyynyy",
+        "findings": {
+          "3": "Wareneingang über dem Bodenmaximum: drei Spuren voll"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -6,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packen",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 10,
+        "answers": "yynyyy",
+        "findings": {
+          "2": "Alte Version der Packanweisung an Platz 2"
+        },
+        "acts": [
+          2
+        ]
+      },
+      {
+        "day": -5,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Warenausgang",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -4,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Zwei Paletten auf der gelben Linie an Tor 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -3,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Kommissionierzone A",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -3,
+        "type": "waste",
+        "layer": "team-lead",
+        "area": "Wareneingang",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 25,
+        "tallies": {
+          "transport": 8,
+          "inventory": 6,
+          "motion": 4,
+          "waiting": 9,
+          "overproduction": 0,
+          "overprocessing": 1,
+          "defects": 2,
+          "skills": 0,
+          "mura": 5,
+          "muri": 3
+        },
+        "notes": {
+          "waiting": "Lkw warten am Tor auf eine freie Rampe",
+          "mura": "Sechs Lkw zwischen 6:00 und 7:00, keiner nach 10:00",
+          "transport": "Paletten im Puffer abgestellt, dann noch einmal ins Regal bewegt"
+        }
+      },
+      {
+        "day": -2,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Packen",
+        "walker": "Anna",
+        "shift": "Früh",
+        "minutes": 12,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Stundenboard seit 10:00 nicht ausgefüllt"
+        },
+        "acts": []
+      },
+      {
+        "day": -1,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Warenausgang",
+        "walker": "Besnik",
+        "shift": "Spät",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      }
+    ]
+  }
+}

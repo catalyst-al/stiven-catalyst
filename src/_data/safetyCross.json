@@ -1,0 +1,170 @@
+{
+  "storageKey": "sc-safety-cross",
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "text": {
+    "tool": "Safety Cross",
+    "csv": "safety-log",
+    "entryLegend": "Log a safety event",
+    "whatPlaceholder": "e.g. Pallet slid off the forks at dock 3, nobody underneath",
+    "actionPlaceholder": "e.g. Mark the pedestrian lane at dock 3",
+    "ownerPlaceholder": "e.g. Anna",
+    "pasteRow": "One row per event",
+    "pastePlaceholder": "2026-10-06\tLate\tNear miss\tLoading dock\tPallet slid off the forks\tForklift / vehicle\t3\tMark the pedestrian lane\tAnna\tno",
+    "empty": "No safety events logged yet.",
+    "hoursPlaceholder": "e.g. 160000",
+    "nearMissPlaceholder": "e.g. 8",
+    "freeDaysPlaceholder": "e.g. 365"
+  },
+  "types": {
+    "lost-time": "Accident with lost time",
+    "no-lost-time": "Accident without lost time",
+    "first-aid": "First aid",
+    "near-miss": "Near miss",
+    "unsafe-condition": "Unsafe condition",
+    "unsafe-act": "Unsafe act",
+    "positive": "Positive observation"
+  },
+  "short": {
+    "lost-time": "Lost time",
+    "no-lost-time": "No lost time",
+    "first-aid": "First aid",
+    "near-miss": "Near miss",
+    "unsafe-condition": "Unsafe condition",
+    "unsafe-act": "Unsafe act",
+    "positive": "Positive"
+  },
+  "shifts": ["Early", "Late", "Night"],
+  "areas": ["Receiving", "Storage", "Picking", "Packing", "Loading dock", "Yard", "Office", "Other"],
+  "causes": ["Housekeeping", "Forklift / vehicle", "Manual handling", "Falls / slips", "Equipment", "Procedure not followed", "PPE", "Other"],
+  "severities": ["1 · Minor potential", "2 · Moderate potential", "3 · Serious potential", "4 · Fatal potential"],
+  "pyramid": {
+    "lost-time": "Lost-time accidents",
+    "recordable": "Accidents without lost time and first aid",
+    "near-miss": "Near misses",
+    "unsafe": "Unsafe conditions and acts"
+  },
+  "advice": {
+    "Housekeeping": {
+      "meaning": "Stretch film on the floor, a pallet left in the aisle, a spill nobody owns: most trips and most forklift swerves start with something that should not have been there.",
+      "moves": [
+        "Walk the worst area at the end of the shift and photograph what is on the floor; show the photos at the next briefing.",
+        "Give every aisle and dock one owner per shift who signs the floor off before leaving.",
+        "Put a bin, a broom and a spill kit where the mess is made, not where it is tidy."
+      ],
+      "question": "Where does the floor get dirty during the shift, and who is meant to clear it?"
+    },
+    "Forklift / vehicle": {
+      "meaning": "A truck and a person in the same space is the one thing in a warehouse that kills. Most near misses here are speed, blind corners and people walking where trucks drive.",
+      "moves": [
+        "Separate people and trucks with a painted lane and a rule that nobody crosses a dock without eye contact with the driver.",
+        "Walk the route at a corner where a near miss happened: mirrors, lighting, a stop line.",
+        "Check the speed and the horn at the worst spot for one shift, and name the drivers who do it right."
+      ],
+      "question": "Where do people and trucks share the same square metre, and why?"
+    },
+    "Manual handling": {
+      "meaning": "Back and shoulder injuries come from heavy, awkward or repeated lifts, usually at the same stations. They build up quietly and then put someone off for weeks.",
+      "moves": [
+        "List the ten heaviest items and where they are picked; move them to waist height.",
+        "Agree a two-person rule or a lifting aid above a weight the team sets itself.",
+        "Watch ten lifts at the worst station and change the station, not the person."
+      ],
+      "question": "Which lift does everyone complain about, and what would make it unnecessary?"
+    },
+    "Falls / slips": {
+      "meaning": "Wet floors, uneven dock plates, a step nobody sees in the dark: slips are the most common injury in logistics and almost always come back to one place.",
+      "moves": [
+        "Mark on a floor plan where every slip or trip happened; fix the place with the most marks first.",
+        "Put a drying routine and a sign at every door where rain and condensation come in.",
+        "Check dock plates and steps for height differences and edges, and paint the edges."
+      ],
+      "question": "Where did the last three slips happen, and what is still the same there?"
+    },
+    "Equipment": {
+      "meaning": "A broken wheel, a frayed strap, a guard removed to work faster: a defect that is known and not fixed is a decision, not an accident.",
+      "moves": [
+        "Tag-out: a red tag on anything defective, and nobody uses a tagged item until it is repaired.",
+        "Start every shift with a two-minute check of trucks, trolleys and straps, written down.",
+        "Agree with maintenance how fast a safety defect is repaired, and track the open ones."
+      ],
+      "question": "What defect does everyone know about and keep working around?"
+    },
+    "Procedure not followed": {
+      "meaning": "When people skip a rule, the rule is usually slow, unclear or not possible with the time they have. Ask why before you blame.",
+      "moves": [
+        "Ask the person who skipped the step to show you how the job is normally done; look for the time pressure behind it.",
+        "Shorten the rule to the one thing that must never be skipped, and put it where the work is done.",
+        "Thank people who stop the work when they are unsure; a stop is cheaper than a stretcher."
+      ],
+      "question": "What makes the safe way the slow way here?"
+    },
+    "PPE": {
+      "meaning": "Missing gloves, shoes or vests are visible, so they get written up most. The cause is usually comfort, availability or a culture where nobody says anything.",
+      "moves": [
+        "Check that the right size and a spare are at the entrance; nobody wears what hurts.",
+        "Make the vest and shoes the first thing every visitor and new starter gets, before the badge.",
+        "Lead by example: a supervisor without a vest cancels every poster on the wall."
+      ],
+      "question": "Why is the equipment not worn: not there, not comfortable, or not expected?"
+    },
+    "Other": {
+      "meaning": "Events without a clear cause pile up when the log is filled in quickly. Each one deserves one more question.",
+      "moves": [
+        "Go back to the three most recent events marked Other and ask what was really behind them.",
+        "If a new cause appears three times, add it to the list so the next entries find it.",
+        "Keep the cause about the situation, not the person: what would have stopped it?"
+      ],
+      "question": "What do the events marked Other have in common?"
+    }
+  },
+  "talks": [
+    { "title": "Near misses are free lessons", "text": "A near miss is an accident that did not happen yet. Every one you report is a lesson the team gets without anybody getting hurt. Report it today; tomorrow it may cost a colleague." },
+    { "title": "Eye contact before you cross", "text": "A forklift driver cannot read your mind. Before you cross a dock or an aisle where trucks drive, stop, look at the driver and wait for the nod. No eye contact, no crossing." },
+    { "title": "Speed in the aisle", "text": "A truck at walking pace stops in a metre. At twice that speed it needs four. The aisle is not a race track, whatever the dispatch screen says." },
+    { "title": "Housekeeping is safety", "text": "Stretch film on the floor becomes a trip. A pallet in the aisle becomes a swerve. Five minutes of tidying at the end of the shift is the cheapest safety measure we have." },
+    { "title": "Lift with the legs, or with a colleague", "text": "Anything heavy, awkward or above the shoulders: get help or a lifting aid. A back injury does not hurt today; it hurts for the rest of the month." },
+    { "title": "Tag it, do not work around it", "text": "A defective truck, strap or trolley gets a red tag and goes out of use until it is repaired. Working around a known defect is a decision, and a bad one." },
+    { "title": "Wet floors and dock plates", "text": "Rain comes in with every truck. Check the dock plates and the entrance doors, dry what is wet and put the sign out. A slip on a wet plate is the most common injury we have." },
+    { "title": "The right gloves for the job", "text": "Cut-resistant gloves for knives and strapping, grip gloves for pallets. Gloves that do not fit are gloves that come off. Say so and get the right size." },
+    { "title": "Stop when unsure", "text": "If something looks wrong, stop and ask. Nobody has ever been disciplined here for stopping a job that felt unsafe. The reverse is not true." },
+    { "title": "Pedestrian lanes mean something", "text": "The painted lane is the only place where a driver expects you. Outside it you are a surprise, and surprises at dock speed end badly." },
+    { "title": "Stacking height and stability", "text": "Heavy at the bottom, nothing overhanging, nothing above the marked height. A falling pallet does not ask who is under it." },
+    { "title": "Charging and batteries", "text": "Charging areas are for charging. No food, no shortcuts through them, and report any smell or hot cable at once. A battery fire does not wait for the end of the shift." },
+    { "title": "New colleagues", "text": "A new starter does not know where the trucks drive or which strap is broken. Walk with them on day one, and tell them the near misses of this area. Their safety is yours to share." },
+    { "title": "Tiredness is a hazard", "text": "The last hour of a night shift has more accidents than the first three. Watch for yourself and for others: slow down, talk, and take the break you are owed." },
+    { "title": "Report the unsafe condition", "text": "A loose dock plate, a dark corner, a missing mirror: report it, even if it has been like that for months. The log is how it finally gets fixed." },
+    { "title": "Reversing", "text": "Half of all vehicle contacts happen in reverse. Horn, mirrors, a look over the shoulder, and a banksman when the view is blocked. Never trust the camera alone." },
+    { "title": "Cutting safely", "text": "Cut away from the body, with a safety knife, and never towards a colleague. Retract the blade before you put the knife down. Most hand cuts happen in the half second after the cut." },
+    { "title": "Say something", "text": "If you see a colleague without a vest or under a raised load, say so. Not to tell them off, but because you would want the same. Silence is how accidents get permission." },
+    { "title": "Emergency exits and extinguishers", "text": "Know your nearest exit and the nearest extinguisher from where you work now, not from where you worked last year. Nothing stands in front of either." },
+    { "title": "Celebrate the green days", "text": "Every green day on the cross is the result of hundreds of small decisions. Look at the cross, say thank you, and tell the team what made this month green." }
+  ],
+  "tips": [
+    ["A near miss is a free lesson.", "Nobody was hurt and you learned where the next accident will come from. The more near misses in the log, the safer the plant, not the other way round."],
+    ["The cross is for the team, not the auditor.", "Print it, put it on the wall and look at it at every briefing. A cross nobody sees changes nothing."],
+    ["A rising report rate is good news.", "When the team starts reporting unsafe conditions, the pyramid gets a wide base. That is trust, not trouble."],
+    ["Severity is the potential, not the outcome.", "A pallet that fell next to someone is a 4 even though nobody was touched. Rate what could have happened."],
+    ["Every event gets an action and an owner.", "An event without an action is a story. Tick the action when it is done and send the open ones to the Action Tracker."]
+  ],
+  "example": {
+    "hours": 160000,
+    "nearMissTarget": 8,
+    "freeDaysTarget": 365,
+    "rows": [
+      "2026-09-08|Early|Near miss|Loading dock|Pallet slid off the forks at dock 3, nobody underneath|Forklift / vehicle|3|Check fork angle and the ramp at dock 3|Marco|yes",
+      "2026-09-11|Late|Unsafe condition|Receiving|Dock plate at door 2 loose, moves when driven over|Equipment|3|Repair dock plate, red tag until done|Maintenance|yes",
+      "2026-09-16|Early|Accident with lost time|Picking|Picker slipped on a wet floor at aisle 12, sprained wrist, 4 days off|Falls / slips|3|Drying routine and sign at door 5 when it rains|Anna|yes",
+      "2026-09-19|Night|Near miss|Yard|Driver reversed towards a colleague walking behind the truck|Forklift / vehicle|4|Banksman rule when reversing in the yard|Luca|no",
+      "2026-09-24|Late|Positive observation|Storage|Team stopped the job to re-stack an overhanging pallet before it fell|Procedure not followed|1|Thank the team at the briefing|Anna|yes",
+      "2026-09-29|Early|Near miss|Packing|Strapping knife slipped, cut the glove but not the hand|Equipment|2|Replace worn safety knives at packing|Sofia|yes",
+      "2026-10-02|Late|Near miss|Loading dock|Pedestrian crossed dock 1 behind a reversing truck|Forklift / vehicle|4|Paint the pedestrian lane at dock 1|Marco|no",
+      "2026-10-06|Early|First aid|Picking|Cut finger on a broken tote at aisle 8, plaster, back to work|Equipment|2|Remove broken totes from circulation each shift|Sofia|no",
+      "2026-10-08|Night|Unsafe condition|Yard|Lighting out at the yard gate, drivers cannot see the walkway|Equipment|3|Replace the lamp at the gate|Maintenance|no",
+      "2026-10-10|Late|Near miss|Receiving|Pallet stacked above the marked height tipped while being moved|Procedure not followed|3|Repeat stacking height in the briefing, check receiving twice a shift|Luca|yes",
+      "2026-10-13|Early|Unsafe act|Loading dock|Driver on the phone while driving the forklift|Procedure not followed|4|Talk with the driver, phone rule on the board|Anna|no",
+      "2026-10-15|Late|Positive observation|Yard|Night shift put the banksman rule into practice without being asked|Forklift / vehicle|1|Mention in the weekly review|Luca|yes",
+      "2026-10-17|Early|Near miss|Storage|Stretch film on the floor at aisle 4, picker tripped but did not fall|Housekeeping|2|Bin and broom at the end of aisle 4|Sofia|no",
+      "2026-10-20|Late|Positive observation|Picking|New starter stopped and asked before crossing dock 2|Forklift / vehicle|1|Thank the new starter|Marco|yes"
+    ]
+  }
+}

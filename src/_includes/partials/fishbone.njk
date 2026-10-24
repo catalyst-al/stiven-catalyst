@@ -1,0 +1,67 @@
+{#- Fishbone (Ishikawa): the effect at the head, causes on the bones of a category set, votes and likely causes; fishbone.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-fishbone>
+    <div class="dl-box fb-saved">
+      <div class="dl-log-head">
+        <p class="kicker">1 · {{ "Your diagrams" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <ul class="fb-list" data-list></ul>
+      <p class="form-note dl-log-status" data-list-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-new>{{ "New diagram" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-example>{{ "Load the example" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box fb-setup">
+      <fieldset>
+        <legend class="kicker">2 · {{ "Effect and categories" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="fb-effect">{{ "Effect: the problem at the head of the fish" | t(lang) }}</label>
+            <input id="fb-effect" placeholder="{{ cfg.text.effectPlaceholder }}" autocomplete="off" maxlength="300">
+          </div>
+          <div class="field dl-wide">
+            <label for="fb-set">{{ "Category set" | t(lang) }}</label>
+            <select id="fb-set">
+              {%- for set in cfg.sets %}
+              <option value="{{ set.key }}">{{ set.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+        <p class="form-note fb-set-note" data-set-note aria-live="polite"></p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box fb-editor">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Causes on the bones" | t(lang) }}</p>
+        <p class="form-note" data-cause-count></p>
+      </div>
+      <p class="form-note">{{ "Up to 12 causes per category, each with its own why. Mark the likely ones and count the votes of the team." | t(lang) }}</p>
+      <div class="fb-cats" data-categories></div>
+      <p class="form-note dl-log-status" data-cause-status aria-live="polite"></p>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "One cause stands out?" | t(lang) }}</strong> {{ "Take that cause through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results fb-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="fishbone-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/fishbone.js' | assetUrl }}" defer></script>

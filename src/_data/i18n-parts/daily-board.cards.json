@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Daily Board", "type": "Dashboard", "time": "10 min", "summary": "Safety, Quality, Delivery, Cost and People as five month calendars of green, amber and red days, filled from your logs. Open actions, carried handover issues and a ten-minute huddle agenda to read out or print.", "url": "/tools/daily-board/", "cta": "Open the board" },
+    "de": { "name": "Tagesboard", "type": "Übersicht", "time": "10 min", "summary": "Sicherheit, Qualität, Lieferung, Kosten und Menschen als fünf Monatskalender mit grünen, gelben und roten Tagen, gefüllt aus Ihren Protokollen. Offene Maßnahmen, weitergegebene Übergabepunkte und ein Huddle in zehn Minuten zum Vorlesen oder Drucken.", "url": "/de/tools/daily-board/", "cta": "Board öffnen" },
+    "sq": { "name": "Tabela e ditës", "type": "Pasqyrë", "time": "10 min", "summary": "Siguria, Cilësia, Dorëzimi, Kostoja dhe Njerëzit si pesë kalendarë mujorë me ditë të gjelbra, të verdha dhe të kuqe, të mbushura nga regjistrat e tu. Veprimet e hapura, çështjet e mbartura të dorëzimit dhe një takim prej dhjetë minutash për t'u lexuar ose printuar.", "url": "/sq/tools/daily-board/", "cta": "Hap tabelën" }
+  },
+  "routine": { "when": "Every morning", "do": "Open the board at the huddle, read the five letters and the agenda, and give every red day an action with an owner and a date.", "de": { "when": "Jeden Morgen", "do": "Öffnen Sie das Board im Huddle, gehen Sie die fünf Buchstaben und die Tagesordnung durch, und geben Sie jedem roten Tag eine Maßnahme mit Verantwortlichem und Termin." }, "sq": { "when": "Çdo mëngjes", "do": "Hap tabelën në takim, lexo pesë shkronjat dhe rendin e ditës, dhe jepi çdo dite të kuqe një veprim me përgjegjës dhe afat." } },
+  "recipe": "example"
+}

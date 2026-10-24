@@ -1,0 +1,205 @@
+{
+  "storageKey": "sc-hotel-kpis-sq",
+  "text": {
+    "tool": "KPI-të e hotelit",
+    "csv": "kpi-te-e-hotelit",
+    "entryLegend": "Regjistro një ditë",
+    "pasteRow": "Një rresht për çdo ditë",
+    "pastePlaceholder": "22.10.2026\t180\t155\t17386,67\t2540,31\t96\t78\t4\t1\t2\t0\t118\tZhurmë",
+    "empty": "Ende asnjë ditë e regjistruar.",
+    "roomsPlaceholder": "p.sh. 180",
+    "occPlaceholder": "p.sh. 78",
+    "adrPlaceholder": "p.sh. 112",
+    "revparPlaceholder": "p.sh. 87,36",
+    "availablePlaceholder": "nga cilësimet",
+    "report": "Raporti i mëngjesit"
+  },
+  "causes": {
+    "cleanliness": "Pastërtia",
+    "noise": "Zhurmë",
+    "billing": "Fatura",
+    "service": "Shërbimi",
+    "maintenance": "Mirëmbajtja",
+    "other": "Tjetër"
+  },
+  "weekdays": [
+    "Hën",
+    "Mar",
+    "Mër",
+    "Enj",
+    "Pre",
+    "Sht",
+    "Die"
+  ],
+  "weekdaysLong": [
+    "E hënë",
+    "E martë",
+    "E mërkurë",
+    "E enjte",
+    "E premte",
+    "E shtunë",
+    "E diel"
+  ],
+  "months": [
+    "janar",
+    "shkurt",
+    "mars",
+    "prill",
+    "maj",
+    "qershor",
+    "korrik",
+    "gusht",
+    "shtator",
+    "tetor",
+    "nëntor",
+    "dhjetor"
+  ],
+  "limits": {
+    "noShowRate": 0.05,
+    "oooShare": 0.02,
+    "complaintsPer100": 2
+  },
+  "kpis": {
+    "occupancy": "Zënia nën buxhet",
+    "adr": "ADR nën buxhet",
+    "noShows": "Shumë no-show",
+    "ooo": "Shumë dhoma jashtë përdorimit",
+    "complaints": "Shumë ankesa",
+    "onTrack": "Brenda buxhetit"
+  },
+  "advice": {
+    "occupancy": {
+      "meaning": "Shiten më pak dhoma nga sa pret buxheti. Në një hotel aeroporti boshllëku zakonisht është në fundjavë dhe në netët anësore: ditët e javës mbushen vetë me ekuipazhe dhe udhëtarë biznesi, nga e premtja te e diela jo.",
+      "moves": [
+        "Lexo mesataret sipas ditës së javës: hap një tarifë fundjave ose pushimi për dy netët më të dobëta, në kanalet që shesin në çast të fundit.",
+        "Telefono linjat ajrore dhe operatorët turistikë për blloqe ekuipazhesh dhe tranziti në netët e dobëta të katër javëve të ardhshme.",
+        "Krahaso çdo mëngjes dhomat e rezervuara me të njëjtën ditë të javës së kaluar dhe ndrysho tarifën para natës, jo pas saj."
+      ],
+      "question": "Cilat net të javës së ardhshme janë sot nën buxhet, dhe çfarë po bëjmë për secilën?",
+      "action": "Hap një tarifë për dy netët më të dobëta të javës së ardhshme",
+      "check": "Zënia në ato net arrin buxhetin katër javë rresht"
+    },
+    "adr": {
+      "meaning": "Dhomat shiten, por më lirë se sa ishte planifikuar: zbritje të dhëna në recepsion, një tarifë grupi në netët më të mira, ose netët me kërkesë të lartë pa rritur tarifën.",
+      "moves": [
+        "Rendit netët mbi 90% zënie dhe kontrollo tarifat e tyre: një natë e plotë nën ADR-në e buxhetit është para e lënë në tryezë.",
+        "Mbyll tarifat më të lira dhe kanalet me zbritje në netët që mbushen gjithsesi: panaire, konferenca, nga e marta te e enjtja.",
+        "Bie dakord me recepsionin se cilat upgrade dhe zbritje mund të japë, dhe regjistro secilën."
+      ],
+      "question": "Në cilat net u mbushëm nën tarifën e buxhetit, dhe kush e vendosi tarifën?",
+      "action": "Mbyll tarifat me zbritje në netët me parashikim mbi 90%",
+      "check": "ADR në netët me kërkesë të lartë në nivelin e buxhetit ose mbi të për një muaj"
+    },
+    "noShows": {
+      "meaning": "Më shumë mysafirë se zakonisht nuk mbërrijnë, dhe secili prej tyre është një dhomë që mbeti bosh në një natë të shitur. Në aeroport shkaku shpesh është jashtë hotelit (një grevë, fluturime të anuluara), por garancia dhe ora e lirimit janë brenda tij.",
+      "moves": [
+        "Kontrollo që çdo rezervim me mbërritje pas orës 18 të ketë garanci me kartë, dhe apliko tarifën e no-show-t njësoj çdo natë.",
+        "Ndiq në mbrëmje tabelën e fluturimeve dhe anulimet e linjave ajrore: liro herët dhomat pa garanci për walk-in dhe ekuipazhe.",
+        "Lejo një mbirezervim të vogël në netët me histori të lartë no-show-sh, në marrëveshje me menaxherin në detyrë."
+      ],
+      "question": "Cilat no-show të javës së kaluar ishin të garantuara, dhe sa prej tyre i faturuam në të vërtetë?",
+      "action": "Faturo garancinë për çdo no-show dhe liro dhomat pa garanci në orën 18",
+      "check": "Shkalla e no-show-ve nën 5% të mbërritjeve të pritura për katër javë"
+    },
+    "ooo": {
+      "meaning": "Një dhomë jashtë përdorimit nuk mund të shitet. Pak prej tyre janë mirëmbajtje normale; shumë, ose të njëjtat dhoma për një javë, do të thotë që një riparim pret pjesë, një vendim ose një firmë të jashtme.",
+      "moves": [
+        "Rendit çdo dhomë jashtë përdorimit me arsyen dhe datën kur doli; jepi secilës një përgjegjës dhe një datë kthimi në shitje.",
+        "Riparo në netët e qeta: çoji punimet e planifikuara te fundjava e dobët, kurrë në një javë panairi ose konference.",
+        "Kontrollo çdo mëngjes me housekeeping-un cilat dhoma mund të kthehen sot në shitje."
+      ],
+      "question": "Cila dhomë është më gjatë jashtë përdorimit, dhe çfarë pret ajo?",
+      "action": "Jepi çdo dhome jashtë përdorimit një përgjegjës dhe një datë kthimi",
+      "check": "Dhomat jashtë përdorimit nën 2% të dhomave në dispozicion për një muaj"
+    },
+    "complaints": {
+      "meaning": "Më shumë ankesa për 100 dhoma të shitura nga sa duhet të pranojë hoteli. Një ankesë është një mysafir që mund të mos kthehet, dhe për çdo mysafir që ankohet ka të tjerë që thjesht largohen.",
+      "moves": [
+        "Çoji shkaqet e ankesave në Pareto: zakonisht dy shkaqe janë shumica e tyre.",
+        "Përgjigju çdo ankese të njëjtën ditë, me emrin e personit që e zgjidhi.",
+        "Kontrollo këtë javë çdo ditë pesë dhoma për shkakun kryesor, bashkë me housekeeping-un ose mirëmbajtjen."
+      ],
+      "question": "Cili ishte shkaku i shumicës së ankesave këtë muaj, dhe çfarë ndryshuam për të?",
+      "action": "Zgjidh shkakun kryesor të ankesave dhe kontrollo pesë dhoma në ditë",
+      "check": "Nën 2 ankesa për 100 dhoma të shitura për një muaj"
+    },
+    "onTrack": {
+      "meaning": "Zënia, ADR, no-show-et, dhomat jashtë përdorimit dhe ankesat janë të gjitha brenda buxhetit dhe kufijve këtë muaj. Mbaje rutinën që të solli deri këtu.",
+      "moves": [
+        "Lexo çdo mëngjes parashikimin: muaji nuk ka mbaruar derisa të shitet nata e tij e fundit.",
+        "Shiko ditën më të dobët të javës dhe provo një tarifë ose një paketë për të.",
+        "Ndaje rezultatin në takimin e mëngjesit dhe thuaj çfarë shkoi mirë."
+      ],
+      "question": "Çfarë bëmë këtë muaj që duhet ta vazhdojmë edhe muajin tjetër?",
+      "action": "Provo një paketë për ditën më të dobët të javës",
+      "check": "Dita më e dobët e javës fiton pesë pikë zënie brenda katër javëve"
+    }
+  },
+  "tips": [
+    [
+      "Regjistro çdo mëngjes ditën e djeshme.",
+      "Night audit mbyll ditën: merr dhomat e shitura, të ardhurat nga dhomat dhe no-show-et nga raporti i tij para takimit të mëngjesit, që shifrat të mos jenë kurrë më të vjetra se një ditë."
+    ],
+    [
+      "Ngjit eksportin e PMS-it.",
+      "Eksporto statistikat ditore nga PMS-i ose nga raporti i menaxherit në Excel dhe ngjit rreshtat. Çdo format date funksionon, rreshti i titujve kapërcehet, dhe një ditë e ngjitur dy herë mban shifrat e fundit."
+    ],
+    [
+      "Zënia vetëm nuk mjafton.",
+      "Një hotel plot me tarifë të ulët mund të fitojë më pak se 80% me tarifën e buxhetit. RevPAR, të ardhurat nga dhomat për dhomë në dispozicion, bashkon zënien dhe ADR në një numër: gjyko ditën sipas tij."
+    ],
+    [
+      "Numëro çfarë humbi.",
+      "Një no-show i pafaturuar dhe një dhomë jashtë përdorimit në një natë të fortë janë të ardhura që hoteli i kishte dhe i humbi. Mjeti i vlerëson të dyja me ADR-në e asaj dite."
+    ]
+  ],
+  "example": {
+    "rooms": 180,
+    "budgetOcc": 78,
+    "budgetAdr": 112,
+    "rows": [
+      "2026-09-12|180|103|9231.07|1738.13|53|63|2|2|2|3|76|service",
+      "2026-09-13|180|119|12147.94|2062.75|72|71|1|3|2|1|96|noise",
+      "2026-09-14|180|156|18518.90|2793.48|79|96|5|0|3|2|114|noise",
+      "2026-09-15|180|160|19488.20|2526.28|93|88|8|1|4|0|116|",
+      "2026-09-16|180|175|21000.76|2870.14|98|89|3|1|4|2|129|cleanliness",
+      "2026-09-17|180|162|18042.93|2879.69|100|83|7|2|2|0|119|",
+      "2026-09-18|180|125|11920.03|2197.27|63|64|1|2|3|1|97|billing",
+      "2026-09-19|180|96|9124.18|1822.04|56|52|2|5|4|3|75|noise",
+      "2026-09-20|180|112|11372.56|2024.00|69|65|1|3|4|2|79|noise",
+      "2026-09-21|180|148|17084.67|2429.02|79|90|3|0|3|0|120|",
+      "2026-09-22|180|172|21388.18|3060.51|96|105|8|3|4|0|119|",
+      "2026-09-23|180|163|20493.41|2501.31|98|91|6|3|3|2|117|service",
+      "2026-09-24|180|161|18534.46|3054.35|81|83|4|2|2|0|125|",
+      "2026-09-25|180|122|11906.08|1993.23|61|74|3|2|3|0|87|",
+      "2026-09-26|180|92|8251.95|1580.68|46|53|3|3|2|1|65|maintenance",
+      "2026-09-27|180|126|12275.57|2091.70|74|68|1|2|3|2|95|noise",
+      "2026-09-28|180|151|17147.86|2765.00|81|80|5|2|13|4|119|maintenance",
+      "2026-09-29|180|168|20776.66|3256.57|100|88|5|1|12|3|132|maintenance",
+      "2026-09-30|180|168|20387.29|2743.17|88|90|3|0|12|0|128|",
+      "2026-10-01|180|164|19179.96|2785.96|101|84|8|2|12|0|116|",
+      "2026-10-02|180|126|12469.19|2066.43|72|74|3|5|2|3|99|noise",
+      "2026-10-03|180|104|9336.46|1701.17|59|64|3|4|2|1|80|maintenance",
+      "2026-10-04|180|126|12815.51|2092.28|68|74|2|5|4|2|94|noise",
+      "2026-10-05|180|171|22401.00|3130.62|102|101|3|2|2|3|130|billing",
+      "2026-10-06|180|178|26069.40|3330.22|100|95|8|0|2|3|132|billing",
+      "2026-10-07|180|177|26320.62|2998.00|108|109|4|2|3|3|132|maintenance",
+      "2026-10-08|180|176|25879.45|3313.81|103|104|3|2|4|1|143|service",
+      "2026-10-09|180|124|12143.93|1786.75|73|70|2|2|4|1|87|service",
+      "2026-10-10|180|92|8479.05|1427.31|48|52|2|5|4|1|69|noise",
+      "2026-10-11|180|116|11801.07|2013.34|59|62|3|3|3|1|88|service",
+      "2026-10-12|180|153|17827.48|2659.75|79|83|5|3|3|2|115|noise",
+      "2026-10-13|180|172|20558.14|2920.27|103|97|14|3|3|2|124|cleanliness",
+      "2026-10-14|180|166|20854.87|2857.39|95|99|11|1|2|2|133|billing",
+      "2026-10-15|180|152|17612.24|2928.13|85|91|17|2|2|1|122|cleanliness",
+      "2026-10-16|180|125|12039.15|1910.54|66|63|3|2|4|3|96|service",
+      "2026-10-17|180|75|6369.31|1141.06|38|43|2|2|3|2|57|cleanliness",
+      "2026-10-18|180|94|8961.48|1621.93|52|50|2|5|3|1|66|noise",
+      "2026-10-19|180|157|17967.93|2828.45|90|81|3|2|3|0|126|",
+      "2026-10-20|180|162|19014.19|2789.53|92|82|6|1|3|2|116|cleanliness",
+      "2026-10-21|180|172|20971.65|3002.24|104|103|3|0|3|3|120|noise",
+      "2026-10-22|180|155|17386.67|2540.31|96|78|4|1|2|0|118|",
+      "2026-10-23|180|126|12653.11|2258.65|66|71|3|4|3|1|102|noise"
+    ]
+  }
+}

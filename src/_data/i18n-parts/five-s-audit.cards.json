@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "5S Audit", "type": "Lean", "time": "10 min", "summary": "Walk one area and score each S from 0 to 4, in 5S, 6S or 8S, with checklists for warehouse, hotel and delivery station. A radar against the last walk, the trend and a league table by area, findings straight into actions and a red tag register.", "url": "/tools/five-s-audit/", "cta": "Start the audit" },
+    "de": { "name": "5S-Audit", "type": "Lean", "time": "10 min", "summary": "Gehen Sie einen Bereich ab und bewerten Sie jedes S von 0 bis 4, in 5S, 6S oder 8S, mit Checklisten für Lager, Hotel und Zustellbasis. Radar gegen den letzten Rundgang, Trend und Rangliste je Bereich, Befunde direkt als Maßnahmen und ein Register der Roten Karten.", "url": "/de/tools/five-s-audit/", "cta": "Audit starten" },
+    "sq": { "name": "Auditi 5S", "type": "Lean", "time": "10 min", "summary": "Kalo nëpër një zonë dhe vlerëso çdo S nga 0 në 4, në 5S, 6S ose 8S, me lista kontrolli për magazinë, hotel dhe stacion shpërndarjeje. Radari kundrejt kontrollit të fundit, trendi dhe renditja e zonave, gjetjet drejt e në veprime dhe një regjistër i etiketave të kuqe.", "url": "/sq/tools/five-s-audit/", "cta": "Nis auditin" }
+  },
+  "routine": { "when": "Every week", "do": "Walk the same areas on the same day, score what you see, and give every finding at 2 or below an owner before you leave the floor.", "de": { "when": "Jede Woche", "do": "Gehen Sie am selben Tag dieselben Bereiche ab, bewerten Sie, was Sie sehen, und geben Sie jedem Befund bei 2 oder darunter einen Verantwortlichen, bevor Sie die Fläche verlassen." }, "sq": { "when": "Çdo javë", "do": "Kalo në të njëjtën ditë nëpër të njëjtat zona, vlerëso atë që sheh dhe jepi çdo gjetjeje me 2 ose më pak një përgjegjës para se të largohesh nga salla." } },
+  "recipe": "example"
+}

@@ -1,0 +1,154 @@
+{#- Hotel KPIs: the daily statistics of a hotel read as occupancy, ADR and RevPAR against the month's budget; hotel-kpis.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout hk-setup">
+  <div class="tool-panel" data-hotel-kpis>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ t.entryLegend }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="hk-date">{{ "Date" | t(lang) }}</label>
+            <input id="hk-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="hk-available">{{ "Rooms available" | t(lang) }}</label>
+            <input id="hk-available" name="available" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.availablePlaceholder }}">
+          </div>
+          <div class="field">
+            <label for="hk-sold">{{ "Rooms sold" | t(lang) }}</label>
+            <input id="hk-sold" name="sold" type="number" min="0" step="1" inputmode="numeric" required>
+          </div>
+          <div class="field">
+            <label for="hk-room-rev">{{ "Room revenue" | t(lang) }} (€)</label>
+            <input id="hk-room-rev" name="roomRev" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="hk-other-rev">{{ "Other revenue" | t(lang) }} (€) <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="hk-other-rev" name="otherRev" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="hk-arrivals">{{ "Arrivals" | t(lang) }}</label>
+            <input id="hk-arrivals" name="arrivals" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-departures">{{ "Departures" | t(lang) }}</label>
+            <input id="hk-departures" name="departures" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-no-shows">{{ "No-shows" | t(lang) }}</label>
+            <input id="hk-no-shows" name="noShows" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-walk-ins">{{ "Walk-ins" | t(lang) }}</label>
+            <input id="hk-walk-ins" name="walkIns" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-ooo">{{ "Rooms out of order" | t(lang) }}</label>
+            <input id="hk-ooo" name="ooo" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-covers">{{ "Breakfast covers" | t(lang) }}</label>
+            <input id="hk-covers" name="covers" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-complaints">{{ "Complaints" | t(lang) }}</label>
+            <input id="hk-complaints" name="complaints" type="number" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="hk-cause">{{ "Complaint cause" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <select id="hk-cause" name="cause">
+              <option value="">–</option>
+              {%- for key, name in cfg.causes %}
+              <option value="{{ key }}">{{ name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+        <p class="form-note">{{ "The figures of one night, from the night audit or the PMS. A night already in the log is replaced." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date, rooms available, rooms sold, room revenue, other revenue, arrivals, departures, no-shows, walk-ins, rooms out of order, complaints, breakfast covers, complaint cause" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "Any date format works. An empty rooms available takes the total rooms of the settings." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="hk-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="hk-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Settings and budget" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="hk-rooms">{{ "Total rooms" | t(lang) }}</label>
+          <input id="hk-rooms" name="rooms" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.roomsPlaceholder }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="hk-budget-occ">{{ "Budget occupancy" | t(lang) }} (%)</label>
+          <input id="hk-budget-occ" name="budgetOcc" inputmode="decimal" autocomplete="off" placeholder="{{ t.occPlaceholder }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="hk-budget-adr">{{ "Budget ADR" | t(lang) }} (€)</label>
+          <input id="hk-budget-adr" name="budgetAdr" inputmode="decimal" autocomplete="off" placeholder="{{ t.adrPlaceholder }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="hk-budget-revpar">{{ "Budget RevPAR" | t(lang) }} (€) <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="hk-budget-revpar" name="budgetRevpar" inputmode="decimal" autocomplete="off" placeholder="{{ t.revparPlaceholder }}" data-setting>
+          <span class="form-note">{{ "Empty: occupancy × ADR." | t(lang) }}</span>
+        </div>
+      </div>
+      <p class="form-note">{{ "The budget of the month you are looking at. The month shown is chosen with the arrows above the calendar." | t(lang) }}</p>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col" class="num">{{ "Sold" | t(lang) }}</th><th scope="col" class="num">{{ "Available" | t(lang) }}</th><th scope="col" class="num">{{ "Occupancy" | t(lang) }}</th><th scope="col" class="num">{{ "Room revenue" | t(lang) }}</th><th scope="col" class="num">ADR</th><th scope="col" class="num">RevPAR</th><th scope="col" class="num">{{ "No-shows" | t(lang) }}</th><th scope="col" class="num">{{ "Out of order" | t(lang) }}</th><th scope="col" class="num">{{ "Complaints" | t(lang) }}</th><th scope="col">{{ "Cause" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load six example weeks" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The exceptions behind the numbers." | t(lang) }}</strong> {{ "Log the no-shows, declined cards and posting errors of each night in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/night-audit/' | local(lang) }}">{{ "Night Audit Log" | t(lang) }}</a>{{ ", and take the weakest night through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your log stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results hk-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="hotel-kpis-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/hotel-kpis.js' | assetUrl }}" defer></script>

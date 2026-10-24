@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Daily Board
+seo_title: "SQDCP daily board for the shift huddle: safety, quality, delivery, cost, people"
+description: "A private SQDCP tier board: five month calendars of green, amber and red days filled from your logs, open actions and a ten-minute huddle agenda."
+activeNav: /tools.html
+permalink: /tools/daily-board/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Dashboard</p>
+  <h1>Daily Board</h1>
+  <p class="lede">Safety, Quality, Delivery, Cost and People as five month calendars of green, amber and red days. Three letters fill themselves from the logs you already keep here; you mark the rest by hand. Then a ten-minute huddle agenda, ready to read out.</p>
+</section>
+
+{% set cfg = dailyBoard %}
+{% include "partials/daily-board.njk" %}

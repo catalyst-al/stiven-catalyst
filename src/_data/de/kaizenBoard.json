@@ -1,0 +1,65 @@
+{
+  "storageKey": "sc-kaizen-board-de",
+  "text": {
+    "tool": "Kaizen-Board",
+    "csv": "kaizen-board",
+    "titlePlaceholder": "z. B. Schattenbrett für die Wickelwerkzeuge an Tor 3",
+    "byPlaceholder": "z. B. Marco",
+    "ownerPlaceholder": "z. B. Anna",
+    "areaPlaceholder": "z. B. Verladung",
+    "savingPlaceholder": "z. B. 350",
+    "nextPlaceholder": "z. B. Eine Woche Test mit den Frühspediteuren",
+    "resultPlaceholder": "z. B. Fehlsortierungen von 9 auf 2 pro Woche gesunken",
+    "reasonPlaceholder": "z. B. Der Lieferant stellt im November die Kartons um; dann erneut versuchen",
+    "empty": "Noch keine Ideen auf dem Board.",
+    "scaleNote": "Aufwand: 1 ist unter einer Stunde und kostet nichts, 5 ist ein Projekt mit Budget. Nutzen: 1 ist ein besserer Tag für eine Person, 5 bewegt eine Kennzahl des Bereichs."
+  },
+  "wastes": ["Fehler", "Überproduktion", "Warten", "Ungenutztes Talent", "Transport", "Bestände", "Bewegung", "Überbearbeitung", "Sicherheit", "Kunde"],
+  "areas": ["Wareneingang", "Kommissionierung", "Verpackung", "Verladung", "Retouren", "Disposition", "Rezeption", "Housekeeping", "Frühstück", "Instandhaltung"],
+  "statuses": { "idea": "Idee", "plan": "Planen", "do": "Umsetzen", "check": "Prüfen", "act": "Eingeführt", "dropped": "Verworfen" },
+  "statusHints": {
+    "idea": "Vorgeschlagen, noch nicht angesehen. Antwort innerhalb einer Woche.",
+    "plan": "Vereinbart, was getestet wird, wer testet und bis wann.",
+    "do": "Im Test, durch die Person, die die Idee hatte.",
+    "check": "Vorher und nachher wird gemessen.",
+    "act": "Der Standard ist geändert und das Ergebnis geprüft.",
+    "dropped": "Nicht jetzt, mit einem Grund, den die Person nachlesen kann."
+  },
+  "scales": {
+    "effort": ["1 · unter einer Stunde, kein Geld", "2 · eine Schicht, ein kleiner Einkauf", "3 · eine Woche, braucht ein anderes Team", "4 · ein Monat oder ein Budget", "5 · ein Projekt"],
+    "impact": ["1 · ein besserer Tag für eine Person", "2 · eine Aufgabe leichter für das Team", "3 · jeden Tag Zeit oder Fehler gespart", "4 · eine Kennzahl des Bereichs bewegt sich", "5 · Kunde oder Sicherheit merken es"]
+  },
+  "quadrants": ["Schnelle Erfolge", "Projekte", "Lückenfüller", "Undankbare Aufgaben"],
+  "quadrantAdvice": {
+    "Schnelle Erfolge": "Wenig Aufwand, viel Nutzen: diese Woche umsetzen, mit der Person, die die Idee hatte.",
+    "Projekte": "Viel Aufwand, viel Nutzen: Verantwortlichen, Budget und Plan festlegen oder in einen A3-Bericht überführen.",
+    "Lückenfüller": "Wenig Aufwand, wenig Nutzen: erledigen, wenn Luft ist, nie vor einem schnellen Erfolg.",
+    "Undankbare Aufgaben": "Viel Aufwand, wenig Nutzen: mit Dank verwerfen oder so lange überdenken, bis der Aufwand klein ist."
+  },
+  "tips": [
+    ["Klein, viele, schnell.", "Zehn Ideen mit je einer Stunde Aufwand schlagen ein Projekt, das ein Jahr dauert. Die Hürde zum Einreichen niedrig halten, die zum Abschließen hoch."],
+    ["Jede Idee bekommt innerhalb einer Woche eine Antwort.", "Planen, testen oder mit einem lesbaren Grund verwerfen. Ideen, die liegen bleiben, bringen den Leuten bei, keine mehr zu haben."],
+    ["Wer die Idee hatte, testet sie.", "Diese Person verantwortet die Spalte Umsetzen. Die Führungskraft räumt Hindernisse aus dem Weg, nicht die Idee."],
+    ["Mit einer Zahl prüfen.", "Vorher und nachher: Minuten, Fehler, gelaufene Meter. Eine Idee ohne gemessene Prüfung ist eine Meinung."],
+    ["Eingeführt heißt: Der Standard ist geändert.", "Passen Sie die SOP, das Schattenbrett oder die Schulung an, bevor die Karte auf Eingeführt wandert, sonst kommt der alte Weg zurück."],
+    ["Erst schnelle Erfolge, Projekte mit Absicht.", "Wenig Aufwand und viel Nutzen kommt diese Woche dran. Viel Aufwand und viel Nutzen bekommt einen Plan, ein Budget und einen Verantwortlichen."]
+  ],
+  "example": {
+    "rows": [
+      { "title": "Schattenbrett für die Wickelwerkzeuge an Tor 3", "waste": "Bewegung", "area": "Verladung", "by": "Marco", "date": -84, "effort": 1, "impact": 3, "saving": 120, "status": "act", "owner": "Marco", "moved": -70, "adopted": -70, "result": "Wickelwerkzeug sofort zur Hand; etwa 4 Minuten pro Lkw gespart." },
+      { "title": "Farbige Kistenetiketten je Tour", "waste": "Fehler", "area": "Verpackung", "by": "Fatima", "date": -78, "effort": 2, "impact": 4, "saving": 350, "status": "act", "owner": "Fatima", "moved": -55, "adopted": -55, "result": "Fehlsortierungen von 9 auf 2 pro Woche gesunken." },
+      { "title": "Schnelldreher in Gang 12 auf Hüfthöhe", "waste": "Bewegung", "area": "Kommissionierung", "by": "Anna", "date": -72, "effort": 2, "impact": 4, "saving": 480, "status": "act", "owner": "Anna", "moved": -40, "adopted": -40, "result": "Pickleistung in Gang 12 in drei Wochen um 11 % gestiegen." },
+      { "title": "Ladeplan auf dem Torbildschirm statt auf Papier", "waste": "Überbearbeitung", "area": "Verladung", "by": "Jonas", "date": -65, "effort": 3, "impact": 3, "saving": 90, "status": "act", "owner": "Jonas", "moved": -30, "adopted": -30, "result": "Seitdem kein gedruckter Plan mehr verloren; jeden Abend pünktliche Abfahrten." },
+      { "title": "Zweiter Scanner am Retourentisch", "waste": "Warten", "area": "Retouren", "by": "Elena", "date": -60, "effort": 2, "impact": 3, "saving": 200, "status": "act", "owner": "Elena", "moved": -12, "adopted": -12, "result": "Die Warteschlange am Retourentisch am Morgen ist weg." },
+      { "title": "Bodenmarkierung für Leerpalettenstapel", "waste": "Sicherheit", "area": "Wareneingang", "by": "Dritan", "date": -58, "effort": 1, "impact": 4, "saving": "", "status": "act", "owner": "Dritan", "moved": -45, "adopted": -45, "result": "Seit der Markierung kein Beinahe-Unfall mehr mit losen Paletten." },
+      { "title": "Klebebandabroller mit breiterem Band", "waste": "Fehler", "area": "Verpackung", "by": "Marco", "date": -50, "effort": 1, "impact": 2, "saving": 60, "status": "dropped", "owner": "", "moved": -42, "reason": "Der Lieferant stellt im November die Kartons um; mit den neuen Kartons erneut versuchen." },
+      { "title": "Kommissionierwagen nach Zonen vorsortiert", "waste": "Transport", "area": "Kommissionierung", "by": "Anna", "date": -40, "effort": 4, "impact": 4, "saving": 600, "status": "check", "owner": "Anna", "due": 10, "moved": -8, "next": "Pickzeiten von zwei Wochen mit und ohne vorsortierte Wagen vergleichen." },
+      { "title": "Standardarbeit für die Lkw-Anmeldung", "waste": "Warten", "area": "Wareneingang", "by": "Dritan", "date": -33, "effort": 3, "impact": 4, "saving": 300, "status": "do", "owner": "Dritan", "due": 7, "moved": -14, "next": "Eine Woche Test mit den Frühspediteuren." },
+      { "title": "Kanban-Karte für die Nachbestellung von Stretchfolie", "waste": "Bestände", "area": "Verladung", "by": "Jonas", "date": -25, "effort": 2, "impact": 3, "saving": 150, "status": "plan", "owner": "Jonas", "due": 14, "moved": -6, "next": "Meldebestand mit dem Einkauf abstimmen." },
+      { "title": "Zwei Kommissionierer für den Retourentisch anlernen", "waste": "Ungenutztes Talent", "area": "Retouren", "by": "Elena", "date": -20, "effort": 3, "impact": 3, "saving": "", "status": "plan", "owner": "Elena", "due": 21, "moved": -4, "next": "Zwei Schulungsschichten mit der Frühschicht einplanen." },
+      { "title": "Jeden Morgen fünf Minuten Board-Runde am Tor", "waste": "Kunde", "area": "Verladung", "by": "Marco", "date": -12, "effort": 1, "impact": 3, "saving": "", "status": "idea", "moved": -12 },
+      { "title": "Eine Kartongröße weniger im Verpackungssortiment", "waste": "Überproduktion", "area": "Verpackung", "by": "Fatima", "date": -6, "effort": 4, "impact": 2, "saving": 80, "status": "idea", "moved": -6 },
+      { "title": "Headset statt Funkgerät für den Torleiter", "waste": "Warten", "area": "Verladung", "by": "Jonas", "date": -3, "effort": 2, "impact": 2, "saving": 40, "status": "idea", "moved": -3 }
+    ]
+  }
+}
