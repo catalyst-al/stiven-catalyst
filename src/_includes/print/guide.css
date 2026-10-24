@@ -103,6 +103,9 @@
 .tg .pg.routine-page .routine { font-size: 7.7pt; }
 .tg .pg.routine-page .routine td { padding: 1.5mm 0; line-height: 1.38; }
 .tg .pg.routine-page .routine td:first-child { width: 29mm; }
+/* A long routine (more than twelve steps) keeps the tighter setting of the role's opening page. */
+.tg .pg.routine-page.is-long .routine { font-size: 7.3pt; }
+.tg .pg.routine-page.is-long .routine td { padding: 1.05mm 0; }
 
 /* Tool page */
 .tg .pg .tool-head { margin-bottom: 4mm; }

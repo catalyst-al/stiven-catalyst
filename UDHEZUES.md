@@ -227,7 +227,7 @@ pasi janë hapur një herë në atë pajisje.
 
 ### Udhëzuesi i mjeteve
 
-**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e tretë**: një faqe
+**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e katërt**: një faqe
 për çdo mjet, në tri gjuhë, për t’u shfletuar ose shkarkuar si PDF. Botimet e mëparshme mbeten te faqja si u
 printuan. Te çdo mjet, poshtë, lidhja **Hape te faqja N** të çon te faqja e tij në libër.
 
