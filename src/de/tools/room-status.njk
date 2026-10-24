@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Zimmerstatus
+seo_title: "Zimmerstatus-Board fürs Hotel: Housekeeping-Codes VD, VC, VI, OOO, das nächste Zimmer und die Durchlaufzeiten"
+description: "Das Zimmerboard für Housekeeping und Rezeption: VD, VC, VI, OCC, DO, OOO je Etage, das nächste Zimmer, bezugsfertige Zimmer für Anreisen, Durchlaufzeit."
+activeNav: /de/tools.html
+permalink: /de/tools/room-status/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Hotel</p>
+  <h1>Zimmerstatus</h1>
+  <p class="lede">Das Zimmerboard der Schicht, auf dem Handy oder am Bildschirm der Rezeption: jedes Zimmer nach Etage mit seinem Housekeeping-Code, den Markierungen DND, VIP und Anreise, der Reinigungskraft und einer Notiz. Ein Tippen ändert es, und jede Änderung wird mit Uhrzeit festgehalten. Das Board zeigt das nächste Zimmer zur Reinigung, die bezugsfertigen Zimmer für die heutigen Anreisen, was außer Betrieb ist und wie lange ein Zimmer von der Abreise bis sauber und von sauber bis kontrolliert braucht.</p>
+</section>
+
+{% set cfg = de.roomStatus %}
+{% include "partials/room-status.njk" %}

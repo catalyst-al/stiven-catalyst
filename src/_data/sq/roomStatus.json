@@ -1,0 +1,407 @@
+{
+  "storageKey": "sc-room-status-sq",
+  "inspectionKey": "sc-room-inspection-sq",
+  "historyDays": 30,
+  "text": {
+    "tool": "Statusi i dhomave",
+    "roomsPlaceholder": "101; dyshe; 1\n102; twin; 1\n110; suitë; 1",
+    "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
+    "importPlaceholder": "101 VD\n102 OCC\n103 OOO\n104 DO",
+    "notePlaceholder": "p.sh. Shtrat shtesë, largim i vonë në 12:00",
+    "maintenanceOwner": "Mirëmbajtja",
+    "checkText": "Dhoma sërish në rregull, e pastruar dhe e inspektuar: statusi VI, sërish për shitje.",
+    "csvName": "statusi-i-dhomave",
+    "historyName": "statusi-i-dhomave-historiku",
+    "unassigned": "Pa caktuar"
+  },
+  "statuses": [
+    {
+      "key": "vd",
+      "code": "VD",
+      "name": "E lirë – e papastër",
+      "short": "E lirë e papastër",
+      "meaning": "Pa mysafir, ende e papastruar. Nuk shitet.",
+      "aliases": [
+        "VD"
+      ]
+    },
+    {
+      "key": "vc",
+      "code": "VC",
+      "name": "E lirë – e pastër",
+      "short": "E lirë e pastër",
+      "meaning": "E pastruar nga pastruesi, pret inspektimin e supervizores.",
+      "aliases": [
+        "VC"
+      ]
+    },
+    {
+      "key": "vi",
+      "code": "VI",
+      "name": "E lirë – e inspektuar (gati)",
+      "short": "Gati",
+      "meaning": "E pastruar dhe e inspektuar: recepsioni mund t’ia japë një mysafiri që mbërrin.",
+      "aliases": [
+        "VI",
+        "VR"
+      ]
+    },
+    {
+      "key": "occ",
+      "code": "OCC",
+      "name": "E zënë",
+      "short": "E zënë",
+      "meaning": "Mysafiri në dhomë, tani nuk duhet shërbim.",
+      "aliases": [
+        "OCC",
+        "OC"
+      ]
+    },
+    {
+      "key": "od",
+      "code": "OD",
+      "name": "E zënë – duhet shërbim",
+      "short": "Duhet shërbim",
+      "meaning": "Qëndrim i vazhduar: mysafiri qëndron, dhoma ka nevojë për shërbimin ditor.",
+      "aliases": [
+        "OD"
+      ]
+    },
+    {
+      "key": "do",
+      "code": "DO",
+      "name": "Largim i pritshëm",
+      "short": "Largim i pritshëm",
+      "meaning": "Mysafiri largohet sot dhe ende nuk ka bërë check-out.",
+      "aliases": [
+        "DO"
+      ]
+    },
+    {
+      "key": "co",
+      "code": "CO",
+      "name": "U largua (check-out, e papastër)",
+      "short": "U largua",
+      "meaning": "Mysafiri ka bërë check-out; dhoma pret pastrimin pas largimit.",
+      "aliases": [
+        "CO",
+        "C/O"
+      ]
+    },
+    {
+      "key": "ooo",
+      "code": "OOO",
+      "name": "Jashtë përdorimit",
+      "short": "Jashtë përdorimit",
+      "meaning": "Nuk shitet: ka nevojë për mirëmbajtje dhe del nga inventari deri në datën kur kthehet.",
+      "aliases": [
+        "OOO"
+      ]
+    },
+    {
+      "key": "oos",
+      "code": "OOS",
+      "name": "Jashtë shërbimit",
+      "short": "Jashtë shërbimit",
+      "meaning": "Një defekt i vogël: mbetet në inventar dhe shitet sërish sapo të rregullohet.",
+      "aliases": [
+        "OOS"
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "key": "dnd",
+      "code": "DND",
+      "name": "Mos shqetëso"
+    },
+    {
+      "key": "vip",
+      "code": "VIP",
+      "name": "VIP"
+    },
+    {
+      "key": "early",
+      "code": "MH",
+      "name": "Mbërritje e hershme / prioritet"
+    },
+    {
+      "key": "arrival",
+      "code": "MBR",
+      "name": "Mbërritje sot"
+    }
+  ],
+  "roomTypes": [
+    {
+      "key": "single",
+      "name": "Teke"
+    },
+    {
+      "key": "double",
+      "name": "Dyshe"
+    },
+    {
+      "key": "twin",
+      "name": "Twin"
+    },
+    {
+      "key": "suite",
+      "name": "Suitë"
+    },
+    {
+      "key": "accessible",
+      "name": "E aksesueshme"
+    }
+  ],
+  "oooReasons": [
+    {
+      "key": "plumbing",
+      "name": "Hidraulikë / ujë"
+    },
+    {
+      "key": "electrical",
+      "name": "Elektrike / ndriçim"
+    },
+    {
+      "key": "hvac",
+      "name": "Ngrohje / kondicioner"
+    },
+    {
+      "key": "furniture",
+      "name": "Mobilje / pajisje"
+    },
+    {
+      "key": "tv",
+      "name": "TV / telefon / Wi-Fi"
+    },
+    {
+      "key": "deepclean",
+      "name": "Pastrim i thellë / erë"
+    },
+    {
+      "key": "pest",
+      "name": "Dezinsektim"
+    },
+    {
+      "key": "renovation",
+      "name": "Rinovim"
+    },
+    {
+      "key": "other",
+      "name": "Tjetër"
+    }
+  ],
+  "tips": [
+    [
+      "Një status, i vendosur aty ku bëhet puna.",
+      "Pastruesi vendos VC kur del nga dhoma, supervizorja VI pas inspektimit, recepsioni OCC në check-in. Mysafirit që mbërrin recepsioni i jep vetëm një dhomë VI."
+    ],
+    [
+      "Në fillim largimet me mbërritje.",
+      "Radha vendos në krye mbërritjet e hershme dhe mbërritjet VIP, pastaj largimet me mbërritje sot, pastaj largimet e tjera, pastaj dhomat me qëndrim të vazhduar. Dhomat DND presin dhe renditen veçmas."
+    ],
+    [
+      "DND kontrollohet, nuk harrohet.",
+      "Kalo dhomën dhe provo më vonë. Kur shenja është ende në derë në orën që caktojnë rregullat e hotelit (shpesh pas dreke), supervizorja telefonon dhomën; një DND për më shumë se një ditë kërkon kontroll për mirëqenien e mysafirit."
+    ],
+    [
+      "OOO nuk është OOS.",
+      "Jashtë përdorimit e nxjerr dhomën nga inventari: ka nevojë për mirëmbajtje dhe për një datë kur kthehet. Jashtë shërbimit mbetet për shitje dhe rikthehet në shitje pas një rregullimi të vogël. Çdo OOO dërgoje te lista e veprimeve."
+    ],
+    [
+      "Krahaso me PMS-in dy herë në ditë.",
+      "Ngjit statusin e dhomave nga PMS-i në mëngjes dhe pas dreke. Një dhomë që PMS-i e tregon të zënë dhe housekeeping e gjen bosh është skipper; një dhomë e treguar e lirë me mysafir brenda është sleeper. Recepsioni i sqaron të dyja menjëherë."
+    ],
+    [
+      "Kodet janë kodet e PMS-it.",
+      "VD, VC, VI, OCC, OD, DO, CO, OOO dhe OOS përdoren njësoj në çdo gjuhë, kështu tabela dhe PMS-i flasin të njëjtën gjuhë."
+    ]
+  ],
+  "example": {
+    "time": "10:45",
+    "start": "07:00",
+    "floors": [
+      1,
+      4
+    ],
+    "rooms": [
+      1,
+      10
+    ],
+    "default": "double",
+    "types": [
+      {
+        "from": 1,
+        "to": 1,
+        "type": "accessible",
+        "floors": [
+          1
+        ]
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "type": "twin"
+      },
+      {
+        "from": 8,
+        "to": 8,
+        "type": "single"
+      },
+      {
+        "from": 10,
+        "to": 10,
+        "type": "suite",
+        "floors": [
+          3,
+          4
+        ]
+      }
+    ],
+    "attendants": [
+      {
+        "name": "Marta",
+        "floors": [
+          1
+        ]
+      },
+      {
+        "name": "Ilir",
+        "floors": [
+          2
+        ]
+      },
+      {
+        "name": "Sofia",
+        "floors": [
+          3
+        ]
+      },
+      {
+        "name": "Jonas",
+        "floors": [
+          4
+        ]
+      }
+    ],
+    "board": {
+      "101": "do arrival",
+      "102": "od",
+      "103": "od vip",
+      "104": "do arrival",
+      "105": "od",
+      "106": "do",
+      "107": "od",
+      "108": "vi arrival",
+      "109": "do arrival",
+      "110": "od",
+      "201": "od",
+      "202": "do arrival",
+      "203": "od",
+      "204": "od",
+      "205": "vd arrival vip",
+      "206": "do arrival",
+      "207": "do arrival early",
+      "208": "oos",
+      "209": "od",
+      "210": "od",
+      "301": "do arrival",
+      "302": "od",
+      "303": "od",
+      "304": "do arrival",
+      "305": "ooo",
+      "306": "od",
+      "307": "do",
+      "308": "vi arrival",
+      "309": "od",
+      "310": "do arrival vip",
+      "401": "od",
+      "402": "do arrival",
+      "403": "od",
+      "404": "od",
+      "405": "vd arrival",
+      "406": "do arrival early",
+      "407": "od",
+      "408": "od",
+      "409": "do",
+      "410": "od vip"
+    },
+    "ooo": {
+      "305": {
+        "reason": "plumbing",
+        "back": 2
+      },
+      "208": {
+        "reason": "tv",
+        "back": 0
+      }
+    },
+    "events": [
+      "07:30 405 start",
+      "07:35 205 start",
+      "07:40 104 co",
+      "07:40 302 start",
+      "07:45 104 start",
+      "07:50 202 co",
+      "08:00 402 co",
+      "08:05 101 co",
+      "08:05 302 occ",
+      "08:05 405 vc",
+      "08:10 205 vc",
+      "08:10 402 start",
+      "08:15 202 start",
+      "08:20 301 co",
+      "08:20 405 vi",
+      "08:25 104 vc",
+      "08:30 101 start",
+      "08:30 105 +dnd",
+      "08:30 205 vi",
+      "08:30 301 start",
+      "08:40 207 co",
+      "08:50 104 vd",
+      "08:50 402 vc",
+      "08:55 202 vc",
+      "09:00 207 start",
+      "09:00 303 +dnd",
+      "09:00 410 start",
+      "09:05 304 co",
+      "09:05 402 vi",
+      "09:10 301 vc",
+      "09:15 101 vc",
+      "09:15 304 start",
+      "09:20 104 start",
+      "09:20 202 vi",
+      "09:30 104 vc",
+      "09:30 206 co",
+      "09:35 301 vi",
+      "09:40 104 vi",
+      "09:40 207 vc",
+      "09:45 103 start",
+      "09:45 406 co",
+      "09:50 101 vi",
+      "09:50 310 co",
+      "09:50 410 occ",
+      "09:55 207 vi",
+      "09:55 304 vc",
+      "09:55 401 start",
+      "10:00 201 start",
+      "10:05 310 start",
+      "10:10 103 occ",
+      "10:10 109 co",
+      "10:15 102 start",
+      "10:20 401 occ",
+      "10:25 201 occ",
+      "10:25 403 start",
+      "10:30 203 start",
+      "10:40 102 occ",
+      "10:42 107 start"
+    ],
+    "notes": {
+      "305": "Rrjedhje poshtë lavamanit, hidrauliku i porositur",
+      "208": "Televizori nuk ndizet, tekniku në 11:00",
+      "310": "VIP: dhuratë mirëseardhjeje dhe letër nga drejtori i përgjithshëm",
+      "406": "Mysafiri mbërrin në 11:30 nga një fluturim nate",
+      "106": "Largim i vonë deri në 12:00"
+    }
+  }
+}

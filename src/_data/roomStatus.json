@@ -1,0 +1,107 @@
+{
+  "storageKey": "sc-room-status",
+  "inspectionKey": "sc-room-inspection",
+  "historyDays": 30,
+  "text": {
+    "tool": "Room Status",
+    "roomsPlaceholder": "101; double; 1\n102; twin; 1\n110; suite; 1",
+    "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
+    "importPlaceholder": "101 VD\n102 OCC\n103 OOO\n104 DO",
+    "notePlaceholder": "e.g. Extra bed, late check-out 12:00",
+    "maintenanceOwner": "Maintenance",
+    "checkText": "Room back in order, cleaned and inspected: status VI, sellable again.",
+    "csvName": "room-status",
+    "historyName": "room-status-history",
+    "unassigned": "Not assigned"
+  },
+  "statuses": [
+    { "key": "vd", "code": "VD", "name": "Vacant dirty", "short": "Vacant dirty", "meaning": "No guest, not cleaned yet. Not sellable.", "aliases": ["VD"] },
+    { "key": "vc", "code": "VC", "name": "Vacant clean", "short": "Vacant clean", "meaning": "Cleaned by the attendant, waiting for the supervisor's inspection.", "aliases": ["VC"] },
+    { "key": "vi", "code": "VI", "name": "Vacant inspected (ready)", "short": "Ready", "meaning": "Cleaned and inspected: reception can give it to an arriving guest.", "aliases": ["VI", "VR"] },
+    { "key": "occ", "code": "OCC", "name": "Occupied", "short": "Occupied", "meaning": "Guest in the room, no service needed now.", "aliases": ["OCC", "OC"] },
+    { "key": "od", "code": "OD", "name": "Occupied – service needed", "short": "Service needed", "meaning": "Stay-over: the guest stays, the room needs its daily service.", "aliases": ["OD"] },
+    { "key": "do", "code": "DO", "name": "Due out", "short": "Due out", "meaning": "The guest leaves today and has not checked out yet.", "aliases": ["DO"] },
+    { "key": "co", "code": "CO", "name": "Departed (checked out, dirty)", "short": "Departed", "meaning": "The guest has checked out; the room waits for its departure clean.", "aliases": ["CO", "C/O"] },
+    { "key": "ooo", "code": "OOO", "name": "Out of order", "short": "Out of order", "meaning": "Not sellable: it needs maintenance and leaves the inventory until the date it is back.", "aliases": ["OOO"] },
+    { "key": "oos", "code": "OOS", "name": "Out of service", "short": "Out of service", "meaning": "A minor issue: stays in the inventory and is sold again as soon as it is fixed.", "aliases": ["OOS"] }
+  ],
+  "flags": [
+    { "key": "dnd", "code": "DND", "name": "Do not disturb" },
+    { "key": "vip", "code": "VIP", "name": "VIP" },
+    { "key": "early", "code": "EA", "name": "Early arrival / priority" },
+    { "key": "arrival", "code": "ARR", "name": "Arrival today" }
+  ],
+  "roomTypes": [
+    { "key": "single", "name": "Single" },
+    { "key": "double", "name": "Double" },
+    { "key": "twin", "name": "Twin" },
+    { "key": "suite", "name": "Suite" },
+    { "key": "accessible", "name": "Accessible" }
+  ],
+  "oooReasons": [
+    { "key": "plumbing", "name": "Plumbing / water" },
+    { "key": "electrical", "name": "Electrical / lighting" },
+    { "key": "hvac", "name": "Heating / air conditioning" },
+    { "key": "furniture", "name": "Furniture / fittings" },
+    { "key": "tv", "name": "TV / phone / Wi-Fi" },
+    { "key": "deepclean", "name": "Deep clean / odour" },
+    { "key": "pest", "name": "Pest control" },
+    { "key": "renovation", "name": "Renovation" },
+    { "key": "other", "name": "Other" }
+  ],
+  "tips": [
+    ["One status, set where the work happens.", "The attendant sets VC when she leaves the room, the supervisor VI after the inspection, reception OCC at check-in. Reception gives an arriving guest only a VI room."],
+    ["Departures with an arrival first.", "The queue puts early arrivals and VIP arrivals first, then departures with an arrival today, then the other departures, then the stay-overs. DND rooms wait and are listed apart."],
+    ["DND is checked, not forgotten.", "Skip the room and try again later. When the DND is still on at the time your house rules set (often early afternoon), the supervisor calls the room; a DND for more than a day is a guest welfare check."],
+    ["OOO is not OOS.", "Out of order takes the room out of the inventory: it needs maintenance and a date it is back. Out of service stays sellable and goes back on sale after a small fix. Send every OOO to the Action Tracker."],
+    ["Compare with the PMS twice a day.", "Paste the PMS room status in the morning and after lunch. A room the PMS shows occupied that housekeeping finds empty is a skipper; a room shown vacant with a guest inside is a sleeper. Reception checks both at once."],
+    ["The codes are the PMS codes.", "VD, VC, VI, OCC, OD, DO, CO, OOO and OOS are used the same in every language, so the board and the PMS speak alike."]
+  ],
+  "example": {
+    "time": "10:45",
+    "start": "07:00",
+    "floors": [1, 4],
+    "rooms": [1, 10],
+    "default": "double",
+    "types": [
+      { "from": 1, "to": 1, "type": "accessible", "floors": [1] },
+      { "from": 6, "to": 7, "type": "twin" },
+      { "from": 8, "to": 8, "type": "single" },
+      { "from": 10, "to": 10, "type": "suite", "floors": [3, 4] }
+    ],
+    "attendants": [
+      { "name": "Marta", "floors": [1] },
+      { "name": "Ilir", "floors": [2] },
+      { "name": "Sofia", "floors": [3] },
+      { "name": "Jonas", "floors": [4] }
+    ],
+    "board": {
+      "101": "do arrival", "102": "od", "103": "od vip", "104": "do arrival", "105": "od", "106": "do", "107": "od", "108": "vi arrival", "109": "do arrival", "110": "od",
+      "201": "od", "202": "do arrival", "203": "od", "204": "od", "205": "vd arrival vip", "206": "do arrival", "207": "do arrival early", "208": "oos", "209": "od", "210": "od",
+      "301": "do arrival", "302": "od", "303": "od", "304": "do arrival", "305": "ooo", "306": "od", "307": "do", "308": "vi arrival", "309": "od", "310": "do arrival vip",
+      "401": "od", "402": "do arrival", "403": "od", "404": "od", "405": "vd arrival", "406": "do arrival early", "407": "od", "408": "od", "409": "do", "410": "od vip"
+    },
+    "ooo": {
+      "305": { "reason": "plumbing", "back": 2 },
+      "208": { "reason": "tv", "back": 0 }
+    },
+    "events": [
+      "07:30 405 start", "07:35 205 start", "07:40 104 co", "07:40 302 start", "07:45 104 start", "07:50 202 co",
+      "08:00 402 co", "08:05 101 co", "08:05 302 occ", "08:05 405 vc", "08:10 205 vc", "08:10 402 start", "08:15 202 start",
+      "08:20 301 co", "08:20 405 vi", "08:25 104 vc", "08:30 101 start", "08:30 105 +dnd", "08:30 205 vi", "08:30 301 start",
+      "08:40 207 co", "08:50 104 vd", "08:50 402 vc", "08:55 202 vc", "09:00 207 start", "09:00 303 +dnd", "09:00 410 start",
+      "09:05 304 co", "09:05 402 vi", "09:10 301 vc", "09:15 101 vc", "09:15 304 start", "09:20 104 start", "09:20 202 vi",
+      "09:30 104 vc", "09:30 206 co", "09:35 301 vi", "09:40 104 vi", "09:40 207 vc", "09:45 103 start", "09:45 406 co",
+      "09:50 101 vi", "09:50 310 co", "09:50 410 occ", "09:55 207 vi", "09:55 304 vc", "09:55 401 start", "10:00 201 start",
+      "10:05 310 start", "10:10 103 occ", "10:10 109 co", "10:15 102 start", "10:20 401 occ", "10:25 201 occ", "10:25 403 start",
+      "10:30 203 start", "10:40 102 occ", "10:42 107 start"
+    ],
+    "notes": {
+      "305": "Leak under the washbasin, plumber booked",
+      "208": "TV does not switch on, technician at 11:00",
+      "310": "VIP: welcome amenity and letter from the general manager",
+      "406": "Guest arrives 11:30 from a night flight",
+      "106": "Late check-out until 12:00"
+    }
+  }
+}
