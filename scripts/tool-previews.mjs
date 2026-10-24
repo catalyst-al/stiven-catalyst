@@ -85,6 +85,7 @@ const RECIPES = {
   "guest-complaints": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "housekeeping-planner": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "leader-standard-work": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "shift-capacity": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).

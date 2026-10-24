@@ -334,5 +334,13 @@
     "summary": "Rutina e çdo drejtuesi si standard, nga takimi i drejtuesit të ekipit deri te Gemba Walk i drejtuesit të objektit, e shënuar çdo ditë: e kryer, ose e humbur me arsye. Niveli tjetër e rishikon zbatimin çdo javë, sheh pjesën e ditës në punë standarde kundrejt udhëzimit për nivelin, dhe e dërgon te lista e veprimeve një detyrë të humbur tri herë në dy javë.",
     "url": "/sq/tools/leader-standard-work/",
     "cta": "Shkruaj standardin"
+  },
+  {
+    "name": "Kapaciteti i turnit",
+    "type": "Planifikim",
+    "time": "10 min",
+    "summary": "Ktheje parashikimin e volumit dhe ritmin e çdo procesi në njerëzit që i duhen çdo turni, me pushimet, shfrytëzimin dhe mungesat, dhe shiko hendekun me ekipin e planifikuar, pikën e ngushtë dhe si mbyllet me orë shtesë, agjenci ose njerëz të kualifikuar nga një proces tjetër.",
+    "url": "/sq/tools/shift-capacity/",
+    "cta": "Planifiko turnet"
   }
 ]

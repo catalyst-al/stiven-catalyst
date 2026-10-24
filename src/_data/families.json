@@ -131,7 +131,8 @@
       "/tools/maintenance-planner/",
       "/tools/signals/",
       "/tools/housekeeping-planner/",
-      "/tools/leader-standard-work/"
+      "/tools/leader-standard-work/",
+      "/tools/shift-capacity/"
     ],
     "learn": [],
     "also": [
@@ -230,6 +231,11 @@
         "when": "Start of shift",
         "do": "Open today's standard, tick each task as you do it, and give every miss a reason before the handover.",
         "tool": "/tools/leader-standard-work/"
+      },
+      {
+        "when": "Every week",
+        "do": "Paste next week's volume forecast before the roster closes and close every shift that is short of hours with a move, overtime or agency booking.",
+        "tool": "/tools/shift-capacity/"
       }
     ],
     "next": "lumen"

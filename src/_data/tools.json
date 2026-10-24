@@ -334,5 +334,13 @@
     "summary": "Each leader's routine as a standard, from the team leader's huddle to the site manager's Gemba walk, checked off every day: done, or missed with a reason. The next level up reviews the adherence each week, sees the share of the day in standard work against the guide for the level, and sends a task missed three times in two weeks to the Action Tracker.",
     "url": "/tools/leader-standard-work/",
     "cta": "Write the standard"
+  },
+  {
+    "name": "Shift Capacity",
+    "type": "Planning",
+    "time": "10 min",
+    "summary": "Turn the volume forecast and the rate of each process into the heads every shift needs, with breaks, utilisation and absence, and see the gap against the planned team, the bottleneck and how to close it with overtime, agency or qualified people from another process.",
+    "url": "/tools/shift-capacity/",
+    "cta": "Plan the shifts"
   }
 ]

@@ -334,5 +334,13 @@
     "summary": "Die Routine jeder Führungskraft als Standard, von der Teamrunde der Teamleitung bis zum Gemba Walk der Standortleitung, täglich abgehakt: erledigt oder verpasst mit Grund. Die nächste Ebene prüft jede Woche die Einhaltung, sieht den Anteil der Standardarbeit am Tag gegen den Richtwert der Ebene und gibt eine Aufgabe, die in zwei Wochen dreimal verpasst wurde, in die Maßnahmenliste.",
     "url": "/de/tools/leader-standard-work/",
     "cta": "Standard schreiben"
+  },
+  {
+    "name": "Schichtkapazität",
+    "type": "Planung",
+    "time": "10 min",
+    "summary": "Machen Sie aus der Mengenprognose und der Leistung jedes Prozesses die Köpfe, die jede Schicht braucht, mit Pausen, Nutzungsgrad und Abwesenheit, und sehen Sie die Lücke zum geplanten Team, den Engpass und wie Sie sie mit Überstunden, Leihkräften oder qualifizierten Personen aus einem anderen Prozess schließen.",
+    "url": "/de/tools/shift-capacity/",
+    "cta": "Schichten planen"
   }
 ]
