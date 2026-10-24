@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Time Study", "type": "Lean", "time": "20 min", "summary": "Time each element over five cycles with a stopwatch, space bar as the lap key. Get the standard time per station, takt from demand, a Yamazumi against it and the first element to move.", "url": "/tools/time-study/", "cta": "Start a study" },
+    "de": { "name": "Zeitstudie", "type": "Lean", "time": "20 Min.", "summary": "Messen Sie jedes Element über fünf Zyklen mit der Stoppuhr, die Leertaste nimmt die Zwischenzeit. Sie erhalten die Standardzeit pro Station, die Taktzeit aus dem Bedarf, ein Yamazumi dagegen und das erste Element, das sich verlagern lässt.", "url": "/de/tools/time-study/", "cta": "Studie beginnen" },
+    "sq": { "name": "Studimi i kohës", "type": "Lean", "time": "20 min", "summary": "Mat çdo element gjatë pesë cikleve me kronometër, tasti i hapësirës merr xhiron. Merr kohën standarde për stacion, taktin nga kërkesa, një Yamazumi kundrejt tij dhe elementin e parë për t'u lëvizur.", "url": "/sq/tools/time-study/", "cta": "Nis një studim" }
+  },
+  "routine": { "when": "Every week", "do": "Time one station for five cycles, compare it with takt and move the first element that fits.", "de": { "when": "Jede Woche", "do": "Messen Sie eine Station über fünf Zyklen, vergleichen Sie sie mit der Taktzeit und verlagern Sie das erste Element, das passt." }, "sq": { "when": "Çdo javë", "do": "Mat një stacion për pesë cikle, krahasoje me taktin dhe lëviz elementin e parë që hyn." } },
+  "recipe": "example"
+}

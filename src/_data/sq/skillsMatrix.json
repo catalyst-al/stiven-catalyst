@@ -1,0 +1,116 @@
+{
+  "storageKey": "sc-skills-matrix-sq",
+  "text": {
+    "tool": "Matrica e aftësive",
+    "teamPlaceholder": "p.sh. Dalja, turni i mëngjesit",
+    "namePlaceholder": "p.sh. Anna",
+    "rolePlaceholder": "p.sh. Mbledhës porosish",
+    "taskPlaceholder": "p.sh. Pirunjaku",
+    "csvMatrix": "matrica-aftesive",
+    "csvPlan": "plani-trajnimit",
+    "checkText": "{trainee} e kryen vetë {task} në nivelin {level}, e firmosur nga {trainer}"
+  },
+  "levels": [
+    { "name": "Pa trajnim", "note": "Nuk e ka kryer ende detyrën." },
+    { "name": "Në trajnim", "note": "E mëson detyrën me një trajner pranë." },
+    { "name": "Me mbështetje", "note": "E kryen detyrën, me dikë afër për të pyetur." },
+    { "name": "I pavarur", "note": "E kryen detyrën vetë, sipas standardit, në çdo turn." },
+    { "name": "Mund të trajnojë", "note": "Ua mëson detyrën të tjerëve dhe ua firmos nivelin." }
+  ],
+  "criticality": ["E ulët", "Mesatare", "E lartë"],
+  "shifts": ["Mëngjes", "Pasdite", "Natë"],
+  "templates": {
+    "warehouse": {
+      "name": "Magazinë",
+      "tasks": [
+        { "name": "Pranimi", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Vendosja në raft", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Mbledhja e porosive", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Paketimi", "crit": 2, "min": 1, "target": 3 },
+        { "name": "Ngarkimi", "crit": 3, "min": 0, "target": 3 },
+        { "name": "Pirunjaku", "crit": 3, "min": 0, "target": 2 },
+        { "name": "Kthimet", "crit": 1, "min": 0, "target": 2 },
+        { "name": "WMS", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Udhëzimi i sigurisë", "crit": 3, "min": 3, "target": 6 }
+      ]
+    },
+    "hotel": {
+      "name": "Recepsioni i hotelit",
+      "tasks": [
+        { "name": "Check-in", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Check-out", "crit": 2, "min": 2, "target": 4 },
+        { "name": "Auditi i natës", "crit": 3, "min": 0, "target": 2 },
+        { "name": "PMS", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Ankesat", "crit": 2, "min": 1, "target": 3 },
+        { "name": "VCC dhe pagesat", "crit": 3, "min": 1, "target": 3 },
+        { "name": "Mbërritjet e grupeve", "crit": 2, "min": 0, "target": 2 },
+        { "name": "Procedura e zjarrit", "crit": 3, "min": 3, "target": 5 }
+      ]
+    },
+    "delivery-station": {
+      "name": "Stacion shpërndarjeje",
+      "tasks": [
+        { "name": "Futja dhe renditja", "crit": 3, "min": 1, "target": 4 },
+        { "name": "Përgatitja e rrugëve", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Ngarkimi i furgonit", "crit": 3, "min": 1, "target": 3 },
+        { "name": "Skaneri dhe aplikacioni i shoferit", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Renditjet e gabuara dhe kthimet", "crit": 1, "min": 0, "target": 2 },
+        { "name": "Dispeçimi", "crit": 3, "min": 0, "target": 2 },
+        { "name": "Kontrolli i furgonit", "crit": 2, "min": 0, "target": 2 },
+        { "name": "Udhëzimi i sigurisë", "crit": 3, "min": 3, "target": 5 }
+      ]
+    }
+  },
+  "advice": {
+    "none": {
+      "meaning": "Askush në ekip nuk e kryen këtë detyrë vetë. Sot ajo ecën me dikë që ende po mëson, ose nuk ecën fare.",
+      "moves": ["Cakto kush e mbulon këtë javë, edhe me mbështetje, dhe njofto turnin.", "Merr hua një nivel 4 nga një ekip ose turn tjetër për të trajnuar dy persona njëherësh.", "Shkruaj standardin njëfaqësh të detyrës sa kohë trajneri është në sallë."],
+      "question": "Kush e kreu këtë detyrë herën e fundit që duhej bërë, dhe si?"
+    },
+    "spof": {
+      "meaning": "Një person e mban këtë detyrë. Një pushim, një ditë sëmundjeje ose një dorëheqje e ndalon brenda natës.",
+      "moves": ["Vendos pranë mbajtësit një të trajnuar në nivelin 2, për një bllok në çdo turn.", "Lëre të trajnuarin ta kryejë detyrën ndërsa mbajtësi shikon, pastaj vetë me mbajtësin afër.", "Firmos nivelin 3 vetëm pasi i trajnuari e ka kryer vetë në një turn normal."],
+      "question": "Çfarë ndodh me këtë detyrë ditën kur ky person mungon?"
+    },
+    "short": {
+      "meaning": "Detyra është e mbuluar, por nga më pak njerëz se sa ke planifikuar. Një mungesë dhe të tjerët e mbajnë me orë shtesë.",
+      "moves": ["Vendos në këtë detyrë për dy javë të trajnuarin që është më afër nivelit 3.", "Planifiko trajnimin në orarin e turneve, jo në orën e qetë që nuk vjen kurrë.", "Kontrollo nivelin pas një turni normal, jo pas kursit."],
+      "question": "Sa njerëz mund ta kryenin këtë detyrë në ditën më të ngarkuar të vitit?"
+    },
+    "below": {
+      "meaning": "Çdo detyrë ka mbulimin e saj, por disa njerëz punojnë nën nivelin minimal që një detyrë kërkon nga të gjithë.",
+      "moves": ["Fillo me detyrën kritike për sigurinë: askush nuk punon aty nën minimum.", "Jepi çdo personi nën minimum një trajner dhe një datë.", "Kontrollo nivelin në sallë, pastaj përditëso matricën bashkë me personin."],
+      "question": "Kush po punon sot në një detyrë pa nivelin që ajo kërkon?"
+    },
+    "ok": {
+      "meaning": "Çdo detyrë ka mjaft njerëz në nivelin 3 ose më lart, dhe askush nuk është nën një minimum.",
+      "moves": ["Mbaj një të trajnuar në çdo detyrë kritike, që mbulimi të mos plaket.", "Bëj një fotografi çdo muaj dhe ndiq indeksin e fleksibilitetit.", "Ço një nivel 3 në nivelin 4 në çdo detyrë kritike: trajnerët janë pengesa e radhës."],
+      "question": "Cilën detyrë do ta humbje e para nëse dy njerëz largohen muajin tjetër?"
+    }
+  },
+  "tips": [
+    ["Vlerëso atë që njerëzit bëjnë, jo atë që kanë ndjekur.", "Një certifikatë nuk është nivel 3. Niveli 3 do të thotë që personi e ka kryer detyrën vetë, sipas standardit, në një turn normal."],
+    ["Plotësoje bashkë me personin.", "Bini dakord për çdo nivel në një bisedë të shkurtër në sallë. Matrica është plan trajnimi, jo renditje e njerëzve."],
+    ["Pikat e vetme të dështimit në fillim.", "Një detyrë që e mban një person ndalet ditën që ai mungon. Vendos pranë tij një të trajnuar para çdo gjëje tjetër."],
+    ["Vetëm një nivel 4 firmos një nivel 3.", "Plani i propozuar i vendos çdo të trajnuari pranë një nivel 4 të së njëjtës detyrë, me boshllëqet më kritike në fillim."],
+    ["Bëj një fotografi çdo muaj.", "Indeksi i fleksibilitetit dhe numri i pikave të vetme të dështimit në kohë tregojnë nëse trajnimi funksionon."]
+  ],
+  "example": {
+    "team": "Ekipi i daljes",
+    "template": "warehouse",
+    "people": [
+      { "name": "Besnik", "role": "Drejtues ekipi", "shift": "Mëngjes", "levels": [4, 4, 4, 3, 3, 2, 1, 4, 4] },
+      { "name": "Anna", "role": "Mbledhëse porosish me përvojë", "shift": "Mëngjes", "levels": [2, 3, 4, 4, 2, 0, 2, 4, 4] },
+      { "name": "Marco", "role": "Drejtues pirunjaku", "shift": "Mëngjes", "levels": [3, 4, 2, 1, 4, 4, 0, 3, 4] },
+      { "name": "Lina", "role": "Mbledhëse porosish", "shift": "Pasdite", "levels": [1, 2, 4, 3, 2, 0, 4, 3, 3] },
+      { "name": "Arben", "role": "Ngarkues", "shift": "Pasdite", "levels": [2, 2, 3, 2, 4, 2, 0, 2, 3] },
+      { "name": "Sara", "role": "Paketuese", "shift": "Pasdite", "levels": [0, 1, 3, 4, 3, 0, 2, 2, 3] },
+      { "name": "Tomasz", "role": "Punonjës pranimi", "shift": "Natë", "levels": [4, 3, 2, 2, 3, 1, 0, 3, 3] },
+      { "name": "Elira", "role": "Punonjëse e re", "shift": "Natë", "levels": [1, 0, 1, 1, 0, 0, 0, 1, 2] }
+    ],
+    "snapshots": [
+      { "daysAgo": 56, "spof": 4, "nocover": 1, "below": 7, "means": [1.75, 2, 2.5, 2.25, 2.25, 1, 0.75, 2.25, 3] },
+      { "daysAgo": 28, "spof": 3, "nocover": 0, "below": 5, "means": [2, 2.25, 2.75, 2.5, 2.5, 1, 1, 2.5, 3] }
+    ]
+  }
+}

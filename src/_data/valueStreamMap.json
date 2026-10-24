@@ -1,0 +1,95 @@
+{
+  "storageKey": "sc-value-stream-map",
+  "title": "Value Stream Map",
+  "csv": "value-stream-map",
+  "text": {
+    "familyPlaceholder": "e.g. Parcel outbound, standard parcels",
+    "supplierPlaceholder": "e.g. Inbound hub",
+    "customerPlaceholder": "e.g. Delivery stations"
+  },
+  "advice": {
+    "over": {
+      "meaning": "A step above takt sets the pace of the whole stream. Everything before it piles up in front of it, everything after it waits for work, and the customer gets what this one step can release, however fast the others are.",
+      "moves": [
+        "Take the waste out of the bottleneck first: walking, searching and waiting for material at that one step are capacity for the whole stream.",
+        "Protect its time: no breaks without cover, changeovers prepared while it still runs, a small buffer in front so it never starves.",
+        "Only then balance the work or add a pair of hands, and map the stream again to see where the pile moves to."
+      ],
+      "question": "What does the bottleneck do in the minutes it is not releasing a piece?"
+    },
+    "flow": {
+      "meaning": "Every step keeps up with takt, so the lead time is not in the work: it is in the piles between the steps. Each pile is a decision to push, a batch too large or a step that does not know what the next one needs.",
+      "moves": [
+        "Take the largest wait first and ask why the pile is there: batch size, a fixed departure, a step that pushes whatever it can.",
+        "Cut the batch or link the two steps with a FIFO lane of a fixed size, so the pile cannot grow.",
+        "Draw the future state with the lower inventories and give each change a kaizen burst with an owner."
+      ],
+      "question": "Who decides how many pieces may wait in front of the next step?"
+    },
+    "lowPce": "Less than five per cent of the lead time adds value. That is normal for a first map, and it says where the lever is: in the waits, not in faster work.",
+    "yield": "Fewer than nine in ten pieces pass every step right first time. The rework loops are hidden lead time; find the step with the lowest first-pass yield before you cut inventories.",
+    "noFuture": "Switch to Future state above to draw the stream as it should run: it starts as a copy of this map, and each change gets a kaizen burst."
+  },
+  "tips": [
+    ["Walk the stream backwards.", "Start at the customer and walk upstream with a clipboard. You see what pulls and what pushes, and nobody has time to tidy up for you."],
+    ["Count, do not estimate.", "Count the pieces in every pile on the day you walk. A remembered inventory is always smaller than the real one."],
+    ["One family, one map.", "Map products or guests that go through the same steps. A map of everything is a map of nothing."],
+    ["The ladder tells the story.", "Waiting sits high, processing low. When the low rungs are seconds and the high ones are hours, the lever is in the piles, not in faster hands."],
+    ["Draw the future before you act.", "Copy the current state, change what the improvements change and write each change as a kaizen burst. Then send the bursts to the Action Tracker with an owner."]
+  ],
+  "templates": [
+    {
+      "id": "parcel",
+      "name": "Parcel outbound: receive, sort, pick, pack, stage, load",
+      "header": { "family": "Parcel outbound, standard parcels", "demand": 4800, "minutes": 900, "supplier": "Inbound hub", "customer": "Delivery stations" },
+      "steps": [
+        { "name": "Receive", "operators": 3, "ct": 24, "co": 10, "uptime": 96, "batch": 600, "fpy": 99.6, "shifts": 2, "va": false },
+        { "name": "Sort", "operators": 2, "ct": 16, "co": 20, "uptime": 92, "batch": 2400, "fpy": 99.2, "shifts": 2, "va": true },
+        { "name": "Pick", "operators": 5, "ct": 45, "co": 0, "uptime": 98, "batch": 30, "fpy": 99, "shifts": 2, "va": true },
+        { "name": "Pack", "operators": 4, "ct": 48, "co": 5, "uptime": 94, "batch": 200, "fpy": 98.5, "shifts": 2, "va": true },
+        { "name": "Stage", "operators": 2, "ct": 14, "co": 0, "uptime": 99, "batch": 50, "fpy": 99.8, "shifts": 2, "va": false },
+        { "name": "Load", "operators": 2, "ct": 20, "co": 15, "uptime": 97, "batch": 800, "fpy": 99.7, "shifts": 2, "va": false }
+      ],
+      "finished": ""
+    },
+    {
+      "id": "hotel",
+      "name": "Hotel arrival: welcome to room",
+      "header": { "family": "Guest arrival, leisure and business", "demand": 240, "minutes": 960, "supplier": "Booking channels", "customer": "Guest in the room" },
+      "steps": [
+        { "name": "Welcome at the door", "operators": 1, "ct": 30, "co": 0, "uptime": 100, "batch": 1, "fpy": 100, "shifts": 2, "va": false },
+        { "name": "Registration", "operators": 2, "ct": 240, "co": 0, "uptime": 97, "batch": 1, "fpy": 96, "shifts": 2, "va": true },
+        { "name": "Payment and pre-authorisation", "operators": 2, "ct": 90, "co": 0, "uptime": 95, "batch": 1, "fpy": 94, "shifts": 2, "va": false },
+        { "name": "Key cards", "operators": 2, "ct": 40, "co": 0, "uptime": 98, "batch": 1, "fpy": 99, "shifts": 2, "va": false },
+        { "name": "Luggage to the room", "operators": 1, "ct": 300, "co": 0, "uptime": 100, "batch": 1, "fpy": 99, "shifts": 2, "va": true },
+        { "name": "Room handover", "operators": 1, "ct": 120, "co": 0, "uptime": 100, "batch": 1, "fpy": 97, "shifts": 2, "va": true }
+      ],
+      "finished": ""
+    }
+  ],
+  "example": {
+    "header": { "family": "Parcel outbound, standard parcels", "demand": 4800, "minutes": 900, "supplier": "Inbound hub", "customer": "Delivery stations" },
+    "current": {
+      "steps": [
+        { "name": "Receive", "operators": 3, "ct": 24, "co": 10, "uptime": 96, "batch": 600, "fpy": 99.6, "shifts": 2, "va": false, "inv": 1400, "kaizen": "" },
+        { "name": "Sort", "operators": 2, "ct": 16, "co": 20, "uptime": 92, "batch": 2400, "fpy": 99.2, "shifts": 2, "va": true, "inv": 600, "kaizen": "" },
+        { "name": "Pick", "operators": 5, "ct": 45, "co": 0, "uptime": 98, "batch": 30, "fpy": 99, "shifts": 2, "va": true, "inv": 900, "kaizen": "" },
+        { "name": "Pack", "operators": 4, "ct": 48, "co": 5, "uptime": 94, "batch": 200, "fpy": 98.5, "shifts": 2, "va": true, "inv": 450, "kaizen": "" },
+        { "name": "Stage", "operators": 2, "ct": 14, "co": 0, "uptime": 99, "batch": 50, "fpy": 99.8, "shifts": 2, "va": false, "inv": 300, "kaizen": "" },
+        { "name": "Load", "operators": 2, "ct": 20, "co": 15, "uptime": 97, "batch": 800, "fpy": 99.7, "shifts": 2, "va": false, "inv": 1600, "kaizen": "" }
+      ],
+      "finished": 0
+    },
+    "future": {
+      "steps": [
+        { "name": "Receive", "operators": 3, "ct": 24, "co": 10, "uptime": 96, "batch": 600, "fpy": 99.6, "shifts": 2, "va": false, "inv": 600, "kaizen": "Arrival slots for the line-haul trailers" },
+        { "name": "Sort", "operators": 2, "ct": 16, "co": 20, "uptime": 92, "batch": 2400, "fpy": 99.2, "shifts": 2, "va": true, "inv": 300, "kaizen": "" },
+        { "name": "Pick", "operators": 5, "ct": 45, "co": 0, "uptime": 98, "batch": 30, "fpy": 99, "shifts": 2, "va": true, "inv": 300, "kaizen": "Pick waves every 30 minutes, not three a shift" },
+        { "name": "Pack", "operators": 5, "ct": 44, "co": 5, "uptime": 94, "batch": 200, "fpy": 98.5, "shifts": 2, "va": true, "inv": 150, "kaizen": "Fifth packing bench, pre-formed boxes at hand" },
+        { "name": "Stage", "operators": 2, "ct": 14, "co": 0, "uptime": 99, "batch": 50, "fpy": 99.8, "shifts": 2, "va": false, "inv": 150, "kaizen": "" },
+        { "name": "Load", "operators": 2, "ct": 20, "co": 8, "uptime": 97, "batch": 800, "fpy": 99.7, "shifts": 2, "va": false, "inv": 800, "kaizen": "Next trailer staged before departure: changeover 15 to 8 min" }
+      ],
+      "finished": 0
+    }
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "storageKey": "sc-safety-cross-de",
+  "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+  "text": {
+    "tool": "Sicherheitskreuz",
+    "csv": "sicherheitsprotokoll",
+    "entryLegend": "Sicherheitsereignis erfassen",
+    "whatPlaceholder": "z. B. Palette an Tor 3 von den Gabeln gerutscht, niemand darunter",
+    "actionPlaceholder": "z. B. Fußgängerweg an Tor 3 markieren",
+    "ownerPlaceholder": "z. B. Anna",
+    "pasteRow": "Eine Zeile pro Ereignis",
+    "pastePlaceholder": "06.10.2026\tSpät\tBeinahe-Unfall\tVerladetor\tPalette von den Gabeln gerutscht\tStapler / Fahrzeug\t3\tFußgängerweg markieren\tAnna\tnein",
+    "empty": "Noch keine Sicherheitsereignisse erfasst.",
+    "hoursPlaceholder": "z. B. 160000",
+    "nearMissPlaceholder": "z. B. 8",
+    "freeDaysPlaceholder": "z. B. 365"
+  },
+  "types": {
+    "lost-time": "Unfall mit Ausfallzeit",
+    "no-lost-time": "Unfall ohne Ausfallzeit",
+    "first-aid": "Erste Hilfe",
+    "near-miss": "Beinahe-Unfall",
+    "unsafe-condition": "Unsicherer Zustand",
+    "unsafe-act": "Unsichere Handlung",
+    "positive": "Positive Beobachtung"
+  },
+  "short": {
+    "lost-time": "Mit Ausfallzeit",
+    "no-lost-time": "Ohne Ausfallzeit",
+    "first-aid": "Erste Hilfe",
+    "near-miss": "Beinahe-Unfall",
+    "unsafe-condition": "Unsicherer Zustand",
+    "unsafe-act": "Unsichere Handlung",
+    "positive": "Positiv"
+  },
+  "shifts": ["Früh", "Spät", "Nacht"],
+  "areas": ["Wareneingang", "Lager", "Kommissionierung", "Verpackung", "Verladetor", "Hof", "Büro", "Sonstiges"],
+  "causes": ["Ordnung und Sauberkeit", "Stapler / Fahrzeug", "Manuelles Heben", "Stürze / Ausrutschen", "Arbeitsmittel", "Vorgabe nicht eingehalten", "PSA", "Sonstiges"],
+  "severities": ["1 · Geringes Potenzial", "2 · Mittleres Potenzial", "3 · Schweres Potenzial", "4 · Tödliches Potenzial"],
+  "pyramid": {
+    "lost-time": "Unfälle mit Ausfallzeit",
+    "recordable": "Unfälle ohne Ausfallzeit und Erste Hilfe",
+    "near-miss": "Beinahe-Unfälle",
+    "unsafe": "Unsichere Zustände und Handlungen"
+  },
+  "advice": {
+    "Ordnung und Sauberkeit": {
+      "meaning": "Stretchfolie auf dem Boden, eine Palette im Gang, eine Lache, für die niemand zuständig ist: Die meisten Stürze und die meisten Ausweichmanöver von Staplern beginnen mit etwas, das dort nicht hätte liegen dürfen.",
+      "moves": [
+        "Gehen Sie am Schichtende durch den schlechtesten Bereich und fotografieren Sie, was auf dem Boden liegt; zeigen Sie die Fotos in der nächsten Besprechung.",
+        "Geben Sie jedem Gang und jedem Tor pro Schicht einen Verantwortlichen, der den Boden vor dem Gehen abnimmt.",
+        "Stellen Sie Behälter, Besen und Bindemittel dorthin, wo der Schmutz entsteht, nicht dorthin, wo es ordentlich ist."
+      ],
+      "question": "Wo wird der Boden während der Schicht schmutzig, und wer soll ihn räumen?"
+    },
+    "Stapler / Fahrzeug": {
+      "meaning": "Ein Stapler und ein Mensch im selben Raum sind das Einzige im Lager, das tötet. Die meisten Beinahe-Unfälle hier sind Geschwindigkeit, tote Ecken und Menschen, die dort gehen, wo Stapler fahren.",
+      "moves": [
+        "Trennen Sie Menschen und Stapler mit einem markierten Weg und der Regel, dass niemand ein Tor ohne Blickkontakt zum Fahrer überquert.",
+        "Gehen Sie die Strecke an einer Ecke ab, an der ein Beinahe-Unfall passiert ist: Spiegel, Beleuchtung, eine Haltelinie.",
+        "Prüfen Sie Geschwindigkeit und Hupe an der schlimmsten Stelle eine Schicht lang, und nennen Sie die Fahrer, die es richtig machen."
+      ],
+      "question": "Wo teilen sich Menschen und Stapler denselben Quadratmeter, und warum?"
+    },
+    "Manuelles Heben": {
+      "meaning": "Rücken- und Schulterverletzungen entstehen durch schwere, ungünstige oder wiederholte Hebevorgänge, meist an denselben Stationen. Sie bauen sich leise auf und fallen dann wochenlang aus.",
+      "moves": [
+        "Listen Sie die zehn schwersten Artikel auf und wo sie gegriffen werden; legen Sie sie auf Hüfthöhe.",
+        "Vereinbaren Sie eine Zwei-Personen-Regel oder eine Hebehilfe ab einem Gewicht, das das Team selbst festlegt.",
+        "Beobachten Sie zehn Hebevorgänge an der schlechtesten Station und ändern Sie die Station, nicht die Person."
+      ],
+      "question": "Über welchen Hebevorgang beschweren sich alle, und was würde ihn überflüssig machen?"
+    },
+    "Stürze / Ausrutschen": {
+      "meaning": "Nasse Böden, unebene Überladebrücken, eine Stufe, die im Dunkeln niemand sieht: Ausrutschen ist die häufigste Verletzung in der Logistik und führt fast immer auf eine Stelle zurück.",
+      "moves": [
+        "Markieren Sie auf einem Hallenplan, wo jeder Sturz passiert ist; beheben Sie zuerst die Stelle mit den meisten Markierungen.",
+        "Richten Sie an jeder Tür, durch die Regen und Kondenswasser kommen, eine Trocknungsroutine und ein Schild ein.",
+        "Prüfen Sie Überladebrücken und Stufen auf Höhenunterschiede und Kanten, und streichen Sie die Kanten."
+      ],
+      "question": "Wo sind die letzten drei Stürze passiert, und was ist dort noch genauso?"
+    },
+    "Arbeitsmittel": {
+      "meaning": "Ein kaputtes Rad, ein ausgefranster Gurt, eine Schutzvorrichtung, die für mehr Tempo entfernt wurde: Ein bekannter und nicht behobener Mangel ist eine Entscheidung, kein Unfall.",
+      "moves": [
+        "Sperrkennzeichnung: ein roter Anhänger an allem Defekten, und niemand benutzt ein gekennzeichnetes Gerät, bis es repariert ist.",
+        "Beginnen Sie jede Schicht mit einer zweiminütigen Prüfung von Staplern, Wagen und Gurten, schriftlich.",
+        "Vereinbaren Sie mit der Instandhaltung, wie schnell ein Sicherheitsmangel behoben wird, und verfolgen Sie die offenen."
+      ],
+      "question": "Welchen Mangel kennen alle und arbeiten trotzdem um ihn herum?"
+    },
+    "Vorgabe nicht eingehalten": {
+      "meaning": "Wenn Menschen eine Regel überspringen, ist die Regel meist langsam, unklar oder mit der verfügbaren Zeit nicht machbar. Fragen Sie nach dem Warum, bevor Sie Schuld zuweisen.",
+      "moves": [
+        "Bitten Sie die Person, die den Schritt übersprungen hat, Ihnen zu zeigen, wie die Arbeit normalerweise gemacht wird; suchen Sie den Zeitdruck dahinter.",
+        "Kürzen Sie die Regel auf das eine, das niemals übersprungen werden darf, und hängen Sie es dort auf, wo gearbeitet wird.",
+        "Danken Sie Menschen, die die Arbeit stoppen, wenn sie unsicher sind; ein Stopp ist billiger als eine Trage."
+      ],
+      "question": "Was macht hier den sicheren Weg zum langsamen Weg?"
+    },
+    "PSA": {
+      "meaning": "Fehlende Handschuhe, Schuhe oder Westen sind sichtbar und werden deshalb am häufigsten notiert. Die Ursache ist meist Komfort, Verfügbarkeit oder eine Kultur, in der niemand etwas sagt.",
+      "moves": [
+        "Prüfen Sie, dass die richtige Größe und ein Ersatz am Eingang liegen; niemand trägt, was drückt.",
+        "Machen Sie Weste und Schuhe zum Ersten, was jeder Besucher und jeder neue Kollege bekommt, noch vor dem Ausweis.",
+        "Gehen Sie mit gutem Beispiel voran: Ein Vorgesetzter ohne Weste macht jedes Plakat an der Wand ungültig."
+      ],
+      "question": "Warum wird die Ausrüstung nicht getragen: nicht da, nicht bequem, oder nicht erwartet?"
+    },
+    "Sonstiges": {
+      "meaning": "Ereignisse ohne klare Ursache häufen sich, wenn das Protokoll schnell ausgefüllt wird. Jedes davon verdient eine Frage mehr.",
+      "moves": [
+        "Gehen Sie zu den drei letzten Ereignissen unter Sonstiges zurück und fragen Sie, was wirklich dahinterstand.",
+        "Taucht eine neue Ursache dreimal auf, nehmen Sie sie in die Liste auf, damit die nächsten Einträge sie finden.",
+        "Halten Sie die Ursache bei der Situation, nicht bei der Person: Was hätte es verhindert?"
+      ],
+      "question": "Was haben die Ereignisse unter Sonstiges gemeinsam?"
+    }
+  },
+  "talks": [
+    { "title": "Beinahe-Unfälle sind kostenlose Lektionen", "text": "Ein Beinahe-Unfall ist ein Unfall, der noch nicht passiert ist. Jeder, den Sie melden, ist eine Lektion für das Team, ohne dass jemand verletzt wird. Melden Sie ihn heute; morgen kann er einen Kollegen kosten." },
+    { "title": "Blickkontakt vor dem Überqueren", "text": "Ein Staplerfahrer kann Ihre Gedanken nicht lesen. Bevor Sie ein Tor oder einen Gang überqueren, in dem Stapler fahren: anhalten, den Fahrer ansehen und auf das Nicken warten. Kein Blickkontakt, kein Überqueren." },
+    { "title": "Geschwindigkeit im Gang", "text": "Ein Stapler in Schrittgeschwindigkeit steht nach einem Meter. Bei doppeltem Tempo braucht er vier. Der Gang ist keine Rennstrecke, egal was der Dispositionsbildschirm sagt." },
+    { "title": "Ordnung ist Sicherheit", "text": "Stretchfolie auf dem Boden wird zum Sturz. Eine Palette im Gang wird zum Ausweichmanöver. Fünf Minuten Aufräumen am Schichtende sind die günstigste Sicherheitsmaßnahme, die wir haben." },
+    { "title": "Mit den Beinen heben, oder mit einem Kollegen", "text": "Alles, was schwer, unhandlich oder über Schulterhöhe ist: Hilfe holen oder eine Hebehilfe nehmen. Eine Rückenverletzung schmerzt nicht heute; sie schmerzt den Rest des Monats." },
+    { "title": "Kennzeichnen, nicht umgehen", "text": "Ein defekter Stapler, Gurt oder Wagen bekommt einen roten Anhänger und bleibt außer Betrieb, bis er repariert ist. Einen bekannten Mangel zu umgehen ist eine Entscheidung, und eine schlechte." },
+    { "title": "Nasse Böden und Überladebrücken", "text": "Mit jedem Lkw kommt Regen herein. Prüfen Sie Überladebrücken und Eingangstüren, trocknen Sie, was nass ist, und stellen Sie das Schild auf. Ausrutschen auf einer nassen Brücke ist unsere häufigste Verletzung." },
+    { "title": "Die richtigen Handschuhe für die Arbeit", "text": "Schnittschutzhandschuhe für Messer und Umreifung, Grip-Handschuhe für Paletten. Handschuhe, die nicht passen, werden ausgezogen. Sagen Sie es und holen Sie sich die richtige Größe." },
+    { "title": "Bei Unsicherheit anhalten", "text": "Wenn etwas falsch aussieht, anhalten und fragen. Niemand wurde hier je gerügt, weil er eine Arbeit gestoppt hat, die sich unsicher anfühlte. Umgekehrt gilt das nicht." },
+    { "title": "Fußgängerwege bedeuten etwas", "text": "Der markierte Weg ist der einzige Ort, an dem ein Fahrer Sie erwartet. Außerhalb sind Sie eine Überraschung, und Überraschungen bei Torgeschwindigkeit enden schlecht." },
+    { "title": "Stapelhöhe und Standsicherheit", "text": "Schweres unten, nichts überstehend, nichts über der markierten Höhe. Eine fallende Palette fragt nicht, wer darunter steht." },
+    { "title": "Laden und Batterien", "text": "Ladebereiche sind zum Laden da. Kein Essen, keine Abkürzungen hindurch, und jeden Geruch oder jedes heiße Kabel sofort melden. Ein Batteriebrand wartet nicht auf das Schichtende." },
+    { "title": "Neue Kollegen", "text": "Ein neuer Kollege weiß nicht, wo die Stapler fahren oder welcher Gurt kaputt ist. Gehen Sie am ersten Tag mit und erzählen Sie die Beinahe-Unfälle dieses Bereichs. Seine Sicherheit teilen Sie mit ihm." },
+    { "title": "Müdigkeit ist eine Gefahr", "text": "Die letzte Stunde einer Nachtschicht hat mehr Unfälle als die ersten drei. Achten Sie auf sich und auf andere: langsamer werden, reden, und die Pause nehmen, die Ihnen zusteht." },
+    { "title": "Den unsicheren Zustand melden", "text": "Eine lose Überladebrücke, eine dunkle Ecke, ein fehlender Spiegel: melden, auch wenn es seit Monaten so ist. Das Protokoll ist der Weg, auf dem es endlich behoben wird." },
+    { "title": "Rückwärtsfahren", "text": "Die Hälfte aller Fahrzeugkontakte passiert rückwärts. Hupe, Spiegel, Blick über die Schulter, und ein Einweiser, wenn die Sicht versperrt ist. Verlassen Sie sich nie allein auf die Kamera." },
+    { "title": "Sicher schneiden", "text": "Vom Körper weg schneiden, mit einem Sicherheitsmesser, und niemals in Richtung eines Kollegen. Klinge einfahren, bevor das Messer abgelegt wird. Die meisten Schnittverletzungen passieren in der halben Sekunde nach dem Schnitt." },
+    { "title": "Sagen Sie etwas", "text": "Wenn Sie einen Kollegen ohne Weste oder unter einer angehobenen Last sehen, sagen Sie es. Nicht um zu belehren, sondern weil Sie dasselbe wollen würden. Schweigen ist die Erlaubnis, mit der Unfälle passieren." },
+    { "title": "Notausgänge und Feuerlöscher", "text": "Kennen Sie den nächsten Ausgang und den nächsten Feuerlöscher von dort, wo Sie jetzt arbeiten, nicht von dort, wo Sie letztes Jahr gearbeitet haben. Vor beiden steht nichts." },
+    { "title": "Die grünen Tage feiern", "text": "Jeder grüne Tag auf dem Kreuz ist das Ergebnis hunderter kleiner Entscheidungen. Schauen Sie auf das Kreuz, sagen Sie Danke, und erzählen Sie dem Team, was diesen Monat grün gemacht hat." }
+  ],
+  "tips": [
+    ["Ein Beinahe-Unfall ist eine kostenlose Lektion.", "Niemand wurde verletzt, und Sie wissen, woher der nächste Unfall kommt. Je mehr Beinahe-Unfälle im Protokoll, desto sicherer der Betrieb, nicht umgekehrt."],
+    ["Das Kreuz ist für das Team, nicht für den Auditor.", "Drucken Sie es, hängen Sie es an die Wand und schauen Sie in jeder Besprechung darauf. Ein Kreuz, das niemand sieht, ändert nichts."],
+    ["Eine steigende Meldequote ist eine gute Nachricht.", "Wenn das Team anfängt, unsichere Zustände zu melden, bekommt die Pyramide eine breite Basis. Das ist Vertrauen, kein Ärger."],
+    ["Der Schweregrad ist das Potenzial, nicht der Ausgang.", "Eine Palette, die neben jemandem herunterfiel, ist eine 4, auch wenn niemand berührt wurde. Bewerten Sie, was hätte passieren können."],
+    ["Jedes Ereignis bekommt eine Maßnahme und einen Verantwortlichen.", "Ein Ereignis ohne Maßnahme ist eine Geschichte. Haken Sie die Maßnahme ab, wenn sie erledigt ist, und schicken Sie die offenen an die Maßnahmenliste."]
+  ],
+  "example": {
+    "hours": 160000,
+    "nearMissTarget": 8,
+    "freeDaysTarget": 365,
+    "rows": [
+      "2026-09-08|Früh|Beinahe-Unfall|Verladetor|Palette an Tor 3 von den Gabeln gerutscht, niemand darunter|Stapler / Fahrzeug|3|Gabelneigung und Rampe an Tor 3 prüfen|Marco|ja",
+      "2026-09-11|Spät|Unsicherer Zustand|Wareneingang|Überladebrücke an Tor 2 lose, bewegt sich beim Überfahren|Arbeitsmittel|3|Überladebrücke reparieren, roter Anhänger bis dahin|Instandhaltung|ja",
+      "2026-09-16|Früh|Unfall mit Ausfallzeit|Kommissionierung|Kommissionierer auf nassem Boden in Gang 12 ausgerutscht, Handgelenk verstaucht, 4 Tage Ausfall|Stürze / Ausrutschen|3|Trocknungsroutine und Schild an Tür 5 bei Regen|Anna|ja",
+      "2026-09-19|Nacht|Beinahe-Unfall|Hof|Fahrer rückwärts auf einen Kollegen zugefahren, der hinter dem Lkw ging|Stapler / Fahrzeug|4|Einweiser-Regel beim Rückwärtsfahren im Hof|Luca|nein",
+      "2026-09-24|Spät|Positive Beobachtung|Lager|Team hat die Arbeit gestoppt und eine überstehende Palette neu gestapelt, bevor sie fiel|Vorgabe nicht eingehalten|1|Dem Team in der Besprechung danken|Anna|ja",
+      "2026-09-29|Früh|Beinahe-Unfall|Verpackung|Umreifungsmesser abgerutscht, Handschuh geschnitten, Hand nicht|Arbeitsmittel|2|Abgenutzte Sicherheitsmesser in der Verpackung ersetzen|Sofia|ja",
+      "2026-10-02|Spät|Beinahe-Unfall|Verladetor|Fußgänger hinter einem rückwärtsfahrenden Lkw über Tor 1 gegangen|Stapler / Fahrzeug|4|Fußgängerweg an Tor 1 markieren|Marco|nein",
+      "2026-10-06|Früh|Erste Hilfe|Kommissionierung|Finger an einem gebrochenen Behälter in Gang 8 geschnitten, Pflaster, weitergearbeitet|Arbeitsmittel|2|Gebrochene Behälter jede Schicht aus dem Umlauf nehmen|Sofia|nein",
+      "2026-10-08|Nacht|Unsicherer Zustand|Hof|Beleuchtung am Hoftor ausgefallen, Fahrer sehen den Gehweg nicht|Arbeitsmittel|3|Lampe am Tor ersetzen|Instandhaltung|nein",
+      "2026-10-10|Spät|Beinahe-Unfall|Wareneingang|Über die markierte Höhe gestapelte Palette beim Bewegen gekippt|Vorgabe nicht eingehalten|3|Stapelhöhe in der Besprechung wiederholen, Wareneingang zweimal pro Schicht prüfen|Luca|ja",
+      "2026-10-13|Früh|Unsichere Handlung|Verladetor|Fahrer beim Staplerfahren am Telefon|Vorgabe nicht eingehalten|4|Gespräch mit dem Fahrer, Telefonregel an die Tafel|Anna|nein",
+      "2026-10-15|Spät|Positive Beobachtung|Hof|Nachtschicht hat die Einweiser-Regel ungefragt umgesetzt|Stapler / Fahrzeug|1|In der Wochenbesprechung erwähnen|Luca|ja",
+      "2026-10-17|Früh|Beinahe-Unfall|Lager|Stretchfolie auf dem Boden in Gang 4, Kommissionierer gestolpert, nicht gefallen|Ordnung und Sauberkeit|2|Behälter und Besen am Ende von Gang 4|Sofia|nein",
+      "2026-10-20|Spät|Positive Beobachtung|Kommissionierung|Neuer Kollege hat vor dem Überqueren von Tor 2 angehalten und gefragt|Stapler / Fahrzeug|1|Dem neuen Kollegen danken|Marco|ja"
+    ]
+  }
+}

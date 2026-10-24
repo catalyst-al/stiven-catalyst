@@ -1,0 +1,57 @@
+{
+  "storageKey": "sc-fishbone-sq",
+  "text": {
+    "tool": "Kurrizi i peshkut",
+    "untitled": "Diagram pa titull",
+    "copySuffix": "kopje",
+    "effectPlaceholder": "p.sh. Linjat nisen me vonesë nga rampa",
+    "causePlaceholder": "p.sh. Skanerët nuk janë karikuar në fillim të turnit",
+    "subPlaceholder": "Pse? p.sh. Vetëm dhjetë vende karikimi",
+    "csvName": "kurrizi-shkaqet",
+    "checkText": "Parë në terren: konfirmuar me të dhëna ose përjashtuar, dhe rezultati shënuar pranë shkakut"
+  },
+  "sets": [
+    { "key": "6m", "name": "6M · prodhim, magazinë, shpërndarje", "categories": ["Njerëzit", "Makineria", "Metoda", "Materiali", "Matja", "Mjedisi"] },
+    { "key": "4p", "name": "4P · shërbime", "categories": ["Politikat", "Procedurat", "Njerëzit", "Vendi"] },
+    { "key": "service5", "name": "Service 5 · hotele", "categories": ["Njerëzit", "Procesi", "Vendi", "Pajisjet", "Informacioni"] }
+  ],
+  "tips": [
+    ["Shkruaje efektin si fakt.", "„Linjat nisen me vonesë nga rampa“, me numrin nëse e ke. Jo „ngarkim i keq“: një gjykim i fsheh shkaqet."],
+    ["Mbushi kockat me ekipin.", "Ata që e bëjnë punën i njohin shkaqet. Dhjetë minuta para tabelës vlejnë më shumë se një orë në zyrë."],
+    ["Pyet pse për çdo shkak.", "Një nënshkak është përgjigjja e pyetjes „pse ndodh kjo?“. Këtu mjafton një nivel; më thellë vazhdo me 5 Whys."],
+    ["Voto, pastaj shëno çfarë është e mundshme.", "Çdo person ka tre vota. Shkaqet me më shumë vota kontrollohen të parat, nuk rregullohen të parat."],
+    ["Verifiko para se të rregullosh.", "Një shkak i mundshëm mbetet hamendje derisa dikush ta ketë parë në terren. Secili bëhet një veprim verifikimi, me përgjegjës dhe afat."]
+  ],
+  "example": {
+    "effect": "Linjat nisen me vonesë nga rampa",
+    "set": "6m",
+    "causes": [
+      [
+        { "text": "Brifingu zgjat dhe ngarkimi nis vonë", "likely": true, "votes": 5, "subs": ["Brifingu nuk ka orë të caktuar mbarimi", "Njoftimet lexohen linjë për linjë"] },
+        { "text": "Shoferët e rinj nuk e dinë radhën e ngarkimit", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Mungesat e së hënës zëvendësohen vonë", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Skanerët nuk janë karikuar në fillim të turnit", "likely": true, "votes": 4, "subs": ["Rafti i karikimit ka vetëm dhjetë vende"] },
+        { "text": "Dera e rampës 3 bllokohet në të ftohtë", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Të gjitha linjat dalin në rampë njëherësh, jo me valë", "likely": true, "votes": 6, "subs": ["Planifikimi mbyllet në 05:30", "Nuk ka radhë sipas orës së nisjes"] },
+        { "text": "Lista e kontrollit të ngarkimit ndryshon nga turni në turn", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Ndryshime të vona në listat e ndalesave", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Pakot e një linje shpërndahen në disa kontejnerë", "likely": false, "votes": 3, "subs": ["Korsia e tejmbushjes së sorterit është e përzier"] },
+        { "text": "Mungojnë kontejnerët me rrota te dyert", "likely": false, "votes": 2, "subs": [] }
+      ],
+      [
+        { "text": "Nisja regjistrohet te porta e oborrit, jo te rampa", "likely": false, "votes": 1, "subs": [] },
+        { "text": "Nuk ka pamje ditore të nisjeve të vonuara sipas linjës", "likely": false, "votes": 2, "subs": [] }
+      ],
+      [
+        { "text": "Oborri bllokohet nga kamionët e linjës rreth orës 06:00", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Oborri i errët në dimër ngadalëson kontrollin para nisjes", "likely": false, "votes": 0, "subs": [] }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "storageKey": "sc-fmea",
+  "text": {
+    "tool": "FMEA",
+    "csv": "fmea",
+    "processPlaceholder": "e.g. Outbound: picking, packing, loading",
+    "ownerPlaceholder": "e.g. Anna Berg, outbound lead",
+    "revisionPlaceholder": "e.g. A",
+    "actionPlaceholder": "What changes the cause or the control",
+    "empty": "No failure modes yet."
+  },
+  "status": { "open": "Open", "done": "Done" },
+  "ap": { "H": "High", "M": "Medium", "L": "Low" },
+  "columns": {
+    "step": "Process step",
+    "function": "Function / requirement",
+    "mode": "Potential failure mode",
+    "effect": "Potential effect of failure",
+    "s": "Severity (S)",
+    "cause": "Potential cause",
+    "o": "Occurrence (O)",
+    "prevention": "Current prevention control",
+    "detection": "Current detection control",
+    "d": "Detection (D)",
+    "rpn": "RPN",
+    "ap": "Action priority (AP)",
+    "crit": "Criticality (S×O)",
+    "action": "Recommended action",
+    "owner": "Owner",
+    "due": "Due",
+    "status": "Status",
+    "s2": "S after action",
+    "o2": "O after action",
+    "d2": "D after action",
+    "rpn2": "RPN after action"
+  },
+  "scales": {
+    "S": {
+      "name": "Severity",
+      "question": "How bad is the effect for the customer or the people when the failure happens?",
+      "levels": [
+        ["None", "No noticeable effect."],
+        ["Very minor", "A slight inconvenience that few notice."],
+        ["Minor", "A small inconvenience that most notice; no rework."],
+        ["Very low", "A little rework or a short delay inside the shift."],
+        ["Low", "Rework or a late order; the customer notices."],
+        ["Moderate", "A damaged or incomplete delivery; complaint and re-send."],
+        ["High", "The process stops or needs heavy rework; a customer may be lost."],
+        ["Very high", "The service fails for many customers at once."],
+        ["Hazardous, with warning", "Safety or regulatory breach that announces itself first."],
+        ["Hazardous, without warning", "Injury or regulatory breach with no warning at all."]
+      ]
+    },
+    "O": {
+      "name": "Occurrence",
+      "question": "How often does this cause lead to the failure, with the process as it runs today?",
+      "levels": [
+        ["Remote", "Practically ruled out; nobody has seen it."],
+        ["Very low", "A few times a year."],
+        ["Low", "About once a month."],
+        ["Moderately low", "A few times a month."],
+        ["Moderate", "About once a week."],
+        ["Moderately high", "Several times a week."],
+        ["High", "About once a shift."],
+        ["Very high", "Several times a shift."],
+        ["Very high, repeated", "Several times an hour."],
+        ["Almost certain", "Happens nearly every time the step runs."]
+      ]
+    },
+    "D": {
+      "name": "Detection",
+      "question": "How likely is it that today's controls catch the failure before it reaches the customer?",
+      "levels": [
+        ["Almost certain", "The step cannot pass the error; it is blocked at source."],
+        ["Very high", "An automatic check at the step catches it every time."],
+        ["High", "An automatic check at a later step catches it."],
+        ["Moderately high", "A second person checks it at the step."],
+        ["Moderate", "The operator checks it by eye at the step."],
+        ["Low", "A visual check at a later step, or a sample check."],
+        ["Very low", "Found only by chance or in an audit."],
+        ["Remote", "Found only after the process, by the next department."],
+        ["Very remote", "Found only by the customer."],
+        ["Cannot detect", "No control; it is never found, or found too late."]
+      ]
+    }
+  },
+  "templates": [
+    {
+      "id": "warehouse",
+      "name": "Warehouse outbound",
+      "process": "Outbound: picking, packing, loading",
+      "steps": [
+        ["Picking", "Right item, right quantity, right tote"],
+        ["Packing", "Right box, fill and label; parcel closed and scanned"],
+        ["Loading", "Stable wall in the right trailer; doors closed on time"]
+      ]
+    },
+    {
+      "id": "hotel",
+      "name": "Hotel check-in and night audit",
+      "process": "Front office: check-in to night audit",
+      "steps": [
+        ["Check-in", "Guest identified, right room and rate, keys handed over"],
+        ["Payment guarantee", "Card authorised or deposit taken for every stay"],
+        ["Posting", "Every charge on the right folio on the right day"],
+        ["Night audit", "Day closed: no-shows charged, postings checked, reports run"]
+      ]
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery route",
+      "process": "Last mile: load, drive, hand over, return",
+      "steps": [
+        ["Loading the van", "Parcels in stop order, each scanned to the vehicle"],
+        ["Driving to the stop", "Right address, planned sequence, safe driving"],
+        ["Handover at the door", "Right parcel to the right person, with proof of delivery"],
+        ["Return to depot", "Undelivered parcels scanned back with a reason"]
+      ]
+    }
+  ],
+  "advice": {
+    "H": {
+      "meaning": "Action priority high: the team must find an action that lowers occurrence or improves detection, or document why it cannot. Severity rarely changes; the cause and the controls do.",
+      "moves": [
+        "Agree one action with one owner and a date this week; a wish without an owner is not an action.",
+        "Prefer a change that stops the cause (prevention) over one that finds the failure later (detection).",
+        "When the action is done, rate S, O and D again on the same row and compare the RPN."
+      ],
+      "question": "What would have to be true at this step for this failure to become impossible?"
+    },
+    "M": {
+      "meaning": "Action priority medium: the team should find an action; if none is worth it, write down why the risk is accepted, with the controls that keep it where it is.",
+      "moves": [
+        "Check the detection control first: a cheap check at the step often moves D by several points.",
+        "Give the action an owner and a date, or record the decision to accept the risk.",
+        "Re-rate after the action; a medium that turns low frees the team for the next one."
+      ],
+      "question": "Which control do we trust here, and when did we last see it work?"
+    },
+    "L": {
+      "meaning": "Action priority low: no action is required. Keep the controls that are there and review the row when the process changes.",
+      "moves": [
+        "Keep the prevention and detection controls in the standard work.",
+        "Review the rating when volume, staff or layout change.",
+        "Spend the team's time on the high and medium rows first."
+      ],
+      "question": "Which control holds this risk low, and is it still in place today?"
+    }
+  },
+  "example": {
+    "process": "Outbound parcel hub, late shift",
+    "owner": "Anna Berg, outbound lead",
+    "revision": "B",
+    "daysAgo": 6,
+    "rows": [
+      { "step": "Loading", "function": "Stable wall in the trailer", "mode": "Parcels crushed in loading", "effect": "Damaged goods, claim, re-send", "s": 6, "cause": "Heavy parcels stacked on light ones at peak", "o": 8, "prevention": "Stacking standard on the dock wall", "detection": "None until the delivery station scans the damage", "d": 7, "action": "Heavy-first zone at the dock and a wall check before the doors close", "owner": "Marko", "dueIn": 10, "status": "open", "s2": 6, "o2": 3, "d2": 4 },
+      { "step": "Labelling", "function": "One correct label per parcel", "mode": "Wrong label on the parcel", "effect": "Misroute, late delivery, re-labelling", "s": 5, "cause": "Two labels printed in a row and picked up out of order", "o": 4, "prevention": "Print on demand at the pack station", "detection": "Scan check at the sorter", "d": 3, "action": "Printer releases the label only after the parcel scan", "owner": "Lea", "dueIn": 14, "status": "open" },
+      { "step": "Picking", "function": "Right item and quantity", "mode": "Item missing from the order", "effect": "Incomplete delivery, complaint", "s": 6, "cause": "Empty slot at the location; the picker skips it", "o": 5, "prevention": "Replenishment before the wave", "detection": "Weight check at packing", "d": 4, "action": "A short pick needs a reason code; it cannot be skipped", "owner": "Jonas", "dueIn": 7, "status": "done", "s2": 6, "o2": 2, "d2": 4 },
+      { "step": "Trolley transfer", "function": "Trolley at the pack line by wave time", "mode": "Trolley arrives late at packing", "effect": "Idle pack station, late wave, missed cut-off", "s": 5, "cause": "Only one lift free at peak", "o": 7, "prevention": "Wave plan", "detection": "Supervisor sees the gap on the floor", "d": 6, "action": "Second lift key and a trolley runner from 20:00", "owner": "Marko", "dueIn": 5, "status": "open" },
+      { "step": "Packing", "function": "Right box and void fill", "mode": "Box too large, no fill", "effect": "Item damaged in transit", "s": 5, "cause": "Right box size not at the station", "o": 5, "prevention": "Box mix per station", "detection": "None", "d": 8, "action": "Box size per item group printed on the pack list", "owner": "Lea", "dueIn": 12, "status": "open" },
+      { "step": "Sorting", "function": "Parcel to the right chute", "mode": "Parcel in the wrong chute", "effect": "Misroute, next-day delivery", "s": 4, "cause": "Label crumpled and unreadable", "o": 3, "prevention": "Label quality check at packing", "detection": "No-read alarm at the sorter", "d": 2, "action": "", "owner": "", "dueIn": null, "status": "open" },
+      { "step": "Loading", "function": "Doors closed and sealed on time", "mode": "Trailer leaves without the last cage", "effect": "Parcels left on the dock, late delivery", "s": 7, "cause": "Loader not told the cage count", "o": 3, "prevention": "Cage count on the load sheet", "detection": "Dispatcher checks the sheet before release", "d": 3, "action": "Load sheet signed by loader and dispatcher", "owner": "Dana", "dueIn": 9, "status": "open" },
+      { "step": "Loading", "function": "Safe work at the dock", "mode": "Pallet jack hits a loader's foot", "effect": "Injury, lost time", "s": 9, "cause": "Trolleys parked in the narrow dock lane", "o": 3, "prevention": "Marked lanes", "detection": "Supervisor round every two hours", "d": 7, "action": "Taped trolley parking zone; no trolley in the lane", "owner": "Anna", "dueIn": 3, "status": "open", "s2": 9, "o2": 2, "d2": 5 },
+      { "step": "Inbound scan", "function": "Every parcel scanned on arrival", "mode": "Inbound parcel not scanned", "effect": "Parcel invisible, missed cut-off, customer not informed", "s": 5, "cause": "Scanner battery empty mid-shift", "o": 4, "prevention": "Charging rota", "detection": "Count against the manifest", "d": 5, "action": "One spare scanner per door", "owner": "Jonas", "dueIn": 7, "status": "done", "s2": 5, "o2": 2, "d2": 5 },
+      { "step": "Packing", "function": "Fragile items flagged and padded", "mode": "Fragile item packed without padding", "effect": "Broken item, refund", "s": 6, "cause": "Fragile flag missing in the system", "o": 4, "prevention": "Fragile flag by SKU", "detection": "None", "d": 9, "action": "Flag the 50 most fragile SKUs this week", "owner": "Lea", "dueIn": 6, "status": "open" },
+      { "step": "Dispatch", "function": "Manifest closed before departure", "mode": "Manifest closed after the trailer left", "effect": "Parcels not traceable for a day", "s": 3, "cause": "Dispatcher handles two doors at peak", "o": 5, "prevention": "One dispatcher per door after 21:00", "detection": "System alert when departure precedes the manifest", "d": 2, "action": "", "owner": "", "dueIn": null, "status": "open" },
+      { "step": "Loading", "function": "Load secured", "mode": "Cage not locked in the trailer", "effect": "Cage rolls, parcels crushed, loader hurt", "s": 8, "cause": "Lock bar missing in some trailers", "o": 3, "prevention": "Trailer check at the door", "detection": "Driver walk-round", "d": 4, "action": "Trailers without a lock bar are refused at the door", "owner": "Dana", "dueIn": 14, "status": "open" }
+    ]
+  },
+  "tips": [
+    ["Rate the cause, not the person.", "Occurrence is how often the cause leads to the failure with the process as it runs today, whoever is on shift."],
+    ["Detection is about today's controls.", "Rate the chance that what you have now catches it before the customer, not the check you plan to add."],
+    ["AP before RPN.", "Two rows with the same RPN can need different urgency: a severity 9 with a low occurrence still gets an action. Read the AP first, the RPN second."],
+    ["Re-rate after the action.", "That is the point of the sheet: when the action is done, rate S, O and D again on the same row and see what the risk is now."]
+  ]
+}

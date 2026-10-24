@@ -1,0 +1,48 @@
+/* ===== Hotel KPIs (js/hotel-kpis.js) =====
+   The month as a calendar of occupancy next to last night's figures where there is room, one under the other on a
+   phone. A KPI against its budget is told by its arrow and its words (▲ above, ▼ below); the colour only repeats it. */
+.hk-results .result-head { margin-bottom: 14px; }
+.hk-board { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin: 18px 0; }
+.hk-calendar { min-width: 0; }
+.hk-calendar .ck-figure { margin-top: 8px; }
+.hk-calendar .ck-chart { max-width: 460px; margin: 0 auto; }
+.hk-calendar .ck-legend { justify-content: center; }
+
+.hk-month-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.hk-month-nav > .button-ghost { min-width: 40px; padding: 6px 10px; }
+.hk-month { margin: 0; min-width: 9em; font-size: 18px; text-align: center; }
+
+.hk-night { align-self: start; }
+.hk-night h3 { margin: 4px 0 10px; font-size: 20px; }
+.hk-night-grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; margin: 0; }
+.hk-night-grid dt { color: var(--muted); font-size: 14px; }
+.hk-night-grid dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.hk-pickup { margin: 12px 0 0; }
+
+.hk-chip { display: inline-block; margin-top: 6px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.hk-chip.is-good { border-color: var(--ok); color: var(--ok); }
+.hk-chip.is-bad { border-color: var(--danger); color: var(--danger); }
+.hk-chip.is-none { color: var(--muted); font-weight: 600; }
+.hk-stats .dl-stat { align-content: start; }
+
+.hk-forecast-note { margin: 0 0 12px; }
+.hk-results .dl-panel .ck-figure + .ck-figure { margin-top: 18px; }
+
+@media (min-width: 900px) {
+  .hk-board { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
+}
+
+@media (max-width: 600px) {
+  .hk-month { font-size: 16px; min-width: 0; flex: 1; }
+  .hk-chip { white-space: normal; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .hk-setup, .hk-month-nav > .button-ghost, .hk-results .result-actions, .hk-results .dl-focus .tool-actions { display: none !important; }
+  .hk-results { padding: 0; }
+  .hk-board { grid-template-columns: 1fr 1fr; break-inside: avoid; }
+  .hk-calendar .ck-chart { max-width: none; min-width: 0; }
+  .hk-chip { border-width: 1px; }
+  .hk-results .dl-panel { break-inside: avoid; }
+}

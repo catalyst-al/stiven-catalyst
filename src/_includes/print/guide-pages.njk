@@ -1,5 +1,6 @@
 {#- The pages of the Tools Guide in one language, as the print (src/guide-print/print.njk) and the reader
-    (pages/guide.njk) both show them: one A5 page per section, the roles with their planets, one page per tool. Each
+    (pages/guide.njk) both show them: one A5 page per section, the roles with their planets (and the routine of a
+    role on a page of its own when toolsGuide.pages has one for it), one page per tool. Each
     page sits in a .book-page wrapper that the reader scales (js/book.js) and the print simply ignores. Needs lang. -#}
 {%- set lang = lang or "en" -%}
 {%- set g = toolsGuide[lang] -%}
@@ -8,6 +9,7 @@
 {%- set P = toolsGuide.pageOf -%}
 {%- macro pageTitle(id) -%}
 {%- if id.startsWith("family:") -%}{% set f = F[id.slice(7)] %}{{ f.name }} · {{ f.role | t(lang) }}
+{%- elif id.startsWith("routine:") -%}{{ g.labels.routine }}
 {%- elif id.startsWith("tool:") -%}{{ T[id.slice(5)].name }}
 {%- elif id == "contents" -%}{{ g.labels.contents }}
 {%- elif g.sections[id] and g.sections[id].title -%}{{ g.sections[id].title }}
@@ -69,6 +71,15 @@
 {%- endfor %}
 {%- endmacro -%}
 
+{#- The routine of a role (families.json): when, what, and with which tool. -#}
+{%- macro routine(f) -%}
+<table class="routine">
+  {%- for step in f.routine %}
+  <tr><td>{{ step.when | t(lang) }}</td><td>{{ step.do | t(lang) }} <span class="routine-tool">· {{ T[step.tool].name }}</span></td></tr>
+  {%- endfor %}
+</table>
+{%- endmacro -%}
+
 {%- macro chrome(number, section, color) -%}
 <header class="run"><span>{{ g.title }}</span>{% if section %}<span class="run-section" style="--family: {{ color }}"><i></i>{{ section }}</span>{% endif %}</header>
 <footer class="foot"><span>stivencatalyst.com</span><span class="num">{{ number }}</span></footer>
@@ -114,7 +125,7 @@
     {%- if other not in ["cover", "contents", "back"] %}
     {%- if other.startsWith("family:") %}{% set f = F[other.slice(7)] %}
     <li class="fam" style="--family: {{ f.color }}"><span class="dot"></span><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
-    {%- elif other.startsWith("tool:") %}
+    {%- elif other.startsWith("tool:") or other.startsWith("routine:") %}
     <li class="tool"><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
     {%- else %}
     <li><span class="t">{{ pageTitle(other) }}</span><span class="n">{{ loop.index }}</span></li>
@@ -148,11 +159,23 @@
     {%- endfor %}
   </div>
   <p class="subhead">{{ g.labels.routine }}</p>
-  <table class="routine">
-    {%- for step in f.routine %}
-    <tr><td>{{ step.when | t(lang) }}</td><td>{{ step.do | t(lang) }} <span class="routine-tool">· {{ T[step.tool].name }}</span></td></tr>
-    {%- endfor %}
-  </table>
+  {%- if ("routine:" + f.id) in toolsGuide.pages %}
+  <div class="fam-tools fam-routine"><div><span>{{ g.labels.routineNote }}</span><em>{{ P["routine:" + f.id] }}</em></div></div>
+  {%- else %}
+  {{ routine(f) }}
+  {%- endif %}
+</section>
+</div>
+
+{%- elif id.startsWith("routine:") %}
+{%- set f = F[id.slice(8)] %}
+<div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
+<section class="pg fam routine-page{{ fitClass }}" style="--family: {{ f.color }}">
+  {{ chrome(number, f.name + " · " + (f.role | t(lang)), f.color) }}
+  <p class="kicker">{{ f.name }} · {{ f.role | t(lang) }}</p>
+  <h2>{{ g.labels.routine }}</h2>
+  <p class="routine-note">{{ g.labels.routineNote }}</p>
+  {{ routine(f) }}
 </section>
 </div>
 

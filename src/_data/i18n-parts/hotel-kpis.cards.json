@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Hotel KPIs", "type": "Hotel", "time": "Ongoing", "summary": "Each night's rooms sold, revenue, no-shows, rooms out of order and complaints, pasted from the PMS. Occupancy, ADR and RevPAR against budget, the month's forecast, the weekday pattern, the revenue that leaked and a morning report to copy.", "url": "/tools/hotel-kpis/", "cta": "Open the KPIs" },
+    "de": { "name": "Hotel-Kennzahlen", "type": "Hotel", "time": "Laufend", "summary": "Verkaufte Zimmer, Umsatz, No-Shows, Zimmer außer Betrieb und Beschwerden jeder Nacht, eingefügt aus dem PMS. Auslastung, ADR und RevPAR gegen Budget, die Monatsprognose, das Muster der Wochentage, der verlorene Umsatz und ein Morgenbericht zum Kopieren.", "url": "/de/tools/hotel-kpis/", "cta": "Kennzahlen öffnen" },
+    "sq": { "name": "KPI-të e hotelit", "type": "Hotel", "time": "Në vazhdim", "summary": "Dhomat e shitura, të ardhurat, no-show-et, dhomat jashtë përdorimit dhe ankesat e çdo nate, të ngjitura nga PMS-i. Zënia, ADR dhe RevPAR kundrejt buxhetit, parashikimi i muajit, modeli i ditëve të javës, të ardhurat që humbën dhe një raport mëngjesi për t'u kopjuar.", "url": "/sq/tools/hotel-kpis/", "cta": "Hap KPI-të" }
+  },
+  "routine": { "when": "Every morning", "do": "Paste last night's figures from the night audit, read the morning report at the meeting and act on the KPI the tool puts first.", "de": { "when": "Jeden Morgen", "do": "Fügen Sie die Zahlen der letzten Nacht aus dem Night Audit ein, lesen Sie den Morgenbericht in der Besprechung vor und handeln Sie bei der Kennzahl, die das Tool an erste Stelle setzt." }, "sq": { "when": "Çdo mëngjes", "do": "Ngjit shifrat e natës së kaluar nga night audit, lexo raportin e mëngjesit në takim dhe vepro për KPI-në që mjeti vë të parën." } },
+  "recipe": "example"
+}

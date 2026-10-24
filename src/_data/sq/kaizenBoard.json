@@ -1,0 +1,65 @@
+{
+  "storageKey": "sc-kaizen-board-sq",
+  "text": {
+    "tool": "Tabela Kaizen",
+    "csv": "tabela-kaizen",
+    "titlePlaceholder": "p.sh. Tabelë me hije për veglat e mbështjelljes te porta 3",
+    "byPlaceholder": "p.sh. Marco",
+    "ownerPlaceholder": "p.sh. Anna",
+    "areaPlaceholder": "p.sh. Ngarkimi",
+    "savingPlaceholder": "p.sh. 350",
+    "nextPlaceholder": "p.sh. Provë një javë me transportuesit e mëngjesit",
+    "resultPlaceholder": "p.sh. Renditjet e gabuara ranë nga 9 në 2 në javë",
+    "reasonPlaceholder": "p.sh. Furnitori ndryshon kutitë në nëntor; provojmë sërish atëherë",
+    "empty": "Ende asnjë ide në tabelë.",
+    "scaleNote": "Përpjekja: 1 është nën një orë dhe pa para, 5 është projekt me buxhet. Ndikimi: 1 është një ditë më e mirë për një person, 5 lëviz një tregues kyç të zonës."
+  },
+  "wastes": ["Defektet", "Mbiprodhimi", "Pritja", "Talenti i pashfrytëzuar", "Transporti", "Inventari", "Lëvizja", "Përpunimi i tepërt", "Siguria", "Klienti"],
+  "areas": ["Pranimi", "Mbledhja", "Paketimi", "Ngarkimi", "Kthimet", "Zyra e dërgesave", "Recepsioni", "Pastrimi i dhomave", "Mëngjesi", "Mirëmbajtja"],
+  "statuses": { "idea": "Ide", "plan": "Plan", "do": "Zbatim", "check": "Kontroll", "act": "E miratuar", "dropped": "E lënë mënjanë" },
+  "statusHints": {
+    "idea": "E propozuar, ende pa u parë. Përgjigju brenda një jave.",
+    "plan": "U ra dakord çfarë provohet, kush e provon dhe deri kur.",
+    "do": "Në provë, nga personi që e propozoi.",
+    "check": "Matet para dhe pas.",
+    "act": "Standardi është ndryshuar dhe rezultati është verifikuar.",
+    "dropped": "Jo tani, me një arsye që personi mund ta lexojë."
+  },
+  "scales": {
+    "effort": ["1 · nën një orë, pa para", "2 · një turn, një blerje e vogël", "3 · një javë, duhet një ekip tjetër", "4 · një muaj ose një buxhet", "5 · një projekt"],
+    "impact": ["1 · një ditë më e mirë për një person", "2 · një detyrë më e lehtë për ekipin", "3 · kohë ose gabime të kursyera çdo ditë", "4 · lëviz një tregues kyç i zonës", "5 · e vë re klienti ose siguria"]
+  },
+  "quadrants": ["Fitore të shpejta", "Projekte", "Mbushëse", "Pa shpërblim"],
+  "quadrantAdvice": {
+    "Fitore të shpejta": "Përpjekje e vogël, ndikim i madh: bëje këtë javë, bashkë me personin që pati idenë.",
+    "Projekte": "Përpjekje e madhe, ndikim i madh: jepi një përgjegjës, një buxhet dhe një plan, ose çoje në një A3.",
+    "Mbushëse": "Përpjekje e vogël, ndikim i vogël: bëje kur ka kohë të lirë, kurrë para një fitoreje të shpejtë.",
+    "Pa shpërblim": "Përpjekje e madhe, ndikim i vogël: lëre mënjanë me falënderim, ose rimendoje derisa përpjekja të bëhet e vogël."
+  },
+  "tips": [
+    ["Të vogla, shumë, shpejt.", "Dhjetë ide që marrin nga një orë secila mundin një projekt që zgjat një vit. Mbaje pengesën të ulët për të hyrë dhe të lartë për ta mbyllur."],
+    ["Çdo ide merr përgjigje brenda një jave.", "Planifikoje, provoje ose lëre mënjanë me një arsye që personi mund ta lexojë. Idetë që presin i mësojnë njerëzit të mos kenë më ide."],
+    ["Kush pati idenë, e provon.", "Ai person zotëron kolonën Zbatim. Drejtuesi heq atë që e pengon, jo idenë."],
+    ["Kontrollo me një numër.", "Para dhe pas: minuta, gabime, metra të ecura. Një ide pa kontroll të matur është një mendim."],
+    ["E miratuar do të thotë që standardi ndryshoi.", "Ndrysho SOP-në, tabelën me hije ose trajnimin para se karta të kalojë te E miratuar, përndryshe mënyra e vjetër kthehet."],
+    ["Së pari fitoret e shpejta, projektet me qëllim.", "Përpjekja e vogël me ndikim të madh bëhet këtë javë. Përpjekja e madhe me ndikim të madh merr një plan, një buxhet dhe një përgjegjës."]
+  ],
+  "example": {
+    "rows": [
+      { "title": "Tabelë me hije për veglat e mbështjelljes te porta 3", "waste": "Lëvizja", "area": "Ngarkimi", "by": "Marco", "date": -84, "effort": 1, "impact": 3, "saving": 120, "status": "act", "owner": "Marco", "moved": -70, "adopted": -70, "result": "Veglat e mbështjelljes gjenden menjëherë; rreth 4 minuta të kursyera për kamion." },
+      { "title": "Etiketa me ngjyra për kutitë sipas linjës", "waste": "Defektet", "area": "Paketimi", "by": "Fatima", "date": -78, "effort": 2, "impact": 4, "saving": 350, "status": "act", "owner": "Fatima", "moved": -55, "adopted": -55, "result": "Renditjet e gabuara ranë nga 9 në 2 në javë." },
+      { "title": "Artikujt me qarkullim të shpejtë në lartësinë e belit në korridorin 12", "waste": "Lëvizja", "area": "Mbledhja", "by": "Anna", "date": -72, "effort": 2, "impact": 4, "saving": 480, "status": "act", "owner": "Anna", "moved": -40, "adopted": -40, "result": "Ritmi i mbledhjes në korridorin 12 u rrit me 11 % në tri javë." },
+      { "title": "Plani i ngarkimit në ekranin e portës në vend të letrës", "waste": "Përpunimi i tepërt", "area": "Ngarkimi", "by": "Jonas", "date": -65, "effort": 3, "impact": 3, "saving": 90, "status": "act", "owner": "Jonas", "moved": -30, "adopted": -30, "result": "Asnjë plan i shtypur i humbur që atëherë; nisje në kohë çdo mbrëmje." },
+      { "title": "Skaner i dytë në tavolinën e kthimeve", "waste": "Pritja", "area": "Kthimet", "by": "Elena", "date": -60, "effort": 2, "impact": 3, "saving": 200, "status": "act", "owner": "Elena", "moved": -12, "adopted": -12, "result": "Radha e mëngjesit te tavolina e kthimeve nuk ekziston më." },
+      { "title": "Shenjë në dysheme për stivat e paletave bosh", "waste": "Siguria", "area": "Pranimi", "by": "Dritan", "date": -58, "effort": 1, "impact": 4, "saving": "", "status": "act", "owner": "Dritan", "moved": -45, "adopted": -45, "result": "Asnjë rast për pak me paleta të lira që nga shënimi." },
+      { "title": "Pistoleta shiriti me shirit më të gjerë", "waste": "Defektet", "area": "Paketimi", "by": "Marco", "date": -50, "effort": 1, "impact": 2, "saving": 60, "status": "dropped", "owner": "", "moved": -42, "reason": "Furnitori ndryshon kutitë në nëntor; provojmë sërish me kutitë e reja." },
+      { "title": "Karrocat e mbledhjes të renditura paraprakisht sipas zonës", "waste": "Transporti", "area": "Mbledhja", "by": "Anna", "date": -40, "effort": 4, "impact": 4, "saving": 600, "status": "check", "owner": "Anna", "due": 10, "moved": -8, "next": "Krahaso kohët e mbledhjes së dy javëve me dhe pa karrocat e renditura." },
+      { "title": "Puna standarde për regjistrimin e kamionëve", "waste": "Pritja", "area": "Pranimi", "by": "Dritan", "date": -33, "effort": 3, "impact": 4, "saving": 300, "status": "do", "owner": "Dritan", "due": 7, "moved": -14, "next": "Provë një javë me transportuesit e mëngjesit." },
+      { "title": "Kartë kanban për porosinë e filmit mbështjellës", "waste": "Inventari", "area": "Ngarkimi", "by": "Jonas", "date": -25, "effort": 2, "impact": 3, "saving": 150, "status": "plan", "owner": "Jonas", "due": 14, "moved": -6, "next": "Bie dakord me prokurimin për pikën e riporosisë." },
+      { "title": "Trajno dy mbledhës për tavolinën e kthimeve", "waste": "Talenti i pashfrytëzuar", "area": "Kthimet", "by": "Elena", "date": -20, "effort": 3, "impact": 3, "saving": "", "status": "plan", "owner": "Elena", "due": 21, "moved": -4, "next": "Rezervo dy turne trajnimi me ekipin e mëngjesit." },
+      { "title": "Pesë minuta raund te tabela në portë çdo mëngjes", "waste": "Klienti", "area": "Ngarkimi", "by": "Marco", "date": -12, "effort": 1, "impact": 3, "saving": "", "status": "idea", "moved": -12 },
+      { "title": "Një madhësi kutie më pak në gamën e paketimit", "waste": "Mbiprodhimi", "area": "Paketimi", "by": "Fatima", "date": -6, "effort": 4, "impact": 2, "saving": 80, "status": "idea", "moved": -6 },
+      { "title": "Kufje në vend të radios për drejtuesin e portës", "waste": "Pritja", "area": "Ngarkimi", "by": "Jonas", "date": -3, "effort": 2, "impact": 2, "saving": 40, "status": "idea", "moved": -3 }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Safety Cross", "type": "Safety", "time": "Ongoing", "summary": "Every accident, near miss and unsafe condition on the green cross of the month, with days since the last accident, LTIFR, TRIR and the Bird pyramid. The cause to tackle first, open actions and a talk for today's briefing.", "url": "/tools/safety-cross/", "cta": "Open the cross" },
+    "de": { "name": "Sicherheitskreuz", "type": "Sicherheit", "time": "Laufend", "summary": "Jeder Unfall, jeder Beinahe-Unfall und jeder unsichere Zustand im grünen Kreuz des Monats, mit Tagen seit dem letzten Unfall, LTIFR, TRIR und Bird-Pyramide. Die Ursache, die Sie zuerst angehen, offene Maßnahmen und ein Thema für die heutige Besprechung.", "url": "/de/tools/safety-cross/", "cta": "Kreuz öffnen" },
+    "sq": { "name": "Kryqi i sigurisë", "type": "Siguria", "time": "Vazhdimisht", "summary": "Çdo aksident, rrezik i shmangur dhe kusht i pasigurt në kryqin e gjelbër të muajit, me ditët që nga aksidenti i fundit, LTIFR, TRIR dhe piramidën e Bird-it. Shkaku që trajtohet i pari, veprimet e hapura dhe një temë për takimin e sotëm.", "url": "/sq/tools/safety-cross/", "cta": "Hap kryqin" }
+  },
+  "routine": { "when": "Start of shift", "do": "Log what happened yesterday, read the talk of the day at the briefing and ask who saw a near miss.", "de": { "when": "Schichtbeginn", "do": "Erfassen Sie, was gestern passiert ist, lesen Sie in der Besprechung das Thema des Tages vor und fragen Sie, wer einen Beinahe-Unfall gesehen hat." }, "sq": { "when": "Fillimi i turnit", "do": "Regjistro çfarë ndodhi dje, lexo temën e ditës në takim dhe pyet kush pa një rrezik të shmangur." } },
+  "recipe": "example"
+}

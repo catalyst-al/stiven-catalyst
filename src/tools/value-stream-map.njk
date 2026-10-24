@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Value Stream Map
+seo_title: "Value stream map with lead-time ladder, takt and future state"
+description: "Map a flow from supplier to customer: steps, inventories turned into time, lead time, PCE, takt and the bottleneck, then a future state with kaizen bursts."
+activeNav: /tools.html
+permalink: /tools/value-stream-map/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Lean</p>
+  <h1>Value Stream Map</h1>
+  <p class="lede">Draw the flow of one product or service from the supplier to the customer: every step with its cycle time, changeover, uptime and yield, and the pieces waiting between the steps. The tool turns the piles into time, draws the map with its lead-time ladder, shows how little of the lead time is work, names the step above takt, and lets you draw the future state with a kaizen burst for each change.</p>
+</section>
+
+{% set cfg = valueStreamMap %}
+{% include "partials/value-stream-map.njk" %}

@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Kaizen Board", "type": "Improvement", "time": "Weekly", "summary": "Every improvement idea of the team on one board, from Idea through Plan, Do and Check to Adopted, with an effort and impact matrix that shows the quick wins. Adoption rate, days to adopted, savings per month and year, and the idea of the month.", "url": "/tools/kaizen-board/", "cta": "Open the board" },
+    "de": { "name": "Kaizen-Board", "type": "Verbesserung", "time": "Wöchentlich", "summary": "Alle Verbesserungsideen des Teams auf einem Board, von der Idee über Planen, Umsetzen und Prüfen bis zur Einführung, mit einer Aufwand-Nutzen-Matrix, die die schnellen Erfolge zeigt. Umsetzungsquote, Tage bis zur Einführung, Einsparung pro Monat und Jahr und die Idee des Monats.", "url": "/de/tools/kaizen-board/", "cta": "Board öffnen" },
+    "sq": { "name": "Tabela Kaizen", "type": "Përmirësim", "time": "Çdo javë", "summary": "Të gjitha idetë e përmirësimit të ekipit në një tabelë, nga ideja te plani, zbatimi dhe kontrolli deri te miratimi, me një matricë përpjekje-ndikim që tregon fitoret e shpejta. Shkalla e miratimit, ditët deri te miratimi, kursimet në muaj e në vit dhe ideja e muajit.", "url": "/sq/tools/kaizen-board/", "cta": "Hap tabelën" }
+  },
+  "routine": { "when": "Every week", "do": "Answer every new idea within the week, move each card one honest step, and name the idea of the month in front of the team.", "de": { "when": "Jede Woche", "do": "Beantworten Sie jede neue Idee innerhalb der Woche, schieben Sie jede Karte einen ehrlichen Schritt weiter und nennen Sie die Idee des Monats vor dem Team." }, "sq": { "when": "Çdo javë", "do": "Përgjigju çdo ideje të re brenda javës, lëviz çdo kartë një hap të vërtetë dhe shpall idenë e muajit para ekipit." } },
+  "recipe": "example"
+}

@@ -1,0 +1,248 @@
+{
+ "storageKey": "sc-oee-de",
+ "title": "OEE",
+ "defaultPlanned": 480,
+ "shifts": [
+  "Früh",
+  "Spät",
+  "Nacht"
+ ],
+ "reasons": [
+  {
+   "name": "Störung",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Elektrischer Fehler",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Warten auf Instandhaltung",
+   "loss": "breakdowns"
+  },
+  {
+   "name": "Umrüsten",
+   "loss": "setup"
+  },
+  {
+   "name": "Einstellen",
+   "loss": "setup"
+  },
+  {
+   "name": "Materialwechsel",
+   "loss": "setup"
+  },
+  {
+   "name": "Stau",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Blockiert oder leergelaufen",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Lesefehler-Stopp",
+   "loss": "smallStops"
+  },
+  {
+   "name": "Langsamlauf",
+   "loss": "speed"
+  },
+  {
+   "name": "Pause",
+   "loss": "planned"
+  },
+  {
+   "name": "Besprechung",
+   "loss": "planned"
+  },
+  {
+   "name": "Geplante Wartung",
+   "loss": "planned"
+  },
+  {
+   "name": "Keine Aufträge",
+   "loss": "planned"
+  }
+ ],
+ "losses": {
+  "breakdowns": {
+   "name": "Ausfälle",
+   "meaning": "Die Anlage stand, weil etwas ausgefallen ist: ein Motor, ein Sensor, eine Siegelbacke. Jeder Ausfall nimmt die ganze Laufzeit mit, und dieselben Fehler kommen gern wieder.",
+   "moves": [
+    "Listen Sie die Ausfälle der letzten zwei Wochen nach Bauteil auf; das häufigste bekommt diese Woche ein 5 Whys.",
+    "Vereinbaren Sie einen Reaktionsstandard: wer nach wie vielen Minuten gerufen wird und was der Bediener zuerst prüft.",
+    "Nehmen Sie das ausfallende Teil in die tägliche Bedienerpflege auf: reinigen, prüfen, nachziehen, mit einem Haken an der Anlage."
+   ],
+   "question": "Welches Teil ist am häufigsten ausgefallen, und wie sah es eine Schicht vorher aus?"
+  },
+  "setup": {
+   "name": "Rüsten und Einstellen",
+   "meaning": "Umrüsten, Einstellen und Anlaufen nach einem Wechsel: die Zeit vom letzten Gutteil eines Auftrags bis zum ersten Gutteil des nächsten.",
+   "moves": [
+    "Filmen Sie einen Rüstvorgang und teilen Sie ihn in Schritte, für die die Anlage stehen muss, und Schritte, die während des Laufs möglich sind.",
+    "Bereiten Sie Werkzeug, Folie und Einstellungen vor dem Stopp vor: ein Rüstwagen mit Checkliste.",
+    "Schreiben Sie die Einstellungen jedes Produkts an die Anlage, damit niemand nach Gefühl einstellt."
+   ],
+   "question": "Welche Schritte des Rüstens könnten erledigt sein, bevor die Anlage stoppt?"
+  },
+  "smallStops": {
+   "name": "Kurzstillstände",
+   "meaning": "Staus, Fehleinzüge, ein blockierter Auslauf: Stopps von ein, zwei Minuten, die der Bediener selbst behebt, ohne jemanden zu rufen. Einzeln wirken sie harmlos; zusammen kosten sie eine Stunde.",
+   "moves": [
+    "Zählen Sie die Kurzstillstände einer Schicht mit einer Strichliste an der Anlage, nach Stelle.",
+    "Beheben Sie die häufigste Staustelle gemeinsam mit Bediener und Instandhaltung, nicht mit einem Provisorium.",
+    "Prüfen Sie den Zulauf: Ein ungleichmäßiger Strom von Paketen oder Packungen löst die meisten Staus aus."
+   ],
+   "question": "Wo an der Anlage greift der Bediener am häufigsten ein?"
+  },
+  "speed": {
+   "name": "Verringerte Geschwindigkeit",
+   "meaning": "Die Anlage läuft, aber langsamer als ihre ideale Leistung: nach einem Problem heruntergestellt und nie wieder hochgestellt, oder im Tempo des langsamsten Produkts.",
+   "moves": [
+    "Vergleichen Sie die eingestellte Geschwindigkeit mit der idealen Leistung auf dem Typenschild und in den Einstellungen; notieren Sie, warum sie abweichen.",
+    "Erhöhen Sie die Geschwindigkeit in einer Schicht in Schritten von 5 % und beobachten Sie Ausschuss und Staus.",
+    "Finden Sie heraus, worauf die Anlage wartet: auf den Zulauf, den Auslauf oder den Bediener."
+   ],
+   "question": "Warum läuft die Anlage mit dieser Geschwindigkeit, und wer hat das entschieden?"
+  },
+  "startupRejects": {
+   "name": "Anlaufausschuss",
+   "meaning": "Schlechte Teile beim Warmlaufen oder nach einem Wechsel, bevor die Einstellungen stabil sind.",
+   "moves": [
+    "Zählen Sie eine Woche lang den Ausschuss der ersten 15 Minuten getrennt vom Rest.",
+    "Schreiben Sie die Anlaufeinstellungen jedes Produkts auf und prüfen Sie sie vor dem ersten Teil.",
+    "Wärmen Sie die Teile, die es brauchen (Siegelbacken, Leim), vor Schichtbeginn vor."
+   ],
+   "question": "Wie viele Teile braucht es bis zum ersten guten, und warum so viele?"
+  },
+  "productionRejects": {
+   "name": "Produktionsausschuss",
+   "meaning": "Schlechte Teile im stabilen Lauf: Lesefehler, Fehlsortierungen, schwache Siegelnähte, Beschädigungen. Jedes hat Anlagenzeit verbraucht und muss neu gemacht werden.",
+   "moves": [
+    "Sortieren Sie den Ausschuss einer Schicht nach Fehlerart; die größte bekommt eine Prüfung an der Anlage.",
+    "Zeigen Sie die Ausschusszahl jede Stunde an der Anlage, damit der Bediener eine Änderung sofort sieht.",
+    "Prüfen Sie das Eingangsmaterial: Viel Ausschuss kommt von Etiketten, Verpackung oder Material, nicht von der Anlage."
+   ],
+   "question": "Wie sieht ein typisches Ausschussteil aus, und wo ist es entstanden?"
+  }
+ },
+ "verdicts": [
+  {
+   "name": "Weltklasse",
+   "note": "85 % oder mehr: Verfügbarkeit, Leistung und Qualität nahe am Bestwert."
+  },
+  {
+   "name": "Üblich",
+   "note": "60 bis 85 %: ein gewöhnliches Ergebnis, mit klaren Verlusten zum Zurückholen."
+  },
+  {
+   "name": "Niedrig",
+   "note": "40 bis 60 %: große Verluste; der größte ist ein eigenes Projekt wert."
+  },
+  {
+   "name": "Schwach",
+   "note": "Unter 40 %: Prüfen Sie zuerst die Daten, dann den größten Verlust."
+  }
+ ],
+ "placeholders": {
+  "machine": "z. B. Sorter S1",
+  "stops": "Stau: 12; Umrüsten: 20; Pause: 30",
+  "note": "z. B. Folie vom neuen Lieferanten",
+  "paste": "22.10.2026; Früh; Sorter S1; 480; Pause: 30, Stau: 12; 15200; 540; 90"
+ },
+ "tips": [
+  [
+   "Beginnen Sie mit dem Engpass.",
+   "Seine OEE ist die Leistung der ganzen Linie. Messen Sie eine Anlage gut, bevor Sie alle messen."
+  ],
+  [
+   "Schreiben Sie den Grund auf, nicht nur die Minuten.",
+   "Ein Stopp ohne Grund lässt sich nicht beheben. Halten Sie die Liste der Gründe kurz und in jeder Schicht gleich."
+  ],
+  [
+   "Nehmen Sie die ideale Leistung vom Typenschild.",
+   "Nicht die Geschwindigkeit, mit der die Anlage meistens läuft. Zeigt die Leistung 100 %, ist die ideale Leistung vermutlich zu niedrig eingetragen."
+  ],
+  [
+   "Geplante Stopps sind keine Verluste.",
+   "Pausen, Besprechungen und fehlende Aufträge werden aus der geplanten Zeit herausgerechnet, sodass die OEE nur die Zeit misst, in der die Anlage laufen sollte."
+  ]
+ ],
+ "example": {
+  "equipment": [
+   {
+    "name": "Sorter S1",
+    "rate": 2400,
+    "planned": 480
+   },
+   {
+    "name": "Verpackungsmaschine W2",
+    "rate": 1800,
+    "planned": 480
+   }
+  ],
+  "rows": [
+   "2026-09-28|Früh|Sorter S1|480|Pause: 30; Umrüsten: 10; Stau: 12|13795|467|77|",
+   "2026-09-28|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 77; Umrüsten: 22; Warten auf Instandhaltung: 11; Stau: 12|8248|480|190|",
+   "2026-09-28|Spät|Sorter S1|480|Pause: 30; Stau: 9|13941|466|74|",
+   "2026-09-28|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 78; Umrüsten: 22; Warten auf Instandhaltung: 17; Stau: 10|8527|451|145|",
+   "2026-09-29|Früh|Sorter S1|480|Pause: 30; Umrüsten: 10; Stau: 5|13591|469|90|",
+   "2026-09-29|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 48; Umrüsten: 18; Elektrischer Fehler: 24; Stau: 12|8723|542|167|",
+   "2026-09-29|Spät|Sorter S1|480|Pause: 30; Stau: 5; Lesefehler-Stopp: 3|14111|595|124|",
+   "2026-09-29|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 83; Umrüsten: 17; Warten auf Instandhaltung: 13; Stau: 9|8384|472|173|",
+   "2026-09-30|Früh|Sorter S1|480|Pause: 30; Umrüsten: 10; Stau: 12|13881|405|90|",
+   "2026-09-30|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 81; Umrüsten: 15; Stau: 11|8318|566|228|",
+   "2026-09-30|Spät|Sorter S1|480|Pause: 30; Stau: 8|13923|372|97|",
+   "2026-09-30|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 100; Umrüsten: 27; Stau: 8|8216|451|192|",
+   "2026-10-01|Früh|Sorter S1|480|Pause: 30; Umrüsten: 13; Stau: 4; Störung: 11|12900|500|119|",
+   "2026-10-01|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 79; Umrüsten: 22; Stau: 8|8571|540|235|",
+   "2026-10-01|Spät|Sorter S1|480|Pause: 30; Stau: 5; Störung: 18|13769|522|119|Neuer Bediener am Zulauf",
+   "2026-10-01|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 98; Umrüsten: 29; Einstellen: 10; Stau: 10|7480|390|142|",
+   "2026-10-02|Früh|Sorter S1|480|Pause: 30; Umrüsten: 11; Stau: 10|14132|595|94|",
+   "2026-10-02|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 98; Umrüsten: 15; Warten auf Instandhaltung: 15; Stau: 11|7818|478|170|",
+   "2026-10-02|Spät|Sorter S1|480|Pause: 30; Stau: 9|13997|522|98|",
+   "2026-10-02|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 80; Umrüsten: 19; Warten auf Instandhaltung: 10; Stau: 10|8701|481|194|",
+   "2026-10-05|Früh|Sorter S1|480|Pause: 30; Umrüsten: 13; Stau: 12|13101|488|109|Geschwindigkeit nach dem Stau am Montag reduziert",
+   "2026-10-05|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 46; Umrüsten: 16; Warten auf Instandhaltung: 13; Stau: 5|8842|611|248|",
+   "2026-10-05|Spät|Sorter S1|480|Pause: 30; Stau: 8|14057|483|89|",
+   "2026-10-05|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 46; Umrüsten: 28; Elektrischer Fehler: 26; Stau: 11|8525|427|152|",
+   "2026-10-06|Früh|Sorter S1|480|Pause: 30; Umrüsten: 14; Stau: 10; Störung: 22; Lesefehler-Stopp: 6|12520|464|73|",
+   "2026-10-06|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 41; Umrüsten: 28; Stau: 11|9829|546|240|",
+   "2026-10-06|Spät|Sorter S1|480|Pause: 30; Stau: 8; Störung: 18; Lesefehler-Stopp: 8|13632|456|87|",
+   "2026-10-06|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 51; Umrüsten: 21; Warten auf Instandhaltung: 14; Stau: 8|8868|447|196|",
+   "2026-10-07|Früh|Sorter S1|480|Pause: 30; Umrüsten: 14; Stau: 10; Störung: 19|12984|406|82|",
+   "2026-10-07|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 48; Umrüsten: 17; Einstellen: 10; Stau: 10|8848|519|192|",
+   "2026-10-07|Spät|Sorter S1|480|Pause: 30; Stau: 4; Lesefehler-Stopp: 7|13361|370|99|",
+   "2026-10-07|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 64; Umrüsten: 30; Elektrischer Fehler: 23; Stau: 7|8324|467|159|",
+   "2026-10-08|Früh|Sorter S1|480|Pause: 30; Umrüsten: 11; Stau: 9; Störung: 21|12378|414|64|",
+   "2026-10-08|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 48; Umrüsten: 26; Stau: 12|9067|463|161|Heizung der Siegelbacke getauscht",
+   "2026-10-08|Spät|Sorter S1|480|Pause: 30; Stau: 8; Störung: 17|13102|393|112|",
+   "2026-10-08|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 69; Umrüsten: 20; Elektrischer Fehler: 28; Stau: 5|7835|435|182|",
+   "2026-10-09|Früh|Sorter S1|480|Pause: 30; Umrüsten: 12; Stau: 4; Störung: 25|12954|475|131|",
+   "2026-10-09|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 63; Umrüsten: 19; Einstellen: 14; Stau: 10|8487|463|203|",
+   "2026-10-09|Spät|Sorter S1|480|Pause: 30; Stau: 5; Lesefehler-Stopp: 8|14163|485|134|",
+   "2026-10-09|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 72; Umrüsten: 27; Elektrischer Fehler: 21; Warten auf Instandhaltung: 12; Stau: 5|8108|534|161|",
+   "2026-10-12|Früh|Sorter S1|480|Pause: 30; Umrüsten: 13; Stau: 5; Störung: 17; Lesefehler-Stopp: 7|12659|464|91|",
+   "2026-10-12|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 67; Umrüsten: 18; Warten auf Instandhaltung: 18; Stau: 7|8805|489|193|",
+   "2026-10-12|Spät|Sorter S1|480|Pause: 30; Stau: 8; Lesefehler-Stopp: 3|13819|545|132|",
+   "2026-10-12|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 51; Umrüsten: 16; Stau: 9|9593|515|227|",
+   "2026-10-13|Früh|Sorter S1|480|Pause: 30; Umrüsten: 11; Stau: 12; Lesefehler-Stopp: 4|14176|433|111|",
+   "2026-10-13|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 78; Umrüsten: 29; Elektrischer Fehler: 20; Stau: 5|7805|420|153|",
+   "2026-10-13|Spät|Sorter S1|480|Pause: 30; Stau: 12; Störung: 19|12758|336|69|",
+   "2026-10-13|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 71; Umrüsten: 17; Elektrischer Fehler: 32; Warten auf Instandhaltung: 12; Stau: 7|7926|524|224|Folie vom neuen Lieferanten",
+   "2026-10-14|Früh|Sorter S1|480|Pause: 30; Umrüsten: 13; Stau: 12; Störung: 14; Lesefehler-Stopp: 8|13625|489|132|",
+   "2026-10-14|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 83; Umrüsten: 22; Warten auf Instandhaltung: 19; Einstellen: 13; Stau: 11|7958|529|218|",
+   "2026-10-14|Spät|Sorter S1|480|Pause: 30; Stau: 6|14124|568|160|",
+   "2026-10-14|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 84; Umrüsten: 23; Elektrischer Fehler: 18; Warten auf Instandhaltung: 24; Stau: 12|7540|430|181|",
+   "2026-10-15|Früh|Sorter S1|480|Pause: 30; Umrüsten: 12; Stau: 9|13786|455|122|",
+   "2026-10-15|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 67; Umrüsten: 23; Warten auf Instandhaltung: 23; Stau: 10|8019|519|178|",
+   "2026-10-15|Spät|Sorter S1|480|Pause: 30; Stau: 6; Störung: 25; Lesefehler-Stopp: 5|13193|368|98|",
+   "2026-10-15|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 82; Umrüsten: 23; Warten auf Instandhaltung: 17; Stau: 5|7846|478|151|",
+   "2026-10-16|Früh|Sorter S1|480|Pause: 30; Umrüsten: 11; Stau: 9|13839|430|109|",
+   "2026-10-16|Früh|Verpackungsmaschine W2|480|Pause: 30; Störung: 43; Umrüsten: 15; Stau: 7|9215|468|176|",
+   "2026-10-16|Spät|Sorter S1|480|Pause: 30; Stau: 10; Lesefehler-Stopp: 3|14084|417|123|",
+   "2026-10-16|Spät|Verpackungsmaschine W2|480|Pause: 30; Störung: 59; Umrüsten: 18; Einstellen: 13; Stau: 5|8779|500|181|"
+  ]
+ }
+}

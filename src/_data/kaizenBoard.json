@@ -1,0 +1,65 @@
+{
+  "storageKey": "sc-kaizen-board",
+  "text": {
+    "tool": "Kaizen Board",
+    "csv": "kaizen-board",
+    "titlePlaceholder": "e.g. Shadow board for the wrap tools at dock 3",
+    "byPlaceholder": "e.g. Marco",
+    "ownerPlaceholder": "e.g. Anna",
+    "areaPlaceholder": "e.g. Loading",
+    "savingPlaceholder": "e.g. 350",
+    "nextPlaceholder": "e.g. Trial with the morning carriers for one week",
+    "resultPlaceholder": "e.g. Mis-sorts down from 9 to 2 a week",
+    "reasonPlaceholder": "e.g. The supplier changes cartons in November; try again then",
+    "empty": "No ideas on the board yet.",
+    "scaleNote": "Effort: 1 is under an hour and no money, 5 is a project with a budget. Impact: 1 is a nicer day for one person, 5 changes a KPI of the area."
+  },
+  "wastes": ["Defects", "Overproduction", "Waiting", "Non-utilised talent", "Transport", "Inventory", "Motion", "Extra processing", "Safety", "Customer"],
+  "areas": ["Inbound", "Picking", "Packing", "Loading", "Returns", "Dispatch office", "Front desk", "Housekeeping", "Breakfast", "Maintenance"],
+  "statuses": { "idea": "Idea", "plan": "Plan", "do": "Do", "check": "Check", "act": "Adopted", "dropped": "Dropped" },
+  "statusHints": {
+    "idea": "Suggested, not yet looked at. Answer within a week.",
+    "plan": "Agreed what to try, who tries it and by when.",
+    "do": "Being tested, by the person who proposed it.",
+    "check": "Measuring before and after.",
+    "act": "The standard is changed and the result is verified.",
+    "dropped": "Not now, with a reason the person can read."
+  },
+  "scales": {
+    "effort": ["1 · under an hour, no money", "2 · a shift, a small purchase", "3 · a week, needs another team", "4 · a month or a budget", "5 · a project"],
+    "impact": ["1 · a nicer day for one person", "2 · one task easier for the team", "3 · time or errors saved every day", "4 · a KPI of the area moves", "5 · the customer or safety notices"]
+  },
+  "quadrants": ["Quick wins", "Projects", "Fill-ins", "Thankless"],
+  "quadrantAdvice": {
+    "Quick wins": "Low effort, high impact: do it this week, with the person who had the idea.",
+    "Projects": "High effort, high impact: give it an owner, a budget and a plan, or take it to an A3.",
+    "Fill-ins": "Low effort, low impact: do it when there is slack, never ahead of a quick win.",
+    "Thankless": "High effort, low impact: drop it with thanks, or rethink it until the effort is small."
+  },
+  "tips": [
+    ["Small, many, fast.", "Ten ideas that take an hour each beat one project that takes a year. Keep the bar low to enter and high to finish."],
+    ["Every idea gets an answer within a week.", "Plan it, test it or drop it with a reason the person can read. Ideas that wait teach people to stop having them."],
+    ["The person who had the idea tests it.", "They own the Do column. The leader removes what blocks them, not the idea."],
+    ["Check with a number.", "Before and after: minutes, errors, metres walked. An idea without a measured check is an opinion."],
+    ["Adopted means the standard changed.", "Change the SOP, the shadow board or the training before the card moves to Adopted, or the old way comes back."],
+    ["Quick wins first, projects on purpose.", "Low effort and high impact goes this week. High effort and high impact gets a plan, a budget and an owner."]
+  ],
+  "example": {
+    "rows": [
+      { "title": "Shadow board for the wrap tools at dock 3", "waste": "Motion", "area": "Loading", "by": "Marco", "date": -84, "effort": 1, "impact": 3, "saving": 120, "status": "act", "owner": "Marco", "moved": -70, "adopted": -70, "result": "Wrapping tools found at once; about 4 minutes saved per truck." },
+      { "title": "Colour-coded tote labels per route", "waste": "Defects", "area": "Packing", "by": "Fatima", "date": -78, "effort": 2, "impact": 4, "saving": 350, "status": "act", "owner": "Fatima", "moved": -55, "adopted": -55, "result": "Mis-sorts down from 9 to 2 a week." },
+      { "title": "Move fast movers to waist height in aisle 12", "waste": "Motion", "area": "Picking", "by": "Anna", "date": -72, "effort": 2, "impact": 4, "saving": 480, "status": "act", "owner": "Anna", "moved": -40, "adopted": -40, "result": "Pick rate in aisle 12 up 11 % over three weeks." },
+      { "title": "Loading plan on the dock screen instead of paper", "waste": "Extra processing", "area": "Loading", "by": "Jonas", "date": -65, "effort": 3, "impact": 3, "saving": 90, "status": "act", "owner": "Jonas", "moved": -30, "adopted": -30, "result": "No printed plan lost since; departures on time every evening." },
+      { "title": "Second scanner at the returns bench", "waste": "Waiting", "area": "Returns", "by": "Elena", "date": -60, "effort": 2, "impact": 3, "saving": 200, "status": "act", "owner": "Elena", "moved": -12, "adopted": -12, "result": "The morning queue at the returns bench is gone." },
+      { "title": "Floor marking for empty pallet stacks", "waste": "Safety", "area": "Inbound", "by": "Dritan", "date": -58, "effort": 1, "impact": 4, "saving": "", "status": "act", "owner": "Dritan", "moved": -45, "adopted": -45, "result": "No near miss with loose pallets since the marking." },
+      { "title": "Replace the tape guns with wider tape", "waste": "Defects", "area": "Packing", "by": "Marco", "date": -50, "effort": 1, "impact": 2, "saving": 60, "status": "dropped", "owner": "", "moved": -42, "reason": "The supplier changes cartons in November; try again with the new boxes." },
+      { "title": "Picking carts pre-sorted by zone", "waste": "Transport", "area": "Picking", "by": "Anna", "date": -40, "effort": 4, "impact": 4, "saving": 600, "status": "check", "owner": "Anna", "due": 10, "moved": -8, "next": "Compare the pick times of two weeks with and without the sorted carts." },
+      { "title": "Standard work for truck check-in", "waste": "Waiting", "area": "Inbound", "by": "Dritan", "date": -33, "effort": 3, "impact": 4, "saving": 300, "status": "do", "owner": "Dritan", "due": 7, "moved": -14, "next": "Trial with the morning carriers for one week." },
+      { "title": "Kanban card for the stretch film reorder", "waste": "Inventory", "area": "Loading", "by": "Jonas", "date": -25, "effort": 2, "impact": 3, "saving": 150, "status": "plan", "owner": "Jonas", "due": 14, "moved": -6, "next": "Agree the reorder point with purchasing." },
+      { "title": "Cross-train two pickers for the returns bench", "waste": "Non-utilised talent", "area": "Returns", "by": "Elena", "date": -20, "effort": 3, "impact": 3, "saving": "", "status": "plan", "owner": "Elena", "due": 21, "moved": -4, "next": "Book two training shifts with the early team." },
+      { "title": "Five-minute board round at the dock every morning", "waste": "Customer", "area": "Loading", "by": "Marco", "date": -12, "effort": 1, "impact": 3, "saving": "", "status": "idea", "moved": -12 },
+      { "title": "One carton size less in the packing range", "waste": "Overproduction", "area": "Packing", "by": "Fatima", "date": -6, "effort": 4, "impact": 2, "saving": 80, "status": "idea", "moved": -6 },
+      { "title": "Headset instead of the radio for the dock leader", "waste": "Waiting", "area": "Loading", "by": "Jonas", "date": -3, "effort": 2, "impact": 2, "saving": 40, "status": "idea", "moved": -3 }
+    ]
+  }
+}

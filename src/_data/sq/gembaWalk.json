@@ -1,0 +1,1070 @@
+{
+  "storageKey": "sc-gemba-walk-sq",
+  "text": {
+    "tool": "Gemba Walk",
+    "areaPlaceholder": "p.sh. Rampa e pranimit",
+    "walkerPlaceholder": "p.sh. Anna",
+    "findingPlaceholder": "Gjetja, p.sh. paletë mbi vijën e verdhë",
+    "notePlaceholder": "Çfarë pe, p.sh. ecën 20 m për shirit",
+    "csv": "gemba-ecjet",
+    "checkText": "Përgjigje po në ecjen e radhës të këtij niveli",
+    "sheetTitle": "Fleta e ecjes Gemba"
+  },
+  "types": [
+    {
+      "key": "lpa",
+      "name": "Auditi i procesit me nivele",
+      "short": "LPA",
+      "note": "Një kontroll i shkurtër në vendin e punës nëse standardi zbatohet; çdo nivel drejtues bën pyetjet e veta."
+    },
+    {
+      "key": "waste",
+      "name": "Ecje për humbjet",
+      "short": "Humbjet",
+      "note": "Numëro humbjet që sheh në një zonë: tetë humbjet plus Mura dhe Muri."
+    }
+  ],
+  "layers": [
+    {
+      "key": "team-lead",
+      "name": "Drejtuesi i ekipit",
+      "short": "DE",
+      "cadence": "daily",
+      "note": "Drejtuesi i ekipit ecën çdo ditë dhe kontrollon bazat e turnit."
+    },
+    {
+      "key": "area-manager",
+      "name": "Menaxheri i zonës",
+      "short": "MZ",
+      "cadence": "weekly",
+      "note": "Menaxheri i zonës ecën çdo javë dhe kontrollon nëse sistemi rreth turnit funksionon."
+    },
+    {
+      "key": "site-lead",
+      "name": "Drejtuesi i objektit",
+      "short": "DO",
+      "cadence": "monthly",
+      "note": "Drejtuesi i objektit ecën çdo muaj dhe kontrollon nëse nivelet më poshtë i mbyllin gjetjet e tyre."
+    }
+  ],
+  "cadences": [
+    {
+      "key": "daily",
+      "name": "Çdo ditë"
+    },
+    {
+      "key": "weekly",
+      "name": "Çdo javë"
+    },
+    {
+      "key": "monthly",
+      "name": "Çdo muaj"
+    }
+  ],
+  "answers": [
+    {
+      "key": "yes",
+      "name": "Po"
+    },
+    {
+      "key": "no",
+      "name": "Jo"
+    },
+    {
+      "key": "na",
+      "name": "s'zbatohet"
+    }
+  ],
+  "shifts": [
+    "Mëngjes",
+    "Pasdite",
+    "Natë"
+  ],
+  "templates": {
+    "warehouse": {
+      "name": "Magazinë",
+      "areas": [
+        "Rampa e pranimit",
+        "Zona e mbledhjes A",
+        "Paketimi",
+        "Rampa e daljes",
+        "Kthimet"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Të gjithë në sallë mbajnë këpucë sigurie dhe jelek reflektues.",
+            "standard": "Rregulli i MMP-së në hyrje: këpucë S3, jeleku i veshur.",
+            "topic": "safety"
+          },
+          {
+            "text": "Korridoret dhe vijat e verdha janë të lira nga paleta dhe kafaze.",
+            "standard": "Plani i shenjave në dysheme: asgjë e parkuar mbi vijë.",
+            "topic": "fives"
+          },
+          {
+            "text": "Udhëzimi i mbledhjes ose paketimit në çdo stacion është versioni aktual.",
+            "standard": "Fleta e punës standarde, versioni në tabelë.",
+            "topic": "standard"
+          },
+          {
+            "text": "Skanerët dhe printerët janë të ngarkuar dhe në vendin e tyre në fillim të turnit.",
+            "standard": "Kontrolli i pajisjeve në fillim të turnit.",
+            "topic": "fives"
+          },
+          {
+            "text": "Tabela e turnit tregon planin dhe orën e fundit kundrejt planit.",
+            "standard": "Tabela orare plotësohet deri në dhjetë minuta pas orës.",
+            "topic": "visual"
+          },
+          {
+            "text": "Të sapoardhurit punojnë me një kujdestar dhe fleta e tyre e trajnimit është te stacioni.",
+            "standard": "Matrica e trajnimit: pa punë të vetme nën nivelin 2.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Drejtuesit e ekipit bënë ecjet e përditshme këtë javë dhe çdo gjetje ka një përgjegjës.",
+            "standard": "Plani LPA, niveli i drejtuesit të ekipit.",
+            "topic": "standard"
+          },
+          {
+            "text": "Kontrolli i pirunit para përdorimit është nënshkruar për çdo makinë dhe turn.",
+            "standard": "Fleta e kontrollit të pirunit, çdo turn.",
+            "topic": "safety"
+          },
+          {
+            "text": "Malli i dëmtuar është etiketuar dhe në karantinë, jo në vendin e mbledhjes.",
+            "standard": "Procesi i dëmeve: etiketo, karantinë, regjistro brenda turnit.",
+            "topic": "quality"
+          },
+          {
+            "text": "Malli në rampë qëndron nën maksimumin e shënuar në dysheme.",
+            "standard": "Maksimumi i rampës: dy orë mallra në hyrje.",
+            "topic": "flow"
+          },
+          {
+            "text": "Tabela e KPI-ve është e përditësuar dhe çdo KPI e kuqe ka një veprim me përgjegjës.",
+            "standard": "Tabela ditore: e kuqja do të thotë veprim.",
+            "topic": "visual"
+          },
+          {
+            "text": "Dorëzimi i turnit është i shkruar dhe turni tjetër e ka lexuar.",
+            "standard": "Fleta e dorëzimit e nënshkruar nga të dy drejtuesit.",
+            "topic": "flow"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Gjetjet e muajit të kaluar janë mbyllur ose kanë një datë.",
+            "standard": "Lista e veprimeve: asnjë gjetje më e vjetër se 30 ditë pa datë.",
+            "topic": "standard"
+          },
+          {
+            "text": "Rastet pothuajse aksident u raportuan dhe u diskutuan në bisedën e sigurisë.",
+            "standard": "Procesi i rasteve pothuajse aksident: raportim brenda turnit.",
+            "topic": "safety"
+          },
+          {
+            "text": "Pikët 5S të zonave të vizituara nuk kanë rënë që nga auditi i fundit.",
+            "standard": "Auditi 5S, çdo muaj.",
+            "topic": "fives"
+          },
+          {
+            "text": "Çdo detyrë kritike mbulohet nga të paktën dy persona të trajnuar në turn.",
+            "standard": "Matrica e aftësive: dy për çdo detyrë kritike.",
+            "topic": "people"
+          },
+          {
+            "text": "KPI-të e cilësisë (mbledhje të gabuara, dëme) janë në objektiv ose kanë një kundërmasë.",
+            "standard": "Objektivat e cilësisë në tabelën e objektit.",
+            "topic": "quality"
+          },
+          {
+            "text": "Drejtuesit në terren mund ta shpjegojnë standardin që kontrollojnë dhe pse ka rëndësi.",
+            "standard": "Puna standarde e drejtuesit, nivelet 1 dhe 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    },
+    "hotel": {
+      "name": "Hotel",
+      "areas": [
+        "Recepsioni",
+        "Depoja e housekeeping-ut",
+        "Kuzhina"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Recepsioni ndjek standardin e check-in-it: përshëndetja, dokumenti, garancia e pagesës, çelësi.",
+            "standard": "SOP e check-in-it, versioni në zyrën e pasme.",
+            "topic": "standard"
+          },
+          {
+            "text": "Statusi i dhomave në PMS përputhet me raportin e housekeeping-ut në oraret e rëna dakord.",
+            "standard": "Kontrolli i statusit të dhomave në 11:00 dhe 15:00.",
+            "topic": "quality"
+          },
+          {
+            "text": "Karrocat e pastrimit janë të furnizuara sipas listës dhe të parkuara jashtë korridorit.",
+            "standard": "Lista e karrocës dhe rregulli i korridorit.",
+            "topic": "fives"
+          },
+          {
+            "text": "Kimikatet janë të etiketuara dhe të mbyllura; dorezat mbahen.",
+            "standard": "Udhëzimi për substancat e rrezikshme.",
+            "topic": "safety"
+          },
+          {
+            "text": "Libri i dorëzimit ka çështjet e hapura të mysafirëve me një përgjegjës.",
+            "standard": "Dorëzimi i turnit, kolona e çështjeve të hapura.",
+            "topic": "flow"
+          },
+          {
+            "text": "Stafi i ri punon me një trajner dhe lista e tij është nënshkruar për detyrat e sotme.",
+            "standard": "Lista e kontrollit të hyrjes në punë.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Drejtuesit e ekipit bënë ecjet e përditshme këtë javë dhe çdo gjetje ka një përgjegjës.",
+            "standard": "Plani LPA, niveli i drejtuesit të ekipit.",
+            "topic": "standard"
+          },
+          {
+            "text": "Daljet emergjente dhe rrugët e evakuimit janë të lira dhe tabelat ndriçojnë.",
+            "standard": "Kontrolli i sigurisë nga zjarri, çdo javë.",
+            "topic": "safety"
+          },
+          {
+            "text": "Ankesat e mysafirëve të kësaj jave janë regjistruar me shkakun dhe rikuperimin.",
+            "standard": "Regjistri i ankesave brenda 24 orëve.",
+            "topic": "quality"
+          },
+          {
+            "text": "Stoku i lirit dhe i artikujve të dhomës është midis min dhe maks në çdo depo kati.",
+            "standard": "Nivelet standarde për çdo depo kati.",
+            "topic": "flow"
+          },
+          {
+            "text": "Tabela e departamentit tregon KPI-të e javës dhe çdo e kuqe ka një veprim.",
+            "standard": "Tabela e departamentit: e kuqja do të thotë veprim.",
+            "topic": "visual"
+          },
+          {
+            "text": "Pesë dhoma të inspektuara plotësojnë standardin e dhomës.",
+            "standard": "Lista e inspektimit të dhomës.",
+            "topic": "quality"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Gjetjet e muajit të kaluar janë mbyllur ose kanë një datë.",
+            "standard": "Lista e veprimeve: asnjë gjetje më e vjetër se 30 ditë pa datë.",
+            "topic": "standard"
+          },
+          {
+            "text": "Aksidentet dhe rastet pothuajse aksident u rishikuan me drejtuesit e departamenteve.",
+            "standard": "Rishikimi mujor i sigurisë.",
+            "topic": "safety"
+          },
+          {
+            "text": "Trendi i vlerësimit të mysafirëve u diskutua me ekipin dhe u zgjodh një përmirësim.",
+            "standard": "Takimi mujor për vlerësimet.",
+            "topic": "visual"
+          },
+          {
+            "text": "Çdo detyrë kritike (night audit, check-in, HACCP) ka dy persona të trajnuar.",
+            "standard": "Matrica e aftësive: dy për çdo detyrë kritike.",
+            "topic": "people"
+          },
+          {
+            "text": "Regjistrimet HACCP të kuzhinës janë të plota për muajin.",
+            "standard": "Plani HACCP, regjistrime ditore.",
+            "topic": "quality"
+          },
+          {
+            "text": "Drejtuesit në terren mund ta shpjegojnë standardin që kontrollojnë dhe pse ka rëndësi.",
+            "standard": "Puna standarde e drejtuesit, nivelet 1 dhe 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    },
+    "delivery-station": {
+      "name": "Stacion shpërndarjeje",
+      "areas": [
+        "Salla e ndarjes",
+        "Korsitë e përgatitjes",
+        "Oborri dhe rampat",
+        "Kafazi i kthimeve"
+      ],
+      "questions": {
+        "team-lead": [
+          {
+            "text": "Të gjithë në oborr dhe te rripi mbajnë jelek reflektues dhe këpucë sigurie.",
+            "standard": "Rregulli i MMP-së për stacionin.",
+            "topic": "safety"
+          },
+          {
+            "text": "Thasët dhe kutitë janë në korsinë e duhur për rrugën e duhur para valës së parë.",
+            "standard": "Plani i përgatitjes për çdo valë.",
+            "topic": "flow"
+          },
+          {
+            "text": "Ngarkimi ndjek radhën e ndalesave: ndalesa e fundit hyn e para.",
+            "standard": "Standardi i ngarkimit dhe fleta e rrugës.",
+            "topic": "standard"
+          },
+          {
+            "text": "Pakot e dëmtuara ose të lagura shkojnë me etiketë në raftin e zgjidhjes së problemeve.",
+            "standard": "Procesi i dëmeve te rripi.",
+            "topic": "quality"
+          },
+          {
+            "text": "Skanerët, karrocat dhe kafazet janë kthyer në vendet e tyre.",
+            "standard": "Plani i sallës me vendet fikse.",
+            "topic": "fives"
+          },
+          {
+            "text": "Shoferët morën udhëzimin e rrugës dhe këshillën e sigurisë së ditës.",
+            "standard": "Takimi i mëngjesit: pesë minuta, një këshillë sigurie.",
+            "topic": "people"
+          }
+        ],
+        "area-manager": [
+          {
+            "text": "Drejtuesit e ekipit bënë ecjet e përditshme këtë javë dhe çdo gjetje ka një përgjegjës.",
+            "standard": "Plani LPA, niveli i drejtuesit të ekipit.",
+            "topic": "standard"
+          },
+          {
+            "text": "Në oborr respektohen kufiri i shpejtësisë dhe trafiku njëkahësh, dhe korridori është i lirë.",
+            "standard": "Plani i trafikut në oborr.",
+            "topic": "safety"
+          },
+          {
+            "text": "Pakot që mungojnë dhe ato të drejtuara gabim të javës kanë një shkak.",
+            "standard": "Rishikimi javor i humbjeve dhe ndarjeve të gabuara.",
+            "topic": "quality"
+          },
+          {
+            "text": "Asnjë karrocë nuk pret në korsi më shumë se 20 minuta pasi ka nisur ngarkimi.",
+            "standard": "Qëndrimi në korsi nën 20 minuta.",
+            "topic": "flow"
+          },
+          {
+            "text": "Tabela e stacionit (nisja në kohë, dëmet, mungesat) është e përditësuar, me veprime te e kuqja.",
+            "standard": "Tabela e stacionit: e kuqja do të thotë veprim.",
+            "topic": "visual"
+          },
+          {
+            "text": "Kontrollet e furgonit (gomat, dritat, dëmet) janë bërë dhe regjistruar para nisjes.",
+            "standard": "Kontrolli i mjetit para nisjes.",
+            "topic": "safety"
+          }
+        ],
+        "site-lead": [
+          {
+            "text": "Gjetjet e muajit të kaluar janë mbyllur ose kanë një datë.",
+            "standard": "Lista e veprimeve: asnjë gjetje më e vjetër se 30 ditë pa datë.",
+            "topic": "standard"
+          },
+          {
+            "text": "Rastet pothuajse aksident dhe incidentet u rishikuan me drejtuesit e ekipit dhe partnerët e shpërndarjes.",
+            "standard": "Rishikimi mujor i sigurisë.",
+            "topic": "safety"
+          },
+          {
+            "text": "Pikët 5S të zonave të vizituara nuk kanë rënë që nga auditi i fundit.",
+            "standard": "Auditi 5S, çdo muaj.",
+            "topic": "fives"
+          },
+          {
+            "text": "Çdo detyrë kritike (ndarja, ngarkimi, zgjidhja e problemeve) ka dy persona të trajnuar në turn.",
+            "standard": "Matrica e aftësive: dy për çdo detyrë kritike.",
+            "topic": "people"
+          },
+          {
+            "text": "KPI-të e klientit (dorëzimi i suksesshëm, ankesat) janë në objektiv ose kanë një kundërmasë.",
+            "standard": "Objektivat e klientit në tabelën e stacionit.",
+            "topic": "quality"
+          },
+          {
+            "text": "Drejtuesit në terren mund ta shpjegojnë standardin që kontrollojnë dhe pse ka rëndësi.",
+            "standard": "Puna standarde e drejtuesit, nivelet 1 dhe 2.",
+            "topic": "people"
+          }
+        ]
+      }
+    }
+  },
+  "topics": {
+    "safety": {
+      "name": "Siguria",
+      "meaning": "Një standard sigurie që rrëshqet një herë në ditë është standard që askush s'e beson. Zgjidhja është drejtimi i dukshëm, jo një poster tjetër.",
+      "moves": [
+        "Ndalo punën sapo ta shohësh dhe rregulloje bashkë me personin, jo kundër tij.",
+        "Pyet çfarë e bën mënyrën e sigurt më të vështirë se të pasigurtën, dhe hiqe.",
+        "Fute rregullin në takimin e fillimit të turnit për pesë ditët e ardhshme."
+      ],
+      "question": "Çfarë e bën këtu mënyrën e pasigurt më të lehtë?"
+    },
+    "standard": {
+      "name": "Puna standarde",
+      "meaning": "Kur standardi nuk zbatohet, shpesh është i paqartë, i vjetëruar ose i pamundur në kohën që jepet. Kontrollo standardin para njerëzve.",
+      "moves": [
+        "Shiko një cikël kundrejt standardit të shkruar dhe shëno çdo ndryshim.",
+        "Rishkruaje hapin me njerëzit që e bëjnë dhe vendose versionin e ri te stacioni.",
+        "Kontrollo të njëjtën pyetje në tri ecjet e ardhshme."
+      ],
+      "question": "A mund të ma tregojë personi standardin, dhe a funksionon ai në kohën që ka?"
+    },
+    "fives": {
+      "name": "Rregulli dhe 5S",
+      "meaning": "Sendet jashtë vendit rikthehen kur s'kanë vend të caktuar, ose kur vendi është gabim. Jepi çdo sendi një vend aty ku përdoret.",
+      "moves": [
+        "Shëno vendin e sendit me etiketë dhe vijë në dysheme.",
+        "Pyet pse ishte parkuar aty: s'kishte vend, kohë apo rregull?",
+        "Vlerësoje zonën në auditin 5S këtë javë."
+      ],
+      "question": "Ku duhet të qëndrojë që kthimi në vend të jetë zgjedhja e lehtë?"
+    },
+    "quality": {
+      "name": "Cilësia",
+      "meaning": "Një kontroll cilësie i anashkaluar e lë gabimin të udhëtojë te klienti. Gjej ku kontrolli është i vështirë dhe bëje pjesë të rrjedhës.",
+      "moves": [
+        "Ndiq një gabim mbrapsht deri te hapi ku u bë.",
+        "Bëje kontrollin të dukshëm në atë hap: një raft, një ngjyrë, një skanim.",
+        "Numëroji gabimet çdo ditë në tabelë për dy javë."
+      ],
+      "question": "Në cilin hap mund të kapet ky gabim në momentin që ndodh?"
+    },
+    "visual": {
+      "name": "Menaxhimi vizual",
+      "meaning": "Një tabelë që s'është e përditësuar i thotë ekipit se askush s'e shikon. Kur drejtuesit e përdorin çdo ditë, ekipi e mban të përditësuar.",
+      "moves": [
+        "Mbaje takimin e turnit të ardhshëm para tabelës dhe pyet për numrat e kuq.",
+        "Shkurtoje tabelën te numrat për të cilët dikush vepron.",
+        "Jepi çdo KPI-je të kuqe një përgjegjës dhe një datë, të shkruar në tabelë."
+      ],
+      "question": "Kush e pa sot këtë tabelë, dhe çfarë bëri për shkak të saj?"
+    },
+    "flow": {
+      "name": "Rrjedha dhe dorëzimi",
+      "meaning": "Stoku që grumbullohet dhe dorëzimet që humbin tregojnë se hapat nuk janë të lidhur. Kufizo atë që pret dhe bëje dorëzimin një moment të caktuar.",
+      "moves": [
+        "Shëno një maksimum në dysheme dhe bini dakord çfarë ndodh kur arrihet.",
+        "Cakto orën dhe vendin e dorëzimit dhe përdor një fletë të vetme.",
+        "Ndiq rrjedhën nga stoku që pret mbrapsht te hapi që e dërgon."
+      ],
+      "question": "Çfarë pret këtu, dhe kush vendos kur lëviz?"
+    },
+    "people": {
+      "name": "Njerëzit dhe aftësitë",
+      "meaning": "Një standard është aq i fortë sa trajnimi që ka pas. Boshllëqet shfaqen së pari te njerëzit e rinj dhe te detyrat që i bën vetëm një person.",
+      "moves": [
+        "Kontrollo matricën e aftësive për detyrën dhe cakto personin e dytë për trajnim.",
+        "Vendose të sapoardhurin me një kujdestar për pjesën tjetër të javës.",
+        "Kërkoji drejtuesit ta shpjegojë standardin; aty ku s'mundet, trajno së pari drejtuesin."
+      ],
+      "question": "Nëse ky person mungon nesër, kush e bën detyrën sipas standardit?"
+    }
+  },
+  "wastes": [
+    {
+      "key": "transport",
+      "name": "Transporti",
+      "definition": "Mallrat ose dokumentet lëvizen më shumë sesa kërkon puna.",
+      "example": "Paletat lëvizen dy herë: nga rampa te buferi, nga buferi te rafti."
+    },
+    {
+      "key": "inventory",
+      "name": "Inventari",
+      "definition": "Më shumë stok ose punë në proces sesa i duhet hapit tjetër.",
+      "example": "Tre orë mallra në hyrje presin në dyshemenë e rampës."
+    },
+    {
+      "key": "motion",
+      "name": "Lëvizja",
+      "definition": "Njerëzit ecin, përkulen ose kërkojnë më shumë sesa kërkon detyra.",
+      "example": "Paketuesi ecën 20 m çdo orë për të marrë shirit ngjitës."
+    },
+    {
+      "key": "waiting",
+      "name": "Pritja",
+      "definition": "Njerëzit ose mallrat qëndrojnë në vend duke pritur diçka.",
+      "example": "Ngarkuesit presin kamionin; kamioni pret dokumentet."
+    },
+    {
+      "key": "overproduction",
+      "name": "Mbiprodhimi",
+      "definition": "Prodhohet ose përgatitet më shumë, ose më herët, sesa i duhet klientit.",
+      "example": "Etiketat printohen për gjithë valën para se porositë të jenë përfundimtare."
+    },
+    {
+      "key": "overprocessing",
+      "name": "Mbipërpunimi",
+      "definition": "Bëhet më shumë me produktin sesa paguan klienti.",
+      "example": "Çdo pako mbështillet dy herë; një skanim i dytë që s'e lexon askush."
+    },
+    {
+      "key": "defects",
+      "name": "Defektet",
+      "definition": "Gabime që kërkojnë ripunim, kontroll të dytë ose ankesë.",
+      "example": "Mbledhje të gabuara zbulohen te paketimi dhe kthehen në korridor."
+    },
+    {
+      "key": "skills",
+      "name": "Aftësitë e papërdorura",
+      "definition": "Idetë dhe aftësitë e ekipit që askush nuk i kërkon.",
+      "example": "Turni i natës di një rrugë më të shpejtë; askush s'e ka shkruar."
+    },
+    {
+      "key": "mura",
+      "name": "Mura (çrregullsia)",
+      "definition": "Puna vjen me maja dhe gropa në vend të një rrjedhe të njëtrajtshme.",
+      "example": "80% e kamionëve vijnë midis orës 6 dhe 8; pasditja është bosh."
+    },
+    {
+      "key": "muri",
+      "name": "Muri (mbingarkesa)",
+      "definition": "Njerëz ose makineri të ngarkuar përtej një ngarkese të sigurt e të qëndrueshme.",
+      "example": "Një person shkarkon vetëm një kontejner në fund të një turni të dyfishtë."
+    }
+  ],
+  "tips": [
+    [
+      "Shko e shiko, pastaj pyet.",
+      "Qëndro aty ku bëhet puna. Kërkoji personit të ta tregojë, jo të ta thotë."
+    ],
+    [
+      "Kontrollo standardin, jo personin.",
+      "Një “jo” do të thotë se standardi nuk mbajti sot. Pyet çfarë e bëri të vështirë para se të pyesësh kush."
+    ],
+    [
+      "Çdo nivel ecën.",
+      "Drejtuesit e ekipit çdo ditë, menaxherët çdo javë, drejtuesi i objektit çdo muaj. Nivelet më të larta kontrollojnë që të poshtmit t'i mbyllin gjetjet."
+    ],
+    [
+      "Numëro humbjet pa faj.",
+      "Në ecjen për humbjet, shtyp + për çdo humbje që sheh. Numri tregon ku të shikosh; njerëzit të tregojnë pse."
+    ],
+    [
+      "Mbyll ciklin.",
+      "Çdo “jo” që s'e rregullon në vend bëhet veprim me përgjegjës dhe datë, dhe ecja e radhës e kontrollon."
+    ]
+  ],
+  "example": {
+    "template": "warehouse",
+    "walks": [
+      {
+        "day": -27,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 10,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Dy paleta të parkuara mbi vijën e verdhë te dera 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -26,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Zona e mbledhjes A",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -26,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Rampa e pranimit",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "yynnyy",
+        "findings": {
+          "2": "Kuti të dëmtuara në vendin e mbledhjes, pa etiketë",
+          "3": "Hyrja mbi maksimumin e dyshemesë: tri korsi plot"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -25,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Paketimi",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 14,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -24,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e daljes",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 10,
+        "answers": "yyynyy",
+        "findings": {
+          "3": "Dy skanerë të pakarikuar në fillim të turnit"
+        },
+        "acts": []
+      },
+      {
+        "day": -24,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Zona e mbledhjes A",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "KPI e mbledhjeve të gabuara e kuqe prej dy ditësh, pa veprim"
+        },
+        "acts": []
+      },
+      {
+        "day": -23,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -22,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Zona e mbledhjes A",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 14,
+        "answers": "ynyyya",
+        "findings": {
+          "1": "Kafaze bosh në korridor pranë pikës së karikimit"
+        },
+        "acts": []
+      },
+      {
+        "day": -22,
+        "type": "lpa",
+        "layer": "site-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Elira",
+        "shift": "Mëngjes",
+        "minutes": 45,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Norma e dëmeve mbi objektiv, kundërmasa e parënë dakord"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -20,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Paketimi",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -19,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e daljes",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 12,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Tabela orare e paplotësuar që nga ora 10:00"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -19,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Rampa e daljes",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "ynyyny",
+        "findings": {
+          "1": "Fleta e kontrollit të pirunit 4 e panënshkruar në turnin e pasdites",
+          "4": "KPI e mbledhjeve të gabuara e kuqe prej dy ditësh, pa veprim"
+        },
+        "acts": [
+          4
+        ]
+      },
+      {
+        "day": -18,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Dy paleta të parkuara mbi vijën e verdhë te dera 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -17,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Zona e mbledhjes A",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -17,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Rampa e pranimit",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "yyynya",
+        "findings": {
+          "3": "Hyrja mbi maksimumin e dyshemesë: tri korsi plot"
+        },
+        "acts": []
+      },
+      {
+        "day": -16,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Paketimi",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 12,
+        "answers": "yyyyyn",
+        "findings": {
+          "5": "I sapoardhuri punon vetëm te stacioni i paketimit 4"
+        },
+        "acts": [
+          5
+        ]
+      },
+      {
+        "day": -15,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e daljes",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -15,
+        "type": "waste",
+        "layer": "area-manager",
+        "area": "Zona e mbledhjes A",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "tallies": {
+          "transport": 4,
+          "inventory": 3,
+          "motion": 11,
+          "waiting": 7,
+          "overproduction": 1,
+          "overprocessing": 2,
+          "defects": 3,
+          "skills": 1,
+          "mura": 2,
+          "muri": 1
+        },
+        "notes": {
+          "motion": "Mbledhësit kthehen në fillim për çdo listë të re mbledhjeje",
+          "waiting": "Pritje për rimbushje në korridorin 12"
+        }
+      },
+      {
+        "day": -13,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 10,
+        "answers": "yyynya",
+        "findings": {
+          "3": "Dy skanerë të pakarikuar në fillim të turnit"
+        },
+        "acts": []
+      },
+      {
+        "day": -12,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Zona e mbledhjes A",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -12,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Paketimi",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "yyyynn",
+        "findings": {
+          "4": "KPI e mbledhjeve të gabuara e kuqe prej dy ditësh, pa veprim",
+          "5": "Turni i pasdites nuk e lexoi dorëzimin"
+        },
+        "acts": [
+          5
+        ]
+      },
+      {
+        "day": -11,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Paketimi",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Karroca e mbështjelljes e lënë në korridor"
+        },
+        "acts": []
+      },
+      {
+        "day": -10,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e daljes",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -10,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Rampa e pranimit",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "nyynyy",
+        "findings": {
+          "0": "Dy gjetje nga java e kaluar pa përgjegjës",
+          "3": "Hyrja mbi maksimumin e dyshemesë: tri korsi plot"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -9,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 12,
+        "answers": "nyyyya",
+        "findings": {
+          "0": "Vizitor në rampë pa jelek"
+        },
+        "acts": []
+      },
+      {
+        "day": -8,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Zona e mbledhjes A",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -8,
+        "type": "lpa",
+        "layer": "area-manager",
+        "area": "Zona e mbledhjes A",
+        "walker": "Dritan",
+        "shift": "Mëngjes",
+        "minutes": 30,
+        "answers": "yyynyy",
+        "findings": {
+          "3": "Hyrja mbi maksimumin e dyshemesë: tri korsi plot"
+        },
+        "acts": [
+          3
+        ]
+      },
+      {
+        "day": -6,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Paketimi",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 10,
+        "answers": "yynyyy",
+        "findings": {
+          "2": "Version i vjetër i udhëzimit të paketimit te stacioni 2"
+        },
+        "acts": [
+          2
+        ]
+      },
+      {
+        "day": -5,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e daljes",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 12,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -4,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 14,
+        "answers": "ynyyyy",
+        "findings": {
+          "1": "Dy paleta të parkuara mbi vijën e verdhë te dera 3"
+        },
+        "acts": [
+          1
+        ]
+      },
+      {
+        "day": -3,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Zona e mbledhjes A",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 10,
+        "answers": "yyyyya",
+        "findings": {},
+        "acts": []
+      },
+      {
+        "day": -3,
+        "type": "waste",
+        "layer": "team-lead",
+        "area": "Rampa e pranimit",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 25,
+        "tallies": {
+          "transport": 8,
+          "inventory": 6,
+          "motion": 4,
+          "waiting": 9,
+          "overproduction": 0,
+          "overprocessing": 1,
+          "defects": 2,
+          "skills": 0,
+          "mura": 5,
+          "muri": 3
+        },
+        "notes": {
+          "waiting": "Kamionët presin te porta për një derë të lirë",
+          "mura": "Gjashtë kamionë midis 6:00 dhe 7:00, asnjë pas 10:00",
+          "transport": "Paletat parkohen në bufer, pastaj lëvizen sërish te rafti"
+        }
+      },
+      {
+        "day": -2,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Paketimi",
+        "walker": "Anna",
+        "shift": "Mëngjes",
+        "minutes": 12,
+        "answers": "yyyyny",
+        "findings": {
+          "4": "Tabela orare e paplotësuar që nga ora 10:00"
+        },
+        "acts": []
+      },
+      {
+        "day": -1,
+        "type": "lpa",
+        "layer": "team-lead",
+        "area": "Rampa e daljes",
+        "walker": "Besnik",
+        "shift": "Pasdite",
+        "minutes": 14,
+        "answers": "yyyyyy",
+        "findings": {},
+        "acts": []
+      }
+    ]
+  }
+}

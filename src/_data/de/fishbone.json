@@ -1,0 +1,57 @@
+{
+  "storageKey": "sc-fishbone-de",
+  "text": {
+    "tool": "Fischgräte",
+    "untitled": "Diagramm ohne Titel",
+    "copySuffix": "Kopie",
+    "effectPlaceholder": "z. B. Touren verlassen die Rampe zu spät",
+    "causePlaceholder": "z. B. Scanner zu Schichtbeginn nicht geladen",
+    "subPlaceholder": "Warum? z. B. Nur zehn Ladeplätze",
+    "csvName": "fischgraete-ursachen",
+    "checkText": "Vor Ort gesehen: mit Daten bestätigt oder ausgeschlossen, und das Ergebnis neben der Ursache notiert"
+  },
+  "sets": [
+    { "key": "6m", "name": "6M · Produktion, Lager, Zustellung", "categories": ["Mensch", "Maschine", "Methode", "Material", "Messung", "Umwelt"] },
+    { "key": "4p", "name": "4P · Dienstleistung", "categories": ["Richtlinien", "Abläufe", "Menschen", "Ort"] },
+    { "key": "service5", "name": "Service 5 · Hotel", "categories": ["Menschen", "Prozess", "Ort", "Ausstattung", "Information"] }
+  ],
+  "tips": [
+    ["Schreiben Sie die Wirkung als Tatsache.", "„Touren verlassen die Rampe zu spät“, mit der Zahl, wenn Sie sie haben. Nicht „schlechte Verladung“: Ein Urteil verdeckt die Ursachen."],
+    ["Füllen Sie die Gräten mit dem Team.", "Wer die Arbeit macht, kennt die Ursachen. Zehn Minuten am Board schlagen eine Stunde am Schreibtisch."],
+    ["Fragen Sie bei jeder Ursache nach dem Warum.", "Eine Unterursache ist die Antwort auf „Warum passiert das?“. Eine Ebene reicht hier; tiefer geht es mit 5 Whys."],
+    ["Erst abstimmen, dann das Wahrscheinliche markieren.", "Jede Person hat drei Stimmen. Die Ursachen mit den meisten Stimmen prüfen Sie zuerst, Sie beheben sie nicht zuerst."],
+    ["Prüfen, bevor Sie abstellen.", "Eine wahrscheinliche Ursache bleibt eine Vermutung, bis sie jemand vor Ort gesehen hat. Jede wird eine Maßnahme zur Prüfung, mit Verantwortlichem und Termin."]
+  ],
+  "example": {
+    "effect": "Touren verlassen die Rampe zu spät",
+    "set": "6m",
+    "causes": [
+      [
+        { "text": "Briefing dauert länger, Verladung beginnt spät", "likely": true, "votes": 5, "subs": ["Kein festes Ende für das Briefing", "Infos werden Tour für Tour vorgelesen"] },
+        { "text": "Neue Fahrer kennen die Ladereihenfolge nicht", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Ausfälle am Montag zu spät ersetzt", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Scanner zu Schichtbeginn nicht geladen", "likely": true, "votes": 4, "subs": ["Ladestation hat nur zehn Plätze"] },
+        { "text": "Rampentor 3 klemmt bei Kälte", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Alle Touren auf einmal an die Rampe, nicht in Wellen", "likely": true, "votes": 6, "subs": ["Planungsschluss um 05:30", "Keine Reihenfolge nach Abfahrtszeit"] },
+        { "text": "Ladecheckliste je Schicht verschieden", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Späte Änderungen an den Stopplisten", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Pakete einer Tour auf mehrere Rollcontainer verteilt", "likely": false, "votes": 3, "subs": ["Überlaufbahn des Sorters ist gemischt"] },
+        { "text": "Rollcontainer fehlen an den Toren", "likely": false, "votes": 2, "subs": [] }
+      ],
+      [
+        { "text": "Abfahrt am Hoftor erfasst, nicht an der Rampe", "likely": false, "votes": 1, "subs": [] },
+        { "text": "Keine tägliche Sicht auf späte Abfahrten je Tour", "likely": false, "votes": 2, "subs": [] }
+      ],
+      [
+        { "text": "Hof gegen 06:00 von Linienverkehr-Lkw blockiert", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Dunkler Hof im Winter verlangsamt die Abfahrtskontrolle", "likely": false, "votes": 0, "subs": [] }
+      ]
+    ]
+  }
+}

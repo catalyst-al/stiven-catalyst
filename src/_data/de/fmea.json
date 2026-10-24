@@ -1,0 +1,176 @@
+{
+  "storageKey": "sc-fmea-de",
+  "text": {
+    "tool": "FMEA",
+    "csv": "fmea",
+    "processPlaceholder": "z. B. Warenausgang: Kommissionierung, Packen, Verladung",
+    "ownerPlaceholder": "z. B. Anna Berg, Leitung Warenausgang",
+    "revisionPlaceholder": "z. B. A",
+    "actionPlaceholder": "Was die Ursache oder die Kontrolle verändert",
+    "empty": "Noch keine Fehlerarten erfasst."
+  },
+  "status": { "open": "Offen", "done": "Erledigt" },
+  "ap": { "H": "Hoch", "M": "Mittel", "L": "Niedrig" },
+  "columns": {
+    "step": "Prozessschritt",
+    "function": "Funktion / Anforderung",
+    "mode": "Mögliche Fehlerart",
+    "effect": "Mögliche Fehlerfolge",
+    "s": "Bedeutung (S)",
+    "cause": "Mögliche Fehlerursache",
+    "o": "Auftreten (O)",
+    "prevention": "Aktuelle Vermeidungsmaßnahme",
+    "detection": "Aktuelle Entdeckungsmaßnahme",
+    "d": "Entdeckung (D)",
+    "rpn": "RPZ",
+    "ap": "Aufgabenpriorität (AP)",
+    "crit": "Kritikalität (S×O)",
+    "action": "Empfohlene Maßnahme",
+    "owner": "Verantwortlich",
+    "due": "Termin",
+    "status": "Status",
+    "s2": "S nach Maßnahme",
+    "o2": "O nach Maßnahme",
+    "d2": "D nach Maßnahme",
+    "rpn2": "RPZ nach Maßnahme"
+  },
+  "scales": {
+    "S": {
+      "name": "Bedeutung",
+      "question": "Wie schwer wiegt die Folge für den Kunden oder die Menschen, wenn der Fehler eintritt?",
+      "levels": [
+        ["Keine", "Keine spürbare Auswirkung."],
+        ["Sehr gering", "Eine kleine Unannehmlichkeit, die wenige bemerken."],
+        ["Gering", "Eine kleine Unannehmlichkeit, die die meisten bemerken; keine Nacharbeit."],
+        ["Sehr niedrig", "Etwas Nacharbeit oder eine kurze Verzögerung innerhalb der Schicht."],
+        ["Niedrig", "Nacharbeit oder ein verspäteter Auftrag; der Kunde bemerkt es."],
+        ["Mäßig", "Eine beschädigte oder unvollständige Lieferung; Beschwerde und Nachlieferung."],
+        ["Hoch", "Der Prozess steht oder braucht viel Nacharbeit; ein Kunde kann verloren gehen."],
+        ["Sehr hoch", "Die Leistung fällt für viele Kunden gleichzeitig aus."],
+        ["Gefährlich, mit Vorwarnung", "Sicherheits- oder Rechtsverstoß, der sich vorher ankündigt."],
+        ["Gefährlich, ohne Vorwarnung", "Verletzung oder Rechtsverstoß ohne jede Vorwarnung."]
+      ]
+    },
+    "O": {
+      "name": "Auftreten",
+      "question": "Wie oft führt diese Ursache zum Fehler, so wie der Prozess heute läuft?",
+      "levels": [
+        ["Unwahrscheinlich", "Praktisch ausgeschlossen; niemand hat es je gesehen."],
+        ["Sehr gering", "Ein paar Mal im Jahr."],
+        ["Gering", "Etwa einmal im Monat."],
+        ["Mäßig gering", "Ein paar Mal im Monat."],
+        ["Mäßig", "Etwa einmal pro Woche."],
+        ["Mäßig hoch", "Mehrmals pro Woche."],
+        ["Hoch", "Etwa einmal pro Schicht."],
+        ["Sehr hoch", "Mehrmals pro Schicht."],
+        ["Sehr hoch, wiederholt", "Mehrmals pro Stunde."],
+        ["Fast sicher", "Passiert fast jedes Mal, wenn der Schritt läuft."]
+      ]
+    },
+    "D": {
+      "name": "Entdeckung",
+      "question": "Wie wahrscheinlich fangen die heutigen Kontrollen den Fehler ab, bevor er den Kunden erreicht?",
+      "levels": [
+        ["Fast sicher", "Der Fehler kann den Schritt nicht passieren; er wird an der Quelle blockiert."],
+        ["Sehr hoch", "Eine automatische Prüfung am Schritt fängt ihn jedes Mal ab."],
+        ["Hoch", "Eine automatische Prüfung an einem späteren Schritt fängt ihn ab."],
+        ["Mäßig hoch", "Eine zweite Person prüft am Schritt."],
+        ["Mäßig", "Die Mitarbeiterin oder der Mitarbeiter prüft am Schritt mit dem Auge."],
+        ["Gering", "Sichtprüfung an einem späteren Schritt oder Stichprobe."],
+        ["Sehr gering", "Wird nur zufällig oder in einem Audit gefunden."],
+        ["Unwahrscheinlich", "Wird erst nach dem Prozess von der nächsten Abteilung gefunden."],
+        ["Sehr unwahrscheinlich", "Wird nur vom Kunden gefunden."],
+        ["Nicht entdeckbar", "Keine Kontrolle; wird nie oder zu spät gefunden."]
+      ]
+    }
+  },
+  "templates": [
+    {
+      "id": "warehouse",
+      "name": "Lager Warenausgang",
+      "process": "Warenausgang: Kommissionierung, Packen, Verladung",
+      "steps": [
+        ["Kommissionierung", "Richtiger Artikel, richtige Menge, richtiger Behälter"],
+        ["Packen", "Richtiger Karton, Polsterung und Etikett; Paket verschlossen und gescannt"],
+        ["Verladung", "Stabile Wand im richtigen Lkw; Türen rechtzeitig geschlossen"]
+      ]
+    },
+    {
+      "id": "hotel",
+      "name": "Hotel Check-in und Night Audit",
+      "process": "Front Office: vom Check-in bis zum Night Audit",
+      "steps": [
+        ["Check-in", "Gast identifiziert, richtiges Zimmer und richtige Rate, Schlüssel übergeben"],
+        ["Zahlungsgarantie", "Karte autorisiert oder Anzahlung genommen für jeden Aufenthalt"],
+        ["Buchung", "Jede Leistung auf dem richtigen Folio am richtigen Tag"],
+        ["Night Audit", "Tag abgeschlossen: No-Shows belastet, Buchungen geprüft, Berichte erstellt"]
+      ]
+    },
+    {
+      "id": "delivery",
+      "name": "Zustellroute",
+      "process": "Letzte Meile: beladen, fahren, übergeben, zurück",
+      "steps": [
+        ["Beladen des Fahrzeugs", "Pakete in Stopp-Reihenfolge, jedes auf das Fahrzeug gescannt"],
+        ["Fahrt zum Stopp", "Richtige Adresse, geplante Reihenfolge, sicheres Fahren"],
+        ["Übergabe an der Tür", "Richtiges Paket an die richtige Person, mit Zustellnachweis"],
+        ["Rückkehr ins Depot", "Nicht zugestellte Pakete mit Grund zurückgescannt"]
+      ]
+    }
+  ],
+  "advice": {
+    "H": {
+      "meaning": "Aufgabenpriorität hoch: Das Team muss eine Maßnahme finden, die das Auftreten senkt oder die Entdeckung verbessert, oder dokumentieren, warum das nicht geht. Die Bedeutung ändert sich selten; die Ursache und die Kontrollen schon.",
+      "moves": [
+        "Vereinbaren Sie diese Woche eine Maßnahme mit einem Verantwortlichen und einem Termin; ein Wunsch ohne Verantwortlichen ist keine Maßnahme.",
+        "Bevorzugen Sie eine Änderung, die die Ursache abstellt (Vermeidung), vor einer, die den Fehler später findet (Entdeckung).",
+        "Wenn die Maßnahme umgesetzt ist, bewerten Sie S, O und D in derselben Zeile neu und vergleichen Sie die RPZ."
+      ],
+      "question": "Was müsste an diesem Schritt gelten, damit dieser Fehler unmöglich wird?"
+    },
+    "M": {
+      "meaning": "Aufgabenpriorität mittel: Das Team sollte eine Maßnahme finden; lohnt sich keine, halten Sie fest, warum das Risiko akzeptiert wird, mit den Kontrollen, die es dort halten.",
+      "moves": [
+        "Prüfen Sie zuerst die Entdeckungsmaßnahme: Eine günstige Prüfung am Schritt verschiebt D oft um mehrere Punkte.",
+        "Geben Sie der Maßnahme einen Verantwortlichen und einen Termin, oder dokumentieren Sie die Entscheidung, das Risiko zu akzeptieren.",
+        "Bewerten Sie nach der Maßnahme neu; ein Mittel, das niedrig wird, macht das Team frei für das nächste."
+      ],
+      "question": "Welcher Kontrolle vertrauen wir hier, und wann haben wir sie zuletzt wirken sehen?"
+    },
+    "L": {
+      "meaning": "Aufgabenpriorität niedrig: Keine Maßnahme nötig. Behalten Sie die vorhandenen Kontrollen bei und prüfen Sie die Zeile, wenn sich der Prozess ändert.",
+      "moves": [
+        "Halten Sie die Vermeidungs- und Entdeckungsmaßnahmen im Standard fest.",
+        "Prüfen Sie die Bewertung, wenn sich Volumen, Personal oder Layout ändern.",
+        "Setzen Sie die Zeit des Teams zuerst bei den hohen und mittleren Zeilen ein."
+      ],
+      "question": "Welche Kontrolle hält dieses Risiko niedrig, und ist sie heute noch da?"
+    }
+  },
+  "example": {
+    "process": "Paketzentrum Warenausgang, Spätschicht",
+    "owner": "Anna Berg, Leitung Warenausgang",
+    "revision": "B",
+    "daysAgo": 6,
+    "rows": [
+      { "step": "Verladung", "function": "Stabile Wand im Lkw", "mode": "Pakete beim Verladen gequetscht", "effect": "Beschädigte Ware, Reklamation, Nachlieferung", "s": 6, "cause": "Schwere Pakete zur Spitzenzeit auf leichten gestapelt", "o": 8, "prevention": "Stapelstandard an der Torwand", "detection": "Keine, bis die Zustellbasis den Schaden scannt", "d": 7, "action": "Zone „Schweres zuerst“ am Tor und Wandkontrolle vor dem Schließen der Türen", "owner": "Marko", "dueIn": 10, "status": "open", "s2": 6, "o2": 3, "d2": 4 },
+      { "step": "Etikettierung", "function": "Ein richtiges Etikett pro Paket", "mode": "Falsches Etikett auf dem Paket", "effect": "Fehlleitung, verspätete Zustellung, neu etikettieren", "s": 5, "cause": "Zwei Etiketten nacheinander gedruckt und vertauscht genommen", "o": 4, "prevention": "Druck auf Abruf am Packplatz", "detection": "Scanprüfung am Sorter", "d": 3, "action": "Drucker gibt das Etikett erst nach dem Paketscan frei", "owner": "Lea", "dueIn": 14, "status": "open" },
+      { "step": "Kommissionierung", "function": "Richtiger Artikel und richtige Menge", "mode": "Artikel fehlt im Auftrag", "effect": "Unvollständige Lieferung, Beschwerde", "s": 6, "cause": "Leerer Platz am Lagerort; der Kommissionierer überspringt ihn", "o": 5, "prevention": "Nachschub vor der Welle", "detection": "Gewichtsprüfung beim Packen", "d": 4, "action": "Eine Unterentnahme braucht einen Grundcode; sie kann nicht übersprungen werden", "owner": "Jonas", "dueIn": 7, "status": "done", "s2": 6, "o2": 2, "d2": 4 },
+      { "step": "Wagentransport", "function": "Wagen zur Wellenzeit an der Packlinie", "mode": "Wagen kommt zu spät zum Packen", "effect": "Packplatz steht, Welle verspätet, Cut-off verpasst", "s": 5, "cause": "Zur Spitzenzeit nur ein Aufzug frei", "o": 7, "prevention": "Wellenplan", "detection": "Schichtleitung sieht die Lücke auf der Fläche", "d": 6, "action": "Zweiter Aufzugschlüssel und ein Wagenläufer ab 20:00", "owner": "Marko", "dueIn": 5, "status": "open" },
+      { "step": "Packen", "function": "Richtiger Karton und Polsterung", "mode": "Karton zu groß, keine Polsterung", "effect": "Artikel im Transport beschädigt", "s": 5, "cause": "Richtige Kartongröße nicht am Platz", "o": 5, "prevention": "Kartonmix pro Packplatz", "detection": "Keine", "d": 8, "action": "Kartongröße pro Artikelgruppe auf der Packliste gedruckt", "owner": "Lea", "dueIn": 12, "status": "open" },
+      { "step": "Sortierung", "function": "Paket in die richtige Rutsche", "mode": "Paket in der falschen Rutsche", "effect": "Fehlleitung, Zustellung am nächsten Tag", "s": 4, "cause": "Etikett zerknittert und unlesbar", "o": 3, "prevention": "Etikettenprüfung beim Packen", "detection": "No-Read-Alarm am Sorter", "d": 2, "action": "", "owner": "", "dueIn": null, "status": "open" },
+      { "step": "Verladung", "function": "Türen rechtzeitig geschlossen und verplombt", "mode": "Lkw fährt ohne die letzte Gitterbox", "effect": "Pakete bleiben am Tor, verspätete Zustellung", "s": 7, "cause": "Verlader kennt die Anzahl der Gitterboxen nicht", "o": 3, "prevention": "Anzahl der Gitterboxen auf dem Ladeschein", "detection": "Disponent prüft den Schein vor der Freigabe", "d": 3, "action": "Ladeschein von Verlader und Disponent unterschrieben", "owner": "Dana", "dueIn": 9, "status": "open" },
+      { "step": "Verladung", "function": "Sicheres Arbeiten am Tor", "mode": "Hubwagen trifft den Fuß eines Verladers", "effect": "Verletzung, Ausfallzeit", "s": 9, "cause": "Wagen in der engen Torgasse abgestellt", "o": 3, "prevention": "Markierte Gassen", "detection": "Rundgang der Schichtleitung alle zwei Stunden", "d": 7, "action": "Abgeklebte Parkzone für Wagen; kein Wagen in der Gasse", "owner": "Anna", "dueIn": 3, "status": "open", "s2": 9, "o2": 2, "d2": 5 },
+      { "step": "Eingangsscan", "function": "Jedes Paket bei Ankunft gescannt", "mode": "Eingehendes Paket nicht gescannt", "effect": "Paket unsichtbar, Cut-off verpasst, Kunde nicht informiert", "s": 5, "cause": "Scanner-Akku mitten in der Schicht leer", "o": 4, "prevention": "Ladeplan", "detection": "Zählung gegen das Manifest", "d": 5, "action": "Ein Ersatzscanner pro Tor", "owner": "Jonas", "dueIn": 7, "status": "done", "s2": 5, "o2": 2, "d2": 5 },
+      { "step": "Packen", "function": "Zerbrechliche Artikel gekennzeichnet und gepolstert", "mode": "Zerbrechlicher Artikel ohne Polsterung gepackt", "effect": "Zerbrochener Artikel, Rückerstattung", "s": 6, "cause": "Kennzeichen „zerbrechlich“ fehlt im System", "o": 4, "prevention": "Kennzeichen je Artikelnummer", "detection": "Keine", "d": 9, "action": "Die 50 empfindlichsten Artikelnummern diese Woche kennzeichnen", "owner": "Lea", "dueIn": 6, "status": "open" },
+      { "step": "Abfertigung", "function": "Manifest vor der Abfahrt geschlossen", "mode": "Manifest nach Abfahrt des Lkw geschlossen", "effect": "Pakete einen Tag lang nicht nachverfolgbar", "s": 3, "cause": "Disponent betreut zur Spitzenzeit zwei Tore", "o": 5, "prevention": "Ein Disponent pro Tor ab 21:00", "detection": "Systemalarm, wenn die Abfahrt vor dem Manifest liegt", "d": 2, "action": "", "owner": "", "dueIn": null, "status": "open" },
+      { "step": "Verladung", "function": "Ladung gesichert", "mode": "Gitterbox im Lkw nicht verriegelt", "effect": "Gitterbox rollt, Pakete gequetscht, Verlader verletzt", "s": 8, "cause": "Sperrstange fehlt in manchen Lkw", "o": 3, "prevention": "Lkw-Kontrolle am Tor", "detection": "Rundgang des Fahrers", "d": 4, "action": "Lkw ohne Sperrstange werden am Tor abgewiesen", "owner": "Dana", "dueIn": 14, "status": "open" }
+    ]
+  },
+  "tips": [
+    ["Bewerten Sie die Ursache, nicht die Person.", "Das Auftreten sagt, wie oft die Ursache zum Fehler führt, so wie der Prozess heute läuft, egal wer Schicht hat."],
+    ["Entdeckung meint die heutigen Kontrollen.", "Bewerten Sie die Chance, dass das, was Sie jetzt haben, den Fehler vor dem Kunden abfängt, nicht die Prüfung, die Sie einführen wollen."],
+    ["AP vor RPZ.", "Zwei Zeilen mit derselben RPZ können verschieden dringend sein: Eine Bedeutung 9 mit seltenem Auftreten bekommt trotzdem eine Maßnahme. Lesen Sie zuerst die AP, dann die RPZ."],
+    ["Nach der Maßnahme neu bewerten.", "Das ist der Sinn des Blatts: Ist die Maßnahme umgesetzt, bewerten Sie S, O und D in derselben Zeile neu und sehen, wo das Risiko jetzt steht."]
+  ]
+}

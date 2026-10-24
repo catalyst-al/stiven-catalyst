@@ -1,0 +1,57 @@
+{
+  "storageKey": "sc-fishbone",
+  "text": {
+    "tool": "Fishbone",
+    "untitled": "Untitled diagram",
+    "copySuffix": "copy",
+    "effectPlaceholder": "e.g. Routes leave the dock late",
+    "causePlaceholder": "e.g. Scanners not charged at shift start",
+    "subPlaceholder": "Why? e.g. Only ten charging slots",
+    "csvName": "fishbone-causes",
+    "checkText": "Seen on the floor: confirmed with data or ruled out, and the result written next to the cause"
+  },
+  "sets": [
+    { "key": "6m", "name": "6M · production, warehouse, delivery", "categories": ["People", "Machine", "Method", "Material", "Measurement", "Environment"] },
+    { "key": "4p", "name": "4P · service", "categories": ["Policies", "Procedures", "People", "Place"] },
+    { "key": "service5", "name": "Service 5 · hotels", "categories": ["People", "Process", "Place", "Equipment", "Information"] }
+  ],
+  "tips": [
+    ["Write the effect as a fact.", "\"Routes leave the dock late\", with the number if you have it. Not \"bad loading\": a judgement hides the causes."],
+    ["Fill the bones with the team.", "The people who do the work know the causes. Ten minutes at the board beat an hour at the desk."],
+    ["Ask why on each cause.", "A sub-cause is the answer to \"why does this happen?\". One level is enough here; deeper goes to 5 Whys."],
+    ["Vote, then mark what is likely.", "Each person gets three votes. The causes with the most votes are the ones to check first, not the ones to fix first."],
+    ["Verify before you fix.", "A likely cause is a guess until someone has seen it on the floor. Each one becomes an action to verify, with an owner and a date."]
+  ],
+  "example": {
+    "effect": "Routes leave the dock late",
+    "set": "6m",
+    "causes": [
+      [
+        { "text": "Briefing runs over and loading starts late", "likely": true, "votes": 5, "subs": ["No fixed end time for the briefing", "Updates read out route by route"] },
+        { "text": "New drivers unsure of the loading sequence", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Monday absences covered too late", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Scanners not charged at shift start", "likely": true, "votes": 4, "subs": ["Charging rack has only ten slots"] },
+        { "text": "Dock door 3 jams in the cold", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "All routes released to the dock at once, not in waves", "likely": true, "votes": 6, "subs": ["Planning cut-off at 05:30", "No sequence by departure time"] },
+        { "text": "Loading checklist differs between shifts", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Late changes to the stop lists", "likely": false, "votes": 1, "subs": [] }
+      ],
+      [
+        { "text": "Parcels of one route spread over several cages", "likely": false, "votes": 3, "subs": ["Sorter overflow lane is mixed"] },
+        { "text": "Roll cages missing at the doors", "likely": false, "votes": 2, "subs": [] }
+      ],
+      [
+        { "text": "Departure logged at the yard gate, not at the dock", "likely": false, "votes": 1, "subs": [] },
+        { "text": "No daily view of late departures by route", "likely": false, "votes": 2, "subs": [] }
+      ],
+      [
+        { "text": "Yard blocked by line-haul trucks around 06:00", "likely": false, "votes": 2, "subs": [] },
+        { "text": "Dark yard in winter slows the pre-trip checks", "likely": false, "votes": 0, "subs": [] }
+      ]
+    ]
+  }
+}

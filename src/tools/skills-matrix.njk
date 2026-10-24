@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Skills Matrix
+seo_title: "Skills matrix for warehouse, hotel front office and delivery station: ILU levels, cover and training plan"
+description: "Rate each person on each task from 0 to 4: cover against target, single points of failure, cover per shift and a training plan for the Action Tracker."
+activeNav: /tools.html
+permalink: /tools/skills-matrix/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · People</p>
+  <h1>Skills Matrix</h1>
+  <p class="lede">List your team and its tasks, and rate each person on each task from 0, not trained, to 4, can train. The tool shows which tasks hang on one person, which have no cover on a shift, who is below the minimum, and suggests a training plan that pairs a trainer with a trainee, the most critical gaps first.</p>
+</section>
+
+{% set cfg = skillsMatrix %}
+{% include "partials/skills-matrix.njk" %}

@@ -1,0 +1,234 @@
+{
+  "storageKey": "sc-process-lab-de",
+  "csv": "prozesslabor",
+  "example": {
+    "name": "Beladezeit",
+    "unit": "min",
+    "lsl": "30",
+    "usl": "50",
+    "target": "40",
+    "rows": [
+      "2026-09-14|38.4",
+      "2026-09-14|42.4",
+      "2026-09-14|39.9",
+      "2026-09-15|43.6",
+      "2026-09-15|43.1",
+      "2026-09-15|43.4",
+      "2026-09-16|39",
+      "2026-09-16|34.9",
+      "2026-09-16|42.6",
+      "2026-09-17|41",
+      "2026-09-17|39.4",
+      "2026-09-17|37.8",
+      "2026-09-18|42.3",
+      "2026-09-18|33.2",
+      "2026-09-18|42.9",
+      "2026-09-21|41.1",
+      "2026-09-21|43.2",
+      "2026-09-21|40.8",
+      "2026-09-22|41.2",
+      "2026-09-22|42.4",
+      "2026-09-22|41.4",
+      "2026-09-23|47.8",
+      "2026-09-23|56.4",
+      "2026-09-23|42",
+      "2026-09-24|43",
+      "2026-09-24|39.2",
+      "2026-09-24|39.7",
+      "2026-09-25|46.2",
+      "2026-09-25|41.5",
+      "2026-09-25|43.9",
+      "2026-09-28|42.4",
+      "2026-09-28|42.4",
+      "2026-09-28|46.9",
+      "2026-09-29|42.6",
+      "2026-09-29|41.2",
+      "2026-09-29|42.5",
+      "2026-09-30|45.5",
+      "2026-09-30|43.6",
+      "2026-09-30|46.8",
+      "2026-10-01|48.7",
+      "2026-10-01|41.4",
+      "2026-10-01|38",
+      "2026-10-02|42.3",
+      "2026-10-02|44.9",
+      "2026-10-02|40.8",
+      "2026-10-05|48.2",
+      "2026-10-05|29.6",
+      "2026-10-05|43.3",
+      "2026-10-06|49.3",
+      "2026-10-06|45",
+      "2026-10-06|41.1",
+      "2026-10-07|49.2",
+      "2026-10-07|47.1",
+      "2026-10-07|41.6",
+      "2026-10-08|47.7",
+      "2026-10-08|43",
+      "2026-10-08|37.3",
+      "2026-10-09|49.3",
+      "2026-10-09|44.7",
+      "2026-10-09|38.5"
+    ],
+    "proportion": {
+      "label1": "Vorher",
+      "label2": "Nachher",
+      "d1": "104",
+      "n1": "18400",
+      "d2": "61",
+      "n2": "18200"
+    },
+    "means": {
+      "a": "47,2\n44,1\n49,5\n42,8\n46,3\n45,0\n50,1\n43,7\n48,4\n44,9\n41,6\n46,8\n45,5\n49,0\n43,2",
+      "b": "41,3\n39,8\n43,5\n40,2\n42,1\n38,7\n44,0\n40,9\n39,5\n42,6\n41,8\n37,9\n43,1\n40,4\n41,0"
+    },
+    "size": {
+      "p0": "0,57",
+      "p1": "0,34",
+      "alpha": "5",
+      "power": "80",
+      "sd": "4",
+      "delta": "2",
+      "alpha2": "5",
+      "power2": "80"
+    }
+  },
+  "placeholders": {
+    "values": "42,4\n39,9\n43,6\noder  14.09.2026\t42,4",
+    "name": "z. B. Beladezeit",
+    "unit": "z. B. min",
+    "before": "47,2\n44,1\n49,5",
+    "after": "41,3\n39,8\n43,5"
+  },
+  "rules": [
+    {
+      "id": 1,
+      "name": "Außerhalb 3σ",
+      "signal": "Punkt {n} ({value}) liegt außerhalb der 3σ-Grenze.",
+      "text": "Ein Messwert weit außerhalb der Grenzen. Bei diesem einen war etwas anders: Finden Sie es, solange sich alle noch erinnern."
+    },
+    {
+      "id": 2,
+      "name": "Verschiebung",
+      "signal": "{n} Punkte in Folge auf derselben Seite des Mittelwerts (Punkte {from}–{to}).",
+      "text": "Das Niveau hat sich verschoben. Nach einer Änderung, die Sie gemacht haben, ist das der Beweis, dass sie wirkt; ohne eine Änderung finden Sie heraus, was sich geändert hat."
+    },
+    {
+      "id": 3,
+      "name": "Trend",
+      "signal": "{n} Punkte in Folge, jeder {direction} als der vorherige (Punkte {from}–{to}).",
+      "text": "Etwas driftet: Verschleiß, ein wachsender Rückstand, Ermüdung oder eine langsame Änderung im Mix."
+    },
+    {
+      "id": 4,
+      "name": "Sägezahn",
+      "signal": "{n} Punkte in Folge abwechselnd auf und ab (Punkte {from}–{to}).",
+      "text": "Auf, ab, auf, ab: meist zwei Ströme, die abwechselnd gemessen werden (zwei Schichten, zwei Tore, zwei Mitarbeitende), oder Nachregeln nach jedem Wert."
+    },
+    {
+      "id": 5,
+      "name": "2 von 3 außerhalb 2σ",
+      "signal": "2 von 3 Punkten außerhalb 2σ auf derselben Seite (Punkte {from}–{to}).",
+      "text": "Eine kleine Verschiebung, die die Grenze noch nicht überschritten hat. Behandeln Sie sie als Frühwarnung und sehen Sie sich diese Punkte an."
+    },
+    {
+      "id": 6,
+      "name": "4 von 5 außerhalb 1σ",
+      "signal": "4 von 5 Punkten außerhalb 1σ auf derselben Seite (Punkte {from}–{to}).",
+      "text": "Der Prozess neigt zu einer Seite. Oft eine Änderung beim Input, bei der Besetzung oder der Tageszeit."
+    },
+    {
+      "id": 7,
+      "name": "Zu ruhig",
+      "signal": "{n} Punkte in Folge innerhalb 1σ um den Mittelwert (Punkte {from}–{to}).",
+      "text": "Weniger Streuung, als dieser Prozess zeigt: Die Messung sieht die Unterschiede vielleicht nicht, oder zwei Ströme mitteln sich gegenseitig aus."
+    },
+    {
+      "id": 8,
+      "name": "Mischung",
+      "signal": "{n} Punkte in Folge außerhalb 1σ auf beiden Seiten, keiner nahe am Mittelwert (Punkte {from}–{to}).",
+      "text": "Die Werte springen zwischen zwei Niveaus: Zwei Prozesse sind in einer Karte gemischt. Trennen Sie sie (nach Schicht, Tor, Produkt) und führen Sie für jeden eine Karte."
+    }
+  ],
+  "directions": {
+    "up": "höher",
+    "down": "niedriger"
+  },
+  "control": {
+    "stable": "Kein Signal in {n} Messwerten. Das Auf und Ab ist das normale Rauschen dieses Prozesses; auf einzelne Werte zu reagieren hilft nicht. Für eine bessere Zahl muss sich der Prozess selbst ändern.",
+    "signals": "{count} Signal(e), die kein normales Rauschen sind. Untersuchen Sie zuerst diese Messwerte: Was war anders bei Menge, Personal, Ausrüstung oder Methode? Bringen Sie die Ursache dann in die 5 Whys.",
+    "short": "Weniger als 20 Messwerte: Die Grenzen sind grob. Messen Sie weiter, bevor Sie einem Signal oder einem Fähigkeitsindex vertrauen."
+  },
+  "capability": {
+    "none": "Tragen Sie eine Spezifikationsgrenze (LSL oder USL) ein, um zu sehen, wie fähig der Prozess ist.",
+    "low": {
+      "label": "Nicht fähig",
+      "text": "Cpk {cpk}: Der Prozess kann nicht innerhalb der Spezifikation bleiben. Erwarten Sie etwa {ppm} pro Million außerhalb ({pct}). Verringern Sie die Streuung oder verschieben Sie den Mittelwert, bevor jemand dem Kunden etwas zusagt."
+    },
+    "marginal": {
+      "label": "Grenzwertig",
+      "text": "Cpk {cpk}: Es passt, aber nur knapp. Erwarten Sie etwa {ppm} pro Million außerhalb ({pct}); eine kleine Drift bringt Sie über die Grenze. Führen Sie die Karte weiter."
+    },
+    "capable": {
+      "label": "Fähig",
+      "text": "Cpk {cpk}: Der Prozess passt mit Reserve in die Spezifikation. Erwarten Sie etwa {ppm} pro Million außerhalb ({pct}). Halten Sie den Standard und prüfen Sie die Karte wöchentlich."
+    },
+    "six": {
+      "label": "Six Sigma",
+      "text": "Cpk {cpk}: Die Spezifikation ist doppelt so breit, wie der Prozess sie braucht. Erwarten Sie etwa {ppm} pro Million außerhalb. Setzen Sie die Kraft woanders ein."
+    },
+    "gap": "Cp {cp}, aber Cpk {cpk}: Die Streuung würde passen, der Prozess liegt nicht mittig. Den Mittelwert Richtung {target} zu verschieben bringt mehr, als die Streuung zu verringern.",
+    "shortLong": "Pp/Ppk ({pp}/{ppk}) liegen deutlich unter Cp/Cpk: Der Prozess verschiebt sich zwischen den Messungen. Die Signale auf der Karte zeigen, wo."
+  },
+  "normality": {
+    "normal": "Die Werte folgen einer Normalverteilung (Anderson-Darling, {p}): Den Fähigkeitsindizes und dem erwarteten Anteil außerhalb können Sie vertrauen.",
+    "notNormal": "Die Werte folgen keiner Normalverteilung (Anderson-Darling, {p}): Lesen Sie Cp, Cpk und den erwarteten Anteil außerhalb als grobe Werte. Sehen Sie sich das Histogramm an: Ein langer Ausläufer bedeutet meist Wartezeit oder Nacharbeit in einigen Fällen; zwei Gipfel bedeuten zwei gemischte Prozesse.",
+    "outliers": "Die {n} Punkt(e) außerhalb der Grenzen ziehen an den Rändern. Ohne sie ist die Stichprobe {verdict} ({p}). Klären Sie zuerst diese Punkte, dann beurteilen Sie den Rest.",
+    "normalWord": "normalverteilt",
+    "notNormalWord": "immer noch nicht normalverteilt",
+    "few": "Weniger als 8 Messwerte: Noch ist kein Normalitätstest aussagekräftig."
+  },
+  "drift": "Über die ganze Stichprobe driften die Werte um {slope} {unit} pro Punkt (r = {r}). Eine langsame Drift ist noch kein Signal, aber sie wird eines.",
+  "proportion": {
+    "real": "Die Änderung von {p1} auf {p2} ist echt ({p}): Die Wahrscheinlichkeit, dass es Rauschen ist, liegt unter {chance}. 95-%-Intervall für die Differenz: {low} bis {high}.",
+    "noise": "Die Änderung von {p1} auf {p2} kann Rauschen sein ({p}): Mit diesen Zahlen entsteht ein Unterschied dieser Größe in etwa {chance} der Fälle durch Zufall. Messen Sie weiter, bevor Sie von einer Verbesserung sprechen, oder von einem Problem.",
+    "borderline": "Die Änderung von {p1} auf {p2} ist wahrscheinlich echt ({p}), aber nicht zweifelsfrei: Die Wahrscheinlichkeit, dass es Rauschen ist, liegt bei etwa {chance}. Eine weitere Woche Daten würde es klären.",
+    "oneInWords": "1 zu {n}",
+    "better": "besser",
+    "worse": "schlechter"
+  },
+  "means": {
+    "real": "Der Mittelwert ging von {m1} auf {m2} ({diff}): echt (Welch t = {t}, {p}). 95-%-Intervall für die Änderung: {low} bis {high}.",
+    "noise": "Der Mittelwert ging von {m1} auf {m2} ({diff}), aber das kann Rauschen sein ({p}): Die beiden Stichproben überlappen zu stark, um es zu sagen. Messen Sie mehr oder verringern Sie die Streuung.",
+    "borderline": "Der Mittelwert ging von {m1} auf {m2} ({diff}): wahrscheinlich echt ({p}), noch nicht zweifelsfrei. Ein paar weitere Messwerte auf jeder Seite würden es klären.",
+    "need": "Fügen Sie auf jeder Seite mindestens zwei Werte ein."
+  },
+  "size": {
+    "alpha": "Alpha ist das Risiko, eine Änderung zu sehen, die es nicht gibt: 5 % bedeutet einen Fehlalarm in zwanzig Tests.",
+    "power": "Die Teststärke ist die Chance, eine Änderung zu sehen, die es gibt: 80 % bedeutet, dass Sie eine echte Änderung einmal in fünf übersehen.",
+    "proportionResult": "Messen Sie {n} Einheiten vorher und {n} nachher, um {p0} von {p1} zu unterscheiden.",
+    "meanResult": "Messen Sie {n} Werte vorher und {n} nachher, um eine Änderung von {delta} {unit} zu sehen, wenn Einzelwerte um {sd} streuen.",
+    "need": "Tragen Sie zwei verschiedene Quoten, Alpha und Teststärke ein."
+  },
+  "tips": [
+    [
+      "Messen Sie, bevor Sie ändern.",
+      "Zwanzig Werte des alten Prozesses sind der einzige Beweis, dass Ihre Änderung wirkt. Beginnen Sie die Karte heute."
+    ],
+    [
+      "Grenzen kommen vom Prozess, Spezifikationen vom Kunden.",
+      "Eingriffsgrenzen sagen, was der Prozess tut; LSL und USL sagen, was gebraucht wird. Ein stabiler Prozess kann trotzdem ein schlechter sein."
+    ],
+    [
+      "Verfolgen Sie Signale, nicht Werte.",
+      "Ein Wert innerhalb der Grenzen ist Rauschen, so schlecht er aussieht. Eine Nelson-Regel ist ein Grund, in die Halle zu gehen."
+    ],
+    [
+      "p ist kein Beweis, aber es beendet Diskussionen.",
+      "p = 0,002 bedeutet, dass ein Unterschied dieser Größe 2-mal in 1.000 durch Zufall entsteht. Entscheiden Sie mit der Zahl, dann handeln Sie."
+    ],
+    [
+      "Erklären Sie Ausreißer, bevor Sie sie löschen.",
+      "Ein Lkw, der zwei Stunden gewartet hat, ist echt. Finden Sie seine Geschichte; erst dann entscheiden Sie, ob er in die Stichprobe gehört."
+    ]
+  ]
+}

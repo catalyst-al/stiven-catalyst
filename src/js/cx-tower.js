@@ -1497,6 +1497,7 @@
         goTo("actions");
       });
       actions.append(whys, plan);
+      if (TK.trackerLink) actions.append(TK.trackerLink(tx("Add to actions"), { title: tx("Act on “{cause}”: {n} incidents, {p} of the total", { cause: top.key, n: int.format(top.amount), p: pct(top.share, 0) }), source: "cx-control-tower", priority: "High" }));
     }
     chartBox.append(actions);
     out.push(chartBox);

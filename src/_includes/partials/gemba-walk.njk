@@ -1,0 +1,149 @@
+{#- The Gemba Walk: layered process audits and waste walks, the log, the schedule per layer; gemba-walk.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-gemba-walk>
+    <div class="dl-box gw-setup">
+      <fieldset>
+        <legend class="kicker">1 · {{ "Walk setup" | t(lang) }}</legend>
+        <div class="gw-type" role="group" aria-label="{{ 'Type of walk' | t(lang) }}">
+          {%- for type in cfg.types %}
+          <button type="button" data-type-value="{{ type.key }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ type.name }}</button>
+          {%- endfor %}
+        </div>
+        <p class="form-note gw-layer-note" data-layer-note></p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="gw-layer">{{ "Layer" | t(lang) }}</label>
+            <select id="gw-layer">
+              {%- for layer in cfg.layers %}
+              <option value="{{ layer.key }}">{{ layer.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="gw-template">{{ "Checklist" | t(lang) }}</label>
+            <select id="gw-template">
+              {%- for key, tpl in cfg.templates %}
+              <option value="{{ key }}">{{ tpl.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field" hidden>
+            <label for="gw-area-select">{{ "Area" | t(lang) }}</label>
+            <select id="gw-area-select"></select>
+          </div>
+          <div class="field">
+            <label for="gw-area">{{ "Area" | t(lang) }}</label>
+            <input id="gw-area" list="gw-area-list" placeholder="{{ cfg.text.areaPlaceholder }}" autocomplete="off">
+            <datalist id="gw-area-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="gw-walker">{{ "Walker" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="gw-walker" placeholder="{{ cfg.text.walkerPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="gw-date">{{ "Date" | t(lang) }}</label>
+            <input id="gw-date" type="date">
+          </div>
+          <div class="field">
+            <label for="gw-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="gw-shift"></select>
+          </div>
+          <div class="field">
+            <label for="gw-minutes">{{ "Duration (minutes)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="gw-minutes" type="number" min="1" step="1" inputmode="numeric" placeholder="15">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="dl-box gw-walk">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "On the floor" | t(lang) }}</p>
+      </div>
+      <p class="form-note gw-progress" data-progress aria-live="polite"></p>
+      <div class="gw-lpa" data-lpa>
+        <div class="gw-questions" data-questions></div>
+      </div>
+      <div class="gw-waste-walk" data-waste hidden>
+        <div class="gw-timer">
+          <span class="gw-timer-label">{{ "Elapsed" | t(lang) }}</span>
+          <output class="gw-timer-value" data-timer aria-live="off">00:00</output>
+          <button class="button-secondary" type="button" data-timer-toggle aria-pressed="false">{{ "Start the timer" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-timer-reset hidden>{{ "Reset" | t(lang) }}</button>
+        </div>
+        <div class="gw-wastes" data-wastes></div>
+      </div>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-save disabled>{{ "Save walk" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-add-actions disabled>{{ "Add findings to actions" | t(lang) }}</button>
+        <a class="button-ghost" href="{{ '/tools/action-tracker/' | local(lang) }}" data-tracker-link>{{ "Open the Action Tracker" | t(lang) }}</a>
+        <button class="button-ghost" type="button" data-sheet-print>{{ "Print the walk sheet" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-reset>{{ "New walk" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-walk-status aria-live="polite"></p>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Walk log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table gw-log">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Type" | t(lang) }}</th><th scope="col">{{ "Layer" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "Walker" | t(lang) }}</th><th scope="col" class="num">{{ "Result" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ "No walks yet." | t(lang) }} {{ "Walk the floor and save it, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box gw-cadence">
+      <fieldset>
+        <legend class="kicker">4 · {{ "Schedule" | t(lang) }}</legend>
+        <p class="form-note">{{ "How often each layer walks. The next walk is due one cadence after the last one; the results flag a layer that is late." | t(lang) }}</p>
+        <div class="dl-grid">
+          {%- for layer in cfg.layers %}
+          <div class="field">
+            <label for="gw-cadence-{{ layer.key }}">{{ layer.name }}</label>
+            <select id="gw-cadence-{{ layer.key }}" data-cadence="{{ layer.key }}">
+              {%- for cadence in cfg.cadences %}
+              <option value="{{ cadence.key }}"{% if cadence.key == layer.cadence %} selected{% endif %}>{{ cadence.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          {%- endfor %}
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The same finding keeps coming back?" | t(lang) }}</strong> {{ "Find the root cause with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+      <li><strong>{{ "Order and standards" | t(lang) }}</strong> {{ "Score the area in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-s-audit/' | local(lang) }}">{{ "5S Audit" | t(lang) }}</a> {{ "and write the missing standard in" | t(lang) }} <a class="inline-link" href="{{ '/tools/standard-work/' | local(lang) }}">{{ "Standard Work" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results gw-results" data-results tabindex="-1" hidden></section>
+<section class="shell gw-sheet" data-sheet hidden></section>
+
+<script type="application/json" id="gemba-walk-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/gemba-walk.js' | assetUrl }}" defer></script>

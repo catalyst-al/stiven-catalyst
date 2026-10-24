@@ -70,6 +70,7 @@
           {%- if id not in ["cover", "contents", "back"] %}
           {%- if id.startsWith("family:") %}{% set f = F[id.slice(7)] %}{% set label = g.labels.family %}{% set title = f.name + " · " + (f.role | t(lang)) %}
           {%- elif id.startsWith("tool:") %}{% set label = F[toolsGuide.familyOfTool[id.slice(5)]].name %}{% set title = T[id.slice(5)].name %}
+          {%- elif id.startsWith("routine:") %}{% set label = F[id.slice(8)].name %}{% set title = g.labels.routine %}
           {%- else %}{% set label = g.sections[id].kicker %}{% set title = g.sections[id].title %}{% endif %}
           <li><button type="button" data-book-goto="{{ toolsGuide.pageOf[id] }}"><span class="book-contents-label">{{ label }}</span><span class="book-contents-title">{{ title }}</span><span class="book-contents-page">{{ toolsGuide.pageOf[id] | pad }}</span></button></li>
           {%- endif %}

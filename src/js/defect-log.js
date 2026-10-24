@@ -30,6 +30,24 @@
   const pasteArea = root.querySelector("#dl-paste");
   const results = document.querySelector("[data-results]");
 
+  // The workplace profile (workplace.js), when the page has one: its shifts fill the shift list and its target stands in
+  // for an empty target box, so a site sets them once. Without it the log runs on its own data, as before.
+  const Workplace = window.Workplace || null;
+  const TARGET_KEY = KEY.includes("damage") ? "damage" : KEY.includes("incomplete") ? "incomplete" : KEY.includes("night") ? "nightAudit" : null;
+  const shiftOptions = () => (Workplace?.shifts().length ? Workplace.shifts() : field.shift.options);
+  // A per cent, like the box (0.3 means 0.3 %); null when the profile has none.
+  const profileTarget = () => (Workplace && TARGET_KEY ? Workplace.target(TARGET_KEY) : null);
+  const typedTarget = () => str(state.target).trim();
+  // The target as a share: the one typed wins, else the profile's.
+  const targetShare = () => {
+    if (typedTarget()) return parseNumber(state.target) / 100;
+    const own = profileTarget();
+    return own === null ? NaN : own / 100;
+  };
+  const targetInput = root.querySelector('[name="target"]');
+  const targetPlaceholder = targetInput?.placeholder || "";
+  const targetNote = root.querySelector("[data-profile-target]");
+
   const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [], example: {}, totalsFor: {} });
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
@@ -62,7 +80,7 @@
       const value = parseNumber(cost);
       added.push({
         date: parseDate(date),
-        shift: canon(field.shift.options, shift, NOT_RECORDED),
+        shift: canon([...new Set([...shiftOptions(), ...field.shift.options])], shift, NOT_RECORDED),
         stage: canon(field.stage.options, stage, NOT_RECORDED),
         type: canon(field.type.options, type, NOT_RECORDED),
         cause: canon(field.cause.options, cause, NOT_RECORDED),
@@ -88,8 +106,9 @@
   };
   // Known options in process order, then any other names by size.
   const inOrder = (map, name) => {
-    const known = field[name].options.filter((option) => map.has(option)).map((option) => map.get(option));
-    const rest = [...map.values()].filter((item) => !field[name].options.includes(item.key)).sort((a, b) => b.value - a.value);
+    const options = name === "shift" ? shiftOptions() : field[name].options;
+    const known = options.filter((option) => map.has(option)).map((option) => map.get(option));
+    const rest = [...map.values()].filter((item) => !options.includes(item.key)).sort((a, b) => b.value - a.value);
     return [...known, ...rest];
   };
   const bySize = (map) => [...map.values()].sort((a, b) => b.value - a.value || a.key.localeCompare(b.key));
@@ -120,7 +139,7 @@
     const typed = parseNumber(typedVolume.value);
     const fromDays = !(typed > 0) && days.items.length > 0 && !days.missing.length && !days.undated;
     const volume = fromDays ? days.total : typed;
-    const target = parseNumber(state.target) / 100;
+    const target = targetShare();
     const hasVolume = volume > 0 && total <= volume;
     const rate = hasVolume ? total / volume : null;
 
@@ -268,8 +287,21 @@
     periodVolumeInput.placeholder = covers ? tx("from the daily volumes: {n}", { n: int.format(days.total) }) : periodVolumePlaceholder;
   };
 
+  // An empty target box shows the profile's target, and a note says where it comes from.
+  const syncTarget = () => {
+    if (!targetInput) return;
+    const own = typedTarget() ? null : profileTarget();
+    const digits = own === null ? 0 : Math.min(3, (String(own).split(".")[1] || "").length);
+    targetInput.placeholder = own === null ? targetPlaceholder : num(own, digits);
+    if (!targetNote) return;
+    targetNote.hidden = own === null;
+    if (own === null) targetInput.removeAttribute("aria-describedby");
+    else targetInput.setAttribute("aria-describedby", targetNote.id);
+  };
+
   const renderResults = () => {
     syncPeriodVolume();
+    syncTarget();
     renderVolumes();
     results.replaceChildren();
     results.hidden = !state.rows.length;
@@ -333,7 +365,7 @@
     const shares = result.dayVolumes.items.length ? trendShares(result.rows, (row) => row.units, result.dayVolumes.items) : null;
     const useShares = Boolean(shares) && shares.buckets.filter((bucket) => bucket.total > 0).length > 1;
     const trend = useShares ? shares : trendBuckets(result.rows, (row) => row.units);
-    const goal = parseNumber(state.target) / 100;
+    const goal = targetShare();
     const trendUnit = trend.unit === "week" ? tx("week") : tx("day");
     let trendPanel = null;
     if (trend.buckets.length > 1) {
@@ -557,6 +589,27 @@
     flash(entryStatus, tx("Added {count} at {stage}.", { count: plural(units, t.one, t.many), stage: form.stage.value }));
     form.type.focus();
   });
+
+  // The shifts of the profile replace the page's list; a shift chosen before stays, so the next entry does not jump.
+  const shiftSelect = entry.elements.shift;
+  let chosenShift = "";
+  shiftSelect?.addEventListener("change", () => { chosenShift = shiftSelect.value; });
+  const fillShifts = () => {
+    if (!Workplace || !shiftSelect) return;
+    Workplace.fillSelect(shiftSelect, shiftOptions(), chosenShift);
+  };
+  fillShifts();
+  // The note goes as soon as a target is typed, without waiting for the results.
+  targetInput?.addEventListener("input", syncTarget);
+  // The profile changed here (the Daily Board in this page) or in another tab.
+  const profileChanged = () => {
+    fillShifts();
+    book.render();
+  };
+  if (Workplace) {
+    window.addEventListener("workplace:changed", profileChanged);
+    window.addEventListener("storage", (event) => { if (event.key === Workplace.KEY || event.key === null) profileChanged(); });
+  }
 
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
   book.render();

@@ -1,0 +1,15 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Fishbone", "type": "Root causes", "time": "15 min", "summary": "Put the effect at the head and collect causes with the team on the 6M, 4P or hotel bones, each with its why. Votes and likely causes rank them, the likely ones become actions to verify, and the top one goes to 5 Whys or the causes to Pareto.", "url": "/tools/fishbone/", "cta": "Draw the fishbone" },
+    "de": { "name": "Fischgräte", "type": "Ursachen", "time": "15 min", "summary": "Die Wirkung an den Kopf, die Ursachen mit dem Team an die Gräten von 6M, 4P oder Hotel, jede mit ihrem Warum. Stimmen und wahrscheinliche Ursachen ordnen sie, die wahrscheinlichen werden Maßnahmen zur Prüfung, die wichtigste geht zu 5 Whys, die Ursachen gehen zu Pareto.", "url": "/de/tools/fishbone/", "cta": "Fischgräte zeichnen" },
+    "sq": { "name": "Kurrizi i peshkut", "type": "Shkaqet rrënjësore", "time": "15 min", "summary": "Vendos efektin te koka dhe mblidh me ekipin shkaqet në kockat 6M, 4P ose hotel, secili me pse-në e vet. Votat dhe shkaqet e mundshme i renditin, të mundshmet bëhen veprime verifikimi, kryesori shkon te 5 Whys dhe shkaqet te Pareto.", "url": "/sq/tools/fishbone/", "cta": "Vizato kurrizin e peshkut" }
+  },
+  "routine": {
+    "when": "When a problem returns",
+    "do": "Gather the people who do the work for fifteen minutes, fill the bones, vote, and leave with the likely causes as actions to verify on the floor.",
+    "de": { "when": "Wenn ein Problem wiederkehrt", "do": "Holen Sie die Menschen, die die Arbeit machen, für fünfzehn Minuten zusammen, füllen Sie die Gräten, stimmen Sie ab und gehen Sie mit den wahrscheinlichen Ursachen als Maßnahmen zur Prüfung vor Ort auseinander." },
+    "sq": { "when": "Kur një problem kthehet", "do": "Mblidh për pesëmbëdhjetë minuta njerëzit që e bëjnë punën, mbushni kockat, votoni dhe largohuni me shkaqet e mundshme si veprime për t'u verifikuar në terren." }
+  },
+  "recipe": "example"
+}

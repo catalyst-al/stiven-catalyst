@@ -219,7 +219,8 @@ const loadChromium = async () => {
 };
 
 const chromium = await loadChromium();
-const browser = await chromium.launch();
+// CHROMIUM_PATH=/path/to/chromium uses a browser already on the machine instead of the one Playwright downloads.
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const tab = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 const save = async (html, file) => {
   await tab.setContent(html, { waitUntil: "load" });

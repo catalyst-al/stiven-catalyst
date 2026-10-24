@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Action Tracker
+seo_title: "Action tracker for operations teams: owners, due dates, PDCA and verification"
+description: "One private list of actions from every tool: owner, due date, status and how it is verified. Overdue first, a ten-minute weekly review, calendar and Excel."
+activeNav: /tools.html
+permalink: /tools/action-tracker/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Actions</p>
+  <h1>Action Tracker</h1>
+  <p class="lede">Every countermeasure, finding and signal from the other tools lands here with an owner, a date and a way to check it. Overdue first, then this week, then what was verified. The list is the weekly review.</p>
+</section>
+
+{% set cfg = actionTracker %}
+{% include "partials/action-tracker.njk" %}

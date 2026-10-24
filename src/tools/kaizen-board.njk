@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Kaizen Board
+seo_title: "Kaizen board for improvement ideas: PDCA columns, effort and impact matrix"
+description: "The team's improvement ideas from suggestion to verified result: PDCA columns, an effort and impact matrix, adoption rate, savings and the idea of the month."
+activeNav: /tools.html
+permalink: /tools/kaizen-board/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Improvement</p>
+  <h1>Kaizen Board</h1>
+  <p class="lede">Collect the team's improvement ideas and move each one through Plan, Do and Check until the standard changes. The tool ranks the open ideas by effort and impact, shows the quick wins, how many ideas become standard and what they save, and names the idea of the month.</p>
+</section>
+
+{% set cfg = kaizenBoard %}
+{% include "partials/kaizen-board.njk" %}

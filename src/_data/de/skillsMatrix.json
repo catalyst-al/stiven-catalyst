@@ -1,0 +1,116 @@
+{
+  "storageKey": "sc-skills-matrix-de",
+  "text": {
+    "tool": "Qualifikationsmatrix",
+    "teamPlaceholder": "z. B. Warenausgang, Frühschicht",
+    "namePlaceholder": "z. B. Anna",
+    "rolePlaceholder": "z. B. Kommissionierer",
+    "taskPlaceholder": "z. B. Stapler",
+    "csvMatrix": "qualifikationsmatrix",
+    "csvPlan": "schulungsplan",
+    "checkText": "{trainee} erledigt {task} selbstständig auf Stufe {level}, bestätigt von {trainer}"
+  },
+  "levels": [
+    { "name": "Nicht geschult", "note": "Hat die Aufgabe noch nicht ausgeführt." },
+    { "name": "In Einarbeitung", "note": "Lernt die Aufgabe mit einem Trainer an der Seite." },
+    { "name": "Mit Unterstützung", "note": "Erledigt die Aufgabe, mit jemandem in der Nähe, den sie fragen kann." },
+    { "name": "Selbstständig", "note": "Erledigt die Aufgabe allein, nach Standard, in jeder Schicht." },
+    { "name": "Kann schulen", "note": "Bringt die Aufgabe anderen bei und bestätigt deren Stufe." }
+  ],
+  "criticality": ["Niedrig", "Mittel", "Hoch"],
+  "shifts": ["Früh", "Spät", "Nacht"],
+  "templates": {
+    "warehouse": {
+      "name": "Lager",
+      "tasks": [
+        { "name": "Wareneingang", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Einlagerung", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Kommissionierung", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Verpackung", "crit": 2, "min": 1, "target": 3 },
+        { "name": "Verladung", "crit": 3, "min": 0, "target": 3 },
+        { "name": "Stapler", "crit": 3, "min": 0, "target": 2 },
+        { "name": "Retouren", "crit": 1, "min": 0, "target": 2 },
+        { "name": "WMS", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Sicherheitsunterweisung", "crit": 3, "min": 3, "target": 6 }
+      ]
+    },
+    "hotel": {
+      "name": "Hotel-Rezeption",
+      "tasks": [
+        { "name": "Check-in", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Check-out", "crit": 2, "min": 2, "target": 4 },
+        { "name": "Night Audit", "crit": 3, "min": 0, "target": 2 },
+        { "name": "PMS", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Beschwerden", "crit": 2, "min": 1, "target": 3 },
+        { "name": "VCC und Zahlungen", "crit": 3, "min": 1, "target": 3 },
+        { "name": "Gruppenanreisen", "crit": 2, "min": 0, "target": 2 },
+        { "name": "Verhalten im Brandfall", "crit": 3, "min": 3, "target": 5 }
+      ]
+    },
+    "delivery-station": {
+      "name": "Zustellbasis",
+      "tasks": [
+        { "name": "Einschleusen und Sortieren", "crit": 3, "min": 1, "target": 4 },
+        { "name": "Tourenbereitstellung", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Fahrzeugbeladung", "crit": 3, "min": 1, "target": 3 },
+        { "name": "Scanner und Fahrer-App", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Fehlsortierungen und Retouren", "crit": 1, "min": 0, "target": 2 },
+        { "name": "Disposition", "crit": 3, "min": 0, "target": 2 },
+        { "name": "Fahrzeugcheck", "crit": 2, "min": 0, "target": 2 },
+        { "name": "Sicherheitsunterweisung", "crit": 3, "min": 3, "target": 5 }
+      ]
+    }
+  },
+  "advice": {
+    "none": {
+      "meaning": "Niemand im Team erledigt diese Aufgabe allein. Heute läuft sie über jemanden, der noch lernt, oder gar nicht.",
+      "moves": ["Legen Sie fest, wer sie diese Woche abdeckt, auch mit Unterstützung, und sagen Sie es der Schicht.", "Leihen Sie sich eine Stufe 4 aus einem anderen Team oder einer anderen Schicht, um zwei Personen gleichzeitig zu schulen.", "Schreiben Sie den einseitigen Standard der Aufgabe, solange der Trainer auf der Fläche ist."],
+      "question": "Wer hat diese Aufgabe beim letzten Mal erledigt, als sie anfiel, und wie?"
+    },
+    "spof": {
+      "meaning": "Eine Person trägt diese Aufgabe. Ein Urlaub, ein Krankheitstag oder eine Kündigung stoppt sie über Nacht.",
+      "moves": ["Stellen Sie der Person einen Lernenden auf Stufe 2 zur Seite, für einen Block in jeder Schicht.", "Lassen Sie den Lernenden die Aufgabe ausführen, erst unter Beobachtung, dann allein mit der Person in der Nähe.", "Bestätigen Sie Stufe 3 erst, wenn der Lernende die Aufgabe in einer normalen Schicht allein erledigt hat."],
+      "question": "Was passiert mit dieser Aufgabe an dem Tag, an dem diese Person fehlt?"
+    },
+    "short": {
+      "meaning": "Die Aufgabe ist abgedeckt, aber von weniger Personen als geplant. Fällt eine aus, tragen die anderen sie mit Überstunden.",
+      "moves": ["Setzen Sie den Lernenden, der Stufe 3 am nächsten ist, für zwei Wochen auf diese Aufgabe.", "Planen Sie die Schulung in den Dienstplan ein, nicht in die ruhige Stunde, die nie kommt.", "Prüfen Sie die Stufe nach einer normalen Schicht, nicht nach dem Kurs."],
+      "question": "Wie viele Personen könnten diese Aufgabe am stärksten Tag des Jahres erledigen?"
+    },
+    "below": {
+      "meaning": "Jede Aufgabe ist abgedeckt, aber einige Personen arbeiten unter dem Mindestniveau, das eine Aufgabe von allen verlangt.",
+      "moves": ["Beginnen Sie mit der sicherheitskritischen Aufgabe: Niemand arbeitet dort unter dem Minimum.", "Geben Sie jeder Person unter dem Minimum einen Trainer und einen Termin.", "Prüfen Sie die Stufe auf der Fläche und passen Sie die Matrix gemeinsam mit der Person an."],
+      "question": "Wer arbeitet heute an einer Aufgabe ohne die Stufe, die sie verlangt?"
+    },
+    "ok": {
+      "meaning": "Jede Aufgabe hat genug Personen auf Stufe 3 oder höher, und niemand liegt unter einem Minimum.",
+      "moves": ["Halten Sie auf jeder kritischen Aufgabe einen Lernenden, damit die Abdeckung nicht veraltet.", "Machen Sie jeden Monat eine Momentaufnahme und beobachten Sie den Flexibilitätsindex.", "Bringen Sie auf jeder kritischen Aufgabe eine Stufe 3 auf Stufe 4: Trainer sind der nächste Engpass."],
+      "question": "Welche Aufgabe würden Sie zuerst verlieren, wenn nächsten Monat zwei Personen gehen?"
+    }
+  },
+  "tips": [
+    ["Bewerten Sie, was Menschen tun, nicht was sie besucht haben.", "Ein Zertifikat ist keine Stufe 3. Stufe 3 heißt: Die Person hat die Aufgabe allein, nach Standard, in einer normalen Schicht erledigt."],
+    ["Füllen Sie sie mit der Person aus.", "Vereinbaren Sie jede Stufe in einem kurzen Gespräch auf der Fläche. Die Matrix ist ein Plan für die Schulung, keine Rangliste von Menschen."],
+    ["Einzelabhängigkeiten zuerst.", "Eine Aufgabe, die eine Person trägt, steht still, sobald diese Person fehlt. Stellen Sie ihr vor allem anderen einen Lernenden zur Seite."],
+    ["Nur eine Stufe 4 bestätigt eine Stufe 3.", "Der vorgeschlagene Plan stellt jedem Lernenden eine Stufe 4 derselben Aufgabe zur Seite, die kritischsten Lücken zuerst."],
+    ["Machen Sie jeden Monat eine Momentaufnahme.", "Der Flexibilitätsindex und die Zahl der Einzelabhängigkeiten über die Zeit zeigen, ob die Schulung wirkt."]
+  ],
+  "example": {
+    "team": "Team Warenausgang",
+    "template": "warehouse",
+    "people": [
+      { "name": "Besnik", "role": "Teamleiter", "shift": "Früh", "levels": [4, 4, 4, 3, 3, 2, 1, 4, 4] },
+      { "name": "Anna", "role": "Erfahrene Kommissioniererin", "shift": "Früh", "levels": [2, 3, 4, 4, 2, 0, 2, 4, 4] },
+      { "name": "Marco", "role": "Staplerfahrer", "shift": "Früh", "levels": [3, 4, 2, 1, 4, 4, 0, 3, 4] },
+      { "name": "Lina", "role": "Kommissioniererin", "shift": "Spät", "levels": [1, 2, 4, 3, 2, 0, 4, 3, 3] },
+      { "name": "Arben", "role": "Verlader", "shift": "Spät", "levels": [2, 2, 3, 2, 4, 2, 0, 2, 3] },
+      { "name": "Sara", "role": "Packerin", "shift": "Spät", "levels": [0, 1, 3, 4, 3, 0, 2, 2, 3] },
+      { "name": "Tomasz", "role": "Mitarbeiter Wareneingang", "shift": "Nacht", "levels": [4, 3, 2, 2, 3, 1, 0, 3, 3] },
+      { "name": "Elira", "role": "Neue Mitarbeiterin", "shift": "Nacht", "levels": [1, 0, 1, 1, 0, 0, 0, 1, 2] }
+    ],
+    "snapshots": [
+      { "daysAgo": 56, "spof": 4, "nocover": 1, "below": 7, "means": [1.75, 2, 2.5, 2.25, 2.25, 1, 0.75, 2.25, 3] },
+      { "daysAgo": 28, "spof": 3, "nocover": 0, "below": 5, "means": [2, 2.25, 2.75, 2.5, 2.5, 1, 1, 2.5, 3] }
+    ]
+  }
+}

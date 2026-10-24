@@ -1,0 +1,118 @@
+{
+  "storageKey": "sc-daily-board-de",
+  "title": "Tagesboard",
+  "shifts": ["Früh", "Spät", "Nacht"],
+  "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+  "letters": [
+    {
+      "key": "S",
+      "name": "Sicherheit",
+      "sources": "Sicherheitskreuz, 5S-Audit oder von Hand",
+      "red": "Ein Unfall oder ein Erste-Hilfe-Fall an diesem Tag.",
+      "amber": "Ein Beinahe-Unfall, ein unsicherer Zustand oder ein 5S-Audit unter dem Ziel.",
+      "green": "Ein Tag ohne Vorfall, sobald das Sicherheitskreuz in Gebrauch ist."
+    },
+    {
+      "key": "Q",
+      "name": "Qualität",
+      "sources": "Schadenskontrolle, Vollständigkeitskontrolle, Night-Audit-Protokoll",
+      "red": "Schäden, unvollständige Aufträge oder Audit-Ausnahmen über der Zielquote. Ohne Volumen: eine Anzahl deutlich über dem üblichen Tag.",
+      "amber": "Innerhalb von 20 % des Ziels oder über der üblichen Anzahl.",
+      "green": "Nichts erfasst oder eine Quote unter dem Ziel."
+    },
+    {
+      "key": "D",
+      "name": "Lieferung",
+      "sources": "Verspätungsanalyse",
+      "red": "Pünktliche Touren unter dem Ziel.",
+      "amber": "Innerhalb von 5 Punkten des Ziels. Wenn nur einige Touren erfasst sind: verspätete Touren über dem Üblichen.",
+      "green": "Pünktlich auf oder über dem Ziel."
+    },
+    {
+      "key": "C",
+      "name": "Kosten",
+      "sources": "Von Hand",
+      "red": "Was Sie festlegen, zum Beispiel Überstunden über dem Tagesziel oder ungeplantes Leihpersonal.",
+      "amber": "Überstunden oder Mehrkosten, die im Ziel blieben, aber ein Wort brauchen.",
+      "green": "Ein Tag im Plan."
+    },
+    {
+      "key": "P",
+      "name": "Menschen",
+      "sources": "Von Hand",
+      "red": "Abwesenheiten über dem Ziel oder eine Schicht, die unterbesetzt lief.",
+      "amber": "Eine vertretene Abwesenheit, ein neuer Mitarbeiter, eine Schulungslücke.",
+      "green": "Alle da, alle für die Arbeit geschult."
+    }
+  ],
+  "states": { "green": "Grün", "amber": "Gelb", "red": "Rot" },
+  "targets": [
+    { "key": "damage", "label": "Schadensquote", "unit": "%", "placeholder": "z. B. 0,3", "default": 0.3 },
+    { "key": "incomplete", "label": "Unvollständigkeitsquote", "unit": "%", "placeholder": "z. B. 0,5", "default": 0.5 },
+    { "key": "ontime", "label": "Pünktliche Touren", "unit": "%", "placeholder": "z. B. 95", "default": 95 },
+    { "key": "fives", "label": "5S-Wert", "unit": "%", "placeholder": "z. B. 80", "default": 80 },
+    { "key": "cost", "label": "Überstunden pro Tag", "unit": "h", "placeholder": "z. B. 8" },
+    { "key": "absence", "label": "Abwesenheit", "unit": "%", "placeholder": "z. B. 5" }
+  ],
+  "safetyMessages": [
+    "Zwei Hände für die letzten Meter: tragen, nie werfen.",
+    "Der Hubwagen hält an jedem Gangende. Ein Mensch ist schneller, als Sie denken.",
+    "Nasser Boden: wischen oder absperren, bevor jemand darüber geht.",
+    "Melden Sie den Beinahe-Unfall heute. Morgen ist er ein Unfall.",
+    "Schweres unten, Leichtes oben, nichts über die Kante.",
+    "Vor dem Heben nach oben schauen: Träger, Sprinkler, Kabel.",
+    "Eine Tür, die im Regen offen bleibt, ist in zehn Minuten ein nasser Boden.",
+    "Die Ladung sichern, bevor die Türen schließen, nicht danach.",
+    "Handschuhe an bei Glasbruch, scharfem Metall und im Kühlraum.",
+    "Beschädigtes Gerät aus dem Verkehr nehmen. Heute, nicht nach der Schicht.",
+    "Gehen, nicht rennen. Die drei gesparten Sekunden sind keinen Sturz wert.",
+    "Der neue Mitarbeiter weiß nicht, dass die Abkürzung gefährlich ist. Sagen Sie es ihm."
+  ],
+  "tips": [
+    ["Ein Board, zehn Minuten, im Stehen.", "Das Huddle wird gelesen, nicht getippt. Board öffnen, die fünf Buchstaben durchgehen, mit den Maßnahmen schließen."],
+    ["Rot ist eine Frage, keine Schuld.", "Ein roter Tag fragt, was passiert ist und wer den nächsten Schritt übernimmt. Er fragt nie, wer schuld war."],
+    ["Ein Rot ohne Maßnahme ist eine Lüge.", "Jeder rote Tag bekommt eine Maßnahme mit Verantwortlichem und Termin in der Maßnahmenliste, sonst dekoriert das Board die Wand."],
+    ["Lassen Sie die Protokolle arbeiten.", "Sicherheit, Qualität und Lieferung füllen sich aus Schadenskontrolle, Vollständigkeitskontrolle, Verspätungsanalyse und dem Sicherheitskreuz in diesem Browser. Tippen Sie nur Kosten und Menschen."],
+    ["Setzen Sie die Ziele einmal.", "Das Arbeitsplatzprofil hält den Standort, die Schichten, die Bereiche mit ihren Verantwortlichen und die Ziele. Jedes Tool liest sie."]
+  ],
+  "example": {
+    "note": "Dies ist ein von Hand eingetragener Beispielmonat, damit Sie sehen, was das Board zeigt. Auf einem echten Board füllen sich Sicherheit, Qualität und Lieferung aus den Protokollen der anderen Tools in diesem Browser.",
+    "days": 35,
+    "fill": ["S", "Q", "D", "C", "P"],
+    "profile": {
+      "site": "Frankfurt Hub · Warenausgang",
+      "shifts": ["Früh", "Spät", "Nacht"],
+      "areas": [
+        { "name": "Tor 1", "owner": "Anna" },
+        { "name": "Kommissionierung", "owner": "Besnik" },
+        { "name": "Verpackung", "owner": "Clara" }
+      ],
+      "targets": { "damage": 0.3, "incomplete": 0.5, "ontime": 95, "fives": 80, "cost": 8, "absence": 5 }
+    },
+    "rows": [
+      { "ago": 1, "shift": "Spät", "letter": "Q", "state": "red", "note": "Schäden 0,5 %: 14 gequetschte Einheiten beim Beladen, Ziel 0,3 %" },
+      { "ago": 1, "shift": "Früh", "letter": "D", "state": "amber", "note": "Pünktlich 93 %: zwei Touren verließen Tor 3 verspätet" },
+      { "ago": 1, "shift": "Früh", "letter": "P", "state": "amber", "note": "Zwei Abwesende in der Kommissionierung, eine Leihkraft bestätigt" },
+      { "ago": 2, "shift": "Spät", "letter": "C", "state": "amber", "note": "Überstunden 9 h in der Verpackung, um den Rückstand abzubauen" },
+      { "ago": 3, "shift": "Früh", "letter": "S", "state": "amber", "note": "Beinahe-Unfall an Tor 2: Hubwagen und Fußgänger, keine Verletzung" },
+      { "ago": 5, "shift": "Spät", "letter": "Q", "state": "amber", "note": "Unvollständig 0,45 %: drei Aufträge ohne das zweite Paket" },
+      { "ago": 6, "shift": "Früh", "letter": "D", "state": "red", "note": "Pünktlich 88 %: Schnee auf der A5, vier Touren verspätet" },
+      { "ago": 8, "shift": "Spät", "letter": "C", "state": "red", "note": "Überstunden 14 h: die Spätschicht blieb für die zweite Abholung des Spediteurs" },
+      { "ago": 8, "shift": "Nacht", "letter": "P", "state": "amber", "note": "Ein Abwesender, keine Vertretung in der Nachtschicht" },
+      { "ago": 9, "shift": "Früh", "letter": "C", "state": "amber", "note": "Zwei Leihkräfte beim Beladen ungeplant" },
+      { "ago": 12, "shift": "Spät", "letter": "Q", "state": "amber", "note": "Schäden 0,26 %, knapp am Ziel" },
+      { "ago": 13, "shift": "Spät", "letter": "P", "state": "red", "note": "Vier Abwesende beim Beladen, die Spätschicht lief mit zwei Personen zu wenig" },
+      { "ago": 15, "shift": "Früh", "letter": "S", "state": "amber", "note": "Unsicherer Zustand: nasser Boden am Wareneingang, gewischt und abgesperrt" },
+      { "ago": 16, "shift": "Früh", "letter": "D", "state": "amber", "note": "Pünktlich 94 %: ein Trailer kam zu spät" },
+      { "ago": 19, "shift": "Spät", "letter": "C", "state": "amber", "note": "Überstunden 8 h am Spitzentag" },
+      { "ago": 22, "shift": "Spät", "letter": "Q", "state": "red", "note": "Schäden 0,6 %: eine eingestürzte Palettenwand in Trailer 7" },
+      { "ago": 23, "shift": "Früh", "letter": "D", "state": "amber", "note": "Pünktlich 93 %" },
+      { "ago": 26, "shift": "Früh", "letter": "P", "state": "amber", "note": "Neuer Mitarbeiter in der Verpackung, eingewiesen von Clara" },
+      { "ago": 27, "shift": "Spät", "letter": "S", "state": "red", "note": "Erste-Hilfe-Fall: Schnitt an der Hand am Packplatz, Pflaster, zurück an der Arbeit" },
+      { "ago": 29, "shift": "Früh", "letter": "C", "state": "red", "note": "Überstunden 12 h, zwei Personen am Samstag" },
+      { "ago": 30, "shift": "Spät", "letter": "Q", "state": "amber", "note": "Unvollständig 0,4 %" },
+      { "ago": 33, "shift": "Früh", "letter": "D", "state": "red", "note": "Pünktlich 87 %: Tor 4 defekt, Beladung verspätet" },
+      { "ago": 34, "shift": "Nacht", "letter": "P", "state": "amber", "note": "Ein Abwesender" }
+    ]
+  }
+}

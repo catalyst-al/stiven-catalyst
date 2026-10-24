@@ -1,0 +1,147 @@
+{
+  "storageKey": "sc-standard-work",
+  "maxSteps": 12,
+  "firstIssue": "First issue.",
+  "stepsHint": "A major step is what is done, in a few words. Key points are only what makes or breaks the step: safety first, then quality, technique and cost. Each key point has its reason.",
+  "fields": {
+    "title": "e.g. Load a roll cage onto the truck",
+    "process": "e.g. Outbound loading",
+    "area": "e.g. Dock 3",
+    "owner": "e.g. Anna K., shift lead",
+    "takt": "e.g. 240",
+    "ppe": "e.g. Safety shoes, gloves, vest; scanner",
+    "trainedBy": "e.g. Mehmet Y., trainer",
+    "approvedBy": "e.g. Laura S., operations manager",
+    "changeNote": "e.g. Step 2: walkway added after a near miss",
+    "step": "e.g. Push the cage to the dock door",
+    "time": "e.g. 25",
+    "point": "e.g. Push, never pull",
+    "reason": "e.g. Pulling puts your feet in front of the wheels"
+  },
+  "types": {
+    "safety": { "label": "Safety", "mark": "⚠" },
+    "quality": { "label": "Quality", "mark": "◆" },
+    "technique": { "label": "Technique", "mark": "●" },
+    "cost": { "label": "Cost", "mark": "€" }
+  },
+  "areas": ["Inbound", "Storage", "Picking", "Packing", "Outbound dock", "Returns", "Front desk"],
+  "safetyWords": ["forklift*", "fork-lift*", "fork lift*", "reach truck*", "pallet truck*", "pallet jack*", "tail lift*", "dock leveller*", "dock leveler*", "leveller*", "knife", "knives", "blade*", "cutter*", "height*", "ladder*", "chemical*", "acid*", "solvent*", "cleaning agent*", "hot", "burn*", "sharp", "broken glass", "lifting", "electric*", "voltage"],
+  "checks": {
+    "keyPoints": ["Every step has a key point", "Give each step at least one key point"],
+    "safety": ["Hazards have a safety key point", "Add a Safety key point where the step names a hazard"],
+    "takt": ["The job fits the takt", "Give the takt and a time for every step, and keep the total within it"],
+    "steps": ["At most 12 steps", "Keep it to 12 steps or fewer: split the job in two"],
+    "reasons": ["Every key point has a reason", "Write the reason for each key point"],
+    "changeNote": ["The version has a change note", "Write what changed in this version"]
+  },
+  "tips": [
+    ["One step is one movement.", "A major step is what is done, in a few words. If it needs a sentence, it is two steps."],
+    ["Key points make or break the job.", "Only what affects safety, quality, technique or cost. Everything else is training detail."],
+    ["Every key point has a reason.", "People keep a rule they understand. Write why, in the words of the floor."],
+    ["Change the standard, not the people.", "When the job changes, start a new version with a note, then train the team on it."]
+  ],
+  "templates": [
+    { "name": "Loading a roll cage", "doc": "example" },
+    { "name": "Hotel night audit close", "doc": {
+      "title": "Close the day in the night audit",
+      "process": "Front office, night audit",
+      "takt": "1800",
+      "ppe": "Property management system, cash drawer, report folder",
+      "steps": [
+        { "step": "Close the restaurant and bar cheques", "time": "300", "points": [
+          { "text": "Every open cheque posted to a room or paid", "type": "quality", "reason": "An open cheque is lost revenue once the day is closed" }
+        ] },
+        { "step": "Check arrivals and no-shows", "time": "300", "points": [
+          { "text": "Each reservation not arrived is checked against its guarantee", "type": "quality", "reason": "A guaranteed no-show is charged, a non-guaranteed one is cancelled" },
+          { "text": "Charge the no-show fee by the policy, with the card authorised", "type": "cost", "reason": "A missed no-show fee is money that never comes back" }
+        ] },
+        { "step": "Balance the cash drawer", "time": "300", "points": [
+          { "text": "Count with the back-office door closed and the safe locked", "type": "safety", "reason": "Cash counted in view of the lobby invites a robbery" },
+          { "text": "Cash matches the system to the cent; any difference is written down", "type": "quality", "reason": "A difference found tomorrow can no longer be explained" }
+        ] },
+        { "step": "Run the day-end close", "time": "300", "points": [
+          { "text": "Start the close only when every terminal is logged out", "type": "technique", "reason": "A terminal still logged in blocks or splits the close" }
+        ] },
+        { "step": "Print and file the reports", "time": "300", "points": [
+          { "text": "Manager report, cash report and in-house list in the folder", "type": "quality", "reason": "The morning shift and the manager read the day from these reports" }
+        ] },
+        { "step": "Hand over to the morning shift", "time": "200", "points": [
+          { "text": "Open issues written in the handover book with room numbers", "type": "quality", "reason": "What is only said is forgotten by noon" }
+        ] }
+      ]
+    } },
+    { "name": "Delivery handover at the dock", "doc": {
+      "title": "Take over a delivery at the dock",
+      "process": "Inbound, goods receipt",
+      "takt": "600",
+      "ppe": "Safety shoes, high-visibility vest, gloves; pallet truck, scanner, camera",
+      "steps": [
+        { "step": "Open the trailer", "time": "60", "points": [
+          { "text": "Wheels chocked and engine off before anyone opens the doors", "type": "safety", "reason": "A truck that moves while the doors open crushes the person behind it" }
+        ] },
+        { "step": "Check the seal", "time": "45", "points": [
+          { "text": "Seal number matches the delivery note", "type": "quality", "reason": "A broken or wrong seal means the load may have been opened" }
+        ] },
+        { "step": "Unload with the pallet truck", "time": "240", "points": [
+          { "text": "Walking speed, nobody else in the trailer while unloading", "type": "safety", "reason": "A pallet that slips has nowhere to go but onto feet" },
+          { "text": "Unload from the back, pallet straight on the forks", "type": "technique", "reason": "A twisted pallet catches the trailer wall" }
+        ] },
+        { "step": "Count the pallets and check for damage", "time": "120", "points": [
+          { "text": "Count against the delivery note, a photo of every damage", "type": "quality", "reason": "Damage not recorded at the dock becomes the warehouse's cost" },
+          { "text": "Damage written on the delivery note before signing", "type": "cost", "reason": "The carrier pays only for damage written on the note" }
+        ] },
+        { "step": "Sign and give the driver the copy", "time": "60", "points": [
+          { "text": "Remarks written above the signature", "type": "quality", "reason": "A clean signature accepts the load as perfect" }
+        ] },
+        { "step": "Release the truck", "time": "45", "points": [
+          { "text": "Chocks removed only once the doors are closed and the dock is clear", "type": "safety", "reason": "The driver cannot see the dock from the cab" }
+        ] }
+      ]
+    } }
+  ],
+  "example": {
+    "title": "Load a roll cage onto the truck",
+    "process": "Outbound loading, store deliveries",
+    "area": "Dock 3, outbound",
+    "owner": "Anna K. (shift lead, early)",
+    "takt": "240",
+    "ppe": "Safety shoes, gloves, high-visibility vest; scanner, load bar",
+    "trainedBy": "Mehmet Y. (trainer)",
+    "approvedBy": "Laura S. (operations manager)",
+    "version": 3,
+    "versionDate": -6,
+    "changeNote": "Step 2: walkway away from the forklift lane added after a near miss at dock 3.",
+    "history": [
+      { "version": 1, "date": -180, "note": "First issue." },
+      { "version": 2, "date": -60, "note": "Step 6: scan the cage label, not a parcel on it." }
+    ],
+    "steps": [
+      { "step": "Check the roll cage", "time": "20", "points": [
+        { "text": "Wheels turn freely and both brakes hold", "type": "safety", "reason": "A cage with a broken brake rolls back off the tail lift" },
+        { "text": "Cage label matches the load list", "type": "quality", "reason": "A wrong label sends the cage to the wrong store" }
+      ] },
+      { "step": "Push the cage to the dock door", "time": "25", "points": [
+        { "text": "Push, never pull, both hands on the frame", "type": "safety", "reason": "Pulling puts your feet in front of the wheels" },
+        { "text": "Stay on the marked walkway, out of the forklift lane", "type": "safety", "reason": "A forklift driver cannot see a person behind a cage" }
+      ] },
+      { "step": "Check the dock leveller and the truck", "time": "30", "points": [
+        { "text": "Truck wheels chocked, dock light green, leveller resting on the truck floor", "type": "safety", "reason": "A truck that moves off drops the cage and the person into the gap" }
+      ] },
+      { "step": "Roll the cage onto the truck", "time": "40", "points": [
+        { "text": "One cage at a time, steered from the back corner", "type": "technique", "reason": "Two cages at once can neither be steered nor stopped" },
+        { "text": "Heaviest cages against the front wall", "type": "quality", "reason": "Weight at the front keeps the load stable when the driver brakes" }
+      ] },
+      { "step": "Place and lock the cage", "time": "35", "points": [
+        { "text": "Tight against the cage before, no gap", "type": "quality", "reason": "A gap lets the cages move and tip over in transit" },
+        { "text": "Brakes on, load bar fitted at chest height", "type": "safety", "reason": "A loose cage falls on whoever opens the doors at the store" }
+      ] },
+      { "step": "Scan the cage", "time": "20", "points": [
+        { "text": "Scan the cage label, not a parcel on it", "type": "technique", "reason": "The store sees which cage is on which truck only from the cage label" }
+      ] },
+      { "step": "Close the load and hand over", "time": "35", "points": [
+        { "text": "Cage count matches the load list before the doors close", "type": "quality", "reason": "A missing cage is found here, not at the store" },
+        { "text": "Empty cages from the truck back to the return line", "type": "cost", "reason": "Every lost roll cage costs about 150 euros" }
+      ] }
+    ]
+  }
+}

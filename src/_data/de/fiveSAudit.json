@@ -1,0 +1,1297 @@
+{
+  "storageKey": "sc-five-s-audit-de",
+  "text": {
+    "tool": "5S-Audit",
+    "areaPlaceholder": "z. B. Wareneingang",
+    "auditorPlaceholder": "z. B. Anna",
+    "notePlaceholder": "Befund, z. B. Klebebandstation leer",
+    "itemPlaceholder": "z. B. Palette mit alten Kartongrößen",
+    "ownerPlaceholder": "z. B. Besnik",
+    "csvAudits": "5s-audits",
+    "csvTags": "rote-karten",
+    "checkText": "Beim nächsten 5S-Audit bei dieser Frage ≥ 3"
+  },
+  "scopes": {
+    "5S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain"
+    ],
+    "6S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain",
+      "safety"
+    ],
+    "8S": [
+      "sort",
+      "set",
+      "shine",
+      "standardize",
+      "sustain",
+      "safety",
+      "security",
+      "satisfaction"
+    ]
+  },
+  "shifts": [
+    "Früh",
+    "Spät",
+    "Nacht"
+  ],
+  "levels": [
+    "Nichts vorhanden",
+    "Begonnen, noch nicht sichtbar",
+    "Teilweise, mit Lücken",
+    "Weitgehend, kleine Abweichungen",
+    "Voller Standard, hält jeden Tag"
+  ],
+  "bands": [
+    {
+      "name": "Noch kein Standard",
+      "note": "Beginnen Sie mit Sortieren und Ordnen in einer Zone. Eine Ecke richtig, bevor Sie ausweiten."
+    },
+    {
+      "name": "Lücken",
+      "note": "Der Standard existiert stellenweise. Schließen Sie das schwächste S, bevor Sie Neues hinzufügen."
+    },
+    {
+      "name": "Gut, halten",
+      "note": "Halten Sie es über die Übergabe und die Audits, und achten Sie auf den ersten Rückfall."
+    },
+    {
+      "name": "Weltklasse, erhalten",
+      "note": "Jetzt ist Erhalten die Arbeit: Führungskräfte gehen durch, das Team besitzt den Standard."
+    }
+  ],
+  "reasons": [
+    "Nicht benötigt",
+    "Defekt",
+    "Überschuss",
+    "Unbekannter Besitzer"
+  ],
+  "decisions": [
+    "Zurückgeben",
+    "Umsetzen",
+    "Entsorgen",
+    "Zurückstellen"
+  ],
+  "pillars": [
+    {
+      "key": "sort",
+      "name": "Sortieren",
+      "japanese": "Seiri",
+      "meaning": "Unordnung verdeckt Probleme und frisst Fläche. Sortieren entscheidet, was hierher gehört, und entfernt den Rest.",
+      "moves": [
+        "Gehen Sie mit roten Karten durch den Bereich: Alles, was diese Woche nicht benutzt wurde, bekommt Karte, Datum und Entscheidung.",
+        "Räumen Sie heute eine Zone vollständig, statt den ganzen Bereich ein bisschen.",
+        "Vereinbaren Sie, wo markierte Teile warten und wer innerhalb von sieben Tagen entscheidet."
+      ],
+      "question": "Was steht hier, das seit einer Woche niemand angefasst hat?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "set",
+      "name": "Ordnen",
+      "japanese": "Seiton",
+      "meaning": "Ein Platz für alles spart das Suchen, das Schichten langsam und Nerven kurz macht.",
+      "moves": [
+        "Markieren Sie zuerst den Platz der zehn meistgenutzten Dinge: Klebeband, Bodenmarkierung, Etikett.",
+        "Legen Sie Verbrauchsmaterial an den Verwendungsort mit sichtbarem Min/Max.",
+        "Fotografieren Sie den Standard und hängen Sie ihn dort auf, wo das Teil lebt."
+      ],
+      "question": "Findet ein neuer Mitarbeiter es in 30 Sekunden, ohne zu fragen?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "shine",
+      "name": "Säubern",
+      "japanese": "Seiso",
+      "meaning": "Reinigen ist Prüfen: Ein sauberer Bereich zeigt Lecks, Schäden und Verschleiß, bevor sie die Arbeit stoppen.",
+      "moves": [
+        "Geben Sie jeder Fläche und jeder Maschine einen Verantwortlichen und einen Moment in der Schicht.",
+        "Beseitigen Sie die Quelle des Schmutzes (eine gerissene Dichtung, eine Wickelstation), statt erneut zu putzen.",
+        "Melden Sie, was das Reinigen findet: Lampen, Lecks, lose Schutzabdeckungen."
+      ],
+      "question": "Was hat das Reinigen diese Woche gefunden, und wer hat es behoben?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "standardize",
+      "name": "Standardisieren",
+      "japanese": "Seiketsu",
+      "meaning": "Ohne sichtbaren Standard erfindet jede Schicht ihren eigenen, und der Wert schwankt mit den Leuten.",
+      "moves": [
+        "Ein Bild von „gut“ am Eingang des Bereichs, mit dem Team vereinbart.",
+        "Machen Sie Abweichungen offensichtlich: Schattentafeln, Farbcodes, eine Linie, die nicht überschritten wird.",
+        "Nehmen Sie die Bereichsprüfung in die Übergabe, damit sie zweimal am Tag gesehen wird."
+      ],
+      "question": "Wie sieht ein Besucher in einer Minute, dass hier etwas nicht stimmt?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "sustain",
+      "name": "Selbstdisziplin",
+      "japanese": "Shitsuke",
+      "meaning": "Erhalten ist der Teil der Führung: Audits, die stattfinden, Maßnahmen, die schließen, Aufmerksamkeit, die jede Woche spürbar ist.",
+      "moves": [
+        "Legen Sie Audittag und Auditorenpaar für die nächsten sechs Wochen fest.",
+        "Schließen Sie die Maßnahmen des letzten Audits, bevor Sie neue eröffnen.",
+        "Zeigen Sie den Trend am Board und nennen Sie, was besser wurde und wer es war."
+      ],
+      "question": "Wann hat eine Führungskraft zuletzt etwas zur Ordnung in diesem Bereich gesagt?",
+      "scopes": [
+        "5S",
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "safety",
+      "name": "Sicherheit",
+      "japanese": "",
+      "meaning": "Eine Sicherheitsabweichung ist der lauteste 5S-Befund: Der Standard hält nicht, wenn es am meisten zählt.",
+      "moves": [
+        "Räumen Sie heute Fluchtwege, Feuerlöscher und Erste Hilfe frei, vor allem anderen.",
+        "Gehen Sie die Stapler- und Fußwege zur Spitzenzeit ab und sehen Sie, wo sie sich kreuzen.",
+        "Besprechen Sie den letzten Beinahe-Unfall im nächsten Briefing."
+      ],
+      "question": "Wo wäre hier im letzten Monat fast jemand verletzt worden?",
+      "scopes": [
+        "6S",
+        "8S"
+      ]
+    },
+    {
+      "key": "security",
+      "name": "Schutz",
+      "aka": "Teamgeist",
+      "japanese": "",
+      "meaning": "Eine Schutzlücke kostet mehr als das verlorene Teil: Vertrauen, Zeit und Untersuchungen.",
+      "moves": [
+        "Schließen Sie die Hochwertzone ab und protokollieren Sie ab heute den Zugang.",
+        "Prüfen Sie Türen und Tore zu Schichtbeginn und -ende, und nennen Sie, wer das tut.",
+        "Persönliche Dinge in die Spinde; nichts Privates im Warenfluss."
+      ],
+      "question": "Wer war gestern in der abgeschlossenen Zone, und woher wissen Sie das?",
+      "scopes": [
+        "8S"
+      ]
+    },
+    {
+      "key": "satisfaction",
+      "name": "Zufriedenheit",
+      "aka": "Nachhaltigkeit",
+      "japanese": "",
+      "meaning": "Menschen halten einen Standard, den sie mitgemacht haben; ein müdes, ungehörtes Team lässt ihn rutschen.",
+      "moves": [
+        "Beantworten Sie jedes gemeldete 5S-Problem innerhalb einer Woche, auch mit einem Nein.",
+        "Verbessern Sie zuerst die Ergonomie der schwersten Tätigkeit.",
+        "Nennen Sie ein gutes Ergebnis am Board und sagen Sie, wer es erreicht hat."
+      ],
+      "question": "Was hat das Team letzten Monat gewünscht, und was ist daraus geworden?",
+      "scopes": [
+        "8S"
+      ]
+    }
+  ],
+  "templates": {
+    "warehouse": {
+      "name": "Lager",
+      "areas": [
+        "Wareneingang",
+        "Kommissionierzone A",
+        "Packen",
+        "Warenausgang",
+        "Retouren"
+      ],
+      "questions": {
+        "sort": [
+          "Nur Teile für die heutige Arbeit sind im Bereich; nichts steht „für später“.",
+          "Keine defekten Geräte, leeren Paletten oder Abfälle in Gängen oder an der Rampe.",
+          "Jedes zweifelhafte Teil trägt eine rote Karte mit Datum und Entscheidung.",
+          "Dokumente und Aushänge an den Wänden sind aktuell; nichts Veraltetes oder Doppeltes."
+        ],
+        "set": [
+          "Jedes Werkzeug, jeder Rollwagen und jeder Gitterwagen hat einen markierten Platz und steht jetzt dort.",
+          "Bodenmarkierungen für Paletten, Gehwege und Bereitstellungsspuren sind vollständig und sichtbar.",
+          "Regale und Plätze sind so beschriftet, dass ein neuer Mitarbeiter alles in 30 Sekunden findet.",
+          "Verbrauchsmaterial (Klebeband, Etiketten, Folie) liegt am Verwendungsort mit Min/Max."
+        ],
+        "shine": [
+          "Böden sind sauber und trocken; keine Flüssigkeiten, kein Staub, keine Folienreste.",
+          "Stapler, Scanner und Waagen sind sauber und geprüft, das Prüfblatt ist ausgefüllt.",
+          "Der Reinigungsplan zeigt, wer was wann reinigt; heute ist abgezeichnet.",
+          "Lecks, Schäden und defekte Lampen werden gemeldet, nicht umgangen."
+        ],
+        "standardize": [
+          "Der 5S-Standard des Bereichs hängt als ein Bild davon, wie „gut“ aussieht.",
+          "Jeder in der Schicht kann sagen, wofür er die Ordnung verantwortet.",
+          "Visuelle Kontrollen (Schattentafeln, Min/Max, Farbcodes) machen Abweichungen auf einen Blick sichtbar.",
+          "Die Übergabe prüft den Zustand des Bereichs; Abweichungen kommen ans Schichtboard."
+        ],
+        "sustain": [
+          "5S-Audits finden planmäßig statt, die letzten drei Ergebnisse hängen am Board.",
+          "Maßnahmen aus dem letzten Audit sind geschlossen oder haben Verantwortlichen und Termin.",
+          "Führungskräfte gehen durch den Bereich und äußern sich mindestens wöchentlich zu 5S.",
+          "Das Team passt den Standard selbst an, wenn sich die Arbeit ändert."
+        ],
+        "safety": [
+          "Fluchtwege, Feuerlöscher und Erste-Hilfe-Kästen sind frei und gekennzeichnet.",
+          "Fuß- und Staplerwege sind getrennt und werden eingehalten.",
+          "Die PSA des Bereichs wird getragen, und die Regel ist sichtbar.",
+          "Beinahe-Unfälle im Bereich werden aufgeschrieben und besprochen."
+        ],
+        "security": [
+          "Hochwertige und kontrollierte Ware liegt in einer abgeschlossenen, gekennzeichneten Zone mit Zugangsprotokoll.",
+          "Türen und Tore zum Hof sind während der Schicht geschlossen und kontrolliert.",
+          "Nichts Privates (Taschen, Handys) liegt im Warenfluss.",
+          "Besucher und Fremdfirmen sind angemeldet und werden begleitet."
+        ],
+        "satisfaction": [
+          "Das Team kann ein 5S-Problem melden und bekommt innerhalb einer Woche eine Antwort.",
+          "Pausenraum, Wasser und Beleuchtung entsprechen dem Standard, den das Team vereinbart hat.",
+          "Ergonomie: schwere Teile auf Hüfthöhe, kein wiederholtes Greifen über Schulterhöhe.",
+          "Gute 5S-Ergebnisse hängen am Board, mit Namen."
+        ]
+      }
+    },
+    "hotel": {
+      "name": "Hotel",
+      "areas": [
+        "Front Office",
+        "Housekeeping-Lager",
+        "Küche"
+      ],
+      "questions": {
+        "sort": [
+          "Rezeption und Backoffice enthalten nur, was die heutige Schicht braucht; keine alten Flyer oder Ersatzgeräte.",
+          "Im Housekeeping-Lager gibt es keine unbeschrifteten Chemikalien, defekten Teile oder abgelaufenen Amenities.",
+          "In der Küche sind keine abgelaufenen Waren, doppelten Utensilien oder defekten Geräte in Gebrauch.",
+          "Jedes zweifelhafte Teil trägt eine rote Karte mit Datum und Entscheidung."
+        ],
+        "set": [
+          "Schlüssel, Karten, Bargeld und Formulare haben an der Rezeption je einen markierten Platz und liegen jetzt dort.",
+          "Wäsche und Amenities stehen nach Art im Regal, mit Etiketten und Min/Max.",
+          "Küchenwerkzeuge und Zutaten sind nach Station gelagert; nichts steht auf dem Boden.",
+          "Gedruckte Gästematerialien sind aktuell und in ihrem Halter."
+        ],
+        "shine": [
+          "Lobby, Rezeption und Backoffice sind sauber; keine Kabel, kein Staub, keine Tassen in Sicht.",
+          "Housekeeping-Wagen und Lagerregale sind sauber und zum Schichtende aufgefüllt.",
+          "Küchenflächen, Böden und Abläufe sind sauber; der Reinigungsplan ist heute abgezeichnet.",
+          "Mängel (Lampen, Schlösser, Lecks) werden im System gemeldet, nicht der nächsten Schicht überlassen."
+        ],
+        "standardize": [
+          "Der Aufbau der Rezeption und des Wagens hängt als ein Bild von „gut“.",
+          "Jeder weiß, welche Prüfungen zu seiner Schicht gehören: Kasse, Safe, Logbuch, Kühlschranktemperaturen.",
+          "Visuelle Kontrollen: farbcodierte Tücher und Chemikalien, beschriftete Regale, Bestandskarten.",
+          "Die Übergabe prüft den Zustand des Bereichs und protokolliert Abweichungen."
+        ],
+        "sustain": [
+          "5S-Audits laufen planmäßig, die Ergebnisse hängen am Mitarbeiterboard.",
+          "Maßnahmen aus dem letzten Audit sind geschlossen oder haben Verantwortlichen und Termin.",
+          "Der Duty Manager geht wöchentlich durch Front Office, Lager und Küche und äußert sich zu 5S.",
+          "Das Team ändert den Standard, wenn sich die Arbeit ändert: neue Amenities, eine neue PMS-Maske."
+        ],
+        "safety": [
+          "Fluchtwege, Feuerlöscher und Fluchtpläne sind frei und sichtbar.",
+          "Warnschilder für nasse Böden, rutschfeste Matten und sichere Messeraufbewahrung sind in Gebrauch.",
+          "Chemikalien lagern abgeschlossen, die Sicherheitsdatenblätter liegen bereit.",
+          "Beinahe-Unfälle und Gästevorfälle werden aufgeschrieben und ausgewertet."
+        ],
+        "security": [
+          "Kassenschublade, Safe und Schlüsselschrank sind abgeschlossen; der Zugang wird protokolliert.",
+          "Gästedaten auf Ausdrucken und Bildschirmen sind für andere Gäste nicht sichtbar.",
+          "Türen zum Back-of-House sind geschlossen und mit Ausweis gesichert.",
+          "Fundsachen werden protokolliert, beschriftet und abgeschlossen aufbewahrt."
+        ],
+        "satisfaction": [
+          "Das Team kann an der Rezeption, im Lager oder in der Küche ein Problem melden und bekommt innerhalb einer Woche eine Antwort.",
+          "Personalraum, Wasser und Pausen entsprechen dem vereinbarten Standard.",
+          "Ergonomie: Wagen rollen, Regale sind erreichbar, kein Heben über Schulterhöhe.",
+          "Gute Ergebnisse und Gästelob hängen am Board, mit Namen."
+        ]
+      }
+    },
+    "delivery-station": {
+      "name": "Zustellbasis",
+      "areas": [
+        "Sortierfläche",
+        "Bereitstellungsspuren",
+        "Hof und Rampen",
+        "Retourenkäfig"
+      ],
+      "questions": {
+        "sort": [
+          "Nur die Touren und Wagen von heute stehen in den Bereitstellungsspuren; nichts von gestern.",
+          "Keine defekten Wagen, leeren Behälter oder Abfälle in der Sortierfläche oder an der Rampe.",
+          "Jedes zweifelhafte Teil trägt eine rote Karte mit Datum und Entscheidung.",
+          "Ausgehängte Tourenblätter und Hinweise sind aktuell; alte sind weg."
+        ],
+        "set": [
+          "Jede Tour hat eine markierte Bereitstellungsspur, und die Wagen stehen darin.",
+          "Behälter, Taschen und Wagen haben einen markierten Platz und kehren nach der Welle dorthin zurück.",
+          "Scanner, Ladegeräte und Etiketten liegen am Verwendungsort mit Min/Max.",
+          "Die Stellplätze der Fahrzeuge sind nummeriert und passen zum Tourenboard."
+        ],
+        "shine": [
+          "Böden und Rampenplatten sind sauber und trocken; keine Klebebandreste, keine Verpackung.",
+          "Wagen, Behälter und Scanner sind sauber und geprüft; Defekte sind markiert.",
+          "Der Reinigungsplan zeigt, wer was wann reinigt; heute ist abgezeichnet.",
+          "Hofbeleuchtung, Absperrungen und Markierungen sind intakt und werden sonst gemeldet."
+        ],
+        "standardize": [
+          "Der Sortier- und Versandstandard hängt als ein Bild an der Spur.",
+          "Jeder in der Welle kennt seine Spur, seine Prüfungen und seine Aufgaben am Ende der Welle.",
+          "Visuelle Kontrollen (Spurfarben, Wagenzahl, Abfahrtsuhr) machen eine späte Spur offensichtlich.",
+          "Die Übergabe der Welle prüft den Zustand des Bereichs und protokolliert Abweichungen."
+        ],
+        "sustain": [
+          "5S-Audits laufen planmäßig, die letzten drei Ergebnisse hängen am Board.",
+          "Maßnahmen aus dem letzten Audit sind geschlossen oder haben Verantwortlichen und Termin.",
+          "Die Stationsleitung geht durch die Fläche und äußert sich mindestens wöchentlich zu 5S.",
+          "Fahrer und Sortierer schlagen Änderungen am Standard vor, und einige werden übernommen."
+        ],
+        "safety": [
+          "Gehwege und Fahrzeugspuren sind getrennt; Rückwärtsfahren wird eingewiesen.",
+          "Ausgänge, Feuerlöscher und Erste Hilfe sind frei und gekennzeichnet.",
+          "Warnwesten und Sicherheitsschuhe werden getragen; die Regel ist sichtbar.",
+          "Beinahe-Unfälle im Hof und auf der Fläche werden aufgeschrieben und besprochen."
+        ],
+        "security": [
+          "Hochwertige Pakete liegen in einem abgeschlossenen Käfig mit Zugangsprotokoll.",
+          "Hoftore sind geschlossen; Fahrzeuge sind abgeschlossen, wenn niemand dabei ist.",
+          "Nichts Privates im Warenfluss; die Spinde werden genutzt.",
+          "Besucher und Partnerfahrer sind angemeldet."
+        ],
+        "satisfaction": [
+          "Sortierer und Fahrer können ein Problem melden und bekommen innerhalb einer Woche eine Antwort.",
+          "Wasser, Toiletten und Pausenraum entsprechen dem vereinbarten Standard.",
+          "Ergonomie: schwere Pakete auf Hüfthöhe, Wagen, die rollen, kein Stapeln über Schulterhöhe.",
+          "Gute Ergebnisse und gute Funde hängen am Board, mit Namen."
+        ]
+      }
+    }
+  },
+  "tips": [
+    [
+      "Prüfen Sie, was Sie sehen, nicht die SOP.",
+      "Bewerten Sie die Fläche, wie sie in dieser Minute ist. Das Dokument sagt, was sein soll; das Audit sagt, was ist."
+    ],
+    [
+      "Bewerten Sie die Fläche, nicht die Leute.",
+      "Eine 2 ist eine Lücke im System, kein Urteil über die Schicht. Sagen Sie das, bevor Sie beginnen."
+    ],
+    [
+      "Eine 2 ist ein Befund.",
+      "Alles bei 2 oder darunter bekommt eine Notiz und einen Verantwortlichen. Werte ohne Maßnahmen sind Dekoration."
+    ],
+    [
+      "Gleicher Tag, gleicher Rundgang.",
+      "Prüfen Sie dieselben Bereiche am selben Wochentag in derselben Reihenfolge. Ein Trend braucht gleiche Messungen."
+    ],
+    [
+      "Rote Karte statt Diskussion.",
+      "Unsicher, ob es hierher gehört? Karte mit Datum dran. Die Entscheidung folgt innerhalb einer Woche."
+    ]
+  ],
+  "example": {
+    "template": "warehouse",
+    "scope": "6S",
+    "audits": [
+      {
+        "date": "2026-09-07",
+        "area": "Wareneingang",
+        "auditor": "Anna",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            1,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            0,
+            1,
+            1
+          ],
+          "shine": [
+            2,
+            2,
+            1,
+            2
+          ],
+          "standardize": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "sustain": [
+            0,
+            2,
+            1,
+            1
+          ],
+          "safety": [
+            2,
+            1,
+            2,
+            2
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Wareneingang",
+        "auditor": "Anna",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "shine": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "standardize": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "sustain": [
+            2,
+            1,
+            2,
+            1
+          ],
+          "safety": [
+            2,
+            3,
+            2,
+            2
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Wareneingang",
+        "auditor": "Anna",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "set": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "shine": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "standardize": [
+            2,
+            1,
+            2,
+            2
+          ],
+          "sustain": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "safety": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Wareneingang",
+        "auditor": "Anna",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "sustain": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Wareneingang",
+        "auditor": "Anna",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "set": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "sustain": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Wareneingang",
+        "auditor": "Anna",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            2,
+            4,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "standardize": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {
+          "set-0": "Gitterwagen 7 steht im Gehweg, kein Platz markiert",
+          "standardize-0": "Standardbild verblasst, halb von einem Aushang verdeckt"
+        }
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Kommissionierzone A",
+        "auditor": "Besnik",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Kommissionierzone A",
+        "auditor": "Besnik",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            3,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Kommissionierzone A",
+        "auditor": "Besnik",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Kommissionierzone A",
+        "auditor": "Besnik",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "set": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "shine": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "sustain": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Kommissionierzone A",
+        "auditor": "Besnik",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "set": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "shine": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            4
+          ],
+          "sustain": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            3,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Kommissionierzone A",
+        "auditor": "Besnik",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            2
+          ],
+          "standardize": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            3,
+            4,
+            4
+          ]
+        },
+        "notes": {
+          "shine-3": "Defekte Lampe über Gang 4 zweimal gemeldet, immer noch nicht behoben"
+        }
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Packen",
+        "auditor": "Clara",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            3,
+            4,
+            3
+          ],
+          "shine": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "standardize": [
+            4,
+            3,
+            4,
+            3
+          ],
+          "sustain": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "safety": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-14",
+        "area": "Packen",
+        "auditor": "Clara",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "shine": [
+            3,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "sustain": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "safety": [
+            3,
+            4,
+            4,
+            4
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-21",
+        "area": "Packen",
+        "auditor": "Clara",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "set": [
+            3,
+            2,
+            3,
+            2
+          ],
+          "shine": [
+            3,
+            3,
+            2,
+            3
+          ],
+          "standardize": [
+            3,
+            3,
+            4,
+            4
+          ],
+          "sustain": [
+            2,
+            3,
+            2,
+            3
+          ],
+          "safety": [
+            4,
+            3,
+            4,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-09-28",
+        "area": "Packen",
+        "auditor": "Clara",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "shine": [
+            2,
+            2,
+            3,
+            3
+          ],
+          "standardize": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "sustain": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "safety": [
+            3,
+            4,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-05",
+        "area": "Packen",
+        "auditor": "Clara",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "set": [
+            2,
+            2,
+            3,
+            2
+          ],
+          "shine": [
+            1,
+            2,
+            2,
+            2
+          ],
+          "standardize": [
+            3,
+            2,
+            3,
+            2
+          ],
+          "sustain": [
+            2,
+            2,
+            1,
+            2
+          ],
+          "safety": [
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {}
+      },
+      {
+        "date": "2026-10-12",
+        "area": "Packen",
+        "auditor": "Clara",
+        "shift": "Früh",
+        "scores": {
+          "sort": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "set": [
+            1,
+            2,
+            2,
+            1
+          ],
+          "shine": [
+            2,
+            1,
+            2,
+            2
+          ],
+          "standardize": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "sustain": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "safety": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        "notes": {
+          "sort-1": "Zwei Paletten alter Kartongrößen seit letztem Monat hinter Platz 3",
+          "set-3": "Klebeband und Etiketten fehlen an Platz 2 und 4",
+          "shine-0": "Folienreste auf dem Boden an jedem Platz",
+          "sustain-1": "Drei Maßnahmen aus dem letzten Audit noch offen, kein Verantwortlicher"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "date": "2026-10-02",
+        "area": "Packen",
+        "item": "Palette alter Kartongrößen (B4)",
+        "reason": "Nicht benötigt",
+        "decision": "Entsorgen",
+        "owner": "Clara",
+        "due": "2026-10-09",
+        "done": false
+      },
+      {
+        "date": "2026-09-02",
+        "area": "Wareneingang",
+        "item": "Hubwagen mit verbogener Gabel",
+        "reason": "Defekt",
+        "decision": "Zurückgeben",
+        "owner": "Besnik",
+        "due": "2026-09-09",
+        "done": false
+      },
+      {
+        "date": "2026-09-07",
+        "area": "Kommissionierzone A",
+        "item": "Zweiter Etikettendrucker, ungenutzt",
+        "reason": "Überschuss",
+        "decision": "Umsetzen",
+        "owner": "Anna",
+        "due": "2026-09-14",
+        "done": true
+      },
+      {
+        "date": "2026-10-06",
+        "area": "Wareneingang",
+        "item": "Drei Gitterwagen ohne Etikett",
+        "reason": "Unbekannter Besitzer",
+        "decision": "Zurückstellen",
+        "owner": "Besnik",
+        "due": "2026-10-13",
+        "done": false
+      },
+      {
+        "date": "2026-10-10",
+        "area": "Packen",
+        "item": "Kiste mit gemischten Ladegeräten",
+        "reason": "Unbekannter Besitzer",
+        "decision": "Zurückstellen",
+        "owner": "Clara",
+        "due": "2026-10-17",
+        "done": false
+      }
+    ]
+  }
+}

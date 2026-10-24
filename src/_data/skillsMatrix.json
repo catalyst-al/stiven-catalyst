@@ -1,0 +1,116 @@
+{
+  "storageKey": "sc-skills-matrix",
+  "text": {
+    "tool": "Skills Matrix",
+    "teamPlaceholder": "e.g. Outbound, early shift",
+    "namePlaceholder": "e.g. Anna",
+    "rolePlaceholder": "e.g. Picker",
+    "taskPlaceholder": "e.g. Forklift",
+    "csvMatrix": "skills-matrix",
+    "csvPlan": "training-plan",
+    "checkText": "{trainee} does {task} alone at level {level}, signed off by {trainer}"
+  },
+  "levels": [
+    { "name": "Not trained", "note": "Has not done the task yet." },
+    { "name": "In training", "note": "Learns the task with a trainer at their side." },
+    { "name": "With support", "note": "Does the task, with someone to ask close by." },
+    { "name": "Independent", "note": "Does the task alone, to the standard, on any shift." },
+    { "name": "Can train", "note": "Teaches the task and signs off the level of others." }
+  ],
+  "criticality": ["Low", "Medium", "High"],
+  "shifts": ["Early", "Late", "Night"],
+  "templates": {
+    "warehouse": {
+      "name": "Warehouse",
+      "tasks": [
+        { "name": "Receiving", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Put-away", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Picking", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Packing", "crit": 2, "min": 1, "target": 3 },
+        { "name": "Loading", "crit": 3, "min": 0, "target": 3 },
+        { "name": "Forklift", "crit": 3, "min": 0, "target": 2 },
+        { "name": "Returns", "crit": 1, "min": 0, "target": 2 },
+        { "name": "WMS", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Safety briefing", "crit": 3, "min": 3, "target": 6 }
+      ]
+    },
+    "hotel": {
+      "name": "Hotel front office",
+      "tasks": [
+        { "name": "Check-in", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Check-out", "crit": 2, "min": 2, "target": 4 },
+        { "name": "Night audit", "crit": 3, "min": 0, "target": 2 },
+        { "name": "PMS", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Complaints", "crit": 2, "min": 1, "target": 3 },
+        { "name": "VCC and payments", "crit": 3, "min": 1, "target": 3 },
+        { "name": "Group arrivals", "crit": 2, "min": 0, "target": 2 },
+        { "name": "Fire procedure", "crit": 3, "min": 3, "target": 5 }
+      ]
+    },
+    "delivery-station": {
+      "name": "Delivery station",
+      "tasks": [
+        { "name": "Induct and sort", "crit": 3, "min": 1, "target": 4 },
+        { "name": "Route staging", "crit": 2, "min": 0, "target": 3 },
+        { "name": "Van loading", "crit": 3, "min": 1, "target": 3 },
+        { "name": "Scanner and driver app", "crit": 3, "min": 2, "target": 4 },
+        { "name": "Missorts and returns", "crit": 1, "min": 0, "target": 2 },
+        { "name": "Dispatch", "crit": 3, "min": 0, "target": 2 },
+        { "name": "Van check", "crit": 2, "min": 0, "target": 2 },
+        { "name": "Safety briefing", "crit": 3, "min": 3, "target": 5 }
+      ]
+    }
+  },
+  "advice": {
+    "none": {
+      "meaning": "Nobody in the team does this task alone. Today it runs on someone still learning, or it does not run at all.",
+      "moves": ["Name who covers it this week, even with support, and tell the shift.", "Borrow a level 4 from another team or shift to train two people at once.", "Write the one-page standard of the task while the trainer is on the floor."],
+      "question": "Who did this task the last time it had to be done, and how?"
+    },
+    "spof": {
+      "meaning": "One person carries this task. A holiday, a sick day or a resignation stops it overnight.",
+      "moves": ["Pair the holder with a trainee at level 2 for one block of every shift.", "Let the trainee run the task with the holder watching, then alone with the holder close by.", "Sign off level 3 only after the trainee has done it alone on a normal shift."],
+      "question": "What happens to this task on the day this person is off?"
+    },
+    "short": {
+      "meaning": "The task is covered, but by fewer people than you planned. One absence and the rest carry it with overtime.",
+      "moves": ["Move the trainee closest to level 3 onto this task for two weeks.", "Plan the training into the rota, not into the quiet hour that never comes.", "Check the level again after a normal shift, not after the course."],
+      "question": "How many people could do this task on the busiest day of the year?"
+    },
+    "below": {
+      "meaning": "Every task has its cover, but some people work below the minimum level a task asks of everyone.",
+      "moves": ["Start with the safety-critical task: nobody works it below the minimum.", "Give each person below the minimum one trainer and one date.", "Check the level on the floor, then update the matrix together with the person."],
+      "question": "Who is working a task today without the level it requires?"
+    },
+    "ok": {
+      "meaning": "Every task has enough people at level 3 or above, and nobody is below a minimum.",
+      "moves": ["Keep one trainee on each critical task, so the cover does not age.", "Take a snapshot each month and watch the flexibility index.", "Bring a level 3 to level 4 on each critical task: trainers are the next bottleneck."],
+      "question": "Which task would you lose first if two people left next month?"
+    }
+  },
+  "tips": [
+    ["Rate what people do, not what they attended.", "A certificate is not a level 3. Level 3 means the person did the task alone, to the standard, on a normal shift."],
+    ["Fill it in with the person.", "Agree each level in a short talk on the floor. The matrix is a plan for training, not a ranking of people."],
+    ["Single points of failure first.", "A task one person carries stops the day that person is off. Pair them with a trainee before anything else."],
+    ["Only a level 4 signs off a level 3.", "The suggested plan pairs each trainee with a level 4 on the same task, the most critical gaps first."],
+    ["Take a snapshot every month.", "The flexibility index and the count of single points of failure over time show whether the training works."]
+  ],
+  "example": {
+    "team": "Outbound team",
+    "template": "warehouse",
+    "people": [
+      { "name": "Besnik", "role": "Team lead", "shift": "Early", "levels": [4, 4, 4, 3, 3, 2, 1, 4, 4] },
+      { "name": "Anna", "role": "Senior picker", "shift": "Early", "levels": [2, 3, 4, 4, 2, 0, 2, 4, 4] },
+      { "name": "Marco", "role": "Forklift driver", "shift": "Early", "levels": [3, 4, 2, 1, 4, 4, 0, 3, 4] },
+      { "name": "Lina", "role": "Picker", "shift": "Late", "levels": [1, 2, 4, 3, 2, 0, 4, 3, 3] },
+      { "name": "Arben", "role": "Loader", "shift": "Late", "levels": [2, 2, 3, 2, 4, 2, 0, 2, 3] },
+      { "name": "Sara", "role": "Packer", "shift": "Late", "levels": [0, 1, 3, 4, 3, 0, 2, 2, 3] },
+      { "name": "Tomasz", "role": "Receiver", "shift": "Night", "levels": [4, 3, 2, 2, 3, 1, 0, 3, 3] },
+      { "name": "Elira", "role": "New starter", "shift": "Night", "levels": [1, 0, 1, 1, 0, 0, 0, 1, 2] }
+    ],
+    "snapshots": [
+      { "daysAgo": 56, "spof": 4, "nocover": 1, "below": 7, "means": [1.75, 2, 2.5, 2.25, 2.25, 1, 0.75, 2.25, 3] },
+      { "daysAgo": 28, "spof": 3, "nocover": 0, "below": 5, "means": [2, 2.25, 2.75, 2.5, 2.5, 1, 1, 2.5, 3] }
+    ]
+  }
+}
