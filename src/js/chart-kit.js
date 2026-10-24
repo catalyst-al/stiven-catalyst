@@ -235,10 +235,13 @@ window.ChartKit = (() => {
         svg.append(tip(dot, p.tip || `${p.x}${series.length > 1 ? ` · ${s.label}` : ""}: ${format(p.y)}${options.unit ? ` ${options.unit}` : ""}`));
       });
     });
+    // Each label takes the room its text needs (about 6.6 px a character at 12 px), so a long one never runs into the next.
+    let lx = left;
     if (series.length > 1) series.forEach((s, i) => {
-      const lx = left + i * 120;
+      const label = shorten(s.label, 16);
       svg.append(svgEl("rect", { x: lx, y: 8, width: 12, height: 4, fill: s.color || SERIES[i % SERIES.length] }));
-      svg.append(svgEl("text", { x: lx + 17, y: 14, "font-size": 12, fill: C.text }, shorten(s.label, 16)));
+      svg.append(svgEl("text", { x: lx + 17, y: 14, "font-size": 12, fill: C.text }, label));
+      lx += 17 + Math.ceil(String(label).length * 6.6) + 18;
     });
     else if (options.unit) svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, fill: C.muted }, options.unit));
     return svg;

@@ -1,8 +1,9 @@
 /* ===== Room Status (js/room-status.js) ===== */
-/* The status colours report the state of a room; the code is always written on the tile too. */
+/* The status colours report the state of a room; the code is always written on the tile too. They are fixed values, not
+   the site's blue, because a family page puts its own colour in place of the blue. */
 .rs-board-box, .rs-setup, .rs-import-box, .rs-sheet {
-  --rs-vd: var(--warn); --rs-co: #f472b6; --rs-od: #a78bfa; --rs-vc: var(--blue-soft); --rs-vi: var(--ok);
-  --rs-occ: var(--muted); --rs-do: var(--blue); --rs-ooo: var(--danger); --rs-oos: #94a3b8;
+  --rs-vd: var(--warn); --rs-co: #f472b6; --rs-od: #a78bfa; --rs-vc: #38bdf8; --rs-vi: var(--ok);
+  --rs-occ: var(--muted); --rs-do: #fb923c; --rs-ooo: var(--danger); --rs-oos: #94a3b8;
 }
 
 /* Setup and import: closed once the rooms are there. */
@@ -43,7 +44,7 @@ details[open] > .rs-setup-summary::after { content: "−"; }
 .rs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
 .rs-tile {
   --rs-c: var(--line);
-  display: grid; align-content: start; gap: 2px; min-width: 0; min-height: 76px; padding: 8px 8px 8px 11px;
+  position: relative; display: grid; align-content: start; gap: 2px; min-width: 0; min-height: 76px; padding: 8px 8px 8px 11px;
   border: 1px solid color-mix(in srgb, var(--rs-c) 55%, var(--line)); border-left: 5px solid var(--rs-c); border-radius: 10px;
   background: color-mix(in srgb, var(--rs-c) 14%, var(--card)); color: var(--ink); font: inherit; text-align: left; cursor: pointer;
   transition: border-color .15s ease, transform .15s ease;
@@ -56,7 +57,8 @@ details[open] > .rs-setup-summary::after { content: "−"; }
 .rs-tile-flags { font-size: 11px; font-weight: 800; letter-spacing: .04em; overflow-wrap: anywhere; }
 .rs-tile-who { overflow: hidden; color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; text-overflow: ellipsis; }
 .rs-tile.is-started .rs-tile-who { color: var(--ink); }
-.rs-tile-note { justify-self: end; margin-top: -16px; color: var(--muted); font-size: 12px; }
+.rs-tile-note { position: absolute; right: 8px; bottom: 6px; color: var(--muted); font-size: 12px; }
+.rs-tile:has(.rs-tile-note) .rs-tile-who { padding-right: 14px; }
 .rs-tile.is-vd, .rs-pick-item.is-vd, .rs-swatch.is-vd, .rs-queue-room.is-vd { --rs-c: var(--rs-vd); }
 .rs-tile.is-co, .rs-pick-item.is-co, .rs-swatch.is-co, .rs-queue-room.is-co { --rs-c: var(--rs-co); }
 .rs-tile.is-od, .rs-pick-item.is-od, .rs-swatch.is-od, .rs-queue-room.is-od { --rs-c: var(--rs-od); }
