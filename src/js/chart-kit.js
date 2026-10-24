@@ -220,7 +220,10 @@ window.ChartKit = (() => {
     rule(options.target, C.target, tx("Target"), "2 3");
     const labels = series[0]?.points || [];
     const every = Math.ceil(labels.length / 8);
-    labels.forEach((p, i) => { if (i % every === 0 || i === labels.length - 1) svg.append(svgEl("text", { x: x(i), y: top + plotH + 18, "text-anchor": "middle", "font-size": 11, fill: C.text }, shorten(p.x, 10))); });
+    // The last point is always labelled; a regular label too close before it is left out so the two never overlap.
+    const last = labels.length - 1;
+    const labelled = (i) => i === last || (i % every === 0 && last - i >= Math.ceil(every * 0.6));
+    labels.forEach((p, i) => { if (labelled(i)) svg.append(svgEl("text", { x: x(i), y: top + plotH + 18, "text-anchor": "middle", "font-size": 11, fill: C.text }, shorten(p.x, 10))); });
     series.forEach((s, si) => {
       const color = s.color || SERIES[si % SERIES.length];
       const d = s.points.map((p, i) => (Number.isFinite(p.y) ? `${i && Number.isFinite(s.points[i - 1].y) ? "L" : "M"}${x(i).toFixed(1)} ${y(p.y).toFixed(1)}` : "")).join(" ");
