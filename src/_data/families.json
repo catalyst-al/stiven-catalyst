@@ -18,7 +18,8 @@
       "/tools/action-tracker/",
       "/tools/daily-board/",
       "/tools/five-s-audit/",
-      "/tools/safety-cross/"
+      "/tools/safety-cross/",
+      "/tools/lost-found/"
     ],
     "learn": [],
     "also": [
@@ -85,6 +86,11 @@
         "when": "Start of shift",
         "do": "Log what happened yesterday, read the talk of the day at the briefing and ask who saw a near miss.",
         "tool": "/tools/safety-cross/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Log every item handed in with its tag number, contact the guest the same day and clear the items due for a decision before the shift ends.",
+        "tool": "/tools/lost-found/"
       }
     ],
     "next": "zenith"
@@ -107,7 +113,9 @@
       "/tools/skills-matrix/",
       "/tools/oee/",
       "/tools/hotel-kpis/",
-      "/tools/gemba-walk/"
+      "/tools/gemba-walk/",
+      "/tools/ops-report/",
+      "/tools/room-inspection/"
     ],
     "learn": [],
     "also": [
@@ -176,6 +184,16 @@
         "when": "During the shift",
         "do": "Walk your layer's questions where the work is done, answer each with yes or no against the standard, and give every no you cannot fix on the spot an owner before you leave the floor.",
         "tool": "/tools/gemba-walk/"
+      },
+      {
+        "when": "Every week",
+        "do": "Choose last week, read the summary and the biggest risk, send the report to your manager and put next week's three priorities into the Action Tracker.",
+        "tool": "/tools/ops-report/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Inspect every checkout and VIP room before reception releases it, send each fault back to the attendant or to maintenance, and coach on the item that fails most this week.",
+        "tool": "/tools/room-inspection/"
       }
     ],
     "next": "lumen"
@@ -197,7 +215,9 @@
       "/tools/process-lab/",
       "/tools/time-study/",
       "/tools/value-stream-map/",
-      "/tools/standard-work/"
+      "/tools/standard-work/",
+      "/tools/spaghetti-diagram/",
+      "/tools/project-portfolio/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -257,6 +277,16 @@
         "when": "When a problem returns",
         "do": "Write the job as a standard with a reason for every key point, start a new version when it changes, and train the team on it.",
         "tool": "/tools/standard-work/"
+      },
+      {
+        "when": "Every month",
+        "do": "Follow one job with the floor plan, draw its walks, and move the stop visited most next to where the work happens.",
+        "tool": "/tools/spaghetti-diagram/"
+      },
+      {
+        "when": "Every week",
+        "do": "Review each project with its lead, tick what the next tollgate still needs, and ask the sponsor to sign the phases that are ready.",
+        "tool": "/tools/project-portfolio/"
       }
     ],
     "next": "atlas"

@@ -1,0 +1,138 @@
+{#- Process Lab, the panels of the second set: the control chart family with a chooser and phases, a chi-square test,
+    a regression line and the measurement system (attribute agreement, Gage R&R). Each section writes its results
+    into its own [data-out]; process-lab-2.js does the work. -#}
+    <div class="pl-panel" role="tabpanel" id="pl-panel-chart" aria-labelledby="pl-tab-chart" data-panel="chart" hidden>
+      <div class="dl-box" data-lab="chart">
+        <fieldset class="pl-chooser">
+          <legend class="kicker">{{ "What do you measure?" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Pick what your data looks like; the right chart follows from it." | t(lang) }}</p>
+          <div class="pl-choices">
+            {%- for kind in cfg.lab.kinds %}
+            <label class="pl-choice"><input type="radio" name="pl-kind" value="{{ kind.id }}" data-kind> <span><strong>{{ kind.ask }}</strong> <small>{{ kind.chart }}</small></span></label>
+            {%- endfor %}
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="kicker">{{ "Your data" | t(lang) }}</legend>
+          <p class="form-note pl-help" data-kind-help></p>
+          <div class="pl-entry">
+            <div class="field">
+              <label for="pl-chart-text">{{ "Rows, one per line" | t(lang) }}</label>
+              <textarea id="pl-chart-text" name="text" rows="9" spellcheck="false" data-field></textarea>
+              <p class="form-note" data-count aria-live="polite"></p>
+            </div>
+            <div class="dl-grid pl-spec">
+              <div class="field pl-wide">
+                <label for="pl-chart-name">{{ "What is measured" | t(lang) }}</label>
+                <input id="pl-chart-name" name="name" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-chart-unit">{{ "Unit" | t(lang) }}</label>
+                <input id="pl-chart-unit" name="unit" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-chart-split">{{ "Change starts at" | t(lang) }} <span class="optional">{{ "limits before and after the change" | t(lang) }}</span></label>
+                <select id="pl-chart-split" name="split" data-field></select>
+              </div>
+            </div>
+          </div>
+          <p class="dl-empty" data-empty>{{ "Nothing pasted yet." | t(lang) }} <button class="button-ghost" type="button" data-lab-example>{{ "Load the example" | t(lang) }}</button></p>
+        </fieldset>
+        <div class="pl-out pl-lab-out" data-out></div>
+      </div>
+    </div>
+
+    <div class="pl-panel" role="tabpanel" id="pl-panel-chi" aria-labelledby="pl-tab-chi" data-panel="chi" hidden>
+      <div class="dl-box" data-lab="chi">
+        <fieldset>
+          <legend class="kicker">{{ "Chi-square test of a table" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Counts in a small table, for example defects by shift: a header row with the column names, then one row per group with its counts. The test says whether the mix really differs between the rows." | t(lang) }}</p>
+          <div class="field">
+            <label for="pl-chi-text">{{ "Table of counts" | t(lang) }}</label>
+            <textarea id="pl-chi-text" name="text" rows="6" spellcheck="false" placeholder="{{ cfg.lab.placeholders.chi }}" data-field></textarea>
+          </div>
+          <p class="dl-empty" data-empty>{{ "Nothing pasted yet." | t(lang) }} <button class="button-ghost" type="button" data-lab-example>{{ "Load the example" | t(lang) }}</button></p>
+        </fieldset>
+        <div class="pl-out pl-lab-out" data-out></div>
+      </div>
+    </div>
+
+    <div class="pl-panel" role="tabpanel" id="pl-panel-reg" aria-labelledby="pl-tab-reg" data-panel="reg" hidden>
+      <div class="dl-box" data-lab="reg">
+        <fieldset>
+          <legend class="kicker">{{ "Scatter with regression" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Two columns: x, what you think drives the result (pallets per truck), and y, the result (loading minutes). A header row gives their names." | t(lang) }}</p>
+          <div class="pl-entry">
+            <div class="field">
+              <label for="pl-reg-text">{{ "Pairs, x and y on each line" | t(lang) }}</label>
+              <textarea id="pl-reg-text" name="text" rows="9" spellcheck="false" placeholder="{{ cfg.lab.placeholders.reg }}" data-field></textarea>
+              <p class="form-note" data-count aria-live="polite"></p>
+            </div>
+            <div class="dl-grid pl-spec">
+              <div class="field">
+                <label for="pl-reg-x">{{ "x: what drives it" | t(lang) }}</label>
+                <input id="pl-reg-x" name="x" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-reg-xunit">{{ "One unit of x" | t(lang) }} <span class="optional">{{ "e.g. pallet" | t(lang) }}</span></label>
+                <input id="pl-reg-xunit" name="xUnit" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-reg-y">{{ "y: the result" | t(lang) }}</label>
+                <input id="pl-reg-y" name="y" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-reg-yunit">{{ "Unit of y" | t(lang) }}</label>
+                <input id="pl-reg-yunit" name="yUnit" autocomplete="off" data-field>
+              </div>
+            </div>
+          </div>
+          <p class="dl-empty" data-empty>{{ "Nothing pasted yet." | t(lang) }} <button class="button-ghost" type="button" data-lab-example>{{ "Load the example" | t(lang) }}</button></p>
+        </fieldset>
+        <div class="pl-out pl-lab-out" data-out></div>
+      </div>
+    </div>
+
+    <div class="pl-panel" role="tabpanel" id="pl-panel-msa" aria-labelledby="pl-tab-msa" data-panel="msa" hidden>
+      <div class="dl-box" data-lab="attr">
+        <fieldset>
+          <legend class="kicker">{{ "Attribute agreement" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "Several appraisers judge the same parts as good or bad, each part at least twice, without seeing their earlier answer. A header row: Part, Standard (the known answer, optional), then one column per appraiser and trial, such as Anna 1, Anna 2, Ben 1, Ben 2." | t(lang) }}</p>
+          <div class="field">
+            <label for="pl-attr-text">{{ "Judgements, one part per line" | t(lang) }}</label>
+            <textarea id="pl-attr-text" name="text" rows="8" spellcheck="false" placeholder="{{ cfg.lab.placeholders.attr }}" data-field></textarea>
+          </div>
+          <p class="dl-empty" data-empty>{{ "Nothing pasted yet." | t(lang) }} <button class="button-ghost" type="button" data-lab-example>{{ "Load the example" | t(lang) }}</button></p>
+        </fieldset>
+        <div class="pl-out pl-lab-out" data-out></div>
+      </div>
+
+      <div class="dl-box" data-lab="gage">
+        <fieldset>
+          <legend class="kicker">{{ "Gage R&R" | t(lang) }}</legend>
+          <p class="form-note pl-help">{{ "About 10 parts, 2 or 3 operators, each part measured 2 or 3 times by each operator in random order. A header row: Part, then one column per operator and trial (Anna 1, Anna 2, Anna 3, Ben 1 …), or three columns: part, operator, value." | t(lang) }}</p>
+          <div class="pl-entry">
+            <div class="field">
+              <label for="pl-gage-text">{{ "Measurements, one part per line" | t(lang) }}</label>
+              <textarea id="pl-gage-text" name="text" rows="9" spellcheck="false" placeholder="{{ cfg.lab.placeholders.gage }}" data-field></textarea>
+            </div>
+            <div class="dl-grid pl-spec">
+              <div class="field pl-wide">
+                <label for="pl-gage-name">{{ "What is measured" | t(lang) }}</label>
+                <input id="pl-gage-name" name="name" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-gage-unit">{{ "Unit" | t(lang) }}</label>
+                <input id="pl-gage-unit" name="unit" autocomplete="off" data-field>
+              </div>
+              <div class="field">
+                <label for="pl-gage-tol">{{ "Tolerance" | t(lang) }} <span class="optional">{{ "USL − LSL, optional" | t(lang) }}</span></label>
+                <input id="pl-gage-tol" name="tol" inputmode="decimal" autocomplete="off" data-field>
+              </div>
+            </div>
+          </div>
+          <p class="dl-empty" data-empty>{{ "Nothing pasted yet." | t(lang) }} <button class="button-ghost" type="button" data-lab-example>{{ "Load the example" | t(lang) }}</button></p>
+        </fieldset>
+        <div class="pl-out pl-lab-out" data-out></div>
+      </div>
+    </div>

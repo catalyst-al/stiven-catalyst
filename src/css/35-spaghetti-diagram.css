@@ -1,0 +1,117 @@
+/* ===== Spaghetti Diagram (js/spaghetti-diagram.js) =====
+   The plan as a quiet drawing surface the width of the panel, the walks as small cards with their colour and number,
+   the points table for the keyboard and the result plan large enough to read. Each walk has a number as well as a
+   colour, so the colour is never the only way to tell two walks apart. */
+.sp2-plan-grid { margin-top: 14px; }
+.sp2-grid-size { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 420px; }
+.sp2-grid-size[hidden] { display: none; }
+.sp2-scale-grid { grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; }
+.sp2-scale-grid .tool-actions { margin: 0; }
+.sp2-scale-status { color: var(--ink); font-weight: 600; }
+[data-scale-start][aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+
+.sp2-views { display: inline-flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; }
+.sp2-views button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+.sp2-change { margin-top: 12px; }
+
+.sp2-canvas {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.sp2-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  /* A tap is a point; a drag still scrolls and a pinch still zooms the page. */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.sp2-canvas.is-scale { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-soft); }
+
+.sp2-draw-grid { margin-top: 14px; grid-template-columns: minmax(0, 1fr); align-items: end; }
+.sp2-draw-actions { margin: 0; }
+
+.sp2-walks { display: grid; gap: 8px; margin-top: 12px; }
+.sp2-walk {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+}
+.sp2-walk.is-active { border-color: var(--blue); }
+.sp2-walk-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+.sp2-walk-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.sp2-swatch {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 5px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.sp2-in {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+.sp2-in:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.sp2-walk-name { font-weight: 700; }
+.sp2-cycles-label { color: var(--muted); font-size: 13px; }
+.sp2-walk-cycles { width: 72px; }
+.sp2-walk-meta { flex: 1 1 auto; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.sp2-walk-draw[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+.sp2-tool {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+.sp2-tool:hover { border-color: var(--blue); color: var(--ink); }
+
+.sp2-table-box { margin-top: 14px; }
+.sp2-table-box summary { cursor: pointer; font-weight: 700; }
+.sp2-points .sp2-num { width: 88px; text-align: right; }
+.sp2-points td { vertical-align: middle; }
+
+.sp2-result-plan .ck-figure { margin-top: 8px; }
+.sp2-result-plan .ck-scroll svg { min-width: 520px; }
+.sp2-results .sp2-compare td:nth-child(3) { font-weight: 700; }
+
+@media (min-width: 761px) {
+  .sp2-draw-grid { grid-template-columns: minmax(0, 1fr) auto; }
+}
+@media (max-width: 420px) {
+  .sp2-scale-grid { grid-template-columns: minmax(0, 1fr); }
+  .sp2-points .sp2-num { width: 70px; }
+}
+
+@media print {
+  .sp2-setup, body:has(.sp2-results) .dl-example-note { display: none !important; }
+  .sp2-result-plan .ck-scroll { overflow: visible; border: 0; }
+  .sp2-result-plan .ck-scroll svg { min-width: 0 !important; width: 100%; }
+  .sp2-results .dl-table-wrap { max-height: none; overflow: visible; border: 0; }
+  .sp2-results .dl-panel { break-inside: avoid; }
+  .sp2-results .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

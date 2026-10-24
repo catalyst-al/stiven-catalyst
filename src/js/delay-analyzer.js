@@ -35,6 +35,10 @@
     parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout, periodTotal, rangeText,
     panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
+  // Newer pieces of the kit (filter, day / week / month, the period before); a page with an older kit still works.
+  const kit = window.ToolKit;
+  const Annotations = window.Annotations || null;
+  const SLUG = Annotations ? Annotations.slugHere() : "";
 
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
@@ -62,7 +66,8 @@
   const targetPlaceholder = targetInput?.placeholder || "";
   const targetNote = root.querySelector("[data-profile-target]");
 
-  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [], example: {}, totalsFor: {} });
+  const state = loadState(KEY, { period: "", routes: "", departureGrace: "10", arrivalGrace: "15", target: "", from: "", to: "", rows: [], example: {}, totalsFor: {}, grain: "", compare: false });
+  if (!["", "day", "week", "month"].includes(state.grain)) state.grain = "";
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   const save = () => write(KEY, state);
@@ -149,13 +154,41 @@
   };
   const graces = () => [Math.max(0, parseNumber(state.departureGrace) || 0), Math.max(0, parseNumber(state.arrivalGrace) || 0)];
 
-  const analyse = () => {
+  // Each route with its delays and whether it was late, by the graces set now.
+  const judge = (list) => {
     const [depGrace, arrGrace] = graces();
-    const rows = periodRows().map((row) => {
+    return list.map((row) => {
       const dep = diff(row.planDep, row.actDep);
       const arr = diff(row.planArr, row.actArr);
       return { ...row, dep, arr, lateDep: dep !== null && dep > depGrace, ...classify(dep, arr, depGrace, arrGrace) };
     });
+  };
+
+  // A reason or shift chosen in the result's lists filters the log table and the trend to it. It is not saved: a filter
+  // left on would hide routes the next time the log is opened. A reason picks the late routes with that reason (the
+  // trend is then their share of all routes); a shift picks that shift's routes.
+  let picked = null;
+  const pickTest = () => {
+    if (!picked) return null;
+    if (picked.field === "shift") return (row) => (row.shift || NOT_RECORDED) === picked.value;
+    const [depGrace, arrGrace] = graces();
+    return (row) => (row.reason || NOT_RECORDED) === picked.value && classify(diff(row.planDep, row.actDep), diff(row.planArr, row.actArr), depGrace, arrGrace).late;
+  };
+  let rerender = () => {};
+  const choose = (name, value) => {
+    picked = picked && picked.field === name && picked.value === value ? null : { field: name, value };
+    kit.keepFocus ? kit.keepFocus(rerender) : rerender();
+  };
+  const clearPick = () => {
+    const was = picked;
+    picked = null;
+    kit.keepFocus ? kit.keepFocus(rerender, was ? `pick:${was.field}:${was.value}` : "") : rerender();
+  };
+  const pickOptions = (name) => (kit.filterChip ? { pick: (item) => choose(name, item.key), picked: (item) => picked?.field === name && picked.value === item.key, pickKey: name } : {});
+
+  const analyse = () => {
+    const [depGrace, arrGrace] = graces();
+    const rows = judge(periodRows());
 
     const logged = rows.length;
     // "Routes in the period" typed for other days than the ones chosen now says nothing about these days: their
@@ -408,23 +441,71 @@
     if (result.routesStale) notes.push(el("p", "dl-warning", staleText(result)));
     const grid = [];
     // Trend: the share of routes that were late each day (week), or the count of late routes when only some routes are logged.
-    // The on-time target, when there is one, becomes a ceiling for the late share.
-    const trend = result.partial ? trendBuckets(result.rows, (row) => (row.late ? 1 : 0)) : trendBuckets(result.rows, (row) => (row.late ? 1 : 0), 60, () => 1);
-    if (trend.buckets.length > 1) {
-      const unit = trend.unit === "week" ? tx("week") : tx("day");
+    // The on-time target, when there is one, becomes a ceiling for the late share. A reason or shift picked in the lists
+    // narrows it; the period before can be drawn over it.
+    const test = pickTest();
+    const reasonPick = picked?.field === "reason";
+    const lateOf = (row) => (row.late && (!reasonPick || test(row)) ? 1 : 0);
+    const trendRows = test && !reasonPick ? result.rows.filter(test) : result.rows;
+    const span = dateSpan(result.rows);
+    const range = { from: state.from || span?.from || "", to: state.to || span?.to || "" };
+    const before = state.compare && kit.previousRange ? kit.previousRange(range) : null;
+    // A filter or a comparison keeps the columns of the whole period, so they line up with the ones before.
+    const reach = { ...(state.grain && { unit: state.grain }), ...((test || before) && range.from && { from: range.from, to: range.to }) };
+    const trendOf = (list, options) => (result.partial ? trendBuckets(list, lateOf, 60, null, options) : trendBuckets(list, lateOf, 60, () => 1, options));
+    const trend = trendOf(trendRows, reach);
+    if (trend.buckets.length > 1 || test || state.grain) {
+      const unit = trend.unit === "week" ? tx("week") : trend.unit === "month" ? tx("month") : tx("day");
       const lateTarget = !result.partial && result.target && result.target < 1 ? 1 - result.target : null;
-      const trendPanel = panel(tx("Trend over time"), result.partial
+      const trendPanel = panel(picked ? `${tx("Trend over time")} · ${picked.value}` : tx("Trend over time"), result.partial
         ? tx("Late routes per {unit}. The dashed line is the average; the highest {unit} is red.", { unit })
         : lateTarget ? tx("Share of routes that were late per {unit}. The dashed line is the average, the solid line the target; columns above it are red.", { unit })
         : tx("Share of routes that were late per {unit}. The dashed line is the average; the highest {unit} is red.", { unit }));
-      trendPanel.append(trendFigure(trend, {
-        title: `${data.tool}: ${tx("Trend over time")}`,
-        unit: result.partial ? tx("Late routes") : tx("Late routes (%)"),
-        average: tx("Average"),
-        format: result.partial ? undefined : (value) => pct(value, 0),
-        target: lateTarget,
-        targetLabel: tx("Target"),
-      }, KEY.replace(/^sc-/, "")));
+      if (kit.trendControls) {
+        trendPanel.append(kit.trendControls({
+          unit: trend.unit,
+          grain: state.grain,
+          compare: state.compare,
+          onGrain: (value) => { state.grain = value; save(); kit.keepFocus(rerender); },
+          onCompare: (on) => { state.compare = on; save(); kit.keepFocus(rerender); },
+        }));
+      }
+      if (picked && kit.filterChip) trendPanel.append(kit.filterChip(picked.value, clearPick));
+      const format = result.partial ? (value) => int.format(value) : (value) => pct(value, 0);
+      let previous = null;
+      let compareLine = "";
+      if (before) {
+        const earlier = judge(inRange(state.rows, before.from, before.to));
+        // Without routes on or before those days the log did not run yet: 0 would be no comparison.
+        const ran = state.rows.some((row) => row.date && row.date <= before.to);
+        previous = ran ? trendOf(test && !reasonPick ? earlier.filter(test) : earlier, { unit: trend.unit, from: before.from, to: before.to }) : null;
+        const now = kit.trendTotal(trend).value;
+        const then = previous ? kit.trendTotal(previous).value : null;
+        const share = (value) => pct(value, 1);
+        compareLine = then === null || now === null
+          ? tx("The log has no routes for the period before ({days}).", { days: spanText(before) })
+          : `${kit.compareText(now, then, result.partial ? format : share)} (${spanText(before)})`;
+        if (then === null) previous = null;
+      }
+      const events = Annotations && trend.buckets.length ? Annotations.list(trend.buckets[0].key, trend.buckets.at(-1).to, SLUG).map((item) => ({ date: item.date, text: item.text })) : [];
+      if (trend.buckets.length > 1) {
+        trendPanel.append(trendFigure(trend, {
+          title: `${data.tool}: ${tx("Trend over time")}`,
+          unit: result.partial ? tx("Late routes") : tx("Late routes (%)"),
+          average: tx("Average"),
+          format: result.partial ? undefined : format,
+          target: lateTarget,
+          targetLabel: tx("Target"),
+          previous: previous?.buckets,
+          events,
+        }, KEY.replace(/^sc-/, "")));
+      } else {
+        trendPanel.append(el("p", "dl-panel-note", tx("Not enough days for a trend. Choose Day, or a longer period.")));
+      }
+      if (compareLine) trendPanel.append(el("p", "ci-compare-line", compareLine));
+      if (previous) trendPanel.append(el("p", "dl-panel-note", tx("The grey dotted line is the period before, at the same place in its period.")));
+      if (events.length) trendPanel.append(el("p", "dl-panel-note", tx("A flag marks a change on the timeline. Point at it to read it.")));
+      if (kit.filterChip && !picked) trendPanel.append(el("p", "dl-panel-note", tx("Choose a reason or a shift in the lists below to see only its routes here and in the log.")));
       grid.push(trendPanel);
     }
     if (result.late.length) {
@@ -443,6 +524,7 @@
       const vital = result.reasons.filter((item) => item.vital);
       const pareto = panel(tx("Pareto of reasons"), tx("{a} of {b} reasons carry {pct} of late routes. Fix these first.", { a: vital.length, b: result.reasons.length, pct: pct(vital.at(-1).cumulative, 0) }));
       pareto.append(barList(result.reasons, {
+        ...pickOptions("reason"),
         ranked: true,
         highlight: (item) => item.vital,
         tag: tx("Vital few"),
@@ -458,14 +540,14 @@
       hours.append(countBars(result.hours));
       grid.push(hours);
       const shifts = panel(tx("By shift"), onlySome);
-      shifts.append(countBars(result.shifts));
+      shifts.append(countBars(result.shifts, pickOptions("shift")));
       grid.push(shifts);
     } else {
       const hours = panel(tx("By planned departure hour"), tx("Share of routes that arrived late, by the hour they were planned to leave."));
       hours.append(rateBars(result.hours, { highlight: (item) => item === result.worstHour, tag: tx("Worst") }));
       grid.push(hours);
       const shifts = panel(tx("By shift"), tx("Share of each shift's routes that arrived late."));
-      shifts.append(rateBars(result.shifts));
+      shifts.append(rateBars(result.shifts, pickOptions("shift")));
       grid.push(shifts);
     }
 
@@ -567,7 +649,9 @@
       };
     },
     renderResults,
+    filter: () => (picked ? { label: picked.value, test: pickTest(), clear: clearPick } : null),
   });
+  rerender = () => book.render();
 
   // While a route is typed in: its delay and whether it counts as late, before it is added.
   const showPreview = () => {
@@ -636,6 +720,12 @@
   if (Workplace) {
     window.addEventListener("workplace:changed", profileChanged);
     window.addEventListener("storage", (event) => { if (event.key === Workplace.KEY || event.key === null) profileChanged(); });
+  }
+
+  // Events on the timeline: the form adds them, and the charts redraw when one is added or removed (here or in another tab).
+  if (Annotations) {
+    Annotations.mount(document.querySelector("[data-annotations]"), SLUG);
+    window.addEventListener("annotations:changed", () => book.render());
   }
 
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);

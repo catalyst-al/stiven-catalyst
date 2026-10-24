@@ -16,6 +16,12 @@ window.ToolKit = (() => {
     const format = new Intl.DateTimeFormat(LOCALE, { ...(weekday && { weekday: "short" }), day: "numeric", month: "short", timeZone: "UTC" });
     return (date) => format.format(date);
   };
+  // "Oct 2026" / "Okt. 2026" / "Tet 2026": the name of a month in a trend by month.
+  const monthYear = (() => {
+    if (LANG === "sq") return (date) => `${SQ_MONTHS[date.getUTCMonth()].charAt(0).toUpperCase()}${SQ_MONTHS[date.getUTCMonth()].slice(1)} ${date.getUTCFullYear()}`;
+    const format = new Intl.DateTimeFormat(LOCALE, { month: "short", year: "numeric", timeZone: "UTC" });
+    return (date) => format.format(date);
+  })();
   // German and Albanian write 1.234,5 (or 1 234,5); English writes 1,234.5.
   const DECIMAL_COMMA = LANG !== "en";
   const strings = window.UiStrings || (() => {
@@ -314,15 +320,27 @@ window.ToolKit = (() => {
 
   // Horizontal bars. Each item has key and value; options.label(item) returns
   // [bold value, rest of the text], options.title(item) the hover text.
+  // With options.pick(item) every row is a button that picks its item (a log filters by it), pressed when
+  // options.picked(item) is true; options.pickKey names the list, so the same row gets the focus back after a redraw.
   const barList = (items, options = {}) => {
     const list = el("div", "dl-bars");
     const max = Math.max(...items.map((item) => item.value), 0) || 1;
+    const pickable = typeof options.pick === "function";
+    // Inside a button only phrasing content is allowed, so the parts are spans there.
+    const box = pickable ? "span" : "div";
     items.forEach((item, index) => {
-      const row = el("div", "dl-bar");
+      const row = el(pickable ? "button" : "div", "dl-bar");
+      if (pickable) {
+        row.type = "button";
+        row.classList.add("is-pick");
+        row.setAttribute("aria-pressed", String(Boolean(options.picked?.(item))));
+        row.dataset.focusKey = `pick:${options.pickKey || ""}:${item.key}`;
+        row.addEventListener("click", () => options.pick(item));
+      }
       const highlight = options.highlight ? options.highlight(item) : false;
       if (highlight) row.classList.add("is-top");
       if (options.title) row.title = options.title(item);
-      const label = el("div", "dl-bar-label");
+      const label = el(box, "dl-bar-label");
       const name = el("span", "dl-bar-name");
       if (options.ranked) name.append(el("span", "dl-rank", String(index + 1)));
       name.append(item.key);
@@ -332,8 +350,8 @@ window.ToolKit = (() => {
       const value = el("span", "dl-bar-value");
       value.append(el("strong", null, strong), rest);
       label.append(value);
-      const track = el("div", "bar-track");
-      const fill = el("div", "bar-fill");
+      const track = el(box, "bar-track");
+      const fill = el(box, "bar-fill");
       fill.style.width = `${(item.value / max) * 100}%`;
       track.append(fill);
       row.append(label, track);
@@ -391,15 +409,23 @@ window.ToolKit = (() => {
     };
   };
 
-  // Trend over time. trendBuckets groups dated rows by day (a period of up to 31 days) or by week
-  // (Monday to Sunday), fills quiet days with 0 and sums valueOf(row). It is plain arithmetic, so a test can call it.
+  // Trend over time. trendBuckets groups dated rows by day (a period of up to 31 days), by week (Monday to Sunday)
+  // or, when asked, by month (from its first day), fills quiet days with 0 and sums valueOf(row). It is plain
+  // arithmetic, so a test can call it.
   const mondayOf = (isoDate) => {
     const date = new Date(`${isoDate}T00:00:00Z`);
     return addDays(isoDate, -((date.getUTCDay() + 6) % 7));
   };
+  const monthStart = (isoDate) => `${isoDate.slice(0, 7)}-01`;
+  const nextMonth = (key) => {
+    const date = new Date(`${key}T00:00:00Z`);
+    date.setUTCMonth(date.getUTCMonth() + 1);
+    return date.toISOString().slice(0, 10);
+  };
+  const TREND_UNITS = ["day", "week", "month"];
   // With totalOf, each bucket holds a share (sum of valueOf over sum of totalOf, 0 to 1) and its count and total;
-  // a day with no total has no share and draws no column. options: { unit: "day" or "week" instead of by the length of
-  // the span, from and to: dates the buckets must cover even where there are no rows }.
+  // a day with no total has no share and draws no column. options: { unit: "day", "week" or "month" instead of by the
+  // length of the span, from and to: dates the buckets must cover even where there are no rows }.
   const trendBuckets = (rows, valueOf, maxBuckets = 60, totalOf = null, options = {}) => {
     const dated = rows.filter((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.date));
     const undated = rows.length - dated.length;
@@ -407,22 +433,49 @@ window.ToolKit = (() => {
     if (!dated.length && !reach.length) return { unit: options.unit || "day", buckets: [], undated };
     const dates = [...dated.map((row) => row.date), ...reach].sort();
     const days = Math.round((new Date(`${dates.at(-1)}T00:00:00Z`) - new Date(`${dates[0]}T00:00:00Z`)) / 864e5) + 1;
-    const unit = options.unit || (days <= 31 ? "day" : "week");
-    const keyOf = unit === "day" ? (d) => d : mondayOf;
+    const unit = TREND_UNITS.includes(options.unit) ? options.unit : options.unit ? "week" : days <= 31 ? "day" : "week";
+    const keyOf = unit === "day" ? (d) => d : unit === "month" ? monthStart : mondayOf;
+    const next = unit === "day" ? (key) => addDays(key, 1) : unit === "month" ? nextMonth : (key) => addDays(key, 7);
     const sums = new Map();
     const totals = new Map();
     dated.forEach((row) => {
       sums.set(keyOf(row.date), (sums.get(keyOf(row.date)) || 0) + valueOf(row));
       if (totalOf) totals.set(keyOf(row.date), (totals.get(keyOf(row.date)) || 0) + totalOf(row));
     });
-    const step = unit === "day" ? 1 : 7;
     const buckets = [];
-    for (let key = keyOf(dates[0]); key <= keyOf(dates.at(-1)); key = addDays(key, step)) {
+    for (let key = keyOf(dates[0]); key <= keyOf(dates.at(-1)); key = next(key)) {
       const count = sums.get(key) || 0;
       const total = totals.get(key) || 0;
-      buckets.push(totalOf ? { key, to: addDays(key, step - 1), count, total, value: total ? count / total : 0 } : { key, to: addDays(key, step - 1), value: count });
+      const to = addDays(next(key), -1);
+      buckets.push(totalOf ? { key, to, count, total, value: total ? count / total : 0 } : { key, to, value: count });
     }
     return { unit, buckets: buckets.slice(-maxBuckets), undated };
+  };
+  // The period of the same length just before a period: 8–14 Oct gives 1–7 Oct (days: 7).
+  const daysBetween = (from, to) => Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5);
+  const previousRange = (range) => {
+    if (!range || !/^\d{4}-\d{2}-\d{2}$/.test(range.from || "") || !/^\d{4}-\d{2}-\d{2}$/.test(range.to || "") || range.to < range.from) return null;
+    const days = daysBetween(range.from, range.to) + 1;
+    return { from: addDays(range.from, -days), to: addDays(range.from, -1), days };
+  };
+  // What a whole trend adds up to: with shares, its count over its total (the same as the dashed average); otherwise
+  // the sum of its buckets. value is null for shares without any total.
+  const trendTotal = (trend) => {
+    const buckets = trend?.buckets || [];
+    if (!buckets.some((b) => "total" in b)) return { value: buckets.reduce((sum, b) => sum + b.value, 0), count: null, total: null };
+    const count = buckets.reduce((sum, b) => sum + b.count, 0);
+    const total = buckets.reduce((sum, b) => sum + b.total, 0);
+    return { value: total ? count / total : null, count, total };
+  };
+  // The change from before to now as a share of before: 0.57 % to 0.42 % is about −0.26. null when before is 0 or missing.
+  const periodChange = (now, before) => (Number.isFinite(now) && Number.isFinite(before) && before > 0 ? (now - before) / before : null);
+  // "−26%", "+12%", "±0%".
+  const changeText = (change) => (change === null ? "" : `${change > 0.0005 ? "+" : change < -0.0005 ? "−" : "±"}${pct(Math.abs(change), 0)}`);
+  // The line under a trend compared with the period before: "This period 0.42% · before 0.57% · −26%".
+  const compareText = (now, before, format) => {
+    const change = periodChange(now, before);
+    const vars = { now: format(now), before: format(before), change: changeText(change) };
+    return change === null ? tx("This period {now} · before {before}", vars) : tx("This period {now} · before {before} · {change}", vars);
   };
   // Shares over a volume of each day: countOf(row) over volumes[{ date, volume }], per day or per week. A day with
   // entries but no volume cannot have a share, so it is left out and listed in `skipped`; a day with a volume and no
@@ -454,7 +507,9 @@ window.ToolKit = (() => {
   };
   // Columns per bucket, a dashed average line and the highest bucket in the alert colour. With labels.target (a share,
   // for buckets that hold shares) a solid target line is drawn and every column above it is in the alert colour instead.
-  // labels: { title, unit (what the columns count), average, format (optional), target, targetLabel }. Returns an <svg>.
+  // labels: { title, unit (what the columns count), average, format (optional), target, targetLabel, previous (the
+  // buckets of the period before, in the same order: drawn as a thin dashed line over the columns and named in each
+  // column's tooltip), events ([{ date, text }]: a dashed vertical line with a flag on each date) }. Returns an <svg>.
   const trendChart = (trend, colors, labels) => {
     const { buckets, unit } = trend;
     const W = 640, H = 280, left = 44, right = 14, top = 28, bottom = 44;
@@ -463,13 +518,18 @@ window.ToolKit = (() => {
     const format = labels.format || ((value) => int.format(Math.round(value * 10) / 10));
     const max = Math.max(...buckets.map((b) => b.value), 0);
     const target = shares && Number.isFinite(labels.target) && labels.target > 0 ? labels.target : null;
-    const peak = Math.max(max, target ?? 0);
+    // A bucket of the period before counts only where it has something to compare: a share needs its total.
+    const previous = buckets.map((b, i) => {
+      const before = labels.previous?.[i];
+      return before && (!shares || before.total > 0) ? before : null;
+    });
+    const peak = Math.max(max, target ?? 0, ...previous.map((b) => b?.value ?? 0));
     const ceiling = shares ? Math.min(1, niceMax(peak * 100) / 100) : niceMax(peak);
     const y = (value) => top + plotH - (Math.min(value, ceiling) / ceiling) * plotH;
     const band = plotW / buckets.length;
     const barW = Math.max(2, Math.min(40, band * 0.7));
     const dayName = dayMonth(false);
-    const nameOf = (b) => dayName(new Date(`${b.key}T00:00:00Z`));
+    const nameOf = unit === "month" ? (b) => monthYear(new Date(`${b.key}T00:00:00Z`)) : (b) => dayName(new Date(`${b.key}T00:00:00Z`));
     const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": labels.title, class: "tr-chart", "font-family": "Inter, Segoe UI, Roboto, Arial, sans-serif" });
     svg.append(svgEl("title", {}, labels.title));
     [0, 0.5, 1].forEach((f) => {
@@ -483,7 +543,9 @@ window.ToolKit = (() => {
       const hot = target ? b.total > 0 && b.value > target : max > 0 && i === top1;
       // The chart is one image with one name; a column is a tooltip (its title), not a tab stop of its own.
       const g = svgEl("g", { class: "tr-col" });
-      const tipText = `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}`;
+      const before = previous[i];
+      const tipText = `${nameOf(b)}: ${format(b.value)} ${labels.unit}${shares ? ` (${b.count}/${b.total})` : ""}${before
+        ? `\n${labels.beforeLabel || tx("Before")} (${nameOf(before)}): ${format(before.value)}${shares ? ` (${before.count}/${before.total})` : ""}` : ""}`;
       g.append(svgEl("title", {}, tipText));
       g.setAttribute("data-tip", tipText);
       g.append(svgEl("rect", { x: cx - band / 2, y: top, width: band, height: plotH, fill: "transparent" }));
@@ -491,6 +553,31 @@ window.ToolKit = (() => {
       if (buckets.length <= 16 && b.value > 0) g.append(svgEl("text", { x: cx, y: y(b.value) - 5, "text-anchor": "middle", "font-size": 12, "font-weight": 700, style: `fill:${colors.text}` }, format(b.value)));
       svg.append(g);
       if (i % Math.ceil(buckets.length / 10) === 0) svg.append(svgEl("text", { x: cx, y: top + plotH + 18, "text-anchor": "middle", "font-size": 12, style: `fill:${colors.text}` }, nameOf(b)));
+    });
+    // The period before: one dashed line through its buckets, broken where a bucket has nothing to compare.
+    if (previous.some(Boolean)) {
+      let d = "";
+      previous.forEach((b, i) => {
+        if (!b) return;
+        d += `${i && previous[i - 1] ? "L" : "M"}${(left + band * (i + 0.5)).toFixed(1)},${y(b.value).toFixed(1)}`;
+      });
+      svg.append(svgEl("path", { d, class: "tr-before", fill: "none", style: `stroke:${colors.muted}`, "stroke-width": 2, "stroke-dasharray": "3 3", "stroke-linecap": "round", "pointer-events": "none" }));
+      previous.forEach((b, i) => { if (b) svg.append(svgEl("circle", { cx: left + band * (i + 0.5), cy: y(b.value), r: 2.5, style: `fill:${colors.muted}`, "pointer-events": "none" })); });
+    }
+    // Events on the timeline: a dashed line on the day, inside its week or month, with a small flag at the top.
+    const first = buckets[0]?.key;
+    const last = buckets.at(-1)?.to;
+    (labels.events || []).filter((event) => first && event.date >= first && event.date <= last).forEach((event) => {
+      const i = buckets.findIndex((b) => event.date >= b.key && event.date <= b.to);
+      const b = buckets[i];
+      const x = left + band * (i + (daysBetween(b.key, event.date) + 0.5) / (daysBetween(b.key, b.to) + 1));
+      const tip = `${dayName(new Date(`${event.date}T00:00:00Z`))}: ${event.text}`;
+      const g = svgEl("g", { class: "tr-event", "data-tip": tip });
+      g.append(svgEl("title", {}, tip));
+      g.append(svgEl("rect", { x: x - 7, y: top - 8, width: 14, height: plotH + 8, fill: "transparent" }));
+      g.append(svgEl("line", { x1: x, x2: x, y1: top - 2, y2: top + plotH, style: `stroke:${colors.text}`, "stroke-width": 1.25, "stroke-dasharray": "4 3" }));
+      g.append(svgEl("path", { d: `M${x.toFixed(1)},${top - 8}h9l-3,4l3,4h-9z`, style: `fill:${colors.text}` }));
+      svg.append(g);
     });
     const average = shares
       ? buckets.reduce((sum, b) => sum + b.count, 0) / (buckets.reduce((sum, b) => sum + b.total, 0) || 1)
@@ -576,6 +663,55 @@ window.ToolKit = (() => {
     actions.append(svgButton, pngButton);
     figure.append(scroller, actions);
     return figure;
+  };
+
+  // The chip that says a log is filtered, and clears the filter: "Filtered: Loading ×".
+  const filterChip = (value, onClear) => {
+    const chip = el("button", "ci-chip");
+    chip.type = "button";
+    chip.dataset.focusKey = "filter-chip";
+    chip.setAttribute("aria-label", tx("Clear the filter: {value}", { value }));
+    const x = el("span", "ci-chip-x", "×");
+    x.setAttribute("aria-hidden", "true");
+    chip.append(el("span", null, tx("Filtered: {value}", { value })), x);
+    chip.addEventListener("click", onClear);
+    return chip;
+  };
+  // A result rebuilt under a control that was just used: the control with the same data-focus-key gets the focus
+  // back, or the one named by fallback when it is gone (the chip, after the filter is cleared).
+  const keepFocus = (render, fallback = "") => {
+    const active = document.activeElement;
+    const key = active?.closest?.("[data-focus-key]")?.dataset.focusKey || "";
+    render();
+    if (!key) return;
+    const find = (name) => [...document.querySelectorAll("[data-focus-key]")].find((node) => node.dataset.focusKey === name && !node.closest("[hidden]"));
+    (find(key) || (fallback && find(fallback)))?.focus({ preventScroll: true });
+  };
+  // Above a trend: Day / Week / Month (automatic until one is chosen) and the comparison with the period before.
+  // unit is the unit the chart uses now, grain the one chosen ("" for automatic).
+  const trendControls = ({ unit, grain, compare, onGrain, onCompare }) => {
+    const box = el("div", "ci-controls");
+    const group = el("div", "ci-grain");
+    group.setAttribute("role", "group");
+    group.setAttribute("aria-label", tx("Show the trend by"));
+    [["day", "Day"], ["week", "Week"], ["month", "Month"]].forEach(([value, label]) => {
+      const button = el("button", null, tx(label));
+      button.type = "button";
+      button.dataset.focusKey = `grain:${value}`;
+      button.setAttribute("aria-pressed", String(value === unit));
+      button.addEventListener("click", () => onGrain(value));
+      group.append(button);
+    });
+    if (!grain) group.append(el("span", "ci-auto", tx("automatic")));
+    const label = el("label", "ci-compare");
+    const box2 = el("input");
+    box2.type = "checkbox";
+    box2.checked = Boolean(compare);
+    box2.dataset.focusKey = "compare";
+    box2.addEventListener("change", () => onCompare(box2.checked));
+    label.append(box2, " ", tx("Compare with the period before"));
+    box.append(group, label);
+    return box;
   };
 
   // "Start here" card: stage or reason advice from a tool's data file.
@@ -800,7 +936,9 @@ window.ToolKit = (() => {
     return { sync: (state) => { if (state.example && !exampleMatches(state)) state.example = {}; note.hidden = !exampleMatches(state); } };
   };
 
-  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results }) => {
+  // filter, when given, returns null or { label, test(row), clear() }: the table then shows only the rows that pass,
+  // under a chip that clears it (the result is not filtered here: the tool decides what it filters).
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null }) => {
     const logBody = root.querySelector("[data-log]");
     const logWrap = root.querySelector("[data-log-wrap]");
     const logEmpty = root.querySelector("[data-log-empty]");
@@ -819,6 +957,9 @@ window.ToolKit = (() => {
     more.type = "button";
     more.hidden = true;
     logWrap.after(more);
+    const filterNote = el("div", "ci-log-filter");
+    filterNote.hidden = true;
+    logWrap.before(filterNote);
     more.addEventListener("click", () => {
       shown = Math.min(shown + LOG_LIMIT, state.rows.length);
       renderLog();
@@ -827,9 +968,13 @@ window.ToolKit = (() => {
 
     const renderLog = () => {
       const rows = state.rows;
+      const only = typeof filter === "function" && rows.length ? filter() : null;
+      const passing = only ? rows.filter(only.test) : rows;
+      filterNote.hidden = !only;
+      filterNote.replaceChildren(...(only ? [filterChip(only.label, only.clear), el("span", "form-note", tx("{a} of {b}", { a: int.format(passing.length), b: int.format(rows.length) }))] : []));
       logBody.replaceChildren();
       const newest = [];
-      for (let index = rows.length - 1; index >= 0 && newest.length < shown; index--) newest.push([rows[index], index]);
+      for (let index = rows.length - 1; index >= 0 && newest.length < shown; index--) if (!only || only.test(rows[index])) newest.push([rows[index], index]);
       newest.forEach(([row, index]) => {
         const tr = el("tr");
         tr.append(...cells(row));
@@ -844,8 +989,8 @@ window.ToolKit = (() => {
       });
       logWrap.hidden = !rows.length;
       logEmpty.hidden = rows.length > 0;
-      const hiddenRows = rows.length - newest.length;
-      logCount.textContent = rows.length ? `${countText(rows)}${hiddenRows ? tx(" · newest {n} shown, CSV has all", { n: int.format(newest.length) }) : ""}` : "";
+      const hiddenRows = passing.length - newest.length;
+      logCount.textContent = rows.length ? `${countText(passing)}${hiddenRows ? tx(" · newest {n} shown, CSV has all", { n: int.format(newest.length) }) : ""}` : "";
       more.hidden = !hiddenRows;
       more.textContent = tx("Show {n} more", { n: int.format(Math.min(LOG_LIMIT, hiddenRows)) });
       const others = rows.length || !key ? [] : otherLogs(key);
@@ -1202,6 +1347,6 @@ window.ToolKit = (() => {
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
-    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

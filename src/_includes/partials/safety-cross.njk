@@ -29,7 +29,7 @@
           </div>
           <div class="field">
             <label for="sx-area">{{ "Area" | t(lang) }}</label>
-            <select id="sx-area" name="area">
+            <select id="sx-area" name="area" data-scan>
               {%- for area in cfg.areas %}
               <option>{{ area }}</option>
               {%- endfor %}
@@ -79,7 +79,7 @@
       <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "type" | t(lang) }}, {{ "area" | t(lang) }}, {{ "what happened" | t(lang) }}, {{ "cause" | t(lang) }}, {{ "severity 1–4" | t(lang) }}, {{ "action" | t(lang) }}, {{ "owner" | t(lang) }}, {{ "done (yes or no)" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "The type as its name or its short name, for example near miss or first aid." | t(lang) }}</p>
       <div class="field">
         <label class="visually-hidden" for="sx-paste">{{ "Rows to import" | t(lang) }}</label>
-        <textarea id="sx-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+        <textarea id="sx-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date","shift","type","area","what","cause","severity","action","owner","done"]' data-column-labels='[{{ "date" | t(lang) | dump }},{{ "shift" | t(lang) | dump }},{{ "type" | t(lang) | dump }},{{ "area" | t(lang) | dump }},{{ "what happened" | t(lang) | dump }},{{ "cause" | t(lang) | dump }},{{ "severity 1–4" | t(lang) | dump }},{{ "action" | t(lang) | dump }},{{ "owner" | t(lang) | dump }},{{ "done (yes or no)" | t(lang) | dump }}]'></textarea>
       </div>
       <div class="tool-actions">
         <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
@@ -146,7 +146,11 @@
 
 <script type="application/json" id="safety-cross-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/safety-cross.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/media-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/safety-cross-photos.js' | assetUrl }}" defer></script>

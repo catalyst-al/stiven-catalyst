@@ -132,6 +132,9 @@
       </div>
     </details>
 
+    {%- set anPrefix = "cc" %}
+    {% include "partials/annotations-form.njk" %}
+
     <div class="dl-box">
       <div class="dl-log-head">
         <p class="kicker">{{ "Days" | t(lang) }}</p>
@@ -171,4 +174,5 @@
 
 <script type="application/json" id="sigma-chart-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/annotations.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/sigma-chart.js' | assetUrl }}" defer></script>

@@ -1,0 +1,373 @@
+{
+  "storageKey": "sc-project-portfolio-sq",
+  "text": {
+    "tool": "Portofoli i projekteve",
+    "csv": "portofoli-i-projekteve",
+    "newProject": "Projekt i ri",
+    "titlePlaceholder": "p.sh. Dëmet në dalje nën 0,30%",
+    "leadPlaceholder": "Kush e drejton projektin",
+    "sponsorPlaceholder": "Kush e ka përgjegjësinë e rezultatit dhe nënshkruan pikat e kalimit",
+    "areaPlaceholder": "p.sh. Dalja e mallit",
+    "problemPlaceholder": "Çfarë, ku, që kur, sa, dhe hendeku nga objektivi. Pa shkak, pa zgjidhje.",
+    "goalPlaceholder": "p.sh. 0,30% ose më pak deri në javën 46, pa kohë më të gjata ngarkimi",
+    "scopeInPlaceholder": "p.sh. Nga rafti i mbledhjes deri te dorëzimi te shoferi",
+    "scopeOutPlaceholder": "p.sh. Transporti ndërqytetës, ambalazhi i furnitorit",
+    "teamPlaceholder": "Emrat dhe rolet",
+    "peoplePlaceholder": "p.sh. Sponsori, Shefi i turnit, Ngarkuesit, Cilësia",
+    "softPlaceholder": "p.sh. Më pak ankesa, turn pasditeje më i qetë",
+    "reasonPlaceholder": "Pse pika e kalimit mbyllet me pika të hapura dhe deri kur do të kryhen",
+    "sipocPlaceholder": "Një për rresht"
+  },
+  "areas": ["Hyrja e mallit", "Mbledhja e porosive", "Dalja e mallit", "Milja e fundit", "Recepsioni", "Housekeeping"],
+  "belts": {
+    "yellow": "Yellow Belt",
+    "green": "Green Belt",
+    "black": "Black Belt",
+    "mbb": "Master Black Belt",
+    "lead": "Drejtues projekti (pa belt)"
+  },
+  "phases": {
+    "define": { "letter": "D", "name": "Përcakto" },
+    "measure": { "letter": "M", "name": "Mat" },
+    "analyze": { "letter": "A", "name": "Analizo" },
+    "improve": { "letter": "I", "name": "Përmirëso" },
+    "control": { "letter": "C", "name": "Kontrollo" }
+  },
+  "statuses": {
+    "on-track": "Sipas planit",
+    "at-risk": "Në rrezik",
+    "late": "Me vonesë",
+    "on-hold": "Pezulluar",
+    "closed": "Mbyllur"
+  },
+  "sheets": {
+    "charter": "Karta e projektit",
+    "sipoc": "SIPOC",
+    "ctq": "Pema CTQ",
+    "raci": "RACI",
+    "kano": "Kano"
+  },
+  "sipoc": [
+    ["s", "Furnitorët", "Kush jep atë që i duhet procesit"],
+    ["i", "Hyrjet", "Material, informacion, njerëz"],
+    ["p", "Procesi", "5 deri 7 hapa, secili nis me një folje"],
+    ["o", "Daljet", "Çfarë del nga procesi"],
+    ["c", "Klientët", "Kush i merr daljet"]
+  ],
+  "columns": {
+    "ctq": { "need": "Nevoja e klientit", "driver": "Faktori", "ctq": "CTQ e matshme", "spec": "Specifikimi" },
+    "raci": { "activity": "Aktiviteti", "check": "Kontrolli" },
+    "kano": { "feature": "Veçoria", "functional": "Kur ekziston", "dysfunctional": "Kur mungon", "set": "Cakto drejtpërdrejt", "category": "Kategoria" },
+    "rty": { "step": "Hapi i procesit", "fpy": "Rendimenti në herën e parë %" },
+    "realised": { "month": "Muaji", "amount": "Realizuar €" },
+    "control": { "what": "Çfarë matet", "spec": "Specifikimi ose objektivi", "method": "Metoda", "frequency": "Shpeshtësia", "owner": "Përgjegjësi", "reaction": "Plani i reagimit" },
+    "portfolio": {
+      "project": "Projekti", "lead": "Drejtuesi", "belt": "Belt", "sponsor": "Sponsori", "area": "Zona", "start": "Fillimi", "end": "Fundi i planifikuar",
+      "phase": "Faza", "status": "Gjendja", "gate": "Pika e radhës e kalimit", "gateDate": "Planifikuar", "ready": "Lista e kontrollit", "days": "Ditë në fazë",
+      "dpmoBefore": "DPMO para", "sigmaBefore": "Sigma para", "dpmoAfter": "DPMO pas", "sigmaAfter": "Sigma pas",
+      "rty": "RTY", "copq": "COPQ € në muaj", "hard": "Kursime të forta € në vit", "soft": "Kursime të buta", "softValue": "Vlerësim i butë € në vit",
+      "planned": "Planifikuar këtë vit €", "realised": "Realizuar këtë vit €"
+    }
+  },
+  "raci": {
+    "R": "Responsible: e kryen punën",
+    "A": "Accountable: përgjigjet për rezultatin, një për aktivitet",
+    "C": "Consulted: pyetet më parë",
+    "I": "Informed: njoftohet më pas",
+    "AR": "Përgjigjet për rezultatin dhe e kryen vetë punën"
+  },
+  "kano": {
+    "functional": "Kur veçoria ekziston, si ndihet klienti?",
+    "dysfunctional": "Kur veçoria mungon, si ndihet klienti?",
+    "auto": "Nga përgjigjet",
+    "answers": ["Më pëlqen", "E pres", "Jam asnjanës", "Mund ta duroj", "Nuk më pëlqen"],
+    "categories": {
+      "M": ["Kërkesë bazë", "Pritet. Kur mungon, klientët zemërohen; kur ekziston, askush nuk falënderon."],
+      "O": ["Kërkesë performance", "Sa më shumë, aq më mirë: kënaqësia rritet me çdo hap."],
+      "A": ["Kërkesë tërheqëse", "Nuk pritet. Kur ekziston, mahnit; kur mungon, nuk kushton asgjë."],
+      "I": ["Indiferente", "Klientëve nuk u bën përshtypje. Mos shpenzo për të."],
+      "R": ["E kundërt", "Klientët do të preferonin të mos e kishin."],
+      "Q": ["E dyshimtë", "Dy përgjigjet kundërshtojnë njëra-tjetrën: pyet sërish."]
+    },
+    "axisX": ["E paplotësuar", "Plotësisht e plotësuar"],
+    "axisY": ["I pakënaqur", "I mahnitur"]
+  },
+  "copq": [
+    ["internal", "Dështim i brendshëm", "Ripunim, skarco, ripaketim, para se ta shohë klienti"],
+    ["external", "Dështim i jashtëm", "Kompensime, kthime, ridërgime, ankesa"],
+    ["appraisal", "Vlerësim", "Kontrolle, auditime, inspektim"],
+    ["prevention", "Parandalim", "Trajnim, standarde, mbrojtje nga gabimet"]
+  ],
+  "tollgates": {
+    "define": [
+      "Problemi ka një numër, një periudhë kohe dhe hendekun nga objektivi.",
+      "Objektivi është i matshëm dhe ka një datë.",
+      "Çfarë hyn dhe çfarë mbetet jashtë është shkruar dhe është rënë dakord.",
+      "SIPOC tregon 5 deri 7 hapa procesi, nga furnitori te klienti.",
+      "Çdo CTQ vjen nga zëri i klientit dhe ka një specifikim.",
+      "Rolet janë rënë dakord në RACI: një person përgjigjet për çdo aktivitet."
+    ],
+    "measure": [
+      "Çdo CTQ ka një përkufizim operacional, me foto aty ku ndihmon.",
+      "Një plan i mbledhjes së të dhënave thotë çfarë regjistrohet, ku, nga kush dhe sa shpesh.",
+      "Matja u kontrollua: dy persona gjykuan të njëjtat raste dhe u pajtuan.",
+      "Pika e nisjes mbulon të paktën dy deri katër javë.",
+      "DPMO, niveli sigma, RTY dhe kostoja e cilësisë së dobët janë llogaritur.",
+      "Objektivi është konfirmuar ose përshtatur me sponsorin."
+    ],
+    "analyze": [
+      "Ekipi e ndoqi procesin në terren, aty ku bëhet puna.",
+      "Një Pareto tregon cilat shkaqe mbajnë shumicën e defekteve.",
+      "Shkaqet e mundshme u renditën dhe u ngushtuan me të dhëna.",
+      "Shkaqet rrënjësore janë provuar me të dhëna, jo me mendime.",
+      "5 Whys përfundojnë te një shkak mbi të cilin ekipi mund të veprojë.",
+      "Sponsori bie dakord se cilat shkaqe rrënjësore do të sulmojë faza Përmirëso."
+    ],
+    "improve": [
+      "Çdo kundërmasë sulmon një shkak rrënjësor të provuar.",
+      "Zgjidhjet u zgjodhën sipas përpjekjes dhe ndikimit.",
+      "Një pilot u krye me të njëjtin përkufizim dhe të njëjtin regjistër si pika e nisjes.",
+      "Rezultati i pilotit është krahasuar me pikën e nisjes dhe ndryshimi është i qartë.",
+      "Efektet anësore në kohë, kosto dhe siguri janë kontrolluar dhe pranuar.",
+      "Plani i zbatimit ka përgjegjës dhe data."
+    ],
+    "control": [
+      "Metoda e re është në punën standarde dhe në trajnim.",
+      "Plani i kontrollit thotë çfarë matet, sa shpesh, nga kush dhe çfarë ndodh kur procesi del nga kontrolli.",
+      "Një kartë kontrolli me kufijtë nga procesi i përmirësuar është në punë.",
+      "Kursimet janë konfirmuar me financën.",
+      "Pronari i procesit e ka marrë përsipër rezultatin.",
+      "Mësimet e nxjerra janë ndarë dhe projekti është mbyllur."
+    ]
+  },
+  "limits": { "daysInPhase": 45 },
+  "tips": [
+    ["Një projekt, një problem.", "Një kartë projekti me një numër, një periudhë dhe një hendek. Nëse problemi nuk ka numër, projekti nuk ka fund."],
+    ["Mbyll çdo pikë kalimi me sponsorin.", "Shëno atë që është kryer; një fazë mbyllet vetëm kur lista është e plotë, ose me një arsye të shkruar që sponsori e nënshkruan."],
+    ["Ndiq ditët në një fazë.", "Më shumë se 45 ditë në një fazë zakonisht do të thotë se projekti ka ngecur: pyet çfarë e bllokon pikën e radhës të kalimit."],
+    ["Numëro vetëm atë që konfirmon financa.", "Kursimet e forta janë euro që dalin nga rreshtat e kostos; kursimet e buta shkruhen me një vlerësim, nuk shtohen te totali."],
+    ["Dorëzoje planin e kontrollit.", "Çdo rresht i planit të kontrollit shkon në listën e veprimeve me përgjegjësin e tij, që rezultati të mbetet edhe pasi projekti mbyllet."]
+  ],
+  "example": {
+    "projects": [
+      {
+        "title": "Dëmet në dalje nën 0,30%",
+        "lead": "Mira Hoxha",
+        "belt": "green",
+        "sponsor": "Jonas Weber, menaxher i daljes së mallit",
+        "area": "Dalja e mallit",
+        "start": -150,
+        "end": 20,
+        "phase": "control",
+        "status": "on-track",
+        "phaseDates": { "define": -150, "measure": -128, "analyze": -110, "improve": -92, "control": -40 },
+        "charter": {
+          "problem": "Në javët 36 deri 38, 0,57% e njësive në dalje u larguan nga qendra të dëmtuara (104 nga 18.400 në javën 38) kundrejt 0,30% të premtuar klientit. Kompensimet kushtuan rreth 1.150 € në javë.",
+          "goal": "0,30% ose më pak deri në javën 46, pa kohë më të gjata ngarkimi.",
+          "scopeIn": "Nga rafti i mbledhjes deri te dorëzimi te shoferi.",
+          "scopeOut": "Transporti ndërqytetës dhe ambalazhi i furnitorit.",
+          "team": "Shefat e turnit të mëngjesit dhe të pasdites, dy ngarkues, një shofer, koordinatori i cilësisë."
+        },
+        "sipoc": {
+          "s": ["Mbledhja dhe paketimi", "Planifikimi i linjave", "Flota dhe shufrat e fiksimit"],
+          "i": ["Pako të paketuara dhe me etiketë", "Valët e nisjes dhe plani i linjave", "Mjete me shufra fiksimi"],
+          "p": ["Mblidh", "Paketo dhe etiketo", "Rendit te rampa", "Përgatit te rampa", "Ngarko mjetin", "Fiksoje ngarkesën", "Dorëzoja shoferit"],
+          "o": ["Mjet i ngarkuar dhe i fiksuar", "Regjistri i dëmeve sipas hapit dhe shkakut", "Skanimi në dorëzim"],
+          "c": ["Shoferët", "Klientët fundorë", "Shërbimi i klientit"]
+        },
+        "ctq": [
+          { "need": "Pakoja ime mbërrin pa dëme", "driver": "Stivuar si duhet te rampa", "ctq": "Njësi të dëmtuara ÷ njësi të dërguara", "spec": "≤ 0,30% në javë" },
+          { "need": "Pakoja ime mbërrin pa dëme", "driver": "Ngarkesa e fiksuar në mjet", "ctq": "Linja me shufra fiksimi dhe foto", "spec": "100% e linjave" },
+          { "need": "Pakoja ime mbërrin në kohë", "driver": "Ngarkimi nuk ngadalësohet", "ctq": "Koha e ngarkimit për linjë", "spec": "≤ 40 min (pika e nisjes 38)" }
+        ],
+        "raci": {
+          "people": ["Menaxheri i daljes", "Shefi i turnit të pasdites", "Ngarkuesit", "Koordinatori i cilësisë", "Shoferi"],
+          "rows": [
+            { "activity": "Mirato standardin e stivimit", "cells": ["A", "R", "C", "C", "I"] },
+            { "activity": "Trajno ngarkuesit te çdo rampë", "cells": ["I", "AR", "C", "C", ""] },
+            { "activity": "Regjistro dëmet sipas hapit dhe shkakut", "cells": ["I", "A", "R", "C", ""] },
+            { "activity": "Mbaj kartën p ditore dhe reago", "cells": ["I", "R", "", "A", ""] },
+            { "activity": "Kontrollo shufrat në dorëzim", "cells": ["", "A", "R", "", "C"] },
+            { "activity": "Konfirmo kursimet me financën", "cells": ["A", "I", "", "R", ""] }
+          ]
+        },
+        "kano": [
+          { "feature": "Pakoja mbërrin pa dëme", "functional": 1, "dysfunctional": 4, "set": "" },
+          { "feature": "Dorëzim në ditën e premtuar", "functional": 0, "dysfunctional": 4, "set": "" },
+          { "feature": "Foto e pakos te dera", "functional": 0, "dysfunctional": 2, "set": "" },
+          { "feature": "Dritare dorëzimi prej një ore", "functional": 0, "dysfunctional": 3, "set": "" },
+          { "feature": "Shirit me logo mbi kuti", "functional": 2, "dysfunctional": 2, "set": "" },
+          { "feature": "Telefonatë para çdo dorëzimi", "functional": 4, "dysfunctional": 0, "set": "" }
+        ],
+        "base": { "defects": 104, "units": 18400, "opps": 1 },
+        "after": { "defects": 57, "units": 18400, "opps": 1 },
+        "rty": [
+          { "step": "Mblidh", "fpy": 99.6 },
+          { "step": "Paketo dhe etiketo", "fpy": 99.3 },
+          { "step": "Rendit te rampa", "fpy": 99.8 },
+          { "step": "Ngarko dhe fikso", "fpy": 99.4 },
+          { "step": "Dorëzoja shoferit", "fpy": 99.9 }
+        ],
+        "copq": { "internal": 1200, "external": 4980, "appraisal": 600, "prevention": 300 },
+        "savings": {
+          "hard": 26000,
+          "from": -100,
+          "soft": "Më pak ankesa nga klientët, më pak ripaketim në turnin e pasdites.",
+          "softValue": 3000,
+          "realised": [
+            { "month": -3, "amount": 1100 },
+            { "month": -2, "amount": 2180 },
+            { "month": -1, "amount": 2140 },
+            { "month": 0, "amount": 1450 }
+          ]
+        },
+        "control": [
+          { "what": "Njësi të dëmtuara në ditë (karta p)", "spec": "Brenda kufijve; ≤ 0,30% në javë", "method": "Regjistri i dëmeve, karta p me kufijtë nga javët e pilotit", "frequency": "Çdo ditë", "owner": "Shefi i turnit të pasdites", "reaction": "Një ditë mbi kufirin e sipërm: kontrollo të njëjtin turn dhe bëj 5 Whys brenda 24 orëve." },
+          { "what": "Shufrat e fiksimit pas murit të fundit", "spec": "100% e linjave, me foto", "method": "Foto në regjistrin e dorëzimit", "frequency": "Çdo linjë", "owner": "Ngarkuesit", "reaction": "Pa foto: mjeti nuk niset derisa shefi i turnit ta vendosë shufrën dhe të shënojë arsyen." },
+          { "what": "Standardi i stivimit te rampa", "spec": "Të rëndat poshtë, të brishtat lart, pa boshllëqe", "method": "Kontroll në terren me figurën e rampës", "frequency": "Çdo javë", "owner": "Jonas Weber", "reaction": "Dy kontrolle të dështuara radhazi: ekipi i asaj rampe ritrajnohet në të njëjtën javë." }
+        ],
+        "gates": {
+          "define": { "checks": 6, "planned": -130, "sponsor": "Jonas Weber", "date": -128, "reason": "", "closed": true },
+          "measure": { "checks": 6, "planned": -112, "sponsor": "Jonas Weber", "date": -110, "reason": "", "closed": true },
+          "analyze": { "checks": 6, "planned": -95, "sponsor": "Jonas Weber", "date": -92, "reason": "", "closed": true },
+          "improve": { "checks": 5, "planned": -45, "sponsor": "Jonas Weber", "date": -40, "reason": "Efektet anësore u kontrolluan vetëm në turnin e pasdites; turni i mëngjesit kontrollohet në dy javët e para të fazës Kontrollo.", "closed": true },
+          "control": { "checks": 3, "planned": 20, "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      },
+      {
+        "title": "Linja me vonesë në valën e mëngjesit",
+        "lead": "Arben Kola",
+        "belt": "green",
+        "sponsor": "Sara Brandt, menaxhere e miljes së fundit",
+        "area": "Milja e fundit",
+        "start": -100,
+        "end": 40,
+        "phase": "analyze",
+        "status": "at-risk",
+        "phaseDates": { "define": -100, "measure": -80, "analyze": -52 },
+        "charter": {
+          "problem": "Në javët 30 deri 37, 9,4% e linjave të mëngjesit u nisën nga depoja pas orës 07:45 (113 nga 1.200) kundrejt 3% të rënë dakord me klientin. Çdo linjë me vonesë kushton rreth 40 € në orë shtesë dhe ridërgime.",
+          "goal": "3% ose më pak nisje me vonesë deri në javën 50.",
+          "scopeIn": "Nga mbërritja e rimorkios në depo deri te dalja e furgonit nga porta.",
+          "scopeOut": "Orari i transportit ndërqytetës, softueri i planifikimit të linjave.",
+          "team": "Drejtuesi i depos, dy shoferë, shefi i ekipit të renditjes, dispeçeri."
+        },
+        "sipoc": {
+          "s": ["Transporti ndërqytetës", "Ekipi i renditjes", "Dispeçeria"],
+          "i": ["Rimorkio me pako", "Listat e linjave", "Furgonë dhe skanerë"],
+          "p": ["Shkarko rimorkion", "Rendit sipas linjave", "Ngarko furgonët", "Kontrollo ngarkesën", "Dil nga porta"],
+          "o": ["Furgonë në rrugë", "Oraret e nisjes"],
+          "c": ["Shoferët", "Marrësit", "Klienti"]
+        },
+        "ctq": [
+          { "need": "Pakot mbërrijnë në dritaren e premtuar", "driver": "Furgonët nisen në kohë", "ctq": "Linja të nisura pas 07:45 ÷ linja", "spec": "≤ 3% në javë" }
+        ],
+        "raci": { "people": [], "rows": [] },
+        "kano": [],
+        "base": { "defects": 113, "units": 1200, "opps": 1 },
+        "after": { "defects": null, "units": null, "opps": 1 },
+        "rty": [
+          { "step": "Shkarko rimorkion", "fpy": 97 },
+          { "step": "Rendit sipas linjave", "fpy": 94 },
+          { "step": "Ngarko furgonët", "fpy": 92 },
+          { "step": "Dil nga porta", "fpy": 98 }
+        ],
+        "copq": { "internal": 2100, "external": 2400, "appraisal": 400, "prevention": 0 },
+        "savings": { "hard": 18000, "from": 45, "soft": "Shoferët nisen më të qetë, më pak telefonata te shërbimi i klientit.", "softValue": 2000, "realised": [] },
+        "control": [],
+        "gates": {
+          "define": { "checks": 6, "planned": -82, "sponsor": "Sara Brandt", "date": -80, "reason": "", "closed": true },
+          "measure": { "checks": 5, "planned": -55, "sponsor": "Sara Brandt", "date": -52, "reason": "Kontrolli i matjes përsëritet me regjistrin e ri të skanerëve në javën e parë të fazës Analizo.", "closed": true },
+          "analyze": { "checks": 2, "planned": -5, "sponsor": "", "date": "", "reason": "", "closed": false },
+          "improve": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "control": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      },
+      {
+        "title": "Më pak no-show në hotelin e aeroportit",
+        "lead": "Elira Daci",
+        "belt": "yellow",
+        "sponsor": "Thomas Berg, menaxher i recepsionit",
+        "area": "Recepsioni",
+        "start": -40,
+        "end": 110,
+        "phase": "measure",
+        "status": "on-track",
+        "phaseDates": { "define": -40, "measure": -18 },
+        "charter": {
+          "problem": "Nga korriku deri në shtator, 6,8% e rezervimeve të garantuara ishin no-show (612 nga 9.000 netë dhome) kundrejt 4% në buxhet. Një dhomë që mund të ishte rishitur kushton rreth 95 €.",
+          "goal": "4% ose më pak nga marsi, pa më shumë anulime në recepsion.",
+          "scopeIn": "Nga rezervimi deri te night audit i ditës së mbërritjes.",
+          "scopeOut": "Rezervimet e grupeve, strategjia e çmimeve.",
+          "team": "Menaxheri i recepsionit, dy recepsionistë, night auditori, agjenti i rezervimeve."
+        },
+        "sipoc": {
+          "s": ["Kanalet e rezervimit", "Rezervimet", "Ofruesi i pagesave"],
+          "i": ["Rezervim me garanci", "Të dhënat e kartës", "Ora e mbërritjes"],
+          "p": ["Merr rezervimin", "Kontrollo garancinë", "Dërgo mesazhin para mbërritjes", "Mbaje dhomën", "Fatuoje no-show në night audit"],
+          "o": ["Mysafirë të mbërritur", "Lista e no-show", "Faturimet e no-show"],
+          "c": ["Mysafirët", "Menaxheri i të ardhurave", "Financa"]
+        },
+        "ctq": [],
+        "raci": { "people": [], "rows": [] },
+        "kano": [],
+        "base": { "defects": 612, "units": 9000, "opps": 1 },
+        "after": { "defects": null, "units": null, "opps": 1 },
+        "rty": [],
+        "copq": { "internal": 3800, "external": 900, "appraisal": 600, "prevention": 0 },
+        "savings": { "hard": 21000, "from": 130, "soft": "Parashikim më i mirë për housekeeping dhe mëngjesin.", "softValue": 1500, "realised": [] },
+        "control": [],
+        "gates": {
+          "define": { "checks": 6, "planned": -20, "sponsor": "Thomas Berg", "date": -18, "reason": "", "closed": true },
+          "measure": { "checks": 2, "planned": 12, "sponsor": "", "date": "", "reason": "", "closed": false },
+          "analyze": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "improve": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "control": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      },
+      {
+        "title": "Gabimet e mbledhjes në zonën e pjesëve të vogla",
+        "lead": "Luka Meyer",
+        "belt": "black",
+        "sponsor": "Nora Albers, menaxhere e magazinës",
+        "area": "Mbledhja e porosive",
+        "start": -16,
+        "end": 150,
+        "phase": "define",
+        "status": "late",
+        "phaseDates": { "define": -16 },
+        "charter": {
+          "problem": "Në javët 38 deri 41, 0,42% e rreshtave të porosive në zonën e pjesëve të vogla u mblodhën gabim (210 nga 50.000) kundrejt 0,15% në marrëveshjen e shërbimit.",
+          "goal": "",
+          "scopeIn": "Zona e pjesëve të vogla, nga lista e mbledhjes deri te tavolina e paketimit.",
+          "scopeOut": "",
+          "team": "Shefi i turnit, tre mbledhës, përdoruesi kyç i IT-së."
+        },
+        "sipoc": { "s": [], "i": [], "p": ["Printo listën e mbledhjes", "Mblidh", "Paketo"], "o": [], "c": [] },
+        "ctq": [],
+        "raci": {
+          "people": ["Menaxherja e magazinës", "Shefi i turnit", "Mbledhësit", "Përdoruesi kyç i IT-së"],
+          "rows": [
+            { "activity": "Përcakto kategoritë e gabimeve", "cells": ["A", "A", "C", "C"] },
+            { "activity": "Mblidh regjistrin e gabimeve", "cells": ["I", "R", "C", ""] },
+            { "activity": "Mirato kartën e projektit", "cells": ["A", "C", "I", "I"] }
+          ]
+        },
+        "kano": [],
+        "base": { "defects": 210, "units": 50000, "opps": 1 },
+        "after": { "defects": null, "units": null, "opps": 1 },
+        "rty": [],
+        "copq": { "internal": 1500, "external": 1100, "appraisal": 800, "prevention": 0 },
+        "savings": { "hard": 15000, "from": "", "soft": "", "softValue": null, "realised": [] },
+        "control": [],
+        "gates": {
+          "define": { "checks": 3, "planned": -2, "sponsor": "", "date": "", "reason": "", "closed": false },
+          "measure": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "analyze": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "improve": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false },
+          "control": { "checks": 0, "planned": "", "sponsor": "", "date": "", "reason": "", "closed": false }
+        }
+      }
+    ]
+  }
+}

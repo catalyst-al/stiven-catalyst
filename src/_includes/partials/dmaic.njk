@@ -124,6 +124,37 @@
   </dl>
 </section>
 
+{#- The certificate of the course: shown once every step is complete (dmaic.js), printed on its own A4 page. -#}
+<section class="shell dm-extra dm-certificate" id="dm-certificate" data-certificate hidden>
+  <div class="section-heading">
+    <div>
+      <p class="kicker">{{ "Course complete" | t(lang) }}</p>
+      <h2>{{ "Your certificate" | t(lang) }}</h2>
+    </div>
+    <p>{{ "Every question of the five steps answered right. Write your name as it should stand on the certificate and print it or save it as PDF." | t(lang) }}</p>
+  </div>
+  <div class="dl-box">
+    <div class="field">
+      <label for="dm-cert-name">{{ "Your name" | t(lang) }}</label>
+      <input id="dm-cert-name" name="certName" autocomplete="name" data-cert-name>
+    </div>
+    <div class="tool-actions">
+      <button class="button-primary" type="button" data-cert-print>{{ "Print the certificate" | t(lang) }}</button>
+      <a class="button-secondary" href="{{ '/tools/project-portfolio/' | local(lang) }}">{{ "Start a real project in the Project Portfolio" | t(lang) }}</a>
+    </div>
+  </div>
+  <div class="dm-cert-sheet" data-cert-sheet aria-hidden="true">
+    <p class="dm-cert-kicker">Stiven Catalyst · {{ "Self-study course" | t(lang) }}</p>
+    <p class="dm-cert-title">{{ "Certificate of completion" | t(lang) }}</p>
+    <p class="dm-cert-name" data-cert-sheet-name></p>
+    <p class="dm-cert-line">{{ "has completed the course" | t(lang) }}</p>
+    <p class="dm-cert-course">{{ title }}</p>
+    <p class="dm-cert-line">{{ "Define, Measure, Analyze, Improve, Control: every step read and every question answered right." | t(lang) }}</p>
+    <p class="dm-cert-date" data-cert-sheet-date></p>
+    <p class="dm-cert-note">{{ "A record of self-study. It is not an accredited Six Sigma certification." | t(lang) }}</p>
+  </div>
+</section>
+
 <section class="shell dm-extra dm-charter" id="dm-charter" data-print-fields>
   <div class="section-heading">
     <div>

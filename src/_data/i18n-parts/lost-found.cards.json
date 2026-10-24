@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Lost & Found", "type": "Hotel", "time": "Ongoing", "summary": "The register of found items from hand-in to return, police, charity or the bin, with a tag number, the safe and a photo for each. Keep-until dates, the items due for a decision, where most things are left, a reply to the guest and a tag label.", "url": "/tools/lost-found/", "cta": "Open the register" },
+    "de": { "name": "Fundsachen", "type": "Hotel", "time": "Laufend", "summary": "Das Register der Fundsachen von der Abgabe bis zur Rückgabe, zum Fundbüro, zur Spende oder zur Vernichtung, mit Etikettnummer, Safe und Foto für jede Sache. Aufbewahrungsfristen, fällige Entscheidungen, die Orte, an denen am meisten liegen bleibt, eine Antwort an den Gast und ein Etikett.", "url": "/de/tools/lost-found/", "cta": "Register öffnen" },
+    "sq": { "name": "Sendet e gjetura", "type": "Hotel", "time": "Vazhdimisht", "summary": "Regjistri i sendeve të gjetura nga dorëzimi deri te kthimi, policia, bamirësia ose asgjësimi, me numër etikete, kasafortë dhe foto për secilin. Afatet e ruajtjes, sendet që presin vendim, vendet ku harrohet më shumë, një përgjigje për mysafirin dhe një etiketë.", "url": "/sq/tools/lost-found/", "cta": "Hap regjistrin" }
+  },
+  "routine": { "when": "During the shift", "do": "Log every item handed in with its tag number, contact the guest the same day and clear the items due for a decision before the shift ends.", "de": { "when": "Während der Schicht", "do": "Erfassen Sie jede abgegebene Fundsache mit Etikettnummer, kontaktieren Sie den Gast noch am selben Tag und erledigen Sie die fälligen Entscheidungen vor Schichtende." }, "sq": { "when": "Gjatë turnit", "do": "Regjistro çdo send të dorëzuar me numrin e etiketës, kontakto mysafirin po atë ditë dhe mbyll sendet që presin vendim para fundit të turnit." } },
+  "recipe": "example"
+}

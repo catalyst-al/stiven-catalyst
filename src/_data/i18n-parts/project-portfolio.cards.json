@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Project Portfolio", "type": "Six Sigma", "time": "Weekly", "summary": "Every DMAIC project on one page: phase, status, the next tollgate and its checklist, days in the phase, sigma before and after, and savings planned against realised. Each project keeps its charter, SIPOC, CTQ tree, RACI, Kano, RTY, COPQ and control plan.", "url": "/tools/project-portfolio/", "cta": "Open the portfolio" },
+    "de": { "name": "Projektportfolio", "type": "Six Sigma", "time": "Wöchentlich", "summary": "Alle DMAIC-Projekte auf einer Seite: Phase, Status, das nächste Tollgate mit Checkliste, Tage in der Phase, Sigma vorher und nachher und geplante gegen realisierte Einsparungen. Jedes Projekt behält Projektauftrag, SIPOC, CTQ-Baum, RACI, Kano, RTY, COPQ und Kontrollplan.", "url": "/de/tools/project-portfolio/", "cta": "Portfolio öffnen" },
+    "sq": { "name": "Portofoli i projekteve", "type": "Six Sigma", "time": "Çdo javë", "summary": "Të gjitha projektet DMAIC në një faqe: faza, gjendja, pika e radhës e kalimit me listën e saj, ditët në fazë, sigma para dhe pas, dhe kursimet e planifikuara kundrejt atyre të realizuara. Çdo projekt mban kartën, SIPOC, pemën CTQ, RACI, Kano, RTY, COPQ dhe planin e kontrollit.", "url": "/sq/tools/project-portfolio/", "cta": "Hap portofolin" }
+  },
+  "routine": { "when": "Every week", "do": "Review each project with its lead, tick what the next tollgate still needs, and ask the sponsor to sign the phases that are ready.", "de": { "when": "Jede Woche", "do": "Gehen Sie jedes Projekt mit seiner Leitung durch, haken Sie ab, was dem nächsten Tollgate noch fehlt, und bitten Sie den Sponsor, die fertigen Phasen zu unterschreiben." }, "sq": { "when": "Çdo javë", "do": "Kalo çdo projekt me drejtuesin e tij, shëno çfarë i mungon ende pikës së radhës të kalimit dhe kërkoji sponsorit të nënshkruajë fazat që janë gati." } },
+  "recipe": "example"
+}

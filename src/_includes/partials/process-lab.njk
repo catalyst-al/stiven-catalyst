@@ -1,5 +1,6 @@
 {#- Process Lab: I-MR chart, capability and normality of pasted measurements, two before/after tests and a sample-size
-    calculator. The page sets `cfg` to its data file; stats-kit.js has the arithmetic, process-lab.js does the rest. -#}
+    calculator, then the control chart family, chi-square, regression and the measurement system (process-lab-2.njk).
+    The page sets `cfg` to its data file; stats-kit.js has the arithmetic, process-lab.js and process-lab-2.js the rest. -#}
 <section class="shell tool-layout pl-setup">
   <div class="tool-panel" data-process-lab>
 
@@ -7,6 +8,7 @@
       <button class="pl-tab" type="button" role="tab" id="pl-tab-measure" aria-controls="pl-panel-measure" aria-selected="true" data-tab="measure">1 · {{ "Measurements" | t(lang) }}</button>
       <button class="pl-tab" type="button" role="tab" id="pl-tab-compare" aria-controls="pl-panel-compare" aria-selected="false" tabindex="-1" data-tab="compare">2 · {{ "Before / after" | t(lang) }}</button>
       <button class="pl-tab" type="button" role="tab" id="pl-tab-size" aria-controls="pl-panel-size" aria-selected="false" tabindex="-1" data-tab="size">3 · {{ "How many to measure" | t(lang) }}</button>
+      {% include "partials/process-lab-2-tabs.njk" %}
     </div>
 
     {#- 1 · Measurements: a pasted column, the specification, the chart below. -#}
@@ -165,6 +167,8 @@
         </div>
       </form>
     </div>
+
+    {% include "partials/process-lab-2.njk" %}
   </div>
 
   <aside class="tool-aside">
@@ -187,3 +191,4 @@
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/stats-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/process-lab.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/process-lab-2.js' | assetUrl }}" defer></script>

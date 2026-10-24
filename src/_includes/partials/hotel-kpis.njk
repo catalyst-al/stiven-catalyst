@@ -78,7 +78,7 @@
       <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date, rooms available, rooms sold, room revenue, other revenue, arrivals, departures, no-shows, walk-ins, rooms out of order, complaints, breakfast covers, complaint cause" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "Any date format works. An empty rooms available takes the total rooms of the settings." | t(lang) }}</p>
       <div class="field">
         <label class="visually-hidden" for="hk-paste">{{ "Rows to import" | t(lang) }}</label>
-        <textarea id="hk-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+        <textarea id="hk-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date","available","sold","roomRev","otherRev","arrivals","departures","noShows","walkIns","ooo","complaints","covers","complaintCause"]' data-column-labels='{{ ("date, rooms available, rooms sold, room revenue, other revenue, arrivals, departures, no-shows, walk-ins, rooms out of order, complaints, breakfast covers, complaint cause" | t(lang)).split(", ") | dump }}'></textarea>
       </div>
       <div class="tool-actions">
         <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
@@ -149,6 +149,7 @@
 
 <script type="application/json" id="hotel-kpis-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/hotel-kpis.js' | assetUrl }}" defer></script>

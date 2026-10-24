@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Diagrami spageti
+seo_title: "Diagrami spageti: rrugët e ecjes në metra mbi planin e katit"
+description: "Vizato rrugët e ecjes së një pune mbi planin e katit, në metra: për cikël dhe për turn, ndalesat më të vizituara, harta e nxehtësisë, para dhe pas."
+activeNav: /sq/tools.html
+permalink: /sq/tools/spaghetti-diagram/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Lean</p>
+  <h1>Diagrami spageti</h1>
+  <p class="lede">Ndiq një punë nëpër sipërfaqe dhe vizato mbi planin e katit çdo ecje që ajo bën, prekje pas prekjeje. Mjeti i mat rrugët në metra, për cikël dhe për turn, i kthen në minuta ecjeje, numëron vizitat në çdo ndalesë, tregon ku kryqëzohen më shumë rrugët dhe krahason paraqitjen para dhe pas ndryshimit.</p>
+</section>
+
+{% set cfg = sq.spaghettiDiagram %}
+{% include "partials/spaghetti-diagram.njk" %}

@@ -1,0 +1,108 @@
+/* ===== Room Inspection (js/room-inspection.js) ===== */
+/* Setup: closed once the rooms are there. */
+.ri-setup { padding-block: 0; }
+.ri-setup-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 18px 0; cursor: pointer; list-style: none; }
+.ri-setup-summary::-webkit-details-marker { display: none; }
+.ri-setup-summary::after { content: "+"; margin-left: auto; color: var(--muted); font-weight: 800; }
+.ri-setup[open] > .ri-setup-summary::after { content: "−"; }
+.ri-setup-summary .kicker { margin: 0; }
+.ri-setup-summary .form-note { margin: 0; }
+.ri-setup-summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+.ri-setup-body { display: grid; gap: 16px; padding-bottom: 20px; }
+.ri-generate { display: grid; gap: 12px; }
+.ri-sub { margin: 4px 0 0; font-size: 15px; font-weight: 800; color: var(--ink); }
+.ri-setup [data-rooms-status]:empty { display: none; }
+.ri-setup textarea { width: 100%; min-width: 0; font-family: inherit; }
+
+/* The inspection. */
+.ri-room-note { margin: 0; }
+.ri-live { margin: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.ri-live.is-pass { border-color: var(--ok); }
+.ri-live.is-fail { border-color: var(--danger); }
+.ri-zones { display: grid; gap: 22px; min-width: 0; }
+.ri-photo-note { margin: 0; }
+.dl-box .ri-zone { gap: 0; min-width: 0; }
+.ri-zone-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 14px; width: 100%; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.ri-zone-name { font-size: 18px; font-weight: 800; }
+.ri-zone-progress { color: var(--muted); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ri-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 14px; align-items: center; padding: 10px 0 10px 12px; border-left: 3px solid transparent; }
+.ri-item + .ri-item { border-top: 1px dashed var(--line); }
+.ri-item[data-answer="fail"] { border-left-color: var(--danger); }
+.ri-item-text { display: grid; grid-template-columns: 1.4em minmax(0, 1fr); gap: 2px 10px; align-items: baseline; margin: 0; line-height: 1.4; }
+.ri-item-n { flex: none; min-width: 1.4em; color: var(--muted); font-weight: 800; font-variant-numeric: tabular-nums; }
+.ri-weight { grid-column: 2; justify-self: start; color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.ri-weight.is-critical { padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); letter-spacing: .04em; text-transform: uppercase; font-size: 11px; }
+.ri-answers { display: flex; gap: 6px; }
+.ri-answer, .ri-flag { position: relative; display: inline-flex; cursor: pointer; }
+.ri-answer input, .ri-flag input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.ri-answer span, .ri-flag span {
+  display: inline-grid; place-items: center; min-width: 58px; min-height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--paper); color: var(--ink); font-size: 14px; font-weight: 800; white-space: nowrap;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ri-answer:hover span, .ri-flag:hover span { border-color: var(--blue); }
+.ri-answer input:checked + span, .ri-flag input:checked + span { border-color: var(--blue); background: var(--blue); color: var(--paper); }
+.ri-answer.is-fail input:checked + span { border-color: var(--danger); background: var(--danger); }
+.ri-answer input:focus-visible + span, .ri-flag input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.ri-detail { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 14px; align-items: center; }
+.ri-detail[hidden] { display: none; }
+.ri-detail .fc-photos { grid-column: 1 / -1; }
+.ri-note {
+  width: 100%; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px;
+}
+.ri-note:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.ri-flags { display: flex; gap: 6px; }
+.ri-flag span { min-width: 0; min-height: 36px; font-size: 13px; font-weight: 700; }
+.ri-walk [data-walk-status]:empty { display: none; }
+.ri-walk [data-walk-status] { margin: 0; }
+
+/* Log. */
+.ri-period { max-width: 260px; }
+.ri-log td { vertical-align: middle; }
+.ri-result { font-weight: 800; white-space: nowrap; }
+.ri-result.is-pass { color: var(--ok); }
+.ri-result.is-fail { color: var(--danger); }
+.ri-row-tools { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.ri-row-print { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+
+/* Results. */
+.ri-head h2 span { color: var(--muted); font-weight: 700; }
+.ri-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.ri-results .dl-stats { margin-bottom: 18px; }
+.ri-panel-heat .ck-chart { max-width: 560px; }
+
+@media (max-width: 600px) {
+  .ri-item { grid-template-columns: minmax(0, 1fr); padding-left: 8px; }
+  .ri-answers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ri-answer span { width: 100%; min-width: 0; padding: 0 6px; font-size: 13px; }
+  .ri-detail { grid-template-columns: minmax(0, 1fr); }
+  .ri-flags { flex-wrap: wrap; }
+}
+
+/* The printed sheet of one room (A4 on a clipboard) and the daily summary. */
+.ri-print[hidden] { display: none; }
+@page ri-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  .ri-item { break-inside: avoid; }
+  html.ri-printing main > :not(.ri-print) { display: none !important; }
+  html.ri-printing .ri-print { page: ri-a4; display: block !important; padding: 0; color: #000; font-size: 11px; }
+  .ri-print h2 { margin: 2px 0 0; font-size: 22px; }
+  .ri-print h3 { margin: 12px 0 4px; font-size: 13px; }
+  .ri-print .kicker { margin: 0; }
+  .ri-print-meta { margin: 2px 0 8px; }
+  .ri-print-fields { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px 10px; margin: 0 0 8px; }
+  .ri-print-fields dt { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+  .ri-print-fields dd { margin: 0; min-height: 16px; border-bottom: 1px solid #999; }
+  .ri-print-table { width: 100%; border-collapse: collapse; }
+  .ri-print-table th, .ri-print-table td { padding: 3px 5px; border: 1px solid #bbb; text-align: left; vertical-align: top; }
+  .ri-print-table thead th { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .ri-print-zone th { background: #eee; font-weight: 800; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ri-print-table tr { break-inside: avoid; }
+  .ri-print-table .num, .ri-print-table .ri-box { text-align: center; white-space: nowrap; }
+  .ri-box { font-size: 14px; }
+  .ri-print-note { width: 32%; }
+  .ri-print-foot { margin: 8px 0 0; font-weight: 700; }
+  .ri-print-sign { margin: 14px 0 0; }
+  .ri-print-list { margin: 0; padding-left: 16px; }
+}

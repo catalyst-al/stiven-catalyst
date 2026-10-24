@@ -775,6 +775,24 @@
     open(d.id);
     flash(listStatus, tx("A new standard from the template: {text}", { text: tpl.name }));
   });
+  // One standard as a template file (js/template-pack.js): another site opens it as a new standard of its own, with
+  // its version and the notes of every earlier version.
+  const packHost = $("[data-template-pack]");
+  if (window.TemplatePack && packHost) {
+    window.TemplatePack.ui(packHost, {
+      tool: "standard-work", kind: "standard",
+      name: () => (current() ? nameOf(current()) : ""),
+      data: () => { const d = current(); if (!d || !hasContent(d)) return null; const { id: _id, ...doc } = cleanDoc(d); return doc; },
+      validate: (raw) => { const d = cleanDoc(isObject(raw) ? { ...raw, id: undefined } : null); return hasContent(d) ? d : null; },
+      onOpen: (result) => {
+        const d = result.data;
+        d.updated = today();
+        state.docs.unshift(d);
+        open(d.id);
+        return tx("A new standard from the file: {text}", { text: nameOf(d) });
+      },
+    });
+  }
 
   // Another tab changed the saved standards.
   window.addEventListener("storage", (event) => {

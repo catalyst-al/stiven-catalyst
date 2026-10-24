@@ -1,0 +1,21 @@
+{#- Events on the timeline (js/annotations.js): a change marked here is a line in the charts. Set anPrefix before the include. -#}
+<details class="dl-box an-box" data-annotations>
+  <summary class="kicker">{{ "Mark a change on the timeline" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></summary>
+  <p class="form-note">{{ "A new standard, a new layout, a new team: mark the day it started, and the charts show a line there, so you can see whether the numbers moved after it." | t(lang) }}</p>
+  <form class="dl-grid" data-annotation-form novalidate>
+    <div class="field">
+      <label for="{{ anPrefix }}-an-date">{{ "Date" | t(lang) }}</label>
+      <input id="{{ anPrefix }}-an-date" name="andate" type="date">
+    </div>
+    <div class="field dl-wide">
+      <label for="{{ anPrefix }}-an-text">{{ "What changed" | t(lang) }}</label>
+      <input id="{{ anPrefix }}-an-text" name="antext" maxlength="160" autocomplete="off" placeholder="{{ 'e.g. New stacking standard at the dock' | t(lang) }}">
+    </div>
+    <label class="an-all dl-wide"><input type="checkbox" name="anall"> {{ "Show it in the charts of every tool" | t(lang) }}</label>
+    <div class="tool-actions dl-wide">
+      <button class="button-secondary" type="submit">{{ "Mark the change" | t(lang) }}</button>
+      <p class="form-note" data-annotation-status aria-live="polite"></p>
+    </div>
+  </form>
+  <ul class="an-list" data-annotation-list hidden></ul>
+</details>

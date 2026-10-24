@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Spaghetti Diagram
+seo_title: "Spaghetti diagram: walking paths in metres over the floor plan"
+description: "Draw the walking paths of one job over the floor plan, in metres: per cycle and per shift, the stops visited most, a heat grid, before and after."
+activeNav: /tools.html
+permalink: /tools/spaghetti-diagram/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Lean</p>
+  <h1>Spaghetti Diagram</h1>
+  <p class="lede">Follow one job across the floor and draw every walk it takes over the floor plan, tap by tap. The tool measures the paths in metres, per cycle and per shift, turns them into minutes of walking, counts the visits to each stop, shows where the paths cross most, and compares the layout before and after the change.</p>
+</section>
+
+{% set cfg = spaghettiDiagram %}
+{% include "partials/spaghetti-diagram.njk" %}

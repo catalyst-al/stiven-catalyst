@@ -1,0 +1,276 @@
+{#- Project Portfolio: several DMAIC projects at once, each with its worksheets, its tollgates and its savings; project-portfolio.js does the rest. -#}
+<section class="shell tool-layout dl-setup pp-setup">
+  <div class="tool-panel" data-project-portfolio>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">{{ "Improvement projects" | t(lang) }}</p>
+        <p class="form-note" data-count></p>
+      </div>
+      <div class="pp-tabs" role="group" aria-label="{{ 'Choose a project' | t(lang) }}" data-tabs></div>
+      <p class="dl-empty" data-empty>{{ "No projects yet. Start the first one, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example portfolio" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-new>{{ "+ New project" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-remove-project>{{ "Remove this project" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear the portfolio" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-status aria-live="polite"></p>
+    </div>
+
+    <div class="pp-editor" data-editor hidden>
+      <fieldset class="dl-box">
+        <legend class="kicker">1 · {{ "The project" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="pp-title">{{ "Project name" | t(lang) }}</label>
+            <input id="pp-title" data-f="title" placeholder="{{ cfg.text.titlePlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="pp-lead">{{ "Project lead" | t(lang) }}</label>
+            <input id="pp-lead" data-f="lead" placeholder="{{ cfg.text.leadPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="pp-belt">{{ "Belt" | t(lang) }}</label>
+            <select id="pp-belt" data-f="belt">
+              {%- for key, label in cfg.belts %}
+              <option value="{{ key }}">{{ label }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="pp-sponsor">{{ "Sponsor" | t(lang) }}</label>
+            <input id="pp-sponsor" data-f="sponsor" placeholder="{{ cfg.text.sponsorPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="pp-area">{{ "Area" | t(lang) }}</label>
+            <input id="pp-area" data-f="area" list="pp-area-list" placeholder="{{ cfg.text.areaPlaceholder }}" autocomplete="off">
+            <datalist id="pp-area-list" data-area-list></datalist>
+          </div>
+          <div class="field">
+            <label for="pp-start">{{ "Start" | t(lang) }}</label>
+            <input id="pp-start" type="date" data-f="start" data-kind="date">
+          </div>
+          <div class="field">
+            <label for="pp-end">{{ "Target end" | t(lang) }}</label>
+            <input id="pp-end" type="date" data-f="end" data-kind="date">
+          </div>
+          <div class="field">
+            <label for="pp-phase">{{ "Phase" | t(lang) }}</label>
+            <select id="pp-phase" data-f="phase">
+              {%- for key, phase in cfg.phases %}
+              <option value="{{ key }}">{{ phase.letter }} · {{ phase.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="pp-state">{{ "Status" | t(lang) }}</label>
+            <select id="pp-state" data-f="status">
+              {%- for key, label in cfg.statuses %}
+              <option value="{{ key }}">{{ label }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="dl-box pp-sheets">
+        <legend class="kicker">2 · {{ "Define worksheets" | t(lang) }}</legend>
+        <details class="pp-sheet" open>
+          <summary>{{ cfg.sheets.charter }}</summary>
+          <div class="dl-grid">
+            <div class="field dl-wide">
+              <label for="pp-problem">{{ "Problem statement" | t(lang) }}</label>
+              <textarea id="pp-problem" rows="3" data-f="charter.problem" placeholder="{{ cfg.text.problemPlaceholder }}"></textarea>
+            </div>
+            <div class="field dl-wide">
+              <label for="pp-goal">{{ "Goal" | t(lang) }}</label>
+              <input id="pp-goal" data-f="charter.goal" placeholder="{{ cfg.text.goalPlaceholder }}" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="pp-scope-in">{{ "In scope" | t(lang) }}</label>
+              <textarea id="pp-scope-in" rows="2" data-f="charter.scopeIn" placeholder="{{ cfg.text.scopeInPlaceholder }}"></textarea>
+            </div>
+            <div class="field">
+              <label for="pp-scope-out">{{ "Out of scope" | t(lang) }}</label>
+              <textarea id="pp-scope-out" rows="2" data-f="charter.scopeOut" placeholder="{{ cfg.text.scopeOutPlaceholder }}"></textarea>
+            </div>
+            <div class="field dl-wide">
+              <label for="pp-team">{{ "Team" | t(lang) }}</label>
+              <input id="pp-team" data-f="charter.team" placeholder="{{ cfg.text.teamPlaceholder }}" autocomplete="off">
+            </div>
+          </div>
+          <p class="form-note" data-out="charter" aria-live="polite"></p>
+        </details>
+
+        <details class="pp-sheet">
+          <summary>{{ cfg.sheets.sipoc }}</summary>
+          <div class="pp-sipoc">
+            {%- for part in cfg.sipoc %}
+            <div class="field">
+              <label for="pp-sipoc-{{ part[0] }}"><span class="pp-letter" aria-hidden="true">{{ part[0] | upper }}</span> {{ part[1] }}</label>
+              <textarea id="pp-sipoc-{{ part[0] }}" rows="6" data-f="sipoc.{{ part[0] }}" data-kind="lines" placeholder="{{ cfg.text.sipocPlaceholder }}" aria-describedby="pp-sipoc-{{ part[0] }}-note"></textarea>
+              <span class="form-note" id="pp-sipoc-{{ part[0] }}-note">{{ part[2] }}</span>
+            </div>
+            {%- endfor %}
+          </div>
+          <p class="form-note" data-out="sipoc" aria-live="polite"></p>
+        </details>
+
+        <details class="pp-sheet">
+          <summary>{{ cfg.sheets.ctq }}</summary>
+          <p class="form-note">{{ "From what the customer says to what you can measure: one need, the drivers behind it, and for each driver a measurable CTQ with its specification." | t(lang) }}</p>
+          <div data-table="ctq"></div>
+        </details>
+
+        <details class="pp-sheet">
+          <summary>{{ cfg.sheets.raci }}</summary>
+          <div class="field">
+            <label for="pp-people">{{ "People or roles" | t(lang) }}</label>
+            <input id="pp-people" data-f="raci.people" data-kind="list" placeholder="{{ cfg.text.peoplePlaceholder }}" autocomplete="off" aria-describedby="pp-people-note">
+            <span class="form-note" id="pp-people-note">{{ "Comma separated. Each becomes a column." | t(lang) }}</span>
+          </div>
+          <ul class="pp-raci-key">
+            {%- for key, label in cfg.raci %}
+            <li><strong>{% if key == "AR" %}A/R{% else %}{{ key }}{% endif %}</strong> {{ label }}</li>
+            {%- endfor %}
+          </ul>
+          <div data-raci></div>
+          <p class="form-note" data-out="raci" aria-live="polite"></p>
+        </details>
+
+        <details class="pp-sheet">
+          <summary>{{ cfg.sheets.kano }}</summary>
+          <p class="form-note">{{ "Ask the customer two questions per feature and pick the answers: the category follows from the Kano evaluation table. Or set the category directly." | t(lang) }}</p>
+          <p class="form-note pp-kano-q"><strong>1</strong> {{ cfg.kano.functional }} <strong>2</strong> {{ cfg.kano.dysfunctional }}</p>
+          <div data-table="kano"></div>
+        </details>
+      </fieldset>
+
+      <fieldset class="dl-box">
+        <legend class="kicker">3 · {{ "Measure and Analyze: the numbers" | t(lang) }}</legend>
+        <div class="pp-numbers">
+          <div class="pp-num-group" role="group" aria-labelledby="pp-base-label">
+            <p class="result-label" id="pp-base-label">{{ "Baseline (before)" | t(lang) }}</p>
+            <div class="field"><label for="pp-base-d">{{ "Defects" | t(lang) }}</label><input id="pp-base-d" type="number" min="0" step="any" inputmode="decimal" data-f="base.defects" data-kind="number"></div>
+            <div class="field"><label for="pp-base-u">{{ "Units" | t(lang) }}</label><input id="pp-base-u" type="number" min="0" step="any" inputmode="decimal" data-f="base.units" data-kind="number"></div>
+            <div class="field"><label for="pp-base-o">{{ "Opportunities per unit" | t(lang) }}</label><input id="pp-base-o" type="number" min="1" step="any" inputmode="decimal" data-f="base.opps" data-kind="number"></div>
+          </div>
+          <div class="pp-num-group" role="group" aria-labelledby="pp-after-label">
+            <p class="result-label" id="pp-after-label">{{ "After the change" | t(lang) }}</p>
+            <div class="field"><label for="pp-after-d">{{ "Defects" | t(lang) }}</label><input id="pp-after-d" type="number" min="0" step="any" inputmode="decimal" data-f="after.defects" data-kind="number"></div>
+            <div class="field"><label for="pp-after-u">{{ "Units" | t(lang) }}</label><input id="pp-after-u" type="number" min="0" step="any" inputmode="decimal" data-f="after.units" data-kind="number"></div>
+            <div class="field"><label for="pp-after-o">{{ "Opportunities per unit" | t(lang) }}</label><input id="pp-after-o" type="number" min="1" step="any" inputmode="decimal" data-f="after.opps" data-kind="number"></div>
+          </div>
+        </div>
+        <p class="pp-out" data-out="numbers" aria-live="polite"></p>
+
+        <p class="result-label pp-sub">{{ "Rolled throughput yield (RTY)" | t(lang) }}</p>
+        <p class="form-note">{{ "The share of units that pass every step right the first time: the first-pass yields of the steps multiplied." | t(lang) }}</p>
+        <div data-table="rty"></div>
+        <p class="pp-out" data-out="rty" aria-live="polite"></p>
+
+        <p class="result-label pp-sub">{{ "Cost of poor quality (COPQ), € per month" | t(lang) }}</p>
+        <div class="dl-grid pp-copq">
+          {%- for part in cfg.copq %}
+          <div class="field">
+            <label for="pp-copq-{{ part[0] }}">{{ part[1] }}</label>
+            <input id="pp-copq-{{ part[0] }}" type="number" min="0" step="any" inputmode="decimal" data-f="copq.{{ part[0] }}" data-kind="number" aria-describedby="pp-copq-{{ part[0] }}-note">
+            <span class="form-note" id="pp-copq-{{ part[0] }}-note">{{ part[2] }}</span>
+          </div>
+          {%- endfor %}
+        </div>
+        <p class="pp-out" data-out="copq" aria-live="polite"></p>
+      </fieldset>
+
+      <fieldset class="dl-box">
+        <legend class="kicker">4 · {{ "Improve and Control" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="pp-hard">{{ "Hard savings, € per year" | t(lang) }}</label>
+            <input id="pp-hard" type="number" min="0" step="any" inputmode="decimal" data-f="savings.hard" data-kind="number">
+          </div>
+          <div class="field">
+            <label for="pp-from">{{ "Savings start on" | t(lang) }}</label>
+            <input id="pp-from" type="date" data-f="savings.from" data-kind="date">
+          </div>
+          <div class="field">
+            <label for="pp-soft">{{ "Soft savings" | t(lang) }}</label>
+            <input id="pp-soft" data-f="savings.soft" placeholder="{{ cfg.text.softPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="pp-soft-value">{{ "Soft estimate, € per year" | t(lang) }}</label>
+            <input id="pp-soft-value" type="number" min="0" step="any" inputmode="decimal" data-f="savings.softValue" data-kind="number">
+          </div>
+        </div>
+        <p class="result-label pp-sub">{{ "Realised savings by month" | t(lang) }}</p>
+        <div data-table="realised"></div>
+        <p class="pp-out" data-out="savings" aria-live="polite"></p>
+
+        <p class="result-label pp-sub">{{ "Control plan" | t(lang) }}</p>
+        <p class="form-note">{{ "What keeps the result after the project: each line has an owner and says what happens when the number goes out of control." | t(lang) }}</p>
+        <div data-table="control"></div>
+      </fieldset>
+
+      <fieldset class="dl-box pp-gates">
+        <legend class="kicker">5 · {{ "Tollgates" | t(lang) }}</legend>
+        <p class="form-note">{{ "At the end of each phase the sponsor reviews the checklist and signs. A phase closes only when its checklist is complete, or with a written reason." | t(lang) }}</p>
+        {%- for key, items in cfg.tollgates %}
+        <details class="pp-gate" data-gate="{{ key }}">
+          <summary><span class="pp-letter" aria-hidden="true">{{ cfg.phases[key].letter }}</span> {{ cfg.phases[key].name }} <span class="pp-gate-sum" data-gate-sum="{{ key }}"></span></summary>
+          <ul class="pp-checks">
+            {%- for item in items %}
+            <li><label class="dl-check-item"><input type="checkbox" data-gate-check="{{ key }}" data-index="{{ loop.index0 }}"><span>{{ item }}</span></label></li>
+            {%- endfor %}
+          </ul>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="pp-gate-{{ key }}-planned">{{ "Planned for" | t(lang) }}</label>
+              <input id="pp-gate-{{ key }}-planned" type="date" data-f="gates.{{ key }}.planned" data-kind="date">
+            </div>
+            <div class="field">
+              <label for="pp-gate-{{ key }}-sponsor">{{ "Signed by the sponsor" | t(lang) }}</label>
+              <input id="pp-gate-{{ key }}-sponsor" data-f="gates.{{ key }}.sponsor" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="pp-gate-{{ key }}-date">{{ "Signed on" | t(lang) }}</label>
+              <input id="pp-gate-{{ key }}-date" type="date" data-f="gates.{{ key }}.date" data-kind="date">
+            </div>
+            <div class="field dl-wide">
+              <label for="pp-gate-{{ key }}-reason">{{ "Reason to close with open points" | t(lang) }}</label>
+              <textarea id="pp-gate-{{ key }}-reason" rows="2" data-f="gates.{{ key }}.reason" placeholder="{{ cfg.text.reasonPlaceholder }}"></textarea>
+            </div>
+          </div>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-close-gate="{{ key }}">{{ "Close this tollgate" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-reopen-gate="{{ key }}">{{ "Reopen" | t(lang) }}</button>
+          </div>
+          <p class="form-note" data-gate-status="{{ key }}" aria-live="polite"></p>
+        </details>
+        {%- endfor %}
+      </fieldset>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Learn the method." | t(lang) }}</strong> {{ "Each phase step by step, with the same parcel-hub case, in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/six-sigma-dmaic/' | local(lang) }}">{{ "DMAIC course" | t(lang) }}</a>. {{ "Root causes go through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results pp-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="project-portfolio-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/project-portfolio.js' | assetUrl }}" defer></script>

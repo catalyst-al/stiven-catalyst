@@ -696,18 +696,37 @@
   // Setup events.
   teamInput.addEventListener("input", () => { state.team = teamInput.value.trim().slice(0, 80); save(); renderResults(); });
   templateSelect.addEventListener("change", () => { state.template = templateSelect.value; save(); });
+  // A task list replaces the tasks; a task of the same name keeps its id, so its levels stay. False when declined.
+  const useTasks = (tasks) => {
+    if (!state.example && state.tasks.length && !window.confirm(tx("Replace the tasks with the template? Levels of tasks with the same name are kept."))) return false;
+    ownWork();
+    const byName = new Map(state.tasks.map((t) => [t.name.toLowerCase(), t.id]));
+    state.tasks = tasks.map((t) => ({ id: byName.get(t.name.toLowerCase()) || newId("t"), name: t.name, crit: t.crit, min: t.min, target: t.target }));
+    tidy();
+    changed();
+    return true;
+  };
   q("[data-load-template]").addEventListener("click", () => {
     const tpl = cfg.templates[templateSelect.value];
     if (!tpl) return;
-    if (!state.example && state.tasks.length && !window.confirm(tx("Replace the tasks with the template? Levels of tasks with the same name are kept."))) return;
-    ownWork();
     state.template = templateSelect.value;
-    const byName = new Map(state.tasks.map((t) => [t.name.toLowerCase(), t.id]));
-    state.tasks = tpl.tasks.map((t) => ({ id: byName.get(t.name.toLowerCase()) || newId("t"), name: t.name, crit: t.crit, min: t.min, target: t.target }));
-    tidy();
-    changed();
-    flash(setupStatus, tx("{n} tasks loaded from the template.", { n: state.tasks.length }));
+    if (useTasks(tpl.tasks)) flash(setupStatus, tx("{n} tasks loaded from the template.", { n: state.tasks.length }));
   });
+  // The task list as a template file (js/template-pack.js): names, criticality, minimum level and target. The people
+  // and their levels stay in this browser.
+  const packHost = q("[data-template-pack]");
+  if (window.TemplatePack && packHost) {
+    window.TemplatePack.ui(packHost, {
+      tool: "skills-matrix", kind: "skills-tasks",
+      name: () => state.team || cfg.templates[state.template]?.name || "",
+      data: () => (state.tasks.length ? { tasks: state.tasks.map((t) => ({ name: t.name, crit: t.crit, min: t.min, target: t.target })) } : null),
+      validate: (raw) => {
+        const tasks = (isObject(raw) && Array.isArray(raw.tasks) ? raw.tasks : []).slice(0, 200).map(cleanTask).filter(Boolean).map(({ id: _id, ...t }) => t);
+        return tasks.length ? { tasks } : null;
+      },
+      onOpen: (result) => (useTasks(result.data.tasks) ? tx("{n} tasks loaded from the file.", { n: state.tasks.length }) : false),
+    });
+  }
   q("[data-clear-all]").addEventListener("click", () => {
     if (!state.people.length && !state.tasks.length) return;
     if (!state.example && !window.confirm(tx("Clear the whole matrix: people, tasks, levels, plan and snapshots?"))) return;

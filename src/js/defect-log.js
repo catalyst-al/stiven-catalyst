@@ -12,6 +12,10 @@
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout, periodTotal, rangeText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
+  // Newer pieces of the kit (filter, day / week / month, the period before); a page with an older kit still works.
+  const kit = window.ToolKit;
+  const Annotations = window.Annotations || null;
+  const SLUG = Annotations ? Annotations.slugHere() : "";
 
   const data = JSON.parse(dataEl.textContent);
   const t = data.text;
@@ -48,7 +52,8 @@
   const targetPlaceholder = targetInput?.placeholder || "";
   const targetNote = root.querySelector("[data-profile-target]");
 
-  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [], example: {}, totalsFor: {} });
+  const state = loadState(KEY, { period: "", volume: "", target: "", from: "", to: "", volumes: [], rows: [], example: {}, totalsFor: {}, grain: "", compare: false });
+  if (!["", "day", "week", "month"].includes(state.grain)) state.grain = "";
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   state.volumes = cleanVolumes(state.volumes);
@@ -178,6 +183,22 @@
       days: new Set(rows.map((row) => row.date).filter(Boolean)).size,
     };
   };
+
+  // A cause, stage or shift chosen in the result's lists filters the log table and the trend to it. It is not saved:
+  // a filter left on would hide entries the next time the log is opened.
+  let picked = null;
+  const pickTest = () => (picked ? (row) => (row[picked.field] || NOT_RECORDED) === picked.value : null);
+  let rerender = () => {};
+  const choose = (name, value) => {
+    picked = picked && picked.field === name && picked.value === value ? null : { field: name, value };
+    kit.keepFocus ? kit.keepFocus(rerender) : rerender();
+  };
+  const clearPick = () => {
+    const was = picked;
+    picked = null;
+    kit.keepFocus ? kit.keepFocus(rerender, was ? `pick:${was.field}:${was.value}` : "") : rerender();
+  };
+  const pickOptions = (name) => (kit.filterChip ? { pick: (item) => choose(name, item.key), picked: (item) => picked?.field === name && picked.value === item.key, pickKey: name } : {});
 
   // Results.
   const bars = (items, total, options = {}) => barList(items, {
@@ -355,28 +376,82 @@
 
     const vital = result.causes.filter((item) => item.vital);
     const pareto = panel(tx("Pareto of causes"), tx("{a} of {b} causes carry {pct} of the {noun}. Fix these first.", { a: vital.length, b: result.causes.length, pct: pct(vital.at(-1).cumulative, 0), noun: t.allNoun }));
-    pareto.append(bars(result.causes, result.total, { ranked: true, cumulative: true, highlight: (item) => item.vital, tag: tx("Vital few") }));
+    pareto.append(bars(result.causes, result.total, { ranked: true, cumulative: true, highlight: (item) => item.vital, tag: tx("Vital few"), ...pickOptions("cause") }));
 
     const flow = panel(t.stageTitle, t.stageNote);
-    flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: tx("Most") }));
+    flow.append(bars(result.stages, result.total, { highlight: (item) => item.key === result.topStage.key, tag: tx("Most"), ...pickOptions("stage") }));
 
     // Trend over time, so a bad day or a worsening week shows before the totals do. With the volume of each day it is a
-    // rate (and the target, when there is one, is drawn); without it, the units per day or week.
-    const shares = result.dayVolumes.items.length ? trendShares(result.rows, (row) => row.units, result.dayVolumes.items) : null;
+    // rate (and the target, when there is one, is drawn); without it, the units per day or week. A cause, stage or shift
+    // picked in the lists below narrows it to that one; the period before can be drawn over it.
+    const test = pickTest();
+    const trendRows = test ? result.rows.filter(test) : result.rows;
+    const span = dateSpan(result.rows);
+    const range = { from: state.from || span?.from || "", to: state.to || span?.to || "" };
+    const before = state.compare && kit.previousRange ? kit.previousRange(range) : null;
+    // A filter or a comparison keeps the columns of the whole period, so they line up with the ones before.
+    const reach = { ...(state.grain && { unit: state.grain }), ...((test || before) && range.from && { from: range.from, to: range.to }) };
+    const units = (row) => row.units;
+    const shares = result.dayVolumes.items.length ? trendShares(trendRows, units, result.dayVolumes.items, 60, reach) : null;
     const useShares = Boolean(shares) && shares.buckets.filter((bucket) => bucket.total > 0).length > 1;
-    const trend = useShares ? shares : trendBuckets(result.rows, (row) => row.units);
+    const trend = useShares ? shares : trendBuckets(trendRows, units, 60, null, reach);
     const goal = targetShare();
-    const trendUnit = trend.unit === "week" ? tx("week") : tx("day");
+    const trendUnit = trend.unit === "week" ? tx("week") : trend.unit === "month" ? tx("month") : tx("day");
     let trendPanel = null;
-    if (trend.buckets.length > 1) {
-      const by = trend.unit === "week" ? tx("week by week") : tx("day by day");
+    if (trend.buckets.length > 1 || test || state.grain) {
+      const by = trend.unit === "week" ? tx("week by week") : trend.unit === "month" ? tx("month by month") : tx("day by day");
       const note = !useShares ? tx("{many} per {unit}. The dashed line is the average; the highest {unit} is red.", { many: t.many, unit: trendUnit })
         : goal > 0 ? tx("{rate} ({many} / {volume}), {by}. The dashed line is the average, the solid line the target; columns above it are red.", { rate: t.rateLabel, many: t.many, volume: t.volumeLabel, by })
         : tx("{rate} ({many} / {volume}), {by}. The dashed line is the average; the highest column is red.", { rate: t.rateLabel, many: t.many, volume: t.volumeLabel, by });
-      trendPanel = panel(tx("Trend over time"), note);
-      trendPanel.append(trendFigure(trend, useShares
-        ? { title: `${t.tool}: ${t.rateLabel}`, unit: t.rateLabel, average: tx("Average"), format: shareText, target: goal > 0 ? goal : null, targetLabel: tx("Target") }
-        : { title: `${t.tool}: ${tx("Trend over time")}`, unit: capital(t.many), average: tx("Average") }, KEY.replace(/^sc-/, "")));
+      trendPanel = panel(picked ? `${tx("Trend over time")} · ${picked.value}` : tx("Trend over time"), note);
+      if (kit.trendControls) {
+        trendPanel.append(kit.trendControls({
+          unit: trend.unit,
+          grain: state.grain,
+          compare: state.compare,
+          onGrain: (value) => { state.grain = value; save(); kit.keepFocus(rerender); },
+          onCompare: (on) => { state.compare = on; save(); kit.keepFocus(rerender); },
+        }));
+      }
+      if (picked && kit.filterChip) trendPanel.append(kit.filterChip(picked.value, clearPick));
+      // The period before, with the same filter, as the same kind of trend: a rate needs the volumes of its days.
+      let previous = null;
+      let compareLine = "";
+      if (before) {
+        const earlier = inRange(state.rows, before.from, before.to);
+        const earlierRows = test ? earlier.filter(test) : earlier;
+        const options = { unit: trend.unit, from: before.from, to: before.to };
+        if (useShares) {
+          const volumes = state.volumes.filter((item) => item.date >= before.from && item.date <= before.to);
+          previous = volumes.length ? trendShares(earlierRows, units, volumes, 60, options) : null;
+        } else {
+          // Without entries on or before those days the log did not run yet: 0 would be no comparison.
+          previous = state.rows.some((row) => row.date && row.date <= before.to) ? trendBuckets(earlierRows, units, 60, null, options) : null;
+        }
+        const now = kit.trendTotal(trend).value;
+        const then = previous ? kit.trendTotal(previous).value : null;
+        const format = useShares ? shareText : (value) => int.format(value);
+        compareLine = then === null || now === null
+          ? tx(useShares ? "The period before ({days}) has no daily volumes to compare with." : "The log has no entries for the period before ({days}).", { days: spanText(before) })
+          : `${kit.compareText(now, then, format)} (${spanText(before)})`;
+        if (then === null) previous = null;
+      }
+      const events = Annotations && trend.buckets.length ? Annotations.list(trend.buckets[0].key, trend.buckets.at(-1).to, SLUG).map((item) => ({ date: item.date, text: item.text })) : [];
+      if (trend.buckets.length > 1) {
+        trendPanel.append(trendFigure(trend, {
+          ...(useShares
+            ? { title: `${t.tool}: ${t.rateLabel}`, unit: t.rateLabel, average: tx("Average"), format: shareText, target: goal > 0 ? goal : null, targetLabel: tx("Target") }
+            : { title: `${t.tool}: ${tx("Trend over time")}`, unit: capital(t.many), average: tx("Average") }),
+          previous: previous?.buckets,
+          events,
+        }, KEY.replace(/^sc-/, "")));
+      } else {
+        trendPanel.append(el("p", "dl-panel-note", tx("Not enough days for a trend. Choose Day, or a longer period.")));
+      }
+      if (compareLine) trendPanel.append(el("p", "ci-compare-line", compareLine));
+      if (previous) trendPanel.append(el("p", "dl-panel-note", tx("The grey dotted line is the period before, at the same place in its period.")));
+      if (events.length) trendPanel.append(el("p", "dl-panel-note", tx("A flag marks a change on the timeline. Point at it to read it.")));
+      if (kit.filterChip && !picked) trendPanel.append(el("p", "dl-panel-note", tx("Choose a {cause}, {stage} or {shift} in the lists below to see only its entries here and in the log.", { cause: lower(field.cause.label), stage: lower(field.stage.label), shift: lower(field.shift.label) })));
       if (useShares && shares.skipped.length) {
         const list = shares.skipped.slice(0, 5).map(showDate).join(", ");
         trendPanel.append(el("p", "dl-panel-note", tx(shares.skipped.length === 1 ? "{n} day with entries has no volume and is not in this chart: {days}." : "{n} days with entries have no volume and are not in this chart: {days}.", { n: shares.skipped.length, days: shares.skipped.length > 5 ? `${list}…` : list })));
@@ -387,7 +462,7 @@
     types.append(matrix(result));
 
     const shifts = panel(tx("By shift"), tx("Counts only. A shift that handles more volume will log more {noun}, so compare with its share of the work.", { noun: t.allNoun }));
-    shifts.append(bars(result.shifts, result.total));
+    shifts.append(bars(result.shifts, result.total, pickOptions("shift")));
 
     // Where to start: the stage with the highest count, and its main cause.
     const cause = result.topStageCause;
@@ -475,7 +550,9 @@
       ],
     }),
     renderResults,
+    filter: () => (picked ? { label: picked.value, test: pickTest(), clear: clearPick } : null),
   });
+  rerender = () => book.render();
 
   // The volume of each day (optional): it makes the trend a rate and can stand in for the volume of the period.
   const volumesBox = root.querySelector("[data-volumes]");
@@ -609,6 +686,12 @@
   if (Workplace) {
     window.addEventListener("workplace:changed", profileChanged);
     window.addEventListener("storage", (event) => { if (event.key === Workplace.KEY || event.key === null) profileChanged(); });
+  }
+
+  // Events on the timeline: the form adds them, and the charts redraw when one is added or removed (here or in another tab).
+  if (Annotations) {
+    Annotations.mount(document.querySelector("[data-annotations]"), SLUG);
+    window.addEventListener("annotations:changed", () => book.render());
   }
 
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Operations Report
+seo_title: "Weekly operations report for area managers: safety, quality, delivery, OEE, 5S and actions"
+description: "The weekly or monthly management report, written from your tools: each number against the period before and its target, the risk, the decision, Word and A4."
+activeNav: /tools.html
+permalink: /tools/ops-report/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Report</p>
+  <h1>Operations Report</h1>
+  <p class="lede">The report for your manager, written by itself from everything this browser holds: safety, quality, delivery, equipment, the workplace, the hotel, improvement and actions. Each number against the period before and its target, what got better, what got worse, the biggest risk and the one decision it needs. Copy it, print it on A4 or download it as Word.</p>
+</section>
+
+{% set cfg = opsReport %}
+{% include "partials/ops-report.njk" %}

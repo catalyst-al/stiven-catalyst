@@ -1,0 +1,253 @@
+{
+  "storageKey": "sc-ops-report-de",
+  "text": {
+    "tool": "Betriebsbericht",
+    "file": "betriebsbericht",
+    "exampleNote": "Dies ist ein Beispielstandort, der nur auf dieser Seite liegt, damit Sie einen fertigen Bericht sehen. Der echte Bericht liest die Schadenskontrolle, die Verspätungsanalyse, OEE, die Maßnahmenliste und die anderen Tools in diesem Browser und schreibt sich aus dem, was dort gespeichert ist.",
+    "exampleActions": "Der Fokus des Beispiels wird nicht in Ihre Maßnahmenliste übernommen. Erfassen Sie Ihre eigene Arbeit in den Tools, dann schreibt der Bericht Ihren.",
+    "nothing": "Keines der Tools enthält Daten für diesen Zeitraum. Wählen Sie einen anderen Zeitraum oder erfassen Sie die Woche zuerst in den Tools."
+  },
+  "periods": [
+    { "key": "thisWeek", "label": "Diese Woche" },
+    { "key": "lastWeek", "label": "Letzte Woche" },
+    { "key": "thisMonth", "label": "Dieser Monat" },
+    { "key": "lastMonth", "label": "Letzter Monat" },
+    { "key": "custom", "label": "Eigener Zeitraum" }
+  ],
+  "sources": {
+    "damage-control": "Schadenskontrolle",
+    "incomplete-control": "Vollständigkeitskontrolle",
+    "night-audit": "Night-Audit-Protokoll",
+    "delay-analyzer": "Verspätungsanalyse",
+    "shift-handover": "Schichtübergabe",
+    "safety-cross": "Sicherheitskreuz",
+    "oee": "OEE",
+    "five-s-audit": "5S-Audit",
+    "gemba-walk": "Gemba Walk",
+    "hotel-kpis": "Hotel-Kennzahlen",
+    "kaizen-board": "Kaizen-Board",
+    "action-tracker": "Maßnahmenliste"
+  },
+  "targets": [
+    { "key": "damage", "label": "Schadensquote", "unit": "%", "placeholder": "z. B. 0,3" },
+    { "key": "incomplete", "label": "Unvollständigkeitsquote", "unit": "%", "placeholder": "z. B. 0,5" },
+    { "key": "nightAudit", "label": "Ausnahmequote Night Audit", "unit": "%", "placeholder": "z. B. 2" },
+    { "key": "ontime", "label": "Pünktliche Touren", "unit": "%", "placeholder": "z. B. 95" },
+    { "key": "oee", "label": "OEE", "unit": "%", "placeholder": "z. B. 85" },
+    { "key": "fives", "label": "5S-Ergebnis", "unit": "%", "placeholder": "z. B. 80" }
+  ],
+  "report": {
+    "title": "Betriebsbericht",
+    "weekly": "Wochenbericht",
+    "monthly": "Monatsbericht",
+    "periodReport": "Bericht",
+    "period": "Zeitraum",
+    "before": "Verglichen mit",
+    "site": "Standort",
+    "written": "Erstellt am {date} aus den Daten in diesem Browser.",
+    "table": ["Kennzahl", "Dieser Zeitraum", "Vorzeitraum", "Veränderung", "Ziel"]
+  },
+  "sections": {
+    "summary": "Zusammenfassung",
+    "safety": "Arbeitssicherheit",
+    "quality": "Qualität",
+    "delivery": "Lieferung",
+    "equipment": "Anlagen",
+    "workplace": "Arbeitsplatz",
+    "hotel": "Hotel",
+    "improvement": "Verbesserung",
+    "actions": "Maßnahmen",
+    "focusWeek": "Fokus der nächsten Woche",
+    "focusMonth": "Fokus des nächsten Monats"
+  },
+  "words": {
+    "better": "besser",
+    "worse": "schlechter",
+    "same": "unverändert",
+    "up": "gestiegen",
+    "down": "gesunken",
+    "noBefore": "kein Vorzeitraum",
+    "met": "im Ziel",
+    "missed": "nicht im Ziel",
+    "before": "vorher",
+    "target": "Ziel",
+    "owner": "Verantwortlich",
+    "check": "Prüfung",
+    "noOwner": "noch ohne Verantwortlichen",
+    "and": "und"
+  },
+  "metrics": {
+    "accidents": { "label": "Unfälle", "noun": "die Unfälle" },
+    "firstAid": { "label": "Erste Hilfe", "noun": "die Erste-Hilfe-Fälle" },
+    "nearMisses": { "label": "Beinaheunfälle und unsichere Handlungen", "noun": "die gemeldeten Beinaheunfälle" },
+    "daysSince": { "label": "Tage ohne Unfall", "noun": "die Tage ohne Unfall" },
+    "damage": { "label": "Beschädigte Einheiten", "noun": "die beschädigten Einheiten" },
+    "damageRate": { "label": "Schadensquote", "noun": "die Schadensquote" },
+    "incomplete": { "label": "Unvollständige Aufträge", "noun": "die unvollständigen Aufträge" },
+    "incompleteRate": { "label": "Unvollständigkeitsquote", "noun": "die Unvollständigkeitsquote" },
+    "night": { "label": "Night-Audit-Ausnahmen", "noun": "die Night-Audit-Ausnahmen" },
+    "nightRate": { "label": "Ausnahmequote Night Audit", "noun": "die Ausnahmequote im Night Audit" },
+    "onTime": { "label": "Pünktliche Touren", "noun": "die Pünktlichkeit" },
+    "late": { "label": "Verspätete Touren", "noun": "die verspäteten Touren" },
+    "routes": { "label": "Touren", "noun": "die Touren" },
+    "oee": { "label": "OEE", "noun": "die OEE" },
+    "availability": { "label": "Verfügbarkeit", "noun": "die Verfügbarkeit" },
+    "performance": { "label": "Leistung", "noun": "die Leistung" },
+    "quality": { "label": "Qualitätsrate", "noun": "die Qualitätsrate" },
+    "fiveS": { "label": "5S-Ergebnis", "noun": "das 5S-Ergebnis" },
+    "gemba": { "label": "Gemba-Erfüllungsgrad", "noun": "der Erfüllungsgrad der Gemba Walks" },
+    "walks": { "label": "Rundgänge", "noun": "die Rundgänge" },
+    "occ": { "label": "Auslastung", "noun": "die Auslastung" },
+    "adr": { "label": "ADR", "noun": "die ADR" },
+    "revpar": { "label": "RevPAR", "noun": "der RevPAR" },
+    "ideas": { "label": "Neue Ideen", "noun": "die neuen Ideen" },
+    "adopted": { "label": "Umgesetzte Ideen", "noun": "die umgesetzten Ideen" },
+    "saving": { "label": "Einsparung pro Monat", "noun": "die Einsparung" },
+    "opened": { "label": "Eröffnete Maßnahmen", "noun": "die eröffneten Maßnahmen" },
+    "closed": { "label": "Erledigte Maßnahmen", "noun": "die erledigten Maßnahmen" },
+    "verified": { "label": "Bestätigte Maßnahmen", "noun": "die bestätigten Maßnahmen" },
+    "overdue": { "label": "Überfällige Maßnahmen", "noun": "die überfälligen Maßnahmen" }
+  },
+  "factors": { "availability": "Verfügbarkeit", "performance": "Leistung", "quality": "Qualität" },
+  "sentences": {
+    "trend": "{value} gegenüber {before} im Vorzeitraum, {trend}",
+    "noTrend": "{value}, ohne Vorzeitraum zum Vergleich",
+    "targetMet": "Damit ist das Ziel von {target} erreicht.",
+    "targetMissed": "Damit ist das Ziel von {target} verfehlt.",
+    "safety": {
+      "accident": { "one": "Ein Unfall im Zeitraum, am {date}{where}.", "many": "{n} Unfälle im Zeitraum, der letzte am {date}{where}." },
+      "none": "Kein Unfall im Zeitraum. Tage ohne Unfall an seinem Ende: {days}.",
+      "where": " im Bereich {area}",
+      "near": "Gemeldete Beinaheunfälle und unsichere Handlungen: {near} ({nearBefore} im Vorzeitraum). Jede Meldung ist ein Unfall, der nicht passiert ist."
+    },
+    "quality": {
+      "lead": "{metric}: {trend}.",
+      "cause": "Die größte Ursache ist {cause} mit {share} der Einträge."
+    },
+    "delivery": {
+      "lead": "Pünktlich: {trend}.",
+      "late": { "one": "Eine Tour kam zu spät an, {minutes} Minuten nach Plan.", "many": "{late} Touren kamen zu spät an, im Schnitt {minutes} Minuten nach Plan." },
+      "none": "Keine Tour kam zu spät an.",
+      "partial": "Verspätete Touren: {trend}. Nur ein Teil der Touren ist erfasst, daher gibt es keinen Pünktlichkeitsanteil."
+    },
+    "equipment": {
+      "lead": "OEE: {trend}.",
+      "machine": "Am niedrigsten liegt {machine} mit {low}; der schwächste Faktor ist {factor}."
+    },
+    "workplace": {
+      "fiveS": "5S-Ergebnis über die Audits des Zeitraums: {trend}.",
+      "weakest": "Der schwächste Bereich ist {area} mit {low}.",
+      "gemba": "Erfüllungsgrad der Gemba Walks: {trend}."
+    },
+    "hotel": {
+      "lead": "RevPAR: {trend}.",
+      "mix": "Auslastung {occ} bei einer ADR von {adr}."
+    },
+    "improvement": {
+      "lead": { "one": "Eine Idee umgesetzt ({before} im Vorzeitraum), im Wert von {saving} pro Monat.", "many": "{adopted} Ideen umgesetzt ({before} im Vorzeitraum), im Wert von {saving} pro Monat." },
+      "none": "Im Zeitraum wurde keine Idee umgesetzt.",
+      "ideas": { "one": "Eine neue Idee ist eingegangen.", "many": "{ideas} neue Ideen sind eingegangen." }
+    },
+    "actions": {
+      "lead": "Eröffnet {opened}, erledigt {closed}, bestätigt {verified}.",
+      "overdue": { "one": "Eine Maßnahme war am Ende des Zeitraums überfällig, bei {owners}.", "many": "{overdue} Maßnahmen waren am Ende des Zeitraums überfällig, bei {owners}." },
+      "overdueNone": "Am Ende des Zeitraums war keine Maßnahme überfällig.",
+      "handover": { "one": "Eine Schichtübergabe wurde abgeschlossen; in die nächste Schicht übernommene Punkte: {carried}.", "many": "{n} Schichtübergaben wurden abgeschlossen; in die nächste Schicht übernommene Punkte: {carried}." }
+    }
+  },
+  "summary": {
+    "intro": { "one": "Dieser Bericht umfasst {range}{site} und vergleicht ihn mit {beforeRange}. Er liest ein Tool in diesem Browser.", "many": "Dieser Bericht umfasst {range}{site} und vergleicht ihn mit {beforeRange}. Er liest {n} Tools in diesem Browser." },
+    "site": " am Standort {site}",
+    "better": "Besser geworden: {noun}, von {before} auf {value}.",
+    "betterNone": "Gegenüber dem Vorzeitraum ist nichts deutlich besser geworden.",
+    "worse": "Schlechter geworden: {noun}, von {before} auf {value}.",
+    "worseNone": "Gegenüber dem Vorzeitraum ist nichts deutlich schlechter geworden.",
+    "risk": {
+      "accident": { "one": "Das größte Risiko ist die Arbeitssicherheit: ein Unfall im Zeitraum, am {date}.", "many": "Das größte Risiko ist die Arbeitssicherheit: {n} Unfälle im Zeitraum, der letzte am {date}." },
+      "target": "Das größte Risiko ist {noun}: {value} bei einem Ziel von {target}.",
+      "overdue": { "one": "Das größte Risiko ist der Maßnahmenplan: eine Maßnahme ist überfällig.", "many": "Das größte Risiko ist der Maßnahmenplan: {n} Maßnahmen sind überfällig." },
+      "worse": "Das größte Risiko ist die Kennzahl {metric}, die sich verschlechtert hat.",
+      "none": "Kein Risiko sticht hervor: Jede Kennzahl mit Ziel erreicht es."
+    },
+    "decision": {
+      "accident": "Die eine nötige Entscheidung: Wer prüft die Gegenmaßnahme zum Unfall, und bis wann?",
+      "target": "Die eine nötige Entscheidung: Wer bringt die Kennzahl {metric} zurück auf {target}, und bis wann?",
+      "overdue": "Die eine nötige Entscheidung: Bekommen die überfälligen Maßnahmen neue Termine oder neue Verantwortliche?",
+      "worse": "Die eine nötige Entscheidung: Wer klärt bis zum nächsten Bericht die Verschlechterung der Kennzahl {metric}?",
+      "none": "Die eine nötige Entscheidung: keine außer den Standard zu halten. Der Fokus unten hilft dabei."
+    }
+  },
+  "focus": {
+    "accident": { "title": "Gegenmaßnahme jedes Unfalls im Zeitraum prüfen", "detail": { "one": "Ein Unfall, am {date}{where}.", "many": "{n} Unfälle, der letzte am {date}{where}." }, "check": "Keine Wiederholung an derselben Stelle in den nächsten vier Wochen" },
+    "target": { "title": "Kennzahl {metric} zurück auf {target} bringen", "detail": "Jetzt {value}; im Vorzeitraum {before}.", "check": "{metric} im nächsten Bericht bei {target} oder besser" },
+    "cause": { "title": "Die größte Ursache angehen: {cause} ({metric})", "detail": "{share} der Einträge im Zeitraum.", "check": "{cause} im nächsten Bericht nicht mehr die größte Ursache" },
+    "overdue": { "title": "Überfällige Maßnahmen abschließen oder neu planen", "detail": { "one": "Eine Maßnahme ist überfällig, bei {owners}.", "many": "{n} Maßnahmen sind überfällig, bei {owners}." }, "check": "Keine überfällige Maßnahme im nächsten Bericht" },
+    "machine": { "title": "OEE an {machine} steigern", "detail": "{value} bei einem Ziel von {target}; der schwächste Faktor ist {factor}.", "check": "OEE an {machine} im nächsten Bericht bei {target} oder besser" },
+    "area": { "title": "5S im Bereich {area} verbessern", "detail": "{value} bei einem Ziel von {target}.", "check": "5S im Bereich {area} beim nächsten Audit bei {target} oder besser" },
+    "worse": { "title": "Verschlechterung klären: {metric}", "detail": "Von {before} auf {value}.", "check": "{metric} im nächsten Bericht wieder bei {before} oder besser" },
+    "none": "Jede Kennzahl hält ihr Ziel. Halten Sie den Standard und gehen Sie auf die Fläche."
+  },
+  "tips": [
+    ["Erst erfassen, dann berichten.", "Der Bericht hat keine eigenen Daten: Er liest, was die Schadenskontrolle, die Verspätungsanalyse, OEE, das 5S-Audit, die Maßnahmenliste und die anderen Tools in diesem Browser gespeichert haben."],
+    ["Den Vorzeitraum lesen.", "Jede Zahl steht gegen den Vorzeitraum und gegen ihr Ziel, in Worten und mit Pfeilen, damit der Bericht auch auf Papier gleich lesbar ist."],
+    ["Ziele einmal festlegen.", "Der Standortname und die Ziele kommen aus dem Arbeitsplatzprofil, das die Protokolle gemeinsam nutzen. Ein in einem Protokoll eingegebenes Ziel hat Vorrang vor dem Profil."],
+    ["Eine Entscheidung, drei Prioritäten.", "Die Zusammenfassung nennt das größte Risiko und die eine Entscheidung, die es braucht; der Fokus nennt die drei Themen der nächsten Woche. Mit einem Tippen gehen sie in die Maßnahmenliste."],
+    ["So versenden, wie er ist.", "Kopieren Sie den Text in eine E-Mail, drucken Sie ihn auf A4 oder laden Sie ihn als Word-Datei für die Managementrunde herunter."]
+  ],
+  "example": {
+    "seed": 11,
+    "site": "Hub Frankfurt",
+    "shifts": ["Früh", "Spät", "Nacht"],
+    "areas": [
+      { "name": "Wareneingang", "owner": "Anna" },
+      { "name": "Kommissionierung", "owner": "Besnik" },
+      { "name": "Verpackung", "owner": "Fatima" },
+      { "name": "Verladung", "owner": "Marco" }
+    ],
+    "targets": { "damage": 0.3, "incomplete": 0.5, "nightAudit": 2, "ontime": 95, "oee": 85, "fives": 80 },
+    "damage": { "volume": 3600, "rate": [0.42, 0.26], "target": "0.3", "stages": ["Verladung", "Kommissionierung", "Transport", "Wareneingang"], "causes": ["Stapelung", "Handhabung", "Ladungssicherung", "Verpackung"] },
+    "incomplete": { "volume": 2400, "rate": [0.42, 0.62], "target": "0.5", "stages": ["Kommissionierung", "Verpackung", "Versand"], "causes": ["Falsch kommissioniert", "Nicht auf Lager", "Etikett fehlt", "Scan ausgelassen"] },
+    "night": { "volume": 180, "rate": [2.8, 2.1], "target": "2", "stages": ["Anreise", "Zahlung", "Tagesabschluss"], "causes": ["Keine Garantie", "Rate nicht hinterlegt", "Buchung zu spät"] },
+    "delay": { "routes": 14, "late": [4, 10], "grace": "15", "target": "95" },
+    "safety": {
+      "near": 0.45,
+      "events": [
+        { "week": -1, "day": 2, "type": "no-lost-time", "area": 3 },
+        { "week": -6, "day": 1, "type": "first-aid", "area": 1 }
+      ]
+    },
+    "oee": {
+      "machines": [
+        { "name": "Sorter 1", "rate": 2400, "breakdown": [45, 24] },
+        { "name": "Sorter 2", "rate": 2400, "breakdown": [30, 30] },
+        { "name": "Stretchwickler", "rate": 60, "breakdown": [55, 50] }
+      ],
+      "stops": { "planned": "Pause", "breakdown": "Störung", "setup": "Umrüsten" }
+    },
+    "fiveS": { "score": [1.9, 3.0], "weak": 2 },
+    "gemba": { "yes": [0.8, 0.87], "template": "warehouse", "layers": ["team-lead", "area-manager"], "walkers": ["Anna", "Besnik", "Dritan"] },
+    "hotel": { "rooms": 120, "occ": [0.74, 0.79], "adr": [112, 115], "budgetOcc": "80", "budgetAdr": "118" },
+    "kaizen": [
+      { "title": "Schattenbrett für das Wickelwerkzeug an Tor 3", "waste": "Bewegung", "area": "Verladung", "by": "Marco", "created": [-11, 1], "adopted": [-9, 3], "saving": 120 },
+      { "title": "Farbige Behälteretiketten je Tour", "waste": "Fehler", "area": "Verpackung", "by": "Fatima", "created": [-9, 2], "adopted": [-6, 4], "saving": 350 },
+      { "title": "Schnelldreher in Hüfthöhe in Gang 12", "waste": "Bewegung", "area": "Kommissionierung", "by": "Besnik", "created": [-6, 0], "adopted": [-2, 2], "saving": 480 },
+      { "title": "Kantenschutz an jeder Mischpalette", "waste": "Fehler", "area": "Verladung", "by": "Marco", "created": [-3, 1], "adopted": [-1, 3], "saving": 260 },
+      { "title": "Ladeplan auf dem Bildschirm am Tor", "waste": "Überbearbeitung", "area": "Verladung", "by": "Jonas", "created": [-2, 4], "adopted": null, "status": "do", "saving": 90 },
+      { "title": "Zweiter Scanner an Packplatz 4", "waste": "Warten", "area": "Verpackung", "by": "Fatima", "created": [-1, 1], "adopted": null, "status": "plan", "saving": 150 },
+      { "title": "Pickliste nach Gängen sortiert", "waste": "Bewegung", "area": "Kommissionierung", "by": "Anna", "created": [-1, 3], "adopted": null, "status": "idea", "saving": 200 }
+    ],
+    "actions": [
+      { "title": "Stapelregel als ein Bild an Tor 2 aushängen", "owner": "Marco", "area": "Verladung", "created": [-5, 0], "due": [-4, 4], "status": "verified", "closed": [-4, 3] },
+      { "title": "Überladebrücke an Tor 4 reparieren", "owner": "Jonas", "area": "Wareneingang", "created": [-3, 1], "due": [-2, 4], "status": "open" },
+      { "title": "Spätschicht in Ladungssicherung schulen", "owner": "Marco", "area": "Verladung", "created": [-2, 0], "due": [-1, 1], "status": "doing" },
+      { "title": "Verschlissene Gurte an Auflieger 7 ersetzen", "owner": "Jonas", "area": "Verladung", "created": [-2, 2], "due": [-1, 4], "status": "done", "closed": [-1, 3] },
+      { "title": "Leere Behälter vor der Spätschicht zählen", "owner": "Fatima", "area": "Verpackung", "created": [-1, 0], "due": [-1, 2], "status": "verified", "closed": [-1, 2] },
+      { "title": "Gehweg am Palettenwickler markieren", "owner": "Anna", "area": "Verladung", "created": [-1, 2], "due": [0, 4], "status": "open" },
+      { "title": "Scanner-Akkus jeden Morgen prüfen", "owner": "Besnik", "area": "Kommissionierung", "created": [-1, 3], "due": [-1, 3], "status": "open" }
+    ],
+    "handover": {
+      "issues": ["Überladebrücke Tor 4 klemmt", "Zwei Paletten warten auf ein Etikett", "Akku von Scanner 3 schwach", "Auflieger aus Mainz verspätet", "Wickelfolie geht aus"],
+      "owners": ["Anna", "Marco", "Besnik"]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Inspektimi i dhomës
+seo_title: "Lista e kontrollit për inspektimin e dhomës në hotel: vlerësimi sipas zonës, ripastrimet dhe trendi për çdo pastrues"
+description: "Kontrollo dhomën para lirimit: në rregull, defekt ose s'aplikohet sipas zonës, pikat kritike, ripastrim ose mirëmbajtje, trendi sipas pastruesit."
+activeNav: /sq/tools.html
+permalink: /sq/tools/room-inspection/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Hotel</p>
+  <h1>Inspektimi i dhomës</h1>
+  <p class="lede">Kontrollo dhomën e pastruar para se recepsioni ta shesë: çdo pikë e listës në rregull, me defekt ose s'aplikohet, zonë pas zone, me shënim dhe foto aty ku ka defekt. Dhoma merr një vlerësim dhe një rezultat, çdo defekt i kthehet pastruesit ose mirëmbajtjes, dhe regjistri tregon shkallën e kalimit herën e parë sipas pastruesit, katit dhe llojit të dhomës, si dhe pikat që dështojnë më shpesh.</p>
+</section>
+
+{% set cfg = sq.roomInspection %}
+{% include "partials/room-inspection.njk" %}

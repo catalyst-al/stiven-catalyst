@@ -25,7 +25,57 @@
     });
     return [...weeks.values()].sort((a, b) => a.date.localeCompare(b.date)).map(({ notes, ...week }) => ({ ...week, note: notes.join("; ") }));
   };
-  window.SigmaMath = { takeOver, byWeek };
+  // The limits of one point: three standard errors around the centre line, for the n of that point.
+  const limitsFor = (n, centre) => {
+    const spread = 3 * Math.sqrt((centre * (1 - centre)) / n);
+    return { ucl: centre + spread, lcl: Math.max(0, centre - spread) };
+  };
+  // Phases: the chart split at changes on the timeline. rows are in date order; each cut is the first date of a new
+  // phase (a cut on or before the first row, or after the last, splits nothing). Each phase has its own centre line, its
+  // defects over its handled, so the level before a change does not blur the level after it.
+  const phases = (rows, cuts = []) => {
+    const starts = [...new Set(cuts.map((cut) => rows.findIndex((row) => row.date >= cut)).filter((index) => index > 0))].sort((a, b) => a - b);
+    return [0, ...starts].map((start, k, all) => {
+      const end = all[k + 1] ?? rows.length;
+      const part = rows.slice(start, end);
+      const n = part.reduce((sum, row) => sum + row.n, 0);
+      const d = part.reduce((sum, row) => sum + row.d, 0);
+      return { start, end, from: part[0]?.date ?? "", to: part.at(-1)?.date ?? "", n, d, pBar: n ? d / n : 0 };
+    });
+  };
+  // The three signal rules on points that share one centre line: a point beyond a limit; eight or more in a row on one
+  // side of the centre line; six in a row each higher (or lower) than the one before (the turning point of one trend is
+  // the first point of the next). points: [{ p, ucl, lcl }]. Gives [{ rule, worse, from, to }], from and to being the
+  // indices of the first and last point of the signal.
+  const signalRules = (points, centre) => {
+    const found = [];
+    points.forEach((point, i) => {
+      if (point.p > point.ucl) found.push({ rule: "beyond", worse: true, from: i, to: i });
+      else if (point.lcl > 0 && point.p < point.lcl) found.push({ rule: "beyond", worse: false, from: i, to: i });
+    });
+    const side = (point) => Math.sign(point.p - centre);
+    let from = 0;
+    for (let i = 1; i <= points.length; i++) {
+      if (i < points.length && side(points[i - 1]) !== 0 && side(points[i - 1]) === side(points[i])) continue;
+      if (i - from >= 8 && side(points[from]) !== 0) found.push({ rule: "run", worse: side(points[from]) > 0, from, to: i - 1 });
+      from = i;
+    }
+    const step = (a, b) => Math.sign(b.p - a.p);
+    let start = 0;
+    for (let i = 1; i <= points.length; i++) {
+      const s = i < points.length ? step(points[i - 1], points[i]) : 0;
+      const before = i - 1 > start ? step(points[i - 2], points[i - 1]) : null;
+      if (s !== 0 && (before === null || before === s)) continue;
+      if (i - start >= 6) found.push({ rule: "trend", worse: step(points[start], points[start + 1]) > 0, from: start, to: i - 1 });
+      start = s !== 0 ? i - 1 : i;
+    }
+    return found;
+  };
+  // How the level moved at each split: the centre line before and after, and the change as a share of before.
+  const levelChanges = (parts) => parts.slice(1).map((part, k) => ({
+    at: part.from, before: parts[k].pBar, after: part.pBar, change: parts[k].pBar > 0 ? (part.pBar - parts[k].pBar) / parts[k].pBar : null,
+  }));
+  window.SigmaMath = { takeOver, byWeek, limitsFor, phases, signalRules, levelChanges };
 
   const dataEl = document.getElementById("sigma-chart-data");
   if (!dataEl || !window.ToolKit) return;
@@ -159,8 +209,9 @@
   const results = document.querySelector("[data-results]");
   const KEY = data.storageKey;
 
-  const state = loadState(KEY, { metric: "", unit: "", baseline: "", grain: "day", rows: [], example: {} });
+  const state = loadState(KEY, { metric: "", unit: "", baseline: "", grain: "day", rows: [], example: {}, splits: [] });
   if (state.grain !== "week") state.grain = "day";
+  state.splits = state.splits.filter((id) => typeof id === "string");
   state.rows = state.rows.filter(isObject)
     .map((row) => ({ date: parseDate(row.date), n: Math.round(Number(row.n)), d: Math.round(Number(row.d)), note: str(row.note) }))
     .filter((row) => row.date && row.n > 0 && row.d >= 0 && row.d <= row.n);
@@ -195,74 +246,71 @@
     return { added, skipped };
   };
 
-  // Limits, and the three signal rules.
+  // Changes on the timeline (js/annotations.js) inside the chart: the first point on or after each is where a phase
+  // can start. By week, the week of the change is the first week of the new phase.
+  const Annotations = window.Annotations || null;
+  const SLUG = Annotations ? Annotations.slugHere() : "";
+  const changesIn = (rows) => {
+    if (!Annotations || rows.length < 2) return [];
+    const last = weekly() ? window.ToolKit.addDays(rows.at(-1).date, 6) : rows.at(-1).date;
+    return Annotations.list(rows[0].date, last, SLUG).map((item) => {
+      const cut = weekly() ? window.ToolKit.mondayOf(item.date) : item.date;
+      const index = rows.findIndex((row) => row.date >= cut);
+      // Each side needs two points of its own for a centre line worth the name.
+      return { ...item, cut, index, splittable: index >= 2 && rows.length - index >= 2 };
+    });
+  };
+  const splitCuts = (rows) => changesIn(rows).filter((item) => item.splittable && state.splits.includes(item.id)).map((item) => item.cut);
+
+  // Limits, and the three signal rules: over the whole chart (or from its first days), or within each phase when the
+  // limits are split at a change.
   const analyse = () => {
     const rows = chartRows();
+    const parts = phases(rows, splitCuts(rows));
+    const split = parts.length > 1;
     const baseCount = Math.round(parseNumber(state.baseline));
-    const useBase = baseCount >= 2 && baseCount < rows.length;
+    const useBase = !split && baseCount >= 2 && baseCount < rows.length;
     const base = useBase ? rows.slice(0, baseCount) : rows;
-    const pBar = base.reduce((sum, row) => sum + row.d, 0) / base.reduce((sum, row) => sum + row.n, 0);
+    const pBar = split ? parts.at(-1).pBar : base.reduce((sum, row) => sum + row.d, 0) / base.reduce((sum, row) => sum + row.n, 0);
 
     const points = rows.map((row, index) => {
-      const p = row.d / row.n;
-      const spread = 3 * Math.sqrt((pBar * (1 - pBar)) / row.n);
-      return { ...row, index, p, ucl: pBar + spread, lcl: Math.max(0, pBar - spread), signals: [] };
+      const phase = split ? parts.findIndex((part) => index >= part.start && index < part.end) : 0;
+      const centre = split ? parts[phase].pBar : pBar;
+      return { ...row, index, p: row.d / row.n, phase, centre, ...limitsFor(row.n, centre), signals: [] };
     });
 
-    const events = [];
-    points.forEach((point) => {
-      if (point.p > point.ucl) {
-        point.signals.push({ rule: "beyond", worse: true });
-        events.push({ rule: "beyond", worse: true, from: point, to: point, text: tx("{rate} is above the upper limit of {limit}.", { rate: rate(point.p), limit: rate(point.ucl) }) });
-      } else if (point.lcl > 0 && point.p < point.lcl) {
-        point.signals.push({ rule: "beyond", worse: false });
-        events.push({ rule: "beyond", worse: false, from: point, to: point, text: tx("{rate} is below the lower limit of {limit}.", { rate: rate(point.p), limit: rate(point.lcl) }) });
-      }
-    });
-
-    // Eight or more points in a row on one side of the centre line.
-    const side = (point) => Math.sign(point.p - pBar);
-    const shifts = [];
-    let from = 0;
-    for (let i = 1; i <= points.length; i++) {
-      if (i < points.length && side(points[i - 1]) !== 0 && side(points[i - 1]) === side(points[i])) continue;
-      if (i - from >= 8 && side(points[from]) !== 0) shifts.push(points.slice(from, i));
-      from = i;
-    }
-    shifts.forEach((run) => {
-      const worse = side(run[0]) > 0;
-      run.forEach((point) => point.signals.push({ rule: "run", worse }));
-      events.push({ rule: "run", worse, from: run[0], to: run.at(-1), text: weekly()
-        ? tx(worse ? "{n} weeks in a row above the centre line." : "{n} weeks in a row below the centre line.", { n: run.length })
-        : tx(worse ? "{n} days in a row above the centre line." : "{n} days in a row below the centre line.", { n: run.length }) });
-    });
-    // Six points each higher (or lower) than the one before. The turning
-    // point of one trend is the first point of the next.
-    const step = (a, b) => Math.sign(b.p - a.p);
-    const trends = [];
-    let start = 0;
-    for (let i = 1; i <= points.length; i++) {
-      const s = i < points.length ? step(points[i - 1], points[i]) : 0;
-      const before = i - 1 > start ? step(points[i - 2], points[i - 1]) : null;
-      if (s !== 0 && (before === null || before === s)) continue;
-      if (i - start >= 6) trends.push(points.slice(start, i));
-      start = s !== 0 ? i - 1 : i;
-    }
-    // Six points make five rises: "5 days in a row each higher than the one before".
-    trends.forEach((run) => {
-      const worse = step(run[0], run[1]) > 0;
-      run.forEach((point) => point.signals.push({ rule: "trend", worse }));
-      events.push({ rule: "trend", worse, from: run[0], to: run.at(-1), text: weekly()
-        ? tx(worse ? "{n} weeks in a row each higher than the one before." : "{n} weeks in a row each lower than the one before.", { n: run.length - 1 })
-        : tx(worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: run.length - 1 }) });
+    const found = split
+      ? parts.flatMap((part) => signalRules(points.slice(part.start, part.end), part.pBar).map((item) => ({ ...item, from: item.from + part.start, to: item.to + part.start })))
+      : signalRules(points, pBar);
+    const events = found.map((item) => {
+      const from = points[item.from];
+      const to = points[item.to];
+      const length = item.to - item.from + 1;
+      points.slice(item.from, item.to + 1).forEach((point) => point.signals.push({ rule: item.rule, worse: item.worse }));
+      const text = item.rule === "beyond"
+        ? (item.worse ? tx("{rate} is above the upper limit of {limit}.", { rate: rate(from.p), limit: rate(from.ucl) }) : tx("{rate} is below the lower limit of {limit}.", { rate: rate(from.p), limit: rate(from.lcl) }))
+        : item.rule === "run"
+          ? (weekly()
+            ? tx(item.worse ? "{n} weeks in a row above the centre line." : "{n} weeks in a row below the centre line.", { n: length })
+            : tx(item.worse ? "{n} days in a row above the centre line." : "{n} days in a row below the centre line.", { n: length }))
+          // Six points make five rises: "5 days in a row each higher than the one before".
+          : (weekly()
+            ? tx(item.worse ? "{n} weeks in a row each higher than the one before." : "{n} weeks in a row each lower than the one before.", { n: length - 1 })
+            : tx(item.worse ? "{n} days in a row each higher than the one before." : "{n} days in a row each lower than the one before.", { n: length - 1 }));
+      return { rule: item.rule, worse: item.worse, from, to, text };
     });
     events.sort((a, b) => a.from.index - b.from.index);
 
     const total = rows.reduce((sum, row) => sum + row.d, 0) / rows.reduce((sum, row) => sum + row.n, 0);
     const after = useBase ? rows.slice(baseCount) : [];
     const afterRate = after.length ? after.reduce((sum, row) => sum + row.d, 0) / after.reduce((sum, row) => sum + row.n, 0) : null;
-    return { points, events, pBar, total, useBase, baseCount, afterRate };
+    return { points, events, pBar, total, useBase, baseCount, afterRate, phases: split ? parts : null, changes: split ? levelChanges(parts) : [] };
   };
+  // "From 12 Oct the level moved from 0.57% to 0.42% (−26%)."
+  const levelText = (change) => tx("From {date} the level moved from {before} to {after} ({change}).", {
+    date: shortDate(change.at), before: rate(change.before), after: rate(change.after),
+    change: change.change === null ? "–" : window.ToolKit.changeText ? window.ToolKit.changeText(change.change) : pct(change.change, 0),
+  });
 
   const ruleName = (rule) => data.rules.find((item) => item.id === rule).name;
   const signalText = (point) => point.signals.map((s) => `${ruleName(s.rule)} (${direction(s.worse)})`).join(", ");
@@ -318,14 +366,29 @@
     const stepPath = (key) => points.map((p, i) => `${i ? "L" : "M"}${m.left + band * i},${y(p[key])}H${m.left + band * (i + 1)}`).join("");
     root.append(svg("path", { d: stepPath("ucl"), class: "sc-limit" }));
     if (points.some((p) => p.lcl > 0)) root.append(svg("path", { d: stepPath("lcl"), class: "sc-limit" }));
-    root.append(svg("line", { x1: m.left, x2: m.left + w, y1: y(pBar), y2: y(pBar), class: "sc-center" }));
+    // Split at a change, each phase has its own centre line: a step where the phase begins.
+    if (result.phases) {
+      root.append(svg("path", { d: stepPath("centre"), class: "sc-center" }));
+      result.phases.slice(1).forEach((part) => {
+        const at = m.left + band * part.start;
+        root.append(svg("line", { x1: at, x2: at, y1: m.top, y2: m.top + h, class: "sc-divider" }));
+      });
+    } else {
+      root.append(svg("line", { x1: m.left, x2: m.left + w, y1: y(pBar), y2: y(pBar), class: "sc-center" }));
+    }
+    // Changes on the timeline: a dashed line with a flag where the change begins (its text is in the day's tooltip).
+    (result.marks || []).forEach((mark) => {
+      const at = m.left + band * mark.index;
+      root.append(svg("line", { x1: at, x2: at, y1: m.top - 4, y2: m.top + h, class: "sc-event" }));
+      root.append(svg("path", { d: `M${at.toFixed(1)},${m.top - 10}h9l-3,4l3,4h-9z`, class: "sc-flag" }));
+    });
     const endLabel = (text, value) => {
       const label = svg("text", { x: m.left + w + 6, y: y(value) + 4, class: "sc-axis sc-end" });
       label.textContent = text;
       root.append(label);
     };
     endLabel(tx("UCL"), points.at(-1).ucl);
-    endLabel(tx("Avg"), pBar);
+    endLabel(tx("Avg"), points.at(-1).centre ?? pBar);
 
     root.append(svg("path", { d: points.map((p, i) => `${i ? "L" : "M"}${x(i)},${y(p.p)}`).join(""), class: "sc-line" }));
     points.forEach((point, i) => {
@@ -347,7 +410,7 @@
     root.append(cross);
     const hit = svg("rect", { x: m.left, y: m.top, width: w, height: h, class: "sc-hit" });
     root.append(hit);
-    return { node: root, x, y, band, left: m.left, cross, hit };
+    return { node: root, x, y, band, left: m.left, cross, hit, marks: result.marks || [] };
   };
 
   const tooltip = el("div", "sc-tooltip");
@@ -371,6 +434,7 @@
       );
       if (point.signals.length) tooltip.append(el("span", "sc-tip-signal", signalText(point)));
       if (point.note) tooltip.append(el("span", "sc-tip-note", point.note));
+      (drawn.marks || []).filter((mark) => mark.index === i).forEach((mark) => tooltip.append(el("span", "sc-tip-note", `${tx("Change")}: ${showDate(mark.date)} · ${mark.text}`)));
       tooltip.hidden = false;
       const wrapBox = wrap.getBoundingClientRect();
       const left = drawn.x(i) * scale + (box.left - wrapBox.left);
@@ -418,7 +482,14 @@
   const summaryText = (result) => {
     const v = verdict(result);
     const lines = [`${tx("Control chart")} | Stiven Catalyst`, "", `${tx("{metric} out of {unit}", { metric: metric(), unit: lower(unit()) })}, ${periods(result.points.length)} (${shortDate(result.points[0].date)} – ${shortDate(result.points.at(-1).date)})`];
-    lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${weekly() ? tx("over the first {n} weeks", { n: result.baseCount }) : tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${sigmaText(result.pBar)}`);
+    if (result.phases) {
+      lines.push(`${tx("Limits split at the changes on the timeline")}:`);
+      result.phases.forEach((part) => lines.push(`- ${shortDate(part.from)} – ${shortDate(part.to)}: ${tx("Average")} ${rate(part.pBar)}`));
+      result.changes.forEach((change) => lines.push(levelText(change)));
+      lines.push(`${tx("sigma level")} ${sigmaText(result.pBar)}`);
+    } else {
+      lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${weekly() ? tx("over the first {n} weeks", { n: result.baseCount }) : tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${sigmaText(result.pBar)}`);
+    }
     if (result.afterRate !== null) lines.push(`${tx("Since then")}: ${rate(result.afterRate)}`);
     lines.push("", `${v.title}. ${v.text}`);
     if (result.events.length) {
@@ -454,7 +525,16 @@
     results.append(head);
 
     const stats = el("div", "dl-stats");
-    stats.append(stat(tx("Average rate"), rate(result.pBar), result.useBase ? (weekly() ? tx("first {n} weeks", { n: result.baseCount }) : tx("first {n} days", { n: result.baseCount })) : periods(result.points.length)));
+    if (result.phases) {
+      // The level since the last change, against the phase before it.
+      const now = result.phases.at(-1);
+      const change = result.changes.at(-1);
+      stats.append(stat(tx("Since the change"), rate(now.pBar), `${periods(now.end - now.start)} · ${tx("from {date}", { date: shortDate(now.from) })}`));
+      const prior = result.phases.at(-2);
+      stats.append(stat(tx("Before the change"), rate(prior.pBar), change.change === null ? periods(prior.end - prior.start) : `${window.ToolKit.changeText ? window.ToolKit.changeText(change.change) : pct(change.change, 0)} ${tx("since the change")}`));
+    } else {
+      stats.append(stat(tx("Average rate"), rate(result.pBar), result.useBase ? (weekly() ? tx("first {n} weeks", { n: result.baseCount }) : tx("first {n} days", { n: result.baseCount })) : periods(result.points.length)));
+    }
     if (result.afterRate !== null) {
       const change = (result.afterRate - result.pBar) / result.pBar;
       const against = { change: `${change > 0 ? "+" : ""}${pct(change, 0)}`, n: result.baseCount };
@@ -475,13 +555,47 @@
     chartPanel.append(wrap);
     results.append(chartPanel);
     lastWidth = wrap.clientWidth;
+    const changes = changesIn(chartRows());
+    result.marks = changes.filter((item) => item.index >= 0).map((item) => ({ index: item.index, date: item.date, text: item.text }));
     const drawn = chart(result, Math.max(240, lastWidth));
     wrap.append(drawn.node);
     attachHover(wrap, drawn, result.points);
+    // Each change inside the chart can split the limits: before and after get their own centre line and limits.
+    if (changes.length) {
+      const box = el("div", "sc-changes");
+      box.append(el("p", "result-label", tx("Changes on the timeline")));
+      const list = el("ul", "sc-change-list");
+      changes.forEach((item) => {
+        const line = el("li");
+        line.append(el("strong", "nowrap", showDate(item.date)), " ", el("span", null, item.text), " ");
+        if (item.splittable) {
+          const on = state.splits.includes(item.id);
+          const button = el("button", "button-secondary", on ? tx("Use one set of limits again") : tx("Split the limits at this change"));
+          button.type = "button";
+          button.dataset.focusKey = `split:${item.id}`;
+          button.addEventListener("click", () => {
+            state.splits = on ? state.splits.filter((id) => id !== item.id) : [...state.splits, item.id];
+            save();
+            window.ToolKit.keepFocus ? window.ToolKit.keepFocus(renderResults) : renderResults();
+          });
+          line.append(button);
+        } else {
+          line.append(el("span", "form-note", weekly() ? tx("Too close to the edge of the chart to split: each side needs two weeks.") : tx("Too close to the edge of the chart to split: each side needs two days.")));
+        }
+        list.append(line);
+      });
+      box.append(list);
+      chartPanel.append(box);
+    }
 
     const card = el("article", "result-card dl-focus");
     card.append(el("p", "result-label", tx("What it says")));
     card.append(el("p", "sc-verdict", v.text));
+    if (result.phases) {
+      result.changes.forEach((change) => card.append(el("p", "sc-verdict", levelText(change))));
+      card.append(el("p", "form-note", tx("The limits are split at the change: each phase has its own average and limits, and the signal rules run within each phase.")));
+      if (Math.round(parseNumber(state.baseline)) >= 2) card.append(el("p", "form-note", tx("“Limits from the first” is not used while the limits are split.")));
+    }
     // A p-chart needs enough per point: with fewer than about five expected per day (week) the limits are so wide
     // that even a day where everything went wrong can sit inside them.
     const sizes = result.points.map((point) => point.n).sort((a, b) => a - b);
@@ -679,7 +793,7 @@
       ...exported.map((row, i) => {
         const point = result?.points[i];
         const fixed = (value) => (value == null ? "" : asNumbers ? Number((value * 100).toFixed(3)) : (value * 100).toFixed(3).replace(".", DECIMAL_COMMA ? "," : "."));
-        return [row.date, row.n, row.d, fixed(row.d / row.n), fixed(result?.pBar), fixed(point?.lcl), fixed(point?.ucl), point ? signalText(point) : "", row.note];
+        return [row.date, row.n, row.d, fixed(row.d / row.n), fixed(point?.centre ?? result?.pBar), fixed(point?.lcl), fixed(point?.ucl), point ? signalText(point) : "", row.note];
       }),
     ];
   };
@@ -753,6 +867,12 @@
       if (wrap && Math.abs(wrap.clientWidth - lastWidth) > 8) renderResults();
     }, 150);
   });
+
+  // Events on the timeline: the form adds them, and the chart redraws when one is added or removed (here or in another tab).
+  if (Annotations) {
+    Annotations.mount(document.querySelector("[data-annotations]"), SLUG);
+    window.addEventListener("annotations:changed", () => renderResults());
+  }
 
   // A first visit opens on the example month, so the chart is visible at once; the note says so. Nothing is written
   // to the browser until the visitor acts, as in the log tools.

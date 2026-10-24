@@ -1,0 +1,253 @@
+{
+  "storageKey": "sc-ops-report",
+  "text": {
+    "tool": "Operations Report",
+    "file": "operations-report",
+    "exampleNote": "This is an example site, held only on this page, so you can see a finished report. The real report reads Damage Control, Delay Analyzer, OEE, the Action Tracker and the other tools in this browser, and writes itself from what they hold.",
+    "exampleActions": "The focus of the example is not added to your Action Tracker. Log your own work in the tools and the report writes yours.",
+    "nothing": "None of the tools holds data for this period. Choose another period, or log the week in the tools first."
+  },
+  "periods": [
+    { "key": "thisWeek", "label": "This week" },
+    { "key": "lastWeek", "label": "Last week" },
+    { "key": "thisMonth", "label": "This month" },
+    { "key": "lastMonth", "label": "Last month" },
+    { "key": "custom", "label": "Custom" }
+  ],
+  "sources": {
+    "damage-control": "Damage Control",
+    "incomplete-control": "Incomplete Control",
+    "night-audit": "Night Audit Log",
+    "delay-analyzer": "Delay Analyzer",
+    "shift-handover": "Shift Handover",
+    "safety-cross": "Safety Cross",
+    "oee": "OEE",
+    "five-s-audit": "5S Audit",
+    "gemba-walk": "Gemba Walk",
+    "hotel-kpis": "Hotel KPIs",
+    "kaizen-board": "Kaizen Board",
+    "action-tracker": "Action Tracker"
+  },
+  "targets": [
+    { "key": "damage", "label": "Damage rate", "unit": "%", "placeholder": "e.g. 0.3" },
+    { "key": "incomplete", "label": "Incomplete rate", "unit": "%", "placeholder": "e.g. 0.5" },
+    { "key": "nightAudit", "label": "Night audit exception rate", "unit": "%", "placeholder": "e.g. 2" },
+    { "key": "ontime", "label": "On-time routes", "unit": "%", "placeholder": "e.g. 95" },
+    { "key": "oee", "label": "OEE", "unit": "%", "placeholder": "e.g. 85" },
+    { "key": "fives", "label": "5S score", "unit": "%", "placeholder": "e.g. 80" }
+  ],
+  "report": {
+    "title": "Operations Report",
+    "weekly": "Weekly report",
+    "monthly": "Monthly report",
+    "periodReport": "Report",
+    "period": "Period",
+    "before": "Compared with",
+    "site": "Site",
+    "written": "Written on {date} from the data in this browser.",
+    "table": ["Measure", "This period", "Period before", "Change", "Target"]
+  },
+  "sections": {
+    "summary": "Summary",
+    "safety": "Safety",
+    "quality": "Quality",
+    "delivery": "Delivery",
+    "equipment": "Equipment",
+    "workplace": "Workplace",
+    "hotel": "Hotel",
+    "improvement": "Improvement",
+    "actions": "Actions",
+    "focusWeek": "Next week's focus",
+    "focusMonth": "Next month's focus"
+  },
+  "words": {
+    "better": "better",
+    "worse": "worse",
+    "same": "unchanged",
+    "up": "up",
+    "down": "down",
+    "noBefore": "no period before",
+    "met": "on target",
+    "missed": "off target",
+    "before": "before",
+    "target": "Target",
+    "owner": "Owner",
+    "check": "Check",
+    "noOwner": "no owner yet",
+    "and": "and"
+  },
+  "metrics": {
+    "accidents": { "label": "Accidents", "noun": "the accidents" },
+    "firstAid": { "label": "First aid", "noun": "the first aid cases" },
+    "nearMisses": { "label": "Near misses and unsafe acts", "noun": "the near misses reported" },
+    "daysSince": { "label": "Days without an accident", "noun": "the days without an accident" },
+    "damage": { "label": "Damaged units", "noun": "the damaged units" },
+    "damageRate": { "label": "Damage rate", "noun": "the damage rate" },
+    "incomplete": { "label": "Incomplete orders", "noun": "the incomplete orders" },
+    "incompleteRate": { "label": "Incomplete rate", "noun": "the incomplete rate" },
+    "night": { "label": "Night audit exceptions", "noun": "the night audit exceptions" },
+    "nightRate": { "label": "Night audit exception rate", "noun": "the night audit exception rate" },
+    "onTime": { "label": "On-time routes", "noun": "the on-time rate" },
+    "late": { "label": "Late routes", "noun": "the late routes" },
+    "routes": { "label": "Routes", "noun": "the routes" },
+    "oee": { "label": "OEE", "noun": "OEE" },
+    "availability": { "label": "Availability", "noun": "availability" },
+    "performance": { "label": "Performance", "noun": "performance" },
+    "quality": { "label": "Quality rate", "noun": "the quality rate" },
+    "fiveS": { "label": "5S score", "noun": "the 5S score" },
+    "gemba": { "label": "Gemba compliance", "noun": "Gemba walk compliance" },
+    "walks": { "label": "Walks", "noun": "the walks" },
+    "occ": { "label": "Occupancy", "noun": "occupancy" },
+    "adr": { "label": "ADR", "noun": "the ADR" },
+    "revpar": { "label": "RevPAR", "noun": "RevPAR" },
+    "ideas": { "label": "New ideas", "noun": "the new ideas" },
+    "adopted": { "label": "Ideas adopted", "noun": "the ideas adopted" },
+    "saving": { "label": "Savings a month", "noun": "the savings" },
+    "opened": { "label": "Actions opened", "noun": "the actions opened" },
+    "closed": { "label": "Actions closed", "noun": "the actions closed" },
+    "verified": { "label": "Actions verified", "noun": "the actions verified" },
+    "overdue": { "label": "Actions overdue", "noun": "the overdue actions" }
+  },
+  "factors": { "availability": "availability", "performance": "performance", "quality": "quality" },
+  "sentences": {
+    "trend": "{value} against {before} the period before, {trend}",
+    "noTrend": "{value}, with no period before to compare",
+    "targetMet": "That meets the target of {target}.",
+    "targetMissed": "That misses the target of {target}.",
+    "safety": {
+      "accident": { "one": "One accident in the period, on {date}{where}.", "many": "{n} accidents in the period, the last on {date}{where}." },
+      "none": "No accident in the period. Days without an accident at its end: {days}.",
+      "where": " at {area}",
+      "near": "Near misses and unsafe acts reported: {near} ({nearBefore} the period before). Every one reported is an accident that did not happen."
+    },
+    "quality": {
+      "lead": "{metric}: {trend}.",
+      "cause": "The largest cause is {cause}, with {share} of the entries."
+    },
+    "delivery": {
+      "lead": "On time: {trend}.",
+      "late": { "one": "One route arrived late, {minutes} minutes after plan.", "many": "{late} routes arrived late, on average {minutes} minutes after plan." },
+      "none": "No route arrived late.",
+      "partial": "Late routes: {trend}. Only some routes are logged, so there is no on-time share."
+    },
+    "equipment": {
+      "lead": "OEE: {trend}.",
+      "machine": "The lowest is {machine} at {low}; its weakest factor is {factor}."
+    },
+    "workplace": {
+      "fiveS": "5S score over the audits of the period: {trend}.",
+      "weakest": "The weakest area is {area} at {low}.",
+      "gemba": "Gemba walk compliance: {trend}."
+    },
+    "hotel": {
+      "lead": "RevPAR: {trend}.",
+      "mix": "Occupancy {occ} at an ADR of {adr}."
+    },
+    "improvement": {
+      "lead": { "one": "One idea adopted ({before} the period before), worth {saving} a month.", "many": "{adopted} ideas adopted ({before} the period before), worth {saving} a month." },
+      "none": "No idea was adopted in the period.",
+      "ideas": { "one": "One new idea came in.", "many": "{ideas} new ideas came in." }
+    },
+    "actions": {
+      "lead": "Opened {opened}, closed {closed}, verified {verified}.",
+      "overdue": { "one": "One action was overdue at the end of the period, with {owners}.", "many": "{overdue} actions were overdue at the end of the period, with {owners}." },
+      "overdueNone": "No action was overdue at the end of the period.",
+      "handover": { "one": "One shift handover was closed; issues carried over to the next shift: {carried}.", "many": "{n} shift handovers were closed; issues carried over to the next shift: {carried}." }
+    }
+  },
+  "summary": {
+    "intro": { "one": "This report covers {range}{site} and compares it with {beforeRange}. It reads one tool in this browser.", "many": "This report covers {range}{site} and compares it with {beforeRange}. It reads {n} tools in this browser." },
+    "site": " at {site}",
+    "better": "What got better: {noun}, from {before} to {value}.",
+    "betterNone": "Nothing got clearly better against the period before.",
+    "worse": "What got worse: {noun}, from {before} to {value}.",
+    "worseNone": "Nothing got clearly worse against the period before.",
+    "risk": {
+      "accident": { "one": "The biggest risk is safety: one accident in the period, on {date}.", "many": "The biggest risk is safety: {n} accidents in the period, the last on {date}." },
+      "target": "The biggest risk is {noun}: {value} against a target of {target}.",
+      "overdue": { "one": "The biggest risk is the action plan: one action is overdue.", "many": "The biggest risk is the action plan: {n} actions are overdue." },
+      "worse": "The biggest risk is {noun}, which got worse.",
+      "none": "No risk stands out: every number with a target meets it."
+    },
+    "decision": {
+      "accident": "The one decision needed: who checks the countermeasure of the accident, and by when.",
+      "target": "The one decision needed: who owns bringing {noun} back to {target}, and by when.",
+      "overdue": "The one decision needed: whether the overdue actions get new dates or new owners.",
+      "worse": "The one decision needed: who finds out why {noun} got worse before the next report.",
+      "none": "The one decision needed: none beyond holding the standard. Use the focus below to keep it."
+    }
+  },
+  "focus": {
+    "accident": { "title": "Check the countermeasure of every accident of the period", "detail": { "one": "One accident, on {date}{where}.", "many": "{n} accidents, the last on {date}{where}." }, "check": "No repeat at the same place in the next four weeks" },
+    "target": { "title": "Bring {noun} back to {target}", "detail": "Now {value}; the period before {before}.", "check": "{metric} at {target} or better in the next report" },
+    "cause": { "title": "Attack the largest cause of {noun}: {cause}", "detail": "{share} of the entries in the period.", "check": "{cause} no longer the largest cause in the next report" },
+    "overdue": { "title": "Close or re-plan the overdue actions", "detail": { "one": "One action is overdue, with {owners}.", "many": "{n} actions are overdue, with {owners}." }, "check": "No overdue action in the next report" },
+    "machine": { "title": "Raise OEE on {machine}", "detail": "{value} against a target of {target}; the weakest factor is {factor}.", "check": "OEE on {machine} at {target} or better in the next report" },
+    "area": { "title": "Lift 5S in {area}", "detail": "{value} against a target of {target}.", "check": "5S in {area} at {target} or better at the next audit" },
+    "worse": { "title": "Find out why {noun} got worse", "detail": "From {before} to {value}.", "check": "{metric} back to {before} or better in the next report" },
+    "none": "Every number holds its target. Keep the standard and walk the floor."
+  },
+  "tips": [
+    ["Log first, report second.", "The report has no data of its own: it reads what Damage Control, Delay Analyzer, OEE, the 5S Audit, the Action Tracker and the other tools hold in this browser."],
+    ["Read the period before.", "Every number is set against the period before and against its target, in words as well as arrows, so the report reads the same on paper."],
+    ["Set the targets once.", "The site name and the targets come from the workplace profile, which the logs share. A target typed into a log wins over the profile."],
+    ["One decision, three priorities.", "The summary names the biggest risk and the one decision it needs; the focus lists the three things for next week. Send them to the Action Tracker with one tap."],
+    ["Send it as it is.", "Copy the text into an email, print it on A4, or download it as a Word file for the management meeting."]
+  ],
+  "example": {
+    "seed": 11,
+    "site": "Frankfurt hub",
+    "shifts": ["Early", "Late", "Night"],
+    "areas": [
+      { "name": "Inbound dock", "owner": "Anna" },
+      { "name": "Picking", "owner": "Besnik" },
+      { "name": "Packing", "owner": "Fatima" },
+      { "name": "Loading", "owner": "Marco" }
+    ],
+    "targets": { "damage": 0.3, "incomplete": 0.5, "nightAudit": 2, "ontime": 95, "oee": 85, "fives": 80 },
+    "damage": { "volume": 3600, "rate": [0.42, 0.26], "target": "0.3", "stages": ["Loading", "Picking", "Transport", "Receiving"], "causes": ["Stacking", "Handling", "Load securing", "Packaging"] },
+    "incomplete": { "volume": 2400, "rate": [0.42, 0.62], "target": "0.5", "stages": ["Picking", "Packing", "Dispatch"], "causes": ["Wrong pick", "Out of stock", "Label missing", "Scan skipped"] },
+    "night": { "volume": 180, "rate": [2.8, 2.1], "target": "2", "stages": ["Arrival", "Payment", "Audit close"], "causes": ["No guarantee", "Rate not loaded", "Posting late"] },
+    "delay": { "routes": 14, "late": [4, 10], "grace": "15", "target": "95" },
+    "safety": {
+      "near": 0.45,
+      "events": [
+        { "week": -1, "day": 2, "type": "no-lost-time", "area": 3 },
+        { "week": -6, "day": 1, "type": "first-aid", "area": 1 }
+      ]
+    },
+    "oee": {
+      "machines": [
+        { "name": "Sorter 1", "rate": 2400, "breakdown": [45, 24] },
+        { "name": "Sorter 2", "rate": 2400, "breakdown": [30, 30] },
+        { "name": "Stretch wrapper", "rate": 60, "breakdown": [55, 50] }
+      ],
+      "stops": { "planned": "Break", "breakdown": "Breakdown", "setup": "Changeover" }
+    },
+    "fiveS": { "score": [1.9, 3.0], "weak": 2 },
+    "gemba": { "yes": [0.8, 0.87], "template": "warehouse", "layers": ["team-lead", "area-manager"], "walkers": ["Anna", "Besnik", "Dritan"] },
+    "hotel": { "rooms": 120, "occ": [0.74, 0.79], "adr": [112, 115], "budgetOcc": "80", "budgetAdr": "118" },
+    "kaizen": [
+      { "title": "Shadow board for the wrap tools at dock 3", "waste": "Motion", "area": "Loading", "by": "Marco", "created": [-11, 1], "adopted": [-9, 3], "saving": 120 },
+      { "title": "Colour-coded tote labels per route", "waste": "Defects", "area": "Packing", "by": "Fatima", "created": [-9, 2], "adopted": [-6, 4], "saving": 350 },
+      { "title": "Fast movers at waist height in aisle 12", "waste": "Motion", "area": "Picking", "by": "Besnik", "created": [-6, 0], "adopted": [-2, 2], "saving": 480 },
+      { "title": "Corner boards on every mixed pallet", "waste": "Defects", "area": "Loading", "by": "Marco", "created": [-3, 1], "adopted": [-1, 3], "saving": 260 },
+      { "title": "Loading plan on the dock screen", "waste": "Extra processing", "area": "Loading", "by": "Jonas", "created": [-2, 4], "adopted": null, "status": "do", "saving": 90 },
+      { "title": "Second scanner at packing station 4", "waste": "Waiting", "area": "Packing", "by": "Fatima", "created": [-1, 1], "adopted": null, "status": "plan", "saving": 150 },
+      { "title": "Pick list sorted by aisle", "waste": "Motion", "area": "Picking", "by": "Anna", "created": [-1, 3], "adopted": null, "status": "idea", "saving": 200 }
+    ],
+    "actions": [
+      { "title": "Post the stacking rule as one picture at dock 2", "owner": "Marco", "area": "Loading", "created": [-5, 0], "due": [-4, 4], "status": "verified", "closed": [-4, 3] },
+      { "title": "Repair the dock leveller at door 4", "owner": "Jonas", "area": "Inbound dock", "created": [-3, 1], "due": [-2, 4], "status": "open" },
+      { "title": "Train the late shift on load securing", "owner": "Marco", "area": "Loading", "created": [-2, 0], "due": [-1, 1], "status": "doing" },
+      { "title": "Replace the worn straps on trailer 7", "owner": "Jonas", "area": "Loading", "created": [-2, 2], "due": [-1, 4], "status": "done", "closed": [-1, 3] },
+      { "title": "Count the empty totes before the late shift", "owner": "Fatima", "area": "Packing", "created": [-1, 0], "due": [-1, 2], "status": "verified", "closed": [-1, 2] },
+      { "title": "Mark the walkway at the pallet wrapper", "owner": "Anna", "area": "Loading", "created": [-1, 2], "due": [0, 4], "status": "open" },
+      { "title": "Check the scanner batteries every morning", "owner": "Besnik", "area": "Picking", "created": [-1, 3], "due": [-1, 3], "status": "open" }
+    ],
+    "handover": {
+      "issues": ["Door 4 leveller sticks", "Two pallets wait for a label", "Scanner 3 battery weak", "Late trailer from Mainz", "Wrapper film runs out"],
+      "owners": ["Anna", "Marco", "Besnik"]
+    }
+  }
+}

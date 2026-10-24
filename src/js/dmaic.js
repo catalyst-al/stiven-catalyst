@@ -5,7 +5,7 @@
   const { tx, write, loadState } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
-  const state = loadState(KEY, { answers: {}, checks: {}, charter: {} });
+  const state = loadState(KEY, { answers: {}, checks: {}, charter: {}, certName: "", completed: "" });
   const save = () => write(KEY, state);
   const total = data.modules.reduce((sum, m) => sum + m.quiz.length, 0);
 
@@ -42,11 +42,41 @@
       const answered = module.quiz.filter((_, i) => state.answers[`${module.id}-${i}`] !== undefined).length;
       score.textContent = answered ? tx(complete ? "{a} of {b} right: step complete." : "{a} of {b} right.", { a: moduleRight, b: module.quiz.length }) : "";
     });
+    showCertificate(done === data.modules.length);
     document.querySelector("[data-progress-bar]").style.width = `${(right / total) * 100}%`;
     document.querySelector("[data-progress-text]").textContent = right
       ? `${tx("{a} of {b} questions right · {c} of {d} steps complete", { a: right, b: total, c: done, d: data.modules.length })}${done === data.modules.length ? tx(". Well done: now start your own project below.") : ""}`
       : tx("Answer the questions to track your progress.");
   };
+
+  // Certificate ---------------------------------------------------------------
+  // Shown once every step is complete; the day it was first completed is kept, so a reprint carries the same date.
+  const certificate = document.querySelector("[data-certificate]");
+  const certName = certificate?.querySelector("[data-cert-name]");
+  const sheetName = certificate?.querySelector("[data-cert-sheet-name]");
+  const sheetDate = certificate?.querySelector("[data-cert-sheet-date]");
+  const showDay = (iso) => (window.ToolKit.showDate ? window.ToolKit.showDate(iso) : iso);
+  const syncSheet = () => {
+    if (!certificate) return;
+    sheetName.textContent = state.certName.trim() || "\u00a0";
+    sheetDate.textContent = state.completed ? showDay(state.completed) : "";
+  };
+  const showCertificate = (complete) => {
+    if (!certificate) return;
+    if (complete && !state.completed) { state.completed = window.ToolKit.today ? window.ToolKit.today() : new Date().toISOString().slice(0, 10); save(); }
+    certificate.hidden = !complete;
+    syncSheet();
+  };
+  if (certificate) {
+    certName.value = state.certName;
+    certName.addEventListener("input", () => { state.certName = certName.value; save(); syncSheet(); });
+    certificate.querySelector("[data-cert-print]").addEventListener("click", () => {
+      if (!state.certName.trim()) { certName.focus(); return; }
+      document.body.classList.add("print-certificate");
+      window.print();
+    });
+    window.addEventListener("afterprint", () => document.body.classList.remove("print-certificate"));
+  }
 
   data.modules.forEach((module) => {
     const quiz = document.querySelector(`[data-quiz="${module.id}"]`);

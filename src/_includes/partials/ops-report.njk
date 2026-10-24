@@ -1,0 +1,61 @@
+{#- Operations Report: the weekly or monthly management report, written from what the other tools hold in this browser; ops-report.js does the rest. The OEE stop reasons of the page's language travel along, so planned stops count as the OEE tool counts them. -#}
+{%- set oeeData = de.oee if lang == "de" else (sq.oee if lang == "sq" else oee) -%}
+<section class="shell tool-layout or-setup">
+  <div class="tool-panel" data-ops-report>
+    <div class="dl-box">
+      <fieldset class="or-period" data-periods>
+        <legend class="kicker">1 · {{ "Period" | t(lang) }}</legend>
+        <div class="or-choices">
+          {%- for p in cfg.periods %}
+          <label class="or-choice"><input type="radio" name="period" value="{{ p.key }}"{% if p.key == "lastWeek" %} checked{% endif %}> <span>{{ p.label }}</span></label>
+          {%- endfor %}
+        </div>
+        <div class="dl-grid or-custom" data-custom hidden>
+          <div class="field">
+            <label for="or-from">{{ "From" | t(lang) }}</label>
+            <input id="or-from" name="from" type="date">
+          </div>
+          <div class="field">
+            <label for="or-to">{{ "To" | t(lang) }}</label>
+            <input id="or-to" name="to" type="date">
+          </div>
+        </div>
+        <p class="form-note" data-span aria-live="polite"></p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box">
+      <p class="kicker">2 · {{ "What the report reads" | t(lang) }}</p>
+      <p class="form-note">{{ "Each section appears only when its tool holds data for the period. Open a tool to add to it." | t(lang) }}</p>
+      <ul class="or-sources" data-sources></ul>
+      <p class="dl-empty" data-empty hidden>{{ "Nothing is saved in this browser yet. The report writes itself once the other tools hold data." | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "Load an example" | t(lang) }}</button></p>
+    </div>
+
+    <details class="dl-box or-profile">
+      <summary class="kicker">3 · {{ "Site and targets" | t(lang) }}</summary>
+      <p class="form-note">{{ "The site name and the targets come from the workplace profile, which the other tools share. A target typed into a log wins over the profile." | t(lang) }}</p>
+      <div data-workplace></div>
+    </details>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results or-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="ops-report-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="ops-report-oee">{{ (oeeData.reasons if oeeData else []) | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/ops-report.js' | assetUrl }}" defer></script>

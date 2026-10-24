@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Lost & Found
+seo_title: "Lost and found register for hotels: retention, guest reply and tag labels"
+description: "A private lost and found register for hotels: every found item from hand-in to return, with keep-until dates, items due for a decision and a reply to the guest."
+activeNav: /tools.html
+permalink: /tools/lost-found/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Hotel</p>
+  <h1>Lost &amp; Found</h1>
+  <p class="lede">Log every found item the moment it reaches reception: where it was, what it is, who found it, the shelf or the safe and its tag number. Follow it until it goes back to the guest, in person or by post, or to the police, to charity or the bin, with the keep-until date of each item, the ones due for a decision, where most things are left, a reply to the guest to copy and a tag label to print.</p>
+</section>
+
+{% set cfg = lostFound %}
+{% include "partials/lost-found.njk" %}
