@@ -3579,5 +3579,12 @@
   "Answer or count": "Antwort oder Anzahl",
   "Finding or note": "Befund oder Notiz",
   "Overdue by 1 day": "1 Tag überfällig",
-  "1 layer overdue": "1 Ebene überfällig"
+  "1 layer overdue": "1 Ebene überfällig",
+  "Add the countermeasure to the Action Tracker": "Maßnahme in die Maßnahmenliste übernehmen",
+  "Write the countermeasure first, then add it to the actions.": "Schreiben Sie zuerst die Maßnahme, dann übernehmen Sie sie in die Liste.",
+  "To actions": "Zur Maßnahmenliste",
+  "Countermeasure for: {problem}": "Maßnahme zu: {problem}",
+  "First move on {kpi}: {cause}": "Erster Schritt bei {kpi}: {cause}",
+  "find the cause": "Ursache finden",
+  "Act on “{cause}”: {n} incidents, {p} of the total": "„{cause}“ angehen: {n} Vorfälle, {p} der Gesamtzahl"
 }

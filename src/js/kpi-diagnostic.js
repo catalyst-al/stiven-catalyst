@@ -170,7 +170,9 @@
       ? tx("{kpi} is red; the diagnostic points to {cause}.", { kpi: kpi || "KPI", cause: top.map((key) => data.causes[key].name).join(" + ") })
       : tx("{kpi} is red; no single cause stands out in the diagnostic.", { kpi: kpi || "KPI" }));
     whys.href = whysUrl.href;
-    actions.append(copyButton, printButton, whys, resetButton);
+    actions.append(copyButton, printButton, whys);
+    if (window.ToolKit?.trackerLink) actions.append(window.ToolKit.trackerLink(tx("Add to actions"), { title: tx("First move on {kpi}: {cause}", { kpi: kpi || "KPI", cause: top.length ? top.map((key) => data.causes[key].name).join(" + ") : tx("find the cause") }), detail: whysUrl.searchParams.get("problem") || "", source: "kpi-diagnostic", priority: "High" }));
+    actions.append(resetButton);
     resultBox.append(actions);
 
     resultBox.hidden = false;

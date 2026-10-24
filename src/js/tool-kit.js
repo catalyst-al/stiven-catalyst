@@ -627,6 +627,27 @@ window.ToolKit = (() => {
   // that the Pareto tool opens; it travels in sessionStorage, so it stays in this tab.
   // chart, when given, is a day-by-day series ({ source, metric, unit, rows: [{ date, n, d }], skipped }) that
   // the Sigma & Control Chart opens as a p-chart: d defects out of n handled on each date.
+  // An action for the Action Tracker (js/actions-store.js reads these parameters on its page, adds the action once and
+  // cleans the address). The tracker is a sibling of every tool, so the link keeps the page's language. The source is the
+  // tool's own address, so the tracker can say where the action came from.
+  const trackerUrl = (action = {}) => {
+    const url = new URL("../action-tracker/", window.location.href);
+    const source = window.location.pathname.split("/").filter(Boolean).pop() || "";
+    const title = str(action.title).trim().slice(0, 300);
+    if (title) {
+      url.searchParams.set("action", title);
+      url.searchParams.set("source", str(action.source) || source);
+      ["detail", "owner", "due", "check", "area", "priority"].forEach((name) => { if (str(action[name]).trim()) url.searchParams.set(name, str(action[name]).trim()); });
+    }
+    return url.href;
+  };
+  const trackerLink = (label, action, className = "button-secondary") => {
+    const link = el("a", className, label);
+    link.href = trackerUrl(typeof action === "function" ? {} : action);
+    // An action that changes while the page is open is read when the link is followed.
+    if (typeof action === "function") link.addEventListener("click", () => { link.href = trackerUrl(action() || {}); });
+    return link;
+  };
   const resultActions = (summary, problem, pareto, chart = null) => {
     const actions = el("div", "tool-actions result-actions");
     const copyButton = el("button", "button-primary", tx("Copy summary"));
@@ -642,6 +663,9 @@ window.ToolKit = (() => {
     url.searchParams.set("problem", problem);
     whys.href = url.href;
     actions.append(copyButton, printButton, whys);
+    // Pages that keep their own list of actions (they load js/actions-store.js) offer their own hand-off; the others send
+    // the problem to the Action Tracker as the action to take.
+    if (!window.ActionsStore && problem) actions.append(trackerLink(tx("Add to actions"), { title: tx("Countermeasure for: {problem}", { problem }), priority: "High" }));
     if (pareto) {
       const link = el("a", "button-secondary", tx("Open in Pareto 80/20"));
       link.href = new URL("../pareto/", window.location.href).href;
@@ -1178,6 +1202,6 @@ window.ToolKit = (() => {
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
-    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

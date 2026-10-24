@@ -1,0 +1,20 @@
+{
+  "de": {
+    "Add the countermeasure to the Action Tracker": "Maßnahme in die Maßnahmenliste übernehmen",
+    "Write the countermeasure first, then add it to the actions.": "Schreiben Sie zuerst die Maßnahme, dann übernehmen Sie sie in die Liste.",
+    "To actions": "Zur Maßnahmenliste",
+    "Countermeasure for: {problem}": "Maßnahme zu: {problem}",
+    "First move on {kpi}: {cause}": "Erster Schritt bei {kpi}: {cause}",
+    "find the cause": "Ursache finden",
+    "Act on “{cause}”: {n} incidents, {p} of the total": "„{cause}“ angehen: {n} Vorfälle, {p} der Gesamtzahl"
+  },
+  "sq": {
+    "Add the countermeasure to the Action Tracker": "Shto kundërmasën te lista e veprimeve",
+    "Write the countermeasure first, then add it to the actions.": "Shkruaj në fillim kundërmasën, pastaj shtoje te veprimet.",
+    "To actions": "Te veprimet",
+    "Countermeasure for: {problem}": "Kundërmasë për: {problem}",
+    "First move on {kpi}: {cause}": "Hapi i parë për {kpi}: {cause}",
+    "find the cause": "gjej shkakun",
+    "Act on “{cause}”: {n} incidents, {p} of the total": "Vepro për “{cause}”: {n} incidente, {p} e totalit"
+  }
+}

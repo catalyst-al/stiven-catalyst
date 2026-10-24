@@ -3579,5 +3579,12 @@
   "Answer or count": "Përgjigjja ose numri",
   "Finding or note": "Gjetja ose shënimi",
   "Overdue by 1 day": "Vonesë 1 ditë",
-  "1 layer overdue": "1 nivel me vonesë"
+  "1 layer overdue": "1 nivel me vonesë",
+  "Add the countermeasure to the Action Tracker": "Shto kundërmasën te lista e veprimeve",
+  "Write the countermeasure first, then add it to the actions.": "Shkruaj në fillim kundërmasën, pastaj shtoje te veprimet.",
+  "To actions": "Te veprimet",
+  "Countermeasure for: {problem}": "Kundërmasë për: {problem}",
+  "First move on {kpi}: {cause}": "Hapi i parë për {kpi}: {cause}",
+  "find the cause": "gjej shkakun",
+  "Act on “{cause}”: {n} incidents, {p} of the total": "Vepro për “{cause}”: {n} incidente, {p} e totalit"
 }

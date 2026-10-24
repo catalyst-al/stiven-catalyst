@@ -1,7 +1,16 @@
 {
   "storageKey": "sc-actions",
-  "statuses": { "open": "E hapur", "doing": "Në punë", "done": "Kryer", "verified": "Verifikuar" },
-  "priorities": { "High": "E lartë", "Medium": "Mesatare", "Low": "E ulët" },
+  "statuses": {
+    "open": "E hapur",
+    "doing": "Në punë",
+    "done": "Kryer",
+    "verified": "Verifikuar"
+  },
+  "priorities": {
+    "High": "E lartë",
+    "Medium": "Mesatare",
+    "Low": "E ulët"
+  },
   "sources": {
     "manual": "Shkruar këtu",
     "five-whys": "5 Whys",
@@ -24,14 +33,33 @@
     "pareto": "Pareto 80/20",
     "sigma-control-chart": "Grafiku i kontrollit",
     "cx-control-tower": "CX Control Tower",
-    "kpi-diagnostic": "Diagnostikimi i KPI-së"
+    "kpi-diagnostic": "Diagnostikimi i KPI-së",
+    "damage-control": "Kontrolli i dëmeve",
+    "incomplete-control": "Kontrolli i plotësisë",
+    "delay-analyzer": "Analiza e vonesave",
+    "night-audit": "Regjistri i Night Audit"
   },
   "tips": [
-    ["Një listë, çdo mjet.", "Një kundërmasë nga 5 Whys, një gjetje nga auditi 5S, një sinjal nga grafiku i kontrollit: të gjitha vijnë këtu me një përgjegjës dhe një datë."],
-    ["Një veprim ka tri gjëra.", "Një folje, një emër dhe një datë. “Të përmirësojmë ngarkimin” është dëshirë; “Anna vendos fotografinë e stivimit te doku 2 deri të premten” është veprim."],
-    ["Kryer nuk është verifikuar.", "Kryer thotë që ndryshimi u bë. Verifikuar thotë që numri lëvizi dhe qëndroi. Vetëm verifikuar e mbyll rrethin."],
-    ["Shqyrtoje çdo javë, në dhjetë minuta.", "Të vonuarat në fillim, pastaj çfarë skadon këtë javë, pastaj çfarë u verifikua. Lista është rendi i ditës."],
-    ["Më pak, por të mbaruara.", "Dhjetë veprime të hapura që askush nuk i mbyll janë më keq se tri që verifikohen. Hiq ose bashko çfarë ka ngelur pezull."]
+    [
+      "Një listë, çdo mjet.",
+      "Një kundërmasë nga 5 Whys, një gjetje nga auditi 5S, një sinjal nga grafiku i kontrollit: të gjitha vijnë këtu me një përgjegjës dhe një datë."
+    ],
+    [
+      "Një veprim ka tri gjëra.",
+      "Një folje, një emër dhe një datë. “Të përmirësojmë ngarkimin” është dëshirë; “Anna vendos fotografinë e stivimit te doku 2 deri të premten” është veprim."
+    ],
+    [
+      "Kryer nuk është verifikuar.",
+      "Kryer thotë që ndryshimi u bë. Verifikuar thotë që numri lëvizi dhe qëndroi. Vetëm verifikuar e mbyll rrethin."
+    ],
+    [
+      "Shqyrtoje çdo javë, në dhjetë minuta.",
+      "Të vonuarat në fillim, pastaj çfarë skadon këtë javë, pastaj çfarë u verifikua. Lista është rendi i ditës."
+    ],
+    [
+      "Më pak, por të mbaruara.",
+      "Dhjetë veprime të hapura që askush nuk i mbyll janë më keq se tri që verifikohen. Hiq ose bashko çfarë ka ngelur pezull."
+    ]
   ],
   "verdicts": {
     "clear": "Asgjë e vonuar. Lista është nën kontroll.",
@@ -46,17 +74,141 @@
     "none": "asnjë"
   },
   "example": [
-    { "title": "Rregulli i stivimit si një fotografi te doku 2", "detail": "Kutitë e rënda poshtë, të brishtat sipër, maks. 1,6 m. A3 e laminuar te rampa e ngarkimit.", "owner": "Anna", "offset": -2, "source": "five-whys", "check": "Pako të shtypura në ngarkim nën 10 në javë për katër javë", "area": "Doku 2", "priority": "High", "status": "doing", "created": -12 },
-    { "title": "Shëno në dysheme vendet e tri karrocave te Picking B", "owner": "Besnik", "offset": 3, "source": "five-s-audit", "check": "Pikët e auditit për “Rregullo” ≥ 3 në ecjen tjetër", "area": "Picking B", "priority": "Medium", "status": "open", "created": -5 },
-    { "title": "Zëvendëso mbajtësen e prishur të skanerit te stacioni 4 i paketimit", "owner": "Clara", "offset": -6, "source": "five-s-audit", "area": "Paketimi", "priority": "Medium", "status": "open", "created": -14 },
-    { "title": "Dispeçeri zotëron planin e dokut nga ora 5:30", "detail": "Shift lead-i e konfirmon në 6:00 në briefing.", "owner": "Driton", "offset": -20, "source": "five-whys", "check": "Nisjet brenda 5 minutash nga plani, pesë ditë rresht", "area": "Doku", "priority": "High", "status": "done", "created": -34, "closed": -21 },
-    { "title": "Rinumëro volumin e javës 41 në regjistrin e dëmtimeve", "owner": "Anna", "offset": 1, "source": "sigma-control-chart", "area": "Dalja e mallit", "priority": "Low", "status": "open", "created": -3 },
-    { "title": "Bisedë sigurie: korsitë e pirunit dhe të këmbësorëve", "owner": "Emir", "offset": 2, "source": "safety-cross", "check": "Zero near-miss te kryqëzimi për një muaj", "area": "Hyrja e mallit", "priority": "High", "status": "open", "created": -4 },
-    { "title": "Trajno Linën për përpunimin e kthimeve", "owner": "Besnik", "offset": 14, "source": "skills-matrix", "check": "Lina në nivelin 3, e firmosur nga Besniku", "area": "Kthimet", "priority": "Medium", "status": "open", "created": -1 },
-    { "title": "Zhvendos printerin e etiketave pranë tavolinës së paketimit", "owner": "Clara", "offset": -27, "source": "kaizen-board", "check": "Ecja për porosi nga 22 në nën 8 hapa", "area": "Paketimi", "priority": "Medium", "status": "verified", "created": -41, "closed": -26, "result": "U matën 6 hapa për porosi. U mbajt." },
-    { "title": "Telefonatë javore me transportuesin për marrjet e vona", "owner": "Driton", "offset": -9, "source": "cx-control-tower", "area": "Dispeçimi", "priority": "Medium", "status": "done", "created": -23, "closed": -8 },
-    { "title": "Night audit: kontrollo kartat e refuzuara para orës 23:00", "owner": "Mira", "offset": 5, "source": "shift-handover", "check": "Asnjë bilanc i hapur në check-out për dy javë", "area": "Recepsioni", "priority": "High", "status": "doing", "created": -6 },
-    { "title": "Mbyll të çarën nën derën 7 nga ku hyn shiu", "owner": "Mirëmbajtja", "offset": -15, "source": "gemba-walk", "area": "Doku", "priority": "Medium", "status": "open", "created": -29 },
-    { "title": "Përcakto lartësinë maksimale të paletave për sorterin", "owner": "Emir", "offset": -33, "source": "fmea", "check": "Asnjë bllokim i sorterit nga lartësia për një muaj", "area": "Sorteri", "priority": "High", "status": "verified", "created": -50, "closed": -31, "result": "Një muaj pa bllokim nga lartësia." }
+    {
+      "title": "Rregulli i stivimit si një fotografi te doku 2",
+      "detail": "Kutitë e rënda poshtë, të brishtat sipër, maks. 1,6 m. A3 e laminuar te rampa e ngarkimit.",
+      "owner": "Anna",
+      "offset": -2,
+      "source": "five-whys",
+      "check": "Pako të shtypura në ngarkim nën 10 në javë për katër javë",
+      "area": "Doku 2",
+      "priority": "High",
+      "status": "doing",
+      "created": -12
+    },
+    {
+      "title": "Shëno në dysheme vendet e tri karrocave te Picking B",
+      "owner": "Besnik",
+      "offset": 3,
+      "source": "five-s-audit",
+      "check": "Pikët e auditit për “Rregullo” ≥ 3 në ecjen tjetër",
+      "area": "Picking B",
+      "priority": "Medium",
+      "status": "open",
+      "created": -5
+    },
+    {
+      "title": "Zëvendëso mbajtësen e prishur të skanerit te stacioni 4 i paketimit",
+      "owner": "Clara",
+      "offset": -6,
+      "source": "five-s-audit",
+      "area": "Paketimi",
+      "priority": "Medium",
+      "status": "open",
+      "created": -14
+    },
+    {
+      "title": "Dispeçeri zotëron planin e dokut nga ora 5:30",
+      "detail": "Shift lead-i e konfirmon në 6:00 në briefing.",
+      "owner": "Driton",
+      "offset": -20,
+      "source": "five-whys",
+      "check": "Nisjet brenda 5 minutash nga plani, pesë ditë rresht",
+      "area": "Doku",
+      "priority": "High",
+      "status": "done",
+      "created": -34,
+      "closed": -21
+    },
+    {
+      "title": "Rinumëro volumin e javës 41 në regjistrin e dëmtimeve",
+      "owner": "Anna",
+      "offset": 1,
+      "source": "sigma-control-chart",
+      "area": "Dalja e mallit",
+      "priority": "Low",
+      "status": "open",
+      "created": -3
+    },
+    {
+      "title": "Bisedë sigurie: korsitë e pirunit dhe të këmbësorëve",
+      "owner": "Emir",
+      "offset": 2,
+      "source": "safety-cross",
+      "check": "Zero near-miss te kryqëzimi për një muaj",
+      "area": "Hyrja e mallit",
+      "priority": "High",
+      "status": "open",
+      "created": -4
+    },
+    {
+      "title": "Trajno Linën për përpunimin e kthimeve",
+      "owner": "Besnik",
+      "offset": 14,
+      "source": "skills-matrix",
+      "check": "Lina në nivelin 3, e firmosur nga Besniku",
+      "area": "Kthimet",
+      "priority": "Medium",
+      "status": "open",
+      "created": -1
+    },
+    {
+      "title": "Zhvendos printerin e etiketave pranë tavolinës së paketimit",
+      "owner": "Clara",
+      "offset": -27,
+      "source": "kaizen-board",
+      "check": "Ecja për porosi nga 22 në nën 8 hapa",
+      "area": "Paketimi",
+      "priority": "Medium",
+      "status": "verified",
+      "created": -41,
+      "closed": -26,
+      "result": "U matën 6 hapa për porosi. U mbajt."
+    },
+    {
+      "title": "Telefonatë javore me transportuesin për marrjet e vona",
+      "owner": "Driton",
+      "offset": -9,
+      "source": "cx-control-tower",
+      "area": "Dispeçimi",
+      "priority": "Medium",
+      "status": "done",
+      "created": -23,
+      "closed": -8
+    },
+    {
+      "title": "Night audit: kontrollo kartat e refuzuara para orës 23:00",
+      "owner": "Mira",
+      "offset": 5,
+      "source": "shift-handover",
+      "check": "Asnjë bilanc i hapur në check-out për dy javë",
+      "area": "Recepsioni",
+      "priority": "High",
+      "status": "doing",
+      "created": -6
+    },
+    {
+      "title": "Mbyll të çarën nën derën 7 nga ku hyn shiu",
+      "owner": "Mirëmbajtja",
+      "offset": -15,
+      "source": "gemba-walk",
+      "area": "Doku",
+      "priority": "Medium",
+      "status": "open",
+      "created": -29
+    },
+    {
+      "title": "Përcakto lartësinë maksimale të paletave për sorterin",
+      "owner": "Emir",
+      "offset": -33,
+      "source": "fmea",
+      "check": "Asnjë bllokim i sorterit nga lartësia për një muaj",
+      "area": "Sorteri",
+      "priority": "High",
+      "status": "verified",
+      "created": -50,
+      "closed": -31,
+      "result": "Një muaj pa bllokim nga lartësia."
+    }
   ]
 }

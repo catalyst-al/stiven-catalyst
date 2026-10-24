@@ -180,6 +180,13 @@
       whys.title = tx("Take it to 5 Whys");
       meta.append(whys);
     } else if (issue.carried) meta.append(el("span", "dl-tag", tx("Carried {n}×", { n: issue.carried })));
+    // An issue that outlives the shift belongs on the Action Tracker, with its owner and, when it is a date, its due day.
+    if (issue.text.trim() && !issue.done && window.ToolKit.trackerUrl) {
+      const tracker = el("a", "sh-tracker", tx("To actions"));
+      tracker.href = window.ToolKit.trackerUrl({ title: issue.text, owner: issue.owner, due: /^\d{4}-\d{2}-\d{2}$/.test(issue.due) ? issue.due : "", detail: issue.due && !/^\d{4}-\d{2}-\d{2}$/.test(issue.due) ? `${tx("By when")}: ${issue.due}` : "", priority: issue.priority, source: "shift-handover" });
+      tracker.title = tx("Add to actions");
+      meta.append(tracker);
+    }
     meta.append(removeButton("", "issue", i));
     const main = el("div", "sh-issue-main");
     main.append(text, meta);

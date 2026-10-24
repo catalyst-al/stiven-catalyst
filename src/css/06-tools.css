@@ -411,7 +411,7 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
   border-radius: 50%;
   font-size: 11px;
 }
-.dl-tag {
+.dl-tag, .sh-tracker {
   padding: 2px 8px;
   border: 1px solid color-mix(in srgb, var(--blue) 55%, var(--line));
   border-radius: 999px;
