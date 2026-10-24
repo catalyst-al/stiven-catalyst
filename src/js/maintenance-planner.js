@@ -295,12 +295,44 @@
     return { site: spec.site, assets, rows: rows.sort(byDate) };
   };
 
-  window.MaintenancePlannerMath = { UNITS, KINDS, WHO, CRITS, isIso, addDays, daysBetween, mondayOf, weekEnd, monthEnd, addInterval, intervalDays, graceDays, meterPoints, rateOf, hoursAt, dateAtHours, nextDue, history, compliance, statusOf, project, reliability, pareto, ics, random, taskFrom, exampleData };
+  // From OEE: the stops of its log that are breakdowns, as the OEE tool counts them (the loss of the reason in its list; a
+  // reason nobody listed counts as a breakdown). OEE rows have no ids, so each stop gets a stable key: the date, the
+  // machine, the shift, the reason and the minutes, and how often the same stop came before it (two identical lines of
+  // one shift stay two). The key does not depend on a row's position, so adding or removing other rows in OEE leaves it
+  // as it was.
+  const lowered = (text) => String(text ?? "").trim().toLowerCase();
+  const oeeBreakdowns = (saved, reasons = []) => {
+    const lossOf = (reason) => reasons.find((r) => lowered(r.name) === lowered(reason))?.loss || "breakdowns";
+    const seen = new Map();
+    const out = [];
+    (Array.isArray(saved?.rows) ? saved.rows : []).forEach((row) => {
+      if (!row || typeof row !== "object" || !isIso(row.date) || !lowered(row.equipment) || !Array.isArray(row.stops)) return;
+      row.stops.forEach((stop) => {
+        const minutes = Math.round(Number(stop?.minutes) * 10) / 10;
+        if (!(minutes > 0) || lossOf(stop.reason) !== "breakdowns") return;
+        const base = [row.date, lowered(row.equipment), lowered(row.shift), lowered(stop.reason), minutes].join("|");
+        const n = seen.get(base) || 0;
+        seen.set(base, n + 1);
+        out.push({ key: `oee|${base}|${n}`, date: row.date, shift: String(row.shift ?? "").trim(), machine: String(row.equipment).trim(), reason: String(stop.reason ?? "").trim(), minutes });
+      });
+    });
+    return out.sort((a, b) => b.date.localeCompare(a.date));
+  };
+  // An OEE machine onto an asset of the plan: the same tag, else the same name, in any case.
+  const matchAsset = (name, assets) => {
+    const wanted = lowered(name);
+    if (!wanted) return null;
+    return assets.find((a) => lowered(a.tag) === wanted) || assets.find((a) => lowered(a.name) === wanted) || null;
+  };
+  // An OEE reason onto a cause of the planner: the same name or key in any case, else "other" (the reason stays in the note).
+  const causeFor = (reason, causes) => causes.find((c) => lowered(c.name) === lowered(reason) || c.key === lowered(reason))?.key || "other";
+
+  window.MaintenancePlannerMath = { UNITS, KINDS, WHO, CRITS, isIso, addDays, daysBetween, mondayOf, weekEnd, monthEnd, addInterval, intervalDays, graceDays, meterPoints, rateOf, hoursAt, dateAtHours, nextDue, history, compliance, statusOf, project, reliability, pareto, ics, random, taskFrom, exampleData, oeeBreakdowns, matchAsset, causeFor };
 
   const dataEl = document.getElementById("maintenance-planner-data");
   const root = document.querySelector("[data-maintenance-planner]");
   if (!dataEl || !root || !window.ToolKit) return;
-  const { tx, int, euro, pct, num, showDate, monthYear, write, loadState, isObject, str, el, today, parseDate, parseNumber, flash, undoNote, panel, stat, focusCard, resultActions, resultLayout, exampleNote, exampleStamp, exampleMatches, firstVisit, downloadCsv, downloadXlsx } = window.ToolKit;
+  const { tx, int, euro, pct, num, showDate, monthYear, read, write, loadState, isObject, str, el, today, parseDate, parseNumber, flash, undoNote, panel, stat, focusCard, resultActions, resultLayout, exampleNote, exampleStamp, exampleMatches, firstVisit, downloadCsv, downloadXlsx } = window.ToolKit;
   const ChartKit = window.ChartKit;
   const Actions = window.ActionsStore;
   const Workplace = window.Workplace || null;
@@ -320,8 +352,8 @@
   const hoursValue = (value) => { const n = typeof value === "number" ? value : parseNumber(value); return Number.isFinite(n) && n >= 0 ? Math.round(n * 10) / 10 : null; };
 
   // State: the site kind, the assets with their tasks, the log (done, postponed, breakdown, reading), what was already
-  // sent to the Action Tracker, and the example's stamp.
-  const state = loadState(KEY, { site: cfg.example.site, assets: [], rows: [], sent: {}, show: "all", example: {} });
+  // sent to the Action Tracker, the OEE stops already taken over or ignored (by their key), and the example's stamp.
+  const state = loadState(KEY, { site: cfg.example.site, assets: [], rows: [], sent: {}, oee: {}, show: "all", example: {} });
   if (!SITES.includes(state.site)) state.site = SITES[0];
   if (!["all", "due", "overdue", "statutory"].includes(state.show)) state.show = "all";
   const cleanTask = (raw) => {
@@ -354,7 +386,12 @@
   state.assets = state.assets.map(cleanAsset).filter(Boolean);
   state.rows = state.rows.map(cleanRow).filter(Boolean).sort(byDate);
   state.sent = Object.fromEntries(Object.entries(state.sent).filter(([, value]) => value === true));
+  state.oee = Object.fromEntries(Object.entries(state.oee).filter(([key, value]) => key.startsWith("oee|") && (value === "taken" || value === "ignored")));
   const save = () => write(KEY, state);
+  // The OEE log of the same language and its stop reasons, which say which stops are breakdowns.
+  const oeeCfg = (() => { try { return JSON.parse(document.getElementById("maintenance-planner-oee")?.textContent || "{}") || {}; } catch { return {}; } })();
+  const OEE_KEY = typeof oeeCfg.key === "string" && oeeCfg.key.startsWith("sc-oee") ? oeeCfg.key : `sc-oee${KEY.slice("sc-maintenance-planner".length)}`;
+  const oeeReasons = Array.isArray(oeeCfg.reasons) ? oeeCfg.reasons : [];
 
   const assetById = (assetId) => state.assets.find((a) => a.id === assetId) || null;
   const fold = (text) => String(text).trim().toLowerCase();
@@ -419,6 +456,7 @@
   const logEmpty = q("[data-log-empty]");
   const logCount = q("[data-log-count]");
   const historyStatus = q("[data-history-status]");
+  const oeeBox = q("[data-oee-box]");
   const results = document.querySelector("[data-results]");
   const printBox = document.querySelector("[data-print]");
   const fiveWhysUrl = () => new URL(document.querySelector("a[data-five-whys]")?.href || new URL("../five-whys/", window.location.href));
@@ -1031,10 +1069,75 @@
     decorateLog();
   };
 
+  // From OEE: the breakdown stops of the OEE log not taken over or ignored yet, newest first. Each is taken over as a
+  // breakdown of the asset its machine matches by tag or name (or the one picked), with its minutes and its cause; the
+  // OEE reason stays in the note. While either tool shows its example, nothing is offered: example stops do not belong
+  // in a real plan, and a real stop does not belong to an example asset.
+  const OEE_SHOWN = 8;
+  const oeeStops = () => {
+    const saved = read(OEE_KEY, null);
+    if (!isObject(saved) || exampleMatches(saved)) return [];
+    return oeeBreakdowns(saved, oeeReasons).filter((stop) => !state.oee[stop.key]);
+  };
+  const oeeText = (stop) => [showDate(stop.date), stop.machine, minutesText(stop.minutes), stop.reason || tx("No reason"), stop.shift].filter(Boolean).join(" · ");
+  const renderOee = () => {
+    if (!oeeBox) return;
+    const list = oeeBox.querySelector("[data-oee-list]");
+    const note = oeeBox.querySelector("[data-oee-note]");
+    const all = oeeBox.querySelector("[data-oee-ignore-all]");
+    const pending = oeeStops();
+    const status = oeeBox.querySelector("[data-oee-status]");
+    oeeBox.hidden = !pending.length && !status.textContent;
+    list.replaceChildren();
+    all.hidden = pending.length < 2 || exampleMatches(state);
+    if (!pending.length) { note.textContent = ""; return; }
+    if (exampleMatches(state)) {
+      note.textContent = tx("OEE holds {stops} not in this log. Clear the example to take them over.", { stops: pending.length === 1 ? tx("1 breakdown stop") : tx("{n} breakdown stops", { n: int.format(pending.length) }) });
+      return;
+    }
+    const assets = [...state.assets].sort((a, b) => a.tag.localeCompare(b.tag, undefined, { numeric: true }));
+    note.textContent = [
+      pending.length > OEE_SHOWN ? tx("{n} breakdown stops, the newest {m} shown.", { n: int.format(pending.length), m: int.format(OEE_SHOWN) }) : "",
+      assets.length ? "" : tx("Add the machine as an asset first, then take its stops over."),
+    ].filter(Boolean).join(" ");
+    pending.slice(0, OEE_SHOWN).forEach((stop, i) => {
+      const li = el("li", "mp-oee-item");
+      li.dataset.oeeKey = stop.key;
+      li.append(el("p", "mp-oee-what", oeeText(stop)));
+      const pick = el("div", "mp-oee-pick");
+      const match = matchAsset(stop.machine, state.assets);
+      const asset = el("select");
+      asset.id = `mp-oee-asset-${i}`;
+      asset.dataset.oeeAsset = "";
+      const assetLabelEl = el("label", "visually-hidden", tx("Asset for {machine}", { machine: stop.machine }));
+      assetLabelEl.htmlFor = asset.id;
+      fill(asset, [...(match ? [] : [["", tx("Pick the asset")]]), ...assets.map((a) => [a.id, assetLabel(a)])], match?.id || "");
+      const cause = el("select");
+      cause.id = `mp-oee-cause-${i}`;
+      cause.dataset.oeeCause = "";
+      const causeLabelEl = el("label", "visually-hidden", tx("Cause"));
+      causeLabelEl.htmlFor = cause.id;
+      fill(cause, cfg.causes.map((c) => [c.key, c.name]), causeFor(stop.reason, cfg.causes));
+      const take = el("button", "button-secondary mp-small", tx("Take over as a breakdown"));
+      take.type = "button";
+      take.dataset.oeeTake = stop.key;
+      take.disabled = !assets.length;
+      take.setAttribute("aria-label", `${tx("Take over as a breakdown")}: ${oeeText(stop)}`);
+      const ignore = el("button", "button-ghost mp-small", tx("Ignore"));
+      ignore.type = "button";
+      ignore.dataset.oeeIgnore = stop.key;
+      ignore.setAttribute("aria-label", `${tx("Ignore")}: ${oeeText(stop)}`);
+      pick.append(assetLabelEl, asset, causeLabelEl, cause, take, ignore);
+      li.append(pick);
+      list.append(li);
+    });
+  };
+
   const render = () => {
     renderAssets();
     renderPlan();
     renderLog();
+    renderOee();
     renderResults();
   };
   const changed = () => { save(); render(); };
@@ -1196,6 +1299,52 @@
     await movePhotos(clean.id);
   });
 
+  // From OEE: take a stop over as a breakdown of the chosen asset, or ignore it; either can be undone.
+  const oeeStatus = oeeBox?.querySelector("[data-oee-status]");
+  oeeBox?.addEventListener("click", (event) => {
+    const takeButton = event.target.closest("[data-oee-take]");
+    const ignoreButton = event.target.closest("[data-oee-ignore]");
+    const allButton = event.target.closest("[data-oee-ignore-all]");
+    if (allButton) {
+      const pending = oeeStops();
+      if (!pending.length || !window.confirm(tx("Ignore all {n} breakdown stops from OEE? They are not offered again.", { n: int.format(pending.length) }))) return;
+      pending.forEach((stop) => { state.oee[stop.key] = "ignored"; });
+      changed();
+      undoNote(oeeStatus, tx("{n} stops from OEE ignored.", { n: int.format(pending.length) }), () => { pending.forEach((stop) => { delete state.oee[stop.key]; }); changed(); });
+      renderOee();
+      return;
+    }
+    const key = takeButton?.dataset.oeeTake || ignoreButton?.dataset.oeeIgnore;
+    if (!key) return;
+    const stop = oeeStops().find((item) => item.key === key);
+    if (!stop) return;
+    const item = event.target.closest("[data-oee-key]");
+    if (ignoreButton) {
+      state.oee[key] = "ignored";
+      changed();
+      undoNote(oeeStatus, tx("Ignored: {stop}.", { stop: oeeText(stop) }), () => { delete state.oee[key]; changed(); });
+      renderOee();
+      return;
+    }
+    const asset = assetById(item?.querySelector("[data-oee-asset]")?.value);
+    if (!asset) { flash(oeeStatus, tx("Pick the asset in the plan for this machine.")); item?.querySelector("[data-oee-asset]")?.focus(); return; }
+    const cause = item.querySelector("[data-oee-cause]")?.value;
+    const row = cleanRow({ id: id("r"), kind: "breakdown", asset: asset.id, date: stop.date, minutes: stop.minutes, cause, cost: 0, by: "", note: [`${tx("From OEE")}: ${stop.reason || tx("No reason")}`, stop.shift].filter(Boolean).join(" · ") });
+    state.rows.push(row);
+    state.rows.sort(byDate);
+    state.oee[key] = "taken";
+    changed();
+    undoNote(oeeStatus, tx("Breakdown logged: {asset}, {t} of downtime.", { asset: asset.tag, t: minutesText(row.minutes) }), () => {
+      state.rows = state.rows.filter((r) => r.id !== row.id);
+      delete state.oee[key];
+      changed();
+    });
+    renderOee();
+    (oeeBox.querySelector("[data-oee-take]") || logForm.asset).focus();
+  });
+  // OEE logged in another tab: offer its new stops here too.
+  window.addEventListener("storage", (event) => { if (event.key === OEE_KEY) renderOee(); });
+
   // The log: remove one (with undo), the exports and clearing.
   logBody.addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove-row]");
@@ -1221,6 +1370,7 @@
     if (!state.rows.length || !window.confirm(tx("Clear the whole log? The assets and their tasks stay; the due dates go back to the last dates given."))) return;
     state.rows = [];
     state.sent = {};
+    state.oee = {};
     state.example = {};
     changed();
   });
@@ -1229,6 +1379,7 @@
     state.assets = [];
     state.rows = [];
     state.sent = {};
+    state.oee = {};
     state.example = {};
     resetAssetForm();
     changed();

@@ -22,9 +22,12 @@
     "shift-handover": "Dorëzimi i turnit",
     "safety-cross": "Kryqi i sigurisë",
     "oee": "OEE",
+    "maintenance-planner": "Planifikuesi i mirëmbajtjes",
     "five-s-audit": "Auditi 5S",
     "gemba-walk": "Gemba Walk",
     "hotel-kpis": "KPI-të e hotelit",
+    "lost-found": "Sendet e gjetura",
+    "room-inspection": "Inspektimi i dhomës",
     "kaizen-board": "Tabela Kaizen",
     "action-tracker": "Lista e veprimeve"
   },
@@ -74,7 +77,9 @@
     "owner": "Përgjegjësi",
     "check": "Kontrolli",
     "noOwner": "ende pa përgjegjës",
-    "and": "dhe"
+    "and": "dhe",
+    "minutes": "{n} min",
+    "hours": "{n} orë"
   },
   "metrics": {
     "accidents": { "label": "Aksidente", "noun": "aksidentet" },
@@ -94,12 +99,21 @@
     "availability": { "label": "Disponueshmëria", "noun": "disponueshmëria" },
     "performance": { "label": "Performanca", "noun": "performanca" },
     "quality": { "label": "Shkalla e cilësisë", "noun": "shkalla e cilësisë" },
+    "pm": { "label": "Zbatimi i planit", "noun": "zbatimi i planit të mirëmbajtjes" },
+    "pmOverdue": { "label": "Detyra mirëmbajtjeje me vonesë", "noun": "detyrat e mirëmbajtjes me vonesë" },
+    "breakdowns": { "label": "Prishje", "noun": "prishjet" },
+    "downtime": { "label": "Ndalesa", "noun": "koha e ndalesave" },
     "fiveS": { "label": "Rezultati 5S", "noun": "rezultati 5S" },
     "gemba": { "label": "Përputhshmëria Gemba", "noun": "përputhshmëria e Gemba Walk" },
     "walks": { "label": "Ecje", "noun": "ecjet" },
     "occ": { "label": "Zënia", "noun": "zënia e dhomave" },
     "adr": { "label": "ADR", "noun": "ADR" },
     "revpar": { "label": "RevPAR", "noun": "RevPAR" },
+    "lostLogged": { "label": "Sende të regjistruara", "noun": "sendet e gjetura të regjistruara" },
+    "lostReturned": { "label": "Kthyer te pronari", "noun": "pjesa e sendeve të kthyera te pronari" },
+    "lostOver": { "label": "Përtej afatit të ruajtjes", "noun": "sendet përtej afatit të ruajtjes" },
+    "firstPass": { "label": "Kalimi herën e parë", "noun": "kalimi herën e parë i dhomave" },
+    "inspections": { "label": "Inspektime dhomash", "noun": "inspektimet e dhomave" },
     "ideas": { "label": "Ide të reja", "noun": "idetë e reja" },
     "adopted": { "label": "Ide të zbatuara", "noun": "idetë e zbatuara" },
     "saving": { "label": "Kursime në muaj", "noun": "kursimet" },
@@ -109,7 +123,30 @@
     "overdue": { "label": "Veprime të vonuara", "noun": "veprimet e vonuara" }
   },
   "factors": { "availability": "disponueshmëria", "performance": "performanca", "quality": "cilësia" },
+  "parts": { "lostFound": "Sendet e gjetura", "inspection": "Inspektimi i dhomës", "maintenance": "Planifikuesi i mirëmbajtjes" },
   "sentences": {
+    "parts": {
+      "lostFound": {
+        "logged": { "one": "U regjistrua një send i gjetur ({before} në periudhën para).", "many": "U regjistruan {n} sende të gjetura ({before} në periudhën para)." },
+        "returned": "Kthyer te pronari deri në fund të periudhës: {trend}.",
+        "over": { "one": "Një send i hapur e ka kaluar afatin e ruajtjes: vendos për të tani.", "many": "{n} sende të hapura e kanë kaluar afatin e ruajtjes: vendos për to tani." },
+        "overNone": "Asnjë send i hapur nuk e ka kaluar afatin e ruajtjes."
+      },
+      "inspection": {
+        "lead": { "one": "Një inspektim dhome; kalimi herën e parë me pragun e kalimit {mark}: {trend}.", "many": "{n} inspektime dhomash; kalimi herën e parë me pragun e kalimit {mark}: {trend}." },
+        "fault": { "one": "Pika që dështon më shpesh është “{item}” ({zone}): një herë, {share} e mangësive.", "many": "Pika që dështon më shpesh është “{item}” ({zone}): {n} herë, {share} e mangësive." },
+        "faultNone": "Asnjë pikë nuk dështoi."
+      },
+      "maintenance": {
+        "pm": "Zbatimi i planit: {trend} ({a} nga {b} detyrat me afat u kryen në kohë).",
+        "pmNone": "Asnjë detyrë parandaluese nuk kishte afat në këtë periudhë.",
+        "overdue": { "one": "Në fund të periudhës një detyrë mirëmbajtjeje ishte me vonesë.", "many": "Në fund të periudhës {n} detyra mirëmbajtjeje ishin me vonesë." },
+        "overdueNone": "Në fund të periudhës asnjë detyrë mirëmbajtjeje nuk ishte me vonesë.",
+        "breakdowns": { "one": "Një prishje, {minutes} ndalesë ({before} në periudhën para).", "many": "{n} prishje, {minutes} ndalesë ({before} në periudhën para)." },
+        "breakdownsNone": "Asnjë prishje në këtë periudhë.",
+        "reliability": "Për {assets} pajisjet e planit: MTBF {mtbf} ({mtbfBefore} në periudhën para), MTTR {mttr} ({mttrBefore})."
+      }
+    },
     "trend": "{value} kundrejt {before} në periudhën para, {trend}",
     "noTrend": "{value}, pa periudhë para për krahasim",
     "targetMet": "Kjo arrin objektivin prej {target}.",
@@ -224,9 +261,24 @@
       ],
       "stops": { "planned": "Pushim", "breakdown": "Prishje", "setup": "Ndërrim produkti" }
     },
+    "maintenance": {
+      "assets": [
+        { "tag": "SRT-1", "name": "Renditësi 1", "crit": "A", "tasks": [[1, 30], [4, 120]], "breakdown": [0.1, 0.07] },
+        { "tag": "SRT-2", "name": "Renditësi 2", "crit": "A", "tasks": [[1, 30], [4, 120]], "breakdown": [0.09, 0.07] },
+        { "tag": "WRP-1", "name": "Mbështjellësi i paletave", "crit": "B", "tasks": [[2, 45]], "breakdown": [0.12, 0.09] },
+        { "tag": "FL-01", "name": "Pirunmbajtësi 1", "crit": "A", "tasks": [[1, 15], [8, 90]], "breakdown": [0.04, 0.03] },
+        { "tag": "FL-02", "name": "Pirunmbajtësi 2", "crit": "B", "tasks": [[1, 15], [8, 90]], "breakdown": [0.05, 0.03] }
+      ],
+      "late": [0.3, 0.12],
+      "open": [[0, 0], [2, 0]],
+      "minutes": [20, 150],
+      "causes": ["sensor", "jam", "wear", "electrical", "hydraulic"]
+    },
     "fiveS": { "score": [1.9, 3.0], "weak": 2 },
     "gemba": { "yes": [0.8, 0.87], "template": "warehouse", "layers": ["team-lead", "area-manager"], "walkers": ["Anna", "Besnik", "Dritan"] },
     "hotel": { "rooms": 120, "occ": [0.74, 0.79], "adr": [112, 115], "budgetOcc": "80", "budgetAdr": "118" },
+    "lostFound": { "perDay": 0.8, "categories": [["clothing", "low"], ["phone", "high"], ["glasses", "medium"], ["keys", "low"], ["documents", "high"], ["bag", "medium"], ["wallet", "high"], ["toy", "low"]], "returned": [0.45, 0.6], "contacted": 0.2, "decided": 0.85 },
+    "inspection": { "perDay": [5, 9], "floors": 4, "rooms": 30, "suites": 0.1, "weak": "bathroom-2", "weakRate": [0.3, 0.16], "fail": [0.025, 0.018], "critical": 0.02, "recheck": 0.8, "attendants": ["Marta", "Ilir", "Sara", "Jonas"], "inspector": "Elena" },
     "kaizen": [
       { "title": "Tabelë hijesh për veglat e mbështjelljes te porta 3", "waste": "Lëvizja", "area": "Ngarkimi", "by": "Marco", "created": [-11, 1], "adopted": [-9, 3], "saving": 120 },
       { "title": "Etiketa me ngjyra për kutitë sipas rrugës", "waste": "Defektet", "area": "Paketimi", "by": "Fatima", "created": [-9, 2], "adopted": [-6, 4], "saving": 350 },

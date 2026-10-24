@@ -60,6 +60,19 @@
 .mp-checklist legend { padding: 0 6px; }
 .mp-photo { min-width: 0; }
 
+/* From OEE: the breakdown stops of the OEE log, each with its asset, its cause and two buttons. */
+.mp-oee[hidden] { display: none; }
+.mp-oee .dl-log-head { align-items: center; }
+.mp-oee [data-oee-note]:empty, .mp-oee [data-oee-status]:empty { display: none; }
+.mp-oee-list { display: grid; gap: 0; margin: 4px 0 0; padding: 0; list-style: none; }
+.mp-oee-list:empty { display: none; }
+.mp-oee-item { display: grid; gap: 8px; padding: 10px 0; min-width: 0; }
+.mp-oee-item + .mp-oee-item { border-top: 1px dashed var(--line); }
+.mp-oee-what { margin: 0; font-size: 14px; font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+.mp-oee-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+.mp-oee-pick select { flex: 1 1 160px; min-width: 0; max-width: 100%; min-height: 36px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); font: inherit; font-size: 14px; }
+.mp-oee-pick select:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+
 /* Results. */
 .mp-head h2 span { color: var(--muted); font-weight: 700; }
 .mp-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
@@ -106,5 +119,5 @@
   .mp-print-note { width: 28%; }
   .mp-print-foot { margin: 10px 0 0; font-size: 10px; }
   .mp-print-sign { margin: 14px 0 0; }
-  .mp-setup, .mp-logbox, .mp-row-tools, .mp-cal-nav button { display: none !important; }
+  .mp-setup, .mp-logbox, .mp-oee, .mp-row-tools, .mp-cal-nav button { display: none !important; }
 }

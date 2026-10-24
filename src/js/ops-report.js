@@ -1,10 +1,12 @@
 (() => {
   // Operations Report: the weekly or monthly management report, written from what the other tools hold in this
   // browser. It has no log of its own: it reads Damage Control, Incomplete Control, the Night Audit Log, Delay Analyzer,
-  // Shift Handover, Safety Cross, OEE, the 5S Audit, Gemba Walk, Hotel KPIs, the Kaizen Board and the Action Tracker,
-  // sets every number against the period before and its target, and writes the sentences from the templates of the
-  // page's language. The arithmetic is in window.OpsReportMath; it counts the way each tool counts, and the tests hold
-  // it against the tools' own Math objects.
+  // Shift Handover, Safety Cross, OEE, the Maintenance Planner, the 5S Audit, Gemba Walk, Hotel KPIs, Lost & Found,
+  // Room Inspection, the Kaizen Board and the Action Tracker, sets every number against the period before and its
+  // target, and writes the sentences from the templates of the page's language. The arithmetic is in
+  // window.OpsReportMath; it counts the way each tool counts, and the tests hold it against the tools' own Math objects.
+  // For Lost & Found, Room Inspection and the Maintenance Planner it uses those Math objects themselves (the page loads
+  // their scripts, which stop before their page code), so a keep-until date, a re-check or a due date is the tool's own.
   const DAY = 864e5;
   const isIso = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
   const isObj = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
@@ -308,11 +310,98 @@
     };
   };
 
+  // Lost & Found: { rows: [{ date, category, value, steps: [{ status, date }] }], retLow, retMedium, retHigh, retDocs },
+  // counted with LostFoundMath and the retention rules of its data file (a typed setting wins, as in the register). The
+  // items logged in the period; of those, the share back with their owner by the end of the period (a step "returned" on
+  // or before it, so a report reads the same next month); and the open items past their keep-until date as the register
+  // stood at the end of the period.
+  const lostFound = (saved, range, tool) => {
+    const M = tool?.M, cfg = tool?.cfg;
+    if (!M || !isObj(cfg) || !Array.isArray(cfg.categories) || !isObj(cfg.retention)) return null;
+    const asOf = (row, day) => ({ ...row, steps: listOf(row.steps).filter((step) => isIso(step.date) && step.date <= day) });
+    const rows = listOf(saved?.rows).filter((row) => isIso(row.date) && row.date <= range.to).map((row) => asOf(row, range.to));
+    const rules = M.rules(cfg, isObj(saved) ? saved : {});
+    const logged = rows.filter((row) => inRange(row.date, range));
+    const over = rows.filter((row) => M.isOpen(row) && range.to > M.keepUntil(row, cfg, rules));
+    if (!logged.length && !over.length) return null;
+    const returned = logged.filter((row) => M.statusOf(row) === "returned").length;
+    return { logged: logged.length, returned, returnRate: logged.length ? returned / logged.length : null, over: over.length, open: rows.filter((row) => M.isOpen(row)).length, series: perSlot(range, logged) };
+  };
+
+  // Room Inspection: { rows: [{ date, time, room, template, answers }], threshold, custom }, scored with
+  // RoomInspectionMath: the checklist of each inspection (the team's own one where it was used), the pass mark saved in
+  // the tool, a failed critical item failing the room on its own, and a room inspected again on the day it failed being
+  // a re-check, left out of the first-time pass rate. The item that fails most counts each failed item once per
+  // inspection, as the tool's "Items that fail most".
+  const inspection = (saved, range, tool) => {
+    const M = tool?.M, cfg = tool?.cfg;
+    if (!M || !isObj(cfg) || !isObj(cfg.templates) || !Array.isArray(cfg.zones)) return null;
+    const zones = cfg.zones.map((zone) => zone.key);
+    const builtIn = Object.keys(cfg.templates);
+    const custom = isObj(saved?.custom) ? saved.custom : {};
+    const templateOf = (name) => (String(name).startsWith("custom-") && isObj(custom[name]) && isObj(custom[name].questions) ? custom[name] : cfg.templates[name] || cfg.templates[builtIn[0]]);
+    const typed = Number(saved?.threshold);
+    const threshold = typed >= 0.5 && typed <= 1 ? typed : cfg.threshold;
+    const itemsFor = (row) => M.itemsOf(templateOf(row.template), zones);
+    const all = M.annotate(listOf(saved?.rows).filter((row) => isIso(row.date) && text(row.room)), itemsFor, threshold);
+    const list = all.filter((row) => inRange(row.date, range));
+    if (!list.length) return null;
+    const total = M.overall(list);
+    const top = M.itemPareto(list)[0];
+    let fault = null;
+    if (top) {
+      const [template, qid] = top.key.split("|");
+      const item = M.itemsOf(templateOf(template), zones).find((entry) => entry.qid === qid);
+      fault = { name: item?.text || qid, zone: cfg.zones.find((zone) => zone.key === item?.zone)?.name || "", count: top.count, share: top.share };
+    }
+    const firsts = list.filter((row) => !row.recheck && row.pass !== null);
+    const tried = perSlot(range, firsts);
+    const passed = perSlot(range, firsts.filter((row) => row.pass));
+    return { inspections: list.length, first: total.first, firstPass: total.firstPass, rate: total.rate, threshold, fault, series: tried.map((n, i) => (n ? passed[i] / n : null)) };
+  };
+
+  // The Maintenance Planner: { assets: [{ id, tasks }], rows: [{ kind, asset, task, date, minutes }] }, counted with
+  // MaintenancePlannerMath. PM compliance: of the tasks due in the period, the share done within their tolerance, judged
+  // today (a task still open past its tolerance counts as due and not done), as the planner counts it. Overdue: the tasks
+  // past their due date as the plan stood at the end of the period (the log up to that day). Breakdowns and their
+  // downtime in the period. MTTR = total repair time / number of failures; MTBF = operating time / number of failures,
+  // where the operating time is the time of every asset in the plan over the period less the downtime. With fewer than
+  // two breakdowns there is not enough to say, as in the planner.
+  const maintenance = (saved, range, today, tool) => {
+    const M = tool?.M;
+    if (!M) return null;
+    const assets = listOf(saved?.assets).filter((asset) => text(asset.id));
+    if (!assets.length) return null;
+    const ids = new Set(assets.map((asset) => asset.id));
+    const rows = listOf(saved?.rows).filter((row) => isIso(row.date) && ids.has(row.asset));
+    const end = range.to < today ? range.to : today;
+    const tasks = assets.flatMap((asset) => listOf(asset.tasks).filter((task) => text(task.id)).map((task) => ({ asset, task })));
+    const eventsOf = (id, until = null) => rows.filter((row) => row.asset === id && (!until || row.date <= until));
+    const histories = tasks.map(({ asset, task }) => { const events = eventsOf(asset.id); return M.history(task, events, M.meterPoints(events)); });
+    const pm = M.compliance(histories, range.from, range.to, today);
+    const overdue = tasks.filter(({ asset, task }) => {
+      const events = eventsOf(asset.id, end);
+      return M.statusOf(M.nextDue(task, events, M.meterPoints(events)).due, end) === "overdue";
+    }).length;
+    const breakdowns = rows.filter((row) => row.kind === "breakdown" && inRange(row.date, range));
+    const logged = rows.filter((row) => inRange(row.date, range)).length;
+    if (!logged && !pm.scheduled && !overdue) return null;
+    const minutes = sum(breakdowns.map((row) => positive(row.minutes)));
+    const n = breakdowns.length;
+    const operating = assets.length * (between(range.from, range.to) + 1) * 24 - minutes / 60;
+    return {
+      assets: assets.length, tasks: tasks.length, scheduled: pm.scheduled, onTime: pm.onTime, pm: pm.rate, overdue, breakdowns: n, minutes,
+      mttr: n >= 2 ? minutes / n : null, mtbf: n >= 2 ? operating / n : null,
+      target: Number(tool.cfg?.target) > 0 && Number(tool.cfg.target) <= 1 ? Number(tool.cfg.target) : null,
+      series: perSlot(range, breakdowns, (row) => positive(row.minutes)),
+    };
+  };
+
   // Comparison ---------------------------------------------------------------------------------------------------------
   // A number against the period before and its target. better says which way is good: "higher", "lower" or "none" (a
   // count that is neither, such as the routes driven). A change smaller than the shown precision is no change.
-  const TOLERANCE = { int: 0.5, days: 0.5, share: 0.00005, pct: 0.0005, pct0: 0.005, euro: 0.005 };
-  const FLOOR = { int: 1, days: 1, share: 0.001, pct: 0.01, pct0: 0.01, euro: 1 };
+  const TOLERANCE = { int: 0.5, days: 0.5, share: 0.00005, pct: 0.0005, pct0: 0.005, euro: 0.005, minutes: 0.5, hours: 0.5 };
+  const FLOOR = { int: 1, days: 1, share: 0.001, pct: 0.01, pct0: 0.01, euro: 1, minutes: 1, hours: 1 };
   const compare = (metric) => {
     const { value, before, better = "none", target = null, format = "int" } = metric;
     const tol = TOLERANCE[format] ?? 0;
@@ -333,11 +422,15 @@
   };
 
   // The sections of the report, each only when its source holds data in the period. A metric: { key, value, before,
-  // target, better, format, minor } (minor numbers are shown, but never named as the period's best or worst).
-  const SOURCES = ["damage", "incomplete", "night", "delay", "safety", "oee", "fiveS", "gemba", "hotel", "kaizen", "actions", "handover"];
+  // target, better, format, minor, part } (minor numbers are shown, but never named as the period's best or worst; a
+  // part is a second tool inside a section: Lost & Found and Room Inspection in the hotel, the Maintenance Planner with
+  // the equipment). A section with parts shows when any of its tools holds data; section.data is its first tool's, or null.
+  const SOURCES = ["damage", "incomplete", "night", "delay", "safety", "oee", "maintenance", "fiveS", "gemba", "hotel", "lostFound", "roomInspection", "kaizen", "actions", "handover"];
   const sections = (src, range, before, opts = {}) => {
     const targets = isObj(opts.targets) ? opts.targets : {};
     const reasons = opts.reasons || [];
+    const tools = isObj(opts.tools) ? opts.tools : {};
+    const today = isIso(opts.today) ? opts.today : range.to;
     const both = (fn) => ({ now: fn(range), then: fn(before) });
     const metric = (key, now, then, pick, extra = {}) => ({ key, value: now ? pick(now) : null, before: then ? pick(then) : null, ...extra });
     const list = [];
@@ -384,12 +477,23 @@
     }
 
     const o = both((r) => equipment(src.oee, r, reasons, targets.oee));
-    if (o.now) {
+    const mp = both((r) => maintenance(src.maintenance, r, today, tools.maintenance));
+    if (o.now || mp.now) {
+      const part = { part: "maintenance" };
       list.push({
         key: "equipment", data: o.now, prev: o.then,
+        parts: mp.now ? { maintenance: { now: mp.now, then: mp.then } } : {},
         metrics: [
-          metric("oee", o.now, o.then, (x) => x.oee, { better: "higher", target: o.now.target, format: "pct" }),
-          ...["availability", "performance", "quality"].map((key) => metric(key, o.now, o.then, (x) => x[key], { better: "higher", format: "pct0", minor: true })),
+          ...(o.now ? [
+            metric("oee", o.now, o.then, (x) => x.oee, { better: "higher", target: o.now.target, format: "pct" }),
+            ...["availability", "performance", "quality"].map((key) => metric(key, o.now, o.then, (x) => x[key], { better: "higher", format: "pct0", minor: true })),
+          ] : []),
+          ...(mp.now ? [
+            metric("pm", mp.now, mp.then, (x) => x.pm, { better: "higher", target: mp.now.target, format: "pct0", ...part }),
+            metric("pmOverdue", mp.now, mp.then, (x) => x.overdue, { better: "lower", format: "int", minor: true, ...part }),
+            metric("breakdowns", mp.now, mp.then, (x) => x.breakdowns, { better: "lower", format: "int", minor: true, ...part }),
+            metric("downtime", mp.now, mp.then, (x) => x.minutes, { better: "lower", format: "minutes", minor: true, ...part }),
+          ] : []),
         ],
       });
     }
@@ -404,14 +508,30 @@
     }
 
     const h = both((r) => hotel(src.hotel, r));
-    if (h.now) {
-      const b = h.now.budget;
+    const lf = both((r) => lostFound(src.lostFound, r, tools.lostFound));
+    const ri = both((r) => inspection(src.roomInspection, r, tools.roomInspection));
+    if (h.now || lf.now || ri.now) {
+      const b = h.now?.budget;
+      const parts = {};
+      if (lf.now) parts.lostFound = { now: lf.now, then: lf.then };
+      if (ri.now) parts.inspection = { now: ri.now, then: ri.then };
       list.push({
-        key: "hotel", data: h.now, prev: h.then,
+        key: "hotel", data: h.now, prev: h.then, parts,
         metrics: [
-          metric("revpar", h.now, h.then, (x) => x.revpar, { better: "higher", target: b.revpar, format: "euro" }),
-          metric("occ", h.now, h.then, (x) => x.occ, { better: "higher", target: b.occ, format: "pct" }),
-          metric("adr", h.now, h.then, (x) => x.adr, { better: "higher", target: b.adr, format: "euro" }),
+          ...(h.now ? [
+            metric("revpar", h.now, h.then, (x) => x.revpar, { better: "higher", target: b.revpar, format: "euro" }),
+            metric("occ", h.now, h.then, (x) => x.occ, { better: "higher", target: b.occ, format: "pct" }),
+            metric("adr", h.now, h.then, (x) => x.adr, { better: "higher", target: b.adr, format: "euro" }),
+          ] : []),
+          ...(lf.now ? [
+            metric("lostLogged", lf.now, lf.then, (x) => x.logged, { better: "none", format: "int", minor: true, part: "lostFound" }),
+            metric("lostReturned", lf.now, lf.then, (x) => x.returnRate, { better: "higher", format: "pct0", minor: true, part: "lostFound" }),
+            metric("lostOver", lf.now, lf.then, (x) => x.over, { better: "lower", format: "int", minor: true, part: "lostFound" }),
+          ] : []),
+          ...(ri.now ? [
+            metric("firstPass", ri.now, ri.then, (x) => x.rate, { better: "higher", format: "pct0", part: "inspection" }),
+            metric("inspections", ri.now, ri.then, (x) => x.inspections, { better: "none", format: "int", minor: true, part: "inspection" }),
+          ] : []),
         ],
       });
     }
@@ -498,7 +618,9 @@
     };
   };
   const EXAMPLE_DAYS = 98;
-  const exampleSources = (ex, today) => {
+  // tools holds the data files the Lost & Found, Room Inspection and Maintenance Planner parts need (the retention, the
+  // checklists); without them those parts of the example stay empty.
+  const exampleSources = (ex, today, tools = {}) => {
     const rand = rng(Number(ex.seed) || 7);
     const first = addDays(today, -(EXAMPLE_DAYS - 1));
     const days = Array.from({ length: EXAMPLE_DAYS }, (_, i) => addDays(first, i));
@@ -603,6 +725,96 @@
       history.unshift({ closedAt: `${date}T${shift === shifts[0] ? "13" : "21"}:30:00.000Z`, handover: { date, shift, issues }, text: "" });
     }));
 
+    // Lost & Found: about one find a day; most go back to their owner within days, some guests are contacted and never
+    // come, and an item nobody claimed goes where its category goes once its keep-until date has passed, except a few
+    // that wait too long. The keep-until dates are those of the register (LostFoundMath with its data file).
+    const lostRows = [];
+    const lfTool = tools.lostFound;
+    if (ex.lostFound && lfTool?.M && lfTool.cfg) {
+      const L = ex.lostFound;
+      const rules = lfTool.M.rules(lfTool.cfg, {});
+      days.forEach((date) => {
+        const n = Math.floor(rand() * (L.perDay * 2 + 1));
+        for (let k = 0; k < n; k++) {
+          const [category, value] = lead(L.categories);
+          const row = { id: `ex-lf${lostRows.length}`, date, time: "", area: "", room: "", category, what: "", value, foundBy: "", place: "", tag: "", guest: "", steps: [], delivery: {} };
+          const step = (status, day) => { if (day <= today) row.steps.push({ status, date: day, by: "" }); };
+          const r = rand();
+          if (r < lerp(L.returned, share(date))) { const contact = Math.floor(rand() * 2); step("contacted", addDays(date, contact)); step("returned", addDays(date, contact + 1 + Math.floor(rand() * 5))); }
+          else if (r < lerp(L.returned, share(date)) + L.contacted) step("contacted", addDays(date, 1));
+          const until = lfTool.M.keepUntil(row, lfTool.cfg, rules);
+          if (lfTool.M.isOpen(row) && until < today && rand() < L.decided) step(lfTool.M.categoryOf(lfTool.cfg, category).decision, addDays(until, 1 + Math.floor(rand() * 3)));
+          lostRows.push(row);
+        }
+      });
+    }
+
+    // Room Inspection: the supervisor checks some rooms every day with the hotel's own checklists; one item fails more
+    // often than the rest (and less so as the weeks go by), a failed room is mostly inspected again the same day.
+    const inspectionRows = [];
+    const riCfg = tools.roomInspection?.cfg;
+    const riM = tools.roomInspection?.M;
+    if (ex.inspection && riM && riCfg?.templates) {
+      const I = ex.inspection;
+      const zones = riCfg.zones.map((zone) => zone.key);
+      days.forEach((date) => {
+        const count = I.perDay[0] + Math.floor(rand() * (I.perDay[1] - I.perDay[0] + 1));
+        let minutes = 9 * 60 + 30;
+        for (let k = 0; k < count; k++) {
+          minutes += 15 + Math.floor(rand() * 25);
+          const floor = 1 + Math.floor(rand() * I.floors);
+          const suite = rand() < I.suites;
+          const template = suite ? "suite" : "standard";
+          const items = riM.itemsOf(riCfg.templates[template], zones);
+          const answers = {};
+          items.forEach((item) => {
+            const p = item.qid === I.weak ? lerp(I.weakRate, share(date)) : item.critical ? I.critical : lerp(I.fail, share(date));
+            answers[item.qid] = rand() < p ? "fail" : "pass";
+          });
+          const base = { date, room: `${floor}${String(1 + Math.floor(rand() * I.rooms)).padStart(2, "0")}`, floor: String(floor), roomType: suite ? "suite" : "double", attendant: pick(I.attendants), inspector: I.inspector, kind: "", template, notes: {}, flags: {}, sent: {} };
+          inspectionRows.push({ ...base, id: `ex-ri${inspectionRows.length}`, time: hhmm(minutes), answers });
+          const failed = riM.verdict(riM.score(answers, items), riCfg.threshold).pass === false;
+          if (failed && rand() < I.recheck) inspectionRows.push({ ...base, id: `ex-ri${inspectionRows.length}`, time: hhmm(Math.min(minutes + 30, 23 * 60)), answers: Object.fromEntries(items.map((item) => [item.qid, "pass"])) });
+        }
+      });
+    }
+
+    // The Maintenance Planner: the machines of the OEE example and the forklifts, each with weekly or four-weekly
+    // tasks done on their day or a few days late (late less often as the weeks go by), two tasks whose last date is left
+    // open, and the breakdowns of each asset.
+    const mpAssets = [];
+    const mpRows = [];
+    if (ex.maintenance) {
+      const P = ex.maintenance;
+      const mid = (prefix) => `ex-mp${prefix}${mpRows.length}`;
+      P.assets.forEach((spec, a) => {
+        const asset = { id: `ex-m${a}`, tag: spec.tag, name: spec.name, type: "other", area: "", crit: spec.crit || "B", supplier: "", contact: "", tasks: [] };
+        spec.tasks.forEach(([weeks, minutes], t) => {
+          const task = { id: `ex-m${a}-t${t}`, text: spec.tag, every: weeks, unit: "weeks", hours: 0, who: "internal", minutes, statutory: false, checklist: [], last: addDays(first, -Math.floor(rand() * weeks * 7)), lastHours: null, start: "" };
+          asset.tasks.push(task);
+          const open = P.open.some(([i, j]) => i === a && j === t);
+          let last = task.last;
+          for (let due = addDays(last, weeks * 7), guard = 0; due < today && guard < 200; due = addDays(last, weeks * 7), guard++) {
+            // A task left open: its last date before today is not done, so it is overdue now.
+            if (open && addDays(due, weeks * 7) >= today) break;
+            const late = rand() < lerp(P.late, share(due));
+            const done = addDays(due, late ? 2 + Math.floor(rand() * 7) : -Math.floor(rand() * 2));
+            if (done > today) break;
+            mpRows.push({ id: mid("d"), kind: "done", asset: asset.id, task: task.id, date: done, by: "", note: "", minutes, parts: 0, hours: null, checked: [] });
+            last = done;
+          }
+        });
+        // Breakdowns at the asset's rate (per day), half to one and a half times the mean gap apart; a Sunday's waits
+        // for Monday.
+        for (let date = addDays(first, Math.floor(rand() / lerp(spec.breakdown, 0))); date <= today; date = addDays(date, Math.max(1, Math.round((0.5 + rand()) / lerp(spec.breakdown, share(date)))))) {
+          const day = weekday(date) === 6 ? addDays(date, 1) : date;
+          if (day <= today) mpRows.push({ id: mid("b"), kind: "breakdown", asset: asset.id, date: day, by: "", note: "", minutes: 5 * Math.round((P.minutes[0] + rand() * (P.minutes[1] - P.minutes[0])) / 5), cause: lead(P.causes), cost: 0 });
+        }
+        mpAssets.push(asset);
+      });
+      mpRows.sort((x, y) => x.date.localeCompare(y.date));
+    }
+
     const ws = working.filter((iso) => iso <= today);
     return {
       damage: defectLog(ex.damage, ws, shifts),
@@ -611,6 +823,9 @@
       delay: { arrivalGrace: ex.delay.grace, departureGrace: "10", target: ex.delay.target, routes: "", rows: delayRows },
       safety: { rows: safetyRows },
       oee: { equipment: ex.oee.machines.map((m) => ({ name: m.name, rate: m.rate })), rows: oeeRows },
+      maintenance: { assets: mpAssets, rows: mpRows },
+      lostFound: { rows: lostRows },
+      roomInspection: { rows: inspectionRows },
       fiveS: { rows: fiveRows },
       gemba: { rows: gembaRows },
       hotel: { rooms: String(ex.hotel.rooms), budgetOcc: ex.hotel.budgetOcc, budgetAdr: ex.hotel.budgetAdr, budgetRevpar: "", rows: hotelRows },
@@ -630,14 +845,17 @@
     "shift-handover": listOf(src.handover?.history).filter((entry) => isObj(entry.handover) && inRange(entry.handover.date, range)).length,
     "safety-cross": listOf(src.safety?.rows).filter((row) => inRange(row.date, range)).length,
     oee: listOf(src.oee?.rows).filter((row) => inRange(row.date, range)).length,
+    "maintenance-planner": listOf(src.maintenance?.rows).filter((row) => inRange(row.date, range)).length,
     "five-s-audit": listOf(src.fiveS?.rows).filter((row) => inRange(row.date, range)).length,
     "gemba-walk": listOf(src.gemba?.rows).filter((row) => inRange(row.date, range)).length,
     "hotel-kpis": listOf(src.hotel?.rows).filter((row) => inRange(row.date, range)).length,
+    "lost-found": listOf(src.lostFound?.rows).filter((row) => inRange(row.date, range)).length,
+    "room-inspection": listOf(src.roomInspection?.rows).filter((row) => inRange(row.date, range)).length,
     "kaizen-board": listOf(src.kaizen?.rows).filter((row) => inRange(row.date, range) || inRange(row.adopted, range)).length,
     "action-tracker": listOf(src.actions).filter((row) => inRange(row.created, range) || inRange(row.closed, range)).length,
   });
-  const holdsAnything = (src) => ["damage", "incomplete", "night", "delay", "safety", "oee", "fiveS", "gemba", "hotel", "kaizen"].some((key) => listOf(src[key]?.rows).length)
-    || listOf(src.actions).length > 0 || listOf(src.handover?.history).length > 0;
+  const holdsAnything = (src) => ["damage", "incomplete", "night", "delay", "safety", "oee", "maintenance", "fiveS", "gemba", "hotel", "lostFound", "roomInspection", "kaizen"].some((key) => listOf(src[key]?.rows).length)
+    || listOf(src.maintenance?.assets).length > 0 || listOf(src.actions).length > 0 || listOf(src.handover?.history).length > 0;
 
   // A sentence template: a string, or { one, many } chosen by n; {name} placeholders filled from vars.
   const fill = (template, vars = {}, n = null) => {
@@ -647,7 +865,7 @@
 
   window.OpsReportMath = {
     KINDS, SOURCES, period, slotsOf, mondayOf, monthEnd, addDays, percent, minutesLate, defects, delivery, safety, oeeTarget, oeeEntry, oeeCombine,
-    equipment, fiveSOverall, workplace, budgetOf, hotel, improvement, actions, compare, sections, highlights, rng, exampleSources, counts, holdsAnything, fill,
+    equipment, maintenance, fiveSOverall, workplace, budgetOf, hotel, lostFound, inspection, improvement, actions, compare, sections, highlights, rng, exampleSources, counts, holdsAnything, fill,
   };
 
   // The page -------------------------------------------------------------------------------------------------------------
@@ -663,6 +881,15 @@
   const cfg = JSON.parse(dataEl.textContent);
   let reasons = [];
   try { reasons = JSON.parse(document.getElementById("ops-report-oee")?.textContent || "[]"); } catch { reasons = []; }
+  // The data files of Lost & Found, Room Inspection and the Maintenance Planner in this language (retention, checklists,
+  // the PM target), with the Math objects of their scripts.
+  let toolData = {};
+  try { toolData = JSON.parse(document.getElementById("ops-report-tools")?.textContent || "{}") || {}; } catch { toolData = {}; }
+  const tools = {
+    lostFound: window.LostFoundMath && isObject(toolData.lostFound) ? { M: window.LostFoundMath, cfg: toolData.lostFound } : null,
+    roomInspection: window.RoomInspectionMath && isObject(toolData.roomInspection) ? { M: window.RoomInspectionMath, cfg: toolData.roomInspection } : null,
+    maintenance: window.MaintenancePlannerMath ? { M: window.MaintenancePlannerMath, cfg: isObject(toolData.maintenance) ? toolData.maintenance : {} } : null,
+  };
   const KEY = cfg.storageKey;
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;
   const state = loadState(KEY, { period: "lastWeek", from: "", to: "", exampleOff: false });
@@ -692,8 +919,8 @@
   };
   const readSources = () => ({
     damage: logOf("damage-control"), incomplete: logOf("incomplete-control"), night: logOf("night-audit"), delay: logOf("delay-analyzer"),
-    safety: logOf("safety-cross"), oee: logOf("oee"), fiveS: logOf("five-s-audit"), gemba: logOf("gemba-walk"), hotel: logOf("hotel-kpis"),
-    kaizen: logOf("kaizen-board"), handover: logOf("shift-handover"),
+    safety: logOf("safety-cross"), oee: logOf("oee"), maintenance: logOf("maintenance-planner"), fiveS: logOf("five-s-audit"), gemba: logOf("gemba-walk"),
+    hotel: logOf("hotel-kpis"), lostFound: logOf("lost-found"), roomInspection: logOf("room-inspection"), kaizen: logOf("kaizen-board"), handover: logOf("shift-handover"),
     actions: Store ? Store.list() : (Array.isArray(read("sc-actions", {})?.rows) ? read("sc-actions", {}).rows : []),
     workplace: Workplace ? Workplace.get() : { site: "", areas: [], targets: {} },
   });
@@ -705,6 +932,8 @@
     if (format === "pct") return pct(value, 1);
     if (format === "pct0") return pct(value, 0);
     if (format === "euro") return euro.format(value);
+    if (format === "minutes") return fill(cfg.words.minutes, { n: int.format(Math.round(value)) });
+    if (format === "hours") return fill(cfg.words.hours, { n: int.format(Math.round(value)) });
     return int.format(Math.round(value));
   };
   const W = cfg.words;
@@ -718,10 +947,39 @@
   const ownersText = (owners) => names(owners.map((o) => o.owner || W.noOwner));
   const areaOwner = (src, area) => (src.workplace?.areas || []).find((a) => fold(a.name) === fold(area))?.owner || "";
 
-  // The sentence of each section, from the templates of the data file.
-  const sentence = (section) => {
+  // The sentence of each section, from the templates of the data file: the section's own, then one per part (a second
+  // tool in the section), which the page shows under the part's numbers and the text and Word file after the section's.
+  const PARTS = ["lostFound", "inspection", "maintenance"];
+  const partsOf = (section) => PARTS.filter((part) => section.parts?.[part]);
+  const partSentence = (section, part) => {
+    const S = cfg.sentences.parts[part];
+    const m = Object.fromEntries(section.metrics.filter((item) => item.part === part).map((item) => [item.key, item]));
+    const { now: d, then: b } = section.parts[part];
+    const out = [];
+    if (part === "lostFound") {
+      out.push(fill(S.logged, { n: int.format(d.logged), before: b ? int.format(b.logged) : "–" }, d.logged));
+      if (d.logged) out.push(fill(S.returned, { trend: trendText(m.lostReturned), n: int.format(d.returned) }));
+      out.push(d.over ? fill(S.over, { n: int.format(d.over) }, d.over) : S.overNone);
+    } else if (part === "inspection") {
+      out.push(fill(S.lead, { n: int.format(d.inspections), mark: pct(d.threshold, 0), trend: trendText(m.firstPass) }, d.inspections));
+      out.push(d.fault ? fill(S.fault, { item: d.fault.name, zone: d.fault.zone, n: int.format(d.fault.count), share: pct(d.fault.share, 0) }, d.fault.count) : S.faultNone);
+    } else if (part === "maintenance") {
+      out.push(d.pm === null ? S.pmNone : fill(S.pm, { trend: trendText(m.pm), a: int.format(d.onTime), b: int.format(d.scheduled) }), d.pm === null ? "" : targetText(m.pm));
+      out.push(d.overdue ? fill(S.overdue, { n: int.format(d.overdue) }, d.overdue) : S.overdueNone);
+      out.push(d.breakdowns ? fill(S.breakdowns, { n: int.format(d.breakdowns), minutes: show(d.minutes, "minutes"), before: b ? int.format(b.breakdowns) : "–" }, d.breakdowns) : S.breakdownsNone);
+      if (d.mtbf !== null) {
+        out.push(fill(S.reliability, {
+          assets: int.format(d.assets), mtbf: show(d.mtbf, "hours"), mttr: show(d.mttr, "minutes"),
+          mtbfBefore: b && b.mtbf !== null ? show(b.mtbf, "hours") : "–", mttrBefore: b && b.mttr !== null ? show(b.mttr, "minutes") : "–",
+        }));
+      }
+    }
+    return out.filter(Boolean).join(" ");
+  };
+  const sentence = (section) => [ownSentence(section), ...partsOf(section).map((part) => partSentence(section, part))].filter(Boolean).join(" ");
+  const ownSentence = (section) => {
     const S = cfg.sentences;
-    const m = Object.fromEntries(section.metrics.map((item) => [item.key, item]));
+    const m = Object.fromEntries(section.metrics.filter((item) => !item.part).map((item) => [item.key, item]));
     const d = section.data;
     const parts = [];
     if (section.key === "safety") {
@@ -739,6 +997,7 @@
         parts.push(d.late ? fill(S.delivery.late, { late: int.format(d.late), minutes: int.format(Math.round(d.minutes)) }, d.late) : S.delivery.none);
       }
     } else if (section.key === "equipment") {
+      if (!d) return "";
       parts.push(fill(S.equipment.lead, { trend: trendText(m.oee) }), targetText(m.oee));
       if (d.machines.length > 1) parts.push(fill(S.equipment.machine, { machine: d.lowest.name, low: pct(d.lowest.oee, 1), factor: `${cfg.factors[d.lowest.factor]} ${pct(d.lowest[d.lowest.factor], 0)}` }));
     } else if (section.key === "workplace") {
@@ -748,6 +1007,7 @@
       }
       if (m.gemba) parts.push(fill(S.workplace.gemba, { trend: trendText(m.gemba) }), targetText(m.gemba));
     } else if (section.key === "hotel") {
+      if (!d) return "";
       parts.push(fill(S.hotel.lead, { trend: trendText(m.revpar) }), targetText(m.revpar));
       parts.push(fill(S.hotel.mix, { occ: show(d.occ, "pct"), adr: show(d.adr, "euro") }));
     } else if (section.key === "improvement") {
@@ -827,6 +1087,14 @@
     } else if (section.key === "delivery") {
       if (d.partial) svg = CK.bars(labels.map((name, i) => ({ label: name, value: d.lateSeries[i] })), { title, unit: label("late") });
       else svg = CK.bars(labels.map((name, i) => ({ label: name, value: d.series[i] ?? 0 })).filter((item, i) => d.series[i] !== null), { title, unit: label("onTime"), yMax: 1, format: (v) => pct(v, 0), target: d.target ?? undefined, highlight: (item) => d.target !== null && item.value < d.target - 1e-9 });
+    } else if (section.key === "equipment" && !d) {
+      const mp = section.parts.maintenance.now;
+      if (mp.minutes > 0) svg = CK.bars(labels.map((name, i) => ({ label: name, value: mp.series[i] })), { title, unit: label("downtime"), format: (v) => int.format(Math.round(v)) });
+    } else if (section.key === "hotel" && !d) {
+      const ri = section.parts.inspection?.now;
+      const lf = section.parts.lostFound?.now;
+      if (ri) svg = CK.bars(labels.map((name, i) => ({ label: name, value: ri.series[i] ?? 0 })).filter((item, i) => ri.series[i] !== null), { title, unit: label("firstPass"), yMax: 1, format: (v) => pct(v, 0) });
+      else if (lf?.logged) svg = CK.bars(labels.map((name, i) => ({ label: name, value: lf.series[i] })), { title, unit: label("lostLogged") });
     } else if (section.key === "equipment") {
       svg = CK.bars(d.machines.map((m) => ({ label: m.name, value: m.oee ?? 0, tip: `${m.name}: OEE ${pct(m.oee ?? 0, 1)} · ${cfg.factors.availability} ${pct(m.availability ?? 0, 0)} · ${cfg.factors.performance} ${pct(m.performance ?? 0, 0)} · ${cfg.factors.quality} ${pct(m.quality ?? 0, 0)}` })), { title, unit: "OEE", yMax: 1, format: (v) => pct(v, 0), target: d.target, highlight: (item) => item.value < d.target - 1e-9 });
     } else if (section.key === "workplace") {
@@ -846,7 +1114,7 @@
     const src = example || readSources();
     const range = period(state.period, today(), { from: state.from, to: state.to });
     const targets = { ...(src.workplace?.targets || {}) };
-    const list = sections(src, range, range.before, { targets, reasons, partialDelay: example ? false : Boolean(partialRouteLog?.(src.delay)) });
+    const list = sections(src, range, range.before, { targets, reasons, tools, today: today(), partialDelay: example ? false : Boolean(partialRouteLog?.(src.delay)) });
     return { src, range, list, high: highlights(list), counts: counts(src, range), before: counts(src, range.before) };
   };
 
@@ -979,14 +1247,26 @@
     model.list.forEach((section) => {
       const box = el("section", `or-section or-${section.key}`);
       box.append(el("h3", "or-section-title", cfg.sections[section.key]));
-      if (section.metrics.length) {
+      const statsOf = (metrics) => {
         const stats = el("div", "or-stats");
-        section.metrics.forEach((m) => stats.append(tile(m)));
-        box.append(stats);
-      }
+        metrics.forEach((m) => stats.append(tile(m)));
+        return stats;
+      };
+      const own = section.metrics.filter((m) => !m.part);
+      if (own.length) box.append(statsOf(own));
       const chart = chartOf(section, range);
       if (chart) box.append(chart);
-      box.append(el("p", "or-sentence", sentence(section)));
+      const said = ownSentence(section);
+      if (said || !partsOf(section).length) box.append(el("p", "or-sentence", said));
+      // A second tool in the section: its name, its numbers and its sentence, laid out as a section of its own.
+      partsOf(section).forEach((part) => {
+        const sub = el("div", `or-section or-part or-part-${part}`);
+        sub.append(el("h4", "kicker or-part-title", cfg.parts[part]));
+        const metrics = section.metrics.filter((m) => m.part === part);
+        if (metrics.length) sub.append(statsOf(metrics));
+        sub.append(el("p", "or-sentence", partSentence(section, part)));
+        box.append(sub);
+      });
       report.append(box);
     });
 
@@ -1077,7 +1357,7 @@
   }));
 
   const loadExample = () => {
-    example = exampleSources(cfg.example, today());
+    example = exampleSources(cfg.example, today(), tools);
     render();
   };
   exampleButton?.addEventListener("click", () => {
@@ -1099,6 +1379,6 @@
   window.addEventListener("storage", (event) => { if (!event.key || event.key.startsWith("sc-")) render(); });
 
   // A first visit with nothing in this browser opens on the example; real work in any tool replaces it.
-  if (!state.exampleOff && firstVisit(KEY) && !holdsAnything(readSources())) example = exampleSources(cfg.example, today());
+  if (!state.exampleOff && firstVisit(KEY) && !holdsAnything(readSources())) example = exampleSources(cfg.example, today(), tools);
   render();
 })();

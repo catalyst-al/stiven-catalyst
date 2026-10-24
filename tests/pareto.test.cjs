@@ -223,3 +223,26 @@ test('spellings of one cause fold together, and causes in other scripts stay apa
   assert.equal(new Set(names.map(Pareto.fold)).size, 3, 'three Cyrillic causes are three causes');
   assert.notEqual(Pareto.fold('Καθυστέρηση'), '', 'Greek letters are kept');
 });
+
+test('the Room Inspection hand-off: checklist items counted once per row, the zone as the filter, in the housekeeping template', () => {
+  // The shape room-inspection.js puts into sessionStorage "sc-pareto-handoff".
+  const handoff = {
+    template: 'housekeeping',
+    headers: ['Date', 'Zone', 'Room', 'Cause', 'Count', 'Floor', 'Note'],
+    rows: [
+      ['2026-10-20', 'Bathroom', '412', 'No hair in the shower', '1', '4', ''],
+      ['2026-10-20', 'Bathroom', '413', 'No hair in the shower', '1', '4', 'basin'],
+      ['2026-10-21', 'Bed', '305', 'Bed made to the standard', '1', '3', ''],
+      ['2026-10-21', 'Bathroom', '305', 'Mirror without streaks', '1', '3', ''],
+    ],
+    map: { category: 3, count: 4, value: -1, date: 0, filter: 1 },
+    measure: 'count',
+  };
+  assert.ok(data.templates.some((t) => t.id === handoff.template && t.group === 'hotel'), 'the template exists');
+  const table = { hasHeader: true, rows: handoff.rows };
+  const all = run(table, { map: handoff.map, measure: handoff.measure });
+  assert.deepEqual(plain(all.items.map((item) => [item.key, item.amount])), [['No hair in the shower', 2], ['Bed made to the standard', 1], ['Mirror without streaks', 1]]);
+  const bathroom = run(table, { map: handoff.map, measure: handoff.measure, filterValue: 'bathroom' });
+  assert.equal(bathroom.used, 3);
+  assert.deepEqual(plain(bathroom.items.map((item) => item.key)), ['No hair in the shower', 'Mirror without streaks']);
+});

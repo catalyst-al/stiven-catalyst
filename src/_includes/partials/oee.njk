@@ -158,6 +158,7 @@
       {%- for tip in cfg.tips %}
       <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
       {%- endfor %}
+      <li><strong>{{ "A machine broke down?" | t(lang) }}</strong> {{ "Its breakdown stops wait in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/maintenance-planner/' | local(lang) }}" data-planner-link>{{ "Maintenance Planner" | t(lang) }}</a>{{ ", to be taken over as breakdowns of the asset with their minutes and cause, so MTBF and MTTR count them." | t(lang) }}</li>
       <li><strong>{{ "Attack the biggest loss." | t(lang) }}</strong> {{ "One loss usually carries most of the gap. Take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "and give the countermeasure an owner and a date in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
     </ul>
     <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>

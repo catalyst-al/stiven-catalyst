@@ -549,12 +549,14 @@
     }
     return lines.join("\n");
   };
-  // The failed items for Pareto 80/20, one row per fault, in the columns of its housekeeping template.
+  // The faults of the chosen period for Pareto 80/20, in its housekeeping template: one row per failed item and
+  // inspection (an item counts once per inspection, as in "Items that fail most"), the cause is the checklist item, and
+  // its zone is the second column, which Pareto offers as the filter (the bathroom alone, say). The floor goes along.
   const paretoTable = (r) => () => ({
     source: cfg.text.tool,
     template: "housekeeping",
-    headers: [tx("Date"), tx("Floor"), tx("Room"), tx("Cause"), tx("Count"), tx("Note")],
-    rows: r.list.flatMap((row) => row.s.failed.map((qid) => [row.date, row.floor, row.room, itemText(row.template, qid), "1", row.notes[qid] || ""])),
+    headers: [tx("Date"), tx("Zone"), tx("Room"), tx("Cause"), tx("Count"), tx("Floor"), tx("Note")],
+    rows: r.list.flatMap((row) => row.s.failed.map((qid) => [row.date, zoneOf[zoneOfQid(qid)]?.name || "", row.room, itemText(row.template, qid), "1", row.floor, row.notes[qid] || ""])),
     map: { category: 3, count: 4, value: -1, date: 0, filter: 1 },
     measure: "count",
   });

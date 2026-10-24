@@ -273,12 +273,46 @@ test('an inspection: the room picks its checklist and attendant, a fault opens i
   click(w, pareto);
   const handoff = JSON.parse(w.sessionStorage.getItem('sc-pareto-handoff'));
   assert.equal(handoff.template, 'housekeeping');
-  assert.deepEqual(handoff.headers, ['Date', 'Floor', 'Room', 'Cause', 'Count', 'Note']);
+  assert.deepEqual(handoff.headers, ['Date', 'Zone', 'Room', 'Cause', 'Count', 'Floor', 'Note']);
   assert.equal(handoff.rows.length, 2);
-  assert.deepEqual(handoff.map, { category: 3, count: 4, value: -1, date: 0, filter: 1 });
+  assert.deepEqual(handoff.map, { category: 3, count: 4, value: -1, date: 0, filter: 1 }, 'the zone is the filter column');
+  assert.equal(handoff.measure, 'count');
+  const [tapRow, hairRow] = handoff.rows;
+  assert.deepEqual([tapRow[1], tapRow[2], tapRow[4], tapRow[5], tapRow[6]], ['Bathroom', '412', '1', '4', 'Shower tap drips']);
+  assert.match(tapRow[3], /^Tap, drain and flush work/);
+  assert.deepEqual([hairRow[1], hairRow[2], hairRow[3], hairRow[5]], ['Bathroom', '413', 'No hair in the shower, bath, basin or on the floor', '4']);
   const whys = [...results.querySelectorAll('a')].find((a) => /5 Whys/.test(a.textContent));
   assert.equal(new URL(whys.href).pathname, '/tools/five-whys/');
   assert.equal(new URL(whys.href).searchParams.get('problem'), 'Room inspection: “No hair in the shower, bath, basin or on the floor” fails most often (1 ×)');
+});
+
+test('the Pareto hand-off of the example: every fault of the period once per inspection, the checklist item as the cause, its zone beside it', () => {
+  for (const lang of ['en', 'de']) {
+    const w = load({ lang });
+    const d = w.document;
+    const results = d.querySelector('[data-results]');
+    const cfg = read(DATA[lang]);
+    const pareto = [...results.querySelectorAll('a')].find((a) => /Pareto/.test(a.textContent));
+    assert.match(pareto.href, lang === 'de' ? /\/de\/tools\/pareto\/$/ : /\/tools\/pareto\/$/);
+    click(w, pareto);
+    const handoff = JSON.parse(w.sessionStorage.getItem('sc-pareto-handoff'));
+    // The example is two weeks, so the 30 days of the period hold all of it; the faults are those of the result.
+    const M = w.RoomInspectionMath;
+    const ex = M.exampleData(cfg.example, cfg.templates, ZONES, '2026-10-24', cfg.threshold);
+    const itemsFor = (row) => M.itemsOf(cfg.templates[row.template], ZONES);
+    const all = M.annotate(ex.rows, itemsFor, cfg.threshold);
+    const faults = all.reduce((sum, row) => sum + row.s.failed.length, 0);
+    assert.equal(handoff.rows.length, faults, `${lang}: one row per failed item and inspection`);
+    assert.equal(handoff.rows.length, plain(M.itemPareto(all)).reduce((sum, p) => sum + p.count, 0), 'the same count as the items that fail most');
+    const zoneNames = cfg.zones.map((z) => z.name);
+    const texts = new Set(Object.values(cfg.templates).flatMap((t) => Object.values(t.questions).flat().map((q) => (typeof q === 'string' ? q : q.text))));
+    assert.ok(handoff.rows.every((row) => zoneNames.includes(row[1]) && texts.has(row[3]) && row[4] === '1'), `${lang}: a zone and a checklist item on every row`);
+    // The top cause in Pareto is the item the result names first.
+    const counts = new Map();
+    handoff.rows.forEach((row) => counts.set(row[3], (counts.get(row[3]) || 0) + 1));
+    const [topText] = [...counts].sort((a, b) => b[1] - a[1])[0];
+    assert.equal(results.querySelector('.dl-focus h3').firstChild.textContent, topText);
+  }
 });
 
 test('German page: links keep /de/, the texts are translated and the log removes with undo', () => {

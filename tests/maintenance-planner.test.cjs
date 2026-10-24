@@ -11,6 +11,7 @@ const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
+const close = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-9, `${message}: ${a} vs ${b}`);
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const DATA = { en: 'src/_data/maintenancePlanner.json', de: 'src/_data/de/maintenancePlanner.json', sq: 'src/_data/sq/maintenancePlanner.json' };
 const TODAY = '2026-10-24';
@@ -21,7 +22,8 @@ env.addFilter('t', (text) => text);
 env.addFilter('local', (url, lang) => (lang && lang !== 'en' ? `/${lang}${url}` : url));
 env.addFilter('assetUrl', (url) => url);
 env.addFilter('scriptJson', (value) => JSON.stringify(value).replace(/</g, '\\u003c'));
-const partial = (lang) => env.render('partials/maintenance-planner.njk', { cfg: read(DATA[lang]), lang: lang === 'en' ? undefined : lang })
+const OEE = { en: 'src/_data/oee.json', de: 'src/_data/de/oee.json', sq: 'src/_data/sq/oee.json' };
+const partial = (lang) => env.render('partials/maintenance-planner.njk', { cfg: read(DATA[lang]), lang: lang === 'en' ? undefined : lang, oee: read(OEE.en), de: { oee: read(OEE.de) }, sq: { oee: read(OEE.sq) } })
   .replace(/<script src=[^>]*><\/script>/g, '');
 
 const load = ({ lang = 'en', page = true, now = `${TODAY}T09:30:00Z`, storage = {} } = {}) => {
@@ -172,6 +174,140 @@ test('the calendar projection, MTBF and MTTR, the Pareto of the downtime and the
   assert.match(text, /DTSTAMP:20261024T080000Z/);
   assert.match(text, /END:VCALENDAR\r\n$/);
   assert.ok(text.split('\r\n').every((line) => line.length <= 75), 'long lines are folded');
+});
+
+test('MTBF and MTTR by hand: operating time over failures, repair time over failures, with the downtime taken out', () => {
+  const M = math();
+  // 30 days from 1 to 30 October; three breakdowns of 30, 60 and 90 minutes (180 in all).
+  const rel = plain(M.reliability([
+    { asset: 'a', date: '2026-10-03', minutes: 30, cost: 0, cause: 'jam' },
+    { asset: 'a', date: '2026-10-12', minutes: 60, cost: 0, cause: 'sensor' },
+    { asset: 'a', date: '2026-10-25', minutes: 90, cost: 0, cause: 'sensor' },
+    { asset: 'a', date: '2026-11-02', minutes: 500, cost: 0, cause: 'wear' },
+  ], '2026-10-01', '2026-10-30'));
+  assert.equal(rel.length, 1);
+  assert.deepEqual([rel[0].n, rel[0].minutes, rel[0].topCause], [3, 180, 'sensor'], 'the one after the period is left out');
+  assert.equal(rel[0].mttr, 60, 'MTTR = 180 min / 3');
+  // MTBF = operating time / failures: 30 days less the 3 hours stopped, over 3 = 9.9583 days.
+  close(rel[0].mtbfDays, (30 - 180 / 1440) / 3, 'MTBF in days');
+  close(rel[0].mtbfDays, 9.958333333333334, 'MTBF by hand');
+  assert.equal(rel[0].mtbfHours, null, 'no meter, no operating hours');
+  // With the meter: 1 200 h at the start, 1 440 h at the end (8 h a day), so 240 operating hours over 3 = 80 h.
+  const points = [{ date: '2026-10-01', hours: 1200 }, { date: '2026-10-31', hours: 1440 }];
+  const metered = plain(M.reliability([{ asset: 'a', date: '2026-10-03', minutes: 30, cause: 'jam' }, { asset: 'a', date: '2026-10-12', minutes: 60, cause: 'jam' }, { asset: 'a', date: '2026-10-25', minutes: 90, cause: 'jam' }], '2026-10-01', '2026-10-31', () => points));
+  assert.equal(metered[0].mtbfHours, 80);
+});
+
+test('from OEE: its breakdown stops with a stable key, the asset by tag or name, the cause by name', () => {
+  const M = math();
+  const reasons = read(OEE.en).reasons;
+  const rows = [
+    { date: '2026-10-20', shift: 'Early', equipment: 'Sorter S1', planned: 480, stops: [{ reason: 'Break', minutes: 30 }, { reason: 'Breakdown', minutes: 45 }, { reason: 'Jam', minutes: 12 }, { reason: 'Motor smoke', minutes: 20 }] },
+    { date: '2026-10-20', shift: 'Early', equipment: 'Sorter S1', planned: 480, stops: [{ reason: 'breakdown', minutes: 45 }] },
+    { date: '2026-10-22', shift: 'Late', equipment: 'SRT-01', planned: 480, stops: [{ reason: 'Electrical fault', minutes: 25.5 }, { reason: 'Changeover', minutes: 15 }, { reason: 'Waiting for maintenance', minutes: 0 }] },
+    { date: 'not a date', equipment: 'Sorter S1', stops: [{ reason: 'Breakdown', minutes: 10 }] },
+  ];
+  const stops = plain(M.oeeBreakdowns({ rows }, reasons));
+  assert.deepEqual(stops.map((s) => [s.date, s.machine, s.reason, s.minutes]), [
+    ['2026-10-22', 'SRT-01', 'Electrical fault', 25.5],
+    ['2026-10-20', 'Sorter S1', 'Breakdown', 45],
+    ['2026-10-20', 'Sorter S1', 'Motor smoke', 20],
+    ['2026-10-20', 'Sorter S1', 'breakdown', 45],
+  ], 'breakdowns only (an unlisted reason counts as one), newest first; planned stops, setup, small stops and zero minutes stay in OEE');
+  assert.equal(new Set(stops.map((s) => s.key)).size, 4, 'two identical stops keep two keys');
+  assert.equal(stops[1].key, 'oee|2026-10-20|sorter s1|early|breakdown|45|0');
+  assert.equal(stops[3].key, 'oee|2026-10-20|sorter s1|early|breakdown|45|1');
+  // A row added before them or one removed elsewhere in OEE leaves the keys as they were.
+  const again = plain(M.oeeBreakdowns({ rows: [{ date: '2026-10-01', shift: 'Late', equipment: 'Wrapper', planned: 480, stops: [{ reason: 'Breakdown', minutes: 9 }] }, ...rows.slice(2), ...rows.slice(0, 2)] }, reasons));
+  assert.deepEqual(again.filter((s) => s.machine !== 'Wrapper').map((s) => s.key).sort(), stops.map((s) => s.key).sort());
+  assert.deepEqual(plain(M.oeeBreakdowns(null, reasons)), []);
+  const assets = [{ id: 'a1', tag: 'SRT-01', name: 'Parcel sorter' }, { id: 'a2', tag: 'W2', name: 'Sorter S1' }];
+  assert.equal(M.matchAsset('srt-01', assets).id, 'a1', 'by tag, in any case');
+  assert.equal(M.matchAsset(' sorter s1 ', assets).id, 'a2', 'by name');
+  assert.equal(M.matchAsset('Wrapper', assets), null);
+  const causes = read(DATA.en).causes;
+  assert.equal(M.causeFor('Electrical fault', causes), 'electrical');
+  assert.equal(M.causeFor('Breakdown', causes), 'other');
+  assert.equal(M.causeFor('Elektrischer Fehler', read(DATA.de).causes), 'electrical');
+  assert.equal(M.causeFor('Defekt elektrik', read(DATA.sq).causes), 'electrical');
+});
+
+test('from OEE on the page: taken over as breakdowns of the asset, ignored or undone, never twice, and counted in MTTR and MTBF', () => {
+  const plan = { site: 'warehouse', assets: [{ id: 'a1', tag: 'SRT-01', name: 'Sorter S1', type: 'sorter', area: 'Hall', crit: 'A', tasks: [] }, { id: 'a2', tag: 'FL-01', name: 'Forklift 1', type: 'forklift', area: 'Hall', crit: 'B', tasks: [] }],
+    rows: [{ id: 'r1', kind: 'breakdown', asset: 'a1', date: '2026-10-01', minutes: 40, cause: 'sensor', cost: 0, by: 'Ardit', note: '' }] };
+  const oee = { equipment: [{ name: 'Sorter S1', rate: 2400 }], rows: [
+    { date: '2026-10-20', shift: 'Early', equipment: 'Sorter S1', planned: 480, stops: [{ reason: 'Break', minutes: 30 }, { reason: 'Breakdown', minutes: 45 }, { reason: 'Jam', minutes: 12 }], pieces: 10000, rejects: 0, startup: 0 },
+    { date: '2026-10-22', shift: 'Late', equipment: 'srt-01', planned: 480, stops: [{ reason: 'Electrical fault', minutes: 25 }, { reason: 'Changeover', minutes: 15 }], pieces: 10000, rejects: 0, startup: 0 },
+    { date: '2026-10-23', shift: 'Early', equipment: 'Wrapper W2', planned: 480, stops: [{ reason: 'Breakdown', minutes: 30 }], pieces: 5000, rejects: 0, startup: 0 },
+  ], example: {} };
+  const w = load({ storage: { 'sc-maintenance-planner': plan, 'sc-oee': oee } });
+  const d = w.document;
+  const box = d.querySelector('[data-oee-box]');
+  assert.equal(box.hidden, false, 'the box shows');
+  const items = () => [...box.querySelectorAll('[data-oee-key]')];
+  assert.equal(items().length, 3);
+  assert.match(items()[0].textContent, /^2026-10-23 · Wrapper W2 · 30 min · Breakdown · Early/);
+  assert.equal(items()[0].querySelector('[data-oee-asset]').value, '', 'no asset matches: the user picks it');
+  assert.equal(items()[1].querySelector('[data-oee-asset]').value, 'a1', 'matched by tag, in any case');
+  assert.equal(items()[1].querySelector('[data-oee-cause]').value, 'electrical', 'the cause by its name');
+  assert.equal(items()[2].querySelector('[data-oee-asset]').value, 'a1', 'matched by name');
+  assert.equal(items()[2].querySelector('[data-oee-cause]').value, 'other');
+  // The wrapper is not in the plan: taking it over without an asset asks for one.
+  click(w, items()[0].querySelector('[data-oee-take]'));
+  assert.match(box.querySelector('[data-oee-status]').textContent, /Pick the asset/);
+  assert.equal(items().length, 3);
+  click(w, items()[0].querySelector('[data-oee-ignore]'));
+  assert.equal(items().length, 2);
+  assert.match(box.querySelector('[data-oee-status]').textContent, /Ignored: 2026-10-23 · Wrapper W2/);
+  click(w, box.querySelector('[data-oee-status] .dl-undo'));
+  assert.equal(items().length, 3, 'ignoring can be undone');
+  click(w, items()[0].querySelector('[data-oee-ignore]'));
+  click(w, items()[0].querySelector('[data-oee-take]'));
+  click(w, items()[0].querySelector('[data-oee-take]'));
+  assert.equal(box.hidden, false, 'the box stays while its undo note shows');
+  assert.equal(items().length, 0);
+  const state = saved(w);
+  const taken = state.rows.filter((r) => r.kind === 'breakdown').sort((a, b) => a.date.localeCompare(b.date));
+  assert.deepEqual(taken.map((r) => [r.date, r.asset, r.minutes, r.cause]), [['2026-10-01', 'a1', 40, 'sensor'], ['2026-10-20', 'a1', 45, 'other'], ['2026-10-22', 'a1', 25, 'electrical']]);
+  assert.equal(taken[2].note, 'From OEE: Electrical fault · Late', 'the OEE reason and the shift stay in the note');
+  assert.deepEqual(Object.values(state.oee).sort(), ['ignored', 'taken', 'taken']);
+  assert.ok(Object.keys(state.oee).every((key) => key.startsWith('oee|')));
+  // MTTR and MTBF now count them: 3 breakdowns, 110 minutes, in the 91 days up to today.
+  const row = [...d.querySelectorAll('.mp-panel-reliability tbody tr')].find((tr) => /SRT-01/.test(tr.textContent));
+  const cells = [...row.cells].map((td) => td.textContent);
+  assert.deepEqual(cells.slice(1, 5), ['3', '110 min', '37 min', `${Math.round((91 - 110 / 1440) / 3)} days`]);
+  assert.match(d.querySelector('[data-log]').textContent, /From OEE: Electrical fault · Late/);
+  // Taken over once: a reload does not offer them again.
+  const again = load({ storage: { 'sc-maintenance-planner': state, 'sc-oee': oee } });
+  assert.equal(again.document.querySelector('[data-oee-box]').hidden, true);
+  assert.equal(saved(again).rows.length, 3);
+  // Undo of a take removes the breakdown and offers the stop again.
+  const w2 = load({ storage: { 'sc-maintenance-planner': plan, 'sc-oee': oee } });
+  const box2 = w2.document.querySelector('[data-oee-box]');
+  click(w2, box2.querySelectorAll('[data-oee-take]')[1]);
+  assert.equal(saved(w2).rows.length, 2);
+  click(w2, box2.querySelector('[data-oee-status] .dl-undo'));
+  assert.equal(saved(w2).rows.length, 1);
+  assert.equal(box2.querySelectorAll('[data-oee-key]').length, 3);
+  assert.deepEqual(saved(w2).oee, {});
+});
+
+test('from OEE: nothing is offered from the OEE example, and the planner example asks to be cleared first', () => {
+  const plan = { site: 'warehouse', assets: [{ id: 'a1', tag: 'SRT-01', name: 'Sorter S1', type: 'sorter', area: 'Hall', crit: 'A', tasks: [] }], rows: [] };
+  const rows = [{ date: '2026-10-20', shift: 'Early', equipment: 'Sorter S1', planned: 480, stops: [{ reason: 'Breakdown', minutes: 45 }], pieces: 100, rejects: 0, startup: 0 }];
+  const example = load({ storage: { 'sc-maintenance-planner': plan, 'sc-oee': { rows, example: { n: 1, first: '2026-10-20', last: '2026-10-20' } } } });
+  assert.equal(example.document.querySelector('[data-oee-box]').hidden, true, 'the OEE example stays in OEE');
+  const w = load({ storage: { 'sc-oee': { rows, example: {} } } });
+  const box = w.document.querySelector('[data-oee-box]');
+  assert.equal(box.hidden, false);
+  assert.match(box.querySelector('[data-oee-note]').textContent, /OEE holds 1 breakdown stop not in this log\. Clear the example to take them over\./);
+  assert.equal(box.querySelectorAll('[data-oee-key]').length, 0);
+  // The German planner reads the German OEE log only.
+  const de = load({ lang: 'de', storage: { 'sc-maintenance-planner-de': plan, 'sc-oee': { rows, example: {} }, 'sc-oee-de': { rows: [{ ...rows[0], stops: [{ reason: 'Elektrischer Fehler', minutes: 20 }] }], example: {} } } });
+  const items = [...de.document.querySelectorAll('[data-oee-key]')];
+  assert.equal(items.length, 1);
+  assert.match(items[0].textContent, /20\.10\.2026 · Sorter S1 · 20 min · Elektrischer Fehler/);
+  assert.equal(items[0].querySelector('[data-oee-cause]').value, 'electrical');
 });
 
 test('the example: a parcel hub with 14 assets, three months of history, some overdue tasks and the sorter breaking down', () => {
@@ -355,7 +491,9 @@ test('German page: links keep /de/, the plan is in German, and removing a log en
 
 test('every text of the page and the script has a German and an Albanian translation', () => {
   const ui = { de: read('src/_data/de/ui.json'), sq: read('src/_data/sq/ui.json') };
-  const part = read('src/_data/i18n-parts/maintenance-planner.json');
+  const own = read('src/_data/i18n-parts/maintenance-planner.json');
+  const links = read('src/_data/i18n-parts/links-3.json');
+  const part = { de: { ...links.de, ...own.de }, sq: { ...links.sq, ...own.sq } };
   const njk = fs.readFileSync('src/_includes/partials/maintenance-planner.njk', 'utf8');
   const js = fs.readFileSync('src/js/maintenance-planner.js', 'utf8');
   const texts = new Set([...njk.matchAll(/\{\{\s*["']((?:[^"'\\]|\\.)*)["']\s*\|\s*t\(lang\)/g)].map((m) => m[1]));
