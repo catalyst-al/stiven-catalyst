@@ -1,0 +1,147 @@
+{
+  "storageKey": "sc-standard-work-de",
+  "maxSteps": 12,
+  "firstIssue": "Erstausgabe.",
+  "stepsHint": "Ein Hauptschritt sagt in wenigen Worten, was getan wird. Kernpunkte sind nur, woran der Schritt gelingt oder scheitert: zuerst Sicherheit, dann Qualität, Technik und Kosten. Jeder Kernpunkt hat seinen Grund.",
+  "fields": {
+    "title": "z. B. Rollcontainer auf den Lkw laden",
+    "process": "z. B. Warenausgang, Verladung",
+    "area": "z. B. Tor 3",
+    "owner": "z. B. Anna K., Schichtleitung",
+    "takt": "z. B. 240",
+    "ppe": "z. B. Sicherheitsschuhe, Handschuhe, Warnweste; Scanner",
+    "trainedBy": "z. B. Mehmet Y., Trainer",
+    "approvedBy": "z. B. Laura S., Betriebsleitung",
+    "changeNote": "z. B. Schritt 2: Gehweg nach Beinaheunfall ergänzt",
+    "step": "z. B. Rollcontainer zum Tor schieben",
+    "time": "z. B. 25",
+    "point": "z. B. Schieben, nie ziehen",
+    "reason": "z. B. Beim Ziehen stehen Ihre Füße vor den Rädern"
+  },
+  "types": {
+    "safety": { "label": "Sicherheit", "mark": "⚠" },
+    "quality": { "label": "Qualität", "mark": "◆" },
+    "technique": { "label": "Technik", "mark": "●" },
+    "cost": { "label": "Kosten", "mark": "€" }
+  },
+  "areas": ["Wareneingang", "Lager", "Kommissionierung", "Packerei", "Warenausgang", "Retouren", "Rezeption"],
+  "safetyWords": ["*stapler*", "*hubwagen*", "flurförderzeug*", "ladebordwand*", "*ladebrücke*", "messer", "*messer", "klinge*", "cutter*", "höhe", "*höhe", "leiter", "stehleiter", "trittleiter", "chemikali*", "gefahrstoff*", "säure*", "lösemittel*", "reinigungsmittel*", "heiß", "heiße", "heißes", "heißer", "heißem", "hitze*", "scharf*", "glasbruch", "*strom*", "spannung", "forklift*", "pallet truck*", "knife", "chemical*"],
+  "checks": {
+    "keyPoints": ["Jeder Schritt hat einen Kernpunkt", "Geben Sie jedem Schritt mindestens einen Kernpunkt"],
+    "safety": ["Gefahren haben einen Sicherheits-Kernpunkt", "Ergänzen Sie einen Kernpunkt Sicherheit, wo der Schritt eine Gefahr nennt"],
+    "takt": ["Die Tätigkeit passt in den Takt", "Tragen Sie den Takt und eine Zeit für jeden Schritt ein und bleiben Sie mit der Summe darunter"],
+    "steps": ["Höchstens 12 Schritte", "Bleiben Sie bei 12 Schritten oder weniger: Teilen Sie die Tätigkeit in zwei"],
+    "reasons": ["Jeder Kernpunkt hat einen Grund", "Schreiben Sie zu jedem Kernpunkt den Grund"],
+    "changeNote": ["Die Version hat einen Änderungsvermerk", "Schreiben Sie, was sich in dieser Version geändert hat"]
+  },
+  "tips": [
+    ["Ein Schritt ist eine Bewegung.", "Ein Hauptschritt sagt in wenigen Worten, was getan wird. Braucht er einen ganzen Satz, sind es zwei Schritte."],
+    ["Kernpunkte entscheiden über die Tätigkeit.", "Nur was Sicherheit, Qualität, Technik oder Kosten betrifft. Alles andere ist Detail für die Unterweisung."],
+    ["Jeder Kernpunkt hat einen Grund.", "Menschen halten sich an Regeln, die sie verstehen. Schreiben Sie das Warum in der Sprache der Fläche."],
+    ["Ändern Sie den Standard, nicht die Menschen.", "Ändert sich die Tätigkeit, beginnen Sie eine neue Version mit Vermerk und unterweisen dann das Team."]
+  ],
+  "templates": [
+    { "name": "Rollcontainer verladen", "doc": "example" },
+    { "name": "Tagesabschluss im Night Audit (Hotel)", "doc": {
+      "title": "Den Tag im Night Audit abschließen",
+      "process": "Empfang, Night Audit",
+      "takt": "1800",
+      "ppe": "Hotelsoftware (PMS), Kassenlade, Berichtsordner",
+      "steps": [
+        { "step": "Restaurant- und Barrechnungen abschließen", "time": "300", "points": [
+          { "text": "Jede offene Rechnung auf ein Zimmer gebucht oder bezahlt", "type": "quality", "reason": "Eine offene Rechnung ist nach dem Tagesabschluss verlorener Umsatz" }
+        ] },
+        { "step": "Anreisen und No-Shows prüfen", "time": "300", "points": [
+          { "text": "Jede nicht angereiste Buchung gegen ihre Garantie geprüft", "type": "quality", "reason": "Ein garantierter No-Show wird belastet, ein nicht garantierter storniert" },
+          { "text": "No-Show-Gebühr nach Richtlinie belasten, Karte autorisiert", "type": "cost", "reason": "Eine verpasste No-Show-Gebühr ist Geld, das nicht wiederkommt" }
+        ] },
+        { "step": "Kasse abrechnen", "time": "300", "points": [
+          { "text": "Zählen bei geschlossener Bürotür und verschlossenem Tresor", "type": "safety", "reason": "Bargeld, das in Sicht der Lobby gezählt wird, lädt zum Überfall ein" },
+          { "text": "Kassenbestand stimmt auf den Cent mit dem System; jede Differenz wird notiert", "type": "quality", "reason": "Eine Differenz, die erst morgen auffällt, lässt sich nicht mehr erklären" }
+        ] },
+        { "step": "Tagesabschluss starten", "time": "300", "points": [
+          { "text": "Abschluss erst starten, wenn alle Arbeitsplätze abgemeldet sind", "type": "technique", "reason": "Ein noch angemeldeter Arbeitsplatz blockiert oder teilt den Abschluss" }
+        ] },
+        { "step": "Berichte drucken und ablegen", "time": "300", "points": [
+          { "text": "Managerbericht, Kassenbericht und Hausliste im Ordner", "type": "quality", "reason": "Frühschicht und Leitung lesen den Tag aus diesen Berichten" }
+        ] },
+        { "step": "An die Frühschicht übergeben", "time": "200", "points": [
+          { "text": "Offene Punkte mit Zimmernummer im Übergabebuch notiert", "type": "quality", "reason": "Was nur gesagt wird, ist bis Mittag vergessen" }
+        ] }
+      ]
+    } },
+    { "name": "Warenübergabe an der Rampe", "doc": {
+      "title": "Eine Anlieferung an der Rampe übernehmen",
+      "process": "Wareneingang, Annahme",
+      "takt": "600",
+      "ppe": "Sicherheitsschuhe, Warnweste, Handschuhe; Hubwagen, Scanner, Kamera",
+      "steps": [
+        { "step": "Auflieger öffnen", "time": "60", "points": [
+          { "text": "Unterlegkeile gesetzt und Motor aus, bevor jemand die Türen öffnet", "type": "safety", "reason": "Ein Lkw, der beim Öffnen anrollt, quetscht die Person dahinter" }
+        ] },
+        { "step": "Plombe prüfen", "time": "45", "points": [
+          { "text": "Plombennummer stimmt mit dem Lieferschein überein", "type": "quality", "reason": "Eine beschädigte oder falsche Plombe heißt, die Ladung war vielleicht offen" }
+        ] },
+        { "step": "Mit dem Hubwagen entladen", "time": "240", "points": [
+          { "text": "Schrittgeschwindigkeit, beim Entladen niemand sonst im Auflieger", "type": "safety", "reason": "Eine rutschende Palette landet auf den Füßen" },
+          { "text": "Von hinten entladen, Palette gerade auf den Gabeln", "type": "technique", "reason": "Eine verdrehte Palette verhakt sich an der Wand des Aufliegers" }
+        ] },
+        { "step": "Paletten zählen und auf Schäden prüfen", "time": "120", "points": [
+          { "text": "Gegen den Lieferschein zählen, jeden Schaden fotografieren", "type": "quality", "reason": "Ein Schaden, der an der Rampe nicht erfasst wird, geht zulasten des Lagers" },
+          { "text": "Schaden vor der Unterschrift auf dem Lieferschein vermerken", "type": "cost", "reason": "Der Spediteur zahlt nur für Schäden, die auf dem Lieferschein stehen" }
+        ] },
+        { "step": "Unterschreiben und dem Fahrer die Kopie geben", "time": "60", "points": [
+          { "text": "Vermerke über der Unterschrift", "type": "quality", "reason": "Eine Unterschrift ohne Vermerk nimmt die Ladung als einwandfrei an" }
+        ] },
+        { "step": "Lkw freigeben", "time": "45", "points": [
+          { "text": "Unterlegkeile erst entfernen, wenn die Türen zu sind und die Rampe frei ist", "type": "safety", "reason": "Der Fahrer sieht die Rampe aus dem Führerhaus nicht" }
+        ] }
+      ]
+    } }
+  ],
+  "example": {
+    "title": "Rollcontainer auf den Lkw laden",
+    "process": "Warenausgang, Filialbelieferung",
+    "area": "Tor 3, Warenausgang",
+    "owner": "Anna K. (Schichtleitung Früh)",
+    "takt": "240",
+    "ppe": "Sicherheitsschuhe, Handschuhe, Warnweste; Scanner, Ladebalken",
+    "trainedBy": "Mehmet Y. (Trainer)",
+    "approvedBy": "Laura S. (Betriebsleitung)",
+    "version": 3,
+    "versionDate": -6,
+    "changeNote": "Schritt 2: Gehweg abseits der Staplerspur ergänzt, nach einem Beinaheunfall an Tor 3.",
+    "history": [
+      { "version": 1, "date": -180, "note": "Erstausgabe." },
+      { "version": 2, "date": -60, "note": "Schritt 6: Etikett des Rollcontainers scannen, nicht ein Paket darauf." }
+    ],
+    "steps": [
+      { "step": "Rollcontainer prüfen", "time": "20", "points": [
+        { "text": "Räder laufen frei, beide Bremsen halten", "type": "safety", "reason": "Ein Rollcontainer mit defekter Bremse rollt von der Ladebordwand zurück" },
+        { "text": "Etikett stimmt mit der Ladeliste überein", "type": "quality", "reason": "Ein falsches Etikett schickt den Container in die falsche Filiale" }
+      ] },
+      { "step": "Rollcontainer zum Tor schieben", "time": "25", "points": [
+        { "text": "Schieben, nie ziehen, beide Hände am Rahmen", "type": "safety", "reason": "Beim Ziehen stehen Ihre Füße vor den Rädern" },
+        { "text": "Auf dem markierten Gehweg bleiben, außerhalb der Staplerspur", "type": "safety", "reason": "Ein Staplerfahrer sieht niemanden hinter einem Rollcontainer" }
+      ] },
+      { "step": "Überladebrücke und Lkw prüfen", "time": "30", "points": [
+        { "text": "Lkw mit Unterlegkeil gesichert, Torampel grün, Brücke liegt auf dem Ladeboden auf", "type": "safety", "reason": "Fährt der Lkw an, stürzen Container und Mensch in den Spalt" }
+      ] },
+      { "step": "Rollcontainer in den Lkw rollen", "time": "40", "points": [
+        { "text": "Ein Container nach dem anderen, von der hinteren Ecke aus gelenkt", "type": "technique", "reason": "Zwei Container auf einmal lassen sich weder lenken noch stoppen" },
+        { "text": "Schwerste Container an die Stirnwand", "type": "quality", "reason": "Gewicht vorn hält die Ladung stabil, wenn der Fahrer bremst" }
+      ] },
+      { "step": "Rollcontainer stellen und sichern", "time": "35", "points": [
+        { "text": "Dicht an den vorherigen Container, ohne Lücke", "type": "quality", "reason": "Durch eine Lücke verrutschen die Container und kippen während der Fahrt" },
+        { "text": "Bremsen fest, Ladebalken auf Brusthöhe gesetzt", "type": "safety", "reason": "Ein loser Container fällt auf den, der in der Filiale die Türen öffnet" }
+      ] },
+      { "step": "Rollcontainer scannen", "time": "20", "points": [
+        { "text": "Das Etikett des Containers scannen, nicht ein Paket darauf", "type": "technique", "reason": "Nur über das Container-Etikett sieht die Filiale, welcher Container auf welchem Lkw ist" }
+      ] },
+      { "step": "Ladung abschließen und übergeben", "time": "35", "points": [
+        { "text": "Anzahl Container stimmt mit der Ladeliste, bevor die Türen schließen", "type": "quality", "reason": "Ein fehlender Container fällt hier auf, nicht erst in der Filiale" },
+        { "text": "Leere Container aus dem Lkw zurück an die Leergutlinie", "type": "cost", "reason": "Jeder verlorene Rollcontainer kostet rund 150 Euro" }
+      ] }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Standard Work", "type": "Standard", "time": "20 min", "summary": "One job as a TWI breakdown: major steps, key points marked Safety, Quality, Technique or Cost, and a reason for each, with the time per step against the takt. Versions with change notes, print on A4, Word.", "url": "/tools/standard-work/", "cta": "Write a standard" },
+    "de": { "name": "Standardarbeit", "type": "Standard", "time": "20 min", "summary": "Eine Tätigkeit als TWI-Arbeitszerlegung: Hauptschritte, Kernpunkte nach Sicherheit, Qualität, Technik oder Kosten und zu jedem ein Grund, mit der Zeit je Schritt gegen den Takt. Versionen mit Änderungsvermerk, Druck auf A4, Word.", "url": "/de/tools/standard-work/", "cta": "Standard schreiben" },
+    "sq": { "name": "Puna standarde", "type": "Standard", "time": "20 min", "summary": "Një punë e ndarë sipas TWI: hapat kryesorë, pikat kyçe sipas sigurisë, cilësisë, teknikës ose kostos, dhe arsyeja e secilës, me kohën e çdo hapi kundrejt taktit. Versione me shënim ndryshimi, printim në A4, Word.", "url": "/sq/tools/standard-work/", "cta": "Shkruaj një standard" }
+  },
+  "routine": { "when": "When a problem returns", "do": "Write the job as a standard with a reason for every key point, start a new version when it changes, and train the team on it.", "de": { "when": "Wenn ein Problem wiederkehrt", "do": "Schreiben Sie die Tätigkeit als Standard mit einem Grund für jeden Kernpunkt, beginnen Sie bei jeder Änderung eine neue Version und unterweisen Sie das Team darin." }, "sq": { "when": "Kur një problem kthehet", "do": "Shkruaje punën si standard me një arsye për çdo pikë kyçe, nis një version të ri kur ndryshon dhe trajno ekipin për të." } },
+  "recipe": "example"
+}

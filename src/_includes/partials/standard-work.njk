@@ -1,0 +1,131 @@
+{#- Standard Work: the TWI job breakdown of one job (major steps, key points by type, reasons, times against the takt), with versions. The page sets `cfg` to its data file; standard-work.js does the rest. -#}
+<section class="shell tool-layout sw-setup">
+  <div class="tool-panel" data-standard-work>
+
+    <div class="dl-box sw-list-box">
+      <div class="dl-log-head">
+        <p class="kicker">{{ "Your standards" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <ul class="sw-list" data-list></ul>
+      <p class="dl-empty" data-list-empty>{{ "No standard saved yet." | t(lang) }} {{ "Start a new one below, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example" | t(lang) }}</button>.</p>
+      <p class="form-note dl-log-status" data-list-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-new>{{ "New standard" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-example-again hidden>{{ "Load the example" | t(lang) }}</button>
+      </div>
+      <div class="sw-template">
+        <div class="field">
+          <label for="sw-template">{{ "Start from a template" | t(lang) }}</label>
+          <select id="sw-template" data-template>
+            {%- for tpl in cfg.templates %}
+            <option value="{{ loop.index0 }}">{{ tpl.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <button class="button-secondary" type="button" data-from-template>{{ "Use this template" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <form class="dl-box sw-form" data-sw-form novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ "The job" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="sw-title">{{ "Title" | t(lang) }}</label>
+            <input id="sw-title" name="title" placeholder="{{ cfg.fields.title }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sw-process">{{ "Process" | t(lang) }}</label>
+            <input id="sw-process" name="process" placeholder="{{ cfg.fields.process }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sw-area">{{ "Area" | t(lang) }}</label>
+            <input id="sw-area" name="area" list="sw-areas" placeholder="{{ cfg.fields.area }}" autocomplete="off">
+            <datalist id="sw-areas" data-areas></datalist>
+          </div>
+          <div class="field">
+            <label for="sw-owner">{{ "Owner" | t(lang) }}</label>
+            <input id="sw-owner" name="owner" placeholder="{{ cfg.fields.owner }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sw-takt">{{ "Takt or target time (s)" | t(lang) }}</label>
+            <input id="sw-takt" name="takt" inputmode="decimal" placeholder="{{ cfg.fields.takt }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="sw-ppe">{{ "PPE and tools" | t(lang) }}</label>
+            <input id="sw-ppe" name="ppe" placeholder="{{ cfg.fields.ppe }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sw-trained">{{ "Trained by" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sw-trained" name="trainedBy" placeholder="{{ cfg.fields.trainedBy }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sw-approved">{{ "Approved by" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sw-approved" name="approvedBy" placeholder="{{ cfg.fields.approvedBy }}" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">2 · {{ "Version" | t(lang) }} <strong class="sw-version-no" data-version>1</strong></legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="sw-version-date">{{ "Version date" | t(lang) }}</label>
+            <input id="sw-version-date" name="versionDate" type="date">
+          </div>
+          <div class="field dl-wide">
+            <label for="sw-change">{{ "What changed in this version" | t(lang) }}</label>
+            <input id="sw-change" name="changeNote" placeholder="{{ cfg.fields.changeNote }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-new-version>{{ "New version" | t(lang) }}</button>
+          <p class="form-note" data-version-status aria-live="polite"></p>
+        </div>
+        <ul class="sw-history" data-history hidden></ul>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">3 · {{ "Steps, key points, reasons" | t(lang) }}</legend>
+        <p class="sw-hint">{{ cfg.stepsHint }}</p>
+        <div class="sw-steps" data-steps></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-step>{{ "Add a step" | t(lang) }}</button>
+          <p class="form-note sw-total-line" data-step-total aria-live="polite"></p>
+        </div>
+        <p class="form-note" data-steps-status aria-live="polite"></p>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">4 · {{ "Hand it on" | t(lang) }}</legend>
+        <div class="tool-actions sw-handoffs" data-handoffs>
+          <span data-train-slot></span>
+          <a class="button-secondary" href="{{ '/tools/five-s-audit/' | local(lang) }}" data-five-s>{{ "Audit this standard" | t(lang) }}</a>
+          <a class="button-ghost" href="{{ '/tools/skills-matrix/' | local(lang) }}" data-skills>{{ "Open the skills matrix" | t(lang) }}</a>
+        </div>
+      </fieldset>
+      <p class="form-note" data-save-status aria-live="polite">{{ "Saved in this browser." | t(lang) }}</p>
+    </form>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sw-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="standard-work-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/standard-work.js' | assetUrl }}" defer></script>

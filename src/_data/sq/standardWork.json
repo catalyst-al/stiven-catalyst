@@ -1,0 +1,147 @@
+{
+  "storageKey": "sc-standard-work-sq",
+  "maxSteps": 12,
+  "firstIssue": "Botimi i parë.",
+  "stepsHint": "Një hap kryesor thotë me pak fjalë çfarë bëhet. Pikat kyçe janë vetëm ato që e bëjnë ose e prishin hapin: së pari siguria, pastaj cilësia, teknika dhe kostoja. Çdo pikë kyçe ka arsyen e saj.",
+  "fields": {
+    "title": "p.sh. Ngarko kafazin me rrota në kamion",
+    "process": "p.sh. Dalja e mallrave, ngarkimi",
+    "area": "p.sh. Porta 3",
+    "owner": "p.sh. Anna K., drejtuese turni",
+    "takt": "p.sh. 240",
+    "ppe": "p.sh. Këpucë sigurie, doreza, jelek; skaner",
+    "trainedBy": "p.sh. Mehmet Y., trajner",
+    "approvedBy": "p.sh. Laura S., menaxhere operacionesh",
+    "changeNote": "p.sh. Hapi 2: u shtua kalimi pas një rasti gati-aksident",
+    "step": "p.sh. Shtyje kafazin te porta",
+    "time": "p.sh. 25",
+    "point": "p.sh. Shtyje, mos e tërhiq",
+    "reason": "p.sh. Kur e tërheq, këmbët i ke para rrotave"
+  },
+  "types": {
+    "safety": { "label": "Siguria", "mark": "⚠" },
+    "quality": { "label": "Cilësia", "mark": "◆" },
+    "technique": { "label": "Teknika", "mark": "●" },
+    "cost": { "label": "Kostoja", "mark": "€" }
+  },
+  "areas": ["Pranimi", "Magazina", "Përgatitja e porosive", "Paketimi", "Dalja e mallrave", "Kthimet", "Recepsioni"],
+  "safetyWords": ["pirun*", "transpalet*", "makinë ngritëse", "makina ngritëse", "platform* ngritëse", "ngritës*", "urë ngarkimi", "ura e ngarkimit", "urën e ngarkimit", "thik*", "tehu", "prerëse", "lartësi*", "shkallë", "shkallët", "shkallën", "kimik*", "acid*", "tretës*", "nxeht*", "mpreht*", "xham i thyer", "elektrik*", "tension*", "forklift*", "pallet truck*", "knife", "chemical*"],
+  "checks": {
+    "keyPoints": ["Çdo hap ka një pikë kyçe", "Jepi çdo hapi të paktën një pikë kyçe"],
+    "safety": ["Rreziqet kanë një pikë kyçe sigurie", "Shto një pikë kyçe Siguria aty ku hapi përmend një rrezik"],
+    "takt": ["Puna hyn brenda taktit", "Jep taktin dhe një kohë për çdo hap, dhe mbaje totalin brenda tij"],
+    "steps": ["Jo më shumë se 12 hapa", "Mbaje në 12 hapa ose më pak: ndaje punën në dysh"],
+    "reasons": ["Çdo pikë kyçe ka një arsye", "Shkruaj arsyen e çdo pike kyçe"],
+    "changeNote": ["Versioni ka një shënim ndryshimi", "Shkruaj çfarë ndryshoi në këtë version"]
+  },
+  "tips": [
+    ["Një hap është një lëvizje.", "Një hap kryesor thotë me pak fjalë çfarë bëhet. Nëse do një fjali të tërë, janë dy hapa."],
+    ["Pikat kyçe e bëjnë ose e prishin punën.", "Vetëm ato që prekin sigurinë, cilësinë, teknikën ose koston. Gjithçka tjetër është detaj trajnimi."],
+    ["Çdo pikë kyçe ka një arsye.", "Njerëzit e mbajnë një rregull që e kuptojnë. Shkruaje pse, me fjalët e terrenit."],
+    ["Ndrysho standardin, jo njerëzit.", "Kur puna ndryshon, nis një version të ri me shënim, pastaj trajno ekipin."]
+  ],
+  "templates": [
+    { "name": "Ngarkimi i kafazit me rrota", "doc": "example" },
+    { "name": "Mbyllja e ditës në night audit (hotel)", "doc": {
+      "title": "Mbyll ditën në night audit",
+      "process": "Recepsioni, night audit",
+      "takt": "1800",
+      "ppe": "Sistemi i hotelit (PMS), arka, dosja e raporteve",
+      "steps": [
+        { "step": "Mbyll faturat e restorantit dhe barit", "time": "300", "points": [
+          { "text": "Çdo faturë e hapur e kaluar në një dhomë ose e paguar", "type": "quality", "reason": "Një faturë e hapur është e ardhur e humbur pasi mbyllet dita" }
+        ] },
+        { "step": "Kontrollo mbërritjet dhe no-show", "time": "300", "points": [
+          { "text": "Çdo rezervim që nuk erdhi kontrollohet kundrejt garancisë së tij", "type": "quality", "reason": "Një no-show i garantuar faturohet, një i pagarantuar anulohet" },
+          { "text": "Tarifa e no-show sipas rregullores, me kartën e autorizuar", "type": "cost", "reason": "Një tarifë no-show e humbur janë para që nuk kthehen më" }
+        ] },
+        { "step": "Barazo arkën", "time": "300", "points": [
+          { "text": "Numëro me derën e zyrës mbyllur dhe kasafortën kyçur", "type": "safety", "reason": "Paratë e numëruara para syve të lobit ftojnë një grabitje" },
+          { "text": "Arka përputhet me sistemin deri në cent; çdo diferencë shkruhet", "type": "quality", "reason": "Një diferencë e gjetur nesër nuk shpjegohet më" }
+        ] },
+        { "step": "Nis mbylljen e ditës", "time": "300", "points": [
+          { "text": "Nise mbylljen vetëm kur të gjitha terminalet janë çkyçur", "type": "technique", "reason": "Një terminal ende i kyçur e bllokon ose e ndan mbylljen" }
+        ] },
+        { "step": "Printo dhe arkivo raportet", "time": "300", "points": [
+          { "text": "Raporti i menaxherit, raporti i arkës dhe lista e mysafirëve në dosje", "type": "quality", "reason": "Turni i mëngjesit dhe menaxheri e lexojnë ditën nga këto raporte" }
+        ] },
+        { "step": "Dorëzo te turni i mëngjesit", "time": "200", "points": [
+          { "text": "Çështjet e hapura të shkruara në librin e dorëzimit me numrin e dhomës", "type": "quality", "reason": "Ajo që vetëm thuhet harrohet deri në drekë" }
+        ] }
+      ]
+    } },
+    { "name": "Pranimi i dorëzimit në rampë", "doc": {
+      "title": "Merr në dorëzim një furnizim në rampë",
+      "process": "Pranimi i mallrave",
+      "takt": "600",
+      "ppe": "Këpucë sigurie, jelek me shikueshmëri të lartë, doreza; transpaletë, skaner, kamerë",
+      "steps": [
+        { "step": "Hap rimorkion", "time": "60", "points": [
+          { "text": "Rrotat e bllokuara me pykë dhe motori i fikur para se dikush të hapë dyert", "type": "safety", "reason": "Një kamion që lëviz kur hapen dyert shtyp personin pas tij" }
+        ] },
+        { "step": "Kontrollo vulën", "time": "45", "points": [
+          { "text": "Numri i vulës përputhet me fletëdërgesën", "type": "quality", "reason": "Një vulë e thyer ose e gabuar do të thotë se ngarkesa mund të jetë hapur" }
+        ] },
+        { "step": "Shkarko me transpaletë", "time": "240", "points": [
+          { "text": "Shpejtësi ecjeje, askush tjetër në rimorkio gjatë shkarkimit", "type": "safety", "reason": "Një paletë që rrëshqet nuk ka ku të shkojë veç mbi këmbë" },
+          { "text": "Shkarko nga mbrapa, paleta drejt mbi pirunët", "type": "technique", "reason": "Një paletë e shtrembër kapet te muri i rimorkios" }
+        ] },
+        { "step": "Numëro paletat dhe kontrollo dëmet", "time": "120", "points": [
+          { "text": "Numëro kundrejt fletëdërgesës, një foto për çdo dëm", "type": "quality", "reason": "Dëmi që nuk shënohet në rampë bëhet kosto e magazinës" },
+          { "text": "Dëmi shënohet në fletëdërgesë para nënshkrimit", "type": "cost", "reason": "Transportuesi paguan vetëm dëmet e shkruara në fletëdërgesë" }
+        ] },
+        { "step": "Nënshkruaj dhe jepi shoferit kopjen", "time": "60", "points": [
+          { "text": "Vërejtjet të shkruara mbi nënshkrimin", "type": "quality", "reason": "Një nënshkrim pa vërejtje e pranon ngarkesën si të përsosur" }
+        ] },
+        { "step": "Lësho kamionin", "time": "45", "points": [
+          { "text": "Pykat hiqen vetëm kur dyert janë mbyllur dhe rampa është e lirë", "type": "safety", "reason": "Shoferi nuk e sheh rampën nga kabina" }
+        ] }
+      ]
+    } }
+  ],
+  "example": {
+    "title": "Ngarko kafazin me rrota në kamion",
+    "process": "Dalja e mallrave, furnizimi i dyqaneve",
+    "area": "Porta 3, dalja",
+    "owner": "Anna K. (drejtuese turni, mëngjes)",
+    "takt": "240",
+    "ppe": "Këpucë sigurie, doreza, jelek me shikueshmëri të lartë; skaner, shufër ngarkese",
+    "trainedBy": "Mehmet Y. (trajner)",
+    "approvedBy": "Laura S. (menaxhere operacionesh)",
+    "version": 3,
+    "versionDate": -6,
+    "changeNote": "Hapi 2: u shtua kalimi i shënuar larg korsisë së pirunit, pas një rasti gati-aksident në portën 3.",
+    "history": [
+      { "version": 1, "date": -180, "note": "Botimi i parë." },
+      { "version": 2, "date": -60, "note": "Hapi 6: skano etiketën e kafazit, jo një pako mbi të." }
+    ],
+    "steps": [
+      { "step": "Kontrollo kafazin me rrota", "time": "20", "points": [
+        { "text": "Rrotat lëvizin lirshëm dhe të dy frenat mbajnë", "type": "safety", "reason": "Një kafaz me fren të prishur rrokulliset mbrapsht nga platforma ngritëse" },
+        { "text": "Etiketa e kafazit përputhet me listën e ngarkesës", "type": "quality", "reason": "Një etiketë e gabuar e çon kafazin në dyqanin e gabuar" }
+      ] },
+      { "step": "Shtyje kafazin te porta", "time": "25", "points": [
+        { "text": "Shtyje, mos e tërhiq kurrë, me të dyja duart te korniza", "type": "safety", "reason": "Kur e tërheq, këmbët i ke para rrotave" },
+        { "text": "Qëndro në kalimin e shënuar, jashtë korsisë së pirunit", "type": "safety", "reason": "Drejtuesi i pirunit nuk e sheh dot një person pas kafazit" }
+      ] },
+      { "step": "Kontrollo urën e ngarkimit dhe kamionin", "time": "30", "points": [
+        { "text": "Rrotat e kamionit të bllokuara me pykë, drita e portës jeshile, ura mbështetur në dyshemenë e kamionit", "type": "safety", "reason": "Nëse kamioni lëviz, kafazi dhe personi bien në hapësirë" }
+      ] },
+      { "step": "Fute kafazin në kamion", "time": "40", "points": [
+        { "text": "Një kafaz në një kohë, i drejtuar nga cepi i pasmë", "type": "technique", "reason": "Dy kafazë njëherësh nuk drejtohen dot dhe nuk ndalen dot" },
+        { "text": "Kafazët më të rëndë te muri i përparmë", "type": "quality", "reason": "Pesha përpara e mban ngarkesën të qëndrueshme kur shoferi frenon" }
+      ] },
+      { "step": "Vendose dhe siguroje kafazin", "time": "35", "points": [
+        { "text": "Ngjitur me kafazin e mëparshëm, pa hapësirë", "type": "quality", "reason": "Nga një hapësirë kafazët lëvizin dhe përmbysen gjatë rrugës" },
+        { "text": "Frenat të vëna, shufra e ngarkesës në lartësinë e gjoksit", "type": "safety", "reason": "Një kafaz i lirë bie mbi atë që hap dyert në dyqan" }
+      ] },
+      { "step": "Skano kafazin", "time": "20", "points": [
+        { "text": "Skano etiketën e kafazit, jo një pako mbi të", "type": "technique", "reason": "Vetëm nga etiketa e kafazit dyqani sheh se cili kafaz është në cilin kamion" }
+      ] },
+      { "step": "Mbyll ngarkesën dhe dorëzoje", "time": "35", "points": [
+        { "text": "Numri i kafazëve përputhet me listën e ngarkesës para se të mbyllen dyert", "type": "quality", "reason": "Një kafaz që mungon zbulohet këtu, jo në dyqan" },
+        { "text": "Kafazët bosh nga kamioni kthehen te linja e kthimit", "type": "cost", "reason": "Çdo kafaz me rrota i humbur kushton rreth 150 euro" }
+      ] }
+    ]
+  }
+}
