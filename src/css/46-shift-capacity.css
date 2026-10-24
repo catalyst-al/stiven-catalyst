@@ -1,0 +1,88 @@
+/* ===== Shift Capacity (js/shift-capacity.js) ===== */
+/* Setup tables: inputs that fit their cells. */
+.cp-list { max-height: 380px; }
+.cp-list input, .cp-list select {
+  min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px;
+}
+.cp-list :is(input, select):focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.cp-list .cp-text { width: 100%; min-width: 140px; }
+.cp-list .cp-unit { width: 100%; min-width: 110px; }
+.cp-list .cp-num { width: 84px; text-align: right; }
+.cp-list .cp-vol { width: 96px; }
+.cp-list input[type="date"] { min-width: 140px; }
+.cp-ph { color: var(--muted); font-size: 13px; }
+.cp-template { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; }
+.cp-template .field { flex: 1 1 240px; min-width: 0; }
+.cp-template .button-secondary { flex: none; }
+.cp-formula { margin: 0; }
+.cp-formula strong { color: var(--ink); }
+.cp-plan-pick { max-width: 420px; }
+.cp-plan-grid { grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); }
+.cp-plan-field .form-note { margin: 0; font-size: 12px; }
+[data-conversions]:empty, [data-process-status]:empty, [data-shift-status]:empty, [data-study-status]:empty, [data-plan-status]:empty, [data-plan-note]:empty { display: none; }
+
+/* Rates from the Time Study: offered per station, never applied on their own. */
+.cp-study[hidden] { display: none; }
+.cp-study { display: grid; gap: 10px; padding: 14px 16px; border: 1px dashed var(--line); border-radius: var(--radius); }
+.cp-sub { margin: 0; font-size: 15px; font-weight: 800; color: var(--ink); }
+.cp-study p { margin: 0; }
+.cp-allowance { max-width: 280px; }
+.cp-study-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.cp-study-item { display: grid; gap: 6px; padding: 10px 0; min-width: 0; }
+.cp-study-item + .cp-study-item { border-top: 1px dashed var(--line); }
+.cp-study-what { overflow-wrap: anywhere; }
+.cp-study-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: 0; }
+.cp-study-pick select, .cp-study-pick input {
+  min-width: 0; min-height: 36px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px;
+}
+.cp-study-pick select { flex: 1 1 160px; max-width: 100%; }
+.cp-study-pick input { width: 64px; text-align: right; }
+.cp-study-pick :is(select, input):focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.cp-study-units-label { color: var(--muted); font-size: 13px; }
+.cp-small { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+
+/* Results. */
+.cp-head h2 span { color: var(--muted); font-weight: 700; }
+.cp-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.cp-results .dl-stats { margin-bottom: 18px; }
+.cp-pick { max-width: 420px; margin: 0 0 14px; }
+.cp-shift-panel { margin-bottom: 18px; }
+.cp-shift-panel .dl-table-wrap { max-height: none; }
+.cp-shift-panel .ck-chart { max-width: 760px; }
+.cp-note { margin: 10px 0 0; }
+.cp-gap { font-weight: 700; }
+.cp-gap.is-short { color: var(--danger); font-weight: 800; }
+.cp-shift-table tr.is-bottleneck td:first-child { box-shadow: inset 3px 0 0 var(--blue); }
+.cp-shift-table tfoot td, .cp-week-table tfoot td { border-top: 1px solid var(--line); font-weight: 800; }
+.cp-week-table tr.is-current td { background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.cp-options { display: grid; gap: 12px; margin: 4px 0 14px; padding: 0; list-style: none; }
+.cp-option-head { margin: 0; }
+.cp-option-steps { margin: 4px 0 0; padding-left: 20px; }
+.cp-option-steps li + li { margin-top: 4px; }
+.cp-blocked { color: var(--muted); }
+.cp-formulas { margin: 0; padding-left: 20px; }
+.cp-formulas li + li { margin-top: 6px; }
+
+/* The printed plan of one day (A4): every shift, its processes, the steps to close a gap, a signature. */
+.cp-print[hidden] { display: none; }
+@page cp-a4 { size: A4 portrait; margin: 12mm; }
+@media print {
+  html.cp-printing main > :not(.cp-print) { display: none !important; }
+  html.cp-printing .cp-print { page: cp-a4; display: block !important; padding: 0; color: #000; font-size: 11px; }
+  .cp-print h2 { margin: 2px 0 0; font-size: 20px; }
+  .cp-print h3 { margin: 14px 0 2px; font-size: 13px; }
+  .cp-print .kicker { margin: 0; }
+  .cp-print-meta { margin: 2px 0 6px; }
+  .cp-print-table { width: 100%; border-collapse: collapse; }
+  .cp-print-table th, .cp-print-table td { padding: 3px 5px; border: 1px solid #bbb; text-align: left; vertical-align: top; }
+  .cp-print-table thead th { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; }
+  .cp-print-table tr { break-inside: avoid; }
+  .cp-print-table .num { text-align: right; white-space: nowrap; }
+  .cp-print-total td { font-weight: 700; }
+  .cp-print-table :is(td, th):first-child { white-space: nowrap; }
+  .cp-print-blank { width: 10%; }
+  .cp-print-options { margin: 4px 0 0; padding: 0; list-style: none; }
+  .cp-print-sign { margin: 16px 0 0; }
+}

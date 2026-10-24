@@ -1,0 +1,137 @@
+{
+  "storageKey": "sc-shift-capacity",
+  "text": {
+    "tool": "Shift Capacity",
+    "csvName": "shift-capacity",
+    "owner": "Shift lead",
+    "check": "Planned heads cover the heads needed on every process, checked against the forecast before the shift starts",
+    "processPlaceholder": "e.g. Picking",
+    "driverPlaceholder": "e.g. lines",
+    "sourcePlaceholder": "e.g. orders",
+    "shiftPlaceholder": "e.g. Early",
+    "pastePlaceholder": "2026-10-26; Early; 52000; 180",
+    "skillsName": "Skills Matrix",
+    "timeStudyName": "Time Study",
+    "trackerName": "Action Tracker",
+    "station": "Station {n}",
+    "bottleneck": "Bottleneck"
+  },
+  "defaults": { "utilisation": 85, "absenteeism": 8, "overtime": 2, "allowance": 15, "length": 8, "unpaid": 30, "paid": 30, "mode": "rostered" },
+  "shifts": ["Early", "Late", "Night"],
+  "drivers": ["units", "lines", "orders", "parcels", "pallets", "cartons", "non-conveyables", "kg", "covers", "rooms", "pieces"],
+  "templates": [
+    {
+      "key": "parcel-hub",
+      "name": "Parcel hub (sort centre)",
+      "processes": [
+        { "name": "Unloading", "driver": "parcels", "uph": 750, "source": "parcels", "factor": 1, "skill": "" },
+        { "name": "Induction", "driver": "parcels", "uph": 1100, "source": "parcels", "factor": 1, "skill": "" },
+        { "name": "Manual sort", "driver": "non-conveyables", "uph": 160, "source": "parcels", "factor": 0.05, "skill": "" },
+        { "name": "Loading", "driver": "parcels", "uph": 550, "source": "parcels", "factor": 1, "skill": "Loading" },
+        { "name": "Pallet handling", "driver": "pallets", "uph": 25, "source": "pallets", "factor": 1, "skill": "Forklift" }
+      ]
+    },
+    {
+      "key": "warehouse",
+      "name": "Warehouse (e-commerce fulfilment)",
+      "processes": [
+        { "name": "Unloading", "driver": "pallets", "uph": 30, "source": "pallets", "factor": 1, "skill": "" },
+        { "name": "Receiving", "driver": "pallets", "uph": 20, "source": "pallets", "factor": 1, "skill": "Receiving" },
+        { "name": "Putaway", "driver": "pallets", "uph": 18, "source": "pallets", "factor": 1, "skill": "Put-away" },
+        { "name": "Picking", "driver": "lines", "uph": 110, "source": "orders", "factor": 2.4, "skill": "Picking" },
+        { "name": "Packing", "driver": "orders", "uph": 45, "source": "orders", "factor": 1, "skill": "Packing" },
+        { "name": "Loading", "driver": "parcels", "uph": 400, "source": "orders", "factor": 1.1, "skill": "Loading" }
+      ]
+    },
+    {
+      "key": "delivery-station",
+      "name": "Delivery station (last mile)",
+      "processes": [
+        { "name": "Unloading", "driver": "parcels", "uph": 800, "source": "parcels", "factor": 1, "skill": "" },
+        { "name": "Induct and sort", "driver": "parcels", "uph": 350, "source": "parcels", "factor": 1, "skill": "Induct and sort" },
+        { "name": "Route staging", "driver": "parcels", "uph": 900, "source": "parcels", "factor": 1, "skill": "Route staging" },
+        { "name": "Van loading", "driver": "parcels", "uph": 600, "source": "parcels", "factor": 1, "skill": "Van loading" }
+      ]
+    },
+    {
+      "key": "laundry-kitchen",
+      "name": "Hotel laundry and kitchen",
+      "processes": [
+        { "name": "Linen sorting", "driver": "kg", "uph": 200, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Washing and drying", "driver": "kg", "uph": 120, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Ironing and folding", "driver": "kg", "uph": 45, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Food preparation", "driver": "covers", "uph": 40, "source": "covers", "factor": 1, "skill": "" },
+        { "name": "Dishwashing", "driver": "covers", "uph": 90, "source": "covers", "factor": 1, "skill": "" }
+      ]
+    }
+  ],
+  "example": {
+    "template": "parcel-hub",
+    "site": "Parcel hub, outbound and inbound",
+    "shifts": [
+      { "name": "Early", "length": 8, "unpaid": 30, "paid": 30 },
+      { "name": "Late", "length": 8, "unpaid": 30, "paid": 30 },
+      { "name": "Night", "length": 8, "unpaid": 30, "paid": 30 }
+    ],
+    "utilisation": 85,
+    "absenteeism": 8,
+    "overtime": 2,
+    "mode": "rostered",
+    "rows": [
+      "0|0|52000|180", "0|1|58500|190", "0|2|39000|260",
+      "1|0|44000|155", "1|1|49500|160", "1|2|33000|215",
+      "2|0|40000|140", "2|1|45000|145", "2|2|30000|200",
+      "3|0|38400|135", "3|1|43200|140", "3|2|28800|190",
+      "4|0|41000|145", "4|1|46000|150", "4|2|31000|205",
+      "5|0|24000|80", "5|1|27000|90"
+    ],
+    "crew": [[10, 7, 4, 15, 2], [11, 8, 4, 16, 2], [8, 5, 3, 10, 3]],
+    "crewOverrides": ["5|0|6|4|2|9|1", "5|1|7|5|2|10|1"]
+  },
+  "advice": {
+    "short": {
+      "meaning": "The forecast needs more hours on this process than the planned team brings. Without a change before the shift, the work backs up behind it: trailers wait, cut-off times slip, and the next shift starts with a backlog.",
+      "moves": [
+        "Staff the bottleneck first: it sets the output of the whole shift.",
+        "Move people from a process with spare hours, but only people who do the work alone (level 3 or above).",
+        "Book the rest as overtime or agency hours today, not when the shift has started.",
+        "Check the forecast with the planner or the customer: a peak that is not confirmed is a risk, not a plan."
+      ],
+      "question": "Which process runs out of people first, and who can step in there without a trainer at their side?"
+    },
+    "rounding": {
+      "meaning": "In hours the planned team is enough, but not in whole people: the heads are rounded up for each process and again for absence. One person who works two processes covers the fractions.",
+      "moves": [
+        "Name one flexible person who moves between the processes with spare hours and the ones that are short.",
+        "Agree when they move: for example after the inbound wave or once the trailers are unloaded.",
+        "Watch the first two hours: if the rate is below the standard, book the extra hours then."
+      ],
+      "question": "Who in this team can work both processes, and when in the shift do they move?"
+    },
+    "ok": {
+      "meaning": "The planned team covers the forecast on every process, with the absence allowance included. The plan holds as long as the volume and the rates do.",
+      "moves": [
+        "Check the rates against what the team really did last week: a standard that is too high hides a gap.",
+        "Keep the spare hours visible: training, 5S or cross-training on the bottleneck process.",
+        "Check again when the volume forecast changes."
+      ],
+      "question": "Which rate here has not been checked against real output for a month or more?"
+    },
+    "none": {
+      "meaning": "No planned heads are entered for this shift yet, so the tool shows only what the forecast needs.",
+      "moves": [
+        "Type the people rostered for each process, or only the total if they work across processes.",
+        "Use the heads needed incl. absence as the number to roster."
+      ],
+      "question": "How many people are rostered for this shift, and on which processes?"
+    }
+  },
+  "tips": [
+    ["Rates from real work.", "Use the units per productive hour of an engineered labour standard or of a time study, not a target. A rate that is too high hides the gap until the shift is already late."],
+    ["One driver per process.", "Each process is counted in its own unit: lines for picking, orders for packing, pallets for putaway. If the forecast comes in orders, give the conversion (for example 2.4 lines per order)."],
+    ["Productive hours, not paid hours.", "Of an 8-hour shift, breaks, the briefing and the clean-up are not productive, and nobody works at 100 % for the rest. Utilisation (often 80–90 %) covers walking, waiting and small stops."],
+    ["Absence before it happens.", "With an absence allowance of 8 %, about 1 in 12 rostered people will not come. The heads incl. absence are the number to roster, so that the heads needed are there on the day."],
+    ["The bottleneck sets the output.", "The process with the lowest capacity against its volume limits the whole shift. Staff it first, and move qualified people to it from processes with spare hours."],
+    ["Every week, before the roster closes.", "Paste the volume forecast of the week, type the planned heads, and close the gaps with overtime, agency or moves while there is still time to book them."]
+  ]
+}

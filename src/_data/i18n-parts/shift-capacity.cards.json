@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Shift Capacity", "type": "Planning", "time": "10 min", "summary": "Turn the volume forecast and the rate of each process into the heads every shift needs, with breaks, utilisation and absence, and see the gap against the planned team, the bottleneck and how to close it with overtime, agency or qualified people from another process.", "url": "/tools/shift-capacity/", "cta": "Plan the shifts" },
+    "de": { "name": "Schichtkapazität", "type": "Planung", "time": "10 min", "summary": "Machen Sie aus der Mengenprognose und der Leistung jedes Prozesses die Köpfe, die jede Schicht braucht, mit Pausen, Nutzungsgrad und Abwesenheit, und sehen Sie die Lücke zum geplanten Team, den Engpass und wie Sie sie mit Überstunden, Leihkräften oder qualifizierten Personen aus einem anderen Prozess schließen.", "url": "/de/tools/shift-capacity/", "cta": "Schichten planen" },
+    "sq": { "name": "Kapaciteti i turnit", "type": "Planifikim", "time": "10 min", "summary": "Ktheje parashikimin e volumit dhe ritmin e çdo procesi në njerëzit që i duhen çdo turni, me pushimet, shfrytëzimin dhe mungesat, dhe shiko hendekun me ekipin e planifikuar, pikën e ngushtë dhe si mbyllet me orë shtesë, agjenci ose njerëz të kualifikuar nga një proces tjetër.", "url": "/sq/tools/shift-capacity/", "cta": "Planifiko turnet" }
+  },
+  "routine": { "when": "Every week", "do": "Paste next week's volume forecast before the roster closes and close every shift that is short of hours with a move, overtime or agency booking.", "de": { "when": "Jede Woche", "do": "Fügen Sie die Mengenprognose der nächsten Woche ein, bevor der Dienstplan schließt, und schließen Sie jede Schicht mit zu wenig Stunden durch eine Umsetzung, Überstunden oder eine Leihkräfte-Buchung." }, "sq": { "when": "Çdo javë", "do": "Ngjit parashikimin e volumit të javës që vjen para se të mbyllet grafiku, dhe mbyll çdo turn me orë mangut me një zhvendosje, orë shtesë ose një rezervim nga agjencia." } },
+  "recipe": "example"
+}
