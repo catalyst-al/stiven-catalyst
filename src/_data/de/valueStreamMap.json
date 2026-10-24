@@ -1,0 +1,392 @@
+{
+  "storageKey": "sc-value-stream-map-de",
+  "title": "Wertstromanalyse",
+  "csv": "value-stream-map",
+  "text": {
+    "familyPlaceholder": "z. B. Paketversand, Standardpakete",
+    "supplierPlaceholder": "z. B. Eingangs-Hub",
+    "customerPlaceholder": "z. B. Zustellstationen"
+  },
+  "advice": {
+    "over": {
+      "meaning": "Ein Schritt über der Taktzeit bestimmt das Tempo des ganzen Stroms. Alles davor staut sich vor ihm, alles danach wartet auf Arbeit, und der Kunde erhält nur, was dieser eine Schritt abgeben kann, so schnell die anderen auch sind.",
+      "moves": [
+        "Nehmen Sie zuerst die Verschwendung aus dem Engpass: Laufen, Suchen und Warten auf Material an diesem einen Schritt sind Kapazität für den ganzen Strom.",
+        "Schützen Sie seine Zeit: keine Pause ohne Vertretung, Rüsten vorbereiten, solange er noch läuft, ein kleiner Puffer davor, damit er nie leer läuft.",
+        "Erst danach die Arbeit austakten oder ein Paar Hände ergänzen, und den Strom neu aufnehmen, um zu sehen, wohin der Bestand wandert."
+      ],
+      "question": "Was tut der Engpass in den Minuten, in denen er kein Teil abgibt?"
+    },
+    "flow": {
+      "meaning": "Jeder Schritt hält die Taktzeit, die Durchlaufzeit steckt also nicht in der Arbeit, sondern in den Beständen zwischen den Schritten. Jeder Bestand ist eine Entscheidung zu schieben, ein zu großes Los oder ein Schritt, der nicht weiß, was der nächste braucht.",
+      "moves": [
+        "Nehmen Sie die größte Wartezeit zuerst und fragen Sie, warum der Bestand dort liegt: Losgröße, eine feste Abfahrt, ein Schritt, der schiebt, was er kann.",
+        "Verkleinern Sie das Los oder verbinden Sie die beiden Schritte mit einer FIFO-Bahn fester Größe, damit der Bestand nicht wachsen kann.",
+        "Zeichnen Sie den Soll-Zustand mit den kleineren Beständen und geben Sie jeder Änderung einen Kaizen-Blitz mit Verantwortlichem."
+      ],
+      "question": "Wer entscheidet, wie viele Teile vor dem nächsten Schritt warten dürfen?"
+    },
+    "lowPce": "Weniger als fünf Prozent der Durchlaufzeit sind wertschöpfend. Für eine erste Karte ist das normal, und es zeigt, wo der Hebel liegt: in den Wartezeiten, nicht in schnellerer Arbeit.",
+    "yield": "Weniger als neun von zehn Teilen durchlaufen jeden Schritt beim ersten Mal fehlerfrei. Die Nacharbeitsschleifen sind versteckte Durchlaufzeit; suchen Sie den Schritt mit der niedrigsten Erstausbeute, bevor Sie Bestände senken.",
+    "noFuture": "Wechseln Sie oben zum Soll-Zustand, um den Strom so zu zeichnen, wie er laufen soll: Er beginnt als Kopie dieser Karte, und jede Änderung erhält einen Kaizen-Blitz."
+  },
+  "tips": [
+    [
+      "Gehen Sie den Strom rückwärts.",
+      "Beginnen Sie beim Kunden und gehen Sie mit dem Klemmbrett stromaufwärts. Sie sehen, was zieht und was schiebt, und niemand hat Zeit, vorher aufzuräumen."
+    ],
+    [
+      "Zählen statt schätzen.",
+      "Zählen Sie die Teile in jedem Bestand am Tag Ihres Rundgangs. Ein erinnerter Bestand ist immer kleiner als der echte."
+    ],
+    [
+      "Eine Familie, eine Karte.",
+      "Bilden Sie Produkte oder Gäste ab, die dieselben Schritte durchlaufen. Eine Karte von allem ist eine Karte von nichts."
+    ],
+    [
+      "Die Treppe erzählt die Geschichte.",
+      "Warten liegt oben, Bearbeiten unten. Sind die unteren Stufen Sekunden und die oberen Stunden, liegt der Hebel in den Beständen, nicht in schnelleren Händen."
+    ],
+    [
+      "Zeichnen Sie die Zukunft, bevor Sie handeln.",
+      "Kopieren Sie den Ist-Zustand, ändern Sie, was die Verbesserungen ändern, und schreiben Sie jede Änderung als Kaizen-Blitz. Dann senden Sie die Blitze mit Verantwortlichem an den Maßnahmen-Tracker."
+    ]
+  ],
+  "templates": [
+    {
+      "id": "parcel",
+      "name": "Paketversand: Annahme, Sortierung, Kommissionierung, Verpackung, Bereitstellung, Verladung",
+      "header": {
+        "family": "Paketversand, Standardpakete",
+        "demand": 4800,
+        "minutes": 900,
+        "supplier": "Eingangs-Hub",
+        "customer": "Zustellstationen"
+      },
+      "steps": [
+        {
+          "name": "Annahme",
+          "operators": 3,
+          "ct": 24,
+          "co": 10,
+          "uptime": 96,
+          "batch": 600,
+          "fpy": 99.6,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Sortierung",
+          "operators": 2,
+          "ct": 16,
+          "co": 20,
+          "uptime": 92,
+          "batch": 2400,
+          "fpy": 99.2,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Kommissionierung",
+          "operators": 5,
+          "ct": 45,
+          "co": 0,
+          "uptime": 98,
+          "batch": 30,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Verpackung",
+          "operators": 4,
+          "ct": 48,
+          "co": 5,
+          "uptime": 94,
+          "batch": 200,
+          "fpy": 98.5,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Bereitstellung",
+          "operators": 2,
+          "ct": 14,
+          "co": 0,
+          "uptime": 99,
+          "batch": 50,
+          "fpy": 99.8,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Verladung",
+          "operators": 2,
+          "ct": 20,
+          "co": 15,
+          "uptime": 97,
+          "batch": 800,
+          "fpy": 99.7,
+          "shifts": 2,
+          "va": false
+        }
+      ],
+      "finished": ""
+    },
+    {
+      "id": "hotel",
+      "name": "Hotelanreise: Begrüßung bis Zimmer",
+      "header": {
+        "family": "Gästeanreise, Freizeit und Geschäft",
+        "demand": 240,
+        "minutes": 960,
+        "supplier": "Buchungskanäle",
+        "customer": "Gast im Zimmer"
+      },
+      "steps": [
+        {
+          "name": "Begrüßung an der Tür",
+          "operators": 1,
+          "ct": 30,
+          "co": 0,
+          "uptime": 100,
+          "batch": 1,
+          "fpy": 100,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Registrierung",
+          "operators": 2,
+          "ct": 240,
+          "co": 0,
+          "uptime": 97,
+          "batch": 1,
+          "fpy": 96,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Zahlung und Vorautorisierung",
+          "operators": 2,
+          "ct": 90,
+          "co": 0,
+          "uptime": 95,
+          "batch": 1,
+          "fpy": 94,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Schlüsselkarten",
+          "operators": 2,
+          "ct": 40,
+          "co": 0,
+          "uptime": 98,
+          "batch": 1,
+          "fpy": 99,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Gepäck aufs Zimmer",
+          "operators": 1,
+          "ct": 300,
+          "co": 0,
+          "uptime": 100,
+          "batch": 1,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Zimmerübergabe",
+          "operators": 1,
+          "ct": 120,
+          "co": 0,
+          "uptime": 100,
+          "batch": 1,
+          "fpy": 97,
+          "shifts": 2,
+          "va": true
+        }
+      ],
+      "finished": ""
+    }
+  ],
+  "example": {
+    "header": {
+      "family": "Paketversand, Standardpakete",
+      "demand": 4800,
+      "minutes": 900,
+      "supplier": "Eingangs-Hub",
+      "customer": "Zustellstationen"
+    },
+    "current": {
+      "steps": [
+        {
+          "name": "Annahme",
+          "operators": 3,
+          "ct": 24,
+          "co": 10,
+          "uptime": 96,
+          "batch": 600,
+          "fpy": 99.6,
+          "shifts": 2,
+          "va": false,
+          "inv": 1400,
+          "kaizen": ""
+        },
+        {
+          "name": "Sortierung",
+          "operators": 2,
+          "ct": 16,
+          "co": 20,
+          "uptime": 92,
+          "batch": 2400,
+          "fpy": 99.2,
+          "shifts": 2,
+          "va": true,
+          "inv": 600,
+          "kaizen": ""
+        },
+        {
+          "name": "Kommissionierung",
+          "operators": 5,
+          "ct": 45,
+          "co": 0,
+          "uptime": 98,
+          "batch": 30,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true,
+          "inv": 900,
+          "kaizen": ""
+        },
+        {
+          "name": "Verpackung",
+          "operators": 4,
+          "ct": 48,
+          "co": 5,
+          "uptime": 94,
+          "batch": 200,
+          "fpy": 98.5,
+          "shifts": 2,
+          "va": true,
+          "inv": 450,
+          "kaizen": ""
+        },
+        {
+          "name": "Bereitstellung",
+          "operators": 2,
+          "ct": 14,
+          "co": 0,
+          "uptime": 99,
+          "batch": 50,
+          "fpy": 99.8,
+          "shifts": 2,
+          "va": false,
+          "inv": 300,
+          "kaizen": ""
+        },
+        {
+          "name": "Verladung",
+          "operators": 2,
+          "ct": 20,
+          "co": 15,
+          "uptime": 97,
+          "batch": 800,
+          "fpy": 99.7,
+          "shifts": 2,
+          "va": false,
+          "inv": 1600,
+          "kaizen": ""
+        }
+      ],
+      "finished": 0
+    },
+    "future": {
+      "steps": [
+        {
+          "name": "Annahme",
+          "operators": 3,
+          "ct": 24,
+          "co": 10,
+          "uptime": 96,
+          "batch": 600,
+          "fpy": 99.6,
+          "shifts": 2,
+          "va": false,
+          "inv": 600,
+          "kaizen": "Ankunftsfenster für die Fernverkehrs-Trailer"
+        },
+        {
+          "name": "Sortierung",
+          "operators": 2,
+          "ct": 16,
+          "co": 20,
+          "uptime": 92,
+          "batch": 2400,
+          "fpy": 99.2,
+          "shifts": 2,
+          "va": true,
+          "inv": 300,
+          "kaizen": ""
+        },
+        {
+          "name": "Kommissionierung",
+          "operators": 5,
+          "ct": 45,
+          "co": 0,
+          "uptime": 98,
+          "batch": 30,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true,
+          "inv": 300,
+          "kaizen": "Kommissionierwellen alle 30 Minuten statt drei pro Schicht"
+        },
+        {
+          "name": "Verpackung",
+          "operators": 5,
+          "ct": 44,
+          "co": 5,
+          "uptime": 94,
+          "batch": 200,
+          "fpy": 98.5,
+          "shifts": 2,
+          "va": true,
+          "inv": 150,
+          "kaizen": "Fünfter Packtisch, vorgefaltete Kartons griffbereit"
+        },
+        {
+          "name": "Bereitstellung",
+          "operators": 2,
+          "ct": 14,
+          "co": 0,
+          "uptime": 99,
+          "batch": 50,
+          "fpy": 99.8,
+          "shifts": 2,
+          "va": false,
+          "inv": 150,
+          "kaizen": ""
+        },
+        {
+          "name": "Verladung",
+          "operators": 2,
+          "ct": 20,
+          "co": 8,
+          "uptime": 97,
+          "batch": 800,
+          "fpy": 99.7,
+          "shifts": 2,
+          "va": false,
+          "inv": 800,
+          "kaizen": "Nächsten Trailer vor der Abfahrt bereitstellen: Rüsten 15 auf 8 Min."
+        }
+      ],
+      "finished": 0
+    }
+  }
+}

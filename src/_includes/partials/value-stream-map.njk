@@ -1,0 +1,92 @@
+{#- Value Stream Map: the flow from supplier to customer, inventories turned into time, current and future state; value-stream-map.js does the rest. -#}
+<section class="shell tool-layout dl-setup vs-setup">
+  <div class="tool-panel" data-value-stream-map>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "The value stream" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="vs-family">{{ "Product or service family" | t(lang) }}</label>
+          <input id="vs-family" name="family" placeholder="{{ cfg.text.familyPlaceholder }}" autocomplete="off" data-header>
+        </div>
+        <div class="field">
+          <label for="vs-demand">{{ "Customer demand per day" | t(lang) }}</label>
+          <input id="vs-demand" name="demand" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ 'e.g. 4800' | t(lang) }}" data-header>
+        </div>
+        <div class="field">
+          <label for="vs-minutes">{{ "Working minutes per day" | t(lang) }}</label>
+          <input id="vs-minutes" name="minutes" type="number" min="1" step="1" inputmode="numeric" placeholder="{{ 'e.g. 900' | t(lang) }}" data-header>
+        </div>
+        <div class="field">
+          <label for="vs-supplier">{{ "Supplier" | t(lang) }}</label>
+          <input id="vs-supplier" name="supplier" placeholder="{{ cfg.text.supplierPlaceholder }}" autocomplete="off" data-header>
+        </div>
+        <div class="field">
+          <label for="vs-customer">{{ "Customer" | t(lang) }}</label>
+          <input id="vs-customer" name="customer" placeholder="{{ cfg.text.customerPlaceholder }}" autocomplete="off" data-header>
+        </div>
+      </div>
+      <p class="form-note vs-takt" data-takt aria-live="polite"></p>
+      <p class="form-note">{{ "Working minutes are the time the stream runs in a day, without breaks. Takt is that time divided by the demand, and a pile of one day's demand is one working day of waiting." | t(lang) }}</p>
+    </fieldset>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">2 · {{ "Start from a template" | t(lang) }}</legend>
+      <div class="dl-grid vs-template">
+        <div class="field">
+          <label for="vs-template">{{ "Template" | t(lang) }}</label>
+          <select id="vs-template" data-template>
+            {%- for template in cfg.templates %}
+            <option value="{{ template.id }}">{{ template.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-fill>{{ "Fill the steps" | t(lang) }}</button>
+        </div>
+      </div>
+      <p class="form-note">{{ "Replaces the steps of the state you are drawing with the template's steps and typical times. Count the inventories yourself: they are the waits." | t(lang) }}</p>
+      <p class="form-note" data-template-status aria-live="polite"></p>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Process steps" | t(lang) }}</p>
+        <p class="form-note" data-step-count></p>
+      </div>
+      <div class="vs-views" role="group" aria-label="{{ 'State to draw' | t(lang) }}">
+        <button class="button-secondary" type="button" data-view="current" aria-pressed="true">{{ "Current state" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-view="future" aria-pressed="false">{{ "Future state" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-view-note aria-live="polite"></p>
+      <p class="form-note">{{ "In the order of the flow. CT is the work time of one piece; with more operators the step releases a piece every CT ÷ operators. Between the steps, count the pieces waiting: the tool turns them into time through the demand." | t(lang) }}</p>
+      <div class="vs-steps" data-steps></div>
+      <p class="dl-empty" data-empty>{{ "No steps yet. Choose a template, add a step, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example map" | t(lang) }}</button>.</p>
+      <p class="form-note dl-log-status" data-step-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-add>{{ "+ Add a step" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-reset-future hidden>{{ "Copy the current state again" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear the map" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Then go to the floor." | t(lang) }}</strong> {{ "Time the bottleneck element by element in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/time-study/' | local(lang) }}">{{ "Time Study" | t(lang) }}</a>, {{ "and take a wait that keeps coming back through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results vs-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="value-stream-map-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/value-stream-map.js' | assetUrl }}" defer></script>

@@ -1,0 +1,392 @@
+{
+  "storageKey": "sc-value-stream-map-sq",
+  "title": "Harta e rrjedhës së vlerës",
+  "csv": "value-stream-map",
+  "text": {
+    "familyPlaceholder": "p.sh. Dërgesa e pakove, pako standarde",
+    "supplierPlaceholder": "p.sh. Qendra hyrëse",
+    "customerPlaceholder": "p.sh. Stacionet e shpërndarjes"
+  },
+  "advice": {
+    "over": {
+      "meaning": "Një hap mbi takt përcakton ritmin e gjithë rrjedhës. Gjithçka para tij grumbullohet përpara tij, gjithçka pas tij pret punë, dhe klienti merr vetëm aq sa mund të lëshojë ky hap, sado të shpejtë të jenë të tjerët.",
+      "moves": [
+        "Hiq së pari humbjet nga pika e ngushtë: ecja, kërkimi dhe pritja për material te ky hap janë kapacitet për gjithë rrjedhën.",
+        "Mbroje kohën e tij: asnjë pushim pa zëvendësim, ndërrimet përgatiten ndërsa ai ende punon, një rezervë e vogël përpara që të mos mbetet kurrë pa punë.",
+        "Vetëm pastaj balanco punën ose shto një palë duar, dhe harto rrjedhën sërish për të parë ku zhvendoset stoku."
+      ],
+      "question": "Çfarë bën pika e ngushtë në minutat kur nuk lëshon asnjë copë?"
+    },
+    "flow": {
+      "meaning": "Çdo hap e mban taktin, pra koha e kalimit nuk është te puna: është te stoqet mes hapave. Çdo stok është një vendim për të shtyrë, një parti shumë e madhe ose një hap që nuk e di çfarë i duhet hapit pasardhës.",
+      "moves": [
+        "Merr së pari pritjen më të madhe dhe pyet pse stoku është aty: madhësia e partisë, një nisje me orar fiks, një hap që shtyn gjithçka që mundet.",
+        "Zvogëlo partinë ose lidhi dy hapat me një korsi FIFO me madhësi fikse, që stoku të mos rritet dot.",
+        "Vizato gjendjen e ardhshme me stoqet më të ulëta dhe jepi çdo ndryshimi një shpërthim kaizen me përgjegjës."
+      ],
+      "question": "Kush vendos sa copa mund të presin para hapit pasardhës?"
+    },
+    "lowPce": "Më pak se pesë për qind e kohës së kalimit shton vlerë. Kjo është normale për një hartë të parë, dhe tregon ku është leva: te pritjet, jo te puna më e shpejtë.",
+    "yield": "Më pak se nëntë në dhjetë copa e kalojnë çdo hap pa gabim herën e parë. Ciklet e ripunimit janë kohë kalimi e fshehur; gjej hapin me rendimentin më të ulët të kalimit të parë para se të ulësh stoqet.",
+    "noFuture": "Kalo te Gjendja e ardhshme më sipër për të vizatuar rrjedhën siç duhet të funksionojë: nis si kopje e kësaj harte, dhe çdo ndryshim merr një shpërthim kaizen."
+  },
+  "tips": [
+    [
+      "Ec rrjedhën së prapthi.",
+      "Nis te klienti dhe ec drejt burimit me një bllok shënimesh. Sheh çfarë tërheq dhe çfarë shtyn, dhe askush s’ka kohë të rregullojë gjërat para teje."
+    ],
+    [
+      "Numëro, mos vlerëso.",
+      "Numëro copat në çdo stok ditën kur ecën rrjedhën. Një stok i kujtuar është gjithmonë më i vogël se ai i vërteti."
+    ],
+    [
+      "Një familje, një hartë.",
+      "Harto produkte ose mysafirë që kalojnë nëpër të njëjtat hapa. Një hartë e gjithçkaje është hartë e asgjëje."
+    ],
+    [
+      "Shkalla e tregon historinë.",
+      "Pritja rri lart, përpunimi poshtë. Kur shkallët e poshtme janë sekonda dhe të sipërmet orë, leva është te stoqet, jo te duart më të shpejta."
+    ],
+    [
+      "Vizato të ardhmen para se të veprosh.",
+      "Kopjo gjendjen aktuale, ndrysho atë që ndryshojnë përmirësimet dhe shkruaje çdo ndryshim si shpërthim kaizen. Pastaj dërgoji shpërthimet te Ndjekësi i veprimeve me përgjegjës."
+    ]
+  ],
+  "templates": [
+    {
+      "id": "parcel",
+      "name": "Dërgesa e pakove: pranim, renditje, mbledhje, paketim, përgatitje, ngarkim",
+      "header": {
+        "family": "Dërgesa e pakove, pako standarde",
+        "demand": 4800,
+        "minutes": 900,
+        "supplier": "Qendra hyrëse",
+        "customer": "Stacionet e shpërndarjes"
+      },
+      "steps": [
+        {
+          "name": "Pranimi",
+          "operators": 3,
+          "ct": 24,
+          "co": 10,
+          "uptime": 96,
+          "batch": 600,
+          "fpy": 99.6,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Renditja",
+          "operators": 2,
+          "ct": 16,
+          "co": 20,
+          "uptime": 92,
+          "batch": 2400,
+          "fpy": 99.2,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Mbledhja",
+          "operators": 5,
+          "ct": 45,
+          "co": 0,
+          "uptime": 98,
+          "batch": 30,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Paketimi",
+          "operators": 4,
+          "ct": 48,
+          "co": 5,
+          "uptime": 94,
+          "batch": 200,
+          "fpy": 98.5,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Përgatitja",
+          "operators": 2,
+          "ct": 14,
+          "co": 0,
+          "uptime": 99,
+          "batch": 50,
+          "fpy": 99.8,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Ngarkimi",
+          "operators": 2,
+          "ct": 20,
+          "co": 15,
+          "uptime": 97,
+          "batch": 800,
+          "fpy": 99.7,
+          "shifts": 2,
+          "va": false
+        }
+      ],
+      "finished": ""
+    },
+    {
+      "id": "hotel",
+      "name": "Mbërritja në hotel: nga mirëseardhja te dhoma",
+      "header": {
+        "family": "Mbërritja e mysafirëve, pushime dhe biznes",
+        "demand": 240,
+        "minutes": 960,
+        "supplier": "Kanalet e rezervimit",
+        "customer": "Mysafiri në dhomë"
+      },
+      "steps": [
+        {
+          "name": "Mirëseardhja te dera",
+          "operators": 1,
+          "ct": 30,
+          "co": 0,
+          "uptime": 100,
+          "batch": 1,
+          "fpy": 100,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Regjistrimi",
+          "operators": 2,
+          "ct": 240,
+          "co": 0,
+          "uptime": 97,
+          "batch": 1,
+          "fpy": 96,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Pagesa dhe paraautorizimi",
+          "operators": 2,
+          "ct": 90,
+          "co": 0,
+          "uptime": 95,
+          "batch": 1,
+          "fpy": 94,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Kartat e çelësit",
+          "operators": 2,
+          "ct": 40,
+          "co": 0,
+          "uptime": 98,
+          "batch": 1,
+          "fpy": 99,
+          "shifts": 2,
+          "va": false
+        },
+        {
+          "name": "Bagazhet në dhomë",
+          "operators": 1,
+          "ct": 300,
+          "co": 0,
+          "uptime": 100,
+          "batch": 1,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true
+        },
+        {
+          "name": "Dorëzimi i dhomës",
+          "operators": 1,
+          "ct": 120,
+          "co": 0,
+          "uptime": 100,
+          "batch": 1,
+          "fpy": 97,
+          "shifts": 2,
+          "va": true
+        }
+      ],
+      "finished": ""
+    }
+  ],
+  "example": {
+    "header": {
+      "family": "Dërgesa e pakove, pako standarde",
+      "demand": 4800,
+      "minutes": 900,
+      "supplier": "Qendra hyrëse",
+      "customer": "Stacionet e shpërndarjes"
+    },
+    "current": {
+      "steps": [
+        {
+          "name": "Pranimi",
+          "operators": 3,
+          "ct": 24,
+          "co": 10,
+          "uptime": 96,
+          "batch": 600,
+          "fpy": 99.6,
+          "shifts": 2,
+          "va": false,
+          "inv": 1400,
+          "kaizen": ""
+        },
+        {
+          "name": "Renditja",
+          "operators": 2,
+          "ct": 16,
+          "co": 20,
+          "uptime": 92,
+          "batch": 2400,
+          "fpy": 99.2,
+          "shifts": 2,
+          "va": true,
+          "inv": 600,
+          "kaizen": ""
+        },
+        {
+          "name": "Mbledhja",
+          "operators": 5,
+          "ct": 45,
+          "co": 0,
+          "uptime": 98,
+          "batch": 30,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true,
+          "inv": 900,
+          "kaizen": ""
+        },
+        {
+          "name": "Paketimi",
+          "operators": 4,
+          "ct": 48,
+          "co": 5,
+          "uptime": 94,
+          "batch": 200,
+          "fpy": 98.5,
+          "shifts": 2,
+          "va": true,
+          "inv": 450,
+          "kaizen": ""
+        },
+        {
+          "name": "Përgatitja",
+          "operators": 2,
+          "ct": 14,
+          "co": 0,
+          "uptime": 99,
+          "batch": 50,
+          "fpy": 99.8,
+          "shifts": 2,
+          "va": false,
+          "inv": 300,
+          "kaizen": ""
+        },
+        {
+          "name": "Ngarkimi",
+          "operators": 2,
+          "ct": 20,
+          "co": 15,
+          "uptime": 97,
+          "batch": 800,
+          "fpy": 99.7,
+          "shifts": 2,
+          "va": false,
+          "inv": 1600,
+          "kaizen": ""
+        }
+      ],
+      "finished": 0
+    },
+    "future": {
+      "steps": [
+        {
+          "name": "Pranimi",
+          "operators": 3,
+          "ct": 24,
+          "co": 10,
+          "uptime": 96,
+          "batch": 600,
+          "fpy": 99.6,
+          "shifts": 2,
+          "va": false,
+          "inv": 600,
+          "kaizen": "Orare mbërritjeje për rimorkiot e linjës"
+        },
+        {
+          "name": "Renditja",
+          "operators": 2,
+          "ct": 16,
+          "co": 20,
+          "uptime": 92,
+          "batch": 2400,
+          "fpy": 99.2,
+          "shifts": 2,
+          "va": true,
+          "inv": 300,
+          "kaizen": ""
+        },
+        {
+          "name": "Mbledhja",
+          "operators": 5,
+          "ct": 45,
+          "co": 0,
+          "uptime": 98,
+          "batch": 30,
+          "fpy": 99,
+          "shifts": 2,
+          "va": true,
+          "inv": 300,
+          "kaizen": "Valë mbledhjeje çdo 30 minuta, jo tri në turn"
+        },
+        {
+          "name": "Paketimi",
+          "operators": 5,
+          "ct": 44,
+          "co": 5,
+          "uptime": 94,
+          "batch": 200,
+          "fpy": 98.5,
+          "shifts": 2,
+          "va": true,
+          "inv": 150,
+          "kaizen": "Tavolinë e pestë paketimi, kuti të formuara gati"
+        },
+        {
+          "name": "Përgatitja",
+          "operators": 2,
+          "ct": 14,
+          "co": 0,
+          "uptime": 99,
+          "batch": 50,
+          "fpy": 99.8,
+          "shifts": 2,
+          "va": false,
+          "inv": 150,
+          "kaizen": ""
+        },
+        {
+          "name": "Ngarkimi",
+          "operators": 2,
+          "ct": 20,
+          "co": 8,
+          "uptime": 97,
+          "batch": 800,
+          "fpy": 99.7,
+          "shifts": 2,
+          "va": false,
+          "inv": 800,
+          "kaizen": "Rimorkioja tjetër gati para nisjes: ndërrimi nga 15 në 8 min"
+        }
+      ],
+      "finished": 0
+    }
+  }
+}

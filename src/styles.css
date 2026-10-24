@@ -10337,6 +10337,126 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .ts-table { font-size: 11px; }
   .ts-table .is-waste td:first-child { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+/* ===== Value Stream Map (js/value-stream-map.js) =====
+   The steps as quiet cards with the inventory between them as a triangle row, the current / future switch, the map
+   itself wide enough to read (it scrolls sideways on a phone) and the whole result on one landscape sheet on paper.
+   A step above takt is told by ▲ and its words; the colour only repeats it. */
+.vs-takt { margin: 0; color: var(--ink); font-weight: 600; }
+.vs-template { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+.vs-template .tool-actions { margin: 0; }
+
+.vs-views { display: inline-flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; }
+.vs-views button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+
+.vs-steps { display: grid; gap: 10px; margin-top: 14px; }
+.vs-step {
+  display: grid;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--paper-2);
+}
+.vs-step-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px 10px; }
+.vs-no {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.vs-in {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+.vs-in:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.vs-name { font-weight: 700; }
+.vs-tools { display: flex; gap: 4px; }
+.vs-tool {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+.vs-tool:hover:not(:disabled) { border-color: var(--blue); color: var(--ink); }
+.vs-tool:disabled { opacity: .35; cursor: default; }
+.vs-tool:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+
+.vs-fields { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 12px; }
+.vs-field { display: grid; gap: 4px; min-width: 0; }
+.vs-field label { color: var(--muted); font-size: 12px; font-weight: 700; }
+.vs-va { grid-template-columns: auto minmax(0, 1fr); align-items: center; align-self: end; gap: 8px; padding-bottom: 8px; }
+.vs-va input { width: 20px; height: 20px; margin: 0; accent-color: var(--blue); }
+.vs-va label { color: var(--ink); font-size: 14px; }
+.vs-kaizen-field { grid-column: 1 / -1; }
+.vs-kaizen { resize: vertical; min-height: 52px; }
+
+/* The inventory between two steps: a triangle, the pieces and the time they mean. */
+.vs-inv {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 110px) auto;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 2px 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.vs-tri { color: var(--muted); font-size: 16px; }
+.vs-inv label { font-weight: 700; }
+.vs-inv-in { padding: 6px 8px; font-size: 14px; }
+.vs-unit { color: var(--muted); }
+.vs-inv-out { grid-column: 2 / -1; color: var(--ink); font-weight: 600; }
+.vs-inv-out:empty { display: none; }
+
+/* Results: the map, the comparison and the step table. */
+.vs-map { margin: 0 0 20px; }
+.vs-map .result-label { margin: 0; }
+.vs-map .ck-figure { margin-top: 10px; }
+.vs-map .ck-scroll { border: 1px solid var(--line); border-radius: calc(var(--radius) - 6px); background: var(--paper-2); }
+.vs-actions-status { flex-basis: 100%; margin: 0; }
+.vs-compare th[scope="row"] { text-align: left; font-weight: 700; }
+.vs-compare .vs-strong { color: var(--ink); font-weight: 800; }
+.vs-table-panel { grid-column: 1 / -1; }
+.vs-table .vs-alert { color: var(--danger); font-weight: 800; }
+.vs-table .is-over td:first-child { border-left: 3px solid var(--danger); }
+
+@media (max-width: 600px) {
+  .vs-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vs-template { grid-template-columns: minmax(0, 1fr); }
+  .vs-step-head { grid-template-columns: auto minmax(0, 1fr); }
+  .vs-tools { grid-column: 1 / -1; justify-content: flex-end; }
+  .vs-inv { grid-template-columns: auto minmax(0, 1fr) minmax(0, 90px) auto; padding: 2px 4px; }
+}
+
+/* Paper: the map and its numbers on landscape sheets. */
+@page vs-land { size: A4 landscape; margin: 10mm; }
+@media print {
+  .vs-setup, .vs-actions-status, body:has(.vs-results) .dl-example-note { display: none !important; }
+  .vs-results { page: vs-land; padding: 0; border: 0; }
+  .vs-map .ck-scroll { overflow: visible; border: 0; }
+  .vs-map .ck-chart { min-width: 0 !important; width: 100%; }
+  .vs-results .dl-table-wrap { max-height: none; overflow: visible; border: 0; }
+  .vs-table, .vs-compare { font-size: 10px; }
+  .vs-results .ck-chart, .vs-table .is-over td:first-child { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 /* ===== Action Tracker (js/action-tracker.js) ===== */
 .at-filters { display: grid; gap: 12px; margin: 0 0 12px; }
 .at-status-filter { display: flex; flex-wrap: wrap; gap: 6px; }

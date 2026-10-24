@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Value Stream Map", "type": "Lean", "time": "30 min", "summary": "Map one flow from supplier to customer with the pieces waiting between the steps. Get the lead-time ladder, PCE, takt and the bottleneck, then draw the future state and send its kaizen bursts to the Action Tracker.", "url": "/tools/value-stream-map/", "cta": "Map a stream" },
+    "de": { "name": "Wertstromanalyse", "type": "Lean", "time": "30 Min.", "summary": "Bilden Sie einen Fluss vom Lieferanten bis zum Kunden ab, mit den Teilen, die zwischen den Schritten warten. Sie erhalten die Durchlaufzeit-Treppe, den Flussgrad, die Taktzeit und den Engpass, zeichnen dann den Soll-Zustand und senden seine Kaizen-Blitze an den Maßnahmen-Tracker.", "url": "/de/tools/value-stream-map/", "cta": "Wertstrom aufnehmen" },
+    "sq": { "name": "Harta e rrjedhës së vlerës", "type": "Lean", "time": "30 min", "summary": "Harto një rrjedhë nga furnitori te klienti me copat që presin mes hapave. Merr shkallën e kohës së kalimit, PCE-në, taktin dhe pikën e ngushtë, pastaj vizato gjendjen e ardhshme dhe dërgo shpërthimet kaizen te Ndjekësi i veprimeve.", "url": "/sq/tools/value-stream-map/", "cta": "Harto një rrjedhë" }
+  },
+  "routine": { "when": "Every month", "do": "Walk one value stream from the customer back, count every pile, and turn the largest wait into a kaizen burst with an owner.", "de": { "when": "Jeden Monat", "do": "Gehen Sie einen Wertstrom vom Kunden rückwärts ab, zählen Sie jeden Bestand und machen Sie aus der längsten Wartezeit einen Kaizen-Blitz mit Verantwortlichem." }, "sq": { "when": "Çdo muaj", "do": "Ec një rrjedhë vlere nga klienti së prapthi, numëro çdo stok dhe ktheje pritjen më të madhe në një shpërthim kaizen me përgjegjës." } },
+  "recipe": "example"
+}
