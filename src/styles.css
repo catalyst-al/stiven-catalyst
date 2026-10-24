@@ -10175,6 +10175,112 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .oe-results .dl-panel { break-inside: avoid; }
   .oe-verdict strong { color: #000; }
 }
+/* ===== Skills Matrix (js/skills-matrix.js) ===== */
+/* Setup lists: inputs that fit their table cells. */
+.sm-list { max-height: 360px; }
+.sm-list input, .sm-list select, .sm-plan-table select, .sm-plan-table input {
+  min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px;
+}
+.sm-list input[type="text"] { width: 100%; min-width: 120px; }
+.sm-list .sm-num { width: 72px; }
+.sm-list :is(input, select):focus-visible, .sm-plan-table :is(input, select):focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.sm-task-grid { grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); }
+[data-setup-status]:empty, [data-people-status]:empty, [data-tasks-status]:empty { display: none; }
+
+/* The results: boxes stacked with air between them; charts inside a box get the chart colours of a panel. */
+.sm-results { display: grid; gap: 22px; }
+.sm-results > [data-head] .dl-stats { margin-bottom: 0; }
+.sm-box {
+  --tr-bar: var(--blue); --tr-top: var(--danger); --tr-line: #f6f7f4; --tr-target: var(--warn);
+  --tr-grid: rgba(255, 255, 255, .12); --tr-text: #f6f7f4; --tr-muted: #a5b0b8;
+}
+[data-theme="light"] .sm-box { --tr-line: #1b2330; --tr-grid: #dfe3e8; --tr-text: #1b2330; --tr-muted: #5f6870; }
+.sm-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.sm-head h2 { margin-bottom: 12px; }
+.sm-head h2 span { color: var(--muted); font-weight: 400; }
+.sm-anon { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; }
+.sm-anon input { width: 18px; height: 18px; accent-color: var(--blue); }
+
+/* The ILU icon: a ring, filled by quarters; level 4 is full with a dot. */
+.sm-icon { display: block; width: 26px; height: 26px; }
+.sm-icon .sm-ring { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.sm-icon .sm-fill { fill: var(--blue); }
+.sm-icon .sm-dot { fill: var(--card); }
+.sm-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
+.sm-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.sm-legend .sm-icon { width: 20px; height: 20px; }
+.sm-legend strong { color: var(--ink); }
+
+/* The grid: the names stay in view while the tasks scroll sideways. */
+.sm-grid-wrap { max-height: none; }
+.sm-grid th, .sm-grid td { padding: 6px 8px; vertical-align: middle; }
+.sm-grid thead th { font-size: 10px; letter-spacing: .06em; vertical-align: bottom; }
+.sm-grid .sm-task { min-width: 64px; max-width: 96px; white-space: normal; text-align: center; }
+.sm-task-name { display: block; color: var(--ink); line-height: 1.25; }
+.sm-crit { display: block; margin-top: 3px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+.sm-crit-3 { color: var(--ink); }
+.sm-grid :is(.sm-corner, .sm-person, tfoot th) { position: sticky; left: 0; z-index: 1; background: var(--paper-2); }
+.sm-grid .sm-corner { z-index: 2; }
+.sm-person { min-width: 120px; font-weight: 400; }
+.sm-person strong { display: block; font-size: 14px; }
+.sm-person span { display: block; color: var(--muted); font-size: 12px; }
+.sm-td { text-align: center; }
+.sm-cell {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; padding: 0;
+  border: 1px solid transparent; border-radius: 10px; background: none; color: var(--ink); cursor: pointer;
+}
+.sm-cell:hover { border-color: var(--line); background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.sm-cell:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 55%, transparent); outline-offset: 1px; }
+/* Below a task's minimum: a dashed frame in the warning colour; the cell's text says it too. */
+.sm-cell.is-below { border: 1px dashed var(--warn); }
+.sm-vers { color: var(--ink); }
+.sm-grid tfoot th, .sm-grid tfoot td { border-top: 1px solid var(--line); font-size: 12px; text-align: center; }
+.sm-grid tfoot th { text-align: left; color: var(--muted); font-weight: 700; white-space: nowrap; }
+.sm-grid tfoot th span { font-weight: 400; }
+.sm-cover td strong { font-size: 14px; }
+.sm-cov.is-none, .sm-cov.is-none strong { color: var(--danger); }
+.sm-cov.is-spof strong, .sm-cov.is-short strong { color: var(--warn); }
+.sm-flag { display: block; margin-top: 2px; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.sm-cov.is-spof .sm-flag { color: var(--warn); }
+.sm-shift-n { color: var(--muted); }
+.sm-shift-n.is-gap { color: var(--danger); font-weight: 800; }
+
+/* Summary, plan and snapshots. */
+.sm-summary:empty { display: none; }
+.sm-summary .dl-details { margin-top: 18px; }
+.sm-panel-wide { grid-column: 1 / -1; }
+.sm-panel-wide .ck-chart { max-width: 760px; }
+.sm-panel-radar .ck-chart { max-width: 520px; margin-inline: auto; }
+.sm-needs { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.sm-needs li { padding-bottom: 8px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.sm-needs li:last-child { border-bottom: 0; }
+.sm-plan-wrap { max-height: none; }
+.sm-plan-table td { vertical-align: middle; }
+.sm-now { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.sm-sent { color: var(--ok); font-weight: 700; }
+.sm-plan-table tr.is-sent select, .sm-plan-table tr.is-sent input { color: var(--muted); }
+[data-plan-status]:empty, [data-snap-status]:empty { display: none; }
+[data-plan-status], [data-snap-status] { margin: 0; }
+[data-snap-chart]:empty { display: none; }
+
+@media (max-width: 600px) {
+  .sm-grid .sm-task { min-width: 52px; }
+  .sm-cell { width: 36px; height: 36px; }
+  .sm-icon { width: 22px; height: 22px; }
+  .sm-person { min-width: 96px; }
+}
+
+/* Print: the results only, without buttons; the anonymous view prints as it is shown. */
+@media print {
+  .sm-setup, .sm-results .tool-actions, .sm-results .result-actions, .sm-anon, .sm-results .dl-remove { display: none !important; }
+  .sm-results { display: block; padding: 0; border: 0; }
+  .sm-box { margin-bottom: 12px; break-inside: avoid; }
+  .sm-grid-wrap, .sm-plan-wrap { overflow: visible; border: 0; }
+  .sm-grid :is(.sm-corner, .sm-person, tfoot th) { position: static; }
+  .sm-icon .sm-fill, .sm-icon .sm-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sm-plan-table select, .sm-plan-table input { border: 0; padding: 0; appearance: none; background: none; }
+}
 /* ===== Safety Cross (js/safety-cross.js) =====
    The cross of the month next to the talk of the day where there is room, one under the other on a phone. A day's state
    is told by its sign (✓ ! ✕) and its tooltip; the colour only repeats it. Printed on one A4 page with the cross large. */

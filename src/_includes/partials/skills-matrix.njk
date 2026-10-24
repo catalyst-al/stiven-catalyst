@@ -1,0 +1,202 @@
+{#- The Skills Matrix: people × tasks at ILU levels 0 to 4, cover, single points of failure, a training plan and snapshots; skills-matrix.js does the rest. -#}
+<section class="shell tool-layout sm-setup">
+  <div class="tool-panel" data-skills-matrix>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Team and template" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sm-team">{{ "Team" | t(lang) }}</label>
+          <input id="sm-team" list="sm-team-list" placeholder="{{ cfg.text.teamPlaceholder }}" autocomplete="off">
+          <datalist id="sm-team-list"></datalist>
+        </div>
+        <div class="field">
+          <label for="sm-template">{{ "Template" | t(lang) }}</label>
+          <select id="sm-template">
+            {%- for key, tpl in cfg.templates %}
+            <option value="{{ key }}">{{ tpl.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-load-template>{{ "Load the tasks" | t(lang) }}</button>
+        </div>
+      </div>
+      <p class="form-note">{{ "A template fills the tasks of a warehouse, a hotel front office or a delivery station, with their criticality, minimum level and target. Change any of them below." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-clear-all>{{ "Clear the matrix" | t(lang) }}</button>
+        <p class="form-note" data-setup-status aria-live="polite"></p>
+      </div>
+    </fieldset>
+
+    <div class="dl-box">
+      <form data-person-form novalidate>
+        <fieldset>
+          <legend class="kicker">2 · {{ "People" | t(lang) }}</legend>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="sm-person-name">{{ "Name" | t(lang) }}</label>
+              <input id="sm-person-name" name="name" placeholder="{{ cfg.text.namePlaceholder }}" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="sm-person-role">{{ "Role" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+              <input id="sm-person-role" name="role" placeholder="{{ cfg.text.rolePlaceholder }}" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="sm-person-shift">{{ "Shift" | t(lang) }}</label>
+              <select id="sm-person-shift" name="shift"></select>
+            </div>
+          </div>
+          <div class="tool-actions">
+            <button class="button-primary" type="submit">{{ "Add person" | t(lang) }}</button>
+            <p class="form-note" data-people-status aria-live="polite"></p>
+          </div>
+        </fieldset>
+      </form>
+      <p class="form-note" data-people-count></p>
+      <div class="dl-table-wrap sm-list" tabindex="0" data-people-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Name" | t(lang) }}</th><th scope="col">{{ "Role" | t(lang) }}</th><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-people></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-people-empty>{{ "No people yet." | t(lang) }} {{ "Add the first person and load the tasks of a template, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example team" | t(lang) }}</button>.</p>
+    </div>
+
+    <div class="dl-box">
+      <form data-task-form novalidate>
+        <fieldset>
+          <legend class="kicker">3 · {{ "Tasks" | t(lang) }}</legend>
+          <div class="dl-grid sm-task-grid">
+            <div class="field">
+              <label for="sm-task-name">{{ "Task" | t(lang) }}</label>
+              <input id="sm-task-name" name="name" placeholder="{{ cfg.text.taskPlaceholder }}" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="sm-task-crit">{{ "Criticality" | t(lang) }}</label>
+              <select id="sm-task-crit" name="crit">
+                {%- for name in cfg.criticality %}
+                <option value="{{ loop.index }}"{% if loop.index == 2 %} selected{% endif %}>{{ loop.index }} · {{ name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="sm-task-min">{{ "Minimum level" | t(lang) }}</label>
+              <select id="sm-task-min" name="min">
+                {%- for level in cfg.levels %}
+                <option value="{{ loop.index0 }}">{{ loop.index0 }} · {{ level.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="sm-task-target">{{ "Target at level 3+" | t(lang) }}</label>
+              <input id="sm-task-target" name="target" type="number" min="1" max="99" step="1" inputmode="numeric" value="2">
+            </div>
+          </div>
+          <p class="form-note">{{ "Minimum level: what everyone in the team must reach on this task. Target: how many people should do it alone, at level 3 or above." | t(lang) }}</p>
+          <div class="tool-actions">
+            <button class="button-primary" type="submit">{{ "Add task" | t(lang) }}</button>
+            <p class="form-note" data-tasks-status aria-live="polite"></p>
+          </div>
+        </fieldset>
+      </form>
+      <p class="form-note" data-tasks-count></p>
+      <div class="dl-table-wrap sm-list" tabindex="0" data-tasks-wrap hidden>
+        <table class="dl-table">
+          <thead>
+            <tr><th scope="col">{{ "Task" | t(lang) }}</th><th scope="col">{{ "Criticality" | t(lang) }}</th><th scope="col">{{ "Minimum level" | t(lang) }}</th><th scope="col">{{ "Target at level 3+" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-tasks></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-tasks-empty>{{ "No tasks yet. Load a template above or add your own." | t(lang) }}</p>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The same gap keeps coming back?" | t(lang) }}</strong> {{ "Take it through" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sm-results" data-results tabindex="-1" hidden>
+  <div data-head></div>
+
+  <div class="dl-box sm-box sm-matrix">
+    <div class="dl-log-head">
+      <p class="kicker">4 · {{ "The matrix" | t(lang) }}</p>
+      <label class="sm-anon" for="sm-anon"><input id="sm-anon" type="checkbox" data-anon> {{ "Anonymise names" | t(lang) }}</label>
+    </div>
+    <p class="form-note">{{ "Click a cell to raise the level by one; after 4 it starts again at 0. With the keyboard: the arrow keys move, 0 to 4 set the level." | t(lang) }}</p>
+    <div data-legend></div>
+    <div class="dl-table-wrap sm-grid-wrap" data-grid></div>
+    <p class="form-note">{{ "Under the grid: how many people do each task at level 3 or above against its target, then the same for each shift. SPOF: a single point of failure, only one person." | t(lang) }}</p>
+    <div class="tool-actions">
+      <button class="button-secondary" type="button" data-matrix-csv>{{ "Download CSV" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-matrix-xlsx>{{ "Download Excel" | t(lang) }}</button>
+    </div>
+  </div>
+
+  <div class="sm-summary" data-summary></div>
+
+  <div class="dl-box sm-box sm-plan">
+    <div class="dl-log-head">
+      <p class="kicker">5 · {{ "Training plan" | t(lang) }}</p>
+    </div>
+    <p class="form-note">{{ "Suggested rows pair a trainee with a level 4 on the same task, the most critical gaps first, due in 30 days. Change any row; each one becomes an action owned by its trainer." | t(lang) }}</p>
+    <div class="tool-actions">
+      <button class="button-secondary" type="button" data-suggest>{{ "Suggest a plan" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-add-row>{{ "+ Add a row" | t(lang) }}</button>
+    </div>
+    <div class="dl-table-wrap sm-plan-wrap" tabindex="0" data-plan-wrap hidden>
+      <table class="dl-table sm-plan-table">
+        <thead>
+          <tr><th scope="col">{{ "Task" | t(lang) }}</th><th scope="col">{{ "Trainee" | t(lang) }}</th><th scope="col">{{ "Trainer" | t(lang) }}</th><th scope="col">{{ "Target level" | t(lang) }}</th><th scope="col">{{ "By date" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+        </thead>
+        <tbody data-plan></tbody>
+      </table>
+    </div>
+    <p class="dl-empty" data-plan-empty>{{ "No training planned yet. Let the tool suggest a plan from the gaps, or add a row." | t(lang) }}</p>
+    <div class="tool-actions">
+      <button class="button-primary" type="button" data-send>{{ "Send plan to the Action Tracker" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-plan-csv>{{ "Download CSV" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-plan-xlsx>{{ "Download Excel" | t(lang) }}</button>
+      <button class="button-ghost" type="button" data-plan-clear>{{ "Clear the plan" | t(lang) }}</button>
+    </div>
+    <p class="form-note" data-plan-status aria-live="polite"></p>
+  </div>
+
+  <div class="dl-box sm-box sm-snapshots">
+    <div class="dl-log-head">
+      <p class="kicker">6 · {{ "Snapshots" | t(lang) }}</p>
+      <button class="button-secondary" type="button" data-snapshot>{{ "Take a snapshot" | t(lang) }}</button>
+    </div>
+    <p class="form-note">{{ "A snapshot keeps today's flexibility index, single points of failure and gaps, so you can see over the months whether the training works." | t(lang) }}</p>
+    <p class="form-note" data-snap-status aria-live="polite"></p>
+    <div data-snap-chart></div>
+    <div class="dl-table-wrap" tabindex="0" data-snaps-wrap hidden>
+      <table class="dl-table">
+        <thead>
+          <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col" class="num">{{ "Flexibility index" | t(lang) }}</th><th scope="col" class="num">{{ "SPOF" | t(lang) }}</th><th scope="col" class="num">{{ "No cover" | t(lang) }}</th><th scope="col" class="num">{{ "Below the minimum" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+        </thead>
+        <tbody data-snaps></tbody>
+      </table>
+    </div>
+    <p class="dl-empty" data-snaps-empty>{{ "No snapshots yet. Take one today and again next month." | t(lang) }}</p>
+  </div>
+</section>
+
+<script type="application/json" id="skills-matrix-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/skills-matrix.js' | assetUrl }}" defer></script>

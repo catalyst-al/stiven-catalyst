@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Matrica e aftësive
+seo_title: "Matrica e aftësive për magazinë, recepsion hoteli dhe stacion shpërndarjeje: nivelet ILU, mbulimi dhe plani i trajnimit"
+description: "Vlerëso çdo person për çdo detyrë nga 0 në 4: mbulimi kundrejt objektivit, pikat e vetme të dështimit, mbulimi për turn dhe një plan trajnimi."
+activeNav: /sq/tools.html
+permalink: /sq/tools/skills-matrix/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Njerëzit</p>
+  <h1>Matrica e aftësive</h1>
+  <p class="lede">Shëno ekipin dhe detyrat e tij dhe vlerëso çdo person për çdo detyrë nga 0, pa trajnim, deri në 4, mund të trajnojë. Mjeti tregon cilat detyra varen nga një person i vetëm, cilat mbeten pa mbulim në një turn, kush është nën nivelin minimal, dhe propozon një plan trajnimi që çiftëzon një trajner me një të trajnuar, me boshllëqet më kritike në fillim.</p>
+</section>
+
+{% set cfg = sq.skillsMatrix %}
+{% include "partials/skills-matrix.njk" %}

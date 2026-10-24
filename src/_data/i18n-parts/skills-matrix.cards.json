@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Skills Matrix", "type": "People", "time": "15 min", "summary": "Rate each person on each task from 0 to 4 in an ILU grid, with templates for warehouse, hotel front office and delivery station. Cover against target, single points of failure, cover per shift and a training plan that pairs a level 4 with a trainee, straight into actions.", "url": "/tools/skills-matrix/", "cta": "Build the matrix" },
+    "de": { "name": "Qualifikationsmatrix", "type": "Menschen", "time": "15 min", "summary": "Bewerten Sie jede Person je Aufgabe von 0 bis 4 in einem ILU-Raster, mit Vorlagen für Lager, Hotel-Rezeption und Zustellbasis. Abdeckung gegen Ziel, Einzelabhängigkeiten, Abdeckung je Schicht und ein Schulungsplan, der eine Stufe 4 mit einem Lernenden zusammenbringt, direkt als Maßnahmen.", "url": "/de/tools/skills-matrix/", "cta": "Matrix aufbauen" },
+    "sq": { "name": "Matrica e aftësive", "type": "Njerëzit", "time": "15 min", "summary": "Vlerëso çdo person për çdo detyrë nga 0 në 4 në një rrjetë ILU, me modele për magazinë, recepsion hoteli dhe stacion shpërndarjeje. Mbulimi kundrejt objektivit, pikat e vetme të dështimit, mbulimi për turn dhe një plan trajnimi që çiftëzon një nivel 4 me një të trajnuar, drejt e në veprime.", "url": "/sq/tools/skills-matrix/", "cta": "Ndërto matricën" }
+  },
+  "routine": { "when": "Every month", "do": "Walk the matrix with each team lead, update the levels you saw on the floor, take a snapshot and give every single point of failure a trainee and a date.", "de": { "when": "Jeden Monat", "do": "Gehen Sie die Matrix mit jeder Teamleitung durch, aktualisieren Sie die Stufen, die Sie auf der Fläche gesehen haben, machen Sie eine Momentaufnahme und geben Sie jeder Einzelabhängigkeit einen Lernenden und einen Termin." }, "sq": { "when": "Çdo muaj", "do": "Kalo matricën me çdo drejtues ekipi, përditëso nivelet që pe në sallë, bëj një fotografi dhe jepi çdo pike të vetme dështimi një të trajnuar dhe një datë." } },
+  "recipe": "example"
+}
