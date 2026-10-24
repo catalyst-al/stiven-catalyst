@@ -318,5 +318,13 @@
     "summary": "Das Beschwerde- und Wiedergutmachungsprotokoll des Empfangs: LEARN, die Maßnahme, die Kompensation in Euro, die Lösungszeit und der Rückruf. Beschwerden pro 100 belegte Zimmernächte, der Anteil innerhalb der Zielzeit gelöst, Wiederholungszimmer, das Pareto der Kategorien und eine Antwort an den Gast.",
     "url": "/de/tools/guest-complaints/",
     "cta": "Protokoll öffnen"
+  },
+  {
+    "name": "Housekeeping-Planer",
+    "type": "Hotel",
+    "time": "10 min",
+    "summary": "Der Personalplan der Hausdame: Abreisen, Bleibezimmer, Wäschewechsel, VIP-Zimmer, Grundreinigungen und öffentliche Bereiche werden zu Arbeitsminuten (oder Credits) und zu den benötigten Reinigungskräften gegen den Dienstplan, mit Stunden, Personalkosten und Minuten pro belegtem Zimmer. Reviere nach Minuten ausgeglichen auf möglichst wenigen Etagen, pro Reinigungskraft gedruckt oder in den Zimmerstatus übernommen, und die Woche aus der Vorschau.",
+    "url": "/de/tools/housekeeping-planner/",
+    "cta": "Housekeeping-Team planen"
   }
 ]

@@ -318,5 +318,13 @@
     "summary": "Regjistri i ankesave dhe i rikuperimit të shërbimit në recepsion: LEARN, veprimi, kompensimi në euro, koha e zgjidhjes dhe telefonata pasuese. Ankesat për 100 net dhome të zëna, pjesa e zgjidhur brenda objektivit, dhomat që përsëriten, Pareto e kategorive dhe një përgjigje për mysafirin.",
     "url": "/sq/tools/guest-complaints/",
     "cta": "Hap regjistrin"
+  },
+  {
+    "name": "Planifikuesi i housekeeping-ut",
+    "type": "Hotel",
+    "time": "10 min",
+    "summary": "Plani i stafit i drejtuesit të housekeeping-ut: largimet, qëndrimet e vazhduara, ndërrimet e çarçafëve, dhomat VIP, pastrimet e thella dhe zonat publike bëhen minuta pune (ose kredite) dhe pastruesit e nevojshëm kundrejt atyre në turn, me orë, kosto pune dhe minuta për dhomë të zënë. Sektorë të balancuar sipas minutave në sa më pak kate, të printuar për çdo pastrues ose të vendosur në Statusin e dhomave, dhe java nga parashikimi.",
+    "url": "/sq/tools/housekeeping-planner/",
+    "cta": "Planifiko ekipin e housekeeping-ut"
   }
 ]

@@ -318,5 +318,13 @@
     "summary": "The complaint and service-recovery log of the front office: LEARN, the action, the compensation in euros, the time to resolve and the call back. Complaints per 100 occupied room nights, the share resolved within target, repeat rooms, the Pareto of the categories and a reply to the guest.",
     "url": "/tools/guest-complaints/",
     "cta": "Open the log"
+  },
+  {
+    "name": "Housekeeping Planner",
+    "type": "Hotel",
+    "time": "10 min",
+    "summary": "The executive housekeeper's staffing plan: departures, stay-overs, linen changes, VIP rooms, deep cleans and public areas become workload minutes (or credits) and the attendants needed against those scheduled, with hours, labour cost and minutes per occupied room. Sections balanced by minutes on as few floors as possible, printed per attendant or set into Room Status, and the week from the forecast.",
+    "url": "/tools/housekeeping-planner/",
+    "cta": "Plan the housekeeping team"
   }
 ]

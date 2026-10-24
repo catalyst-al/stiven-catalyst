@@ -129,7 +129,8 @@
       "/tools/ops-report/",
       "/tools/room-inspection/",
       "/tools/maintenance-planner/",
-      "/tools/signals/"
+      "/tools/signals/",
+      "/tools/housekeeping-planner/"
     ],
     "learn": [],
     "also": [
@@ -218,6 +219,11 @@
         "when": "Every morning",
         "do": "Read the signals before the morning meeting, take the first high ones to the floor and give each one an owner, a 5 Whys or a date.",
         "tool": "/tools/signals/"
+      },
+      {
+        "when": "Every morning",
+        "do": "Read today's departures and stay-overs after the night audit, check the attendants needed against the schedule, and hand every attendant the printed sheet of their section.",
+        "tool": "/tools/housekeeping-planner/"
       }
     ],
     "next": "lumen"
