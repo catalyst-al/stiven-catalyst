@@ -326,5 +326,13 @@
     "summary": "Der Personalplan der Hausdame: Abreisen, Bleibezimmer, Wäschewechsel, VIP-Zimmer, Grundreinigungen und öffentliche Bereiche werden zu Arbeitsminuten (oder Credits) und zu den benötigten Reinigungskräften gegen den Dienstplan, mit Stunden, Personalkosten und Minuten pro belegtem Zimmer. Reviere nach Minuten ausgeglichen auf möglichst wenigen Etagen, pro Reinigungskraft gedruckt oder in den Zimmerstatus übernommen, und die Woche aus der Vorschau.",
     "url": "/de/tools/housekeeping-planner/",
     "cta": "Housekeeping-Team planen"
+  },
+  {
+    "name": "Leader Standard Work",
+    "type": "Lean",
+    "time": "Täglich",
+    "summary": "Die Routine jeder Führungskraft als Standard, von der Teamrunde der Teamleitung bis zum Gemba Walk der Standortleitung, täglich abgehakt: erledigt oder verpasst mit Grund. Die nächste Ebene prüft jede Woche die Einhaltung, sieht den Anteil der Standardarbeit am Tag gegen den Richtwert der Ebene und gibt eine Aufgabe, die in zwei Wochen dreimal verpasst wurde, in die Maßnahmenliste.",
+    "url": "/de/tools/leader-standard-work/",
+    "cta": "Standard schreiben"
   }
 ]

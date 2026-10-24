@@ -326,5 +326,13 @@
     "summary": "The executive housekeeper's staffing plan: departures, stay-overs, linen changes, VIP rooms, deep cleans and public areas become workload minutes (or credits) and the attendants needed against those scheduled, with hours, labour cost and minutes per occupied room. Sections balanced by minutes on as few floors as possible, printed per attendant or set into Room Status, and the week from the forecast.",
     "url": "/tools/housekeeping-planner/",
     "cta": "Plan the housekeeping team"
+  },
+  {
+    "name": "Leader Standard Work",
+    "type": "Lean",
+    "time": "Daily",
+    "summary": "Each leader's routine as a standard, from the team leader's huddle to the site manager's Gemba walk, checked off every day: done, or missed with a reason. The next level up reviews the adherence each week, sees the share of the day in standard work against the guide for the level, and sends a task missed three times in two weeks to the Action Tracker.",
+    "url": "/tools/leader-standard-work/",
+    "cta": "Write the standard"
   }
 ]

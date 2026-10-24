@@ -326,5 +326,13 @@
     "summary": "Plani i stafit i drejtuesit të housekeeping-ut: largimet, qëndrimet e vazhduara, ndërrimet e çarçafëve, dhomat VIP, pastrimet e thella dhe zonat publike bëhen minuta pune (ose kredite) dhe pastruesit e nevojshëm kundrejt atyre në turn, me orë, kosto pune dhe minuta për dhomë të zënë. Sektorë të balancuar sipas minutave në sa më pak kate, të printuar për çdo pastrues ose të vendosur në Statusin e dhomave, dhe java nga parashikimi.",
     "url": "/sq/tools/housekeeping-planner/",
     "cta": "Planifiko ekipin e housekeeping-ut"
+  },
+  {
+    "name": "Puna standarde e drejtuesit",
+    "type": "Lean",
+    "time": "Çdo ditë",
+    "summary": "Rutina e çdo drejtuesi si standard, nga takimi i drejtuesit të ekipit deri te Gemba Walk i drejtuesit të objektit, e shënuar çdo ditë: e kryer, ose e humbur me arsye. Niveli tjetër e rishikon zbatimin çdo javë, sheh pjesën e ditës në punë standarde kundrejt udhëzimit për nivelin, dhe e dërgon te lista e veprimeve një detyrë të humbur tri herë në dy javë.",
+    "url": "/sq/tools/leader-standard-work/",
+    "cta": "Shkruaj standardin"
   }
 ]
