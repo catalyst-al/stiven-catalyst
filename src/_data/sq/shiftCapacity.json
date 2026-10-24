@@ -1,0 +1,137 @@
+{
+  "storageKey": "sc-shift-capacity-sq",
+  "text": {
+    "tool": "Kapaciteti i turnit",
+    "csvName": "kapaciteti-i-turnit",
+    "owner": "Shef turni",
+    "check": "Njerëzit e planifikuar mbulojnë njerëzit e nevojshëm në çdo proces, të kontrolluar me parashikimin para fillimit të turnit",
+    "processPlaceholder": "p.sh. Mbledhja e porosive",
+    "driverPlaceholder": "p.sh. rreshta",
+    "sourcePlaceholder": "p.sh. porosi",
+    "shiftPlaceholder": "p.sh. Mëngjes",
+    "pastePlaceholder": "26.10.2026; Mëngjes; 52000; 180",
+    "skillsName": "Matrica e aftësive",
+    "timeStudyName": "Studimi i kohës",
+    "trackerName": "lista e veprimeve",
+    "station": "Stacioni {n}",
+    "bottleneck": "Pika e ngushtë"
+  },
+  "defaults": { "utilisation": 85, "absenteeism": 8, "overtime": 2, "allowance": 15, "length": 8, "unpaid": 30, "paid": 30, "mode": "rostered" },
+  "shifts": ["Mëngjes", "Pasdite", "Natë"],
+  "drivers": ["njësi", "rreshta", "porosi", "pako", "paleta", "kuti", "pako jashtë sorterit", "kg", "kuverta", "dhoma", "copë"],
+  "templates": [
+    {
+      "key": "parcel-hub",
+      "name": "Qendër pakosh (qendër renditjeje)",
+      "processes": [
+        { "name": "Shkarkimi", "driver": "pako", "uph": 750, "source": "pako", "factor": 1, "skill": "" },
+        { "name": "Futja në sorter", "driver": "pako", "uph": 1100, "source": "pako", "factor": 1, "skill": "" },
+        { "name": "Renditja me dorë", "driver": "pako jashtë sorterit", "uph": 160, "source": "pako", "factor": 0.05, "skill": "" },
+        { "name": "Ngarkimi", "driver": "pako", "uph": 550, "source": "pako", "factor": 1, "skill": "Ngarkimi" },
+        { "name": "Trajtimi i paletave", "driver": "paleta", "uph": 25, "source": "paleta", "factor": 1, "skill": "Pirunjaku" }
+      ]
+    },
+    {
+      "key": "warehouse",
+      "name": "Magazinë (përmbushje e-commerce)",
+      "processes": [
+        { "name": "Shkarkimi", "driver": "paleta", "uph": 30, "source": "paleta", "factor": 1, "skill": "" },
+        { "name": "Pranimi", "driver": "paleta", "uph": 20, "source": "paleta", "factor": 1, "skill": "Pranimi" },
+        { "name": "Vendosja në raft", "driver": "paleta", "uph": 18, "source": "paleta", "factor": 1, "skill": "Vendosja në raft" },
+        { "name": "Mbledhja e porosive", "driver": "rreshta", "uph": 110, "source": "porosi", "factor": 2.4, "skill": "Mbledhja e porosive" },
+        { "name": "Paketimi", "driver": "porosi", "uph": 45, "source": "porosi", "factor": 1, "skill": "Paketimi" },
+        { "name": "Ngarkimi", "driver": "pako", "uph": 400, "source": "porosi", "factor": 1.1, "skill": "Ngarkimi" }
+      ]
+    },
+    {
+      "key": "delivery-station",
+      "name": "Stacion shpërndarjeje (milja e fundit)",
+      "processes": [
+        { "name": "Shkarkimi", "driver": "pako", "uph": 800, "source": "pako", "factor": 1, "skill": "" },
+        { "name": "Futja dhe renditja", "driver": "pako", "uph": 350, "source": "pako", "factor": 1, "skill": "Futja dhe renditja" },
+        { "name": "Përgatitja e rrugëve", "driver": "pako", "uph": 900, "source": "pako", "factor": 1, "skill": "Përgatitja e rrugëve" },
+        { "name": "Ngarkimi i furgonit", "driver": "pako", "uph": 600, "source": "pako", "factor": 1, "skill": "Ngarkimi i furgonit" }
+      ]
+    },
+    {
+      "key": "laundry-kitchen",
+      "name": "Lavanderia dhe kuzhina e hotelit",
+      "processes": [
+        { "name": "Ndarja e rrobave", "driver": "kg", "uph": 200, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Larja dhe tharja", "driver": "kg", "uph": 120, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Hekurosja dhe palosja", "driver": "kg", "uph": 45, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Përgatitja e ushqimit", "driver": "kuverta", "uph": 40, "source": "kuverta", "factor": 1, "skill": "" },
+        { "name": "Larja e enëve", "driver": "kuverta", "uph": 90, "source": "kuverta", "factor": 1, "skill": "" }
+      ]
+    }
+  ],
+  "example": {
+    "template": "parcel-hub",
+    "site": "Qendër pakosh, hyrje dhe dalje",
+    "shifts": [
+      { "name": "Mëngjes", "length": 8, "unpaid": 30, "paid": 30 },
+      { "name": "Pasdite", "length": 8, "unpaid": 30, "paid": 30 },
+      { "name": "Natë", "length": 8, "unpaid": 30, "paid": 30 }
+    ],
+    "utilisation": 85,
+    "absenteeism": 8,
+    "overtime": 2,
+    "mode": "rostered",
+    "rows": [
+      "0|0|52000|180", "0|1|58500|190", "0|2|39000|260",
+      "1|0|44000|155", "1|1|49500|160", "1|2|33000|215",
+      "2|0|40000|140", "2|1|45000|145", "2|2|30000|200",
+      "3|0|38400|135", "3|1|43200|140", "3|2|28800|190",
+      "4|0|41000|145", "4|1|46000|150", "4|2|31000|205",
+      "5|0|24000|80", "5|1|27000|90"
+    ],
+    "crew": [[10, 7, 4, 15, 2], [11, 8, 4, 16, 2], [8, 5, 3, 10, 3]],
+    "crewOverrides": ["5|0|6|4|2|9|1", "5|1|7|5|2|10|1"]
+  },
+  "advice": {
+    "short": {
+      "meaning": "Parashikimi kërkon më shumë orë në këtë proces nga sa sjell ekipi i planifikuar. Pa një ndryshim para turnit, puna grumbullohet pas tij: rimorkiot presin, oraret e nisjes rrëshqasin, dhe turni tjetër fillon me prapambetje.",
+      "moves": [
+        "Mbulo së pari pikën e ngushtë: ajo cakton rezultatin e gjithë turnit.",
+        "Zhvendos njerëz nga një proces me orë të lira, por vetëm ata që e bëjnë punën vetë (niveli 3 ose më lart).",
+        "Rezervo pjesën tjetër sot si orë shtesë ose punonjës nga agjencia, jo kur turni ka filluar.",
+        "Kontrollo parashikimin me planifikuesin ose me klientin: një kulm i pakonfirmuar është rrezik, jo plan."
+      ],
+      "question": "Cilit proces i mbarojnë i pari njerëzit, dhe kush mund të hyjë atje pa një trajner pranë?"
+    },
+    "rounding": {
+      "meaning": "Në orë ekipi i planifikuar mjafton, por jo në njerëz të plotë: njerëzit rrumbullakosen lart për çdo proces dhe edhe një herë për mungesat. Një person që punon në dy procese i mbulon thyesat.",
+      "moves": [
+        "Cakto një person fleksibël që lëviz mes proceseve me orë të lira dhe atyre që janë mangut.",
+        "Bini dakord kur lëviz: për shembull pas valës së hyrjes ose kur të jenë shkarkuar mjetet.",
+        "Shiko dy orët e para: nëse ritmi është nën standardin, rezervo atëherë orët shtesë."
+      ],
+      "question": "Kush në këtë ekip i di të dy proceset, dhe kur gjatë turnit lëviz?"
+    },
+    "ok": {
+      "meaning": "Ekipi i planifikuar e mbulon parashikimin në çdo proces, me rezervën për mungesat. Plani mban për sa kohë mbajnë volumi dhe ritmet.",
+      "moves": [
+        "Kontrollo ritmet me atë që ekipi bëri vërtet javën e kaluar: një standard shumë i lartë fsheh një hendek.",
+        "Mbaji të dukshme orët e lira: trajnim, 5S ose trajnim i kryqëzuar në procesin e pikës së ngushtë.",
+        "Kontrollo sërish kur ndryshon parashikimi i volumit."
+      ],
+      "question": "Cili ritëm këtu nuk është krahasuar me rezultatin e vërtetë prej një muaji ose më shumë?"
+    },
+    "none": {
+      "meaning": "Për këtë turn nuk ka ende njerëz të planifikuar, prandaj mjeti tregon vetëm atë që kërkon parashikimi.",
+      "moves": [
+        "Shkruaj njerëzit e planifikuar për çdo proces, ose vetëm totalin nëse punojnë në disa procese.",
+        "Planifiko me njerëzit përfshirë mungesat: ky është numri për grafikun e turneve."
+      ],
+      "question": "Sa njerëz janë planifikuar për këtë turn, dhe në cilat procese?"
+    }
+  },
+  "tips": [
+    ["Ritme nga puna e vërtetë.", "Përdor njësitë për orë produktive nga një standard pune i matur ose nga një studim kohe, jo një objektiv. Një ritëm shumë i lartë e fsheh hendekun derisa turni është tashmë vonë."],
+    ["Një njësi matëse për çdo proces.", "Çdo proces numërohet në njësinë e vet: rreshta për mbledhjen e porosive, porosi për paketimin, paleta për vendosjen në raft. Nëse parashikimi vjen në porosi, jep konvertimin (për shembull 2,4 rreshta për porosi)."],
+    ["Orë produktive, jo orë të paguara.", "Nga një turn 8-orësh, pushimet, briefingu dhe pastrimi nuk janë produktive, dhe askush nuk punon me 100 % pjesën tjetër. Shfrytëzimi (shpesh 80–90 %) mbulon ecjen, pritjen dhe ndalesat e vogla."],
+    ["Mungesat para se të ndodhin.", "Me një rezervë mungesash prej 8 %, rreth 1 në 12 njerëz të planifikuar nuk vjen. Njerëzit përfshirë mungesat janë numri për grafikun, që ditën e punës të jenë aty njerëzit e nevojshëm."],
+    ["Pika e ngushtë cakton rezultatin.", "Procesi me kapacitetin më të ulët kundrejt volumit të tij kufizon gjithë turnin. Mbuloje atë së pari, dhe zhvendos atje njerëz të kualifikuar nga proceset me orë të lira."],
+    ["Çdo javë, para se të mbyllet grafiku.", "Ngjit parashikimin e volumit të javës, shkruaj njerëzit e planifikuar, dhe mbyll hendeqet me orë shtesë, agjenci ose zhvendosje sa ka ende kohë për t'i rezervuar."]
+  ]
+}

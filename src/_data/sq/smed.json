@@ -1,0 +1,125 @@
+{
+  "storageKey": "sc-smed-sq",
+  "title": "SMED: ndërrimi i shpejtë",
+  "csv": "smed-nderrimi",
+  "defaults": { "weeks": "48" },
+  "text": {
+    "machinePlaceholder": "p.sh. Linja e paketimit 3, makina e qeseve",
+    "fromPlaceholder": "p.sh. Granola 375 g",
+    "toPlaceholder": "p.sh. Granola 750 g",
+    "observerPlaceholder": "p.sh. Përgjegjësi i turnit",
+    "teamPlaceholder": "p.sh. Operatori dhe rregulluesi",
+    "elementPlaceholder": "p.sh. Merr pjesët e formatit",
+    "whoPlaceholder": "p.sh. Operatori",
+    "notePlaceholder": "Çfarë ndryshon saktësisht",
+    "ownerPlaceholder": "Kush e realizon",
+    "checkPlaceholder": "p.sh. Shpatulla mbi të dy kunjat, kapëset të mbyllura",
+    "pastePlaceholder": "Merr pjesët e formatit; 1; 5:00; e jashtme",
+    "changeover": "Ndërrimi",
+    "singleMinute": "Ndërrim me një shifër minutash: nën dhjetë minuta me makinën të ndalur, qëllimi nga i cili Shingo e mori emrin e metodës.",
+    "freedNote": "Koha e fituar e makinës vlen kaq vetëm kur përdoret: më shumë prodhim në një linjë plot, ose më shumë ndërrime me parti më të vogla dhe më pak stok.",
+    "oee": "OEE e numëron një ndërrim si humbje rregullimi dhe përshtatjeje: makina duhej të punonte dhe nuk punoi, ndaj çdo minutë e tij ul disponueshmërinë. Regjistro aty çdo ndërrim me arsyen Ndërrim produkti.",
+    "standardFoot": "Koha e ndërrimit shkon nga copa e fundit e mirë e produktit të vjetër te copa e parë e mirë e produktit të ri me shpejtësi normale. Mat ndërrimet e ardhshme kundrejt këtij standardi dhe përmirësoje përsëri.",
+    "typicalSource": "Pjesët tipike në një ndërrim tradicional sipas Shigeo Shingos, A Revolution in Manufacturing: The SMED System (1985)."
+  },
+  "categories": [
+    { "key": "prep", "name": "Përgatitje dhe kontroll", "short": "Përgatitja", "typical": 0.3, "meaning": "Marrja, kontrolli dhe vendosja në vend e veglave, pjesëve, materialit dhe dokumenteve; zbrazja e linjës dhe pastrimi." },
+    { "key": "mount", "name": "Montim dhe çmontim", "short": "Montimi", "typical": 0.05, "meaning": "Heqja e pjesëve të produktit të vjetër dhe vendosja e pjesëve të produktit të ri." },
+    { "key": "measure", "name": "Matje, vendosje parametrash dhe kalibrim", "short": "Vendosja", "typical": 0.15, "meaning": "Qendërzimi, pozicionimi, vendosja e përmasave, temperaturave dhe programeve." },
+    { "key": "trial", "name": "Prova dhe korrigjime", "short": "Provat", "typical": 0.5, "meaning": "Copa prove dhe korrigjime deri te copa e parë e mirë me shpejtësi normale." }
+  ],
+  "measures": [
+    { "key": "prestage", "step": 3, "name": "Përgatit veglat, pjesët dhe materialin para ndalesës (karroca e ndërrimit)" },
+    { "key": "preheat", "step": 3, "name": "Ngroh ose kondiciono paraprakisht para ndalesës (stampat, nofullat, kallëpet)" },
+    { "key": "preassemble", "step": 3, "name": "Paramonto dhe paravendos jashtë makinës (komplet i dytë, mbajtëse e ndërmjetme)" },
+    { "key": "standardparts", "step": 3, "name": "Njësto pjesët funksionale (e njëjta lartësi, shtrëngim dhe qendërzim)" },
+    { "key": "prepare", "step": 3, "name": "Përgatit porosinë, parametrat dhe etiketat para ndalesës" },
+    { "key": "checkbefore", "step": 3, "name": "Kontrollo para ndalesës që veglat dhe materiali funksionojnë" },
+    { "key": "quickrelease", "step": 4, "name": "Shtrëngim i shpejtë: kapëse me një rrotullim ose një lëvizje në vend të bulonave" },
+    { "key": "locate", "step": 4, "name": "Kunja pozicionimi dhe lartësi standarde: pa spesorë, pa kërkuar" },
+    { "key": "noadjust", "step": 4, "name": "Hiq korrigjimet: ndalesa fikse, shkallë, parametra të ruajtur për çdo produkt" },
+    { "key": "parallel", "step": 4, "name": "Punë paralele me dy veta, me rend të caktuar dhe një sinjal" },
+    { "key": "checklist", "step": 4, "name": "Një listë kontrolli dhe një rend i caktuar për çdo ndërrim" },
+    { "key": "pointofuse", "step": 4, "name": "Veglat dhe pjesët te vendi i përdorimit: më pak ecje" },
+    { "key": "mechanise", "step": 4, "name": "Mekanizo ngritjen e rëndë (rula, ndihmë ngritjeje)" }
+  ],
+  "steps": [
+    { "title": "Vëzhgo dhe regjistro", "what": "Mat një ndërrim të vërtetë, nga copa e fundit e mirë e produktit të vjetër te copa e parë e mirë e produktit të ri. Çdo xhiro mbyll një element. Shkruaj çfarë ndodhi, jo çfarë duhej të ndodhte.", "tip": "Filmoje nëse ekipi pajtohet: një video tregon ecjet dhe kërkimet që kronometri i humbet." },
+    { "title": "Ndaj të brendshmen nga e jashtmja", "what": "Shëno çdo element: i brendshëm nëse bëhet vetëm me makinën të ndalur, i jashtëm nëse mund të bëhet ndërsa makina punon. Që sot bëhet me makinën të ndalur nuk e bën elementin të brendshëm.", "tip": "Vetëm ndarja zakonisht e ul kohën e brendshme me 30 deri 50 % (Shingo): marrja dhe kontrolli kalojnë para ndalesës." },
+    { "title": "Shndërro të brendshmen në të jashtme", "what": "Shiko përsëri çdo element të brendshëm dhe pyet çfarë do ta lejonte të bëhej ndërsa makina punon: ngrohja paraprake, përgatitja, paramontimi, njësimi i pjesëve që prekin makinën.", "tip": "Shiko për çfarë shërben elementi, jo mënyrën si bëhet sot." },
+    { "title": "Thjeshto të dyja", "what": "Shkurto atë që mbetet e brendshme (shtrëngim i shpejtë, kunja pozicionimi, pa korrigjime, dy veta paralelisht) dhe edhe punën e jashtme (vendosje te vendi i përdorimit, lista kontrolli). Jepi çdo elementi kohën e planifikuar pas ndryshimit dhe personin që e bën.", "tip": "Korrigjimet janë fitimi më i madh: hiq nevojën për to, në vend që t'i bësh më shpejt." },
+    { "title": "Standardizo", "what": "Shkruaje ndërrimin e ri si standard: çfarë bëhet para ndalesës, me makinën të ndalur dhe pas rinisjes, nga kush, për sa kohë dhe me cilin kontroll. Trajno ekipin dhe mat ndërrimin e ardhshëm kundrejt tij.", "tip": "Standardi është baza e raundit tjetër: mat përsëri një ndërrim pas një muaji." }
+  ],
+  "advice": {
+    "prep": {
+      "meaning": "Marrja, kërkimi dhe kontrolli ende bëhen ndërsa makina qëndron. Kjo është koha më e lirë për t'u fituar: asgjë prej saj nuk e kërkon makinën.",
+      "moves": [
+        "Ndërto një karrocë ndërrimi me gjithçka për produktin tjetër, të kontrolluar me listë para ndalesës.",
+        "Mbaji veglat në një tabelë me hije te makina: pa ecje, pa kërkim.",
+        "Zbraze porosinë e vjetër deri në një sasi të caktuar, që ndalesa të nisë në kohë dhe askush të mos presë."
+      ],
+      "question": "Çfarë mori apo kërkoi dikush ndërsa makina ishte e ndalur?"
+    },
+    "mount": {
+      "meaning": "Pjesët ende hiqen dhe vendosen me dorë, vidë pas vide. Shingo gjeti këtu vetëm rreth 5 % të një ndërrimi tradicional; më shumë do të thotë që shtrëngimet janë të ngadalta.",
+      "moves": [
+        "Zëvendëso bulonat me kapëse me një rrotullim ose një lëvizje; një bulon që vetëm lirohet merr një vrimë në formë U.",
+        "Jepu pjesëve kunja pozicionimi dhe një lartësi, që të vendosen vetëm në një pozicion.",
+        "Punoni paralelisht me dy veta dhe me rend të caktuar: kush bën cilën anë, dhe një sinjal kur mbaron."
+      ],
+      "question": "Cili shtrëngim rrotullohet më shumë se një herë, dhe pse duhet?"
+    },
+    "measure": {
+      "meaning": "Parametrat gjenden duke matur dhe provuar te makina. Çdo parametër që mund të ruhet ose të fiksohet pushon së qeni një hap pune.",
+      "moves": [
+        "Ruaj parametrat e çdo produkti (receta, shenjat e shkallës, ndalesat fikse) dhe vendosi me numër, jo me vizore.",
+        "Shëno pozicionin e çdo formati në makinë: një shkallë, një ngjyrë, një kunj.",
+        "Përgatit printerin, koduesin dhe skedarët e etiketave para ndalesës."
+      ],
+      "question": "Cili parametër matet nga e para në çdo ndërrim, megjithëse për këtë produkt është gjithmonë i njëjtë?"
+    },
+    "trial": {
+      "meaning": "Provat dhe korrigjimet zakonisht janë gjysma e një ndërrimi tradicional (Shingo). Ekzistojnë sepse parametrat nuk janë të saktë; zgjidhja është më përpara, te vendosja dhe montimi.",
+      "moves": [
+        "Shkruaj çdo korrigjim të provave për pesë ndërrime: ai që ndodh gjithmonë është një parametër për t'u fiksuar.",
+        "Bie dakord me cilësinë për kontrollin e copës së parë: çfarë matet, nga kush, kundrejt cilit mostër reference.",
+        "Numëro copat e provës dhe minutat deri te copa e parë e mirë: kjo është masa e ndërrimit."
+      ],
+      "question": "Çfarë u korrigjua gjatë provës, dhe a mund të ishte vendosur saktë para nisjes?"
+    }
+  },
+  "tips": [
+    ["E ndalur nuk do të thotë e brendshme.", "Sot pothuajse gjithçka bëhet me makinën të ndalur. E brendshme do të thotë që nuk mund të bëhet ndryshe; kjo pyetje është hapi 2."],
+    ["Mat deri te copa e parë e mirë.", "Ndërrimi mbaron kur produkti i ri del i mirë me shpejtësi normale, jo kur shtrëngohet buloni i fundit. Provat janë pjesë e tij."],
+    ["Fillo me hapat e lirë.", "Ndarja dhe shndërrimi kushtojnë një karrocë dhe një listë kontrolli. Kapëset e shpejta dhe parametrat e ruajtur vijnë më pas; makineritë dhe automatizimi në fund."],
+    ["Puna paralele kërkon një rend.", "Dy veta e përgjysmojnë ndalesën vetëm kur secili e di anën e vet dhe askush nuk pret tjetrin. Planifiko kush bën çfarë, pastaj mate."],
+    ["Një ndërrim, pastaj standardi.", "Studio mirë një ndërrim, shkruaj standardin e ri, trajno ekipin dhe mat ndërrimin tjetër kundrejt tij. Pastaj nis raundi tjetër."]
+  ],
+  "example": {
+    "machine": "Linja e paketimit 3 · makina vertikale e qeseve",
+    "from": "Granola 375 g",
+    "to": "Granola 750 g",
+    "date": -3,
+    "observer": "Përgjegjësi i turnit",
+    "team": "Operatori dhe rregulluesi",
+    "target": "20",
+    "perWeek": "8",
+    "costMin": "6",
+    "weeks": "48",
+    "elements": [
+      { "name": "Merr pjesët e formatit dhe veglat nga magazina", "cat": "prep", "dur": 300, "kind": "external", "after": "external", "afterDur": 240, "who": "Rregulluesi", "convert": "prestage", "streamline": "", "note": "Një karrocë ndërrimi për çdo format, e mbushur nga rregulluesi para ndalesës", "owner": "Përgjegjësi i linjës", "due": 14, "check": "Karroca e plotë sipas listës para ndalesës", "phase": "before" },
+      { "name": "Kërko fletën e ndërrimit dhe çelësat e duhur hekzagonalë", "cat": "prep", "dur": 120, "kind": "external", "after": "external", "afterDur": 60, "who": "Rregulluesi", "convert": "", "streamline": "checklist", "note": "Fleta e ndërrimit dhe çelësat në karrocë, të shënuar sipas listës", "owner": "Përgjegjësi i linjës", "due": 14, "check": "Lista e shënuar, çelësat në tabelën me hije të karrocës", "phase": "before" },
+      { "name": "Zbraz paketimet e fundit dhe hiq filmin e vjetër", "cat": "prep", "dur": 180, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Operatori", "convert": "", "streamline": "checklist", "note": "Hyrja ndalon te sasia e porosisë; zbrazja ndjek fletën", "owner": "Përgjegjësi i linjës", "due": 14, "check": "Paketimi i fundit i mirë i numëruar dhe i shënuar", "phase": "" },
+      { "name": "Hiq shpatullën e vjetër formuese (8 vida)", "cat": "mount", "dur": 240, "kind": "internal", "after": "internal", "afterDur": 120, "who": "Operatori", "convert": "", "streamline": "quickrelease", "note": "Dy kapëse të shpejta në vend të 8 vidave te shpatulla formuese", "owner": "Mirëmbajtja", "due": 28, "check": "Të dyja kapëset të hapura, shpatulla në karrocë", "phase": "" },
+      { "name": "Vendos dhe qendërzo shpatullën e re formuese", "cat": "mount", "dur": 300, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Operatori", "convert": "standardparts", "streamline": "locate", "note": "Kunja pozicionimi dhe një lartësi montimi për çdo shpatull: pa qendërzim", "owner": "Mirëmbajtja", "due": 28, "check": "Shpatulla mbi të dy kunjat, kapëset të mbyllura", "phase": "" },
+      { "name": "Ndërro rrotullën e filmit dhe kalo filmin e ri", "cat": "mount", "dur": 210, "kind": "internal", "after": "internal", "afterDur": 180, "who": "Operatori", "convert": "prestage", "streamline": "", "note": "Rrotulla e re gati në karrocë, skema e kalimit të filmit te makina", "owner": "Përgjegjësi i linjës", "due": 14, "check": "Filmi kalon në qendër mbi shpatullën", "phase": "" },
+      { "name": "Ndërro nofullat e saldimit", "cat": "mount", "dur": 150, "kind": "internal", "after": "internal", "afterDur": 90, "who": "Operatori", "convert": "", "streamline": "quickrelease", "note": "Nofulla me ndërrim të shpejtë dhe lidhëse me prizë", "owner": "Mirëmbajtja", "due": 42, "check": "Prizat të futura, nofullat në vend", "phase": "" },
+      { "name": "Prit që nofullat e reja të ngrohen në 165 °C", "cat": "prep", "dur": 360, "kind": "internal", "after": "external", "afterDur": 360, "who": "Rregulluesi", "convert": "preheat", "streamline": "", "note": "Një stacion ngrohjeje pranë linjës: nofullat e reja arrijnë 165 °C para ndalesës", "owner": "Mirëmbajtja", "due": 42, "check": "Nofullat në 165 °C në stacionin e ngrohjes para ndalesës", "phase": "before" },
+      { "name": "Vendos udhëzuesit, gjerësinë e filmit dhe gjatësinë e qeses me vizore", "cat": "measure", "dur": 270, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Operatori", "convert": "", "streamline": "noadjust", "note": "Një recetë për çdo format në panelin e komandimit, shenja shkalle te udhëzuesit", "owner": "Mirëmbajtja", "due": 28, "check": "Udhëzuesit te shenja 750 g, receta 750 g e ngarkuar", "phase": "" },
+      { "name": "Fut kodin e ri të datës dhe skedarin e etiketës", "cat": "measure", "dur": 90, "kind": "internal", "after": "internal", "afterDur": 30, "who": "Operatori", "convert": "prepare", "streamline": "", "note": "Kodi dhe skedari i etiketës përgatiten para ndalesës, zgjidhen me recetën", "owner": "Përgjegjësi i linjës", "due": 14, "check": "Kodi i datës dhe etiketa përputhen me porosinë", "phase": "" },
+      { "name": "Qese prove: korrigjo saldimin dhe peshën derisa të jenë të mira", "cat": "trial", "dur": 360, "kind": "internal", "after": "internal", "afterDur": 180, "who": "Operatori", "convert": "", "streamline": "noadjust", "note": "Parametrat e saldimit të ruajtur për çdo format; korrigjo vetëm kur testi i saldimit dështon", "owner": "Përgjegjësi i linjës", "due": 28, "check": "Testi i saldimit dhe pesha të kontrolluara në 3 qese", "phase": "" },
+      { "name": "Prit që cilësia të lirojë qeset e para", "cat": "trial", "dur": 150, "kind": "internal", "after": "internal", "afterDur": 90, "who": "Operatori", "convert": "", "streamline": "checklist", "note": "Operatori liron me kartën e copës së parë; cilësia verifikon gjatë xhiros së saj", "owner": "Cilësia", "due": 21, "check": "Karta e copës së parë e nënshkruar", "phase": "" },
+      { "name": "Pastro dhe çoji pjesët e vjetra në magazinë", "cat": "prep", "dur": 150, "kind": "external", "after": "external", "afterDur": 150, "who": "Rregulluesi", "convert": "", "streamline": "", "note": "", "owner": "", "due": "", "check": "Pjesët e vjetra të formatit përsëri në vendin e tyre", "phase": "after" }
+    ]
+  }
+}

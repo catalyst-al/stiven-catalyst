@@ -1,0 +1,262 @@
+{#- Leader Standard Work: each leader's routine as a standard, checked off every day and reviewed by the next level up; leader-standard-work.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-leader-standard-work>
+    <div class="dl-box lw-leaders">
+      <fieldset>
+        <legend class="kicker">1 · {{ "Leaders" | t(lang) }}</legend>
+        <div class="lw-pick">
+          <div class="field">
+            <label for="lw-leader">{{ "Leader" | t(lang) }}</label>
+            <select id="lw-leader"></select>
+          </div>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-leader-new>{{ "New leader" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-leader-edit>{{ "Edit" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-leader-remove>{{ "Remove" | t(lang) }}</button>
+          </div>
+        </div>
+        <p class="form-note" data-leader-status aria-live="polite"></p>
+        <div class="lw-form" data-leader-form hidden>
+          <p class="lw-sub" data-leader-form-title>{{ "New leader" | t(lang) }}</p>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="lw-name">{{ "Name" | t(lang) }}</label>
+              <input id="lw-name" type="text" autocomplete="off" placeholder="{{ cfg.text.namePlaceholder }}">
+            </div>
+            <div class="field">
+              <label for="lw-level">{{ "Leadership level" | t(lang) }}</label>
+              <select id="lw-level">
+                {%- for level in cfg.levels %}
+                <option value="{{ level.key }}">{{ level.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="lw-area">{{ "Area" | t(lang) }}</label>
+              <input id="lw-area" type="text" list="lw-area-list" autocomplete="off" placeholder="{{ cfg.text.areaPlaceholder }}">
+              <datalist id="lw-area-list"></datalist>
+            </div>
+            <div class="field">
+              <label for="lw-shift">{{ "Shift" | t(lang) }}</label>
+              <input id="lw-shift" type="text" list="lw-shift-list" autocomplete="off" placeholder="{{ cfg.text.shiftPlaceholder }}">
+              <datalist id="lw-shift-list"></datalist>
+            </div>
+            <div class="field">
+              <label for="lw-start">{{ "Shift start" | t(lang) }}</label>
+              <input id="lw-start" type="time" value="06:00">
+            </div>
+            <div class="field">
+              <label for="lw-hours">{{ "Length of the day (hours)" | t(lang) }}</label>
+              <input id="lw-hours" type="number" min="1" max="16" step="0.25" inputmode="decimal" value="8">
+            </div>
+            <div class="field">
+              <label for="lw-reports">{{ "Reports to" | t(lang) }}</label>
+              <select id="lw-reports"></select>
+            </div>
+          </div>
+          <fieldset class="lw-days">
+            <legend class="lw-sub">{{ "Working days" | t(lang) }}</legend>
+            <div class="lw-day-boxes">
+              {%- for name in cfg.weekdays.short %}
+              <label class="lw-day-box"><input type="checkbox" name="lw-days" value="{{ loop.index }}"> <span>{{ name }}</span></label>
+              {%- endfor %}
+            </div>
+          </fieldset>
+          <p class="form-note">{{ "The shift start and its length set the day: per-shift tasks follow the start, and the share of the day in standard work is planned minutes over this length." | t(lang) }}</p>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-leader-save>{{ "Save leader" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-leader-cancel>{{ "Cancel" | t(lang) }}</button>
+          </div>
+        </div>
+        <details class="lw-guide">
+          <summary>{{ "Guide: share of the day in standard work, by level" | t(lang) }}</summary>
+          <p class="form-note">{{ "After David Mann, Creating a Lean Culture: about 80 % of a team leader’s day is standard work, 50 % of a shift lead’s, 25 % of a manager’s, less again at the top of the site. Change them to your own guide." | t(lang) }}</p>
+          <div class="dl-grid">
+            {%- for level in cfg.levels %}
+            <div class="field">
+              <label for="lw-share-{{ level.key }}">{{ level.name }} (%)</label>
+              <input id="lw-share-{{ level.key }}" type="number" min="1" max="100" step="1" inputmode="numeric">
+            </div>
+            {%- endfor %}
+          </div>
+          <div class="tool-actions">
+            <button class="button-ghost" type="button" data-shares-reset>{{ "Back to the defaults" | t(lang) }}</button>
+          </div>
+        </details>
+      </fieldset>
+    </div>
+
+    <div class="dl-box lw-standard">
+      <fieldset>
+        <legend class="kicker">2 · {{ "The standard" | t(lang) }}</legend>
+        <div class="lw-template">
+          <div class="field">
+            <label for="lw-template">{{ "Start from a template" | t(lang) }}</label>
+            <select id="lw-template">
+              {%- for sector in cfg.sectors %}
+              <optgroup label="{{ sector.name }}">
+                {%- for key, tpl in cfg.templates %}{% if tpl.sector == sector.key %}
+                <option value="{{ key }}">{{ tpl.name }}</option>
+                {%- endif %}{% endfor %}
+              </optgroup>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-template-apply data-needs-leader>{{ "Use this template" | t(lang) }}</button>
+          </div>
+        </div>
+        <p class="form-note">{{ "A template replaces the tasks of the chosen leader; its times follow the leader’s shift start." | t(lang) }}</p>
+        <p class="lw-planned" data-planned aria-live="polite"></p>
+        <div class="dl-table-wrap" tabindex="0" data-tasks-wrap hidden>
+          <table class="dl-table lw-tasks">
+            <thead>
+              <tr><th scope="col">{{ "When" | t(lang) }}</th><th scope="col">{{ "Task" | t(lang) }}</th><th scope="col">{{ "Frequency" | t(lang) }}</th><th scope="col" class="num">{{ "min" | t(lang) }}</th><th scope="col">{{ "Tool" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Edit" | t(lang) }}</span></th></tr>
+            </thead>
+            <tbody data-tasks></tbody>
+          </table>
+        </div>
+        <p class="dl-empty" data-tasks-empty>{{ "No tasks yet." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-task-new data-needs-leader>{{ "Add a task" | t(lang) }}</button>
+        </div>
+        <div class="lw-form" data-task-form hidden>
+          <p class="lw-sub" data-task-form-title>{{ "Add a task" | t(lang) }}</p>
+          <div class="dl-grid">
+            <div class="field dl-wide">
+              <label for="lw-task-title">{{ "Task" | t(lang) }}</label>
+              <input id="lw-task-title" type="text" autocomplete="off" placeholder="{{ cfg.text.taskPlaceholder }}">
+            </div>
+            <div class="field">
+              <label for="lw-task-freq">{{ "Frequency" | t(lang) }}</label>
+              <select id="lw-task-freq">
+                {%- for freq in cfg.frequencies %}
+                <option value="{{ freq.key }}">{{ freq.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field" data-for-freq="daily weekly monthly">
+              <label for="lw-task-time">{{ "Time" | t(lang) }}</label>
+              <input id="lw-task-time" type="time">
+            </div>
+            <div class="field" data-for-freq="shift">
+              <label for="lw-task-offset">{{ "Minutes after the shift start" | t(lang) }}</label>
+              <input id="lw-task-offset" type="number" min="0" max="1440" step="5" inputmode="numeric">
+            </div>
+            <div class="field" data-for-freq="weekly">
+              <label for="lw-task-weekday">{{ "Weekday" | t(lang) }}</label>
+              <select id="lw-task-weekday">
+                {%- for name in cfg.weekdays.long %}
+                <option value="{{ loop.index }}">{{ name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field" data-for-freq="monthly">
+              <label for="lw-task-day">{{ "Day of the month" | t(lang) }}</label>
+              <input id="lw-task-day" type="number" min="1" max="31" step="1" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="lw-task-minutes">{{ "Minutes" | t(lang) }}</label>
+              <input id="lw-task-minutes" type="number" min="1" max="600" step="1" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="lw-task-tool">{{ "Tool" | t(lang) }}</label>
+              <select id="lw-task-tool">
+                <option value="">{{ "No tool" | t(lang) }}</option>
+                {%- for tool in cfg.tools %}
+                <option value="{{ tool.key }}">{{ tool.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field dl-wide">
+              <label for="lw-task-done">{{ "Done when" | t(lang) }}</label>
+              <input id="lw-task-done" type="text" autocomplete="off" placeholder="{{ cfg.text.donePlaceholder }}">
+            </div>
+          </div>
+          <p class="form-note">{{ "Day 29, 30 or 31 falls on the last day of a shorter month. A weekly or monthly task that falls on a day off moves to the leader’s next working day." | t(lang) }}</p>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-task-save>{{ "Add the task" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-task-cancel>{{ "Cancel" | t(lang) }}</button>
+          </div>
+        </div>
+        <p class="form-note" data-task-status aria-live="polite"></p>
+        <div class="tp-host" data-template-pack></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-print-card data-needs-leader>{{ "Print the standard" | t(lang) }}</button>
+          <button class="button-secondary" type="button" data-ics data-needs-leader>{{ "Calendar file (.ics)" | t(lang) }}</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="dl-box lw-today">
+      <fieldset>
+        <legend class="kicker">3 · {{ "Check off the day" | t(lang) }}</legend>
+        <div class="lw-day-pick">
+          <div class="field">
+            <label for="lw-day">{{ "Date" | t(lang) }}</label>
+            <input id="lw-day" type="date">
+          </div>
+          <div class="tool-actions">
+            <button class="button-ghost" type="button" data-day-today>{{ "Today" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-print-week data-needs-leader>{{ "Print the week sheet" | t(lang) }}</button>
+          </div>
+        </div>
+        <p class="lw-day-head" data-day-head></p>
+        <p class="form-note lw-progress" data-day-progress aria-live="polite"></p>
+        <ol class="lw-list" data-day-list></ol>
+        <p class="form-note">{{ "Tap again to take a mark away. What is not marked by the end of its day counts as missed: not recorded." | t(lang) }}</p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">4 · {{ "Log and results" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="lw-period">{{ "Show results for" | t(lang) }}</label>
+          <select id="lw-period">
+            <option value="1">{{ "This week" | t(lang) }}</option>
+            <option value="2">{{ "Last 2 weeks" | t(lang) }}</option>
+            <option value="4">{{ "Last 4 weeks" | t(lang) }}</option>
+            <option value="12">{{ "Last 12 weeks" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="lw-filter">{{ "Leader" | t(lang) }}</label>
+          <select id="lw-filter"></select>
+        </div>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <p class="dl-empty" data-log-empty>{{ "No leaders yet." | t(lang) }} {{ "Add the first one above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "The tasks use the other tools." | t(lang) }}</strong> {{ "The huddle runs on the" | t(lang) }} <a class="inline-link" href="{{ '/tools/daily-board/' | local(lang) }}">{{ "Daily Board" | t(lang) }}</a>, {{ "the walk on the" | t(lang) }} <a class="inline-link" href="{{ '/tools/gemba-walk/' | local(lang) }}">Gemba Walk</a>, {{ "the safety talk on the" | t(lang) }} <a class="inline-link" href="{{ '/tools/safety-cross/' | local(lang) }}">{{ "Safety Cross" | t(lang) }}</a>, {{ "the review of open points in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>. {{ "A task that keeps failing goes to" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results lw-results" data-results tabindex="-1" hidden></section>
+<section class="shell lw-print" data-print hidden></section>
+
+<script type="application/json" id="leader-standard-work-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/template-pack.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/leader-standard-work.js' | assetUrl }}" defer></script>

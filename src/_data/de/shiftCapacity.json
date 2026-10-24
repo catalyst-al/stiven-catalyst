@@ -1,0 +1,137 @@
+{
+  "storageKey": "sc-shift-capacity-de",
+  "text": {
+    "tool": "Schichtkapazität",
+    "csvName": "schichtkapazitaet",
+    "owner": "Schichtleiter",
+    "check": "Die geplanten Köpfe decken auf jedem Prozess die benötigten Köpfe, geprüft gegen die Prognose vor Schichtbeginn",
+    "processPlaceholder": "z. B. Kommissionierung",
+    "driverPlaceholder": "z. B. Positionen",
+    "sourcePlaceholder": "z. B. Aufträge",
+    "shiftPlaceholder": "z. B. Früh",
+    "pastePlaceholder": "26.10.2026; Früh; 52000; 180",
+    "skillsName": "Qualifikationsmatrix",
+    "timeStudyName": "Zeitstudie",
+    "trackerName": "Maßnahmenliste",
+    "station": "Station {n}",
+    "bottleneck": "Engpass"
+  },
+  "defaults": { "utilisation": 85, "absenteeism": 8, "overtime": 2, "allowance": 15, "length": 8, "unpaid": 30, "paid": 30, "mode": "rostered" },
+  "shifts": ["Früh", "Spät", "Nacht"],
+  "drivers": ["Einheiten", "Positionen", "Aufträge", "Pakete", "Paletten", "Kartons", "Sperrgut", "kg", "Gedecke", "Zimmer", "Stück"],
+  "templates": [
+    {
+      "key": "parcel-hub",
+      "name": "Paketzentrum (Sortierzentrum)",
+      "processes": [
+        { "name": "Entladung", "driver": "Pakete", "uph": 750, "source": "Pakete", "factor": 1, "skill": "" },
+        { "name": "Einschleusung", "driver": "Pakete", "uph": 1100, "source": "Pakete", "factor": 1, "skill": "" },
+        { "name": "Handsortierung", "driver": "Sperrgut", "uph": 160, "source": "Pakete", "factor": 0.05, "skill": "" },
+        { "name": "Verladung", "driver": "Pakete", "uph": 550, "source": "Pakete", "factor": 1, "skill": "Verladung" },
+        { "name": "Palettenhandling", "driver": "Paletten", "uph": 25, "source": "Paletten", "factor": 1, "skill": "Stapler" }
+      ]
+    },
+    {
+      "key": "warehouse",
+      "name": "Lager (E-Commerce-Fulfillment)",
+      "processes": [
+        { "name": "Entladung", "driver": "Paletten", "uph": 30, "source": "Paletten", "factor": 1, "skill": "" },
+        { "name": "Wareneingang", "driver": "Paletten", "uph": 20, "source": "Paletten", "factor": 1, "skill": "Wareneingang" },
+        { "name": "Einlagerung", "driver": "Paletten", "uph": 18, "source": "Paletten", "factor": 1, "skill": "Einlagerung" },
+        { "name": "Kommissionierung", "driver": "Positionen", "uph": 110, "source": "Aufträge", "factor": 2.4, "skill": "Kommissionierung" },
+        { "name": "Verpackung", "driver": "Aufträge", "uph": 45, "source": "Aufträge", "factor": 1, "skill": "Verpackung" },
+        { "name": "Verladung", "driver": "Pakete", "uph": 400, "source": "Aufträge", "factor": 1.1, "skill": "Verladung" }
+      ]
+    },
+    {
+      "key": "delivery-station",
+      "name": "Zustellbasis (letzte Meile)",
+      "processes": [
+        { "name": "Entladung", "driver": "Pakete", "uph": 800, "source": "Pakete", "factor": 1, "skill": "" },
+        { "name": "Einschleusen und Sortieren", "driver": "Pakete", "uph": 350, "source": "Pakete", "factor": 1, "skill": "Einschleusen und Sortieren" },
+        { "name": "Tourenbereitstellung", "driver": "Pakete", "uph": 900, "source": "Pakete", "factor": 1, "skill": "Tourenbereitstellung" },
+        { "name": "Fahrzeugbeladung", "driver": "Pakete", "uph": 600, "source": "Pakete", "factor": 1, "skill": "Fahrzeugbeladung" }
+      ]
+    },
+    {
+      "key": "laundry-kitchen",
+      "name": "Hotelwäscherei und Küche",
+      "processes": [
+        { "name": "Wäschesortierung", "driver": "kg", "uph": 200, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Waschen und Trocknen", "driver": "kg", "uph": 120, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Mangeln und Falten", "driver": "kg", "uph": 45, "source": "kg", "factor": 1, "skill": "" },
+        { "name": "Speisenvorbereitung", "driver": "Gedecke", "uph": 40, "source": "Gedecke", "factor": 1, "skill": "" },
+        { "name": "Spülküche", "driver": "Gedecke", "uph": 90, "source": "Gedecke", "factor": 1, "skill": "" }
+      ]
+    }
+  ],
+  "example": {
+    "template": "parcel-hub",
+    "site": "Paketzentrum, Ein- und Ausgang",
+    "shifts": [
+      { "name": "Früh", "length": 8, "unpaid": 30, "paid": 30 },
+      { "name": "Spät", "length": 8, "unpaid": 30, "paid": 30 },
+      { "name": "Nacht", "length": 8, "unpaid": 30, "paid": 30 }
+    ],
+    "utilisation": 85,
+    "absenteeism": 8,
+    "overtime": 2,
+    "mode": "rostered",
+    "rows": [
+      "0|0|52000|180", "0|1|58500|190", "0|2|39000|260",
+      "1|0|44000|155", "1|1|49500|160", "1|2|33000|215",
+      "2|0|40000|140", "2|1|45000|145", "2|2|30000|200",
+      "3|0|38400|135", "3|1|43200|140", "3|2|28800|190",
+      "4|0|41000|145", "4|1|46000|150", "4|2|31000|205",
+      "5|0|24000|80", "5|1|27000|90"
+    ],
+    "crew": [[10, 7, 4, 15, 2], [11, 8, 4, 16, 2], [8, 5, 3, 10, 3]],
+    "crewOverrides": ["5|0|6|4|2|9|1", "5|1|7|5|2|10|1"]
+  },
+  "advice": {
+    "short": {
+      "meaning": "Die Prognose braucht auf diesem Prozess mehr Stunden, als das geplante Team mitbringt. Ohne Änderung vor der Schicht staut sich die Arbeit dahinter: Wechselbrücken warten, Abfahrtszeiten rutschen, und die nächste Schicht beginnt mit einem Rückstand.",
+      "moves": [
+        "Besetzen Sie zuerst den Engpass: Er bestimmt die Leistung der ganzen Schicht.",
+        "Setzen Sie Personen aus einem Prozess mit freien Stunden um, aber nur solche, die die Arbeit allein beherrschen (Stufe 3 oder höher).",
+        "Buchen Sie den Rest heute als Überstunden oder Leihkräfte, nicht erst, wenn die Schicht schon läuft.",
+        "Prüfen Sie die Prognose mit der Disposition oder dem Kunden: Eine nicht bestätigte Spitze ist ein Risiko, kein Plan."
+      ],
+      "question": "Welchem Prozess gehen zuerst die Leute aus, und wer kann dort einspringen, ohne dass ein Trainer daneben steht?"
+    },
+    "rounding": {
+      "meaning": "In Stunden reicht das geplante Team, aber nicht in ganzen Personen: Die Köpfe werden für jeden Prozess aufgerundet und noch einmal für die Abwesenheit. Eine Person, die zwei Prozesse arbeitet, deckt die Bruchteile.",
+      "moves": [
+        "Benennen Sie eine flexible Person, die zwischen den Prozessen mit freien Stunden und den knappen wechselt.",
+        "Legen Sie fest, wann sie wechselt: zum Beispiel nach der Eingangswelle oder wenn die Fahrzeuge entladen sind.",
+        "Beobachten Sie die ersten zwei Stunden: Liegt die Leistung unter dem Standard, buchen Sie die zusätzlichen Stunden dann."
+      ],
+      "question": "Wer in diesem Team kann beide Prozesse, und wann in der Schicht wechselt er?"
+    },
+    "ok": {
+      "meaning": "Das geplante Team deckt die Prognose auf jedem Prozess, mit dem Abwesenheitszuschlag. Der Plan hält, solange Menge und Leistung halten.",
+      "moves": [
+        "Prüfen Sie die Leistungswerte gegen das, was das Team letzte Woche wirklich geschafft hat: Ein zu hoher Standard verdeckt eine Lücke.",
+        "Machen Sie die freien Stunden sichtbar: Schulung, 5S oder Anlernen am Engpassprozess.",
+        "Prüfen Sie erneut, wenn sich die Mengenprognose ändert."
+      ],
+      "question": "Welcher Leistungswert hier wurde seit einem Monat oder länger nicht mehr gegen die tatsächliche Leistung geprüft?"
+    },
+    "none": {
+      "meaning": "Für diese Schicht sind noch keine geplanten Köpfe eingetragen, deshalb zeigt das Tool nur, was die Prognose braucht.",
+      "moves": [
+        "Tragen Sie die eingeplanten Personen je Prozess ein, oder nur die Summe, wenn sie prozessübergreifend arbeiten.",
+        "Planen Sie mit den Köpfen inkl. Abwesenheit: Das ist die Zahl für den Dienstplan."
+      ],
+      "question": "Wie viele Personen sind für diese Schicht eingeplant, und auf welchen Prozessen?"
+    }
+  },
+  "tips": [
+    ["Leistungswerte aus echter Arbeit.", "Nutzen Sie die Einheiten pro produktiver Stunde aus einem Arbeitszeitstandard (Vorgabezeit) oder einer Zeitstudie, kein Ziel. Ein zu hoher Wert verdeckt die Lücke, bis die Schicht schon im Verzug ist."],
+    ["Eine Bezugsgröße je Prozess.", "Jeder Prozess wird in seiner eigenen Einheit gezählt: Positionen in der Kommissionierung, Aufträge in der Verpackung, Paletten in der Einlagerung. Kommt die Prognose in Aufträgen, geben Sie die Umrechnung an (zum Beispiel 2,4 Positionen pro Auftrag)."],
+    ["Produktive Stunden, nicht bezahlte Stunden.", "Von einer 8-Stunden-Schicht sind Pausen, Schichtbesprechung und Aufräumen nicht produktiv, und niemand arbeitet den Rest mit 100 %. Der Nutzungsgrad (oft 80–90 %) deckt Wege, Warten und kleine Stopps."],
+    ["Abwesenheit einplanen, bevor sie eintritt.", "Bei einem Abwesenheitszuschlag von 8 % kommt etwa jede zwölfte eingeplante Person nicht. Die Köpfe inkl. Abwesenheit sind die Zahl für den Dienstplan, damit am Tag die benötigten Köpfe da sind."],
+    ["Der Engpass bestimmt die Leistung.", "Der Prozess mit der niedrigsten Kapazität gegenüber seiner Menge begrenzt die ganze Schicht. Besetzen Sie ihn zuerst, und setzen Sie qualifizierte Personen aus Prozessen mit freien Stunden dorthin um."],
+    ["Jede Woche, bevor der Dienstplan schließt.", "Fügen Sie die Mengenprognose der Woche ein, tragen Sie die geplanten Köpfe ein, und schließen Sie die Lücken mit Überstunden, Leihkräften oder Umsetzungen, solange noch Zeit zum Buchen ist."]
+  ]
+}

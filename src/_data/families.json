@@ -130,7 +130,9 @@
       "/tools/room-inspection/",
       "/tools/maintenance-planner/",
       "/tools/signals/",
-      "/tools/housekeeping-planner/"
+      "/tools/housekeeping-planner/",
+      "/tools/leader-standard-work/",
+      "/tools/shift-capacity/"
     ],
     "learn": [],
     "also": [
@@ -224,6 +226,16 @@
         "when": "Every morning",
         "do": "Read today's departures and stay-overs after the night audit, check the attendants needed against the schedule, and hand every attendant the printed sheet of their section.",
         "tool": "/tools/housekeeping-planner/"
+      },
+      {
+        "when": "Start of shift",
+        "do": "Open today's standard, tick each task as you do it, and give every miss a reason before the handover.",
+        "tool": "/tools/leader-standard-work/"
+      },
+      {
+        "when": "Every week",
+        "do": "Paste next week's volume forecast before the roster closes and close every shift that is short of hours with a move, overtime or agency booking.",
+        "tool": "/tools/shift-capacity/"
       }
     ],
     "next": "lumen"
@@ -247,7 +259,9 @@
       "/tools/value-stream-map/",
       "/tools/standard-work/",
       "/tools/spaghetti-diagram/",
-      "/tools/project-portfolio/"
+      "/tools/project-portfolio/",
+      "/tools/inventory-abc/",
+      "/tools/smed/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -317,6 +331,16 @@
         "when": "Every week",
         "do": "Review each project with its lead, tick what the next tollgate still needs, and ask the sponsor to sign the phases that are ready.",
         "tool": "/tools/project-portfolio/"
+      },
+      {
+        "when": "Every month",
+        "do": "Import last month's demand, reorder every A SKU below its reorder point and move the top AX SKUs into the golden zone.",
+        "tool": "/tools/inventory-abc/"
+      },
+      {
+        "when": "Every month",
+        "do": "Time one changeover of the line with the longest stops, move everything external out of the stop and print the new changeover standard for the machine.",
+        "tool": "/tools/smed/"
       }
     ],
     "next": "atlas"

@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Leader Standard Work", "type": "Lean", "time": "Daily", "summary": "Each leader's routine as a standard, from the team leader's huddle to the site manager's Gemba walk, checked off every day: done, or missed with a reason. The next level up reviews the adherence each week, sees the share of the day in standard work against the guide for the level, and sends a task missed three times in two weeks to the Action Tracker.", "url": "/tools/leader-standard-work/", "cta": "Write the standard" },
+    "de": { "name": "Leader Standard Work", "type": "Lean", "time": "Täglich", "summary": "Die Routine jeder Führungskraft als Standard, von der Teamrunde der Teamleitung bis zum Gemba Walk der Standortleitung, täglich abgehakt: erledigt oder verpasst mit Grund. Die nächste Ebene prüft jede Woche die Einhaltung, sieht den Anteil der Standardarbeit am Tag gegen den Richtwert der Ebene und gibt eine Aufgabe, die in zwei Wochen dreimal verpasst wurde, in die Maßnahmenliste.", "url": "/de/tools/leader-standard-work/", "cta": "Standard schreiben" },
+    "sq": { "name": "Puna standarde e drejtuesit", "type": "Lean", "time": "Çdo ditë", "summary": "Rutina e çdo drejtuesi si standard, nga takimi i drejtuesit të ekipit deri te Gemba Walk i drejtuesit të objektit, e shënuar çdo ditë: e kryer, ose e humbur me arsye. Niveli tjetër e rishikon zbatimin çdo javë, sheh pjesën e ditës në punë standarde kundrejt udhëzimit për nivelin, dhe e dërgon te lista e veprimeve një detyrë të humbur tri herë në dy javë.", "url": "/sq/tools/leader-standard-work/", "cta": "Shkruaj standardin" }
+  },
+  "routine": { "when": "Start of shift", "do": "Open today's standard, tick each task as you do it, and give every miss a reason before the handover.", "de": { "when": "Schichtbeginn", "do": "Öffnen Sie den Standard des Tages, haken Sie jede Aufgabe ab, sobald sie erledigt ist, und geben Sie jeder Lücke vor der Übergabe einen Grund." }, "sq": { "when": "Fillimi i turnit", "do": "Hap standardin e sotëm, shëno çdo detyrë sapo e kryen, dhe jepi çdo mospërmbushjeje një arsye para dorëzimit." } },
+  "recipe": "example"
+}

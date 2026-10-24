@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: ABC/XYZ-Analyse
+seo_title: "ABC/XYZ-Analyse für das Lager: Klassen nach Wert und Bedarf, Sicherheitsbestand, Meldebestand, Inventurzyklen und Lagerplatzvergabe"
+description: "Teilen Sie Artikel nach Wert (ABC) und Bedarfsschwankung (XYZ) ein: mit Sicherheitsbestand, Meldebestand, Zählrhythmus und Plätzen in der goldenen Zone."
+activeNav: /de/tools.html
+permalink: /de/tools/inventory-abc/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Bestand</p>
+  <h1>ABC/XYZ-Analyse</h1>
+  <p class="lede">Teilen Sie die Artikel Ihres Lagers nach ihrem jährlichen Verbrauchswert (ABC) und nach der Gleichmäßigkeit ihres Bedarfs (XYZ) ein. Fügen Sie den Bedarf je Woche oder Monat ein oder öffnen Sie eine Datei, und sehen Sie die neun Felder mit der Strategie für jedes, wie oft jede Klasse gezählt wird, Sicherheitsbestand und Meldebestand jedes Artikels beim gewählten Servicegrad, welche Artikel jetzt darunter liegen und welche in die goldene Zone nächst dem Versand gehören.</p>
+</section>
+
+{% set cfg = de.inventoryAbc %}
+{% include "partials/inventory-abc.njk" %}

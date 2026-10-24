@@ -1,0 +1,168 @@
+{#- Shift Capacity: the people each process needs per shift for the forecast volume, against the people planned; shift-capacity.js does the rest. The Skills Matrix and Time Study keys of the page's language travel along, so moves between processes and rates from a time study can be checked against them. -#}
+{%- set skillsData = de.skillsMatrix if lang == "de" else (sq.skillsMatrix if lang == "sq" else skillsMatrix) -%}
+{%- set studyData = de.timeStudy if lang == "de" else (sq.timeStudy if lang == "sq" else timeStudy) -%}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-shift-capacity>
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">1 · {{ "Processes and rates" | t(lang) }}</legend>
+        <div class="cp-template">
+          <div class="field">
+            <label for="cp-template">{{ "Template" | t(lang) }}</label>
+            <select id="cp-template"></select>
+          </div>
+          <button class="button-secondary" type="button" data-load-template>{{ "Load template" | t(lang) }}</button>
+        </div>
+        <p class="form-note">{{ "Each process is counted in its own unit, at its rate in units per productive hour (UPH) from an engineered labour standard or a time study. When the forecast comes in another unit, the conversion turns it into the unit of the process, for example 2.4 lines per order." | t(lang) }}</p>
+        <div class="dl-table-wrap cp-list" tabindex="0" data-processes-wrap>
+          <table class="dl-table cp-process-table">
+            <thead>
+              <tr><th scope="col">{{ "Process" | t(lang) }}</th><th scope="col">{{ "Counted in" | t(lang) }}</th><th scope="col" class="num">{{ "Rate (UPH)" | t(lang) }}</th><th scope="col">{{ "Forecast in" | t(lang) }}</th><th scope="col" class="num">{{ "Conversion" | t(lang) }}</th><th scope="col" data-skill-head hidden>{{ "Task in the Skills Matrix" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+            </thead>
+            <tbody data-processes></tbody>
+          </table>
+        </div>
+        <datalist id="cp-driver-list"></datalist>
+        <datalist id="cp-skill-list"></datalist>
+        <p class="form-note" data-conversions aria-live="polite"></p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-process>{{ "Add a process" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-process-status aria-live="polite"></p>
+        <div class="cp-study" data-study hidden>
+          <p class="cp-sub">{{ "Rates from the Time Study" | t(lang) }}</p>
+          <p class="form-note">{{ "Stations timed in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/time-study/' | local(lang) }}">{{ cfg.text.timeStudyName }}</a> {{ "in this browser. A rate is only offered: pick the process and use it, or leave it." | t(lang) }}</p>
+          <div class="field cp-allowance">
+            <label for="cp-allowance">{{ "PF&D allowance (%)" | t(lang) }} <span class="optional">{{ "personal needs, fatigue, unavoidable delay" | t(lang) }}</span></label>
+            <input id="cp-allowance" type="text" inputmode="decimal" autocomplete="off">
+          </div>
+          <ul class="cp-study-list" data-study-list></ul>
+          <p class="form-note" data-study-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">2 · {{ "Shifts" | t(lang) }}</legend>
+        <div class="dl-table-wrap cp-list" tabindex="0">
+          <table class="dl-table cp-shift-setup">
+            <thead>
+              <tr><th scope="col">{{ "Shift" | t(lang) }}</th><th scope="col" class="num">{{ "Length (h)" | t(lang) }}</th><th scope="col" class="num">{{ "Unpaid breaks (min)" | t(lang) }}</th><th scope="col" class="num">{{ "Paid breaks and briefing (min)" | t(lang) }}</th><th scope="col">{{ "Productive hours per person" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+            </thead>
+            <tbody data-shifts></tbody>
+          </table>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-shift>{{ "Add a shift" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-shift-status aria-live="polite"></p>
+        <div class="dl-grid cp-settings">
+          <div class="field">
+            <label for="cp-utilisation">{{ "Utilisation (%)" | t(lang) }}</label>
+            <input id="cp-utilisation" name="utilisation" type="text" inputmode="decimal" autocomplete="off" data-setting>
+            <span class="form-note">{{ "the share of the net time spent on measured work" | t(lang) }}</span>
+          </div>
+          <div class="field">
+            <label for="cp-absenteeism">{{ "Absence allowance (%)" | t(lang) }}</label>
+            <input id="cp-absenteeism" name="absenteeism" type="text" inputmode="decimal" autocomplete="off" data-setting>
+            <span class="form-note">{{ "sickness, short-notice leave and no-shows" | t(lang) }}</span>
+          </div>
+          <div class="field">
+            <label for="cp-overtime">{{ "Overtime per person, at most (h)" | t(lang) }}</label>
+            <input id="cp-overtime" name="overtime" type="text" inputmode="decimal" autocomplete="off" data-setting>
+            <span class="form-note">{{ "what one person may add to a shift" | t(lang) }}</span>
+          </div>
+          <div class="field dl-wide">
+            <label for="cp-mode">{{ "Planned heads are" | t(lang) }}</label>
+            <select id="cp-mode">
+              <option value="rostered">{{ "Rostered: absence is still to come" | t(lang) }}</option>
+              <option value="confirmed">{{ "Confirmed: the people who will be there" | t(lang) }}</option>
+            </select>
+          </div>
+        </div>
+        <p class="form-note cp-formula"><strong>{{ "Productive hours per person" | t(lang) }}</strong> = {{ "(length − unpaid breaks − paid breaks and briefing) × utilisation." | t(lang) }} {{ "Heads = hours needed ÷ productive hours per person, rounded up; heads incl. absence = heads ÷ (1 − absence allowance), rounded up." | t(lang) }}</p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Volume forecast" | t(lang) }}</p>
+        <p class="form-note" data-forecast-count></p>
+      </div>
+      <p class="form-note">{{ "One row per day and shift, one volume per unit the processes are counted from." | t(lang) }}</p>
+      <p class="form-note dl-log-status" data-forecast-status aria-live="polite"></p>
+      <div class="dl-table-wrap cp-list" tabindex="0" data-forecast-wrap hidden>
+        <table class="dl-table cp-forecast-table">
+          <thead data-forecast-head></thead>
+          <tbody data-forecast></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-forecast-empty>{{ "No forecast yet. Add a day or paste the week from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-add-day>{{ "Add a day" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear>{{ "Clear the forecast" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ "One row per day and shift, columns in this order:" | t(lang) }} <strong data-paste-columns></strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }} {{ "A day and shift already in the forecast gets the new volumes." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="cp-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="cp-paste" rows="5" placeholder="{{ cfg.text.pastePlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">4 · {{ "Planned heads" | t(lang) }}</legend>
+        <div class="field cp-plan-pick">
+          <label for="cp-plan-shift">{{ "Day and shift" | t(lang) }}</label>
+          <select id="cp-plan-shift"></select>
+        </div>
+        <p class="form-note">{{ "Type the people planned per process, or only the total if they work across the processes." | t(lang) }}</p>
+        <div class="dl-grid cp-plan-grid" data-plan-fields></div>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="cp-plan-total">{{ "Or only the total" | t(lang) }}</label>
+            <input id="cp-plan-total" type="number" min="0" max="99999" step="1" inputmode="numeric" autocomplete="off">
+          </div>
+        </div>
+        <p class="form-note" data-plan-note aria-live="polite"></p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-copy-plan>{{ "Copy to every shift of this name" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-plan-status aria-live="polite"></p>
+      </fieldset>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Who can move?" | t(lang) }}</strong> {{ "Moves between processes are counted only for people at level 3 or above in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/skills-matrix/' | local(lang) }}">{{ cfg.text.skillsName }}</a> {{ "of this browser. A gap that comes back every week is a problem for" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>; {{ "each step to close it goes to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ cfg.text.trackerName }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results cp-results" data-results tabindex="-1" hidden></section>
+<section class="shell cp-print" data-print hidden></section>
+
+<script type="application/json" id="shift-capacity-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="shift-capacity-links">{{ { "skills": skillsData.storageKey if skillsData else "", "study": studyData.storageKey if studyData else "" } | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/shift-capacity.js' | assetUrl }}" defer></script>

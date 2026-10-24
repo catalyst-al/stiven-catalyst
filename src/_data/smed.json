@@ -1,0 +1,125 @@
+{
+  "storageKey": "sc-smed",
+  "title": "SMED Changeover",
+  "csv": "smed-changeover",
+  "defaults": { "weeks": "48" },
+  "text": {
+    "machinePlaceholder": "e.g. Packing line 3, bagger",
+    "fromPlaceholder": "e.g. Granola 375 g",
+    "toPlaceholder": "e.g. Granola 750 g",
+    "observerPlaceholder": "e.g. Shift lead",
+    "teamPlaceholder": "e.g. Operator and setter",
+    "elementPlaceholder": "e.g. Fetch the format parts",
+    "whoPlaceholder": "e.g. Operator",
+    "notePlaceholder": "What exactly changes",
+    "ownerPlaceholder": "Who makes it happen",
+    "checkPlaceholder": "e.g. Shoulder on both pins, clamps locked",
+    "pastePlaceholder": "Fetch the format parts; 1; 5:00; external",
+    "changeover": "Changeover",
+    "singleMinute": "Single-minute changeover: under ten minutes with the machine stopped, the goal Shingo named the method after.",
+    "freedNote": "Freed machine time is worth this only when it is used: more output on a full line, or more changeovers with smaller batches and less stock.",
+    "oee": "OEE counts a changeover as the setup and adjustment loss: the machine was planned to run and did not, so every minute of it lowers availability. Log each changeover there with the reason Changeover.",
+    "standardFoot": "Changeover time runs from the last good piece of the old product to the first good piece of the new one at normal speed. Time the next changeovers against this standard and improve it again.",
+    "typicalSource": "Typical shares in a traditional changeover after Shigeo Shingo, A Revolution in Manufacturing: The SMED System (1985)."
+  },
+  "categories": [
+    { "key": "prep", "name": "Preparation and checking", "short": "Preparation", "typical": 0.3, "meaning": "Fetching, checking and putting away tools, parts, material and papers; the run-out and the clean-up." },
+    { "key": "mount", "name": "Mounting and removing", "short": "Mounting", "typical": 0.05, "meaning": "Taking off the parts of the old product and putting on those of the new one." },
+    { "key": "measure", "name": "Measuring, setting and calibrating", "short": "Setting", "typical": 0.15, "meaning": "Centring, positioning, setting dimensions, temperatures and programs." },
+    { "key": "trial", "name": "Trial runs and adjustments", "short": "Trial runs", "typical": 0.5, "meaning": "Test pieces and corrections until the first good piece at normal speed." }
+  ],
+  "measures": [
+    { "key": "prestage", "step": 3, "name": "Pre-stage tools, parts and material before the stop (changeover cart)" },
+    { "key": "preheat", "step": 3, "name": "Pre-heat or pre-condition before the stop (dies, jaws, moulds)" },
+    { "key": "preassemble", "step": 3, "name": "Pre-assemble and pre-set off the machine (second set, intermediate jig)" },
+    { "key": "standardparts", "step": 3, "name": "Standardise the functional parts (same height, clamping and centring)" },
+    { "key": "prepare", "step": 3, "name": "Prepare the order, settings and labels before the stop" },
+    { "key": "checkbefore", "step": 3, "name": "Check that tools and material work before the stop" },
+    { "key": "quickrelease", "step": 4, "name": "Quick-release: one-turn or one-motion clamps instead of bolts" },
+    { "key": "locate", "step": 4, "name": "Locating pins and standard heights: no shims, no searching" },
+    { "key": "noadjust", "step": 4, "name": "Eliminate adjustments: fixed stops, scales, settings stored per product" },
+    { "key": "parallel", "step": 4, "name": "Parallel work with two people, a fixed sequence and a signal" },
+    { "key": "checklist", "step": 4, "name": "A checklist and a fixed sequence for every changeover" },
+    { "key": "pointofuse", "step": 4, "name": "Tools and parts stored at the point of use: shorter walks" },
+    { "key": "mechanise", "step": 4, "name": "Mechanise the heavy handling (rollers, lifting aid)" }
+  ],
+  "steps": [
+    { "title": "Observe and record", "what": "Time one real changeover, from the last good piece of the old product to the first good piece of the new one. Each lap closes one element. Write down what happened, not what should happen.", "tip": "Film it if the team agrees: a video shows the walks and the searching that a stopwatch misses." },
+    { "title": "Separate internal and external", "what": "Mark each element: internal if it can only be done with the machine stopped, external if it could be done while the machine runs. Being done with the machine stopped today does not make an element internal.", "tip": "Separating alone usually cuts the internal time by 30 to 50 % (Shingo): the fetching and checking move before the stop." },
+    { "title": "Convert internal to external", "what": "Look at every internal element again and ask what would let it happen while the machine runs: pre-heat, pre-stage, pre-assemble, standardise the parts that touch the machine.", "tip": "Look at what the element is for, not at the way it is done today." },
+    { "title": "Streamline both", "what": "Shorten what stays internal (quick-release, locating pins, no adjustments, two people in parallel) and the external work too (point-of-use storage, checklists). Give each element its planned time after the change and the person who does it.", "tip": "Adjustments are the largest prize: remove the need for them rather than doing them faster." },
+    { "title": "Standardise", "what": "Write the new changeover as a standard: what is done before the stop, with the machine stopped and after the restart, by whom, in what time and with which check. Train it and time the next changeover against it.", "tip": "The standard is the base of the next round: time a changeover again after a month." }
+  ],
+  "advice": {
+    "prep": {
+      "meaning": "Fetching, searching and checking still happen while the machine stands. This is the cheapest time to win: none of it needs the machine.",
+      "moves": [
+        "Build a changeover cart with everything for the next product, checked against a list before the stop.",
+        "Keep the tools on a shadow board at the machine: no walk, no search.",
+        "Run out the old order to a count, so the stop starts on time and nobody waits."
+      ],
+      "question": "What did someone fetch or look for while the machine was stopped?"
+    },
+    "mount": {
+      "meaning": "Parts still come off and go on by hand, screw by screw. Shingo found only about 5 % of a traditional changeover here; more means the fastenings are slow.",
+      "moves": [
+        "Replace bolts with one-turn or one-motion clamps; a bolt that only needs loosening gets a U-slot.",
+        "Give the parts locating pins and one height, so they go on in one position.",
+        "Work in parallel with two people and a fixed sequence: who does which side, and a signal when done."
+      ],
+      "question": "Which fastening is turned more than once, and why does it need to be?"
+    },
+    "measure": {
+      "meaning": "Settings are found by measuring and trying at the machine. Every setting that can be stored or fixed stops being a step.",
+      "moves": [
+        "Store the settings of each product (recipe, scale marks, fixed stops) and set by number, not by ruler.",
+        "Mark the position of every format on the machine: a scale, a colour, a pin.",
+        "Prepare the printer, coder and label files before the stop."
+      ],
+      "question": "Which setting is measured fresh at every changeover, though it is the same for this product every time?"
+    },
+    "trial": {
+      "meaning": "Trial runs and adjustments are typically half of a traditional changeover (Shingo). They exist because the settings are not exact; the cure lies upstream, in setting and mounting.",
+      "moves": [
+        "Write down every adjustment of the trial runs for five changeovers: the one that always happens is a setting to fix.",
+        "Agree the first-piece check with quality: what is measured, by whom, against which reference.",
+        "Count the trial pieces and the minutes to the first good piece: that is the measure of the changeover."
+      ],
+      "question": "What was adjusted during the trial run, and could it have been set right before the start?"
+    }
+  },
+  "tips": [
+    ["Stopped is not the same as internal.", "Today almost everything happens with the machine stopped. Internal means it cannot be done any other way; that question is step 2."],
+    ["Time to the first good piece.", "The changeover ends when the new product comes off good at normal speed, not when the last bolt is tight. Trial runs belong to it."],
+    ["Do the cheap steps first.", "Separating and converting cost a cart and a checklist. Quick-release clamps and stored settings come next; machines and automation come last."],
+    ["Parallel work needs a sequence.", "Two people only halve the stop when each knows their side and nobody waits for the other. Plan who does what, then time it."],
+    ["One changeover, then the standard.", "Study one changeover well, write the new standard, train it and time the next one against it. Then start the next round."]
+  ],
+  "example": {
+    "machine": "Packing line 3 · vertical bagger",
+    "from": "Granola 375 g",
+    "to": "Granola 750 g",
+    "date": -3,
+    "observer": "Shift lead",
+    "team": "Operator and setter",
+    "target": "20",
+    "perWeek": "8",
+    "costMin": "6",
+    "weeks": "48",
+    "elements": [
+      { "name": "Fetch the format parts and tools from the store", "cat": "prep", "dur": 300, "kind": "external", "after": "external", "afterDur": 240, "who": "Setter", "convert": "prestage", "streamline": "", "note": "A changeover cart for each format, packed by the setter before the stop", "owner": "Line lead", "due": 14, "check": "Cart complete against the checklist before the stop", "phase": "before" },
+      { "name": "Search for the changeover sheet and the right Allen keys", "cat": "prep", "dur": 120, "kind": "external", "after": "external", "afterDur": 60, "who": "Setter", "convert": "", "streamline": "checklist", "note": "Changeover sheet and keys on the cart, ticked against the list", "owner": "Line lead", "due": 14, "check": "Checklist ticked, keys on the shadow board of the cart", "phase": "before" },
+      { "name": "Run out the last packs and take off the old film", "cat": "prep", "dur": 180, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Operator", "convert": "", "streamline": "checklist", "note": "The infeed stops at the order count; the run-out follows the sheet", "owner": "Line lead", "due": 14, "check": "Last good pack counted and labelled", "phase": "" },
+      { "name": "Remove the old forming shoulder (8 screws)", "cat": "mount", "dur": 240, "kind": "internal", "after": "internal", "afterDur": 120, "who": "Operator", "convert": "", "streamline": "quickrelease", "note": "Two quick-release clamps instead of the 8 screws on the forming shoulder", "owner": "Maintenance", "due": 28, "check": "Both clamps open, shoulder on the cart", "phase": "" },
+      { "name": "Fit and centre the new forming shoulder", "cat": "mount", "dur": 300, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Operator", "convert": "standardparts", "streamline": "locate", "note": "Locating pins and one mounting height on every shoulder: no centring", "owner": "Maintenance", "due": 28, "check": "Shoulder on both pins, clamps locked", "phase": "" },
+      { "name": "Change the film reel and thread the new film", "cat": "mount", "dur": 210, "kind": "internal", "after": "internal", "afterDur": 180, "who": "Operator", "convert": "prestage", "streamline": "", "note": "New reel ready on the cart, threading diagram on the machine", "owner": "Line lead", "due": 14, "check": "Film runs centred over the shoulder", "phase": "" },
+      { "name": "Swap the sealing jaws", "cat": "mount", "dur": 150, "kind": "internal", "after": "internal", "afterDur": 90, "who": "Operator", "convert": "", "streamline": "quickrelease", "note": "Quick-change jaws with plug connectors", "owner": "Maintenance", "due": 42, "check": "Plugs locked, jaws seated", "phase": "" },
+      { "name": "Wait for the new jaws to heat to 165 °C", "cat": "prep", "dur": 360, "kind": "internal", "after": "external", "afterDur": 360, "who": "Setter", "convert": "preheat", "streamline": "", "note": "A heating station beside the line: the new jaws reach 165 °C before the stop", "owner": "Maintenance", "due": 42, "check": "Jaws at 165 °C on the heating station before the stop", "phase": "before" },
+      { "name": "Set guide rails, film width and bag length with a ruler", "cat": "measure", "dur": 270, "kind": "internal", "after": "internal", "afterDur": 150, "who": "Operator", "convert": "", "streamline": "noadjust", "note": "A recipe per format on the control panel, scale marks on the rails", "owner": "Maintenance", "due": 28, "check": "Rails on the 750 g mark, recipe 750 g loaded", "phase": "" },
+      { "name": "Enter the new date code and label file", "cat": "measure", "dur": 90, "kind": "internal", "after": "internal", "afterDur": 30, "who": "Operator", "convert": "prepare", "streamline": "", "note": "Code and label file prepared before the stop, selected with the recipe", "owner": "Line lead", "due": 14, "check": "Date code and label match the order", "phase": "" },
+      { "name": "Trial bags: adjust sealing and weight until good", "cat": "trial", "dur": 360, "kind": "internal", "after": "internal", "afterDur": 180, "who": "Operator", "convert": "", "streamline": "noadjust", "note": "Sealing settings stored per format; adjust only when the seal test fails", "owner": "Line lead", "due": 28, "check": "Seal test and weight checked on 3 bags", "phase": "" },
+      { "name": "Wait for quality to release the first bags", "cat": "trial", "dur": 150, "kind": "internal", "after": "internal", "afterDur": 90, "who": "Operator", "convert": "", "streamline": "checklist", "note": "The operator releases with the first-piece card; quality verifies on its round", "owner": "Quality", "due": 21, "check": "First-piece card signed", "phase": "" },
+      { "name": "Clean up and take the old parts back to the store", "cat": "prep", "dur": 150, "kind": "external", "after": "external", "afterDur": 150, "who": "Setter", "convert": "", "streamline": "", "note": "", "owner": "", "due": "", "check": "Old format parts back in their place", "phase": "after" }
+    ]
+  }
+}

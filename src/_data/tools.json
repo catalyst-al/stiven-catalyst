@@ -326,5 +326,37 @@
     "summary": "The executive housekeeper's staffing plan: departures, stay-overs, linen changes, VIP rooms, deep cleans and public areas become workload minutes (or credits) and the attendants needed against those scheduled, with hours, labour cost and minutes per occupied room. Sections balanced by minutes on as few floors as possible, printed per attendant or set into Room Status, and the week from the forecast.",
     "url": "/tools/housekeeping-planner/",
     "cta": "Plan the housekeeping team"
+  },
+  {
+    "name": "Leader Standard Work",
+    "type": "Lean",
+    "time": "Daily",
+    "summary": "Each leader's routine as a standard, from the team leader's huddle to the site manager's Gemba walk, checked off every day: done, or missed with a reason. The next level up reviews the adherence each week, sees the share of the day in standard work against the guide for the level, and sends a task missed three times in two weeks to the Action Tracker.",
+    "url": "/tools/leader-standard-work/",
+    "cta": "Write the standard"
+  },
+  {
+    "name": "Shift Capacity",
+    "type": "Planning",
+    "time": "10 min",
+    "summary": "Turn the volume forecast and the rate of each process into the heads every shift needs, with breaks, utilisation and absence, and see the gap against the planned team, the bottleneck and how to close it with overtime, agency or qualified people from another process.",
+    "url": "/tools/shift-capacity/",
+    "cta": "Plan the shifts"
+  },
+  {
+    "name": "ABC/XYZ Inventory",
+    "type": "Inventory",
+    "time": "15 min",
+    "summary": "Classify every SKU by annual consumption value and by how steady its demand is, and get the nine-cell matrix with its policies, the cycle counts per week, safety stock and reorder points at your service level, and the SKUs for the golden zone.",
+    "url": "/tools/inventory-abc/",
+    "cta": "Classify the stock"
+  },
+  {
+    "name": "SMED Changeover",
+    "type": "Lean",
+    "time": "30 min",
+    "summary": "Time one changeover element by element, split it into internal and external work, convert and streamline by Shingo's steps, and see the minutes and euros freed and the new changeover standard.",
+    "url": "/tools/smed/",
+    "cta": "Study a changeover"
   }
 ]

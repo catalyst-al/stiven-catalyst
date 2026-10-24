@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Schichtkapazität
+seo_title: "Schichtkapazität planen: Köpfe je Prozess aus Mengenprognose und Leistung pro Stunde, Abwesenheitszuschlag, Lücke, Engpass und Takt"
+description: "Benötigte Köpfe je Prozess und Schicht aus Mengenprognose und Leistung pro Stunde, gegen das geplante Team: Lücke, Engpass, Überstunden und Leihkräfte."
+activeNav: /de/tools.html
+permalink: /de/tools/shift-capacity/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Planung</p>
+  <h1>Schichtkapazität</h1>
+  <p class="lede">Wie viele Personen jeder Prozess in jeder Schicht für die prognostizierte Menge braucht, gegen die geplanten Personen, bevor die Schicht beginnt. Geben Sie jedem Prozess seine Leistung in Einheiten pro produktiver Stunde, den Schichten ihre Pausen, den Nutzungsgrad und den Abwesenheitszuschlag, und der Woche ihre Menge je Tag und Schicht. Das Tool berechnet die Arbeitsstunden und die Köpfe, die Lücke in Köpfen und in Stunden, die Kapazität des geplanten Teams und seinen Engpass, und wie sich eine Lücke schließen lässt: Überstunden, Leihkräfte oder qualifizierte Personen aus einem Prozess mit freien Stunden.</p>
+</section>
+
+{% set cfg = de.shiftCapacity %}
+{% include "partials/shift-capacity.njk" %}

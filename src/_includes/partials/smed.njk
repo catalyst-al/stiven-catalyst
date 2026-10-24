@@ -1,0 +1,184 @@
+{#- SMED Changeover: one changeover timed element by element, split into internal and external work, converted, streamlined and written as the changeover standard; smed.js does the rest. -#}
+<section class="shell tool-layout dl-setup sm-setup">
+  <div class="tool-panel" data-smed>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">{{ "The changeover" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="sm-machine">{{ "Machine or line" | t(lang) }}</label>
+          <input id="sm-machine" name="machine" autocomplete="off" placeholder="{{ cfg.text.machinePlaceholder }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-from">{{ "From product" | t(lang) }}</label>
+          <input id="sm-from" name="from" autocomplete="off" placeholder="{{ cfg.text.fromPlaceholder }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-to">{{ "To product" | t(lang) }}</label>
+          <input id="sm-to" name="to" autocomplete="off" placeholder="{{ cfg.text.toPlaceholder }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-date">{{ "Date" | t(lang) }}</label>
+          <input id="sm-date" name="date" type="date" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-observer">{{ "Observed by" | t(lang) }}</label>
+          <input id="sm-observer" name="observer" autocomplete="off" placeholder="{{ cfg.text.observerPlaceholder }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-team">{{ "Team on the changeover" | t(lang) }}</label>
+          <input id="sm-team" name="team" autocomplete="off" placeholder="{{ cfg.text.teamPlaceholder }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-target">{{ "Target time (min)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="sm-target" name="target" type="number" min="0" step="0.5" inputmode="decimal" placeholder="{{ 'e.g. 10' | t(lang) }}" data-study>
+        </div>
+      </div>
+      <p class="form-note">{{ "Changeover time runs from the last good piece of the old product to the first good piece of the new one at normal speed." | t(lang) }}</p>
+    </fieldset>
+
+    <div class="dl-box sm-flow">
+      <p class="kicker">{{ "The five SMED steps" | t(lang) }}</p>
+      <ol class="sm-steps">
+        {%- for step in cfg.steps %}
+        <li><button class="sm-step" type="button" data-step="{{ loop.index }}"><span class="sm-step-no">{{ loop.index }}</span><span class="sm-step-name">{{ step.title }}</span><span class="sm-step-state" data-step-state></span></button></li>
+        {%- endfor %}
+      </ol>
+      <div class="sm-step-intro" data-step-intro tabindex="-1"></div>
+
+      <div class="sm-watch" data-only-step="1">
+        <div class="dl-grid sm-watch-grid">
+          <div class="field">
+            <label for="sm-watch-name">{{ "Element under way" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sm-watch-name" autocomplete="off" placeholder="{{ cfg.text.elementPlaceholder }}" data-watch-name>
+          </div>
+          <div class="field">
+            <label for="sm-watch-cat">{{ "Category" | t(lang) }}</label>
+            <select id="sm-watch-cat" data-watch-cat>
+              {%- for c in cfg.categories %}<option value="{{ c.key }}">{{ c.name }}</option>{% endfor -%}
+            </select>
+          </div>
+        </div>
+        <div class="sm-clock" aria-hidden="true"><span data-clock>0:00</span></div>
+        <p class="sm-current" data-current aria-live="polite"></p>
+        <div class="tool-actions sm-watch-actions">
+          <button class="button-primary sm-big" type="button" data-start>{{ "Start: last good piece" | t(lang) }}</button>
+          <button class="button-primary sm-big" type="button" data-lap hidden>{{ "Lap: next element" | t(lang) }}</button>
+          <button class="button-secondary" type="button" data-stop hidden>{{ "Stop: first good piece" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-undo-lap hidden>{{ "Undo last lap" | t(lang) }}</button>
+        </div>
+        <p class="form-note">{{ "Space is the lap key. Each lap closes the element under way and starts the next; type its name while it runs or later in the list." | t(lang) }}</p>
+        <p class="form-note" data-watch-status aria-live="polite"></p>
+      </div>
+
+      <details class="dl-paste sm-manual" data-only-step="1">
+        <summary class="kicker">{{ "Type or paste elements" | t(lang) }}</summary>
+        <form class="dl-grid sm-entry" data-entry novalidate>
+          <div class="field dl-wide">
+            <label for="sm-entry-name">{{ "Element" | t(lang) }}</label>
+            <input id="sm-entry-name" name="name" autocomplete="off" placeholder="{{ cfg.text.elementPlaceholder }}">
+          </div>
+          <div class="field">
+            <label for="sm-entry-cat">{{ "Category" | t(lang) }}</label>
+            <select id="sm-entry-cat" name="cat">
+              {%- for c in cfg.categories %}<option value="{{ c.key }}">{{ c.name }}</option>{% endfor -%}
+            </select>
+          </div>
+          <div class="field">
+            <label for="sm-entry-now">{{ "Done today" | t(lang) }}</label>
+            <select id="sm-entry-now" name="now">
+              <option value="stopped">{{ "Machine stopped" | t(lang) }}</option>
+              <option value="running">{{ "Machine running" | t(lang) }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sm-entry-duration">{{ "Duration (m:ss)" | t(lang) }}</label>
+            <input id="sm-entry-duration" name="duration" inputmode="numeric" autocomplete="off" placeholder="4:30">
+          </div>
+          <div class="field">
+            <label for="sm-entry-start">{{ "Starts at (m:ss)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sm-entry-start" name="start" inputmode="numeric" autocomplete="off" placeholder="0:00">
+          </div>
+          <div class="field">
+            <label for="sm-entry-end">{{ "Ends at (m:ss)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="sm-entry-end" name="end" inputmode="numeric" autocomplete="off" placeholder="4:30">
+          </div>
+          <div class="tool-actions dl-wide">
+            <button class="button-secondary" type="submit">{{ "Add the element" | t(lang) }}</button>
+            <p class="form-note" data-entry-status aria-live="polite"></p>
+          </div>
+        </form>
+        <p class="form-note">{{ "Times since the stop as m:ss; a plain number is minutes. With a start and an end the duration follows from them." | t(lang) }}</p>
+        <p class="form-note">{{ "Or paste rows from Excel, columns in this order:" | t(lang) }} <strong>{{ "element, category (1 to 4), duration, internal or external" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+        <div class="field">
+          <label class="visually-hidden" for="sm-paste">{{ "Rows to import" | t(lang) }}</label>
+          <textarea id="sm-paste" rows="4" data-paste placeholder="{{ cfg.text.pastePlaceholder }}"></textarea>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+          <p class="form-note" data-import-status aria-live="polite"></p>
+        </div>
+      </details>
+
+      <p class="form-note sm-totals" data-totals aria-live="polite"></p>
+      <p class="form-note dl-log-status" data-status aria-live="polite"></p>
+      <div class="sm-elements" data-elements></div>
+      <p class="dl-empty" data-empty>{{ "No elements yet. Time a changeover, type the elements in, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example changeover" | t(lang) }}</button>.</p>
+      <div class="sm-standard" data-standard hidden></div>
+      <div class="tool-actions sm-step-nav">
+        <button class="button-secondary" type="button" data-prev>{{ "Previous step" | t(lang) }}</button>
+        <button class="button-primary" type="button" data-next>{{ "Next step" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">{{ "What a minute is worth" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sm-per-week">{{ "Changeovers per week" | t(lang) }}</label>
+          <input id="sm-per-week" name="perWeek" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ 'e.g. 8' | t(lang) }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-cost">{{ "Cost per machine-minute (€)" | t(lang) }}</label>
+          <input id="sm-cost" name="costMin" type="number" min="0" step="0.01" inputmode="decimal" placeholder="{{ 'e.g. 6' | t(lang) }}" data-study>
+        </div>
+        <div class="field">
+          <label for="sm-weeks">{{ "Working weeks per year" | t(lang) }}</label>
+          <input id="sm-weeks" name="weeks" type="number" min="1" max="53" step="1" inputmode="numeric" data-study>
+        </div>
+      </div>
+      <p class="form-note">{{ "The cost of a machine-minute is what an hour of the line costs (people, machine, lost margin when it is full) divided by 60. Leave it empty to see the minutes only." | t(lang) }}</p>
+    </fieldset>
+
+    <div class="dl-box">
+      <p class="kicker">{{ "The study" | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear the study" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Then make it the standard." | t(lang) }}</strong> {{ "Print the changeover standard for the machine, or save it for" | t(lang) }} <a class="inline-link" href="{{ '/tools/standard-work/' | local(lang) }}">{{ "Standard Work" | t(lang) }}</a>{{ ", and count every changeover as a setup loss in" | t(lang) }} <a class="inline-link" href="{{ '/tools/oee/' | local(lang) }}">OEE</a>.</li>
+      <li><strong>{{ "Cyclic work is a different study." | t(lang) }}</strong> {{ "For the repeated work of a station, against takt, use the" | t(lang) }} <a class="inline-link" href="{{ '/tools/time-study/' | local(lang) }}">{{ "Time Study" | t(lang) }}</a>. {{ "When one element will not get shorter, ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sm-results" data-results tabindex="-1" hidden></section>
+<section class="shell sm-print" data-print hidden></section>
+
+<script type="application/json" id="smed-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/template-pack.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/smed.js' | assetUrl }}" defer></script>

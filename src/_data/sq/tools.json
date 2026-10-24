@@ -326,5 +326,37 @@
     "summary": "Plani i stafit i drejtuesit të housekeeping-ut: largimet, qëndrimet e vazhduara, ndërrimet e çarçafëve, dhomat VIP, pastrimet e thella dhe zonat publike bëhen minuta pune (ose kredite) dhe pastruesit e nevojshëm kundrejt atyre në turn, me orë, kosto pune dhe minuta për dhomë të zënë. Sektorë të balancuar sipas minutave në sa më pak kate, të printuar për çdo pastrues ose të vendosur në Statusin e dhomave, dhe java nga parashikimi.",
     "url": "/sq/tools/housekeeping-planner/",
     "cta": "Planifiko ekipin e housekeeping-ut"
+  },
+  {
+    "name": "Puna standarde e drejtuesit",
+    "type": "Lean",
+    "time": "Çdo ditë",
+    "summary": "Rutina e çdo drejtuesi si standard, nga takimi i drejtuesit të ekipit deri te Gemba Walk i drejtuesit të objektit, e shënuar çdo ditë: e kryer, ose e humbur me arsye. Niveli tjetër e rishikon zbatimin çdo javë, sheh pjesën e ditës në punë standarde kundrejt udhëzimit për nivelin, dhe e dërgon te lista e veprimeve një detyrë të humbur tri herë në dy javë.",
+    "url": "/sq/tools/leader-standard-work/",
+    "cta": "Shkruaj standardin"
+  },
+  {
+    "name": "Kapaciteti i turnit",
+    "type": "Planifikim",
+    "time": "10 min",
+    "summary": "Ktheje parashikimin e volumit dhe ritmin e çdo procesi në njerëzit që i duhen çdo turni, me pushimet, shfrytëzimin dhe mungesat, dhe shiko hendekun me ekipin e planifikuar, pikën e ngushtë dhe si mbyllet me orë shtesë, agjenci ose njerëz të kualifikuar nga një proces tjetër.",
+    "url": "/sq/tools/shift-capacity/",
+    "cta": "Planifiko turnet"
+  },
+  {
+    "name": "Analiza ABC/XYZ e stokut",
+    "type": "Stoku",
+    "time": "15 min",
+    "summary": "Ndaj çdo artikull sipas vlerës vjetore të konsumit dhe sipas sa e qëndrueshme është kërkesa e tij, dhe merr matricën me nëntë qeliza e politikat e saj, numërimet në javë, stokun e sigurisë dhe pikat e riporosisë për nivelin tënd të shërbimit, dhe artikujt për zonën e artë.",
+    "url": "/sq/tools/inventory-abc/",
+    "cta": "Klasifiko stokun"
+  },
+  {
+    "name": "SMED: ndërrimi i shpejtë",
+    "type": "Lean",
+    "time": "30 min",
+    "summary": "Mat një ndërrim element pas elementi, ndaj punën e brendshme nga e jashtmja, shndërroje dhe thjeshtoje sipas hapave të Shingos, dhe shiko minutat dhe eurot e fituara dhe standardin e ri të ndërrimit.",
+    "url": "/sq/tools/smed/",
+    "cta": "Studio një ndërrim"
   }
 ]

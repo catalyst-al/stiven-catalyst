@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "SMED Changeover", "type": "Lean", "time": "30 min", "summary": "Time one changeover element by element, split it into internal and external work, convert and streamline by Shingo's steps, and see the minutes and euros freed and the new changeover standard.", "url": "/tools/smed/", "cta": "Study a changeover" },
+    "de": { "name": "SMED-Rüstzeitanalyse", "type": "Lean", "time": "30 Min.", "summary": "Stoppen Sie einen Rüstvorgang Element für Element, trennen Sie internes und externes Rüsten, wandeln Sie um und verbessern Sie nach Shingos Schritten, und sehen Sie die gewonnenen Minuten und Euro und den neuen Rüststandard.", "url": "/de/tools/smed/", "cta": "Rüstvorgang untersuchen" },
+    "sq": { "name": "SMED: ndërrimi i shpejtë", "type": "Lean", "time": "30 min", "summary": "Mat një ndërrim element pas elementi, ndaj punën e brendshme nga e jashtmja, shndërroje dhe thjeshtoje sipas hapave të Shingos, dhe shiko minutat dhe eurot e fituara dhe standardin e ri të ndërrimit.", "url": "/sq/tools/smed/", "cta": "Studio një ndërrim" }
+  },
+  "routine": { "when": "Every month", "do": "Time one changeover of the line with the longest stops, move everything external out of the stop and print the new changeover standard for the machine.", "de": { "when": "Jeden Monat", "do": "Stoppen Sie einen Rüstvorgang der Linie mit den längsten Stillständen, holen Sie alles Externe aus dem Stillstand und drucken Sie den neuen Rüststandard für die Maschine." }, "sq": { "when": "Çdo muaj", "do": "Mat një ndërrim të linjës me ndalesat më të gjata, nxirr nga ndalesa gjithçka të jashtme dhe printo standardin e ri të ndërrimit për makinën." } },
+  "recipe": "example"
+}

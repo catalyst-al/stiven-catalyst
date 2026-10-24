@@ -1,0 +1,159 @@
+{#- ABC/XYZ Inventory: the SKUs of a store by value (ABC) and steadiness of demand (XYZ), with the matrix, cycle counts, safety stock, reorder points and slotting; inventory-abc.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-inventory-abc>
+    <fieldset class="dl-box ia-import">
+      <legend class="kicker">1 · {{ "Your SKUs" | t(lang) }}</legend>
+      <p class="form-note">{{ "One row per SKU: SKU, description, unit cost and the demand of each week or month, one column per period. Lead time in days, its spread, stock on hand and picks are optional." | t(lang) }} {{ "With a header row the columns are matched by name; without one the order is SKU, description, unit cost, then the periods." | t(lang) }}</p>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="ia-file">{{ "Open a CSV or Excel file" | t(lang) }} <span class="optional">.csv, .txt, .xlsx</span></label>
+          <input id="ia-file" type="file" accept=".csv,.txt,.tsv,.xlsx,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+        <div class="field dl-wide">
+          <label for="ia-paste">{{ "Or paste the rows from Excel" | t(lang) }}</label>
+          <textarea id="ia-paste" rows="6" placeholder="{{ cfg.text.pastePlaceholder }}" spellcheck="false"></textarea>
+        </div>
+      </div>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-example>{{ "Load the example" | t(lang) }}</button>
+      </div>
+      <p class="form-note ia-status" data-import-status aria-live="polite"></p>
+      <details class="ia-map" data-map hidden>
+        <summary class="ia-map-summary">{{ "Columns used" | t(lang) }}</summary>
+        <p class="form-note" data-map-note aria-live="polite"></p>
+        <div class="dl-grid" data-map-grid></div>
+      </details>
+    </fieldset>
+
+    <fieldset class="dl-box ia-settings">
+      <legend class="kicker">2 · {{ "Settings" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="ia-unit">{{ "Length of one demand column" | t(lang) }}</label>
+          <select id="ia-unit" name="unit" data-setting>
+            <option value="month">{{ "month" | t(lang) }}</option>
+            <option value="week">{{ "week" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ia-service">{{ "Cycle service level (%)" | t(lang) }}</label>
+          <input id="ia-service" name="service" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-a">{{ "A up to (% of value)" | t(lang) }}</label>
+          <input id="ia-a" name="a" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-b">{{ "B up to (% of value)" | t(lang) }}</label>
+          <input id="ia-b" name="b" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-x">{{ "X up to (CV)" | t(lang) }}</label>
+          <input id="ia-x" name="x" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-y">{{ "Y up to (CV)" | t(lang) }}</label>
+          <input id="ia-y" name="y" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-lead">{{ "Lead time if none is given (days)" | t(lang) }}</label>
+          <input id="ia-lead" name="leadTime" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-ltsd">{{ "Lead-time spread σ if none is given (days)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="ia-ltsd" name="ltSd" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-order">{{ "Cost of one order" | t(lang) }} <span class="optional">{{ "optional, for the EOQ" | t(lang) }}</span></label>
+          <input id="ia-order" name="orderCost" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-holding">{{ "Holding cost (% of unit cost per year)" | t(lang) }}</label>
+          <input id="ia-holding" name="holding" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-currency">{{ "Currency" | t(lang) }}</label>
+          <input id="ia-currency" name="currency" type="text" autocomplete="off" maxlength="8" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-count-a">{{ "A counts per year" | t(lang) }}</label>
+          <input id="ia-count-a" name="countA" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-count-b">{{ "B counts per year" | t(lang) }}</label>
+          <input id="ia-count-b" name="countB" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ia-count-c">{{ "C counts per year" | t(lang) }}</label>
+          <input id="ia-count-c" name="countC" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+      </div>
+      <p class="form-note">{{ "Defaults: A up to 80 %, B up to 95 %; X up to a CV of 0.5, Y up to 1.0; counts 12, 4 and 1 a year (monthly, quarterly, yearly)." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-reset-settings>{{ "Back to the defaults" | t(lang) }}</button>
+      </div>
+    </fieldset>
+
+    <div class="dl-box ia-list">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Classified SKUs" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <div class="field ia-filter" data-list-filter hidden>
+        <label for="ia-filter">{{ "Show" | t(lang) }}</label>
+        <select id="ia-filter">
+          <option value="all">{{ "All SKUs" | t(lang) }}</option>
+          <option value="below">{{ "Below reorder point" | t(lang) }}</option>
+          <option value="nodemand">{{ "No demand" | t(lang) }}</option>
+          <option value="A">{{ "Class A" | t(lang) }}</option>
+          <option value="B">{{ "Class B" | t(lang) }}</option>
+          <option value="C">{{ "Class C" | t(lang) }}</option>
+          <option value="X">X · {{ "steady" | t(lang) }}</option>
+          <option value="Y">Y · {{ "variable" | t(lang) }}</option>
+          <option value="Z">Z · {{ "erratic" | t(lang) }}</option>
+          {%- for cell in ["AX", "AY", "AZ", "BX", "BY", "BZ", "CX", "CY", "CZ"] %}
+          <option value="{{ cell }}">{{ cell }} · {{ cfg.cells[cell].name }}</option>
+          {%- endfor %}
+        </select>
+      </div>
+      <div class="dl-table-wrap" tabindex="0" data-list-wrap hidden>
+        <table class="dl-table ia-table">
+          <thead>
+            <tr><th scope="col">{{ "SKU and description" | t(lang) }}</th><th scope="col">{{ "Class" | t(lang) }}</th><th scope="col" class="num">{{ "Annual value" | t(lang) }}</th><th scope="col" class="num">{{ "Cumulative" | t(lang) }}</th><th scope="col" class="num">CV</th><th scope="col" class="num">{{ "Safety stock" | t(lang) }}</th><th scope="col" class="num">{{ "Reorder point" | t(lang) }}</th><th scope="col" class="num">{{ "Stock" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th></tr>
+          </thead>
+          <tbody data-list></tbody>
+        </table>
+      </div>
+      <button class="button-ghost dl-more" type="button" data-more hidden></button>
+      <p class="dl-empty" data-list-empty>{{ "No SKUs yet. Open a file or paste the rows above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example of 60 SKUs" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear>{{ "Clear the list" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Take it further." | t(lang) }}</strong> {{ "Open the values in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>, {{ "find out why a SKU keeps running short with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "and give every reorder an owner in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ia-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="inventory-abc-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pareto.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/inventory-abc.js' | assetUrl }}" defer></script>

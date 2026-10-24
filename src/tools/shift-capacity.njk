@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Shift Capacity
+seo_title: "Shift capacity planner: heads per process from the volume forecast and UPH, absence allowance, gap, bottleneck and takt"
+description: "Heads needed per process and shift from the volume forecast and the rates (UPH), against the planned team: the gap, the bottleneck, overtime and agency."
+activeNav: /tools.html
+permalink: /tools/shift-capacity/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Planning</p>
+  <h1>Shift Capacity</h1>
+  <p class="lede">How many people each process needs on each shift for the forecast volume, against the people planned, before the shift starts. Give every process its rate in units per productive hour, the shifts their breaks, the utilisation and the absence allowance, and the week its volume per day and shift. The tool works out the labour hours and the heads, the gap in heads and in hours, the capacity of the planned team and its bottleneck, and how to close a gap: overtime, agency, or qualified people from a process with spare hours.</p>
+</section>
+
+{% set cfg = shiftCapacity %}
+{% include "partials/shift-capacity.njk" %}
