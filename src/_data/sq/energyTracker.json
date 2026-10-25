@@ -25,7 +25,7 @@
     "hsHiNote": "Faturat e gazit japin kWh mbi vlerën kalorifike bruto (Brennwert, Hs); faktori i BAFA-s për gazin natyror është për kWh mbi vlerën kalorifike neto (Hi). Mjeti pjesëton me Hs/Hi = 1,11, raporti për gazin natyror në DIN V 18599.",
     "weatherNote": "Energjia e ngrohjes ndjek motin. Para se të veprosh për një sinjal te gazi, nafta ose ngrohja qendrore, krahaso me gradë-ditët e ngrohjes të të njëjtave javë (i publikon shërbimi meteorologjik ose furnizuesi i energjisë).",
     "pasteRow": "Një rresht për çdo lexim",
-    "pastePlaceholder": "12.10.2026\tEnergjia kryesore\t1284310\t\t\tLexuar në 06:00",
+    "pastePlaceholder": "12.10.2026\tElektriciteti, matësi kryesor\t1284310\t\t\tLexuar në 06:00",
     "empty": "Ende asnjë lexim.",
     "allMeters": "Të gjithë njehsorët",
     "newMeter": "Njehsor i ri"
@@ -121,7 +121,7 @@
   "meters": [
     {
       "id": "m1",
-      "name": "Energjia kryesore",
+      "name": "Elektriciteti, matësi kryesor",
       "medium": "electricity",
       "tariff": "",
       "calorific": "",
@@ -238,7 +238,7 @@
     "meters": [
       {
         "id": "m1",
-        "name": "Energjia kryesore",
+        "name": "Elektriciteti, matësi kryesor",
         "medium": "electricity",
         "tariff": "0,24",
         "calorific": "",
