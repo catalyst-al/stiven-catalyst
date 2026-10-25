@@ -55,9 +55,15 @@ Shtyp **Save**. Kaq.
 **Field Notes → Add an entry**: shkruaj shënimin (pa thonjëza, shtohen vetë) dhe datën. Faqja kryesore tregon 2 më të rejat.
 
 **Lidhjet bëhen vetë.** Çdo shënim lidhet me esenë nga vjen (kur fjalët e tij janë në një ese) dhe me mjetin që përmend
-(dorëzimi i turnit, KPI, vonesat…), ose me mjetin e parë të esesë së tij. Te shënimi dalin "Nga eseja" dhe "Provoje në
-punë"; te eseja "Shënime nga terreni nga kjo ese"; te mjeti "Nga shënimet e terrenit". Mjetet e një eseje i zgjedh fusha
-**relatedTools** e esesë angleze; pa të, faqja i gjen vetë nga teksti.
+(dorëzimi i turnit, KPI, vonesat, 8D, SMED, kapaciteti, mirëmbajtja, statusi i dhomës…), ose me mjetin e parë të esesë
+së tij. Te shënimi dalin "Nga eseja" dhe "Provoje në punë"; te eseja "Shënime nga terreni nga kjo ese"; te mjeti "Nga
+shënimet e terrenit". Mjetet e një eseje i zgjedh fusha **relatedTools** e esesë angleze; pa të, faqja i gjen vetë nga
+teksti. Shënimet nga Reflections nuk kanë ese as mjet, dhe kjo është në rregull.
+
+**Fjalët që e lidhin shënimin me mjetin** janë te `TOOL_WORDS` në `lib/writing-links.js`, në anglisht (p.sh. "changeover"
+→ SMED, "capacity" → Shift Capacity, "maintenance" → Maintenance Planner). Ato mbulojnë pothuajse të gjitha mjetet. Kur
+shton një mjet të ri, shto edhe fjalët e tij aty, që shënimet që e përmendin të lidhen me të. Shënimi lidhet me mjetin
+që përmend më shpesh; kur dy mjete barazohen, fiton ai që është më lart në listë.
 
 **Shënime të reja nga esetë.** Fjalitë me bold më vete në ese (parimet) mund të bëhen shënime, në tri gjuhët njëherësh:
 
@@ -68,6 +74,15 @@ node scripts/note-cards.mjs               # pastaj: imazhet e shënimeve për Li
 ```
 
 Skripti lë jashtë parimet që janë tashmë shënim dhe hapat e listave ("Dita 1: …", "2. …").
+
+**Kur skripti thotë "Every principle that stands alone is already a field note"**, të gjitha parimet e eseve janë bërë
+shënime. Shënimet e reja shkruhen atëherë me dorë, nga mjetet e reja dhe nga Reflections: tre skedarë me të njëjtin emër
+(`src/content/notes/`, `de/notes/`, `sq/notes/`), me numrin pas të fundit. Kështu u shtuan më 25 tetor 2026 38 shënime
+(27 nga mjetet e reja, 11 nga Reflections); tani janë 256. Pas tyre: `node scripts/note-cards.mjs 215-… 216-…` vetëm për
+shënimet e reja.
+
+Faqja Field Notes ka një kufi madhësie në teste (`tests/lean-pages.test.cjs`, 360 kB, rreth 1,2 kB për shënim, vend për
+afro 280 shënime). Kur shënimet e kalojnë, testi dështon: ngrije kufirin ose bëje kartën më të lehtë.
 
 ## 4. Projekt, foto ose material për shkarkim
 

@@ -17,6 +17,8 @@ test('a note finds the tool its words name, and the essay that holds its words',
   const { toolScores, sourceEssay, writingLinks } = await load();
   assert.equal(toolScores('A handover is not just a transfer of information.')[0][0], '/tools/shift-handover/');
   assert.equal(toolScores('A KPI tells you where to look.')[0][0], '/tools/kpi-diagnostic/');
+  assert.equal(toolScores('Overtime is not a capacity plan.')[0][0], '/tools/shift-capacity/');
+  assert.equal(toolScores('A postponed maintenance job is not saved time.')[0][0], '/tools/maintenance-planner/');
   assert.deepEqual(toolScores('Ownership begins where the sentence ends.'), []);
   const essays = [
     { slug: 'night', date: '2026-10-01', text: '---\ntitle: x\n---\nAt night you see the **traces** the activity has left behind, and nobody else does.', data: {} },

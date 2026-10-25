@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32, Vëllimi 11 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -460,6 +460,63 @@ për faqen në tri gjuhët (`lib/treatise/volumes/10.js`). Blloku: Operacioni. 3
 | Intuita e ekspertit kërkon mjedis të rregullt dhe reagim | `pressure-kahneman-klein-2009` | Ekzistonte |
 | Zgjidhjet e nivelit të parë që nuk mësojnë | `tucker-edmondson-2003` | Ekzistonte |
 | 3 / 2 / 4 / 1 / 2 përjashtime dhe 11 / 17 / 8 minuta | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
+
+## Vëllimi 11: Fabrika e përjashtimeve, kur procesi funksionon vetëm sepse njerëzit vazhdojnë ta ndreqin (25 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 11, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/11.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30). Me këtë
+vëllim nis cikli i dytë i traktatit.
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Të gjashtë kapitujt kanë skenë, shpjegim dhe protokoll si te PDF-ja. PDF-ja ka vetëm
+  një grafik (48 / 20 minuta, Kap. V), kurse sistemi kërkon dy; u shtua një faqe modeli, hipotetike me flamur, te
+  Kapitulli III: "Njëzet devijime, të renditura para se të gjykohen" (fleksibilitet i miratuar 8, kompensim 7, risi
+  kandidate 3, anashkalim i ndaluar 2), që vizaton katër kategoritë editoriale që PDF-ja i përshkruan me fjalë. Edhe
+  faqja e metodës, si te vëllimet e tjera. Kategoria 04 (anashkalimi i ndaluar) është një bllok `callout` me etiketë.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Tucker, Edmondson & Spear 2002, "197 hours
+  of observation of hospital nurses", JOCM 15(2), 122–137; Feldman & Pentland 2003, aspekti ostensiv dhe performativ,
+  ASQ 48(1), 94–118; Tucker 2004, JOM 22(2), 151–169, "most operational failures stem from breakdowns in the supply
+  of materials and information across organizational boundaries" dhe punonjësit "quickly compensate for most
+  failures"; Halbesleben, Wakefield & Wakefield 2008, HCMR 33(1), 2–12; Alter 2014, CAIS 34, artikulli 55;
+  Bartelheimer, Wolf & Beverungen 2023, ISJ 33(5), 1085–1150, studim dyvjeçar me shumë raste, nëntë zgjidhje të
+  përkohshme në tri raste (abstrakti dhe përmbledhja e botuesit; teksti i plotë nuk u hap, Wiley 403); van der Waal
+  et al., BISE 67(2), 171–190, në internet 29 janar 2024, numri i prillit 2025, "11 unique workaround types" në dy
+  reparte spitalore; van der Aalst 2016, Process Mining, botimi i dytë. Asnjë gabim faktik i rëndë në PDF.
+- **Korrigjimet ndaj PDF-së.** (1) Tucker 2004: PDF-ja shkruan "many failures"; abstrakti thotë "most", faqja ndjek
+  abstraktin. (2) Tucker & Edmondson 2003 ishte në listën e burimeve të PDF-së, por nuk citohej në tekst; faqja e citon
+  te faqja e provave të Kapitullit II (239 orë, 26 infermiere, nëntë spitale, si te Vëllimi 4). (3) Titujt e kapitujve
+  ishin të ndryshëm mes përmbajtjes dhe kokave të faqeve ("The work never in the SOP" / "The work that was never in the
+  SOP", "The hero who hides failure" / "... the failure", "The invisible cost" / "... of keeping things moving"); faqja
+  mban një titull për kapitull. (4) "For the invented example on page 20" u bë "në skenën e këtij kapitulli", sepse
+  numrat e faqeve ndryshojnë. (5) Halbesleben et al. dhe van der Aalst përmendeshin vetëm te shënimet; faqja i vendos në
+  tekst aty ku mbështesin pohimin (pasojat e sigurisë, kufiri i regjistrave), dhe Rother & Shook dhe Martin & Osterling
+  te faqja e kostos si kornizë, jo si rezultat.
+- **Aritmetika u rikontrollua.** 12 × 4 = 48; 5 × 4 = 20; 48 − 20 = 28; 12 / 80 = 15%; 8 + 7 + 3 + 2 = 20.
+- **Burimet.** Tre ekzistonin (`tucker-edmondson-2003`, `vsm-rother-shook-1999`, `vsm-martin-osterling-2014`); u
+  shtuan tetë. Të tetë DOI-të zgjidhen në Crossref me të njëjtët autorë, revista, vëllime dhe faqe.
+- **Lidhjet me faqen.** Esetë: a-good-sop-is-not-a-document (Kap. I), why-the-handover-is-underrated (Kap. II),
+  the-tools-you-build-yourself (Kap. III, "lista e vogël pranë sistemit"), watch-how-i-do-it-is-not-training (Kap. IV),
+  pareto-and-5-why-in-practice (Kap. V), mistakes-get-lost-between-departments (Kap. VI). Mjeti: Kaizen Board
+  (`/tools/kaizen-board/`), që i mban vendimet dhe kontrollet e tyre.
+- **Çfarë u ndryshua nga PDF-ja.** Editoriali u shkurtua (numrat e studimeve mbetën te shënimi kërkimor), protokollet
+  u shkurtuan që të hyjnë në A5 në gjermanisht. Asgjë tjetër.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| 197 orë vëzhgim i infermiereve; zgjidhja e menjëhershme pengon të mësuarit | `tucker-edmondson-spear-2002`, DOI 10.1108/09534810210423008 | Abstrakti përputhet |
+| Aspekti ostensiv dhe performativ i rutinave | `feldman-pentland-2003`, DOI 10.2307/3556620 | Abstrakti përputhet |
+| 239 orë, 26 infermiere, nëntë spitale | `tucker-edmondson-2003` | Ekzistonte (Nr. 15, Vëll. 4) |
+| Shumica e dështimeve nga furnizimi me materiale dhe informacion; kompensim i shpejtë | `tucker-2004`, DOI 10.1016/j.jom.2003.12.006 | Abstrakti përputhet |
+| Zgjidhjet e përkohshme në shëndetësi dhe pasojat e sigurisë | `halbesleben-2008`, DOI 10.1097/01.HMR.0000304495.95522.ca | DOI hapet, HCMR 33(1) |
+| Teoria e zgjidhjeve të përkohshme | `alter-2014`, DOI 10.17705/1CAIS.03455 | DOI hapet, CAIS 34, art. 55 |
+| 9 zgjidhje të përkohshme, 3 raste, 2 vjet | `bartelheimer-wolf-beverungen-2023`, DOI 10.1111/isj.12435 | Abstrakti dhe përmbledhja e botuesit |
+| 11 tipe, dy reparte, SWORD | `van-der-waal-2025`, DOI 10.1007/s12599-023-00846-3 | Abstrakti përputhet |
+| Process mining, kufiri i regjistrave | `van-der-aalst-2016`, DOI 10.1007/978-3-662-49851-4 | Përshkrimi i botuesit |
+| Koha e procesit dhe pritja si kornizë | `vsm-rother-shook-1999`, `vsm-martin-osterling-2014` | Ekzistonin |
+| 8 / 7 / 3 / 2 dhe 12 nga 80, 48 → 20 min | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
 
 ## Si shtohet një vëllim
 
