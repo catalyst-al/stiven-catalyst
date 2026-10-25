@@ -16,7 +16,7 @@ const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url)
 // on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
 // the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
 // src/media/guides/tools-guide/editions/).
-const EDITION = 5;
+const EDITION = 6;
 const EDITION_DATE = "2026-10-25";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
@@ -46,7 +46,7 @@ pages.push("coaching", "next", "back");
 
 const en = {
   title: "The Tools Guide",
-  subtitle: "Forty-nine free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
+  subtitle: "Fifty free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
   edition: `Edition ${EDITION} · October 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -68,9 +68,9 @@ const en = {
   sections: {
     about: {
       kicker: "About this guide",
-      title: "Forty-nine tools, four planets, one idea",
+      title: "Fifty tools, four planets, one idea",
       body: [
-        "Stiven Catalyst has forty-nine free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
+        "Stiven Catalyst has fifty free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
         "This guide explains how the tools are organised, why the site looks the way it does, and how to use each tool, step by step. You do not need to read it in order: find your planet and start there.",
         { cards: [
           { title: "Free", text: "Every tool is free to use." },
@@ -183,7 +183,7 @@ const en = {
       ],
     },
     next: {
-      kicker: "Edition 5",
+      kicker: "Edition 6",
       title: "What could come next",
       body: [
         "Ideas under consideration, not promises with dates. Tell me which one would help you most.",
@@ -203,7 +203,7 @@ const en = {
   families: {
     pulse: "Fourteen tools for one shift: log what goes wrong where it happens, keep the floor safe and in order, run the huddle, see the shift in one picture, run the hotel's rooms, lost items and complaints, and hand it over cleanly, with every action on one list and the week's paper printed in one go.",
     zenith: "Seventeen tools for one area: start the morning with the signals that matter, read the week, find where a red number really comes from, put a problem on one sheet, grow the team's ideas and skills, plan the people, rooms and maintenance, assess the risks, keep the leaders' standard work and report the week.",
-    lumen: "Fifteen tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, solve a customer problem with 8D, time, map and walk the flow, cut changeovers, class the stock, write the standard, deploy the strategy, compare the sites and run improvements as a portfolio of projects.",
+    lumen: "Sixteen tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, solve a customer problem with 8D, time, map and walk the flow, cut changeovers, run Kaizen events, class the stock, write the standard, deploy the strategy, compare the sites and run improvements as a portfolio of projects.",
     atlas: "Three tools for the next role: a designed CV, a CV that screening software reads correctly, and a letter that matches.",
   },
   tools: {
@@ -723,6 +723,17 @@ const en = {
       get: "One print: the open actions by owner, the week's maintenance work list and 5S audits, a card per leader, the Safety Cross and Daily Board of the month, and a hotel's attendant and section sheets. Each sheet names its tool and date; the tool keeps the live version. [[Show the example pack]] to see one first.",
       data: "The pack only reads the tools in this browser and changes nothing in them. It keeps only which documents you ticked.",
     },
+    "/tools/kaizen-event/": {
+      when: "When a problem in one area needs a team for three to five days: a line, a dock or a floor, with a clear before and after.",
+      how: [
+        "[[New Kaizen event]] with its charter: the area, the scope, the problem, the dates and the team. [[Add a goal]] for each measure, with its baseline and target; operators of the area must be on the team.",
+        "Work through the preparation list, each task due a set number of weeks before the first day.",
+        "Run the days by their checklists: current state, causes and ideas, try out, standardise, report-out. [[Add an idea]] with the waste it removes, its effort and impact, an owner and a status.",
+        "Enter each goal after the event and at the 30-day check. [[Send the follow-up list to the Action Tracker]] for what is still open.",
+      ],
+      get: "Each goal's change from its baseline and whether the target was met, the follow-up list closed by day 30, savings, the ideas on an effort and impact matrix, and the report-out: [[Print the report-out]] or [[Download Word]].",
+      data: "Your events stay in this browser, and the action list downloads as CSV or Excel.",
+    },
     "/tools/cv-builder/": {
       when: "When your CV should look designed, not typed.",
       how: [
@@ -761,7 +772,7 @@ const en = {
 
 const sq = {
   title: "Udhëzuesi i mjeteve",
-  subtitle: "Dyzet e nëntë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
+  subtitle: "Pesëdhjetë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
   edition: `Botimi ${EDITION} · tetor 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -783,9 +794,9 @@ const sq = {
   sections: {
     about: {
       kicker: "Për këtë udhëzues",
-      title: "Dyzet e nëntë mjete, katër planete, një ide",
+      title: "Pesëdhjetë mjete, katër planete, një ide",
       body: [
-        "Stiven Catalyst ka dyzet e nëntë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
+        "Stiven Catalyst ka pesëdhjetë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
         "Ky udhëzues shpjegon si janë organizuar mjetet, pse faqja duket ashtu siç duket dhe si përdoret çdo mjet, hap pas hapi. Nuk ke nevojë ta lexosh me radhë: gjej planetin tënd dhe nis nga aty.",
         { cards: [
           { title: "Falas", text: "Çdo mjet përdoret falas." },
@@ -898,7 +909,7 @@ const sq = {
       ],
     },
     next: {
-      kicker: "Botimi 5",
+      kicker: "Botimi 6",
       title: "Çfarë mund të vijë më pas",
       body: [
         "Ide në shqyrtim, jo premtime me data. Më thuaj cila do të të ndihmonte më shumë.",
@@ -918,7 +929,7 @@ const sq = {
   families: {
     pulse: "Katërmbëdhjetë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, mbaje terrenin të sigurt dhe në rregull, drejto takimin e turnit, shih turnin në një pamje, mbaj dhomat, sendet e harruara dhe ankesat e hotelit, dhe dorëzoje të pastër, me çdo veprim në një listë dhe letrat e javës të printuara me një herë.",
     zenith: "Shtatëmbëdhjetë mjete për një zonë: nis mëngjesin me sinjalet që kanë rëndësi, lexo javën, gjej nga vjen realisht një shifër e kuqe, vëre një problem në një fletë, rrit idetë dhe aftësitë e ekipit, planifiko njerëzit, dhomat dhe mirëmbajtjen, vlerëso rreziqet, mbaj punën standarde të drejtuesve dhe raporto javën.",
-    lumen: "Pesëmbëdhjetë mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, zgjidh një problem të klientit me 8D, mat, harto dhe ec rrjedhën, shkurto ndërrimet, klasifiko stokun, shkruaj standardin, shpërndaj strategjinë, krahaso objektet dhe drejto përmirësimet si një portofol projektesh.",
+    lumen: "Gjashtëmbëdhjetë mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, zgjidh një problem të klientit me 8D, mat, harto dhe ec rrjedhën, shkurto ndërrimet, drejto ngjarje Kaizen, klasifiko stokun, shkruaj standardin, shpërndaj strategjinë, krahaso objektet dhe drejto përmirësimet si një portofol projektesh.",
     atlas: "Tri mjete për rolin e ardhshëm: një CV e dizajnuar, një CV që softueri i përzgjedhjes e lexon saktë dhe një letër që përputhet me to.",
   },
   tools: {
@@ -1438,6 +1449,17 @@ const sq = {
       get: "Një printim: veprimet e hapura sipas përgjegjësit, lista e mirëmbajtjes dhe auditet 5S të javës, një kartë për çdo drejtues, Kryqi i sigurisë dhe Tabela e ditës e muajit, dhe fletët e pastruesve dhe të sektorëve të një hoteli. Çdo fletë tregon mjetin dhe datën; gjendja e përditësuar mbetet te mjeti. Me [[Show the example pack]] e sheh një më parë.",
       data: "Paketa vetëm lexon mjetet në këtë shfletues dhe nuk ndryshon asgjë në to. Ruan vetëm cilat dokumente ke shënuar.",
     },
+    "/tools/kaizen-event/": {
+      when: "Kur një problem në një zonë kërkon një ekip për tri deri në pesë ditë: një linjë, një dok ose një kat, me një para dhe pas të qartë.",
+      how: [
+        "[[New Kaizen event]] me kartën e saj: zona, fusha, problemi, datat dhe ekipi. [[Add a goal]] për çdo matës, me vlerën bazë dhe objektivin; operatorët e zonës duhet të jenë në ekip.",
+        "Kalo nëpër listën e përgatitjes, ku çdo detyrë ka afatin disa javë para ditës së parë.",
+        "Drejto ditët sipas listave të tyre: gjendja aktuale, shkaqet dhe idetë, provat, standardi, prezantimi. [[Add an idea]] me humbjen që heq, përpjekjen dhe ndikimin, përgjegjësin dhe gjendjen.",
+        "Shkruaj çdo objektiv pas ngjarjes dhe në kontrollin e 30 ditëve. [[Send the follow-up list to the Action Tracker]] për atë që mbetet e hapur.",
+      ],
+      get: "Ndryshimi i çdo objektivi nga vlera bazë dhe nëse u arrit objektivi, lista e ndjekjes e mbyllur deri në ditën 30, kursimet, idetë në matricën përpjekje–ndikim dhe prezantimi: [[Print the report-out]] ose [[Download Word]].",
+      data: "Ngjarjet mbeten në këtë shfletues, dhe lista e veprimeve shkarkohet si CSV ose Excel.",
+    },
     "/tools/cv-builder/": {
       when: "Kur CV-ja jote duhet të duket e dizajnuar, jo e shtypur.",
       how: [
@@ -1476,7 +1498,7 @@ const sq = {
 
 const de = {
   title: "Der Werkzeug-Leitfaden",
-  subtitle: "Neunundvierzig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
+  subtitle: "Fünfzig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
   edition: `Ausgabe ${EDITION} · Oktober 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -1498,9 +1520,9 @@ const de = {
   sections: {
     about: {
       kicker: "Über diesen Leitfaden",
-      title: "Neunundvierzig Tools, vier Planeten, eine Idee",
+      title: "Fünfzig Tools, vier Planeten, eine Idee",
       body: [
-        "Stiven Catalyst hat neunundvierzig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
+        "Stiven Catalyst hat fünfzig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
         "Dieser Leitfaden erklärt, wie die Tools geordnet sind, warum die Website so aussieht, wie sie aussieht, und wie Sie jedes Tool Schritt für Schritt nutzen. Sie müssen ihn nicht der Reihe nach lesen: Suchen Sie Ihren Planeten und fangen Sie dort an.",
         { cards: [
           { title: "Kostenlos", text: "Jedes Tool ist kostenlos." },
@@ -1613,7 +1635,7 @@ const de = {
       ],
     },
     next: {
-      kicker: "Ausgabe 5",
+      kicker: "Ausgabe 6",
       title: "Was als Nächstes kommen könnte",
       body: [
         "Ideen, über die ich nachdenke, keine Versprechen mit Datum. Sagen Sie mir, welche Ihnen am meisten helfen würde.",
@@ -1633,7 +1655,7 @@ const de = {
   families: {
     pulse: "Vierzehn Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, den Bereich sicher und in Ordnung halten, das Huddle führen, die Schicht in einem Bild sehen, Zimmer, Fundsachen und Beschwerden des Hotels führen und sauber übergeben, mit jeder Maßnahme auf einer Liste und dem Papier der Woche in einem Druck.",
     zenith: "Siebzehn Tools für einen Bereich: den Morgen mit den wichtigen Signalen beginnen, die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, ein Problem auf ein Blatt bringen, die Ideen und Fähigkeiten des Teams wachsen lassen, Personal, Zimmer und Wartung planen, Gefährdungen beurteilen, die Standardarbeit der Führungskräfte halten und über die Woche berichten.",
-    lumen: "Fünfzehn Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, ein Kundenproblem mit 8D lösen, den Fluss messen, abbilden und ablaufen, Rüstzeiten senken, den Bestand klassifizieren, den Standard schreiben, die Strategie entfalten, die Standorte vergleichen und Verbesserungen als Portfolio von Projekten führen.",
+    lumen: "Sechzehn Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, ein Kundenproblem mit 8D lösen, den Fluss messen, abbilden und ablaufen, Rüstzeiten senken, Kaizen-Events durchführen, den Bestand klassifizieren, den Standard schreiben, die Strategie entfalten, die Standorte vergleichen und Verbesserungen als Portfolio von Projekten führen.",
     atlas: "Drei Tools für die nächste Rolle: ein gestalteter Lebenslauf, ein Lebenslauf, den Bewerbungssoftware richtig liest, und ein Anschreiben, das dazu passt.",
   },
   tools: {
@@ -2153,6 +2175,17 @@ const de = {
       get: "Ein Druck: offene Maßnahmen nach Verantwortlichen, Wartungsarbeitsliste und 5S-Audits der Woche, eine Karte je Führungskraft, Sicherheitskreuz und Tagesboard des Monats und die Arbeits- und Revierzettel eines Hotels. Jedes Blatt nennt sein Tool und Datum; der aktuelle Stand bleibt im Tool. Mit [[Show the example pack]] sehen Sie vorher ein Beispiel.",
       data: "Das Paket liest die Tools in diesem Browser nur und ändert nichts an ihnen. Es speichert nur, welche Dokumente Sie angehakt haben.",
     },
+    "/tools/kaizen-event/": {
+      when: "Wenn ein Problem in einem Bereich ein Team für drei bis fünf Tage braucht: eine Linie, eine Rampe oder eine Etage, mit klarem Vorher und Nachher.",
+      how: [
+        "[[New Kaizen event]] mit seinem Auftrag: Bereich, Umfang, Problem, Termine und Team. [[Add a goal]] für jede Kennzahl, mit Ausgangswert und Ziel; Mitarbeitende des Bereichs gehören ins Team.",
+        "Arbeiten Sie die Vorbereitungsliste ab; jede Aufgabe ist eine feste Zahl Wochen vor dem ersten Tag fällig.",
+        "Führen Sie die Tage nach ihren Checklisten: Ist-Zustand, Ursachen und Ideen, Ausprobieren, Standardisieren, Abschluss. [[Add an idea]] mit der Verschwendung, die sie beseitigt, Aufwand, Wirkung, Verantwortlichem und Status.",
+        "Tragen Sie jedes Ziel nach dem Event und bei der 30-Tage-Prüfung ein. [[Send the follow-up list to the Action Tracker]] für das, was offen ist.",
+      ],
+      get: "Die Veränderung jedes Ziels gegenüber dem Ausgangswert und ob es erreicht wurde, die bis Tag 30 erledigte Nachverfolgung, die Einsparungen, die Ideen in der Aufwand-Wirkung-Matrix und die Abschlusspräsentation: [[Print the report-out]] oder [[Download Word]].",
+      data: "Ihre Events bleiben in diesem Browser; die Maßnahmenliste lässt sich als CSV oder Excel herunterladen.",
+    },
     "/tools/cv-builder/": {
       when: "Wenn Ihr Lebenslauf gestaltet aussehen soll und nicht getippt.",
       how: [
@@ -2220,8 +2253,24 @@ const system = families.map((item) => {
 // What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
 const editions = [
   {
+    number: 6,
+    date: { en: "25 October 2026", sq: "25 tetor 2026", de: "25. Oktober 2026" },
+    changes: {
+      en: [
+        "One new tool, with its page in this guide: the Kaizen Event, a three-to-five-day improvement workshop from the charter and its preparation to the report-out and the 30-day check.",
+      ],
+      sq: [
+        "Një mjet i ri, me faqen e vet në këtë udhëzues: Ngjarja Kaizen, një punëtori përmirësimi tri deri në pesë ditë, nga karta dhe përgatitja te prezantimi dhe kontrolli i 30 ditëve.",
+      ],
+      de: [
+        "Ein neues Tool, mit seiner Seite in diesem Leitfaden: das Kaizen-Event, ein Verbesserungsworkshop von drei bis fünf Tagen, vom Auftrag und der Vorbereitung bis zur Abschlusspräsentation und zur 30-Tage-Prüfung.",
+      ],
+    },
+  },
+  {
     number: 5,
     date: { en: "25 October 2026", sq: "25 tetor 2026", de: "25. Oktober 2026" },
+    pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-5-${lang}.pdf`,
     changes: {
       en: [
         "Thirteen new tools, each with its page in this guide: Signals, Room Status, Guest Complaints, Housekeeping Planner, Leader Standard Work, Shift Capacity, Risk Assessment, Print Pack, ABC/XYZ Inventory, SMED Changeover, 8D Report, Hoshin Kanri and Site Compare.",
@@ -2371,7 +2420,7 @@ export default {
   family,
   familyOfTool,
   tool,
-  // The tools of every role, without the course: forty-nine, as the cover says.
+  // The tools of every role, without the course: fifty, as the cover says.
   toolCount: families.reduce((count, item) => count + item.tools.length, 0),
   pageOf: Object.fromEntries(pages.map((id) => [id, pageOf(id)])),
   system,

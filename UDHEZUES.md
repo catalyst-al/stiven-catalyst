@@ -135,7 +135,7 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ## 8. Mjetet
 
-Te **Mjete** (`/sq/tools.html`) janë **49 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
+Te **Mjete** (`/sq/tools.html`) janë **50 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
 (planetet): çdo rol ka mjetet e veta dhe një rutinë që thotë kur përdoret secili. Mjetet punojnë edhe pa internet,
 pasi janë hapur një herë në atë pajisje.
 
@@ -197,6 +197,7 @@ pasi janë hapur një herë në atë pajisje.
 | **Diagrami spageti** | Rrugët e ecjes mbi planin e katit, në metra, para dhe pas ndryshimit |
 | **Portofoli i projekteve** | Të gjitha projektet DMAIC në një faqe: faza, gjendja, kursimet dhe kalimi i radhës |
 | **Analiza ABC/XYZ e stokut** | Klasat ABC dhe XYZ, stoku i sigurisë, pika e ripërmbushjes dhe numërimet |
+| **Ngjarja Kaizen** | Punëtoria Kaizen 3–5 ditë: karta, përgatitja, ditët, idetë dhe kontrolli i 30 ditëve |
 | **SMED: ndërrimi i shpejtë** | Ndërrimi i makinës: puna e brendshme dhe e jashtme, para dhe pas, minutat dhe eurot |
 | **Raporti 8D** | Problemi i klientit nga D0 te D8, me shkakun e ndodhjes dhe të moszbulimit, në Word |
 | **Hoshin Kanri (matrica X)** | Strategjia në një faqe: objektivat, projektet, matësit dhe grafiku mujor |
@@ -251,7 +252,7 @@ pasi janë hapur një herë në atë pajisje.
 
 ### Udhëzuesi i mjeteve
 
-**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e pestë**: një faqe
+**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e gjashtë**: një faqe
 për çdo mjet, në tri gjuhë, për t’u shfletuar ose shkarkuar si PDF. Botimet e mëparshme mbeten te faqja si u
 printuan. Te çdo mjet, poshtë, lidhja **Hape te faqja N** të çon te faqja e tij në libër.
 
