@@ -1,0 +1,211 @@
+{#- Energy & Water: meter readings to use, cost and CO₂, per occupied room night or per unit, against a baseline with a signal; energy-tracker.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout et-setup">
+  <div class="tool-panel" data-energy-tracker>
+
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">1 · {{ t.metersLegend }}</legend>
+        <p class="form-note">{{ t.metersNote }}</p>
+        <div class="et-meters" data-meters></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-meter>{{ "Add a meter" | t(lang) }}</button>
+          <p class="form-note" data-meters-status aria-live="polite"></p>
+        </div>
+        <p class="form-note">{{ t.tariffNote }}</p>
+        <p class="form-note">{{ t.gasNote }}</p>
+        <p class="form-note">{{ t.oilNote }}</p>
+      </fieldset>
+    </div>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">2 · {{ t.entryLegend }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="et-date">{{ "Date" | t(lang) }}</label>
+            <input id="et-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="et-meter">{{ "Meter" | t(lang) }}</label>
+            <select id="et-meter" name="meter"></select>
+          </div>
+          <div class="field">
+            <label for="et-value">{{ "Reading (as the meter shows it)" | t(lang) }}</label>
+            <input id="et-value" name="value" inputmode="decimal" autocomplete="off" placeholder="{{ t.readingPlaceholder }}" aria-describedby="et-hint" required>
+          </div>
+          <p class="form-note dl-wide et-hint" id="et-hint" data-reading-hint aria-live="polite"></p>
+          <div class="field dl-wide et-check">
+            <label for="et-replaced"><input id="et-replaced" name="replaced" type="checkbox" aria-describedby="et-replaced-note"> {{ "Meter replaced: this is the new meter's first reading" | t(lang) }}</label>
+            <p class="form-note" id="et-replaced-note">{{ t.replacedNote }}</p>
+          </div>
+          <div class="field" data-old-final hidden>
+            <label for="et-old-final">{{ "Old meter's last reading" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="et-old-final" name="oldFinal" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="et-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="et-note" name="note" placeholder="{{ t.notePlaceholder }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add the reading" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+        <p class="form-note">{{ t.spreadNote }}</p>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "meter" | t(lang) }}, {{ "reading" | t(lang) }}, {{ "meter replaced (x)" | t(lang) }}, {{ "old meter's last reading" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "The meter is named as in the list above." | t(lang) }} {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="et-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="et-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <form class="dl-box" data-denom novalidate>
+      <fieldset>
+        <legend class="kicker">3 · {{ t.denomLegend }} <span class="optional">{{ "optional" | t(lang) }}</span></legend>
+        <p class="form-note">{{ t.denomNote }}</p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="et-denom">{{ "Divide by" | t(lang) }}</label>
+            <select id="et-denom" name="denom" data-setting>
+              {%- for item in cfg.denominators %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide et-check" data-hotel>
+            <label for="et-use-hotel"><input id="et-use-hotel" type="checkbox" aria-describedby="et-hotel-note"> {{ "Use the rooms sold from Hotel KPIs in this browser" | t(lang) }}</label>
+            <p class="form-note" id="et-hotel-note" data-hotel-note aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="et-units-date">{{ "Date" | t(lang) }}</label>
+            <input id="et-units-date" name="unitsDate" type="date">
+          </div>
+          <div class="field">
+            <label for="et-units">{{ "Figure of the day" | t(lang) }}</label>
+            <input id="et-units" name="units" inputmode="decimal" autocomplete="off" placeholder="{{ "e.g. 118" | t(lang) }}">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="submit">{{ "Save the figure" | t(lang) }}</button>
+          <p class="form-note" data-denom-status aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="et-units-paste">{{ "Paste days: date and figure, one row per day" | t(lang) }}</label>
+          <textarea id="et-units-paste" rows="3" placeholder="{{ t.denomPastePlaceholder }}"></textarea>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-units-import>{{ "Import the days" | t(lang) }}</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">4 · {{ t.settingsLegend }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "et" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field">
+          <label for="et-filter-meter">{{ "Meter" | t(lang) }}</label>
+          <select id="et-filter-meter" data-filter="meter">
+            <option value="">{{ t.allMeters }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="et-grain">{{ "Chart by" | t(lang) }}</label>
+          <select id="et-grain" name="grain" data-setting>
+            <option value="">{{ "Automatic" | t(lang) }}</option>
+            <option value="week">{{ "Week" | t(lang) }}</option>
+            <option value="month">{{ "Month" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="et-threshold">{{ "Signal above the baseline (%)" | t(lang) }}</label>
+          <input id="et-threshold" name="threshold" type="number" min="1" max="100" step="1" inputmode="numeric" placeholder="{{ cfg.signal.threshold }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="et-baseline-weeks">{{ "Baseline: first complete weeks" | t(lang) }}</label>
+          <input id="et-baseline-weeks" name="baselineWeeks" type="number" min="1" max="26" step="1" inputmode="numeric" placeholder="{{ cfg.signal.baselineWeeks }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="et-baseline-from">{{ "Or a baseline period from" | t(lang) }}</label>
+          <input id="et-baseline-from" name="baselineFrom" type="date" data-setting>
+        </div>
+        <div class="field">
+          <label for="et-baseline-to">{{ "Baseline period to" | t(lang) }}</label>
+          <input id="et-baseline-to" name="baselineTo" type="date" data-setting>
+        </div>
+        <p class="form-note dl-wide">{{ "Empty boxes use the defaults shown." | t(lang) }} {{ t.baselineNote }}</p>
+      </div>
+      <details class="et-factors-box">
+        <summary class="kicker">{{ "CO₂ factors" | t(lang) }}</summary>
+        <p class="form-note">{{ t.factorNote }}</p>
+        <div class="dl-grid">
+          {%- for m in cfg.media %}
+          <div class="field">
+            <label for="et-co2-{{ m.key }}">{{ m.name }} (kg CO₂e / {{ m.co2Unit }})</label>
+            <input id="et-co2-{{ m.key }}" name="co2{{ m.key }}" inputmode="decimal" autocomplete="off" placeholder="{{ m.co2Shown }}" aria-describedby="et-co2-{{ m.key }}-note" data-setting>
+            <p class="form-note" id="et-co2-{{ m.key }}-note">{{ m.co2Source }}</p>
+          </div>
+          {%- endfor %}
+          <div class="field">
+            <label for="et-hshi">{{ "Gas: Hs/Hi ratio" | t(lang) }}</label>
+            <input id="et-hshi" name="hsHi" inputmode="decimal" autocomplete="off" placeholder="{{ t.hsHiShown }}" aria-describedby="et-hshi-note" data-setting>
+            <p class="form-note" id="et-hshi-note">{{ t.hsHiNote }}</p>
+          </div>
+        </div>
+      </details>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">5 · {{ "Readings" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table et-log">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Meter" | t(lang) }}</th><th scope="col">{{ "Reading" | t(lang) }}</th><th scope="col">{{ "Use since the reading before" | t(lang) }}</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example hotel" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "A meter drifts up?" | t(lang) }}</strong> {{ "Ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>{{ ", and send the check to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>. {{ "Occupied rooms come from" | t(lang) }} <a class="inline-link" href="{{ '/tools/hotel-kpis/' | local(lang) }}">{{ "Hotel KPIs" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="form-note">{{ t.weatherNote }}</p>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results et-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="energy-tracker-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/energy-tracker.js' | assetUrl }}" defer></script>

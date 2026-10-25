@@ -1,0 +1,280 @@
+{
+  "storageKey": "sc-lean-assessment-de",
+  "areas": ["Wareneingang und Einlagerung", "Kommissionierung", "Verpackung und Versand", "Rezeption", "Housekeeping", "Zustellbasis"],
+  "text": {
+    "areaPlaceholder": "z. B. Wareneingang und Einlagerung",
+    "assessorPlaceholder": "Name",
+    "notePlaceholder": "z. B. In der Frühschicht vor Ort bewertet, gemeinsam mit der Schichtleitung."
+  },
+  "levels": [
+    { "name": "Reaktiv", "short": "Nicht vorhanden oder nur, wenn etwas schiefgeht." },
+    { "name": "Begonnen", "short": "Erste Schritte gemacht, noch keine Routine." },
+    { "name": "Definiert", "short": "Festgelegt und überwiegend eingehalten." },
+    { "name": "Gemessen", "short": "Eingehalten und gemessen; Lücken werden geschlossen." },
+    { "name": "Nachhaltig", "short": "Hält dauerhaft und wird vom Team selbst verbessert." }
+  ],
+  "dimensions": [
+    {
+      "key": "fiveS",
+      "name": "5S und visuelles Management",
+      "short": "5S und Visualisierung",
+      "statements": [
+        "Im Bereich ist nur, was für die Arbeit gebraucht wird; Unnötiges wird mit einer Roten Karte markiert und entfernt.",
+        "Jedes Werkzeug, Material, jeder Scanner und Wagen hat einen markierten Platz, und ein fehlendes Teil fällt sofort auf.",
+        "Reinigen und Prüfen laufen nach einem Plan mit Verantwortlichen, und der Plan wird eingehalten.",
+        "Bodenmarkierungen, Etiketten und Tafeln zeigen Normal und Abweichung, ohne dass man jemanden fragen muss.",
+        "Ein 5S-Audit findet nach Plan statt, sein Ergebnis hängt aus, und seine Befunde werden geschlossen."
+      ],
+      "levels": [
+        "Gegenstände ohne Besitzer stapeln sich in Ecken und Gängen; jede Schicht sucht Werkzeug, Scanner und Hubwagen.",
+        "Eine erste Rote-Karten-Aktion ist gelaufen und einige Plätze sind markiert, aber die Markierungen sind lückenhaft oder abgenutzt, und die Unordnung kehrt nach Wochen zurück.",
+        "Jedes Teil hat einen markierten, beschrifteten Platz; ein Reinigungsplan mit Verantwortlichen hängt aus und wird überwiegend eingehalten.",
+        "5S-Audits laufen nach Plan, das Ergebnis hängt mit seinem Verlauf aus, und jeder Befund bekommt Verantwortliche und Termin.",
+        "Die Mitarbeitenden des Bereichs führen die Audits selbst durch und heben den Standard nach jeder Runde an; ein Besucher findet alles in 30 Sekunden."
+      ],
+      "advice": "Beginnen Sie in einer Zone, nicht im ganzen Bereich: Unnötiges mit Roten Karten markieren, für das Übrige einen Platz kennzeichnen und ein erstes 5S-Audit als Ausgangswert bewerten. Wiederholen Sie das Audit jede Woche, bis der Wert hält.",
+      "tools": [{ "slug": "five-s-audit", "name": "5S-Audit" }],
+      "action": "Rote-Karten-Aktion und erstes 5S-Audit in {area}",
+      "check": "5S-Audit-Wert zu Beginn und vier Wochen später"
+    },
+    {
+      "key": "standardWork",
+      "name": "Standardarbeit",
+      "short": "Standardarbeit",
+      "statements": [
+        "Die Hauptaufgaben (Wareneingang, Kommissionierung, Zimmerreinigung, Tourbeladung) haben einen schriftlichen Standard mit Schritten, Kernpunkten und dem Grund für jeden Kernpunkt.",
+        "Die Standards hängen dort, wo gearbeitet wird, sind aktuell und zeigen, wer sie zuletzt geändert hat und wann.",
+        "Es wird nach Standard gearbeitet: Eine Beobachtung der Aufgabe stimmt mit dem überein, was geschrieben steht.",
+        "Findet jemand einen besseren Weg, wird der Standard geändert und jede Schicht auf die Änderung geschult."
+      ],
+      "levels": [
+        "Jeder macht die Aufgabe auf seine Weise; die Methode hängt davon ab, wer eingearbeitet hat; die Ergebnisse unterscheiden sich nach Person und Schicht.",
+        "Für einige Aufgaben gibt es Standards, aber sie liegen in einem Ordner oder im System, sind veraltet oder beschreiben das Ideal statt der echten Arbeit.",
+        "Standards für die Hauptaufgaben hängen am Arbeitsplatz, sind aktuell und dienen zur Einarbeitung neuer Mitarbeitender; die meisten halten sich daran.",
+        "Führungskräfte beobachten die Einhaltung nach Plan; jede Abweichung wird entweder korrigiert oder genutzt, um den Standard zu verbessern.",
+        "Der Standard ist die Grundlage der Verbesserung: Die Mitarbeitenden ändern ihn mehrmals im Jahr selbst, mit Zeit und Qualität vorher und nachher gemessen."
+      ],
+      "advice": "Nehmen Sie die eine Aufgabe mit der größten Streuung zwischen den Personen und schreiben Sie ihren Standard mit dem Team: Schritte, Kernpunkte und den Grund für jeden. Hängen Sie ihn am Arbeitsplatz aus und beobachten Sie ihn einmal in jeder Schicht.",
+      "tools": [{ "slug": "standard-work", "name": "Standardarbeit" }, { "slug": "time-study", "name": "Zeitstudie" }],
+      "action": "Standard für die Aufgabe mit der größten Streuung in {area} schreiben und aushängen",
+      "check": "Beobachtung in jeder Schicht: Die Arbeit entspricht dem Standard"
+    },
+    {
+      "key": "dailyMgmt",
+      "name": "Tägliches Shopfloor-Management und KPIs",
+      "short": "Shopfloor-Management",
+      "statements": [
+        "Der Bereich hält zu fester Zeit eine kurze tägliche Besprechung an einer Tafel ab, und sie beginnt und endet pünktlich.",
+        "Die Ergebnisse von gestern zu Sicherheit, Qualität, Lieferung und Kosten stehen vor Beginn der Besprechung mit Ziel an der Tafel.",
+        "Ein verfehltes Ziel führt zu einer Maßnahme mit Verantwortlichen und Termin, und offene Maßnahmen werden in der nächsten Besprechung geprüft.",
+        "Ein Problem, das das Team nicht lösen kann, geht noch am selben Tag an die nächste Ebene, und die Antwort kommt zurück."
+      ],
+      "levels": [
+        "Keine regelmäßige Besprechung; Zahlen kommen per wöchentlicher E-Mail oder gar nicht; das Team erfährt von Problemen durch Beschwerden.",
+        "An den meisten Tagen gibt es eine Besprechung, aber ohne Tafel oder mit Zahlen von vor Tagen; es sind vor allem Ansagen.",
+        "Ein tägliches Stand-up an der Tafel mit den KPIs von gestern gegen Ziel; ein roter KPI bekommt eine Maßnahme, die Nachverfolgung schwankt aber.",
+        "Tafel, KPIs und Maßnahmenliste werden jeden Tag gepflegt; Maßnahmen schließen termingerecht; die Eskalation an die nächste Ebene läuft nach festem Takt.",
+        "Schicht-, Bereichs- und Standortrunden folgen am Vormittag aufeinander; die Tafel steuert die Entscheidungen des Tages, und die KPIs zeigen eine dauerhafte Verbesserung."
+      ],
+      "advice": "Halten Sie jeden Tag zur gleichen Zeit ein 10-minütiges Stand-up an einer Tafel: Sicherheit, Qualität, Lieferung und Kosten von gestern gegen Ziel und eine Maßnahme mit Verantwortlichen für jede rote Zahl. Prüfen Sie zuerst die offenen Maßnahmen.",
+      "tools": [{ "slug": "daily-board", "name": "Tagesboard" }, { "slug": "kpi-diagnostic", "name": "KPI-Diagnose" }],
+      "action": "Tägliche 10-Minuten-Runde an der Tafel mit KPIs gegen Ziel in {area} starten",
+      "check": "Runden pünktlich gehalten und Maßnahmen termingerecht geschlossen, vier Wochen lang"
+    },
+    {
+      "key": "problemSolving",
+      "name": "Problemlösung",
+      "short": "Problemlösung",
+      "statements": [
+        "Ein Problem wird zuerst mit Fakten beschrieben: was, wo, wann und wie viele, im Vergleich zum Standard.",
+        "Ein wiederkehrendes Problem wird bis zur Grundursache bearbeitet (5 Whys, Ishikawa oder A3), bevor eine Gegenmaßnahme gewählt wird.",
+        "Kundenbeschwerden und schwere Fehler bekommen eine strukturierte Antwort (8D oder ähnlich) mit Sofortmaßnahme, Grundursache und Wirksamkeitsprüfung.",
+        "Die Wirkung jeder Gegenmaßnahme wird einige Wochen später mit Daten geprüft, und die Erkenntnis wird an andere Schichten oder Bereiche weitergegeben."
+      ],
+      "levels": [
+        "Feuerwehreinsätze: Dieselben Probleme kehren jede Woche zurück; Schuldzuweisung oder eine schnelle Lösung beendet die Diskussion; nichts wird aufgeschrieben.",
+        "Einige Probleme werden analysiert, meist nach einer Eskalation; 5 Whys ist bekannt, hört aber bei der ersten Antwort oder bei einer Person auf.",
+        "Wiederkehrende Probleme bekommen ein 5 Whys oder ein A3 mit Grundursache und Gegenmaßnahme; die meisten werden geschlossen, die Wirkung wird aber nicht immer geprüft.",
+        "Problemlösung wird verfolgt: eröffnet und geschlossen, Zeit bis zum Abschluss, Wiederauftreten; jede Gegenmaßnahme wird mit Daten bestätigt.",
+        "Die Mitarbeitenden in der Fläche lösen die meisten Probleme selbst mit einer einfachen Methode; schwere Fälle laufen als 8D oder A3, und die Erkenntnisse erreichen andere Bereiche."
+      ],
+      "advice": "Wählen Sie das Problem, das im letzten Monat am häufigsten wiederkam, und bearbeiten Sie es mit 5 Whys gemeinsam mit denen, die es sehen, bis zu einer Ursache, an der Sie handeln können. Eine Kundenbeschwerde oder ein schwerer Fehler bekommt einen 8D-Report, ein größeres Problem einen A3.",
+      "tools": [{ "slug": "five-whys", "name": "5 Whys" }, { "slug": "a3-report", "name": "A3-Report" }, { "slug": "eight-d", "name": "8D-Report" }],
+      "action": "Das häufigste wiederkehrende Problem in {area} bis zur Grundursache bearbeiten",
+      "check": "Das Problem ist vier Wochen nach der Gegenmaßnahme nicht zurückgekehrt"
+    },
+    {
+      "key": "flow",
+      "name": "Fluss und Pull",
+      "short": "Fluss und Pull",
+      "statements": [
+        "Der Wertstrom des Bereichs ist mit Durchlaufzeit, Warteschlangen und Wartezeiten aufgenommen, und die Aufnahme ist jünger als ein Jahr.",
+        "Die Arbeit fließt in kleinen, regelmäßigen Losen statt in großen Wellen (Aufträge, Zimmer, Touren, Paletten).",
+        "Der Nachschub wird durch echten Verbrauch gezogen (Kanban-Karten, Behälter, Min/Max) statt durch eine Prognose oder Gewohnheit geschoben.",
+        "Umlaufbestand und Warteschlangen sind begrenzt und sichtbar, sodass ein Stau auffällt, bevor er den Kunden erreicht."
+      ],
+      "levels": [
+        "Die Arbeit kommt in Wellen und staut sich zwischen den Schritten; Mitarbeitende warten, dann sind sie überlastet; Bestände und Warteschlangen fallen erst auf, wenn sie leer laufen oder überlaufen.",
+        "Der Engpass ist bekannt und einige Puffer sind bemessen, aber die Arbeit wird noch in großen Losen geplant, und Eilaufträge hinterherzulaufen ist normal.",
+        "Eine Ist-Aufnahme liegt vor; der Hauptfluss hat eine feste Reihenfolge und Grenzen; Kanban oder Min/Max läuft für die wichtigsten Materialien.",
+        "Durchlaufzeit und Umlaufbestand werden jede Woche gemessen; die Arbeit ist über den Tag geglättet; Kanban-Mengen sind aus Bedarfsdaten berechnet.",
+        "Ein Soll-Zustand wird Schritt für Schritt umgesetzt; der Fluss ist über die Woche gleichmäßig; Warteschlangen und Durchlaufzeit sinken weiter."
+      ],
+      "advice": "Nehmen Sie den Wertstrom des Bereichs auf einem Blatt auf, mit Durchlaufzeit und den Stellen, an denen die Arbeit wartet. Glätten Sie dann die Arbeit über den Tag und bemessen Sie das Kanban für die wichtigsten Materialien aus dem echten Bedarf.",
+      "tools": [{ "slug": "value-stream-map", "name": "Wertstromanalyse" }, { "slug": "heijunka", "name": "Heijunka (Produktionsglättung)" }, { "slug": "kanban-sizing", "name": "Kanban-Dimensionierung" }],
+      "action": "Ist-Wertstrom von {area} mit Durchlaufzeit und Warteschlangen aufnehmen",
+      "check": "Durchlaufzeit in der Aufnahme gemessen und nach der ersten Änderung erneut"
+    },
+    {
+      "key": "quality",
+      "name": "Qualität an der Quelle",
+      "short": "Qualität an der Quelle",
+      "statements": [
+        "Jeder Schritt prüft seine eigene Arbeit, bevor er sie weitergibt, sodass Fehler dort gefunden werden, wo sie entstehen.",
+        "Häufige Fehler werden konstruktiv verhindert: Scanner, Farbcodes, Checklisten, Vorrichtungen oder Systemsperren (Poka-Yoke).",
+        "First-Time-Right (oder die Fehlerquote) wird je Schritt gemessen und dem Team gezeigt.",
+        "Jeder darf die Arbeit stoppen oder Hilfe rufen, wenn etwas nicht stimmt, und bekommt Dank dafür."
+      ],
+      "levels": [
+        "Fehler findet der Kunde oder die nächste Schicht; die Prüfung am Ende ist die einzige; Fehler werden Personen angelastet.",
+        "An einigen Schritten gibt es Prüfungen, meist durch Vorgesetzte; Fehler werden gezählt, aber nicht nach Schritt oder Ursache.",
+        "Selbstprüfungen sind an den Hauptschritten Teil des Standards; die wichtigsten Fehlerarten haben ein Poka-Yoke oder eine Checkliste; First-Time-Right wird gemessen.",
+        "Fehler werden nach Schritt und Ursache verfolgt; die größten Risiken stehen in einer FMEA; jedes Poka-Yoke wird nach Plan getestet, ob es noch wirkt.",
+        "Neue Prozesse werden von Anfang an fehlersicher gestaltet; bei einem Fehler anzuhalten ist normal und geht schnell; First-Time-Right hält das Ziel."
+      ],
+      "advice": "Nehmen Sie die Fehlerart, die am häufigsten beim Kunden ankommt, und suchen Sie den Schritt, in dem sie entsteht. Setzen Sie dort ein Poka-Yoke oder eine Selbstprüfung ein und bewerten Sie die übrigen Risiken des Prozesses in einer FMEA.",
+      "tools": [{ "slug": "poka-yoke", "name": "Poka-Yoke" }, { "slug": "fmea", "name": "FMEA" }],
+      "action": "Den Schritt fehlersicher machen, in dem der häufigste Fehler in {area} entsteht",
+      "check": "First-Time-Right dieses Schritts vorher und vier Wochen danach"
+    },
+    {
+      "key": "maintenance",
+      "name": "Instandhaltung (TPM)",
+      "short": "Instandhaltung (TPM)",
+      "statements": [
+        "Die Bedienenden prüfen ihre Geräte jeden Tag (Stapler, Förderbänder, Scanner, Wagen, Fahrzeuge) anhand einer kurzen Checkliste.",
+        "Die vorbeugende Wartung ist nach Datum oder Nutzung geplant, und der Plan wird eingehalten.",
+        "Ausfälle und ihre Stillstandszeit werden erfasst, und ein wiederholter Ausfall wird auf seine Ursache untersucht.",
+        "Die Leistung der Anlagen (Verfügbarkeit, OEE oder Stillstand je Woche) wird gemessen und ist für das Team sichtbar."
+      ],
+      "levels": [
+        "Geräte laufen, bis sie kaputtgehen; niemand ist für die tägliche Prüfung zuständig; Ersatzteile und Reparaturen werden erst nach dem Ausfall gesucht.",
+        "Für die großen Anlagen gibt es einen Wartungsplan, aber die Intervalle rutschen; Störungen werden mündlich gemeldet; die Ausfallaufzeichnungen sind lückenhaft.",
+        "Tägliche Prüfungen durch die Bedienenden mit Checkliste an den wichtigsten Geräten; vorbeugende Wartung meist pünktlich; Ausfälle mit Stillstandszeit erfasst.",
+        "MTBF, MTTR oder OEE werden verfolgt; wiederholte Ausfälle bekommen eine Ursachenanalyse; der Plan wird an die Ausfallhistorie angepasst.",
+        "Bedienende und Techniker verbessern die Anlagen gemeinsam; ungeplanter Stillstand ist selten und sinkt; neue Geräte werden auch nach Wartungsfreundlichkeit ausgewählt."
+      ],
+      "advice": "Nehmen Sie jedes Gerät, von dem der Bereich abhängt, mit seinem Intervall in einen Wartungsplan auf und geben Sie den Bedienenden eine tägliche Zwei-Minuten-Prüfung. Erfassen Sie jeden Ausfall mit seiner Stillstandszeit, damit OEE oder MTBF messbar werden.",
+      "tools": [{ "slug": "maintenance-planner", "name": "Wartungsplaner" }, { "slug": "oee", "name": "OEE" }],
+      "action": "Die Geräte von {area} in einen Wartungsplan mit täglicher Prüfung durch die Bedienenden aufnehmen",
+      "check": "Plan einen Monat lang pünktlich eingehalten und Ausfälle mit Stillstandszeit erfasst"
+    },
+    {
+      "key": "leadership",
+      "name": "Führungsroutinen",
+      "short": "Führung",
+      "statements": [
+        "Führungskräfte jeder Ebene haben ein schriftliches Leader Standard Work: was sie jeden Tag und jede Woche prüfen, und wann.",
+        "Führungskräfte gehen nach Plan in die Fläche (Gemba), um die Arbeit zu sehen, zu fragen und zu coachen, nicht nur, wenn es ein Problem gibt.",
+        "Führungskräfte prüfen, ob die Standards eingehalten und die Maßnahmen von der Tafel geschlossen werden.",
+        "Führungskräfte coachen die Mitarbeitenden, Probleme selbst zu lösen, statt ihnen die Antwort zu geben."
+      ],
+      "levels": [
+        "Führungskräfte sitzen im Büro oder am Telefon; sie kommen in die Fläche, wenn etwas schiefgeht; ihr Tag wird von E-Mails und Eskalationen bestimmt.",
+        "Einige Führungskräfte gehen durch die Fläche, aber ohne feste Zeit und ohne Zweck; was sie prüfen, hängt von der Person ab.",
+        "Leader Standard Work ist für die wichtigsten Rollen geschrieben, mit täglichen und wöchentlichen Prüfungen; Gemba Walks finden in den meisten Wochen statt, mit Notizen.",
+        "Die nächste Ebene prüft die Einhaltung des Leader Standard Work; Befunde aus dem Gemba werden Maßnahmen mit Verantwortlichen; die Routinen halten auch in vollen Wochen.",
+        "Die Routinen sind die Art, wie der Standort geführt wird; Führungskräfte coachen mit Fragen; die Routinen werden verbessert wie jeder andere Standard."
+      ],
+      "advice": "Schreiben Sie das Leader Standard Work für die Leitung des Bereichs: was jeden Tag und jede Woche zu prüfen ist, und wann. Ergänzen Sie einen Gemba Walk pro Woche mit einem Zweck und lassen Sie die nächste Ebene prüfen, dass beides stattfindet.",
+      "tools": [{ "slug": "leader-standard-work", "name": "Leader Standard Work" }, { "slug": "gemba-walk", "name": "Gemba Walk" }],
+      "action": "Leader Standard Work und einen wöchentlichen Gemba Walk für {area} schreiben",
+      "check": "Routine in vier von vier Wochen eingehalten, von der nächsten Ebene geprüft"
+    },
+    {
+      "key": "people",
+      "name": "Mitarbeitende und Qualifikation",
+      "short": "Qualifikation",
+      "statements": [
+        "Eine Qualifikationsmatrix zeigt, wer welche Aufgabe auf welcher Stufe beherrscht, und sie ist aktuell.",
+        "Jede Schlüsselaufgabe hat mindestens zwei oder drei geschulte Personen pro Schicht, sodass ein Ausfall die Arbeit nicht stoppt.",
+        "Neue Mitarbeitende und solche, die die Aufgabe wechseln, werden nach dem Standard geschult (zum Beispiel mit TWI Job Instruction) und freigegeben.",
+        "Die Mitarbeitenden wirken an Verbesserungen mit, und ihre Ideen werden anerkannt."
+      ],
+      "levels": [
+        "Eingearbeitet wird, indem man mitläuft, wer gerade frei ist; niemand weiß, wer welche Aufgabe vertreten kann; ein Ausfall stoppt einen Prozess.",
+        "Eine Liste der Qualifikationen gibt es, sie ist aber veraltet; Schulung wird geplant, wenn jemand geht; Wissensinseln sind bekannt, aber nicht behoben.",
+        "Eine aktuelle Qualifikationsmatrix für den Bereich; ein Schulungsplan schließt die Lücken; neue Mitarbeitende werden nach Standard geschult und freigegeben.",
+        "Die Abdeckung je Aufgabe und Schicht wird gegen ein Ziel gemessen; Mehrfachqualifizierung ist eingeplant; die Schulung wird durch Beobachtung geprüft.",
+        "Die Mitarbeitenden schulen sich gegenseitig und pflegen die Matrix selbst; die Abdeckung liegt in jeder Schicht im Ziel; Entwicklungsschritte sind an Qualifikation und Verbesserungsarbeit geknüpft."
+      ],
+      "advice": "Erstellen Sie die Qualifikationsmatrix des Bereichs mit den Teamleitungen und markieren Sie jede Aufgabe, die pro Schicht nur eine Person beherrscht. Planen Sie für diese zuerst die Mehrfachqualifizierung, nach Standard geschult und freigegeben.",
+      "tools": [{ "slug": "skills-matrix", "name": "Qualifikationsmatrix" }],
+      "action": "Qualifikationsmatrix für {area} und Schulungsplan für Aufgaben mit nur einer Person",
+      "check": "Jede Schlüsselaufgabe pro Schicht von mindestens zwei geschulten Personen abgedeckt"
+    },
+    {
+      "key": "ci",
+      "name": "Kontinuierliche Verbesserung (Kaizen)",
+      "short": "Kaizen",
+      "statements": [
+        "Es gibt einen einfachen Weg, eine Idee einzubringen (Tafel, Karte oder App), und jede Idee bekommt innerhalb von zwei Wochen eine Antwort.",
+        "Das Team setzt jede Woche selbst kleine Verbesserungen um, ohne auf ein Projekt zu warten.",
+        "Größere Verbesserungen laufen als Kaizen-Events oder Projekte mit einem Ziel in Zahlen und einer Prüfung nach 30 Tagen.",
+        "Die Ergebnisse der Verbesserungen (Zeit, Fehler, Kosten, Sicherheit) werden gemessen und gezeigt, und der Gewinn wird im Standard gehalten."
+      ],
+      "levels": [
+        "Verbesserung ist ein einmaliges Projekt des Managements oder eines Beraters; Ideen aus der Fläche gehen verloren; Änderungen verblassen nach Wochen.",
+        "Eine Ideentafel oder ein Briefkasten existiert, aber wenige Ideen werden umgesetzt und Antworten dauern; Verbesserung hängt an einigen Begeisterten.",
+        "Die Ideentafel wird jede Woche durchgesehen; die meisten Ideen bekommen eine Antwort und Verantwortliche; einige Kaizen-Events im Jahr mit gemessenen Ergebnissen.",
+        "Eingebrachte und umgesetzte Ideen werden verfolgt; Kaizen-Events folgen einem Standard mit 30-Tage-Prüfung; Ergebnisse werden im Standard gehalten.",
+        "Verbesserung gehört zu jeder Aufgabe: viele kleine Ideen pro Person und Jahr, Events aus dem Wertstrom ausgewählt, Ergebnisse standortübergreifend geteilt."
+      ],
+      "advice": "Hängen Sie im Bereich ein Kaizen-Board auf und sehen Sie es jede Woche zur gleichen Zeit durch: Jede Idee bekommt innerhalb von zwei Wochen eine Antwort und Verantwortliche. Führen Sie pro Quartal ein Kaizen-Event zur größten Lücke durch.",
+      "tools": [{ "slug": "kaizen-board", "name": "Kaizen-Board" }, { "slug": "kaizen-event", "name": "Kaizen-Event" }],
+      "action": "Wöchentliche Durchsicht des Kaizen-Boards in {area} starten",
+      "check": "Jede Idee innerhalb von zwei Wochen beantwortet; umgesetzte Ideen pro Monat"
+    }
+  ],
+  "tips": [
+    ["Bewerten Sie, was Sie sehen, nicht was geplant ist.", "Ein Standard im Ordner, an den sich niemand hält, ist Stufe 2, nicht 3. Gehen Sie beim Bewerten durch die Fläche."],
+    ["Erst getrennt bewerten, dann sprechen.", "Jeder Bewerter bewertet zuerst allein. Wo zwei Werte zwei Stufen oder mehr auseinanderliegen, markiert das Tool die Aussage: Besprechen Sie, was jeder gesehen hat, bevor Sie sich einigen."],
+    ["N/A nur, wenn es wirklich nicht zutrifft.", "Eine Aussage, die nicht zum Bereich passt, zählt nicht zum Durchschnitt. Eine Lücke ist nicht N/A: Bewerten Sie sie mit 1."],
+    ["Jedes Quartal auf die gleiche Weise.", "Gleicher Bereich, gleiche Aussagen, am besten die gleichen Bewerter. Das Radar zeigt die Veränderung gegenüber der letzten Bewertung."],
+    ["An drei Dingen arbeiten, nicht an zehn.", "Geben Sie die drei schwächsten Dimensionen an die Maßnahmenliste, jede mit Verantwortlichen und Prüfung, und lassen Sie den Rest für das nächste Quartal."]
+  ],
+  "example": {
+    "area": "Wareneingang und Einlagerung",
+    "assessors": ["Elira", "Jonas"],
+    "daysAgo": 3,
+    "note": "In der Frühschicht abgegangen, von den Ladetoren bis zu den Reserveregalen. Elira hatte keine Stillstandsdaten der Stapler und hat diese Aussage daher mit N/A bewertet.",
+    "scores": {
+      "fiveS": [[3, 3], [3, 4], [2, 3], [3, 3], [2, 2]],
+      "standardWork": [[2, 3], [2, 2], [1, 3], [2, 2]],
+      "dailyMgmt": [[4, 4], [3, 4], [3, 3], [2, 3]],
+      "problemSolving": [[2, 2], [2, 1], [2, 2], [1, 1]],
+      "flow": [[2, 2], [2, 3], ["na", "na"], [2, 2]],
+      "quality": [[3, 3], [3, 2], [2, 2], [4, 2]],
+      "maintenance": [[3, 3], [3, 3], [2, 2], ["na", 2]],
+      "leadership": [[2, 2], [2, 3], [2, 2], [2, 2]],
+      "people": [[3, 3], [2, 2], [3, 2], [3, 4]],
+      "ci": [[2, 3], [2, 2], [1, 1], [2, 2]]
+    },
+    "previous": {
+      "daysBefore": 91,
+      "note": "Erste Bewertung des Bereichs, bevor das Tagesboard eingeführt wurde.",
+      "scores": {
+        "fiveS": [[2, 3], [3, 3], [2, 2], [2, 3], [2, 2]],
+        "standardWork": [[2, 2], [2, 2], [2, 2], [1, 2]],
+        "dailyMgmt": [[3, 3], [2, 3], [2, 2], [2, 2]],
+        "problemSolving": [[2, 2], [1, 1], [2, 2], [1, 1]],
+        "flow": [[2, 2], [2, 2], ["na", "na"], [2, 1]],
+        "quality": [[3, 3], [2, 2], [2, 2], [3, 3]],
+        "maintenance": [[3, 3], [3, 2], [2, 2], ["na", 2]],
+        "leadership": [[2, 2], [2, 2], [2, 2], [2, 2]],
+        "people": [[3, 3], [2, 2], [2, 2], [3, 3]],
+        "ci": [[2, 2], [2, 2], [1, 1], [2, 1]]
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+/* ===== Lean Assessment (js/lean-assessment.js) =====
+   The form runs in the order of an assessment: area and assessors, then the ten dimensions with their statements,
+   each scored 1–5 or N/A by the assessor chosen above, then the history. The result is the report: score, radar,
+   the dimensions weakest first, the three next steps and the disagreements. It prints on its own. */
+.la-assessors { display: grid; gap: 10px; margin: 0 0 12px; }
+.la-assessor { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; align-items: end; }
+.la-assessor label { grid-column: 1 / -1; font-size: 13px; font-weight: 700; }
+.la-assessor input { min-width: 0; }
+.la-remove { padding: 6px 10px; font-size: 13px; }
+.la-score-box .form-note { margin-top: 0; }
+
+.la-rater { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 0 0 10px; }
+.la-rater-label { color: var(--muted); font-size: 13px; font-weight: 700; }
+.la-rater-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.la-rater-group button {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.la-rater-group button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: var(--paper); }
+
+.la-scale-key, .la-levels { margin: 0 0 12px; }
+.la-scale-key summary, .la-levels summary { color: var(--blue); font-size: 14px; font-weight: 700; cursor: pointer; }
+.la-level-key, .la-level-list { display: grid; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; font-size: 14px; }
+.la-level-key strong, .la-level-list strong { display: block; }
+
+.la-dim { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.la-dim-head { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+.la-dim h3 { margin: 0; font-size: 18px; }
+.la-dim-no { display: inline-block; min-width: 1.6em; color: var(--blue); }
+.la-dim-score { margin: 0; color: var(--muted); font-size: 13px; }
+
+.la-statements { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.la-statement {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 10px);
+  background: var(--paper-2);
+}
+.la-statement.is-disagree { border-color: var(--warn); }
+.la-statement-text { margin: 0 0 8px; overflow-wrap: anywhere; }
+.la-scale { display: flex; flex-wrap: wrap; gap: 6px; }
+.la-scale button {
+  min-width: 42px;
+  min-height: 40px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.la-scale button:hover { border-color: var(--blue); }
+.la-scale button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: var(--paper); }
+.la-statement-meta { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+.la-statement-meta:empty { display: none; }
+.la-flag { color: var(--warn); }
+
+.la-history tr[aria-current="true"] td { font-weight: 700; }
+.la-row-tools { white-space: nowrap; }
+.la-row-tools .button-ghost { padding: 4px 8px; font-size: 13px; }
+.la-aside-links { margin: 0 0 18px; padding-left: 18px; font-size: 14px; }
+
+/* Results */
+.la-main { display: grid; gap: 22px; margin: 18px 0; }
+.la-pictures { display: grid; gap: 18px; }
+.la-radar, .la-ranking, .la-weak, .la-disagree { min-width: 0; }
+.la-radar .ck-chart { min-width: 420px; }
+.la-bars .dl-bar.is-top .dl-bar-name { font-weight: 700; }
+.la-weak-grid { display: grid; gap: 12px; }
+.la-weak-card {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 8px);
+  background: var(--card);
+}
+.la-weak-card h4 { margin: 0 0 4px; font-size: 17px; }
+.la-weak-card h4 .dl-rank { margin-right: 4px; }
+.la-weak-card p { margin: 0 0 10px; }
+.la-weak-score { color: var(--muted); font-size: 14px; }
+.la-tools .result-label { display: inline; margin: 0; }
+.la-weak-card .tool-actions { margin: 0; }
+.la-disagree-list { display: grid; gap: 8px; margin: 8px 0 0; padding-left: 18px; }
+.la-disagree-list strong { color: var(--warn); }
+.la-scores { display: block; color: var(--muted); font-size: 13px; }
+.la-detail td:nth-child(2) { min-width: 260px; }
+
+@media (min-width: 761px) {
+  .la-assessors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .la-pictures { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; }
+  .la-weak-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media print {
+  .la-setup, body:has(.la-results) .page-hero, body:has(.la-results) .dl-example-note { display: none !important; }
+  .la-results { padding: 0 !important; border: 0 !important; }
+  .la-results .result-actions, .la-results .ck-actions, .la-results .ck-tooltip, .la-weak-card .tool-actions { display: none !important; }
+  .la-pictures { grid-template-columns: 1.2fr 1fr; }
+  .la-weak-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .la-weak-card, .la-disagree, .dl-panel { break-inside: avoid; }
+  .la-radar .ck-chart { min-width: 0; }
+  .la-weak-card, .la-statement { background: #fff; border-color: #999; }
+}

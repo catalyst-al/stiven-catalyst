@@ -7546,5 +7546,7 @@
   "Scores per assessor, the mean and the spread (highest minus lowest). N/A is left out of every mean.": "Vlerësimet për çdo vlerësues, mesatarja dhe shpërndarja (më i larti minus më i ulëti). N/A lihet jashtë çdo mesatareje.",
   "The levels": "Nivelet",
   "What each score means, for every dimension.": "Çfarë do të thotë çdo vlerësim, për çdo dimension.",
-  "New assessment started. The earlier ones stay in the history.": "U nis një vlerësim i ri. Të mëparshmit mbeten në historik."
+  "New assessment started. The earlier ones stay in the history.": "U nis një vlerësim i ri. Të mëparshmit mbeten në historik.",
+  "Read the meters on Monday morning, type them in, and send any meter that drifts above its baseline to the Action Tracker as a check.": "Lexo njehsorët të hënën në mëngjes, shkruaji dhe dërgo çdo njehsor që ngrihet mbi vlerën e vet fillestare si kontroll në listën e veprimeve.",
+  "Score each area with two assessors, talk through every flagged disagreement on the floor, and send the three weakest dimensions to the Action Tracker.": "Vlerëso çdo zonë me dy vlerësues, diskutoni në terren çdo mospajtim të shënuar dhe çoji tri dimensionet më të dobëta te lista e veprimeve."
 }

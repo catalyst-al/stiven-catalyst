@@ -76,7 +76,8 @@ window.ChartKit = (() => {
     return [cx + Math.cos(angle) * r * share, cy + Math.sin(angle) * r * share];
   });
   const radar = (axes, options = {}) => {
-    const W = 520, H = 420, cx = W / 2, cy = H / 2 + 6, r = 150, levels = options.levels || 4;
+    // Wide enough that a long name at the side (German, Albanian) is not cut by the edge of the picture.
+    const W = 640, H = 420, cx = W / 2, cy = H / 2 + 6, r = 150, levels = options.levels || 4;
     const svg = frame(W, H, options.title);
     const n = axes.length || 1;
     const format = options.format || ((v) => num(v, 1));
@@ -90,7 +91,14 @@ window.ChartKit = (() => {
       svg.append(svgEl("line", { x1: cx, y1: cy, x2: x, y2: y, stroke: C.grid, "stroke-width": 1 }));
       const lx = cx + Math.cos(angle) * (r + 26), ly = cy + Math.sin(angle) * (r + 26);
       const anchor = Math.abs(Math.cos(angle)) < 0.2 ? "middle" : Math.cos(angle) > 0 ? "start" : "end";
-      const label = svgEl("text", { x: lx, y: ly + 4, "text-anchor": anchor, "font-size": 13, "font-weight": 600, fill: C.text }, shorten(axis.label, 22));
+      const text = shorten(axis.label, 22);
+      // A long name at the side breaks at the space nearest its middle, so it keeps to its side of the picture.
+      const breakAt = anchor !== "middle" && text.length > 14 ? [...text].reduce((best, ch, at) => (ch === " " && Math.abs(at - text.length / 2) < Math.abs(best - text.length / 2) ? at : best), -1) : -1;
+      const label = svgEl("text", { x: lx, y: breakAt > 0 ? ly - 3 : ly + 4, "text-anchor": anchor, "font-size": 13, "font-weight": 600, fill: C.text }, breakAt > 0 ? "" : text);
+      if (breakAt > 0) {
+        label.append(svgEl("tspan", { x: lx, dy: 0 }, text.slice(0, breakAt)));
+        label.append(svgEl("tspan", { x: lx, dy: 15 }, text.slice(breakAt + 1)));
+      }
       svg.append(tip(label, `${axis.label}: ${format(axis.value)} / ${format(axis.max)}`));
     });
     (options.compare || []).forEach((set, i) => {

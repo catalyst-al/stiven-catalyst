@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Lean Assessment", "type": "Lean", "time": "Quarterly", "summary": "Score how mature an area's lean system is in ten dimensions, from 5S to kaizen, with up to five assessors: the spread shows where they disagree, the radar the change since last quarter, and the three weakest dimensions link to the tools that close them.", "url": "/tools/lean-assessment/", "cta": "Assess an area" },
+    "de": { "name": "Lean-Reifegradbewertung", "type": "Lean", "time": "Quartalsweise", "summary": "Bewerten Sie den Lean-Reifegrad eines Bereichs in zehn Dimensionen, von 5S bis Kaizen, mit bis zu fünf Bewertern: Die Spannweite zeigt, wo sie sich uneinig sind, das Radar die Veränderung seit dem letzten Quartal, und die drei schwächsten Dimensionen führen zu den Tools, die sie schließen.", "url": "/de/tools/lean-assessment/", "cta": "Bereich bewerten" },
+    "sq": { "name": "Vlerësimi i pjekurisë Lean", "type": "Lean", "time": "Çdo tremujor", "summary": "Vlerëso sa i pjekur është sistemi Lean i një zone në dhjetë dimensione, nga 5S te kaizen, me deri në pesë vlerësues: shpërndarja tregon ku nuk pajtohen, radari ndryshimin që nga tremujori i kaluar, dhe tri dimensionet më të dobëta të çojnë te mjetet që i mbyllin.", "url": "/sq/tools/lean-assessment/", "cta": "Vlerëso një zonë" }
+  },
+  "routine": { "when": "Every quarter", "do": "Score each area with two assessors, talk through every flagged disagreement on the floor, and send the three weakest dimensions to the Action Tracker.", "de": { "when": "Jedes Quartal", "do": "Bewerten Sie jeden Bereich mit zwei Bewertern, besprechen Sie jede markierte Uneinigkeit vor Ort und geben Sie die drei schwächsten Dimensionen an die Maßnahmenliste." }, "sq": { "when": "Çdo tremujor", "do": "Vlerëso çdo zonë me dy vlerësues, diskutoni në terren çdo mospajtim të shënuar dhe çoji tri dimensionet më të dobëta te lista e veprimeve." } },
+  "recipe": "example"
+}

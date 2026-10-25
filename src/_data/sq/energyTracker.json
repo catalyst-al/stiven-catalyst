@@ -1,0 +1,345 @@
+{
+  "storageKey": "sc-energy-tracker-sq",
+  "text": {
+    "tool": "Energjia dhe uji",
+    "csv": "energjia-uji",
+    "metersLegend": "Njehsorët",
+    "metersNote": "Një rresht për çdo njehsor që lexon: njehsori kryesor i energjisë elektrike, njehsori i gazit, njehsori i ujit, një nënnjehsor për kuzhinën ose dhomën frigoriferike. Çmimi është çmimi i energjisë ose i ujit për njësi pa tarifat fikse; shifrat e shembullit janë vetëm shembuj, merri tëndat nga kontrata ose fatura e fundit.",
+    "gasNote": "Njehsorët e gazit numërojnë m³; fatura i kthen në kWh: kWh = m³ × vlera kalorifike (Brennwert) × koeficienti i gjendjes (Zustandszahl), metoda e fletës teknike DVGW G 685. Të dyja shifrat janë në faturën e gazit. 11,0 kWh/m³ dhe 0,95 janë vetëm vlera fillestare: merri tëndat nga fatura.",
+    "oilNote": "Nafta e ngrohjes: 10 kWh për litër është vlerë fillestare (naftë ngrohjeje EL, vlera kalorifike neto). Merr shifrën që jep furnizuesi.",
+    "tariffNote": "Energjia elektrike, gazi dhe ngrohja qendrore kanë çmim për kWh, si në faturë; nafta e ngrohjes për litër; uji për m³ bashkë me ujërat e ndotura.",
+    "entryLegend": "Shto një lexim",
+    "readingPlaceholder": "p.sh. 1284310",
+    "notePlaceholder": "p.sh. Lexuar nga auditi i natës në 06:00",
+    "replacedNote": "Shënoje kur ky është leximi i parë i një njehsori të ri (ndërrim, rivendosje). Me leximin e fundit të njehsorit të vjetër, konsumi deri te ndërrimi vazhdon të numërohet; pa të, ditët që nga leximi i mëparshëm mbeten boshllëk dhe shfaqen si i tillë. Një lexim më i ulët se i mëparshmi pa këtë shenjë trajtohet si gabim dhe gjithashtu mbetet boshllëk.",
+    "spreadNote": "Një lexim mbyll ditët para tij: konsumi mes dy leximeve shpërndahet në mënyrë të barabartë mbi ditët mes tyre, kështu javët dhe muajt ndërtohen edhe nga lexime të bëra në çdo ditë. Ditët që nuk janë mes dy leximeve të një njehsori nuk kanë vlerë; ato nuk plotësohen kurrë.",
+    "denomLegend": "Për dhomë të zënë ose për njësi",
+    "denomNote": "Shifra me të cilën pjesëtohet konsumi, ditë për ditë: netët e dhomave të zëna në hotel, porositë ose paletat në magazinë. Shkruaj një ditë në një kohë ose ngjit një listë ditësh. Një shifër e shkruar këtu ka përparësi ndaj asaj nga KPI-të e hotelit.",
+    "hotelNote": "KPI-të e hotelit në këtë shfletues kanë dhoma të shitura për {n} netë ({from} – {to}). Ato vetëm lexohen, nuk ndryshohen kurrë.",
+    "hotelNone": "Asnjë natë nga KPI-të e hotelit në këtë shfletues në këtë gjuhë.",
+    "denomPastePlaceholder": "12.10.2026\t118",
+    "settingsLegend": "Periudha, njehsori, vlera fillestare dhe CO₂",
+    "baselineNote": "Vlera fillestare janë javët e para të plota me lexime (ose periudha që cakton), për dhomë të zënë ose për njësi kur ka shifra, përndryshe për ditë. Një javë më shumë se pragu mbi të është sinjal.",
+    "hsHiShown": "1,11",
+    "factorNote": "Faktorët e CO₂ për kWh (uji për m³). Vlerat fillestare janë të rrumbullakosura dhe numërojnë vetëm CO₂, pa gazet e tjera dhe pa zinxhirin e furnizimit: kontrollo vlerën aktuale të UBA-së ose etiketën e furnizuesit tënd dhe shkruaj tënden.",
+    "hsHiNote": "Faturat e gazit japin kWh mbi vlerën kalorifike bruto (Brennwert, Hs); faktori i BAFA-s për gazin natyror është për kWh mbi vlerën kalorifike neto (Hi). Mjeti pjesëton me Hs/Hi = 1,11, raporti për gazin natyror në DIN V 18599.",
+    "weatherNote": "Energjia e ngrohjes ndjek motin. Para se të veprosh për një sinjal te gazi, nafta ose ngrohja qendrore, krahaso me gradë-ditët e ngrohjes të të njëjtave javë (i publikon shërbimi meteorologjik ose furnizuesi i energjisë).",
+    "pasteRow": "Një rresht për çdo lexim",
+    "pastePlaceholder": "12.10.2026\tElektriciteti, matësi kryesor\t1284310\t\t\tLexuar në 06:00",
+    "empty": "Ende asnjë lexim.",
+    "allMeters": "Të gjithë njehsorët",
+    "newMeter": "Njehsor i ri"
+  },
+  "media": [
+    {
+      "key": "electricity",
+      "name": "Energjia elektrike",
+      "unit": "kWh",
+      "tariffUnit": "kWh",
+      "co2": 0.38,
+      "co2Shown": "0,38",
+      "co2Unit": "kWh",
+      "co2Source": "Vlera fillestare 0,38 kg CO₂/kWh: Umweltbundesamt (UBA), miksi elektrik gjerman 2023, vlerësim, vetëm CO₂. Kontrollo vlerën aktuale të UBA-së ose etiketën e furnizuesit tënd."
+    },
+    {
+      "key": "gas",
+      "name": "Gaz natyror",
+      "unit": "m³",
+      "tariffUnit": "kWh",
+      "co2": 0.201,
+      "co2Shown": "0,201",
+      "co2Unit": "kWh",
+      "co2Source": "Vlera fillestare 0,201 kg CO₂/kWh: fleta informative e BAFA-s për faktorët e CO₂, gaz natyror, për kWh mbi vlerën kalorifike neto (Hi). Kontrollo vlerën aktuale."
+    },
+    {
+      "key": "water",
+      "name": "Uji",
+      "unit": "m³",
+      "tariffUnit": "m³",
+      "co2": 0,
+      "co2Shown": "",
+      "co2Unit": "m³",
+      "co2Source": "Pa vlerë fillestare: CO₂ i furnizimit dhe i trajtimit të ujërave të ndotura varet nga ndërmarrja e ujit. Lëre bosh ose shkruaj shifrën që jep ndërmarrja jote."
+    },
+    {
+      "key": "heat",
+      "name": "Ngrohja qendrore",
+      "unit": "kWh",
+      "tariffUnit": "kWh",
+      "co2": 0,
+      "co2Shown": "",
+      "co2Unit": "kWh",
+      "co2Source": "Pa vlerë fillestare: ngrohja qendrore varet nga furnizuesi. Shkruaj faktorin e CO₂ që furnizuesi publikon për rrjetin tënd."
+    },
+    {
+      "key": "oil",
+      "name": "Nafta e ngrohjes",
+      "unit": "l",
+      "tariffUnit": "l",
+      "co2": 0.266,
+      "co2Shown": "0,266",
+      "co2Unit": "kWh",
+      "co2Source": "Vlera fillestare 0,266 kg CO₂/kWh: fleta informative e BAFA-s për faktorët e CO₂, naftë ngrohjeje, vlera kalorifike neto. Kontrollo vlerën aktuale."
+    }
+  ],
+  "conversion": {
+    "calorific": 11,
+    "zustand": 0.95,
+    "oilKwhPerLitre": 10,
+    "hsHi": 1.11
+  },
+  "denominators": [
+    {
+      "key": "rooms",
+      "name": "Netë dhomash të zëna",
+      "one": "natë dhome të zënë",
+      "per": "për natë dhome të zënë"
+    },
+    {
+      "key": "orders",
+      "name": "Porositë",
+      "one": "porosi",
+      "per": "për porosi"
+    },
+    {
+      "key": "pallets",
+      "name": "Paletat",
+      "one": "paletë",
+      "per": "për paletë"
+    },
+    {
+      "key": "units",
+      "name": "Njësitë e trajtuara",
+      "one": "njësi",
+      "per": "për njësi"
+    }
+  ],
+  "signal": {
+    "threshold": 10,
+    "baselineWeeks": 4
+  },
+  "meters": [
+    {
+      "id": "m1",
+      "name": "Elektriciteti, matësi kryesor",
+      "medium": "electricity",
+      "tariff": "",
+      "calorific": "",
+      "zustand": "",
+      "kwhPerLitre": ""
+    },
+    {
+      "id": "m2",
+      "name": "Gazi",
+      "medium": "gas",
+      "tariff": "",
+      "calorific": "",
+      "zustand": "",
+      "kwhPerLitre": ""
+    },
+    {
+      "id": "m3",
+      "name": "Uji",
+      "medium": "water",
+      "tariff": "",
+      "calorific": "",
+      "zustand": "",
+      "kwhPerLitre": ""
+    }
+  ],
+  "weekdays": ["Hën","Mar","Mër","Enj","Pre","Sht","Die"],
+  "weekdaysLong": ["E hënë","E martë","E mërkurë","E enjte","E premte","E shtunë","E diel"],
+  "advice": {
+    "electricity": {
+      "meaning": "Energjia elektrike për njësi është rritur, ndërsa puna që ajo shërben jo. Zakonisht diçka punon që nuk duhet: një ngarkesë bazë natën, ventilimi ose ftohja me orar të gabuar, një defekt që e detyron një makinë të punojë më shumë.",
+      "moves": [
+        "Lexo njehsorin natën ose në orën më të qetë për tri ditë: ngarkesa bazë tregon çfarë punon kur nuk i duhet askujt.",
+        "Ec nëpër ndërtesë me teknikun në atë orë: aspiratorët, ftohësit, dhomat frigoriferike, ajri i kompresuar, ndriçimi, karikuesit.",
+        "Kontrollo oraret dhe vlerat e caktuara të ventilimit dhe ftohjes kundrejt orëve të përdorimit, dhe riparo atë që ka defekt."
+      ],
+      "question": "Çfarë punon që nga java kur vija u ngrit, që nuk punonte më parë?"
+    },
+    "gas": {
+      "meaning": "Gazi për njësi është rritur. Ngrohja ndjek motin, prandaj përjashtoje fillimisht atë; pastaj shiko ujin e ngrohtë, kuzhinën dhe cilësimet e kaldajës.",
+      "moves": [
+        "Krahaso javët me gradë-ditët e ngrohjes: javët më të ftohta shpjegojnë më shumë gaz ngrohjeje.",
+        "Kontrollo oraret e kaldajës dhe të ngrohjes, temperaturën e ujit që shkon dhe temperaturën e ujit të ngrohtë kundrejt nevojës.",
+        "Kërko humbje uji të ngrohtë (rubinetë që pikojnë, dushe, pjatalarësja e kuzhinës) dhe djegës që mbeten ndezur."
+      ],
+      "question": "A është moti, apo ndryshoi një cilësim, një orar ose një rrjedhje?"
+    },
+    "water": {
+      "meaning": "Uji për njësi është rritur. Uji rrallë rritet vetvetiu: një rrjedhje, një rezervuar tualeti që rrjedh, një ujitje ose cilësimi i një kulle ftohëse.",
+      "moves": [
+        "Lexo njehsorin natën kur asgjë nuk përdoret: nëse rrotullohet, uji po rrjedh diku.",
+        "Kontrollo tualetet dhe rezervuarët, dushet, kuzhinën dhe lavanderinë për ujë që rrjedh.",
+        "Kontrollo ujitjen, kullat ftohëse dhe zbutësin e ujit për program të gabuar."
+      ],
+      "question": "A rrotullohet njehsori kur asgjë nuk përdoret?"
+    },
+    "heat": {
+      "meaning": "Ngrohja qendrore për njësi është rritur. Si gazi, ndjek motin; pas tij vendosin stacioni i shpërndarjes dhe oraret e ngrohjes.",
+      "moves": [
+        "Krahaso javët me gradë-ditët e ngrohjes.",
+        "Kontrollo temperaturën e kthimit në stacionin e shpërndarjes: një kthim i lartë humbet ngrohje dhe mund të kushtojë një shtesë.",
+        "Kontrollo oraret e ngrohjes dhe temperaturën e ujit të ngrohtë."
+      ],
+      "question": "A është moti, apo oraret dhe temperatura e kthimit?"
+    },
+    "oil": {
+      "meaning": "Nafta e ngrohjes për njësi është rritur. Përjashto fillimisht motin dhe leximet e depozitës (një furnizim i lexuar si konsum), pastaj djegësin.",
+      "moves": [
+        "Kontrollo që asnjë furnizim të mos jetë shënuar si lexim: nafta lexohet si ajo që u përdor, jo si ajo që është në depozitë.",
+        "Krahaso javët me gradë-ditët e ngrohjes.",
+        "Kontrollo djegësin dhe cilësimet e tij."
+      ],
+      "question": "A është leximi i saktë, dhe a është moti apo djegësi?"
+    },
+    "default": {
+      "meaning": "Konsumi për njësi është mbi vlerën fillestare.",
+      "moves": [
+        "Kontrollo leximet e javëve të fundit për ndonjë gabim shtypi.",
+        "Ec nëpër zonë me personin përgjegjës për pajisjet.",
+        "Bini dakord për një ndryshim dhe lexo sërish njehsorin javën tjetër."
+      ],
+      "question": "Çfarë ndryshoi në javën kur vija u ngrit?"
+    }
+  },
+  "tips": [
+    [
+      "Lexo në të njëjtën ditë dhe orë.",
+      "Për shembull të hënën në 06:00 nga auditi i natës. Mjeti i shpërndan leximet e parregullta mbi ditët mes tyre, por leximet e rregullta i bëjnë javët të lehta për t'u krahasuar."
+    ],
+    [
+      "Shkruaj njehsorin siç e tregon.",
+      "Numrin e plotë në numërues, jo konsumin: mjeti e llogarit konsumin mes dy leximeve."
+    ],
+    [
+      "Një njehsor i ri fillon me leximin e vet.",
+      "Shëno „njehsori u zëvendësua“ dhe jep leximin e fundit të njehsorit të vjetër, që asgjë të mos humbasë te ndërrimi."
+    ],
+    [
+      "Pjesëto me punën.",
+      "Energjia për natë dhome të zënë ose për porosi thotë më shumë se totali: një javë e plotë konsumon më shumë se një e qetë."
+    ],
+    [
+      "Përdor çmimet dhe faktorët e faturës tënde.",
+      "Vlerat fillestare janë vetëm vlera fillestare. Kontrata jote, fatura e gazit dhe etiketa e furnizuesit japin shifrat që vlejnë."
+    ]
+  ],
+  "example": {
+    "start": "2026-06-29",
+    "rooms": 140,
+    "settings": {
+      "denom": "rooms",
+      "threshold": 10,
+      "baselineWeeks": 4
+    },
+    "meters": [
+      {
+        "id": "m1",
+        "name": "Elektriciteti, matësi kryesor",
+        "medium": "electricity",
+        "tariff": "0,24",
+        "calorific": "",
+        "zustand": "",
+        "kwhPerLitre": ""
+      },
+      {
+        "id": "m2",
+        "name": "Gazi",
+        "medium": "gas",
+        "tariff": "0,085",
+        "calorific": "11,15",
+        "zustand": "0,9542",
+        "kwhPerLitre": ""
+      },
+      {
+        "id": "m3",
+        "name": "Uji",
+        "medium": "water",
+        "tariff": "4,80",
+        "calorific": "",
+        "zustand": "",
+        "kwhPerLitre": ""
+      }
+    ],
+    "notes": {
+      "smart": "Portali i njehsorit inteligjent: lexime ditore nga tani e tutje",
+      "late": "Lexuar një ditë më vonë (të martën)",
+      "replaced": "Njehsori u ndërrua nga ndërmarrja (afati i kalibrimit)",
+      "skipped": "Leximi i javës së kaluar u harrua"
+    },
+    "occupied": [116,120,120,119,96,89,92,119,126,126,115,98,88,92,119,121,126,119,93,88,91,115,119,118,111,93,84,84,115,121,117,111,92,84,86,114,122,121,111,86,84,86,116,119,117,110,87,84,87,124,121,122,117,92,89,90,119,123,125,114,98,91,90,122,124,126,114,94,92,96,118,122,126,121,99,91,95,120,126,121,120,95,86,89,124,125,125,117,94,89,90,118,126,121,120,98,92,91,121,126,125,117,95,90,95,124,121,122,117,93,88,96],
+    "readings": [
+      {"day":0,"meter":"m1","value":1284310,"note":""},
+      {"day":0,"meter":"m2","value":418562,"note":""},
+      {"day":0,"meter":"m3","value":35214.6,"note":""},
+      {"day":7,"meter":"m1","value":1309099,"note":""},
+      {"day":7,"meter":"m2","value":419522,"note":""},
+      {"day":7,"meter":"m3","value":35518.9,"note":""},
+      {"day":14,"meter":"m1","value":1334396,"note":""},
+      {"day":14,"meter":"m2","value":420489,"note":""},
+      {"day":14,"meter":"m3","value":35827.3,"note":""},
+      {"day":21,"meter":"m1","value":1359429,"note":""},
+      {"day":21,"meter":"m2","value":421459,"note":""},
+      {"day":21,"meter":"m3","value":36128.5,"note":""},
+      {"day":28,"meter":"m1","value":1383375,"note":""},
+      {"day":28,"meter":"m2","value":422406,"note":""},
+      {"day":28,"meter":"m3","value":36423.1,"note":""},
+      {"day":35,"meter":"m1","value":1407786,"note":""},
+      {"day":35,"meter":"m2","value":423356,"note":""},
+      {"day":42,"meter":"m1","value":1431922,"note":""},
+      {"day":42,"meter":"m2","value":424289,"note":""},
+      {"day":42,"meter":"m3","value":37014.5,"note":"skipped"},
+      {"day":49,"meter":"m1","value":1456058,"note":""},
+      {"day":49,"meter":"m2","value":425252,"note":""},
+      {"day":49,"meter":"m3","value":37309,"note":""},
+      {"day":56,"meter":"m1","value":1480903,"note":""},
+      {"day":56,"meter":"m2","value":426220,"note":""},
+      {"day":56,"meter":"m3","value":0,"replaced":true,"oldFinal":37615.7,"note":"replaced"},
+      {"day":63,"meter":"m2","value":427188,"note":""},
+      {"day":63,"meter":"m3","value":309.7,"note":""},
+      {"day":64,"meter":"m1","value":1509578,"note":"late"},
+      {"day":70,"meter":"m1","value":1530977,"note":""},
+      {"day":70,"meter":"m2","value":428172,"note":""},
+      {"day":70,"meter":"m3","value":611.4,"note":""},
+      {"day":77,"meter":"m1","value":1556125,"note":""},
+      {"day":77,"meter":"m2","value":429147,"note":""},
+      {"day":77,"meter":"m3","value":919.4,"note":""},
+      {"day":84,"meter":"m1","value":1581268,"note":""},
+      {"day":84,"meter":"m2","value":430109,"note":""},
+      {"day":84,"meter":"m3","value":1230.5,"note":""},
+      {"day":91,"meter":"m1","value":1606729,"note":"smart"},
+      {"day":91,"meter":"m2","value":431078,"note":""},
+      {"day":91,"meter":"m3","value":1539.3,"note":""},
+      {"day":92,"meter":"m1","value":1610523,"note":""},
+      {"day":93,"meter":"m1","value":1614416,"note":""},
+      {"day":94,"meter":"m1","value":1618243,"note":""},
+      {"day":95,"meter":"m1","value":1622100,"note":""},
+      {"day":96,"meter":"m1","value":1625478,"note":""},
+      {"day":97,"meter":"m1","value":1628769,"note":""},
+      {"day":98,"meter":"m1","value":1631914,"note":""},
+      {"day":98,"meter":"m2","value":432060,"note":""},
+      {"day":98,"meter":"m3","value":1847,"note":""},
+      {"day":99,"meter":"m1","value":1636236,"note":""},
+      {"day":100,"meter":"m1","value":1640741,"note":""},
+      {"day":101,"meter":"m1","value":1645179,"note":""},
+      {"day":102,"meter":"m1","value":1649416,"note":""},
+      {"day":103,"meter":"m1","value":1653194,"note":""},
+      {"day":104,"meter":"m1","value":1656855,"note":""},
+      {"day":105,"meter":"m1","value":1660660,"note":""},
+      {"day":105,"meter":"m2","value":433057,"note":""},
+      {"day":105,"meter":"m3","value":2160.9,"note":""},
+      {"day":106,"meter":"m1","value":1665052,"note":""},
+      {"day":107,"meter":"m1","value":1669454,"note":""},
+      {"day":108,"meter":"m1","value":1673767,"note":""},
+      {"day":109,"meter":"m1","value":1677987,"note":""},
+      {"day":110,"meter":"m1","value":1681751,"note":""},
+      {"day":111,"meter":"m1","value":1685549,"note":""},
+      {"day":112,"meter":"m1","value":1689378,"note":""},
+      {"day":112,"meter":"m2","value":434047,"note":""},
+      {"day":112,"meter":"m3","value":2471.4,"note":""}
+    ]
+  }
+}

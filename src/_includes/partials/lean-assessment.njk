@@ -1,0 +1,126 @@
+{#- Lean Assessment: a quarterly self-assessment of an area's lean maturity in ten dimensions, scored 1–5 by up to five assessors; lean-assessment.js does the rest. -#}
+<section class="shell tool-layout la-setup">
+  <div class="tool-panel" data-lean-assessment>
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">1 · {{ "Area, date and assessors" | t(lang) }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="la-area">{{ "Area" | t(lang) }}</label>
+            <input id="la-area" list="la-area-list" placeholder="{{ cfg.text.areaPlaceholder }}" autocomplete="off">
+            <datalist id="la-area-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="la-date">{{ "Date" | t(lang) }}</label>
+            <input id="la-date" type="date">
+          </div>
+        </div>
+        <p class="form-note">{{ "Up to five assessors. Each one scores alone first, then you compare." | t(lang) }}</p>
+        <div class="la-assessors" data-assessors></div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add-assessor>{{ "Add an assessor" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-new>{{ "Start a new assessment" | t(lang) }}</button>
+        </div>
+        <div class="field">
+          <label for="la-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <textarea id="la-note" rows="2" placeholder="{{ cfg.text.notePlaceholder }}"></textarea>
+        </div>
+        <p class="form-note" data-save-status aria-live="polite"></p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box la-score-box">
+      <div class="dl-log-head">
+        <p class="kicker">2 · {{ "Score each statement" | t(lang) }}</p>
+      </div>
+      <div class="la-rater">
+        <span class="la-rater-label" id="la-rater-label">{{ "Scoring as" | t(lang) }}</span>
+        <div class="la-rater-group" role="group" aria-labelledby="la-rater-label" data-rater></div>
+      </div>
+      <p class="form-note" data-progress aria-live="polite"></p>
+      <details class="la-scale-key">
+        <summary>{{ "The score scale" | t(lang) }}</summary>
+        <ol class="la-level-key">
+          {%- for level in cfg.levels %}
+          <li><strong>{{ loop.index }} · {{ level.name }}</strong> {{ level.short }}</li>
+          {%- endfor %}
+          <li><strong>{{ "N/A" | t(lang) }}</strong> {{ "Does not apply to this area; left out of the average." | t(lang) }}</li>
+        </ol>
+      </details>
+      {%- for dim in cfg.dimensions %}
+      <section class="la-dim" aria-labelledby="la-dim-{{ dim.key }}">
+        <div class="la-dim-head">
+          <h3 id="la-dim-{{ dim.key }}"><span class="la-dim-no">{{ loop.index }}</span> {{ dim.name }}</h3>
+          <p class="la-dim-score" data-dim-score="{{ dim.key }}"></p>
+        </div>
+        <details class="la-levels">
+          <summary>{{ "What each level looks like on the floor" | t(lang) }}</summary>
+          <ol class="la-level-list">
+            {%- for text in dim.levels %}
+            <li><strong>{{ loop.index }} · {{ cfg.levels[loop.index0].name }}</strong> {{ text }}</li>
+            {%- endfor %}
+          </ol>
+        </details>
+        <ol class="la-statements">
+          {%- for text in dim.statements %}
+          <li class="la-statement" data-statement="{{ dim.key }}.{{ loop.index0 }}">
+            <p class="la-statement-text" id="la-s-{{ dim.key }}-{{ loop.index0 }}">{{ text }}</p>
+            <div class="la-scale" role="group" aria-labelledby="la-s-{{ dim.key }}-{{ loop.index0 }}">
+              {%- for level in cfg.levels %}
+              <button type="button" data-score="{{ loop.index }}" aria-pressed="false" title="{{ loop.index }} · {{ level.name }}" aria-label="{{ loop.index }} · {{ level.name }}">{{ loop.index }}</button>
+              {%- endfor %}
+              <button type="button" data-score="na" aria-pressed="false" title="{{ 'Not applicable' | t(lang) }}">{{ "N/A" | t(lang) }}</button>
+            </div>
+            <p class="la-statement-meta" data-meta></p>
+          </li>
+          {%- endfor %}
+        </ol>
+      </section>
+      {%- endfor %}
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "History" | t(lang) }}</p>
+        <p class="form-note" data-history-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-history-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-history-wrap hidden>
+        <table class="dl-table la-history">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "Assessors" | t(lang) }}</th><th scope="col" class="num">{{ "Overall score" | t(lang) }}</th><th scope="col">{{ "Maturity level" | t(lang) }}</th><th scope="col" class="num">{{ "Change" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Open or remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-history></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-history-empty>{{ "No assessment scored yet." | t(lang) }} {{ "Score the statements above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-example-again hidden>{{ "Load the example" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="kicker">{{ "Next steps go to" | t(lang) }}</p>
+    <ul class="la-aside-links">
+      <li><a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Open the Action Tracker" | t(lang) }}</a></li>
+      <li><a class="inline-link" href="{{ '/tools/five-s-audit/' | local(lang) }}">{{ "5S Audit" | t(lang) }}</a> · <a class="inline-link" href="{{ '/tools/daily-board/' | local(lang) }}">{{ "Daily Board" | t(lang) }}</a> · <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}">5 Whys</a></li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results la-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="lean-assessment-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/lean-assessment.js' | assetUrl }}" defer></script>

@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Energy & Water", "type": "Sustainability", "time": "Weekly", "summary": "Meter readings for electricity, gas, water, district heat or oil turned into use, cost and CO₂ for any period, kWh per occupied room night or per order, each meter against its own baseline, and a signal when a week drifts above it.", "url": "/tools/energy-tracker/", "cta": "Read the meters" },
+    "de": { "name": "Energie und Wasser", "type": "Nachhaltigkeit", "time": "Wöchentlich", "summary": "Zählerstände für Strom, Gas, Wasser, Fernwärme oder Heizöl als Verbrauch, Kosten und CO₂ für jeden Zeitraum, kWh pro belegte Zimmernacht oder pro Auftrag, jeder Zähler gegen seinen eigenen Ausgangswert und ein Signal, wenn eine Woche darüber steigt.", "url": "/de/tools/energy-tracker/", "cta": "Zähler auswerten" },
+    "sq": { "name": "Energjia dhe uji", "type": "Qëndrueshmëria", "time": "Çdo javë", "summary": "Leximet e njehsorëve të energjisë elektrike, gazit, ujit, ngrohjes qendrore ose naftës të kthyera në konsum, kosto dhe CO₂ për çdo periudhë, kWh për natë dhome të zënë ose për porosi, çdo njehsor kundrejt vlerës së vet fillestare dhe një sinjal kur një javë ngrihet mbi të.", "url": "/sq/tools/energy-tracker/", "cta": "Lexo njehsorët" }
+  },
+  "routine": { "when": "Every week", "do": "Read the meters on Monday morning, type them in, and send any meter that drifts above its baseline to the Action Tracker as a check.", "de": { "when": "Jede Woche", "do": "Lesen Sie die Zähler am Montagmorgen ab, tragen Sie die Stände ein und geben Sie jeden Zähler, der über seinen Ausgangswert steigt, als Prüfung in die Maßnahmenliste." }, "sq": { "when": "Çdo javë", "do": "Lexo njehsorët të hënën në mëngjes, shkruaji dhe dërgo çdo njehsor që ngrihet mbi vlerën e vet fillestare si kontroll në listën e veprimeve." } },
+  "recipe": "example"
+}
