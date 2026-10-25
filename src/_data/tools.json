@@ -374,5 +374,13 @@
     "summary": "The documented risk assessment of each work area: hazards from the eleven hazard-factor groups, likelihood × severity on a 5 × 5 matrix, measures in the STOP order with owners and their effectiveness check, the residual risk and the review date, set against the events of the Safety Cross.",
     "url": "/tools/risk-assessment/",
     "cta": "Assess the risks"
+  },
+  {
+    "name": "Hoshin Kanri",
+    "type": "Strategy",
+    "time": "Monthly",
+    "summary": "The site's strategy on one X-matrix: breakthrough and annual objectives, improvement priorities, metrics and their owners, with the gaps listed. Catchball notes per priority, a bowling chart month by month, and a countermeasure when a metric misses twice in a row.",
+    "url": "/tools/hoshin-kanri/",
+    "cta": "Open the X-matrix"
   }
 ]

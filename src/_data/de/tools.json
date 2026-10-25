@@ -374,5 +374,13 @@
     "summary": "Die dokumentierte Gefährdungsbeurteilung jedes Arbeitsbereichs: Gefährdungen aus den elf Gruppen der Gefährdungsfaktoren, Wahrscheinlichkeit × Schwere auf einer 5 × 5 Matrix, Maßnahmen nach dem STOP-Prinzip mit Verantwortlichen und Wirksamkeitskontrolle, Restrisiko und Überprüfungstermin, abgeglichen mit den Ereignissen des Sicherheitskreuzes.",
     "url": "/de/tools/risk-assessment/",
     "cta": "Gefährdungen beurteilen"
+  },
+  {
+    "name": "Hoshin Kanri (X-Matrix)",
+    "type": "Strategie",
+    "time": "Monatlich",
+    "summary": "Die Strategie des Standorts auf einer X-Matrix: Durchbruch- und Jahresziele, Verbesserungsprioritäten, Kennzahlen und Verantwortliche, mit allen Lücken. Catchball-Notizen je Priorität, ein Bowling-Chart Monat für Monat und eine Gegenmaßnahme, wenn eine Kennzahl zweimal in Folge verfehlt.",
+    "url": "/de/tools/hoshin-kanri/",
+    "cta": "X-Matrix öffnen"
   }
 ]

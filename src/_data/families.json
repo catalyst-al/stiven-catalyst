@@ -268,7 +268,8 @@
       "/tools/project-portfolio/",
       "/tools/inventory-abc/",
       "/tools/smed/",
-      "/tools/eight-d/"
+      "/tools/eight-d/",
+      "/tools/hoshin-kanri/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -353,6 +354,11 @@
         "when": "When a problem returns",
         "do": "Open an 8D the day the customer complains: contain it within 24 hours, then verify the root cause and the escape point before you choose the fix.",
         "tool": "/tools/eight-d/"
+      },
+      {
+        "when": "Every month",
+        "do": "Enter last month's actuals on the bowling chart, agree a countermeasure with its owner for every metric that missed twice in a row, and close the gaps in the X-matrix.",
+        "tool": "/tools/hoshin-kanri/"
       }
     ],
     "next": "atlas"
