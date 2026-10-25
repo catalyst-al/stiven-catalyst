@@ -358,5 +358,13 @@
     "summary": "Time one changeover element by element, split it into internal and external work, convert and streamline by Shingo's steps, and see the minutes and euros freed and the new changeover standard.",
     "url": "/tools/smed/",
     "cta": "Study a changeover"
+  },
+  {
+    "name": "8D Report",
+    "type": "Quality",
+    "time": "Per problem",
+    "summary": "The Global 8D for a problem a customer saw, D0 to D8: containment within a day, 5W2H and IS / IS NOT, the root cause and the escape point both verified, corrective actions validated with data. Days open and to containment against targets, every action to the tracker, print and Word.",
+    "url": "/tools/eight-d/",
+    "cta": "Open an 8D"
   }
 ]

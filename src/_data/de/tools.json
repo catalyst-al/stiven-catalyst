@@ -358,5 +358,13 @@
     "summary": "Stoppen Sie einen Rüstvorgang Element für Element, trennen Sie internes und externes Rüsten, wandeln Sie um und verbessern Sie nach Shingos Schritten, und sehen Sie die gewonnenen Minuten und Euro und den neuen Rüststandard.",
     "url": "/de/tools/smed/",
     "cta": "Rüstvorgang untersuchen"
+  },
+  {
+    "name": "8D-Report",
+    "type": "Qualität",
+    "time": "Je Problem",
+    "summary": "Der Global 8D für ein Problem, das ein Kunde gesehen hat, D0 bis D8: Eindämmung innerhalb eines Tages, 5W2H und IST / IST NICHT, Grundursache und Schlupfstelle geprüft, Abstellmaßnahmen mit Daten validiert. Tage offen und bis zur Eindämmung gegen Zielzeiten, jede Maßnahme in die Maßnahmenliste, Druck und Word.",
+    "url": "/de/tools/eight-d/",
+    "cta": "8D eröffnen"
   }
 ]

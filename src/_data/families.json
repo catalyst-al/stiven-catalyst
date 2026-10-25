@@ -261,7 +261,8 @@
       "/tools/spaghetti-diagram/",
       "/tools/project-portfolio/",
       "/tools/inventory-abc/",
-      "/tools/smed/"
+      "/tools/smed/",
+      "/tools/eight-d/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -341,6 +342,11 @@
         "when": "Every month",
         "do": "Time one changeover of the line with the longest stops, move everything external out of the stop and print the new changeover standard for the machine.",
         "tool": "/tools/smed/"
+      },
+      {
+        "when": "When a problem returns",
+        "do": "Open an 8D the day the customer complains: contain it within 24 hours, then verify the root cause and the escape point before you choose the fix.",
+        "tool": "/tools/eight-d/"
       }
     ],
     "next": "atlas"
