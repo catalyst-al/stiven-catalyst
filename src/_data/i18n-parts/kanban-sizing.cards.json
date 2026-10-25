@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Kanban Sizing", "type": "Inventory", "time": "15 min", "summary": "Work out how many kanban cards each supermarket or two-bin loop needs, by Toyota's formula or a statistical safety stock, see the cards to add or take out and the stock value at maximum, and print the cards eight to an A4 sheet.", "url": "/tools/kanban-sizing/", "cta": "Size the loops" },
+    "de": { "name": "Kanban-Dimensionierung", "type": "Bestand", "time": "15 Min.", "summary": "Berechnen Sie, wie viele Kanban-Karten jeder Supermarkt- oder Zwei-Behälter-Regelkreis braucht, nach Toyotas Formel oder mit statistischem Sicherheitsbestand, sehen Sie die Karten, die dazukommen oder herausgenommen werden, und den Bestandswert beim Höchstbestand, und drucken Sie die Karten, acht auf ein A4-Blatt.", "url": "/de/tools/kanban-sizing/", "cta": "Regelkreise dimensionieren" },
+    "sq": { "name": "Përmasimi i Kanban-it", "type": "Stoku", "time": "15 min", "summary": "Llogarit sa karta kanban i duhen çdo cikli të supermarketit ose me dy kontejnerë, me formulën e Toyota-s ose me stok sigurie statistikor, shiko kartat që duhen shtuar ose hequr dhe vlerën e stokut maksimal, dhe printo kartat, tetë në një fletë A4.", "url": "/sq/tools/kanban-sizing/", "cta": "Përmaso ciklet" }
+  },
+  "routine": { "when": "Every month", "do": "Update the demand per day and the lead times, add the cards to every loop that has too few and take the extra ones out one at a time.", "de": { "when": "Jeden Monat", "do": "Aktualisieren Sie Tagesbedarf und Wiederbeschaffungszeiten, ergänzen Sie die Karten in jedem Regelkreis mit zu wenigen und nehmen Sie überzählige einzeln heraus." }, "sq": { "when": "Çdo muaj", "do": "Përditëso kërkesën ditore dhe kohët e rifurnizimit, shto kartat në çdo cikël që ka pak dhe hiqi ato të tepërtat një nga një." } },
+  "recipe": "example"
+}

@@ -1,0 +1,81 @@
+{
+  "storageKey": "sc-heijunka-de",
+  "title": "Heijunka (Produktionsglättung)",
+  "csv": "heijunka",
+  "defaults": { "name": "", "shifts": "2", "shiftMin": "480", "breakMin": "30", "start": "06:00", "days": "20", "runs": "", "batchDays": "" },
+  "text": {
+    "line": "Die Linie",
+    "linePlaceholder": "z. B. Verpackungslinie 2",
+    "productPlaceholder": "z. B. A · Starterset",
+    "loadNote": "In Losen fährt die Linie stundenlang die Zykluszeit eines Produkts: unter dem Takt wartet sie, über dem Takt gerät sie in Rückstand. Geglättet folgen lange und kurze Zykluszeiten aufeinander, und die Last gleicht sich über den Tag aus. Rüstvorgänge zählen ebenfalls als Last.",
+    "stockNote": "Bestand in Losen ≈ Bedarf pro Tag × Losintervall: Das Los muss bis zum nächsten Lauf des Produkts reichen (was während des Laufs verbraucht wird, bleibt außen vor). Geglättet ≈ der größte Lauf des Produkts; mit einem Behälter pro Lauf ein Pitch je Produkt. Sicherheitsbestand für Bedarfsschwankungen kommt in beiden Fällen hinzu: Prüfen Sie ihn mit Ihren eigenen Daten.",
+    "sources": "Formeln nach Mike Rother und John Shook, Learning to See (Sehen lernen; Lean Enterprise Institute, 1999), und Art Smalley, Creating Level Pull (Lean Enterprise Institute, 2004). Die vorgegebenen Schichtzeiten sind nur Vorgaben: Verwenden Sie Ihre eigenen."
+  },
+  "advice": {
+    "over": {
+      "title": "Erst Kapazität finden, dann glätten",
+      "meaning": "Der Tagesbedarf braucht mehr Zeit, als die Linie hat. Glätten verteilt die Arbeit gleichmäßig, es macht sie nicht kleiner: Jeder Mix gerät in Rückstand.",
+      "moves": [
+        "Prüfen Sie die Zykluszeiten vor Ort: Die Zykluszeit aus dem Arbeitsplan ist oft nicht die, mit der die Linie heute läuft.",
+        "Schaffen Sie Zeit dort, wo sie am günstigsten ist: eine dritte Schicht an einzelnen Tagen, Überstunden oder eine Produktfamilie auf eine andere Linie.",
+        "Planen Sie die Mitarbeitenden mit der Schichtkapazität, sobald die Zeit da ist, und glätten Sie dann den Mix."
+      ],
+      "question": "Welches Produkt liegt mit seiner Zykluszeit am weitesten über dem Takt, und warum?"
+    },
+    "epei": {
+      "title": "Zuerst die Rüstzeiten verkürzen",
+      "meaning": "Die Rüstvorgänge einer Runde über alle Produkte brauchen mehr als einen Tag freie Zeit, also kann nicht jedes Produkt jeden Tag gefertigt werden. Jeder lange Rüstvorgang drängt die Linie zurück in große Lose und große Bestände.",
+      "moves": [
+        "Nehmen Sie den längsten Rüstvorgang in die SMED-Analyse: internes und externes Rüsten trennen und das Externe aus dem Stillstand holen.",
+        "Fertigen Sie die Produkte mit hohem Volumen jeden Tag und die mit kleinem Volumen in festem Rhythmus (jeden zweiten Tag), bis die Rüstzeiten mehr zulassen.",
+        "Berechnen Sie den EPEI nach jeder SMED-Runde neu und nehmen Sie einen Lauf pro Tag hinzu, sobald er passt."
+      ],
+      "question": "Was wäre nötig, um auf das Produkt mit dem längsten Rüstvorgang in der halben Zeit umzurüsten?"
+    },
+    "nofit": {
+      "title": "Weniger Läufe pro Tag oder kürzere Rüstzeiten",
+      "meaning": "Die gewählten Läufe pro Tag brauchen mehr Rüstzeit, als der Linie nach der Laufzeit bleibt. Die Linie würde den Tag mit Rückstand beenden.",
+      "moves": [
+        "Planen Sie vorerst mit der Zahl der Läufe, die passt (siehe Warnung).",
+        "Verkürzen Sie den längsten Rüstvorgang mit SMED und erhöhen Sie dann die Läufe pro Tag um eins.",
+        "Prüfen Sie, ob die freie Zeit wirklich frei ist: Störungen und Qualitätsverluste brauchen sie auch."
+      ],
+      "question": "Welcher Rüstvorgang würde einen weiteren Lauf pro Tag möglich machen?"
+    },
+    "tight": {
+      "title": "Glätten, aber die freie Zeit schützen",
+      "meaning": "Der Mix passt, aber die Laufzeit belegt mehr als etwa 85 % des Tages. Jede Störung und jedes Qualitätsproblem geht von der Rüstzeit ab, und der geglättete Plan bricht zuerst.",
+      "moves": [
+        "Planen Sie einen Lauf pro Tag weniger als möglich, damit eine schlechte Stunde aufgeholt werden kann.",
+        "Verfolgen Sie den Pitch: Ist die Karte zu jedem Pitch-Intervall fertig? Verfehlte Pitches zeigen die Verluste früh.",
+        "Prüfen Sie die Zykluszeiten über dem Takt: Mit Standardarbeit ausgeglichen, schaffen sie Zeit für Rüstvorgänge."
+      ],
+      "question": "Wo hat die Linie gestern Zeit verloren, und hätte der Plan das überstanden?"
+    },
+    "ok": {
+      "title": "Box bestücken und im Pitch ziehen",
+      "meaning": "Der Mix passt mit Reserve: Jedes Produkt kann jeden Tag gefertigt werden, in mehreren Läufen, mit viel weniger Fertigwarenbestand als in Losen.",
+      "moves": [
+        "Bauen Sie die Heijunka-Box: eine Zeile pro Produkt, eine Spalte pro Pitch, die Karten in dieser Reihenfolge.",
+        "Ziehen Sie zu jedem Pitch-Intervall eine Spalte und prüfen Sie, ob die Linie mitgekommen ist; ein verfehlter Pitch ist ein sofort zu lösendes Problem.",
+        "Senken Sie den Fertigwarenbestand schrittweise auf das geglättete Niveau und nehmen Sie einen Lauf pro Tag hinzu, wenn SMED die Rüstzeiten verkürzt."
+      ],
+      "question": "Wer zieht die Karten zu jedem Pitch, und was passiert, wenn eine nicht fertig ist?"
+    }
+  },
+  "tips": [
+    ["Vom Bedarf ausgehen.", "Nehmen Sie den durchschnittlichen Bedarf pro Arbeitstag über einen Monat oder ein Quartal, nicht die Aufträge eines Tages: Glätten gleicht den Mix aus, der Sicherheitsbestand deckt die Schwankungen."],
+    ["Der Pitch ist der Herzschlag.", "Ein Behälter pro Pitch: Das Team sieht alle paar Minuten, ob es im Plan ist, statt erst am Schichtende."],
+    ["Die Läufe pro Tag sind der Hebel.", "Mehr Läufe pro Tag bedeuten weniger Bestand und eine gleichmäßigere Last, aber mehr Rüstvorgänge. Lassen Sie das Feld leer, nimmt das Tool die meisten, die passen."],
+    ["EPEI über einem Tag?", "Dann bestimmen die Rüstzeiten den Plan, nicht der Kunde. Verkürzen Sie sie zuerst."]
+  ],
+  "example": {
+    "line": { "name": "Verpackungslinie 2 (Sets)", "shifts": 2, "shiftMin": 480, "breakMin": 30, "start": "06:00", "days": 20, "runs": 4, "batchDays": 5 },
+    "products": [
+      { "name": "A · Starterset", "demand": 12000, "cycle": 27, "packout": 20, "changeover": 4 },
+      { "name": "B · Nachfüllset", "demand": 6000, "cycle": 36, "packout": 20, "changeover": 4 },
+      { "name": "C · Premiumset", "demand": 4000, "cycle": 45, "packout": 10, "changeover": 6 },
+      { "name": "D · Geschenkbox", "demand": 2000, "cycle": 60, "packout": 10, "changeover": 6 }
+    ]
+  }
+}

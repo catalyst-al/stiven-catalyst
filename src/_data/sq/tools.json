@@ -422,5 +422,21 @@
     "summary": "Pesho dhe regjistro mbetjet ushqimore, mallrat e skaduara dhe të dëmtuara, skarton dhe linon me arsyen dhe ku shkuan. Kg dhe euro të humbura për ditë, gramë për mysafir, Pareto e kategorive dhe e arsyeve, dhe javët kundrejt një objektivi uljeje.",
     "url": "/sq/tools/waste-log/",
     "cta": "Hap regjistrin"
+  },
+  {
+    "name": "Heijunka (niveli i prodhimit)",
+    "type": "Lean",
+    "time": "20 min",
+    "summary": "Kthe një plan me partia në një përzierje të niveluar: takti, pitch, ngarkesa dhe EPEI, kutia heijunka e ditës me orare, dhe ndërrimet që kushton kundrejt stokut të gatshëm që kursen.",
+    "url": "/sq/tools/heijunka/",
+    "cta": "Nivelo përzierjen"
+  },
+  {
+    "name": "Përmasimi i Kanban-it",
+    "type": "Stoku",
+    "time": "15 min",
+    "summary": "Llogarit sa karta kanban i duhen çdo cikli të supermarketit ose me dy kontejnerë, me formulën e Toyota-s ose me stok sigurie statistikor, shiko kartat që duhen shtuar ose hequr dhe vlerën e stokut maksimal, dhe printo kartat, tetë në një fletë A4.",
+    "url": "/sq/tools/kanban-sizing/",
+    "cta": "Përmaso ciklet"
   }
 ]

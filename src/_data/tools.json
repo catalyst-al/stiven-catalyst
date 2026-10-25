@@ -422,5 +422,21 @@
     "summary": "Weigh and log food waste, expired and damaged goods, scrap and linen with the reason and where it went. Kg and euro lost per day, grams per cover, the Pareto of categories and reasons, and the weeks against a reduction target.",
     "url": "/tools/waste-log/",
     "cta": "Open the log"
+  },
+  {
+    "name": "Heijunka",
+    "type": "Lean",
+    "time": "20 min",
+    "summary": "Turn a batched schedule into a levelled mix: takt, pitch, load and EPEI, the day's heijunka box with clock times, and the changeovers it costs against the finished stock it saves.",
+    "url": "/tools/heijunka/",
+    "cta": "Level the mix"
+  },
+  {
+    "name": "Kanban Sizing",
+    "type": "Inventory",
+    "time": "15 min",
+    "summary": "Work out how many kanban cards each supermarket or two-bin loop needs, by Toyota's formula or a statistical safety stock, see the cards to add or take out and the stock value at maximum, and print the cards eight to an A4 sheet.",
+    "url": "/tools/kanban-sizing/",
+    "cta": "Size the loops"
   }
 ]

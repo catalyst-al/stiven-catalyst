@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Përmasimi i Kanban-it
+seo_title: "Përmasimi i Kanban-it: sa karta kanban i duhen çdo cikli, me formulën e Toyota-s ose me stok sigurie statistikor, dhe kartat për printim"
+description: "Përmaso çdo cikël kanban dhe me dy kontejnerë: kartat sipas Toyota-s ose stokut të sigurisë, ndryshimi në vlerën e stokut dhe kartat për printim."
+activeNav: /sq/tools.html
+permalink: /sq/tools/kanban-sizing/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Stoku</p>
+  <h1>Përmasimi i Kanban-it</h1>
+  <p class="lede">Llogarit sa karta kanban i duhen çdo cikli të supermarketit ose të sistemit me dy kontejnerë, nga kërkesa ditore, koha e rifurnizimit dhe sasia për kontejner, me faktorin e sigurisë të Toyota-s ose me një stok sigurie statistikor. Shiko kartat që duhen shtuar ose hequr, stokun maksimal të çdo cikli dhe vlerën e tij, dhe printo kartat, tetë në një fletë A4.</p>
+</section>
+
+{% set cfg = sq.kanbanSizing %}
+{% include "partials/kanban-sizing.njk" %}

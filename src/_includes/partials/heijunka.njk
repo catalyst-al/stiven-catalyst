@@ -1,0 +1,86 @@
+{#- Heijunka: a batched schedule turned into a levelled mix (takt, pitch, load, EPEI, the heijunka box, batch against levelled); heijunka.js does the rest. -#}
+<section class="shell tool-layout hj-setup">
+  <div class="tool-panel" data-heijunka>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "The line and its time" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field dl-wide">
+          <label for="hj-line">{{ "Line, pick area or packing station" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="hj-line" name="name" autocomplete="off" placeholder="{{ cfg.text.linePlaceholder }}" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-shifts">{{ "Shifts per day" | t(lang) }}</label>
+          <input id="hj-shifts" name="shifts" inputmode="numeric" autocomplete="off" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-shift-min">{{ "Shift length (min)" | t(lang) }}</label>
+          <input id="hj-shift-min" name="shiftMin" inputmode="decimal" autocomplete="off" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-break-min">{{ "Planned breaks per shift (min)" | t(lang) }}</label>
+          <input id="hj-break-min" name="breakMin" inputmode="decimal" autocomplete="off" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-start">{{ "First shift starts at" | t(lang) }}</label>
+          <input id="hj-start" name="start" inputmode="numeric" autocomplete="off" placeholder="06:00" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-days">{{ "Working days in the period" | t(lang) }}</label>
+          <input id="hj-days" name="days" inputmode="decimal" autocomplete="off" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-runs">{{ "Runs of each product per day" | t(lang) }} <span class="optional">{{ "empty = the most that fit" | t(lang) }}</span></label>
+          <input id="hj-runs" name="runs" inputmode="numeric" autocomplete="off" data-line>
+        </div>
+        <div class="field">
+          <label for="hj-batch">{{ "Batch interval today (days)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="hj-batch" name="batchDays" inputmode="decimal" autocomplete="off" placeholder="{{ 'e.g. 5' | t(lang) }}" data-line>
+        </div>
+      </div>
+      <p class="form-note">{{ "Available time per day = shifts × (shift length − planned breaks). The batch interval is how often each product runs in today's schedule: 5 means once a week." | t(lang) }}</p>
+      <p class="form-note hj-derived" data-derived aria-live="polite"></p>
+    </fieldset>
+
+    <div class="dl-box">
+      <p class="kicker">2 · {{ "Products and families" | t(lang) }}</p>
+      <p class="form-note">{{ "Demand for the same period as the working days. Cycle time per unit at this line, in seconds; the pack-out is the units in one container (a tote, a case, a pallet); the changeover is the time to change over to this product. To shorten it, use" | t(lang) }} <a class="inline-link" href="{{ '/tools/smed/' | local(lang) }}">{{ "SMED Changeover" | t(lang) }}</a>.</p>
+      <div class="dl-table-wrap hj-list" tabindex="0" data-products-wrap>
+        <table class="dl-table hj-products">
+          <thead>
+            <tr><th scope="col">{{ "Product or family" | t(lang) }}</th><th scope="col" class="num">{{ "Demand in the period" | t(lang) }}</th><th scope="col" class="num">{{ "Cycle time (s)" | t(lang) }}</th><th scope="col" class="num">{{ "Pack-out (units)" | t(lang) }}</th><th scope="col" class="num">{{ "Changeover to it (min)" | t(lang) }}</th><th scope="col">{{ "Per day · pitch" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-products></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-empty>{{ "No products yet. Add the products or families the line makes, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example line" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-add>{{ "Add a product" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear>{{ "Clear the plan" | t(lang) }}</button>
+      </div>
+      <p class="form-note dl-log-status" data-status aria-live="polite"></p>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Changeovers too long?" | t(lang) }}</strong> {{ "Study the longest one in" | t(lang) }} <a class="inline-link" href="{{ '/tools/smed/' | local(lang) }}">{{ "SMED Changeover" | t(lang) }}</a>{{ ", then come back and add a run a day." | t(lang) }}</li>
+      <li><strong>{{ "Then staff it and fix it." | t(lang) }}</strong> {{ "Plan the people for the load with" | t(lang) }} <a class="inline-link" href="{{ '/tools/shift-capacity/' | local(lang) }}">{{ "Shift Capacity" | t(lang) }}</a>{{ ", fix the work at each station against takt in" | t(lang) }} <a class="inline-link" href="{{ '/tools/standard-work/' | local(lang) }}">{{ "Standard Work" | t(lang) }}</a>{{ ", and see the whole flow in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/value-stream-map/' | local(lang) }}">{{ "Value Stream Map" | t(lang) }}</a>.</li>
+      <li><strong>{{ "A pitch keeps missing?" | t(lang) }}</strong> {{ "Ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results hj-results" data-results tabindex="-1" hidden></section>
+<section class="shell hj-print" data-print hidden></section>
+
+<script type="application/json" id="heijunka-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/heijunka.js' | assetUrl }}" defer></script>

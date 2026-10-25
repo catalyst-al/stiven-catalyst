@@ -284,7 +284,9 @@
       "/tools/hoshin-kanri/",
       "/tools/site-compare/",
       "/tools/kaizen-event/",
-      "/tools/cost-of-quality/"
+      "/tools/cost-of-quality/",
+      "/tools/heijunka/",
+      "/tools/kanban-sizing/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -389,6 +391,16 @@
         "when": "Every month",
         "do": "Update the failure lines from last month's figures, report the cost of poor quality as a share of revenue and send the largest item to the Action Tracker.",
         "tool": "/tools/cost-of-quality/"
+      },
+      {
+        "when": "Every month",
+        "do": "Update the demand per product, check the EPEI and the runs per day that fit, and load the heijunka box for the next month.",
+        "tool": "/tools/heijunka/"
+      },
+      {
+        "when": "Every month",
+        "do": "Update the demand per day and the lead times, add the cards to every loop that has too few and take the extra ones out one at a time.",
+        "tool": "/tools/kanban-sizing/"
       }
     ],
     "next": "atlas"

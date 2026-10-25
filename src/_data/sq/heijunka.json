@@ -1,0 +1,135 @@
+{
+  "storageKey": "sc-heijunka-sq",
+  "title": "Heijunka (niveli i prodhimit)",
+  "csv": "heijunka",
+  "defaults": {
+    "name": "",
+    "shifts": "2",
+    "shiftMin": "480",
+    "breakMin": "30",
+    "start": "06:00",
+    "days": "20",
+    "runs": "",
+    "batchDays": ""
+  },
+  "text": {
+    "line": "Linja",
+    "linePlaceholder": "p.sh. Linja e paketimit 2",
+    "productPlaceholder": "p.sh. A · Kompleti fillestar",
+    "loadNote": "Me partia, linja punon për orë të tëra me kohën e ciklit të një produkti: nën takt pret, mbi takt mbetet prapa. Me nivelim, kohët e gjata dhe të shkurtra të ciklit ndjekin njëra-tjetrën dhe ngarkesa barazohet gjatë ditës. Edhe ndërrimet llogariten si ngarkesë.",
+    "stockNote": "Stoku me partia ≈ kërkesa në ditë × intervali i partisë: prodhimi duhet të mjaftojë deri në prodhimin e radhës të produktit (ajo që përdoret gjatë prodhimit lihet jashtë). Me nivelim ≈ prodhimi më i madh i produktit; me një kontejner për prodhim, një pitch për çdo produkt. Stoku i sigurisë për luhatjet e kërkesës shtohet në të dyja rastet: kontrolloje me të dhënat e tua.",
+    "sources": "Formulat sipas Mike Rother dhe John Shook, Learning to See (Lean Enterprise Institute, 1999), dhe Art Smalley, Creating Level Pull (Lean Enterprise Institute, 2004). Kohët e paracaktuara të turneve janë vetëm vlera fillestare: përdor tuajat."
+  },
+  "advice": {
+    "over": {
+      "title": "Gjej kapacitet para se të nivelosh",
+      "meaning": "Kërkesa e ditës kërkon më shumë kohë nga sa ka linja. Nivelimi e shpërndan punën në mënyrë të barabartë, nuk e zvogëlon: çdo përzierje do të mbetet prapa.",
+      "moves": [
+        "Kontrollo kohët e ciklit në vend: koha e ciklit nga plani i punës shpesh nuk është ajo me të cilën punon linja sot.",
+        "Shto kohë aty ku kushton më pak: një turn i tretë në disa ditë, orë shtesë, ose një familje produktesh në një linjë tjetër.",
+        "Planifiko njerëzit me Kapacitetin e turnit kur koha të jetë gati, pastaj kthehu dhe nivelo përzierjen."
+      ],
+      "question": "Cili produkt e ka kohën e ciklit më larg mbi takt, dhe pse?"
+    },
+    "epei": {
+      "title": "Shkurto fillimisht ndërrimet",
+      "meaning": "Ndërrimet e një rrethi me të gjitha produktet kërkojnë më shumë se një ditë kohë të lirë, prandaj jo çdo produkt mund të prodhohet çdo ditë. Çdo ndërrim i gjatë e shtyn linjën përsëri drejt partive të mëdha dhe stokut të madh.",
+      "moves": [
+        "Çoje ndërrimin më të gjatë në SMED: ndaj punën e brendshme nga e jashtmja dhe nxirr punën e jashtme nga ndalesa.",
+        "Prodho çdo ditë produktet me volum të lartë dhe ato me volum të ulët me një ritëm të caktuar (çdo dy ditë), derisa ndërrimet të lejojnë më shumë.",
+        "Rillogarit EPEI pas çdo rrethi SMED dhe shto një prodhim në ditë kur të përshtatet."
+      ],
+      "question": "Çfarë do të duhej për ta bërë ndërrimin te produkti më i gjatë në gjysmën e kohës?"
+    },
+    "nofit": {
+      "title": "Më pak prodhime në ditë, ose ndërrime më të shkurtra",
+      "meaning": "Prodhimet në ditë që zgjodhe kërkojnë më shumë kohë ndërrimi nga sa i mbetet linjës pas kohës së prodhimit. Linja do ta mbyllte ditën me vonesë.",
+      "moves": [
+        "Për tani planifiko me numrin e prodhimeve që përshtatet (tregohet te paralajmërimi).",
+        "Shkurto ndërrimin më të gjatë me SMED, pastaj rrit prodhimet në ditë me një.",
+        "Kontrollo nëse koha e lirë është vërtet e lirë: edhe defektet e makinave dhe humbjet e cilësisë e përdorin."
+      ],
+      "question": "Cili ndërrim do të lejonte edhe një prodhim më shumë në ditë?"
+    },
+    "tight": {
+      "title": "Nivelo, por mbro kohën e lirë",
+      "meaning": "Përzierja përshtatet, por koha e prodhimit zë më shumë se rreth 85 % të ditës. Çdo defekt apo problem cilësie ha nga koha e ndërrimeve, dhe plani i niveluar prishet i pari.",
+      "moves": [
+        "Mbaje numrin e prodhimeve në ditë një më pak se maksimumi që përshtatet, që një orë e keqe të mund të rikuperohet.",
+        "Ndiq pitch-in: në çdo interval pitch-i, a është gati karta? Pitch-et e humbura i tregojnë humbjet herët.",
+        "Shiko kohët e ciklit mbi takt: të balancuara me Punën standarde, ato lirojnë kohë për ndërrimet."
+      ],
+      "question": "Ku humbi kohë linja dje, dhe a do t'i kishte mbijetuar plani?"
+    },
+    "ok": {
+      "title": "Mbush kutinë dhe tërhiq në çdo pitch",
+      "meaning": "Përzierja përshtatet me rezervë: çdo produkt mund të prodhohet çdo ditë, në disa prodhime, me shumë më pak stok të gatshëm se me partia.",
+      "moves": [
+        "Ndërto kutinë heijunka: një rresht për produkt, një kolonë për pitch, kartat në këtë radhë.",
+        "Tërhiq një kolonë në çdo interval pitch-i dhe kontrollo nëse linja e mbajti ritmin; një pitch i humbur është problem për t'u zgjidhur menjëherë.",
+        "Ul stokun e gatshëm hap pas hapi deri në nivelin e niveluar, dhe shto një prodhim në ditë kur SMED t'i shkurtojë ndërrimet."
+      ],
+      "question": "Kush i tërheq kartat në çdo pitch, dhe çfarë ndodh kur një nuk është gati?"
+    }
+  },
+  "tips": [
+    [
+      "Nis nga kërkesa.",
+      "Përdor kërkesën mesatare për ditë pune gjatë një muaji ose tremujori, jo porositë e një dite: nivelimi barazon përzierjen, stoku i sigurisë mbulon luhatjet."
+    ],
+    [
+      "Pitch-i është rrahja e zemrës.",
+      "Një kontejner në çdo pitch: ekipi sheh çdo disa minuta nëse është në plan, në vend që ta shohë në fund të turnit."
+    ],
+    [
+      "Prodhimet në ditë janë leva.",
+      "Më shumë prodhime në ditë do të thotë më pak stok dhe ngarkesë më e barabartë, por më shumë ndërrime. Lëre fushën bosh dhe mjeti përdor maksimumin që përshtatet."
+    ],
+    [
+      "EPEI mbi një ditë?",
+      "Atëherë planin e vendosin ndërrimet, jo klienti. Shkurtoji ato fillimisht."
+    ]
+  ],
+  "example": {
+    "line": {
+      "name": "Linja e paketimit 2 (komplete)",
+      "shifts": 2,
+      "shiftMin": 480,
+      "breakMin": 30,
+      "start": "06:00",
+      "days": 20,
+      "runs": 4,
+      "batchDays": 5
+    },
+    "products": [
+      {
+        "name": "A · Kompleti fillestar",
+        "demand": 12000,
+        "cycle": 27,
+        "packout": 20,
+        "changeover": 4
+      },
+      {
+        "name": "B · Kompleti i rimbushjes",
+        "demand": 6000,
+        "cycle": 36,
+        "packout": 20,
+        "changeover": 4
+      },
+      {
+        "name": "C · Kompleti premium",
+        "demand": 4000,
+        "cycle": 45,
+        "packout": 10,
+        "changeover": 6
+      },
+      {
+        "name": "D · Kutia e dhuratës",
+        "demand": 2000,
+        "cycle": 60,
+        "packout": 10,
+        "changeover": 6
+      }
+    ]
+  }
+}

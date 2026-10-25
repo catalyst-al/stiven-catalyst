@@ -7133,5 +7133,14 @@
   "When a loop keeps running empty, ask why with": "Kur një cikël mbetet bosh vazhdimisht, pyet pse me",
   "Kanban cards": "Kartat kanban",
   "One card per container, eight to an A4 sheet. Cut them out, put them in sleeves and attach one to every full container of the loop.": "Një kartë për kontejner, tetë në një fletë A4. Preji, futi në mbështjellëse plastike dhe vendos një në çdo kontejner plot të ciklit.",
-  "Cards for": "Kartat për"
+  "Cards for": "Kartat për",
+  "Update the demand per product, check the EPEI and the runs per day that fit, and load the heijunka box for the next month.": "Përditëso kërkesën për çdo produkt, kontrollo EPEI dhe prodhimet në ditë që përshtaten, dhe mbush kutinë heijunka për muajin e ardhshëm.",
+  "One run of each product a day: {n} changeovers, {p} less finished stock": "Një prodhim i çdo produkti në ditë: {n} ndërrime, {p} më pak stok të gatshëm",
+  "One run of each product a day: {n} changeovers": "Një prodhim i çdo produkti në ditë: {n} ndërrime",
+  "Even one run a day needs {m} of changeovers, but only {free} are free: not every product can be made every day.": "Edhe një prodhim në ditë kërkon {m} ndërrime, por të lira janë vetëm {free}: jo çdo produkt mund të prodhohet çdo ditë.",
+  "{runs} runs a day need {m} of changeovers, but only {free} are free. The most that fit: {fits} a day.": "{runs} prodhime në ditë kërkojnë {m} ndërrime, por të lira janë vetëm {free}. Përshtaten deri në {fits} në ditë.",
+  "1 card": "1 kartë",
+  "Sequence: each run belongs at (k + ½) ÷ runs of the day; sorting the runs by that position (largest remainder) spreads every product evenly. Runs at the same position follow goal chasing on the work content: next comes the run that keeps the work closest to the day's average rate, so long and short cycle times alternate.": "Radha: çdo prodhim i përket pozicionit (k + ½) ÷ prodhimet e ditës; renditja sipas këtij pozicioni (mbetja më e madhe) e shpërndan çdo produkt në mënyrë të barabartë. Prodhimet në të njëjtin pozicion ndjekin goal chasing sipas përmbajtjes së punës: vjen më pas prodhimi që e mban punën më afër ritmit mesatar të ditës, që kohët e gjata dhe të shkurtra të ciklit të alternohen.",
+  "The work asked of the line in each productive hour (run time and changeovers), as a share of the hour: levelled with {n} runs a day, against one block of each product. Above 100 % it falls behind and has to catch up later.": "Puna që i kërkohet linjës në çdo orë prodhimi (koha e prodhimit dhe ndërrimet), si pjesë e orës: me nivelim me {n} prodhime në ditë, kundrejt një blloku për çdo produkt. Mbi 100 % ajo mbetet prapa dhe duhet të rikuperojë më vonë.",
+  "Update the demand per day and the lead times, add the cards to every loop that has too few and take the extra ones out one at a time.": "Përditëso kërkesën ditore dhe kohët e rifurnizimit, shto kartat në çdo cikël që ka pak dhe hiqi ato të tepërtat një nga një."
 }
