@@ -121,7 +121,7 @@
         "Një gjendje e synuar zbatohet hap pas hapi; rrjedha është e njëtrajtshme gjatë javës; radhët dhe koha e plotë vazhdojnë të bien."
       ],
       "advice": "Harto rrjedhën e vlerës së zonës në një fletë, me kohën e plotë dhe vendet ku puna pret. Pastaj nivelo punën gjatë ditës dhe përmaso kanban-in për materialet kryesore nga kërkesa e vërtetë.",
-      "tools": [{ "slug": "value-stream-map", "name": "Harta e rrjedhës së vlerës" }, { "slug": "heijunka", "name": "Heijunka (niveli i prodhimit)" }, { "slug": "kanban-sizing", "name": "Përmasimi i Kanban-it" }],
+      "tools": [{ "slug": "value-stream-map", "name": "Harta e rrjedhës së vlerës" }, { "slug": "heijunka", "name": "Heijunka (nivelizimi i prodhimit)" }, { "slug": "kanban-sizing", "name": "Përmasimi i Kanban-it" }],
       "action": "Harto rrjedhën aktuale të vlerës së {area} me kohën e plotë dhe radhët",
       "check": "Koha e plotë e matur në hartë, dhe sërish pas ndryshimit të parë"
     },

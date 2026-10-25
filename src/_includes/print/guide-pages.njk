@@ -120,7 +120,7 @@
   {{ chrome(number) }}
   <p class="kicker">{{ g.edition }}</p>
   <h2>{{ g.labels.contents }}</h2>
-  <ol class="toc{{ ' is-long' if toolsGuide.pages.length > 60 }}">
+  <ol class="toc{{ ' is-long' if toolsGuide.pages.length > 60 }}{{ ' is-longer' if toolsGuide.pages.length > 75 }}">
     {%- for other in toolsGuide.pages %}
     {%- if other not in ["cover", "contents", "back"] %}
     {%- if other.startsWith("family:") %}{% set f = F[other.slice(7)] %}
@@ -153,7 +153,7 @@
   <p class="fam-line">{{ f.line | t(lang) }}</p>
   <p>{{ g.families[f.id] }}</p>
   <p class="subhead">{{ g.labels.tools }}</p>
-  <div class="fam-tools">
+  <div class="fam-tools{{ ' is-long' if f.tools.length + f.learn.length > 18 }}">
     {%- for url in f.tools.concat(f.learn) %}
     <div><span>{{ T[url].name }}</span><em>{{ P["tool:" + url] }}</em></div>
     {%- endfor %}

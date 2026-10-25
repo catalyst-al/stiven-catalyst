@@ -427,7 +427,7 @@ test('every text of the page and the script has a German and an Albanian transla
   const cards = read('src/_data/i18n-parts/heijunka.cards.json');
   assert.equal(cards.family, 'lumen');
   assert.deepEqual(['en', 'de', 'sq'].map((lang) => cards.cards[lang].url), ['/tools/heijunka/', '/de/tools/heijunka/', '/sq/tools/heijunka/']);
-  assert.deepEqual(['en', 'de', 'sq'].map((lang) => cards.cards[lang].name), ['Heijunka', 'Heijunka (Produktionsglättung)', 'Heijunka (niveli i prodhimit)']);
+  assert.deepEqual(['en', 'de', 'sq'].map((lang) => cards.cards[lang].name), ['Heijunka', 'Heijunka (Produktionsglättung)', 'Heijunka (nivelizimi i prodhimit)']);
   for (const [file, lang] of [['src/tools/heijunka.njk', 'en'], ['src/de/tools/heijunka.njk', 'de'], ['src/sq/tools/heijunka.njk', 'sq']]) {
     const page = fs.readFileSync(file, 'utf8');
     assert.match(page, lang === 'en' ? /\{% set cfg = heijunka %\}/ : new RegExp(`\\{% set cfg = ${lang}\\.heijunka %\\}`));

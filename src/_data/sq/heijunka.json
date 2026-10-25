@@ -1,6 +1,6 @@
 {
   "storageKey": "sc-heijunka-sq",
-  "title": "Heijunka (niveli i prodhimit)",
+  "title": "Heijunka (nivelizimi i prodhimit)",
   "csv": "heijunka",
   "defaults": {
     "name": "",
