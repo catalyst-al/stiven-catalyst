@@ -1,0 +1,532 @@
+{
+  "storageKey": "sc-kaizen-event-sq",
+  "areas": [
+    "Pranimi",
+    "Mbledhja",
+    "Paketimi",
+    "Renditja",
+    "Ngarkimi",
+    "Kthimet"
+  ],
+  "eventStatuses": {
+    "planned": "E planifikuar",
+    "running": "Në zhvillim",
+    "followup": "Në ndjekje",
+    "closed": "E mbyllur"
+  },
+  "ideaStatuses": {
+    "idea": "Ide",
+    "trying": "Në provë",
+    "done": "Kryer",
+    "followup": "Për ndjekje"
+  },
+  "directions": {
+    "lower": "Më e ulët është më mirë",
+    "higher": "Më e lartë është më mirë"
+  },
+  "roles": [
+    {
+      "key": "operator",
+      "name": "Punonjës nga zona"
+    },
+    {
+      "key": "supervisor",
+      "name": "Drejtues ekipi ose përgjegjës i zonës"
+    },
+    {
+      "key": "maintenance",
+      "name": "Mirëmbajtja"
+    },
+    {
+      "key": "support",
+      "name": "Funksion mbështetës (cilësia, IT, inxhinieria, siguria)"
+    },
+    {
+      "key": "outsider",
+      "name": "Sy të freskët nga një zonë tjetër"
+    },
+    {
+      "key": "other",
+      "name": "Tjetër"
+    }
+  ],
+  "wastes": [
+    {
+      "key": "D",
+      "name": "Defektet"
+    },
+    {
+      "key": "O",
+      "name": "Mbiprodhimi"
+    },
+    {
+      "key": "W",
+      "name": "Pritja"
+    },
+    {
+      "key": "N",
+      "name": "Talenti i pashfrytëzuar"
+    },
+    {
+      "key": "T",
+      "name": "Transporti"
+    },
+    {
+      "key": "I",
+      "name": "Inventari"
+    },
+    {
+      "key": "M",
+      "name": "Lëvizja"
+    },
+    {
+      "key": "E",
+      "name": "Përpunimi i tepërt"
+    }
+  ],
+  "quadrants": [
+    "Fitore të shpejta",
+    "Projekte",
+    "Mbushëse",
+    "Pa shpërblim"
+  ],
+  "links": [
+    {
+      "url": "/tools/time-study/",
+      "name": "Studimi i kohës",
+      "note": "mat çdo hap ditën e parë"
+    },
+    {
+      "url": "/tools/spaghetti-diagram/",
+      "name": "Diagrami spageti",
+      "note": "vizato ecjen, para dhe pas"
+    },
+    {
+      "url": "/tools/value-stream-map/",
+      "name": "Harta e rrjedhës së vlerës",
+      "note": "ku qëndron ngjarja në rrjedhë"
+    },
+    {
+      "url": "/tools/standard-work/",
+      "name": "Puna standarde",
+      "note": "standardi i ri ditën e katërt"
+    },
+    {
+      "url": "/tools/five-s-audit/",
+      "name": "Auditi 5S",
+      "note": "mbaje zonën deri te kontrolli 30-ditor"
+    },
+    {
+      "url": "/tools/kaizen-board/",
+      "name": "Tabela Kaizen",
+      "note": "ide më të mëdha se ngjarja"
+    },
+    {
+      "url": "/tools/project-portfolio/",
+      "name": "Portofoli i projekteve",
+      "note": "probleme që kërkojnë një projekt DMAIC"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Zona, sponsori dhe drejtuesi i ekipit të zgjedhur; ngjarja është në planin e qendrës",
+      "weeks": 6
+    },
+    {
+      "text": "Karta e rënë dakord me sponsorin: shtrirja, objektivat, kufijtë, buxheti",
+      "weeks": 4
+    },
+    {
+      "text": "Të dhënat fillestare të mbledhura: volumet, kohët e ciklit, defektet, puna në proces",
+      "weeks": 3
+    },
+    {
+      "text": "Ekipi i zgjedhur dhe i ftuar: punonjës nga zona, funksione mbështetëse, sy të freskët",
+      "weeks": 3
+    },
+    {
+      "text": "Punonjësit të liruar nga prodhimi: zëvendësimi i planifikuar për çdo ditë të ngjarjes",
+      "weeks": 2
+    },
+    {
+      "text": "Zona e njoftuar: të gjitha turnet, zonat para dhe pas, këshilli i punonjësve kur duhet",
+      "weeks": 2
+    },
+    {
+      "text": "Të dhënat e gjendjes aktuale gati: plani i vendosjes, puna standarde, një video e procesit",
+      "weeks": 1
+    },
+    {
+      "text": "Materialet dhe mjetet gati: salla, kronometrat, shiriti dhe etiketat, fletët e mëdha, mirëmbajtja dhe IT në gatishmëri",
+      "weeks": 1
+    },
+    {
+      "text": "Prezantimi përmbyllës i rezervuar me sponsorin dhe zonën për ditën e fundit",
+      "weeks": 1
+    }
+  ],
+  "agenda": [
+    {
+      "title": "Trajnimi dhe gjendja aktuale",
+      "items": [
+        "Hapja: sponsori hap ngjarjen, ekipi lexon kartën",
+        "Bazat Lean: 8 humbjet, rrjedha, puna standarde",
+        "Ec procesin nga fillimi deri në fund të shtrirjes",
+        "Mat çdo hap: të paktën 10 cikle secili",
+        "Vizato diagramin spageti të ecjes së punonjësit",
+        "Shkruaj humbjet që pe, hap pas hapi",
+        "Bini dakord për vlerën fillestare të çdo objektivi"
+      ]
+    },
+    {
+      "title": "Analiza dhe idetë",
+      "items": [
+        "Krahaso kohët e ciklit me kohën takt",
+        "Gjej shkaqet rrënjësore të humbjes më të madhe (5 Whys, Fishbone)",
+        "Mblidh ide nga çdo anëtar i ekipit, punonjësit e zonës të parët",
+        "Vendos çdo ide sipas përpjekjes dhe ndikimit",
+        "Zgjidh çfarë provohet e para dhe nis gazetën Kaizen"
+      ]
+    },
+    {
+      "title": "Provo dhe zbato",
+      "items": [
+        "Provo ndryshimet e para në terren, me punonjësit",
+        "Afro mjetet dhe materialet te vendi i përdorimit",
+        "Mat çdo provë: mbaj atë që funksionon, ndrysho atë që jo",
+        "Kontrollo sigurinë dhe ergonominë e çdo ndryshimi",
+        "Jepi çdo pike të gazetës një përgjegjës dhe një datë"
+      ]
+    },
+    {
+      "title": "Standardizo dhe mat",
+      "items": [
+        "Shkruaj punën e re standarde me punonjësit",
+        "Trajno punonjësit e çdo turni që do ta zbatojnë",
+        "Mat çdo objektiv në procesin e ri",
+        "5S në zonë: etiketat, shenjat në dysheme, tabelat me hije",
+        "Bini dakord për listën e ndjekjes 30-ditore me përgjegjës dhe data"
+      ]
+    },
+    {
+      "title": "Prezantimi përmbyllës",
+      "items": [
+        "Mat edhe një herë objektivat në procesin që punon",
+        "Përgatit prezantimin përmbyllës: para dhe pas, çfarë ndryshoi",
+        "Prezantoja sponsorit dhe zonës, me punonjësit që prezantojnë",
+        "Dorëzoja listën e ndjekjes përgjegjësit të zonës",
+        "Falënderoje ekipin"
+      ]
+    }
+  ],
+  "plans": {
+    "3": [
+      [
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "4": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "5": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "fields": {
+    "name": "p.sh. Linja e paketimit 2: më pak ecje, paketim më i shpejtë",
+    "scopeStart": "p.sh. Arka mbërrin te tavolina e paketimit",
+    "scopeEnd": "p.sh. Pako me etiketë në transportierin e daljes",
+    "problem": "Çfarë nuk shkon sot, në numra, dhe kush e ndien",
+    "whyNow": "p.sh. Sezoni i pikut pas tetë javësh; orët e agjencisë mbi buxhet",
+    "outOfBounds": "p.sh. Asnjë transportier i ri, asnjë ndryshim në WMS, asnjë ndryshim i orarit të turneve",
+    "person": "Emri, roli",
+    "metric": "p.sh. Ecja për pako",
+    "unit": "p.sh. m",
+    "idea": "Çfarë ndryshon, ku, për kë",
+    "changed": "Ndryshimet në pak rreshta, ashtu si do t'i thoshin punonjësit"
+  },
+  "tips": [
+    [
+      "Përgatit më shumë sesa zhvillon.",
+      "Pjesa më e madhe e rezultatit vendoset në javët para ngjarjes: një shtrirje e ngushtë, objektiva të matshëm, të dhënat dhe punonjës vërtet të liruar nga prodhimi."
+    ],
+    [
+      "Ekipi janë njerëzit që e bëjnë punën.",
+      "Të paktën një punonjës nga zona, më mirë një e treta e ekipit. Shto një funksion mbështetës dhe një palë sy të freskët nga një zonë tjetër."
+    ],
+    [
+      "Shko e shiko, pastaj ndrysho.",
+      "Dita e parë është në terren: ec procesin, mate, vizato ecjen. Idetë vijnë ditën e dytë, provat ditën e tretë, sa ekipi është ende bashkë."
+    ],
+    [
+      "Mat para dhe pas në të njëjtën mënyrë.",
+      "I njëjti tregues, e njëjta njësi, e njëjta metodë. Mjeti thotë për çdo objektiv nëse më e ulët apo më e lartë është më mirë, që ndryshimi të mos lexohet kurrë së prapthi."
+    ],
+    [
+      "Mbylle gazetën brenda 30 ditëve.",
+      "Çfarë nuk mbaron në ngjarje shkon në listën e ndjekjes me përgjegjës dhe datë. Kontrolli 30-ditor është kur zona i tregon sponsorit se fitimet u mbajtën."
+    ]
+  ],
+  "example": {
+    "name": "Linja e paketimit 2: më pak ecje, paketim më i shpejtë",
+    "area": "Paketimi",
+    "days": 5,
+    "scopeStart": "Arka mbërrin te tavolina e paketimit",
+    "scopeEnd": "Pako me etiketë në transportierin e daljes",
+    "problem": "Paketuesit ecin 18,4 m për pako për të marrë kuti, shirit dhe etiketa nga printeri i përbashkët; një pako zgjat 96 s, dhe në pik presin 42 arka te tavolinat. Turni i pasdites ka nevojë çdo ditë për punonjës nga agjencia që ta mbyllë volumin.",
+    "whyNow": "Sezoni i pikut nis pas tetë javësh me 30% më shumë volum; orët e agjencisë janë 18% mbi buxhet.",
+    "sponsor": "Jonas Weber, menaxheri i qendrës",
+    "leader": "Elif Demir, drejtuesja e turnit të paketimit",
+    "facilitator": "Tom Richter, përmirësimi i vazhdueshëm",
+    "outOfBounds": "Asnjë transportier i ri, asnjë ndryshim në WMS, asnjë ndryshim i orarit të turneve apo i numrit të tavolinave.",
+    "budget": 5000,
+    "spent": 3850,
+    "savings": 61600,
+    "savingsNote": "Një vend agjencie me 8,8 orë të paguara në ditë më pak për 250 ditë: 2.200 orë me 28 €.",
+    "changed": "Kuti, shirit dhe etiketa te çdo tavolinë. Arkat rrokullisen te paketuesi në një korsi me rula për katër. Pesë madhësi kutie në vend të nëntë. Furnizim me kuti me dy kosha, i mbushur nga furnizuesi i materialeve. Skanimi i dytë i peshës hiqet.",
+    "members": [
+      {
+        "name": "Ana Petrova",
+        "role": "operator"
+      },
+      {
+        "name": "Mehmet Kaya",
+        "role": "operator"
+      },
+      {
+        "name": "Lukas Brandt",
+        "role": "operator"
+      },
+      {
+        "name": "Sara Lind",
+        "role": "supervisor"
+      },
+      {
+        "name": "Piotr Nowak",
+        "role": "maintenance"
+      },
+      {
+        "name": "Nina Hofmann",
+        "role": "support"
+      },
+      {
+        "name": "David Klein",
+        "role": "outsider"
+      }
+    ],
+    "goals": [
+      {
+        "metric": "Ecja për pako",
+        "unit": "m",
+        "better": "lower",
+        "baseline": 18.4,
+        "target": 9,
+        "result": 7.6,
+        "result30": 8.1
+      },
+      {
+        "metric": "Koha e ciklit për pako",
+        "unit": "s",
+        "better": "lower",
+        "baseline": 96,
+        "target": 75,
+        "result": 78,
+        "result30": 74
+      },
+      {
+        "metric": "Arka në pritje te tavolinat",
+        "unit": "arka",
+        "better": "lower",
+        "baseline": 42,
+        "target": 20,
+        "result": 18,
+        "result30": 22
+      },
+      {
+        "metric": "Pako për orë paketuesi",
+        "unit": "pako/orë",
+        "better": "higher",
+        "baseline": 37.5,
+        "target": 48,
+        "result": 46.2,
+        "result30": 48.6
+      }
+    ],
+    "undone": [
+      [
+        3,
+        1
+      ]
+    ],
+    "ideas": [
+      {
+        "text": "Kuti, shirit dhe material mbushës te çdo tavolinë, në vendin e përdorimit",
+        "waste": "M",
+        "effort": 1,
+        "impact": 5,
+        "status": "done",
+        "owner": "Ana Petrova",
+        "due": 2,
+        "closed": 2
+      },
+      {
+        "text": "Korsi me rula për katër arka para çdo tavoline, e para hyn e para del",
+        "waste": "T",
+        "effort": 3,
+        "impact": 4,
+        "status": "done",
+        "owner": "Piotr Nowak",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Jo më shumë se katër arka në pritje për tavolinë, korsia e shënuar në dysheme",
+        "waste": "I",
+        "effort": 1,
+        "impact": 4,
+        "status": "done",
+        "owner": "Sara Lind",
+        "due": 2,
+        "closed": 2
+      },
+      {
+        "text": "Pesë madhësi kutie te tavolina në vend të nëntë",
+        "waste": "E",
+        "effort": 2,
+        "impact": 3,
+        "status": "done",
+        "owner": "Mehmet Kaya",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Furnizim me kuti me dy kosha, i mbushur nga furnizuesi i materialeve",
+        "waste": "W",
+        "effort": 2,
+        "impact": 4,
+        "status": "done",
+        "owner": "Sara Lind",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Karta idesh te çdo tavolinë, të lexuara në fillim të turnit",
+        "waste": "N",
+        "effort": 1,
+        "impact": 2,
+        "status": "done",
+        "owner": "Elif Demir",
+        "due": 4,
+        "closed": 4
+      },
+      {
+        "text": "Një printer etiketash te çdo tavolinë, që printon në skanimin e fundit",
+        "waste": "M",
+        "effort": 3,
+        "impact": 5,
+        "status": "followup",
+        "owner": "Nina Hofmann",
+        "due": 29,
+        "closed": null,
+        "fu": true
+      },
+      {
+        "text": "Hiq skanimin e dytë të peshës pas miratimit nga cilësia",
+        "waste": "E",
+        "effort": 2,
+        "impact": 3,
+        "status": "done",
+        "owner": "Nina Hofmann",
+        "due": 11,
+        "closed": 9,
+        "fu": true
+      },
+      {
+        "text": "Riparo bashkimin e transportierit që bllokohet në pik",
+        "waste": "W",
+        "effort": 4,
+        "impact": 4,
+        "status": "done",
+        "owner": "Piotr Nowak",
+        "due": 14,
+        "closed": 13,
+        "fu": true
+      },
+      {
+        "text": "Trajno turnin e pasdites dhe të natës për punën e re standarde",
+        "waste": "D",
+        "effort": 2,
+        "impact": 4,
+        "status": "followup",
+        "owner": "Elif Demir",
+        "due": 32,
+        "closed": null,
+        "fu": true
+      },
+      {
+        "text": "Rrethi i furnizuesit të materialeve çdo 45 minuta në vend të 60",
+        "waste": "W",
+        "effort": 2,
+        "impact": 3,
+        "status": "trying",
+        "owner": "Sara Lind",
+        "due": 28,
+        "closed": null
+      },
+      {
+        "text": "Tavolina me lartësi të rregullueshme për të tetë vendet e paketimit",
+        "waste": "M",
+        "effort": 5,
+        "impact": 3,
+        "status": "idea",
+        "owner": "",
+        "due": null,
+        "closed": null
+      },
+      {
+        "text": "Lësho porositë në mbledhje të renditura sipas madhësisë së kutisë",
+        "waste": "O",
+        "effort": 5,
+        "impact": 5,
+        "status": "idea",
+        "owner": "",
+        "due": null,
+        "closed": null
+      }
+    ]
+  }
+}

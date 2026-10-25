@@ -398,5 +398,13 @@
     "summary": "Objektet që drejton krah për krah, secili i lexuar nga kodi i tij vetëm për lexim, pa u bashkuar: përqindja e dëmeve dhe e porosive të paplota, linjat në kohë, OEE, 5S, siguria, veprimet, mirëmbajtja dhe treguesit e hotelit, më i miri dhe më i dobëti të emërtuar, të renditura sipas një rregulli të dukshëm.",
     "url": "/sq/tools/site-compare/",
     "cta": "Krahaso objektet"
+  },
+  {
+    "name": "Ngjarja Kaizen",
+    "type": "Lean",
+    "time": "3–5 ditë",
+    "summary": "Planifiko, zhvillo dhe ndiq një ngjarje të shpejtë përmirësimi: karta me objektiva në numra, përgatitja e numëruar së prapthi nga dita e parë, axhenda standarde 3–5 ditë, idetë sipas humbjes në një matricë përpjekje-ndikim, objektivat para dhe pas dhe lista e ndjekjes 30-ditore. Prezantimi përmbyllës në A4 dhe Word.",
+    "url": "/sq/tools/kaizen-event/",
+    "cta": "Planifiko një ngjarje"
   }
 ]

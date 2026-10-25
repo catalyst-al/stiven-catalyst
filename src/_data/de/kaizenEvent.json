@@ -1,0 +1,532 @@
+{
+  "storageKey": "sc-kaizen-event-de",
+  "areas": [
+    "Wareneingang",
+    "Kommissionierung",
+    "Verpackung",
+    "Sortierung",
+    "Verladung",
+    "Retouren"
+  ],
+  "eventStatuses": {
+    "planned": "Geplant",
+    "running": "Läuft",
+    "followup": "Nachverfolgung",
+    "closed": "Abgeschlossen"
+  },
+  "ideaStatuses": {
+    "idea": "Idee",
+    "trying": "In Erprobung",
+    "done": "Erledigt",
+    "followup": "Nachverfolgung"
+  },
+  "directions": {
+    "lower": "Niedriger ist besser",
+    "higher": "Höher ist besser"
+  },
+  "roles": [
+    {
+      "key": "operator",
+      "name": "Mitarbeitende aus dem Bereich"
+    },
+    {
+      "key": "supervisor",
+      "name": "Teamleitung oder Vorgesetzte des Bereichs"
+    },
+    {
+      "key": "maintenance",
+      "name": "Instandhaltung"
+    },
+    {
+      "key": "support",
+      "name": "Unterstützende Funktion (Qualität, IT, Technik, Arbeitssicherheit)"
+    },
+    {
+      "key": "outsider",
+      "name": "Frischer Blick aus einem anderen Bereich"
+    },
+    {
+      "key": "other",
+      "name": "Andere"
+    }
+  ],
+  "wastes": [
+    {
+      "key": "D",
+      "name": "Fehler (Defects)"
+    },
+    {
+      "key": "O",
+      "name": "Überproduktion (Overproduction)"
+    },
+    {
+      "key": "W",
+      "name": "Warten (Waiting)"
+    },
+    {
+      "key": "N",
+      "name": "Ungenutztes Talent (Non-used talent)"
+    },
+    {
+      "key": "T",
+      "name": "Transport"
+    },
+    {
+      "key": "I",
+      "name": "Bestände (Inventory)"
+    },
+    {
+      "key": "M",
+      "name": "Bewegung (Motion)"
+    },
+    {
+      "key": "E",
+      "name": "Zusätzliche Bearbeitung (Extra processing)"
+    }
+  ],
+  "quadrants": [
+    "Schnelle Erfolge",
+    "Projekte",
+    "Lückenfüller",
+    "Undankbare Aufgaben"
+  ],
+  "links": [
+    {
+      "url": "/tools/time-study/",
+      "name": "Zeitstudie",
+      "note": "jeden Schritt am ersten Tag stoppen"
+    },
+    {
+      "url": "/tools/spaghetti-diagram/",
+      "name": "Spaghetti-Diagramm",
+      "note": "die Wege zeichnen, vorher und nachher"
+    },
+    {
+      "url": "/tools/value-stream-map/",
+      "name": "Wertstromanalyse",
+      "note": "wo das Event im Fluss liegt"
+    },
+    {
+      "url": "/tools/standard-work/",
+      "name": "Standardarbeit",
+      "note": "der neue Standard am vierten Tag"
+    },
+    {
+      "url": "/tools/five-s-audit/",
+      "name": "5S-Audit",
+      "note": "den Bereich bis zur 30-Tage-Prüfung halten"
+    },
+    {
+      "url": "/tools/kaizen-board/",
+      "name": "Kaizen-Board",
+      "note": "Ideen, die größer sind als das Event"
+    },
+    {
+      "url": "/tools/project-portfolio/",
+      "name": "Projektportfolio",
+      "note": "Probleme, die ein DMAIC-Projekt brauchen"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Bereich, Sponsor und Teamleitung gewählt; das Event steht im Standortplan",
+      "weeks": 6
+    },
+    {
+      "text": "Auftrag mit dem Sponsor vereinbart: Umfang, Ziele, Grenzen, Budget",
+      "weeks": 4
+    },
+    {
+      "text": "Ausgangsdaten erhoben: Mengen, Zykluszeiten, Fehler, Bestände in Arbeit",
+      "weeks": 3
+    },
+    {
+      "text": "Team ausgewählt und eingeladen: Mitarbeitende aus dem Bereich, unterstützende Funktionen, frischer Blick",
+      "weeks": 3
+    },
+    {
+      "text": "Mitarbeitende von der Produktion freigestellt: Vertretung für jeden Tag des Events geplant",
+      "weeks": 2
+    },
+    {
+      "text": "Bereich informiert: alle Schichten, die vor- und nachgelagerten Bereiche, wo nötig der Betriebsrat",
+      "weeks": 2
+    },
+    {
+      "text": "Daten zum Ist-Zustand bereit: Layout, Standardarbeit, ein Video des Prozesses",
+      "weeks": 1
+    },
+    {
+      "text": "Material und Werkzeug bereit: Raum, Stoppuhren, Klebeband und Etiketten, Flipcharts, Instandhaltung und IT auf Abruf",
+      "weeks": 1
+    },
+    {
+      "text": "Abschlusspräsentation mit dem Sponsor und dem Bereich für den letzten Tag geplant",
+      "weeks": 1
+    }
+  ],
+  "agenda": [
+    {
+      "title": "Schulung und Ist-Zustand",
+      "items": [
+        "Kick-off: Der Sponsor eröffnet, das Team liest den Auftrag",
+        "Lean-Grundlagen: die 8 Verschwendungsarten, Fluss, Standardarbeit",
+        "Den Prozess vom Anfang bis zum Ende des Umfangs abgehen",
+        "Jeden Schritt stoppen: mindestens 10 Zyklen je Schritt",
+        "Das Spaghetti-Diagramm der Wege zeichnen",
+        "Die gesehene Verschwendung Schritt für Schritt auflisten",
+        "Den Ausgangswert jedes Ziels festlegen"
+      ]
+    },
+    {
+      "title": "Analysieren und Ideen sammeln",
+      "items": [
+        "Die Zykluszeiten mit der Taktzeit vergleichen",
+        "Die Grundursachen der größten Verschwendung finden (5 Whys, Fishbone)",
+        "Ideen von jedem Teammitglied sammeln, die Mitarbeitenden des Bereichs zuerst",
+        "Jede Idee nach Aufwand und Nutzen einordnen",
+        "Festlegen, was zuerst erprobt wird, und die Kaizen-Zeitung beginnen"
+      ]
+    },
+    {
+      "title": "Erproben und umsetzen",
+      "items": [
+        "Die ersten Änderungen vor Ort erproben, mit den Mitarbeitenden",
+        "Werkzeug und Material an den Ort der Verwendung bringen",
+        "Jede Erprobung messen: behalten, was wirkt, ändern, was nicht wirkt",
+        "Arbeitssicherheit und Ergonomie jeder Änderung prüfen",
+        "Jedem Punkt der Zeitung einen Verantwortlichen und einen Termin geben"
+      ]
+    },
+    {
+      "title": "Standardisieren und messen",
+      "items": [
+        "Die neue Standardarbeit mit den Mitarbeitenden schreiben",
+        "Die Mitarbeitenden jeder Schicht unterweisen, die damit arbeiten",
+        "Jedes Ziel am neuen Prozess messen",
+        "5S im Bereich: Beschriftung, Bodenmarkierung, Schattenbretter",
+        "Die 30-Tage-Liste mit Verantwortlichen und Terminen vereinbaren"
+      ]
+    },
+    {
+      "title": "Abschlusspräsentation",
+      "items": [
+        "Die Ziele am laufenden Prozess noch einmal messen",
+        "Die Abschlusspräsentation vorbereiten: vorher und nachher, was sich geändert hat",
+        "Dem Sponsor und dem Bereich präsentieren, die Mitarbeitenden stellen vor",
+        "Die Nachverfolgungsliste an die Bereichsleitung übergeben",
+        "Das Team würdigen"
+      ]
+    }
+  ],
+  "plans": {
+    "3": [
+      [
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "4": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "5": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "fields": {
+    "name": "z. B. Packlinie 2: weniger Wege, schneller packen",
+    "scopeStart": "z. B. Behälter kommt am Packtisch an",
+    "scopeEnd": "z. B. Etikettiertes Paket auf dem Ausgangsförderband",
+    "problem": "Was heute nicht stimmt, in Zahlen, und wer es spürt",
+    "whyNow": "z. B. Hochsaison in acht Wochen; Leihkräftestunden über Budget",
+    "outOfBounds": "z. B. Kein neues Förderband, keine Änderung am WMS, keine Änderung der Schichtzeiten",
+    "person": "Name, Funktion",
+    "metric": "z. B. Weg pro Paket",
+    "unit": "z. B. m",
+    "idea": "Was sich ändert, wo, für wen",
+    "changed": "Die Änderungen in wenigen Zeilen, so wie die Mitarbeitenden sie sagen würden"
+  },
+  "tips": [
+    [
+      "Mehr vorbereiten als durchführen.",
+      "Der größte Teil des Ergebnisses entscheidet sich in den Wochen davor: ein enger Umfang, messbare Ziele, die Daten und Mitarbeitende, die wirklich von der Produktion freigestellt sind."
+    ],
+    [
+      "Das Team sind die Menschen, die die Arbeit machen.",
+      "Mindestens eine Person aus dem Bereich, besser ein Drittel des Teams. Dazu eine unterstützende Funktion und ein frischer Blick aus einem anderen Bereich."
+    ],
+    [
+      "Erst hingehen und sehen, dann ändern.",
+      "Tag eins ist vor Ort: abgehen, stoppen, die Wege zeichnen. Die Ideen kommen am zweiten Tag, die Erprobung am dritten, solange das Team noch zusammen ist."
+    ],
+    [
+      "Vorher und nachher gleich messen.",
+      "Dieselbe Kennzahl, dieselbe Einheit, dieselbe Methode. Das Tool sagt für jedes Ziel, ob niedriger oder höher besser ist, damit die Veränderung nie verkehrt herum gelesen wird."
+    ],
+    [
+      "Die Zeitung in 30 Tagen schließen.",
+      "Was im Event nicht fertig wird, kommt mit Verantwortlichem und Termin auf die Nachverfolgungsliste. Bei der 30-Tage-Prüfung zeigt der Bereich dem Sponsor, dass die Ergebnisse gehalten haben."
+    ]
+  ],
+  "example": {
+    "name": "Packlinie 2: weniger Wege, schneller packen",
+    "area": "Verpackung",
+    "days": 5,
+    "scopeStart": "Behälter kommt am Packtisch an",
+    "scopeEnd": "Etikettiertes Paket auf dem Ausgangsförderband",
+    "problem": "Die Packer gehen 18,4 m pro Paket, um Kartons, Klebeband und Etiketten vom gemeinsamen Drucker zu holen; ein Paket dauert 96 s, und zur Spitze warten 42 Behälter an den Packtischen. Die Spätschicht braucht jeden Tag Leihkräfte, um die Menge zu schaffen.",
+    "whyNow": "In acht Wochen beginnt die Hochsaison mit 30 % mehr Menge; die Leihkräftestunden liegen 18 % über Budget.",
+    "sponsor": "Jonas Weber, Standortleitung",
+    "leader": "Elif Demir, Schichtleitung Verpackung",
+    "facilitator": "Tom Richter, kontinuierliche Verbesserung",
+    "outOfBounds": "Kein neues Förderband, keine Änderung am WMS, keine Änderung der Schichtzeiten oder der Zahl der Packtische.",
+    "budget": 5000,
+    "spent": 3850,
+    "savings": 61600,
+    "savingsNote": "Eine Leihkraftstelle mit 8,8 bezahlten Stunden pro Tag weniger an 250 Tagen: 2.200 Stunden zu 28 €.",
+    "changed": "Kartons, Klebeband und Etiketten an jedem Packtisch. Die Behälter rollen auf einer Rollenbahn für vier zum Packer. Fünf Kartongrößen statt neun. Ein Zwei-Behälter-Nachschub für Kartons, aufgefüllt vom Materialversorger. Der zweite Wiegescan entfällt.",
+    "members": [
+      {
+        "name": "Ana Petrova",
+        "role": "operator"
+      },
+      {
+        "name": "Mehmet Kaya",
+        "role": "operator"
+      },
+      {
+        "name": "Lukas Brandt",
+        "role": "operator"
+      },
+      {
+        "name": "Sara Lind",
+        "role": "supervisor"
+      },
+      {
+        "name": "Piotr Nowak",
+        "role": "maintenance"
+      },
+      {
+        "name": "Nina Hofmann",
+        "role": "support"
+      },
+      {
+        "name": "David Klein",
+        "role": "outsider"
+      }
+    ],
+    "goals": [
+      {
+        "metric": "Weg pro Paket",
+        "unit": "m",
+        "better": "lower",
+        "baseline": 18.4,
+        "target": 9,
+        "result": 7.6,
+        "result30": 8.1
+      },
+      {
+        "metric": "Zykluszeit pro Paket",
+        "unit": "s",
+        "better": "lower",
+        "baseline": 96,
+        "target": 75,
+        "result": 78,
+        "result30": 74
+      },
+      {
+        "metric": "Wartende Behälter an den Packtischen",
+        "unit": "Behälter",
+        "better": "lower",
+        "baseline": 42,
+        "target": 20,
+        "result": 18,
+        "result30": 22
+      },
+      {
+        "metric": "Pakete pro Packerstunde",
+        "unit": "Pakete/h",
+        "better": "higher",
+        "baseline": 37.5,
+        "target": 48,
+        "result": 46.2,
+        "result30": 48.6
+      }
+    ],
+    "undone": [
+      [
+        3,
+        1
+      ]
+    ],
+    "ideas": [
+      {
+        "text": "Kartons, Klebeband und Füllmaterial an jedem Packtisch, am Ort der Verwendung",
+        "waste": "M",
+        "effort": 1,
+        "impact": 5,
+        "status": "done",
+        "owner": "Ana Petrova",
+        "due": 2,
+        "closed": 2
+      },
+      {
+        "text": "Rollenbahn für vier Behälter vor jedem Packtisch, first in, first out",
+        "waste": "T",
+        "effort": 3,
+        "impact": 4,
+        "status": "done",
+        "owner": "Piotr Nowak",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Höchstens vier wartende Behälter pro Packtisch, Bahn auf dem Boden markiert",
+        "waste": "I",
+        "effort": 1,
+        "impact": 4,
+        "status": "done",
+        "owner": "Sara Lind",
+        "due": 2,
+        "closed": 2
+      },
+      {
+        "text": "Fünf Kartongrößen am Packtisch statt neun",
+        "waste": "E",
+        "effort": 2,
+        "impact": 3,
+        "status": "done",
+        "owner": "Mehmet Kaya",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Zwei-Behälter-Nachschub für Kartons, aufgefüllt vom Materialversorger",
+        "waste": "W",
+        "effort": 2,
+        "impact": 4,
+        "status": "done",
+        "owner": "Sara Lind",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Ideenkarten an jedem Packtisch, zu Schichtbeginn gelesen",
+        "waste": "N",
+        "effort": 1,
+        "impact": 2,
+        "status": "done",
+        "owner": "Elif Demir",
+        "due": 4,
+        "closed": 4
+      },
+      {
+        "text": "Ein Etikettendrucker an jedem Packtisch, der beim letzten Scan druckt",
+        "waste": "M",
+        "effort": 3,
+        "impact": 5,
+        "status": "followup",
+        "owner": "Nina Hofmann",
+        "due": 29,
+        "closed": null,
+        "fu": true
+      },
+      {
+        "text": "Den zweiten Wiegescan nach der Freigabe durch die Qualität streichen",
+        "waste": "E",
+        "effort": 2,
+        "impact": 3,
+        "status": "done",
+        "owner": "Nina Hofmann",
+        "due": 11,
+        "closed": 9,
+        "fu": true
+      },
+      {
+        "text": "Die Zusammenführung des Förderbands reparieren, die zur Spitze staut",
+        "waste": "W",
+        "effort": 4,
+        "impact": 4,
+        "status": "done",
+        "owner": "Piotr Nowak",
+        "due": 14,
+        "closed": 13,
+        "fu": true
+      },
+      {
+        "text": "Spät- und Nachtschicht in der neuen Standardarbeit unterweisen",
+        "waste": "D",
+        "effort": 2,
+        "impact": 4,
+        "status": "followup",
+        "owner": "Elif Demir",
+        "due": 32,
+        "closed": null,
+        "fu": true
+      },
+      {
+        "text": "Runde des Materialversorgers alle 45 Minuten statt alle 60",
+        "waste": "W",
+        "effort": 2,
+        "impact": 3,
+        "status": "trying",
+        "owner": "Sara Lind",
+        "due": 28,
+        "closed": null
+      },
+      {
+        "text": "Höhenverstellbare Tische für alle acht Packtische",
+        "waste": "M",
+        "effort": 5,
+        "impact": 3,
+        "status": "idea",
+        "owner": "",
+        "due": null,
+        "closed": null
+      },
+      {
+        "text": "Die Aufträge nach Kartongröße sortiert in die Kommissionierung geben",
+        "waste": "O",
+        "effort": 5,
+        "impact": 5,
+        "status": "idea",
+        "owner": "",
+        "due": null,
+        "closed": null
+      }
+    ]
+  }
+}

@@ -70,9 +70,11 @@ const card = ({ kicker, number, title, sub }) => `<!doctype html><html><head><me
   .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
   .kicker { padding-top: 10px; font-size: 21px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #4ab5f7; }
   .number { font: 92px/0.8 "Archivo Black", sans-serif; letter-spacing: -.04em; color: #4ab5f7; }
-  .copy { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; max-width: 960px; padding-bottom: 18px; }
+  .copy { flex: 1; display: flex; flex-direction: column; justify-content: safe center; min-height: 0; max-width: 960px; padding-bottom: 18px; }
   h1 { margin: 0; font: 400 76px/1.04 Gelasio, serif; letter-spacing: -.025em; }
-  .sub { margin: 20px 0 0; font-size: 25px; font-weight: 400; line-height: 1.35; color: #a5b0b8; }
+  /* The lede keeps its two lines (it may not shrink) and the box overflows downwards ("safe center"), where fit()
+     can measure it and shrink the title, instead of cutting the lede to one line. */
+  .sub { flex-shrink: 0; margin: 20px 0 0; font-size: 25px; font-weight: 400; line-height: 1.35; color: #a5b0b8; }
   footer { display: flex; align-items: center; gap: 20px; padding-top: 26px; border-top: 2px solid rgba(255,255,255,.12); }
   footer img.photo { width: 76px; height: 76px; border-radius: 50%; }
   footer div { flex: 1; }
