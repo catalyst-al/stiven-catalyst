@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32, Vëllimi 11 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32, Vëllimi 11 ka 32, Vëllimi 12 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -517,6 +517,68 @@ vëllim nis cikli i dytë i traktatit.
 | Process mining, kufiri i regjistrave | `van-der-aalst-2016`, DOI 10.1007/978-3-662-49851-4 | Përshkrimi i botuesit |
 | Koha e procesit dhe pritja si kornizë | `vsm-rother-shook-1999`, `vsm-martin-osterling-2014` | Ekzistonin |
 | 8 / 7 / 3 / 2 dhe 12 nga 80, 48 → 20 min | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
+
+## Vëllimi 12: Taksa e ndërprerjes, si vëmendja e copëzuar krijon rrezik operacional të fshehur (25 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 12, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/12.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** Kapitulli V i PDF-së (skena, Mark, modeli, Westbrook) mbaron pa protokoll; testi kërkon
+  që çdo kapitull të mbyllet me një. U shtua "Mat kalimin, jo sloganin", me hapat që PDF-ja i mban në paragrafin e
+  fundit të faqes së modelit (emëruesi, dy kohët, supozimet, cilësia, rruga urgjente). Edhe faqja e metodës, si te
+  vëllimet e tjera; PDF-ja e mban metodën te faqja e burimeve.
+- **Grafikët.** Dy. (1) Shembulli i PDF-së, 12 kalime × 40 s = 480 s (8:00) dhe 7 × 40 s = 280 s (4:40), hipotetik me
+  flamur. (2) I ri dhe me burim: Westbrook et al. 2010, pjesa e dhënieve me të paktën një dështim procedural 69,6% →
+  84,6% dhe me të paktën një gabim klinik 25,3% → 38,9%, nga asnjë te tri ndërprerje (abstrakti), grafik `pairs` te
+  faqja "Ku gabimet ndryshojnë rrezikun". Shiritat konceptualë të PDF-së te Kapitulli IV (baseline / variable / risk,
+  pa vlera) u bënë rreshta, sepse një shirit pa numër nuk mbart informacion.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Altmann & Trafton 2002, Cognitive Science
+  26(1), 39–83, model i provuar me simulim; Trafton et al. 2003, IJHCS 58(5), 583–603, vonesë ndërprerjeje 8 s kundrejt
+  asnjë, përgatitje më e madhe dhe rikthim më i shpejtë; Adamczyk & Bailey 2004, CHI, 271–278, çastet ndikojnë te
+  gjendja emocionale dhe atribuimi shoqëror; Monk, Trafton & Boehm-Davis 2008, JEP: Applied 14(4), 299–313, "Three
+  experiments", deri në 1 min; Mark, Gudith & Klocke 2008, CHI, 107–110, "completed interrupted tasks in less time with no
+  difference in quality", me më shumë stres, frustrim, presion kohe dhe mundim; Grundgeiger & Sanderson 2009, IJMI 78(5),
+  293–307; Leroy 2009, OBHDP 109(2), 168–181; Westbrook et al. 2010, Arch Intern Med 170(8), 683–690, 98 infermiere,
+  6 reparte, 2 spitale në Sidnei, 4.271 ilaçe, 505 orë, +12,1% dështime procedurale dhe +12,7% gabime klinike për
+  ndërprerje; Adler & Benbunan-Fich 2012, IJHCS 70(2), 156–168, U e përmbysur për efikasitetin dhe rënie e saktësisë;
+  Brumby et al. 2013, JEP: Applied 19(2), 95–107, bllokim 10 s në eksperimentin e dytë që uli gabimet e rikthimit.
+  Asnjë gabim faktik në PDF.
+- **Çfarë nuk u konfirmua te burimi parësor.** N = 50 te Bailey & Konstan 2006 dhe "dy eksperimente" te Leroy 2009:
+  abstraktet nuk u hapën (ScienceDirect 403), shifrat dalin vetëm në burime dytësore. Faqja nuk i përdor si numra;
+  burimet kanë `via` që e thotë.
+- **Korrigjimet ndaj PDF-së.** (1) Faqja e përmbajtjes së PDF-së ngjit fjalët ("The Resume Point CardPrintable",
+  "Closing essayThe human cost", "Sources and limitationsPrimary", "Back coverStiven"). (2) Te faqja 4 kutia "Our
+  reading" del pas kokës së faqes tjetër, jashtë faqes së vet. (3) Kokat e faqeve 22 dhe 23 thyhen në dy rreshta
+  ("OCTOBER / 2026"). (4) Faqja e burimeve thotë "Eleven primary studies", por dy nga njëmbëdhjetë janë një model
+  (Altmann & Trafton) dhe një rishikim (Grundgeiger & Sanderson); faqja thotë "nëntë studime empirike, një model dhe një
+  rishikim". Të katra nuk ekzistojnë në printimin e faqes.
+- **Burimet.** Asnjëri nuk ekzistonte; u shtuan të njëmbëdhjetë. Të njëmbëdhjetë DOI-të zgjidhen në Crossref me të
+  njëjtët autorë, revista, vëllime dhe faqe.
+- **Lidhjet me faqen.** Esetë: what-a-night-auditor-learns (Kap. I), the-system-is-faster-than-you (Kap. II),
+  solve-it-or-escalate-it (Kap. III), 80-vehicles-you-cannot-see (Kap. IV), high-volume-days (Kap. V),
+  why-the-handover-is-underrated (Kap. VI). Mjeti: Shift Handover (`/tools/shift-handover/`), që i mban fushat e kartës
+  nga një turn te tjetri.
+- **Çfarë u ndryshua nga PDF-ja.** Tekstet u shkurtuan që të hyjnë në A5 (sidomos harta e kërkimit, faqja e Westbrook
+  dhe protokollet në gjermanisht). Asgjë tjetër.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Modeli i kujtesës për qëllimet; interferenca, forcimi, nxitja nga shenjat | `altmann-trafton-2002`, DOI 10.1207/s15516709cog2601_2 | Abstrakti përputhet |
+| Vonesë 8 s kundrejt asnjë; përgatitje dhe rikthim më i shpejtë | `trafton-2003`, DOI 10.1016/S1071-5819(03)00023-5 | Abstrakti përputhet (përmes kërkimit) |
+| Çastet e ndërprerjes, gjendja emocionale, atribuimi shoqëror | `adamczyk-bailey-2004`, DOI 10.1145/985692.985727 | Abstrakti përputhet |
+| Performanca, gabimet, bezdia, ankthi | `bailey-konstan-2006`, DOI 10.1016/j.chb.2005.12.009 | Titulli dhe regjistri; N = 50 i pakonfirmuar, nuk përdoret |
+| Tri eksperimente, kohëzgjatja dhe kërkesa, deri në 1 min | `monk-trafton-boehm-davis-2008`, DOI 10.1037/a0014402 | Abstrakti përputhet |
+| Më shpejt, pa dallim cilësie, më shumë stres | `mark-gudith-klocke-2008`, DOI 10.1145/1357054.1357072 | Abstrakti përputhet |
+| Pikëpamje teorike në shëndetësi | `grundgeiger-sanderson-2009`, DOI 10.1016/j.ijmedinf.2008.10.001 | Regjistri i botuesit |
+| Mbetja e vëmendjes | `leroy-2009`, DOI 10.1016/j.obhdp.2009.04.002 | Regjistri dhe burime dytësore |
+| 98 infermiere, 4.271 ilaçe, 505 orë; 69,6 → 84,6% dhe 25,3 → 38,9% | `westbrook-2010`, DOI 10.1001/archinternmed.2010.65 | Abstrakti (Europe PMC) përputhet |
+| U e përmbysur për efikasitetin, rënie e saktësisë | `adler-benbunan-fich-2012`, DOI 10.1016/j.ijhcs.2011.10.003 | Abstrakti (përmes kërkimit) |
+| Bllokim 10 s, më pak gabime rikthimi | `brumby-2013`, DOI 10.1037/a0032696 | Abstrakti përputhet |
+| 12 × 40 = 480 s; 7 × 40 = 280 s; 200 s | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
 
 ## Si shtohet një vëllim
 
