@@ -1,0 +1,176 @@
+{#- Kanban Sizing: the cards each kanban or two-bin loop of a supermarket needs, its stock and money, and the printed cards; kanban-sizing.js does the rest. -#}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-kanban-sizing>
+    <fieldset class="dl-box ks-entry">
+      <legend class="kicker">1 · {{ "The loop" | t(lang) }}</legend>
+      <form class="dl-grid" data-form novalidate>
+        <div class="field">
+          <label for="ks-part">{{ "Part / SKU" | t(lang) }}</label>
+          <input id="ks-part" name="part" autocomplete="off" maxlength="80" placeholder="{{ cfg.text.partPlaceholder }}">
+        </div>
+        <div class="field">
+          <label for="ks-name">{{ "Description" | t(lang) }}</label>
+          <input id="ks-name" name="name" autocomplete="off" maxlength="160" placeholder="{{ cfg.text.namePlaceholder }}">
+        </div>
+        <div class="field">
+          <label for="ks-location">{{ "Location" | t(lang) }} <span class="optional">{{ "where the full containers stand" | t(lang) }}</span></label>
+          <input id="ks-location" name="location" autocomplete="off" maxlength="80" placeholder="{{ cfg.text.locationPlaceholder }}">
+        </div>
+        <div class="field">
+          <label for="ks-source">{{ "Supplier or source process" | t(lang) }}</label>
+          <input id="ks-source" name="source" autocomplete="off" maxlength="120" placeholder="{{ cfg.text.sourcePlaceholder }}">
+        </div>
+        <div class="field">
+          <label for="ks-type">{{ "Type" | t(lang) }}</label>
+          <select id="ks-type" name="type">
+            <option value="kanban">{{ "Kanban loop" | t(lang) }}</option>
+            <option value="twobin">{{ "Two-bin" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ks-demand">{{ "Average demand per day (D)" | t(lang) }}</label>
+          <input id="ks-demand" name="demand" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-sd">{{ "σ of daily demand (σd)" | t(lang) }} <span class="optional">{{ "for the statistical method" | t(lang) }}</span></label>
+          <input id="ks-sd" name="sd" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-alpha">{{ "Safety factor α (%)" | t(lang) }} <span class="optional">{{ "empty: the default" | t(lang) }}</span></label>
+          <input id="ks-alpha" name="alpha" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-interval">{{ "Order interval (days)" | t(lang) }}</label>
+          <input id="ks-interval" name="interval" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-lead">{{ "Lead time (days)" | t(lang) }}</label>
+          <input id="ks-lead" name="lead" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-container">{{ "Container quantity (C)" | t(lang) }}</label>
+          <input id="ks-container" name="container" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-cost">{{ "Unit cost" | t(lang) }}</label>
+          <input id="ks-cost" name="cost" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ks-cards">{{ "Cards in the loop now" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="ks-cards" name="cards" type="text" inputmode="numeric" autocomplete="off">
+        </div>
+        <div class="tool-actions dl-wide">
+          <button class="button-primary" type="submit" data-submit>{{ "Add the loop" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-cancel hidden>{{ "Cancel" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-example>{{ "Load the example" | t(lang) }}</button>
+        </div>
+        <p class="form-note dl-wide" data-form-status aria-live="polite"></p>
+      </form>
+      <p class="form-note">{{ "Replenishment lead time L = order interval + lead time. The order interval is how long an empty container's card waits before it is collected or ordered (the milk run, the daily order); the lead time is how long until the full container is back at its place (picking, transport, the supplier or the source process). Both in working days, like the demand." | t(lang) }}</p>
+    </fieldset>
+
+    <details class="dl-box ks-abc" data-abc hidden>
+      <summary class="kicker">{{ "Bring in from ABC/XYZ Inventory" | t(lang) }} <span class="optional" data-abc-count></span></summary>
+      <p class="form-note">{{ "The SKUs saved in ABC/XYZ Inventory in this browser, largest annual value first, with their demand per day, its σd and their lead time. That list is only read, never changed. Tick the SKUs that run in a kanban loop." | t(lang) }}</p>
+      <ul class="ks-abc-list" data-abc-list></ul>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-abc-add>{{ "Add the ticked SKUs" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-abc-status aria-live="polite"></p>
+    </details>
+
+    <fieldset class="dl-box ks-settings">
+      <legend class="kicker">2 · {{ "Method" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="ks-method">{{ "Formula for every loop" | t(lang) }}</label>
+          <select id="ks-method" name="method" data-setting>
+            <option value="toyota">{{ "Toyota: safety factor α" | t(lang) }}</option>
+            <option value="stat">{{ "Statistical: service level and σd" | t(lang) }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ks-alpha-default">{{ "Default safety factor α (%)" | t(lang) }}</label>
+          <input id="ks-alpha-default" name="alpha" type="text" inputmode="decimal" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ks-service">{{ "Service level" | t(lang) }}</label>
+          <select id="ks-service" name="service" data-setting>
+            {%- for level in cfg.services %}
+            <option value="{{ level.value }}">{{ level.label }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="ks-currency">{{ "Currency" | t(lang) }}</label>
+          <input id="ks-currency" name="currency" type="text" autocomplete="off" maxlength="8" data-setting>
+        </div>
+      </div>
+      <p class="form-note">{{ "Defaults: Toyota's formula with α = 10%, and a 95% service level for the statistical method. Both are policy choices, not rules: check them against your own stock-outs and your supplier's reliability." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-ghost" type="button" data-reset-settings>{{ "Back to the defaults" | t(lang) }}</button>
+      </div>
+    </fieldset>
+
+    <div class="dl-box ks-list">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "The loops" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <div class="dl-table-wrap" tabindex="0" data-list-wrap hidden>
+        <table class="dl-table ks-table">
+          <thead>
+            <tr><th scope="col">{{ "Part" | t(lang) }}</th><th scope="col">{{ "Type" | t(lang) }}</th><th scope="col" class="num">{{ "D per day" | t(lang) }}</th><th scope="col" class="num">{{ "L (days)" | t(lang) }}</th><th scope="col" class="num">C</th><th scope="col" class="num">{{ "Cards now" | t(lang) }}</th><th scope="col" class="num">{{ "Cards needed" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Edit or remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-list></tbody>
+        </table>
+      </div>
+      <p class="form-note dl-log-status" data-list-status aria-live="polite"></p>
+      <p class="dl-empty" data-list-empty>{{ "No loops yet. Add the first one above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example supermarket of 8 parts" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear>{{ "Clear the list" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Start from the classes." | t(lang) }}</strong> {{ "Find the steady, high-runner SKUs that suit a kanban loop in" | t(lang) }} <a class="inline-link" href="{{ '/tools/inventory-abc/' | local(lang) }}">ABC/XYZ</a>{{ ", bring them in here, and give every loop with too few cards an owner in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>. {{ "When a loop keeps running empty, ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>.</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ks-results" data-results tabindex="-1" hidden></section>
+
+<section class="shell ks-cards" data-cards hidden>
+  <div class="dl-box">
+    <div class="dl-log-head">
+      <p class="kicker">{{ "Kanban cards" | t(lang) }}</p>
+      <p class="form-note" data-cards-note aria-live="polite"></p>
+    </div>
+    <p class="form-note">{{ "One card per container, eight to an A4 sheet. Cut them out, put them in sleeves and attach one to every full container of the loop." | t(lang) }}</p>
+    <div class="ks-cards-controls">
+      <div class="field">
+        <label for="ks-cards-for">{{ "Cards for" | t(lang) }}</label>
+        <select id="ks-cards-for" data-cards-for></select>
+      </div>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-print-cards>{{ "Print cards" | t(lang) }}</button>
+      </div>
+    </div>
+    <div class="ks-preview" data-cards-preview></div>
+  </div>
+</section>
+
+<script type="application/json" id="kanban-sizing-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/kanban-sizing.js' | assetUrl }}" defer></script>

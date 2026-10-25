@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Kanban Sizing
+seo_title: "Kanban sizing: how many kanban cards each loop needs, with Toyota's formula or a statistical safety stock, and the cards to print"
+description: "Size every kanban and two-bin loop: the cards needed by Toyota's formula or a safety stock, the change in stock value, and printable kanban cards."
+activeNav: /tools.html
+permalink: /tools/kanban-sizing/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Inventory</p>
+  <h1>Kanban Sizing</h1>
+  <p class="lede">Work out how many kanban cards each loop of your supermarket or two-bin system needs, from the demand per day, the replenishment lead time and the container quantity, with Toyota's safety factor or a statistical safety stock. See the cards to add or take out, the most each loop can hold and what it is worth, and print the cards eight to an A4 sheet.</p>
+</section>
+
+{% set cfg = kanbanSizing %}
+{% include "partials/kanban-sizing.njk" %}

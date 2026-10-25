@@ -14167,3 +14167,151 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   .cq-print .cq-print-table .num { text-align: right; white-space: nowrap; }
   .cq-print .cq-print-table tr { break-inside: avoid; }
 }
+/* ===== Heijunka (js/heijunka.js) =====
+   The products as a table of inputs, the results with the heijunka box: one row per product, one narrow column per
+   pitch interval, a card mark where a container is released. The box scrolls sideways on a phone and prints on A4
+   landscape. A run's start is told by its edge and by the sequence table; colour only repeats it. */
+.hj-list { max-height: 420px; }
+.hj-list input {
+  min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: var(--ink); font: inherit; font-size: 14px;
+}
+.hj-list input:focus-visible { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.hj-list .hj-text { width: 100%; min-width: 160px; }
+.hj-list .hj-num { width: 92px; text-align: right; }
+.hj-list[hidden] { display: none; }
+.hj-info { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.hj-derived { margin: 0; color: var(--ink); }
+.hj-derived:empty { display: none; }
+
+/* Results. */
+.hj-results .dl-stats { margin-bottom: 18px; }
+.hj-box-panel { grid-column: 1 / -1; }
+.hj-box-wrap { max-height: none; }
+.hj-box { border-collapse: separate; border-spacing: 0; font-size: 12px; }
+.hj-box th, .hj-box td { border-bottom: 1px solid var(--line); }
+.hj-box-name {
+  position: sticky; left: 0; z-index: 1; min-width: 132px; max-width: 180px; padding: 6px 10px 6px 0;
+  background: var(--paper-2); color: var(--ink); font-weight: 700; text-align: left; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.hj-box-time { padding: 4px 0; color: var(--muted); font-weight: 600; vertical-align: bottom; }
+.hj-box-time span { display: block; writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto; font-variant-numeric: tabular-nums; }
+.hj-cell { min-width: 22px; height: 30px; padding: 0; border-left: 1px dashed var(--line); text-align: center; }
+.hj-cell.is-start { border-left: 2px solid var(--ink); }
+.hj-cell.has-card { background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.hj-card { color: var(--blue); font-size: 11px; letter-spacing: -1px; line-height: 1; }
+.hj-box-key { margin-top: 10px; }
+.hj-facts { margin: 8px 0; padding-left: 20px; }
+.hj-facts li + li { margin-top: 4px; }
+.hj-formulas { margin: 0 0 10px; padding-left: 20px; }
+.hj-formulas li + li { margin-top: 6px; }
+.hj-next { margin-top: 10px; }
+.hj-compare tfoot td, .hj-seq tfoot td { border-top: 1px solid var(--line); font-weight: 800; }
+
+/* The printed box (A4 landscape): the rest of the page is hidden meanwhile. */
+.hj-print[hidden] { display: none; }
+@page hj-a4 { size: A4 landscape; margin: 10mm; }
+
+@media (max-width: 760px) {
+  .hj-box-name { min-width: 104px; max-width: 120px; }
+}
+
+@media print {
+  html.hj-printing main > :not(.hj-print) { display: none !important; }
+  html.hj-printing .hj-print { page: hj-a4; display: block !important; padding: 0; color: #000; }
+  .hj-print h2 { margin: 0 0 4px; font-size: 16px; }
+  .hj-print .hj-print-meta, .hj-print .dl-panel-note { margin: 0 0 8px; color: #000; font-size: 10px; }
+  .hj-print .dl-table-wrap { overflow: visible; border: 0; max-height: none; }
+  .hj-print .hj-box { width: 100%; table-layout: fixed; font-size: 7px; }
+  .hj-print .hj-box-name { position: static; width: 26mm; min-width: 0; max-width: none; padding: 2px 4px 2px 0; background: #fff; color: #000; font-size: 8px; }
+  .hj-print .hj-box th, .hj-print .hj-box td { border-bottom: 1px solid #999; }
+  .hj-print .hj-cell { min-width: 0; height: 14mm; border-left: 1px solid #ccc; }
+  .hj-print .hj-cell.is-start { border-left: 2px solid #000; }
+  .hj-print .hj-cell.has-card { background: #e8e8e8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hj-print .hj-card, .hj-print .hj-box-time { color: #000; }
+  .hj-print-sign { margin: 14px 0 0; font-size: 10px; }
+  .hj-setup { display: none !important; }
+  .hj-results { padding: 0; border: 0; }
+  .hj-results .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+/* ===== Kanban Sizing (js/kanban-sizing.js) ===== */
+/* The entry form and the ABC/XYZ import. */
+.ks-entry form { margin: 0; }
+.ks-entry input, .ks-entry select, .ks-settings input, .ks-settings select { min-width: 0; max-width: 100%; }
+.ks-entry .form-note:empty, .ks-abc .form-note:empty, .ks-list .dl-log-status:empty { display: none; }
+.ks-abc[hidden] { display: none; }
+.ks-abc summary { cursor: pointer; }
+.ks-abc summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+.ks-abc-list { display: grid; gap: 6px; max-height: 280px; margin: 10px 0 12px; padding: 0; overflow: auto; list-style: none; }
+.ks-abc-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px; align-items: start; font-size: 14px; color: var(--ink); }
+.ks-abc-list input { margin-top: 3px; }
+.ks-abc-list label { overflow-wrap: anywhere; }
+.ks-settings .form-note { margin: 12px 0 0; }
+
+/* The list of loops and the result tables. */
+.ks-table th, .ks-table td { vertical-align: middle; }
+.ks-table td.num, .ks-results td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ks-part { min-width: 0; text-align: left; font-weight: 400; }
+.ks-part strong { display: block; color: var(--ink); font-weight: 800; white-space: nowrap; }
+.ks-note { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; overflow-wrap: anywhere; }
+.ks-strong { font-weight: 800; }
+.ks-row-tools { white-space: nowrap; }
+.ks-small { min-height: 32px; padding: 4px 10px; font-size: 13px; white-space: nowrap; }
+.ks-flag { display: inline-block; font-size: 13px; font-weight: 800; white-space: nowrap; }
+.ks-flag.is-short { color: var(--danger); }
+.ks-flag.is-excess { color: var(--warn); }
+.ks-flag.is-ok, .ks-flag.is-new, .ks-flag.is-incomplete { color: var(--muted); font-weight: 700; }
+.ks-table tr:has(.ks-flag.is-short) th:first-child { box-shadow: inset 3px 0 0 var(--danger); }
+.ks-total th, .ks-total td { border-top: 2px solid var(--line); font-weight: 800; }
+
+/* Results. */
+.ks-results .result-head { margin-bottom: 14px; }
+.ks-meta { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.ks-results .dl-stats { margin-bottom: 18px; }
+.ks-flags { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.45; color: var(--ink); }
+.ks-flags li { padding-left: 10px; border-left: 3px solid var(--line); overflow-wrap: anywhere; }
+.ks-flags li.is-short { border-left-color: var(--danger); }
+.ks-flags li.is-excess { border-left-color: var(--warn); }
+.ks-method { display: grid; gap: 8px; margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--ink); }
+
+/* The kanban cards: a screen preview of the A4 sheets, eight cards each. */
+.ks-cards[hidden] { display: none; }
+.ks-cards { margin-top: 24px; }
+.ks-cards-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 16px; margin: 12px 0 16px; }
+.ks-cards-controls .field { flex: 1 1 260px; min-width: 0; }
+.ks-cards-controls select { min-width: 0; max-width: 100%; }
+.ks-cards-controls .tool-actions { margin: 0; }
+.ks-preview { display: grid; gap: 18px; }
+.ks-sheet { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 12px; border: 1px dashed var(--line); border-radius: var(--radius); background: var(--paper); }
+.ks-card { display: grid; grid-template-rows: auto 1fr auto; gap: 8px; min-width: 0; min-height: 168px; padding: 12px 14px; border: 2px solid var(--ink); border-radius: 8px; background: var(--card); color: var(--ink); }
+.ks-card-top { display: flex; justify-content: space-between; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.ks-card-count { color: var(--blue); }
+.ks-card-body p { margin: 0; }
+.ks-card-part { font-size: 24px; font-weight: 800; line-height: 1.1; overflow-wrap: anywhere; }
+.ks-card-name { margin-top: 4px !important; font-size: 14px; line-height: 1.35; overflow-wrap: anywhere; }
+.ks-card-facts { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; margin: 0; font-size: 13px; }
+.ks-card-facts dt { color: var(--muted); font-weight: 700; }
+.ks-card-facts dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.ks-card-facts dd:first-of-type { font-size: 18px; font-weight: 800; }
+@media (min-width: 620px) {
+  .ks-sheet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Printing: the results as usual; with "Print cards" only the sheets, eight cards to an A4 page. */
+@page ks-a4 { size: A4 portrait; margin: 10mm; }
+@media print {
+  .ks-entry, .ks-abc, .ks-settings, .ks-list .tool-actions, .ks-row-tools, .ks-results .result-actions, .ks-results .ck-actions, .ks-cards-controls { display: none !important; }
+  .ks-results .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html:not(.ks-printing) .ks-cards { display: none !important; }
+  html.ks-printing main > :not(.ks-cards) { display: none !important; }
+  html.ks-printing .ks-cards { page: ks-a4; display: block !important; margin: 0; padding: 0; break-before: auto; }
+  html.ks-printing .ks-cards .dl-box { padding: 0; border: 0; background: none; box-shadow: none; }
+  html.ks-printing .ks-cards .dl-log-head, html.ks-printing .ks-cards .form-note { display: none; }
+  .ks-preview { display: block; }
+  .ks-sheet { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 66mm); gap: 4mm; padding: 0; border: 0; background: none; break-after: page; break-inside: avoid; }
+  .ks-sheet:last-child { break-after: auto; }
+  .ks-card { min-height: 0; height: 66mm; padding: 4mm 5mm; border: 0.5mm solid #000; border-radius: 2mm; background: #fff; color: #000; break-inside: avoid; }
+  .ks-card-top { border-bottom-color: #000; }
+  .ks-card-count, .ks-card-facts dt { color: #000; }
+}

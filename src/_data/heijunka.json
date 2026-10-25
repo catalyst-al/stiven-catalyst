@@ -1,0 +1,81 @@
+{
+  "storageKey": "sc-heijunka",
+  "title": "Heijunka",
+  "csv": "heijunka",
+  "defaults": { "name": "", "shifts": "2", "shiftMin": "480", "breakMin": "30", "start": "06:00", "days": "20", "runs": "", "batchDays": "" },
+  "text": {
+    "line": "The line",
+    "linePlaceholder": "e.g. Packing line 2",
+    "productPlaceholder": "e.g. A · Starter kit",
+    "loadNote": "In batches the line runs each product's cycle time for hours: below takt it waits, above takt it falls behind. Levelled, the long and the short cycle times follow each other and the load evens out over the day. Changeovers count as load too.",
+    "stockNote": "Stock in batches ≈ demand per day × batch interval: the run has to last until the product's next run (what is used during the run is left out). Levelled ≈ the largest run of the product; with one container per run, one pitch of each product. Safety stock for demand swings comes on top in both cases: check it against your own data.",
+    "sources": "Formulas after Mike Rother and John Shook, Learning to See (Lean Enterprise Institute, 1999), and Art Smalley, Creating Level Pull (Lean Enterprise Institute, 2004). The default shift times are only defaults: use your own."
+  },
+  "advice": {
+    "over": {
+      "title": "Find capacity before you level",
+      "meaning": "The day's demand needs more time than the line has. Levelling spreads the work evenly, it does not make it smaller: every mix will fall behind.",
+      "moves": [
+        "Check the cycle times against the floor: a cycle time from the routing is often not the one the line runs today.",
+        "Add time where it is cheapest: a third shift on some days, overtime, or moving one family to another line.",
+        "Plan the people with Shift Capacity once the time is there, then come back and level the mix."
+      ],
+      "question": "Which product's cycle time is furthest above takt, and why?"
+    },
+    "epei": {
+      "title": "Shorten the changeovers first",
+      "meaning": "The changeovers of one round of all products need more than a day of free time, so not every product can be made every day. Every long changeover pushes the line back into big batches and big stock.",
+      "moves": [
+        "Take the longest changeover to SMED: separate the internal from the external work and move the external work out of the stop.",
+        "Run the high-volume products every day and the low-volume ones in a fixed rhythm (every second day) until the changeovers allow more.",
+        "Recalculate the EPEI after each SMED round and add one run a day when it fits."
+      ],
+      "question": "What would it take to change over to the longest product in half the time?"
+    },
+    "nofit": {
+      "title": "Fewer runs a day, or shorter changeovers",
+      "meaning": "The runs per day you chose need more changeover time than the line has left after the run time. The line would end the day behind.",
+      "moves": [
+        "Use the number of runs that fits (shown in the warning) as the plan for now.",
+        "Cut the longest changeover with SMED, then raise the runs per day by one.",
+        "Check that the free time is really free: breakdowns and quality losses use it too."
+      ],
+      "question": "Which changeover would let one more run a day fit?"
+    },
+    "tight": {
+      "title": "Level, but protect the free time",
+      "meaning": "The mix fits, but the run time uses more than about 85 % of the day. Every breakdown or quality problem eats into the changeover time, and the levelled plan breaks first.",
+      "moves": [
+        "Keep the runs per day one below the most that fit, so a bad hour can be recovered.",
+        "Track the pitch: at every pitch interval, is the card done? Misses show the losses early.",
+        "Look at the cycle times above takt: balancing them with Standard Work frees time for changeovers."
+      ],
+      "question": "Where did the line lose time yesterday, and would the plan have survived it?"
+    },
+    "ok": {
+      "title": "Load the box and pull at the pitch",
+      "meaning": "The mix fits with time to spare: every product can be made every day, in several runs, with much less finished stock than in batches.",
+      "moves": [
+        "Make the heijunka box: one row per product, one column per pitch, the cards in this sequence.",
+        "Pull one column at each pitch interval and check that the line kept up; a missed pitch is a problem to solve at once.",
+        "Lower the finished stock step by step to the levelled level, and add a run a day when SMED makes the changeovers shorter."
+      ],
+      "question": "Who pulls the cards at each pitch, and what happens when one is not done?"
+    }
+  },
+  "tips": [
+    ["Start from demand.", "Use the average demand per working day over a month or a quarter, not the orders of one day: levelling evens out the mix, safety stock covers the swings."],
+    ["Pitch is the heartbeat.", "One container every pitch: the team sees every few minutes whether it is on plan, instead of at the end of the shift."],
+    ["Runs per day is the lever.", "More runs a day mean less stock and a flatter load, and more changeovers. Leave the field empty and the tool uses the most that fit."],
+    ["EPEI above one day?", "Then the changeovers decide the plan, not the customer. Cut them first."]
+  ],
+  "example": {
+    "line": { "name": "Packing line 2 (kits)", "shifts": 2, "shiftMin": 480, "breakMin": 30, "start": "06:00", "days": 20, "runs": 4, "batchDays": 5 },
+    "products": [
+      { "name": "A · Starter kit", "demand": 12000, "cycle": 27, "packout": 20, "changeover": 4 },
+      { "name": "B · Refill kit", "demand": 6000, "cycle": 36, "packout": 20, "changeover": 4 },
+      { "name": "C · Premium kit", "demand": 4000, "cycle": 45, "packout": 10, "changeover": 6 },
+      { "name": "D · Gift box", "demand": 2000, "cycle": 60, "packout": 10, "changeover": 6 }
+    ]
+  }
+}

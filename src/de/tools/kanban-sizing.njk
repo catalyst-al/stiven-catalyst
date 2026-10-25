@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Kanban-Dimensionierung
+seo_title: "Kanban-Dimensionierung: wie viele Kanban-Karten jeder Regelkreis braucht, nach Toyotas Formel oder mit statistischem Sicherheitsbestand, und die Karten zum Drucken"
+description: "Dimensionieren Sie jeden Kanban- und Zwei-Behälter-Regelkreis: Kartenzahl nach Toyota oder Sicherheitsbestand, Bestandswert und Kanban-Karten zum Drucken."
+activeNav: /de/tools.html
+permalink: /de/tools/kanban-sizing/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Bestand</p>
+  <h1>Kanban-Dimensionierung</h1>
+  <p class="lede">Berechnen Sie, wie viele Kanban-Karten jeder Regelkreis Ihres Supermarkts oder Zwei-Behälter-Systems braucht, aus dem Tagesbedarf, der Wiederbeschaffungszeit und der Behältermenge, mit Toyotas Sicherheitsfaktor oder einem statistischen Sicherheitsbestand. Sehen Sie die Karten, die dazukommen oder herausgenommen werden, den Höchstbestand jedes Regelkreises und seinen Wert, und drucken Sie die Karten, acht auf ein A4-Blatt.</p>
+</section>
+
+{% set cfg = de.kanbanSizing %}
+{% include "partials/kanban-sizing.njk" %}

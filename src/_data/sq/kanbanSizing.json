@@ -1,0 +1,71 @@
+{
+  "storageKey": "sc-kanban-sizing-sq",
+  "text": {
+    "tool": "Përmasimi i Kanban-it",
+    "csvName": "permasimi-kanban",
+    "currency": "€",
+    "partPlaceholder": "P-1001",
+    "namePlaceholder": "Bulon gjashtëkëndësh M8×30, kuti me 200",
+    "locationPlaceholder": "Supermarketi A-01-1",
+    "sourcePlaceholder": "Furnitori ose paramontimi i linjës 2",
+    "owner": "Planifikimi i materialeve",
+    "checkShort": "Kartat shtesë janë printuar dhe janë në cikël, dhe supermarketi nuk ka mbetur bosh që atëherë."
+  },
+  "defaults": { "method": "toyota", "alpha": 10, "service": 95 },
+  "services": [
+    { "value": "90", "label": "90%" },
+    { "value": "95", "label": "95%" },
+    { "value": "97.5", "label": "97,5%" },
+    { "value": "98", "label": "98%" },
+    { "value": "99", "label": "99%" }
+  ],
+  "focus": {
+    "short": {
+      "meaning": "Këto cikle kanë më pak karta se sa kërkon kërkesa gjatë kohës së rifurnizimit. Kur kërkesa ecën me mesataren, kontejneri i fundit plot mbaron para se të kthehet i radhës: linja ose mbledhësit presin.",
+      "moves": [
+        "Printo kartat që mungojnë dhe futi në cikël me kontejnerë plot sot.",
+        "Krahaso kohën e rifurnizimit me realitetin: një milk run që vjen çdo dy ditë në vend të çdo dite kërkon më shumë karta.",
+        "Aty ku kartat humbasin në cikël, numëroji çdo javë në një orë të caktuar dhe zëvendëso menjëherë ato që mungojnë."
+      ],
+      "question": "Cili nga këto cikle mbeti bosh muajin e kaluar, dhe sa gjatë priti linja?"
+    },
+    "excess": {
+      "meaning": "Këto cikle kanë më shumë karta se sa duhen: në supermarket qëndrojnë më shumë kontejnerë plot se sa kërkojnë kërkesa gjatë kohës së rifurnizimit dhe rezerva e sigurisë. Kjo lidh para, hapësirë dhe trajtim, dhe fsheh problemet e ciklit.",
+      "moves": [
+        "Hiqi kartat e tepërta një nga një, secilën kur kthehet një kontejner, jo të gjitha njëherësh.",
+        "Ndiq ciklin dy javë pas çdo karte të hequr: nëse nuk mungon malli, hiq tjetrën.",
+        "Përdor hapësirën e liruar për pjesët që kanë nevojë për më shumë karta."
+      ],
+      "question": "Pse u shtuan këto karta: një mungesë e dikurshme, një kohë furnizimi më e gjatë, apo askush nuk i hoqi më?"
+    },
+    "ok": {
+      "meaning": "Çdo cikël ka aq karta sa kërkojnë kërkesa, koha e rifurnizimit dhe sasia për kontejner. Mbaje kështu: përmasimi është aq i mirë sa kërkesa dhe kohët që ka pas.",
+      "moves": [
+        "Printo kartat dhe vendos një në çdo kontejner plot.",
+        "Rillogarit çdo muaj, ose kur kërkesa ditore ndryshon më shumë se rreth 20%.",
+        "Kontrollo që çdo kartë të jetë në cikël: një kartë e humbur është një kontejner që mungon."
+      ],
+      "question": "Cila kërkesë apo kohë furnizimi do të ndryshojë muajin e ardhshëm, dhe cilat cikle prek?"
+    }
+  },
+  "tips": [
+    ["Kërkesa për ditë pune.", "Merr kërkesën mesatare për ditë pune të javëve të fundit, në të njëjtat ditë si koha e rifurnizimit. Një pjesë që përdoret 2.000 copë në javë në 5 ditë ka D = 400."],
+    ["L është më e gjatë se transporti.", "Koha e rifurnizimit shkon nga çasti kur një kontejner zbrazet deri kur kthehet plot: koha që karta e tij pret të mblidhet ose të porositet, plus mbledhja, transporti, furnitori ose procesi burim."],
+    ["Një metodë për të gjitha ciklet.", "Formula e Toyota-s i shton kërkesës gjatë kohës së rifurnizimit një faktor sigurie α. Metoda statistikore e llogarit stokun e sigurisë nga shpërndarja e kërkesës ditore (σd) dhe një nivel shërbimi; një cikël pa σd llogaritet me α."],
+    ["Dy kontejnerë për pjesë të vogla e të lira.", "Dy kontejnerë, secili me të paktën kërkesën gjatë kohës së rifurnizimit plus stokun e sigurisë. Kur i pari zbrazet, shkon për mbushje dhe përdoret i dyti."],
+    ["Kartat e sotme, për krahasim.", "Shkruaj sa karta ka çdo cikël sot: mjeti tregon kartat që duhen shtuar ose hequr dhe çfarë do të thotë kjo në vlerën e stokut."]
+  ],
+  "example": {
+    "settings": { "method": "toyota", "alpha": 10, "service": 95 },
+    "loops": [
+      { "part": "P-1001", "name": "Bulon gjashtëkëndësh M8×30, kuti me 200", "location": "Supermarketi A-01-1", "source": "Furnitori: elementë lidhës", "type": "kanban", "demand": 400, "sd": 80, "alpha": null, "interval": 1, "lead": 2, "container": 200, "cost": 0.06, "cards": 6 },
+      { "part": "P-1002", "name": "Shirit lidhës kabllosh 200 mm, qese me 500", "location": "Supermarketi A-01-2", "source": "Furnitori: material elektrik", "type": "kanban", "demand": 150, "sd": 40, "alpha": null, "interval": 1, "lead": 4, "container": 500, "cost": 0.03, "cards": 4 },
+      { "part": "P-1003", "name": "Kuti kartoni 400×300×300, tufë me 50", "location": "Supermarketi B-02-1", "source": "Furnitori: ambalazhe", "type": "kanban", "demand": 120, "sd": 30, "alpha": null, "interval": 1, "lead": 2, "container": 50, "cost": 1.38, "cards": 8 },
+      { "part": "P-1004", "name": "Film shtrëngues 23 µm, kuti me 6 rrotulla", "location": "Supermarketi B-02-2", "source": "Furnitori: ambalazhe", "type": "kanban", "demand": 6, "sd": 2, "alpha": null, "interval": 2, "lead": 5, "container": 6, "cost": 14.9, "cards": 6 },
+      { "part": "P-1005", "name": "Etiketë dërgese 100×150, rrotull", "location": "Supermarketi B-03-1", "source": "Furnitori: etiketa", "type": "kanban", "demand": 10, "sd": 3, "alpha": null, "interval": 1, "lead": 3, "container": 12, "cost": 3.2, "cards": 5 },
+      { "part": "P-1006", "name": "Guarnicion i sheshtë DN25", "location": "Linja 2, stacioni 4", "source": "Supermarketi C-01-3", "type": "twobin", "demand": 25, "sd": 6, "alpha": null, "interval": 1, "lead": 2, "container": 100, "cost": 0.45, "cards": 2 },
+      { "part": "P-1007", "name": "Paletë euro 1200×800", "location": "Depoja e paletave D-01", "source": "Riparimi i paletave", "type": "kanban", "demand": 40, "sd": 8, "alpha": null, "interval": 1, "lead": 1, "container": 10, "cost": 9.5, "cards": 9 },
+      { "part": "P-1008", "name": "Filtër ajri, kuti me 4", "location": "Magazina e pjesëve të mirëmbajtjes E-02", "source": "Furnitori: pjesë mirëmbajtjeje", "type": "kanban", "demand": 2, "sd": 1, "alpha": null, "interval": 5, "lead": 10, "container": 4, "cost": 22, "cards": null }
+    ]
+  }
+}

@@ -22,7 +22,7 @@ test('every cover has its small copies, and every tool preview its 720 px copy',
   }
   for (const lang of ['en', 'de', 'sq']) {
     const previews = fs.readdirSync(`src/media/tools/${lang}`).filter((name) => /^[a-z0-9-]+\.jpg$/.test(name));
-    assert.equal(previews.length, 53, lang);
+    assert.equal(previews.length, 55, lang);
     for (const name of previews) {
       assert.ok(fs.existsSync(`src/media/tools/${lang}/${name.replace(/\.jpg$/, '-720.webp')}`), `${lang}/${name}: run node scripts/thumbnails.mjs`);
     }

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Heijunka
+seo_title: "Heijunka production levelling: takt, pitch, EPEI and the heijunka box"
+description: "Turn a batched schedule into a levelled mix: takt, pitch, load and EPEI, the day's heijunka box, and the changeovers and finished stock against batches."
+activeNav: /tools.html
+permalink: /tools/heijunka/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Lean</p>
+  <h1>Heijunka</h1>
+  <p class="lede">Level the mix of a line, a pick area or a packing station the way Rother and Shook and Art Smalley describe it. Enter the time the line has and what each product needs, and see the takt, the pitch, the load and the EPEI, the day's sequence in a heijunka box with clock times, and what levelling costs in changeovers and saves in finished stock and in uneven hours. The box prints on A4 for the line.</p>
+</section>
+
+{% set cfg = heijunka %}
+{% include "partials/heijunka.njk" %}

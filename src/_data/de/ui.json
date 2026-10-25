@@ -7133,5 +7133,14 @@
   "When a loop keeps running empty, ask why with": "Läuft ein Regelkreis immer wieder leer, fragen Sie nach dem Warum mit",
   "Kanban cards": "Kanban-Karten",
   "One card per container, eight to an A4 sheet. Cut them out, put them in sleeves and attach one to every full container of the loop.": "Eine Karte pro Behälter, acht auf ein A4-Blatt. Schneiden Sie sie aus, stecken Sie sie in Hüllen und befestigen Sie an jedem vollen Behälter des Regelkreises eine.",
-  "Cards for": "Karten für"
+  "Cards for": "Karten für",
+  "Update the demand per product, check the EPEI and the runs per day that fit, and load the heijunka box for the next month.": "Aktualisieren Sie den Bedarf je Produkt, prüfen Sie den EPEI und die passenden Läufe pro Tag und bestücken Sie die Heijunka-Box für den nächsten Monat.",
+  "One run of each product a day: {n} changeovers, {p} less finished stock": "Ein Lauf je Produkt pro Tag: {n} Rüstvorgänge, {p} weniger Fertigwarenbestand",
+  "One run of each product a day: {n} changeovers": "Ein Lauf je Produkt pro Tag: {n} Rüstvorgänge",
+  "Even one run a day needs {m} of changeovers, but only {free} are free: not every product can be made every day.": "Schon ein Lauf pro Tag braucht {m} Rüstzeit, frei sind aber nur {free}: Nicht jedes Produkt kann jeden Tag gefertigt werden.",
+  "{runs} runs a day need {m} of changeovers, but only {free} are free. The most that fit: {fits} a day.": "{runs} Läufe pro Tag brauchen {m} Rüstzeit, frei sind aber nur {free}. Höchstens passen {fits} pro Tag.",
+  "1 card": "1 Karte",
+  "Sequence: each run belongs at (k + ½) ÷ runs of the day; sorting the runs by that position (largest remainder) spreads every product evenly. Runs at the same position follow goal chasing on the work content: next comes the run that keeps the work closest to the day's average rate, so long and short cycle times alternate.": "Reihenfolge: Jeder Lauf gehört an die Stelle (k + ½) ÷ Läufe des Tages; nach dieser Stelle sortiert (größter Rest) verteilt sich jedes Produkt gleichmäßig. Läufe an derselben Stelle folgen dem Goal Chasing nach Arbeitsinhalt: Als Nächstes kommt der Lauf, der die Arbeit am nächsten an der durchschnittlichen Rate des Tages hält, sodass lange und kurze Zykluszeiten abwechseln.",
+  "The work asked of the line in each productive hour (run time and changeovers), as a share of the hour: levelled with {n} runs a day, against one block of each product. Above 100 % it falls behind and has to catch up later.": "Die Arbeit, die in jeder produktiven Stunde von der Linie verlangt wird (Laufzeit und Rüstvorgänge), als Anteil der Stunde: geglättet mit {n} Läufen pro Tag, gegenüber je einem Block pro Produkt. Über 100 % gerät sie in Rückstand und muss später aufholen.",
+  "Update the demand per day and the lead times, add the cards to every loop that has too few and take the extra ones out one at a time.": "Aktualisieren Sie Tagesbedarf und Wiederbeschaffungszeiten, ergänzen Sie die Karten in jedem Regelkreis mit zu wenigen und nehmen Sie überzählige einzeln heraus."
 }

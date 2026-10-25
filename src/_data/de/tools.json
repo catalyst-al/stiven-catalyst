@@ -422,5 +422,21 @@
     "summary": "Lebensmittelabfall, abgelaufene und beschädigte Ware, Ausschuss und Wäsche mit Grund und Verbleib wiegen und erfassen. Kilogramm und Euro Verlust pro Tag, Gramm pro Gast, das Pareto der Kategorien und Gründe und die Wochen gegenüber einem Reduktionsziel.",
     "url": "/de/tools/waste-log/",
     "cta": "Protokoll öffnen"
+  },
+  {
+    "name": "Heijunka (Produktionsglättung)",
+    "type": "Lean",
+    "time": "20 Min.",
+    "summary": "Verwandeln Sie einen Losplan in einen geglätteten Mix: Takt, Pitch, Auslastung und EPEI, die Heijunka-Box des Tages mit Uhrzeiten und die Rüstvorgänge, die er kostet, gegenüber dem Fertigwarenbestand, den er spart.",
+    "url": "/de/tools/heijunka/",
+    "cta": "Mix glätten"
+  },
+  {
+    "name": "Kanban-Dimensionierung",
+    "type": "Bestand",
+    "time": "15 Min.",
+    "summary": "Berechnen Sie, wie viele Kanban-Karten jeder Supermarkt- oder Zwei-Behälter-Regelkreis braucht, nach Toyotas Formel oder mit statistischem Sicherheitsbestand, sehen Sie die Karten, die dazukommen oder herausgenommen werden, und den Bestandswert beim Höchstbestand, und drucken Sie die Karten, acht auf ein A4-Blatt.",
+    "url": "/de/tools/kanban-sizing/",
+    "cta": "Regelkreise dimensionieren"
   }
 ]
