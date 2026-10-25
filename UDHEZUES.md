@@ -135,7 +135,7 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ## 8. Mjetet
 
-Te **Mjete** (`/sq/tools.html`) janë **36 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
+Te **Mjete** (`/sq/tools.html`) janë **49 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
 (planetet): çdo rol ka mjetet e veta dhe një rutinë që thotë kur përdoret secili. Mjetet punojnë edhe pa internet,
 pasi janë hapur një herë në atë pajisje.
 
@@ -156,6 +156,9 @@ pasi janë hapur një herë në atë pajisje.
 | **Auditi 5S** | Auditi 5S, 6S ose 8S sipas zonës, me radar, trend, etiketat e kuqe, foto para/pas dhe plan auditesh me rotacion |
 | **Kryqi i sigurisë** | Kryqi i muajit për murin, ditët pa aksident, LTIFR, TRIR dhe piramida e ngjarjeve |
 | **Sendet e gjetura** | Regjistri i sendeve të gjetura nga dorëzimi deri te kthimi, policia, bamirësia ose asgjësimi |
+| **Statusi i dhomave** | Tabela e dhomave për recepsionin dhe housekeeping-un: VD, VC, VI, OOO, radha e pastrimit dhe kohët |
+| **Ankesat e mysafirëve** | Ankesa, rikuperimi (LEARN), kompensimi, ankesat për 100 net dhe dhomat që përsëriten |
+| **Paketa e printimit** | Letrat e së hënës me një klik: veprimet, mirëmbajtja, 5S, kartat e drejtuesve, kryqi, tabela |
 
 **Menaxher zone** (një zonë, javë pas jave):
 
@@ -173,6 +176,11 @@ pasi janë hapur një herë në atë pajisje.
 | **Raporti i operacioneve** | Raporti javor ose mujor për menaxherin, i shkruar vetë nga të dhënat e mjeteve të tjera |
 | **Inspektimi i dhomës** | Kontrolli i dhomës së pastruar para se të lirohet, me pikët sipas zonës dhe defektet |
 | **Planifikuesi i mirëmbajtjes** | Mirëmbajtja parandaluese dhe kontrollet ligjore sipas datës ose orëve të punës, me MTBF/MTTR |
+| **Sinjalet** | Çdo mëngjes: të gjitha sinjalet e mjeteve në një listë, sipas rëndësisë (karta kontrolli, objektiva, vonesa) |
+| **Planifikuesi i housekeeping-ut** | Sa persona pastrimi duhen sot dhe seksionet e tyre, të balancuara sipas minutave |
+| **Puna standarde e drejtuesit** | Rutina e çdo drejtuesi, e shënuar çdo ditë, me përqindjen e kryerjes |
+| **Kapaciteti i turnit** | Sa njerëz duhen për çdo proces dhe turn, kundrejt të planifikuarve, dhe gryka e ngushtë |
+| **Vlerësimi i rrezikut** | Gefährdungsbeurteilung: rreziqet sipas zonës (5×5), masat sipas STOP dhe rishikimi |
 
 **Menaxher procesesh** (një proces, nga problemi te standardi):
 
@@ -188,6 +196,11 @@ pasi janë hapur një herë në atë pajisje.
 | **Puna standarde** | Udhëzimi i punës hap pas hapi, me pikat kyçe dhe arsyet, në A4 dhe Word |
 | **Diagrami spageti** | Rrugët e ecjes mbi planin e katit, në metra, para dhe pas ndryshimit |
 | **Portofoli i projekteve** | Të gjitha projektet DMAIC në një faqe: faza, gjendja, kursimet dhe kalimi i radhës |
+| **Analiza ABC/XYZ e stokut** | Klasat ABC dhe XYZ, stoku i sigurisë, pika e ripërmbushjes dhe numërimet |
+| **SMED: ndërrimi i shpejtë** | Ndërrimi i makinës: puna e brendshme dhe e jashtme, para dhe pas, minutat dhe eurot |
+| **Raporti 8D** | Problemi i klientit nga D0 te D8, me shkakun e ndodhjes dhe të moszbulimit, në Word |
+| **Hoshin Kanri (matrica X)** | Strategjia në një faqe: objektivat, projektet, matësit dhe grafiku mujor |
+| **Krahasimi i objekteve** | Disa objekte krahasohen përmes kodeve vetëm për lexim, pa ndryshuar asgjë |
 | **Six Sigma në magazinë** | Kursi DMAIC në pesë hapa, me mjetin e duhur te çdo hap |
 
 **Karrierë:** Krijuesi i CV-së, CV për ATS dhe Letër motivimi.
@@ -203,6 +216,11 @@ pasi janë hapur një herë në atë pajisje.
 - **Tabela e ditës dhe Shift Pulse lexojnë vetë** regjistrat e mjeteve të tjera: dëmet, vonesat, sigurinë, OEE-në,
   auditin 5S dhe veprimet. Nuk shkruan gjë dy herë.
 - Shumë mjete kanë edhe butonat **Vazhdo me 5 Whys**, **Hape në Pareto 80/20** dhe **Hape si kartë kontrolli**.
+- **Sinjalet** lexojnë çdo mjet çdo mëngjes dhe rendisin atë që kërkon vëmendje; **Paketa e printimit** printon
+  letrat e javës nga të njëjtat të dhëna.
+- **Modaliteti në terren** (lart djathtas në çdo faqe mjeti) jep butona dhe tekst më të mëdhenj, për doreza dhe për
+  një dorë. Ngjitjet nga eksportet e sistemeve të hotelit, të magazinës ose të linjave njihen nga emrat e kolonave
+  (**U njoh si**); kontrollo gjithmonë përputhjen.
 
 ### Ku ruhen të dhënat
 
@@ -222,12 +240,18 @@ pasi janë hapur një herë në atë pajisje.
   `workers/sync/`) nuk mund ta lexojë. Kodi tregohet **vetëm një herë**: shkruaje diku. Mjetet e karrierës, rafti dhe
   leximet nuk ndahen kurrë. Një ekip që nuk përdoret 180 ditë fshihet vetë; **Fshi kopjen e ekipit** e fshin menjëherë.
   Për ta fikur kudo, lër bosh `sync.endpoint` te `src/_data/site.json`.
+- **Krijo një kod vetëm për lexim**: një kod që i lejon një menaxheri të shohë punën e ekipit pa e ndryshuar (serveri
+  refuzon çdo shkrim prej tij). Me këto kode, **Krahasimi i objekteve** krahason disa objekte. Kur dikush largohet
+  nga ekipi, **Ndrysho kodin e ekipit**: puna kalon te një kod i ri dhe kopja e vjetër fshihet; pajisjet e tjera
+  bashkohen sërish me kodin e ri.
+- **Më kujto veprimet që skadojnë në këtë pajisje** (te Lista e veprimeve): një njoftim një herë në ditë për veprimet
+  me afat të kaluar dhe të sotme. Mbetet në pajisje; asgjë nuk dërgohet.
 - Çdo mjet hapet herën e parë me një **shembull**, që të shihet menjëherë çfarë tregon. Shtyp **Fshi shembullin**
   ose shto të dhënat e tua dhe shembulli ikën vetë.
 
 ### Udhëzuesi i mjeteve
 
-**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e katërt**: një faqe
+**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e pestë**: një faqe
 për çdo mjet, në tri gjuhë, për t’u shfletuar ose shkarkuar si PDF. Botimet e mëparshme mbeten te faqja si u
 printuan. Te çdo mjet, poshtë, lidhja **Hape te faqja N** të çon te faqja e tij në libër.
 

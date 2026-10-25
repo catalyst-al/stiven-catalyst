@@ -6,7 +6,8 @@
 // [[Label]] is a button or field of a tool: it is printed in quotes, in the language of the guide (ui.json).
 // The page order is the same in every language: the roles and their tools in the order of families.json, the tools of
 // a role first and then its course. A role with a long routine (families.json) gives it a page of its own after the
-// role's opening page ("routine:<id>"); the routine of a role without one stays on its opening page.
+// role's opening page ("routine:<id>", and "routine:<id>/2" when it runs on); the routine of a role without one stays on
+// its opening page.
 import fs from "node:fs";
 
 const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url), "utf8"));
@@ -15,73 +16,37 @@ const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url)
 // on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
 // the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
 // src/media/guides/tools-guide/editions/).
-const EDITION = 4;
-const EDITION_DATE = "2026-10-24";
+const EDITION = 5;
+const EDITION_DATE = "2026-10-25";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
 
-const pages = [
-  "cover",
-  "about",
-  "contents",
-  "start",
-  "system",
-  "families",
-  "idea",
-  "machine",
-  "data",
-  "family:pulse",
-  "routine:pulse",
-  "tool:/tools/shift-pulse/",
-  "tool:/tools/damage-control/",
-  "tool:/tools/incomplete-control/",
-  "tool:/tools/delay-analyzer/",
-  "tool:/tools/night-audit/",
-  "tool:/tools/shift-handover/",
-  "tool:/tools/action-tracker/",
-  "tool:/tools/daily-board/",
-  "tool:/tools/five-s-audit/",
-  "tool:/tools/safety-cross/",
-  "tool:/tools/lost-found/",
-  "family:zenith",
-  "routine:zenith",
-  "tool:/tools/cx-control-tower/",
-  "tool:/tools/kpi-diagnostic/",
-  "tool:/tools/pareto/",
-  "tool:/tools/a3-report/",
-  "tool:/tools/kaizen-board/",
-  "tool:/tools/skills-matrix/",
-  "tool:/tools/oee/",
-  "tool:/tools/hotel-kpis/",
-  "tool:/tools/gemba-walk/",
-  "tool:/tools/ops-report/",
-  "tool:/tools/room-inspection/",
-  "tool:/tools/maintenance-planner/",
-  "family:lumen",
-  "routine:lumen",
-  "tool:/tools/sigma-control-chart/",
-  "tool:/tools/five-whys/",
-  "tool:/tools/fishbone/",
-  "tool:/tools/fmea/",
-  "tool:/tools/process-lab/",
-  "tool:/tools/time-study/",
-  "tool:/tools/value-stream-map/",
-  "tool:/tools/standard-work/",
-  "tool:/tools/spaghetti-diagram/",
-  "tool:/tools/project-portfolio/",
-  "tool:/tools/six-sigma-dmaic/",
-  "family:atlas",
-  "tool:/tools/cv-builder/",
-  "tool:/tools/ats-cv/",
-  "tool:/tools/cover-letter/",
-  "coaching",
-  "next",
-  "back",
-];
+// The pages, built from families.json: each role's opening page, its routine on a page of its own for the roles in
+// ROUTINE_PAGE (a routine of more than ROUTINE_PER_PAGE steps runs on to a second page, "routine:<id>/2", each
+// page with half of it), then its tools and its course. routinePart says which steps each routine page holds.
+const ROUTINE_PAGE = new Set(["pulse", "zenith", "lumen"]);
+const ROUTINE_PER_PAGE = 16;
+const routinePart = {};
+const pages = ["cover", "about", "contents", "start", "system", "families", "idea", "machine", "data"];
+for (const role of families) {
+  pages.push(`family:${role.id}`);
+  if (ROUTINE_PAGE.has(role.id)) {
+    const steps = role.routine.length;
+    const split = steps > ROUTINE_PER_PAGE ? Math.ceil(steps / 2) : steps;
+    pages.push(`routine:${role.id}`);
+    routinePart[`routine:${role.id}`] = { family: role.id, part: 1, from: 0, to: split };
+    if (split < steps) {
+      pages.push(`routine:${role.id}/2`);
+      routinePart[`routine:${role.id}/2`] = { family: role.id, part: 2, from: split, to: steps };
+    }
+  }
+  for (const url of [...role.tools, ...role.learn]) pages.push(`tool:${url}`);
+}
+pages.push("coaching", "next", "back");
 
 const en = {
   title: "The Tools Guide",
-  subtitle: "Thirty-six free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
+  subtitle: "Forty-nine free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
   edition: `Edition ${EDITION} · October 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -103,9 +68,9 @@ const en = {
   sections: {
     about: {
       kicker: "About this guide",
-      title: "Thirty-six tools, four planets, one idea",
+      title: "Forty-nine tools, four planets, one idea",
       body: [
-        "Stiven Catalyst has thirty-six free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
+        "Stiven Catalyst has forty-nine free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
         "This guide explains how the tools are organised, why the site looks the way it does, and how to use each tool, step by step. You do not need to read it in order: find your planet and start there.",
         { cards: [
           { title: "Free", text: "Every tool is free to use." },
@@ -165,7 +130,7 @@ const en = {
           "5 Whys sends its countermeasure to the Action Tracker or puts it on the Shift Handover.",
           "The CX Control Tower and the Fishbone send their causes to Pareto 80/20; the A3 Report takes the Pareto result and the 5 Whys worksheet.",
           "The Cover Letter takes your details from the CV Builder or the ATS CV.",
-          "The Operations Report reads them all and writes the report of the week or the month.",
+          "The Operations Report reads them all and writes the report of the week or the month; Signals reads them every morning and ranks what needs attention.",
         ] },
         "And on each role page, a coaching workspace turns the tools into a practice: a project with a goal, a measurement and a review date. More on the last pages.",
       ],
@@ -195,7 +160,7 @@ const en = {
           "Each tool keeps its work separately for each language of the site, except the list of actions and the workplace profile.",
           "A tool you have opened once opens again without a connection, and the site can be installed as an app.",
           "The browser keeps a restore point of all your work once a day and before a file replaces anything; [[Restore points]] in the same box brings one back.",
-          "[[Team sync]] shares the tools you tick with your team's devices. A code of six words makes the key, and the work is encrypted on the device, so the server cannot read it. Write the code down: it is shown once.",
+          "[[Team sync]] shares the tools you tick with your team's devices. A code of six words makes the key, and the work is encrypted on the device, so the server cannot read it. Write the code down: it is shown once. A [[Read-only code]] lets a manager see the team's work without changing it.",
           "Clearing the browser's data clears your work too. Save a file first.",
         ] },
       ],
@@ -218,14 +183,14 @@ const en = {
       ],
     },
     next: {
-      kicker: "Edition 4",
+      kicker: "Edition 5",
       title: "What could come next",
       body: [
         "Ideas under consideration, not promises with dates. Tell me which one would help you most.",
         { list: [
-          "Shift Pulse and the Daily Board reading Room Inspection and the Maintenance Planner.",
+          "Signals passing the day's first signals to the reminders on this device.",
           "The Delay Analyzer for routes without a recorded departure time.",
-          "Team sync with a code for each person, so that one member can leave without a new code for everyone.",
+          "Room Status reading the arrivals and departures of a hotel PMS export directly.",
         ] },
         "When a tool changes, this guide gets a new edition. The newest one is always on the site, and the earlier ones stay there as they were printed.",
       ],
@@ -236,9 +201,9 @@ const en = {
     },
   },
   families: {
-    pulse: "Eleven tools for one shift: log what goes wrong where it happens, keep the floor safe and in order, run the huddle, see the shift in one picture, keep the guests' lost items, and hand it over cleanly, with every action on one list.",
-    zenith: "Twelve tools for one area: read the week, find where a red number really comes from, start with the causes that matter most, put a problem on one sheet, grow the team's ideas and skills, inspect the rooms, plan the maintenance and report the week.",
-    lumen: "Ten tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, rate the risks, time, map and walk the flow, write the standard, and run improvements as a portfolio of projects.",
+    pulse: "Fourteen tools for one shift: log what goes wrong where it happens, keep the floor safe and in order, run the huddle, see the shift in one picture, run the hotel's rooms, lost items and complaints, and hand it over cleanly, with every action on one list and the week's paper printed in one go.",
+    zenith: "Seventeen tools for one area: start the morning with the signals that matter, read the week, find where a red number really comes from, put a problem on one sheet, grow the team's ideas and skills, plan the people, rooms and maintenance, assess the risks, keep the leaders' standard work and report the week.",
+    lumen: "Fifteen tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, solve a customer problem with 8D, time, map and walk the flow, cut changeovers, class the stock, write the standard, deploy the strategy, compare the sites and run improvements as a portfolio of projects.",
     atlas: "Three tools for the next role: a designed CV, a CV that screening software reads correctly, and a letter that matches.",
   },
   tools: {
@@ -615,6 +580,149 @@ const en = {
       get: "A DMAIC project charter to print, save as PDF or copy as text. Once every answer is right, the course gives a certificate of completion with your name: [[Print the certificate]].",
       data: "Your answers and your charter are kept only in this browser.",
     },
+    "/tools/signals/": {
+      when: "Every morning, two minutes before the morning meeting, once the tools you use hold a few days of data.",
+      how: [
+        "Choose the period the control charts read, 30 to 180 days, the [[Minimum severity]] and, if you wish, one tool. Safety, targets and overdue items are always read as of today.",
+        "Read the list from the top: safety first, then High, Medium and Low. Each line says which rule fired, a point beyond a limit, a run of 8 or a trend of 6, or what is overdue.",
+        "Act on the first lines: open the tool, [[Take it to 5 Whys]] or [[Add to actions]]. A change of method goes on the tool's timeline, so the limits start again from it.",
+        "[[Dismiss for today]] hides a signal until tomorrow. If it is still true then, it is back on the list.",
+      ],
+      get: "One ranked list of what needs attention in the tools of this browser: accidents and first aid of the last 7 days, control-chart signals (p, c, u and I-MR), missed targets, overdue actions, maintenance, lost property, red tags, ideas, re-cleans and layer walks, with the next move for the first one, to copy or print.",
+      data: "It keeps only your choices and what you dismissed today. It reads the other tools and changes nothing in them; the example stays on the page.",
+    },
+    "/tools/room-status/": {
+      when: "All day, on one screen for housekeeping and reception: each room is set as the work is done, and reception sees which rooms are ready.",
+      how: [
+        "Set up the rooms once: [[Add these rooms]] from the floors and room numbers, or paste a list, and type the room attendants with their floors.",
+        "Each morning, [[Start today's board]], then paste the room status report of the PMS and [[Import status]]. A code it does not know is listed, not guessed.",
+        "Tap a room to set its status, the DND, VIP and arrival flags, its attendant and a note. [[Start cleaning]] when the attendant goes in; an OOO room gets a reason and a date back.",
+        "Compare with the PMS again after lunch: reception clears a skipper or a sleeper at once. Send every OOO room to the Action Tracker.",
+      ],
+      get: "The next rooms to clean, early and VIP arrivals first, the rooms to inspect, the ready rooms against today's arrivals, the out-of-order share, the rooms per attendant and the minutes from check-out to clean and from clean to inspected. Print the board or the attendant sheets, and download it as CSV or Excel.",
+      data: "The board and 30 days of its history stay in this browser. With team sync turned on, every device of the team sees the same board.",
+    },
+    "/tools/guest-complaints/": {
+      when: "The moment a guest complains, in person, by phone, chat, email, review or survey, and again when it is resolved and the guest is called back.",
+      how: [
+        "Log it while the guest is still there: time, room, channel, category, severity and what happened in the guest's words, then [[Add to log]]. The clock for the target starts here.",
+        "Open the complaint and walk through LEARN: listen, empathise, apologise, resolve, notify. A critical complaint goes to the general manager at once, with an incident report.",
+        "Write the action taken, the compensation and its value in euros, when it was resolved and when the guest was contacted again, then [[Save the recovery]].",
+        "Choose an email, a chat message or a public answer to a review, and [[Copy the reply]].",
+      ],
+      get: "Complaints per 100 occupied room nights, the share resolved within target, the median time to resolve, the recovery cost, the guests satisfied after recovery, the repeat rooms and the Pareto of the categories. A repeat room goes to the Action Tracker; download the log as CSV or Excel.",
+      data: "The log stays in this browser. Write a guest's name only to call back; [[Remove guest names of closed complaints]] clears them once the cases are done.",
+    },
+    "/tools/housekeeping-planner/": {
+      when: "Every morning after the night audit, to staff the day, and on Thursday for the week ahead from the PMS forecast.",
+      how: [
+        "Take the rooms from Room Status in this browser, or type per floor and room type the departures, stay-overs, linen changes, VIP rooms and deep cleans.",
+        "Type the number of [[Attendants scheduled]] and, for the labour cost, the hourly rate. Under [[Workload standards]], set the minutes or credits per clean, the shift, the break and the productive share.",
+        "Read the attendants needed against those scheduled. When the plan is short, decide at 7:00: overtime, an agency attendant, stay-overs on request or deep cleans moved to a quieter day.",
+        "For the week, type or paste each day's rooms occupied the night before, departures and attendants scheduled.",
+      ],
+      get: "The workload in minutes or credits, the attendants needed in persons and hours, the labour cost, the minutes per occupied room, and one section per attendant, balanced by minutes on as few floors as possible. [[Print section sheets]] or [[Apply sections to Room Status]]; short days go to the Action Tracker.",
+      data: "The plan stays in this browser. When you apply the sections, it changes only the attendant of each room in Room Status, and undo puts it back.",
+    },
+    "/tools/leader-standard-work/": {
+      when: "Every day for each leader's routine, from the team leader's huddle to the site manager's walk, and weekly for the review with the next level up.",
+      how: [
+        "Add each leader with level, area, shift start, length of the day, working days and who they report to. Pick the template of your sector and level and [[Use this template]], or [[Add a task]].",
+        "Give each task its frequency, time, minutes, the tool it uses and what done looks like. Print the standard, or download it as a calendar file.",
+        "On the day, mark each task done, missed with a reason, or not due. What nobody marks by the end of its day counts as missed.",
+        "Once a week the next level up opens the review: the adherence, the task missed most and a note on what was agreed. [[Copy the review]] or print it.",
+      ],
+      get: "The adherence of each leader, done over due, the share of the day in standard work against the guide for the level, and the tasks missed most and why. A task missed three times in two weeks goes to the Action Tracker; download the log as CSV or Excel.",
+      data: "The leaders, their standards and the log stay in this browser. A standard can be saved as a template file for the next leader or another site.",
+    },
+    "/tools/shift-capacity/": {
+      when: "Once a week before the roster closes, and again whenever the volume forecast changes.",
+      how: [
+        "[[Load template]] or add each process: the unit it is counted in, its rate in units per productive hour and, if the forecast comes in another unit, the conversion. A Time Study rate is offered.",
+        "Add the shifts with their length, unpaid breaks and paid breaks with the briefing, then the utilisation and the [[Absence allowance (%)]].",
+        "Type or paste the volume forecast of the week: one row per day and shift, one volume per unit.",
+        "Type the planned heads per process, or only the total, and copy them with [[Copy to every shift of this name]].",
+      ],
+      get: "For every shift: the labour hours and the heads needed, with absence, the gap against the plan in heads and in hours, the bottleneck, the takt and how to close the gap with overtime, agency or qualified people from another process. A short shift goes to the actions; copy, print or download as CSV or Excel.",
+      data: "The processes, shifts, forecast and plan stay in this browser. It reads the Skills Matrix and the Time Study and changes nothing in them.",
+    },
+    "/tools/inventory-abc/": {
+      when: "Every month, with at least twelve months of demand per SKU, to set the counts, the reorder points and the slotting.",
+      how: [
+        "Open a CSV or Excel file or paste the rows: SKU, description, unit cost and one demand column per week or month; lead time, its spread, stock and picks are optional. [[Import rows]].",
+        "Check the columns used, then set the length of one demand column, the [[Cycle service level (%)]], the ABC and XYZ cut-offs and the counts per class per year.",
+        "Read the nine-cell matrix and the policy of each cell. Show the SKUs [[Below reorder point]] to see what to order; with an order cost, in economic lots (EOQ).",
+        "Put the AX and AY SKUs in the golden zone, at waist height and nearest dispatch, and clear the SKUs without demand.",
+      ],
+      get: "The ABC and XYZ class of every SKU, the nine-cell matrix with its policies, the cycle counts per week, the safety stock, reorder point and order quantity at your service level, and the golden-zone SKUs. [[Add to actions]] for the reorders, open the values in Pareto 80/20, or download as CSV or Excel.",
+      data: "The SKUs and the settings stay in this browser. Files are read in the browser, Excel included; nothing is uploaded.",
+    },
+    "/tools/smed/": {
+      when: "When a changeover keeps a machine or line stopped too long, before you plan smaller batches, and again a month after the new standard.",
+      how: [
+        "Name the machine, the two products and the target time. [[Start: last good piece]] when the old product stops, [[Lap: next element]] as each element ends, and stop at the first good piece at normal speed.",
+        "Give each element its category, then mark it internal, only possible with the machine stopped, or external, possible while it runs. Being done with the machine stopped today does not make it internal.",
+        "Convert what you can to external and streamline the rest: for each element its time after the change, who does it, the countermeasure with its owner and date, and the check.",
+        "Give the changeovers per week and the cost of a machine-minute, then [[Print the changeover standard]]: before the stop, machine stopped, after the restart. Or [[Save for Standard Work]].",
+      ],
+      get: "The stop as observed, after separating and after the plan, the minutes saved per changeover, the time and euros freed per week and per year, and the stop by category against Shingo's typical shares. The countermeasures go to the Action Tracker; the study downloads as CSV or Excel.",
+      data: "The study stays in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/eight-d/": {
+      when: "When a customer has seen a serious problem whose cause is not known, from the first day until the report is closed.",
+      how: [
+        "[[New 8D report]] with its title, customer, product and opening date. In D0, tick the 8D criteria and write the emergency response; in D1, name the team leader, the champion and the members.",
+        "D2 describes the problem with 5W2H and IS / IS NOT. D3 contains it by the next day: [[Add a containment action]] for every place the suspect stock can be, and set the clean point.",
+        "D4 verifies two root causes, why it happened and why nobody caught it; the text of a 5 Whys or Fishbone in this browser can be taken in. D5 verifies the actions, D6 validates them with data.",
+        "D7 updates the FMEA, control plan, standard work and training; D8 records the lessons learned and closes. Mark each discipline done, and [[Send all actions to the Action Tracker]].",
+      ],
+      get: "Each report with its status per discipline and what each still needs, the days open and to containment against the target times, and over all reports the open, closed and overdue ones and the average days to close. [[Download Word]] or print the report.",
+      data: "The reports stay in this browser and download as CSV or Excel. A 5 Whys or Fishbone is only read, never changed.",
+    },
+    "/tools/risk-assessment/": {
+      when: "For each work area or activity before the work starts, after an accident, a near miss or any change, and at the latest on its review date.",
+      how: [
+        "[[+ New assessment]] for a work area or activity: the assessor and the date, the review interval, who is exposed and the special groups, such as young, pregnant or new workers.",
+        "Walk the area with the people who do the work. For each hazard, choose its hazard factor, rate likelihood and severity from 1 to 5 as things are today, and [[Add hazard]].",
+        "Plan its measures in the STOP order, substitution, technical, organisational and personal last, each with an owner, a due date and its status. Once a measure is done, record whether it works.",
+        "Rate the residual risk with the measures in place, set the next review, and [[Print the documentation]] with its lines to sign.",
+      ],
+      get: "The risk matrix before and after the measures, the hazards per band, the highest risks first, the open measures by owner, the reviews due, and the Safety Cross events of 12 months set against the areas assessed. [[Add open measures to the Action Tracker]].",
+      data: "The assessments stay in this browser, download as CSV or Excel, and go to another site as a template file. The tool is not legal advice.",
+    },
+    "/tools/hoshin-kanri/": {
+      when: "Once a year to deploy the site's strategy on one page, and every month to review each metric on the bowling chart.",
+      how: [
+        "Name the plan and its first month, then fill the five lists: breakthrough objectives, annual objectives, improvement priorities, metrics with their baseline and year-end target, and the people who own them.",
+        "In the four corners, tap each cell: ● strong, ○ weak, · none; in the resources, ● primary owner. Each priority needs one primary owner; the gaps are listed under the matrix.",
+        "For each metric, [[Spread the targets from the baseline to the year-end target]] and enter the actual each month. Link each priority to its project, and keep the catchball notes: proposal, feedback, agreed.",
+        "A metric missed two months in a row asks for a countermeasure: [[Add to actions]] with an owner and a date, or open an A3. [[Print the X-matrix]] or [[Print the bowling chart]].",
+      ],
+      get: "The X-matrix as on paper with its gaps, how many priorities are agreed with the level below, the bowling chart with every month met or missed, the metric trends, and the phase, status and savings of the linked projects against the annual objectives.",
+      data: "The matrix stays in this browser, downloads as CSV or Excel, and goes to the next level as a template file. The Project Portfolio is only read.",
+    },
+    "/tools/site-compare/": {
+      when: "Every week, when you look after several sites that each share their tools with Team sync, to see which site to learn from on each rate.",
+      how: [
+        "Ask each site for the read-only code of its team, made in Team sync. Through it this tool reads the site's team copy and keeps only the figures; you do not join the team or change anything.",
+        "Give the site its name, paste or scan the code into [[Read-only code]] and [[Add site]]. A six-word team code is refused and not kept: it would let you change the team's work.",
+        "Every Monday, [[Update all sites]] and choose the period: the last 7 or 30 days, this month or last month. Each period ends on the day of the site's update.",
+        "Read the best and the worst on each rate, then [[Plan a Gemba Walk]] at the best site, or add what to learn from it to the actions.",
+      ],
+      get: "Damage and incomplete rates, routes on time, OEE, PM compliance, 5S, safety, actions and the hotel rates side by side, best and worst named in each cell, a score per site by a rule you can see, and the widest gap to learn from. Copy the summary, print it, or download CSV or Excel.",
+      data: "The codes stay in this browser and Team sync never shares them. Only each site's figures and update time are kept; nothing of yours is sent.",
+    },
+    "/tools/print-pack/": {
+      when: "Every Monday before the huddle, or on Friday for the week ahead, to put the paper of the team board up in one print.",
+      how: [
+        "Fill in the tools first: Action Tracker, Maintenance Planner, 5S Audit, Leader Standard Work, Safety Cross and Daily Board, and for a hotel Room Status and the Housekeeping Planner.",
+        "Tick the documents for your board. One can be ticked once its tool holds data in this browser; the line under it says what is in it, or which tool to fill first.",
+        "Set the [[Date on the pack]]: the week of the work list and the audits, and the month of the Safety Cross and Daily Board, follow it. Set the coming Monday to print on Friday.",
+        "[[Print the pack]]. Write on the sheets during the week, then enter what was done in the tools, so the next pack starts from it.",
+      ],
+      get: "One print: the open actions by owner, the week's maintenance work list and 5S audits, a card per leader, the Safety Cross and Daily Board of the month, and a hotel's attendant and section sheets. Each sheet names its tool and date; the tool keeps the live version. [[Show the example pack]] to see one first.",
+      data: "The pack only reads the tools in this browser and changes nothing in them. It keeps only which documents you ticked.",
+    },
     "/tools/cv-builder/": {
       when: "When your CV should look designed, not typed.",
       how: [
@@ -653,7 +761,7 @@ const en = {
 
 const sq = {
   title: "Udhëzuesi i mjeteve",
-  subtitle: "Tridhjetë e gjashtë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
+  subtitle: "Dyzet e nëntë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
   edition: `Botimi ${EDITION} · tetor 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -675,9 +783,9 @@ const sq = {
   sections: {
     about: {
       kicker: "Për këtë udhëzues",
-      title: "Tridhjetë e gjashtë mjete, katër planete, një ide",
+      title: "Dyzet e nëntë mjete, katër planete, një ide",
       body: [
-        "Stiven Catalyst ka tridhjetë e gjashtë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
+        "Stiven Catalyst ka dyzet e nëntë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
         "Ky udhëzues shpjegon si janë organizuar mjetet, pse faqja duket ashtu siç duket dhe si përdoret çdo mjet, hap pas hapi. Nuk ke nevojë ta lexosh me radhë: gjej planetin tënd dhe nis nga aty.",
         { cards: [
           { title: "Falas", text: "Çdo mjet përdoret falas." },
@@ -737,7 +845,7 @@ const sq = {
           "5 Whys e dërgon kundërmasën e vet te Lista e veprimeve ose e vendos në Dorëzimin e turnit.",
           "CX Control Tower dhe Kurrizi i peshkut ia dërgojnë shkaqet e tyre Pareto 80/20; Raporti A3 merr rezultatin e Pareto-s dhe fletën e 5 Whys.",
           "Letra e motivimit i merr të dhënat e tua nga Krijuesi i CV-së ose nga CV për ATS.",
-          "Raporti i operacioneve i lexon të gjitha dhe shkruan raportin e javës ose të muajit.",
+          "Raporti i operacioneve i lexon të gjitha dhe shkruan raportin e javës ose të muajit; Sinjalet i lexojnë çdo mëngjes dhe rendisin atë që kërkon vëmendje.",
         ] },
         "Dhe në faqen e çdo roli, një hapësirë coaching-u i kthen mjetet në praktikë: një projekt me qëllim, matje dhe datë rishikimi. Më shumë në faqet e fundit.",
       ],
@@ -767,7 +875,7 @@ const sq = {
           "Çdo mjet e ruan punën veçmas për çdo gjuhë të faqes, përveç listës së veprimeve dhe profilit të vendit të punës.",
           "Një mjet që e ke hapur një herë hapet përsëri edhe pa lidhje, dhe faqja mund të instalohet si aplikacion.",
           "Shfletuesi mban një pikë rikthimi të gjithë punës një herë në ditë dhe para se një skedar të zëvendësojë diçka; [[Restore points]] në të njëjtën kuti e kthen një të tillë.",
-          "[[Team sync]] i ndan mjetet që shënon me pajisjet e ekipit. Një kod me gjashtë fjalë krijon çelësin dhe puna kriptohet në pajisje, kështu që serveri nuk mund ta lexojë. Shënoje kodin diku: tregohet vetëm një herë.",
+          "[[Team sync]] i ndan mjetet që shënon me pajisjet e ekipit. Një kod me gjashtë fjalë krijon çelësin dhe puna kriptohet në pajisje, kështu që serveri nuk mund ta lexojë. Shënoje kodin diku: tregohet vetëm një herë. Një [[Read-only code]] i lejon një menaxheri të shohë punën e ekipit pa e ndryshuar.",
           "Fshirja e të dhënave të shfletuesit fshin edhe punën tënde. Ruaj një skedar më parë.",
         ] },
       ],
@@ -790,14 +898,14 @@ const sq = {
       ],
     },
     next: {
-      kicker: "Botimi 4",
+      kicker: "Botimi 5",
       title: "Çfarë mund të vijë më pas",
       body: [
         "Ide në shqyrtim, jo premtime me data. Më thuaj cila do të të ndihmonte më shumë.",
         { list: [
-          "Shift Pulse dhe Tabela e ditës që lexojnë Inspektimin e dhomës dhe Planifikuesin e mirëmbajtjes.",
+          "Sinjalet që ua kalojnë sinjalet e para të ditës kujtesave në këtë pajisje.",
           "Analiza e vonesave për linja pa orë nisjeje të regjistruar.",
-          "Sinkronizimi i ekipit me një kod për çdo person, që një anëtar të largohet pa një kod të ri për të gjithë.",
+          "Statusi i dhomave që lexon drejtpërdrejt mbërritjet dhe largimet nga një eksport i sistemit të hotelit.",
         ] },
         "Kur ndryshon një mjet, ky udhëzues merr një botim të ri. Botimi më i fundit është gjithmonë në faqe, dhe të mëparshmit mbeten aty siç u printuan.",
       ],
@@ -808,9 +916,9 @@ const sq = {
     },
   },
   families: {
-    pulse: "Njëmbëdhjetë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, mbaje terrenin të sigurt dhe në rregull, drejto takimin e turnit, shih turnin në një pamje, ruaj sendet që harrojnë mysafirët dhe dorëzoje të pastër, me çdo veprim në një listë.",
-    zenith: "Dymbëdhjetë mjete për një zonë: lexo javën, gjej nga vjen realisht një shifër e kuqe, nis me shkaqet që peshojnë më shumë, vëre një problem në një fletë, rrit idetë dhe aftësitë e ekipit, inspekto dhomat, planifiko mirëmbajtjen dhe raporto javën.",
-    lumen: "Dhjetë mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, vlerëso rreziqet, mat, harto dhe ec rrjedhën, shkruaj standardin dhe drejto përmirësimet si një portofol projektesh.",
+    pulse: "Katërmbëdhjetë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, mbaje terrenin të sigurt dhe në rregull, drejto takimin e turnit, shih turnin në një pamje, mbaj dhomat, sendet e harruara dhe ankesat e hotelit, dhe dorëzoje të pastër, me çdo veprim në një listë dhe letrat e javës të printuara me një herë.",
+    zenith: "Shtatëmbëdhjetë mjete për një zonë: nis mëngjesin me sinjalet që kanë rëndësi, lexo javën, gjej nga vjen realisht një shifër e kuqe, vëre një problem në një fletë, rrit idetë dhe aftësitë e ekipit, planifiko njerëzit, dhomat dhe mirëmbajtjen, vlerëso rreziqet, mbaj punën standarde të drejtuesve dhe raporto javën.",
+    lumen: "Pesëmbëdhjetë mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, zgjidh një problem të klientit me 8D, mat, harto dhe ec rrjedhën, shkurto ndërrimet, klasifiko stokun, shkruaj standardin, shpërndaj strategjinë, krahaso objektet dhe drejto përmirësimet si një portofol projektesh.",
     atlas: "Tri mjete për rolin e ardhshëm: një CV e dizajnuar, një CV që softueri i përzgjedhjes e lexon saktë dhe një letër që përputhet me to.",
   },
   tools: {
@@ -1187,6 +1295,149 @@ const sq = {
       get: "Një kartë projekti DMAIC për ta printuar, ruajtur si PDF ose kopjuar si tekst. Kur çdo përgjigje është e saktë, kursi jep një certifikatë përfundimi me emrin tënd: [[Print the certificate]].",
       data: "Përgjigjet dhe karta jote ruhen vetëm në këtë shfletues.",
     },
+    "/tools/signals/": {
+      when: "Çdo mëngjes, dy minuta para mbledhjes së mëngjesit, sapo mjetet që përdor kanë të dhëna për disa ditë.",
+      how: [
+        "Zgjidh periudhën që lexojnë kartat e kontrollit, nga 30 deri në 180 ditë, [[Minimum severity]] dhe, nëse do, një mjet të vetëm. Siguria, objektivat dhe afatet e kaluara lexohen gjithmonë sipas gjendjes së sotme.",
+        "Lexo listën nga lart: siguria në krye, pastaj i lartë, i mesëm dhe i ulët. Çdo rresht thotë rregullin, një pikë jashtë kufirit, një seri prej 8 ose një prirje prej 6, ose çfarë ka kaluar afatin.",
+        "Vepro për rreshtat e parë: hap mjetin, [[Take it to 5 Whys]] ose [[Add to actions]]. Një metodë e re shënohet në vijën kohore të mjetit, që kufijtë të nisin nga ndryshimi.",
+        "[[Dismiss for today]] e heq një sinjal deri nesër. Nëse është ende i vërtetë, rikthehet në listë.",
+      ],
+      get: "Një listë e renditur e asaj që kërkon vëmendje në mjetet e këtij shfletuesi: aksidentet dhe ndihma e parë e 7 ditëve, sinjalet e kartave të kontrollit (p, c, u, I-MR), objektivat e humbura, veprimet, mirëmbajtja, sendet e gjetura, etiketat e kuqe, idetë, ripastrimet dhe ecjet e niveleve me vonesë, me hapin e radhës për të parin. Kopjohet ose printohet.",
+      data: "Ruan vetëm zgjedhjet e tua dhe çfarë fshehe sot. I lexon mjetet e tjera dhe nuk ndryshon asgjë në to; shembulli mbetet vetëm në faqe.",
+    },
+    "/tools/room-status/": {
+      when: "Gjatë gjithë ditës, në një ekran për housekeeping dhe recepsionin: çdo dhomë shënohet sapo kryhet puna, dhe recepsioni sheh cilat dhoma janë gati.",
+      how: [
+        "Përgatit dhomat një herë: [[Add these rooms]] nga katet dhe numrat e dhomave, ose ngjit një listë, dhe shkruaj pastruesit e dhomave me katet e tyre.",
+        "Çdo mëngjes, [[Start today's board]], pastaj ngjit raportin e statusit të dhomave nga PMS-i dhe [[Import status]]. Një kod që nuk e njeh renditet, nuk hamendësohet.",
+        "Prek një dhomë për t'i vendosur statusin, shenjat DND, VIP dhe mbërritje, pastruesin dhe një shënim. [[Start cleaning]] kur pastruesi hyn; një dhomë OOO merr arsyen dhe datën e kthimit.",
+        "Krahaso përsëri me PMS-in pas dreke: recepsioni sqaron menjëherë një skipper ose një sleeper. Çdo dhomë OOO dërgoje te Lista e veprimeve.",
+      ],
+      get: "Dhomat e radhës për pastrim, në krye mbërritjet e hershme dhe VIP, dhomat për inspektim, dhomat gati kundrejt mbërritjeve të sotme, pjesa jashtë përdorimit, dhomat për pastrues dhe minutat nga largimi deri e pastër dhe nga e pastër deri e inspektuar. Printo tabelën ose fletët e pastruesve, dhe shkarkoje si CSV ose Excel.",
+      data: "Tabela dhe historiku i saj për 30 ditë mbeten në këtë shfletues. Me sinkronizimin e ekipit të ndezur, çdo pajisje e ekipit sheh të njëjtën tabelë.",
+    },
+    "/tools/guest-complaints/": {
+      when: "Sapo një mysafir ankohet, në dorë, në telefon, në chat, me email, në një vlerësim ose anketë, dhe përsëri kur zgjidhet dhe mysafiri merret në telefon.",
+      how: [
+        "Regjistroje sa mysafiri është ende aty: ora, dhoma, kanali, kategoria, rëndësia dhe çfarë ndodhi me fjalët e mysafirit, pastaj [[Add to log]]. Matja e objektivit nis këtu.",
+        "Hap ankesën dhe kalo hapat e LEARN: dëgjo, trego empati, kërko falje, zgjidh, njofto. Një ankesë kritike shkon menjëherë te drejtori i përgjithshëm, me një raport incidenti.",
+        "Shkruaj veprimin e marrë, kompensimin dhe vlerën e tij në euro, kur u zgjidh dhe kur u kontaktua përsëri mysafiri, pastaj [[Save the recovery]].",
+        "Zgjidh një email, një mesazh në chat ose një përgjigje publike për një vlerësim, dhe [[Copy the reply]].",
+      ],
+      get: "Ankesat për 100 net dhome të zëna, pjesa e zgjidhur brenda objektivit, koha mediane e zgjidhjes, kostoja e rikuperimit, mysafirët e kënaqur pas rikuperimit, dhomat që përsëriten dhe Pareto e kategorive. Një dhomë që përsëritet shkon te Lista e veprimeve; regjistri shkarkohet si CSV ose Excel.",
+      data: "Regjistri mbetet në këtë shfletues. Shkruaj emrin e mysafirit vetëm për ta marrë në telefon; [[Remove guest names of closed complaints]] i fshin kur rastet mbyllen.",
+    },
+    "/tools/housekeeping-planner/": {
+      when: "Çdo mëngjes pas night audit, dhe të enjten për javën që vjen.",
+      how: [
+        "Merr dhomat nga Statusi i dhomave në këtë shfletues, ose shkruaj sipas katit dhe llojit të dhomës largimet, qëndrimet e vazhduara, ndërrimet e çarçafëve, dhomat VIP dhe pastrimet e thella.",
+        "Shkruaj [[Attendants scheduled]] dhe, për koston e punës, pagën për orë. Te [[Workload standards]], cakto minutat ose kreditet për pastrim, turnin, pushimin dhe pjesën produktive.",
+        "Lexo pastruesit e nevojshëm kundrejt atyre në turn. Kur plani nuk mbulohet, vendos herët: orë shtesë, një pastrues nga agjencia ose pastrimet e thella në një ditë tjetër.",
+        "Për javën, shkruaj ose ngjit për çdo ditë dhomat e zëna natën para, largimet dhe pastruesit në turn.",
+      ],
+      get: "Ngarkesa e punës në minuta ose kredite, pastruesit e nevojshëm në njerëz dhe orë, kostoja e punës, minutat për dhomë të zënë, dhe sektorë të balancuar sipas minutave në sa më pak kate. [[Print section sheets]] ose [[Apply sections to Room Status]].",
+      data: "Plani mbetet në këtë shfletues. Kur vendos sektorët, ndryshon vetëm pastruesin e çdo dhome te Statusi i dhomave, dhe zhbërja e kthen siç ishte.",
+    },
+    "/tools/leader-standard-work/": {
+      when: "Çdo ditë për rutinën e çdo drejtuesi, nga takimi i ekipit deri te ecja e drejtuesit të objektit, dhe një herë në javë për rishikimin me nivelin tjetër.",
+      how: [
+        "Shto çdo drejtues me nivelin, zonën, fillimin e turnit, gjatësinë e ditës, ditët e punës dhe kujt i raporton. Zgjidh modelin e sektorit dhe nivelit tënd dhe [[Use this template]], ose [[Add a task]].",
+        "Jepi çdo detyre shpeshtësinë, orën, minutat, mjetin që përdor dhe si duket kur është kryer. Printo standardin, ose shkarkoje si skedar kalendari.",
+        "Në ditën e saj, shëno çdo detyrë të kryer, të humbur me arsye, ose që nuk i takon. Çfarë nuk shënon askush deri në fund të ditës llogaritet si e humbur.",
+        "Një herë në javë niveli tjetër hap rishikimin: zbatimin, detyrën e humbur më shpesh dhe një shënim për atë që ranë dakord. [[Copy the review]] ose printoje.",
+      ],
+      get: "Zbatimi i çdo drejtuesi, të kryerat mbi ato që i takonin, pjesa e ditës në punë standarde kundrejt udhëzimit për nivelin, dhe detyrat e humbura më shpesh dhe pse. Një detyrë e humbur tri herë në dy javë shkon te Lista e veprimeve; regjistri shkarkohet si CSV ose Excel.",
+      data: "Drejtuesit, standardet e tyre dhe regjistri mbeten në këtë shfletues. Një standard ruhet si skedar modeli për drejtuesin tjetër ose për një objekt tjetër.",
+    },
+    "/tools/shift-capacity/": {
+      when: "Një herë në javë para se të mbyllet grafiku, dhe përsëri sa herë ndryshon parashikimi i volumit.",
+      how: [
+        "[[Load template]] ose shto çdo proces: njësinë në të cilën numërohet, ritmin në njësi për orë produktive dhe, nëse parashikimi vjen në një njësi tjetër, konvertimin. Ofrohet edhe ritmi nga Studimi i kohës.",
+        "Shto turnet me gjatësinë, pushimet e papaguara dhe pushimet e paguara me briefingun, pastaj shfrytëzimin dhe [[Absence allowance (%)]].",
+        "Shkruaj ose ngjit parashikimin e volumit të javës: një rresht për çdo ditë dhe turn, një volum për çdo njësi.",
+        "Shkruaj njerëzit e planifikuar për çdo proces, ose vetëm totalin, dhe kopjoji me [[Copy to every shift of this name]].",
+      ],
+      get: "Për çdo turn: orët e punës dhe njerëzit e nevojshëm, me mungesat, hendeku me planin në njerëz dhe në orë, pika e ngushtë, takti dhe si mbyllet hendeku me orë shtesë, agjenci ose njerëz të kualifikuar nga një proces tjetër. Një turn i mangët shkon te veprimet; kopjo, printo ose shkarko si CSV ose Excel.",
+      data: "Proceset, turnet, parashikimi dhe plani mbeten në këtë shfletues. I lexon Matricën e aftësive dhe Studimin e kohës dhe nuk ndryshon asgjë në to.",
+    },
+    "/tools/inventory-abc/": {
+      when: "Çdo muaj, me të paktën dymbëdhjetë muaj kërkesë për çdo artikull, për të caktuar numërimet, pikat e riporosisë dhe vendosjen në magazinë.",
+      how: [
+        "Hap një skedar CSV ose Excel ose ngjit rreshtat: artikulli, përshkrimi, kostoja për njësi dhe një kolonë kërkese për çdo javë ose muaj; koha e furnizimit, shpërndarja e saj, stoku dhe marrjet janë opsionale. [[Import rows]].",
+        "Kontrollo kolonat e përdorura, pastaj cakto gjatësinë e një kolone kërkese, [[Cycle service level (%)]], kufijtë ABC dhe XYZ dhe numërimet e çdo klase në vit.",
+        "Lexo matricën me nëntë qeliza dhe politikën e çdo qelize. Shfaq artikujt [[Below reorder point]] për të parë çfarë duhet porositur; me koston e një porosie, në sasi ekonomike (EOQ).",
+        "Vendos artikujt AX dhe AY në zonën e artë, në lartësinë e belit dhe sa më afër daljes, dhe pastro artikujt pa kërkesë.",
+      ],
+      get: "Klasa ABC dhe XYZ e çdo artikulli, matrica me nëntë qeliza dhe politikat e saj, numërimet ciklike në javë, stoku i sigurisë, pika e riporosisë dhe sasia e porosisë për nivelin tënd të shërbimit, dhe artikujt për zonën e artë. [[Add to actions]] për riporositë, hap vlerat në Pareto 80/20, ose shkarko si CSV ose Excel.",
+      data: "Artikujt dhe cilësimet mbeten në këtë shfletues. Skedarët lexohen në shfletues, edhe Excel-i; asgjë nuk ngarkohet.",
+    },
+    "/tools/smed/": {
+      when: "Kur një ndërrim e mban makinën ose linjën të ndalur shumë gjatë, para se të planifikosh parti më të vogla, dhe sërish një muaj pas standardit të ri.",
+      how: [
+        "Emërto makinën, dy produktet dhe kohën objektiv. [[Start: last good piece]] kur ndalet produkti i vjetër, [[Lap: next element]] sa herë mbaron një element, dhe ndalo te copa e parë e mirë me shpejtësi normale.",
+        "Jepi çdo elementi kategorinë, pastaj shënoje të brendshëm, i mundur vetëm me makinën të ndalur, ose të jashtëm, i mundur ndërsa makina punon. Fakti që sot bëhet me makinën të ndalur nuk e bën të brendshëm.",
+        "Shndërro në të jashtme sa më shumë elemente dhe thjeshto pjesën tjetër: për çdo element kohën pas ndryshimit, kush e bën, kundërmasën me përgjegjësin dhe afatin, dhe kontrollin.",
+        "Jep ndërrimet në javë dhe koston për minutë makine, pastaj [[Print the changeover standard]]: para ndalesës, me makinën të ndalur, pas rinisjes. Ose [[Save for Standard Work]].",
+      ],
+      get: "Ndalesa e vëzhguar, pas ndarjes dhe pas planit, minutat e kursyera për ndërrim, koha dhe eurot e fituara në javë dhe në vit, dhe ndalesa sipas kategorisë kundrejt përqindjeve tipike të Shingos. Kundërmasat shkojnë te Lista e veprimeve; studimi shkarkohet si CSV ose Excel.",
+      data: "Studimi mbetet në këtë shfletues. Asgjë nuk dërgohet ose ngarkohet.",
+    },
+    "/tools/eight-d/": {
+      when: "Kur një klient ka parë një problem serioz me shkak të panjohur, nga dita e parë deri kur raporti mbyllet.",
+      how: [
+        "[[New 8D report]] me titullin, klientin, produktin dhe datën e hapjes. Në D0 shëno kriteret e 8D dhe shkruaj reagimin emergjent; në D1 emërto drejtuesin e ekipit, sponsorin dhe anëtarët.",
+        "D2 e përshkruan problemin me 5W2H dhe ËSHTË / NUK ËSHTË. D3 e kufizon deri ditën tjetër: [[Add a containment action]] për çdo vend ku mund të jetë malli i dyshimtë, dhe cakto pikën e pastër.",
+        "D4 verifikon dy shkaqe rrënjësore, pse ndodhi dhe pse nuk u zbulua; teksti i një 5 Whys ose Kurrizi i peshkut në këtë shfletues mund të merret në analizë. D5 verifikon veprimet, D6 i vërteton me të dhëna.",
+        "D7 përditëson FMEA-në, planin e kontrollit, punën standarde dhe trajnimin; D8 shënon mësimet e nxjerra dhe mbyll raportin. Shëno çdo disiplinë si të kryer dhe [[Send all actions to the Action Tracker]].",
+      ],
+      get: "Çdo raport me statusin për çdo disiplinë dhe çfarë i duhet ende secilës, ditët e hapura dhe deri te kufizimi kundrejt afateve synim, dhe për të gjitha raportet ato të hapura, të mbyllura dhe me vonesë, dhe mesatarja e ditëve deri te mbyllja. [[Download Word]] ose printo raportin.",
+      data: "Raportet mbeten në këtë shfletues dhe shkarkohen si CSV ose Excel. Një 5 Whys ose Kurrizi i peshkut vetëm lexohet, nuk ndryshohet kurrë.",
+    },
+    "/tools/risk-assessment/": {
+      when: "Për çdo zonë pune ose veprimtari para se të nisë puna, pas një aksidenti, rreziku të shmangur ose ndryshimi, dhe më së voni në datën e rishikimit.",
+      how: [
+        "[[+ New assessment]] për një zonë pune ose veprimtari: vlerësuesi dhe data, rishikimi, kush është i ekspozuar dhe grupet e veçanta, si të miturit, gratë shtatzëna ose të sapoardhurit.",
+        "Kalo nëpër zonë me njerëzit që e bëjnë punën. Për çdo burim rreziku zgjidh faktorin e rrezikut, vlerëso gjasat dhe rëndesën nga 1 deri në 5 siç janë sot, dhe [[Add hazard]].",
+        "Planifiko masat sipas rendit STOP, zëvendësim, teknike, organizative dhe personale në fund, secila me përgjegjës, afat dhe gjendje. Kur një masë kryhet, shëno nëse funksionon.",
+        "Vlerëso rrezikun e mbetur me masat në vend, cakto rishikimin e radhës dhe [[Print the documentation]] me vijat për nënshkrim.",
+      ],
+      get: "Matrica e rrezikut para dhe pas masave, burimet e rrezikut sipas nivelit, rreziqet më të larta në krye, masat e hapura sipas përgjegjësit, rishikimet me afat dhe ngjarjet e 12 muajve të Kryqit të sigurisë përballë zonave të vlerësuara. [[Add open measures to the Action Tracker]].",
+      data: "Vlerësimet mbeten në këtë shfletues, shkarkohen si CSV ose Excel dhe shkojnë te një objekt tjetër si skedar modeli. Mjeti nuk është këshillë ligjore.",
+    },
+    "/tools/hoshin-kanri/": {
+      when: "Një herë në vit për të shpërndarë strategjinë e vendit të punës në një faqe, dhe çdo muaj për të shqyrtuar çdo tregues në grafikun bowling.",
+      how: [
+        "Emërto planin dhe muajin e tij të parë, pastaj plotëso pesë listat: objektivat e përparimit, objektivat vjetore, prioritetet e përmirësimit, treguesit me vlerën fillestare dhe objektivin e fundvitit, dhe njerëzit përgjegjës.",
+        "Te katër cepat, prek çdo qelizë: ● e fortë, ○ e dobët, · asnjë; te burimet, ● përgjegjës kryesor. Çdo prioritet do një përgjegjës kryesor; mungesat listohen poshtë matricës.",
+        "Për çdo tregues, [[Spread the targets from the baseline to the year-end target]] dhe shëno vlerën reale çdo muaj. Lidh çdo prioritet me projektin e tij dhe mbaj shënimet catchball: propozim, përgjigje, rënë dakord.",
+        "Një tregues që nuk arrihet dy muaj radhazi kërkon një kundërmasë: [[Add to actions]] me përgjegjës dhe afat, ose hap një A3. [[Print the X-matrix]] ose [[Print the bowling chart]].",
+      ],
+      get: "Matrica X si në letër me mungesat e saj, sa prioritete janë rënë dakord me nivelin më poshtë, grafiku bowling me çdo muaj të arritur ose jo, prirja e treguesve, dhe faza, gjendja dhe kursimet e projekteve të lidhura kundrejt objektivave vjetore.",
+      data: "Matrica mbetet në këtë shfletues, shkarkohet si CSV ose Excel dhe shkon te niveli më poshtë si skedar modeli. Portofoli i projekteve vetëm lexohet.",
+    },
+    "/tools/site-compare/": {
+      when: "Çdo javë, kur drejton disa objekte që i ndajnë mjetet me sinkronizimin e ekipit, për të parë nga cili objekt të mësosh në çdo tregues.",
+      how: [
+        "Kërkoji çdo objekti kodin vetëm për lexim të ekipit, të krijuar te sinkronizimi i ekipit. Me të, mjeti lexon kopjen e ekipit të objektit dhe mban vetëm treguesit; nuk bashkohesh me ekipin dhe nuk ndryshon asgjë.",
+        "Jepi objektit emrin, ngjit ose skano kodin te [[Read-only code]] dhe [[Add site]]. Një kod ekipi me gjashtë fjalë refuzohet dhe nuk ruhet: me të mund të ndryshohej puna e ekipit.",
+        "Çdo të hënë, [[Update all sites]] dhe zgjidh periudhën: 7 ose 30 ditët e fundit, ky muaj ose muaji i kaluar. Çdo periudhë mbaron në ditën e përditësimit të objektit.",
+        "Lexo më të mirin dhe më të dobëtin në çdo tregues, pastaj [[Plan a Gemba Walk]] te objekti më i mirë, ose shto te veprimet çfarë duhet mësuar prej tij.",
+      ],
+      get: "Përqindja e dëmeve dhe e porosive të paplota, linjat në kohë, OEE, mirëmbajtja parandaluese, 5S, siguria, veprimet dhe treguesit e hotelit krah për krah, më i miri dhe më i dobëti në çdo qelizë, pikët e çdo objekti sipas një rregulli të dukshëm dhe diferenca më e madhe për të mësuar. Kopjo përmbledhjen, printoje ose shkarko CSV ose Excel.",
+      data: "Kodet mbeten në këtë shfletues dhe sinkronizimi i ekipit nuk i ndan kurrë. Ruhen vetëm treguesit e çdo objekti dhe koha e përditësimit; nga ti nuk dërgohet asgjë.",
+    },
+    "/tools/print-pack/": {
+      when: "Çdo të hënë para takimit, ose të premten për javën që vjen, për të varur letrën e tabelës së ekipit me një printim.",
+      how: [
+        "Plotëso më parë mjetet: Lista e veprimeve, Planifikuesi i mirëmbajtjes, Auditi 5S, Puna standarde e drejtuesit, Kryqi i sigurisë dhe Tabela e ditës, dhe për një hotel Statusi i dhomave dhe Planifikuesi i housekeeping-ut.",
+        "Shëno dokumentet për tabelën tënde. Një dokument shënohet sapo mjeti i tij ka të dhëna në këtë shfletues; rreshti poshtë tij thotë çfarë ka, ose cilin mjet të plotësosh më parë.",
+        "Cakto [[Date on the pack]]: java e listës së punës dhe e auditeve, dhe muaji i Kryqit të sigurisë dhe i Tabelës së ditës, e ndjekin. Vendos të hënën që vjen për ta printuar të premten.",
+        "[[Print the pack]]. Shkruaj mbi fletët gjatë javës, pastaj hidh në mjete çfarë u krye, që paketa e radhës të nisë prej andej.",
+      ],
+      get: "Një printim: veprimet e hapura sipas përgjegjësit, lista e mirëmbajtjes dhe auditet 5S të javës, një kartë për çdo drejtues, Kryqi i sigurisë dhe Tabela e ditës e muajit, dhe fletët e pastruesve dhe të sektorëve të një hoteli. Çdo fletë tregon mjetin dhe datën; gjendja e përditësuar mbetet te mjeti. Me [[Show the example pack]] e sheh një më parë.",
+      data: "Paketa vetëm lexon mjetet në këtë shfletues dhe nuk ndryshon asgjë në to. Ruan vetëm cilat dokumente ke shënuar.",
+    },
     "/tools/cv-builder/": {
       when: "Kur CV-ja jote duhet të duket e dizajnuar, jo e shtypur.",
       how: [
@@ -1225,7 +1476,7 @@ const sq = {
 
 const de = {
   title: "Der Werkzeug-Leitfaden",
-  subtitle: "Sechsunddreißig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
+  subtitle: "Neunundvierzig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
   edition: `Ausgabe ${EDITION} · Oktober 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -1247,9 +1498,9 @@ const de = {
   sections: {
     about: {
       kicker: "Über diesen Leitfaden",
-      title: "Sechsunddreißig Tools, vier Planeten, eine Idee",
+      title: "Neunundvierzig Tools, vier Planeten, eine Idee",
       body: [
-        "Stiven Catalyst hat sechsunddreißig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
+        "Stiven Catalyst hat neunundvierzig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
         "Dieser Leitfaden erklärt, wie die Tools geordnet sind, warum die Website so aussieht, wie sie aussieht, und wie Sie jedes Tool Schritt für Schritt nutzen. Sie müssen ihn nicht der Reihe nach lesen: Suchen Sie Ihren Planeten und fangen Sie dort an.",
         { cards: [
           { title: "Kostenlos", text: "Jedes Tool ist kostenlos." },
@@ -1309,7 +1560,7 @@ const de = {
           "5 Whys gibt seine Gegenmaßnahme an die Maßnahmenliste weiter oder nimmt sie in die Schichtübergabe auf.",
           "Der CX Control Tower und die Fischgräte geben ihre Ursachen an Pareto 80/20 weiter; der A3-Report übernimmt das Pareto-Ergebnis und das Arbeitsblatt von 5 Whys.",
           "Das Anschreiben übernimmt Ihre Angaben aus dem Lebenslauf-Generator oder dem ATS-Lebenslauf.",
-          "Der Betriebsbericht liest sie alle und schreibt den Bericht der Woche oder des Monats.",
+          "Der Betriebsbericht liest sie alle und schreibt den Bericht der Woche oder des Monats; die Signale lesen sie jeden Morgen und ordnen, was Aufmerksamkeit braucht.",
         ] },
         "Und auf jeder Rollenseite macht ein Coaching-Bereich aus den Tools eine Praxis: ein Projekt mit Ziel, Messung und Termin für die Überprüfung. Mehr dazu auf den letzten Seiten.",
       ],
@@ -1339,7 +1590,7 @@ const de = {
           "Jedes Tool speichert seine Arbeit für jede Sprache der Website getrennt, außer der Maßnahmenliste und dem Arbeitsplatzprofil.",
           "Ein Tool, das Sie einmal geöffnet haben, öffnet sich auch ohne Verbindung wieder, und die Website lässt sich als App installieren.",
           "Der Browser legt einmal am Tag und bevor eine Datei etwas ersetzt einen Wiederherstellungspunkt Ihrer ganzen Arbeit an; [[Restore points]] im selben Bereich holt einen zurück.",
-          "[[Team sync]] teilt die Tools, die Sie ankreuzen, mit den Geräten Ihres Teams. Ein Code aus sechs Wörtern ergibt den Schlüssel, und die Arbeit wird auf dem Gerät verschlüsselt, sodass der Server sie nicht lesen kann. Schreiben Sie den Code auf: Er wird nur einmal gezeigt.",
+          "[[Team sync]] teilt die Tools, die Sie ankreuzen, mit den Geräten Ihres Teams. Ein Code aus sechs Wörtern ergibt den Schlüssel, und die Arbeit wird auf dem Gerät verschlüsselt, sodass der Server sie nicht lesen kann. Schreiben Sie den Code auf: Er wird nur einmal gezeigt. Mit einem [[Read-only code]] sieht eine Führungskraft die Arbeit des Teams, ohne sie zu ändern.",
           "Wenn Sie die Browserdaten löschen, löschen Sie auch Ihre Arbeit. Sichern Sie vorher eine Datei.",
         ] },
       ],
@@ -1362,14 +1613,14 @@ const de = {
       ],
     },
     next: {
-      kicker: "Ausgabe 4",
+      kicker: "Ausgabe 5",
       title: "Was als Nächstes kommen könnte",
       body: [
         "Ideen, über die ich nachdenke, keine Versprechen mit Datum. Sagen Sie mir, welche Ihnen am meisten helfen würde.",
         { list: [
-          "Shift Pulse und das Tagesboard, die die Zimmerkontrolle und den Wartungsplaner lesen.",
+          "Signale, die die ersten Signale des Tages an die Erinnerungen auf diesem Gerät geben.",
           "Die Verspätungsanalyse für Touren ohne erfasste Abfahrtszeit.",
-          "Die Team-Synchronisierung mit einem Code pro Person, damit ein Mitglied gehen kann, ohne dass alle einen neuen Code brauchen.",
+          "Der Zimmerstatus, der An- und Abreisen direkt aus einem Export des Hotelsystems liest.",
         ] },
         "Wenn sich ein Tool ändert, bekommt dieser Leitfaden eine neue Ausgabe. Die neueste ist immer auf der Website, die früheren bleiben dort, wie sie gedruckt wurden.",
       ],
@@ -1380,9 +1631,9 @@ const de = {
     },
   },
   families: {
-    pulse: "Elf Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, den Bereich sicher und in Ordnung halten, das Huddle führen, die Schicht in einem Bild sehen, die Fundsachen der Gäste verwalten und sauber übergeben, mit jeder Maßnahme auf einer Liste.",
-    zenith: "Zwölf Tools für einen Bereich: die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, mit den Ursachen anfangen, die am meisten wiegen, ein Problem auf ein Blatt bringen, die Ideen und Fähigkeiten des Teams wachsen lassen, die Zimmer prüfen, die Wartung planen und über die Woche berichten.",
-    lumen: "Zehn Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, Risiken bewerten, den Fluss messen, abbilden und ablaufen, den Standard schreiben und Verbesserungen als Portfolio von Projekten führen.",
+    pulse: "Vierzehn Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, den Bereich sicher und in Ordnung halten, das Huddle führen, die Schicht in einem Bild sehen, Zimmer, Fundsachen und Beschwerden des Hotels führen und sauber übergeben, mit jeder Maßnahme auf einer Liste und dem Papier der Woche in einem Druck.",
+    zenith: "Siebzehn Tools für einen Bereich: den Morgen mit den wichtigen Signalen beginnen, die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, ein Problem auf ein Blatt bringen, die Ideen und Fähigkeiten des Teams wachsen lassen, Personal, Zimmer und Wartung planen, Gefährdungen beurteilen, die Standardarbeit der Führungskräfte halten und über die Woche berichten.",
+    lumen: "Fünfzehn Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, ein Kundenproblem mit 8D lösen, den Fluss messen, abbilden und ablaufen, Rüstzeiten senken, den Bestand klassifizieren, den Standard schreiben, die Strategie entfalten, die Standorte vergleichen und Verbesserungen als Portfolio von Projekten führen.",
     atlas: "Drei Tools für die nächste Rolle: ein gestalteter Lebenslauf, ein Lebenslauf, den Bewerbungssoftware richtig liest, und ein Anschreiben, das dazu passt.",
   },
   tools: {
@@ -1759,6 +2010,149 @@ const de = {
       get: "Ein DMAIC-Projektauftrag, den Sie drucken, als PDF speichern oder als Text kopieren können. Sind alle Antworten richtig, stellt der Kurs ein Abschlusszertifikat mit Ihrem Namen aus: [[Print the certificate]].",
       data: "Ihre Antworten und Ihr Projektauftrag bleiben nur in diesem Browser.",
     },
+    "/tools/signals/": {
+      when: "Jeden Morgen, zwei Minuten vor der Morgenbesprechung, sobald die Tools, die Sie nutzen, einige Tage Daten enthalten.",
+      how: [
+        "Wählen Sie den Zeitraum der Regelkarten, 30 bis 180 Tage, unter [[Minimum severity]] die Schwelle und bei Bedarf ein einzelnes Tool. Sicherheit, Ziele und Überfälliges gelten immer mit Stand heute.",
+        "Lesen Sie die Liste von oben: zuerst die Sicherheit, dann Hoch, Mittel und Niedrig. Jede Zeile nennt die Regel, ein Punkt außerhalb einer Grenze, ein Lauf von 8 oder ein Trend von 6, oder was überfällig ist.",
+        "Handeln Sie bei den ersten Zeilen: Tool öffnen, [[Take it to 5 Whys]] oder [[Add to actions]]. Eine neue Methode kommt auf die Zeitachse des Tools, dann beginnen die Grenzen dort neu.",
+        "[[Dismiss for today]] verbirgt ein Signal bis morgen. Ist es dann noch wahr, steht es wieder auf der Liste.",
+      ],
+      get: "Eine geordnete Liste dessen, was in den Tools dieses Browsers Aufmerksamkeit braucht: Unfälle und Erste Hilfe der letzten 7 Tage, Signale der Regelkarten (p, c, u und I-MR), verfehlte Ziele, überfällige Maßnahmen, Wartung, Fundsachen, Rote Karten, Ideen, Nachreinigungen und Ebenen-Rundgänge, mit dem nächsten Schritt für das erste, zum Kopieren oder Drucken.",
+      data: "Es speichert nur Ihre Auswahl und was Sie heute ausgeblendet haben. Die anderen Tools liest es und ändert nichts daran; das Beispiel bleibt auf der Seite.",
+    },
+    "/tools/room-status/": {
+      when: "Den ganzen Tag, auf einem Bildschirm für Housekeeping und Rezeption: Jedes Zimmer wird gesetzt, sobald die Arbeit getan ist.",
+      how: [
+        "Legen Sie die Zimmer einmal an: [[Add these rooms]] aus Etagen und Zimmernummern, oder fügen Sie eine Liste ein, und tragen Sie die Reinigungskräfte mit ihren Etagen ein.",
+        "Jeden Morgen [[Start today's board]], dann den Zimmerstatusbericht aus dem PMS einfügen und [[Import status]]. Einen unbekannten Code listet es auf, statt zu raten.",
+        "Tippen Sie ein Zimmer an und setzen Sie Status, Markierungen (DND, VIP, Anreise), Reinigungskraft und Notiz. [[Start cleaning]], wenn die Reinigung beginnt; OOO bekommt Grund und Rückgabedatum.",
+        "Gleichen Sie nach Mittag mit dem PMS ab und geben Sie jedes OOO-Zimmer in die Maßnahmenliste.",
+      ],
+      get: "Die nächsten Zimmer zur Reinigung, Früh- und VIP-Anreisen zuerst, die Zimmer zur Kontrolle, bezugsfertige Zimmer gegen heutige Anreisen, der Anteil außer Betrieb und die Minuten von der Abreise bis sauber und bis kontrolliert. Board und Arbeitszettel drucken, CSV oder Excel.",
+      data: "Das Board und sein Verlauf über 30 Tage bleiben in diesem Browser; mit Team-Synchronisierung sieht das ganze Team dasselbe Board.",
+    },
+    "/tools/guest-complaints/": {
+      when: "Sobald sich ein Gast beschwert, auf welchem Weg auch immer, und wieder, wenn gelöst und zurückgerufen ist.",
+      how: [
+        "Erfassen Sie die Beschwerde, solange der Gast da ist: Uhrzeit, Zimmer, Kanal, Kategorie, Schweregrad und was passiert ist, dann [[Add to log]]. Hier beginnt die Zielzeit.",
+        "Öffnen Sie die Beschwerde und gehen Sie LEARN durch: zuhören, mitfühlen, entschuldigen, lösen, informieren. Eine kritische Beschwerde geht sofort an die Direktion, mit einem Vorfallbericht.",
+        "Tragen Sie die ergriffene Maßnahme, die Kompensation mit ihrem Wert in Euro, den Zeitpunkt der Lösung und des erneuten Kontakts ein, dann [[Save the recovery]].",
+        "Wählen Sie eine E-Mail, eine Chat-Nachricht oder eine öffentliche Antwort auf eine Bewertung, und [[Copy the reply]].",
+      ],
+      get: "Beschwerden pro 100 belegte Zimmernächte, der Anteil innerhalb der Zielzeit gelöst, die mittlere Lösungszeit, die Kosten der Wiedergutmachung, die danach zufriedenen Gäste, die Wiederholungszimmer und das Pareto der Kategorien. Ein Wiederholungszimmer geht in die Maßnahmenliste; CSV oder Excel.",
+      data: "Das Protokoll bleibt in diesem Browser. Schreiben Sie einen Gästenamen nur für den Rückruf; [[Remove guest names of closed complaints]] löscht sie nach Abschluss.",
+    },
+    "/tools/housekeeping-planner/": {
+      when: "Jeden Morgen nach dem Night Audit, und am Donnerstag für die nächste Woche.",
+      how: [
+        "Übernehmen Sie die Zimmer aus dem Zimmerstatus, oder tragen Sie je Etage Abreisen, Bleibezimmer, Wäschewechsel, VIP-Zimmer und Grundreinigungen ein.",
+        "Tragen Sie die Zahl unter [[Attendants scheduled]] ein und, für die Personalkosten, den Stundensatz. Unter [[Workload standards]] legen Sie Minuten oder Credits pro Reinigung, Schicht, Pause und produktiven Anteil fest.",
+        "Lesen Sie die benötigten Reinigungskräfte gegen die eingeplanten. Fehlt Personal, entscheiden Sie früh: Überstunden, eine Fremdkraft oder Grundreinigungen verschieben.",
+        "Für die Woche tippen oder fügen Sie je Tag die belegten Zimmer der Vornacht, die Abreisen und die eingeplanten Kräfte ein.",
+      ],
+      get: "Die Arbeitsmenge in Minuten oder Credits, die benötigten Reinigungskräfte in Köpfen und Stunden, die Personalkosten, die Minuten pro belegtem Zimmer und nach Minuten ausgeglichene Reviere auf möglichst wenigen Etagen. [[Print section sheets]] oder [[Apply sections to Room Status]].",
+      data: "Der Plan bleibt in diesem Browser. Beim Übernehmen der Reviere ändert er im Zimmerstatus nur die Reinigungskraft jedes Zimmers, und Rückgängig stellt sie wieder her.",
+    },
+    "/tools/leader-standard-work/": {
+      when: "Täglich für die Routine jeder Führungskraft, und einmal pro Woche für das Review mit der nächsten Ebene.",
+      how: [
+        "Legen Sie jede Führungskraft mit Ebene, Bereich, Schichtbeginn und Arbeitstagen an. Wählen Sie die Vorlage Ihrer Branche und Ebene, dann [[Use this template]], oder [[Add a task]].",
+        "Geben Sie jeder Aufgabe Häufigkeit, Uhrzeit, Minuten, das genutzte Tool und woran man sieht, dass sie erledigt ist. Drucken Sie den Standard oder laden Sie ihn als Kalenderdatei herunter.",
+        "Markieren Sie am Tag jede Aufgabe als erledigt, verpasst mit Grund oder nicht fällig. Was am Ende ihres Tages niemand markiert hat, zählt als verpasst.",
+        "Einmal pro Woche öffnet die nächste Ebene das Review: die Einhaltung, die am häufigsten verpasste Aufgabe und eine Notiz zur Vereinbarung. [[Copy the review]] oder drucken.",
+      ],
+      get: "Die Einhaltung jeder Führungskraft (erledigt durch fällig), der Anteil der Standardarbeit am Tag gegen den Richtwert der Ebene und die meistverpassten Aufgaben mit Gründen. Was dreimal in zwei Wochen verpasst wird, geht in die Maßnahmenliste.",
+      data: "Die Führungskräfte, ihre Standards und das Protokoll bleiben in diesem Browser. Ein Standard lässt sich als Vorlagendatei für die nächste Führungskraft oder einen anderen Standort speichern.",
+    },
+    "/tools/shift-capacity/": {
+      when: "Einmal pro Woche, bevor der Dienstplan schließt, und erneut, sobald sich die Mengenprognose ändert.",
+      how: [
+        "[[Load template]] oder legen Sie jeden Prozess an: seine Einheit, seine Leistung in Einheiten pro produktiver Stunde und, wenn die Prognose in einer anderen Einheit kommt, die Umrechnung. Zeitstudien-Werte werden angeboten.",
+        "Legen Sie die Schichten mit Länge, unbezahlten Pausen sowie bezahlten Pausen und Besprechung an, dann den Nutzungsgrad und den [[Absence allowance (%)]].",
+        "Tippen oder fügen Sie die Mengenprognose der Woche ein: eine Zeile je Tag und Schicht, eine Menge je Einheit.",
+        "Tragen Sie die geplanten Köpfe je Prozess oder nur die Summe ein und übertragen Sie sie mit [[Copy to every shift of this name]].",
+      ],
+      get: "Für jede Schicht: die Arbeitsstunden und die benötigten Köpfe, mit Abwesenheit, die Lücke zum Plan in Köpfen und Stunden, der Engpass, der Takt und wie Sie die Lücke mit Überstunden, Leihkräften oder qualifizierten Personen aus einem anderen Prozess schließen. Eine unterbesetzte Schicht geht zu den Maßnahmen; kopieren, drucken oder als CSV oder Excel herunterladen.",
+      data: "Prozesse, Schichten, Prognose und Plan bleiben in diesem Browser. Qualifikationsmatrix und Zeitstudie liest es und ändert nichts daran.",
+    },
+    "/tools/inventory-abc/": {
+      when: "Jeden Monat, mit mindestens zwölf Monaten Bedarf je Artikel, um Zählungen, Meldebestände und die Lagerplatzvergabe festzulegen.",
+      how: [
+        "Öffnen Sie eine CSV- oder Excel-Datei oder fügen Sie die Zeilen ein: Artikel, Beschreibung, Stückkosten und eine Bedarfsspalte je Periode; Wiederbeschaffungszeit, Bestand und Picks sind optional. [[Import rows]].",
+        "Prüfen Sie die erkannten Spalten, dann legen Sie die Länge einer Bedarfsspalte, den [[Cycle service level (%)]], die ABC- und XYZ-Grenzen und die Zählungen je Klasse und Jahr fest.",
+        "Lesen Sie die Neun-Felder-Matrix und die Strategie jedes Feldes. Zeigen Sie die Artikel [[Below reorder point]]: Das ist zu bestellen, mit Bestellkosten in wirtschaftlichen Losen (EOQ).",
+        "Legen Sie die AX- und AY-Artikel in die goldene Zone, auf Hüfthöhe und nah am Versand, und bereinigen Sie die Artikel ohne Bedarf.",
+      ],
+      get: "Die ABC- und XYZ-Klasse jedes Artikels, die Neun-Felder-Matrix mit ihren Strategien, die Zählungen pro Woche, Sicherheitsbestand, Meldebestand und Bestellmenge beim gewählten Servicegrad und die Artikel für die goldene Zone. [[Add to actions]] für die Nachbestellungen, die Werte in Pareto 80/20 öffnen oder als CSV oder Excel herunterladen.",
+      data: "Artikel und Einstellungen bleiben in diesem Browser; auch Excel-Dateien werden nur im Browser gelesen.",
+    },
+    "/tools/smed/": {
+      when: "Wenn ein Rüstvorgang eine Maschine oder Linie zu lange stillstehen lässt, bevor Sie kleinere Lose planen, und einen Monat nach dem neuen Standard erneut.",
+      how: [
+        "Benennen Sie die Maschine, beide Produkte und die Zielzeit. [[Start: last good piece]], wenn das alte Produkt endet, [[Lap: next element]] am Ende jedes Elements, und stoppen Sie beim ersten Gutteil bei normaler Geschwindigkeit.",
+        "Geben Sie jedem Element seine Kategorie und markieren Sie es als intern, nur bei stehender Maschine möglich, oder extern, bei laufender Maschine möglich. Was heute bei Stillstand geschieht, ist deshalb noch nicht intern.",
+        "Wandeln Sie möglichst viel in extern um und verbessern Sie den Rest: für jedes Element die Zeit nachher, wer es macht, die Maßnahme mit Verantwortlichem und Termin und die Kontrolle.",
+        "Geben Sie die Rüstvorgänge pro Woche und die Kosten je Maschinenminute an, dann [[Print the changeover standard]]: vor dem Stopp, bei Stillstand, nach dem Anlauf. Oder [[Save for Standard Work]].",
+      ],
+      get: "Der Stillstand wie beobachtet, nach dem Trennen und nach dem Plan, die gesparten Minuten je Rüstvorgang, die gewonnene Zeit und die Euro pro Woche und Jahr und der Stillstand nach Kategorie gegen Shingos typische Anteile. Die Maßnahmen gehen in die Maßnahmenliste; die Studie lässt sich als CSV oder Excel herunterladen.",
+      data: "Die Studie bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/eight-d/": {
+      when: "Wenn ein Kunde ein ernstes Problem gesehen hat, dessen Ursache nicht bekannt ist, vom ersten Tag bis zum Abschluss des Reports.",
+      how: [
+        "[[New 8D report]] mit Titel, Kunde, Produkt und Eröffnungsdatum. Kreuzen Sie in D0 die 8D-Kriterien an und schreiben Sie die Notfallmaßnahme; nennen Sie in D1 Teamleitung, Sponsor und Mitglieder.",
+        "D2 beschreibt das Problem mit 5W2H und IST / IST NICHT. D3 dämmt es bis zum nächsten Tag ein: [[Add a containment action]] für jeden Ort, an dem verdächtige Ware sein kann, und setzen Sie den Clean Point.",
+        "D4 prüft zwei Grundursachen: warum es geschah und warum es niemand entdeckte; der Text eines 5 Whys oder einer Fischgräte aus diesem Browser lässt sich übernehmen. D5 prüft die Maßnahmen, D6 validiert sie mit Daten.",
+        "D7 aktualisiert FMEA, Kontrollplan, Standardarbeit und Schulung; D8 hält die Lessons Learned fest und schließt ab. Setzen Sie jede Disziplin auf erledigt und [[Send all actions to the Action Tracker]].",
+      ],
+      get: "Jeder Report mit dem Status je Disziplin und dem, was jeder noch fehlt, den Tagen offen und bis zur Eindämmung gegen die Zielzeiten, und über alle Reports die offenen, abgeschlossenen und überfälligen und die durchschnittlichen Tage bis zum Abschluss. [[Download Word]] oder drucken Sie den Report.",
+      data: "Die Reports bleiben in diesem Browser und lassen sich als CSV oder Excel herunterladen. Ein 5 Whys oder eine Fischgräte wird nur gelesen, nie geändert.",
+    },
+    "/tools/risk-assessment/": {
+      when: "Für jeden Bereich und jede Tätigkeit, vor Beginn der Arbeit, nach einem Unfall oder einer Änderung, spätestens zum Überprüfungstermin.",
+      how: [
+        "[[+ New assessment]] für einen Bereich oder eine Tätigkeit: wer beurteilt und wann, das Überprüfungsintervall, wer betroffen ist und schutzbedürftige Gruppen.",
+        "Gehen Sie den Bereich mit den Beschäftigten ab. Wählen Sie für jede Gefährdung ihren Gefährdungsfaktor, bewerten Sie Wahrscheinlichkeit und Schwere von 1 bis 5 nach dem heutigen Stand und [[Add hazard]].",
+        "Planen Sie die Maßnahmen nach dem STOP-Prinzip, substituierend, technisch, organisatorisch und personenbezogen zuletzt, jede mit Verantwortlichem, Termin und Status. Ist eine Maßnahme erledigt, halten Sie fest, ob sie wirkt.",
+        "Bewerten Sie das Restrisiko mit den Maßnahmen, setzen Sie die nächste Überprüfung und [[Print the documentation]] mit den Unterschriftszeilen.",
+      ],
+      get: "Die Risikomatrix vor und nach den Maßnahmen, die Gefährdungen je Stufe, die höchsten Risiken zuerst, die offenen Maßnahmen nach Verantwortlichen, die fälligen Überprüfungen und die Ereignisse des Sicherheitskreuzes aus 12 Monaten gegen die beurteilten Bereiche. [[Add open measures to the Action Tracker]].",
+      data: "Die Beurteilungen bleiben in diesem Browser; CSV, Excel oder eine Vorlagendatei für einen anderen Standort. Das Tool ist keine Rechtsberatung.",
+    },
+    "/tools/hoshin-kanri/": {
+      when: "Einmal im Jahr, um die Strategie des Standorts auf einer Seite zu entfalten, und jeden Monat, um jede Kennzahl am Bowling-Chart zu prüfen.",
+      how: [
+        "Benennen Sie den Plan und seinen ersten Monat und füllen Sie die fünf Listen: Durchbruchziele, Jahresziele, Verbesserungsprioritäten, Kennzahlen mit Ausgangswert und Ziel zum Jahresende, und die Menschen, die sie verantworten.",
+        "Tippen Sie in den vier Ecken jede Zelle an: ● stark, ○ schwach, · keine; bei den Ressourcen ● hauptverantwortlich. Jede Priorität braucht genau eine hauptverantwortliche Person; die Lücken stehen unter der Matrix.",
+        "Für jede Kennzahl: [[Spread the targets from the baseline to the year-end target]] und tragen Sie jeden Monat den Istwert ein. Verknüpfen Sie jede Priorität mit ihrem Projekt und führen Sie die Catchball-Notizen: Vorschlag, Rückmeldung, vereinbart.",
+        "Verfehlt eine Kennzahl zwei Monate in Folge, braucht sie eine Gegenmaßnahme: [[Add to actions]] mit Verantwortlichem und Termin, oder öffnen Sie einen A3. [[Print the X-matrix]] oder [[Print the bowling chart]].",
+      ],
+      get: "Die X-Matrix wie auf Papier mit ihren Lücken, wie viele Prioritäten mit der Ebene darunter vereinbart sind, das Bowling-Chart mit jedem Monat erreicht oder verfehlt, der Verlauf der Kennzahlen und Phase, Status und Einsparungen der verknüpften Projekte gegen die Jahresziele.",
+      data: "Die Matrix bleibt in diesem Browser, lässt sich als CSV oder Excel herunterladen und geht als Vorlagendatei an die Ebene darunter. Das Projektportfolio wird nur gelesen.",
+    },
+    "/tools/site-compare/": {
+      when: "Jede Woche, wenn Sie mehrere Standorte mit Team-Synchronisierung betreuen.",
+      how: [
+        "Bitten Sie jeden Standort um seinen Nur-Lese-Code. Damit liest das Tool die Teamkopie und behält nur die Kennzahlen; Sie treten nicht bei und ändern nichts.",
+        "Geben Sie den Namen des Standorts ein, fügen Sie den Code unter [[Read-only code]] ein oder scannen Sie ihn, dann [[Add site]]. Ein Teamcode aus sechs Wörtern wird abgelehnt und nicht gespeichert.",
+        "Jeden Montag [[Update all sites]] und den Zeitraum wählen: die letzten 7 oder 30 Tage, diesen oder letzten Monat.",
+        "Lesen Sie bei jeder Quote den besten und den schwächsten Wert, dann [[Plan a Gemba Walk]] am besten Standort, oder nehmen Sie das Lernen von ihm in die Maßnahmen auf.",
+      ],
+      get: "Schadens- und Unvollständigkeitsquote, pünktliche Touren, OEE, Wartung, 5S, Sicherheit, Maßnahmen und Hotelkennzahlen nebeneinander, bester und schwächster Wert benannt, Punkte je Standort nach sichtbarer Regel und die größte Lücke. Kopieren, drucken, CSV oder Excel.",
+      data: "Die Codes bleiben in diesem Browser und werden nie geteilt; von jedem Standort bleiben nur die Kennzahlen.",
+    },
+    "/tools/print-pack/": {
+      when: "Jeden Montag vor dem Huddle, oder am Freitag für die kommende Woche, um das Papier des Teamboards in einem Druck aufzuhängen.",
+      how: [
+        "Füllen Sie zuerst die Tools: Maßnahmenliste, Wartungsplaner, 5S-Audit, Leader Standard Work, Sicherheitskreuz und Tagesboard, für ein Hotel auch Zimmerstatus und Housekeeping-Planer.",
+        "Haken Sie die Dokumente für Ihr Board an. Eines lässt sich anhaken, sobald sein Tool in diesem Browser Daten hat; die Zeile darunter sagt, was es enthält oder welches Tool zuerst zu füllen ist.",
+        "Setzen Sie das [[Date on the pack]]: Danach richten sich die Woche der Arbeitsliste und der Audits und der Monat von Sicherheitskreuz und Tagesboard. Wählen Sie den kommenden Montag, um am Freitag zu drucken.",
+        "[[Print the pack]]. Schreiben Sie während der Woche auf die Blätter und tragen Sie dann das Erledigte in die Tools ein, damit das nächste Paket davon ausgeht.",
+      ],
+      get: "Ein Druck: offene Maßnahmen nach Verantwortlichen, Wartungsarbeitsliste und 5S-Audits der Woche, eine Karte je Führungskraft, Sicherheitskreuz und Tagesboard des Monats und die Arbeits- und Revierzettel eines Hotels. Jedes Blatt nennt sein Tool und Datum; der aktuelle Stand bleibt im Tool. Mit [[Show the example pack]] sehen Sie vorher ein Beispiel.",
+      data: "Das Paket liest die Tools in diesem Browser nur und ändert nichts an ihnen. Es speichert nur, welche Dokumente Sie angehakt haben.",
+    },
     "/tools/cv-builder/": {
       when: "Wenn Ihr Lebenslauf gestaltet aussehen soll und nicht getippt.",
       how: [
@@ -1826,8 +2220,39 @@ const system = families.map((item) => {
 // What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
 const editions = [
   {
+    number: 5,
+    date: { en: "25 October 2026", sq: "25 tetor 2026", de: "25. Oktober 2026" },
+    changes: {
+      en: [
+        "Thirteen new tools, each with its page in this guide: Signals, Room Status, Guest Complaints, Housekeeping Planner, Leader Standard Work, Shift Capacity, Risk Assessment, Print Pack, ABC/XYZ Inventory, SMED Changeover, 8D Report, Hoshin Kanri and Site Compare.",
+        "Shift Pulse and the Daily Board read Room Inspection, the Maintenance Planner and Lost & Found, the Operations Report reads them too, and breakdowns logged in OEE reach the Maintenance Planner.",
+        "Team sync: read-only codes for a manager, a new team code when someone leaves, and reminders of due actions that stay on the device.",
+        "Floor mode on every tool page: larger buttons and text, for gloves and one hand.",
+        "A paste from a hotel PMS, a warehouse system or a route planner is recognised by its column names.",
+        "Charts print dark on paper, whatever the theme of the screen.",
+      ],
+      sq: [
+        "Trembëdhjetë mjete të reja, secili me faqen e vet në këtë udhëzues: Sinjalet, Statusi i dhomave, Ankesat e mysafirëve, Planifikuesi i housekeeping-ut, Puna standarde e drejtuesit, Kapaciteti i turnit, Vlerësimi i rrezikut, Paketa e printimit, Analiza ABC/XYZ e stokut, SMED: ndërrimi i shpejtë, Raporti 8D, Hoshin Kanri dhe Krahasimi i objekteve.",
+        "Shift Pulse dhe Tabela e ditës lexojnë Inspektimin e dhomës, Planifikuesin e mirëmbajtjes dhe Sendet e gjetura, Raporti i operacioneve i lexon edhe ai, dhe prishjet e regjistruara në OEE arrijnë te Planifikuesi i mirëmbajtjes.",
+        "Sinkronizimi i ekipit: kode vetëm për lexim për një menaxher, një kod i ri ekipi kur dikush largohet, dhe kujtesa për veprimet me afat që mbeten në pajisje.",
+        "Modaliteti në terren në çdo faqe mjeti: butona dhe tekst më të mëdhenj, për doreza dhe për një dorë.",
+        "Të dhënat e ngjitura nga një sistem hoteli, një sistem magazine ose një planifikues linjash njihen nga emrat e kolonave.",
+        "Grafikët printohen të errët në letër, cilado qoftë tema e ekranit.",
+      ],
+      de: [
+        "Dreizehn neue Tools, jedes mit seiner Seite in diesem Leitfaden: Signale, Zimmerstatus, Gästebeschwerden, Housekeeping-Planer, Leader Standard Work, Schichtkapazität, Gefährdungsbeurteilung, Druckpaket, ABC/XYZ-Analyse, SMED-Rüstzeitanalyse, 8D-Report, Hoshin Kanri und Standortvergleich.",
+        "Shift Pulse und das Tagesboard lesen die Zimmerkontrolle, den Wartungsplaner und die Fundsachen, der Betriebsbericht liest sie ebenfalls, und in der OEE erfasste Ausfälle gelangen in den Wartungsplaner.",
+        "Team-Synchronisierung: Nur-Lese-Codes für Führungskräfte, ein neuer Team-Code, wenn jemand geht, und Erinnerungen an fällige Maßnahmen, die auf dem Gerät bleiben.",
+        "Der Vor-Ort-Modus auf jeder Tool-Seite: größere Schaltflächen und Schrift, für Handschuhe und eine Hand.",
+        "Eingefügte Daten aus einem Hotelsystem, einem Lagersystem oder einer Tourenplanung werden an ihren Spaltennamen erkannt.",
+        "Diagramme werden dunkel auf Papier gedruckt, egal welches Design der Bildschirm zeigt.",
+      ],
+    },
+  },
+  {
     number: 4,
     date: { en: "24 October 2026", sq: "24 tetor 2026", de: "24. Oktober 2026" },
+    pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-4-${lang}.pdf`,
     changes: {
       en: [
         "Six new tools, each with its page in this guide: Lost & Found, Operations Report, Room Inspection, Maintenance Planner, Spaghetti Diagram and Project Portfolio.",
@@ -1942,10 +2367,11 @@ export default {
   editions: editions.map(({ pdf, ...edition }) => ({ ...edition, ...(pdf ? { pdf: Object.fromEntries(["en", "sq", "de"].map((lang) => [lang, pdf(lang)])) } : {}) })),
   langs: ["en", "sq", "de"],
   pages,
+  routinePart,
   family,
   familyOfTool,
   tool,
-  // The tools of every role, without the course: thirty-six, as the cover says.
+  // The tools of every role, without the course: forty-nine, as the cover says.
   toolCount: families.reduce((count, item) => count + item.tools.length, 0),
   pageOf: Object.fromEntries(pages.map((id) => [id, pageOf(id)])),
   system,
