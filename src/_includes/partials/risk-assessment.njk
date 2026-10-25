@@ -1,0 +1,226 @@
+{#- Risk Assessment: the documented risk assessment (Gefährdungsbeurteilung) of each work area or activity, with its hazards, the measures in the STOP order and their check; risk-assessment.js does the rest. The Safety Cross key and event names of the page's language travel along, so its events can be set against the assessments. -#}
+{%- set sxData = de.safetyCross if lang == "de" else (sq.safetyCross if lang == "sq" else safetyCross) -%}
+<section class="shell tool-layout ra-setup">
+  <div class="tool-panel" data-risk-assessment>
+
+    <form class="dl-box" data-header novalidate>
+      <fieldset class="ra-fieldset">
+        <legend class="kicker">1 · {{ "Work area or activity" | t(lang) }}</legend>
+        <div class="ra-pick">
+          <div class="field">
+            <label for="ra-pick">{{ "Assessment" | t(lang) }}</label>
+            <select id="ra-pick" data-pick></select>
+          </div>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-new>{{ "+ New assessment" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-delete>{{ "Delete this assessment" | t(lang) }}</button>
+          </div>
+        </div>
+        <p class="form-note" data-pick-note></p>
+        <p class="form-note dl-log-status" data-head-status aria-live="polite"></p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ra-area">{{ "Work area" | t(lang) }}</label>
+            <input id="ra-area" name="area" type="text" list="ra-area-list" autocomplete="off" placeholder="{{ cfg.text.areaPlaceholder }}">
+            <datalist id="ra-area-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="ra-activity">{{ "Activity" | t(lang) }}</label>
+            <input id="ra-activity" name="activity" type="text" autocomplete="off" placeholder="{{ cfg.text.activityPlaceholder }}">
+          </div>
+          <div class="field">
+            <label for="ra-date">{{ "Assessed on" | t(lang) }}</label>
+            <input id="ra-date" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="ra-assessor">{{ "Assessor" | t(lang) }}</label>
+            <input id="ra-assessor" name="assessor" type="text" autocomplete="off" placeholder="{{ cfg.text.assessorPlaceholder }}">
+          </div>
+          <div class="field">
+            <label for="ra-review-months">{{ "Review interval" | t(lang) }}</label>
+            <select id="ra-review-months" name="reviewMonths">
+              {%- for n in cfg.reviewMonths %}
+              <option value="{{ n }}">{{ "Every {n} months" | t(lang) | replace("{n}", n) }}</option>
+              {%- endfor %}
+              <option value="0">{{ "Own date" | t(lang) }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ra-next">{{ "Next review" | t(lang) }}</label>
+            <input id="ra-next" name="nextReview" type="date">
+          </div>
+          <div class="field dl-wide">
+            <label class="ra-check" for="ra-changed"><input id="ra-changed" name="changed" type="checkbox"> <span>{{ "Something has changed here (process, equipment, layout, substances or people): review now" | t(lang) }}</span></label>
+          </div>
+          <div class="field dl-wide">
+            <label for="ra-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <textarea id="ra-note" name="note" rows="2" placeholder="{{ cfg.text.notePlaceholder }}"></textarea>
+          </div>
+        </div>
+        <div class="ra-who">
+          <fieldset class="ra-boxes">
+            <legend class="ra-sub">{{ "Who is exposed" | t(lang) }}</legend>
+            {%- for item in cfg.exposed %}
+            <label class="ra-check" for="ra-exposed-{{ item.key }}"><input id="ra-exposed-{{ item.key }}" name="exposed" type="checkbox" value="{{ item.key }}"> <span>{{ item.name }}</span></label>
+            {%- endfor %}
+          </fieldset>
+          <fieldset class="ra-boxes">
+            <legend class="ra-sub">{{ "Special groups" | t(lang) }}</legend>
+            {%- for item in cfg.special %}
+            <label class="ra-check" for="ra-special-{{ item.key }}"><input id="ra-special-{{ item.key }}" name="special" type="checkbox" value="{{ item.key }}"> <span>{{ item.name }}</span></label>
+            {%- endfor %}
+          </fieldset>
+        </div>
+        <ul class="ra-special-notes" data-special-notes aria-live="polite" hidden></ul>
+      </fieldset>
+    </form>
+
+    <div class="dl-box">
+      <form class="ra-add" data-add-form novalidate>
+        <fieldset class="ra-fieldset">
+          <legend class="kicker">2 · {{ "Hazards and their risk" | t(lang) }}</legend>
+          <div class="dl-grid">
+            <div class="field">
+              <label for="ra-group">{{ "Hazard factor" | t(lang) }}</label>
+              <select id="ra-group" name="group">
+                {%- for group in cfg.groups %}
+                <option value="{{ group.key }}">{{ group.no }} · {{ group.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="ra-sector">{{ "Examples for" | t(lang) }}</label>
+              <select id="ra-sector" data-sector>
+                {%- for sector in cfg.sectors %}
+                <option value="{{ sector.key }}">{{ sector.name }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field dl-wide">
+              <label for="ra-hazard">{{ "Hazard: what can happen, to whom, where" | t(lang) }}</label>
+              <input id="ra-hazard" name="text" type="text" list="ra-examples" autocomplete="off" placeholder="{{ cfg.text.hazardPlaceholder }}">
+              <datalist id="ra-examples"></datalist>
+              <span class="form-note" data-group-factors></span>
+            </div>
+            <div class="field">
+              <label for="ra-l">{{ "Likelihood" | t(lang) }}</label>
+              <select id="ra-l" name="l"></select>
+            </div>
+            <div class="field">
+              <label for="ra-s">{{ "Severity of harm" | t(lang) }}</label>
+              <select id="ra-s" name="s"></select>
+            </div>
+          </div>
+          <p class="ra-risk-out" data-add-risk aria-live="polite"></p>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-add-hazard>{{ "Add hazard" | t(lang) }}</button>
+          </div>
+        </fieldset>
+      </form>
+      <details class="ra-catalogue">
+        <summary class="ra-sub">{{ "Hazard factor catalogue" | t(lang) }}</summary>
+        <p class="form-note">{{ cfg.text.catalogueNote }}</p>
+        <div class="ra-cat-grid" data-catalogue></div>
+      </details>
+    </div>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Measures, check and residual risk" | t(lang) }}</p>
+        <p class="form-note" data-hazard-count></p>
+      </div>
+      <p class="form-note">{{ cfg.text.measuresNote }}</p>
+      <p class="form-note dl-log-status" data-hazard-status aria-live="polite"></p>
+      <div class="ra-hazards" data-hazards></div>
+      <p class="dl-empty" data-hazards-empty>{{ cfg.text.empty }} {{ "Add the first hazard above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example" | t(lang) }}</button>.</p>
+      <datalist id="ra-owner-list"></datalist>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-print-doc>{{ "Print the documentation" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear>{{ "Clear all assessments" | t(lang) }}</button>
+      </div>
+      <div class="ra-pack" data-pack></div>
+    </div>
+
+    <details class="dl-box ra-scales">
+      <summary class="kicker">{{ "Rating scales and risk bands" | t(lang) }}</summary>
+      <p class="form-note">{{ cfg.text.scalesNote }}</p>
+      <div class="ra-scale-grid">
+        <div class="ra-scale">
+          <h3>{{ "Likelihood" | t(lang) }}</h3>
+          <ol>
+            {%- for item in cfg.likelihood %}
+            <li><strong>{{ loop.index }} · {{ item[0] }}</strong> {{ item[1] }}</li>
+            {%- endfor %}
+          </ol>
+        </div>
+        <div class="ra-scale">
+          <h3>{{ "Severity of harm" | t(lang) }}</h3>
+          <ol>
+            {%- for item in cfg.severity %}
+            <li><strong>{{ loop.index }} · {{ item[0] }}</strong> {{ item[1] }}</li>
+            {%- endfor %}
+          </ol>
+        </div>
+      </div>
+      <form class="ra-bands" data-bands novalidate>
+        <fieldset class="ra-fieldset">
+          <legend class="ra-sub">{{ "Risk = likelihood × severity (1–5 each), in four bands" | t(lang) }}</legend>
+          <p class="ra-bands-text"><strong data-bands-text></strong></p>
+          <div class="ra-band-inputs">
+            <div class="field">
+              <label for="ra-band-low">{{ "Low up to" | t(lang) }}</label>
+              <input id="ra-band-low" name="low" type="number" min="1" max="22" step="1" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="ra-band-medium">{{ "Medium up to" | t(lang) }}</label>
+              <input id="ra-band-medium" name="medium" type="number" min="2" max="23" step="1" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="ra-band-high">{{ "High up to" | t(lang) }}</label>
+              <input id="ra-band-high" name="high" type="number" min="3" max="24" step="1" inputmode="numeric">
+            </div>
+          </div>
+          <p class="form-note">{{ "Above the high limit the risk is very high. The standard is 4, 9 and 16." | t(lang) }} <button class="button-ghost ra-small" type="button" data-bands-reset>{{ "Back to the standard bands" | t(lang) }}</button></p>
+          <p class="form-note" data-bands-status aria-live="polite"></p>
+        </fieldset>
+      </form>
+      <ul class="ra-band-list">
+        {%- for key, item in cfg.bands %}
+        <li><strong>{{ item.name }}</strong> {{ item.meaning }}</li>
+        {%- endfor %}
+      </ul>
+      <h3 class="ra-sub">{{ "The STOP order" | t(lang) }}</h3>
+      <ol class="ra-stop-list">
+        {%- for key, item in cfg.stop %}
+        <li><strong>{{ key }} · {{ item.name }}</strong> {{ item.hint }}</li>
+        {%- endfor %}
+      </ol>
+    </details>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Events tell you what the assessment missed." | t(lang) }}</strong> {{ "Log accidents and near misses on the" | t(lang) }} <a class="inline-link" href="{{ '/tools/safety-cross/' | local(lang) }}" data-safety-cross-link>{{ "Safety Cross" | t(lang) }}</a>; {{ "a risk that stays high goes to" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "or" | t(lang) }} <a class="inline-link" href="{{ '/tools/fmea/' | local(lang) }}" data-fmea>FMEA</a>, {{ "and every measure to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="form-note ra-legal">{{ cfg.text.legal }}</p>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ra-results" data-results tabindex="-1" hidden></section>
+<section class="shell ra-print" data-print aria-hidden="true"></section>
+
+<script type="application/json" id="risk-assessment-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="risk-assessment-sx">{{ ({ "key": sxData.storageKey, "types": sxData.short } if sxData else {}) | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/template-pack.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/risk-assessment.js' | assetUrl }}" defer></script>

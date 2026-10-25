@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Hoshin Kanri", "type": "Strategy", "time": "Monthly", "summary": "The site's strategy on one X-matrix: breakthrough and annual objectives, improvement priorities, metrics and their owners, with the gaps listed. Catchball notes per priority, a bowling chart month by month, and a countermeasure when a metric misses twice in a row.", "url": "/tools/hoshin-kanri/", "cta": "Open the X-matrix" },
+    "de": { "name": "Hoshin Kanri (X-Matrix)", "type": "Strategie", "time": "Monatlich", "summary": "Die Strategie des Standorts auf einer X-Matrix: Durchbruch- und Jahresziele, Verbesserungsprioritäten, Kennzahlen und Verantwortliche, mit allen Lücken. Catchball-Notizen je Priorität, ein Bowling-Chart Monat für Monat und eine Gegenmaßnahme, wenn eine Kennzahl zweimal in Folge verfehlt.", "url": "/de/tools/hoshin-kanri/", "cta": "X-Matrix öffnen" },
+    "sq": { "name": "Hoshin Kanri (matrica X)", "type": "Strategji", "time": "Çdo muaj", "summary": "Strategjia e vendit të punës në një matricë X: objektivat e përparimit dhe ato vjetore, prioritetet e përmirësimit, treguesit dhe përgjegjësit, me mungesat të listuara. Shënime catchball për çdo prioritet, grafiku bowling muaj pas muaji dhe një kundërmasë kur një tregues nuk arrihet dy herë radhazi.", "url": "/sq/tools/hoshin-kanri/", "cta": "Hap matricën X" }
+  },
+  "routine": { "when": "Every month", "do": "Enter last month's actuals on the bowling chart, agree a countermeasure with its owner for every metric that missed twice in a row, and close the gaps in the X-matrix.", "de": { "when": "Jeden Monat", "do": "Tragen Sie die Istwerte des letzten Monats in das Bowling-Chart ein, vereinbaren Sie für jede zweimal in Folge verfehlte Kennzahl eine Gegenmaßnahme mit ihrer verantwortlichen Person und schließen Sie die Lücken in der X-Matrix." }, "sq": { "when": "Çdo muaj", "do": "Shkruaj vlerat reale të muajit të kaluar në grafikun bowling, bini dakord me përgjegjësin për një kundërmasë për çdo tregues që nuk u arrit dy herë radhazi, dhe mbyll mungesat në matricën X." } },
+  "recipe": "example"
+}

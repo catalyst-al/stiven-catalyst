@@ -1,0 +1,193 @@
+{
+  "storageKey": "sc-eight-d-sq",
+  "targets": { "d3": 1, "d4": 10, "d5": 14, "d6": 30, "d8": 60 },
+  "stepStatuses": { "todo": "Pa filluar", "doing": "Në punë", "done": "Kryer" },
+  "actionStatuses": { "open": "Hapur", "doing": "Në punë", "done": "Kryer" },
+  "disciplines": [
+    { "key": "d0", "code": "D0", "title": "Përgatitja dhe reagimi emergjent", "question": "A ka nevojë ky problem për një 8D, dhe çfarë e mbron klientin tani, para se dikush ta dijë shkakun?" },
+    { "key": "d1", "code": "D1", "title": "Ngritja e ekipit", "question": "Kush e njeh produktin dhe procesin, kush e drejton ekipin, dhe kush si sponsor heq pengesat?" },
+    { "key": "d2", "code": "D2", "title": "Përshkrimi i problemit", "question": "Çfarë nuk shkon me çfarë, në numra? Përgjigju 5W2H, vendos ËSHTË përballë NUK ËSHTË, pastaj shkruaj një përshkrim të problemit. Ende pa shkaqe." },
+    { "key": "d3", "code": "D3", "title": "Masat e përkohshme të kufizimit", "question": "Si e ndalon dorëzimin e radhës me defekt, ndërkohë që shkaku nuk dihet? Kontrollo çdo vend ku mund të jetë malli i dyshimtë dhe provo që kufizimi funksionon." },
+    { "key": "d4", "code": "D4", "title": "Shkaku rrënjësor dhe pika e moszbulimit", "question": "Pse ndodhi, dhe pse nuk e kapi askush? Dy shkaqe rrënjësore, secili i verifikuar: me të mund ta ndezësh dhe ta fikësh problemin." },
+    { "key": "d5", "code": "D5", "title": "Veprimet korrigjuese të përhershme", "question": "Cilat veprime i heqin të dy shkaqet rrënjësore? Zgjidhi dhe verifiko që funksionojnë para se t'i zbatosh." },
+    { "key": "d6", "code": "D6", "title": "Zbatimi dhe vërtetimi", "question": "Vëri veprimet në punë, trego me të dhëna që problemi u zhduk, dhe vetëm atëherë hiq kufizimin." },
+    { "key": "d7", "code": "D7", "title": "Parandalimi i përsëritjes", "question": "Cilat sisteme ndryshojnë që kjo të mos ndodhë më, as këtu, as kudo ku është e ngjashme?" },
+    { "key": "d8", "code": "D8", "title": "Mirënjohja për ekipin dhe mbyllja", "question": "Falënderoje ekipin për atë që bëri, shkruaj çfarë mësove dhe mbylle raportin." }
+  ],
+  "criteria": [
+    "Simptoma është përshkruar dhe matur.",
+    "Dihet klienti që e pa dhe palët e prekura.",
+    "Numrat tregojnë një hendek, ose rëndësia, urgjenca apo rritja e bëjnë prioritet.",
+    "Shkaku nuk dihet.",
+    "Drejtimi angazhon njerëzit dhe kohën për ta zgjidhur në rrënjë dhe për të parandaluar kthimin e tij.",
+    "Është shumë kompleks që ta zgjidhë një person i vetëm."
+  ],
+  "w2h": [
+    { "key": "what", "label": "Cili është problemi?", "placeholder": "Defekti te objekti, me fjalë të thjeshta: cili artikull, cili gabim." },
+    { "key": "why", "label": "Pse është problem?", "placeholder": "Çfarë i kushton ose i prish klientit: boshllëqe në raft, tarifa, një nivel shërbimi i humbur." },
+    { "key": "where", "label": "Ku u pa?", "placeholder": "Linja, vendi i klientit, linja e prodhimit, zona, vendi në artikull." },
+    { "key": "when", "label": "Kur u pa?", "placeholder": "Që kur, në cilat turne ose ditë, në cilën fazë (pranim, mbledhje, dorëzim)." },
+    { "key": "who", "label": "Kush e gjeti, kë prek?", "placeholder": "Kush e zbuloi dhe kë prek. Role, jo faj." },
+    { "key": "how", "label": "Si u gjet, si shfaqet?", "placeholder": "Si u zbulua dhe si shfaqet gabimi në proces." },
+    { "key": "howMany", "label": "Sa?", "placeholder": "Numri dhe baza: 144 nga 4.800 rreshta, ecuria, zona të tjera për krahasim." }
+  ],
+  "isNot": [
+    { "key": "what", "label": "Çfarë", "is": "Cili objekt, cili defekt", "isNot": "Objekte ose defekte të ngjashme që mund të preken, por nuk preken" },
+    { "key": "where", "label": "Ku", "is": "Ku shfaqet", "isNot": "Ku mund të shfaqej, por nuk shfaqet" },
+    { "key": "when", "label": "Kur", "is": "Kur u shfaq së pari, kur shfaqet", "isNot": "Kur mund të shfaqej, por nuk shfaqet" },
+    { "key": "extent", "label": "Shtrirja", "is": "Sa, sa i madh, ecuria", "isNot": "Sa mund të preken, por nuk preken" }
+  ],
+  "locations": [
+    { "key": "transit", "name": "Në rrugë" },
+    { "key": "warehouse", "name": "Magazinë" },
+    { "key": "customer", "name": "Te klienti" },
+    { "key": "production", "name": "Në prodhim" },
+    { "key": "supplier", "name": "Te furnitori" }
+  ],
+  "addresses": { "occurrence": "Shkaku rrënjësor (ndodhja)", "escape": "Pika e moszbulimit" },
+  "preventions": [
+    { "key": "fmea", "name": "Përditëso FMEA-në", "hint": "Shto mënyrën e dështimit dhe shkakun e saj, pastaj rivlerëso shpeshtësinë dhe zbulimin." },
+    { "key": "controlPlan", "name": "Përditëso planin e kontrollit", "hint": "Kontrolli i ri: çfarë, sa shpesh, nga kush, dhe çfarë bëhet kur ai dështon." },
+    { "key": "standardWork", "name": "Përditëso punën standarde", "hint": "Ndrysho udhëzimin te vendi i punës, që mënyra e re të jetë e vetmja." },
+    { "key": "training", "name": "Trajno njerëzit", "hint": "Të gjithë ata që e bëjnë punën, në çdo turn, me nënshkrim." },
+    { "key": "readAcross", "name": "Shtrije te produkte dhe procese të ngjashme", "hint": "Ku tjetër mund të fshihet i njëjti shkak: site të tjera, linja, zona, produkte?" },
+    { "key": "other", "name": "Ndryshim tjetër në sistem", "hint": "Një rregullore, një marrëveshje me furnitorin, një rregull projektimi." }
+  ],
+  "fishboneSets": {
+    "6m": ["Njerëzit", "Makineria", "Metoda", "Materiali", "Matja", "Mjedisi"],
+    "4p": ["Politikat", "Procedurat", "Njerëzit", "Vendi"],
+    "service5": ["Njerëzit", "Procesi", "Vendi", "Pajisjet", "Informacioni"]
+  },
+  "fields": {
+    "title": "p.sh. Artikuj të gabuar te klienti në linjën R7",
+    "customer": "p.sh. Klient me pakicë, 12 dyqane",
+    "ref": "p.sh. Ankesa 2026-118",
+    "product": "p.sh. Pije, zona e mbledhjes C",
+    "area": "p.sh. Dalja, qendra e shpërndarjes Veri",
+    "person": "Emri, funksioni",
+    "eraText": "p.sh. Asnjë kafaz me rrota i linjës nuk niset pa kontroll; klienti merret në telefon sot.",
+    "statement": "Një ose dy fjali: çfarë nuk shkon me çfarë, ku, që kur dhe sa. Pa shkak, pa faj.",
+    "containment": "p.sh. Skanim 100 % i çdo kafazi me rrota të linjës para ngarkimit",
+    "verification": "p.sh. 0 rreshta të gabuar në kontrollin e pranimit te klienti që nga",
+    "cleanMark": "p.sh. Pikë jeshile në etiketën e çdo kafazi të kontrolluar",
+    "occurrence": "Pse ndodhi? Shkaku në proces që, kur është i pranishëm, e shfaq problemin.",
+    "escapePoint": "p.sh. Konfirmimi i mbledhjes, pastaj kontrolli në nisje",
+    "escape": "Pse nuk u zbulua? Kontrolli që duhej ta kapte dhe pse nuk e kapi.",
+    "verifyHow": "Si u ndez dhe u fik: një provë, një test, të dhënat para dhe pas.",
+    "notes": "Zinxhiri yt i pse-ve ose shkaqet e mundshme të një kurrizi peshku; mund t'i marrësh më poshtë nga 5 Whys dhe Kurrizi i peshkut.",
+    "pca": "Një ndryshim në proces që e heq shkakun, jo një kujtesë.",
+    "pcaCheck": "p.sh. Provë mbledhjeje: 0 gabime në 400 mbledhje",
+    "implementation": "p.sh. Skanimi EAN aktiv në zonën C në të gjitha turnet",
+    "period": "p.sh. Dy javë pas ndryshimit",
+    "result": "Çfarë tregojnë të dhënat pas ndryshimit, dhe që kur.",
+    "prevention": "Çfarë ndryshon, ku",
+    "recognition": "Kush bëri çfarë; si u falënderua ekipi.",
+    "lessons": "Çfarë do të bëje njësoj dhe çfarë ndryshe herën tjetër.",
+    "closedBy": "p.sh. Sponsori ose kontakti i cilësisë te klienti"
+  },
+  "tips": [
+    ["Në fillim kufizo, pastaj kërko.", "D3 e mbron klientin brenda një dite. Kontrollo çdo vend ku mund të jetë malli i dyshimtë: në magazinë, në rrugë, te klienti."],
+    ["Faktet para shkaqeve.", "D2 është 5W2H dhe ËSHTË / NUK ËSHTË. Dallimi mes vendit ku shfaqet dhe vendit ku nuk shfaqet tregon drejt shkakut; një hamendësim jo."],
+    ["Dy shkaqe rrënjësore, jo një.", "Pse ndodhi dhe pse nuk e kapi askush. Një shkak është i verifikuar kur me të mund ta ndezësh dhe ta fikësh problemin."],
+    ["Verifiko, zbato, pastaj vërteto.", "D5 provon në një test që veprimi funksionon; D6 provon me të dhënat që problemi u zhduk. Vetëm pas kësaj hiqet kufizimi."],
+    ["Mbyll sistemin, jo vetëm rastin.", "D7 ndryshon FMEA-në, planin e kontrollit, punën standarde dhe trajnimin, dhe kërkon të njëjtin shkak edhe gjetkë."]
+  ],
+  "example": {
+    "title": "Artikuj të gabuar te klienti në linjën R7",
+    "customer": "Klient me pakicë, 12 dyqane në rajonin verior",
+    "ref": "Ankesa 2026-118",
+    "product": "Pije, zona e mbledhjes C",
+    "area": "Dalja, qendra e shpërndarjes Veri",
+    "opened": -38,
+    "steps": {
+      "d0": { "status": "done", "date": -38 },
+      "d1": { "status": "done", "date": -38 },
+      "d2": { "status": "done", "date": -37 },
+      "d3": { "status": "done", "date": -37 },
+      "d4": { "status": "done", "date": -30 },
+      "d5": { "status": "done", "date": -25 },
+      "d6": { "status": "done", "date": -10 },
+      "d7": { "status": "doing", "date": "" },
+      "d8": { "status": "todo", "date": "" }
+    },
+    "d0": {
+      "criteria": [true, true, true, true, true, true],
+      "era": "Nga ngarkimi i radhës asnjë kafaz me rrota i linjës R7 nuk largohet nga rampa pa kontroll. Menaxherja e klientit e merr në telefon klientin po atë mëngjes dhe bie dakord për një dorëzim zëvendësimi për rreshtat e gabuar.",
+      "eraOwner": "Sara K., menaxhere e klientit",
+      "eraDate": -38
+    },
+    "d1": {
+      "leader": "Mira S., drejtuese e cilësisë",
+      "champion": "Daniel R., drejtues i sitit",
+      "members": [
+        { "name": "Jonas B.", "role": "Shef turni në dalje, turni i pasdites" },
+        { "name": "Elena P.", "role": "Kontrolli i stokut dhe vendosja në rafte" },
+        { "name": "Tom W.", "role": "Përdorues kyç i WMS" },
+        { "name": "Sara K.", "role": "Menaxhere e klientit" },
+        { "name": "Ardit H.", "role": "Mbledhës porosish, zona C" }
+      ]
+    },
+    "d2": {
+      "w": {
+        "what": "Dyqanet marrin një variant të gabuar të artikullit të porositur: një madhësi ose shije tjetër të së njëjtës linjë produkti, p.sh. 1 l në vend të 0,5 l të së njëjtës pije.",
+        "why": "Artikulli i porositur mungon në raft dhe një tjetër është tepër. Klienti faturon 15 € për çdo rresht të gabuar (2.160 € në pesë ditë) dhe 99,5 % rreshta të saktë që janë rënë dakord nuk arrihen.",
+        "where": "Linja R7, 12 dyqanet e klientit në rajonin verior. Rreshtat mblidhen në zonën C të qendrës së shpërndarjes.",
+        "when": "Që nga rivendosja e artikujve në zonën C, një javë para ankesës, në të dy turnet. U gjet në kontrollin e pranimit të klientit.",
+        "who": "E gjetën ekipet e dyqaneve dhe kontrolli i pranimit të klientit; ankesa i erdhi menaxheres sonë të klientit.",
+        "how": "Mbledhësi konfirmon shifrën e kontrollit të vendit dhe merr variantin e ngjashëm nga vendi fqinj. Kontrolli në nisje numëron kafazet dhe etiketat e dyqaneve, jo artikujt.",
+        "howMany": "144 nga 4.800 rreshta (3,0 %) në pesë ditë dorëzimi në R7; linjat e tjera 0,2 % (42 nga 21.000)."
+      },
+      "isNot": {
+        "what": { "is": "Një variant i gabuar i artikullit të porositur (madhësi ose shije tjetër, e njëjta linjë produkti)", "isNot": "Rreshta që mungojnë, mall i dëmtuar, sasi të gabuara, artikuj të një linje tjetër", "diff": "Variante të ngjashme me të njëjtën ngjyrë etikete" },
+        "where": { "is": "Linja R7, 12 dyqane; rreshta të mbledhur në zonën C", "isNot": "Linjat e tjera (0,2 %); zonat A, B dhe D", "diff": "Vetëm dyqanet e R7 porositin të dy variantet (gamë rajonale); zona C u rivendos" },
+        "when": { "is": "Që nga rivendosja e zonës C, në të dy turnet", "isNot": "Para rivendosjes (edhe R7 në 0,2 %)", "diff": "Rivendosja i vuri variantet e ngjashme në vende fqinje" },
+        "extent": { "is": "144 nga 4.800 rreshta (3,0 %), i qëndrueshëm nga dita në ditë; 9 çifte të ngjashme", "isNot": "Nuk po rritet; jo artikujt e tjerë të zonës C", "diff": "9 çiftet janë krah për krah që nga rivendosja" }
+      },
+      "statement": "Që nga rivendosja e zonës C, 3,0 % e rreshtave të porosive që dorëzohen në linjën R7 te 12 dyqanet e klientit janë një variant i gabuar i artikullit të porositur (144 nga 4.800 rreshta në pesë ditë dorëzimi), kundrejt 0,2 % në linjat e tjera."
+    },
+    "d3": {
+      "actions": [
+        { "text": "Skanim 100 % i artikujve të çdo kafazi të R7 në nisje para ngarkimit; rreshtat e gabuar korrigjohen në vend", "owner": "Jonas B.", "date": -38, "where": "warehouse", "sorted": "2880", "found": "84", "verified": "84 rreshta të gabuar u korrigjuan në tri ditët e para; një rikontroll i 200 rreshtave të skanuar nuk gjeti asnjë", "status": "done" },
+        { "text": "Kontrollo dy kamionët e R7 që ishin tashmë në rrugë kur mbërrijnë në dyqan dhe zëvendëso rreshtat e gabuar", "owner": "Sara K.", "date": -38, "where": "transit", "sorted": "960", "found": "31", "verified": "Të 31 u zëvendësuan po atë ditë; ekipet e dyqaneve e konfirmuan me email", "status": "done" },
+        { "text": "Rinumëro me dyqanet dorëzimet e pesë ditëve të fundit; një dorëzim zëvendësimi për rreshtat e gabuar", "owner": "Sara K.", "date": -37, "where": "customer", "sorted": "4800", "found": "144", "verified": "144 rreshta u zëvendësuan në një dorëzim; nota e kreditit e klientit përputhet me 144", "status": "done" }
+      ],
+      "cleanPoint": -37,
+      "cleanMark": "Pikë jeshile në etiketën e çdo kafazi të skanuar; kontrolli i pranimit të klientit gjeti 0 rreshta të gabuar në R7 që nga dorëzimi i parë me pikë jeshile."
+    },
+    "d4": {
+      "occurrence": { "text": "Rivendosja e zonës C i vuri variantet e ngjashme të të njëjtit artikull (e njëjta ngjyrë etikete, madhësi 0,5 l dhe 1 l) në vende fqinje: 9 çifte. Vetëm dyqanet e R7 porositin të dy variantet, prandaj preken vetëm rreshtat e R7.", "verified": true, "how": "U ndez dhe u fik në një provë mbledhjeje: 400 mbledhje nga vendet fqinje të ngjashme, 11 të gabuara (2,75 %); të njëjtat 400 mbledhje me variantet tri vende larg, 0 të gabuara." },
+      "escape": { "point": "Konfirmimi i mbledhjes në zonën C, pastaj kontrolli në nisje", "text": "Mbledhja konfirmohet vetëm me shifrën e kontrollit të vendit, jo me barkodin e artikullit; kontrolli në nisje numëron kafazet dhe etiketat, jo artikujt. Një variant i gabuar nga vendi i duhur kalon të dy kontrollet.", "verified": true, "how": "Në provë të 11 mbledhjet e gabuara kaluan shifrën e kontrollit dhe kontrollin në nisje; me skanimin e artikullit (EAN) në mbledhje, të 11 u ndalën." },
+      "notes": "Kurrizi i peshkut me turnin e pasdites: Metoda (asnjë rregull vendosjeje për artikujt e ngjashëm), Materiali (e njëjta ngjyrë etikete), Matja (shifra e kontrollit, jo artikulli). 5 Whys: variant i gabuar, sepse vendi fqinj, sepse rivendosja vetëm sipas shpejtësisë së shitjes, sepse asnjë rregull për artikujt e ngjashëm."
+    },
+    "d5": {
+      "actions": [
+        { "text": "Rivendos zonën C: variantet e ngjashme të paktën tri vende larg dhe në nivele të ndryshme; rregulli u shtua në kontrollin e vendosjes në WMS", "addresses": "occurrence", "owner": "Elena P.", "due": -27, "verification": "Provë mbledhjeje: 0 gabime në 400 mbledhje", "verified": true, "status": "done" },
+        { "text": "Konfirmo çdo mbledhje në zonën C me skanimin e artikullit (EAN) në vend të shifrës së kontrollit të vendit", "addresses": "escape", "owner": "Tom W.", "due": -25, "verification": "Provë: 11 nga 11 mbledhje të gabuara u ndalën; ritmi i mbledhjes −2 %, i pranuar", "verified": true, "status": "done" }
+      ]
+    },
+    "d6": {
+      "actions": [
+        { "text": "Zona C u rivendos, 9 çiftet e ngjashme u ndanë", "owner": "Elena P.", "due": -27, "status": "done" },
+        { "text": "Skanimi EAN në mbledhje aktiv në zonën C në të gjitha turnet", "owner": "Tom W.", "due": -25, "status": "done" },
+        { "text": "Ndalo skanimin 100 % në nisje për R7 pas dy javësh pa gabime", "owner": "Jonas B.", "due": -10, "status": "done" }
+      ],
+      "beforeBad": "144",
+      "beforeTotal": "4800",
+      "afterBad": "9",
+      "afterTotal": "9600",
+      "period": "Dy javë pasi nisi skanimi EAN, matur te skanimi në nisje",
+      "result": "Rreshtat e gabuar në R7 ranë nga 3,0 % në 0,09 % (9 nga 9.600), nën 0,2 % të linjave të tjera. Kontrolli i pranimit të klientit nuk gjeti asnjë.",
+      "containmentRemoved": -10
+    },
+    "d7": {
+      "lines": [
+        { "kind": "fmea", "text": "FMEA e procesit, mbledhja: u shtua mënyra e dështimit “variant i ngjashëm në vendin fqinj”; shpeshtësia dhe zbulimi u rivlerësuan pas skanimit EAN", "owner": "Mira S.", "due": -12, "status": "done" },
+        { "kind": "controlPlan", "text": "Plani i kontrollit: kontroll javor i vendosjes për çifte të ngjashme; norma e skanimit EAN si tregues ditor me plan reagimi", "owner": "Elena P.", "due": 4, "status": "doing" },
+        { "kind": "standardWork", "text": "Punë standarde për çdo ndryshim vendosjeje: kontroll për artikuj të ngjashëm para se ndryshimi të miratohet", "owner": "Daniel R.", "due": 8, "status": "open" },
+        { "kind": "training", "text": "Të gjithë mbledhësit e zonës C dhe ekipi i vendosjes u informuan për artikujt e ngjashëm dhe rregullin e skanimit, të dy turnet, me nënshkrim", "owner": "Jonas B.", "due": -11, "status": "done" },
+        { "kind": "readAcross", "text": "Shtrirja: kontrollo zonat A, B dhe D dhe qendrën e dytë të shpërndarjes për çifte të ngjashme krah për krah", "owner": "Mira S.", "due": 12, "status": "open" }
+      ]
+    },
+    "d8": { "recognition": "", "lessons": "", "closedBy": "" }
+  }
+}

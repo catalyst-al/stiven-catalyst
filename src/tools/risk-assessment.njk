@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Risk Assessment
+seo_title: "Risk assessment (Gefährdungsbeurteilung) per work area: hazard factors, 5 × 5 risk matrix, STOP measures, effectiveness check and review"
+description: "Document the risk assessment of each work area: hazards by factor group, likelihood × severity, STOP measures with owners, residual risk, checks and reviews."
+activeNav: /tools.html
+permalink: /tools/risk-assessment/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Safety</p>
+  <h1>Risk Assessment</h1>
+  <p class="lede">The documented risk assessment of each work area or activity, the way the German Gefährdungsbeurteilung does it: who is exposed, the hazards from the eleven hazard-factor groups, each rated likelihood × severity on a 5 × 5 matrix, the measures in the STOP order with an owner, a date and the check of whether they work, and the residual risk. See the matrix before and after, the open measures, the reviews that are due and what the Safety Cross says the assessment missed, and print it with signature lines.</p>
+</section>
+
+{% set cfg = riskAssessment %}
+{% include "partials/risk-assessment.njk" %}

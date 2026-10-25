@@ -358,5 +358,29 @@
     "summary": "Mat një ndërrim element pas elementi, ndaj punën e brendshme nga e jashtmja, shndërroje dhe thjeshtoje sipas hapave të Shingos, dhe shiko minutat dhe eurot e fituara dhe standardin e ri të ndërrimit.",
     "url": "/sq/tools/smed/",
     "cta": "Studio një ndërrim"
+  },
+  {
+    "name": "Raporti 8D",
+    "type": "Cilësia",
+    "time": "Për çdo problem",
+    "summary": "Global 8D për një problem që e pa një klient, D0 deri D8: kufizimi brenda një dite, 5W2H dhe ËSHTË / NUK ËSHTË, shkaku rrënjësor dhe pika e moszbulimit të verifikuara, veprimet korrigjuese të vërtetuara me të dhëna. Ditët e hapura dhe deri te kufizimi kundrejt afateve, çdo veprim te lista, printim dhe Word.",
+    "url": "/sq/tools/eight-d/",
+    "cta": "Hap një 8D"
+  },
+  {
+    "name": "Vlerësimi i rrezikut",
+    "type": "Siguria",
+    "time": "Për çdo zonë",
+    "summary": "Vlerësimi i dokumentuar i rrezikut për çdo zonë pune: burimet e rrezikut nga njëmbëdhjetë grupet e faktorëve, gjasat × rëndesa në një matricë 5 × 5, masat sipas rendit STOP me përgjegjës dhe kontrollin e efektivitetit, rreziku i mbetur dhe data e rishikimit, përballë ngjarjeve të kryqit të sigurisë.",
+    "url": "/sq/tools/risk-assessment/",
+    "cta": "Vlerëso rreziqet"
+  },
+  {
+    "name": "Hoshin Kanri (matrica X)",
+    "type": "Strategji",
+    "time": "Çdo muaj",
+    "summary": "Strategjia e vendit të punës në një matricë X: objektivat e përparimit dhe ato vjetore, prioritetet e përmirësimit, treguesit dhe përgjegjësit, me mungesat të listuara. Shënime catchball për çdo prioritet, grafiku bowling muaj pas muaji dhe një kundërmasë kur një tregues nuk arrihet dy herë radhazi.",
+    "url": "/sq/tools/hoshin-kanri/",
+    "cta": "Hap matricën X"
   }
 ]

@@ -1,0 +1,318 @@
+{
+  "storageKey": "sc-risk-assessment-de",
+  "text": {
+    "tool": "Gefährdungsbeurteilung",
+    "csv": "gefaehrdungsbeurteilung",
+    "areaPlaceholder": "z. B. Verladetor",
+    "activityPlaceholder": "z. B. Be- und Entladen von Lkw",
+    "assessorPlaceholder": "z. B. Marco (Schichtleitung) mit der Fachkraft für Arbeitssicherheit",
+    "notePlaceholder": "z. B. Begehung mit zwei Fahrern der Spätschicht; der Betriebsrat wurde informiert",
+    "hazardPlaceholder": "z. B. Fußgänger queren das Tor hinter rückwärtsfahrenden Lkw",
+    "measurePlaceholder": "z. B. Markierter Fußweg und Absperrung entlang Tor 1–6",
+    "ownerPlaceholder": "z. B. Anna",
+    "empty": "In dieser Beurteilung sind noch keine Gefährdungen erfasst.",
+    "catalogueNote": "Die elf Gruppen der Gefährdungsfaktoren aus dem Handbuch Gefährdungsbeurteilung der BAuA, mit typischen Beispielen für die oben gewählte Art von Betrieb. Wählen Sie eines, um das Formular zu füllen, und schreiben Sie es dann für Ihren Arbeitsplatz um.",
+    "measuresNote": "Für jede Gefährdung: Maßnahmen in der STOP-Reihenfolge (Substitution, technisch, organisatorisch, personenbezogen), jede mit Verantwortlichem, Termin und Stand; nach der Umsetzung die Prüfung, ob sie wirkt; dann die Gefährdung erneut bewertet, so wie sie mit den Maßnahmen ist.",
+    "scalesNote": "Bewerten Sie die Wahrscheinlichkeit des Schadens, den Sie bewertet haben, nicht die eines beliebigen Ereignisses: Ein Sturz von der Rampe ist unwahrscheinlich, ein Bluterguss durch einen Rollbehälter nicht. Bewerten Sie die wahrscheinlichste schwere Folge, so wie heute gearbeitet wird.",
+    "reviewNote": "Jede Beurteilung wird zu ihrem Termin überprüft, und sofort nach einer Verletzung im Bereich, einem Beinahe-Unfall mit möglicher tödlicher Folge oder einer Änderung (Ablauf, Arbeitsmittel, Layout, Stoffe, neue oder besonders schutzbedürftige Personen).",
+    "legal": "Dieses Tool hilft Ihnen, eine Gefährdungsbeurteilung durchzuführen und zu dokumentieren; es ist keine Rechtsberatung. Es folgt dem Arbeitsschutzgesetz (ArbSchG § 5 Beurteilung, § 6 Dokumentation, § 4 Maßnahmen mit individuellem Schutz zuletzt, § 3 Wirksamkeitskontrolle), den Gefährdungsfaktoren des BAuA-Handbuchs und dem STOP-Prinzip. Prüfen Sie die Vorgaben für Ihren Betrieb und beziehen Sie Ihre Fachkraft für Arbeitssicherheit, den Betriebsarzt und die DGUV-Regeln Ihrer Berufsgenossenschaft ein; der Betriebsrat hat ein Mitbestimmungsrecht. In Albanien gilt das Gesetz über Sicherheit und Gesundheit bei der Arbeit (Nr. 10237/2010) mit seinen Verordnungen.",
+    "legalShort": "Keine Rechtsberatung: Prüfen Sie die Vorgaben mit Ihrer Fachkraft für Arbeitssicherheit."
+  },
+  "areas": ["Wareneingang", "Lager", "Kommissionierung", "Verpackung", "Verladetor", "Hof", "Batterieladeraum", "Büro", "Sonstiges"],
+  "sectors": [
+    { "key": "warehouse", "name": "Lager und Paketzentrum" },
+    { "key": "hotel", "name": "Hotel" },
+    { "key": "delivery", "name": "Zustellbasis (letzte Meile)" }
+  ],
+  "exposed": [
+    { "key": "employees", "name": "Beschäftigte" },
+    { "key": "temps", "name": "Zeitarbeitskräfte" },
+    { "key": "contractors", "name": "Fremdfirmen und Fahrer der Frachtführer" },
+    { "key": "visitors", "name": "Besucher" }
+  ],
+  "special": [
+    { "key": "young", "name": "Jugendliche (unter 18)", "note": "Beurteilen Sie ihre Arbeit gesondert: keine Arbeiten über ihre Leistungsfähigkeit hinaus, mit Gefahrstoffen oder hoher Unfallgefahr, außer die Ausbildung verlangt es und eine fachkundige Person beaufsichtigt (JArbSchG §§ 22 und 28a)." },
+    { "key": "pregnant", "name": "Schwangere oder stillende Beschäftigte", "note": "Beurteilen Sie jede Tätigkeit für sie, unabhängig davon, ob gerade jemand schwanger ist, und legen Sie die Schutzmaßnahmen fest, bevor eine Schwangerschaft mitgeteilt wird (MuSchG § 10). Heben, Gefahrstoffe und Alleinarbeit brauchen eine Entscheidung." },
+    { "key": "disabled", "name": "Beschäftigte mit Behinderungen", "note": "Passen Sie Arbeitsplatz, Fluchtwege und Alarmierung an die Person an (ArbStättV § 3a Abs. 2)." },
+    { "key": "new", "name": "Neue Beschäftigte und Beschäftigte mit wenig Deutschkenntnissen", "note": "Unterweisen Sie sie vor Arbeitsbeginn in einer Sprache, die sie verstehen, und prüfen Sie, ob es verstanden wurde (ArbSchG § 12)." }
+  ],
+  "groups": [
+    {
+      "key": "mechanical", "no": 1, "name": "Mechanische Gefährdungen",
+      "factors": "Ungeschützt bewegte Maschinenteile, bewegte Transport- und Arbeitsmittel (Stapler, Lkw, Förderbänder), unkontrolliert bewegte Teile, gefährliche Oberflächen, Ausrutschen, Stolpern und Stürzen, Absturz",
+      "ref": "BetrSichV § 3, ASR A1.8 Verkehrswege",
+      "examples": {
+        "warehouse": ["Zusammenstoß von Stapler und Fußgänger an unübersichtlichen Gangenden", "Lkw fährt während der Beladung vom Tor ab", "Herabfallendes Ladegut aus dem Regal", "Stolpern über Stretchfolie und Leerpaletten", "Einzugsstelle an Förderband oder Sorter"],
+        "hotel": ["Ausrutschen auf nassen Böden in Küche und Bädern", "Schnitte durch Messer und Glasbruch", "Sturz von Leiter oder Tritt", "Einzug an der Mangel in der Wäscherei"],
+        "delivery": ["Ausrutschen oder Stolpern auf Stufen und Bordsteinen beim Tragen", "Angefahren werden beim Entladen am Straßenrand", "Rollbehälter rollt von der Ladebordwand", "Einklemmen an Schiebe- oder Hecktür des Transporters"]
+      }
+    },
+    {
+      "key": "electrical", "no": 2, "name": "Elektrische Gefährdungen",
+      "factors": "Elektrischer Schlag, Lichtbögen, elektrostatische Aufladung",
+      "ref": "DGUV Vorschrift 3",
+      "examples": {
+        "warehouse": ["Beschädigte Kabel und Stecker an Ladegeräten und Scannern", "Kurzschluss über die Batteriepole", "Arbeiten am Schaltschrank des Sorters"],
+        "hotel": ["Defekte Wasserkocher und Föhne in Gästezimmern", "Beschädigte Kabel an Reinigungsmaschinen", "Wasser in der Nähe von Steckdosen in Küche und Spa"],
+        "delivery": ["Ladekabel von E-Transportern im Regen", "Beschädigte Verlängerungskabel auf der Zustellbasis"]
+      }
+    },
+    {
+      "key": "substances", "no": 3, "name": "Gefahrstoffe",
+      "factors": "Hautkontakt, Einatmen, Verschlucken, physikalisch-chemische Wirkungen (Brand, Reaktionen)",
+      "ref": "GefStoffV § 6, Sicherheitsdatenblatt",
+      "examples": {
+        "warehouse": ["Batteriesäure (Schwefelsäure) an der Ladestation", "Auslaufende Pakete mit Chemikalien", "Dieselabgase von Lkw am Tor"],
+        "hotel": ["Reinigungs- und Desinfektionsmittel (Haut, Augen, Mischen)", "Chemikalien für das Schwimmbad (Chlor)", "Spülmaschinenreiniger und Entkalker"],
+        "delivery": ["Gefahrgut in Paketen (Lithiumbatterien, Spraydosen)", "Abgase in der Ladehalle"]
+      }
+    },
+    {
+      "key": "biological", "no": 4, "name": "Biologische Arbeitsstoffe",
+      "factors": "Infektion durch Mikroorganismen, sensibilisierende oder toxische Wirkungen (Schimmel)",
+      "ref": "BioStoffV § 4",
+      "examples": {
+        "warehouse": ["Kot von Nagern und Vögeln im Lager", "Schimmel an Retouren und feuchter Ware"],
+        "hotel": ["Gebrauchte Spritzen, Blut und Körperflüssigkeiten in Zimmern", "Legionellen in Wasseranlagen und Duschen", "Umgang mit Lebensmitteln (Salmonellen, Noroviren)"],
+        "delivery": ["Verdorbene Lebensmittelpakete und verschmutzte Verpackungen", "Atemwegsinfekte durch Kontakt mit vielen Menschen"]
+      }
+    },
+    {
+      "key": "fire", "no": 5, "name": "Brand- und Explosionsgefährdungen",
+      "factors": "Brennbare Feststoffe, Flüssigkeiten und Gase, explosionsfähige Atmosphäre, Explosivstoffe",
+      "ref": "ASR A2.2 Maßnahmen gegen Brände, GefStoffV",
+      "examples": {
+        "warehouse": ["Wasserstoff beim Laden der Staplerbatterien", "Lithium-Ionen-Akkus in Paketen und Scannern", "Brandlast aus gelagerten Kartonagen und Paletten", "Verstellte Fluchtwege, verkeilte Brandschutztüren"],
+        "hotel": ["Fettbrand in der Küche", "Rauchende Gäste im Zimmer", "Flusen in den Wäschetrocknern"],
+        "delivery": ["Laden von E-Bikes und E-Transportern in Innenräumen", "Gelagerter Kraftstoff auf der Zustellbasis"]
+      }
+    },
+    {
+      "key": "thermal", "no": 6, "name": "Thermische Gefährdungen",
+      "factors": "Heiße oder kalte Medien und Oberflächen",
+      "ref": "",
+      "examples": {
+        "warehouse": ["Heiße Oberflächen an Schrumpf- und Siegelgeräten", "Tiefkühlware und Oberflächen im Kühlhaus"],
+        "hotel": ["Heißes Fett, Dampf und Öfen in der Küche", "Heißes Wasser und Dampf in der Wäscherei"],
+        "delivery": ["Heiße Motorteile und Auspuff", "Trockeneis in Kühlboxen"]
+      }
+    },
+    {
+      "key": "physical", "no": 7, "name": "Spezielle physikalische Einwirkungen",
+      "factors": "Lärm, Ultra- und Infraschall, Ganzkörper- und Hand-Arm-Vibrationen, optische Strahlung (UV, Laser), ionisierende Strahlung, elektromagnetische Felder, Über- oder Unterdruck",
+      "ref": "LärmVibrationsArbSchV § 3, OStrV",
+      "examples": {
+        "warehouse": ["Lärm von Sorter und Förderbändern", "Ganzkörpervibrationen auf Staplern über beschädigten Böden", "Laser von Scannern und Vermessungsanlagen"],
+        "hotel": ["Lärm in der Spülküche", "UV-Strahlung für Beschäftigte im Freien (Pool, Garten)"],
+        "delivery": ["Ganzkörpervibrationen beim Fahren", "UV-Strahlung und Hitze auf Sommertouren"]
+      }
+    },
+    {
+      "key": "environment", "no": 8, "name": "Arbeitsumgebungsbedingungen",
+      "factors": "Klima (Hitze, Kälte, Zugluft), Beleuchtung, Sauerstoffmangel, Flucht- und Verkehrswege, Kennzeichnung, Bewegungsfläche, Anordnung des Arbeitsplatzes, Sanitär- und Pausenräume",
+      "ref": "ArbStättV und ASR (A3.4 Beleuchtung, A3.5 Raumtemperatur)",
+      "examples": {
+        "warehouse": ["Kälte und Zugluft an offenen Toren", "Schlechte Beleuchtung in den Gängen", "Hitze unter dem Dach im Sommer", "Mit Ware verstellte Verkehrs- und Fluchtwege"],
+        "hotel": ["Hitze in Küche und Wäscherei", "Schlechte Beleuchtung in Fluren und Treppenhäusern", "Enge Lager- und Wäscheräume"],
+        "delivery": ["Hitze im Transporter im Sommer, Kälte im Winter", "Dunkle Eingänge und Treppenhäuser", "Keine Toilette auf der Tour"]
+      }
+    },
+    {
+      "key": "load", "no": 9, "name": "Physische Belastung",
+      "factors": "Heben, Halten, Tragen, Ziehen und Schieben von Lasten, Zwangshaltungen, repetitive Tätigkeiten, Kombination statischer und dynamischer Arbeit",
+      "ref": "LasthandhabV, Leitmerkmalmethoden (LMM) der BAuA",
+      "examples": {
+        "warehouse": ["Heben schwerer Pakete vom Boden des Aufliegers", "Repetitive Handhabung an der Sorter-Einschleusung", "Zwangshaltungen beim Kommissionieren aus den unteren Fächern", "Ziehen und Schieben voller Rollbehälter"],
+        "hotel": ["Betten machen und Matratzen wenden", "Schieben schwerer Zimmerwagen", "Stundenlanges Stehen an der Rezeption"],
+        "delivery": ["Schwere Pakete die Treppe hinauftragen", "Viele Male am Tag in den Transporter ein- und aussteigen", "Pakete vom Boden des Laderaums heben"]
+      }
+    },
+    {
+      "key": "psych", "no": 10, "name": "Psychische Belastung",
+      "factors": "Arbeitsinhalt und Arbeitsaufgabe, Arbeitsorganisation (Zeitdruck, Arbeitszeit, Schichtarbeit), soziale Beziehungen, Arbeitsumgebung, neue Arbeitsformen",
+      "ref": "ArbSchG § 5 Abs. 3 Nr. 6",
+      "examples": {
+        "warehouse": ["Zeitdruck in der Spitze (Pickraten, Scannervorgaben)", "Nachtschichten und wechselnde Dienstpläne", "Monotone Arbeit an einem Platz"],
+        "hotel": ["Aggressive oder beleidigende Gäste", "Night Audit allein mit der Verantwortung für das Haus", "Geteilte Dienste und kurzfristige Planänderungen"],
+        "delivery": ["Enge Zustellfenster und Tourvorgaben", "Konflikte mit Empfängern", "Stress im dichten Verkehr"]
+      }
+    },
+    {
+      "key": "other", "no": 11, "name": "Sonstige Gefährdungen",
+      "factors": "Gefährdungen durch Menschen (Gewalt, Überfall), Tiere und Pflanzen, Straßenverkehr, Alleinarbeit und alles, was oben nicht erfasst ist",
+      "ref": "DGUV Regel 112-139 zu Personen-Notsignal-Anlagen",
+      "examples": {
+        "warehouse": ["Alleinarbeit im Batterieladeraum oder nachts", "Diebstahl und Gewalt an der Pforte", "Fremde Lkw-Fahrer, die die Regeln des Standorts nicht kennen"],
+        "hotel": ["Überfall oder Gewalt an der Rezeption in der Nacht", "Alleinarbeit in Technikräumen", "Unbefugte in Personalbereichen"],
+        "delivery": ["Verkehrsunfälle auf der Tour", "Hundeangriffe an der Haustür", "Alleinarbeit auf der Tour, keine Hilfe nach einem Unfall", "Überfall wegen Bargeld oder wertvoller Pakete"]
+      }
+    }
+  ],
+  "likelihood": [
+    ["Sehr unwahrscheinlich", "Praktisch nie: in Jahren dieser Arbeit nicht zu erwarten, weder hier noch anderswo."],
+    ["Unwahrscheinlich", "Könnte passieren, hier aber nicht bekannt; vielleicht einmal in mehreren Jahren."],
+    ["Möglich", "Bei ähnlicher Arbeit oder hier schon vorgekommen; etwa einmal im Jahr."],
+    ["Wahrscheinlich", "Kommt hier ab und zu vor; mehrmals im Jahr."],
+    ["Sehr wahrscheinlich", "Zu erwarten: kommt oft vor, monatlich oder häufiger, wenn sich nichts ändert."]
+  ],
+  "severity": [
+    ["Unbedeutend", "Keine Verletzung oder eine geringe, die keine Erste Hilfe braucht."],
+    ["Gering", "Erste Hilfe oder Arztbesuch, innerhalb von drei Tagen wieder bei der Arbeit."],
+    ["Mittel", "Verletzung oder Erkrankung mit mehr als drei Tagen Ausfall (meldepflichtiger Arbeitsunfall), vollständig ausgeheilt."],
+    ["Schwer", "Schwere oder bleibende Verletzung, Berufskrankheit, langer Ausfall."],
+    ["Tödlich", "Tod oder mehrere Schwerverletzte."]
+  ],
+  "bands": {
+    "low": {
+      "name": "Gering",
+      "meaning": "Akzeptabel, wie es ist. Behalten Sie die Maßnahmen bei und sehen Sie es bei der nächsten Überprüfung wieder an.",
+      "moves": ["Prüfen Sie beim nächsten Rundgang, ob die bestehenden Maßnahmen noch umgesetzt sind.", "Lassen Sie die Gefährdung auf der Liste, damit eine Änderung der Arbeit sie wieder aufruft.", "Halten Sie sie in der Unterweisung präsent."],
+      "question": "Was müsste sich ändern, damit dieses Risiko wächst?"
+    },
+    "medium": {
+      "name": "Mittel",
+      "meaning": "Maßnahmen sind nötig: Planen Sie sie mit Verantwortlichem und Termin und senken Sie das Risiko so weit wie vertretbar.",
+      "moves": ["Planen Sie mindestens eine Maßnahme oberhalb von P in der STOP-Reihenfolge, mit Verantwortlichem und Termin.", "Legen Sie fest, wie und wann die Wirksamkeit geprüft wird.", "Bewerten Sie das Restrisiko, sobald die Maßnahme umgesetzt ist."],
+      "question": "Welche Maßnahme würde diese Gefährdung beseitigen, statt sie nur unwahrscheinlicher zu machen?"
+    },
+    "high": {
+      "name": "Hoch",
+      "meaning": "Maßnahmen sind kurzfristig nötig, bevor normal weitergearbeitet wird: Suchen Sie zuerst nach Substitution und technischen Maßnahmen.",
+      "moves": ["Setzen Sie diese Woche eine Sofortmaßnahme um und die dauerhafte mit festem Termin.", "Fragen Sie, ob die Gefährdung beseitigt oder die Arbeit anders erledigt werden kann (S), bevor Sie sie absichern (T).", "Unterweisen Sie alle Betroffenen und prüfen Sie die Wirksamkeit innerhalb eines Monats."],
+      "question": "Warum gibt es diese Gefährdung überhaupt, und wer hat entschieden, dass es sie geben muss?"
+    },
+    "very-high": {
+      "name": "Sehr hoch",
+      "meaning": "Nicht so weitermachen: Stellen Sie die Arbeit ein oder schränken Sie sie ein, bis Maßnahmen das Risiko gesenkt haben.",
+      "moves": ["Stellen Sie die Arbeit jetzt ein oder schränken Sie sie ein und informieren Sie die verantwortliche Führungskraft und die Fachkraft für Arbeitssicherheit.", "Legen Sie fest, welche Maßnahmen umgesetzt sein müssen, bevor die Arbeit wieder beginnt.", "Bewerten Sie das Risiko mit den Maßnahmen erneut und geben Sie die Arbeit erst dann frei."],
+      "question": "Was muss gegeben sein, bevor jemand diese Arbeit wieder macht?"
+    }
+  },
+  "stop": {
+    "S": { "name": "Substitution", "hint": "Gefährdung beseitigen oder ersetzen: ein anderer Stoff, Ablauf, ein anderes Arbeitsmittel oder Verfahren, das weniger gefährlich ist." },
+    "T": { "name": "Technisch", "hint": "Gefährdung an der Quelle bekämpfen und Menschen davon trennen: Schutzeinrichtungen, Absperrungen, Verriegelungen, Lüftung, Hebehilfen." },
+    "O": { "name": "Organisatorisch", "hint": "Die Organisation der Arbeit ändern: Regeln, Wege, Rotation, Dienstpläne, Erlaubnisscheine, Unterweisung, zeitliche oder räumliche Trennung." },
+    "P": { "name": "Personenbezogen", "hint": "Persönliche Schutzausrüstung und persönliches Verhalten. Kommt zuletzt, wenn S, T und O nicht ausreichen, und braucht Unterweisung und Kontrolle." }
+  },
+  "statuses": { "open": "Geplant", "doing": "In Arbeit", "done": "Erledigt" },
+  "checks": { "none": "Noch nicht geprüft", "effective": "Wirksam", "partly": "Teilweise wirksam", "not-effective": "Nicht wirksam" },
+  "reviewMonths": [6, 12, 24],
+  "causeGroups": {
+    "Ordnung und Sauberkeit": ["mechanical", "environment"],
+    "Stapler / Fahrzeug": ["mechanical", "environment", "other"],
+    "Manuelles Heben": ["load"],
+    "Stürze / Ausrutschen": ["mechanical"],
+    "Arbeitsmittel": ["mechanical", "electrical"],
+    "Vorgabe nicht eingehalten": ["*"],
+    "PSA": ["*"],
+    "Sonstiges": ["*"]
+  },
+  "signatures": ["Erstellt von", "Arbeitgeber bzw. verantwortliche Führungskraft", "Fachkraft für Arbeitssicherheit (ggf. Betriebsarzt)", "Betriebsrat (zur Kenntnis)"],
+  "tips": [
+    ["Eine Beurteilung je Bereich oder Tätigkeit.", "Bei gleichartigen Arbeitsbedingungen genügt die Beurteilung eines Arbeitsplatzes oder einer Tätigkeit (ArbSchG § 5 Abs. 2). Ein Paketzentrum braucht einige: Tor, Verkehr, Kommissionierung, Batterieladeraum."],
+    ["Vor Ort, mit den Beschäftigten.", "Gefährdungen findet man in der Halle, nicht am Schreibtisch. Nehmen Sie ein oder zwei Beschäftigte der Schicht und die Fachkraft für Arbeitssicherheit mit und gehen Sie die elf Gruppen des Katalogs durch."],
+    ["Bewerten Sie den heutigen Stand.", "Wahrscheinlichkeit und Schwere des Schadens mit den Maßnahmen, die wirklich umgesetzt sind, nicht mit den geplanten. Das Restrisiko wird getrennt bewertet, nach den Maßnahmen."],
+    ["S vor T vor O vor P.", "Persönliche Schutzausrüstung kommt zuletzt. Ein hohes Risiko, dem nur mit Handschuhen und Warnweste begegnet wird, wird markiert: Suchen Sie zuerst einen Weg, die Gefährdung zu beseitigen oder die Menschen von ihr fernzuhalten."],
+    ["Erledigt heißt noch nicht wirksam.", "Prüfen Sie zu einem Termin, ob die Maßnahme wirkt, und halten Sie das Ergebnis fest: Das meint das Gesetz mit der Dokumentation der Wirksamkeitskontrolle."],
+    ["Nach jeder Änderung überprüfen.", "Nach einem Unfall oder Beinahe-Unfall, bei neuen Maschinen oder neuem Layout, neuen Stoffen oder neuen Beschäftigten, spätestens zum Überprüfungstermin."]
+  ],
+  "example": {
+    "assessments": [
+      {
+        "area": "Verladetor", "activity": "Be- und Entladen von Lkw und Wechselbrücken (Pakete in Rollbehältern und auf Paletten)", "daysAgo": 120,
+        "assessor": "Marco (Schichtleitung) mit der Fachkraft für Arbeitssicherheit", "exposed": ["employees", "temps", "contractors"], "special": [], "reviewMonths": 12,
+        "note": "Begehung des Tors mit zwei Fahrern der Spätschicht; Fahrer der Frachtführer wurden zum Wegfahren während der Beladung befragt.",
+        "hazards": [
+          { "group": "mechanical", "text": "Lkw fährt während der Beladung ab: Stapler oder Hubwagen stürzt zwischen Rampe und Auflieger", "l": 3, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Fahrzeugsicherung oder Unterlegkeile an jedem Tor; die Torampel wird erst grün, wenn der Lkw gesichert ist", "owner": "Instandhaltung", "dueIn": 30, "status": "doing", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Fahrer geben den Lkw-Schlüssel bis zum Ende der Beladung an der Pforte ab", "owner": "Anna", "dueIn": -90, "status": "done", "checkIn": -30, "check": "effective" }
+          ] },
+          { "group": "mechanical", "text": "Fußgänger queren das Tor hinter rückwärtsfahrenden Lkw und Staplern", "l": 4, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Markierter Fußweg und Absperrung entlang Tor 1–6", "owner": "Instandhaltung", "dueIn": 14, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Niemand quert eine Torspur ohne Blickkontakt zum Fahrer; Einweiser beim Rückwärtsfahren", "owner": "Luca", "dueIn": -40, "status": "done", "checkIn": -7, "check": "partly" },
+            { "type": "P", "text": "Warnwesten für alle am Tor, auch für die Fahrer der Frachtführer", "owner": "Anna", "dueIn": -60, "status": "done", "checkIn": -30, "check": "effective" }
+          ] },
+          { "group": "load", "text": "Heben schwerer Pakete (bis 31,5 kg) vom Boden des Aufliegers", "l": 4, "s": 3, "l2": 3, "s2": 2, "measures": [
+            { "type": "T", "text": "Teleskop-Förderband in den Auflieger für lose geladene Pakete", "owner": "Marco", "dueIn": 90, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Heben zu zweit über 25 kg; schwere Pakete am Sorter gekennzeichnet", "owner": "Anna", "dueIn": -50, "status": "done", "checkIn": -20, "check": "effective" }
+          ] },
+          { "group": "environment", "text": "Kälte und Zugluft an den offenen Toren im Winter", "l": 4, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Torabdichtungen an Tor 1–6", "owner": "Instandhaltung", "dueIn": -100, "status": "done", "checkIn": -60, "check": "effective" },
+            { "type": "P", "text": "Winterjacken, Handschuhe und Thermounterwäsche im Oktober ausgegeben", "owner": "Anna", "dueIn": 7, "status": "doing", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Lager", "activity": "Stapler- und Hubwagenverkehr in den Gängen und auf den Cross-Dock-Spuren", "daysAgo": 345,
+        "assessor": "Luca (Lagerleitung) mit der Fachkraft für Arbeitssicherheit", "exposed": ["employees", "temps"], "special": [], "reviewMonths": 12,
+        "note": "",
+        "hazards": [
+          { "group": "mechanical", "text": "Zusammenstoß von Stapler und Fußgänger an unübersichtlichen Gangenden", "l": 3, "s": 5, "l2": 2, "s2": 5, "measures": [
+            { "type": "T", "text": "Blue-Spot-Warnleuchten an allen Staplern, Verkehrsspiegel an den Gangenden", "owner": "Instandhaltung", "dueIn": -200, "status": "done", "checkIn": -150, "check": "effective" },
+            { "type": "O", "text": "Markierte Gehwege; Höchstgeschwindigkeit 6 km/h in den Gängen", "owner": "Luca", "dueIn": -200, "status": "done", "checkIn": -150, "check": "partly" },
+            { "type": "O", "text": "Nur ausgebildete Fahrer mit schriftlicher Beauftragung; Unterweisung einmal im Jahr", "owner": "Luca", "dueIn": 20, "status": "open", "checkIn": null, "check": "" }
+          ] },
+          { "group": "mechanical", "text": "Herabfallendes Ladegut aus dem Regal (überstehende Paletten, falsche Stapelhöhe)", "l": 3, "s": 4, "l2": 2, "s2": 4, "measures": [
+            { "type": "T", "text": "Regalprüfung jährlich durch eine befähigte Person; Anfahrschutz an den Gangenden", "owner": "Instandhaltung", "dueIn": -120, "status": "done", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Maximale Stapelhöhe an jedem Regal markiert und zweimal pro Schicht geprüft", "owner": "Luca", "dueIn": 7, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "mechanical", "text": "Stolpern über Stretchfolie und Leerpaletten in den Gängen", "l": 3, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Behälter für Stretchfolie an jedem Gangende", "owner": "Sofia", "dueIn": -10, "status": "done", "checkIn": 20, "check": "" },
+            { "type": "O", "text": "Ein Gangpate pro Schicht gibt den Boden vor Schichtende frei", "owner": "Sofia", "dueIn": 10, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "physical", "text": "Ganzkörpervibrationen beim Überfahren beschädigter Bodenfugen und Überladebrücken", "l": 2, "s": 2, "l2": 1, "s2": 2, "measures": [
+            { "type": "T", "text": "Bodenfuge an Cross-Dock-Spur 2 instand setzen", "owner": "Instandhaltung", "dueIn": 45, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Kommissionierung", "activity": "Kommissionieren und Sortieren von Paketen und Kleinteilen an Regalen und der Sorter-Einschleusung", "daysAgo": 75,
+        "assessor": "Anna (Schichtleitung) mit dem Betriebsarzt", "exposed": ["employees", "temps"], "special": ["young"], "reviewMonths": 12,
+        "note": "Zwei Auszubildende unter 18 arbeiten in der Kommissionierung: Ihre Tätigkeiten wurden mit ihnen beurteilt.",
+        "hazards": [
+          { "group": "load", "text": "Repetitives Heben und Verdrehen an der Sorter-Einschleusung", "l": 4, "s": 3, "l2": 3, "s2": 2, "measures": [
+            { "type": "T", "text": "Höhenverstellbare Aufgabetische und Rollenbahnen an den Rutschen", "owner": "Marco", "dueIn": 60, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Rotation alle zwei Stunden zwischen Einschleusung, Kommissionierung und Verpackung", "owner": "Anna", "dueIn": -60, "status": "done", "checkIn": -30, "check": "effective" },
+            { "type": "O", "text": "Schulung zur Hebetechnik mit dem Betriebsarzt", "owner": "Anna", "dueIn": -45, "status": "done", "checkIn": -14, "check": "partly" }
+          ] },
+          { "group": "load", "text": "Zwangshaltungen beim Kommissionieren aus den unteren und oberen Fächern", "l": 3, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Tritte mit Haltebügel in jedem Gang", "owner": "Sofia", "dueIn": -30, "status": "done", "checkIn": -5, "check": "effective" },
+            { "type": "O", "text": "Schwere und schnelldrehende Artikel zwischen Knie- und Schulterhöhe (Umlagerung)", "owner": "Sofia", "dueIn": 21, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "psych", "text": "Zeitdruck in der Spitze (Pickraten, Scannervorgaben) und Nachtarbeit", "l": 3, "s": 3, "l2": 2, "s2": 3, "measures": [
+            { "type": "O", "text": "Personalplan für die Spitze mit Zeitarbeitskräften, zwei Wochen im Voraus gebucht", "owner": "Anna", "dueIn": -20, "status": "done", "checkIn": -2, "check": "" },
+            { "type": "O", "text": "Pausen im Schichtplan festgelegt und in der Spitze nicht gestrichen", "owner": "Anna", "dueIn": -3, "status": "open", "checkIn": null, "check": "" }
+          ] },
+          { "group": "environment", "text": "Schlechte Beleuchtung in den Gängen 10–14 (Leuchten defekt, Schatten auf den Etiketten)", "l": 3, "s": 2, "l2": 1, "s2": 2, "measures": [
+            { "type": "T", "text": "Leuchten auf LED umrüsten und die Beleuchtungsstärke am Greifplatz messen", "owner": "Instandhaltung", "dueIn": 30, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Batterieladeraum", "activity": "Laden und Wechseln von Blei-Säure-Batterien der Stapler", "daysAgo": 400,
+        "assessor": "Marco mit der Fachkraft für Arbeitssicherheit und dem Batterielieferanten", "exposed": ["employees", "contractors"], "special": ["pregnant"], "reviewMonths": 12,
+        "note": "Schwangere oder stillende Beschäftigte arbeiten nicht im Batterieladeraum (Schwefelsäure, Heben).",
+        "hazards": [
+          { "group": "fire", "text": "Wasserstoff beim Laden: explosionsfähige Atmosphäre, wenn die Lüftung ausfällt", "l": 2, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Lüftung nach DIN EN IEC 62485-3 mit Strömungswächter, der das Laden abschaltet", "owner": "Instandhaltung", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" },
+            { "type": "O", "text": "Rauchen, offenes Feuer und Funken verboten: Schilder an der Tür, Heißarbeiten nur mit Erlaubnisschein", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "substances", "text": "Säurespritzer (Schwefelsäure) beim Nachfüllen von Wasser oder beim Umgang mit Batterien", "l": 3, "s": 4, "l2": 2, "s2": 4, "measures": [
+            { "type": "P", "text": "Gesichtsschutzschirm, säurefeste Handschuhe und Schürze", "owner": "Anna", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "electrical", "text": "Kurzschluss über die Batteriepole (Werkzeug auf der Batterie): Lichtbogen und Verbrennungen", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "O", "text": "Nur unterwiesene Beschäftigte laden und wechseln Batterien", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" },
+            { "type": "P", "text": "Nur isoliertes Werkzeug; Ringe und Uhren ablegen", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "mechanical", "text": "Quetschen beim Batteriewechsel (bis 1,5 t)", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "T", "text": "Batteriewechselwagen mit Rollenbahn und Endanschlägen", "owner": "Instandhaltung", "dueIn": -300, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "other", "text": "Alleinarbeit im Batterieladeraum in der Nachtschicht", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "T", "text": "Personen-Notsignal-Gerät für Alleinarbeit", "owner": "Luca", "dueIn": 30, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Meldung an die Schichtleitung alle 30 Minuten bei Alleinarbeit", "owner": "Luca", "dueIn": -5, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      }
+    ]
+  }
+}

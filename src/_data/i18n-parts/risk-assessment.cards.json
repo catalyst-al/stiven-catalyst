@@ -1,0 +1,10 @@
+{
+  "family": "zenith",
+  "cards": {
+    "en": { "name": "Risk Assessment", "type": "Safety", "time": "Per area", "summary": "The documented risk assessment of each work area: hazards from the eleven hazard-factor groups, likelihood × severity on a 5 × 5 matrix, measures in the STOP order with owners and their effectiveness check, the residual risk and the review date, set against the events of the Safety Cross.", "url": "/tools/risk-assessment/", "cta": "Assess the risks" },
+    "de": { "name": "Gefährdungsbeurteilung", "type": "Sicherheit", "time": "Je Bereich", "summary": "Die dokumentierte Gefährdungsbeurteilung jedes Arbeitsbereichs: Gefährdungen aus den elf Gruppen der Gefährdungsfaktoren, Wahrscheinlichkeit × Schwere auf einer 5 × 5 Matrix, Maßnahmen nach dem STOP-Prinzip mit Verantwortlichen und Wirksamkeitskontrolle, Restrisiko und Überprüfungstermin, abgeglichen mit den Ereignissen des Sicherheitskreuzes.", "url": "/de/tools/risk-assessment/", "cta": "Gefährdungen beurteilen" },
+    "sq": { "name": "Vlerësimi i rrezikut", "type": "Siguria", "time": "Për çdo zonë", "summary": "Vlerësimi i dokumentuar i rrezikut për çdo zonë pune: burimet e rrezikut nga njëmbëdhjetë grupet e faktorëve, gjasat × rëndesa në një matricë 5 × 5, masat sipas rendit STOP me përgjegjës dhe kontrollin e efektivitetit, rreziku i mbetur dhe data e rishikimit, përballë ngjarjeve të kryqit të sigurisë.", "url": "/sq/tools/risk-assessment/", "cta": "Vlerëso rreziqet" }
+  },
+  "routine": { "when": "Every month", "do": "Walk one area with the people who work there, close or re-date its overdue measures and check the effect of the ones done.", "de": { "when": "Jeden Monat", "do": "Gehen Sie einen Bereich mit den Beschäftigten dort ab, schließen oder terminieren Sie seine überfälligen Maßnahmen neu und prüfen Sie die Wirksamkeit der erledigten." }, "sq": { "when": "Çdo muaj", "do": "Kalo një zonë me njerëzit që punojnë aty, mbyll ose jepi datë të re masave të saj me vonesë dhe kontrollo efektin e atyre të kryera." } },
+  "recipe": "example"
+}

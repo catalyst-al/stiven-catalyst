@@ -1,0 +1,193 @@
+{
+  "storageKey": "sc-eight-d-de",
+  "targets": { "d3": 1, "d4": 10, "d5": 14, "d6": 30, "d8": 60 },
+  "stepStatuses": { "todo": "Nicht begonnen", "doing": "In Arbeit", "done": "Erledigt" },
+  "actionStatuses": { "open": "Offen", "doing": "In Arbeit", "done": "Erledigt" },
+  "disciplines": [
+    { "key": "d0", "code": "D0", "title": "Vorbereitung und Notfallmaßnahmen", "question": "Braucht dieses Problem einen 8D, und was schützt den Kunden jetzt sofort, bevor jemand die Ursache kennt?" },
+    { "key": "d1", "code": "D1", "title": "Team bilden", "question": "Wer kennt das Produkt und den Prozess, wer leitet das Team, und wer räumt als Sponsor die Hindernisse aus dem Weg?" },
+    { "key": "d2", "code": "D2", "title": "Problem beschreiben", "question": "Was ist woran falsch, in Zahlen? Beantworten Sie 5W2H, stellen Sie IST und IST NICHT gegenüber und schreiben Sie dann eine Problembeschreibung. Noch keine Ursachen." },
+    { "key": "d3", "code": "D3", "title": "Sofortmaßnahmen (Eindämmung)", "question": "Wie verhindern Sie die nächste fehlerhafte Lieferung, solange die Ursache noch unbekannt ist? Sortieren Sie überall, wo verdächtige Ware sein kann, und belegen Sie, dass die Eindämmung wirkt." },
+    { "key": "d4", "code": "D4", "title": "Fehlerursache und Schlupfstelle", "question": "Warum ist es passiert, und warum hat es niemand bemerkt? Zwei Grundursachen, jede geprüft: Sie können das Problem damit ein- und ausschalten." },
+    { "key": "d5", "code": "D5", "title": "Abstellmaßnahmen auswählen und prüfen", "question": "Welche Maßnahmen beseitigen beide Grundursachen? Wählen Sie sie aus und weisen Sie ihre Wirksamkeit nach, bevor Sie sie einführen." },
+    { "key": "d6", "code": "D6", "title": "Umsetzen und validieren", "question": "Führen Sie die Maßnahmen ein, zeigen Sie mit Daten, dass das Problem weg ist, und heben Sie erst dann die Sofortmaßnahmen auf." },
+    { "key": "d7", "code": "D7", "title": "Wiederauftreten verhindern", "question": "Welche Systeme ändern sich, damit das nicht wieder passieren kann, hier und überall, wo es ähnlich ist?" },
+    { "key": "d8", "code": "D8", "title": "Teamleistung würdigen und abschließen", "question": "Danken Sie dem Team für seine Arbeit, halten Sie fest, was Sie gelernt haben, und schließen Sie den Report ab." }
+  ],
+  "criteria": [
+    "Das Symptom ist beschrieben und gemessen.",
+    "Der Kunde, der es bemerkt hat, und die Betroffenen sind bekannt.",
+    "Die Zahlen zeigen eine Abweichung, oder Schwere, Dringlichkeit oder Zunahme machen es zur Priorität.",
+    "Die Ursache ist nicht bekannt.",
+    "Die Leitung stellt Menschen und Zeit bereit, um es an der Wurzel zu beheben und ein Wiederauftreten zu verhindern.",
+    "Es ist zu komplex, als dass eine Person es allein lösen könnte."
+  ],
+  "w2h": [
+    { "key": "what", "label": "Was ist das Problem?", "placeholder": "Der Fehler am Objekt in einfachen Worten: welcher Artikel, welcher Fehler." },
+    { "key": "why", "label": "Warum ist es ein Problem?", "placeholder": "Was es den Kunden kostet oder was es stört: Regallücken, Gebühren, ein verfehltes Servicelevel." },
+    { "key": "where", "label": "Wo wurde es gesehen?", "placeholder": "Tour, Kundenstandort, Linie, Zone, Stelle am Artikel." },
+    { "key": "when", "label": "Wann wurde es gesehen?", "placeholder": "Seit wann, in welchen Schichten oder an welchen Tagen, in welcher Phase (Wareneingang, Kommissionierung, Zustellung)." },
+    { "key": "who", "label": "Wer hat es gefunden, wer ist betroffen?", "placeholder": "Wer es entdeckt hat und wer betroffen ist. Rollen, keine Schuldzuweisung." },
+    { "key": "how", "label": "Wie wurde es gefunden, wie zeigt es sich?", "placeholder": "Wie es entdeckt wurde und wie sich der Fehler im Prozess zeigt." },
+    { "key": "howMany", "label": "Wie viele?", "placeholder": "Die Anzahl und die Basis: 144 von 4.800 Positionen, der Verlauf, andere Bereiche zum Vergleich." }
+  ],
+  "isNot": [
+    { "key": "what", "label": "Was", "is": "Welches Objekt, welcher Fehler", "isNot": "Ähnliche Objekte oder Fehler, die betroffen sein könnten, es aber nicht sind" },
+    { "key": "where", "label": "Wo", "is": "Wo es auftritt", "isNot": "Wo es auftreten könnte, aber nicht auftritt" },
+    { "key": "when", "label": "Wann", "is": "Wann es zuerst auftrat, wann es sich zeigt", "isNot": "Wann es sich zeigen könnte, aber nicht zeigt" },
+    { "key": "extent", "label": "Ausmaß", "is": "Wie viele, wie groß, der Verlauf", "isNot": "Wie viele betroffen sein könnten, es aber nicht sind" }
+  ],
+  "locations": [
+    { "key": "transit", "name": "Unterwegs" },
+    { "key": "warehouse", "name": "Lager" },
+    { "key": "customer", "name": "Beim Kunden" },
+    { "key": "production", "name": "In der Produktion" },
+    { "key": "supplier", "name": "Beim Lieferanten" }
+  ],
+  "addresses": { "occurrence": "Grundursache (Auftreten)", "escape": "Schlupfstelle (Nichtentdecken)" },
+  "preventions": [
+    { "key": "fmea", "name": "FMEA aktualisieren", "hint": "Fehlerart und Ursache ergänzen, dann Auftreten und Entdeckung neu bewerten." },
+    { "key": "controlPlan", "name": "Lenkungsplan aktualisieren", "hint": "Die neue Prüfung: was, wie oft, durch wen, und was zu tun ist, wenn sie anschlägt." },
+    { "key": "standardWork", "name": "Standardarbeit aktualisieren", "hint": "Die Anweisung am Arbeitsplatz ändern, damit der neue Weg der einzige ist." },
+    { "key": "training", "name": "Mitarbeitende schulen", "hint": "Alle, die die Arbeit machen, in jeder Schicht, mit Unterschrift." },
+    { "key": "readAcross", "name": "Auf ähnliche Produkte und Prozesse übertragen", "hint": "Wo kann dieselbe Ursache noch stecken: andere Standorte, Linien, Zonen, Produkte?" },
+    { "key": "other", "name": "Andere Systemänderung", "hint": "Eine Richtlinie, eine Lieferantenvereinbarung, eine Konstruktionsregel." }
+  ],
+  "fishboneSets": {
+    "6m": ["Mensch", "Maschine", "Methode", "Material", "Messung", "Umwelt"],
+    "4p": ["Richtlinien", "Abläufe", "Menschen", "Ort"],
+    "service5": ["Menschen", "Prozess", "Ort", "Ausstattung", "Information"]
+  },
+  "fields": {
+    "title": "z. B. Falsche Artikel an den Händler auf Tour R7",
+    "customer": "z. B. Handelskunde, 12 Filialen",
+    "ref": "z. B. Reklamation 2026-118",
+    "product": "z. B. Getränke, Kommissionierzone C",
+    "area": "z. B. Warenausgang, DC Nord",
+    "person": "Name, Funktion",
+    "eraText": "z. B. Kein Rollcontainer der Tour verlässt das Lager ungeprüft; der Kunde wird heute angerufen.",
+    "statement": "Ein oder zwei Sätze: was woran falsch ist, wo, seit wann und wie oft. Keine Ursache, keine Schuld.",
+    "containment": "z. B. 100-%-Scan jedes Rollcontainers der Tour vor der Verladung",
+    "verification": "z. B. 0 falsche Positionen in der Wareneingangsprüfung des Kunden seit",
+    "cleanMark": "z. B. Grüner Punkt auf dem Etikett jedes geprüften Rollcontainers",
+    "occurrence": "Warum ist es passiert? Die Ursache im Prozess, bei der das Problem auftritt, sobald sie vorliegt.",
+    "escapePoint": "z. B. Pickbestätigung, dann die Versandkontrolle",
+    "escape": "Warum wurde es nicht entdeckt? Die Kontrolle, die es hätte finden müssen, und warum sie es nicht fand.",
+    "verifyHow": "Wie es ein- und ausgeschaltet wurde: ein Versuch, ein Test, die Daten vorher und nachher.",
+    "notes": "Ihre Warum-Kette oder die wahrscheinlichen Ursachen einer Fischgräte; Sie können sie unten aus 5 Whys und der Fischgräte übernehmen.",
+    "pca": "Eine Änderung am Prozess, die die Ursache beseitigt, keine Erinnerung.",
+    "pcaCheck": "z. B. Pickversuch: 0 Fehler bei 400 Picks",
+    "implementation": "z. B. EAN-Scan in Zone C in allen Schichten aktiv",
+    "period": "z. B. Zwei Wochen nach der Änderung",
+    "result": "Was die Daten nach der Änderung zeigen, und seit wann.",
+    "prevention": "Was ändert sich, wo",
+    "recognition": "Wer was getan hat; wie dem Team gedankt wurde.",
+    "lessons": "Was Sie beim nächsten Mal genauso und was Sie anders machen würden.",
+    "closedBy": "z. B. Sponsor oder der Qualitätsansprechpartner des Kunden"
+  },
+  "tips": [
+    ["Erst eindämmen, dann suchen.", "D3 schützt den Kunden innerhalb eines Tages. Sortieren Sie überall, wo verdächtige Ware sein kann: im Lager, unterwegs, beim Kunden."],
+    ["Fakten vor Ursachen.", "D2 heißt 5W2H und IST / IST NICHT. Der Unterschied zwischen dort, wo es auftritt, und dort, wo nicht, zeigt auf die Ursache; eine Vermutung tut das nicht."],
+    ["Zwei Grundursachen, nicht eine.", "Warum es passiert ist und warum es niemand bemerkt hat. Eine Ursache ist geprüft, wenn Sie das Problem mit ihr ein- und ausschalten können."],
+    ["Prüfen, dann einführen, dann validieren.", "D5 belegt in einem Versuch, dass eine Maßnahme wirkt; D6 belegt mit den Daten, dass das Problem weg ist. Erst danach fallen die Sofortmaßnahmen weg."],
+    ["Das System schließen, nicht nur den Fall.", "D7 ändert FMEA, Lenkungsplan, Standardarbeit und Schulung und sucht dieselbe Ursache auch anderswo."]
+  ],
+  "example": {
+    "title": "Falsche Artikel an den Händler auf Tour R7",
+    "customer": "Handelskunde, 12 Filialen in der Region Nord",
+    "ref": "Reklamation 2026-118",
+    "product": "Getränke, Kommissionierzone C",
+    "area": "Warenausgang, DC Nord",
+    "opened": -38,
+    "steps": {
+      "d0": { "status": "done", "date": -38 },
+      "d1": { "status": "done", "date": -38 },
+      "d2": { "status": "done", "date": -37 },
+      "d3": { "status": "done", "date": -37 },
+      "d4": { "status": "done", "date": -30 },
+      "d5": { "status": "done", "date": -25 },
+      "d6": { "status": "done", "date": -10 },
+      "d7": { "status": "doing", "date": "" },
+      "d8": { "status": "todo", "date": "" }
+    },
+    "d0": {
+      "criteria": [true, true, true, true, true, true],
+      "era": "Ab der nächsten Verladung verlässt kein Rollcontainer der Tour R7 die Rampe ungeprüft. Die Kundenbetreuerin ruft den Händler noch am selben Morgen an und vereinbart eine Tauschfahrt für die falschen Positionen.",
+      "eraOwner": "Sara K., Kundenbetreuung",
+      "eraDate": -38
+    },
+    "d1": {
+      "leader": "Mira S., Qualitätsleitung",
+      "champion": "Daniel R., Standortleitung",
+      "members": [
+        { "name": "Jonas B.", "role": "Schichtleiter Warenausgang, Spätschicht" },
+        { "name": "Elena P.", "role": "Bestandsführung und Lagerplatzvergabe" },
+        { "name": "Tom W.", "role": "WMS-Key-User" },
+        { "name": "Sara K.", "role": "Kundenbetreuerin des Händlers" },
+        { "name": "Ardit H.", "role": "Kommissionierer, Zone C" }
+      ]
+    },
+    "d2": {
+      "w": {
+        "what": "Filialen erhalten eine falsche Variante des bestellten Artikels: eine andere Größe oder Sorte derselben Produktlinie, z. B. 1 l statt 0,5 l desselben Getränks.",
+        "why": "Der bestellte Artikel fehlt im Regal, ein anderer liegt zu viel da. Der Händler berechnet 15 € je falscher Position (2.160 € in fünf Tagen), und die vereinbarten 99,5 % richtige Positionen werden verfehlt.",
+        "where": "Tour R7, die 12 Filialen des Händlers in der Region Nord. Die Positionen werden in Zone C des DC kommissioniert.",
+        "when": "Seit der Neuplatzierung von Zone C, eine Woche vor der Reklamation, in beiden Schichten. Gefunden in der Wareneingangsprüfung des Händlers.",
+        "who": "Gefunden von den Filialteams und der Wareneingangsprüfung des Händlers; die Reklamation ging an unsere Kundenbetreuerin.",
+        "how": "Der Kommissionierer bestätigt die Prüfziffer des Lagerplatzes und greift die ähnlich aussehende Variante aus dem Nachbarfach. Die Versandkontrolle zählt Rollcontainer und Filialetiketten, nicht Artikel.",
+        "howMany": "144 von 4.800 Positionen (3,0 %) in fünf Liefertagen auf R7; die anderen Touren 0,2 % (42 von 21.000)."
+      },
+      "isNot": {
+        "what": { "is": "Eine falsche Variante des bestellten Artikels (andere Größe oder Sorte, gleiche Produktlinie)", "isNot": "Fehlende Positionen, beschädigte Ware, falsche Mengen, Artikel einer anderen Produktlinie", "diff": "Ähnlich aussehende Varianten mit derselben Etikettfarbe" },
+        "where": { "is": "Tour R7, 12 Filialen; in Zone C kommissionierte Positionen", "isNot": "Die anderen Touren (0,2 %); die Zonen A, B und D", "diff": "Nur die R7-Filialen bestellen beide Varianten (regionales Sortiment); Zone C wurde neu platziert" },
+        "when": { "is": "Seit der Neuplatzierung von Zone C, in beiden Schichten", "isNot": "Vor der Neuplatzierung (auch R7 bei 0,2 %)", "diff": "Die Neuplatzierung hat ähnlich aussehende Varianten in Nachbarfächer gelegt" },
+        "extent": { "is": "144 von 4.800 Positionen (3,0 %), von Tag zu Tag gleichbleibend; 9 ähnliche Paare", "isNot": "Nicht steigend; nicht die übrigen Artikel von Zone C", "diff": "Die 9 Paare liegen seit der Neuplatzierung nebeneinander" }
+      },
+      "statement": "Seit der Neuplatzierung von Zone C sind 3,0 % der Auftragspositionen, die auf Tour R7 an die 12 Filialen des Händlers geliefert werden, eine falsche Variante des bestellten Artikels (144 von 4.800 Positionen in fünf Liefertagen), gegenüber 0,2 % auf den anderen Touren."
+    },
+    "d3": {
+      "actions": [
+        { "text": "100-%-Artikelscan jedes R7-Rollcontainers im Versand vor der Verladung; falsche Positionen sofort korrigiert", "owner": "Jonas B.", "date": -38, "where": "warehouse", "sorted": "2880", "found": "84", "verified": "84 falsche Positionen in den ersten drei Tagen korrigiert; eine Nachprüfung von 200 gescannten Positionen fand keine", "status": "done" },
+        { "text": "Die zwei R7-Lkw, die schon unterwegs waren, bei Ankunft in der Filiale prüfen und die falschen Positionen tauschen", "owner": "Sara K.", "date": -38, "where": "transit", "sorted": "960", "found": "31", "verified": "Alle 31 am selben Tag getauscht; die Filialteams haben es per Mail bestätigt", "status": "done" },
+        { "text": "Mit den Filialen die Lieferungen der letzten fünf Tage nachzählen; Tauschfahrt für die falschen Positionen", "owner": "Sara K.", "date": -37, "where": "customer", "sorted": "4800", "found": "144", "verified": "144 Positionen in einer Fahrt getauscht; die Gutschrift des Händlers stimmt mit den 144 überein", "status": "done" }
+      ],
+      "cleanPoint": -37,
+      "cleanMark": "Grüner Punkt auf dem Etikett jedes gescannten Rollcontainers; die Wareneingangsprüfung des Händlers fand seit der ersten Lieferung mit grünem Punkt 0 falsche Positionen auf R7."
+    },
+    "d4": {
+      "occurrence": { "text": "Die Neuplatzierung von Zone C hat ähnlich aussehende Varianten desselben Artikels (gleiche Etikettfarbe, Größen 0,5 l und 1 l) in Nachbarfächer gelegt: 9 Paare. Nur die R7-Filialen bestellen beide Varianten, daher sind nur R7-Positionen betroffen.", "verified": true, "how": "In einem Pickversuch ein- und ausgeschaltet: 400 Picks aus den benachbarten ähnlichen Fächern, 11 falsch (2,75 %); dieselben 400 Picks mit den Varianten drei Fächer auseinander, 0 falsch." },
+      "escape": { "point": "Pickbestätigung in Zone C, dann die Versandkontrolle", "text": "Ein Pick wird nur mit der Prüfziffer des Lagerplatzes bestätigt, nicht mit dem Artikelbarcode; die Versandkontrolle zählt Rollcontainer und Etiketten, nicht Artikel. Eine falsche Variante vom richtigen Platz kommt durch beide.", "verified": true, "how": "Im Versuch kamen alle 11 falschen Picks durch die Prüfziffer und die Versandkontrolle; mit einem Artikelscan (EAN) beim Pick wurden alle 11 gestoppt." },
+      "notes": "Fischgräte mit der Spätschicht: Methode (keine Platzierungsregel für ähnliche Artikel), Material (gleiche Etikettfarbe), Messung (Prüfziffer, nicht der Artikel). 5 Whys: falsche Variante, weil Nachbarfach, weil Neuplatzierung nur nach Umschlag, weil keine Regel für ähnliche Artikel."
+    },
+    "d5": {
+      "actions": [
+        { "text": "Zone C neu platzieren: ähnliche Varianten mindestens drei Fächer auseinander und auf verschiedenen Ebenen; die Regel in die Platzierungsprüfung des WMS aufgenommen", "addresses": "occurrence", "owner": "Elena P.", "due": -27, "verification": "Pickversuch: 0 Fehler bei 400 Picks", "verified": true, "status": "done" },
+        { "text": "Jeden Pick in Zone C mit einem Artikelscan (EAN) statt mit der Prüfziffer des Lagerplatzes bestätigen", "addresses": "escape", "owner": "Tom W.", "due": -25, "verification": "Versuch: 11 von 11 falschen Picks gestoppt; Pickleistung −2 %, akzeptiert", "verified": true, "status": "done" }
+      ]
+    },
+    "d6": {
+      "actions": [
+        { "text": "Zone C neu platziert, die 9 ähnlichen Paare getrennt", "owner": "Elena P.", "due": -27, "status": "done" },
+        { "text": "EAN-Scan beim Pick in Zone C in allen Schichten aktiv", "owner": "Tom W.", "due": -25, "status": "done" },
+        { "text": "Den 100-%-Versandscan für R7 nach zwei fehlerfreien Wochen beenden", "owner": "Jonas B.", "due": -10, "status": "done" }
+      ],
+      "beforeBad": "144",
+      "beforeTotal": "4800",
+      "afterBad": "9",
+      "afterTotal": "9600",
+      "period": "Zwei Wochen nach Start des EAN-Scans, gemessen am Versandscan",
+      "result": "Falsche Positionen auf R7 von 3,0 % auf 0,09 % (9 von 9.600) gesunken, unter den 0,2 % der anderen Touren. Die Wareneingangsprüfung des Händlers fand keine.",
+      "containmentRemoved": -10
+    },
+    "d7": {
+      "lines": [
+        { "kind": "fmea", "text": "Prozess-FMEA Kommissionierung: Fehlerart „ähnliche Variante im Nachbarfach“ ergänzt; Auftreten und Entdeckung nach dem EAN-Scan neu bewertet", "owner": "Mira S.", "due": -12, "status": "done" },
+        { "kind": "controlPlan", "text": "Lenkungsplan: wöchentliche Platzierungsprüfung auf ähnliche Paare; EAN-Scanquote als tägliche Kennzahl mit Reaktionsplan", "owner": "Elena P.", "due": 4, "status": "doing" },
+        { "kind": "standardWork", "text": "Standardarbeit für jede Platzierungsänderung: Prüfung auf ähnliche Artikel, bevor die Änderung freigegeben wird", "owner": "Daniel R.", "due": 8, "status": "open" },
+        { "kind": "training", "text": "Alle Kommissionierer der Zone C und das Platzierungsteam zu ähnlichen Artikeln und zur Scanregel unterwiesen, beide Schichten, mit Unterschrift", "owner": "Jonas B.", "due": -11, "status": "done" },
+        { "kind": "readAcross", "text": "Übertragung: die Zonen A, B und D und das zweite DC auf nebeneinanderliegende ähnliche Paare prüfen", "owner": "Mira S.", "due": 12, "status": "open" }
+      ]
+    },
+    "d8": { "recognition": "", "lessons": "", "closedBy": "" }
+  }
+}

@@ -1,0 +1,149 @@
+/* ===== Risk Assessment (js/risk-assessment.js) =====
+   One assessment open at a time: its header, the hazard form with the catalogue, and a card per hazard with its two
+   ratings and its measures. The risk band is a chip whose number and word carry the meaning (the colour only repeats
+   it). On paper: the documentation table per assessment, A4 landscape, with signature lines. */
+.ra-fieldset { display: grid; gap: 12px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.ra-sub { margin: 0; padding: 0; font-size: 15px; font-weight: 800; color: var(--ink); }
+.ra-pick { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 14px; align-items: end; }
+.ra-pick .tool-actions { margin: 0; }
+.ra-pick select { min-width: 0; }
+[data-head-status]:empty, [data-hazard-status]:empty, [data-bands-status]:empty, .ra-actions-status:empty { display: none; }
+.ra-setup textarea { width: 100%; min-width: 0; font-family: inherit; }
+
+/* Who is exposed: two groups of boxes, and the notes on the special groups ticked. */
+.ra-who { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 20px; }
+.ra-boxes { display: grid; gap: 6px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.ra-boxes legend { margin-bottom: 6px; }
+.ra-check { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; line-height: 1.4; font-weight: 400; }
+.ra-check input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); }
+.ra-special-notes { display: grid; gap: 6px; margin: 4px 0 0; padding: 12px 14px; border-left: 3px solid var(--blue); background: var(--paper-2); font-size: 14px; list-style: none; }
+.ra-special-notes[hidden] { display: none; }
+
+/* The hazard form and its catalogue. */
+.ra-risk-out { margin: 0; font-size: 14px; color: var(--muted); }
+.ra-catalogue { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.ra-catalogue summary { cursor: pointer; }
+.ra-cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 20px; margin-top: 12px; }
+.ra-cat-group h3 { margin: 0 0 4px; font-size: 15px; }
+.ra-cat-factors { margin: 0 0 6px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.ra-cat-list { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.ra-cat-pick {
+  width: 100%; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper);
+  color: var(--ink); font: inherit; font-size: 13px; line-height: 1.35; text-align: left; cursor: pointer;
+}
+.ra-cat-pick:hover { border-color: var(--blue); }
+.ra-cat-pick:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 1px; }
+
+/* A card per hazard. */
+.ra-hazards { display: grid; gap: 14px; margin: 8px 0 14px; }
+.ra-hazard { display: grid; gap: 14px; min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.ra-hazard-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: start; }
+.ra-no { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-top: 22px; border-radius: 50%; background: var(--paper-2); color: var(--muted); font-size: 13px; font-weight: 800; }
+.ra-hazard-head .dl-remove { margin-top: 22px; }
+.ra-hazard-fields { display: grid; grid-template-columns: minmax(150px, 0.8fr) minmax(0, 2fr); gap: 8px 12px; min-width: 0; }
+.ra-mini { min-width: 0; margin: 0; }
+.ra-mini label { font-size: 12px; }
+.ra-mini :is(input, select) { width: 100%; min-width: 0; font-size: 14px; }
+.ra-rating { display: grid; gap: 6px; }
+.ra-rating-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(120px, auto); gap: 8px; align-items: end; }
+.ra-times { padding-bottom: 10px; color: var(--muted); font-weight: 800; }
+.ra-rating-row .ra-risk-out { padding-bottom: 6px; }
+.ra-measures { display: grid; gap: 8px; padding: 12px 0; border-block: 1px dashed var(--line); }
+.ra-measures-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.ra-measures-head .form-note { margin: 0; }
+.ra-measure-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ra-measure { display: grid; gap: 6px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.ra-measure.is-done :is(input[type=text]) { color: var(--muted); }
+.ra-measure-grid { display: grid; grid-template-columns: minmax(130px, 0.9fr) minmax(0, 2.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 6px 10px; }
+.ra-measure-grid .ra-what { grid-column: span 3; }
+.ra-measure-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 6px 10px; }
+.ra-check-state { margin-right: auto; color: var(--muted); font-size: 13px; font-weight: 700; }
+.ra-small { min-height: 32px; padding: 4px 10px; font-size: 13px; white-space: nowrap; }
+.ra-warn { display: grid; gap: 6px; }
+.ra-warn[hidden] { display: none; }
+.ra-warn .dl-warning { margin: 0; }
+
+/* The risk band: number and word, in the colour of the result it reports. */
+.ra-chip {
+  display: inline-flex; align-items: center; padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--muted); font-size: 13px; font-weight: 800; white-space: nowrap;
+}
+.ra-chip.is-low { border-color: color-mix(in srgb, var(--ok) 60%, transparent); color: var(--ok); }
+.ra-chip.is-medium { border-color: color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
+.ra-chip.is-high { border-color: color-mix(in srgb, var(--danger) 60%, transparent); color: var(--danger); }
+.ra-chip.is-very-high { border-color: var(--danger); background: var(--danger); color: var(--paper); }
+
+/* Scales and bands. */
+.ra-scales summary { cursor: pointer; }
+.ra-scales[open] > summary { margin-bottom: 10px; }
+.ra-scale-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 20px; margin: 12px 0 18px; }
+.ra-scale h3 { margin: 0 0 6px; font-size: 15px; }
+.ra-scale ol, .ra-band-list, .ra-stop-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--muted); }
+.ra-scale strong, .ra-band-list strong, .ra-stop-list strong { color: var(--ink); font-weight: 700; }
+.ra-bands { margin: 0 0 14px; padding: 14px 0 0; border-top: 1px dashed var(--line); }
+.ra-bands-text { margin: 0; font-size: 15px; }
+.ra-band-inputs { display: grid; grid-template-columns: repeat(3, minmax(0, 140px)); gap: 10px 14px; }
+.ra-band-list { margin-bottom: 16px; }
+.ra-stop-list { margin-top: 8px; }
+.ra-legal { margin: 12px 0 0; }
+.ra-pack { margin-top: 12px; }
+
+/* Results. */
+.ra-meta { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.ra-results .dl-stats { margin-bottom: 18px; }
+.ra-results .dl-warning { margin: 0 0 8px; }
+.ra-results .ck-legend { margin-top: 8px; }
+.ra-late { color: var(--ink); font-weight: 800; }
+.ra-cell-note { display: block; color: var(--muted); font-size: 12px; }
+.ra-open-table td, .ra-all-table td, .ra-cross-table td { vertical-align: top; white-space: normal; min-width: 70px; }
+.ra-open-table td:nth-child(2), .ra-all-table td:nth-child(2) { min-width: 220px; }
+.ra-band-table td:last-child { min-width: 240px; white-space: normal; }
+.ra-review { font-weight: 800; }
+.ra-review.is-due { color: var(--danger); }
+.ra-review.is-soon { color: var(--ink); }
+.ra-review.is-ok { color: var(--muted); font-weight: 700; }
+.ra-review-table tr:has(.ra-review.is-due) td:first-child, .ra-cross-table tr:has(.ra-review.is-due) td:first-child { box-shadow: inset 3px 0 0 var(--danger); }
+.ra-actions-status { flex-basis: 100%; margin: 0; }
+.ra-wide, .ra-cross { grid-column: 1 / -1; }
+
+@media (max-width: 760px) {
+  .ra-measure-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ra-measure-grid :is(.ra-what, .ra-type) { grid-column: 1 / -1; }
+  .ra-rating-row { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+  .ra-rating-row .ra-risk-out { grid-column: 1 / -1; padding: 0; }
+}
+@media (max-width: 600px) {
+  .ra-pick { grid-template-columns: minmax(0, 1fr); }
+  .ra-hazard { padding: 12px; }
+  .ra-hazard-head { grid-template-columns: minmax(0, 1fr) auto; }
+  .ra-no { display: none; }
+  .ra-hazard-fields { grid-template-columns: minmax(0, 1fr); }
+  .ra-band-inputs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Paper: the documentation, one assessment per page, A4 landscape. On screen it is not shown. */
+.ra-print { display: none; }
+@page ra-a4 { size: A4 landscape; margin: 10mm; }
+@media print {
+  body:has(.ra-print.is-ready) main > :not(.ra-print) { display: none !important; }
+  body:has(.ra-print.is-ready) .dl-example-note { display: none !important; }
+  .ra-print.is-ready { display: block !important; page: ra-a4; padding: 0; color: #000; font-size: 8pt; }
+  .ra-print-page + .ra-print-page { break-before: page; }
+  .ra-print h2 { margin: 2px 0 6px; font-size: 13pt; }
+  .ra-print .kicker { margin: 0; }
+  .ra-print-meta { display: grid; grid-template-columns: repeat(5, auto); gap: 2px 16px; margin: 0 0 8px; }
+  .ra-print-meta dt { font-size: 7.5pt; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+  .ra-print-meta dd { margin: 0; grid-row: 2; }
+  .ra-print-table { width: 100%; border-collapse: collapse; }
+  .ra-print-table th, .ra-print-table td { padding: 2px 4px; border: 1px solid #999; text-align: left; vertical-align: top; }
+  .ra-print-table .ra-tight { white-space: nowrap; }
+  .ra-print-table thead th { font-size: 7pt; text-transform: uppercase; letter-spacing: .03em; }
+  .ra-print-table .num { text-align: center; white-space: nowrap; }
+  .ra-print-table tr { break-inside: avoid; }
+  .ra-print-note, .ra-print-foot { margin: 4px 0 0; font-size: 7pt; }
+  .ra-print-sign { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin: 14px 0 0; break-inside: avoid; }
+  .ra-sign { display: grid; gap: 3px; font-size: 7.5pt; }
+  .ra-sign-line { display: block; height: 22px; border-bottom: 1px solid #000; }
+}
+/* The "something has changed" box sits in a field, whose labels are small capitals: this one reads as a sentence. */
+.field .ra-check { text-transform: none; letter-spacing: normal; font-size: 14px; font-weight: 400; color: var(--ink); }

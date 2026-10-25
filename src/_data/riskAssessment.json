@@ -1,0 +1,318 @@
+{
+  "storageKey": "sc-risk-assessment",
+  "text": {
+    "tool": "Risk Assessment",
+    "csv": "risk-assessment",
+    "areaPlaceholder": "e.g. Loading dock",
+    "activityPlaceholder": "e.g. Loading and unloading trucks",
+    "assessorPlaceholder": "e.g. Marco (shift lead) with the safety specialist",
+    "notePlaceholder": "e.g. Walked the dock with two drivers of the late shift; the works council was informed",
+    "hazardPlaceholder": "e.g. Pedestrians crossing the dock behind reversing trucks",
+    "measurePlaceholder": "e.g. Painted pedestrian lane and barrier along docks 1–6",
+    "ownerPlaceholder": "e.g. Anna",
+    "empty": "No hazards in this assessment yet.",
+    "catalogueNote": "The eleven hazard-factor groups of the BAuA handbook on risk assessment, with typical examples for the kind of site chosen above. Pick one to fill the form, then write it for your own workplace.",
+    "measuresNote": "For every hazard: measures in the STOP order (substitution, technical, organisational, personal), each with an owner, a due date and its status; once done, the check of whether it works; then the risk rated again as it is with the measures in place.",
+    "scalesNote": "Rate the likelihood of the harm you rated, not of any incident: a fall from the dock is unlikely, a bruise from a roll cage is not. Rate the most likely serious outcome, as the work is done today.",
+    "reviewNote": "Each assessment is reviewed on its date, and at once after an injury in the area, a near miss that could have been fatal, or a change (process, equipment, layout, substances, new or vulnerable people).",
+    "legal": "This tool helps you carry out and document a risk assessment; it is not legal advice. It follows the German practice of the Gefährdungsbeurteilung: the Occupational Safety and Health Act (ArbSchG § 5 assess, § 6 document, § 4 measures with personal protection last, § 3 check that they work), the hazard factors of the BAuA handbook and the STOP order. Check the law where you work and involve your safety specialist: in Germany the Fachkraft für Arbeitssicherheit, the company doctor and the DGUV rules of your Berufsgenossenschaft; in Albania the law on safety and health at work (Law No. 10237/2010) and its by-laws.",
+    "legalShort": "Not legal advice: check the law where you work with your safety specialist."
+  },
+  "areas": ["Receiving", "Storage", "Picking", "Packing", "Loading dock", "Yard", "Charging room", "Office", "Other"],
+  "sectors": [
+    { "key": "warehouse", "name": "Warehouse and parcel hub" },
+    { "key": "hotel", "name": "Hotel" },
+    { "key": "delivery", "name": "Delivery station (last mile)" }
+  ],
+  "exposed": [
+    { "key": "employees", "name": "Employees" },
+    { "key": "temps", "name": "Temporary workers" },
+    { "key": "contractors", "name": "Contractors and carrier drivers" },
+    { "key": "visitors", "name": "Visitors" }
+  ],
+  "special": [
+    { "key": "young", "name": "Young workers (under 18)", "note": "Assess their work separately: no work beyond their strength, with hazardous substances or high accident risk, unless training needs it and a competent person supervises (in Germany: JArbSchG §§ 22 and 28a)." },
+    { "key": "pregnant", "name": "Pregnant or breastfeeding workers", "note": "Assess every activity for them, whether or not anyone is pregnant now, and set the protective measures before a pregnancy is announced (in Germany: MuSchG § 10). Lifting, hazardous substances and working alone need a decision." },
+    { "key": "disabled", "name": "Workers with disabilities", "note": "Adjust the workplace, escape routes and alarms to the person (in Germany: ArbStättV § 3a (2))." },
+    { "key": "new", "name": "New starters and workers with little of the local language", "note": "Instruct them before they start, in a language they understand, and check that it was understood (in Germany: ArbSchG § 12)." }
+  ],
+  "groups": [
+    {
+      "key": "mechanical", "no": 1, "name": "Mechanical hazards",
+      "factors": "Unguarded moving parts, moving transport and work equipment (forklifts, trucks, conveyors), uncontrolled moving parts, dangerous surfaces, slipping, tripping and falling, falling from height",
+      "ref": "Germany: BetrSichV § 3, ASR A1.8 traffic routes",
+      "examples": {
+        "warehouse": ["Collision between forklift and pedestrian at blind aisle ends", "Truck pulls away from the dock during loading", "Goods falling from racking", "Tripping over stretch film and empty pallets", "Caught in a nip point of the conveyor or sorter"],
+        "hotel": ["Slipping on wet floors in the kitchen and bathrooms", "Cuts from knives and broken glass", "Falling from a ladder or step stool", "Caught in the roller ironer in the laundry"],
+        "delivery": ["Slipping or tripping on steps and kerbs while carrying", "Struck by passing traffic while unloading at the roadside", "Roll cage rolling off the tail lift", "Trapped by the sliding or rear door of the van"]
+      }
+    },
+    {
+      "key": "electrical", "no": 2, "name": "Electrical hazards",
+      "factors": "Electric shock, arcs, electrostatic charge",
+      "ref": "Germany: DGUV Regulation 3",
+      "examples": {
+        "warehouse": ["Damaged cables and plugs on chargers and scanners", "Short circuit across battery terminals", "Work on the control cabinet of the sorter"],
+        "hotel": ["Faulty kettles and hair dryers in guest rooms", "Damaged cables on cleaning machines", "Water near sockets in the kitchen and spa"],
+        "delivery": ["Charging cables of electric vans in the rain", "Damaged extension leads at the station"]
+      }
+    },
+    {
+      "key": "substances", "no": 3, "name": "Hazardous substances",
+      "factors": "Skin contact, breathing in, swallowing, physical and chemical effects (fire, reactions)",
+      "ref": "Germany: GefStoffV § 6, safety data sheet",
+      "examples": {
+        "warehouse": ["Battery acid (sulfuric acid) at the charging station", "Leaking parcels with chemicals", "Diesel exhaust from trucks at the dock"],
+        "hotel": ["Cleaning and disinfection chemicals (skin, eyes, mixing)", "Pool chemicals (chlorine)", "Dishwasher detergents and descalers"],
+        "delivery": ["Dangerous goods in parcels (lithium batteries, aerosols)", "Exhaust fumes in the loading hall"]
+      }
+    },
+    {
+      "key": "biological", "no": 4, "name": "Biological agents",
+      "factors": "Infection by microorganisms, sensitising or toxic effects (mould)",
+      "ref": "Germany: BioStoffV § 4",
+      "examples": {
+        "warehouse": ["Rodent and bird droppings in storage areas", "Mould on returns and damp goods"],
+        "hotel": ["Used needles, blood and body fluids in rooms", "Legionella in water systems and showers", "Food handling (salmonella, norovirus)"],
+        "delivery": ["Spoiled food parcels and contaminated packaging", "Respiratory infections from contact with many people"]
+      }
+    },
+    {
+      "key": "fire", "no": 5, "name": "Fire and explosion hazards",
+      "factors": "Flammable solids, liquids and gases, explosive atmospheres, explosives",
+      "ref": "Germany: ASR A2.2 fire protection, GefStoffV",
+      "examples": {
+        "warehouse": ["Hydrogen released while charging forklift batteries", "Lithium-ion batteries in parcels and in scanners", "Fire load of stored cardboard and pallets", "Escape routes blocked, fire doors wedged open"],
+        "hotel": ["Fat fire in the kitchen", "Guests smoking in their rooms", "Lint in the laundry dryers"],
+        "delivery": ["Charging e-bikes and e-vans indoors", "Fuel stored at the station"]
+      }
+    },
+    {
+      "key": "thermal", "no": 6, "name": "Thermal hazards",
+      "factors": "Hot or cold media and surfaces",
+      "ref": "",
+      "examples": {
+        "warehouse": ["Hot surfaces of shrink-wrap and heat-seal machines", "Frozen goods and cold-store surfaces"],
+        "hotel": ["Hot fat, steam and ovens in the kitchen", "Hot water and steam in the laundry"],
+        "delivery": ["Hot engine parts and exhaust", "Dry ice in cold-chain boxes"]
+      }
+    },
+    {
+      "key": "physical", "no": 7, "name": "Specific physical effects",
+      "factors": "Noise, ultrasound and infrasound, whole-body and hand-arm vibration, optical radiation (UV, laser), ionising radiation, electromagnetic fields, over- or under-pressure",
+      "ref": "Germany: LärmVibrationsArbSchV § 3, OStrV",
+      "examples": {
+        "warehouse": ["Noise from the sorter and conveyors", "Whole-body vibration on forklifts over damaged floors", "Laser of scanners and dimensioning systems"],
+        "hotel": ["Noise in the dishwashing area", "UV radiation for outdoor staff (pool, garden)"],
+        "delivery": ["Whole-body vibration while driving", "UV radiation and heat on summer tours"]
+      }
+    },
+    {
+      "key": "environment", "no": 8, "name": "Working environment",
+      "factors": "Climate (heat, cold, draughts), lighting, lack of oxygen, escape and traffic routes, signs, space to move, layout of the workplace, sanitary and break rooms",
+      "ref": "Germany: ArbStättV and the ASR (A3.4 lighting, A3.5 room temperature)",
+      "examples": {
+        "warehouse": ["Cold and draughts at open dock doors", "Poor lighting in the aisles", "Heat under the roof in summer", "Traffic and escape routes blocked by goods"],
+        "hotel": ["Heat in the kitchen and laundry", "Poor lighting in corridors and stairwells", "Cramped storerooms and linen rooms"],
+        "delivery": ["Heat in the van in summer, cold in winter", "Dark entrances and stairwells", "No toilet on the route"]
+      }
+    },
+    {
+      "key": "load", "no": 9, "name": "Physical load",
+      "factors": "Lifting, holding, carrying, pushing and pulling loads, forced postures, repetitive work, static and dynamic work combined",
+      "ref": "Germany: LasthandhabV, the key indicator methods (LMM) of the BAuA",
+      "examples": {
+        "warehouse": ["Lifting heavy parcels from the trailer floor", "Repetitive handling at the sorter infeed", "Forced postures picking from the bottom shelves", "Pushing and pulling full roll cages"],
+        "hotel": ["Making beds and turning mattresses", "Pushing heavy housekeeping trolleys", "Standing for hours at the front desk"],
+        "delivery": ["Carrying heavy parcels up stairs", "Getting in and out of the van many times a day", "Lifting parcels from the van floor"]
+      }
+    },
+    {
+      "key": "psych", "no": 10, "name": "Psychological load",
+      "factors": "Work content and task, work organisation (time pressure, working hours, shifts), social relations, working environment, new forms of work",
+      "ref": "Germany: ArbSchG § 5 (3) No. 6",
+      "examples": {
+        "warehouse": ["Time pressure at peak (pick rates, scanner targets)", "Night shifts and changing rotas", "Monotonous work at one station"],
+        "hotel": ["Aggressive or abusive guests", "Night audit alone with the responsibility for the house", "Split shifts and short-notice rota changes"],
+        "delivery": ["Tight delivery windows and route targets", "Conflicts with recipients", "Stress in heavy traffic"]
+      }
+    },
+    {
+      "key": "other", "no": 11, "name": "Other hazards",
+      "factors": "Hazards from people (violence, robbery), animals and plants, road traffic, working alone, and anything not covered above",
+      "ref": "Germany: DGUV Rule 112-139 for lone-worker alarms",
+      "examples": {
+        "warehouse": ["Working alone in the charging room or at night", "Theft and violence at the gate", "External truck drivers who do not know the site rules"],
+        "hotel": ["Robbery or violence at the night desk", "Working alone in technical rooms", "Intruders in staff areas"],
+        "delivery": ["Road traffic accidents on the route", "Dog attacks at the door", "Working alone on the route, no help after an accident", "Robbery of cash or valuable parcels"]
+      }
+    }
+  ],
+  "likelihood": [
+    ["Very unlikely", "Practically never: not expected in years of this work, here or elsewhere."],
+    ["Unlikely", "Could happen, but not known here; perhaps once in several years."],
+    ["Possible", "Has happened in similar work or here before; about once a year."],
+    ["Likely", "Happens here now and then; several times a year."],
+    ["Very likely", "Expected: happens often, monthly or more, if nothing changes."]
+  ],
+  "severity": [
+    ["Negligible", "No injury, or a minor one that needs no first aid."],
+    ["Minor", "First aid or a doctor's visit, back at work within three days."],
+    ["Moderate", "Injury or illness with more than three days off (in Germany a reportable accident), fully recovered."],
+    ["Severe", "Serious or lasting injury, occupational disease, long absence."],
+    ["Fatal", "Death, or several people seriously injured."]
+  ],
+  "bands": {
+    "low": {
+      "name": "Low",
+      "meaning": "Acceptable as it is. Keep the measures in place and look at it again at the next review.",
+      "moves": ["Check at the next walk that the existing measures are still in place.", "Keep the hazard on the list, so a change in the work brings it back.", "Use the instruction to keep people aware of it."],
+      "question": "What would have to change for this risk to grow?"
+    },
+    "medium": {
+      "name": "Medium",
+      "meaning": "Measures are needed: plan them with an owner and a date, and bring the risk down as far as reasonably possible.",
+      "moves": ["Plan at least one measure above P in the STOP order, with an owner and a date.", "Agree how and when the effect will be checked.", "Rate the residual risk once the measure is in place."],
+      "question": "Which measure would make this hazard go away, not just make it less likely?"
+    },
+    "high": {
+      "name": "High",
+      "meaning": "Measures are needed soon, before the work goes on as usual: look first for substitution and technical measures.",
+      "moves": ["Put an interim measure in place this week and the lasting one with a fixed date.", "Ask whether the hazard can be removed or the work done another way (S) before guarding it (T).", "Instruct everyone exposed and check the effect within a month."],
+      "question": "Why is this hazard here at all, and who decided that it has to be?"
+    },
+    "very-high": {
+      "name": "Very high",
+      "meaning": "Do not carry on as it is: stop or restrict the work until measures have brought the risk down.",
+      "moves": ["Stop or restrict the work now and tell the responsible manager and the safety specialist.", "Agree the measures that must be in place before the work starts again.", "Rate the risk again with the measures in place, and only then release the work."],
+      "question": "What has to be true before anyone does this work again?"
+    }
+  },
+  "stop": {
+    "S": { "name": "Substitution", "hint": "Remove the hazard or replace it: another substance, process, machine or way of working that is less dangerous." },
+    "T": { "name": "Technical", "hint": "Deal with the hazard at its source and separate people from it: guards, barriers, interlocks, ventilation, lifting aids." },
+    "O": { "name": "Organisational", "hint": "Change how the work is organised: rules, routes, rotation, rotas, permits, training and instruction, distance in time or space." },
+    "P": { "name": "Personal", "hint": "Personal protective equipment and personal behaviour. It comes last, when S, T and O are not enough, and it needs instruction and checks." }
+  },
+  "statuses": { "open": "Planned", "doing": "In progress", "done": "Done" },
+  "checks": { "none": "Not checked yet", "effective": "Effective", "partly": "Partly effective", "not-effective": "Not effective" },
+  "reviewMonths": [6, 12, 24],
+  "causeGroups": {
+    "Housekeeping": ["mechanical", "environment"],
+    "Forklift / vehicle": ["mechanical", "environment", "other"],
+    "Manual handling": ["load"],
+    "Falls / slips": ["mechanical"],
+    "Equipment": ["mechanical", "electrical"],
+    "Procedure not followed": ["*"],
+    "PPE": ["*"],
+    "Other": ["*"]
+  },
+  "signatures": ["Assessed by", "Employer or responsible manager", "Safety specialist (and company doctor where needed)", "Works council or employee representative (noted)"],
+  "tips": [
+    ["One assessment per area or activity.", "Where the work is the same, one assessment covers every workplace like it (ArbSchG § 5 (2)). A parcel hub needs a few: dock, traffic, picking, the charging room."],
+    ["Walk it, with the people who do the work.", "Hazards are found on the floor, not at the desk. Take one or two people from the shift and the safety specialist, and go through the eleven groups of the catalogue."],
+    ["Rate it as it is today.", "Likelihood and severity of the harm with the measures that are really in place, not the ones planned. The residual risk is rated separately, after the measures."],
+    ["S before T before O before P.", "Personal protective equipment comes last. A high risk met with gloves and a vest alone is flagged: look for a way to remove the hazard or keep people away from it first."],
+    ["A measure is not finished when it is done.", "Check that it works, on a date, and write down the result: that is what the law means by documenting the effectiveness check."],
+    ["Review it after anything changes.", "After an accident or a near miss, a new machine or layout, new substances or new people, and at the latest on the review date."]
+  ],
+  "example": {
+    "assessments": [
+      {
+        "area": "Loading dock", "activity": "Loading and unloading trucks and swap bodies (parcels in roll cages and on pallets)", "daysAgo": 120,
+        "assessor": "Marco (shift lead) with the safety specialist", "exposed": ["employees", "temps", "contractors"], "special": [], "reviewMonths": 12,
+        "note": "Walked the dock with two drivers of the late shift; carrier drivers were asked about the drive-away risk.",
+        "hazards": [
+          { "group": "mechanical", "text": "Truck pulls away during loading: forklift or pallet truck falls between dock and trailer", "l": 3, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Vehicle restraint or wheel chocks at every door; the dock light turns green only when the truck is secured", "owner": "Maintenance", "dueIn": 30, "status": "doing", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Drivers hand the truck key in at the gate office until loading is finished", "owner": "Anna", "dueIn": -90, "status": "done", "checkIn": -30, "check": "effective" }
+          ] },
+          { "group": "mechanical", "text": "Pedestrians crossing the dock behind reversing trucks and forklifts", "l": 4, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Painted pedestrian lane and barrier along docks 1–6", "owner": "Maintenance", "dueIn": 14, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Nobody crosses a dock lane without eye contact with the driver; banksman when reversing", "owner": "Luca", "dueIn": -40, "status": "done", "checkIn": -7, "check": "partly" },
+            { "type": "P", "text": "High-visibility vests for everyone on the dock, carrier drivers included", "owner": "Anna", "dueIn": -60, "status": "done", "checkIn": -30, "check": "effective" }
+          ] },
+          { "group": "load", "text": "Lifting heavy parcels (up to 31.5 kg) from the trailer floor", "l": 4, "s": 3, "l2": 3, "s2": 2, "measures": [
+            { "type": "T", "text": "Extendable belt conveyor into the trailer for loose-loaded parcels", "owner": "Marco", "dueIn": 90, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Two-person lift above 25 kg; heavy parcels marked at the sorter", "owner": "Anna", "dueIn": -50, "status": "done", "checkIn": -20, "check": "effective" }
+          ] },
+          { "group": "environment", "text": "Cold and draughts at the open dock doors in winter", "l": 4, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Dock shelters at doors 1–6", "owner": "Maintenance", "dueIn": -100, "status": "done", "checkIn": -60, "check": "effective" },
+            { "type": "P", "text": "Winter jackets, gloves and thermal underwear issued in October", "owner": "Anna", "dueIn": 7, "status": "doing", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Storage", "activity": "Forklift and pallet-truck traffic in the aisles and cross-dock lanes", "daysAgo": 345,
+        "assessor": "Luca (warehouse lead) with the safety specialist", "exposed": ["employees", "temps"], "special": [], "reviewMonths": 12,
+        "note": "",
+        "hazards": [
+          { "group": "mechanical", "text": "Collision between forklift and pedestrian at blind aisle ends", "l": 3, "s": 5, "l2": 2, "s2": 5, "measures": [
+            { "type": "T", "text": "Blue-spot warning lights on all forklifts, convex mirrors at the aisle ends", "owner": "Maintenance", "dueIn": -200, "status": "done", "checkIn": -150, "check": "effective" },
+            { "type": "O", "text": "Marked walkways; speed limit 6 km/h in the aisles", "owner": "Luca", "dueIn": -200, "status": "done", "checkIn": -150, "check": "partly" },
+            { "type": "O", "text": "Only trained drivers with written authorisation; instruction once a year", "owner": "Luca", "dueIn": 20, "status": "open", "checkIn": null, "check": "" }
+          ] },
+          { "group": "mechanical", "text": "Goods falling from racking (overhanging pallets, wrong stacking height)", "l": 3, "s": 4, "l2": 2, "s2": 4, "measures": [
+            { "type": "T", "text": "Racking inspected by a competent person every year; rack protection at the aisle ends", "owner": "Maintenance", "dueIn": -120, "status": "done", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Maximum stacking height marked on each rack and checked twice a shift", "owner": "Luca", "dueIn": 7, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "mechanical", "text": "Tripping over stretch film and empty pallets in the aisles", "l": 3, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Bins for stretch film at every aisle end", "owner": "Sofia", "dueIn": -10, "status": "done", "checkIn": 20, "check": "" },
+            { "type": "O", "text": "One aisle owner per shift signs the floor off before leaving", "owner": "Sofia", "dueIn": 10, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "physical", "text": "Whole-body vibration when driving over damaged floor joints and dock plates", "l": 2, "s": 2, "l2": 1, "s2": 2, "measures": [
+            { "type": "T", "text": "Repair the floor joint at cross-dock lane 2", "owner": "Maintenance", "dueIn": 45, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Picking", "activity": "Picking and sorting parcels and small goods at the shelving and the sorter infeed", "daysAgo": 75,
+        "assessor": "Anna (shift lead) with the company doctor", "exposed": ["employees", "temps"], "special": ["young"], "reviewMonths": 12,
+        "note": "Two apprentices under 18 work in picking: their tasks were assessed with them.",
+        "hazards": [
+          { "group": "load", "text": "Repetitive lifting and twisting at the sorter infeed", "l": 4, "s": 3, "l2": 3, "s2": 2, "measures": [
+            { "type": "T", "text": "Height-adjustable infeed tables and roller slides at the chutes", "owner": "Marco", "dueIn": 60, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Rotation every two hours between infeed, picking and packing", "owner": "Anna", "dueIn": -60, "status": "done", "checkIn": -30, "check": "effective" },
+            { "type": "O", "text": "Lifting-technique training with the company doctor", "owner": "Anna", "dueIn": -45, "status": "done", "checkIn": -14, "check": "partly" }
+          ] },
+          { "group": "load", "text": "Forced postures when picking from the bottom and top shelves", "l": 3, "s": 2, "l2": 2, "s2": 2, "measures": [
+            { "type": "T", "text": "Step stools with a handrail in every aisle", "owner": "Sofia", "dueIn": -30, "status": "done", "checkIn": -5, "check": "effective" },
+            { "type": "O", "text": "Heavy and fast-moving items between knee and shoulder height (re-slotting)", "owner": "Sofia", "dueIn": 21, "status": "doing", "checkIn": null, "check": "" }
+          ] },
+          { "group": "psych", "text": "Time pressure at peak (pick rates, scanner targets) and night work", "l": 3, "s": 3, "l2": 2, "s2": 3, "measures": [
+            { "type": "O", "text": "Peak staffing plan with temporary workers booked two weeks ahead", "owner": "Anna", "dueIn": -20, "status": "done", "checkIn": -2, "check": "" },
+            { "type": "O", "text": "Breaks fixed in the shift plan and not skipped at peak", "owner": "Anna", "dueIn": -3, "status": "open", "checkIn": null, "check": "" }
+          ] },
+          { "group": "environment", "text": "Poor lighting in aisles 10–14 (lamps out, shadows on the labels)", "l": 3, "s": 2, "l2": 1, "s2": 2, "measures": [
+            { "type": "T", "text": "Replace the lamps with LED and measure the lighting at the picking face", "owner": "Maintenance", "dueIn": 30, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      },
+      {
+        "area": "Charging room", "activity": "Charging and changing lead-acid forklift batteries", "daysAgo": 400,
+        "assessor": "Marco with the safety specialist and the battery supplier", "exposed": ["employees", "contractors"], "special": ["pregnant"], "reviewMonths": 12,
+        "note": "Pregnant or breastfeeding workers do not work in the charging room (sulfuric acid, lifting).",
+        "hazards": [
+          { "group": "fire", "text": "Hydrogen released while charging: explosive atmosphere if the ventilation fails", "l": 2, "s": 5, "l2": 1, "s2": 5, "measures": [
+            { "type": "T", "text": "Ventilation to EN IEC 62485-3 with an airflow monitor that stops charging", "owner": "Maintenance", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" },
+            { "type": "O", "text": "No smoking, no open flame, no sparks: signs at the door, hot work only with a permit", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "substances", "text": "Acid splashes (sulfuric acid) when topping up water or handling batteries", "l": 3, "s": 4, "l2": 2, "s2": 4, "measures": [
+            { "type": "P", "text": "Face shield, acid-resistant gloves and apron", "owner": "Anna", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "electrical", "text": "Short circuit across the battery terminals (a tool on the battery): arc and burns", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "O", "text": "Only instructed staff charge and change batteries", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" },
+            { "type": "P", "text": "Insulated tools only; rings and watches off", "owner": "Marco", "dueIn": -380, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "mechanical", "text": "Crushing when changing batteries (up to 1.5 t)", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "T", "text": "Battery-change trolley with roller bed and end stops", "owner": "Maintenance", "dueIn": -300, "status": "done", "checkIn": -200, "check": "effective" }
+          ] },
+          { "group": "other", "text": "Working alone in the charging room on the night shift", "l": 2, "s": 4, "l2": 1, "s2": 4, "measures": [
+            { "type": "T", "text": "Personal emergency alarm for lone work", "owner": "Luca", "dueIn": 30, "status": "open", "checkIn": null, "check": "" },
+            { "type": "O", "text": "Lone-worker check-in with the shift lead every 30 minutes", "owner": "Luca", "dueIn": -5, "status": "open", "checkIn": null, "check": "" }
+          ] }
+        ]
+      }
+    ]
+  }
+}

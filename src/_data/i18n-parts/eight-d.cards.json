@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "8D Report", "type": "Quality", "time": "Per problem", "summary": "The Global 8D for a problem a customer saw, D0 to D8: containment within a day, 5W2H and IS / IS NOT, the root cause and the escape point both verified, corrective actions validated with data. Days open and to containment against targets, every action to the tracker, print and Word.", "url": "/tools/eight-d/", "cta": "Open an 8D" },
+    "de": { "name": "8D-Report", "type": "Qualität", "time": "Je Problem", "summary": "Der Global 8D für ein Problem, das ein Kunde gesehen hat, D0 bis D8: Eindämmung innerhalb eines Tages, 5W2H und IST / IST NICHT, Grundursache und Schlupfstelle geprüft, Abstellmaßnahmen mit Daten validiert. Tage offen und bis zur Eindämmung gegen Zielzeiten, jede Maßnahme in die Maßnahmenliste, Druck und Word.", "url": "/de/tools/eight-d/", "cta": "8D eröffnen" },
+    "sq": { "name": "Raporti 8D", "type": "Cilësia", "time": "Për çdo problem", "summary": "Global 8D për një problem që e pa një klient, D0 deri D8: kufizimi brenda një dite, 5W2H dhe ËSHTË / NUK ËSHTË, shkaku rrënjësor dhe pika e moszbulimit të verifikuara, veprimet korrigjuese të vërtetuara me të dhëna. Ditët e hapura dhe deri te kufizimi kundrejt afateve, çdo veprim te lista, printim dhe Word.", "url": "/sq/tools/eight-d/", "cta": "Hap një 8D" }
+  },
+  "routine": { "when": "When a problem returns", "do": "Open an 8D the day the customer complains: contain it within 24 hours, then verify the root cause and the escape point before you choose the fix.", "de": { "when": "Wenn ein Problem wiederkehrt", "do": "Eröffnen Sie einen 8D am Tag der Reklamation: Dämmen Sie innerhalb von 24 Stunden ein und prüfen Sie dann Grundursache und Schlupfstelle, bevor Sie die Lösung wählen." }, "sq": { "when": "Kur një problem kthehet", "do": "Hap një 8D ditën kur ankohet klienti: kufizoje brenda 24 orësh, pastaj verifiko shkakun rrënjësor dhe pikën e moszbulimit para se të zgjedhësh zgjidhjen." } },
+  "recipe": "example"
+}

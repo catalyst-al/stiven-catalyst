@@ -132,7 +132,8 @@
       "/tools/signals/",
       "/tools/housekeeping-planner/",
       "/tools/leader-standard-work/",
-      "/tools/shift-capacity/"
+      "/tools/shift-capacity/",
+      "/tools/risk-assessment/"
     ],
     "learn": [],
     "also": [
@@ -236,6 +237,11 @@
         "when": "Every week",
         "do": "Paste next week's volume forecast before the roster closes and close every shift that is short of hours with a move, overtime or agency booking.",
         "tool": "/tools/shift-capacity/"
+      },
+      {
+        "when": "Every month",
+        "do": "Walk one area with the people who work there, close or re-date its overdue measures and check the effect of the ones done.",
+        "tool": "/tools/risk-assessment/"
       }
     ],
     "next": "lumen"
@@ -261,7 +267,9 @@
       "/tools/spaghetti-diagram/",
       "/tools/project-portfolio/",
       "/tools/inventory-abc/",
-      "/tools/smed/"
+      "/tools/smed/",
+      "/tools/eight-d/",
+      "/tools/hoshin-kanri/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -341,6 +349,16 @@
         "when": "Every month",
         "do": "Time one changeover of the line with the longest stops, move everything external out of the stop and print the new changeover standard for the machine.",
         "tool": "/tools/smed/"
+      },
+      {
+        "when": "When a problem returns",
+        "do": "Open an 8D the day the customer complains: contain it within 24 hours, then verify the root cause and the escape point before you choose the fix.",
+        "tool": "/tools/eight-d/"
+      },
+      {
+        "when": "Every month",
+        "do": "Enter last month's actuals on the bowling chart, agree a countermeasure with its owner for every metric that missed twice in a row, and close the gaps in the X-matrix.",
+        "tool": "/tools/hoshin-kanri/"
       }
     ],
     "next": "atlas"

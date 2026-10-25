@@ -1,0 +1,150 @@
+/* Hoshin Kanri (js/hoshin-kanri.js): the five lists and four corners of the X-matrix, the monthly targets, catchball,
+   the X-matrix as on paper (with a stacked list on a phone), the bowling chart and the monthly review. */
+.hx-list, .hx-matrix { border-top: 1px solid var(--line); padding: 10px 0; }
+.hx-list:first-child, .hx-matrix:first-child { border-top: 0; }
+.hx-list > summary, .hx-matrix > summary { cursor: pointer; font-weight: 700; line-height: 1.35; }
+.hx-list > .form-note { margin: 6px 0 10px; }
+.hx-count { color: var(--muted); font-weight: 400; }
+.hx-code { display: inline-block; min-width: 2.1em; color: var(--blue); font-weight: 800; font-variant-numeric: tabular-nums; }
+.hx-items { display: grid; gap: 10px; margin: 0 0 10px; padding: 0; list-style: none; }
+.hx-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: start; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.hx-item > .hx-code { padding-top: 30px; }
+.hx-item-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px 10px; }
+.hx-item-fields .hx-wide { grid-column: 1 / -1; }
+.hx-item .dl-remove { margin-top: 26px; }
+.hx-in { width: 100%; min-width: 0; }
+.hx-add { margin-top: 2px; }
+
+/* The corners: one button per cell, the row's name beside it. */
+.hx-matrix-wrap { margin-top: 10px; }
+.hx-grid { width: auto; }
+.hx-grid :is(th, td) { padding: 4px 6px; vertical-align: middle; }
+.hx-grid .hx-grid-row { min-width: 180px; max-width: 320px; font-weight: 400; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.hx-grid-name { color: var(--ink); }
+.hx-grid-col abbr { text-decoration: none; cursor: help; }
+.hx-grid-cell { text-align: center; }
+.hx-cell { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper-2); color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.hx-cell.is-strong, .hx-cell.is-primary { color: var(--ink); border-color: var(--ink); }
+.hx-cell.is-weak, .hx-cell.is-secondary { color: var(--ink); }
+.hx-cell.is-primary, .hx-cell.is-secondary { color: var(--blue); border-color: var(--blue); }
+.hx-cell:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.hx-grid-check { white-space: nowrap; font-size: 13px; font-weight: 700; }
+.hx-grid-check.is-ok { color: var(--ok); }
+.hx-grid-check.is-bad { color: var(--danger); }
+
+/* Monthly targets and actuals. */
+.hx-months { width: 100%; }
+.hx-months :is(th, td) { padding: 4px 8px; vertical-align: middle; }
+.hx-num { max-width: 110px; text-align: right; font-variant-numeric: tabular-nums; }
+.hx-month-status { white-space: nowrap; font-size: 13px; font-weight: 700; }
+.hx-month-status.is-met { color: var(--ok); }
+.hx-month-status.is-missed { color: var(--danger); }
+
+/* Projects and catchball. */
+.hx-project-list { display: grid; gap: 12px; margin: 10px 0 18px; padding: 0; list-style: none; }
+.hx-project-info { margin: 4px 0 0; }
+.hx-sub-kicker { margin-top: 8px; }
+.hx-catch { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.hx-catch-head { margin: 0 0 6px; }
+.hx-catch-notes { display: grid; gap: 6px; margin: 0; padding-left: 20px; }
+.hx-catch-notes li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.hx-catch-notes .dl-remove { margin-left: auto; }
+.hx-catch-meta { color: var(--muted); font-size: 13px; font-weight: 700; }
+.hx-step { display: inline-block; padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 12px; font-weight: 700; }
+.hx-step.is-agreed { border-color: var(--ok); color: var(--ok); }
+
+/* The X-matrix: as on paper on a wide screen and in print, as stacked lists on a phone. */
+.hx-xm-panel { display: grid; gap: 12px; }
+.hx-xm-paper > summary { cursor: pointer; font-weight: 700; margin-bottom: 8px; }
+.hx-xm { min-width: 760px; width: 100%; height: auto; }
+.hx-xm-list { display: none; gap: 14px; }
+.hx-xm-sec-title { margin: 0 0 6px; font-size: 14px; }
+.hx-xm-items { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.hx-xm-items > li { padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.hx-xm-items > li.is-gap { border-color: var(--danger); }
+.hx-gap-flag { color: var(--danger); font-weight: 700; }
+.hx-xm-links { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; }
+.hx-xm-link-label { color: var(--muted); font-size: 12px; }
+.hx-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.hx-chip { padding: 0 7px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; font-weight: 700; }
+.hx-chip.is-primary, .hx-chip.is-secondary { border-color: var(--blue); color: var(--blue); }
+.hx-gaps .result-label { margin-bottom: 6px; }
+.hx-gap-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.hx-gap-list strong { color: var(--danger); }
+.hx-sub { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+@media (max-width: 760px) {
+  .hx-xm-list { display: grid; }
+  .hx-item { grid-template-columns: minmax(0, 1fr) auto; }
+  .hx-item > .hx-code { display: none; }
+  .hx-bowl .hx-bowl-name { min-width: 120px; max-width: 150px; }
+}
+@media (min-width: 761px) {
+  .hx-xm-paper > summary { display: none; }
+}
+
+/* The bowling chart: a target row and an actual row per metric, met or missed in words and in colour. */
+.hx-bowl { width: 100%; font-variant-numeric: tabular-nums; }
+.hx-bowl :is(th, td) { padding: 4px 6px; font-size: 13px; white-space: nowrap; vertical-align: middle; }
+.hx-bowl .hx-bowl-name { position: sticky; left: 0; z-index: 1; min-width: 170px; max-width: 240px; white-space: normal; background: var(--card); text-align: left; }
+.hx-bowl thead .hx-bowl-name { background: var(--paper-2); }
+.hx-bowl-name small { display: block; color: var(--muted); font-weight: 400; }
+.hx-bowl-kind { color: var(--muted); font-size: 12px; }
+.hx-bowl-target td { color: var(--muted); border-bottom: 0; }
+.hx-bowl-cell { line-height: 1.15; }
+.hx-bowl-cell .hx-bowl-word { display: block; font-size: 11px; font-weight: 700; }
+.hx-bowl-cell.is-met { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ink); }
+.hx-bowl-cell.is-met .hx-bowl-word { color: var(--ok); }
+.hx-bowl-cell.is-missed { background: color-mix(in srgb, var(--danger) 16%, transparent); color: var(--ink); }
+.hx-bowl-cell.is-missed .hx-bowl-word { color: var(--danger); }
+.hx-bowl .is-review { box-shadow: inset 0 0 0 2px var(--blue); }
+.hx-bowl thead .is-review { color: var(--blue); }
+.hx-bowl-score { font-weight: 700; }
+.hx-bowl-trend.is-improving { color: var(--ok); }
+.hx-bowl-trend.is-worsening { color: var(--danger); }
+
+/* The review card and the panels under it. */
+.hx-flag { margin: 14px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line); }
+.hx-flag-name { margin: 0; font-weight: 800; }
+.hx-flag-why { margin: 2px 0 10px; color: var(--danger); font-size: 14px; }
+.hx-review-status { margin-top: 10px; }
+.hx-watch { margin: 0; padding-left: 20px; }
+.hx-trend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.hx-trend-title { margin: 0 0 4px; font-weight: 700; font-size: 14px; }
+.hx-pstatus.is-on-track { color: var(--ok); font-weight: 700; }
+.hx-pstatus:is(.is-at-risk, .is-late) { color: var(--danger); font-weight: 700; }
+.hx-goal-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.hx-goal-list li { display: grid; gap: 4px; }
+.hx-goal-bar { display: block; max-width: 420px; }
+.hx-goal-bar .bar-fill { display: block; background: var(--blue); }
+.hx-projects td { min-width: 120px; max-width: 280px; white-space: normal; }
+.hx-catch-sum { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+
+/* Paper: the X-matrix on A3 landscape (A4 landscape where the printer has no A3), the bowling chart on A4 landscape. */
+@page hx-a3 { size: A3 landscape; margin: 10mm; }
+@page hx-a4 { size: A4 landscape; margin: 10mm; }
+@media print {
+  body:has(.hx-results) main > :not(.hx-results, .page-hero),
+  body:has(.hx-results) .dl-example-note,
+  .hx-results .ck-actions,
+  .hx-results .tool-actions,
+  .hx-results .hx-xm-list,
+  .hx-xm-paper > summary { display: none !important; }
+  .hx-results { padding: 0; border: 0; }
+  /* Paper is white whatever the theme on screen: the charts take their light colours. */
+  .hx-results :is(.dl-panel, .ck-figure) { --tr-line: #1b2330; --tr-grid: #cfd5dc; --tr-text: #1b2330; --tr-muted: #5f6870; --paper-2: #fff; }
+  .hx-results .dl-table-wrap { max-height: none; overflow: visible; }
+  .hx-xm { min-width: 0; }
+  .hx-bowl-cell, .hx-grid-check, .ck-chart { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hx-bowl .hx-bowl-name { position: static; }
+  .hx-bowl :is(th, td) { padding: 2px 4px; font-size: 8pt; }
+  .hx-review textarea, .hx-review input { border: 0; padding: 0; }
+  body.hx-print-matrix .page-hero,
+  body.hx-print-matrix .hx-results > :not(.hx-xm-panel),
+  body.hx-print-matrix .hx-xm-panel > :not(.hx-xm-paper),
+  body.hx-print-bowling .page-hero,
+  body.hx-print-bowling .hx-results > :not(.hx-bowling) { display: none !important; }
+  body.hx-print-matrix .hx-xm-panel { page: hx-a3; padding: 0; border: 0; }
+  body.hx-print-matrix .hx-xm { max-height: 265mm; }
+  body.hx-print-bowling .hx-bowling { page: hx-a4; padding: 0; border: 0; }
+  body:is(.hx-print-matrix, .hx-print-bowling) :is(main, .hx-results) { min-height: 0; margin: 0; padding: 0; }
+}

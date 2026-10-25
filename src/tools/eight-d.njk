@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: 8D Report
+seo_title: "8D report template: Global 8D from D0 to D8, with 5W2H, IS / IS NOT, target times and Word export"
+description: "An 8D report from D0 to D8: emergency response, team, 5W2H and IS / IS NOT, containment, root cause and escape point, corrective actions, prevention."
+activeNav: /tools.html
+permalink: /tools/eight-d/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Quality</p>
+  <h1>8D Report</h1>
+  <p class="lede">For the problem a customer saw: the eight disciplines of the Global 8D, from the first emergency response to the closing of the team's work. Contain within a day, find why it happened and why nobody caught it, prove the fix with data, and change the systems so it does not come back. Every discipline has its status and its date, and the days count against your target times.</p>
+</section>
+
+{% set cfg = eightD %}
+{% include "partials/eight-d.njk" %}

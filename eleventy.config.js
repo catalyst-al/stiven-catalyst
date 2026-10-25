@@ -34,6 +34,14 @@ export default function (eleventyConfig) {
   // prefixes them with the folder the site lives in (for example /stiven-catalyst/ on a GitHub Pages project address).
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
+  // Eleventy copies every plain object of the global data into each page's data, unless the object is frozen. With
+  // the translations and the data of every tool in three languages, those copies came to gigabytes. A data file read
+  // from JSON is frozen at its top level, so the pages share it; nothing writes to data files at that level.
+  eleventyConfig.addDataExtension("json", (contents) => {
+    const data = JSON.parse(contents);
+    return data && typeof data === "object" && !Array.isArray(data) ? Object.freeze(data) : data;
+  });
+
   for (const path of ["styles.css", "coaching.css", "script.js", "sw.js", "manifest.webmanifest", "favicon.svg", "social.png", "fonts", "icons", "media", "js"]) {
     eleventyConfig.addPassthroughCopy(`src/${path}`);
   }

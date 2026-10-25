@@ -1,0 +1,124 @@
+{
+  "storageKey": "sc-hoshin-kanri-sq",
+  "portfolioKey": "sc-project-portfolio-sq",
+  "text": {
+    "tool": "Hoshin Kanri",
+    "csv": "hoshin-kanri",
+    "titlePlaceholder": "p.sh. Qendra e shpërndarjes Veri",
+    "breakthroughPlaceholder": "p.sh. 99,5% në kohë dhe të plota deri në 2029",
+    "annualPlaceholder": "p.sh. Rrit OTIF nga 96,8% në 98,5% këtë vit",
+    "priorityPlaceholder": "p.sh. Rrjedhë cross-dock për artikujt me qarkullim të shpejtë",
+    "metricPlaceholder": "p.sh. Koha nga rampa në magazinë",
+    "unitPlaceholder": "p.sh. %, h, €",
+    "ownerPlaceholder": "Emri",
+    "rolePlaceholder": "p.sh. Përgjegjësi i hyrjes së mallit",
+    "countermeasurePlaceholder": "Çfarë ndryshon, ku dhe nga kur: një kundërmasë kundër shkakut, jo një dëshirë"
+  },
+  "quadrants": {
+    "breakthroughs": ["Objektivat e përparimit (3–5 vjet)", "Jugu i matricës. Ku duhet të jetë vendi i punës pas tre deri pesë vjetësh: pak objektiva, të guximshëm dhe të matshëm, arsyeja e gjithçkaje që qëndron mbi ta."],
+    "annual": ["Objektivat vjetore", "Perëndimi. Çfarë duhet të arrijë ky vit në rrugën drejt objektivave të përparimit, secili me një numër dhe një afat."],
+    "priorities": ["Prioritetet e përmirësimit", "Veriu. Prioritetet kryesore të përmirësimit (projekte, rrjedha kaizen) që arrijnë objektivat vjetore. Sa më pak, aq më mirë: ajo që nuk është këtu nuk është puna e këtij viti."],
+    "metrics": ["Treguesit për t'u përmirësuar", "Lindja. Treguesit që vërtetojnë se çdo prioritet funksionon, me vlerën fillestare dhe objektivin në fund të vitit. Objektivat mujore dhe vlerat reale vijnë në hapin 4."],
+    "owners": ["Burimet", "Lindja e largët. Njerëzit që i mbajnë prioritetet. Çdo prioritet ka nevojë për një përgjegjës kryesor; përgjegjësit ndihmës ndihmojnë."]
+  },
+  "matrices": {
+    "ba": "Objektivat vjetore ↔ objektivat e përparimit (jugperëndim)",
+    "pa": "Prioritetet e përmirësimit ↔ objektivat vjetore (veriperëndim)",
+    "pm": "Prioritetet e përmirësimit ↔ treguesit për t'u përmirësuar (verilindje)",
+    "po": "Prioritetet e përmirësimit ↔ burimet (lindja e largët)"
+  },
+  "strengths": { "strong": "e fortë", "weak": "e dobët" },
+  "roles": { "primary": "përgjegjës kryesor", "secondary": "përgjegjës ndihmës" },
+  "better": { "higher": "Më e lartë është më mirë", "lower": "Më e ulët është më mirë" },
+  "catchball": { "proposal": "Propozim", "feedback": "Përgjigje", "agreed": "Rënë dakord" },
+  "portfolio": {
+    "phases": { "define": "Përcakto", "measure": "Mat", "analyze": "Analizo", "improve": "Përmirëso", "control": "Kontrollo" },
+    "statuses": { "on-track": "Sipas planit", "at-risk": "Në rrezik", "late": "Me vonesë", "on-hold": "Pezulluar", "closed": "Mbyllur" }
+  },
+  "tips": [
+    ["Pak objektiva, të shpërndarë deri në fund.", "Tre deri pesë objektiva përparimi, një grusht objektivash vjetore dhe çdo prioritet i lidhur me një objektiv vjetor, një tregues dhe një përgjegjës. Ajo që nuk është në matricë nuk është puna e këtij viti."],
+    ["Lexoje X-in rreth e rrotull.", "Objektivat e përparimit (jug) çojnë te objektivat vjetore (perëndim), ato te prioritetet e përmirësimit (veri), këto te treguesit (lindje) dhe te njerëzit që mbajnë përgjegjësinë (lindja e largët). Çdo cep tregon sa fort lidhen dy lista: ● e fortë, ○ e dobët."],
+    ["Luaj catchball para se matrica të fiksohet.", "Niveli më poshtë propozon si do ta arrijë një prioritet, niveli më lart përgjigjet, dhe një shënim tregon kur ranë dakord të dy. Një prioritet për të cilin askush nuk ka rënë dakord është ende një dëshirë."],
+    ["Shqyrtoje çdo muaj në grafikun bowling.", "Çdo tregues ka një objektiv për çdo muaj: i arritur ose jo, me fjalë dhe me ngjyrë. Dy mosarritje radhazi kërkojnë një kundërmasë me përgjegjës dhe afat, dhe një A3 kur shkaku nuk është i qartë."],
+    ["Lëri projektet t'i mbajnë prioritetet.", "Lidhe një prioritet me projektin e tij në Portofolin e projekteve të këtij shfletuesi: faza, gjendja dhe kursimet shfaqen pranë objektivit vjetor të cilit i shërben. Portofoli këtu vetëm lexohet."],
+    ["Kaloja matricën nivelit më poshtë si skedar.", "Ruaje si skedar modeli dhe dërgoja nivelit tjetër; ata e hapin këtu dhe ndërtojnë matricën e tyre nën tënden."]
+  ],
+  "example": {
+    "reported": 9,
+    "plan": {
+      "title": "Qendra e shpërndarjes Veri",
+      "breakthroughs": [
+        { "id": "b1", "text": "Zgjedhja e parë e klientëve tanë: 99,5% e porosive në kohë dhe të plota deri në 2029" },
+        { "id": "b2", "text": "Kosto për porosi të dërguar 25% më e ulët deri në 2029" },
+        { "id": "b3", "text": "Një vend pune i sigurt ku njerëzit qëndrojnë: asnjë aksident me humbje ditësh pune, largime nga puna nën 10% në vit" }
+      ],
+      "annual": [
+        { "id": "a1", "text": "Rrit OTIF nga 96,8% në 98,5%", "savingsTarget": null },
+        { "id": "a2", "text": "Ul koston për porosi nga 3,40 € në 3,05 €: 180.000 € në vit", "savingsTarget": 180000 },
+        { "id": "a3", "text": "Rrit saktësinë e regjistrimit të stokut nga 98,9% në 99,6%", "savingsTarget": null },
+        { "id": "a4", "text": "Përgjysmo shkallën e aksidenteve me humbje ditësh pune dhe ul largimet nga puna në 14%", "savingsTarget": null }
+      ],
+      "priorities": [
+        { "id": "p1", "text": "Rrjedhë cross-dock për artikujt me qarkullim të shpejtë: nga rampa në magazinë për më pak se 4 orë", "project": "hx-example-crossdock", "projectTitle": "Rrjedhë cross-dock për artikujt me qarkullim të shpejtë" },
+        { "id": "p2", "text": "Rrugë e re e mbledhjes dhe vendosje e artikujve sipas ABC", "project": "hx-example-pickpath", "projectTitle": "Rrugë e re e mbledhjes dhe vendosje sipas ABC" },
+        { "id": "p3", "text": "Numërim ciklik sipas klasave ABC, shkaku rrënjësor për çdo diferencë", "project": "", "projectTitle": "" },
+        { "id": "p4", "text": "Ndaj pirunët nga këmbësorët; punë standarde te rampat", "project": "", "projectTitle": "" },
+        { "id": "p5", "text": "Përfshirje me mentor dhe matricë aftësish për punonjësit e rinj", "project": "", "projectTitle": "" },
+        { "id": "p6", "text": "Përshtat madhësinë e pesë kartonëve më të përdorur", "project": "", "projectTitle": "" }
+      ],
+      "metrics": [
+        { "id": "m1", "text": "OTIF", "unit": "%", "better": "higher", "baseline": 96.8, "target": 98.5,
+          "targets": [96.9, 97.1, 97.2, 97.4, 97.5, 97.7, 97.8, 97.9, 98.1, 98.2, 98.4, 98.5],
+          "actuals": [97.0, 97.2, 97.1, 97.6, 97.8, 97.6, 97.9, 98.0, 98.2] },
+        { "id": "m2", "text": "Koha nga rampa në magazinë (dock to stock)", "unit": "h", "better": "lower", "baseline": 7.5, "target": 4.0,
+          "targets": [7.2, 6.9, 6.6, 6.3, 6.0, 5.8, 5.5, 5.2, 4.9, 4.6, 4.3, 4.0],
+          "actuals": [7.4, 7.0, 6.5, 6.1, 6.0, 5.6, 5.4, 5.0, 4.8] },
+        { "id": "m3", "text": "Kosto për porosi të dërguar", "unit": "€", "better": "lower", "baseline": 3.40, "target": 3.05,
+          "targets": [3.37, 3.34, 3.31, 3.28, 3.25, 3.23, 3.20, 3.17, 3.14, 3.11, 3.08, 3.05],
+          "actuals": [3.38, 3.33, 3.30, 3.27, 3.26, 3.22, 3.19, 3.21, 3.18] },
+        { "id": "m4", "text": "Saktësia e regjistrimit të stokut", "unit": "%", "better": "higher", "baseline": 98.9, "target": 99.6,
+          "targets": [99.0, 99.0, 99.1, 99.1, 99.2, 99.3, 99.3, 99.4, 99.4, 99.5, 99.5, 99.6],
+          "actuals": [98.9, 99.1, 99.1, 99.2, 99.2, 99.3, 99.2, 99.4, 99.5] },
+        { "id": "m5", "text": "Shkalla e aksidenteve me humbje ditësh pune (LTIFR), 12 muajt e fundit (për një milion orë)", "unit": "", "better": "lower", "baseline": 11.8, "target": 6.0,
+          "targets": [11.3, 10.8, 10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.5, 7.0, 6.5, 6.0],
+          "actuals": [11.5, 10.6, 10.1, 9.8, 9.6, 8.7, 8.5, 7.8, 7.4] },
+        { "id": "m6", "text": "Largimet nga puna, 12 muajt e fundit", "unit": "%", "better": "lower", "baseline": 19, "target": 14,
+          "targets": [18.6, 18.2, 17.8, 17.3, 16.9, 16.5, 16.1, 15.7, 15.3, 14.8, 14.4, 14.0],
+          "actuals": [18.5, 18.1, 17.9, 17.4, 17.0, 16.6, 16.0, 15.9, 15.6] }
+      ],
+      "owners": [
+        { "id": "r1", "text": "Jonas Weber", "role": "Përgjegjësi i hyrjes së mallit" },
+        { "id": "r2", "text": "Mira Hoxha", "role": "Përgjegjësja e daljes së mallit" },
+        { "id": "r3", "text": "Arben Krasniqi", "role": "Drejtuesi i përmirësimit të vazhdueshëm" },
+        { "id": "r4", "text": "Nora Albers", "role": "Planifikuesja e paraqitjes së magazinës" },
+        { "id": "r5", "text": "Luca Brandt", "role": "Drejtuesi i kontrollit të stokut" },
+        { "id": "r6", "text": "Sara Demiri", "role": "Koordinatorja e sigurisë dhe shëndetit në punë" },
+        { "id": "r7", "text": "Petra Lang", "role": "Partnerja e burimeve njerëzore" }
+      ],
+      "links": {
+        "ba": { "a1|b1": "strong", "a2|b2": "strong", "a3|b1": "strong", "a3|b2": "weak", "a4|b3": "strong" },
+        "pa": { "p1|a1": "strong", "p1|a2": "weak", "p2|a2": "strong", "p2|a1": "weak", "p3|a3": "strong", "p4|a4": "strong", "p5|a4": "strong", "p5|a2": "weak", "p6|a2": "strong" },
+        "pm": { "p1|m2": "strong", "p1|m1": "weak", "p2|m3": "strong", "p2|m1": "weak", "p3|m4": "strong", "p3|m1": "weak", "p4|m5": "strong", "p5|m6": "strong", "p5|m5": "weak", "p6|m3": "weak" },
+        "po": { "p1|r1": "primary", "p1|r3": "secondary", "p2|r2": "primary", "p2|r4": "secondary", "p3|r5": "primary", "p4|r6": "primary", "p4|r1": "secondary", "p5|r7": "primary", "p5|r3": "secondary", "p6|r3": "secondary", "p6|r2": "secondary" }
+      },
+      "catchball": [
+        { "priority": "p4", "date": -110, "kind": "proposal", "from": "Drejtuesit e ekipeve te rampat", "text": "Kalimet për këmbësorë me të verdhë dhe qarkullim njëdrejtimësh te rampat 1 deri 12; drejtuesit e pirunëve nënshkruajnë standardin e rampës." },
+        { "priority": "p4", "date": -101, "kind": "agreed", "from": "Drejtimi i vendit të punës", "text": "Rënë dakord siç u propozua. E drejton Sara Demiri, Jonas Weber për rampat e hyrjes." },
+        { "priority": "p2", "date": -80, "kind": "proposal", "from": "Shefat e turnit në dalje", "text": "Fillimisht vendosja sipas ABC, ndryshimi i rrugës së mbledhjes pas sezonit të pikut." },
+        { "priority": "p2", "date": -66, "kind": "feedback", "from": "Drejtimi i vendit të punës", "text": "Objektivi i kostos e ka nevojë rrugën e re këtë vit. A mund të kalojë ndryshimi i rrugës në tremujorin e tretë?" },
+        { "priority": "p2", "date": -52, "kind": "agreed", "from": "Shefat e turnit në dalje", "text": "Vendosja në korrik, ndryshimi i rrugës në shtator; dy shefa turni hyjnë në ekipin e projektit." },
+        { "priority": "p6", "date": -20, "kind": "proposal", "from": "Ekipi i paketimit", "text": "Përshtatni madhësinë e pesë kartonëve më të përdorur dhe mos i mbushni më me jastëkë ajri." },
+        { "priority": "p6", "date": -9, "kind": "feedback", "from": "Drejtimi i vendit të punës", "text": "Mirë, por kush mban përgjegjësinë: dalja e mallit apo përmirësimi i vazhdueshëm? Caktoni një përgjegjës kryesor." }
+      ],
+      "review": {
+        "m3": { "countermeasure": "Zhvendos 200 artikujt me qarkullimin më të shpejtë në zonën e artë dhe kontrollo çdo ditë mbushjen e kartonëve në çdo tavolinë paketimi", "owner": "Mira Hoxha", "due": 14 }
+      }
+    },
+    "projects": [
+      { "id": "hx-example-crossdock", "title": "Rrjedhë cross-dock për artikujt me qarkullim të shpejtë", "lead": "Jonas Weber", "area": "Hyrja e mallit", "phase": "improve", "status": "on-track",
+        "savings": { "hard": 64000, "from": 3, "realised": [{ "month": 3, "amount": 4800 }, { "month": 4, "amount": 5200 }, { "month": 5, "amount": 5600 }, { "month": 6, "amount": 5300 }, { "month": 7, "amount": 5500 }, { "month": 8, "amount": 5800 }] } },
+      { "id": "hx-example-pickpath", "title": "Rrugë e re e mbledhjes dhe vendosje sipas ABC", "lead": "Mira Hoxha", "area": "Dalja e mallit", "phase": "analyze", "status": "at-risk",
+        "savings": { "hard": 96000, "from": 6, "realised": [{ "month": 6, "amount": 5100 }, { "month": 7, "amount": 4600 }, { "month": 8, "amount": 4200 }] } }
+    ]
+  }
+}
