@@ -9,7 +9,7 @@
 {%- set P = toolsGuide.pageOf -%}
 {%- macro pageTitle(id) -%}
 {%- if id.startsWith("family:") -%}{% set f = F[id.slice(7)] %}{{ f.name }} · {{ f.role | t(lang) }}
-{%- elif id.startsWith("routine:") -%}{{ g.labels.routine }}
+{%- elif id.startsWith("routine:") -%}{{ g.labels.routine }}{% if toolsGuide.routinePart[id].part > 1 %} · {{ toolsGuide.routinePart[id].part }}{% endif %}
 {%- elif id.startsWith("tool:") -%}{{ T[id.slice(5)].name }}
 {%- elif id == "contents" -%}{{ g.labels.contents }}
 {%- elif g.sections[id] and g.sections[id].title -%}{{ g.sections[id].title }}
@@ -72,9 +72,9 @@
 {%- endmacro -%}
 
 {#- The routine of a role (families.json): when, what, and with which tool. -#}
-{%- macro routine(f) -%}
+{%- macro routine(f, firstStep = 0, stopStep = 999) -%}
 <table class="routine">
-  {%- for step in f.routine %}
+  {%- for step in f.routine.slice(firstStep, stopStep) %}
   <tr><td>{{ step.when | t(lang) }}</td><td>{{ step.do | t(lang) }} <span class="routine-tool">· {{ T[step.tool].name }}</span></td></tr>
   {%- endfor %}
 </table>
@@ -120,7 +120,7 @@
   {{ chrome(number) }}
   <p class="kicker">{{ g.edition }}</p>
   <h2>{{ g.labels.contents }}</h2>
-  <ol class="toc">
+  <ol class="toc{{ ' is-long' if toolsGuide.pages.length > 60 }}">
     {%- for other in toolsGuide.pages %}
     {%- if other not in ["cover", "contents", "back"] %}
     {%- if other.startsWith("family:") %}{% set f = F[other.slice(7)] %}
@@ -168,14 +168,18 @@
 </div>
 
 {%- elif id.startsWith("routine:") %}
-{%- set f = F[id.slice(8)] %}
+{#- A routine of more than ROUTINE_PER_PAGE steps runs on to a second page (toolsGuide.routinePart). #}
+{%- set part = toolsGuide.routinePart[id] %}
+{%- set f = F[part.family] %}
 <div class="book-page is-live" id="faqe-{{ number }}" data-page="{{ number }}">
-<section class="pg fam routine-page{{ ' is-long' if f.routine.length > 12 }}{{ fitClass }}" style="--family: {{ f.color }}">
+<section class="pg fam routine-page{{ ' is-long' if (part.to - part.from) > 12 }}{{ fitClass }}" style="--family: {{ f.color }}">
   {{ chrome(number, f.name + " · " + (f.role | t(lang)), f.color) }}
   <p class="kicker">{{ f.name }} · {{ f.role | t(lang) }}</p>
-  <h2>{{ g.labels.routine }}</h2>
+  <h2>{{ pageTitle(id) }}</h2>
+  {%- if part.part == 1 %}
   <p class="routine-note">{{ g.labels.routineNote }}</p>
-  {{ routine(f) }}
+  {%- endif %}
+  {{ routine(f, part.from, part.to) }}
 </section>
 </div>
 

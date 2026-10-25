@@ -79,6 +79,9 @@
 .tg .pg .toc li.fam { margin-top: 1.8mm; border-bottom-color: var(--line); }
 .tg .pg .toc li.fam .t { font-weight: 700; color: var(--family); }
 .tg .pg .toc li.tool .t { padding-left: 4.5mm; color: var(--body); }
+/* A long contents list (more than sixty pages) is set a little tighter so it stays on one page. */
+.tg .pg .toc.is-long li { padding: .45mm 0; font-size: 7.5pt; line-height: 1.3; }
+.tg .pg .toc.is-long li.fam { margin-top: 1.2mm; }
 .tg .pg .toc li .dot { width: 2mm; height: 2mm; border-radius: 50%; background: var(--family); flex: none; transform: translateY(-.2mm); }
 
 /* Family opener */
