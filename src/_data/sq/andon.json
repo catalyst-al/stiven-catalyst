@@ -79,11 +79,11 @@
     },
     {
       "name": "Supervizori",
-      "after": 5
+      "after": 15
     },
     {
       "name": "Menaxheri i turnit",
-      "after": 15
+      "after": 30
     }
   ],
   "targets": {

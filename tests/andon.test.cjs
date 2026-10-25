@@ -48,7 +48,7 @@ const load = ({ lang = 'en', page = false, now = NOW, storage = {} } = {}) => {
 const flush = (w) => w.dispatchEvent(new w.Event('pagehide'));
 const near = (actual, expected, digits = 9) => assert.ok(Math.abs(actual - expected) < 10 ** -digits, `${actual} ≈ ${expected}`);
 
-// Five calls, by hand (targets 3 and 15 min, levels at 0, 5 and 15 min):
+// Five calls, by hand (targets 3 and 15 min, levels set to 0, 5 and 15 min):
 //   A Mon 05.10 07:10 → help 07:12 → solved 07:20  material  respond 2  solve 10  ran on
 //   B Mon 05.10 09:00 → help 09:04 → solved 09:30  machine   respond 4  solve 30  stopped 25 min
 //   C Tue 06.10 14:30 → help 14:31 → solved 14:34  it        respond 1  solve  4  stopped, minutes not typed: 4
@@ -84,7 +84,7 @@ test('the three data files have the same keys, and each language keeps its own l
   }
   assert.equal(data.en.storageKey, 'sc-andon');
   assert.deepEqual(data.en.reasons.map((r) => r.key), ['quality', 'material', 'machine', 'safety', 'people', 'it', 'other']);
-  assert.deepEqual(data.en.levels.map((l) => l.after), [0, 5, 15], 'team lead at once, supervisor after 5, manager after 15');
+  assert.deepEqual(data.en.levels.map((l) => l.after), [0, 15, 30], 'team lead at once, supervisor once the solve target of 15 min is missed, manager after 30');
   assert.deepEqual(data.en.targets, { respond: 3, resolve: 15 });
   for (const lang of ['en', 'de', 'sq']) {
     const cfg = data[lang];
@@ -134,7 +134,8 @@ test('mean, median, within target, escalation and stopped minutes of the fixture
   assert.deepEqual(plain(M.within([2, 4, 1, 8], 3)), { within: 2, n: 4, share: 0.5 });
   assert.deepEqual(plain(M.within([3], 3)), { within: 1, n: 1, share: 1 }, 'at the target is within it');
 
-  const set = M.settings(data.en, {});
+  assert.deepEqual(plain(M.settings(data.en, {})), { respond: 3, resolve: 15, afters: [0, 15, 30], rising: true }, 'the defaults');
+  const set = M.settings(data.en, { level1: '5', level2: '15' });
   assert.deepEqual(plain(set), { respond: 3, resolve: 15, afters: [0, 5, 15], rising: true });
   const s = M.summary(M.cleanRows(FIXTURE, data.en), set);
   assert.equal(s.n, 5);
@@ -155,7 +156,7 @@ test('mean, median, within target, escalation and stopped minutes of the fixture
 
   // Typed settings: a decimal comma or point, and escalation minutes that do not rise fall back to the defaults.
   assert.deepEqual(plain(M.settings(data.en, { respondTarget: '2.5', resolveTarget: '20', level1: '4', level2: '12' })), { respond: 2.5, resolve: 20, afters: [0, 4, 12], rising: true });
-  assert.deepEqual(plain(M.settings(data.en, { level1: '8', level2: '6' })).afters, [0, 5, 15]);
+  assert.deepEqual(plain(M.settings(data.en, { level1: '8', level2: '6' })).afters, [0, 15, 30]);
   assert.equal(M.settings(data.en, { level1: '8', level2: '6' }).rising, false);
 });
 
@@ -220,7 +221,7 @@ test('the example adds up: 121 calls over twelve working days, moved by whole we
   near(s.resolve.mean, 1299 / 121);
   assert.deepEqual([s.respond.median, s.resolve.median], [2, 8]);
   assert.deepEqual([s.respond.within, s.resolve.within], [94, 100]);
-  assert.deepEqual(plain(s.reached), [26, 74, 21]);
+  assert.deepEqual(plain(s.reached), [100, 15, 6]);
   assert.deepEqual([s.stops, s.stopMin], [43, 538]);
   assert.deepEqual(plain(M.pareto(rows, 'reason').slice(0, 3).map((i) => [i.key, i.value])), [['material', 38], ['machine', 25], ['it', 18]]);
   // The call that ran past midnight is in it, on the day it was made.
@@ -242,7 +243,7 @@ test('a first visit opens on the example: the numbers, the charts and the hand-o
   assert.ok(stats.some((s) => /^Rufe12110,1 pro Tag an 12 Tagen mit Rufen/.test(s)), stats.join(' | '));
   assert.ok(stats.some((s) => /^Reaktion im Ziel78\s%94 von 121 innerhalb von 3 min/.test(s)), stats.join(' | '));
   assert.ok(stats.some((s) => /^Gelöst im Ziel83\s%100 von 121 innerhalb von 15 min/.test(s)), stats.join(' | '));
-  assert.ok(stats.some((s) => /^Eskaliert95Supervisor erreicht: 95 · Schichtleitung erreicht: 21/.test(s)), stats.join(' | '));
+  assert.ok(stats.some((s) => /^Eskaliert21Supervisor erreicht: 21 · Schichtleitung erreicht: 6/.test(s)), stats.join(' | '));
   assert.ok(stats.some((s) => /^Linie stand538 min43 von 121 Rufen/.test(s)), stats.join(' | '));
   assert.match(results.querySelector('.dl-focus h3').textContent, /^Fehlendes Material · 31\s%/);
   assert.ok(results.querySelectorAll('svg.ck-chart').length >= 5, 'two Pareto charts, the heat map, the days, the levels');
@@ -271,35 +272,35 @@ test('a first visit opens on the example: the numbers, the charts and the hand-o
 });
 
 test('a live call: the clock, the level to call now, help arrived and solved; it survives a reload', () => {
-  const calledAt = Date.parse(NOW) - 7 * 6e4;
+  const calledAt = Date.parse(NOW) - 17 * 6e4;
   const open = [{ id: 'c1', area: 'Picking', shift: 'Early', reason: 'material', calledAt, arrivedAt: 0, responder: '', stopped: false, stopMin: '', note: '' }];
   const w = load({ lang: 'en', page: true, storage: { 'sc-andon': { rows: [], open } } });
   const doc = w.document;
   const card = doc.querySelector('[data-call-id="c1"]');
   assert.ok(card, 'the open call is back after the reload');
-  assert.equal(card.querySelector('[data-elapsed]').textContent, '7');
+  assert.equal(card.querySelector('[data-elapsed]').textContent, '17');
   assert.equal(card.dataset.level, '1');
-  assert.equal(card.querySelector('[data-escalate]').textContent, '▲ Call now: Supervisor · Shift manager in 8 min');
+  assert.equal(card.querySelector('[data-escalate]').textContent, '▲ Call now: Supervisor · Shift manager in 13 min');
   assert.equal(card.querySelector('[data-help]').textContent, 'Waiting for help');
   assert.equal(doc.querySelector('[data-results]').hidden, true, 'no closed call yet, no result');
 
   // Help arrives a minute later; the call is solved four minutes after that, with the line stopped.
-  w.__setNow(calledAt + 8 * 6e4);
+  w.__setNow(calledAt + 18 * 6e4);
   card.querySelector('.an-arrived').click();
   const again = doc.querySelector('[data-call-id="c1"]');
-  assert.match(again.querySelector('[data-help]').textContent, /^Help on site since \d\d:\d\d \(8 min to respond\)/);
+  assert.match(again.querySelector('[data-help]').textContent, /^Help on site since \d\d:\d\d \(18 min to respond\)/);
   const box = again.querySelector('input[type=checkbox]');
   box.checked = true;
   box.dispatchEvent(new w.Event('change'));
-  w.__setNow(calledAt + 12 * 6e4);
+  w.__setNow(calledAt + 22 * 6e4);
   again.querySelector('.an-solved').click();
   assert.equal(doc.querySelector('[data-call-id="c1"]'), null);
   flush(w);
   const saved = JSON.parse(w.localStorage.getItem('sc-andon'));
   assert.equal(saved.open.length, 0);
   assert.equal(saved.rows.length, 1);
-  assert.deepEqual([saved.rows[0].date, saved.rows[0].reason, saved.rows[0].stopped, saved.rows[0].stopMin], ['2026-10-25', 'material', true, 12]);
-  assert.match(doc.querySelector('[data-results] h2').textContent, /^1 call · help in 8 min, solved in 12 min/);
+  assert.deepEqual([saved.rows[0].date, saved.rows[0].reason, saved.rows[0].stopped, saved.rows[0].stopMin], ['2026-10-25', 'material', true, 22]);
+  assert.match(doc.querySelector('[data-results] h2').textContent, /^1 call · help in 18 min, solved in 22 min/);
 
   // A new call from the big button.
   doc.querySelector('[data-call="safety"]').click();
