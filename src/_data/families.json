@@ -23,7 +23,8 @@
       "/tools/room-status/",
       "/tools/guest-complaints/",
       "/tools/print-pack/",
-      "/tools/waste-log/"
+      "/tools/waste-log/",
+      "/tools/andon/"
     ],
     "learn": [],
     "also": [
@@ -115,6 +116,11 @@
         "when": "End of shift",
         "do": "Weigh what was thrown away or written off on the shift, log it with its reason and where it went, and enter the covers of the day.",
         "tool": "/tools/waste-log/"
+      },
+      {
+        "when": "During the shift",
+        "do": "Start a call the moment help is needed, mark when help arrives and when the work runs again, and call the next level when the card says so.",
+        "tool": "/tools/andon/"
       }
     ],
     "next": "zenith"
@@ -286,7 +292,8 @@
       "/tools/kaizen-event/",
       "/tools/cost-of-quality/",
       "/tools/heijunka/",
-      "/tools/kanban-sizing/"
+      "/tools/kanban-sizing/",
+      "/tools/poka-yoke/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -401,6 +408,11 @@
         "when": "Every month",
         "do": "Update the demand per day and the lead times, add the cards to every loop that has too few and take the extra ones out one at a time.",
         "tool": "/tools/kanban-sizing/"
+      },
+      {
+        "when": "Every week",
+        "do": "Print the week's verification checklist, test every device that is due with a deliberate error, record the results, and send each failed device to the Action Tracker.",
+        "tool": "/tools/poka-yoke/"
       }
     ],
     "next": "atlas"

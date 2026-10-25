@@ -438,5 +438,21 @@
     "summary": "Llogarit sa karta kanban i duhen çdo cikli të supermarketit ose me dy kontejnerë, me formulën e Toyota-s ose me stok sigurie statistikor, shiko kartat që duhen shtuar ose hequr dhe vlerën e stokut maksimal, dhe printo kartat, tetë në një fletë A4.",
     "url": "/sq/tools/kanban-sizing/",
     "cta": "Përmaso ciklet"
+  },
+  {
+    "name": "Regjistri Andon",
+    "type": "Operacione",
+    "time": "Vazhdimisht",
+    "summary": "Regjistro çdo thirrje për ndihmë në sallë, drejtpërdrejt me orë që ecën ose më vonë. Koha e reagimit dhe e zgjidhjes kundrejt objektivave, kë duhet thirrur tani për një thirrje të hapur, Pareto e arsyeve dhe e minutave të ndalesës, dhe orët kur grumbullohen thirrjet.",
+    "url": "/sq/tools/andon/",
+    "cta": "Hap regjistrin"
+  },
+  {
+    "name": "Regjistri Poka-Yoke",
+    "type": "Cilësia",
+    "time": "Çdo javë",
+    "summary": "Çdo pajisje kundër gabimeve në një regjistër: gabimi që parandalon, metoda sipas Shingo, ndalim ose paralajmërim, parandalim ose zbulim. Testoje secilën sipas planit me një gabim të qëllimshëm; shiko vonesat dhe defektet, respektimin e verifikimeve, efektivitetin e çdo pajisjeje dhe një listë për ta printuar.",
+    "url": "/sq/tools/poka-yoke/",
+    "cta": "Hap regjistrin"
   }
 ]

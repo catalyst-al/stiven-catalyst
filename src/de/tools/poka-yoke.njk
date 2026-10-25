@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Poka-Yoke-Register
+seo_title: "Poka-Yoke-Register: Fehlhandlungssicherungen, Prüfplan, Prüftreue und Wirksamkeit"
+description: "Alle Poka-Yokes in einem Register: Methode nach Shingo, Eingriff oder Warnung, Vermeidung oder Entdeckung, Prüfprotokoll, Überfälliges und Ausfälle."
+activeNav: /de/tools.html
+permalink: /de/tools/poka-yoke/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Qualität</p>
+  <h1>Poka-Yoke-Register</h1>
+  <p class="lede">Führen Sie jede Fehlhandlungssicherung in einem Register: den Scan, der eine falsche Entnahme sperrt, die Waage, die ein unvollständiges Paket ausschleust, die PMS-Sperre, die ein nicht abgenommenes Zimmer aus dem Verkauf hält. Zu jeder gehören der Fehler, den sie verhindert, ihre Methode nach Shingo, ob sie den Prozess stoppt oder nur warnt und ob sie den Fehler vermeidet oder entdeckt. Prüfen Sie jede nach Plan mit einem absichtlichen Fehler; das Register zeigt, was fällig ist, was ausgefallen ist, wie viele Prüfungen rechtzeitig waren, wie stark jede Sicherung ihren Fehler gesenkt hat und welche Fehler heute ungeschützt sind.</p>
+</section>
+
+{% set cfg = de.pokaYoke %}
+{% include "partials/poka-yoke.njk" %}

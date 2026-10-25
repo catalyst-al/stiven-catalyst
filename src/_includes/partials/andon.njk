@@ -1,0 +1,213 @@
+{#- Andon Log: calls for help on the floor, live with a running clock or after the fact, time to respond and to solve, escalation and line stops; andon.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout an-setup">
+  <div class="tool-panel" data-andon>
+
+    <fieldset class="dl-box an-live">
+      <legend class="kicker">1 · {{ t.liveLegend }}</legend>
+      <p class="form-note">{{ t.liveNote }}</p>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="an-live-area">{{ "Station or area" | t(lang) }}</label>
+          <select id="an-live-area">
+            {%- for name in cfg.areas %}
+            <option value="{{ name }}">{{ name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="an-live-shift">{{ "Shift" | t(lang) }}</label>
+          <select id="an-live-shift">
+            {%- for name in cfg.shifts %}
+            <option value="{{ name }}">{{ name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="an-call-grid" role="group" aria-label="{{ 'Call for help: tap the reason' | t(lang) }}">
+        {%- for item in cfg.reasons %}
+        <button class="an-call" type="button" data-call="{{ item.key }}"><span class="an-call-word">{{ "Call" | t(lang) }}</span> <strong>{{ item.name }}</strong> <span class="an-call-hint">{{ item.hint }}</span></button>
+        {%- endfor %}
+      </div>
+      <p class="form-note an-live-status" data-live-status aria-live="polite"></p>
+      <section class="an-open-list" data-open-list aria-label="{{ 'Open calls' | t(lang) }}" hidden></section>
+      <datalist id="an-responders">
+        {%- for name in cfg.responders %}
+        <option value="{{ name }}"></option>
+        {%- endfor %}
+      </datalist>
+    </fieldset>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">2 · {{ t.entryLegend }}</legend>
+        <p class="form-note">{{ t.entryNote }}</p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="an-date">{{ "Date" | t(lang) }}</label>
+            <input id="an-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="an-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="an-shift" name="shift">
+              {%- for name in cfg.shifts %}
+              <option value="{{ name }}">{{ name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="an-area">{{ "Station or area" | t(lang) }}</label>
+            <select id="an-area" name="area">
+              {%- for name in cfg.areas %}
+              <option value="{{ name }}">{{ name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="an-reason">{{ "Reason" | t(lang) }}</label>
+            <select id="an-reason" name="reason">
+              {%- for item in cfg.reasons %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="an-called">{{ "Called" | t(lang) }}</label>
+            <input id="an-called" name="called" type="time" required>
+          </div>
+          <div class="field">
+            <label for="an-arrived">{{ "Help arrived" | t(lang) }}</label>
+            <input id="an-arrived" name="arrived" type="time">
+          </div>
+          <div class="field">
+            <label for="an-solved">{{ "Solved" | t(lang) }}</label>
+            <input id="an-solved" name="solved" type="time" required>
+          </div>
+          <p class="form-note dl-wide an-times" data-times-note aria-live="polite"></p>
+          <div class="field">
+            <label for="an-responder">{{ "Who responded" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="an-responder" name="responder" list="an-responders" placeholder="{{ t.responderPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="an-stopped">{{ "Did the line stop?" | t(lang) }}</label>
+            <select id="an-stopped" name="stopped">
+              <option value="no">{{ "no" | t(lang) }}</option>
+              <option value="yes">{{ "yes" | t(lang) }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="an-stop-min">{{ "Stopped minutes" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="an-stop-min" name="stopMin" inputmode="numeric" placeholder="{{ 'the whole call' | t(lang) }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="an-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="an-note" name="note" placeholder="{{ t.notePlaceholder }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "station" | t(lang) }}, {{ "reason" | t(lang) }}, {{ "called" | t(lang) }}, {{ "help arrived" | t(lang) }}, {{ "solved" | t(lang) }}, {{ "responder" | t(lang) }}, {{ "line stopped (yes/no)" | t(lang) }}, {{ "stopped minutes" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="an-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="an-paste" rows="5" placeholder="{{ t.pastePlaceholder }}"></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">3 · {{ "Period, filters, targets and escalation" | t(lang) }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "an" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field">
+          <label for="an-filter-area">{{ "Station or area" | t(lang) }}</label>
+          <select id="an-filter-area" data-filter="area">
+            <option value="">{{ t.allAreas }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="an-filter-reason">{{ "Reason" | t(lang) }}</label>
+          <select id="an-filter-reason" data-filter="reason">
+            <option value="">{{ t.allReasons }}</option>
+            {%- for item in cfg.reasons %}
+            <option value="{{ item.key }}">{{ item.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="an-respond-target">{{ "Respond within (min)" | t(lang) }}</label>
+          <input id="an-respond-target" name="respondTarget" inputmode="decimal" placeholder="{{ cfg.targets.respond }}" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="an-resolve-target">{{ "Solve within (min)" | t(lang) }}</label>
+          <input id="an-resolve-target" name="resolveTarget" inputmode="decimal" placeholder="{{ cfg.targets.resolve }}" autocomplete="off" data-setting>
+        </div>
+        {%- for level in cfg.levels %}{% if not loop.first %}
+        <div class="field">
+          <label for="an-level{{ loop.index0 }}">{{ level.name }} · {{ "after min" | t(lang) }}</label>
+          <input id="an-level{{ loop.index0 }}" name="level{{ loop.index0 }}" inputmode="numeric" placeholder="{{ level.after }}" autocomplete="off" data-setting>
+        </div>
+        {%- endif %}{% endfor %}
+        <p class="form-note dl-wide">{{ "Empty boxes use the defaults shown." | t(lang) }} {{ cfg.levels[0].name }} {{ "is called at once." | t(lang) }} {{ t.targetNote }}</p>
+      </div>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">4 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table an-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Called" | t(lang) }}</th><th scope="col">{{ "Station or area" | t(lang) }}</th><th scope="col">{{ "Reason" | t(lang) }}</th><th scope="col">{{ "Respond" | t(lang) }}</th><th scope="col">{{ "Solve" | t(lang) }}</th><th scope="col">{{ "Line stop" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example log" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "One reason keeps coming back?" | t(lang) }}</strong> {{ "Open it in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>{{ ", ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>{{ ", and send the fix to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="kicker">{{ "Escalation" | t(lang) }}</p>
+    <ol class="an-ladder">
+      {%- for level in cfg.levels %}
+      <li><strong>{{ level.name }}</strong> {% if loop.first %}{{ "at once" | t(lang) }}{% else %}{{ "after {n} min" | t(lang) | replace("{n}", level.after) }}{% endif %}</li>
+      {%- endfor %}
+    </ol>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results an-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="andon-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/andon.js' | assetUrl }}" defer></script>

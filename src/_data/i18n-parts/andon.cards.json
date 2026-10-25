@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Andon Log", "type": "Operations", "time": "Ongoing", "summary": "Log every call for help on the floor, live with a running clock or after the fact. Time to respond and to solve against your targets, who to call now for an open call, the Pareto of reasons and stopped minutes, and the hours when calls pile up.", "url": "/tools/andon/", "cta": "Open the log" },
+    "de": { "name": "Andon-Protokoll", "type": "Betrieb", "time": "Laufend", "summary": "Jeden Hilferuf auf der Fläche erfassen, live mit laufender Uhr oder nachträglich. Reaktions- und Lösungszeit gegenüber Ihren Zielen, wer bei einem offenen Ruf jetzt gerufen werden muss, das Pareto der Gründe und Stillstandsminuten und die Stunden, in denen sich Rufe häufen.", "url": "/de/tools/andon/", "cta": "Protokoll öffnen" },
+    "sq": { "name": "Regjistri Andon", "type": "Operacione", "time": "Vazhdimisht", "summary": "Regjistro çdo thirrje për ndihmë në sallë, drejtpërdrejt me orë që ecën ose më vonë. Koha e reagimit dhe e zgjidhjes kundrejt objektivave, kë duhet thirrur tani për një thirrje të hapur, Pareto e arsyeve dhe e minutave të ndalesës, dhe orët kur grumbullohen thirrjet.", "url": "/sq/tools/andon/", "cta": "Hap regjistrin" }
+  },
+  "routine": { "when": "During the shift", "do": "Start a call the moment help is needed, mark when help arrives and when the work runs again, and call the next level when the card says so.", "de": { "when": "Während der Schicht", "do": "Starten Sie einen Ruf, sobald Hilfe nötig ist, markieren Sie, wann Hilfe vor Ort ist und wann die Arbeit wieder läuft, und rufen Sie die nächste Stufe, wenn die Karte es anzeigt." }, "sq": { "when": "Gjatë turnit", "do": "Nis një thirrje sapo nevojitet ndihmë, shëno kur mbërrin ndihma dhe kur puna rifillon, dhe thirr nivelin tjetër kur e tregon karta." } },
+  "recipe": "example"
+}

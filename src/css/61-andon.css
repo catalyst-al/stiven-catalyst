@@ -1,0 +1,102 @@
+/* ===== Andon Log (js/andon.js) =====
+   The live calls (a large button per reason, and a card per open call with its running minutes and the level to call
+   now), the form after the fact, the period with its filters, targets and escalation, the log, and the result. The
+   level of an open call is told by its words and arrows (▲ ▲▲); the colour of the card's edge only repeats it. Large
+   targets first: the page is used on a tablet at the line, with gloves. */
+.an-live { display: grid; gap: 16px; }
+.an-call-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.an-call {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-height: 92px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color .2s ease, background .2s ease;
+}
+.an-call:hover { border-color: var(--blue); }
+.an-call:active { background: color-mix(in srgb, var(--blue) 14%, var(--card)); }
+.an-call:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.an-call-word { color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+.an-call strong { font-size: 17px; line-height: 1.2; }
+.an-call-hint { color: var(--muted); font-size: 13px; line-height: 1.35; }
+.an-live-status { margin: 0; }
+.an-live-status:empty { display: none; }
+
+.an-open-list { display: grid; gap: 12px; }
+.an-open {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+.an-open[data-level="1"] { border-left-color: var(--warn); }
+.an-open[data-level="2"], .an-open[data-level="3"] { border-left-color: var(--danger); }
+.an-open-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 14px; }
+.an-open-head h3 { margin: 0; font-size: 18px; }
+.an-open-head h3 span { color: var(--muted); font-weight: 600; }
+.an-open-head .form-note { margin: 0; }
+.an-timer { margin: 0; color: var(--muted); font-size: 15px; }
+.an-timer strong { color: var(--ink); font-size: 40px; font-variant-numeric: tabular-nums; line-height: 1; }
+.an-help, .an-escalate { margin: 0; }
+.an-escalate { font-weight: 800; }
+.an-open-fields { align-items: end; }
+.an-check { display: flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; cursor: pointer; }
+.an-check input { width: 20px; height: 20px; accent-color: var(--blue); }
+.an-open-actions { margin: 0; }
+.an-open-actions .button-primary, .an-open-actions .an-arrived { min-height: 52px; padding-inline: 24px; font-size: 16px; }
+
+.an-times:empty { display: none; }
+.an-times { margin: 0; font-weight: 700; }
+.an-table td { vertical-align: top; }
+.an-ladder { margin: 6px 0 14px; padding-left: 1.4em; }
+.an-ladder li { margin: 2px 0; }
+
+.an-results .result-head { margin-bottom: 14px; }
+.an-slow td { vertical-align: top; }
+.an-slow td:nth-child(4) { min-width: 12em; }
+
+@media (max-width: 760px) {
+  .an-open-fields { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 420px) {
+  .an-call-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .an-call { min-height: 84px; padding: 10px 12px; }
+  .an-call strong { font-size: 16px; }
+}
+
+/* Floor mode: the call buttons and the open cards grow again, for a glove at arm's length. */
+@media screen {
+  :root[data-floor="on"] .an-call-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+  :root[data-floor="on"] .an-call { min-height: 120px; padding: 16px 18px; }
+  :root[data-floor="on"] .an-call strong { font-size: 21px; }
+  :root[data-floor="on"] .an-call-hint { color: var(--ink); font-size: 15px; }
+  :root[data-floor="on"] .an-timer strong { font-size: 56px; }
+  :root[data-floor="on"] .an-escalate { font-size: 19px; }
+  :root[data-floor="on"] .an-open-actions .button-primary, :root[data-floor="on"] .an-open-actions .an-arrived { min-height: 64px; font-size: 19px; }
+}
+@media screen and (max-width: 420px) {
+  :root[data-floor="on"] .an-call-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .an-setup, .an-results .result-actions, .an-results .ck-actions, .an-results .dl-focus .tool-actions { display: none !important; }
+  .an-results { padding: 0; }
+  .an-results .dl-panel { break-inside: avoid; }
+  .an-slow { width: 100%; font-size: 9pt; }
+}

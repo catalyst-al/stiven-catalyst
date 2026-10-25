@@ -438,5 +438,21 @@
     "summary": "Berechnen Sie, wie viele Kanban-Karten jeder Supermarkt- oder Zwei-Behälter-Regelkreis braucht, nach Toyotas Formel oder mit statistischem Sicherheitsbestand, sehen Sie die Karten, die dazukommen oder herausgenommen werden, und den Bestandswert beim Höchstbestand, und drucken Sie die Karten, acht auf ein A4-Blatt.",
     "url": "/de/tools/kanban-sizing/",
     "cta": "Regelkreise dimensionieren"
+  },
+  {
+    "name": "Andon-Protokoll",
+    "type": "Betrieb",
+    "time": "Laufend",
+    "summary": "Jeden Hilferuf auf der Fläche erfassen, live mit laufender Uhr oder nachträglich. Reaktions- und Lösungszeit gegenüber Ihren Zielen, wer bei einem offenen Ruf jetzt gerufen werden muss, das Pareto der Gründe und Stillstandsminuten und die Stunden, in denen sich Rufe häufen.",
+    "url": "/de/tools/andon/",
+    "cta": "Protokoll öffnen"
+  },
+  {
+    "name": "Poka-Yoke-Register",
+    "type": "Qualität",
+    "time": "Wöchentlich",
+    "summary": "Jede Fehlhandlungssicherung in einem Register: der Fehler, den sie verhindert, die Methode nach Shingo, Eingriff oder Warnung, Vermeidung oder Entdeckung. Jede nach Plan mit einem absichtlichen Fehler prüfen; Überfälliges und Ausfälle, Prüftreue, Wirksamkeit je Sicherung und eine Checkliste zum Drucken.",
+    "url": "/de/tools/poka-yoke/",
+    "cta": "Register öffnen"
   }
 ]

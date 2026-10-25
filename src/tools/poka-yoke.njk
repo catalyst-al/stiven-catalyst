@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Poka-Yoke Register
+seo_title: "Poka-Yoke register: mistake-proofing devices, verification schedule, compliance and effectiveness"
+description: "Every mistake-proofing device in one register: Shingo's method, control or warning, prevention or detection, a verification log, overdue and failed devices."
+activeNav: /tools.html
+permalink: /tools/poka-yoke/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Quality</p>
+  <h1>Poka-Yoke Register</h1>
+  <p class="lede">Keep every mistake-proofing device in one register: the scan that blocks a wrong pick, the scale that rejects a short parcel, the PMS lock that keeps an uninspected room off sale. Each one has the error it prevents, its method after Shingo, whether it stops the process or only warns, and whether it prevents the error or detects it. Test each on its schedule with a deliberate error, and the register shows what is due, what failed, how many tests were done on time, how much each device cut its error, and which errors are not protected today.</p>
+</section>
+
+{% set cfg = pokaYoke %}
+{% include "partials/poka-yoke.njk" %}

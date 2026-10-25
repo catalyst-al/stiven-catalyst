@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Andon Log
+seo_title: "Andon log for the warehouse and the line: time to respond, time to solve, escalation and line stops"
+description: "A private andon log: every call for help, live with a running clock or typed in later, time to respond and to solve, escalation and stopped minutes."
+activeNav: /tools.html
+permalink: /tools/andon/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Operations</p>
+  <h1>Andon Log</h1>
+  <p class="lede">Record every call for help on the floor: a line stop, missing material, a quality doubt, a safety hazard, a scanner or the system down. Tap the reason and the clock runs; press Help arrived when someone is there and Solved when the work runs again, or type the times in after the shift. The log shows how fast help comes and how fast problems are solved against your targets, who should be called now for a call still open, the reasons and hours behind most calls, and the minutes the line stood.</p>
+</section>
+
+{% set cfg = andon %}
+{% include "partials/andon.njk" %}

@@ -98,6 +98,8 @@ const RECIPES = {
   "waste-log": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "heijunka": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "kanban-sizing": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "andon": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "poka-yoke": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).
