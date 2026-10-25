@@ -406,5 +406,21 @@
     "summary": "Planifiko, zhvillo dhe ndiq një ngjarje të shpejtë përmirësimi: karta me objektiva në numra, përgatitja e numëruar së prapthi nga dita e parë, axhenda standarde 3–5 ditë, idetë sipas humbjes në një matricë përpjekje-ndikim, objektivat para dhe pas dhe lista e ndjekjes 30-ditore. Prezantimi përmbyllës në A4 dhe Word.",
     "url": "/sq/tools/kaizen-event/",
     "cta": "Planifiko një ngjarje"
+  },
+  {
+    "name": "Kostoja e cilësisë",
+    "type": "Six Sigma",
+    "time": "20 min",
+    "summary": "Shëno sa kushtojnë parandalimi, kontrolli, dështimet e brendshme dhe të jashtme, si orë, numër ose shumë për çdo periudhë, dhe merr koston e cilësisë në muaj e në vit, koston e cilësisë së dobët si pjesë e të ardhurave, zërat më të mëdhenj dhe sa kursen një ulje e dështimeve.",
+    "url": "/sq/tools/cost-of-quality/",
+    "cta": "Vëri një shifër cilësisë së dobët"
+  },
+  {
+    "name": "Regjistri i mbetjeve",
+    "type": "Operacione",
+    "time": "Vazhdimisht",
+    "summary": "Pesho dhe regjistro mbetjet ushqimore, mallrat e skaduara dhe të dëmtuara, skarton dhe linon me arsyen dhe ku shkuan. Kg dhe euro të humbura për ditë, gramë për mysafir, Pareto e kategorive dhe e arsyeve, dhe javët kundrejt një objektivi uljeje.",
+    "url": "/sq/tools/waste-log/",
+    "cta": "Hap regjistrin"
   }
 ]

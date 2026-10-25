@@ -1,0 +1,28 @@
+/* ===== Waste Log (js/waste-log.js) =====
+   The waste and write-off log: the entry form, the covers of the day, the period with its filters and target, the log,
+   and the result with the Pareto charts, the weeks against the target and where the waste went. A week above the
+   target is told by its sign and words (✓ ✕); the colour of its dot only repeats it. The log prints on A4. */
+.wl-table td { vertical-align: top; }
+.wl-table td:nth-child(3) { min-width: 12em; }
+
+.wl-hierarchy { margin: 6px 0 10px; padding-left: 1.4em; }
+.wl-hierarchy li { margin: 2px 0; }
+.wl-hierarchy li:first-child { font-weight: 700; }
+
+.wl-results .result-head { margin-bottom: 14px; }
+.wl-cover-note { margin: 4px 0 14px; }
+.wl-register { display: none; }
+
+@media (max-width: 600px) {
+  .wl-table td:nth-child(3) { min-width: 9em; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .wl-setup, .wl-results .result-actions, .wl-results .ck-actions, .wl-results .dl-focus .tool-actions { display: none !important; }
+  .wl-results { padding: 0; }
+  .wl-results .dl-panel { break-inside: avoid; }
+  .wl-register { display: block; margin-top: 18px; break-before: page; }
+  .wl-register .dl-table { width: 100%; font-size: 9pt; border-collapse: collapse; }
+  .wl-register th, .wl-register td { padding: 3px 5px; border-bottom: 1px solid #c8cdd2; text-align: left; vertical-align: top; }
+}

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Cost of Quality
+seo_title: "Cost of quality (PAF): prevention, appraisal, internal and external failure"
+description: "Put prevention, appraisal, internal and external failure into one monthly and yearly number, with the cost of poor quality as a share of revenue."
+activeNav: /tools.html
+permalink: /tools/cost-of-quality/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Six Sigma</p>
+  <h1>Cost of Quality</h1>
+  <p class="lede">Put what poor quality costs into one number management understands. List the costs of an operation by the PAF model of Feigenbaum (prevention, appraisal, internal failure, external failure), each as hours, a count or an amount for its own period, and see the cost of quality a month and a year, the cost of poor quality as a share of revenue and per order, the split, the largest items and what a cut in failure would save once the extra prevention is paid for.</p>
+</section>
+
+{% set cfg = costOfQuality %}
+{% include "partials/cost-of-quality.njk" %}

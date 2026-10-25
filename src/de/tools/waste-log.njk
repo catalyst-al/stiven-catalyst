@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Abfall- und Verlustprotokoll
+seo_title: "Protokoll für Lebensmittelabfall und Abschreibungen in Hotel und Lager: kg, Euro, Gramm pro Gast und ein Reduktionsziel"
+description: "Ein privates Verlustprotokoll: Lebensmittelabfall, abgelaufene und beschädigte Ware, Ausschuss und Wäsche in kg und Euro, nach Grund und Verbleib, pro Gast."
+activeNav: /de/tools.html
+permalink: /de/tools/waste-log/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Betrieb</p>
+  <h1>Abfall- und Verlustprotokoll</h1>
+  <p class="lede">Wiegen und erfassen Sie, was weggeworfen oder abgeschrieben wird: die Reste vom Frühstücksbuffet, Küchenabschnitte, Tellerreste, abgelaufene und beschädigte Ware im Lager, Ausschuss, Verpackung und Wäsche. Jeder Eintrag erhält Bereich, Kategorie, Grund und Verbleib sowie seinen Wert zum Einstandspreis. Das Protokoll zeigt den Verlust in kg und in Euro, pro Tag und in Gramm pro Gast, die wenigen Gründe hinter dem größten Teil, wie viel gespendet, kompostiert oder als Restmüll entsorgt wird, und ob die Wochen auf das Ziel zugehen.</p>
+</section>
+
+{% set cfg = de.wasteLog %}
+{% include "partials/waste-log.njk" %}

@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Cost of Quality", "type": "Six Sigma", "time": "20 min", "summary": "List what prevention, appraisal, internal and external failure cost, as hours, counts or amounts for any period, and get the cost of quality a month and a year, the cost of poor quality as a share of revenue, the largest items and what a cut in failure would save.", "url": "/tools/cost-of-quality/", "cta": "Put a number on poor quality" },
+    "de": { "name": "Qualitätskosten", "type": "Six Sigma", "time": "20 Min.", "summary": "Erfassen Sie, was Fehlerverhütung, Prüfung, interne und externe Fehler kosten, als Stunden, Anzahl oder Betrag für jeden Zeitraum, und erhalten Sie die Qualitätskosten pro Monat und Jahr, die Kosten schlechter Qualität als Anteil am Umsatz, die größten Posten und was eine Senkung der Fehlerkosten einspart.", "url": "/de/tools/cost-of-quality/", "cta": "Schlechte Qualität beziffern" },
+    "sq": { "name": "Kostoja e cilësisë", "type": "Six Sigma", "time": "20 min", "summary": "Shëno sa kushtojnë parandalimi, kontrolli, dështimet e brendshme dhe të jashtme, si orë, numër ose shumë për çdo periudhë, dhe merr koston e cilësisë në muaj e në vit, koston e cilësisë së dobët si pjesë e të ardhurave, zërat më të mëdhenj dhe sa kursen një ulje e dështimeve.", "url": "/sq/tools/cost-of-quality/", "cta": "Vëri një shifër cilësisë së dobët" }
+  },
+  "routine": { "when": "Every month", "do": "Update the failure lines from last month's figures, report the cost of poor quality as a share of revenue and send the largest item to the Action Tracker.", "de": { "when": "Jeden Monat", "do": "Aktualisieren Sie die Fehlerzeilen mit den Zahlen des letzten Monats, berichten Sie die Kosten schlechter Qualität als Anteil am Umsatz und geben Sie den größten Posten in die Maßnahmenliste." }, "sq": { "when": "Çdo muaj", "do": "Përditëso rreshtat e dështimeve me shifrat e muajit të kaluar, raporto koston e cilësisë së dobët si pjesë e të ardhurave dhe dërgoje zërin më të madh në listën e veprimeve." } },
+  "recipe": "example"
+}

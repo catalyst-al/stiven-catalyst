@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Waste Log
+seo_title: "Food waste and write-off log for hotels and warehouses: kg, euro, grams per cover and a reduction target"
+description: "A private waste log: food waste, expired and damaged goods, scrap and linen in kg and euro, by reason and destination, per cover and against a target."
+activeNav: /tools.html
+permalink: /tools/waste-log/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Operations</p>
+  <h1>Waste Log</h1>
+  <p class="lede">Weigh and log what is thrown away or written off: the leftovers of the breakfast buffet, kitchen trim, plate waste, expired and damaged goods in the warehouse, scrap, packaging and linen. Each entry gets its area, category, reason and where it went, and its value at purchase cost. The log shows what is lost in kg and in euro, per day and in grams per cover, the few reasons behind most of it, how much goes to donation, compost or residual waste, and whether the weeks are coming down to the target.</p>
+</section>
+
+{% set cfg = wasteLog %}
+{% include "partials/waste-log.njk" %}

@@ -1,0 +1,205 @@
+{#- Waste Log: food waste, damaged and expired goods, scrap and linen in kg and euro, by category, reason and destination, per cover and against a reduction target; waste-log.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout wl-setup">
+  <div class="tool-panel" data-waste-log>
+
+    <form class="dl-box" data-entry novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ t.entryLegend }}</legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="wl-date">{{ "Date" | t(lang) }}</label>
+            <input id="wl-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="wl-shift">{{ "Shift" | t(lang) }}</label>
+            <select id="wl-shift" name="shift">
+              {%- for name in cfg.shifts %}
+              <option value="{{ name }}">{{ name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="wl-area">{{ "Area" | t(lang) }}</label>
+            <select id="wl-area" name="area">
+              {%- for name in cfg.areas %}
+              <option value="{{ name }}">{{ name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="wl-category">{{ "Category" | t(lang) }}</label>
+            <select id="wl-category" name="category">
+              {%- for item in cfg.categories %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="wl-item">{{ "Item or product" | t(lang) }}</label>
+            <input id="wl-item" name="product" placeholder="{{ t.itemPlaceholder }}" autocomplete="off" list="wl-items" required>
+            <datalist id="wl-items"></datalist>
+          </div>
+          <div class="field">
+            <label for="wl-qty">{{ "Quantity" | t(lang) }}</label>
+            <input id="wl-qty" name="qty" inputmode="decimal" placeholder="{{ t.qtyPlaceholder }}" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="wl-unit">{{ "Unit" | t(lang) }}</label>
+            <select id="wl-unit" name="unit">
+              {%- for item in cfg.units %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="wl-cost">{{ "Cost per unit (€)" | t(lang) }}</label>
+            <input id="wl-cost" name="cost" inputmode="decimal" placeholder="{{ t.costPlaceholder }}" autocomplete="off" aria-describedby="wl-cost-note">
+          </div>
+          <p class="form-note dl-wide" id="wl-cost-note">{{ t.costNote }} <strong data-value-note aria-live="polite"></strong></p>
+          <div class="field">
+            <label for="wl-reason">{{ "Reason" | t(lang) }}</label>
+            <select id="wl-reason" name="reason">
+              {%- for item in cfg.reasons %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="wl-dest">{{ "Where it went" | t(lang) }}</label>
+            <select id="wl-dest" name="dest">
+              {%- for item in cfg.destinations %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field dl-wide">
+            <label for="wl-note">{{ "Note" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="wl-note" name="note" placeholder="{{ t.notePlaceholder }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Add to log" | t(lang) }}</button>
+          <p class="form-note" data-entry-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <details class="dl-box dl-paste">
+      <summary class="kicker">{{ "Paste from Excel or CSV" | t(lang) }}</summary>
+      <p class="form-note">{{ t.pasteRow }}{{ ", columns in this order:" | t(lang) }} <strong>{{ "date" | t(lang) }}, {{ "shift" | t(lang) }}, {{ "area" | t(lang) }}, {{ "category" | t(lang) }}, {{ "item" | t(lang) }}, {{ "quantity" | t(lang) }}, {{ "unit" | t(lang) }}, {{ "cost per unit €" | t(lang) }}, {{ "reason" | t(lang) }}, {{ "where it went" | t(lang) }}, {{ "note" | t(lang) }}</strong>. {{ "Tabs, semicolons or commas all work, and a header row is skipped." | t(lang) }}</p>
+      <div class="field">
+        <label class="visually-hidden" for="wl-paste">{{ "Rows to import" | t(lang) }}</label>
+        <textarea id="wl-paste" rows="5" placeholder="{{ t.pastePlaceholder }}" data-columns='["date","shift","area","type","item","units","unit","cost","reason","destination","note"]' data-column-labels='[{{ "date" | t(lang) | dump }},{{ "shift" | t(lang) | dump }},{{ "area" | t(lang) | dump }},{{ "category" | t(lang) | dump }},{{ "item" | t(lang) | dump }},{{ "quantity" | t(lang) | dump }},{{ "unit" | t(lang) | dump }},{{ "cost per unit €" | t(lang) | dump }},{{ "reason" | t(lang) | dump }},{{ "where it went" | t(lang) | dump }},{{ "note" | t(lang) | dump }}]'></textarea>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Import rows" | t(lang) }}</button>
+        <p class="form-note" data-import-status aria-live="polite"></p>
+      </div>
+    </details>
+
+    <form class="dl-box" data-covers novalidate>
+      <fieldset>
+        <legend class="kicker">2 · {{ "Covers of the day" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></legend>
+        <p class="form-note">{{ t.coversNote }}</p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="wl-covers-date">{{ "Date" | t(lang) }}</label>
+            <input id="wl-covers-date" name="coversDate" type="date">
+          </div>
+          <div class="field">
+            <label for="wl-covers">{{ "Covers (guests served)" | t(lang) }}</label>
+            <input id="wl-covers" name="covers" type="number" min="0" step="1" inputmode="numeric" placeholder="{{ t.coversPlaceholder }}">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-secondary" type="submit">{{ "Save the covers" | t(lang) }}</button>
+          <p class="form-note" data-covers-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">3 · {{ "Period, filters and target" | t(lang) }}</legend>
+      <div class="dl-grid">
+        {%- set prefix = "wl" %}
+        {% include "partials/log-range.njk" %}
+        <div class="field">
+          <label for="wl-filter-area">{{ "Area" | t(lang) }}</label>
+          <select id="wl-filter-area" data-filter="area">
+            <option value="">{{ t.allAreas }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="wl-filter-category">{{ "Category" | t(lang) }}</label>
+          <select id="wl-filter-category" data-filter="category">
+            <option value="">{{ t.allCategories }}</option>
+            {%- for item in cfg.categories %}
+            <option value="{{ item.key }}">{{ item.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="wl-reduction">{{ "Reduction target (%)" | t(lang) }}</label>
+          <input id="wl-reduction" name="reduction" type="number" min="1" max="90" step="1" inputmode="numeric" placeholder="{{ cfg.target.reduction }}" data-setting>
+        </div>
+        <div class="field">
+          <label for="wl-baseline">{{ "Baseline: first weeks of the log" | t(lang) }}</label>
+          <input id="wl-baseline" name="baselineWeeks" type="number" min="1" max="12" step="1" inputmode="numeric" placeholder="{{ cfg.target.baselineWeeks }}" data-setting>
+        </div>
+        <p class="form-note dl-wide">{{ "Empty boxes use the defaults shown." | t(lang) }} {{ t.targetNote }}</p>
+      </div>
+    </fieldset>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">4 · {{ "Log" | t(lang) }}</p>
+        <p class="form-note" data-log-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-log-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
+        <table class="dl-table wl-table">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Area" | t(lang) }}</th><th scope="col">{{ "Item or product" | t(lang) }}</th><th scope="col">{{ "Quantity" | t(lang) }}</th><th scope="col">{{ "Value €" | t(lang) }}</th><th scope="col">{{ "Reason" | t(lang) }}</th><th scope="col">{{ "Where it went" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-log></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-log-empty>{{ t.empty }} {{ "Add the first one above, paste from Excel, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example log" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear log" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "One reason keeps coming back?" | t(lang) }}</strong> {{ "Open it in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>{{ ", ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>{{ ", and send the fix to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+    </ul>
+    <p class="kicker">{{ "Where it went" | t(lang) }}</p>
+    <ol class="wl-hierarchy">
+      {%- for item in cfg.destinations %}
+      <li>{{ item.name }}</li>
+      {%- endfor %}
+    </ol>
+    <p class="form-note">{{ t.hierarchy }}</p>
+    <p class="form-note">{{ t.feedNote }}</p>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results wl-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="waste-log-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/waste-log.js' | assetUrl }}" defer></script>
