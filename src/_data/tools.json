@@ -382,5 +382,13 @@
     "summary": "The site's strategy on one X-matrix: breakthrough and annual objectives, improvement priorities, metrics and their owners, with the gaps listed. Catchball notes per priority, a bowling chart month by month, and a countermeasure when a metric misses twice in a row.",
     "url": "/tools/hoshin-kanri/",
     "cta": "Open the X-matrix"
+  },
+  {
+    "name": "Print Pack",
+    "type": "Print",
+    "time": "5 min",
+    "summary": "The paper of the team board in one print, from what the tools hold in this browser: open actions by owner, the week's maintenance work list and 5S audits, a card per leader, the Safety Cross and Daily Board of the month, and the attendant and section sheets of a hotel.",
+    "url": "/tools/print-pack/",
+    "cta": "Print the pack"
   }
 ]

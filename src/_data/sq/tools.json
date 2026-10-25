@@ -382,5 +382,13 @@
     "summary": "Strategjia e vendit të punës në një matricë X: objektivat e përparimit dhe ato vjetore, prioritetet e përmirësimit, treguesit dhe përgjegjësit, me mungesat të listuara. Shënime catchball për çdo prioritet, grafiku bowling muaj pas muaji dhe një kundërmasë kur një tregues nuk arrihet dy herë radhazi.",
     "url": "/sq/tools/hoshin-kanri/",
     "cta": "Hap matricën X"
+  },
+  {
+    "name": "Paketa e printimit",
+    "type": "Printim",
+    "time": "5 min",
+    "summary": "Letra e tabelës së ekipit në një printim, nga ajo që mjetet kanë në këtë shfletues: veprimet e hapura sipas përgjegjësit, lista e mirëmbajtjes dhe auditet 5S të javës, një kartë për çdo drejtues, kryqi i sigurisë dhe tabela e ditës për muajin, dhe fletët e pastruesve dhe të sektorëve të një hoteli.",
+    "url": "/sq/tools/print-pack/",
+    "cta": "Printo paketën"
   }
 ]

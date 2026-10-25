@@ -382,5 +382,13 @@
     "summary": "Die Strategie des Standorts auf einer X-Matrix: Durchbruch- und Jahresziele, Verbesserungsprioritäten, Kennzahlen und Verantwortliche, mit allen Lücken. Catchball-Notizen je Priorität, ein Bowling-Chart Monat für Monat und eine Gegenmaßnahme, wenn eine Kennzahl zweimal in Folge verfehlt.",
     "url": "/de/tools/hoshin-kanri/",
     "cta": "X-Matrix öffnen"
+  },
+  {
+    "name": "Druckpaket",
+    "type": "Druck",
+    "time": "5 min",
+    "summary": "Das Papier des Teamboards in einem Druck, aus dem, was die Tools in diesem Browser enthalten: offene Maßnahmen nach Verantwortlichen, Wartungsarbeitsliste und 5S-Audits der Woche, eine Karte je Führungskraft, Sicherheitskreuz und Tagesboard des Monats und die Arbeits- und Revierzettel eines Hotels.",
+    "url": "/de/tools/print-pack/",
+    "cta": "Paket drucken"
   }
 ]
