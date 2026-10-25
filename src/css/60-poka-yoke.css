@@ -1,0 +1,92 @@
+/* ===== Poka-Yoke Register (js/poka-yoke.js) =====
+   The device form, the verify form, the register and its log, and the result: the due list, the charts, the
+   effectiveness ranking and the checklist of the coming week. A status is told by its sign and words (✕ ! • ✓);
+   its colour only repeats it. The checklist prints on its own, with boxes to tick on paper. */
+.py-table td, .py-log td { vertical-align: top; }
+.py-table td:first-child { min-width: 12em; }
+.py-table .nowrap, .py-log .nowrap { white-space: nowrap; }
+.py-cell-note { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.py-row-tools { display: flex; flex-wrap: wrap; gap: 6px; min-width: 12em; }
+.py-small { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+
+.py-status { font-weight: 800; white-space: nowrap; }
+.py-status.is-failed { color: var(--danger); }
+.py-status.is-overdue, .py-status.is-new { color: var(--warn); }
+.py-status.is-due { color: var(--ink); }
+.py-status.is-ok { color: var(--muted); font-weight: 700; }
+.py-result { font-weight: 700; white-space: nowrap; }
+.py-result.is-failed { color: var(--danger); }
+.py-result.is-untested { color: var(--muted); }
+
+/* The result of a check: three choices, one at a time. */
+.py-results-pick { margin: 0; padding: 0; border: 0; min-width: 0; }
+.py-results-pick legend { margin-bottom: 6px; padding: 0; font-weight: 700; font-size: 14px; }
+.py-picks { display: flex; flex-wrap: wrap; gap: 6px; }
+.py-pick { position: relative; display: inline-flex; cursor: pointer; }
+.py-pick input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.py-pick span {
+  display: inline-grid; place-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--paper); color: var(--ink); font-size: 14px; font-weight: 800; white-space: nowrap;
+}
+.py-pick:hover span { border-color: var(--blue); }
+.py-pick input:checked + span { border-color: var(--blue); background: var(--blue); color: var(--paper); }
+.py-pick input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+.py-handoff { margin-top: 14px; padding: 14px 16px; border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: var(--radius); background: var(--card); }
+.py-handoff[hidden] { display: none; }
+.py-handoff p { margin: 0 0 10px; }
+.py-period { margin-top: 14px; }
+
+.py-glossary { margin: 6px 0 12px; }
+.py-glossary dt { font-weight: 800; color: var(--ink); }
+.py-glossary dd { margin: 0 0 8px; color: var(--muted); }
+.py-strengths { margin: 6px 0 14px; padding-left: 1.4em; }
+.py-strengths li { margin: 2px 0; }
+.py-strengths li:first-child { font-weight: 700; }
+
+/* The result. */
+.py-results .result-head { margin-bottom: 14px; }
+.py-def { margin: 4px 0 14px; }
+.py-due { margin: 0 0 18px; }
+.py-due-list { display: grid; gap: 0; margin: 8px 0 0; padding: 0; list-style: none; }
+.py-due-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 14px; align-items: center; padding: 10px 0; }
+.py-due-item + .py-due-item { border-top: 1px solid var(--line); }
+.py-due-item.is-failed { box-shadow: inset 3px 0 0 var(--danger); padding-left: 12px; }
+.py-due-main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; min-width: 0; }
+.py-due-main .py-cell-note { flex-basis: 100%; }
+.py-due-tools { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.py-unprotected { margin: 8px 0 0; padding-left: 1.2em; }
+.py-unprotected li { margin: 4px 0; }
+
+/* The checklist of the coming 7 days. */
+.py-checklist { margin-top: 24px; }
+.py-checklist-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.py-checklist-head .result-label { margin: 0; }
+.py-checklist-table th, .py-checklist-table td { vertical-align: top; }
+.py-checklist-table th[scope="row"] { min-width: 11em; text-align: left; font-weight: 400; }
+.py-test-cell { min-width: 14em; font-size: 13px; }
+.py-day { min-width: 3.4em; text-align: center; white-space: nowrap; }
+.py-box { display: inline-flex; flex-direction: column; align-items: center; margin: 0 2px; line-height: 1; }
+.py-box-mark { font-size: 20px; }
+.py-box-shift { font-size: 10px; color: var(--muted); }
+.py-initials { min-width: 4em; }
+
+@media (max-width: 600px) {
+  .py-due-item { grid-template-columns: minmax(0, 1fr); }
+  .py-due-tools { justify-content: flex-start; }
+  .py-table td:first-child { min-width: 9em; }
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 10mm; }
+  .py-setup, .py-results .result-actions, .py-results .ck-actions, .py-results .dl-focus .tool-actions, .py-due-tools, .py-checklist-head button { display: none !important; }
+  .py-results { padding: 0; }
+  .py-results .dl-panel { break-inside: avoid; }
+  .py-checklist { break-before: page; }
+  .py-checklist .dl-table-wrap { overflow: visible; max-height: none; }
+  .py-checklist-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  .py-checklist-table th, .py-checklist-table td { padding: 4px 5px; border: 1px solid #999; }
+  .py-initials { min-width: 18mm; }
+  /* "Print the checklist": only the checklist, on its own sheet. */
+  .py-print-checklist main > :not(.py-results), .py-print-checklist .py-results > :not(.py-checklist) { display: none !important; }
+  .py-print-checklist .py-checklist { break-before: auto; margin-top: 0; }
+}

@@ -438,5 +438,21 @@
     "summary": "Work out how many kanban cards each supermarket or two-bin loop needs, by Toyota's formula or a statistical safety stock, see the cards to add or take out and the stock value at maximum, and print the cards eight to an A4 sheet.",
     "url": "/tools/kanban-sizing/",
     "cta": "Size the loops"
+  },
+  {
+    "name": "Andon Log",
+    "type": "Operations",
+    "time": "Ongoing",
+    "summary": "Log every call for help on the floor, live with a running clock or after the fact. Time to respond and to solve against your targets, who to call now for an open call, the Pareto of reasons and stopped minutes, and the hours when calls pile up.",
+    "url": "/tools/andon/",
+    "cta": "Open the log"
+  },
+  {
+    "name": "Poka-Yoke Register",
+    "type": "Quality",
+    "time": "Weekly",
+    "summary": "Every mistake-proofing device in one register: the error it prevents, Shingo's method, control or warning, prevention or detection. Test each on schedule with a deliberate error; see what is overdue or failed, verification compliance, effectiveness per device and a checklist to print.",
+    "url": "/tools/poka-yoke/",
+    "cta": "Open the register"
   }
 ]

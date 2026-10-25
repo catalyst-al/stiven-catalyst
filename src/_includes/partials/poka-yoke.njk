@@ -1,0 +1,225 @@
+{#- Poka-Yoke Register: the mistake-proofing devices of a site, their verification log, what is due, failed and not protected; poka-yoke.js does the rest. -#}
+{%- set t = cfg.text -%}
+<section class="shell tool-layout py-setup">
+  <div class="tool-panel" data-poka-yoke>
+
+    <div class="dl-example-note" data-example-note role="status" hidden>
+      <strong>{{ "Example" | t(lang) }}</strong> <span>{{ "This is an example, so you can see what the tool shows. Add your own entries and it disappears, or clear it now." | t(lang) }}</span>
+      <button class="button-ghost" type="button" data-clear-example>{{ "Clear the example" | t(lang) }}</button>
+    </div>
+
+    <form class="dl-box" data-device-form novalidate>
+      <fieldset>
+        <legend class="kicker">1 · <span data-form-legend data-add="{{ 'Add a device to the register' | t(lang) }}" data-edit="{{ 'Edit the device' | t(lang) }}">{{ "Add a device to the register" | t(lang) }}</span></legend>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="py-name">{{ "Device" | t(lang) }}</label>
+            <input id="py-name" name="name" placeholder="{{ t.namePlaceholder }}" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="py-error">{{ "Error it prevents" | t(lang) }}</label>
+            <input id="py-error" name="error" placeholder="{{ t.errorPlaceholder }}" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="py-step">{{ "Process step" | t(lang) }}</label>
+            <input id="py-step" name="step" placeholder="{{ t.stepPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="py-area">{{ "Area" | t(lang) }}</label>
+            <input id="py-area" name="area" list="py-areas" autocomplete="off" placeholder="{{ cfg.areas[0] }}">
+            <datalist id="py-areas">
+              {%- for name in cfg.areas %}
+              <option value="{{ name }}"></option>
+              {%- endfor %}
+            </datalist>
+          </div>
+          <div class="field">
+            <label for="py-method">{{ "Method (Shingo)" | t(lang) }}</label>
+            <select id="py-method" name="method">
+              {%- for item in cfg.methods %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="py-func">{{ "Function" | t(lang) }}</label>
+            <select id="py-func" name="func">
+              {%- for item in cfg.functions %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="py-level">{{ "Level" | t(lang) }}</label>
+            <select id="py-level" name="level">
+              {%- for item in cfg.levels %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="py-owner">{{ "Owner" | t(lang) }}</label>
+            <input id="py-owner" name="owner" placeholder="{{ t.ownerPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="py-freq">{{ "Verification frequency" | t(lang) }}</label>
+            <select id="py-freq" name="freq" aria-describedby="py-freq-note">
+              {%- for item in cfg.frequencies %}
+              <option value="{{ item.key }}">{{ item.name }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="py-last">{{ "Last verified" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="py-last" name="last" type="date" aria-describedby="py-last-note">
+          </div>
+          <p class="form-note dl-wide" id="py-freq-note">{{ t.intervalNote }}</p>
+          <p class="form-note dl-wide" id="py-last-note">{{ t.lastNote }}</p>
+          <div class="field dl-wide">
+            <label for="py-test">{{ "How to test it" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="py-test" name="test" placeholder="{{ t.testPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="py-fmea">{{ "Linked FMEA failure mode" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="py-fmea" name="fmea" placeholder="{{ t.fmeaPlaceholder }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="py-before">{{ "Errors per month before" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="py-before" name="before" inputmode="decimal" placeholder="{{ t.beforePlaceholder }}" autocomplete="off" aria-describedby="py-effect-note">
+          </div>
+          <div class="field">
+            <label for="py-after">{{ "Errors per month after" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="py-after" name="after" inputmode="decimal" placeholder="{{ t.afterPlaceholder }}" autocomplete="off" aria-describedby="py-effect-note">
+          </div>
+          <p class="form-note dl-wide" id="py-effect-note">{{ t.effectNote }}</p>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit" data-submit-device data-add="{{ 'Add to register' | t(lang) }}" data-edit="{{ 'Save changes' | t(lang) }}">{{ "Add to register" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-cancel-edit hidden>{{ "Cancel" | t(lang) }}</button>
+          <p class="form-note" data-form-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <form class="dl-box py-verify" data-verify-form novalidate>
+      <fieldset>
+        <legend class="kicker">2 · {{ "Verify a device" | t(lang) }}</legend>
+        <p class="form-note">{{ t.verifyNote }}</p>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="py-v-device">{{ "Device" | t(lang) }}</label>
+            <select id="py-v-device" name="device"></select>
+          </div>
+          <div class="field">
+            <label for="py-v-date">{{ "Date" | t(lang) }}</label>
+            <input id="py-v-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="py-v-by">{{ "Who tested it" | t(lang) }}</label>
+            <input id="py-v-by" name="by" placeholder="{{ t.byPlaceholder }}" autocomplete="off">
+          </div>
+          <fieldset class="field dl-wide py-results-pick">
+            <legend>{{ "Result" | t(lang) }}</legend>
+            <div class="py-picks">
+              {%- for item in cfg.results %}
+              <label class="py-pick"><input type="radio" name="result" value="{{ item.key }}"{% if loop.first %} checked{% endif %}><span>{{ item.name }}</span></label>
+              {%- endfor %}
+            </div>
+          </fieldset>
+          <div class="field dl-wide" data-reason-field data-reason="{{ 'Why it could not be tested' | t(lang) }}" data-note="{{ 'Note' | t(lang) }}">
+            <label for="py-v-note">{{ "Note" | t(lang) }}</label>
+            <input id="py-v-note" name="note" placeholder="{{ t.notePlaceholder }}" autocomplete="off">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="submit">{{ "Record the check" | t(lang) }}</button>
+          <p class="form-note" data-verify-status aria-live="polite"></p>
+        </div>
+        <div class="py-handoff" data-handoff aria-live="polite" hidden></div>
+      </fieldset>
+    </form>
+
+    <div class="dl-box">
+      <div class="dl-log-head">
+        <p class="kicker">3 · {{ "Register" | t(lang) }}</p>
+        <p class="form-note" data-register-count></p>
+      </div>
+      <p class="form-note dl-log-status" data-register-status aria-live="polite"></p>
+      <div class="dl-table-wrap" tabindex="0" data-register-wrap hidden>
+        <table class="dl-table py-table">
+          <thead>
+            <tr><th scope="col">{{ "Device" | t(lang) }}</th><th scope="col">{{ "Area and step" | t(lang) }}</th><th scope="col">{{ "Method · function · level" | t(lang) }}</th><th scope="col">{{ "Frequency" | t(lang) }}</th><th scope="col">{{ "Last verified" | t(lang) }}</th><th scope="col">{{ "Next due" | t(lang) }}</th><th scope="col">{{ "Status" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Verify, edit or remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-register></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-register-empty>{{ t.empty }} {{ "Add the first one above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example register" | t(lang) }}</button>.</p>
+      <div class="dl-grid py-period">
+        <div class="field">
+          <label for="py-period">{{ "Compliance period" | t(lang) }}</label>
+          <select id="py-period" data-period>
+            <option value="7">{{ "Last 7 days" | t(lang) }}</option>
+            <option value="30">{{ "Last 30 days" | t(lang) }}</option>
+            <option value="90">{{ "Last 90 days" | t(lang) }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear register" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <div class="dl-box">
+      <p class="kicker">4 · {{ "Verification log" | t(lang) }}</p>
+      <div class="dl-table-wrap" tabindex="0" data-checks-wrap hidden>
+        <table class="dl-table py-log">
+          <thead>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th><th scope="col">{{ "Device" | t(lang) }}</th><th scope="col">{{ "Result" | t(lang) }}</th><th scope="col">{{ "Who" | t(lang) }}</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+          </thead>
+          <tbody data-checks></tbody>
+        </table>
+      </div>
+      <p class="dl-empty" data-checks-empty>{{ t.logEmpty }}</p>
+      <p class="form-note">{{ "The newest 60 checks are shown; the CSV has them all." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-log-csv>{{ "Checks as CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-log-xlsx>{{ "Checks as Excel" | t(lang) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "A device failed?" | t(lang) }}</strong> {{ "Send the repair to the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>{{ ", ask why with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a>{{ ", and review its failure mode in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/fmea/' | local(lang) }}" data-fmea>FMEA</a>.</li>
+    </ul>
+    <p class="kicker">{{ "Shingo's three methods" | t(lang) }}</p>
+    <dl class="py-glossary">
+      {%- for item in cfg.methods %}
+      <dt>{{ item.short }}</dt>
+      <dd>{{ item.hint }}</dd>
+      {%- endfor %}
+    </dl>
+    <p class="form-note">{{ t.strengthNote }}</p>
+    <ol class="py-strengths">
+      {%- for name in cfg.strengths %}
+      <li>{{ name }}</li>
+      {%- endfor %}
+    </ol>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results py-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="poka-yoke-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/poka-yoke.js' | assetUrl }}" defer></script>

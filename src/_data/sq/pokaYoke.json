@@ -1,0 +1,141 @@
+{
+  "storageKey": "sc-poka-yoke-sq",
+  "text": {
+    "tool": "Regjistri Poka-Yoke",
+    "csv": "regjistri-poka-yoke",
+    "logCsv": "verifikimet-poka-yoke",
+    "namePlaceholder": "p.sh. Kontrolli me skaner i vendit të marrjes",
+    "errorPlaceholder": "p.sh. Marrje nga vendi i gabuar",
+    "stepPlaceholder": "p.sh. Mbledhja, konfirmimi i vendit",
+    "ownerPlaceholder": "p.sh. M. Weber",
+    "testPlaceholder": "p.sh. Skano etiketën test të një vendi të gabuar: skaneri duhet ta bllokojë marrjen",
+    "fmeaPlaceholder": "p.sh. Artikull i gabuar i mbledhur",
+    "beforePlaceholder": "p.sh. 38",
+    "afterPlaceholder": "p.sh. 4",
+    "byPlaceholder": "p.sh. A. Krasniqi",
+    "notePlaceholder": "p.sh. U testua me etiketën e kuqe test, bllokoi menjëherë",
+    "reasonPlaceholder": "p.sh. Dhoma test e zënë, mysafiri e zgjati qëndrimin",
+    "lastNote": "Data kur u provua për herë të fundit se funksionon, para se të hynte në këtë regjistër. Çdo verifikim që regjistron më pas e çon përpara.",
+    "effectNote": "Gabimet në muaj para pajisjes dhe që prej saj, nga regjistri yt i defekteve ose i ankesave. Opsionale: prej tyre del efektiviteti.",
+    "intervalNote": "Çdo turn dhe çdo ditë: skadon sërish të nesërmen (regjistri numëron ditë, jo turne; regjistro një verifikim për çdo turn nëse teston çdo turn). Çdo javë: 7 ditë. Çdo muaj: 30 ditë. Këto janë vlera fillestare; zgjidh atë që kërkon rreziku yt.",
+    "verifyNote": "Të verifikosh do të thotë: jepi pajisjes gabimin që duhet të kapë dhe shiko nëse reagon. Një verifikim i dështuar e shënon pajisjen si me defekt derisa një verifikim i mëvonshëm të thotë që funksionon.",
+    "complianceNote": "Respektimi i verifikimeve = verifikimet e skaduara të bëra në kohë ÷ verifikimet e skaduara në periudhë. Një verifikim skadon në datën e verifikimit të fundit plus intervalin dhe është në kohë kur pajisja u testua (funksionon ose dështoi) në atë datë ose para saj. Çdo interval tjetër që kalon pa test numërohet si një verifikim tjetër i humbur, dhe një test i vonuar e nis afatin nga e para. Një verifikim që skadon sot numërohet vetëm pasi bëhet; „nuk u testua“ nuk është test.",
+    "failureNote": "Shkalla e dështimit = testet e dështuara ÷ testet (funksionon + dështoi) në periudhë. „Nuk u testua“ lihet jashtë.",
+    "effectivenessNote": "Efektiviteti = (gabimet në muaj para − pas) ÷ para, për pajisjet me një vlerë para mbi 0. Shifrat e tua; disa muaj pas futjes së pajisjes tregojnë më shumë se një.",
+    "strengthNote": "Parandalimi është më i fortë se zbulimi (gabimi nuk mund të ndodhë fare, në vend që të kapet para se të dalë nga hapi), dhe ndalimi është më i fortë se paralajmërimi (procesi ndalon, në vend të një sinjali që dikush mund ta humbasë). E forta e para.",
+    "checklistNote": "Shëno në letër ndërsa teston, pastaj regjistro rezultatet këtu. Pajisjet që testohen çdo turn kanë një kuti për çdo turn.",
+    "failedHandoff": "Pajisja është shënuar me defekt. Derisa të riparohet dhe një verifikim të thotë që funksionon, gabimi nga i cili mbron nuk është i mbrojtur: kufizoje me një kontroll manual 100 %.",
+    "empty": "Ende asnjë pajisje në regjistër.",
+    "logEmpty": "Ende asnjë verifikim i regjistruar."
+  },
+  "areas": [
+    "Mbledhja",
+    "Paketimi",
+    "Rampa e daljes",
+    "Rampa e hyrjes",
+    "Recepsioni",
+    "Housekeeping",
+    "Restoranti"
+  ],
+  "shifts": [
+    "Mëngjes",
+    "Pasdite",
+    "Natë"
+  ],
+  "methods": [
+    { "key": "contact", "name": "Kontakt", "short": "Kontakt", "hint": "Kontrollon një veti fizike ose të kapur nga sensori: formën, madhësinë, peshën, ngjyrën, një barkod, një sensor." },
+    { "key": "fixed", "name": "Vlerë fikse (numër konstant)", "short": "Vlerë fikse", "hint": "Kontrollon që të jetë numri i duhur i pjesëve ose i lëvizjeve: një numërim, një set, një paketë e numëruar më parë." },
+    { "key": "motion", "name": "Hap pas hapi (radha)", "short": "Hap pas hapi", "hint": "Kontrollon që hapat të ndodhin në radhën e duhur: hapi tjetër hapet vetëm kur ai para tij është bërë." }
+  ],
+  "functions": [
+    { "key": "control", "name": "Ndalim: ndal procesin ose e bën gabimin të pamundur", "short": "Ndalim" },
+    { "key": "warning", "name": "Paralajmërim: sinjalizon gabimin, një njeri duhet të reagojë", "short": "Paralajmërim" }
+  ],
+  "levels": [
+    { "key": "prevent", "name": "Parandalim: gabimi nuk mund të ndodhë", "short": "Parandalim" },
+    { "key": "detect", "name": "Zbulim: gabimi kapet para se të dalë nga hapi", "short": "Zbulim" }
+  ],
+  "frequencies": [
+    { "key": "shift", "name": "Çdo turn", "days": 1 },
+    { "key": "daily", "name": "Çdo ditë", "days": 1 },
+    { "key": "weekly", "name": "Çdo javë", "days": 7 },
+    { "key": "monthly", "name": "Çdo muaj (30 ditë)", "days": 30 }
+  ],
+  "results": [
+    { "key": "works", "name": "Funksionon" },
+    { "key": "failed", "name": "Dështoi" },
+    { "key": "untested", "name": "Nuk u testua" }
+  ],
+  "statuses": {
+    "failed": "Me defekt",
+    "overdue": "Me vonesë",
+    "new": "Asnjëherë e verifikuar",
+    "due": "Skadon sot",
+    "ok": "OK"
+  },
+  "strengths": [
+    "Parandalim + ndalim",
+    "Parandalim + paralajmërim",
+    "Zbulim + ndalim",
+    "Zbulim + paralajmërim"
+  ],
+  "advice": {
+    "failed": {
+      "meaning": "Një pajisje që dështoi në test nuk mbron asgjë: gabimi për të cilin u ndërtua mund të ndodhë sërish dhe të dalë nga hapi pa u parë.",
+      "moves": [
+        "Kufizoje tani: një kontroll manual 100 % në këtë hap derisa pajisja të funksionojë sërish, me një emër përgjegjës.",
+        "Gjej pse dështoi (u anashkalua, u konsumua, u ndryshuan cilësimet, një përditësim softueri) para se thjesht ta riparosh.",
+        "Riparoje, testoje sërish me gabimin e qëllimshëm dhe regjistro rezultatin këtu."
+      ],
+      "question": "Kush mund ta ketë anashkaluar ose ndryshuar, dhe a do ta kishim vënë re pa këtë test?"
+    },
+    "overdue": {
+      "meaning": "Një pajisje me vonesë mund të funksionojë ende, por askush nuk e ka provuar. Një poka-yoke që nuk testohet është një shpresë, jo një mbrojtje.",
+      "moves": [
+        "Testo në këtë turn pajisjen me vonesën më të madhe, me gabimin e qëllimshëm.",
+        "Pyet përgjegjësin çfarë e pengoi verifikimin: koha, pjesa test, qasja te pajisja.",
+        "Nëse intervali nuk mbahet, ndrysho intervalin ose përgjegjësin, jo zakonin e anashkalimit."
+      ],
+      "question": "Çfarë duhet që ky verifikim të bëhet pa pasur nevojë që dikush ta mbajë mend?"
+    },
+    "new": {
+      "meaning": "Një pajisje që nuk u verifikua kurrë nuk është provuar kurrë. Shëno datën kur u testua për herë të fundit, ose testoje sot.",
+      "moves": [
+        "Shkruaj si testohet: gabimi i qëllimshëm dhe reagimi që pret.",
+        "Testoje sot dhe regjistro rezultatin.",
+        "Jepi një përgjegjës dhe një interval."
+      ],
+      "question": "Si do ta merrnim vesh nesër që kjo pajisje pushoi së funksionuari sonte?"
+    },
+    "weak": {
+      "meaning": "Çdo pajisje funksionon dhe testohet në kohë. Fitimi i radhës është forca: pajisjet që vetëm zbulojnë ose vetëm paralajmërojnë e lënë ende gabimin të ndodhë.",
+      "moves": [
+        "Merr së pari pajisjet me zbulim + paralajmërim: a mund të bëhet paralajmërimi një ndalim?",
+        "Pyet nëse gabimi mund të bëhet i pamundur më herët në proces.",
+        "Shiko shifrat para dhe pas: aty ku gabimet nuk ranë, pajisja është në vendin e gabuar."
+      ],
+      "question": "Cilin nga këto gabime mund ta eliminojmë që në projektim, që të mos duhet fare verifikim?"
+    }
+  },
+  "tips": [
+    ["Testoje me një gabim të qëllimshëm.", "Një pajisje është e verifikuar kur dikush i jep gabimin që duhet të kapë (etiketën e një vendi të gabuar, një pako më të lehtë, një etiketë të paskanuar) dhe ajo reagon. Ta shohësh me sy nuk është test."],
+    ["Me defekt do të thotë pa mbrojtje.", "Derisa një verifikim i mëvonshëm të thotë që funksionon, gabimi nga i cili mbron mund të arrijë te klienti. Kufizoje me një kontroll manual dhe dërgoje riparimin te lista e veprimeve."],
+    ["Parandalimi mund zbulimin, ndalimi mund paralajmërimin.", "Një pajisje që e bën gabimin të pamundur është më e fortë se një që e gjen; një që e ndal procesin është më e fortë se një dritë ose një bip që dikush mund ta injorojë."],
+    ["„Nuk u testua“ kërkon një arsye.", "Një verifikim që nuk mund të bëhej (dhoma test ishte e zënë, linja nuk mund të ndalej) regjistrohet me arsyen e vet; pajisja mbetet në skadim."],
+    ["Lidhe me FMEA-në.", "Shkruaj mënyrën e dështimit të cilës i përgjigjet pajisja. Pas disa muajsh shifrat para dhe pas tregojnë nëse vlerësimi i saj në FMEA mund të ndryshojë."]
+  ],
+  "example": {
+    "devices": [
+      { "name": "Kontrolli me skaner i vendit të marrjes", "error": "Marrje nga vendi i gabuar", "step": "Mbledhja: skano vendin, pastaj artikullin", "area": 0, "method": "contact", "func": "control", "level": "prevent", "owner": "M. Weber", "freq": "shift", "test": "Skano etiketën e kuqe test të një vendi të gabuar: skaneri duhet ta refuzojë marrjen.", "fmea": "Artikull i gabuar i mbledhur", "before": 38, "after": 4, "anchor": 35, "stop": 0, "late": { "12": 1 }, "fails": [], "notes": [], "untested": [] },
+      { "name": "Kontrolli i peshës te paketimi", "error": "Pako me një artikull që mungon ose që është tepër", "step": "Paketimi: peshimi para se të mbyllet pakoja", "area": 1, "method": "fixed", "func": "control", "level": "detect", "owner": "A. Krasniqi", "freq": "daily", "test": "Vendos peshën test 50 g mbi një porosi të paketuar: peshorja duhet ta dërgojë te linja e refuzimit.", "fmea": "", "before": 22, "after": 3, "anchor": 35, "stop": 1, "late": {}, "fails": [12], "notes": [[12, "Pakoja test kaloi: peshorja doli nga kalibrimi pasi u zhvendos."], [11, "Peshorja u rikalibrua nga furnitori, pesha test refuzohet sërish."]], "untested": [] },
+      { "name": "Kontejnerë me ngjyra sipas korrierit", "error": "Kontejner i vënë në linjën e gabuar të daljes", "step": "Sortimi: kontejneri te linja e ngjyrës së vet", "area": 2, "method": "contact", "func": "warning", "level": "prevent", "owner": "J. Novak", "freq": "weekly", "test": "Ec përgjatë linjave: çdo kontejner dhe çdo tabelë linje në ngjyrën e korrierit, pa etiketa të zbehura ose që mungojnë.", "fmea": "", "before": 15, "after": 9, "anchor": 51, "stop": 9, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Bllokimi i printerit të etiketave", "error": "Etiketa e dërgesës në pakon e gabuar", "step": "Paketimi: etiketa printohet vetëm pasi pakoja skanohet dhe peshohet", "area": 1, "method": "motion", "func": "control", "level": "prevent", "owner": "A. Krasniqi", "freq": "weekly", "test": "Provo të printosh një etiketë pa e skanuar pakon: printeri nuk duhet të printojë.", "fmea": "Etiketë e gabuar në pako", "before": 12, "after": 1, "anchor": 44, "stop": 0, "late": {}, "fails": [2], "notes": [[2, "Etiketa u printua pa skanim: bllokimi ishte fikur pas përditësimit të firmware-it të printerit."]], "untested": [] },
+      { "name": "Matësi i lartësisë së paletave te rampa", "error": "Paletë shumë e lartë për raftin", "step": "Hyrja: çdo paletë kalon nën shufrën matëse", "area": 3, "method": "contact", "func": "control", "level": "detect", "owner": "J. Novak", "freq": "monthly", "test": "Mat shufrën në 1,80 m dhe shty një paletë shumë të lartë: nuk duhet të kalojë.", "fmea": "", "before": null, "after": null, "anchor": 70, "stop": 0, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Rileximi te koduesi i kartave", "error": "Kartë çelësi e koduar për dhomën ose datat e gabuara", "step": "Check-in: koduesi e rilexon kartën kundrejt rezervimit", "area": 4, "method": "contact", "func": "warning", "level": "detect", "owner": "L. Hoxha", "freq": "daily", "test": "Kodo një kartë për dhomën test 999 me datën e djeshme: koduesi duhet të tregojë mospërputhjen.", "fmea": "Kartë çelësi e koduar për dhomën e gabuar", "before": 9, "after": 2, "anchor": 33, "stop": 4, "late": {}, "fails": [], "notes": [], "untested": [[3, "Koduesi i zënë gjithë turnin: radha e check-in-it të një grupi turistik."]] },
+      { "name": "Sensori i minibarit", "error": "Konsumi i minibarit nuk u faturua", "step": "Dhoma: sensori e regjistron çdo artikull të marrë në faturën e dhomës", "area": 5, "method": "contact", "func": "warning", "level": "detect", "owner": "S. Becker", "freq": "monthly", "test": "Ngri një artikull në dhomën test: tarifa duhet të shfaqet në dhomë brenda 10 minutash.", "fmea": "", "before": 30, "after": 6, "anchor": 78, "stop": 0, "late": { "18": 3 }, "fails": [], "notes": [], "untested": [[18, "Dhoma test e zënë, mysafiri e zgjati qëndrimin."]] },
+      { "name": "Bllokimi i listës „dhoma gati“ në PMS", "error": "Dhomë e lëshuar për shitje para se të përfundojë inspektimi", "step": "Housekeeping: statusi „e inspektuar“ vetëm kur çdo rresht i listës është shënuar", "area": 5, "method": "motion", "func": "control", "level": "prevent", "owner": "S. Becker", "freq": "weekly", "test": "Lër një rresht të listës të hapur dhe provo ta kalosh dhomën si të inspektuar: PMS duhet ta refuzojë.", "fmea": "Dhomë e lëshuar para inspektimit", "before": 14, "after": 1, "anchor": 50, "stop": 0, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Skanimi i të drejtës për mëngjes", "error": "Mëngjes i shërbyer pa paketë mëngjesi", "step": "Hyrja e restorantit: skano kartën e çelësit të dhomës", "area": 6, "method": "contact", "func": "warning", "level": "detect", "owner": "L. Hoxha", "freq": "daily", "test": "Skano kartën test të një dhome pa mëngjes: skaneri duhet të tregojë njoftimin e kuq.", "fmea": "", "before": 25, "after": 8, "anchor": 31, "stop": 0, "late": {}, "fails": [20], "notes": [[20, "Pas rinisjes së ndërfaqes së PMS-it, çdo dhomë dukej me të drejtë mëngjesi."], [19, "IT e riktheu lidhjen e ndërfaqes, karta test e tregon sërish njoftimin."]], "untested": [] },
+      { "name": "Set amenitetesh i numëruar më parë", "error": "Dhomë e përgatitur me një amenitet që mungon", "step": "Housekeeping: një set i vulosur për çdo dhomë, i numëruar në magazinë", "area": 5, "method": "fixed", "func": "warning", "level": "prevent", "owner": "S. Becker", "freq": "weekly", "test": "Hap rastësisht pesë sete dhe numëroji kundrejt kartës së setit.", "fmea": "", "before": 18, "after": 5, "anchor": 46, "stop": 0, "late": { "25": 2 }, "fails": [], "notes": [], "untested": [] }
+    ]
+  }
+}

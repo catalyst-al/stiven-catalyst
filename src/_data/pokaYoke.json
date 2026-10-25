@@ -1,0 +1,141 @@
+{
+  "storageKey": "sc-poka-yoke",
+  "text": {
+    "tool": "Poka-Yoke Register",
+    "csv": "poka-yoke-register",
+    "logCsv": "poka-yoke-checks",
+    "namePlaceholder": "e.g. Pick-location scan check",
+    "errorPlaceholder": "e.g. Picking from the wrong location",
+    "stepPlaceholder": "e.g. Picking, confirm the location",
+    "ownerPlaceholder": "e.g. M. Weber",
+    "testPlaceholder": "e.g. Scan a test label of a wrong location: the scanner must block the pick",
+    "fmeaPlaceholder": "e.g. Wrong item picked",
+    "beforePlaceholder": "e.g. 38",
+    "afterPlaceholder": "e.g. 4",
+    "byPlaceholder": "e.g. A. Krasniqi",
+    "notePlaceholder": "e.g. Tested with the red test label, blocked at once",
+    "reasonPlaceholder": "e.g. Test room occupied, guest extended the stay",
+    "lastNote": "The date it was last proven to work before it came into this register. Every check you record afterwards moves it on.",
+    "effectNote": "Errors per month before the device and since, from your own defect or complaint log. Optional: they give the effectiveness.",
+    "intervalNote": "Each shift and daily: due again the next day (the register counts days, not shifts; record one check per shift if you test every shift). Weekly: 7 days. Monthly: 30 days. These are defaults; choose what your risk needs.",
+    "verifyNote": "Verify means: feed the device the error it should catch and see it react. A failed check marks the device failed until a later check says it works.",
+    "complianceNote": "Verification compliance = due checks done on time ÷ due checks in the period. A check falls due on the last verified date plus the interval and is on time when the device was tested (works or failed) on or before that date. Each further interval that passes without a test counts as one more missed check, and a late test restarts the clock. A check due today counts only once it is done; “not tested” is not a test.",
+    "failureNote": "Failure rate = failed tests ÷ tests (works + failed) in the period. Not tested is left out.",
+    "effectivenessNote": "Effectiveness = (errors per month before − after) ÷ before, for devices with a before above 0. Your own figures; a few months after the device came in tell more than one.",
+    "strengthNote": "Prevention is stronger than detection (the error cannot happen at all, instead of being caught before it leaves the step), and control is stronger than warning (the process stops, instead of a signal someone can miss). Strongest first.",
+    "checklistNote": "Tick on paper while you test, then record the results here. Each-shift devices have one box per shift.",
+    "failedHandoff": "The device is marked failed. Until it is repaired and a check says it works, the error it guards against is not protected: contain it with a 100 % manual check.",
+    "empty": "No device in the register yet.",
+    "logEmpty": "No check recorded yet."
+  },
+  "areas": [
+    "Picking",
+    "Packing",
+    "Outbound dock",
+    "Inbound dock",
+    "Front office",
+    "Housekeeping",
+    "Restaurant"
+  ],
+  "shifts": [
+    "Early",
+    "Late",
+    "Night"
+  ],
+  "methods": [
+    { "key": "contact", "name": "Contact", "short": "Contact", "hint": "Checks a physical or sensed attribute: shape, size, weight, colour, a barcode, a sensor." },
+    { "key": "fixed", "name": "Fixed-value (constant number)", "short": "Fixed-value", "hint": "Checks that the right number of parts or moves is there: a count, a kit, a pre-counted set." },
+    { "key": "motion", "name": "Motion-step (sequence)", "short": "Motion-step", "hint": "Checks that the steps happen in the right order: the next step only opens when the one before is done." }
+  ],
+  "functions": [
+    { "key": "control", "name": "Control: stops the process or makes the error impossible", "short": "Control" },
+    { "key": "warning", "name": "Warning: signals the error, a person has to react", "short": "Warning" }
+  ],
+  "levels": [
+    { "key": "prevent", "name": "Prevention: the error cannot happen", "short": "Prevention" },
+    { "key": "detect", "name": "Detection: the error is caught before it leaves the step", "short": "Detection" }
+  ],
+  "frequencies": [
+    { "key": "shift", "name": "Each shift", "days": 1 },
+    { "key": "daily", "name": "Daily", "days": 1 },
+    { "key": "weekly", "name": "Weekly", "days": 7 },
+    { "key": "monthly", "name": "Monthly (30 days)", "days": 30 }
+  ],
+  "results": [
+    { "key": "works", "name": "Works" },
+    { "key": "failed", "name": "Failed" },
+    { "key": "untested", "name": "Not tested" }
+  ],
+  "statuses": {
+    "failed": "Failed",
+    "overdue": "Overdue",
+    "new": "Never verified",
+    "due": "Due today",
+    "ok": "OK"
+  },
+  "strengths": [
+    "Prevention + control",
+    "Prevention + warning",
+    "Detection + control",
+    "Detection + warning"
+  ],
+  "advice": {
+    "failed": {
+      "meaning": "A device that failed its test is not protecting anything: the error it was built for can happen again and leave the step unseen.",
+      "moves": [
+        "Contain it now: a 100 % manual check at the step until the device works again, with a name on it.",
+        "Find why it failed (bypassed, worn, changed settings, a software update) before you only repair it.",
+        "Repair it, test it with the deliberate error again and record the result here."
+      ],
+      "question": "Who could have bypassed or changed it, and would we have noticed without this test?"
+    },
+    "overdue": {
+      "meaning": "An overdue device may still work, but nobody has proven it. A poka-yoke that is not tested is a hope, not a protection.",
+      "moves": [
+        "Test the most overdue device on this shift, with the deliberate error.",
+        "Ask the owner what stopped the check: time, the test part, access to the equipment.",
+        "If the interval cannot be kept, change the interval or the owner, not the habit of skipping."
+      ],
+      "question": "What would it take for this check to happen without anyone having to remember it?"
+    },
+    "new": {
+      "meaning": "A device that was never verified has never been proven. Register it with the date it was last tested, or test it today.",
+      "moves": [
+        "Write how to test it: the deliberate error and the reaction you expect.",
+        "Test it today and record the result.",
+        "Give it an owner and an interval."
+      ],
+      "question": "How would we know tomorrow if this device stopped working tonight?"
+    },
+    "weak": {
+      "meaning": "Every device works and is tested on time. The next gain is strength: devices that only detect or only warn still let the error happen.",
+      "moves": [
+        "Take the detection + warning devices first: can the warning become a stop?",
+        "Ask whether the error could be made impossible earlier in the process.",
+        "Check the before and after figures: where the errors did not fall, the device is in the wrong place."
+      ],
+      "question": "Which of these errors could we design out so that no check is needed at all?"
+    }
+  },
+  "tips": [
+    ["Test it with a deliberate error.", "A device is verified when someone feeds it the error it should catch (a label of a wrong location, an underweight parcel, an unscanned label) and it reacts. Looking at it is not a test."],
+    ["Failed means unprotected.", "Until a later check says it works, the error it guards against can reach the customer. Contain it with a manual check and send the repair to the Action Tracker."],
+    ["Prevention beats detection, control beats warning.", "A device that makes the error impossible is stronger than one that finds it; one that stops the process is stronger than a light or a beep that someone can ignore."],
+    ["Not tested needs a reason.", "A check that could not be done (the test room was occupied, the line could not stop) is recorded with its reason; the device stays due."],
+    ["Link it to the FMEA.", "Write the failure mode the device answers. After a few months the before and after figures show whether its rating in the FMEA may change."]
+  ],
+  "example": {
+    "devices": [
+      { "name": "Pick-location scan check", "error": "Picking from the wrong location", "step": "Picking: scan the location, then the item", "area": 0, "method": "contact", "func": "control", "level": "prevent", "owner": "M. Weber", "freq": "shift", "test": "Scan the red test label of a wrong location: the scanner must refuse the pick.", "fmea": "Wrong item picked", "before": 38, "after": 4, "anchor": 35, "stop": 0, "late": { "12": 1 }, "fails": [], "notes": [], "untested": [] },
+      { "name": "Weight check at packing", "error": "Parcel with a missing or an extra item", "step": "Packing: weigh before the parcel is closed", "area": 1, "method": "fixed", "func": "control", "level": "detect", "owner": "A. Krasniqi", "freq": "daily", "test": "Put the 50 g test weight on a packed order: the scale must send it to the reject lane.", "fmea": "", "before": 22, "after": 3, "anchor": 35, "stop": 1, "late": {}, "fails": [12], "notes": [[12, "Test parcel passed: scale out of calibration after it was moved."], [11, "Scale recalibrated by the supplier, test weight rejected again."]], "untested": [] },
+      { "name": "Colour-coded totes per carrier", "error": "Tote put on the wrong outbound lane", "step": "Sorting: tote to the lane of its colour", "area": 2, "method": "contact", "func": "warning", "level": "prevent", "owner": "J. Novak", "freq": "weekly", "test": "Walk the lanes: every tote and lane sign in its carrier colour, no faded or missing labels.", "fmea": "", "before": 15, "after": 9, "anchor": 51, "stop": 9, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Label printer interlock", "error": "Shipping label on the wrong parcel", "step": "Packing: the label prints only after the parcel is scanned and weighed", "area": 1, "method": "motion", "func": "control", "level": "prevent", "owner": "A. Krasniqi", "freq": "weekly", "test": "Try to print a label without scanning the parcel: the printer must not print.", "fmea": "Wrong label on the parcel", "before": 12, "after": 1, "anchor": 44, "stop": 0, "late": {}, "fails": [2], "notes": [[2, "Label printed without the scan: the interlock was switched off after the printer firmware update."]], "untested": [] },
+      { "name": "Pallet height gauge at the dock", "error": "Pallet too high for the racking", "step": "Inbound: every pallet passes under the gauge bar", "area": 3, "method": "contact", "func": "control", "level": "detect", "owner": "J. Novak", "freq": "monthly", "test": "Measure the bar at 1.80 m and push a pallet that is too high: it must not pass.", "fmea": "", "before": null, "after": null, "anchor": 70, "stop": 0, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Key card encoder read-back", "error": "Key card encoded for the wrong room or dates", "step": "Check-in: the encoder reads the card back against the reservation", "area": 4, "method": "contact", "func": "warning", "level": "detect", "owner": "L. Hoxha", "freq": "daily", "test": "Encode a card for test room 999 with yesterday's date: the encoder must show the mismatch.", "fmea": "Key card encoded for the wrong room", "before": 9, "after": 2, "anchor": 33, "stop": 4, "late": {}, "fails": [], "notes": [], "untested": [[3, "Encoder in use the whole shift: check-in queue of a tour group."]] },
+      { "name": "Minibar sensor", "error": "Minibar consumption not charged", "step": "Room: the sensor posts each item taken to the room bill", "area": 5, "method": "contact", "func": "warning", "level": "detect", "owner": "S. Becker", "freq": "monthly", "test": "Lift one item in the test room: the charge must appear on the room within 10 minutes.", "fmea": "", "before": 30, "after": 6, "anchor": 78, "stop": 0, "late": { "18": 3 }, "fails": [], "notes": [], "untested": [[18, "Test room occupied, the guest extended the stay."]] },
+      { "name": "Room-ready checklist lock in the PMS", "error": "Room released to sale before the inspection is complete", "step": "Housekeeping: status “inspected” only when every checklist line is ticked", "area": 5, "method": "motion", "func": "control", "level": "prevent", "owner": "S. Becker", "freq": "weekly", "test": "Leave one checklist line open and try to set the room to inspected: the PMS must refuse.", "fmea": "Room released before the inspection", "before": 14, "after": 1, "anchor": 50, "stop": 0, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Breakfast entitlement scan", "error": "Breakfast served without a breakfast package", "step": "Restaurant entrance: scan the room's key card", "area": 6, "method": "contact", "func": "warning", "level": "detect", "owner": "L. Hoxha", "freq": "daily", "test": "Scan the test card of a room without breakfast: the scanner must show the red notice.", "fmea": "", "before": 25, "after": 8, "anchor": 31, "stop": 0, "late": {}, "fails": [20], "notes": [[20, "Every room showed as entitled after the PMS interface restart."], [19, "Interface mapping restored by IT, test card shows the notice again."]], "untested": [] },
+      { "name": "Pre-counted amenity kit", "error": "Room set up with an amenity missing", "step": "Housekeeping: one sealed kit per room, counted in the store", "area": 5, "method": "fixed", "func": "warning", "level": "prevent", "owner": "S. Becker", "freq": "weekly", "test": "Open five kits at random and count them against the kit card.", "fmea": "", "before": 18, "after": 5, "anchor": 46, "stop": 0, "late": { "25": 2 }, "fails": [], "notes": [], "untested": [] }
+    ]
+  }
+}

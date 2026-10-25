@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Poka-Yoke Register", "type": "Quality", "time": "Weekly", "summary": "Every mistake-proofing device in one register: the error it prevents, Shingo's method, control or warning, prevention or detection. Test each on schedule with a deliberate error; see what is overdue or failed, verification compliance, effectiveness per device and a checklist to print.", "url": "/tools/poka-yoke/", "cta": "Open the register" },
+    "de": { "name": "Poka-Yoke-Register", "type": "Qualität", "time": "Wöchentlich", "summary": "Jede Fehlhandlungssicherung in einem Register: der Fehler, den sie verhindert, die Methode nach Shingo, Eingriff oder Warnung, Vermeidung oder Entdeckung. Jede nach Plan mit einem absichtlichen Fehler prüfen; Überfälliges und Ausfälle, Prüftreue, Wirksamkeit je Sicherung und eine Checkliste zum Drucken.", "url": "/de/tools/poka-yoke/", "cta": "Register öffnen" },
+    "sq": { "name": "Regjistri Poka-Yoke", "type": "Cilësia", "time": "Çdo javë", "summary": "Çdo pajisje kundër gabimeve në një regjistër: gabimi që parandalon, metoda sipas Shingo, ndalim ose paralajmërim, parandalim ose zbulim. Testoje secilën sipas planit me një gabim të qëllimshëm; shiko vonesat dhe defektet, respektimin e verifikimeve, efektivitetin e çdo pajisjeje dhe një listë për ta printuar.", "url": "/sq/tools/poka-yoke/", "cta": "Hap regjistrin" }
+  },
+  "routine": { "when": "Every week", "do": "Print the week's verification checklist, test every device that is due with a deliberate error, record the results, and send each failed device to the Action Tracker.", "de": { "when": "Jede Woche", "do": "Drucken Sie die Prüfcheckliste der Woche, prüfen Sie jede fällige Sicherung mit einem absichtlichen Fehler, erfassen Sie die Ergebnisse und geben Sie jede ausgefallene Sicherung in die Maßnahmenliste." }, "sq": { "when": "Çdo javë", "do": "Printo listën e verifikimit të javës, testo çdo pajisje që skadon me një gabim të qëllimshëm, regjistro rezultatet dhe dërgo çdo pajisje me defekt te lista e veprimeve." } },
+  "recipe": "example"
+}

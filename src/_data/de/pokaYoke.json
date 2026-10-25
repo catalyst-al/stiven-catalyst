@@ -1,0 +1,141 @@
+{
+  "storageKey": "sc-poka-yoke-de",
+  "text": {
+    "tool": "Poka-Yoke-Register",
+    "csv": "poka-yoke-register",
+    "logCsv": "poka-yoke-pruefungen",
+    "namePlaceholder": "z. B. Scan-Prüfung des Entnahmeplatzes",
+    "errorPlaceholder": "z. B. Entnahme vom falschen Lagerplatz",
+    "stepPlaceholder": "z. B. Kommissionierung, Lagerplatz bestätigen",
+    "ownerPlaceholder": "z. B. M. Weber",
+    "testPlaceholder": "z. B. Testetikett eines falschen Lagerplatzes scannen: Der Scanner muss die Entnahme sperren",
+    "fmeaPlaceholder": "z. B. Falscher Artikel kommissioniert",
+    "beforePlaceholder": "z. B. 38",
+    "afterPlaceholder": "z. B. 4",
+    "byPlaceholder": "z. B. A. Krasniqi",
+    "notePlaceholder": "z. B. Mit dem roten Testetikett geprüft, sofort gesperrt",
+    "reasonPlaceholder": "z. B. Testzimmer belegt, Gast hat verlängert",
+    "lastNote": "Das Datum, an dem die Sicherung zuletzt nachweislich funktioniert hat, bevor sie in dieses Register kam. Jede Prüfung, die Sie danach erfassen, schreibt es fort.",
+    "effectNote": "Fehler pro Monat vor der Sicherung und seitdem, aus Ihrem eigenen Fehler- oder Reklamationsprotokoll. Optional: Daraus ergibt sich die Wirksamkeit.",
+    "intervalNote": "Jede Schicht und täglich: am nächsten Tag wieder fällig (das Register zählt Tage, nicht Schichten; erfassen Sie eine Prüfung je Schicht, wenn Sie jede Schicht prüfen). Wöchentlich: 7 Tage. Monatlich: 30 Tage. Das sind Vorgaben; wählen Sie, was Ihr Risiko verlangt.",
+    "verifyNote": "Prüfen heißt: Geben Sie der Sicherung den Fehler, den sie abfangen soll, und sehen Sie, ob sie reagiert. Eine nicht bestandene Prüfung markiert die Sicherung als ausgefallen, bis eine spätere Prüfung „funktioniert“ ergibt.",
+    "complianceNote": "Prüftreue = rechtzeitig erledigte fällige Prüfungen ÷ fällige Prüfungen im Zeitraum. Eine Prüfung wird am Datum der letzten Prüfung plus Intervall fällig und ist rechtzeitig, wenn die Sicherung an oder vor diesem Datum geprüft wurde (funktioniert oder ausgefallen). Jedes weitere Intervall ohne Prüfung zählt als eine weitere versäumte Prüfung, und eine verspätete Prüfung startet die Frist neu. Eine heute fällige Prüfung zählt erst, wenn sie erledigt ist; „nicht geprüft“ ist keine Prüfung.",
+    "failureNote": "Ausfallquote = nicht bestandene Prüfungen ÷ Prüfungen (funktioniert + ausgefallen) im Zeitraum. „Nicht geprüft“ bleibt außen vor.",
+    "effectivenessNote": "Wirksamkeit = (Fehler pro Monat vorher − nachher) ÷ vorher, für Sicherungen mit einem Vorher-Wert über 0. Ihre eigenen Zahlen; einige Monate nach der Einführung sagen mehr als einer.",
+    "strengthNote": "Vermeidung ist stärker als Entdeckung (der Fehler kann gar nicht entstehen, statt vor dem Verlassen des Schritts abgefangen zu werden), und Eingriff ist stärker als Warnung (der Prozess stoppt, statt eines Signals, das jemand übersehen kann). Die stärkste zuerst.",
+    "checklistNote": "Beim Prüfen auf Papier abhaken, danach die Ergebnisse hier erfassen. Sicherungen mit Prüfung je Schicht haben ein Kästchen pro Schicht.",
+    "failedHandoff": "Die Sicherung ist als ausgefallen markiert. Bis sie repariert ist und eine Prüfung „funktioniert“ ergibt, ist der Fehler, gegen den sie schützt, nicht abgesichert: Fangen Sie ihn mit einer 100-%-Sichtprüfung ab.",
+    "empty": "Noch keine Sicherung im Register.",
+    "logEmpty": "Noch keine Prüfung erfasst."
+  },
+  "areas": [
+    "Kommissionierung",
+    "Packerei",
+    "Warenausgang",
+    "Wareneingang",
+    "Rezeption",
+    "Housekeeping",
+    "Restaurant"
+  ],
+  "shifts": [
+    "Früh",
+    "Spät",
+    "Nacht"
+  ],
+  "methods": [
+    { "key": "contact", "name": "Kontaktmethode", "short": "Kontakt", "hint": "Prüft ein körperliches oder erfasstes Merkmal: Form, Größe, Gewicht, Farbe, einen Barcode, einen Sensor." },
+    { "key": "fixed", "name": "Fixwertmethode (feste Anzahl)", "short": "Fixwert", "hint": "Prüft, ob die richtige Anzahl Teile oder Handgriffe da ist: eine Zählung, ein Set, ein vorgezähltes Paket." },
+    { "key": "motion", "name": "Schrittfolgemethode (Reihenfolge)", "short": "Schrittfolge", "hint": "Prüft, ob die Schritte in der richtigen Reihenfolge geschehen: Der nächste Schritt öffnet sich erst, wenn der vorige erledigt ist." }
+  ],
+  "functions": [
+    { "key": "control", "name": "Eingriff: stoppt den Prozess oder macht den Fehler unmöglich", "short": "Eingriff" },
+    { "key": "warning", "name": "Warnung: meldet den Fehler, ein Mensch muss reagieren", "short": "Warnung" }
+  ],
+  "levels": [
+    { "key": "prevent", "name": "Vermeidung: der Fehler kann nicht entstehen", "short": "Vermeidung" },
+    { "key": "detect", "name": "Entdeckung: der Fehler wird abgefangen, bevor er den Schritt verlässt", "short": "Entdeckung" }
+  ],
+  "frequencies": [
+    { "key": "shift", "name": "Jede Schicht", "days": 1 },
+    { "key": "daily", "name": "Täglich", "days": 1 },
+    { "key": "weekly", "name": "Wöchentlich", "days": 7 },
+    { "key": "monthly", "name": "Monatlich (30 Tage)", "days": 30 }
+  ],
+  "results": [
+    { "key": "works", "name": "Funktioniert" },
+    { "key": "failed", "name": "Ausgefallen" },
+    { "key": "untested", "name": "Nicht geprüft" }
+  ],
+  "statuses": {
+    "failed": "Ausgefallen",
+    "overdue": "Überfällig",
+    "new": "Nie geprüft",
+    "due": "Heute fällig",
+    "ok": "OK"
+  },
+  "strengths": [
+    "Vermeidung + Eingriff",
+    "Vermeidung + Warnung",
+    "Entdeckung + Eingriff",
+    "Entdeckung + Warnung"
+  ],
+  "advice": {
+    "failed": {
+      "meaning": "Eine Sicherung, die ihre Prüfung nicht bestanden hat, schützt nichts: Der Fehler, für den sie gebaut wurde, kann wieder passieren und den Schritt unbemerkt verlassen.",
+      "moves": [
+        "Jetzt eindämmen: eine 100-%-Sichtprüfung am Schritt, bis die Sicherung wieder funktioniert, mit einem verantwortlichen Namen.",
+        "Herausfinden, warum sie ausgefallen ist (überbrückt, verschlissen, Einstellungen geändert, ein Software-Update), bevor Sie sie nur reparieren.",
+        "Reparieren, erneut mit dem absichtlichen Fehler prüfen und das Ergebnis hier erfassen."
+      ],
+      "question": "Wer konnte sie überbrücken oder verändern, und hätten wir es ohne diese Prüfung bemerkt?"
+    },
+    "overdue": {
+      "meaning": "Eine überfällige Sicherung funktioniert vielleicht noch, aber niemand hat es nachgewiesen. Ein Poka-Yoke ohne Prüfung ist eine Hoffnung, kein Schutz.",
+      "moves": [
+        "Prüfen Sie die am längsten überfällige Sicherung in dieser Schicht, mit dem absichtlichen Fehler.",
+        "Fragen Sie die verantwortliche Person, was die Prüfung verhindert hat: Zeit, das Prüfteil, der Zugang zur Anlage.",
+        "Wenn das Intervall nicht zu halten ist, ändern Sie das Intervall oder die Verantwortung, nicht die Gewohnheit, sie auszulassen."
+      ],
+      "question": "Was müsste passieren, damit diese Prüfung stattfindet, ohne dass jemand daran denken muss?"
+    },
+    "new": {
+      "meaning": "Eine Sicherung, die nie geprüft wurde, ist nie nachgewiesen. Tragen Sie das Datum der letzten Prüfung ein oder prüfen Sie sie heute.",
+      "moves": [
+        "Schreiben Sie auf, wie sie geprüft wird: der absichtliche Fehler und die erwartete Reaktion.",
+        "Prüfen Sie sie heute und erfassen Sie das Ergebnis.",
+        "Geben Sie ihr eine verantwortliche Person und ein Intervall."
+      ],
+      "question": "Woran würden wir morgen merken, dass diese Sicherung heute Nacht ausgefallen ist?"
+    },
+    "weak": {
+      "meaning": "Jede Sicherung funktioniert und wird rechtzeitig geprüft. Der nächste Gewinn ist Stärke: Sicherungen, die nur entdecken oder nur warnen, lassen den Fehler noch entstehen.",
+      "moves": [
+        "Nehmen Sie zuerst die Sicherungen mit Entdeckung + Warnung: Kann aus der Warnung ein Stopp werden?",
+        "Fragen Sie, ob der Fehler früher im Prozess unmöglich gemacht werden kann.",
+        "Prüfen Sie die Vorher- und Nachher-Zahlen: Wo die Fehler nicht gesunken sind, sitzt die Sicherung an der falschen Stelle."
+      ],
+      "question": "Welchen dieser Fehler könnten wir so wegkonstruieren, dass gar keine Prüfung mehr nötig ist?"
+    }
+  },
+  "tips": [
+    ["Mit einem absichtlichen Fehler prüfen.", "Eine Sicherung ist geprüft, wenn jemand ihr den Fehler gibt, den sie abfangen soll (ein Etikett eines falschen Lagerplatzes, ein zu leichtes Paket, ein ungescanntes Etikett), und sie reagiert. Hinschauen ist keine Prüfung."],
+    ["Ausgefallen heißt ungeschützt.", "Bis eine spätere Prüfung „funktioniert“ ergibt, kann der Fehler, gegen den sie schützt, beim Kunden ankommen. Dämmen Sie ihn mit einer Sichtprüfung ein und geben Sie die Reparatur in die Maßnahmenliste."],
+    ["Vermeidung schlägt Entdeckung, Eingriff schlägt Warnung.", "Eine Sicherung, die den Fehler unmöglich macht, ist stärker als eine, die ihn findet; eine, die den Prozess stoppt, ist stärker als ein Licht oder ein Piepton, den jemand überhören kann."],
+    ["„Nicht geprüft“ braucht einen Grund.", "Eine Prüfung, die nicht möglich war (das Testzimmer war belegt, die Linie konnte nicht stoppen), wird mit ihrem Grund erfasst; die Sicherung bleibt fällig."],
+    ["Mit der FMEA verknüpfen.", "Tragen Sie die Fehlerart ein, auf die die Sicherung antwortet. Nach einigen Monaten zeigen die Vorher- und Nachher-Zahlen, ob sich ihre Bewertung in der FMEA ändern darf."]
+  ],
+  "example": {
+    "devices": [
+      { "name": "Scan-Prüfung des Entnahmeplatzes", "error": "Entnahme vom falschen Lagerplatz", "step": "Kommissionierung: erst den Lagerplatz scannen, dann den Artikel", "area": 0, "method": "contact", "func": "control", "level": "prevent", "owner": "M. Weber", "freq": "shift", "test": "Das rote Testetikett eines falschen Lagerplatzes scannen: Der Scanner muss die Entnahme verweigern.", "fmea": "Falscher Artikel kommissioniert", "before": 38, "after": 4, "anchor": 35, "stop": 0, "late": { "12": 1 }, "fails": [], "notes": [], "untested": [] },
+      { "name": "Gewichtskontrolle beim Packen", "error": "Paket mit fehlendem oder zusätzlichem Artikel", "step": "Packerei: wiegen, bevor das Paket verschlossen wird", "area": 1, "method": "fixed", "func": "control", "level": "detect", "owner": "A. Krasniqi", "freq": "daily", "test": "Das 50-g-Prüfgewicht auf einen gepackten Auftrag legen: Die Waage muss ihn auf die Ausschleusbahn schicken.", "fmea": "", "before": 22, "after": 3, "anchor": 35, "stop": 1, "late": {}, "fails": [12], "notes": [[12, "Testpaket ging durch: Waage nach dem Umstellen nicht mehr kalibriert."], [11, "Waage vom Lieferanten neu kalibriert, Prüfgewicht wird wieder ausgeschleust."]], "untested": [] },
+      { "name": "Farbcodierte Behälter je Paketdienst", "error": "Behälter auf der falschen Ausgangsbahn", "step": "Sortierung: Behälter auf die Bahn seiner Farbe", "area": 2, "method": "contact", "func": "warning", "level": "prevent", "owner": "J. Novak", "freq": "weekly", "test": "Die Bahnen ablaufen: jeder Behälter und jedes Bahnschild in der Farbe des Paketdienstes, keine verblassten oder fehlenden Etiketten.", "fmea": "", "before": 15, "after": 9, "anchor": 51, "stop": 9, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Verriegelung des Etikettendruckers", "error": "Versandetikett auf dem falschen Paket", "step": "Packerei: Das Etikett druckt erst, wenn das Paket gescannt und gewogen ist", "area": 1, "method": "motion", "func": "control", "level": "prevent", "owner": "A. Krasniqi", "freq": "weekly", "test": "Versuchen, ein Etikett ohne Scan des Pakets zu drucken: Der Drucker darf nicht drucken.", "fmea": "Falsches Etikett auf dem Paket", "before": 12, "after": 1, "anchor": 44, "stop": 0, "late": {}, "fails": [2], "notes": [[2, "Etikett ohne Scan gedruckt: Die Verriegelung war nach dem Firmware-Update des Druckers ausgeschaltet."]], "untested": [] },
+      { "name": "Höhenlehre für Paletten an der Rampe", "error": "Palette zu hoch für das Regal", "step": "Wareneingang: jede Palette fährt unter dem Lehrbügel durch", "area": 3, "method": "contact", "func": "control", "level": "detect", "owner": "J. Novak", "freq": "monthly", "test": "Den Bügel auf 1,80 m messen und eine zu hohe Palette anfahren: Sie darf nicht durchpassen.", "fmea": "", "before": null, "after": null, "anchor": 70, "stop": 0, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Rücklesen am Schlüsselkarten-Encoder", "error": "Schlüsselkarte für das falsche Zimmer oder die falschen Daten codiert", "step": "Check-in: Der Encoder liest die Karte gegen die Reservierung zurück", "area": 4, "method": "contact", "func": "warning", "level": "detect", "owner": "L. Hoxha", "freq": "daily", "test": "Eine Karte für Testzimmer 999 mit gestrigem Datum codieren: Der Encoder muss die Abweichung anzeigen.", "fmea": "Schlüsselkarte für das falsche Zimmer codiert", "before": 9, "after": 2, "anchor": 33, "stop": 4, "late": {}, "fails": [], "notes": [], "untested": [[3, "Encoder die ganze Schicht belegt: Check-in-Schlange einer Reisegruppe."]] },
+      { "name": "Minibar-Sensor", "error": "Minibar-Verbrauch nicht berechnet", "step": "Zimmer: Der Sensor bucht jeden entnommenen Artikel auf die Zimmerrechnung", "area": 5, "method": "contact", "func": "warning", "level": "detect", "owner": "S. Becker", "freq": "monthly", "test": "Im Testzimmer einen Artikel anheben: Die Buchung muss innerhalb von 10 Minuten auf dem Zimmer erscheinen.", "fmea": "", "before": 30, "after": 6, "anchor": 78, "stop": 0, "late": { "18": 3 }, "fails": [], "notes": [], "untested": [[18, "Testzimmer belegt, der Gast hat verlängert."]] },
+      { "name": "Checklisten-Sperre „Zimmer fertig“ im PMS", "error": "Zimmer vor abgeschlossener Abnahme zum Verkauf freigegeben", "step": "Housekeeping: Status „abgenommen“ erst, wenn jede Zeile der Checkliste abgehakt ist", "area": 5, "method": "motion", "func": "control", "level": "prevent", "owner": "S. Becker", "freq": "weekly", "test": "Eine Zeile der Checkliste offen lassen und versuchen, das Zimmer auf abgenommen zu setzen: Das PMS muss ablehnen.", "fmea": "Zimmer vor der Abnahme freigegeben", "before": 14, "after": 1, "anchor": 50, "stop": 0, "late": {}, "fails": [], "notes": [], "untested": [] },
+      { "name": "Frühstücksberechtigung per Scan", "error": "Frühstück ohne Frühstückspaket serviert", "step": "Restauranteingang: die Schlüsselkarte des Zimmers scannen", "area": 6, "method": "contact", "func": "warning", "level": "detect", "owner": "L. Hoxha", "freq": "daily", "test": "Die Testkarte eines Zimmers ohne Frühstück scannen: Der Scanner muss den roten Hinweis zeigen.", "fmea": "", "before": 25, "after": 8, "anchor": 31, "stop": 0, "late": {}, "fails": [20], "notes": [[20, "Nach dem Neustart der PMS-Schnittstelle galt jedes Zimmer als berechtigt."], [19, "Zuordnung der Schnittstelle von der IT wiederhergestellt, die Testkarte zeigt den Hinweis wieder."]], "untested": [] },
+      { "name": "Vorgezähltes Amenity-Set", "error": "Zimmer mit fehlendem Amenity eingedeckt", "step": "Housekeeping: ein versiegeltes Set je Zimmer, im Lager gezählt", "area": 5, "method": "fixed", "func": "warning", "level": "prevent", "owner": "S. Becker", "freq": "weekly", "test": "Fünf Sets zufällig öffnen und gegen die Set-Karte zählen.", "fmea": "", "before": 18, "after": 5, "anchor": 46, "stop": 0, "late": { "25": 2 }, "fails": [], "notes": [], "untested": [] }
+    ]
+  }
+}

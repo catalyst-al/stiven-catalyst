@@ -1,0 +1,333 @@
+{
+  "storageKey": "sc-andon",
+  "text": {
+    "tool": "Andon Log",
+    "csv": "andon-log",
+    "liveLegend": "Call for help now",
+    "liveNote": "Choose the station, then tap the reason. The timer runs on this device's clock; open calls stay here after a reload until they are solved.",
+    "entryLegend": "Log a call after the fact",
+    "entryNote": "The date is the day of the call: after midnight, the new day, as in the other logs. A time that is earlier on the clock than the call is read as the next day.",
+    "responderPlaceholder": "e.g. Team lead",
+    "notePlaceholder": "e.g. Sensor 3 on the conveyor dirty, cleaned",
+    "pasteRow": "One row per call",
+    "pastePlaceholder": "2026-10-14\tEarly\tPicking\tMissing material\t07:12\t07:14\t07:21\tTeam lead\tno\t\tPick face A-12 empty",
+    "empty": "No calls in the log yet.",
+    "allAreas": "All stations",
+    "allReasons": "All reasons",
+    "targetNote": "The targets and the escalation minutes are examples to start from, not a standard: agree your own with the team and post them where the calls are made."
+  },
+  "shifts": [
+    "Early",
+    "Late"
+  ],
+  "areas": [
+    "Goods-in",
+    "Picking",
+    "Packing",
+    "Dispatch",
+    "Returns"
+  ],
+  "reasons": [
+    {
+      "key": "quality",
+      "name": "Quality doubt",
+      "hint": "Wrong item, damage, label in doubt"
+    },
+    {
+      "key": "material",
+      "name": "Missing material",
+      "hint": "Empty location, no pallets, no labels"
+    },
+    {
+      "key": "machine",
+      "name": "Machine or equipment",
+      "hint": "Conveyor, truck, printer, dock"
+    },
+    {
+      "key": "safety",
+      "name": "Safety",
+      "hint": "Spill, blocked route, near miss"
+    },
+    {
+      "key": "people",
+      "name": "People",
+      "hint": "Short of staff, a question, training"
+    },
+    {
+      "key": "it",
+      "name": "IT or system down",
+      "hint": "Scanner, WMS, network"
+    },
+    {
+      "key": "other",
+      "name": "Other",
+      "hint": "Anything else that needs help"
+    }
+  ],
+  "responders": [
+    "Team lead",
+    "Supervisor",
+    "Maintenance",
+    "IT support",
+    "Quality",
+    "Shift manager"
+  ],
+  "levels": [
+    {
+      "name": "Team lead",
+      "after": 0
+    },
+    {
+      "name": "Supervisor",
+      "after": 5
+    },
+    {
+      "name": "Shift manager",
+      "after": 15
+    }
+  ],
+  "targets": {
+    "respond": 3,
+    "resolve": 15
+  },
+  "weekdays": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun"
+  ],
+  "advice": {
+    "quality": {
+      "meaning": "Doubts about the goods or the order: the work waits until someone decides.",
+      "moves": [
+        "Give the team lead clear rules to decide on the spot: photo, hold area, release.",
+        "Put the most frequent doubts on a one-point lesson with pictures of good and bad.",
+        "Send the confirmed defects back to goods-in or the supplier the same day."
+      ],
+      "question": "Which decision did the operator wait for, and could the rule be at the station?"
+    },
+    "material": {
+      "meaning": "Most calls are for material that should already be there: the replenishment signal comes too late or not at all.",
+      "moves": [
+        "Set a minimum at each pick face and replenish at the minimum, not when it is empty.",
+        "Walk the last five calls with the replenishment driver and see where the signal was lost.",
+        "Keep labels, pallets and packing material on a kanban with a visible reorder point."
+      ],
+      "question": "What told us the location was running empty, and why did it come after the picker got there?"
+    },
+    "machine": {
+      "meaning": "Equipment stops the work: the fix is quick once help is there, but the same faults come back.",
+      "moves": [
+        "List the repeat faults by machine and give the top one a root-cause check with maintenance.",
+        "Add the first checks to the start of the shift: chargers, conveyor sensors, printer heads.",
+        "Keep the spare parts for the three most frequent faults at the line, with a minimum stock."
+      ],
+      "question": "Which fault have we fixed more than twice this month, and what would stop it for good?"
+    },
+    "safety": {
+      "meaning": "Safety calls stop the work for a good reason; each one is a chance to remove a hazard before it hurts someone.",
+      "moves": [
+        "Treat every safety call as a near miss: mark it on the safety cross and look at the cause.",
+        "Remove the hazard before the area starts again, and confirm it on the next walk.",
+        "Tell the next shift at the start of the shift what happened and what changed."
+      ],
+      "question": "What would have removed this hazard before anyone had to call?"
+    },
+    "people": {
+      "meaning": "Calls for people: a question, a gap in the staffing, or someone who does not know the task yet.",
+      "moves": [
+        "Check the skills matrix for the stations with the most calls and train a second person.",
+        "Plan breaks and staffing against the hours when the calls peak.",
+        "Answer the most frequent question once, on a card at the station."
+      ],
+      "question": "What did the person need to know that was not at the station?"
+    },
+    "it": {
+      "meaning": "Scanners, printers or the system stop the floor, and nobody on the floor can fix them.",
+      "moves": [
+        "Agree a response time with IT for a line stop and post the number at every station.",
+        "Keep charged spare scanners and a spare label printer at the shift desk.",
+        "Write a one-page fallback for when the WMS is down: paper pick list, labels by hand."
+      ],
+      "question": "What can the floor do in the first five minutes while IT is on the way?"
+    },
+    "other": {
+      "meaning": "Calls that fit no category: read their notes to see whether a new category is needed.",
+      "moves": [
+        "Read the notes of these calls and group them.",
+        "Add a category when one group keeps coming back.",
+        "Ask the callers what would have made the call unnecessary."
+      ],
+      "question": "What do these calls have in common?"
+    },
+    "default": {
+      "meaning": "The reason with the most calls is where help is needed most often.",
+      "moves": [
+        "Read the notes of the calls for this reason and group them.",
+        "Agree one countermeasure with the team and give it an owner and a date.",
+        "Check in two weeks whether the calls for this reason have gone down."
+      ],
+      "question": "What would have made these calls unnecessary?"
+    }
+  },
+  "tips": [
+    [
+      "Call at the first doubt.",
+      "An andon call is not a complaint. A call early is cheaper than a stop later; the log shows where help is slow, not who called."
+    ],
+    [
+      "Press Help arrived when someone is there.",
+      "Time to respond runs from the call to help on site; time to solve runs to the moment the work runs again."
+    ],
+    [
+      "Agree the escalation with the team.",
+      "Who is called after how many minutes: the defaults are examples. Set your own and post them at the board."
+    ],
+    [
+      "Look at the hours, not only the reasons.",
+      "The heat map shows when calls pile up: the start of a shift, before the trucks leave, after the breaks."
+    ]
+  ],
+  "example": {
+    "start": "2026-10-12",
+    "notes": {
+      "palletMissing": "No empty pallets at the station",
+      "labelsOut": "Label roll empty, no spare at the station",
+      "conveyorJam": "Conveyor jammed at the merge",
+      "chargerFault": "Charger fault on the reach truck",
+      "scannerReboot": "Scanner froze, rebooted",
+      "wmsSlow": "WMS slow, picks not loading",
+      "wrongItem": "Wrong item in the location",
+      "shortStaff": "One picker short after the break",
+      "spill": "Oil on the floor in aisle 7",
+      "lateTruck": "Truck at the dock early, no slot",
+      "dockLeveller": "Dock leveller stuck on the last truck, loaded on overtime"
+    },
+    "rows": [
+      {"day":0,"shift":0,"area":2,"reason":"quality","called":"07:49","arrived":"07:52","solved":"07:53","by":4,"stop":0,"stopMin":0,"note":"wrongItem"},
+      {"day":0,"shift":0,"area":2,"reason":"it","called":"08:27","arrived":"08:29","solved":"08:39","by":3,"stop":0,"stopMin":0,"note":"scannerReboot"},
+      {"day":0,"shift":0,"area":4,"reason":"it","called":"09:36","arrived":"09:38","solved":"09:43","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":0,"area":3,"reason":"it","called":"10:14","arrived":"10:15","solved":"10:21","by":3,"stop":1,"stopMin":4,"note":""},
+      {"day":0,"shift":0,"area":1,"reason":"it","called":"10:57","arrived":"10:59","solved":"11:09","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":0,"area":0,"reason":"people","called":"11:00","arrived":"11:03","solved":"11:05","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":0,"area":4,"reason":"machine","called":"11:18","arrived":"11:27","solved":"11:37","by":2,"stop":1,"stopMin":17,"note":""},
+      {"day":0,"shift":0,"area":0,"reason":"people","called":"13:35","arrived":"13:40","solved":"13:42","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":1,"area":1,"reason":"other","called":"14:27","arrived":"14:29","solved":"14:31","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":1,"area":0,"reason":"machine","called":"14:29","arrived":"14:31","solved":"14:37","by":2,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":1,"area":1,"reason":"people","called":"14:54","arrived":"14:56","solved":"15:24","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":0,"shift":1,"area":1,"reason":"material","called":"19:04","arrived":"19:07","solved":"19:12","by":0,"stop":0,"stopMin":0,"note":"labelsOut"},
+      {"day":0,"shift":1,"area":2,"reason":"material","called":"19:39","arrived":"19:49","solved":"19:50","by":0,"stop":1,"stopMin":11,"note":"palletMissing"},
+      {"day":0,"shift":1,"area":3,"reason":"quality","called":"20:07","arrived":"20:08","solved":"20:13","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":0,"area":1,"reason":"safety","called":"06:15","arrived":"06:18","solved":"06:20","by":1,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":0,"area":2,"reason":"it","called":"06:47","arrived":"06:50","solved":"06:58","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":0,"area":1,"reason":"machine","called":"07:34","arrived":"07:37","solved":"08:11","by":5,"stop":1,"stopMin":37,"note":""},
+      {"day":1,"shift":0,"area":0,"reason":"machine","called":"11:48","arrived":"11:49","solved":"12:05","by":2,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":0,"area":0,"reason":"material","called":"12:25","arrived":"12:30","solved":"12:32","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":0,"area":0,"reason":"material","called":"12:38","arrived":"12:41","solved":"12:48","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":1,"area":1,"reason":"material","called":"15:14","arrived":"15:17","solved":"15:23","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":1,"area":1,"reason":"safety","called":"18:06","arrived":"18:16","solved":"18:19","by":1,"stop":1,"stopMin":13,"note":"spill"},
+      {"day":1,"shift":1,"area":1,"reason":"machine","called":"19:04","arrived":"19:06","solved":"19:17","by":2,"stop":1,"stopMin":13,"note":"chargerFault"},
+      {"day":1,"shift":1,"area":2,"reason":"people","called":"20:22","arrived":"20:24","solved":"20:25","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":1,"shift":1,"area":1,"reason":"material","called":"21:39","arrived":"21:46","solved":"21:50","by":0,"stop":0,"stopMin":0,"note":"labelsOut"},
+      {"day":2,"shift":0,"area":1,"reason":"it","called":"07:29","arrived":"07:32","solved":"07:40","by":3,"stop":1,"stopMin":11,"note":""},
+      {"day":2,"shift":0,"area":1,"reason":"it","called":"07:40","arrived":"07:43","solved":"07:47","by":3,"stop":1,"stopMin":7,"note":""},
+      {"day":2,"shift":0,"area":2,"reason":"other","called":"07:48","arrived":"07:51","solved":"07:52","by":0,"stop":1,"stopMin":4,"note":""},
+      {"day":2,"shift":0,"area":0,"reason":"material","called":"08:33","arrived":"08:36","solved":"08:42","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":2,"shift":0,"area":3,"reason":"other","called":"12:26","arrived":"12:28","solved":"12:33","by":0,"stop":0,"stopMin":0,"note":"lateTruck"},
+      {"day":2,"shift":0,"area":2,"reason":"safety","called":"13:05","arrived":"13:07","solved":"13:13","by":1,"stop":0,"stopMin":0,"note":"spill"},
+      {"day":2,"shift":1,"area":4,"reason":"machine","called":"14:09","arrived":"14:10","solved":"14:21","by":2,"stop":1,"stopMin":10,"note":""},
+      {"day":2,"shift":1,"area":4,"reason":"machine","called":"16:05","arrived":"16:07","solved":"16:12","by":2,"stop":0,"stopMin":0,"note":""},
+      {"day":2,"shift":1,"area":1,"reason":"material","called":"21:07","arrived":"21:09","solved":"21:36","by":5,"stop":0,"stopMin":0,"note":""},
+      {"day":2,"shift":1,"area":2,"reason":"material","called":"21:48","arrived":"21:55","solved":"22:01","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":3,"shift":0,"area":1,"reason":"people","called":"07:26","arrived":"07:28","solved":"07:31","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":3,"shift":0,"area":3,"reason":"it","called":"08:55","arrived":"08:56","solved":"09:27","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":3,"shift":0,"area":2,"reason":"material","called":"10:48","arrived":"10:50","solved":"10:56","by":0,"stop":1,"stopMin":8,"note":""},
+      {"day":3,"shift":0,"area":4,"reason":"people","called":"11:06","arrived":"11:08","solved":"11:12","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":3,"shift":0,"area":2,"reason":"quality","called":"12:02","arrived":"12:04","solved":"12:10","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":3,"shift":1,"area":2,"reason":"other","called":"14:16","arrived":"14:17","solved":"14:22","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":3,"shift":1,"area":0,"reason":"people","called":"15:36","arrived":"15:37","solved":"15:39","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":3,"shift":1,"area":1,"reason":"it","called":"16:03","arrived":"16:06","solved":"16:09","by":3,"stop":1,"stopMin":6,"note":"wmsSlow"},
+      {"day":3,"shift":1,"area":4,"reason":"it","called":"17:32","arrived":"17:34","solved":"17:41","by":3,"stop":1,"stopMin":9,"note":""},
+      {"day":4,"shift":0,"area":0,"reason":"people","called":"06:41","arrived":"06:44","solved":"06:45","by":0,"stop":0,"stopMin":0,"note":"shortStaff"},
+      {"day":4,"shift":0,"area":1,"reason":"material","called":"06:59","arrived":"07:04","solved":"07:09","by":0,"stop":0,"stopMin":0,"note":"labelsOut"},
+      {"day":4,"shift":0,"area":2,"reason":"quality","called":"07:20","arrived":"07:23","solved":"07:28","by":4,"stop":0,"stopMin":0,"note":"wrongItem"},
+      {"day":4,"shift":0,"area":1,"reason":"material","called":"07:29","arrived":"07:41","solved":"07:46","by":0,"stop":1,"stopMin":17,"note":""},
+      {"day":4,"shift":0,"area":2,"reason":"machine","called":"07:38","arrived":"07:50","solved":"08:03","by":2,"stop":1,"stopMin":25,"note":""},
+      {"day":4,"shift":0,"area":0,"reason":"machine","called":"07:52","arrived":"07:55","solved":"08:12","by":2,"stop":1,"stopMin":17,"note":""},
+      {"day":4,"shift":0,"area":0,"reason":"machine","called":"10:01","arrived":"10:02","solved":"10:19","by":2,"stop":1,"stopMin":16,"note":""},
+      {"day":4,"shift":1,"area":0,"reason":"material","called":"14:28","arrived":"14:33","solved":"14:38","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":4,"shift":1,"area":2,"reason":"material","called":"14:46","arrived":"14:52","solved":"14:53","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":4,"shift":1,"area":3,"reason":"it","called":"15:00","arrived":"15:01","solved":"15:10","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":4,"shift":1,"area":3,"reason":"machine","called":"18:00","arrived":"18:03","solved":"18:47","by":2,"stop":1,"stopMin":47,"note":"chargerFault"},
+      {"day":4,"shift":1,"area":2,"reason":"machine","called":"20:53","arrived":"20:54","solved":"21:11","by":2,"stop":1,"stopMin":18,"note":"chargerFault"},
+      {"day":5,"shift":0,"area":2,"reason":"other","called":"07:33","arrived":"07:42","solved":"07:46","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":5,"shift":0,"area":0,"reason":"quality","called":"08:21","arrived":"08:23","solved":"08:29","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":5,"shift":0,"area":2,"reason":"material","called":"12:56","arrived":"12:59","solved":"13:03","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":5,"shift":1,"area":1,"reason":"material","called":"14:36","arrived":"14:37","solved":"14:53","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":5,"shift":1,"area":1,"reason":"material","called":"15:14","arrived":"15:16","solved":"15:19","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":5,"shift":1,"area":1,"reason":"people","called":"17:37","arrived":"17:40","solved":"17:41","by":0,"stop":0,"stopMin":0,"note":"shortStaff"},
+      {"day":7,"shift":0,"area":2,"reason":"machine","called":"06:49","arrived":"06:50","solved":"07:02","by":2,"stop":0,"stopMin":0,"note":""},
+      {"day":7,"shift":0,"area":1,"reason":"material","called":"07:30","arrived":"07:32","solved":"07:33","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":7,"shift":0,"area":1,"reason":"it","called":"07:31","arrived":"07:41","solved":"07:48","by":3,"stop":0,"stopMin":0,"note":"wmsSlow"},
+      {"day":7,"shift":0,"area":4,"reason":"quality","called":"07:43","arrived":"07:49","solved":"07:55","by":4,"stop":1,"stopMin":12,"note":""},
+      {"day":7,"shift":0,"area":0,"reason":"material","called":"08:37","arrived":"08:42","solved":"08:46","by":0,"stop":1,"stopMin":9,"note":""},
+      {"day":7,"shift":0,"area":0,"reason":"machine","called":"09:32","arrived":"09:35","solved":"09:43","by":2,"stop":0,"stopMin":0,"note":"chargerFault"},
+      {"day":7,"shift":0,"area":0,"reason":"material","called":"10:23","arrived":"10:32","solved":"11:04","by":5,"stop":0,"stopMin":0,"note":""},
+      {"day":7,"shift":1,"area":1,"reason":"machine","called":"14:06","arrived":"14:11","solved":"14:21","by":2,"stop":1,"stopMin":15,"note":"conveyorJam"},
+      {"day":7,"shift":1,"area":0,"reason":"machine","called":"14:51","arrived":"14:52","solved":"15:01","by":2,"stop":1,"stopMin":10,"note":""},
+      {"day":7,"shift":1,"area":2,"reason":"material","called":"15:21","arrived":"15:28","solved":"15:33","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":7,"shift":1,"area":1,"reason":"material","called":"16:27","arrived":"16:29","solved":"16:36","by":0,"stop":1,"stopMin":9,"note":"labelsOut"},
+      {"day":7,"shift":1,"area":2,"reason":"material","called":"17:46","arrived":"17:49","solved":"17:55","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":7,"shift":1,"area":2,"reason":"people","called":"17:52","arrived":"17:55","solved":"17:58","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":8,"shift":0,"area":0,"reason":"it","called":"06:45","arrived":"06:46","solved":"06:49","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":8,"shift":0,"area":1,"reason":"material","called":"07:32","arrived":"07:34","solved":"07:38","by":0,"stop":1,"stopMin":6,"note":""},
+      {"day":8,"shift":0,"area":1,"reason":"machine","called":"07:41","arrived":"07:43","solved":"07:48","by":2,"stop":0,"stopMin":0,"note":""},
+      {"day":8,"shift":0,"area":2,"reason":"material","called":"08:28","arrived":"08:29","solved":"08:31","by":0,"stop":1,"stopMin":3,"note":"palletMissing"},
+      {"day":8,"shift":0,"area":0,"reason":"safety","called":"09:32","arrived":"09:33","solved":"09:38","by":1,"stop":1,"stopMin":6,"note":""},
+      {"day":8,"shift":0,"area":2,"reason":"quality","called":"11:55","arrived":"11:57","solved":"12:03","by":4,"stop":1,"stopMin":8,"note":"wrongItem"},
+      {"day":8,"shift":1,"area":1,"reason":"material","called":"14:12","arrived":"14:14","solved":"14:21","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":8,"shift":1,"area":2,"reason":"quality","called":"15:41","arrived":"15:42","solved":"15:48","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":8,"shift":1,"area":0,"reason":"other","called":"19:22","arrived":"19:24","solved":"19:26","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":8,"shift":1,"area":3,"reason":"machine","called":"21:48","arrived":"21:49","solved":"21:53","by":2,"stop":0,"stopMin":0,"note":""},
+      {"day":9,"shift":0,"area":1,"reason":"material","called":"08:15","arrived":"08:18","solved":"08:23","by":0,"stop":1,"stopMin":8,"note":""},
+      {"day":9,"shift":0,"area":4,"reason":"machine","called":"09:53","arrived":"10:00","solved":"10:12","by":2,"stop":1,"stopMin":19,"note":""},
+      {"day":9,"shift":0,"area":1,"reason":"it","called":"10:30","arrived":"10:33","solved":"10:37","by":3,"stop":1,"stopMin":4,"note":""},
+      {"day":9,"shift":0,"area":1,"reason":"quality","called":"12:39","arrived":"12:41","solved":"12:43","by":4,"stop":1,"stopMin":4,"note":""},
+      {"day":9,"shift":1,"area":1,"reason":"material","called":"14:26","arrived":"14:28","solved":"14:30","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":9,"shift":1,"area":0,"reason":"it","called":"15:46","arrived":"15:53","solved":"15:55","by":3,"stop":1,"stopMin":9,"note":""},
+      {"day":9,"shift":1,"area":2,"reason":"it","called":"17:51","arrived":"17:53","solved":"18:06","by":3,"stop":1,"stopMin":15,"note":"scannerReboot"},
+      {"day":9,"shift":1,"area":1,"reason":"machine","called":"18:01","arrived":"18:03","solved":"18:12","by":2,"stop":0,"stopMin":0,"note":"conveyorJam"},
+      {"day":10,"shift":0,"area":0,"reason":"it","called":"10:34","arrived":"10:35","solved":"10:40","by":3,"stop":0,"stopMin":0,"note":""},
+      {"day":10,"shift":0,"area":1,"reason":"machine","called":"10:59","arrived":"11:05","solved":"11:23","by":2,"stop":1,"stopMin":24,"note":""},
+      {"day":10,"shift":0,"area":1,"reason":"safety","called":"11:51","arrived":"11:53","solved":"11:54","by":1,"stop":1,"stopMin":3,"note":""},
+      {"day":10,"shift":0,"area":2,"reason":"machine","called":"12:52","arrived":"12:55","solved":"13:04","by":2,"stop":1,"stopMin":12,"note":""},
+      {"day":10,"shift":0,"area":1,"reason":"material","called":"13:25","arrived":"13:27","solved":"13:31","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":10,"shift":1,"area":2,"reason":"material","called":"15:17","arrived":"15:20","solved":"15:26","by":0,"stop":1,"stopMin":9,"note":"palletMissing"},
+      {"day":10,"shift":1,"area":4,"reason":"machine","called":"15:22","arrived":"15:24","solved":"15:38","by":2,"stop":0,"stopMin":0,"note":"conveyorJam"},
+      {"day":10,"shift":1,"area":1,"reason":"material","called":"15:41","arrived":"15:43","solved":"15:50","by":0,"stop":0,"stopMin":0,"note":"labelsOut"},
+      {"day":10,"shift":1,"area":3,"reason":"quality","called":"20:34","arrived":"20:35","solved":"20:43","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":0,"area":3,"reason":"people","called":"06:47","arrived":"06:51","solved":"06:53","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":0,"area":3,"reason":"safety","called":"07:15","arrived":"07:17","solved":"07:20","by":1,"stop":1,"stopMin":3,"note":""},
+      {"day":11,"shift":0,"area":2,"reason":"material","called":"08:10","arrived":"08:12","solved":"08:14","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":0,"area":0,"reason":"quality","called":"08:28","arrived":"08:38","solved":"08:43","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":0,"area":2,"reason":"quality","called":"10:15","arrived":"10:17","solved":"10:22","by":4,"stop":0,"stopMin":0,"note":"wrongItem"},
+      {"day":11,"shift":0,"area":1,"reason":"it","called":"11:49","arrived":"11:52","solved":"11:55","by":3,"stop":1,"stopMin":6,"note":"scannerReboot"},
+      {"day":11,"shift":1,"area":3,"reason":"people","called":"15:05","arrived":"15:10","solved":"15:40","by":5,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":1,"area":1,"reason":"people","called":"15:19","arrived":"15:27","solved":"15:28","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":1,"area":2,"reason":"material","called":"15:50","arrived":"15:52","solved":"15:58","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":1,"area":1,"reason":"quality","called":"21:14","arrived":"21:15","solved":"21:18","by":4,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":1,"area":1,"reason":"material","called":"21:34","arrived":"21:36","solved":"21:42","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":11,"shift":1,"area":3,"reason":"machine","called":"23:41","arrived":"23:46","solved":"00:13","by":2,"stop":1,"stopMin":32,"note":"dockLeveller"},
+      {"day":12,"shift":0,"area":1,"reason":"material","called":"06:48","arrived":"06:50","solved":"06:52","by":0,"stop":1,"stopMin":4,"note":""},
+      {"day":12,"shift":0,"area":2,"reason":"machine","called":"10:56","arrived":"10:58","solved":"11:17","by":2,"stop":1,"stopMin":18,"note":"conveyorJam"},
+      {"day":12,"shift":0,"area":1,"reason":"material","called":"11:06","arrived":"11:08","solved":"11:12","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":12,"shift":0,"area":2,"reason":"other","called":"11:31","arrived":"11:34","solved":"11:35","by":0,"stop":0,"stopMin":0,"note":""},
+      {"day":12,"shift":1,"area":2,"reason":"material","called":"15:06","arrived":"15:09","solved":"15:13","by":0,"stop":0,"stopMin":0,"note":"palletMissing"},
+      {"day":12,"shift":1,"area":2,"reason":"material","called":"18:10","arrived":"18:11","solved":"18:12","by":0,"stop":0,"stopMin":0,"note":"labelsOut"},
+      {"day":12,"shift":1,"area":0,"reason":"people","called":"19:10","arrived":"19:13","solved":"19:15","by":0,"stop":0,"stopMin":0,"note":""}
+    ]
+  }
+}

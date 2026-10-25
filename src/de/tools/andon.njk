@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Andon-Protokoll
+seo_title: "Andon-Protokoll für Lager und Linie: Reaktionszeit, Lösungszeit, Eskalation und Stillstand"
+description: "Ein privates Andon-Protokoll: jeder Hilferuf live mit laufender Uhr oder nachträglich, Reaktions- und Lösungszeit, Eskalation und Stillstandsminuten."
+activeNav: /de/tools.html
+permalink: /de/tools/andon/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Betrieb</p>
+  <h1>Andon-Protokoll</h1>
+  <p class="lede">Erfassen Sie jeden Hilferuf auf der Fläche: einen Linienstopp, fehlendes Material, einen Qualitätszweifel, eine Gefahr für die Sicherheit, einen ausgefallenen Scanner oder ein ausgefallenes System. Tippen Sie auf den Grund, und die Uhr läuft; drücken Sie „Hilfe vor Ort“, sobald jemand da ist, und „Gelöst“, wenn die Arbeit wieder läuft, oder tragen Sie die Zeiten nach der Schicht ein. Das Protokoll zeigt, wie schnell Hilfe kommt und wie schnell Probleme gelöst werden, gemessen an Ihren Zielen, wer bei einem noch offenen Ruf jetzt gerufen werden muss, die Gründe und Stunden hinter den meisten Rufen und die Minuten, in denen die Linie stand.</p>
+</section>
+
+{% set cfg = de.andon %}
+{% include "partials/andon.njk" %}
