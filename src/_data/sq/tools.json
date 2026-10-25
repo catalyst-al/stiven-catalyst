@@ -366,5 +366,13 @@
     "summary": "Global 8D për një problem që e pa një klient, D0 deri D8: kufizimi brenda një dite, 5W2H dhe ËSHTË / NUK ËSHTË, shkaku rrënjësor dhe pika e moszbulimit të verifikuara, veprimet korrigjuese të vërtetuara me të dhëna. Ditët e hapura dhe deri te kufizimi kundrejt afateve, çdo veprim te lista, printim dhe Word.",
     "url": "/sq/tools/eight-d/",
     "cta": "Hap një 8D"
+  },
+  {
+    "name": "Vlerësimi i rrezikut",
+    "type": "Siguria",
+    "time": "Për çdo zonë",
+    "summary": "Vlerësimi i dokumentuar i rrezikut për çdo zonë pune: burimet e rrezikut nga njëmbëdhjetë grupet e faktorëve, gjasat × rëndesa në një matricë 5 × 5, masat sipas rendit STOP me përgjegjës dhe kontrollin e efektivitetit, rreziku i mbetur dhe data e rishikimit, përballë ngjarjeve të kryqit të sigurisë.",
+    "url": "/sq/tools/risk-assessment/",
+    "cta": "Vlerëso rreziqet"
   }
 ]

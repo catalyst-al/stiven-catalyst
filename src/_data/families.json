@@ -132,7 +132,8 @@
       "/tools/signals/",
       "/tools/housekeeping-planner/",
       "/tools/leader-standard-work/",
-      "/tools/shift-capacity/"
+      "/tools/shift-capacity/",
+      "/tools/risk-assessment/"
     ],
     "learn": [],
     "also": [
@@ -236,6 +237,11 @@
         "when": "Every week",
         "do": "Paste next week's volume forecast before the roster closes and close every shift that is short of hours with a move, overtime or agency booking.",
         "tool": "/tools/shift-capacity/"
+      },
+      {
+        "when": "Every month",
+        "do": "Walk one area with the people who work there, close or re-date its overdue measures and check the effect of the ones done.",
+        "tool": "/tools/risk-assessment/"
       }
     ],
     "next": "lumen"

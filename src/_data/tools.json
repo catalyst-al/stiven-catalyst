@@ -366,5 +366,13 @@
     "summary": "The Global 8D for a problem a customer saw, D0 to D8: containment within a day, 5W2H and IS / IS NOT, the root cause and the escape point both verified, corrective actions validated with data. Days open and to containment against targets, every action to the tracker, print and Word.",
     "url": "/tools/eight-d/",
     "cta": "Open an 8D"
+  },
+  {
+    "name": "Risk Assessment",
+    "type": "Safety",
+    "time": "Per area",
+    "summary": "The documented risk assessment of each work area: hazards from the eleven hazard-factor groups, likelihood × severity on a 5 × 5 matrix, measures in the STOP order with owners and their effectiveness check, the residual risk and the review date, set against the events of the Safety Cross.",
+    "url": "/tools/risk-assessment/",
+    "cta": "Assess the risks"
   }
 ]

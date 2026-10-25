@@ -89,6 +89,7 @@ const RECIPES = {
   "inventory-abc": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "smed": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "eight-d": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "risk-assessment": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).

@@ -366,5 +366,13 @@
     "summary": "Der Global 8D für ein Problem, das ein Kunde gesehen hat, D0 bis D8: Eindämmung innerhalb eines Tages, 5W2H und IST / IST NICHT, Grundursache und Schlupfstelle geprüft, Abstellmaßnahmen mit Daten validiert. Tage offen und bis zur Eindämmung gegen Zielzeiten, jede Maßnahme in die Maßnahmenliste, Druck und Word.",
     "url": "/de/tools/eight-d/",
     "cta": "8D eröffnen"
+  },
+  {
+    "name": "Gefährdungsbeurteilung",
+    "type": "Sicherheit",
+    "time": "Je Bereich",
+    "summary": "Die dokumentierte Gefährdungsbeurteilung jedes Arbeitsbereichs: Gefährdungen aus den elf Gruppen der Gefährdungsfaktoren, Wahrscheinlichkeit × Schwere auf einer 5 × 5 Matrix, Maßnahmen nach dem STOP-Prinzip mit Verantwortlichen und Wirksamkeitskontrolle, Restrisiko und Überprüfungstermin, abgeglichen mit den Ereignissen des Sicherheitskreuzes.",
+    "url": "/de/tools/risk-assessment/",
+    "cta": "Gefährdungen beurteilen"
   }
 ]
