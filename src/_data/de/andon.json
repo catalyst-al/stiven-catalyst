@@ -79,11 +79,11 @@
     },
     {
       "name": "Supervisor",
-      "after": 5
+      "after": 15
     },
     {
       "name": "Schichtleitung",
-      "after": 15
+      "after": 30
     }
   ],
   "targets": {

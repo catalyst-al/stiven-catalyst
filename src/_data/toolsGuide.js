@@ -749,7 +749,7 @@ const en = {
       when: "The moment someone on the floor needs help, live with a running clock, and after the shift for a call that was not logged as it happened.",
       how: [
         "Choose the station and the shift, then tap the reason: the clock starts. [[Help arrived]] when someone is there, [[Solved]] when the work runs again.",
-        "Each open call says who to call now: the team lead at once, the supervisor after 5 minutes, the shift manager after 15. Note who responded and whether the line stopped.",
+        "Each open call says who to call now: the team lead at once, the supervisor after 15 minutes, the shift manager after 30. Note who responded and whether the line stopped.",
         "Log a call after the fact with the times it was called, help arrived and it was solved, and [[Add to log]], or paste rows with [[Import rows]].",
         "Set the period, the filters and the targets, respond within 3 and solve within 15 minutes by default, and the escalation minutes agreed with the team.",
       ],
@@ -1563,7 +1563,7 @@ const sq = {
       when: "Në çastin kur dikush në terren ka nevojë për ndihmë, drejtpërdrejt me orën që ecën, dhe pas turnit për një thirrje që nuk u regjistrua kur ndodhi.",
       how: [
         "Zgjidh stacionin dhe turnin, pastaj prek arsyen: ora nis. [[Help arrived]] kur dikush është aty, [[Solved]] kur puna rinis.",
-        "Çdo thirrje e hapur të thotë kë të thërrasësh tani: përgjegjësin e ekipit menjëherë, supervizorin pas 5 minutash, menaxherin e turnit pas 15. Shëno kush ndihmoi dhe nëse u ndal linja.",
+        "Çdo thirrje e hapur të thotë kë të thërrasësh tani: përgjegjësin e ekipit menjëherë, supervizorin pas 15 minutash, menaxherin e turnit pas 30. Shëno kush ndihmoi dhe nëse u ndal linja.",
         "Regjistro një thirrje më pas, me orën e thirrjes, të mbërritjes së ndihmës dhe të zgjidhjes, dhe shtyp [[Add to log]], ose ngjit rreshtat me [[Import rows]].",
         "Cakto periudhën, filtrat dhe objektivat, si parazgjedhje reagimi brenda 3 dhe zgjidhja brenda 15 minutash, dhe minutat e përshkallëzimit që ke rënë dakord me ekipin.",
       ],
@@ -2377,7 +2377,7 @@ const de = {
       when: "Sobald jemand in der Fläche Hilfe braucht, live mit laufender Uhr, und nach der Schicht für einen Ruf, der nicht sofort erfasst wurde.",
       how: [
         "Wählen Sie Station und Schicht und tippen Sie auf den Grund: Die Uhr läuft. [[Help arrived]], wenn jemand da ist, [[Solved]], wenn die Arbeit wieder läuft.",
-        "Jeder offene Ruf zeigt, wer jetzt zu rufen ist: die Teamleitung sofort, der Supervisor nach 5 Minuten, die Schichtleitung nach 15. Notieren Sie, wer geholfen hat und ob die Linie stand.",
+        "Jeder offene Ruf zeigt, wer jetzt zu rufen ist: die Teamleitung sofort, der Supervisor nach 15 Minuten, die Schichtleitung nach 30. Notieren Sie, wer geholfen hat und ob die Linie stand.",
         "Erfassen Sie einen Ruf nachträglich mit den Zeiten für Ruf, Hilfe vor Ort und Lösung und [[Add to log]], oder fügen Sie Zeilen mit [[Import rows]] ein.",
         "Legen Sie Zeitraum, Filter und Ziele fest, standardmäßig Reaktion in 3 und Lösung in 15 Minuten, und die mit dem Team vereinbarten Eskalationsminuten.",
       ],
