@@ -7546,5 +7546,7 @@
   "Scores per assessor, the mean and the spread (highest minus lowest). N/A is left out of every mean.": "Werte je Bewerter, der Mittelwert und die Spannweite (höchster minus niedrigster Wert). N/A zählt in keinem Mittelwert.",
   "The levels": "Die Stufen",
   "What each score means, for every dimension.": "Was jeder Wert bedeutet, für jede Dimension.",
-  "New assessment started. The earlier ones stay in the history.": "Neue Bewertung begonnen. Die früheren bleiben im Verlauf."
+  "New assessment started. The earlier ones stay in the history.": "Neue Bewertung begonnen. Die früheren bleiben im Verlauf.",
+  "Read the meters on Monday morning, type them in, and send any meter that drifts above its baseline to the Action Tracker as a check.": "Lesen Sie die Zähler am Montagmorgen ab, tragen Sie die Stände ein und geben Sie jeden Zähler, der über seinen Ausgangswert steigt, als Prüfung in die Maßnahmenliste.",
+  "Score each area with two assessors, talk through every flagged disagreement on the floor, and send the three weakest dimensions to the Action Tracker.": "Bewerten Sie jeden Bereich mit zwei Bewertern, besprechen Sie jede markierte Uneinigkeit vor Ort und geben Sie die drei schwächsten Dimensionen an die Maßnahmenliste."
 }

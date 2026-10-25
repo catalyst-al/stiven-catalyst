@@ -454,5 +454,21 @@
     "summary": "Çdo pajisje kundër gabimeve në një regjistër: gabimi që parandalon, metoda sipas Shingo, ndalim ose paralajmërim, parandalim ose zbulim. Testoje secilën sipas planit me një gabim të qëllimshëm; shiko vonesat dhe defektet, respektimin e verifikimeve, efektivitetin e çdo pajisjeje dhe një listë për ta printuar.",
     "url": "/sq/tools/poka-yoke/",
     "cta": "Hap regjistrin"
+  },
+  {
+    "name": "Energjia dhe uji",
+    "type": "Qëndrueshmëria",
+    "time": "Çdo javë",
+    "summary": "Leximet e njehsorëve të energjisë elektrike, gazit, ujit, ngrohjes qendrore ose naftës të kthyera në konsum, kosto dhe CO₂ për çdo periudhë, kWh për natë dhome të zënë ose për porosi, çdo njehsor kundrejt vlerës së vet fillestare dhe një sinjal kur një javë ngrihet mbi të.",
+    "url": "/sq/tools/energy-tracker/",
+    "cta": "Lexo njehsorët"
+  },
+  {
+    "name": "Vlerësimi i pjekurisë Lean",
+    "type": "Lean",
+    "time": "Çdo tremujor",
+    "summary": "Vlerëso sa i pjekur është sistemi Lean i një zone në dhjetë dimensione, nga 5S te kaizen, me deri në pesë vlerësues: shpërndarja tregon ku nuk pajtohen, radari ndryshimin që nga tremujori i kaluar, dhe tri dimensionet më të dobëta të çojnë te mjetet që i mbyllin.",
+    "url": "/sq/tools/lean-assessment/",
+    "cta": "Vlerëso një zonë"
   }
 ]

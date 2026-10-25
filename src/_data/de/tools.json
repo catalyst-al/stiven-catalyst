@@ -454,5 +454,21 @@
     "summary": "Jede Fehlhandlungssicherung in einem Register: der Fehler, den sie verhindert, die Methode nach Shingo, Eingriff oder Warnung, Vermeidung oder Entdeckung. Jede nach Plan mit einem absichtlichen Fehler prüfen; Überfälliges und Ausfälle, Prüftreue, Wirksamkeit je Sicherung und eine Checkliste zum Drucken.",
     "url": "/de/tools/poka-yoke/",
     "cta": "Register öffnen"
+  },
+  {
+    "name": "Energie und Wasser",
+    "type": "Nachhaltigkeit",
+    "time": "Wöchentlich",
+    "summary": "Zählerstände für Strom, Gas, Wasser, Fernwärme oder Heizöl als Verbrauch, Kosten und CO₂ für jeden Zeitraum, kWh pro belegte Zimmernacht oder pro Auftrag, jeder Zähler gegen seinen eigenen Ausgangswert und ein Signal, wenn eine Woche darüber steigt.",
+    "url": "/de/tools/energy-tracker/",
+    "cta": "Zähler auswerten"
+  },
+  {
+    "name": "Lean-Reifegradbewertung",
+    "type": "Lean",
+    "time": "Quartalsweise",
+    "summary": "Bewerten Sie den Lean-Reifegrad eines Bereichs in zehn Dimensionen, von 5S bis Kaizen, mit bis zu fünf Bewertern: Die Spannweite zeigt, wo sie sich uneinig sind, das Radar die Veränderung seit dem letzten Quartal, und die drei schwächsten Dimensionen führen zu den Tools, die sie schließen.",
+    "url": "/de/tools/lean-assessment/",
+    "cta": "Bereich bewerten"
   }
 ]

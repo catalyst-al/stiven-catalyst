@@ -454,5 +454,21 @@
     "summary": "Every mistake-proofing device in one register: the error it prevents, Shingo's method, control or warning, prevention or detection. Test each on schedule with a deliberate error; see what is overdue or failed, verification compliance, effectiveness per device and a checklist to print.",
     "url": "/tools/poka-yoke/",
     "cta": "Open the register"
+  },
+  {
+    "name": "Energy & Water",
+    "type": "Sustainability",
+    "time": "Weekly",
+    "summary": "Meter readings for electricity, gas, water, district heat or oil turned into use, cost and CO₂ for any period, kWh per occupied room night or per order, each meter against its own baseline, and a signal when a week drifts above it.",
+    "url": "/tools/energy-tracker/",
+    "cta": "Read the meters"
+  },
+  {
+    "name": "Lean Assessment",
+    "type": "Lean",
+    "time": "Quarterly",
+    "summary": "Score how mature an area's lean system is in ten dimensions, from 5S to kaizen, with up to five assessors: the spread shows where they disagree, the radar the change since last quarter, and the three weakest dimensions link to the tools that close them.",
+    "url": "/tools/lean-assessment/",
+    "cta": "Assess an area"
   }
 ]

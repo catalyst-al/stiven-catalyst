@@ -1,0 +1,345 @@
+{
+  "storageKey": "sc-energy-tracker",
+  "text": {
+    "tool": "Energy & Water",
+    "csv": "energy-water",
+    "metersLegend": "Meters",
+    "metersNote": "One line per meter you read: the main electricity meter, the gas meter, the water meter, a sub-meter for the kitchen or the cold store. The price is the energy or water price per unit without the fixed charges (Grundpreis); the figures of the example are only examples, take yours from your contract or last bill.",
+    "gasNote": "Gas meters count m³; the bill converts them into kWh: kWh = m³ × calorific value (Brennwert) × Zustandszahl, the method of DVGW worksheet G 685. Both figures are on your gas bill. 11.0 kWh/m³ and 0.95 are defaults only: take yours from your bill.",
+    "oilNote": "Heating oil: 10 kWh per litre is a default (heating oil EL, net calorific value). Take the figure your supplier gives.",
+    "tariffNote": "Electricity, gas and district heat are priced per kWh, as on the bill; heating oil per litre; water per m³ including wastewater.",
+    "entryLegend": "Add a reading",
+    "readingPlaceholder": "e.g. 1284310",
+    "notePlaceholder": "e.g. Read by the night audit at 06:00",
+    "replacedNote": "Tick it when this is the first reading of a new meter (a swap, a reset). With the old meter's last reading the use up to the swap still counts; without it the days since the reading before stay a gap and are shown as one. A reading lower than the one before without this tick is treated as an error and also left as a gap.",
+    "spreadNote": "A reading closes the days before it: the use between two readings is spread evenly over the days between them, so weeks and months can be built from readings taken on any day. Days not between two readings of a meter have no figure; they are never filled in.",
+    "denomLegend": "Per occupied room or per unit",
+    "denomNote": "The figure the use is divided by, day by day: occupied room nights in a hotel, orders or pallets in a warehouse. Enter one day at a time or paste a list of days. A figure entered here wins over the one from Hotel KPIs.",
+    "hotelNote": "Hotel KPIs in this browser has rooms sold for {n} nights ({from} – {to}). They are read only, never changed.",
+    "hotelNone": "No nights from Hotel KPIs in this browser in this language.",
+    "denomPastePlaceholder": "2026-10-12\t118",
+    "settingsLegend": "Period, meter, baseline and CO₂",
+    "baselineNote": "The baseline is the first complete weeks with readings (or the period you set), per occupied room or unit when there are figures, else per day. A week more than the threshold above it is a signal.",
+    "hsHiShown": "1.11",
+    "factorNote": "CO₂ factors per kWh (water per m³). The defaults are rounded and count CO₂ only, without other gases or the upstream chain: check the current UBA value or your supplier's label, and type your own.",
+    "hsHiNote": "Gas bills are in kWh on the gross calorific value (Brennwert, Hs); the BAFA factor for natural gas is per kWh on the net calorific value (Hi). The tool divides by Hs/Hi = 1.11, the ratio for natural gas in DIN V 18599.",
+    "weatherNote": "Heating energy follows the weather. Before you act on a gas, oil or district heat signal, compare with the heating degree days of the same weeks (your weather service or energy supplier publishes them).",
+    "pasteRow": "One row per reading",
+    "pastePlaceholder": "2026-10-12\tElectricity main\t1284310\t\t\tRead at 06:00",
+    "empty": "No readings yet.",
+    "allMeters": "All meters",
+    "newMeter": "New meter"
+  },
+  "media": [
+    {
+      "key": "electricity",
+      "name": "Electricity",
+      "unit": "kWh",
+      "tariffUnit": "kWh",
+      "co2": 0.38,
+      "co2Shown": "0.38",
+      "co2Unit": "kWh",
+      "co2Source": "Default 0.38 kg CO₂/kWh: Umweltbundesamt (UBA), German electricity mix 2023, estimate, CO₂ only. Check the current UBA value or your supplier's label."
+    },
+    {
+      "key": "gas",
+      "name": "Natural gas",
+      "unit": "m³",
+      "tariffUnit": "kWh",
+      "co2": 0.201,
+      "co2Shown": "0.201",
+      "co2Unit": "kWh",
+      "co2Source": "Default 0.201 kg CO₂/kWh: BAFA information sheet on CO₂ factors, natural gas, per kWh on the net calorific value (Hi). Check the current value."
+    },
+    {
+      "key": "water",
+      "name": "Water",
+      "unit": "m³",
+      "tariffUnit": "m³",
+      "co2": 0,
+      "co2Shown": "",
+      "co2Unit": "m³",
+      "co2Source": "No default: the CO₂ of supply and wastewater treatment depends on the utility. Leave it empty or type the figure your utility gives."
+    },
+    {
+      "key": "heat",
+      "name": "District heat",
+      "unit": "kWh",
+      "tariffUnit": "kWh",
+      "co2": 0,
+      "co2Shown": "",
+      "co2Unit": "kWh",
+      "co2Source": "No default: district heat is supplier-specific. Type the CO₂ factor your supplier publishes for your network."
+    },
+    {
+      "key": "oil",
+      "name": "Heating oil",
+      "unit": "l",
+      "tariffUnit": "l",
+      "co2": 0.266,
+      "co2Shown": "0.266",
+      "co2Unit": "kWh",
+      "co2Source": "Default 0.266 kg CO₂/kWh: BAFA information sheet on CO₂ factors, heating oil, net calorific value. Check the current value."
+    }
+  ],
+  "conversion": {
+    "calorific": 11,
+    "zustand": 0.95,
+    "oilKwhPerLitre": 10,
+    "hsHi": 1.11
+  },
+  "denominators": [
+    {
+      "key": "rooms",
+      "name": "Occupied room nights",
+      "one": "occupied room night",
+      "per": "per occupied room night"
+    },
+    {
+      "key": "orders",
+      "name": "Orders",
+      "one": "order",
+      "per": "per order"
+    },
+    {
+      "key": "pallets",
+      "name": "Pallets",
+      "one": "pallet",
+      "per": "per pallet"
+    },
+    {
+      "key": "units",
+      "name": "Units handled",
+      "one": "unit",
+      "per": "per unit"
+    }
+  ],
+  "signal": {
+    "threshold": 10,
+    "baselineWeeks": 4
+  },
+  "meters": [
+    {
+      "id": "m1",
+      "name": "Electricity main",
+      "medium": "electricity",
+      "tariff": "",
+      "calorific": "",
+      "zustand": "",
+      "kwhPerLitre": ""
+    },
+    {
+      "id": "m2",
+      "name": "Gas",
+      "medium": "gas",
+      "tariff": "",
+      "calorific": "",
+      "zustand": "",
+      "kwhPerLitre": ""
+    },
+    {
+      "id": "m3",
+      "name": "Water",
+      "medium": "water",
+      "tariff": "",
+      "calorific": "",
+      "zustand": "",
+      "kwhPerLitre": ""
+    }
+  ],
+  "weekdays": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+  "weekdaysLong": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+  "advice": {
+    "electricity": {
+      "meaning": "Electricity per unit has risen while the work it serves has not. Most often something runs that should not: a base load at night, ventilation or cooling on a wrong schedule, a fault that makes a machine work harder.",
+      "moves": [
+        "Read the meter at night or at the quietest hour for three days: the base load shows what runs when nobody needs it.",
+        "Walk the building with the engineer at that hour: extraction, chillers, cold rooms, compressed air, lighting, chargers.",
+        "Check the timers and set points of ventilation and cooling against the hours of use, and repair what is faulty."
+      ],
+      "question": "What has been running since the week the line went up that was not running before?"
+    },
+    "gas": {
+      "meaning": "Gas per unit has risen. Heating follows the weather, so first rule that out; then look at hot water, the kitchen and the boiler settings.",
+      "moves": [
+        "Compare the weeks with the heating degree days: colder weeks explain a rise in heating gas.",
+        "Check the boiler and heating schedules, the flow temperature and the hot water temperature against what is needed.",
+        "Look for leaks of hot water (dripping taps, showers, the kitchen dishwasher) and for burners left on."
+      ],
+      "question": "Is it the weather, or did a setting, a schedule or a leak change?"
+    },
+    "water": {
+      "meaning": "Water per unit has risen. Water rarely rises by itself: a leak, a cistern that runs, an irrigation or a cooling tower setting.",
+      "moves": [
+        "Read the meter at night with nothing in use: if it turns, water is leaking somewhere.",
+        "Check the toilets and cisterns, the showers, the kitchen and the laundry for running water.",
+        "Check irrigation, cooling towers and the water softener for a wrong programme."
+      ],
+      "question": "Does the meter turn when nothing is in use?"
+    },
+    "heat": {
+      "meaning": "District heat per unit has risen. Like gas it follows the weather; after that, the transfer station and the heating schedules decide.",
+      "moves": [
+        "Compare the weeks with the heating degree days.",
+        "Check the return temperature at the transfer station: a high return wastes heat and may cost a surcharge.",
+        "Check the heating schedules and the hot water temperature."
+      ],
+      "question": "Is it the weather, or the schedules and the return temperature?"
+    },
+    "oil": {
+      "meaning": "Heating oil per unit has risen. Rule out the weather and the tank readings first (a delivery read as use), then the burner.",
+      "moves": [
+        "Check that no delivery was recorded as a reading: oil is read as what was used, not what is in the tank.",
+        "Compare the weeks with the heating degree days.",
+        "Have the burner and its settings checked."
+      ],
+      "question": "Is the reading right, and is it the weather or the burner?"
+    },
+    "default": {
+      "meaning": "Use per unit is above the baseline.",
+      "moves": [
+        "Check the readings of the last weeks for a typing error.",
+        "Walk the area with the person responsible for the equipment.",
+        "Agree one change and read the meter again next week."
+      ],
+      "question": "What changed in the week the line went up?"
+    }
+  },
+  "tips": [
+    [
+      "Read on the same day and hour.",
+      "Monday at 06:00 by the night audit, for example. The tool spreads irregular readings over the days between them, but regular ones make the weeks easy to compare."
+    ],
+    [
+      "Type the meter as it shows.",
+      "The whole number on the counter, not the use: the tool works out the use between two readings."
+    ],
+    [
+      "A new meter starts at its own reading.",
+      "Tick “meter replaced” and give the old meter's last reading, so nothing is lost at the swap."
+    ],
+    [
+      "Divide by the work.",
+      "Electricity per occupied room night or per order says more than the total: a full week uses more than a quiet one."
+    ],
+    [
+      "Use the prices and factors of your bill.",
+      "The defaults are only defaults. Your contract, your gas bill and your supplier's label give the figures that count."
+    ]
+  ],
+  "example": {
+    "start": "2026-06-29",
+    "rooms": 140,
+    "settings": {
+      "denom": "rooms",
+      "threshold": 10,
+      "baselineWeeks": 4
+    },
+    "meters": [
+      {
+        "id": "m1",
+        "name": "Electricity main",
+        "medium": "electricity",
+        "tariff": "0.24",
+        "calorific": "",
+        "zustand": "",
+        "kwhPerLitre": ""
+      },
+      {
+        "id": "m2",
+        "name": "Gas",
+        "medium": "gas",
+        "tariff": "0.085",
+        "calorific": "11.15",
+        "zustand": "0.9542",
+        "kwhPerLitre": ""
+      },
+      {
+        "id": "m3",
+        "name": "Water",
+        "medium": "water",
+        "tariff": "4.80",
+        "calorific": "",
+        "zustand": "",
+        "kwhPerLitre": ""
+      }
+    ],
+    "notes": {
+      "smart": "Smart meter portal: daily readings from now on",
+      "late": "Read a day late (Tuesday)",
+      "replaced": "Meter replaced by the utility (calibration due)",
+      "skipped": "Reading of the week before missed"
+    },
+    "occupied": [116,120,120,119,96,89,92,119,126,126,115,98,88,92,119,121,126,119,93,88,91,115,119,118,111,93,84,84,115,121,117,111,92,84,86,114,122,121,111,86,84,86,116,119,117,110,87,84,87,124,121,122,117,92,89,90,119,123,125,114,98,91,90,122,124,126,114,94,92,96,118,122,126,121,99,91,95,120,126,121,120,95,86,89,124,125,125,117,94,89,90,118,126,121,120,98,92,91,121,126,125,117,95,90,95,124,121,122,117,93,88,96],
+    "readings": [
+      {"day":0,"meter":"m1","value":1284310,"note":""},
+      {"day":0,"meter":"m2","value":418562,"note":""},
+      {"day":0,"meter":"m3","value":35214.6,"note":""},
+      {"day":7,"meter":"m1","value":1309099,"note":""},
+      {"day":7,"meter":"m2","value":419522,"note":""},
+      {"day":7,"meter":"m3","value":35518.9,"note":""},
+      {"day":14,"meter":"m1","value":1334396,"note":""},
+      {"day":14,"meter":"m2","value":420489,"note":""},
+      {"day":14,"meter":"m3","value":35827.3,"note":""},
+      {"day":21,"meter":"m1","value":1359429,"note":""},
+      {"day":21,"meter":"m2","value":421459,"note":""},
+      {"day":21,"meter":"m3","value":36128.5,"note":""},
+      {"day":28,"meter":"m1","value":1383375,"note":""},
+      {"day":28,"meter":"m2","value":422406,"note":""},
+      {"day":28,"meter":"m3","value":36423.1,"note":""},
+      {"day":35,"meter":"m1","value":1407786,"note":""},
+      {"day":35,"meter":"m2","value":423356,"note":""},
+      {"day":42,"meter":"m1","value":1431922,"note":""},
+      {"day":42,"meter":"m2","value":424289,"note":""},
+      {"day":42,"meter":"m3","value":37014.5,"note":"skipped"},
+      {"day":49,"meter":"m1","value":1456058,"note":""},
+      {"day":49,"meter":"m2","value":425252,"note":""},
+      {"day":49,"meter":"m3","value":37309,"note":""},
+      {"day":56,"meter":"m1","value":1480903,"note":""},
+      {"day":56,"meter":"m2","value":426220,"note":""},
+      {"day":56,"meter":"m3","value":0,"replaced":true,"oldFinal":37615.7,"note":"replaced"},
+      {"day":63,"meter":"m2","value":427188,"note":""},
+      {"day":63,"meter":"m3","value":309.7,"note":""},
+      {"day":64,"meter":"m1","value":1509578,"note":"late"},
+      {"day":70,"meter":"m1","value":1530977,"note":""},
+      {"day":70,"meter":"m2","value":428172,"note":""},
+      {"day":70,"meter":"m3","value":611.4,"note":""},
+      {"day":77,"meter":"m1","value":1556125,"note":""},
+      {"day":77,"meter":"m2","value":429147,"note":""},
+      {"day":77,"meter":"m3","value":919.4,"note":""},
+      {"day":84,"meter":"m1","value":1581268,"note":""},
+      {"day":84,"meter":"m2","value":430109,"note":""},
+      {"day":84,"meter":"m3","value":1230.5,"note":""},
+      {"day":91,"meter":"m1","value":1606729,"note":"smart"},
+      {"day":91,"meter":"m2","value":431078,"note":""},
+      {"day":91,"meter":"m3","value":1539.3,"note":""},
+      {"day":92,"meter":"m1","value":1610523,"note":""},
+      {"day":93,"meter":"m1","value":1614416,"note":""},
+      {"day":94,"meter":"m1","value":1618243,"note":""},
+      {"day":95,"meter":"m1","value":1622100,"note":""},
+      {"day":96,"meter":"m1","value":1625478,"note":""},
+      {"day":97,"meter":"m1","value":1628769,"note":""},
+      {"day":98,"meter":"m1","value":1631914,"note":""},
+      {"day":98,"meter":"m2","value":432060,"note":""},
+      {"day":98,"meter":"m3","value":1847,"note":""},
+      {"day":99,"meter":"m1","value":1636236,"note":""},
+      {"day":100,"meter":"m1","value":1640741,"note":""},
+      {"day":101,"meter":"m1","value":1645179,"note":""},
+      {"day":102,"meter":"m1","value":1649416,"note":""},
+      {"day":103,"meter":"m1","value":1653194,"note":""},
+      {"day":104,"meter":"m1","value":1656855,"note":""},
+      {"day":105,"meter":"m1","value":1660660,"note":""},
+      {"day":105,"meter":"m2","value":433057,"note":""},
+      {"day":105,"meter":"m3","value":2160.9,"note":""},
+      {"day":106,"meter":"m1","value":1665052,"note":""},
+      {"day":107,"meter":"m1","value":1669454,"note":""},
+      {"day":108,"meter":"m1","value":1673767,"note":""},
+      {"day":109,"meter":"m1","value":1677987,"note":""},
+      {"day":110,"meter":"m1","value":1681751,"note":""},
+      {"day":111,"meter":"m1","value":1685549,"note":""},
+      {"day":112,"meter":"m1","value":1689378,"note":""},
+      {"day":112,"meter":"m2","value":434047,"note":""},
+      {"day":112,"meter":"m3","value":2471.4,"note":""}
+    ]
+  }
+}

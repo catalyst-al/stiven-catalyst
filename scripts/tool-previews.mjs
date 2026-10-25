@@ -100,6 +100,8 @@ const RECIPES = {
   "kanban-sizing": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "andon": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "poka-yoke": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "energy-tracker": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "lean-assessment": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).

@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Energjia dhe uji
+seo_title: "Ndjekësi i energjisë dhe ujit për hotel dhe magazinë: leximet e njehsorëve në kWh, kosto, CO₂ dhe kWh për dhomë të zënë"
+description: "Një regjistër privat energjie dhe uji: leximet në konsum, kosto dhe CO₂, për natë dhome ose porosi, me sinjal kur një njehsor rritet mbi bazën."
+activeNav: /sq/tools.html
+permalink: /sq/tools/energy-tracker/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Mjet falas · Qëndrueshmëria</p>
+  <h1>Energjia dhe uji</h1>
+  <p class="lede">Shkruaj njehsorët ashtu siç i lexon: energjia elektrike, gazi, uji, ngrohja qendrore ose nafta e ngrohjes, në çdo ditë dhe aq shpesh sa i lexon. Mjeti llogarit konsumin mes leximeve dhe e shpërndan mbi ditët, e kthen gazin nga m³ në kWh si fatura dhe tregon konsumin, koston dhe CO₂ e çdo njehsori për çdo periudhë, për natë dhome të zënë në hotel ose për porosi a paletë në magazinë. Çdo njehsor krahasohet me vlerën e vet fillestare, dhe një javë që ngrihet mbi të bëhet sinjal dhe veprim.</p>
+</section>
+
+{% set cfg = sq.energyTracker %}
+{% include "partials/energy-tracker.njk" %}

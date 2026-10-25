@@ -1,0 +1,280 @@
+{
+  "storageKey": "sc-lean-assessment-sq",
+  "areas": ["Pranimi i mallit dhe vendosja", "Mbledhja e porosive", "Paketimi dhe dërgesa", "Recepsioni", "Housekeeping", "Stacioni i shpërndarjes"],
+  "text": {
+    "areaPlaceholder": "p.sh. Pranimi i mallit dhe vendosja",
+    "assessorPlaceholder": "Emri",
+    "notePlaceholder": "p.sh. Vlerësuar në terren gjatë turnit të mëngjesit, bashkë me drejtuesin e turnit."
+  },
+  "levels": [
+    { "name": "Reaktiv", "short": "Nuk ekziston, ose vetëm kur diçka shkon keq." },
+    { "name": "Nisur", "short": "Hapat e parë janë bërë, ende jo rutinë." },
+    { "name": "I përcaktuar", "short": "I përcaktuar dhe zbatohet në pjesën më të madhe." },
+    { "name": "I matur", "short": "Zbatohet dhe matet; mangësitë mbyllen." },
+    { "name": "I qëndrueshëm", "short": "Mbahet në kohë dhe përmirësohet nga vetë ekipi." }
+  ],
+  "dimensions": [
+    {
+      "key": "fiveS",
+      "name": "5S dhe menaxhimi vizual",
+      "short": "5S dhe vizualja",
+      "statements": [
+        "Në zonë ka vetëm atë që duhet për punën; sendet e panevojshme shënohen me etiketë të kuqe dhe hiqen.",
+        "Çdo vegël, material, skaner dhe karrocë ka një vend të shënuar, dhe një send që mungon bie në sy menjëherë.",
+        "Pastrimi dhe kontrolli bëhen sipas një plani me përgjegjës, dhe plani mbahet.",
+        "Shenjat në dysheme, etiketat dhe tabelat tregojnë normalen dhe devijimin pa pasur nevojë të pyesësh dikë.",
+        "Një audit 5S bëhet sipas planit, rezultati i tij afishohet dhe gjetjet e tij mbyllen."
+      ],
+      "levels": [
+        "Sende pa pronar grumbullohen në qoshe dhe korridore; çdo turn kërkon vegla, skanerë dhe transpaletë.",
+        "Është bërë një renditje e parë me etiketa të kuqe dhe disa vende janë shënuar, por shenjat janë të pjesshme ose të konsumuara dhe rrëmuja kthehet pas disa javësh.",
+        "Çdo send ka një vend të shënuar dhe me etiketë; një plan pastrimi me përgjegjës varet në zonë dhe mbahet në pjesën më të madhe.",
+        "Auditet 5S bëhen sipas planit, rezultati afishohet me ecurinë e tij dhe çdo gjetje merr përgjegjës dhe afat.",
+        "Vetë njerëzit e zonës bëjnë auditet dhe e ngrenë standardin pas çdo raundi; një vizitor gjen gjithçka për 30 sekonda."
+      ],
+      "advice": "Fillo në një zonë të vetme, jo në të gjithë hapësirën: shëno me etiketë të kuqe atë që nuk duhet, cakto një vend për atë që mbetet dhe bëj një audit të parë 5S si pikënisje. Përsërite auditin çdo javë derisa rezultati të mbahet.",
+      "tools": [{ "slug": "five-s-audit", "name": "Auditi 5S" }],
+      "action": "Renditje me etiketa të kuqe dhe audit i parë 5S në {area}",
+      "check": "Rezultati i auditit 5S në fillim dhe katër javë më vonë"
+    },
+    {
+      "key": "standardWork",
+      "name": "Puna standarde",
+      "short": "Puna standarde",
+      "statements": [
+        "Detyrat kryesore (pranimi i mallit, mbledhja e porosive, pastrimi i dhomës, ngarkimi i rrugës) kanë një standard të shkruar me hapat, pikat kyçe dhe arsyen e çdo pike kyçe.",
+        "Standardet varen aty ku bëhet puna, janë të përditësuara dhe tregojnë kush i ndryshoi për herë të fundit dhe kur.",
+        "Njerëzit punojnë sipas standardit: një vëzhgim i detyrës përputhet me atë që është shkruar.",
+        "Kur dikush gjen një mënyrë më të mirë, standardi ndryshohet dhe çdo turn trajnohet për ndryshimin."
+      ],
+      "levels": [
+        "Secili e bën detyrën në mënyrën e vet; metoda varet nga kush e ka trajnuar; rezultatet ndryshojnë sipas personit dhe turnit.",
+        "Për disa detyra ka standarde, por ato rrinë në një dosje ose në sistem, janë të vjetruara ose përshkruajnë idealin në vend të punës së vërtetë.",
+        "Standardet për detyrat kryesore varen në vendin e punës, janë të përditësuara dhe përdoren për trajnimin e të rinjve; shumica i ndjekin.",
+        "Drejtuesit vëzhgojnë zbatimin sipas planit; çdo devijim ose korrigjohet ose përdoret për të përmirësuar standardin.",
+        "Standardi është baza e përmirësimit: njerëzit që bëjnë punën e ndryshojnë disa herë në vit, me kohën dhe cilësinë të matura para dhe pas."
+      ],
+      "advice": "Merr detyrën me ndryshimet më të mëdha midis njerëzve dhe shkruaj standardin e saj me ekipin: hapat, pikat kyçe dhe arsyen e secilës. Vare në vendin e punës dhe vëzhgoje një herë në çdo turn.",
+      "tools": [{ "slug": "standard-work", "name": "Puna standarde" }, { "slug": "time-study", "name": "Studimi i kohës" }],
+      "action": "Shkruaj dhe afisho standardin për detyrën me ndryshimet më të mëdha në {area}",
+      "check": "Vëzhgim në çdo turn: puna përputhet me standardin"
+    },
+    {
+      "key": "dailyMgmt",
+      "name": "Menaxhimi ditor dhe KPI-të",
+      "short": "Menaxhimi ditor",
+      "statements": [
+        "Zona mban çdo ditë një mbledhje të shkurtër pranë një tabele në një orë të caktuar, dhe ajo fillon dhe mbaron në kohë.",
+        "Rezultatet e djeshme për sigurinë, cilësinë, dorëzimin dhe koston janë në tabelë kundrejt objektivit para se të fillojë mbledhja.",
+        "Një objektiv i paarritur sjell një veprim me përgjegjës dhe afat, dhe veprimet e hapura shqyrtohen në mbledhjen e radhës.",
+        "Një problem që ekipi nuk e zgjidh shkon te niveli tjetër po atë ditë, dhe përgjigjja kthehet."
+      ],
+      "levels": [
+        "Asnjë mbledhje e rregullt; shifrat vijnë me një e-mail javor ose aspak; ekipi mëson për problemet nga ankesat.",
+        "Në shumicën e ditëve ka një mbledhje, por pa tabelë ose me shifra të disa ditëve më parë; janë kryesisht njoftime.",
+        "Një mbledhje ditore në këmbë pranë tabelës me KPI-të e djeshme kundrejt objektivave; një KPI e kuqe merr një veprim, por ndjekja është e çrregullt.",
+        "Tabela, KPI-të dhe lista e veprimeve mbahen çdo ditë; veprimet mbyllen në afat; përshkallëzimi te niveli tjetër bëhet me ritëm të caktuar.",
+        "Mbledhjet e turnit, të zonës dhe të objektit pasojnë njëra-tjetrën brenda mëngjesit; tabela drejton vendimet e ditës dhe KPI-të tregojnë një përmirësim të qëndrueshëm."
+      ],
+      "advice": "Mbaj çdo ditë në të njëjtën orë një mbledhje 10-minutëshe në këmbë pranë tabelës: siguria, cilësia, dorëzimi dhe kostoja e djeshme kundrejt objektivit, dhe një veprim me përgjegjës për çdo shifër të kuqe. Shqyrto së pari veprimet e hapura.",
+      "tools": [{ "slug": "daily-board", "name": "Tabela e ditës" }, { "slug": "kpi-diagnostic", "name": "Diagnostikimi i KPI-së" }],
+      "action": "Nis një mbledhje ditore 10-minutëshe pranë tabelës me KPI kundrejt objektivit në {area}",
+      "check": "Mbledhjet mbahen në kohë dhe veprimet mbyllen në afat, për katër javë"
+    },
+    {
+      "key": "problemSolving",
+      "name": "Zgjidhja e problemeve",
+      "short": "Zgjidhja e problemeve",
+      "statements": [
+        "Një problem përshkruhet së pari me fakte: çfarë, ku, kur dhe sa, krahasuar me standardin.",
+        "Një problem që përsëritet trajtohet deri te shkaku rrënjësor (5 Whys, diagrami peshk ose A3) para se të zgjidhet një kundërmasë.",
+        "Ankesat e klientëve dhe defektet e rënda marrin një përgjigje të strukturuar (8D ose e ngjashme) me masë të menjëhershme, shkak rrënjësor dhe kontroll që funksionoi.",
+        "Efekti i çdo kundërmase kontrollohet me të dhëna disa javë më vonë, dhe mësimi ndahet me turnet ose zonat e tjera."
+      ],
+      "levels": [
+        "Shuarje zjarresh: të njëjtat probleme kthehen çdo javë; fajësimi ose një zgjidhje e shpejtë e mbyll diskutimin; asgjë nuk shkruhet.",
+        "Disa probleme analizohen, zakonisht pas një përshkallëzimi; 5 Whys njihet, por ndalet te përgjigjja e parë ose te një person.",
+        "Problemet që përsëriten marrin një 5 Whys ose një A3 me shkak rrënjësor dhe kundërmasë; shumica mbyllen, por efekti nuk kontrollohet gjithmonë.",
+        "Zgjidhja e problemeve ndiqet: të hapura dhe të mbyllura, koha deri në mbyllje, përsëritja; çdo kundërmasë vërtetohet me të dhëna.",
+        "Stafi në terren i zgjidh vetë shumicën e problemeve me një metodë të thjeshtë; rastet e rënda kalojnë si 8D ose A3 dhe mësimet arrijnë zonat e tjera."
+      ],
+      "advice": "Zgjidh problemin që u kthye më shpesh muajin e kaluar dhe kaloje nëpër 5 Whys me njerëzit që e shohin, deri te një shkak mbi të cilin mund të veprosh. Një ankesë klienti ose një defekt i rëndë merr një raport 8D; një problem më i madh një A3.",
+      "tools": [{ "slug": "five-whys", "name": "5 Whys" }, { "slug": "a3-report", "name": "Raporti A3" }, { "slug": "eight-d", "name": "Raporti 8D" }],
+      "action": "Çoje problemin më të shpeshtë që përsëritet në {area} deri te shkaku rrënjësor",
+      "check": "Problemi nuk është kthyer katër javë pas kundërmasës"
+    },
+    {
+      "key": "flow",
+      "name": "Rrjedha dhe tërheqja (pull)",
+      "short": "Rrjedha dhe pull",
+      "statements": [
+        "Rrjedha e vlerës e zonës është hartuar me kohën e plotë, radhët dhe pritjet, dhe harta është më e re se një vit.",
+        "Puna lëviz në tufa të vogla dhe të rregullta, jo në valë të mëdha (porosi, dhoma, rrugë, paleta).",
+        "Rimbushja tërhiqet nga përdorimi i vërtetë (karta kanban, kontejnerë, min/max), jo shtyhet nga një parashikim ose një zakon.",
+        "Puna në proces dhe radhët janë të kufizuara dhe të dukshme, kështu që një bllokim vihet re para se të arrijë te klienti."
+      ],
+      "levels": [
+        "Puna vjen me valë dhe grumbullohet midis hapave; stafi pret, pastaj mbingarkohet; stoku dhe radhët vihen re kur mbarojnë ose tejmbushen.",
+        "Ngushtica njihet dhe disa rezerva janë përmasuar, por puna planifikohet ende në tufa të mëdha dhe ndjekja e porosive urgjente është normale.",
+        "Ekziston një hartë e gjendjes aktuale; rrjedha kryesore ka një renditje të caktuar dhe kufij; kanban ose min/max funksionon për materialet kryesore.",
+        "Koha e plotë dhe puna në proces maten çdo javë; puna është niveluar gjatë ditës; sasitë e kanban-it llogariten nga të dhënat e kërkesës.",
+        "Një gjendje e synuar zbatohet hap pas hapi; rrjedha është e njëtrajtshme gjatë javës; radhët dhe koha e plotë vazhdojnë të bien."
+      ],
+      "advice": "Harto rrjedhën e vlerës së zonës në një fletë, me kohën e plotë dhe vendet ku puna pret. Pastaj nivelo punën gjatë ditës dhe përmaso kanban-in për materialet kryesore nga kërkesa e vërtetë.",
+      "tools": [{ "slug": "value-stream-map", "name": "Harta e rrjedhës së vlerës" }, { "slug": "heijunka", "name": "Heijunka (niveli i prodhimit)" }, { "slug": "kanban-sizing", "name": "Përmasimi i Kanban-it" }],
+      "action": "Harto rrjedhën aktuale të vlerës së {area} me kohën e plotë dhe radhët",
+      "check": "Koha e plotë e matur në hartë, dhe sërish pas ndryshimit të parë"
+    },
+    {
+      "key": "quality",
+      "name": "Cilësia në burim",
+      "short": "Cilësia në burim",
+      "statements": [
+        "Çdo hap kontrollon punën e vet para se ta kalojë më tej, kështu që gabimet gjenden aty ku bëhen.",
+        "Gabimet e zakonshme parandalohen me ndërtim: skanerë, kode ngjyrash, lista kontrolli, mbajtëse ose bllokime në sistem (poka-yoke).",
+        "First-time-right (ose norma e defekteve) matet për çdo hap dhe i tregohet ekipit.",
+        "Kushdo mund ta ndalojë punën ose të thërrasë ndihmë kur diçka nuk shkon, dhe falënderohet për këtë."
+      ],
+      "levels": [
+        "Gabimet i gjen klienti ose turni tjetër; kontrolli në fund është i vetmi; për gabimet fajësohen njerëzit.",
+        "Ka kontrolle në disa hapa, kryesisht nga mbikëqyrësit; defektet numërohen, por jo sipas hapit ose shkakut.",
+        "Vetëkontrollet janë pjesë e standardit në hapat kryesorë; llojet kryesore të gabimeve kanë një poka-yoke ose një listë kontrolli; first-time-right matet.",
+        "Defektet ndiqen sipas hapit dhe shkakut; rreziqet kryesore janë në një FMEA; çdo poka-yoke testohet sipas planit nëse funksionon ende.",
+        "Proceset e reja ndërtohen që në fillim të mbrojtura nga gabimi; ndalimi për një defekt është normal dhe i shpejtë; first-time-right mbahet në objektiv."
+      ],
+      "advice": "Merr llojin e gabimit që arrin më shpesh te klienti dhe gjej hapin ku bëhet. Vendos atje një poka-yoke ose një vetëkontroll, dhe rendit rreziqet e tjera të procesit në një FMEA.",
+      "tools": [{ "slug": "poka-yoke", "name": "Poka-Yoke" }, { "slug": "fmea", "name": "FMEA" }],
+      "action": "Mbroje nga gabimi hapin ku bëhet defekti më i shpeshtë në {area}",
+      "check": "First-time-right i atij hapi para dhe katër javë pas"
+    },
+    {
+      "key": "maintenance",
+      "name": "Mirëmbajtja (TPM)",
+      "short": "Mirëmbajtja (TPM)",
+      "statements": [
+        "Operatorët kontrollojnë pajisjet e tyre çdo ditë (pirunë, rripa transportues, skanerë, karroca, automjete) me një listë të shkurtër kontrolli.",
+        "Mirëmbajtja parandaluese planifikohet sipas datës ose përdorimit, dhe plani mbahet.",
+        "Defektet dhe koha e ndalimit regjistrohen, dhe një defekt që përsëritet analizohet për shkakun e tij.",
+        "Performanca e pajisjeve (disponueshmëria, OEE ose ndalimi në javë) matet dhe është e dukshme për ekipin."
+      ],
+      "levels": [
+        "Pajisjet punojnë derisa prishen; askush nuk e ka përgjegjësinë e kontrollit ditor; pjesët dhe riparimet kërkohen pasi ka ndodhur prishja.",
+        "Për pajisjet e mëdha ka një plan servisi, por intervalet shtyhen; defektet njoftohen me gojë; regjistrimet e prishjeve janë të paplota.",
+        "Kontrolle ditore nga operatorët me listë kontrolli te pajisjet kryesore; mirëmbajtja parandaluese kryesisht në kohë; prishjet regjistrohen me kohën e ndalimit.",
+        "MTBF, MTTR ose OEE ndiqen; prishjet e përsëritura marrin analizë të shkakut rrënjësor; plani përshtatet sipas historisë së prishjeve.",
+        "Operatorët dhe teknikët i përmirësojnë pajisjet bashkë; ndalimi i paplanifikuar është i rrallë dhe në rënie; pajisjet e reja zgjidhen edhe për mirëmbajtje të lehtë."
+      ],
+      "advice": "Fut në një plan mirëmbajtjeje çdo pajisje nga e cila varet zona, me intervalin e saj, dhe jepu operatorëve një kontroll ditor dy-minutësh. Regjistro çdo prishje me kohën e ndalimit, që OEE ose MTBF të mund të maten.",
+      "tools": [{ "slug": "maintenance-planner", "name": "Planifikuesi i mirëmbajtjes" }, { "slug": "oee", "name": "OEE" }],
+      "action": "Fut pajisjet e {area} në një plan mirëmbajtjeje me kontrolle ditore nga operatorët",
+      "check": "Plani mbahet në kohë dhe prishjet regjistrohen me kohën e ndalimit për një muaj"
+    },
+    {
+      "key": "leadership",
+      "name": "Rutinat e drejtimit",
+      "short": "Drejtimi",
+      "statements": [
+        "Drejtuesit në çdo nivel kanë një punë standarde të drejtuesit të shkruar: çfarë kontrollojnë çdo ditë dhe çdo javë, dhe kur.",
+        "Drejtuesit shkojnë në terren (gemba) sipas planit për të parë punën, për të pyetur dhe për të udhëzuar, jo vetëm kur ka një problem.",
+        "Drejtuesit kontrollojnë që standardet zbatohen dhe që veprimet nga tabela mbyllen.",
+        "Drejtuesit i udhëzojnë njerëzit t'i zgjidhin vetë problemet në vend që t'u japin përgjigjen."
+      ],
+      "levels": [
+        "Drejtuesit janë në zyrë ose në telefon; vijnë në terren kur diçka shkon keq; dita e tyre drejtohet nga e-mailet dhe përshkallëzimet.",
+        "Disa drejtues kalojnë nëpër terren, por pa orë të caktuar dhe pa qëllim; çfarë kontrollojnë varet nga personi.",
+        "Puna standarde e drejtuesit është shkruar për rolet kryesore, me kontrolle ditore dhe javore; vizitat gemba bëhen në shumicën e javëve, me shënime.",
+        "Niveli tjetër shqyrton zbatimin e punës standarde të drejtuesit; gjetjet nga gemba bëhen veprime me përgjegjës; rutinat mbahen edhe në javët e ngarkuara.",
+        "Rutinat janë mënyra si drejtohet objekti; drejtuesit udhëzojnë me pyetje; rutinat përmirësohen si çdo standard tjetër."
+      ],
+      "advice": "Shkruaj punën standarde të drejtuesit për përgjegjësin e zonës: çfarë kontrollohet çdo ditë dhe çdo javë, dhe kur. Shto një vizitë gemba në javë me një qëllim, dhe le të kontrollojë niveli tjetër që të dyja bëhen.",
+      "tools": [{ "slug": "leader-standard-work", "name": "Puna standarde e drejtuesit" }, { "slug": "gemba-walk", "name": "Gemba Walk" }],
+      "action": "Shkruaj punën standarde të drejtuesit dhe një vizitë gemba javore për {area}",
+      "check": "Rutina mbahet katër javë nga katër, e kontrolluar nga niveli tjetër"
+    },
+    {
+      "key": "people",
+      "name": "Njerëzit dhe aftësitë",
+      "short": "Njerëzit dhe aftësitë",
+      "statements": [
+        "Një matricë aftësish tregon kush mund të bëjë cilën detyrë dhe në çfarë niveli, dhe është e përditësuar.",
+        "Çdo detyrë kyçe ka të paktën dy ose tre njerëz të trajnuar për turn, kështu që një mungesë nuk e ndalon punën.",
+        "Të rinjtë dhe ata që ndërrojnë detyrë trajnohen sipas standardit (për shembull me TWI Job Instruction) dhe miratohen.",
+        "Njerëzit marrin pjesë në përmirësime, dhe idetë e tyre vlerësohen."
+      ],
+      "levels": [
+        "Trajnimi bëhet duke ndjekur këdo që është i lirë; askush nuk e di kush mund të zëvendësojë cilën detyrë; një mungesë ndalon një proces.",
+        "Ekziston një listë kualifikimesh, por është e vjetruar; trajnimi planifikohet kur dikush largohet; njohuritë që i ka vetëm një person dihen, por nuk zgjidhen.",
+        "Një matricë aftësish e përditësuar për zonën; një plan trajnimi mbulon mangësitë; të rinjtë trajnohen sipas standardit dhe miratohen.",
+        "Mbulimi për detyrë dhe turn matet kundrejt një objektivi; trajnimi i kryqëzuar është planifikuar; trajnimi kontrollohet me vëzhgim.",
+        "Njerëzit trajnojnë njëri-tjetrin dhe e mbajnë vetë matricën; mbulimi është në objektiv në çdo turn; hapat e karrierës lidhen me aftësitë dhe punën e përmirësimit."
+      ],
+      "advice": "Ndërto matricën e aftësive të zonës me drejtuesit e ekipeve dhe shëno çdo detyrë që në një turn e di vetëm një person. Planifiko së pari trajnimin e kryqëzuar për to, sipas standardit dhe me miratim.",
+      "tools": [{ "slug": "skills-matrix", "name": "Matrica e aftësive" }],
+      "action": "Matrica e aftësive për {area} dhe plan trajnimi për detyrat me një person të vetëm",
+      "check": "Çdo detyrë kyçe e mbuluar nga të paktën dy njerëz të trajnuar për turn"
+    },
+    {
+      "key": "ci",
+      "name": "Përmirësimi i vazhdueshëm (kaizen)",
+      "short": "Kaizen",
+      "statements": [
+        "Ka një mënyrë të thjeshtë për të sjellë një ide (tabelë, kartë ose aplikacion), dhe çdo ide merr përgjigje brenda dy javësh.",
+        "Ekipi bën vetë përmirësime të vogla çdo javë, pa pritur një projekt.",
+        "Përmirësimet më të mëdha bëhen si ngjarje kaizen ose projekte me një objektiv në numra dhe një kontroll pas 30 ditësh.",
+        "Rezultatet e përmirësimeve (koha, gabimet, kostoja, siguria) maten dhe tregohen, dhe fitimi mbahet në standard."
+      ],
+      "levels": [
+        "Përmirësimi është një projekt i njëhershëm i drejtimit ose i një konsulenti; idetë nga terreni humbasin; ndryshimet shuhen pas disa javësh.",
+        "Ekziston një tabelë idesh ose një kuti, por pak ide zbatohen dhe përgjigjet vonohen; përmirësimi varet nga disa entuziastë.",
+        "Tabela e ideve shqyrtohet çdo javë; shumica e ideve marrin përgjigje dhe përgjegjës; disa ngjarje kaizen në vit me rezultate të matura.",
+        "Idetë e sjella dhe të zbatuara ndiqen; ngjarjet kaizen ndjekin një standard me kontroll 30-ditor; rezultatet mbahen në standard.",
+        "Përmirësimi është pjesë e punës së gjithkujt: shumë ide të vogla për person në vit, ngjarje të zgjedhura nga rrjedha e vlerës, rezultate të ndara midis objekteve."
+      ],
+      "advice": "Vendos një tabelë kaizen në zonë dhe shqyrtoje çdo javë në të njëjtën orë: çdo ide merr përgjigje dhe përgjegjës brenda dy javësh. Bëj një ngjarje kaizen në tremujor për mangësinë më të madhe.",
+      "tools": [{ "slug": "kaizen-board", "name": "Tabela Kaizen" }, { "slug": "kaizen-event", "name": "Ngjarja Kaizen" }],
+      "action": "Nis shqyrtimin javor të tabelës kaizen në {area}",
+      "check": "Çdo ide merr përgjigje brenda dy javësh; ide të zbatuara në muaj"
+    }
+  ],
+  "tips": [
+    ["Vlerëso atë që sheh, jo atë që është planifikuar.", "Një standard në dosje që nuk e ndjek askush është niveli 2, jo 3. Kalo nëpër terren ndërsa vlerëson."],
+    ["Vlerësoni veç, pastaj flisni.", "Çdo vlerësues vlerëson fillimisht vetëm. Kur dy vlerësime janë dy nivele ose më shumë larg, mjeti e shënon pohimin: diskutoni çfarë pa secili para se të bini dakord."],
+    ["N/A vetëm kur vërtet nuk vlen.", "Një pohim që nuk i përshtatet zonës lihet jashtë mesatares. Një mangësi nuk është N/A: vlerësoje me 1."],
+    ["Çdo tremujor, në të njëjtën mënyrë.", "E njëjta zonë, të njëjtat pohime, mundësisht të njëjtët vlerësues. Radari tregon ndryshimin ndaj vlerësimit të fundit."],
+    ["Puno për tri gjëra, jo për dhjetë.", "Çoji tri dimensionet më të dobëta te lista e veprimeve, secilën me përgjegjës dhe kontroll, dhe lëre pjesën tjetër për tremujorin e ardhshëm."]
+  ],
+  "example": {
+    "area": "Pranimi i mallit dhe vendosja",
+    "assessors": ["Elira", "Jonas"],
+    "daysAgo": 3,
+    "note": "Kaluam gjatë turnit të mëngjesit, nga dyert e rampës deri te raftet rezervë. Elira nuk kishte të dhëna për ndalimet e pirunëve, prandaj e shënoi atë pohim N/A.",
+    "scores": {
+      "fiveS": [[3, 3], [3, 4], [2, 3], [3, 3], [2, 2]],
+      "standardWork": [[2, 3], [2, 2], [1, 3], [2, 2]],
+      "dailyMgmt": [[4, 4], [3, 4], [3, 3], [2, 3]],
+      "problemSolving": [[2, 2], [2, 1], [2, 2], [1, 1]],
+      "flow": [[2, 2], [2, 3], ["na", "na"], [2, 2]],
+      "quality": [[3, 3], [3, 2], [2, 2], [4, 2]],
+      "maintenance": [[3, 3], [3, 3], [2, 2], ["na", 2]],
+      "leadership": [[2, 2], [2, 3], [2, 2], [2, 2]],
+      "people": [[3, 3], [2, 2], [3, 2], [3, 4]],
+      "ci": [[2, 3], [2, 2], [1, 1], [2, 2]]
+    },
+    "previous": {
+      "daysBefore": 91,
+      "note": "Vlerësimi i parë i zonës, para se të nisej tabela e ditës.",
+      "scores": {
+        "fiveS": [[2, 3], [3, 3], [2, 2], [2, 3], [2, 2]],
+        "standardWork": [[2, 2], [2, 2], [2, 2], [1, 2]],
+        "dailyMgmt": [[3, 3], [2, 3], [2, 2], [2, 2]],
+        "problemSolving": [[2, 2], [1, 1], [2, 2], [1, 1]],
+        "flow": [[2, 2], [2, 2], ["na", "na"], [2, 1]],
+        "quality": [[3, 3], [2, 2], [2, 2], [3, 3]],
+        "maintenance": [[3, 3], [3, 2], [2, 2], ["na", 2]],
+        "leadership": [[2, 2], [2, 2], [2, 2], [2, 2]],
+        "people": [[3, 3], [2, 2], [2, 2], [3, 3]],
+        "ci": [[2, 2], [2, 2], [1, 1], [2, 1]]
+      }
+    }
+  }
+}

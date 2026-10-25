@@ -151,7 +151,8 @@
       "/tools/housekeeping-planner/",
       "/tools/leader-standard-work/",
       "/tools/shift-capacity/",
-      "/tools/risk-assessment/"
+      "/tools/risk-assessment/",
+      "/tools/energy-tracker/"
     ],
     "learn": [],
     "also": [
@@ -260,6 +261,11 @@
         "when": "Every month",
         "do": "Walk one area with the people who work there, close or re-date its overdue measures and check the effect of the ones done.",
         "tool": "/tools/risk-assessment/"
+      },
+      {
+        "when": "Every week",
+        "do": "Read the meters on Monday morning, type them in, and send any meter that drifts above its baseline to the Action Tracker as a check.",
+        "tool": "/tools/energy-tracker/"
       }
     ],
     "next": "lumen"
@@ -293,7 +299,8 @@
       "/tools/cost-of-quality/",
       "/tools/heijunka/",
       "/tools/kanban-sizing/",
-      "/tools/poka-yoke/"
+      "/tools/poka-yoke/",
+      "/tools/lean-assessment/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -413,6 +420,11 @@
         "when": "Every week",
         "do": "Print the week's verification checklist, test every device that is due with a deliberate error, record the results, and send each failed device to the Action Tracker.",
         "tool": "/tools/poka-yoke/"
+      },
+      {
+        "when": "Every quarter",
+        "do": "Score each area with two assessors, talk through every flagged disagreement on the floor, and send the three weakest dimensions to the Action Tracker.",
+        "tool": "/tools/lean-assessment/"
       }
     ],
     "next": "atlas"

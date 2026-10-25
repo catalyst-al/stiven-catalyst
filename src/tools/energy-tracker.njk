@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Energy & Water
+seo_title: "Energy and water tracker for hotels and warehouses: meter readings to kWh, cost, CO₂ and kWh per occupied room"
+description: "A private energy and water log: meter readings to use, cost and CO₂, per occupied room night or per order, with a signal when a meter drifts above its baseline."
+activeNav: /tools.html
+permalink: /tools/energy-tracker/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Sustainability</p>
+  <h1>Energy &amp; Water</h1>
+  <p class="lede">Type the meters as you read them: electricity, gas, water, district heat or heating oil, on any day and as often as you read them. The tool works out the use between readings and spreads it over the days, converts gas from m³ into kWh as the bill does, and shows the use, the cost and the CO₂ of each meter for any period, per occupied room night in a hotel or per order or pallet in a warehouse. Each meter is compared with its own baseline, and a week that drifts above it becomes a signal and an action.</p>
+</section>
+
+{% set cfg = energyTracker %}
+{% include "partials/energy-tracker.njk" %}

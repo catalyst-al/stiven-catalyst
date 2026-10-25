@@ -1,0 +1,47 @@
+/* ===== Energy & Water (js/energy-tracker.js) =====
+   The meters with their prices and gas conversion, the reading form with its "meter replaced" box, the units per day,
+   the period and baseline settings with the CO₂ factors, the readings log, and the result: use, cost and CO₂ per meter,
+   the weeks or months by medium, each meter against its baseline and the weekday pattern. A week above the baseline is
+   told by its sign and words (✕ ✓); the colour of its dot only repeats it. */
+.et-meters { display: grid; gap: 12px; margin: 12px 0; }
+.et-meter {
+  padding: 14px 16px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+.et-meter .dl-grid { margin-bottom: 4px; }
+.et-remove-meter { margin-top: 2px; }
+
+.et-check label { display: flex; align-items: flex-start; gap: 10px; font-weight: 600; }
+.et-check input[type="checkbox"] { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; }
+.et-check .form-note { margin: 4px 0 0 28px; }
+.et-hint { min-height: 1.4em; margin: 0; color: var(--ink); }
+
+.et-factors-box { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.et-factors-box summary { cursor: pointer; }
+.et-factors-box .field .form-note { margin: 4px 0 0; font-size: 13px; }
+
+.et-log td:nth-child(4) { min-width: 12em; }
+.et-table th[scope="row"] { font-weight: 700; text-align: left; }
+.et-table td, .et-table th { vertical-align: top; }
+.et-factors { margin: 6px 0 10px; padding-left: 1.2em; }
+.et-factors li { margin: 4px 0; color: var(--muted); }
+.et-factors li strong { color: var(--ink); }
+
+.et-results .result-head { margin-bottom: 14px; }
+.et-results .dl-warning { margin: 6px 0; }
+
+@media (max-width: 600px) {
+  .et-meter { padding: 12px 12px 8px; }
+  .et-log td:nth-child(4) { min-width: 9em; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  .et-setup, .et-results .result-actions, .et-results .ck-actions, .et-results .dl-focus .tool-actions { display: none !important; }
+  .et-results { padding: 0; }
+  .et-results .dl-panel { break-inside: avoid; }
+  .et-table { width: 100%; font-size: 9pt; border-collapse: collapse; }
+  .et-table th, .et-table td { padding: 3px 5px; border-bottom: 1px solid #c8cdd2; }
+}

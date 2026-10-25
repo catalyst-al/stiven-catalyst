@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Energie und Wasser
+seo_title: "Energie- und Wassertracker für Hotel und Lager: Zählerstände zu kWh, Kosten, CO₂ und kWh pro belegtem Zimmer"
+description: "Ein privates Energie- und Wasserprotokoll: Zählerstände zu Verbrauch, Kosten und CO₂, pro Zimmernacht oder Auftrag, mit Signal, wenn ein Zähler ansteigt."
+activeNav: /de/tools.html
+permalink: /de/tools/energy-tracker/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Kostenloses Tool · Nachhaltigkeit</p>
+  <h1>Energie und Wasser</h1>
+  <p class="lede">Erfassen Sie die Zähler so, wie Sie sie ablesen: Strom, Gas, Wasser, Fernwärme oder Heizöl, an jedem Tag und so oft Sie ablesen. Das Tool rechnet den Verbrauch zwischen den Zählerständen aus und verteilt ihn auf die Tage, rechnet Gas wie die Rechnung von m³ in kWh um und zeigt Verbrauch, Kosten und CO₂ jedes Zählers für jeden Zeitraum, pro belegte Zimmernacht im Hotel oder pro Auftrag oder Palette im Lager. Jeder Zähler wird mit seinem eigenen Ausgangswert verglichen, und eine Woche, die darüber steigt, wird zum Signal und zur Maßnahme.</p>
+</section>
+
+{% set cfg = de.energyTracker %}
+{% include "partials/energy-tracker.njk" %}
