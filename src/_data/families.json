@@ -275,7 +275,8 @@
       "/tools/inventory-abc/",
       "/tools/smed/",
       "/tools/eight-d/",
-      "/tools/hoshin-kanri/"
+      "/tools/hoshin-kanri/",
+      "/tools/site-compare/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -365,6 +366,11 @@
         "when": "Every month",
         "do": "Enter last month's actuals on the bowling chart, agree a countermeasure with its owner for every metric that missed twice in a row, and close the gaps in the X-matrix.",
         "tool": "/tools/hoshin-kanri/"
+      },
+      {
+        "when": "Every week",
+        "do": "Update every site on Monday, read the best and the worst on each rate, and take one practice of the best site to the others with a Gemba Walk.",
+        "tool": "/tools/site-compare/"
       }
     ],
     "next": "atlas"

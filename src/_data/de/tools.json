@@ -390,5 +390,13 @@
     "summary": "Das Papier des Teamboards in einem Druck, aus dem, was die Tools in diesem Browser enthalten: offene Maßnahmen nach Verantwortlichen, Wartungsarbeitsliste und 5S-Audits der Woche, eine Karte je Führungskraft, Sicherheitskreuz und Tagesboard des Monats und die Arbeits- und Revierzettel eines Hotels.",
     "url": "/de/tools/print-pack/",
     "cta": "Paket drucken"
+  },
+  {
+    "name": "Standortvergleich",
+    "type": "Übersicht",
+    "time": "Wöchentlich",
+    "summary": "Ihre Standorte nebeneinander, jeder aus seinem Nur-Lese-Code gelesen, ohne beizutreten: Schadens- und Unvollständigkeitsquote, pünktliche Touren, OEE, 5S, Arbeitssicherheit, Maßnahmen, Instandhaltung und Hotelkennzahlen, bester und schwächster Wert benannt, eingestuft nach einer sichtbaren Regel.",
+    "url": "/de/tools/site-compare/",
+    "cta": "Standorte vergleichen"
   }
 ]

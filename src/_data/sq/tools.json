@@ -390,5 +390,13 @@
     "summary": "Letra e tabelës së ekipit në një printim, nga ajo që mjetet kanë në këtë shfletues: veprimet e hapura sipas përgjegjësit, lista e mirëmbajtjes dhe auditet 5S të javës, një kartë për çdo drejtues, kryqi i sigurisë dhe tabela e ditës për muajin, dhe fletët e pastruesve dhe të sektorëve të një hoteli.",
     "url": "/sq/tools/print-pack/",
     "cta": "Printo paketën"
+  },
+  {
+    "name": "Krahasimi i objekteve",
+    "type": "Pasqyrë",
+    "time": "Çdo javë",
+    "summary": "Objektet që drejton krah për krah, secili i lexuar nga kodi i tij vetëm për lexim, pa u bashkuar: përqindja e dëmeve dhe e porosive të paplota, linjat në kohë, OEE, 5S, siguria, veprimet, mirëmbajtja dhe treguesit e hotelit, më i miri dhe më i dobëti të emërtuar, të renditura sipas një rregulli të dukshëm.",
+    "url": "/sq/tools/site-compare/",
+    "cta": "Krahaso objektet"
   }
 ]
