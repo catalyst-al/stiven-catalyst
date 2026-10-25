@@ -78,7 +78,7 @@ Skripti lë jashtë parimet që janë tashmë shënim dhe hapat e listave ("Dita
 **Kur skripti thotë "Every principle that stands alone is already a field note"**, të gjitha parimet e eseve janë bërë
 shënime. Shënimet e reja shkruhen atëherë me dorë, nga mjetet e reja dhe nga Reflections: tre skedarë me të njëjtin emër
 (`src/content/notes/`, `de/notes/`, `sq/notes/`), me numrin pas të fundit. Kështu u shtuan më 25 tetor 2026 38 shënime
-(27 nga mjetet e reja, 11 nga Reflections); tani janë 256. Pas tyre: `node scripts/note-cards.mjs 215-… 216-…` vetëm për
+(27 nga mjetet e reja, 11 nga Reflections), pastaj edhe 33 të tjera (mjetet pa shënim, vëllimi 11 i traktatit dhe Reflections e fundit); tani janë 289. Pas tyre: `node scripts/note-cards.mjs 215-… 216-…` vetëm për
 shënimet e reja.
 
 Faqja Field Notes ka një kufi madhësie në teste (`tests/lean-pages.test.cjs`, 360 kB, rreth 1,2 kB për shënim, vend për
