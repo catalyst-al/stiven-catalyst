@@ -1,0 +1,42 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": {
+      "name": "Site Compare",
+      "type": "Overview",
+      "time": "Weekly",
+      "summary": "The sites you look after side by side, each read from its read-only team code without joining: damage and incomplete rates, routes on time, OEE, 5S, safety, actions, maintenance and the hotel rates, best and worst named, ranked by a rule you can see.",
+      "url": "/tools/site-compare/",
+      "cta": "Compare the sites"
+    },
+    "de": {
+      "name": "Standortvergleich",
+      "type": "Übersicht",
+      "time": "Wöchentlich",
+      "summary": "Ihre Standorte nebeneinander, jeder aus seinem Nur-Lese-Code gelesen, ohne beizutreten: Schadens- und Unvollständigkeitsquote, pünktliche Touren, OEE, 5S, Arbeitssicherheit, Maßnahmen, Instandhaltung und Hotelkennzahlen, bester und schwächster Wert benannt, eingestuft nach einer sichtbaren Regel.",
+      "url": "/de/tools/site-compare/",
+      "cta": "Standorte vergleichen"
+    },
+    "sq": {
+      "name": "Krahasimi i objekteve",
+      "type": "Pasqyrë",
+      "time": "Çdo javë",
+      "summary": "Objektet që drejton krah për krah, secili i lexuar nga kodi i tij vetëm për lexim, pa u bashkuar: përqindja e dëmeve dhe e porosive të paplota, linjat në kohë, OEE, 5S, siguria, veprimet, mirëmbajtja dhe treguesit e hotelit, më i miri dhe më i dobëti të emërtuar, të renditura sipas një rregulli të dukshëm.",
+      "url": "/sq/tools/site-compare/",
+      "cta": "Krahaso objektet"
+    }
+  },
+  "routine": {
+    "when": "Every week",
+    "do": "Update every site on Monday, read the best and the worst on each rate, and take one practice of the best site to the others with a Gemba Walk.",
+    "de": {
+      "when": "Jede Woche",
+      "do": "Aktualisieren Sie jeden Montag alle Standorte, lesen Sie bei jeder Quote den besten und den schwächsten Wert und tragen Sie mit einem Gemba Walk eine Praxis des besten Standorts zu den anderen."
+    },
+    "sq": {
+      "when": "Çdo javë",
+      "do": "Përditëso çdo të hënë të gjitha objektet, lexo më të mirin dhe më të dobëtin në çdo tregues dhe çoje një praktikë të objektit më të mirë te të tjerët me një Gemba Walk."
+    }
+  },
+  "recipe": "example"
+}

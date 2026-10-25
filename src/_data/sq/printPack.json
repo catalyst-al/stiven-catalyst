@@ -1,0 +1,22 @@
+{
+  "storageKey": "sc-print-pack-sq",
+  "docs": [
+    { "key": "actions", "name": "Veprimet e hapura sipas përgjegjësit", "about": "Çdo veprim i hapur i listës së veprimeve, një bllok për çdo përgjegjës: të vonuarat së pari, pastaj sipas afatit, me një kuti për ta shënuar dhe vend për një shënim.", "tool": "Lista e veprimeve", "slug": "action-tracker", "hotel": false },
+    { "key": "maintenance", "name": "Lista e punëve të mirëmbajtjes për javën", "about": "Detyrat e vonuara dhe ato me afat deri të dielën, sipas zonës, me listat e tyre të kontrollit, minutat dhe një rresht për nënshkrim.", "tool": "Planifikuesi i mirëmbajtjes", "slug": "maintenance-planner", "hotel": false },
+    { "key": "fives", "name": "Auditet 5S të javës", "about": "Auditet që plani cakton për shtatë ditët e ardhshme: kush kontrollon cilën zonë dhe në cilën ditë, të vonuarat së pari.", "tool": "Auditi 5S", "slug": "five-s-audit", "hotel": false },
+    { "key": "lsw", "name": "Kartat e punës standarde të drejtuesve", "about": "Një kartë për çdo drejtues: rutina e ditës me një kuti për çdo ditë pune, pastaj kontrollet javore dhe mujore.", "tool": "Puna standarde e drejtuesit", "slug": "leader-standard-work", "hotel": false },
+    { "key": "safety", "name": "Kryqi i sigurisë i muajit", "about": "Muaji në kryq: ditët deri sot të shënuara, ditët që vijnë bosh për t'i shënuar me dorë, dhe ngjarjet e muajit.", "tool": "Kryqi i sigurisë", "slug": "safety-cross", "hotel": false },
+    { "key": "board", "name": "Tabela e ditës për muajin", "about": "Siguria, cilësia, dorëzimi, kostoja dhe njerëzit ditë pas dite, siç i ka nxjerrë tabela, me ditët që vijnë për t'u plotësuar në takim.", "tool": "Tabela e ditës", "slug": "daily-board", "hotel": false },
+    { "key": "rooms", "name": "Fletët e pastruesve nga statusi i dhomave", "about": "Një fletë për çdo pastrues: dhomat sipas radhës së pastrimit, me orën e hyrjes, orën e daljes dhe vërejtje.", "tool": "Statusi i dhomave", "slug": "room-status", "hotel": true },
+    { "key": "housekeeping", "name": "Fletët e sektorëve të housekeeping-ut", "about": "Një fletë për çdo sektor të planit të ditës, të balancuar sipas minutave: kati, dhoma, pastrimi, shënimet dhe minutat e planifikuara.", "tool": "Planifikuesi i housekeeping-ut", "slug": "housekeeping-planner", "hotel": true }
+  ],
+  "tips": [
+    ["Printoje para takimit të së hënës.", "Java dhe muaji i fletëve ndjekin datën e paketës: vendos të hënën që vjen për ta printuar që të premten."],
+    ["Shëno çfarë shkon në tabelën tënde.", "Një dokument është gati sapo mjeti i tij ka të dhëna në këtë shfletues; rreshti poshtë tij thotë çfarë ka brenda, ose cilin mjet duhet të plotësosh së pari."],
+    ["Letra është plani, mjeti është regjistri.", "Shkruaj në fletë gjatë javës, pastaj hidh në mjet çfarë u krye, që paketa e radhës të nisë prej andej."],
+    ["Fletët e hotelit janë për një hotel.", "Statusi i dhomave dhe planifikuesi i housekeeping-ut printojnë një faqe për çdo pastrues ose sektor; lëri jashtë në tabelën e një magazine."]
+  ],
+  "example": {
+    "note": "Kjo është një paketë shembull e bërë nga shembujt e vetë mjeteve, sepse mjetet në këtë shfletues nuk kanë ende asgjë tëndën. Plotëso një mjet dhe fletët e tij janë të tuat."
+  }
+}

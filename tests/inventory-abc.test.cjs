@@ -16,7 +16,8 @@ const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const DATA = { en: 'src/_data/inventoryAbc.json', de: 'src/_data/de/inventoryAbc.json', sq: 'src/_data/sq/inventoryAbc.json' };
 const data = { en: read(DATA.en), de: read(DATA.de), sq: read(DATA.sq) };
 const part = read('src/_data/i18n-parts/inventory-abc.json');
-const strings = (lang) => (lang === 'en' ? {} : { ...read(`src/_data/${lang}/ui.json`), ...part[lang] });
+// The import presets keep their strings in their own part until the integrator merges it.
+const strings = (lang) => (lang === 'en' ? {} : { ...read(`src/_data/${lang}/ui.json`), ...read('src/_data/i18n-parts/import-presets.json')[lang], ...part[lang] });
 const TODAY = '2026-10-24';
 
 const pageHtml = (lang) => {

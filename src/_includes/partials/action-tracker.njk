@@ -84,6 +84,28 @@
         <button class="button-secondary" type="button" data-ics>{{ "Calendar file (.ics)" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-clear>{{ "Clear list" | t(lang) }}</button>
       </div>
+      {#- Reminders on this device (js/reminders.js, loaded with the work box): shown by the script where it runs. -#}
+      {%- set rmText = {
+        on: "Remind me of due actions on this device" | t(lang),
+        off: "Stop the reminders on this device" | t(lang),
+        onNotify: "Reminders are on. Once a day, when you open a tool on this device, a notification says what is overdue and due today." | t(lang),
+        onBanner: "Reminders are on. This browser blocks notifications or has none, so a note at the top of the page says what is overdue and due today, once a day when you open a tool." | t(lang),
+        background: "As an installed app, this device can also remind you when no tool is open." | t(lang),
+        offDone: "Reminders are off on this device." | t(lang),
+        unavailable: "This browser cannot keep reminders (for example in a private window)." | t(lang),
+        reminder: {
+          title: "Action Tracker" | t(lang),
+          counts: "{overdue} overdue · {today} due today" | t(lang),
+          more: "and {n} more" | t(lang),
+          open: "Open the Action Tracker" | t(lang),
+          close: "Close" | t(lang)
+        }
+      } %}
+      <div class="at-remind" data-reminders-optin data-text="{{ rmText | dump }}" hidden>
+        <button class="button-secondary" type="button" data-reminders-toggle aria-pressed="false">{{ "Remind me of due actions on this device" | t(lang) }}</button>
+        <p class="form-note">{{ "The reminder is made on this device from the list in this browser; nothing is sent. The browser asks once whether this site may show notifications." | t(lang) }}</p>
+        <p class="form-note" data-reminders-status role="status" aria-live="polite"></p>
+      </div>
     </div>
   </div>
 

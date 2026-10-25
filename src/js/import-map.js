@@ -5,6 +5,10 @@
 // import runs, the rows are put into the log's order (tab-separated, header dropped), and the choice is kept per
 // tool and header in localStorage "sc-import-maps", so the next paste of the same export is mapped by itself.
 // A paste that already fits (no header, or a header in the log's order) is never touched.
+// Presets: the column names that exports of a kind of system typically use (a hotel PMS, a warehouse system, a route
+// planner). They are generic names, not the layout of any one product's report: a header that matches more of one
+// preset's names than of the others is "recognised as" that kind of export, and its names help the guess. The
+// visitor can choose another preset or none, and map by hand; a remembered mapping still wins over any preset.
 (() => {
   const kit = window.ToolKit;
   if (!kit) return;
@@ -57,7 +61,94 @@
     complaints: ["complaints", "beschwerden", "reklamationen", "ankesa", "ankesat"],
     covers: ["breakfast covers", "breakfast", "covers", "fruhstucksgaste", "fruhstuck", "mengjese", "mengjesi"],
     complaintCause: ["complaint cause", "cause of complaint", "beschwerdeursache", "beschwerdegrund", "shkaku i ankeses"],
+    room: ["room", "room number", "room no", "zimmer", "zimmernummer", "zimmer nr", "zi nr", "dhoma", "numri i dhomes", "nr i dhomes"],
+    guest: ["guest", "guest name", "gast", "gastname", "name des gastes", "mysafiri", "emri i mysafirit"],
   };
+
+  // The presets. `fields` adds names to the columns of the logs (by the keys the partials declare, and the fields
+  // of Inventory ABC); `known` lists columns such exports often carry that no log takes (a rate code, a balance, a
+  // delivery number): they help to recognise the export and are never guessed into a column that only looks alike
+  // ("Arrival", the date of a booking, is not "arrivals", the count of a night). Written folded, as fold() makes them.
+  const PRESETS = {
+    hotel: {
+      name: "Hotel PMS export (OPERA, protel, Mews …)",
+      fields: {
+        date: ["business date", "hotel date", "report date", "stay date", "created", "created at", "created on", "erstellt am", "angelegt am", "geschaftsdatum", "berichtsdatum", "funddatum", "gefunden am", "date found", "data e krijimit"],
+        time: ["time", "zeit", "uhrzeit", "ora", "koha"],
+        room: ["room", "room no", "room nr", "room number", "rm", "zimmer", "zimmernummer", "zimmer nr", "zi nr", "zi", "dhoma", "nr dhome", "numri i dhomes"],
+        guest: ["guest", "guest name", "name", "last name", "surname", "gast", "gastname", "name des gastes", "nachname", "mysafiri", "emri i mysafirit", "klienti"],
+        available: ["rooms available", "available rooms", "total rooms", "rooms in hotel", "zimmer gesamt", "verfugbare zimmer", "anzahl zimmer"],
+        sold: ["rooms sold", "occupied rooms", "rooms occupied", "room nights", "belegte zimmer", "verkaufte zimmer", "zimmernachte"],
+        roomRev: ["room revenue", "rooms revenue", "net room revenue", "accommodation revenue", "logis", "logisumsatz", "logis netto", "zimmerumsatz", "beherbergungsumsatz"],
+        otherRev: ["other revenue", "f b revenue", "food and beverage revenue", "extras revenue", "f b umsatz", "nebenumsatz", "sonstiger umsatz"],
+        arrivals: ["arrivals", "arrival rooms", "check ins", "anreisen", "mberritjet"],
+        departures: ["departures", "departure rooms", "check outs", "abreisen", "largimet"],
+        noShows: ["no shows", "no show", "no show rooms"],
+        walkIns: ["walk ins", "walk in"],
+        ooo: ["out of order", "ooo rooms", "rooms out of order", "ausser betrieb", "zimmer ausser betrieb"],
+        covers: ["breakfast covers", "breakfast count", "fruhstuck", "fruhstucke", "anzahl fruhstuck"],
+        what: ["description", "item", "item description", "object", "beschreibung", "gegenstand", "fundgegenstand", "fundsache", "complaint", "beschwerde", "pershkrimi", "sendi"],
+        category: ["category", "kategorie", "kategoria"],
+        status: ["status", "item status", "statusi"],
+        channel: ["source", "channel", "via", "quelle", "kanal", "burimi", "kanali"],
+        takenBy: ["taken by", "reported by", "created by", "user", "aufgenommen von", "erstellt von", "gemeldet von", "benutzer", "marre nga"],
+        foundBy: ["found by", "finder", "gefunden von", "gjetur nga"],
+        place: ["storage location", "stored in", "storage", "aufbewahrungsort", "aufbewahrung", "lagerort", "ruajtur ne", "vendi i ruajtjes"],
+        tag: ["tag", "tag number", "tag no", "label", "etikett", "fundnummer", "etiketa"],
+        area: ["area", "location", "department", "bereich", "abteilung", "ort", "fundort", "zona", "departamenti"],
+        action: ["action taken", "resolution", "massnahme", "losung", "veprimi"],
+        comp: ["compensation", "credit", "gutschrift", "kompensation", "kompensimi"],
+        value: ["value", "amount", "wert", "betrag", "vlera", "shuma"],
+        severity: ["severity", "priority", "prioritat", "schweregrad", "prioriteti"],
+        note: ["comment", "comments", "remarks", "notes", "bemerkung", "bemerkungen", "kommentar", "notiz", "shenim", "koment"],
+      },
+      known: ["arrival", "arrival date", "departure", "departure date", "anreise", "anreisedatum", "abreise", "abreisedatum", "nights", "nachte", "rate code", "ratencode", "rate", "rate amount", "rate plan", "ratenplan", "balance", "saldo", "offener saldo", "confirmation number", "confirmation no", "bestatigungsnummer", "reservation number", "reservation no", "reservierungsnummer", "adults", "erwachsene", "children", "kinder", "room type", "zimmertyp", "zimmerkategorie", "company", "firma", "travel agent", "reiseburo", "market code", "marktsegment", "source code", "hk status", "fo status", "room status", "zimmerstatus", "payment method", "zahlungsart", "nationality", "nationalitat", "vip", "email", "phone", "telefon"],
+    },
+    warehouse: {
+      name: "Warehouse export (SAP, WMS)",
+      fields: {
+        date: ["posting date", "document date", "created on", "delivery date", "goods issue date", "goods receipt date", "confirmation date", "buchungsdatum", "belegdatum", "angelegt am", "erstellt am", "lieferdatum", "warenausgangsdatum", "wa datum", "wareneingangsdatum", "we datum", "quittierungsdatum"],
+        stage: ["process", "process step", "activity", "warehouse process type", "prozess", "prozessschritt", "tatigkeit", "lagerprozessart", "procesi"],
+        type: ["exception code", "exception", "damage code", "error code", "error type", "ausnahmecode", "ausnahme", "schadenscode", "fehlercode", "fehlerart", "kodi i gabimit"],
+        cause: ["reason for movement", "reason code", "reason", "bewegungsgrund", "grund", "grundcode", "arsyeja"],
+        units: ["quantity", "qty", "delivery quantity", "actual quantity", "difference quantity", "damaged quantity", "menge", "liefermenge", "istmenge", "ist menge", "differenzmenge", "beschadigte menge", "sasia"],
+        cost: ["value", "net value", "amount", "price", "wert", "nettowert", "betrag", "preis", "vlera"],
+        note: ["item text", "text", "comment", "positionstext", "bemerkung", "kommentar", "shenim"],
+        area: ["storage bin", "storage type", "storage section", "warehouse", "gate", "door", "dock", "lagerplatz", "lagertyp", "lagerbereich", "lager", "tor", "rampe", "magazina"],
+        sku: ["material", "material number", "material no", "materialnummer", "artikelnummer", "sku", "artikulli"],
+        name: ["material description", "product description", "materialkurztext", "materialbezeichnung", "produktbeschreibung", "bezeichnung", "pershkrimi"],
+        unitCost: ["moving average price", "standard price", "price per unit", "gleitender durchschnittspreis", "standardpreis", "preis pro einheit"],
+        lt: ["planned delivery time", "planned delivery time days", "planlieferzeit", "wiederbeschaffungszeit"],
+        stock: ["unrestricted", "unrestricted use", "unrestricted use stock", "available quantity", "frei verwendbar", "frei verwendbarer bestand", "lagerbestand", "verfugbare menge", "stoku"],
+        picks: ["pick lines", "picks", "number of picks", "anzahl picks", "pickpositionen"],
+      },
+      known: ["delivery", "delivery number", "outbound delivery", "inbound delivery", "lieferung", "liefernummer", "auslieferung", "anlieferung", "item", "position", "pos", "handling unit", "hu", "batch", "charge", "plant", "werk", "storage location", "lagerort", "warehouse number", "lagernummer", "unit of measure", "uom", "base unit of measure", "mengeneinheit", "basismengeneinheit", "me", "bme", "transfer order", "transportauftrag", "warehouse task", "lageraufgabe", "ship to party", "warenempfanger", "sold to party", "auftraggeber", "vendor", "supplier", "lieferant", "sales order", "kundenauftrag", "purchase order", "bestellung", "movement type", "bewegungsart", "weight", "gewicht"],
+    },
+    transport: {
+      name: "Transport/route export (TMS)",
+      fields: {
+        date: ["tour date", "route date", "trip date", "transport date", "loading date", "shipping date", "delivery date", "tourdatum", "fahrtdatum", "transportdatum", "ladedatum", "versanddatum", "lieferdatum", "data e turit"],
+        route: ["route", "route number", "route no", "route name", "route id", "tour", "tour nr", "tour number", "tournummer", "trip", "trip id", "fahrt", "fahrtnummer", "transport", "transportnummer", "linja", "rruga"],
+        planDep: ["planned departure", "plan departure", "scheduled departure", "planned departure time", "planned start", "plan start", "etd", "std", "plan abfahrt", "planabfahrt", "soll abfahrt", "geplante abfahrt", "abfahrt plan", "geplanter start", "nisja e planifikuar", "nisja plan"],
+        actDep: ["actual departure", "actual departure time", "actual start", "atd", "ist abfahrt", "istabfahrt", "tatsachliche abfahrt", "abfahrt ist", "ist start", "nisja reale", "nisja aktuale"],
+        planArr: ["planned arrival", "plan arrival", "scheduled arrival", "planned arrival time", "planned end", "eta", "sta", "plan ankunft", "planankunft", "soll ankunft", "geplante ankunft", "ankunft plan", "plan ende", "mberritja e planifikuar"],
+        actArr: ["actual arrival", "actual arrival time", "actual end", "ata", "ist ankunft", "istankunft", "tatsachliche ankunft", "ankunft ist", "ist ende", "mberritja reale", "mberritja aktuale"],
+        reason: ["delay reason", "deviation reason", "reason code", "reason", "verspatungsgrund", "abweichungsgrund", "grund", "arsyeja e vonese", "arsyeja"],
+        shift: ["shift", "wave", "schicht", "welle", "turni"],
+        note: ["comment", "remarks", "driver note", "bemerkung", "kommentar", "fahrerbemerkung", "shenim"],
+      },
+      known: ["driver", "driver name", "fahrer", "vehicle", "fahrzeug", "truck", "lkw", "license plate", "kennzeichen", "carrier", "frachtfuhrer", "spediteur", "depot", "hub", "distance", "km", "entfernung", "origin", "start location", "startort", "destination", "ziel", "zielort", "stop", "stop number", "stopp", "stoppnummer", "pallets", "paletten", "shipment", "sendung", "customer", "kunde"],
+    },
+  };
+  // A name that more than one preset uses ("comment", "lieferdatum") says nothing about which export it is.
+  const SHARED = (() => {
+    const seen = new Map();
+    Object.values(PRESETS).forEach((preset) => {
+      new Set([...Object.values(preset.fields).flat(), ...preset.known]).forEach((name) => seen.set(name, (seen.get(name) || 0) + 1));
+    });
+    return new Set([...seen].filter(([, n]) => n > 1).map(([name]) => name));
+  })();
+  const presetOf = (preset) => (typeof preset === "string" ? PRESETS[preset] : preset) || null;
 
   // Lower case, without accents and signs: "Tatsächliche Ankunft", "Room revenue €" and "mbërritja" compare by
   // their letters.
@@ -93,17 +184,31 @@
     if (within(wa, wb) || within(wb, wa)) score = Math.max(score, 0.75 + (0.2 * Math.min(wa.length, wb.length)) / Math.max(wa.length, wb.length));
     return score;
   };
-  const namesOf = (column) => [column.label, column.key, ...(ALIASES[column.key] || [])].filter(Boolean);
+  const namesOf = (column, preset = null) => [column.label, column.key, ...(ALIASES[column.key] || []), ...(presetOf(preset)?.fields[column.key] || [])].filter(Boolean);
+  const best = (header, names) => Math.max(0, ...names.map((name) => similarity(header, name)));
+
+  // Which preset a header row looks like, or "": the one with the most headers close to its own names (two at
+  // least, and more than any other preset).
+  const detect = (headers) => {
+    const counts = Object.entries(PRESETS).map(([key, preset]) => {
+      const names = [...Object.values(preset.fields).flat(), ...preset.known].filter((name) => !SHARED.has(name));
+      return [key, (headers || []).filter((header) => best(header, names) >= 0.85).length];
+    }).sort((a, b) => b[1] - a[1]);
+    return counts[0][1] >= 2 && counts[0][1] > counts[1][1] ? counts[0][0] : "";
+  };
 
   // The best pasted column for each column of the log, or -1. Each pasted column feeds one column at most; the
-  // surest pairs are taken first, and of equal ones the pair that keeps the column in its place.
-  const guess = (headers, columns) => {
+  // surest pairs are taken first, and of equal ones the pair that keeps the column in its place. With a preset, its
+  // names count too, and a header that is closer to one of its known columns than to a log's column stays out.
+  const guess = (headers, columns, preset = null) => {
+    const chosen = presetOf(preset);
+    const knownScore = headers.map((header) => (chosen ? best(header, chosen.known) : 0));
     const pairs = [];
     columns.forEach((column, j) => {
-      const names = namesOf(column);
+      const names = namesOf(column, chosen);
       headers.forEach((header, i) => {
-        const score = Math.max(0, ...names.map((name) => similarity(header, name)));
-        if (score >= THRESHOLD) pairs.push({ i, j, score });
+        const score = best(header, names);
+        if (score >= THRESHOLD && score >= knownScore[i]) pairs.push({ i, j, score });
       });
     });
     pairs.sort((a, b) => b.score - a.score || Math.abs(a.i - a.j) - Math.abs(b.i - b.j) || a.i - b.i);
@@ -161,15 +266,18 @@
   // The first row of a paste: a header sits on top, so a few thousand characters are enough to read it.
   const firstRow = (text) => parseRows(String(text ?? "").slice(0, 4000))[0] || [];
   // What to do with a paste: null when it is left as it is.
-  const plan = (text, columns, tool) => {
+  // preset: a key of PRESETS, "" for none, or undefined to take the one the header is recognised as.
+  const plan = (text, columns, tool, preset) => {
     const headers = firstRow(text);
     if (!isHeader(headers)) return null;
     const sig = signature(headers);
+    const detected = detect(headers);
+    const chosen = preset === undefined ? detected : PRESETS[preset] ? preset : "";
     const saved = remembered(tool, sig);
-    if (valid(saved, columns, headers)) return inPlace(saved) ? null : { headers, sig, mapping: saved.slice(), remembered: true };
-    const mapping = guess(headers, columns);
+    if (valid(saved, columns, headers)) return inPlace(saved) ? null : { headers, sig, mapping: saved.slice(), remembered: true, detected, preset: chosen };
+    const mapping = guess(headers, columns, chosen);
     if (mapping.every((i) => i < 0) || inPlace(mapping)) return null;
-    return { headers, sig, mapping, remembered: false };
+    return { headers, sig, mapping, remembered: false, detected, preset: chosen };
   };
 
   const toolOf = (textarea) => textarea.dataset.importKey
@@ -209,8 +317,25 @@
     const title = el("p", "fc-map-title", tx("Match the columns"));
     title.id = `${id}-title`;
     const help = el("p", "form-note", tx("The first row is a header in another order. Choose which pasted column goes into each column of the log; the rows are put in order when you import them."));
+    // Which kind of export the header was recognised as; another choice guesses again with its names.
+    const presetRow = el("div", "fc-map-grid fc-map-preset");
+    const presetField = el("div", "field");
+    const presetLabel = el("label", null, tx("Recognised as"));
+    presetLabel.htmlFor = `${id}-preset`;
+    const presetSelect = el("select");
+    presetSelect.id = `${id}-preset`;
+    const noPreset = el("option", null, tx("No known export (column names only)"));
+    noPreset.value = "";
+    presetSelect.append(noPreset, ...Object.entries(PRESETS).map(([key, preset]) => {
+      const option = el("option", null, tx(preset.name));
+      option.value = key;
+      return option;
+    }));
+    presetField.append(presetLabel, presetSelect);
+    presetRow.append(presetField);
+    const presetNote = el("p", "form-note", tx("Recognised from typical column names; check the mapping against your export."));
     const grid = el("div", "fc-map-grid");
-    panel.append(title, help, grid);
+    panel.append(title, help, presetRow, presetNote, grid);
     (textarea.closest(".field") || textarea).after(note, panel);
 
     const hide = () => {
@@ -220,6 +345,8 @@
       grid.replaceChildren();
     };
     const renderPanel = () => {
+      presetSelect.value = current.preset || "";
+      presetNote.hidden = !current.preset;
       grid.replaceChildren();
       columns.forEach((column, j) => {
         const field = el("div", "field");
@@ -256,6 +383,12 @@
       clearTimeout(timer);
       timer = setTimeout(analyse, 120);
     });
+    presetSelect.addEventListener("change", () => {
+      if (!current) return;
+      current.preset = PRESETS[presetSelect.value] ? presetSelect.value : "";
+      current.mapping = guess(current.headers, columns, current.preset);
+      renderPanel();
+    });
     change.addEventListener("click", () => {
       note.hidden = true;
       panel.hidden = false;
@@ -279,7 +412,7 @@
 
   const init = (root = document) => [...root.querySelectorAll("textarea[data-columns]")].map(attach).filter(Boolean);
 
-  window.ImportMap = { STORE, THRESHOLD, ALIASES, fold, similarity, guess, isHeader, inPlace, signature, rewrite, plan, remembered, remember, attach, init };
+  window.ImportMap = { STORE, THRESHOLD, ALIASES, PRESETS, fold, similarity, detect, guess, isHeader, inPlace, signature, rewrite, plan, remembered, remember, attach, init };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => init());
   else init();
 })();

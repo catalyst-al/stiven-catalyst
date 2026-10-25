@@ -1,0 +1,150 @@
+/* ===== Floor mode (js/floor-mode.js) =====
+   The tools as the floor needs them: gloves, one hand, a cold dock, a bright day. The switch is on every tool page, at
+   the top right, level with the family badge (on a phone, on its own line above it). The inline script in
+   layouts/base.njk sets data-floor="on" on the root before the first paint. With it on: every tap target at least
+   48 px, larger text and inputs, full contrast (no grey for what has to be read), the main button of a form kept in
+   reach at the bottom of the screen, larger chart text, and nothing that shows only under a pointer. Screen only:
+   paper prints as it always did. */
+.floor-switch-row { position: relative; z-index: 3; height: 0; }
+.floor-switch {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 34px;
+  padding: 0 14px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.floor-switch:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); color: var(--ink); }
+.floor-switch:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+/* The track and its knob: left is off, right on; the word beside it says what it is. */
+.floor-switch-track {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+}
+.floor-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: translate .2s ease;
+}
+:root[data-floor="on"] .floor-switch { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 16%, var(--paper)); color: var(--ink); }
+:root[data-floor="on"] .floor-switch-track { border-color: var(--blue); background: var(--blue); }
+:root[data-floor="on"] .floor-switch-track::after { translate: 12px 0; background: var(--on-blue); }
+/* On a phone the badge takes most of its line: the switch stands on its own line above it, at the right. */
+@media (max-width: 620px) {
+  .floor-switch-row { display: flex; justify-content: flex-end; height: auto; padding-top: 14px; }
+  .floor-switch { position: static; }
+  .floor-switch-row ~ .family-badge-row { padding-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floor-switch, .floor-switch-track::after { transition: none; }
+}
+@media print {
+  .floor-switch-row { display: none !important; }
+}
+
+@media screen {
+  /* Contrast: what is grey on the normal page reads as text here, and lines and borders can be seen in sunlight. */
+  :root[data-floor="on"] { --muted: #dde3e8; --line: rgba(255, 255, 255, .34); }
+  :root[data-floor="on"][data-theme="light"] { --muted: #262e35; --line: rgba(11, 16, 21, .45); }
+  /* The drawing behind the title is decoration: on the floor it only lowers the contrast. */
+  :root[data-floor="on"] .family-sky { display: none; }
+  :root[data-floor="on"] body { font-size: 18px; line-height: 1.55; }
+  :root[data-floor="on"] .floor-switch { top: 33px; min-height: 48px; padding: 0 18px 0 14px; font-size: 13px; }
+
+  /* Text: the small print of the tools grows to a size that reads at arm's length. */
+  :root[data-floor="on"] main :is(.form-note, .dl-empty, .dl-panel-note, .ck-caption, .tips li, .privacy-note) { font-size: 16px; }
+  :root[data-floor="on"] main :is(.kicker, .eyebrow, .dl-range-label, .result-label) { font-size: 13px; letter-spacing: .1em; }
+  :root[data-floor="on"] .field label { color: var(--ink); font-size: 14px; letter-spacing: .06em; }
+  /* Larger words need their room: the note beside a label wraps instead of pushing the field past the screen. */
+  :root[data-floor="on"] .field label .optional { color: var(--muted); white-space: normal; }
+  :root[data-floor="on"] .field > * { min-width: 0; }
+  :root[data-floor="on"] .tool-hero .lede { font-size: 18px; }
+
+  /* Tap targets of 48 px at least. min-height and min-width leave a tool's own layout (and inputs laid over a
+     larger target) alone. */
+  :root[data-floor="on"] main :is(button, .button-primary, .button-secondary, .chip, summary, select),
+  :root[data-floor="on"] main input:not([type="checkbox"], [type="radio"], [type="range"], [type="hidden"]) { min-height: 48px; }
+  :root[data-floor="on"] main :is(button, .button-primary, .button-secondary) { min-width: 48px; font-size: 17px; }
+  :root[data-floor="on"] main .button-ghost { display: inline-flex; align-items: center; min-height: 48px; font-size: 17px; }
+  :root[data-floor="on"] main :is(.button-primary, .button-secondary) { padding: 13px 22px; white-space: normal; text-align: center; }
+  :root[data-floor="on"] .field :is(input, select, textarea) { padding: 13px 16px; border-width: 2px; font-size: 18px; }
+  :root[data-floor="on"] main :is(input, select, textarea) { font-size: max(1em, 17px); }
+  :root[data-floor="on"] main :is(input[type="checkbox"], input[type="radio"]) { min-width: 26px; min-height: 26px; accent-color: var(--blue); }
+  :root[data-floor="on"] main label:has(> :is(input[type="checkbox"], input[type="radio"])) { min-height: 48px; padding-block: 11px; }
+  :root[data-floor="on"] .dl-remove { min-width: 48px; min-height: 48px; font-size: 20px; }
+  :root[data-floor="on"] .dl-range-presets button { min-height: 48px; padding: 10px 16px; font-size: 16px; }
+  :root[data-floor="on"] .dl-undo { min-height: 48px; }
+
+  /* The header: the four round buttons at 48 px; on a phone the name beside the mark steps aside to make room
+     (the link keeps its name for screen readers). */
+  :root[data-floor="on"] .site-header :is(.icon-button, .menu-button) { width: 48px; height: 48px; }
+  @media (max-width: 620px) {
+    :root[data-floor="on"] .brand > span:not(.brand-mark) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+
+  /* Tables: larger figures, notes written out in full rather than cut off (their full text was only a pointer away). */
+  :root[data-floor="on"] .dl-table { font-size: 16px; }
+  :root[data-floor="on"] .dl-table thead th { color: var(--ink); font-size: 12px; }
+  :root[data-floor="on"] .dl-table :is(th, td) { padding: 12px 14px; }
+  :root[data-floor="on"] .dl-table .dl-note { max-width: 320px; overflow: visible; white-space: normal; text-overflow: clip; }
+
+  /* Charts: the text of a chart at a readable size. A chart keeps a width at which its text is not scaled down to
+     nothing and scrolls sideways in its frame (.ck-scroll) on a phone instead. */
+  :root[data-floor="on"] .ck-chart { min-width: 560px; }
+  :root[data-floor="on"] :is(.dl-panel, .ck-figure, .ck-scroll) { min-width: 0; max-width: 100%; }
+  :root[data-floor="on"] .ck-chart text:is([font-size="10"], [font-size="11"], [font-size="12"]) { font-size: 14px; }
+  :root[data-floor="on"] .ck-chart text[font-size="13"] { font-size: 15px; }
+  :root[data-floor="on"] :is(.ck-legend, .ck-chip, .ck-tooltip) { font-size: 16px; }
+  :root[data-floor="on"] .ck-tooltip strong { font-size: 17px; }
+  :root[data-floor="on"] .ck-swatch { width: 16px; height: 16px; }
+
+  /* The main button of a form stays in reach: its row of buttons sticks to the bottom of the screen while the form is
+     on it, the main button first, the others a swipe away in the same row. */
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -10px;
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    border-radius: 14px 14px 0 0;
+    background: var(--paper);
+    scrollbar-width: thin;
+  }
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) > * { flex: 0 0 auto; }
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) > .button-primary { order: -1; }
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) > .form-note { flex: 1 0 12em; max-width: 70vw; white-space: normal; }
+
+  /* Nothing that only a pointer finds: no lift on hover, a pressed choice marked by its border as well as its colour. */
+  :root[data-floor="on"] .family-badge:hover { translate: none; }
+  /* The floating share button would sit on the row of buttons kept in reach; sharing is not work of the floor. */
+  :root[data-floor="on"] .share-orbit { display: none; }
+  :root[data-floor="on"] main [aria-pressed="true"]:not(.floor-switch) { outline: 2px solid var(--ink); outline-offset: 1px; }
+}

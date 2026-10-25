@@ -1,0 +1,863 @@
+{
+  "storageKey": "sc-site-compare-de",
+  "periods": [
+    {
+      "key": "last7",
+      "label": "Letzte 7 Tage"
+    },
+    {
+      "key": "last30",
+      "label": "Letzte 30 Tage"
+    },
+    {
+      "key": "thisMonth",
+      "label": "Dieser Monat"
+    },
+    {
+      "key": "lastMonth",
+      "label": "Letzter Monat"
+    }
+  ],
+  "groups": {
+    "quality": "Qualität",
+    "delivery": "Lieferung",
+    "equipment": "Anlagen und Instandhaltung",
+    "workplace": "Arbeitsplatz",
+    "safety": "Arbeitssicherheit",
+    "actions": "Maßnahmen und Verbesserung",
+    "hotel": "Hotel"
+  },
+  "kpis": {
+    "damageRate": {
+      "label": "Schadensquote",
+      "detail": "{units} beschädigt von {volume}"
+    },
+    "damageUnits": {
+      "label": "Beschädigte Einheiten"
+    },
+    "incompleteRate": {
+      "label": "Unvollständigkeitsquote",
+      "detail": "{units} unvollständig von {volume}"
+    },
+    "incompleteUnits": {
+      "label": "Unvollständige Aufträge"
+    },
+    "onTime": {
+      "label": "Pünktliche Touren",
+      "detail": "{late} verspätet von {routes}"
+    },
+    "lateRoutes": {
+      "label": "Verspätete Touren"
+    },
+    "oee": {
+      "label": "OEE (alle Anlagen)",
+      "detail": "{entries} Schichten · Anlagen: {machines}"
+    },
+    "fiveS": {
+      "label": "5S-Durchschnitt",
+      "detail": "Audits: {audits}"
+    },
+    "accidents": {
+      "label": "Unfälle"
+    },
+    "firstAid": {
+      "label": "Erste-Hilfe-Fälle"
+    },
+    "nearMisses": {
+      "label": "Beinaheunfälle und unsichere Handlungen"
+    },
+    "daysSince": {
+      "label": "Tage seit dem letzten Unfall"
+    },
+    "openActions": {
+      "label": "Offene Maßnahmen"
+    },
+    "overdueActions": {
+      "label": "Überfällige Maßnahmen"
+    },
+    "kaizenDone": {
+      "label": "Umgesetzte Kaizen-Ideen"
+    },
+    "pm": {
+      "label": "PM-Erfüllung",
+      "detail": "{onTime} von {scheduled} rechtzeitig"
+    },
+    "pmOverdue": {
+      "label": "Überfällige Wartungsaufgaben"
+    },
+    "firstPass": {
+      "label": "Zimmer beim ersten Mal abgenommen",
+      "detail": "{firstPass} von {first}"
+    },
+    "complaintsPer100": {
+      "label": "Beschwerden pro 100 belegte Zimmernächte",
+      "detail": "{complaints} bei {nights} Zimmernächten"
+    },
+    "complaints": {
+      "label": "Gästebeschwerden"
+    }
+  },
+  "prompt": {
+    "title": "Was der beste Standort anders macht",
+    "lead": "{best} hat bei „{kpi}“ den besten Wert: {bestValue}, gegenüber {worstValue} in {worst}.",
+    "ask": "Gehen Sie hin und sehen Sie selbst, bevor Sie Menschen vergleichen: Gehen Sie mit der Leitung von {worst} durch die Halle von {best}, halten Sie im Gemba Walk fest, was dort anders gemacht wird, und stellen Sie die Praxis, die sich übertragen lässt, auf das Kaizen-Board.",
+    "none": "Die Standorte haben in diesem Zeitraum noch keine gemeinsame Quote. Aktualisieren Sie sie oder wählen Sie einen längeren Zeitraum."
+  },
+  "summary": {
+    "title": "Standortvergleich",
+    "ranking": "Rangfolge"
+  },
+  "tips": [
+    [
+      "Bitten Sie um den Nur-Lese-Code.",
+      "Jeder Standort erstellt ihn in der Team-Synchronisierung (Box „Ihre ganze Arbeit in einer Datei“ → „Nur-Lese-Code erstellen“) und schickt ihn Ihnen. Sie lesen die geteilten Tools des Standorts; Sie treten dem Team nicht bei und können nichts ändern."
+    ],
+    [
+      "Niemals ein Team-Code.",
+      "Mit den sechs Wörtern kann jeder, der sie hat, die Arbeit eines Teams ändern. Diese Seite lehnt sie ab und speichert sie nicht."
+    ],
+    [
+      "Jeden Montag aktualisieren.",
+      "„Alle Standorte aktualisieren“ liest die neueste Teamkopie jedes Standorts und behält nur die Kennzahlen. Ein Standort, der seinen Code geändert hat, muss Ihnen seinen neuen Nur-Lese-Code schicken."
+    ],
+    [
+      "Erst Quoten vergleichen, dann hingehen.",
+      "Quoten und Durchschnitte kommen in die Rangfolge, Anzahlen nicht, weil sie mit der Größe eines Standorts wachsen. Der beste Standort bei einer Quote ist der Ort zum Lernen, kein Urteil über die anderen."
+    ]
+  ],
+  "example": {
+    "sites": [
+      {
+        "name": "Leipzig",
+        "damage": {
+          "volume": [
+            4200,
+            4600,
+            4400,
+            4500,
+            4900,
+            2100,
+            0
+          ],
+          "units": [
+            8,
+            9,
+            7,
+            9,
+            11,
+            3,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            -1,
+            2,
+            0,
+            -2,
+            1
+          ],
+          "causes": [
+            "Beim Verladen gefallen",
+            "Im Rollbehälter gequetscht",
+            "Nasse Verpackung"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            4200,
+            4600,
+            4400,
+            4500,
+            4900,
+            2100,
+            0
+          ],
+          "units": [
+            5,
+            6,
+            4,
+            5,
+            7,
+            2,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "causes": [
+            "Fehlender Artikel",
+            "Falsches Etikett"
+          ]
+        },
+        "delay": {
+          "routes": [
+            14,
+            14,
+            14,
+            14,
+            14,
+            8,
+            0
+          ],
+          "late": [
+            1,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "minutes": 24
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter 1",
+              "rate": 600,
+              "perf": [
+                0.88,
+                0.9,
+                0.86
+              ],
+              "scrap": 0.008,
+              "breakdown": [
+                10,
+                0,
+                20,
+                5
+              ]
+            },
+            {
+              "name": "Sorter 2",
+              "rate": 600,
+              "perf": [
+                0.84,
+                0.87,
+                0.85
+              ],
+              "scrap": 0.01,
+              "breakdown": [
+                15,
+                30,
+                0,
+                10
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 2,
+          "areas": [
+            "Wareneingang",
+            "Warenausgang"
+          ],
+          "totals": [
+            66,
+            68,
+            64,
+            70,
+            67,
+            69
+          ]
+        },
+        "safety": [
+          [
+            4,
+            "near-miss"
+          ],
+          [
+            11,
+            "unsafe-condition"
+          ],
+          [
+            19,
+            "first-aid"
+          ],
+          [
+            26,
+            "near-miss"
+          ],
+          [
+            40,
+            "positive"
+          ],
+          [
+            58,
+            "no-lost-time"
+          ]
+        ],
+        "actions": [
+          [
+            30,
+            10,
+            "done",
+            12
+          ],
+          [
+            21,
+            5,
+            "verified",
+            6
+          ],
+          [
+            14,
+            2,
+            "doing"
+          ],
+          [
+            9,
+            -4,
+            "open"
+          ],
+          [
+            6,
+            -10,
+            "open"
+          ],
+          [
+            40,
+            20,
+            "done",
+            18
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter 1",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  0,
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "Stapler 3",
+            "tasks": [
+              {
+                "every": 1,
+                "late": [
+                  0,
+                  0,
+                  0,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            5,
+            12,
+            18,
+            27,
+            33,
+            44
+          ],
+          "ideas": [
+            2,
+            8
+          ]
+        }
+      },
+      {
+        "name": "Kassel",
+        "damage": {
+          "volume": [
+            3100,
+            3300,
+            3200,
+            3400,
+            3600,
+            1500,
+            0
+          ],
+          "units": [
+            12,
+            13,
+            11,
+            12,
+            15,
+            5,
+            0
+          ],
+          "extra": [
+            1,
+            -1,
+            2,
+            0,
+            -2,
+            1,
+            0
+          ],
+          "causes": [
+            "Im Rollbehälter gequetscht",
+            "Beim Verladen gefallen",
+            "Gerissene Folie"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            3100,
+            3300,
+            3200,
+            3400,
+            3600,
+            1500,
+            0
+          ],
+          "units": [
+            3,
+            4,
+            3,
+            3,
+            4,
+            1,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "causes": [
+            "Fehlender Artikel",
+            "Fehlmenge beim Kommissionieren"
+          ]
+        },
+        "delay": {
+          "routes": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            6,
+            0
+          ],
+          "late": [
+            2,
+            1,
+            2,
+            1,
+            3,
+            1,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "minutes": 31
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter A",
+              "rate": 540,
+              "perf": [
+                0.8,
+                0.83,
+                0.78
+              ],
+              "scrap": 0.012,
+              "breakdown": [
+                25,
+                10,
+                40,
+                0,
+                15
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 3,
+          "areas": [
+            "Rampe",
+            "Sortierung"
+          ],
+          "totals": [
+            55,
+            58,
+            52,
+            57,
+            60,
+            54
+          ]
+        },
+        "safety": [
+          [
+            3,
+            "near-miss"
+          ],
+          [
+            8,
+            "near-miss"
+          ],
+          [
+            15,
+            "unsafe-act"
+          ],
+          [
+            22,
+            "near-miss"
+          ],
+          [
+            29,
+            "unsafe-condition"
+          ],
+          [
+            33,
+            "positive"
+          ],
+          [
+            47,
+            "first-aid"
+          ],
+          [
+            120,
+            "no-lost-time"
+          ]
+        ],
+        "actions": [
+          [
+            35,
+            15,
+            "done",
+            14
+          ],
+          [
+            28,
+            7,
+            "done",
+            9
+          ],
+          [
+            20,
+            3,
+            "verified",
+            2
+          ],
+          [
+            12,
+            0,
+            "doing"
+          ],
+          [
+            8,
+            -6,
+            "open"
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter A",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  3,
+                  0,
+                  4
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  5,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "Rampentor 2",
+            "tasks": [
+              {
+                "every": 4,
+                "late": [
+                  0
+                ],
+                "open": true
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            9,
+            25,
+            41
+          ],
+          "ideas": [
+            4,
+            11,
+            16
+          ]
+        }
+      },
+      {
+        "name": "Erfurt",
+        "damage": {
+          "volume": [
+            2600,
+            2800,
+            2700,
+            2900,
+            3000,
+            0,
+            0
+          ],
+          "units": [
+            4,
+            5,
+            4,
+            4,
+            6,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            -1,
+            0,
+            1,
+            0
+          ],
+          "causes": [
+            "Nasse Verpackung",
+            "Beim Verladen gefallen"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            2600,
+            2800,
+            2700,
+            2900,
+            3000,
+            0,
+            0
+          ],
+          "units": [
+            6,
+            7,
+            6,
+            8,
+            9,
+            0,
+            0
+          ],
+          "extra": [
+            1,
+            0,
+            -1,
+            0,
+            2,
+            0,
+            -1
+          ],
+          "causes": [
+            "Falsches Etikett",
+            "Fehlender Artikel",
+            "Fehlmenge beim Kommissionieren"
+          ]
+        },
+        "delay": {
+          "routes": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            0,
+            0
+          ],
+          "late": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "minutes": 22
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter E1",
+              "rate": 480,
+              "perf": [
+                0.9,
+                0.92,
+                0.89
+              ],
+              "scrap": 0.006,
+              "breakdown": [
+                5,
+                0,
+                10,
+                0
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 1,
+          "areas": [
+            "Lager"
+          ],
+          "totals": [
+            70,
+            72,
+            69,
+            73,
+            71
+          ]
+        },
+        "safety": [
+          [
+            6,
+            "near-miss"
+          ],
+          [
+            13,
+            "near-miss"
+          ],
+          [
+            20,
+            "unsafe-condition"
+          ],
+          [
+            27,
+            "positive"
+          ],
+          [
+            36,
+            "near-miss"
+          ],
+          [
+            44,
+            "unsafe-act"
+          ]
+        ],
+        "actions": [
+          [
+            25,
+            12,
+            "done",
+            11
+          ],
+          [
+            18,
+            4,
+            "verified",
+            3
+          ],
+          [
+            10,
+            1,
+            "done",
+            1
+          ],
+          [
+            5,
+            -9,
+            "open"
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter E1",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            7,
+            14,
+            21,
+            30
+          ],
+          "ideas": [
+            3
+          ]
+        }
+      }
+    ]
+  }
+}

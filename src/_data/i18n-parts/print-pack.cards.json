@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Print Pack", "type": "Print", "time": "5 min", "summary": "The paper of the team board in one print, from what the tools hold in this browser: open actions by owner, the week's maintenance work list and 5S audits, a card per leader, the Safety Cross and Daily Board of the month, and the attendant and section sheets of a hotel.", "url": "/tools/print-pack/", "cta": "Print the pack" },
+    "de": { "name": "Druckpaket", "type": "Druck", "time": "5 min", "summary": "Das Papier des Teamboards in einem Druck, aus dem, was die Tools in diesem Browser enthalten: offene Maßnahmen nach Verantwortlichen, Wartungsarbeitsliste und 5S-Audits der Woche, eine Karte je Führungskraft, Sicherheitskreuz und Tagesboard des Monats und die Arbeits- und Revierzettel eines Hotels.", "url": "/de/tools/print-pack/", "cta": "Paket drucken" },
+    "sq": { "name": "Paketa e printimit", "type": "Printim", "time": "5 min", "summary": "Letra e tabelës së ekipit në një printim, nga ajo që mjetet kanë në këtë shfletues: veprimet e hapura sipas përgjegjësit, lista e mirëmbajtjes dhe auditet 5S të javës, një kartë për çdo drejtues, kryqi i sigurisë dhe tabela e ditës për muajin, dhe fletët e pastruesve dhe të sektorëve të një hoteli.", "url": "/sq/tools/print-pack/", "cta": "Printo paketën" }
+  },
+  "routine": { "when": "Every week", "do": "On Monday before the huddle, print the pack and put the week's sheets on the team board.", "de": { "when": "Jede Woche", "do": "Drucken Sie am Montag vor dem Huddle das Paket und hängen Sie die Blätter der Woche an das Teamboard." }, "sq": { "when": "Çdo javë", "do": "Të hënën para takimit, printo paketën dhe vari fletët e javës në tabelën e ekipit." } },
+  "recipe": "example"
+}

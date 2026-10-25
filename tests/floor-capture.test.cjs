@@ -115,7 +115,7 @@ test('a pasted header in another order shows the mapping; the import gets the ro
   await wait(w);
   assert.equal(panel.hidden, false, 'the panel shows');
   assert.equal(note.hidden, true);
-  const selects = [...panel.querySelectorAll('select')];
+  const selects = [...panel.querySelectorAll('.fc-map-grid:not(.fc-map-preset) select')];
   assert.equal(selects.length, SAFETY.length, 'one choice per column of the log');
   assert.equal(doc.querySelector(`label[for="${selects[3].id}"]`).textContent, 'area');
   assert.deepEqual(selects.slice(0, 4).map((s) => s.value), ['1', '3', '2', '0']);
@@ -138,7 +138,7 @@ test('a pasted header in another order shows the mapping; the import gets the ro
   assert.equal(panel.hidden, true);
   click(w, note.querySelector('button'));
   assert.equal(panel.hidden, false, '"change" opens the choices');
-  assert.equal(panel.querySelectorAll('select')[1].value, '-1', 'with the remembered choice');
+  assert.equal(panel.querySelectorAll('.fc-map-grid:not(.fc-map-preset) select')[1].value, '-1', 'with the remembered choice');
   click(w, doc.querySelector('[data-import]'));
   assert.deepEqual(got[1], '02.10.2026\t\tfirst aid\tTor 4\t\t\t\t\t\t');
 });

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Site Compare
+seo_title: "Compare sites side by side from their read-only team codes: quality, delivery, OEE, 5S, safety and actions"
+description: "Compare the sites you look after from their read-only Team Sync codes: damage, delivery, OEE, 5S, safety, actions and maintenance, best and worst named."
+activeNav: /tools.html
+permalink: /tools/site-compare/
+---
+<section class="shell page-hero tool-hero">
+  <p class="eyebrow">Free tool · Overview</p>
+  <h1>Site Compare</h1>
+  <p class="lede">For the area or regional manager: the sites you look after side by side, each read from its read-only team code, without joining any team and without being able to change anything. Damage and incomplete rates, routes on time, OEE, 5S, safety, actions, maintenance and the hotel rates, counted as each site's own tools count them, the best and the worst named on every figure, a ranking with its rule, and the question that matters: what does the best site do differently?</p>
+</section>
+
+{% set cfg = siteCompare %}
+{% include "partials/site-compare.njk" %}

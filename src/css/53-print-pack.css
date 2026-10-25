@@ -1,0 +1,119 @@
+/* ===== Print Pack (js/print-pack.js) =====
+   The list of documents to tick, then the preview: each document as the sheet of paper it prints as, white with black
+   text in either theme, and on paper one A4 page (or more) per sheet with a page break before each. */
+.pk-intro { margin: 0; }
+.pk-docs { display: grid; gap: 10px; }
+.pk-doc {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.pk-doc:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); background: color-mix(in srgb, var(--blue) 6%, transparent); }
+.pk-doc input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--blue); cursor: pointer; }
+.pk-doc input:disabled { cursor: not-allowed; }
+.pk-doc label { display: grid; gap: 2px; cursor: pointer; }
+.pk-doc label span { color: var(--muted); font-size: 14px; }
+.pk-doc.is-empty label { cursor: default; }
+.pk-doc.is-empty label strong { color: var(--muted); }
+.pk-doc-note { grid-column: 2; margin: 0; }
+.pk-grid { grid-template-columns: minmax(0, 260px); }
+.pk-stats { margin-bottom: 0; }
+.pk-results .result-head .pk-nowrap { white-space: nowrap; }
+.pk-example-note { margin: 24px auto 0; }
+
+/* The preview: paper on the page. */
+.pk-pack { display: grid; gap: 24px; margin-top: 22px; }
+.pk-empty { padding: 20px 0; }
+.pk-sheet,
+:root .pk-sheet svg {
+  --ink: #111; --muted: #3a3a3a; --line: #9a9a9a; --card: #fff; --paper: #fff; --paper-2: #fff;
+  /* A chart on a sheet is black and grey, like the rest of the paper: the columns grey, the alert ones black. */
+  --tr-bar: #8c9297; --tr-top: #111; --tr-line: #111; --tr-target: #111; --tr-grid: #c4c8cc; --tr-text: #111; --tr-muted: #3a3a3a;
+  --blue: #222; --blue-soft: #666; --ok: #333; --warn: #333; --danger: #111;
+}
+.pk-sheet {
+  width: 100%;
+  max-width: 210mm;
+  min-width: 0;
+  margin-inline: auto;
+  padding: clamp(16px, 4vw, 14mm);
+  overflow-x: auto;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 14px 36px -12px rgba(0, 0, 0, .45);
+  color: #111;
+  color-scheme: light;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.pk-head { margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #111; }
+.pk-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.pk-head h2 { margin: 6px 0 0; font-size: 22px; line-height: 1.15; letter-spacing: -.01em; }
+.pk-meta { margin: 6px 0 0; font-size: 12px; }
+.pk-group { margin: 16px 0 6px; font-size: 14px; }
+.pk-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.pk-table th,
+.pk-table td { padding: 5px 6px; border: 1px solid #8a8a8a; text-align: left; vertical-align: top; overflow-wrap: normal; word-break: normal; hyphens: auto; }
+/* Headings stay on one line: a narrow column of boxes is as wide as its day, never "W/E/E/K" letter by letter. */
+.pk-table thead th { background: #ececec; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.pk-table tfoot :is(th, td) { font-weight: 800; }
+.pk-table .num { text-align: right; white-space: nowrap; }
+.pk-table .pk-box { width: 24px; min-width: 24px; text-align: center; font-size: 15px; line-height: 1.1; }
+.pk-table .pk-when { width: 1%; white-space: nowrap; }
+.pk-table .pk-write { min-width: 80px; width: 15%; }
+.pk-table .pk-nowrap { white-space: nowrap; }
+.pk-sub { display: block; margin-top: 2px; color: #333; font-size: 11px; }
+.pk-flag { font-size: 11px; font-weight: 700; }
+.pk-strong, .pk-strong-cell { font-weight: 800; }
+.pk-check { margin: 4px 0 0; padding: 0; list-style: none; font-size: 11px; }
+.pk-note, .pk-legend, .pk-sign { margin: 10px 0 0; font-size: 11px; }
+.pk-sign { margin-top: 18px; font-size: 12px; white-space: pre-wrap; }
+.pk-foot { margin: 14px 0 0; padding-top: 6px; border-top: 1px solid #bbb; color: #444; font-size: 10px; }
+.pk-warn { margin: 0 0 10px; padding: 6px 8px; border: 2px solid #111; font-size: 12px; font-weight: 700; }
+.pk-sheet .ck-figure { margin: 6px 0 4px; }
+.pk-sheet .ck-chart { max-height: 220px; }
+.pk-sheet .ck-caption { color: #333; font-size: 11px; }
+
+/* The Safety Cross: 31 squares on a 7 × 7 grid; a day so far carries its sign, a day ahead is left to mark by hand. */
+.pk-cross { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; width: min(100%, 400px); margin: 12px auto 4px; }
+.pk-cell { position: relative; display: grid; place-items: center; aspect-ratio: 1; border: 1.5px solid #111; border-radius: 4px; }
+.pk-cell.is-none { border: 1px dashed #bbb; }
+.pk-cell.is-warn { border-width: 2.5px; }
+.pk-cell.is-danger { border-width: 3.5px; background: #e2e2e2; }
+.pk-cell-day { position: absolute; top: 2px; left: 4px; font-size: 10px; font-weight: 800; }
+.pk-cell-sign { font-size: 20px; font-weight: 900; line-height: 1; }
+.pk-cell-n { position: absolute; right: 3px; bottom: 1px; font-size: 9px; font-weight: 800; }
+
+/* The Daily Board: a line per day, a column per letter, its sign in the cell. */
+.pk-board :is(th, td) { padding: 2px 6px; }
+.pk-board .pk-letter { width: 15%; text-align: center; font-size: 13px; font-weight: 800; }
+.pk-board thead .pk-letter { font-size: 9px; }
+.pk-board td.is-red { background: #e2e2e2; }
+
+@media (max-width: 620px) {
+  .pk-grid { grid-template-columns: minmax(0, 1fr); }
+  .pk-sheet { font-size: 12px; }
+  .pk-table { min-width: 520px; }
+  .pk-board { min-width: 0; }
+}
+
+/* Paper: the pack alone, black on white, one A4 page or more per sheet. */
+@page pk-sheet { size: A4 portrait; margin: 12mm; }
+@media print {
+  html.pk-page main > :not(.pk-results),
+  html.pk-page .pk-results > :not(.pk-pack) { display: none !important; }
+  html.pk-page .pk-results { display: block !important; padding: 0; content-visibility: visible; }
+  .pk-pack { display: block; margin: 0; }
+  .pk-sheet { page: pk-sheet; max-width: none; padding: 0; overflow: visible; border-radius: 0; box-shadow: none; font-size: 9.5pt; break-before: page; }
+  .pk-sheet:first-child { break-before: auto; }
+  .pk-table { min-width: 0; font-size: 8.5pt; }
+  .pk-table thead { display: table-header-group; }
+  .pk-table tr, .pk-cross, .pk-head, .pk-sign, .pk-foot { break-inside: avoid; }
+  .pk-group { break-after: avoid; }
+  .pk-table thead th, .pk-cell.is-danger, .pk-board td.is-red { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .pk-head h2 { font-size: 16pt; }
+  .pk-board :is(th, td) { padding: 1.5px 5px; }
+}

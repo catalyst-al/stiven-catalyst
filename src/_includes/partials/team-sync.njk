@@ -1,5 +1,7 @@
 {#- Team sync (js/team-sync.js), inside "All your work in one file" when site.sync.endpoint is set: the tools a team
-    ticks stay the same on every device of the team, encrypted on the device with a key from the team code. -#}
+    ticks stay the same on every device of the team, encrypted on the device with a key from the team code. A member
+    can make a read-only code (it reads, never writes) and change the team code; [data-tm-member-only] and
+    [data-tm-viewer-only] are shown by the script for the kind of device. -#}
 {%- set tmText = {
   off: "Off" | t(lang),
   on: "On" | t(lang),
@@ -38,7 +40,25 @@
   left: "This device has left the team. The work here stays." | t(lang),
   deleteConfirm: "Delete the team's copy on the server? Every device of the team stops syncing; the work on each device stays." | t(lang),
   deleted: "The team's copy is deleted. The work on this device stays." | t(lang),
-  reasons: { "before-sync": "Before a team sync" | t(lang) }
+  reasons: { "before-sync": "Before a team sync" | t(lang) },
+  readOnly: "Read-only" | t(lang),
+  readOnlySynced: "Read-only · synced {when}" | t(lang),
+  readOnlyError: "Read-only · not synced" | t(lang),
+  viewerSynced: "Read-only · synced {when} · version {rev} · {size} · {devices} of the team." | t(lang),
+  viewerPending: "Changed on this device but not sent: {tools}. The next sync replaces these changes with the team's copy." | t(lang),
+  joinedViewer: "Joined read-only. This device takes the team's work for the ticked tools and sends nothing." | t(lang),
+  viewerDamaged: "This read-only code is incomplete or damaged. Copy it again in full, or scan its QR code." | t(lang),
+  viewerVersion: "This read-only code comes from a newer version of the site. Reload the page and try again." | t(lang),
+  viewerMaking: "Making the read-only code…" | t(lang),
+  viewerQrLabel: "QR code of the read-only code" | t(lang),
+  goneMember: "If your team changed its code, leave the team on this device and join again with the new code." | t(lang),
+  goneViewer: "If your team changed its code, ask for a new read-only code." | t(lang),
+  rotateConfirm: "Change the team code? This device moves the team's work to a new code and then deletes the old copy. Every other device must join again with the new code, and the old read-only codes stop working." | t(lang),
+  rotating: "Changing the team code…" | t(lang),
+  rotated: "The team code is changed. Give the new code to your team now: it is shown only this once. Every other device must leave the team and join again with it; the old code and the old read-only codes no longer work." | t(lang),
+  rotateFailed: "The team code was not changed, and the team keeps the old one. {reason}" | t(lang),
+  retireFailed: "The old copy could not be deleted yet, so devices with the old code can still read it. This device tries again at every sync." | t(lang),
+  retired: "The old copy of the team is now deleted." | t(lang)
 } %}
 <details class="tm" data-team-sync data-endpoint="{{ site.sync.endpoint }}" data-text="{{ tmText | dump }}">
   <summary class="tm-summary"><strong>{{ "Team sync" | t(lang) }}</strong> <span class="tm-state" data-tm-summary>{{ "Off" | t(lang) }}</span></summary>
@@ -50,8 +70,8 @@
       </div>
       <div class="tm-join">
         <div class="field tm-join-field">
-          <label for="tm-join-code">{{ "Join a team: the team code" | t(lang) }}</label>
-          <input id="tm-join-code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="{{ 'six words' | t(lang) }}" data-tm-join-code data-scan>
+          <label for="tm-join-code">{{ "Join a team: the team code or a read-only code" | t(lang) }}</label>
+          <input id="tm-join-code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="{{ 'six words, or a read-only code' | t(lang) }}" data-tm-join-code data-scan>
         </div>
         <button class="button-secondary" type="button" data-tm-join>{{ "Join" | t(lang) }}</button>
       </div>
@@ -63,20 +83,23 @@
         <div class="tm-qr" data-tm-qr></div>
         <div class="tm-new-copy">
           <button class="button-secondary" type="button" data-tm-copy>{{ "Copy" | t(lang) }}</button>
-          <p class="form-note">{{ "On another device, open this box and scan the code or type the six words under “Join a team”. Give it only to your team: whoever has it can read and change the shared work. Write it down; it is not shown again." | t(lang) }}</p>
+          <p class="form-note">{{ "On another device, open this box and scan the code or type the six words under “Join a team”. Give it only to your team: whoever has it can read and change the shared work; for someone who should only look, make a read-only code instead. Write it down; it is not shown again." | t(lang) }}</p>
         </div>
       </div>
     </div>
     <div class="tm-on" data-tm-on hidden>
       <p class="form-note tm-status" data-tm-status role="status" aria-live="polite"></p>
       <p class="form-note tm-devices" data-tm-devices hidden></p>
+      <p class="form-note tm-readonly" data-tm-viewer-only hidden>{{ "Read-only: this device takes the team's work and sends nothing, so it can neither change nor delete the team's copy. Changes made here to the shared tools are not sent, and the next sync replaces them with the team's copy." | t(lang) }}</p>
+      <p class="form-note tm-pending" data-tm-pending role="status" hidden></p>
       <fieldset class="tm-tools">
-        <legend class="kicker">{{ "What is shared" | t(lang) }}</legend>
+        <legend class="kicker"><span data-tm-member-only>{{ "What is shared" | t(lang) }}</span><span data-tm-viewer-only hidden>{{ "What this device takes from the team" | t(lang) }}</span></legend>
         <div class="tm-tool-list" data-tm-tools></div>
         <p class="form-note" data-tm-tools-empty hidden>{{ "No tool has work in this browser yet. What the team shares appears here after the first sync." | t(lang) }}</p>
-        <p class="form-note">{{ "Unticking a tool stops this device sharing it; what the team already has stays. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
+        <p class="form-note" data-tm-member-only>{{ "Unticking a tool stops this device sharing it; what the team already has stays. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
+        <p class="form-note" data-tm-viewer-only hidden>{{ "Unticking a tool stops this device taking the team's version of it; the work here then stays as it is. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
       </fieldset>
-      <div class="field tm-device">
+      <div class="field tm-device" data-tm-member-only>
         <label for="tm-device">{{ "Name of this device" | t(lang) }} ({{ "optional" | t(lang) }})</label>
         <input id="tm-device" type="text" maxlength="60" autocomplete="off" placeholder="{{ 'Phone of …' | t(lang) }}" data-tm-device>
       </div>
@@ -84,9 +107,33 @@
         <button class="button-primary" type="button" data-tm-sync>{{ "Sync now" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-tm-again hidden>{{ "Send this device's work again" | t(lang) }}</button>
       </div>
+      <div class="tm-more" data-tm-member-only>
+        <div class="tm-more-item">
+          <button class="button-secondary" type="button" data-tm-viewer-make>{{ "Create a read-only code" | t(lang) }}</button>
+          <p class="form-note">{{ "For someone who should see the team's work but not change it, such as a manager or a screen on the wall. It cannot change or delete anything." | t(lang) }}</p>
+        </div>
+        <div class="tm-more-item">
+          <button class="button-secondary" type="button" data-tm-rotate>{{ "Change the team code" | t(lang) }}</button>
+          <p class="form-note">{{ "When someone leaves the team: the work moves to a new code and the old copy is deleted. Every other device then joins again with the new code, and the old read-only codes stop working." | t(lang) }}</p>
+        </div>
+      </div>
+      <div class="tm-new tm-view" data-tm-view hidden>
+        <p class="kicker">{{ "Read-only code" | t(lang) }}</p>
+        <p class="tm-code tm-code-long" data-tm-view-code></p>
+        <div class="tm-new-row">
+          <div class="tm-qr" data-tm-view-qr></div>
+          <div class="tm-new-copy">
+            <div class="tm-row">
+              <button class="button-secondary" type="button" data-tm-view-copy>{{ "Copy" | t(lang) }}</button>
+              <button class="button-ghost" type="button" data-tm-view-hide>{{ "Hide" | t(lang) }}</button>
+            </div>
+            <p class="form-note">{{ "On the other device, open this box and scan the code or paste it under “Join a team”. Whoever has it can read the shared work, so give it only to people who may see it. It stops working when the team changes its code." | t(lang) }}</p>
+          </div>
+        </div>
+      </div>
       <div class="tm-leave">
         <button class="button-ghost" type="button" data-tm-leave>{{ "Leave the team on this device" | t(lang) }}</button>
-        <button class="button-ghost" type="button" data-tm-delete>{{ "Delete the team's copy" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-tm-delete data-tm-member-only>{{ "Delete the team's copy" | t(lang) }}</button>
       </div>
     </div>
     <p class="form-note tm-message" data-tm-message role="status" aria-live="polite"></p>

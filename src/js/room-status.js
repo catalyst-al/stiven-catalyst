@@ -223,30 +223,70 @@
   };
 
   // The PMS export pasted in: "room code" per line (tab, semicolon, comma or spaces between). The code is matched
-  // case-insensitively against the aliases of each status (VD, VC, VI, OC/OCC, OD, DO, CO, OOO, OOS); a code that is not
-  // one of them, or a room not on the board, is listed and left alone, never guessed. A line without a digit in its
-  // first cell (a header) is skipped.
-  const normCode = (code) => String(code).toLowerCase().replace(/[\s./-]/g, "");
+  // case-insensitively against the aliases of each status (VD, VC, VI, OC/OCC, OD, DO, CO, OOO, OOS) and the words
+  // housekeeping lists write instead (Dirty, Clean, Inspected, Out of Order, Sauber, Schmutzig, Inspiziert …); a code
+  // that is not one of them, or a room not on the board, is listed and left alone, never guessed. A line without a
+  // digit in its first cell (a header) is skipped; a header that names the room and status columns ("Zimmer;
+  // Zimmertyp;HK-Status") says where to read them, and a front-office column next to it (Vacant / Occupied) turns
+  // "Dirty" into a stay-over (OD) for an occupied room.
+  const normCode = (code) => String(code).toLowerCase().replace(/ß/g, "ss").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s./_-]/g, "");
+  // Written as a person types them; normCode folds case, accents and spaces.
+  const STATUS_WORDS = {
+    vd: ["Dirty", "Vacant dirty", "Vacant/Dirty", "Schmutzig", "Frei schmutzig", "Unrein", "E pistë", "E lirë e pistë"],
+    vc: ["Clean", "Vacant clean", "Vacant/Clean", "Sauber", "Frei sauber", "Gereinigt", "E pastër", "E lirë e pastër"],
+    vi: ["Inspected", "Vacant inspected", "Vacant/Inspected", "Inspiziert", "Frei inspiziert", "Kontrolliert", "E kontrolluar", "E lirë e kontrolluar"],
+    occ: ["Occupied", "Occupied clean", "Occupied/Clean", "Belegt", "Belegt sauber", "E zënë", "E zënë e pastër"],
+    od: ["Occupied dirty", "Occupied/Dirty", "Stayover", "Stay over", "Belegt schmutzig", "Bleiber", "E zënë e pistë"],
+    do: ["Due out", "Expected departure"],
+    co: ["Checked out", "Departed", "Abgereist", "Ausgecheckt"],
+    ooo: ["Out of order", "Außer Betrieb", "Jashtë përdorimit"],
+    oos: ["Out of service", "Jashtë shërbimit"],
+  };
   const aliasMap = (statuses) => {
     const map = new Map();
+    const known = new Set(statuses.map((s) => s.key));
+    Object.entries(STATUS_WORDS).forEach(([key, words]) => { if (known.has(key)) words.forEach((word) => map.set(normCode(word), key)); });
+    // The codes last: a code of the data file always wins over a word.
     statuses.forEach((s) => [s.code, ...(s.aliases || [])].forEach((alias) => map.set(normCode(alias), s.key)));
     return map;
+  };
+  // Header names, folded by normCode: the room column, the housekeeping status and the front-office status.
+  const HEADS = {
+    room: ["room", "roomno", "roomnr", "roomnumber", "rm", "zimmer", "zimmernr", "zimmernummer", "zinr", "zi", "dhoma", "nrdhome", "numriidhomes"],
+    hk: ["status", "hkstatus", "housekeepingstatus", "roomstatus", "hk", "zimmerstatus", "reinigungsstatus", "hausdamenstatus", "statusi", "statusiidhomes", "gjendja"],
+    fo: ["fostatus", "frontofficestatus", "fo", "rezeptionsstatus", "belegungsstatus", "statusirecepsionit"],
+  };
+  const OCCUPIED = new Set(["occupied", "occ", "oc", "o", "belegt", "ezene"].map(normCode));
+  const headerColumns = (cells) => {
+    const at = (names) => cells.findIndex((cell) => names.includes(normCode(cell)));
+    const cols = { room: at(HEADS.room), hk: at(HEADS.hk), fo: at(HEADS.fo) };
+    return cols.room >= 0 && cols.hk >= 0 && cols.room !== cols.hk ? cols : null;
   };
   const parseImport = (text, statuses, roomNumbers) => {
     const known = new Map(roomNumbers.map((n) => [String(n).toLowerCase(), n]));
     const codes = aliasMap(statuses);
     const updates = new Map(), unknownCodes = [], unknownRooms = [];
-    let skipped = 0;
-    String(text ?? "").replace(/^﻿/, "").split(/\r?\n/).forEach((line) => {
+    let skipped = 0, cols = null;
+    String(text ?? "").replace(/^\uFEFF/, "").split(/\r?\n/).forEach((line) => {
       if (!line.trim()) return;
-      const cells = (/[;\t,]/.test(line) ? line.split(/[;\t,]/) : line.trim().split(/\s+/)).map((c) => c.trim());
-      const number = cells[0];
-      if (!/\d/.test(number) || number.length > 12) { skipped++; return; }
-      const code = cells.slice(1).find(Boolean) || "";
+      const spaced = !/[;\t,]/.test(line);
+      const cells = (spaced ? line.trim().split(/\s+/) : line.split(/[;\t,]/)).map((c) => c.trim());
+      const byHeader = cols && !spaced;
+      const number = byHeader ? cells[cols.room] || "" : cells[0];
+      if (!/\d/.test(number) || number.length > 12) {
+        skipped++;
+        if (!spaced && !updates.size && !unknownCodes.length && !unknownRooms.length) cols = headerColumns(cells) || cols;
+        return;
+      }
+      const rest = cells.slice(1).filter(Boolean);
+      // With spaces between, a word status ("Out of Order") is the rest of the line; else the first known code.
+      const candidates = byHeader ? [cells[cols.hk] || ""] : spaced ? [rest.join(" "), ...rest] : rest;
+      const code = candidates.find((c) => codes.has(normCode(c))) ?? candidates[0] ?? "";
       const room = known.get(number.toLowerCase());
       if (!room) { unknownRooms.push({ room: number, code }); return; }
-      const key = codes.get(normCode(code));
+      let key = codes.get(normCode(code));
       if (!key) { unknownCodes.push({ room, code }); return; }
+      if (byHeader && cols.fo >= 0 && OCCUPIED.has(normCode(cells[cols.fo] || ""))) key = key === "vd" ? "od" : key === "vc" || key === "vi" ? "occ" : key;
       updates.set(room, { room, status: key, code });
     });
     return { updates: [...updates.values()], unknownCodes, unknownRooms, skipped };

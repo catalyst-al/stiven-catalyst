@@ -32,6 +32,19 @@
 @media print {
   .ck-actions { display: none; }
   .ck-tooltip { display: none; }
+  /* Paper is white whatever the theme on screen. The charts draw with variables (fill="var(--tr-text)"), and in the
+     dark theme those are light: printed, they came out light grey on white. On paper every chart takes the print
+     colours of its SVG export (ChartKit.EXPORT), with darker text and grid so they read on a laser print. They are set
+     on the SVG itself, which beats what a panel or a tool's own box sets around it, and on the panels and legends,
+     whose swatches and state words share the colours. Series and state colours stay the same hues. */
+  :root svg,
+  :root :is(.dl-panel, .ck-figure, .ck-legend, .ck-chips) {
+    --tr-bar: #0a6ab0; --tr-top: #c2141b; --tr-line: #1b2330; --tr-target: #7f5c1f;
+    --tr-grid: #9aa3ab; --tr-text: #10161c; --tr-muted: #3d464e;
+    --ok: #1d7a45; --warn: #7f5c1f; --danger: #c2141b; --blue: #0a6ab0; --blue-soft: #63bdf3; --paper-2: #fff;
+  }
+  /* Fills and swatches are colour, not background decoration: they print even with background graphics off. */
+  .ck-chart, .ck-swatch { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
 /* The workplace profile form, wherever a tool shows it. */

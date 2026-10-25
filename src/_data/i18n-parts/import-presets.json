@@ -1,0 +1,20 @@
+{
+  "de": {
+    "Recognised as": "Erkannt als",
+    "Recognised as: {name}.": "Erkannt als: {name}.",
+    "No known export (column names only)": "Kein bekannter Export (nur Spaltennamen)",
+    "Hotel PMS export (OPERA, protel, Mews …)": "Hotel-PMS-Export (OPERA, protel, Mews …)",
+    "Warehouse export (SAP, WMS)": "Lager-Export (SAP, WMS)",
+    "Transport/route export (TMS)": "Transport-/Tourenexport (TMS)",
+    "Recognised from typical column names; check the mapping against your export.": "Anhand typischer Spaltennamen erkannt; prüfen Sie die Zuordnung anhand Ihres Exports."
+  },
+  "sq": {
+    "Recognised as": "U njoh si",
+    "Recognised as: {name}.": "U njoh si: {name}.",
+    "No known export (column names only)": "Asnjë eksport i njohur (vetëm emrat e kolonave)",
+    "Hotel PMS export (OPERA, protel, Mews …)": "Eksport nga PMS-i i hotelit (OPERA, protel, Mews …)",
+    "Warehouse export (SAP, WMS)": "Eksport nga magazina (SAP, WMS)",
+    "Transport/route export (TMS)": "Eksport transporti/itinerari (TMS)",
+    "Recognised from typical column names; check the mapping against your export.": "U njoh nga emrat e zakonshëm të kolonave; kontrollo përputhjen me eksportin tënd."
+  }
+}

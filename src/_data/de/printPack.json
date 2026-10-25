@@ -1,0 +1,22 @@
+{
+  "storageKey": "sc-print-pack-de",
+  "docs": [
+    { "key": "actions", "name": "Offene Maßnahmen nach Verantwortlichen", "about": "Jede offene Maßnahme der Maßnahmenliste, ein Block je Verantwortlichen: Überfälliges zuerst, dann nach Termin, mit einem Kästchen zum Abhaken und Platz für eine Notiz.", "tool": "Maßnahmenliste", "slug": "action-tracker", "hotel": false },
+    { "key": "maintenance", "name": "Wartungsarbeitsliste der Woche", "about": "Die überfälligen und bis Sonntag fälligen Aufgaben nach Bereich, mit ihren Checklisten, ihren Minuten und einer Zeile für die Unterschrift.", "tool": "Wartungsplaner", "slug": "maintenance-planner", "hotel": false },
+    { "key": "fives", "name": "5S-Audits der Woche", "about": "Die Audits, die der Plan für die nächsten sieben Tage vorsieht: wer welchen Bereich an welchem Tag prüft, die überfälligen zuerst.", "tool": "5S-Audit", "slug": "five-s-audit", "hotel": false },
+    { "key": "lsw", "name": "Leader-Standard-Work-Karten", "about": "Eine Karte je Führungskraft: die Routine des Tages mit einem Kästchen für jeden Arbeitstag, dann die wöchentlichen und monatlichen Prüfungen.", "tool": "Leader Standard Work", "slug": "leader-standard-work", "hotel": false },
+    { "key": "safety", "name": "Sicherheitskreuz des Monats", "about": "Der Monat auf dem Kreuz: die bisherigen Tage markiert, die kommenden leer zum Markieren von Hand, und die Ereignisse des Monats.", "tool": "Sicherheitskreuz", "slug": "safety-cross", "hotel": false },
+    { "key": "board", "name": "Tagesboard des Monats", "about": "Sicherheit, Qualität, Lieferung, Kosten und Menschen Tag für Tag, wie das Board sie ermittelt hat, die kommenden Tage zum Ausfüllen im Huddle.", "tool": "Tagesboard", "slug": "daily-board", "hotel": false },
+    { "key": "rooms", "name": "Arbeitszettel aus dem Zimmerstatus", "about": "Ein Zettel je Reinigungskraft: die Zimmer in der Reihenfolge der Reinigung, mit Uhrzeit rein, Uhrzeit raus und Bemerkungen.", "tool": "Zimmerstatus", "slug": "room-status", "hotel": true },
+    { "key": "housekeeping", "name": "Revierzettel des Housekeepings", "about": "Ein Zettel je Revier des Tagesplans, nach Minuten ausgeglichen: Etage, Zimmer, Reinigung, Markierungen und geplante Minuten.", "tool": "Housekeeping-Planer", "slug": "housekeeping-planner", "hotel": true }
+  ],
+  "tips": [
+    ["Drucken Sie es vor dem Huddle am Montag.", "Woche und Monat der Blätter richten sich nach dem Datum auf dem Paket: Stellen Sie den kommenden Montag ein, um es schon am Freitag zu drucken."],
+    ["Haken Sie an, was an Ihr Board kommt.", "Ein Dokument ist bereit, sobald sein Tool in diesem Browser Daten hat; die Zeile darunter sagt, was darin steht, oder welches Tool Sie zuerst ausfüllen."],
+    ["Das Papier ist der Plan, das Tool der Nachweis.", "Schreiben Sie während der Woche auf die Blätter und tragen Sie das Erledigte danach im Tool ein, damit das nächste Paket darauf aufbaut."],
+    ["Die Hotelblätter sind für ein Hotel.", "Zimmerstatus und Housekeeping-Planer drucken eine Seite je Reinigungskraft oder Revier; lassen Sie sie für ein Lager weg."]
+  ],
+  "example": {
+    "note": "Dies ist ein Beispielpaket aus den eigenen Beispielen der Tools, weil die Tools in diesem Browser noch nichts von Ihnen enthalten. Füllen Sie ein Tool aus, und seine Blätter gehören Ihnen."
+  }
+}

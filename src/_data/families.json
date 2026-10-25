@@ -21,7 +21,8 @@
       "/tools/safety-cross/",
       "/tools/lost-found/",
       "/tools/room-status/",
-      "/tools/guest-complaints/"
+      "/tools/guest-complaints/",
+      "/tools/print-pack/"
     ],
     "learn": [],
     "also": [
@@ -103,6 +104,11 @@
         "when": "During the shift",
         "do": "Log every complaint while the guest is still with you, walk through LEARN, resolve it within the target and call the guest back before the shift ends.",
         "tool": "/tools/guest-complaints/"
+      },
+      {
+        "when": "Every week",
+        "do": "On Monday before the huddle, print the pack and put the week's sheets on the team board.",
+        "tool": "/tools/print-pack/"
       }
     ],
     "next": "zenith"
@@ -269,7 +275,8 @@
       "/tools/inventory-abc/",
       "/tools/smed/",
       "/tools/eight-d/",
-      "/tools/hoshin-kanri/"
+      "/tools/hoshin-kanri/",
+      "/tools/site-compare/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -359,6 +366,11 @@
         "when": "Every month",
         "do": "Enter last month's actuals on the bowling chart, agree a countermeasure with its owner for every metric that missed twice in a row, and close the gaps in the X-matrix.",
         "tool": "/tools/hoshin-kanri/"
+      },
+      {
+        "when": "Every week",
+        "do": "Update every site on Monday, read the best and the worst on each rate, and take one practice of the best site to the others with a Gemba Walk.",
+        "tool": "/tools/site-compare/"
       }
     ],
     "next": "atlas"

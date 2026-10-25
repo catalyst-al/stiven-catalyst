@@ -37,6 +37,7 @@
     panel, stat, barList, trendBuckets, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
   // Newer pieces of the kit (filter, day / week / month, the period before); a page with an older kit still works.
   const kit = window.ToolKit;
+  const parseDateTime = kit.parseDateTime || ((value) => ({ date: parseDate(value), time: "" }));
   const Annotations = window.Annotations || null;
   const SLUG = Annotations ? Annotations.slugHere() : "";
 
@@ -72,8 +73,11 @@
   state.to = parseDate(state.to);
   const save = () => write(KEY, state);
 
-  // Times: 07:45, 7.45, 0745, 07:45:00, or an Excel day fraction (0.3229).
+  // Times: 07:45, 7.45, 0745, 07:45:00, or an Excel day fraction (0.3229). A route planner often writes the date
+  // with it (24.10.2026 07:45, 2026-10-24T07:45:00): the time is taken from it.
   const parseTime = (value) => {
+    const stamp = parseDateTime(value);
+    if (stamp.date && stamp.time) return stamp.time;
     const text = String(value ?? "").trim();
     let minutes = NaN;
     // A day fraction first: 0.32 is 07:41, not 00:32.
@@ -125,7 +129,8 @@
       const reason = cells.length >= 12 ? cells[10] : cells[7];
       const note = cells.slice(cells.length >= 12 ? 11 : 8);
       const row = {
-        date: parseDate(date),
+        // Without a date column, the day of the planned departure (or arrival) is the route's day.
+        date: parseDate(date) || parseDateTime(planDep).date || parseDateTime(planArr).date,
         shift: canon([...new Set([...shiftOptions(), ...data.shifts])], shift, NOT_RECORDED),
         route: (route || "").trim(),
         planDep: parseTime(planDep),

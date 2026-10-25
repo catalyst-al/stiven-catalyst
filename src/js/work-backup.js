@@ -7,7 +7,7 @@
   const MAX_BYTES = 20 * 1024 * 1024;
   // Settings of the page itself, not work; the team code and what team sync last saw (js/team-sync.js) stay on this
   // device too, so a saved file never carries the code.
-  const SKIP = new Set(["sc-theme", "sc-print-guide-hidden", "sc-team", "sc-team-state"]);
+  const SKIP = new Set(["sc-theme", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state"]);
   // Storage names that differ from the tool's address.
   const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower", actions: "action-tracker" };
 
