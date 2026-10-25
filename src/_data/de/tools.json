@@ -398,5 +398,13 @@
     "summary": "Ihre Standorte nebeneinander, jeder aus seinem Nur-Lese-Code gelesen, ohne beizutreten: Schadens- und Unvollständigkeitsquote, pünktliche Touren, OEE, 5S, Arbeitssicherheit, Maßnahmen, Instandhaltung und Hotelkennzahlen, bester und schwächster Wert benannt, eingestuft nach einer sichtbaren Regel.",
     "url": "/de/tools/site-compare/",
     "cta": "Standorte vergleichen"
+  },
+  {
+    "name": "Kaizen-Event",
+    "type": "Lean",
+    "time": "3–5 Tage",
+    "summary": "Einen Verbesserungsworkshop planen, durchführen und nachverfolgen: der Auftrag mit Zielen in Zahlen, die Vorbereitung vom ersten Tag zurückgerechnet, die Standardagenda für 3–5 Tage, Ideen nach Verschwendung auf einer Aufwand-Nutzen-Matrix, Ziele vorher und nachher und die 30-Tage-Nachverfolgung. Abschlusspräsentation als A4 und Word.",
+    "url": "/de/tools/kaizen-event/",
+    "cta": "Event planen"
   }
 ]

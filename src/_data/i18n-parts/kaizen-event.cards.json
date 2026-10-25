@@ -1,0 +1,10 @@
+{
+  "family": "lumen",
+  "cards": {
+    "en": { "name": "Kaizen Event", "type": "Lean", "time": "3–5 days", "summary": "Plan, run and follow up a rapid improvement event: the charter with goals in numbers, preparation counted back from the first day, the standard 3–5 day agenda, ideas by waste on an effort and impact matrix, goals before and after, and the 30-day follow-up list. Report-out in A4 and Word.", "url": "/tools/kaizen-event/", "cta": "Plan an event" },
+    "de": { "name": "Kaizen-Event", "type": "Lean", "time": "3–5 Tage", "summary": "Einen Verbesserungsworkshop planen, durchführen und nachverfolgen: der Auftrag mit Zielen in Zahlen, die Vorbereitung vom ersten Tag zurückgerechnet, die Standardagenda für 3–5 Tage, Ideen nach Verschwendung auf einer Aufwand-Nutzen-Matrix, Ziele vorher und nachher und die 30-Tage-Nachverfolgung. Abschlusspräsentation als A4 und Word.", "url": "/de/tools/kaizen-event/", "cta": "Event planen" },
+    "sq": { "name": "Ngjarja Kaizen", "type": "Lean", "time": "3–5 ditë", "summary": "Planifiko, zhvillo dhe ndiq një ngjarje të shpejtë përmirësimi: karta me objektiva në numra, përgatitja e numëruar së prapthi nga dita e parë, axhenda standarde 3–5 ditë, idetë sipas humbjes në një matricë përpjekje-ndikim, objektivat para dhe pas dhe lista e ndjekjes 30-ditore. Prezantimi përmbyllës në A4 dhe Word.", "url": "/sq/tools/kaizen-event/", "cta": "Planifiko një ngjarje" }
+  },
+  "routine": { "when": "Every month", "do": "Agree the next event's charter six weeks ahead, tick the preparation as its dates come up, and close the last event's follow-up list by its 30-day check.", "de": { "when": "Jeden Monat", "do": "Vereinbaren Sie den Auftrag des nächsten Events sechs Wochen im Voraus, haken Sie die Vorbereitung ab, sobald ihre Termine kommen, und schließen Sie die Nachverfolgungsliste des letzten Events bis zu seiner 30-Tage-Prüfung." }, "sq": { "when": "Çdo muaj", "do": "Mirato me sponsorin kartën e ngjarjes së radhës gjashtë javë përpara, shëno përgatitjen kur i vijnë afatet dhe mbyll listën e ndjekjes së ngjarjes së fundit deri te kontrolli i saj 30-ditor." } },
+  "recipe": "example"
+}

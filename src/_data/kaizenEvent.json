@@ -1,0 +1,532 @@
+{
+  "storageKey": "sc-kaizen-event",
+  "areas": [
+    "Inbound",
+    "Picking",
+    "Packing",
+    "Sorting",
+    "Loading",
+    "Returns"
+  ],
+  "eventStatuses": {
+    "planned": "Planned",
+    "running": "Running",
+    "followup": "Follow-up",
+    "closed": "Closed"
+  },
+  "ideaStatuses": {
+    "idea": "Idea",
+    "trying": "Trying",
+    "done": "Done",
+    "followup": "Follow-up"
+  },
+  "directions": {
+    "lower": "Lower is better",
+    "higher": "Higher is better"
+  },
+  "roles": [
+    {
+      "key": "operator",
+      "name": "Operator from the area"
+    },
+    {
+      "key": "supervisor",
+      "name": "Team lead or supervisor of the area"
+    },
+    {
+      "key": "maintenance",
+      "name": "Maintenance"
+    },
+    {
+      "key": "support",
+      "name": "Support function (quality, IT, engineering, safety)"
+    },
+    {
+      "key": "outsider",
+      "name": "Fresh eyes from another area"
+    },
+    {
+      "key": "other",
+      "name": "Other"
+    }
+  ],
+  "wastes": [
+    {
+      "key": "D",
+      "name": "Defects"
+    },
+    {
+      "key": "O",
+      "name": "Overproduction"
+    },
+    {
+      "key": "W",
+      "name": "Waiting"
+    },
+    {
+      "key": "N",
+      "name": "Non-utilised talent"
+    },
+    {
+      "key": "T",
+      "name": "Transport"
+    },
+    {
+      "key": "I",
+      "name": "Inventory"
+    },
+    {
+      "key": "M",
+      "name": "Motion"
+    },
+    {
+      "key": "E",
+      "name": "Extra processing"
+    }
+  ],
+  "quadrants": [
+    "Quick wins",
+    "Projects",
+    "Fill-ins",
+    "Thankless"
+  ],
+  "links": [
+    {
+      "url": "/tools/time-study/",
+      "name": "Time Study",
+      "note": "time every step on day 1"
+    },
+    {
+      "url": "/tools/spaghetti-diagram/",
+      "name": "Spaghetti Diagram",
+      "note": "draw the walk, before and after"
+    },
+    {
+      "url": "/tools/value-stream-map/",
+      "name": "Value Stream Map",
+      "note": "where the event sits in the flow"
+    },
+    {
+      "url": "/tools/standard-work/",
+      "name": "Standard Work",
+      "note": "the new standard on day 4"
+    },
+    {
+      "url": "/tools/five-s-audit/",
+      "name": "5S Audit",
+      "note": "hold the area at the 30-day check"
+    },
+    {
+      "url": "/tools/kaizen-board/",
+      "name": "Kaizen Board",
+      "note": "ideas bigger than the event"
+    },
+    {
+      "url": "/tools/project-portfolio/",
+      "name": "Project Portfolio",
+      "note": "problems that need a DMAIC project"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Area, sponsor and team leader chosen; the event is in the site plan",
+      "weeks": 6
+    },
+    {
+      "text": "Charter agreed with the sponsor: scope, goals, boundaries, budget",
+      "weeks": 4
+    },
+    {
+      "text": "Baseline data collected: volumes, cycle times, defects, WIP",
+      "weeks": 3
+    },
+    {
+      "text": "Team chosen and invited: operators from the area, support functions, fresh eyes",
+      "weeks": 3
+    },
+    {
+      "text": "Operators released from production: cover planned for every day of the event",
+      "weeks": 2
+    },
+    {
+      "text": "Area informed: all shifts, the areas up- and downstream, the works council where needed",
+      "weeks": 2
+    },
+    {
+      "text": "Current-state data ready: layout drawing, standard work, a video of the process",
+      "weeks": 1
+    },
+    {
+      "text": "Materials and tools ready: room, stopwatches, tape and labels, flip charts, maintenance and IT on call",
+      "weeks": 1
+    },
+    {
+      "text": "Report-out booked with the sponsor and the area for the last day",
+      "weeks": 1
+    }
+  ],
+  "agenda": [
+    {
+      "title": "Training and current state",
+      "items": [
+        "Kick-off: the sponsor opens, the team reads the charter",
+        "Lean basics: the 8 wastes, flow, standard work",
+        "Walk the process from the start to the end of the scope",
+        "Time every step: at least 10 cycles each",
+        "Draw the spaghetti diagram of the operator's walk",
+        "List the waste you saw, step by step",
+        "Agree the baseline of every goal"
+      ]
+    },
+    {
+      "title": "Analyse and generate ideas",
+      "items": [
+        "Compare the cycle times with the takt time",
+        "Find the root causes of the biggest waste (5 Whys, fishbone)",
+        "Collect ideas from every team member, the operators first",
+        "Place each idea on effort and impact",
+        "Choose what to try first and start the Kaizen newspaper"
+      ]
+    },
+    {
+      "title": "Try and implement",
+      "items": [
+        "Try the first changes on the floor, with the operators",
+        "Move tools and material to the point of use",
+        "Measure each trial: keep what works, change what does not",
+        "Check the safety and ergonomics of every change",
+        "Give every newspaper item an owner and a date"
+      ]
+    },
+    {
+      "title": "Standardise and measure",
+      "items": [
+        "Write the new standard work with the operators",
+        "Train the operators of every shift who will run it",
+        "Measure every goal on the new process",
+        "5S the area: labels, floor markings, shadow boards",
+        "Agree the 30-day follow-up list with owners and dates"
+      ]
+    },
+    {
+      "title": "Report out",
+      "items": [
+        "Measure the goals once more on the running process",
+        "Prepare the report-out: before and after, what changed",
+        "Report out to the sponsor and the area, the operators presenting",
+        "Hand the follow-up list to the area owner",
+        "Recognise the team"
+      ]
+    }
+  ],
+  "plans": {
+    "3": [
+      [
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "4": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "5": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "fields": {
+    "name": "e.g. Packing line 2: walk less, pack faster",
+    "scopeStart": "e.g. Tote arrives at the packing bench",
+    "scopeEnd": "e.g. Labelled parcel on the outbound conveyor",
+    "problem": "What is wrong today, in numbers, and who feels it",
+    "whyNow": "e.g. Peak season in eight weeks; agency hours over budget",
+    "outOfBounds": "e.g. No new conveyor, no change to the WMS, no change to shift times",
+    "person": "Name, role",
+    "metric": "e.g. Walking per parcel",
+    "unit": "e.g. m",
+    "idea": "What changes, where, for whom",
+    "changed": "The changes in a few lines, as the operators would say them"
+  },
+  "tips": [
+    [
+      "Prepare more than you run.",
+      "Most of an event's result is decided in the weeks before it: a narrow scope, measurable goals, the data, and operators really free from production."
+    ],
+    [
+      "The people who do the work are the team.",
+      "At least one operator from the area, better a third of the team. Add a support function and one pair of fresh eyes from another area."
+    ],
+    [
+      "Go and see, then change.",
+      "Day one is on the floor: walk it, time it, draw the walk. Ideas come on day two, trials on day three, while the team is still together."
+    ],
+    [
+      "Measure before and after the same way.",
+      "Same metric, same unit, same method. The tool says for each goal whether lower or higher is better, so the change is never read the wrong way round."
+    ],
+    [
+      "Close the newspaper in 30 days.",
+      "What is not finished in the event goes on the follow-up list with an owner and a date. The 30-day check is when the area shows the sponsor that the gains held."
+    ]
+  ],
+  "example": {
+    "name": "Packing line 2: walk less, pack faster",
+    "area": "Packing",
+    "days": 5,
+    "scopeStart": "Tote arrives at the packing bench",
+    "scopeEnd": "Labelled parcel on the outbound conveyor",
+    "problem": "Packers walk 18.4 m per parcel to fetch cartons, tape and labels from the shared printer; a parcel takes 96 s, and 42 totes wait at the benches at peak. The late shift needs agency staff every day to clear the volume.",
+    "whyNow": "Peak season starts in eight weeks with 30% more volume; agency hours are 18% over budget.",
+    "sponsor": "Jonas Weber, site manager",
+    "leader": "Elif Demir, packing shift lead",
+    "facilitator": "Tom Richter, continuous improvement",
+    "outOfBounds": "No new conveyor, no change to the WMS, no change to shift times or the number of benches.",
+    "budget": 5000,
+    "spent": 3850,
+    "savings": 61600,
+    "savingsNote": "One agency post of 8.8 paid hours a day less on 250 days: 2,200 hours at €28.",
+    "changed": "Cartons, tape and labels at every bench. Totes roll to the packer on a gravity lane of four. Five carton sizes instead of nine. A two-bin carton supply refilled by the water spider. The second weight scan is gone.",
+    "members": [
+      {
+        "name": "Ana Petrova",
+        "role": "operator"
+      },
+      {
+        "name": "Mehmet Kaya",
+        "role": "operator"
+      },
+      {
+        "name": "Lukas Brandt",
+        "role": "operator"
+      },
+      {
+        "name": "Sara Lind",
+        "role": "supervisor"
+      },
+      {
+        "name": "Piotr Nowak",
+        "role": "maintenance"
+      },
+      {
+        "name": "Nina Hofmann",
+        "role": "support"
+      },
+      {
+        "name": "David Klein",
+        "role": "outsider"
+      }
+    ],
+    "goals": [
+      {
+        "metric": "Walking per parcel",
+        "unit": "m",
+        "better": "lower",
+        "baseline": 18.4,
+        "target": 9,
+        "result": 7.6,
+        "result30": 8.1
+      },
+      {
+        "metric": "Cycle time per parcel",
+        "unit": "s",
+        "better": "lower",
+        "baseline": 96,
+        "target": 75,
+        "result": 78,
+        "result30": 74
+      },
+      {
+        "metric": "Totes waiting at the benches",
+        "unit": "totes",
+        "better": "lower",
+        "baseline": 42,
+        "target": 20,
+        "result": 18,
+        "result30": 22
+      },
+      {
+        "metric": "Parcels per packer hour",
+        "unit": "parcels/h",
+        "better": "higher",
+        "baseline": 37.5,
+        "target": 48,
+        "result": 46.2,
+        "result30": 48.6
+      }
+    ],
+    "undone": [
+      [
+        3,
+        1
+      ]
+    ],
+    "ideas": [
+      {
+        "text": "Cartons, tape and void fill at every bench, at the point of use",
+        "waste": "M",
+        "effort": 1,
+        "impact": 5,
+        "status": "done",
+        "owner": "Ana Petrova",
+        "due": 2,
+        "closed": 2
+      },
+      {
+        "text": "Gravity lane of four totes in front of each bench, first in first out",
+        "waste": "T",
+        "effort": 3,
+        "impact": 4,
+        "status": "done",
+        "owner": "Piotr Nowak",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Limit the totes waiting per bench to four, lane marked on the floor",
+        "waste": "I",
+        "effort": 1,
+        "impact": 4,
+        "status": "done",
+        "owner": "Sara Lind",
+        "due": 2,
+        "closed": 2
+      },
+      {
+        "text": "Five carton sizes at the bench instead of nine",
+        "waste": "E",
+        "effort": 2,
+        "impact": 3,
+        "status": "done",
+        "owner": "Mehmet Kaya",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Two-bin carton supply, refilled by the water spider",
+        "waste": "W",
+        "effort": 2,
+        "impact": 4,
+        "status": "done",
+        "owner": "Sara Lind",
+        "due": 3,
+        "closed": 3
+      },
+      {
+        "text": "Idea cards at every bench, read at the start of the shift",
+        "waste": "N",
+        "effort": 1,
+        "impact": 2,
+        "status": "done",
+        "owner": "Elif Demir",
+        "due": 4,
+        "closed": 4
+      },
+      {
+        "text": "A label printer at every bench, printing on the last scan",
+        "waste": "M",
+        "effort": 3,
+        "impact": 5,
+        "status": "followup",
+        "owner": "Nina Hofmann",
+        "due": 29,
+        "closed": null,
+        "fu": true
+      },
+      {
+        "text": "Remove the second weight scan after the quality sign-off",
+        "waste": "E",
+        "effort": 2,
+        "impact": 3,
+        "status": "done",
+        "owner": "Nina Hofmann",
+        "due": 11,
+        "closed": 9,
+        "fu": true
+      },
+      {
+        "text": "Repair the conveyor merge that jams at peak",
+        "waste": "W",
+        "effort": 4,
+        "impact": 4,
+        "status": "done",
+        "owner": "Piotr Nowak",
+        "due": 14,
+        "closed": 13,
+        "fu": true
+      },
+      {
+        "text": "Train the late and night shifts on the new standard work",
+        "waste": "D",
+        "effort": 2,
+        "impact": 4,
+        "status": "followup",
+        "owner": "Elif Demir",
+        "due": 32,
+        "closed": null,
+        "fu": true
+      },
+      {
+        "text": "Water spider round every 45 minutes instead of 60",
+        "waste": "W",
+        "effort": 2,
+        "impact": 3,
+        "status": "trying",
+        "owner": "Sara Lind",
+        "due": 28,
+        "closed": null
+      },
+      {
+        "text": "Height-adjustable tables for all eight benches",
+        "waste": "M",
+        "effort": 5,
+        "impact": 3,
+        "status": "idea",
+        "owner": "",
+        "due": null,
+        "closed": null
+      },
+      {
+        "text": "Release the orders to picking sorted by carton size",
+        "waste": "O",
+        "effort": 5,
+        "impact": 5,
+        "status": "idea",
+        "owner": "",
+        "due": null,
+        "closed": null
+      }
+    ]
+  }
+}
