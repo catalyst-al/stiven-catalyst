@@ -1,0 +1,179 @@
+{#- The Kaizen Event: one or more rapid improvement events, from the charter and the preparation weeks to the event days, the Kaizen newspaper and the 30-day follow-up. The page sets `cfg` to its data file; kaizen-event.js does the rest. -#}
+<section class="shell tool-layout ke-setup">
+  <div class="tool-panel" data-kaizen-event>
+
+    <div class="dl-box ke-list-box">
+      <div class="dl-log-head">
+        <p class="kicker">{{ "Your Kaizen events" | t(lang) }}</p>
+        <p class="form-note" data-list-count></p>
+      </div>
+      <ul class="ke-list" data-list></ul>
+      <p class="dl-empty" data-list-empty>{{ "No Kaizen event saved yet." | t(lang) }} {{ "Start a new one below, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example" | t(lang) }}</button>.</p>
+      <p class="form-note dl-log-status" data-list-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-new>{{ "New Kaizen event" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-example-again hidden>{{ "Load the example" | t(lang) }}</button>
+      </div>
+    </div>
+
+    <form class="dl-box ke-form" data-ke-form novalidate>
+      <fieldset>
+        <legend class="kicker">1 · {{ "Charter" | t(lang) }}</legend>
+        <p class="ke-hint">{{ "Agree it with the sponsor four to six weeks before the event: a narrow scope, goals in numbers, and what the team may not change." | t(lang) }}</p>
+        <div class="dl-grid">
+          <div class="field dl-wide">
+            <label for="ke-name">{{ "Event name" | t(lang) }}</label>
+            <input id="ke-name" data-f="name" placeholder="{{ cfg.fields.name }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ke-area">{{ "Area or process" | t(lang) }}</label>
+            <input id="ke-area" data-f="area" list="ke-area-list" autocomplete="off">
+            <datalist id="ke-area-list" data-area-list></datalist>
+          </div>
+          <div class="field">
+            <label for="ke-start">{{ "First day of the event" | t(lang) }}</label>
+            <input id="ke-start" type="date" data-f="start">
+          </div>
+          <div class="field">
+            <label for="ke-days">{{ "Length of the event" | t(lang) }}</label>
+            <select id="ke-days" data-f="days">
+              <option value="3">{{ "3 days" | t(lang) }}</option>
+              <option value="4">{{ "4 days" | t(lang) }}</option>
+              <option value="5">{{ "5 days" | t(lang) }}</option>
+            </select>
+          </div>
+          <p class="form-note dl-wide" data-dates-note aria-live="polite"></p>
+          <div class="field">
+            <label for="ke-scope-start">{{ "Scope starts at" | t(lang) }}</label>
+            <input id="ke-scope-start" data-f="scopeStart" placeholder="{{ cfg.fields.scopeStart }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ke-scope-end">{{ "Scope ends at" | t(lang) }}</label>
+            <input id="ke-scope-end" data-f="scopeEnd" placeholder="{{ cfg.fields.scopeEnd }}" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="ke-problem">{{ "Problem" | t(lang) }}</label>
+            <textarea id="ke-problem" rows="3" data-f="problem" placeholder="{{ cfg.fields.problem }}"></textarea>
+          </div>
+          <div class="field dl-wide">
+            <label for="ke-why">{{ "Why now" | t(lang) }}</label>
+            <textarea id="ke-why" rows="2" data-f="whyNow" placeholder="{{ cfg.fields.whyNow }}"></textarea>
+          </div>
+          <div class="field">
+            <label for="ke-sponsor">{{ "Sponsor" | t(lang) }}</label>
+            <input id="ke-sponsor" data-f="sponsor" placeholder="{{ cfg.fields.person }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ke-leader">{{ "Team leader" | t(lang) }}</label>
+            <input id="ke-leader" data-f="leader" placeholder="{{ cfg.fields.person }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ke-facilitator">{{ "Facilitator" | t(lang) }}</label>
+            <input id="ke-facilitator" data-f="facilitator" placeholder="{{ cfg.fields.person }}" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ke-budget">{{ "Budget limit (€)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ke-budget" data-f="budget" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="ke-bounds">{{ "Out of bounds" | t(lang) }} <span class="optional">{{ "what the team may not change" | t(lang) }}</span></label>
+            <textarea id="ke-bounds" rows="2" data-f="outOfBounds" placeholder="{{ cfg.fields.outOfBounds }}"></textarea>
+          </div>
+        </div>
+        <p class="ke-sub">{{ "Goals as measurable targets" | t(lang) }}</p>
+        <div class="ke-rows" data-rows="goals"></div>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="goals">{{ "Add a goal" | t(lang) }}</button></div>
+        <p class="ke-sub">{{ "Team members" | t(lang) }}</p>
+        <div class="ke-rows" data-rows="members"></div>
+        <p class="form-note ke-team-note" data-team-note aria-live="polite"></p>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="members">{{ "Add a team member" | t(lang) }}</button></div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">2 · {{ "Preparation" | t(lang) }}</legend>
+        <p class="ke-hint">{{ "Each task is due a number of weeks before the first day; the dates count back from it." | t(lang) }}</p>
+        <div class="ke-rows" data-rows="prep"></div>
+        <p class="form-note" data-prep-note aria-live="polite"></p>
+        <div class="tool-actions"><button class="button-secondary" type="button" data-add="prep">{{ "Add a task" | t(lang) }}</button></div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">3 · {{ "The event days" | t(lang) }}</legend>
+        <p class="ke-hint">{{ "The standard agenda of a Kaizen event, one checklist per day. Change any line to fit your event." | t(lang) }}</p>
+        <div class="ke-days" data-agenda></div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">4 · {{ "Ideas and the Kaizen newspaper" | t(lang) }}</legend>
+        <p class="ke-hint">{{ "Every idea with the waste it removes, its effort and impact, an owner and a date. What is not done by the report-out goes on the 30-day follow-up list." | t(lang) }}</p>
+        <div class="ke-rows" data-rows="ideas"></div>
+        <p class="form-note" data-ideas-note aria-live="polite"></p>
+        <div class="tool-actions">
+          <button class="button-secondary" type="button" data-add="ideas">{{ "Add an idea" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="kicker">5 · {{ "Results and the 30-day check" | t(lang) }}</legend>
+        <p class="ke-hint">{{ "Measure each goal the same way as the baseline: at the end of the event, and again at the 30-day check." | t(lang) }}</p>
+        <div class="ke-rows" data-rows="results"></div>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="ke-savings">{{ "Hard savings per year (€)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ke-savings" data-f="savings" inputmode="decimal" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ke-spent">{{ "Spent (€)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ke-spent" data-f="spent" inputmode="decimal" autocomplete="off">
+          </div>
+          <p class="form-note dl-wide ke-budget-note" data-budget-note aria-live="polite"></p>
+          <div class="field dl-wide">
+            <label for="ke-savings-note">{{ "How the savings are counted" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+            <input id="ke-savings-note" data-f="savingsNote" autocomplete="off">
+          </div>
+          <div class="field dl-wide">
+            <label for="ke-changed">{{ "What changed in the process" | t(lang) }}</label>
+            <textarea id="ke-changed" rows="3" data-f="changed" placeholder="{{ cfg.fields.changed }}"></textarea>
+          </div>
+          <div class="field">
+            <label for="ke-closed">{{ "30-day check held on" | t(lang) }}</label>
+            <input id="ke-closed" type="date" data-f="closedOn">
+          </div>
+          <div class="tool-actions ke-close-actions">
+            <button class="button-ghost" type="button" data-close-today>{{ "Close the event today" | t(lang) }}</button>
+          </div>
+        </div>
+      </fieldset>
+      <p class="form-note" data-save-status aria-live="polite">{{ "Saved in this browser." | t(lang) }}</p>
+    </form>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="kicker">{{ "Tools for the event" | t(lang) }}</p>
+    <ul class="ke-links">
+      {%- for link in cfg.links %}
+      <li><a class="inline-link" href="{{ link.url | local(lang) }}">{{ link.name }}</a> · {{ link.note }}</li>
+      {%- endfor %}
+      <li><a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Open the Action Tracker" | t(lang) }}</a></li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results ke-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="kaizen-event-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/kaizen-event.js' | assetUrl }}" defer></script>
