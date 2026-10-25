@@ -16,7 +16,7 @@ const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url)
 // on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
 // the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
 // src/media/guides/tools-guide/editions/).
-const EDITION = 6;
+const EDITION = 7;
 const EDITION_DATE = "2026-10-25";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
@@ -46,7 +46,7 @@ pages.push("coaching", "next", "back");
 
 const en = {
   title: "The Tools Guide",
-  subtitle: "Fifty free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
+  subtitle: "Fifty-eight free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
   edition: `Edition ${EDITION} · October 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -68,9 +68,9 @@ const en = {
   sections: {
     about: {
       kicker: "About this guide",
-      title: "Fifty tools, four planets, one idea",
+      title: "Fifty-eight tools, four planets, one idea",
       body: [
-        "Stiven Catalyst has fifty free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
+        "Stiven Catalyst has fifty-eight free tools and a course for the people who run the work: shift leads, area managers, process managers, and anyone carrying their experience into the next role.",
         "This guide explains how the tools are organised, why the site looks the way it does, and how to use each tool, step by step. You do not need to read it in order: find your planet and start there.",
         { cards: [
           { title: "Free", text: "Every tool is free to use." },
@@ -183,7 +183,7 @@ const en = {
       ],
     },
     next: {
-      kicker: "Edition 6",
+      kicker: "Edition 7",
       title: "What could come next",
       body: [
         "Ideas under consideration, not promises with dates. Tell me which one would help you most.",
@@ -201,9 +201,9 @@ const en = {
     },
   },
   families: {
-    pulse: "Fourteen tools for one shift: log what goes wrong where it happens, keep the floor safe and in order, run the huddle, see the shift in one picture, run the hotel's rooms, lost items and complaints, and hand it over cleanly, with every action on one list and the week's paper printed in one go.",
-    zenith: "Seventeen tools for one area: start the morning with the signals that matter, read the week, find where a red number really comes from, put a problem on one sheet, grow the team's ideas and skills, plan the people, rooms and maintenance, assess the risks, keep the leaders' standard work and report the week.",
-    lumen: "Sixteen tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, solve a customer problem with 8D, time, map and walk the flow, cut changeovers, run Kaizen events, class the stock, write the standard, deploy the strategy, compare the sites and run improvements as a portfolio of projects.",
+    pulse: "Sixteen tools for one shift: log what goes wrong where it happens, weigh the waste, answer every call for help, keep the floor safe and in order, run the huddle, see the shift in one picture, run the hotel's rooms, lost items and complaints, and hand it over cleanly, with every action on one list and the week's paper printed in one go.",
+    zenith: "Eighteen tools for one area: start the morning with the signals that matter, read the week, find where a red number really comes from, put a problem on one sheet, grow the team's ideas and skills, plan the people, rooms and maintenance, assess the risks, follow the energy and water, keep the leaders' standard work and report the week.",
+    lumen: "Twenty-one tools and a course for the whole system: tell a real change from noise, reach a root cause you can change, solve a customer problem with 8D, mistake-proof the work, price poor quality, time, map and walk the flow, cut changeovers, level the mix, size the kanbans, run Kaizen events, class the stock, write the standard, deploy the strategy, assess lean maturity, compare the sites and run improvements as a portfolio of projects.",
     atlas: "Three tools for the next role: a designed CV, a CV that screening software reads correctly, and a letter that matches.",
   },
   tools: {
@@ -734,6 +734,94 @@ const en = {
       get: "Each goal's change from its baseline and whether the target was met, the follow-up list closed by day 30, savings, the ideas on an effort and impact matrix, and the report-out: [[Print the report-out]] or [[Download Word]].",
       data: "Your events stay in this browser, and the action list downloads as CSV or Excel.",
     },
+    "/tools/waste-log/": {
+      when: "Whenever food, goods, scrap or linen are thrown away or written off, weighed where it happens, and once a week against the target.",
+      how: [
+        "Log each entry: date, shift, area, category, the item, its quantity in kg, pieces or litres, the cost per unit at purchase cost, the reason and where it went, then [[Add to log]]. Rows can be pasted with [[Import rows]].",
+        "Enter the covers of the day, the guests served, and [[Save the covers]]: food waste in kg then reads as grams per cover.",
+        "Set the period, an area or a category, the [[Reduction target (%)]], 20 unless you change it, and the baseline: the first four weeks of the log.",
+        "Read where to start, then [[Add to actions]] for the reason to cut, or take it on to 5 Whys or Pareto 80/20.",
+      ],
+      get: "The weight and value lost, the value per day against the baseline and the target, grams of food per cover, the Pareto of categories and reasons, the value by area and by where it went, in the order of the waste hierarchy, and the weeks by value and weight. Download it as CSV or Excel.",
+      data: "The log and the covers stay in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/andon/": {
+      when: "The moment someone on the floor needs help, live with a running clock, and after the shift for a call that was not logged as it happened.",
+      how: [
+        "Choose the station and the shift, then tap the reason: the clock starts. [[Help arrived]] when someone is there, [[Solved]] when the work runs again.",
+        "Each open call says who to call now: the team lead at once, the supervisor after 5 minutes, the shift manager after 15. Note who responded and whether the line stopped.",
+        "Log a call after the fact with the times it was called, help arrived and it was solved, and [[Add to log]], or paste rows with [[Import rows]].",
+        "Set the period, the filters and the targets, respond within 3 and solve within 15 minutes by default, and the escalation minutes agreed with the team.",
+      ],
+      get: "The calls, the median time to respond and to solve and the share within target, the Pareto of reasons and of stopped minutes, the calls by hour and weekday, the slowest calls and the level each reached. [[Add to actions]] for the top reason, take a slow call to 5 Whys, or download the log as CSV or Excel.",
+      data: "The log and the open calls stay in this browser, the open calls through a reload too. Nothing is sent or uploaded.",
+    },
+    "/tools/energy-tracker/": {
+      when: "Once a week, on the same day and at the same hour, when the meters are read: to see use, cost and CO₂, and to catch a meter that drifts up.",
+      how: [
+        "[[Add a meter]] for each one you read: electricity, gas, water, district heat or heating oil, with its price per unit without the fixed charges.",
+        "Type each reading as the meter shows it and [[Add the reading]]: the use between two readings is spread over the days between them. When a meter is replaced, tick the box and give the old one's last reading.",
+        "Divide by the work: the rooms sold from Hotel KPIs, or each day's occupied room nights, orders, pallets or units with [[Save the figure]].",
+        "Set the period and the baseline, the first 4 complete weeks, the signal, 10 % above it, and the CO₂ factors, calorific value and Zustandszahl of your bills.",
+      ],
+      get: "The use, cost and CO₂ of each meter for any period, with gas and oil converted to kWh, the use per occupied room night or per unit, the weeks, the months and the weekday pattern, and each meter against its own baseline, with a signal when a week drifts above it. [[Add to actions]] for the meter to check, or download as CSV or Excel.",
+      data: "The meters and the readings stay in this browser. Hotel KPIs is only read, never changed.",
+    },
+    "/tools/cost-of-quality/": {
+      when: "When you need the money behind quality problems on one page, before you argue for more prevention, and again a few months after the change.",
+      how: [
+        "Choose the operation, warehouse, hotel or delivery, the default hourly rate, 28 € until you type your loaded labour cost, and if you like the revenue and the volume per month.",
+        "[[Add a line]] under prevention, appraisal, internal and external failure: hours × rate, a count × the cost of one event, or a fixed amount, each for the period it comes in.",
+        "[[Bring in from this browser]] adds the last 30 days of the Waste Log as internal failure and the compensation in Guest Complaints as external failure.",
+        "Set the scenario: failure costs fall by 30 % unless you change it, and prevention rises by what the change costs a month.",
+      ],
+      get: "The cost of quality a month and a year, the cost of poor quality, internal plus external failure, as a share of revenue and per unit, the split P, A, IF, EF, the top items, and the net saving per year with its break-even cut. [[Add to actions]] for the largest item, [[Open in Pareto 80/20]], print a one-page summary, or download CSV or Excel.",
+      data: "The lines stay in this browser. The Waste Log and Guest Complaints are only read, never changed.",
+    },
+    "/tools/heijunka/": {
+      when: "When a line, a pick area or a packing station makes each product in large batches, and the load and the finished stock swing from day to day.",
+      how: [
+        "Describe the line: the shifts per day, their length and planned breaks, 2 × 480 minutes with 30 of breaks by default, the start of the first shift, the working days in the period and today's batch interval.",
+        "[[Add a product]] for each product or family: its demand in the period, its cycle time in seconds, the units in one container and the changeover to it.",
+        "Leave the runs of each product per day empty for the most that fit, or set them: more runs mean less stock and more changeovers.",
+        "Read the takt, the pitch, the load and EPEI, then [[Print the heijunka box]] and pull one column of cards at each pitch.",
+      ],
+      get: "Takt time, pitch (takt × pack-out), utilisation and EPEI with their formulas, the day's sequence with clock times, the load per hour, and the finished stock in batches against the levelled mix. The longest changeover goes on to SMED or the Action Tracker; download as CSV or Excel.",
+      data: "The plan stays in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/kanban-sizing/": {
+      when: "When you set up a supermarket or a two-bin loop, and every month, or whenever the demand per day changes by more than about 20 %.",
+      how: [
+        "Describe each loop: the part, its location and source, kanban or two-bin, the average demand per working day, the order interval and lead time in days, the container quantity, the unit cost and the cards in the loop now. [[Add the loop]].",
+        "Or bring in the steady SKUs of ABC/XYZ Inventory with their demand, σd and lead time: tick them and [[Add the ticked SKUs]].",
+        "Choose the formula for every loop: Toyota's N = ⌈D × L × (1 + α) ÷ C⌉ with α = 10 %, or a statistical safety stock z × σd × √L at a 95 % service level. L is the order interval plus the lead time.",
+        "Add the missing cards, take the extra ones out one at a time, and [[Print cards]], eight to an A4 sheet.",
+      ],
+      get: "For each loop the cards needed, the cards to add or take out, the safety stock, the maximum inventory and its value, and the change in stock value. Loops with too few cards go to the Action Tracker; download as CSV or Excel.",
+      data: "The loops stay in this browser. ABC/XYZ Inventory is only read, never changed.",
+    },
+    "/tools/poka-yoke/": {
+      when: "When a mistake-proofing device is put in place, and on its schedule, to prove with a deliberate error that it still catches what it was made for.",
+      how: [
+        "Describe each device: the error it prevents, the step and area, Shingo's method, contact, fixed-value or motion-step, control or warning, prevention or detection, the owner and how to test it. [[Add to register]].",
+        "Set how often it is verified, each shift, daily, weekly or monthly, and when it last was; add the FMEA failure mode and the errors per month before and after.",
+        "Feed it the error, mark it works, failed or not tested with a reason, and [[Record the check]]. A failed device stays failed until a later check says it works.",
+        "Read what to verify, most urgent first, and [[Print the checklist]] for the round.",
+      ],
+      get: "The errors not protected today, the verification compliance, the failure rate of the checks, the effectiveness of each device from its errors before and after, and the devices by method, level and function. A failed or overdue device goes on with [[Add to actions]] or [[Take it to 5 Whys]]; the register and the checks download as CSV or Excel.",
+      data: "The register and its checks stay in this browser. Nothing is sent or uploaded.",
+    },
+    "/tools/lean-assessment/": {
+      when: "Once a quarter for each area, on the floor, to see how mature its lean system is and where to act next.",
+      how: [
+        "Name the area and the date, and [[Add an assessor]]: up to five, each scoring alone first.",
+        "Score the 41 statements of the ten dimensions, from 5S to kaizen, from 1, reactive, to 5, sustained, as you see it now. N/A only when a statement does not apply.",
+        "Talk through every statement whose scores lie 2 or more apart before you agree on it.",
+        "Give the three weakest dimensions an owner and a check in the Action Tracker; next quarter, [[Start a new assessment]] of the same area.",
+      ],
+      get: "The overall score, each dimension on a radar against the last assessment, the change per dimension, where the assessors disagree, and the three weakest dimensions with the tools that close them. [[Copy summary]], [[Print or save as PDF]], or download as CSV or Excel.",
+      data: "The assessments stay in this browser, with the history of each area.",
+    },
     "/tools/cv-builder/": {
       when: "When your CV should look designed, not typed.",
       how: [
@@ -772,7 +860,7 @@ const en = {
 
 const sq = {
   title: "Udhëzuesi i mjeteve",
-  subtitle: "Pesëdhjetë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
+  subtitle: "Pesëdhjetë e tetë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
   edition: `Botimi ${EDITION} · tetor 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -794,9 +882,9 @@ const sq = {
   sections: {
     about: {
       kicker: "Për këtë udhëzues",
-      title: "Pesëdhjetë mjete, katër planete, një ide",
+      title: "Pesëdhjetë e tetë mjete, katër planete, një ide",
       body: [
-        "Stiven Catalyst ka pesëdhjetë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
+        "Stiven Catalyst ka pesëdhjetë e tetë mjete falas dhe një kurs për ata që e drejtojnë punën: shefat e turnit, area manager-ët, process manager-ët dhe këdo që po e çon përvojën e vet te roli i ardhshëm.",
         "Ky udhëzues shpjegon si janë organizuar mjetet, pse faqja duket ashtu siç duket dhe si përdoret çdo mjet, hap pas hapi. Nuk ke nevojë ta lexosh me radhë: gjej planetin tënd dhe nis nga aty.",
         { cards: [
           { title: "Falas", text: "Çdo mjet përdoret falas." },
@@ -909,7 +997,7 @@ const sq = {
       ],
     },
     next: {
-      kicker: "Botimi 6",
+      kicker: "Botimi 7",
       title: "Çfarë mund të vijë më pas",
       body: [
         "Ide në shqyrtim, jo premtime me data. Më thuaj cila do të të ndihmonte më shumë.",
@@ -927,9 +1015,9 @@ const sq = {
     },
   },
   families: {
-    pulse: "Katërmbëdhjetë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, mbaje terrenin të sigurt dhe në rregull, drejto takimin e turnit, shih turnin në një pamje, mbaj dhomat, sendet e harruara dhe ankesat e hotelit, dhe dorëzoje të pastër, me çdo veprim në një listë dhe letrat e javës të printuara me një herë.",
-    zenith: "Shtatëmbëdhjetë mjete për një zonë: nis mëngjesin me sinjalet që kanë rëndësi, lexo javën, gjej nga vjen realisht një shifër e kuqe, vëre një problem në një fletë, rrit idetë dhe aftësitë e ekipit, planifiko njerëzit, dhomat dhe mirëmbajtjen, vlerëso rreziqet, mbaj punën standarde të drejtuesve dhe raporto javën.",
-    lumen: "Gjashtëmbëdhjetë mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, zgjidh një problem të klientit me 8D, mat, harto dhe ec rrjedhën, shkurto ndërrimet, drejto ngjarje Kaizen, klasifiko stokun, shkruaj standardin, shpërndaj strategjinë, krahaso objektet dhe drejto përmirësimet si një portofol projektesh.",
+    pulse: "Gjashtëmbëdhjetë mjete për një turn: regjistro atë që shkon keq aty ku ndodh, peshoji mbetjet, përgjigju çdo thirrjeje për ndihmë, mbaje terrenin të sigurt dhe në rregull, drejto takimin e turnit, shih turnin në një pamje, mbaj dhomat, sendet e harruara dhe ankesat e hotelit, dhe dorëzoje të pastër, me çdo veprim në një listë dhe letrat e javës të printuara me një herë.",
+    zenith: "Tetëmbëdhjetë mjete për një zonë: nis mëngjesin me sinjalet që kanë rëndësi, lexo javën, gjej nga vjen realisht një shifër e kuqe, vëre një problem në një fletë, rrit idetë dhe aftësitë e ekipit, planifiko njerëzit, dhomat dhe mirëmbajtjen, vlerëso rreziqet, ndiq energjinë dhe ujin, mbaj punën standarde të drejtuesve dhe raporto javën.",
+    lumen: "Njëzet e një mjete dhe një kurs për të gjithë sistemin: dallo një ndryshim të vërtetë nga zhurma, arri te një shkak që mund ta ndryshosh, zgjidh një problem të klientit me 8D, mbroje punën nga gabimet, vëri çmim cilësisë së dobët, mat, harto dhe ec rrjedhën, shkurto ndërrimet, nivelizo përzierjen, përmaso kanban-et, drejto ngjarje Kaizen, klasifiko stokun, shkruaj standardin, shpërndaj strategjinë, vlerëso pjekurinë lean, krahaso objektet dhe drejto përmirësimet si një portofol projektesh.",
     atlas: "Tri mjete për rolin e ardhshëm: një CV e dizajnuar, një CV që softueri i përzgjedhjes e lexon saktë dhe një letër që përputhet me to.",
   },
   tools: {
@@ -1460,6 +1548,94 @@ const sq = {
       get: "Ndryshimi i çdo objektivi nga vlera bazë dhe nëse u arrit objektivi, lista e ndjekjes e mbyllur deri në ditën 30, kursimet, idetë në matricën përpjekje–ndikim dhe prezantimi: [[Print the report-out]] ose [[Download Word]].",
       data: "Ngjarjet mbeten në këtë shfletues, dhe lista e veprimeve shkarkohet si CSV ose Excel.",
     },
+    "/tools/waste-log/": {
+      when: "Sa herë hidhet ose shlyhet ushqim, mall, skarto ose lino, e peshuar aty ku ndodh, dhe një herë në javë kundrejt objektivit.",
+      how: [
+        "Regjistro çdo rast: datën, turnin, zonën, kategorinë, artikullin, sasinë në kg, copë ose litra, koston për njësi me çmimin e blerjes, arsyen dhe ku shkoi, pastaj shtyp [[Add to log]]. Rreshtat ngjiten me [[Import rows]].",
+        "Shkruaj mysafirët e ditës, ata që u shërbyen, dhe shtyp [[Save the covers]]: mbetjet ushqimore në kg lexohen atëherë në gramë për mysafir.",
+        "Cakto periudhën, një zonë ose kategori, [[Reduction target (%)]], 20 nëse nuk e ndryshon, dhe bazën: katër javët e para të regjistrit.",
+        "Lexo ku të fillosh, pastaj [[Add to actions]] për arsyen që do të ulësh, ose vazhdo me 5 Whys ose Pareto 80/20.",
+      ],
+      get: "Pesha dhe vlera e humbur, vlera për ditë kundrejt bazës dhe objektivit, gramët e ushqimit për mysafir, Pareto e kategorive dhe e arsyeve, vlera sipas zonës dhe sipas vendit ku shkoi, me radhën e hierarkisë së mbetjeve, dhe javët sipas vlerës dhe peshës. Shkarkoje si CSV ose Excel.",
+      data: "Regjistri dhe numri i mysafirëve mbeten në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/andon/": {
+      when: "Në çastin kur dikush në terren ka nevojë për ndihmë, drejtpërdrejt me orën që ecën, dhe pas turnit për një thirrje që nuk u regjistrua kur ndodhi.",
+      how: [
+        "Zgjidh stacionin dhe turnin, pastaj prek arsyen: ora nis. [[Help arrived]] kur dikush është aty, [[Solved]] kur puna rinis.",
+        "Çdo thirrje e hapur të thotë kë të thërrasësh tani: përgjegjësin e ekipit menjëherë, supervizorin pas 5 minutash, menaxherin e turnit pas 15. Shëno kush ndihmoi dhe nëse u ndal linja.",
+        "Regjistro një thirrje më pas, me orën e thirrjes, të mbërritjes së ndihmës dhe të zgjidhjes, dhe shtyp [[Add to log]], ose ngjit rreshtat me [[Import rows]].",
+        "Cakto periudhën, filtrat dhe objektivat, si parazgjedhje reagimi brenda 3 dhe zgjidhja brenda 15 minutash, dhe minutat e përshkallëzimit që ke rënë dakord me ekipin.",
+      ],
+      get: "Thirrjet, mediana e kohës së reagimit dhe e kohës së zgjidhjes dhe pjesa brenda objektivit, Pareto e arsyeve dhe e minutave të ndalesës, thirrjet sipas orës dhe ditës së javës, thirrjet më të ngadalta dhe niveli që arriti secila. [[Add to actions]] për arsyen kryesore, çoje një thirrje të ngadaltë te 5 Whys, ose shkarko regjistrin si CSV ose Excel.",
+      data: "Regjistri dhe thirrjet e hapura mbeten në këtë shfletues, thirrjet e hapura edhe pas rifreskimit. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/energy-tracker/": {
+      when: "Një herë në javë, në të njëjtën ditë dhe orë, kur lexohen njehsorët: për të parë konsumin, koston dhe CO₂-në, dhe për të kapur një njehsor që rritet.",
+      how: [
+        "[[Add a meter]] për secilin që lexon: energji elektrike, gaz, ujë, ngrohje qendrore ose naftë ngrohjeje, me çmimin për njësi pa tarifat fikse.",
+        "Shkruaj çdo lexim siç e tregon njehsori dhe shtyp [[Add the reading]]: konsumi mes dy leximeve shpërndahet në ditët mes tyre. Kur zëvendësohet një njehsor, shëno kutinë dhe jep leximin e fundit të të vjetrit.",
+        "Pjesëto me punën: dhomat e shitura nga KPI-të e hotelit, ose netët e dhomave të zëna, porositë, paletat ose njësitë e çdo dite me [[Save the figure]].",
+        "Cakto periudhën dhe vlerën fillestare, katër javët e para të plota, sinjalin, 10 % mbi të, dhe faktorët e CO₂-së, vlerën kalorike dhe Zustandszahl nga faturat e tua.",
+      ],
+      get: "Konsumi, kostoja dhe CO₂-ja e çdo njehsori për çdo periudhë, me gazin dhe naftën të kthyera në kWh, konsumi për natë dhome të zënë ose për njësi, javët, muajt dhe modeli sipas ditës së javës, dhe çdo njehsor kundrejt vlerës së vet fillestare, me një sinjal kur një javë del mbi të. [[Add to actions]] për njehsorin që duhet kontrolluar, ose shkarko si CSV ose Excel.",
+      data: "Njehsorët dhe leximet mbeten në këtë shfletues. KPI-të e hotelit vetëm lexohen, nuk ndryshohen kurrë.",
+    },
+    "/tools/cost-of-quality/": {
+      when: "Kur të duhen në një faqe paratë që fshihen pas problemeve të cilësisë, para se të kërkosh më shumë parandalim, dhe sërish disa muaj pas ndryshimit.",
+      how: [
+        "Zgjidh llojin e operacionit, magazinë, hotel ose dorëzim, tarifën standarde për orë, 28 € derisa të shkruash koston tënde të plotë të punës, dhe, nëse do, të ardhurat dhe vëllimin në muaj.",
+        "[[Add a line]] te parandalimi, kontrolli, dështimi i brendshëm dhe i jashtëm: orë × tarifë, një numër × koston e një rasti, ose një shumë fikse, secila për periudhën në të cilën vjen.",
+        "[[Bring in from this browser]] shton 30 ditët e fundit të Regjistrit të mbetjeve si dështim të brendshëm dhe kompensimet e Ankesave të mysafirëve si dështim të jashtëm.",
+        "Cakto skenarin: kostot e dështimit bien me 30 % nëse nuk e ndryshon, dhe parandalimi rritet me aq sa kushton ndryshimi në muaj.",
+      ],
+      get: "Kostoja e cilësisë në muaj dhe në vit, kostoja e cilësisë së dobët, dështimi i brendshëm plus i jashtëm, si pjesë e të ardhurave dhe për njësi, ndarja P, A, IF, EF, zërat më të mëdhenj, dhe kursimi neto në vit me uljen e barazimit. [[Add to actions]] për zërin më të madh, [[Open in Pareto 80/20]], printo një përmbledhje në një faqe, ose shkarko CSV ose Excel.",
+      data: "Rreshtat mbeten në këtë shfletues. Regjistri i mbetjeve dhe Ankesat e mysafirëve vetëm lexohen, nuk ndryshohen kurrë.",
+    },
+    "/tools/heijunka/": {
+      when: "Kur një linjë, një zonë marrjeje ose një stacion paketimi e bën çdo produkt në parti të mëdha, dhe ngarkesa dhe stoku i gatshëm luhaten nga dita në ditë.",
+      how: [
+        "Përshkruaj linjën: turnet në ditë, kohëzgjatjen dhe pushimet e planifikuara, si parazgjedhje 2 × 480 minuta me 30 minuta pushim, fillimin e turnit të parë, ditët e punës në periudhë dhe intervalin e partisë sot.",
+        "[[Add a product]] për çdo produkt ose familje: kërkesën në periudhë, kohën e ciklit në sekonda, njësitë në një kontejner dhe ndërrimin drejt tij.",
+        "Lëre bosh numrin e prodhimeve të çdo produkti në ditë për sa më shumë që hyjnë, ose caktoje vetë: më shumë prodhime do të thotë më pak stok dhe më shumë ndërrime.",
+        "Lexo taktin, pitch-in, ngarkesën dhe EPEI-n, pastaj [[Print the heijunka box]] dhe tërhiq një kolonë kartash në çdo pitch.",
+      ],
+      get: "Koha e taktit, pitch-i (takti × sasia e paketimit), shfrytëzimi dhe EPEI me formulat e tyre, radha e ditës me oraret, ngarkesa për orë, dhe stoku i gatshëm në parti kundrejt përzierjes së niveluar. Ndërrimi më i gjatë vazhdon te SMED ose te Lista e veprimeve; shkarko si CSV ose Excel.",
+      data: "Plani mbetet në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/kanban-sizing/": {
+      when: "Kur ngre një supermarket ose një cikël me dy kontejnerë, dhe çdo muaj, ose sa herë kërkesa ditore ndryshon më shumë se rreth 20 %.",
+      how: [
+        "Përshkruaj çdo cikël: artikullin, vendin dhe burimin, kanban ose dy kontejnerë, kërkesën mesatare për ditë pune, intervalin e porosisë dhe kohën e furnizimit në ditë, sasinë për kontejner, koston për njësi dhe kartat në cikël sot. [[Add the loop]].",
+        "Ose sill artikujt e qëndrueshëm nga Analiza ABC/XYZ e stokut, me kërkesën, σd dhe kohën e furnizimit: shënoji dhe shtyp [[Add the ticked SKUs]].",
+        "Zgjidh formulën për çdo cikël: atë të Toyota-s, N = ⌈D × L × (1 + α) ÷ C⌉ me α = 10 %, ose stokun statistikor të sigurisë z × σd × √L me nivel shërbimi 95 %. L është intervali i porosisë plus koha e furnizimit.",
+        "Shto kartat që mungojnë, hiq të tepërtat një nga një, dhe [[Print cards]], tetë në një fletë A4.",
+      ],
+      get: "Për çdo cikël kartat që duhen, kartat për t'u shtuar ose hequr, stoku i sigurisë, stoku maksimal dhe vlera e tij, dhe ndryshimi në vlerën e stokut. Ciklet me pak karta shkojnë te Lista e veprimeve; shkarko si CSV ose Excel.",
+      data: "Ciklet mbeten në këtë shfletues. Analiza ABC/XYZ e stokut vetëm lexohet, nuk ndryshohet kurrë.",
+    },
+    "/tools/poka-yoke/": {
+      when: "Kur vendoset një pajisje kundër gabimeve, dhe sipas afatit të saj, për të provuar me një gabim të qëllimshëm që ende kap atë për të cilin u bë.",
+      how: [
+        "Përshkruaj çdo pajisje: gabimin që parandalon, hapin dhe zonën, metodën e Shingos, kontakt, vlerë fikse ose hap pas hapi, ndalim ose paralajmërim, parandalim ose zbulim, përgjegjësin dhe si testohet. [[Add to register]].",
+        "Cakto sa shpesh verifikohet, çdo turn, çdo ditë, çdo javë ose çdo muaj, dhe kur u verifikua së fundi; shto mënyrën e dështimit në FMEA dhe gabimet në muaj para dhe pas.",
+        "Jepi gabimin, shëno funksionon, dështoi ose nuk u testua me arsyen, dhe shtyp [[Record the check]]. Një pajisje me defekt mbetet e tillë derisa një verifikim i mëvonshëm të thotë që funksionon.",
+        "Lexo çfarë duhet verifikuar, më urgjentja e para, dhe [[Print the checklist]] për raundin.",
+      ],
+      get: "Gabimet pa mbrojtje sot, respektimi i verifikimeve, shkalla e dështimit të verifikimeve, efektiviteti i çdo pajisjeje nga gabimet para dhe pas, dhe pajisjet sipas metodës, nivelit dhe funksionit. Një pajisje me defekt ose me afat të kaluar vazhdon me [[Add to actions]] ose [[Take it to 5 Whys]]; regjistri dhe verifikimet shkarkohen si CSV ose Excel.",
+      data: "Regjistri dhe verifikimet e tij mbeten në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
+    },
+    "/tools/lean-assessment/": {
+      when: "Një herë në tremujor për çdo zonë, në terren, për të parë sa i pjekur është sistemi lean i saj dhe ku të veprosh më pas.",
+      how: [
+        "Emërto zonën dhe datën, dhe [[Add an assessor]]: deri në pesë, secili vlerëson fillimisht vetëm.",
+        "Vlerëso 41 pohimet e dhjetë dimensioneve, nga 5S te kaizen, nga 1, reaktiv, te 5, i qëndrueshëm, siç e sheh sot. N/A vetëm kur një pohim nuk vlen për zonën.",
+        "Diskuto çdo pohim ku vlerësimet ndahen me 2 ose më shumë, para se të bini dakord.",
+        "Jepu tri dimensioneve më të dobëta një përgjegjës dhe një kontroll te Lista e veprimeve; tremujorin tjetër, [[Start a new assessment]] për të njëjtën zonë.",
+      ],
+      get: "Rezultati i përgjithshëm, çdo dimension në një radar kundrejt vlerësimit të fundit, ndryshimi sipas dimensionit, ku nuk pajtohen vlerësuesit, dhe tri dimensionet më të dobëta me mjetet që i mbyllin. [[Copy summary]], [[Print or save as PDF]], ose shkarko si CSV ose Excel.",
+      data: "Vlerësimet mbeten në këtë shfletues, me historikun e çdo zone.",
+    },
     "/tools/cv-builder/": {
       when: "Kur CV-ja jote duhet të duket e dizajnuar, jo e shtypur.",
       how: [
@@ -1498,7 +1674,7 @@ const sq = {
 
 const de = {
   title: "Der Werkzeug-Leitfaden",
-  subtitle: "Fünfzig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
+  subtitle: "Achtundfünfzig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
   edition: `Ausgabe ${EDITION} · Oktober 2026`,
   author: "Stiven Janaqi",
   labels: {
@@ -1520,9 +1696,9 @@ const de = {
   sections: {
     about: {
       kicker: "Über diesen Leitfaden",
-      title: "Fünfzig Tools, vier Planeten, eine Idee",
+      title: "Achtundfünfzig Tools, vier Planeten, eine Idee",
       body: [
-        "Stiven Catalyst hat fünfzig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
+        "Stiven Catalyst hat achtundfünfzig kostenlose Tools und einen Kurs für alle, die Teams und Abläufe führen: Schichtleiter, Area Manager, Prozessmanager und alle, die ihre Erfahrung in die nächste Rolle mitnehmen.",
         "Dieser Leitfaden erklärt, wie die Tools geordnet sind, warum die Website so aussieht, wie sie aussieht, und wie Sie jedes Tool Schritt für Schritt nutzen. Sie müssen ihn nicht der Reihe nach lesen: Suchen Sie Ihren Planeten und fangen Sie dort an.",
         { cards: [
           { title: "Kostenlos", text: "Jedes Tool ist kostenlos." },
@@ -1635,7 +1811,7 @@ const de = {
       ],
     },
     next: {
-      kicker: "Ausgabe 6",
+      kicker: "Ausgabe 7",
       title: "Was als Nächstes kommen könnte",
       body: [
         "Ideen, über die ich nachdenke, keine Versprechen mit Datum. Sagen Sie mir, welche Ihnen am meisten helfen würde.",
@@ -1653,9 +1829,9 @@ const de = {
     },
   },
   families: {
-    pulse: "Vierzehn Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, den Bereich sicher und in Ordnung halten, das Huddle führen, die Schicht in einem Bild sehen, Zimmer, Fundsachen und Beschwerden des Hotels führen und sauber übergeben, mit jeder Maßnahme auf einer Liste und dem Papier der Woche in einem Druck.",
-    zenith: "Siebzehn Tools für einen Bereich: den Morgen mit den wichtigen Signalen beginnen, die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, ein Problem auf ein Blatt bringen, die Ideen und Fähigkeiten des Teams wachsen lassen, Personal, Zimmer und Wartung planen, Gefährdungen beurteilen, die Standardarbeit der Führungskräfte halten und über die Woche berichten.",
-    lumen: "Sechzehn Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, ein Kundenproblem mit 8D lösen, den Fluss messen, abbilden und ablaufen, Rüstzeiten senken, Kaizen-Events durchführen, den Bestand klassifizieren, den Standard schreiben, die Strategie entfalten, die Standorte vergleichen und Verbesserungen als Portfolio von Projekten führen.",
+    pulse: "Sechzehn Tools für eine Schicht: erfassen, was schiefgeht, dort, wo es passiert, Verluste wiegen, jeden Hilferuf beantworten, den Bereich sicher und in Ordnung halten, das Huddle führen, die Schicht in einem Bild sehen, Zimmer, Fundsachen und Beschwerden des Hotels führen und sauber übergeben, mit jeder Maßnahme auf einer Liste und dem Papier der Woche in einem Druck.",
+    zenith: "Achtzehn Tools für einen Bereich: den Morgen mit den wichtigen Signalen beginnen, die Woche lesen, herausfinden, woher eine rote Zahl wirklich kommt, ein Problem auf ein Blatt bringen, die Ideen und Fähigkeiten des Teams wachsen lassen, Personal, Zimmer und Wartung planen, Gefährdungen beurteilen, Energie und Wasser verfolgen, die Standardarbeit der Führungskräfte halten und über die Woche berichten.",
+    lumen: "Einundzwanzig Tools und ein Kurs für das ganze System: eine echte Veränderung vom Rauschen unterscheiden, eine Grundursache finden, die Sie ändern können, ein Kundenproblem mit 8D lösen, Fehler unmöglich machen, schlechte Qualität beziffern, den Fluss messen, abbilden und ablaufen, Rüstzeiten senken, den Mix glätten, Kanbans dimensionieren, Kaizen-Events durchführen, den Bestand klassifizieren, den Standard schreiben, die Strategie entfalten, den Lean-Reifegrad bewerten, die Standorte vergleichen und Verbesserungen als Portfolio von Projekten führen.",
     atlas: "Drei Tools für die nächste Rolle: ein gestalteter Lebenslauf, ein Lebenslauf, den Bewerbungssoftware richtig liest, und ein Anschreiben, das dazu passt.",
   },
   tools: {
@@ -2186,6 +2362,94 @@ const de = {
       get: "Die Veränderung jedes Ziels gegenüber dem Ausgangswert und ob es erreicht wurde, die bis Tag 30 erledigte Nachverfolgung, die Einsparungen, die Ideen in der Aufwand-Wirkung-Matrix und die Abschlusspräsentation: [[Print the report-out]] oder [[Download Word]].",
       data: "Ihre Events bleiben in diesem Browser; die Maßnahmenliste lässt sich als CSV oder Excel herunterladen.",
     },
+    "/tools/waste-log/": {
+      when: "Immer wenn Lebensmittel, Ware, Ausschuss oder Wäsche weggeworfen oder abgeschrieben werden, gewogen dort, wo es passiert, und einmal pro Woche gegen das Ziel.",
+      how: [
+        "Erfassen Sie jeden Eintrag: Datum, Schicht, Bereich, Kategorie, Artikel, die Menge in kg, Stück oder Litern, die Kosten pro Einheit zum Einkaufspreis, den Grund und den Verbleib, dann [[Add to log]]. Zeilen fügen Sie mit [[Import rows]] ein.",
+        "Tragen Sie die Gäste des Tages ein, die bedienten Gäste, und [[Save the covers]]: Lebensmittelabfall in kg erscheint dann in Gramm pro Gast.",
+        "Legen Sie Zeitraum, Bereich oder Kategorie fest, das [[Reduction target (%)]], 20, solange Sie nichts ändern, und die Basis: die ersten vier Wochen des Protokolls.",
+        "Lesen Sie, wo Sie anfangen, dann [[Add to actions]] für den Grund, den Sie senken wollen, oder weiter mit 5 Whys oder Pareto 80/20.",
+      ],
+      get: "Gewicht und Wert des Verlusts, der Wert pro Tag gegen Basis und Ziel, Gramm Lebensmittel pro Gast, die Pareto der Kategorien und Gründe, der Wert nach Bereich und nach Verbleib, in der Reihenfolge der Abfallhierarchie, und die Wochen nach Wert und Gewicht. Als CSV oder Excel herunterladen.",
+      data: "Protokoll und Gästezahlen bleiben in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/andon/": {
+      when: "Sobald jemand in der Fläche Hilfe braucht, live mit laufender Uhr, und nach der Schicht für einen Ruf, der nicht sofort erfasst wurde.",
+      how: [
+        "Wählen Sie Station und Schicht und tippen Sie auf den Grund: Die Uhr läuft. [[Help arrived]], wenn jemand da ist, [[Solved]], wenn die Arbeit wieder läuft.",
+        "Jeder offene Ruf zeigt, wer jetzt zu rufen ist: die Teamleitung sofort, der Supervisor nach 5 Minuten, die Schichtleitung nach 15. Notieren Sie, wer geholfen hat und ob die Linie stand.",
+        "Erfassen Sie einen Ruf nachträglich mit den Zeiten für Ruf, Hilfe vor Ort und Lösung und [[Add to log]], oder fügen Sie Zeilen mit [[Import rows]] ein.",
+        "Legen Sie Zeitraum, Filter und Ziele fest, standardmäßig Reaktion in 3 und Lösung in 15 Minuten, und die mit dem Team vereinbarten Eskalationsminuten.",
+      ],
+      get: "Die Rufe, der Median der Reaktions- und der Lösungszeit und der Anteil im Ziel, die Pareto der Gründe und der Stillstandsminuten, die Rufe nach Uhrzeit und Wochentag, die langsamsten Rufe und die erreichte Eskalationsstufe. [[Add to actions]] für den häufigsten Grund, einen langsamen Ruf weiter zu 5 Whys, oder das Protokoll als CSV oder Excel herunterladen.",
+      data: "Protokoll und offene Rufe bleiben in diesem Browser, offene Rufe auch nach dem Neuladen. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/energy-tracker/": {
+      when: "Jede Woche zur selben Zeit, wenn die Zähler abgelesen werden: für Verbrauch, Kosten, CO₂ und einen Zähler, der nach oben driftet.",
+      how: [
+        "[[Add a meter]] für jeden Zähler, den Sie ablesen: Strom, Gas, Wasser, Fernwärme oder Heizöl, mit dem Preis pro Einheit ohne Grundpreis.",
+        "Tragen Sie jeden Stand ein, wie der Zähler ihn zeigt, und [[Add the reading]]: Der Verbrauch wird auf die Tage dazwischen verteilt. Beim Zählerwechsel haken Sie das Feld an, mit dem letzten Stand des alten Zählers.",
+        "Teilen Sie durch die Arbeit: die verkauften Zimmer aus den Hotel-Kennzahlen oder die belegten Zimmernächte, Aufträge, Paletten oder Einheiten jedes Tages mit [[Save the figure]].",
+        "Legen Sie Zeitraum und Ausgangswert fest, die ersten 4 vollständigen Wochen, das Signal, 10 % darüber, und die CO₂-Faktoren, Brennwert und Zustandszahl Ihrer Rechnungen.",
+      ],
+      get: "Verbrauch, Kosten und CO₂ jedes Zählers, Gas und Öl in kWh, der Verbrauch pro belegter Zimmernacht oder Einheit nach Woche, Monat und Wochentag, und jeder Zähler gegen seinen Ausgangswert, mit einem Signal, wenn eine Woche darüber driftet. [[Add to actions]] für den Zähler; CSV oder Excel.",
+      data: "Zähler und Stände bleiben in diesem Browser. Die Hotel-Kennzahlen werden nur gelesen, nie geändert.",
+    },
+    "/tools/cost-of-quality/": {
+      when: "Wenn Sie das Geld hinter Qualitätsproblemen auf einer Seite brauchen, bevor Sie für Fehlerverhütung argumentieren, und Monate danach erneut.",
+      how: [
+        "Wählen Sie die Art des Betriebs, Lager, Hotel oder Zustellung, den Standard-Stundensatz, 28 €, bis Sie Ihre vollen Personalkosten eintragen, und auf Wunsch Umsatz und Volumen pro Monat.",
+        "[[Add a line]] unter Fehlerverhütung, Prüfung, internen und externen Fehlern: Stunden × Stundensatz, Anzahl × Kosten pro Fall oder ein fester Betrag, jeweils für den Zeitraum, in dem er anfällt.",
+        "[[Bring in from this browser]] übernimmt die letzten 30 Tage des Verlustprotokolls als interne Fehler und die Entschädigungen aus den Gästebeschwerden als externe Fehler.",
+        "Legen Sie das Szenario fest: Die Fehlerkosten sinken um 30 % (Vorgabe), die Fehlerverhütung steigt um die monatlichen Kosten der Änderung.",
+      ],
+      get: "Qualitätskosten pro Monat und Jahr, die Kosten schlechter Qualität (interne plus externe Fehler) als Anteil am Umsatz und pro Einheit, die Aufteilung P, A, IF, EF, die größten Posten und die Netto-Einsparung pro Jahr. [[Add to actions]] für den größten Posten, [[Open in Pareto 80/20]], eine Seite drucken, CSV oder Excel.",
+      data: "Die Zeilen bleiben in diesem Browser. Verlustprotokoll und Gästebeschwerden werden nur gelesen, nie geändert.",
+    },
+    "/tools/heijunka/": {
+      when: "Wenn eine Linie, ein Kommissionierbereich oder ein Packplatz jedes Produkt in großen Losen fertigt und Last und Fertigwarenbestand von Tag zu Tag schwanken.",
+      how: [
+        "Beschreiben Sie die Linie: Schichten pro Tag, ihre Länge und geplanten Pausen, standardmäßig 2 × 480 Minuten mit 30 Minuten Pause, den Beginn der ersten Schicht, die Arbeitstage im Zeitraum und das heutige Losintervall.",
+        "[[Add a product]] für jedes Produkt oder jede Familie: der Bedarf im Zeitraum, die Zykluszeit in Sekunden, die Einheiten in einem Behälter und das Rüsten auf das Produkt.",
+        "Lassen Sie die Läufe je Produkt pro Tag leer, um so viele wie möglich einzuplanen, oder legen Sie sie fest: Mehr Läufe heißen weniger Bestand und mehr Rüstvorgänge.",
+        "Lesen Sie Takt, Pitch, Last und EPEI, dann [[Print the heijunka box]] und ziehen Sie bei jedem Pitch eine Spalte Karten.",
+      ],
+      get: "Taktzeit, Pitch (Takt × Packmenge), Auslastung und EPEI mit ihren Formeln, die Reihenfolge des Tages mit Uhrzeiten, die Last pro Stunde und der Fertigwarenbestand in Losen gegenüber dem geglätteten Mix. Der längste Rüstvorgang geht weiter an SMED oder die Maßnahmenliste; als CSV oder Excel herunterladen.",
+      data: "Der Plan bleibt in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/kanban-sizing/": {
+      when: "Beim Einrichten eines Supermarkts oder Zwei-Behälter-Kreises, dann monatlich oder wenn sich der Tagesbedarf um mehr als etwa 20 % ändert.",
+      how: [
+        "Beschreiben Sie jeden Regelkreis: Artikel, Lagerort, Quelle, Kanban oder Zwei-Behälter, den Bedarf pro Arbeitstag, Bestellintervall und Wiederbeschaffungszeit in Tagen, Behältermenge, Stückkosten und die Karten heute. [[Add the loop]].",
+        "Oder haken Sie stetige Artikel aus der ABC/XYZ-Analyse an, mit Bedarf, σd und Wiederbeschaffungszeit, und [[Add the ticked SKUs]].",
+        "Wählen Sie die Formel: Toyotas N = ⌈D × L × (1 + α) ÷ C⌉ mit α = 10 % oder den Sicherheitsbestand z × σd × √L bei 95 % Servicegrad; L = Bestellintervall + Wiederbeschaffungszeit.",
+        "Ergänzen Sie fehlende Karten, nehmen Sie überzählige heraus und [[Print cards]], acht pro A4-Blatt.",
+      ],
+      get: "Für jeden Kreis die benötigten Karten, die hinzuzufügenden oder herauszunehmenden, Sicherheitsbestand, Höchstbestand und sein Wert. Kreise mit zu wenigen Karten gehen in die Maßnahmenliste; CSV oder Excel.",
+      data: "Die Regelkreise bleiben in diesem Browser. Die ABC/XYZ-Analyse wird nur gelesen, nie geändert.",
+    },
+    "/tools/poka-yoke/": {
+      when: "Wenn eine Sicherung gegen Fehler eingeführt wird, und nach jedem Prüfintervall, um mit einem absichtlichen Fehler zu zeigen, dass sie noch wirkt.",
+      how: [
+        "Beschreiben Sie jede Sicherung: den verhinderten Fehler, Schritt und Bereich, Shingos Methode (Kontakt, Fixwert, Schrittfolge), Eingriff oder Warnung, Vermeidung oder Entdeckung, Verantwortliche und Prüfung. [[Add to register]].",
+        "Legen Sie fest, wie oft sie geprüft wird, jede Schicht, täglich, wöchentlich oder monatlich, und wann zuletzt; ergänzen Sie den Fehlermodus der FMEA und die Fehler pro Monat vorher und nachher.",
+        "Geben Sie ihr den Fehler, markieren Sie funktioniert, ausgefallen oder nicht geprüft mit Grund, und [[Record the check]]. Eine ausgefallene Sicherung bleibt ausgefallen, bis eine spätere Prüfung „funktioniert“ ergibt.",
+        "Lesen Sie, was zu prüfen ist, das Dringendste zuerst, und [[Print the checklist]] für den Rundgang.",
+      ],
+      get: "Die heute ungeschützten Fehler, Prüftreue, Ausfallquote der Prüfungen, die Wirksamkeit jeder Sicherung (Fehler vorher und nachher) und die Sicherungen nach Methode, Niveau und Funktion. Eine ausgefallene oder überfällige geht mit [[Add to actions]] oder [[Take it to 5 Whys]] weiter; CSV oder Excel.",
+      data: "Das Register und seine Prüfungen bleiben in diesem Browser. Nichts wird gesendet oder hochgeladen.",
+    },
+    "/tools/lean-assessment/": {
+      when: "Einmal im Quartal für jeden Bereich, vor Ort, um zu sehen, wie reif sein Lean-System ist und wo Sie als Nächstes ansetzen.",
+      how: [
+        "Benennen Sie Bereich und Datum und [[Add an assessor]]: bis zu fünf, jeder bewertet zuerst allein.",
+        "Bewerten Sie die 41 Aussagen der zehn Dimensionen, von 5S bis Kaizen, von 1, reaktiv, bis 5, nachhaltig, so wie Sie es heute sehen. N/A nur, wenn eine Aussage für den Bereich nicht gilt.",
+        "Besprechen Sie jede Aussage, deren Bewertungen 2 oder mehr auseinanderliegen, bevor Sie sich einigen.",
+        "Geben Sie den drei schwächsten Dimensionen in der Maßnahmenliste einen Verantwortlichen und eine Kontrolle; im nächsten Quartal [[Start a new assessment]] für denselben Bereich.",
+      ],
+      get: "Der Gesamtwert, jede Dimension im Radar gegen die letzte Bewertung, die Änderung je Dimension, wo die Bewerter uneinig sind, und die drei schwächsten Dimensionen mit den Tools, die sie schließen. [[Copy summary]], [[Print or save as PDF]] oder als CSV oder Excel herunterladen.",
+      data: "Die Bewertungen bleiben in diesem Browser, mit der Historie jedes Bereichs.",
+    },
     "/tools/cv-builder/": {
       when: "Wenn Ihr Lebenslauf gestaltet aussehen soll und nicht getippt.",
       how: [
@@ -2253,8 +2517,24 @@ const system = families.map((item) => {
 // What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
 const editions = [
   {
+    number: 7,
+    date: { en: "25 October 2026", sq: "25 tetor 2026", de: "25. Oktober 2026" },
+    changes: {
+      en: [
+        "Eight new tools, each with its page in this guide: Waste Log, Andon Log, Energy & Water, Cost of Quality, Heijunka, Kanban Sizing, Poka-Yoke Register and Lean Assessment.",
+      ],
+      sq: [
+        "Tetë mjete të reja, secili me faqen e vet në këtë udhëzues: Regjistri i mbetjeve, Regjistri Andon, Energjia dhe uji, Kostoja e cilësisë, Heijunka (nivelizimi i prodhimit), Përmasimi i Kanban-it, Regjistri Poka-Yoke dhe Vlerësimi i pjekurisë Lean.",
+      ],
+      de: [
+        "Acht neue Tools, jedes mit seiner Seite in diesem Leitfaden: Verlustprotokoll, Andon-Protokoll, Energie und Wasser, Qualitätskosten, Heijunka (Produktionsglättung), Kanban-Dimensionierung, Poka-Yoke-Register und Lean-Reifegradbewertung.",
+      ],
+    },
+  },
+  {
     number: 6,
     date: { en: "25 October 2026", sq: "25 tetor 2026", de: "25. Oktober 2026" },
+    pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-6-${lang}.pdf`,
     changes: {
       en: [
         "One new tool, with its page in this guide: the Kaizen Event, a three-to-five-day improvement workshop from the charter and its preparation to the report-out and the 30-day check.",
@@ -2420,7 +2700,7 @@ export default {
   family,
   familyOfTool,
   tool,
-  // The tools of every role, without the course: fifty, as the cover says.
+  // The tools of every role, without the course: fifty-eight, as the cover says.
   toolCount: families.reduce((count, item) => count + item.tools.length, 0),
   pageOf: Object.fromEntries(pages.map((id) => [id, pageOf(id)])),
   system,

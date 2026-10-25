@@ -150,7 +150,7 @@ Në panel çdo seksion ka edhe variantet **(Deutsch)** dhe **(Shqip)**:
 
 ## 8. Mjetet
 
-Te **Mjete** (`/sq/tools.html`) janë **50 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
+Te **Mjete** (`/sq/tools.html`) janë **58 mjete falas dhe një kurs**, në tri gjuhë. Janë të ndara sipas rolit
 (planetet): çdo rol ka mjetet e veta dhe një rutinë që thotë kur përdoret secili. Mjetet punojnë edhe pa internet,
 pasi janë hapur një herë në atë pajisje.
 
@@ -174,6 +174,8 @@ pasi janë hapur një herë në atë pajisje.
 | **Statusi i dhomave** | Tabela e dhomave për recepsionin dhe housekeeping-un: VD, VC, VI, OOO, radha e pastrimit dhe kohët |
 | **Ankesat e mysafirëve** | Ankesa, rikuperimi (LEARN), kompensimi, ankesat për 100 net dhe dhomat që përsëriten |
 | **Paketa e printimit** | Letrat e së hënës me një klik: veprimet, mirëmbajtja, 5S, kartat e drejtuesve, kryqi, tabela |
+| **Regjistri i mbetjeve** | Mbetjet ushqimore, malli i dëmtuar ose i skaduar, skrapi: kg, euro, gramë për mysafir dhe trendi kundrejt objektivit |
+| **Regjistri Andon** | Çdo thirrje për ndihmë, live me kohëmatës: sa shpejt erdhi ndihma, sa shpejt u zgjidh dhe kur duhet përshkallëzuar |
 
 **Menaxher zone** (një zonë, javë pas jave):
 
@@ -196,6 +198,7 @@ pasi janë hapur një herë në atë pajisje.
 | **Puna standarde e drejtuesit** | Rutina e çdo drejtuesi, e shënuar çdo ditë, me përqindjen e kryerjes |
 | **Kapaciteti i turnit** | Sa njerëz duhen për çdo proces dhe turn, kundrejt të planifikuarve, dhe gryka e ngushtë |
 | **Vlerësimi i rrezikut** | Gefährdungsbeurteilung: rreziqet sipas zonës (5×5), masat sipas STOP dhe rishikimi |
+| **Energjia dhe uji** | Leximet e matësve: konsumi, kostoja, CO₂e, kWh për natë dhome të zënë dhe sinjali kur rritet mbi bazën |
 
 **Menaxher procesesh** (një proces, nga problemi te standardi):
 
@@ -217,6 +220,11 @@ pasi janë hapur një herë në atë pajisje.
 | **Raporti 8D** | Problemi i klientit nga D0 te D8, me shkakun e ndodhjes dhe të moszbulimit, në Word |
 | **Hoshin Kanri (matrica X)** | Strategjia në një faqe: objektivat, projektet, matësit dhe grafiku mujor |
 | **Krahasimi i objekteve** | Disa objekte krahasohen përmes kodeve vetëm për lexim, pa ndryshuar asgjë |
+| **Kostoja e cilësisë** | Parandalimi, kontrolli, dështimet e brendshme dhe të jashtme (PAF) në një shifër mujore dhe vjetore |
+| **Heijunka (nivelizimi i prodhimit)** | Dita e nivelizuar: takti, pitch-i, EPEI, kutia heijunka dhe stoku kundrejt prodhimit me tufa |
+| **Përmasimi i Kanban-it** | Sa karta kanban duhen për çdo cikël, stoku dhe vlera në maksimum, kartat për printim |
+| **Regjistri Poka-Yoke** | Çdo mbrojtje kundër gabimit, kontrolli i saj sipas afatit, efektiviteti dhe lista javore e kontrollit |
+| **Vlerësimi i pjekurisë Lean** | Dhjetë dimensione me disa vlerësues, radari kundrejt tremujorit të kaluar dhe hapat e radhës |
 | **Six Sigma në magazinë** | Kursi DMAIC në pesë hapa, me mjetin e duhur te çdo hap |
 
 **Karrierë:** Krijuesi i CV-së, CV për ATS dhe Letër motivimi.
@@ -267,7 +275,7 @@ pasi janë hapur një herë në atë pajisje.
 
 ### Udhëzuesi i mjeteve
 
-**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e gjashtë**: një faqe
+**The Tools Guide** (`/sq/guides/tools-guide.html`) është libri i mjeteve, tani në **botimin e shtatë**: një faqe
 për çdo mjet, në tri gjuhë, për t’u shfletuar ose shkarkuar si PDF. Botimet e mëparshme mbeten te faqja si u
 printuan. Te çdo mjet, poshtë, lidhja **Hape te faqja N** të çon te faqja e tij në libër.
 

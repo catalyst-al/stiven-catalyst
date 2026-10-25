@@ -424,10 +424,10 @@
     "cta": "Hap regjistrin"
   },
   {
-    "name": "Heijunka (niveli i prodhimit)",
+    "name": "Heijunka (nivelizimi i prodhimit)",
     "type": "Lean",
     "time": "20 min",
-    "summary": "Kthe një plan me partia në një përzierje të niveluar: takti, pitch, ngarkesa dhe EPEI, kutia heijunka e ditës me orare, dhe ndërrimet që kushton kundrejt stokut të gatshëm që kursen.",
+    "summary": "Kthe një plan prodhimi me tufa në një përzierje të nivelizuar: takti, pitch, ngarkesa dhe EPEI, kutia heijunka e ditës me orare, dhe ndërrimet që kushton kundrejt stokut të gatshëm që kursen.",
     "url": "/sq/tools/heijunka/",
     "cta": "Nivelo përzierjen"
   },
