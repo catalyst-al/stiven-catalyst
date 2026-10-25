@@ -24,7 +24,8 @@ test('a field note card carries its quote once: no copy text, share text or sear
       assert.match(card, /<button type="button" data-copied-label="[^"]+" data-copy-text>/, file);
       assert.match(card, /<button type="button" data-share-url="https:\/\/stivencatalyst\.com\/(de\/|sq\/)?field-notes\.html#note-[^"]+" data-share-text>/, file);
     }
-    assert.ok(html.length < 300000, `${file}: ${html.length} bytes`);
+    // About 1.2 kB a card: room for some 280 notes.
+    assert.ok(html.length < 360000, `${file}: ${html.length} bytes`);
   }
 });
 
