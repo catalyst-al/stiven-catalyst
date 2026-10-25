@@ -94,6 +94,8 @@ const RECIPES = {
   "print-pack": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "site-compare": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "kaizen-event": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "cost-of-quality": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "waste-log": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).

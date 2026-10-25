@@ -1,0 +1,180 @@
+{
+  "storageKey": "sc-cost-of-quality-de",
+  "title": "Qualitätskosten",
+  "csv": "qualitaetskosten",
+  "defaults": { "sector": "warehouse", "hourlyRate": "28", "cut": "30" },
+  "categories": [
+    { "key": "prevention", "short": "P", "name": "Fehlerverhütung", "hint": "Arbeit, die Fehler verhindert, bevor sie entstehen: Schulung, Poka-Yoke, Standards, vorbeugende Instandhaltung." },
+    { "key": "appraisal", "short": "A", "name": "Prüfung", "hint": "Arbeit, die Fehler findet: Kontrollen, Prüfungen, Zählungen, Audits." },
+    { "key": "internal", "short": "IF", "name": "Interne Fehler", "hint": "Fehler, die vor dem Kunden gefunden werden: Nacharbeit, Nachkommissionierung, Nachreinigung, Ausschuss." },
+    { "key": "external", "short": "EF", "name": "Externe Fehler", "hint": "Fehler, die der Kunde findet: Retouren, Neuzustellung, Entschädigung, Reklamationsbearbeitung, Vertragsstrafen." }
+  ],
+  "bases": [
+    { "key": "hours", "name": "Stunden × Stundensatz" },
+    { "key": "count", "name": "Anzahl × Kosten pro Fall" },
+    { "key": "fixed", "name": "Fester Betrag" }
+  ],
+  "periods": [
+    { "key": "week", "name": "Pro Woche", "per": "pro Woche" },
+    { "key": "month", "name": "Pro Monat", "per": "pro Monat" },
+    { "key": "quarter", "name": "Pro Quartal", "per": "pro Quartal" },
+    { "key": "year", "name": "Pro Jahr", "per": "pro Jahr" }
+  ],
+  "sectors": [
+    {
+      "key": "warehouse", "name": "Lager", "unitOne": "Auftrag", "unitMany": "Aufträge",
+      "presets": {
+        "prevention": [
+          { "name": "Einarbeitung neuer Kommissionierer", "basis": "hours" },
+          { "name": "Poka-Yoke: Scan-Bestätigung beim Packen", "basis": "fixed" },
+          { "name": "Standardarbeit und Qualitätsplanung", "basis": "hours" },
+          { "name": "Vorbeugende Instandhaltung von Scannern und Fördertechnik", "basis": "fixed" },
+          { "name": "Qualitätsvereinbarungen mit Lieferanten", "basis": "hours" }
+        ],
+        "appraisal": [
+          { "name": "Packkontrolle im Warenausgang", "basis": "hours" },
+          { "name": "Permanente Inventur (Zählungen)", "basis": "hours" },
+          { "name": "Wareneingangsprüfung", "basis": "hours" },
+          { "name": "Interne Audits und Kundenaudits", "basis": "fixed" },
+          { "name": "Kalibrierung der Waagen", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Nachkommissionierung falscher Artikel, beim Packen entdeckt", "basis": "count" },
+          { "name": "Nacharbeit beschädigter Verpackungen", "basis": "hours" },
+          { "name": "Ausschuss: beschädigte Ware abgeschrieben", "basis": "fixed" },
+          { "name": "Suche nach falsch eingelagertem Bestand", "basis": "hours" },
+          { "name": "Neuetikettierung", "basis": "count" }
+        ],
+        "external": [
+          { "name": "Retourenbearbeitung (falscher oder beschädigter Artikel)", "basis": "count" },
+          { "name": "Neuzustellung", "basis": "count" },
+          { "name": "Reklamationsbearbeitung", "basis": "hours" },
+          { "name": "Rückbelastungen und Vertragsstrafen von Kunden", "basis": "fixed" },
+          { "name": "Gutschriften für falsche Artikel", "basis": "fixed" }
+        ]
+      }
+    },
+    {
+      "key": "hotel", "name": "Hotel", "unitOne": "Zimmernacht", "unitMany": "Zimmernächte",
+      "presets": {
+        "prevention": [
+          { "name": "Schulung im Housekeeping", "basis": "hours" },
+          { "name": "Poka-Yoke: Checkliste Zimmer bezugsfertig", "basis": "hours" },
+          { "name": "Vorbeugende Instandhaltung der Zimmer", "basis": "fixed" },
+          { "name": "Schulung der Rezeption zur Abrechnung", "basis": "hours" }
+        ],
+        "appraisal": [
+          { "name": "Zimmerkontrollen durch die Hausdamen", "basis": "hours" },
+          { "name": "Prüfungen im Night Audit", "basis": "hours" },
+          { "name": "Mystery-Guest-Audits", "basis": "fixed" },
+          { "name": "Audits zur Lebensmittelsicherheit", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Nachreinigung eines Zimmers nach der Kontrolle", "basis": "count" },
+          { "name": "Wäsche erneut waschen", "basis": "count" },
+          { "name": "Lebensmittelabfall und Ausschuss in der Küche", "basis": "fixed" },
+          { "name": "Rechnungskorrekturen vor dem Check-out", "basis": "count" }
+        ],
+        "external": [
+          { "name": "Entschädigung von Gästen", "basis": "fixed" },
+          { "name": "Reklamationsbearbeitung", "basis": "hours" },
+          { "name": "Erstattete Zimmernächte", "basis": "count" },
+          { "name": "Zimmerwechsel nach einer Beschwerde", "basis": "count" },
+          { "name": "Strafen und Rückbelastungen von Buchungsportalen", "basis": "fixed" }
+        ]
+      }
+    },
+    {
+      "key": "delivery", "name": "Zustellung", "unitOne": "Paket", "unitMany": "Pakete",
+      "presets": {
+        "prevention": [
+          { "name": "Fahrerschulung", "basis": "hours" },
+          { "name": "Adressprüfung bei der Auftragserfassung", "basis": "fixed" },
+          { "name": "Ladestandards und Tourenplanung", "basis": "hours" },
+          { "name": "Vorbeugende Wartung der Fahrzeuge", "basis": "fixed" }
+        ],
+        "appraisal": [
+          { "name": "Ladekontrolle vor der Abfahrt", "basis": "hours" },
+          { "name": "Audits der Zustellnachweise", "basis": "hours" },
+          { "name": "Fahrzeug- und Kühlkettenkontrollen", "basis": "hours" },
+          { "name": "Depot-Audits", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Nachsortierung fehlsortierter Pakete", "basis": "count" },
+          { "name": "Fahrzeug neu beladen", "basis": "hours" },
+          { "name": "Im Depot beschädigte und abgeschriebene Pakete", "basis": "fixed" }
+        ],
+        "external": [
+          { "name": "Neuzustellung nach erfolglosem Erstversuch", "basis": "count" },
+          { "name": "Schadensfälle", "basis": "count" },
+          { "name": "Vertragsstrafen für verspätete Zustellung", "basis": "fixed" },
+          { "name": "Reklamationsbearbeitung", "basis": "hours" },
+          { "name": "Erstattete verlorene Pakete", "basis": "count" }
+        ]
+      }
+    }
+  ],
+  "advice": {
+    "prevention": {
+      "meaning": "Fehlerverhütung ist der günstigste Euro im Modell, aber nur, wenn sie auf den Fehler zielt, der am meisten kostet.",
+      "moves": ["Ordnen Sie jede Verhütungsposition der Fehlerposition zu, die sie verkleinern soll.", "Beenden Sie Verhütung, die ihre Fehlerposition in drei Monaten nicht bewegt hat.", "Setzen Sie das Geld dort ein, wohin das Pareto der Fehler zeigt."],
+      "question": "Welcher Fehler käme zurück, wenn wir das morgen einstellen?"
+    },
+    "appraisal": {
+      "meaning": "Prüfen findet Fehler, verhindert sie aber nicht. Ein hoher Prüfanteil heißt oft, dass man dem Prozess noch nicht trauen kann.",
+      "moves": ["Fragen Sie, was jede Prüfung im letzten Monat gefunden hat. Eine Prüfung, die nichts findet, kann als Stichprobe laufen.", "Verlegen Sie die Prüfung dorthin, wo der Fehler entsteht, damit er sofort auffällt.", "Machen Sie aus dem häufigsten Befund ein Poka-Yoke."],
+      "question": "Was müsste stimmen, damit wir das nicht mehr prüfen müssen?"
+    },
+    "internal": {
+      "meaning": "Vor dem Kunden gefunden, aber doppelt bezahlt: die falsch gemachte Arbeit und die Arbeit, sie noch einmal zu machen.",
+      "moves": ["Zählen Sie die Fehler zwei Wochen lang dort, wo sie gefunden werden, nach Ursache.", "Fragen Sie mit 5 Whys nach der größten Ursache und beheben Sie den Schritt, in dem sie entsteht, nicht die Prüfung, die sie findet.", "Machen Sie den richtigen Weg zum einfachen Weg: ein Poka-Yoke in dem Schritt, der den Fehler erzeugt."],
+      "question": "Wo entsteht dieser Fehler, und warum lässt dieser Schritt ihn durch?"
+    },
+    "external": {
+      "meaning": "Der Kunde hat ihn gefunden. Das ist der teuerste Fehler: die Behebung, die Bearbeitung, die Strafe und das Vertrauen, das man nicht verbuchen kann.",
+      "moves": ["Lesen Sie die letzten zwanzig Fälle und sortieren Sie sie nach Ursache, nicht nach Kunde.", "Verfolgen Sie die größte Ursache bis zu dem Schritt zurück, in dem sie begann, und beheben Sie sie dort.", "Bis sie behoben ist, prüfen Sie genau diesen Punkt vor dem Versand, und beenden Sie die Prüfung, sobald die Ursache weg ist."],
+      "question": "Was hat der Kunde gesehen, das wir nicht zuerst gesehen haben?"
+    }
+  },
+  "text": {
+    "paf": "Jede Zeile ist ein Kostenposten: Stunden × Stundensatz, eine Anzahl × Kosten eines Falls oder ein fester Betrag, für den Zeitraum, in dem er anfällt. Alles wird auf einen Monat umgerechnet (eine Woche ist 52/12 eines Monats, ein Quartal ein Drittel, ein Jahr ein Zwölftel) und auf ein Jahr.",
+    "fromWaste": "Verlustprotokoll",
+    "fromComplaints": "Gästebeschwerden",
+    "wasteLine": "Abgeschriebene Ware (Verlustprotokoll, letzte 30 Tage)",
+    "complaintsLine": "Entschädigung von Gästen (Gästebeschwerden, letzte 30 Tage)",
+    "splitNote": "Jede Kategorie pro Monat und ihr Anteil an den Qualitätskosten.",
+    "scenarioNote": "Die Einsparung ist ein Plan, kein Ergebnis: Die Senkung gilt gleichmäßig für jede Fehlerposition, und die Euro für Fehlerverhütung sind das, was die Änderung jeden Monat im Betrieb kostet. Prüfen Sie die tatsächlichen Fehlerkosten drei Monate nach der Änderung in diesem Tool.",
+    "reading": [
+      "Fehlerverhütung verhindert Fehler, bevor sie entstehen; Prüfung findet sie; ein interner Fehler wird vor dem Kunden gefunden, ein externer vom Kunden. Das ist das PAF-Modell von A. V. Feigenbaum, das auch die ASQ verwendet.",
+      "Die Kosten schlechter Qualität sind hier interne plus externe Fehlerkosten. Manche Autoren zählen auch die Prüfkosten dazu, weil Prüfen nur nötig ist, weil Arbeit schiefgehen kann; die Aufteilung zeigt auch diese Zahl.",
+      "Das Argument des PAF-Modells: Ein Euro, der in Fehlerverhütung fließt, beseitigt mehr als einen Euro Fehlerkosten. Ein Verhältnis über 1 : 1 heißt, dass Fehler noch mehr kosten als die gesamte Arbeit, sie zu verhüten und zu finden.",
+      "Die Liste enthält die Kosten, die man sehen und verbuchen kann. Verlorene Kunden, Überstunden, die niemand als Nacharbeit bucht, und die Zeit, die Führungskräfte mit Feuerwehreinsätzen verbringen, erscheinen selten, deshalb sind die echten Kosten schlechter Qualität meist höher als diese Summe. Die Sätze sind Ihre eigenen: Prüfen Sie sie mit Ihren eigenen Zahlen."
+    ],
+    "printFoot": "Erstellt mit dem Tool Qualitätskosten von Stiven Catalyst (PAF-Modell: Fehlerverhütung, Prüfung, interne Fehler, externe Fehler). Ein Jahr hat zwölf Monate; eine Woche ist 52/12 eines Monats."
+  },
+  "tips": [
+    ["Beginnen Sie mit den Fehlern.", "Retouren, Neuzustellungen, Nacharbeit und Entschädigungen sind die Kosten, über die ohnehin alle sprechen. Tragen Sie sie zuerst ein; Fehlerverhütung und Prüfung folgen."],
+    ["Nehmen Sie die Kosten, die Sie einsparen würden.", "Eine Stunde ist der Vollkostensatz, nicht nur der Lohn. Eine Retoure kostet ihre Bearbeitung, den Transport und die Gutschrift."],
+    ["Tragen Sie die Zahl so ein, wie sie kommt.", "Stunden pro Woche, ein Monatsbericht, eine Strafe pro Quartal: Erfassen Sie jede mit ihrem eigenen Zeitraum, das Tool rechnet sie auf den Monat um."],
+    ["Bringen Sie den größten Posten in die Fläche.", "Geben Sie die größte Fehlerposition in die Maßnahmenliste und fragen Sie mit 5 Whys nach, bevor Sie für mehr Prüfung bezahlen."]
+  ],
+  "example": {
+    "setup": { "sector": "warehouse", "revenue": "1800000", "volume": "60000", "hourlyRate": "28" },
+    "scenario": { "cut": "30", "invest": "2000" },
+    "lines": [
+      { "cat": "prevention", "name": "Einarbeitung neuer Kommissionierer", "basis": "hours", "qty": "40", "rate": "32", "period": "month" },
+      { "cat": "prevention", "name": "Poka-Yoke: Scan-Bestätigung beim Packen", "basis": "fixed", "amount": "6000", "period": "year" },
+      { "cat": "prevention", "name": "Standardarbeit und Qualitätsplanung", "basis": "hours", "qty": "10", "rate": "45", "period": "week" },
+      { "cat": "appraisal", "name": "Packkontrolle im Warenausgang", "basis": "hours", "qty": "120", "rate": "", "period": "month" },
+      { "cat": "appraisal", "name": "Permanente Inventur (Zählungen)", "basis": "hours", "qty": "30", "rate": "", "period": "week" },
+      { "cat": "appraisal", "name": "Interne Audits und Kundenaudits", "basis": "fixed", "amount": "4500", "period": "quarter" },
+      { "cat": "internal", "name": "Nachkommissionierung falscher Artikel, beim Packen entdeckt", "basis": "count", "qty": "1800", "rate": "4,50", "period": "month" },
+      { "cat": "internal", "name": "Nacharbeit beschädigter Verpackungen", "basis": "hours", "qty": "30", "rate": "", "period": "week" },
+      { "cat": "internal", "name": "Ausschuss: beschädigte Ware abgeschrieben", "basis": "fixed", "amount": "4200", "period": "month" },
+      { "cat": "external", "name": "Retourenbearbeitung (falscher oder beschädigter Artikel)", "basis": "count", "qty": "900", "rate": "12", "period": "month" },
+      { "cat": "external", "name": "Neuzustellung", "basis": "count", "qty": "300", "rate": "18", "period": "month" },
+      { "cat": "external", "name": "Reklamationsbearbeitung", "basis": "hours", "qty": "60", "rate": "35", "period": "month" },
+      { "cat": "external", "name": "Rückbelastungen und Vertragsstrafen von Kunden", "basis": "fixed", "amount": "27000", "period": "quarter" }
+    ]
+  }
+}

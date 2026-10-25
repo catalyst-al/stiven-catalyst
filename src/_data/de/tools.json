@@ -406,5 +406,21 @@
     "summary": "Einen Verbesserungsworkshop planen, durchführen und nachverfolgen: der Auftrag mit Zielen in Zahlen, die Vorbereitung vom ersten Tag zurückgerechnet, die Standardagenda für 3–5 Tage, Ideen nach Verschwendung auf einer Aufwand-Nutzen-Matrix, Ziele vorher und nachher und die 30-Tage-Nachverfolgung. Abschlusspräsentation als A4 und Word.",
     "url": "/de/tools/kaizen-event/",
     "cta": "Event planen"
+  },
+  {
+    "name": "Qualitätskosten",
+    "type": "Six Sigma",
+    "time": "20 Min.",
+    "summary": "Erfassen Sie, was Fehlerverhütung, Prüfung, interne und externe Fehler kosten, als Stunden, Anzahl oder Betrag für jeden Zeitraum, und erhalten Sie die Qualitätskosten pro Monat und Jahr, die Kosten schlechter Qualität als Anteil am Umsatz, die größten Posten und was eine Senkung der Fehlerkosten einspart.",
+    "url": "/de/tools/cost-of-quality/",
+    "cta": "Schlechte Qualität beziffern"
+  },
+  {
+    "name": "Verlustprotokoll",
+    "type": "Betrieb",
+    "time": "Laufend",
+    "summary": "Lebensmittelabfall, abgelaufene und beschädigte Ware, Ausschuss und Wäsche mit Grund und Verbleib wiegen und erfassen. Kilogramm und Euro Verlust pro Tag, Gramm pro Gast, das Pareto der Kategorien und Gründe und die Wochen gegenüber einem Reduktionsziel.",
+    "url": "/de/tools/waste-log/",
+    "cta": "Protokoll öffnen"
   }
 ]

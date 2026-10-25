@@ -1,0 +1,180 @@
+{
+  "storageKey": "sc-cost-of-quality",
+  "title": "Cost of Quality",
+  "csv": "cost-of-quality",
+  "defaults": { "sector": "warehouse", "hourlyRate": "28", "cut": "30" },
+  "categories": [
+    { "key": "prevention", "short": "P", "name": "Prevention", "hint": "Work that stops defects before they happen: training, poka-yoke, standards, preventive maintenance." },
+    { "key": "appraisal", "short": "A", "name": "Appraisal", "hint": "Work that finds defects: inspections, checks, counts, audits." },
+    { "key": "internal", "short": "IF", "name": "Internal failure", "hint": "Defects found before the customer sees them: rework, re-picking, re-cleaning, scrap." },
+    { "key": "external", "short": "EF", "name": "External failure", "hint": "Defects the customer finds: returns, redelivery, compensation, complaint handling, penalties." }
+  ],
+  "bases": [
+    { "key": "hours", "name": "Hours × hourly rate" },
+    { "key": "count", "name": "Count × cost per event" },
+    { "key": "fixed", "name": "Fixed amount" }
+  ],
+  "periods": [
+    { "key": "week", "name": "Per week", "per": "a week" },
+    { "key": "month", "name": "Per month", "per": "a month" },
+    { "key": "quarter", "name": "Per quarter", "per": "a quarter" },
+    { "key": "year", "name": "Per year", "per": "a year" }
+  ],
+  "sectors": [
+    {
+      "key": "warehouse", "name": "Warehouse", "unitOne": "order", "unitMany": "orders",
+      "presets": {
+        "prevention": [
+          { "name": "Training of new pickers", "basis": "hours" },
+          { "name": "Poka-yoke: scan-to-confirm at packing", "basis": "fixed" },
+          { "name": "Standard work and quality planning", "basis": "hours" },
+          { "name": "Preventive maintenance of scanners and conveyors", "basis": "fixed" },
+          { "name": "Supplier quality agreements", "basis": "hours" }
+        ],
+        "appraisal": [
+          { "name": "Outbound pack check", "basis": "hours" },
+          { "name": "Cycle counts", "basis": "hours" },
+          { "name": "Goods-in inspection", "basis": "hours" },
+          { "name": "Internal and customer audits", "basis": "fixed" },
+          { "name": "Calibration of scales", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Re-picking wrong items caught at packing", "basis": "count" },
+          { "name": "Rework of damaged packaging", "basis": "hours" },
+          { "name": "Scrap: damaged goods written off", "basis": "fixed" },
+          { "name": "Searching for misplaced stock", "basis": "hours" },
+          { "name": "Relabelling", "basis": "count" }
+        ],
+        "external": [
+          { "name": "Returns processing (wrong or damaged item)", "basis": "count" },
+          { "name": "Redelivery", "basis": "count" },
+          { "name": "Complaint handling", "basis": "hours" },
+          { "name": "Customer chargebacks and penalties", "basis": "fixed" },
+          { "name": "Credit notes for wrong items", "basis": "fixed" }
+        ]
+      }
+    },
+    {
+      "key": "hotel", "name": "Hotel", "unitOne": "room night", "unitMany": "room nights",
+      "presets": {
+        "prevention": [
+          { "name": "Housekeeping training", "basis": "hours" },
+          { "name": "Poka-yoke: room-ready checklist", "basis": "hours" },
+          { "name": "Preventive maintenance of rooms", "basis": "fixed" },
+          { "name": "Front-office training on billing", "basis": "hours" }
+        ],
+        "appraisal": [
+          { "name": "Room inspections by the supervisor", "basis": "hours" },
+          { "name": "Night-audit checks", "basis": "hours" },
+          { "name": "Mystery-guest audits", "basis": "fixed" },
+          { "name": "Food safety audits", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Re-cleaning a room after inspection", "basis": "count" },
+          { "name": "Linen re-wash", "basis": "count" },
+          { "name": "Kitchen food waste and scrap", "basis": "fixed" },
+          { "name": "Billing corrections before check-out", "basis": "count" }
+        ],
+        "external": [
+          { "name": "Guest compensation", "basis": "fixed" },
+          { "name": "Complaint handling", "basis": "hours" },
+          { "name": "Refunded room nights", "basis": "count" },
+          { "name": "Room moves after a complaint", "basis": "count" },
+          { "name": "Booking-platform penalties and chargebacks", "basis": "fixed" }
+        ]
+      }
+    },
+    {
+      "key": "delivery", "name": "Delivery", "unitOne": "parcel", "unitMany": "parcels",
+      "presets": {
+        "prevention": [
+          { "name": "Driver training", "basis": "hours" },
+          { "name": "Address validation at order entry", "basis": "fixed" },
+          { "name": "Loading standards and route planning", "basis": "hours" },
+          { "name": "Preventive maintenance of vehicles", "basis": "fixed" }
+        ],
+        "appraisal": [
+          { "name": "Load checks before departure", "basis": "hours" },
+          { "name": "Proof-of-delivery audits", "basis": "hours" },
+          { "name": "Vehicle and cold-chain checks", "basis": "hours" },
+          { "name": "Depot audits", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Re-sorting missorted parcels", "basis": "count" },
+          { "name": "Re-loading a vehicle", "basis": "hours" },
+          { "name": "Parcels damaged at the depot and written off", "basis": "fixed" }
+        ],
+        "external": [
+          { "name": "Redelivery after a failed first attempt", "basis": "count" },
+          { "name": "Damage claims", "basis": "count" },
+          { "name": "Late-delivery penalties", "basis": "fixed" },
+          { "name": "Complaint handling", "basis": "hours" },
+          { "name": "Lost parcels refunded", "basis": "count" }
+        ]
+      }
+    }
+  ],
+  "advice": {
+    "prevention": {
+      "meaning": "Prevention is the cheapest euro in the model, but only when it is aimed at the failure that costs most.",
+      "moves": ["Tie each prevention line to the failure line it is meant to shrink.", "Stop prevention that has not moved its failure line in three months.", "Put the euros where the Pareto of failure points."],
+      "question": "Which failure would grow back if we stopped this tomorrow?"
+    },
+    "appraisal": {
+      "meaning": "Checking finds defects; it does not stop them. A large appraisal share often means the process cannot be trusted yet.",
+      "moves": ["Ask what each check has found in the last month. A check that finds nothing can be sampled.", "Move the check to where the defect is made, so it is caught at once.", "Turn the most frequent finding into a poka-yoke."],
+      "question": "What would have to be true for us to stop checking this?"
+    },
+    "internal": {
+      "meaning": "Caught before the customer, but paid for twice: the work done wrong and the work done again.",
+      "moves": ["Count the defects at the point where they are found, by cause, for two weeks.", "Ask 5 Whys about the largest cause and fix the step where it starts, not the check that finds it.", "Make the right way the easy way: a poka-yoke at the step that creates the defect."],
+      "question": "Where is this defect made, and why does that step let it pass?"
+    },
+    "external": {
+      "meaning": "The customer found it. This is the most expensive failure: the fix, the handling, the penalty and the trust you cannot book.",
+      "moves": ["Read the last twenty cases and sort them by cause, not by customer.", "Trace the largest cause back to the step where it began and fix it there.", "Until it is fixed, check that one thing before it leaves, and stop the check once the cause is gone."],
+      "question": "What did the customer see that we did not see first?"
+    }
+  },
+  "text": {
+    "paf": "Each line is one cost: hours × hourly rate, a count × the cost of one event, or a fixed amount, for the period it comes in. Everything is brought to a month (a week is 52/12 of a month, a quarter a third, a year a twelfth) and a year.",
+    "fromWaste": "Waste Log",
+    "fromComplaints": "Guest Complaints",
+    "wasteLine": "Waste written off (Waste Log, last 30 days)",
+    "complaintsLine": "Guest compensation (Guest Complaints, last 30 days)",
+    "splitNote": "Each category a month, and its share of the cost of quality.",
+    "scenarioNote": "The saving is a plan, not a result: the cut applies evenly to every failure line, and the prevention euros are what the change costs to run each month. Check the real failure costs in this tool three months after the change.",
+    "reading": [
+      "Prevention stops defects before they happen; appraisal finds them; internal failure is a defect found before the customer; external failure is one the customer finds. This is the PAF model of A. V. Feigenbaum, also used by ASQ.",
+      "The cost of poor quality here is internal plus external failure. Some authors also count appraisal, since checking exists only because work can go wrong; the split shows that figure too.",
+      "The argument of the PAF model is that a euro moved into prevention removes more than a euro of failure. A ratio above 1 : 1 means failure still costs more than all the work spent to prevent and find it.",
+      "The list holds the costs you can see and book. Lost customers, overtime nobody codes as rework and the time managers spend firefighting rarely appear, so the real cost of poor quality is usually higher than this total. The rates are your own: check them with your own figures."
+    ],
+    "printFoot": "Prepared with the Cost of Quality tool of Stiven Catalyst (PAF model: prevention, appraisal, internal failure, external failure). A year is twelve months; a week is 52/12 of a month."
+  },
+  "tips": [
+    ["Start with failure.", "Returns, redelivery, rework and compensation are the costs everybody already talks about. Put them in first; prevention and appraisal come next."],
+    ["Use the cost you would save.", "An hour is the loaded labour cost, not the wage alone. A returned order costs its handling, the transport and the credit note."],
+    ["Type the number as it comes.", "Weekly hours, a monthly report, a penalty each quarter: enter each with its own period and let the tool bring it to a month."],
+    ["Take the biggest item to the floor.", "Send the largest failure line to the Action Tracker and ask 5 Whys about it before you pay for more inspection."]
+  ],
+  "example": {
+    "setup": { "sector": "warehouse", "revenue": "1800000", "volume": "60000", "hourlyRate": "28" },
+    "scenario": { "cut": "30", "invest": "2000" },
+    "lines": [
+      { "cat": "prevention", "name": "Training of new pickers", "basis": "hours", "qty": "40", "rate": "32", "period": "month" },
+      { "cat": "prevention", "name": "Poka-yoke: scan-to-confirm at packing", "basis": "fixed", "amount": "6000", "period": "year" },
+      { "cat": "prevention", "name": "Standard work and quality planning", "basis": "hours", "qty": "10", "rate": "45", "period": "week" },
+      { "cat": "appraisal", "name": "Outbound pack check", "basis": "hours", "qty": "120", "rate": "", "period": "month" },
+      { "cat": "appraisal", "name": "Cycle counts", "basis": "hours", "qty": "30", "rate": "", "period": "week" },
+      { "cat": "appraisal", "name": "Internal and customer audits", "basis": "fixed", "amount": "4500", "period": "quarter" },
+      { "cat": "internal", "name": "Re-picking wrong items caught at packing", "basis": "count", "qty": "1800", "rate": "4.50", "period": "month" },
+      { "cat": "internal", "name": "Rework of damaged packaging", "basis": "hours", "qty": "30", "rate": "", "period": "week" },
+      { "cat": "internal", "name": "Scrap: damaged goods written off", "basis": "fixed", "amount": "4200", "period": "month" },
+      { "cat": "external", "name": "Returns processing (wrong or damaged item)", "basis": "count", "qty": "900", "rate": "12", "period": "month" },
+      { "cat": "external", "name": "Redelivery", "basis": "count", "qty": "300", "rate": "18", "period": "month" },
+      { "cat": "external", "name": "Complaint handling", "basis": "hours", "qty": "60", "rate": "35", "period": "month" },
+      { "cat": "external", "name": "Customer chargebacks and penalties", "basis": "fixed", "amount": "27000", "period": "quarter" }
+    ]
+  }
+}

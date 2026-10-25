@@ -1,0 +1,180 @@
+{
+  "storageKey": "sc-cost-of-quality-sq",
+  "title": "Kostoja e cilësisë",
+  "csv": "kostoja-e-cilesise",
+  "defaults": { "sector": "warehouse", "hourlyRate": "28", "cut": "30" },
+  "categories": [
+    { "key": "prevention", "short": "P", "name": "Parandalimi", "hint": "Puna që i ndalon defektet para se të ndodhin: trajnimi, poka-yoke, standardet, mirëmbajtja parandaluese." },
+    { "key": "appraisal", "short": "A", "name": "Kontrolli", "hint": "Puna që i gjen defektet: inspektimet, kontrollet, numërimet, auditet." },
+    { "key": "internal", "short": "IF", "name": "Dështimi i brendshëm", "hint": "Defektet e gjetura para se t'i shohë klienti: ripunimi, rimbledhja e porosisë, ripastrimi, skarto." },
+    { "key": "external", "short": "EF", "name": "Dështimi i jashtëm", "hint": "Defektet që i gjen klienti: kthimet, ridorëzimi, kompensimi, trajtimi i ankesave, penalitetet." }
+  ],
+  "bases": [
+    { "key": "hours", "name": "Orë × tarifa për orë" },
+    { "key": "count", "name": "Numër × kosto për rast" },
+    { "key": "fixed", "name": "Shumë fikse" }
+  ],
+  "periods": [
+    { "key": "week", "name": "Në javë", "per": "në javë" },
+    { "key": "month", "name": "Në muaj", "per": "në muaj" },
+    { "key": "quarter", "name": "Në tremujor", "per": "në tremujor" },
+    { "key": "year", "name": "Në vit", "per": "në vit" }
+  ],
+  "sectors": [
+    {
+      "key": "warehouse", "name": "Magazinë", "unitOne": "porosi", "unitMany": "porosi",
+      "presets": {
+        "prevention": [
+          { "name": "Trajnimi i mbledhësve të rinj", "basis": "hours" },
+          { "name": "Poka-yoke: konfirmimi me skaner në paketim", "basis": "fixed" },
+          { "name": "Puna standarde dhe planifikimi i cilësisë", "basis": "hours" },
+          { "name": "Mirëmbajtja parandaluese e skanerëve dhe transportuesve", "basis": "fixed" },
+          { "name": "Marrëveshjet e cilësisë me furnitorët", "basis": "hours" }
+        ],
+        "appraisal": [
+          { "name": "Kontrolli i paketimit në dalje", "basis": "hours" },
+          { "name": "Numërimet ciklike", "basis": "hours" },
+          { "name": "Inspektimi i mallit në hyrje", "basis": "hours" },
+          { "name": "Auditet e brendshme dhe të klientëve", "basis": "fixed" },
+          { "name": "Kalibrimi i peshoreve", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Rimbledhja e artikujve të gabuar, e kapur në paketim", "basis": "count" },
+          { "name": "Ripunimi i paketimeve të dëmtuara", "basis": "hours" },
+          { "name": "Skarto: mall i dëmtuar i shlyer", "basis": "fixed" },
+          { "name": "Kërkimi i stokut të vendosur gabim", "basis": "hours" },
+          { "name": "Rietiketimi", "basis": "count" }
+        ],
+        "external": [
+          { "name": "Trajtimi i kthimeve (artikull i gabuar ose i dëmtuar)", "basis": "count" },
+          { "name": "Ridorëzimi", "basis": "count" },
+          { "name": "Trajtimi i ankesave", "basis": "hours" },
+          { "name": "Ngarkesat prapa dhe penalitetet e klientëve", "basis": "fixed" },
+          { "name": "Notat e kreditit për artikuj të gabuar", "basis": "fixed" }
+        ]
+      }
+    },
+    {
+      "key": "hotel", "name": "Hotel", "unitOne": "natë dhome", "unitMany": "netë dhome",
+      "presets": {
+        "prevention": [
+          { "name": "Trajnimi i housekeeping-ut", "basis": "hours" },
+          { "name": "Poka-yoke: lista e kontrollit për dhomën gati", "basis": "hours" },
+          { "name": "Mirëmbajtja parandaluese e dhomave", "basis": "fixed" },
+          { "name": "Trajnimi i recepsionit për faturimin", "basis": "hours" }
+        ],
+        "appraisal": [
+          { "name": "Inspektimi i dhomave nga supervizori", "basis": "hours" },
+          { "name": "Kontrollet e night audit-it", "basis": "hours" },
+          { "name": "Auditet me mysafir të fshehtë", "basis": "fixed" },
+          { "name": "Auditet e sigurisë ushqimore", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Ripastrimi i një dhome pas inspektimit", "basis": "count" },
+          { "name": "Rilarja e çarçafëve", "basis": "count" },
+          { "name": "Mbetjet ushqimore dhe skarto në kuzhinë", "basis": "fixed" },
+          { "name": "Korrigjimet e faturës para check-out-it", "basis": "count" }
+        ],
+        "external": [
+          { "name": "Kompensimi i mysafirëve", "basis": "fixed" },
+          { "name": "Trajtimi i ankesave", "basis": "hours" },
+          { "name": "Netë dhome të rimbursuara", "basis": "count" },
+          { "name": "Ndërrimi i dhomës pas një ankese", "basis": "count" },
+          { "name": "Penalitetet dhe ngarkesat prapa të platformave të rezervimit", "basis": "fixed" }
+        ]
+      }
+    },
+    {
+      "key": "delivery", "name": "Dorëzimi", "unitOne": "pako", "unitMany": "pako",
+      "presets": {
+        "prevention": [
+          { "name": "Trajnimi i shoferëve", "basis": "hours" },
+          { "name": "Verifikimi i adresës në marrjen e porosisë", "basis": "fixed" },
+          { "name": "Standardet e ngarkimit dhe planifikimi i rrugëve", "basis": "hours" },
+          { "name": "Mirëmbajtja parandaluese e automjeteve", "basis": "fixed" }
+        ],
+        "appraisal": [
+          { "name": "Kontrolli i ngarkesës para nisjes", "basis": "hours" },
+          { "name": "Auditet e provës së dorëzimit", "basis": "hours" },
+          { "name": "Kontrollet e automjetit dhe të zinxhirit të ftohtë", "basis": "hours" },
+          { "name": "Auditet e depos", "basis": "fixed" }
+        ],
+        "internal": [
+          { "name": "Rirenditja e pakove të renditura gabim", "basis": "count" },
+          { "name": "Ringarkimi i një automjeti", "basis": "hours" },
+          { "name": "Pako të dëmtuara në depo dhe të shlyera", "basis": "fixed" }
+        ],
+        "external": [
+          { "name": "Ridorëzimi pas një përpjekjeje të parë të dështuar", "basis": "count" },
+          { "name": "Kërkesat për dëme", "basis": "count" },
+          { "name": "Penalitetet për dorëzim me vonesë", "basis": "fixed" },
+          { "name": "Trajtimi i ankesave", "basis": "hours" },
+          { "name": "Pako të humbura të rimbursuara", "basis": "count" }
+        ]
+      }
+    }
+  ],
+  "advice": {
+    "prevention": {
+      "meaning": "Parandalimi është euroja më e lirë e modelit, por vetëm kur synon dështimin që kushton më shumë.",
+      "moves": ["Lidhe çdo zë parandalimi me zërin e dështimit që duhet të zvogëlojë.", "Ndalo parandalimin që nuk e ka lëvizur zërin e vet të dështimit në tre muaj.", "Vendosi paratë aty ku tregon Pareto-ja e dështimeve."],
+      "question": "Cili dështim do të kthehej po ta ndalonim këtë nesër?"
+    },
+    "appraisal": {
+      "meaning": "Kontrolli i gjen defektet, nuk i ndalon. Një pjesë e madhe kontrolli shpesh do të thotë se procesit nuk i besohet ende.",
+      "moves": ["Pyet çfarë ka gjetur çdo kontroll muajin e kaluar. Një kontroll që nuk gjen asgjë mund të bëhet me kampion.", "Çoje kontrollin aty ku lind defekti, që të kapet menjëherë.", "Ktheje gjetjen më të shpeshtë në një poka-yoke."],
+      "question": "Çfarë duhet të jetë e vërtetë që ta ndalojmë këtë kontroll?"
+    },
+    "internal": {
+      "meaning": "U kap para klientit, por u pagua dy herë: puna e bërë gabim dhe puna e bërë sërish.",
+      "moves": ["Numëroji defektet për dy javë aty ku gjenden, sipas shkakut.", "Pyet me 5 Whys për shkakun më të madh dhe rregullo hapin ku ai lind, jo kontrollin që e gjen.", "Bëje rrugën e drejtë rrugën e lehtë: një poka-yoke në hapin që e krijon defektin."],
+      "question": "Ku lind ky defekt, dhe pse e lë ai hap të kalojë?"
+    },
+    "external": {
+      "meaning": "E gjeti klienti. Ky është dështimi më i shtrenjtë: rregullimi, trajtimi, penaliteti dhe besimi që nuk regjistrohet në llogari.",
+      "moves": ["Lexo njëzet rastet e fundit dhe renditi sipas shkakut, jo sipas klientit.", "Ndiqe shkakun më të madh deri te hapi ku nisi dhe rregulloje aty.", "Derisa të rregullohet, kontrolloje pikërisht atë gjë para se të dalë, dhe ndaloje kontrollin sapo të ikë shkaku."],
+      "question": "Çfarë pa klienti që ne nuk e pamë të parët?"
+    }
+  },
+  "text": {
+    "paf": "Çdo rresht është një kosto: orë × tarifa për orë, një numër × kostoja e një rasti, ose një shumë fikse, për periudhën kur vjen. Gjithçka kthehet në muaj (një javë është 52/12 e muajit, një tremujor një e treta, një vit një e dymbëdhjeta) dhe në vit.",
+    "fromWaste": "Regjistri i mbetjeve",
+    "fromComplaints": "Ankesat e mysafirëve",
+    "wasteLine": "Mall i shlyer (Regjistri i mbetjeve, 30 ditët e fundit)",
+    "complaintsLine": "Kompensimi i mysafirëve (Ankesat e mysafirëve, 30 ditët e fundit)",
+    "splitNote": "Çdo kategori në muaj dhe pjesa e saj në koston e cilësisë.",
+    "scenarioNote": "Kursimi është plan, jo rezultat: ulja zbatohet njësoj për çdo zë dështimi, dhe eurot e parandalimit janë ajo që kushton ndryshimi çdo muaj. Kontrollo kostot e vërteta të dështimit në këtë mjet tre muaj pas ndryshimit.",
+    "reading": [
+      "Parandalimi i ndalon defektet para se të ndodhin; kontrolli i gjen; dështimi i brendshëm është një defekt i gjetur para klientit, dështimi i jashtëm një defekt që e gjen klienti. Ky është modeli PAF i A. V. Feigenbaum-it, që e përdor edhe ASQ.",
+      "Kostoja e cilësisë së dobët këtu është dështimi i brendshëm plus i jashtëm. Disa autorë numërojnë edhe kontrollin, sepse kontrolli ekziston vetëm se puna mund të dalë gabim; ndarja e tregon edhe këtë shifër.",
+      "Argumenti i modelit PAF është se një euro e kaluar në parandalim heq më shumë se një euro dështimi. Një raport mbi 1 : 1 do të thotë se dështimet kushtojnë ende më shumë se gjithë puna për t'i parandaluar dhe për t'i gjetur.",
+      "Lista mban kostot që shihen dhe regjistrohen. Klientët e humbur, orët shtesë që askush nuk i shënon si ripunim dhe koha që drejtuesit humbin duke shuar zjarre rrallë dalin, ndaj kostoja e vërtetë e cilësisë së dobët zakonisht është më e lartë se ky total. Tarifat janë tuajat: kontrolloji me shifrat e tua."
+    ],
+    "printFoot": "Përgatitur me mjetin Kostoja e cilësisë të Stiven Catalyst (modeli PAF: parandalimi, kontrolli, dështimi i brendshëm, dështimi i jashtëm). Një vit ka dymbëdhjetë muaj; një javë është 52/12 e muajit."
+  },
+  "tips": [
+    ["Nis me dështimet.", "Kthimet, ridorëzimet, ripunimi dhe kompensimet janë kostot për të cilat flasin të gjithë. Shkruaji të parat; parandalimi dhe kontrolli vijnë pas."],
+    ["Përdor koston që do të kurseje.", "Një orë është kostoja e plotë e punës, jo vetëm paga. Një porosi e kthyer kushton trajtimin, transportin dhe notën e kreditit."],
+    ["Shkruaje shifrën siç vjen.", "Orë në javë, një raport mujor, një penalitet çdo tremujor: fute secilën me periudhën e vet dhe mjeti e kthen në muaj."],
+    ["Çoje zërin më të madh në terren.", "Dërgoje zërin më të madh të dështimit në listën e veprimeve dhe pyet me 5 Whys para se të paguash për më shumë inspektim."]
+  ],
+  "example": {
+    "setup": { "sector": "warehouse", "revenue": "1800000", "volume": "60000", "hourlyRate": "28" },
+    "scenario": { "cut": "30", "invest": "2000" },
+    "lines": [
+      { "cat": "prevention", "name": "Trajnimi i mbledhësve të rinj", "basis": "hours", "qty": "40", "rate": "32", "period": "month" },
+      { "cat": "prevention", "name": "Poka-yoke: konfirmimi me skaner në paketim", "basis": "fixed", "amount": "6000", "period": "year" },
+      { "cat": "prevention", "name": "Puna standarde dhe planifikimi i cilësisë", "basis": "hours", "qty": "10", "rate": "45", "period": "week" },
+      { "cat": "appraisal", "name": "Kontrolli i paketimit në dalje", "basis": "hours", "qty": "120", "rate": "", "period": "month" },
+      { "cat": "appraisal", "name": "Numërimet ciklike", "basis": "hours", "qty": "30", "rate": "", "period": "week" },
+      { "cat": "appraisal", "name": "Auditet e brendshme dhe të klientëve", "basis": "fixed", "amount": "4500", "period": "quarter" },
+      { "cat": "internal", "name": "Rimbledhja e artikujve të gabuar, e kapur në paketim", "basis": "count", "qty": "1800", "rate": "4,50", "period": "month" },
+      { "cat": "internal", "name": "Ripunimi i paketimeve të dëmtuara", "basis": "hours", "qty": "30", "rate": "", "period": "week" },
+      { "cat": "internal", "name": "Skarto: mall i dëmtuar i shlyer", "basis": "fixed", "amount": "4200", "period": "month" },
+      { "cat": "external", "name": "Trajtimi i kthimeve (artikull i gabuar ose i dëmtuar)", "basis": "count", "qty": "900", "rate": "12", "period": "month" },
+      { "cat": "external", "name": "Ridorëzimi", "basis": "count", "qty": "300", "rate": "18", "period": "month" },
+      { "cat": "external", "name": "Trajtimi i ankesave", "basis": "hours", "qty": "60", "rate": "35", "period": "month" },
+      { "cat": "external", "name": "Ngarkesat prapa dhe penalitetet e klientëve", "basis": "fixed", "amount": "27000", "period": "quarter" }
+    ]
+  }
+}

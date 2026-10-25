@@ -22,7 +22,8 @@
       "/tools/lost-found/",
       "/tools/room-status/",
       "/tools/guest-complaints/",
-      "/tools/print-pack/"
+      "/tools/print-pack/",
+      "/tools/waste-log/"
     ],
     "learn": [],
     "also": [
@@ -109,6 +110,11 @@
         "when": "Every week",
         "do": "On Monday before the huddle, print the pack and put the week's sheets on the team board.",
         "tool": "/tools/print-pack/"
+      },
+      {
+        "when": "End of shift",
+        "do": "Weigh what was thrown away or written off on the shift, log it with its reason and where it went, and enter the covers of the day.",
+        "tool": "/tools/waste-log/"
       }
     ],
     "next": "zenith"
@@ -277,7 +283,8 @@
       "/tools/eight-d/",
       "/tools/hoshin-kanri/",
       "/tools/site-compare/",
-      "/tools/kaizen-event/"
+      "/tools/kaizen-event/",
+      "/tools/cost-of-quality/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -377,6 +384,11 @@
         "when": "Every month",
         "do": "Agree the next event's charter six weeks ahead, tick the preparation as its dates come up, and close the last event's follow-up list by its 30-day check.",
         "tool": "/tools/kaizen-event/"
+      },
+      {
+        "when": "Every month",
+        "do": "Update the failure lines from last month's figures, report the cost of poor quality as a share of revenue and send the largest item to the Action Tracker.",
+        "tool": "/tools/cost-of-quality/"
       }
     ],
     "next": "atlas"

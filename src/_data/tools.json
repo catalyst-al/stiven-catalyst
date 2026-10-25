@@ -406,5 +406,21 @@
     "summary": "Plan, run and follow up a rapid improvement event: the charter with goals in numbers, preparation counted back from the first day, the standard 3–5 day agenda, ideas by waste on an effort and impact matrix, goals before and after, and the 30-day follow-up list. Report-out in A4 and Word.",
     "url": "/tools/kaizen-event/",
     "cta": "Plan an event"
+  },
+  {
+    "name": "Cost of Quality",
+    "type": "Six Sigma",
+    "time": "20 min",
+    "summary": "List what prevention, appraisal, internal and external failure cost, as hours, counts or amounts for any period, and get the cost of quality a month and a year, the cost of poor quality as a share of revenue, the largest items and what a cut in failure would save.",
+    "url": "/tools/cost-of-quality/",
+    "cta": "Put a number on poor quality"
+  },
+  {
+    "name": "Waste Log",
+    "type": "Operations",
+    "time": "Ongoing",
+    "summary": "Weigh and log food waste, expired and damaged goods, scrap and linen with the reason and where it went. Kg and euro lost per day, grams per cover, the Pareto of categories and reasons, and the weeks against a reduction target.",
+    "url": "/tools/waste-log/",
+    "cta": "Open the log"
   }
 ]

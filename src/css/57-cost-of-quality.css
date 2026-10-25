@@ -1,0 +1,109 @@
+/* ===== Cost of Quality (js/cost-of-quality.js) =====
+   The cost lines grouped by the four PAF categories, each a compact card with its live monthly figure; the split as
+   one bar of the whole; the scenario as plain arithmetic; and a one-page management summary for print. The category
+   is always named in words (P, A, IF, EF and its name); the colour only repeats it. */
+.cq-lines { display: grid; gap: 18px; }
+.cq-group { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.cq-group:first-child { padding-top: 0; border-top: 0; }
+.cq-group-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+.cq-group-title { margin: 0; font-size: 18px; }
+.cq-group-total { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.cq-group-hint { margin: 0; }
+.cq-letter {
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 26px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  vertical-align: 2px;
+}
+.cq-group[data-cat="prevention"] .cq-letter { border-color: var(--blue); color: var(--blue); }
+.cq-line {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 8px);
+  background: var(--card);
+}
+.cq-line-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.cq-line-grid > .field:first-child { grid-column: 1 / -1; }
+.cq-line-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.cq-line-out { margin: 0; color: var(--ink); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cq-remove { padding: 4px 8px; font-size: 14px; }
+.cq-add { justify-self: start; }
+.cq-range { width: 100%; margin-top: 8px; accent-color: var(--blue); }
+
+/* The split: one bar of the cost of quality, each part named in its own words. */
+.cq-split {
+  display: flex;
+  overflow: hidden;
+  height: 34px;
+  margin: 4px 0 12px;
+  border-radius: 8px;
+  background: var(--paper-2);
+}
+.cq-split-part {
+  display: grid;
+  place-items: center;
+  min-width: 2px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.cq-split-part + .cq-split-part { border-left: 2px solid var(--paper-2); }
+.cq-split-part.is-prevention { background: var(--blue); }
+.cq-split-part.is-appraisal { background: var(--blue-soft); color: var(--ink); }
+.cq-split-part.is-internal { background: #a78bfa; color: #1b2330; }
+.cq-split-part.is-external { background: var(--muted); }
+.cq-total td { font-weight: 800; border-top: 2px solid var(--line); }
+
+/* The scenario, as the sums a manager can check by hand. */
+.cq-sums { display: grid; gap: 8px; margin: 0; }
+.cq-sum {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: 4px 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cq-sum dt { color: var(--muted); }
+.cq-sum dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; }
+.cq-sum.is-net dt { color: var(--ink); font-weight: 800; }
+.cq-sum.is-net dd { font-size: 18px; font-weight: 800; }
+.cq-after { margin-top: 12px; }
+
+/* The printed management summary: hidden on screen, the only thing on paper (html.cq-page is set by the script, so
+   other pages print as they always did). */
+.cq-print { display: none; }
+.cq-print-head h2 { margin: 4px 0; font-size: 20px; }
+.cq-print-meta { margin: 0 0 8px; }
+.cq-print h3 { margin: 12px 0 4px; font-size: 13px; }
+.cq-print-scenario p { margin: 2px 0; }
+.cq-print-foot { margin: 12px 0 0; font-size: 10px; }
+
+@media (max-width: 760px) {
+  .cq-line-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cq-sum { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 420px) {
+  .cq-line-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media print {
+  html.cq-page main > :not(.cq-print) { display: none !important; }
+  html.cq-page .cq-print { display: block !important; padding: 0; color: #000; font-size: 11px; }
+  .cq-print .kicker, .cq-print-meta, .cq-print-foot { color: #000; }
+  .cq-print .dl-table-wrap { overflow: visible; border: 0; }
+  .cq-print .cq-print-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .cq-print .cq-print-table th, .cq-print .cq-print-table td { padding: 3px 5px; border: 1px solid #bbb; text-align: left; vertical-align: top; }
+  .cq-print .cq-print-table .num { text-align: right; white-space: nowrap; }
+  .cq-print .cq-print-table tr { break-inside: avoid; }
+}

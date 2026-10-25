@@ -1,0 +1,383 @@
+{
+  "storageKey": "sc-waste-log",
+  "text": {
+    "tool": "Waste Log",
+    "csv": "waste-log",
+    "entryLegend": "Log waste or a write-off",
+    "itemPlaceholder": "e.g. Scrambled eggs from the buffet",
+    "qtyPlaceholder": "e.g. 3.5",
+    "costPlaceholder": "e.g. 4.50",
+    "notePlaceholder": "e.g. Tray refilled at 10:15, 15 minutes before closing",
+    "costNote": "Purchase cost per unit (food cost), not the menu price. Take it from your invoices; the figures in the example are only examples.",
+    "coversPlaceholder": "e.g. 146",
+    "coversNote": "Guests served on that day, for example breakfast covers. With covers, food waste is shown in grams per cover, the usual food-waste figure: it lets a full day and a quiet day be compared.",
+    "perCoverNote": "Grams per cover count only rows in kg of the food categories ({categories}), and only on days with covers entered.",
+    "targetNote": "The baseline is the first weeks of the log; the target is a cut against its average per day. 20 % is a common first goal; set your own.",
+    "pasteRow": "One row per entry",
+    "pastePlaceholder": "2026-10-12\tEarly\tBreakfast buffet\tBreakfast buffet\tScrambled eggs\t3.2\tkg\t4.50\tOverproduction\tCompost or biogas\tRefilled too late",
+    "empty": "Nothing in the log yet.",
+    "hierarchy": "The EU waste hierarchy (Directive 2008/98/EC, Article 4) ranks prevention first, then preparing for re-use, recycling, other recovery such as energy recovery, and disposal last. Applied to food, the order usually given is: prevent the surplus, donate what is still safe to eat, use it as animal feed where the law allows, then compost or biogas, and residual waste last.",
+    "feedNote": "Animal feed: in the EU, catering waste must not be fed to farmed animals (Regulation (EC) No 1069/2009). Check with your local authority before using this route.",
+    "allAreas": "All areas",
+    "allCategories": "All categories"
+  },
+  "shifts": [
+    "Early",
+    "Late",
+    "Night"
+  ],
+  "areas": [
+    "Breakfast buffet",
+    "Main kitchen",
+    "Warehouse",
+    "Housekeeping"
+  ],
+  "units": [
+    {
+      "key": "kg",
+      "name": "kg"
+    },
+    {
+      "key": "pcs",
+      "name": "pcs"
+    },
+    {
+      "key": "l",
+      "name": "l"
+    }
+  ],
+  "categories": [
+    {
+      "key": "buffet",
+      "name": "Breakfast buffet",
+      "food": true
+    },
+    {
+      "key": "prep",
+      "name": "Kitchen preparation",
+      "food": true
+    },
+    {
+      "key": "plate",
+      "name": "Plate waste",
+      "food": true
+    },
+    {
+      "key": "expired",
+      "name": "Expired goods",
+      "food": false
+    },
+    {
+      "key": "damaged",
+      "name": "Damaged in handling",
+      "food": false
+    },
+    {
+      "key": "scrap",
+      "name": "Scrap and packaging",
+      "food": false
+    },
+    {
+      "key": "linen",
+      "name": "Linen and amenities",
+      "food": false
+    },
+    {
+      "key": "other",
+      "name": "Other",
+      "food": false
+    }
+  ],
+  "reasons": [
+    {
+      "key": "overproduction",
+      "name": "Overproduction"
+    },
+    {
+      "key": "spoilage",
+      "name": "Spoilage"
+    },
+    {
+      "key": "expiry",
+      "name": "Expiry"
+    },
+    {
+      "key": "damage",
+      "name": "Damage in handling"
+    },
+    {
+      "key": "wrongOrder",
+      "name": "Wrong order or delivery"
+    },
+    {
+      "key": "leftovers",
+      "name": "Guest leftovers"
+    },
+    {
+      "key": "quality",
+      "name": "Quality reject"
+    },
+    {
+      "key": "other",
+      "name": "Other"
+    }
+  ],
+  "destinations": [
+    {
+      "key": "prevented",
+      "name": "Reused or repurposed"
+    },
+    {
+      "key": "donated",
+      "name": "Donated"
+    },
+    {
+      "key": "feed",
+      "name": "Animal feed"
+    },
+    {
+      "key": "compost",
+      "name": "Compost or biogas"
+    },
+    {
+      "key": "recycling",
+      "name": "Recycling"
+    },
+    {
+      "key": "residual",
+      "name": "Residual waste"
+    }
+  ],
+  "target": {
+    "reduction": 20,
+    "baselineWeeks": 4
+  },
+  "advice": {
+    "overproduction": {
+      "meaning": "More was prepared or put out than the guests took. It is the largest and the most preventable loss of a buffet.",
+      "moves": [
+        "Weigh the buffet waste by item for one week and set the batch sizes from the covers forecast.",
+        "Refill in smaller trays in the last hour instead of keeping every tray full until closing.",
+        "Agree the cut-off time for each refill with the kitchen and write it on the buffet plan."
+      ],
+      "question": "Which item do we refill after the last guests have already eaten?"
+    },
+    "spoilage": {
+      "meaning": "Goods went off before use: storage, temperature or rotation did not hold.",
+      "moves": [
+        "Check the fridge temperatures and the first-in, first-out order on the shelves today.",
+        "Order delicate goods in smaller, more frequent deliveries.",
+        "Give each opened pack a label with the date it was opened."
+      ],
+      "question": "Where did the goods wait too long, and why?"
+    },
+    "expiry": {
+      "meaning": "Goods passed their date in stock: more was ordered than used, or older stock was not used first.",
+      "moves": [
+        "Compare the order quantities with the real use of the last four weeks.",
+        "Put a weekly date check on the shelves with the shortest dates.",
+        "Offer goods close to their best-before date to the kitchen or to a food bank in time."
+      ],
+      "question": "Why was this quantity ordered, and who saw the date coming?"
+    },
+    "damage": {
+      "meaning": "Goods or equipment were damaged in handling: at goods-in, in storage, in transport or in the laundry.",
+      "moves": [
+        "Note where in the flow the damage happens and check it at the next delivery.",
+        "Agree the claim rule with the supplier: damage found at goods-in goes back, it is not written off.",
+        "Show the team the correct way to store and move the items that break most."
+      ],
+      "question": "At which step does the damage happen, and what would stop it?"
+    },
+    "wrongOrder": {
+      "meaning": "Something was ordered or delivered that was not needed: a double order, a wrong item or a wrong quantity.",
+      "moves": [
+        "Check who orders what, and that one person approves each order.",
+        "Check the delivery against the order at goods-in, and refuse what was not ordered.",
+        "Write the case down for the supplier review."
+      ],
+      "question": "How could a second person have seen the mistake before the goods arrived?"
+    },
+    "leftovers": {
+      "meaning": "Food the guests took but did not eat. It is shaped by plate sizes, portions and how the buffet is laid out.",
+      "moves": [
+        "Try smaller plates or smaller portions of the items most left on plates.",
+        "Put a small sign at the buffet: take as often as you like.",
+        "Weigh the plate waste for a week and compare before and after."
+      ],
+      "question": "Which items come back most on the plates, and why are they taken?"
+    },
+    "quality": {
+      "meaning": "Goods or dishes did not meet the standard and were rejected: a burnt batch, a bruised delivery, a stained napkin.",
+      "moves": [
+        "Write down why each reject failed the standard.",
+        "Check the recipe, the holding time or the delivery specification behind the most frequent reject.",
+        "Agree with the supplier what is returned and credited."
+      ],
+      "question": "What failed the standard, and where did it start?"
+    },
+    "other": {
+      "meaning": "The reason is not one of the usual ones. A large share of other means the reasons need a closer look.",
+      "moves": [
+        "Read the notes of these entries and group them.",
+        "Add a reason to the list if one keeps coming back.",
+        "Take the largest item to 5 Whys."
+      ],
+      "question": "What do these entries have in common?"
+    },
+    "default": {
+      "meaning": "One reason gives most of the lost value. Removing its cause saves more than handling each entry well.",
+      "moves": [
+        "Take the top reason to 5 Whys with the team that owns it.",
+        "Agree one change with an owner and a date in the Action Tracker.",
+        "Compare the value per day with the target again in four weeks."
+      ],
+      "question": "What would have to change so that this waste does not happen at all?"
+    }
+  },
+  "tips": [
+    [
+      "Weigh it, do not guess.",
+      "A scale at the buffet and in the kitchen is the start: the log is only as good as the weights in it."
+    ],
+    [
+      "Value it at purchase cost.",
+      "Quantity × unit cost gives the value. Use what the goods cost to buy, from your invoices, so the figure holds up."
+    ],
+    [
+      "Enter the covers of the day.",
+      "Grams per cover makes a full Saturday and a quiet Tuesday comparable. Days without covers are left out of that figure."
+    ],
+    [
+      "A night shift after midnight",
+      "logs on the new day, as in the other logs: the date is the day the waste was found."
+    ],
+    [
+      "Prevention first.",
+      "Donated and composted is better than residual waste, but the waste that is never made saves the most."
+    ]
+  ],
+  "example": {
+    "start": "2026-09-28",
+    "settings": {
+      "baselineWeeks": "2",
+      "reduction": "20"
+    },
+    "items": {
+      "buffetMix": "Buffet mix: eggs, sausages, fruit, bread",
+      "pastries": "Unopened pastries",
+      "plate": "Plate waste from tables",
+      "fruitTrim": "Fruit trim and rejected melons",
+      "berries": "Spoiled berries",
+      "eggsHeld": "Scrambled eggs held too long",
+      "yoghurt": "Yoghurt cups past best-before",
+      "eggs": "Eggs broken",
+      "pallets": "Broken pallets",
+      "towels": "Torn bath towels",
+      "cheese": "Sliced cheese, past use-by",
+      "juiceCase": "Orange juice case dropped",
+      "milk": "Milk past use-by",
+      "napkins": "Stained napkins",
+      "juice": "Juice close to best-before",
+      "amenities": "Opened amenity kits",
+      "jam": "Dented jam portions",
+      "bread": "Bread dough proofed too long"
+    },
+    "notes": {
+      "goodsIn": "Found at goods-in, too late to claim",
+      "rags": "Cut into cleaning rags",
+      "doubleOrder": "Ordered twice",
+      "foodBank": "Picked up by the food bank",
+      "nightBake": "Night bake for the breakfast"
+    },
+    "rows": [
+        {"day": 0, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 11.4, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 0, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.1, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 1, "shift": 0, "area": 1, "category": "prep", "item": "fruitTrim", "qty": 1.8, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 1, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 10.8, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 1, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.8, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 2, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 11.9, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 2, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.3, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 2, "shift": 1, "area": 2, "category": "expired", "item": "yoghurt", "qty": 24, "unit": "pcs", "cost": 0.45, "reason": "expiry", "dest": "compost", "note": ""},
+        {"day": 3, "shift": 0, "area": 1, "category": "prep", "item": "berries", "qty": 1.2, "unit": "kg", "cost": 3.2, "reason": "spoilage", "dest": "compost", "note": ""},
+        {"day": 3, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 11.2, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 3, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.0, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 4, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 12.0, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 4, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.4, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 4, "shift": 1, "area": 2, "category": "damaged", "item": "eggs", "qty": 30, "unit": "pcs", "cost": 0.28, "reason": "damage", "dest": "compost", "note": "goodsIn"},
+        {"day": 5, "shift": 0, "area": 1, "category": "prep", "item": "eggsHeld", "qty": 2.5, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 5, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 10.6, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 5, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.6, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 6, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 9.8, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 6, "shift": 0, "area": 0, "category": "buffet", "item": "pastries", "qty": 2.4, "unit": "kg", "cost": 6.0, "reason": "overproduction", "dest": "donated", "note": "foodBank"},
+        {"day": 6, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.5, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 7, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 10.2, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 7, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.0, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 7, "shift": 1, "area": 2, "category": "scrap", "item": "pallets", "qty": 2, "unit": "pcs", "cost": 8.0, "reason": "damage", "dest": "recycling", "note": ""},
+        {"day": 8, "shift": 0, "area": 1, "category": "prep", "item": "fruitTrim", "qty": 1.6, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 8, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 9.6, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 8, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.7, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 8, "shift": 1, "area": 3, "category": "linen", "item": "towels", "qty": 6, "unit": "pcs", "cost": 6.5, "reason": "damage", "dest": "prevented", "note": "rags"},
+        {"day": 9, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 10.9, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 9, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.1, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 9, "shift": 1, "area": 2, "category": "expired", "item": "cheese", "qty": 6.0, "unit": "kg", "cost": 9.8, "reason": "wrongOrder", "dest": "compost", "note": "doubleOrder"},
+        {"day": 10, "shift": 0, "area": 1, "category": "prep", "item": "berries", "qty": 0.9, "unit": "kg", "cost": 3.2, "reason": "spoilage", "dest": "compost", "note": ""},
+        {"day": 10, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 10.4, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 10, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.9, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 11, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 11.1, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 11, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.2, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 12, "shift": 0, "area": 1, "category": "prep", "item": "eggsHeld", "qty": 2.2, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 12, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 9.4, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 12, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.5, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 12, "shift": 1, "area": 2, "category": "damaged", "item": "juiceCase", "qty": 6, "unit": "l", "cost": 1.6, "reason": "damage", "dest": "residual", "note": ""},
+        {"day": 13, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 8.8, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 13, "shift": 0, "area": 0, "category": "buffet", "item": "pastries", "qty": 2.0, "unit": "kg", "cost": 6.0, "reason": "overproduction", "dest": "donated", "note": "foodBank"},
+        {"day": 13, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.3, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 14, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 8.9, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 14, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.8, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 15, "shift": 0, "area": 1, "category": "prep", "item": "fruitTrim", "qty": 1.5, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 15, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 8.4, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 15, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.6, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 15, "shift": 1, "area": 2, "category": "scrap", "item": "pallets", "qty": 1, "unit": "pcs", "cost": 8.0, "reason": "damage", "dest": "recycling", "note": ""},
+        {"day": 16, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 9.2, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 16, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.0, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 16, "shift": 1, "area": 2, "category": "expired", "item": "milk", "qty": 12, "unit": "l", "cost": 1.1, "reason": "expiry", "dest": "compost", "note": ""},
+        {"day": 17, "shift": 0, "area": 1, "category": "prep", "item": "berries", "qty": 0.8, "unit": "kg", "cost": 3.2, "reason": "spoilage", "dest": "compost", "note": ""},
+        {"day": 17, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 8.7, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 17, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.7, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 18, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 9.6, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 18, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.1, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 18, "shift": 1, "area": 3, "category": "linen", "item": "napkins", "qty": 14, "unit": "pcs", "cost": 1.2, "reason": "quality", "dest": "recycling", "note": ""},
+        {"day": 19, "shift": 0, "area": 1, "category": "prep", "item": "eggsHeld", "qty": 1.6, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 19, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 8.1, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 19, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.4, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 19, "shift": 1, "area": 2, "category": "damaged", "item": "eggs", "qty": 18, "unit": "pcs", "cost": 0.28, "reason": "damage", "dest": "compost", "note": "goodsIn"},
+        {"day": 20, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 7.6, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 20, "shift": 0, "area": 0, "category": "buffet", "item": "pastries", "qty": 1.6, "unit": "kg", "cost": 6.0, "reason": "overproduction", "dest": "donated", "note": "foodBank"},
+        {"day": 20, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.2, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 21, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 7.6, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 21, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.7, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 22, "shift": 0, "area": 1, "category": "prep", "item": "fruitTrim", "qty": 1.4, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 22, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 7.1, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 22, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.5, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 23, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 7.9, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 23, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.9, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 23, "shift": 1, "area": 2, "category": "expired", "item": "juice", "qty": 18, "unit": "l", "cost": 1.6, "reason": "expiry", "dest": "donated", "note": "foodBank"},
+        {"day": 24, "shift": 0, "area": 1, "category": "prep", "item": "berries", "qty": 0.6, "unit": "kg", "cost": 3.2, "reason": "spoilage", "dest": "compost", "note": ""},
+        {"day": 24, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 7.4, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 24, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 2.6, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 24, "shift": 1, "area": 3, "category": "linen", "item": "amenities", "qty": 22, "unit": "pcs", "cost": 0.9, "reason": "other", "dest": "residual", "note": ""},
+        {"day": 25, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 8.2, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 25, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.0, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 25, "shift": 1, "area": 2, "category": "damaged", "item": "jam", "qty": 40, "unit": "pcs", "cost": 0.12, "reason": "damage", "dest": "residual", "note": ""},
+        {"day": 26, "shift": 0, "area": 1, "category": "prep", "item": "eggsHeld", "qty": 1.2, "unit": "kg", "cost": 3.2, "reason": "quality", "dest": "compost", "note": ""},
+        {"day": 26, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 6.9, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 26, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.2, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""},
+        {"day": 26, "shift": 2, "area": 1, "category": "prep", "item": "bread", "qty": 3.0, "unit": "kg", "cost": 2.4, "reason": "quality", "dest": "compost", "note": "nightBake"},
+        {"day": 27, "shift": 0, "area": 0, "category": "buffet", "item": "buffetMix", "qty": 6.3, "unit": "kg", "cost": 4.5, "reason": "overproduction", "dest": "compost", "note": ""},
+        {"day": 27, "shift": 0, "area": 0, "category": "buffet", "item": "pastries", "qty": 1.2, "unit": "kg", "cost": 6.0, "reason": "overproduction", "dest": "donated", "note": "foodBank"},
+        {"day": 27, "shift": 0, "area": 0, "category": "plate", "item": "plate", "qty": 3.1, "unit": "kg", "cost": 4.0, "reason": "leftovers", "dest": "compost", "note": ""}
+      ],
+    "covers": [128, 124, 131, 136, 142, 176, 168, 131, 127, null, 138, 145, 181, 171, 126, 122, 133, 139, 147, 179, null, 129, 125, 132, 137, 144, 174, 165]
+  }
+}

@@ -1,0 +1,89 @@
+{#- Cost of Quality: the PAF model (prevention, appraisal, internal and external failure) in one monthly and yearly number, with COPQ, the split, the Pareto and a scenario; cost-of-quality.js does the rest. -#}
+<section class="shell tool-layout cq-setup">
+  <div class="tool-panel" data-cost-of-quality>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">1 · {{ "Your operation" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="cq-sector">{{ "Type of operation" | t(lang) }}</label>
+          <select id="cq-sector" name="sector" data-setup>
+            {%- for s in cfg.sectors %}<option value="{{ s.key }}">{{ s.name }}</option>{% endfor -%}
+          </select>
+        </div>
+        <div class="field">
+          <label for="cq-rate">{{ "Default hourly rate (€)" | t(lang) }}</label>
+          <input id="cq-rate" name="hourlyRate" type="text" inputmode="decimal" autocomplete="off" data-setup>
+        </div>
+        <div class="field">
+          <label for="cq-revenue">{{ "Revenue per month (€)" | t(lang) }} <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="cq-revenue" name="revenue" type="text" inputmode="decimal" autocomplete="off" placeholder="{{ 'e.g. 1800000' | t(lang) }}" data-setup>
+        </div>
+        <div class="field">
+          <label for="cq-volume">{{ "Volume per month" | t(lang) }} (<span data-unit-label>{{ cfg.sectors[0].unitMany }}</span>) <span class="optional">{{ "optional" | t(lang) }}</span></label>
+          <input id="cq-volume" name="volume" type="text" inputmode="decimal" autocomplete="off" placeholder="{{ 'e.g. 60000' | t(lang) }}" data-setup>
+        </div>
+      </div>
+      <p class="form-note">{{ "The default hourly rate is used for every line in hours without a rate of its own. It is only a starting value: use your loaded labour cost (wage, employer's contributions, supervision) from your own figures." | t(lang) }}</p>
+    </fieldset>
+
+    <div class="dl-box">
+      <p class="kicker">2 · {{ "The costs, by PAF category" | t(lang) }}</p>
+      <p class="form-note">{{ cfg.text.paf }}</p>
+      <div class="cq-lines" data-lines></div>
+      <p class="dl-empty" data-empty>{{ "No costs yet. Add a line under a category, bring in what this browser already holds, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load the example warehouse" | t(lang) }}</button>.</p>
+      <p class="form-note dl-log-status" data-status aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-secondary" type="button" data-import>{{ "Bring in from this browser" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-csv>{{ "Download CSV" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-xlsx>{{ "Download Excel" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-clear>{{ "Clear all lines" | t(lang) }}</button>
+      </div>
+      <p class="form-note">{{ "Bring in reads the last 30 days of the Waste Log on this browser as internal failure, and the compensation given in Guest Complaints as external failure, one line each. It only reads them, and 30 days count as one month." | t(lang) }}</p>
+    </div>
+
+    <fieldset class="dl-box">
+      <legend class="kicker">3 · {{ "Scenario" | t(lang) }}</legend>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="cq-cut">{{ "Failure costs fall by (%)" | t(lang) }}</label>
+          <input id="cq-cut" name="cut" type="text" inputmode="decimal" autocomplete="off" data-scenario>
+          <label class="visually-hidden" for="cq-cut-range">{{ "Failure costs fall by (%), slider" | t(lang) }}</label>
+          <input id="cq-cut-range" class="cq-range" type="range" min="0" max="90" step="5" data-cut-range>
+        </div>
+        <div class="field">
+          <label for="cq-invest">{{ "Prevention rises by (€ per month)" | t(lang) }}</label>
+          <input id="cq-invest" name="invest" type="text" inputmode="decimal" autocomplete="off" placeholder="{{ 'e.g. 2000' | t(lang) }}" data-scenario>
+        </div>
+      </div>
+      <p class="form-note">{{ "Net saving per year = failure cut × (internal + external failure) × 12 − extra prevention × 12." | t(lang) }}</p>
+    </fieldset>
+
+    {%- for s in cfg.sectors %}{% for cat in cfg.categories %}
+    <datalist id="cq-presets-{{ s.key }}-{{ cat.key }}">
+      {%- for p in s.presets[cat.key] %}<option value="{{ p.name }}"></option>{% endfor -%}
+    </datalist>
+    {%- endfor %}{% endfor %}
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+      <li><strong>{{ "Then go after the largest item." | t(lang) }}</strong> {{ "Rank the items in" | t(lang) }} <a class="inline-link" href="{{ '/tools/pareto/' | local(lang) }}">Pareto 80/20</a>, {{ "find the cause with" | t(lang) }} <a class="inline-link" href="{{ '/tools/five-whys/' | local(lang) }}" data-five-whys>5 Whys</a> {{ "and track the fix in the" | t(lang) }} <a class="inline-link" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Action Tracker" | t(lang) }}</a>.</li>
+      <li><strong>{{ "Compensation is already counted." | t(lang) }}</strong> {{ "In a hotel, the compensation logged in" | t(lang) }} <a class="inline-link" href="{{ '/tools/guest-complaints/' | local(lang) }}">{{ "Guest Complaints" | t(lang) }}</a> {{ "comes in with Bring in from this browser." | t(lang) }}</li>
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results cq-results" data-results tabindex="-1" hidden></section>
+<section class="shell cq-print" data-print aria-hidden="true"></section>
+
+<script type="application/json" id="cost-of-quality-data">{{ cfg | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/cost-of-quality.js' | assetUrl }}" defer></script>

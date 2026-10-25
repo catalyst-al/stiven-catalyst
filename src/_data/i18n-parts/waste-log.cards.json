@@ -1,0 +1,10 @@
+{
+  "family": "pulse",
+  "cards": {
+    "en": { "name": "Waste Log", "type": "Operations", "time": "Ongoing", "summary": "Weigh and log food waste, expired and damaged goods, scrap and linen with the reason and where it went. Kg and euro lost per day, grams per cover, the Pareto of categories and reasons, and the weeks against a reduction target.", "url": "/tools/waste-log/", "cta": "Open the log" },
+    "de": { "name": "Verlustprotokoll", "type": "Betrieb", "time": "Laufend", "summary": "Lebensmittelabfall, abgelaufene und beschädigte Ware, Ausschuss und Wäsche mit Grund und Verbleib wiegen und erfassen. Kilogramm und Euro Verlust pro Tag, Gramm pro Gast, das Pareto der Kategorien und Gründe und die Wochen gegenüber einem Reduktionsziel.", "url": "/de/tools/waste-log/", "cta": "Protokoll öffnen" },
+    "sq": { "name": "Regjistri i mbetjeve", "type": "Operacione", "time": "Vazhdimisht", "summary": "Pesho dhe regjistro mbetjet ushqimore, mallrat e skaduara dhe të dëmtuara, skarton dhe linon me arsyen dhe ku shkuan. Kg dhe euro të humbura për ditë, gramë për mysafir, Pareto e kategorive dhe e arsyeve, dhe javët kundrejt një objektivi uljeje.", "url": "/sq/tools/waste-log/", "cta": "Hap regjistrin" }
+  },
+  "routine": { "when": "End of shift", "do": "Weigh what was thrown away or written off on the shift, log it with its reason and where it went, and enter the covers of the day.", "de": { "when": "Schichtende", "do": "Wiegen Sie, was in der Schicht weggeworfen oder abgeschrieben wurde, erfassen Sie es mit Grund und Verbleib und tragen Sie die Gäste des Tages ein." }, "sq": { "when": "Fundi i turnit", "do": "Pesho çfarë u hodh ose u fshi nga stoku gjatë turnit, regjistroje me arsyen dhe ku shkoi, dhe shëno mysafirët e ditës." } },
+  "recipe": "example"
+}
