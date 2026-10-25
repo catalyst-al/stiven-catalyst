@@ -198,11 +198,13 @@
         if (index > 0) skipped++;
         return;
       }
+      // An export with one "found at" column holds the time in the date cell.
+      const clock = String(time ?? "").trim() || (kit.parseDateTime ? kit.parseDateTime(date).time : "");
       const kind = categoryKey(category, cfg) || "other";
       const state = statusKey(status, cfg);
       added.push({
         date: day,
-        time: String(time ?? "").trim(),
+        time: clock,
         area: kit.canon(cfg.areas || [], area, ""),
         room: String(room ?? "").trim(),
         category: kind,

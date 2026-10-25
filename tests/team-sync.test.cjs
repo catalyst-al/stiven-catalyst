@@ -1,6 +1,7 @@
 // Team sync (src/js/team-sync.js): the team code and what is derived from it, the sealed copy, the merge rules, what
 // may leave the device, and whole syncs against a fake of the server's API (workers/sync/worker.js), including the
-// 409 and 429 paths. The box section is the real partial rendered with Nunjucks.
+// 409 and 429 paths. The box section is the real partial rendered with Nunjucks. Read-only codes (they read, never
+// write) and the change of the team code run against the same fake.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -11,6 +12,7 @@ const nunjucks = require('nunjucks');
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const part = read('src/_data/i18n-parts/team-sync.json');
+const part2 = read('src/_data/i18n-parts/team-sync-2.json');
 const site = read('src/_data/site.json');
 const ENDPOINT = 'https://sync.example.test';
 const CODE = 'acid-acorn-acre-acts-afar-affix';
@@ -440,7 +442,7 @@ test('the QR code matches a reference encoder (byte mode, level M), and is drawn
 
 // ---- The section in the box ----
 const render = (lang, withSite = true) => {
-  const ui = lang === 'en' ? {} : { ...read(`src/_data/${lang}/ui.json`), ...part[lang] };
+  const ui = lang === 'en' ? {} : { ...read(`src/_data/${lang}/ui.json`), ...part[lang], ...part2[lang] };
   const missing = new Set();
   const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(['src/_includes']), { autoescape: true });
   env.addFilter('t', (text) => { if (lang !== 'en' && ui[text] === undefined) missing.add(text); return lang === 'en' ? text : ui[text] ?? text; });
@@ -453,12 +455,14 @@ const render = (lang, withSite = true) => {
 test('the section shows only with an endpoint, after the box scripts, and every text is translated', () => {
   const on = render('en');
   assert.match(on.html, /data-team-sync data-endpoint="https:\/\/sync\.example\.test"/);
-  assert.deepEqual(on.scripts, ['/js/storage-guard.js', '/js/work-backup.js', '/js/team-sync.js']);
+  assert.deepEqual(on.scripts, ['/js/storage-guard.js', '/js/work-backup.js', '/js/reminders.js', '/js/team-sync.js']);
   const off = render('en', false);
   assert.doesNotMatch(off.html, /data-team-sync/);
-  assert.deepEqual(off.scripts, ['/js/storage-guard.js', '/js/work-backup.js']);
+  assert.deepEqual(off.scripts, ['/js/storage-guard.js', '/js/work-backup.js', '/js/reminders.js']);
   for (const lang of ['de', 'sq']) assert.deepEqual(render(lang).missing, [], lang);
   assert.deepEqual(Object.keys(part.de).sort(), Object.keys(part.sq).sort());
+  assert.deepEqual(Object.keys(part2.de).sort(), Object.keys(part2.sq).sort());
+
   assert.equal(site.sync.endpoint, 'https://stiven-catalyst-sync.stivenjanaqi1.workers.dev');
   // The Content Security Policy lets the tools and the Tools page reach the server, and only them: the line of
   // base.njk that sets it, rendered with the filters as eleventy.config.js defines them.
@@ -536,4 +540,364 @@ test('the stylesheet is balanced and keeps to the brand colours', () => {
   const stripped = css.replace(/\/\*[\s\S]*?\*\//g, '');
   assert.equal((stripped.match(/\{/g) || []).length, (stripped.match(/\}/g) || []).length);
   assert.doesNotMatch(css, /--red|--gold/);
+});
+
+// ---- Read-only codes ----
+const viewerOf = async (w, code = CODE) => w.TeamSyncMath.viewerCode(code, 1000);
+const bytesOf = (text) => Buffer.from(text.slice(5).replace(/-/g, '+').replace(/_/g, '/'), 'base64');
+const contains = (haystack, needle) => Buffer.from(haystack).indexOf(Buffer.from(needle)) >= 0;
+
+test('a read-only code: versioned base64url of the space id, the key and a check; it round-trips and refuses damage', async () => {
+  const w = load();
+  const M2 = w.TeamSyncMath;
+  const text = await viewerOf(w);
+  assert.match(text, /^scr1\.[A-Za-z0-9_-]{91}$/);
+  assert.equal(text.length, 96);
+  assert.equal(await viewerOf(w, 'ACID acorn acre acts afar affix'), text, 'the same code however typed');
+  const member = await M2.deriveKeys(CODE, 1000);
+  const parsed = plain(await M2.parseViewer(text));
+  assert.equal(parsed.ok, true);
+  assert.equal(parsed.spaceId, member.spaceId);
+  // The key is exactly PBKDF2 of the code: node derives the same 32 bytes on its own.
+  assert.deepEqual(Buffer.from(Object.values(parsed.key)), nodeCrypto.pbkdf2Sync(CODE, 'stiven-catalyst-sync-v1', 1000, 32, 'sha256'));
+  const bytes = bytesOf(text);
+  assert.equal(bytes.length, 68);
+  assert.equal(bytes.subarray(0, 32).toString('hex'), member.spaceId);
+  assert.deepEqual(bytes.subarray(64), nodeCrypto.createHash('sha256').update(Buffer.concat([Buffer.from('scr1.'), bytes.subarray(0, 64)])).digest().subarray(0, 4));
+  // Pasted with a line break or spaces from a chat: the same code.
+  assert.equal((await M2.parseViewer(`  ${text.slice(0, 40)}\n${text.slice(40)} `)).ok, true);
+  // Told apart from a team code; damage, a cut and a later version are refused.
+  assert.ok(M2.looksViewer(text) && M2.looksViewer(' SCR1.abc') && !M2.looksViewer(CODE) && !M2.looksViewer('scrub scoop'));
+  const flip = text.slice(0, 50) + (text[50] === 'A' ? 'B' : 'A') + text.slice(51);
+  assert.equal((await M2.parseViewer(flip)).reason, 'damaged');
+  assert.equal((await M2.parseViewer(text.slice(0, 90))).reason, 'damaged');
+  assert.equal((await M2.parseViewer(`scr2.${text.slice(5)}`)).reason, 'version');
+  assert.equal((await M2.parseViewer('scr1.@@@')).reason, 'damaged');
+  // A QR code of it fits the encoder (byte mode, level M, version 6).
+  assert.equal(M2.qrEncode(text).version, 6);
+});
+
+test('a read-only code holds neither the six words nor the write token, and its key can only decrypt', async () => {
+  const w = load();
+  const text = await viewerOf(w);
+  const bytes = bytesOf(text);
+  const member = await w.TeamSyncMath.deriveKeys(CODE, 1000);
+  for (const needle of [CODE, ...CODE.split('-'), member.writeToken]) {
+    assert.ok(!contains(bytes, needle), `bytes: ${needle}`);
+    assert.ok(!text.includes(needle), `text: ${needle}`);
+  }
+  assert.ok(!contains(bytes, Buffer.from(member.writeToken, 'hex')), 'nor the token as raw bytes');
+  assert.ok(!contains(bytes, Buffer.from(sha(`write:${member.writeToken}`), 'hex')), 'nor what the server keeps of it');
+  const keys = await w.TeamSyncMath.viewerKeys(text);
+  assert.equal(keys.writeToken, null);
+  assert.equal(keys.viewer, true);
+  assert.deepEqual(plain(keys.key.usages), ['decrypt']);
+  await assert.rejects(() => w.TeamSyncMath.seal({ format: 'stiven-catalyst-team', version: 1, items: {} }, keys.key), 'it cannot seal a copy');
+  assert.equal(await w.TeamSyncMath.viewerKeys(`${text.slice(0, -1)}x`), null);
+});
+
+test('a viewer reads what a member uploaded, takes the team\'s version after a restore point, and never PUTs or DELETEs', async () => {
+  const server = fakeServer();
+  const a = await device(load({ storage: { 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door', created: '2026-10-20' }] }, 'sc-workplace': { areas: ['Dock'] }, 'sc-team-state': { deviceName: 'Phone of Ana' } } }));
+  assert.equal((await run(a, server)).status, 'synced');
+  const vw = load({ storage: { 'sc-actions': { rows: [{ id: 'v1', title: 'My own note' }] }, 'sc-five-whys': { q: 'mine' } } });
+  const viewer = { w: vw, keys: await vw.TeamSyncMath.viewerKeys(await viewerOf(vw)) };
+  // Every request the viewer makes, through its own door to the same server.
+  const asked = [];
+  const viewerServer = { fetch: async (url, init = {}) => { asked.push(init.method || 'GET'); return server.fetch(url, init); } };
+  const points = [];
+  // syncOnce with keys that hold no token reads only, whatever it is asked (create included).
+  const first = await run(viewer, viewerServer, { create: true, beforeWrite: async (keys) => { points.push([...keys].sort(), vw.localStorage.getItem('sc-actions')); } });
+  assert.equal(first.status, 'synced');
+  assert.equal(first.uploaded, false);
+  assert.deepEqual(plain(first.changed).sort(), ['sc-actions', 'sc-workplace']);
+  assert.deepEqual(points, [['sc-actions', 'sc-workplace'], JSON.stringify({ rows: [{ id: 'v1', title: 'My own note' }] })], 'the restore point holds the work as it was');
+  assert.deepEqual(stored(vw, 'sc-actions'), { rows: [{ id: 'a1', title: 'Fix dock door', created: '2026-10-20' }] }, 'the team\'s version wins');
+  assert.deepEqual(stored(vw, 'sc-workplace'), { areas: ['Dock'] });
+  assert.deepEqual(stored(vw, 'sc-five-whys'), { q: 'mine' }, 'a tool the team does not have stays');
+  const state = stored(vw, 'sc-team-state');
+  assert.equal(state.viewer, true);
+  assert.equal(state.rev, 1);
+  assert.deepEqual(state.devices.map((d) => d.name), ['Phone of Ana'], 'the viewer is not on the list');
+  // A change on the viewer is not sent; the next sync replaces it.
+  vw.localStorage.setItem('sc-actions', JSON.stringify({ rows: [{ id: 'a1', title: 'Changed here' }] }));
+  const second = await run(viewer, viewerServer);
+  assert.deepEqual(plain(second.changed), ['sc-actions']);
+  assert.equal(stored(vw, 'sc-actions').rows[0].title, 'Fix dock door');
+  // A member's new work arrives; deleting with the viewer's keys sends nothing.
+  a.w.localStorage.setItem('sc-actions', JSON.stringify({ rows: [...stored(a.w, 'sc-actions').rows, { id: 'a2', title: 'Sweep bay 4' }] }));
+  await run(a, server);
+  const third = await run(viewer, viewerServer);
+  assert.equal(third.rev, 2);
+  assert.deepEqual(stored(vw, 'sc-actions').rows.map((r) => r.id), ['a1', 'a2']);
+  assert.equal(await vw.TeamSync.deleteCopy({ endpoint: ENDPOINT, fetch: viewerServer.fetch, keys: viewer.keys }), 'refused');
+  assert.equal(await vw.TeamSync.pullOnce({ endpoint: ENDPOINT, fetch: viewerServer.fetch, storage: vw.localStorage, keys: viewer.keys, selected: () => true }).then((r) => r.status), 'synced');
+  assert.deepEqual(asked, ['GET', 'GET', 'GET', 'GET'], 'four syncs, four GETs, and nothing else');
+  assert.equal(server.log.filter((e) => e.method === 'DELETE').length, 0);
+  // The copy deleted: the viewer says so and creates nothing.
+  server.spaces.clear();
+  assert.equal((await run(viewer, viewerServer, { create: true })).status, 'gone');
+  assert.equal(server.spaces.size, 0);
+  assert.ok(asked.every((method) => method === 'GET'));
+});
+
+// ---- Changing the team code ----
+const NEW_CODE = 'zesty-zippy-zone-zoom-yacht-amino';
+const rotateCtx = (dev, server, extra = {}) => ({
+  endpoint: ENDPOINT, fetch: server.fetch, storage: dev.w.localStorage, keys: dev.keys,
+  selected: (key) => dev.w.TeamSyncMath.isOn(dev.w.WorkBackup.toolSlug(key)), wait: async () => {},
+  newCode: () => NEW_CODE, derive: (code) => dev.w.TeamSyncMath.deriveKeys(code, 1000), ...extra,
+});
+
+test('change the team code: the whole merged copy goes to the new space, then the old one is deleted with the old token', async () => {
+  const server = fakeServer();
+  const aw = load({ storage: { 'sc-team': { code: CODE }, 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] }, 'sc-team-state': { deviceName: 'Phone of Ana' } } });
+  const a = await device(aw);
+  await run(a, server);
+  // B shares the Pareto data, which A does not tick, and has an action A has not seen yet.
+  const b = await device(load({ storage: { 'sc-pareto': { from: 'B' }, 'sc-actions': { rows: [{ id: 'b1', title: 'Order gloves' }] } } }));
+  await run(b, server, { selected: () => true });
+  b.w.localStorage.setItem('sc-actions', JSON.stringify({ rows: [{ id: 'b1', title: 'Order gloves' }, { id: 'b2', title: 'Label racks' }] }));
+  await run(b, server, { selected: () => true });
+  const oldViewer = await vwKeys(b.w, CODE);
+  const result = await aw.TeamSync.rotate(rotateCtx(a, server));
+  assert.equal(result.status, 'rotated');
+  assert.equal(result.code, NEW_CODE);
+  assert.equal(result.deleted, 'deleted');
+  assert.ok(!server.spaces.has(a.keys.spaceId), 'the old copy is gone');
+  const next = await aw.TeamSyncMath.deriveKeys(NEW_CODE, 1000);
+  assert.equal(result.keys.spaceId, next.spaceId);
+  const box = server.spaces.get(next.spaceId);
+  assert.equal(box.rev, 1);
+  assert.equal(box.token, next.writeToken, 'the new space belongs to the new token');
+  const copy = plain(await aw.TeamSyncMath.unseal(box, next.key));
+  assert.deepEqual(Object.keys(copy.items).sort(), ['sc-actions', 'sc-pareto'], 'the tools other devices share too');
+  assert.deepEqual(JSON.parse(copy.items['sc-actions']).rows.map((r) => r.id).sort(), ['a1', 'b1', 'b2'], 'merged first');
+  assert.deepEqual(copy.devices.map((d) => d.name), ['Phone of Ana'], 'only this device until the others join again');
+  // This device now holds the new code, nothing left to delete; the old code is nowhere in the new copy.
+  assert.deepEqual(stored(aw, 'sc-team').code, NEW_CODE);
+  assert.equal(stored(aw, 'sc-team').retire, undefined);
+  assert.ok(!JSON.stringify(copy).includes(CODE) && !JSON.stringify(copy).includes(NEW_CODE));
+  assert.equal(stored(aw, 'sc-team-state').rev, 1);
+  assert.deepEqual(stored(aw, 'sc-actions').rows.map((r) => r.id).sort(), ['a1', 'b1', 'b2']);
+  // B on the old code: gone; it does not create the old space again by itself. The old read-only code: gone too.
+  assert.equal((await run(b, server, { create: false })).status, 'gone');
+  assert.equal((await run({ w: b.w, keys: oldViewer }, server)).status, 'gone');
+  // B joins with the new code and syncs on; a new read-only code reads the new copy.
+  const b2 = { w: b.w, keys: next };
+  assert.equal((await run(b2, server, { selected: () => true })).status, 'synced');
+  const fresh = load();
+  assert.equal((await run({ w: fresh, keys: await vwKeys(fresh, NEW_CODE) }, server)).status, 'synced');
+  assert.deepEqual(stored(fresh, 'sc-actions').rows.map((r) => r.id).sort(), ['a1', 'b1', 'b2']);
+  // Old and new read-only codes differ in every part.
+  assert.notEqual(await viewerOf(fresh, NEW_CODE), await viewerOf(fresh, CODE));
+});
+const vwKeys = async (w, code) => w.TeamSyncMath.viewerKeys(await viewerOf(w, code));
+
+test('change the team code, failures: an upload that fails keeps the old team; a delete that fails is said and tried again', async () => {
+  const server = fakeServer();
+  const aw = load({ storage: { 'sc-team': { code: CODE }, 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] } } });
+  const a = await device(aw);
+  await run(a, server);
+  const next = await aw.TeamSyncMath.deriveKeys(NEW_CODE, 1000);
+  const oldBox = { ...server.spaces.get(a.keys.spaceId) };
+  // The new space refuses the upload (e.g. the server is busy): nothing changes here or on the server.
+  const busy = async (url, init = {}) => (init.method === 'PUT' && url.endsWith(next.spaceId) ? { status: 429, ok: false, json: async () => ({}) } : server.fetch(url, init));
+  const refused = await aw.TeamSync.rotate(rotateCtx(a, { fetch: busy }));
+  assert.equal(refused.status, 'busy');
+  assert.equal(refused.stage, 'upload');
+  assert.equal(stored(aw, 'sc-team').code, CODE, 'the old team stays');
+  assert.deepEqual(server.spaces.get(a.keys.spaceId), oldBox, 'the old copy is untouched');
+  assert.ok(!server.spaces.has(next.spaceId));
+  // The connection drops during the upload: the new space, should it exist after all, is deleted with its token.
+  const calls = [];
+  const drop = async (url, init = {}) => {
+    calls.push(`${init.method || 'GET'} ${url.endsWith(next.spaceId) ? 'new' : 'old'}`);
+    if (init.method === 'PUT' && url.endsWith(next.spaceId)) { await server.fetch(url, init); throw new TypeError('Failed to fetch'); }
+    return server.fetch(url, init);
+  };
+  const lost = await aw.TeamSync.rotate(rotateCtx(a, { fetch: drop }));
+  assert.equal(lost.status, 'offline');
+  assert.deepEqual(calls.slice(-2), ['PUT new', 'DELETE new']);
+  assert.ok(!server.spaces.has(next.spaceId));
+  assert.equal(stored(aw, 'sc-team').code, CODE);
+  // Offline before anything: nothing at all.
+  const off = await aw.TeamSync.rotate(rotateCtx(a, { fetch: async () => { throw new TypeError('offline'); } }));
+  assert.deepEqual([off.status, off.stage], ['offline', 'sync']);
+  // A read-only device cannot change the code.
+  assert.equal((await aw.TeamSync.rotate(rotateCtx({ w: aw, keys: await vwKeys(aw, CODE) }, server))).status, 'refused');
+  // The upload goes through but the old copy cannot be deleted: the device is in the new team and keeps the old space to delete.
+  const noDelete = async (url, init = {}) => { if (init.method === 'DELETE') throw new TypeError('Failed to fetch'); return server.fetch(url, init); };
+  const half = await aw.TeamSync.rotate(rotateCtx(a, { fetch: noDelete }));
+  assert.equal(half.status, 'rotated');
+  assert.equal(half.deleted, 'offline');
+  assert.ok(server.spaces.has(a.keys.spaceId) && server.spaces.has(next.spaceId));
+  const team = stored(aw, 'sc-team');
+  assert.equal(team.code, NEW_CODE);
+  assert.deepEqual(team.retire, [{ spaceId: a.keys.spaceId, writeToken: a.keys.writeToken }]);
+  assert.ok(!aw.WorkBackup.isWork('sc-team'), 'never in a saved file');
+  // Later, with a connection: deleted, and forgotten.
+  assert.equal(await aw.TeamSync.retireOld({ endpoint: ENDPOINT, fetch: server.fetch, storage: aw.localStorage }), 'deleted');
+  assert.ok(!server.spaces.has(a.keys.spaceId));
+  assert.equal(stored(aw, 'sc-team').retire, undefined);
+});
+
+const waitFor = async (check, tries = 300) => { for (let i = 0; i < tries && !check(); i++) await new Promise((r) => setTimeout(r, 20)); return check(); };
+
+test('in the box: a read-only code made, shown with a QR; a viewer joins with it in the same field and only reads', async (t) => {
+  const server = fakeServer();
+  // The box derives with the real 310 000 rounds, so the member here does too.
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] }, 'sc-team-state': { deviceName: 'Office PC' } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const calls = [];
+  const watched = async (url, init = {}) => { calls.push(init.method || 'GET'); return server.fetch(url, init); };
+  // The member's box: make a read-only code (real PBKDF2, as on a device).
+  const mw = load({ body: render('en').html, storage: { 'sc-team': { code: CODE }, 'sc-team-state': stored(member.w, 'sc-team-state'), 'sc-actions': stored(member.w, 'sc-actions') }, before: (win) => { win.fetch = server.fetch; } });
+  t.after(() => mw.close());
+  const m$ = (selector) => mw.document.querySelector(selector);
+  await waitFor(() => /^Synced/.test(m$('[data-tm-status]').textContent));
+  assert.equal(m$('[data-tm-viewer-make]').closest('[hidden]'), null, 'offered to a member');
+  m$('[data-tm-viewer-make]').click();
+  assert.ok(await waitFor(() => /^scr1\./.test(m$('[data-tm-view-code]').textContent)));
+  const code = m$('[data-tm-view-code]').textContent;
+  assert.equal(m$('[data-tm-view]').hidden, false);
+  assert.match(m$('[data-tm-view-qr]').innerHTML, /^<svg [^>]*aria-label="QR code of the read-only code"/);
+  assert.equal(code, await mw.TeamSyncMath.viewerCode(CODE));
+  m$('[data-tm-view-hide]').click();
+  assert.equal(m$('[data-tm-view]').hidden, true);
+  // The viewer's box: a mistyped read-only code, then the right one.
+  const vw = load({ body: render('en').html, storage: { 'sc-actions': { rows: [{ id: 'v1', title: 'Mine' }] } }, before: (win) => { win.fetch = watched; } });
+  t.after(() => vw.close());
+  const v$ = (selector) => vw.document.querySelector(selector);
+  v$('[data-tm-join-code]').value = code.slice(0, 60);
+  v$('[data-tm-join]').click();
+  assert.ok(await waitFor(() => /incomplete or damaged/.test(v$('[data-tm-message]').textContent)));
+  assert.deepEqual(calls, [], 'nothing asked of the server for a damaged code');
+  v$('[data-tm-join-code]').value = `${code.slice(0, 48)}\n${code.slice(48)}`;
+  v$('[data-tm-join]').click();
+  assert.ok(await waitFor(() => /^Joined read-only/.test(v$('[data-tm-message]').textContent)));
+  assert.deepEqual(stored(vw, 'sc-team'), { viewer: code, since: stored(vw, 'sc-team').since });
+  assert.match(v$('[data-tm-summary]').textContent, /^Read-only · synced today/);
+  assert.match(v$('[data-tm-status]').textContent, /^Read-only · synced today \d\d:\d\d · version 1 · \d+ KB · 1 device of the team\.$/);
+  assert.deepEqual(stored(vw, 'sc-actions'), stored(member.w, 'sc-actions'), 'the team\'s version');
+  // What a viewer is not offered: delete, send again, a read-only code of its own, a new code, a device name.
+  for (const selector of ['[data-tm-delete]', '[data-tm-viewer-make]', '[data-tm-rotate]', '[data-tm-device]', '[data-tm-again]']) {
+    const node = v$(selector);
+    assert.ok(node.hidden || node.closest('[hidden]'), selector);
+  }
+  assert.equal(v$('[data-tm-viewer-only]').hidden, false);
+  assert.match(v$('[data-tm-viewer-only]').textContent, /Changes made here to the shared tools are not sent/);
+  v$('[data-tm-sync]').click();
+  assert.ok(await waitFor(() => calls.length >= 3));
+  await waitFor(() => !v$('[data-tm-sync]').disabled);
+  assert.deepEqual([...new Set(calls)], ['GET'], 'a viewer only ever GETs');
+  // A change on the viewer: the next page it opens says it will be replaced.
+  vw.localStorage.setItem('sc-actions', JSON.stringify({ rows: [{ id: 'a1', title: 'Edited on the viewer' }] }));
+  const storageCopy = Object.fromEntries(Object.keys(vw.localStorage).map((key) => [key, vw.localStorage.getItem(key)]));
+  const again = load({ body: render('en').html, storage: storageCopy, before: (win) => { win.fetch = async () => { throw new TypeError('offline'); }; } });
+  t.after(() => again.close());
+  const pending = again.document.querySelector('[data-tm-pending]');
+  assert.equal(pending.hidden, false);
+  assert.match(pending.textContent, /^Changed on this device but not sent: Action Tracker\. The next sync replaces/);
+  // Its own sync at opening, offline here: said, and the warning stays.
+  assert.ok(await waitFor(() => /^No connection/.test(again.document.querySelector('[data-tm-status]').textContent)));
+  assert.equal(pending.hidden, false);
+});
+
+test('in the box: change the team code shows the new code once and says what the other devices must do', async (t) => {
+  const server = fakeServer();
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const w = load({ body: render('en').html, storage: { 'sc-team': { code: CODE }, 'sc-team-state': stored(member.w, 'sc-team-state'), 'sc-actions': stored(member.w, 'sc-actions') }, before: (win) => { win.fetch = server.fetch; } });
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  await waitFor(() => /^Synced/.test($('[data-tm-status]').textContent));
+  $('[data-tm-rotate]').click();
+  assert.ok(await waitFor(() => /^The team code is changed/.test($('[data-tm-message]').textContent)));
+  const code = stored(w, 'sc-team').code;
+  assert.notEqual(code, CODE);
+  assert.ok(w.TeamSyncMath.parseCode(code).ok);
+  assert.equal($('[data-tm-code]').textContent, code);
+  assert.equal($('[data-tm-new]').hidden, false);
+  assert.match($('[data-tm-qr]').innerHTML, /^<svg/);
+  assert.match($('[data-tm-message]').textContent, /Every other device must leave the team and join again with it; the old code and the old read-only codes no longer work\.$/);
+  assert.ok(!server.spaces.has(member.keys.spaceId));
+  assert.equal(server.spaces.size, 1);
+  // The other member, on the old code: gone, with what to do, and it stops syncing by itself.
+  const other = load({ body: render('en').html, storage: { 'sc-team': { code: CODE }, 'sc-team-state': { ...stored(member.w, 'sc-team-state'), deviceId: 'other123' } }, before: (win) => { win.fetch = server.fetch; } });
+  t.after(() => other.close());
+  const o$ = (selector) => other.document.querySelector(selector);
+  assert.ok(await waitFor(() => /no longer on the server/.test(o$('[data-tm-status]').textContent)));
+  assert.match(o$('[data-tm-status]').textContent, /If your team changed its code, leave the team on this device and join again with the new code\./);
+  assert.equal(o$('[data-tm-sync]').hidden, true);
+  assert.equal(o$('[data-tm-again]').hidden, false);
+  assert.equal(server.spaces.size, 1, 'the old space is not made again');
+});
+
+// ---- Reading another team's copy without joining (Site Compare) ----
+test('readTeamCopy: a read-only code reads the team copy with one GET; no PUT, no DELETE, nothing stored, the own team untouched', async () => {
+  const server = fakeServer();
+  const a = await device(load({ storage: { 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] }, 'sc-damage-control-de': { rows: [{ date: '2026-10-20', units: 2 }] }, 'sc-team-state': { deviceName: 'Phone of Ana' } } }));
+  assert.equal((await run(a, server)).status, 'synced');
+  // The reader is in a team of its own: its code, state and work must come out of this exactly as they went in.
+  const own = { 'sc-team': { code: NEW_CODE }, 'sc-team-state': { deviceId: 'own12345', rev: 7, lastSync: '2026-10-23T08:00:00.000Z' }, 'sc-actions': { rows: [{ id: 'mine', title: 'My action' }] } };
+  const w = load({ storage: own });
+  const before = Object.fromEntries(Object.keys(w.localStorage).map((key) => [key, w.localStorage.getItem(key)]));
+  const asked = [];
+  const watched = async (url, init = {}) => { asked.push(init.method || 'GET'); return server.fetch(url, init); };
+  const code = await viewerOf(w);
+  const copy = plain(await w.TeamSync.readTeamCopy(code, { endpoint: ENDPOINT, fetch: watched }));
+  assert.equal(copy.status, 'ok');
+  assert.equal(copy.rev, 1);
+  assert.deepEqual(Object.keys(copy.items).sort(), ['sc-actions', 'sc-damage-control-de']);
+  assert.deepEqual(JSON.parse(copy.items['sc-actions']).rows[0].title, 'Fix dock door');
+  assert.equal(copy.devices, undefined, 'the team\'s device names stay out');
+  assert.ok(!JSON.stringify(copy).includes('Phone of Ana'));
+  assert.deepEqual(asked, ['GET']);
+  const after = Object.fromEntries(Object.keys(w.localStorage).map((key) => [key, w.localStorage.getItem(key)]));
+  assert.deepEqual(after, before, 'not one key written, sc-team and sc-team-state included');
+  // A pasted code with a line break reads the same; the copy is never changed on the server.
+  assert.equal((await w.TeamSync.readTeamCopy(`${code.slice(0, 50)}\n${code.slice(50)}`, { endpoint: ENDPOINT, fetch: watched })).status, 'ok');
+  assert.equal(server.spaces.get(a.keys.spaceId).rev, 1);
+  assert.ok(asked.every((method) => method === 'GET'));
+  assert.equal(server.log.filter((entry) => entry.method === 'PUT').length, 1, 'only the member\'s own upload');
+  assert.equal(server.log.filter((entry) => entry.method === 'DELETE').length, 0);
+});
+
+test('readTeamCopy: a six-word team code, a damaged or later code are refused before any request; gone, offline and a wrong key say so', async () => {
+  const server = fakeServer();
+  const w = load();
+  const asked = [];
+  const watched = async (url, init = {}) => { asked.push(init.method || 'GET'); return server.fetch(url, init); };
+  const ctx = { endpoint: ENDPOINT, fetch: watched };
+  assert.equal((await w.TeamSync.readTeamCopy(CODE, ctx)).status, 'team-code');
+  assert.equal((await w.TeamSync.readTeamCopy('ACID acorn acre acts afar affix', ctx)).status, 'team-code');
+  const code = await viewerOf(w);
+  assert.equal((await w.TeamSync.readTeamCopy(code.slice(0, 70), ctx)).status, 'damaged');
+  assert.equal((await w.TeamSync.readTeamCopy(`scr2.${code.slice(5)}`, ctx)).status, 'version');
+  assert.equal((await w.TeamSync.readTeamCopy('hello', ctx)).status, 'damaged');
+  assert.equal((await w.TeamSync.readTeamCopy(code, { fetch: watched, endpoint: '' })).status, 'off');
+  assert.deepEqual(asked, [], 'nothing asked of the server');
+  assert.equal((await w.TeamSync.readTeamCopy(code, ctx)).status, 'gone');
+  assert.equal((await w.TeamSync.readTeamCopy(code, { endpoint: ENDPOINT, fetch: async () => { throw new TypeError('offline'); } })).status, 'offline');
+  // A copy sealed with another key, and a copy that is not a sealed box.
+  const member = await w.TeamSyncMath.deriveKeys(CODE, 1000);
+  const other = await w.TeamSyncMath.deriveKeys(NEW_CODE, 1000);
+  server.spaces.set(member.spaceId, { rev: 1, updated: 1, token: member.writeToken, ...(await w.TeamSyncMath.seal({ format: 'stiven-catalyst-team', version: 1, items: {} }, other.key)) });
+  assert.equal((await w.TeamSync.readTeamCopy(code, ctx)).status, 'unreadable');
+  server.spaces.set(member.spaceId, { rev: 1, updated: 1, token: member.writeToken, iv: 'x', data: 'not base64 ciphertext' });
+  assert.equal((await w.TeamSync.readTeamCopy(code, ctx)).status, 'unreadable');
+  assert.ok(asked.every((method) => method === 'GET'));
+});
+
+test('Site Compare keeps other teams\' read-only codes: its key is never offered, never taken from a team copy', async () => {
+  const w = load();
+  for (const key of ['sc-site-compare', 'sc-site-compare-de', 'sc-site-compare-sq']) assert.ok(!w.TeamSyncMath.offerable(key), key);
+  assert.ok(w.TeamSyncMath.offerable('sc-signals'), 'a tool next to it is still offered');
+  // In a saved work file it stays (it is the visitor's own work), and a team copy that carries it is not taken.
+  assert.ok(w.WorkBackup.isWork('sc-site-compare'));
+  const payload = w.TeamSyncMath.readPayload({ format: 'stiven-catalyst-team', version: 1, items: { 'sc-site-compare': '{"sites":[]}', 'sc-pareto': '{}' } });
+  assert.deepEqual(Object.keys(payload.items), ['sc-pareto']);
 });

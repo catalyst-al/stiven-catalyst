@@ -1,0 +1,22 @@
+{
+  "storageKey": "sc-print-pack",
+  "docs": [
+    { "key": "actions", "name": "Open actions by owner", "about": "Every open action of the Action Tracker, one block per owner: overdue first, then by due date, with a box to tick and room for a note.", "tool": "Action Tracker", "slug": "action-tracker", "hotel": false },
+    { "key": "maintenance", "name": "Maintenance work list of the week", "about": "The tasks overdue and due by Sunday, by area, with their checklists, their minutes and a line to sign.", "tool": "Maintenance Planner", "slug": "maintenance-planner", "hotel": false },
+    { "key": "fives", "name": "5S audits of the week", "about": "The audits the plan sets for the next seven days: who walks which area on which day, the overdue ones first.", "tool": "5S Audit", "slug": "five-s-audit", "hotel": false },
+    { "key": "lsw", "name": "Leader Standard Work cards", "about": "One card per leader: the routine of the day with a box for each working day, then the weekly and monthly checks.", "tool": "Leader Standard Work", "slug": "leader-standard-work", "hotel": false },
+    { "key": "safety", "name": "Safety Cross of the month", "about": "The month on the cross: the days so far marked, the days ahead blank to mark by hand, and the month's events.", "tool": "Safety Cross", "slug": "safety-cross", "hotel": false },
+    { "key": "board", "name": "Daily Board of the month", "about": "Safety, Quality, Delivery, Cost and People day by day as the board worked them out, the days ahead left to fill at the huddle.", "tool": "Daily Board", "slug": "daily-board", "hotel": false },
+    { "key": "rooms", "name": "Room Status attendant sheets", "about": "One sheet per room attendant: the rooms in the order to clean them, with time in, time out and remarks.", "tool": "Room Status", "slug": "room-status", "hotel": true },
+    { "key": "housekeeping", "name": "Housekeeping section sheets", "about": "One sheet per section of the day's plan, balanced by minutes: floor, room, clean, flags and planned minutes.", "tool": "Housekeeping Planner", "slug": "housekeeping-planner", "hotel": true }
+  ],
+  "tips": [
+    ["Print it before the Monday huddle.", "The week and the month of the sheets follow the date on the pack: set the coming Monday to print it on Friday."],
+    ["Tick what goes on your board.", "A document is ready once its tool holds data in this browser; the line under it says what is in it, or which tool to fill in first."],
+    ["The paper is the plan, the tool is the record.", "Write on the sheets during the week, then enter what was done in the tool, so the next pack starts from it."],
+    ["The hotel sheets are for a hotel.", "Room Status and the Housekeeping Planner print one page per attendant or section; leave them out on a warehouse board."]
+  ],
+  "example": {
+    "note": "This is an example pack made from the tools' own examples, because the tools in this browser hold nothing of your own yet. Fill in a tool and its sheets are yours."
+  }
+}

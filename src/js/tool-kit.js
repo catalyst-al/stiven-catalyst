@@ -120,17 +120,26 @@ window.ToolKit = (() => {
 
   // Parsing, for forms and for rows pasted from a spreadsheet.
   const parseNumber = (value) => {
-    let text = String(value ?? "").replace(/[\s€]/g, "");
+    // An export may write the currency next to the amount: "1.234,50 EUR", "CHF 80".
+    let text = String(value ?? "").replace(/[\s€]/g, "").replace(/^(?:EUR|CHF|USD|GBP|ALL|Lek)(?=[\d+.,-])/i, "")
+      .replace(/([\d.,-])(?:EUR|CHF|USD|GBP|ALL|Lek)$/i, "$1");
     if (!text) return NaN;
+    // SAP lists put the minus after the number: 12,5- is -12.5.
+    let sign = "";
+    if (/^[+-]/.test(text)) [sign, text] = [text[0], text.slice(1)];
+    else if (/^[\d.,]+-$/.test(text)) [sign, text] = ["-", text.slice(0, -1)];
     const comma = text.lastIndexOf(",");
     const dot = text.lastIndexOf(".");
+    // A separator repeated is grouping in every locale: 1.234.567 and 1,234,567.
+    if (comma >= 0 && dot < 0 && /^\d{1,3}(,\d{3}){2,}$/.test(text)) text = text.replace(/,/g, "");
+    else if (dot >= 0 && comma < 0 && /^\d{1,3}(\.\d{3}){2,}$/.test(text)) text = text.replace(/\./g, "");
     // With one separator, use the page's locale to distinguish 1,234 from 1,234 decimals.
-    if (comma >= 0 && dot < 0 && !DECIMAL_COMMA && /^\d{1,3}(,\d{3})+$/.test(text) && !text.startsWith("0,")) text = text.replace(/,/g, "");
+    else if (comma >= 0 && dot < 0 && !DECIMAL_COMMA && /^\d{1,3}(,\d{3})+$/.test(text) && !text.startsWith("0,")) text = text.replace(/,/g, "");
     else if (dot >= 0 && comma < 0 && DECIMAL_COMMA && /^\d{1,3}(\.\d{3})+$/.test(text) && !text.startsWith("0.")) text = text.replace(/\./g, "");
     // When both appear, the later separator is decimal: 1.234,50 and 1,234.50.
     else text = comma > dot ? text.replace(/\./g, "").replace(",", ".") : text.replace(/,/g, "");
-    if (!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(text)) return NaN;
-    const number = Number(text);
+    if (!/^(?:\d+\.?\d*|\.\d+)$/.test(text)) return NaN;
+    const number = Number(sign + text);
     return Number.isFinite(number) ? number : NaN;
   };
 
@@ -146,11 +155,22 @@ window.ToolKit = (() => {
     const text = String(value ?? "").trim();
     let match = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:$|[T ])/);
     if (match) return iso(match[1], match[2], match[3]);
-    match = text.match(/^(\d{1,2})[./](\d{1,2})[./](\d{2,4})$/);
+    // Day first, as European exports write it, also with a time after it: 24.10.2026 08:15, 24/10/2026 08:15:00.
+    match = text.match(/^(\d{1,2})[./](\d{1,2})[./](\d{2,4})(?:$|,?\s+\d{1,2}:\d{2}(?::\d{2})?\s*(?:Uhr|h)?$)/i);
     if (match) return iso(match[3].length === 2 ? `20${match[3]}` : match[3], match[2], match[1]);
     // Excel sometimes pastes dates as serial numbers.
     if (/^\d{5}(?:[.,]\d+)?$/.test(text)) return new Date(Date.UTC(1899, 11, 30) + Math.floor(Number(text.replace(",", "."))) * 864e5).toISOString().slice(0, 10);
     return "";
+  };
+
+  // A cell that holds a date and a time ("24.10.2026 08:15", "2026-10-24T08:15:00"): both parts, the time as HH:MM
+  // or "" when there is none.
+  const parseDateTime = (value) => {
+    const text = String(value ?? "").trim();
+    const date = parseDate(text);
+    const match = date ? text.match(/[T\s,](\d{1,2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?\s*(?:Uhr|h)?$/i) : null;
+    const time = match && Number(match[1]) < 24 && Number(match[2]) < 60 ? `${match[1].padStart(2, "0")}:${match[2]}` : "";
+    return { date, time };
   };
 
   // Parse pasted TSV or CSV, including quoted separators, doubled quotes and line breaks.
@@ -1345,7 +1365,7 @@ window.ToolKit = (() => {
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
-    parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
+    parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };

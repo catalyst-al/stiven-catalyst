@@ -79,6 +79,8 @@
 }</script>
 <script src="{{ '/js/storage-guard.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>
+{#- Reminders of due actions, on this device only, once switched on in the Action Tracker. #}
+<script src="{{ '/js/reminders.js' | assetUrl }}" defer></script>
 {%- if site.sync.endpoint %}
 <script src="{{ '/js/team-sync.js' | assetUrl }}" defer></script>
 {%- endif %}

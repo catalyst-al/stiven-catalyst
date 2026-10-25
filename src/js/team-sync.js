@@ -12,7 +12,14 @@
 //
 // A sync: GET → decrypt → merge (TeamSyncMath.merge) → a restore point, then only the changed keys are written → PUT
 // with the revision of the GET. 409 (another device saved first): once more from the GET. 429: wait 2 s, once more.
-// It runs on page load, after "Sync now", and when the page has been idle for 30 s after a change.
+// It runs on page load, after "Sync now", and when the page has been idle for 30 s after a change. A device that
+// found the team's copy gone (deleted, or the team changed its code) no longer syncs by itself.
+//
+// A read-only code ("scr1." + base64url, see viewerCode) carries the space id and the AES key, not the write token:
+// a device that joined with one only reads (pullOnce: GET → decrypt → the team's version of the ticked tools, after a
+// restore point) and never sends a PUT or a DELETE; the server would refuse them anyway without the token. Its key
+// is imported for decryption only. "Change the team code" (rotate) moves the team's whole copy to the space of a new
+// code, and only once that upload has gone through deletes the old space with the old token.
 (() => {
   const FORMAT = "stiven-catalyst-team";
   const VERSION = 1;
@@ -142,6 +149,20 @@
     for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
     return bytes;
   };
+  // RFC 4648 §5: the URL- and file-safe alphabet, without padding.
+  const toBase64Url = (bytes) => toBase64(bytes).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const fromBase64Url = (text) => {
+    if (!/^[A-Za-z0-9_-]*$/.test(text) || text.length % 4 === 1) throw new Error("base64url");
+    const plain = text.replace(/-/g, "+").replace(/_/g, "/");
+    return fromBase64(plain + "=".repeat((4 - (plain.length % 4)) % 4));
+  };
+  const fromHex = (text) => Uint8Array.from(String(text).match(/[0-9a-f]{2}/g) || [], (pair) => parseInt(pair, 16));
+  const concat = (...parts) => {
+    const out = new Uint8Array(parts.reduce((sum, part) => sum + part.length, 0));
+    let at = 0;
+    parts.forEach((part) => { out.set(part, at); at += part.length; });
+    return out;
+  };
   const through = async (bytes, stream) => {
     const writer = stream.writable.getWriter();
     const written = writer.write(bytes).then(() => writer.close());
@@ -192,11 +213,57 @@
     return JSON.parse(new TextDecoder().decode(json));
   };
 
+  // ---- Read-only codes ----
+  // What a device needs to read the team's copy, and nothing that lets it write:
+  //   "scr1." + base64url( space id (32 bytes) ‖ AES key (32 bytes) ‖ check (4 bytes) )      96 characters
+  // The key is the 256 bits PBKDF2 gives the team code (deriveBits; deriveKey to AES-256 takes the very same bits, so
+  // it opens what the members seal). The check is the first 4 bytes of SHA-256("scr1." ‖ space id ‖ key): a copy cut
+  // short or mistyped is told apart from a code of another team. The six words and the write token are not in it:
+  // the token is SHA-256("write:" + code), which cannot be run backwards, and PBKDF2 cannot either. "1" is the
+  // version of the format; a later one gets a new number.
+  const VIEW_PREFIX = "scr";
+  const VIEW_VERSION = 1;
+  const VIEW_BYTES = 68;
+  const HEX64 = /^[0-9a-f]{64}$/;
+  const looksViewer = (text) => /^\s*scr\d+\./i.test(String(text ?? ""));
+  const viewerCheck = async (body) => new Uint8Array(await subtle().digest("SHA-256", concat(utf8(`${VIEW_PREFIX}${VIEW_VERSION}.`), body))).subarray(0, 4);
+  const viewerCode = async (text, iterations = ITERATIONS) => {
+    const code = normalise(text);
+    const spaceId = await sha256(`space:${code}`);
+    const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveBits"]);
+    const key = new Uint8Array(await subtle().deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, 256));
+    const body = concat(fromHex(spaceId), key);
+    return `${VIEW_PREFIX}${VIEW_VERSION}.${toBase64Url(concat(body, await viewerCheck(body)))}`;
+  };
+  // { ok: true, text, spaceId, key (32 bytes) }, or { ok: false, reason: "damaged" | "version" }. Spaces and line
+  // breaks a chat app put in are ignored; the letters keep their case (base64url is case-sensitive).
+  const parseViewer = async (input) => {
+    const text = String(input ?? "").replace(/\s+/g, "");
+    const match = /^scr(\d+)\.([A-Za-z0-9_-]+)$/i.exec(text);
+    if (!match) return { ok: false, reason: "damaged" };
+    if (Number(match[1]) !== VIEW_VERSION) return { ok: false, reason: "version" };
+    let bytes;
+    try { bytes = fromBase64Url(match[2]); } catch { return { ok: false, reason: "damaged" }; }
+    if (bytes.length !== VIEW_BYTES) return { ok: false, reason: "damaged" };
+    const body = bytes.slice(0, 64);
+    const check = await viewerCheck(body);
+    if (check.some((byte, i) => byte !== bytes[64 + i])) return { ok: false, reason: "damaged" };
+    return { ok: true, text: `${VIEW_PREFIX}${VIEW_VERSION}.${match[2]}`, spaceId: hex(body.slice(0, 32)), key: body.slice(32) };
+  };
+  // A viewer's keys: the space, a key that can only decrypt, and no write token.
+  const viewerKeys = async (input) => {
+    const parsed = await parseViewer(input);
+    if (!parsed.ok) return null;
+    const key = await subtle().importKey("raw", parsed.key, { name: "AES-GCM" }, false, ["decrypt"]);
+    return { viewer: true, code: parsed.text, spaceId: parsed.spaceId, writeToken: null, key };
+  };
+
   // ---- What may be shared ----
   const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-print-guide-hidden", TEAM_KEY, STATE_KEY].includes(key));
   const toolSlug = (key) => (window.WorkBackup ? window.WorkBackup.toolSlug(key) : String(key).replace(/^sc-/, "").replace(/-(check|calc|ui)$/, "").replace(/-(de|sq)$/, ""));
-  // Personal, never offered: the career tools, the reader's own shelf, reading and cards, coaching.
-  const PERSONAL = /^sc-(cv-builder|ats-cv|cover-letter|shelf|reading|checklists|coaching)(?![a-z])/;
+  // Personal, never offered: the career tools, the reader's own shelf, reading and cards, coaching, and Site Compare,
+  // which holds other teams' read-only codes (secrets of those teams, not work of this one).
+  const PERSONAL = /^sc-(cv-builder|ats-cv|cover-letter|shelf|reading|checklists|coaching|site-compare)(?![a-z])/;
   // Settings of the page, the reader and this module, not work of a tool.
   const NOT_TOOL = /^sc-(team|book-|audio-|listen-|import-maps|persist-|restore|theme|print-guide)|-ui$/;
   const offerable = (key) => isWork(key) && !PERSONAL.test(key) && !NOT_TOOL.test(key);
@@ -632,11 +699,17 @@
   const readState = (storage) => readJson(storage, STATE_KEY) || {};
   const newDeviceId = () => hex(globalThis.crypto.getRandomValues(new Uint8Array(8)));
 
+  const spaceUrl = (endpoint, spaceId) => `${String(endpoint).replace(/\/+$/, "")}/v1/spaces/${spaceId}`;
+  const answer = async (response) => { try { return await response.json(); } catch { return null; } };
+  const sealedBox = (box) => Boolean(box && typeof box.data === "string" && typeof box.iv === "string" && Number.isInteger(box.rev));
+
   // ctx: { endpoint, fetch, storage, keys (deriveKeys), selected(key), beforeWrite(keys), create (a 404 may start the
   // team's copy), now(), wait(ms) }. Returns { status, changed, rev, size, devices, code? }; status is "synced",
   // "offline", "gone" (no copy on the server), "unreadable", "refused", "too-large", "busy", "conflict", "full" or "error".
+  // Keys without a write token (a read-only code) only ever read: pullOnce.
   const syncOnce = async (ctx) => {
     const { storage, keys } = ctx;
+    if (!keys.writeToken) return pullOnce(ctx);
     const now = ctx.now || (() => new Date());
     const wait = ctx.wait || ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
     const url = `${String(ctx.endpoint).replace(/\/+$/, "")}/v1/spaces/${keys.spaceId}`;
@@ -707,21 +780,154 @@
     }
     return { status: "conflict" };
   };
+  // A read-only device: GET → decrypt → for every ticked tool the team's copy has, the team's version, written after a
+  // restore point (beforeWrite) when it differs from this device's. Nothing goes up: no PUT, no DELETE, not even to
+  // say the device was seen, so a viewer is never on the team's list of devices.
+  const pullOnce = async (ctx) => {
+    const { storage, keys } = ctx;
+    const now = ctx.now || (() => new Date());
+    let got = null;
+    try { got = await ctx.fetch(spaceUrl(ctx.endpoint, keys.spaceId), { method: "GET", cache: "no-store" }); } catch { got = null; }
+    if (!got) return { status: "offline" };
+    if (got.status === 404) return { status: "gone" };
+    if (!got.ok) return { status: got.status === 403 || got.status === 401 ? "refused" : "error", code: got.status };
+    const box = await answer(got);
+    if (!sealedBox(box)) return { status: "unreadable" };
+    let remote = null;
+    try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
+    if (!remote) return { status: "unreadable" };
+    const shared = (key) => offerable(key) && ctx.selected(key);
+    const team = Object.fromEntries(Object.entries(remote.items).filter(([key]) => shared(key)));
+    const changed = Object.keys(team).filter((key) => storage.getItem(key) !== team[key]);
+    if (changed.length) {
+      try { await ctx.beforeWrite?.(changed); } catch { /* written as before */ }
+      if (!replaceItems(storage, pick(team, changed))) return { status: "full" };
+    }
+    // What the device now holds of the team's copy: a later change here is measured against it (the warning that
+    // the next sync will replace it).
+    writeJson(storage, STATE_KEY, { ...readState(storage), viewer: true, synced: baseOf(team), teamKeys: Object.keys(remote.items), rev: box.rev, size: box.data.length, devices: remote.devices, lastSync: now().toISOString(), gone: false });
+    return { status: "synced", changed, rev: box.rev, size: box.data.length, devices: remote.devices, uploaded: false };
+  };
+  // A look at another team's copy for a page that reads it without joining (site-compare.js): a read-only code only,
+  // one GET, decrypt, and the payload's tools back to the caller. It sends no PUT and no DELETE, writes nothing to
+  // storage, makes no restore point and leaves this browser's own team (sc-team, sc-team-state) alone. A six-word
+  // team code is refused before anything is derived from it: whoever compares must not hold the right to write.
+  // Returns { status: "ok", sent, items, rev, updated }, or { status } with "team-code", "damaged", "version",
+  // "no-crypto", "off" (no server), "offline", "gone", "refused", "unreadable" or "error" (with code).
+  const readTeamCopy = async (input, ctx = {}) => {
+    if (!canEncrypt()) return { status: "no-crypto" };
+    if (!looksViewer(input)) return { status: parseCode(input).ok ? "team-code" : "damaged" };
+    const parsed = await parseViewer(input);
+    if (!parsed.ok) return { status: parsed.reason };
+    const endpoint = ctx.endpoint ?? document.querySelector("[data-team-sync]")?.dataset.endpoint ?? "";
+    if (!endpoint) return { status: "off" };
+    const keys = await viewerKeys(parsed.text);
+    const get = ctx.fetch || ((...args) => window.fetch(...args));
+    let got = null;
+    try { got = await get(spaceUrl(endpoint, keys.spaceId), { method: "GET", cache: "no-store" }); } catch { got = null; }
+    if (!got) return { status: "offline" };
+    if (got.status === 404) return { status: "gone" };
+    if (!got.ok) return { status: got.status === 403 || got.status === 401 ? "refused" : "error", code: got.status };
+    const box = await answer(got);
+    if (!sealedBox(box)) return { status: "unreadable" };
+    let remote = null;
+    try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
+    if (!remote) return { status: "unreadable" };
+    // The team's device names stay out: the caller needs the work, not who carries it.
+    return { status: "ok", sent: remote.sent, items: remote.items, rev: box.rev, updated: Number.isFinite(box.updated) ? box.updated : null };
+  };
   const deleteCopy = async ({ endpoint, fetch, keys }) => {
+    if (!keys?.writeToken) return "refused";
     try {
-      const response = await fetch(`${String(endpoint).replace(/\/+$/, "")}/v1/spaces/${keys.spaceId}`, { method: "DELETE", headers: { Authorization: `Bearer ${keys.writeToken}` } });
+      const response = await fetch(spaceUrl(endpoint, keys.spaceId), { method: "DELETE", headers: { Authorization: `Bearer ${keys.writeToken}` } });
       return response.status === 204 || response.status === 404 ? "deleted" : response.status === 403 || response.status === 401 ? "refused" : "error";
     } catch { return "offline"; }
   };
 
+  // Old spaces still to delete after a change of code, kept with the team code in sc-team (never in a saved file).
+  const retireList = (storage) => {
+    const saved = readJson(storage, TEAM_KEY);
+    return (Array.isArray(saved?.retire) ? saved.retire : []).filter((item) => item && HEX64.test(item.spaceId) && HEX64.test(item.writeToken));
+  };
+  // Tries to delete each; "deleted" when none is left, else the reason of the last that failed.
+  const retireOld = async ({ endpoint, fetch, storage }) => {
+    const list = retireList(storage);
+    if (!list.length) return "deleted";
+    let result = "deleted";
+    const left = [];
+    for (const item of list) {
+      const outcome = await deleteCopy({ endpoint, fetch, keys: item });
+      if (outcome !== "deleted") { left.push(item); result = outcome; }
+    }
+    const saved = readJson(storage, TEAM_KEY);
+    if (saved) {
+      if (left.length) saved.retire = left;
+      else delete saved.retire;
+      writeJson(storage, TEAM_KEY, saved);
+    }
+    return result;
+  };
+
+  // Change the team code, for when someone leaves. In this order, each step only once the one before went through:
+  // 1. a sync with the old team (pull, merge, push), so the copy holds this device's work and everyone's latest;
+  // 2. the team's whole copy read back, the tools other devices share included;
+  // 3. that copy sealed with the keys of a new code and uploaded as the first version of the new space;
+  // 4. the new code kept on this device; 5. the old space deleted with the old token.
+  // Until 3 has gone through nothing changes here and the device keeps the old team. When 5 fails the old space is
+  // kept in "retire" and deleted at a later sync. ctx as syncOnce, plus newCode() and derive(code) for the tests.
+  // Returns { status: "rotated", code, keys, rev, deleted, changed } or { status, code?, stage: "sync" | "read" |
+  // "upload", changed? }.
+  const rotate = async (ctx) => {
+    const { storage, keys: old } = ctx;
+    const now = ctx.now || (() => new Date());
+    if (!old.writeToken) return { status: "refused", stage: "sync" };
+    const first = await syncOnce({ ...ctx, create: false });
+    if (first.status !== "synced") return { ...first, stage: "sync" };
+    const fail = (outcome) => ({ ...outcome, changed: first.changed || [] });
+    let got = null;
+    try { got = await ctx.fetch(spaceUrl(ctx.endpoint, old.spaceId), { method: "GET", cache: "no-store" }); } catch { got = null; }
+    if (!got) return fail({ status: "offline", stage: "read" });
+    if (!got.ok) return fail({ status: got.status === 404 ? "gone" : "error", code: got.status, stage: "read" });
+    const box = await answer(got);
+    let remote = null;
+    try { remote = sealedBox(box) ? readPayload(await unseal(box, old.key)) : null; } catch { remote = null; }
+    if (!remote) return fail({ status: "unreadable", stage: "read" });
+    const code = (ctx.newCode || newCode)();
+    const next = await (ctx.derive || deriveKeys)(code);
+    const state = readState(storage);
+    const device = { id: state.deviceId || newDeviceId(), name: state.deviceName || "" };
+    // Only this device: the others are on the list again once they have joined with the new code.
+    const devices = withDevice([], device, now());
+    const sealed = await seal({ format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: remote.items }, next.key);
+    if (sealed.data.length > MAX_BYTES) return fail({ status: "too-large", stage: "upload" });
+    let put = null;
+    try {
+      put = await ctx.fetch(spaceUrl(ctx.endpoint, next.spaceId), { method: "PUT", cache: "no-store", headers: { Authorization: `Bearer ${next.writeToken}`, "Content-Type": "application/json" }, body: JSON.stringify({ rev: 0, ...sealed }) });
+    } catch { put = null; }
+    if (!put || !put.ok) {
+      // The answer was lost on the way: the new space may exist all the same. Nobody else has its code; it goes.
+      if (!put) await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: next });
+      const status = !put ? "offline" : put.status === 413 ? "too-large" : put.status === 429 ? "busy" : put.status === 409 ? "conflict" : put.status === 403 || put.status === 401 ? "refused" : "error";
+      return fail({ status, code: put?.status, stage: "upload" });
+    }
+    const saved = (await answer(put)) || {};
+    const rev = Number.isInteger(saved.rev) ? saved.rev : 1;
+    // From here this device is in the new team, whatever happens to the old copy.
+    writeJson(storage, TEAM_KEY, { code, since: now().toISOString(), retire: [...retireList(storage), { spaceId: old.spaceId, writeToken: old.writeToken }].slice(-5) });
+    writeJson(storage, STATE_KEY, { ...readState(storage), deviceId: device.id, rev, size: sealed.data.length, devices, teamKeys: Object.keys(remote.items), lastSync: now().toISOString(), gone: false });
+    const deleted = await retireOld({ endpoint: ctx.endpoint, fetch: ctx.fetch, storage });
+    return { status: "rotated", code, keys: next, rev, deleted, changed: first.changed || [] };
+  };
+
   window.TeamSyncMath = {
-    FORMAT, VERSION, SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON,
-    newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64,
+    FORMAT, VERSION, SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION,
+    newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64, toBase64Url, fromBase64Url,
+    looksViewer, viewerCode, parseViewer, viewerKeys,
     offerable, isOn, readPayload, withDevice, deviceFresh,
     hash, newer, mergeRows, mergeValue, merge, baseOf, changedSince, sameItems,
     qrEncode, qrSvg,
   };
-  window.TeamSync = { syncOnce, deleteCopy, TEAM_KEY, STATE_KEY };
+  window.TeamSync = { syncOnce, pullOnce, readTeamCopy, deleteCopy, rotate, retireOld, retireList, TEAM_KEY, STATE_KEY };
 
   // ---- The section in the box ----
   const root = document.querySelector("[data-team-sync]");
@@ -756,15 +962,18 @@
     return;
   }
 
+  // { code, since, retire? } for a member, { viewer, since } for a read-only device.
   const team = () => {
     const saved = readJson(storage, TEAM_KEY);
-    return saved && parseCode(saved.code).ok ? saved : null;
+    return saved && (parseCode(saved.code).ok || (typeof saved.viewer === "string" && looksViewer(saved.viewer))) ? saved : null;
   };
+  const isViewer = () => Boolean(team()?.viewer);
   let keysFor = null;
   const keys = async () => {
     const current = team();
     if (!current) return null;
-    if (!keysFor || keysFor.code !== normalise(current.code)) keysFor = await deriveKeys(current.code);
+    const id = current.viewer || normalise(current.code);
+    if (!keysFor || keysFor.code !== id) keysFor = current.viewer ? await viewerKeys(current.viewer) : await deriveKeys(current.code);
     return keysFor;
   };
   const state = () => readState(storage);
@@ -810,25 +1019,52 @@
       return `${d.name || fill(text.unnamed, { id: d.id.slice(0, 4) })} (${when(d.seen)})`;
     }).join(", ");
   };
+  // A read-only device: the shared tools changed here since the last sync, which the next one will replace.
+  const viewerPending = () => {
+    const s = state();
+    const synced = s.synced || {};
+    return (s.teamKeys || []).filter((key) => offerable(key) && selected(key) && synced[key]).filter((key) => {
+      const value = storage.getItem(key);
+      return value === null || hash(value) !== synced[key].h;
+    });
+  };
+  const showPending = () => {
+    const node = $("[data-tm-pending]");
+    const changed = isViewer() && state().lastSync ? viewerPending() : [];
+    node.textContent = changed.length ? fill(text.viewerPending, { tools: [...new Set(changed.map((key) => nameOf(toolSlug(key))))].sort((a, b) => a.localeCompare(b)).join(", ") }) : "";
+    node.hidden = !changed.length;
+  };
   let lastError = "";
   const showStatus = () => {
     const s = state();
+    const viewer = isViewer();
     const count = cleanDevices(s.devices).length;
     const line = s.lastSync
-      ? fill(text.synced, { when: when(s.lastSync), rev: s.rev ?? 0, size: size(s.size || 0), devices: count === 1 ? text.oneDevice : fill(text.devicesN, { n: count }) })
+      ? fill(viewer ? text.viewerSynced : text.synced, { when: when(s.lastSync), rev: s.rev ?? 0, size: size(s.size || 0), devices: count === 1 ? text.oneDevice : fill(text.devicesN, { n: count }) })
       : text.neverSynced;
-    $("[data-tm-status]").textContent = lastError ? `${lastError} ${s.lastSync ? fill(text.lastSynced, { when: when(s.lastSync) }) : ""}`.trim() : line;
-    $("[data-tm-status]").classList.toggle("is-error", Boolean(lastError));
+    const problem = lastError || (s.gone ? `${text.gone} ${viewer ? text.goneViewer : text.goneMember}` : "");
+    $("[data-tm-status]").textContent = problem ? `${problem} ${s.lastSync ? fill(text.lastSynced, { when: when(s.lastSync) }) : ""}`.trim() : line;
+    $("[data-tm-status]").classList.toggle("is-error", Boolean(problem));
     const devices = $("[data-tm-devices]");
     devices.textContent = count ? fill(text.devicesLine, { list: devicesText(s.devices) }) : "";
     devices.hidden = !count;
-    $("[data-tm-again]").hidden = !s.gone;
-    $("[data-tm-summary]").textContent = lastError ? text.onError : s.lastSync ? fill(text.onSynced, { when: when(s.lastSync) }) : text.on;
+    // A copy that is gone is not synced again by a click on "Sync now": the team may have moved to a new code, and
+    // whoever has the old one could have put a copy of their own there since.
+    $("[data-tm-again]").hidden = !s.gone || viewer;
+    $("[data-tm-sync]").hidden = Boolean(s.gone);
+    $("[data-tm-summary]").textContent = viewer
+      ? (problem ? text.readOnlyError : s.lastSync ? fill(text.readOnlySynced, { when: when(s.lastSync) }) : text.readOnly)
+      : (problem ? text.onError : s.lastSync ? fill(text.onSynced, { when: when(s.lastSync) }) : text.on);
+    showPending();
   };
   const showMode = () => {
     const on = Boolean(team());
+    const viewer = isViewer();
     $("[data-tm-off]").hidden = on;
     $("[data-tm-on]").hidden = !on;
+    root.querySelectorAll("[data-tm-member-only]").forEach((node) => { node.hidden = viewer; });
+    root.querySelectorAll("[data-tm-viewer-only]").forEach((node) => { node.hidden = !viewer; });
+    if (!on || viewer) $("[data-tm-view]").hidden = true;
     if (on) {
       showTools();
       showStatus();
@@ -839,8 +1075,12 @@
   };
 
   const ERRORS = { offline: "offline", gone: "gone", unreadable: "unreadable", refused: "refused", "too-large": "tooLarge", busy: "busy", conflict: "conflict", full: "full" };
+  const errorText = (result) => (result.status === "error" ? fill(text.failed, { code: result.code ?? "?" }) : text[ERRORS[result.status]] || fill(text.failed, { code: result.status }));
   let running = null;
   let again = false;
+  const restorePoint = () => (window.StorageGuard?.supported?.()
+    ? Promise.race([window.StorageGuard.makePoint("before-sync").catch(() => null), new Promise((resolve) => setTimeout(resolve, 2000))])
+    : null);
   const sync = async ({ create = false, quiet = false } = {}) => {
     if (running) { again = true; return running; }
     running = (async () => {
@@ -850,17 +1090,22 @@
       button.disabled = true;
       if (!quiet) $("[data-tm-status]").textContent = text.syncing;
       touched = false;
-      const result = await syncOnce({
-        endpoint, storage, keys: k, selected, create: create || !(state().rev > 0) && !state().gone,
-        fetch: (...args) => window.fetch(...args),
-        beforeWrite: () => (window.StorageGuard?.supported?.()
-          ? Promise.race([window.StorageGuard.makePoint("before-sync").catch(() => null), new Promise((resolve) => setTimeout(resolve, 2000))])
-          : null),
+      const viewer = Boolean(k.viewer);
+      const fetcher = (...args) => window.fetch(...args);
+      // A read-only device reads and nothing else, whatever the button.
+      const result = await (viewer ? pullOnce : syncOnce)({
+        endpoint, storage, keys: k, selected, create: !viewer && (create || !(state().rev > 0) && !state().gone),
+        fetch: fetcher, beforeWrite: restorePoint,
       }).catch(() => ({ status: "error", code: "?" }));
       button.disabled = false;
       if (result.status === "gone") setState({ gone: true });
-      lastError = result.status === "synced" ? "" : result.status === "error" ? fill(text.failed, { code: result.code ?? "?" }) : text[ERRORS[result.status]] || fill(text.failed, { code: result.status });
+      // A gone copy is said by the status line from the state, with what to do about it.
+      lastError = result.status === "synced" || result.status === "gone" ? "" : errorText(result);
       if (result.changed?.length) afterChange(result.changed);
+      // An old copy left over from a change of code: deleted now that the server answers.
+      if (!viewer && result.status === "synced" && retireList(storage).length) {
+        if ((await retireOld({ endpoint, fetch: fetcher, storage })) === "deleted") say(text.retired);
+      }
       showTools();
       showStatus();
       return result;
@@ -892,14 +1137,14 @@
   };
 
   // ---- Start, join, leave ----
-  const showCode = (code) => {
-    $("[data-tm-new]").hidden = false;
-    $("[data-tm-code]").textContent = code;
+  const showCode = (code, { block = "[data-tm-new]", textAt = "[data-tm-code]", qrAt = "[data-tm-qr]", label = text.qrLabel } = {}) => {
+    $(block).hidden = false;
+    $(textAt).textContent = code;
     const qr = qrEncode(code);
-    const holder = $("[data-tm-qr]");
+    const holder = $(qrAt);
     holder.replaceChildren();
     if (qr) {
-      holder.innerHTML = qrSvg(qr.matrix, text.qrLabel || "");
+      holder.innerHTML = qrSvg(qr.matrix, label || "");
     }
   };
   $("[data-tm-start]").addEventListener("click", async () => {
@@ -913,16 +1158,28 @@
   });
   const joinField = $("[data-tm-join-code]");
   $("[data-tm-join]").addEventListener("click", async () => {
-    const parsed = parseCode(joinField.value);
-    if (!parsed.ok) {
+    // The same field takes both kinds: a read-only code starts with "scr" and a version, a team code is six words.
+    const typed = joinField.value;
+    const viewer = looksViewer(typed);
+    const parsed = viewer ? null : parseCode(typed);
+    if (parsed && !parsed.ok) {
       say(parsed.unknown.length ? fill(text.unknownWords, { words: parsed.unknown.join(", ") }) : fill(text.badCode, { n: CODE_WORDS }));
       joinField.focus();
       return;
     }
     const button = $("[data-tm-join]");
+    let view = null;
+    if (viewer) {
+      view = await parseViewer(typed);
+      if (!view.ok) {
+        say(view.reason === "version" ? text.viewerVersion : text.viewerDamaged);
+        joinField.focus();
+        return;
+      }
+    }
     button.disabled = true;
     say(text.syncing);
-    const k = await deriveKeys(parsed.code);
+    const k = viewer ? await viewerKeys(view.text) : await deriveKeys(parsed.code);
     // Join only a team that exists: a mistyped code that happens to be six real words starts nothing.
     let exists = null;
     try {
@@ -932,20 +1189,74 @@
     button.disabled = false;
     if (exists === false) { say(text.noTeam); return; }
     if (exists === null) { say(text.offline); return; }
-    writeJson(storage, TEAM_KEY, { code: parsed.code, since: new Date().toISOString() });
-    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false });
+    writeJson(storage, TEAM_KEY, viewer ? { viewer: view.text, since: new Date().toISOString() } : { code: parsed.code, since: new Date().toISOString() });
+    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, viewer });
     keysFor = k;
     joinField.value = "";
     showMode();
     const result = await sync();
-    say(result?.status === "synced" ? text.joined : "");
+    say(result?.status === "synced" ? (viewer ? text.joinedViewer : text.joined) : "");
   });
   $("[data-tm-copy]").addEventListener("click", async () => {
     const code = $("[data-tm-code]").textContent;
     try { await navigator.clipboard.writeText(code); say(text.copied); } catch { say(code); }
   });
   $("[data-tm-sync]").addEventListener("click", () => sync());
-  $("[data-tm-again]").addEventListener("click", () => sync({ create: true }));
+  $("[data-tm-again]").addEventListener("click", () => { if (!isViewer()) sync({ create: true }); });
+
+  // ---- A read-only code, and a new team code ----
+  $("[data-tm-viewer-make]").addEventListener("click", async () => {
+    const current = team();
+    if (!current || current.viewer) return;
+    const button = $("[data-tm-viewer-make]");
+    button.disabled = true;
+    say(text.viewerMaking);
+    let code = null;
+    try { code = await viewerCode(current.code); } catch { code = null; }
+    button.disabled = false;
+    if (!code) { say(fill(text.failed, { code: "?" })); return; }
+    say("");
+    showCode(code, { block: "[data-tm-view]", textAt: "[data-tm-view-code]", qrAt: "[data-tm-view-qr]", label: text.viewerQrLabel });
+  });
+  $("[data-tm-view-copy]").addEventListener("click", async () => {
+    const code = $("[data-tm-view-code]").textContent;
+    try { await navigator.clipboard.writeText(code); say(text.copied); } catch { say(code); }
+  });
+  $("[data-tm-view-hide]").addEventListener("click", () => {
+    $("[data-tm-view]").hidden = true;
+    $("[data-tm-view-code]").textContent = "";
+    $("[data-tm-view-qr]").replaceChildren();
+  });
+  $("[data-tm-rotate]").addEventListener("click", async () => {
+    if (!team() || isViewer() || !window.confirm(text.rotateConfirm)) return;
+    // Never alongside a sync of the old team.
+    if (running) { try { await running; } catch { /* it said so */ } }
+    const k = await keys();
+    if (!k || !k.writeToken) return;
+    const buttons = ["[data-tm-rotate]", "[data-tm-sync]", "[data-tm-viewer-make]"].map((selector) => $(selector));
+    buttons.forEach((node) => { node.disabled = true; });
+    say(text.rotating);
+    running = rotate({ endpoint, storage, keys: k, selected, fetch: (...args) => window.fetch(...args), beforeWrite: restorePoint })
+      .catch(() => ({ status: "error", code: "?", stage: "sync" }));
+    let result;
+    try { result = await running; } finally { running = null; }
+    buttons.forEach((node) => { node.disabled = false; });
+    if (result.changed?.length) afterChange(result.changed);
+    if (result.status !== "rotated") {
+      if (result.status === "gone") setState({ gone: true });
+      lastError = "";
+      showStatus();
+      say(fill(text.rotateFailed, { reason: errorText(result) }));
+      return;
+    }
+    keysFor = result.keys;
+    lastError = "";
+    $("[data-tm-view]").hidden = true;
+    showMode();
+    showCode(result.code);
+    say(result.deleted === "deleted" ? text.rotated : `${text.rotated} ${text.retireFailed}`);
+    if (again) { again = false; sync({ quiet: true }); }
+  });
   $("[data-tm-reload-button]").addEventListener("click", () => window.location.reload());
   $("[data-tm-device]").addEventListener("change", (event) => {
     setState({ deviceName: event.target.value.trim().slice(0, 60) });
@@ -959,6 +1270,7 @@
     keysFor = null;
     lastError = "";
     $("[data-tm-new]").hidden = true;
+    $("[data-tm-view]").hidden = true;
     showMode();
   };
   $("[data-tm-leave]").addEventListener("click", () => {
@@ -967,9 +1279,9 @@
     say(text.left);
   });
   $("[data-tm-delete]").addEventListener("click", async () => {
-    if (!window.confirm(text.deleteConfirm)) return;
+    if (isViewer() || !window.confirm(text.deleteConfirm)) return;
     const k = await keys();
-    if (!k) return;
+    if (!k || !k.writeToken) return;
     const result = await deleteCopy({ endpoint, fetch: (...args) => window.fetch(...args), keys: k });
     if (result === "deleted") { forget(); say(text.deleted); return; }
     say(result === "offline" ? text.offline : result === "refused" ? text.refused : fill(text.failed, { code: "" }));
@@ -990,15 +1302,18 @@
     return changedSince(items, state().synced || {}).length > 0;
   };
   setInterval(() => {
-    if (!team() || !touched || running || Date.now() - lastActivity < IDLE_MS) return;
+    if (!team() || !touched || running) return;
+    // A read-only device sends nothing: it only says, soon after, what the next sync will replace.
+    if (isViewer()) { touched = false; showPending(); return; }
+    if (state().gone || Date.now() - lastActivity < IDLE_MS) return;
     if (pending()) sync({ quiet: true });
     else touched = false;
   }, 5000);
-  window.addEventListener("online", () => { if (team() && lastError) sync({ quiet: true }); });
+  window.addEventListener("online", () => { if (team() && lastError && !state().gone) sync({ quiet: true }); });
 
   window.FloorCapture?.initScan?.(root);
   showMode();
-  if (team()) {
+  if (team() && !state().gone) {
     // After the day's restore point (storage-guard.js), so that one holds the work as it was before the team's.
     const ready = window.StorageGuard?.ready || Promise.resolve();
     Promise.race([ready, new Promise((resolve) => setTimeout(resolve, 3000))]).then(() => sync({ quiet: true }));

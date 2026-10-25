@@ -1,0 +1,863 @@
+{
+  "storageKey": "sc-site-compare",
+  "periods": [
+    {
+      "key": "last7",
+      "label": "Last 7 days"
+    },
+    {
+      "key": "last30",
+      "label": "Last 30 days"
+    },
+    {
+      "key": "thisMonth",
+      "label": "This month"
+    },
+    {
+      "key": "lastMonth",
+      "label": "Last month"
+    }
+  ],
+  "groups": {
+    "quality": "Quality",
+    "delivery": "Delivery",
+    "equipment": "Equipment and maintenance",
+    "workplace": "Workplace",
+    "safety": "Safety",
+    "actions": "Actions and improvement",
+    "hotel": "Hotel"
+  },
+  "kpis": {
+    "damageRate": {
+      "label": "Damage rate",
+      "detail": "{units} damaged of {volume}"
+    },
+    "damageUnits": {
+      "label": "Damaged units"
+    },
+    "incompleteRate": {
+      "label": "Incomplete rate",
+      "detail": "{units} incomplete of {volume}"
+    },
+    "incompleteUnits": {
+      "label": "Incomplete orders"
+    },
+    "onTime": {
+      "label": "Routes on time",
+      "detail": "{late} late of {routes}"
+    },
+    "lateRoutes": {
+      "label": "Late routes"
+    },
+    "oee": {
+      "label": "OEE (all machines)",
+      "detail": "{entries} shifts · machines: {machines}"
+    },
+    "fiveS": {
+      "label": "5S average score",
+      "detail": "audits: {audits}"
+    },
+    "accidents": {
+      "label": "Accidents"
+    },
+    "firstAid": {
+      "label": "First aid cases"
+    },
+    "nearMisses": {
+      "label": "Near misses and unsafe acts"
+    },
+    "daysSince": {
+      "label": "Days since the last accident"
+    },
+    "openActions": {
+      "label": "Open actions"
+    },
+    "overdueActions": {
+      "label": "Overdue actions"
+    },
+    "kaizenDone": {
+      "label": "Kaizen ideas done"
+    },
+    "pm": {
+      "label": "PM compliance",
+      "detail": "{onTime} of {scheduled} on time"
+    },
+    "pmOverdue": {
+      "label": "Overdue maintenance tasks"
+    },
+    "firstPass": {
+      "label": "Rooms passed first time",
+      "detail": "{firstPass} of {first}"
+    },
+    "complaintsPer100": {
+      "label": "Complaints per 100 occupied room nights",
+      "detail": "{complaints} of {nights} room nights"
+    },
+    "complaints": {
+      "label": "Guest complaints"
+    }
+  },
+  "prompt": {
+    "title": "What the best site does differently",
+    "lead": "{best} leads on “{kpi}”: {bestValue}, against {worstValue} at {worst}.",
+    "ask": "Go and see before you compare people: walk {best}'s floor with the lead of {worst}, write down what they do differently in a Gemba Walk, and put the practice that travels on the Kaizen Board.",
+    "none": "The sites have no rate in common for this period yet. Update them, or choose a longer period."
+  },
+  "summary": {
+    "title": "Site comparison",
+    "ranking": "Ranking"
+  },
+  "tips": [
+    [
+      "Ask for the read-only code.",
+      "Each site makes it in Team Sync (box “All your work in one file” → “Create a read-only code”) and sends it to you. You read its shared tools; you do not join the team and cannot change anything."
+    ],
+    [
+      "Never a team code.",
+      "The six words let whoever holds them change a team's work. This page refuses them and does not keep them."
+    ],
+    [
+      "Update every Monday.",
+      "“Update all sites” reads each site's latest team copy and keeps only the figures. A site that changed its code has to send you its new read-only code."
+    ],
+    [
+      "Compare rates, then go and see.",
+      "Rates and averages are ranked; counts are not, because they grow with the size of a site. The best site on a rate is where to learn, not a verdict on the others."
+    ]
+  ],
+  "example": {
+    "sites": [
+      {
+        "name": "Leipzig",
+        "damage": {
+          "volume": [
+            4200,
+            4600,
+            4400,
+            4500,
+            4900,
+            2100,
+            0
+          ],
+          "units": [
+            8,
+            9,
+            7,
+            9,
+            11,
+            3,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            -1,
+            2,
+            0,
+            -2,
+            1
+          ],
+          "causes": [
+            "Dropped in loading",
+            "Crushed in the cage",
+            "Wet packaging"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            4200,
+            4600,
+            4400,
+            4500,
+            4900,
+            2100,
+            0
+          ],
+          "units": [
+            5,
+            6,
+            4,
+            5,
+            7,
+            2,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "causes": [
+            "Missing item",
+            "Wrong label"
+          ]
+        },
+        "delay": {
+          "routes": [
+            14,
+            14,
+            14,
+            14,
+            14,
+            8,
+            0
+          ],
+          "late": [
+            1,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "minutes": 24
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter 1",
+              "rate": 600,
+              "perf": [
+                0.88,
+                0.9,
+                0.86
+              ],
+              "scrap": 0.008,
+              "breakdown": [
+                10,
+                0,
+                20,
+                5
+              ]
+            },
+            {
+              "name": "Sorter 2",
+              "rate": 600,
+              "perf": [
+                0.84,
+                0.87,
+                0.85
+              ],
+              "scrap": 0.01,
+              "breakdown": [
+                15,
+                30,
+                0,
+                10
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 2,
+          "areas": [
+            "Inbound",
+            "Outbound"
+          ],
+          "totals": [
+            66,
+            68,
+            64,
+            70,
+            67,
+            69
+          ]
+        },
+        "safety": [
+          [
+            4,
+            "near-miss"
+          ],
+          [
+            11,
+            "unsafe-condition"
+          ],
+          [
+            19,
+            "first-aid"
+          ],
+          [
+            26,
+            "near-miss"
+          ],
+          [
+            40,
+            "positive"
+          ],
+          [
+            58,
+            "no-lost-time"
+          ]
+        ],
+        "actions": [
+          [
+            30,
+            10,
+            "done",
+            12
+          ],
+          [
+            21,
+            5,
+            "verified",
+            6
+          ],
+          [
+            14,
+            2,
+            "doing"
+          ],
+          [
+            9,
+            -4,
+            "open"
+          ],
+          [
+            6,
+            -10,
+            "open"
+          ],
+          [
+            40,
+            20,
+            "done",
+            18
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter 1",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  0,
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "Forklift 3",
+            "tasks": [
+              {
+                "every": 1,
+                "late": [
+                  0,
+                  0,
+                  0,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            5,
+            12,
+            18,
+            27,
+            33,
+            44
+          ],
+          "ideas": [
+            2,
+            8
+          ]
+        }
+      },
+      {
+        "name": "Kassel",
+        "damage": {
+          "volume": [
+            3100,
+            3300,
+            3200,
+            3400,
+            3600,
+            1500,
+            0
+          ],
+          "units": [
+            12,
+            13,
+            11,
+            12,
+            15,
+            5,
+            0
+          ],
+          "extra": [
+            1,
+            -1,
+            2,
+            0,
+            -2,
+            1,
+            0
+          ],
+          "causes": [
+            "Crushed in the cage",
+            "Dropped in loading",
+            "Torn wrap"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            3100,
+            3300,
+            3200,
+            3400,
+            3600,
+            1500,
+            0
+          ],
+          "units": [
+            3,
+            4,
+            3,
+            3,
+            4,
+            1,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "causes": [
+            "Missing item",
+            "Short pick"
+          ]
+        },
+        "delay": {
+          "routes": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            6,
+            0
+          ],
+          "late": [
+            2,
+            1,
+            2,
+            1,
+            3,
+            1,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "minutes": 31
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter A",
+              "rate": 540,
+              "perf": [
+                0.8,
+                0.83,
+                0.78
+              ],
+              "scrap": 0.012,
+              "breakdown": [
+                25,
+                10,
+                40,
+                0,
+                15
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 3,
+          "areas": [
+            "Dock",
+            "Sorting"
+          ],
+          "totals": [
+            55,
+            58,
+            52,
+            57,
+            60,
+            54
+          ]
+        },
+        "safety": [
+          [
+            3,
+            "near-miss"
+          ],
+          [
+            8,
+            "near-miss"
+          ],
+          [
+            15,
+            "unsafe-act"
+          ],
+          [
+            22,
+            "near-miss"
+          ],
+          [
+            29,
+            "unsafe-condition"
+          ],
+          [
+            33,
+            "positive"
+          ],
+          [
+            47,
+            "first-aid"
+          ],
+          [
+            120,
+            "no-lost-time"
+          ]
+        ],
+        "actions": [
+          [
+            35,
+            15,
+            "done",
+            14
+          ],
+          [
+            28,
+            7,
+            "done",
+            9
+          ],
+          [
+            20,
+            3,
+            "verified",
+            2
+          ],
+          [
+            12,
+            0,
+            "doing"
+          ],
+          [
+            8,
+            -6,
+            "open"
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter A",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  3,
+                  0,
+                  4
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  5,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "Dock door 2",
+            "tasks": [
+              {
+                "every": 4,
+                "late": [
+                  0
+                ],
+                "open": true
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            9,
+            25,
+            41
+          ],
+          "ideas": [
+            4,
+            11,
+            16
+          ]
+        }
+      },
+      {
+        "name": "Erfurt",
+        "damage": {
+          "volume": [
+            2600,
+            2800,
+            2700,
+            2900,
+            3000,
+            0,
+            0
+          ],
+          "units": [
+            4,
+            5,
+            4,
+            4,
+            6,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            -1,
+            0,
+            1,
+            0
+          ],
+          "causes": [
+            "Wet packaging",
+            "Dropped in loading"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            2600,
+            2800,
+            2700,
+            2900,
+            3000,
+            0,
+            0
+          ],
+          "units": [
+            6,
+            7,
+            6,
+            8,
+            9,
+            0,
+            0
+          ],
+          "extra": [
+            1,
+            0,
+            -1,
+            0,
+            2,
+            0,
+            -1
+          ],
+          "causes": [
+            "Wrong label",
+            "Missing item",
+            "Short pick"
+          ]
+        },
+        "delay": {
+          "routes": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            0,
+            0
+          ],
+          "late": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "minutes": 22
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter E1",
+              "rate": 480,
+              "perf": [
+                0.9,
+                0.92,
+                0.89
+              ],
+              "scrap": 0.006,
+              "breakdown": [
+                5,
+                0,
+                10,
+                0
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 1,
+          "areas": [
+            "Warehouse"
+          ],
+          "totals": [
+            70,
+            72,
+            69,
+            73,
+            71
+          ]
+        },
+        "safety": [
+          [
+            6,
+            "near-miss"
+          ],
+          [
+            13,
+            "near-miss"
+          ],
+          [
+            20,
+            "unsafe-condition"
+          ],
+          [
+            27,
+            "positive"
+          ],
+          [
+            36,
+            "near-miss"
+          ],
+          [
+            44,
+            "unsafe-act"
+          ]
+        ],
+        "actions": [
+          [
+            25,
+            12,
+            "done",
+            11
+          ],
+          [
+            18,
+            4,
+            "verified",
+            3
+          ],
+          [
+            10,
+            1,
+            "done",
+            1
+          ],
+          [
+            5,
+            -9,
+            "open"
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter E1",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            7,
+            14,
+            21,
+            30
+          ],
+          "ideas": [
+            3
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -36,9 +36,34 @@
 .tm-leave .button-ghost { padding: 0; font-size: 14px; }
 .tm-message:empty { display: none; }
 .tm-reload { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 0; }
+/* A read-only device says so beside its status; what the next sync will replace is a state, said in words too. */
+.tm-readonly { padding-left: 12px; border-left: 3px solid var(--blue); }
+.tm-pending { padding-left: 12px; border-left: 3px solid var(--warn); }
+.tm-code-long { font-size: 14px; font-weight: 600; line-height: 1.5; }
+.tm-more { display: grid; gap: 12px; }
+.tm-more-item { display: grid; gap: 6px; justify-items: start; }
 @media (max-width: 620px) {
+  .tm-more-item > button { min-height: 44px; }
   .tm-tool-list { grid-template-columns: minmax(0, 1fr); }
   .tm-tool { min-height: 44px; }
   .tm-row > *, .tm-join > button { min-height: 44px; }
   .tm-leave { display: grid; justify-items: start; gap: 12px; }
+}
+
+/* ===== Reminders that stay on the device (js/reminders.js): the opt-in in the Action Tracker, and the note at the
+   top of a page where notifications are blocked or not available. Overdue is a state, so the one warm line. ===== */
+.at-remind { display: grid; gap: 8px; justify-items: start; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.at-remind[hidden], .rm-wrap[hidden] { display: none; }
+.at-remind .form-note { margin: 0; }
+.rm-wrap { margin-top: 16px; }
+.rm-banner { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 12px 16px; border: 1px solid var(--line); border-left: 3px solid var(--warn); border-radius: var(--radius); background: var(--card); color: var(--ink); }
+.rm-text { margin: 0; flex: 1 1 260px; min-width: 0; overflow-wrap: anywhere; }
+.rm-text p { margin: 0; }
+.rm-list { margin: 4px 0 0; padding-left: 18px; color: var(--muted); }
+.rm-actions { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+@media (max-width: 620px) {
+  .rm-actions > *, .at-remind > button { min-height: 44px; }
+}
+@media print {
+  .rm-wrap { display: none; }
 }

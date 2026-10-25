@@ -322,8 +322,10 @@
         if (index > 0) skipped++;
         return;
       }
+      // An export with one "created at" (or "resolved at") column holds the time in the date cell.
+      const clockOf = (cell, dateCell) => String(cell ?? "").trim() || (kit.parseDateTime ? kit.parseDateTime(dateCell).time : "");
       added.push({
-        date: day, time, room, what, guest, takenBy, action, value, resolvedDate, resolvedTime, followed,
+        date: day, time: clockOf(time, date), room, what, guest, takenBy, action, value, resolvedDate, resolvedTime: clockOf(resolvedTime, resolvedDate), followed,
         channel: keyOf(channel, named(cfg.channels)),
         category: keyOf(category, named(cfg.categories)) || "other",
         severity: keyOf(severity, named(cfg.severities)),

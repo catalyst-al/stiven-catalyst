@@ -9416,6 +9416,19 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 @media print {
   .ck-actions { display: none; }
   .ck-tooltip { display: none; }
+  /* Paper is white whatever the theme on screen. The charts draw with variables (fill="var(--tr-text)"), and in the
+     dark theme those are light: printed, they came out light grey on white. On paper every chart takes the print
+     colours of its SVG export (ChartKit.EXPORT), with darker text and grid so they read on a laser print. They are set
+     on the SVG itself, which beats what a panel or a tool's own box sets around it, and on the panels and legends,
+     whose swatches and state words share the colours. Series and state colours stay the same hues. */
+  :root svg,
+  :root :is(.dl-panel, .ck-figure, .ck-legend, .ck-chips) {
+    --tr-bar: #0a6ab0; --tr-top: #c2141b; --tr-line: #1b2330; --tr-target: #7f5c1f;
+    --tr-grid: #9aa3ab; --tr-text: #10161c; --tr-muted: #3d464e;
+    --ok: #1d7a45; --warn: #7f5c1f; --danger: #c2141b; --blue: #0a6ab0; --blue-soft: #63bdf3; --paper-2: #fff;
+  }
+  /* Fills and swatches are colour, not background decoration: they print even with background graphics off. */
+  .ck-chart, .ck-swatch { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
 /* The workplace profile form, wherever a tool shows it. */
@@ -12076,11 +12089,36 @@ td > .fc-row-photos { margin-left: 8px; }
 .tm-leave .button-ghost { padding: 0; font-size: 14px; }
 .tm-message:empty { display: none; }
 .tm-reload { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 0; }
+/* A read-only device says so beside its status; what the next sync will replace is a state, said in words too. */
+.tm-readonly { padding-left: 12px; border-left: 3px solid var(--blue); }
+.tm-pending { padding-left: 12px; border-left: 3px solid var(--warn); }
+.tm-code-long { font-size: 14px; font-weight: 600; line-height: 1.5; }
+.tm-more { display: grid; gap: 12px; }
+.tm-more-item { display: grid; gap: 6px; justify-items: start; }
 @media (max-width: 620px) {
+  .tm-more-item > button { min-height: 44px; }
   .tm-tool-list { grid-template-columns: minmax(0, 1fr); }
   .tm-tool { min-height: 44px; }
   .tm-row > *, .tm-join > button { min-height: 44px; }
   .tm-leave { display: grid; justify-items: start; gap: 12px; }
+}
+
+/* ===== Reminders that stay on the device (js/reminders.js): the opt-in in the Action Tracker, and the note at the
+   top of a page where notifications are blocked or not available. Overdue is a state, so the one warm line. ===== */
+.at-remind { display: grid; gap: 8px; justify-items: start; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.at-remind[hidden], .rm-wrap[hidden] { display: none; }
+.at-remind .form-note { margin: 0; }
+.rm-wrap { margin-top: 16px; }
+.rm-banner { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 12px 16px; border: 1px solid var(--line); border-left: 3px solid var(--warn); border-radius: var(--radius); background: var(--card); color: var(--ink); }
+.rm-text { margin: 0; flex: 1 1 260px; min-width: 0; overflow-wrap: anywhere; }
+.rm-text p { margin: 0; }
+.rm-list { margin: 4px 0 0; padding-left: 18px; color: var(--muted); }
+.rm-actions { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+@media (max-width: 620px) {
+  .rm-actions > *, .at-remind > button { min-height: 44px; }
+}
+@media print {
+  .rm-wrap { display: none; }
 }
 /* ===== Signals (js/signals.js) =====
    The morning list: what needs attention across every tool, ranked. A signal's severity is told by its sign (▲ ◆ ○)
@@ -13447,4 +13485,359 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   body.hx-print-matrix .hx-xm { max-height: 265mm; }
   body.hx-print-bowling .hx-bowling { page: hx-a4; padding: 0; border: 0; }
   body:is(.hx-print-matrix, .hx-print-bowling) :is(main, .hx-results) { min-height: 0; margin: 0; padding: 0; }
+}
+/* ===== Floor mode (js/floor-mode.js) =====
+   The tools as the floor needs them: gloves, one hand, a cold dock, a bright day. The switch is on every tool page, at
+   the top right, level with the family badge (on a phone, on its own line above it). The inline script in
+   layouts/base.njk sets data-floor="on" on the root before the first paint. With it on: every tap target at least
+   48 px, larger text and inputs, full contrast (no grey for what has to be read), the main button of a form kept in
+   reach at the bottom of the screen, larger chart text, and nothing that shows only under a pointer. Screen only:
+   paper prints as it always did. */
+.floor-switch-row { position: relative; z-index: 3; height: 0; }
+.floor-switch {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 34px;
+  padding: 0 14px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.floor-switch:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); color: var(--ink); }
+.floor-switch:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+/* The track and its knob: left is off, right on; the word beside it says what it is. */
+.floor-switch-track {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+}
+.floor-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: translate .2s ease;
+}
+:root[data-floor="on"] .floor-switch { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 16%, var(--paper)); color: var(--ink); }
+:root[data-floor="on"] .floor-switch-track { border-color: var(--blue); background: var(--blue); }
+:root[data-floor="on"] .floor-switch-track::after { translate: 12px 0; background: var(--on-blue); }
+/* On a phone the badge takes most of its line: the switch stands on its own line above it, at the right. */
+@media (max-width: 620px) {
+  .floor-switch-row { display: flex; justify-content: flex-end; height: auto; padding-top: 14px; }
+  .floor-switch { position: static; }
+  .floor-switch-row ~ .family-badge-row { padding-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floor-switch, .floor-switch-track::after { transition: none; }
+}
+@media print {
+  .floor-switch-row { display: none !important; }
+}
+
+@media screen {
+  /* Contrast: what is grey on the normal page reads as text here, and lines and borders can be seen in sunlight. */
+  :root[data-floor="on"] { --muted: #dde3e8; --line: rgba(255, 255, 255, .34); }
+  :root[data-floor="on"][data-theme="light"] { --muted: #262e35; --line: rgba(11, 16, 21, .45); }
+  /* The drawing behind the title is decoration: on the floor it only lowers the contrast. */
+  :root[data-floor="on"] .family-sky { display: none; }
+  :root[data-floor="on"] body { font-size: 18px; line-height: 1.55; }
+  :root[data-floor="on"] .floor-switch { top: 33px; min-height: 48px; padding: 0 18px 0 14px; font-size: 13px; }
+
+  /* Text: the small print of the tools grows to a size that reads at arm's length. */
+  :root[data-floor="on"] main :is(.form-note, .dl-empty, .dl-panel-note, .ck-caption, .tips li, .privacy-note) { font-size: 16px; }
+  :root[data-floor="on"] main :is(.kicker, .eyebrow, .dl-range-label, .result-label) { font-size: 13px; letter-spacing: .1em; }
+  :root[data-floor="on"] .field label { color: var(--ink); font-size: 14px; letter-spacing: .06em; }
+  /* Larger words need their room: the note beside a label wraps instead of pushing the field past the screen. */
+  :root[data-floor="on"] .field label .optional { color: var(--muted); white-space: normal; }
+  :root[data-floor="on"] .field > * { min-width: 0; }
+  :root[data-floor="on"] .tool-hero .lede { font-size: 18px; }
+
+  /* Tap targets of 48 px at least. min-height and min-width leave a tool's own layout (and inputs laid over a
+     larger target) alone. */
+  :root[data-floor="on"] main :is(button, .button-primary, .button-secondary, .chip, summary, select),
+  :root[data-floor="on"] main input:not([type="checkbox"], [type="radio"], [type="range"], [type="hidden"]) { min-height: 48px; }
+  :root[data-floor="on"] main :is(button, .button-primary, .button-secondary) { min-width: 48px; font-size: 17px; }
+  :root[data-floor="on"] main .button-ghost { display: inline-flex; align-items: center; min-height: 48px; font-size: 17px; }
+  :root[data-floor="on"] main :is(.button-primary, .button-secondary) { padding: 13px 22px; white-space: normal; text-align: center; }
+  :root[data-floor="on"] .field :is(input, select, textarea) { padding: 13px 16px; border-width: 2px; font-size: 18px; }
+  :root[data-floor="on"] main :is(input, select, textarea) { font-size: max(1em, 17px); }
+  :root[data-floor="on"] main :is(input[type="checkbox"], input[type="radio"]) { min-width: 26px; min-height: 26px; accent-color: var(--blue); }
+  :root[data-floor="on"] main label:has(> :is(input[type="checkbox"], input[type="radio"])) { min-height: 48px; padding-block: 11px; }
+  :root[data-floor="on"] .dl-remove { min-width: 48px; min-height: 48px; font-size: 20px; }
+  :root[data-floor="on"] .dl-range-presets button { min-height: 48px; padding: 10px 16px; font-size: 16px; }
+  :root[data-floor="on"] .dl-undo { min-height: 48px; }
+
+  /* The header: the four round buttons at 48 px; on a phone the name beside the mark steps aside to make room
+     (the link keeps its name for screen readers). */
+  :root[data-floor="on"] .site-header :is(.icon-button, .menu-button) { width: 48px; height: 48px; }
+  @media (max-width: 620px) {
+    :root[data-floor="on"] .brand > span:not(.brand-mark) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+
+  /* Tables: larger figures, notes written out in full rather than cut off (their full text was only a pointer away). */
+  :root[data-floor="on"] .dl-table { font-size: 16px; }
+  :root[data-floor="on"] .dl-table thead th { color: var(--ink); font-size: 12px; }
+  :root[data-floor="on"] .dl-table :is(th, td) { padding: 12px 14px; }
+  :root[data-floor="on"] .dl-table .dl-note { max-width: 320px; overflow: visible; white-space: normal; text-overflow: clip; }
+
+  /* Charts: the text of a chart at a readable size. A chart keeps a width at which its text is not scaled down to
+     nothing and scrolls sideways in its frame (.ck-scroll) on a phone instead. */
+  :root[data-floor="on"] .ck-chart { min-width: 560px; }
+  :root[data-floor="on"] :is(.dl-panel, .ck-figure, .ck-scroll) { min-width: 0; max-width: 100%; }
+  :root[data-floor="on"] .ck-chart text:is([font-size="10"], [font-size="11"], [font-size="12"]) { font-size: 14px; }
+  :root[data-floor="on"] .ck-chart text[font-size="13"] { font-size: 15px; }
+  :root[data-floor="on"] :is(.ck-legend, .ck-chip, .ck-tooltip) { font-size: 16px; }
+  :root[data-floor="on"] .ck-tooltip strong { font-size: 17px; }
+  :root[data-floor="on"] .ck-swatch { width: 16px; height: 16px; }
+
+  /* The main button of a form stays in reach: its row of buttons sticks to the bottom of the screen while the form is
+     on it, the main button first, the others a swipe away in the same row. */
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -10px;
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    border-radius: 14px 14px 0 0;
+    background: var(--paper);
+    scrollbar-width: thin;
+  }
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) > * { flex: 0 0 auto; }
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) > .button-primary { order: -1; }
+  :root[data-floor="on"] .tool-panel .tool-actions:has(> .button-primary) > .form-note { flex: 1 0 12em; max-width: 70vw; white-space: normal; }
+
+  /* Nothing that only a pointer finds: no lift on hover, a pressed choice marked by its border as well as its colour. */
+  :root[data-floor="on"] .family-badge:hover { translate: none; }
+  /* The floating share button would sit on the row of buttons kept in reach; sharing is not work of the floor. */
+  :root[data-floor="on"] .share-orbit { display: none; }
+  :root[data-floor="on"] main [aria-pressed="true"]:not(.floor-switch) { outline: 2px solid var(--ink); outline-offset: 1px; }
+}
+/* ===== Print Pack (js/print-pack.js) =====
+   The list of documents to tick, then the preview: each document as the sheet of paper it prints as, white with black
+   text in either theme, and on paper one A4 page (or more) per sheet with a page break before each. */
+.pk-intro { margin: 0; }
+.pk-docs { display: grid; gap: 10px; }
+.pk-doc {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.pk-doc:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); background: color-mix(in srgb, var(--blue) 6%, transparent); }
+.pk-doc input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--blue); cursor: pointer; }
+.pk-doc input:disabled { cursor: not-allowed; }
+.pk-doc label { display: grid; gap: 2px; cursor: pointer; }
+.pk-doc label span { color: var(--muted); font-size: 14px; }
+.pk-doc.is-empty label { cursor: default; }
+.pk-doc.is-empty label strong { color: var(--muted); }
+.pk-doc-note { grid-column: 2; margin: 0; }
+.pk-grid { grid-template-columns: minmax(0, 260px); }
+.pk-stats { margin-bottom: 0; }
+.pk-results .result-head .pk-nowrap { white-space: nowrap; }
+.pk-example-note { margin: 24px auto 0; }
+
+/* The preview: paper on the page. */
+.pk-pack { display: grid; gap: 24px; margin-top: 22px; }
+.pk-empty { padding: 20px 0; }
+.pk-sheet,
+:root .pk-sheet svg {
+  --ink: #111; --muted: #3a3a3a; --line: #9a9a9a; --card: #fff; --paper: #fff; --paper-2: #fff;
+  /* A chart on a sheet is black and grey, like the rest of the paper: the columns grey, the alert ones black. */
+  --tr-bar: #8c9297; --tr-top: #111; --tr-line: #111; --tr-target: #111; --tr-grid: #c4c8cc; --tr-text: #111; --tr-muted: #3a3a3a;
+  --blue: #222; --blue-soft: #666; --ok: #333; --warn: #333; --danger: #111;
+}
+.pk-sheet {
+  width: 100%;
+  max-width: 210mm;
+  min-width: 0;
+  margin-inline: auto;
+  padding: clamp(16px, 4vw, 14mm);
+  overflow-x: auto;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 14px 36px -12px rgba(0, 0, 0, .45);
+  color: #111;
+  color-scheme: light;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.pk-head { margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #111; }
+.pk-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.pk-head h2 { margin: 6px 0 0; font-size: 22px; line-height: 1.15; letter-spacing: -.01em; }
+.pk-meta { margin: 6px 0 0; font-size: 12px; }
+.pk-group { margin: 16px 0 6px; font-size: 14px; }
+.pk-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.pk-table th,
+.pk-table td { padding: 5px 6px; border: 1px solid #8a8a8a; text-align: left; vertical-align: top; overflow-wrap: normal; word-break: normal; hyphens: auto; }
+/* Headings stay on one line: a narrow column of boxes is as wide as its day, never "W/E/E/K" letter by letter. */
+.pk-table thead th { background: #ececec; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.pk-table tfoot :is(th, td) { font-weight: 800; }
+.pk-table .num { text-align: right; white-space: nowrap; }
+.pk-table .pk-box { width: 24px; min-width: 24px; text-align: center; font-size: 15px; line-height: 1.1; }
+.pk-table .pk-when { width: 1%; white-space: nowrap; }
+.pk-table .pk-write { min-width: 80px; width: 15%; }
+.pk-table .pk-nowrap { white-space: nowrap; }
+.pk-sub { display: block; margin-top: 2px; color: #333; font-size: 11px; }
+.pk-flag { font-size: 11px; font-weight: 700; }
+.pk-strong, .pk-strong-cell { font-weight: 800; }
+.pk-check { margin: 4px 0 0; padding: 0; list-style: none; font-size: 11px; }
+.pk-note, .pk-legend, .pk-sign { margin: 10px 0 0; font-size: 11px; }
+.pk-sign { margin-top: 18px; font-size: 12px; white-space: pre-wrap; }
+.pk-foot { margin: 14px 0 0; padding-top: 6px; border-top: 1px solid #bbb; color: #444; font-size: 10px; }
+.pk-warn { margin: 0 0 10px; padding: 6px 8px; border: 2px solid #111; font-size: 12px; font-weight: 700; }
+.pk-sheet .ck-figure { margin: 6px 0 4px; }
+.pk-sheet .ck-chart { max-height: 220px; }
+.pk-sheet .ck-caption { color: #333; font-size: 11px; }
+
+/* The Safety Cross: 31 squares on a 7 × 7 grid; a day so far carries its sign, a day ahead is left to mark by hand. */
+.pk-cross { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; width: min(100%, 400px); margin: 12px auto 4px; }
+.pk-cell { position: relative; display: grid; place-items: center; aspect-ratio: 1; border: 1.5px solid #111; border-radius: 4px; }
+.pk-cell.is-none { border: 1px dashed #bbb; }
+.pk-cell.is-warn { border-width: 2.5px; }
+.pk-cell.is-danger { border-width: 3.5px; background: #e2e2e2; }
+.pk-cell-day { position: absolute; top: 2px; left: 4px; font-size: 10px; font-weight: 800; }
+.pk-cell-sign { font-size: 20px; font-weight: 900; line-height: 1; }
+.pk-cell-n { position: absolute; right: 3px; bottom: 1px; font-size: 9px; font-weight: 800; }
+
+/* The Daily Board: a line per day, a column per letter, its sign in the cell. */
+.pk-board :is(th, td) { padding: 2px 6px; }
+.pk-board .pk-letter { width: 15%; text-align: center; font-size: 13px; font-weight: 800; }
+.pk-board thead .pk-letter { font-size: 9px; }
+.pk-board td.is-red { background: #e2e2e2; }
+
+@media (max-width: 620px) {
+  .pk-grid { grid-template-columns: minmax(0, 1fr); }
+  .pk-sheet { font-size: 12px; }
+  .pk-table { min-width: 520px; }
+  .pk-board { min-width: 0; }
+}
+
+/* Paper: the pack alone, black on white, one A4 page or more per sheet. */
+@page pk-sheet { size: A4 portrait; margin: 12mm; }
+@media print {
+  html.pk-page main > :not(.pk-results),
+  html.pk-page .pk-results > :not(.pk-pack) { display: none !important; }
+  html.pk-page .pk-results { display: block !important; padding: 0; content-visibility: visible; }
+  .pk-pack { display: block; margin: 0; }
+  .pk-sheet { page: pk-sheet; max-width: none; padding: 0; overflow: visible; border-radius: 0; box-shadow: none; font-size: 9.5pt; break-before: page; }
+  .pk-sheet:first-child { break-before: auto; }
+  .pk-table { min-width: 0; font-size: 8.5pt; }
+  .pk-table thead { display: table-header-group; }
+  .pk-table tr, .pk-cross, .pk-head, .pk-sign, .pk-foot { break-inside: avoid; }
+  .pk-group { break-after: avoid; }
+  .pk-table thead th, .pk-cell.is-danger, .pk-board td.is-red { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .pk-head h2 { font-size: 16pt; }
+  .pk-board :is(th, td) { padding: 1.5px 5px; }
+}
+/* Site Compare (js/site-compare.js): the sites, the period, and the comparison table, ranking and charts. */
+
+.sv-sites { display: grid; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
+.sv-sites:empty { display: none; }
+.sv-site {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.sv-site-text { display: grid; gap: 2px; min-width: 0; }
+.sv-site-text strong { overflow-wrap: anywhere; }
+.sv-site-status { color: var(--muted); font-size: 13px; }
+/* A site that could not be read says why in words; the rule only marks it. */
+.sv-site-status.is-problem { padding-left: 8px; border-left: 3px solid var(--warn); color: var(--ink); }
+.sv-remove { flex: none; }
+
+.sv-choices { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
+.sv-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sv-choice input { margin: 0; accent-color: var(--blue); }
+.sv-choice:has(input:checked) { border-color: var(--blue); color: var(--ink); }
+.sv-choice:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.sv-head h2 { margin: 0 0 4px; }
+.sv-prompt .tool-actions { margin-top: 12px; }
+
+.sv-table-box { margin: 18px 0; }
+.sv-table-note { margin: 0 0 8px; }
+.sv-table-wrap { max-height: none; }
+.sv-table th, .sv-table td { vertical-align: top; }
+/* The figure's name stays in view while the sites scroll past on a phone. */
+.sv-table tbody th, .sv-table thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper-2); }
+.sv-table thead th:first-child { z-index: 2; }
+.sv-site-head { display: block; color: var(--ink); font-size: 12px; letter-spacing: 0; text-transform: none; }
+.sv-asof { display: block; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.sv-group th {
+  padding-top: 14px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.sv-kpi { min-width: 118px; max-width: 160px; white-space: normal; font-weight: 700; }
+@media (min-width: 761px) {
+  .sv-kpi { min-width: 150px; max-width: 220px; }
+}
+.sv-kpi span { display: block; }
+.sv-better { color: var(--muted); font-size: 11px; font-weight: 400; }
+.sv-cell { min-width: 104px; }
+.sv-value { font-size: 15px; }
+.sv-detail, .sv-none { display: block; color: var(--muted); font-size: 11px; white-space: normal; }
+.sv-tag { display: inline-block; margin-left: 4px; vertical-align: 2px; }
+.sv-tag.is-best { border-color: color-mix(in srgb, var(--ok) 70%, var(--line)); color: var(--ink); }
+.sv-tag.is-worst { border-color: color-mix(in srgb, var(--danger) 70%, var(--line)); color: var(--ink); }
+
+.sv-ranking { display: grid; gap: 6px; margin: 8px 0 0; padding-left: 22px; }
+
+.sv-chart-grid { display: grid; gap: 14px; margin-top: 12px; }
+@media (min-width: 900px) {
+  .sv-chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media print {
+  .sv-setup, .sv-results .result-actions, .sv-results .ck-actions, .sv-prompt .tool-actions, .sv-results .dl-example-note button { display: none !important; }
+  .sv-table-wrap { overflow: visible; border: 0; }
+  .sv-table tbody th, .sv-table thead th { position: static; }
+  .sv-table th, .sv-table td { padding: 4px 6px; }
+  .sv-chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-chart-grid .dl-panel { break-inside: avoid; }
 }

@@ -1,0 +1,80 @@
+{#- Print Pack: the paper of a team's board, printed in one go from the tools in this browser; print-pack.js does the rest.
+    The data of the tools it reads comes in this language from their own data files (their storage keys, names and
+    examples), and their scripts load for their arithmetic only: each stops before its page code on a page that is not
+    its own. -#}
+{%- set atData = de.actionTracker if lang == "de" else (sq.actionTracker if lang == "sq" else actionTracker) -%}
+{%- set mpData = de.maintenancePlanner if lang == "de" else (sq.maintenancePlanner if lang == "sq" else maintenancePlanner) -%}
+{%- set fsData = de.fiveSAudit if lang == "de" else (sq.fiveSAudit if lang == "sq" else fiveSAudit) -%}
+{%- set lwData = de.leaderStandardWork if lang == "de" else (sq.leaderStandardWork if lang == "sq" else leaderStandardWork) -%}
+{%- set sxData = de.safetyCross if lang == "de" else (sq.safetyCross if lang == "sq" else safetyCross) -%}
+{%- set dbData = de.dailyBoard if lang == "de" else (sq.dailyBoard if lang == "sq" else dailyBoard) -%}
+{%- set riData = de.roomInspection if lang == "de" else (sq.roomInspection if lang == "sq" else roomInspection) -%}
+{%- set rsData = de.roomStatus if lang == "de" else (sq.roomStatus if lang == "sq" else roomStatus) -%}
+{%- set hpData = de.housekeepingPlanner if lang == "de" else (sq.housekeepingPlanner if lang == "sq" else housekeepingPlanner) -%}
+{%- set sources = {
+  actions: { key: atData.storageKey, uiKey: atData.storageKey + "-ui", statuses: atData.statuses, priorities: atData.priorities, sources: atData.sources, example: atData.example },
+  maintenance: { key: mpData.storageKey, tool: mpData.text.tool, statutory: mpData.text.statutory, types: mpData.types, example: mpData.example },
+  fives: { key: fsData.storageKey, tool: fsData.text.tool, cadences: fsData.cadences, example: { plan: fsData.example.plan, audits: fsData.example.audits } },
+  lsw: { key: lwData.storageKey, tool: lwData.text.tool, levels: lwData.levels, weekdays: lwData.weekdays, reasons: lwData.reasons, tools: lwData.tools, templates: lwData.templates, example: lwData.example },
+  safety: { key: sxData.storageKey, tool: sxData.text.tool, types: sxData.types, short: sxData.short, shifts: sxData.shifts, areas: sxData.areas, causes: sxData.causes, example: { rows: sxData.example.rows } },
+  board: { key: dbData.storageKey, title: dbData.title, months: dbData.months, shifts: dbData.shifts, letters: dbData.letters, states: dbData.states, targets: dbData.targets, rules: dbData.rules, example: dbData.example },
+  roomInspection: { threshold: riData.threshold, zones: riData.zones, templates: riData.templates },
+  rooms: { key: rsData.storageKey, tool: rsData.text.tool, unassigned: rsData.text.unassigned, statuses: rsData.statuses, flags: rsData.flags, roomTypes: rsData.roomTypes, example: rsData.example },
+  housekeeping: { key: hpData.storageKey, roomStatusKey: hpData.roomStatusKey, tool: hpData.text.tool, roomTypes: hpData.roomTypes, cleanTypes: hpData.cleanTypes, defaults: hpData.defaults, example: hpData.example }
+} -%}
+<section class="shell tool-layout">
+  <div class="tool-panel" data-print-pack>
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">1 · {{ "What goes in the pack" | t(lang) }}</legend>
+        <p class="form-note pk-intro">{{ "A document can be ticked once its tool holds data in this browser. The pack only reads the tools: nothing in them changes." | t(lang) }}</p>
+        <div class="pk-docs" data-docs></div>
+      </fieldset>
+    </div>
+    <div class="dl-box">
+      <fieldset>
+        <legend class="kicker">2 · {{ "Print" | t(lang) }}</legend>
+        <div class="dl-grid pk-grid">
+          <div class="field">
+            <label for="pk-date">{{ "Date on the pack" | t(lang) }}</label>
+            <input id="pk-date" type="date" required>
+          </div>
+        </div>
+        <p class="form-note">{{ "The week of the work list and the audits and the month of the Safety Cross and the Daily Board follow this date: set the coming Monday to print on Friday." | t(lang) }}</p>
+        <div class="tool-actions">
+          <button class="button-primary" type="button" data-print>{{ "Print the pack" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-example>{{ "Show the example pack" | t(lang) }}</button>
+          <p class="form-note" data-status aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="privacy-note">{{ "Your work stays in this browser. Nothing is sent or uploaded, and you can clear it at any time." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results pk-results" data-results tabindex="-1" aria-label="{{ 'Preview of the pack' | t(lang) }}" hidden></section>
+
+<script type="application/json" id="print-pack-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="print-pack-sources">{{ sources | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+{#- Their arithmetic only: each script stops before its page code on a page that is not its own. -#}
+<script src="{{ '/js/room-inspection.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/maintenance-planner.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/five-s-audit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/leader-standard-work.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/safety-cross.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/daily-board.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/room-status.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/housekeeping-planner.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/print-pack.js' | assetUrl }}" defer></script>

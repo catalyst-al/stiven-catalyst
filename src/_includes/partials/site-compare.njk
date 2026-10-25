@@ -1,0 +1,82 @@
+{#- Site Compare: the sites an area manager looks after, side by side, read from each site's read-only Team Sync code; site-compare.js does the rest. The OEE stop reasons of all three languages travel along (a site may keep its OEE log in any of them), with the Room Inspection checklists and the PM target, whose tools' scripts the page loads for their arithmetic. -#}
+{%- set riData = de.roomInspection if lang == "de" else (sq.roomInspection if lang == "sq" else roomInspection) -%}
+{%- set mpData = de.maintenancePlanner if lang == "de" else (sq.maintenancePlanner if lang == "sq" else maintenancePlanner) -%}
+<section class="shell tool-layout sv-setup">
+  <div class="tool-panel" data-site-compare>
+    <div class="dl-box">
+      <fieldset class="sv-add">
+        <legend class="kicker">1 · {{ "Add a site" | t(lang) }}</legend>
+        <p class="form-note">{{ "Ask the site for the read-only code of its team: in Team Sync, in the box “All your work in one file”, “Create a read-only code”. It lets you read the tools the site shares; you do not join the team and cannot change anything." | t(lang) }}</p>
+        <div class="dl-grid">
+          <div class="field">
+            <label for="sv-name">{{ "Site name" | t(lang) }}</label>
+            <input id="sv-name" name="name" type="text" maxlength="60" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sv-code">{{ "Read-only code" | t(lang) }}</label>
+            <input id="sv-code" name="code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="scr1.…" data-scan>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="button-primary" type="button" data-add>{{ "Add site" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-add-note aria-live="polite"></p>
+      </fieldset>
+    </div>
+
+    <div class="dl-box">
+      <p class="kicker">2 · {{ "Sites" | t(lang) }}</p>
+      <ul class="sv-sites" data-sites></ul>
+      <p class="dl-empty" data-empty>{{ "No site yet. Add the first one above, or" | t(lang) }} <button class="button-ghost" type="button" data-example>{{ "load an example" | t(lang) }}</button>.</p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-update hidden>{{ "Update all sites" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-clear hidden>{{ "Remove all sites and codes" | t(lang) }}</button>
+      </div>
+      <p class="form-note" data-status aria-live="polite"></p>
+      <p class="form-note" data-off hidden>{{ "This page has no sync server, so it cannot read the sites." | t(lang) }}</p>
+    </div>
+
+    <div class="dl-box">
+      <fieldset class="sv-periods" data-periods>
+        <legend class="kicker">3 · {{ "Period" | t(lang) }}</legend>
+        <div class="sv-choices">
+          {%- for p in cfg.periods %}
+          <label class="sv-choice"><input type="radio" name="period" value="{{ p.key }}"{% if p.key == "last30" %} checked{% endif %}> <span>{{ p.label }}</span></label>
+          {%- endfor %}
+        </div>
+        <p class="form-note">{{ "Each period ends on the day of the site's last update. The figures of all four are worked out at each update, so a change of period needs no new one." | t(lang) }}</p>
+      </fieldset>
+    </div>
+  </div>
+
+  <aside class="tool-aside">
+    <p class="kicker">{{ "How to use it" | t(lang) }}</p>
+    <ul class="tips">
+      {%- for tip in cfg.tips %}
+      <li><strong>{{ tip[0] }}</strong> {{ tip[1] }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="privacy-note">{{ "The read-only codes stay on this device: they are kept in this browser and go into your own saved work file, but Team Sync never shares them. “Update all sites” asks the sync server for each site's encrypted copy, decrypts it here and keeps only the figures and the time of the update; nothing of yours is sent." | t(lang) }}</p>
+  </aside>
+</section>
+
+<section class="shell dl-results sv-results" data-results tabindex="-1" hidden></section>
+
+<script type="application/json" id="site-compare-data">{{ cfg | scriptJson | safe }}</script>
+<script type="application/json" id="site-compare-tools">{{ {
+  "endpoint": (site.sync.endpoint if site and site.sync else ""),
+  "oeeReasons": { "en": (oee.reasons if oee else []), "de": (de.oee.reasons if de and de.oee else []), "sq": (sq.oee.reasons if sq and sq.oee else []) },
+  "roomInspection": ({ "threshold": riData.threshold, "zones": riData.zones, "templates": riData.templates } if riData else null),
+  "maintenance": ({ "target": mpData.target } if mpData else null)
+} | scriptJson | safe }}</script>
+<script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/chart-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/oee.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/safety-cross.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/maintenance-planner.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/room-inspection.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/guest-complaints.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/ops-report.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/site-compare.js' | assetUrl }}" defer></script>

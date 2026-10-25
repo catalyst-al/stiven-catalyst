@@ -105,5 +105,103 @@ self.addEventListener("message", (event) => {
   }));
 });
 
-// For the tests (tests/offline.test.cjs).
+// Reminders without a page open. js/reminders.js keeps, in IndexedDB "sc-reminders" on this device, whether they
+// are on, the day one was last shown, their words, and a summary of the open actions (counts per due day, the three
+// due soonest). Where the browser offers Periodic Background Sync (an installed app in Chromium) it wakes this worker
+// about once a day, and the worker shows the day's one notification if no page has shown it yet. A click opens the
+// Action Tracker. Nothing is fetched or sent for it; where any of it is missing, nothing happens.
+const REMIND = { DB: "sc-reminders", STORE: "kv", TAG: "sc-reminders" };
+const remindDay = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+const remindIsDay = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+// As RemindersMath.fromSummary: open actions due before today, due today, and the first three titles of those.
+const remindCounts = (summary, today) => {
+  let overdue = 0;
+  let due = 0;
+  for (const [day, n] of Object.entries(summary?.byDue || {})) {
+    if (!remindIsDay(day) || !Number.isInteger(n) || n < 1) continue;
+    if (day < today) overdue += n;
+    else if (day === today) due += n;
+  }
+  const titles = (Array.isArray(summary?.first) ? summary.first : []).filter((a) => a && typeof a.title === "string" && remindIsDay(a.due) && a.due <= today).slice(0, 3).map((a) => a.title);
+  return { overdue, today: due, titles };
+};
+const remindFill = (template, vars) => String(template || "").replace(/\{(\w+)\}/g, (match, name) => (name in vars ? vars[name] : match));
+const remindWords = (state, lang) => {
+  const texts = state && typeof state.texts === "object" && state.texts ? state.texts : {};
+  const sound = (words) => words && ["title", "counts", "more"].every((name) => typeof words[name] === "string");
+  return [texts[lang], texts[state?.lang], ...Object.values(texts)].find(sound) || null;
+};
+// Only the Action Tracker of this site, in one of its three languages.
+const remindUrl = (href) => {
+  try {
+    const url = new URL(href, self.location.origin);
+    if (url.origin === self.location.origin && /^\/(?:(?:de|sq)\/)?tools\/action-tracker\/$/.test(url.pathname)) return url.href;
+  } catch { /* the default */ }
+  return new URL("/tools/action-tracker/", self.location.origin).href;
+};
+// The database only if a page made it: opened to read, a missing one is not created.
+const remindOpen = (idb) => new Promise((resolve) => {
+  if (!idb) { resolve(null); return; }
+  let request;
+  try { request = idb.open(REMIND.DB, 1); } catch { resolve(null); return; }
+  request.onupgradeneeded = () => { try { request.transaction.abort(); } catch { /* resolves null */ } };
+  request.onsuccess = () => {
+    const db = request.result;
+    if (!db.objectStoreNames.contains(REMIND.STORE)) { db.close(); resolve(null); return; }
+    resolve(db);
+  };
+  request.onerror = () => resolve(null);
+  request.onblocked = () => resolve(null);
+});
+const remindDo = (db, mode, run) => new Promise((resolve) => {
+  try {
+    const tx = db.transaction(REMIND.STORE, mode);
+    const request = run(tx.objectStore(REMIND.STORE));
+    let result;
+    request.onsuccess = () => { result = request.result; };
+    tx.oncomplete = () => resolve(result);
+    tx.onerror = () => resolve(undefined);
+    tx.onabort = () => resolve(undefined);
+  } catch { resolve(undefined); }
+});
+// True when a notification was shown.
+const remind = async ({ idb = self.indexedDB, registration = self.registration, permission = self.Notification?.permission, now = new Date() } = {}) => {
+  if (permission !== "granted" || !registration || typeof registration.showNotification !== "function") return false;
+  const db = await remindOpen(idb);
+  if (!db) return false;
+  try {
+    const state = await remindDo(db, "readonly", (store) => store.get("state"));
+    const summary = await remindDo(db, "readonly", (store) => store.get("summary"));
+    const today = remindDay(now);
+    if (!state || state.on !== true || state.last === today || !summary) return false;
+    const due = remindCounts(summary, today);
+    if (!due.overdue && !due.today) return false;
+    const words = remindWords(state, summary.lang);
+    if (!words) return false;
+    // The day is claimed first, as the page does, so the page does not show it again.
+    if ((await remindDo(db, "readwrite", (store) => store.put({ ...state, last: today }))) === undefined) return false;
+    const counts = remindFill(words.counts, { overdue: due.overdue, today: due.today });
+    const rest = due.overdue + due.today - due.titles.length;
+    const body = [counts, ...due.titles.map((title) => `• ${title}`), rest > 0 ? remindFill(words.more, { n: rest }) : ""].filter(Boolean).join("\n");
+    await registration.showNotification(words.title, { body, tag: REMIND.TAG, data: { url: remindUrl(summary.url) }, icon: "/icons/icon-192.png", lang: summary.lang });
+    return true;
+  } catch { return false; } finally { db.close(); }
+};
+// Set as the scope's event handler properties (standard for both events), beside the listeners of the offline copy.
+self.onperiodicsync = (event) => {
+  if (event.tag === REMIND.TAG) event.waitUntil(remind());
+};
+// A reminder clicked (shown here or by a page through this worker): the Action Tracker, in a tab already open if any.
+self.onnotificationclick = (event) => {
+  if (event.notification?.tag !== REMIND.TAG) return;
+  event.notification.close();
+  const href = remindUrl(event.notification.data?.url);
+  event.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
+    const open = list.find((client) => new URL(client.url).pathname === new URL(href).pathname && typeof client.focus === "function");
+    return open ? open.focus() : self.clients.openWindow(href);
+  }).catch(() => null));
+};
+
+// For the tests (tests/offline.test.cjs, tests/reminders.test.cjs).
 self.SwKit = { CACHE, PRECACHE, KEPT, isVersioned, assetsOf };
+self.SwReminders = { REMIND, remindCounts, remindUrl, remind };

@@ -1,0 +1,863 @@
+{
+  "storageKey": "sc-site-compare-sq",
+  "periods": [
+    {
+      "key": "last7",
+      "label": "7 ditët e fundit"
+    },
+    {
+      "key": "last30",
+      "label": "30 ditët e fundit"
+    },
+    {
+      "key": "thisMonth",
+      "label": "Ky muaj"
+    },
+    {
+      "key": "lastMonth",
+      "label": "Muaji i kaluar"
+    }
+  ],
+  "groups": {
+    "quality": "Cilësia",
+    "delivery": "Dorëzimi",
+    "equipment": "Pajisjet dhe mirëmbajtja",
+    "workplace": "Vendi i punës",
+    "safety": "Siguria në punë",
+    "actions": "Veprimet dhe përmirësimi",
+    "hotel": "Hoteli"
+  },
+  "kpis": {
+    "damageRate": {
+      "label": "Përqindja e dëmeve",
+      "detail": "{units} të dëmtuara nga {volume}"
+    },
+    "damageUnits": {
+      "label": "Njësi të dëmtuara"
+    },
+    "incompleteRate": {
+      "label": "Përqindja e porosive të paplota",
+      "detail": "{units} të paplota nga {volume}"
+    },
+    "incompleteUnits": {
+      "label": "Porosi të paplota"
+    },
+    "onTime": {
+      "label": "Linjat në kohë",
+      "detail": "{late} me vonesë nga {routes}"
+    },
+    "lateRoutes": {
+      "label": "Linjat me vonesë"
+    },
+    "oee": {
+      "label": "OEE (të gjitha makineritë)",
+      "detail": "{entries} turne · makineri: {machines}"
+    },
+    "fiveS": {
+      "label": "Mesatarja e 5S",
+      "detail": "auditime: {audits}"
+    },
+    "accidents": {
+      "label": "Aksidente"
+    },
+    "firstAid": {
+      "label": "Raste ndihme të parë"
+    },
+    "nearMisses": {
+      "label": "Gati-aksidente dhe veprime të pasigurta"
+    },
+    "daysSince": {
+      "label": "Ditë që nga aksidenti i fundit"
+    },
+    "openActions": {
+      "label": "Veprimet e hapura"
+    },
+    "overdueActions": {
+      "label": "Veprimet me afat të kaluar"
+    },
+    "kaizenDone": {
+      "label": "Ide Kaizen të zbatuara"
+    },
+    "pm": {
+      "label": "Zbatimi i mirëmbajtjes parandaluese",
+      "detail": "{onTime} nga {scheduled} në kohë"
+    },
+    "pmOverdue": {
+      "label": "Detyra mirëmbajtjeje me afat të kaluar"
+    },
+    "firstPass": {
+      "label": "Dhoma të kaluara herën e parë",
+      "detail": "{firstPass} nga {first}"
+    },
+    "complaintsPer100": {
+      "label": "Ankesa për 100 net dhome të zëna",
+      "detail": "{complaints} në {nights} net dhome"
+    },
+    "complaints": {
+      "label": "Ankesat e mysafirëve"
+    }
+  },
+  "prompt": {
+    "title": "Çfarë bën ndryshe objekti më i mirë",
+    "lead": "{best} ka treguesin më të mirë për «{kpi}»: {bestValue}, kundrejt {worstValue} në {worst}.",
+    "ask": "Shko e shiko para se të krahasosh njerëzit: ec në terrenin e {best} bashkë me drejtuesin e {worst}, shëno në një Gemba Walk çfarë bëjnë ndryshe dhe vendos në Tabelën Kaizen praktikën që mund të përhapet.",
+    "none": "Objektet nuk kanë ende asnjë tregues të përbashkët për këtë periudhë. Përditësoji ose zgjidh një periudhë më të gjatë."
+  },
+  "summary": {
+    "title": "Krahasimi i objekteve",
+    "ranking": "Renditja"
+  },
+  "tips": [
+    [
+      "Kërko kodin vetëm për lexim.",
+      "Çdo objekt e krijon te sinkronizimi i ekipit (kutia «Gjithë puna jote në një skedar» → «Krijo një kod vetëm për lexim») dhe ta dërgon. Ti lexon mjetet që ndan objekti; nuk bashkohesh me ekipin dhe nuk mund të ndryshosh asgjë."
+    ],
+    [
+      "Kurrë kodin e ekipit.",
+      "Me gjashtë fjalët, kushdo që i ka mund të ndryshojë punën e një ekipi. Kjo faqe i refuzon dhe nuk i ruan."
+    ],
+    [
+      "Përditëso çdo të hënë.",
+      "«Përditëso të gjitha objektet» lexon kopjen më të fundit të ekipit të çdo objekti dhe mban vetëm treguesit. Një objekt që e ka ndryshuar kodin duhet të ta dërgojë kodin e ri vetëm për lexim."
+    ],
+    [
+      "Krahaso përqindjet, pastaj shko e shiko.",
+      "Përqindjet dhe mesataret hyjnë në renditje, numrat jo, sepse rriten me madhësinë e objektit. Objekti më i mirë në një tregues është vendi ku mësohet, jo gjykim për të tjerët."
+    ]
+  ],
+  "example": {
+    "sites": [
+      {
+        "name": "Leipzig",
+        "damage": {
+          "volume": [
+            4200,
+            4600,
+            4400,
+            4500,
+            4900,
+            2100,
+            0
+          ],
+          "units": [
+            8,
+            9,
+            7,
+            9,
+            11,
+            3,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            -1,
+            2,
+            0,
+            -2,
+            1
+          ],
+          "causes": [
+            "Rënë gjatë ngarkimit",
+            "Shtypur në kafaz",
+            "Paketim i lagur"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            4200,
+            4600,
+            4400,
+            4500,
+            4900,
+            2100,
+            0
+          ],
+          "units": [
+            5,
+            6,
+            4,
+            5,
+            7,
+            2,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "causes": [
+            "Artikull që mungon",
+            "Etiketë e gabuar"
+          ]
+        },
+        "delay": {
+          "routes": [
+            14,
+            14,
+            14,
+            14,
+            14,
+            8,
+            0
+          ],
+          "late": [
+            1,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "minutes": 24
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter 1",
+              "rate": 600,
+              "perf": [
+                0.88,
+                0.9,
+                0.86
+              ],
+              "scrap": 0.008,
+              "breakdown": [
+                10,
+                0,
+                20,
+                5
+              ]
+            },
+            {
+              "name": "Sorter 2",
+              "rate": 600,
+              "perf": [
+                0.84,
+                0.87,
+                0.85
+              ],
+              "scrap": 0.01,
+              "breakdown": [
+                15,
+                30,
+                0,
+                10
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 2,
+          "areas": [
+            "Pritja e mallit",
+            "Dalja e mallit"
+          ],
+          "totals": [
+            66,
+            68,
+            64,
+            70,
+            67,
+            69
+          ]
+        },
+        "safety": [
+          [
+            4,
+            "near-miss"
+          ],
+          [
+            11,
+            "unsafe-condition"
+          ],
+          [
+            19,
+            "first-aid"
+          ],
+          [
+            26,
+            "near-miss"
+          ],
+          [
+            40,
+            "positive"
+          ],
+          [
+            58,
+            "no-lost-time"
+          ]
+        ],
+        "actions": [
+          [
+            30,
+            10,
+            "done",
+            12
+          ],
+          [
+            21,
+            5,
+            "verified",
+            6
+          ],
+          [
+            14,
+            2,
+            "doing"
+          ],
+          [
+            9,
+            -4,
+            "open"
+          ],
+          [
+            6,
+            -10,
+            "open"
+          ],
+          [
+            40,
+            20,
+            "done",
+            18
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter 1",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  0,
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "Pirun 3",
+            "tasks": [
+              {
+                "every": 1,
+                "late": [
+                  0,
+                  0,
+                  0,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            5,
+            12,
+            18,
+            27,
+            33,
+            44
+          ],
+          "ideas": [
+            2,
+            8
+          ]
+        }
+      },
+      {
+        "name": "Kassel",
+        "damage": {
+          "volume": [
+            3100,
+            3300,
+            3200,
+            3400,
+            3600,
+            1500,
+            0
+          ],
+          "units": [
+            12,
+            13,
+            11,
+            12,
+            15,
+            5,
+            0
+          ],
+          "extra": [
+            1,
+            -1,
+            2,
+            0,
+            -2,
+            1,
+            0
+          ],
+          "causes": [
+            "Shtypur në kafaz",
+            "Rënë gjatë ngarkimit",
+            "Mbështjellës i grisur"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            3100,
+            3300,
+            3200,
+            3400,
+            3600,
+            1500,
+            0
+          ],
+          "units": [
+            3,
+            4,
+            3,
+            3,
+            4,
+            1,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "causes": [
+            "Artikull që mungon",
+            "Mbledhje e mangët"
+          ]
+        },
+        "delay": {
+          "routes": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            6,
+            0
+          ],
+          "late": [
+            2,
+            1,
+            2,
+            1,
+            3,
+            1,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "minutes": 31
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter A",
+              "rate": 540,
+              "perf": [
+                0.8,
+                0.83,
+                0.78
+              ],
+              "scrap": 0.012,
+              "breakdown": [
+                25,
+                10,
+                40,
+                0,
+                15
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 3,
+          "areas": [
+            "Rampa",
+            "Sortimi"
+          ],
+          "totals": [
+            55,
+            58,
+            52,
+            57,
+            60,
+            54
+          ]
+        },
+        "safety": [
+          [
+            3,
+            "near-miss"
+          ],
+          [
+            8,
+            "near-miss"
+          ],
+          [
+            15,
+            "unsafe-act"
+          ],
+          [
+            22,
+            "near-miss"
+          ],
+          [
+            29,
+            "unsafe-condition"
+          ],
+          [
+            33,
+            "positive"
+          ],
+          [
+            47,
+            "first-aid"
+          ],
+          [
+            120,
+            "no-lost-time"
+          ]
+        ],
+        "actions": [
+          [
+            35,
+            15,
+            "done",
+            14
+          ],
+          [
+            28,
+            7,
+            "done",
+            9
+          ],
+          [
+            20,
+            3,
+            "verified",
+            2
+          ],
+          [
+            12,
+            0,
+            "doing"
+          ],
+          [
+            8,
+            -6,
+            "open"
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter A",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  3,
+                  0,
+                  4
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  5,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "Porta e rampës 2",
+            "tasks": [
+              {
+                "every": 4,
+                "late": [
+                  0
+                ],
+                "open": true
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            9,
+            25,
+            41
+          ],
+          "ideas": [
+            4,
+            11,
+            16
+          ]
+        }
+      },
+      {
+        "name": "Erfurt",
+        "damage": {
+          "volume": [
+            2600,
+            2800,
+            2700,
+            2900,
+            3000,
+            0,
+            0
+          ],
+          "units": [
+            4,
+            5,
+            4,
+            4,
+            6,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            1,
+            0,
+            -1,
+            0,
+            1,
+            0
+          ],
+          "causes": [
+            "Paketim i lagur",
+            "Rënë gjatë ngarkimit"
+          ]
+        },
+        "incomplete": {
+          "volume": [
+            2600,
+            2800,
+            2700,
+            2900,
+            3000,
+            0,
+            0
+          ],
+          "units": [
+            6,
+            7,
+            6,
+            8,
+            9,
+            0,
+            0
+          ],
+          "extra": [
+            1,
+            0,
+            -1,
+            0,
+            2,
+            0,
+            -1
+          ],
+          "causes": [
+            "Etiketë e gabuar",
+            "Artikull që mungon",
+            "Mbledhje e mangët"
+          ]
+        },
+        "delay": {
+          "routes": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            0,
+            0
+          ],
+          "late": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "extra": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "minutes": 22
+        },
+        "oee": {
+          "planned": 450,
+          "machines": [
+            {
+              "name": "Sorter E1",
+              "rate": 480,
+              "perf": [
+                0.9,
+                0.92,
+                0.89
+              ],
+              "scrap": 0.006,
+              "breakdown": [
+                5,
+                0,
+                10,
+                0
+              ]
+            }
+          ]
+        },
+        "fiveS": {
+          "weekday": 1,
+          "areas": [
+            "Magazina"
+          ],
+          "totals": [
+            70,
+            72,
+            69,
+            73,
+            71
+          ]
+        },
+        "safety": [
+          [
+            6,
+            "near-miss"
+          ],
+          [
+            13,
+            "near-miss"
+          ],
+          [
+            20,
+            "unsafe-condition"
+          ],
+          [
+            27,
+            "positive"
+          ],
+          [
+            36,
+            "near-miss"
+          ],
+          [
+            44,
+            "unsafe-act"
+          ]
+        ],
+        "actions": [
+          [
+            25,
+            12,
+            "done",
+            11
+          ],
+          [
+            18,
+            4,
+            "verified",
+            3
+          ],
+          [
+            10,
+            1,
+            "done",
+            1
+          ],
+          [
+            5,
+            -9,
+            "open"
+          ]
+        ],
+        "maintenance": [
+          {
+            "tag": "Sorter E1",
+            "tasks": [
+              {
+                "every": 2,
+                "late": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "every": 4,
+                "late": [
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "kaizen": {
+          "done": [
+            7,
+            14,
+            21,
+            30
+          ],
+          "ideas": [
+            3
+          ]
+        }
+      }
+    ]
+  }
+}

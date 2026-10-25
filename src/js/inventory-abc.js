@@ -376,6 +376,12 @@
   const results = document.querySelector("[data-results]");
   const $ = (selector) => root.querySelector(selector);
   const similarity = Map_?.similarity || ((a, b) => (fold(a) && fold(a) === fold(b) ? 1 : 0));
+  // The names of the warehouse preset (SAP, WMS) join the page's own; its "value" is a stock value, not a unit
+  // cost, so the cost takes only its unit prices.
+  const warehouse = Map_?.PRESETS?.warehouse?.fields || {};
+  const aliases = { ...cfg.aliases };
+  ["sku", "name", "lt", "stock", "picks"].forEach((field) => { aliases[field] = [...(cfg.aliases[field] || []), ...(warehouse[field] || [])]; });
+  aliases.cost = [...(cfg.aliases.cost || []), ...(warehouse.unitCost || [])];
 
   // Saved work is rebuilt field by field, so damaged data cannot break the page.
   const numOrNull = (value) => (finite(value) ? value : null);
@@ -425,7 +431,7 @@
   const arrayLayout = (list, header) => ({ header, mapping: Object.fromEntries(FIELDS.map((field, i) => [field, list[i]])), from: list[FIELDS.length], to: list[FIELDS.length + 1] });
 
   const planTable = (rows) => {
-    const header = isHeaderRow(rows, cfg.aliases, similarity, parseNumber);
+    const header = isHeaderRow(rows, aliases, similarity, parseNumber);
     const headers = header ? rows[0].map((cell) => String(cell ?? "").trim()) : [];
     const width = Math.max(...rows.slice(0, 200).map((row) => row.length));
     const body = (header ? rows.slice(1) : rows).slice(0, 200);
@@ -435,13 +441,13 @@
     const validSaved = Array.isArray(saved) && saved.length === FIELDS.length + 2 && saved.every((i) => Number.isInteger(i) && i >= -1 && i < width);
     if (validSaved) layout = arrayLayout(saved, true);
     else if (header) {
-      const mapping = guessColumns(headers, cfg.aliases, similarity);
-      layout = { header, mapping, ...guessDemand(headers, body, mapping, cfg.aliases, similarity, parseNumber) };
+      const mapping = guessColumns(headers, aliases, similarity);
+      layout = { header, mapping, ...guessDemand(headers, body, mapping, aliases, similarity, parseNumber) };
     } else {
       // Without a header: SKU, description, unit cost, then one column per period.
       layout = { header, mapping: { sku: 0, name: 1, cost: 2, lt: -1, ltSd: -1, stock: -1, picks: -1 }, from: 3, to: width - 1 };
     }
-    return { rows, header, headers, width, layout, sig, remembered: validSaved };
+    return { rows, header, headers, width, layout, sig, remembered: validSaved, preset: header && Map_?.detect ? Map_.detect(headers) : "" };
   };
 
   const applyTable = (name) => {
@@ -501,12 +507,14 @@
     fieldSelect(tx("First period column"), table.layout.from, (value) => { table.layout.from = value; if (table.layout.to < value) table.layout.to = value; }, "ia-map-from");
     fieldSelect(tx("Last period column"), table.layout.to, (value) => { table.layout.to = value; if (table.layout.from > value || table.layout.from < 0) table.layout.from = value; }, "ia-map-to");
     const count = periodLabels(table.headers, table.layout, (n) => String(n)).length;
-    mapNote.textContent = `${table.header ? tx("The first row is a header: the columns were matched by name.") : tx("No header row: SKU, description, unit cost, then one column per period.")} ${tx("Periods used: {n}.", { n: int.format(count) })}${table.remembered ? ` ${tx("Mapped like last time")}.` : ""}`;
+    const recognised = table.preset && Map_.PRESETS[table.preset]
+      ? ` ${tx("Recognised as: {name}.", { name: tx(Map_.PRESETS[table.preset].name) })} ${tx("Recognised from typical column names; check the mapping against your export.")}` : "";
+    mapNote.textContent = `${table.header ? tx("The first row is a header: the columns were matched by name.") : tx("No header row: SKU, description, unit cost, then one column per period.")}${recognised} ${tx("Periods used: {n}.", { n: int.format(count) })}${table.remembered ? ` ${tx("Mapped like last time")}.` : ""}`;
   };
 
   const importRows = (rows, name) => {
     const filled = rows.filter((row) => row.some((cell) => String(cell ?? "").trim()));
-    if (filled.length < (isHeaderRow(filled, cfg.aliases, similarity, parseNumber) ? 2 : 1)) {
+    if (filled.length < (isHeaderRow(filled, aliases, similarity, parseNumber) ? 2 : 1)) {
       flash(importStatus, tx("No rows were found in this data."));
       return false;
     }

@@ -1,0 +1,86 @@
+/* Site Compare (js/site-compare.js): the sites, the period, and the comparison table, ranking and charts. */
+
+.sv-sites { display: grid; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
+.sv-sites:empty { display: none; }
+.sv-site {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.sv-site-text { display: grid; gap: 2px; min-width: 0; }
+.sv-site-text strong { overflow-wrap: anywhere; }
+.sv-site-status { color: var(--muted); font-size: 13px; }
+/* A site that could not be read says why in words; the rule only marks it. */
+.sv-site-status.is-problem { padding-left: 8px; border-left: 3px solid var(--warn); color: var(--ink); }
+.sv-remove { flex: none; }
+
+.sv-choices { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
+.sv-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sv-choice input { margin: 0; accent-color: var(--blue); }
+.sv-choice:has(input:checked) { border-color: var(--blue); color: var(--ink); }
+.sv-choice:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.sv-head h2 { margin: 0 0 4px; }
+.sv-prompt .tool-actions { margin-top: 12px; }
+
+.sv-table-box { margin: 18px 0; }
+.sv-table-note { margin: 0 0 8px; }
+.sv-table-wrap { max-height: none; }
+.sv-table th, .sv-table td { vertical-align: top; }
+/* The figure's name stays in view while the sites scroll past on a phone. */
+.sv-table tbody th, .sv-table thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper-2); }
+.sv-table thead th:first-child { z-index: 2; }
+.sv-site-head { display: block; color: var(--ink); font-size: 12px; letter-spacing: 0; text-transform: none; }
+.sv-asof { display: block; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.sv-group th {
+  padding-top: 14px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.sv-kpi { min-width: 118px; max-width: 160px; white-space: normal; font-weight: 700; }
+@media (min-width: 761px) {
+  .sv-kpi { min-width: 150px; max-width: 220px; }
+}
+.sv-kpi span { display: block; }
+.sv-better { color: var(--muted); font-size: 11px; font-weight: 400; }
+.sv-cell { min-width: 104px; }
+.sv-value { font-size: 15px; }
+.sv-detail, .sv-none { display: block; color: var(--muted); font-size: 11px; white-space: normal; }
+.sv-tag { display: inline-block; margin-left: 4px; vertical-align: 2px; }
+.sv-tag.is-best { border-color: color-mix(in srgb, var(--ok) 70%, var(--line)); color: var(--ink); }
+.sv-tag.is-worst { border-color: color-mix(in srgb, var(--danger) 70%, var(--line)); color: var(--ink); }
+
+.sv-ranking { display: grid; gap: 6px; margin: 8px 0 0; padding-left: 22px; }
+
+.sv-chart-grid { display: grid; gap: 14px; margin-top: 12px; }
+@media (min-width: 900px) {
+  .sv-chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media print {
+  .sv-setup, .sv-results .result-actions, .sv-results .ck-actions, .sv-prompt .tool-actions, .sv-results .dl-example-note button { display: none !important; }
+  .sv-table-wrap { overflow: visible; border: 0; }
+  .sv-table tbody th, .sv-table thead th { position: static; }
+  .sv-table th, .sv-table td { padding: 4px 6px; }
+  .sv-chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-chart-grid .dl-panel { break-inside: avoid; }
+}
