@@ -398,5 +398,13 @@
     "summary": "The sites you look after side by side, each read from its read-only team code without joining: damage and incomplete rates, routes on time, OEE, 5S, safety, actions, maintenance and the hotel rates, best and worst named, ranked by a rule you can see.",
     "url": "/tools/site-compare/",
     "cta": "Compare the sites"
+  },
+  {
+    "name": "Kaizen Event",
+    "type": "Lean",
+    "time": "3–5 days",
+    "summary": "Plan, run and follow up a rapid improvement event: the charter with goals in numbers, preparation counted back from the first day, the standard 3–5 day agenda, ideas by waste on an effort and impact matrix, goals before and after, and the 30-day follow-up list. Report-out in A4 and Word.",
+    "url": "/tools/kaizen-event/",
+    "cta": "Plan an event"
   }
 ]

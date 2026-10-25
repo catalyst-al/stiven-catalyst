@@ -276,7 +276,8 @@
       "/tools/smed/",
       "/tools/eight-d/",
       "/tools/hoshin-kanri/",
-      "/tools/site-compare/"
+      "/tools/site-compare/",
+      "/tools/kaizen-event/"
     ],
     "learn": [
       "/tools/six-sigma-dmaic/"
@@ -371,6 +372,11 @@
         "when": "Every week",
         "do": "Update every site on Monday, read the best and the worst on each rate, and take one practice of the best site to the others with a Gemba Walk.",
         "tool": "/tools/site-compare/"
+      },
+      {
+        "when": "Every month",
+        "do": "Agree the next event's charter six weeks ahead, tick the preparation as its dates come up, and close the last event's follow-up list by its 30-day check.",
+        "tool": "/tools/kaizen-event/"
       }
     ],
     "next": "atlas"

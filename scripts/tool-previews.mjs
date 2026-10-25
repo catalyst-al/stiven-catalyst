@@ -93,6 +93,7 @@ const RECIPES = {
   "hoshin-kanri": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "print-pack": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
   "site-compare": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
+  "kaizen-event": { act: (page) => clickIfVisible(page, "[data-example]"), target: "[data-results]" },
 };
 
 // A click only when the button is there and visible (a first visit already shows the example).
