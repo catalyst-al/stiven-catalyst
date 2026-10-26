@@ -20,7 +20,7 @@ me shifrat e verifikuara të numrave 40 dhe 56 të Management Review dhe me graf
   protokolli).
 - **Faqet.** Kopertina, editoriali (me tri shtresat dhe kontratën e leximit), përmbajtja (kapitujt me faqet e tyre në tri
   kolona), kapitujt, mjeti i vëllimit, eseja e mbylljes, metoda, burimet, kopertina e pasme. Vëllimi 1 ka 18 faqe, Vëllimi
-  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32, Vëllimi 11 ka 32, Vëllimi 12 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
+  2 ka 30, Vëllimi 3 ka 31, Vëllimi 4 ka 30, Vëllimi 5 ka 32, Vëllimi 6 ka 32, Vëllimi 7 ka 32, Vëllimi 8 ka 31, Vëllimi 9 ka 33, Vëllimi 10 ka 32, Vëllimi 11 ka 32, Vëllimi 12 ka 32, Vëllimi 13 ka 32. Të njëjtat faqe printohen (`node scripts/treatise.mjs`) dhe shfaqen të gjalla te lexuesi; vetëm kopertina
   ruhet si fotografi.
 - **Shifrat.** Vijnë nga Nr. 40 (gemba: Teresko 2004, fjalori i LEI, Womack 2011, Mann 2005 dhe 2014, Tucker & Singer
   2015, Sexton et al. 2014) dhe Nr. 56 (VSM: Rother & Shook 1999, fjalori i LEI, Martin & Osterling 2014, Martin 2009,
@@ -579,6 +579,68 @@ për faqen në tri gjuhët (`lib/treatise/volumes/12.js`). Blloku: Operacioni. 3
 | U e përmbysur për efikasitetin, rënie e saktësisë | `adler-benbunan-fich-2012`, DOI 10.1016/j.ijhcs.2011.10.003 | Abstrakti (përmes kërkimit) |
 | Bllokim 10 s, më pak gabime rikthimi | `brumby-2013`, DOI 10.1037/a0032696 | Abstrakti përputhet |
 | 12 × 40 = 480 s; 7 × 40 = 280 s; 200 s | të shpikura | Flamur "sintetik" në faqe dhe te metoda |
+
+## Vëllimi 13: Paradoksi i partnerit, pse operacionet varen nga njerëz jashtë organigramës (26 tetor 2026)
+
+Burimi është PDF-ja e autorit "Stiven Catalyst, Operational Treatise, Volume 13, EN" (30 faqe, anglisht), e rishkruar
+për faqen në tri gjuhët (`lib/treatise/volumes/13.js`). Blloku: Operacioni. 32 faqe në faqe (PDF-ja ka 30).
+
+### Vendimet
+
+- **Dy faqe më shumë se PDF-ja.** (1) Kapitulli II merr faqen "Për çfarë ishin 99 mosmarrëveshjet", me dy grafikë me
+  burim, sepse PDF-ja nuk ka asnjë grafik dhe seria kërkon të paktën dy (shih më poshtë). (2) Faqja e metodës në fund,
+  si te vëllimet e tjera; faqja 4 e PDF-së ("Editorial method") u bë faqja hyrëse e shënimit, para kapitujve.
+- **Grafikët.** Të dy nga Lumineau & Henderson 2012, pjesa e mostrës në versionin e punës (MPRA nr. 38510): 128 dosje
+  të shqyrtuara → 99 mosmarrëveshje me dy palë në zinxhirin e furnizimit → 96 vetëm me firma evropiane; lloji i
+  kontratës: shpërndarje 36,4%, furnizim për prodhim 28,3%, IT 26,2%, konsulencë e shërbime 9,1%. Asnjë grafik
+  sintetik: Kapitulli V i PDF-së thotë vetë se numrat e rrjetit nuk duhen shpikur për një grafik.
+- **Faktet e studimeve u rikontrolluan** kundrejt Crossref dhe abstrakteve: Williamson 1979, JLE 22(2), 233–261; Anderson
+  & Narus 1990, JM 54(1), 42–58, bashkëpunimi si paraardhës i besimit, disa informues; Heide & John 1992, JM 56(2),
+  32–44, normat kur asetet specifike janë në rrezik dhe kontrolli vertikal mungon; Ring & Van de Ven 1994, AMR 19(1),
+  90–118; Gulati 1995, AMJ 38(1), 85–112, aleanca 1970–1989, lidhjet e përsëritura më rrallë me kapital; Dyer & Singh
+  1998, AMR 23(4), 660–679, katër burime; Zaheer, McEvily & Perrone 1998, OrgSci 9(2), 141–159, 107 marrëdhënie në
+  pajisje elektrike, model ekuacionesh strukturore; Jap & Ganesan 2000, JMR 37(2), 227–245; Poppo & Zenger 2002, SMJ
+  23(8), 707–725, shërbime informatike, plotësueshmëri; Provan & Kenis 2008, JPART 18(2), 229–252, tri mënyra;
+  Lumineau & Henderson 2012, JOM 30(5), 382–395, 99 mosmarrëveshje (versioni i punës: 128 dosje të një firme ligjore
+  franceze, 1991–2005); Cao & Lumineau 2015, JOM 33–34, 15–42, 149 studime, 33.051 marrëdhënie. Shifrat 99, 107, 149
+  dhe 33.051 të PDF-së janë të sakta.
+- **Korrigjimet ndaj PDF-së.** (1) Jap & Ganesan (2000) ishte te burimet, por nuk citohej askund; tani citohet te faqja
+  e ciklit të marrëdhënies (Kapitulli V), me atë që thotë abstrakti (efekti i mbrojtjeve varet nga faza e
+  marrëdhënies). (2) Williamson: PDF-ja përmend vetëm pasigurinë dhe specifikën e aseteve; u shtua shpeshtësia, dimensioni
+  i tretë i artikullit të 1979-ës. (3) Gulati: "repeated ties mattered for the form of governance" u saktësua me gjetjen
+  e abstraktit (aleancat e përsëritura më rrallë me kapital të përbashkët). (4) Lumineau & Henderson: u shtua burimi i
+  mostrës (dosjet e një firme ligjore franceze) dhe gjetja për historinë konkurruese (më shumë kontroll, negocim më
+  bashkëpunues), që PDF-ja e la të paqartë ("control could operate differently"). (5) Cao & Lumineau: u shtuan
+  moderatorët dhe lidhja me kënaqësinë, performancën dhe oportunizmin, nga abstrakti. (6) Përmbajtja e PDF-së nuk e
+  rendit sintezën e faqes 28. (7) Koka e faqes 18 thyhet në dy rreshta ("OCTOBER / 2026"), dhe te faqet 14, 21, 22 dhe
+  25 etiketa e kapitullit ngjitet me datën. Të dyja nuk ekzistojnë në printimin e faqes. (8) Teksti i kopertinës së
+  pasme të PDF-së u la te formula e përbashkët e serisë.
+- **Burimet.** Asnjëri nuk ekzistonte; u shtuan të dymbëdhjetë. Të dymbëdhjetë DOI-të zgjidhen në Crossref me të
+  njëjtët autorë, revista, vëllime dhe faqe. "Interorganizational" (19 shkronja) hyri te `lib/soft-hyphens.js`.
+- **Lidhjet me faqen.** Esetë: mistakes-get-lost-between-departments (Kap. I), 80-vehicles-you-cannot-see (Kap. II),
+  61-resellers (Kap. III), where-part-of-the-order-goes-missing (Kap. IV), what-last-mile-taught-me (Kap. V),
+  kpis-the-team-trusts (Kap. VI). Mjeti: Action Tracker (`/tools/action-tracker/`), që i mban pikat e ndjekjes së
+  kartës me pronar dhe datë rishikimi.
+- **Çfarë u ndryshua nga PDF-ja.** Tekstet u shkurtuan që të hyjnë në A5 (sidomos protokollet e Kapitujve II, V dhe VI
+  dhe karta e partneritetit në gjermanisht). Asgjë tjetër.
+
+### Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Pasiguria, shpeshtësia, investimet specifike | `williamson-1979`, DOI 10.1086/466942 | Regjistri i botuesit |
+| Bashkëpunimi si paraardhës i besimit; disa informues | `anderson-narus-1990`, DOI 10.1177/002224299005400103 | Abstrakti përputhet |
+| Normat kur asetet janë në rrezik dhe kontrolli vertikal mungon | `heide-john-1992`, DOI 10.1177/002224299205600203 | Abstrakti përputhet |
+| Negocim, angazhim, zbatim | `ring-van-de-ven-1994`, DOI 10.5465/amr.1994.9410122009 | Regjistri i botuesit |
+| Aleanca 1970–1989; lidhjet e përsëritura më rrallë me kapital | `gulati-1995`, DOI 10.5465/256729 | Abstrakti (përmes kërkimit) |
+| Katër burime të rentës relacionale | `dyer-singh-1998`, DOI 10.5465/amr.1998.1255632 | Regjistri i botuesit |
+| 107 marrëdhënie, pajisje elektrike, dy nivele besimi | `zaheer-mcevily-perrone-1998`, DOI 10.1287/orsc.9.2.141 | Abstrakti përputhet |
+| Efekti i mbrojtjeve sipas fazës së marrëdhënies | `jap-ganesan-2000`, DOI 10.1509/jmkr.37.2.227.18735 | Abstrakti përputhet |
+| Shërbime informatike; plotësueshmëri | `poppo-zenger-2002`, DOI 10.1002/smj.249 | Abstrakti përputhet |
+| Tri mënyra qeverisjeje të rrjetit | `provan-kenis-2008`, DOI 10.1093/jopart/mum015 | Regjistri i botuesit |
+| 128 → 99 → 96; 36,4 / 28,3 / 26,2 / 9,1%; ~46% ndërkufitare; ~150.000 faqe | `lumineau-henderson-2012`, DOI 10.1016/j.jom.2012.03.005 | Abstrakti dhe versioni i punës (MPRA 38510), lexuar |
+| 149 studime, 33.051 marrëdhënie; moderatorët | `cao-lumineau-2015`, DOI 10.1016/j.jom.2014.09.009 | Abstrakti përputhet |
+| 61 rishitës | Sfondi i autorit | Kontekst, jo mostër |
 
 ## Si shtohet një vëllim
 
