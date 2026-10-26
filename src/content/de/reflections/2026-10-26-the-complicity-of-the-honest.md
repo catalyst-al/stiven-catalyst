@@ -3,7 +3,7 @@ title: 'Die Mitschuld der Anständigen: Wenn Schweigen zur Stimme für das Unrec
 date: 2026-10-26
 status: published
 summary: 'Angesichts offenen Unrechts gibt es keine Neutralität. Das Schweigen der Anständigen liest derjenige, der andere mit Füßen tritt, als Erlaubnis.'
-deck: 'In einem verzerrten System gedeiht das Böse nicht nur durch jene, die die Regeln brechen, sondern durch die stille Zustimmung derer, die sich lieber um ihre eigenen Angelegenheiten kümmern.'
+deck: 'In einem verzerrten System gedeiht das Böse nicht nur durch jene, die die Regeln brechen, sondern durch die stille Zustimmung derer, die lieber nur ihre eigene Arbeit machen.'
 description: 'Über das Schweigen in Besprechungen, über anständige Menschen, die „nur ihre Arbeit machen“, und warum Mut mit einem ruhig gesagten Wort beginnt.'
 ---
 
