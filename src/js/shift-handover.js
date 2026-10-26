@@ -1,4 +1,51 @@
 (() => {
+  // ---- Sending a handover to the next shift's device, without a server ----
+  // The handover travels inside the address of this page, after "#h=": { format, version, sent, handover } as JSON,
+  // gzipped where the browser can (CompressionStream; "#h0=" and plain JSON otherwise) and written in base64url. The
+  // part of an address after "#" never leaves the browser, so the link can go through any chat or email and holds
+  // nothing a server sees; shown as a QR code (team-sync.js draws it, up to 2331 bytes) it moves from one screen to
+  // the next phone without any connection at all. Opened, the link offers the handover; nothing is replaced unasked.
+  const LINK_FORMAT = "stiven-catalyst-handover";
+  const LINK_VERSION = 1;
+  const toBase64Url = (bytes) => {
+    let binary = "";
+    bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  };
+  const fromBase64Url = (text) => {
+    const padded = text.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - (text.length % 4)) % 4);
+    return Uint8Array.from(atob(padded), (ch) => ch.charCodeAt(0));
+  };
+  const pipe = async (bytes, stream) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer());
+  const canZip = () => typeof CompressionStream === "function" && typeof DecompressionStream === "function";
+  // The fragment (without "#") that carries a handover.
+  const packHandover = async (handover, now = new Date()) => {
+    const bytes = new TextEncoder().encode(JSON.stringify({ format: LINK_FORMAT, version: LINK_VERSION, sent: now.toISOString(), handover }));
+    if (canZip()) {
+      try { return `h=${toBase64Url(await pipe(bytes, new CompressionStream("gzip")))}`; } catch { /* plain below */ }
+    }
+    return `h0=${toBase64Url(bytes)}`;
+  };
+  // The handover a fragment carries (as saved, to be cleaned by the page), or null when it carries none.
+  const unpackHandover = async (fragment) => {
+    const m = /^#?(h0?)=([A-Za-z0-9_-]+)$/.exec(String(fragment ?? "").trim());
+    if (!m) return null;
+    try {
+      let bytes = fromBase64Url(m[2]);
+      if (m[1] === "h") {
+        if (!canZip()) return null;
+        bytes = await pipe(bytes, new DecompressionStream("gzip"));
+      }
+      const payload = JSON.parse(new TextDecoder().decode(bytes));
+      if (!payload || payload.format !== LINK_FORMAT || payload.version !== LINK_VERSION || !payload.handover || typeof payload.handover !== "object" || Array.isArray(payload.handover)) return null;
+      return { sent: typeof payload.sent === "string" ? payload.sent : "", handover: payload.handover };
+    } catch {
+      return null;
+    }
+  };
+  const handoverLink = async (handover, href, now) => `${String(href).split("#")[0]}#${await packHandover(handover, now)}`;
+  window.ShiftHandoverLink = { LINK_FORMAT, LINK_VERSION, toBase64Url, fromBase64Url, packHandover, unpackHandover, handoverLink };
+
   const form = document.querySelector("[data-handover]");
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
@@ -708,6 +755,88 @@
 
   if (!cur().date) cur().date = today();
   renderAll();
+
+  // "Send to the next shift": the handover as a link and, when it fits, a QR code, in a dialog.
+  const sendDialog = output.querySelector("[data-send-dialog]");
+  const sendButton = output.querySelector("[data-send]");
+  if (sendDialog && sendButton && typeof HTMLDialogElement !== "undefined") {
+    const linkBox = sendDialog.querySelector("[data-send-link]");
+    const qrBox = sendDialog.querySelector("[data-send-qr]");
+    const qrNote = sendDialog.querySelector("[data-send-qr-note]");
+    const shareButton = sendDialog.querySelector("[data-send-share]");
+    const sendStatus = sendDialog.querySelector("[data-send-status]");
+    let link = "";
+    sendButton.addEventListener("click", async () => {
+      const h = cur();
+      if (!hasContent(h)) {
+        note(tx("There is nothing to send yet."));
+        return;
+      }
+      link = await handoverLink({ ...h, ackAt: "" }, location.href);
+      linkBox.value = link;
+      qrBox.replaceChildren();
+      const qr = window.TeamSyncMath?.qrEncode ? window.TeamSyncMath.qrEncode(link) : null;
+      if (qr) {
+        qrBox.innerHTML = window.TeamSyncMath.qrSvg(qr.matrix, tx("Scan the code with the next shift's phone"));
+        qrNote.textContent = tx("Scan the code with the next shift's phone");
+      } else {
+        qrNote.textContent = window.TeamSyncMath?.qrEncode ? tx("The handover is too long for a code: share or copy the link.") : tx("Share or copy the link.");
+      }
+      qrBox.hidden = !qr;
+      shareButton.hidden = typeof navigator.share !== "function";
+      sendStatus.textContent = "";
+      sendDialog.showModal();
+    });
+    shareButton.addEventListener("click", async () => {
+      try {
+        await navigator.share({ title: tx("Shift handover"), text: `${tx("Shift handover")} · ${shiftLine(cur())}`, url: link });
+      } catch { /* the visitor closed the share sheet */ }
+    });
+    sendDialog.querySelector("[data-send-copy]").addEventListener("click", async () => {
+      await copyText(link);
+      sendStatus.textContent = tx("Link copied.");
+    });
+    sendDialog.querySelector("[data-send-close]").addEventListener("click", () => sendDialog.close());
+  }
+
+  // A handover that arrived in the address (#h=…): offered, never opened unasked. What is here moves to the history
+  // first, and the person taking over confirms on their own device.
+  const incomingBox = document.querySelector("[data-incoming]");
+  const offerIncoming = async () => {
+    if (!incomingBox || !/^#h0?=/.test(location.hash)) return;
+    const arrived = await unpackHandover(location.hash);
+    const clearHash = () => history.replaceState(null, "", location.pathname + location.search);
+    if (!arrived) {
+      note(tx("This link does not hold a handover."));
+      clearHash();
+      return;
+    }
+    const h = clean(arrived.handover);
+    h.ackAt = "";
+    incomingBox.querySelector("[data-incoming-text]").textContent = tx("A handover arrived{from}: {shift} shift of {date}, {open}.", {
+      shift: h.shift, date: longDate(h.date), from: h.from ? ` ${tx("from {name}", { name: h.from })}` : "", open: tx("{n} open", { n: openIssues(h).length }),
+    });
+    incomingBox.hidden = false;
+    incomingBox.querySelector("[data-incoming-open]").addEventListener("click", () => {
+      if (hasContent(cur())) {
+        if (!window.confirm(tx("Open the handover that arrived? What you have here moves to the history first."))) return;
+        state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(cur())), text: asText(cur()) });
+        state.history = state.history.slice(0, HISTORY_MAX);
+      }
+      state.current = h;
+      save();
+      renderAll();
+      incomingBox.hidden = true;
+      clearHash();
+      note(tx("Opened the handover. Read it, then confirm takeover."));
+      output.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, { once: true });
+    incomingBox.querySelector("[data-incoming-ignore]").addEventListener("click", () => {
+      incomingBox.hidden = true;
+      clearHash();
+    }, { once: true });
+  };
+  offerIncoming();
 
   // 5 Whys hands its countermeasure over with ?issue=, ?owner= and ?due=: it becomes an open issue of this handover,
   // once (the same text open already is not added twice). The address is cleaned so a reload does not add it again.

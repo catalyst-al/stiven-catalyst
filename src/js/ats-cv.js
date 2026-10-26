@@ -116,6 +116,48 @@
     if (found(k.split(" ").map(escapeTerm).join(" ?"), longWord)) return true;
     return longWord && /^\p{L}+$/u.test(k) && found(escapeTerm(k.slice(0, -3)), true);
   };
+  // Words that mean the same skill (src/_data/atsSkills.json: "Staplerschein", "forklift licence" and "pirun" are one
+  // group). A key word of the ad counts as found when the CV has it, or any other word of its group; the match says
+  // which word it found, so the visitor can decide whether to write it as the ad does.
+  const groupOf = (term, groups = []) => {
+    const k = simple(term).trim();
+    return groups.find((group) => group.some((word) => simple(word).trim() === k)) || null;
+  };
+  const findTerm = (text, term, groups = []) => {
+    if (hasTerm(text, term)) return { found: true, via: null };
+    const via = (groupOf(term, groups) || []).find((word) => simple(word).trim() !== simple(term).trim() && hasTerm(text, word));
+    return { found: Boolean(via), via: via || null };
+  };
+  // The parts of an ad: a short line that reads like "Ihr Profil" or "Requirements" opens what is required, one like
+  // "Nice to have" what is only welcome, and one like "Ihre Aufgaben" or "We offer" closes them; the text before any
+  // such line (the company, the tasks) is neither. A key word found in the required part weighs double in the score.
+  const adParts = (ad, skills = {}) => {
+    const headingLike = (line, list) => {
+      const plain = simple(line).replace(/[:.!?()\-–—*#]+/g, " ").replace(/\s+/g, " ").trim();
+      return plain.split(" ").length <= 7 && (list || []).some((heading) => plain === simple(heading).trim() || plain.startsWith(`${simple(heading).trim()} `) || plain.endsWith(` ${simple(heading).trim()}`));
+    };
+    const parts = { required: [], optional: [], other: [] };
+    let current = "other";
+    String(ad ?? "").split(/\r?\n/).forEach((line) => {
+      if (!line.trim()) return;
+      if (headingLike(line, skills.requirementHeadings)) { current = "required"; return; }
+      if (headingLike(line, skills.optionalHeadings)) { current = "optional"; return; }
+      if (headingLike(line, skills.otherHeadings)) { current = "other"; return; }
+      parts[current].push(line);
+    });
+    return Object.fromEntries(Object.entries(parts).map(([key, list]) => [key, list.join("\n")]));
+  };
+  // A term's weight in the score: 2 when the ad requires it, 1 otherwise (also when the ad has no such part).
+  const weightOf = (term, parts) => (parts.required && hasTerm(parts.required, term) ? 2 : 1);
+  // The match of a CV text to the key words of an ad: each term with found, via (the group word that counted) and
+  // weight, and the score as the weighted share found.
+  const match = (text, terms, skills = {}, ad = "") => {
+    const parts = adParts(ad, skills);
+    const items = terms.map((term) => ({ term, ...findTerm(text, term, skills.groups), weight: weightOf(term, parts) }));
+    const total = items.reduce((sum, item) => sum + item.weight, 0);
+    const got = items.filter((item) => item.found).reduce((sum, item) => sum + item.weight, 0);
+    return { items, score: total ? got / total : 0, required: items.filter((item) => item.weight > 1).length };
+  };
 
   // ---------- Plain text ----------
   const period = (from, to, present) => {
@@ -218,6 +260,92 @@
     return window.DocxKit.wordFile({ body, font, accent, lang: cv.docLang, title: [p.name.trim(), doc.doc].filter(Boolean).join(" – "), creator: p.name.trim() });
   };
 
+  // ---------- PDF file (pdf-kit.js writes the file) ----------
+  // The page of the preview in points (a pixel of the preview is 0.75 pt): A4, 45 pt above, 54 pt at the sides, 48 pt
+  // below, the same sizes and gaps. Arial and Calibri become Helvetica, Georgia becomes Times: the standard fonts every
+  // PDF reader has, so the file is a few kilobytes and lays out the same on every screen and printer.
+  const pdf = (cv, data, now = new Date()) => {
+    const doc = data.docLangs[cv.docLang];
+    const font = data.fonts.find((item) => item.id === cv.font) || data.fonts[0];
+    const accent = (data.accents.find((item) => item.id === cv.accent) || data.accents[0]).color;
+    const PT = 0.75;
+    const INK = "#1a1a1a";
+    const MUTED = "#4a4a4a";
+    const body = 13 * PT;
+    const leading = body * 1.42;
+    const runs = (text) => String(text).split(/\*\*(.+?)\*\*/g).map((part, i) => ({ text: part, bold: i % 2 === 1 })).filter((run) => run.text);
+    const blocks = [];
+    const add = (block) => blocks.push(block);
+    const text = (value, space, extra = {}) => add({ kind: "text", runs: runs(value), size: body, leading, color: INK, space, ...extra });
+    const section = (title) => {
+      add({ kind: "text", text: title.toUpperCase(), size: 13.5 * PT, bold: true, color: accent, leading: 13.5 * PT * 1.42, space: 18 * PT, keep: true, spacing: 0.55 });
+      add({ kind: "rule", color: accent, width: 0.9, space: 3 * PT, keep: true });
+    };
+    const bullets = (value, first) => lines(value).forEach((line, i) => text(line, i ? 2 * PT : first, { bullet: "•", indent: 14 * PT }));
+    const p = cv.person;
+    add({ kind: "text", text: p.name.trim() || doc.yourName, size: 27 * PT, bold: true, color: accent, leading: 27 * PT * 1.15, space: 0 });
+    if (p.headline.trim()) add({ kind: "text", text: p.headline.trim(), size: 14.5 * PT, bold: true, color: INK, leading: 14.5 * PT * 1.42, space: 4 * PT });
+    const contact = [p.location, p.phone, p.email, p.website, p.extra].map((part) => part.trim()).filter(Boolean);
+    if (contact.length) add({ kind: "text", text: contact.join("  |  "), size: 12.5 * PT, color: MUTED, leading: 12.5 * PT * 1.42, space: 4 * PT });
+
+    if (cv.summary.trim()) {
+      section(headingOf(cv, doc, "summary"));
+      cv.summary.trim().split(/\n\s*\n/).forEach((para, i) => text(para.replace(/\s*\n\s*/g, " "), i ? 4 * PT : 6 * PT));
+    }
+    if (lines(cv.highlights).length) {
+      section(headingOf(cv, doc, "highlights"));
+      bullets(cv.highlights, 6 * PT);
+    }
+    const jobs = cv.experience.filter(hasText);
+    if (jobs.length) {
+      section(headingOf(cv, doc, "experience"));
+      jobs.forEach((job, i) => {
+        add({ kind: "row", left: job.title.trim(), right: period(job.from, job.to, doc.present), size: 13.5 * PT, leading: 13.5 * PT * 1.42, color: INK, rightColor: MUTED, space: i ? 12 * PT : 6 * PT, keep: true });
+        const sub = [job.company, job.location].map((part) => part.trim()).filter(Boolean).join(" | ");
+        if (sub) text(sub, 2 * PT, { color: MUTED, keep: Boolean(lines(job.bullets).length) });
+        bullets(job.bullets, 3 * PT);
+      });
+    }
+    const schools = cv.education.filter(hasText);
+    if (schools.length) {
+      section(headingOf(cv, doc, "education"));
+      schools.forEach((item, i) => {
+        add({ kind: "row", left: item.title.trim(), right: item.date.trim(), size: 13.5 * PT, leading: 13.5 * PT * 1.42, color: INK, rightColor: MUTED, space: i ? 10 * PT : 6 * PT, keep: true });
+        if (item.school.trim()) text(item.school.trim(), 2 * PT, { color: MUTED });
+        if (item.detail.trim()) text(item.detail.trim(), 2 * PT);
+      });
+    }
+    const skills = cv.skills.filter(hasText);
+    if (skills.length) {
+      section(headingOf(cv, doc, "skills"));
+      skills.forEach((item, i) => add({ kind: "text", runs: [...(item.title.trim() ? [{ text: `${item.title.trim()}: `, bold: true }] : []), ...runs(item.text.trim())], size: body, leading, color: INK, space: i ? 4 * PT : 6 * PT }));
+    }
+    const langs = cv.languages.filter(hasText);
+    if (langs.length) {
+      section(headingOf(cv, doc, "languages"));
+      text(langs.map((item) => item.level.trim() ? `${item.name.trim()} (${item.level.trim()})` : item.name.trim()).join(", "), 6 * PT);
+    }
+    cv.extras.filter(hasText).forEach((extra) => {
+      section(extra.title.trim() || "—");
+      lines(extra.text).forEach((line, i) => text(line, i ? 4 * PT : 6 * PT));
+    });
+
+    const footerName = [p.name.trim(), doc.doc].filter(Boolean).join(" · ");
+    return window.PdfKit.flow(blocks, {
+      family: font.pdf || "helvetica",
+      margins: { top: 60 * PT, bottom: 64 * PT, left: 72 * PT, right: 72 * PT },
+      footer: (n, total) => [footerName, doc.page.replace("{n}", n).replace("{total}", total)],
+      footerSize: 10.5 * PT,
+      footerColor: "#666666",
+      footerAt: 26 * PT,
+      title: [p.name.trim(), doc.doc].filter(Boolean).join(" – "),
+      author: p.name.trim(),
+      subject: p.headline.trim(),
+      lang: cv.docLang,
+      date: now,
+    });
+  };
+
   // Pages: blocks fill a page until the next one no longer fits; a heading moves with the block under it.
   const paginate = (blocks, limit) => {
     const pages = [[]];
@@ -241,7 +369,7 @@
     return pages;
   };
 
-  window.AtsCv = { fit, clean, fromBuilder, keywords, hasTerm, plainText, docx, paginate, SHAPE };
+  window.AtsCv = { fit, clean, fromBuilder, keywords, hasTerm, groupOf, findTerm, adParts, match, plainText, docx, pdf, paginate, SHAPE };
 
   // ======================================================================
   const app = document.querySelector("[data-ats]");
@@ -253,6 +381,8 @@
   const builder = JSON.parse(document.getElementById("ats-builder-data")?.textContent || "{}");
   const sideTitles = Object.fromEntries(Object.entries(builder.docLangs || {}).map(([code, lang]) => [code, lang.headings?.side || ""]));
   const STOP = data.stopwords.split(/\s+/);
+  // Words that mean the same skill, and the headings that open the required part of an ad (src/_data/atsSkills.json).
+  const SKILLS = JSON.parse(document.getElementById("ats-skills-data")?.textContent || "{}");
   const KEY = data.storageKey;
   const scriptUrl = document.currentScript?.src || window.location.href;
   const PDFJS = new URL("vendor/pdfjs/pdf.min.mjs", scriptUrl).href;
@@ -515,9 +645,10 @@
       return;
     }
     const text = cvText();
-    const found = terms.filter((term) => hasTerm(text, term));
-    const missing = terms.filter((term) => !found.includes(term));
-    matchScore = found.length / terms.length;
+    const result = match(text, terms, SKILLS, cv.jobAd);
+    const found = result.items.filter((item) => item.found);
+    const missing = result.items.filter((item) => !item.found);
+    matchScore = result.score;
     const meter = el("div", "ats-meter");
     const bar = el("span");
     bar.style.width = `${Math.round(matchScore * 100)}%`;
@@ -527,11 +658,21 @@
       el("p", "ats-score", tx("{a} of {b} key words from the ad are in your CV ({p}%).", { a: found.length, b: terms.length, p: Math.round(matchScore * 100) })),
       meter,
     );
+    const notes = [];
+    if (result.required) notes.push(tx(result.required === 1 ? "{n} word comes from the part of the ad that lists what is required; it weighs double." : "{n} words come from the part of the ad that lists what is required; they weigh double.", { n: result.required }));
+    const viaCount = found.filter((item) => item.via).length;
+    if (viaCount) notes.push(tx(viaCount === 1 ? "{n} word was found as another word for the same skill (marked ≈); write it as the ad does if that is true for you." : "{n} words were found as other words for the same skill (marked ≈); write them as the ad does if that is true for you.", { n: viaCount }));
+    if (notes.length) matchBox.append(el("p", "cv-hint", notes.join(" ")));
     const chips = (title, items, className) => {
       if (!items.length) return;
       matchBox.append(el("p", "ats-chips-title", title));
       const box = el("div", "ats-chips");
-      items.forEach((item) => box.append(el("span", `ats-chip ${className}`, item)));
+      items.forEach((item) => {
+        const chip = el("span", `ats-chip ${className}${item.weight > 1 ? " is-required" : ""}`, item.via ? `${item.term} ≈ ${item.via}` : item.term);
+        if (item.weight > 1) chip.title = tx("Required by the ad");
+        if (item.via) chip.title = [chip.title, tx("Found in your CV as “{word}”", { word: item.via })].filter(Boolean).join(" · ");
+        box.append(chip);
+      });
       matchBox.append(box);
     };
     chips(tx("Missing: add the ones that are true for you"), missing, "is-missing");
@@ -840,6 +981,12 @@
       next.accent = cv.accent;
       replaceCv(next, "");
       say(tx("Cleared."));
+    },
+    pdf: () => {
+      if (!window.PdfKit) return actions.print();
+      const file = pdf(cv, data);
+      download(`${fileName()}.pdf`, file.bytes, "application/pdf");
+      say(tx(file.pages === 1 ? "PDF saved: one page, laid out the same in every reader and on every printer." : "PDF saved: {n} pages, laid out the same in every reader and on every printer.", { n: file.pages }));
     },
     word: () => {
       download(`${fileName()}.docx`, docx(cv, data), "application/vnd.openxmlformats-officedocument.wordprocessingml.document");

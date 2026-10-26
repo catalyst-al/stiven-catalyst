@@ -2,9 +2,9 @@
   "storageKey": "sc-ats-cv",
   "cvBuilderKey": "sc-cv-builder",
   "fonts": [
-    { "id": "arial", "name": "Arial", "css": "Arial, Helvetica, \"Liberation Sans\", sans-serif", "word": "Arial" },
-    { "id": "calibri", "name": "Calibri", "css": "Calibri, Carlito, \"Segoe UI\", Arial, sans-serif", "word": "Calibri" },
-    { "id": "georgia", "name": "Georgia", "css": "Georgia, \"Times New Roman\", serif", "word": "Georgia" }
+    { "id": "arial", "name": "Arial", "css": "Arial, Helvetica, \"Liberation Sans\", sans-serif", "word": "Arial", "pdf": "helvetica" },
+    { "id": "calibri", "name": "Calibri", "css": "Calibri, Carlito, \"Segoe UI\", Arial, sans-serif", "word": "Calibri", "pdf": "helvetica" },
+    { "id": "georgia", "name": "Georgia", "css": "Georgia, \"Times New Roman\", serif", "word": "Georgia", "pdf": "times" }
   ],
   "accents": [
     { "id": "black", "name": "Black", "color": "#111111" },

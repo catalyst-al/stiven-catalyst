@@ -174,11 +174,12 @@
 
   <div class="cv-preview" id="cv-preview" tabindex="-1">
     <div class="cv-toolbar">
-      <button class="button-primary" type="button" data-act="print">{{ "Download PDF" | t(lang) }}</button>
+      <button class="button-primary" type="button" data-act="pdf">{{ "Download PDF" | t(lang) }}</button>
       <button class="button-secondary" type="button" data-act="word">{{ "Word (.docx)" | t(lang) }}</button>
       <details class="cv-more">
         <summary class="button-secondary">{{ "More" | t(lang) }}</summary>
         <div class="cv-more-menu">
+          <button type="button" data-act="print">{{ "Print the preview" | t(lang) }}</button>
           <button type="button" data-act="copy">{{ "Copy as plain text" | t(lang) }}</button>
           <button type="button" data-act="text">{{ "Download as text (.txt)" | t(lang) }}</button>
           <button type="button" data-act="example">{{ "Load an example CV" | t(lang) }}</button>
@@ -220,8 +221,10 @@
 
 <script type="application/json" id="ats-cv-data">{{ cfg | scriptJson | safe }}</script>
 <script type="application/json" id="ats-builder-data">{{ {"examples": cvBuilder.examples, "docLangs": cvBuilder.docLangs} | scriptJson | safe }}</script>
+<script type="application/json" id="ats-skills-data">{{ {"groups": atsSkills.groups, "requirementHeadings": atsSkills.requirementHeadings, "optionalHeadings": atsSkills.optionalHeadings, "otherHeadings": atsSkills.otherHeadings} | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/print-guide.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pdf-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/ats-cv.js' | assetUrl }}" defer></script>

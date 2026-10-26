@@ -434,7 +434,22 @@ test('the QR code matches a reference encoder (byte mode, level M), and is drawn
   const auto = M.qrEncode(M.newCode());
   assert.ok(auto.version <= 3 && auto.mask >= 0 && auto.mask < 8);
   assert.equal(M.qrEncode('x'.repeat(213)).version, 10);
-  assert.equal(M.qrEncode('x'.repeat(214)), null, 'beyond version 10 at level M');
+  assert.equal(M.qrEncode('x'.repeat(214)).version, 11, 'a longer text takes the next version');
+  // The computed table matches the standard's rows: the capacity of each version at level M, and the alignment
+  // pattern centres (version 32 is the exception to the rounding).
+  assert.equal(M.qrEncode('x'.repeat(997)).version, 25);
+  assert.equal(M.qrEncode('x'.repeat(998)).version, 26);
+  assert.equal(M.qrEncode('x'.repeat(2331)).version, 40);
+  assert.equal(M.qrEncode('x'.repeat(2332)), null, 'beyond version 40 at level M');
+  const big = M.qrEncode('x'.repeat(1500));
+  assert.equal(big.version, 32);
+  assert.equal(big.matrix.length, 145);
+  // Alignment pattern centres: a dark module ringed by light then dark; (34, 34), (60, 60) … on version 32.
+  for (const at of [34, 60, 86, 112, 138]) {
+    assert.equal(big.matrix[at][at], 1, `centre at ${at}`);
+    assert.equal(big.matrix[at - 1][at], 0, `light ring at ${at}`);
+    assert.equal(big.matrix[at - 2][at], 1, `dark ring at ${at}`);
+  }
   const svg = M.qrSvg(M.qrEncode('hello', 3).matrix, 'QR "code"');
   assert.match(svg, /^<svg [^>]*viewBox="0 0 29 29"[^>]*aria-label="QR &quot;code&quot;"/);
   assert.match(svg, /<rect width="29" height="29" fill="#fff"\/><path d="M4 4h7v1h-7z/);

@@ -787,6 +787,15 @@ select.sh-in { cursor: pointer; }
 .sh-problems li { margin-bottom: 8px; }
 .sh-ok { margin: 0; color: var(--ink); }
 .sh-actions { gap: 10px; }
+/* Send to the next shift: the dialog with the QR code and the link; the box for a handover that arrived. */
+.sh-send { width: min(92vw, 520px); padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card, var(--bg)); color: var(--ink); }
+.sh-send::backdrop { background: rgba(0, 0, 0, .55); }
+.sh-send h2 { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
+.sh-send .tool-actions { margin-top: 12px; }
+.sh-qr { width: min(100%, 320px); margin: 12px auto 0; }
+.sh-qr svg { display: block; width: 100%; height: auto; border-radius: 8px; }
+.sh-link { width: 100%; box-sizing: border-box; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; word-break: break-all; }
+.sh-incoming { margin: 0 0 16px; border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .sh-side > .form-note { margin: 0; }
 .sh-history { padding: 20px 0 110px; }
 .sh-history-list { display: grid; gap: 12px; margin-bottom: 20px; }

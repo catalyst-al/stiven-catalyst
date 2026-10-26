@@ -96,6 +96,13 @@
       <p class="kicker">{{ "The handover" | t(lang) }}</p>
       <h2 data-output-title>{{ "Ready to hand over" | t(lang) }}</h2>
     </div>
+    <div class="dl-box sh-incoming" data-incoming hidden>
+      <p class="sh-ok" data-incoming-text></p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-incoming-open>{{ "Open this handover" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-incoming-ignore>{{ "Not now" | t(lang) }}</button>
+      </div>
+    </div>
     <p>{{ "This is what the next shift reads. It updates as you type." | t(lang) }}</p>
   </div>
   <div class="sh-output-grid">
@@ -111,11 +118,28 @@
       </div>
       <div class="tool-actions sh-actions">
         <button class="button-primary" type="button" data-copy>{{ "Copy as text" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-send>{{ "Send to the next shift" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-print>{{ "Print or save as PDF" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-close>{{ "Close shift, start the next" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-clear>{{ "Clear" | t(lang) }}</button>
       </div>
       <p class="form-note" data-status aria-live="polite"></p>
+      <dialog class="sh-send" data-send-dialog aria-labelledby="sh-send-title">
+        <h2 id="sh-send-title">{{ "Send this handover to another device" | t(lang) }}</h2>
+        <p class="form-note sh-help">{{ "The handover travels inside this link, never through a server. Open it on the other phone or computer, or scan the code." | t(lang) }}</p>
+        <div class="sh-qr" data-send-qr hidden></div>
+        <p class="form-note sh-help" data-send-qr-note></p>
+        <label class="field">
+          <span>{{ "Link" | t(lang) }}</span>
+          <textarea class="sh-link" data-send-link rows="3" readonly></textarea>
+        </label>
+        <div class="tool-actions">
+          <button class="button-primary" type="button" data-send-share hidden>{{ "Share the link" | t(lang) }}</button>
+          <button class="button-secondary" type="button" data-send-copy>{{ "Copy the link" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-send-close>{{ "Close" | t(lang) }}</button>
+        </div>
+        <p class="form-note" data-send-status aria-live="polite"></p>
+      </dialog>
     </div>
   </div>
 </section>

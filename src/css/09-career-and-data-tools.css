@@ -452,6 +452,7 @@
 .ats-chip { padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; }
 .ats-chip.is-missing { border: 1px solid color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
 .ats-chip.is-found { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ok); }
+.ats-chip.is-required { box-shadow: inset 0 0 0 2px currentColor; }
 
 .ats-doc {
   --ats-ink: #1a1a1a;

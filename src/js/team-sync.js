@@ -439,14 +439,43 @@
     return keys.length === Object.keys(b).length && keys.every((key) => b[key] === a[key]);
   };
 
-  // ---- QR code (ISO/IEC 18004): byte mode, error correction level M, versions 1 to 10 ----
-  // Enough for a team code (about 35 characters fit version 3). The matrix is an array of rows of 0 and 1.
-  const QR_M = [
+  // ---- QR code (ISO/IEC 18004): byte mode, error correction level M, versions 1 to 40 ----
+  // A team code (about 35 characters) fits version 3; a handover sent as a link (js/shift-handover.js, up to 2331
+  // bytes) may need the largest. The matrix is an array of rows of 0 and 1.
+  // Level M by version: error correction codewords in each block, and how many blocks. The codewords a version holds
+  // follow from its size (the modules left once the finders, timing, alignment, format and version areas are placed),
+  // and the data splits into the blocks as evenly as it can, the longer ones last, as the standard's table has it.
+  const QR_EC = [null, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28];
+  const QR_BLOCKS = [null, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49];
+  // The centres of the alignment patterns: 6, then evenly up to the last one, with an even step (version 32 is the
+  // standard's one exception to the rounding).
+  const qrAlign = (version) => {
+    if (version === 1) return [];
+    const n = version * 4 + 17;
+    const count = Math.floor(version / 7) + 2;
+    const step = version === 32 ? 26 : Math.ceil((n - 13) / (2 * count - 2)) * 2;
+    const out = [6];
+    for (let i = count - 1, at = n - 7; i >= 1; i--, at -= step) out.splice(1, 0, at);
+    return out;
+  };
+  const qrTotal = (version) => {
+    const n = version * 4 + 17;
+    const align = qrAlign(version).length;
+    const alignment = align ? (align * align - 3) * 25 - (align - 2) * 2 * 5 : 0;
+    return Math.floor((n * n - 192 - 2 * (n - 16) - alignment - 31 - (version >= 7 ? 36 : 0)) / 8);
+  };
+  const QR_M = [null];
+  const QR_ALIGN = [null];
+  for (let version = 1; version <= 40; version++) {
+    const ec = QR_EC[version];
+    const blocks = QR_BLOCKS[version];
+    const data = qrTotal(version) - ec * blocks;
+    const short = Math.floor(data / blocks);
+    const longer = data % blocks;
     // [error correction codewords per block, blocks in group 1, data codewords each, blocks in group 2, data codewords each]
-    null, [10, 1, 16, 0, 0], [16, 1, 28, 0, 0], [26, 1, 44, 0, 0], [18, 2, 32, 0, 0], [24, 2, 43, 0, 0],
-    [16, 4, 27, 0, 0], [18, 4, 31, 0, 0], [22, 2, 38, 2, 39], [22, 3, 36, 2, 37], [26, 4, 43, 1, 44],
-  ];
-  const QR_ALIGN = [null, [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50]];
+    QR_M.push([ec, blocks - longer, short, longer, longer ? short + 1 : 0]);
+    QR_ALIGN.push(qrAlign(version));
+  }
   const GF_EXP = new Array(512);
   const GF_LOG = new Array(256);
   for (let i = 0, x = 1; i < 255; i++) {
@@ -561,8 +590,8 @@
   const qrEncode = (text, forceMask = -1) => {
     const bytes = [...utf8(String(text))];
     let version = 1;
-    while (version <= 10 && qrCapacity(version) * 8 < 4 + (version < 10 ? 8 : 16) + bytes.length * 8) version++;
-    if (version > 10) return null;
+    while (version <= 40 && qrCapacity(version) * 8 < 4 + (version < 10 ? 8 : 16) + bytes.length * 8) version++;
+    if (version > 40) return null;
     const n = version * 4 + 17;
     const m = Array.from({ length: n }, () => new Array(n).fill(0));
     const fixed = Array.from({ length: n }, () => new Array(n).fill(false));
