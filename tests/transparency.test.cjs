@@ -80,7 +80,7 @@ test('the publications say when they went online, and tell search engines the sa
 
 // The essays and reflections: the day their text last changed (src/_data/edited.json, scripts/online-dates.mjs) is the
 // one the byline, the search engines, the feed and the sitemap give, so a correction or an edit shows everywhere.
-test('an essay edited after it came out says so in its byline, to search engines, in the feed and in the sitemap', { skip: !hasSite }, () => {
+test('an essay edited after it came out says so in its byline, to search engines, in the feed and in the sitemap', { skip: !hasSite }, async () => {
   const edited = JSON.parse(fs.readFileSync('src/_data/edited.json', 'utf8'));
   const essays = fs.readdirSync('src/content/insights').filter((file) => file.endsWith('.md'));
   assert.equal(Object.keys(edited).filter((file) => file.startsWith('src/content/insights/')).length, essays.length);
@@ -94,9 +94,18 @@ test('an essay edited after it came out says so in its byline, to search engines
     assert.equal(html.match(/"dateModified":"([^"]+)"/)[1], edited[file.replace('content/', `content/${prefix}`)], lang);
     assert.match(html, new RegExp(`class="article-byline"[\\s\\S]*?${word} <time datetime="${edited[file.replace('content/', `content/${prefix}`)]}">`), lang);
   }
-  const feed = read('feed.xml');
-  const entry = feed.slice(feed.indexOf('/insights/the-tools-you-build-yourself/'));
-  assert.match(entry, new RegExp(`<updated>${day}T00:00:00Z</updated>`));
+  // In the feed its entry carries the day of the edit as <updated>.
+  const { feedEntries } = await import('../lib/feed-entries.js');
+  const post = { data: { title: 'The tools you build yourself' }, url: '/insights/the-tools-you-build-yourself/', date: new Date('2026-10-13'), inputPath: `./${file}` };
+  assert.equal(feedEntries([post], 'en', { edited }).entries[0].updated, day);
+  // The feed keeps only its newest entries, so the essay may have left it: every essay still in it carries the day
+  // of its last edit as <updated> (never before the day it came out).
+  const entries = [...read('feed.xml').matchAll(/<link href="[^"]*\/insights\/([^/"]+)\/"\/>[\s\S]*?<published>([\d-]+)T[^<]*<\/published>\s*<updated>([\d-]+)T/g)];
+  for (const [, slug, published, updated] of entries) {
+    const source = essays.find((name) => name.replace(/^\d{4}-\d\d-\d\d-/, '') === `${slug}.md`);
+    const changed = edited[`src/content/insights/${source}`];
+    assert.equal(updated, [published, changed].filter(Boolean).sort().at(-1), `feed: ${slug}`);
+  }
   assert.match(read('sitemap.xml'), new RegExp(`insights/the-tools-you-build-yourself/</loc><lastmod>${day}</lastmod>`));
 });
 
