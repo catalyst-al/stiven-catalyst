@@ -96,9 +96,12 @@ test('a team made before: its copy is read at the old id, moved to the new one a
   assert.equal((await sync(other, await other.TeamSyncMath.deriveKeys(CODE, 1000), server)).status, 'synced');
   assert.deepEqual(JSON.parse(other.localStorage.getItem('sc-actions')).rows.map((r) => r.id), ['a1', 't1']);
   assert.ok(server.log.every((line) => !line.includes(keys.legacy.spaceId)));
-  // Neither copy exists: gone, as before.
+  // Neither copy exists: gone, as before. The old address answering with an error is not "gone" (a device that
+  // thinks its team is gone stops syncing by itself).
   const lost = fakeServer();
   assert.equal((await sync(load(), keys, lost)).status, 'gone');
+  const failing = async (url, init = {}) => (url.endsWith(keys.legacy.spaceId) ? { status: 500, ok: false, json: async () => ({}) } : lost.fetch(url, init));
+  assert.deepEqual(plain(await sync(load(), keys, { fetch: failing })), { status: 'error', code: 500 });
 });
 
 test('the old space cannot be deleted at once: it is kept to delete at a later sync', async () => {

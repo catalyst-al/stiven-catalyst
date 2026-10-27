@@ -872,7 +872,7 @@
       if (got.status === 404 && keys.legacy && HEX64.test(keys.legacy.spaceId)) {
         const old = await call({ method: "GET" }, spaceUrl(ctx.endpoint, keys.legacy.spaceId));
         if (!old) return { status: "offline" };
-        if (old.ok) { got = old; moving = true; }
+        if (old.ok) { got = old; moving = true; } else if (old.status !== 404) return { status: old.status === 403 || old.status === 401 ? "refused" : "error", code: old.status };
       }
       let rev = 0;
       let remote = null;
