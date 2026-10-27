@@ -29,6 +29,17 @@ const KNOWN = [];
 
 const drawEverything = (page) => page.addStyleTag({ content: "* { content-visibility: visible !important; }" });
 
+// The page as axe measures it: its styles and images in (the load event) and its fonts ready. Not a quiet network:
+// on GitHub's runner /de/field-notes.html in the dark project kept a request open for more than 90 s in three runs on
+// 27 October 2026 (this container never did, in 72 runs on the same Chrome), and a request that is still open after
+// the load changes nothing axe reads. It is written to the log, so the next run shows what it is.
+const settled = async (page, open) => {
+  await page.waitForLoadState("load");
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
+  const quiet = await page.waitForLoadState("networkidle", { timeout: 5_000 }).then(() => true, () => false);
+  if (!quiet) console.log(`${page.url()}: still open 5 s after the load: ${[...open].map((r) => `${r.resourceType()} ${r.url()}`).join(", ") || "(none seen)"}`);
+};
+
 // Each failing node as { node: "rule colours", where: "rule: target colours" }: the first is compared, the second
 // says where it is.
 const violationsOf = async (page) => {
@@ -48,11 +59,14 @@ for (const lang of LANGS) {
     test(`axe: ${url}`, async ({ page, theme }) => {
       test.setTimeout(90_000);
       const found = [];
+      const open = new Set();
+      page.on("request", (r) => open.add(r));
+      for (const done of ["requestfinished", "requestfailed"]) page.on(done, (r) => open.delete(r));
       for (const viewport of WIDTHS) {
         await page.setViewportSize(viewport);
         await page.goto(url);
         await expectTheme(page, theme);
-        await page.waitForLoadState("networkidle");
+        await settled(page, open);
         for (const { node, where } of await violationsOf(page)) found.push({ node: `${viewport.width} ${node}`, where: `${viewport.width} ${where}` });
       }
       const known = KNOWN.filter((k) => k.theme === theme && k.path === path).flatMap((k) => k.nodes);
