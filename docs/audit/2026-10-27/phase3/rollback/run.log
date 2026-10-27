@@ -17,11 +17,11 @@ PASS [rollback/1 new: the work] CV Builder: no script error on the page
 PASS [rollback/1 new: the work] ATS CV: no script error on the page
 PASS [rollback/1 new: the work] Daily Board: no script error on the page
 PASS [rollback/1 new: the work] Daily Board: the workplace profile is kept | {"site":"Frankfurt hub, outbound","shifts":["Early","Late"],"areas":[{"name":"Dock 1","owner":"Anna"},{"name":"Dock 2","owner":"Mira"}],"teams":[],"targets":{"damage":0.5}}
-PASS [rollback/2 new: save, lock, unlock] Save all my work: the file of the new site holds the work and the photo | 10 keys, 1 photos; "Saved as stiven-catalyst-2026-10-27.json. Keep it, or open it on another device with “Open a saved file”. Photos in the file: 1."
+PASS [rollback/2 new: save, lock, unlock] Save all my work: the file of the new site holds the work and the photo | 11 keys, 1 photos; "Saved as stiven-catalyst-2026-10-27.json. Keep it, or open it on another device with “Open a saved file”. Photos in the file: 1."
 PASS [rollback/2 new: save, lock, unlock] Work lock: locked with a 6-character PIN: the dialog, no work left in plain text | ["sc-locked","sc-motion","sc-seen-publications","sc-seen-writing","sc-theme"]
 PASS [rollback/2 new: save, lock, unlock] Work lock: the PIN unlocks
 PASS [rollback/2 new: save, lock, unlock] Work lock: after the unlock every key is as before | []
-PASS [rollback/2 new: save, lock, unlock] Work lock: after the unlock the photo is back | [{"id":"1b2bba8e-4de6-4b77-b2b0-39b677fcba1a","tool":"five-s-audit","ref":"amvqy6oyf3cru|sort-0","bytes":920}]
+PASS [rollback/2 new: save, lock, unlock] Work lock: after the unlock the photo is back | [{"id":"8de685f4-363f-44f3-988d-d1f904140f91","tool":"five-s-audit","ref":"amvr1c1fqrlme|sort-0","bytes":920}]
 ---- now serving the OLD site
 PASS [rollback/3 old: rollback] Action Tracker: no script error on the page
 PASS [rollback/3 old: rollback] Action Tracker: both actions shown, no example, none duplicated | ["Only items needed for today's work are in the area; nothing parked “for later”.","Replace the seal of dock door 3"]
@@ -31,10 +31,10 @@ PASS [rollback/3 old: rollback] Action Tracker: no script error on the page
 PASS [rollback/3 old: rollback] Damage Control: the two own rows shown, no example | 2 rows
 PASS [rollback/3 old: rollback] Damage Control: a row added on the old site | 3 rows; fields of a row: date,shift,stage,type,cause,units,cost,note
 PASS [rollback/3 old: rollback] Damage Control: no script error on the page
-PASS [rollback/3 old: rollback] 5S Audit: the audit is shown with its photo | {"photos":[{"id":"1b2bba8e-4de6-4b77-b2b0-39b677fcba1a","ref":"amvqy6oyf3cru|sort-0","type":"image/jpeg","size":920}],"photoButton":1}
+PASS [rollback/3 old: rollback] 5S Audit: the audit is shown with its photo | {"photos":[{"id":"8de685f4-363f-44f3-988d-d1f904140f91","ref":"amvr1c1fqrlme|sort-0","type":"image/jpeg","size":920}],"photoButton":1}
 PASS [rollback/3 old: rollback] 5S Audit: no script error on the page
-PASS [rollback/3 old: rollback] Room Inspection: both inspections shown | ["2026-10-27 18:16 215 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×","2026-10-27 18:16 214 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×"]
-NOTE [rollback/3 old: rollback] Room Inspection: the incomplete inspection of room 214 reads on the old site: "2026-10-27 18:16 214 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×"
+PASS [rollback/3 old: rollback] Room Inspection: both inspections shown | ["2026-10-27 19:44 215 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×","2026-10-27 19:44 214 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×"]
+NOTE [rollback/3 old: rollback] Room Inspection: the incomplete inspection of room 214 reads on the old site: "2026-10-27 19:44 214 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×"
 PASS [rollback/3 old: rollback] Room Inspection: no script error on the page
 PASS [rollback/3 old: rollback] Coaching: both projects shown, the labelled copy among them | Fewer missed handovers at the late shift |  | PULSE · Shift Lead · 2026-10-27 |  | Open → | Delete | Fewer missed handovers at the late shift (version from the backup of 2026-10-27) |  | PULSE · Shift Lead · 2026-10-27 |  | Open → | Delete
 PASS [rollback/3 old: rollback] Coaching: editable on the old site: an action added to the copy | 1 actions
@@ -64,7 +64,7 @@ PASS [forward/4 new: forward again] Damage Control: 3 rows, none an example, non
 PASS [forward/4 new: forward again] Damage Control: no script error on the page
 PASS [forward/4 new: forward again] 5S Audit: the audit and its photo | 1 audits, 1 photos
 PASS [forward/4 new: forward again] 5S Audit: no script error on the page
-PASS [forward/4 new: forward again] Room Inspection: both inspections, 214 incomplete again | ["2026-10-27 18:16 215 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×","2026-10-27 18:16 214 · Floor 2 Ana Mira After checkout 100% … Incomplete Sheet ×"]
+PASS [forward/4 new: forward again] Room Inspection: both inspections, 214 incomplete again | ["2026-10-27 19:44 215 · Floor 2 Ana Mira After checkout 100% ✓ Pass Sheet ×","2026-10-27 19:44 214 · Floor 2 Ana Mira After checkout 100% … Incomplete Sheet ×"]
 PASS [forward/4 new: forward again] Room Inspection: no script error on the page
 PASS [forward/4 new: forward again] Coaching: both projects, the old site's action kept | ["Fewer missed handovers at the late shift (0 actions)","Fewer missed handovers at the late shift (version from the backup of 2026-10-27) (1 actions)"]
 PASS [forward/4 new: forward again] Coaching: the same coaching backup opened again adds nothing (copyOf survived the old site) | 2 projects
@@ -75,8 +75,8 @@ PASS [forward/4 new: forward again] Daily Board: the workplace profile is kept |
 PASS [forward/4 new: forward again] Daily Board: no script error on the page
 PASS [forward/4 new: forward again] Theme and motion: the theme and the motion pause hold again | {"theme":"light","stored":"light","motion":"paused","pressed":null}
 PASS [forward/4 new: forward again] All: no key of the work lost between step 2 and step 4 | []
-PASS [forward/4 new: forward again] All: the photo store holds one photo | [{"id":"1b2bba8e-4de6-4b77-b2b0-39b677fcba1a","tool":"five-s-audit","ref":"amvqy6oyf3cru|sort-0","bytes":920}]
-FAIL [forward/4 new: forward again] Save all my work: the old site's file opens in the new site | "This is not a Stiven Catalyst work file, or it is damaged. Nothing was changed."; not restored: sc-motion,sc-five-s-audit,sc-room-inspection,sc-workplace,sc-actions,sc-coaching-v1,sc-cv-builder,sc-actions-ui,sc-ats-cv,sc-damage-control
+PASS [forward/4 new: forward again] All: the photo store holds one photo | [{"id":"8de685f4-363f-44f3-988d-d1f904140f91","tool":"five-s-audit","ref":"amvr1c1fqrlme|sort-0","bytes":920}]
+PASS [forward/4 new: forward again] Save all my work: the old site's file opens in the new site, every key of the work restored | "Opened. The page reloads to show your work."; work not restored: none; page settings left out: sc-motion
 ---- now serving the NEW site
 PASS [rollback-while-locked/1 new: work, locked] Action Tracker: a first visit shows the example, marked example: true | 12 example rows
 PASS [rollback-while-locked/1 new: work, locked] Action Tracker: the own action replaces the example | 1 rows
@@ -92,17 +92,19 @@ NOTE [rollback-while-locked/2 old: rollback while locked] All: keys the old site
 NOTE [rollback-while-locked/2 old: rollback while locked] Save all my work: the old site's file made while locked holds: sc-seen-publications, sc-locked, sc-actions-ui, sc-seen-writing, sc-actions, sc-damage-control
 ---- now serving the NEW site
 PASS [rollback-while-locked/3 new: forward, unlock] Work lock: the new site still asks for the PIN, and it unlocks
-FAIL [rollback-while-locked/3 new: forward, unlock] Damage Control: the row added on the old site while locked survives the unlock | ["Crushed cartons, lane 4","Wet pallet, dock 2"]
 PASS [rollback-while-locked/3 new: forward, unlock] Damage Control: the locked rows are back | ["Crushed cartons, lane 4","Wet pallet, dock 2"]
 PASS [rollback-while-locked/3 new: forward, unlock] Action Tracker: after the unlock: the own action, no example | ["Replace the seal of dock door 3"]
-FAIL [rollback-while-locked/3 new: forward, unlock] Save all my work: the old site's file made while locked opens in the new site | "This is not a Stiven Catalyst work file, or it is damaged. Nothing was changed."
+PASS [rollback-while-locked/3 new: forward, unlock] Damage Control: the row added on the old site while locked is kept as a restore point at the unlock | ["Old site while locked: crushed cage, dock 1"]
+PASS [rollback-while-locked/3 new: forward, unlock] Damage Control: restored from that point, the row is back in the log | {"restored":"restored","after":["Old site while locked: crushed cage, dock 1"]}
+PASS [rollback-while-locked/3 new: forward, unlock] Damage Control: and the locked rows are kept in turn, in the point made before the restore | 1
+PASS [rollback-while-locked/3 new: forward, unlock] Action Tracker: after that restore, nothing of the old site's example counts as the visitor's | {"own":0,"all":12,"note":true}
+PASS [rollback-while-locked/3 new: forward, unlock] Save all my work: the old site's file made while locked opens in the new site | "Opened. The page reloads to show your work."
 ---- now serving the NEW site
 PASS [rollback-with-example/1 new: the examples are opened] Action Tracker: the example is stored, marked | 12 rows
 ---- now serving the OLD site
-NOTE [rollback-with-example/2 old: rollback, a hand-off and an own row] Action Tracker: the old tracker shows the new site's example WITHOUT its example note; ActionsStore.counts() = {"total":12,"open":8,"overdue":3,"done":2,"verified":2,"bySource":{"five-whys":1,"five-s-audit":2,"sigma-control-chart":1,"safety-cross":1,"skills-matrix":1,"shift-handover":1,"gemba-walk":1}}
-NOTE [rollback-with-example/2 old: rollback, a hand-off and an own row] Action Tracker: after one own action on the old site the list holds 13 actions, 0 still marked example
+NOTE [rollback-with-example/2 old: rollback, a hand-off and an own row] Action Tracker: the old tracker shows the new site's example with its example note; ActionsStore.counts() = {"total":12,"open":8,"overdue":3,"done":2,"verified":2,"bySource":{"five-whys":1,"five-s-audit":2,"sigma-control-chart":1,"safety-cross":1,"skills-matrix":1,"shift-handover":1,"gemba-walk":1}}
+NOTE [rollback-with-example/2 old: rollback, a hand-off and an own row] Action Tracker: after one own action on the old site the list holds 1 actions, 0 still marked example
 PASS [rollback-with-example/2 old: rollback, a hand-off and an own row] Damage Control: the old site reads the new example as an example, and the own row replaces it | example note true; 1 rows
 ---- now serving the NEW site
-FAIL [rollback-with-example/3 new: forward] Action Tracker: forward: only the own action counts, the example does not come back as real work | 13 stored, 9 shown, example note false; counts {"total":13,"open":9,"overdue":3,"done":2,"verified":2,"bySource":{"five-whys":1,"five-s-audit":2,"sigma-control-chart":1,"safety-cross":1,"skills-matrix":1,"shift-handover":1,"gemba-walk":1,"manual":1}}
-{"checks":87,"failed":6,"pageErrors":0,"runErrors":0}
-EXIT 0
+PASS [rollback-with-example/3 new: forward] Action Tracker: forward: only the own action counts, the example does not come back as real work | 1 stored, 1 shown, example note false; counts {"total":1,"open":1,"overdue":0,"done":0,"verified":0,"bySource":{"manual":1}}
+{"checks":90,"failed":2,"pageErrors":0,"runErrors":0}

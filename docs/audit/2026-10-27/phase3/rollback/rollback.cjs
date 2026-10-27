@@ -637,8 +637,12 @@ const rollbackAndForward = async () => {
     const fresh = await launch(freshNew());
     const opened = await openBackup(fresh, "/tools.html", savedOld.file);
     const s = await snapshot(fresh, "4b-new-empty-browser-opens-old-file");
-    const missing = oldKeys.filter((k) => s.localStorage[k] !== savedOld.backup.items[k]);
-    check("Save all my work", "the old site's file opens in the new site", opened.reloaded && missing.length === 0, `"${opened.status}"; not restored: ${missing.join(",") || "none"}`);
+    // Page settings in the file (the old site saves them: sc-motion, sc-locked …) are left out by the new site's reader
+    // since 197d840d; every key of the work must come back.
+    const SETTINGS = new Set(["sc-theme", "sc-motion", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle"]);
+    const missing = oldKeys.filter((k) => !SETTINGS.has(k) && s.localStorage[k] !== savedOld.backup.items[k]);
+    const settings = oldKeys.filter((k) => SETTINGS.has(k));
+    check("Save all my work", "the old site's file opens in the new site, every key of the work restored", opened.reloaded && missing.length === 0, `"${opened.status}"; work not restored: ${missing.join(",") || "none"}; page settings left out: ${settings.join(",") || "none"}`);
     results.oldFileInNew = { status: opened.status, reloaded: opened.reloaded, notRestored: missing };
     await fresh.close();
   }
@@ -697,13 +701,32 @@ const rollbackWhileLocked = async () => {
     const page = await open(ctx, "/tools/damage-control/");
     const stored = await json(page, "sc-damage-control");
     const notes = (stored?.rows || []).map((r) => r.note);
-    check("Damage Control", "the row added on the old site while locked survives the unlock", notes.some((n) => /while locked/.test(n)), notes);
     check("Damage Control", "the locked rows are back", notes.includes("Crushed cartons, lane 4") && notes.includes("Wet pallet, dock 2"), notes);
     await page.close();
     const tracker = await open(ctx, "/tools/action-tracker/");
     const rows = (await json(tracker, "sc-actions"))?.rows || [];
     check("Action Tracker", "after the unlock: the own action, no example", rows.length === 1 && !rows[0].example, rows.map((r) => `${r.title}${r.example ? " (example)" : ""}`));
     await tracker.close();
+    // Since e6203a47 the row typed on the old site while locked is kept as a restore point before the unlock
+    // ("Before the unlock"), and comes back from it with the box's own restore, the locked rows kept in turn. Last, as
+    // a visitor who wants it back would do it: a restore point brings back every key it holds, here the old site's
+    // tracker too, whose example stays marked as one.
+    const dc = await open(ctx, "/tools/damage-control/");
+    const points = await dc.evaluate(() => window.StorageGuard.points().then((list) => list.map((p) => ({ id: p.id, reason: p.reason, items: p.items }))));
+    const kept = points.find((p) => p.reason === "before-unlock");
+    const keptNotes = kept ? (JSON.parse(kept.items["sc-damage-control"] || "{}").rows || []).map((r) => r.note) : [];
+    check("Damage Control", "the row added on the old site while locked is kept as a restore point at the unlock", keptNotes.some((n) => /while locked/.test(n)), keptNotes);
+    const restored = kept ? await dc.evaluate((id) => window.StorageGuard.restorePoint(id), kept.id) : "no point";
+    const after = ((await json(dc, "sc-damage-control"))?.rows || []).map((r) => r.note);
+    check("Damage Control", "restored from that point, the row is back in the log", restored === "restored" && after.some((n) => /while locked/.test(n)), { restored, after });
+    const again = await dc.evaluate(() => window.StorageGuard.points().then((list) => list.filter((p) => p.reason === "before-restore").map((p) => p.items["sc-damage-control"] || "")));
+    check("Damage Control", "and the locked rows are kept in turn, in the point made before the restore", again.some((v) => v.includes("Crushed cartons, lane 4")), again.length);
+    await dc.close();
+    // The old site saved its tracker list without the marks; the new store reads them back from the ids.
+    const tr = await open(ctx, "/tools/action-tracker/");
+    const seen = await tr.evaluate(() => ({ own: window.ActionsStore.list().length, all: window.ActionsStore.all().length, note: !document.querySelector(".dl-example-note")?.hidden }));
+    check("Action Tracker", "after that restore, nothing of the old site's example counts as the visitor's", seen.own === 0 && seen.note, seen);
+    await tr.close();
   }
   const end = await snapshot(ctx, "L3-new-after-unlock");
   results.lockedScenario = { lockedKeys: locked.keys, oldWrote, restorePointsAfter: end.restorePoints, photosAfter: end.photos };

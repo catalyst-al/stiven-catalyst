@@ -4,7 +4,7 @@ Përditësuar më 27 tetor 2026. Këtu janë vetëm vendimet që kërkojnë fakt
 origjinal shqip, asnjë tekst i librit dhe asnjë tekst ligjor nuk ndryshon pa përgjigjen e tij. Detajet janë në
 skedarët e treguar; numrat e gjetjeve janë ato të `RAPORTI-I-KONSOLIDUAR.md`.
 
-## A. Të vendosura më 27 tetor 2026
+## A. Të vendosura më 27 tetor 2026 (përfshirë vendimet përfundimtare të mbrëmjes)
 
 | Çështja | Vendimi | Ku është zbatuar |
 | --- | --- | --- |
@@ -12,7 +12,9 @@ skedarët e treguar; numrat e gjetjeve janë ato të `RAPORTI-I-KONSOLIDUAR.md`.
 | Rrota e mausit (M-06) | Miratohet lëvizja natyrale e shfletuesit, me kusht që të ruhen animacionet, tranzicionet dhe lëvizjet e tjera të buta | `2d9f9906`: hiqet vetëm "glide" i rrotës; lidhjet brenda faqes rrëshqasin ende, asnjë animacion apo tranzicion nuk preket |
 | Ari i Lumen-it, tema e çelët | Miratohet përmirësimi i kontrastit | `5dd8dfc5`: #9c824a → #7b683e, 3.18:1 → 4.67:1 |
 | Pause | Miratohet vendi (kryefaqja dhe footer-i) dhe ruajtja e zgjedhjes | në degë që në Fazën 3 |
-| Planetët në celular (rezolucioni 1.5) | Patch-i mbetet veçmas; krahasim vizual dhe provë në telefon real para çdo vendimi; mprehtësia, ndriçimi dhe identiteti nuk sakrifikohen për FPS | Jo në degë. Krahasimi (`phase3/planets-touch.md`): ndriçimi dhe ngjyrat ruhen, por detajet e imëta humbasin rreth gjysmën (−41 deri −55 % për planet dhe emrat), pra patch-i 1.5 **nuk** e plotëson kushtin tënd. Alternativa që pret ty: `planets-touch-dpr-adaptive.patch` (densiteti 2 si sot; ulet në 1.5 vetëm kur telefoni nuk arrin 30 fps; në telefonat që e mbajnë ritmin, 0 piksele ndryshim). Telefoni real: procedura në po atë dokument |
+| Planetët në celular | Vendim përfundimtar: as patch-i 1.5, as versioni adaptiv. Mprehtësia dhe identiteti i katër planetëve mbeten si sot; propozimet e optimizimit mbeten vetëm të dokumentuara | Asgjë e aplikuar. Krahasimi dhe dy patch-et: `phase3/planets-touch.md`, `phase3/proposals/` |
+| Rollback me PIN të kyçur | Asgjë të mos mbishkruhet pa mundësi rikthimi | `e6203a47`: puna e shkruar gjatë kyçjes ruhet si pikë rikthimi "Para hapjes" para se të kthehet puna e kyçur |
+| Shembulli i Action Tracker gjatë rollback-ut | Të mos shndërrohet në veprime reale | `17f737ad`: shembulli mbetet shembull në faqen e vjetër dhe pas kthimit |
 | SEO-02, lidhjet mes reflektimeve | Shtyhet për një ndryshim editorial më vete; lidhjet e rekomanduara duhet të jenë kuptimplota | asgjë e ndryshuar |
 | Team Sync Worker, Cloudflare | Mos publiko; mos ndrysho konfigurimin | asgjë e publikuar; plani: `docs/SYNC-WORKER-MIGRATION.md` |
 | Publikimi | Draft PR për shqyrtim; asnjë merge pa miratimin përfundimtar | `docs/RELEASE.md` |

@@ -8,7 +8,23 @@ Files: `rollback/rollback.cjs` (the proof), `rollback/results.json` (87 checks, 
 `rollback/run.log`, `rollback/open-file.cjs` + `open-file.log` (the cause check of the refused files),
 `rollback/files/` (the files the pages saved), `rollback/build.sh` + `build-light.config.mjs` (the two builds).
 
-## In short, for the author
+## Update, 27 October 2026, after the author's decision: the three risks are fixed
+
+- Risk 1 (a file saved by the old site refused by the new one): fixed in `197d840d` (tests/work-backup.test.cjs).
+- Risk 2 (work typed on the old site while locked, overwritten at the unlock): fixed in `e6203a47`. It is kept as a
+  restore point, "Before the unlock", before the locked work returns, and the page says so; if the point cannot be
+  kept, nothing is overwritten (tests/work-lock-storage.test.cjs).
+- Risk 3 (the Action Tracker's example turned into real actions): fixed in `17f737ad`. The tracker keeps the
+  example's ids where the old site looks for them (tests/actions-integrity.test.cjs, new → live → new).
+
+The proof was run again on the fixed branch with the same two builds' method (`run.log`, `results.json`): **90
+checks, 2 failed, 0 page errors.** The two are limits of the live site, which this version cannot change: it reads
+no photos from a file (they stay in the file), and having no lock it cannot show the locked work during a rollback
+(the work is safe and comes back with the PIN). New checks: the row typed while locked is in the "Before the unlock"
+point; restored from it, it is back in the log; the locked rows are kept in turn; after that restore, nothing of the
+old site's example counts as the visitor's. The account below is the first run, before the fixes.
+
+## In short, for the author (first run, before the fixes)
 
 A rollback of the site, done today, **keeps the work** of a visitor who has used the new site: every tool tested
 shows its work on the old site, can be edited there, and nothing is lost or doubled when the new site comes back.

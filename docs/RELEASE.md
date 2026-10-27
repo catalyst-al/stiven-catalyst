@@ -100,11 +100,17 @@ In a current Chrome, EN, DE and SQ:
   Builder, ATS CV, the Daily Board's profile, the theme; a file saved by the new site opens on the old one (its
   photos stay in the file). A file saved by the **old** site after the visitor used the new one holds `sc-motion`
   and was refused whole by the new site: fixed before the merge (the settings in it are left out; test with the files
-  the old site saved, tests/work-backup.test.cjs). Two exceptions remain, with proposals in the review:
+  the old site saved, tests/work-backup.test.cjs). The two other risks the proof found are fixed too (the author's
+  decision of 27 October 2026), and the proof was run again on the fixed branch (90 checks; the 2 that fail are
+  limits of the live site that this version cannot change):
   - the old site has **no work lock** (origin/main has no `work-lock.js`): a browser locked at the moment of the
-    revert shows its tools empty, and what is typed there is overwritten by the locked work at the unlock;
-  - an Action Tracker holding only the new site's example: the old site takes the example for real actions, and they
-    stay real after the return.
+    revert shows its tools empty there (the locked work is safe in IndexedDB and comes back with the PIN); what is
+    typed there is no longer overwritten at the unlock: it is kept as a restore point, "Before the unlock", and the
+    page says so (`e6203a47`, tests/work-lock-storage.test.cjs; in the real browser: kept, restored from the point,
+    the locked work kept in turn);
+  - the Action Tracker's example stays an example on the old site and after the return: the tracker keeps the
+    example's ids where the old site looks for them (`17f737ad`, tests/actions-integrity.test.cjs, new → live → new);
+  - the old site does not read the photos inside a file saved by the new one (they stay in the file).
   - team sync: a team already moved to its new address is not found by the old page ("gone"), which writes nothing;
     the work stays on every device, and the new page finds the team again (tests/sync-compat.test.cjs); details in
     `docs/SYNC-WORKER-MIGRATION.md`.
