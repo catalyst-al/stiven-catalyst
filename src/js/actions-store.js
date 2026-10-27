@@ -197,23 +197,41 @@ window.ActionsStore = (() => {
     a.addEventListener("click", () => { const action = getAction(); if (action && str(action.title)) a.href = link(action); });
     return a;
   };
+  // iCalendar text (RFC 5545), shared by every tool that writes a calendar file (the Action Tracker, the Maintenance
+  // Planner, the 5S audit plan, Leader Standard Work): icsText escapes a value, icsFold breaks a content line after 75
+  // octets of UTF-8 (not characters: "ë" and "ü" take two, so a German or Albanian line counts more than it shows),
+  // each continuation starting with one space, and never inside a character.
+  const icsText = (value) => String(value ?? "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  const octets = (char) => { const code = char.codePointAt(0); return code < 0x80 ? 1 : code < 0x800 ? 2 : code < 0x10000 ? 3 : 4; };
+  const icsFold = (line) => {
+    const parts = [];
+    let part = "", size = 0;
+    for (const char of String(line)) {
+      if (size + octets(char) > 75) { parts.push(part); part = " "; size = 1; }
+      part += char;
+      size += octets(char);
+    }
+    parts.push(part);
+    return parts.join("\r\n");
+  };
   // The list as an iCalendar file: every open action with a due date is an all-day event, so a phone can remind its owner.
+  // The labels in the description are in the page's language (ToolKit's tx, loaded before this script on tool pages).
   const ics = (rows = list(), stamp = new Date()) => {
-    const esc = (text) => String(text).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+    const tx = window.ToolKit?.tx || ((text) => text);
     const dt = stamp.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Stiven Catalyst//Action Tracker//EN", "CALSCALE:GREGORIAN"];
     rows.filter((a) => isOpen(a) && a.due).forEach((a) => {
       const day = a.due.replace(/-/g, "");
       const next = new Date(`${a.due}T00:00:00Z`);
       next.setUTCDate(next.getUTCDate() + 1);
-      lines.push("BEGIN:VEVENT", `UID:${a.id}@stivencatalyst.com`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${day}`, `DTEND;VALUE=DATE:${next.toISOString().slice(0, 10).replace(/-/g, "")}`, `SUMMARY:${esc(a.title)}${a.owner ? esc(` (${a.owner})`) : ""}`);
-      const description = [a.detail, a.check ? `Check: ${a.check}` : "", a.area ? `Area: ${a.area}` : "", a.source ? `From: ${a.source}` : ""].filter(Boolean).join("\n");
-      if (description) lines.push(`DESCRIPTION:${esc(description)}`);
+      lines.push("BEGIN:VEVENT", `UID:${a.id}@stivencatalyst.com`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${day}`, `DTEND;VALUE=DATE:${next.toISOString().slice(0, 10).replace(/-/g, "")}`, `SUMMARY:${icsText(a.title)}${a.owner ? icsText(` (${a.owner})`) : ""}`);
+      const description = [a.detail, a.check ? `${tx("Check")}: ${a.check}` : "", a.area ? `${tx("Area")}: ${a.area}` : "", a.source ? `${tx("From")}: ${a.source}` : ""].filter(Boolean).join("\n");
+      if (description) lines.push(`DESCRIPTION:${icsText(description)}`);
       lines.push("END:VEVENT");
     });
     lines.push("END:VCALENDAR");
-    return `${lines.join("\r\n")}\r\n`;
+    return `${lines.map(icsFold).join("\r\n")}\r\n`;
   };
 
-  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, trackerUrl, link, linkButton, fromParams, ics, get failed() { return failed; }, get lastAdd() { return lastAdd; } };
+  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; } };
 })();

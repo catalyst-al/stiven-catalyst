@@ -194,18 +194,17 @@
   };
   // A calendar file of the due tasks: each one an all-day event, so a phone can remind whoever does it.
   const ics = (items, stamp = new Date()) => {
-    const esc = (text) => String(text).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
-    // Lines longer than 75 bytes are folded; 60 characters keep a line with umlauts inside the limit.
-    const fold = (line) => { const parts = []; let rest = line; while (rest.length > 60) { parts.push(rest.slice(0, 60)); rest = ` ${rest.slice(60)}`; } parts.push(rest); return parts.join("\r\n"); };
+    // Escaped, and every line folded at 75 octets of UTF-8 (the one rule of ActionsStore, which the page loads first).
+    const { icsText: esc, icsFold: fold } = window.ActionsStore;
     const dt = stamp.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Stiven Catalyst//Maintenance Planner//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
     items.filter((item) => isIso(item.date)).forEach((item) => {
-      lines.push("BEGIN:VEVENT", `UID:${item.uid}@stivencatalyst.com`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${item.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${addDays(item.date, 1).replace(/-/g, "")}`, fold(`SUMMARY:${esc(item.summary)}`));
-      if (item.description) lines.push(fold(`DESCRIPTION:${esc(item.description)}`));
+      lines.push("BEGIN:VEVENT", `UID:${item.uid}@stivencatalyst.com`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${item.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${addDays(item.date, 1).replace(/-/g, "")}`, `SUMMARY:${esc(item.summary)}`);
+      if (item.description) lines.push(`DESCRIPTION:${esc(item.description)}`);
       lines.push("END:VEVENT");
     });
     lines.push("END:VCALENDAR");
-    return `${lines.join("\r\n")}\r\n`;
+    return `${lines.map(fold).join("\r\n")}\r\n`;
   };
 
   // The example: a seeded walk through three months of a parcel hub, so every visitor sees the same numbers.

@@ -131,20 +131,10 @@
   };
   // A calendar file (iCalendar): one all-day entry per planned audit. The UID stays the same for the same area and
   // day, so a second import updates the entries instead of doubling them. Long lines are folded at 75 bytes.
-  const icsText = (value) => String(value ?? "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
-  const octets = (char) => { const code = char.codePointAt(0); return code < 0x80 ? 1 : code < 0x800 ? 2 : code < 0x10000 ? 3 : 4; };
-  const fold = (line) => {
-    const parts = [];
-    let part = "";
-    let size = 0;
-    for (const char of line) {
-      if (size + octets(char) > 75) { parts.push(part); part = " "; size = 1; }
-      part += char;
-      size += octets(char);
-    }
-    parts.push(part);
-    return parts.join("\r\n");
-  };
+  // Escaping and folding (75 octets of UTF-8) are the shared ones of ActionsStore, which the tool page loads first;
+  // looked up when a file is written, so a page that only reads this tool's numbers does not need it.
+  const icsText = (value) => window.ActionsStore.icsText(value);
+  const fold = (line) => window.ActionsStore.icsFold(line);
   const uidOf = (area, date) => {
     let hash = 5381;
     for (const char of norm(area)) hash = ((hash * 33) ^ char.codePointAt(0)) >>> 0;

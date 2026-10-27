@@ -232,19 +232,10 @@
   // Times are floating (the phone's own time zone). Daily and per-shift tasks repeat weekly on the working days, a weekly
   // task on its (moved) weekday; a monthly task is one entry per date for the next months, because "the last day of a
   // shorter month, moved off a day off" has no RRULE.
-  const icsText = (value) => String(value ?? "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
-  const octets = (char) => { const code = char.codePointAt(0); return code < 0x80 ? 1 : code < 0x800 ? 2 : code < 0x10000 ? 3 : 4; };
-  const fold = (line) => {
-    const parts = [];
-    let part = "", size = 0;
-    for (const char of line) {
-      if (size + octets(char) > 75) { parts.push(part); part = " "; size = 1; }
-      part += char;
-      size += octets(char);
-    }
-    parts.push(part);
-    return parts.join("\r\n");
-  };
+  // Escaping and folding (75 octets of UTF-8) are the shared ones of ActionsStore, which the tool page loads first;
+  // looked up when a file is written, so a page that only reads this tool's numbers does not need it.
+  const icsText = (value) => window.ActionsStore.icsText(value);
+  const fold = (line) => window.ActionsStore.icsFold(line);
   const BYDAY = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
   const stampAt = (date, minute) => `${addDays(date, Math.floor(minute / 1440)).replace(/-/g, "")}T${clock(minute).replace(":", "")}00`;
   const ics = (leader, { from, months = 12, stamp = new Date(), labels = {} } = {}) => {
