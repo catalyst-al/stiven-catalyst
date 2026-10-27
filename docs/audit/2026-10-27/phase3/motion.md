@@ -23,7 +23,7 @@ Scripts, raw results and pictures: `docs/audit/2026-10-27/phase3/motion/`.
 - Diagnosis only: `profile.cjs` (V8 profile), `trace.cjs` (trace self-time per event), `composited.cjs` (which CSS
   animations Chrome could not run on the compositor, and why), `anims.cjs` (`document.getAnimations()` inventory).
 
-## PM-2, PM-3, CI-03: one switch for the motion of the whole site (commit 41e632a0)
+## PM-2, PM-3, CI-03: one switch for the motion of the whole site (commit 972b58e7)
 
 **Was:** "Pause the motion" only in the home hero, not remembered; glows, shine and the share ring kept running; no
 control on tool, book and issue pages; `tests/cosmos-pause.test.cjs` checked CSS text only.
@@ -51,14 +51,14 @@ control on tool, book and issue pages; `tests/cosmos-pause.test.cjs` checked CSS
 - Measured (`perf-home-paused.json`, 3 runs): home paused, main thread **0.006 s / 5 s desktop, 0.015 s phone4x**
   (audit: 0.85-1.0 s and 3.9 s after Pause).
 
-## PM-1: the planets hero (commits 1be94272, and 01014144 for approval)
+## PM-1: the planets hero (commits ba1c7ee0, and 01014144 for approval)
 
 **Diagnosis** (`trace.cjs`, `profile.cjs`): JavaScript is only 12-16 % of the hero's main-thread time; the rest is the
 canvas raster (`LayerTreeHost::DoUpdateLayers`, ~21 ms a frame at phone4x) and copying the canvas resource every
 frame (`Canvas2DResourceProvider::ProduceCanvasResource`). The raster cost is the drawn shapes at DPR 2 (the glow,
 the halos, the planets), not the JS.
 
-**Same look (1be94272):** the hero is drawn on three canvases: the planets' band (from the cable's top to 2.5 system
+**Same look (ba1c7ee0):** the hero is drawn on three canvases: the planets' band (from the cable's top to 2.5 system
 radii below the light, where nothing can reach beyond: computed bound 2.26 radii tilted and zoomed) and the stars above
 and below it. Each is drawn only while it is within half a screen of the view; the band is 42 % of the phone hero.
 The big glow is filled as its disc instead of its square (the corners added nothing). Proof that the drawing is the
@@ -110,7 +110,7 @@ the wheel. Headless Chrome scrolls a notch at once; real Chrome animates it on t
 the page is drawing. Test (failing first, `red/wheel-before.txt`): the wheel is not cancelled and the page has moved
 >= 270 px within 120 ms. This also ends PM-16's "glide overrides programmatic scrolls".
 
-## PM-8: tool pages (commit 7b3da4b2)
+## PM-8: tool pages (commit d8b9192f)
 
 `composited.cjs` showed every endless animation on CX Control Tower was compositor-capable, yet the main thread drew
 60 frames a second. Cause, isolated by switching animations off one group at a time: the family badge animates the dot
@@ -124,11 +124,36 @@ a main-thread animation (the radar's background-position/opacity).
 
 ## PM-16
 
-- Smooth `scrollIntoView` under reduced motion: **not reproduced** in Chrome 153 (it is instant under reduced motion,
-  smooth otherwise); a browser test keeps it so (`red/scroll-not-reproduced.txt`). Not verified in Firefox/Safari.
-- Glide overriding programmatic scrolls: gone with PM-6.
+- Smooth `scrollIntoView` under reduced motion: first judged **not reproduced** (`red/scroll-not-reproduced.txt`), but
+  that run did not really emulate reduced motion: `reducedMotion` written directly under a Playwright project's `use`
+  is ignored, which the CI and accessibility work of phase 3 found and fixed (`contextOptions`). With reduced motion
+  really applied, Chrome 153 **does** glide `scrollIntoView({ behavior: "smooth" })`: the browser test failed in the
+  three light projects (`{"y":0,…}` two frames later). **Fixed by the coordinator**: `src/script.js` turns "smooth" into
+  "auto" for scrollIntoView, scrollTo, scroll and scrollBy while reduced motion is asked for; the test passes in all
+  six projects. Not verified in Firefox/Safari.
+- Glide overriding programmatic scrolls: ends with PM-6, if the author approves it (below).
 - Live regions un-hidden in the same tick: not motion; left for the accessibility worker. Essay "Save for later"
   pill: opinion, not touched.
+
+## What is on the work branch, and what waits as a patch
+
+On the work branch: the switch for the whole site (PM-2, PM-3, CI-03), the planets on three canvases with the same
+look (PM-1, first part), the family badge's glow (PM-8), the PM-16 test with its fix, the measurement scripts and
+results. The four commits that change how something looks or feels are **not** on the branch; each is kept as a patch
+that applies on it with `git am`, in `phase3/proposals/`:
+
+| Patch | What it changes | Measured |
+| --- | --- | --- |
+| `planets-touch-dpr-1.5.patch` | planets drawn at 1.5 device pixels per CSS pixel on touch screens (was 2): a little softer up close | phone at 4×: 22 → 32 fps, long tasks 27 → 2 |
+| `zenith-radar-keyframes.patch` | Zenith's radar turns again (as written), the podcast steps light blue, Start here keeps its gold as `start-reach`; a test that no two `@keyframes` share a name | before/after frames in `motion/radar/` |
+| `wheel-native-scroll.patch` | the mouse wheel scrolls the browser's own way, without the site's glide; links to a place on the page still glide | a notch: 393 → 54 ms (home), 1067 → 183 ms (home at 4×) |
+
+The place of the switch (at the foot of every page, and beside the planets on the homepage) is on the branch, as a
+default for the author to confirm.
+
+The approval commits are named below by their patch: `01014144` = `planets-touch-dpr-1.5.patch`, `9858edf5` +
+`18b65fca` = `zenith-radar-keyframes.patch`, `fa50a0d4` = `wheel-native-scroll.patch` (hashes of the worker's branch,
+not of the work branch).
 
 ## Tests
 
@@ -138,8 +163,7 @@ a main-thread animation (the radar's background-position/opacity).
 
 ## Left / for the author
 
-- Approve or drop: 01014144 (touch DPR 1.5), 9858edf5 + 18b65fca (radar turns, podcast steps blue), fa50a0d4 (native
-  wheel), the switch's place (footer + hero).
+- Approve or drop the three patches above, and confirm the switch's place (footer + hero).
 - Home on a slow phone stays heavy under software raster even after these; the remaining levers change the look.
 - Shift Pulse's ECG trace (PM-8), the home shelf's `translate` float, which still costs a style recalculation every
   frame while the canvas runs (cause not found), and the box-shadow breathing of the hero buttons (main-thread paint

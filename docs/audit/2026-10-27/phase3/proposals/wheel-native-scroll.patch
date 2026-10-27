@@ -1,0 +1,727 @@
+From 819c29e78b370989fa59de1a0d2a08001cf7ded0 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 27 Oct 2026 12:28:02 +0000
+Subject: [PATCH] The wheel scrolls the page the browser's own way: a notch in
+ 0.05 s instead of 0.39 s (1.07 s on a slow homepage); links to a place on the
+ page still glide (audit PM-6; a change of feel for the author to judge)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01AtMYkgndrDbZkBjz8B5ny3
+---
+ docs/audit/2026-10-27/phase3/motion/glide.cjs |  65 ++++
+ .../audit/2026-10-27/phase3/motion/glide.json | 312 ++++++++++++++++++
+ .../phase3/motion/red/wheel-before.txt        | 220 ++++++++++++
+ src/script.js                                 |  47 +--
+ tests/browser/motion.spec.mjs                 |  21 ++
+ 5 files changed, 622 insertions(+), 43 deletions(-)
+ create mode 100644 docs/audit/2026-10-27/phase3/motion/glide.cjs
+ create mode 100644 docs/audit/2026-10-27/phase3/motion/glide.json
+ create mode 100644 docs/audit/2026-10-27/phase3/motion/red/wheel-before.txt
+
+diff --git a/docs/audit/2026-10-27/phase3/motion/glide.cjs b/docs/audit/2026-10-27/phase3/motion/glide.cjs
+new file mode 100644
+index 00000000..9b175c3b
+--- /dev/null
++++ b/docs/audit/2026-10-27/phase3/motion/glide.cjs
+@@ -0,0 +1,65 @@
++// Phase 3, motion: how long one turn of the mouse wheel (a 300 px notch) takes to move the page, before and after.
++//   node docs/audit/2026-10-27/phase3/motion/glide.cjs --a http://127.0.0.1:8321 --b http://127.0.0.1:8322 [--runs 5]
++// Desktop 1440x900, fine pointer, motion allowed; CPU throttle 1 and 4 (CDP). The page is left 2 s to settle at the
++// top; then one wheel event of deltaY 300 is sent (page.mouse.wheel, a real input event) and the time is measured
++// until window.scrollY has covered 90 % of the notch, and until it stops (no change for 150 ms). Also recorded:
++// whether the page cancelled the wheel event (preventDefault: the page scrolls it itself). Median of the runs.
++// Headless Chromium has no smooth wheel scrolling of its own, so a native notch lands at once; a real Chrome animates
++// it over about 100-200 ms on the compositor.
++const { chromium } = require("playwright");
++
++const arg = (name, fallback) => {
++  const at = process.argv.indexOf(`--${name}`);
++  return at > -1 ? process.argv[at + 1] : fallback;
++};
++const SIDES = [["a", arg("a")], ["b", arg("b")]].filter(([, url]) => url);
++const RUNS = Number(arg("runs", 5));
++const PAGES = ["/", "/field-notes.html"];
++
++const median = (list) => { const s = [...list].sort((x, y) => x - y); const m = Math.floor(s.length / 2); return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
++
++const once = async (browser, base, path, rate) => {
++  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
++  await context.route((url) => !/^http:\/\/127\.0\.0\.1/.test(url.href), (route) => route.abort());
++  await context.addInitScript(() => {
++    window.__prevented = [];
++    window.addEventListener("wheel", (e) => setTimeout(() => window.__prevented.push(e.defaultPrevented)), { passive: true, capture: true });
++  });
++  const page = await context.newPage();
++  const cdp = await context.newCDPSession(page);
++  if (rate > 1) await cdp.send("Emulation.setCPUThrottlingRate", { rate });
++  await page.goto(base + path, { waitUntil: "load" });
++  await page.mouse.move(700, 450);
++  await page.waitForTimeout(2000);
++  await page.evaluate(() => {
++    window.__track = [];
++    const t0 = performance.now();
++    const tick = () => { window.__track.push([performance.now() - t0, scrollY]); if (performance.now() - t0 < 3000) requestAnimationFrame(tick); };
++    window.__t0 = t0;
++    requestAnimationFrame(tick);
++  });
++  const sent = await page.evaluate(() => performance.now() - window.__t0);
++  await page.mouse.wheel(0, 300);
++  await page.waitForTimeout(rate > 1 ? 2600 : 1500);
++  const { track, prevented } = await page.evaluate(() => ({ track: window.__track, prevented: window.__prevented }));
++  await context.close();
++  const end = track.at(-1)[1];
++  const at90 = track.find(([, y]) => y >= 0.9 * end);
++  let settled = track.at(-1)[0];
++  for (let i = track.length - 1; i > 0; i -= 1) if (track[i - 1][1] !== end) { settled = track[i][0]; break; }
++  return { distance: end, to90: at90 ? Math.round(at90[0] - sent) : null, settled: Math.round(settled - sent), prevented: prevented.includes(true) };
++};
++
++(async () => {
++  const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
++  const out = {};
++  for (const path of PAGES) for (const rate of [1, 4]) for (const [side, base] of SIDES) {
++    const runs = [];
++    for (let i = 0; i < RUNS; i += 1) runs.push(await once(browser, base, path, rate));
++    const key = `${path} x${rate} ${side}`;
++    out[key] = { distance: median(runs.map((r) => r.distance)), to90ms: median(runs.map((r) => r.to90)), settledMs: median(runs.map((r) => r.settled)), prevented: runs.some((r) => r.prevented), runs };
++    console.log(key, JSON.stringify({ ...out[key], runs: undefined }));
++  }
++  await browser.close();
++  if (arg("out")) require("node:fs").writeFileSync(arg("out"), JSON.stringify({ date: new Date().toISOString(), a: arg("a"), b: arg("b"), runs: RUNS, results: out }, null, 1));
++})();
+diff --git a/docs/audit/2026-10-27/phase3/motion/glide.json b/docs/audit/2026-10-27/phase3/motion/glide.json
+new file mode 100644
+index 00000000..71e48ffd
+--- /dev/null
++++ b/docs/audit/2026-10-27/phase3/motion/glide.json
+@@ -0,0 +1,312 @@
++{
++ "date": "2026-10-27T12:27:57.100Z",
++ "a": "http://127.0.0.1:8321",
++ "b": "http://127.0.0.1:8322",
++ "runs": 5,
++ "results": {
++  "/ x1 a": {
++   "distance": 300,
++   "to90ms": 393,
++   "settledMs": 992,
++   "prevented": true,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 371,
++     "settled": 960,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 394,
++     "settled": 1002,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 394,
++     "settled": 1065,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 375,
++     "settled": 992,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 393,
++     "settled": 986,
++     "prevented": true
++    }
++   ]
++  },
++  "/ x1 b": {
++   "distance": 300,
++   "to90ms": 54,
++   "settledMs": 54,
++   "prevented": false,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 79,
++     "settled": 79,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 46,
++     "settled": 46,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 54,
++     "settled": 54,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 40,
++     "settled": 40,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 72,
++     "settled": 72,
++     "prevented": false
++    }
++   ]
++  },
++  "/ x4 a": {
++   "distance": 300,
++   "to90ms": 1067,
++   "settledMs": 2478,
++   "prevented": true,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 976,
++     "settled": 2478,
++     "prevented": true
++    },
++    {
++     "distance": 299,
++     "to90": 1067,
++     "settled": 2457,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 1027,
++     "settled": 2433,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 1232,
++     "settled": 2855,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 1110,
++     "settled": 2674,
++     "prevented": true
++    }
++   ]
++  },
++  "/ x4 b": {
++   "distance": 300,
++   "to90ms": 183,
++   "settledMs": 183,
++   "prevented": false,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 183,
++     "settled": 183,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 216,
++     "settled": 216,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 163,
++     "settled": 163,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 164,
++     "settled": 164,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 204,
++     "settled": 204,
++     "prevented": false
++    }
++   ]
++  },
++  "/field-notes.html x1 a": {
++   "distance": 300,
++   "to90ms": 361,
++   "settledMs": 948,
++   "prevented": true,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 357,
++     "settled": 941,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 366,
++     "settled": 966,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 365,
++     "settled": 950,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 361,
++     "settled": 943,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 359,
++     "settled": 948,
++     "prevented": true
++    }
++   ]
++  },
++  "/field-notes.html x1 b": {
++   "distance": 300,
++   "to90ms": 31,
++   "settledMs": 31,
++   "prevented": false,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 24,
++     "settled": 24,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 26,
++     "settled": 26,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 36,
++     "settled": 36,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 31,
++     "settled": 31,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 36,
++     "settled": 36,
++     "prevented": false
++    }
++   ]
++  },
++  "/field-notes.html x4 a": {
++   "distance": 300,
++   "to90ms": 366,
++   "settledMs": 994,
++   "prevented": true,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 361,
++     "settled": 978,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 371,
++     "settled": 994,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 366,
++     "settled": 1014,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 365,
++     "settled": 997,
++     "prevented": true
++    },
++    {
++     "distance": 300,
++     "to90": 366,
++     "settled": 943,
++     "prevented": true
++    }
++   ]
++  },
++  "/field-notes.html x4 b": {
++   "distance": 300,
++   "to90ms": 40,
++   "settledMs": 40,
++   "prevented": false,
++   "runs": [
++    {
++     "distance": 300,
++     "to90": 48,
++     "settled": 48,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 30,
++     "settled": 30,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 37,
++     "settled": 37,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 48,
++     "settled": 48,
++     "prevented": false
++    },
++    {
++     "distance": 300,
++     "to90": 40,
++     "settled": 40,
++     "prevented": false
++    }
++   ]
++  }
++ }
++}
+\ No newline at end of file
+diff --git a/docs/audit/2026-10-27/phase3/motion/red/wheel-before.txt b/docs/audit/2026-10-27/phase3/motion/red/wheel-before.txt
+new file mode 100644
+index 00000000..e7fe35ee
+--- /dev/null
++++ b/docs/audit/2026-10-27/phase3/motion/red/wheel-before.txt
+@@ -0,0 +1,220 @@
++
++Running 6 tests using 2 workers
++
++[1A[2K[1/6] [390px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
++[1A[2K[2/6] [390px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
++[1A[2K  1) [390px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++
++    Error: /
++
++    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
++
++    [32m- Expected  - 1[39m
++    [31m+ Received  + 1[39m
++
++    [2m  Array [[22m
++    [32m-   false,[39m
++    [31m+   true,[39m
++    [2m  ][22m
++
++      122 |     await page.mouse.wheel(0, 300);
++      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++          |                                                                ^
++      125 |     // Within a frame or two, not over a third of a second.
++      126 |     await page.waitForTimeout(120);
++      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
++
++    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-light/error-context.md
++
++    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
++    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-light/trace.zip
++    Usage:
++
++        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-light/trace.zip
++
++    ────────────────────────────────────────────────────────────────────────────────────────────────
++
++
++[1A[2K  2) [390px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++
++    Error: /
++
++    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
++
++    [32m- Expected  - 1[39m
++    [31m+ Received  + 1[39m
++
++    [2m  Array [[22m
++    [32m-   false,[39m
++    [31m+   true,[39m
++    [2m  ][22m
++
++      122 |     await page.mouse.wheel(0, 300);
++      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++          |                                                                ^
++      125 |     // Within a frame or two, not over a third of a second.
++      126 |     await page.waitForTimeout(120);
++      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
++
++    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-dark/error-context.md
++
++    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
++    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-dark/trace.zip
++    Usage:
++
++        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-dark/trace.zip
++
++    ────────────────────────────────────────────────────────────────────────────────────────────────
++
++
++[1A[2K[3/6] [768px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
++[1A[2K[4/6] [768px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
++[1A[2K  3) [768px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++
++    Error: /
++
++    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
++
++    [32m- Expected  - 1[39m
++    [31m+ Received  + 1[39m
++
++    [2m  Array [[22m
++    [32m-   false,[39m
++    [31m+   true,[39m
++    [2m  ][22m
++
++      122 |     await page.mouse.wheel(0, 300);
++      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++          |                                                                ^
++      125 |     // Within a frame or two, not over a third of a second.
++      126 |     await page.waitForTimeout(120);
++      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
++
++    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-dark/error-context.md
++
++    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
++    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-dark/trace.zip
++    Usage:
++
++        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-dark/trace.zip
++
++    ────────────────────────────────────────────────────────────────────────────────────────────────
++
++
++[1A[2K  4) [768px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++
++    Error: /
++
++    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
++
++    [32m- Expected  - 1[39m
++    [31m+ Received  + 1[39m
++
++    [2m  Array [[22m
++    [32m-   false,[39m
++    [31m+   true,[39m
++    [2m  ][22m
++
++      122 |     await page.mouse.wheel(0, 300);
++      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++          |                                                                ^
++      125 |     // Within a frame or two, not over a third of a second.
++      126 |     await page.waitForTimeout(120);
++      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
++
++    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-light/error-context.md
++
++    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
++    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-light/trace.zip
++    Usage:
++
++        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-light/trace.zip
++
++    ────────────────────────────────────────────────────────────────────────────────────────────────
++
++
++[1A[2K[5/6] [1440px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
++[1A[2K[6/6] [1440px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
++[1A[2K  5) [1440px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++
++    Error: /
++
++    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
++
++    [32m- Expected  - 1[39m
++    [31m+ Received  + 1[39m
++
++    [2m  Array [[22m
++    [32m-   false,[39m
++    [31m+   true,[39m
++    [2m  ][22m
++
++      122 |     await page.mouse.wheel(0, 300);
++      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++          |                                                                ^
++      125 |     // Within a frame or two, not over a third of a second.
++      126 |     await page.waitForTimeout(120);
++      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
++
++    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-dark/error-context.md
++
++    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
++    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-dark/trace.zip
++    Usage:
++
++        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-dark/trace.zip
++
++    ────────────────────────────────────────────────────────────────────────────────────────────────
++
++
++[1A[2K  6) [1440px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++
++    Error: /
++
++    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
++
++    [32m- Expected  - 1[39m
++    [31m+ Received  + 1[39m
++
++    [2m  Array [[22m
++    [32m-   false,[39m
++    [31m+   true,[39m
++    [2m  ][22m
++
++      122 |     await page.mouse.wheel(0, 300);
++      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++          |                                                                ^
++      125 |     // Within a frame or two, not over a third of a second.
++      126 |     await page.waitForTimeout(120);
++      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
++
++    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-light/error-context.md
++
++    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
++    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-light/trace.zip
++    Usage:
++
++        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-light/trace.zip
++
++    ────────────────────────────────────────────────────────────────────────────────────────────────
++
++
++[1A[2K  6 failed
++    [390px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++    [390px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++    [768px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++    [768px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++    [1440px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
++    [1440px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+diff --git a/src/script.js b/src/script.js
+index 67fa54fb..80b3e67f 100644
+--- a/src/script.js
++++ b/src/script.js
+@@ -204,47 +204,8 @@
+     node.textContent = new Date().getFullYear();
+   });
+ 
+-  // The page glides under the wheel: each turn of the wheel or swipe of a touchpad sets where the page is going, and
+-  // it eases there over a few frames instead of jumping in steps, so the cards and rows that rise on scroll move
+-  // with it. Only with a mouse or touchpad (a phone scrolls smoothly by itself), never for readers who ask for less
+-  // motion, and never inside a box that scrolls on its own (a reader, a list, a text field), for zoom (Ctrl) or for a
+-  // sideways scroll. A click, a key or a touch stops the glide where it is, so links, anchors and the keyboard
+-  // scroll as before.
+-  const media = (query) => window.matchMedia?.(query) || { matches: false };
+-  const calm = media("(prefers-reduced-motion: reduce)");
+-  if (media("(pointer: fine)").matches) {
+-    let target = window.scrollY;
+-    let current = target;
+-    let frame = 0;
+-    const limit = () => document.documentElement.scrollHeight - window.innerHeight;
+-    const scrollsItself = (node) => {
+-      for (let el = node instanceof Element ? node : null; el && el !== document.body && el !== root; el = el.parentElement) {
+-        const style = getComputedStyle(el);
+-        if (/auto|scroll/.test(style.overflowY) && el.scrollHeight > el.clientHeight + 1) return true;
+-      }
+-      return false;
+-    };
+-    const locked = () => getComputedStyle(document.body).overflowY === "hidden" || getComputedStyle(root).overflowY === "hidden";
+-    const step = () => {
+-      current += (target - current) * 0.11;
+-      if (Math.abs(target - current) < 0.5) current = target;
+-      window.scrollTo({ top: current, behavior: "instant" });
+-      frame = current === target ? 0 : requestAnimationFrame(step);
+-    };
+-    const stop = () => {
+-      if (frame) cancelAnimationFrame(frame);
+-      frame = 0;
+-      target = current = window.scrollY;
+-    };
+-    window.addEventListener("wheel", (event) => {
+-      if (calm.matches || event.ctrlKey || event.defaultPrevented || Math.abs(event.deltaX) > Math.abs(event.deltaY) || scrollsItself(event.target) || locked()) return;
+-      event.preventDefault();
+-      if (!frame) target = current = window.scrollY;
+-      const unit = event.deltaMode === 1 ? 40 : event.deltaMode === 2 ? window.innerHeight : 1;
+-      target = Math.max(0, Math.min(limit(), target + event.deltaY * unit));
+-      if (!frame) frame = requestAnimationFrame(step);
+-    }, { passive: false });
+-    window.addEventListener("scroll", () => { if (!frame) target = current = window.scrollY; }, { passive: true });
+-    ["mousedown", "keydown", "touchstart"].forEach((type) => window.addEventListener(type, () => { if (frame) stop(); }, { passive: true }));
+-  }
++  // The wheel scrolls the page the browser's own way, on the compositor, whatever the page is drawing (audit PM-6: the
++  // page used to cancel the wheel and move itself frame by frame, which took a third of a second a notch, and a second
++  // on a busy homepage). Links to a place on the page still glide (html { scroll-behavior: smooth }), and the cards and
++  // rows that rise on scroll follow the scroll as before.
+ })();
+diff --git a/tests/browser/motion.spec.mjs b/tests/browser/motion.spec.mjs
+index d43ce3f5..61ae9791 100644
+--- a/tests/browser/motion.spec.mjs
++++ b/tests/browser/motion.spec.mjs
+@@ -107,6 +107,27 @@ test("the switch is in every language", async ({ page }) => {
+   }
+ });
+ 
++// The wheel scrolls the page the browser's own way (audit PM-6): the site no longer cancels the wheel to move the page
++// itself frame by frame on the main thread (a notch took 0.37 s, 1.1 s on the homepage of a slow computer), so the
++// scrolling runs on the compositor, whatever the page is doing. Links to a place on the page still glide (scroll-behavior).
++test("a turn of the wheel scrolls the page at once, by the browser", async ({ page }) => {
++  await page.addInitScript(() => {
++    window.__prevented = [];
++    window.addEventListener("wheel", (event) => setTimeout(() => window.__prevented.push(event.defaultPrevented)), { passive: true, capture: true });
++  });
++  for (const url of ["/", "/field-notes.html"]) {
++    await page.goto(url);
++    await page.mouse.move(200, 400);
++    const before = await page.evaluate(() => window.scrollY);
++    await page.mouse.wheel(0, 300);
++    await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
++    expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
++    // Within a frame or two, not over a third of a second.
++    await page.waitForTimeout(120);
++    expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
++  }
++});
++
+ // A tool that brings its result into view does it at once for a reader who asks for reduced motion, and glides for the
+ // others (audit PM-16 feared the 63 calls of scrollIntoView({ behavior: "smooth" }) in the tools glided all the same;
+ // Chromium 153 itself makes them instant under reduced motion, and this keeps any script of the site from undoing it).
+-- 
+2.43.0
+
