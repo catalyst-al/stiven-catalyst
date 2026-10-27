@@ -10,16 +10,16 @@ Status values:
 - **needs author approval**: a fact, a wording of the author's own text, an account setting or a deployment.
 - **not verified**: could not be checked in this environment.
 
-## Verification of phase 1 (state at `d6408501` + wave 2, see the end)
+## Verification of phase 1 (state at `8f9c4e25`)
 
 | Check | Result |
 | --- | --- |
 | Build | `npm run build` from an empty `_site`: 838 files, 58 s, no error |
-| Unit tests | `npm test`: **1207 tests, 1207 pass, 0 fail, 0 skipped, 0 todo** (baseline at `605d0df`: 1092) |
+| Unit tests | `npm test`: **1269 tests, 1269 pass, 0 fail, 0 skipped, 0 todo** (baseline at `605d0df`: 1092) |
 | Coaching build check | `scripts/check-coaching-build.mjs`: 54 pages, 9 journeys pass |
 | Browser tests, current Chrome (153) | 32 tests, 26 pass, 0 skipped, **6 fail: the keyboard search journey** (CI-01, a view-transition error on current Chrome; phase 3). The same 6 failed at the audit. |
 | Flows between tools in real Chromium | `verification/phase1-flows-chromium.cjs`: 11 of 11 pass (examples, readers, Waste Log → Cost of Quality in 3 languages, Kaizen Board → Action Tracker, Daily Board profile), no script error |
-| Fixes of the workers in real Chromium | Process Lab (3 languages), Room Inspection, Heijunka, Hotel KPIs (3 languages), Andon across the clock change: 22 of 22 pass |
+| Other fixes in real Chromium | Process Lab (3 languages), Room Inspection, Heijunka, Hotel KPIs (3 languages), Andon across the clock change: all pass; zip bomb refused in about 0.2 s; search for "fuehrung" in about 25 ms |
 | Files in 3 languages | `verification/phase1-exports-chromium.cjs`: Excel opens in openpyxl and keeps "00123" as text, CSV has its BOM and the separator of its language, the ATS CV PDF has extractable text with the "+", every XML part of the Word file parses: 18 of 18 pass |
 | Existing data | Every changed format reads the old one: examples saved by shape, the Action Tracker's old example ids (even a list the old code had mixed), the Daily Board's old demo profile, team copies of version 1, the old team address, Andon rows without time stamps, inspections saved before. Each has a test with the old format, several produced by the old scripts from the checkpoint. |
 | Motion and visual identity | No CSS, layout, planet or motion script changed in phase 1 (`git diff 605d0df -- src/css src/styles.css src/js/cosmos.js src/js/family-sky.js src/script.js src/_includes/layouts` is empty). Result areas whose content changed were looked at in Chromium at 390 and 1440 px. |
@@ -59,7 +59,7 @@ Status values:
 | T-20 | Heijunka freezes the tab | fixed | `b9da1c6e`, `094b9c97`, `70fab809` · tests/heijunka.test.cjs |
 | T-21 | Room Inspection passes after 1 of 34 items | fixed | `fb3cdb26` · tests/room-inspection.test.cjs. **Author:** a failed critical item still fails a room while other items are open, as before. |
 | T-22 | Excel turns "00123" into 123 | fixed | `285c7af8` · tests/log-integrity.test.cjs, verification/phase1-exports-chromium.cjs |
-| T-23 | Time Study's "standard time" has no rating or allowance | see wave 2 | |
+| T-23 | Time Study's "standard time" has no rating or allowance | fixed | `bf3e2c51` · tests/time-study-standard.test.cjs (rating and allowance inputs; the real Time Study → Shift Capacity hand-off; an old study made by the pre-phase-1 script). The printed Tools Guide still says the old thing: phase 2. |
 | T-24 | CV and ATS PDFs cut long blocks | ATS CV: fixed by the PDF writer of `605d0df` (70 bullets checked, `822faca1`); CV Builder print: pending (phase 3, print) | |
 | T-25 | Team sync never propagates deletions | fixed | `4e69750f` · tests/team-sync-deletions.test.cjs |
 | T-26 | Sync ids by plain SHA-256; no limits on the Worker | fixed in code | `697cbf95`, `9e64b36c` · tests/team-sync-keys.test.cjs, tests/sync-worker.test.cjs. **Needs author approval to deploy the Worker.** Read-only codes made before the move stop working once a team's copy moves. |
@@ -88,8 +88,19 @@ Status values:
 | P2B-13 | Heijunka drops a product without pack-out from the takt | fixed `b9da1c6e` |
 | P2C-11 | Shelf accepts "/\host" links from a backup | fixed `52b56020` |
 | Flaky test | template-pack waited 30 ms for a file reader | fixed `b36db424` |
-| P2B-10, P2B-11, P2B-12, P2B-14, P2B-15, P2B-16, P2B-17 | ics files, partial 5S audits, 5 Whys save warning, VSM bottleneck, ABC ties, Gage R&R alpha, Hoshin file names | see wave 2 |
-| P2C-06, P2C-12, P2C-13, P2C-14, P2C-15 | zip bomb, search, coaching import, cover-letter example, coaching doc | see wave 2 |
+| P2B-10 | Calendar files unfolded, English labels in DE/SQ | fixed `81dfd587` · tests/ics-files.test.cjs (one fold at 75 octets for all four writers) |
+| P2B-11 | Partial 5S audits counted as full | fixed `6f04859b` (the 5S Audit) and `8f9c4e25` (every tool that reads it, one shared ToolKit.fiveSScore) · tests/five-s-partial.test.cjs, tests/handoffs-real.test.cjs |
+| P2B-12 | 5 Whys gives no warning when it cannot save | fixed `605e90e9` · tests/five-whys-save.test.cjs |
+| P2B-14 | VSM names the bottleneck by cycle time only | fixed `62867c4b` · tests/vsm-bottleneck.test.cjs (time per piece with operators, changeover and uptime) |
+| P2B-15 | ABC ties put a whole tail into A | fixed `d45ba43d` · tests/inventory-abc-ties.test.cjs (70/10/10/10 → A, A, B, B) |
+| P2B-16 | Gage R&R alpha 0.05 vs "Minitab parity" | not a defect: Minitab's documented default is 0.05 (support.minitab.com, Gage R&R settings); code and comment agree |
+| P2B-17 | Two Hoshin exports, same file name | not a defect: both buttons write the same table, byte for byte. **Author:** keep or remove the second button |
+| P2C-06 | A zip bomb holds the tab | fixed `19cf45d8` · tests/zip-limits.test.cjs (one reader for Word and Excel; 5,000 entries, 50 MB per entry, 100 MB per file) |
+| — | JSON imports read whole whatever their size | fixed `9e07002f` and `eb588d94` (CV Builder) · tests/import-size.test.cjs (ATS CV 5 MB, CV Builder 5 MB, work file 40 MB, coaching 5 MB, template pack 2 MB) |
+| P2C-12 | Search: "30 results", "fuehrung", "C#" | fixed `72145707` · tests/search-queries.test.cjs |
+| P2C-13 | Coaching backup imported twice duplicates; wrong message over 100 | fixed `7fed9cfc` · tests/coaching-import.test.cjs. **Author:** a project with the same id but other content is added as a copy, so nothing is lost |
+| P2C-14 | Cover-letter example fails its own check | fixed `2309b507` · tests/cover-letter-example.test.cjs |
+| P2C-15 | Coaching doc says there is no sync | fixed `ddd6b6cc` |
 
 ## Found and fixed during phase 1 (not in the audit)
 
@@ -116,3 +127,6 @@ Status values:
 4. A failed critical item fails a room even while other items are open (Room Inspection).
 5. The Tools Guide (printed edition 7) still describes Time Study, KPI Diagnostic and the ATS CV the old way; a new
    edition needs its PDF printed again (phase 2).
+6. Hoshin Kanri has two download buttons that write the same file; keep or remove one.
+7. Coaching: a backup project with the same id but other content is added as a copy (no data lost).
+8. Search: a lone "a" lists the pages that contain the word "a".
