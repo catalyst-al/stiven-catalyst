@@ -45,12 +45,18 @@
     complaintsPer100: complaintsPer100(t.complaints, t.sold),
   });
 
-  // One row per night: a day pasted twice keeps its latest figures. Oldest first.
-  const dailyRows = (rows) => {
+  // A night cannot sell more rooms than it has. Such a night (stored before the page checked it) stays in the log,
+  // marked, so it can be corrected, but it counts in no total: one 120 % night lifts the month, the forecast and Signals.
+  const oversold = (row) => Boolean(row) && row.sold > row.available;
+  // One row per night: a day pasted twice keeps its latest figures. Oldest first. dailyRows are the nights that count;
+  // oversoldNights the ones whose latest figures sell more rooms than there are.
+  const nightsOf = (rows) => {
     const byDate = new Map();
     rows.forEach((row) => { if (row && isIso(row.date)) byDate.set(row.date, row); });
     return [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
   };
+  const dailyRows = (rows) => nightsOf(rows).filter((row) => !oversold(row));
+  const oversoldNights = (rows) => nightsOf(rows).filter(oversold);
   const monthRows = (rows, ym) => rows.filter((row) => String(row.date).startsWith(`${ym}-`));
 
   // The budget as typed: occupancy in % (78) or as a share (0.78), ADR and RevPAR in €. Without a RevPAR budget it is
@@ -208,10 +214,11 @@
   };
   // Rows from a spreadsheet or a PMS export: date, rooms available, rooms sold, room revenue, other revenue, arrivals,
   // departures, no-shows, walk-ins, out of order, complaints, breakfast covers, complaint cause. An empty "rooms
-  // available" takes the rooms of the settings; a first row without a date is a header.
+  // available" takes the rooms of the settings; a first row without a date is a header. A row with more rooms sold
+  // than available is left out and counted apart (`oversold`).
   const importRows = (text, cfg = {}, rooms = 0) => {
     const added = [];
-    let skipped = 0;
+    let skipped = 0, tooMany = 0;
     kit.parseRows(text).forEach((cells, index) => {
       const [date, available, sold, roomRev, otherRev, arrivals, departures, noShows, walkIns, ooo, complaints, covers, cause] = cells;
       const row = cleanRow({ date, available, sold, roomRev, otherRev, arrivals, departures, noShows, walkIns, ooo, complaints, covers, cause: causeOf(cause, cfg) }, rooms);
@@ -219,15 +226,16 @@
         if (index > 0 || kit.parseDate(date)) skipped++;
         return;
       }
+      if (oversold(row)) { tooMany++; return; }
       added.push(row);
     });
-    return { added, skipped };
+    return { added, skipped, oversold: tooMany };
   };
   // The example of the data file, moved forward so that its last night is recent.
   const exampleRows = (cfg) => importRows(kit.recentExample(cfg.example.rows).map((row) => row.replace(/\|/g, "\t")).join("\n"), cfg, cfg.example.rooms).added;
 
   window.HotelKpisMath = {
-    CAUSES, occupancy, adr, revpar, trevpar, noShowRate, oooShare, complaintsPer100, totals, kpis, dailyRows, monthRows,
+    CAUSES, occupancy, adr, revpar, trevpar, noShowRate, oooShare, complaintsPer100, totals, kpis, dailyRows, oversold, oversoldNights, monthRows,
     budgetOf, weekday, weekdayAverages, forecast, bestWorst, pickup, leaks, causeTally, gaps, dayState, causeOf, cleanRow,
     importRows, exampleRows, monthDays, addMonths,
   };
@@ -500,7 +508,21 @@
     return box;
   };
 
+  // Nights stored with more rooms sold than available: named above the result, counted in nothing.
+  const oversoldNote = el("p", "dl-warning");
+  oversoldNote.dataset.hkOversold = "";
+  results.before(oversoldNote);
+  const renderOversold = () => {
+    const list = M.oversoldNights(state.rows);
+    oversoldNote.hidden = !list.length;
+    const dates = `${list.slice(0, 5).map((row) => `${showDate(row.date)} (${int.format(row.sold)} / ${int.format(row.available)})`).join(", ")}${list.length > 5 ? " …" : ""}`;
+    oversoldNote.textContent = !list.length ? "" : list.length === 1
+      ? tx("1 night has more rooms sold than available and counts in no total: {dates}. Enter it again with the right figures, or remove it from the log.", { dates })
+      : tx("{n} nights have more rooms sold than available and count in no total: {dates}. Enter them again with the right figures, or remove them from the log.", { n: int.format(list.length), dates });
+  };
+
   const renderResults = () => {
+    renderOversold();
     results.replaceChildren();
     results.hidden = !state.rows.length;
     if (!state.rows.length) return;
@@ -598,6 +620,7 @@
 
   const round2 = (value) => (Number.isFinite(value) ? Math.round(value * 100) / 100 : "");
   const percent2 = (value) => (Number.isFinite(value) ? Math.round(value * 10000) / 100 : "");
+  let lastOversold = 0;
   const book = logBook({
     root,
     key: KEY,
@@ -617,7 +640,7 @@
       el("td", "nowrap", showDate(row.date)),
       el("td", "num", int.format(row.sold)),
       el("td", "num", int.format(row.available)),
-      el("td", "num", share(M.occupancy(row.sold, row.available))),
+      M.oversold(row) ? Object.assign(el("td", "num", `⚠ ${share(M.occupancy(row.sold, row.available))}`), { title: tx("More rooms sold than available: not counted") }) : el("td", "num", share(M.occupancy(row.sold, row.available))),
       el("td", "num nowrap", money0(row.roomRev)),
       el("td", "num nowrap", money2(M.adr(row.roomRev, row.sold))),
       el("td", "num nowrap", money2(M.revpar(row.roomRev, row.available))),
@@ -629,10 +652,18 @@
     removeLabel: (row) => tx("Remove the night of {date}", { date: showDate(row.date) }),
     removedText: (row) => tx("Removed the night of {date}.", { date: showDate(row.date) }),
     countText: (rows) => plural(M.dailyRows(rows).length, tx("night"), tx("nights")),
-    importRows: (text) => M.importRows(text, data, rooms()),
+    importRows: (text) => {
+      const out = M.importRows(text, data, rooms());
+      lastOversold = out.oversold;
+      return out;
+    },
     importText: {
-      none: tx("No rows found. Each row needs a date, the rooms sold and, without a room total in the settings, the rooms available."),
-      done: (added, skipped) => `${tx("Imported {rows}", { rows: plural(added, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without a date or rooms sold", { n: skipped }) : ""}.`,
+      get none() {
+        return lastOversold
+          ? tx("No rows imported: {n} rows have more rooms sold than available. Check the rooms available, or the room total in the settings.", { n: lastOversold })
+          : tx("No rows found. Each row needs a date, the rooms sold and, without a room total in the settings, the rooms available.");
+      },
+      done: (added, skipped) => `${tx("Imported {rows}", { rows: plural(added, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without a date or rooms sold", { n: skipped }) : ""}${lastOversold ? tx(", left out {n} with more rooms sold than available", { n: lastOversold }) : ""}.`,
     },
     loadExample: () => {
       const example = data.example;
@@ -693,6 +724,11 @@
     if (!row) {
       (form.sold.value.trim() ? form.available : form.sold).focus();
       flash(entryStatus, tx("Enter the rooms sold, and the rooms available or the total rooms in the settings."));
+      return;
+    }
+    if (M.oversold(row)) {
+      form.sold.focus();
+      flash(entryStatus, tx("Rooms sold ({sold}) cannot be more than rooms available ({available}). Check the figures of the night, or the room total in the settings.", { sold: int.format(row.sold), available: int.format(row.available) }));
       return;
     }
     const noRevenue = !(parseNumber(form.roomRev.value) > 0) && row.sold > 0;

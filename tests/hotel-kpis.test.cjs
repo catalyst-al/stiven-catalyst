@@ -316,3 +316,47 @@ test('hand-offs and the log: complaints to Pareto, the month moves, a night is a
   assert.match(results.querySelector('h2').textContent, /1 Nacht im Oktober 2026: RevPAR 75,00/);
   assert.match(results.querySelector('.dl-warning').textContent, /Budget des Monats/, 'the example budget left with the example');
 });
+
+// Audit 27 Oct 2026, P2A-14: a night with 120 rooms sold of 100 available was stored and shown as 120 % occupancy.
+// A night cannot sell more rooms than it has: the form refuses it and says why, an import leaves it out and counts
+// it, and a night saved that way by an earlier version stays in the log, marked, but counts in no total.
+test('rooms sold above rooms available: refused with a message, never counted, old nights kept', () => {
+  const M = load().HotelKpisMath;
+  const rows = [night('2026-10-19', 80, 8000), night('2026-10-20', 90, 9900), night('2026-10-21', 120, 12000)];
+  close(M.kpis(M.totals(M.dailyRows(rows))).occ, 170 / 200);
+  assert.deepEqual(plain(M.dailyRows(rows).map((row) => row.date)), ['2026-10-19', '2026-10-20'], 'the impossible night counts in no total');
+  assert.deepEqual(plain(M.oversoldNights(rows).map((row) => row.date)), ['2026-10-21']);
+  assert.equal(M.oversold(M.cleanRow(night('2026-10-21', 120, 12000))), true);
+  assert.equal(M.oversold(M.cleanRow(night('2026-10-21', 100, 12000))), false, 'a full house is fine');
+  const imported = M.importRows('2026-10-20\t100\t90\t9900\n2026-10-21\t100\t120\t12000\n2026-10-22\t100\t80\t8000');
+  assert.deepEqual(plain(imported.added.map((row) => row.date)), ['2026-10-20', '2026-10-22']);
+  assert.equal(imported.oversold, 1);
+  const texts = {
+    en: [/Rooms sold \(120\) cannot be more than rooms available \(100\)/, /1 night has more rooms sold than available/],
+    de: [/Verkaufte Zimmer \(120\) können nicht mehr sein als verfügbare Zimmer \(100\)/, /1 Nacht hat mehr verkaufte als verfügbare Zimmer/],
+    sq: [/Dhomat e shitura \(120\) nuk mund të jenë më shumë se dhomat në dispozicion \(100\)/, /1 natë ka më shumë dhoma të shitura se në dispozicion/],
+  };
+  for (const lang of ['en', 'de', 'sq']) {
+    const key = `sc-hotel-kpis${lang === 'en' ? '' : `-${lang}`}`;
+    const w = load({ lang, page: true, storage: { [key]: { rows: [night('2026-10-19', 80, 8000), night('2026-10-20', 90, 9900)], rooms: '100', example: {} } } });
+    const doc = w.document;
+    const form = doc.querySelector('[data-entry]');
+    form.elements.date.value = '2026-10-21';
+    form.elements.available.value = '100';
+    form.elements.sold.value = '120';
+    form.elements.roomRev.value = '12000';
+    form.dispatchEvent(new w.Event('submit', { cancelable: true }));
+    flush(w);
+    assert.match(doc.querySelector('[data-entry-status]').textContent, texts[lang][0], `${lang}: the form says why`);
+    assert.equal(JSON.parse(w.localStorage.getItem(key)).rows.length, 2, `${lang}: the night is not stored`);
+    // A night stored by an earlier version: kept, marked, not counted.
+    const old = load({ lang, page: true, storage: { [key]: { rows: [night('2026-10-19', 80, 8000), night('2026-10-20', 90, 9900), night('2026-10-21', 120, 12000)], rooms: '100', example: {} } } });
+    const results = old.document.querySelector('[data-results]');
+    assert.doesNotMatch(results.textContent, /120[,.]0 ?%/, `${lang}: no 120 % in the result`);
+    assert.match(old.document.querySelector('[data-hk-oversold]').textContent, texts[lang][1], `${lang}: the warning`);
+    assert.match(results.querySelector('h2').textContent, lang === 'en' ? /^2 nights/ : lang === 'de' ? /^2 Nächte/ : /^2 net/, `${lang}: two nights counted`);
+    old.document.querySelector('#hk-rooms').dispatchEvent(new old.Event('input'));
+    flush(old);
+    assert.equal(JSON.parse(old.localStorage.getItem(key)).rows.length, 3, `${lang}: the old night stays stored`);
+  }
+});

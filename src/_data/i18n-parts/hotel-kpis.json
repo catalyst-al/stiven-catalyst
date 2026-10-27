@@ -112,7 +112,13 @@
     ", and take the weakest night through": ", und analysieren Sie die schwächste Nacht mit",
     "{rooms} more than a week before": "{rooms} mehr als eine Woche zuvor",
     "{rooms} fewer than a week before": "{rooms} weniger als eine Woche zuvor",
-    "room": "Zimmer"
+    "room": "Zimmer",
+    "1 night has more rooms sold than available and counts in no total: {dates}. Enter it again with the right figures, or remove it from the log.": "1 Nacht hat mehr verkaufte als verfügbare Zimmer und zählt in keiner Summe: {dates}. Erfassen Sie sie erneut mit den richtigen Zahlen oder entfernen Sie sie aus dem Protokoll.",
+    "{n} nights have more rooms sold than available and count in no total: {dates}. Enter them again with the right figures, or remove them from the log.": "{n} Nächte haben mehr verkaufte als verfügbare Zimmer und zählen in keiner Summe: {dates}. Erfassen Sie sie erneut mit den richtigen Zahlen oder entfernen Sie sie aus dem Protokoll.",
+    "More rooms sold than available: not counted": "Mehr verkaufte als verfügbare Zimmer: nicht gezählt",
+    "No rows imported: {n} rows have more rooms sold than available. Check the rooms available, or the room total in the settings.": "Keine Zeilen importiert: {n} Zeilen haben mehr verkaufte als verfügbare Zimmer. Prüfen Sie die verfügbaren Zimmer oder die Zimmerzahl in den Einstellungen.",
+    ", left out {n} with more rooms sold than available": ", {n} mit mehr verkauften als verfügbaren Zimmern ausgelassen",
+    "Rooms sold ({sold}) cannot be more than rooms available ({available}). Check the figures of the night, or the room total in the settings.": "Verkaufte Zimmer ({sold}) können nicht mehr sein als verfügbare Zimmer ({available}). Prüfen Sie die Zahlen der Nacht oder die Zimmerzahl in den Einstellungen."
   },
   "sq": {
     "room night": "natë dhome",
@@ -227,6 +233,12 @@
     ", and take the weakest night through": ", dhe kaloje natën më të dobët nëpër",
     "{rooms} more than a week before": "{rooms} më shumë se një javë më parë",
     "{rooms} fewer than a week before": "{rooms} më pak se një javë më parë",
-    "room": "dhomë"
+    "room": "dhomë",
+    "1 night has more rooms sold than available and counts in no total: {dates}. Enter it again with the right figures, or remove it from the log.": "1 natë ka më shumë dhoma të shitura se në dispozicion dhe nuk llogaritet në asnjë total: {dates}. Shkruaje përsëri me shifrat e sakta, ose hiqe nga regjistri.",
+    "{n} nights have more rooms sold than available and count in no total: {dates}. Enter them again with the right figures, or remove them from the log.": "{n} net kanë më shumë dhoma të shitura se në dispozicion dhe nuk llogariten në asnjë total: {dates}. Shkruaji përsëri me shifrat e sakta, ose hiqi nga regjistri.",
+    "More rooms sold than available: not counted": "Më shumë dhoma të shitura se në dispozicion: nuk llogaritet",
+    "No rows imported: {n} rows have more rooms sold than available. Check the rooms available, or the room total in the settings.": "Nuk u importua asnjë rresht: {n} rreshta kanë më shumë dhoma të shitura se në dispozicion. Kontrollo dhomat në dispozicion, ose numrin e dhomave në cilësimet.",
+    ", left out {n} with more rooms sold than available": ", u lanë jashtë {n} me më shumë dhoma të shitura se në dispozicion",
+    "Rooms sold ({sold}) cannot be more than rooms available ({available}). Check the figures of the night, or the room total in the settings.": "Dhomat e shitura ({sold}) nuk mund të jenë më shumë se dhomat në dispozicion ({available}). Kontrollo shifrat e natës, ose numrin e dhomave në cilësimet."
   }
 }
