@@ -1,0 +1,220 @@
+
+Running 6 tests using 2 workers
+
+[1A[2K[1/6] [390px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
+[1A[2K[2/6] [390px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
+[1A[2K  1) [390px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+
+    Error: /
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   false,[39m
+    [31m+   true,[39m
+    [2m  ][22m
+
+      122 |     await page.mouse.wheel(0, 300);
+      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+          |                                                                ^
+      125 |     // Within a frame or two, not over a third of a second.
+      126 |     await page.waitForTimeout(120);
+      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
+
+    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-light/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-light/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-light/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2) [390px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+
+    Error: /
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   false,[39m
+    [31m+   true,[39m
+    [2m  ][22m
+
+      122 |     await page.mouse.wheel(0, 300);
+      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+          |                                                                ^
+      125 |     // Within a frame or two, not over a third of a second.
+      126 |     await page.waitForTimeout(120);
+      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
+
+    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-390px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/6] [768px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
+[1A[2K[4/6] [768px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
+[1A[2K  3) [768px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+
+    Error: /
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   false,[39m
+    [31m+   true,[39m
+    [2m  ][22m
+
+      122 |     await page.mouse.wheel(0, 300);
+      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+          |                                                                ^
+      125 |     // Within a frame or two, not over a third of a second.
+      126 |     await page.waitForTimeout(120);
+      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
+
+    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4) [768px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+
+    Error: /
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   false,[39m
+    [31m+   true,[39m
+    [2m  ][22m
+
+      122 |     await page.mouse.wheel(0, 300);
+      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+          |                                                                ^
+      125 |     // Within a frame or two, not over a third of a second.
+      126 |     await page.waitForTimeout(120);
+      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
+
+    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-light/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-light/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-768px-light/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/6] [1440px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
+[1A[2K[6/6] [1440px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser
+[1A[2K  5) [1440px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+
+    Error: /
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   false,[39m
+    [31m+   true,[39m
+    [2m  ][22m
+
+      122 |     await page.mouse.wheel(0, 300);
+      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+          |                                                                ^
+      125 |     // Within a frame or two, not over a third of a second.
+      126 |     await page.waitForTimeout(120);
+      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
+
+    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  6) [1440px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+
+    Error: /
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   false,[39m
+    [31m+   true,[39m
+    [2m  ][22m
+
+      122 |     await page.mouse.wheel(0, 300);
+      123 |     await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    > 124 |     expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+          |                                                                ^
+      125 |     // Within a frame or two, not over a third of a second.
+      126 |     await page.waitForTimeout(120);
+      127 |     expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-ad8495abaa2cbbb64/tests/browser/motion.spec.mjs:124:64
+
+    Error Context: test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-light/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-light/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser-motion/motion-a-turn-of-the-wheel-e44ca-page-at-once-by-the-browser-1440px-light/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  6 failed
+    [390px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+    [390px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+    [768px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+    [768px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+    [1440px dark] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 
+    [1440px light] › tests/browser/motion.spec.mjs:113:1 › a turn of the wheel scrolls the page at once, by the browser 

@@ -1,0 +1,312 @@
+{
+ "date": "2026-10-27T12:27:57.100Z",
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "runs": 5,
+ "results": {
+  "/ x1 a": {
+   "distance": 300,
+   "to90ms": 393,
+   "settledMs": 992,
+   "prevented": true,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 371,
+     "settled": 960,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 394,
+     "settled": 1002,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 394,
+     "settled": 1065,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 375,
+     "settled": 992,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 393,
+     "settled": 986,
+     "prevented": true
+    }
+   ]
+  },
+  "/ x1 b": {
+   "distance": 300,
+   "to90ms": 54,
+   "settledMs": 54,
+   "prevented": false,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 79,
+     "settled": 79,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 46,
+     "settled": 46,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 54,
+     "settled": 54,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 40,
+     "settled": 40,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 72,
+     "settled": 72,
+     "prevented": false
+    }
+   ]
+  },
+  "/ x4 a": {
+   "distance": 300,
+   "to90ms": 1067,
+   "settledMs": 2478,
+   "prevented": true,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 976,
+     "settled": 2478,
+     "prevented": true
+    },
+    {
+     "distance": 299,
+     "to90": 1067,
+     "settled": 2457,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 1027,
+     "settled": 2433,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 1232,
+     "settled": 2855,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 1110,
+     "settled": 2674,
+     "prevented": true
+    }
+   ]
+  },
+  "/ x4 b": {
+   "distance": 300,
+   "to90ms": 183,
+   "settledMs": 183,
+   "prevented": false,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 183,
+     "settled": 183,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 216,
+     "settled": 216,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 163,
+     "settled": 163,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 164,
+     "settled": 164,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 204,
+     "settled": 204,
+     "prevented": false
+    }
+   ]
+  },
+  "/field-notes.html x1 a": {
+   "distance": 300,
+   "to90ms": 361,
+   "settledMs": 948,
+   "prevented": true,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 357,
+     "settled": 941,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 366,
+     "settled": 966,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 365,
+     "settled": 950,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 361,
+     "settled": 943,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 359,
+     "settled": 948,
+     "prevented": true
+    }
+   ]
+  },
+  "/field-notes.html x1 b": {
+   "distance": 300,
+   "to90ms": 31,
+   "settledMs": 31,
+   "prevented": false,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 24,
+     "settled": 24,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 26,
+     "settled": 26,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 36,
+     "settled": 36,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 31,
+     "settled": 31,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 36,
+     "settled": 36,
+     "prevented": false
+    }
+   ]
+  },
+  "/field-notes.html x4 a": {
+   "distance": 300,
+   "to90ms": 366,
+   "settledMs": 994,
+   "prevented": true,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 361,
+     "settled": 978,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 371,
+     "settled": 994,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 366,
+     "settled": 1014,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 365,
+     "settled": 997,
+     "prevented": true
+    },
+    {
+     "distance": 300,
+     "to90": 366,
+     "settled": 943,
+     "prevented": true
+    }
+   ]
+  },
+  "/field-notes.html x4 b": {
+   "distance": 300,
+   "to90ms": 40,
+   "settledMs": 40,
+   "prevented": false,
+   "runs": [
+    {
+     "distance": 300,
+     "to90": 48,
+     "settled": 48,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 30,
+     "settled": 30,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 37,
+     "settled": 37,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 48,
+     "settled": 48,
+     "prevented": false
+    },
+    {
+     "distance": 300,
+     "to90": 40,
+     "settled": 40,
+     "prevented": false
+    }
+   ]
+  }
+ }
+}

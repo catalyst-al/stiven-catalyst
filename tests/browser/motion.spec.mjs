@@ -109,6 +109,27 @@ test("the switch is in every language", async ({ page }) => {
   }
 });
 
+// The wheel scrolls the page the browser's own way (audit PM-6): the site no longer cancels the wheel to move the page
+// itself frame by frame on the main thread (a notch took 0.37 s, 1.1 s on the homepage of a slow computer), so the
+// scrolling runs on the compositor, whatever the page is doing. Links to a place on the page still glide (scroll-behavior).
+test("a turn of the wheel scrolls the page at once, by the browser", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__prevented = [];
+    window.addEventListener("wheel", (event) => setTimeout(() => window.__prevented.push(event.defaultPrevented)), { passive: true, capture: true });
+  });
+  for (const url of ["/", "/field-notes.html"]) {
+    await page.goto(url);
+    await page.mouse.move(200, 400);
+    const before = await page.evaluate(() => window.scrollY);
+    await page.mouse.wheel(0, 300);
+    await expect.poll(() => page.evaluate(() => window.__prevented.length)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => window.__prevented), url).toEqual([false]);
+    // Within a frame or two, not over a third of a second.
+    await page.waitForTimeout(120);
+    expect(await page.evaluate(() => window.scrollY) - before, url).toBeGreaterThanOrEqual(270);
+  }
+});
+
 // A tool that brings its result into view does it at once for a reader who asks for reduced motion, and glides for the
 // others (audit PM-16 feared the 63 calls of scrollIntoView({ behavior: "smooth" }) in the tools glided all the same;
 // Chromium 153 itself makes them instant under reduced motion, and this keeps any script of the site from undoing it).

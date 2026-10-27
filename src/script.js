@@ -217,47 +217,8 @@
     node.textContent = new Date().getFullYear();
   });
 
-  // The page glides under the wheel: each turn of the wheel or swipe of a touchpad sets where the page is going, and
-  // it eases there over a few frames instead of jumping in steps, so the cards and rows that rise on scroll move
-  // with it. Only with a mouse or touchpad (a phone scrolls smoothly by itself), never for readers who ask for less
-  // motion, and never inside a box that scrolls on its own (a reader, a list, a text field), for zoom (Ctrl) or for a
-  // sideways scroll. A click, a key or a touch stops the glide where it is, so links, anchors and the keyboard
-  // scroll as before.
-  const media = (query) => window.matchMedia?.(query) || { matches: false };
-  const calm = media("(prefers-reduced-motion: reduce)");
-  if (media("(pointer: fine)").matches) {
-    let target = window.scrollY;
-    let current = target;
-    let frame = 0;
-    const limit = () => document.documentElement.scrollHeight - window.innerHeight;
-    const scrollsItself = (node) => {
-      for (let el = node instanceof Element ? node : null; el && el !== document.body && el !== root; el = el.parentElement) {
-        const style = getComputedStyle(el);
-        if (/auto|scroll/.test(style.overflowY) && el.scrollHeight > el.clientHeight + 1) return true;
-      }
-      return false;
-    };
-    const locked = () => getComputedStyle(document.body).overflowY === "hidden" || getComputedStyle(root).overflowY === "hidden";
-    const step = () => {
-      current += (target - current) * 0.11;
-      if (Math.abs(target - current) < 0.5) current = target;
-      window.scrollTo({ top: current, behavior: "instant" });
-      frame = current === target ? 0 : requestAnimationFrame(step);
-    };
-    const stop = () => {
-      if (frame) cancelAnimationFrame(frame);
-      frame = 0;
-      target = current = window.scrollY;
-    };
-    window.addEventListener("wheel", (event) => {
-      if (calm.matches || event.ctrlKey || event.defaultPrevented || Math.abs(event.deltaX) > Math.abs(event.deltaY) || scrollsItself(event.target) || locked()) return;
-      event.preventDefault();
-      if (!frame) target = current = window.scrollY;
-      const unit = event.deltaMode === 1 ? 40 : event.deltaMode === 2 ? window.innerHeight : 1;
-      target = Math.max(0, Math.min(limit(), target + event.deltaY * unit));
-      if (!frame) frame = requestAnimationFrame(step);
-    }, { passive: false });
-    window.addEventListener("scroll", () => { if (!frame) target = current = window.scrollY; }, { passive: true });
-    ["mousedown", "keydown", "touchstart"].forEach((type) => window.addEventListener(type, () => { if (frame) stop(); }, { passive: true }));
-  }
+  // The wheel scrolls the page the browser's own way, on the compositor, whatever the page is drawing (audit PM-6: the
+  // page used to cancel the wheel and move itself frame by frame, which took a third of a second a notch, and a second
+  // on a busy homepage). Links to a place on the page still glide (html { scroll-behavior: smooth }), and the cards and
+  // rows that rise on scroll follow the scroll as before.
 })();
