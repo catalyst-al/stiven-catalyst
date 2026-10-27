@@ -213,6 +213,9 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
   .share-orbit.is-resting { opacity: 0; visibility: hidden; transform: translateY(12px); }
   .share-orbit-button { width: 44px; height: 44px; }
   .share-orbit-panel { bottom: 58px; }
+  /* A control reached with Tab, or a link followed to an anchor, stops above the planet (18 px + 44 px + its focus
+     ring), never under it (audit PM-10). */
+  html { scroll-padding-bottom: 72px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .share-orbit-ring,
