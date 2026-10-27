@@ -850,6 +850,22 @@ select.sh-in { cursor: pointer; }
   .dl-results { padding: 0; border: 0; }
   .dl-panel, .dl-stat, .dl-focus, .dl-check-item { break-inside: avoid; }
   .dl-matrix td.is-heat { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Tables on paper: no sideways scroll, so every column is on the page. The box around a table no longer scrolls or
+     cuts, the cells wrap their text (a word longer than its column breaks rather than running out of the page), the
+     type is smaller, the header repeats on each page and a row is not split between two pages. */
+  .dl-table-wrap { max-height: none !important; overflow: visible !important; border: 0; border-radius: 0; }
+  .dl-table { width: 100%; font-size: 8.5pt; }
+  .dl-table th, .dl-table td { padding: 3px 5px; white-space: normal; overflow-wrap: break-word; vertical-align: top; }
+  .dl-table thead { display: table-header-group; }
+  .dl-table thead th { position: static; font-size: 6.5pt; letter-spacing: .03em; }
+  .dl-table tr { break-inside: avoid; }
+  .dl-table .dl-note { max-width: none; overflow: visible; text-overflow: clip; }
+  /* Eight columns or more (a register): smaller still, so its longest words fit side by side. */
+  .dl-table:has(thead th:nth-child(8)) { font-size: 7.5pt; }
+  .dl-table:has(thead th:nth-child(8)) :is(th, td) { padding: 2px 3px; }
+  /* Twelve or more (an FMEA sheet, a bowling chart): a long word of a header may break, as in "VERMEIDUNGS-
+     MASSNAHME", rather than push the last columns off the sheet. */
+  .dl-table:has(thead th:nth-child(12)) thead th { overflow-wrap: anywhere; hyphens: auto; }
   .dl-check { padding: 20px 0 0; }
   /* A box prints only what fits in it, and an empty one its grey example: on paper its whole text stands in for it. */
   .has-print-text { display: none !important; }

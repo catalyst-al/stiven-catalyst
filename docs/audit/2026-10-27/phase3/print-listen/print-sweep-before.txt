@@ -1,0 +1,178 @@
+FAIL en a3-report pages=2 tables=1 wide=["dl-table 960px"] clipped=["dl-table in div.dl-table-wrap 960>597"] missing=["th OWNER","th DUE DATE","th STATUS","td Anna K. (Area Manager)","td 2026-09-15","td Verified"]
+ok   en action-tracker pages=7 tables=0
+FAIL en andon pages=5 tables=1 wide=["dl-table 1150px"] clipped=["dl-table in div.dl-table-wrap 1150>630"] missing=["th ESCALATION LEVEL","td Supervisor","td 5 Whys"]
+ok   en ats-cv pages=1 tables=0
+ok   en cost-of-quality pages=1 tables=3
+ok   en cover-letter pages=1 tables=0
+ok   en cv-builder pages=1 tables=0
+ok   en cx-control-tower pages=5 tables=0
+ok   en daily-board pages=3 tables=0
+ok   en damage-control pages=7 tables=1
+ok   en delay-analyzer pages=6 tables=0
+ok   en eight-d pages=5 tables=8
+FAIL en energy-tracker pages=6 tables=1 wide=["dl-table 780px"] clipped=["dl-table in div.dl-table-wrap 780>630"] missing=["th DAYS WITH READINGS","td 112 / 112"]
+ok   en fishbone pages=6 tables=0
+FAIL en five-s-audit pages=11 tables=2 wide=["dl-table 915px"] clipped=["dl-table in div.dl-table-wrap 654>630","dl-table in div.dl-table-wrap 915>630"] missing=["td 2026-09-21","td Packing","td Clara","td Early","td 6S","td 81% · Good, hold it","td ×","th DUE DATE","th REMOVE","td 2026-09-28","td ×"]
+ok   en five-whys pages=2 tables=0
+FAIL en fmea pages=11 tables=3 wide=["dl-table 1034px","dl-table 1172px"]
+FAIL en gemba-walk pages=7 tables=2 clipped=["dl-table in div.dl-table-wrap 658>630"] missing=["th REMOVE","td 2026-09-30","td LPA","td Team lead","td Inbound dock","td Anna","td 83% · 1 no","td ×"]
+FAIL en guest-complaints pages=5 tables=1 wide=["dl-table 2650px"] missing=["th WHAT HAPPENED","th ACTION TAKEN","th COMPENSATION","th STATUS","td Doors slamming and loud voices in the co","td None","td Open · 37.3 h · ✕ past the target"]
+FAIL en heijunka pages=5 tables=3 wide=["hj-box 1424px","dl-table 900px"] clipped=["hj-box in div.dl-table-wrap 1424>630","dl-table in div.dl-table-wrap 900>630"] missing=["th 16:00","th 16:15","th 16:30","th 16:45","th 17:00","th 17:15","th 17:30","th 18:15","th 18:30","th 18:45","th 19:00","th 19:15","th 19:30","th 19:45","th 20:00","th 20:15","th 20:30","th 20:45","th 21:00","th 21:15","th 21:30","th 21:45","td ■ 1 card, 10 units","td ■ 1 card, 10 units","td ■■ 2 cards, 10 + 10 units"]
+FAIL en hoshin-kanri pages=5 tables=2 wide=["dl-table 983px"] missing=["th TREND"]
+ok   en hotel-kpis pages=7 tables=0
+FAIL en housekeeping-planner pages=7 tables=3 wide=["dl-table 807px"] clipped=["dl-table in div.dl-table-wrap 807>625"] missing=["th DIFFERENCE","td 0"]
+ok   en incomplete-control pages=7 tables=1
+FAIL en inventory-abc pages=9 tables=6 wide=["dl-table 992px","dl-table 864px"] clipped=["dl-table in div.dl-table-wrap 864>630"] missing=["th STATUS","td OK"]
+ok   en kaizen-board pages=8 tables=0
+ok   en kaizen-event pages=3 tables=3
+FAIL en kanban-sizing pages=3 tables=2 wide=["dl-table 1062px","dl-table 1399px"] clipped=["dl-table in div.dl-table-wrap 1062>630","dl-table in div.dl-table-wrap 1399>630"] missing=["th STATUS","th EDIT OR REMOVE","th P-1008 Air filter cartridge, carton of 4","td Kanban loop","td 2","td 15","td 4","td –","td 9","td + New loop","th MAXIMUM INVENTORY","th VALUE AT MAXIMUM","th CHANGE IN VALUE","th STATUS","td 3,222","td 3,271.80 €","td +122.40 €"]
+ok   en kpi-diagnostic pages=3 tables=0
+FAIL en leader-standard-work pages=9 tables=2 wide=["dl-table 748px"] clipped=["dl-table in div.dl-table-wrap 748>630"] missing=["th TOOL","th EDIT","td Friday 11:30","td Update the skills matrix after this week","td Weekly","td 20","td Skills Matrix","td ×"]
+FAIL en lean-assessment pages=4 tables=2 wide=["dl-table 1423px"] clipped=["dl-table in div.dl-table-wrap 659>630","dl-table in div.dl-table-wrap 1423>630"] missing=["th STATEMENT","th ELIRA","th JONAS","th MEAN","th SPREAD","td The results of improvements (time, error","td 2","td 2","td 2.0","td 0"]
+FAIL en lost-found pages=4 tables=1 wide=["dl-table 1461px"] missing=["th STORED IN","th GUEST","th STATUS","td Safe · #123","td Stored · keep until 2026-10-30"]
+FAIL en maintenance-planner pages=8 tables=3 wide=["dl-table 1519px","dl-table 1293px"] clipped=["dl-table in div.dl-table-wrap 1519>630","dl-table in div.dl-table-wrap 1293>630","dl-table in div.dl-table-wrap 656>630"] missing=["th TASK","th INTERVAL","th WHO","th LAST DONE","th NEXT DUE DATE","th STATUS","th LOG OR REMOVE","td FL-03 Forklift 3 · electric 1.6 t","td Yearly inspection by a competent person ","td every year","td External","td 2026-09-03","td 2027-09-03","td Planned","th DETAILS","th DONE BY","th REMOVE","td 2026-10-08","td FL-03","td Breakdown","td Hydraulic or oil leak · 180 min of downt","td Jonas","th COST","td €260.00"]
+ok   en night-audit pages=8 tables=1
+FAIL en oee pages=5 tables=1 wide=["dl-table 817px"] clipped=["dl-table in div.dl-table-wrap 817>630"] missing=["th BIGGEST LOSS","td Breakdowns · 2,465 min"]
+ok   en ops-report pages=6 tables=0
+ok   en pareto pages=3 tables=1
+FAIL en poka-yoke pages=6 tables=1 wide=["dl-table 1492px"] missing=["th THU 29 OCT","th FRI 30 OCT","th SAT 31 OCT","th SUN 1 NOV","th MON 2 NOV","th INITIALS","td ☐"]
+ok   en print-pack pages=20 tables=28
+ok   en process-lab pages=5 tables=1
+FAIL en project-portfolio pages=6 tables=3 wide=["dl-table 894px"] missing=["th CHECK","td ✓ OK"]
+ok   en risk-assessment pages=4 tables=4
+FAIL en room-inspection pages=10 tables=1 wide=["dl-table 783px"] clipped=["dl-table in div.dl-table-wrap 783>630"] missing=["th SCORE","th RESULT","th REMOVE","td 2026-10-24 09:56","td 622 · Floor 6","td Mehmet","td Elena","td After checkout","td 100%","td ✓ Pass","td ×"]
+ok   en room-status pages=7 tables=0
+ok   en safety-cross pages=6 tables=0
+FAIL en shift-capacity pages=1 tables=3 wide=["cp-print-table 810px","cp-print-table 808px"]
+ok   en shift-handover pages=3 tables=0
+ok   en shift-pulse pages=1 tables=0
+FAIL en sigma-control-chart pages=4 tables=2 wide=["dl-table 924px"] clipped=["dl-table in div.dl-table-wrap 924>630"] missing=["th SIGNAL","th NOTE","td 27 Oct","td 2,900","td 8","td 0.28%","td 0.18%","td 1.04%","td Shift (better)"]
+ok   en signals pages=8 tables=0
+ok   en site-compare pages=6 tables=1
+ok   en six-sigma-dmaic pages=22 tables=0
+FAIL en skills-matrix pages=10 tables=3 wide=["dl-table 794px","dl-table 719px"] missing=["th TASKS AT 3+","td 0"]
+FAIL en smed pages=7 tables=2 wide=["dl-table 693px","dl-table 1161px"] clipped=["dl-table in div.dl-table-wrap 693>630","dl-table in div.dl-table-wrap 1161>630"] missing=["th AFTER","td 3:00","th TIME SAVED","th COUNTERMEASURE","td 2:30"]
+ok   en spaghetti-diagram pages=7 tables=3
+ok   en standard-work pages=2 tables=1
+FAIL en time-study pages=5 tables=1 wide=["dl-table 838px"] clipped=["dl-table in div.dl-table-wrap 838>630"] missing=["th MAX","th CV","th OUTLIERS","td 12.8","td 3%"]
+FAIL en value-stream-map pages=10 tables=2 wide=["dl-table 703px"]
+FAIL en waste-log pages=6 tables=1 wide=["dl-table 1222px"] missing=["th NOTE"]
+FAIL de a3-report pages=2 tables=1 wide=["dl-table 960px"] clipped=["dl-table in div.dl-table-wrap 960>597"] missing=["th VERANTWORTLICH","th FÄLLIG AM","th STATUS","td Anna K. (Area Managerin)","td 15.09.2026","td Bestätigt"]
+ok   de action-tracker pages=7 tables=0
+FAIL de andon pages=5 tables=1 wide=["dl-table 1259px"] clipped=["dl-table in div.dl-table-wrap 1259>630"] missing=["th REAKTION","th LÖSUNG","th ESKALATIONSSTUFE","td 2 min","td 29 min ✕","td Supervisor","td 5 Whys"]
+ok   de ats-cv pages=1 tables=0
+ok   de cost-of-quality pages=1 tables=3
+ok   de cover-letter pages=1 tables=0
+ok   de cv-builder pages=1 tables=0
+ok   de cx-control-tower pages=5 tables=0
+ok   de daily-board pages=3 tables=0
+ok   de damage-control pages=8 tables=1
+ok   de delay-analyzer pages=6 tables=0
+ok   de eight-d pages=6 tables=8
+FAIL de energy-tracker pages=6 tables=1 wide=["dl-table 827px"] clipped=["dl-table in div.dl-table-wrap 827>630"] missing=["th TAGE MIT ZÄHLERSTÄNDEN","td 112 / 112"]
+ok   de fishbone pages=6 tables=0
+FAIL de five-s-audit pages=11 tables=2 wide=["dl-table 728px","dl-table 1156px"] clipped=["dl-table in div.dl-table-wrap 728>630","dl-table in div.dl-table-wrap 1156>630"] missing=["td 21.09.2026","td Packen","td Clara","td Früh","td 6S","td 81 % · Gut, halten","td ×","th VERANTWORTLICH","th FÄLLIG AM","th ENTFERNEN","td Anna","td 28.09.2026","td ×"]
+ok   de five-whys pages=2 tables=0
+FAIL de fmea pages=11 tables=3 wide=["dl-table 756px","dl-table 1250px","dl-table 1353px"] missing=["th RPZ NACH MASSNAHME"]
+FAIL de gemba-walk pages=8 tables=2 wide=["dl-table 861px"] clipped=["dl-table in div.dl-table-wrap 861>630","dl-table in div.dl-table-wrap 658>630"] missing=["th DURCHGEFÜHRT VON","th ERGEBNIS","th ENTFERNEN","td 30.09.2026","td LPA","td Teamleitung","td Wareneingang","td Anna","td 83 % · 1 × Nein","td ×","th STATUS","td ✓ Pünktlich"]
+FAIL de guest-complaints pages=5 tables=1 wide=["dl-table 3043px"] missing=["th WAS PASSIERT IST","th ERGRIFFENE MASSNAHME","th KOMPENSATION","th STATUS","td Türenknallen und laute Stimmen im Flur v","td Keine","td Offen · 37,4 h · ✕ Zielzeit überschritte"]
+FAIL de heijunka pages=5 tables=3 wide=["hj-box 1429px","dl-table 970px"] clipped=["hj-box in div.dl-table-wrap 1429>630","dl-table in div.dl-table-wrap 970>630"] missing=["th 16:00","th 16:15","th 16:30","th 16:45","th 17:00","th 17:15","th 17:30","th 18:15","th 18:30","th 18:45","th 19:00","th 19:15","th 19:30","th 19:45","th 20:00","th 20:15","th 20:30","th 20:45","th 21:00","th 21:15","th 21:30","th 21:45","td ■ 1 Karte, 10 Einheiten","td ■ 1 Karte, 10 Einheiten","td ■■ 2 Karten, 10 + 10 Einheiten","th BESTAND GEGLÄTTET","td 30"]
+FAIL de hoshin-kanri pages=4 tables=2 wide=["dl-table 1055px","dl-table 733px"] missing=["th TREND"]
+ok   de hotel-kpis pages=7 tables=0
+FAIL de housekeeping-planner pages=7 tables=3 wide=["dl-table 818px"] clipped=["dl-table in div.dl-table-wrap 818>625"] missing=["th DIFFERENZ","td 0"]
+ok   de incomplete-control pages=8 tables=1
+FAIL de inventory-abc pages=9 tables=6 wide=["dl-table 1134px","dl-table 983px"] clipped=["dl-table in div.dl-table-wrap 983>630","dl-table in div.dl-table-wrap 656>630"] missing=["th STATUS","td OK","th MASSNAHME"]
+ok   de kaizen-board pages=9 tables=0
+ok   de kaizen-event pages=3 tables=3
+FAIL de kanban-sizing pages=4 tables=2 wide=["dl-table 1187px","dl-table 1681px"] clipped=["dl-table in div.dl-table-wrap 1187>630","dl-table in div.dl-table-wrap 1681>630"] missing=["th BENÖTIGTE KARTEN","th STATUS","th BEARBEITEN ODER ENTFERNEN","th P-1008 Luftfilterpatrone, Karton à 4 · E","td Kanban-Regelkreis","td 2","td 15","td 4","td –","td 9","td + Neuer Regelkreis","th VERÄNDERUNG","th HÖCHSTBESTAND","th WERT BEIM HÖCHSTBESTAND","th VERÄNDERUNG DES WERTS","th STATUS","td 0 Karten","td 3.222","td 3.271,80 €","td +122,40 €"]
+ok   de kpi-diagnostic pages=3 tables=0
+FAIL de leader-standard-work pages=10 tables=2 wide=["dl-table 808px"] clipped=["dl-table in div.dl-table-wrap 808>630"] missing=["th TOOL","th BEARBEITEN","td Freitag 11:30","td Qualifikationsmatrix nach dem Anlernen d","td Wöchentlich","td 20","td Qualifikationsmatrix","td ×"]
+FAIL de lean-assessment pages=4 tables=2 wide=["dl-table 750px","dl-table 1803px"] clipped=["dl-table in div.dl-table-wrap 750>630","dl-table in div.dl-table-wrap 1803>630"] missing=["th AUSSAGE","th ELIRA","th JONAS","th MITTELWERT","th SPANNWEITE","td Die Ergebnisse der Verbesserungen (Zeit,","td 2","td 2","td 2,0","td 0"]
+FAIL de lost-found pages=5 tables=1 wide=["dl-table 1623px"] missing=["th BESCHREIBUNG","th WERT","th AUFBEWAHRT IN","th GAST","th STATUS","td Kartenetui mit einer Kreditkarte und ein","td Hoch","td Safe · #123","td Eingelagert · aufbewahren bis 30.10.2026"]
+FAIL de maintenance-planner pages=9 tables=3 wide=["dl-table 1698px","dl-table 1406px","dl-table 684px"] clipped=["dl-table in div.dl-table-wrap 1698>630","dl-table in div.dl-table-wrap 1406>630","dl-table in div.dl-table-wrap 684>630"] missing=["th AUFGABE","th INTERVALL","th WER","th ZULETZT ERLEDIGT","th NÄCHSTE FÄLLIGKEIT","th STATUS","th ERFASSEN ODER ENTFERNEN","td FL-03 Stapler 3 · elektrisch 1,6 t","td Jährliche Prüfung durch eine befähigte P","td jährlich","td Extern","td 03.09.2026","td 03.09.2027","td Geplant","th DETAILS","th ERLEDIGT VON","th ENTFERNEN","td 08.10.2026","td FL-03","td Störung","td Hydraulik- oder Ölleck · 180 Min. Ausfal","td Jonas","th KOSTEN","td 260,00 €"]
+FAIL de night-audit pages=8 tables=1 missing=["th OFFENER SALDO"]
+FAIL de oee pages=4 tables=1 wide=["dl-table 1015px"] clipped=["dl-table in div.dl-table-wrap 1015>630"] missing=["th GRÖSSTER VERLUST","td Ausfälle · 2.465 min"]
+ok   de ops-report pages=7 tables=0
+ok   de pareto pages=3 tables=1
+FAIL de poka-yoke pages=6 tables=1 wide=["dl-table 1830px"] missing=["th SO WIRD GEPRÜFT","th DI., 27. OKT.","th MI., 28. OKT.","th DO., 29. OKT.","th FR., 30. OKT.","th SA., 31. OKT.","th SO., 1. NOV.","th MO., 2. NOV.","th KÜRZEL","td Eine Zeile der Checkliste offen lassen u","td ☐"]
+ok   de print-pack pages=21 tables=28
+ok   de process-lab pages=5 tables=1
+FAIL de project-portfolio pages=6 tables=3 wide=["dl-table 704px","dl-table 1045px"] missing=["th PRÜFUNG","td ✓ OK"]
+ok   de risk-assessment pages=4 tables=4
+FAIL de room-inspection pages=11 tables=1 wide=["dl-table 801px"] clipped=["dl-table in div.dl-table-wrap 801>630"] missing=["th BEWERTUNG","th ERGEBNIS","th ENTFERNEN","td 24.10.2026 09:56","td 622 · Etage 6","td Mehmet","td Elena","td Nach Abreise","td 100 %","td ✓ OK","td ×"]
+ok   de room-status pages=7 tables=0
+ok   de safety-cross pages=6 tables=0
+FAIL de shift-capacity pages=1 tables=3 wide=["cp-print-table 871px","cp-print-table 869px"]
+ok   de shift-handover pages=3 tables=0
+ok   de shift-pulse pages=1 tables=0
+FAIL de sigma-control-chart pages=5 tables=2 wide=["dl-table 1191px"] clipped=["dl-table in div.dl-table-wrap 1191>630"] missing=["th OBERGRENZE","th SIGNAL","th NOTIZ","td 27. Okt.","td 2.900","td 8","td 0,28 %","td 0,18 %","td 1,04 %","td Verschiebung (besser)"]
+ok   de signals pages=8 tables=0
+FAIL de site-compare pages=6 tables=1 wide=["dl-table 701px"]
+ok   de six-sigma-dmaic pages=24 tables=0
+FAIL de skills-matrix pages=9 tables=3 wide=["dl-table 910px","dl-table 862px"] missing=["th AUFGABEN AUF 3+","td 0"]
+FAIL de smed pages=7 tables=2 wide=["dl-table 732px","dl-table 1339px"] clipped=["dl-table in div.dl-table-wrap 732>630","dl-table in div.dl-table-wrap 1339>630"] missing=["th NACHHER","td 3:00","th GEWONNEN","th MASSNAHME","td 2:30"]
+ok   de spaghetti-diagram pages=7 tables=3
+ok   de standard-work pages=3 tables=1
+FAIL de time-study pages=5 tables=1 wide=["dl-table 1020px"] clipped=["dl-table in div.dl-table-wrap 1020>630"] missing=["th MAX.","th CV","th AUSREISSER","td 12,8","td 3 %"]
+FAIL de value-stream-map pages=11 tables=2 wide=["dl-table 849px"]
+FAIL de waste-log pages=6 tables=1 wide=["dl-table 1528px"] missing=["th VERBLEIB","th NOTIZ","td Kompost oder Biogas"]
+FAIL sq a3-report pages=2 tables=1 wide=["dl-table 1100px"] clipped=["dl-table in div.dl-table-wrap 1100>597"] missing=["th ÇFARË","th PËRGJEGJËSI","th AFATI","th STATUSI","td Dhjetë minuta më shumë për orët e pikut ","td Anna K. (Area Manager)","td 15.09.2026","td Verifikuar"]
+ok   sq action-tracker pages=7 tables=0
+FAIL sq andon pages=5 tables=1 wide=["dl-table 1258px"] clipped=["dl-table in div.dl-table-wrap 1258>630"] missing=["th ZGJIDHJA","th NIVELI I PËRSHKALLËZIMIT","td 29 min ✕","td Supervizori","td 5 Whys"]
+ok   sq ats-cv pages=1 tables=0
+ok   sq cost-of-quality pages=1 tables=3
+ok   sq cover-letter pages=1 tables=0
+ok   sq cv-builder pages=1 tables=0
+ok   sq cx-control-tower pages=5 tables=0
+ok   sq daily-board pages=3 tables=0
+ok   sq damage-control pages=8 tables=1
+ok   sq delay-analyzer pages=6 tables=0
+ok   sq eight-d pages=5 tables=8
+FAIL sq energy-tracker pages=6 tables=1 wide=["dl-table 794px"] clipped=["dl-table in div.dl-table-wrap 794>630"] missing=["th DITË ME LEXIME","td 112 / 112"]
+ok   sq fishbone pages=6 tables=0
+FAIL sq five-s-audit pages=10 tables=2 wide=["dl-table 713px","dl-table 1059px"] clipped=["dl-table in div.dl-table-wrap 713>630","dl-table in div.dl-table-wrap 1059>630"] missing=["td 21.09.2026","td Paketimi","td Clara","td Mëngjes","td 6S","td 81% · Mirë, mbaje","td ×","th AFATI","th HIQ","td 28.09.2026","td ×"]
+ok   sq five-whys pages=2 tables=0
+FAIL sq fmea pages=11 tables=3 wide=["dl-table 727px","dl-table 1174px","dl-table 1313px"] missing=["th RPN PAS VEPRIMIT"]
+FAIL sq gemba-walk pages=8 tables=2 wide=["dl-table 708px"] clipped=["dl-table in div.dl-table-wrap 708>630"] missing=["th REZULTATI","th HIQ","td 30.09.2026","td LPA","td Drejtuesi i ekipit","td Rampa e pranimit","td Anna","td 83% · 1 × jo","td ×"]
+FAIL sq guest-complaints pages=5 tables=1 wide=["dl-table 2872px"] missing=["th ÇFARË NDODHI","th VEPRIMI I MARRË","th KOMPENSIMI","th STATUSI","td Dyer që përplasen dhe zëra të lartë në k","td Asnjë","td E hapur · 37,4 h · ✕ përtej objektivit"]
+FAIL sq heijunka pages=5 tables=3 wide=["hj-box 1440px","dl-table 1082px"] clipped=["hj-box in div.dl-table-wrap 1440>630","dl-table in div.dl-table-wrap 1082>630"] missing=["th 16:00","th 16:15","th 16:30","th 16:45","th 17:00","th 17:15","th 17:30","th 18:15","th 18:30","th 18:45","th 19:00","th 19:15","th 19:30","th 19:45","th 20:00","th 20:15","th 20:30","th 20:45","th 21:00","th 21:15","th 21:30","th 21:45","td ■ 1 kartë, 10 njësi","td ■ 1 kartë, 10 njësi","td ■■ 2 karta, 10 + 10 njësi","th STOKU ME NIVELIM","td 30"]
+FAIL sq hoshin-kanri pages=4 tables=2 wide=["dl-table 1176px","dl-table 687px"] missing=["th DHJ","th ARRITUR","th PRIRJA","td –"]
+ok   sq hotel-kpis pages=7 tables=0
+FAIL sq housekeeping-planner pages=6 tables=3 wide=["dl-table 894px"] clipped=["dl-table in div.dl-table-wrap 894>625"] missing=["th DIFERENCA","td 0"]
+ok   sq incomplete-control pages=7 tables=1
+FAIL sq inventory-abc pages=9 tables=6 wide=["dl-table 1163px","dl-table 941px"] clipped=["dl-table in div.dl-table-wrap 941>630","dl-table in div.dl-table-wrap 658>630"] missing=["th STATUSI","td OK"]
+ok   sq kaizen-board pages=9 tables=0
+ok   sq kaizen-event pages=3 tables=3
+FAIL sq kanban-sizing pages=3 tables=2 wide=["dl-table 1141px","dl-table 1529px"] clipped=["dl-table in div.dl-table-wrap 1141>630","dl-table in div.dl-table-wrap 1529>630"] missing=["th KARTAT QË DUHEN","th STATUSI","th NDRYSHO OSE HIQ","th P-1008 Filtër ajri, kuti me 4 · Magazina","td Cikël kanban","td 2","td 15","td 4","td –","td 9","td + Cikël i ri","th STOKU MAKSIMAL","th VLERA NË MAKSIMUM","th NDRYSHIMI I VLERËS","th STATUSI","td 3.222","td 3.271,80 €","td +122,40 €"]
+ok   sq kpi-diagnostic pages=3 tables=0
+FAIL sq leader-standard-work pages=10 tables=2 wide=["dl-table 762px"] clipped=["dl-table in div.dl-table-wrap 762>630"] missing=["th MJET","th NDRYSHO","td E premte 11:30","td Përditëso matricën e aftësive pas trajni","td Çdo javë","td 20","td Matrica e aftësive","td ×"]
+FAIL sq lean-assessment pages=4 tables=2 wide=["dl-table 709px","dl-table 1647px"] clipped=["dl-table in div.dl-table-wrap 709>630","dl-table in div.dl-table-wrap 1647>630"] missing=["th POHIMI","th ELIRA","th JONAS","th MESATARJA","th SHPËRNDARJA","td Rezultatet e përmirësimeve (koha, gabime","td 2","td 2","td 2,0","td 0"]
+FAIL sq lost-found pages=5 tables=1 wide=["dl-table 1604px"] missing=["th VLERA","th RUHET NË","th MYSAFIRI","th STATUSI","td E lartë","td Kasaforta · #123","td I ruajtur · ruhet deri më 30.10.2026"]
+FAIL sq maintenance-planner pages=8 tables=3 wide=["dl-table 1607px","dl-table 1374px"] clipped=["dl-table in div.dl-table-wrap 1607>630","dl-table in div.dl-table-wrap 1374>630"] missing=["th DETYRA","th INTERVALI","th KUSH","th KRYER PËR HERË TË FUNDIT","th AFATI I RADHËS","th STATUSI","th REGJISTRO OSE HIQ","td FL-03 Piruni 3 · elektrik 1,6 t","td Inspektim vjetor nga një person i kualif","td çdo vit","td E jashtme","td 03.09.2026","td 03.09.2027","td Planifikuar","th DETAJET","th KRYER NGA","th HIQ","td 08.10.2026","td FL-03","td Prishje","td Rrjedhje hidraulike ose vaji · 180 min n","td Jonas"]
+ok   sq night-audit pages=7 tables=1
+FAIL sq oee pages=4 tables=1 wide=["dl-table 923px"] clipped=["dl-table in div.dl-table-wrap 923>630"] missing=["th HUMBJA MË E MADHE","td Prishjet · 2.465 min"]
+ok   sq ops-report pages=7 tables=0
+ok   sq pareto pages=3 tables=1
+FAIL sq poka-yoke pages=6 tables=1 wide=["dl-table 1652px"] missing=["th MAR, 27 TET","th MËR, 28 TET","th ENJ, 29 TET","th PRE, 30 TET","th SHT, 31 TET","th DIE, 1 NËN","th HËN, 2 NËN","th INICIALET","td ☐"]
+ok   sq print-pack pages=20 tables=28
+ok   sq process-lab pages=5 tables=1
+FAIL sq project-portfolio pages=6 tables=3 wide=["dl-table 1071px"] missing=["th KONTROLLI","td ✓ OK"]
+ok   sq risk-assessment pages=4 tables=4
+FAIL sq room-inspection pages=10 tables=1 wide=["dl-table 873px"] clipped=["dl-table in div.dl-table-wrap 873>630"] missing=["th LLOJI","th VLERËSIMI","th REZULTATI","th HIQ","td 24.10.2026 09:56","td 622 · Kati 6","td Mehmet","td Elena","td Pas largimit","td 100%","td ✓ Në rregull","td ×"]
+ok   sq room-status pages=7 tables=0
+ok   sq safety-cross pages=6 tables=0
+FAIL sq shift-capacity pages=1 tables=3 wide=["cp-print-table 941px","cp-print-table 940px","cp-print-table 938px"]
+ok   sq shift-handover pages=3 tables=0
+ok   sq shift-pulse pages=1 tables=0
+FAIL sq sigma-control-chart pages=4 tables=2 wide=["dl-table 982px"] clipped=["dl-table in div.dl-table-wrap 982>630"] missing=["th SINJAL","th SHËNIM","td 27 tet","td 2.900","td 8","td 0,28%","td 0,18%","td 1,04%","td Zhvendosje (më mirë)"]
+ok   sq signals pages=8 tables=0
+ok   sq site-compare pages=6 tables=1
+ok   sq six-sigma-dmaic pages=22 tables=0
+FAIL sq skills-matrix pages=9 tables=3 wide=["dl-table 929px","dl-table 785px"] missing=["th DETYRA NË 3+","td 0"]
+FAIL sq smed pages=7 tables=2 wide=["dl-table 701px","dl-table 1392px"] clipped=["dl-table in div.dl-table-wrap 701>630","dl-table in div.dl-table-wrap 1392>630"] missing=["th KOHA E FITUAR","th KUNDËRMASA","td 2:30"]
+ok   sq spaghetti-diagram pages=7 tables=3
+ok   sq standard-work pages=3 tables=1
+FAIL sq time-study pages=5 tables=1 wide=["dl-table 1032px"] clipped=["dl-table in div.dl-table-wrap 1032>630"] missing=["th MAKS.","th CV","th VLERAT E JASHTME","td 12,8","td 3%"]
+FAIL sq value-stream-map pages=10 tables=2 wide=["dl-table 824px"]
+FAIL sq waste-log pages=6 tables=1 wide=["dl-table 1376px"] missing=["th KU SHKOI","th SHËNIM","td Kompost ose biogaz"]
+83 of 177 pages with a cut table (print-sweep-portrait.json)

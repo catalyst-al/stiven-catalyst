@@ -3713,6 +3713,22 @@ select.sh-in { cursor: pointer; }
   .dl-results { padding: 0; border: 0; }
   .dl-panel, .dl-stat, .dl-focus, .dl-check-item { break-inside: avoid; }
   .dl-matrix td.is-heat { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Tables on paper: no sideways scroll, so every column is on the page. The box around a table no longer scrolls or
+     cuts, the cells wrap their text (a word longer than its column breaks rather than running out of the page), the
+     type is smaller, the header repeats on each page and a row is not split between two pages. */
+  .dl-table-wrap { max-height: none !important; overflow: visible !important; border: 0; border-radius: 0; }
+  .dl-table { width: 100%; font-size: 8.5pt; }
+  .dl-table th, .dl-table td { padding: 3px 5px; white-space: normal; overflow-wrap: break-word; vertical-align: top; }
+  .dl-table thead { display: table-header-group; }
+  .dl-table thead th { position: static; font-size: 6.5pt; letter-spacing: .03em; }
+  .dl-table tr { break-inside: avoid; }
+  .dl-table .dl-note { max-width: none; overflow: visible; text-overflow: clip; }
+  /* Eight columns or more (a register): smaller still, so its longest words fit side by side. */
+  .dl-table:has(thead th:nth-child(8)) { font-size: 7.5pt; }
+  .dl-table:has(thead th:nth-child(8)) :is(th, td) { padding: 2px 3px; }
+  /* Twelve or more (an FMEA sheet, a bowling chart): a long word of a header may break, as in "VERMEIDUNGS-
+     MASSNAHME", rather than push the last columns off the sheet. */
+  .dl-table:has(thead th:nth-child(12)) thead th { overflow-wrap: anywhere; hyphens: auto; }
   .dl-check { padding: 20px 0 0; }
   /* A box prints only what fits in it, and an empty one its grey example: on paper its whole text stands in for it. */
   .has-print-text { display: none !important; }
@@ -10414,8 +10430,12 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .sm-box { margin-bottom: 12px; break-inside: avoid; }
   .sm-grid-wrap, .sm-plan-wrap { overflow: visible; border: 0; }
   .sm-grid :is(.sm-corner, .sm-person, tfoot th) { position: static; }
+  /* The screen's minimum widths (a finger's width per cell) would push the last tasks off the page. */
+  .sm-grid .sm-task, .sm-person { min-width: 0; }
+  .sm-cell { width: 30px; height: 30px; }
+  .sm-icon { width: 22px; height: 22px; }
   .sm-icon .sm-fill, .sm-icon .sm-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .sm-plan-table select, .sm-plan-table input { border: 0; padding: 0; appearance: none; background: none; }
+  .sm-plan-table select, .sm-plan-table input { width: 100%; min-width: 0; border: 0; padding: 0; appearance: none; background: none; }
 }
 /* ===== Safety Cross (js/safety-cross.js) =====
    The cross of the month next to the talk of the day where there is room, one under the other on a phone. A day's state
@@ -12742,6 +12762,8 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   .cp-print-table .num { text-align: right; white-space: nowrap; }
   .cp-print-total td { font-weight: 700; }
   .cp-print-table :is(td, th):first-child { white-space: nowrap; }
+  /* The headers and the volume ("2.600 pako jashtë sorterit") wrap, so the ten columns fit the A4 page in every language. */
+  .cp-print-table thead :is(th, .num), .cp-print-table td.num:nth-child(2) { white-space: normal; }
   .cp-print-blank { width: 10%; }
   .cp-print-options { margin: 4px 0 0; padding: 0; list-style: none; }
   .cp-print-sign { margin: 16px 0 0; }
@@ -13502,6 +13524,10 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   body.hx-print-matrix .hx-xm-panel { page: hx-a3; padding: 0; border: 0; }
   body.hx-print-matrix .hx-xm { max-height: 265mm; }
   body.hx-print-bowling .hx-bowling { page: hx-a4; padding: 0; border: 0; }
+  /* With Ctrl+P (a portrait page), the bowling chart's month columns are smaller still, so the last months fit. */
+  body:not(.hx-print-bowling) .hx-bowl :is(th, td) { padding: 1px 2px; font-size: 6.5pt; letter-spacing: 0; white-space: normal; }
+  body:not(.hx-print-bowling) .hx-bowl .hx-bowl-name { min-width: 0; }
+  body:not(.hx-print-bowling) .hx-bowl-cell .hx-bowl-word { font-size: inherit; }
   body:is(.hx-print-matrix, .hx-print-bowling) :is(main, .hx-results) { min-height: 0; margin: 0; padding: 0; }
 }
 /* ===== Floor mode (js/floor-mode.js) =====
@@ -14240,14 +14266,16 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   html.hj-printing .hj-print { page: hj-a4; display: block !important; padding: 0; color: #000; }
   .hj-print h2 { margin: 0 0 4px; font-size: 16px; }
   .hj-print .hj-print-meta, .hj-print .dl-panel-note { margin: 0 0 8px; color: #000; font-size: 10px; }
-  .hj-print .dl-table-wrap { overflow: visible; border: 0; max-height: none; }
-  .hj-print .hj-box { width: 100%; table-layout: fixed; font-size: 7px; }
-  .hj-print .hj-box-name { position: static; width: 26mm; min-width: 0; max-width: none; padding: 2px 4px 2px 0; background: #fff; color: #000; font-size: 8px; }
-  .hj-print .hj-box th, .hj-print .hj-box td { border-bottom: 1px solid #999; }
-  .hj-print .hj-cell { min-width: 0; height: 14mm; border-left: 1px solid #ccc; }
-  .hj-print .hj-cell.is-start { border-left: 2px solid #000; }
-  .hj-print .hj-cell.has-card { background: #e8e8e8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .hj-print .hj-card, .hj-print .hj-box-time { color: #000; }
+  /* Printed with Ctrl+P instead of the box's own button, the box of the result is drawn the same way, its columns
+     sharing the width of the page, instead of running past its edge. */
+  :is(.hj-print, .hj-box-panel) .dl-table-wrap { overflow: visible; border: 0; max-height: none; }
+  :is(.hj-print, .hj-box-panel) .hj-box { width: 100%; table-layout: fixed; font-size: 7px; }
+  :is(.hj-print, .hj-box-panel) .hj-box-name { position: static; width: 26mm; min-width: 0; max-width: none; padding: 2px 4px 2px 0; background: #fff; color: #000; font-size: 8px; }
+  :is(.hj-print, .hj-box-panel) .hj-box th, :is(.hj-print, .hj-box-panel) .hj-box td { border-bottom: 1px solid #999; }
+  :is(.hj-print, .hj-box-panel) .hj-cell { min-width: 0; height: 14mm; border-left: 1px solid #ccc; }
+  :is(.hj-print, .hj-box-panel) .hj-cell.is-start { border-left: 2px solid #000; }
+  :is(.hj-print, .hj-box-panel) .hj-cell.has-card { background: #e8e8e8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :is(.hj-print, .hj-box-panel) .hj-card, :is(.hj-print, .hj-box-panel) .hj-box-time { color: #000; }
   .hj-print-sign { margin: 14px 0 0; font-size: 10px; }
   .hj-setup { display: none !important; }
   .hj-results { padding: 0; border: 0; }
