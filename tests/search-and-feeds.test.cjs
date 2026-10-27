@@ -155,7 +155,8 @@ test('the feeds give the publications the day they went online, newest first, an
     assert.equal(feedUpdated, entries.map((entry) => entry.updated).sort().at(-1), `${feed}: updated with its newest entry`);
     const prefix = lang === 'en' ? '' : `/${lang}`;
     const magazine = entries.filter((entry) => /\/magazine\//.test(entry.link));
-    assert.ok(magazine.length >= 5, `${feed}: the publications are in it`);
+    // The feed keeps its newest thirty entries: when new essays fill all of them, the publications have not left, they are older.
+    assert.ok(magazine.length >= 5 || entries.length === 30, `${feed}: the publications are in it`);
     for (const entry of magazine) {
       const slug = entry.link.match(/\/magazine\/([^/]+)\.html$/)[1];
       assert.equal(entry.link, `https://stivencatalyst.com${prefix}/magazine/${slug}.html`, entry.link);
@@ -171,7 +172,12 @@ test('the feeds give the publications the day they went online, newest first, an
     }
     // Each edition of the guide is an entry of its own, on the day it came out.
     const edition = entries.find((entry) => entry.id.endsWith(`/guides/tools-guide.html#edition-${guide.edition}`));
-    assert.ok(edition, `${feed}: the guide's edition ${guide.edition}`);
+    if (!edition) {
+      // Only when thirty newer entries have pushed it out of the feed.
+      assert.equal(entries.length, 30, `${feed}: the guide's edition ${guide.edition}`);
+      assert.ok(`${guide.editionDate}T00:00:00Z` <= entries.at(-1).published, `${feed}: the guide's edition ${guide.edition} is older than the feed`);
+      continue;
+    }
     assert.equal(edition.published, `${guide.editionDate}T00:00:00Z`);
     assert.ok(edition.title.includes(guide[lang].edition), edition.title);
   }
