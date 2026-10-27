@@ -308,7 +308,8 @@
   const hotelSeries = (saved, period) => {
     const byDate = new Map();
     list(saved?.rows).filter(isObj).forEach((row) => { if (isIso(row.date)) byDate.set(row.date, row); });
-    const nights = [...byDate.values()].filter((row) => inPeriod(row.date, period) && positive(row.available) > 0).sort((a, b) => a.date.localeCompare(b.date))
+    // A night that sold more rooms than it had is a typing error, as the Hotel KPIs tool itself says: no point.
+    const nights = [...byDate.values()].filter((row) => inPeriod(row.date, period) && positive(row.available) > 0 && !(Number(row.sold) > positive(row.available))).sort((a, b) => a.date.localeCompare(b.date))
       .map((row) => ({ date: row.date, available: positive(row.available), sold: Math.max(0, Math.round(Number(row.sold) || 0)), roomRev: positive(row.roomRev), arrivals: Math.round(positive(row.arrivals)), noShows: Math.round(positive(row.noShows)), complaints: Math.round(positive(row.complaints)) }));
     const occTyped = typed(saved?.budgetOcc);
     const occ = occTyped > 0 ? (occTyped > 1 ? occTyped / 100 : occTyped) : null;

@@ -54,3 +54,35 @@ test('an Excel export keeps codes with leading zeros as text, and numbers as num
   assert.match(xml, /<c r="A3"><v>0<\/v>/);
   assert.match(xml, /<c r="B3"><v>-7<\/v>/);
 });
+
+// The copied summary says what the screen says: no damaged unit in 250 is a bound ("≥ …"), not a sigma level of 6+.
+test('the copied Damage Control summary gives the same sigma level as the screen, with a bound for a clean sample', async () => {
+  const storage = { 'sc-damage-control': { rows: [], volumes: [{ date: '2026-10-24', volume: 250 }], volume: '', period: '', target: '', example: {} } };
+  const w = openTool('damage-control', { storage, now: NOW });
+  const form = w.document.querySelector('[data-entry]');
+  // One own row with 0 units is refused, so the sample needs one unit: 1 of 250.
+  form.elements.date.value = '2026-10-24';
+  form.elements.units.value = '1';
+  form.dispatchEvent(new w.Event('submit', { bubbles: true, cancelable: true }));
+  await settle(w);
+  let copied = '';
+  Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async (text) => { copied = text; } }, configurable: true });
+  click(w, [...w.document.querySelectorAll('[data-results] button')].find((b) => /Copy summary/.test(b.textContent)));
+  await settle(w);
+  const card = [...w.document.querySelectorAll('[data-results] .dl-stat')].find((n) => /Sigma level/.test(n.querySelector('.dl-stat-label')?.textContent));
+  const onScreen = card?.querySelector('.dl-stat-value').textContent.trim();
+  const inCopy = (copied.match(/Sigma level: ([^\n·]+)/) || [])[1]?.trim();
+  assert.ok(onScreen && inCopy, `both show a sigma level (screen: ${onScreen}, copy: ${inCopy})`);
+  assert.equal(inCopy, onScreen);
+});
+
+test('Signals leaves out a hotel night that sold more rooms than it had', () => {
+  const w = openTool('signals', { now: NOW });
+  const M = w.SignalsMath;
+  const rows = Array.from({ length: 10 }, (_, i) => ({ date: `2026-10-${String(10 + i).padStart(2, '0')}`, available: 100, sold: i === 4 ? 120 : 80, roomRev: 8000 }));
+  const series = M.hotelSeries ? M.hotelSeries({ rows }, { from: '2026-10-01', to: '2026-10-25' }) : null;
+  assert.ok(series, 'SignalsMath.hotelSeries is reachable');
+  const occupancy = series.find((s) => s.key === 'hotel-kpis:occupancy');
+  assert.equal(occupancy.points.length, 9, 'the oversold night is not a point');
+  assert.ok(occupancy.points.every((p) => p.value <= 1));
+});
