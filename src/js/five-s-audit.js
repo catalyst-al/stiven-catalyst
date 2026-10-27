@@ -12,7 +12,8 @@
   // An audit counts in the trend and the league table only when it covers the area: at least 80 % of its questions
   // scored and every S with a score. A few answers are a partial audit: a single "4" would read as 100 % (audit of
   // 27 October 2026, P2B-11). Partial audits stay in the log, marked, and keep their own result.
-  const COMPLETE_SHARE = 0.8;
+  // One constant for the 5S Audit and every tool that reads its audits (ToolKit.fiveSScore; docs/THRESHOLDS.md).
+  const COMPLETE_SHARE = window.ToolKit?.FIVE_S_COMPLETE ?? 0.8;
 
   const addDays = (iso, days) => {
     const date = new Date(`${iso}T00:00:00Z`);

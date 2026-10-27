@@ -510,6 +510,11 @@
   const CK = window.ChartKit;
   const Actions = window.ActionsStore;
   const cfg = JSON.parse(dataEl.textContent);
+  // The minimum volumes before a site ranks are the data file's (minimums; docs/THRESHOLDS.md): an operation can set
+  // them to its own scale without touching the code. A missing or invalid one keeps the default above.
+  Object.entries(isObj(cfg.minimums) ? cfg.minimums : {}).forEach(([key, min]) => {
+    if (window.SiteCompareMath.MIN_N[key] && Number.isFinite(min) && min > 0) window.SiteCompareMath.MIN_N[key].min = min;
+  });
   const tools = (() => { try { return JSON.parse(document.getElementById("site-compare-tools")?.textContent || "{}") || {}; } catch { return {}; } })();
   const KEY = cfg.storageKey;
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;

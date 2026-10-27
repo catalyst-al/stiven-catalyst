@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-site-compare-de",
+  "minimums": {"damageRate": 1000, "incompleteRate": 1000, "onTime": 30, "oee": 5, "pm": 5, "fiveS": 2, "firstPass": 30, "complaintsPer100": 300},
   "periods": [
     {
       "key": "last7",

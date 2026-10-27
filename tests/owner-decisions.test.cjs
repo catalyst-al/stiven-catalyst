@@ -57,3 +57,28 @@ test('Room Inspection: a critical failure fails at once; an incomplete inspectio
   const rate = M.rateBy(rows, () => 'all')[0];
   assert.deepEqual([rate.first, rate.firstPass, rate.incomplete], [1, 0, 1], 'the critical failure counts as a failed first inspection; the incomplete one in neither');
 });
+
+// Thresholds: the minimum volumes Site Compare needs before it ranks a site depend on the operation, so they are set in
+// the data file (src/_data/siteCompare.json and its translations, the same in all three) and documented in
+// docs/THRESHOLDS.md; the statistical rules are fixed and documented there too.
+test('Site Compare reads its minimum volumes from its data file, the same in every language', () => {
+  const fs = require('node:fs');
+  const files = ['src/_data/siteCompare.json', 'src/_data/de/siteCompare.json', 'src/_data/sq/siteCompare.json'].map((f) => JSON.parse(fs.readFileSync(f, 'utf8')).minimums);
+  assert.ok(files[0] && Object.keys(files[0]).length >= 8, 'the minimums are in the data file');
+  assert.deepEqual(files[1], files[0]);
+  assert.deepEqual(files[2], files[0]);
+  const raise = (w) => {
+    const node = w.document.getElementById('site-compare-data');
+    const cfg = JSON.parse(node.textContent);
+    cfg.minimums.onTime = 50;
+    node.textContent = JSON.stringify(cfg);
+  };
+  const w = openTool('site-compare', { now: NOW, before: raise });
+  assert.equal(w.SiteCompareMath.MIN_N.onTime.min, 50, 'a changed minimum is used');
+  assert.equal(w.SiteCompareMath.MIN_N.damageRate.min, files[0].damageRate);
+});
+
+test('the 5S completeness share is one constant for the 5S Audit and every tool that reads it', () => {
+  const five = openTool('five-s-audit', { now: NOW });
+  assert.equal(five.FiveSMath.COMPLETE_SHARE, five.ToolKit.FIVE_S_COMPLETE);
+});

@@ -1494,7 +1494,7 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, fiveSScore, fiveSShare, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
+    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, fiveSScore, fiveSShare, FIVE_S_COMPLETE, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
