@@ -1,7 +1,7 @@
 // Phase 3, motion: the cost of a page's motion on the main thread, measured the same way before and after a change.
 //
 //   node docs/audit/2026-10-27/phase3/motion/perf.cjs --a http://127.0.0.1:8321 --b http://127.0.0.1:8322 \
-//        [--path /] [--runs 5] [--profiles desktop,desktop4x,phone4x] [--tap .cosmos-chip] [--out file.json]
+//        [--path /] [--runs 5] [--profiles desktop,desktop4x,phone4x] [--tap .cosmos-chip] [--out file.json] [--settle 3000]
 //
 // --a and --b are two servers of the built site (node tests/browser/server.mjs <port>, one started in a folder that
 // holds the old _site). The runs are interleaved (a, b, b, a, ...) so both builds see the same load on the machine.
@@ -16,7 +16,7 @@
 //   delay    first-input processingStart - startTime, ms (how long the tap waited for the main thread)
 //   tap      the longest event duration of that interaction (pointerdown/pointerup/click), ms
 // Profiles: desktop = 1440x900 DPR 1 unthrottled; desktop4x = the same at CPU throttle 4 (CDP
-// Emulation.setCPUThrottlingRate); phone4x = 390x844 DPR 2, touch, mobile, CPU throttle 4. The medians of each
+// Emulation.setCPUThrottlingRate); phone4x = 390x844 DPR 2, touch, mobile, CPU throttle 4; phone2x the same at 2. The medians of each
 // profile are printed and written to --out.
 const { chromium } = require("playwright");
 const fs = require("node:fs");
@@ -34,6 +34,9 @@ const OUT = arg("out");
 const PROFILES = arg("profiles", "desktop,desktop4x,phone4x").split(",");
 const EXTRA = arg("init", ""); // optional script run before the page's own (e.g. to pause the motion)
 const WINDOW = 5000;
+// --settle: ms the page is left before the 5 s window (default 3000, as in the phase 3 measurements); a longer one
+// measures a page after its own adaptive steps have settled (planets-touch review).
+const SETTLE = Number(arg("settle", 3000));
 
 const PROFILE = {
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, rate: 1 },
@@ -41,6 +44,8 @@ const PROFILE = {
   phone4x: { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, rate: 4,
     userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36" },
 };
+// phone2x: the same phone at CPU throttle 2, a middle-range phone (planets-touch review).
+PROFILE.phone2x = { ...PROFILE.phone4x, rate: 2 };
 
 const INIT = () => {
   const stamps = [];
@@ -76,7 +81,7 @@ const measure = async (browser, base, profileName) => {
   await cdp.send("Performance.enable");
   if (p.rate > 1) await cdp.send("Emulation.setCPUThrottlingRate", { rate: p.rate });
   await page.goto(base + PATH, { waitUntil: "load" });
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(SETTLE);
   const task = async () => (await cdp.send("Performance.getMetrics")).metrics.find((m) => m.name === "TaskDuration").value;
   const t0 = await task();
   await page.evaluate(() => { window.__rec = true; });
@@ -133,7 +138,7 @@ const measure = async (browser, base, profileName) => {
       (summary[profile] ||= {})[side] = Object.fromEntries(keys.map((k) => [k, median(list.map((r) => r[k]))]));
     }
   }
-  const result = { date: new Date().toISOString(), path: PATH, runs: RUNS, a: A, b: B || null, tap: TAP, windowMs: WINDOW, init: EXTRA || null,
+  const result = { date: new Date().toISOString(), path: PATH, runs: RUNS, a: A, b: B || null, tap: TAP, windowMs: WINDOW, settleMs: SETTLE, init: EXTRA || null,
     machine: { cpus: require("node:os").cpus().length, model: require("node:os").cpus()[0]?.model, load: require("node:os").loadavg() }, summary, raw };
   if (OUT) fs.writeFileSync(OUT, JSON.stringify(result, null, 1));
   console.log(JSON.stringify({ path: PATH, summary }, null, 1));

@@ -1,0 +1,139 @@
+{
+ "date": "2026-10-27T17:21:18.117Z",
+ "path": "/",
+ "runs": 5,
+ "a": "http://127.0.0.1:8351",
+ "b": "http://127.0.0.1:8354",
+ "tap": ".cosmos-chip",
+ "windowMs": 5000,
+ "init": null,
+ "machine": {
+  "cpus": 4,
+  "model": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+  "load": [
+   2.44,
+   5.71,
+   9.46
+  ]
+ },
+ "summary": {
+  "phone4x": {
+   "a": {
+    "busy": 5.195,
+    "fps": 11.8,
+    "p95": 116.7,
+    "longTasks": 59,
+    "blocking": 2015,
+    "delay": 291,
+    "tap": 728
+   },
+   "b": {
+    "busy": 5.191,
+    "fps": 13.8,
+    "p95": 100,
+    "longTasks": 65,
+    "blocking": 1535,
+    "delay": 247,
+    "tap": 608
+   }
+  }
+ },
+ "raw": {
+  "phone4x": {
+   "a": [
+    {
+     "busy": 5.239,
+     "fps": 11.8,
+     "p95": 116.7,
+     "longTasks": 59,
+     "blocking": 2053,
+     "delay": 269,
+     "tap": 728
+    },
+    {
+     "busy": 5.182,
+     "fps": 11.6,
+     "p95": 116.7,
+     "longTasks": 56,
+     "blocking": 2015,
+     "delay": 342,
+     "tap": 728
+    },
+    {
+     "busy": 5.195,
+     "fps": 12,
+     "p95": 116.6,
+     "longTasks": 61,
+     "blocking": 2003,
+     "delay": 271,
+     "tap": 672
+    },
+    {
+     "busy": 5.219,
+     "fps": 11.2,
+     "p95": 116.7,
+     "longTasks": 56,
+     "blocking": 2182,
+     "delay": 307,
+     "tap": 760
+    },
+    {
+     "busy": 5.175,
+     "fps": 11.8,
+     "p95": 100.1,
+     "longTasks": 59,
+     "blocking": 1988,
+     "delay": 291,
+     "tap": 640
+    }
+   ],
+   "b": [
+    {
+     "busy": 5.183,
+     "fps": 15,
+     "p95": 116.7,
+     "longTasks": 66,
+     "blocking": 1339,
+     "delay": 153,
+     "tap": 512
+    },
+    {
+     "busy": 5.171,
+     "fps": 16,
+     "p95": 99.9,
+     "longTasks": 64,
+     "blocking": 1132,
+     "delay": 231,
+     "tap": 624
+    },
+    {
+     "busy": 5.195,
+     "fps": 13.8,
+     "p95": 100,
+     "longTasks": 68,
+     "blocking": 1535,
+     "delay": 247,
+     "tap": 568
+    },
+    {
+     "busy": 5.196,
+     "fps": 12.4,
+     "p95": 116.7,
+     "longTasks": 61,
+     "blocking": 1843,
+     "delay": 307,
+     "tap": 608
+    },
+    {
+     "busy": 5.191,
+     "fps": 13,
+     "p95": 100,
+     "longTasks": 65,
+     "blocking": 1692,
+     "delay": 264,
+     "tap": 712
+    }
+   ]
+  }
+ }
+}
