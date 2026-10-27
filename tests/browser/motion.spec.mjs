@@ -106,3 +106,17 @@ test("the switch is in every language", async ({ page }) => {
     await toggle.click();
   }
 });
+
+// A tool that brings its result into view does it at once for a reader who asks for reduced motion, and glides for the
+// others (audit PM-16 feared the 63 calls of scrollIntoView({ behavior: "smooth" }) in the tools glided all the same;
+// Chromium 153 itself makes them instant under reduced motion, and this keeps any script of the site from undoing it).
+test("a tool brings its result into view at once under reduced motion", async ({ page }) => {
+  await page.goto("/tools/kaizen-board/");
+  const result = await page.evaluate(() => new Promise((resolve) => {
+    const footer = document.querySelector("footer.site-footer");
+    footer.scrollIntoView({ behavior: "smooth", block: "start" });
+    requestAnimationFrame(() => requestAnimationFrame(() => resolve({ y: window.scrollY, max: document.documentElement.scrollHeight - window.innerHeight, top: footer.getBoundingClientRect().top })));
+  }));
+  const settled = Math.abs(result.top) < 2 || Math.abs(result.y - result.max) < 2;
+  expect(settled, JSON.stringify(result)).toBe(await reduced(page));
+});
