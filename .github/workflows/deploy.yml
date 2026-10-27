@@ -16,7 +16,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # The browser tests (128, of them 78 axe checks) took 7 minutes on a shared four-core machine; the runner's time is
+    # not measured yet, so the job has room.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
