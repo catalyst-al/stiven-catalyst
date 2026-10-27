@@ -688,6 +688,8 @@
     if (!saveFailed) sayTimer = setTimeout(() => { status.textContent = ""; }, 5000);
   };
   const save = () => {
+    // Locked with a PIN (js/work-lock.js): nothing of the visitor's work is written in plain text.
+    if (window.WorkLock?.locked) return;
     try {
       localStorage.setItem(KEY, JSON.stringify(cv));
       dirty = false;

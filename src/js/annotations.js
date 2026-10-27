@@ -29,6 +29,8 @@ window.Annotations = (() => {
   // Saving must never throw (a private window, a full storage); the change then lasts until the page closes.
   let memory = null;
   const store = (rows) => {
+    // Locked with a PIN (js/work-lock.js): kept on the page only, not written in plain text.
+    if (window.WorkLock?.locked) { memory = rows; return false; }
     try {
       localStorage.setItem(KEY, JSON.stringify({ rows }));
       memory = null;

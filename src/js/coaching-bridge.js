@@ -5,7 +5,7 @@
   if (!root || !projectId || !window.CoachingCore) return;
   root.hidden = false;
   const C = window.CoachingCore;
-  const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
+  const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => { if (window.WorkLock?.locked) throw new Error('locked'); window.localStorage.setItem(key, value); } };
   const loaded = C.load(storage);
   const p = loaded.state.projects.find(p => p.id === projectId);
   const dataEl = document.getElementById('coaching-data');

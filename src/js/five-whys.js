@@ -21,6 +21,8 @@
     try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
   };
   const write = (value) => {
+    // Locked with a PIN (js/work-lock.js): nothing of the visitor's work is written in plain text.
+    if (window.WorkLock?.locked) return;
     try { localStorage.setItem(KEY, JSON.stringify(value)); } catch { /* storage unavailable */ }
   };
   const forget = () => {

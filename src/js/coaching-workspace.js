@@ -14,7 +14,7 @@
   const D = v => { const s = String(v ?? ''); return E(lang !== 'en' && /^\d{4}-\d{2}-\d{2}$/.test(s) ? `${s.slice(8, 10)}.${s.slice(5, 7)}.${s.slice(0, 4)}` : s); };
   const roleId = root.dataset.role, role = data.roles[roleId];
   const app = root.querySelector('[data-coaching-app]'), status = root.querySelector('[data-coaching-status]');
-  const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
+  const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => { if (window.WorkLock?.locked) throw new Error('locked'); window.localStorage.setItem(key, value); } };
   const loaded = C.load(storage);
   let state = loaded.state, blocked = loaded.error === 'corrupt' ? 'corrupt' : null, view = blocked ? 'backup' : 'today', moduleId = role.modules[0], dirty = false, fieldIndex = 0, volatile = false;
   const dirtyForms = new Set();
