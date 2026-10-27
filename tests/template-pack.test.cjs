@@ -43,11 +43,15 @@ const load = (slug, { lang = 'en', page = true, storage = {}, now = '2026-10-23T
 const saved = (w, slug, lang = 'en') => JSON.parse(w.localStorage.getItem(keyOf(slug, lang)));
 const click = (w, node) => node.dispatchEvent(new w.MouseEvent('click', { bubbles: true }));
 const type = (w, node, value) => { node.value = value; node.dispatchEvent(new w.Event('input', { bubbles: true })); };
-// Chooses a file for an <input type=file> and waits for the FileReader.
+// Chooses a file for an <input type=file> and waits for the FileReader: until the page has written what it read, or
+// said something, up to three seconds. (A fixed 30 ms wait failed now and then when the whole suite ran at once.)
+const snapshot = (w) => JSON.stringify(Object.entries({ ...w.localStorage })) + w.document.body.textContent.length;
 const openFile = async (w, input, text, name = 'pack.json') => {
+  const before = snapshot(w);
   Object.defineProperty(input, 'files', { value: [new w.File([text], name, { type: 'application/json' })], configurable: true });
   input.dispatchEvent(new w.Event('change', { bubbles: true }));
-  await new Promise((resolve) => setTimeout(resolve, 30));
+  for (let waited = 0; waited < 3000 && snapshot(w) === before; waited += 10) await new Promise((resolve) => setTimeout(resolve, 10));
+  await new Promise((resolve) => setTimeout(resolve, 20));
 };
 const lastFile = (w) => {
   assert.ok(w.files.length, 'a file was downloaded');
