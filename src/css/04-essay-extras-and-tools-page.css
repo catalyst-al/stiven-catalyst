@@ -506,7 +506,9 @@
   52% { opacity: .3; }
 }
 .pulse-ring { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--family) 80%, transparent)); }
-.zenith-radar {
+/* The radar of the planet drawing turns (the radar behind a Zenith tool stands still and its own sweep turns inside it,
+   10-families-and-roles.css). */
+.family-planet .zenith-radar {
   transform-box: view-box;
   transform-origin: 200px 150px;
   animation: family-sweep 6s linear infinite;
@@ -622,7 +624,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .pulse-cracks,
-  .zenith-radar,
+  .family-planet .zenith-radar,
   .lumen-ring ellipse { animation: none; }
   .family-card,
   .family-planet { transition: none; }

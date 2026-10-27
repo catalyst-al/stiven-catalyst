@@ -393,10 +393,10 @@ test('Projects: the cards fill in one after another, a project in progress beats
 
 test('Start here: the portrait breathes, each step number lights up as it is reached, the closing links draw their line', () => {
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.start-intro img \{ animation: portrait-breathe/);
-  assert.match(css, /\.start-number \{ animation: step-reach linear both; animation-timeline: view\(\);/);
+  assert.match(css, /\.start-number \{ animation: start-reach linear both; animation-timeline: view\(\);/);
   assert.match(css, /\.start-more a:hover \{ background-size: 100% 1px; \}/);
   assert.match(css, /:where\([^)]*\.start-intro[^)]*\) \{\s*animation: scroll-rise/);
-  assert.match(sheetOf('start.html'), /@keyframes step-reach/);
+  assert.match(sheetOf('start.html'), /@keyframes start-reach/);
 });
 
 test('Search: the box glows, results come in one after another with the words swept in, a result answers the pointer', () => {

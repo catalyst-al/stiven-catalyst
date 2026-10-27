@@ -2492,7 +2492,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   52% { opacity: .3; }
 }
 .pulse-ring { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--family) 80%, transparent)); }
-.zenith-radar {
+/* The radar of the planet drawing turns (the radar behind a Zenith tool stands still and its own sweep turns inside it,
+   10-families-and-roles.css). */
+.family-planet .zenith-radar {
   transform-box: view-box;
   transform-origin: 200px 150px;
   animation: family-sweep 6s linear infinite;
@@ -2608,7 +2610,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 @media (prefers-reduced-motion: reduce) {
   .pulse-cracks,
-  .zenith-radar,
+  .family-planet .zenith-radar,
   .lumen-ring ellipse { animation: none; }
   .family-card,
   .family-planet { transition: none; }
@@ -7250,7 +7252,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%) no-repeat;
   background-size: 250% 100%;
   pointer-events: none;
-  animation: family-sweep .8s ease-out both;
+  animation: chip-sweep .8s ease-out both;
 }
 @keyframes family-flare {
   0% { opacity: 0; transform: scale(.9); }
@@ -7258,7 +7260,9 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes family-breathe { 50% { opacity: .5; } }
-@keyframes family-sweep {
+/* The sweep of light across a chosen chip or a hovered button (it was called family-sweep, the name of Zenith's
+   turning radar, and replaced it everywhere: audit PM-4). */
+@keyframes chip-sweep {
   from { background-position: 120% 0; opacity: 1; }
   to { background-position: -20% 0; opacity: 0; }
 }
@@ -7293,7 +7297,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   pointer-events: none;
 }
 .in-family .button-primary:hover { box-shadow: 0 0 30px -4px var(--glow), 0 0 60px -10px var(--glow-soft); }
-.in-family .button-primary:hover::after { animation: family-sweep .9s ease-out both; }
+.in-family .button-primary:hover::after { animation: chip-sweep .9s ease-out both; }
 .in-family .button-primary:active {
   transform: scale(.97);
   box-shadow: 0 0 36px 2px var(--glow), 0 0 80px 10px var(--glow-soft);
@@ -8565,7 +8569,7 @@ a.essay-series-next:hover em { translate: 5px 0; }
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .start-number { animation: step-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+    .start-number { animation: start-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
   }
 }
 @keyframes step-reach {
@@ -9429,7 +9433,9 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 /* Start here: each step's number is a bulb in a gold ring that lights as the step is reached. */
 .start-number { border-color: color-mix(in srgb, var(--gold) 65%, transparent); color: var(--gold); }
 .start-step:hover .start-number { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 6px #fff, 0 0 18px rgba(255, 214, 150, .9), 0 0 36px rgba(255, 196, 120, .45); }
-@keyframes step-reach {
+/* Start here lights its numbers in gold (its own name: under the name step-reach it also turned the podcast's blue
+   steps gold, audit PM-4). */
+@keyframes start-reach {
   0% { background: transparent; color: var(--gold); box-shadow: none; }
   60% { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 0 6px rgba(255, 214, 150, .16), 0 0 8px #fff, 0 0 24px rgba(255, 214, 150, 1); }
   100% { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 6px #fff, 0 0 16px rgba(255, 214, 150, .8), 0 0 32px rgba(255, 196, 120, .35); }
@@ -14821,7 +14827,7 @@ details[open] > .rs-setup-summary::after { content: "−"; }
 :root[data-motion="paused"] .hero-go::after,
 :root[data-motion="paused"] .hero-bulb,
 :root[data-motion="paused"] .pulse-cracks,
-:root[data-motion="paused"] .zenith-radar,
+:root[data-motion="paused"] .family-planet .zenith-radar,
 :root[data-motion="paused"] .lumen-ring ellipse,
 :root[data-motion="paused"] .reflection-hero::before,
 :root[data-motion="paused"] .about-portrait,

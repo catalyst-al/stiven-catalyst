@@ -415,7 +415,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%) no-repeat;
   background-size: 250% 100%;
   pointer-events: none;
-  animation: family-sweep .8s ease-out both;
+  animation: chip-sweep .8s ease-out both;
 }
 @keyframes family-flare {
   0% { opacity: 0; transform: scale(.9); }
@@ -423,7 +423,9 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes family-breathe { 50% { opacity: .5; } }
-@keyframes family-sweep {
+/* The sweep of light across a chosen chip or a hovered button (it was called family-sweep, the name of Zenith's
+   turning radar, and replaced it everywhere: audit PM-4). */
+@keyframes chip-sweep {
   from { background-position: 120% 0; opacity: 1; }
   to { background-position: -20% 0; opacity: 0; }
 }
@@ -458,7 +460,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   pointer-events: none;
 }
 .in-family .button-primary:hover { box-shadow: 0 0 30px -4px var(--glow), 0 0 60px -10px var(--glow-soft); }
-.in-family .button-primary:hover::after { animation: family-sweep .9s ease-out both; }
+.in-family .button-primary:hover::after { animation: chip-sweep .9s ease-out both; }
 .in-family .button-primary:active {
   transform: scale(.97);
   box-shadow: 0 0 36px 2px var(--glow), 0 0 80px 10px var(--glow-soft);

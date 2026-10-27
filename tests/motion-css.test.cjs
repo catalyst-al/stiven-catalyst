@@ -50,3 +50,12 @@ test('every endless animation of the stylesheet stops when the motion is paused'
   const missing = loops.filter((s) => !stopped.has(s) && !/^\.sky-/.test(s));
   assert.deepEqual(missing, [], 'add these to the pause in src/css/65-motion.css');
 });
+
+// Two @keyframes of the same name: the later one wins everywhere, silently (audit PM-4: Zenith's radar faded and
+// popped with the chips' shine instead of turning; the podcast's steps lit in the gold of Start here).
+test('no two @keyframes share a name', () => {
+  const css = fs.readFileSync('src/styles.css', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const names = [...css.matchAll(/@keyframes\s+([\w-]+)/g)].map((m) => m[1]);
+  const twice = [...new Set(names.filter((name, i) => names.indexOf(name) !== i))];
+  assert.deepEqual(twice, []);
+});
