@@ -7673,5 +7673,6 @@
   "The first {shown} of {n} results": "{shown} rezultatet e para nga {n}",
   "partial audit": "auditim i pjesshëm",
   "{n} partial audit is left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} auditim i pjesshëm nuk hyn në trend dhe në renditje: një auditim numërohet kur ke vlerësuar të paktën 80 % të pyetjeve, me një vlerësim në çdo S.",
-  "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} auditime të pjesshme nuk hyjnë në trend dhe në renditje: një auditim numërohet kur ke vlerësuar të paktën 80 % të pyetjeve, me një vlerësim në çdo S."
+  "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} auditime të pjesshme nuk hyjnë në trend dhe në renditje: një auditim numërohet kur ke vlerësuar të paktën 80 % të pyetjeve, me një vlerësim në çdo S.",
+  "{t} per piece with uptime and changeovers": "{t} për copë me disponueshmërinë dhe ndërrimet"
 }

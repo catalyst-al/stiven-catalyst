@@ -7673,5 +7673,6 @@
   "The first {shown} of {n} results": "Die ersten {shown} von {n} Ergebnissen",
   "partial audit": "unvollständiges Audit",
   "{n} partial audit is left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständiges Audit ist nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S.",
-  "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständige Audits sind nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S."
+  "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständige Audits sind nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S.",
+  "{t} per piece with uptime and changeovers": "{t} pro Teil mit Verfügbarkeit und Rüsten"
 }
