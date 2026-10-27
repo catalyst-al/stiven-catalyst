@@ -274,12 +274,8 @@
 
   // 5S Audit: the overall share of the latest audit, as the audit tool shows it: per S the mean of the answered
   // questions (0–4) over 4, then the mean of the S that have an answer, so each S weighs the same.
-  const isScore = (value) => Number.isInteger(value) && value >= 0 && value <= 4;
-  const fiveSOverall = (scores) => {
-    const shares = Object.values(isObj(scores) ? scores : {}).map((list) => (Array.isArray(list) ? list.filter(isScore) : []))
-      .filter((values) => values.length).map((values) => sum(values) / values.length / 4);
-    return shares.length ? sum(shares) / shares.length : null;
-  };
+  // A partial audit (as the 5S Audit calls it) is no score here either: ToolKit.fiveSShare, one function for every reader.
+  const fiveSOverall = (scores) => window.ToolKit.fiveSShare(scores);
   const fiveS = (saved) => {
     const rows = listOf(saved?.rows).filter((row) => isObj(row) && isIso(row.date) && fiveSOverall(row.scores) !== null)
       .map((row, i) => ({ row, i })).sort((a, b) => a.row.date.localeCompare(b.row.date) || a.i - b.i).map(({ row }) => row);

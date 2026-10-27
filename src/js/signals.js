@@ -281,12 +281,8 @@
 
   // 5S Audit: the overall share of each audit as the audit tool scores it (per S the mean of the answered questions,
   // 0–4, over 4; then the mean of the S with an answer), one series per area. Target: the profile's 5S score.
-  const isScore = (value) => Number.isInteger(value) && value >= 0 && value <= 4;
-  const fiveSOverall = (row, scopes = FIVE_S) => {
-    const keys = Array.isArray(scopes[row.scope]) ? scopes[row.scope] : scopes["5S"];
-    const shares = keys.map((key) => list(row.scores?.[key]).filter(isScore)).filter((values) => values.length).map((values) => sum(values) / values.length / 4);
-    return shares.length ? sum(shares) / shares.length : null;
-  };
+  // A partial audit (as the 5S Audit calls it) is no point here either: ToolKit.fiveSShare, one function for every reader.
+  const fiveSOverall = (row, scopes = FIVE_S) => window.ToolKit.fiveSShare(row.scores, Array.isArray(scopes[row.scope]) ? scopes[row.scope] : scopes["5S"]);
   const fiveSSeries = (saved, period, targets = {}, scopes = FIVE_S) => {
     const byArea = new Map();
     list(saved?.rows).filter(isObj).map((row, i) => ({ row, i })).filter(({ row }) => inPeriod(row.date, period) && str(row.area))

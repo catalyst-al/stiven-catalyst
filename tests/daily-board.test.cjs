@@ -70,7 +70,10 @@ test('the small rules: minutes late, the 5S score, counts, rates and on time aga
   const M = load().DailyBoardMath;
   assert.equal(M.minutesLate('23:50', '00:20'), 30, 'a night route across midnight');
   assert.equal(M.minutesLate('10:00', ''), null);
-  assert.equal(M.fivesScore({ scores: { S: [4, 2], Q: [null, 3, null] } }), 9 / 12, 'an unscored question is no zero');
+  // Per S, as the 5S Audit: S (4+2)/8 = 0.75, Q (3+3+3+3)/16 = 0.75; the unscored question is no zero (6 of 7 scored).
+  assert.equal(M.fivesScore({ scores: { S: [4, 2], Q: [3, 3, null, 3, 3] } }), 0.75, 'an unscored question is no zero');
+  // 3 of 5 questions scored is a partial audit for the 5S Audit, so no score on the board either.
+  assert.equal(M.fivesScore({ scores: { S: [4, 2], Q: [null, 3, null] } }), null, 'a partial audit');
   assert.equal(M.fivesScore({ scores: {} }), null);
   assert.equal(M.countState(0, 2), 'green');
   assert.equal(M.countState(3, null), 'amber', 'no usual day yet: a question for the huddle');

@@ -1259,6 +1259,31 @@ window.ToolKit = (() => {
     };
   };
 
+  // A 5S audit's scores ({ S: [0–4 or null, ...], ... }) as the 5S Audit scores them (FiveSMath.score): per S the mean of
+  // the answered questions over 4, the audit the mean of the S that have an answer; complete when at least 80 % of its
+  // questions and every S have a score. The tools that read the 5S Audit's audits all use this one function: each had
+  // its own copy, and they drifted apart (audit of 27 October 2026, T-16). keys: the S of the audit's scope, when known.
+  const FIVE_S_COMPLETE = 0.8;
+  const fiveSScore = (scores, keys = null) => {
+    const source = isObject(scores) ? scores : {};
+    const lists = (Array.isArray(keys) ? keys : Object.keys(source)).map((key) => (Array.isArray(source[key]) ? source[key] : []));
+    const isScore = (value) => Number.isInteger(value) && value >= 0 && value <= 4;
+    let answered = 0;
+    let total = 0;
+    const shares = [];
+    lists.forEach((list) => {
+      const values = list.filter(isScore);
+      answered += values.length;
+      total += list.length;
+      if (values.length) shares.push(values.reduce((sum, value) => sum + value, 0) / values.length / 4);
+    });
+    const overall = shares.length ? shares.reduce((sum, share) => sum + share, 0) / shares.length : null;
+    const complete = answered > 0 && answered / total >= FIVE_S_COMPLETE && lists.every((list) => !list.length || list.some(isScore));
+    return { overall, complete };
+  };
+  // The score of a 5S audit as data for another tool: null when the 5S Audit calls it partial.
+  const fiveSShare = (scores, keys = null) => { const result = fiveSScore(scores, keys); return result.complete ? result.overall : null; };
+
   // What a hand-off to the Action Tracker did (ActionsStore.addAll), said plainly: added, already open, not saved.
   const actionsNote = ({ added = [], duplicate = 0, unsaved = 0, example = 0 } = {}) => [
     (Array.isArray(added) ? added.length : added) ? tx("Added {n} actions.", { n: int.format(Array.isArray(added) ? added.length : added) }) : "",
@@ -1469,7 +1494,7 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
+    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, fiveSScore, fiveSShare, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,

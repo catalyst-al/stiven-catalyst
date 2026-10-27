@@ -32,18 +32,9 @@
     return value;
   };
 
-  // A 5S audit row ({ scores: { S: [0-4, ...], ... } }) scored as the 5S Audit scores it (FiveSMath.score): each S the
-  // average of its answered questions over 4, the audit the mean of the S that have an answer, each S weighing 1. A
-  // question left unscored (null) is no zero. (Until 27 October 2026 the board pooled every question, so a fully
-  // answered S outweighed the others: 80 % where the 5S Audit said 20 %, audit finding T-16.)
-  const fivesScore = (row) => {
-    const scores = row && row.scores && typeof row.scores === "object" && !Array.isArray(row.scores) ? row.scores : {};
-    const shares = Object.values(scores).filter(Array.isArray).map((list) => list
-      .filter((v) => v !== null && v !== "" && typeof v !== "boolean").map(Number).filter((v) => Number.isFinite(v) && v >= 0 && v <= 4))
-      .filter((values) => values.length)
-      .map((values) => values.reduce((sum, value) => sum + value, 0) / (4 * values.length));
-    return shares.length ? shares.reduce((sum, share) => sum + share, 0) / shares.length : null;
-  };
+  // A 5S audit row scored as the 5S Audit scores it (ToolKit.fiveSScore): null for an audit the 5S Audit calls partial.
+  // (Until 27 October 2026 the board pooled every question: 80 % where the 5S Audit said 20 %, audit finding T-16.)
+  const fivesScore = (row) => kit.fiveSShare(row && row.scores);
 
 
   const rowsOf = (log) => (log && Array.isArray(log.rows) ? log.rows.filter((row) => row && typeof row === "object" && isIso(row.date)) : []);

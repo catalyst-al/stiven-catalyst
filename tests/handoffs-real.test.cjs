@@ -61,3 +61,35 @@ test('Daily Board scores a 5S audit exactly as the 5S Audit does', async () => {
   }
   assert.ok(rows.length > 0, 'the 5S Audit\'s own audits were scored too');
 });
+
+// Every tool that reads the 5S Audit's audits scores each one as the 5S Audit does, and leaves out an audit the 5S
+// Audit calls partial (fewer than 80 % of its questions scored, or an S without a score: FiveSMath.isComplete). They
+// each had their own copy of the formula, which is how the Daily Board drifted (T-16); they now share ToolKit.fiveSScore.
+test('Daily Board, Shift Pulse, Ops Report and Signals score every 5S audit as the 5S Audit does, partial ones left out', () => {
+  const five = openTool('five-s-audit', { now: NOW });
+  const M = five.FiveSMath;
+  const cfg = JSON.parse(five.document.getElementById('five-s-audit-data').textContent);
+  const keys = M.pillarsFor('5S', cfg.scopes);
+  const full = (value) => Object.fromEntries(keys.map((key) => [key, [value, value, value, value]]));
+  const rows = [
+    { date: '2026-10-20', area: 'Packing', scope: '5S', scores: full(3) },
+    { date: '2026-10-21', area: 'Packing', scope: '5S', scores: { ...full(4), [keys[1]]: [0, 1, 2, null] } },
+    // Partial: one S fully answered, the others empty.
+    { date: '2026-10-22', area: 'Dock', scope: '5S', scores: { ...Object.fromEntries(keys.map((key) => [key, [null, null, null, null]])), [keys[0]]: [4, 4, 4, 4] } },
+    // Partial: every S has an answer, but only 5 of 20 questions.
+    { date: '2026-10-23', area: 'Dock', scope: '5S', scores: Object.fromEntries(keys.map((key, i) => [key, [i === 0 ? 2 : 1, null, null, null]])) },
+  ];
+  const board = openTool('daily-board', { now: NOW }).DailyBoardMath;
+  const pulse = openTool('shift-pulse', { now: NOW }).PulseMath;
+  const ops = openTool('ops-report', { now: NOW }).OpsReportMath;
+  const signals = openTool('signals', { now: NOW }).SignalsMath;
+  for (const row of rows) {
+    const complete = M.isComplete(row, cfg.scopes);
+    const expected = complete ? M.score(row.scores, M.pillarsFor(row.scope, cfg.scopes)).overall : null;
+    const got = { board: board.fivesScore(row), pulse: pulse.fiveSOverall(row.scores), ops: ops.fiveSOverall(row.scores), signals: signals.fiveSOverall(row) };
+    for (const [reader, value] of Object.entries(got)) {
+      if (expected === null) assert.equal(value, null, `${row.date} is partial: ${reader} gives ${value}`);
+      else assert.ok(value !== null && Math.abs(value - expected) < 1e-9, `${row.date}: 5S Audit ${expected}, ${reader} ${value}`);
+    }
+  }
+});
