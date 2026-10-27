@@ -16,14 +16,22 @@
   if (typeof ui.status !== "string") ui.status = "live";
   if (typeof ui.owner !== "string") ui.owner = "";
   if (typeof ui.source !== "string") ui.source = "";
-  // Lists saved before 27 October 2026 kept the example's ids here; ActionsStore reads them to mark those actions, and
-  // once the marks are saved with the list the ids are not needed any more.
+  // The example is marked in the list itself (ActionsStore: example: true), and its ids are kept here as well, where
+  // the version of the site before 27 October 2026 looks for them: after a rollback to it, that version still shows the
+  // example as one, and when its store saves the list without the marks, ActionsStore reads the ids back and marks
+  // the actions again (tests/actions-integrity.test.cjs, new → live → new). The ids follow the marks: they are emptied
+  // when the example leaves.
   if (!Array.isArray(ui.exampleIds)) ui.exampleIds = [];
   const saveUi = () => write(UI_KEY, ui);
-  if (ui.exampleIds.length && S.replaceAll(S.all())) {
-    ui.exampleIds = [];
+  const syncExampleIds = () => {
+    const ids = S.all().filter((a) => a.example === true).map((a) => a.id);
+    if (ids.length === ui.exampleIds.length && ids.every((id) => ui.exampleIds.includes(id))) return;
+    ui.exampleIds = ids;
     saveUi();
-  }
+  };
+  // A list saved without the marks (by the older version): they are saved with it again.
+  if (ui.exampleIds.length && S.all().some((a) => a.example === true)) S.replaceAll(S.all());
+  syncExampleIds();
   const sourceName = (source) => data.sources[source || "manual"] || source || data.sources.manual;
   const statusName = (status) => data.statuses[status] || status;
 
@@ -343,6 +351,7 @@
   };
 
   const render = () => {
+    syncExampleIds();
     const rows = S.all();
     const day = today();
     exampleNote.hidden = !exampleOn();

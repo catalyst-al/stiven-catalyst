@@ -101,3 +101,54 @@ test('actions handed over from a tool\'s example arrive as example actions, neve
   storage = keep(kaizen);
   assert.deepEqual(storage['sc-actions'].rows.map((row) => row.source), ['kaizen-board'], 'the first own action replaces them');
 });
+
+// New site → the live one (a rollback) → new site, the author's decision of 27 October 2026 (rollback proof, risk 3):
+// the example of the Action Tracker stays an example on the live site and when the new one returns. The live site's
+// scripts are tests/fixtures/pre-phase1 (origin/main carries the same action-tracker.js and actions-store.js as 605d0df).
+// It knows the example only by the ids in sc-actions-ui, and its store drops the "example" mark when it saves.
+const LIVE = {
+  'action-tracker': fs.readFileSync('tests/fixtures/pre-phase1/action-tracker.js', 'utf8'),
+  'actions-store': fs.readFileSync('tests/fixtures/pre-phase1/actions-store.js', 'utf8'),
+};
+const exampleShown = (w) => !w.document.querySelector('.dl-example-note').hidden;
+
+test('new → live → new, untouched: the example stays an example on both sites, even after the live site saved the list', async () => {
+  const first = openTool('action-tracker', { now: NOW });
+  await settle(first);
+  let storage = keep(first);
+  const count = storage['sc-actions'].rows.length;
+  assert.ok(count >= 10 && own(storage).length === 0, 'the new site opens on its example');
+  // The live site: shows it as its example, and saves the list as it does (the marks dropped).
+  const live = openTool('action-tracker', { storage, now: NOW, code: LIVE });
+  await settle(live);
+  assert.ok(exampleShown(live), 'the live site shows the example as an example');
+  live.ActionsStore.replaceAll(live.ActionsStore.list());
+  storage = keep(live);
+  assert.ok(storage['sc-actions'].rows.every((row) => row.example !== true), 'the live store saved the list without the marks');
+  // Back on the new site: still the example, none of it counted as the visitor's.
+  const back = openTool('action-tracker', { storage, now: NOW });
+  await settle(back);
+  assert.ok(exampleShown(back), 'the example note is back');
+  assert.equal(own(keep(back)).length, 0, 'no example action became the visitor\'s');
+  const reader = openTool('ops-report', { storage: keep(back), now: NOW });
+  assert.equal(reader.ActionsStore.list().length, 0, 'the other tools count none of it');
+});
+
+test('new → live → new, with an own action on the live site: only that action is left, on both sites', async () => {
+  const first = openTool('action-tracker', { now: NOW });
+  await settle(first);
+  const live = openTool('action-tracker', { storage: keep(first), now: NOW, code: LIVE });
+  await settle(live);
+  const form = live.document.querySelector('[data-entry]');
+  form.elements.title.value = 'Fix the dock door sensor';
+  submit(live, form);
+  await settle(live);
+  let storage = keep(live);
+  assert.deepEqual(storage['sc-actions'].rows.map((row) => row.title), ['Fix the dock door sensor'], 'the live site replaced the example');
+  const back = openTool('action-tracker', { storage, now: NOW });
+  await settle(back);
+  storage = keep(back);
+  assert.deepEqual(own(storage).map((row) => row.title), ['Fix the dock door sensor']);
+  assert.equal(storage['sc-actions'].rows.length, 1);
+  assert.ok(!exampleShown(back));
+});
