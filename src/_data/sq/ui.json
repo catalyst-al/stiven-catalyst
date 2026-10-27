@@ -7669,5 +7669,6 @@
   "This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.": "Ky skedar do të hapej në shumë më tepër të dhëna nga sa mban çdo CV apo tabelë, prandaj nuk u lexua. Mund të jetë i dëmtuar; asgjë nuk ndryshoi.",
   "{name}: would unpack to far more than any table holds, so it was not read.": "{name}: do të hapej në shumë më tepër të dhëna nga sa mban çdo tabelë, prandaj nuk u lexua.",
   "This file is larger than 5 MB, far larger than any CV. Nothing was changed.": "Ky skedar është më i madh se 5 MB, shumë më i madh se çdo CV. Asgjë nuk ndryshoi.",
-  "This file is larger than 40 MB; a work file from this site is never that large. Nothing was changed.": "Ky skedar është më i madh se 40 MB; një skedar pune i kësaj faqeje nuk është kurrë kaq i madh. Asgjë nuk ndryshoi."
+  "This file is larger than 40 MB; a work file from this site is never that large. Nothing was changed.": "Ky skedar është më i madh se 40 MB; një skedar pune i kësaj faqeje nuk është kurrë kaq i madh. Asgjë nuk ndryshoi.",
+  "The first {shown} of {n} results": "{shown} rezultatet e para nga {n}"
 }

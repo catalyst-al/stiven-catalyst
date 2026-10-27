@@ -20,7 +20,7 @@
 } -%}
 <section class="shell section search-page" data-search data-index="{{ indexUrl }}"
   data-kinds='{{ kinds | dump }}'
-  data-count-label="{{ '{n} results' | t(lang) }}" data-one-label="{{ '1 result' | t(lang) }}" data-none-label="{{ 'Nothing found for that yet. Try another word, or browse the essays.' | t(lang) }}">
+  data-count-label="{{ '{n} results' | t(lang) }}" data-some-label="{{ 'The first {shown} of {n} results' | t(lang) }}" data-one-label="{{ '1 result' | t(lang) }}" data-none-label="{{ 'Nothing found for that yet. Try another word, or browse the essays.' | t(lang) }}">
   <form class="search-form" action="" method="get" role="search">
     <label class="visually-hidden" for="search-input">{{ "Search" | t(lang) }}</label>
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
