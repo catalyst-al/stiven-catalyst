@@ -7625,5 +7625,8 @@
   "How sure is this?": "Sa i sigurt është ky përfundim?",
   "{kpi} is red; the self-assessment points to {cause}, a hypothesis to check.": "{kpi} është në të kuqe; vetëvlerësimi tregon nga {cause}, një hipotezë për t'u verifikuar.",
   "Check on the floor: {cause} behind {kpi}": "Verifiko në terren: {cause} pas {kpi}",
-  "The result shows which cause your answers point to most, as a hypothesis to check on the floor, with three first moves and one question to ask there.": "Rezultati tregon nga cili shkak anojnë më shumë përgjigjet e tua, si hipotezë për ta verifikuar në terren, me tre hapa të parë dhe një pyetje për të bërë atje."
+  "The result shows which cause your answers point to most, as a hypothesis to check on the floor, with three first moves and one question to ask there.": "Rezultati tregon nga cili shkak anojnë më shumë përgjigjet e tua, si hipotezë për ta verifikuar në terren, me tre hapa të parë dhe një pyetje për të bërë atje.",
+  "Better than usual: a signal to investigate": "Më mirë se zakonisht: një sinjal për t'u hetuar",
+  "no defect in {n}: the data can show this level and no higher (95% confidence, rule of three). Collect more to show more.": "asnjë defekt në {n}: të dhënat mund ta tregojnë këtë nivel dhe jo më të lartë (besueshmëri 95%, rregulli i treshit). Mblidh më shumë për të treguar më shumë.",
+  "a rough figure: with {n} chances the level could be anywhere from {low} to {high} (95% range)": "një shifër e përafërt: me {n} mundësi niveli mund të jetë kudo nga {low} deri në {high} (diapazoni 95%)"
 }

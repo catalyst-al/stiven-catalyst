@@ -97,6 +97,8 @@
     "stable": "Asnjë sinjal. Ngritjet dhe uljet janë zhurma normale e këtij procesi. Reagimi ndaj ditëve të veçanta nuk ndihmon dhe mund ta përkeqësojë: për një numër më të mirë, ndrysho vetë procesin.",
     "badSpecial": "Karta tregon ditë që nuk janë zhurmë normale. Heto së pari ato ditë: çfarë ishte ndryshe në volum, njerëz, pajisje ose metodë?",
     "goodSpecial": "Karta tregon një përmirësim të qëndrueshëm. Gjej çfarë e bëri ndryshimin dhe bëje standard, pastaj rillogarit kufijtë nga niveli i ri.",
+    "goodSignal": "Disa ditë janë më të mira se sa i lejojnë kufijtë zhurmës. Një pikë (ose një prirje e shkurtër) është një sinjal për t'u hetuar, jo ende një ndryshim i qëndrueshëm: gjej çfarë ishte ndryshe në ato ditë, sa njerëzit ende e mbajnë mend. Nëse është diçka që mund ta përsëritësh, provoje me qëllim; karta tregon një përmirësim të qëndrueshëm vetëm kur tetë ditë ose më shumë radhazi qëndrojnë në anën më të mirë të vijës qendrore.",
+    "goodSignalWeek": "Disa javë janë më të mira se sa i lejojnë kufijtë zhurmës. Një pikë (ose një prirje e shkurtër) është një sinjal për t'u hetuar, jo ende një ndryshim i qëndrueshëm: gjej çfarë ishte ndryshe në ato javë. Nëse është diçka që mund ta përsëritësh, provoje me qëllim; karta tregon një përmirësim të qëndrueshëm vetëm kur tetë javë ose më shumë radhazi qëndrojnë në anën më të mirë të vijës qendrore.",
     "short": "Më pak se 12 ditë në kartë. Kufijtë janë të përafërt; vazhdo të shtosh ditë para se t'i besosh një sinjali.",
     "shortWeek": "Më pak se 12 javë në kartë. Kufijtë janë të përafërt; vazhdo të shtosh javë para se t'i besosh një sinjali."
   }

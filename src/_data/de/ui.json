@@ -7625,5 +7625,8 @@
   "How sure is this?": "Wie sicher ist das?",
   "{kpi} is red; the self-assessment points to {cause}, a hypothesis to check.": "{kpi} ist rot; die Selbsteinschätzung deutet auf {cause}, eine Hypothese, die zu prüfen ist.",
   "Check on the floor: {cause} behind {kpi}": "Vor Ort prüfen: {cause} hinter {kpi}",
-  "The result shows which cause your answers point to most, as a hypothesis to check on the floor, with three first moves and one question to ask there.": "Das Ergebnis zeigt, auf welche Ursache Ihre Antworten am stärksten deuten, als Hypothese, die Sie vor Ort prüfen, mit drei ersten Schritten und einer Frage, die Sie dort stellen."
+  "The result shows which cause your answers point to most, as a hypothesis to check on the floor, with three first moves and one question to ask there.": "Das Ergebnis zeigt, auf welche Ursache Ihre Antworten am stärksten deuten, als Hypothese, die Sie vor Ort prüfen, mit drei ersten Schritten und einer Frage, die Sie dort stellen.",
+  "Better than usual: a signal to investigate": "Besser als üblich: ein Signal zum Untersuchen",
+  "no defect in {n}: the data can show this level and no higher (95% confidence, rule of three). Collect more to show more.": "kein Fehler in {n}: Die Daten können dieses Niveau zeigen und kein höheres (95 % Sicherheit, Dreierregel). Sammeln Sie mehr, um mehr zu zeigen.",
+  "a rough figure: with {n} chances the level could be anywhere from {low} to {high} (95% range)": "ein grober Wert: Bei {n} Möglichkeiten kann das Niveau irgendwo zwischen {low} und {high} liegen (95-%-Bereich)"
 }

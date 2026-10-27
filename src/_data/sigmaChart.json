@@ -96,6 +96,8 @@
     "stable": "No signals. The ups and downs are the normal noise of this process. Reacting to single days will not help and may make it worse: to get a better number, change the process itself.",
     "badSpecial": "The chart shows days that are not normal noise. Investigate those days first: what was different in volume, people, equipment or method?",
     "goodSpecial": "The chart shows a lasting improvement. Find out what made the difference and make it the standard, then recalculate the limits from the new level.",
+    "goodSignal": "Some days are better than the limits allow for noise. One point (or a short trend) is a signal to investigate, not yet a lasting change: find out what was different on those days while people still remember. If it is something you can repeat, try it on purpose; the chart shows a lasting improvement only when eight days or more in a row stay on the better side of the centre line.",
+    "goodSignalWeek": "Some weeks are better than the limits allow for noise. One point (or a short trend) is a signal to investigate, not yet a lasting change: find out what was different in those weeks. If it is something you can repeat, try it on purpose; the chart shows a lasting improvement only when eight weeks or more in a row stay on the better side of the centre line.",
     "short": "Fewer than 12 days in the chart. The limits are rough; keep adding days before you trust a signal.",
     "shortWeek": "Fewer than 12 weeks in the chart. The limits are rough; keep adding weeks before you trust a signal."
   }
