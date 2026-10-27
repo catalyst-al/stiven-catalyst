@@ -13,7 +13,7 @@
 // differ at all (any channel), that differ by more than 8/255, and the largest difference. A few side-by-side PNGs
 // (a | b | the differing pixels in red) are written, downscaled, for the pairs that differ most (--keep).
 const { chromium } = require("playwright");
-const { PNG } = require("playwright-core/lib/utilsBundle");
+const { PNG, jpegjs } = require("playwright-core/lib/utilsBundle");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -30,6 +30,12 @@ const WIDTHS = (arg("widths", "390,768,1440")).split(",").map(Number);
 const THEMES = (arg("themes", "dark,light")).split(",");
 // For a diagnosis: side b gets this file in place of its js/cosmos.js (one change at a time).
 const B_COSMOS = arg("b-cosmos");
+// --touch: the phone and tablet widths as touch screens (pointer: coarse), as on a real phone.
+const TOUCH = Boolean(arg("touch"));
+// --crop 100,520: the side-by-side pictures show only these rows of the screen (CSS px), at full size if they fit.
+const CROP = arg("crop")?.split(",").map(Number);
+// --jpeg: the side-by-side pictures as JPEG (quality 85), to keep the files small.
+const JPEG = Boolean(arg("jpeg"));
 
 const FREEZE = () => {
   let seed = 20261027;
@@ -60,7 +66,7 @@ const FREEZE = () => {
 const shoot = async (page) => page.screenshot({ animations: "allow", caret: "hide" });
 
 const capture = async (browser, base, width, theme, plan) => {
-  const context = await browser.newContext({ viewport: { width, height: width < 600 ? 844 : width < 1000 ? 1024 : 900 }, deviceScaleFactor: width < 1000 ? 2 : 1, colorScheme: theme });
+  const context = await browser.newContext({ viewport: { width, height: width < 600 ? 844 : width < 1000 ? 1024 : 900 }, deviceScaleFactor: width < 1000 ? 2 : 1, colorScheme: theme, ...(TOUCH && width < 1000 ? { isMobile: true, hasTouch: true } : {}) });
   await context.route((url) => !/^http:\/\/127\.0\.0\.1/.test(url.href), (route) => route.abort());
   await context.addInitScript(`try{localStorage.setItem("sc-theme",${JSON.stringify(theme)})}catch(e){}`);
   await context.addInitScript(FREEZE);
@@ -109,18 +115,20 @@ const diff = (bufA, bufB) => {
   return { width: a.width, height: a.height, differ: +(100 * any / n).toFixed(3), differOver8: +(100 * big / n).toFixed(3), maxDelta: max, a, b, mask };
 };
 
-// a | b | mask, downscaled by an integer factor to at most 1200 px wide.
-const sideBySide = (d, file) => {
-  const scale = Math.max(1, Math.ceil((d.width * 3 + 20) / 1200));
+// a | b | mask, downscaled by an integer factor to at most 1200 px wide (or 1600 px with --crop).
+const sideBySide = (d, file, dpr) => {
+  const top = CROP ? Math.round(CROP[0] * dpr) : 0;
+  const rows = CROP ? Math.min(d.height - top, Math.round((CROP[1] - CROP[0]) * dpr)) : d.height;
+  const scale = Math.max(1, Math.ceil((d.width * 3 + 20) / (CROP ? 1600 : 1200)));
   const w = Math.floor(d.width / scale);
-  const h = Math.floor(d.height / scale);
+  const h = Math.floor(rows / scale);
   const out = new PNG({ width: w * 3 + 20, height: h });
   out.data.fill(255);
   const put = (x, y, r, g, b) => { const o = (y * out.width + x) * 4; out.data[o] = r; out.data[o + 1] = g; out.data[o + 2] = b; out.data[o + 3] = 255; };
   for (let y = 0; y < h; y += 1) {
     for (let x = 0; x < w; x += 1) {
       const sx = x * scale;
-      const sy = y * scale;
+      const sy = top + y * scale;
       const o = (sy * d.width + sx) * 4;
       put(x, y, d.a.data[o], d.a.data[o + 1], d.a.data[o + 2]);
       put(x + w + 10, y, d.b.data[o], d.b.data[o + 1], d.b.data[o + 2]);
@@ -132,7 +140,8 @@ const sideBySide = (d, file) => {
       else put(x + 2 * w + 20, y, grey, grey, grey);
     }
   }
-  fs.writeFileSync(file, PNG.sync.write(out, { colorType: 2 }));
+  if (JPEG) fs.writeFileSync(file.replace(/\.png$/, ".jpg"), jpegjs.encode({ data: out.data, width: out.width, height: out.height }, 85).data);
+  else fs.writeFileSync(file, PNG.sync.write(out, { colorType: 2 }));
 };
 
 (async () => {
@@ -164,7 +173,7 @@ const sideBySide = (d, file) => {
     }
   }
   await browser.close();
-  for (const { row, d } of keep) if (row.differ > 0) sideBySide(d, path.join(OUT, `diff-${row.width}-${row.theme}-${row.frame}.png`));
+  for (const { row, d } of keep) if (row.differ > 0) sideBySide(d, path.join(OUT, `diff-${row.width}-${row.theme}-${row.frame}.png`), row.width < 1000 ? 2 : 1);
   const summary = { date: new Date().toISOString(), a: A, b: B, path: PATH, results };
   fs.writeFileSync(path.join(OUT, "frames.json"), JSON.stringify(summary, null, 1));
 })();
