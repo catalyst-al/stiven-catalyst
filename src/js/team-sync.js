@@ -2,9 +2,16 @@
 // same on every device of the team, through one encrypted copy on the sync server (workers/sync/worker.js).
 //
 // The team code is six words. Everything else comes from it on the device, with WebCrypto:
-//   spaceId     = hex SHA-256("space:" + code)   the address of the team's copy
-//   writeToken  = hex SHA-256("write:" + code)   lets a device replace or delete it
+//   bits        = PBKDF2-SHA-256(code, "stiven-catalyst-sync-id-v2", 310000), 512 bits
+//   spaceId     = hex of the first 256 bits      the address of the team's copy
+//   writeToken  = hex of the last 256 bits       lets a device replace or delete it
 //   key         = PBKDF2-SHA-256(code, "stiven-catalyst-sync-v1", 310000) → AES-GCM 256
+// The server sees the space id and the token: each guess of the code costs whoever holds them the same 310 000
+// rounds as a guess against the copy. Teams made before kept their copy at the "legacy" address, SHA-256("space:" +
+// code) with the token SHA-256("write:" + code), which a guesser could test with one hash; a sync reads such a copy
+// there, writes it to the new address and deletes the old one (or keeps it in "retire" to delete later). Read-only
+// codes made before carry the old address and stop working once the team's copy has moved: the box says the copy
+// is gone, and the team makes a new read-only code.
 // What goes up is { format: "stiven-catalyst-team", version: 2, sent, device, devices, items: { key: string },
 // deleted: { key: { row id: ms } } }, gzipped
 // where the browser can (a first byte says which: 1 gzip, 0 plain JSON), then encrypted with a fresh 12-byte IV. The
@@ -43,6 +50,7 @@
   // At most this many tombstones in a copy, the newest kept: a few hundred kilobytes before gzip.
   const MAX_DELETED = 20000;
   const SALT = "stiven-catalyst-sync-v1";
+  const ID_SALT = "stiven-catalyst-sync-id-v2";
   const ITERATIONS = 310000;
   const TEAM_KEY = "sc-team";
   const STATE_KEY = "sc-team-state";
@@ -150,12 +158,25 @@
   const utf8 = (text) => new TextEncoder().encode(text);
   const hex = (buffer) => [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, "0")).join("");
   const sha256 = async (text) => hex(await subtle().digest("SHA-256", utf8(text)));
+  // The address and the token: 512 bits of PBKDF2 with a salt that is not the key's.
+  const deriveIds = async (code, iterations = ITERATIONS) => {
+    const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveBits"]);
+    const bits = new Uint8Array(await subtle().deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: utf8(ID_SALT), iterations }, base, 512));
+    return { spaceId: hex(bits.subarray(0, 32)), writeToken: hex(bits.subarray(32)) };
+  };
+  const legacyIds = async (code) => {
+    const [spaceId, writeToken] = await Promise.all([sha256(`space:${code}`), sha256(`write:${code}`)]);
+    return { spaceId, writeToken };
+  };
   const deriveKeys = async (text, iterations = ITERATIONS) => {
     const code = normalise(text);
-    const [spaceId, writeToken] = await Promise.all([sha256(`space:${code}`), sha256(`write:${code}`)]);
     const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveKey"]);
-    const key = await subtle().deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
-    return { code, spaceId, writeToken, key };
+    const [ids, legacy, key] = await Promise.all([
+      deriveIds(code, iterations),
+      legacyIds(code),
+      subtle().deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]),
+    ]);
+    return { code, spaceId: ids.spaceId, writeToken: ids.writeToken, key, legacy };
   };
   const toBase64 = (bytes) => {
     let text = "";
@@ -238,8 +259,8 @@
   // The key is the 256 bits PBKDF2 gives the team code (deriveBits; deriveKey to AES-256 takes the very same bits, so
   // it opens what the members seal). The check is the first 4 bytes of SHA-256("scr1." ‖ space id ‖ key): a copy cut
   // short or mistyped is told apart from a code of another team. The six words and the write token are not in it:
-  // the token is SHA-256("write:" + code), which cannot be run backwards, and PBKDF2 cannot either. "1" is the
-  // version of the format; a later one gets a new number.
+  // the token is the other half of the address's PBKDF2 (deriveIds), which nothing in the code leads back to. "1" is
+  // the version of the format; a later one gets a new number.
   const VIEW_PREFIX = "scr";
   const VIEW_VERSION = 1;
   const VIEW_BYTES = 68;
@@ -248,7 +269,7 @@
   const viewerCheck = async (body) => new Uint8Array(await subtle().digest("SHA-256", concat(utf8(`${VIEW_PREFIX}${VIEW_VERSION}.`), body))).subarray(0, 4);
   const viewerCode = async (text, iterations = ITERATIONS) => {
     const code = normalise(text);
-    const spaceId = await sha256(`space:${code}`);
+    const { spaceId } = await deriveIds(code, iterations);
     const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveBits"]);
     const key = new Uint8Array(await subtle().deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, 256));
     const body = concat(fromHex(spaceId), key);
@@ -836,15 +857,23 @@
     if (!keys.writeToken) return pullOnce(ctx);
     const now = ctx.now || (() => new Date());
     const wait = ctx.wait || ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
-    const url = `${String(ctx.endpoint).replace(/\/+$/, "")}/v1/spaces/${keys.spaceId}`;
-    const call = async (init) => {
-      try { return await ctx.fetch(url, { cache: "no-store", ...init }); } catch { return null; }
+    const url = spaceUrl(ctx.endpoint, keys.spaceId);
+    const call = async (init, at = url) => {
+      try { return await ctx.fetch(at, { cache: "no-store", ...init }); } catch { return null; }
     };
     const body = async (response) => { try { return await response.json(); } catch { return null; } };
     for (let attempt = 0; attempt < 2; attempt++) {
       const state = readState(storage);
-      const got = await call({ method: "GET" });
+      let got = await call({ method: "GET" });
       if (!got) return { status: "offline" };
+      // Nothing at the address: a team made before keeps its copy at the old one. Read there, it goes up to the
+      // new address (revision 0, a new space) and the old space is deleted once that went through.
+      let moving = false;
+      if (got.status === 404 && keys.legacy && HEX64.test(keys.legacy.spaceId)) {
+        const old = await call({ method: "GET" }, spaceUrl(ctx.endpoint, keys.legacy.spaceId));
+        if (!old) return { status: "offline" };
+        if (old.ok) { got = old; moving = true; }
+      }
       let rev = 0;
       let remote = null;
       let size = 0;
@@ -853,7 +882,7 @@
       } else if (got.ok) {
         const box = await body(got);
         if (!box || typeof box.data !== "string" || typeof box.iv !== "string" || !Number.isInteger(box.rev)) return { status: "unreadable" };
-        rev = box.rev;
+        rev = moving ? 0 : box.rev;
         size = box.data.length;
         try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
         if (!remote) return { status: "unreadable" };
@@ -882,8 +911,9 @@
       const out = applyDeleted({ ...remoteItems, ...merged }, deleted);
       const devices = withDevice(remote?.devices, device, now());
       const keep = (extra) => writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced, deleted, teamKeys: Object.keys(out), ...extra });
-      if (remote && sameItems(out, remoteItems) && sameDeleted(deleted, remote.deleted) && deviceFresh(remote.devices, device, now())) {
-        keep({ rev, size, devices: remote.devices, lastSync: now().toISOString(), gone: false });
+      const space = keys.spaceId;
+      if (!moving && remote && sameItems(out, remoteItems) && sameDeleted(deleted, remote.deleted) && deviceFresh(remote.devices, device, now())) {
+        keep({ rev, size, devices: remote.devices, lastSync: now().toISOString(), gone: false, space });
         return { status: "synced", changed, rev, size, devices: remote.devices, uploaded: false };
       }
       keep({ gone: false });
@@ -904,8 +934,14 @@
       if (!response.ok) return { status: "error", code: response.status, changed };
       const saved = (await body(response)) || {};
       const newRev = Number.isInteger(saved.rev) ? saved.rev : rev + 1;
-      writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced: { ...base, ...baseOf(merged) }, deleted, teamKeys: Object.keys(out), rev: newRev, size: sealed.data.length, devices, lastSync: now().toISOString(), gone: false });
-      return { status: "synced", changed, rev: newRev, size: sealed.data.length, devices, uploaded: true };
+      writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced: { ...base, ...baseOf(merged) }, deleted, teamKeys: Object.keys(out), rev: newRev, size: sealed.data.length, devices, lastSync: now().toISOString(), gone: false, space });
+      if (moving) {
+        // The copy is at its new address: the old one goes, now or at a later sync (retireOld).
+        const outcome = await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: keys.legacy });
+        const saved = readJson(storage, TEAM_KEY);
+        if (outcome !== "deleted" && saved) writeJson(storage, TEAM_KEY, { ...saved, retire: [...retireList(storage), { spaceId: keys.legacy.spaceId, writeToken: keys.legacy.writeToken }].slice(-5) });
+      }
+      return { status: "synced", changed, rev: newRev, size: sealed.data.length, devices, uploaded: true, moved: moving };
     }
     return { status: "conflict" };
   };
@@ -965,12 +1001,18 @@
     // The team's device names stay out: the caller needs the work, not who carries it.
     return { status: "ok", sent: remote.sent, items: remote.items, rev: box.rev, updated: Number.isFinite(box.updated) ? box.updated : null };
   };
+  // The copy at the address of the keys and, for a team made before, the one at its old address too.
   const deleteCopy = async ({ endpoint, fetch, keys }) => {
     if (!keys?.writeToken) return "refused";
-    try {
-      const response = await fetch(spaceUrl(endpoint, keys.spaceId), { method: "DELETE", headers: { Authorization: `Bearer ${keys.writeToken}` } });
-      return response.status === 204 || response.status === 404 ? "deleted" : response.status === 403 || response.status === 401 ? "refused" : "error";
-    } catch { return "offline"; }
+    const one = async ({ spaceId, writeToken }) => {
+      try {
+        const response = await fetch(spaceUrl(endpoint, spaceId), { method: "DELETE", headers: { Authorization: `Bearer ${writeToken}` } });
+        return response.status === 204 || response.status === 404 ? "deleted" : response.status === 403 || response.status === 401 ? "refused" : "error";
+      } catch { return "offline"; }
+    };
+    const result = await one(keys);
+    if (result !== "deleted" || !keys.legacy?.writeToken) return result;
+    return one(keys.legacy);
   };
 
   // Old spaces still to delete after a change of code, kept with the team code in sc-team (never in a saved file).
@@ -1035,7 +1077,7 @@
     } catch { put = null; }
     if (!put || !put.ok) {
       // The answer was lost on the way: the new space may exist all the same. Nobody else has its code; it goes.
-      if (!put) await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: next });
+      if (!put) await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: { spaceId: next.spaceId, writeToken: next.writeToken } });
       const status = !put ? "offline" : put.status === 413 ? "too-large" : put.status === 429 ? "busy" : put.status === 409 ? "conflict" : put.status === 403 || put.status === 401 ? "refused" : "error";
       return fail({ status, code: put?.status, stage: "upload" });
     }
@@ -1043,7 +1085,7 @@
     const rev = Number.isInteger(saved.rev) ? saved.rev : 1;
     // From here this device is in the new team, whatever happens to the old copy.
     writeJson(storage, TEAM_KEY, { code, since: now().toISOString(), retire: [...retireList(storage), { spaceId: old.spaceId, writeToken: old.writeToken }].slice(-5) });
-    writeJson(storage, STATE_KEY, { ...readState(storage), deviceId: device.id, rev, size: sealed.data.length, devices, teamKeys: Object.keys(remote.items), lastSync: now().toISOString(), gone: false });
+    writeJson(storage, STATE_KEY, { ...readState(storage), deviceId: device.id, rev, size: sealed.data.length, devices, teamKeys: Object.keys(remote.items), lastSync: now().toISOString(), gone: false, space: next.spaceId });
     const deleted = await retireOld({ endpoint: ctx.endpoint, fetch: ctx.fetch, storage });
     return { status: "rotated", code, keys: next, rev, deleted, changed: first.changed || [] };
   };
@@ -1068,7 +1110,7 @@
   };
 
   window.TeamSyncMath = {
-    FORMAT, VERSION, SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION, TOMBSTONE_DAYS,
+    FORMAT, VERSION, SALT, ID_SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION, TOMBSTONE_DAYS,
     newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64, toBase64Url, fromBase64Url,
     looksViewer, viewerCode, parseViewer, viewerKeys,
     offerable, isOn, readPayload, withDevice, deviceFresh,
@@ -1330,11 +1372,15 @@
     say(text.syncing);
     const k = viewer ? await viewerKeys(view.text) : await deriveKeys(parsed.code);
     // Join only a team that exists: a mistyped code that happens to be six real words starts nothing.
-    let exists = null;
-    try {
-      const response = await window.fetch(`${endpoint.replace(/\/+$/, "")}/v1/spaces/${k.spaceId}`, { cache: "no-store" });
-      exists = response.status === 404 ? false : response.ok ? true : null;
-    } catch { exists = null; }
+    const probe = async (spaceId) => {
+      try {
+        const response = await window.fetch(spaceUrl(endpoint, spaceId), { cache: "no-store" });
+        return response.status === 404 ? false : response.ok ? true : null;
+      } catch { return null; }
+    };
+    // A team made before may still have its copy at the old address (it moves at the next sync of a member).
+    let exists = await probe(k.spaceId);
+    if (exists === false && k.legacy) exists = await probe(k.legacy.spaceId);
     button.disabled = false;
     if (exists === false) { say(text.noTeam); return; }
     if (exists === null) { say(text.offline); return; }
@@ -1360,6 +1406,8 @@
     const button = $("[data-tm-viewer-make]");
     button.disabled = true;
     say(text.viewerMaking);
+    // The code carries the new address of the team's copy: a team made before moves there first.
+    if (!state().lastSync || state().space !== (await keys())?.spaceId) await sync({ quiet: true });
     let code = null;
     try { code = await viewerCode(current.code); } catch { code = null; }
     button.disabled = false;

@@ -106,11 +106,14 @@ test('the word list and the team code: six of 1296 plain words, at least 60 bits
   assert.equal(M.parseCode('acid acorn acre').ok, false);
 });
 
-test('keys: the space id and the write token are SHA-256 of the code, the key is PBKDF2 → AES-GCM, all deterministic', async () => {
+test('keys: the space id and the write token are PBKDF2 of the code with their own salt, the key is PBKDF2 → AES-GCM, all deterministic', async () => {
   const w = load();
   const a = await w.TeamSyncMath.deriveKeys(CODE);
-  assert.equal(a.spaceId, sha(`space:${CODE}`));
-  assert.equal(a.writeToken, sha(`write:${CODE}`));
+  // Not SHA-256 of the code any more (tests/team-sync-keys.test.cjs): that is only where a team made before is found.
+  const ids = nodeCrypto.pbkdf2Sync(CODE, 'stiven-catalyst-sync-id-v2', 310000, 64, 'sha256');
+  assert.equal(a.spaceId, ids.subarray(0, 32).toString('hex'));
+  assert.equal(a.writeToken, ids.subarray(32).toString('hex'));
+  assert.deepEqual(plain(a.legacy), { spaceId: sha(`space:${CODE}`), writeToken: sha(`write:${CODE}`) });
   assert.match(a.spaceId, /^[0-9a-f]{64}$/);
   assert.notEqual(a.spaceId, a.writeToken);
   const b = await w.TeamSyncMath.deriveKeys('ACID acorn acre acts afar affix');
