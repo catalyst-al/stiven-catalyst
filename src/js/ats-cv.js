@@ -805,6 +805,57 @@
   // A block taller than a page is cut off by the page; the page is marked and the checks say so.
   let overflow = false;
 
+  // Printed from the page (Print), a job or a list of bullet points longer than a page is not cut off at its foot
+  // (audit P2C-03): it is split between its bullet points into pieces that each fit a page, the first one filling
+  // what is left of the page it starts on. Only a single bullet point taller than a page still marks its page.
+  const ROOM = PAGE_H - TOP - BOTTOM;
+  const splitBlock = (block, room) => {
+    const node = block.node;
+    const isList = node.matches(".ats-bullets");
+    if (!isList && !node.matches(".ats-entry")) return null;
+    const rest = el(isList ? "div" : "article", isList ? "ats-bullets" : "ats-entry is-continued");
+    node.after(rest);
+    let into = isList ? rest : null;
+    while (node.offsetHeight > room) {
+      const list = isList ? node : node.lastElementChild;
+      if (!list || !list.matches(".ats-bullets") || list.children.length <= 1) break;
+      if (!into) { into = el("div", "ats-bullets"); rest.append(into); }
+      into.prepend(list.lastElementChild);
+    }
+    if (!rest.children.length) { rest.remove(); return null; }
+    block.height = node.offsetHeight;
+    return { node: rest, space: 0, keep: false, height: rest.offsetHeight };
+  };
+  const splitTall = (list) => {
+    const given = new Set();
+    for (let guard = 0; guard < 400; guard++) {
+      const pages = paginate(list, ROOM);
+      let over = null;
+      pages.some((indices, n) => {
+        let used = 0;
+        return indices.some((index, i) => {
+          const block = list[index];
+          const top = used + (i ? block.space : 0);
+          used = top + block.height;
+          if (used <= ROOM || given.has(block)) return false;
+          let room = ROOM - top;
+          const head = i === 1 && list[indices[0]].keep ? list[indices[0]] : null;
+          if (n > 0 && (i === 0 || head)) {
+            const filled = pages[n - 1].reduce((sum, k, j) => sum + (j ? list[k].space : 0) + list[k].height, 0);
+            const left = ROOM - filled - (head ? head.space + head.height : 0) - block.space;
+            if (left >= 120) room = left;
+          }
+          over = { index, room };
+          return true;
+        });
+      });
+      if (!over) return;
+      const rest = splitBlock(list[over.index], over.room);
+      if (rest) list.splice(over.index + 1, 0, rest);
+      else given.add(list[over.index]);
+    }
+  };
+
   const renderCv = () => {
     const font = data.fonts.find((item) => item.id === cv.font) || data.fonts[0];
     const accent = data.accents.find((item) => item.id === cv.accent) || data.accents[0];
@@ -815,6 +866,7 @@
     measure.replaceChildren(...list.map((block) => block.node));
     scaler.append(measure);
     list.forEach((block) => { block.height = block.node.offsetHeight; });
+    splitTall(list);
     const pages = paginate(list, PAGE_H - TOP - BOTTOM);
     measure.remove();
     pageCount = pages.length;

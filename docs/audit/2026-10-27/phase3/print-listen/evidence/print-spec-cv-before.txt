@@ -1,0 +1,66 @@
+
+Running 2 tests using 2 workers
+
+[1A[2K[1/2] [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included
+[1A[2K[2/2] [1440px dark] › tests/browser/print.spec.mjs:153:1 › ATS CV: printed from the page, a job with 70 bullet points keeps all of them
+[1A[2K  1) [1440px dark] › tests/browser/print.spec.mjs:153:1 › ATS CV: printed from the page, a job with 70 bullet points keeps all of them 
+
+    Error: bullet points on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m70[39m
+    Received: [31m48[39m
+
+      167 |   const text = pages.join("").replace(/\s+/g, "");
+      168 |   const printed = Array.from({ length: 70 }, (_, i) => i + 1).filter((n) => text.includes(`Bulletnumber${n}with`));
+    > 169 |   expect(printed.length, "bullet points on paper").toBe(70);
+          |                                                    ^
+      170 |   expect(text).toContain("FINAL-BULLET-MARKER");
+      171 |   await page.emulateMedia({ media: "screen" });
+      172 |   await expect(page.locator(".ats-page.is-over")).toHaveCount(0);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:169:52
+
+    Error Context: test-results/browser/print-ATS-CV-printed-from--d3067-et-points-keeps-all-of-them-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-ATS-CV-printed-from--d3067-et-points-keeps-all-of-them-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-ATS-CV-printed-from--d3067-et-points-keeps-all-of-them-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2) [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included 
+
+    Error: bullet points on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m70[39m
+    Received: [31m50[39m
+
+      144 |   const text = pages.join("").replace(/\s+/g, "");
+      145 |   const printed = Array.from({ length: 70 }, (_, i) => i + 1).filter((n) => text.includes(`Bulletnumber${n}with`));
+    > 146 |   expect(printed.length, "bullet points on paper").toBe(70);
+          |                                                    ^
+      147 |   expect(text).toContain("FINAL-BULLET-MARKER");
+      148 |   // Nothing runs past its page: no page is marked as too full.
+      149 |   await page.emulateMedia({ media: "screen" });
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:146:52
+
+    Error Context: test-results/browser/print-CV-Builder-a-job-wit-b8c02--them-the-last-one-included-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-CV-Builder-a-job-wit-b8c02--them-the-last-one-included-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-CV-Builder-a-job-wit-b8c02--them-the-last-one-included-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included 
+    [1440px dark] › tests/browser/print.spec.mjs:153:1 › ATS CV: printed from the page, a job with 70 bullet points keeps all of them 

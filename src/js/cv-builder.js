@@ -495,6 +495,81 @@
   let pageCount = 0;
   let overflow = false;
 
+  // A job longer than a page is not cut off at the foot of the page (audit P2C-03): it is split between its bullet
+  // points (or before a later role of it) into pieces that each fit a page, the first one filling what is left of the
+  // page it starts on. The pieces after the first leave the logo's column empty. A block that cannot be split (one
+  // bullet point taller than a page) still marks its page as too full.
+  const FIRST_ROOM = PAGE_H - BOTTOM;
+  const PAGE_ROOM = PAGE_H - TOP - BOTTOM;
+  // The first block that runs past the foot of its page, and the room it has: on its own page, or what is left of
+  // the page before, where it would follow what is there (with the heading that went over with it).
+  const runsOver = (list, given) => {
+    const pages = paginate(list, FIRST_ROOM, PAGE_ROOM);
+    for (let n = 0; n < pages.length; n++) {
+      const max = n ? PAGE_ROOM : FIRST_ROOM;
+      let used = 0;
+      for (let i = 0; i < pages[n].length; i++) {
+        const block = list[pages[n][i]];
+        const top = used + (i ? block.space : 0);
+        used = top + block.height;
+        if (used <= max || given.has(block)) continue;
+        let room = max - top;
+        const head = i === 1 && list[pages[n][0]].keep ? list[pages[n][0]] : null;
+        if (n > 0 && (i === 0 || head)) {
+          const before = pages[n - 1];
+          const filled = before.reduce((sum, index, k) => sum + (k ? list[index].space : 0) + list[index].height, 0);
+          const left = (n > 1 ? PAGE_ROOM : FIRST_ROOM) - filled - (head ? head.space + head.height : 0) - block.space;
+          if (left >= 160) room = left;
+        }
+        return { index: pages[n][i], room };
+      }
+    }
+    return null;
+  };
+  // Moves the end of a job into a new block until the job fits the room; the job keeps at least its first role and
+  // first bullet point, and never ends on a role's title. Returns the new block, or null when nothing could move.
+  const splitBlock = (block, room) => {
+    const body = block.node.querySelector(".cv-entry-body");
+    if (!body) return null;
+    const restBody = el("div", "cv-entry-body");
+    const rest = el("article", "cv-entry is-continued");
+    rest.append(el("div"), restBody);
+    block.node.after(rest);
+    let source = null;
+    let into = null;
+    while (block.node.offsetHeight > room) {
+      const last = body.lastElementChild;
+      if (!last) break;
+      if (last.matches("ul")) {
+        if (body.querySelectorAll("li").length <= 1) break;
+        if (last !== source) {
+          source = last;
+          into = el("ul", last.className);
+          restBody.prepend(into);
+        }
+        into.prepend(last.lastElementChild);
+        if (!last.children.length) last.remove();
+      } else {
+        restBody.prepend(last);
+      }
+    }
+    while (body.lastElementChild && !body.lastElementChild.matches("ul") && body.querySelector("li")) restBody.prepend(body.lastElementChild);
+    if (!restBody.children.length) { rest.remove(); return null; }
+    block.height = block.node.offsetHeight;
+    return { node: rest, space: 0, keep: false, height: rest.offsetHeight };
+  };
+  const splitTall = (list) => {
+    const given = new Set();
+    for (let guard = 0; guard < 400; guard++) {
+      const over = runsOver(list, given);
+      if (!over) return;
+      const block = list[over.index];
+      const rest = splitBlock(block, over.room);
+      if (rest) list.splice(over.index + 1, 0, rest);
+      else given.add(block);
+    }
+  };
+
   const renderCv = () => {
     const theme = themeOf();
     scaler.style.setProperty("--cv-dark", theme.dark);
@@ -512,6 +587,7 @@
       block.height = block.node.offsetHeight;
       block.space = Math.round(block.space * scale);
     });
+    splitTall(list);
     const pages = paginate(list, PAGE_H - BOTTOM, PAGE_H - TOP - BOTTOM);
     measure.remove();
 
