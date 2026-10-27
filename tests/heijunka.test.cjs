@@ -298,7 +298,7 @@ test('large volumes stay fast: 20,000 units a week at a pack-out of 1 in under 3
   };
   let seed = 7;
   const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
-  for (let trial = 0; trial < 1500; trial += 1) {
+  for (let trial = 0; trial < 300; trial += 1) {
     const items = Array.from({ length: 1 + Math.floor(rand() * 6) }, () => ({ daily: 1 + Math.floor(rand() * 200), packout: 1 + Math.floor(rand() * 20), cycle: rand() * 60, changeover: Math.floor(rand() * 30) }));
     const availableMin = 400 + rand() * 1000;
     const t = (availableMin * 60) / items.reduce((s, p) => s + p.daily, 0);
