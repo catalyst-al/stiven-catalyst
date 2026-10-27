@@ -33,15 +33,17 @@ export default defineConfig({
     launchOptions,
     trace: "retain-on-failure",
   },
-  // The photo backup journey needs one width only, print one project only (dark theme, with motion) and the phone
-  // charts the phone width only: the other projects leave them out (rather than skipping them), so a run reports no
-  // skipped tests.
+  // Some specs run in one project or one width only, and the others leave them out (rather than skipping them), so a
+  // run reports no skipped tests: the photo backup journey at one width, print in one project (dark theme, with
+  // motion), the phone charts at the phone width, and the accessibility pages at 1440 px, once per theme (they check
+  // both widths themselves).
   projects: widths.flatMap((width) => themes.map((theme) => ({
     name: `${width}px ${theme}`,
     testIgnore: [
       ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/]),
       ...(width === 390 ? [] : [/chart-labels\.spec\.mjs$/]),
       ...(width === 1440 && theme === "dark" ? [] : [/print\.spec\.mjs$/]),
+      ...(width === 1440 ? [] : [/a11y-pages\.spec\.mjs$/]),
     ],
     use: {
       viewport: { width, height: width < 600 ? 844 : 900 },

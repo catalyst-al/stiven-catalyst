@@ -1,0 +1,140 @@
+[
+ {
+  "width": 1440,
+  "theme": "light",
+  "url": "/tools/eight-d/",
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": [
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"0\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 1\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"1\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 2\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"2\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 3\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"3\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 4\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"4\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 5\"] #9c824a on #eceff0"
+    ]
+   }
+  ]
+ },
+ {
+  "width": 1440,
+  "theme": "light",
+  "url": "/de/tools/eight-d/",
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": [
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"0\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 1\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"1\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 2\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"2\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 3\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"3\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 4\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"4\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 5\"] #9c824a on #eceff0"
+    ]
+   }
+  ]
+ },
+ {
+  "width": 1440,
+  "theme": "light",
+  "url": "/sq/tools/eight-d/",
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": [
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"0\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 1\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"1\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 2\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"2\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 3\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"3\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 4\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"4\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 5\"] #9c824a on #eceff0"
+    ]
+   }
+  ]
+ },
+ {
+  "width": 390,
+  "theme": "light",
+  "url": "/tools/eight-d/",
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": [
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"0\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 1\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"1\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 2\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"2\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 3\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"3\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 4\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"4\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Remove: System change 5\"] #9c824a on #eceff0"
+    ]
+   }
+  ]
+ },
+ {
+  "width": 390,
+  "theme": "light",
+  "url": "/de/tools/eight-d/",
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": [
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"0\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 1\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"1\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 2\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"2\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 3\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"3\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 4\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"4\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Entfernen: Systemänderung 5\"] #9c824a on #eceff0"
+    ]
+   }
+  ]
+ },
+ {
+  "width": 390,
+  "theme": "light",
+  "url": "/sq/tools/eight-d/",
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": [
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"0\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 1\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-row=\"d7.lines\"][data-index=\"1\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 2\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"2\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 3\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"3\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 4\"] #9c824a on #eceff0",
+     ".ed-row-d7-lines[data-index=\"4\"][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+     "button[aria-label=\"Hiq: Ndryshimi në sistem 5\"] #9c824a on #eceff0"
+    ]
+   }
+  ]
+ }
+]
